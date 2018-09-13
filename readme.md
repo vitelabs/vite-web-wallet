@@ -1,1 +1,1 @@
-# vite-wallet
+# vite-web-wallet

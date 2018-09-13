@@ -3,7 +3,7 @@
 // const addrNamePre = 'addr';
 // const accNamePre = 'account';
 
-// class Account {
+class Account {
 //     constructor() {
 //         // init account names
 //         // let accNames = accName.getAccNames();
@@ -12,49 +12,49 @@
 //         // this.__lastLoginAccount = accNames.lastLoginAccount || '';
 //     }
 
-//     // __checkName(address, isSave = true) {
-//     //     if (this.__accountsMap[address]) {
-//     //         return true;
-//     //     }
-//     //     let name = `${accNamePre}${++this.__nameCount}`;
-//     //     this.__accountsMap[address] = name;
-//     //     isSave && this.__setAccNames();
-//     //     return false;
-//     // }
+    //     // __checkName(address, isSave = true) {
+    //     //     if (this.__accountsMap[address]) {
+    //     //         return true;
+    //     //     }
+    //     //     let name = `${accNamePre}${++this.__nameCount}`;
+    //     //     this.__accountsMap[address] = name;
+    //     //     isSave && this.__setAccNames();
+    //     //     return false;
+    //     // }
 
-//     // __setAccNames() {
-//     //     accName.setAccNames(this.__accountsMap, this.__nameCount, this.__lastLoginAccount);
-//     // }
+    //     // __setAccNames() {
+    //     //     accName.setAccNames(this.__accountsMap, this.__nameCount, this.__lastLoginAccount);
+    //     // }
 
-//     // getName(address) {
-//     //     this.__checkName(address);
-//     //     return this.__accountsMap[address];
-//     // }
+    //     // getName(address) {
+    //     //     this.__checkName(address);
+    //     //     return this.__accountsMap[address];
+    //     // }
 
-//     // rename(address, name) {
-//     //     if (!address || !name) {
-//     //         return false;
-//     //     }
+    //     // rename(address, name) {
+    //     //     if (!address || !name) {
+    //     //         return false;
+    //     //     }
 
-//     //     this.__accountsMap[address] = name;
-//     //     this.__setAccNames();
-//     //     return true;
-//     // }
+    //     //     this.__accountsMap[address] = name;
+    //     //     this.__setAccNames();
+    //     //     return true;
+    //     // }
 
-//     // getLast() {
-//     //     if (!this.__lastLoginAccount) {
-//     //         return null;
-//     //     }
-//     //     this.__checkName(this.__lastLoginAccount);
-//     //     return {
-//     //         address: this.__lastLoginAccount,
-//     //         name: this.__accountsMap[this.__lastLoginAccount]
-//     //     };
-//     // }
+    //     // getLast() {
+    //     //     if (!this.__lastLoginAccount) {
+    //     //         return null;
+    //     //     }
+    //     //     this.__checkName(this.__lastLoginAccount);
+    //     //     return {
+    //     //         address: this.__lastLoginAccount,
+    //     //         name: this.__accountsMap[this.__lastLoginAccount]
+    //     //     };
+    //     // }
 
-//     addAddr(pass) {
+    //     addAddr(pass) {
 
 //     }
-// }
+}
 
-// export default Account;
+export default Account;
