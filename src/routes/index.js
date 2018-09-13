@@ -6,7 +6,7 @@ import restore from 'pages/restore.vue';
 import record from 'pages/record.vue';
 import account from 'pages/account/index.vue';
 import transList from 'pages/transList.vue';
-import setting from 'pages/setting.vue';
+import setting from 'pages/setting/index.vue';
 
 export default [
     {
