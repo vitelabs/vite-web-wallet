@@ -66,7 +66,7 @@ class Wallet {
         
         let acc = {
             entropy: account.entropy || '',
-            address: account.address || ''
+            addr: account.addr || ''
         };
         lastIn.setLast(acc);
     }
@@ -77,8 +77,8 @@ class Wallet {
             return null;
         }
 
-        if (last.address) {
-            return this.getAccFromAddr(last.address);
+        if (last.addr) {
+            return this.getAccFromAddr(last.addr);
         }
 
         return this.getAccFromEntropy(last.entropy);
@@ -118,7 +118,11 @@ class Wallet {
     }
 
     getAddrsFromMnemonic(mnemonic) {
-        console.log( $ViteJS.Wallet.Address.getAddrsFromMnemonic(mnemonic, path) );
+        let addrs = $ViteJS.Wallet.Address.getAddrsFromMnemonic(mnemonic, path);
+        if (!addrs) {
+            return Promise.reject(addrs);
+        }
+        console.log(addrs);
     }
 
     rename(account, name) {

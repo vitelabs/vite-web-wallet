@@ -3,6 +3,11 @@ module.exports = {
 
     start: '开始',
 
+    title: {
+        restore: '助记词恢复',
+        record: '记录助记词'
+    },
+
     nav: {
         home: '首页',
         head: {

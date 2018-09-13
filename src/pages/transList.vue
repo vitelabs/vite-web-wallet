@@ -1,5 +1,5 @@
 <template>
-    <div v-show="true" class="trans-list">
+    <div class="trans-list">
         <div class="table__head">
             <div class="cell-text tType">{{ $t('transList.tType.title') }}</div>
             <div class="cell-text status">{{ $t('transList.status.title') }}</div>
@@ -59,10 +59,6 @@ export default {
     },
     mounted() {
         this.fetchTransList(0);
-        
-        eventChangeLang = viteWallet.EventEmitter.on('changeLang', (locale)=>{
-            this.updateTransListTime(locale);
-        });
     },
     data() {
         return {

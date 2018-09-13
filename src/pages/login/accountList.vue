@@ -11,7 +11,7 @@
 
         <router-link class="__btn add-acc" 
                      :to="{ name: 'createAccount', params: { from: 'login' } }"> 
-            <img class="icon" src="../assets/imgs/add_icon.svg"/>{{ $t('accList.addAcc') }}
+            <img class="icon" src="../../assets/imgs/add_icon.svg"/>{{ $t('accList.addAcc') }}
         </router-link>
     </div>
 </template>
@@ -43,7 +43,7 @@ export default {
     z-index: 100;
     width: 100%;
     .list-wrapper {
-        max-height: 112px;
+        max-height: 180px;
         overflow: auto;
     }
     .add-acc {

@@ -6,7 +6,7 @@ import './assets/scss/mixins.scss';
 
 import App from 'pages/index.vue';
 import start from 'pages/start.vue';
-import login from 'pages/login.vue';
+import login from 'pages/login/index.vue';
 
 import routes from 'routes/index';
 import i18nConfig from 'i18n';

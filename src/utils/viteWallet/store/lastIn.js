@@ -6,7 +6,7 @@ export default {
     getLast() {
         return storage.getItem(LAST_KEY);
     },
-    setLast(seed) {
-        storage.setItem(LAST_KEY, seed);
+    setLast(acc) {
+        storage.setItem(LAST_KEY, acc);
     }
 };

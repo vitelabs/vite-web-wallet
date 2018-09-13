@@ -47,7 +47,6 @@ export default {
             name: '',
             pass1: '',
             pass2: '',
-            btn: this.$route.params.from === 'start' ? 'back' : 'login',
             inputItem: '',
             isCreating: false
         };
