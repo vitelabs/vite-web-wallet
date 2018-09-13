@@ -1,0 +1,54 @@
+{
+    "name": "vite-wallet",
+    "version": "0.0.1",
+    "description": "",
+    "scripts": {
+        "clean": "rm -rf ./static",
+        "build": "npm run clean && webpack",
+        "build:map": "npm run clean && MAP=true webpack",
+        "app": "node app/index.js",
+        "dev": "npm run app & NODE_ENV=development webpack-dev-server",
+        "lint": "eslint ./ --cache"
+    },
+    "pre-commit": [
+        "lint"
+    ],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "@babel/core": "^7.0.1",
+        "@babel/plugin-transform-async-to-generator": "^7.0.0",
+        "@babel/plugin-transform-runtime": "^7.0.0",
+        "@babel/preset-env": "^7.0.0",
+        "@babel/preset-es2015": "^7.0.0-beta.53",
+        "@babel/runtime": "^7.0.0",
+        "babel-eslint": "^9.0.0",
+        "babel-loader": "^8.0.2",
+        "connect": "^3.6.6",
+        "css-loader": "^1.0.0",
+        "eslint": "^5.5.0",
+        "eslint-plugin-vue": "^4.7.1",
+        "file-loader": "^1.1.11",
+        "html-webpack-plugin": "^3.2.0",
+        "node-sass": "^4.9.2",
+        "pre-commit": "^1.2.2",
+        "sass-loader": "^7.0.3",
+        "style-loader": "^0.21.0",
+        "vue": "^2.5.16",
+        "vue-i18n": "^8.0.0",
+        "vue-loader": "^15.2.4",
+        "vue-router": "^3.0.1",
+        "vue-template-compiler": "^2.5.16",
+        "webpack": "^4.18.0",
+        "webpack-cli": "^3.0.8",
+        "webpack-dev-server": "^3.1.4",
+        "webpack-merge": "^4.1.3"
+    },
+    "dependencies": {
+        "body-parser": "^1.18.3",
+        "cors": "^2.8.4",
+        "jayson": "^2.0.6",
+        "koa": "^2.5.3",
+        "koa-router": "^7.4.0"
+    }
+}

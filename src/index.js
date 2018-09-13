@@ -1,0 +1,73 @@
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import VueI18n from 'vue-i18n';
+
+import './assets/scss/mixins.scss';
+
+import App from 'pages/index.vue';
+import start from 'pages/start.vue';
+import login from 'pages/login.vue';
+
+import routes from 'routes/index';
+import i18nConfig from 'i18n';
+
+import 'utils/eventEmitter.js';
+
+import './utils/viteWallet/index.js';
+
+Vue.use(VueRouter);
+Vue.use(VueI18n);
+
+const i18n = new VueI18n(i18nConfig);
+
+let rootRoute = {
+    name: 'index',
+    path: '/'
+};
+
+document.addEventListener('drop', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+});
+document.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+});
+
+let { Wallet } = viteWallet;
+let list = Wallet.getList();
+rootRoute.component = list && list.length ? login : start;
+routes.push(rootRoute);
+
+const router = new VueRouter({
+    // mode: 'history',
+    routes
+});
+router.beforeEach((to, from, next) => {
+    if (!from.name && to.name !== 'index') {
+        router.replace({
+            name: 'index'
+        });
+        return;
+    }
+    next();
+});
+
+new Vue({
+    el: '#app',
+    components: { App },
+    template: '<App/>',
+    router,
+    i18n
+});
+
+let HTTP_RPC = new ViteJS.HTTP_RPC({
+    host: 'http://localhost:3000',
+    timeout: 15000
+});
+
+HTTP_RPC.request('jsonrpcSuccess', [1, 2]).then((res) => {
+    console.log(res);
+}).catch((err) => {
+    console.error(err);
+});

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+  <defs>
+    <linearGradient id="vite-a" x1="0%" x2="136.343%" y1="0%" y2="155.449%">
+      <stop offset="0%" stop-color="#052EF5"/>
+      <stop offset="31.474%" stop-color="#0D6DF0"/>
+      <stop offset="49.184%" stop-color="#0B92E7"/>
+      <stop offset="71.324%" stop-color="#0BB6EB"/>
+      <stop offset="100%" stop-color="#00E0F2"/>
+    </linearGradient>
+  </defs>
+  <g fill="none">
+    <circle cx="10" cy="10" r="10" fill="url(#vite-a)"/>
+    <path fill="#FFF" d="M4,8.1259388 L8.12121211,7.19230769 L7.71049566,17.6666667 L4,8.1259388 Z M9.0980956,6.95012821 L17.3333333,5 L7.87878788,17.5448718 L9.0980956,6.95012821 Z"/>
+  </g>
+</svg>
