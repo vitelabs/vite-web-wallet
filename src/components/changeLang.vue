@@ -22,7 +22,6 @@ export default {
         },
         changeLocale(locale) {
             this.$i18n.locale = locale;
-            window.webViteEventEmitter.emit('changeLang', locale);
             this.toggleLangList();
         }
     }

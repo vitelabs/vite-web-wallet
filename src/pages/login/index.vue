@@ -2,15 +2,15 @@
     <div class="login-wrapper">
         <div class="__title">登录账户</div>
 
-        <div class="__btn __pointer">
+        <div class="bottom __btn __pointer">
             <div @click="toggleAccountList">
                 <div v-show="!activeAccount" class="__btn_input">{{ $t('create.choose') }}</div>
 
-                <div v-show="activeAccount && !activeAccount.addr" class="__btn_input">
+                <div v-show="activeAccount && !activeAccount.addr" class="__btn __btn_input">
                     <div class="name __ellipsis">{{activeAccount.name}}</div>
                 </div>
 
-                <div v-show="activeAccount && activeAccount.addr" class="__btn_input_active">
+                <div v-show="activeAccount && activeAccount.addr" class="__btn __btn_input_active">
                     <div class="name __ellipsis">{{activeAccount.name}}</div>
                     <div class="address __ellipsis">{{activeAccount.showAddr}}</div>
                 </div>
@@ -27,16 +27,16 @@
                           :clickAccount="chooseAccount"></account-list>
         </div>
 
-        <div class="__btn __btn_input" 
+        <div class="bottom __btn __btn_input" 
              :class="{ 'active': !!password || inputItem === 'pass' }">
             <input ref="passInput" autofocus :placeholder="$t('create.input')" 
                    v-model="password" :type="'password'"
                    @focus="inputFocus('pass')" @blur="inputBlur('pass')" />
         </div>
 
-        <div class="__btn __pointer __btn_all_in" @click="login">{{ $t('btn.login') }}</div>
+        <div class="bottom __btn __pointer __btn_all_in" @click="login">{{ $t('btn.login') }}</div>
 
-        <div class="btn-list">
+        <div class="bottom btn-list">
             <router-link class="__btn_link" :to="{ 
                 name: 'importAccount',
                 params: { from: 'login' }
@@ -48,9 +48,9 @@
 </template>
 
 <script>
-import accountList from 'components/accountList.vue';
-import ellipsisAddr from 'utils/ellipsisAddr.js';
 import Vue from 'vue';
+import accountList from './accountList.vue';
+import ellipsisAddr from 'utils/ellipsisAddr.js';
 
 export default {
     components: {
@@ -90,6 +90,7 @@ export default {
 
             let account = viteWallet.Wallet.getLast();
             if (account) {
+                account.showAddr = ellipsisAddr(account.addr);
                 return account;
             }
             
@@ -153,9 +154,10 @@ export default {
 .login-wrapper {
     .__btn {
         position: relative;
-        margin-bottom: 15px;
     }
-
+    .bottom {
+        margin-bottom: 20px;
+    }
     .slide {
         display: inline-block;
         position: absolute;
@@ -165,11 +167,11 @@ export default {
         height: 16px;
         margin-top: -6px;
         &.down {
-            background: url('../assets/imgs/down_icon.svg');
+            background: url('../../assets/imgs/down_icon.svg');
             background-size: 16px 16px;
         }
         &.up {
-            background: url('../assets/imgs/up_icon.svg');
+            background: url('../../assets/imgs/up_icon.svg');
             background-size: 16px 16px;
         }
     }
@@ -194,7 +196,6 @@ export default {
 
 <style lang="scss">
 @import "~assets/scss/vars.scss";
-
 .__btn_input_active {
     border: 1px solid #D4DEE7;
     padding: 8px 40px 8px 20px;

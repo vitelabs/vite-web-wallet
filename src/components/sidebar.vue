@@ -5,16 +5,16 @@
         <router-link :class="{
             'icon': true,
             'home': true,
-            'active': title === 'account'
-        }" :to="{ name: 'account', params: { address }}"></router-link>
+            'active': active === 'account'
+        }" :to="{ name: 'account' }"></router-link>
 
-        <div class="__pointer icon send" :class="{
-            'active': title === 'transaction'
-        }" @click="goTransaction"></div>
+        <router-link class="__pointer icon send" :class="{
+            'active': active === 'transList'
+        }" :to="{ name: 'transList' }"></router-link>
 
         <div class="_bottom">
             <router-link class="icon setting __pointer" :class="{
-                'active': title === 'setting'
+                'active': active === 'setting'
             }" :to="{ name: 'setting' }"></router-link>
             <div class="logout __pointer" @click="logout"></div>
         </div>
@@ -22,9 +22,6 @@
 </template>
 
 <script>
-let p2pEvent = null;
-let blockEvent = null;
-
 export default {
     props: {
         title: {
@@ -34,26 +31,15 @@ export default {
     },
     data() {
         return {
+            active: this.$route.name,
             address: this.$route.params.address,
-            blockStatus: 0,
-            p2pStatus: false,
             isShowNotice: false
         };
     },
     mounted() {
-        // blockEvent = viteWallet.EventEmitter.on('blockInfo', ({ status }) => {
-        //     this.handleBlock(status);
-        // });
-        // p2pEvent = viteWallet.EventEmitter.on('p2pStatus', (p2pStatus) => {
-        //     this.p2pStatus = p2pStatus;
-        // });
-
-        // this.handleBlock( viteWallet.Block.getSyncInfo().status );
-        // this.p2pStatus = viteWallet.Net.getP2PStatus();
-    },
-    destroyed() {
-        // viteWallet.EventEmitter.off(p2pEvent);
-        // viteWallet.EventEmitter.off(blockEvent);
+        this.$router.afterEach((to) => {
+            this.active = to.name;
+        });
     },
     methods: {
         overLogo() {
@@ -62,38 +48,7 @@ export default {
         leaveLogo() {
             this.isShowNotice = false;
         },
-        handleBlock(status) {
-            this.blockStatus = status;
-            // this.blockStatus === 2 && viteWallet.EventEmitter.off(blockEvent);
-        },
 
-        goTransaction() {
-            if (this.$route.name === 'transaction') {
-                return;
-            }
-
-            if (!window.navigator.onLine) {
-                window.alert(this.$t('nav.noNet'));
-                return;
-            }
-
-            if (!this.p2pStatus) {
-                window.alert(this.$t('nav.noP2P'));
-                return;
-            }
-
-            if (this.blockStatus !== 2) {
-                window.alert(this.$t('nav.sync'));
-                return;
-            }
-
-            this.$router.push({
-                name: 'transaction',
-                params: {
-                    address: this.address
-                }
-            });
-        },
         logout() {
             // viteWallet.Account.lock(this.address).then(() => {
             //     this.$router.push({

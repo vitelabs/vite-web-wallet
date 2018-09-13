@@ -17,7 +17,7 @@ import indexLayout from 'components/indexLayout.vue';
 import pageLayout from 'components/pageLayout.vue';
 import update from 'components/update.vue';
 
-const pageLayouts = ['account', 'transaction'];
+const pageLayouts = ['account', 'transList', 'setting'];
 
 export default {
     components: {
@@ -25,8 +25,8 @@ export default {
     },
     mounted() {
         this.changeLayout(this.$route.name);
-        this.$router.beforeEach((to, from, next)=>{
-            this.changeLayout(to.name, next);
+        this.$router.afterEach((to)=>{
+            this.changeLayout(to.name);
         });
     },
     data() {

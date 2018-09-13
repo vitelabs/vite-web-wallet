@@ -4,7 +4,7 @@
 
         <div ref="fileArea" class="file-drag" @drop="dragFile">
             {{ $t('dragDrop.text') }}
-            <span class="msg" v-show="errMsg" >
+            <span class="msg __err_msg" v-show="errMsg" >
                 {{ errMsg === 'dragDrop.err2' || errMsg === 'dragDrop.err1' ? $t(errMsg) : errMsg }}
             </span>
         </div>
@@ -91,13 +91,6 @@ export default {
         position: absolute;
         left: 0;
         bottom: 0;
-        background: rgba(255,41,41, 0.08);
-        width: 100%;
-        height: 34px;
-        line-height: 34px;
-        text-align: center;
-        font-size: 12px;
-        color: #FF2929;
     }
 }
 .__btn {

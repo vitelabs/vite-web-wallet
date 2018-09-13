@@ -24,10 +24,9 @@ export default {
     mounted() {
         let showList = ['createAccount', 'record'];
 
-        this.$router.beforeEach((to, from, next)=>{
+        this.$router.afterEach((to)=>{
             this.showPro = showList.indexOf(to.name) >= 0;
             this.active = to.name;
-            next();
         });
     },
     data() {

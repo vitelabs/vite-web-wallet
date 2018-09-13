@@ -2,7 +2,10 @@ module.exports = {
     lang: 'English',
 
     start: 'Start',
-
+    title: {
+        restore: 'restore',
+        record: 'record'
+    },
     nav: {
         home: 'Home',
         head: {

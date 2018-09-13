@@ -1,11 +1,12 @@
 import start from 'pages/start.vue';
-import login from 'pages/login.vue';
+import login from 'pages/login/index.vue';
 import importAccount from 'pages/importAccount.vue';
 import createAccount from 'pages/createAccount.vue';
 import restore from 'pages/restore.vue';
 import record from 'pages/record.vue';
 import account from 'pages/account/index.vue';
-import transaction from 'pages/transaction.vue';
+import transList from 'pages/transList.vue';
+import setting from 'pages/setting.vue';
 
 export default [
     {
@@ -30,12 +31,12 @@ export default [
     },
     {
         name: 'importAccount',
-        path: '/importAccount:from',
+        path: '/importAccount',
         component: importAccount
     },
     {
         name: 'createAccount',
-        path: '/createAccount:from',
+        path: '/createAccount',
         component: createAccount
     },
     {
@@ -44,8 +45,13 @@ export default [
         component: account
     },
     {
-        name: 'transaction',
-        path: '/transaction/:address',
-        component: transaction
+        name: 'transList',
+        path: '/transList',
+        component: transList
+    },
+    {
+        name: 'setting',
+        path: '/setting',
+        component: setting
     }
 ];

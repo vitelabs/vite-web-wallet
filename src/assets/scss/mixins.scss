@@ -24,7 +24,7 @@ ul li{
 a {
     text-decoration: none;
 }
-input {
+input, textarea {
     padding: 0;
     margin: 0;
     border: none;
@@ -33,8 +33,7 @@ input {
         border: none;
     }
 }
-textarea{
-    border: 0;
+textarea {
     background-color: transparent;
     height: auto;
 }
