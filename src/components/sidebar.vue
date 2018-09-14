@@ -50,6 +50,9 @@ export default {
         },
 
         logout() {
+            this.$router.push({
+                name: 'login'
+            });
             // viteWallet.Account.lock(this.address).then(() => {
             //     this.$router.push({
             //         name: 'login'
@@ -120,6 +123,9 @@ export default {
         .setting {
             margin-bottom: 35px;
             background: url('../assets/imgs/settings_default.svg') no-repeat center;
+            &.active {
+                background: url('../assets/imgs/settings_pressed.svg') no-repeat center;
+            }
         }
         .logout {
             width: 100%;

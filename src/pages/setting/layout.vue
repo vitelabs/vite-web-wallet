@@ -1,6 +1,6 @@
 <template>
     <div class="setting-wrapper">
-        <div class="title">设置</div>
+        <div class="title  __pointer">设置</div>
         <div class="content-wrapper">
             <div class="content">
                 <slot></slot>
@@ -57,7 +57,6 @@ export default {
         border-radius: 8px;
         .content {
             padding: 20px;
-            
         }
         .description {
             padding: 20px;
@@ -73,7 +72,7 @@ export default {
                 font-family: $font-bold;
                 margin-right: 15px;
                 &:last-child {
-                    margin-left: 15px;
+                    margin-left: 20px;
                 }
                 &:first-child {
                     margin-left: 0;
