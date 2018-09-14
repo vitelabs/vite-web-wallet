@@ -1,5 +1,5 @@
 <template>
-    <div class="page-layout-wrapper">
+    <div class="page-layout-wrapper" @click="operate">
         <div class="page-wrapper">
             <sidebar class="sidebar" :title="title"></sidebar>
             <div class="page-content">
@@ -12,6 +12,8 @@
 <script>
 import sidebar from 'components/sidebar';
 
+let operateTimeout = null;
+
 export default {
     components: {
         sidebar
@@ -20,6 +22,28 @@ export default {
         title: {
             type: String,
             default: '',
+        }
+    },
+    mounted() {
+        this.operate();
+    },
+    destroyed() {
+        this.logout();
+    },
+    methods: {
+        operate() {
+            clearTimeout(operateTimeout);
+            operateTimeout = null;
+
+            operateTimeout = setTimeout(()=>{
+                operateTimeout = null;
+                this.logout();
+            }, 5*60*1000);
+        },
+        logout() {
+            this.$router.push({
+                name: 'login'
+            });
         }
     }
 };

@@ -90,8 +90,14 @@ export default {
 
             let account = viteWallet.Wallet.getLast();
             if (account) {
-                account.showAddr = ellipsisAddr(account.addr);
-                return account;
+                let addr = !account.isWalletAcc ? account.getDefaultAddr() : '';
+                let showAddr = addr ? ellipsisAddr(addr) : '';
+                return {
+                    name: account.getName() || '',
+                    addr,
+                    showAddr,
+                    entropy: account.entropy || ''
+                };
             }
             
             let list = viteWallet.Wallet.getList();

@@ -37,7 +37,7 @@
 
 <script>
 import Vue from 'vue';
-import getCurrentAcc from './getCurrentAcc';
+import copy from 'utils/copy';
 
 export default {
     data() {
@@ -49,36 +49,16 @@ export default {
         };
     },
     mounted() {
-        this.account = getCurrentAcc.getSimpleAcc();
+        this.account = this.getSimpleAcc();
     },
     methods: {
         copy() {
-            let textArea = document.createElement('textarea');
-            textArea.style.position = 'fixed';
-            textArea.style.top = 0;
-            textArea.style.left = 0;
-            textArea.style.width = '2em';
-            textArea.style.height = '2em';
-            textArea.style.padding = 0;
-            textArea.style.border = 'none';
-            textArea.style.outline = 'none';
-            textArea.style.boxShadow = 'none';
-            textArea.style.background = 'transparent';
-            textArea.value = this.account.addr;
-            document.body.appendChild(textArea);
-            textArea.select();
+            copy(this.account.addr);
 
-            try {
-                document.execCommand('copy');
-                this.copySuccess = true;
-                setTimeout(()=>{
-                    this.copySuccess = false;
-                }, 500);
-            } catch (err) {
-                console.warn(err);
-            }
-
-            document.body.removeChild(textArea);
+            this.copySuccess = true;
+            setTimeout(()=>{
+                this.copySuccess = false;
+            }, 500);
         },
 
         goDetail() {
@@ -93,6 +73,14 @@ export default {
             //     console.warn(err);
             //     window.alert(this.$t('accDetail.hint.tErr'));
             // });
+        },
+        getSimpleAcc() {
+            let acc = viteWallet.Wallet.getLast();
+            return {
+                name: acc.getName(),
+                addr: acc.getDefaultAddr(),
+                entropy: acc.entropy || ''
+            };
         },
 
         clearEditName() {
@@ -142,7 +130,7 @@ export default {
                 return;
             }
             this.clearEditName();
-            this.account = getCurrentAcc.getSimpleAcc();
+            this.account = this.getSimpleAcc();
         }
     }
 };

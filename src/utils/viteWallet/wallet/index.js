@@ -1,12 +1,22 @@
-import acc from './store/acc.js';
-import lastIn from './store/lastIn';
+import acc from '../store/acc.js';
+import lastIn from '../store/lastIn.js';
+import account from './account.js';
 
 const path = 'm/44\'/999\'';
 const namePre = 'account';
 
 class Wallet {
     constructor() {
+        this.account = account;
+        this.rootPath = path;
+    }
 
+    getAccInstance({
+        entropy, addr
+    }) {
+        return new this.account({
+            entropy, addr, wallet: this
+        });
     }
 
     _checkName(name) {
@@ -19,43 +29,37 @@ class Wallet {
         return name;
     }
 
-    saveAcc({
-        name, entropy, addr, pass, keystore
-    }) {
-        name = this._checkName(name);
+    saveAcc(account) {
+        let name = this._checkName(account.name);
 
-        if (keystore) {
+        if (account.keystore) {
             let item = {
                 name,
-                addr: keystore.hexaddress,
-                keystore
+                addr: account.keystore.hexaddress,
+                keystore: account.keystore
             };
             acc.add(item);
             return item;
         }
 
+        acc.add(account);
+        return account;
+    }
+
+    create(name, pass) {
+        let { addr, entropy } = $ViteJS.Wallet.Address.newAddr(path);
         let defaultPath = `${path}/0\'`;
         let addrList = {};
         addrList[defaultPath] = {
             addr: addr.hexAddr,
             privKey: addr.privKey
         };
-        let item = {
-            pass,
-            name,
-            entropy,
-            defaultPath,
-            addrList
-        };
-        acc.add(item);
-        return item;
-    }
 
-    create(name, pass) {
-        let { addr, entropy } = $ViteJS.Wallet.Address.newAddr(path);
-        this.saveAcc({
-            name, entropy, addr, pass
-        });
+        let acc = {
+            name, pass, defaultPath, entropy, addrList
+        };
+
+        this.saveAcc(acc);
         return { addr, entropy };
     }
 
@@ -77,11 +81,12 @@ class Wallet {
             return null;
         }
 
-        if (last.addr) {
-            return this.getAccFromAddr(last.addr);
+        let acc = last.addr ? this.getAccFromAddr(last.addr) : this.getAccFromEntropy(last.entropy);
+        if (!acc) {
+            return null;
         }
-
-        return this.getAccFromEntropy(last.entropy);
+        
+        return this.getAccInstance(acc);
     }
 
     getAccFromEntropy(entropy) {
