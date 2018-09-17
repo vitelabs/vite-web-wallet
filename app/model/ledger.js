@@ -23,8 +23,8 @@ class Ledger {
             }, loopTime.ledger_getInitSyncInfo);
         };
 
-        this.$ViteJS.Vite.Ledger.getInitSyncInfo().then((data)=>{
-            this.syncInfo = data;
+        this.$ViteJS.Vite.Ledger.getInitSyncInfo().then(({ result })=>{
+            this.syncInfo = result;
             loop();
         }).catch((err)=>{
             console.log(err);
@@ -42,8 +42,8 @@ class Ledger {
             }, loopTime.ledger_getSnapshotChainHeight);
         };
 
-        this.$ViteJS.Vite.Ledger.getSnapshotChainHeight().then((data)=>{
-            this.snapshotChainHeight = data;
+        this.$ViteJS.Vite.Ledger.getSnapshotChainHeight().then(({ result })=>{
+            this.snapshotChainHeight = result;
             loop();
         }).catch(()=>{
             loop();

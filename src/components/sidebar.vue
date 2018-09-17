@@ -1,6 +1,7 @@
 <template>
     <div class="sidebar-wrapper">
-        <div class="logo __pointer"></div>
+        <div @mouseenter="overLogo" @mouseleave="leaveLogo" class="logo __pointer"></div>
+        <test-notice class="notice" :class="{'hide': !isShowNotice}"></test-notice>
 
         <router-link :class="{
             'icon': true,
@@ -31,7 +32,12 @@
 </template>
 
 <script>
+import testNotice from 'components/testNotice';
+
 export default {
+    components: {
+        testNotice
+    },
     props: {
         title: {
             type: String,
@@ -99,6 +105,13 @@ export default {
                 opacity: 0;
                 overflow: hidden;
             }
+        }
+    }
+    .notice {
+        transition: opacity 0.3s ease-in-out;
+        opacity: 1;
+        &.hide {
+            opacity: 0;
         }
     }
     .icon {

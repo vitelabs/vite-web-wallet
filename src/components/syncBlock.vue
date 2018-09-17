@@ -48,9 +48,9 @@ export default {
         };
     },
     mounted() {
-        // blockEvent = webViteEventEmitter.on('blockInfo', (blockInfo) => {
-        //     this.syncData(blockInfo);
-        // });
+        blockEvent = webViteEventEmitter.on('syncInfo', (blockInfo) => {
+            this.syncData(blockInfo);
+        });
         p2pEvent = webViteEventEmitter.on('p2pStatus', (netStatus) => {
             this.netStatus = netStatus;
         });
@@ -59,19 +59,19 @@ export default {
         });
 
         this.netStatus = viteWallet.Net.getP2PStatus();
-        // this.syncData( viteWallet.Block.getSyncInfo() );
+        this.syncData( viteWallet.Ledger.getSyncInfo() );
 
-        // this.startBlockHeight();
+        this.startBlockHeight();
     },
     destroyed() {
-        viteWallet.EventEmitter.off(blockEvent);
-        viteWallet.EventEmitter.off(p2pEvent);
-        viteWallet.EventEmitter.off(netEvent);
+        webViteEventEmitter.off(blockEvent);
+        webViteEventEmitter.off(p2pEvent);
+        webViteEventEmitter.off(netEvent);
         this.stopBlockHeight();
     },
     watch: {
         status: function(val, oldVal) {
-            val === 2 && viteWallet.EventEmitter.off(blockEvent);
+            val === 2 && webViteEventEmitter.off(blockEvent);
             this.updateStatusText(oldVal);
         },
         netStatus: function() {
@@ -85,7 +85,7 @@ export default {
             }
 
             this.reloading = true;
-            viteWallet.Block.reloadSyncInfo().then((data) => {
+            viteWallet.Ledger.reloadSyncInfo().then((data) => {
                 setTimeout(()=>{
                     this.reloading = false;
                 }, 200);
@@ -108,7 +108,7 @@ export default {
                 }, 2000);
             };
 
-            viteWallet.Block.getBlockHeight().then((data) => {
+            viteWallet.Ledger.getBlockHeight().then((data) => {
                 this.blockHeight = data;
                 reGet();
             }).catch((err)=>{

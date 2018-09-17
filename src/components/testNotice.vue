@@ -14,9 +14,9 @@
 
     .hover-wrapper {
         position: absolute;
-        top: 0;
-        left: 0;
-        padding: 49.5px 0 0 81.75px;
+        top: 20px;
+        left: 130px;
+        width: 350px;
         z-index: 100;
     }
     .hover-notice {
