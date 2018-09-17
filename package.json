@@ -7,7 +7,7 @@
         "build": "npm run clean && webpack",
         "build:map": "npm run clean && MAP=true webpack",
         "app": "node app/index.js",
-        "dev": "npm run app & NODE_ENV=development webpack-dev-server",
+        "dev": "NODE_ENV=development webpack-dev-server",
         "lint": "eslint ./ --cache"
     },
     "pre-commit": [
@@ -45,8 +45,7 @@
         "webpack-merge": "^4.1.3"
     },
     "dependencies": {
-        "body-parser": "^1.18.3",
-        "jayson": "^2.0.6",
+        "axios": "^0.18.0",
         "koa": "^2.5.3",
         "koa-router": "^7.4.0"
     }

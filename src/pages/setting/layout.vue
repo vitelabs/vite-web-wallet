@@ -7,7 +7,7 @@
             </div>
             <div class="description">
                 <div class="row">
-                    <span class="title">当前区块高度</span>
+                    <span class="title">当前区块高度: {{ height || '----' }}</span>
                 </div>
                 <div class="row">
                     <span class="title">版本</span>sdsdsd
@@ -26,8 +26,23 @@
 </template>
 
 <script>
+let heightEvent = null;
+
 export default {
-    
+    data() {
+        return {
+            height: ''
+        };
+    },
+    mounted() {
+        this.height = viteWallet.Ledger.getHeight();
+        heightEvent = webViteEventEmitter.on('currentHeight', (height) => {
+            this.height = height;
+        });
+    },
+    destroyed() {
+        webViteEventEmitter.off(heightEvent);
+    }
 };
 </script>
 
