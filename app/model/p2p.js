@@ -20,8 +20,8 @@ class P2P {
             }, loopTime.p2p_networkAvailable);
         };
 
-        this.$ViteJS.Vite.P2P.networkAvailable().then((data)=>{
-            this.network = data;
+        this.$ViteJS.Vite.P2P.networkAvailable().then(({ result })=>{
+            this.network = result;
             loop();
         }).catch(()=>{
             loop();
