@@ -47,6 +47,8 @@
     "dependencies": {
         "axios": "^0.18.0",
         "koa": "^2.5.3",
-        "koa-router": "^7.4.0"
+        "koa-router": "^7.4.0",
+        "qrcode.es": "^1.0.0",
+        "query-string": "^6.1.0"
     }
 }

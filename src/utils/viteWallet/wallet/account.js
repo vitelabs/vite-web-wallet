@@ -18,7 +18,12 @@ class Account {
         }
         return null;
     }
-
+    getAccountByAccAddr() {
+        return $ViteJS.Vite.Ledger.getAccountByAccAddr(this.addr);
+    }
+    getUnconfirmedInfo() {
+        return $ViteJS.Vite.Ledger.getUnconfirmedInfo(this.addr);
+    }
     getName() {
         let self = this._getSelf();
         return self ? self.name : '';
@@ -60,8 +65,8 @@ class Account {
         }
 
         try {
-            return self.addrList[ self.defaultPath ].addr;
-        } catch(err) {
+            return self.addrList[self.defaultPath].addr;
+        } catch (err) {
             console.error(err);
             return null;
         }
@@ -76,7 +81,7 @@ class Account {
         if (!self) {
             return;
         }
-    
+
         let entropy = self.entropy || null;
         if (!entropy) {
             return;
@@ -109,7 +114,7 @@ class Account {
             return;
         }
 
-        let path = `${this.wallet.rootPath }/${addrList.length}\'`;
+        let path = `${this.wallet.rootPath}/${addrList.length}\'`;
         let mnenonic = this.getMnemonic();
         if (!mnenonic) {
             return;
@@ -132,7 +137,7 @@ class Account {
         if (!this.isWalletAcc) {
             let keystore = this._getSelf().keystore;
             // let keyJSON = {'hexaddress':'vite_5f03e33f9550155548bf0a045a7a602384d3f1a65fb2ceff6b','id':'71b3bd76-a938-403d-b876-57ca22f993f3','crypto':{'ciphername':'aes-256-gcm','ciphertext':'03d8f2773ddce6132a5ceb136ba736ae1640ba2d664f2a8493a2f3ff2bb84dec8a3229edad6031a7ef494946852d3e3a45b0b3a88eb3167b41a3843d01d93c9abe52479f582b694e9c378dfb5aac7eb5','nonce':'a6bb299c35e48960e096351d','kdf':'scrypt','scryptparams':{'n':262144,'r':8,'p':1,'keylen':32,'salt':'a35724d6c46cb59e47c893a2bba3875c5b238c8a9ce9b2b1b3c4c0f6dec618db'}},'keystoreversion':1,'timestamp':1536059534};
-            
+
             let privKey = $ViteJS.Wallet.Keystore.decrypt(JSON.stringify(keystore), pass);
 
             if (!privKey) {
