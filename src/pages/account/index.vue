@@ -1,84 +1,56 @@
 <template>
     <div class="account-wrapper">
-        <sync-block class="sync-block"></sync-block>
-        <account-head></account-head>
-        <div class="token-list"></div>
+        <sync-block class="sync-block item"></sync-block>
+        <account-head class="item"></account-head>
+        <div class="token-list item">  <tokenCard></tokenCard> <tokenCard class="mg-left"></tokenCard></div>
     </div>
 </template>
 
 <script>
 import syncBlock from 'components/syncBlock';
 import accountHead from './head.vue';
+import tokenCard from './tokenCard';
 // import bigNumber from 'utils/bigNumber.js';
 
 let fetchAccountTimeout = null;
 let lastFetchTime = null;
-
+// const acc=viteWallet.Wallet.account
 export default {
-    components: {
-        accountHead, syncBlock
+    data(){
+        tokenInfo:Object.create(null)
     },
-    // mounted() {
-    //     this.fetchAccount(true);
+    components: {
+        accountHead, syncBlock,tokenCard
+    },
+    // beforeMount(){
+    // acc.getAccountByAccAddr()
+    // acc.getUnconfirmedInfo()
     // },
-    // data() {
+    // methods:{
+    //     updateBalance({balanceInfo,unconfirmedInfo}){
+    //         if(balanceInfo){
+    //             balanceInfo.forEach(v=>{
+    //                if(this.tokenInfo[v.mintage.id]){
+    //                    this.tokenInfo[v.mintage.id].accBalance=v.balance
+    //                }else{
+    //                    this.tokenInfo[v.mintage.id]={
+    //                     tokenName: "--",
+    //                     accBalance: v.balance,
+    //                     unConfirmedBalance:"--",
+    //                     unConfirmedNums: "--",
+    //                    }
+    //                }
+    //             })
+    //         }
+    //         if(unconfirmedInfo){
+    //              balanceInfo.forEach(v=>{
+    //                if(this.tokenInfo[v.mintage.id]){
 
+    //                }else{
 
-    //     return {
-    //         address: this.$route.params.address,
-    //         accountName: '',
-    //         balanceInfos: [],
-    //         fundFloat: {},
-    //         blockHeight: '0'
-    //     };
-    // },
-    // destroyed() {
-    //     this.clearAccountTimeout();
-    // },
-    // methods: {
-    //     formatAmountList(balanceList) {
-    //         balanceList = balanceList || [];
-    //         let list = [];
-    //         balanceList.forEach(({ Balance, TokenSymbol })=>{
-    //             list.push({
-    //                 // balance: bigNumber.amountToBasicString(Balance),
-    //                 balance: Balance,
-    //                 tokenSymbol: TokenSymbol
-    //             });
-    //         });
-    //         return list;
-    //     },
-    //     clearAccountTimeout() {
-    //         window.clearTimeout(fetchAccountTimeout);
-    //         fetchAccountTimeout = null;
-    //     },
-    //     fetchAccount(isFirst) {
-    //         let reFetch = () => {
-    //             fetchAccountTimeout = window.setTimeout(()=>{
-    //                 this.clearAccountTimeout();
-    //                 this.fetchAccount();
-    //             }, viteWallet.Block.getLoopBlockTime());
-    //         };
-
-    //         let nowFetchTime = new Date().getTime();
-    //         lastFetchTime = nowFetchTime;
-
-    //         viteWallet.Account.get(this.address).then(({
-    //             balanceInfos, fundFloat
-    //         }) => {
-    //             if (lastFetchTime !== nowFetchTime) {
-    //                 return;
-    //             }
-
-    //             this.fundFloat = fundFloat || {};
-    //             this.balanceInfos = balanceInfos ? this.formatAmountList(balanceInfos) : [];    // deal with balanceinfo
-    //             this.fundFloat.balanceInfos = fundFloat.balanceInfos ? this.formatAmountList(fundFloat.balanceInfos) : [];    // deal with fundinfo
-    //             reFetch();
-    //         }).catch((err) => {
-    //             console.warn(err);
-    //             isFirst && window.alert(this.$t('transList.valid.err'));
-    //             reFetch();
-    //         });
+    //                }
+    //             })
+    //         }
     //     }
     // }
 };
@@ -93,10 +65,20 @@ export default {
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    padding:0 40px;
     .sync-block {
         width: 100%;
-        padding: 40px 0;
         text-align: center;
+    }
+}
+
+.item{
+    margin-top:40px;
+    &.token-list{
+        display: flex;
+        >.mg-left{
+            margin-left: 40px;
+        }
     }
 }
 </style>

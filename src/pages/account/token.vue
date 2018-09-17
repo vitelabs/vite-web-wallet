@@ -42,6 +42,10 @@ export default {
             blockHeight: '0'
         };
     },
+    created(){
+        console.log('pppppppp')
+        window.w=viteWallet
+    },
     destroyed() {
         window.clearTimeout(inputTimeout);
         inputTimeout = null;
@@ -96,3 +100,6 @@ export default {
     }
 };
 </script>
+<style lang='scss'>
+
+</style>
