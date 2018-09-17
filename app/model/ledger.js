@@ -7,10 +7,13 @@ let loopSyncInfoTimeout;
 class Ledger {
     constructor($ViteJS) {
         this.$ViteJS = $ViteJS;
-        this.snapshotChainHeight = null;
-        this.syncInfo = null;
 
-        this.loopHeight();
+        this.startHeight = '';
+        this.targetHeight = '';
+        this.currentHeight = '';
+        this.isFirstSyncDone = false;
+        this.isStartFirstSync = false;
+
         this.loopSyncInfo();
     }
 
@@ -24,13 +27,27 @@ class Ledger {
         };
 
         this.$ViteJS.Vite.Ledger.getInitSyncInfo().then(({ result })=>{
-            this.syncInfo = result;
+            this.startHeight = result.StartHeight;
+            this.targetHeight = result.TargetHeight;
+            this.currentHeight = result.CurrentHeight;
+            this.isFirstSyncDone = result.IsFirstSyncDone;
+            this.isStartFirstSync = result.IsStartFirstSync;
+
+            if (this.isFirstSyncDone) {
+                this.stopLoopSyncInfo();
+                return;
+            }
             loop();
         }).catch((err)=>{
             console.log(err);
-
             loop();
         });
+    }
+
+    stopLoopSyncInfo() {
+        clearTimeout(loopSyncInfoTimeout);
+        loopSyncInfoTimeout = null;
+        this.loopHeight();
     }
 
     loopHeight() {
@@ -43,11 +60,27 @@ class Ledger {
         };
 
         this.$ViteJS.Vite.Ledger.getSnapshotChainHeight().then(({ result })=>{
-            this.snapshotChainHeight = result;
+            this.currentHeight = result;
             loop();
         }).catch(()=>{
             loop();
         });
+    }
+
+    getSyncInfo() {
+        let status = 1;
+        if (this.isFirstSyncDone) {
+            status = 2;
+        }
+        if (!this.isStartFirstSync) {
+            status = 0;
+        }
+
+        return {
+            targetHeight: this.targetHeight,
+            currentHeight: this.currentHeight,
+            status           
+        };
     }
 }
 

@@ -6,10 +6,10 @@ module.exports = function({ P2P, Ledger }) {
             callback(null, P2P.network);
         },
         ledger_getInitSyncInfo: function (args, callback) {
-            callback(null, Ledger.syncInfo);
+            callback(null, Ledger.getSyncInfo());
         },
         ledger_getSnapshotChainHeight: function (args, callback) {
-            callback(null, Ledger.snapshotChainHeight);
+            callback(null, Ledger.currentHeight);
         },
         netStatus: function (args, callback) {
             callback(null, true);

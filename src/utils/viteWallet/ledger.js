@@ -1,40 +1,39 @@
 import loopTime from 'loopTime';
 
 let loopSyncInfoTimeout = null;
+let loopHeightTimeout = null;
 
 class Ledger {
     constructor(services) {
         this.services = services;
 
-        this.startHeight = '';
         this.targetHeight = '';
         this.currentHeight = '';
-        this.isFirstSyncDone = false;
-        this.isStartFirstSync = false;
+        this.status = 1;
 
         this.__startSyncInfo();
     }
 
     __syncInfo() {
         return this.services['ledger_getInitSyncInfo']().then((data)=>{
-            console.log(data.IsFirstSyncDone);
-
-            this.startHeight = data.StartHeight;
             this.targetHeight = data.TargetHeight;
             this.currentHeight = data.CurrentHeight;
-            this.isFirstSyncDone = data.IsFirstSyncDone;
-            this.isStartFirstSync = data.IsStartFirstSync;
-            console.log(this.isFirstSyncDone);
-            this.isFirstSyncDone && this.__stopSyncInfo();
+            this.status = data.status;
             webViteEventEmitter.emit('syncInfo', this.getSyncInfo());
+
+            if (this.status !== 2) {
+                return;
+            }
+
+            this.__stopSyncInfo();
+            this.startLoopHeight();
 
             return data;
         });
     }
 
     __startSyncInfo() {
-        console.log(this.isFirstSyncDone);
-        if (this.isFirstSyncDone) {
+        if (this.status === 2) {
             return;
         }
 
@@ -57,26 +56,12 @@ class Ledger {
         loopSyncInfoTimeout = null;
     }
 
-    __getStatus() {
-        if (this.isFirstSyncDone) {
-            return 2;
-        }
-        if (!this.isStartFirstSync) {
-            return 0;
-        }
-        return 1;
-    }
-    
     reloadSyncInfo() {
         this.__stopSyncBlock();
         return new Promise((res, rej)=>{
-            this.__syncBlock().then(()=>{
+            this.__syncInfo().then(()=>{
                 this.__startSyncInfo();
-                res({
-                    targetHeight: this.targetHeight,
-                    currentHeight: this.currentHeight,
-                    status: this.__getStatus()
-                });
+                res( this.getSyncInfo() );
             }).catch((err)=>{
                 this.__startSyncInfo();
                 rej(err);
@@ -88,12 +73,31 @@ class Ledger {
         return {
             targetHeight: this.targetHeight,
             currentHeight: this.currentHeight,
-            status: this.__getStatus()            
+            status: this.status            
         };
     }
 
-    getBlockHeight() {
-        return this.services['ledger_getSnapshotChainHeight']();
+    startLoopHeight() {
+        let loop = ()=>{
+            loopHeightTimeout = setTimeout(()=>{
+                clearTimeout(loopHeightTimeout);
+                loopHeightTimeout = null;
+                this.startLoopHeight();
+            }, loopTime.ledger_getInitSyncInfo);
+        };
+
+        this.services['ledger_getSnapshotChainHeight']().then((data)=>{
+            this.currentHeight = data;
+            webViteEventEmitter.emit('snapshotChainHeight', data);
+            loop();
+            return data;
+        }).catch(()=>{
+            loop();
+        });
+    }
+
+    getHeight() {
+        return this.currentHeight;
     }
 
     // createTX({
