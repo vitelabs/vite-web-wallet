@@ -1,16 +1,21 @@
 import ViteJS from 'vite.js';
 window.ViteJS = ViteJS;
 
-import initServices from '../services/index';
 import wallet from './wallet/index';
 import net from './net';
 import ledger from './ledger';
+import account from './account';
+import TestToken from './testToken';
 
-window.$ViteJS = new ViteJS(null);
-let services = initServices(ViteJS);
+let WS_RPC = new ViteJS.WS_RPC({
+    timeout: 15000
+});
+window.$ViteJS = new ViteJS(WS_RPC);
 
 window.viteWallet = {
-    Wallet: new wallet(services),
-    Net: new net(services),
-    Ledger: new ledger(services)
+    Wallet: new wallet(),
+    Net: new net(),
+    Ledger: new ledger(),
+    Account: new account(),
+    TestToken: new TestToken()
 };

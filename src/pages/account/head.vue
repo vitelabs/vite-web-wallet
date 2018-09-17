@@ -63,16 +63,16 @@ export default {
 
         goDetail() {
             let locale = this.$i18n.locale === 'zh' ? 'zh/' : '';
-            window.open(`https://testnet.vite.net/${locale}account/${this.address}`);
+            window.open(`https://testnet.vite.net/${locale}account/${this.account.addr}`);
         },
 
         getTestToken() {
-            // viteWallet.TestToken.get(this.address).then(()=>{
-            //     window.alert(this.$t('accDetail.hint.token'));
-            // }).catch((err) => {
-            //     console.warn(err);
-            //     window.alert(this.$t('accDetail.hint.tErr'));
-            // });
+            viteWallet.TestToken.get(this.account.addr).then(()=>{
+                window.alert(this.$t('accDetail.hint.token'));
+            }).catch((err) => {
+                console.warn(err);
+                window.alert(this.$t('accDetail.hint.tErr'));
+            });
         },
         getSimpleAcc() {
             let acc = viteWallet.Wallet.getAccInstance(this.$route.params);

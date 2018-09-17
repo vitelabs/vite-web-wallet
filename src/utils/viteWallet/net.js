@@ -1,48 +1,22 @@
 import loopTime from 'loopTime';
 
 let loopP2PTimeout = null;
-let loopNetTimeout = null;
 
 class Net {
-    constructor(services) {
-        this.services = services;
+    constructor() {
         this.p2pStatus = false;
         this.clientStatus = -1;
-        this.netStatus = -1;
 
         window.addEventListener('online', this._updateClientNet);
         window.addEventListener('offline', this._updateClientNet);
         this._updateClientNet();
 
-        this.loopNetStatus();
         this.loopP2PStatus();
     }
 
     _updateClientNet() {
         this.clientStatus = navigator.onLine;
-        // offline
-        !this.clientStatus && window.webViteEventEmitter.emit('netStatus', false);
-        this.clientStatus && window.webViteEventEmitter.emit('netStatus', this.netStatus);
-    }
-
-    loopNetStatus() {
-        let loop = ()=>{
-            loopNetTimeout = setTimeout(()=>{
-                clearTimeout(loopNetTimeout);
-                loopNetTimeout = null;
-                window.webViteEventEmitter.emit('netStatus', this.netStatus);
-                this.loopNetStatus();
-            }, loopTime.netStatus);
-        };
-
-        this.services.netStatus().then(()=>{
-            this.netStatus = true;
-            loop();
-        }).catch((err)=>{
-            console.warn(err);
-            this.netStatus = false;
-            loop();
-        });
+        window.webViteEventEmitter.emit('netStatus', this.clientStatus);
     }
 
     loopP2PStatus() {
@@ -55,8 +29,8 @@ class Net {
             }, loopTime.p2p_networkAvailable);
         };
 
-        this.services.p2pStatus().then((data)=>{
-            this.p2pStatus = data;
+        $ViteJS.Vite.P2P.networkAvailable().then(({ result })=>{
+            this.p2pStatus = result;
             loop();
         }).catch(()=>{
             loop();
@@ -64,10 +38,7 @@ class Net {
     }
 
     getNetStatus() {
-        if (!this.clientStatus) {
-            return false;
-        }
-        return this.netStatus;
+        return this.clientStatus;
     }
 
     getP2PStatus() {

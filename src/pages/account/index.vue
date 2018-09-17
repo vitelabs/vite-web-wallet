@@ -11,9 +11,8 @@ import syncBlock from 'components/syncBlock';
 import accountHead from './head.vue';
 // import bigNumber from 'utils/bigNumber.js';
 
-// let inputTimeout = null;
-// let fetchAccountTimeout = null;
-// let lastFetchTime = null;
+let fetchAccountTimeout = null;
+let lastFetchTime = null;
 
 export default {
     components: {
@@ -23,6 +22,8 @@ export default {
     //     this.fetchAccount(true);
     // },
     // data() {
+
+
     //     return {
     //         address: this.$route.params.address,
     //         accountName: '',
@@ -32,8 +33,6 @@ export default {
     //     };
     // },
     // destroyed() {
-    //     window.clearTimeout(inputTimeout);
-    //     inputTimeout = null;
     //     this.clearAccountTimeout();
     // },
     // methods: {
@@ -42,7 +41,8 @@ export default {
     //         let list = [];
     //         balanceList.forEach(({ Balance, TokenSymbol })=>{
     //             list.push({
-    //                 balance: bigNumber.amountToBasicString(Balance),
+    //                 // balance: bigNumber.amountToBasicString(Balance),
+    //                 balance: Balance,
     //                 tokenSymbol: TokenSymbol
     //             });
     //         });
@@ -53,34 +53,32 @@ export default {
     //         fetchAccountTimeout = null;
     //     },
     //     fetchAccount(isFirst) {
-    //         // let reFetch = () => {
-    //         //     fetchAccountTimeout = window.setTimeout(()=>{
-    //         //         this.clearAccountTimeout();
-    //         //         this.fetchAccount();
-    //         //     }, viteWallet.Block.getLoopBlockTime());
-    //         // };
+    //         let reFetch = () => {
+    //             fetchAccountTimeout = window.setTimeout(()=>{
+    //                 this.clearAccountTimeout();
+    //                 this.fetchAccount();
+    //             }, viteWallet.Block.getLoopBlockTime());
+    //         };
 
-    //         // let nowFetchTime = new Date().getTime();
-    //         // lastFetchTime = nowFetchTime;
+    //         let nowFetchTime = new Date().getTime();
+    //         lastFetchTime = nowFetchTime;
 
-    //         // viteWallet.Account.get(this.address).then(({
-    //         //     name, balanceInfos, fundFloat, blockHeight
-    //         // }) => {
-    //         //     if (lastFetchTime !== nowFetchTime) {
-    //         //         return;
-    //         //     }
+    //         viteWallet.Account.get(this.address).then(({
+    //             balanceInfos, fundFloat
+    //         }) => {
+    //             if (lastFetchTime !== nowFetchTime) {
+    //                 return;
+    //             }
 
-    //         //     this.accountName = name;
-    //         //     this.fundFloat = fundFloat || {};
-    //         //     this.blockHeight = blockHeight;
-    //         //     this.balanceInfos = balanceInfos ? this.formatAmountList(balanceInfos) : [];    // deal with balanceinfo
-    //         //     this.fundFloat.balanceInfos = fundFloat.balanceInfos ? this.formatAmountList(fundFloat.balanceInfos) : [];    // deal with fundinfo
-    //         //     reFetch();
-    //         // }).catch((err) => {
-    //         //     console.warn(err);
-    //         //     isFirst && window.alert(this.$t('transList.valid.err'));
-    //         //     reFetch();
-    //         // });
+    //             this.fundFloat = fundFloat || {};
+    //             this.balanceInfos = balanceInfos ? this.formatAmountList(balanceInfos) : [];    // deal with balanceinfo
+    //             this.fundFloat.balanceInfos = fundFloat.balanceInfos ? this.formatAmountList(fundFloat.balanceInfos) : [];    // deal with fundinfo
+    //             reFetch();
+    //         }).catch((err) => {
+    //             console.warn(err);
+    //             isFirst && window.alert(this.$t('transList.valid.err'));
+    //             reFetch();
+    //         });
     //     }
     // }
 };

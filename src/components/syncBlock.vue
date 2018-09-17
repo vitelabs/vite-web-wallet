@@ -52,7 +52,7 @@ export default {
         blockEvent = webViteEventEmitter.on('syncInfo', (blockInfo) => {
             this.syncData(blockInfo);
         });
-        heightEvent = webViteEventEmitter.on('snapshotChainHeight', (height) => {
+        heightEvent = webViteEventEmitter.on('currentHeight', (height) => {
             this.blockHeight = height;
         });
         p2pEvent = webViteEventEmitter.on('p2pStatus', (p2pStatus) => {
