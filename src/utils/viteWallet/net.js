@@ -6,6 +6,7 @@ let loopNetTimeout = null;
 class Net {
     constructor(services) {
         this.services = services;
+        this.p2pStatus = false;
         this.clientStatus = -1;
         this.netStatus = -1;
 
@@ -37,7 +38,8 @@ class Net {
         this.services.netStatus().then(()=>{
             this.netStatus = true;
             loop();
-        }).catch(()=>{
+        }).catch((err)=>{
+            console.warn(err);
             this.netStatus = false;
             loop();
         });

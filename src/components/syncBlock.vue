@@ -10,6 +10,7 @@
             `${currentHeight} / ${targetHeight}`
         }}</span>
 
+        <!-- [TODO] images -->
         <img src="../assets/imgs/sync_icon.svg"
              v-show="statusText !== 'firstDone' && statusText !== 'sync'" 
              @click="reloadBlock"
@@ -19,12 +20,9 @@
         }"/>
         <img src="../assets/imgs/done_icon.svg" class="icon" v-show="statusText === 'firstDone'" />
 
-
         <span v-show="statusText === 'sync'">
             {{ $t(`nav.blockHeight`) + ': ' + blockHeight }}
         </span>
-
-
     </div>
 </template>
 
@@ -32,15 +30,18 @@
 let p2pEvent = null;
 let blockEvent = null;
 let netEvent = null;
-let heightTimeout = null;
+let heightEvent = null;
 
 export default {
     data() {
         return {
             currentHeight: '',
             targetHeight: '',
+
             status: null,
             statusText: '',
+
+            p2pStatus: false,
             netStatus: false,
             reloading: false,
 
@@ -51,31 +52,37 @@ export default {
         blockEvent = webViteEventEmitter.on('syncInfo', (blockInfo) => {
             this.syncData(blockInfo);
         });
-        p2pEvent = webViteEventEmitter.on('p2pStatus', (netStatus) => {
-            this.netStatus = netStatus;
+        heightEvent = webViteEventEmitter.on('snapshotChainHeight', (height) => {
+            this.blockHeight = height;
+        });
+        p2pEvent = webViteEventEmitter.on('p2pStatus', (p2pStatus) => {
+            this.p2pStatus = p2pStatus;
         });
         netEvent = webViteEventEmitter.on('netStatus', (status) => {
-            this.updateStatusText(null, status);
+            this.netStatus = status;
         });
 
-        this.netStatus = viteWallet.Net.getP2PStatus();
+        this.p2pStatus = viteWallet.Net.getP2PStatus();
+        this.netStatus = viteWallet.Net.getNetStatus();
         this.syncData( viteWallet.Ledger.getSyncInfo() );
-
-        this.startBlockHeight();
+        this.blockHeight = viteWallet.Ledger.getHeight();
     },
     destroyed() {
         webViteEventEmitter.off(blockEvent);
         webViteEventEmitter.off(p2pEvent);
         webViteEventEmitter.off(netEvent);
-        this.stopBlockHeight();
+        webViteEventEmitter.off(heightEvent);
     },
     watch: {
         status: function(val, oldVal) {
             val === 2 && webViteEventEmitter.off(blockEvent);
             this.updateStatusText(oldVal);
         },
+        p2pStatus: function() {
+            this.updateStatusText(null);
+        },
         netStatus: function() {
-            this.updateStatusText(null, -1);
+            this.updateStatusText(null);
         }
     },
     methods: {
@@ -95,37 +102,15 @@ export default {
                 console.warn(err);
             });
         },
-
-        stopBlockHeight() {
-            window.clearTimeout(heightTimeout);
-            heightTimeout = null;
-        },
-        startBlockHeight() {
-            let reGet = () => {
-                heightTimeout = setTimeout(()=>{
-                    this.stopBlockHeight();
-                    this.startBlockHeight();
-                }, 2000);
-            };
-
-            viteWallet.Ledger.getBlockHeight().then((data) => {
-                this.blockHeight = data;
-                reGet();
-            }).catch((err)=>{
-                console.warn(err);
-                reGet();
-            });
-        },
-
-        updateStatusText(oldVal, clientNet = -1) {
+        updateStatusText(oldVal) {
             // Client has no network.
-            if (!clientNet) {
+            if (!this.netStatus) {
                 this.statusText = 'noNet';
                 return;
             }
 
             // No node connection
-            if (!this.netStatus) {
+            if (!this.p2pStatus) {
                 this.statusText = 'noP2P';
                 return;
             }
