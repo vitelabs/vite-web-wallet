@@ -23,7 +23,7 @@ export default {
         layout, accList, lang, mnemonic
     },
     data() {
-        let acc = viteWallet.Wallet.getLast();
+        let acc = viteWallet.Wallet.getAccInstance(this.$route.params);
         let showPassWrapper = acc ? !!acc.entropy : false;
 
         return {

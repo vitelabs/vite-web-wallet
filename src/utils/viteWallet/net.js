@@ -1,30 +1,76 @@
+import loopTime from 'loopTime';
+
+let loopP2PTimeout = null;
+let loopNetTimeout = null;
+
 class Net {
-    constructor() {
+    constructor(services) {
+        this.services = services;
+        this.clientStatus = -1;
+        this.netStatus = -1;
+
         window.addEventListener('online', this._updateClientNet);
         window.addEventListener('offline', this._updateClientNet);
         this._updateClientNet();
+
+        this.loopNetStatus();
+        this.loopP2PStatus();
     }
 
     _updateClientNet() {
-        window.webViteEventEmitter.emit('clientNetStatus', navigator.onLine);
+        this.clientStatus = navigator.onLine;
+        // offline
+        !this.clientStatus && window.webViteEventEmitter.emit('netStatus', false);
+        this.clientStatus && window.webViteEventEmitter.emit('netStatus', this.netStatus);
+    }
+
+    loopNetStatus() {
+        let loop = ()=>{
+            loopNetTimeout = setTimeout(()=>{
+                clearTimeout(loopNetTimeout);
+                loopNetTimeout = null;
+                window.webViteEventEmitter.emit('netStatus', this.netStatus);
+                this.loopNetStatus();
+            }, loopTime.netStatus);
+        };
+
+        this.services.netStatus().then(()=>{
+            this.netStatus = true;
+            loop();
+        }).catch(()=>{
+            this.netStatus = false;
+            loop();
+        });
+    }
+
+    loopP2PStatus() {
+        let loop = ()=>{
+            loopP2PTimeout = setTimeout(()=>{
+                clearTimeout(loopP2PTimeout);
+                loopP2PTimeout = null;
+                window.webViteEventEmitter.emit('p2pStatus', this.p2pStatus);
+                this.loopP2PStatus();
+            }, loopTime.p2p_networkAvailable);
+        };
+
+        this.services.p2pStatus().then((data)=>{
+            this.p2pStatus = data;
+            loop();
+        }).catch(()=>{
+            loop();
+        });
+    }
+
+    getNetStatus() {
+        if (!this.clientStatus) {
+            return false;
+        }
+        return this.netStatus;
+    }
+
+    getP2PStatus() {
+        return this.p2pStatus;
     }
 }
 
 export default Net;
-
-// let loopP2PTimeout = null;
-
-// function startLoopP2P() {
-//     viteWallet.EventEmitter.emit('p2pStatus', viteWallet.Net.getP2PStatus());
-//     loopP2PTimeout = window.setTimeout(() => {
-//         stopLoopP2P();
-//         startLoopP2P();
-//     }, viteWallet.Net.getLoopP2PTime());
-// }
-
-// function stopLoopP2P() {
-//     window.clearTimeout(loopP2PTimeout);
-//     loopP2PTimeout = null;
-// }
-
-// startLoopP2P();

@@ -1,11 +1,19 @@
+export default function(ViteJS) {
+    let HTTP_RPC = new ViteJS.HTTP_RPC({
+        host: 'http://127.0.0.1:8080/',
+        timeout: 15000
+    });
 
-let HTTP_RPC = new ViteJS.HTTP_RPC({
-    host: 'http://localhost:3000',
-    timeout: 15000
-});
-
-HTTP_RPC.request('jsonrpcSuccess', [1, 2]).then((res) => {
-    console.log(res);
-}).catch((err) => {
-    console.error(err);
-});
+    return {
+        netStatus: function() {
+            return HTTP_RPC.request('netStatus').then(({ result }) => {
+                return result;
+            });
+        },
+        p2pStatus: function() {
+            return HTTP_RPC.request('p2p_networkAvailable').then(({ result }) => {
+                return result;
+            });
+        }
+    };
+}

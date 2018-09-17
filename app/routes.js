@@ -1,21 +1,18 @@
-// const ViteJS = require('vite.js');
+module.exports = function({ P2P, Ledger }) {
+    console.log(P2P);
 
-
-module.exports = {
-    jsonrpcSuccess: function (args, callback) {
-        callback(null, args[0] + args[1]);
-    },
-    jsonrpcError: function (args, callback) {
-        callback({ code: 0, message: JSON.stringify(args) });
-    },
-    jsonrpcTimeoutSuccess: function (args, callback) {
-        setTimeout(() => {
-            callback(null, args[0] + args[1]);
-        }, 100);
-    },
-    jsonrpcTimeoutError: function (args, callback) {
-        setTimeout(() => {
-            callback(null, args[0] + args[1]);
-        }, 1000);
-    }
+    return {
+        p2p_networkAvailable: function (args, callback) {
+            callback(null, P2P.network);
+        },
+        ledger_getInitSyncInfo: function (args, callback) {
+            callback(null, Ledger.syncInfo);
+        },
+        ledger_getSnapshotChainHeight: function (args, callback) {
+            callback(null, Ledger.snapshotChainHeight);
+        },
+        netStatus: function (args, callback) {
+            callback(null, true);
+        }
+    };
 };

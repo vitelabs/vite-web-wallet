@@ -28,7 +28,7 @@ export default {
         }
     },
     data() {
-        let acc = viteWallet.Wallet.getLast();
+        let acc = viteWallet.Wallet.getAccInstance(this.$route.params);
         let mnemonic = acc.getMnemonic();
         let mnemonicStr = mnemonic ? this.getShowMnemonic(mnemonic) : '';
 
@@ -97,7 +97,7 @@ export default {
         font-family: $font-bold;
     }
     .icon {
-        display: inline-block;
+        display: block;
         width: 20px;
         height: 20px;
         float: right;

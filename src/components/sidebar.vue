@@ -6,16 +6,25 @@
             'icon': true,
             'home': true,
             'active': active === 'account'
-        }" :to="{ name: 'account' }"></router-link>
+        }" :to="{
+            name: 'account',
+            params: { address, entropy }
+        }"></router-link>
 
         <router-link class="__pointer icon send" :class="{
             'active': active === 'transList'
-        }" :to="{ name: 'transList' }"></router-link>
+        }" :to="{ 
+            name: 'transList',
+            params: { address, entropy }
+        }"></router-link>
 
         <div class="_bottom">
             <router-link class="icon setting __pointer" :class="{
                 'active': active === 'setting'
-            }" :to="{ name: 'setting' }"></router-link>
+            }" :to="{
+                name: 'setting',
+                params: { address, entropy }
+            }"></router-link>
             <div class="logout __pointer" @click="logout"></div>
         </div>
     </div>
@@ -32,7 +41,8 @@ export default {
     data() {
         return {
             active: this.$route.name,
-            address: this.$route.params.address,
+            address: this.$route.params.address || '',
+            entropy: this.$route.params.entropy || '',
             isShowNotice: false
         };
     },

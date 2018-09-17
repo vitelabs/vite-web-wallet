@@ -48,26 +48,26 @@ export default {
         };
     },
     mounted() {
-        // blockEvent = viteWallet.EventEmitter.on('blockInfo', (blockInfo) => {
+        // blockEvent = webViteEventEmitter.on('blockInfo', (blockInfo) => {
         //     this.syncData(blockInfo);
         // });
-        // p2pEvent = viteWallet.EventEmitter.on('p2pStatus', (netStatus) => {
-        //     this.netStatus = netStatus;
-        // });
-        // netEvent = viteWallet.EventEmitter.on('clientNetStatus', (status) => {
-        //     this.updateStatusText(null, status);
-        // });
+        p2pEvent = webViteEventEmitter.on('p2pStatus', (netStatus) => {
+            this.netStatus = netStatus;
+        });
+        netEvent = webViteEventEmitter.on('netStatus', (status) => {
+            this.updateStatusText(null, status);
+        });
 
-        // this.netStatus = viteWallet.Net.getP2PStatus();
+        this.netStatus = viteWallet.Net.getP2PStatus();
         // this.syncData( viteWallet.Block.getSyncInfo() );
 
         // this.startBlockHeight();
     },
     destroyed() {
-        // viteWallet.EventEmitter.off(blockEvent);
-        // viteWallet.EventEmitter.off(p2pEvent);
-        // viteWallet.EventEmitter.off(netEvent);
-        // this.stopBlockHeight();
+        viteWallet.EventEmitter.off(blockEvent);
+        viteWallet.EventEmitter.off(p2pEvent);
+        viteWallet.EventEmitter.off(netEvent);
+        this.stopBlockHeight();
     },
     watch: {
         status: function(val, oldVal) {
