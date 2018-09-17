@@ -28,7 +28,7 @@ import Vue from 'vue';
 
 export default {
     data() {
-        let acc = viteWallet.Wallet.getLast();
+        let acc = viteWallet.Wallet.getAccInstance(this.$route.params);
 
         return {
             acc,
@@ -131,7 +131,7 @@ export default {
         color: #5E6875;
     }
     .select {
-        display: inline-block;
+        display: block;
         box-sizing: border-box;
         float: right;
         margin-top: 4px; 

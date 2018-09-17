@@ -1,0 +1,9 @@
+{
+    "ledger_getAccountByAccAddr": 1000,
+    "ledger_getBlocksByAccAddr": 1000,
+    "ledger_getUnconfirmedInfo": 1000,
+    "ledger_getSnapshotChainHeight": 1000,
+    "ledger_getInitSyncInfo": 1000,
+    "p2p_networkAvailable": 2000,
+    "netStatus": 2000
+}

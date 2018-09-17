@@ -42,6 +42,7 @@ export default {
     position: absolute;
     z-index: 100;
     width: 100%;
+    background: #fff;
     .list-wrapper {
         max-height: 180px;
         overflow: auto;
@@ -73,6 +74,6 @@ export default {
     border-top: none;
 }
 .__btn_input_active:hover {
-    background: #efefef;
+    background: rgba(88,145,255,.13);
 }
 </style>

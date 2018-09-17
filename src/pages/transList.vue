@@ -6,6 +6,7 @@
             <div class="cell-text time">{{ $t('transList.timestamp') }}</div>
             <div class="cell-text address">{{ $t('transList.tAddress') }}</div>
             <div class="cell-text">{{ $t('transList.sum') }}</div>
+            <div class="cell-text">Token</div>
         </div>
 
         <div ref="tableContent" class="table-content" v-show="transList && transList.length">

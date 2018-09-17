@@ -18,7 +18,8 @@ module.exports = {
         "it": true,
         "viteWallet": true,
         "ViteJS": true,
-        "$ViteJS": true
+        "$ViteJS": true,
+        "webViteEventEmitter": true
     },
     "extends": [
         "eslint:recommended",

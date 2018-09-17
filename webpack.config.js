@@ -3,8 +3,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 const merge = require('webpack-merge');
-const devConfig = require('./config/dev.config.js');
-const mapConfig = require('./config/map.config.js');
+const devConfig = require('./webpackConf/dev.config.js');
+const mapConfig = require('./webpackConf/map.config.js');
 
 const SRC_PATH = path.join(__dirname, 'src');
 
@@ -70,6 +70,7 @@ let webpackConfig = {
             routes: path.join(SRC_PATH, '/routes'),
             utils: path.join(SRC_PATH, '/utils'),
             i18n: path.join(SRC_PATH, '/i18n'),
+            loopTime: path.join(SRC_PATH, '../config/loopTime'),
         },
         extensions: ['.js','.scss','.vue','.json']
     }

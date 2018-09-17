@@ -146,7 +146,13 @@ export default {
             let loginSuccess = () => {
                 viteWallet.Wallet.setLast(this.activeAccount);
                 this.password = '';
-                this.$router.push({ name: 'account' });
+                this.$router.push({
+                    name: 'account',
+                    params: {
+                        addr: this.activeAccount.addr || '',
+                        entropy: this.activeAccount.entropy || ''
+                    }
+                });
             };
 
             // unlock addr pass

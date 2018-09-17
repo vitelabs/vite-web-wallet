@@ -75,7 +75,7 @@ export default {
             // });
         },
         getSimpleAcc() {
-            let acc = viteWallet.Wallet.getLast();
+            let acc = viteWallet.Wallet.getAccInstance(this.$route.params);
             return {
                 name: acc.getName(),
                 addr: acc.getDefaultAddr(),
