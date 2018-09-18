@@ -1,6 +1,6 @@
 <template>
     <div class="login-wrapper">
-        <div class="__title">登录账户</div>
+        <div class="__title">{{$t('nav.head.login')}}</div>
 
         <div class="bottom __btn __pointer">
             <div @click="toggleAccountList">
@@ -42,7 +42,7 @@
                 params: { from: 'login' }
             }">{{ $t('btn.imported') }}</router-link>
             <span class="line"></span>
-            <router-link class="__btn_link" :to="{ name: 'restore' }">助记词恢复账户</router-link>
+            <router-link class="__btn_link" :to="{ name: 'restore' }">{{$t('mnemonic.restore')}}</router-link>
         </div>
     </div>
 </template>

@@ -1,6 +1,6 @@
 <template>
     <div class="create-account-wrapper">
-        <div class="__title">设置账户</div>
+        <div class="__title">{{$t('nav.head.setting')}}</div>
 
         <div class="__btn __btn_input" 
              :class="{ 'active': !!name || inputItem === 'name' }">
@@ -30,7 +30,7 @@
             }" @click="back" >{{ $t('btn.back') }}</span>
             <span class="__btn __btn_all_in __pointer" :class="{
                 'unuse': isCreating
-            }" @click="valid">下一步</span>
+            }" @click="valid">{{$t('btn.next')}}</span>
         </div>
     </div>
 </template>
