@@ -1,6 +1,6 @@
 <template>
     <div class="start-wrapper">
-        <div class="__title">创建账户</div>
+        <div class="__title">{{$t('nav.head.create')}}</div>
         
         <router-link class="__btn __btn_all_in" :to="{
             name: 'createAccount',
@@ -12,7 +12,7 @@
         }">{{ $t('btn.imported') }}</router-link>
         <router-link class="__btn_link _top" :to="{
             name: 'restore'
-        }">助记词恢复账户</router-link>
+        }">{{$t('mnemonic.restore')}}</router-link>
     </div>
 </template>
 

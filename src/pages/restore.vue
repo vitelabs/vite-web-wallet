@@ -3,7 +3,7 @@
         <div class="wrapper">
             <textarea v-model="mnemonic" :class="{
                 'center': !mnemonic
-            }" placeholder="请输入您的助记词"></textarea>
+            }" :placeholder="$t('mnemonic.placeholder')"></textarea>
             <span v-show="errMsg" class="msg __err_msg" >
                 {{ errMsg === 'dragDrop.err2' || errMsg === 'dragDrop.err1' ? $t(errMsg) : errMsg }}
             </span>

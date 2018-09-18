@@ -6,7 +6,7 @@
                 'finish': active !== 'createAccount'
             }"></span>
             <br/>
-            <span>设置账户</span>
+            <span>{{$t('nav.head.setting')}}</span>
         </div>
         <div class="line" :class="{'finish': active !== 'createAccount'}"></div>
         <div class="around __pointer">
@@ -14,7 +14,7 @@
                 'active': active === 'record',
                 'default': active !== 'record'
             }"></div>
-            <div>记录助记词</div>
+            <div>{{$t('mnemonic.record')}}</div>
         </div>
     </div>
 </template>
