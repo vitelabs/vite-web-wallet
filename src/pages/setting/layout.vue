@@ -1,24 +1,24 @@
 <template>
     <div class="setting-wrapper">
-        <div class="title  __pointer">设置</div>
+        <div class="title  __pointer">{{$t('setting.title')}}</div>
         <div class="content-wrapper">
             <div class="content">
                 <slot></slot>
             </div>
             <div class="description">
                 <div class="row">
-                    <span class="title">当前区块高度: {{ height || '----' }}</span>
+                    <span class="title">{{$t('setting.block')}} {{ height || '----' }}</span>
                 </div>
                 <div class="row">
-                    <span class="title">版本</span>sdsdsd
+                    <span class="title">{{$t('setting.version')}}</span>sdsdsd
                 </div>
                 <div class="row">
-                    <span class="title">客户服务</span>sdsdsd
-                    <span class="title">Vite官方网站</span>sdsdsdsd
+                    <span class="title">{{$t('setting.service')}}</span>sdsdsd
+                    <span class="title">{{$t('setting.site')}}</span>sdsdsdsd
                 </div>
                 <div class="row">
-                    <span class="title">系统门户网站</span>sdsdsdsd
-                    <span class="title">Vite项目开源代码</span>sdsdsdsdsd
+                    <span class="title">{{$t('setting.sys')}}</span>sdsdsdsd
+                    <span class="title">{{$t('setting.open')}}</span>sdsdsdsdsd
                 </div>
             </div>
         </div>

@@ -2,10 +2,27 @@ module.exports = {
     lang: 'English',
 
     start: 'Start',
-    title: {
-        restore: 'restore',
-        record: 'record'
+
+    mnemonic: {
+        title:'Mnemonic',
+        restore: 'Resore Account by Mnemonic',
+        record: 'Backup Mnemonic',
+        prompt: 'Mnemonic is used to restore your wallet, better write it down and keep it in a safe place where only you can access, otherwise your assets will be at tremendous risks',
+        placeholder:'Please input your mnemonic',
     },
+
+    setting: {
+        title: 'Settings',
+        unlock: 'Unlock Secure Information',
+        lang: 'Language',
+        block: 'Latest Block Height:',
+        version: 'Version',
+        service: 'Customer Service',
+        site: 'Official Website of Vite',
+        sys: 'System Portal',
+        open: 'Open source projects of Vite',
+    },
+
     nav: {
         home: 'Home',
         head: {
@@ -13,6 +30,8 @@ module.exports = {
             create: 'Create',
             imported: 'Import',
             backup: 'Back Up',
+            setting: 'Setting Account',
+            login: 'Login'
         },
         sync: 'Wallet initializing, transactions cannot be made temporarily.',
         noNet: 'No network detected',
@@ -31,7 +50,9 @@ module.exports = {
     // account list
     accList: {
         balance: 'Balance',
-        addAcc: 'Add Account'
+        addAcc: 'Add Account',
+        addr: 'Address Lists of Accounts',
+        default: 'Select Default User'
     },
 
     //create account
@@ -54,6 +75,7 @@ module.exports = {
         text: 'Drag and drop files there',
         err1: 'Imported illegal file!',
         err2: 'Only one file can be imported!',
+        guide: 'Open folder to import'
     },
 
     // account detail
@@ -118,7 +140,9 @@ module.exports = {
         cancel: 'Cancel',
         login: 'Login',
         imported: 'Import Account',
-        back: 'Back'
+        back: 'Back',
+        submit: 'Submit',
+        next: 'Next Step',
     },
     paging: {
         pre: 'Prev',
