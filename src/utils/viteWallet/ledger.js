@@ -94,9 +94,23 @@ class Ledger {
     getBlocks({
         addr, index
     }) {
-        return $ViteJS.Vite.Ledger.getBlocksByAccAddr({
-            addr, index
+        $ViteJS.Vite.Ledger.provider.batch([{
+            type: 'request',                    
+            methodName: 'ledger_getBlocksByAccAddr',
+            params: [addr, index, 20, true]
+        }, {
+            type: 'request',
+            methodName: 'ledger_getAccountByAccAddr',
+            params: [addr]
+        }]).then((data) => {
+            console.warn(data);
+        }).catch((err) => {
+            console.warn(err);
         });
+
+        // return $ViteJS.Vite.Ledger.getBlocksByAccAddr({
+        //     addr, index, needTokenInfo = true
+        // });
     }
 }
 
