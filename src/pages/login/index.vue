@@ -154,11 +154,13 @@ export default {
                 });
             };
 
-            let acc = viteWallet.Wallet.getAccInstance(this.activeAccount);
-            let result = acc.unLock(this.password);
+            loginSuccess();
 
-            result && loginSuccess();
-            !result && window.alert(this.$t('hint.pwErr'));
+            // let acc = viteWallet.Wallet.getAccInstance(this.activeAccount);
+            // let result = acc.unLock(this.password);
+
+            // result && loginSuccess();
+            // !result && window.alert(this.$t('hint.pwErr'));
         }
     }
 };
