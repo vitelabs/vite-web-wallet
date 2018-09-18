@@ -66,17 +66,12 @@ export default {
         },
 
         logout() {
+            let acc = viteWallet.Wallet.getAccInstance(this.$route.params);
+            viteWallet.Account.lock(acc.getDefaultAddr());
+
             this.$router.push({
                 name: 'login'
             });
-            // viteWallet.Account.lock(this.address).then(() => {
-            //     this.$router.push({
-            //         name: 'login'
-            //     });
-            // }).catch((err) => {
-            //     console.warn(err);
-            //     window.alert(err && err.message ? err.message : this.$t('hint.logoutErr'));
-            // });
         }
     }
 };
