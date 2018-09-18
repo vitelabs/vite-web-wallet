@@ -8,12 +8,11 @@ const mapConfig = require('./webpackConf/map.config.js');
 
 const SRC_PATH = path.join(__dirname, 'src');
 
+// [TODO] vendor
 let webpackConfig = {
     mode: process.env.NODE_ENV || 'development',
     entry: {
-        // entry: ["babel-polyfill", "./app/js"]
-        index: path.join(__dirname, 'src/index.js'),
-        vendor: ['vue', 'vue-router']
+        index: path.join(__dirname, 'src/index.js')
     },
     output: {
         path: path.join(__dirname, './static'),
