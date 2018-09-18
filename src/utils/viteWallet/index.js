@@ -1,5 +1,5 @@
 import ViteJS from 'vite.js';
-window.ViteJS = ViteJS;
+// window.ViteJS = ViteJS;
 
 import wallet from './wallet/index';
 import net from './net';
