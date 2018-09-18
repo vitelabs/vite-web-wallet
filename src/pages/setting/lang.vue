@@ -1,6 +1,6 @@
 <template>
     <div class="change-lang-wrapper">
-        <div class="title">语言</div>
+        <div class="title">{{$t('setting.lang')}}</div>
 
         <div class="lang-list __pointer">
             <div class="row" @click="toggleLangList">
