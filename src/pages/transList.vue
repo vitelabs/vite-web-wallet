@@ -52,20 +52,16 @@ export default {
     components: {
         pagination
     },
-    props: {
-        totalNum: {
-            type: String,
-            default: '0'
-        }
-    },
     mounted() {
         this.fetchTransList(0);
     },
     data() {
+        let acc = viteWallet.Wallet.getAccInstance(this.$route.params);
+        let address = acc.getDefaultAddr();
         return {
-            address: this.$route.params.address,
+            acc,
+            address, 
             transList: [],
-            isConfirm: false,
             currentPage: 0
         };
     },
@@ -82,16 +78,6 @@ export default {
         viteWallet.EventEmitter.off(eventChangeLang);
     },
     methods: {
-        updateTransListTime(locale) {
-            let list = [];
-            this.transList.forEach((oldTrans) => {
-                let trans = Object.assign({}, oldTrans);
-                trans.date = date(trans.timestamp, locale);
-                list.push(trans);
-            });
-            this.transList = list;
-        },
-
         goDetail(trans) {
             let locale = this.$i18n.locale === 'zh' ? 'zh/' : '';
             window.open(`https://testnet.vite.net/${locale}transaction/${trans.hash}`);
