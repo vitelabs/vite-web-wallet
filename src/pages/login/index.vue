@@ -127,7 +127,6 @@ export default {
             this.activeAccount = account;
             this.isShowAccountList = false;
         },
-
         toggleAccountList() {
             this.isShowAccountList = !this.isShowAccountList;
         },
@@ -155,8 +154,11 @@ export default {
                 });
             };
 
-            // unlock addr pass
-            loginSuccess();
+            let acc = viteWallet.Wallet.getAccInstance(this.activeAccount);
+            let result = acc.unLock(this.password);
+
+            result && loginSuccess();
+            !result && window.alert(this.$t('hint.pwErr'));
         }
     }
 };

@@ -25,11 +25,13 @@ class Ledger {
         };
 
         $ViteJS.Vite.Ledger.getInitSyncInfo().then(({ result })=>{
-            this.startHeight = result.StartHeight;
-            this.targetHeight = result.TargetHeight;
-            this.currentHeight = result.CurrentHeight;
-            this.isFirstSyncDone = result.IsFirstSyncDone;
-            this.isStartFirstSync = result.IsStartFirstSync;
+            console.log(result);
+
+            this.startHeight = result.startHeight;
+            this.targetHeight = result.targetHeight;
+            this.currentHeight = result.currentHeight;
+            this.isFirstSyncDone = result.isFirstSyncDone;
+            this.isStartFirstSync = result.isStartFirstSync;
 
             webViteEventEmitter.emit('currentHeight', this.currentHeight);
             webViteEventEmitter.emit('syncInfo', this.getSyncInfo());
@@ -87,6 +89,28 @@ class Ledger {
 
     getHeight() {
         return this.currentHeight;
+    }
+
+    getBlocks({
+        addr, index
+    }) {
+        $ViteJS.Vite.Ledger.provider.batch([{
+            type: 'request',                    
+            methodName: 'ledger_getBlocksByAccAddr',
+            params: [addr, index, 20, true]
+        }, {
+            type: 'request',
+            methodName: 'ledger_getAccountByAccAddr',
+            params: [addr]
+        }]).then((data) => {
+            console.warn(data);
+        }).catch((err) => {
+            console.warn(err);
+        });
+
+        // return $ViteJS.Vite.Ledger.getBlocksByAccAddr({
+        //     addr, index, needTokenInfo = true
+        // });
     }
 }
 
