@@ -197,7 +197,7 @@ export default {
         line-height: 20px;
         .line {
             display: inline-block;
-            margin: 0 33px; 
+            // margin: 0 33px;  UI changes in English
             width: 1px;
             height: 100%;
             background: #E5EDF3;

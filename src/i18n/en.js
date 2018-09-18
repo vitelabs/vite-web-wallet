@@ -31,7 +31,7 @@ module.exports = {
             imported: 'Import',
             backup: 'Back Up',
             setting: 'Setting Account',
-            login: 'Login'
+            login: 'Login Account'
         },
         sync: 'Wallet initializing, transactions cannot be made temporarily.',
         noNet: 'No network detected',
