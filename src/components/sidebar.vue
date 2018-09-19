@@ -1,7 +1,9 @@
 <template>
     <div class="sidebar-wrapper">
-        <div @mouseenter="overLogo" @mouseleave="leaveLogo" class="logo __pointer"></div>
-        <test-notice class="notice" :class="{'hide': !isShowNotice}"></test-notice>
+        <div @mouseenter="overLogo"  @mouseleave="leaveLogo" class="logo __pointer">
+            <img src="../assets/imgs/ViteLogo2.svg" />
+            <test-notice class="notice" :class="{'hide': !isShowNotice}"></test-notice>
+        </div>
 
         <router-link :class="{
             'icon': true,
@@ -9,14 +11,14 @@
             'active': active === 'account'
         }" :to="{
             name: 'account',
-            params: { address, entropy }
+            params: { addr, entropy }
         }"></router-link>
 
         <router-link class="__pointer icon send" :class="{
             'active': active === 'transList'
         }" :to="{ 
             name: 'transList',
-            params: { address, entropy }
+            params: { addr, entropy }
         }"></router-link>
 
         <div class="_bottom">
@@ -24,7 +26,7 @@
                 'active': active === 'setting'
             }" :to="{
                 name: 'setting',
-                params: { address, entropy }
+                params: { addr, entropy }
             }"></router-link>
             <div class="logout __pointer" @click="logout"></div>
         </div>
@@ -47,7 +49,7 @@ export default {
     data() {
         return {
             active: this.$route.name,
-            address: this.$route.params.address || '',
+            addr: this.$route.params.addr || '',
             entropy: this.$route.params.entropy || '',
             isShowNotice: false
         };
@@ -67,7 +69,7 @@ export default {
 
         logout() {
             let acc = viteWallet.Wallet.getAccInstance(this.$route.params);
-            viteWallet.Account.lock(acc.getDefaultAddr());
+            acc.lock(acc.getDefaultAddr());
 
             this.$router.push({
                 name: 'login'
@@ -90,9 +92,12 @@ export default {
         margin-top: 24px;
         width: 100%;
         height: 50px;
-        background: url('../assets/imgs/ViteLogo2.svg') no-repeat center;
+        img {
+            width: 100%;
+            height: 100%;
+        }
         .notice {
-            transition: all 0.5s ease-in-out;
+            transition: opacity 0.5s ease-in-out;
             opacity: 1;
             &.hide {
                 width: 0;
@@ -100,13 +105,6 @@ export default {
                 opacity: 0;
                 overflow: hidden;
             }
-        }
-    }
-    .notice {
-        transition: opacity 0.3s ease-in-out;
-        opacity: 1;
-        &.hide {
-            opacity: 0;
         }
     }
     .icon {

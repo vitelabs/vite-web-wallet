@@ -1,9 +1,9 @@
 <template>
     <layout>
         <div v-show="showPassWrapper" class="item" :class="{ 'unlock': !lock }">
-            <div class="title __pointer">解锁安全信息</div>
-            <input :disabled="!lock" class="pass" v-model="pass" type="password" placeholder="请输入密码" />
-            <span class="btn __pointer" @click="validPass">确定</span>
+            <div class="title __pointer">{{$t('setting.unlock')}}</div>
+            <input :disabled="!lock" class="pass" v-model="pass" type="password" :placeholder="$t('create.input')" />
+            <span class="btn __pointer" @click="validPass">{{$t('btn.submit')}}</span>
         </div>
 
         <mnemonic :lock="lock" class="item"></mnemonic>

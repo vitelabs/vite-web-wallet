@@ -3,17 +3,15 @@
         <div class="__title">{{ $t(`${title}`) }}</div>
 
         <div v-show="showNote" class="note">
-            助记词是您恢复账户的重要手段，如给予他人，
-            <br />
-            您的资产会被他人获取。请谨慎记录，以防丢失。
+            {{ $t('mnemonic.prompt') }}
         </div>
         <div class="input-wrapper">
             <slot></slot>
         </div>
 
         <div class="btn_list">
-            <span class="__btn __btn_border __pointer" @click="back">返回</span>
-            <span class="__btn __btn_all_in __pointer" @click="submit">确定</span>
+            <span class="__btn __btn_border __pointer" @click="back">{{$t('btn.back')}}</span>
+            <span class="__btn __btn_all_in __pointer" @click="submit">{{$t('btn.submit')}}</span>
         </div>
     </div>
 </template>
