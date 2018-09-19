@@ -38,29 +38,3 @@ export default {
 function getList() {
     return storage.getItem(ACC_KEY);
 }
-
-// import storage from 'utils/localStorage.js';
-
-// const ACC_NAME_KEY = 'ACC_NAME';
-
-// export default {
-//     getAccNames() {
-//         let defaultObj = {
-//             namesMap: {},
-//             nameCount: 0
-//         };
-
-//         let data = storage.getItem(ACC_NAME_KEY);
-//         if (!data) {
-//             return defaultObj;
-//         }
-
-//         return data || defaultObj;
-//     },
-//     setAccNames(namesMap, nameCount, lastLoginAccount) {
-//         storage.setItem(ACC_NAME_KEY, {
-//             namesMap, nameCount, lastLoginAccount
-//         });
-//     }
-// };
-

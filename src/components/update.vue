@@ -1,9 +1,9 @@
 <template>
     <div v-show="versionList.length" class="update-wrapper">
         <div class="version-wrapper" v-for="(version, index) in versionList" :key="index">
-            <span @click="close(index)" class="close"></span>
+            <img @click="close(index)" src="../assets/imgs/close.svg" class="close __pointer"/>
             <div class="version">{{ version.version }}</div>
-            <div class="describe">{{ version.zh }}</div>
+            <div class="describe">{{ $t('lang') === '中文' ? version.zh : version.en }}</div>
         </div>
     </div>
 </template>
@@ -52,7 +52,7 @@ export default {
     },
     methods: {
         close(index) {
-            this.versionList = this.versionList.slice(index, 1);
+            this.versionList.splice(index, 1);
             this.saveVersion();
         },
         saveVersion() {
@@ -82,6 +82,7 @@ export default {
     margin-bottom: 20px;
     box-sizing: border-box;
     padding: 30px;
+    font-family: $font-bold;
     &:before {
         content: '';
         display: inline-block;
@@ -92,17 +93,19 @@ export default {
         height: 100%;
         background-image: linear-gradient(138deg, #052EF5 0%, #0D6DF0 31%, #0B92E7 49%, #0BB6EB 71%, #00E0F2 100%);
     }
+    .close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+    }
     .version {
-        font-family: $font-bold;
         font-size: 16px;
         color: #1D2024;
         line-height: 24px;
     }
     .describe {
-        font-family: PingFangSC-Semibold;
         font-size: 14px;
-        color: #1D2024;
-        letter-spacing: 0;
+        color: #5E6875;
         line-height: 28px;
     }
 }
