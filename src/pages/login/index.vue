@@ -34,14 +34,18 @@
                    @focus="inputFocus('pass')" @blur="inputBlur('pass')" />
         </div>
 
-        <div class="bottom __btn __pointer __btn_all_in" @click="login">{{ $t('btn.login') }}</div>
+        <div class="bottom __btn __pointer __btn_all_in" :class="{
+            'disable': isLoading
+        }" @click="login">{{ $t('btn.login') + (isLoading ? ' ...' : '') }}</div>
 
         <div class="bottom btn-list">
             <router-link class="__btn_link" :to="{ 
                 name: 'importAccount',
                 params: { from: 'login' }
             }">{{ $t('btn.imported') }}</router-link>
-            <span class="line"></span>
+            <span class="line" :class="{
+                'zh': $t('lang') === '中文'
+            }"></span>
             <router-link class="__btn_link" :to="{ name: 'restore' }">{{$t('mnemonic.restore')}}</router-link>
         </div>
     </div>
@@ -63,7 +67,7 @@ export default {
         return {
             activeAccount: {},
             password: '',
-
+            isLoading: false,
             accountList: [],
             isShowAccountList: false,
             inputItem: ''
@@ -154,13 +158,18 @@ export default {
                 });
             };
 
-            loginSuccess();
+            // loginSuccess();
 
-            // let acc = viteWallet.Wallet.getAccInstance(this.activeAccount);
-            // let result = acc.unLock(this.password);
+            let acc = viteWallet.Wallet.getAccInstance(this.activeAccount);
 
-            // result && loginSuccess();
-            // !result && window.alert(this.$t('hint.pwErr'));
+            this.isLoading = true;
+            setTimeout(()=>{
+                let result = acc.unLock(this.password);
+                this.isLoading = false;
+                result && loginSuccess();
+                !result && window.alert(this.$t('hint.pwErr'));
+            }, 0);
+
         }
     }
 };
@@ -170,6 +179,9 @@ export default {
 .login-wrapper {
     .__btn {
         position: relative;
+        &.disable {
+            background: #bfbfbf;
+        }
     }
     .bottom {
         margin-bottom: 20px;
@@ -198,8 +210,10 @@ export default {
         text-align: center;
         line-height: 20px;
         .line {
+            &.zh {
+                margin: 0 33px;
+            }
             display: inline-block;
-            // margin: 0 33px;  UI changes in English
             width: 1px;
             height: 100%;
             background: #E5EDF3;
