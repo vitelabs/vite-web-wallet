@@ -9,6 +9,7 @@ class Wallet {
     constructor() {
         this.account = account;
         this.rootPath = path;
+        this.defaultAccount=null;
     }
 
     getAccInstance({
@@ -18,7 +19,6 @@ class Wallet {
             entropy, addr, wallet: this
         });
     }
-
     _checkName(name) {
         if (name) {
             return name;

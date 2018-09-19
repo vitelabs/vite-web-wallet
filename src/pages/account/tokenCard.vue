@@ -1,10 +1,20 @@
 <template>
     <div class="token-card">
-        <div class="title"><img :src="opt.tokenIcon" class="icon"/><span class="tokenName">{{opt.tokenName}}</span></div>
+        <div class="title"><img :src="iconMap[opt.tokenName]||iconMap['default']" class="icon" />
+            <span class="tokenName">{{opt.symbol}}</span>
+        </div>
         <div class="body">
-            <div class="item"><span>账户余额</span><span class="balance">{{opt.accBalance}}</span></div>
-            <div class="item"><span>在途金额</span><span class="balance">{{opt.unConfirmedBalance}}</span></div>
-            <div class="tips"><span>{{opt.unConfirmedNums}}笔交易待确认</span></div>
+            <div class="item">
+                <span>账户余额</span>
+                <span class="balance">{{opt.accBalance}}</span>
+            </div>
+            <div class="item">
+                <span>在途金额</span>
+                <span class="balance">{{opt.unConfirmedBalance}}</span>
+            </div>
+            <div class="tips">
+                <span>{{opt.unConfirmedNums}}笔交易待确认</span>
+            </div>
         </div>
         <div class="btn">发送交易</div>
     </div>
@@ -13,10 +23,16 @@
 <script>
 import bigNumber from "utils/bigNumber.js";
 import viteIcon from "assets/imgs/vite.svg";
+import vccIcon from "assets/imgs/vcc.svg"
 
 let inputTimeout = null;
 let fetchAccountTimeout = null;
 let lastFetchTime = null;
+const iconMap={
+    vite:viteIcon,
+    vcc:vccIcon,
+    default:viteIcon
+}
 
 export default {
   data() {
@@ -33,10 +49,10 @@ export default {
       type: Object,
       default: () => ({
         tokenName: "--",
+        symbol:"--",
         accBalance: "--",
         unConfirmedBalance: "--",
-        unConfirmedNums: "--",
-        tokenIcon: viteIcon
+        unConfirmedNums: "--"
       })
     }
   },
@@ -117,35 +133,34 @@ export default {
     font-size: 18px;
   }
 }
-  .body {
-    padding: 0 30px 20px;
-    .item {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 20px;
-      .balance {
-        font-size: 20px;
-        color: #007aff;
-      }
-    }
-    .tips {
-      margin-top: 8px;
-      font-size: 12px;
-      color: #5b638d;
-      display: flex;
-      justify-content: flex-end;
+.body {
+  padding: 0 30px 20px;
+  .item {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    .balance {
+      font-size: 20px;
+      color: #007aff;
     }
   }
-  .btn {
-    background: #007aff;
-    height: 44px;
-    vertical-align: middle;
-    line-height: 44px;
-    text-align: center;
-    color:#fff;
-    cursor: pointer;
-    &:active{
-        
-    }
+  .tips {
+    margin-top: 8px;
+    font-size: 12px;
+    color: #5b638d;
+    display: flex;
+    justify-content: flex-end;
   }
+}
+.btn {
+  background: #007aff;
+  height: 44px;
+  vertical-align: middle;
+  line-height: 44px;
+  text-align: center;
+  color: #fff;
+  cursor: pointer;
+  &:active {
+  }
+}
 </style>
