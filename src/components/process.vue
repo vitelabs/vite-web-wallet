@@ -1,20 +1,18 @@
 <template>
     <div v-show="showPro" class="process-wrapper">
-        <div class="around __pointer">
+        <div class="process-line">
             <span class="icon" :class="{
                 'active': active === 'createAccount',
                 'finish': active !== 'createAccount'
+            }"></span><span class="line" :class="{'finish': active !== 'createAccount'}"></span><span 
+                class="icon" :class="{
+                    'active': active === 'record',
+                    'default': active !== 'record'
             }"></span>
-            <br/>
-            <span>设置账户</span>
         </div>
-        <div class="line" :class="{'finish': active !== 'createAccount'}"></div>
-        <div class="around __pointer">
-            <div class="icon" :class="{
-                'active': active === 'record',
-                'default': active !== 'record'
-            }"></div>
-            <div>记录助记词</div>
+        <div class="words">
+            <span class="setting">{{$t('nav.head.setting')}}</span>
+            <span class="record">{{$t('mnemonic.record')}}</span>
         </div>
     </div>
 </template>
@@ -45,29 +43,8 @@ export default {
 .process-wrapper {
     position: relative;
     display: inline-block;
-    .line {
-        position: absolute;
-        top: 11px;
-        left: 39px;
-        width: 185px;
-        height: 2px;
-        background: #68D2FF;
-        &.finish {
-            background: #007AFF;
-        }
-    }
-    .around {
-        opacity: 0.9;
-        font-family: $font-bold;
-        font-size: 14px;
-        line-height: 20px;
-        color: #FFFFFF;
-        display: inline-block;
-        text-align: center;
-        &:first-child {
-            margin-right: 140px; 
-        }
-    }
+}
+.process-line {
     .icon {
         display: inline-block;
         box-sizing: border-box;
@@ -86,6 +63,32 @@ export default {
         background: #007AFF;
         border: 8px solid #FFFFFF;
         box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16);
+    }
+    .line {
+        display: inline-block;
+        position: relative;
+        top: -30px;
+        width: 185px;
+        height: 2px;
+        background: #68D2FF;
+        &.finish {
+            background: #007AFF;
+        }
+    }
+}
+.words {
+    font-family: $font-bold;
+    font-size: 14px;
+    line-height: 20px;
+    color: #FFFFFF;
+    opacity: 0.9;
+    .setting {
+        float: left;
+        transform: translateX(-35%);
+    }
+    .record {
+        float: right;
+        transform: translateX(35%);
     }
 }
 </style>

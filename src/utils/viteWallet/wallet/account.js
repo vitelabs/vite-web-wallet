@@ -150,6 +150,10 @@ class Account {
         $ViteJS.Wallet.Account.unlock(this.addr, privKey);
         return true;
     }
+
+    lock() {
+        $ViteJS.Wallet.Account.lock(this.getDefaultAddr());
+    }
 }
 
 export default Account;

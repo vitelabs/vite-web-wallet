@@ -12,43 +12,44 @@
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
 
-    .hover-wrapper {
-        position: absolute;
-        top: 20px;
-        left: 130px;
-        width: 350px;
-        z-index: 100;
-    }
-    .hover-notice {
-        max-width: 260px;
-        padding: 30px;
-        word-break: break-all;
+.hover-wrapper {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    padding: 20px 0 0 130px;
+    width: 350px;
+    z-index: 100;
+}
+.hover-notice {
+    max-width: 260px;
+    padding: 30px;
+    word-break: break-all;
+    text-align: left;
+    background: #FFFFFF;
+    border: 1px solid #E5EDF3;
+    box-shadow: 0 2px 15px 1px rgba(176,192,237,0.17);
+    border-radius: 8px;
+    .hover-title {
+        font-family: $font-bold;
         text-align: left;
-        background: #FFFFFF;
-        border: 1px solid #E5EDF3;
-        box-shadow: 0 2px 15px 1px rgba(176,192,237,0.17);
-        border-radius: 8px;
-        .hover-title {
-            font-family: $font-bold;
-            text-align: left;
-            font-size: 16px;
-            line-height: 16px;
-            color: #195ADD;
-            margin-bottom: 16px;
-            word-break: break-all;
+        font-size: 16px;
+        line-height: 16px;
+        color: #195ADD;
+        margin-bottom: 16px;
+        word-break: break-all;
+    }
+    .hover-content {
+        opacity: 0.66;
+        font-size: 14px;
+        color: #172c39;
+        line-height: 22px;
+        margin-bottom: 10px;
+        &:last-child {
+            margin-bottom: 0;
         }
-        .hover-content {
-            opacity: 0.66;
-            font-size: 14px;
-            color: #172c39;
-            line-height: 22px;
-            margin-bottom: 10px;
-            &:last-child {
-                margin-bottom: 0;
-            }
-            &.bold {
-                font-weight: bolder;
-            }
+        &.bold {
+            font-weight: bolder;
         }
     }
+}
 </style>

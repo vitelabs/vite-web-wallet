@@ -1,7 +1,7 @@
 <template>
     <div v-show="mnemonic" class="mnemonic">
         <div class="row">
-            <span class="title">助记词</span>
+            <span class="title">{{$t('mnemonic.title')}}</span>
             <span class="copy icon __pointer" @click="copy" :class="{ 'lock':  lock }"></span>
             <span class="eyes icon __pointer" @click="toggleVisible" :class="{
                 'lock':  lock,

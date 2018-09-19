@@ -70,6 +70,7 @@ let webpackConfig = {
             utils: path.join(SRC_PATH, '/utils'),
             i18n: path.join(SRC_PATH, '/i18n'),
             loopTime: path.join(SRC_PATH, '../config/loopTime'),
+            version: path.join(SRC_PATH, '../config/version'),
         },
         extensions: ['.js','.scss','.vue','.json']
     }
