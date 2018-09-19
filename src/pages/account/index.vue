@@ -17,7 +17,9 @@ let lastFetchTime = null;
 // const acc=viteWallet.Wallet.account
 export default {
     data(){
-        tokenInfo:Object.create(null)
+        return {
+            tokenInfo: Object.create(null)
+        };
     },
     components: {
         accountHead, syncBlock,tokenCard
