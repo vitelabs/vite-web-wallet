@@ -8,7 +8,7 @@
         "build:map": "npm run clean && MAP=true webpack",
         "app": "node app/index.js",
         "dev": "NODE_ENV=development webpack-dev-server",
-        "lint": "eslint ./ --cache"
+        "lint": "eslint ./ --cache --fix"
     },
     "pre-commit": [
         "lint"
@@ -54,6 +54,7 @@
         "koa-router": "^7.4.0",
         "node-libs-browser": "^2.1.0",
         "qrcode.es": "^1.0.0",
-        "query-string": "^6.1.0"
+        "query-string": "^6.1.0",
+        "vuex": "^3.0.1"
     }
 }
