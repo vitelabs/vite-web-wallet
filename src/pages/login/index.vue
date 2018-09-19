@@ -153,7 +153,7 @@ export default {
                     }
                 });
             };
-
+    
             let acc = viteWallet.Wallet.getAccInstance(this.activeAccount);
             let result = acc.unLock(this.password);
 

@@ -8,7 +8,6 @@ class Account {
         this.entropy = entropy;
         this.addr = addr;
     }
-
     _getSelf() {
         if (this.entropy) {
             return this.wallet.getAccFromEntropy(this.entropy);
@@ -19,10 +18,12 @@ class Account {
         return null;
     }
     getAccountByAccAddr() {
-        return $ViteJS.Vite.Ledger.getAccountByAccAddr(this.addr);
+        const s=this._getSelf();
+        return $ViteJS.Vite.Ledger.getAccountByAccAddr([s.addrList[s.defaultPath].addr]);
     }
     getUnconfirmedInfo() {
-        return $ViteJS.Vite.Ledger.getUnconfirmedInfo(this.addr);
+        const s=this._getSelf();
+        return $ViteJS.Vite.Ledger.getUnconfirmedInfo([s.addrList[s.defaultPath].addr]);
     }
     getName() {
         let self = this._getSelf();
