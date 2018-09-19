@@ -4,7 +4,6 @@
         <account-head class="item"></account-head>
         <div class="token-list item">
             <tokenCard v-for="(item,i) in tokenInfo" :class="{'mg-left':i!==0}" :key="item.id"></tokenCard>
-            <tokenCard class="mg-left"></tokenCard>
         </div>
     </div>
 </template>
@@ -13,7 +12,7 @@
 import syncBlock from "components/syncBlock";
 import accountHead from "./head.vue";
 import tokenCard from "./tokenCard";
-// import bigNumber from 'utils/bigNumber.js';
+import bigNumber from 'utils/bigNumber.js';
 
 let fetchAccountTimeout = null;
 let lastFetchTime = null;

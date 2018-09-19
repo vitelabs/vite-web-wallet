@@ -18,12 +18,10 @@ class Account {
         return null;
     }
     getAccountByAccAddr() {
-        const s=this._getSelf();
-        return $ViteJS.Vite.Ledger.getAccountByAccAddr([s.addrList[s.defaultPath].addr]);
+        return $ViteJS.Vite.Ledger.getAccountByAccAddr([this.getDefaultAddr()]);
     }
     getUnconfirmedInfo() {
-        const s=this._getSelf();
-        return $ViteJS.Vite.Ledger.getUnconfirmedInfo([s.addrList[s.defaultPath].addr]);
+        return $ViteJS.Vite.Ledger.getUnconfirmedInfo([this.getDefaultAddr()]);
     }
     getName() {
         let self = this._getSelf();

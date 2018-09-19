@@ -1,12 +1,10 @@
+import request from 'utils/request';
 class TestToken {
-    // constructor(services) {
-    //     this.services = services;
-    // }
-
-    // get(addr) {
-    //     console.log(addr);
-    //     return this.services.getTestToken(addr);
-    // }
+    constructor() {
+    }
+    get(accountAddress) {
+        return request({method:'POST',url:'/api/account/newtesttoken',params:{accountAddress}});
+    }
 }
 
 export default TestToken;
