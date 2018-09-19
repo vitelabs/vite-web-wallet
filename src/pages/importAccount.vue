@@ -1,6 +1,6 @@
 <template>
     <div class="import-account-wrapper">
-        <div class="__title">导入账户</div>
+        <div class="__title">{{ $t('nav.head.imported') }}</div>
 
         <div ref="fileArea" class="file-drag" @drop="dragFile">
             {{ $t('dragDrop.text') }}
@@ -10,7 +10,7 @@
         </div>
         <div @click="openFile" class="__btn __btn_all_in __pointer">
             <input ref="file" type="file" name="file" style="display:none"/>
-            打开文件夹导入
+            {{ $t('dragDrop.guide') }}
         </div>
         <span class="__btn __btn_border __pointer" @click="back" >{{ $t('btn.back') }}</span>
     </div>

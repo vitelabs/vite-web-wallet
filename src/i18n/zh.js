@@ -3,9 +3,24 @@ module.exports = {
 
     start: '开始',
 
-    title: {
-        restore: '助记词恢复',
-        record: '记录助记词'
+    mnemonic: {
+        title:'助记词',
+        restore: '助记词恢复账户',
+        record: '记录助记词',
+        prompt: '助记词是您恢复账户的重要手段，如给予他人，您的资产会被他人获取。请谨慎记录，以防丢失。',
+        placeholder:'请输入您的助记词',
+    },
+
+    setting: {
+        title: '设置',
+        unlock: '解锁安全信息',
+        lang: '语言',
+        block: '当前区块高度:',
+        version: '版本',
+        service: '客户服务',
+        site: 'Vite官方网站',
+        sys: '系统门户网站',
+        open: 'Vite项目开源代码',
     },
 
     nav: {
@@ -15,6 +30,8 @@ module.exports = {
             create: '新建账户',
             imported: '导入账户',
             backup: '备份账户',
+            setting: '设置账户',
+            login: '登录账户'
         },
         sync: '钱包初始化中，暂时无法发送交易',
         noNet: '未检测到网络',
@@ -33,7 +50,9 @@ module.exports = {
     // account list
     accList: {
         balance: '余额',
-        addAcc: '新添加一个账户'
+        addAcc: '新添加一个账户',
+        addr: '账户地址列表',
+        default: '选择默认用户'
     },
 
     // create account
@@ -56,6 +75,7 @@ module.exports = {
         text: '拖拽账户文件进入文本区域',
         err1: '导入的文件错误',
         err2: '只能导入一个文件',
+        guide: '打开文件夹导入'
     },
 
     // account detail
@@ -120,7 +140,9 @@ module.exports = {
         cancel: '取消',
         login: '登录',
         imported: '导入账号',
-        back: '返回'
+        back: '返回',
+        submit: '确定',
+        next: '下一步',
     },
     paging: {
         pre: '上一页',

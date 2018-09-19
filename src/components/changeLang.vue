@@ -9,6 +9,8 @@
 </template>
 
 <script>
+import localStorage from 'utils/localStorage';
+
 export default {
     data() {
         return {
@@ -22,6 +24,7 @@ export default {
         },
         changeLocale(locale) {
             this.$i18n.locale = locale;
+            localStorage.setItem('lang', locale);
             this.toggleLangList();
         }
     }
