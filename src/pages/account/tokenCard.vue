@@ -117,35 +117,34 @@ export default {
     font-size: 18px;
   }
 }
-  .body {
-    padding: 0 30px 20px;
-    .item {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 20px;
-      .balance {
-        font-size: 20px;
-        color: #007aff;
-      }
-    }
-    .tips {
-      margin-top: 8px;
-      font-size: 12px;
-      color: #5b638d;
-      display: flex;
-      justify-content: flex-end;
+.body {
+  padding: 0 30px 20px;
+  .item {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    .balance {
+      font-size: 20px;
+      color: #007aff;
     }
   }
-  .btn {
-    background: #007aff;
-    height: 44px;
-    vertical-align: middle;
-    line-height: 44px;
-    text-align: center;
-    color:#fff;
-    cursor: pointer;
-    &:active{
-        
-    }
+  .tips {
+    margin-top: 8px;
+    font-size: 12px;
+    color: #5b638d;
+    display: flex;
+    justify-content: flex-end;
   }
+}
+.btn {
+  background: #007aff;
+  height: 44px;
+  vertical-align: middle;
+  line-height: 44px;
+  text-align: center;
+  color: #fff;
+  cursor: pointer;
+  &:active {
+  }
+}
 </style>
