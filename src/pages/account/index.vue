@@ -12,7 +12,6 @@
 import syncBlock from "components/syncBlock";
 import accountHead from "./head.vue";
 import tokenCard from "./tokenCard";
-import bigNumber from 'utils/bigNumber.js';
 
 let fetchAccountTimeout = null;
 let lastFetchTime = null;
@@ -40,6 +39,7 @@ export default {
     function _updateBalance({ balanceInfo, unconfirmedInfo }) {
       if (balanceInfo) {
         balanceInfo.forEach(v => {
+        v.balance=viteWallet.Token.toBasic(balance, v.mintage.decimals)
           if (this.tokenInfo[v.mintage.id]) {
             this.tokenInfo[v.mintage.id].accBalance = v.balance;
           } else {
@@ -55,6 +55,7 @@ export default {
       }
       if (unconfirmedInfo) {
         balanceInfo.forEach(v => {
+            v.balance=viteWallet.Token.toBasic(balance, v.mintage.decimals)
           if (this.tokenInfo[v.mintage.id]) {
               this.tokenInfo[v.mintage.id].unConfirmedBalance=v.balance;
               this.tokenInfo[v.mintage.id].unConfirmedNums=v.unConfirmedNums;
@@ -64,7 +65,7 @@ export default {
               tokenName: v.name,
               accBalance: "--",
               unConfirmedBalance: v.balance,
-              unConfirmedNums: v.unConfirmedNums
+            //   unConfirmedNums: v.unConfirmedNums
             }
           }
         });
