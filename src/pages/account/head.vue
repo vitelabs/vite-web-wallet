@@ -16,12 +16,12 @@
             <div class="head-title">
                 <span>{{ $t('accDetail.address') }}</span>
                 <span class="title_icon __pointer qrcode"><img src="../../assets/imgs/qrcode_default.svg" @click="toggleQrCode" />
-                <div class="code-container" v-show="qrcodeShow">
-                    <div class="code">
-                        <qrcode :text="addressStr" :options="{size:146}" @genImage="getImage"></qrcode>
+                    <div class="code-container" v-show="qrcodeShow">
+                        <div class="code">
+                            <qrcode :text="addressStr" :options="{size:146}" @genImage="getImage"></qrcode>
+                        </div>
+                        <div class="btn" @click="downLoadQrCode">保存二维码图片 </div>
                     </div>
-                    <div class="btn" @click="downLoadQrCode">保存二维码图片 </div>
-                </div>
                 </span>
                 <img src="../../assets/imgs/copy_default.svg" @click="copy" class="title_icon copy __pointer"/>
                 <span class="copy-success" :class="{'show': copySuccess}">{{ $t('accDetail.hint.copy') }}</span>
@@ -36,135 +36,133 @@
             </div>
             <div @click="goDetail" class="btn__small __pointer __btn-detail">
                 {{ $t('accDetail.transDetail') }}
-                <img src="../../assets/imgs/right.svg" class="icon" />
+                <img src="../../assets/imgs/more.svg" class="more-icon" />
             </div>
         </div>
     </div>
 </template>
 
 <script>
-import Vue from "vue";
-import copy from "utils/copy";
-import qrcode from "components/qrcode";
-import { stringify } from "utils/viteSchema";
+import Vue from 'vue';
+import copy from 'utils/copy';
+import qrcode from 'components/qrcode';
+import { stringify } from 'utils/viteSchema';
 
 export default {
-  components: { qrcode },
-  data() {
-    return {
-      account: {},
-      isShowNameInput: false,
-      editName: "",
-      copySuccess: false,
-      qrcode:null,
-      qrcodeShow:false
-    };
-  },
-  computed: {
-    addressStr() {
-      return stringify({ targetAddress: this.account.addr });
-    }
-  },
-  mounted() {
-    this.account = this.getSimpleAcc();
-  },
-  methods: {
-      getImage(
-          i
-      ){
-          this.qrcode=i;
-      },
-    copy() {
-      copy(this.account.addr);
-
-      this.copySuccess = true;
-      setTimeout(() => {
-        this.copySuccess = false;
-      }, 500);
-    },
-    toggleQrCode() {
-        this.qrcodeShow=!this.qrcodeShow;
-    },
-    downLoadQrCode(){
-        if(!this.qrcode){return}
-        location.href=this.qrcode.replace("image/png", "image/octet-stream");
-        this.qrcodeShow=false;
-    },
-    goDetail() {
-      let locale = this.$i18n.locale === "zh" ? "zh/" : "";
-      window.open(
-        `https://testnet.vite.net/${locale}account/${this.account.addr}`
-      );
-    },
-
-    getTestToken() {
-      viteWallet.TestToken.get(this.account.addr)
-        .then(() => {
-          window.alert(this.$t("accDetail.hint.token"));
-        })
-        .catch(err => {
-          console.warn(err);
-          window.alert(this.$t("accDetail.hint.tErr"));
-        });
-    },
-    getSimpleAcc() {
-      let acc = viteWallet.Wallet.getAccInstance(this.$route.params);
-      return {
-        name: acc.getName(),
-        addr: acc.getDefaultAddr(),
-        entropy: acc.entropy || ""
-      };
-    },
-
-    clearEditName() {
-      this.isShowNameInput = false;
-      this.editName = "";
-      window.document.onkeydown = null;
-    },
-    startRename() {
-      if (this.isShowNameInput) {
-        return;
-      }
-      this.isShowNameInput = true;
-      Vue.nextTick(() => {
-        window.document.onkeydown = e => {
-          e = e || window.event;
-          let code = e.keyCode || e.which;
-          if (!code || code !== 13) {
-            return;
-          }
-          this.rename();
+    components: { qrcode },
+    data() {
+        return {
+            account: {},
+            isShowNameInput: false,
+            editName: '',
+            copySuccess: false,
+            qrcode:null,
+            qrcodeShow:false
         };
-        this.$refs.nameInput.focus();
-      });
     },
-    rename() {
-      if (!this.editName) {
-        this.clearEditName();
-        return;
-      }
+    computed: {
+        addressStr() {
+            return stringify({ targetAddress: this.account.addr });
+        }
+    },
+    mounted() {
+        this.account = this.getSimpleAcc();
+    },
+    methods: {
+        getImage(i) {
+            this.qrcode=i;
+        },
+        copy() {
+            copy(this.account.addr);
 
-      if (!/^[a-zA-Z0-9_\u4e00-\u9fa5]+$/g.test(this.editName)) {
-        window.alert(this.$t("create.hint.name"));
-        this.clearEditName();
-        return;
-      }
+            this.copySuccess = true;
+            setTimeout(() => {
+                this.copySuccess = false;
+            }, 500);
+        },
+        toggleQrCode() {
+            this.qrcodeShow=!this.qrcodeShow;
+        },
+        downLoadQrCode(){
+            if(!this.qrcode){return;}
+            location.href=this.qrcode.replace('image/png', 'image/octet-stream');
+            this.qrcodeShow=false;
+        },
+        goDetail() {
+            let locale = this.$i18n.locale === 'zh' ? 'zh/' : '';
+            window.open(
+                `https://testnet.vite.net/${locale}account/${this.account.addr}`
+            );
+        },
 
-      if (this.editName.length > 32) {
-        window.alert(this.$t("create.hint.nameLong"));
-        this.clearEditName();
-        return;
-      }
+        getTestToken() {
+            viteWallet.TestToken.get(this.account.addr)
+                .then(() => {
+                    window.alert(this.$t('accDetail.hint.token'));
+                })
+                .catch(err => {
+                    console.warn(err);
+                    window.alert(this.$t('accDetail.hint.tErr'));
+                });
+        },
+        getSimpleAcc() {
+            let acc = viteWallet.Wallet.getAccInstance(this.$route.params);
+            return {
+                name: acc.getName(),
+                addr: acc.getDefaultAddr(),
+                entropy: acc.entropy || ''
+            };
+        },
 
-      let res = viteWallet.Wallet.rename(this.account, this.editName);
-      if (!res) {
-        window.alert("fail");
-        return;
-      }
-      this.clearEditName();
-      this.account = this.getSimpleAcc();
+        clearEditName() {
+            this.isShowNameInput = false;
+            this.editName = '';
+            window.document.onkeydown = null;
+        },
+        startRename() {
+            if (this.isShowNameInput) {
+                return;
+            }
+            this.isShowNameInput = true;
+            Vue.nextTick(() => {
+                window.document.onkeydown = e => {
+                    e = e || window.event;
+                    let code = e.keyCode || e.which;
+                    if (!code || code !== 13) {
+                        return;
+                    }
+                    this.rename();
+                };
+                this.$refs.nameInput.focus();
+            });
+        },
+        rename() {
+            if (!this.editName) {
+                this.clearEditName();
+                return;
+            }
+
+            if (!/^[a-zA-Z0-9_\u4e00-\u9fa5]+$/g.test(this.editName)) {
+                window.alert(this.$t('create.hint.name'));
+                this.clearEditName();
+                return;
+            }
+
+            if (this.editName.length > 32) {
+                window.alert(this.$t('create.hint.nameLong'));
+                this.clearEditName();
+                return;
+            }
+
+            let res = viteWallet.Wallet.rename(this.account, this.editName);
+            if (!res) {
+                window.alert('fail');
+                return;
+            }
+            this.clearEditName();
+            this.account = this.getSimpleAcc();
+        }
     }
-  }
 };
 </script>
 
@@ -292,33 +290,36 @@ export default {
     }
   }
   .btn-group {
-    position: absolute;
-    top: 30px;
-    right: 30px;
-    font-family: $font-normal-b;
-    margin-right: 8px;
-    .btn__small {
-      width: 210px;
-      height: 33px;
-      line-height: 33px;
-      text-align: center;
-      font-size: 14px;
-      border-radius: 2px;
-    }
-    .__btn-test {
-      background: #007aff;
-      color: #ffffff;
-      height: 35px;
-      line-height: 35px;
-    }
-    .__btn-detail {
-      border: 1px solid #007aff;
-      color: #007aff;
-      margin-top: 12px;
-    }
-    .icon {
-      margin-bottom: -7px;
-    }
+        position: absolute;
+        top: 30px;
+        right: 30px;
+        font-family: $font-normal-b;
+        margin-right: 8px;
+        .btn__small {
+            width: 210px;
+            height: 33px;
+            line-height: 33px;
+            text-align: center;
+            font-size: 14px;
+            border-radius: 2px;
+        }
+        .__btn-test {
+            background: #007aff;
+            color: #ffffff;
+            height: 35px;
+            line-height: 35px;
+        }
+        .__btn-detail {
+            border: 1px solid #007aff;
+            color: #007aff;
+            margin-top: 12px;
+        }
+        .icon {
+            margin-bottom: -7px;
+        }
+        .more-icon {
+            margin-bottom: -1px;
+        }
   }
 }
 </style>
