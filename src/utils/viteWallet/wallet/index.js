@@ -158,7 +158,7 @@ class Wallet {
                 addrNum: acc.addrNum, 
                 name: acc.name
             });
-            this.activeAccount.unLock();
+
             setLast({
                 entropy,
                 name: acc.name
