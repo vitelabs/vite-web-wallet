@@ -53,7 +53,7 @@ const router = new VueRouter({
 //     }
 //     next();
 // });
-console.log(store);
+
 new Vue({
     el: '#app',
     components: { App },

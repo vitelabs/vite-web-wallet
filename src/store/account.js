@@ -1,73 +1,58 @@
 const state = {
-    unConfirmedInfo: {
+    unConfirmed: {
         balanceInfos:[]
     },
-    balanceInfo: {
+    balance: {
         balanceInfos:[]
     }
 };
 
 const mutations = {
-    commitUnConfirmedInfo(state, payload) {
-        state.unConfirmedInfo = Object.assign(state.unConfirmedInfo,payload);
-        state.unConfirmedInfo.balanceInfos=state.unConfirmedInfo.balanceInfos||[];
-    },
     commitBalanceInfo(state, payload) {
-        state.balanceInfo = Object.assign(state.balanceInfo,payload);
-        state.balanceInfo.balanceInfos=state.balanceInfo.balanceInfos||[];
+        state.balance = Object.assign(state.balance, payload.balance);
+        state.balance.balanceInfos = state.balance.balanceInfos || [];
+
+        state.unConfirmed = Object.assign(state.unConfirmed, payload.unconfirm);
+        state.unConfirmed.balanceInfos = state.unConfirmed.balanceInfos || [];
     }
 };
+
 const actions = {
     getBalanceInfo({
         commit
-    }, acc) {
-        return acc.getAccountByAccAddr().then(data => {
-            commit('commitBalanceInfo', data.result);
-        }).catch(e=>{
-            console.log(9999,e);
+    }, activeAccount) {
+        return activeAccount.getBalance().then(data => {
+            commit('commitBalanceInfo', data);
+        }).catch(e => {
+            console.warn(e);
         });
     },
-    getUnconfirmedInfo({
-        commit
-    }, acc) {
-        return acc.getUnconfirmedInfo().then(data => {
-            commit('commitUnConfirmedInfo', data.result);
-        });
-    }
 };
 
 const getters = {
     tokenBalanceList(state) {
         const tokenInfo = Object.create(null);
-        state.balanceInfo.balanceInfos.forEach(v => {
-            v.balance = viteWallet.Token.toBasic(v.balance, v.mintage.decimals);
-            if (tokenInfo[v.mintage.id]) {
-                tokenInfo[v.mintage.id].accBalance = v.balance;
-            } else {
-                tokenInfo[v.mintage.id] = {
-                    symbol: v.symbol,
-                    tokenName: v.name,
-                    accBalance: v.balance,
-                    unConfirmedBalance: '--',
-                    unConfirmedNums: '--'
-                };
-            }
+
+        state.balance.balanceInfos.forEach(balanceInfo => {
+            let mintage = balanceInfo.mintage;
+            let balance = viteWallet.Token.toBasic(balanceInfo.balance, mintage.decimals);
+
+            tokenInfo[mintage.id] = tokenInfo[mintage.id] || {};
+            tokenInfo[mintage.id].balance = balance;
+            tokenInfo[mintage.id].symbol = mintage.symbol;
         });
-        state.balanceInfo.balanceInfos.forEach(v => {
-            v.balance = viteWallet.Token.toBasic(v.balance, v.mintage.decimals);
-            if (tokenInfo[v.mintage.id]) {
-                tokenInfo[v.mintage.id].unConfirmedBalance = v.balance;
-                tokenInfo[v.mintage.id].unConfirmedNums = v.unConfirmedNums;
-            } else {
-                tokenInfo[v.mintage.id] = {
-                    symbol: v.symbol,
-                    tokenName: v.name,
-                    accBalance: '--',
-                    unConfirmedBalance: v.balance,
-                    //   unConfirmedNums: v.unConfirmedNums
-                };
-            }
+
+        state.unConfirmed.balanceInfos.forEach(balanceInfo => {
+            let mintage = balanceInfo.mintage;
+            let balance = viteWallet.Token.toBasic(balanceInfo.balance, mintage.decimals);
+
+            tokenInfo[mintage.id] = tokenInfo[mintage.id] || {};
+            tokenInfo[mintage.id].fundFloat = balance;
+            tokenInfo[mintage.id].symbol = tokenInfo[mintage.id].symbol || mintage.symbol;
+            // [TODO] Only one token, now.
+            tokenInfo[mintage.id].unConfirmes = balanceInfo.unConfirmedBlocksLen;
         });
+
         return tokenInfo;
     }
 };

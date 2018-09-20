@@ -38,9 +38,11 @@ export default {
             operateTimeout = setTimeout(()=>{
                 operateTimeout = null;
                 this.logout();
-            }, 5*60*1000);
+            }, 5 * 60 * 1000);
         },
         logout() {
+            let activeAccount = viteWallet.Wallet.getActiveAccount();
+            activeAccount && activeAccount.unLock();
             this.$router.push({
                 name: 'login'
             });
