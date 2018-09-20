@@ -12,15 +12,12 @@
 import syncBlock from "components/syncBlock";
 import accountHead from "./head.vue";
 import tokenCard from "./tokenCard";
-import timer from "utils/asyncFlow";
+import {timer} from "utils/asyncFlow";
 import loopTime from "loopTime";
 
 let balanceInfoInst=null;
 let unConfirmedInst=null;
 export default {
-  data() {
-    return { tokenInfo: Object.create(null) };
-  },
   components: {
     accountHead,
     syncBlock,
@@ -31,16 +28,21 @@ export default {
     balanceInfoInst=new timer(()=>{
       return this.$store.dispatch('getBalanceInfo',acc);
     },loopTime.ledger_getAccountByAccAddr);
+    
     unConfirmedInst=new timer(()=>{
-      return this.$store.dispatch('getunConfirmedInfo',acc)
+      return this.$store.dispatch('getUnconfirmedInfo',acc)
     },loopTime.ledger_getUnconfirmedInfo)
+    balanceInfoInst.start();
+    unConfirmedInst.start();
   },
-  computed(){
-    this.$store.getters.tokenBalanceList
+  computed:{
+    tokenInfo(){
+        return this.$store.getters.tokenBalanceList;
+    }
   },
   beforeDestroy(){
-    balanceInfoInst.stop();
-    unConfirmedInst.stop();
+    balanceInfoInst&&balanceInfoInst.stop();
+    balanceInfoInst&&unConfirmedInst.stop();
     unConfirmedInst=null;
     unConfirmedInst=null;
   }
