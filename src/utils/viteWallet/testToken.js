@@ -3,7 +3,13 @@ class TestToken {
     constructor() {
     }
     get(accountAddress) {
-        return request({method:'POST',url:'/api/account/newtesttoken',params:{accountAddress}});
+        return request({
+            method: 'POST',
+            url: '/api/account/newtesttoken',
+            params: {
+                accountAddress
+            }
+        });
     }
 }
 

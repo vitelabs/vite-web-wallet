@@ -59,11 +59,11 @@ export default {
         this.fetchTransList(0);
     },
     data() {
-        let acc = viteWallet.Wallet.getAccInstance(this.$route.params);
-        let address = acc.getDefaultAddr();
+        let activeAccount = viteWallet.Wallet.getActiveAccount();
+        let address = activeAccount.getDefaultAddr();
 
         return {
-            acc,
+            acc: activeAccount,
             address, 
             transList: [],
             currentPage: 0,
