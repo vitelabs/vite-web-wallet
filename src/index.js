@@ -12,8 +12,9 @@ import routes from 'routes/index';
 import i18nConfig from 'i18n';
 
 import 'utils/eventEmitter.js';
-
 import './utils/viteWallet/index.js';
+
+import store from './store';
 
 Vue.use(VueRouter);
 Vue.use(VueI18n);
@@ -52,11 +53,12 @@ const router = new VueRouter({
 //     }
 //     next();
 // });
-
+console.log(store);
 new Vue({
     el: '#app',
     components: { App },
     template: '<App/>',
+    store,
     router,
     i18n
 });
