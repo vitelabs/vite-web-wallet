@@ -25,8 +25,6 @@ class Ledger {
         };
 
         $ViteJS.Vite.Ledger.getInitSyncInfo().then(({ result })=>{
-            console.log(result);
-
             this.startHeight = result.startHeight;
             this.targetHeight = result.targetHeight;
             this.currentHeight = result.currentHeight;
@@ -94,8 +92,6 @@ class Ledger {
     getBlocks({
         addr, index
     }) {
-        console.log(addr);
-        console.log(index);
         return $ViteJS.Vite.Ledger.provider.batch([{
             type: 'request',                    
             methodName: 'ledger_getBlocksByAccAddr',

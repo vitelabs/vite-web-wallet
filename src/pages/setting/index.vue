@@ -3,7 +3,7 @@
         <div v-show="showPassWrapper" class="item" :class="{ 'unlock': !lock }">
             <div class="title __pointer">{{$t('setting.unlock')}}</div>
             <input :disabled="!lock" class="pass" v-model="pass" type="password" :placeholder="$t('create.input')" />
-            <span class="btn __pointer" @click="validPass">{{$t('btn.submit')}}</span>
+            <span class="btn __pointer" @click="validPass">{{ $t('btn.submit') }}</span>
         </div>
 
         <mnemonic :lock="lock" class="item"></mnemonic>
@@ -23,10 +23,12 @@ export default {
         layout, accList, lang, mnemonic
     },
     data() {
-        let acc = viteWallet.Wallet.getAccInstance(this.$route.params);
-        let showPassWrapper = acc ? !!acc.entropy : false;
+        let activeAccount = viteWallet.Wallet.getActiveAccount();
+        let showPassWrapper = activeAccount ? !!activeAccount.isWalletAcc : false;
 
         return {
+            isSubmiting: false,
+            activeAccount,
             showPassWrapper,
             pass: '',
             lock: true
@@ -34,10 +36,19 @@ export default {
     },
     methods: {
         validPass() {
-            if (!this.lock || !this.pass) {
+            if (this.isSubmiting || !this.lock) {
                 return;
             }
-            this.lock = false;
+
+            if (!this.pass) {
+                window.alert('fail');
+                return;
+            }
+
+            this.isSubmiting = true;
+            this.lock = !this.activeAccount.verify(this.pass);
+            this.isSubmiting = false;
+            this.lock && window.alert('fail');
         }
     }
 };
@@ -85,12 +96,16 @@ export default {
         width: 60px;
         height: 40px;
         text-align: center;
-        line-height: 38px;
+        line-height: 40px;
         background: #007AFF;
         border-radius: 2px;
         font-family: $font-normal-b;
         font-size: 14px;
         color: #FFFFFF;
+        &.unuse {
+            background: #efefef;
+            color: #666;
+        }
     }
 }
 </style>

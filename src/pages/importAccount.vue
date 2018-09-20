@@ -52,19 +52,15 @@ export default {
             let file = files[0];
             let reader = new FileReader();
             reader.onload = (e) => {
-                let keystore = viteWallet.Wallet.isValidKeystore(e.target.result);
+                let result = viteWallet.Wallet.importKeystore(e.target.result);
 
-                if (!keystore) {
+                if (!result) {
                     this.errMsg = 'dragDrop.err1';
                     return;
                 }
 
-                let account = viteWallet.Wallet.saveAcc({ keystore });
                 this.$router.push({
-                    name: 'login',
-                    params: {
-                        addr: account.addr
-                    }
+                    name: 'login'
                 });
             };
             reader.readAsText(file);

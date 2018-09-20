@@ -68,9 +68,8 @@ export default {
         },
 
         logout() {
-            let acc = viteWallet.Wallet.getAccInstance(this.$route.params);
-            acc.lock(acc.getDefaultAddr());
-
+            let activeAccount = viteWallet.Wallet.getActiveAccount();
+            activeAccount.lock();
             this.$router.push({
                 name: 'login'
             });

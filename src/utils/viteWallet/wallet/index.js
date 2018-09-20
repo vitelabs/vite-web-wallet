@@ -2,80 +2,183 @@ import acc from '../store/acc.js';
 import lastIn from '../store/lastIn.js';
 import account from './account.js';
 
-const path = 'm/44\'/999\'';
-const namePre = 'account';
-
 class Wallet {
     constructor() {
-        this.account = account;
-        this.rootPath = path;
-        this.defaultAccount=null;
+        this.activeAccount = null;
+    }
+    
+    getActiveAccount() {
+        return this.activeAccount;
     }
 
-    getAccInstance({
-        entropy, addr
-    }) {
-        return new this.account({
-            entropy, addr, wallet: this
-        });
-    }
-    _checkName(name) {
-        if (name) {
-            return name;
+    clearActiveAccount() {
+        if (!this.activeAccount) {
+            return;
         }
-        let count = acc.getNameCount();
-        name = `${namePre}${count}`;
-        acc.setNameCount(count + 1);
-        return name;
+        this.activeAccount.lock();
+        this.activeAccount = null;
     }
 
-    saveAcc(account) {
-        let name = this._checkName(account.name);
-
-        if (account.keystore) {
-            let item = {
-                name,
-                addr: account.keystore.hexaddress,
-                keystore: account.keystore
-            };
-            acc.add(item);
-            return item;
-        }
-
-        acc.add(account);
-        return account;
+    newActiveAcc(acc) {
+        this.clearActiveAccount();
+        this.activeAccount = new account(acc);
     }
 
     create(name, pass) {
-        let { addr, entropy } = $ViteJS.Wallet.Address.newAddr(path);
-        let defaultPath = `${path}/0\'`;
-        let addrList = {};
-        addrList[defaultPath] = {
-            addr: addr.hexAddr,
-            privKey: addr.privKey
-        };
-
-        let acc = {
-            name, pass, defaultPath, entropy, addrList
-        };
-
-        this.saveAcc(acc);
-        return { addr, entropy };
-    }
-
-    setLast(account) {
-        if (!account) {
+        if (!name || !pass) {
             return;
         }
-        
-        let acc = {
-            entropy: account.entropy || '',
-            addr: account.addr || ''
-        };
-        lastIn.setLast(acc);
+
+        let { addr, entropy } = $ViteJS.Wallet.Address.newAddr();
+        let encryptObj = $ViteJS.Wallet.Account.encrypt(pass);
+        this.newActiveAcc({
+            defaultInx: 0,
+            addrNum: 1, 
+            name,
+            entropy,
+            encryptObj,
+            addrs: [addr]
+        });
+    }
+
+    importKeystore(data) {
+        let keystore = $ViteJS.Wallet.Keystore.isValid(data);
+        if (!keystore) {
+            return false;
+        }
+
+        this.newActiveAcc({
+            keystore
+        });
+        this.activeAccount.save();
+        return this.activeAccount.getDefaultAddr();
+    }
+
+    restoreAddrs(mnemonic) {
+        let num = 10;
+        let addrs = $ViteJS.Wallet.Address.getAddrsFromMnemonic(mnemonic, num);
+        if (!addrs) {
+            return Promise.reject(addrs);
+        }
+
+        let requests = [];
+        for (let i=0; i<num; i++) {
+            requests.push({
+                type: 'request',
+                methodName: 'ledger_getAccountByAccAddr',
+                params: [ addrs[i].hexAddr ]
+            });
+        }
+
+        return $ViteJS.Vite._currentProvider.batch(requests).then((data) => {
+            let index = 0;
+            data.forEach(({ result }, i) => {
+                if (!result) {
+                    return;
+                }
+                result.blockHeight && (index = i);
+            });
+
+            let finalAddrs = addrs.slice(0, index+1);
+            let entropy = $ViteJS.Wallet.Address.getEntropyFromMnemonic(mnemonic);
+            this.newActiveAcc({
+                defaultInx: 0,
+                addrNum: index + 1,
+                entropy,
+                addrs: finalAddrs
+            });
+            return data;
+        });
+    }
+
+    restoreAccount(name, pass) {
+        if (!this.activeAccount) {
+            return;
+        }
+        let encryptObj = $ViteJS.Wallet.Account.encrypt(pass);
+        this.activeAccount.name = name;
+        this.activeAccount.encryptObj = encryptObj;
+        this.activeAccount.save();
+    }
+
+    login({
+        entropy, addr
+    }, pass) {
+        if ( (!entropy && !addr) || !pass ) {
+            return false;
+        }
+
+        let loginRes = addr ? this._loginKeystore(addr, pass) : this._loginWalletAcc(entropy, pass);
+        if (!loginRes) {
+            return false;
+        }
+
+        this.activeAccount.unLock();
+        return true;
+    }
+
+    _loginKeystore(addr, pass) {
+        let acc = this.getAccFromAddr(addr);
+        let keystore = acc.keystore;
+        let privKey = $ViteJS.Wallet.Keystore.decrypt(JSON.stringify(keystore), pass);
+        if (!privKey) {
+            return false;
+        }
+
+        this.newActiveAcc({
+            keystore,
+            addrs: [{
+                hexAddr: addr,
+                privKey
+            }],
+            name: acc.name
+        });
+        setLast({
+            addr,
+            name: acc.name
+        });
+        return true;
+    }
+
+    _loginWalletAcc(entropy, pass) {
+        try {
+            let acc = this.getAccFromEntropy(entropy);
+            let verifyRes = $ViteJS.Wallet.Account.verify(acc.encryptObj, pass);
+            if (!verifyRes) {
+                return false;
+            }
+
+            let mnemonic = $ViteJS.Wallet.Address.getMnemonicFromEntropy(acc.entropy);
+            let addrs = $ViteJS.Wallet.Address.getAddrsFromMnemonic(mnemonic, acc.addrNum);
+            let defaultInx = +acc.defaultInx > 10 || +acc.defaultInx < 0 ? 0 : +acc.defaultInx;
+
+            this.newActiveAcc({
+                entropy, defaultInx, addrs, 
+                encryptObj: acc.encryptObj, 
+                addrNum: acc.addrNum, 
+                name: acc.name
+            });
+
+            setLast({
+                entropy,
+                name: acc.name
+            });
+        } catch(err) {
+            console.warn(err);
+            return false;
+        }
+        return true;
     }
 
     getLast() {
+        if (this.activeAccount) {
+            return {
+                entropy: this.activeAccount.entropy,
+                addr: this.activeAccount.isWalletAcc ? null : this.activeAccount.getDefaultAddr(),
+                name: this.activeAccount.name,
+            };
+        }
+
         let last = lastIn.getLast();
         if (!last) {
             return null;
@@ -86,7 +189,7 @@ class Wallet {
             return null;
         }
         
-        return this.getAccInstance(acc);
+        return acc;
     }
 
     getAccFromEntropy(entropy) {
@@ -112,48 +215,10 @@ class Wallet {
     getList() {
         return acc.getList();
     }
-
-    isValidKeystore(data) {
-        try {
-            return $ViteJS.Wallet.Keystore.isValid(data);
-        } catch(err) {
-            console.warn(err);
-            return false;
-        }
-    }
-
-    getAddrsFromMnemonic(mnemonic) {
-        let addrs = $ViteJS.Wallet.Address.getAddrsFromMnemonic(mnemonic, path);
-        if (!addrs) {
-            return Promise.reject(addrs);
-        }
-        console.log(addrs);
-    }
-
-    rename(account, name) {
-        if (!account || !name || !account.entropy || !account.addr) {
-            return false;
-        }
-
-        let list = acc.getList();
-        let i;
-        for(i=0; i<list.length; i++) {
-            if (account.entropy && account.entropy === list[i].entropy) {
-                break;
-            }
-            if (account.addr && account.addr === list[i].addr) {
-                break;
-            }
-        }
-
-        if (i >= list.length) {
-            return false;
-        }
-
-        list[i].name = name;
-        acc.setAccList(list);
-        return true;
-    }
 }
 
 export default Wallet;
+
+function setLast({ entropy, addr, name }) {
+    lastIn.setLast({ entropy, addr, name });
+}
