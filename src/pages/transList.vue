@@ -83,6 +83,7 @@ export default {
     },
     methods: {
         goDetail(trans) {
+            console.log(trans);
             let locale = this.$i18n.locale === 'zh' ? 'zh/' : '';
             window.open(`https://testnet.vite.net/${locale}transaction/${trans.hash}`);
         },
@@ -126,7 +127,7 @@ export default {
                 let nowList = [];
 
                 list.forEach(item => {
-                    let confirms = item.confirmedTimes;
+                    let confirms = item.confirmedTimes || 0;
 
                     let status = 'unconfirmed';
                     if (confirms && confirms > 0 && confirms <= 50) {
@@ -149,7 +150,7 @@ export default {
                         date: date(timestamp, this.$i18n.locale),
                         transAddr,
                         amount: isSend ? ('-' + amount) : amount,
-                        hash: item.Hash,
+                        hash: item.hash,
                         token: item.mintage.symbol
                     });
                 });
