@@ -8,7 +8,7 @@
                 'visible': visible
             }"></span>
         </div>
-        <copyOK :copySuccess="copySuccess"></copyOK>
+        <copyOK class="copy-wrapper" :copySuccess="copySuccess"></copyOK>
         <div class="content">{{ mnemonicStr }}</div>
     </div>
 </template>
@@ -28,8 +28,8 @@ export default {
         }
     },
     data() {
-        let acc = viteWallet.Wallet.getAccInstance(this.$route.params);
-        let mnemonic = acc.getMnemonic();
+        let activeAccount = viteWallet.Wallet.getActiveAccount();
+        let mnemonic = activeAccount.getMnemonic();
         let mnemonicStr = mnemonic ? this.getShowMnemonic(mnemonic) : '';
 
         return {
@@ -85,6 +85,9 @@ export default {
 .mnemonic {
     width: 100%;
     position: relative;
+    .copy-wrapper {
+        bottom: 90px;
+    }
 }
 .row {
     width: 100%;

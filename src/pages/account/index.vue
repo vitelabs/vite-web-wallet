@@ -9,71 +9,75 @@
 </template>
 
 <script>
-import syncBlock from "components/syncBlock";
-import accountHead from "./head.vue";
-import tokenCard from "./tokenCard";
+import syncBlock from 'components/syncBlock';
+import accountHead from './head.vue';
+import tokenCard from './tokenCard';
 
 let fetchAccountTimeout = null;
 let lastFetchTime = null;
-export default {
-  data() {
-    return { tokenInfo: Object.create(null) };
-  },
-  components: {
-    accountHead,
-    syncBlock,
-    tokenCard
-  },
-  beforeMount() {
-      this.updateBalance();
-  },
-  methods: {
-    updateBalance(){
-    const acc = viteWallet.Wallet.getAccInstance(this.$route.params);
-    acc.getAccountByAccAddr().then(data => {
-      _updateBalance({balanceInfo:data.result.balanceInfo})
-    });
-    acc.getUnconfirmedInfo().then(data => {
-      _updateBalance({balanceInfo:data.result.balanceInfo})
-    });
-    function _updateBalance({ balanceInfo, unconfirmedInfo }) {
-      if (balanceInfo) {
-        balanceInfo.forEach(v => {
-        v.balance=viteWallet.Token.toBasic(balance, v.mintage.decimals)
-          if (this.tokenInfo[v.mintage.id]) {
-            this.tokenInfo[v.mintage.id].accBalance = v.balance;
-          } else {
-            this.tokenInfo[v.mintage.id] = {
-              symbol:v.symbol,
-              tokenName: v.name,
-              accBalance: v.balance,
-              unConfirmedBalance: "--",
-              unConfirmedNums: "--"
-            };
-          }
-        });
-      }
-      if (unconfirmedInfo) {
-        balanceInfo.forEach(v => {
-            v.balance=viteWallet.Token.toBasic(balance, v.mintage.decimals)
-          if (this.tokenInfo[v.mintage.id]) {
-              this.tokenInfo[v.mintage.id].unConfirmedBalance=v.balance;
-              this.tokenInfo[v.mintage.id].unConfirmedNums=v.unConfirmedNums;
-          } else {
-            this.tokenInfo[v.mintage.id] = {
-              symbol:v.symbol,
-              tokenName: v.name,
-              accBalance: "--",
-              unConfirmedBalance: v.balance,
-            //   unConfirmedNums: v.unConfirmedNums
-            }
-          }
-        });
-      }
-    }
-    }
 
-  }
+export default {
+    components: {
+        accountHead, syncBlock, tokenCard
+    },
+    data() {
+        return { 
+            tokenInfo: Object.create(null) 
+        };
+    },
+    beforeMount() {
+        this.updateBalance();
+    },
+    methods: {
+        updateBalance(){
+            const activeAccount = viteWallet.Wallet.getActiveAccount();
+            
+            activeAccount.getBalance().then(({
+                balance, unconfirm
+            }) => {
+                _updateBalance({
+                    balanceInfo: balance.balanceInfo,
+                    unconfirmedInfo: unconfirm.balanceInfo
+                });
+            });
+
+            function _updateBalance({ balanceInfo, unconfirmedInfo }) {
+                if (balanceInfo) {
+                    balanceInfo.forEach(v => {
+                        v.balance =viteWallet.Token.toBasic(balance, v.mintage.decimals);
+                        if (this.tokenInfo[v.mintage.id]) {
+                            this.tokenInfo[v.mintage.id].accBalance = v.balance;
+                        } else {
+                            this.tokenInfo[v.mintage.id] = {
+                                symbol:v.symbol,
+                                tokenName: v.name,
+                                accBalance: v.balance,
+                                unConfirmedBalance: '--',
+                                unConfirmedNums: '--'
+                            };
+                        }
+                    });
+                }
+                if (unconfirmedInfo) {
+                    balanceInfo.forEach(v => {
+                        v.balance=viteWallet.Token.toBasic(balance, v.mintage.decimals);
+                        if (this.tokenInfo[v.mintage.id]) {
+                            this.tokenInfo[v.mintage.id].unConfirmedBalance=v.balance;
+                            this.tokenInfo[v.mintage.id].unConfirmedNums=v.unConfirmedNums;
+                        } else {
+                            this.tokenInfo[v.mintage.id] = {
+                                symbol:v.symbol,
+                                tokenName: v.name,
+                                accBalance: '--',
+                                unConfirmedBalance: v.balance,
+                                //   unConfirmedNums: v.unConfirmedNums
+                            };
+                        }
+                    });
+                }
+            }
+        }
+    }
 };
 </script>
 

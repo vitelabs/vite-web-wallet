@@ -1,159 +1,177 @@
+import acc from '../store/acc.js';
+
+const namePre = 'account';
+
 class Account {
     constructor({
-        entropy, addr, wallet
+        entropy, encryptObj, addrNum, defaultInx, addrs, name, keystore
     }) {
-        this.wallet = wallet;
-        this.isWalletAcc = !addr;
+        this.isWalletAcc = !keystore;
+        this.name = checkName(name);
 
+        // Keystore account
+        this.keystore = keystore;
+
+        // Wallet account
         this.entropy = entropy;
-        this.addr = addr;
-    }
-    _getSelf() {
-        if (this.entropy) {
-            return this.wallet.getAccFromEntropy(this.entropy);
-        }
-        if (this.addr) {
-            return this.wallet.getAccFromAddr(this.addr);
-        }
-        return null;
-    }
-    getAccountByAccAddr() {
-        return $ViteJS.Vite.Ledger.getAccountByAccAddr([this.getDefaultAddr()]);
-    }
-    getUnconfirmedInfo() {
-        return $ViteJS.Vite.Ledger.getUnconfirmedInfo([this.getDefaultAddr()]);
-    }
-    getName() {
-        let self = this._getSelf();
-        return self ? self.name : '';
+        this.encryptObj = encryptObj;
+
+        this.defaultInx = !this.isWalletAcc ? 0 : defaultInx || 0;
+        this.addrNum = !this.isWalletAcc ? 1 : addrNum;
+        this.addrs = (!this.isWalletAcc && !addrs) ? [{
+            hexAddr: keystore.hexaddress
+        }] : addrs;
     }
 
-    getAddrList() {
-        let self = this._getSelf();
-
-        if (!self) {
-            return [];
+    verify(pass) {
+        if (!this.isWalletAcc || !this.encryptObj) {
+            return false;
         }
+        return $ViteJS.Wallet.Account.verify(this.encryptObj, pass);
+    }
+
+    save() {
+        this.name = checkName(this.name);
 
         if (!this.isWalletAcc) {
-            return [{
-                path: '',
-                addr: self.addr
-            }];
+            let item = {
+                name: this.name,
+                addr: this.keystore.hexaddress,
+                keystore: this.keystore
+            };
+            acc.add(item);
+            return;
         }
 
-        let list = [];
-        for (let path in self.addrList) {
-            let item = self.addrList[path];
-            list.push({
-                path,
-                addr: item.addr
-            });
-        }
-        return list;
-    }
-
-    getDefaultAddr() {
-        let self = this._getSelf();
-        if (!self) {
-            return null;
-        }
-
-        if (!this.isWalletAcc) {
-            return self.addr || '';
-        }
-
-        try {
-            return self.addrList[self.defaultPath].addr;
-        } catch (err) {
-            console.error(err);
-            return null;
-        }
+        acc.add({
+            defaultInx: this.defaultInx, 
+            addrNum: this.addrs.length, 
+            name: this.name, 
+            entropy: this.entropy,
+            encryptObj: this.encryptObj
+        });
     }
 
     getMnemonic() {
-        if (!this.isWalletAcc) {
-            return null;
-        }
-
-        let self = this._getSelf();
-        if (!self) {
-            return;
-        }
-
-        let entropy = self.entropy || null;
-        if (!entropy) {
-            return;
-        }
-
-        return $ViteJS.Wallet.Address.getMnemonicFromEntropy(entropy);
+        return $ViteJS.Wallet.Address.getMnemonicFromEntropy(this.entropy);
     }
 
-    setDefault(path) {
-        if (!this.isWalletAcc) {
+    getName() {
+        return this.name;
+    }
+
+    rename(name) {
+        if (!name) {
             return;
         }
-
-        let self = this._getSelf();
-        if (!self.addrList || !self.addrList[path]) {
-            return;
-        }
-
-        self.defaultPath = path;
-        this.wallet.saveAcc(self);
+        this.name = name;
+        this.save();
     }
 
     addAddr() {
-        if (!this.isWalletAcc) {
+        if (!this.isWalletAcc || this.addrs.length >= 10) {
             return;
         }
+        
+        let index = this.addrs.length;
+        let addr = $ViteJS.Wallet.Address.newAddrFromMnemonic(this.getMnemonic(), index);
 
-        let addrList = this.getAddrList();
-        if (!addrList || !addrList.length || addrList.length >= 10) {
-            return;
-        }
-
-        let path = `${this.wallet.rootPath}/${addrList.length}\'`;
-        let mnenonic = this.getMnemonic();
-        if (!mnenonic) {
-            return;
-        }
-
-        let addr = $ViteJS.Wallet.Address.newAddrFromMnemonic(mnenonic, path);
-        let self = this._getSelf();
-        if (!self) {
-            return;
-        }
-
-        self.addrList[path] = {
-            addr: addr.hexAddr,
-            privKey: addr.privKey
-        };
-        this.wallet.saveAcc(self);
+        this.addrs.push(addr);
+        this.addrNum = this.addrs.length;
+        this.save();
     }
 
-    unLock(pass) {
+    getAddrList() {
+        let addrs = [];
+        this.addrs.forEach(({ hexAddr }) => {
+            addrs.push(hexAddr);
+        });
+        return addrs;
+    }
+
+    setDefaultAddr(addr) {
         if (!this.isWalletAcc) {
-            let keystore = this._getSelf().keystore;
-            // let keyJSON = {'hexaddress':'vite_5f03e33f9550155548bf0a045a7a602384d3f1a65fb2ceff6b','id':'71b3bd76-a938-403d-b876-57ca22f993f3','crypto':{'ciphername':'aes-256-gcm','ciphertext':'03d8f2773ddce6132a5ceb136ba736ae1640ba2d664f2a8493a2f3ff2bb84dec8a3229edad6031a7ef494946852d3e3a45b0b3a88eb3167b41a3843d01d93c9abe52479f582b694e9c378dfb5aac7eb5','nonce':'a6bb299c35e48960e096351d','kdf':'scrypt','scryptparams':{'n':262144,'r':8,'p':1,'keylen':32,'salt':'a35724d6c46cb59e47c893a2bba3875c5b238c8a9ce9b2b1b3c4c0f6dec618db'}},'keystoreversion':1,'timestamp':1536059534};
-
-            let privKey = $ViteJS.Wallet.Keystore.decrypt(JSON.stringify(keystore), pass);
-
-            if (!privKey) {
-                return false;
-            }
-            $ViteJS.Wallet.Account.unlock(this.addr, privKey);
-            return true;
+            return;
         }
 
-        let privKey = this._getSelf().privKey;
-        $ViteJS.Wallet.Account.unlock(this.addr, privKey);
-        return true;
+        let i;
+        for(i=0; i<this.addrs.length; i++) {
+            if (this.addrs[i].hexAddr === addr) {
+                break;
+            }
+        }
+
+        if (i >= this.addrs.length) {
+            return;
+        }
+
+        this.defaultInx = i;
+        this.save();
+    }
+
+    getDefaultAddr() {
+        return this.addrs[this.defaultInx].hexAddr;
+    }
+
+    unLock() {
+        if (!this.addrs || !this.addrs.length) {
+            return;
+        }
+
+        let addr = this.addrs[this.defaultInx].hexAddr;
+        let privKey = this.addrs[this.defaultInx].privKey;
+        $ViteJS.Wallet.Account.unlock(addr, privKey);
     }
 
     lock() {
-        $ViteJS.Wallet.Account.lock(this.getDefaultAddr());
+        if (!this.addrs || !this.addrs.length) {
+            return;
+        }
+
+        let addr = this.addrs[this.defaultInx];
+        if (!addr) {
+            return;
+        }
+
+        $ViteJS.Wallet.Account.lock(addr.hexAddr);
+    }
+
+    sendTx() {
+
+    }
+
+    getBalance() {
+        let addr = this.getDefaultAddr();
+        return $ViteJS.Vite._currentProvider.batch([{
+            type: 'request',
+            methodName: 'ledger_getAccountByAccAddr',
+            params: [ addr ]
+        },{
+            type: 'request',
+            methodName: 'ledger_getUnconfirmedInfo',
+            params: [ addr ]
+        }]).then((data)=>{
+            if (!data || !data.length) {
+                return null;
+            }
+
+            let result = {
+                balance: data[0].result, 
+                unconfirm: data[1].result
+            };
+            return result;
+        });
     }
 }
 
 export default Account;
+
+function checkName(name) {
+    if (name) {
+        return name;
+    }
+    let count = acc.getNameCount();
+    name = `${namePre}${count}`;
+    acc.setNameCount(count + 1);
+    return name;
+}

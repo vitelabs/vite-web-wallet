@@ -24,7 +24,6 @@ export default {
     margin-left: -62px; 
     background: #5B638D;
     box-sizing: border-box;
-    border: 1px solid #979797;
     border-radius: 6px;
     font-size: 12px;
     line-height: 12px;

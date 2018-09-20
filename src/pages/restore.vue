@@ -37,8 +37,11 @@ export default {
             }
 
             this.isLoading = true;
-            viteWallet.Wallet.getAddrsFromMnemonic(this.mnemonic).then((list)=>{
+            viteWallet.Wallet.restoreAddrs(this.mnemonic).then(()=>{
                 this.isLoading = false;
+                this.$router.push({
+                    name: 'createAccount'
+                });
             }).catch(err => {
                 console.warn(err);
                 this.errMsg = '助记词错误';
