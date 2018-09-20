@@ -75,29 +75,12 @@ export default {
     },
     methods: {
         getLoginAcc() {
-            let entropy = this.$route.params.entropy;
-            if (entropy) {
-                let acc = viteWallet.Wallet.getAccFromEntropy(entropy);
-                if (acc) {
-                    return acc;
-                }
-            }
-
-            let addr = this.$route.params.addr;
-            if (addr) {
-                let acc = viteWallet.Wallet.getAccFromAddr(addr);
-                if (acc) {
-                    acc.showAddr = ellipsisAddr(acc.addr);
-                    return acc;
-                }
-            }
-
             let account = viteWallet.Wallet.getLast();
             if (account) {
-                let addr = !account.isWalletAcc ? account.getDefaultAddr() : '';
-                let showAddr = addr ? ellipsisAddr(addr) : '';
+                let addr = account.addr || '';
+                let showAddr = account.addr ? ellipsisAddr(account.addr) : '';
                 return {
-                    name: account.getName() || '',
+                    name: account.name || '',
                     addr,
                     showAddr,
                     entropy: account.entropy || ''
@@ -105,7 +88,7 @@ export default {
             }
             
             let list = viteWallet.Wallet.getList();
-            if(!list || !list.length) {
+            if (!list || !list.length) {
                 this.$router.push({
                     name: 'index'
                 });
@@ -147,7 +130,6 @@ export default {
             }
 
             let loginSuccess = () => {
-                viteWallet.Wallet.setLast(this.activeAccount);
                 this.password = '';
                 this.$router.push({
                     name: 'account',
@@ -157,12 +139,10 @@ export default {
                     }
                 });
             };
-    
-            let acc = viteWallet.Wallet.getAccInstance(this.activeAccount);
 
             this.isLoading = true;
             setTimeout(()=>{
-                let result = acc.unLock(this.password);
+                let result = viteWallet.Wallet.login(this.activeAccount, this.password);
                 this.isLoading = false;
                 result && loginSuccess();
                 !result && window.alert(this.$t('hint.pwErr'));

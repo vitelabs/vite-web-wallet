@@ -38,6 +38,7 @@ export default {
     },
     methods: {
         back() {
+            viteWallet.Wallet.clearActiveAccount();
             this.$router.go(-1);
         }
     }

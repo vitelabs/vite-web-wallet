@@ -30,7 +30,7 @@
             }" @click="back" >{{ $t('btn.back') }}</span>
             <span class="__btn __btn_all_in __pointer" :class="{
                 'unuse': isCreating
-            }" @click="valid">{{$t('btn.next')}}</span>
+            }" @click="valid">{{ activeAccount ? '完成' : $t('btn.next')}}</span>
         </div>
     </div>
 </template>
@@ -44,6 +44,7 @@ export default {
     },
     data() {
         return {
+            activeAccount: viteWallet.Wallet.getActiveAccount(),
             name: '',
             pass1: '',
             pass2: '',
@@ -137,15 +138,23 @@ export default {
                 return;
             }
             
-            this.createAccount();  // ok
+            // ok
+            if (!this.activeAccount) {
+                this.createAccount();
+                return;
+            }
+            this.restoreAccount();
         },
         createAccount() {
-            let address = viteWallet.Wallet.create(this.name, this.pass1);
-            address && this.$router.push({
-                name: 'record',
-                params: {
-                    entropy: address.entropy
-                }
+            viteWallet.Wallet.create(this.name, this.pass1);
+            this.$router.push({
+                name: 'record'
+            });
+        },
+        restoreAccount() {
+            viteWallet.Wallet.restoreAccount(this.name, this.pass1);
+            this.$router.push({
+                name: 'login'
             });
         }
     }

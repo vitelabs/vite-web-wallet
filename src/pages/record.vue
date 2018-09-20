@@ -12,14 +12,16 @@ export default {
         mnemonic
     },
     data() {
-        let entropy = this.$route.params.entropy;
-        let mnemonic = $ViteJS.Wallet.Address.getMnemonicFromEntropy(entropy);
+        let activeAccount = viteWallet.Wallet.getActiveAccount();
+        let mnemonic = activeAccount.getMnemonic();
         return {
+            activeAccount,
             mnemonic
         };
     },
     methods: {
         login() {
+            this.activeAccount.save();
             this.$router.push({
                 name: 'login'
             });

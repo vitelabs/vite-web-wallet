@@ -7,11 +7,11 @@
         <div class="acc-list __pointer">
             <div ref="listWrapper" class="list-wrapper">
                 <div ref="list">
-                    <div class="acc-item" v-for="(item, index) in addrList" :key="index">
-                        <span class="describe">{{(index+1) + '. ' + item.addr}}</span>
+                    <div @click="setDefault(addr)" class="acc-item" v-for="(addr, index) in addrList" :key="index">
+                        <span class="describe">{{(index + 1) + '. ' + addr}}</span>
                         <span class="select" :class="{
-                            'active': defaultAddr === item.addr
-                        }" @click="setDefault(item)"></span>
+                            'active': defaultAddr === addr
+                        }"></span>
                     </div>
                 </div>
             </div>
@@ -28,24 +28,24 @@ import Vue from 'vue';
 
 export default {
     data() {
-        let acc = viteWallet.Wallet.getAccInstance(this.$route.params);
+        let activeAccount = viteWallet.Wallet.getActiveAccount();
 
         return {
-            acc,
-            isWalletAcc: acc.isWalletAcc,
-            addrList: acc.getAddrList(),
-            defaultAddr: acc.getDefaultAddr()
+            activeAccount,
+            isWalletAcc: activeAccount.isWalletAcc,
+            addrList: activeAccount.getAddrList(),
+            defaultAddr: activeAccount.getDefaultAddr()
         };
     },
     methods: {
         addAddr() {
-            let addrList = this.acc.getAddrList();
+            let addrList = this.activeAccount.getAddrList();
             if (addrList && addrList.length >= 10) {
                 return;
             }
 
-            this.acc.addAddr();
-            this.addrList = this.acc.getAddrList();
+            this.activeAccount.addAddr();
+            this.addrList = this.activeAccount.getAddrList();
 
             Vue.nextTick(()=>{
                 if (!this.$refs.list || !this.$refs.listWrapper) {
@@ -57,11 +57,9 @@ export default {
                 this.$refs.listWrapper.scrollTop = height - wrapperHeight;
             });
         },
-        setDefault({
-            path
-        }) {
-            this.acc.setDefault(path);
-            this.defaultAddr = this.acc.getDefaultAddr();
+        setDefault(addr) {
+            this.activeAccount.setDefaultAddr(addr);
+            this.defaultAddr = this.activeAccount.getDefaultAddr();
         }
     }
 };

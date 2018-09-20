@@ -48,6 +48,8 @@ import copy from 'utils/copy';
 import qrcode from 'components/qrcode';
 import { stringify } from 'utils/viteSchema';
 
+let activeAccount = null;
+
 export default {
     components: { qrcode },
     data() {
@@ -66,6 +68,7 @@ export default {
         }
     },
     mounted() {
+        activeAccount = viteWallet.Wallet.getActiveAccount();
         this.account = this.getSimpleAcc();
     },
     methods: {
@@ -106,11 +109,9 @@ export default {
                 });
         },
         getSimpleAcc() {
-            let acc = viteWallet.Wallet.getAccInstance(this.$route.params);
             return {
-                name: acc.getName(),
-                addr: acc.getDefaultAddr(),
-                entropy: acc.entropy || ''
+                name: activeAccount.getName(),
+                addr: activeAccount.getDefaultAddr()
             };
         },
 
@@ -154,11 +155,7 @@ export default {
                 return;
             }
 
-            let res = viteWallet.Wallet.rename(this.account, this.editName);
-            if (!res) {
-                window.alert('fail');
-                return;
-            }
+            activeAccount.rename(this.editName);
             this.clearEditName();
             this.account = this.getSimpleAcc();
         }
