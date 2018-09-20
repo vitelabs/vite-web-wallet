@@ -17,7 +17,7 @@
                 <span>{{ opt.unConfirmes || 0 }} 笔交易待确认</span>
             </div>
         </div>
-        <div class="btn">发送交易</div>
+        <div class="btn __pointer" @click="sendTransaction(opt)">发送交易</div>
     </div>
 </template>
 
@@ -35,6 +35,10 @@ export default {
                 fundFloat: '--',
                 unConfirmes: '--'
             })
+        },
+        sendTransaction: {
+            type: Function,
+            default: () => {}
         }
     },
     data () {
@@ -51,6 +55,7 @@ export default {
 
 <style lang='scss' scoped>
 .token-card {
+    position: relative;
     width: 254px;
     background: #fff;
     box-shadow: 0 2px 48px 1px rgba(176, 192, 237, 0.42);
@@ -94,10 +99,8 @@ export default {
 .btn {
     background: #007aff;
     height: 44px;
-    vertical-align: middle;
     line-height: 44px;
     text-align: center;
     color: #fff;
-    cursor: pointer;
 }
 </style>

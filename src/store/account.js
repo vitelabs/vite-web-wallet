@@ -40,6 +40,8 @@ const getters = {
             tokenInfo[mintage.id] = tokenInfo[mintage.id] || {};
             tokenInfo[mintage.id].balance = balance;
             tokenInfo[mintage.id].symbol = mintage.symbol;
+            tokenInfo[mintage.id].id = mintage.id;
+            tokenInfo[mintage.id].decimals = mintage.decimals;
         });
 
         state.unConfirmed.balanceInfos.forEach(balanceInfo => {
@@ -49,6 +51,8 @@ const getters = {
             tokenInfo[mintage.id] = tokenInfo[mintage.id] || {};
             tokenInfo[mintage.id].fundFloat = balance;
             tokenInfo[mintage.id].symbol = tokenInfo[mintage.id].symbol || mintage.symbol;
+            tokenInfo[mintage.id].id = tokenInfo[mintage.id].id || mintage.id;
+            tokenInfo[mintage.id].decimals = mintage.decimals;
             // [TODO] Only one token, now.
             tokenInfo[mintage.id].unConfirmes = balanceInfo.unConfirmedBlocksLen;
         });

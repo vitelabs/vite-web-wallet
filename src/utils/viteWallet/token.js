@@ -53,39 +53,17 @@ class Token {
         }
     }
 
+    toMin(num, minUnit) {
+        num = new this.BigNumber(num);
+        if (num.c == null) {
+            return '';
+        }
+        try {
+            return num.multipliedBy(minUnit).toFormat();
+        } catch(err) {
+            return '';
+        }
+    }
 }
 
 export default Token;
-
-
-// import BigNumber from 'bignumber.js';
-
-
-
-// module.exports = {
-//     getViteMinUnit() {
-//         return VITE_MIN_UNIT;
-//     },
-//     toBasic(num, decimalPlaces = DP, minUnit = VITE_MIN_UNIT) {
-//         num = new BigNumber(num);
-//         if (num.c == null) {
-//             return '';
-//         }
-//         try {
-//             return num.dividedBy(minUnit).decimalPlaces(decimalPlaces).toFormat();
-//         } catch(err) {
-//             return '';
-//         }
-//     },
-//     toMin(num, minUnit = VITE_MIN_UNIT) {
-//         num = new BigNumber(num);
-//         if (num.c == null) {
-//             return '';
-//         }
-//         try {
-//             return num.multipliedBy(minUnit).toFormat();
-//         } catch(err) {
-//             return '';
-//         }
-//     }
-// };
