@@ -69,20 +69,18 @@ export class timer {
         const _task = () => window.setTimeout(() => {
             this.diff = Date.now() - this.lastTrigger;
             this.lastTrigger = Date.now();
-            if(!this.trigger().then){
+            const triggered=this.trigger();
+            if(!triggered.then){
                 this.timeHandler = _task();
                 return;
             }
-            this.trigger().then(() => {
+            triggered.then(() => {
                 this.timeHandler = _task();
             }).catch(() => {
                 this.timeHandler = _task();
             });
-        }, this.interval);
+        }, this.intervalConst - this.diff < 0 ? 0 : (this.intervalConst - this.diff));
         this.timeHandler = _task();
-    }
-    get interval() {
-        return this.interval - this.diff < 0 ? 0 : (this.interval - this.diff);
     }
     trigger() {
         return this.createPromise.call(this.context,this.args);

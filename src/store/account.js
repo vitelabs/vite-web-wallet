@@ -1,14 +1,20 @@
 const state = {
-    unConfirmedInfo: {},
-    balanceInfo: {}
+    unConfirmedInfo: {
+        balanceInfos:[]
+    },
+    balanceInfo: {
+        balanceInfos:[]
+    }
 };
 
-const mutation = {
-    commitUnConfrmedInfo(state, payload) {
-        state.unConfirmedInfo = payload;
+const mutations = {
+    commitUnConfirmedInfo(state, payload) {
+        state.unConfirmedInfo = Object.assign(state.unConfirmedInfo,payload);
+        state.unConfirmedInfo.balanceInfos=state.unConfirmedInfo.balanceInfos||[];
     },
     commitBalanceInfo(state, payload) {
-        state.balanceInfo = payload;
+        state.balanceInfo = Object.assign(state.balanceInfo,payload);
+        state.balanceInfo.balanceInfos=state.balanceInfo.balanceInfos||[];
     }
 };
 const actions = {
@@ -16,14 +22,16 @@ const actions = {
         commit
     }, acc) {
         return acc.getAccountByAccAddr().then(data => {
-            commit('commitBalanceInfo', data.result.balanceInfo);
+            commit('commitBalanceInfo', data.result);
+        }).catch(e=>{
+            console.log(9999,e);
         });
     },
     getUnconfirmedInfo({
         commit
     }, acc) {
         return acc.getUnconfirmedInfo().then(data => {
-            commit('commitUnConfirmedInfo', data.result.balanceInfo);
+            commit('commitUnConfirmedInfo', data.result);
         });
     }
 };
@@ -31,7 +39,7 @@ const actions = {
 const getters = {
     tokenBalanceList(state) {
         const tokenInfo = Object.create(null);
-        state.balanceInfo.forEach(v => {
+        state.balanceInfo.balanceInfos.forEach(v => {
             v.balance = viteWallet.Token.toBasic(v.balance, v.mintage.decimals);
             if (tokenInfo[v.mintage.id]) {
                 tokenInfo[v.mintage.id].accBalance = v.balance;
@@ -45,7 +53,7 @@ const getters = {
                 };
             }
         });
-        state.balanceInfo.forEach(v => {
+        state.balanceInfo.balanceInfos.forEach(v => {
             v.balance = viteWallet.Token.toBasic(v.balance, v.mintage.decimals);
             if (tokenInfo[v.mintage.id]) {
                 tokenInfo[v.mintage.id].unConfirmedBalance = v.balance;
@@ -66,7 +74,7 @@ const getters = {
 
 export default {
     state,
-    mutation,
+    mutations,
     actions,
     getters
 };
