@@ -8,7 +8,6 @@ import Token from './token';
 import Types from './types';
 
 let WS_RPC = new ViteJS.WS_RPC({
-    url: 'ws://192.168.31.50:31420',
     timeout: 15000
 });
 window.$ViteJS = new ViteJS(WS_RPC);

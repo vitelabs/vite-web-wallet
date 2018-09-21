@@ -126,7 +126,7 @@ export default {
                 let list = data.list || [];
                 let nowList = [];
 
-                list.forEach(item => {
+                list.forEach((item) => {
                     let confirms = item.confirmedTimes || 0;
 
                     let status = 'unconfirmed';
@@ -136,7 +136,7 @@ export default {
                         status = 'confirmed';
                     }
 
-                    let isSend = item.from === this.address;
+                    let isSend = item.to && item.to !== this.address;
 
                     let timestamp = item.timestamp * 1000;
                     let transAddr = ellipsisAddr( isSend ? item.accountAddress : item.from );
