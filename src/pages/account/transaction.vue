@@ -9,7 +9,7 @@
                     <span v-show="!isValidAddress" class="err">{{ $t('transList.valid.addr')}}</span>
                 </div>
                 <div class="row-content">
-                    <input ref="inAddr" v-model="inAddress" />
+                    <input ref="inAddr" v-model="inAddress" placeholder="请输入地址" />
                 </div>
             </div>
 
@@ -19,14 +19,14 @@
                     <span v-show="amountErr" class="err">{{ amountErr }}</span>
                 </div>
                 <div class="row-content __btn_text __input">
-                    <input v-model="amount" />
+                    <input v-model="amount" placeholder="请输入金额"  />
                 </div>
             </div>
 
             <div class="row">
-                <div class="row-t">留言</div>
+                <div class="row-t">备注</div>
                 <div class="row-content">
-                    <input v-model="message" type="message" />
+                    <input v-model="message" placeholder="请输入备注"  />
                 </div>
             </div>
 
@@ -36,7 +36,7 @@
                     <span v-show="passwordErr" class="err">{{ passwordErr }}</span>
                 </div>
                 <div class="row-content">
-                    <input v-model="password" type="password" />
+                    <input v-model="password" type="password" placeholder="请输入密码"  />
                 </div>
             </div>
 
@@ -99,7 +99,7 @@ export default {
                 }
 
                 try {
-                    this.isValidAddress = await viteWallet.Types.isValidAddress(this.inAddress);
+                    this.isValidAddress = viteWallet.Types.isValidHexAddr(this.inAddress);
                 } catch(err) {
                     console.warn(err);
                     this.isValidAddress = false;
@@ -161,11 +161,10 @@ export default {
             this.loading = true;
             let amount =  viteWallet.Token.toMin(this.amount, this.token.decimals);
 
-            activeAccount.createTX({
-                selfAddr: this.activeAccount.getDefaultAddr(), 
+            activeAccount.sendTx({
                 toAddr: this.inAddress,
                 pass: this.password,
-                tokenId: this.token.id,    // fixed viteToken
+                tokenId: this.token.id,
                 amount
             }).then(() => {
                 this.loading = false;

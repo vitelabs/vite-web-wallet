@@ -4,10 +4,10 @@
         <account-head class="item"></account-head>
         <div class="item">
             <tokenCard v-for="token in tokenList" :key="token.id"
-                       :opt="token" :sendTansaction="showTrans"></tokenCard>
+                       :opt="token" :sendTransaction="showTrans"></tokenCard>
         </div>
         <div v-show="isShowTrans" class="transaction" @click="closeTrans">
-            <transaction :token="activeToken" :closeTrans="closeTrans"></transaction>
+            <transaction ref="transaction" :token="activeToken" :closeTrans="closeTrans"></transaction>
         </div>
     </div>
 </template>
@@ -55,7 +55,10 @@ export default {
             this.isShowTrans = true;
             this.activeToken = token;
         },
-        closeTrans() {
+        closeTrans(e) {
+            if (this.$refs.transaction.$el.contains(e.target) || this.$refs.transaction.$el === e.target) {
+                return;
+            }
             this.isShowTrans = false;
             this.activeToken = null;
         }
@@ -70,7 +73,7 @@ export default {
     height: 100%;
     display: flex;
     flex-direction: column;
-    overflow: auto;
+    overflow: hidden;
     padding: 0 40px;
     .sync-block {
         width: 100%;

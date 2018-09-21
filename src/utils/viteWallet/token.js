@@ -54,12 +54,13 @@ class Token {
     }
 
     toMin(num, minUnit) {
+        let min = new this.BigNumber(10).exponentiatedBy(minUnit);
         num = new this.BigNumber(num);
         if (num.c == null) {
             return '';
         }
         try {
-            return num.multipliedBy(minUnit).toFormat();
+            return num.multipliedBy(min).toFormat();
         } catch(err) {
             return '';
         }
