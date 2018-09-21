@@ -16,7 +16,7 @@
                 </div>
             </div>
 
-            <div v-show="isWalletAcc" class="add" @click="addAddr">
+            <div v-show="isWalletAcc && addrList.length < 10" class="add" @click="addAddr">
                 <span class="acc-add"></span><span class="describe">{{$t('accList.addAcc')}}</span>
             </div>
         </div>

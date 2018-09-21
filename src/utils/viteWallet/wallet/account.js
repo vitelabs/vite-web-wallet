@@ -24,10 +24,14 @@ class Account {
     }
 
     verify(pass) {
-        if (!this.isWalletAcc || !this.encryptObj) {
+        if (this.isWalletAcc) {
+            return !this.encryptObj ? false : $ViteJS.Wallet.Account.verify(this.encryptObj, pass);
+        }
+
+        if (!this.keystore) {
             return false;
         }
-        return $ViteJS.Wallet.Account.verify(this.encryptObj, pass);
+        return $ViteJS.Wallet.Keystore.decrypt(JSON.stringify(this.keystore), pass);
     }
 
     save() {
@@ -136,8 +140,23 @@ class Account {
         $ViteJS.Wallet.Account.lock(addr.hexAddr);
     }
 
-    sendTx() {
+    sendTx({
+        toAddr, pass, tokenId, amount
+    }) {
+        let verifyRes = this.verify(pass);
+        if (!verifyRes) {
+            return Promise.reject('passErr');
+        }
 
+        let fromAddr = this.addrs[this.defaultInx].hexAddr;
+        let privKey = this.addrs[this.defaultInx].privKey;
+
+        console.log(fromAddr);
+        console.log(privKey);
+
+        return $ViteJS.Wallet.Account.sendTx({
+            fromAddr, toAddr, tokenId, amount
+        }, privKey);
     }
 
     getBalance() {
