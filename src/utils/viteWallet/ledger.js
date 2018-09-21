@@ -95,7 +95,7 @@ class Ledger {
         return $ViteJS.Vite.Ledger.provider.batch([{
             type: 'request',                    
             methodName: 'ledger_getBlocksByAccAddr',
-            params: [addr, index, 20, true]
+            params: [addr, index, 50, true]
         }, {
             type: 'request',
             methodName: 'ledger_getAccountByAccAddr',
