@@ -1,5 +1,5 @@
 <template>
-    <mnemonic :title="'title.record'" :submit="login">
+    <mnemonic :title="'mnemonic.record'" :submit="login">
         <div class="wrapper">{{ this.mnemonic }}</div>
     </mnemonic>
 </template>

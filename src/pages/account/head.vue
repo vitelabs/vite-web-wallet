@@ -18,9 +18,9 @@
                 <span class="title_icon __pointer qrcode"><img src="../../assets/imgs/qrcode_default.svg" @click="toggleQrCode" />
                     <div class="code-container" v-show="qrcodeShow">
                         <div class="code">
-                            <qrcode :text="addressStr" :options="{size:146}" @genImage="getImage"></qrcode>
+                            <qrcode :text="addressStr" :options="{ size:146 }" @genImage="getImage"></qrcode>
                         </div>
-                        <div class="btn" @click="downLoadQrCode">保存二维码图片 </div>
+                        <div class="btn" @click="downLoadQrCode">{{ $t('accDetail.saveQrcode') }}</div>
                     </div>
                 </span>
                 <img src="../../assets/imgs/copy_default.svg" @click="copy" class="title_icon copy __pointer"/>
@@ -100,9 +100,7 @@ export default {
         },
         goDetail() {
             let locale = this.$i18n.locale === 'zh' ? 'zh/' : '';
-            window.open(
-                `https://testnet.vite.net/${locale}account/${this.account.addr}`
-            );
+            window.open(`https://testnet.vite.net/${locale}account/${this.account.addr}`);
         },
 
         getTestToken() {

@@ -30,7 +30,7 @@
             }" @click="back" >{{ $t('btn.back') }}</span>
             <span class="__btn __btn_all_in __pointer" :class="{
                 'unuse': isCreating
-            }" @click="valid">{{ activeAccount ? '完成' : $t('btn.next')}}</span>
+            }" @click="valid">{{ activeAccount ? $t('create.finish') : $t('btn.next')}}</span>
         </div>
     </div>
 </template>

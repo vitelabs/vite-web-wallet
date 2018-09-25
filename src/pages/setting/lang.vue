@@ -1,6 +1,6 @@
 <template>
     <div class="change-lang-wrapper">
-        <div class="title">{{$t('setting.lang')}}</div>
+        <div class="title">{{ $t('setting.lang') }}</div>
 
         <div class="lang-list __pointer">
             <div class="row" @click="toggleLangList">
@@ -12,7 +12,7 @@
                 }"></span>
             </div>
             <div v-for="(key, index) in messages" v-show="showLang && key.lang !== $t('lang')" :key="index" 
-                 class="row" @click="changeLocale(index)">{{key.lang}}</div>
+                 class="row" @click="changeLocale(index)">{{ key.lang }}</div>
         </div>
     </div>
 </template>

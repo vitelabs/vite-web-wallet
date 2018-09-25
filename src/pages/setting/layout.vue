@@ -1,6 +1,6 @@
 <template>
     <div class="setting-wrapper">
-        <div class="title  __pointer">{{$t('setting.title')}}</div>
+        <div class="title  __pointer">{{ $t('setting.title') }}</div>
         <div class="content-wrapper">
             <div class="content">
                 <slot></slot>

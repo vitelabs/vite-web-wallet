@@ -9,6 +9,8 @@ module.exports = {
         record: 'Backup Mnemonic',
         prompt: 'Mnemonic is used to restore your wallet, better write it down and keep it in a safe place where only you can access, otherwise your assets will be at tremendous risks',
         placeholder:'Please input your mnemonic',
+        empty: 'Mnemonic input is empty',    // ???
+        error: 'Mnemonic error' // ??
     },
 
     setting: {
@@ -40,7 +42,7 @@ module.exports = {
         firstDoing: 'Initializing',
         blockHeight: 'Snapshot Block Height'
     },
-    test:{
+    test:{  // [TODO] Need to update ?????
         t: 'Preview Version',
         txt1: 'Vite wallet is full node wallet in preview version, it achieves the functions of generating accounts in DAG ledger structure, searching balance, sending and receiving default transactions as well as getting test token.',
         txt2: 'Accounts are not supported importing private keys for now, please kindly keep your account files and passwords',
@@ -60,7 +62,8 @@ module.exports = {
         accName: 'Account name',
         input: 'Please input password',
         again: 'Please input password again!',
-        choose:'Choose account',
+        choose: 'Choose account',
+        finish: 'Finish',   // ????
         hint: {
             nameInput: 'Please input account name',
             nameLong: 'Account name cannot exceed 32 characters!',
@@ -94,6 +97,18 @@ module.exports = {
         inAddress: 'Receive Address',
         sum: 'Amount',
         password: 'Password',
+        saveQrcode: 'Save QR code image',   // ??
+        sendTrans: 'Transfer',  // ??
+        remarks: 'Remarks', // ??
+        placeholder: {  // ??
+            amount: 'Please input amount',
+            remarks: 'Please input remarks',
+            addr: 'Please input address'
+        },
+        valid: {    // ??
+            remarksFormat: '',
+            remarksLong: ''
+        },
         hint: {
             token: 'Test tokens have be sent to your account, please check your account!',
             tErr: 'Get test token failed!',
@@ -108,6 +123,7 @@ module.exports = {
 
     // Transaction List
     transList: {
+        title: 'Transaction Record',    // ???
         tType: {
             title: 'Transaction Type',
             send: 'Send',
