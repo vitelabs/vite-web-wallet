@@ -9,4 +9,3 @@ const store = new vuex.Store();
 store.registerModule('account', accountStore);
 
 export default store;
-

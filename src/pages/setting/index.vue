@@ -17,6 +17,7 @@ import layout from './layout.vue';
 import accList from './accList.vue';
 import lang from './lang.vue';
 import mnemonic from './mnemonic.vue';
+import toast from 'utils/toast/index.js';
 
 export default {
     components: {
@@ -41,14 +42,14 @@ export default {
             }
 
             if (!this.pass) {
-                window.alert('fail');
+                toast('fail');
                 return;
             }
 
             this.isSubmiting = true;
             this.lock = !this.activeAccount.verify(this.pass);
             this.isSubmiting = false;
-            this.lock && window.alert('fail');
+            this.lock && toast('fail');
         }
     }
 };
@@ -60,6 +61,7 @@ export default {
 .item {
     width: 474px;
     margin-bottom: 20px;
+    margin-top: 0;
     &.unlock {
         .pass {
             border: 1px solid #efefef;

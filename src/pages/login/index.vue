@@ -55,6 +55,7 @@
 import Vue from 'vue';
 import accountList from './accountList.vue';
 import ellipsisAddr from 'utils/ellipsisAddr.js';
+import toast from 'utils/toast/index.js';
 
 export default {
     components: {
@@ -95,7 +96,9 @@ export default {
                 return;
             }
 
-            return list[0];
+            account = list[0];
+            account.showAddr = account.addr ? ellipsisAddr(account.addr) : '';
+            return account;
         },
 
         inputFocus(text) {
@@ -124,7 +127,7 @@ export default {
             }
 
             if (!this.password) {
-                window.alert(this.$t('create.input'));
+                toast(this.$t('create.input'), 'error');
                 this.focusPass();
                 return;
             }
@@ -145,7 +148,7 @@ export default {
                 let result = viteWallet.Wallet.login(this.activeAccount, this.password);
                 this.isLoading = false;
                 result && loginSuccess();
-                !result && window.alert(this.$t('hint.pwErr'));
+                !result && toast(this.$t('hint.pwErr'), 'error');
             }, 0);
 
         }

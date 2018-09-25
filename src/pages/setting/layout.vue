@@ -7,18 +7,18 @@
             </div>
             <div class="description">
                 <div class="row">
-                    <span class="title">{{$t('setting.block')}} {{ height || '----' }}</span>
+                    <span class="title">{{ $t('setting.block') }}</span>{{ height || '----' }}
                 </div>
                 <div class="row">
-                    <span class="title">{{$t('setting.version')}}</span>sdsdsd
+                    <span class="title">{{ $t('setting.version') }}</span>{{ version }}
                 </div>
                 <div class="row">
-                    <span class="title">{{$t('setting.service')}}</span>sdsdsd
-                    <span class="title">{{$t('setting.site')}}</span>sdsdsdsd
+                    <span class="title">{{ $t('setting.service') }}</span>info@vite.org
+                    <span class="title">{{ $t('setting.site') }}</span>vite.org
                 </div>
                 <div class="row">
-                    <span class="title">{{$t('setting.sys')}}</span>sdsdsdsd
-                    <span class="title">{{$t('setting.open')}}</span>sdsdsdsdsd
+                    <span class="title">{{ $t('setting.sys') }}</span>vite.net
+                    <span class="title">{{ $t('setting.open') }}</span>https://github.com/vitelabs
                 </div>
             </div>
         </div>
@@ -26,12 +26,21 @@
 </template>
 
 <script>
+import versionList from 'version';
+
 let heightEvent = null;
 
 export default {
     data() {
+        let code = 0;
+        let versionStr = '';
+        for(let key in versionList) {
+            +key > code && (versionStr = versionList[key].version);
+        }
+
         return {
-            height: ''
+            height: '',
+            version: versionStr
         };
     },
     mounted() {

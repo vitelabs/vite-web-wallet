@@ -46,7 +46,7 @@ export default {
     },
     watch: {
         showMnemonic: function() {
-            this.mnemonicStr = this.getShowMnemonic(this.mnemonic);
+            this.mnemonicStr = this.mnemonic ? this.getShowMnemonic(this.mnemonic) : '';
         }
     },
     methods: {

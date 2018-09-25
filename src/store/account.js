@@ -35,7 +35,7 @@ const getters = {
 
         state.balance.balanceInfos.forEach(balanceInfo => {
             let mintage = balanceInfo.mintage;
-            let balance = viteWallet.Token.toBasic(balanceInfo.balance, mintage.decimals);
+            let balance = viteWallet.BigNumber.toBasic(balanceInfo.balance, mintage.decimals);
 
             tokenInfo[mintage.id] = tokenInfo[mintage.id] || {};
             tokenInfo[mintage.id].balance = balance;
@@ -46,7 +46,7 @@ const getters = {
 
         state.unConfirmed.balanceInfos.forEach(balanceInfo => {
             let mintage = balanceInfo.mintage;
-            let balance = viteWallet.Token.toBasic(balanceInfo.balance, mintage.decimals);
+            let balance = viteWallet.BigNumber.toBasic(balanceInfo.balance, mintage.decimals);
 
             tokenInfo[mintage.id] = tokenInfo[mintage.id] || {};
             tokenInfo[mintage.id].fundFloat = balance;

@@ -1,4 +1,4 @@
-//https://wiki.vitelabs.com/display/~tiantao/uri+standard
+// https://wiki.vitelabs.com/display/~tiantao/uri+standard
 import qs from 'query-string';
 
 export function parse(s) {
