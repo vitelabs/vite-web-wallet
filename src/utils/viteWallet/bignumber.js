@@ -1,6 +1,6 @@
 const DP = 8;
 
-class Token {
+class bignumber {
     constructor(BigNumber) {
         BigNumber.config({ 
             FORMAT: {
@@ -14,18 +14,6 @@ class Token {
         });
 
         this.BigNumber = BigNumber;
-        this.tokens = {};
-    }
-
-    getTokenMintage(tokenId) {
-        if (this.tokens[tokenId]) {
-            return Promise.resolve(this.tokens[tokenId]);
-        }
-
-        return $ViteJS.Vite.Ledger.getTokenMintage(tokenId).then((data)=>{
-            this.tokens[tokenId] = data.result;
-            return this.tokens[tokenId];
-        });
     }
 
     isEqual(num1, num2) {
@@ -67,4 +55,4 @@ class Token {
     }
 }
 
-export default Token;
+export default bignumber;

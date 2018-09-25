@@ -1,6 +1,8 @@
-import acc from '../store/acc.js';
-import lastIn from '../store/lastIn.js';
+import acc from './storeAcc.js';
 import account from './account.js';
+import storage from 'utils/localStorage.js';
+
+const LAST_KEY = 'ACC_LAST';
 
 class Wallet {
     constructor() {
@@ -63,20 +65,25 @@ class Wallet {
 
         let requests = [];
         for (let i=0; i<num; i++) {
-            requests.push({
+            requests.push($ViteJS.Vite._currentProvider.batch([{
                 type: 'request',
                 methodName: 'ledger_getAccountByAccAddr',
                 params: [ addrs[i].hexAddr ]
-            });
+            }, {
+                type: 'request',
+                methodName: 'ledger_getUnconfirmedInfo',
+                params: [ addrs[i].hexAddr ]
+            }]));
         }
 
-        return $ViteJS.Vite._currentProvider.batch(requests).then((data) => {
+        return Promise.all(requests).then((data)=>{
             let index = 0;
-            data.forEach(({ result }, i) => {
-                if (!result) {
-                    return;
+            data.forEach((item, i) => {
+                let account = item[0].result;
+                let unconfirm = item[1].result;
+                if (account.blockHeight || unconfirm.unConfirmedBlocksLen) {
+                    index = i;
                 }
-                result.blockHeight && (index = i);
             });
 
             let finalAddrs = addrs.slice(0, index+1);
@@ -118,7 +125,7 @@ class Wallet {
     }
 
     _loginKeystore(addr, pass) {
-        let acc = this.getAccFromAddr(addr);
+        let acc = getAccFromAddr(addr);
         let keystore = acc.keystore;
         let privKey = $ViteJS.Wallet.Keystore.decrypt(JSON.stringify(keystore), pass);
         if (!privKey) {
@@ -142,7 +149,7 @@ class Wallet {
 
     _loginWalletAcc(entropy, pass) {
         try {
-            let acc = this.getAccFromEntropy(entropy);
+            let acc = getAccFromEntropy(entropy);
             let verifyRes = $ViteJS.Wallet.Account.verify(acc.encryptObj, pass);
             if (!verifyRes) {
                 return false;
@@ -179,37 +186,17 @@ class Wallet {
             };
         }
 
-        let last = lastIn.getLast();
+        let last = getLast();
         if (!last) {
             return null;
         }
 
-        let acc = last.addr ? this.getAccFromAddr(last.addr) : this.getAccFromEntropy(last.entropy);
+        let acc = last.addr ? getAccFromAddr(last.addr) : getAccFromEntropy(last.entropy);
         if (!acc) {
             return null;
         }
         
         return acc;
-    }
-
-    getAccFromEntropy(entropy) {
-        let list = acc.getList();
-        for(let i=0; i<list.length; i++) {
-            if (list[i].entropy === entropy) {
-                return list[i];
-            }
-        }
-        return null;
-    }
-
-    getAccFromAddr(address) {
-        let list = acc.getList();
-        for(let i=0; i<list.length; i++) {
-            if (list[i].addr === address) {
-                return list[i];
-            }
-        }
-        return null;
     }
 
     getList() {
@@ -219,6 +206,30 @@ class Wallet {
 
 export default Wallet;
 
-function setLast({ entropy, addr, name }) {
-    lastIn.setLast({ entropy, addr, name });
+function getAccFromEntropy(entropy) {
+    let list = acc.getList();
+    for(let i=0; i<list.length; i++) {
+        if (list[i].entropy === entropy) {
+            return list[i];
+        }
+    }
+    return null;
+}
+
+function getAccFromAddr(address) {
+    let list = acc.getList();
+    for(let i=0; i<list.length; i++) {
+        if (list[i].addr === address) {
+            return list[i];
+        }
+    }
+    return null;
+}
+
+function getLast() {
+    return storage.getItem(LAST_KEY);
+}
+
+function setLast(acc) {
+    storage.setItem(LAST_KEY, acc);
 }

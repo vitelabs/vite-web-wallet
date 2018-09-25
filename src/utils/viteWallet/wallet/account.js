@@ -1,4 +1,4 @@
-import acc from '../store/acc.js';
+import acc from './storeAcc.js';
 
 const namePre = 'account';
 
@@ -57,6 +57,9 @@ class Account {
     }
 
     getMnemonic() {
+        if (!this.entropy) {
+            return null;
+        }
         return $ViteJS.Wallet.Address.getMnemonicFromEntropy(this.entropy);
     }
 
@@ -109,8 +112,10 @@ class Account {
             return;
         }
 
-        this.defaultInx = i;
-        this.save();
+        this.lock();    // Lock current default address
+        this.defaultInx = i;    // Change default address
+        this.save();    // Save default
+        this.unLock();  // Unlock the current default address
     }
 
     getDefaultAddr() {
@@ -150,9 +155,6 @@ class Account {
 
         let fromAddr = this.addrs[this.defaultInx].hexAddr;
         let privKey = this.addrs[this.defaultInx].privKey;
-
-        console.log(fromAddr);
-        console.log(privKey);
 
         return $ViteJS.Wallet.Account.sendTx({
             fromAddr, toAddr, tokenId, amount

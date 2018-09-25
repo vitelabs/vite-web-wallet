@@ -47,7 +47,7 @@ import pagination from 'components/pagination.vue';
 import date from 'utils/date.js';
 import ellipsisAddr from 'utils/ellipsisAddr.js';
 
-const pageCount = 20;
+const pageCount = 50;
 let reTimeout = null;
 let lastFetchTime = null;
 
@@ -72,7 +72,7 @@ export default {
     },
     computed: {
         totalPage() {
-            return viteWallet.Token.dividedToNumber(this.totalNum, pageCount);
+            return viteWallet.BigNumber.dividedToNumber(this.totalNum, pageCount);
         },
         pageNumber() {
             return `${this.currentPage + 1}/${this.totalPage}`;
@@ -83,7 +83,6 @@ export default {
     },
     methods: {
         goDetail(trans) {
-            console.log(trans);
             let locale = this.$i18n.locale === 'zh' ? 'zh/' : '';
             window.open(`https://testnet.vite.net/${locale}transaction/${trans.hash}`);
         },
@@ -114,7 +113,8 @@ export default {
             this.currentPage = pageIndex;
             viteWallet.Ledger.getBlocks({
                 addr: this.address,
-                index: this.currentPage
+                index: this.currentPage,
+                pageCount: this.pageCount
             }).then((data)=>{
                 if (pageIndex !== this.currentPage || 
                     fetchTime !== lastFetchTime ||
@@ -140,7 +140,7 @@ export default {
 
                     let timestamp = item.timestamp * 1000;
                     let transAddr = ellipsisAddr( isSend ? item.accountAddress : item.from );
-                    let amount = viteWallet.Token.toBasic(item.amount, item.mintage.decimals);
+                    let amount = viteWallet.BigNumber.toBasic(item.amount, item.mintage.decimals);
 
                     nowList.push({
                         type: isSend ? 'send' : 'receive',

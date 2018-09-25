@@ -56,7 +56,10 @@ export default {
             this.activeToken = token;
         },
         closeTrans(e) {
-            if (this.$refs.transaction.$el.contains(e.target) || this.$refs.transaction.$el === e.target) {
+            if (e && e.target && 
+                (this.$refs.transaction.$el.contains(e.target) || 
+                    this.$refs.transaction.$el === e.target)
+            ) {
                 return;
             }
             this.isShowTrans = false;

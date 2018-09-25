@@ -3,8 +3,7 @@ import ViteJS from 'vite.js';
 import wallet from './wallet/index';
 import net from './net';
 import ledger from './ledger';
-import TestToken from './testToken';
-import Token from './token';
+import bignumber from './bignumber';
 import Types from './types';
 
 let WS_RPC = new ViteJS.WS_RPC({
@@ -16,7 +15,6 @@ window.viteWallet = {
     Wallet: new wallet(),
     Net: new net(),
     Ledger: new ledger(),
-    TestToken: new TestToken(),
-    Token: new Token(ViteJS.BigNumber),
+    BigNumber: new bignumber(ViteJS.BigNumber),
     Types: new Types()
 };

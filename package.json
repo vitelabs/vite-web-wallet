@@ -3,7 +3,7 @@
     "version": "0.0.1",
     "description": "",
     "scripts": {
-        "clean": "rm -rf ./static",
+        "clean": "rm -rf ./static && rm -rf ./node_modules/node-libs-browser/node_modules/buffer",
         "build": "npm run clean && webpack",
         "build:map": "npm run clean && MAP=true webpack",
         "app": "node app/index.js",
@@ -55,6 +55,7 @@
         "node-libs-browser": "^2.1.0",
         "qrcode.es": "^1.0.0",
         "query-string": "^6.1.0",
-        "vuex": "^3.0.1"
+        "vuex": "^3.0.1",
+        "vite.js": "https://github.com/vitelabs/vite.js"
     }
 }

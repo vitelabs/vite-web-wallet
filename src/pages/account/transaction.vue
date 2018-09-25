@@ -1,6 +1,9 @@
 <template>
     <div class="transaction-wrapper">
-        <div class="title">{{ $t('accDetail.transfer') }}</div>
+        <div class="title">
+            {{ $t('accDetail.transfer') }}
+            <img class="close __pointer" @click="_closeTrans" src="../../assets/imgs/close.svg"/>
+        </div>
 
         <div class="content-wrapper">
             <div class="row">
@@ -24,7 +27,10 @@
             </div>
 
             <div class="row">
-                <div class="row-t">备注</div>
+                <div class="row-t">
+                    备注
+                    <span v-show="messageErr" class="err">{{ $t('transList.valid.addr')}}</span>
+                </div>
                 <div class="row-content">
                     <input v-model="message" placeholder="请输入备注"  />
                 </div>
@@ -49,6 +55,7 @@
 
 <script>
 import Vue from 'vue';
+import toast from 'utils/toast/index.js';
 
 let inAddrTimeout = null;
 let amountTimeout = null;
@@ -81,6 +88,7 @@ export default {
             isValidAddress: true,
             amountErr: '',
             passwordErr: '',
+            messageErr: '',
 
             loading: false
         };
@@ -117,7 +125,7 @@ export default {
             amountTimeout = setTimeout(async ()=> {
                 amountTimeout = null;
                 let result = this.testAmount();
-                if (!result || viteWallet.Token.isEqual(this.amount, 0)) {
+                if (!result || viteWallet.BigNumber.isEqual(this.amount, 0)) {
                     this.amountErr = this.$t('transList.valid.amt');
                     return;
                 }
@@ -155,11 +163,11 @@ export default {
         transfer() {
             let activeAccount = viteWallet.Wallet.getActiveAccount();
             if (!activeAccount) {
-                window.alert('fail');
+                toast('fail');
             }
 
             this.loading = true;
-            let amount =  viteWallet.Token.toMin(this.amount, this.token.decimals);
+            let amount =  viteWallet.BigNumber.toMin(this.amount, this.token.decimals);
 
             activeAccount.sendTx({
                 toAddr: this.inAddress,
@@ -168,8 +176,8 @@ export default {
                 amount
             }).then(() => {
                 this.loading = false;
-                window.alert(this.$t('transList.valid.succ'));
-                this.closeTrans();
+                toast(this.$t('transList.valid.succ'));
+                this._closeTrans();
             }).catch((err) => {
                 console.warn(err);
                 this.loading = false;
@@ -182,8 +190,19 @@ export default {
                     return;
                 }
 
-                window.alert(err && err.message? err.message : this.$t('transList.valid.err'));
+                toast(err && err.message? err.message : this.$t('transList.valid.err'));
             });
+        },
+        _closeTrans() {
+            this.amount = '';
+            this.inAddress = '';
+            this.password = '';
+            this.message = '';
+            this.isValidAddress = true;
+            this.amountErr = '';
+            this.passwordErr = '';
+            this.messageErr = '';
+            this.closeTrans();
         }
     }
 };
@@ -209,6 +228,10 @@ export default {
     line-height: 60px;
     text-indent: 30px;
     margin-bottom: 5px;
+    .close {
+        float: right;
+        padding: 20px 30px;
+    }
 }
 
 .content-wrapper {

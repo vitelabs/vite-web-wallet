@@ -41,18 +41,9 @@ rootRoute.component = list && list.length ? login : start;
 routes.push(rootRoute);
 
 const router = new VueRouter({
-    // mode: 'history',
+    mode: 'history',
     routes
 });
-// router.beforeEach((to, from, next) => {
-//     if (!from.name && to.name !== 'index') {
-//         router.replace({
-//             name: 'index'
-//         });
-//         return;
-//     }
-//     next();
-// });
 
 new Vue({
     el: '#app',

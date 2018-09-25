@@ -1,10 +1,10 @@
 /**
- * 这是一个promise重试函数，重试promise操作，直到满足要求
- * @param {Function} createPromise 以该函数创建一个promise任务
- * @param {Function} test return Boolean;接受 promise结果参数{resolve,reject}，返回一个bool值，为true时停止重试。
- * @param {Number} interval 重试间隔
- * @param {Number} times 重试次数
- * @param {Number} timeout 重试时间
+ * This is a promise-retry function, retry promise until it is ok for you. ???
+ * @param {Function} createPromise
+ * @param {Function} test return Boolean
+ * @param {Number} interval retryIntervalTime
+ * @param {Number} times retryTimes
+ * @param {Number} timeout retryTimeout
  */
 
 export function doUntill({
@@ -44,7 +44,6 @@ export function doUntill({
         tryAndTry();
     });
 }
-
 
 export class timer {
     constructor(

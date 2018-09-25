@@ -24,7 +24,7 @@
                     </div>
                 </span>
                 <img src="../../assets/imgs/copy_default.svg" @click="copy" class="title_icon copy __pointer"/>
-                <span class="copy-success" :class="{'show': copySuccess}">{{ $t('accDetail.hint.copy') }}</span>
+                <copyOK :copySuccess="copySuccess"></copyOK>
             </div>
             <div class="copy addr-content">{{ account.addr }}</div>
         </div>
@@ -44,14 +44,19 @@
 
 <script>
 import Vue from 'vue';
-import copy from 'utils/copy';
 import qrcode from 'components/qrcode';
+import copyOK from 'components/copyOK';
+import copy from 'utils/copy';
+import request from 'utils/request';
 import { stringify } from 'utils/viteSchema';
+import toast from 'utils/toast/index.js';
 
 let activeAccount = null;
 
 export default {
-    components: { qrcode },
+    components: { 
+        qrcode, copyOK
+    },
     data() {
         return {
             account: {},
@@ -73,7 +78,7 @@ export default {
     },
     methods: {
         getImage(i) {
-            this.qrcode=i;
+            this.qrcode = i;
         },
         copy() {
             copy(this.account.addr);
@@ -84,12 +89,14 @@ export default {
             }, 500);
         },
         toggleQrCode() {
-            this.qrcodeShow=!this.qrcodeShow;
+            this.qrcodeShow = !this.qrcodeShow;
         },
         downLoadQrCode(){
-            if(!this.qrcode){return;}
-            location.href=this.qrcode.replace('image/png', 'image/octet-stream');
-            this.qrcodeShow=false;
+            if (!this.qrcode) {
+                return;
+            }
+            location.href = this.qrcode.replace('image/png', 'image/octet-stream');
+            this.qrcodeShow = false;
         },
         goDetail() {
             let locale = this.$i18n.locale === 'zh' ? 'zh/' : '';
@@ -99,14 +106,18 @@ export default {
         },
 
         getTestToken() {
-            viteWallet.TestToken.get(this.account.addr)
-                .then(() => {
-                    window.alert(this.$t('accDetail.hint.token'));
-                })
-                .catch(err => {
-                    console.warn(err);
-                    window.alert(this.$t('accDetail.hint.tErr'));
-                });
+            request({
+                method: 'POST',
+                url: '/api/account/newtesttoken',
+                params: {
+                    accountAddress: this.account.addr
+                }
+            }).then(() => {
+                toast( this.$t('accDetail.hint.token') );
+            }).catch(err => {
+                console.warn(err);
+                toast( this.$t('accDetail.hint.tErr') );
+            });
         },
         getSimpleAcc() {
             return {
@@ -144,13 +155,13 @@ export default {
             }
 
             if (!/^[a-zA-Z0-9_\u4e00-\u9fa5]+$/g.test(this.editName)) {
-                window.alert(this.$t('create.hint.name'));
+                toast(this.$t('create.hint.name'), 'error');
                 this.clearEditName();
                 return;
             }
 
             if (this.editName.length > 32) {
-                window.alert(this.$t('create.hint.nameLong'));
+                toast(this.$t('create.hint.nameLong'), 'error');
                 this.clearEditName();
                 return;
             }
@@ -167,126 +178,95 @@ export default {
 @import "~assets/scss/vars.scss";
 
 .account-head-wrapper {
-  position: relative;
-  text-align: center;
-  background: #ffffff;
-  box-shadow: 0 2px 48px 1px rgba(176, 192, 237, 0.42);
-  border-radius: 2px;
-  padding: 30px;
-  .head-title {
     position: relative;
-    display: block;
-    height: 20px;
-    line-height: 20px;
-    font-size: 14px;
-    letter-spacing: 0.35px;
-    padding-bottom: 24px;
-    font-family: $font-bold;
-    .edit {
-      display: inline-block;
-      width: 20px;
-      height: 20px;
-      margin-left: 20px;
-    }
-    .title_icon {
-      float: right;
-      &.qrcode {
+    text-align: center;
+    background: #ffffff;
+    box-shadow: 0 2px 48px 1px rgba(176, 192, 237, 0.42);
+    border-radius: 2px;
+    padding: 30px;
+    .head-title {
         position: relative;
-      }
-      .code-container {
-        box-shadow: 0 2px 48px 1px rgba(176, 192, 237, 0.42);
-        width: 166px;
-        padding: 10px;
-        position: absolute;
-        right: 100%;
-        transform: translateX(20px);
-        background: #fff;
-        .code {
-          width: 146px;
-          height: 146px;
-          margin: 10px;
-        }
-        .btn {
-          background: #007aff;
-          border-radius: 2px;
-          color: #fff;
-          margin: 10px 8px;
-          height: 28px;
-          text-align: center;
-          line-height: 28px;
-        }
-      }
-      &.copy {
-        margin-right: 10px;
-      }
-    }
-  }
-  .addr-wrapper {
-    display: inline-block;
-    min-width: 510px;
-    text-align: left;
-    .addr-content {
-      font-size: 14px;
-      width: 100%;
-      height: 40px;
-      line-height: 40px;
-      box-sizing: border-box;
-      background: #f3f6f9;
-      border: 1px solid #d4dee7;
-      border-radius: 2px;
-      padding: 0 8px;
-      color: #283d4a;
-    }
-    .copy-success {
-      transition: all 0.3s ease-in-out;
-      position: absolute;
-      bottom: 6px;
-      left: 50%;
-      margin-left: -62px;
-      background: #5b638d;
-      box-sizing: border-box;
-      border: 1px solid #979797;
-      border-radius: 6px;
-      font-size: 12px;
-      line-height: 12px;
-      color: #ffffff;
-      padding: 6px;
-      opacity: 0;
-      font-family: $font-normal;
-      &.show {
-        opacity: 1;
-      }
-      &:after {
-        content: " ";
+        display: block;
+        height: 20px;
+        line-height: 20px;
+        font-size: 14px;
+        letter-spacing: 0.35px;
+        padding-bottom: 24px;
+        font-family: $font-bold;
+        .edit {
         display: inline-block;
-        border: 6px solid transparent;
-        border-top: 6px solid #5b638d;
+        width: 20px;
+        height: 20px;
+        margin-left: 20px;
+        }
+        .title_icon {
+            float: right;
+            &.qrcode {
+                position: relative;
+            }
+            .code-container {
+                box-shadow: 0 2px 48px 1px rgba(176, 192, 237, 0.42);
+                width: 166px;
+                padding: 10px;
+                position: absolute;
+                right: 100%;
+                transform: translateX(20px);
+                background: #fff;
+                .code {
+                width: 146px;
+                height: 146px;
+                margin: 10px;
+                }
+                .btn {
+                background: #007aff;
+                border-radius: 2px;
+                color: #fff;
+                margin: 10px 8px;
+                height: 28px;
+                text-align: center;
+                line-height: 28px;
+                }
+            }
+            &.copy {
+                margin-right: 10px;
+            }
+        }
+    }
+    .addr-wrapper {
+        display: inline-block;
+        min-width: 510px;
+        text-align: left;
+        .addr-content {
+            font-size: 14px;
+            width: 100%;
+            height: 40px;
+            line-height: 40px;
+            box-sizing: border-box;
+            background: #f3f6f9;
+            border: 1px solid #d4dee7;
+            border-radius: 2px;
+            padding: 0 8px;
+            color: #283d4a;
+        }
+    }
+    .custom-name {
         position: absolute;
-        bottom: -12px;
-        left: 50%;
-        margin-left: -6px;
-      }
+        font-size: 24px;
+        color: #1d2024;
+        text-align: left;
+        font-family: $font-bold;
+        .name {
+            display: inline-block;
+            line-height: 32px;
+        }
+        input {
+            height: 32px;
+            line-height: 32px;
+            font-size: 20px;
+            width: 300px;
+        }
     }
-  }
-  .custom-name {
-    position: absolute;
-    font-size: 24px;
-    color: #1d2024;
-    text-align: left;
-    font-family: $font-bold;
-    .name {
-      display: inline-block;
-      line-height: 32px;
-    }
-    input {
-      height: 32px;
-      line-height: 32px;
-      font-size: 20px;
-      width: 400px;
-      text-indent: 10px;
-    }
-  }
-  .btn-group {
+    .btn-group {
         position: absolute;
         top: 30px;
         right: 30px;
@@ -317,6 +297,6 @@ export default {
         .more-icon {
             margin-bottom: -1px;
         }
-  }
+    }
 }
 </style>
