@@ -38,6 +38,7 @@ class Net {
     }
 
     getNetStatus() {
+        this._updateClientNet();
         return this.clientStatus;
     }
 
