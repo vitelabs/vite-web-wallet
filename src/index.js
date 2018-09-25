@@ -41,7 +41,7 @@ rootRoute.component = list && list.length ? login : start;
 routes.push(rootRoute);
 
 const router = new VueRouter({
-    mode: 'history',
+    // mode: 'history',
     routes
 });
 
