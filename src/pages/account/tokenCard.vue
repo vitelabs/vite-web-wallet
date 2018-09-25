@@ -23,7 +23,7 @@
 
 <script>
 import viteIcon from 'assets/imgs/vite.svg';
-import vccIcon from 'assets/imgs/vcc.svg';
+import vccIcon from 'assets/imgs/VCC.svg';
 
 export default {
     props: {
