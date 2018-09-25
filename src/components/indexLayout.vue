@@ -55,7 +55,7 @@ export default {
         align-items: center;
         .confirm {
             position: relative;
-            width: 390px;
+            width: 360px;
             text-align: center;
             .process {
                 margin-top: 60px;
