@@ -146,7 +146,7 @@ class Account {
     }
 
     sendTx({
-        toAddr, pass, tokenId, amount
+        toAddr, pass, tokenId, amount, message
     }) {
         let verifyRes = this.verify(pass);
         if (!verifyRes) {
@@ -157,7 +157,7 @@ class Account {
         let privKey = this.addrs[this.defaultInx].privKey;
 
         return $ViteJS.Wallet.Account.sendTx({
-            fromAddr, toAddr, tokenId, amount
+            fromAddr, toAddr, tokenId, amount, message
         }, privKey);
     }
 

@@ -29,7 +29,7 @@
             <div class="row">
                 <div class="row-t">
                     {{ $t('accDetail.remarks')}}
-                    <span v-show="messageErr" class="err">{{ $t('accDetail.valid.remarksFormat') }}</span>
+                    <span v-show="messageErr" class="err">{{ messageErr }}</span>
                 </div>
                 <div class="row-content">
                     <input v-model="message" :placeholder="$t('accDetail.placeholder.remarks')"  />
@@ -47,7 +47,7 @@
             </div>
 
             <div class="btn __pointer" :class="{
-                'unuse': loading || amountErr || !isValidAddress || passwordErr
+                'unuse': loading || amountErr || !isValidAddress || passwordErr || messageErr
             }" @click="validTrans">{{ $t('accDetail.transfer') }}</div>
         </div>
     </div>
@@ -59,6 +59,7 @@ import toast from 'utils/toast/index.js';
 
 let inAddrTimeout = null;
 let amountTimeout = null;
+let messageTimeout = null;
 
 export default {
     props: {
@@ -122,21 +123,43 @@ export default {
             clearTimeout(amountTimeout);
             amountTimeout = null;
 
-            amountTimeout = setTimeout(async ()=> {
+            amountTimeout = setTimeout(()=> {
                 amountTimeout = null;
-                let result = this.testAmount();
-                if (!result || viteWallet.BigNumber.isEqual(this.amount, 0)) {
-                    this.amountErr = this.$t('transList.valid.amt');
-                    return;
-                }
+                this.testAmount();
+            }, 500);
+        },
+        message: function() {
+            clearTimeout(messageTimeout);
+            messageTimeout = null;
 
-                this.amountErr = '';
+            messageTimeout = setTimeout(()=> {
+                messageTimeout = null;
+                this.testMessage();
             }, 500);
         }
     },
     methods: {
         testAmount() {
-            return /(^(\d+)$)|(^(\d+[.]\d{1,8})$)/g.test(this.amount);
+            let result = /(^(\d+)$)|(^(\d+[.]\d{1,8})$)/g.test(this.amount);
+            if (!result || viteWallet.BigNumber.isEqual(this.amount, 0)) {
+                this.amountErr = this.$t('transList.valid.amt');
+                return false;
+            }
+            this.amountErr = '';
+            return true;
+        },
+        testMessage() {
+            let result = viteWallet.Types.isValidMessage(this.message);
+            if (result === 0) {
+                this.messageErr = this.$t('accDetail.valid.remarksFormat');
+                return false;
+            }
+            if (result === 1) {
+                this.messageErr = this.$t('accDetail.valid.remarksLong');
+                return false;
+            }
+            this.messageErr = '';
+            return true;
         },
 
         validTrans() {
@@ -147,8 +170,8 @@ export default {
             if (!this.inAddress) {
                 this.isValidAddress = false;
             }
-            if (!this.testAmount()) {
-                this.amountErr = this.$t('transList.valid.amt');
+            if (!this.testAmount() || !this.testMessage()) {
+                return;
             }
             if (!this.password) {
                 this.passwordErr = this.$t('transList.valid.pswd');
@@ -173,7 +196,8 @@ export default {
                 toAddr: this.inAddress,
                 pass: this.password,
                 tokenId: this.token.id,
-                amount
+                amount,
+                message: this.message
             }).then(() => {
                 this.loading = false;
                 toast(this.$t('transList.valid.succ'));
