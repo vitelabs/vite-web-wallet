@@ -16,5 +16,5 @@ window.viteWallet = {
     Net: new net(),
     Ledger: new ledger(),
     BigNumber: new bignumber(ViteJS.BigNumber),
-    Types: new Types()
+    Types: new Types(ViteJS.utils)
 };
