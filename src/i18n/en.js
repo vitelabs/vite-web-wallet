@@ -5,12 +5,12 @@ module.exports = {
 
     mnemonic: {
         title:'Mnemonic',
-        restore: 'Resore Account by Mnemonic',
-        record: 'Backup Mnemonic',
-        prompt: 'Mnemonic is used to restore your wallet, better write it down and keep it in a safe place where only you can access, otherwise your assets will be at tremendous risks',
-        placeholder:'Please input your mnemonic',
-        empty: 'Mnemonic input is empty',    // ???
-        error: 'Mnemonic error' // ??
+        restore: 'Restore Account by Seed Phrase',
+        record: 'Backup Seed Phrase',
+        prompt: 'Mnemonic seed phrase is used to restore your wallet, better write it down and keep it in a safe place where only you can access, otherwise your assets will be at tremendous risks',
+        placeholder:'Please input your mnemonic seed phrase',
+        empty: 'The input of seed phrase cannot be empty',
+        error: 'Incorrect seed phrase. Try again'
     },
 
     setting: {
@@ -63,7 +63,7 @@ module.exports = {
         input: 'Please input password',
         again: 'Please input password again!',
         choose: 'Choose account',
-        finish: 'Finish',   // ????
+        finish: 'Finish',
         hint: {
             nameInput: 'Please input account name',
             nameLong: 'Account name cannot exceed 32 characters!',
@@ -97,17 +97,17 @@ module.exports = {
         inAddress: 'Receive Address',
         sum: 'Amount',
         password: 'Password',
-        saveQrcode: 'Save QR code image',   // ??
-        sendTrans: 'Transfer',  // ??
-        remarks: 'Remarks', // ??
-        placeholder: {  // ??
+        saveQrcode: 'Save QR code image',
+        sendTrans: 'Send Transaction',
+        remarks: 'Comment',
+        placeholder: {
             amount: 'Please input amount',
-            remarks: 'Please input remarks',
+            remarks: 'Please input comments',
             addr: 'Please input address'
         },
-        valid: {    // ??
-            remarksFormat: '',
-            remarksLong: ''
+        valid: {
+            remarksFormat: 'Format error! Remarks can only contain Chinese, English and punctuations.',
+            remarksLong: 'Comment is too long! The input length should be within 180 English characters (or punctuations, 1 Chinese character = 6 English character)'
         },
         hint: {
             token: 'Test tokens have be sent to your account, please check your account!',
@@ -123,7 +123,7 @@ module.exports = {
 
     // Transaction List
     transList: {
-        title: 'Transaction Record',    // ???
+        title: 'Transaction Records',
         tType: {
             title: 'Transaction Type',
             send: 'Send',
