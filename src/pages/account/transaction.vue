@@ -9,10 +9,10 @@
             <div class="row">
                 <div class="row-t">
                     {{ $t('accDetail.inAddress') }}
-                    <span v-show="!isValidAddress" class="err">{{ $t('transList.valid.addr')}}</span>
+                    <span v-show="!isValidAddress" class="err">{{ $t('transList.valid.addr') }}</span>
                 </div>
                 <div class="row-content">
-                    <input ref="inAddr" v-model="inAddress" placeholder="请输入地址" />
+                    <input ref="inAddr" v-model="inAddress" :placeholder="$t('accDetail.placeholder.addr')" />
                 </div>
             </div>
 
@@ -22,17 +22,17 @@
                     <span v-show="amountErr" class="err">{{ amountErr }}</span>
                 </div>
                 <div class="row-content __btn_text __input">
-                    <input v-model="amount" placeholder="请输入金额"  />
+                    <input v-model="amount" :placeholder="$t('accDetail.placeholder.amount')"  />
                 </div>
             </div>
 
             <div class="row">
                 <div class="row-t">
-                    备注
-                    <span v-show="messageErr" class="err">{{ $t('transList.valid.addr')}}</span>
+                    {{ $t('accDetail.remarks')}}
+                    <span v-show="messageErr" class="err">{{ $t('accDetail.valid.remarksFormat') }}</span>
                 </div>
                 <div class="row-content">
-                    <input v-model="message" placeholder="请输入备注"  />
+                    <input v-model="message" :placeholder="$t('accDetail.placeholder.remarks')"  />
                 </div>
             </div>
 
@@ -42,7 +42,7 @@
                     <span v-show="passwordErr" class="err">{{ passwordErr }}</span>
                 </div>
                 <div class="row-content">
-                    <input v-model="password" type="password" placeholder="请输入密码"  />
+                    <input v-model="password" type="password" :placeholder="$t('create.input')"  />
                 </div>
             </div>
 
@@ -163,7 +163,7 @@ export default {
         transfer() {
             let activeAccount = viteWallet.Wallet.getActiveAccount();
             if (!activeAccount) {
-                toast('fail');
+                toast(this.$t('transList.valid.err'));
             }
 
             this.loading = true;

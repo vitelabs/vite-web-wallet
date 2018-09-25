@@ -6,18 +6,18 @@
         </div>
         <div class="body">
             <div class="item">
-                <span>账户余额</span>
+                <span>{{ $t('accDetail.balance') }}</span>
                 <span class="balance">{{ opt.balance || 0 }}</span>
             </div>
             <div class="item">
-                <span>在途金额</span>
+                <span>{{ $t('accDetail.fundFloat') }}</span>
                 <span class="balance">{{ opt.fundFloat || 0 }}</span>
             </div>
             <div class="tips">
-                <span>{{ opt.unConfirmes || 0 }} 笔交易待确认</span>
+                <span>{{ opt.unConfirmes || 0 }} {{ $t('accDetail.pend') }}</span>
             </div>
         </div>
-        <div class="btn __pointer" @click="sendTransaction(opt)">发送交易</div>
+        <div class="btn __pointer" @click="sendTransaction(opt)">{{ $t('accDetail.sendTrans') }}</div>
     </div>
 </template>
 

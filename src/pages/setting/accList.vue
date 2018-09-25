@@ -1,8 +1,8 @@
 <template>
     <div class="acc-list-wrapper">
         <div class="row">
-            <span class="title">{{$t('accList.addr')}}</span>
-            <span class="describe">{{$t('accList.default')}}</span>
+            <span class="title">{{ $t('accList.addr') }}</span>
+            <span class="describe">{{ $t('accList.default') }}</span>
         </div>
         <div class="acc-list __pointer">
             <div ref="listWrapper" class="list-wrapper">
@@ -17,7 +17,7 @@
             </div>
 
             <div v-show="isWalletAcc && addrList.length < 10" class="add" @click="addAddr">
-                <span class="acc-add"></span><span class="describe">{{$t('accList.addAcc')}}</span>
+                <span class="acc-add"></span><span class="describe">{{ $t('accList.addAcc') }}</span>
             </div>
         </div>
     </div>

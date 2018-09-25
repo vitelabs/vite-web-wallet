@@ -1,7 +1,7 @@
 <template>
     <layout>
         <div v-show="showPassWrapper" class="item" :class="{ 'unlock': !lock }">
-            <div class="title __pointer">{{$t('setting.unlock')}}</div>
+            <div class="title __pointer">{{ $t('setting.unlock') }}</div>
             <input :disabled="!lock" class="pass" v-model="pass" type="password" :placeholder="$t('create.input')" />
             <span class="btn __pointer" @click="validPass">{{ $t('btn.submit') }}</span>
         </div>
@@ -42,14 +42,14 @@ export default {
             }
 
             if (!this.pass) {
-                toast('fail');
+                toast( this.$t('accDetail.hint.wrong') );
                 return;
             }
 
             this.isSubmiting = true;
             this.lock = !this.activeAccount.verify(this.pass);
             this.isSubmiting = false;
-            this.lock && toast('fail');
+            this.lock && toast( this.$t('accDetail.hint.wrong') );
         }
     }
 };

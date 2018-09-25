@@ -4,11 +4,13 @@ module.exports = {
     start: '开始',
 
     mnemonic: {
-        title:'助记词',
+        title: '助记词',
         restore: '助记词恢复账户',
         record: '记录助记词',
         prompt: '助记词是您恢复账户的重要手段，如给予他人，您的资产会被他人获取。请谨慎记录，以防丢失。',
-        placeholder:'请输入您的助记词',
+        placeholder: '请输入您的助记词',
+        empty: '助记词输入为空',
+        error: '助记词错误'
     },
 
     setting: {
@@ -42,8 +44,8 @@ module.exports = {
     },
     test: {
         t: '预览版',
-        txt1: 'Vite钱包是第一个预览版全节点钱包，可以生成基于DAG账本结构的账户、查询账户余额、对外发送交易、默认签收交易，以及获取测试代币等功能。',
-        txt2: '目前账户暂不支持私钥导入，请妥善保管好您的账户密码和账户文件。',
+        txt1: 'Vite的Web版钱包是轻节点钱包，目前可以生成基于DAG账本结构的账户、查询账户余额、对外发送交易、默认签收交易，以及获取测试代币、查看目前系统铸造的多种代币等功能。',
+        txt2: '支持账户的助记词找回和加密文件的加载登录。',
         v: '当前版本：预览版'
     },
 
@@ -60,7 +62,8 @@ module.exports = {
         accName: '账户昵称',
         input: '请输入密码',
         again: '请再次输入密码',
-        choose:'选择账户',
+        choose: '选择账户',
+        finish: '完成',
         hint: {
             nameInput: '请输入账户名称',
             nameLong: '账户不得超出32个字符',
@@ -94,6 +97,18 @@ module.exports = {
         inAddress: '接收账户地址',
         sum: '金额',
         password: '密码',
+        saveQrcode: '保存二维码图片',
+        sendTrans: '发送交易',
+        remarks: '备注',
+        placeholder: {
+            amount: '请输入金额',
+            remarks: '请输入备注',
+            addr: '请输入地址'
+        },
+        valid: {
+            remarksFormat: '备注限制中英文和标点符号，格式输入错误',
+            remarksLong: '备注限制中英文和标点符号，格式输入错误'
+        },
         hint: {
             token: '系统已向您转入一笔测试代币，请注意接收',
             tErr: '获取测试代币失败！',
@@ -108,6 +123,7 @@ module.exports = {
 
     // Transaction List
     transList: {
+        title: '交易记录',
         tType: {
             title: '交易类型',
             send: '发送',

@@ -1,6 +1,6 @@
 <template>
     <div class="trans-list-wrapper">
-        <div class="title __pointer">交易记录</div>
+        <div class="title __pointer">{{ $t('transList.title') }}</div>
 
         <div class="trans-list">
             <div class="table__head">

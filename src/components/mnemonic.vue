@@ -10,8 +10,8 @@
         </div>
 
         <div class="btn_list">
-            <span class="__btn __btn_border __pointer" @click="back">{{$t('btn.back')}}</span>
-            <span class="__btn __btn_all_in __pointer" @click="submit">{{$t('btn.submit')}}</span>
+            <span class="__btn __btn_border __pointer" @click="back">{{ $t('btn.back') }}</span>
+            <span class="__btn __btn_all_in __pointer" @click="submit">{{ $t('btn.submit') }}</span>
         </div>
     </div>
 </template>
