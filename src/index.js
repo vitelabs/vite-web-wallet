@@ -45,8 +45,6 @@ const router = new VueRouter({
     routes
 });
 router.beforeEach((to, from, next) => {
-    console.log(to.name);
-    console.log(from.name);
     if (!from.name && to.name !== 'index') {
         router.replace({
             name: 'index'
