@@ -1,10 +1,13 @@
+const viteTokenId = 'tti_000000000000000000004cfd';
+
 const state = {
     unConfirmed: {
         balanceInfos:[]
     },
     balance: {
         balanceInfos:[]
-    }
+    },
+    unConfirmes: ''
 };
 
 const mutations = {
@@ -14,6 +17,9 @@ const mutations = {
 
         state.unConfirmed = Object.assign(state.unConfirmed, payload.unconfirm);
         state.unConfirmed.balanceInfos = state.unConfirmed.balanceInfos || [];
+
+        // [TODO] Only one token VITE, now.
+        state.unConfirmes = state.unConfirmed.unConfirmedBlocksLen;
     },
     commitClearBalance(state) {
         state.balance = {
@@ -61,10 +67,19 @@ const getters = {
             tokenInfo[mintage.id].symbol = tokenInfo[mintage.id].symbol || mintage.symbol;
             tokenInfo[mintage.id].id = tokenInfo[mintage.id].id || mintage.id;
             tokenInfo[mintage.id].decimals = mintage.decimals;
-            // [TODO] Only one token, now.
-            tokenInfo[mintage.id].unConfirmes = balanceInfo.unConfirmedBlocksLen;
         });
 
+        // [TODO] Only one token VITE, now.
+        tokenInfo[viteTokenId] = tokenInfo[viteTokenId] || {
+            balance: '0',
+            fundFloat: '0',
+            symbol: 'VITE',
+            decimals: '0'
+        };
+        tokenInfo[viteTokenId].unConfirmes = state.unConfirmes;
+
+        tokenInfo['VCP'] = { symbol: 'VCP' };
+        tokenInfo['VV'] = { symbol: 'VV' };
         return tokenInfo;
     }
 };
