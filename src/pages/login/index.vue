@@ -38,15 +38,17 @@
             'disable': isLoading
         }" @click="login">{{ $t('btn.login') + (isLoading ? ' ...' : '') }}</div>
 
-        <div class="bottom btn-list">
-            <router-link class="__btn_link" :to="{ 
+        <div class="btn-list" :class="{ zh: $t('lang') === '中文' }">
+            <router-link class="__btn_link" :class="{
+                en: $t('lang') === 'English'  
+            }" :to="{ 
                 name: 'importAccount',
                 params: { from: 'login' }
             }">{{ $t('btn.imported') }}</router-link>
-            <span class="line" :class="{
-                'zh': $t('lang') === '中文'
-            }"></span>
-            <router-link class="__btn_link" :to="{ name: 'restore' }">{{$t('mnemonic.restore')}}</router-link>
+            <span class="line" v-show="$t('lang') === '中文'"></span>
+            <router-link class="__btn_link" :class="{
+                en: $t('lang') === 'English'  
+            }" :to="{ name: 'restore' }">{{$t('mnemonic.restore')}}</router-link>
         </div>
     </div>
 </template>
@@ -187,19 +189,23 @@ export default {
 
     .btn-list {
         width: 100%;
-        height: 20px;
         text-align: center;
-        line-height: 20px;
+        &.zh {
+            height: 20px;
+            line-height: 20px;
+        }
         .line {
-            &.zh {
-                margin: 0 33px;
-            }
+            margin: 0 33px;
             display: inline-block;
             width: 1px;
             height: 100%;
             background: #E5EDF3;
             opacity: 0.3;
             margin-bottom: -4px;
+        }
+        .__btn_link.en:first-child {
+            display: block;
+            margin-bottom: 10px;
         }
     }
 }
