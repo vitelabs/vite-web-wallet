@@ -14,6 +14,14 @@ const mutations = {
 
         state.unConfirmed = Object.assign(state.unConfirmed, payload.unconfirm);
         state.unConfirmed.balanceInfos = state.unConfirmed.balanceInfos || [];
+    },
+    commitClearBalance(state) {
+        state.balance = {
+            balanceInfos:[]
+        };
+        state.unConfirmed = {
+            balanceInfos:[]
+        };
     }
 };
 

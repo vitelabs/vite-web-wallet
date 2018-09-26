@@ -44,17 +44,17 @@ const router = new VueRouter({
     // mode: 'history',
     routes
 });
-// router.beforeEach((to, from, next) => {
-//     // console.log(to.name);
-//     // console.log(from.name);
-//     if (!from.name && to.name !== 'index') {
-//         router.replace({
-//             name: 'index'
-//         });
-//         return;
-//     }
-//     next();
-// });
+router.beforeEach((to, from, next) => {
+    console.log(to.name);
+    console.log(from.name);
+    if (!from.name && to.name !== 'index') {
+        router.replace({
+            name: 'index'
+        });
+        return;
+    }
+    next();
+});
 
 new Vue({
     el: '#app',

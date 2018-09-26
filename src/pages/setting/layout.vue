@@ -14,11 +14,17 @@
                 </div>
                 <div class="row">
                     <span class="title">{{ $t('setting.service') }}</span>info@vite.org
-                    <span class="title">{{ $t('setting.site') }}</span>vite.org
+                    <a href="https://vite.org/" target="_blank">
+                        <span class="title">{{ $t('setting.site') }}</span>vite.org
+                    </a> 
                 </div>
                 <div class="row">
-                    <span class="title">{{ $t('setting.sys') }}</span>vite.net
-                    <span class="title">{{ $t('setting.open') }}</span>https://github.com/vitelabs
+                    <a href="https://test.vite.net/" target="_blank">
+                        <span class="title">{{ $t('setting.sys') }}</span>vite.net
+                    </a>
+                    <a href="https://github.com/vitelabs" target="_blank">
+                        <span class="title">{{ $t('setting.open') }}</span>https://github.com/vitelabs
+                    </a>
                 </div>
             </div>
         </div>
@@ -87,20 +93,23 @@ export default {
             border-top: 1px solid #C6CBD4;
             opacity: 0.8;
             line-height: 28px;
+            letter-spacing: 0.35px;
             font-size: 14px;
             color: #5E6875;
-            letter-spacing: 0.35px;
-            .title {
-                opacity: 0.8;
-                font-size: 14px;
-                font-family: $font-bold;
-                margin-right: 15px;
+            a {
+                color: #5E6875;
                 &:last-child {
                     margin-left: 20px;
                 }
                 &:first-child {
                     margin-left: 0;
                 }
+            }
+            .title {
+                margin-right: 15px;
+                opacity: 0.8;
+                font-size: 14px;
+                font-family: $font-bold;
             }
         }
     }

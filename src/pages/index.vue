@@ -1,10 +1,10 @@
 <template>
     <div class="app-wrapper">
-        <index-layout v-if="layoutType === 'logo'">
+        <index-layout v-if="layoutType === 'index'">
             <router-view/>
         </index-layout>
 
-        <page-layout v-else :title="pageTitle" >
+        <page-layout :active="active" v-else>
             <router-view/>
         </page-layout>
 
@@ -17,7 +17,7 @@ import indexLayout from 'components/indexLayout.vue';
 import pageLayout from 'components/pageLayout.vue';
 import update from 'components/update.vue';
 
-const pageLayouts = ['account', 'transList', 'setting'];
+const homeLayouts = ['account', 'transList', 'setting'];
 
 export default {
     components: {
@@ -25,29 +25,33 @@ export default {
     },
     mounted() {
         this.changeLayout(this.$route.name);
-        this.$router.afterEach((to)=>{
-            this.changeLayout(to.name);
+        this.$router.afterEach((to, from)=>{
+            this.changeLayout(to.name, from.name);
+            this.active = to.name;
         });
     },
     data() {
         return {
-            layoutType: 'logo',
-            pageTitle: ''
+            layoutType: 'index',
+            active: this.$route.name
         };
     },
     methods: {
-        changeLayout(name, next) {
-            let i = pageLayouts.indexOf(name);
+        changeLayout(to, from) {
+            let toHome = homeLayouts.indexOf(to) !== -1;
+            let fromHome = homeLayouts.indexOf(from) !== -1;
 
-            if (i === -1) {
-                this.layoutType = 'logo';
-                next && next();
+            if (toHome) {
+                this.layoutType = 'home';
                 return;
             }
 
-            this.layoutType = 'page';
-            this.pageTitle = pageLayouts[i];
-            next && next();
+            this.layoutType = 'index';
+            if (!fromHome) {
+                return;
+            }
+            viteWallet.Wallet.clearActiveAccount();
+            this.$store.commit('commitClearBalance');
         }
     }
 };

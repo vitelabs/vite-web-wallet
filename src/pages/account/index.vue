@@ -6,8 +6,8 @@
             <tokenCard v-for="token in tokenList" :key="token.id"
                        :opt="token" :sendTransaction="showTrans"></tokenCard>
         </div>
-        <div v-show="isShowTrans" class="transaction" @click="closeTrans">
-            <transaction ref="transaction" :token="activeToken" :closeTrans="closeTrans"></transaction>
+        <div v-show="isShowTrans" class="transaction">
+            <transaction :token="activeToken" :closeTrans="closeTrans"></transaction>
         </div>
     </div>
 </template>
@@ -55,13 +55,7 @@ export default {
             this.isShowTrans = true;
             this.activeToken = token;
         },
-        closeTrans(e) {
-            if (e && e.target && 
-                (this.$refs.transaction.$el.contains(e.target) || 
-                    this.$refs.transaction.$el === e.target)
-            ) {
-                return;
-            }
+        closeTrans() {
             this.isShowTrans = false;
             this.activeToken = null;
         }
@@ -76,7 +70,7 @@ export default {
     height: 100%;
     display: flex;
     flex-direction: column;
-    overflow: hidden;
+    overflow: auto;
     padding: 0 40px;
     .sync-block {
         width: 100%;
@@ -89,11 +83,12 @@ export default {
 }
 
 .transaction {
-    position: absolute;
+    position: fixed;
     top: 0;
     bottom: 0;
     right: 0;
     left: 0;
+    overflow: auto;
     display: flex;
     justify-content: center;
     align-items: center;

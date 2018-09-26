@@ -17,7 +17,7 @@ module.exports = {
         title: 'Settings',
         unlock: 'Unlock Secure Information',
         lang: 'Language',
-        block: 'Latest Block Height:',
+        block: 'Latest Block Height',
         version: 'Version',
         service: 'Customer Service',
         site: 'Official Website of Vite',
