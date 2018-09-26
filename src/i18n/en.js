@@ -110,7 +110,7 @@ module.exports = {
             remarksLong: 'Comment is too long! The input length should be within 180 English characters (or punctuations, 1 Chinese character = 6 English character)'
         },
         hint: {
-            token: 'Test tokens have be sent to your account, please check your account!',
+            token: 'VITE test tokens have be sent to your account, please check your account!',
             tErr: 'Get test token failed!',
             low: 'Insufficient account balance',
             wrong: 'Wrong Password!',
