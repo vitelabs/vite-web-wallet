@@ -149,15 +149,17 @@ export default {
             return true;
         },
         testMessage() {
-            let result = viteWallet.Types.isValidMessage(this.message);
-            if (result === 0) {
+            if (/\s+/g.test(this.message)) {
                 this.messageErr = this.$t('accDetail.valid.remarksFormat');
-                return false;
+                return;
             }
-            if (result === 1) {
+
+            let str = encodeURIComponent(this.message);
+            if (str.length > 180) {
                 this.messageErr = this.$t('accDetail.valid.remarksLong');
-                return false;
+                return;
             }
+
             this.messageErr = '';
             return true;
         },
