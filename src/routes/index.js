@@ -26,7 +26,7 @@ export default [
     },
     {
         name: 'record',
-        path: '/record:entropy',
+        path: '/record',
         component: record
     },
     {
