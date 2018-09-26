@@ -1,5 +1,5 @@
 <template>
-    <div v-show="showPro" class="process-wrapper">
+    <div class="process-wrapper">
         <div class="process-line">
             <span class="icon" :class="{
                 'active': active === 'createAccount',
@@ -19,19 +19,11 @@
 
 <script>
 export default {
-    mounted() {
-        let showList = ['createAccount', 'record'];
-
-        this.$router.afterEach((to, from)=>{
-            this.showPro = showList.indexOf(to.name) >= 0 && from.name !== 'restore';
-            this.active = to.name;
-        });
-    },
-    data() {
-        return {
-            showPro: false,
-            active: ''
-        };
+    props: {
+        active: {
+            type: String,
+            default: ''
+        }
     }
 };
 </script>

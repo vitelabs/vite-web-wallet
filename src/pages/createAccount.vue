@@ -32,20 +32,29 @@
                 'unuse': isCreating
             }" @click="valid">{{ activeAccount ? $t('create.finish') : $t('btn.next')}}</span>
         </div>
+
+        <process v-show="showPro" class="process" active="createAccount"></process>
     </div>
 </template>
 
 <script>
 import Vue from 'vue';
 import toast from 'utils/toast/index.js';
+import process from 'components/process';
 
 export default {
+    components: {
+        process
+    },
     mounted() {
         this.focusName();
     },
     data() {
+        let activeAccount = viteWallet.Wallet.getActiveAccount();
+        let showPro = !activeAccount;
         return {
-            activeAccount: viteWallet.Wallet.getActiveAccount(),
+            activeAccount,
+            showPro,
             name: '',
             pass1: '',
             pass2: '',
@@ -178,5 +187,8 @@ export default {
     .__btn_border {
         margin-right: 20px;
     }
+}
+.process {
+    margin-top: 60px;
 }
 </style>

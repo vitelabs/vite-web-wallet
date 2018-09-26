@@ -98,7 +98,7 @@ class Account {
 
     setDefaultAddr(addr) {
         if (!this.isWalletAcc) {
-            return;
+            return false;
         }
 
         let i;
@@ -109,13 +109,14 @@ class Account {
         }
 
         if (i >= this.addrs.length) {
-            return;
+            return false;
         }
 
         this.lock();    // Lock current default address
         this.defaultInx = i;    // Change default address
         this.save();    // Save default
         this.unLock();  // Unlock the current default address
+        return true;
     }
 
     getDefaultAddr() {

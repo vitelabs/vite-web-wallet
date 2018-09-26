@@ -1,7 +1,7 @@
 <template>
     <div class="page-layout-wrapper" @click="operate">
         <div class="page-wrapper">
-            <sidebar class="sidebar" :title="title"></sidebar>
+            <sidebar class="sidebar" :active="active"></sidebar>
             <div class="page-content">
                 <slot></slot>
             </div>
@@ -19,7 +19,7 @@ export default {
         sidebar
     },
     props: {
-        title: {
+        active: {
             type: String,
             default: '',
         }

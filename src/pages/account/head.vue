@@ -293,7 +293,7 @@ export default {
             margin-bottom: -7px;
         }
         .more-icon {
-            margin-bottom: -1px;
+            margin-left: 4px;
         }
     }
 }

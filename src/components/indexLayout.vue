@@ -5,21 +5,17 @@
             <change-lang class="change-lang __pointer"></change-lang>
         </div>
         <div class="confirm-wrapper">
-            <div class="confirm">
-                <slot></slot>
-                <process class="process"></process>
-            </div>
+            <div class="confirm"> <slot></slot> </div>
         </div>
     </div>
 </template>
 
 <script>
 import changeLang from 'components/changeLang';
-import process from 'components/process';
 
 export default {
     components: {
-        changeLang, process
+        changeLang
     }
 };
 </script>
@@ -57,9 +53,6 @@ export default {
             position: relative;
             width: 360px;
             text-align: center;
-            .process {
-                margin-top: 60px;
-            }
         }
     }
 }

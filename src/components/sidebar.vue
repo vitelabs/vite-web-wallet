@@ -41,23 +41,17 @@ export default {
         testNotice
     },
     props: {
-        title: {
+        active: {
             type: String,
             default: ''
         }
     },
     data() {
         return {
-            active: this.$route.name,
             addr: this.$route.params.addr || '',
             entropy: this.$route.params.entropy || '',
             isShowNotice: false
         };
-    },
-    mounted() {
-        this.$router.afterEach((to) => {
-            this.active = to.name;
-        });
     },
     methods: {
         overLogo() {

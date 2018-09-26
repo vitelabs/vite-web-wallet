@@ -17,7 +17,7 @@ module.exports = {
         title: '设置',
         unlock: '解锁安全信息',
         lang: '语言',
-        block: '当前区块高度:',
+        block: '当前区块高度',
         version: '版本',
         service: '客户服务',
         site: 'Vite官方网站',

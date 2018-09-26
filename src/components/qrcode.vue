@@ -26,7 +26,9 @@ export default {
         text: ''
     },
     data() {
-        return { qrcode: '' };
+        return { 
+            qrcode: '' 
+        };
     },
     mounted() {
         this.genCode();

@@ -1,15 +1,19 @@
 <template>
-    <mnemonic :title="'mnemonic.record'" :submit="login">
-        <div class="wrapper">{{ this.mnemonic }}</div>
-    </mnemonic>
+    <div>
+        <mnemonic :title="'mnemonic.record'" :submit="login">
+            <div class="wrapper">{{ this.mnemonic }}</div>
+        </mnemonic>
+        <process class="process" active="record"></process>
+    </div>
 </template>
 
 <script>
 import mnemonic from 'components/mnemonic.vue';
+import process from 'components/process';
 
 export default {
     components: {
-        mnemonic
+        mnemonic, process
     },
     data() {
         let activeAccount = viteWallet.Wallet.getActiveAccount();
@@ -34,5 +38,8 @@ export default {
 .wrapper {
     box-sizing: border-box;
     padding: 20px;
+}
+.process {
+    margin-top: 60px;
 }
 </style>
