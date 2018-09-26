@@ -51,6 +51,9 @@ export default {
     },
     methods: {
         copy() {
+            if (this.lock) {
+                return;
+            }
             copy(this.mnemonic);
             this.copySuccess = true;
             setTimeout(()=>{

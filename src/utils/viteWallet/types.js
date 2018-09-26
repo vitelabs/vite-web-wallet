@@ -10,7 +10,8 @@ class Types {
         if (/\s+/g.test(message)) {
             return 0;
         }
-        let hexStr = message ? this.utils.strToHex(message) : '';
+        let utf8Bytes = this.utils.strToUtf8Bytes(message);
+        let hexStr = utf8Bytes ? this.utils.bytesToHex(utf8Bytes) : '';
         if (hexStr.length > 180) {
             return 1;
         }

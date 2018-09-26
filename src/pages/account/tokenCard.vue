@@ -1,7 +1,7 @@
 <template>
     <div class="token-card">
         <div class="title">
-            <img :src="iconMap[opt.tokenName] || iconMap['default']" class="icon" />
+            <img :src="iconMap[opt.symbol] || iconMap['default']" class="icon" />
             <span class="tokenName">{{ opt.symbol }}</span>
         </div>
         <div class="body">
@@ -17,13 +17,15 @@
                 <span>{{ opt.unConfirmes || 0 }} {{ $t('accDetail.pend') }}</span>
             </div>
         </div>
-        <div class="btn __pointer" @click="sendTransaction(opt)">{{ $t('accDetail.sendTrans') }}</div>
+        <div class="btn __pointer" :class="{ unuse: !opt.id }" 
+             @click="sendTransaction(opt)">{{ $t('accDetail.sendTrans') }}</div>
     </div>
 </template>
 
 <script>
 import viteIcon from 'assets/imgs/vite.svg';
-import vccIcon from 'assets/imgs/VCC.svg';
+import vcpIcon from 'assets/imgs/VCC.svg';
+import vvIcon from 'assets/imgs/vv.svg';
 
 export default {
     props: {
@@ -44,8 +46,9 @@ export default {
     data () {
         return {
             iconMap: {
-                vite: viteIcon,
-                vcc: vccIcon,
+                VITE: viteIcon,
+                VCP: vcpIcon,
+                VV: vvIcon,
                 default: viteIcon
             }
         };
@@ -102,5 +105,8 @@ export default {
     line-height: 44px;
     text-align: center;
     color: #fff;
+    &.unuse {
+        background: #bfbfbf;
+    }
 }
 </style>

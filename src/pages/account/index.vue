@@ -2,7 +2,7 @@
     <div class="account-wrapper">
         <sync-block class="sync-block item"></sync-block>
         <account-head class="item"></account-head>
-        <div class="item">
+        <div class="item token-list">
             <tokenCard v-for="token in tokenList" :key="token.id"
                        :opt="token" :sendTransaction="showTrans"></tokenCard>
         </div>
@@ -30,14 +30,14 @@ export default {
     beforeMount() {
         const activeAccount = viteWallet.Wallet.getActiveAccount();
 
+        this.clearTime();
         balanceInfoInst = new timer(()=>{
             return this.$store.dispatch('getBalanceInfo', activeAccount);
         }, loopTime.ledger_getAccountByAccAddr);
         balanceInfoInst.start();
     },
     beforeDestroy () {
-        balanceInfoInst && balanceInfoInst.stop();
-        balanceInfoInst = null;
+        this.clearTime();
     },
     data() {
         return {
@@ -51,7 +51,14 @@ export default {
         }
     },
     methods: {
+        clearTime() {
+            balanceInfoInst && balanceInfoInst.stop();
+            balanceInfoInst = null;
+        },
         showTrans(token) {
+            if (!token.id) {
+                return;
+            }
             this.isShowTrans = true;
             this.activeToken = token;
         },
@@ -81,7 +88,10 @@ export default {
 .item {
     margin-top: 40px;
 }
-
+.token-list {
+    display: flex;
+    flex-wrap: wrap;
+}
 .transaction {
     position: fixed;
     top: 0;
