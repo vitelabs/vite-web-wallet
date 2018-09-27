@@ -210,19 +210,20 @@ export default {
                 right: 100%;
                 transform: translateX(20px);
                 background: #fff;
+                z-index: 1;
                 .code {
-                width: 146px;
-                height: 146px;
-                margin: 10px;
+                    width: 146px;
+                    height: 146px;
+                    margin: 10px;
                 }
                 .btn {
-                background: #007aff;
-                border-radius: 2px;
-                color: #fff;
-                margin: 10px 8px;
-                height: 28px;
-                text-align: center;
-                line-height: 28px;
+                    background: #007aff;
+                    border-radius: 2px;
+                    color: #fff;
+                    margin: 10px 8px;
+                    height: 28px;
+                    text-align: center;
+                    line-height: 28px;
                 }
             }
             &.copy {

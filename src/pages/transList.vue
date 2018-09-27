@@ -81,9 +81,6 @@ export default {
     beforeDestroy() {
         this.clearReTimeout();
     },
-    destroyed() {
-        this.clearReTimeout();
-    },
     methods: {
         goDetail(trans) {
             let locale = this.$i18n.locale === 'zh' ? 'zh/' : '';
@@ -112,7 +109,6 @@ export default {
 
             let fetchTime = new Date().getTime();
             lastFetchTime = fetchTime;
-
             this.currentPage = pageIndex;
             viteWallet.Ledger.getBlocks({
                 addr: this.address,
