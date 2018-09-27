@@ -14,12 +14,10 @@ module.exports = {
     },
     "globals": {
         "window": true,
-        "describe": true,
-        "it": true,
         "viteWallet": true,
-        "ViteJS": true,
         "$ViteJS": true,
-        "webViteEventEmitter": true
+        "webViteEventEmitter": true,
+        "_hmt": true
     },
     "extends": [
         "eslint:recommended",
