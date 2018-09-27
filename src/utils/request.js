@@ -1,9 +1,17 @@
 import qs from 'query-string';
+
 export default  function request({ method = 'GET', url, params = {} }) {
     method = method.toUpperCase();
+
     const xhr = new XMLHttpRequest();
-    const qsStr=qs.stringify(params);
-    method === 'GET'&&(url.indexOf('?') < 0 ? (url = `${url}?${qsStr}`) : (url = `${url}${qsStr}`));
+    const qsStr = qs.stringify(params);
+
+    method === 'GET' && (
+        url.indexOf('?') < 0 ? 
+            (url = `${url}?${qsStr}`) : 
+            (url = `${url}${qsStr}`)
+    );
+
     xhr.open(method, url, true);
     xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded; charset=utf-8');
     if (method === 'POST') {
@@ -11,6 +19,7 @@ export default  function request({ method = 'GET', url, params = {} }) {
     } else {
         xhr.send();
     }
+
     return new Promise((res, rej) => {
         xhr.onload = function () {
             if (xhr.status == 200) {
@@ -23,13 +32,16 @@ export default  function request({ method = 'GET', url, params = {} }) {
                 rej();
             }
         };
-        xhr.onerror = function () {
+        xhr.onerror = function (err) {
+            console.error(err);
             rej();
         };
-        xhr.onabort = function () {
+        xhr.onabort = function (x) {
+            console.warn(x);
             rej();
         };
-        xhr.ontimeout = function () {
+        xhr.ontimeout = function (time) {
+            console.warn(time);
             rej();
         };
     });

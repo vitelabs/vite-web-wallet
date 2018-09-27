@@ -10,14 +10,6 @@
             `${currentHeight} / ${targetHeight}`
         }}</span>
 
-        <!-- [TODO] images -->
-        <img src="../assets/imgs/sync_icon.svg"
-             v-show="statusText !== 'firstDone' && statusText !== 'sync'" 
-             @click="reloadBlock"
-             :class="{
-                 'icon': true,
-                 'loading': reloading || statusText === 'noNet' || statusText === 'noP2P'
-        }"/>
         <img src="../assets/imgs/done_icon.svg" class="icon" v-show="statusText === 'firstDone'" />
 
         <span v-show="statusText === 'sync'">
@@ -43,7 +35,6 @@ export default {
 
             p2pStatus: false,
             netStatus: false,
-            reloading: false,
 
             blockHeight: '0'
         };
@@ -86,22 +77,6 @@ export default {
         }
     },
     methods: {
-        reloadBlock() {
-            if (this.reloading || this.statusText === 'noNet') {
-                return;
-            }
-
-            this.reloading = true;
-            viteWallet.Ledger.reloadSyncInfo().then((data) => {
-                setTimeout(()=>{
-                    this.reloading = false;
-                }, 200);
-                this.syncData(data);
-            }).catch((err)=>{
-                this.reloading = false;
-                console.warn(err);
-            });
-        },
         updateStatusText(oldVal) {
             // Client has no network.
             if (!this.netStatus) {
@@ -167,18 +142,6 @@ export default {
         height: 16px;
         margin-bottom: -4px;
         margin-left: 20px;
-        &.loading {
-            animation: rotate 0.7s linear infinite;
-        }
-    }
-}
-
-@keyframes rotate {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
     }
 }
 </style>

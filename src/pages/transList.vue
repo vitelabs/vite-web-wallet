@@ -45,18 +45,23 @@
 <script>
 import pagination from 'components/pagination.vue';
 import date from 'utils/date.js';
+import timer from 'utils/asyncFlow';
 import ellipsisAddr from 'utils/ellipsisAddr.js';
+import loopTime from 'loopTime';
 
 const pageCount = 50;
-let reTimeout = null;
 let lastFetchTime = null;
+let transListInst = null;
 
 export default {
     components: {
         pagination
     },
     mounted() {
-        this.fetchTransList(0);
+        this.currentPage = 0;
+        this.startLoopTransList(() => {
+            return this.fetchTransList(this.currentPage);
+        });
     },
     data() {
         let activeAccount = viteWallet.Wallet.getActiveAccount();
@@ -79,7 +84,7 @@ export default {
         }
     },
     beforeDestroy() {
-        this.clearReTimeout();
+        this.stopLoopTransList();
     },
     methods: {
         goDetail(trans) {
@@ -88,32 +93,43 @@ export default {
         },
 
         toPage(pageNumber) {
-            this.fetchTransList(pageNumber - 1, true);
-        },
-
-        clearReTimeout() {
-            window.clearTimeout(reTimeout);
-            reTimeout = null;
-        },
-        fetchTransList(pageIndex, newPage = false) {
+            let pageIndex = pageNumber - 1;
             if ((pageIndex >= this.totalPage && pageIndex) || pageIndex < 0) {
                 return;
             }
 
-            let reFetch = () => {
-                reTimeout = window.setTimeout(() => {
-                    this.clearReTimeout();
-                    this.fetchTransList(this.currentPage);
-                }, 2000);
-            };
+            this.currentPage = pageIndex;
+            this.stopLoopTransList();
 
+            this.fetchTransList(this.currentPage, true).then((data)=>{
+                data && this.$refs.tableContent && (this.$refs.tableContent.scrollTop = 0);
+                this.startLoopTransList();
+            }).catch(()=>{
+                this.startLoopTransList();
+            });
+
+        },
+
+        startLoopTransList() {
+            this.stopLoopTransList();
+            transListInst = new timer(()=>{
+                return this.fetchTransList(this.currentPage);
+            }, loopTime.ledger_getBlocksByAccAddr);
+            transListInst.start();
+        },
+        stopLoopTransList() {
+            transListInst && transListInst.stop();
+            transListInst = null;
+        },
+
+        fetchTransList(pageIndex) {
             let fetchTime = new Date().getTime();
             lastFetchTime = fetchTime;
-            this.currentPage = pageIndex;
-            viteWallet.Ledger.getBlocks({
+
+            return viteWallet.Ledger.getBlocks({
                 addr: this.address,
                 index: this.currentPage,
-                pageCount: this.pageCount
+                pageCount
             }).then((data)=>{
                 if (pageIndex !== this.currentPage || 
                     fetchTime !== lastFetchTime ||
@@ -122,45 +138,43 @@ export default {
                 }
 
                 this.totalNum = data.totalNum || 0;
-                let list = data.list || [];
-                let nowList = [];
-
-                list.forEach((item) => {
-                    let confirms = item.confirmedTimes || 0;
-
-                    let status = 'unconfirmed';
-                    if (confirms && confirms > 0 && confirms <= 50) {
-                        status = 'confirms';
-                    } else if (confirms && confirms > 50) {
-                        status = 'confirmed';
-                    }
-
-                    let isSend = item.to && item.to !== this.address;
-
-                    let timestamp = item.timestamp * 1000;
-                    let transAddr = ellipsisAddr( isSend ? item.accountAddress : item.from );
-                    let amount = viteWallet.BigNumber.toBasic(item.amount, item.mintage.decimals);
-
-                    nowList.push({
-                        type: isSend ? 'send' : 'receive',
-                        status,
-                        confirms: `(${confirms})`,
-                        timestamp,
-                        date: date(timestamp, this.$i18n.locale),
-                        transAddr,
-                        amount: isSend ? ('-' + amount) : amount,
-                        hash: item.hash,
-                        token: item.mintage.symbol
-                    });
-                });
-                this.transList = nowList;
-
-                newPage && this.$refs.tableContent && (this.$refs.tableContent.scrollTop = 0);
-                reFetch();
-            }).catch((err) => {
-                console.warn(err);
-                reFetch();
+                this.transList = this.getTransList(data.list);
+                return data;
             });
+        },
+        getTransList(list) {
+            list = list || [];
+            let nowList = [];
+
+            list.forEach((item) => {
+                let confirms = item.confirmedTimes || 0;
+
+                let status = 'unconfirmed';
+                if (confirms && confirms > 0 && confirms <= 50) {
+                    status = 'confirms';
+                } else if (confirms && confirms > 50) {
+                    status = 'confirmed';
+                }
+
+                let isSend = !item.from;
+
+                let timestamp = item.timestamp * 1000;
+                let transAddr = ellipsisAddr( isSend ? item.to : item.from );
+                let amount = viteWallet.BigNumber.toBasic(item.amount, item.mintage.decimals);
+
+                nowList.push({
+                    type: isSend ? 'send' : 'receive',
+                    status,
+                    confirms: `(${confirms})`,
+                    timestamp,
+                    date: date(timestamp, this.$i18n.locale),
+                    transAddr,
+                    amount: isSend ? ('-' + amount) : amount,
+                    hash: item.hash,
+                    token: item.mintage.symbol
+                });
+            });
+            return nowList;
         }
     }
 };

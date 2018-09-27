@@ -106,6 +106,8 @@ export default {
         getTestToken() {
             request({
                 method: 'POST',
+                // url: 'https://testnet.vite.net/api/account/newtesttoken',
+                // url: 'https://test.vitewallet.com/api/account/newtesttoken',
                 url: '/api/account/newtesttoken',
                 params: {
                     accountAddress: this.account.addr

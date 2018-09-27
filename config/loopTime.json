@@ -1,6 +1,6 @@
 {
     "ledger_getAccountByAccAddr": 1000,
-    "ledger_getBlocksByAccAddr": 1000,
+    "ledger_getBlocksByAccAddr": 2000,
     "ledger_getUnconfirmedInfo": 1000,
     "ledger_getSnapshotChainHeight": 1000,
     "ledger_getInitSyncInfo": 1000,

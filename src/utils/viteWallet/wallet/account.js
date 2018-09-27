@@ -98,7 +98,7 @@ class Account {
 
     setDefaultAddr(addr) {
         if (!this.isWalletAcc) {
-            return false;
+            return true;
         }
 
         let i;
