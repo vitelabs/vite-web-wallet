@@ -10,7 +10,8 @@ module.exports = {
         prompt: 'Mnemonic seed phrase is used to restore your wallet, better write it down and keep it in a safe place where only you can access, otherwise your assets will be at tremendous risks',
         placeholder:'Please input your mnemonic seed phrase',
         empty: 'The input of seed phrase cannot be empty',
-        error: 'Incorrect seed phrase. Try again'
+        error: 'Incorrect seed phrase. Try again',
+        hint: 'Mnemonic format: words, spaces, words... spaces, words',  // ???
     },
 
     setting: {
@@ -42,7 +43,7 @@ module.exports = {
         firstDoing: 'Initializing',
         blockHeight: 'Snapshot Block Height'
     },
-    test:{  // [TODO] Need to update ?????
+    test:{  // ?????
         t: 'Preview Version',
         txt1: 'Vite wallet is full node wallet in preview version, it achieves the functions of generating accounts in DAG ledger structure, searching balance, sending and receiving default transactions as well as getting test token.',
         txt2: 'Accounts are not supported importing private keys for now, please kindly keep your account files and passwords',
@@ -67,7 +68,7 @@ module.exports = {
         hint: {
             nameInput: 'Please input account name',
             nameLong: 'Account name cannot exceed 32 characters!',
-            long: 'Your input must between 1-32 characters!',
+            long: 'Your input cannot exceed 32 characters!',
             name: 'Account name only supports Chinese, English, numbers and underscores',
             consistency: 'Please enter the same password!',
             pwFormat: 'Wrong password format. The password only supports English, half-width symbols, numbers.',
@@ -78,7 +79,8 @@ module.exports = {
         text: 'Drag and drop files there',
         err1: 'Imported illegal file!',
         err2: 'Only one file can be imported!',
-        guide: 'Open folder to import'
+        guide: 'Open folder to import',
+        hint: 'Note: The way to import encrypted files only supports single addresses and does not support derived addresses. Cross-platform operations are recommended through mnemonics.' // ???
     },
 
     // account detail

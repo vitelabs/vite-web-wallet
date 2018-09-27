@@ -46,11 +46,8 @@
 import pagination from 'components/pagination.vue';
 import date from 'utils/date.js';
 import timer from 'utils/asyncFlow';
-import ellipsisAddr from 'utils/ellipsisAddr.js';
 import loopTime from 'loopTime';
 
-const pageCount = 50;
-let lastFetchTime = null;
 let transListInst = null;
 
 export default {
@@ -58,7 +55,7 @@ export default {
         pagination
     },
     mounted() {
-        this.currentPage = 0;
+        this.currentPage = this.$store.state.transList.currentPage;
         this.startLoopTransList(() => {
             return this.fetchTransList(this.currentPage);
         });
@@ -66,21 +63,29 @@ export default {
     data() {
         let activeAccount = viteWallet.Wallet.getActiveAccount();
         let address = activeAccount.getDefaultAddr();
-
+        console.log(this.$store.state.transList.currentPage);
         return {
             acc: activeAccount,
             address, 
-            transList: [],
-            currentPage: 0,
-            totalNum: 0
+            currentPage: this.$store.state.transList.currentPage
         };
     },
     computed: {
         totalPage() {
-            return viteWallet.BigNumber.dividedToNumber(this.totalNum, pageCount);
+            return this.$store.getters.totalPage;
         },
         pageNumber() {
             return `${this.currentPage + 1}/${this.totalPage}`;
+        },
+        transList() {
+            let transList = this.$store.getters.transList;
+            
+            let nowList = [];
+            transList.forEach(trans => {
+                trans.date = date(trans.timestamp, this.$i18n.locale);
+                nowList.push(trans);
+            });
+            return nowList;
         }
     },
     beforeDestroy() {
@@ -123,58 +128,10 @@ export default {
         },
 
         fetchTransList(pageIndex) {
-            let fetchTime = new Date().getTime();
-            lastFetchTime = fetchTime;
-
-            return viteWallet.Ledger.getBlocks({
-                addr: this.address,
-                index: this.currentPage,
-                pageCount
-            }).then((data)=>{
-                if (pageIndex !== this.currentPage || 
-                    fetchTime !== lastFetchTime ||
-                    !data) {
-                    return;
-                }
-
-                this.totalNum = data.totalNum || 0;
-                this.transList = this.getTransList(data.list);
-                return data;
+            return this.$store.dispatch('fetchTransList', {
+                address: this.address,
+                pageIndex
             });
-        },
-        getTransList(list) {
-            list = list || [];
-            let nowList = [];
-
-            list.forEach((item) => {
-                let confirms = item.confirmedTimes || 0;
-
-                let status = 'unconfirmed';
-                if (confirms && confirms > 0 && confirms <= 50) {
-                    status = 'confirms';
-                } else if (confirms && confirms > 50) {
-                    status = 'confirmed';
-                }
-
-                let isSend = !item.from;
-
-                let timestamp = item.timestamp * 1000;
-                let transAddr = ellipsisAddr( isSend ? item.to : item.from );
-                let amount = viteWallet.BigNumber.toBasic(item.amount, item.mintage.decimals);
-
-                nowList.push({
-                    type: isSend ? 'send' : 'receive',
-                    status,
-                    confirms: `(${confirms})`,
-                    timestamp,
-                    date: date(timestamp, this.$i18n.locale),
-                    transAddr,
-                    amount: isSend ? ('-' + amount) : amount,
-                    hash: item.hash,
-                    token: item.mintage.symbol
-                });
-            });
-            return nowList;
         }
     }
 };

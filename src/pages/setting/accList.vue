@@ -66,6 +66,7 @@ export default {
             }
             this.defaultAddr = this.activeAccount.getDefaultAddr();
             this.$store.commit('commitClearBalance');
+            this.$store.commit('commitClearTransList');
         }
     }
 };

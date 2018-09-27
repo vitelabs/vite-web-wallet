@@ -8,6 +8,7 @@
                 {{ errMsg === 'dragDrop.err2' || errMsg === 'dragDrop.err1' ? $t(errMsg) : errMsg }}
             </span>
         </div>
+        <div class="hint">{{ $t('dragDrop.hint') }}</div>
         <div @click="openFile" class="__btn __btn_all_in __pointer">
             <input ref="file" type="file" name="file" style="display:none"/>
             {{ $t('dragDrop.guide') }}
@@ -73,6 +74,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.hint {
+    font-size: 14px;
+    color: #FFFFFF;
+    text-align: center;
+    line-height: 20px;
+    margin-bottom: 30px;
+    margin-top: 30px;
+}
+
 .file-drag {
     position: relative;
     height: 228px;
@@ -92,6 +102,4 @@ export default {
 .__btn {
     margin-top: 20px;
 }
-
 </style>
-

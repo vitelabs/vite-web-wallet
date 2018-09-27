@@ -151,15 +151,27 @@ class Account {
     }) {
         let verifyRes = this.verify(pass);
         if (!verifyRes) {
-            return Promise.reject('passErr');
+            return Promise.reject({
+                code: 34001,
+                message: 'passErr'
+            });
         }
 
         let fromAddr = this.addrs[this.defaultInx].hexAddr;
         let privKey = this.addrs[this.defaultInx].privKey;
 
-        return $ViteJS.Wallet.Account.sendTx({
-            fromAddr, toAddr, tokenId, amount, message
-        }, privKey);
+        return new Promise((res, rej) => {
+            $ViteJS.Wallet.Account.sendTx({
+                fromAddr, toAddr, tokenId, amount, message
+            }, privKey).then(({ error })=>{
+                if (error) {
+                    return rej(error);
+                }
+                return res();
+            }).catch((err)=>{
+                return rej(err);
+            });
+        }); 
     }
 
     getBalance() {
@@ -173,7 +185,7 @@ class Account {
             methodName: 'ledger_getUnconfirmedInfo',
             params: [ addr ]
         }]).then((data)=>{
-            if (!data || !data.length) {
+            if (!data || !data.length || data.length < 2) {
                 return null;
             }
 

@@ -208,15 +208,17 @@ export default {
                 console.warn(err);
                 this.loading = false;
 
-                if (err && err.code && err.code === 4001) {
+                if (err && err.code && err.code === 34001) {
+                    toast(this.$t('transList.valid.pswd'));
                     this.passwordErr = this.$t('transList.valid.pswd');
                     return;
-                } else if (err && err.code && err.code === 5001) {
+                } else if (err && err.code && err.code === 35001) {
+                    toast(this.$t('transList.valid.bal'));
                     this.amountErr = this.$t('transList.valid.bal');
                     return;
                 }
 
-                toast(err && err.message? err.message : this.$t('transList.valid.err'));
+                toast(err && err.message ? err.message : this.$t('transList.valid.err'));
             });
         },
         _closeTrans() {
