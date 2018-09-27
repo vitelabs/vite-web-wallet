@@ -78,6 +78,9 @@ export default {
             return `${this.currentPage + 1}/${this.totalPage}`;
         }
     },
+    beforeDestroy() {
+        this.clearReTimeout();
+    },
     destroyed() {
         this.clearReTimeout();
     },
