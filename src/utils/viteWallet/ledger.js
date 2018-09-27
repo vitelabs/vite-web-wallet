@@ -110,10 +110,6 @@ class Ledger {
                 totalNum: account.blockHeight
             };
         });
-
-        // return $ViteJS.Vite.Ledger.getBlocksByAccAddr({
-        //     addr, index, needTokenInfo = true
-        // });
     }
 }
 

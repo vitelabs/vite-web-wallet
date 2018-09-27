@@ -32,9 +32,7 @@ const mutations = {
 };
 
 const actions = {
-    getBalanceInfo({
-        commit
-    }, activeAccount) {
+    getBalanceInfo({ commit }, activeAccount) {
         return activeAccount.getBalance().then(data => {
             commit('commitBalanceInfo', data);
         }).catch(e => {
