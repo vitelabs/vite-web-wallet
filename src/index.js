@@ -51,6 +51,7 @@ router.beforeEach((to, from, next) => {
         });
         return;
     }
+    _hmt.push(['_trackPageview', to.name]);
     next();
 });
 
