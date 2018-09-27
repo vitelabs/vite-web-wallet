@@ -33,7 +33,7 @@ export function stringify(o) {
     const _targetAddress=targetAddress||'';
     const _chain_id=chain_id?`@${chain_id}`:'';
     const _function_name=function_name?`\\${function_name}`:'';
-    const _params=params?`?${qs.stringify(params)}`:'';
+    const _params=params?`?${qs.stringify(params,{encode:false})}`:'';
     const str=`${_schema}${_prefix}${_targetAddress}${_chain_id}${_function_name}${_params}`;
     return str;
 }
