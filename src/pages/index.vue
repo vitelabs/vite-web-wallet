@@ -51,7 +51,10 @@ export default {
                 return;
             }
             viteWallet.Wallet.clearActiveAccount();
+
+            // clearAll
             this.$store.commit('commitClearBalance');
+            this.$store.commit('commitClearTransList');
         }
     }
 };

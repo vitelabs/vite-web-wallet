@@ -58,6 +58,7 @@ export default {
 
 <style lang='scss' scoped>
 .token-card {
+    box-sizing: border-box;
     position: relative;
     width: 254px;
     background: #fff;
@@ -72,6 +73,7 @@ export default {
     height: 56px;
     display: flex;
     align-items: center;
+    box-sizing: border-box;
     .icon {
         margin-left: 25px;
     }
@@ -83,12 +85,14 @@ export default {
 .body {
     padding: 0 30px 20px;
     .item {
+        height: 22px;
+        line-height: 22px;
         display: flex;
         justify-content: space-between;
         margin-top: 20px;
         .balance {
-        font-size: 20px;
-        color: #007aff;
+            font-size: 20px;
+            color: #007aff;
         }
     }
     .tips {

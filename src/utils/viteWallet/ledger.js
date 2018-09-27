@@ -25,6 +25,11 @@ class Ledger {
         };
 
         $ViteJS.Vite.Ledger.getInitSyncInfo().then(({ result })=>{
+            if (!result) {
+                loop();
+                return;
+            }
+
             this.startHeight = result.startHeight;
             this.targetHeight = result.targetHeight;
             this.currentHeight = result.currentHeight;
@@ -60,8 +65,10 @@ class Ledger {
         };
 
         $ViteJS.Vite.Ledger.getSnapshotChainHeight().then(({ result })=>{
-            this.currentHeight = result;
-            webViteEventEmitter.emit('currentHeight', this.currentHeight);
+            if (result) {
+                this.currentHeight = result;
+                webViteEventEmitter.emit('currentHeight', this.currentHeight);
+            }
 
             loop();
         }).catch(()=>{
@@ -106,8 +113,8 @@ class Ledger {
             }
             let account = data[1].result;
             return {
-                list: data[0].result,
-                totalNum: account.blockHeight
+                list: data[0].result || [],
+                totalNum: account && account.blockHeight ? account.blockHeight : 0
             };
         });
     }

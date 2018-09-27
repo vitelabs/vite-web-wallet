@@ -1,4 +1,8 @@
-const viteTokenId = 'tti_000000000000000000004cfd';
+const TokenIds = {
+    VITE: 'tti_000000000000000000004cfd',
+    VCP: 'tti_12ea0c02170304090a5ac879',
+    VV: 'VV'
+};
 
 const state = {
     unConfirmed: {
@@ -67,17 +71,17 @@ const getters = {
             tokenInfo[mintage.id].decimals = mintage.decimals;
         });
 
-        // [TODO] Only one token VITE, now.
-        tokenInfo[viteTokenId] = tokenInfo[viteTokenId] || {
-            balance: '0',
-            fundFloat: '0',
-            symbol: 'VITE',
-            decimals: '0'
-        };
-        tokenInfo[viteTokenId].unConfirmes = state.unConfirmes;
+        for (let symbol in TokenIds) {
+            tokenInfo[ TokenIds[symbol] ] = tokenInfo[ TokenIds[symbol] ] || {
+                balance: '0',
+                fundFloat: '0',
+                symbol: symbol,
+                decimals: '0'
+            };
+            // [TODO] API Only one token VITE, now.
+            symbol === 'VITE' && (tokenInfo[ TokenIds[symbol] ].unConfirmes = state.unConfirmes);
+        }
 
-        tokenInfo['VCP'] = { symbol: 'VCP' };
-        tokenInfo['VV'] = { symbol: 'VV' };
         return tokenInfo;
     }
 };
