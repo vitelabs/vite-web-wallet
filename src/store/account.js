@@ -1,7 +1,7 @@
 const TokenIds = {
     VITE: 'tti_000000000000000000004cfd',
     VCP: 'tti_12ea0c02170304090a5ac879',
-    VV: 'VV'
+    VV: 'tti_b6187a150d175e5a165b1c5b'
 };
 
 const state = {
