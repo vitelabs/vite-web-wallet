@@ -37,7 +37,7 @@ export default {
 
             operateTimeout = setTimeout(()=>{
                 operateTimeout = null;
-                this.logout();
+                location.reload();
             }, 5 * 60 * 1000);
         },
         logout() {
