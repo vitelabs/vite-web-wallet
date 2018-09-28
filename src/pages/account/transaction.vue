@@ -95,7 +95,7 @@ export default {
             clearTimeout(inAddrTimeout);
             inAddrTimeout = null;
 
-            inAddrTimeout = setTimeout(async ()=> {
+            inAddrTimeout = setTimeout(()=> {
                 inAddrTimeout = null;
                 
                 if (!this.inAddress) {
