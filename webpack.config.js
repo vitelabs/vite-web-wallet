@@ -1,7 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const merge = require('webpack-merge');
 const devConfig = require('./webpackConf/dev.config.js');
@@ -25,7 +25,7 @@ let webpackConfig = {
             template: path.join(__dirname, 'index.html')
         }),
         new VueLoaderPlugin(),
-        new BundleAnalyzerPlugin()
+        // new BundleAnalyzerPlugin()
     ],
     module: {
         rules: [{
