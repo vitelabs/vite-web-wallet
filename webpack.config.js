@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const merge = require('webpack-merge');
@@ -13,7 +14,8 @@ const SRC_PATH = path.join(__dirname, 'src');
 let webpackConfig = {
     mode: process.env.NODE_ENV || 'development',
     entry: {
-        index: path.join(__dirname, 'src/index.js')
+        index: path.join(__dirname, 'src/index.js'),
+        vendor: ['vue', 'vuex', 'vue-router']
     },
     output: {
         path: path.join(__dirname, './static'),
@@ -22,11 +24,37 @@ let webpackConfig = {
     plugins: [
         new HtmlWebpackPlugin({
             title: 'Vite Wallet',
+            favicon: path.join(SRC_PATH, 'assets/imgs/icon.png'),
             template: path.join(__dirname, 'index.html')
         }),
         new VueLoaderPlugin(),
         // new BundleAnalyzerPlugin()
     ],
+    
+    optimization: {
+        splitChunks:{
+            cacheGroups: {
+                commons: {
+                    test: /[\\/]node_modules[\\/]/,
+                    name: 'vendor',
+                    chunks: 'all'
+                }
+            }
+        },
+        minimizer: [
+            // we specify a custom UglifyJsPlugin here to get source maps in production
+            new UglifyJsPlugin({
+                cache: true,
+                parallel: true,
+                uglifyOptions: {
+                    compress: false,
+                    ecma: 6,
+                    mangle: true
+                },
+                sourceMap: false
+            })
+        ]
+    },
     module: {
         rules: [{
             test: /\.vue$/,
