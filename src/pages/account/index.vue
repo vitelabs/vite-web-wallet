@@ -103,5 +103,6 @@ export default {
     justify-content: center;
     align-items: center;
     background: rgba(0, 0, 0, 0.6);
+    z-index: 2;
 }
 </style>
