@@ -8,10 +8,10 @@ module.exports = {
         restore: 'Restore Account by Seed Phrase',
         record: 'Backup Seed Phrase',
         prompt: 'Mnemonic seed phrase is used to restore your wallet, better write it down and keep it in a safe place where only you can access, otherwise your assets will be at tremendous risks',
-        placeholder:'Please input your mnemonic seed phrase',
+        placeholder: 'Please input your mnemonic seed phrase',
         empty: 'The input of seed phrase cannot be empty',
         error: 'Incorrect seed phrase. Try again',
-        hint: 'Mnemonic format: words, spaces, words... spaces, words',  // ???
+        hint: 'Mnemonic format: words, spaces, words... spaces, words',
     },
 
     setting: {
@@ -43,10 +43,11 @@ module.exports = {
         firstDoing: 'Initializing',
         blockHeight: 'Snapshot Block Height'
     },
-    test:{  // ?????
+    test: {
         t: 'Preview Version',
-        txt1: 'Vite wallet is full node wallet in preview version, it achieves the functions of generating accounts in DAG ledger structure, searching balance, sending and receiving default transactions as well as getting test token.',
-        txt2: 'Accounts are not supported importing private keys for now, please kindly keep your account files and passwords',
+        txt1: 'Vite’s Web wallet is lightweight-node wallet.',
+        txt2: 'Now, it can generate account based on DAG ledger, check account balance, send transactions, receive transactions in default mode, acquire test tokens, check tokens issued by system and etc.',
+        txt3: 'Support finding the mnemonic word of account and login by loading keystore file.',
         v: 'Current version: Preview Version'
     },
 
@@ -80,7 +81,7 @@ module.exports = {
         err1: 'Imported illegal file!',
         err2: 'Only one file can be imported!',
         guide: 'Open folder to import',
-        hint: 'Note: The way to import encrypted files only supports single addresses and does not support derived addresses. Cross-platform operations are recommended through mnemonics.' // ???
+        hint: 'PS Login by loading keystore file doesn’t support creating address, using mnemonic word is recommended when login in multi-platform.'
     },
 
     // account detail

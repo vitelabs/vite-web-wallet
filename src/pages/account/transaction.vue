@@ -37,17 +37,14 @@
             </div>
 
             <div class="row">
-                <div class="row-t">
-                    {{ $t('accDetail.password') }}
-                    <span v-show="passwordErr" class="err">{{ passwordErr }}</span>
-                </div>
+                <div class="row-t">{{ $t('accDetail.password') }}</div>
                 <div class="row-content">
                     <input v-model="password" type="password" :placeholder="$t('create.input')"  />
                 </div>
             </div>
 
             <div class="btn __pointer" :class="{
-                'unuse': loading || amountErr || !isValidAddress || passwordErr || messageErr
+                'unuse': loading || amountErr || !isValidAddress || messageErr
             }" @click="validTrans">{{ $t('accDetail.transfer') }}</div>
         </div>
     </div>
@@ -88,7 +85,6 @@ export default {
 
             isValidAddress: true,
             amountErr: '',
-            passwordErr: '',
             messageErr: '',
 
             loading: false
@@ -114,10 +110,6 @@ export default {
                     this.isValidAddress = false;
                 }
             }, 500);
-        },
-        password: function() {
-            this.password && (this.passwordErr = '');
-            !this.password && (this.passwordErr = this.$t('transList.valid.pswd'));
         },
         amount: function() {
             clearTimeout(amountTimeout);
@@ -175,11 +167,12 @@ export default {
             if (!this.testAmount() || !this.testMessage()) {
                 return;
             }
-            if (!this.password) {
-                this.passwordErr = this.$t('transList.valid.pswd');
-            }
-            if (this.amountErr || !this.isValidAddress || this.passwordErr) {
+            if (this.amountErr || !this.isValidAddress) {
                 return;
+            }
+            if (!this.password) {
+                toast(this.$t('transList.valid.pswd'));
+                return;            
             }
 
             this.transfer();
@@ -210,7 +203,6 @@ export default {
 
                 if (err && err.code && err.code === 34001) {
                     toast(this.$t('transList.valid.pswd'));
-                    this.passwordErr = this.$t('transList.valid.pswd');
                     return;
                 } else if (err && err.code && err.code === 35001) {
                     toast(this.$t('transList.valid.bal'));
@@ -228,7 +220,6 @@ export default {
             this.message = '';
             this.isValidAddress = true;
             this.amountErr = '';
-            this.passwordErr = '';
             this.messageErr = '';
             this.closeTrans();
         }

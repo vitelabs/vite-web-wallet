@@ -4,6 +4,7 @@
             <div class="hover-title">{{ $t('test.t') }}</div>
             <div class="hover-content">{{ $t('test.txt1') }}</div>
             <div class="hover-content">{{ $t('test.txt2') }}</div>
+            <div class="hover-content">{{ $t('test.txt3') }}</div>
             <div class="hover-content bold">{{ $t('test.v') }}</div>
         </div>
     </div>
@@ -23,7 +24,6 @@
 .hover-notice {
     max-width: 260px;
     padding: 30px;
-    word-break: break-all;
     text-align: left;
     background: #FFFFFF;
     border: 1px solid #E5EDF3;
