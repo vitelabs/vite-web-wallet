@@ -12,7 +12,7 @@ import routes from 'routes/index';
 import i18nConfig from 'i18n';
 
 import 'utils/eventEmitter.js';
-import './utils/viteWallet/index.js';
+import 'utils/viteWallet/index.js';
 
 import store from './store';
 
@@ -51,7 +51,8 @@ router.beforeEach((to, from, next) => {
         });
         return;
     }
-    _hmt.push(['_trackPageview', to.name]);
+
+    _hmt.push(['_trackPageview', to.path]);
     next();
 });
 

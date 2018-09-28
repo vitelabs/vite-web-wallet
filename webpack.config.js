@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const merge = require('webpack-merge');
 const devConfig = require('./webpackConf/dev.config.js');
@@ -23,7 +24,8 @@ let webpackConfig = {
             title: 'Vite Wallet',
             template: path.join(__dirname, 'index.html')
         }),
-        new VueLoaderPlugin()
+        new VueLoaderPlugin(),
+        new BundleAnalyzerPlugin()
     ],
     module: {
         rules: [{
