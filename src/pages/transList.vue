@@ -63,7 +63,6 @@ export default {
     data() {
         let activeAccount = viteWallet.Wallet.getActiveAccount();
         let address = activeAccount.getDefaultAddr();
-        console.log(this.$store.state.transList.currentPage);
         return {
             acc: activeAccount,
             address, 
