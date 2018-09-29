@@ -34,11 +34,6 @@ let webpackConfig = {
     optimization: {
         splitChunks:{
             cacheGroups: {
-                // commons: {
-                //     name: 'commons',
-                //     chunks: 'initial',
-                //     minChunks: 2
-                // },
                 vendors: {
                     test: /[\\/]node_modules[\\/]/,
                     name: 'vendor',

@@ -56,11 +56,15 @@ router.beforeEach((to, from, next) => {
     next();
 });
 
-new Vue({
-    el: '#app',
-    components: { App },
-    template: '<App/>',
-    store,
-    router,
-    i18n
-});
+let element  = document.getElementById('loading');
+element.className += ' big-spinner';
+setTimeout(() => {
+    new Vue({
+        el: '#app',
+        components: { App },
+        template: '<App/>',
+        store,
+        router,
+        i18n
+    });
+}, 1100);
