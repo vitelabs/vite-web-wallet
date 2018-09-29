@@ -137,6 +137,7 @@ class Wallet {
         // keystore = JSON.parse(keystoreStr);
 
         this.newActiveAcc({
+            pass,
             keystore,
             addrs: [{
                 hexAddr: addr,
@@ -166,6 +167,7 @@ class Wallet {
             let defaultInx = +acc.defaultInx > 10 || +acc.defaultInx < 0 ? 0 : +acc.defaultInx;
 
             this.newActiveAcc({
+                pass,
                 entropy, defaultInx, addrs, 
                 encryptObj: acc.encryptObj, 
                 addrNum: acc.addrNum, 

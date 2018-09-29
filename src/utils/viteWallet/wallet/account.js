@@ -4,13 +4,14 @@ const namePre = 'account';
 
 class Account {
     constructor({
-        entropy, encryptObj, addrNum, defaultInx, addrs, name, keystore
+        entropy, encryptObj, addrNum, defaultInx, addrs, name, keystore, pass
     }) {
         this.isWalletAcc = !keystore;
         this.name = checkName(name);
 
         // Keystore account
         this.keystore = keystore;
+        this.pass = pass;
 
         // Wallet account
         this.entropy = entropy;
@@ -24,6 +25,10 @@ class Account {
     }
 
     verify(pass) {
+        if (this.pass) {
+            return this.pass === pass;
+        }
+
         if (this.isWalletAcc) {
             return !this.encryptObj ? false : $ViteJS.Wallet.Account.verify(this.encryptObj, pass);
         }
