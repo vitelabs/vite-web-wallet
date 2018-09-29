@@ -57,11 +57,11 @@ router.beforeEach((to, from, next) => {
 });
 
 let element  = document.getElementById('loading');
-element.className += ' big-spinner';
+element.className += 'spinner big-spinner';
 
 setTimeout(() => {
-    element.className = 'spinner big-spinner dis';
-}, 2200);
+    element.className += ' dis';
+}, 1200);
 
 setTimeout(() => {
     new Vue({
@@ -72,4 +72,4 @@ setTimeout(() => {
         router,
         i18n
     });
-}, 2800);
+}, 1800);
