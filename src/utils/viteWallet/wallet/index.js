@@ -132,6 +132,10 @@ class Wallet {
             return false;
         }
 
+        // let obj = $ViteJS.Vite.Account.newHexAddr(privKey);
+        // let keystoreStr = $ViteJS.Wallet.Keystore.encrypt(obj, pass);
+        // keystore = JSON.parse(keystoreStr);
+
         this.newActiveAcc({
             keystore,
             addrs: [{
@@ -140,6 +144,8 @@ class Wallet {
             }],
             name: acc.name
         });
+        // this.activeAccount.save();
+
         setLast({
             addr,
             name: acc.name
