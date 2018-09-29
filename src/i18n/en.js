@@ -7,11 +7,11 @@ module.exports = {
         title:'Mnemonic',
         restore: 'Restore Account by Seed Phrase',
         record: 'Backup Seed Phrase',
-        prompt: 'Mnemonic seed phrase is used to restore your wallet, better write it down and keep it in a safe place where only you can access, otherwise your assets will be at tremendous risks',
+        prompt: 'Mnemonic seed phrase is used to restore your wallet, better write it down and keep it in a safe place where only you can access, otherwise your assets will be at tremendous risks.',
         placeholder: 'Please input your mnemonic seed phrase',
         empty: 'The input of seed phrase cannot be empty',
         error: 'Incorrect seed phrase. Try again',
-        hint: 'Mnemonic format: words, spaces, words... spaces, words',
+        hint: 'Mnemonic format: words, spaces, words... spaces, words.',
     },
 
     setting: {

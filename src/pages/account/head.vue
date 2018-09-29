@@ -86,7 +86,7 @@ export default {
             this.copySuccess = true;
             setTimeout(() => {
                 this.copySuccess = false;
-            }, 500);
+            }, 1000);
         },
         toggleQrCode() {
             this.qrcodeShow = !this.qrcodeShow;
@@ -106,9 +106,7 @@ export default {
         getTestToken() {
             request({
                 method: 'POST',
-                // url: 'https://testnet.vite.net/api/account/newtesttoken',
-                // url: 'https://test.vitewallet.com/api/account/newtesttoken',
-                url: '/api/account/newtesttoken',
+                url: 'https://testnet.vite.net/api/account/newtesttoken',
                 params: {
                     accountAddress: this.account.addr
                 }
