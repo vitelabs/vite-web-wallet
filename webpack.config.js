@@ -24,7 +24,7 @@ let webpackConfig = {
     plugins: [
         new HtmlWebpackPlugin({
             title: 'Vite Wallet',
-            favicon: path.join(SRC_PATH, 'assets/imgs/icon.png'),
+            favicon: path.join(SRC_PATH, 'assets/imgs/logo.png'),
             template: path.join(__dirname, 'index.html')
         }),
         new VueLoaderPlugin(),
@@ -34,7 +34,12 @@ let webpackConfig = {
     optimization: {
         splitChunks:{
             cacheGroups: {
-                commons: {
+                // commons: {
+                //     name: 'commons',
+                //     chunks: 'initial',
+                //     minChunks: 2
+                // },
+                vendors: {
                     test: /[\\/]node_modules[\\/]/,
                     name: 'vendor',
                     chunks: 'all'
