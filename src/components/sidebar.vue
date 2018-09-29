@@ -29,7 +29,8 @@
 
             <div class="icon logout __pointer" @click="logout" 
                  @mouseenter="enterLogout" @mouseleave="leaveLogout">
-                <img :src="logoutIcon" />
+                <img v-show="!logoutHover" :src="logoutDefault" />
+                <img v-show="logoutHover" :src="logoutActive" />
             </div>
         </div>
     </div>
@@ -61,7 +62,8 @@ export default {
     data() {
         return {
             isShowNotice: false,
-            
+            logoutHover: false,
+
             viteLogo,
             home,
             homeActive,
@@ -69,7 +71,8 @@ export default {
             sendActive,
             setting,
             settingActive,
-            logoutIcon: logoutDefault
+            logoutDefault,
+            logoutActive
         };
     },
     methods: {
@@ -81,10 +84,10 @@ export default {
         },
 
         enterLogout() {
-            this.logoutIcon = logoutActive;
+            this.logoutHover = true;
         },
         leaveLogout() {
-            this.logoutIcon = logoutDefault;
+            this.logoutHover = false;
         },
         logout() {
             let activeAccount = viteWallet.Wallet.getActiveAccount();
