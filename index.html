@@ -20,9 +20,10 @@
         <div id="app">
             <div class="app-loading-wrapper">
                 <div id='loading' class="spinner spinner-animate">
-                    <svg class="loading" xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 32 32">
+                    <svg class="loading" xmlns="http://www.w3.org/2000/svg" width="380" height="380" viewBox="0 0 380 380">
                         <defs>
-                            <linearGradient id="logo-a" x1="0%" x2="136.343%" y1="0%" y2="155.449%">
+                            <rect id="logo-a" width="512" height="512"/>
+                            <linearGradient id="logo-b" x1="0%" x2="136.343%" y1="0%" y2="155.449%">
                             <stop offset="0%" stop-color="#052EF5"/>
                             <stop offset="31.474%" stop-color="#0D6DF0"/>
                             <stop offset="49.184%" stop-color="#0B92E7"/>
@@ -30,7 +31,13 @@
                             <stop offset="100%" stop-color="#00E0F2"/>
                             </linearGradient>
                         </defs>
-                        <path fill="url(#logo-a)" fill-rule="evenodd" d="M0,8.33362901 L9.90222651,6.10844998 L8.91537912,31.0726181 L0,8.33362901 Z M12.1651143,5.67998613 L32,1 L9.22836495,31.1056237 L12.1651143,5.67998613 Z"/>
+                        <g fill="none" fill-rule="evenodd" transform="translate(-66 -66)">
+                            <mask id="logo-c" fill="#fff">
+                            <use xlink:href="#logo-a"/>
+                            </mask>
+                            <use fill="#FFF" xlink:href="#logo-a"/>
+                            <path fill="url(#logo-b)" d="M119.926827,194.207608 L211.364459,173.660199 L202.251863,404.180519 L119.926827,194.207608 Z M232.260073,169.703744 L415.416354,126.488528 L205.141989,404.485294 L232.260073,169.703744 Z" mask="url(#logo-c)"/>
+                        </g>
                     </svg>
                 </div>
             </div>
@@ -42,29 +49,30 @@
                 padding: 0;
             }
             .app-loading-wrapper {
-                background: #f1f1f1;
+                background: #fff;
                 height: 100vh;
                 margin: 0;
                 padding: 0;
                 display: flex;
                 justify-content: center;
                 align-items: center;
-            }
-            .spinner-animate {
+                transition: all 4.8s ease-in-out;
                 -webkit-animation: sk-rotateplane 2.4s infinite ease-in-out;
                 animation: sk-rotateplane 2.4s infinite ease-in-out;
             }
             .spinner {
                 width: 80px;
                 height: 80px;
-                margin-top: -60px;
                 opacity: 1;
-                transition: all 1s ease-in-out;
+                transition: all 4.8s ease-in-out;
             }
             .big-spinner {
-                width: 100%;
-                height: 100%;
-                opacity: 0;
+                /* transform: scale(5); */
+                width: 600px;
+                height: 600px;
+                /* width: 100%;
+                height: 100%; */
+                /* opacity: 0; */
             }
             .loading {
                 width: 100%;
@@ -78,7 +86,6 @@
                 75% { -webkit-transform: perspective(120px) rotateX(-0deg) rotateY(180deg); }
                 100% { -webkit-transform: perspective(120px) rotateX(-0deg) rotateY(-0deg); }
             }
-
             @keyframes sk-rotateplane {
                 0% { 
                     transform: perspective(120px) rotateX(0deg) rotateY(0deg);

@@ -50,7 +50,7 @@ export default {
 .note {
     font-size: 14px;
     color: #FFFFFF;
-    text-align: center;
+    text-align: left;
     line-height: 20px;
     margin-bottom: 30px;
     &.hint {

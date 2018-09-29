@@ -58,7 +58,7 @@ export default {
             this.copySuccess = true;
             setTimeout(()=>{
                 this.copySuccess = false;
-            }, 500);
+            }, 1000);
         },
         toggleVisible() {
             if (this.lock) {
