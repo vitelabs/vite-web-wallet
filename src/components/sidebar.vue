@@ -1,40 +1,52 @@
 <template>
     <div class="sidebar-wrapper">
         <div @mouseenter="overLogo"  @mouseleave="leaveLogo" class="logo __pointer">
-            <img src="../assets/imgs/ViteLogo2.svg" />
+            <img :src="viteLogo" />
             <test-notice class="notice" :class="{'hide': !isShowNotice}"></test-notice>
         </div>
 
-        <router-link :class="{
-            'icon': true,
-            'home': true,
+        <router-link class="__pointer icon" :class="{
             'active': active === 'account'
-        }" :to="{
-            name: 'account',
-            params: { addr, entropy }
-        }"></router-link>
+        }" :to="{ name: 'account' }">
+            <img v-show="active !== 'account'" :src="home" />
+            <img v-show="active === 'account'" :src="homeActive"  />
+        </router-link>
 
-        <router-link class="__pointer icon send" :class="{
+        <router-link class="__pointer icon" :class="{
             'active': active === 'transList'
-        }" :to="{ 
-            name: 'transList',
-            params: { addr, entropy }
-        }"></router-link>
+        }" :to="{ name: 'transList' }">
+            <img v-show="active !== 'transList'" :src="send" />
+            <img v-show="active === 'transList'" :src="sendActive"  />
+        </router-link>
 
         <div class="_bottom">
             <router-link class="icon setting __pointer" :class="{
                 'active': active === 'setting'
-            }" :to="{
-                name: 'setting',
-                params: { addr, entropy }
-            }"></router-link>
-            <div class="logout __pointer" @click="logout"></div>
+            }" :to="{ name: 'setting' }">
+                <img v-show="active !== 'setting'" :src="setting" />
+                <img v-show="active === 'setting'" :src="settingActive"  />
+            </router-link>
+
+            <div class="icon logout __pointer" @click="logout" 
+                 @mouseenter="enterLogout" @mouseleave="leaveLogout">
+                <img :src="logoutIcon" />
+            </div>
         </div>
     </div>
 </template>
 
 <script>
 import testNotice from 'components/testNotice';
+
+import viteLogo from 'assets/imgs/ViteLogo2.svg';
+import home from 'assets/imgs/index_icon_default.svg';
+import homeActive from 'assets/imgs/index_icon_pressed.svg';
+import send from 'assets/imgs/transfer_default.svg';
+import sendActive from 'assets/imgs/transfer_pressed.svg';
+import setting from 'assets/imgs/settings_default.svg';
+import settingActive from 'assets/imgs/settings_pressed.svg';
+import logoutDefault from 'assets/imgs/logout_default.svg';
+import logoutActive from 'assets/imgs/logout_pressed.svg';
 
 export default {
     components: {
@@ -48,9 +60,16 @@ export default {
     },
     data() {
         return {
-            addr: this.$route.params.addr || '',
-            entropy: this.$route.params.entropy || '',
-            isShowNotice: false
+            isShowNotice: false,
+            
+            viteLogo,
+            home,
+            homeActive,
+            send,
+            sendActive,
+            setting,
+            settingActive,
+            logoutIcon: logoutDefault
         };
     },
     methods: {
@@ -61,6 +80,12 @@ export default {
             this.isShowNotice = false;
         },
 
+        enterLogout() {
+            this.logoutIcon = logoutActive;
+        },
+        leaveLogout() {
+            this.logoutIcon = logoutDefault;
+        },
         logout() {
             let activeAccount = viteWallet.Wallet.getActiveAccount();
             activeAccount && activeAccount.lock();
@@ -101,28 +126,24 @@ export default {
         }
     }
     .icon {
-        display: inline-block;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         width: 100%;
         height: 54px;
         margin-top: 48px;
         &.active:before {
             content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 4.5px;
             display: inline-block;
             width: 4.5px;
             height: 54px;
             background-image: linear-gradient(-90deg, #1B3BD8 100%, #176CE0 100%, #0B92E7 100%, #0BB6EB 100%, #00E0F2 100%);
-        }
-    }
-    .home {
-        background: url('../assets/imgs/index_icon_default.svg') no-repeat center;
-        &.active {
-            background: url('../assets/imgs/index_icon_pressed.svg') no-repeat center;
-        }
-    }
-    .send {
-        background: url('../assets/imgs/transfer_default.svg') no-repeat center;
-        &.active {
-            background: url('../assets/imgs/transfer_pressed.svg') no-repeat center;
         }
     }
     ._bottom {
@@ -131,18 +152,9 @@ export default {
         width: 100%;
         .setting {
             margin-bottom: 35px;
-            background: url('../assets/imgs/settings_default.svg') no-repeat center;
-            &.active {
-                background: url('../assets/imgs/settings_pressed.svg') no-repeat center;
-            }
         }
         .logout {
-            width: 100%;
             height: 30px;
-            background: url('../assets/imgs/logout_default.svg') no-repeat center;
-            &:hover {
-                background: url('../assets/imgs/logout_pressed.svg') no-repeat center;
-            }
         }
     }
 }

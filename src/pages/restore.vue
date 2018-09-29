@@ -31,13 +31,14 @@ export default {
                 return;
             }
 
-            if (!this.mnemonic) {
+            let mnemonic = this.mnemonic.replace(/(^\s*)|(\s*$)/g,'');
+            if (!mnemonic) {
                 this.errMsg = 'mnemonic.empty';
                 return;
             }
 
             this.isLoading = true;
-            viteWallet.Wallet.restoreAddrs(this.mnemonic).then(()=>{
+            viteWallet.Wallet.restoreAddrs(mnemonic).then(()=>{
                 this.isLoading = false;
                 this.$router.push({
                     name: 'createAccount'

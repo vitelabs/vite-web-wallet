@@ -41,10 +41,7 @@
         <div class="btn-list" :class="{ zh: $t('lang') === '中文' }">
             <router-link class="__btn_link" :class="{
                 en: $t('lang') === 'English'  
-            }" :to="{ 
-                name: 'importAccount',
-                params: { from: 'login' }
-            }">{{ $t('btn.imported') }}</router-link>
+            }" :to="{ name: 'importAccount' }">{{ $t('btn.imported') }}</router-link>
             <span class="line" v-show="$t('lang') === '中文'"></span>
             <router-link class="__btn_link" :class="{
                 en: $t('lang') === 'English'  
@@ -136,13 +133,7 @@ export default {
 
             let loginSuccess = () => {
                 this.password = '';
-                this.$router.push({
-                    name: 'account',
-                    params: {
-                        addr: this.activeAccount.addr || '',
-                        entropy: this.activeAccount.entropy || ''
-                    }
-                });
+                this.$router.push({ name: 'account' });
             };
 
             this.isLoading = true;

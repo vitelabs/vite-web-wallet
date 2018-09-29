@@ -9,8 +9,7 @@
             </div>
         </div>
 
-        <router-link class="__btn add-acc" 
-                     :to="{ name: 'createAccount', params: { from: 'login' } }"> 
+        <router-link class="__btn add-acc" :to="{ name: 'createAccount' }"> 
             <img class="icon" src="../../assets/imgs/add_icon.svg"/>{{ $t('accList.addAcc') }}
         </router-link>
     </div>
