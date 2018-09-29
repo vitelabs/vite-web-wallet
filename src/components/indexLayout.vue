@@ -12,6 +12,8 @@
 
 <script>
 import changeLang from 'components/changeLang';
+import 'assets/imgs/bg.svg';
+import 'assets/imgs/ViteLogo1.svg';
 
 export default {
     components: {
