@@ -5,7 +5,7 @@
     "scripts": {
         "clean:hack": "rm -rf ./node_modules/node-libs-browser/node_modules/buffer",
         "clean": "rm -rf ./static && npm run clean:hack",
-        "build": "npm run clean && webpack",
+        "build": "npm run clean && webpack && node build.js",
         "build:map": "npm run clean && MAP=true webpack",
         "app": "node app/index.js",
         "dev": "npm run clean:hack && NODE_ENV=development webpack-dev-server",
