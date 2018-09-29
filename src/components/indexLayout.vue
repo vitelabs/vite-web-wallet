@@ -27,12 +27,12 @@ export default {
     overflow: auto;
     background: url('../assets/imgs/bg.svg') rgba(255, 255, 255, 0.1) no-repeat;
     background-size: cover;
-    // animation: sk-rotateplane 0.3s ease-in-out;
+    animation: sk-rotateplane 0.3s ease-in-out;
 
-    // @keyframes sk-rotateplane {
-    //     0% { opacity: 0.2; } 
-    //     100% { opacity: 1; }
-    // }
+    @keyframes sk-rotateplane {
+        0% { opacity: 0.1; } 
+        100% { opacity: 1; }
+    }
 
     .header {
         position: absolute;
