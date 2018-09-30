@@ -61,7 +61,7 @@ element.className += 'spinner big-spinner';
 
 setTimeout(() => {
     element.className += ' dis';
-}, 1200);
+}, 800);
 
 setTimeout(() => {
     new Vue({
