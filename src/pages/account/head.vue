@@ -60,6 +60,7 @@ export default {
     data() {
         return {
             account: {},
+            addressStr: '',
             isShowNameInput: false,
             editName: '',
             copySuccess: false,
@@ -67,14 +68,10 @@ export default {
             qrcodeShow:false
         };
     },
-    computed: {
-        addressStr() {
-            return stringify({ targetAddress: this.account.addr });
-        }
-    },
     mounted() {
         activeAccount = viteWallet.Wallet.getActiveAccount();
         this.account = this.getSimpleAcc();
+        this.addressStr = stringify({ targetAddress: this.account.addr });
     },
     methods: {
         getImage(i) {
