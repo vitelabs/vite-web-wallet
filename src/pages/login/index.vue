@@ -61,6 +61,15 @@ export default {
         accountList
     },
     mounted() {
+        window.document.onkeydown = e => {
+            e = e || window.event;
+            let code = e.keyCode || e.which;
+            if (!code || code !== 13) {
+                return;
+            }
+            this.login();
+        };
+
         this.activeAccount = this.getLoginAcc();
     },
     data() {
@@ -132,6 +141,7 @@ export default {
             }
 
             let loginSuccess = () => {
+                window.document.onkeydown = null;
                 this.password = '';
                 this.$router.push({ name: 'account' });
             };
@@ -143,7 +153,6 @@ export default {
                 result && loginSuccess();
                 !result && toast(this.$t('hint.pwErr'), 'error');
             }, 0);
-
         }
     }
 };
