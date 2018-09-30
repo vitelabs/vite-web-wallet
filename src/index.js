@@ -44,13 +44,20 @@ const router = new VueRouter({
     // mode: 'history',
     routes
 });
+
+// const homeLayouts = ['account', 'transList', 'setting'];
+// const goAccount = ['account', 'transList', 'setting', 'index', 'login'];
+
 router.beforeEach((to, from, next) => {
-    if (!from.name && to.name !== 'index') {
-        router.replace({
-            name: 'index'
-        });
-        return;
-    }
+    // if (to.name === 'account' && goAccount.indexOf(from.name) === -1 ) {
+    //     location.href = location.origin + '/';
+    //     return;
+    // } 
+    
+    // if (to.name !== 'account' && homeLayouts.indexOf(to.name) !== -1 && homeLayouts.indexOf(from.name) === -1) {
+    //     location.href = location.origin + '/';
+    //     return;
+    // }
 
     _hmt.push(['_trackPageview', to.path]);
     next();

@@ -1,5 +1,5 @@
 // https://wiki.vitelabs.com/display/~tiantao/uri+standard
-import qs from 'query-string';
+import qs from 'qs';
 
 export function stringify(o) {
     const {schema,prefix,targetAddress,chain_id,function_name,params}=o;
