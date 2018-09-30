@@ -6,7 +6,7 @@
             <tokenCard v-for="token in tokenList" :key="token.id"
                        :opt="token" :sendTransaction="showTrans"></tokenCard>
         </div>
-        <div v-show="isShowTrans" class="transaction">
+        <div v-if="isShowTrans" class="transaction">
             <transaction :token="activeToken" :closeTrans="closeTrans"></transaction>
         </div>
     </div>
