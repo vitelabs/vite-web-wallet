@@ -169,10 +169,10 @@ export default {
             if (!this.inAddress) {
                 this.isValidAddress = false;
             }
-            if (!this.testAmount() || !this.testMessage()) {
+            if (this.amountErr || !this.isValidAddress) {
                 return;
             }
-            if (this.amountErr || !this.isValidAddress) {
+            if (!this.testAmount() || !this.testMessage()) {
                 return;
             }
             if (!this.password) {
