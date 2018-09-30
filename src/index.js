@@ -46,13 +46,13 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-    if (!from.name && to.name !== 'index') {
-        router.replace({
-            name: 'index'
-        });
-        return;
-    }
-
+    // if (!from.name && to.name !== 'index') {
+    //     router.replace({
+    //         name: 'index'
+    //     });
+    //     return;
+    // }
+    console.log('???????');
     _hmt.push(['_trackPageview', to.path]);
     next();
 });
