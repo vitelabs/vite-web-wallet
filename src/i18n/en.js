@@ -18,7 +18,7 @@ module.exports = {
         title: 'Settings',
         unlock: 'Unlock Secure Information',
         lang: 'Language',
-        block: 'Latest Block Height',
+        block: 'Current Height',
         version: 'Version',
         service: 'Customer Service',
         site: 'Official Website of Vite',
@@ -65,7 +65,7 @@ module.exports = {
         input: 'Please input password',
         again: 'Please input password again!',
         choose: 'Choose account',
-        finish: 'Finish',
+        finish: 'Done',
         hint: {
             nameInput: 'Please input account name',
             nameLong: 'Account name cannot exceed 32 characters!',
