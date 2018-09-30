@@ -1,4 +1,4 @@
-import qs from 'query-string';
+import qs from 'qs';
 
 export default  function request({ method = 'GET', url, params = {} }) {
     method = method.toUpperCase();
