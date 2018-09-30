@@ -2,7 +2,7 @@
     <div class="transaction-wrapper">
         <div class="title">
             {{ $t('accDetail.transfer') }}
-            <img class="close __pointer" @click="_closeTrans" src="../../assets/imgs/close.svg"/>
+            <img class="close __pointer" @click="closeTrans" src="../../assets/imgs/close.svg"/>
         </div>
 
         <div class="content-wrapper">
@@ -75,6 +75,11 @@ export default {
         Vue.nextTick(()=>{
             this.$refs.inAddr && this.$refs.inAddr.focus();
         });
+    },
+    destroyed() {
+        clearTimeout(amountTimeout);
+        clearTimeout(inAddrTimeout);
+        clearTimeout(messageTimeout);
     },
     data() {
         return {
@@ -196,7 +201,7 @@ export default {
             }).then(() => {
                 this.loading = false;
                 toast(this.$t('transList.valid.succ'));
-                this._closeTrans();
+                this.closeTrans();
             }).catch((err) => {
                 console.warn(err);
                 this.loading = false;
@@ -212,16 +217,6 @@ export default {
 
                 toast(err && err.message ? err.message : this.$t('transList.valid.err'));
             });
-        },
-        _closeTrans() {
-            this.amount = '';
-            this.inAddress = '';
-            this.password = '';
-            this.message = '';
-            this.isValidAddress = true;
-            this.amountErr = '';
-            this.messageErr = '';
-            this.closeTrans();
         }
     }
 };
