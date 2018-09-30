@@ -93,7 +93,7 @@ module.exports = {
         name: 'Account Name',
         address: 'My Address',
         balance: 'Balance',
-        fundFloat: 'Fund in Float',
+        fundFloat: 'Unreceived',
         pend: 'Pending',
         copy: 'Copy Address',
         outAddress: 'My Address',

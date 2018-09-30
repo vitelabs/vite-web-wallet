@@ -19,7 +19,7 @@
                     </a> 
                 </div>
                 <div class="row">
-                    <a href="https://test.vite.net/" target="_blank">
+                    <a href="https://vite.net/" target="_blank">
                         <span class="title">{{ $t('setting.sys') }}</span>vite.net
                     </a>
                     <a href="https://github.com/vitelabs" target="_blank">
