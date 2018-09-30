@@ -93,7 +93,7 @@ module.exports = {
         name: '账户名称',
         address: '我的地址',
         balance: '账户余额',
-        fundFloat: '在途资金',
+        fundFloat: '待接收',
         pend: '笔交易待确认',
         copy: '复制账户地址',
         outAddress: '我的账户地址',

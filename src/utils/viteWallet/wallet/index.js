@@ -127,14 +127,24 @@ class Wallet {
     _loginKeystore(addr, pass) {
         let acc = getAccFromAddr(addr);
         let keystore = acc.keystore;
+
+        let before = new Date().getTime();
         let privKey = $ViteJS.Wallet.Keystore.decrypt(JSON.stringify(keystore), pass);
         if (!privKey) {
             return false;
         }
 
-        let obj = $ViteJS.Vite.Account.newHexAddr(privKey);
-        let keystoreStr = $ViteJS.Wallet.Keystore.encrypt(obj, pass);
-        keystore = JSON.parse(keystoreStr);
+        // Reduce the difficulty.
+        let after = new Date().getTime();
+        let n = ( keystore.crypto && keystore.crypto.scryptparams && keystore.crypto.scryptparams.n) ? 
+            keystore.crypto.scryptparams.n : 0;
+        _hmt.push(['_trackEvent', 'keystore-decrypt-time', n, after - before]);
+
+        if (n === 262144) {
+            let obj = $ViteJS.Vite.Account.newHexAddr(privKey);
+            let keystoreStr = $ViteJS.Wallet.Keystore.encrypt(obj, pass);
+            keystore = JSON.parse(keystoreStr);
+        }
 
         this.newActiveAcc({
             pass,
