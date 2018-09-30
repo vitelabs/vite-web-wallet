@@ -157,7 +157,7 @@ class Account {
         let verifyRes = this.verify(pass);
         if (!verifyRes) {
             return Promise.reject({
-                code: 34001,
+                code: -34001,
                 message: 'passErr'
             });
         }
