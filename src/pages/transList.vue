@@ -219,8 +219,8 @@ export default {
         width: 20%;
     }
     &.address {
-        min-width: 360px;
-        width: 30%;
+        min-width: 240px;
+        width: 25%;
     }
     &.sum {
         width: 14%;
