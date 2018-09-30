@@ -45,9 +45,9 @@ module.exports = {
     },
     test: {
         t: 'Preview Version',
-        txt1: 'Vite’s Web wallet is lightweight-node wallet.',
-        txt2: 'Now, it can generate account based on DAG ledger, check account balance, send transactions, receive transactions in default mode, acquire test tokens, check tokens issued by system and etc.Support finding the mnemonic word of account and login by loading keystore file.',
-        txt3: 'VITE test token is only for test with no real value, at the same time, Vite Official will clear all the account balances from time to time.',
+        txt1: 'Vite’s Web wallet is a lightweight-node wallet.',
+        txt2: 'Now, it can generate account based on DAG ledger, check account balance, send and receive transactions in default mode, acquire test tokens, check tokens issued by system and etc.',
+        txt3: 'Support finding the mnemonic seed phrase of account and login by importing keystore file.',
         v: 'Current version: Preview Version'
     },
 
