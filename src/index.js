@@ -41,23 +41,17 @@ rootRoute.component = list && list.length ? login : start;
 routes.push(rootRoute);
 
 const router = new VueRouter({
-    // mode: 'history',
+    mode: 'history',
     routes
 });
 
-// const homeLayouts = ['account', 'transList', 'setting'];
-// const goAccount = ['account', 'transList', 'setting', 'index', 'login'];
-
 router.beforeEach((to, from, next) => {
-    // if (to.name === 'account' && goAccount.indexOf(from.name) === -1 ) {
-    //     location.href = location.origin + '/';
-    //     return;
-    // } 
-    
-    // if (to.name !== 'account' && homeLayouts.indexOf(to.name) !== -1 && homeLayouts.indexOf(from.name) === -1) {
-    //     location.href = location.origin + '/';
-    //     return;
-    // }
+    if (!from.name && to.name !== 'index') {
+        router.replace({
+            name: 'index'
+        });
+        return;
+    }
 
     _hmt.push(['_trackPageview', to.path]);
     next();
