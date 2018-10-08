@@ -4,7 +4,7 @@ const namePre = 'account';
 
 class Account {
     constructor({
-        entropy, encryptObj, addrNum, defaultInx, addrs, name, keystore, pass
+        entropy, encryptObj, addrNum, defaultInx, addrs, name, keystore, pass, decryptEntropy
     }) {
         this.isWalletAcc = !keystore;
         this.name = checkName(name);
@@ -14,6 +14,7 @@ class Account {
         this.pass = pass;
 
         // Wallet account
+        this.decryptEntropy = decryptEntropy;
         this.entropy = entropy;
         this.encryptObj = encryptObj;
 
@@ -62,10 +63,10 @@ class Account {
     }
 
     getMnemonic() {
-        if (!this.entropy) {
+        if (!this.decryptEntropy) {
             return null;
         }
-        return $ViteJS.Wallet.Address.getMnemonicFromEntropy(this.entropy);
+        return $ViteJS.Wallet.Address.getMnemonicFromEntropy(this.decryptEntropy);
     }
 
     getName() {

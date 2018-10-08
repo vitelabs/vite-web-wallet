@@ -7,6 +7,7 @@ const LAST_KEY = 'ACC_LAST';
 class Wallet {
     constructor() {
         this.activeAccount = null;
+        reSave();
     }
     
     getActiveAccount() {
@@ -32,13 +33,16 @@ class Wallet {
         }
 
         let { addr, entropy } = $ViteJS.Wallet.Address.newAddr();
-        let encryptObj = $ViteJS.Wallet.Account.encrypt(pass);
+        let encryptObj = $ViteJS.Wallet.Account.encrypt(entropy, pass);
+        let obj = JSON.parse(encryptObj);
+
         this.newActiveAcc({
             defaultInx: 0,
             addrNum: 1, 
             name,
-            entropy,
-            encryptObj,
+            decryptEntropy: entropy,
+            entropy: obj.encryptentropy,
+            encryptObj: obj,
             addrs: [addr]
         });
     }
@@ -88,10 +92,11 @@ class Wallet {
 
             let finalAddrs = addrs.slice(0, index+1);
             let entropy = $ViteJS.Wallet.Address.getEntropyFromMnemonic(mnemonic);
+
             this.newActiveAcc({
                 defaultInx: 0,
                 addrNum: index + 1,
-                entropy,
+                decryptEntropy: entropy,
                 addrs: finalAddrs
             });
             return data;
@@ -99,12 +104,16 @@ class Wallet {
     }
 
     restoreAccount(name, pass) {
-        if (!this.activeAccount) {
+        if (!this.activeAccount || !this.activeAccount.decryptEntropy) {
             return;
         }
-        let encryptObj = $ViteJS.Wallet.Account.encrypt(pass);
+
+        let encryptObj = $ViteJS.Wallet.Account.encrypt(this.activeAccount.decryptEntropy, pass);
+        let obj = JSON.parse(encryptObj);
+        
         this.activeAccount.name = name;
-        this.activeAccount.encryptObj = encryptObj;
+        this.activeAccount.entropy = obj.encryptentropy;
+        this.activeAccount.encryptObj = obj;
         this.activeAccount.save();
     }
 
@@ -167,18 +176,21 @@ class Wallet {
     _loginWalletAcc(entropy, pass) {
         try {
             let acc = getAccFromEntropy(entropy);
-            let verifyRes = $ViteJS.Wallet.Account.verify(acc.encryptObj, pass);
-            if (!verifyRes) {
+            let encryptObj = acc.encryptObj;
+            encryptObj.encryptentropy = entropy;
+
+            let decryptEntropy = $ViteJS.Wallet.Account.decrypt(JSON.stringify(encryptObj), pass);
+            if (!decryptEntropy) {
                 return false;
             }
 
-            let mnemonic = $ViteJS.Wallet.Address.getMnemonicFromEntropy(acc.entropy);
+            let mnemonic = $ViteJS.Wallet.Address.getMnemonicFromEntropy(decryptEntropy);
             let addrs = $ViteJS.Wallet.Address.getAddrsFromMnemonic(mnemonic, acc.addrNum);
             let defaultInx = +acc.defaultInx > 10 || +acc.defaultInx < 0 ? 0 : +acc.defaultInx;
 
             this.newActiveAcc({
                 pass,
-                entropy, defaultInx, addrs, 
+                entropy, defaultInx, addrs, decryptEntropy,
                 encryptObj: acc.encryptObj, 
                 addrNum: acc.addrNum, 
                 name: acc.name
@@ -250,4 +262,49 @@ function getLast() {
 
 function setLast(acc) {
     storage.setItem(LAST_KEY, acc);
+}
+
+function reSave() {
+    let list = acc.getList();
+    if (!list || !list.length) {
+        return;
+    }
+
+    let last = getLast();
+    let reList = [];
+
+    list.forEach((item) => {
+        if (!item) {
+            return;
+        }
+
+        if (!item.entropy || !item.encryptObj || +item.encryptObj.version !== 1 || !item.encryptObj.scryptParams) {
+            reList.push(item);
+            return;
+        }
+
+        let scryptP = {
+            scryptParams: item.encryptObj.scryptParams,
+            encryptPwd: item.encryptObj.encryptP
+        };
+        let entropy = item.entropy;
+        let encryptObj = $ViteJS.Wallet.Account.encrypt(entropy, null, scryptP);
+
+        let obj = JSON.parse(encryptObj);
+        item.entropy = obj.encryptentropy;
+        item.encryptObj = {
+            crypto: obj.crypto,
+            version: obj.version,
+            timestamp: obj.timestamp
+        };
+
+        if (last && last.entropy && last.entropy === entropy) {
+            last.entropy = item.entropy;
+        }
+        reList.push(item);
+    });
+
+    setLast(last);
+    acc.setAccList(reList);
+    console.log('done', new Date().getTime());
 }

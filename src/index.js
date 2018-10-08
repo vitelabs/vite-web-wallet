@@ -65,6 +65,7 @@ setTimeout(() => {
 }, 800);
 
 setTimeout(() => {
+    console.log('new', new Date().getTime());
     new Vue({
         el: '#app',
         components: { App },
