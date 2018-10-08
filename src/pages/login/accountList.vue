@@ -9,9 +9,9 @@
             </div>
         </div>
 
-        <router-link class="__btn add-acc" :to="{ name: 'createAccount' }"> 
+        <span class="__btn add-acc" @click="addAcc"> 
             <img class="icon" src="../../assets/imgs/add_icon.svg"/>{{ $t('accList.addAcc') }}
-        </router-link>
+        </span>
     </div>
 </template>
 
@@ -32,6 +32,14 @@ export default {
         return {
             accountList: list
         };
+    },
+    methods: {
+        addAcc() {
+            viteWallet.Wallet.clearActiveAccount();
+            this.$router.push({
+                name: 'createAccount'
+            });
+        }
     }
 };
 </script>
