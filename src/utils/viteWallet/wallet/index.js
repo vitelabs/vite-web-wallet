@@ -272,6 +272,7 @@ function reSave() {
 
     let last = getLast();
     let reList = [];
+    let isChange = false;
 
     list.forEach((item) => {
         if (!item) {
@@ -283,6 +284,7 @@ function reSave() {
             return;
         }
 
+        isChange = true;
         let scryptP = {
             scryptParams: item.encryptObj.scryptParams,
             encryptPwd: item.encryptObj.encryptP
@@ -304,6 +306,10 @@ function reSave() {
         reList.push(item);
     });
 
+    if (!isChange) {
+        return;
+    }
+    
     setLast(last);
     acc.setAccList(reList);
     console.log('done', new Date().getTime());
