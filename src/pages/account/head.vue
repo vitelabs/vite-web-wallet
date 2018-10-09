@@ -189,10 +189,10 @@ export default {
         padding-bottom: 24px;
         font-family: $font-bold;
         .edit {
-        display: inline-block;
-        width: 20px;
-        height: 20px;
-        margin-left: 20px;
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            margin-left: 20px;
         }
         .title_icon {
             float: right;
@@ -292,6 +292,44 @@ export default {
         }
         .more-icon {
             margin-left: 4px;
+        }
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .account-head-wrapper {
+        padding: 15px;
+        .head-title {
+            padding-bottom: 15px;
+            .edit {
+                float: right;
+            }
+        }
+    }
+    .account-head-wrapper .custom-name {
+        position: relative;
+        input {
+            width: 100%;
+        }
+    }
+    .account-head-wrapper .addr-wrapper {
+        margin-top: 20px;
+        display: block;
+        min-width: 100%;
+        .addr-content {
+            padding: 10px;
+            height: auto;
+            line-height: 20px;
+            word-break: break-all;
+        }
+    }
+    .account-head-wrapper .btn-group {
+        position: relative;
+        top: 0;
+        right: 0;
+        margin-top: 20px;
+        .btn__small {
+            width: 100%;
         }
     }
 }
