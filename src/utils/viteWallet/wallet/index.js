@@ -147,7 +147,7 @@ class Wallet {
         let after = new Date().getTime();
         let n = ( keystore.crypto && keystore.crypto.scryptparams && keystore.crypto.scryptparams.n) ? 
             keystore.crypto.scryptparams.n : 0;
-        _hmt.push(['_trackEvent', 'keystore-decrypt-time', n, after - before]);
+        _hmt.push(['_trackEvent', 'keystore-decrypt-time', n, null, after - before]);
 
         if (n === 262144) {
             let obj = $ViteJS.Vite.Account.newHexAddr(privKey);
