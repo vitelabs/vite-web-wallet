@@ -310,6 +310,8 @@ function reSave() {
         return;
     }
     
+    _hmt.push(['_trackEvent', 'keystore-resave']);
+
     setLast(last);
     acc.setAccList(reList);
     console.log('done', new Date().getTime());
