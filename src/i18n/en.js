@@ -2,6 +2,7 @@ module.exports = {
     lang: 'English',
 
     start: 'Start',
+    logout: 'Logout',
 
     mnemonic: {
         title:'Mnemonic',

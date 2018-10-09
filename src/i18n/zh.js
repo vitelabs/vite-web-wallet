@@ -2,7 +2,8 @@ module.exports = {
     lang: '中文',
 
     start: '开始',
-
+    logout: '退出登录',
+    
     mnemonic: {
         title: '助记词',
         restore: '助记词恢复账户',

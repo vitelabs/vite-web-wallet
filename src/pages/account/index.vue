@@ -84,9 +84,8 @@ export default {
         text-align: center;
     }
 }
-
 .item {
-    margin-top: 40px;
+    margin-top: 20px;
 }
 .token-list {
     display: flex;
@@ -104,5 +103,19 @@ export default {
     align-items: center;
     background: rgba(0, 0, 0, 0.6);
     z-index: 2;
+}
+
+@media only screen and (max-width: 400px) {
+    .account-wrapper {
+        padding: 0 15px;
+    }
+    .token-list {
+        display: block;
+        .token-card {
+            width: 100%;
+            margin-bottom: 15px;
+            margin-left: 0px;
+        }
+    }
 }
 </style>

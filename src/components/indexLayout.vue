@@ -73,4 +73,10 @@ export default {
         }
     }
 }
+
+@media only screen and (max-width: 400px) {
+    .index-layout-wrapper .header  {
+        padding: 40px 0px 40px 20px;
+    }
+}
 </style>
