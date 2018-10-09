@@ -15,6 +15,45 @@
                 var s = document.getElementsByTagName("script")[0]; 
                 s.parentNode.insertBefore(hm, s);
             })();
+
+            window.onload = function () {
+                if (!window.performance) {
+                    return;
+                }
+                try {
+                    var fetchStart = window.performance.timing.fetchStart;  // any requests
+
+                    // DNS
+                    var DNSStart = window.performance.timing.domainLookupStart; // dns end
+                    var DNSEnd = window.performance.timing.domainLookupEnd; // dns end
+                    var DNSTimes = DNSEnd - DNSStart;
+                    var isDNSCache = DNSTimes <= 5;
+                    console.log('DNSTimes', isDNSCache, DNSTimes);
+
+                    // TCP
+                    var TCPStart = window.performance.timing.connectStart;
+                    var TCPEnd = window.performance.timing.connectEnd;
+                    var TCPTimes = TCPEnd - TCPStart;
+                    console.log('TCPTimes', TCPTimes);
+                    
+                    // HTTPS
+                    var httpsEnd = window.performance.timing.secureConnectionStart; // https
+                    var isHTTPS = !!httpsEnd;
+                    var httpsTimes = httpsEnd - DNSEnd;
+                    console.log('HTTPSTimes', isHTTPS, httpsTimes && httpsTimes > 0 ? httpsTimes : 0);
+
+                    // load
+                    var firstByteTime = window.performance.timing.responseStart;
+
+                    var whiteTimes = firstByteTime - fetchStart;
+                    console.log('whiteTimes', whiteTimes);
+
+                    var loadedTimes = new Date().getTime() - fetchStart;
+                    console.log('loadedTimes', loadedTimes);
+                } catch(err) {
+
+                }
+            }
         </script>
     </head>
 
