@@ -40,6 +40,7 @@ export default {
     font-size: 14px;
     color: #FFFFFF;
     letter-spacing: 0;
+    margin-top: 5px;
     font-family: $font-bold;
     &:before {
         content: ' ';

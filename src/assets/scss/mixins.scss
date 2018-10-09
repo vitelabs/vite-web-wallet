@@ -3,6 +3,7 @@
 body {
     padding: 0px;
     margin: 0px;
+    -webkit-overflow-scrolling: touch;
     font-family: $font-normal, "Microsoft Yahei";
     letter-spacing: 0;
 }
@@ -112,4 +113,22 @@ textarea {
     text-align: center;
     font-size: 12px;
     color: #FF2929;
+}
+
+.__btn_list {
+    .__btn {
+        display: inline-block;
+        width: 167px;
+        &:first-child {
+            float: left;
+        }
+        &:last-child {
+            float: right;
+        }
+    }
+}
+@media only screen and (max-width: 400px) {
+    .__btn_list .__btn {
+        width: 158px;
+    }
 }

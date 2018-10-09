@@ -39,7 +39,4 @@ export default {
     box-sizing: border-box;
     padding: 20px;
 }
-.process {
-    margin-top: 60px;
-}
 </style>

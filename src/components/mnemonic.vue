@@ -6,7 +6,7 @@
         <div class="input-wrapper"> <slot></slot> </div>
         <div v-show="isRestore" class="note hint">{{ $t('mnemonic.hint') }}</div>
 
-        <div class="btn_list">
+        <div class="__btn_list">
             <span class="__btn __btn_border __pointer" @click="back">{{ $t('btn.back') }}</span>
             <span class="__btn __btn_all_in __pointer" @click="submit">
                 {{ isRestore ? $t('btn.submit') : $t('create.finish') }}
@@ -67,14 +67,7 @@ export default {
     font-size: 14px;
     color: #1D2024;
 }
-.btn_list {
+.__btn_list {
     margin-top: 20px;
-    .__btn {
-        display: inline-block;
-        width: 167px;
-    }
-    .__btn_border {
-        margin-right: 20px;
-    }
 }
 </style>
