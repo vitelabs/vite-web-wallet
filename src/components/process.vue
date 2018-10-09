@@ -35,7 +35,14 @@ export default {
 .process-wrapper {
     position: relative;
     display: inline-block;
+    margin-top: 60px;
 }
+@media only screen and (max-width: 400px) {
+    .process-wrapper {
+        margin-top: 20px;
+    }
+}
+
 .process-line {
     .icon {
         display: inline-block;
