@@ -7,8 +7,8 @@
         "clean": "rm -rf ./static && npm run clean:hack",
         "build": "npm run clean && webpack && node build.js",
         "build:map": "npm run clean && MAP=true webpack",
-        "app": "node app/index.js",
         "dev": "npm run clean:hack && NODE_ENV=development webpack-dev-server",
+        "analyzer": "analyzer=true webpack-dev-server",
         "lint": "eslint ./ --cache --fix"
     },
     "pre-commit": [

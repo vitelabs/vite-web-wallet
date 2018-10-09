@@ -2,7 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const merge = require('webpack-merge');
 const devConfig = require('./webpackConf/dev.config.js');
@@ -10,7 +10,16 @@ const mapConfig = require('./webpackConf/map.config.js');
 
 const SRC_PATH = path.join(__dirname, 'src');
 
-// [TODO] vendor
+let plugins = [
+    new HtmlWebpackPlugin({
+        title: 'Vite Wallet',
+        favicon: path.join(SRC_PATH, 'assets/imgs/logo.png'),
+        template: path.join(__dirname, 'index.html')
+    }),
+    new VueLoaderPlugin()
+];
+(process.env.analyzer === 'true') && plugins.push(new BundleAnalyzerPlugin());
+
 let webpackConfig = {
     mode: process.env.NODE_ENV || 'development',
     entry: {
@@ -21,16 +30,7 @@ let webpackConfig = {
         path: path.join(__dirname, './static'),
         filename: '[name].[hash].js'
     },
-    plugins: [
-        new HtmlWebpackPlugin({
-            title: 'Vite Wallet',
-            favicon: path.join(SRC_PATH, 'assets/imgs/logo.png'),
-            template: path.join(__dirname, 'index.html')
-        }),
-        new VueLoaderPlugin(),
-        // new BundleAnalyzerPlugin()
-    ],
-    
+    plugins,
     optimization: {
         splitChunks:{
             cacheGroups: {
