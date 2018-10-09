@@ -3,7 +3,8 @@
 body {
     padding: 0px;
     margin: 0px;
-    font-family: $font-normal "Microsoft Yahei";
+    -webkit-overflow-scrolling: touch;
+    font-family: $font-normal, "Microsoft Yahei";
     letter-spacing: 0;
 }
 

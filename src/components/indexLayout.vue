@@ -64,6 +64,7 @@ export default {
         display: flex;
         justify-content: center;
         align-items: center;
+        overflow: auto;
         .confirm {
             position: relative;
             width: 360px;
