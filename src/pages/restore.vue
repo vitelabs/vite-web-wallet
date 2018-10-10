@@ -69,9 +69,10 @@ export default {
         width: 100%;
         height: 100%;
         resize: none;
-        text-align: center;
-        word-break: break-all;
+        text-align: left;
+        word-wrap: break-word;
         &.center {
+            text-align: center;
             line-height: 80px;
         }
     }
