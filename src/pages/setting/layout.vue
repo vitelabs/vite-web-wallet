@@ -114,4 +114,22 @@ export default {
         }
     }
 }
+
+@media only screen and (max-width: 400px) {
+    .setting-wrapper {
+        padding: 15px;
+        background: #fff;
+    }
+    .setting-wrapper .content-wrapper {
+        top: 77px;
+        left: 15px;
+        right: 15px;
+        bottom: 15px;
+        box-shadow: none;
+        border-radius: 0px; 
+        .content {
+            padding: 0;
+        }
+    }
+}
 </style>
