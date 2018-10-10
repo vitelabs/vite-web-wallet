@@ -105,7 +105,7 @@ export default {
     z-index: 2;
 }
 
-@media only screen and (max-width: 400px) {
+@media only screen and (max-width: 500px) {
     .account-wrapper {
         padding: 0 15px;
     }

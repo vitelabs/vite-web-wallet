@@ -24,7 +24,7 @@ module.exports = {
         service: 'Customer Service',
         site: 'Official Website of Vite',
         sys: 'System Portal',
-        open: 'Open source projects of Vite',
+        open: 'Vite Github',
     },
 
     nav: {

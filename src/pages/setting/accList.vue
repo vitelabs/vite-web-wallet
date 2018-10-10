@@ -7,7 +7,7 @@
         <div class="acc-list __pointer">
             <div ref="listWrapper" class="list-wrapper">
                 <div ref="list">
-                    <div @click="setDefault(addr)" class="acc-item" v-for="(addr, index) in addrList" :key="index">
+                    <div @click="setDefault(addr)" class="acc-item __ellipsis" v-for="(addr, index) in addrList" :key="index">
                         <span class="describe">{{(index + 1) + '. ' + addr}}</span>
                         <span class="select" :class="{
                             'active': defaultAddr === addr
@@ -150,6 +150,18 @@ export default {
             background: url('../../assets/imgs/presnet.svg') no-repeat center;
             background-size: 16px 16px;
         }
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .acc-list .acc-item {
+        padding: 10px;
+    }
+    .acc-list .add {
+        padding: 0 10px;
+    }
+    .acc-list .select {
+        margin-top: -18px;
     }
 }
 </style>
