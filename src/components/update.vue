@@ -13,6 +13,7 @@ import version from 'version';
 import localStorage from 'utils/localStorage';
 
 const version_key = 'version';
+const showNum = 1;
 
 export default {
     data() {
@@ -44,14 +45,14 @@ export default {
             this.versionList.push( version[code] );
         }
 
-        if (this.versionList >= 3) {
-            this.versionList = this.versionList.slice(this.versionList.length - 3);
+        if (this.versionList >= showNum) {
+            this.versionList = this.versionList.slice(this.versionList.length - showNum);
             this.latestCode = this.versionList[2].code;
             this.saveVersion();
             return;
         }
 
-        let len = 3 - this.versionList.length;
+        let len = showNum - this.versionList.length;
         lastList = lastList.length <= len ? lastList : lastList.slice(lastList.length - len);
         this.versionList = lastList.concat(this.versionList);
         this.latestCode = this.versionList.length ? this.versionList[this.versionList.length - 1].code : null;
