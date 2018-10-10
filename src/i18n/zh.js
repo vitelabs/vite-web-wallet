@@ -35,6 +35,7 @@ module.exports = {
             imported: '导入账户',
             backup: '备份账户',
             setting: '设置账户',
+            reset: '重新设置账号',
             login: '登录账户'
         },
         sync: '钱包初始化中，暂时无法发送交易',
