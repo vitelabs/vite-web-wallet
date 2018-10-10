@@ -102,7 +102,7 @@ export default {
     justify-content: center;
     align-items: center;
     background: rgba(0, 0, 0, 0.6);
-    z-index: 2;
+    z-index: 100;
 }
 
 @media only screen and (max-width: 500px) {
