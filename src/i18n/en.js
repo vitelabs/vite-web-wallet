@@ -149,6 +149,7 @@ module.exports = {
         },
         timestamp: 'Timestamp',
         tAddress: 'Transaction Side Address',
+        tAddr: 'Transaction Side',
         sum: 'Amount',
         tDetail: 'Transaction Detail',
         noData: 'No Data'

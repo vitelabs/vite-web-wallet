@@ -39,6 +39,36 @@
             <pagination class="pagination" :currentPage="currentPage + 1" 
                         :totalPage="totalPage" :toPage="toPage"></pagination>
         </div>
+
+        <div class="trans-list meta">
+            <div class="table__head">
+                <div class="cell-text status">{{ $t('transList.status.title') }}</div>
+                <div class="cell-text address">{{ $t('transList.tAddr') }}</div>
+                <div class="cell-text sum">{{ $t('transList.sum') }}</div>
+            </div>
+
+            <div ref="tableContent" class="table-content" v-show="transList && transList.length">
+                <div v-for="(item, index) in transList" :key="index"
+                     class="t-row __pointer" @click="goDetail(item)">
+                    <span class="cell-text status __ellipsis" :class="{
+                        'green': item.status === 'confirmed',
+                        'pink': item.status === 'unconfirmed',
+                        'blue': item.status === 'confirms'
+                    }">
+                        {{ item.status === 'confrims' ? item.confirms : $t(`transList.status.${item.status}`) }}
+                    </span>
+                    <span class="cell-text address">{{ item.transAddr }}</span>
+                    <span class="cell-text sum">{{ item.amount }} {{ item.token }}</span>
+                </div>
+            </div>
+
+            <div class="table-content no-data" v-show="!transList || !transList.length">
+                {{ $t('transList.noData') }}
+            </div>
+
+            <pagination class="pagination" :currentPage="currentPage + 1" 
+                        :totalPage="totalPage" :toPage="toPage"></pagination>
+        </div>
     </div>
 </template>
 
@@ -161,6 +191,9 @@ export default {
     background: #FFF;
     box-shadow: 0 2px 15px 1px rgba(176, 192, 237, 0.17);
     border-radius: 8px;
+    &.meta {
+        display: none;
+    }
     .table__head {
         height: 48px;
         line-height: 48px;
@@ -248,5 +281,49 @@ export default {
     height: 75px;
     line-height: 75px;
     text-align: center;
+}
+
+@media only screen and (max-width: 500px) {
+    .trans-list-wrapper {
+        padding: 15px;
+        .title {
+            margin-bottom: 15px;
+        }
+    }
+    .trans-list {
+        display: none;
+    }
+    .trans-list.meta {
+        display: flex;
+        max-height: 92%;
+        .table__head {
+            text-align: center;
+        }
+    }
+    .cell-text {
+        white-space: nowrap;
+        &:first-child {
+            float: left;
+            padding-left: 10px;
+        }
+        &:last-child {
+            float: right;
+            padding-right: 10px;
+        }
+        &.status {
+            min-width: 65px;
+            width: 10%;
+        }
+        &.address {
+            overflow: hidden;
+            min-width: 190px;
+            width: 25%;
+        }
+        &.sum {
+            width: 14%;
+            float: right;
+            min-width: 60px;
+        }
+    }
 }
 </style>
