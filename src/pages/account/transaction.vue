@@ -75,6 +75,10 @@ export default {
         Vue.nextTick(()=>{
             this.$refs.inAddr && this.$refs.inAddr.focus();
         });
+        
+        this.$onEnterKey(() => {
+            this.validTrans();
+        });
     },
     destroyed() {
         clearTimeout(amountTimeout);

@@ -54,9 +54,9 @@ export default {
     background: #fff;
     width: 90%;
     max-height: 500px;
-    max-width: 500px;
+    max-width: 600px;
     border-radius: 2px;
-    padding: 15px;
+    padding: 25px 15px;
     box-sizing: border-box;
     margin-top: -40px;
     .title {

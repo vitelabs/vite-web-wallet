@@ -15,7 +15,7 @@
         <div class="addr-wrapper">
             <div class="head-title">
                 <span>{{ $t('accDetail.address') }}</span>
-                <span class="title_icon __pointer qrcode"><img src="../../assets/imgs/qrcode_default.svg" @click="toggleQrCode" />
+                <span ref="codeContainer" class="title_icon __pointer qrcode"><img src="../../assets/imgs/qrcode_default.svg" @click="toggleQrCode" />
                     <div class="code-container" v-show="qrcodeShow">
                         <div class="code">
                             <qrcode :text="addressStr" :options="{ size:146 }" @genImage="getImage"></qrcode>
@@ -64,8 +64,8 @@ export default {
             isShowNameInput: false,
             editName: '',
             copySuccess: false,
-            qrcode:null,
-            qrcodeShow:false
+            qrcode: null,
+            qrcodeShow: false
         };
     },
     mounted() {
@@ -87,6 +87,20 @@ export default {
         },
         toggleQrCode() {
             this.qrcodeShow = !this.qrcodeShow;
+        },
+        closeQrCode(e) {
+            if (!e || !e.target) {
+                return;
+            }
+
+            let codeContainer = this.$refs.codeContainer;
+            if (!codeContainer || 
+                e.target === codeContainer ||
+                codeContainer.contains( e.target )) {
+                return;
+            }
+            
+            this.qrcodeShow = false;
         },
         downLoadQrCode(){
             if (!this.qrcode) {
@@ -124,7 +138,7 @@ export default {
         clearEditName() {
             this.isShowNameInput = false;
             this.editName = '';
-            window.document.onkeydown = null;
+            this.$offEnterKey();
         },
         startRename() {
             if (this.isShowNameInput) {
@@ -132,14 +146,9 @@ export default {
             }
             this.isShowNameInput = true;
             Vue.nextTick(() => {
-                window.document.onkeydown = e => {
-                    e = e || window.event;
-                    let code = e.keyCode || e.which;
-                    if (!code || code !== 13) {
-                        return;
-                    }
+                this.$onEnterKey(() => {
                     this.rename();
-                };
+                });
                 this.$refs.nameInput.focus();
             });
         },
