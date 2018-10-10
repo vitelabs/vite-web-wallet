@@ -2,9 +2,7 @@
     <div class="menu-wrapper">
         <div class="header">
             <img class="vite-logo" :src="viteLogo" />
-            <span class="menu">
-                <img :src="menu" @click="clickMenu" />
-            </span>
+            <span class="menu" @click="clickMenu"></span>
         </div>
 
         <div class="menu-list" :class="{ 'show': showList }">
@@ -32,7 +30,6 @@
 
 <script>
 import viteLogo from 'assets/imgs/ViteLogo2.svg';
-import menu from 'assets/imgs/menu.svg';
 
 export default {
     props: {
@@ -43,7 +40,6 @@ export default {
     },
     data() {
         return {
-            menu,
             viteLogo,
             showList: false
         };
@@ -90,11 +86,11 @@ export default {
         width: 35px;
         height: 35px;
         line-height: 35px;
-        img {
-            float: right;
-            margin-top: 12px;
-            width: 16px;
-            height: 14px;
+        background: url('../assets/imgs/menu.svg') no-repeat center;
+        background-size: 16px 14px;
+        &:active {
+            background: url('../assets/imgs/menu_presssed.svg') no-repeat center;
+            background-size: 16px 14px;
         }
     }
 }
