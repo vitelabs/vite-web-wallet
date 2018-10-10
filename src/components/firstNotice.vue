@@ -1,6 +1,7 @@
 <template>
     <div class="first-notice-wrapper" v-show="isFirst">
         <div class="wrapper">
+            <div class="title">{{ $t('firstNotice.title') }}</div>
             <ul class="first-notice">
                 <li>{{ $t('firstNotice.text1') }}</li>
                 <li>{{ $t('firstNotice.text2') }}</li>
@@ -34,6 +35,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "~assets/scss/vars.scss";
+
 .first-notice-wrapper {
     position: fixed;
     top: 80px;
@@ -56,11 +59,22 @@ export default {
     padding: 15px;
     box-sizing: border-box;
     margin-top: -40px;
+    .title {
+        font-size: 16px;
+        font-family: $font-bold;
+        text-align: center;
+    }
     .first-notice {
         padding: 20px;
+        font-size: 14px;
         li {
+            margin-top: 10px;
+            line-height: 20px;
             word-wrap: break-word;
             list-style-type: disc;
+            &:first-child {
+                margin-top: 0;
+            }
         }
     }
     .btn {
