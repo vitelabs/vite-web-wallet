@@ -18,6 +18,11 @@ export default {
     components: {
         mnemonic
     },
+    mounted() {
+        this.$onEnterKey(() => {
+            this.validMnemonic();
+        });
+    },
     data() {
         return {
             mnemonic: '',

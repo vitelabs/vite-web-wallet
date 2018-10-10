@@ -48,6 +48,9 @@ export default {
     },
     mounted() {
         this.focusName();
+        this.$onEnterKey(() => {
+            this.valid();
+        });
     },
     data() {
         let activeAccount = viteWallet.Wallet.getActiveAccount();

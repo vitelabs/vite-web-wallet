@@ -61,15 +61,9 @@ export default {
         accountList
     },
     mounted() {
-        window.document.onkeydown = e => {
-            e = e || window.event;
-            let code = e.keyCode || e.which;
-            if (!code || code !== 13) {
-                return;
-            }
+        this.$onEnterKey(() => {
             this.login();
-        };
-
+        });
         this.activeAccount = this.getLoginAcc();
     },
     data() {
@@ -141,7 +135,7 @@ export default {
             }
 
             let loginSuccess = () => {
-                window.document.onkeydown = null;
+                this.$offEnterKey();
                 this.password = '';
                 this.$router.push({ name: 'account' });
             };

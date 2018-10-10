@@ -19,6 +19,28 @@ import store from './store';
 Vue.use(VueRouter);
 Vue.use(VueI18n);
 
+Vue.mixin({
+    created: function() {
+        this.$onEnterKey = (cb) => {
+            window.document.onkeydown = e => {
+                e = e || window.event;
+                let code = e.keyCode || e.which;
+                if (!code || code !== 13) {
+                    return;
+                }
+                cb && cb();
+            };
+        };
+
+        this.$offEnterKey = () => {
+            window.document.onkeydown = null;      
+        };
+    },
+    destroyed: function () {
+        this.$offEnterKey();
+    }
+});
+
 const i18n = new VueI18n(i18nConfig);
 
 let rootRoute = {
