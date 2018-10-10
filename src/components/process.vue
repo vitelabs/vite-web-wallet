@@ -37,7 +37,7 @@ export default {
     display: inline-block;
     margin-top: 60px;
 }
-@media only screen and (max-width: 400px) {
+@media only screen and (max-width: 500px) {
     .process-wrapper {
         margin-top: 20px;
     }

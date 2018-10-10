@@ -74,7 +74,7 @@ export default {
     }
 }
 
-@media only screen and (max-width: 400px) {
+@media only screen and (max-width: 500px) {
     .index-layout-wrapper .header  {
         padding: 40px 0px 40px 20px;
     }

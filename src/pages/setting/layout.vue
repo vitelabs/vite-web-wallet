@@ -16,7 +16,7 @@
                     <span class="title">{{ $t('setting.service') }}</span>info@vite.org
                     <a href="https://vite.org/" target="_blank">
                         <span class="title">{{ $t('setting.site') }}</span>vite.org
-                    </a> 
+                    </a>
                 </div>
                 <div class="row">
                     <a href="https://vite.net/" target="_blank">
@@ -115,7 +115,7 @@ export default {
     }
 }
 
-@media only screen and (max-width: 400px) {
+@media only screen and (max-width: 500px) {
     .setting-wrapper {
         padding: 15px;
         background: #fff;
@@ -129,6 +129,15 @@ export default {
         border-radius: 0px; 
         .content {
             padding: 0;
+        }
+        .description {
+            padding: 0;
+            a {
+                display: block;
+                &:last-child {
+                    margin-left: 0;
+                }
+            }
         }
     }
 }

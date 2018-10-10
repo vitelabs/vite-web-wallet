@@ -95,7 +95,7 @@ export default {
     }
 }
 
-@media only screen and (max-width: 400px) {
+@media only screen and (max-width: 500px) {
     .page-wrapper {
         display: flex;
         flex-direction: column;

@@ -3,7 +3,7 @@
         <div class="header">
             <img class="vite-logo" :src="viteLogo" />
             <span class="menu">
-                <img :src="viteLogo" @click="clickMenu" />
+                <img :src="menu" @click="clickMenu" />
             </span>
         </div>
 
@@ -32,6 +32,7 @@
 
 <script>
 import viteLogo from 'assets/imgs/ViteLogo2.svg';
+import menu from 'assets/imgs/menu.svg';
 
 export default {
     props: {
@@ -42,6 +43,7 @@ export default {
     },
     data() {
         return {
+            menu,
             viteLogo,
             showList: false
         };

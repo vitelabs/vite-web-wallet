@@ -99,7 +99,7 @@ export default {
         bottom: 0;
     }
 }
-@media only screen and (max-width: 400px) {
+@media only screen and (max-width: 500px) {
     .file-drag {
         height: 100px;
         line-height: 100px;

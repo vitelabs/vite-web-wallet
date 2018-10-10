@@ -296,7 +296,7 @@ export default {
     }
 }
 
-@media only screen and (max-width: 400px) {
+@media only screen and (max-width: 500px) {
     .account-head-wrapper {
         padding: 15px;
         .head-title {
