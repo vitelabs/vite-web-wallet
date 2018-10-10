@@ -1,6 +1,6 @@
 <template>
     <div class="create-account-wrapper">
-        <div class="__title">{{$t('nav.head.setting')}}</div>
+        <div class="__title">{{ activeAccount ? $t('nav.head.reset') : $t('nav.head.setting')}}</div>
 
         <div class="__btn __btn_input" 
              :class="{ 'active': !!name || inputItem === 'name' }">
