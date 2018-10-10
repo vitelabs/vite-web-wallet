@@ -227,6 +227,7 @@ export default {
 
 .transaction-wrapper {
     width: 515px;
+    max-width: 90%;
     background: #fff;
     box-shadow: 0 2px 48px 1px rgba(176,192,237,0.42);
     border-radius: 2px;
@@ -291,12 +292,6 @@ export default {
             background: #efefef;
             color: #666;
         }
-    }
-}
-
-@media only screen and (max-width: 500px) {
-    .transaction-wrapper  {
-        width: 90%;
     }
 }
 </style>

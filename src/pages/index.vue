@@ -9,6 +9,7 @@
         </page-layout>
 
         <update></update>
+        <first-notice></first-notice>
     </div>
 </template>
 
@@ -16,12 +17,13 @@
 import indexLayout from 'components/indexLayout.vue';
 import pageLayout from 'components/pageLayout.vue';
 import update from 'components/update.vue';
+import firstNotice from 'components/firstNotice.vue';
 
 const homeLayouts = ['account', 'transList', 'setting'];
 
 export default {
     components: {
-        indexLayout, pageLayout, update
+        indexLayout, pageLayout, update, firstNotice
     },
     mounted() {
         this.changeLayout(this.$route.name);
