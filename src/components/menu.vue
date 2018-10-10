@@ -70,7 +70,7 @@ export default {
 
 .menu-wrapper {
     position: relative;
-    z-index: 100;
+    z-index: 50;
 }
 .header {
     padding: 15px 15px 13px 15px;

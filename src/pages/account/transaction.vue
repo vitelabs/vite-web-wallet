@@ -293,4 +293,10 @@ export default {
         }
     }
 }
+
+@media only screen and (max-width: 500px) {
+    .transaction-wrapper  {
+        width: 90%;
+    }
+}
 </style>
