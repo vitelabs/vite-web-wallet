@@ -63,11 +63,10 @@ let webpackConfig = {
             }]
         }, {
             test: /\.(svg|png|jpg|gif)$/,
-            use: [
-                {
-                    loader: 'file-loader'
-                }
-            ]
+            loader: 'url-loader',
+            query: {
+                limit: 10 * 1024 //10KB
+            }
         }, {
             test: /\.js$/,
             exclude: /node_modules/,
