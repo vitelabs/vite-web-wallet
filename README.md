@@ -19,7 +19,7 @@
 * Develop on branch `dev/{version}/{function name}`
 * Test on branch `test`
 * Fixed version on branch `dev/{version}`
-* Production branch `master`
+* Production branch `production`
 
 > Notice: development branch split from `dev/{last_version}`. If `dev/{last_version}` is not exist, split from `master`
 
