@@ -69,22 +69,17 @@ class Wallet {
 
         let requests = [];
         for (let i=0; i<num; i++) {
-            requests.push($ViteJS.Vite._currentProvider.batch([{
-                type: 'request',
-                methodName: 'ledger_getAccountByAccAddr',
-                params: [ addrs[i].hexAddr ]
-            }, {
-                type: 'request',
-                methodName: 'ledger_getUnconfirmedInfo',
-                params: [ addrs[i].hexAddr ]
-            }]));
+            requests.push( $ViteJS.Vite.Ledger.getBalance(addrs[i].hexAddr) );
         }
 
         return Promise.all(requests).then((data)=>{
             let index = 0;
             data.forEach((item, i) => {
-                let account = item[0].result;
-                let unconfirm = item[1].result;
+                if (!item) {
+                    return;
+                }
+                let account = item.balance;
+                let unconfirm = item.unconfirm;
                 if (account.blockHeight || unconfirm.unConfirmedBlocksLen) {
                     index = i;
                 }
