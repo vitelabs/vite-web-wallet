@@ -53,7 +53,7 @@ export default {
 .wrapper { 
     background: #fff;
     width: 90%;
-    max-height: 500px;
+    max-height: 600px;
     max-width: 600px;
     border-radius: 2px;
     padding: 25px 15px;
@@ -65,8 +65,11 @@ export default {
         text-align: center;
     }
     .first-notice {
+        box-sizing: border-box;
+        max-height: 420px;
         padding: 20px;
         font-size: 14px;
+        overflow: auto;
         li {
             margin-top: 10px;
             line-height: 20px;
@@ -76,11 +79,6 @@ export default {
                 margin-top: 0;
             }
         }
-    }
-    .btn {
-        width: 200px;
-        height: 60px;
-        line-height: 60px;
     }
 }
 </style>
