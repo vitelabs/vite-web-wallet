@@ -182,25 +182,7 @@ class Account {
 
     getBalance() {
         let addr = this.getDefaultAddr();
-        return $ViteJS.Vite._currentProvider.batch([{
-            type: 'request',
-            methodName: 'ledger_getAccountByAccAddr',
-            params: [ addr ]
-        },{
-            type: 'request',
-            methodName: 'ledger_getUnconfirmedInfo',
-            params: [ addr ]
-        }]).then((data)=>{
-            if (!data || !data.length || data.length < 2) {
-                return null;
-            }
-
-            let result = {
-                balance: data[0].result, 
-                unconfirm: data[1].result
-            };
-            return result;
-        });
+        return $ViteJS.Vite.Ledger.getBalance(addr);
     }
 }
 
