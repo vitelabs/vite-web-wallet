@@ -6,7 +6,9 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 
 const SRC_PATH = path.join(__dirname, '../src');
 const TEMPLATE_PATH = path.join(__dirname, '../index.html');
-const STATIC_PATH = path.join(__dirname, '../static');
+const STATIC_PATH = process.env.APP === 'true' ?
+    path.join(__dirname, '../../app/walletPages') : 
+    path.join(__dirname, '../static');
 
 let plugins = [
     new HtmlWebpackPlugin({
