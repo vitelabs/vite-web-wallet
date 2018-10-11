@@ -1,6 +1,6 @@
 <template>
     <div class="create-account-wrapper">
-        <div class="__title">{{$t('nav.head.setting')}}</div>
+        <div class="__title">{{ activeAccount ? $t('nav.head.reset') : $t('nav.head.setting')}}</div>
 
         <div class="__btn __btn_input" 
              :class="{ 'active': !!name || inputItem === 'name' }">
@@ -24,7 +24,7 @@
                    @blur="inputBlur('pass2')" />
         </div>
 
-        <div class="btn_list">
+        <div class="__btn_list">
             <span class="__btn __btn_border __pointer" :class="{
                 'unuse': isCreating
             }" @click="back" >{{ $t('btn.back') }}</span>
@@ -48,6 +48,9 @@ export default {
     },
     mounted() {
         this.focusName();
+        this.$onEnterKey(() => {
+            this.valid();
+        });
     },
     data() {
         let activeAccount = viteWallet.Wallet.getActiveAccount();
@@ -178,17 +181,5 @@ export default {
         background: #efefef;
         color: #666;
     }
-}
-.btn_list {
-    .__btn {
-        display: inline-block;
-        width: 167px;
-    }
-    .__btn_border {
-        margin-right: 20px;
-    }
-}
-.process {
-    margin-top: 60px;
 }
 </style>

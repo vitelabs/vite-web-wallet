@@ -2,6 +2,16 @@ module.exports = {
     lang: '中文',
 
     start: '开始',
+    logout: '退出登录',
+    
+    firstNotice: {
+        title: '使用前必读',
+        text1: '创建账户时，请务必备份您的助记词，如果您访问了一个钓鱼网站或者丢失了您的备份，本站无法为您恢复资金。',
+        text2: '由于本站不存储你的私钥或助记词，如果您更换浏览器、电脑或者清除浏览器缓存，需要通过备份助记词恢复账号。',
+        text3: '如果使用了从助记词恢复地址的方式，请保证助记词绝对正确，如果有细微的不同都可能无法恢复您的地址。',
+        text4: '当前版本钱包为预览版，您获得的VITE测试代币仅用于测试，无任何实际价值，同时官方会不定期对测试代币进行清零。',
+        btn: '我已了解'
+    },
 
     mnemonic: {
         title: '助记词',
@@ -34,6 +44,7 @@ module.exports = {
             imported: '导入账户',
             backup: '备份账户',
             setting: '设置账户',
+            reset: '重新设置账号',
             login: '登录账户'
         },
         sync: '钱包初始化中，暂时无法发送交易',
@@ -129,6 +140,7 @@ module.exports = {
         title: '交易记录',
         tType: {
             title: '交易类型',
+            symbol: '类型',
             send: '发送',
             receive: '接收',
         },
@@ -148,6 +160,7 @@ module.exports = {
         },
         timestamp: '时间戳',
         tAddress: '交易方地址',
+        tAddr: '交易方',
         sum: '金额',
         tDetail: '交易详情',
         noData: '暂无数据'

@@ -2,6 +2,8 @@
     <div class="trans-list-wrapper">
         <div class="title __pointer">{{ $t('transList.title') }}</div>
 
+        <!-- [TODO] -->
+
         <div class="trans-list">
             <div class="table__head">
                 <div class="cell-text tType">{{ $t('transList.tType.title') }}</div>
@@ -29,6 +31,33 @@
                     <span class="cell-text address">{{ item.transAddr }}</span>
                     <span class="cell-text sum">{{ item.amount }}</span>
                     <span class="cell-text">{{ item.token }}</span>
+                </div>
+            </div>
+
+            <div class="table-content no-data" v-show="!transList || !transList.length">
+                {{ $t('transList.noData') }}
+            </div>
+
+            <pagination class="pagination" :currentPage="currentPage + 1" 
+                        :totalPage="totalPage" :toPage="toPage"></pagination>
+        </div>
+
+        <div class="trans-list meta">
+            <div class="table__head">
+                <div class="cell-text tType">{{ $t('transList.tType.symbol') }}</div>
+                <div class="cell-text address">{{ $t('transList.tAddr') }}</div>
+                <div class="cell-text sum">{{ $t('transList.sum') }}</div>
+            </div>
+
+            <div ref="tableContent" class="table-content" v-show="transList && transList.length">
+                <div v-for="(item, index) in transList" :key="index"
+                     class="t-row __pointer" @click="goDetail(item)">
+                    <span class="cell-text tType">
+                        <img v-show="item.type === 'send'" class="icon" src='../assets/imgs/send.svg'/>
+                        <img v-show="item.type === 'receive'" class="icon" src='../assets/imgs/receive.svg'/>
+                    </span>
+                    <span class="cell-text address">{{ item.transAddr }}</span>
+                    <span class="cell-text sum">{{ item.amount }} {{ item.token }}</span>
                 </div>
             </div>
 
@@ -161,6 +190,9 @@ export default {
     background: #FFF;
     box-shadow: 0 2px 15px 1px rgba(176, 192, 237, 0.17);
     border-radius: 8px;
+    &.meta {
+        display: none;
+    }
     .table__head {
         height: 48px;
         line-height: 48px;
@@ -248,5 +280,49 @@ export default {
     height: 75px;
     line-height: 75px;
     text-align: center;
+}
+
+@media only screen and (max-width: 500px) {
+    .trans-list-wrapper {
+        padding: 15px;
+        .title {
+            margin-bottom: 15px;
+        }
+    }
+    .trans-list {
+        display: none;
+    }
+    .trans-list.meta {
+        display: flex;
+        max-height: 92%;
+        .table__head {
+            text-align: center;
+        }
+    }
+    .cell-text {
+        white-space: nowrap;
+        &:first-child {
+            float: left;
+            padding-left: 10px;
+        }
+        &:last-child {
+            float: right;
+            padding-right: 10px;
+        }
+        &.tType {
+            min-width: 50px;
+            width: 10%;
+        }
+        &.address {
+            overflow: hidden;
+            min-width: 200px;
+            width: 25%;
+        }
+        &.sum {
+            width: 14%;
+            float: right;
+            min-width: 60px;
+        }
+    }
 }
 </style>

@@ -75,6 +75,10 @@ export default {
         Vue.nextTick(()=>{
             this.$refs.inAddr && this.$refs.inAddr.focus();
         });
+        
+        this.$onEnterKey(() => {
+            this.validTrans();
+        });
     },
     destroyed() {
         clearTimeout(amountTimeout);
@@ -227,6 +231,7 @@ export default {
 
 .transaction-wrapper {
     width: 515px;
+    max-width: 90%;
     background: #fff;
     box-shadow: 0 2px 48px 1px rgba(176,192,237,0.42);
     border-radius: 2px;

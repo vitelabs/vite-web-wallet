@@ -2,6 +2,8 @@
     <div class="page-layout-wrapper" @click="operate">
         <div class="page-wrapper">
             <sidebar class="sidebar" :active="active"></sidebar>
+            <vite-menu class="menu" :active="active"></vite-menu>
+
             <div class="page-content">
                 <slot></slot>
             </div>
@@ -11,12 +13,13 @@
 
 <script>
 import sidebar from 'components/sidebar';
+import viteMenu from 'components/menu';
 
 let operateTimeout = null;
 
 export default {
     components: {
-        sidebar
+        sidebar, viteMenu
     },
     props: {
         active: {
@@ -78,6 +81,9 @@ export default {
     right: 0;
     bottom: 0;
     background: #fafcff;
+    .menu {
+        display: none;
+    }
     .sidebar {
         float: left;
         width: 118px;
@@ -86,6 +92,23 @@ export default {
         margin-left: 118px;
         height: 100%;
         overflow: auto;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .page-wrapper {
+        display: flex;
+        flex-direction: column;
+    }
+    .page-wrapper .menu  {
+        display: block;
+    }
+    .page-wrapper .sidebar  {
+        display: none;
+    }
+    .page-wrapper .page-content {
+        flex: 1;
+        margin-left: 0;
     }
 }
 </style>

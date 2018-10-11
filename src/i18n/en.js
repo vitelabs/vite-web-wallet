@@ -2,6 +2,17 @@ module.exports = {
     lang: 'English',
 
     start: 'Start',
+    logout: 'Logout',
+
+    // [TODO]
+    firstNotice: {
+        title: 'Read Before Use',
+        text1: 'Please be sure to backup your seed phrase when creating account. We cannot guarantee to restore your assets in case of you visit scam sites or lose your backups.',
+        text2: 'Noted that our site don\'t reserve your private key or seed phrase. Therefore, you need to restore your account via seed phrase if you decide to change browser, clear local cookies or even replace your PC.',
+        text3: 'Please make sure that the seed phrase is a hundred percent correct if you choose to restore address with it. Otherwise, any tiny little difference will lead to the result that your address cannot be restored successfully.',
+        text4: 'The current version of wallet is preview version, the Vite test tokens you obtained is only for testing and has no any actual value. Meanwhile, the official will occasionally clear test tokens.',
+        btn: 'I understand'
+    },
 
     mnemonic: {
         title:'Mnemonic',
@@ -23,7 +34,7 @@ module.exports = {
         service: 'Customer Service',
         site: 'Official Website of Vite',
         sys: 'System Portal',
-        open: 'Open source projects of Vite',
+        open: 'Vite Github',    // [TODO]
     },
 
     nav: {
@@ -34,6 +45,7 @@ module.exports = {
             imported: 'Import',
             backup: 'Back Up',
             setting: 'Setting Account',
+            reset: 'Account Reset',
             login: 'Login Account'
         },
         sync: 'Wallet initializing, transactions cannot be made temporarily.',
@@ -129,6 +141,7 @@ module.exports = {
         title: 'Transaction Records',
         tType: {
             title: 'Transaction Type',
+            symbol: 'Type',
             send: 'Send',
             receive: 'Receive',
         },
@@ -148,6 +161,7 @@ module.exports = {
         },
         timestamp: 'Timestamp',
         tAddress: 'Transaction Side Address',
+        tAddr: 'Transaction Side',
         sum: 'Amount',
         tDetail: 'Transaction Detail',
         noData: 'No Data'
