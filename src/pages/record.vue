@@ -2,9 +2,10 @@
     <div>
         <mnemonic :title="'mnemonic.record'" :submit="login">
             <div class="wrapper">
-                <div v-for="(item, index) in mnemonic" :key="index">
+                {{ mnemonic }}
+                <!-- <div v-for="(item, index) in mnemonic" :key="index">
                     {{ item }}
-                </div>
+                </div> -->
             </div>
         </mnemonic>
         <process class="process" active="record"></process>
@@ -23,24 +24,24 @@ export default {
         let activeAccount = viteWallet.Wallet.getActiveAccount();
         let mnemonic = activeAccount.getMnemonic() || '';
         
-        let list = mnemonic.split(/\s/);
+        // let list = mnemonic.split(/\s/);
 
-        let mnemonicList = [];
-        let str = '';
-        list.forEach((element, index) => {
-            if (index !== 0 && index < list.length - 1 && index%6 === 0) {
-                mnemonicList.push(str);
-                str = '';
-            } else if (index !== 0) {
-                str += ' ';
-            }
-            str += element;
-        });
-        mnemonicList.push(str);
+        // let mnemonicList = [];
+        // let str = '';
+        // list.forEach((element, index) => {
+        //     if (index !== 0 && index < list.length - 1 && index%6 === 0) {
+        //         mnemonicList.push(str);
+        //         str = '';
+        //     } else if (index !== 0) {
+        //         str += ' ';
+        //     }
+        //     str += element;
+        // });
+        // mnemonicList.push(str);
 
         return {
             activeAccount,
-            mnemonic: mnemonicList
+            mnemonic
         };
     },
     methods: {
