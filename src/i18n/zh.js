@@ -140,6 +140,7 @@ module.exports = {
         title: '交易记录',
         tType: {
             title: '交易类型',
+            symbol: '类型',
             send: '发送',
             receive: '接收',
         },
@@ -159,6 +160,7 @@ module.exports = {
         },
         timestamp: '时间戳',
         tAddress: '交易方地址',
+        tAddr: '交易方',
         sum: '金额',
         tDetail: '交易详情',
         noData: '暂无数据'

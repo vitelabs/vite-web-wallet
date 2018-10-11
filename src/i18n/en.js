@@ -4,6 +4,7 @@ module.exports = {
     start: 'Start',
     logout: 'Logout',
 
+    // [TODO]
     firstNotice: {
         title: '使用前必读',
         text1: '创建账户时，请务必备份您的助记词，如果您访问了一个钓鱼网站或者丢失了您的备份，本站无法为您恢复资金。',
@@ -33,7 +34,7 @@ module.exports = {
         service: 'Customer Service',
         site: 'Official Website of Vite',
         sys: 'System Portal',
-        open: 'Vite Github',
+        open: 'Vite Github',    // [TODO]
     },
 
     nav: {
@@ -140,6 +141,7 @@ module.exports = {
         title: 'Transaction Records',
         tType: {
             title: 'Transaction Type',
+            symbol: 'Type',
             send: 'Send',
             receive: 'Receive',
         },

@@ -2,6 +2,8 @@
     <div class="trans-list-wrapper">
         <div class="title __pointer">{{ $t('transList.title') }}</div>
 
+        <!-- [TODO] -->
+
         <div class="trans-list">
             <div class="table__head">
                 <div class="cell-text tType">{{ $t('transList.tType.title') }}</div>
@@ -42,7 +44,7 @@
 
         <div class="trans-list meta">
             <div class="table__head">
-                <div class="cell-text status">{{ $t('transList.status.title') }}</div>
+                <div class="cell-text tType">{{ $t('transList.tType.symbol') }}</div>
                 <div class="cell-text address">{{ $t('transList.tAddr') }}</div>
                 <div class="cell-text sum">{{ $t('transList.sum') }}</div>
             </div>
@@ -50,12 +52,9 @@
             <div ref="tableContent" class="table-content" v-show="transList && transList.length">
                 <div v-for="(item, index) in transList" :key="index"
                      class="t-row __pointer" @click="goDetail(item)">
-                    <span class="cell-text status __ellipsis" :class="{
-                        'green': item.status === 'confirmed',
-                        'pink': item.status === 'unconfirmed',
-                        'blue': item.status === 'confirms'
-                    }">
-                        {{ item.status === 'confrims' ? item.confirms : $t(`transList.status.${item.status}`) }}
+                    <span class="cell-text tType">
+                        <img v-show="item.type === 'send'" class="icon" src='../assets/imgs/send.svg'/>
+                        <img v-show="item.type === 'receive'" class="icon" src='../assets/imgs/receive.svg'/>
                     </span>
                     <span class="cell-text address">{{ item.transAddr }}</span>
                     <span class="cell-text sum">{{ item.amount }} {{ item.token }}</span>
@@ -310,13 +309,13 @@ export default {
             float: right;
             padding-right: 10px;
         }
-        &.status {
-            min-width: 65px;
+        &.tType {
+            min-width: 50px;
             width: 10%;
         }
         &.address {
             overflow: hidden;
-            min-width: 190px;
+            min-width: 200px;
             width: 25%;
         }
         &.sum {
