@@ -134,6 +134,6 @@ export default {
     padding: 10px 15px;
     font-size: 14px;
     color: #5E6875;
-    word-break: break-all;
+    word-wrap: break-word;
 }
 </style>
