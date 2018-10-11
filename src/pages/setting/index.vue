@@ -110,4 +110,16 @@ export default {
         }
     }
 }
+
+@media only screen and (max-width: 500px) {
+    .item {
+        width: auto;
+    }
+    .item .pass {
+        width: 78%;
+    }
+    .item .btn {
+        float: right;
+    }
+}
 </style>

@@ -1,7 +1,11 @@
 var fs = require('fs');
 var path = require('path');
 
-var redirect = path.join(__dirname, '_redirects');
+console.log(`Write _redirects ${process.env.NODE_ENV}`);
+
+var redirect = process.env.NODE_ENV === 'test' ? 
+    path.join(__dirname, 'redirects/_redirects_test') :
+    path.join(__dirname, 'redirects/_redirects');
 var staticPath = path.join(__dirname, 'static');
 
 var result = fs.existsSync(staticPath);

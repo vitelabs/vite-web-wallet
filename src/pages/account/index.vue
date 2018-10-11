@@ -1,7 +1,7 @@
 <template>
-    <div class="account-wrapper">
+    <div class="account-wrapper" @click="closeQrCode">
         <sync-block class="sync-block item"></sync-block>
-        <account-head class="item"></account-head>
+        <account-head ref="accountHead" class="item"></account-head>
         <div class="item token-list">
             <tokenCard v-for="token in tokenList" :key="token.id"
                        :opt="token" :sendTransaction="showTrans"></tokenCard>
@@ -65,6 +65,10 @@ export default {
         closeTrans() {
             this.isShowTrans = false;
             this.activeToken = null;
+        },
+        closeQrCode(e) {
+            let accountHead = this.$refs.accountHead;
+            accountHead && accountHead.closeQrCode(e);
         }
     }
 };
@@ -84,9 +88,8 @@ export default {
         text-align: center;
     }
 }
-
 .item {
-    margin-top: 40px;
+    margin-top: 20px;
 }
 .token-list {
     display: flex;
@@ -103,6 +106,20 @@ export default {
     justify-content: center;
     align-items: center;
     background: rgba(0, 0, 0, 0.6);
-    z-index: 2;
+    z-index: 100;
+}
+
+@media only screen and (max-width: 500px) {
+    .account-wrapper {
+        padding: 0 15px;
+    }
+    .token-list {
+        display: block;
+        .token-card {
+            width: 100%;
+            margin-bottom: 15px;
+            margin-left: 0px;
+        }
+    }
 }
 </style>

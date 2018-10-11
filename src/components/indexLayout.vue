@@ -37,8 +37,8 @@ export default {
     width: 100%;
     height: 100%;
     overflow: auto;
-    animation: sk-rotateplane 0.3s ease-in-out;
-    @keyframes sk-rotateplane {
+    animation: key-opacity 0.3s ease-in-out;
+    @keyframes key-opacity {
         0% { opacity: 0.1; } 
         100% { opacity: 1; }
     }
@@ -69,7 +69,14 @@ export default {
             position: relative;
             width: 360px;
             text-align: center;
+            padding: 20px;
         }
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .index-layout-wrapper .header  {
+        padding: 40px 0px 40px 20px;
     }
 }
 </style>
