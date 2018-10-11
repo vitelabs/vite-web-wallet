@@ -58,7 +58,6 @@
         "node-libs-browser": "^2.1.0",
         "qrcode.es": "^1.0.0",
         "qs": "^6.5.2",
-        "vite.js": "git+https://github.com/vitelabs/vite.js.git",
         "vuex": "^3.0.1"
     }
 }
