@@ -1,6 +1,6 @@
 class Types {
     isValidHexAddr(addr) {
-        return $ViteJS.Vite.Types.isValidHexAddr(addr);
+        return $ViteJS.Vite.Account.isValidHexAddr(addr);
     }
 }
 

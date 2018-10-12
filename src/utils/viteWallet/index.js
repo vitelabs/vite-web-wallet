@@ -7,7 +7,7 @@ import bignumber from './bignumber';
 import Types from './types';
 
 let WS_RPC = new ViteJS.WS_RPC({
-    url: 'wss://test.vitewallet.com/ws',
+    url: 'ws://150.109.105.154:41420',
     timeout: 15000
 });
 window.$ViteJS = new ViteJS(WS_RPC);
