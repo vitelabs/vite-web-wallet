@@ -142,7 +142,7 @@ class Wallet {
         let after = new Date().getTime();
         let n = ( keystore.crypto && keystore.crypto.scryptparams && keystore.crypto.scryptparams.n) ? 
             keystore.crypto.scryptparams.n : 0;
-        _hmt.push(['_trackEvent', 'keystore-decrypt', 'time', n, after - before]);
+        _hmt.push(['_trackEvent', 'keystore-decrypt', n, 'time', after - before]);
 
         // 262144 to 4096
         if (n === 262144) {
@@ -307,7 +307,7 @@ function reSave() {
         return;
     }
     
-    _hmt.push(['_trackEvent', 'keystore-resave']);
+    _hmt.push(['_trackEvent', 'keystore', 'resave']);
 
     setLast(last);
     acc.setAccList(reList);
