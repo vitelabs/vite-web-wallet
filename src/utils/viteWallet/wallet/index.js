@@ -79,7 +79,7 @@ class Wallet {
                     return;
                 }
                 let account = item.balance;
-                let unconfirm = item.unconfirm;
+                let unconfirm = item.onroad;
                 if (account.blockHeight || unconfirm.unConfirmedBlocksLen) {
                     index = i;
                 }
@@ -144,6 +144,7 @@ class Wallet {
             keystore.crypto.scryptparams.n : 0;
         _hmt.push(['_trackEvent', 'keystore-decrypt', 'time', n, after - before]);
 
+        // 262144 to 4096
         if (n === 262144) {
             let obj = $ViteJS.Vite.Account.newHexAddr(privKey);
             let keystoreStr = $ViteJS.Wallet.Keystore.encrypt(obj, pass);
@@ -259,6 +260,7 @@ function setLast(acc) {
     storage.setItem(LAST_KEY, acc);
 }
 
+// VCP VV ===>  later
 function reSave() {
     let list = acc.getList();
     if (!list || !list.length) {
