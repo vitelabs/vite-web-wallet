@@ -1,6 +1,7 @@
 import acc from './storeAcc.js';
 import account from './account.js';
 import storage from 'utils/localStorage.js';
+import toast from 'utils/toast/index.js';
 
 const LAST_KEY = 'ACC_LAST';
 
@@ -32,19 +33,23 @@ class Wallet {
             return;
         }
 
-        let { addr, entropy } = $ViteJS.Wallet.Address.newAddr();
-        let encryptObj = $ViteJS.Wallet.Account.encrypt(entropy, pass);
-        let obj = JSON.parse(encryptObj);
-
-        this.newActiveAcc({
-            defaultInx: 0,
-            addrNum: 1, 
-            name,
-            decryptEntropy: entropy,
-            entropy: obj.encryptentropy,
-            encryptObj: obj,
-            addrs: [addr]
-        });
+        try {
+            let { addr, entropy } = $ViteJS.Wallet.Address.newAddr();
+            let encryptObj = $ViteJS.Wallet.Account.encrypt(entropy, pass);
+            let obj = JSON.parse(encryptObj);
+    
+            this.newActiveAcc({
+                defaultInx: 0,
+                addrNum: 1, 
+                name,
+                decryptEntropy: entropy,
+                entropy: obj.encryptentropy,
+                encryptObj: obj,
+                addrs: [addr]
+            });
+        } catch(err) {
+            toast( JSON.stringify(err) );
+        }
     }
 
     importKeystore(data) {
