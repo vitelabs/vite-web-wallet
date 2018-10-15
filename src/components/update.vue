@@ -23,13 +23,6 @@ export default {
         };
     },
     mounted() {
-        // "1": {
-        //     "version": "0.0.1",
-        //     "zh": "0.0.1 中文版 版本描述",
-        //     "en": "0.0.1 english version",
-        //     "time": "22329382932"
-        // }
-        
         let lastVersion = localStorage.getItem(version_key) || null;
 
         let currentCode = lastVersion ? lastVersion.currentCode || 0 : 0;
@@ -45,9 +38,9 @@ export default {
             this.versionList.push( version[code] );
         }
 
-        if (this.versionList >= showNum) {
+        if (this.versionList.length >= showNum) {
             this.versionList = this.versionList.slice(this.versionList.length - showNum);
-            this.latestCode = this.versionList[2].code;
+            this.latestCode = this.versionList[this.versionList.length - 1].code;
             this.saveVersion();
             return;
         }
@@ -91,6 +84,7 @@ export default {
     box-sizing: border-box;
     padding: 30px;
     font-family: $font-bold;
+    word-wrap: break-word;
     &:before {
         content: '';
         display: inline-block;
@@ -115,6 +109,13 @@ export default {
         font-size: 14px;
         color: #5E6875;
         line-height: 28px;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .version-wrapper {
+        width: 300px;
+        padding: 15px;
     }
 }
 </style>

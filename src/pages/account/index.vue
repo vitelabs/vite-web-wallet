@@ -33,7 +33,7 @@ export default {
         this.clearTime();
         balanceInfoInst = new timer(()=>{
             return this.$store.dispatch('getBalanceInfo', activeAccount);
-        }, loopTime.ledger_getAccountByAccAddr);
+        }, loopTime.ledger_getBalance);
         balanceInfoInst.start();
     },
     beforeDestroy () {

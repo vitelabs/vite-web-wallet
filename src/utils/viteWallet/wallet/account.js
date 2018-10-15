@@ -37,6 +37,7 @@ class Account {
         if (!this.keystore) {
             return false;
         }
+        
         return $ViteJS.Wallet.Keystore.decrypt(JSON.stringify(this.keystore), pass);
     }
 
@@ -136,7 +137,7 @@ class Account {
 
         let addr = this.addrs[this.defaultInx].hexAddr;
         let privKey = this.addrs[this.defaultInx].privKey;
-        $ViteJS.Wallet.Account.unlock(addr, privKey);
+        $ViteJS.Wallet.Account.autoReceiveTX(addr, privKey);
     }
 
     lock() {
@@ -149,7 +150,7 @@ class Account {
             return;
         }
 
-        $ViteJS.Wallet.Account.lock(addr.hexAddr);
+        $ViteJS.Wallet.Account.stopAutoReceiveTX(addr.hexAddr);
     }
 
     sendTx({
@@ -166,18 +167,9 @@ class Account {
         let fromAddr = this.addrs[this.defaultInx].hexAddr;
         let privKey = this.addrs[this.defaultInx].privKey;
 
-        return new Promise((res, rej) => {
-            $ViteJS.Wallet.Account.sendTx({
-                fromAddr, toAddr, tokenId, amount, message
-            }, privKey).then(({ error })=>{
-                if (error) {
-                    return rej(error);
-                }
-                return res();
-            }).catch((err)=>{
-                return rej(err);
-            });
-        }); 
+        return $ViteJS.Wallet.Account.sendTx({
+            fromAddr, toAddr, tokenId, amount, message
+        }, privKey);
     }
 
     getBalance() {

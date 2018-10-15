@@ -18,7 +18,7 @@ class Ledger {
             }, loopTime.ledger_getSnapshotChainHeight);
         };
 
-        $ViteJS.Vite.Ledger.getSnapshotChainHeight().then(({ result })=>{
+        $ViteJS.Vite['ledger_getSnapshotChainHeight']().then(({ result })=>{
             if (result) {
                 this.currentHeight = result;
                 webViteEventEmitter.emit('currentHeight', this.currentHeight);
