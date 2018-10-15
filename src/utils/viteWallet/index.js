@@ -5,6 +5,7 @@ import net from './net';
 import ledger from './ledger';
 import bignumber from './bignumber';
 import Types from './types';
+import TestToken from './testToken';
 
 let WS_RPC = new ViteJS.WS_RPC({
     url: 'ws://150.109.105.154:41420',
@@ -16,6 +17,7 @@ window.viteWallet = {
     Wallet: new wallet(),
     Net: new net(),
     Ledger: new ledger(),
-    BigNumber: new bignumber(ViteJS.BigNumber),
-    Types: new Types()
+    BigNumber: new bignumber(),
+    Types: new Types(),
+    TestToken: new TestToken($ViteJS._currentProvider)
 };

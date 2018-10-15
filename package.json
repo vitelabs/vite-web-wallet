@@ -55,6 +55,7 @@
     },
     "dependencies": {
         "axios": "^0.18.0",
+        "bignumber.js": "^7.2.1",
         "buffer": "^5.2.1",
         "koa": "^2.5.3",
         "koa-router": "^7.4.0",

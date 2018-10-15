@@ -138,7 +138,7 @@ module.exports = {
 
     // Transaction List
     transList: {
-        title: 'Transaction Records',
+        title: 'Transactions',
         tType: {
             title: 'Transaction Type',
             symbol: 'Type',
@@ -160,8 +160,7 @@ module.exports = {
             err: 'Oops, error occurs'
         },
         timestamp: 'Timestamp',
-        tAddress: 'Transaction Side Address',
-        tAddr: 'Transaction Side',
+        tAddress: 'From/To',
         sum: 'Amount',
         tDetail: 'Transaction Detail',
         noData: 'No Data'
