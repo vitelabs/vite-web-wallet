@@ -141,12 +141,12 @@ export default {
             };
 
             this.isLoading = true;
-            Vue.nextTick(()=>{
+            window.setTimeout(()=>{
                 let result = viteWallet.Wallet.login(this.activeAccount, this.password);
                 this.isLoading = false;
                 result && loginSuccess();
                 !result && toast(this.$t('hint.pwErr'), 'error');
-            });
+            }, 0);
         }
     }
 };

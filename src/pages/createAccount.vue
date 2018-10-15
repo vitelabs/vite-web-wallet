@@ -160,13 +160,13 @@ export default {
         },
         createAccount() {
             this.isCreating = true;
-            Vue.nextTick(() => {
+            window.setTimeout(() => {
                 viteWallet.Wallet.create(this.name, this.pass1);
                 this.isCreating = false;
                 this.$router.push({
                     name: 'record'
                 });
-            });
+            }, 0);
         },
         restoreAccount() {
             viteWallet.Wallet.restoreAccount(this.name, this.pass1);
