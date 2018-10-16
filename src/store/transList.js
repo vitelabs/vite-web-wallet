@@ -70,7 +70,7 @@ const getters = {
             let transAddr = ellipsisAddr( isSend ? item.toAddress : item.fromAddress );
 
             let amount = item.tokenInfo && item.tokenInfo.decimals ?
-                viteWallet.BigNumber.toBasic(item.amount, item.mintage.decimals) :
+                viteWallet.BigNumber.toBasic(item.amount, item.tokenInfo.decimals) :
                 item.amount;
 
             nowList.push({
@@ -81,7 +81,7 @@ const getters = {
                 transAddr,
                 amount: isSend ? ('-' + amount) : amount,
                 hash: item.hash,
-                token: item.tokenInfo && item.tokenInfo.symbol ? item.tokenInfo.symbol : '--'
+                token: item.tokenInfo && item.tokenInfo.tokenSymbol ? item.tokenInfo.tokenSymbol : '--'
             });
         });
         return nowList;
