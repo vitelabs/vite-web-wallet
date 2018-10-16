@@ -32,21 +32,13 @@
 </template>
 
 <script>
-import versionList from 'version';
-
 let heightEvent = null;
 
 export default {
     data() {
-        let code = 0;
-        let versionStr = '';
-        for(let key in versionList) {
-            +key > code && (versionStr = versionList[key].version);
-        }
-
         return {
             height: '',
-            version: versionStr
+            version: process.env.version
         };
     },
     mounted() {

@@ -1,6 +1,7 @@
 import acc from './storeAcc.js';
 import account from './account.js';
 import storage from 'utils/localStorage.js';
+import statistics from 'utils/statistics';
 
 const LAST_KEY = 'ACC_LAST';
 
@@ -129,6 +130,7 @@ class Wallet {
     }
 
     _loginKeystore(addr, pass) {
+        console.log('???');
         let acc = getAccFromAddr(addr);
         let keystore = acc.keystore;
 
@@ -142,7 +144,7 @@ class Wallet {
         let after = new Date().getTime();
         let n = ( keystore.crypto && keystore.crypto.scryptparams && keystore.crypto.scryptparams.n) ? 
             keystore.crypto.scryptparams.n : 0;
-        _hmt.push(['_trackEvent', 'keystore-decrypt', n, 'time', after - before]);
+        statistics.event('keystore-decrypt', n, 'time', after - before);
 
         // 262144 to 4096
         if (n === 262144) {
@@ -175,7 +177,11 @@ class Wallet {
             let encryptObj = acc.encryptObj;
             encryptObj.encryptentropy = entropy;
 
+            let before = new Date().getTime();
             let decryptEntropy = $ViteJS.Wallet.Account.decrypt(JSON.stringify(encryptObj), pass);
+            let after = new Date().getTime();
+            statistics.event('mnemonic-decrypt', encryptObj.version || '1', 'time', after - before);
+
             if (!decryptEntropy) {
                 return false;
             }
@@ -307,8 +313,7 @@ function reSave() {
         return;
     }
     
-    _hmt.push(['_trackEvent', 'keystore', 'resave']);
-
+    statistics.event('keystore', 'resave');
     setLast(last);
     acc.setAccList(reList);
     console.log('done', new Date().getTime());
