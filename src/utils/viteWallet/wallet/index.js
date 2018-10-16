@@ -74,22 +74,17 @@ class Wallet {
 
         let requests = [];
         for (let i=0; i<num; i++) {
-            requests.push($ViteJS.Vite._currentProvider.batch([{
-                type: 'request',
-                methodName: 'ledger_getAccountByAccAddr',
-                params: [ addrs[i].hexAddr ]
-            }, {
-                type: 'request',
-                methodName: 'ledger_getUnconfirmedInfo',
-                params: [ addrs[i].hexAddr ]
-            }]));
+            requests.push( $ViteJS.Vite.Ledger.getBalance(addrs[i].hexAddr) );
         }
 
         return Promise.all(requests).then((data)=>{
             let index = 0;
             data.forEach((item, i) => {
-                let account = item[0].result;
-                let unconfirm = item[1].result;
+                if (!item) {
+                    return;
+                }
+                let account = item.balance;
+                let unconfirm = item.onroad;
                 if (account.blockHeight || unconfirm.unConfirmedBlocksLen) {
                     index = i;
                 }
@@ -152,8 +147,9 @@ class Wallet {
         let after = new Date().getTime();
         let n = ( keystore.crypto && keystore.crypto.scryptparams && keystore.crypto.scryptparams.n) ? 
             keystore.crypto.scryptparams.n : 0;
-        _hmt.push(['_trackEvent', 'keystore-decrypt', 'time', n, after - before]);
+        _hmt.push(['_trackEvent', 'keystore-decrypt', n, 'time', after - before]);
 
+        // 262144 to 4096
         if (n === 262144) {
             let obj = $ViteJS.Vite.Account.newHexAddr(privKey);
             let keystoreStr = $ViteJS.Wallet.Keystore.encrypt(obj, pass);
@@ -269,6 +265,7 @@ function setLast(acc) {
     storage.setItem(LAST_KEY, acc);
 }
 
+// VCP VV ===>  later
 function reSave() {
     let list = acc.getList();
     if (!list || !list.length) {
@@ -315,7 +312,7 @@ function reSave() {
         return;
     }
     
-    _hmt.push(['_trackEvent', 'keystore-resave']);
+    _hmt.push(['_trackEvent', 'keystore', 'resave']);
 
     setLast(last);
     acc.setAccList(reList);

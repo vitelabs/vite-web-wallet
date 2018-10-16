@@ -45,7 +45,7 @@
         <div class="trans-list meta">
             <div class="table__head">
                 <div class="cell-text tType">{{ $t('transList.tType.symbol') }}</div>
-                <div class="cell-text address">{{ $t('transList.tAddr') }}</div>
+                <div class="cell-text address">{{ $t('transList.tAddress') }}</div>
                 <div class="cell-text sum">{{ $t('transList.sum') }}</div>
             </div>
 
@@ -147,7 +147,7 @@ export default {
             this.stopLoopTransList();
             transListInst = new timer(()=>{
                 return this.fetchTransList(this.currentPage);
-            }, loopTime.ledger_getBlocksByAccAddr);
+            }, loopTime.ledger_getBlocks);
             transListInst.start();
         },
         stopLoopTransList() {
@@ -167,6 +167,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
+
 .trans-list-wrapper {
     position: relative;
     box-sizing: border-box;

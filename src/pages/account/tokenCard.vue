@@ -14,7 +14,7 @@
                 <span class="balance">{{ opt.fundFloat || 0 }}</span>
             </div>
             <div class="tips">
-                <span>{{ opt.unConfirmes || 0 }} {{ $t('accDetail.pend') }}</span>
+                <span>{{ opt.onroadNum || 0 }} {{ $t('accDetail.pend') }}</span>
             </div>
         </div>
         <div class="btn __pointer" :class="{ unuse: !opt.id }" 
