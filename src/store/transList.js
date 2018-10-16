@@ -65,11 +65,13 @@ const getters = {
                 status = 'confirmed';
             }
 
-            let isSend = !item.from;
-
+            let isSend = [1, 2, 3].indexOf(+item.blockType) > -1;
             let timestamp = item.timestamp * 1000;
-            let transAddr = ellipsisAddr( isSend ? item.to : item.from );
-            let amount = viteWallet.BigNumber.toBasic(item.amount, item.mintage.decimals);
+            let transAddr = ellipsisAddr( isSend ? item.toAddress : item.fromAddress );
+
+            let amount = item.tokenInfo && item.tokenInfo.decimals ?
+                viteWallet.BigNumber.toBasic(item.amount, item.tokenInfo.decimals) :
+                item.amount;
 
             nowList.push({
                 type: isSend ? 'send' : 'receive',
@@ -79,7 +81,7 @@ const getters = {
                 transAddr,
                 amount: isSend ? ('-' + amount) : amount,
                 hash: item.hash,
-                token: item.mintage.symbol
+                token: item.tokenInfo && item.tokenInfo.tokenSymbol ? item.tokenInfo.tokenSymbol : '--'
             });
         });
         return nowList;

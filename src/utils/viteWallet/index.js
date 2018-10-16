@@ -5,10 +5,11 @@ import net from './net';
 import ledger from './ledger';
 import bignumber from './bignumber';
 import Types from './types';
+import TestToken from './testToken';
 
 let WS_RPC = new ViteJS.WS_RPC({
-    url: 'wss://test.vitewallet.com/ws',
-    timeout: 15000
+    url: 'ws://150.109.120.109:41420',
+    timeout: 60000
 });
 window.$ViteJS = new ViteJS(WS_RPC);
 
@@ -16,6 +17,7 @@ window.viteWallet = {
     Wallet: new wallet(),
     Net: new net(),
     Ledger: new ledger(),
-    BigNumber: new bignumber(ViteJS.BigNumber),
-    Types: new Types()
+    BigNumber: new bignumber(),
+    Types: new Types(),
+    TestToken: new TestToken($ViteJS._currentProvider)
 };

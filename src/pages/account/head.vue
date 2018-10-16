@@ -47,7 +47,6 @@ import Vue from 'vue';
 import qrcode from 'components/qrcode';
 import copyOK from 'components/copyOK';
 import copy from 'utils/copy';
-import request from 'utils/request';
 import { stringify } from 'utils/viteSchema';
 import toast from 'utils/toast/index.js';
 
@@ -115,15 +114,12 @@ export default {
         },
 
         getTestToken() {
-            request({
-                method: 'POST',
-                url: 'https://testnet.vite.net/api/account/newtesttoken',
-                params: {
-                    accountAddress: this.account.addr
-                }
-            }).then(() => {
+            if (!this.account || !this.account.addr) {
+                toast( this.$t('accDetail.hint.tErr') );
+            }
+            viteWallet.TestToken.get(this.account.addr).then(() => {
                 toast( this.$t('accDetail.hint.token') );
-            }).catch(err => {
+            }).catch((err) => {
                 console.warn(err);
                 toast( this.$t('accDetail.hint.tErr') );
             });
