@@ -1,5 +1,5 @@
 const TokenIds = {
-    'tti_000000000000000000004cfd': 'VITE',
+    'tti_5649544520544f4b454e6e40': 'VITE',
     'tti_12ea0c02170304090a5ac879': 'VCP',
     'tti_b6187a150d175e5a165b1c5b': 'VV'
 };
