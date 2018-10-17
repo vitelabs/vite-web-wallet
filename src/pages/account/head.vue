@@ -322,6 +322,11 @@ export default {
     .account-head-wrapper {
         display: block;
         padding: 15px;
+        overflow: unset;
+        .head-content {
+            display: block;
+            min-width: 0;
+        }
         .head-title {
             padding-bottom: 15px;
             .edit {
@@ -342,6 +347,7 @@ export default {
         margin-top: 20px;
         display: block;
         width: 100%;
+        min-width: 0;
         .addr-content {
             padding: 10px;
             height: auto;
