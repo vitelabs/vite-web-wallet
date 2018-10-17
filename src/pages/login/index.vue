@@ -159,6 +159,11 @@ export default {
         &.disable {
             background: #bfbfbf;
         }
+        &.__btn_input {
+            .name {
+                width: 89%;
+            }
+        }
     }
     .bottom {
         margin-bottom: 20px;
