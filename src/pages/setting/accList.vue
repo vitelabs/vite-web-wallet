@@ -2,6 +2,7 @@
     <div class="acc-list-wrapper">
         <div class="row">
             <span class="title">{{ $t('accList.addr') }}</span>
+            <span class="title meta">{{ $t('accList.addrList') }}</span>
             <span class="describe">{{ $t('accList.default') }}</span>
         </div>
         <div class="acc-list __pointer">
@@ -85,6 +86,9 @@ export default {
         color: #1D2024;
         letter-spacing: 0.35px;
         font-family: $font-bold;
+        &.meta {
+            display: none;
+        }
     }
     .describe {
         float: right;
@@ -154,6 +158,12 @@ export default {
 }
 
 @media only screen and (max-width: 500px) {
+    .row .title {
+        display: none;
+        &.meta {
+            display: inline;
+        }
+    }
     .acc-list .acc-item {
         padding: 10px;
     }

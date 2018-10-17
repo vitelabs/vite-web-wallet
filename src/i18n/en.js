@@ -68,6 +68,7 @@ module.exports = {
         balance: 'Balance',
         addAcc: 'Add Account',
         addr: 'Address Lists of Accounts',
+        addrList: 'Address List',
         default: 'Select Default User'
     },
 
