@@ -2,7 +2,9 @@
     <layout>
         <div v-show="showPassWrapper" class="item" :class="{ 'unlock': !lock }">
             <div class="title __pointer">{{ $t('setting.unlock') }}</div>
-            <input :disabled="!lock" class="pass" v-model="pass" type="password" :placeholder="$t('create.input')" />
+            <div class="input-wrapper">
+                <input :disabled="!lock" class="pass" v-model="pass" type="password" :placeholder="$t('create.input')" />
+            </div>
             <span class="btn __pointer" @click="validPass">{{ $t('btn.submit') }}</span>
         </div>
 
@@ -78,18 +80,23 @@ export default {
         line-height: 16px;
         margin-bottom: 16px;
     }
-    .pass {
+    .input-wrapper {
         display: inline-block;
-        box-sizing: border-box;
         width: 397px;
         height: 40px;
-        padding: 0 15px;
         margin-right: 10px;
-        line-height: 40px;
-        background: #FFFFFF;
-        border: 1px solid #D4DEE7;
-        border-radius: 2px;
-        font-size: 14px;
+        .pass {
+            display: inline-block;
+            box-sizing: border-box;
+            width: 100%;
+            height: 100%;
+            padding: 0 15px;
+            line-height: 40px;
+            background: #FFFFFF;
+            border: 1px solid #D4DEE7;
+            border-radius: 2px;
+            font-size: 14px;
+        }
     }
     .btn {
         position: relative;
@@ -115,8 +122,8 @@ export default {
     .item {
         width: auto;
     }
-    .item .pass {
-        width: 78%;
+    .item .input-wrapper {
+        width: 75%;
     }
     .item .btn {
         float: right;

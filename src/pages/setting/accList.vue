@@ -7,8 +7,8 @@
         <div class="acc-list __pointer">
             <div ref="listWrapper" class="list-wrapper">
                 <div ref="list">
-                    <div @click="setDefault(addr)" class="acc-item __ellipsis" v-for="(addr, index) in addrList" :key="index">
-                        <span class="describe">{{(index + 1) + '. ' + addr}}</span>
+                    <div @click="setDefault(addr)" class="acc-item" v-for="(addr, index) in addrList" :key="index">
+                        <span class="describe __ellipsis">{{(index + 1) + '. ' + addr}}</span>
                         <span class="select" :class="{
                             'active': defaultAddr === addr
                         }"></span>
@@ -159,6 +159,13 @@ export default {
     }
     .acc-list .add {
         padding: 0 10px;
+        .describe {
+            display: inline;
+        }
+    }
+    .acc-list .describe {
+        display: block;
+        width: 93%;
     }
     .acc-list .select {
         margin-top: -18px;

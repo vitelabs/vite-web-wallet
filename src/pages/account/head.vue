@@ -1,43 +1,45 @@
 <template>
     <div class="account-head-wrapper">
-        <div class="custom-name">
-            <div class="head-title">
-                <span>{{ $t('accDetail.name') }}</span>
-                <img @click="startRename" class="edit __pointer" src="../../assets/imgs/edit_icon.svg"/>
+        <div class="head-content">
+            <div class="custom-name">
+                <div class="head-title">
+                    <span>{{ $t('accDetail.name') }}</span>
+                    <img @click="startRename" class="edit __pointer" src="../../assets/imgs/edit_icon.svg"/>
+                </div>
+                <div v-show="!isShowNameInput" class="name" :class="{
+                    'small-font': account.name && account.name.length > 16
+                }" @click="startRename">{{ account.name }}</div>
+                <input ref="nameInput" v-show="isShowNameInput" type="text"
+                       v-model="editName" :placeholder="account.name"
+                       @blur="rename"/>
             </div>
-            <div v-show="!isShowNameInput" class="name" :class="{
-                'small-font': account.name && account.name.length > 16
-            }" @click="startRename">{{ account.name }}</div>
-            <input ref="nameInput" v-show="isShowNameInput" type="text"
-                   v-model="editName" :placeholder="account.name"
-                   @blur="rename"/>
-        </div>
 
-        <div class="addr-wrapper">
-            <div class="head-title">
-                <span>{{ $t('accDetail.address') }}</span>
-                <span ref="codeContainer" class="title_icon __pointer qrcode"><img src="../../assets/imgs/qrcode_default.svg" @click="toggleQrCode" />
-                    <div class="code-container" v-show="qrcodeShow">
-                        <div class="code">
-                            <qrcode :text="addressStr" :options="{ size:146 }" @genImage="getImage"></qrcode>
+            <div class="addr-wrapper">
+                <div class="head-title">
+                    <span>{{ $t('accDetail.address') }}</span>
+                    <span ref="codeContainer" class="title_icon __pointer qrcode"><img src="../../assets/imgs/qrcode_default.svg" @click="toggleQrCode" />
+                        <div class="code-container" v-show="qrcodeShow">
+                            <div class="code">
+                                <qrcode :text="addressStr" :options="{ size:146 }" @genImage="getImage"></qrcode>
+                            </div>
+                            <div class="btn" @click="downLoadQrCode">{{ $t('accDetail.saveQrcode') }}</div>
                         </div>
-                        <div class="btn" @click="downLoadQrCode">{{ $t('accDetail.saveQrcode') }}</div>
-                    </div>
-                </span>
-                <img src="../../assets/imgs/copy_default.svg" @click="copy" class="title_icon copy __pointer"/>
-                <copyOK :copySuccess="copySuccess"></copyOK>
+                    </span>
+                    <img src="../../assets/imgs/copy_default.svg" @click="copy" class="title_icon copy __pointer"/>
+                    <copyOK :copySuccess="copySuccess"></copyOK>
+                </div>
+                <div class="copy addr-content">{{ account.addr }}</div>
             </div>
-            <div class="copy addr-content">{{ account.addr }}</div>
-        </div>
         
-        <div class="btn-group">
-            <div class="btn__small __pointer __btn-test" @click="getTestToken">
-                <span>{{ $t('accDetail.getTestToken') }}</span>
-                <img src="../../assets/imgs/Vite_icon.svg" class="icon" />
-            </div>
-            <div @click="goDetail" class="btn__small __pointer __btn-detail">
-                {{ $t('accDetail.transDetail') }}
-                <img src="../../assets/imgs/more.svg" class="more-icon" />
+            <div class="btn-group">
+                <div class="btn__small __pointer __btn-test" @click="getTestToken">
+                    <span>{{ $t('accDetail.getTestToken') }}</span>
+                    <img src="../../assets/imgs/Vite_icon.svg" class="icon" />
+                </div>
+                <div @click="goDetail" class="btn__small __pointer __btn-detail">
+                    {{ $t('accDetail.transDetail') }}
+                    <img src="../../assets/imgs/more.svg" class="more-icon" />
+                </div>
             </div>
         </div>
     </div>
@@ -186,9 +188,14 @@ export default {
     box-shadow: 0 2px 48px 1px rgba(176, 192, 237, 0.42);
     border-radius: 2px;
     padding: 30px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    overflow: auto;
+    .head-content {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+        min-width: 1050px;
+    }
     .head-title {
         position: relative;
         display: block;
@@ -240,8 +247,10 @@ export default {
     }
     .addr-wrapper {
         display: inline-block;
-        width: 490px;
+        max-width: 510px;
+        min-width: 470px;
         text-align: left;
+        margin-right: 20px;
         .addr-content {
             font-size: 14px;
             width: 100%;
@@ -261,8 +270,9 @@ export default {
         text-align: left;
         font-family: $font-bold;    
         max-width: 28%;
-        min-width: 300px;
+        min-width: 320px;
         word-break: break-all;
+        margin-right: 20px;
         .name {
             display: inline-block;
             line-height: 32px;
@@ -275,11 +285,11 @@ export default {
             height: 32px;
             line-height: 32px;
             font-size: 20px;
-            width: 300px;
+            width: 100%;
         }
     }
     .btn-group {
-        width: 200px;
+        width: 212px;
         font-family: $font-normal-b;
         .btn__small {
             width: 210px;
@@ -322,6 +332,8 @@ export default {
     }
     .account-head-wrapper .custom-name {
         width: 100%;
+        max-width: 100%;
+        min-width: 0px;
         position: relative;
         input {
             width: 100%;

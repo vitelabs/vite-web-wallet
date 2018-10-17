@@ -67,7 +67,8 @@ export default {
         overflow: auto;
         .confirm {
             position: relative;
-            width: 360px;
+            width: 100%;
+            max-width: 360px;
             text-align: center;
             padding: 20px;
         }
@@ -77,9 +78,6 @@ export default {
 @media only screen and (max-width: 500px) {
     .index-layout-wrapper .header  {
         padding: 40px 0px 40px 20px;
-    }
-    .index-layout-wrapper .confirm-wrapper .confirm {
-        width: 92%;
     }
 }
 </style>
