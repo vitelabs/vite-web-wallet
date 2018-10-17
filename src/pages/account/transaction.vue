@@ -209,17 +209,20 @@ export default {
             }).catch((err) => {
                 console.warn(err);
                 this.loading = false;
+                let code  = err && err.error ? err.error.code || 0 : 0;
+                let message  = err && err.message ? err.message : 
+                    err.error ? err.error.message || '' : '';
 
-                if (err && err.code && err.code === -34001) {
+                if (code === -34001) {
                     toast(this.$t('transList.valid.pswd'));
                     return;
-                } else if (err && err.code && err.code === -35001) {
+                } else if (code === -35001) {
                     toast(this.$t('transList.valid.bal'));
                     this.amountErr = this.$t('transList.valid.bal');
                     return;
                 }
 
-                toast(err && err.message ? err.message : this.$t('transList.valid.err'));
+                toast(message || this.$t('transList.valid.err'));
             });
         }
     }
