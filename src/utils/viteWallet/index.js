@@ -7,8 +7,10 @@ import bignumber from './bignumber';
 import Types from './types';
 import TestToken from './testToken';
 
+console.log(process.env.goViteServer);
+
 let WS_RPC = new ViteJS.WS_RPC({
-    url: 'wss://testnet.vitewallet.com/ws',
+    url: process.env.goViteServer,
     timeout: 60000
 });
 window.$ViteJS = new ViteJS(WS_RPC);

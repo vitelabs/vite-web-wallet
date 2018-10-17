@@ -21,7 +21,9 @@ let plugins = [
     new VueLoaderPlugin(),
     new webpack.DefinePlugin({
         'process.env.version': `"${packJson.version}"`,
-        'process.env.NODE_ENV': `"${process.env.NODE_ENV}"`
+        'process.env.NODE_ENV': `"${process.env.NODE_ENV}"`,
+        'process.env.goViteServer': process.env.NODE_ENV === 'production' ? '\'wss://test.vitewallet.com/ws\'' : '\'wss://testnet.vitewallet.com/ws\'',
+        'process.env.viteNet': process.env.NODE_ENV === 'production' ? '\'https://testnet.vite.net/\'' : '\'http://132.232.134.168:8080/\''
     })
 ];
 (process.env.analyzer === 'true') && plugins.push(new BundleAnalyzerPlugin());

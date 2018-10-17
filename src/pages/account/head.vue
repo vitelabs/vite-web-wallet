@@ -113,8 +113,7 @@ export default {
         },
         goDetail() {
             let locale = this.$i18n.locale === 'zh' ? 'zh/' : '';
-            window.open(`http://132.232.134.168:8080/${locale}account/${this.account.addr}`);
-            // window.open(`https://testnet.vite.net/${locale}account/${this.account.addr}`);
+            window.open(`${process.env.viteNet}${locale}account/${this.account.addr}`);
         },
 
         getTestToken() {

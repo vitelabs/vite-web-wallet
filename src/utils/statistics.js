@@ -1,9 +1,9 @@
 let statisticsNull = {
     pageView(...args){
-        console.log('[statistics pageView]', JSON.stringify(args));
+        process.env.NODE_ENV === 'dev' && console.log('[statistics pageView]', JSON.stringify(args));
     },
     event(...args){
-        console.log('[statistics event]', JSON.stringify(args));
+        process.env.NODE_ENV === 'dev' && console.log('[statistics event]', JSON.stringify(args));
     }
 };
 

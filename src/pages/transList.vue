@@ -123,8 +123,7 @@ export default {
     methods: {
         goDetail(trans) {
             let locale = this.$i18n.locale === 'zh' ? 'zh/' : '';
-            window.open(`http://132.232.134.168:8080/${locale}transaction/${trans.hash}`);
-            // window.open(`https://testnet.vite.net/${locale}transaction/${trans.hash}`);
+            window.open(`${process.env.viteNet}${locale}transaction/${trans.hash}`);
         },
 
         toPage(pageNumber) {
