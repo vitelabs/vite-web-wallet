@@ -164,6 +164,9 @@ export default {
             display: inline;
         }
     }
+    .acc-list .list-wrapper {
+        max-height: unset;
+    }
     .acc-list .acc-item {
         padding: 10px;
     }
