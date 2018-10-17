@@ -73,6 +73,7 @@ export default {
     position: absolute;
     bottom: 0;
     right: 0;
+    z-index: 101;
 }
 .version-wrapper {
     position: relative;
@@ -113,6 +114,9 @@ export default {
 }
 
 @media only screen and (max-width: 500px) {
+    .update-wrapper {
+        z-index: 0;
+    }
     .version-wrapper {
         width: 300px;
         padding: 15px;

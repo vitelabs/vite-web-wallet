@@ -5,8 +5,9 @@
                 <span>{{ $t('accDetail.name') }}</span>
                 <img @click="startRename" class="edit __pointer" src="../../assets/imgs/edit_icon.svg"/>
             </div>
-            
-            <span class="name __ellipsis" @click="startRename" v-show="!isShowNameInput">{{ account.name }}</span>
+            <div v-show="!isShowNameInput" class="name" :class="{
+                'small-font': account.name && account.name.length > 16
+            }" @click="startRename">{{ account.name }}</div>
             <input ref="nameInput" v-show="isShowNameInput" type="text"
                    v-model="editName" :placeholder="account.name"
                    @blur="rename"/>
@@ -256,10 +257,17 @@ export default {
         font-size: 24px;
         color: #1d2024;
         text-align: left;
-        font-family: $font-bold;
+        font-family: $font-bold;    
+        width: 27%;
+        min-width: 300px;
+        word-wrap: break-word;
         .name {
             display: inline-block;
             line-height: 32px;
+            &.small-font {
+                font-size: 20px;
+                line-height: 26px;
+            }
         }
         input {
             height: 32px;
@@ -313,6 +321,7 @@ export default {
         }
     }
     .account-head-wrapper .custom-name {
+        width: 100%;
         position: relative;
         input {
             width: 100%;

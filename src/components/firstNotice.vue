@@ -59,6 +59,7 @@ export default {
     padding: 25px 15px;
     box-sizing: border-box;
     margin-top: -40px;
+    box-shadow: 0 6px 36px 0 rgba(176,192,237,0.4);
     .title {
         font-size: 16px;
         font-family: $font-bold;

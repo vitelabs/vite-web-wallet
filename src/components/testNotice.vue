@@ -16,8 +16,8 @@
 .hover-wrapper {
     position: absolute;
     top: 0px;
-    left: 0px;
-    padding: 20px 0 0 130px;
+    left: 110px;
+    padding: 20px 0 0 20px;
     width: 350px;
     z-index: 100;
 }

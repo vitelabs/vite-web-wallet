@@ -80,8 +80,8 @@ class Wallet {
                     return;
                 }
                 let account = item.balance;
-                let unconfirm = item.onroad;
-                if (account.blockHeight || unconfirm.unConfirmedBlocksLen) {
+                let onroad = item.onroad;
+                if ( (account && account.totalNumber) || (onroad && onroad.totalNumber) ) {
                     index = i;
                 }
             });
