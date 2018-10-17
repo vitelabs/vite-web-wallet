@@ -2,7 +2,7 @@
     <div class="account-wrapper" @click="closeQrCode">
         <sync-block class="sync-block item"></sync-block>
         <account-head ref="accountHead" class="item"></account-head>
-        <div class="item token-list">
+        <div class="token-list item">
             <tokenCard v-for="token in tokenList" :key="token.id"
                        :opt="token" :sendTransaction="showTrans"></tokenCard>
         </div>
@@ -78,7 +78,6 @@ export default {
 .account-wrapper {
     position: relative;
     box-sizing: border-box;
-    height: 100%;
     display: flex;
     flex-direction: column;
     overflow: auto;
@@ -115,11 +114,6 @@ export default {
     }
     .token-list {
         display: block;
-        .token-card {
-            width: 100%;
-            margin-bottom: 15px;
-            margin-left: 0px;
-        }
     }
 }
 </style>
