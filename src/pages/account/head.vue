@@ -311,6 +311,7 @@ export default {
 
 @media only screen and (max-width: 500px) {
     .account-head-wrapper {
+        display: block;
         padding: 15px;
         .head-title {
             padding-bottom: 15px;
@@ -329,7 +330,7 @@ export default {
     .account-head-wrapper .addr-wrapper {
         margin-top: 20px;
         display: block;
-        min-width: 100%;
+        width: 100%;
         .addr-content {
             padding: 10px;
             height: auto;
@@ -338,10 +339,8 @@ export default {
         }
     }
     .account-head-wrapper .btn-group {
-        position: relative;
-        top: 0;
-        right: 0;
         margin-top: 20px;
+        width: 100%;
         .btn__small {
             width: 100%;
         }
