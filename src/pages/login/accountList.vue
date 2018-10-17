@@ -51,6 +51,7 @@ export default {
     width: 100%;
     background: #fff;
     .list-wrapper {
+        border-top: 1px solid #D4DEE7;
         max-height: 180px;
         overflow: auto;
     }
@@ -64,7 +65,6 @@ export default {
         text-align: left;
         background: #fff;
         border: 1px solid #D4DEE7;
-        border-top: none;
         font-size: 16px;
         color: #007AFF;
         .icon {
@@ -79,6 +79,9 @@ export default {
 .__btn_input_active {
     padding: 7px 15px;
     border-top: none;
+    &:last-child {
+        border-bottom: none;
+    }
 }
 .__btn_input_active:hover {
     background: rgba(88,145,255,.13);
