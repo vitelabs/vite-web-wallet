@@ -67,6 +67,7 @@ module.exports = {
         balance: '余额',
         addAcc: '新添加一个账户',
         addr: '账户地址列表',
+        addrList: '账户地址列表',
         default: '选择默认用户'
     },
 

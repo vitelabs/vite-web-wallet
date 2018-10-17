@@ -86,7 +86,7 @@ class Wallet {
                 }
                 let account = item.balance;
                 let onroad = item.onroad;
-                if ( (account && account.totalNumber) || (onroad && onroad.totalNumber) ) {
+                if ( (account && +account.totalNumber) || (onroad && +onroad.totalNumber) ) {
                     index = i;
                 }
             });
