@@ -60,13 +60,10 @@ export default {
 .token-card {
     box-sizing: border-box;
     position: relative;
-    width: 254px;
+    min-width: 245px;
     background: #fff;
     box-shadow: 0 2px 48px 1px rgba(176, 192, 237, 0.42);
-    margin-left: 40px;
-    &:first-child {
-        margin-left: 0;
-    }
+    margin: 0px 40px 20px 0px;
 }
 .title {
     border-bottom: 1px solid #e5edf3;
@@ -93,6 +90,7 @@ export default {
         .balance {
             font-size: 20px;
             color: #007aff;
+            margin-left: 20px;
         }
     }
     .tips {
@@ -111,6 +109,23 @@ export default {
     color: #fff;
     &.unuse {
         background: #bfbfbf;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .token-card {
+        width: 100%;
+        margin-bottom: 15px;
+        margin-left: 0px;
+    }
+    .body {
+        padding: 0 15px 20px;
+        .item .balance {
+            margin-left: 0;
+        }
+    }
+    .title .icon {
+        margin-left: 15px;
     }
 }
 </style>

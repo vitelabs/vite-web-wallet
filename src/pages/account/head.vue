@@ -1,45 +1,43 @@
 <template>
     <div class="account-head-wrapper">
-        <div class="head-content">
-            <div class="custom-name">
-                <div class="head-title">
-                    <span>{{ $t('accDetail.name') }}</span>
-                    <img @click="startRename" class="edit __pointer" src="../../assets/imgs/edit_icon.svg"/>
-                </div>
-                <div v-show="!isShowNameInput" class="name" :class="{
-                    'small-font': account.name && account.name.length > 16
-                }" @click="startRename">{{ account.name }}</div>
-                <input ref="nameInput" v-show="isShowNameInput" type="text"
-                       v-model="editName" :placeholder="account.name"
-                       @blur="rename"/>
+        <div class="custom-name">
+            <div class="head-title">
+                <span>{{ $t('accDetail.name') }}</span>
+                <img @click="startRename" class="edit __pointer" src="../../assets/imgs/edit_icon.svg"/>
             </div>
+            <div v-show="!isShowNameInput" class="name" :class="{
+                'small-font': account.name && account.name.length > 16
+            }" @click="startRename">{{ account.name }}</div>
+            <input ref="nameInput" v-show="isShowNameInput" type="text"
+                   v-model="editName" :placeholder="account.name"
+                   @blur="rename"/>
+        </div>
 
-            <div class="addr-wrapper">
-                <div class="head-title">
-                    <span>{{ $t('accDetail.address') }}</span>
-                    <span ref="codeContainer" class="title_icon __pointer qrcode"><img src="../../assets/imgs/qrcode_default.svg" @click="toggleQrCode" />
-                        <div class="code-container" v-show="qrcodeShow">
-                            <div class="code">
-                                <qrcode :text="addressStr" :options="{ size:146 }" @genImage="getImage"></qrcode>
-                            </div>
-                            <div class="btn" @click="downLoadQrCode">{{ $t('accDetail.saveQrcode') }}</div>
+        <div class="addr-wrapper">
+            <div class="head-title">
+                <span>{{ $t('accDetail.address') }}</span>
+                <span ref="codeContainer" class="title_icon __pointer qrcode"><img src="../../assets/imgs/qrcode_default.svg" @click="toggleQrCode" />
+                    <div class="code-container" v-show="qrcodeShow">
+                        <div class="code">
+                            <qrcode :text="addressStr" :options="{ size:146 }" @genImage="getImage"></qrcode>
                         </div>
-                    </span>
-                    <img src="../../assets/imgs/copy_default.svg" @click="copy" class="title_icon copy __pointer"/>
-                    <copyOK :copySuccess="copySuccess"></copyOK>
-                </div>
-                <div class="copy addr-content">{{ account.addr }}</div>
+                        <div class="btn" @click="downLoadQrCode">{{ $t('accDetail.saveQrcode') }}</div>
+                    </div>
+                </span>
+                <img src="../../assets/imgs/copy_default.svg" @click="copy" class="title_icon copy __pointer"/>
+                <copyOK :copySuccess="copySuccess"></copyOK>
             </div>
+            <div class="copy addr-content">{{ account.addr }}</div>
+        </div>
         
-            <div class="btn-group">
-                <div class="btn__small __pointer __btn-test" @click="getTestToken">
-                    <span>{{ $t('accDetail.getTestToken') }}</span>
-                    <img src="../../assets/imgs/Vite_icon.svg" class="icon" />
-                </div>
-                <div @click="goDetail" class="btn__small __pointer __btn-detail">
-                    {{ $t('accDetail.transDetail') }}
-                    <img src="../../assets/imgs/more.svg" class="more-icon" />
-                </div>
+        <div class="btn-group">
+            <div class="btn__small __pointer __btn-test" @click="getTestToken">
+                <span>{{ $t('accDetail.getTestToken') }}</span>
+                <img src="../../assets/imgs/Vite_icon.svg" class="icon" />
+            </div>
+            <div @click="goDetail" class="btn__small __pointer __btn-detail">
+                {{ $t('accDetail.transDetail') }}
+                <img src="../../assets/imgs/more.svg" class="more-icon" />
             </div>
         </div>
     </div>
@@ -186,15 +184,10 @@ export default {
     background: #ffffff;
     box-shadow: 0 2px 48px 1px rgba(176, 192, 237, 0.42);
     border-radius: 2px;
-    padding: 30px;
-    overflow: auto;
-    .head-content {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        width: 100%;
-        min-width: 1050px;
-    }
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
     .head-title {
         position: relative;
         display: block;
@@ -245,6 +238,8 @@ export default {
         }
     }
     .addr-wrapper {
+        padding: 30px;
+        padding-bottom: 0; 
         display: inline-block;
         max-width: 510px;
         min-width: 470px;
@@ -264,6 +259,8 @@ export default {
         }
     }
     .custom-name {
+        padding: 30px;
+        padding-bottom: 0;
         font-size: 24px;
         color: #1d2024;
         text-align: left;
@@ -288,6 +285,7 @@ export default {
         }
     }
     .btn-group {
+        padding: 30px;
         width: 212px;
         font-family: $font-normal-b;
         .btn__small {
@@ -322,11 +320,8 @@ export default {
     .account-head-wrapper {
         display: block;
         padding: 15px;
-        overflow: unset;
-        .head-content {
-            display: block;
-            min-width: 0;
-        }
+        display: block;
+        min-width: 0;
         .head-title {
             padding-bottom: 15px;
             .edit {
