@@ -78,5 +78,8 @@ export default {
     .index-layout-wrapper .header  {
         padding: 40px 0px 40px 20px;
     }
+    .index-layout-wrapper .confirm-wrapper .confirm {
+        width: 92%;
+    }
 }
 </style>
