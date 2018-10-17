@@ -1,8 +1,10 @@
+const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const packJson = require('../package.json');
 
 const SRC_PATH = path.join(__dirname, '../src');
 const TEMPLATE_PATH = path.join(__dirname, '../index.html');
@@ -16,7 +18,11 @@ let plugins = [
         favicon: path.join(SRC_PATH, 'assets/imgs/logo.png'),
         template: TEMPLATE_PATH
     }),
-    new VueLoaderPlugin()
+    new VueLoaderPlugin(),
+    new webpack.DefinePlugin({
+        'process.env.version': `"${packJson.version}"`,
+        'process.env.NODE_ENV': `"${process.env.NODE_ENV}"`
+    })
 ];
 (process.env.analyzer === 'true') && plugins.push(new BundleAnalyzerPlugin());
 
