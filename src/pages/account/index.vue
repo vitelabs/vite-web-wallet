@@ -1,13 +1,15 @@
 <template>
     <div class="account-wrapper" @click="closeQrCode">
-        <sync-block class="sync-block item"></sync-block>
-        <account-head ref="accountHead" class="item"></account-head>
-        <div class="token-list item">
-            <tokenCard v-for="token in tokenList" :key="token.id"
-                       :opt="token" :sendTransaction="showTrans"></tokenCard>
-        </div>
-        <div v-if="isShowTrans" class="transaction">
-            <transaction :token="activeToken" :closeTrans="closeTrans"></transaction>
+        <div>
+            <sync-block class="sync-block item"></sync-block>
+            <account-head ref="accountHead" class="item"></account-head>
+            <div class="token-list item">
+                <tokenCard v-for="token in tokenList" :key="token.id"
+                           :opt="token" :sendTransaction="showTrans"></tokenCard>
+            </div>
+            <div v-if="isShowTrans" class="transaction">
+                <transaction :token="activeToken" :closeTrans="closeTrans"></transaction>
+            </div>
         </div>
     </div>
 </template>
@@ -81,6 +83,7 @@ export default {
     display: flex;
     flex-direction: column;
     overflow: auto;
+    height: 100%;
     padding: 0 40px;
     .sync-block {
         width: 100%;
