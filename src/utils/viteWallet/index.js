@@ -7,7 +7,7 @@ import bignumber from './bignumber';
 import Types from './types';
 import TestToken from './testToken';
 
-console.log(process.env.goViteServer);
+process.env.NODE_ENV !== 'production' && console.log(process.env.goViteServer);
 
 let WS_RPC = new ViteJS.WS_RPC({
     url: process.env.goViteServer,
