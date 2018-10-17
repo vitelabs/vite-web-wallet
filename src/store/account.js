@@ -15,10 +15,10 @@ const state = {
 
 const mutations = {
     commitBalanceInfo(state, payload) {
-        state.balance = Object.assign(state.balance, payload.balance);
+        state.balance = payload.balance;
         state.balance.balanceInfos = state.balance.tokenBalanceInfoMap || [];
 
-        state.onroad = Object.assign(state.onroad, payload.onroad);
+        state.onroad = payload.onroad;
         state.onroad.balanceInfos = state.onroad.tokenBalanceInfoMap || [];
     },
     commitClearBalance(state) {

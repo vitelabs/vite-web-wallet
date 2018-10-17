@@ -3,70 +3,71 @@
         <div class="title __pointer">{{ $t('transList.title') }}</div>
 
         <!-- [TODO] -->
-
-        <div class="trans-list">
-            <div class="table__head">
-                <div class="cell-text tType">{{ $t('transList.tType.title') }}</div>
-                <div class="cell-text status">{{ $t('transList.status.title') }}</div>
-                <div class="cell-text time">{{ $t('transList.timestamp') }}</div>
-                <div class="cell-text address">{{ $t('transList.tAddress') }}</div>
-                <div class="cell-text sum">{{ $t('transList.sum') }}</div>
-                <div class="cell-text">Token</div>
-            </div>
-
-            <div ref="tableContent" class="table-content" v-show="transList && transList.length">
-                <div v-for="(item, index) in transList" :key="index"
-                     class="t-row __pointer" @click="goDetail(item)">
-                    <span class="cell-text tType">
-                        <img v-show="item.type === 'send'" class="icon" src='../assets/imgs/send.svg'/>
-                        <img v-show="item.type === 'receive'" class="icon" src='../assets/imgs/receive.svg'/>
-                        {{ $t(`transList.tType.${item.type}`) }}
-                    </span>
-                    <span class="cell-text status" :class="{
-                        'green': item.status === 'confirmed',
-                        'pink': item.status === 'unconfirmed',
-                        'blue': item.status === 'confirms'
-                    }">{{ $t(`transList.status.${item.status}`) + `${item.status === 'confirms' ? item.confirms : ''}` }}</span>
-                    <span class="cell-text time">{{ item.date }}</span>
-                    <span class="cell-text address">{{ item.transAddr }}</span>
-                    <span class="cell-text sum">{{ item.amount }}</span>
-                    <span class="cell-text">{{ item.token }}</span>
+        <div class="trans-list-content">
+            <div class="trans-list">
+                <div class="table__head">
+                    <div class="cell-text tType">{{ $t('transList.tType.title') }}</div>
+                    <div class="cell-text status">{{ $t('transList.status.title') }}</div>
+                    <div class="cell-text time">{{ $t('transList.timestamp') }}</div>
+                    <div class="cell-text address">{{ $t('transList.tAddress') }}</div>
+                    <div class="cell-text sum">{{ $t('transList.sum') }}</div>
+                    <div class="cell-text">Token</div>
                 </div>
-            </div>
 
-            <div class="table-content no-data" v-show="!transList || !transList.length">
-                {{ $t('transList.noData') }}
-            </div>
-
-            <pagination class="pagination" :currentPage="currentPage + 1" 
-                        :totalPage="totalPage" :toPage="toPage"></pagination>
-        </div>
-
-        <div class="trans-list meta">
-            <div class="table__head">
-                <div class="cell-text tType">{{ $t('transList.tType.symbol') }}</div>
-                <div class="cell-text address">{{ $t('transList.tAddress') }}</div>
-                <div class="cell-text sum">{{ $t('transList.sum') }}</div>
-            </div>
-
-            <div ref="tableContent" class="table-content" v-show="transList && transList.length">
-                <div v-for="(item, index) in transList" :key="index"
-                     class="t-row __pointer" @click="goDetail(item)">
-                    <span class="cell-text tType">
-                        <img v-show="item.type === 'send'" class="icon" src='../assets/imgs/send.svg'/>
-                        <img v-show="item.type === 'receive'" class="icon" src='../assets/imgs/receive.svg'/>
-                    </span>
-                    <span class="cell-text address">{{ item.transAddr }}</span>
-                    <span class="cell-text sum">{{ item.amount }} {{ item.token }}</span>
+                <div ref="tableContent" class="table-content" v-show="transList && transList.length">
+                    <div v-for="(item, index) in transList" :key="index"
+                         class="t-row __pointer" @click="goDetail(item)">
+                        <span class="cell-text tType">
+                            <img v-show="item.type === 'send'" class="icon" src='../assets/imgs/send.svg'/>
+                            <img v-show="item.type === 'receive'" class="icon" src='../assets/imgs/receive.svg'/>
+                            {{ $t(`transList.tType.${item.type}`) }}
+                        </span>
+                        <span class="cell-text status" :class="{
+                            'green': item.status === 'confirmed',
+                            'pink': item.status === 'unconfirmed',
+                            'blue': item.status === 'confirms'
+                        }">{{ $t(`transList.status.${item.status}`) + `${item.status === 'confirms' ? item.confirms : ''}` }}</span>
+                        <span class="cell-text time">{{ item.date }}</span>
+                        <span class="cell-text address">{{ item.transAddr }}</span>
+                        <span class="cell-text sum">{{ item.amount }}</span>
+                        <span class="cell-text">{{ item.token }}</span>
+                    </div>
                 </div>
+
+                <div class="table-content no-data" v-show="!transList || !transList.length">
+                    {{ $t('transList.noData') }}
+                </div>
+
+                <pagination class="pagination" :currentPage="currentPage + 1" 
+                            :totalPage="totalPage" :toPage="toPage"></pagination>
             </div>
 
-            <div class="table-content no-data" v-show="!transList || !transList.length">
-                {{ $t('transList.noData') }}
-            </div>
+            <div class="trans-list meta">
+                <div class="table__head">
+                    <div class="cell-text tType">{{ $t('transList.tType.symbol') }}</div>
+                    <div class="cell-text address">{{ $t('transList.tAddress') }}</div>
+                    <div class="cell-text sum">{{ $t('transList.sum') }}</div>
+                </div>
 
-            <pagination class="pagination" :currentPage="currentPage + 1" 
-                        :totalPage="totalPage" :toPage="toPage"></pagination>
+                <div ref="tableContent" class="table-content" v-show="transList && transList.length">
+                    <div v-for="(item, index) in transList" :key="index"
+                         class="t-row __pointer" @click="goDetail(item)">
+                        <span class="cell-text tType">
+                            <img v-show="item.type === 'send'" class="icon" src='../assets/imgs/send.svg'/>
+                            <img v-show="item.type === 'receive'" class="icon" src='../assets/imgs/receive.svg'/>
+                        </span>
+                        <span class="cell-text address">{{ item.transAddr }}</span>
+                        <span class="cell-text sum">{{ item.amount }} {{ item.token }}</span>
+                    </div>
+                </div>
+
+                <div class="table-content no-data" v-show="!transList || !transList.length">
+                    {{ $t('transList.noData') }}
+                </div>
+
+                <pagination class="pagination" :currentPage="currentPage + 1" 
+                            :totalPage="totalPage" :toPage="toPage"></pagination>
+            </div>
         </div>
     </div>
 </template>
@@ -182,12 +183,16 @@ export default {
         margin-bottom: 40px;
     }
 }
+.trans-list-content {
+    overflow: auto;
+}
 .trans-list {
     position: relative;
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
     max-height: 100%;
+    min-width: 1050px;
     overflow: auto;
     background: #FFF;
     box-shadow: 0 2px 15px 1px rgba(176, 192, 237, 0.17);
@@ -293,6 +298,7 @@ export default {
     }
     .trans-list {
         display: none;
+        min-width: 350px;
     }
     .trans-list.meta {
         display: flex;

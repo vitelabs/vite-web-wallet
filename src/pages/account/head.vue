@@ -186,6 +186,9 @@ export default {
     box-shadow: 0 2px 48px 1px rgba(176, 192, 237, 0.42);
     border-radius: 2px;
     padding: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     .head-title {
         position: relative;
         display: block;
@@ -237,7 +240,7 @@ export default {
     }
     .addr-wrapper {
         display: inline-block;
-        min-width: 510px;
+        width: 490px;
         text-align: left;
         .addr-content {
             font-size: 14px;
@@ -253,14 +256,13 @@ export default {
         }
     }
     .custom-name {
-        position: absolute;
         font-size: 24px;
         color: #1d2024;
         text-align: left;
         font-family: $font-bold;    
-        width: 27%;
+        max-width: 28%;
         min-width: 300px;
-        word-wrap: break-word;
+        word-break: break-all;
         .name {
             display: inline-block;
             line-height: 32px;
@@ -277,11 +279,8 @@ export default {
         }
     }
     .btn-group {
-        position: absolute;
-        top: 30px;
-        right: 30px;
+        width: 200px;
         font-family: $font-normal-b;
-        margin-right: 8px;
         .btn__small {
             width: 210px;
             height: 33px;
