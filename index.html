@@ -7,8 +7,6 @@
         <title><%= htmlWebpackPlugin.options.title %></title>
 
         <script>
-            console.log('start', new Date().getTime());
-
             var _hmt = _hmt || [];
             (function() {
                 var hm = document.createElement("script");
@@ -16,35 +14,6 @@
                 var s = document.getElementsByTagName("script")[0]; 
                 s.parentNode.insertBefore(hm, s);
             })();
-
-            window.onload = function () {
-                if (!window.performance) {
-                    return;
-                }
-                try {
-                    var fetchStart = window.performance.timing.fetchStart;  // any requests
-
-                    // DNS
-                    var DNSStart = window.performance.timing.domainLookupStart; // dns end
-                    var DNSEnd = window.performance.timing.domainLookupEnd; // dns end
-                    var DNSTimes = DNSEnd - DNSStart;
-                    console.log('DNSTimes', DNSTimes);
-                    _hmt.push(['_trackEvent', 'performance', 'DNS', 'time', DNSTimes]);
-
-                    // load
-                    var firstByteTime = window.performance.timing.responseStart;
-
-                    var whiteTimes = firstByteTime - fetchStart;
-                    console.log('whiteTimes', whiteTimes);
-                    _hmt.push(['_trackEvent', 'performance', 'white', 'time', whiteTimes]);
-
-                    var loadedTimes = new Date().getTime() - fetchStart;
-                    console.log('loadedTimes', loadedTimes);
-                    _hmt.push(['_trackEvent', 'performance', 'loaded', 'time', loadedTimes]);
-                } catch(err) {
-
-                }
-            }
         </script>
     </head>
 

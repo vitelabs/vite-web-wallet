@@ -15,6 +15,7 @@ import 'utils/eventEmitter.js';
 import 'utils/viteWallet/index.js';
 
 import store from './store';
+import statistics from 'utils/statistics';
 
 Vue.use(VueRouter);
 Vue.use(VueI18n);
@@ -75,7 +76,7 @@ router.beforeEach((to, from, next) => {
         return;
     }
 
-    _hmt.push(['_trackPageview', to.path]);
+    statistics.pageView(to.path);
     next();
 });
 
@@ -87,7 +88,6 @@ setTimeout(() => {
 }, 800);
 
 setTimeout(() => {
-    console.log('new', new Date().getTime());
     new Vue({
         el: '#app',
         components: { App },
