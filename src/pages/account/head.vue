@@ -328,27 +328,26 @@ export default {
         }
     }
     .account-head-wrapper .custom-name {
+        padding: 0;
         width: 100%;
         max-width: 100%;
-        min-width: 0px;
-        position: relative;
         input {
             width: 100%;
         }
     }
     .account-head-wrapper .addr-wrapper {
+        padding: 0;
         margin-top: 20px;
         display: block;
         width: 100%;
         min-width: 0;
         .addr-content {
             padding: 10px;
-            height: auto;
             line-height: 20px;
-            word-break: break-all;
         }
     }
     .account-head-wrapper .btn-group {
+        padding: 0;
         margin-top: 20px;
         width: 100%;
         .btn__small {
