@@ -122,7 +122,7 @@ module.exports = {
             addr: '请输入地址'
         },
         valid: {
-            remarksFormat: '备注限制中英文和标点符号，格式输入错误',
+            remarksFormat: '格式输入错误，备注仅支持中英文和标点符号',
             remarksLong: '备注请勿超出180个英文字符（或标点符号，一个汉字=6个英文字符）'
         },
         hint: {
