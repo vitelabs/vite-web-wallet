@@ -150,12 +150,13 @@ export default {
             return true;
         },
         testMessage() {
-            if (/\s+/g.test(this.message)) {
-                this.messageErr = this.$t('accDetail.valid.remarksFormat');
-                return;
-            }
+            // if (/\s+/g.test(this.message)) {
+            //     this.messageErr = this.$t('accDetail.valid.remarksFormat');
+            //     return;
+            // }
 
-            let str = encodeURIComponent(this.message);
+            let message = this.message.replace(/(^\s*)|(\s*$)/g,'');
+            let str = encodeURIComponent(message);
             if (str.length > 180) {
                 this.messageErr = this.$t('accDetail.valid.remarksLong');
                 return;

@@ -243,18 +243,17 @@ export default {
         padding-bottom: 30px;
         display: inline-block;
         max-width: 510px;
-        min-width: 470px;
         text-align: left;
         .addr-content {
             font-size: 14px;
+            word-break: break-all;
             width: 100%;
-            height: 40px;
             line-height: 40px;
             box-sizing: border-box;
             background: #f3f6f9;
             border: 1px solid #d4dee7;
             border-radius: 2px;
-            padding: 0 8px;
+            padding: 0 10px ;
             color: #283d4a;
         }
     }
