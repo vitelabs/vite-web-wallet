@@ -21,7 +21,8 @@ module.exports = {
         placeholder: '请输入您的助记词',
         empty: '助记词输入为空',
         error: '助记词错误',
-        hint: '助记词格式：单词、空格、单词...空格、单词'
+        hint: '助记词格式：单词、空格、单词...空格、单词',
+        netErr: '节点异常，请您稍后重试'
     },
 
     setting: {
