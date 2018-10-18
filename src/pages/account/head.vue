@@ -180,6 +180,7 @@ export default {
 
 .account-head-wrapper {
     position: relative;
+    padding: 30px 0 0px 20px;
     text-align: center;
     background: #ffffff;
     box-shadow: 0 2px 48px 1px rgba(176, 192, 237, 0.42);
@@ -238,13 +239,12 @@ export default {
         }
     }
     .addr-wrapper {
-        padding: 30px;
-        padding-bottom: 0; 
+        padding-right: 20px;
+        padding-bottom: 30px;
         display: inline-block;
         max-width: 510px;
         min-width: 470px;
         text-align: left;
-        margin-right: 20px;
         .addr-content {
             font-size: 14px;
             width: 100%;
@@ -259,16 +259,14 @@ export default {
         }
     }
     .custom-name {
-        padding: 30px;
-        padding-bottom: 0;
+        padding-right: 20px;
+        padding-bottom: 30px;
         font-size: 24px;
         color: #1d2024;
         text-align: left;
         font-family: $font-bold;    
-        max-width: 28%;
-        min-width: 320px;
+        max-width: 24%;
         word-break: break-all;
-        margin-right: 20px;
         .name {
             display: inline-block;
             line-height: 32px;
@@ -285,9 +283,10 @@ export default {
         }
     }
     .btn-group {
-        padding: 30px;
         width: 212px;
         font-family: $font-normal-b;
+        padding-right: 20px;
+        padding-bottom: 30px;
         .btn__small {
             width: 210px;
             height: 33px;
