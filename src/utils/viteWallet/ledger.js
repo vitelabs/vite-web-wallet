@@ -38,7 +38,7 @@ class Ledger {
         addr, index, pageCount = 50
     }) {
         return $ViteJS.Vite.Ledger.getBlocks({
-            addr, index, pageCount, needTokenInfo: true
+            addr, index, pageCount
         });
     }
 }

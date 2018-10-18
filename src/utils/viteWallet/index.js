@@ -1,4 +1,4 @@
-import ViteJS from 'vite.js';
+import ViteJS from '@vitelabs/vite.js';
 
 import wallet from './wallet/index';
 import net from './net';
