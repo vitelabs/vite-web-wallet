@@ -1,3 +1,18 @@
+import request from 'utils/request';
+
+request({
+    method: 'GET',
+    url: '/api/version/config?app=web&channel=token&version=default'
+}).then((req)=>{
+    if (!req && !req.data) {
+        return;
+    }
+    let { data } = req;
+    console.log(JSON.parse(data));
+}).catch((err) => {
+    console.error(err);
+});
+
 const TokenIds = {
     'tti_5649544520544f4b454e6e40': 'VITE',
     'tti_12ea0c02170304090a5ac879': 'VCP',
