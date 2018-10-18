@@ -261,6 +261,7 @@ export default {
     .row {
         margin-top: 20px;
         .row-t {
+            position: relative;
             font-family: $font-bold;
             font-size: 14px;
             color: #1D2024;
@@ -278,10 +279,12 @@ export default {
             }
         }
         .err {
-            float: right;
+            position: absolute;
+            right: 0;
             font-size: 12px;
             color: #FF2929;
             line-height: 16px;
+            text-align: right;
         }
     }
 
