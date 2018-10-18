@@ -70,7 +70,9 @@ class Wallet {
         let num = 10;
         let addrs = $ViteJS.Wallet.Address.getAddrsFromMnemonic(mnemonic, num);
         if (!addrs) {
-            return Promise.reject(addrs);
+            return Promise.reject({
+                code: 500005
+            });
         }
 
         let requests = [];

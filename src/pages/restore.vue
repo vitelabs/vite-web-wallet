@@ -1,11 +1,11 @@
 <template>
-    <mnemonic title="mnemonic.restore" :submit="validMnemonic">
+    <mnemonic title="mnemonic.restore" :submit="validMnemonic" :isLoading="isLoading">
         <div class="wrapper">
             <textarea v-model="mnemonic" :class="{
                 'center': !mnemonic
             }" :placeholder="$t('mnemonic.placeholder')"></textarea>
             <span v-show="errMsg" class="msg __err_msg" >
-                {{ errMsg === 'mnemonic.empty' || errMsg === 'mnemonic.error' ? $t(errMsg) : errMsg }}
+                {{ errMsg === 'mnemonic.empty' || errMsg === 'mnemonic.error' || errMsg === 'mnemonic.netErr' ? $t(errMsg) : errMsg }}
             </span>
         </div>
     </mnemonic>
@@ -50,7 +50,11 @@ export default {
                 });
             }).catch(err => {
                 console.warn(err);
-                this.errMsg = 'mnemonic.error';
+                if (err && err.code === 500005) {
+                    this.errMsg = 'mnemonic.error';
+                } else {
+                    this.errMsg = 'mnemonic.netErr';
+                }
                 this.isLoading = false;
             });
         }
