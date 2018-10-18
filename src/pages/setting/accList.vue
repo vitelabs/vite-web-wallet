@@ -106,6 +106,7 @@ export default {
         overflow: auto;
     }
     .acc-item {
+        position: relative;
         padding: 10px 15px;
         border-bottom: 1px solid #D4DEE7;
         &:last-child {
@@ -128,6 +129,7 @@ export default {
             background-size: 16px 16px;
         }
         .describe {
+            display: inline;
             position: relative;
             bottom: 3px;
             font-size: 12px;
@@ -136,17 +138,19 @@ export default {
     }
 
     .describe {
+        display: block;
+        width: 93%;
         font-size: 12px;
         color: #5E6875;
     }
     .select {
+        position: absolute;
+        top: 12px;
+        right: 10px;
         display: block;
         box-sizing: border-box;
-        float: right;
-        margin-top: 4px; 
         width: 16px;
         height: 16px;
-        background: #FFFFFF;
         background: #FFFFFF;
         border: 1px solid #D4DEE7;
         border-radius: 16px;
@@ -172,16 +176,6 @@ export default {
     }
     .acc-list .add {
         padding: 0 10px;
-        .describe {
-            display: inline;
-        }
-    }
-    .acc-list .describe {
-        display: block;
-        width: 93%;
-    }
-    .acc-list .select {
-        margin-top: -18px;
     }
 }
 </style>

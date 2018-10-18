@@ -61,7 +61,6 @@ export default {
 @import "~assets/scss/vars.scss";
 
 .item {
-    width: 474px;
     margin-bottom: 20px;
     margin-top: 0;
     &.unlock {
@@ -82,7 +81,7 @@ export default {
     }
     .input-wrapper {
         display: inline-block;
-        width: 397px;
+        width: 83%;
         height: 40px;
         margin-right: 10px;
         .pass {
@@ -100,9 +99,10 @@ export default {
     }
     .btn {
         position: relative;
-        top: -2px;
-        display: inline-block;
-        width: 60px;
+        top: -1px;
+        float: right;
+        width: 12%;
+        max-width: 60px;
         height: 40px;
         text-align: center;
         line-height: 40px;
@@ -119,14 +119,8 @@ export default {
 }
 
 @media only screen and (max-width: 500px) {
-    .item {
-        width: auto;
-    }
     .item .input-wrapper {
         width: 75%;
-    }
-    .item .btn {
-        float: right;
     }
 }
 </style>
