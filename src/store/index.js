@@ -10,4 +10,6 @@ const store = new vuex.Store();
 store.registerModule('account', accountStore);
 store.registerModule('transList', transListStore);
 
+store.dispatch('getDefaultTokenList');
+
 export default store;

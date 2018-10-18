@@ -146,7 +146,7 @@ export default {
                 this.isLoading = false;
                 result && loginSuccess();
                 !result && toast(this.$t('hint.pwErr'), 'error');
-            }, 0);
+            }, 10);
         }
     }
 };
