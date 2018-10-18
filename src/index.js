@@ -10,7 +10,7 @@ import start from 'pages/start.vue';
 import login from 'pages/login/index.vue';
 
 import routes from 'routes/index';
-import i18nConfig from 'i18n';
+import i18nCon from 'i18n';
 
 import 'utils/eventEmitter.js';
 import 'utils/viteWallet/index.js';
@@ -43,8 +43,6 @@ Vue.mixin({
     }
 });
 
-const i18n = new VueI18n(i18nConfig);
-
 let rootRoute = {
     name: 'index',
     path: '/'
@@ -59,28 +57,6 @@ document.addEventListener('dragover', (e) => {
     e.stopPropagation();
 });
 
-let { Wallet } = viteWallet;
-let list = Wallet.getList();
-rootRoute.component = list && list.length ? login : start;
-routes.push(rootRoute);
-
-const router = new VueRouter({
-    mode: 'history',
-    routes
-});
-
-router.beforeEach((to, from, next) => {
-    if (!from.name && to.name !== 'index') {
-        router.replace({
-            name: 'index'
-        });
-        return;
-    }
-
-    statistics.pageView(to.path);
-    next();
-});
-
 let element  = document.getElementById('loading');
 element.className += 'spinner big-spinner';
 
@@ -90,6 +66,32 @@ setTimeout(() => {
 
 setTimeout(() => {
     console.log(window.viteWalletStorage);
+    
+    const i18n = new VueI18n( i18nCon() );
+    
+    let { Wallet } = viteWallet;
+    Wallet.reSave();
+    let list = Wallet.getList();
+    rootRoute.component = list && list.length ? login : start;
+    routes.push(rootRoute);
+
+    const router = new VueRouter({
+        mode: 'history',
+        routes
+    });
+
+    router.beforeEach((to, from, next) => {
+        if (!from.name && to.name !== 'index') {
+            router.replace({
+                name: 'index'
+            });
+            return;
+        }
+
+        statistics.pageView(to.path);
+        next();
+    });
+
     new Vue({
         el: '#app',
         components: { App },

@@ -89,7 +89,7 @@ export default {
                     entropy: account.entropy || ''
                 };
             }
-            
+
             let list = viteWallet.Wallet.getList();
             if (!list || !list.length) {
                 this.$router.push({
