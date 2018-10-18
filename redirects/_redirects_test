@@ -1,3 +1,3 @@
 # Redirect default Netlify subdomain to primary domain
-/*    /index.html   200
 /api/*  https://testnet.vite.net/api/*
+/*    /index.html   200
