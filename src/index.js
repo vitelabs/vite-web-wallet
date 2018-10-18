@@ -89,7 +89,7 @@ setTimeout(() => {
 }, 800);
 
 setTimeout(() => {
-    // console.log(window.viteWalletStorage);
+    console.log(window.viteWalletStorage);
     new Vue({
         el: '#app',
         components: { App },
