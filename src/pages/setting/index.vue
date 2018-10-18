@@ -122,5 +122,8 @@ export default {
     .item .input-wrapper {
         width: 75%;
     }
+    .item .btn {
+        width: 60px;
+    }
 }
 </style>

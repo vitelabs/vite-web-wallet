@@ -287,6 +287,7 @@ export default {
         padding-right: 20px;
         padding-bottom: 30px;
         .btn__small {
+            box-sizing: border-box;
             width: 210px;
             height: 33px;
             line-height: 33px;
@@ -318,22 +319,12 @@ export default {
     .account-head-wrapper {
         display: block;
         padding: 15px;
-        display: block;
-        min-width: 0;
         .head-title {
             padding-bottom: 15px;
-            .edit {
-                float: right;
-            }
         }
     }
     .account-head-wrapper .custom-name {
         padding: 0;
-        width: 100%;
-        max-width: 100%;
-        input {
-            width: 100%;
-        }
     }
     .account-head-wrapper .addr-wrapper {
         padding: 0;
@@ -349,9 +340,36 @@ export default {
     .account-head-wrapper .btn-group {
         padding: 0;
         margin-top: 20px;
+    }
+}
+
+@media only screen and (max-width: 700px) {
+    .account-head-wrapper {
+        .head-title {
+            .edit {
+                float: right;
+            }
+        }
+    }
+    .account-head-wrapper .custom-name {
+        width: 100%;
+        max-width: 100%;
+        input {
+            width: 100%;
+        }
+    }
+    .account-head-wrapper .btn-group {
         width: 100%;
         .btn__small {
             width: 100%;
+        }
+    }
+    .account-head-wrapper .addr-wrapper {
+        width: 100%;
+        min-width: 0;
+        .addr-content {
+            padding: 10px;
+            line-height: 20px;
         }
     }
 }
