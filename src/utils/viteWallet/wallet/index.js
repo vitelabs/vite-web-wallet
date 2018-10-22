@@ -9,7 +9,6 @@ const LAST_KEY = 'ACC_LAST';
 class Wallet {
     constructor() {
         this.activeAccount = null;
-        reSave();
     }
     
     getActiveAccount() {
@@ -137,7 +136,6 @@ class Wallet {
     }
 
     _loginKeystore(addr, pass) {
-        console.log('???');
         let acc = getAccFromAddr(addr);
         let keystore = acc.keystore;
 
@@ -241,6 +239,58 @@ class Wallet {
     getList() {
         return acc.getList();
     }
+
+    // VCP VV ===>  later
+    reSave() {
+        let list = acc.getList();
+        if (!list || !list.length) {
+            return;
+        }
+    
+        let last = getLast();
+        let reList = [];
+        let isChange = false;
+    
+        list.forEach((item) => {
+            if (!item) {
+                return;
+            }
+    
+            if (!item.entropy || !item.encryptObj || +item.encryptObj.version !== 1 || !item.encryptObj.scryptParams) {
+                reList.push(item);
+                return;
+            }
+    
+            isChange = true;
+            let scryptP = {
+                scryptParams: item.encryptObj.scryptParams,
+                encryptPwd: item.encryptObj.encryptP
+            };
+            let entropy = item.entropy;
+            let encryptObj = $ViteJS.Wallet.Account.encrypt(entropy, null, scryptP);
+    
+            let obj = JSON.parse(encryptObj);
+            item.entropy = obj.encryptentropy;
+            item.encryptObj = {
+                crypto: obj.crypto,
+                version: obj.version,
+                timestamp: obj.timestamp
+            };
+    
+            if (last && last.entropy && last.entropy === entropy) {
+                last.entropy = item.entropy;
+            }
+            reList.push(item);
+        });
+    
+        if (!isChange) {
+            return;
+        }
+        
+        statistics.event('keystore', 'resave');
+        setLast(last);
+        acc.setAccList(reList);
+    }
 }
 
 export default Wallet;
@@ -271,57 +321,4 @@ function getLast() {
 
 function setLast(acc) {
     storage.setItem(LAST_KEY, acc);
-}
-
-// VCP VV ===>  later
-function reSave() {
-    let list = acc.getList();
-    if (!list || !list.length) {
-        return;
-    }
-
-    let last = getLast();
-    let reList = [];
-    let isChange = false;
-
-    list.forEach((item) => {
-        if (!item) {
-            return;
-        }
-
-        if (!item.entropy || !item.encryptObj || +item.encryptObj.version !== 1 || !item.encryptObj.scryptParams) {
-            reList.push(item);
-            return;
-        }
-
-        isChange = true;
-        let scryptP = {
-            scryptParams: item.encryptObj.scryptParams,
-            encryptPwd: item.encryptObj.encryptP
-        };
-        let entropy = item.entropy;
-        let encryptObj = $ViteJS.Wallet.Account.encrypt(entropy, null, scryptP);
-
-        let obj = JSON.parse(encryptObj);
-        item.entropy = obj.encryptentropy;
-        item.encryptObj = {
-            crypto: obj.crypto,
-            version: obj.version,
-            timestamp: obj.timestamp
-        };
-
-        if (last && last.entropy && last.entropy === entropy) {
-            last.entropy = item.entropy;
-        }
-        reList.push(item);
-    });
-
-    if (!isChange) {
-        return;
-    }
-    
-    statistics.event('keystore', 'resave');
-    setLast(last);
-    acc.setAccList(reList);
-    console.log('done', new Date().getTime());
 }
