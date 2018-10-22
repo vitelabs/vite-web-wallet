@@ -1,9 +1,9 @@
 import 'utils/performance';
+import './assets/scss/mixins.scss';
+
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import VueI18n from 'vue-i18n';
-
-import './assets/scss/mixins.scss';
 
 import App from 'pages/index.vue';
 import start from 'pages/start.vue';
@@ -57,6 +57,7 @@ document.addEventListener('dragover', (e) => {
     e.stopPropagation();
 });
 
+// Start loading animate
 let element  = document.getElementById('loading');
 element.className += 'spinner big-spinner';
 
