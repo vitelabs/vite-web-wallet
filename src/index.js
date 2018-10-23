@@ -65,7 +65,7 @@ setTimeout(() => {
 }, 800);
 
 setTimeout(() => {
-    console.log(window.viteWalletStorage);
+    store.dispatch('getDefaultTokenList');
     
     const i18n = new VueI18n( i18nCon() );
     

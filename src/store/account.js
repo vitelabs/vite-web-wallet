@@ -40,17 +40,18 @@ const actions = {
         });
     },
     getDefaultTokenList({ commit }) {
-        request({
+        let toRequest = window.viteWalletRequest || request;
+
+        toRequest({
             method: 'GET',
-            url: '/api/version/config?app=web&channel=token&version=default'
-        }).then((req)=>{
-            if (!req && !req.data) {
+            path: '/api/version/config?app=web&channel=token&version=default',
+            type: 'form'    // Client Wallet
+        }).then((data)=>{
+            if (!data) {
                 return;
             }
 
-            let { data } = req;
             data = JSON.parse(data);
-
             let tokenIds = {};
             data.forEach((item) => {
                 tokenIds[item.tokenId] = item.tokenSymbol;
