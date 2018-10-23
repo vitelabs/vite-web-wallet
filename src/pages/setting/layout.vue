@@ -78,6 +78,7 @@ export default {
         box-shadow: 0 2px 48px 1px rgba(176,192,237,0.17);
         border-radius: 8px;
         .content {
+            max-width: 480px;
             padding: 20px;
         }
         .description {
@@ -124,11 +125,16 @@ export default {
         }
         .description {
             padding: 0;
-            a {
-                display: block;
-                &:last-child {
-                    margin-left: 0;
-                }
+        }
+    }
+}
+
+@media only screen and (max-width: 750px) {
+    .setting-wrapper .content-wrapper .description {
+        a {
+            display: block;
+            &:last-child {
+                margin-left: 0;
             }
         }
     }
