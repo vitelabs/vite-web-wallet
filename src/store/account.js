@@ -1,37 +1,33 @@
-const TokenIds = {
-    VITE: 'tti_000000000000000000004cfd',
-    VCP: 'tti_12ea0c02170304090a5ac879',
-    VV: 'tti_b6187a150d175e5a165b1c5b'
-};
+import request from 'utils/request';
 
 const state = {
-    unConfirmed: {
-        balanceInfos:[]
+    onroad: {
+        balanceInfos: {}
     },
     balance: {
-        balanceInfos:[]
+        balanceInfos: {}
     },
-    unConfirmes: ''
+    tokenIds: {}
 };
 
 const mutations = {
-    commitBalanceInfo(state, payload) {
-        state.balance = Object.assign(state.balance, payload.balance);
-        state.balance.balanceInfos = state.balance.balanceInfos || [];
+    commitBalanceInfo(state, payload, ) {
+        state.balance = payload.balance || {};
+        state.balance.balanceInfos = state.balance && state.balance.tokenBalanceInfoMap ? state.balance.tokenBalanceInfoMap : [];
 
-        state.unConfirmed = Object.assign(state.unConfirmed, payload.unconfirm);
-        state.unConfirmed.balanceInfos = state.unConfirmed.balanceInfos || [];
-
-        // [TODO] Only one token VITE, now.
-        state.unConfirmes = state.unConfirmed.unConfirmedBlocksLen;
+        state.onroad = payload.onroad || {};
+        state.onroad.balanceInfos = state.onroad && state.onroad.tokenBalanceInfoMap ? state.onroad.tokenBalanceInfoMap : [];
     },
     commitClearBalance(state) {
         state.balance = {
-            balanceInfos:[]
+            balanceInfos:{}
         };
-        state.unConfirmed = {
-            balanceInfos:[]
+        state.onroad = {
+            balanceInfos:{}
         };
+    },
+    commitSetTokenIds(state, tokenIds) {
+        state.tokenIds = tokenIds;
     }
 };
 
@@ -43,46 +39,74 @@ const actions = {
             console.warn(e);
         });
     },
+    getDefaultTokenList({ commit }) {
+        request({
+            method: 'GET',
+            url: '/api/version/config?app=web&channel=token&version=default'
+        }).then((req)=>{
+            if (!req && !req.data) {
+                return;
+            }
+
+            let { data } = req;
+            data = JSON.parse(data);
+
+            let tokenIds = {};
+            data.forEach((item) => {
+                tokenIds[item.tokenId] = item.tokenSymbol;
+            });
+            
+            commit('commitSetTokenIds', tokenIds);
+        }).catch((err) => {
+            console.error(err);
+        });
+    }
 };
 
 const getters = {
     tokenBalanceList(state) {
-        const tokenInfo = Object.create(null);
+        let balanceInfo = Object.create(null);
 
-        state.balance.balanceInfos.forEach(balanceInfo => {
-            let mintage = balanceInfo.mintage;
-            let balance = viteWallet.BigNumber.toBasic(balanceInfo.balance, mintage.decimals);
+        for (let tokenId in state.balance.balanceInfos) {
+            let item = state.balance.balanceInfos[tokenId];
 
-            tokenInfo[mintage.id] = tokenInfo[mintage.id] || {};
-            tokenInfo[mintage.id].balance = balance;
-            tokenInfo[mintage.id].symbol = mintage.symbol;
-            tokenInfo[mintage.id].id = mintage.id;
-            tokenInfo[mintage.id].decimals = mintage.decimals;
-        });
+            let tokenInfo = item.tokenInfo;
+            let decimals = tokenInfo.decimals;
+            let balance = viteWallet.BigNumber.toBasic(item.totalAmount, decimals);
 
-        state.unConfirmed.balanceInfos.forEach(balanceInfo => {
-            let mintage = balanceInfo.mintage;
-            let balance = viteWallet.BigNumber.toBasic(balanceInfo.balance, mintage.decimals);
-
-            tokenInfo[mintage.id] = tokenInfo[mintage.id] || {};
-            tokenInfo[mintage.id].fundFloat = balance;
-            tokenInfo[mintage.id].symbol = tokenInfo[mintage.id].symbol || mintage.symbol;
-            tokenInfo[mintage.id].id = tokenInfo[mintage.id].id || mintage.id;
-            tokenInfo[mintage.id].decimals = mintage.decimals;
-        });
-
-        for (let symbol in TokenIds) {
-            tokenInfo[ TokenIds[symbol] ] = tokenInfo[ TokenIds[symbol] ] || {
-                balance: '0',
-                fundFloat: '0',
-                symbol: symbol,
-                decimals: '0'
-            };
-            // [TODO] API Only one token VITE, now.
-            symbol === 'VITE' && (tokenInfo[ TokenIds[symbol] ].unConfirmes = state.unConfirmes);
+            balanceInfo[tokenId] = tokenInfo[tokenId] || {};
+            balanceInfo[tokenId].id = tokenId;
+            balanceInfo[tokenId].balance = balance;
+            balanceInfo[tokenId].decimals = decimals;
+            balanceInfo[tokenId].symbol = tokenInfo.tokenSymbol;
+            balanceInfo[tokenId].transNum = item.number;
         }
 
-        return tokenInfo;
+        for (let tokenId in state.onroad.balanceInfos) {
+            let item = state.onroad.balanceInfos[tokenId];
+
+            let tokenInfo = item.tokenInfo;
+            let decimals = tokenInfo.decimals;
+            let balance = viteWallet.BigNumber.toBasic(item.totalAmount, decimals);
+
+            balanceInfo[tokenId] = balanceInfo[tokenId] || {};
+            balanceInfo[tokenId].id = balanceInfo[tokenId].id || tokenInfo.id;
+            balanceInfo[tokenId].fundFloat = balance;
+            balanceInfo[tokenId].decimals = balanceInfo[tokenId].decimals || tokenInfo.decimals;
+            balanceInfo[tokenId].symbol = balanceInfo[tokenId].symbol || tokenInfo.tokenSymbol;
+            balanceInfo[tokenId].onroadNum = item.number;
+        }
+
+        for (let tokenId in state.tokenIds) {
+            balanceInfo[tokenId] = balanceInfo[tokenId] || {
+                balance: '0',
+                fundFloat: '0',
+                symbol: state.tokenIds[tokenId],
+                decimals: '0'
+            };
+        }
+
+        return balanceInfo;
     }
 };
 

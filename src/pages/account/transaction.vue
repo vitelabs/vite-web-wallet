@@ -150,12 +150,13 @@ export default {
             return true;
         },
         testMessage() {
-            if (/\s+/g.test(this.message)) {
-                this.messageErr = this.$t('accDetail.valid.remarksFormat');
-                return;
-            }
+            // if (/\s+/g.test(this.message)) {
+            //     this.messageErr = this.$t('accDetail.valid.remarksFormat');
+            //     return;
+            // }
 
-            let str = encodeURIComponent(this.message);
+            let message = this.message.replace(/(^\s*)|(\s*$)/g,'');
+            let str = encodeURIComponent(message);
             if (str.length > 180) {
                 this.messageErr = this.$t('accDetail.valid.remarksLong');
                 return;
@@ -209,17 +210,20 @@ export default {
             }).catch((err) => {
                 console.warn(err);
                 this.loading = false;
+                let code  = err && err.error ? err.error.code || 0 : 0;
+                let message  = err && err.message ? err.message : 
+                    err.error ? err.error.message || '' : '';
 
-                if (err && err.code && err.code === -34001) {
+                if (code === -34001) {
                     toast(this.$t('transList.valid.pswd'));
                     return;
-                } else if (err && err.code && err.code === -35001) {
+                } else if (code === -35001) {
                     toast(this.$t('transList.valid.bal'));
                     this.amountErr = this.$t('transList.valid.bal');
                     return;
                 }
 
-                toast(err && err.message ? err.message : this.$t('transList.valid.err'));
+                toast(message || this.$t('transList.valid.err'));
             });
         }
     }
@@ -258,6 +262,7 @@ export default {
     .row {
         margin-top: 20px;
         .row-t {
+            position: relative;
             font-family: $font-bold;
             font-size: 14px;
             color: #1D2024;
@@ -275,10 +280,12 @@ export default {
             }
         }
         .err {
-            float: right;
+            position: absolute;
+            right: 0;
             font-size: 12px;
             color: #FF2929;
             line-height: 16px;
+            text-align: right;
         }
     }
 

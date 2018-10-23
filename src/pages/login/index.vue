@@ -141,12 +141,12 @@ export default {
             };
 
             this.isLoading = true;
-            setTimeout(()=>{
+            window.setTimeout(()=>{
                 let result = viteWallet.Wallet.login(this.activeAccount, this.password);
                 this.isLoading = false;
                 result && loginSuccess();
                 !result && toast(this.$t('hint.pwErr'), 'error');
-            }, 0);
+            }, 10);
         }
     }
 };
@@ -158,6 +158,11 @@ export default {
         position: relative;
         &.disable {
             background: #bfbfbf;
+        }
+        &.__btn_input {
+            .name {
+                width: 89%;
+            }
         }
     }
     .bottom {

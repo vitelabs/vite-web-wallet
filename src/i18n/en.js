@@ -23,6 +23,7 @@ module.exports = {
         empty: 'The input of seed phrase cannot be empty',
         error: 'Incorrect seed phrase. Try again',
         hint: 'Mnemonic format: words, spaces, words... spaces, words.',
+        netErr: 'The full node is abnormal, please try again later.'
     },
 
     setting: {
@@ -68,6 +69,7 @@ module.exports = {
         balance: 'Balance',
         addAcc: 'Add Account',
         addr: 'Address Lists of Accounts',
+        addrList: 'Address List',
         default: 'Select Default User'
     },
 

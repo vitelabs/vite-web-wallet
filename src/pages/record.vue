@@ -20,10 +20,10 @@ export default {
     components: {
         mnemonic, process
     },
-    data() {
-        let activeAccount = viteWallet.Wallet.getActiveAccount();
-        let mnemonic = activeAccount.getMnemonic() || '';
-        
+    mounted() {
+        this.activeAccount = viteWallet.Wallet.getActiveAccount();
+        this.mnemonic = this.activeAccount.getMnemonic() || '';
+
         // let list = mnemonic.split(/\s/);
 
         // let mnemonicList = [];
@@ -38,6 +38,10 @@ export default {
         //     str += element;
         // });
         // mnemonicList.push(str);
+    },
+    data() {
+        let activeAccount = viteWallet.Wallet.getActiveAccount();
+        let mnemonic = activeAccount.getMnemonic() || '';
 
         return {
             activeAccount,

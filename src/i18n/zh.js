@@ -21,7 +21,8 @@ module.exports = {
         placeholder: '请输入您的助记词',
         empty: '助记词输入为空',
         error: '助记词错误',
-        hint: '助记词格式：单词、空格、单词...空格、单词'
+        hint: '助记词格式：单词、空格、单词...空格、单词',
+        netErr: '节点异常，请您稍后重试'
     },
 
     setting: {
@@ -67,6 +68,7 @@ module.exports = {
         balance: '余额',
         addAcc: '新添加一个账户',
         addr: '账户地址列表',
+        addrList: '账户地址列表',
         default: '选择默认用户'
     },
 
@@ -120,7 +122,7 @@ module.exports = {
             addr: '请输入地址'
         },
         valid: {
-            remarksFormat: '备注限制中英文和标点符号，格式输入错误',
+            remarksFormat: '格式输入错误，备注仅支持中英文和标点符号',
             remarksLong: '备注请勿超出180个英文字符（或标点符号，一个汉字=6个英文字符）'
         },
         hint: {

@@ -2,7 +2,9 @@
     <layout>
         <div v-show="showPassWrapper" class="item" :class="{ 'unlock': !lock }">
             <div class="title __pointer">{{ $t('setting.unlock') }}</div>
-            <input :disabled="!lock" class="pass" v-model="pass" type="password" :placeholder="$t('create.input')" />
+            <div class="input-wrapper">
+                <input :disabled="!lock" class="pass" v-model="pass" type="password" :placeholder="$t('create.input')" />
+            </div>
             <span class="btn __pointer" @click="validPass">{{ $t('btn.submit') }}</span>
         </div>
 
@@ -59,7 +61,6 @@ export default {
 @import "~assets/scss/vars.scss";
 
 .item {
-    width: 474px;
     margin-bottom: 20px;
     margin-top: 0;
     &.unlock {
@@ -78,24 +79,30 @@ export default {
         line-height: 16px;
         margin-bottom: 16px;
     }
-    .pass {
+    .input-wrapper {
         display: inline-block;
-        box-sizing: border-box;
-        width: 397px;
+        width: 83%;
         height: 40px;
-        padding: 0 15px;
         margin-right: 10px;
-        line-height: 40px;
-        background: #FFFFFF;
-        border: 1px solid #D4DEE7;
-        border-radius: 2px;
-        font-size: 14px;
+        .pass {
+            display: inline-block;
+            box-sizing: border-box;
+            width: 100%;
+            height: 100%;
+            padding: 0 15px;
+            line-height: 40px;
+            background: #FFFFFF;
+            border: 1px solid #D4DEE7;
+            border-radius: 2px;
+            font-size: 14px;
+        }
     }
     .btn {
         position: relative;
-        top: -2px;
-        display: inline-block;
-        width: 60px;
+        top: -1px;
+        float: right;
+        width: 12%;
+        max-width: 60px;
         height: 40px;
         text-align: center;
         line-height: 40px;
@@ -112,14 +119,11 @@ export default {
 }
 
 @media only screen and (max-width: 500px) {
-    .item {
-        width: auto;
-    }
-    .item .pass {
-        width: 78%;
+    .item .input-wrapper {
+        width: 75%;
     }
     .item .btn {
-        float: right;
+        width: 60px;
     }
 }
 </style>

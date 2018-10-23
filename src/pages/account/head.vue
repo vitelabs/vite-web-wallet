@@ -5,8 +5,9 @@
                 <span>{{ $t('accDetail.name') }}</span>
                 <img @click="startRename" class="edit __pointer" src="../../assets/imgs/edit_icon.svg"/>
             </div>
-            
-            <span class="name __ellipsis" @click="startRename" v-show="!isShowNameInput">{{ account.name }}</span>
+            <div v-show="!isShowNameInput" class="name" :class="{
+                'small-font': account.name && account.name.length > 16
+            }" @click="startRename">{{ account.name }}</div>
             <input ref="nameInput" v-show="isShowNameInput" type="text"
                    v-model="editName" :placeholder="account.name"
                    @blur="rename"/>
@@ -47,7 +48,6 @@ import Vue from 'vue';
 import qrcode from 'components/qrcode';
 import copyOK from 'components/copyOK';
 import copy from 'utils/copy';
-import request from 'utils/request';
 import { stringify } from 'utils/viteSchema';
 import toast from 'utils/toast/index.js';
 
@@ -111,19 +111,16 @@ export default {
         },
         goDetail() {
             let locale = this.$i18n.locale === 'zh' ? 'zh/' : '';
-            window.open(`https://testnet.vite.net/${locale}account/${this.account.addr}`);
+            window.open(`${process.env.viteNet}${locale}account/${this.account.addr}`);
         },
 
         getTestToken() {
-            request({
-                method: 'POST',
-                url: 'https://testnet.vite.net/api/account/newtesttoken',
-                params: {
-                    accountAddress: this.account.addr
-                }
-            }).then(() => {
+            if (!this.account || !this.account.addr) {
+                toast( this.$t('accDetail.hint.tErr') );
+            }
+            viteWallet.TestToken.get(this.account.addr).then(() => {
                 toast( this.$t('accDetail.hint.token') );
-            }).catch(err => {
+            }).catch((err) => {
                 console.warn(err);
                 toast( this.$t('accDetail.hint.tErr') );
             });
@@ -183,11 +180,15 @@ export default {
 
 .account-head-wrapper {
     position: relative;
+    padding: 30px 0 0px 20px;
     text-align: center;
     background: #ffffff;
     box-shadow: 0 2px 48px 1px rgba(176, 192, 237, 0.42);
     border-radius: 2px;
-    padding: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
     .head-title {
         position: relative;
         display: block;
@@ -238,46 +239,55 @@ export default {
         }
     }
     .addr-wrapper {
+        padding-right: 20px;
+        padding-bottom: 30px;
         display: inline-block;
-        min-width: 510px;
+        max-width: 510px;
         text-align: left;
         .addr-content {
             font-size: 14px;
+            word-break: break-all;
             width: 100%;
-            height: 40px;
             line-height: 40px;
             box-sizing: border-box;
             background: #f3f6f9;
             border: 1px solid #d4dee7;
             border-radius: 2px;
-            padding: 0 8px;
+            padding: 0 10px ;
             color: #283d4a;
         }
     }
     .custom-name {
-        position: absolute;
+        padding-right: 20px;
+        padding-bottom: 30px;
         font-size: 24px;
         color: #1d2024;
         text-align: left;
-        font-family: $font-bold;
+        font-family: $font-bold;    
+        max-width: 24%;
+        word-break: break-all;
         .name {
             display: inline-block;
             line-height: 32px;
+            &.small-font {
+                font-size: 20px;
+                line-height: 26px;
+            }
         }
         input {
             height: 32px;
             line-height: 32px;
             font-size: 20px;
-            width: 300px;
+            width: 100%;
         }
     }
     .btn-group {
-        position: absolute;
-        top: 30px;
-        right: 30px;
+        width: 212px;
         font-family: $font-normal-b;
-        margin-right: 8px;
+        padding-right: 20px;
+        padding-bottom: 30px;
         .btn__small {
+            box-sizing: border-box;
             width: 210px;
             height: 33px;
             line-height: 33px;
@@ -307,38 +317,59 @@ export default {
 
 @media only screen and (max-width: 500px) {
     .account-head-wrapper {
+        display: block;
         padding: 15px;
         .head-title {
             padding-bottom: 15px;
+        }
+    }
+    .account-head-wrapper .custom-name {
+        padding: 0;
+    }
+    .account-head-wrapper .addr-wrapper {
+        padding: 0;
+        margin-top: 20px;
+        display: block;
+        width: 100%;
+        min-width: 0;
+        .addr-content {
+            padding: 10px;
+            line-height: 20px;
+        }
+    }
+    .account-head-wrapper .btn-group {
+        padding: 0;
+        margin-top: 20px;
+    }
+}
+
+@media only screen and (max-width: 700px) {
+    .account-head-wrapper {
+        .head-title {
             .edit {
                 float: right;
             }
         }
     }
     .account-head-wrapper .custom-name {
-        position: relative;
+        width: 100%;
+        max-width: 100%;
         input {
             width: 100%;
         }
     }
-    .account-head-wrapper .addr-wrapper {
-        margin-top: 20px;
-        display: block;
-        min-width: 100%;
-        .addr-content {
-            padding: 10px;
-            height: auto;
-            line-height: 20px;
-            word-break: break-all;
-        }
-    }
     .account-head-wrapper .btn-group {
-        position: relative;
-        top: 0;
-        right: 0;
-        margin-top: 20px;
+        width: 100%;
         .btn__small {
             width: 100%;
+        }
+    }
+    .account-head-wrapper .addr-wrapper {
+        width: 100%;
+        min-width: 0;
+        .addr-content {
+            padding: 10px;
+            line-height: 20px;
         }
     }
 }
