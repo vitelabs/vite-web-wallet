@@ -243,18 +243,17 @@ export default {
         padding-bottom: 30px;
         display: inline-block;
         max-width: 510px;
-        min-width: 470px;
         text-align: left;
         .addr-content {
             font-size: 14px;
+            word-break: break-all;
             width: 100%;
-            height: 40px;
             line-height: 40px;
             box-sizing: border-box;
             background: #f3f6f9;
             border: 1px solid #d4dee7;
             border-radius: 2px;
-            padding: 0 8px;
+            padding: 0 10px ;
             color: #283d4a;
         }
     }
@@ -288,6 +287,7 @@ export default {
         padding-right: 20px;
         padding-bottom: 30px;
         .btn__small {
+            box-sizing: border-box;
             width: 210px;
             height: 33px;
             line-height: 33px;
@@ -319,10 +319,33 @@ export default {
     .account-head-wrapper {
         display: block;
         padding: 15px;
-        display: block;
-        min-width: 0;
         .head-title {
             padding-bottom: 15px;
+        }
+    }
+    .account-head-wrapper .custom-name {
+        padding: 0;
+    }
+    .account-head-wrapper .addr-wrapper {
+        padding: 0;
+        margin-top: 20px;
+        display: block;
+        width: 100%;
+        min-width: 0;
+        .addr-content {
+            padding: 10px;
+            line-height: 20px;
+        }
+    }
+    .account-head-wrapper .btn-group {
+        padding: 0;
+        margin-top: 20px;
+    }
+}
+
+@media only screen and (max-width: 700px) {
+    .account-head-wrapper {
+        .head-title {
             .edit {
                 float: right;
             }
@@ -331,29 +354,22 @@ export default {
     .account-head-wrapper .custom-name {
         width: 100%;
         max-width: 100%;
-        min-width: 0px;
-        position: relative;
         input {
             width: 100%;
         }
     }
+    .account-head-wrapper .btn-group {
+        width: 100%;
+        .btn__small {
+            width: 100%;
+        }
+    }
     .account-head-wrapper .addr-wrapper {
-        margin-top: 20px;
-        display: block;
         width: 100%;
         min-width: 0;
         .addr-content {
             padding: 10px;
-            height: auto;
             line-height: 20px;
-            word-break: break-all;
-        }
-    }
-    .account-head-wrapper .btn-group {
-        margin-top: 20px;
-        width: 100%;
-        .btn__small {
-            width: 100%;
         }
     }
 }

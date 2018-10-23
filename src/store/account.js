@@ -1,8 +1,4 @@
-const TokenIds = {
-    'tti_5649544520544f4b454e6e40': 'VITE',
-    'tti_12ea0c02170304090a5ac879': 'VCP',
-    'tti_b6187a150d175e5a165b1c5b': 'VV'
-};
+import request from 'utils/request';
 
 const state = {
     onroad: {
@@ -10,11 +6,12 @@ const state = {
     },
     balance: {
         balanceInfos: {}
-    }
+    },
+    tokenIds: {}
 };
 
 const mutations = {
-    commitBalanceInfo(state, payload) {
+    commitBalanceInfo(state, payload, ) {
         state.balance = payload.balance || {};
         state.balance.balanceInfos = state.balance && state.balance.tokenBalanceInfoMap ? state.balance.tokenBalanceInfoMap : [];
 
@@ -28,6 +25,9 @@ const mutations = {
         state.onroad = {
             balanceInfos:{}
         };
+    },
+    commitSetTokenIds(state, tokenIds) {
+        state.tokenIds = tokenIds;
     }
 };
 
@@ -39,6 +39,28 @@ const actions = {
             console.warn(e);
         });
     },
+    getDefaultTokenList({ commit }) {
+        request({
+            method: 'GET',
+            url: '/api/version/config?app=web&channel=token&version=default'
+        }).then((req)=>{
+            if (!req && !req.data) {
+                return;
+            }
+
+            let { data } = req;
+            data = JSON.parse(data);
+
+            let tokenIds = {};
+            data.forEach((item) => {
+                tokenIds[item.tokenId] = item.tokenSymbol;
+            });
+            
+            commit('commitSetTokenIds', tokenIds);
+        }).catch((err) => {
+            console.error(err);
+        });
+    }
 };
 
 const getters = {
@@ -75,11 +97,11 @@ const getters = {
             balanceInfo[tokenId].onroadNum = item.number;
         }
 
-        for (let tokenId in TokenIds) {
+        for (let tokenId in state.tokenIds) {
             balanceInfo[tokenId] = balanceInfo[tokenId] || {
                 balance: '0',
                 fundFloat: '0',
-                symbol: TokenIds[tokenId],
+                symbol: state.tokenIds[tokenId],
                 decimals: '0'
             };
         }

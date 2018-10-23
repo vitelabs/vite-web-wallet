@@ -150,12 +150,13 @@ export default {
             return true;
         },
         testMessage() {
-            if (/\s+/g.test(this.message)) {
-                this.messageErr = this.$t('accDetail.valid.remarksFormat');
-                return;
-            }
+            // if (/\s+/g.test(this.message)) {
+            //     this.messageErr = this.$t('accDetail.valid.remarksFormat');
+            //     return;
+            // }
 
-            let str = encodeURIComponent(this.message);
+            let message = this.message.replace(/(^\s*)|(\s*$)/g,'');
+            let str = encodeURIComponent(message);
             if (str.length > 180) {
                 this.messageErr = this.$t('accDetail.valid.remarksLong');
                 return;
@@ -261,6 +262,7 @@ export default {
     .row {
         margin-top: 20px;
         .row-t {
+            position: relative;
             font-family: $font-bold;
             font-size: 14px;
             color: #1D2024;
@@ -278,10 +280,12 @@ export default {
             }
         }
         .err {
-            float: right;
+            position: absolute;
+            right: 0;
             font-size: 12px;
             color: #FF2929;
             line-height: 16px;
+            text-align: right;
         }
     }
 
