@@ -2,13 +2,14 @@
     <div class="acc-list-wrapper">
         <div class="row">
             <span class="title">{{ $t('accList.addr') }}</span>
+            <span class="title meta">{{ $t('accList.addrList') }}</span>
             <span class="describe">{{ $t('accList.default') }}</span>
         </div>
         <div class="acc-list __pointer">
             <div ref="listWrapper" class="list-wrapper">
                 <div ref="list">
-                    <div @click="setDefault(addr)" class="acc-item __ellipsis" v-for="(addr, index) in addrList" :key="index">
-                        <span class="describe">{{(index + 1) + '. ' + addr}}</span>
+                    <div @click="setDefault(addr)" class="acc-item" v-for="(addr, index) in addrList" :key="index">
+                        <span class="describe __ellipsis">{{(index + 1) + '. ' + addr}}</span>
                         <span class="select" :class="{
                             'active': defaultAddr === addr
                         }"></span>
@@ -85,6 +86,9 @@ export default {
         color: #1D2024;
         letter-spacing: 0.35px;
         font-family: $font-bold;
+        &.meta {
+            display: none;
+        }
     }
     .describe {
         float: right;
@@ -102,6 +106,7 @@ export default {
         overflow: auto;
     }
     .acc-item {
+        position: relative;
         padding: 10px 15px;
         border-bottom: 1px solid #D4DEE7;
         &:last-child {
@@ -124,6 +129,7 @@ export default {
             background-size: 16px 16px;
         }
         .describe {
+            display: inline;
             position: relative;
             bottom: 3px;
             font-size: 12px;
@@ -132,17 +138,19 @@ export default {
     }
 
     .describe {
+        display: block;
+        width: 93%;
         font-size: 12px;
         color: #5E6875;
     }
     .select {
+        position: absolute;
+        top: 12px;
+        right: 10px;
         display: block;
         box-sizing: border-box;
-        float: right;
-        margin-top: 4px; 
         width: 16px;
         height: 16px;
-        background: #FFFFFF;
         background: #FFFFFF;
         border: 1px solid #D4DEE7;
         border-radius: 16px;
@@ -154,14 +162,20 @@ export default {
 }
 
 @media only screen and (max-width: 500px) {
+    .row .title {
+        display: none;
+        &.meta {
+            display: inline;
+        }
+    }
+    .acc-list .list-wrapper {
+        max-height: unset;
+    }
     .acc-list .acc-item {
         padding: 10px;
     }
     .acc-list .add {
         padding: 0 10px;
-    }
-    .acc-list .select {
-        margin-top: -18px;
     }
 }
 </style>

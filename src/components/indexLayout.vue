@@ -67,7 +67,8 @@ export default {
         overflow: auto;
         .confirm {
             position: relative;
-            width: 360px;
+            width: 100%;
+            max-width: 360px;
             text-align: center;
             padding: 20px;
         }

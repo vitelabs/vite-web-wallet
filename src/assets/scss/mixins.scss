@@ -74,7 +74,6 @@ textarea {
 
 .__btn_input {
     background: #fff;
-    border: 1px solid #D4DEE7;
     border-radius: 2px;
     overflow: hidden;
     text-align: left;
@@ -129,6 +128,6 @@ textarea {
 }
 @media only screen and (max-width: 500px) {
     .__btn_list .__btn {
-        width: 158px;
+        width: 48%;
     }
 }

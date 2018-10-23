@@ -1,6 +1,8 @@
 import acc from './storeAcc.js';
 import account from './account.js';
 import storage from 'utils/localStorage.js';
+import toast from 'utils/toast/index.js';
+import statistics from 'utils/statistics';
 
 const LAST_KEY = 'ACC_LAST';
 
@@ -32,19 +34,23 @@ class Wallet {
             return;
         }
 
-        let { addr, entropy } = $ViteJS.Wallet.Address.newAddr();
-        let encryptObj = $ViteJS.Wallet.Account.encrypt(entropy, pass);
-        let obj = JSON.parse(encryptObj);
-
-        this.newActiveAcc({
-            defaultInx: 0,
-            addrNum: 1, 
-            name,
-            decryptEntropy: entropy,
-            entropy: obj.encryptentropy,
-            encryptObj: obj,
-            addrs: [addr]
-        });
+        try {
+            let { addr, entropy } = $ViteJS.Wallet.Address.newAddr();
+            let encryptObj = $ViteJS.Wallet.Account.encrypt(entropy, pass);
+            let obj = JSON.parse(encryptObj);
+    
+            this.newActiveAcc({
+                defaultInx: 0,
+                addrNum: 1, 
+                name,
+                decryptEntropy: entropy,
+                entropy: obj.encryptentropy,
+                encryptObj: obj,
+                addrs: [addr]
+            });
+        } catch(err) {
+            toast( JSON.stringify(err) );
+        }
     }
 
     importKeystore(data) {
@@ -64,28 +70,25 @@ class Wallet {
         let num = 10;
         let addrs = $ViteJS.Wallet.Address.getAddrsFromMnemonic(mnemonic, num);
         if (!addrs) {
-            return Promise.reject(addrs);
+            return Promise.reject({
+                code: 500005
+            });
         }
 
         let requests = [];
         for (let i=0; i<num; i++) {
-            requests.push($ViteJS.Vite._currentProvider.batch([{
-                type: 'request',
-                methodName: 'ledger_getAccountByAccAddr',
-                params: [ addrs[i].hexAddr ]
-            }, {
-                type: 'request',
-                methodName: 'ledger_getUnconfirmedInfo',
-                params: [ addrs[i].hexAddr ]
-            }]));
+            requests.push( $ViteJS.Vite.Ledger.getBalance(addrs[i].hexAddr) );
         }
 
         return Promise.all(requests).then((data)=>{
             let index = 0;
             data.forEach((item, i) => {
-                let account = item[0].result;
-                let unconfirm = item[1].result;
-                if (account.blockHeight || unconfirm.unConfirmedBlocksLen) {
+                if (!item) {
+                    return;
+                }
+                let account = item.balance;
+                let onroad = item.onroad;
+                if ( (account && +account.totalNumber) || (onroad && +onroad.totalNumber) ) {
                     index = i;
                 }
             });
@@ -134,6 +137,7 @@ class Wallet {
     }
 
     _loginKeystore(addr, pass) {
+        console.log('???');
         let acc = getAccFromAddr(addr);
         let keystore = acc.keystore;
 
@@ -147,8 +151,9 @@ class Wallet {
         let after = new Date().getTime();
         let n = ( keystore.crypto && keystore.crypto.scryptparams && keystore.crypto.scryptparams.n) ? 
             keystore.crypto.scryptparams.n : 0;
-        _hmt.push(['_trackEvent', 'keystore-decrypt', 'time', n, after - before]);
+        statistics.event('keystore-decrypt', n, 'time', after - before);
 
+        // 262144 to 4096
         if (n === 262144) {
             let obj = $ViteJS.Vite.Account.newHexAddr(privKey);
             let keystoreStr = $ViteJS.Wallet.Keystore.encrypt(obj, pass);
@@ -179,7 +184,11 @@ class Wallet {
             let encryptObj = acc.encryptObj;
             encryptObj.encryptentropy = entropy;
 
+            let before = new Date().getTime();
             let decryptEntropy = $ViteJS.Wallet.Account.decrypt(JSON.stringify(encryptObj), pass);
+            let after = new Date().getTime();
+            statistics.event('mnemonic-decrypt', encryptObj.version || '1', 'time', after - before);
+
             if (!decryptEntropy) {
                 return false;
             }
@@ -264,6 +273,7 @@ function setLast(acc) {
     storage.setItem(LAST_KEY, acc);
 }
 
+// VCP VV ===>  later
 function reSave() {
     let list = acc.getList();
     if (!list || !list.length) {
@@ -310,8 +320,7 @@ function reSave() {
         return;
     }
     
-    _hmt.push(['_trackEvent', 'keystore-resave']);
-
+    statistics.event('keystore', 'resave');
     setLast(last);
     acc.setAccList(reList);
     console.log('done', new Date().getTime());

@@ -51,17 +51,19 @@ export default {
 .mint-toast {
     box-sizing: border-box;
     position: absolute;
-    height: 84px;
+    padding: 30px 0;
     background: #FFFFFF;
     box-shadow: 0 2px 48px 1px rgba(176,192,237,0.42);
     border-radius: 2px;
-    min-width: 360px;
+    min-width: 300px;
+    max-width: 100%;
     text-align: center;
     padding: 30px;
     z-index: 100;
     word-break: keep-all;
     font-family: $font-bold;
     font-size: 16px;
+    line-height: 24px;
     color: #1D2024;
 
     .line {

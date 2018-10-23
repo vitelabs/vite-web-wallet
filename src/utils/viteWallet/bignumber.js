@@ -1,7 +1,9 @@
+import BigNumber from 'bignumber.js';
+
 const DP = 8;
 
 class bignumber {
-    constructor(BigNumber) {
+    constructor() {
         BigNumber.config({ 
             FORMAT: {
                 decimalSeparator: '.',
@@ -12,25 +14,23 @@ class bignumber {
                 fractionGroupSize: 0
             }
         });
-
-        this.BigNumber = BigNumber;
     }
 
     isEqual(num1, num2) {
-        num1 = new this.BigNumber(num1);
-        num2 = new this.BigNumber(num2);
+        num1 = new BigNumber(num1);
+        num2 = new BigNumber(num2);
         return num1.isEqualTo(num2);
     }
 
     dividedToNumber(num1, num2) {
-        num1 = new this.BigNumber(num1);
-        num2 = new this.BigNumber(num2);
-        return num1.dividedBy(num2).integerValue(this.BigNumber.ROUND_CEIL).toNumber();
+        num1 = new BigNumber(num1);
+        num2 = new BigNumber(num2);
+        return num1.dividedBy(num2).integerValue(BigNumber.ROUND_CEIL).toNumber();
     }
 
     toBasic(num, minUnit = 0, decimalPlaces = DP) {
-        let min = new this.BigNumber(10).exponentiatedBy(minUnit);
-        num = new this.BigNumber(num);
+        let min = new BigNumber(10).exponentiatedBy(minUnit);
+        num = new BigNumber(num);
         if (num.c == null) {
             return '';
         }
@@ -42,8 +42,8 @@ class bignumber {
     }
 
     toMin(num, minUnit) {
-        let min = new this.BigNumber(10).exponentiatedBy(minUnit);
-        num = new this.BigNumber(num);
+        let min = new BigNumber(10).exponentiatedBy(minUnit);
+        num = new BigNumber(num);
         if (num.c == null) {
             return '';
         }

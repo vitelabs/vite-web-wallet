@@ -3,124 +3,42 @@
         <span class="status-text" v-show="statusText && statusText !== 'sync'">
             {{ statusText ? $t(`nav.${statusText}`) : '' }}
         </span>
-
-        <span v-show="!statusText">----</span>
-
-        <span v-show="statusText.indexOf('first') !== -1">{{
-            `${currentHeight} / ${targetHeight}`
-        }}</span>
-
-        <img src="../assets/imgs/done_icon.svg" class="icon" v-show="statusText === 'firstDone'" />
-
         <span v-show="statusText === 'sync'">
-            {{ $t(`nav.blockHeight`) + ': ' + blockHeight }}
+            {{ $t(`nav.blockHeight`) + ': ' + (blockHeight || '----') }}
         </span>
     </div>
 </template>
 
 <script>
-let p2pEvent = null;
-let blockEvent = null;
 let netEvent = null;
 let heightEvent = null;
 
 export default {
     data() {
         return {
-            currentHeight: '',
-            targetHeight: '',
-
-            status: null,
             statusText: '',
-
-            p2pStatus: false,
             netStatus: false,
-
-            blockHeight: '0'
+            blockHeight: ''
         };
     },
     mounted() {
-        blockEvent = webViteEventEmitter.on('syncInfo', (blockInfo) => {
-            this.syncData(blockInfo);
-        });
         heightEvent = webViteEventEmitter.on('currentHeight', (height) => {
             this.blockHeight = height;
-        });
-        p2pEvent = webViteEventEmitter.on('p2pStatus', (p2pStatus) => {
-            this.p2pStatus = p2pStatus;
         });
         netEvent = webViteEventEmitter.on('netStatus', (status) => {
             this.netStatus = status;
         });
 
-        this.p2pStatus = viteWallet.Net.getP2PStatus();
         this.netStatus = viteWallet.Net.getNetStatus();
-        this.syncData( viteWallet.Ledger.getSyncInfo() );
         this.blockHeight = viteWallet.Ledger.getHeight();
     },
     destroyed() {
-        webViteEventEmitter.off(blockEvent);
-        webViteEventEmitter.off(p2pEvent);
         webViteEventEmitter.off(netEvent);
         webViteEventEmitter.off(heightEvent);
     },
     watch: {
-        status: function(val, oldVal) {
-            val === 2 && webViteEventEmitter.off(blockEvent);
-            this.updateStatusText(oldVal);
-        },
-        p2pStatus: function() {
-            this.updateStatusText(null);
-        },
         netStatus: function() {
-            this.updateStatusText(null);
-        }
-    },
-    methods: {
-        updateStatusText(oldVal) {
-            // Client has no network.
-            if (!this.netStatus) {
-                this.statusText = 'noNet';
-                return;
-            }
-
-            // No node connection
-            if (!this.p2pStatus) {
-                this.statusText = 'noP2P';
-                return;
-            }
-
-            // Waiting for initialization 
-            if (this.status === 0) {
-                this.statusText = '';
-                return;
-            }
-
-            // Initing
-            if (this.status === 1) {
-                this.statusText = 'firstDoing';
-                return;
-            }
-
-            // Block synchronization completed
-            if (oldVal === null && this.status === 2) {
-                this.statusText = 'sync';
-                return;
-            }
-
-            this.statusText = 'firstDone';
-            let textTimeout = window.setTimeout(()=>{
-                window.clearTimeout(textTimeout);
-                textTimeout = null;
-                this.statusText = 'sync';
-            }, 500);
-        },
-        syncData({
-            targetHeight, currentHeight, status
-        }) {
-            this.targetHeight = targetHeight;
-            this.currentHeight = currentHeight;
-            this.status = status;
+            this.statusText = !this.netStatus ? 'noNet' : 'sync';
         }
     }
 };
@@ -136,12 +54,6 @@ export default {
     line-height: 20px;
     .status-text {
         margin-right: 10px;
-    }
-    .icon {
-        width: 16px;
-        height: 16px;
-        margin-bottom: -4px;
-        margin-left: 20px;
     }
 }
 </style>

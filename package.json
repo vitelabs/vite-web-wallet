@@ -1,13 +1,15 @@
 {
     "name": "vite-wallet",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "",
     "scripts": {
         "clean:hack": "rm -rf ./node_modules/node-libs-browser/node_modules/buffer",
         "clean": "rm -rf ./static && npm run clean:hack",
-        "build": "npm run clean && webpack && node build.js",
-        "build:test": "npm run clean && MAP=true webpack && NODE_ENV=test node build.js",
-        "dev": "npm run clean:hack && NODE_ENV=development webpack-dev-server",
+        "build": "npm run clean && NODE_ENV=production webpack && node build.js",
+        "build:test": "npm run clean && NODE_ENV=test webpack && NODE_ENV=test node build.js",
+        "build:appDev": "APP=true NODE_ENV=dev webpack",
+        "build:app": "APP=true webpack",
+        "dev": "npm run clean:hack && NODE_ENV=dev webpack-dev-server",
         "analyzer": "analyzer=true webpack-dev-server",
         "lint": "eslint ./ --cache --fix"
     },
@@ -52,14 +54,15 @@
         "webpack-merge": "^4.1.3"
     },
     "dependencies": {
+        "@vitelabs/vite.js": "git+https://github.com/vitelabs/vite.js.git",
         "axios": "^0.18.0",
+        "bignumber.js": "^7.2.1",
         "buffer": "^5.2.1",
         "koa": "^2.5.3",
         "koa-router": "^7.4.0",
         "node-libs-browser": "^2.1.0",
         "qrcode.es": "^1.0.0",
         "qs": "^6.5.2",
-        "vite.js": "git+https://github.com/vitelabs/vite.js.git",
         "vuex": "^3.0.1"
     }
 }
