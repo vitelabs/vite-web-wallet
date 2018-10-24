@@ -19,6 +19,13 @@
             <img v-show="active === 'transList'" :src="sendActive"  />
         </router-link>
 
+        <router-link class="__pointer icon" :class="{
+            'active': active === 'quota'
+        }" :to="{ name: 'quota' }">
+            <img v-show="active !== 'quota'" :src="quota" />
+            <img v-show="active === 'quota'" :src="quotaActive"  />
+        </router-link>
+
         <div class="_bottom">
             <router-link class="icon setting __pointer" :class="{
                 'active': active === 'setting'
@@ -48,6 +55,8 @@ import setting from 'assets/imgs/settings_default.svg';
 import settingActive from 'assets/imgs/settings_pressed.svg';
 import logoutDefault from 'assets/imgs/logout_default.svg';
 import logoutActive from 'assets/imgs/logout_pressed.svg';
+import quota from 'assets/imgs/quota_default.svg';
+import quotaActive from 'assets/imgs/quota_pressed.svg';
 
 export default {
     components: {
@@ -72,7 +81,9 @@ export default {
             setting,
             settingActive,
             logoutDefault,
-            logoutActive
+            logoutActive,
+            quota,
+            quotaActive
         };
     },
     methods: {

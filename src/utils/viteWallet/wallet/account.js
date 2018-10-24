@@ -165,7 +165,7 @@ class Account {
 
     sendRawTx(block, privKey) {
         privKey = privKey || this.addrs[this.defaultInx].privKey;
-        return $ViteJS.Vite.Account.sendRawTx(block, privKey);
+        return $ViteJS.Wallet.Account.sendRawTx(block, privKey);
     }
 
     sendTx({

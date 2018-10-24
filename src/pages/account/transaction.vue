@@ -50,9 +50,15 @@
             </div>
         </div>
 
-        <confirm v-show="isShowQuota" :leftBtnClick="" :rightBtnClick="closeTrans"></confirm>
+        <!-- Quota confirm -->
+        <confirm v-show="isShowQuota" :title=" $t('accDetail.quota.title') " 
+                 :closeIcon="true" :close="closeQuota"
+                 :leftBtnTxt="$t('accDetail.quota.left')" :leftBtnClick="startPow"
+                 :rightBtnTxt="$t('accDetail.quota.right')" :rightBtnClick="gotoQuota">
+            {{ $t('accDetail.quota.describe') }}
+        </confirm>
 
-        <pow-process></pow-process>
+        <pow-process ref="powProcess" v-if="isShowPow" :isShowCancel="true" :cancel="stopPow"></pow-process>
     </div>
 </template>
 
@@ -60,7 +66,7 @@
 import Vue from 'vue';
 import toast from 'utils/toast/index.js';
 import confirm from 'components/confirm';
-import powProcess from './powProcess';
+import powProcess from 'components/powProcess';
 
 let inAddrTimeout = null;
 let amountTimeout = null;
@@ -109,7 +115,9 @@ export default {
 
             isShowTrans: true,
             isShowQuota: false,
-            loading: false
+            isShowPow: false,
+            loading: false,
+            powing: false
         };
     },
     watch: {
@@ -160,6 +168,21 @@ export default {
         closeQuota() {
             this.isShowQuota = false;
             this.isShowTrans = true;
+        },
+        showPow() {
+            this.isShowPow = true;
+            this.isShowQuota = false;
+        },
+        stopPow() {
+            this.isShowPow = false;
+            this.loading = false;
+            this.closeTrans();
+        },
+
+        gotoQuota() {
+            this.$router.push({
+                name: 'quota'
+            });
         },
 
         testAmount() {
@@ -221,9 +244,7 @@ export default {
                 amount,
                 message: this.message
             }).then(() => {
-                this.loading = false;
-                toast(this.$t('transList.valid.succ'));
-                this.closeTrans();
+                this.transSuccess();
             }).catch((err) => {
                 console.warn(err);
                 this.loading = false;
@@ -250,9 +271,63 @@ export default {
             let activeAccount = viteWallet.Wallet.getActiveAccount();
             if (!activeAccount) {
                 toast(this.$t('transList.valid.err'));
+                return;
             }
 
-            activeAccount;
+            let transError = () => {
+                this.loading = false;
+                this.isShowTrans = true;
+                toast(this.$t('transList.valid.err'));
+            };
+
+            this.showPow();
+            this.loading = true;
+
+            let amount =  viteWallet.BigNumber.toMin(this.amount, this.token.decimals);
+            activeAccount.getPowTxBlock({
+                toAddr: this.inAddress,
+                tokenId: this.token.id,
+                amount,
+                message: this.message
+            }).then((block) => {
+                if (!this.loading) {
+                    return;
+                }
+
+                let sendRawTx = ()=>{
+                    if (!this.loading) {
+                        return;
+                    }
+
+                    activeAccount.sendRawTx(block).then(() => {
+                        this.transSuccess();
+                    }).catch((err) => {
+                        console.warn('pow trans', err);
+                        transError();
+                    });
+                };
+
+                let powProcessEle = this.$refs.powProcess;
+                powProcessEle.gotoFinish();
+
+                if (powProcessEle) {
+                    setTimeout(() => {
+                        this.isShowPow = false;
+                        sendRawTx();
+                    }, 1000);
+                    return;
+                }
+                sendRawTx();
+            }).catch((err) => {
+                console.warn('pow', err);
+                transError();
+            });
+        },
+
+        transSuccess() {
+            this.loading = false;
+            toast(this.$t('transList.valid.succ'));
+            this.closeTrans();
         }
     }
 };
@@ -260,6 +335,20 @@ export default {
 
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
+
+.trans-wrapper {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    overflow: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 100;
+}
 
 .transaction-wrapper {
     width: 515px;

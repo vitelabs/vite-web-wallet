@@ -1,11 +1,14 @@
 <template>
     <div class="confirm-wrapper">
-        <div class="title">{{ title }}</div>
+        <div class="title">
+            {{ title }}
+            <span @click="close" class="close-icon __pointer"></span>
+        </div>
         <div class="content-wrapper">
             <div class="content"> <slot></slot> </div>
             <div class="bottom">
-                <div class="__btn btn-left" @click="leftBtnClick">{{ leftBtnTxt }}</div>
-                <div class="__btn __btn_all_in" @click="rightBtnClick">{{ rightBtnTxt }}</div>
+                <div class="__btn btn-left __pointer" @click="leftBtnClick">{{ leftBtnTxt }}</div>
+                <div class="__btn __btn_all_in __pointer" @click="rightBtnClick">{{ rightBtnTxt }}</div>
             </div>
         </div>
     </div>
@@ -21,6 +24,10 @@ export default {
         closeIcon: {
             type: Boolean,
             default: false
+        },
+        close: {
+            type: Function,
+            default: ()=>{}
         },
         leftBtnTxt: {
             type: String,
@@ -55,13 +62,30 @@ export default {
         background: #268EFF;
         height: 60px;
         line-height: 60px;
-        padding: 0 30px;
+        padding-left: 30px;
         font-family: $font-bold;
         font-size: 16px;
         color: #FFFFFF;
+        .close-icon {
+            box-sizing: border-box;
+            display: block;
+            float: right;
+            padding: 30px;
+            width: 20px;
+            height: 20px;
+            background: url('../assets/imgs/confirm_close.svg') no-repeat center;
+            background-size: 20px 20px;
+        }
     }
     .content-wrapper {
         padding: 30px;
+        .content {
+            font-family: $font-bold;
+            font-size: 18px;
+            color: #1D2024;
+            line-height: 26px;
+            margin-bottom: 30px;
+        }
     }
     .bottom {
         display: flex;

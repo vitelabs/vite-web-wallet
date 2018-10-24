@@ -134,8 +134,16 @@ module.exports = {
             punctuation: '不可以出现标点符号',
             rename: '重命名失败',
             copy: '复制成功'
+        },
+        quota: {  // [TODO]
+            title: '配额不足',
+            describe: '当前配额不足，无法进行转账，建议您通过减少描述文字、抵押配额或等待XX分钟后在交易',
+            left: '运行pow',
+            right: '抵押配额'
         }
     },
+
+    pow: '运行POW...',  // [TODO]
 
     // Transaction List
     transList: {
