@@ -12,6 +12,12 @@ const STATIC_PATH = process.env.APP === 'true' ?
     path.join(__dirname, '../../app/walletPages') : 
     path.join(__dirname, '../static');
 
+const goViteServer = {
+    production: '\'wss://test.vitewallet.com/ws\'',
+    test: '\'wss://testnet.vitewallet.com/ws\'',
+    dev: '\'ws://150.109.120.109:41420\''
+};
+
 let plugins = [
     new HtmlWebpackPlugin({
         title: 'Vite Wallet',
@@ -22,7 +28,7 @@ let plugins = [
     new webpack.DefinePlugin({
         'process.env.version': `"${packJson.version}"`,
         'process.env.NODE_ENV': `"${process.env.NODE_ENV}"`,
-        'process.env.goViteServer': process.env.NODE_ENV === 'production' ? '\'wss://test.vitewallet.com/ws\'' : '\'wss://testnet.vitewallet.com/ws\'',
+        'process.env.goViteServer': goViteServer[process.env.NODE_ENV || 'dev'],
         'process.env.viteNet': process.env.NODE_ENV === 'production' ? '\'https://testnet.vite.net/\'' : '\'http://132.232.134.168:8080/\''
     })
 ];

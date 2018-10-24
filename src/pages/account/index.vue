@@ -7,8 +7,9 @@
                 <tokenCard v-for="token in tokenList" :key="token.id"
                            :opt="token" :sendTransaction="showTrans"></tokenCard>
             </div>
-            <div v-if="isShowTrans" class="transaction">
-                <transaction :token="activeToken" :closeTrans="closeTrans"></transaction>
+            <div v-if="isShowTrans || isShowQuota" class="mask-layer">
+                <transaction v-show="isShowTrans" :token="activeToken" 
+                             :closeTrans="closeTrans"></transaction>
             </div>
         </div>
     </div>
@@ -27,7 +28,7 @@ let balanceInfoInst = null;
 
 export default {
     components: {
-        accountHead, syncBlock, tokenCard, transaction
+        accountHead, syncBlock, tokenCard, transaction, confirm
     },
     beforeMount() {
         const activeAccount = viteWallet.Wallet.getActiveAccount();
@@ -43,6 +44,7 @@ export default {
     },
     data() {
         return {
+            isShowQuota: false,
             isShowTrans: false,
             activeToken: null
         };
@@ -97,7 +99,7 @@ export default {
     display: flex;
     flex-wrap: wrap;
 }
-.transaction {
+.mask-layer {
     position: fixed;
     top: 0;
     bottom: 0;
