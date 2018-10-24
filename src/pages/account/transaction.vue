@@ -295,6 +295,7 @@ export default {
         }
         .err {
             position: absolute;
+            left: 90px;
             right: 0;
             font-size: 12px;
             color: #FF2929;
