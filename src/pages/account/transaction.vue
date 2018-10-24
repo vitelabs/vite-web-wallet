@@ -50,7 +50,7 @@
             </div>
         </div>
 
-        <confirm v-show="isShowQuota" :rightClick="closeTrans"></confirm>
+        <confirm v-show="isShowQuota" :leftBtnClick="" :rightBtnClick="closeTrans"></confirm>
 
         <pow-process></pow-process>
     </div>
@@ -245,6 +245,14 @@ export default {
 
                 toast(message || this.$t('transList.valid.err'));
             });
+        },
+        startPow() {
+            let activeAccount = viteWallet.Wallet.getActiveAccount();
+            if (!activeAccount) {
+                toast(this.$t('transList.valid.err'));
+            }
+
+            activeAccount;
         }
     }
 };
