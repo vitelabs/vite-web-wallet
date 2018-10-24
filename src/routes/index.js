@@ -7,6 +7,7 @@ import record from 'pages/record.vue';
 import account from 'pages/account/index.vue';
 import transList from 'pages/transList.vue';
 import setting from 'pages/setting/index.vue';
+import quota from 'pages/quota/index.vue';
 
 export default [
     {
@@ -53,5 +54,10 @@ export default [
         name: 'setting',
         path: '/setting',
         component: setting
+    },
+    {
+        name: 'quota',
+        path: '/quota',
+        component: quota
     }
 ];

@@ -7,10 +7,8 @@
                 <tokenCard v-for="token in tokenList" :key="token.id"
                            :opt="token" :sendTransaction="showTrans"></tokenCard>
             </div>
-            <div v-if="isShowTrans || isShowQuota" class="mask-layer">
-                <transaction v-show="isShowTrans" :token="activeToken" 
-                             :closeTrans="closeTrans"></transaction>
-            </div>
+
+            <transaction v-if="isShowTrans" :token="activeToken" :closeTrans="closeTrans"></transaction>
         </div>
     </div>
 </template>
@@ -44,7 +42,6 @@ export default {
     },
     data() {
         return {
-            isShowQuota: false,
             isShowTrans: false,
             activeToken: null
         };
@@ -98,19 +95,6 @@ export default {
 .token-list {
     display: flex;
     flex-wrap: wrap;
-}
-.mask-layer {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    overflow: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: rgba(0, 0, 0, 0.6);
-    z-index: 100;
 }
 
 @media only screen and (max-width: 500px) {
