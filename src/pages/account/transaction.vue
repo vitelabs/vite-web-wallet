@@ -210,7 +210,8 @@ export default {
             }).catch((err) => {
                 console.warn(err);
                 this.loading = false;
-                let code  = err && err.error ? err.error.code || 0 : 0;
+                let code  = err && err.error ? err.error.code || 0 : 
+                    err ? err.code : 0;
                 let message  = err && err.message ? err.message : 
                     err.error ? err.error.message || '' : '';
 
