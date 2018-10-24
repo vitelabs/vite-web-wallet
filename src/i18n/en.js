@@ -124,7 +124,8 @@ module.exports = {
         },
         valid: {
             remarksFormat: 'Format error! Remarks can only contain Chinese, English and punctuations.',
-            remarksLong: 'Comment is too long! The input length should be within 180 English characters (or punctuations, 1 Chinese character = 6 English character)'
+            // 备注请勿超出180个英文字符（或标点符号，一个汉字=6个英文字符）
+            remarksLong: 'Notes do not exceed 180 English characters (or punctuations, 1 Chinese character = 6 English character)'
         },
         hint: {
             token: 'VITE test tokens have be sent to your account, please check your account!',
