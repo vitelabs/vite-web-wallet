@@ -24,6 +24,7 @@ export default {
         },
         changeLocale(locale) {
             this.$i18n.locale = locale;
+            window.viteWalletI18n && window.viteWalletI18n.setLocale(locale);
             localStorage.setItem('lang', locale);
             this.toggleLangList();
         }
