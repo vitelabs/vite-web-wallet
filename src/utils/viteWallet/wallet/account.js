@@ -153,9 +153,24 @@ class Account {
         $ViteJS.Wallet.Account.stopAutoReceiveTX(addr.hexAddr);
     }
 
+    getPowTxBlock({
+        toAddr, tokenId, amount, message
+    }, isPledge = false) {
+        let fromAddr = this.addrs[this.defaultInx].hexAddr;
+
+        return $ViteJS.Vite.Ledger.getSendBlock({
+            fromAddr, toAddr, tokenId, amount, message
+        }, isPledge, true);
+    }
+
+    sendRawTx(block, privKey) {
+        privKey = privKey || this.addrs[this.defaultInx].privKey;
+        return $ViteJS.Vite.Account.sendRawTx(block, privKey);
+    }
+
     sendTx({
         toAddr, pass, tokenId, amount, message
-    }) {
+    }, isPledge = false) {
         let verifyRes = this.verify(pass);
         if (!verifyRes) {
             return Promise.reject({
@@ -167,9 +182,18 @@ class Account {
         let fromAddr = this.addrs[this.defaultInx].hexAddr;
         let privKey = this.addrs[this.defaultInx].privKey;
 
-        return $ViteJS.Wallet.Account.sendTx({
-            fromAddr, toAddr, tokenId, amount, message
-        }, privKey);
+        return new Promise((res, rej) => {
+            $ViteJS.Vite.Ledger.getSendBlock({
+                fromAddr, toAddr, tokenId, amount, message
+            }, isPledge).then((block)=>{
+                if (!block) {
+                    return rej('Block null');
+                }
+                return this.sendRawTx(block, privKey);
+            }).catch((err)=>{
+                return rej(err);
+            });
+        });
     }
 
     getBalance() {

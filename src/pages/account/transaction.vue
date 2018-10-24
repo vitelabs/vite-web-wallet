@@ -1,64 +1,75 @@
 <template>
-    <div class="transaction-wrapper">
-        <div class="title">
-            {{ $t('accDetail.transfer') }}
-            <img class="close __pointer" @click="closeTrans" src="../../assets/imgs/close.svg"/>
+    <div class="trans-wrapper">
+        <div v-show="isShowTrans" class="transaction-wrapper">
+            <div class="title">
+                {{ $t('accDetail.transfer') }}
+                <img class="close __pointer" @click="closeTrans" src="../../assets/imgs/close.svg"/>
+            </div>
+
+            <div class="content-wrapper">
+                <div class="row">
+                    <div class="row-t">
+                        {{ $t('accDetail.inAddress') }}
+                        <span v-show="!isValidAddress" class="err">{{ $t('transList.valid.addr') }}</span>
+                    </div>
+                    <div class="row-content">
+                        <input ref="inAddr" v-model="inAddress" :placeholder="$t('accDetail.placeholder.addr')" />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="row-t">
+                        {{ $t('accDetail.sum') }}
+                        <span v-show="amountErr" class="err">{{ amountErr }}</span>
+                    </div>
+                    <div class="row-content __btn_text __input">
+                        <input v-model="amount" :placeholder="$t('accDetail.placeholder.amount')"  />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="row-t">
+                        {{ $t('accDetail.remarks')}}
+                        <span v-show="messageErr" class="err">{{ messageErr }}</span>
+                    </div>
+                    <div class="row-content">
+                        <input v-model="message" :placeholder="$t('accDetail.placeholder.remarks')"  />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="row-t">{{ $t('accDetail.password') }}</div>
+                    <div class="row-content">
+                        <input v-model="password" type="password" :placeholder="$t('create.input')"  />
+                    </div>
+                </div>
+
+                <div class="btn __pointer" :class="{
+                    'unuse': loading || amountErr || !isValidAddress || messageErr
+                }" @click="validTrans">{{ $t('accDetail.transfer') }}</div>
+            </div>
         </div>
 
-        <div class="content-wrapper">
-            <div class="row">
-                <div class="row-t">
-                    {{ $t('accDetail.inAddress') }}
-                    <span v-show="!isValidAddress" class="err">{{ $t('transList.valid.addr') }}</span>
-                </div>
-                <div class="row-content">
-                    <input ref="inAddr" v-model="inAddress" :placeholder="$t('accDetail.placeholder.addr')" />
-                </div>
-            </div>
+        <confirm v-show="isShowQuota" :rightClick="closeTrans"></confirm>
 
-            <div class="row">
-                <div class="row-t">
-                    {{ $t('accDetail.sum') }}
-                    <span v-show="amountErr" class="err">{{ amountErr }}</span>
-                </div>
-                <div class="row-content __btn_text __input">
-                    <input v-model="amount" :placeholder="$t('accDetail.placeholder.amount')"  />
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="row-t">
-                    {{ $t('accDetail.remarks')}}
-                    <span v-show="messageErr" class="err">{{ messageErr }}</span>
-                </div>
-                <div class="row-content">
-                    <input v-model="message" :placeholder="$t('accDetail.placeholder.remarks')"  />
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="row-t">{{ $t('accDetail.password') }}</div>
-                <div class="row-content">
-                    <input v-model="password" type="password" :placeholder="$t('create.input')"  />
-                </div>
-            </div>
-
-            <div class="btn __pointer" :class="{
-                'unuse': loading || amountErr || !isValidAddress || messageErr
-            }" @click="validTrans">{{ $t('accDetail.transfer') }}</div>
-        </div>
+        <pow-process></pow-process>
     </div>
 </template>
 
 <script>
 import Vue from 'vue';
 import toast from 'utils/toast/index.js';
+import confirm from 'components/confirm';
+import powProcess from './powProcess';
 
 let inAddrTimeout = null;
 let amountTimeout = null;
 let messageTimeout = null;
 
 export default {
+    components: {
+        powProcess, confirm
+    },
     props: {
         token: {
             type: Object,
@@ -96,6 +107,8 @@ export default {
             amountErr: '',
             messageErr: '',
 
+            isShowTrans: true,
+            isShowQuota: false,
             loading: false
         };
     },
@@ -140,6 +153,15 @@ export default {
         }
     },
     methods: {
+        showQuota() {
+            this.isShowTrans = false;
+            this.isShowQuota = true;
+        },
+        closeQuota() {
+            this.isShowQuota = false;
+            this.isShowTrans = true;
+        },
+
         testAmount() {
             let result = /(^(\d+)$)|(^(\d+[.]\d{1,8})$)/g.test(this.amount);
             if (!result || viteWallet.BigNumber.isEqual(this.amount, 0)) {
@@ -150,11 +172,6 @@ export default {
             return true;
         },
         testMessage() {
-            // if (/\s+/g.test(this.message)) {
-            //     this.messageErr = this.$t('accDetail.valid.remarksFormat');
-            //     return;
-            // }
-
             let message = this.message.replace(/(^\s*)|(\s*$)/g,'');
             let str = encodeURIComponent(message);
             if (str.length > 180) {
@@ -210,7 +227,7 @@ export default {
             }).catch((err) => {
                 console.warn(err);
                 this.loading = false;
-                let code  = err && err.error ? err.error.code || 0 : 0;
+                let code  = err && err.error ? err.error.code || -1 : err.code || -1;
                 let message  = err && err.message ? err.message : 
                     err.error ? err.error.message || '' : '';
 
@@ -220,6 +237,9 @@ export default {
                 } else if (code === -35001) {
                     toast(this.$t('transList.valid.bal'));
                     this.amountErr = this.$t('transList.valid.bal');
+                    return;
+                } else if (code === -35002) {
+                    this.showQuota();
                     return;
                 }
 
