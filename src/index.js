@@ -82,6 +82,15 @@ setTimeout(() => {
     });
 
     router.beforeEach((to, from, next) => {
+        // windows APP
+        if (!to.name && to.path) {
+            let arr = to.path.split('/');
+            router.replace({
+                name: arr[ arr.length - 1 ] || 'index'
+            });
+            return;
+        }
+
         if (!from.name && to.name !== 'index') {
             router.replace({
                 name: 'index'

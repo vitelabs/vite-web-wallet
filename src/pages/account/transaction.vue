@@ -232,10 +232,19 @@ export default {
             let activeAccount = viteWallet.Wallet.getActiveAccount();
             if (!activeAccount) {
                 toast(this.$t('transList.valid.err'));
+                return;
+            }
+
+            if (!viteWallet.Net.getNetStatus()) {
+                toast(this.$t('nav.noNet'));
+                return;
             }
 
             this.loading = true;
             let amount =  viteWallet.BigNumber.toMin(this.amount, this.token.decimals);
+
+            let successText = this.$t('transList.valid.succ');
+            let failText = this.$t('transList.valid.err');
 
             activeAccount.sendTx({
                 toAddr: this.inAddress,
@@ -244,11 +253,22 @@ export default {
                 amount,
                 message: this.message
             }).then(() => {
+                if (!this) {
+                    toast(successText);
+                    return;
+                }
                 this.transSuccess();
             }).catch((err) => {
                 console.warn(err);
+
+                if (!this) {
+                    toast(failText);
+                    return;
+                }
+                
                 this.loading = false;
-                let code  = err && err.error ? err.error.code || -1 : err.code || -1;
+                let code  = err && err.error ? err.error.code || -1 : 
+                    err ? err.code : -1;
                 let message  = err && err.message ? err.message : 
                     err.error ? err.error.message || '' : '';
 
@@ -398,6 +418,7 @@ export default {
         }
         .err {
             position: absolute;
+            left: 90px;
             right: 0;
             font-size: 12px;
             color: #FF2929;
