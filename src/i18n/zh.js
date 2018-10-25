@@ -145,6 +145,41 @@ module.exports = {
 
     pow: '运行POW...',  // [TODO]
 
+    quota: {
+        title: '获取配额',
+        Q1: '什么是配额',
+        Q2: '如何获取配额',
+        Q3: '什么是抵押',
+        myQuota: '我的当前配额',
+        maxTxNum: '最大交易数',
+        toAddr: '配额收益地址',
+        fromAddr: '抵押金额扣除地址',
+        amount: '抵押金额',
+        time: '抵押锁定时长',
+        aboutDays: '约3天',
+        btn: '提交抵押',
+        myQuotaList: '我的抵押列表',
+        amountPlaceholder: '请输入抵押金额，最小10vite',
+        addrPlaceholder: '请输入获取配额地址',
+        pledgeSuccess: '抵押成功',
+        pledgeFail: '抵押失败',
+        confirm: {
+            cancel: {
+                title: '取回抵押',
+                describe: '目前抵押金额为XXX VITE，请确认取回金额',
+                placeholder: '请输入取回金额',
+                rightBtn: '确认取回',
+                leftBtn: '暂不取回'
+            },
+            submit: {
+                title: '提交抵押',
+                describe: '确认是否抵押XXX VITE 获取配额，抵押生效X天之后才可取回',
+                rightBtn: '确认抵押',
+                leftBtn: '再等会儿'
+            }
+        }
+    },
+
     // Transaction List
     transList: {
         title: '交易记录',
