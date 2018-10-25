@@ -171,12 +171,14 @@ class Account {
     sendTx({
         toAddr, pass, tokenId, amount, message
     }, isPledge = false) {
-        let verifyRes = this.verify(pass);
-        if (!verifyRes) {
-            return Promise.reject({
-                code: -34001,
-                message: 'passErr'
-            });
+        if (!isPledge) {
+            let verifyRes = this.verify(pass);
+            if (!verifyRes) {
+                return Promise.reject({
+                    code: -34001,
+                    message: 'passErr'
+                });
+            }
         }
 
         let fromAddr = this.addrs[this.defaultInx].hexAddr;

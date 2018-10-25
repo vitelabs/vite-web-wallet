@@ -2,7 +2,7 @@
     <div class="confirm-wrapper">
         <div class="title">
             {{ title }}
-            <span @click="close" class="close-icon __pointer"></span>
+            <span v-show="closeIcon" @click="close" class="close-icon __pointer"></span>
         </div>
         <div class="content-wrapper">
             <div class="content"> <slot></slot> </div>
