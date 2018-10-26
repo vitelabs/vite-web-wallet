@@ -2,25 +2,54 @@
     <div class="my-quota-wrapper">
         <div class="row">
             <div class="title">{{ $t('quota.myQuota') }}</div>
-            <div class="text">{{ quota }}</div>
+            <div class="text">{{ quota || 0 }}</div>
         </div>
         <div class="row">
             <div class="title">{{ $t('quota.maxTxNum') }}</div>
-            <div class="text">{{ txNum }}</div>
+            <div class="text">{{ txNum || 0 }}</div>
         </div>
     </div>
 </template>
 
 <script>
+import timer from 'utils/asyncFlow';
+
+let quotaInst;
+
 export default {
     data() {
+        let activeAccount = viteWallet.Wallet.getActiveAccount();
+        let address = activeAccount.getDefaultAddr();
         return {
-            quota: '',
-            txNum: ''
+            address
         };
     },
+    computed: {
+        quota() {
+            return this.$store.state.pledge.quotaAmount;
+        },
+        txNum() {
+            return this.$store.state.pledge.pledgeTransNum;
+        }
+    },
+    mounted() {
+        this.startLoopQuota();
+    },
     methods: {
-
+        startLoopQuota() {
+            this.stopLoopQuota();
+            quotaInst = new timer(()=>{
+                return this.fetchQuota();
+            }, 1000);
+            quotaInst.start();
+        },
+        stopLoopQuota() {
+            quotaInst && quotaInst.stop();
+            quotaInst = null;
+        },
+        fetchQuota() {
+            return this.$store.dispatch('fetchQuota', this.address);
+        }
     }
 };
 </script>

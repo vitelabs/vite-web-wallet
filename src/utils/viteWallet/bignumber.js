@@ -16,6 +16,12 @@ class bignumber {
         });
     }
 
+    compared(x, y) {
+        x = new BigNumber(x);
+        y = new BigNumber(y);
+        return x.comparedTo(y);
+    }
+
     isEqual(num1, num2) {
         num1 = new BigNumber(num1);
         num2 = new BigNumber(num2);

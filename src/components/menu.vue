@@ -16,6 +16,11 @@
                 {{ $t('transList.title') }}
             </div>
 
+            <div class="item" @click="go('quota')" 
+                 :class="{ 'active': active === 'quota'}">
+                {{ $t('quota.title') }}
+            </div>
+
             <div class="item" @click="go('setting')" 
                  :class="{ 'active': active === 'setting'}">
                 {{ $t('setting.title') }}
@@ -111,7 +116,7 @@ export default {
     overflow: hidden;
     transition: all 0.3s ease-in-out;
     &.show {
-        height: 240px;
+        height: 300px;
     }
     .item {
         margin-top: 0px;

@@ -2,78 +2,61 @@
     <div class="trans-list-wrapper">
         <div class="title __pointer">{{ $t('transList.title') }}</div>
 
-        <!-- [TODO] -->
         <div class="trans-list-content">
-            <div class="trans-list">
-                <div class="table__head">
-                    <div class="cell-text tType">{{ $t('transList.tType.title') }}</div>
-                    <div class="cell-text status">{{ $t('transList.status.title') }}</div>
-                    <div class="cell-text time">{{ $t('transList.timestamp') }}</div>
-                    <div class="cell-text address">{{ $t('transList.tAddress') }}</div>
-                    <div class="cell-text sum">{{ $t('transList.sum') }}</div>
-                    <div class="cell-text">Token</div>
-                </div>
-
-                <div ref="tableContent" class="table-content" v-show="transList && transList.length">
-                    <div v-for="(item, index) in transList" :key="index"
-                         class="t-row __pointer" @click="goDetail(item)">
-                        <span class="cell-text tType">
-                            <img v-show="item.type === 'send'" class="icon" src='../assets/imgs/send.svg'/>
-                            <img v-show="item.type === 'receive'" class="icon" src='../assets/imgs/receive.svg'/>
-                            {{ $t(`transList.tType.${item.type}`) }}
-                        </span>
-                        <span class="cell-text status" :class="{
-                            'green': item.status === 'confirmed',
-                            'pink': item.status === 'unconfirmed',
-                            'blue': item.status === 'confirms'
-                        }">{{ $t(`transList.status.${item.status}`) + `${item.status === 'confirms' ? item.confirms : ''}` }}</span>
-                        <span class="cell-text time">{{ item.date }}</span>
-                        <span class="cell-text address">{{ item.transAddr }}</span>
-                        <span class="cell-text sum">{{ item.amount }}</span>
-                        <span class="cell-text">{{ item.token }}</span>
-                    </div>
-                </div>
-
-                <div class="table-content no-data" v-show="!transList || !transList.length">
-                    {{ $t('transList.noData') }}
-                </div>
-
+            <tabel-list class="big-trans" :headList="[{
+                class: 'tType',
+                text: $t('transList.tType.title'),
+                cell: 'type'
+            },{
+                class: 'status',
+                text: $t('transList.status.title'),
+                cell: 'status'
+            },{
+                class: 'time',
+                text: $t('transList.timestamp'),
+                cell: 'date'
+            },{
+                class: 'address',
+                text: $t('transList.tAddress'),
+                cell: 'transAddr'
+            },{
+                class: 'sum',
+                text: $t('transList.sum'),
+                cell: 'amount'
+            },{
+                text: 'Token',
+                cell: 'token'
+            }]" :contentList="transList" :clickRow="goDetail">
                 <pagination class="pagination" :currentPage="currentPage + 1" 
                             :totalPage="totalPage" :toPage="toPage"></pagination>
-            </div>
+            </tabel-list>
 
-            <div class="trans-list meta">
-                <div class="table__head">
-                    <div class="cell-text tType">{{ $t('transList.tType.symbol') }}</div>
-                    <div class="cell-text address">{{ $t('transList.tAddress') }}</div>
-                    <div class="cell-text sum">{{ $t('transList.sum') }}</div>
-                </div>
-
-                <div ref="tableContent" class="table-content" v-show="transList && transList.length">
-                    <div v-for="(item, index) in transList" :key="index"
-                         class="t-row __pointer" @click="goDetail(item)">
-                        <span class="cell-text tType">
-                            <img v-show="item.type === 'send'" class="icon" src='../assets/imgs/send.svg'/>
-                            <img v-show="item.type === 'receive'" class="icon" src='../assets/imgs/receive.svg'/>
-                        </span>
-                        <span class="cell-text address">{{ item.transAddr }}</span>
-                        <span class="cell-text sum">{{ item.amount }} {{ item.token }}</span>
-                    </div>
-                </div>
-
-                <div class="table-content no-data" v-show="!transList || !transList.length">
-                    {{ $t('transList.noData') }}
-                </div>
-
+            <tabel-list class="small-trans" :headList="[{
+                class: 'tType',
+                text: $t('transList.tType.symbol'),
+                cell: 'type'
+            },{
+                class: 'address',
+                text: $t('transList.tAddress'),
+                cell: 'transAddr'
+            },{
+                class: 'sum',
+                text: $t('transList.sum'),
+                cell: 'amount'
+            }]" :contentList="smallTransList" :clickRow="goDetail">
                 <pagination class="pagination" :currentPage="currentPage + 1" 
                             :totalPage="totalPage" :toPage="toPage"></pagination>
-            </div>
+            </tabel-list>
         </div>
     </div>
 </template>
 
 <script>
+import sendImg from 'assets/imgs/send.svg';
+import receiveImg from 'assets/imgs/receive.svg';
+
 import pagination from 'components/pagination.vue';
+import tabelList from 'components/tabelList.vue';
 import date from 'utils/date.js';
 import timer from 'utils/asyncFlow';
 import loopTime from 'loopTime';
@@ -82,13 +65,11 @@ let transListInst = null;
 
 export default {
     components: {
-        pagination
+        pagination, tabelList
     },
     mounted() {
         this.currentPage = this.$store.state.transList.currentPage;
-        this.startLoopTransList(() => {
-            return this.fetchTransList(this.currentPage);
-        });
+        this.startLoopTransList();
     },
     data() {
         let activeAccount = viteWallet.Wallet.getActiveAccount();
@@ -108,11 +89,40 @@ export default {
         },
         transList() {
             let transList = this.$store.getters.transList;
-            
+
             let nowList = [];
-            transList.forEach(trans => {
+            transList.forEach((trans) => {
+                let typeImg = trans.type === 'send' ? sendImg : receiveImg;
+                let type = `<img class="icon" src='${typeImg}'/>` + this.$t(`transList.tType.${trans.type}`);
+
+                let statusClass = trans.status === 'confirmed' ? 'green' : 
+                    trans.status === 'unconfirmed' ? 'pink': 'blue';
+                let statusText = this.$t(`transList.status.${trans.status}`) + (trans.status === 'confirms' ? trans.confirms : '');
+                let status = `<span class="${statusClass}">${statusText}</span>`;
+
                 trans.date = date(trans.timestamp, this.$i18n.locale);
-                nowList.push(trans);
+                nowList.push({
+                    date: date(trans.timestamp, this.$i18n.locale),
+                    status,
+                    type,
+                    transAddr: trans.transAddr,
+                    amount: trans.amount,
+                    token: trans.token
+                });
+            });
+            return nowList;
+        },
+        smallTransList() {
+            let transList = this.$store.getters.transList;
+
+            let nowList = [];
+            transList.forEach((trans) => {
+                let typeImg = trans.type === 'send' ? sendImg : receiveImg;
+                nowList.push({
+                    type: `<img class="icon" src='${typeImg}'/>`,
+                    amount: trans.amount + ' ' + trans.token,
+                    transAddr: trans.transAddr
+                });
             });
             return nowList;
         }
@@ -141,7 +151,6 @@ export default {
             }).catch(()=>{
                 this.startLoopTransList();
             });
-
         },
 
         startLoopTransList() {
@@ -170,7 +179,8 @@ export default {
 @import "~assets/scss/vars.scss";
 
 .trans-list-wrapper {
-    position: relative;
+    display: flex;
+    flex-direction: column;
     box-sizing: border-box;
     padding: 40px;
     height: 100%;
@@ -181,111 +191,19 @@ export default {
         line-height: 32px;
         margin-bottom: 40px;
     }
-}
-.trans-list-content {
-    overflow: auto;
-}
-.trans-list {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    box-sizing: border-box;
-    max-height: 100%;
-    min-width: 1050px;
-    overflow: auto;
-    background: #FFF;
-    box-shadow: 0 2px 15px 1px rgba(176, 192, 237, 0.17);
-    border-radius: 8px;
-    &.meta {
-        display: none;
-    }
-    .table__head {
-        height: 48px;
-        line-height: 48px;
-        border-bottom: 1px solid #f3f6f9;
-        font-family: $font-bold;
-        color: #1D2024;
-    }
-    .table-content {
-        position: relative;
+    .trans-list-content {
+        overflow: auto;
         flex: 1;
-        overflow-x: hidden;
-        overflow-y: auto;
-    }
-    .pagination {
-        height: 75px;
-        line-height: 75px;
-        text-align: center;
-        border-top: 1px solid #f3f6f9;
     }
 }
-
-.t-row {
-    border-bottom: 1px solid #f3f6f9;
-    color: #5E6875;
-    height: 48px;
-    line-height: 48px;
-    box-sizing: border-box;
-    &:last-child {
-        border: none;
-    }
-    &:hover {
-        background: rgba(88,145,255,.13);
-    }
+.small-trans {
+    display: none;
 }
-
-.cell-text {
-    display: inline-block;
-    text-align: left;
-    font-size: 14px;
-    &:first-child {
-        padding-left: 22.5px;
-    }
-    &:last-child {
-        padding-right: 22.5px;
-    }
-    &.tType {
-        min-width: 140px;
-        width: 10%;
-    }
-    &.status {
-        min-width: 120px;
-        width: 10%;
-    }
-    &.time {
-        min-width: 200px;
-        width: 20%;
-    }
-    &.address {
-        min-width: 240px;
-        width: 25%;
-    }
-    &.sum {
-        width: 14%;
-        min-width: 150px;
-    }
-    &.pink {
-        font-family: $font-bold;
-        color: #EA60AC;
-    }
-    &.blue {
-        font-family: $font-bold;
-        color: #409EFF;
-    }
-    &.green {
-        font-family: $font-bold;
-        color: #67C23A;
-    }
-    .icon {
-        margin-right: 6px;
-        margin-bottom: -2px;
-    }
-}
-
-.no-data {
+.pagination {
     height: 75px;
     line-height: 75px;
     text-align: center;
+    border-top: 1px solid #f3f6f9;
 }
 
 @media only screen and (max-width: 500px) {
@@ -295,41 +213,72 @@ export default {
             margin-bottom: 15px;
         }
     }
-    .trans-list {
+    .big-trans {
         display: none;
-        min-width: 350px;
     }
-    .trans-list.meta {
+    .small-trans {
         display: flex;
-        max-height: 92%;
-        .table__head {
-            text-align: center;
-        }
     }
-    .cell-text {
-        white-space: nowrap;
-        &:first-child {
-            float: left;
-            padding-left: 10px;
-        }
-        &:last-child {
-            float: right;
-            padding-right: 10px;
-        }
-        &.tType {
-            min-width: 50px;
-            width: 10%;
-        }
-        &.address {
-            overflow: hidden;
-            min-width: 200px;
-            width: 25%;
-        }
-        &.sum {
-            width: 14%;
-            float: right;
-            min-width: 60px;
-        }
+}
+</style>
+
+<style lang="scss">
+@import "~assets/scss/vars.scss";
+
+.tType {
+    min-width: 140px;
+    width: 10%;
+}
+.status {
+    min-width: 120px;
+    width: 10%;
+}
+.time {
+    min-width: 200px;
+    width: 20%;
+}
+.address {
+    min-width: 240px;
+    width: 25%;
+}
+.sum {
+    width: 14%;
+    min-width: 150px;
+}
+.pink {
+    font-family: $font-bold;
+    color: #EA60AC;
+}
+.blue {
+    font-family: $font-bold;
+    color: #409EFF;
+}
+.green {
+    font-family: $font-bold;
+    color: #67C23A;
+}
+.icon {
+    margin-right: 6px;
+    margin-bottom: -2px;
+}
+
+@media only screen and (max-width: 500px) {    
+    .small-trans.tabel-list {
+        min-width: 0;
+    }
+    .tType {
+        min-width: 50px;
+        width: 10%;
+    }
+    .address {
+        overflow: hidden;
+        min-width: 200px;
+        width: 25%;
+    }
+    .sum {
+        width: 14%;
+        float: right;
+        min-width: 60px;
     }
 }
 </style>

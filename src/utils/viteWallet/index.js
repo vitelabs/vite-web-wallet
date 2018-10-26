@@ -6,6 +6,7 @@ import ledger from './ledger';
 import bignumber from './bignumber';
 import Types from './types';
 import TestToken from './testToken';
+import pledge from './pledge';
 
 process.env.NODE_ENV !== 'production' && console.log(process.env.goViteServer);
 
@@ -21,5 +22,6 @@ window.viteWallet = {
     Ledger: new ledger(),
     BigNumber: new bignumber(),
     Types: new Types(),
-    TestToken: new TestToken($ViteJS._currentProvider)
+    TestToken: new TestToken($ViteJS._currentProvider),
+    Pledge: new pledge()
 };

@@ -3,11 +3,11 @@
         <div class="row">
             <div class="item">
                 <div class="title">{{ $t('quota.fromAddr') }}</div>
-                <div class="input-item all unuse">{{ addr }}</div>
+                <div class="input-item all unuse __ellipsis">{{ addr }}</div>
             </div>
             <div class="item">
                 <div class="title">{{ $t('quota.amount') }}</div>
-                <div class="input-item all">
+                <div class="input-item all __ellipsis">
                     <input v-model="amount" class="amount" type="text" 
                            :placeholder="$t('quota.amountPlaceholder')" />
                     <span class="unit">VITE</span>
@@ -18,7 +18,7 @@
         <div class="row">
             <div class="item">
                 <div class="title">{{ $t('quota.toAddr') }}</div>
-                <div class="input-item all">
+                <div class="input-item all __ellipsis">
                     <input v-model="toAddr" type="text" 
                            :placeholder="$t('quota.addrPlaceholder')" />
                 </div>
@@ -62,7 +62,7 @@ export default {
                 tokenId: 'tti_5649544520544f4b454e6e40',
                 toAddr: this.toAddr,
                 amount: this.amount
-            }, true).then(() => {
+            }, 'get').then(() => {
                 toast(this.$t('quota.pledgeSuccess'));
             }).catch((err) => {
                 if (err && err.error && err.error.code && err.error.code === -35002) {
@@ -77,9 +77,7 @@ export default {
                 tokenId: 'tti_5649544520544f4b454e6e40',
                 toAddr: this.toAddr,
                 amount: this.amount
-            }, true).then((block) => {
-                console.log(block);
-
+            }, 'get').then((block) => {
                 this.activeAccount.sendRawTx(block).then(() => {
                     toast(this.$t('quota.pledgeSuccess'));
                 }).catch(() => {
@@ -165,12 +163,10 @@ export default {
 }
 
 @media only screen and (max-width: 1410px) {
-    .pledge-tx-wrapper .row {
-        &:last-child {
+    .pledge-tx-wrapper .row .item {
+        margin-top: 20px;
+        &:first-child {
             margin-top: 0;
-        }
-        .item {
-            margin-top: 20px;
         }
     }
 }
