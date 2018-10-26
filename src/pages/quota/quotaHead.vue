@@ -1,23 +1,19 @@
 <template>
     <div class="quota-head-wrapper">
         <span>{{ $t('quota.title') }}</span>
-        <ul class="qa-list">
-            <li class="__pointer">
-                <img src="../../assets/imgs/help.svg" />{{ $t('quota.Q1') }}
-            </li>
-            <li class="__pointer">
-                <img src="../../assets/imgs/help.svg" />{{ $t('quota.Q2') }}
-            </li>
-            <li class="__pointer">
-                <img src="../../assets/imgs/help.svg" />{{ $t('quota.Q3') }}
-            </li>
-        </ul>
+        <div @click="showHelp" class="qa __pointer">
+            <img src="../../assets/imgs/help.svg" />{{ $t('quota.Q1') }}
+        </div>
     </div>
 </template>
 
 <script>
 export default {
-    
+    methods: {
+        showHelp() {
+            
+        }
+    }
 };
 </script>
 
@@ -32,21 +28,17 @@ export default {
         font-family: $font-bold;
     }
 }
-.qa-list {
+.qa {
     float: right;
     font-size: 14px;
     color: #007AFF;
     letter-spacing: 0.35px;
     line-height: 32px;
-    li {
-        display: inline-block;
-        margin-left: 54px;
-        img {
-            width: 18px;
-            height: 18px;
-            margin-right: 6px;
-            margin-bottom: -4px;
-        }
+    img {
+        width: 18px;
+        height: 18px;
+        margin-right: 6px;
+        margin-bottom: -4px;
     }
 }
 </style>

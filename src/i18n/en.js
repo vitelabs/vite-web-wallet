@@ -165,7 +165,10 @@ module.exports = {
         timestamp: 'Timestamp',
         tAddress: 'From/To',
         sum: 'Amount',
-        tDetail: 'Transaction Detail',
+        tDetail: 'Transaction Detail'
+    },
+
+    tabel: {
         noData: 'No Data'
     },
 

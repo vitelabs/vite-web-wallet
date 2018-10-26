@@ -1,13 +1,13 @@
 <template>
     <div class="quota-wrapper">
         <quota-head></quota-head>
+        
         <div class="content">
             <my-quota class="my-quota _content_border"></my-quota>
             <pledge-tx ref="submitPledge" :showConfirm="showConfirm" class="pledge-tx _content_border"></pledge-tx>
         </div>
-        <div class="list">
 
-        </div>
+        <div class="list"> <list></list> </div>
 
         <div v-if="showConfirmType" class="confirm">
             <confirm :title="$t(`quota.confirm.${ showConfirmType }.title`)" :closeIcon="false"
@@ -23,11 +23,12 @@
 import quotaHead from './quotaHead';
 import myQuota from './myQuota';
 import pledgeTx from './pledgeTx';
+import list from './list';
 import confirm from 'components/confirm';
 
 export default {
     components: {
-        quotaHead, myQuota, pledgeTx, confirm
+        quotaHead, myQuota, pledgeTx, confirm, list
     },
     data() {
         return {
@@ -75,7 +76,16 @@ export default {
     }
     .pledge-tx {
         flex: 1;
+        max-width: 100%;
+        box-sizing: border-box;
     }
+}
+.list {
+    width: 100%;
+    overflow: auto;
+    background: #FFFFFF;
+    box-shadow: 0 2px 48px 1px rgba(176,192,237,0.42);
+    border-radius: 2px;
 }
 .confirm {
     position: fixed;
@@ -92,8 +102,14 @@ export default {
 }
 
 @media only screen and (max-width: 500px) {
+    .content ._content_border {
+        padding: 15px;
+    }
+    .content {
+        margin-bottom: 20px;
+    }
     .quota-wrapper {
-        padding: 20px;
+        padding: 15px;
     }
 }
 
@@ -105,4 +121,3 @@ export default {
     }
 }
 </style>
-

@@ -155,12 +155,12 @@ class Account {
 
     getPowTxBlock({
         toAddr, tokenId, amount, message
-    }, isPledge = false) {
+    }, pledgeType = '') {
         let fromAddr = this.addrs[this.defaultInx].hexAddr;
 
         return $ViteJS.Vite.Ledger.getSendBlock({
             fromAddr, toAddr, tokenId, amount, message
-        }, isPledge, true);
+        }, pledgeType, true);
     }
 
     sendRawTx(block, privKey) {
@@ -170,8 +170,8 @@ class Account {
 
     sendTx({
         toAddr, pass, tokenId, amount, message
-    }, isPledge = false) {
-        if (!isPledge) {
+    }, pledgeType = '') {
+        if (!pledgeType) {
             let verifyRes = this.verify(pass);
             if (!verifyRes) {
                 return Promise.reject({
@@ -187,11 +187,15 @@ class Account {
         return new Promise((res, rej) => {
             $ViteJS.Vite.Ledger.getSendBlock({
                 fromAddr, toAddr, tokenId, amount, message
-            }, isPledge).then((block)=>{
+            }, pledgeType).then((block)=>{
                 if (!block) {
                     return rej('Block null');
                 }
-                return this.sendRawTx(block, privKey);
+                this.sendRawTx(block, privKey).then((data) => {
+                    return res(data);
+                }).catch(err => {
+                    return rej(err);
+                });
             }).catch((err)=>{
                 return rej(err);
             });

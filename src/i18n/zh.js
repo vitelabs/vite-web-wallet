@@ -177,6 +177,13 @@ module.exports = {
                 rightBtn: '确认抵押',
                 leftBtn: '再等会儿'
             }
+        },
+        list: {
+            beneficialAddr: '配额受益地址',
+            amount: '抵押金额',
+            withdrawHeight: '到期快照高度',
+            withdrawTime: '预计到期时间',
+            cancel: '取回抵押'
         }
     },
 
@@ -208,6 +215,9 @@ module.exports = {
         tAddr: '交易方',
         sum: '金额',
         tDetail: '交易详情',
+    },
+
+    tabel: {
         noData: '暂无数据'
     },
 
