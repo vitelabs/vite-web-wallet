@@ -115,11 +115,15 @@ export default {
     methods: {
         _testAmount() {
             let result = this.testAmount(this.amount);
-            if (result && viteWallet.BigNumber.compared(this.amount, 10) > 0) {
+            if (!result) {
+                this.amountErr = this.$t('transList.valid.amt');
+                return false;
+            }
+            if (viteWallet.BigNumber.compared(this.amount, 10) >= 0) {
                 this.amountErr = '';
                 return true;
             }
-            this.amountErr = this.$t('transList.valid.amt');
+            this.amountErr = this.$t('quota.limitAmt');
             return false;
         },
         testAddr() {

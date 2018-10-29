@@ -97,7 +97,9 @@ export default {
                 let cancelClass = isMaturity ? 'cancel active' : 'cancel';
                 let cancel = `<span class="${cancelClass}">${this.$t('quota.list.cancel')}</span>`;
 
-                let pledgeDate = date(pledge.withdrawTime * 1000, this.$i18n.locale);
+                let pledgeDate = isMaturity ? 
+                    this.$t('quota.maturity') : 
+                    date(pledge.withdrawTime * 1000, this.$i18n.locale);
 
                 let showAmount = viteWallet.BigNumber.toBasic(pledge.amount || 0, this.tokenInfo.decimals);
 
@@ -195,10 +197,13 @@ export default {
 
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
-
 .list {
     width: 100%;
     overflow: auto;
+    background: #FFFFFF;
+    border: 1px solid #F6F5F5;
+    box-shadow: 0 2px 48px 1px rgba(176,192,237,0.42);
+    border-radius: 2px;
 }
 .title {
     font-family: $font-bold;
@@ -217,6 +222,8 @@ export default {
 </style>
 
 <style lang="scss">
+.tabel-list {
+}
 .beneficial-addr {
     font-size: 14px;
     color: #007AFF;

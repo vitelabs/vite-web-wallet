@@ -293,10 +293,10 @@ export default {
                 return;
             }
 
-            let transError = () => {
+            let transError = (errMsg) => {
                 this.loading = false;
                 this.isShowTrans = true;
-                toast(this.$t('transList.valid.err'));
+                toast(errMsg || this.$t('accDetail.trans.err'));
             };
 
             this.showPow();
@@ -322,6 +322,12 @@ export default {
                         this.transSuccess();
                     }).catch((err) => {
                         console.warn('pow trans', err);
+                        let code  = err && err.error ? err.error.code || -1 : 
+                            err ? err.code : -1;
+                        if (code === -35002) {
+                            transError(this.$t('accDetail.trans.powTransErr'));
+                            return;
+                        }
                         transError();
                     });
                 };
@@ -339,7 +345,7 @@ export default {
                 sendRawTx();
             }).catch((err) => {
                 console.warn('pow', err);
-                transError();
+                transError( this.$t('accDetail.trans.powErr') );
             });
         },
 
