@@ -6,7 +6,8 @@
             <confirm v-if="showConfirmType === 'submit' || showConfirmType === 'cancel'" 
                      :title="$t(`quota.confirm.${ showConfirmType }.title`)" :closeIcon="false"
                      :leftBtnTxt="$t(`quota.confirm.${ showConfirmType }.leftBtn`)" :leftBtnClick="closeConfirm"
-                     :rightBtnTxt="$t(`quota.confirm.${ showConfirmType }.rightBtn`)" :rightBtnClick="submit">
+                     :rightBtnTxt="$t(`quota.confirm.${ showConfirmType }.rightBtn`)" 
+                     :rightBtnClick="submit" :rightBtnUnuse="!!cancelUnuse">
                 {{ $t(`quota.confirm.${ showConfirmType }.describe`, {amount: activeAmountLimit}) }}
                 <div class="cancel-amount" v-show="amountErr">{{ amountErr }}</div>
                 <div v-show="showConfirmType === 'cancel'" class="cancel-input">
@@ -47,6 +48,7 @@
 </template>
 
 <script>
+import Vue from 'vue';
 import quotaHead from './quotaHead';
 import myQuota from './myQuota';
 import pledgeTx from './pledgeTx';
@@ -89,13 +91,22 @@ export default {
 
             activeAmountLimit: '',
             cancelAmount: '',
-            amountErr: ''
+            amountErr: '',
+            stopWatch: false
         };
+    },
+    computed: {
+        cancelUnuse() {
+            return this.showConfirmType === 'cancel' && (!this.cancelAmount || this.amountErr);
+        }
     },
     watch: {
         cancelAmount: function() {
             clearTimeout(amountTimeout);
             amountTimeout = null;
+            if (this.stopWatch) {
+                return;
+            }
 
             amountTimeout = setTimeout(()=> {
                 amountTimeout = null;
@@ -105,20 +116,23 @@ export default {
     },
     methods: {
         testAmount(amount) {
-            let result = /(^(\d+)$)|(^(\d+[.]\d{1,8})$)/g.test(amount);
-            if (!result || viteWallet.BigNumber.isEqual(amount, 0)) {
-                return false;
-            }
-            return true;
+            return /(^(\d+)$)|(^(\d+[.]\d{1,8})$)/g.test(amount);
         },
         _testAmount() {
             let result = this.testAmount(this.cancelAmount);
-            if (result && viteWallet.BigNumber.compared(this.cancelAmount, this.activeAmountLimit) < 0) {
-                this.amountErr = '';
-                return true;
+            if (!result) {
+                this.amountErr = this.$t('transList.valid.amt');
+                return false;
             }
-            this.amountErr = this.$t('transList.valid.amt');
-            return false;
+            if (viteWallet.BigNumber.isEqual(this.cancelAmount, 0) || 
+                viteWallet.BigNumber.compared(this.cancelAmount, this.activeAmountLimit) > 0) {
+                this.amountErr = this.$t('quota.maxAmt', {
+                    amount: this.activeAmountLimit
+                });
+                return false;
+            }
+            this.amountErr = '';
+            return true;
         },
 
         showHelp() {
@@ -129,10 +143,18 @@ export default {
             if (!activeAmountLimit) {
                 return;
             }
-            console.log(activeAmountLimit);
             this.activeAmountLimit = activeAmountLimit;
         },
         closeConfirm() {
+            if (this.showConfirmType === 'cancel') {
+                this.stopWatch = true;
+                clearTimeout(amountTimeout);
+                this.cancelAmount = '';
+                this.amountErr = '';
+                Vue.nextTick(() => {
+                    this.stopWatch = false;
+                });
+            }
             this.showConfirmType = '';
         },
         submit() {
@@ -152,7 +174,7 @@ export default {
                 return;
             }
             this.closeConfirm();
-            txListEle._sendCancelPledgeTx();
+            txListEle._sendCancelPledgeTx(this.cancelAmount);
         },
         stopPow(cb) {
             let powProcessEle = this.$refs.powProcess;
@@ -235,7 +257,8 @@ export default {
         margin-left: -30px;
     }
     .cancel-amount {
-        float: right;
+        position: absolute;
+        right: 30px;
         font-size: 12px;
         color: #FF2929;
         line-height: 26px;

@@ -11,6 +11,7 @@
             <div v-show="!singleBtn" class="__btn btn-left __pointer" 
                  @click="leftBtnClick">{{ leftBtnTxt }}</div>
             <div v-show="!singleBtn" class="__btn __btn_all_in __pointer" 
+                 :class="{'unuse': rightBtnUnuse }"
                  @click="rightBtnClick">{{ rightBtnTxt }}</div>
         </div>
     </div>
@@ -50,6 +51,10 @@ export default {
         rightBtnClick: {
             type: Function,
             default: ()=>{}
+        },
+        rightBtnUnuse: {
+            type: Boolean,
+            default: false
         }
     }
 };
@@ -87,6 +92,7 @@ export default {
         }
     }
     .content-wrapper {
+        position: relative;
         flex: 1;
         box-sizing: border-box;
         padding: 30px;
@@ -116,6 +122,10 @@ export default {
                 border: 1px solid #007AFF;
                 border-radius: 2px;
                 color: #007AFF;
+            }
+            &.unuse {
+                background: #efefef;
+                color: #666;
             }
         }
         .btn-single {

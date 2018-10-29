@@ -115,9 +115,15 @@ export default {
         },
 
         getTestToken() {
+            if (!viteWallet.Net.getNetStatus()) {
+                toast(this.$t('nav.noNet'));
+                return;
+            }
+
             if (!this.account || !this.account.addr) {
                 toast( this.$t('accDetail.hint.tErr') );
             }
+            
             viteWallet.TestToken.get(this.account.addr).then(() => {
                 toast( this.$t('accDetail.hint.token') );
             }).catch((err) => {

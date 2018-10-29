@@ -137,9 +137,14 @@ module.exports = {
         },
         quota: {  // [TODO]
             title: '配额不足',
-            describe: '当前配额不足，无法进行转账，建议您通过减少描述文字、抵押配额或等待XX分钟后在交易',
+            describe: '配额不足，无法进行交易，您需要删除描述文字并运行pow 或 抵押配额才可以继续转账',
             left: '运行pow',
             right: '抵押配额'
+        },
+        trans: {    // [TODO]
+            powErr: '运行POW错误，请重新发起转账',
+            powTransErr: 'pow获取的配额不足，建议您进行抵押VITE获取配额',
+            err: '转账发生错误，请重新发起转账'
         }
     },
 
@@ -164,6 +169,9 @@ module.exports = {
         pledgeFail: '抵押失败',
         canclePledgeSuccess: '取消成功',
         canclePledgeFail: '取消失败',
+        limitAmt: '抵押金额需填写大于等于10的数字',
+        maturity: '抵押已到期',
+        maxAmt: '取回金额在0~{amount}之间”，{amount}为当前可取回最大金额',
         confirm: {
             help: {
                 btn: '我已了解',
