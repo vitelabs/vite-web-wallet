@@ -7,7 +7,7 @@
                      :title="$t(`quota.confirm.${ showConfirmType }.title`)" :closeIcon="false"
                      :leftBtnTxt="$t(`quota.confirm.${ showConfirmType }.leftBtn`)" :leftBtnClick="closeConfirm"
                      :rightBtnTxt="$t(`quota.confirm.${ showConfirmType }.rightBtn`)" :rightBtnClick="submit">
-                {{ $t(`quota.confirm.${ showConfirmType }.describe`) }}
+                {{ $t(`quota.confirm.${ showConfirmType }.describe`, {amount: activeAmountLimit}) }}
                 <div class="cancel-amount" v-show="amountErr">{{ amountErr }}</div>
                 <div v-show="showConfirmType === 'cancel'" class="cancel-input">
                     <input type="text" v-model="cancelAmount"
@@ -18,7 +18,12 @@
             <confirm  v-if="showConfirmType === 'help'" :title="$t('quota.Q1')" 
                       :closeIcon="false" :singleBtn="true"
                       :leftBtnTxt="$t(`quota.confirm.help.btn`)" :leftBtnClick="closeConfirm">
-                {{ $t(`quota.confirm.help.describe`) }}
+                <div class="help-t">{{ $t(`quota.confirm.help.t1`) }}</div>
+                <div class="help-txt">{{ $t(`quota.confirm.help.txt1`) }}</div>
+                <div class="help-t">{{ $t(`quota.confirm.help.t2`) }}</div>
+                <div class="help-txt">{{ $t(`quota.confirm.help.txt2`) }}</div>
+                <div class="help-t">{{ $t(`quota.confirm.help.t3`) }}</div>
+                <div class="help-txt">{{ $t(`quota.confirm.help.txt3`) }}</div>
             </confirm>
 
             <pow-process ref="powProcess" v-if="showConfirmType === 'pow'"></pow-process>
@@ -121,11 +126,11 @@ export default {
         },
         showConfirm(type, activeAmountLimit) {
             this.showConfirmType = type || 'submit';
-
             if (!activeAmountLimit) {
                 return;
             }
-            this.activeAmountLimit = viteWallet.BigNumber.toBasic(activeAmountLimit || 0, this.tokenInfo.decimals);
+            console.log(activeAmountLimit);
+            this.activeAmountLimit = activeAmountLimit;
         },
         closeConfirm() {
             this.showConfirmType = '';
@@ -215,6 +220,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "~assets/scss/vars.scss";
+
 .quota-wrapper {
     position: relative;
     padding: 40px;
@@ -245,6 +252,21 @@ export default {
             text-indent: 15px;
             font-size: 14px;
         }
+    }
+    .help-t {
+        font-family: $font-bold;
+        font-size: 16px;
+        line-height: 16px;
+        margin-bottom: 16px;
+        word-break: break-all;
+    }
+    .help-txt {
+        opacity: 0.66;
+        font-size: 14px;
+        color: #172c39;
+        line-height: 22px;
+        margin-bottom: 10px;
+        word-break: break-all;
     }
 }
 

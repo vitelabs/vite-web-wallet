@@ -2,30 +2,32 @@
     <div class="list-wrapper">
         <div class="title">{{ $t('quota.list.title') }}</div>
         <div class="total">{{ $t('quota.list.total', { amount: totalAmount }) }}</div>
-        <tabel-list class="" :headList="[{
-            class: 'addr __pointer',
-            text: $t('quota.list.beneficialAddr'),
-            cell: 'addr'
-        },{
-            class: 'amount',
-            text: $t('quota.list.amount'),
-            cell: 'showAmount'
-        },{
-            class: 'height',
-            text: $t('quota.list.withdrawHeight'),
-            cell: 'withdrawHeight'
-        },{
-            class: 'time',
-            text: $t('quota.list.withdrawTime'),
-            cell: 'pledgeDate'
-        },{
-            class: '__pointer',
-            text: $t('quota.list.operate'),
-            cell: 'cancel'
-        }]" :contentList="pledgeList" :clickCell="clickCell">
-            <pagination class="pagination" :currentPage="currentPage + 1" 
-                        :totalPage="totalPage" :toPage="toPage"></pagination>
-        </tabel-list>
+        <div class="list">
+            <tabel-list :headList="[{
+                class: 'addr __pointer',
+                text: $t('quota.list.beneficialAddr'),
+                cell: 'addr'
+            },{
+                class: 'amount',
+                text: $t('quota.list.amount'),
+                cell: 'showAmount'
+            },{
+                class: 'height',
+                text: $t('quota.list.withdrawHeight'),
+                cell: 'withdrawHeight'
+            },{
+                class: 'time',
+                text: $t('quota.list.withdrawTime'),
+                cell: 'pledgeDate'
+            },{
+                class: '__pointer',
+                text: $t('quota.list.operate'),
+                cell: 'cancel'
+            }]" :contentList="pledgeList" :clickCell="clickCell">
+                <pagination class="pagination" :currentPage="currentPage + 1" 
+                            :totalPage="totalPage" :toPage="toPage"></pagination>
+            </tabel-list>
+        </div>
     </div>
 </template>
 
@@ -137,7 +139,8 @@ export default {
                 return;
             }
             this.activeItem = item;
-            this.showConfirm('cancel', item.amount);
+            let amount = viteWallet.BigNumber.toBasic(item.amount || 0, this.tokenInfo.decimals);
+            this.showConfirm('cancel', amount);
         },
 
         _sendCancelPledgeTx(amount) {
@@ -193,6 +196,10 @@ export default {
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
 
+.list {
+    width: 100%;
+    overflow: auto;
+}
 .title {
     font-family: $font-bold;
     font-size: 18px;
