@@ -4,16 +4,14 @@
             {{ title }}
             <span v-show="closeIcon" @click="close" class="close-icon __pointer"></span>
         </div>
-        <div class="content-wrapper">
-            <div class="content"> <slot></slot> </div>
-            <div class="bottom" :class="{ 'single': !!singleBtn }">
-                <div v-show="singleBtn" class="__btn btn-single __btn_all_in __pointer" 
-                     @click="leftBtnClick">{{ leftBtnTxt }}</div>
-                <div v-show="!singleBtn" class="__btn btn-left __pointer" 
-                     @click="leftBtnClick">{{ leftBtnTxt }}</div>
-                <div v-show="!singleBtn" class="__btn __btn_all_in __pointer" 
-                     @click="rightBtnClick">{{ rightBtnTxt }}</div>
-            </div>
+        <div class="content-wrapper"> <slot></slot> </div>
+        <div class="bottom" :class="{ 'single': !!singleBtn }">
+            <div v-show="singleBtn" class="__btn btn-single __btn_all_in __pointer" 
+                 @click="leftBtnClick">{{ leftBtnTxt }}</div>
+            <div v-show="!singleBtn" class="__btn btn-left __pointer" 
+                 @click="leftBtnClick">{{ leftBtnTxt }}</div>
+            <div v-show="!singleBtn" class="__btn __btn_all_in __pointer" 
+                 @click="rightBtnClick">{{ rightBtnTxt }}</div>
         </div>
     </div>
 </template>
@@ -63,6 +61,9 @@ export default {
 .confirm-wrapper {
     width: 90%;
     max-width: 460px;
+    max-height: 85%;
+    display: flex;
+    flex-direction: column;
     background: #FFFFFF;
     box-shadow: 0 2px 48px 1px rgba(176,192,237,0.42);
     border-radius: 2px;
@@ -86,17 +87,20 @@ export default {
         }
     }
     .content-wrapper {
+        flex: 1;
+        box-sizing: border-box;
         padding: 30px;
-        .content {
-            font-family: $font-bold;
-            font-size: 18px;
-            color: #1D2024;
-            line-height: 26px;
-            margin-bottom: 30px;
-        }
+        overflow: auto;
+        font-family: $font-bold;
+        font-size: 18px;
+        color: #1D2024;
+        line-height: 26px;
     }
     .bottom {
+        padding: 0 30px;
         display: flex;
+        min-height: 80px;
+        box-sizing: border-box;
         justify-content: space-between;
         &.single {
             justify-content: space-around;

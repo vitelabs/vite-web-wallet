@@ -77,7 +77,8 @@ setTimeout(() => {
     routes.push(rootRoute);
 
     const router = new VueRouter({
-        mode: process.env.NODE_ENV === 'dev' ? 'hash' : 'history',
+        // mode: process.env.NODE_ENV === 'dev' ? 'hash' : 'history',
+        mode: 'history',
         routes
     });
 
@@ -91,7 +92,8 @@ setTimeout(() => {
             return;
         }
 
-        if (process.env.NODE_ENV !== 'dev' && !from.name && to.name !== 'index') {
+        // if (process.env.NODE_ENV !== 'dev' && !from.name && to.name !== 'index') {
+        if (!from.name && to.name !== 'index') {
             router.replace({
                 name: 'index'
             });

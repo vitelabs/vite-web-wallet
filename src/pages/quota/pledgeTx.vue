@@ -41,6 +41,7 @@
 </template>
 
 <script>
+import Vue from 'vue';
 import toast from 'utils/toast/index.js';
 
 let amountTimeout = null;
@@ -62,8 +63,7 @@ export default {
         }
     },
     destroyed() {
-        clearTimeout(amountTimeout);
-        clearTimeout(toAddrTimeout);
+        this.clearAll();
     },
     data() {
         let activeAccount = viteWallet.Wallet.getActiveAccount();
@@ -75,7 +75,8 @@ export default {
             toAddr: '',
             isValidAddress: true,
             amountErr: '',
-            loading: false
+            loading: false,
+            stopWatch: false
         };
     },
     computed: {
@@ -88,6 +89,10 @@ export default {
             clearTimeout(toAddrTimeout);
             toAddrTimeout = null;
 
+            if (this.stopWatch) {
+                return;
+            }
+
             toAddrTimeout = setTimeout(()=> {
                 toAddrTimeout = null;
                 this.testAddr();
@@ -96,6 +101,10 @@ export default {
         amount: function() {
             clearTimeout(amountTimeout);
             amountTimeout = null;
+
+            if (this.stopWatch) {
+                return;
+            }
 
             amountTimeout = setTimeout(()=> {
                 amountTimeout = null;
@@ -127,6 +136,16 @@ export default {
             }
         },
 
+        clearAll() {
+            this.stopWatch = true;
+            clearTimeout(amountTimeout);
+            clearTimeout(toAddrTimeout);
+            this.toAddr = '';
+            this.amount = '';
+            this.amountErr = '';
+            this.isValidAddress = true;
+        },
+
         validTx() {
             if (this.btnUnuse) {
                 return;
@@ -138,7 +157,7 @@ export default {
                 return;
             }
 
-            this.showConfirm();
+            this.showConfirm('submit', this.amount);
         },
         _sendPledgeTx() {
             this.loading = true;
@@ -147,8 +166,16 @@ export default {
                 amount: this.amount
             }, 'get', (result) => {
                 this.loading = false;
-                result && toast(this.$t('quota.pledgeSuccess'));
-                !result && toast(this.$t('quota.pledgeFail'));
+                if (!result) {
+                    toast(this.$t('quota.pledgeFail'));
+                    return;
+                }
+
+                toast(this.$t('quota.pledgeSuccess'));
+                this.clearAll();
+                Vue.nextTick(() => {
+                    this.stopWatch = false;
+                });
             });
         }
     }
