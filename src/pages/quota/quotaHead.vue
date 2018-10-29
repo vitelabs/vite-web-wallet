@@ -9,9 +9,10 @@
 
 <script>
 export default {
-    methods: {
-        showHelp() {
-            
+    props: {
+        showHelp: {
+            type: Function,
+            default: () => {}
         }
     }
 };

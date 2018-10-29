@@ -1,12 +1,65 @@
-
+import request from 'utils/request';
 import loopTime from 'loopTime';
 
 let loopHeightTimeout;
+const ViteId = 'tti_5649544520544f4b454e6e40';
 
 class Ledger {
     constructor() {
-        this.currentHeight = '';
+        this.defaultTokenIds = {};
+        this.tokenInfoMaps = {};
+
+        this.currentHeight = '';        
         this.loopHeight();
+    }
+
+    getDefaultTokenList() {
+        let toRequest = window.viteWalletRequest || request;
+
+        toRequest({
+            method: 'GET',
+            path: '/api/version/config?app=web&channel=token&version=default',
+            type: 'form'    // Client Wallet
+        }).then((data)=>{
+            if (!data) {
+                return;
+            }
+
+            data = JSON.parse(data);
+            data.forEach((item) => {
+                this.defaultTokenIds[item.tokenId] = item.tokenSymbol;
+                this.setTokenInfo({
+                    tokenSymbol: item.tokenSymbol
+                }, item.tokenId);
+                this.fetchTokenInfo(item.tokenId);
+            });
+        }).catch((err) => {
+            console.error(err);
+        });
+    }
+
+    setTokenInfo(tokenInfo, tokenId) {
+        if (!tokenInfo || (!tokenInfo.tokenId && tokenId) ) {
+            return false;
+        }
+        tokenId = tokenId || tokenInfo.tokenId;
+        this.tokenInfoMaps[tokenId] = tokenInfo;
+        this.tokenInfoMaps[tokenId].tokenId = tokenId;
+    }
+
+    getTokenInfo(id = ViteId) {
+        if (!this.tokenInfoMaps[id]) {
+            return null;
+        }
+        this.tokenInfoMaps[id].tokenId = id;
+        return this.tokenInfoMaps[id];
+    }
+
+    fetchTokenInfo(tokenId = ViteId) {
+        return $ViteJS.Vite['ledger_getTokenMintage'](tokenId).then(({ result }) => {
+            this.setTokenInfo(result, tokenId);
+            return this.tokenInfoMaps[tokenId];
+        });
     }
 
     loopHeight() {

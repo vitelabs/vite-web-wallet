@@ -6,7 +6,10 @@
                 <div class="input-item all unuse __ellipsis">{{ addr }}</div>
             </div>
             <div class="item">
-                <div class="title">{{ $t('quota.amount') }}</div>
+                <div class="title">
+                    {{ $t('quota.amount') }}
+                    <span v-show="amountErr" class="err">{{ amountErr }}</span>
+                </div>
                 <div class="input-item all __ellipsis">
                     <input v-model="amount" class="amount" type="text" 
                            :placeholder="$t('quota.amountPlaceholder')" />
@@ -17,7 +20,10 @@
 
         <div class="row">
             <div class="item">
-                <div class="title">{{ $t('quota.toAddr') }}</div>
+                <div class="title">
+                    {{ $t('quota.toAddr') }}
+                    <span v-show="!isValidAddress" class="err">{{ $t('transList.valid.addr') }}</span>
+                </div>
                 <div class="input-item all __ellipsis">
                     <input v-model="toAddr" type="text" 
                            :placeholder="$t('quota.addrPlaceholder')" />
@@ -26,7 +32,9 @@
             <div class="item">
                 <div class="title">{{ $t('quota.time') }}</div>
                 <span class="input-item unuse about">{{ $t('quota.aboutDays') }}</span>
-                <span class="btn __pointer" @click="confirmTx">{{ $t('quota.btn') }}</span>
+                <span class="btn __pointer" :class="{
+                    'unuse': btnUnuse
+                }" @click="validTx">{{ $t('quota.btn') }}</span>
             </div>
         </div>
     </div>
@@ -35,12 +43,27 @@
 <script>
 import toast from 'utils/toast/index.js';
 
+let amountTimeout = null;
+let toAddrTimeout = null;
+
 export default {
     props: {
+        sendPledgeTx: {
+            type: Function,
+            default: () => {}
+        },
         showConfirm: {
             type: Function,
             default: () => {}
+        },
+        testAmount: {
+            type: Function,
+            default: () => {}
         }
+    },
+    destroyed() {
+        clearTimeout(amountTimeout);
+        clearTimeout(toAddrTimeout);
     },
     data() {
         let activeAccount = viteWallet.Wallet.getActiveAccount();
@@ -49,43 +72,83 @@ export default {
             activeAccount,
             addr: activeAccount.getDefaultAddr(),
             amount: '',
-            toAddr: ''
+            toAddr: '',
+            isValidAddress: true,
+            amountErr: '',
+            loading: false
         };
     },
+    computed: {
+        btnUnuse() {
+            return this.loading || !this.isValidAddress || this.amountErr || !this.amount || !this.toAddr;
+        }
+    },
+    watch: {
+        toAddr: function() {
+            clearTimeout(toAddrTimeout);
+            toAddrTimeout = null;
+
+            toAddrTimeout = setTimeout(()=> {
+                toAddrTimeout = null;
+                this.testAddr();
+            }, 500);
+        },
+        amount: function() {
+            clearTimeout(amountTimeout);
+            amountTimeout = null;
+
+            amountTimeout = setTimeout(()=> {
+                amountTimeout = null;
+                this._testAmount();
+            }, 500);
+        },
+    },
     methods: {
-        confirmTx() {
-            this.showConfirm();
+        _testAmount() {
+            let result = this.testAmount(this.amount);
+            if (result && viteWallet.BigNumber.compared(this.amount, 10) > 0) {
+                this.amountErr = '';
+                return true;
+            }
+            this.amountErr = this.$t('transList.valid.amt');
+            return false;
+        },
+        testAddr() {
+            if (!this.toAddr) {
+                this.isValidAddress = false;
+                return;
+            }
+
+            try {
+                this.isValidAddress = viteWallet.Types.isValidHexAddr(this.toAddr);
+            } catch(err) {
+                console.warn(err);
+                this.isValidAddress = false;
+            }
         },
 
-        sendPledgeTx() {
-            this.activeAccount.sendTx({
-                tokenId: 'tti_5649544520544f4b454e6e40',
-                toAddr: this.toAddr,
-                amount: this.amount
-            }, 'get').then(() => {
-                toast(this.$t('quota.pledgeSuccess'));
-            }).catch((err) => {
-                if (err && err.error && err.error.code && err.error.code === -35002) {
-                    this.startPowTx();
-                    return;
-                }
-                toast(this.$t('quota.pledgeFail'));
-            });
+        validTx() {
+            if (this.btnUnuse) {
+                return;
+            }
+
+            this._testAmount();
+            this.testAddr();
+            if (this.amountErr || !this.isValidAddress) {
+                return;
+            }
+
+            this.showConfirm();
         },
-        startPowTx() {
-            this.activeAccount.getPowTxBlock({
-                tokenId: 'tti_5649544520544f4b454e6e40',
+        _sendPledgeTx() {
+            this.loading = true;
+            this.sendPledgeTx({
                 toAddr: this.toAddr,
                 amount: this.amount
-            }, 'get').then((block) => {
-                this.activeAccount.sendRawTx(block).then(() => {
-                    toast(this.$t('quota.pledgeSuccess'));
-                }).catch(() => {
-                    toast(this.$t('quota.pledgeFail'));
-                });
-            }).catch((err) => {
-                console.warn(err);
-                toast(this.$t('quota.pledgeFail'));
+            }, 'get', (result) => {
+                this.loading = false;
+                result && toast(this.$t('quota.pledgeSuccess'));
+                !result && toast(this.$t('quota.pledgeFail'));
             });
         }
     }
@@ -96,6 +159,13 @@ export default {
 @import "~assets/scss/vars.scss";
 
 .pledge-tx-wrapper {
+    position: relative;
+    .loading {
+        width: 60px;
+        height: 60px;
+        margin-top: -30px;
+        margin-left: -30px;
+    }
     .row {
         display: flex;
         justify-content: space-between;
@@ -116,6 +186,12 @@ export default {
             letter-spacing: 0.35px;
             line-height: 16px;
             margin-bottom: 16px;
+            .err {
+                float: right;
+                font-size: 12px;
+                color: #FF2929;
+                line-height: 16px;
+            }
         }
         .about, .btn {
             display: inline-block;
@@ -128,6 +204,10 @@ export default {
             line-height: 40px;
             text-align: center;
             float: right;
+            &.unuse {
+                background: #efefef;
+                color: #666;
+            }
         }
     }
 

@@ -6,9 +6,13 @@
         </div>
         <div class="content-wrapper">
             <div class="content"> <slot></slot> </div>
-            <div class="bottom">
-                <div class="__btn btn-left __pointer" @click="leftBtnClick">{{ leftBtnTxt }}</div>
-                <div class="__btn __btn_all_in __pointer" @click="rightBtnClick">{{ rightBtnTxt }}</div>
+            <div class="bottom" :class="{ 'single': !!singleBtn }">
+                <div v-show="singleBtn" class="__btn btn-single __btn_all_in __pointer" 
+                     @click="leftBtnClick">{{ leftBtnTxt }}</div>
+                <div v-show="!singleBtn" class="__btn btn-left __pointer" 
+                     @click="leftBtnClick">{{ leftBtnTxt }}</div>
+                <div v-show="!singleBtn" class="__btn __btn_all_in __pointer" 
+                     @click="rightBtnClick">{{ rightBtnTxt }}</div>
             </div>
         </div>
     </div>
@@ -28,6 +32,10 @@ export default {
         close: {
             type: Function,
             default: ()=>{}
+        },
+        singleBtn: {
+            type: Boolean,
+            default: false
         },
         leftBtnTxt: {
             type: String,
@@ -90,6 +98,9 @@ export default {
     .bottom {
         display: flex;
         justify-content: space-between;
+        &.single {
+            justify-content: space-around;
+        }
         .__btn {
             display: inline-block;
             width: 48%;
@@ -102,6 +113,10 @@ export default {
                 border-radius: 2px;
                 color: #007AFF;
             }
+        }
+        .btn-single {
+            width: 200px;
+            max-width: 200px;
         }
     }
 }

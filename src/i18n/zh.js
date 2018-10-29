@@ -147,9 +147,7 @@ module.exports = {
 
     quota: {
         title: '获取配额',
-        Q1: '什么是配额',
-        Q2: '如何获取配额',
-        Q3: '什么是抵押',
+        Q1: '快速理解配额',
         myQuota: '我的当前配额',
         maxTxNum: '最大交易数',
         toAddr: '配额收益地址',
@@ -161,29 +159,47 @@ module.exports = {
         myQuotaList: '我的抵押列表',
         amountPlaceholder: '请输入抵押金额，最小10vite',
         addrPlaceholder: '请输入获取配额地址',
+        cancelAmount: '请输入取回金额',
         pledgeSuccess: '抵押成功',
         pledgeFail: '抵押失败',
+        canclePledgeSuccess: '取消成功',
+        canclePledgeFail: '取消失败',
         confirm: {
+            help: {
+                btn: '我已了解',
+                describe: {
+                    t1: '什么是配额',
+                    txt1: '在Vite系统中，用户不是通过支付手续费的方式来购买一次交易所需的燃料，而是通过一种基于配额的模型来获取计算资源，发送交易所需配额=基础配额(请求)+配额(附带的文本资料)，接受交易所需配额=基础配额(响应)。这个基于配额的资源配置协议允许用户通过两种方式来获取更高的资源配额：抵押Vite获取配额、运行Pow',
+                    t2: '什么是抵押',
+                    txt2: '在Vite系统中，用户可以抵押vite获取一定数量的配额，抵押最小值为10vite，没有最大抵押上限；同时支持A地址抵押一部分vite并将获得的配额分配给B地址；用户申请抵押后，会将这笔vite发送到智能合约地址而不是某一个用户，且只有申请抵押用户有权限支配抵押的金额；',
+                    t3: '什么是POW',
+                    txt3: '工作量证明(Proof Of Work，简称POW)，简单理解就是一份证明，用来确认你做过一定量的工作，应对拒绝服务攻击和其他服务滥用的经济对策。它要求发起者进行一定量的运算，也就意味着需要消耗计算机一定的时间；在VITE系统中，用户可以通过运行POW获得免费的配额，用户可以通过获得的配额进行一次不带任何备注信息的交易；'
+                }
+            },
             cancel: {
                 title: '取回抵押',
-                describe: '目前抵押金额为XXX VITE，请确认取回金额',
+                describe: '目前抵押金额为 {amount} VITE，请确认取回金额',
                 placeholder: '请输入取回金额',
                 rightBtn: '确认取回',
                 leftBtn: '暂不取回'
             },
             submit: {
                 title: '提交抵押',
-                describe: '确认是否抵押XXX VITE 获取配额，抵押生效X天之后才可取回',
+                describe: '确认是否抵押 {amount} VITE 获取配额，抵押生效X天之后才可取回',
                 rightBtn: '确认抵押',
                 leftBtn: '再等会儿'
             }
         },
         list: {
+            title: '我的抵押列表',
+            total: '总计抵押 {amount} VITE',
             beneficialAddr: '配额受益地址',
             amount: '抵押金额',
             withdrawHeight: '到期快照高度',
             withdrawTime: '预计到期时间',
-            cancel: '取回抵押'
+            cancel: '取回抵押',
+            operate: '操作',
+            unexpired: '还未到达取回时间，暂时无法取回抵押'
         }
     },
 

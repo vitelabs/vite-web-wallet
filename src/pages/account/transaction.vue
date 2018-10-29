@@ -225,27 +225,26 @@ export default {
                 return;            
             }
 
-            this.transfer();
-        },
-
-        transfer() {
-            let activeAccount = viteWallet.Wallet.getActiveAccount();
-            if (!activeAccount) {
-                toast(this.$t('transList.valid.err'));
-                return;
-            }
-
             if (!viteWallet.Net.getNetStatus()) {
                 toast(this.$t('nav.noNet'));
                 return;
             }
 
+            this.transfer();
+        },
+
+        transfer() {
             this.loading = true;
             let amount =  viteWallet.BigNumber.toMin(this.amount, this.token.decimals);
 
             let successText = this.$t('transList.valid.succ');
             let failText = this.$t('transList.valid.err');
-
+            
+            let activeAccount = viteWallet.Wallet.getActiveAccount();
+            if (!activeAccount) {
+                toast(this.$t('transList.valid.err'));
+                return;
+            }
             activeAccount.sendTx({
                 toAddr: this.inAddress,
                 pass: this.password,

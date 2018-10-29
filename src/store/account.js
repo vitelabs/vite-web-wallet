@@ -1,22 +1,19 @@
-import request from 'utils/request';
-
 const state = {
     onroad: {
         balanceInfos: {}
     },
     balance: {
         balanceInfos: {}
-    },
-    tokenIds: {}
+    }
 };
 
 const mutations = {
-    commitBalanceInfo(state, payload, ) {
+    commitBalanceInfo(state, payload) {
         state.balance = payload.balance || {};
-        state.balance.balanceInfos = state.balance && state.balance.tokenBalanceInfoMap ? state.balance.tokenBalanceInfoMap : [];
+        state.balance.balanceInfos = state.balance && state.balance.tokenBalanceInfoMap ? state.balance.tokenBalanceInfoMap : {};
 
         state.onroad = payload.onroad || {};
-        state.onroad.balanceInfos = state.onroad && state.onroad.tokenBalanceInfoMap ? state.onroad.tokenBalanceInfoMap : [];
+        state.onroad.balanceInfos = state.onroad && state.onroad.tokenBalanceInfoMap ? state.onroad.tokenBalanceInfoMap : {};
     },
     commitClearBalance(state) {
         state.balance = {
@@ -25,9 +22,6 @@ const mutations = {
         state.onroad = {
             balanceInfos:{}
         };
-    },
-    commitSetTokenIds(state, tokenIds) {
-        state.tokenIds = tokenIds;
     }
 };
 
@@ -35,31 +29,15 @@ const actions = {
     getBalanceInfo({ commit }, activeAccount) {
         return activeAccount.getBalance().then(data => {
             commit('commitBalanceInfo', data);
+
+            let balanceInfos = data && data.balance && data.balance.tokenBalanceInfoMap ? 
+                data.balance.tokenBalanceInfoMap : {};
+            for (let tokenId in balanceInfos) {
+                let item = balanceInfos[tokenId];
+                viteWallet.Ledger.setTokenInfo(item.tokenInfo || null, tokenId);
+            }
         }).catch(e => {
             console.warn(e);
-        });
-    },
-    getDefaultTokenList({ commit }) {
-        let toRequest = window.viteWalletRequest || request;
-
-        toRequest({
-            method: 'GET',
-            path: '/api/version/config?app=web&channel=token&version=default',
-            type: 'form'    // Client Wallet
-        }).then((data)=>{
-            if (!data) {
-                return;
-            }
-
-            data = JSON.parse(data);
-            let tokenIds = {};
-            data.forEach((item) => {
-                tokenIds[item.tokenId] = item.tokenSymbol;
-            });
-            
-            commit('commitSetTokenIds', tokenIds);
-        }).catch((err) => {
-            console.error(err);
         });
     }
 };
@@ -98,11 +76,16 @@ const getters = {
             balanceInfo[tokenId].onroadNum = item.number;
         }
 
-        for (let tokenId in state.tokenIds) {
+        for (let tokenId in viteWallet.Ledger.defaultTokenIds) {
+            if (!viteWallet.Ledger.tokenInfoMaps[tokenId] && !balanceInfo[tokenId]) {
+                break;
+            }
+
+            let symbol = viteWallet.Ledger.tokenInfoMaps[tokenId].tokenSymbol || viteWallet.Ledger.defaultTokenIds[tokenId];
             balanceInfo[tokenId] = balanceInfo[tokenId] || {
                 balance: '0',
                 fundFloat: '0',
-                symbol: state.tokenIds[tokenId],
+                symbol,
                 decimals: '0'
             };
         }

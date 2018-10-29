@@ -26,7 +26,18 @@ export default {
     },
     computed: {
         quota() {
-            return this.$store.state.pledge.quotaAmount;
+            let quotaAmount = this.$store.state.pledge.quotaAmount || 0;
+            
+            if (this.$i18n.locale === 'zh') {
+                if (viteWallet.BigNumber.compared(quotaAmount, 10000) < 0) {
+                    return quotaAmount;
+                }
+                return viteWallet.BigNumber.dividedToNumber(quotaAmount, 10000, 2) + ' 万';
+            }
+            if (viteWallet.BigNumber.compared(quotaAmount, 1000) < 0) {
+                return quotaAmount;
+            }
+            return viteWallet.BigNumber.dividedToNumber(quotaAmount, 1000, 3) + ' k';
         },
         txNum() {
             return this.$store.state.pledge.pledgeTransNum;

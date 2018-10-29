@@ -16,6 +16,12 @@ const mutations = {
     commitTransList(state, payload) {
         state.totalNum = payload.totalNum || 0;
         state.transList = payload.list || [];
+
+        for(let i=0; i<state.transList.length; i++) {
+            let item = state.transList[i];
+            let tokenId = item.tokenId;
+            viteWallet.Ledger.setTokenInfo(item.tokenInfo || null, tokenId);
+        }
     },
     commitClearTransList(state) {
         state.transList = [];
