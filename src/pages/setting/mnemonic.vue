@@ -117,6 +117,7 @@ export default {
         }
         &.lock {
             background: url('../../assets/imgs/eyeopen_disabled.svg');
+            cursor: not-allowed;
         }
     }
     .copy {
@@ -124,6 +125,7 @@ export default {
         background: url('../../assets/imgs/copy_default.svg');
         &.lock {
             background: url('../../assets/imgs/copy_disabled.svg');
+            cursor: not-allowed;
         }
     }
 }

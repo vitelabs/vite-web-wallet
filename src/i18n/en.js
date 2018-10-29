@@ -95,7 +95,7 @@ module.exports = {
         err1: 'Imported illegal file!',
         err2: 'Only one file can be imported!',
         guide: 'Open folder to import',
-        hint: 'PS Login by loading keystore file doesn’t support creating address, using mnemonic word is recommended when login in multi-platform.'
+        hint: 'Noted that login by importing keystore file cannot support creating multi addresses, using mnemonic seed phrase is recommended in cross-platform situations.'
     },
 
     // account detail
@@ -143,7 +143,7 @@ module.exports = {
     transList: {
         title: 'Transactions',
         tType: {
-            title: 'Transaction Type',
+            title: 'Type',
             symbol: 'Type',
             send: 'Send',
             receive: 'Receive',
@@ -163,7 +163,8 @@ module.exports = {
             err: 'Oops, error occurs'
         },
         timestamp: 'Timestamp',
-        tAddress: 'From/To',
+        tAddress: 'Address',
+        tAddr: 'Address',
         sum: 'Amount',
         tDetail: 'Transaction Detail'
     },
