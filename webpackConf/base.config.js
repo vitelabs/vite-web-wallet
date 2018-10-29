@@ -15,7 +15,8 @@ const STATIC_PATH = process.env.APP === 'true' ?
 const goViteServer = {
     production: '\'wss://test.vitewallet.com/ws\'',
     test: '\'wss://testnet.vitewallet.com/ws\'',
-    dev: '\'ws://150.109.120.109:41420\''
+    // dev: '\'ws://150.109.120.109:41420\''
+    dev: '\'wss://testnet.vitewallet.com/ws\''
 };
 
 let plugins = [

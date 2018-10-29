@@ -65,13 +65,13 @@ setTimeout(() => {
     element.className += ' dis';
 }, 800);
 
-setTimeout(() => {
-    store.dispatch('getDefaultTokenList');
-    
+setTimeout(() => {    
     const i18n = new VueI18n( i18nCon() );
-    
-    let { Wallet } = viteWallet;
+
+    let { Wallet, Ledger } = viteWallet;
     Wallet.reSave();
+    Ledger.getDefaultTokenList();
+    
     let list = Wallet.getList();
     rootRoute.component = list && list.length ? login : start;
     routes.push(rootRoute);

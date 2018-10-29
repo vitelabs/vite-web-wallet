@@ -1,28 +1,32 @@
 <template>
-    <tabel-list class="" :headList="[{
-        class: 'addr __pointer',
-        text: $t('quota.list.beneficialAddr'),
-        cell: 'addr'
-    },{
-        class: 'amount',
-        text: $t('quota.list.amount'),
-        cell: 'amount'
-    },{
-        class: 'height',
-        text: $t('quota.list.withdrawHeight'),
-        cell: 'withdrawHeight'
-    },{
-        class: 'time',
-        text: $t('quota.list.withdrawTime'),
-        cell: 'pledgeDate'
-    },{
-        class: '__pointer',
-        text: $t('quota.list.cancel'),
-        cell: 'cancel'
-    }]" :contentList="pledgeList" :clickCell="clickCell">
-        <pagination class="pagination" :currentPage="currentPage + 1" 
-                    :totalPage="totalPage" :toPage="toPage"></pagination>
-    </tabel-list>
+    <div class="list-wrapper">
+        <div class="title">{{ $t('quota.list.title') }}</div>
+        <div class="total">{{ $t('quota.list.total', { amount: totalAmount }) }}</div>
+        <tabel-list class="" :headList="[{
+            class: 'addr __pointer',
+            text: $t('quota.list.beneficialAddr'),
+            cell: 'addr'
+        },{
+            class: 'amount',
+            text: $t('quota.list.amount'),
+            cell: 'showAmount'
+        },{
+            class: 'height',
+            text: $t('quota.list.withdrawHeight'),
+            cell: 'withdrawHeight'
+        },{
+            class: 'time',
+            text: $t('quota.list.withdrawTime'),
+            cell: 'pledgeDate'
+        },{
+            class: '__pointer',
+            text: $t('quota.list.operate'),
+            cell: 'cancel'
+        }]" :contentList="pledgeList" :clickCell="clickCell">
+            <pagination class="pagination" :currentPage="currentPage + 1" 
+                        :totalPage="totalPage" :toPage="toPage"></pagination>
+        </tabel-list>
+    </div>
 </template>
 
 <script>
@@ -32,6 +36,7 @@ import tabelList from 'components/tabelList.vue';
 import date from 'utils/date.js';
 import timer from 'utils/asyncFlow';
 import ellipsisAddr from 'utils/ellipsisAddr.js';
+import toast from 'utils/toast/index.js';
 import loopTime from 'loopTime';
 
 let pledgeListInst;
@@ -39,6 +44,22 @@ let pledgeListInst;
 export default {
     components: {
         pagination, tabelList
+    },
+    props: {
+        tokenInfo: {
+            type: Object,
+            default: () => {
+                return {};
+            }
+        },
+        showConfirm: {
+            type: Function,
+            default: () => {}
+        },
+        sendPledgeTx: {
+            type: Function,
+            default: () => {}
+        }
     },
     mounted() {
         this.startLoopPledgeList();
@@ -49,10 +70,15 @@ export default {
 
         return {
             currentPage: 0,
-            address
+            address,
+            activeItem: null,
+            loading: false
         };
     },
     computed: {
+        totalAmount() {
+            return viteWallet.BigNumber.toBasic(this.$store.state.pledge.totalPledgeAmount || 0, this.tokenInfo.decimals);
+        },
         totalPage() {
             return this.$store.getters.totalPledgePage;
         },
@@ -71,13 +97,16 @@ export default {
 
                 let pledgeDate = date(pledge.withdrawTime * 1000, this.$i18n.locale);
 
+                let showAmount = viteWallet.BigNumber.toBasic(pledge.amount || 0, this.tokenInfo.decimals);
+
                 nowList.push({
                     beneficialAddr: pledge.beneficialAddr,
+                    withdrawHeight: pledge.withdrawHeight,
+                    amount: pledge.amount,
                     isMaturity,
                     pledgeDate,
                     addr: addr + addrIcon,
-                    withdrawHeight: pledge.withdrawHeight,
-                    amount: pledge.amount,
+                    showAmount,
                     cancel
                 });
             });
@@ -90,14 +119,37 @@ export default {
                 this.gotoDetail(item.beneficialAddr);
                 return;
             }
-            cell === 'cancel' && item.isMaturity && this.cancel(item, index);
+            if (cell !== 'cancel') {
+                return;
+            }
+            if (item.isMaturity) {
+                this.showCancel(item, index);
+                return;
+            }
+            toast(this.$t('quota.list.unexpired'));
         },
         gotoDetail(addr) {
             let locale = this.$i18n.locale === 'zh' ? 'zh/' : '';
             window.open(`${process.env.viteNet}${locale}account/${addr}`);
         },
-        cancel(item, index) {
-            console.log(item, index);
+        showCancel(item) {
+            if (this.loading) {
+                return;
+            }
+            this.activeItem = item;
+            this.showConfirm('cancel', item.amount);
+        },
+
+        _sendCancelPledgeTx(amount) {
+            this.sendPledgeTx({
+                toAddr: this.activeItem.beneficialAddr,
+                amount
+            }, 'getCancel', (result) => {
+                this.loading = false;
+                this.activeItem = null;
+                result && toast(this.$t('quota.canclePledgeSuccess'));
+                !result && toast(this.$t('quota.canclePledgeFail'));
+            });
         },
 
         toPage(pageNumber) {
@@ -137,6 +189,25 @@ export default {
     }
 };
 </script>
+
+<style lang="scss" scoped>
+@import "~assets/scss/vars.scss";
+
+.title {
+    font-family: $font-bold;
+    font-size: 18px;
+    color: #1D2024;
+    line-height: 32px;
+    margin-bottom: 7px;
+}
+.total {
+    font-size: 14px;
+    color: #5E6875;
+    letter-spacing: 0.35px;
+    line-height: 16px;
+    margin-bottom: 14px;
+}
+</style>
 
 <style lang="scss">
 .beneficial-addr {

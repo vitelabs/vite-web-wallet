@@ -28,10 +28,13 @@ class bignumber {
         return num1.isEqualTo(num2);
     }
 
-    dividedToNumber(num1, num2) {
+    dividedToNumber(num1, num2, fix = 0) {
         num1 = new BigNumber(num1);
         num2 = new BigNumber(num2);
-        return num1.dividedBy(num2).integerValue(BigNumber.ROUND_CEIL).toNumber();
+        if (fix === 0) {
+            return num1.dividedBy(num2).integerValue(BigNumber.ROUND_CEIL).toNumber();
+        }
+        return num1.dividedBy(num2).toFixed(fix);
     }
 
     toBasic(num, minUnit = 0, decimalPlaces = DP) {
