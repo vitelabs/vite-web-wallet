@@ -1,8 +1,8 @@
 <template>
-    <div class="confirm-wrapper">
+    <div v-show="showConfirm" class="confirm-wrapper">
         <div class="title">
             {{ title }}
-            <span v-show="closeIcon" @click="close" class="close-icon __pointer"></span>
+            <span v-show="closeIcon" @click="_close" class="close-icon __pointer"></span>
         </div>
         <div class="content-wrapper"> <slot></slot> </div>
         <div class="bottom" :class="{ 'single': !!singleBtn }">
@@ -55,6 +55,17 @@ export default {
         rightBtnUnuse: {
             type: Boolean,
             default: false
+        }
+    },
+    data() {
+        return {
+            showConfirm: true
+        };
+    },
+    methods: {
+        _close() {
+            this.showConfirm = false;
+            this.close && this.close();
         }
     }
 };
