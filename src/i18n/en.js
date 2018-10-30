@@ -191,7 +191,7 @@ module.exports = {
             },
             submit: {
                 title: 'Submit Staking',
-                describe: 'Make sure to stake {amount} VITE for obtaining quota, you cannot withdraw until about 3 days after staking comes into effect.',
+                describe: 'Make sure to stake {amount} VITE to obtain quota, you cannot withdraw until about 3 days after staking comes into effect.',
                 rightBtn: 'Confirm',
                 leftBtn: 'Cancel'
             }
