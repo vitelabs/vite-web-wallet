@@ -172,8 +172,8 @@ export default {
             if (!txListEle) {
                 return;
             }
-            this.closeConfirm();
             txListEle._sendCancelPledgeTx(this.cancelAmount);
+            this.closeConfirm();
         },
         stopPow(cb) {
             let powProcessEle = this.$refs.powProcess;
