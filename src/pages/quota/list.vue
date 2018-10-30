@@ -38,7 +38,6 @@ import tabelList from 'components/tabelList.vue';
 import date from 'utils/date.js';
 import timer from 'utils/asyncFlow';
 import ellipsisAddr from 'utils/ellipsisAddr.js';
-import toast from 'utils/toast/index.js';
 import loopTime from 'loopTime';
 
 let pledgeListInst;
@@ -133,7 +132,7 @@ export default {
                 this.showCancel(item, index);
                 return;
             }
-            toast(this.$t('quota.list.unexpired'));
+            this.$toast(this.$t('quota.list.unexpired'));
         },
         gotoDetail(addr) {
             let locale = this.$i18n.locale === 'zh' ? 'zh/' : '';
@@ -155,8 +154,8 @@ export default {
             }, 'getCancel', (result) => {
                 this.loading = false;
                 this.activeItem = null;
-                result && toast(this.$t('quota.canclePledgeSuccess'));
-                !result && toast(this.$t('quota.canclePledgeFail'));
+                result && this.$toast(this.$t('quota.canclePledgeSuccess'));
+                !result && this.$toast(this.$t('quota.canclePledgeFail'));
             });
         },
 

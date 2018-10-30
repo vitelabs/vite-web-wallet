@@ -1,7 +1,7 @@
 import acc from './storeAcc.js';
 import account from './account.js';
+import toast from 'components/toast/index.js';
 import storage from 'utils/localStorage.js';
-import toast from 'utils/toast/index.js';
 import statistics from 'utils/statistics';
 
 const LAST_KEY = 'ACC_LAST';

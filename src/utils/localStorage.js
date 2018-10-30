@@ -1,4 +1,4 @@
-import toast from 'utils/toast/index.js';
+import toast from 'components/toast/index.js';
 
 const walletSpace = 'VITE_WEB_WALLET';
 const storage = window.localStorage;

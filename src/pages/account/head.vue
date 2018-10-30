@@ -49,7 +49,6 @@ import qrcode from 'components/qrcode';
 import copyOK from 'components/copyOK';
 import copy from 'utils/copy';
 import { stringify } from 'utils/viteSchema';
-import toast from 'utils/toast/index.js';
 
 let activeAccount = null;
 
@@ -116,19 +115,19 @@ export default {
 
         getTestToken() {
             if (!viteWallet.Net.getNetStatus()) {
-                toast(this.$t('nav.noNet'));
+                this.$toast(this.$t('nav.noNet'));
                 return;
             }
 
             if (!this.account || !this.account.addr) {
-                toast( this.$t('accDetail.hint.tErr') );
+                this.$toast( this.$t('accDetail.hint.tErr') );
             }
             
             viteWallet.TestToken.get(this.account.addr).then(() => {
-                toast( this.$t('accDetail.hint.token') );
+                this.$toast( this.$t('accDetail.hint.token') );
             }).catch((err) => {
                 console.warn(err);
-                toast( this.$t('accDetail.hint.tErr') );
+                this.$toast( this.$t('accDetail.hint.tErr') );
             });
         },
         getSimpleAcc() {
@@ -162,13 +161,13 @@ export default {
             }
 
             if (!/^[a-zA-Z0-9_\u4e00-\u9fa5]+$/g.test(this.editName)) {
-                toast(this.$t('create.hint.name'), 'error');
+                this.$toast(this.$t('create.hint.name'), 'error');
                 this.clearEditName();
                 return;
             }
 
             if (this.editName.length > 32) {
-                toast(this.$t('create.hint.nameLong'), 'error');
+                this.$toast(this.$t('create.hint.nameLong'), 'error');
                 this.clearEditName();
                 return;
             }
