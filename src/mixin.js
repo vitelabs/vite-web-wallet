@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import toast from 'components/toast/index.js';
+import confirm from 'components/confirm/index.js';
 import statistics from 'utils/statistics';
 
 Vue.mixin({
@@ -20,6 +21,7 @@ Vue.mixin({
         };
 
         this.$toast = toast;
+        this.$confirm = confirm;
         this.$statistics = statistics;
     },
     destroyed: function () {

@@ -1,18 +1,21 @@
 <template>
-    <div v-show="showConfirm" class="confirm-wrapper">
-        <div class="title">
-            {{ title }}
-            <span v-show="closeIcon" @click="_close" class="close-icon __pointer"></span>
-        </div>
-        <div class="content-wrapper"> <slot></slot> </div>
-        <div class="bottom" :class="{ 'single': !!singleBtn }">
-            <div v-show="singleBtn" class="__btn btn-single __btn_all_in __pointer" 
-                 @click="leftBtnClick">{{ leftBtnTxt }}</div>
-            <div v-show="!singleBtn" class="__btn btn-left __pointer" 
-                 @click="leftBtnClick">{{ leftBtnTxt }}</div>
-            <div v-show="!singleBtn" class="__btn __btn_all_in __pointer" 
-                 :class="{'unuse': rightBtnUnuse }"
-                 @click="rightBtnClick">{{ rightBtnTxt }}</div>
+    <div :class="{ 'confirm-gray-wrapper': showMask }">
+        <div class="confirm-wrapper">
+            <div class="title">
+                {{ title }}
+                <span v-show="closeIcon" @click="close" class="close-icon __pointer"></span>
+            </div>
+            <div v-if="content" class="content-wrapper" v-html="content"></div>
+            <div v-if="!content" class="content-wrapper" > <slot></slot> </div>
+            <div class="bottom" :class="{ 'single': !!singleBtn }">
+                <div v-show="singleBtn" class="__btn btn-single __btn_all_in __pointer" 
+                     @click="leftBtnClick">{{ leftBtnTxt }}</div>
+                <div v-show="!singleBtn" class="__btn btn-left __pointer" 
+                     @click="leftBtnClick">{{ leftBtnTxt }}</div>
+                <div v-show="!singleBtn" class="__btn __btn_all_in __pointer" 
+                     :class="{'unuse': rightBtnUnuse }"
+                     @click="rightBtnClick">{{ rightBtnTxt }}</div>
+            </div>
         </div>
     </div>
 </template>
@@ -20,6 +23,10 @@
 <script>
 export default {
     props: {
+        showMask: {
+            type: Boolean,
+            default: false
+        },
         title: {
             type: String,
             default: ''
@@ -55,17 +62,10 @@ export default {
         rightBtnUnuse: {
             type: Boolean,
             default: false
-        }
-    },
-    data() {
-        return {
-            showConfirm: true
-        };
-    },
-    methods: {
-        _close() {
-            this.showConfirm = false;
-            this.close && this.close();
+        },
+        content: {
+            type: String,
+            default: ''
         }
     }
 };
@@ -74,6 +74,19 @@ export default {
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
 
+.confirm-gray-wrapper {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    overflow: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 100;
+}
 .confirm-wrapper {
     width: 90%;
     max-width: 460px;
