@@ -13,17 +13,17 @@
         </router-link>
 
         <router-link class="__pointer icon" :class="{
-            'active': active === 'transList'
-        }" :to="{ name: 'transList' }">
-            <img v-show="active !== 'transList'" :src="send" />
-            <img v-show="active === 'transList'" :src="sendActive"  />
-        </router-link>
-
-        <router-link class="__pointer icon" :class="{
             'active': active === 'quota'
         }" :to="{ name: 'quota' }">
             <img v-show="active !== 'quota'" :src="quota" />
             <img v-show="active === 'quota'" :src="quotaActive"  />
+        </router-link>
+        
+        <router-link class="__pointer icon" :class="{
+            'active': active === 'transList'
+        }" :to="{ name: 'transList' }">
+            <img v-show="active !== 'transList'" :src="send" />
+            <img v-show="active === 'transList'" :src="sendActive"  />
         </router-link>
 
         <div class="_bottom">
