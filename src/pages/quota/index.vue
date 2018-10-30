@@ -16,22 +16,11 @@
                 </div>
             </confirm>
 
-            <confirm  v-if="showConfirmType === 'help'" :title="$t('quota.Q1')" 
-                      :closeIcon="false" :singleBtn="true"
-                      :leftBtnTxt="$t(`quota.confirm.help.btn`)" :leftBtnClick="closeConfirm">
-                <div class="help-t">{{ $t(`quota.confirm.help.t1`) }}</div>
-                <div class="help-txt">{{ $t(`quota.confirm.help.txt1`) }}</div>
-                <div class="help-t">{{ $t(`quota.confirm.help.t2`) }}</div>
-                <div class="help-txt">{{ $t(`quota.confirm.help.txt2`) }}</div>
-                <div class="help-t">{{ $t(`quota.confirm.help.t3`) }}</div>
-                <div class="help-txt">{{ $t(`quota.confirm.help.txt3`) }}</div>
-            </confirm>
-
             <pow-process ref="powProcess" v-if="showConfirmType === 'pow'"></pow-process>
         </div>
 
         <div v-show="!loadingToken">
-            <quota-head :showHelp="showHelp"></quota-head>
+            <quota-head></quota-head>
             
             <div class="content">
                 <my-quota class="my-quota _content_border"></my-quota>
@@ -134,9 +123,6 @@ export default {
             return true;
         },
 
-        showHelp() {
-            this.showConfirmType = 'help';
-        },
         showConfirm(type, activeAmountLimit) {
             this.showConfirmType = type || 'submit';
             if (!activeAmountLimit) {
@@ -274,21 +260,6 @@ export default {
             text-indent: 15px;
             font-size: 14px;
         }
-    }
-    .help-t {
-        font-family: $font-bold;
-        font-size: 16px;
-        line-height: 16px;
-        margin-bottom: 16px;
-        word-break: break-all;
-    }
-    .help-txt {
-        opacity: 0.66;
-        font-size: 14px;
-        color: #172c39;
-        line-height: 22px;
-        margin-bottom: 10px;
-        word-break: break-all;
     }
 }
 

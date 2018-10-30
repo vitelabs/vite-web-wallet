@@ -9,10 +9,24 @@
 
 <script>
 export default {
-    props: {
-        showHelp: {
-            type: Function,
-            default: () => {}
+    methods: {
+        showHelp() {
+            this.$confirm({
+                title: this.$t('quota.Q1'), 
+                singleBtn: true, 
+                closeBtn: {
+                    show: false
+                },
+                leftBtn: {
+                    text: this.$t('quota.confirm.help.btn')
+                }, 
+                content: `<div class="help-t">${ this.$t('quota.confirm.help.t1') }</div>
+                        <div class="help-txt">${ this.$t('quota.confirm.help.txt1') }</div>
+                        <div class="help-t">${ this.$t('quota.confirm.help.t2') }</div>
+                        <div class="help-txt">${ this.$t('quota.confirm.help.txt2') }</div>
+                        <div class="help-t">${ this.$t('quota.confirm.help.t3') }</div>
+                        <div class="help-txt">${ this.$t('quota.confirm.help.txt3') }</div>`
+            });
         }
     }
 };
@@ -41,5 +55,25 @@ export default {
         margin-right: 6px;
         margin-bottom: -4px;
     }
+}
+</style>
+
+<style lang="scss">
+@import "~assets/scss/vars.scss";
+
+.help-t {
+    font-family: $font-bold;
+    font-size: 16px;
+    line-height: 16px;
+    margin-bottom: 16px;
+    word-break: break-all;
+}
+.help-txt {
+    opacity: 0.66;
+    font-size: 14px;
+    color: #172c39;
+    line-height: 22px;
+    margin-bottom: 10px;
+    word-break: break-all;
 }
 </style>
