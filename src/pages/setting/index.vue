@@ -19,7 +19,6 @@ import layout from './layout.vue';
 import accList from './accList.vue';
 import lang from './lang.vue';
 import mnemonic from './mnemonic.vue';
-import toast from 'utils/toast/index.js';
 
 export default {
     components: {
@@ -44,14 +43,14 @@ export default {
             }
 
             if (!this.pass) {
-                toast( this.$t('accDetail.hint.wrong') );
+                this.$toast( this.$t('accDetail.hint.wrong') );
                 return;
             }
 
             this.isSubmiting = true;
             this.lock = !this.activeAccount.verify(this.pass);
             this.isSubmiting = false;
-            this.lock && toast( this.$t('accDetail.hint.wrong') );
+            this.lock && this.$toast( this.$t('accDetail.hint.wrong') );
         }
     }
 };
