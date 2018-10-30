@@ -135,20 +135,20 @@ module.exports = {
             rename: '重命名失败',
             copy: '复制成功'
         },
-        quota: {  // [TODO]
+        quota: {
             title: '配额不足',
             describe: '配额不足，无法进行交易，您需要删除描述文字并运行pow 或 抵押配额才可以继续转账',
             left: '运行pow',
             right: '抵押配额'
         },
-        trans: {    // [TODO]
+        trans: {
             powErr: '运行POW错误，请重新发起转账',
             powTransErr: 'pow获取的配额不足，建议您进行抵押VITE获取配额',
             err: '转账发生错误，请重新发起转账'
         }
     },
 
-    pow: '运行POW...',  // [TODO]
+    pow: '运行POW...',
 
     quota: {
         title: '获取配额',
