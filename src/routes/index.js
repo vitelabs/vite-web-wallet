@@ -8,6 +8,9 @@ import account from 'pages/account/index.vue';
 import transList from 'pages/transList.vue';
 import setting from 'pages/setting/index.vue';
 import quota from 'pages/quota/index.vue';
+import SBP from 'pages/SBP/index.vue';
+import vote from 'pages/SBP/vote/index.vue';
+import registered from 'pages/SBP/registered/index.vue';
 
 export default [
     {
@@ -59,5 +62,21 @@ export default [
         name: 'quota',
         path: '/quota',
         component: quota
+    },
+    {
+        path: '/SBP', 
+        component: SBP,
+        children: [
+            { 
+                name: 'SBPRegistered',
+                path: '/SBP/registered',
+                component: registered
+            },
+            { 
+                name: 'SBPVote',
+                path: '/SBP/vote',
+                component: vote
+            }
+        ]
     }
 ];

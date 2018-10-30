@@ -26,6 +26,13 @@
             <img v-show="active === 'transList'" :src="sendActive"  />
         </router-link>
 
+        <router-link class="__pointer icon" :class="{
+            'active': active.indexOf('SBP') !== -1
+        }" :to="{ name: 'SBPRegistered' }">
+            <img v-show="active.indexOf('SBP') === -1" :src="quota" />
+            <img v-show="active.indexOf('SBP') !== -1" :src="quotaActive"  />
+        </router-link>
+
         <div class="_bottom">
             <router-link class="icon setting __pointer" :class="{
                 'active': active === 'setting'
