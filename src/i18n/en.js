@@ -46,7 +46,7 @@ module.exports = {
             backup: 'Back Up',
             setting: 'Setting Account',
             reset: 'Account Reset',
-            login: 'Login Account'
+            login: 'Log in'
         },
         sync: 'Wallet initializing, transactions cannot be made temporarily.',
         noNet: 'No network detected',
@@ -151,13 +151,13 @@ module.exports = {
     pow: 'Running PoW...',
 
     quota: {
-        title: 'Acquire Quota',
+        title: 'Get Quota',
         Q1: 'Quick understanding of quota',
         myQuota: 'My Quota',
         maxTxNum: 'Maximum number of Txs',
-        toAddr: 'Benefit Address',
+        toAddr: 'Profit address',
         fromAddr: 'Deduction address',
-        amount: 'Staking Amount',
+        amount: 'Staking amount',
         time: 'Staking frozen duration',
         aboutDays: 'About 3 days',
         btn: 'Submit staking',
@@ -169,7 +169,7 @@ module.exports = {
         pledgeFail: 'Staking Failed',
         canclePledgeSuccess: 'Cancel Successful',
         canclePledgeFail: 'Cancel Failed',
-        limitAmt: 'Staking amount should be filled in with numbers that are not less than 10.',
+        limitAmt: 'Staking amount should not be less than 10.',
         maturity: 'Staking has expired!',
         maxAmt: 'Receiving amount between 0~{amount}”, the current maximum amount is {amount}',
         confirm: {
@@ -199,7 +199,7 @@ module.exports = {
         list: {
             title: 'My Staking List',
             total: 'Staking {amount} VITE in total',
-            beneficialAddr: 'Benefit Address',
+            beneficialAddr: 'Profit Address',
             amount: 'Amount',
             withdrawHeight: 'Matured snapshot height',
             withdrawTime: 'Expected due date',
@@ -262,7 +262,7 @@ module.exports = {
     hint:{
         create: 'Creation failed',
         logoutErr: 'Logout Error!',
-        pwErr: 'Password Error!',
+        pwErr: 'Incorrect password!',
         acEmpty: 'Account cannot be empty!',
         pwEmpty: 'Password cannot be empty!'
     }
