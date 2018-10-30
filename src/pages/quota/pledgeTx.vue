@@ -42,7 +42,6 @@
 
 <script>
 import Vue from 'vue';
-import toast from 'utils/toast/index.js';
 
 let amountTimeout = null;
 let toAddrTimeout = null;
@@ -155,6 +154,8 @@ export default {
                 return;
             }
 
+            this.$statistics.event('Vite_web_wallet', 'quota', 'SubmitQuota');
+
             this._testAmount();
             this.testAddr();
             if (this.amountErr || !this.isValidAddress) {
@@ -164,18 +165,20 @@ export default {
             this.showConfirm('submit', this.amount);
         },
         _sendPledgeTx() {
+            this.$statistics.event('Vite_web_wallet', 'quota', 'ConfirmQuota');
             this.loading = true;
+            
             this.sendPledgeTx({
                 toAddr: this.toAddr,
                 amount: this.amount
             }, 'get', (result) => {
                 this.loading = false;
                 if (!result) {
-                    toast(this.$t('quota.pledgeFail'));
+                    this.$toast(this.$t('quota.pledgeFail'));
                     return;
                 }
 
-                toast(this.$t('quota.pledgeSuccess'));
+                this.$toast(this.$t('quota.pledgeSuccess'));
                 this.clearAll();
                 Vue.nextTick(() => {
                     this.stopWatch = false;

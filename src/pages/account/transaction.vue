@@ -64,7 +64,6 @@
 
 <script>
 import Vue from 'vue';
-import toast from 'utils/toast/index.js';
 import confirm from 'components/confirm';
 import powProcess from 'components/powProcess';
 
@@ -221,12 +220,12 @@ export default {
                 return;
             }
             if (!this.password) {
-                toast(this.$t('transList.valid.pswd'));
+                this.$toast(this.$t('transList.valid.pswd'));
                 return;            
             }
 
             if (!viteWallet.Net.getNetStatus()) {
-                toast(this.$t('nav.noNet'));
+                this.$toast(this.$t('nav.noNet'));
                 return;
             }
 
@@ -242,7 +241,7 @@ export default {
             
             let activeAccount = viteWallet.Wallet.getActiveAccount();
             if (!activeAccount) {
-                toast(this.$t('transList.valid.err'));
+                this.$toast(this.$t('transList.valid.err'));
                 return;
             }
             activeAccount.sendTx({
@@ -253,7 +252,7 @@ export default {
                 message: this.message
             }).then(() => {
                 if (!this) {
-                    toast(successText);
+                    this.$toast(successText);
                     return;
                 }
                 this.transSuccess();
@@ -261,7 +260,7 @@ export default {
                 console.warn(err);
 
                 if (!this) {
-                    toast(failText);
+                    this.$toast(failText);
                     return;
                 }
                 
@@ -272,10 +271,10 @@ export default {
                     err.error ? err.error.message || '' : '';
 
                 if (code === -34001) {
-                    toast(this.$t('transList.valid.pswd'));
+                    this.$toast(this.$t('transList.valid.pswd'));
                     return;
                 } else if (code === -35001) {
-                    toast(this.$t('transList.valid.bal'));
+                    this.$toast(this.$t('transList.valid.bal'));
                     this.amountErr = this.$t('transList.valid.bal');
                     return;
                 } else if (code === -35002) {
@@ -283,20 +282,20 @@ export default {
                     return;
                 }
 
-                toast(message || this.$t('transList.valid.err'));
+                this.$toast(message || this.$t('transList.valid.err'));
             });
         },
         startPow() {
             let activeAccount = viteWallet.Wallet.getActiveAccount();
             if (!activeAccount) {
-                toast(this.$t('transList.valid.err'));
+                this.$toast(this.$t('transList.valid.err'));
                 return;
             }
 
             let transError = (errMsg) => {
                 this.loading = false;
                 this.isShowTrans = true;
-                toast(errMsg || this.$t('accDetail.trans.err'));
+                this.$toast(errMsg || this.$t('accDetail.trans.err'));
             };
 
             this.showPow();
@@ -351,7 +350,7 @@ export default {
 
         transSuccess() {
             this.loading = false;
-            toast(this.$t('transList.valid.succ'));
+            this.$toast(this.$t('transList.valid.succ'));
             this.closeTrans();
         }
     }

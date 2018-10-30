@@ -39,7 +39,6 @@
 
 <script>
 import Vue from 'vue';
-import toast from 'utils/toast/index.js';
 import process from 'components/process';
 
 export default {
@@ -103,50 +102,50 @@ export default {
             // [NOTICE] Order fix
             // Name not empty
             if (!this.name) {
-                toast(this.$t('create.hint.nameInput'));
+                this.$toast(this.$t('create.hint.nameInput'));
                 this.focusName();
                 return;
             }
 
             if ( !/^[a-zA-Z0-9_\u4e00-\u9fa5]+$/g.test(this.name) ) {
-                toast(this.$t('create.hint.name'));
+                this.$toast(this.$t('create.hint.name'));
                 this.focusName();
                 return;
             }
 
             if (this.name.length > 32) {
-                toast(this.$t('create.hint.nameLong'));
+                this.$toast(this.$t('create.hint.nameLong'));
                 this.focusName();
                 return;
             }
 
             // Not empty
             if (!this.pass1) {
-                toast(this.$t('hint.pwEmpty'));
+                this.$toast(this.$t('hint.pwEmpty'));
                 this.focusPass1();
                 return;
             }
 
             if ( /[\u4e00-\u9fa5]|\s+/g.test(this.pass1) ) {    // Chinese
-                toast(this.$t('create.hint.pwFormat'));
+                this.$toast(this.$t('create.hint.pwFormat'));
                 this.focusPass1();
                 return;
             }
 
             if (this.pass1.length < 1 || this.pass1.length > 32) { // length limit
-                toast(this.$t('create.hint.long'));
+                this.$toast(this.$t('create.hint.long'));
                 this.focusPass1();
                 return;
             }
 
             if (!this.pass2) { // not empty
-                toast(this.$t('create.again'));
+                this.$toast(this.$t('create.again'));
                 this.focusPass2();
                 return;
             }
 
             if (this.pass1 !== this.pass2) { // same password
-                toast(this.$t('create.hint.consistency'));
+                this.$toast(this.$t('create.hint.consistency'));
                 this.focusPass2();
                 return;
             }

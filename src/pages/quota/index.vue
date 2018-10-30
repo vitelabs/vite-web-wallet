@@ -56,7 +56,6 @@ import list from './list';
 import confirm from 'components/confirm';
 import powProcess from 'components/powProcess';
 import loading from 'components/loading';
-import toast from 'utils/toast/index.js';
 
 let amountTimeout = null;
 
@@ -193,7 +192,7 @@ export default {
             toAddr, amount
         }, type, cb) {
             if (!viteWallet.Net.getNetStatus()) {
-                toast(this.$t('nav.noNet'));
+                this.$toast(this.$t('nav.noNet'));
                 cb && cb(false);
                 return;
             }

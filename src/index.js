@@ -17,45 +17,10 @@ import 'utils/viteWallet/index.js';
 
 import store from './store';
 import statistics from 'utils/statistics';
+import './mixin.js';
 
 Vue.use(VueRouter);
 Vue.use(VueI18n);
-
-Vue.mixin({
-    created: function() {
-        this.$onEnterKey = (cb) => {
-            window.document.onkeydown = e => {
-                e = e || window.event;
-                let code = e.keyCode || e.which;
-                if (!code || code !== 13) {
-                    return;
-                }
-                cb && cb();
-            };
-        };
-
-        this.$offEnterKey = () => {
-            window.document.onkeydown = null;      
-        };
-    },
-    destroyed: function () {
-        this.$offEnterKey();
-    }
-});
-
-let rootRoute = {
-    name: 'index',
-    path: '/'
-};
-
-document.addEventListener('drop', (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-});
-document.addEventListener('dragover', (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-});
 
 // Start loading animate
 let element  = document.getElementById('loading');
@@ -65,6 +30,7 @@ setTimeout(() => {
     element.className += ' dis';
 }, 800);
 
+// Loading finish, app init finish also.
 setTimeout(() => {    
     const i18n = new VueI18n( i18nCon() );
 
@@ -73,12 +39,15 @@ setTimeout(() => {
     Ledger.getDefaultTokenList();
     
     let list = Wallet.getList();
+    let rootRoute = {
+        name: 'index',
+        path: '/'
+    };
     rootRoute.component = list && list.length ? login : start;
     routes.push(rootRoute);
 
     const router = new VueRouter({
-        // mode: process.env.NODE_ENV === 'dev' ? 'hash' : 'history',
-        mode: 'history',
+        mode: process.env.NODE_ENV === 'dev' ? 'hash' : 'history',
         routes
     });
 

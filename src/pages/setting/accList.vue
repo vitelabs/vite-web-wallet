@@ -26,7 +26,6 @@
 
 <script>
 import Vue from 'vue';
-import toast from 'utils/toast/index.js';
 
 export default {
     data() {
@@ -62,7 +61,7 @@ export default {
         setDefault(addr) {
             let res = this.activeAccount.setDefaultAddr(addr);
             if (!res) {
-                toast(this.$t('transList.valid.err'));
+                this.$toast(this.$t('transList.valid.err'));
                 return;
             }
             this.defaultAddr = this.activeAccount.getDefaultAddr();
