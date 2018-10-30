@@ -23,15 +23,19 @@ const mutations = {
         state.pledgeList = payload.pledgeInfoList || [];
         state.totalNum = payload.totalCount || 0;
     },
-    commitClearPledgeList(state) {
-        state.pledgeList = [];
-        state.totalPledgeAmount = '';
-        state.totalNum = 0;
-        state.currentPage = 0;
-    },
     commitQuota(state, payload) {
         state.quotaAmount = payload.quota;
         state.pledgeTransNum = payload.txNum;
+    },
+    commitClearPledge(state) {
+        // amount data
+        state.quotaAmount = '';
+        state.pledgeTransNum = '';
+        // list data
+        state.totalPledgeAmount = '';
+        state.pledgeList = [];
+        state.totalNum = 0;
+        state.currentPage = 0;
     }
 };
 

@@ -66,6 +66,9 @@ export default {
     mounted() {
         this.startLoopPledgeList();
     },
+    destroyed() {
+        this.stopLoopPledgeList();
+    },
     data() {
         let activeAccount = viteWallet.Wallet.getActiveAccount();
         let address = activeAccount.getDefaultAddr();
