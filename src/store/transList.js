@@ -78,6 +78,7 @@ const getters = {
             let amount = item.tokenInfo && item.tokenInfo.decimals ?
                 viteWallet.BigNumber.toBasic(item.amount, item.tokenInfo.decimals) :
                 item.amount;
+            let isZero = viteWallet.BigNumber.isEqual(amount, 0);
 
             nowList.push({
                 type: isSend ? 'send' : 'receive',
@@ -85,7 +86,7 @@ const getters = {
                 confirms: `(${confirms})`,
                 timestamp,
                 transAddr,
-                amount: isSend ? ('-' + amount) : amount,
+                amount: isSend && !isZero ? ('-' + amount) : amount,
                 hash: item.hash,
                 token: item.tokenInfo && item.tokenInfo.tokenSymbol ? item.tokenInfo.tokenSymbol : '--'
             });
