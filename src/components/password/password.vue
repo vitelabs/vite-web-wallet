@@ -1,7 +1,7 @@
 <template>
     <confirm :title="title || $t('pwdConfirm.title')" 
              :content="content" :showMask="showMask"
-             :leftBtnTxt="$t('btn.cancel')" :rightBtnTxt="$t('btn.submit')"
+             :leftBtnTxt="cancelTxt || $t('btn.cancel')" :rightBtnTxt="submitTxt || $t('btn.submit')"
              :leftBtnClick="_cancle"  :rightBtnClick="_submit">
         <div class="pass-input">
             <input v-model="password" :placeholder="$t('pwdConfirm.placeholder')" type="text"/>
@@ -40,6 +40,14 @@ export default {
             default: () => {}
         },
         content: {
+            type: String,
+            default: ''
+        },
+        submitTxt: {
+            type: String,
+            default: ''
+        },
+        cancelTxt: {
             type: String,
             default: ''
         }

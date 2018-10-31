@@ -26,7 +26,7 @@ let balanceInfoInst = null;
 
 export default {
     components: {
-        accountHead, syncBlock, tokenCard, transaction, confirm
+        accountHead, syncBlock, tokenCard, transaction
     },
     beforeMount() {
         const activeAccount = this.$wallet.getActiveAccount();
