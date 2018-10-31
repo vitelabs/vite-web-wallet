@@ -136,14 +136,14 @@ module.exports = {
             copy: 'Successfully copied'
         },
         quota: {
-            title: 'Insufficient Quota',
-            describe: 'Not available to conduct a transaction due to lack of quota, please delete descriptive text and run PoW, or gain quota by staking token to resume.',
+            title: 'Insufficient TPS Quota',
+            describe: 'Not available to send a transaction due to lack of quota, please delete descriptive text and run PoW, or gain quota by staking token to resume.',
             left: 'Run PoW',
-            right: ' Token staking for quota'
+            right: ' Token staking for TPS quota'
         },
         trans: {
             powErr: 'Error occurs when running PoW, please try again',
-            powTransErr: 'Insufficient quota of PoW, it is recommended that you stake VITE to gain quota.',
+            powTransErr: 'Insufficient quota of PoW, we\'d recommend that you stake VITE to obtain quota.',
             err: 'Error occurs in transaction, please try again'
         }
     },
@@ -183,8 +183,8 @@ module.exports = {
                 txt3: 'Proof of Work (PoW), to be brief is a protocol to confirm that you have done a certain amount of work, also it is an economic measure to deter DDoS attacks and other service abuse. It requires the initiator to conduct a certain amount of computing, which means that it may take some time for the computer; in the Vite system, Users can obtain a free quota by running the PoW, and also can send a transaction without any annotated information through obtained quota.'
             },
             cancel: {
-                title: 'Staking Withdraw',
-                describe: 'Your current staking amount is {amount} VITE, please confirm to withdraw.',
+                title: 'Withdrawal of staked token',
+                describe: 'Your current staked amount is {amount} VITE, please confirm to withdraw.',
                 placeholder: 'Please input withdraw amount',
                 rightBtn: 'Ready to go',
                 leftBtn: 'Cancel withdraw'
@@ -198,14 +198,14 @@ module.exports = {
         },
         list: {
             title: 'My Staking List',
-            total: 'Staking {amount} VITE in total',
+            total: 'Staked {amount} VITE in total',
             beneficialAddr: 'Profit Address',
             amount: 'Amount',
             withdrawHeight: 'Matured snapshot height',
             withdrawTime: 'Expected due date',
-            cancel: 'Staking Withdraw',
+            cancel: 'Withdrawal of staked token',
             operate: 'Operation',
-            unexpired: 'Temporarily cannot withdraw staking until due date'
+            unexpired: 'Temporarily cannot make withdrawal of staked token until due date'
         }
     },
 
