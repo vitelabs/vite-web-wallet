@@ -7,14 +7,16 @@
             </div>
             <div v-if="content" class="content-wrapper" v-html="content"></div>
             <div v-if="!content" class="content-wrapper" > <slot></slot> </div>
-            <div class="bottom" :class="{ 'single': !!singleBtn }">
+            <div class="bottom">
                 <div v-show="singleBtn" class="__btn btn-single __btn_all_in __pointer" 
-                     @click="leftBtnClick">{{ leftBtnTxt }}</div>
+                     :class="{'unuse': btnUnuse }"
+                     @click="_leftBtnClick">{{ leftBtnTxt }}</div>
                 <div v-show="!singleBtn" class="__btn btn-left __pointer" 
-                     @click="leftBtnClick">{{ leftBtnTxt }}</div>
+                     :class="{'unuse': btnUnuse }"
+                     @click="_leftBtnClick">{{ leftBtnTxt }}</div>
                 <div v-show="!singleBtn" class="__btn __btn_all_in __pointer" 
-                     :class="{'unuse': rightBtnUnuse }"
-                     @click="rightBtnClick">{{ rightBtnTxt }}</div>
+                     :class="{'unuse': btnUnuse }"
+                     @click="_rightBtnClick">{{ rightBtnTxt }}</div>
             </div>
         </div>
     </div>
@@ -59,13 +61,27 @@ export default {
             type: Function,
             default: ()=>{}
         },
-        rightBtnUnuse: {
+        btnUnuse: {
             type: Boolean,
             default: false
         },
         content: {
             type: String,
             default: ''
+        }
+    },
+    methods: {
+        _rightBtnClick() {
+            if (this.btnUnuse) {
+                return;
+            }
+            this.rightBtnClick && this.rightBtnClick();
+        },
+        _leftBtnClick() {
+            if (this.btnUnuse) {
+                return;
+            }
+            this.leftBtnClick && this.leftBtnClick();
         }
     }
 };
@@ -134,9 +150,6 @@ export default {
         min-height: 80px;
         box-sizing: border-box;
         justify-content: space-between;
-        &.single {
-            justify-content: space-around;
-        }
         .__btn {
             display: inline-block;
             width: 48%;
@@ -155,8 +168,8 @@ export default {
             }
         }
         .btn-single {
-            width: 200px;
-            max-width: 200px;
+            width: 100%;
+            max-width: 100%;
         }
     }
 }

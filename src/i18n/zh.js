@@ -248,7 +248,8 @@ module.exports = {
 
     pwdConfirm: {
         conf: '开启10分钟内免密操作',
-        title: '输入钱包密码'
+        title: '输入钱包密码',
+        placeholder: '请输入钱包密码'
     },
 
     // common

@@ -2,11 +2,16 @@ import Vue from 'vue';
 import pwdComponent from './password.vue';
 
 const PwdComponent = Vue.extend(pwdComponent);
-let instance = new PwdComponent({
-    el: document.createElement('div')
-});
+let instance;
 
-export default function({
+export function initPwdConfirm (i18n) {
+    instance = new PwdComponent({
+        el: document.createElement('div'),
+        i18n
+    });
+}
+
+export function pwdConfirm ({
     showMask = true,
     title, 
     cancel = () => {},
@@ -21,7 +26,7 @@ export default function({
         }
         cb && cb();
     };
-
+    
     instance.showMask = showMask;
     instance.title = title;
     instance.cancel = ()=>{
@@ -29,10 +34,11 @@ export default function({
         cancel && cancel();
     };
     instance.submit = () => {
-        submit && submit(_close);
+        _close();
+        submit && submit();
     };
     instance.content = content || '';
-
+    
     document.body.appendChild(instance.$el);
     return true;
 }

@@ -1,11 +1,12 @@
 <template>
-    <confirm :title="title" :content="content"
+    <confirm :title="title || $t('pwdConfirm.title')" 
+             :content="content" :showMask="showMask"
              :leftBtnTxt="$t('btn.cancel')" :rightBtnTxt="$t('btn.submit')"
-             :leftBtnClick="cancel"  :rightBtnClick="_submit">
+             :leftBtnClick="_cancle"  :rightBtnClick="_submit">
         <div class="pass-input">
-            <input v-model="password" type="text"/>
+            <input v-model="password" :placeholder="$t('pwdConfirm.placeholder')" type="text"/>
         </div>
-        <div @click="toggleHold">
+        <div class="hold-pwd" @click="toggleHold">
             <span v-show="isPwdHold">hold</span>
             {{ $t('pwdConfirm.conf') }}
         </div>
@@ -14,18 +15,21 @@
 
 <script>
 import confirm from 'components/confirm.vue';
-import localStorage from 'utils/localStorage';
+
+const holdTime = 10000;
 
 export default {
     components: {
         confirm
     },
     props: {
+        showMask: {
+            type: Boolean,
+            default: true
+        },
         title: {
             type: String,
-            default: () => {
-                return this.$t('pwdConfirm.title');
-            }
+            default: ''
         },
         cancel: {
             type: Function,
@@ -40,9 +44,6 @@ export default {
             default: ''
         }
     },
-    mounted() {
-
-    },
     data() {
         return {
             password: '',
@@ -50,13 +51,21 @@ export default {
         };
     },
     methods: {
+        clear() {
+            this.password = '';
+            this.isPwdHold = false;
+        },
         toggleHold() {
             this.isPwdHold = !this.isPwdHold;
+        },
+        _cancle() {
+            this.clear();
+            this.cancel && this.cancel();
         },
         _submit() {
             let password = this.$trim(this.password);
             if (!password) {
-                this.$toast('hint.pwEmpty');
+                this.$toast( this.$t('hint.pwEmpty') );
                 return false;
             }
 
@@ -68,11 +77,12 @@ export default {
 
             let result = activeAccount.verify(password);
             if (!result) {
-                this.$toast( this.$t('hint.err') );
+                this.$toast( this.$t('hint.pwErr') );
                 return false;
             }
 
-            this.isPwdHold && this.$wallet.holdPWD(password);
+            this.isPwdHold && activeAccount.holdPWD(password, holdTime);
+            this.clear();
             this.submit && this.submit();
         }
     }
@@ -80,5 +90,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+.pass-input {
+    width: 100%;
+    input {
+        width: 100%;
+    }
+}
 </style>

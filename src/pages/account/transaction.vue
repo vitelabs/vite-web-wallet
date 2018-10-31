@@ -1,54 +1,40 @@
 <template>
     <div class="trans-wrapper">
-        <div v-show="isShowTrans" class="transaction-wrapper">
-            <div class="title">
-                {{ $t('accDetail.transfer') }}
-                <img class="close __pointer" @click="closeTrans" src="../../assets/imgs/close.svg"/>
+        <confirm v-show="isShowTrans" class="trans-confirm"
+                 :title="$t('accDetail.transfer')"
+                 :btnUnuse="unTrans"
+                 :closeIcon="true" :close="closeTrans" :singleBtn="true" 
+                 :leftBtnClick="validTrans" :leftBtnTxt="$t('accDetail.transfer')" >
+            <div class="row">
+                <div class="row-t">
+                    {{ $t('accDetail.inAddress') }}
+                    <span v-show="!isValidAddress" class="err">{{ $t('transList.valid.addr') }}</span>
+                </div>
+                <div class="row-content">
+                    <input ref="inAddr" v-model="inAddress" :placeholder="$t('accDetail.placeholder.addr')" />
+                </div>
             </div>
 
-            <div class="content-wrapper">
-                <div class="row">
-                    <div class="row-t">
-                        {{ $t('accDetail.inAddress') }}
-                        <span v-show="!isValidAddress" class="err">{{ $t('transList.valid.addr') }}</span>
-                    </div>
-                    <div class="row-content">
-                        <input ref="inAddr" v-model="inAddress" :placeholder="$t('accDetail.placeholder.addr')" />
-                    </div>
+            <div class="row">
+                <div class="row-t">
+                    {{ $t('accDetail.sum') }}
+                    <span v-show="amountErr" class="err">{{ amountErr }}</span>
                 </div>
-
-                <div class="row">
-                    <div class="row-t">
-                        {{ $t('accDetail.sum') }}
-                        <span v-show="amountErr" class="err">{{ amountErr }}</span>
-                    </div>
-                    <div class="row-content __btn_text __input">
-                        <input v-model="amount" :placeholder="$t('accDetail.placeholder.amount')"  />
-                    </div>
+                <div class="row-content __btn_text __input">
+                    <input v-model="amount" :placeholder="$t('accDetail.placeholder.amount')"  />
                 </div>
-
-                <div class="row">
-                    <div class="row-t">
-                        {{ $t('accDetail.remarks')}}
-                        <span v-show="messageErr" class="err">{{ messageErr }}</span>
-                    </div>
-                    <div class="row-content">
-                        <input v-model="message" :placeholder="$t('accDetail.placeholder.remarks')"  />
-                    </div>
-                </div>
-
-                <!-- <div class="row">
-                    <div class="row-t">{{ $t('accDetail.password') }}</div>
-                    <div class="row-content">
-                        <input v-model="password" type="password" :placeholder="$t('create.input')"  />
-                    </div>
-                </div> -->
-
-                <div class="btn __pointer" :class="{
-                    'unuse': loading || amountErr || !isValidAddress || messageErr
-                }" @click="validTrans">{{ $t('accDetail.transfer') }}</div>
             </div>
-        </div>
+
+            <div class="row">
+                <div class="row-t">
+                    {{ $t('accDetail.remarks')}}
+                    <span v-show="messageErr" class="err">{{ messageErr }}</span>
+                </div>
+                <div class="row-content">
+                    <input v-model="message" :placeholder="$t('accDetail.placeholder.remarks')"  />
+                </div>
+            </div>
+        </confirm>
 
         <pow-process ref="powProcess" v-if="isShowPow" :isShowCancel="true" :cancel="stopPow"></pow-process>
     </div>
@@ -97,7 +83,6 @@ export default {
         return {
             inAddress: '',
             amount: '',
-            password: '',
             message: '',
 
             isValidAddress: true,
@@ -109,6 +94,11 @@ export default {
             loading: false,
             powing: false
         };
+    },
+    computed: {
+        unTrans() {
+            return !!(!this.amount || !this.inAddress || this.loading || this.amountErr || !this.isValidAddress || this.messageErr);
+        }
     },
     watch: {
         inAddress: function() {
@@ -223,13 +213,19 @@ export default {
             if (!this.testAmount() || !this.testMessage()) {
                 return;
             }
-            // if (!this.password) {
-            //     this.$toast(this.$t('transList.valid.pswd'));
-            //     return;            
-            // }
 
-            
-            this.transfer();
+            let activeAccount = this.$wallet.getActiveAccount();
+            let isHold = activeAccount.initPwd({
+                showMask: false,
+                submit: () => {
+                    this.isShowTrans = true;
+                    this.transfer();
+                },
+                cancel: () => {
+                    this.isShowTrans = true;
+                }
+            }); 
+            !isHold && (this.isShowTrans = false);
         },
 
         transfer() {
@@ -251,7 +247,6 @@ export default {
             }
             activeAccount.sendTx({
                 toAddr: this.inAddress,
-                pass: this.password,
                 tokenId: this.token.id,
                 amount,
                 message: this.message
@@ -380,77 +375,44 @@ export default {
     z-index: 100;
 }
 
-.transaction-wrapper {
+.row {
+    margin-top: 20px;
+    &:first-child {
+        margin-top: 0;
+    }
+    .row-t {
+        position: relative;
+        font-family: $font-bold;
+        font-size: 14px;
+        color: #1D2024;
+        letter-spacing: 0.35px;
+        line-height: 16px;
+        padding-bottom: 15px;
+    }
+    .row-content {
+        padding: 10px 15px;
+        border: 1px solid #D4DEE7;
+        border-radius: 2px;
+        font-size: 14px;
+        input {
+            width: 100%;
+        }
+    }
+    .err {
+        position: absolute;
+        left: 90px;
+        right: 0;
+        font-size: 12px;
+        color: #FF2929;
+        line-height: 16px;
+        text-align: right;
+    }
+}
+</style>
+
+<style lang="scss">
+.confirm-container.trans-confirm .confirm-wrapper {
     width: 515px;
     max-width: 90%;
-    background: #fff;
-    box-shadow: 0 2px 48px 1px rgba(176,192,237,0.42);
-    border-radius: 2px;
-}
-
-.title {
-    line-height: 32px;
-    font-family: $font-bold;
-    background: #268EFF;
-    font-size: 16px;
-    color: #FFFFFF;
-    height: 60px;
-    line-height: 60px;
-    text-indent: 30px;
-    margin-bottom: 5px;
-    .close {
-        float: right;
-        padding: 20px 30px;
-    }
-}
-
-.content-wrapper {
-    padding: 0px 30px 30px;
-    .row {
-        margin-top: 20px;
-        .row-t {
-            position: relative;
-            font-family: $font-bold;
-            font-size: 14px;
-            color: #1D2024;
-            letter-spacing: 0.35px;
-            line-height: 16px;
-            padding-bottom: 15px;
-        }
-        .row-content {
-            padding: 10px 15px;
-            border: 1px solid #D4DEE7;
-            border-radius: 2px;
-            font-size: 14px;
-            input {
-                width: 100%;
-            }
-        }
-        .err {
-            position: absolute;
-            left: 90px;
-            right: 0;
-            font-size: 12px;
-            color: #FF2929;
-            line-height: 16px;
-            text-align: right;
-        }
-    }
-
-    .btn {
-        height: 44px;
-        line-height: 44px;
-        background: #007AFF;
-        border-radius: 2px;
-        text-align: center;
-        color: #FFFFFF;
-        margin-top: 30px;
-        font-family: $font-bold;
-        font-size: 16px;
-        &.unuse {
-            background: #efefef;
-            color: #666;
-        }
-    }
 }
 </style>

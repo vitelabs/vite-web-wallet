@@ -10,10 +10,6 @@ class Wallet {
     constructor() {
         this.activeAccount = null;
     }
-    
-    holdPWD(pwd) {
-        console.log(pwd);
-    }
 
     getActiveAccount() {
         return this.activeAccount;
