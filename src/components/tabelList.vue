@@ -22,7 +22,7 @@
         </div>
 
         <div class="table-content no-data" v-show="!contentList || !contentList.length">
-            {{ $t('tabel.noData') }}
+            {{ $t('hint.noData') }}
         </div>
 
         <slot></slot>

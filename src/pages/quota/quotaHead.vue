@@ -18,7 +18,7 @@ export default {
                     show: false
                 },
                 leftBtn: {
-                    text: this.$t('quota.confirm.help.btn')
+                    text: this.$t('btn.understand')
                 }, 
                 content: `<div class="help-t">${ this.$t('quota.confirm.help.t1') }</div>
                         <div class="help-txt">${ this.$t('quota.confirm.help.txt1') }</div>

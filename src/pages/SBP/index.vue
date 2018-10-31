@@ -7,7 +7,9 @@
             <router-link :to="{ name: 'SBPVote' }">
                 go to SBP vote
             </router-link>
-            <div>help</div>
+            <div @click="showHelp">
+                {{ active === 'SBPRegistered' ? $t('SBP.help.registeredTitle') : $t('SBP.help.voteTitle') }}
+            </div>
         </div>
         <router-view/>
     </div>
@@ -16,7 +18,41 @@
 <script>
 
 export default {
-
+    created() {
+        this.active = this.$route.name;
+        this.$router.afterEach((to)=>{
+            this.active = to.name;
+        });
+    },
+    methods: {
+        showHelp() {
+            if (this.active === 'SBPRegistered') {
+                this.$confirm({
+                    title: this.$t('SBP.help.registeredTitle'), 
+                    singleBtn: true, 
+                    closeBtn: {
+                        show: false
+                    },
+                    leftBtn: {
+                        text: this.$t('btn.understand')
+                    }, 
+                    content: this.$t('SBP.help.registered')
+                });
+                return;
+            }
+            this.$confirm({
+                title: this.$t('SBP.help.voteTitle'), 
+                singleBtn: true, 
+                closeBtn: {
+                    show: false
+                },
+                leftBtn: {
+                    text: this.$t('btn.understand')
+                }, 
+                content: this.$t('SBP.help.vote')
+            });
+        }
+    }
 };
 </script>
 
