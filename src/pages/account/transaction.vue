@@ -294,6 +294,7 @@ export default {
 
             let transError = (errMsg) => {
                 this.loading = false;
+                this.isShowPow = false;
                 this.isShowTrans = true;
                 this.$toast(errMsg || this.$t('accDetail.trans.err'));
             };

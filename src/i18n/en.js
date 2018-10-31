@@ -46,7 +46,7 @@ module.exports = {
             backup: 'Back Up',
             setting: 'Setting Account',
             reset: 'Account Reset',
-            login: 'Login Account'
+            login: 'Log in'
         },
         sync: 'Wallet initializing, transactions cannot be made temporarily.',
         noNet: 'No network detected',
@@ -123,8 +123,7 @@ module.exports = {
         },
         valid: {
             remarksFormat: 'Format error! Remarks can only contain Chinese, English and punctuations.',
-            // [TODO] 备注请勿超出180个英文字符（或标点符号，一个汉字=6个英文字符）
-            remarksLong: 'Notes do not exceed 180 English characters (or punctuations, 1 Chinese character = 6 English character)'
+            remarksLong: 'Notes do not exceed 180 English characters (or punctuations, 1 Chinese character = 6 English characters)'
         },
         hint: {
             token: 'VITE test tokens have be sent to your account, please check your account!',
@@ -136,77 +135,77 @@ module.exports = {
             rename: 'Rename failed',
             copy: 'Successfully copied'
         },
-        quota: {  // [TODO]
-            title: '配额不足',
-            describe: '配额不足，无法进行交易，您需要删除描述文字并运行pow 或 抵押配额才可以继续转账',
-            left: '运行pow',
-            right: '抵押配额'
+        quota: {
+            title: 'Insufficient Quota',
+            describe: 'Not available to conduct a transaction due to lack of quota, please delete descriptive text and run PoW, or gain quota by staking token to resume.',
+            left: 'Run PoW',
+            right: ' Token staking for quota'
         },
-        trans: {    // [TODO]
-            powErr: '运行POW错误，请重新发起转账',
-            powTransErr: 'pow获取的配额不足，建议您进行抵押VITE获取配额',
-            err: '转账发生错误，请重新发起转账'
+        trans: {
+            powErr: 'Error occurs when running PoW, please try again',
+            powTransErr: 'Insufficient quota of PoW, it is recommended that you stake VITE to gain quota.',
+            err: 'Error occurs in transaction, please try again'
         }
     },
 
-    pow: '运行POW...',  // [TODO]
+    pow: 'Running PoW...',
 
-    quota: {  // [TODO]
-        title: '获取配额',
-        Q1: '快速理解配额',
-        myQuota: '我的当前配额',
-        maxTxNum: '最大交易数',
-        toAddr: '配额收益地址',
-        fromAddr: '抵押金额扣除地址',
-        amount: '抵押金额',
-        time: '抵押锁定时长',
-        aboutDays: '约3天',
-        btn: '提交抵押',
-        myQuotaList: '我的抵押列表',
-        amountPlaceholder: '请输入抵押金额，最小10vite',
-        addrPlaceholder: '请输入获取配额地址',
-        cancelAmount: '请输入取回金额',
-        pledgeSuccess: '抵押成功',
-        pledgeFail: '抵押失败',
-        canclePledgeSuccess: '取消成功',
-        canclePledgeFail: '取消失败',
-        limitAmt: '抵押金额需填写大于等于10的数字',
-        maturity: '抵押已到期',
-        maxAmt: '取回金额在0~{amount}之间”，{amount}为当前可取回最大金额',
+    quota: {
+        title: 'Get Quota',
+        Q1: 'Quick understanding of quota',
+        myQuota: 'My Quota',
+        maxTxNum: 'Maximum number of Txs',
+        toAddr: 'Profit address',
+        fromAddr: 'Deduction address',
+        amount: 'Staking amount',
+        time: 'Staking frozen duration',
+        aboutDays: 'About 3 days',
+        btn: 'Submit staking',
+        myQuotaList: 'My Staking List',
+        amountPlaceholder: 'Please input staking amount, minimum 10 VITE',
+        addrPlaceholder: 'Please input quota receiving address',
+        cancelAmount: 'Please input withdraw amount',
+        pledgeSuccess: 'Staking Successful',
+        pledgeFail: 'Staking Failed',
+        canclePledgeSuccess: 'Cancel Successful',
+        canclePledgeFail: 'Cancel Failed',
+        limitAmt: 'Staking amount should not be less than 10.',
+        maturity: 'Staking has expired!',
+        maxAmt: 'Receiving amount between 0~{amount}”, the current maximum amount is {amount}',
         confirm: {
             help: {
-                btn: '我已了解',
-                t1: '什么是配额',
-                txt1: '在Vite系统中，用户不是通过支付手续费的方式来购买一次交易所需的燃料，而是通过一种基于配额的模型来获取计算资源，发送交易所需配额=基础配额(请求)+配额(附带的文本资料)，接受交易所需配额=基础配额(响应)。这个基于配额的资源配置协议允许用户通过两种方式来获取更高的资源配额：抵押Vite获取配额、运行Pow',
-                t2: '什么是抵押',
-                txt2: '在Vite系统中，用户可以抵押vite获取一定数量的配额，抵押最小值为10vite，没有最大抵押上限；同时支持A地址抵押一部分vite并将获得的配额分配给B地址；用户申请抵押后，会将这笔vite发送到智能合约地址而不是某一个用户，且只有申请抵押用户有权限支配抵押的金额；',
-                t3: '什么是POW',
-                txt3: '工作量证明(Proof Of Work，简称POW)，简单理解就是一份证明，用来确认你做过一定量的工作，应对拒绝服务攻击和其他服务滥用的经济对策。它要求发起者进行一定量的运算，也就意味着需要消耗计算机一定的时间；在VITE系统中，用户可以通过运行POW获得免费的配额，用户可以通过获得的配额进行一次不带任何备注信息的交易；'
+                btn: 'I understand',
+                t1: 'What is quota? ',
+                txt1: 'In the Vite system, users do not purchase the gas required for a transaction by paying a fee, but acquire the computing resource through a quota-based model. Required quota for sending a transaction = the basic quota (request) + quota ( The attached text data), Quota required to accept a transaction = the basic quota (response). This quota-based resource configuration protocol allows users to obtain higher resource quotas in two ways: Staking VITE to obtain quotas and run PoW.',
+                t2: 'What is staking?',
+                txt2: 'In the Vite system, the user can stake VITE to obtain a certain amount of quota, the minimum value of the staking is 10 VITE, there is no maximum limit; meanwhile, Vite system also support that the A-address stakes a part of the VITE and allocates the obtained quota to the B address; When users apply to stake, The VITE will be sent to the smart contract address instead of some user, and only the user who apply for staking has access to manage the staking amount.',
+                t3: 'What is PoW?',
+                txt3: 'Proof of Work (PoW), to be brief is a protocol to confirm that you have done a certain amount of work, also it is an economic measure to deter DDoS attacks and other service abuse. It requires the initiator to conduct a certain amount of computing, which means that it may take some time for the computer; in the Vite system, Users can obtain a free quota by running the PoW, and also can send a transaction without any annotated information through obtained quota.'
             },
             cancel: {
-                title: '取回抵押',
-                describe: '目前抵押金额为 {amount} VITE，请确认取回金额',
-                placeholder: '请输入取回金额',
-                rightBtn: '确认取回',
-                leftBtn: '暂不取回'
+                title: 'Staking Withdraw',
+                describe: 'Your current staking amount is {amount} VITE, please confirm to withdraw.',
+                placeholder: 'Please input withdraw amount',
+                rightBtn: 'Ready to go',
+                leftBtn: 'Cancel withdraw'
             },
             submit: {
-                title: '提交抵押',
-                describe: '确认是否抵押 {amount} VITE 获取配额，抵押生效约3天之后才可取回',
-                rightBtn: '确认抵押',
-                leftBtn: '再等会儿'
+                title: 'Submit Staking',
+                describe: 'Make sure to stake {amount} VITE to obtain quota, you cannot withdraw until about 3 days after staking comes into effect.',
+                rightBtn: 'Confirm',
+                leftBtn: 'Cancel'
             }
         },
         list: {
-            title: '我的抵押列表',
-            total: '总计抵押 {amount} VITE',
-            beneficialAddr: '配额受益地址',
-            amount: '抵押金额',
-            withdrawHeight: '到期快照高度',
-            withdrawTime: '预计到期时间',
-            cancel: '取回抵押',
-            operate: '操作',
-            unexpired: '还未到达取回时间，暂时无法取回抵押'
+            title: 'My Staking List',
+            total: 'Staking {amount} VITE in total',
+            beneficialAddr: 'Profit Address',
+            amount: 'Amount',
+            withdrawHeight: 'Matured snapshot height',
+            withdrawTime: 'Expected due date',
+            cancel: 'Staking Withdraw',
+            operate: 'Operation',
+            unexpired: 'Temporarily cannot withdraw staking until due date'
         }
     },
 
@@ -222,7 +221,7 @@ module.exports = {
         status: {
             title: 'Status',
             unconfirmed: 'Unconfirmed',
-            confirms: 'Confirms',
+            confirms: 'Confirming',
             confirmed: 'Confirmed',
         },
         valid:{
@@ -230,7 +229,7 @@ module.exports = {
             bal:'Insufficient balance',
             pswd:'Password error',
             amt:'Amount format error',
-            succ:'Transaction success!',
+            succ:'Transaction successful!',
             err: 'Oops, error occurs'
         },
         timestamp: 'Timestamp',
@@ -263,7 +262,7 @@ module.exports = {
     hint:{
         create: 'Creation failed',
         logoutErr: 'Logout Error!',
-        pwErr: 'Password Error!',
+        pwErr: 'Incorrect password!',
         acEmpty: 'Account cannot be empty!',
         pwEmpty: 'Password cannot be empty!'
     }
