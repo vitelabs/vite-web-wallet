@@ -51,10 +51,6 @@ export default {
         sendPledgeTx: {
             type: Function,
             default: () => {}
-        },
-        testAmount: {
-            type: Function,
-            default: () => {}
         }
     },
     destroyed() {
@@ -103,13 +99,13 @@ export default {
 
             amountTimeout = setTimeout(()=> {
                 amountTimeout = null;
-                this._testAmount();
+                this.testAmount();
             }, 500);
         },
     },
     methods: {
-        _testAmount() {
-            let result = this.testAmount(this.amount);
+        testAmount() {
+            let result = this.$validAmount(this.amount);
             if (!result) {
                 this.amountErr = this.$t('transList.valid.amt');
                 return false;
@@ -152,7 +148,7 @@ export default {
 
             this.$statistics.event('Vite_web_wallet', 'quota', 'SubmitQuota');
 
-            this._testAmount();
+            this.testAmount();
             this.testAddr();
             if (this.amountErr || !this.isValidAddress) {
                 return;
