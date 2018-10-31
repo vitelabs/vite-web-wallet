@@ -169,17 +169,17 @@ class Account {
     }
 
     sendTx({
-        toAddr, pass, tokenId, amount, message
+        toAddr, tokenId, amount, message
     }, pledgeType = '') {
-        if (!pledgeType) {
-            let verifyRes = this.verify(pass);
-            if (!verifyRes) {
-                return Promise.reject({
-                    code: -34001,
-                    message: 'passErr'
-                });
-            }
-        }
+        // if (!pledgeType) {
+        //     let verifyRes = this.verify(pass);
+        //     if (!verifyRes) {
+        //         return Promise.reject({
+        //             code: -34001,
+        //             message: 'passErr'
+        //         });
+        //     }
+        // }
 
         let fromAddr = this.addrs[this.defaultInx].hexAddr;
         let privKey = this.addrs[this.defaultInx].privKey;

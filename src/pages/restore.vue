@@ -36,14 +36,14 @@ export default {
                 return;
             }
 
-            let mnemonic = this.mnemonic.replace(/(^\s*)|(\s*$)/g,'');
+            let mnemonic = this.$trim(this.mnemonic);
             if (!mnemonic) {
                 this.errMsg = 'mnemonic.empty';
                 return;
             }
 
             this.isLoading = true;
-            viteWallet.Wallet.restoreAddrs(mnemonic).then(()=>{
+            this.$wallet.restoreAddrs(mnemonic).then(()=>{
                 this.isLoading = false;
                 this.$router.push({
                     name: 'createAccount'

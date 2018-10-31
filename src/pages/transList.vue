@@ -72,7 +72,7 @@ export default {
         this.startLoopTransList();
     },
     data() {
-        let activeAccount = viteWallet.Wallet.getActiveAccount();
+        let activeAccount = this.$wallet.getActiveAccount();
         let address = activeAccount.getDefaultAddr();
         return {
             acc: activeAccount,

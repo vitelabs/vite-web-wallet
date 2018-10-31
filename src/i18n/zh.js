@@ -227,8 +227,7 @@ module.exports = {
             bal:'余额不足',
             pswd:'密码错误',
             amt:'金额格式错误',
-            succ:'转账成功',
-            err: '发生错误'
+            succ:'转账成功'
         },
         timestamp: '时间戳',
         tAddress: '交易方地址',
@@ -276,6 +275,7 @@ module.exports = {
         pwErr: '密码错误',
         acEmpty: '账号不可为空',
         pwEmpty: '密码不能为空',
-        noData: '暂无数据'
+        noData: '暂无数据',
+        err: '发生错误'
     }
 };

@@ -9,19 +9,8 @@ let instance = new PwdComponent({
 export default function({
     showMask = true,
     title, 
-    singleBtn = false, 
-    closeBtn = {
-        show: false,
-        click: () => {}
-    },
-    leftBtn = {
-        text: '',
-        click: () => {}
-    }, 
-    rightBtn = {
-        text: '',
-        click: () => {}
-    },
+    cancel = () => {},
+    submit = () => {},
     content = ''
 }) {
     let _close = (cb) => {
@@ -35,18 +24,12 @@ export default function({
 
     instance.showMask = showMask;
     instance.title = title;
-    instance.singleBtn = singleBtn;
-    instance.closeIcon = closeBtn.show;
-    instance.close = ()=>{
-        _close(closeBtn ? closeBtn.click : null);
+    instance.cancel = ()=>{
+        _close();
+        cancel && cancel();
     };
-    instance.leftBtnTxt = leftBtn.text;
-    instance.leftBtnClick = () => {
-        _close(leftBtn ? leftBtn.click : null);
-    };
-    instance.rightBtnTxt = rightBtn.text;
-    instance.rightBtnClick = () => {
-        _close(rightBtn ? rightBtn.click : null);
+    instance.submit = () => {
+        submit && submit(_close);
     };
     instance.content = content || '';
 

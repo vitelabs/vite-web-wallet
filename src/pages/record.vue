@@ -21,7 +21,7 @@ export default {
         mnemonic, process
     },
     mounted() {
-        this.activeAccount = viteWallet.Wallet.getActiveAccount();
+        this.activeAccount = this.$wallet.getActiveAccount();
         this.mnemonic = this.activeAccount.getMnemonic() || '';
 
         // let list = mnemonic.split(/\s/);
@@ -40,7 +40,7 @@ export default {
         // mnemonicList.push(str);
     },
     data() {
-        let activeAccount = viteWallet.Wallet.getActiveAccount();
+        let activeAccount = this.$wallet.getActiveAccount();
         let mnemonic = activeAccount.getMnemonic() || '';
 
         return {

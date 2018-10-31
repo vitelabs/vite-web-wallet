@@ -69,7 +69,7 @@ export default {
         clearTimeout(amountTimeout);
     },
     data() {
-        let activeAccount = viteWallet.Wallet.getActiveAccount();
+        let activeAccount = this.$wallet.getActiveAccount();
 
         return {
             activeAccount,

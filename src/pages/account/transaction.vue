@@ -198,7 +198,7 @@ export default {
             return true;
         },
         testMessage() {
-            let message = this.message.replace(/(^\s*)|(\s*$)/g,'');
+            let message = this.$trim(this.message);
             let str = encodeURIComponent(message);
             if (str.length > 180) {
                 this.messageErr = this.$t('accDetail.valid.remarksLong');
@@ -242,11 +242,11 @@ export default {
             let amount =  viteWallet.BigNumber.toMin(this.amount, this.token.decimals);
 
             let successText = this.$t('transList.valid.succ');
-            let failText = this.$t('transList.valid.err');
+            let failText = this.$t('hint.err');
             
-            let activeAccount = viteWallet.Wallet.getActiveAccount();
+            let activeAccount = this.$wallet.getActiveAccount();
             if (!activeAccount) {
-                this.$toast(this.$t('transList.valid.err'));
+                this.$toast(this.$t('hint.err'));
                 return;
             }
             activeAccount.sendTx({
@@ -287,13 +287,13 @@ export default {
                     return;
                 }
 
-                this.$toast(message || this.$t('transList.valid.err'));
+                this.$toast(message || this.$t('hint.err'));
             });
         },
         startPow() {
-            let activeAccount = viteWallet.Wallet.getActiveAccount();
+            let activeAccount = this.$wallet.getActiveAccount();
             if (!activeAccount) {
-                this.$toast(this.$t('transList.valid.err'));
+                this.$toast(this.$t('hint.err'));
                 return;
             }
 

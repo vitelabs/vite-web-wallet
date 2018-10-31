@@ -17,7 +17,11 @@ import 'utils/viteWallet/index.js';
 
 import store from './store';
 import statistics from 'utils/statistics';
-import './mixin.js';
+import Wallet from 'utils/wallet/index.js';
+let wallet = new Wallet();
+
+import initMixin from './mixin.js';
+initMixin(wallet);
 
 Vue.use(VueRouter);
 Vue.use(VueI18n);
@@ -34,11 +38,11 @@ setTimeout(() => {
 setTimeout(() => {    
     const i18n = new VueI18n( i18nCon() );
 
-    let { Wallet, Ledger } = viteWallet;
-    Wallet.reSave();
+    wallet.reSave();
+    let { Ledger } = viteWallet;
     Ledger.getDefaultTokenList();
     
-    let list = Wallet.getList();
+    let list = wallet.getList();
     let rootRoute = {
         name: 'index',
         path: '/'
