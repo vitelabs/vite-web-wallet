@@ -1,6 +1,8 @@
 import acc from './storeAcc.js';
+import { pwdConfirm } from 'components/password/index.js';
 
 const namePre = 'account';
+let passTimeout;
 
 class Account {
     constructor({
@@ -8,6 +10,7 @@ class Account {
     }) {
         this.isWalletAcc = !keystore;
         this.name = checkName(name);
+        this.isHoldPWD = false;
 
         // Keystore account
         this.keystore = keystore;
@@ -23,6 +26,38 @@ class Account {
         this.addrs = (!this.isWalletAcc && !addrs) ? [{
             hexAddr: keystore.hexaddress
         }] : addrs;
+    }
+    
+    holdPWD(pwd, time) {
+        this.pass = pwd;
+        this.isHoldPWD = true;
+        passTimeout = setTimeout(() => {
+            this.releasePWD();
+        }, time);
+    }
+
+    releasePWD() {
+        passTimeout && clearTimeout(passTimeout);
+        passTimeout = null;
+        this.isHoldPWD = false;
+    }
+
+    initPwd({
+        showMask = true,
+        title,
+        submit = () => {},
+        cancel = () => {},
+        content = ''
+    }) {
+        if (this.isHoldPWD) {
+            submit && submit();
+            return true;
+        }
+
+        pwdConfirm({
+            showMask, title, submit, content, cancel
+        });
+        return false;
     }
 
     verify(pass) {
@@ -171,16 +206,6 @@ class Account {
     sendTx({
         toAddr, tokenId, amount, message
     }, pledgeType = '') {
-        // if (!pledgeType) {
-        //     let verifyRes = this.verify(pass);
-        //     if (!verifyRes) {
-        //         return Promise.reject({
-        //             code: -34001,
-        //             message: 'passErr'
-        //         });
-        //     }
-        // }
-
         let fromAddr = this.addrs[this.defaultInx].hexAddr;
         let privKey = this.addrs[this.defaultInx].privKey;
 

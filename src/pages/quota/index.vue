@@ -7,7 +7,7 @@
                      :title="$t(`quota.confirm.${ showConfirmType }.title`)" :closeIcon="false"
                      :leftBtnTxt="$t(`quota.confirm.${ showConfirmType }.leftBtn`)" :leftBtnClick="closeConfirm"
                      :rightBtnTxt="$t(`quota.confirm.${ showConfirmType }.rightBtn`)" 
-                     :rightBtnClick="submit" :rightBtnUnuse="!!cancelUnuse">
+                     :rightBtnClick="submit" :btnUnuse="!!cancelUnuse">
                 {{ $t(`quota.confirm.${ showConfirmType }.describe`, {amount: activeAmountLimit}) }}
                 <div class="cancel-amount" v-show="amountErr">{{ amountErr }}</div>
                 <div v-show="showConfirmType === 'cancel'" class="cancel-input">
