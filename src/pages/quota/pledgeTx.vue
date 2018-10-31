@@ -212,6 +212,9 @@ export default {
             width: 49%;
             min-width: 470px;
             margin-top: 0;
+            &:first-child {
+                margin-right: 10px;
+            }
         }
         .title {
             font-family: $font-bold;
@@ -276,7 +279,7 @@ export default {
     }
 }
 
-@media only screen and (max-width: 1410px) {
+@media only screen and (max-width: 1419px) {
     .pledge-tx-wrapper .row .item {
         margin-top: 20px;
         &:first-child {
@@ -289,6 +292,9 @@ export default {
     .pledge-tx-wrapper .row .item {
         width: 100%;
         min-width: 0;
+        &:first-child {
+            margin-right: 0px;
+        }
     }
     .pledge-tx-wrapper .input-item input.amount {
         min-width: 0;
