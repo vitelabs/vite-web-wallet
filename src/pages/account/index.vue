@@ -29,7 +29,7 @@ export default {
         accountHead, syncBlock, tokenCard, transaction, confirm
     },
     beforeMount() {
-        const activeAccount = viteWallet.Wallet.getActiveAccount();
+        const activeAccount = this.$wallet.getActiveAccount();
 
         this.clearTime();
         balanceInfoInst = new timer(()=>{

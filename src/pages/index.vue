@@ -52,7 +52,7 @@ export default {
             if (!fromHome) {
                 return;
             }
-            viteWallet.Wallet.clearActiveAccount();
+            this.$wallet.clearActiveAccount();
 
             // clear all
             this.$store.commit('commitClearBalance');

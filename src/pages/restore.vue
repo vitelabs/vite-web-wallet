@@ -43,7 +43,7 @@ export default {
             }
 
             this.isLoading = true;
-            viteWallet.Wallet.restoreAddrs(mnemonic).then(()=>{
+            this.$wallet.restoreAddrs(mnemonic).then(()=>{
                 this.isLoading = false;
                 this.$router.push({
                     name: 'createAccount'

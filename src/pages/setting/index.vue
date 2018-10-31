@@ -25,7 +25,7 @@ export default {
         layout, accList, lang, mnemonic
     },
     data() {
-        let activeAccount = viteWallet.Wallet.getActiveAccount();
+        let activeAccount = this.$wallet.getActiveAccount();
         let showPassWrapper = activeAccount ? !!activeAccount.isWalletAcc : false;
 
         return {

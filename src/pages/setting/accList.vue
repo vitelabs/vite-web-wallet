@@ -29,7 +29,7 @@ import Vue from 'vue';
 
 export default {
     data() {
-        let activeAccount = viteWallet.Wallet.getActiveAccount();
+        let activeAccount = this.$wallet.getActiveAccount();
 
         return {
             activeAccount,

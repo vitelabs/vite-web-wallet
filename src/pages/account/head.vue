@@ -68,7 +68,7 @@ export default {
         };
     },
     mounted() {
-        activeAccount = viteWallet.Wallet.getActiveAccount();
+        activeAccount = this.$wallet.getActiveAccount();
         this.account = this.getSimpleAcc();
         this.addressStr = stringify({ targetAddress: this.account.addr });
     },
