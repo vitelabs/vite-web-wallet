@@ -9,8 +9,14 @@ module.exports = {
         text1: 'Please be sure to backup your seed phrase when creating account. We cannot guarantee to restore your assets in case of you visit scam sites or lose your backups.',
         text2: 'Noted that our site don\'t reserve your private key or seed phrase. Therefore, you need to restore your account via seed phrase if you decide to change browser, clear local cookies or even replace your PC.',
         text3: 'Please make sure that the seed phrase is a hundred percent correct if you choose to restore address with it. Otherwise, any tiny little difference will lead to the result that your address cannot be restored successfully.',
-        text4: 'The current version of wallet is preview version, the Vite test tokens you obtained is only for testing and has no any actual value. Meanwhile, the official will occasionally clear test tokens.',
-        btn: 'I understand'
+        text4: 'The current version of wallet is preview version, the Vite test tokens you obtained is only for testing and has no any actual value. Meanwhile, the official will occasionally clear test tokens.'
+    },
+    test: {
+        t: 'Preview Version',
+        txt1: 'Vite’s Web wallet is a lightweight-node wallet.',
+        txt2: 'Now, it can generate account based on DAG ledger, check account balance, send and receive transactions in default mode, acquire test tokens, check tokens issued by system and etc.',
+        txt3: 'Support finding the mnemonic seed phrase of account and login by importing keystore file.',
+        v: 'Current version: Preview Version'
     },
 
     mnemonic: {
@@ -54,13 +60,6 @@ module.exports = {
         firstDone: 'Init Done',
         firstDoing: 'Initializing',
         blockHeight: 'Snapshot Block Height'
-    },
-    test: {
-        t: 'Preview Version',
-        txt1: 'Vite’s Web wallet is a lightweight-node wallet.',
-        txt2: 'Now, it can generate account based on DAG ledger, check account balance, send and receive transactions in default mode, acquire test tokens, check tokens issued by system and etc.',
-        txt3: 'Support finding the mnemonic seed phrase of account and login by importing keystore file.',
-        v: 'Current version: Preview Version'
     },
 
     // account list
@@ -148,7 +147,6 @@ module.exports = {
         }
     },
 
-    pow: 'Running PoW...',
 
     quota: {
         title: 'Get Quota',
@@ -174,7 +172,6 @@ module.exports = {
         maxAmt: 'Receiving amount between 0~{amount}”, the current maximum amount is {amount}',
         confirm: {
             help: {
-                btn: 'I understand',
                 t1: 'What is quota? ',
                 txt1: 'In the Vite system, users do not purchase the gas required for a transaction by paying a fee, but acquire the computing resource through a quota-based model. Required quota for sending a transaction = the basic quota (request) + quota ( The attached text data), Quota required to accept a transaction = the basic quota (response). This quota-based resource configuration protocol allows users to obtain higher resource quotas in two ways: Staking VITE to obtain quotas and run PoW.',
                 t2: 'What is staking?',
@@ -239,11 +236,16 @@ module.exports = {
         tDetail: 'Transaction Detail'
     },
 
-    tabel: {
-        noData: 'No Data'
+    // SBP
+    SBP: {
+        help: {
+            vote: '您可以参与投票选出共25个SBP（Snapshot Block Producer），官方SBP获得的出块奖励的70%会分发给那些将票投给官方SBP的地址。',
+            registered: 'SBP（Snapshot Block Producer）是打包快照块的节点，每一轮75秒时间内25个SBP轮流出块。SBP经过投票产生，打包一个快照块将获得0.9482 VITE。'
+        }
     },
 
     //common
+    pow: 'Running PoW...',
     btn: {
         create: 'Create',
         cancel: 'Cancel',
@@ -252,6 +254,7 @@ module.exports = {
         back: 'Back',
         submit: 'Submit',
         next: 'Next Step',
+        understand: 'I understand'
     },
     paging: {
         pre: 'Prev',
@@ -264,6 +267,7 @@ module.exports = {
         logoutErr: 'Logout Error!',
         pwErr: 'Incorrect password!',
         acEmpty: 'Account cannot be empty!',
-        pwEmpty: 'Password cannot be empty!'
+        pwEmpty: 'Password cannot be empty!',
+        noData: 'No Data'
     }
 };
