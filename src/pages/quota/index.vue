@@ -24,14 +24,13 @@
             
             <div class="content">
                 <my-quota class="my-quota _content_border"></my-quota>
-                <pledge-tx ref="submitPledge" class="pledge-tx _content_border"
-                           :tokenInfo="tokenInfo" :sendPledgeTx="sendPledgeTx"
-                           :showConfirm="showConfirm" :testAmount="testAmount"></pledge-tx>
+                <pledge-tx class="pledge-tx _content_border"
+                           :sendPledgeTx="sendPledgeTx"></pledge-tx>
             </div>
 
             <list ref="txList" :sendPledgeTx="sendPledgeTx" 
                   :tokenInfo="tokenInfo"
-                  :showConfirm="showConfirm" :testAmount="testAmount"></list>
+                  :showConfirm="showConfirm"></list>
         </div>
     </div>
 </template>
@@ -98,16 +97,13 @@ export default {
 
             amountTimeout = setTimeout(()=> {
                 amountTimeout = null;
-                this._testAmount();
+                this.testAmount();
             }, 500);
         }
     },
     methods: {
-        testAmount(amount) {
-            return /(^(\d+)$)|(^(\d+[.]\d{1,8})$)/g.test(amount);
-        },
-        _testAmount() {
-            let result = this.testAmount(this.cancelAmount);
+        testAmount() {
+            let result = this.$validAmount(this.cancelAmount);
             if (!result) {
                 this.amountErr = this.$t('transList.valid.amt');
                 return false;
@@ -141,7 +137,7 @@ export default {
             this.showConfirmType = '';
         },
         submit() {
-            this._testAmount();
+            this.testAmount();
             if (this.amountErr) {
                 return;
             }

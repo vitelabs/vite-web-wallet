@@ -31,11 +31,16 @@ export default function(wallet) {
                 window.document.onkeydown = null;      
             };
     
+            this.$validAmount = (amount = '') => {
+                return /(^(\d+)$)|(^(\d+[.]\d{1,8})$)/g.test(amount);
+            };
             this.$trim = (msg = '') => {
                 return msg.replace(/(^\s*)|(\s*$)/g,'');
             };
+
             this.$toast = toast;
             this.$confirm = confirm;
+            
             this.$statistics = statistics;
         },
         destroyed: function () {

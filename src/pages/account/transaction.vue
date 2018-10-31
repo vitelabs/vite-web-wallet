@@ -179,7 +179,7 @@ export default {
         },
 
         testAmount() {
-            let result = /(^(\d+)$)|(^(\d+[.]\d{1,8})$)/g.test(this.amount);
+            let result = this.$validAmount(this.amount);
             if (!result || viteWallet.BigNumber.isEqual(this.amount, 0)) {
                 this.amountErr = this.$t('transList.valid.amt');
                 return false;
