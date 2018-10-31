@@ -52,7 +52,7 @@ export default {
         });
     },
     data() {
-        let activeAccount = viteWallet.Wallet.getActiveAccount();
+        let activeAccount = this.$wallet.getActiveAccount();
         let showPro = !activeAccount;
         return {
             activeAccount,
@@ -160,7 +160,7 @@ export default {
         createAccount() {
             this.isCreating = true;
             window.setTimeout(() => {
-                viteWallet.Wallet.create(this.name, this.pass1);
+                this.$wallet.create(this.name, this.pass1);
                 this.isCreating = false;
                 this.$router.push({
                     name: 'record'
@@ -168,7 +168,7 @@ export default {
             }, 0);
         },
         restoreAccount() {
-            viteWallet.Wallet.restoreAccount(this.name, this.pass1);
+            this.$wallet.restoreAccount(this.name, this.pass1);
             this.$router.push({
                 name: 'login'
             });

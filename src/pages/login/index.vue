@@ -77,7 +77,7 @@ export default {
     },
     methods: {
         getLoginAcc() {
-            let account = viteWallet.Wallet.getLast();
+            let account = this.$wallet.getLast();
             if (account) {
                 let addr = account.addr || '';
                 let showAddr = account.addr ? ellipsisAddr(account.addr) : '';
@@ -89,7 +89,7 @@ export default {
                 };
             }
 
-            let list = viteWallet.Wallet.getList();
+            let list = this.$wallet.getList();
             if (!list || !list.length) {
                 this.$router.push({
                     name: 'index'
@@ -141,7 +141,7 @@ export default {
 
             this.isLoading = true;
             window.setTimeout(()=>{
-                let result = viteWallet.Wallet.login(this.activeAccount, this.password);
+                let result = this.$wallet.login(this.activeAccount, this.password);
                 this.isLoading = false;
                 result && loginSuccess();
                 !result && this.$toast(this.$t('hint.pwErr'), 'error');

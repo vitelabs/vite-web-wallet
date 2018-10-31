@@ -44,7 +44,7 @@ export default {
             }, 5 * 60 * 1000);
         },
         logout() {
-            let activeAccount = viteWallet.Wallet.getActiveAccount();
+            let activeAccount = this.$wallet.getActiveAccount();
             activeAccount && activeAccount.lock();
             this.$router.push({
                 name: 'login'

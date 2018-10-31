@@ -28,7 +28,7 @@ export default {
         }
     },
     data() {
-        let activeAccount = viteWallet.Wallet.getActiveAccount();
+        let activeAccount = this.$wallet.getActiveAccount();
         let mnemonic = activeAccount.getMnemonic();
         let mnemonicStr = mnemonic ? this.getShowMnemonic(mnemonic) : '';
 

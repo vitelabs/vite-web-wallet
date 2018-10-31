@@ -69,7 +69,7 @@ export default {
         this.stopLoopPledgeList();
     },
     data() {
-        let activeAccount = viteWallet.Wallet.getActiveAccount();
+        let activeAccount = this.$wallet.getActiveAccount();
         let address = activeAccount.getDefaultAddr();
 
         return {

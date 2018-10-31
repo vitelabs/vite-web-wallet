@@ -65,7 +65,7 @@ export default {
         this.clearAll();
     },
     data() {
-        let activeAccount = viteWallet.Wallet.getActiveAccount();
+        let activeAccount = this.$wallet.getActiveAccount();
 
         return {
             activeAccount,

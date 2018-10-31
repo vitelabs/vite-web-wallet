@@ -239,7 +239,7 @@ export default {
             let successText = this.$t('transList.valid.succ');
             let failText = this.$t('transList.valid.err');
             
-            let activeAccount = viteWallet.Wallet.getActiveAccount();
+            let activeAccount = this.$wallet.getActiveAccount();
             if (!activeAccount) {
                 this.$toast(this.$t('transList.valid.err'));
                 return;
@@ -286,7 +286,7 @@ export default {
             });
         },
         startPow() {
-            let activeAccount = viteWallet.Wallet.getActiveAccount();
+            let activeAccount = this.$wallet.getActiveAccount();
             if (!activeAccount) {
                 this.$toast(this.$t('transList.valid.err'));
                 return;
