@@ -52,10 +52,6 @@ export default {
             type: Function,
             default: () => {}
         },
-        showConfirm: {
-            type: Function,
-            default: () => {}
-        },
         testAmount: {
             type: Function,
             default: () => {}
@@ -162,7 +158,17 @@ export default {
                 return;
             }
 
-            this.showConfirm('submit', this.amount);
+            this.activeAccount.initPwd({
+                title: this.$t('quota.confirm.submit.title'),
+                submitTxt: this.$t('quota.confirm.submit.rightBtn'),
+                cancelTxt: this.$t('quota.confirm.submit.leftBtn'),
+                content: this.$t('quota.confirm.submit.describe', {
+                    amount: this.amount
+                }),
+                submit: () => {
+                    this._sendPledgeTx();
+                }
+            });
         },
         _sendPledgeTx() {
             this.$statistics.event('Vite_web_wallet', 'quota', 'ConfirmQuota');

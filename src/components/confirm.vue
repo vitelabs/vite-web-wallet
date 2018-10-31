@@ -5,14 +5,15 @@
                 {{ title }}
                 <span v-show="closeIcon" @click="close" class="close-icon __pointer"></span>
             </div>
-            <div v-if="content" class="content-wrapper" v-html="content"></div>
-            <div v-if="!content" class="content-wrapper" > <slot></slot> </div>
+            <div class="content-wrapper" >
+                <div v-if="content" v-html="content"></div>
+                <slot></slot>
+            </div>
             <div class="bottom">
                 <div v-show="singleBtn" class="__btn btn-single __btn_all_in __pointer" 
                      :class="{'unuse': btnUnuse }"
                      @click="_leftBtnClick">{{ leftBtnTxt }}</div>
                 <div v-show="!singleBtn" class="__btn btn-left __pointer" 
-                     :class="{'unuse': btnUnuse }"
                      @click="_leftBtnClick">{{ leftBtnTxt }}</div>
                 <div v-show="!singleBtn" class="__btn __btn_all_in __pointer" 
                      :class="{'unuse': btnUnuse }"
@@ -78,7 +79,7 @@ export default {
             this.rightBtnClick && this.rightBtnClick();
         },
         _leftBtnClick() {
-            if (this.btnUnuse) {
+            if (this.singleBtn && this.btnUnuse) {
                 return;
             }
             this.leftBtnClick && this.leftBtnClick();

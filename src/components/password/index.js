@@ -16,7 +16,9 @@ export function pwdConfirm ({
     title, 
     cancel = () => {},
     submit = () => {},
-    content = ''
+    content = '',
+    cancelTxt,
+    submitTxt
 }) {
     let _close = (cb) => {
         try {
@@ -38,6 +40,8 @@ export function pwdConfirm ({
         submit && submit();
     };
     instance.content = content || '';
+    instance.cancelTxt = cancelTxt || '';
+    instance.submitTxt = submitTxt || '';
     
     document.body.appendChild(instance.$el);
     return true;

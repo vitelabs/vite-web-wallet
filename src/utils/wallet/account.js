@@ -47,7 +47,9 @@ class Account {
         title,
         submit = () => {},
         cancel = () => {},
-        content = ''
+        content = '',
+        submitTxt = '',
+        cancelTxt = ''
     }) {
         if (this.isHoldPWD) {
             submit && submit();
@@ -55,7 +57,7 @@ class Account {
         }
 
         pwdConfirm({
-            showMask, title, submit, content, cancel
+            showMask, title, submit, content, cancel, cancelTxt, submitTxt
         });
         return false;
     }

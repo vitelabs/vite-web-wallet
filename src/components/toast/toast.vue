@@ -59,7 +59,7 @@ export default {
     max-width: 100%;
     text-align: center;
     padding: 30px;
-    z-index: 100;
+    z-index: 1000;
     word-break: keep-all;
     font-family: $font-bold;
     font-size: 16px;

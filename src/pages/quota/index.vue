@@ -3,14 +3,14 @@
         <loading v-if="loadingToken" class="loading"></loading>
 
         <div v-if="showConfirmType" class="gray-wrapper">
-            <confirm v-if="showConfirmType === 'submit' || showConfirmType === 'cancel'" 
-                     :title="$t(`quota.confirm.${ showConfirmType }.title`)" :closeIcon="false"
-                     :leftBtnTxt="$t(`quota.confirm.${ showConfirmType }.leftBtn`)" :leftBtnClick="closeConfirm"
-                     :rightBtnTxt="$t(`quota.confirm.${ showConfirmType }.rightBtn`)" 
+            <confirm v-if="showConfirmType === 'cancel'" 
+                     :title="$t(`quota.confirm.cancel.title`)" :closeIcon="false"
+                     :leftBtnTxt="$t(`quota.confirm.cancel.leftBtn`)" :leftBtnClick="closeConfirm"
+                     :rightBtnTxt="$t(`quota.confirm.cancel.rightBtn`)" 
                      :rightBtnClick="submit" :btnUnuse="!!cancelUnuse">
-                {{ $t(`quota.confirm.${ showConfirmType }.describe`, {amount: activeAmountLimit}) }}
+                {{ $t(`quota.confirm.cancel.describe`, { amount: activeAmountLimit }) }}
                 <div class="cancel-amount" v-show="amountErr">{{ amountErr }}</div>
-                <div v-show="showConfirmType === 'cancel'" class="cancel-input">
+                <div class="cancel-input">
                     <input type="text" v-model="cancelAmount"
                            :placeholder="$t('quota.cancelAmount')" />
                 </div>
@@ -124,42 +124,40 @@ export default {
         },
 
         showConfirm(type, activeAmountLimit) {
-            this.showConfirmType = type || 'submit';
+            this.showConfirmType = type;
             if (!activeAmountLimit) {
                 return;
             }
             this.activeAmountLimit = activeAmountLimit;
         },
         closeConfirm() {
-            if (this.showConfirmType === 'cancel') {
-                this.stopWatch = true;
-                clearTimeout(amountTimeout);
-                this.cancelAmount = '';
-                this.amountErr = '';
-                Vue.nextTick(() => {
-                    this.stopWatch = false;
-                });
-            }
+            this.stopWatch = true;
+            clearTimeout(amountTimeout);
+            this.cancelAmount = '';
+            this.amountErr = '';
+            Vue.nextTick(() => {
+                this.stopWatch = false;
+            });
             this.showConfirmType = '';
         },
         submit() {
-            if (this.showConfirmType === 'submit') {
-                this.closeConfirm();
-                let submitPledgeEle = this.$refs.submitPledge;
-                submitPledgeEle && submitPledgeEle._sendPledgeTx();
-                return;
-            }
-
             this._testAmount();
             if (this.amountErr) {
                 return;
             }
-            let txListEle = this.$refs.txList;
-            if (!txListEle) {
-                return;
-            }
-            txListEle._sendCancelPledgeTx(this.cancelAmount);
+
+            let amount = this.cancelAmount;
             this.closeConfirm();
+
+            this.activeAccount.initPwd({
+                submit: () => {
+                    let txListEle = this.$refs.txList;
+                    if (!txListEle) {
+                        return;
+                    }
+                    txListEle._sendCancelPledgeTx(amount);
+                }
+            });
         },
         stopPow(cb) {
             let powProcessEle = this.$refs.powProcess;
