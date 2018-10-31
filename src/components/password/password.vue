@@ -1,6 +1,6 @@
 <template>
-    <confirm :title="title"
-             :leftBtnTxt="$t('btn.cancel')" :rightBtnTxt="$t('btn.submit')">
+    <confirm :title="title" :leftBtnTxt="$t('btn.cancel')" :rightBtnTxt="$t('btn.submit')"
+             :leftBtnClick="_cancel"  :rightBtnClick="_submit">
         <div class="pass-input">
             <input v-model="password" type="text"/>
         </div>
@@ -24,6 +24,14 @@ export default {
             default: () => {
                 return this.$t('pwdConfirm.title');
             }
+        },
+        cancel: {
+            type: Function,
+            default: () => {}
+        },
+        submit: {
+            type: Function,
+            default: () => {}
         }
     },
     mounted() {
