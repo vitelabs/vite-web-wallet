@@ -1,5 +1,5 @@
 <template>
-    <div :class="{ 'confirm-gray-wrapper': showMask }">
+    <div class="confirm-container" :class="{ 'gray': showMask }">
         <div class="confirm-wrapper">
             <div class="title">
                 {{ title }}
@@ -73,8 +73,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
-
-.confirm-gray-wrapper {
+.confirm-container {
     position: fixed;
     top: 0;
     bottom: 0;
@@ -84,9 +83,12 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: rgba(0, 0, 0, 0.6);
     z-index: 100;
+    &.gray {
+        background: rgba(0, 0, 0, 0.6);
+    }
 }
+
 .confirm-wrapper {
     width: 90%;
     max-width: 460px;

@@ -37,26 +37,18 @@
                     </div>
                 </div>
 
-                <div class="row">
+                <!-- <div class="row">
                     <div class="row-t">{{ $t('accDetail.password') }}</div>
                     <div class="row-content">
                         <input v-model="password" type="password" :placeholder="$t('create.input')"  />
                     </div>
-                </div>
+                </div> -->
 
                 <div class="btn __pointer" :class="{
                     'unuse': loading || amountErr || !isValidAddress || messageErr
                 }" @click="validTrans">{{ $t('accDetail.transfer') }}</div>
             </div>
         </div>
-
-        <!-- Quota confirm -->
-        <confirm v-show="isShowQuota" :title=" $t('accDetail.quota.title') " 
-                 :closeIcon="true" :close="closeQuota"
-                 :leftBtnTxt="$t('accDetail.quota.left')" :leftBtnClick="startPow"
-                 :rightBtnTxt="$t('accDetail.quota.right')" :rightBtnClick="gotoQuota">
-            {{ $t('accDetail.quota.describe') }}
-        </confirm>
 
         <pow-process ref="powProcess" v-if="isShowPow" :isShowCancel="true" :cancel="stopPow"></pow-process>
     </div>
@@ -113,7 +105,6 @@ export default {
             messageErr: '',
 
             isShowTrans: true,
-            isShowQuota: false,
             isShowPow: false,
             loading: false,
             powing: false
@@ -162,26 +153,39 @@ export default {
     methods: {
         showQuota() {
             this.isShowTrans = false;
-            this.isShowQuota = true;
-        },
-        closeQuota() {
-            this.isShowQuota = false;
-            this.isShowTrans = true;
+            this.$confirm({
+                showMask: false,
+                title: this.$t('accDetail.quota.title'),
+                closeBtn: {
+                    show: true,
+                    click: () => {
+                        this.isShowTrans = true;
+                    }
+                },
+                leftBtn: {
+                    text: this.$t('accDetail.quota.left'),
+                    click: () => {
+                        this.startPow();
+                    }
+                },
+                rightBtn: {
+                    text: this.$t('accDetail.quota.right'),
+                    click: () => {
+                        this.$router.push({
+                            name: 'quota'
+                        });
+                    }
+                },
+                content: this.$t('accDetail.quota.describe')
+            });
         },
         showPow() {
             this.isShowPow = true;
-            this.isShowQuota = false;
         },
         stopPow() {
             this.isShowPow = false;
             this.loading = false;
             this.closeTrans();
-        },
-
-        gotoQuota() {
-            this.$router.push({
-                name: 'quota'
-            });
         },
 
         testAmount() {
@@ -219,20 +223,21 @@ export default {
             if (!this.testAmount() || !this.testMessage()) {
                 return;
             }
-            if (!this.password) {
-                this.$toast(this.$t('transList.valid.pswd'));
-                return;            
-            }
+            // if (!this.password) {
+            //     this.$toast(this.$t('transList.valid.pswd'));
+            //     return;            
+            // }
 
-            if (!viteWallet.Net.getNetStatus()) {
-                this.$toast(this.$t('nav.noNet'));
-                return;
-            }
-
+            
             this.transfer();
         },
 
         transfer() {
+            if (!viteWallet.Net.getNetStatus()) {
+                this.$toast(this.$t('nav.noNet'));
+                return;
+            }
+            
             this.loading = true;
             let amount =  viteWallet.BigNumber.toMin(this.amount, this.token.decimals);
 
