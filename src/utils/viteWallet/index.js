@@ -1,6 +1,5 @@
 import ViteJS from '@vitelabs/vite.js';
 
-import wallet from './wallet/index';
 import net from './net';
 import ledger from './ledger';
 import bignumber from './bignumber';
@@ -17,7 +16,6 @@ let WS_RPC = new ViteJS.WS_RPC({
 window.$ViteJS = new ViteJS(WS_RPC);
 
 window.viteWallet = {
-    Wallet: new wallet(),
     Net: new net(),
     Ledger: new ledger(),
     BigNumber: new bignumber(),

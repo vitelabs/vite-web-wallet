@@ -53,7 +53,7 @@ export default {
             let file = files[0];
             let reader = new FileReader();
             reader.onload = (e) => {
-                let result = viteWallet.Wallet.importKeystore(e.target.result);
+                let result = this.$wallet.importKeystore(e.target.result);
 
                 if (!result) {
                     this.errMsg = 'dragDrop.err1';

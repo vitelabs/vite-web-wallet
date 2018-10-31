@@ -29,7 +29,7 @@ import Vue from 'vue';
 
 export default {
     data() {
-        let activeAccount = viteWallet.Wallet.getActiveAccount();
+        let activeAccount = this.$wallet.getActiveAccount();
 
         return {
             activeAccount,
@@ -61,7 +61,7 @@ export default {
         setDefault(addr) {
             let res = this.activeAccount.setDefaultAddr(addr);
             if (!res) {
-                this.$toast(this.$t('transList.valid.err'));
+                this.$toast(this.$t('hint.err'));
                 return;
             }
             this.defaultAddr = this.activeAccount.getDefaultAddr();

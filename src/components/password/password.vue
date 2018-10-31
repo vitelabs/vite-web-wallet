@@ -1,10 +1,12 @@
 <template>
-    <confirm :title="title" :leftBtnTxt="$t('btn.cancel')" :rightBtnTxt="$t('btn.submit')"
-             :leftBtnClick="_cancel"  :rightBtnClick="_submit">
+    <confirm :title="title" :content="content"
+             :leftBtnTxt="$t('btn.cancel')" :rightBtnTxt="$t('btn.submit')"
+             :leftBtnClick="cancel"  :rightBtnClick="_submit">
         <div class="pass-input">
             <input v-model="password" type="text"/>
         </div>
-        <div @click="setting">
+        <div @click="toggleHold">
+            <span v-show="isPwdHold">hold</span>
             {{ $t('pwdConfirm.conf') }}
         </div>
     </confirm>
@@ -32,21 +34,46 @@ export default {
         submit: {
             type: Function,
             default: () => {}
+        },
+        content: {
+            type: String,
+            default: ''
         }
     },
     mounted() {
-        let pwdConf = localStorage.getItem('pwdConf');
-        console.log(pwdConf);
-        // pass Config
+
     },
     data() {
         return {
-            password: ''
+            password: '',
+            isPwdHold: false
         };
     },
     methods: {
-        setting() {
-            console.log('setting');
+        toggleHold() {
+            this.isPwdHold = !this.isPwdHold;
+        },
+        _submit() {
+            let password = this.$trim(this.password);
+            if (!password) {
+                this.$toast('hint.pwEmpty');
+                return false;
+            }
+
+            let activeAccount = this.$wallet.getActiveAccount();
+            if (!activeAccount) {
+                this.$toast( this.$t('hint.err') );
+                return false;
+            }
+
+            let result = activeAccount.verify(password);
+            if (!result) {
+                this.$toast( this.$t('hint.err') );
+                return false;
+            }
+
+            this.isPwdHold && this.$wallet.holdPWD(password);
+            this.submit && this.submit();
         }
     }
 };

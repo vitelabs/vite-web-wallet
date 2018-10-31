@@ -25,7 +25,7 @@ export default {
         }
     },
     data() {
-        let list = viteWallet.Wallet.getList() || [];
+        let list = this.$wallet.getList() || [];
         list.forEach(acc => {
             acc.showAddr = ellipsisAddr(acc.addr);
         });
@@ -35,7 +35,7 @@ export default {
     },
     methods: {
         addAcc() {
-            viteWallet.Wallet.clearActiveAccount();
+            this.$wallet.clearActiveAccount();
             this.$router.push({
                 name: 'createAccount'
             });
