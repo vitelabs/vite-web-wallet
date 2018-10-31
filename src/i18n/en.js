@@ -198,7 +198,7 @@ module.exports = {
         },
         list: {
             title: 'My Staking List',
-            total: 'Staked {amount} VITE in total',
+            total: 'Staking {amount} VITE in total',
             beneficialAddr: 'Profit Address',
             amount: 'Amount',
             withdrawHeight: 'Matured snapshot height',
