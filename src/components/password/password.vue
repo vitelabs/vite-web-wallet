@@ -4,7 +4,7 @@
              :leftBtnTxt="cancelTxt || $t('btn.cancel')" :rightBtnTxt="submitTxt || $t('btn.submit')"
              :leftBtnClick="_cancle"  :rightBtnClick="_submit">
         <div class="pass-input">
-            <input v-model="password" :placeholder="$t('pwdConfirm.placeholder')" type="text"/>
+            <input v-model="password" :placeholder="$t('pwdConfirm.placeholder')" type="password"/>
         </div>
         <div class="hold-pwd" @click="toggleHold">
             <span v-show="isPwdHold">hold</span>
@@ -16,7 +16,7 @@
 <script>
 import confirm from 'components/confirm.vue';
 
-const holdTime = 10000;
+const holdTime = 5 * 60 * 1000;
 
 export default {
     components: {
