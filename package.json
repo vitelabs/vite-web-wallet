@@ -52,7 +52,7 @@
         "webpack-merge": "^4.1.3"
     },
     "dependencies": {
-        "@vitelabs/vite.js": "0.0.1-alpha2",
+        "@vitelabs/vite.js": "0.0.1-alpha3",
         "axios": "^0.18.0",
         "bignumber.js": "^7.2.1",
         "buffer": "^5.2.1",
