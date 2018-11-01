@@ -98,6 +98,9 @@ export default {
     computed: {
         unTrans() {
             return !!(!this.amount || !this.inAddress || this.loading || this.amountErr || !this.isValidAddress || this.messageErr);
+        },
+        tokenBalList() {
+            return this.$store.state.account.balance.balanceInfos;
         }
     },
     watch: {
@@ -180,10 +183,26 @@ export default {
 
         testAmount() {
             let result = this.$validAmount(this.amount);
-            if (!result || viteWallet.BigNumber.isEqual(this.amount, 0)) {
+            
+            if (!result) {
                 this.amountErr = this.$t('transList.valid.amt');
                 return false;
             }
+
+            if (viteWallet.BigNumber.isEqual(this.amount, 0)) {
+                this.amountErr = this.$t('accDetail.hint.amount');
+                return false;
+            }
+
+            if (this.tokenBalList && this.tokenBalList[this.token.id]) {
+                let balance = this.tokenBalList[this.token.id].totalAmount;
+                let amount = viteWallet.BigNumber.toMin(this.amount, this.token.decimals);
+                if (viteWallet.BigNumber.compared(balance, amount) < 0) {
+                    this.amountErr = this.$t('transList.valid.bal');
+                    return false;
+                }
+            }
+            
             this.amountErr = '';
             return true;
         },
@@ -270,10 +289,7 @@ export default {
                 let message  = err && err.message ? err.message : 
                     err.error ? err.error.message || '' : '';
 
-                if (code === -34001) {
-                    this.$toast(this.$t('transList.valid.pswd'));
-                    return;
-                } else if (code === -35001) {
+                if (code === -35001) {
                     this.$toast(this.$t('transList.valid.bal'));
                     this.amountErr = this.$t('transList.valid.bal');
                     return;

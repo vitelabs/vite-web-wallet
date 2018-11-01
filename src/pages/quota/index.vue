@@ -25,7 +25,7 @@
             <div class="content">
                 <my-quota class="my-quota _content_border"></my-quota>
                 <pledge-tx class="pledge-tx _content_border"
-                           :sendPledgeTx="sendPledgeTx"></pledge-tx>
+                           :sendPledgeTx="sendPledgeTx" :tokenInfo="tokenInfo"></pledge-tx>
             </div>
 
             <list ref="txList" :sendPledgeTx="sendPledgeTx" 
