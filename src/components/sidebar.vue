@@ -18,19 +18,26 @@
             <img v-show="active !== 'quota'" :src="quota" />
             <img v-show="active === 'quota'" :src="quotaActive"  />
         </router-link>
+
+        <router-link class="__pointer icon" :class="{
+            'active': active === 'SBP'
+        }" :to="{ name: 'SBP' }">
+            <img v-show="active !== 'SBP'" :src="SBP" />
+            <img v-show="active === 'SBP'" :src="SBPActive"  />
+        </router-link>
+
+        <router-link class="__pointer icon" :class="{
+            'active': active === 'vote'
+        }" :to="{ name: 'vote' }">
+            <img v-show="active !== 'vote'" :src="vote" />
+            <img v-show="active === 'vote'" :src="voteActive"  />
+        </router-link>
         
         <router-link class="__pointer icon" :class="{
             'active': active === 'transList'
         }" :to="{ name: 'transList' }">
             <img v-show="active !== 'transList'" :src="send" />
             <img v-show="active === 'transList'" :src="sendActive"  />
-        </router-link>
-
-        <router-link class="__pointer icon" :class="{
-            'active': active.indexOf('SBP') !== -1
-        }" :to="{ name: 'SBPRegistered' }">
-            <img v-show="active.indexOf('SBP') === -1" :src="quota" />
-            <img v-show="active.indexOf('SBP') !== -1" :src="quotaActive"  />
         </router-link>
 
         <div class="_bottom">
@@ -64,6 +71,10 @@ import logoutDefault from 'assets/imgs/logout_default.svg';
 import logoutActive from 'assets/imgs/logout_pressed.svg';
 import quota from 'assets/imgs/quota_default.svg';
 import quotaActive from 'assets/imgs/quota_pressed.svg';
+import SBP from 'assets/imgs/SBP_default.svg';
+import SBPActive from 'assets/imgs/SBP_active.svg';
+import vote from 'assets/imgs/vote_default.svg';
+import voteActive from 'assets/imgs/vote_active.svg';
 
 export default {
     components: {
@@ -90,7 +101,11 @@ export default {
             logoutDefault,
             logoutActive,
             quota,
-            quotaActive
+            quotaActive,
+            SBP,
+            SBPActive,
+            vote,
+            voteActive
         };
     },
     methods: {
