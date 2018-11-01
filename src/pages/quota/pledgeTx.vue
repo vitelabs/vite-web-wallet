@@ -48,6 +48,12 @@ let toAddrTimeout = null;
 
 export default {
     props: {
+        tokenInfo: {
+            type: Object,
+            default: ()=>{
+                return {};
+            }
+        },
         sendPledgeTx: {
             type: Function,
             default: () => {}
@@ -73,6 +79,9 @@ export default {
     computed: {
         btnUnuse() {
             return this.loading || !this.isValidAddress || this.amountErr || !this.amount || !this.toAddr;
+        },
+        tokenBalList() {
+            return this.$store.state.account.balance.balanceInfos;
         }
     },
     watch: {
@@ -110,12 +119,24 @@ export default {
                 this.amountErr = this.$t('transList.valid.amt');
                 return false;
             }
-            if (viteWallet.BigNumber.compared(this.amount, 10) >= 0) {
-                this.amountErr = '';
-                return true;
+
+            if (viteWallet.BigNumber.compared(this.amount, 10) < 0) {
+                this.amountErr = this.$t('quota.limitAmt');
+                return false;
             }
-            this.amountErr = this.$t('quota.limitAmt');
-            return false;
+
+            if (this.tokenInfo && this.tokenInfo.tokenId && 
+                this.tokenBalList && this.tokenBalList[this.tokenInfo.tokenId]) {
+                let balance = this.tokenBalList[this.tokenInfo.tokenId].totalAmount;
+                let amount = viteWallet.BigNumber.toMin(this.amount, this.tokenInfo.decimals);
+                if (viteWallet.BigNumber.compared(balance, amount) < 0) {
+                    this.amountErr = this.$t('transList.valid.bal');
+                    return false;
+                }
+            }
+
+            this.amountErr = '';
+            return true;
         },
         testAddr() {
             if (!this.toAddr) {
