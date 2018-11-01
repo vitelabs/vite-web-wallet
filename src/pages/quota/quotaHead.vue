@@ -1,6 +1,6 @@
 <template>
     <div class="quota-head-wrapper">
-        <span>{{ $t('quota.title') }}</span>
+        <span class="title">{{ $t('quota.title') }}</span>
         <div @click="showHelp" class="qa __pointer">
             <img src="../../assets/imgs/help.svg" />{{ $t('quota.Q1') }}
         </div>
@@ -22,7 +22,6 @@ export default {
 @import "~assets/scss/vars.scss";
 
 .quota-head-wrapper {
-    padding-bottom: 40px;
     font-size: 24px;
     color: #1D2024;
     .title {

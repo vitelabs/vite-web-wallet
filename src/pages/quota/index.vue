@@ -299,7 +299,6 @@ export default {
     flex-wrap: wrap;
     margin-bottom: 40px;
     ._content_border {
-        padding: 30px;
         background: #FFFFFF;
         border: 1px solid #F6F5F5;
         box-shadow: 0 2px 48px 1px rgba(176,192,237,0.42);
@@ -309,11 +308,13 @@ export default {
         box-sizing: border-box;
         min-width: 170px;
         margin-right: 40px;
+        padding: 30px;
     }
     .pledge-tx {
         flex: 1;
         max-width: 100%;
         box-sizing: border-box;
+        padding: 0 30px 30px 30px;
     }
 }
 
@@ -331,7 +332,7 @@ export default {
     z-index: 100;
 }
 
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 550px) {
     .content ._content_border {
         padding: 15px;
     }
@@ -347,7 +348,6 @@ export default {
     .content .my-quota {
         margin-right: 0;
         width: 100%;
-        margin-bottom: 20px;
     }
 }
 </style>

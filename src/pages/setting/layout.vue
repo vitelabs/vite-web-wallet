@@ -108,9 +108,18 @@ export default {
     }
 }
 
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 550px) {
     .setting-wrapper {
         padding: 15px;
+    }
+    .setting-wrapper .content-wrapper {
+        left: 15px;
+        right: 15px;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .setting-wrapper {
         background: #fff;
     }
     .setting-wrapper .content-wrapper {
