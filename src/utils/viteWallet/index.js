@@ -10,7 +10,7 @@ import pledge from './pledge';
 process.env.NODE_ENV !== 'production' && console.log(process.env.goViteServer);
 
 let WS_RPC = new ViteJS.WS_RPC({
-    // url: process.env.goViteServer,
+    url: process.env.goViteServer,
     timeout: 60000
 });
 WS_RPC.on('connect', (m) => {
