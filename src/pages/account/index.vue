@@ -97,7 +97,7 @@ export default {
     flex-wrap: wrap;
 }
 
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 550px) {
     .account-wrapper {
         padding: 0 15px;
     }

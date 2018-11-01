@@ -5,7 +5,7 @@
         <div class="list">
             <tabel-list :headList="[{
                 class: 'addr __pointer',
-                text: $t('quota.list.beneficialAddr'),
+                text: $t('quota.beneficialAddr'),
                 cell: 'addr'
             },{
                 class: 'amount',
