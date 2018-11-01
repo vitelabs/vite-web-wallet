@@ -194,6 +194,8 @@ export default {
 
 .pledge-tx-wrapper {
     position: relative;
+    margin-top: 40px;
+
     .loading {
         width: 60px;
         height: 60px;
@@ -204,17 +206,11 @@ export default {
         display: flex;
         justify-content: space-between;
         flex-wrap: wrap;
-        &:last-child {
-            margin-top: 30px;
-        }
         .item {
             display: inline-block;
             width: 49%;
             min-width: 470px;
-            margin-top: 0;
-            &:first-child {
-                margin-right: 10px;
-            }
+            margin-top: 30px;
         }
         .title {
             font-family: $font-bold;
@@ -282,13 +278,13 @@ export default {
 @media only screen and (max-width: 1419px) {
     .pledge-tx-wrapper .row .item {
         margin-top: 20px;
-        &:first-child {
-            margin-top: 0;
-        }
     }
 }
 
 @media only screen and (max-width: 750px) {
+    .pledge-tx-wrapper {
+        margin-top: 20px;
+    }
     .pledge-tx-wrapper .row .item {
         width: 100%;
         min-width: 0;

@@ -165,8 +165,8 @@ module.exports = {
         amountPlaceholder: 'Please input staking amount, minimum 10 VITE',
         addrPlaceholder: 'Please input quota receiving address',
         cancelAmount: 'Please input withdraw amount',
-        pledgeSuccess: 'Staking Successful',
-        pledgeFail: 'Staking Failed',
+        pledgeSuccess: 'Staking Successful',   // [TODO]
+        pledgeFail: 'Staking Failed',   // [TODO]
         canclePledgeSuccess: 'Cancel Successful',   // [TODO]
         canclePledgeFail: 'Cancel Failed',   // [TODO]
         limitAmt: 'Staking amount should not be less than 10.',
@@ -199,7 +199,6 @@ module.exports = {
         list: {
             title: 'My Staking List',
             total: 'Staking {amount} VITE in total',
-            beneficialAddr: 'Profit Address',
             amount: 'Amount',
             withdrawHeight: 'Matured snapshot height',
             withdrawTime: 'Expected due date',

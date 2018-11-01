@@ -206,12 +206,15 @@ export default {
     border-top: 1px solid #f3f6f9;
 }
 
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 550px) {
     .trans-list-wrapper {
         padding: 15px;
-        .title {
-            margin-bottom: 15px;
-        }
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .trans-list-wrapper .title {
+        margin-bottom: 15px;
     }
     .big-trans {
         display: none;
