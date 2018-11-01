@@ -1,5 +1,5 @@
-window.Promise = require('es6-promise').Promise;
-console.log(Promise);
+require('es6-promise').polyfill();
+
 import 'utils/performance';
 import './assets/scss/mixins.scss';
 
