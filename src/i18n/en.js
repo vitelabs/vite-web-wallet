@@ -155,7 +155,7 @@ module.exports = {
         Q1: 'Quick understanding of quota',
         myQuota: 'My Quota',
         maxTxNum: 'Maximum number of Txs',
-        toAddr: 'Profit address',
+        beneficialAddr: 'Profit Address',
         fromAddr: 'Deduction address',
         amount: 'Staking amount',
         time: 'Staking frozen duration',
@@ -167,8 +167,8 @@ module.exports = {
         cancelAmount: 'Please input withdraw amount',
         pledgeSuccess: 'Staking Successful',
         pledgeFail: 'Staking Failed',
-        canclePledgeSuccess: 'Cancel Successful',
-        canclePledgeFail: 'Cancel Failed',
+        canclePledgeSuccess: 'Cancel Successful',   // [TODO]
+        canclePledgeFail: 'Cancel Failed',   // [TODO]
         limitAmt: 'Staking amount should not be less than 10.',
         maturity: 'Staking has expired!',
         maxAmt: 'Receiving amount between 0~{amount}”, the current maximum amount is {amount}',

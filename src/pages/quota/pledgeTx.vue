@@ -21,7 +21,7 @@
         <div class="row">
             <div class="item">
                 <div class="title">
-                    {{ $t('quota.toAddr') }}
+                    {{ $t('quota.beneficialAddr') }}
                     <span v-show="!isValidAddress" class="err">{{ $t('transList.valid.addr') }}</span>
                 </div>
                 <div class="input-item all __ellipsis">
