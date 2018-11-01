@@ -240,6 +240,7 @@ export default {
             &.unuse {
                 background: #efefef;
                 color: #666;
+                cursor: not-allowed;
             }
         }
     }
