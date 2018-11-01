@@ -231,7 +231,8 @@ export default {
 </style>
 
 <style lang="scss">
-.tabel-list {
+.list-wrapper .list .tabel-list {
+    min-width: 1260px;
 }
 .beneficial-addr {
     font-size: 14px;

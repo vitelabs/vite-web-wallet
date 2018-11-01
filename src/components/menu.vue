@@ -127,7 +127,7 @@ export default {
     overflow: hidden;
     transition: all 0.3s ease-in-out;
     &.show {
-        height: 300px;
+        height: 420px;
     }
     .item {
         margin-top: 0px;
