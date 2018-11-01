@@ -1,3 +1,5 @@
+window.Promise = Promise;
+
 import 'utils/performance';
 import './assets/scss/mixins.scss';
 
