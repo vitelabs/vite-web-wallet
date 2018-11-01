@@ -16,7 +16,7 @@ export default function(wallet) {
     Vue.mixin({
         beforeCreate: function() {
             this.$wallet = wallet;
-    
+            
             this.$onEnterKey = (cb) => {
                 window.document.onkeydown = e => {
                     e = e || window.event;
@@ -40,7 +40,7 @@ export default function(wallet) {
 
             this.$toast = toast;
             this.$confirm = confirm;
-            
+
             this.$statistics = statistics;
         },
         destroyed: function () {

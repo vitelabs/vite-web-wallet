@@ -112,7 +112,7 @@ export default {
     }
 }
 
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 550px) {
     .token-card {
         width: 100%;
         margin-bottom: 15px;
