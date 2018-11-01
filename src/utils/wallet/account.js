@@ -174,7 +174,7 @@ class Account {
 
         let addr = this.addrs[this.defaultInx].hexAddr;
         let privKey = this.addrs[this.defaultInx].privKey;
-        $ViteJS.Wallet.Account.autoReceiveTX(addr, privKey);
+        $ViteJS.Wallet.Account.autoReceiveTX(addr, privKey, process.env.powDifficulty);
     }
 
     lock() {
@@ -197,7 +197,7 @@ class Account {
 
         return $ViteJS.Vite.Ledger.getSendBlock({
             fromAddr, toAddr, tokenId, amount, message
-        }, pledgeType, true);
+        }, pledgeType, process.env.powDifficulty);
     }
 
     sendRawTx(block, privKey) {

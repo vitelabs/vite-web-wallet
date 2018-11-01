@@ -13,9 +13,8 @@ const STATIC_PATH = process.env.APP === 'true' ?
     path.join(__dirname, '../static');
 
 const goViteServer = {
-    production: '\'wss://test.vitewallet.com/ws\'',
+    production: '\'wss://testnet.vitewallet.com/ws\'',
     test: '\'wss://testnet.vitewallet.com/ws\'',
-    // dev: '\'ws://150.109.120.109:41420\''
     dev: '\'wss://testnet.vitewallet.com/ws\''
 };
 
@@ -27,6 +26,7 @@ let plugins = [
     }),
     new VueLoaderPlugin(),
     new webpack.DefinePlugin({
+        'process.env.powDifficulty': process.env.NODE_ENV !== 'production' ? '"65535"' : '"18446743798831644672"',
         'process.env.version': `"${packJson.version}"`,
         'process.env.NODE_ENV': `"${process.env.NODE_ENV}"`,
         'process.env.goViteServer': goViteServer[process.env.NODE_ENV || 'dev'],

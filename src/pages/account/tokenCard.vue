@@ -57,6 +57,8 @@ export default {
 </script>
 
 <style lang='scss' scoped>
+@import "~assets/scss/vars.scss";
+
 .token-card {
     box-sizing: border-box;
     position: relative;
@@ -77,11 +79,13 @@ export default {
     .tokenName {
         margin-left: 10px;
         font-size: 18px;
+        font-family: $font-bold;
     }
 }
 .body {
     padding: 0 30px 20px;
     .item {
+        font-family: $font-bold;
         height: 22px;
         line-height: 22px;
         display: flex;
