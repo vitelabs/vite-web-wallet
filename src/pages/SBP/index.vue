@@ -1,15 +1,7 @@
 <template>
     <div class="SBP-wrapper">
         <div class="SBP-header">
-            <router-link :to="{ name: 'SBPRegistered' }">
-                go to SBP registered
-            </router-link>
-            <router-link :to="{ name: 'SBPVote' }">
-                go to SBP vote
-            </router-link>
-            <div @click="showHelp">
-                {{ active === 'SBPRegistered' ? $t('SBP.help.registeredTitle') : $t('SBP.help.voteTitle') }}
-            </div>
+            <div @click="showHelp">{{ $t('SBP.help.title') }}</div>
         </div>
         <router-view/>
     </div>
@@ -26,22 +18,8 @@ export default {
     },
     methods: {
         showHelp() {
-            if (this.active === 'SBPRegistered') {
-                this.$confirm({
-                    title: this.$t('SBP.help.registeredTitle'), 
-                    singleBtn: true, 
-                    closeBtn: {
-                        show: false
-                    },
-                    leftBtn: {
-                        text: this.$t('btn.understand')
-                    }, 
-                    content: this.$t('SBP.help.registered')
-                });
-                return;
-            }
             this.$confirm({
-                title: this.$t('SBP.help.voteTitle'), 
+                title: this.$t('SBP.help.title'), 
                 singleBtn: true, 
                 closeBtn: {
                     show: false
@@ -49,8 +27,9 @@ export default {
                 leftBtn: {
                     text: this.$t('btn.understand')
                 }, 
-                content: this.$t('SBP.help.vote')
+                content: this.$t('SBP.help.text')
             });
+            return;
         }
     }
 };

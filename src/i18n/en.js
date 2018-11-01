@@ -237,9 +237,19 @@ module.exports = {
 
     // SBP
     SBP: {
+        title: '注册SBP',
         help: {
-            vote: '您可以参与投票选出共25个SBP（Snapshot Block Producer），官方SBP获得的出块奖励的70%会分发给那些将票投给官方SBP的地址。',
-            registered: 'SBP（Snapshot Block Producer）是打包快照块的节点，每一轮75秒时间内25个SBP轮流出块。SBP经过投票产生，打包一个快照块将获得0.9482 VITE。'
+            title: '了解SBP及成为SBP的收益',
+            text: 'SBP（Snapshot Block Producer）是打包快照块的节点，每一轮75秒时间内25个SBP轮流出块。SBP经过投票产生，打包一个快照块将获得0.9482 VITE。'
+        }
+    },
+
+    // vote
+    vote: {
+        title: '投票',
+        help: {
+            title: '了解投票与投票收益',
+            text: '您可以参与投票选出共25个SBP（Snapshot Block Producer），官方SBP获得的出块奖励的70%会分发给那些将票投给官方SBP的地址。', 
         }
     },
 

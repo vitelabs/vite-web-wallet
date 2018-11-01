@@ -11,14 +11,24 @@
                 {{ $t('nav.home') }}
             </div>
 
-            <div class="item" @click="go('transList')" 
-                 :class="{ 'active': active === 'transList'}">
-                {{ $t('transList.title') }}
-            </div>
-
             <div class="item" @click="go('quota')" 
                  :class="{ 'active': active === 'quota'}">
                 {{ $t('quota.title') }}
+            </div>
+
+            <div class="item" @click="go('SBP')" 
+                 :class="{ 'active': active === 'SBP'}">
+                {{ $t('SBP.title') }}
+            </div>
+
+            <div class="item" @click="go('vote')" 
+                 :class="{ 'active': active === 'vote'}">
+                {{ $t('vote.title') }}
+            </div>
+
+            <div class="item" @click="go('transList')" 
+                 :class="{ 'active': active === 'transList'}">
+                {{ $t('transList.title') }}
             </div>
 
             <div class="item" @click="go('setting')" 

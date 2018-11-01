@@ -19,7 +19,7 @@ import pageLayout from 'components/pageLayout.vue';
 import update from 'components/update.vue';
 import firstNotice from 'components/firstNotice.vue';
 
-const homeLayouts = ['account', 'transList', 'setting', 'quota', 'SBPRegistered', 'SBPVote'];
+const homeLayouts = ['account', 'transList', 'setting', 'quota', 'SBP', 'vote'];
 
 export default {
     components: {
