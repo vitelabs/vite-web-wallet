@@ -81,12 +81,19 @@ export default {
     },
     computed: {
         totalAmount() {
+            if (!this.tokenInfo) {
+                return 0;
+            }
             return viteWallet.BigNumber.toBasic(this.$store.state.pledge.totalPledgeAmount || 0, this.tokenInfo.decimals);
         },
         totalPage() {
             return this.$store.getters.totalPledgePage;
         },
         pledgeList() {
+            if (!this.tokenInfo) {
+                return [];
+            }
+
             let pledgeList = this.$store.getters.pledgeList;
             let currentHeight = viteWallet.Ledger.getHeight() || 0;
 
