@@ -137,9 +137,9 @@ module.exports = {
         },
         quota: {
             title: '配额不足',
-            describe: '配额不足，无法进行交易，您需要删除描述文字并运行PoW 或 抵押配额才可以继续转账',
+            describe: '配额不足，无法进行交易，您需要删除描述文字并运行PoW 或 抵押VITE才可以继续转账',
             left: '运行PoW',
-            right: '抵押配额'
+            right: '抵押VITE'
         },
         trans: {
             powErr: '运行PoW错误，请重新发起转账',

@@ -137,9 +137,10 @@ module.exports = {
         },
         quota: {
             title: 'Insufficient TPS Quota',
+            // [TODO]
             describe: 'Not available to send a transaction due to lack of quota, please delete descriptive text and run PoW, or gain quota by staking token to resume.',
             left: 'Run PoW',
-            right: ' Token staking for TPS quota'
+            right: 'Token staking for TPS quota'    // [TODO]
         },
         trans: {
             powErr: 'Error occurs when running PoW, please try again',
