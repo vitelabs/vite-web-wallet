@@ -249,6 +249,13 @@ module.exports = {
         help: {
             title: '了解投票与投票收益',
             text: '您可以参与投票选出共25个SBP（Snapshot Block Producer），官方SBP获得的出块奖励的70%会分发给那些将票投给官方SBP的地址。', 
+        },
+        section1:{
+            title:'我的投票'
+        },
+
+        section2:{
+            title:'候选节点投票'
         }
     },
 

@@ -8,12 +8,38 @@
     background: #FFF;
     box-shadow: 0 2px 15px 1px rgba(176, 192, 237, 0.17);
     border-radius: 8px;
+    .cell {
+        display: inline-block;
+        text-align: left;
+        font-size: 14px;
+        &:first-child {
+            padding-left: 22.5px;
+        }
+        &:last-child {
+            padding-right: 22.5px;
+        }
+    }
+    @media only screen and (max-width: 500px) {
+        .cell {
+            white-space: nowrap;
+            &:first-child {
+                float: left;
+                padding-left: 10px;
+            }
+            &:last-child {
+                float: right;
+                padding-right: 10px;
+            }
+        }
+    }
     .head {
         height: 48px;
         line-height: 48px;
         border-bottom: 1px solid #f3f6f9;
         font-family: $font-bold;
         color: #1D2024;
+        display: flex;
+        justify-content: space-between;
     }
     .content {
         position: relative;
@@ -21,6 +47,8 @@
         overflow-x: hidden;
         overflow-y: auto;
         .row {
+            display: flex;
+            justify-content: space-between;
             border-bottom: 1px solid #f3f6f9;
             color: #5E6875;
             height: 48px;
@@ -32,38 +60,13 @@
             &.active:hover {
                 background: rgba(88, 145, 255, .13);
             }
-            .cell {
-                display: inline-block;
-                text-align: left;
-                font-size: 14px;
-                &:first-child {
-                    padding-left: 22.5px;
-                }
-                &:last-child {
-                    padding-right: 22.5px;
-                }
-            }
-            @media only screen and (max-width: 500px) {
-                .cell {
-                    white-space: nowrap;
-                    &:first-child {
-                        float: left;
-                        padding-left: 10px;
-                    }
-                    &:last-child {
-                        float: right;
-                        padding-right: 10px;
-                    }
-                }
-            }
             .no-data {
                 height: 75px;
                 line-height: 75px;
                 text-align: center;
             }
         }
-    }
-    // .pagination {
+    } // .pagination {
     //     height: 75px;
     //     line-height: 75px;
     //     text-align: center;

@@ -123,6 +123,7 @@ module.exports = {
             i18n: path.join(SRC_PATH, '/i18n'),
             loopTime: path.join(SRC_PATH, '../config/loopTime'),
             version: path.join(SRC_PATH, '../config/version'),
+            mock:path.join(SRC_PATH, '../mock')
         },
         extensions: ['.js', '.scss', '.vue', '.json']
     }

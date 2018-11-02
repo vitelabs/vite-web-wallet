@@ -1,42 +1,64 @@
 <template>
-    <div class="sec-title-container"><span>{{$(title)}}</span><span class="help"><i class="vote-icon"></i><span @click="showHelp">{{ $t(helpTitle) }}</span></span></div>
+    <div class="sec-title-container"><span>{{$t(title)}}</span><span class="help"><i class="icon"></i><span @click="showHelp">{{ $t(helpTitle) }}</span></span></div>
 </template>
 <script>
 export default {
   props: {
     title: {
-      default: ()=>`${this.router.name}.title`
+      default: function() {
+        return `${this.$route.name}.title`;
+      }
     },
     helpTitle: {
-      default: ()=>`${this.router.name}.help.title`
+      default: function() {
+        return `${this.$route.name}.help.title`;
+      }
     },
     helpText: {
-      default: ()=>`${this.router.name}.help.text`
+      default: function() {
+        return `${this.$route.name}.help.text`;
+      }
     }
   },
   methods: {
     showHelp() {
-      this.$alert(this.helpText);
+      this.$confirm({
+        title: this.$t(this.helpTitle),
+        singleBtn: true,
+        closeBtn: {
+          show: false
+        },
+        leftBtn: {
+          text: this.$t("btn.understand")
+        },
+        content: this.$t(this.helpText)
+      });
     }
   }
 };
 </script>
 <style lang="scss" scoped>
+@import "~assets/scss/vars.scss";
 .sec-title-container {
   display: flex;
   justify-content: space-between;
-  margin: 40px;
-  font-family: PingFangSC-Semibold;
+  font-family: $font-bold;
   font-size: 24px;
   color: #1d2024;
   line-height: 32px;
   .help {
-    font-family: PingFang-SC-Regular;
+    align-items: center;
+    display: flex;
     font-size: 14px;
     color: #007aff;
-    letter-spacing: 0.35px;
     text-align: right;
     line-height: 20px;
+    cursor: pointer;
+    .icon {
+      background: url(~assets/imgs/detail.svg);
+      width: 20px;
+      height: 20px;
+    }
   }
 }
 </style>
