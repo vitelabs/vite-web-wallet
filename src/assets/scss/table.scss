@@ -4,7 +4,7 @@
     flex-direction: column;
     max-height: 100%;
     min-width: 1050px;
-    overflow: auto;
+    overflow: hidden;
     background: #FFF;
     box-shadow: 0 2px 15px 1px rgba(176, 192, 237, 0.17);
     border-radius: 8px;
@@ -33,6 +33,7 @@
         }
     }
     .head {
+        flex:none;
         height: 48px;
         line-height: 48px;
         border-bottom: 1px solid #f3f6f9;
@@ -43,7 +44,6 @@
     }
     .content {
         position: relative;
-        flex: 1;
         overflow-x: hidden;
         overflow-y: auto;
         .row {

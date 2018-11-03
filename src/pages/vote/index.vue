@@ -92,6 +92,8 @@ export default {
 <style lang="scss" scoped>
 @import '~assets/scss/table.scss';
 .vote {
+    height: 100%;
+    overflow: hidden;
     padding: 40px;
     box-sizing: border-box;
     display: flex;
@@ -110,11 +112,17 @@ export default {
         padding-left: 10px;
     }
     .vote_list {
-        margin: 40px auto;
+        overflow-x: auto;
+        overflow-y: hidden;
+        margin: 40px 0;
         margin-bottom: 29px;
     }
     .node_list {
         flex:1;
+        overflow-x: auto;
+        overflow-y: hidden;
+        display: flex;
+        flex-direction: column;
     }
     .cell {
         min-width: 150px;
