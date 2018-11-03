@@ -175,29 +175,6 @@ export default {
                 return;
             }
 
-            if (this.activeAccount.isHoldPWD) {
-                this.$confirm({
-                    showMask: true,
-                    title: this.$t('quota.confirm.submit.title'),
-                    closeBtn: {
-                        show: false
-                    },
-                    leftBtn: {
-                        text: this.$t('quota.confirm.submit.leftBtn')
-                    },
-                    rightBtn: {
-                        text: this.$t('quota.confirm.submit.rightBtn'),
-                        click: () => {
-                            this._sendPledgeTx();
-                        }
-                    },
-                    content: this.$t('quota.confirm.submit.describe', {
-                        amount: this.amount
-                    })
-                });
-                return;
-            }
-
             this.activeAccount.initPwd({
                 title: this.$t('quota.confirm.submit.title'),
                 submitTxt: this.$t('quota.confirm.submit.rightBtn'),
@@ -208,7 +185,7 @@ export default {
                 submit: () => {
                     this._sendPledgeTx();
                 }
-            });
+            }, true);
         },
         _sendPledgeTx() {
             this.$statistics.event('Vite_web_wallet', 'quota', 'ConfirmQuota');
