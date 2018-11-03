@@ -185,6 +185,7 @@ export default {
             }, type).then(() => {
                 cb && cb(true);
             }).catch((err) => {
+                console.log(err);
                 if (err && err.error && err.error.code && err.error.code === -35002) {
                     this.startPowTx({
                         toAddr, amount
@@ -199,11 +200,11 @@ export default {
         }, type, cb) {
             this.showConfirm('pow');
 
-            this.activeAccount.getPowTxBlock({
+            this.activeAccount.getBlock({
                 tokenId: this.tokenInfo.tokenId,
                 toAddr,
                 amount
-            }, type).then((block) => {
+            }, type, true).then((block) => {
                 this.stopPow(() => {
                     this.activeAccount.sendRawTx(block).then(() => {
                         cb && cb(true);

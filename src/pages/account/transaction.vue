@@ -319,34 +319,35 @@ export default {
             this.loading = true;
 
             let amount =  viteWallet.BigNumber.toMin(this.amount, this.token.decimals);
-            activeAccount.getPowTxBlock({
-                toAddr: this.inAddress,
-                tokenId: this.token.id,
-                amount,
-                message: this.message
-            }).then((block) => {
+
+            let sendRawTx = (block)=>{
                 if (!this.loading) {
                     return;
                 }
 
-                let sendRawTx = ()=>{
-                    if (!this.loading) {
+                activeAccount.sendRawTx(block).then(() => {
+                    this.transSuccess();
+                }).catch((err) => {
+                    console.warn('pow trans', err);
+                    let code  = err && err.error ? err.error.code || -1 : 
+                        err ? err.code : -1;
+                    if (code === -35002) {
+                        transError(this.$t('accDetail.trans.powTransErr'));
                         return;
                     }
+                    transError();
+                });
+            };
 
-                    activeAccount.sendRawTx(block).then(() => {
-                        this.transSuccess();
-                    }).catch((err) => {
-                        console.warn('pow trans', err);
-                        let code  = err && err.error ? err.error.code || -1 : 
-                            err ? err.code : -1;
-                        if (code === -35002) {
-                            transError(this.$t('accDetail.trans.powTransErr'));
-                            return;
-                        }
-                        transError();
-                    });
-                };
+            activeAccount.getBlock({
+                toAddr: this.inAddress,
+                tokenId: this.token.id,
+                amount,
+                message: this.message
+            }, 'sendBlock', true).then((block) => {
+                if (!this.loading) {
+                    return;
+                }
 
                 let powProcessEle = this.$refs.powProcess;
                 powProcessEle.gotoFinish();
@@ -354,12 +355,12 @@ export default {
                 if (powProcessEle) {
                     setTimeout(() => {
                         this.isShowPow = false;
-                        sendRawTx();
+                        sendRawTx(block);
                     }, 1000);
                     return;
                 }
                 sendRawTx();
-            }).catch((err) => {
+            }).catch(err => {
                 console.warn('pow', err);
                 transError( this.$t('accDetail.trans.powErr') );
             });

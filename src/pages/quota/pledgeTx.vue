@@ -175,6 +175,29 @@ export default {
                 return;
             }
 
+            if (this.activeAccount.isHoldPWD) {
+                this.$confirm({
+                    showMask: true,
+                    title: this.$t('quota.confirm.submit.title'),
+                    closeBtn: {
+                        show: false
+                    },
+                    leftBtn: {
+                        text: this.$t('quota.confirm.submit.leftBtn')
+                    },
+                    rightBtn: {
+                        text: this.$t('quota.confirm.submit.rightBtn'),
+                        click: () => {
+                            this._sendPledgeTx();
+                        }
+                    },
+                    content: this.$t('quota.confirm.submit.describe', {
+                        amount: this.amount
+                    })
+                });
+                return;
+            }
+
             this.activeAccount.initPwd({
                 title: this.$t('quota.confirm.submit.title'),
                 submitTxt: this.$t('quota.confirm.submit.rightBtn'),
@@ -194,7 +217,7 @@ export default {
             this.sendPledgeTx({
                 toAddr: this.toAddr,
                 amount: this.amount
-            }, 'get', (result) => {
+            }, 'pledgeBlock', (result) => {
                 this.loading = false;
                 if (!result) {
                     this.$toast(this.$t('quota.pledgeFail'));

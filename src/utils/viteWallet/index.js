@@ -6,6 +6,7 @@ import bignumber from './bignumber';
 import Types from './types';
 import TestToken from './testToken';
 import pledge from './pledge';
+import pow from './pow';
 
 process.env.NODE_ENV !== 'production' && console.log(process.env.goViteServer);
 
@@ -31,6 +32,7 @@ window.$ViteJS = new ViteJS(WS_RPC);
 window.viteWallet = {
     Net: new net(),
     Ledger: new ledger(),
+    Pow: new pow($ViteJS._currentProvider, ViteJS.utils),
     BigNumber: new bignumber(),
     Types: new Types(),
     TestToken: new TestToken($ViteJS._currentProvider),
