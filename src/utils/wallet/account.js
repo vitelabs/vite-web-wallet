@@ -176,7 +176,6 @@ class Account {
         let privKey = this.addrs[this.defaultInx].privKey;
 
         $ViteJS.Wallet.Account.autoReceiveTX(addr, privKey, (err, accountBlock, res, rej) => {
-            console.log(err);
             if (!err || !err.error || !err.error.code || err.error.code !== -35002) {
                 return rej(err);
             }
@@ -220,7 +219,7 @@ class Account {
     }, type = 'sendBlock', isPow = false) {
         return new Promise((res, rej) => {
             let accountAddress = this.addrs[this.defaultInx].hexAddr;
-            console.log(type);
+            
             return $ViteJS.Vite.Ledger[type]({
                 accountAddress, 
                 toAddress: toAddr, 
