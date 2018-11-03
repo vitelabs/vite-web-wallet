@@ -19,7 +19,7 @@ export function pwdConfirm ({
     content = '',
     cancelTxt,
     submitTxt
-}) {
+}, isShowPWD = true) {
     let _close = (cb) => {
         try {
             document.body.removeChild(instance.$el);
@@ -30,6 +30,7 @@ export function pwdConfirm ({
     };
     
     instance.showMask = showMask;
+    instance.isShowPWD = isShowPWD;
     instance.title = title;
     instance.cancel = ()=>{
         _close();

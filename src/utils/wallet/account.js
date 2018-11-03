@@ -50,15 +50,17 @@ class Account {
         content = '',
         submitTxt = '',
         cancelTxt = ''
-    }) {
-        if (this.isHoldPWD) {
+    }, isConfirm = false) {
+        let isHide = !isConfirm && this.isHoldPWD;
+
+        if (isHide) {
             submit && submit();
             return true;
         }
 
         pwdConfirm({
             showMask, title, submit, content, cancel, cancelTxt, submitTxt
-        });
+        }, !this.isHoldPWD);
         return false;
     }
 

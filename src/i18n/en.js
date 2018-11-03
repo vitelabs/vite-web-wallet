@@ -226,8 +226,7 @@ module.exports = {
             bal:'Insufficient balance',
             pswd:'Password error',
             amt:'Amount format error',
-            succ:'Transaction successful!',
-            err: 'Oops, error occurs'
+            succ:'Transaction successful!'
         },
         timestamp: 'Timestamp',
         tAddress: 'Address',
@@ -284,6 +283,7 @@ module.exports = {
         pwErr: 'Incorrect password!',
         acEmpty: 'Account cannot be empty!',
         pwEmpty: 'Password cannot be empty!',
-        noData: 'No Data'
+        noData: 'No Data',
+        err: 'Oops, error occurs'
     }
 };

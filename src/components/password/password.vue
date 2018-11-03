@@ -3,10 +3,10 @@
              :content="content" :showMask="showMask"
              :leftBtnTxt="cancelTxt || $t('btn.cancel')" :rightBtnTxt="submitTxt || $t('btn.submit')"
              :leftBtnClick="_cancle"  :rightBtnClick="_submit">
-        <div class="pass-input">
+        <div v-show="isShowPWD" class="pass-input">
             <input v-model="password" :placeholder="$t('pwdConfirm.placeholder')" type="password"/>
         </div>
-        <div class="hold-pwd" @click="toggleHold">
+        <div v-show="isShowPWD" class="hold-pwd" @click="toggleHold">
             <span v-show="isPwdHold">hold</span>
             {{ $t('pwdConfirm.conf') }}
         </div>
@@ -50,6 +50,10 @@ export default {
         cancelTxt: {
             type: String,
             default: ''
+        },
+        isShowPWD: {
+            type: Boolean,
+            default: true
         }
     },
     data() {
@@ -64,13 +68,23 @@ export default {
             this.isPwdHold = false;
         },
         toggleHold() {
+            if (!this.isShowPWD) {
+                return;
+            }
             this.isPwdHold = !this.isPwdHold;
         },
+
         _cancle() {
             this.clear();
             this.cancel && this.cancel();
         },
         _submit() {
+            if (!this.isShowPWD) {
+                this.clear();
+                this.submit && this.submit();
+                return;
+            }
+
             let password = this.$trim(this.password);
             if (!password) {
                 this.$toast( this.$t('hint.pwEmpty') );
