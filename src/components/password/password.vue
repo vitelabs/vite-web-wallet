@@ -114,8 +114,16 @@ export default {
 <style lang="scss" scoped>
 .pass-input {
     width: 100%;
+    background: #FFFFFF;
+    border: 1px solid #D4DEE7;
+    border-radius: 2px;
+    height: 40px;
+    line-height: 40px;
+    box-sizing: border-box;
+    padding: 0 15px;
     input {
         width: 100%;
+        font-size: 14px;
     }
 }
 </style>

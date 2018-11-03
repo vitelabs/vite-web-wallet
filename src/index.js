@@ -4,6 +4,7 @@ import 'utils/performance';
 import './assets/scss/mixins.scss';
 
 import Vue from 'vue';
+Vue.config.devtools = true;
 import VueRouter from 'vue-router';
 import VueI18n from 'vue-i18n';
 

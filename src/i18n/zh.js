@@ -11,7 +11,6 @@ module.exports = {
         text3: '如果使用了从助记词恢复地址的方式，请保证助记词绝对正确，如果有细微的不同都可能无法恢复您的地址。',
         text4: '当前版本钱包为预览版，您获得的VITE测试代币仅用于测试，无任何实际价值，同时官方会不定期对测试代币进行清零。'
     },
-
     test: {
         t: '预览版',
         txt1: 'Vite的Web版钱包是轻节点钱包。',
@@ -250,6 +249,13 @@ module.exports = {
         help: {
             title: '了解投票与投票收益',
             text: '您可以参与投票选出共25个SBP（Snapshot Block Producer），官方SBP获得的出块奖励的70%会分发给那些将票投给官方SBP的地址。', 
+        },
+        section1:{
+            title:'我的投票'
+        },
+
+        section2:{
+            title:'候选节点投票'
         }
     },
 
