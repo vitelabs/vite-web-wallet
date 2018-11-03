@@ -20,7 +20,7 @@
                 </div>
             </div>
         </section>
-        <!-- <search v-model=""></search> -->
+        <search v-model="filterKey" class="filter"></search>
         <section class="node_list">
             <div class="title">{{$t('vote.section2.title')}}</div>
 
@@ -33,7 +33,7 @@
                         <div class="cell">{{v.name}}</div>
                         <div class="cell">{{v.addr}}</div>
                         <div class="cell">{{v.voteNum}}</div>
-                        <div class="cell" :class="v.voteStatus==='voting'?'unclickable':'clickable'"  @click="vote(v)">{{v.operate}}</div>
+                        <div class="cell" :class="v.voteStatus==='voting'?'unclickable':'clickable'" @click="vote(v)">{{v.operate}}</div>
                     </div>
                 </div>
             </div>
@@ -50,86 +50,104 @@ const nodeList = mockdata.nodeList;
 const voteList = mockdata.voteList;
 import secTitle from "components/secTitle";
 export default {
-  components: { secTitle, tooltips,search},
-  methods: {
-      cancelVote(v){
-
-      },
-      vote(v){
-
-      }
-  },
-  computed: {
-    voteList() {
-      return voteList.map(v => {
-        v.nodeStatusText = this.$t(
-          `vote.section1.nodeStatusMap.${v.nodeStatus}`
-        );
-        v.voteStatusText = this.$t(
-          `vote.section1.voteStatusMap.${v.voteStatus}`
-        );
-        v.operate = "撤销";
-        return v;
-      });
+    components: { secTitle, tooltips, search },
+    data() {
+        return {
+            filterKey: ""
+        }
     },
-    nodeList() {
-      return nodeList.map(v => {
-        v.operate = "投票";
-        return v;
-      });
+    methods: {
+        cancelVote(v) {
+
+        },
+        vote(v) {
+
+        }
+    },
+    computed: {
+        voteList() {
+            return voteList.map(v => {
+                v.nodeStatusText = this.$t(
+                    `vote.section1.nodeStatusMap.${v.nodeStatus}`
+                );
+                v.voteStatusText = this.$t(
+                    `vote.section1.voteStatusMap.${v.voteStatus}`
+                );
+                v.operate = "撤销";
+                return v;
+            });
+        },
+        nodeList() {
+            return nodeList.map(v => {
+                v.operate = "投票";
+                return v;
+            }).filter(v => {
+                if (this.filterKey.trim() === "") { return true; }
+                return new RegExp(this.filterKey, 'i').test(v.name) || new RegExp(this.filterKey, 'i').test(v.addr)
+            });
+        }
     }
-  }
 };
 </script>
 <style lang="scss" scoped>
-@import "~assets/scss/table.scss";
+@import '~assets/scss/table.scss';
 .vote {
-  margin: 40px;
-  .title {
-    border-left: 2px solid rgba(0, 122, 255, 0.7);
-    font-family: $font-bold;
-    font-size: 18px;
-    color: #1d2024;
-    line-height: 18px;
-    height: 18px;
-    margin-bottom: 28px;
-    padding-left: 10px;
-  }
-  .vote_list {
-    margin: 40px auto;
-  }
-  .cell {
-    min-width: 150px;
-    .hoveraction {
-      &.tipsicon {
-        position: relative;
-        display: inline-block;
-        background: url(~assets/imgs/hover_help.svg);
-        overflow: visible;
-        width: 16px;
-        height: 16px;
-        vertical-align: sub;
-        cursor: pointer;
-        > div {
-          display: none;
-          font-size: 14px;
-          color: #3e4a59;
-          line-height: 20px;
-        }
-        &:hover {
-          > div {
-            display: flex;
-          }
-        }
-      }
+    padding: 40px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    .filter {
+        align-self: flex-end;
     }
-  }
+    .title {
+        border-left: 2px solid rgba(0, 122, 255, 0.7);
+        font-family: $font-bold;
+        font-size: 18px;
+        color: #1d2024;
+        line-height: 18px;
+        height: 18px;
+        margin-bottom: 28px;
+        padding-left: 10px;
+    }
+    .vote_list {
+        margin: 40px auto;
+        margin-bottom: 29px;
+    }
+    .node_list {
+        flex:1;
+    }
+    .cell {
+        min-width: 150px;
+        .hoveraction {
+            &.tipsicon {
+                position: relative;
+                display: inline-block;
+                background: url(~assets/imgs/hover_help.svg);
+                overflow: visible;
+                width: 16px;
+                height: 16px;
+                vertical-align: sub;
+                cursor: pointer;
+                > div {
+                    display: none;
+                    font-size: 14px;
+                    color: #3e4a59;
+                    line-height: 20px;
+                }
+                &:hover {
+                    > div {
+                        display: flex;
+                    }
+                }
+            }
+        }
+    }
 }
 .clickable {
-  color: #007aff;
-  cursor: pointer;
+    color: #007aff;
+    cursor: pointer;
 }
 .unclickable {
-  color: #ced1d5;
+    color: #ced1d5;
 }
 </style>
