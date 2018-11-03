@@ -135,10 +135,11 @@ module.exports = {
             copy: 'Successfully copied'
         },
         quota: {
-            title: 'Insufficient TPS Quota',
+            title: 'Insufficient Quota',
+            // [TODO]
             describe: 'Not available to send a transaction due to lack of quota, please delete descriptive text and run PoW, or gain quota by staking token to resume.',
             left: 'Run PoW',
-            right: ' Token staking for TPS quota'
+            right: 'Stake VITE'
         },
         trans: {
             powErr: 'Error occurs when running PoW, please try again',
@@ -158,15 +159,15 @@ module.exports = {
         amount: 'Staking amount',
         time: 'Staking frozen duration',
         aboutDays: 'About 3 days',
-        btn: 'Submit staking',
+        btn: 'Submit Staking',
         myQuotaList: 'My Staking List',
         amountPlaceholder: 'Please input staking amount, minimum 10 VITE',
         addrPlaceholder: 'Please input quota receiving address',
         cancelAmount: 'Please input withdraw amount',
-        pledgeSuccess: 'Staking Successful',   // [TODO]
-        pledgeFail: 'Staking Failed',   // [TODO]
-        canclePledgeSuccess: 'Cancel Successful',   // [TODO]
-        canclePledgeFail: 'Cancel Failed',   // [TODO]
+        pledgeSuccess: 'Successfully Submitted',
+        pledgeFail: 'Failed to Submit',
+        canclePledgeSuccess: 'Successful',
+        canclePledgeFail: 'Failed',
         limitAmt: 'Staking amount should not be less than 10.',
         maturity: 'Staking has expired!',
         maxAmt: 'Receiving amount between 0~{amount}”, the current maximum amount is {amount}',

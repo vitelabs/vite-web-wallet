@@ -1,3 +1,5 @@
+require('es6-promise').polyfill();
+
 import 'utils/performance';
 import './assets/scss/mixins.scss';
 
