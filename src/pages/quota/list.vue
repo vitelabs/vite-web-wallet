@@ -158,7 +158,7 @@ export default {
             this.sendPledgeTx({
                 toAddr: this.activeItem.beneficialAddr,
                 amount
-            }, 'getCancel', (result) => {
+            }, 'cancelPledgeBlock', (result) => {
                 this.loading = false;
                 this.activeItem = null;
                 result && this.$toast(this.$t('quota.canclePledgeSuccess'));

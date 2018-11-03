@@ -174,7 +174,27 @@ class Account {
 
         let addr = this.addrs[this.defaultInx].hexAddr;
         let privKey = this.addrs[this.defaultInx].privKey;
-        $ViteJS.Wallet.Account.autoReceiveTX(addr, privKey, process.env.powDifficulty);
+
+        $ViteJS.Wallet.Account.autoReceiveTX(addr, privKey, (err, accountBlock, res, rej) => {
+            console.log(err);
+            if (!err || !err.error || !err.error.code || err.error.code !== -35002) {
+                return rej(err);
+            }
+
+            viteWallet.Pow.getNonce(addr, accountBlock.prevHash).then((data) => {
+                accountBlock.difficulty = data.difficulty;
+                accountBlock.nonce = data.nonce;
+
+                this.sendRawTx(accountBlock, privKey).then((data) => {
+                    return res(data);
+                }).catch((err) => {
+                    return rej(err);
+                });
+
+            }).catch((err) => {
+                rej(err);
+            });
+        });
     }
 
     lock() {
@@ -190,40 +210,54 @@ class Account {
         $ViteJS.Wallet.Account.stopAutoReceiveTX(addr.hexAddr);
     }
 
-    getPowTxBlock({
-        toAddr, tokenId, amount, message
-    }, pledgeType = '') {
-        let fromAddr = this.addrs[this.defaultInx].hexAddr;
-
-        return $ViteJS.Vite.Ledger.getSendBlock({
-            fromAddr, toAddr, tokenId, amount, message
-        }, pledgeType, process.env.powDifficulty);
-    }
-
     sendRawTx(block, privKey) {
         privKey = privKey || this.addrs[this.defaultInx].privKey;
         return $ViteJS.Wallet.Account.sendRawTx(block, privKey);
     }
 
+    getBlock({
+        toAddr, tokenId, amount, message
+    }, type = 'sendBlock', isPow = false) {
+        return new Promise((res, rej) => {
+            let accountAddress = this.addrs[this.defaultInx].hexAddr;
+            console.log(type);
+            return $ViteJS.Vite.Ledger[type]({
+                accountAddress, 
+                toAddress: toAddr, 
+                tokenId, amount, message
+            }).then((block)=>{
+                if (!isPow) {
+                    return res(block);
+                }
+
+                viteWallet.Pow.getNonce(accountAddress, block.prevHash).then((data) => {
+                    block.difficulty = data.difficulty;
+                    block.nonce = data.nonce;
+                    return res(block);
+                }).catch((err) => {
+                    rej(err);
+                });
+            }).catch((err)=>{
+                return rej(err);
+            });
+        });
+    }
+
     sendTx({
         toAddr, tokenId, amount, message
-    }, pledgeType = '') {
-        let fromAddr = this.addrs[this.defaultInx].hexAddr;
+    }, type = 'sendBlock') {
         let privKey = this.addrs[this.defaultInx].privKey;
 
         return new Promise((res, rej) => {
-            $ViteJS.Vite.Ledger.getSendBlock({
-                fromAddr, toAddr, tokenId, amount, message
-            }, pledgeType).then((block)=>{
-                if (!block) {
-                    return rej('Block null');
-                }
+            this.getBlock({
+                toAddr, tokenId, amount, message
+            }, type).then((block) => {
                 this.sendRawTx(block, privKey).then((data) => {
                     return res(data);
                 }).catch(err => {
                     return rej(err);
                 });
-            }).catch((err)=>{
+            }).catch(err => {
                 return rej(err);
             });
         });
