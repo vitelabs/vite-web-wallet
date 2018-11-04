@@ -1,21 +1,22 @@
 <template>
-    <div class="list-content tb">
-        <div class="head">
-            <div class="cell" v-for="v in $t('SBP.section1.headList')" :key="v"> {{v}}</div>
+    <div class="list-content __tb">
+        <div class="__tb_row __tb_head __pointer">
+            <div class="__tb_cell" v-for="v in $t('SBP.section1.headList')" :key="v"> {{v}}</div>
         </div>
-        <div class="content">
-            <div class="row" v-for="item in list" :key="item.name">
-                <div class="cell">{{ item.name }}</div>
-                <div class="cell">{{ item.nodeAddr }} 
+        
+        <div v-show="!list || !list.length" class="__tb_content">
+            <div class="__tb_row __tb_content_row" v-for="item in list" :key="item.name">
+                <div class="__tb_cell">{{ item.name }}</div>
+                <div class="__tb_cell">{{ item.nodeAddr }} 
                     <!-- <i v-if="v.nodeStatus === 'cancelRegister'" class="tipsicon hoveraction">
                         <tooltips :content="$t('vote.section1.hoverHelp')"></tooltips>
                     </i> -->
                 </div>
-                <div class="cell">{{ item.pledgeAddr }}</div>
-                <div class="cell">{{ item.pledgeAmount }}</div>
-                <div class="cell">{{ item.withdrawHeight }}</div>
-                <div class="cell">{{ item.availableReward }}</div>
-                <div class="cell">
+                <div class="__tb_cell">{{ item.pledgeAddr }}</div>
+                <div class="__tb_cell">{{ item.pledgeAmount }}</div>
+                <div class="__tb_cell">{{ item.withdrawHeight }}</div>
+                <div class="__tb_cell">{{ item.availableReward }}</div>
+                <div class="__tb_cell">
                     <span class="edit">edit</span>
                     <span class="cancel">cancel</span>
                     <span class="reward">reward</span>
@@ -25,6 +26,10 @@
                     {{ v.operate }}
                 </div> -->
             </div>
+        </div>
+
+        <div class="__tb_content __tb_no_data" v-show="!list || !list.length">
+            {{ $t('hint.noData') }}
         </div>
     </div>
 </template>

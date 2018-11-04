@@ -20,11 +20,11 @@
                 text: $t('quota.list.withdrawTime'),
                 cell: 'pledgeDate'
             },{
-                class: '__pointer',
+                class: 'operate __pointer',
                 text: $t('quota.list.operate'),
                 cell: 'cancel'
             }]" :contentList="pledgeList" :clickCell="clickCell">
-                <pagination class="pagination" :currentPage="currentPage + 1" 
+                <pagination class="__tb_pagination" :currentPage="currentPage + 1" 
                             :totalPage="totalPage" :toPage="toPage"></pagination>
             </tabel-list>
         </div>
@@ -257,6 +257,9 @@ export default {
 .time {
     min-width: 200px;
     width: 20%;
+}
+.operate {
+    min-width: 205px;
 }
 .cancel {
     color: #CED1D5;

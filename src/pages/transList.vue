@@ -24,10 +24,11 @@
                 text: $t('transList.sum'),
                 cell: 'amount'
             },{
+                class: 'token',
                 text: 'Token',
                 cell: 'token'
             }]" :contentList="transList" :clickRow="goDetail">
-                <pagination class="pagination" :currentPage="currentPage + 1" 
+                <pagination class="__tb_pagination" :currentPage="currentPage + 1" 
                             :totalPage="totalPage" :toPage="toPage"></pagination>
             </tabel-list>
 
@@ -44,7 +45,7 @@
                 text: $t('transList.sum'),
                 cell: 'amount'
             }]" :contentList="smallTransList" :clickRow="goDetail">
-                <pagination class="pagination" :currentPage="currentPage + 1" 
+                <pagination class="__tb_pagination" :currentPage="currentPage + 1" 
                             :totalPage="totalPage" :toPage="toPage"></pagination>
             </tabel-list>
         </div>
@@ -199,12 +200,6 @@ export default {
 .small-trans {
     display: none;
 }
-.pagination {
-    height: 75px;
-    line-height: 75px;
-    text-align: center;
-    border-top: 1px solid #f3f6f9;
-}
 
 @media only screen and (max-width: 550px) {
     .trans-list-wrapper {
@@ -248,6 +243,9 @@ export default {
     width: 14%;
     min-width: 150px;
 }
+.token {
+    min-width: 70px;
+}
 .pink {
     font-family: $font-bold;
     color: #EA60AC;
@@ -266,7 +264,7 @@ export default {
 }
 
 @media only screen and (max-width: 500px) {    
-    .small-trans.tabel-list {
+    .small-trans.__tb{
         min-width: 0;
     }
     .tType {
