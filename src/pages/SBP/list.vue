@@ -1,5 +1,5 @@
 <template>
-    <div class="list-content">
+    <div class="list-content tb">
         <div class="head">
             <div class="cell" v-for="v in $t('SBP.section1.headList')" :key="v"> {{v}}</div>
         </div>
@@ -102,3 +102,7 @@ export default {
 };
 </script>
 
+<style lang="scss" scoped>
+@import '~assets/scss/table.scss';
+
+</style>
