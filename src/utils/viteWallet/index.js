@@ -30,6 +30,7 @@ WS_RPC.on('close', () => {
 
 window.$ViteJS = new ViteJS(WS_RPC);
 window.viteWallet = {
+    Vite: $ViteJS.Vite,
     Net: new net(),
     Ledger: new ledger(),
     Pow: new pow($ViteJS._currentProvider, ViteJS.utils),

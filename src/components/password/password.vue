@@ -3,7 +3,9 @@
              :content="content" :showMask="showMask"
              :leftBtnTxt="cancelTxt || $t('btn.cancel')" :rightBtnTxt="submitTxt || $t('btn.submit')"
              :leftBtnClick="_cancle"  :rightBtnClick="_submit">
-        <div v-show="isShowPWD" class="pass-input">
+        <div v-show="isShowPWD" class="pass-input" :class="{
+            'distance': !!content
+        }">
             <input v-model="password" :placeholder="$t('pwdConfirm.placeholder')" type="password"/>
         </div>
         <div v-show="isShowPWD" class="hold-pwd" @click="toggleHold">
@@ -121,6 +123,9 @@ export default {
     line-height: 40px;
     box-sizing: border-box;
     padding: 0 15px;
+    &.distance {
+        margin-top: 30px;
+    }
     input {
         width: 100%;
         font-size: 14px;

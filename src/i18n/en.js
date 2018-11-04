@@ -241,6 +241,12 @@ module.exports = {
         help: {
             title: '了解SBP及成为SBP的收益',
             text: 'SBP（Snapshot Block Producer）是打包快照块的节点，每一轮75秒时间内25个SBP轮流出块。SBP经过投票产生，打包一个快照块将获得0.9482 VITE。'
+        },
+        section1: {
+            title: '提交注册'
+        },
+        section2: {
+            title: '注册信息'
         }
     },
 
