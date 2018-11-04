@@ -218,13 +218,6 @@ export default {
 .pledge-tx-wrapper {
     position: relative;
     margin-top: 40px;
-
-    .loading {
-        width: 60px;
-        height: 60px;
-        margin-top: -30px;
-        margin-left: -30px;
-    }
     .row {
         display: flex;
         justify-content: space-between;

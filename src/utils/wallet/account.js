@@ -1,6 +1,7 @@
 import acc from './storeAcc.js';
 import { pwdConfirm } from 'components/password/index.js';
 
+const Gid = '00000000000000000001';
 const namePre = 'account';
 let passTimeout;
 
@@ -217,7 +218,7 @@ class Account {
     }
 
     getBlock({
-        toAddr, tokenId, amount, message
+        toAddr, tokenId, amount, message, nodeName, producerAddr
     }, type = 'sendBlock', isPow = false) {
         return new Promise((res, rej) => {
             let accountAddress = this.addrs[this.defaultInx].hexAddr;
@@ -225,7 +226,9 @@ class Account {
             return $ViteJS.Vite.Ledger[type]({
                 accountAddress, 
                 toAddress: toAddr, 
-                tokenId, amount, message
+                tokenId, amount, message, 
+                nodeName, producerAddr,
+                Gid
             }).then((block)=>{
                 if (!isPow) {
                     return res(block);
@@ -245,13 +248,13 @@ class Account {
     }
 
     sendTx({
-        toAddr, tokenId, amount, message
+        toAddr, tokenId, amount, message, nodeName, producerAddr
     }, type = 'sendBlock') {
         let privKey = this.addrs[this.defaultInx].privKey;
 
         return new Promise((res, rej) => {
             this.getBlock({
-                toAddr, tokenId, amount, message
+                toAddr, tokenId, amount, message, nodeName, producerAddr
             }, type).then((block) => {
                 this.sendRawTx(block, privKey).then((data) => {
                     return res(data);
