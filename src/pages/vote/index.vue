@@ -1,44 +1,45 @@
 <template>
     <div class="vote">
         <secTitle></secTitle>
+
         <section class="vote_list">
             <div class="title">{{$t('vote.section1.title')}}</div>
-            <div class="tb">
-                <div class="head">
-                    <div class="cell" v-for="v in $t('vote.section1.head')" :key="v"> {{v}}</div>
+            <div class="__tb">
+                <div class="__tb_row __tb_head">
+                    <div class="__tb_cell" v-for="v in $t('vote.section1.head')" :key="v"> {{v}}</div>
                 </div>
-                <div class="content">
-                    <div class="row" v-for="v in voteList" :key="v.name">
-                        <div class="cell">{{v.name}}</div>
-                        <div class="cell">{{v.nodeStatusText}} <i v-if="v.nodeStatus==='cancelRegister'" class="tipsicon hoveraction">
+                <div class="__tb_content">
+                    <div class="__tb_row" v-for="v in voteList" :key="v.name">
+                        <div class="__tb_cell">{{v.name}}</div>
+                        <div class="__tb_cell">{{v.nodeStatusText}} <i v-if="v.nodeStatus==='cancelRegister'" class="tipsicon hoveraction">
                             <tooltips :content="$t('vote.section1.hoverHelp')"></tooltips>
                         </i></div>
-                        <div class="cell">{{v.voteNum}}</div>
-                        <div class="cell">{{v.voteStatusText}}</div>
-                        <div class="cell" :class="v.voteStatus==='voting'?'unclickable':'clickable'" @click="cancelVote(v)">{{v.operate}}</div>
+                        <div class="__tb_cell">{{v.voteNum}}</div>
+                        <div class="__tb_cell">{{v.voteStatusText}}</div>
+                        <div class="__tb_cell" :class="v.voteStatus==='voting'?'unclickable':'clickable'" @click="cancelVote(v)">{{v.operate}}</div>
                     </div>
                 </div>
             </div>
         </section>
+
         <search v-model="filterKey" class="filter"></search>
         <section class="node_list">
             <div class="title">{{$t('vote.section2.title')}}</div>
 
-            <div class="tb">
-                <div class="head">
-                    <div class="cell" v-for="v in $t('vote.section2.head')" :key="v">{{v}}</div>
+            <div class="__tb">
+                <div class="__tb_row __tb_head">
+                    <div class="__tb_cell" v-for="v in $t('vote.section2.head')" :key="v">{{v}}</div>
                 </div>
-                <div class="content">
-                    <div class="row" v-for="v in nodeList" :key="v.name">
-                        <div class="cell">{{v.name}}</div>
-                        <div class="cell">{{v.addr}}</div>
-                        <div class="cell">{{v.voteNum}}</div>
-                        <div class="cell" :class="v.voteStatus==='voting'?'unclickable':'clickable'" @click="vote(v)">{{v.operate}}</div>
+                <div class="__tb_content">
+                    <div class="__tb_row __tb_content_row" v-for="v in nodeList" :key="v.name">
+                        <div class="__tb_cell">{{v.name}}</div>
+                        <div class="__tb_cell">{{v.addr}}</div>
+                        <div class="__tb_cell">{{v.voteNum}}</div>
+                        <div class="__tb_cell" :class="v.voteStatus==='voting'?'unclickable':'clickable'" @click="vote(v)">{{v.operate}}</div>
                     </div>
                 </div>
             </div>
         </section>
-
     </div>
 </template>
 
@@ -124,7 +125,7 @@ export default {
         display: flex;
         flex-direction: column;
     }
-    .cell {
+    .__tb_cell {
         min-width: 150px;
         .hoveraction {
             &.tipsicon {
