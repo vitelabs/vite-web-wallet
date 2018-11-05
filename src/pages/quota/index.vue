@@ -1,5 +1,7 @@
 <template>
     <div class="quota-wrapper">
+        <quota-head></quota-head>
+
         <loading v-if="loadingToken" class="loading"></loading>
 
         <div v-if="showConfirmType" class="gray-wrapper">
@@ -19,9 +21,7 @@
             <pow-process ref="powProcess" v-if="showConfirmType === 'pow'"></pow-process>
         </div>
 
-        <div v-show="!loadingToken">
-            <quota-head></quota-head>
-            
+        <div v-show="!loadingToken">            
             <div class="content">
                 <my-quota class="my-quota _content_border"></my-quota>
                 <pledge-tx class="pledge-tx _content_border"
