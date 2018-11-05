@@ -42,6 +42,10 @@ let listInst;
 
 export default {
     props: {
+        showConfirm: {
+            type: Function,
+            default: () => {}
+        },
         tokenInfo: {
             type: Object,
             default: () => {
@@ -157,12 +161,10 @@ export default {
             if (item.isCancel) {
                 return;
             }
-            console.log(item);
-            console.log(item.rawData);
+            this.showConfirm('edit', item.rawData);
         },
         reward(item) {
-            console.log(item);
-            console.log(item.rawData);
+            this.showConfirm('reward', item.rawData);
         },
 
         _sendTx(type, item) {
