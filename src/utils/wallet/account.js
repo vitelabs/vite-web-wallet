@@ -41,6 +41,7 @@ class Account {
         passTimeout && clearTimeout(passTimeout);
         passTimeout = null;
         this.isHoldPWD = false;
+        window.isShowPWD = false;
     }
 
     initPwd({

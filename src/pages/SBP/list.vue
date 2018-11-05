@@ -47,6 +47,10 @@ export default {
             default: () => {
                 return {};
             }
+        },
+        sendTx: {
+            type: Function,
+            default: () => {}
         }
     },
     created() {
@@ -138,7 +142,13 @@ export default {
                     amount: item.pledgeAmount
                 }),
                 submit: () => {
-                    this._sendTx('cancelRegisterBlock', item.rawData);
+                    this.sendTx({
+                        nodeName: item.rawData.name
+                    }, 'cancelRegisterBlock').then(()=>{
+                        this.$toast(this.$t('SBP.section2.cancelSuccess'));
+                    }).catch(()=>{
+                        this.$toast(this.$t('SBP.section2.cancelFail'));
+                    });
                 }
             }, true);
             console.log(item.rawData);

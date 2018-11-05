@@ -8,7 +8,7 @@
         }">
             <input v-model="password" :placeholder="$t('pwdConfirm.placeholder')" type="password"/>
         </div>
-        <div v-show="isShowPWD" class="hold-pwd" @click="toggleHold">
+        <div v-show="isShowPWDHold" class="hold-pwd" @click="toggleHold">
             <span :class="{ 'active': isPwdHold }"></span>
             {{ $t('pwdConfirm.conf') }}
         </div>
@@ -54,6 +54,10 @@ export default {
             default: ''
         },
         isShowPWD: {
+            type: Boolean,
+            default: true
+        },
+        isShowPWDHold: {
             type: Boolean,
             default: true
         }

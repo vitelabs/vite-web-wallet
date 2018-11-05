@@ -265,11 +265,12 @@ module.exports = {
             addrErr: '出块地址不合法，请输入合法出块地址',
             addrUsed: '此出块地址已被使用',
             registerSuccess: '注册请求已发出',
-            registerFail: '注册请求失败',
-            headList: ['节点名称', '出块地址', '抵押地址', '抵押金额', '到期快照高度', '全部可提取出块奖励', '操作']
+            registerFail: '注册请求失败'
         },
         section2: {
-            title: '注册信息'
+            title: '注册信息',
+            cancelSuccess: '撤销请求已发送',
+            cancelFail: '撤销请求发送失败'
         }
     },
 
@@ -289,7 +290,7 @@ module.exports = {
     },
 
     pwdConfirm: {
-        conf: '开启10分钟内免密操作',
+        conf: '开启5分钟内免密操作',
         title: '输入钱包密码',
         placeholder: '请输入钱包密码'
     },
