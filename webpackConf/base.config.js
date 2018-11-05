@@ -121,8 +121,7 @@ module.exports = {
             routes: path.join(SRC_PATH, '/routes'),
             utils: path.join(SRC_PATH, '/utils'),
             i18n: path.join(SRC_PATH, '/i18n'),
-            loopTime: path.join(SRC_PATH, '../config/loopTime'),
-            version: path.join(SRC_PATH, '../config/version'),
+            config:path.join(SRC_PATH, '../config'),
             mock:path.join(SRC_PATH, '../mock')
         },
         extensions: ['.js', '.scss', '.vue', '.json']
