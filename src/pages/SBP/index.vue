@@ -93,12 +93,15 @@ export default {
 };
 </script>
 
-
 <style lang="scss" scoped>
 @import '~assets/scss/table.scss';
 
 .SBP-wrapper {
+    position: relative;
     padding: 40px;
+    box-sizing: border-box;
+    overflow: auto;
+    height: 100%;
     .loading {
         width: 60px;
         height: 60px;
