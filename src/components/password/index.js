@@ -31,6 +31,8 @@ export function pwdConfirm ({
     
     instance.showMask = showMask;
     instance.isShowPWD = isShowPWD;
+    instance.isShowPWDHold = !window.isShowPWD;
+    window.isShowPWD = true;
     instance.title = title;
     instance.cancel = ()=>{
         _close();

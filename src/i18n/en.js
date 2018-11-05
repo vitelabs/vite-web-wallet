@@ -236,7 +236,7 @@ module.exports = {
     },
 
     // SBP
-    SBP: {
+    SBP: { // [TODO]
         title: '注册SBP',
         help: {
             title: '了解SBP及成为SBP的收益',
@@ -279,7 +279,7 @@ module.exports = {
     },
 
     // vote
-    vote: {
+    vote: { // [TODO]
         title: '投票',
         help: {
             title: '了解投票与投票收益',
@@ -306,8 +306,8 @@ module.exports = {
     },
 
 
-    pwdConfirm: {
-        conf: '开启10分钟内免密操作',
+    pwdConfirm: {   // [TODO]
+        conf: '开启5分钟内免密操作',
         title: '输入钱包密码',
         placeholder: '请输入钱包密码'
     },

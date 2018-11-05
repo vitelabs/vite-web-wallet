@@ -27,22 +27,19 @@
                            :placeholder="$t('quota.cancelAmount')" />
                 </div>
             </confirm> -->
-
-            <pow-process ref="powProcess" v-if="showConfirmType === 'pow'"></pow-process>
         </div>
     </div>
 </template>
 
 <script>
 import secTitle from 'components/secTitle';
-import powProcess from 'components/powProcess';
 import loading from 'components/loading';
 import register from './register';
 import list from './list';
 
 export default {
     components: {
-        secTitle, register, list, powProcess, loading
+        secTitle, register, list, loading
     },
     created() {
         this.tokenInfo = viteWallet.Ledger.getTokenInfo();
@@ -77,26 +74,13 @@ export default {
         closeConfirm() {
             this.showConfirmType = '';
         },
-        stopPow(cb) {
-            let powProcessEle = this.$refs.powProcess;
-            if (!powProcessEle) {
-                return;
-            }
-
-            powProcessEle.gotoFinish();
-            setTimeout(() => {
-                this.closeConfirm();
-                cb && cb();
-            }, 1000);
-        },
 
         sendTx({
             producerAddr, amount, nodeName
-        }, type, cb) {
+        }, type) {
             if (!viteWallet.Net.getNetStatus()) {
                 this.$toast(this.$t('nav.noNet'));
-                cb && cb(false);
-                return;
+                return Promise.reject(false);
             }
 
             amount = viteWallet.BigNumber.toMin(amount || 0, this.tokenInfo.decimals);            
