@@ -20,11 +20,11 @@ const actions = {
         lastFetchTime = fetchTime;
 
         return viteWallet.Vite['register_getRegistrationList'](Gid, address).then((data)=>{
-            if (fetchTime !== lastFetchTime || !data) {
+            if (fetchTime !== lastFetchTime || !data || !data.result) {
                 return null;
             }
             console.log(data);
-            commit('commitRegistrationList', data);
+            commit('commitRegistrationList', data.result);
             return data;
         });
     }

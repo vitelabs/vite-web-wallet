@@ -11,7 +11,7 @@
 
         <div v-if="!loadingToken" class="section">
             <div class="title">{{ $t('SBP.section2.title') }}</div>
-            <list class="content"></list>
+            <list class="content" :tokenInfo="tokenInfo" :sendTx="sendTx"></list>
         </div>
 
         <div v-if="showConfirmType" class="gray-wrapper">
@@ -36,12 +36,13 @@
 <script>
 import secTitle from 'components/secTitle';
 import powProcess from 'components/powProcess';
+import loading from 'components/loading';
 import register from './register';
 import list from './list';
 
 export default {
     components: {
-        secTitle, register, list, powProcess
+        secTitle, register, list, powProcess, loading
     },
     created() {
         this.tokenInfo = viteWallet.Ledger.getTokenInfo();
@@ -57,7 +58,7 @@ export default {
         }
     },
     destroyed() {
-        this.clearAll();
+        // this.clearAll();
     },
     data() {
         let activeAccount = this.$wallet.getActiveAccount();
@@ -99,43 +100,10 @@ export default {
             }
 
             amount = viteWallet.BigNumber.toMin(amount || 0, this.tokenInfo.decimals);            
-            this.activeAccount.sendTx({
+            return this.activeAccount.sendTx({
                 tokenId: this.tokenInfo.tokenId,
                 producerAddr, nodeName, amount
-            }, type).then(() => {
-                cb && cb(true);
-            }).catch((err) => {
-                console.log(err);
-                if (err && err.error && err.error.code && err.error.code === -35002) {
-                    this.startPowTx({
-                        producerAddr, amount, nodeName
-                    }, type, cb);
-                    return;
-                }
-                cb && cb(false);
-            });
-        },
-        startPowTx({
-            producerAddr, amount, nodeName
-        }, type, cb) {
-            this.showConfirm('pow');
-
-            this.activeAccount.getBlock({
-                tokenId: this.tokenInfo.tokenId,
-                producerAddr,
-                amount, nodeName
-            }, type, true).then((block) => {
-                this.stopPow(() => {
-                    this.activeAccount.sendRawTx(block).then(() => {
-                        cb && cb(true);
-                    }).catch(() => {
-                        cb && cb(false);
-                    });
-                });
-            }).catch(() => {
-                this.closeConfirm();
-                cb && cb(false);
-            });
+            }, type);
         }
     }
 };
@@ -147,6 +115,12 @@ export default {
 
 .SBP-wrapper {
     padding: 40px;
+    .loading {
+        width: 60px;
+        height: 60px;
+        margin-top: -30px;
+        margin-left: -30px;
+    }
 }
 
 .gray-wrapper {

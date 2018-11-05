@@ -242,11 +242,39 @@ module.exports = {
             title: '了解SBP及成为SBP的收益',
             text: 'SBP（Snapshot Block Producer）是打包快照块的节点，每一轮75秒时间内25个SBP轮流出块。SBP经过投票产生，打包一个快照块将获得0.9482 VITE。'
         },
+        confirm: {
+            title: '注册SBP候选节点',
+            describe: '提交注册后，当前地址的 {amount} VITE将被锁定约90天，解锁后金额将退回抵押地址',
+            leftBtn: '暂不注册',
+            rightBtn: '确认注册'
+        },
         section1: {
-            title: '提交注册'
+            title: '提交注册',
+            nodeName: '节点名称',
+            producerAddr: '出块地址',
+            quotaAddr: '抵押地址',
+            quotaTime: '抵押周期',
+            time: '7776000个快照块（约90天）',
+            quotaAmount: '抵押金额',
+            confirmBtn: '提交注册',
+            allReward: '全部可提取出块奖励',
+            namePlaceholder: '请输入节点名称',
+            nameHint: '40个字符以内, 支持大小写英文字母、数字、\'_\'、\'.',
+            nameErr: '节点名称不合法，请输入合法节点名称',
+            nameUsed: '此节点名称已被注册',
+            addrPlaceholder: '请输入快照块出块地址',
+            addrHint: '出块地址必须是全节点地址且保持运行状态',
+            addrErr: '出块地址不合法，请输入合法出块地址',
+            addrUsed: '此出块地址已被使用',
+            registerSuccess: '注册请求已发出',
+            registerFail: '注册请求失败'
         },
         section2: {
-            title: '注册信息'
+            title: '注册信息',
+            cancelConfirm: {
+                title: '撤销注册SBP',
+                describe: '提交注册后，当前地址的 {amount} 将被锁定约90天，解锁后金额将退回抵押地址'
+            }
         }
     },
 
