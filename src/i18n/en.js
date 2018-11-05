@@ -238,11 +238,7 @@ module.exports = {
         sum: 'Amount',
         tDetail: 'Transaction Detail'
     },
-
-    tabel: {
-        noData: 'No Data'
-    },
-
+    
     //common
     btn: {
         create: 'Create',
@@ -264,6 +260,7 @@ module.exports = {
         logoutErr: 'Logout Error!',
         pwErr: 'Incorrect password!',
         acEmpty: 'Account cannot be empty!',
-        pwEmpty: 'Password cannot be empty!'
+        pwEmpty: 'Password cannot be empty!',
+        noData: 'No Data'
     }
 };
