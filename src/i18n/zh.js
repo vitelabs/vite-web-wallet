@@ -238,10 +238,6 @@ module.exports = {
         tDetail: '交易详情',
     },
 
-    tabel: {
-        noData: '暂无数据'
-    },
-
     // common
     btn: {
         create: '创建',
@@ -263,6 +259,7 @@ module.exports = {
         logoutErr: '退出有错误',
         pwErr: '密码错误',
         acEmpty: '账号不可为空',
-        pwEmpty: '密码不能为空'
+        pwEmpty: '密码不能为空',
+        noData: '暂无数据'
     }
 };
