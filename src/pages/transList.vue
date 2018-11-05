@@ -60,7 +60,7 @@ import pagination from 'components/pagination.vue';
 import tabelList from 'components/tabelList.vue';
 import date from 'utils/date.js';
 import timer from 'utils/asyncFlow';
-import loopTime from 'loopTime';
+import loopTime from 'config/loopTime';
 
 let transListInst = null;
 

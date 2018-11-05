@@ -261,19 +261,39 @@ module.exports = {
             title:'我的投票',
             head:['节点名称', '节点状态', '当前投票数', '投票状态', '操作'],
             nodeStatusMap:{
-                cancelRegister:'取消注册',
-                registering:'注册中'
+                1:'注册中',
+                2:'取消注册'
             },
             voteStatusMap:{
-                cancelVote:'取消投票',
-                voting:'投票中'
+                cancelVote:'投票作废',
+                voting:'正在投票中',
+                voted:'已投票'
             },
-            hoverHelp:'您投票的“SBP2”已经取消注册，您可以直接重新投票、或者撤销投票；如果您不重新投票或撤销投票，“SBP2”重新注册后，您原来的投票立即恢复生效。'
+            hoverHelp:'您投票的“SBP2”已经取消注册，您可以直接重新投票、或者撤销投票；如果您不重新投票或撤销投票，“SBP2”重新注册后，您原来的投票立即恢复生效。',
+            confirm:{
+                title:'撤销投票',
+                cancelText:'确认撤销',
+                submitText:'暂不撤销'
+            }
         },
 
         section2:{
             title:'候选节点列表',
-            head:['节点名称', '出块地址', '当前投票数', '操作']
+            head:['节点名称', '出块地址', '当前投票数', '操作'],
+            confirm:{
+                normal:{
+                    title:'投票',
+                    cancelText:'暂不投票',
+                    submitText:'确认投票',
+                    content:''
+                },
+                cover:{
+                    title:'投票',
+                    content:'您已经投过票，再次投票将会覆盖上一次投票',
+                    cancelText:'确认覆盖上次投票',
+                    submitText:'取消保持原投票'
+                }
+            }
         }
     },
 
