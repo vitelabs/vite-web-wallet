@@ -265,11 +265,12 @@ module.exports = {
                 2:'取消注册'
             },
             voteStatusMap:{
-                cancelVote:'投票作废',
+                voted:'已投票',
                 voting:'正在投票中',
-                voted:'已投票'
+                canceling:'撤销中',
+                voteNoWork:'投票作废'
             },
-            hoverHelp:'您投票的“SBP2”已经取消注册，您可以直接重新投票、或者撤销投票；如果您不重新投票或撤销投票，“SBP2”重新注册后，您原来的投票立即恢复生效。',
+            hoverHelp:'您投票的{nodeName}已经取消注册，您可以直接重新投票、或者撤销投票；如果您不重新投票或撤销投票，{nodeName}重新注册后，您原来的投票立即恢复生效。',
             confirm:{
                 title:'撤销投票',
                 cancelText:'确认撤销',
