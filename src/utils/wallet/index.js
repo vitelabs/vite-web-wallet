@@ -48,6 +48,7 @@ class Wallet {
                 addrs: [addr]
             });
         } catch(err) {
+            console.error(err);
             toast( JSON.stringify(err) );
         }
     }
