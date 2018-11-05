@@ -245,7 +245,17 @@ module.exports = {
             title: '注册SBP候选节点',
             describe: '提交注册后，当前地址的{amount} VITE将被锁定约90天，解锁后金额将退回抵押地址',
             leftBtn: '暂不注册',
-            rightBtn: '确认注册'
+            rightBtn: '确认注册',
+            edit: {
+                title: '更换出块地址',
+                placeholder: '请输入新的出块地址',
+                btn: '确认修改'
+            },
+            reward: {
+                title: '提取出块奖励',
+                placeholder: '请输入接收出块奖励地址',
+                btn: '提取奖励'
+            }
         },
         section1: {
             title: '提交注册',
@@ -269,8 +279,22 @@ module.exports = {
         },
         section2: {
             title: '注册信息',
-            cancelSuccess: '撤销请求已发送',
-            cancelFail: '撤销请求发送失败'
+            updateSuccess: '修改请求已发送',
+            updateFail: '修改请求发送失败',
+            rewardSuccess: '提取奖励请求已发送',
+            rewardFail: '提取奖励请求发送失败',
+            allReward: '全部可提取的出块奖励',
+            nowReward: '本次可提取的快照块高度范围及奖励金额',
+            rewardAddr: '提取奖励地址',
+            section2: {
+                title: '注册信息',
+                cancelSuccess: '撤销请求已发送',
+                cancelFail: '撤销请求发送失败'
+            },
+            cancelConfirm: {
+                title: '撤销注册SBP',
+                describe: '提交注册后，当前地址的 {amount} 将被锁定约90天，解锁后金额将退回抵押地址'
+            }
         }
     },
 

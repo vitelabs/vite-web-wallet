@@ -11,22 +11,45 @@
 
         <div v-if="!loadingToken" class="section">
             <div class="title">{{ $t('SBP.section2.title') }}</div>
-            <list class="content" :tokenInfo="tokenInfo" :sendTx="sendTx"></list>
+            <list class="content" :showConfirm="showConfirm"
+                  :tokenInfo="tokenInfo" :sendTx="sendTx"></list>
         </div>
 
         <div v-if="showConfirmType" class="gray-wrapper">
-            <!-- <confirm v-if="showConfirmType === 'cancel'" 
-                     :title="$t(`quota.confirm.cancel.title`)" :closeIcon="false"
-                     :leftBtnTxt="$t(`quota.confirm.cancel.leftBtn`)" :leftBtnClick="closeConfirm"
-                     :rightBtnTxt="$t(`quota.confirm.cancel.rightBtn`)" 
-                     :rightBtnClick="submit" :btnUnuse="!!cancelUnuse">
-                {{ $t(`quota.confirm.cancel.describe`, { amount: activeAmountLimit }) }}
-                <div class="cancel-amount" v-show="amountErr">{{ amountErr }}</div>
-                <div class="cancel-input">
-                    <input type="text" v-model="cancelAmount"
-                           :placeholder="$t('quota.cancelAmount')" />
+            <confirm :title="$t(`SBP.confirm.${showConfirmType}.title`)" :singleBtn="true"
+                     :closeIcon="true" :close="closeConfirm"
+                     :leftBtnTxt="$t(`SBP.confirm.${showConfirmType}.btn`)" :leftBtnClick="validTx"
+                     :btnUnuse="!!btnUnuse">
+                <div v-if="showConfirmType === 'edit'">
+                    <div class="input-err" v-show="addrErr">{{ addrErr }}</div>
+                    <div class="confirm-input">
+                        <input type="text" v-model="addr"
+                               :placeholder="$t(`SBP.confirm.${showConfirmType}.placeholder`)" />
+                    </div>
                 </div>
-            </confirm> -->
+
+                <div v-if="showConfirmType === 'reward'">
+                    <div class="row">
+                        <div class="row-t">{{ $t(`SBP.section2.allReward`) }}</div>
+                        <div class="row-content unuse">{{ activeItem.showAvailableReward }}</div>
+                    </div>
+
+                    <div class="row">
+                        <div class="row-t">{{ $t(`SBP.section2.nowReward`) }}</div>
+                        <div class="row-content unuse">{{ activeItem.showAvailableRewardOneTx }}</div>
+                    </div>
+
+                    <div class="row">
+                        <div class="row-t">
+                            {{ $t(`SBP.section2.rewardAddr`)  }}
+                            <span v-show="addrErr" class="err">{{ addrErr }}</span>
+                        </div>
+                        <div class="row-content">
+                            <input v-model="addr" :placeholder="$t(`SBP.confirm.${showConfirmType}.placeholder`)" />
+                        </div>
+                    </div>
+                </div>
+            </confirm>
         </div>
     </div>
 </template>
@@ -34,12 +57,16 @@
 <script>
 import secTitle from 'components/secTitle';
 import loading from 'components/loading';
+import confirm from 'components/confirm';
 import register from './register';
 import list from './list';
 
+const amount = 500000;
+let addrTimeout;
+
 export default {
     components: {
-        secTitle, register, list, loading
+        secTitle, register, list, loading, confirm
     },
     created() {
         this.tokenInfo = viteWallet.Ledger.getTokenInfo();
@@ -55,7 +82,7 @@ export default {
         }
     },
     destroyed() {
-        // this.clearAll();
+        this.clearAll();
     },
     data() {
         let activeAccount = this.$wallet.getActiveAccount();
@@ -64,15 +91,130 @@ export default {
             activeAccount,
             tokenInfo: {},
             loadingToken: false,
-            showConfirmType: ''
+            showConfirmType: '',
+            activeItem: {},
+
+            loading: false,
+            addr: '',
+            addrErr: ''
         };
     },
+    computed: {
+        btnUnuse() {
+            return !this.addr || this.loading || this.addrErr;
+        },
+        regAddrList() {
+            return this.$store.getters.regAddrList;
+        }
+    },
+    watch: {
+        addr: function() {
+            clearTimeout(addrTimeout);
+            addrTimeout = null;
+
+            if (this.stopWatch) {
+                return;
+            }
+
+            addrTimeout = setTimeout(()=> {
+                addrTimeout = null;
+                this.testAddr();
+            }, 500);
+        },
+    },
     methods: {
-        showConfirm(type) {
+        testAddr() {
+            if (!this.addr || 
+                !viteWallet.Types.isValidHexAddr(this.addr)) {
+                this.addrErr = this.$t('SBP.section1.addrErr');
+                return;
+            }
+
+            if (this.regAddrList.indexOf(this.addr) !== -1) {
+                this.addrErr = this.$t('SBP.section1.addrUsed');
+                return;
+            }
+
+            this.addrErr = '';
+        },
+
+        showConfirm(type, activeItem) {
             this.showConfirmType = type;
+
+            if (!this.tokenInfo) {
+                return;
+            }
+
+            let decimals = this.tokenInfo.decimals;
+            let symbol = this.tokenInfo.tokenSymbol;
+            activeItem.showAvailableReward = viteWallet.BigNumber.toBasic(activeItem.availableReward , decimals) + ' ' +  symbol;
+            activeItem.showAvailableRewardOneTx = viteWallet.BigNumber.toBasic(activeItem.availableRewardOneTx , decimals) + ' ' +  symbol;
+            this.activeItem = activeItem;
         },
         closeConfirm() {
             this.showConfirmType = '';
+            this.activeItem = null;
+            this.clearAll();
+        },
+        clearAll() {
+            this.stopWatch = true;
+            clearTimeout(addrTimeout);
+            this.addr = '';
+            this.addrErr = '';
+        },
+
+        validTx() {
+            this.testAddr();
+            if (this.btnUnuse) {
+                return;
+            }
+
+            if (this.showConfirmType === 'edit') {
+                this.sendUpdateTx();
+            } else {
+                this.sendRewardTx();
+            }
+        },
+        sendUpdateTx() {
+            this.loading = true;
+            this.sendTx({
+                producerAddr: this.editAddr,
+                amount,
+                nodeName: this.activeItem.name
+            }).then(() => {
+                this.loading = false;
+                this.$toast(this.$t('SBP.section2.updateSuccess'));
+                this.closeConfirm();
+            }).catch((err) => {
+                console.log(err);
+
+                this.loading = false;
+                if (err && err.error && err.error.code && err.error.code === -35002) {
+                    return;
+                }
+                this.$toast(this.$t('SBP.section2.updateFail'));
+            });
+        },
+        sendRewardTx() {
+            // this.loading = true;
+            // this.sendTx({
+            //     producerAddr: this.editAddr,
+            //     amount,
+            //     nodeName: this.activeItem.name
+            // }).then(() => {
+            //     this.updateLoading = false;
+            //     this.$toast(this.$t('SBP.section2.updateSuccess'));
+            //     this.closeConfirm();
+            // }).catch((err) => {
+            //     console.log(err);
+            //     this.updateLoading = false;
+
+            //     if (err && err.error && err.error.code && err.error.code === -35002) {
+                    
+            //         return;
+            //     }
+            //     this.$toast(this.$t('SBP.section2.updateFail'));
+            // });
         },
 
         sendTx({
@@ -122,6 +264,26 @@ export default {
     align-items: center;
     background: rgba(0, 0, 0, 0.6);
     z-index: 100;
+    .input-err {
+        position: absolute;
+        right: 30px;
+        top: 2px;
+        font-size: 12px;
+        color: #FF2929;
+        line-height: 26px;
+    }
+    .confirm-input {
+        background: #FFFFFF;
+        border: 1px solid #D4DEE7;
+        border-radius: 2px;
+        height: 40px;
+        line-height: 40px;
+        input {
+            width: 100%;
+            text-indent: 15px;
+            font-size: 14px;
+        }
+    }
 }
 
 .section {
@@ -142,6 +304,46 @@ export default {
         border: 1px solid #F6F5F5;
         box-shadow: 0 2px 48px 1px rgba(176,192,237,0.42);
         border-radius: 2px;
+    }
+}
+
+.row {
+    margin-top: 20px;
+    &:first-child {
+        margin-top: 0;
+    }
+    .row-t {
+        position: relative;
+        font-family: $font-bold;
+        font-size: 14px;
+        color: #1D2024;
+        letter-spacing: 0.35px;
+        line-height: 16px;
+        padding-bottom: 15px;
+    }
+    .row-content {
+        padding: 10px 15px;
+        border: 1px solid #D4DEE7;
+        border-radius: 2px;
+        font-size: 14px;
+        box-sizing: border-box;
+        &.unuse {
+            background: #F3F6F9;
+            font-size: 14px;
+            color: #5E6875;
+        }
+        input {
+            width: 100%;
+        }
+    }
+    .err {
+        position: absolute;
+        left: 90px;
+        right: 0;
+        font-size: 12px;
+        color: #FF2929;
+        line-height: 16px;
+        text-align: right;
     }
 }
 </style>
