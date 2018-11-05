@@ -267,4 +267,7 @@ export default {
         color: #007AFF;
     }
 }
+.operate {
+    min-width: 210px;
+}
 </style>
