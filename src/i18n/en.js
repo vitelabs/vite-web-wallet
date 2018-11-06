@@ -297,7 +297,7 @@ module.exports = {
             },
             cancelConfirm: {
                 title: '撤销注册SBP',
-                describe: '提交注册后，当前地址的 {amount} 将被锁定约90天，解锁后金额将退回抵押地址'
+                describe: '撤销后您的抵押金额将退回抵押地址；若想成为SBP，您需重新提交注册申请'
             }
         }
     },
