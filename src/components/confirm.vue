@@ -104,7 +104,6 @@ export default {
     }
     .content-wrapper {
         position: relative;
-        flex: 1;
         box-sizing: border-box;
         padding: 30px;
         overflow: auto;
