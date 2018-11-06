@@ -150,7 +150,9 @@ module.exports = {
     // quota
     quota: {
         title: '获取配额',
-        Q1: '快速理解配额',
+        help: {
+            title: '快速理解配额'
+        },
         myQuota: '我的当前配额',
         maxTxNum: '最大交易笔数',
         beneficialAddr: '配额受益地址',
@@ -238,8 +240,8 @@ module.exports = {
     SBP: {
         title: '注册SBP',
         help: {
-            title: '了解SBP及成为SBP的收益',
-            text: 'SBP（Snapshot Block Producer）是打包快照块的节点，每一轮75秒时间内25个SBP轮流出块。SBP经过投票产生，打包一个快照块将获得0.9482 VITE。'
+            title: '关于SBP',
+            text: 'SBP（Snapshot Block Producer）为具有出块权利的节点，您可以通过抵押一定数量的VITE注册成为SBP候选节点；每轮（时长75秒）会选举出25个SBP，每轮得票数前25名中随机选出23个作为SBP，得票数26-100名中随机选出2个作为SBP；出块奖励的50%将作为按块奖励分配给该块的出块节点，另外50%将作为按票奖励分配给该轮次得票数排名前100的节点。'
         },
         confirm: {
             title: '注册SBP候选节点',
@@ -293,7 +295,7 @@ module.exports = {
             },
             cancelConfirm: {
                 title: '撤销注册SBP',
-                describe: '提交注册后，当前地址的 {amount} 将被锁定约90天，解锁后金额将退回抵押地址'
+                describe: '撤销后您的抵押金额将退回抵押地址；若想成为SBP，您需重新提交注册申请'
             }
         }
     },

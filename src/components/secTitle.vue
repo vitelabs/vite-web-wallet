@@ -3,7 +3,7 @@
         <span>{{ $t(title) }}</span>
         <span class="help">
             <i class="icon"></i>
-            <span @click="showHelp">{{ $t(helpTitle) }}</span>
+            <span @click="_showHelp">{{ $t(helpTitle) }}</span>
         </span>
     </div>
 </template>
@@ -25,10 +25,17 @@ export default {
             default: function() {
                 return `${this.$route.name}.help.text`;
             }
+        },
+        showHelp: {
+            default: null
         }
     },
     methods: {
-        showHelp() {
+        _showHelp() {
+            if (this.showHelp) {
+                this.showHelp();
+                return;
+            }
             this.$confirm({
                 title: this.$t(this.helpTitle),
                 singleBtn: true,
