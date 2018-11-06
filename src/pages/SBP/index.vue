@@ -240,9 +240,7 @@ export default {
                 return Promise.reject(false);
             }
           
-            console.log(amount);
             let toAmount = viteWallet.BigNumber.toMin(amount || 0, this.tokenInfo.decimals);
-            console.log(toAmount);
             return this.activeAccount.sendTx({
                 tokenId: this.tokenInfo.tokenId,
                 nodeName: nodeName || this.activeItem.name,

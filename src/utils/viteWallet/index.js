@@ -17,6 +17,8 @@ let WS_RPC = new ViteJS.WS_RPC({
 });
 WS_RPC.on('connect', () => {
     reconnectTimes = 0;
+    viteWallet && viteWallet.Ledger.loopHeight();
+    viteWallet && viteWallet.Ledger.getDefaultTokenList();
 });
 WS_RPC.on('close', () => {
     if (reconnectTimes > 5) {
