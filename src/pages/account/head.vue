@@ -109,12 +109,23 @@ export default {
             // IE 11
             let userAgent = navigator.userAgent;
             if (userAgent.indexOf('Trident')) {
-                let oPop = window.open(this.qrcode,'','width=1, height=1, top=5000, left=5000');
-                for(; oPop.document.readyState != 'complete'; ){
-                    if (oPop.document.readyState == 'complete')break;
+                // let oPop = window.open(this.qrcode,'','width=1, height=1, top=5000, left=5000');
+                // for(; oPop.document.readyState != 'complete'; ){
+                //     if (oPop.document.readyState == 'complete')break;
+                // }
+                // oPop.document.execCommand('SaveAs');
+                // oPop.close();
+                var arr = this.qrcode.split(',');
+                var mime = arr[0].match(/:(.*?);/)[1];
+                var bstr = atob(arr[1]);
+                var n = bstr.length;
+                var u8arr = new Uint8Array(n);
+                while (n--) {
+                    u8arr[n] = bstr.charCodeAt(n);
                 }
-                oPop.document.execCommand('SaveAs');
-                oPop.close();
+                window.navigator.msSaveBlob(new Blob([u8arr], {
+                    type:mime
+                }), 'download.png');
             } else {
                 location.href = this.qrcode.replace('image/png', 'image/octet-stream');
             }
