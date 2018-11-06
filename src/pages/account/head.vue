@@ -105,7 +105,23 @@ export default {
             if (!this.qrcode) {
                 return;
             }
-            location.href = this.qrcode.replace('image/png', 'image/octet-stream');
+
+            // IE
+            if(!!window.ActiveXObject || 'ActiveXObject' in window) {
+                var arr = this.qrcode.split(',');
+                var mime = arr[0].match(/:(.*?);/)[1];
+                var bstr = atob(arr[1]);
+                var n = bstr.length;
+                var u8arr = new Uint8Array(n);
+                while (n--) {
+                    u8arr[n] = bstr.charCodeAt(n);
+                }
+                window.navigator.msSaveBlob(new Blob([u8arr], {
+                    type:mime
+                }), 'download.png');
+            } else {
+                location.href = this.qrcode.replace('image/png', 'image/octet-stream');
+            }
             this.qrcodeShow = false;
         },
         goDetail() {
