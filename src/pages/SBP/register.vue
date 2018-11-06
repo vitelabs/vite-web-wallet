@@ -6,8 +6,12 @@
                     {{ $t('SBP.section1.nodeName') }}
                     <span v-show="nodeNameErr" class="err">{{ nodeNameErr }}</span>
                 </div>
+                <span class="tips" :class="{
+                    'active': tipsType === 'name'
+                }">{{ $t('SBP.section1.nameHint') }}</span>
                 <div class="input-item all __ellipsis">
-                    <input v-model="nodeName" type="text" 
+                    <input v-model="nodeName" type="text"
+                           @blur="hideTips" @focus="showTips('name')"
                            :placeholder="$t('SBP.section1.namePlaceholder')" />
                 </div>
             </div>
@@ -16,8 +20,12 @@
                     {{ $t('SBP.section1.producerAddr') }}
                     <span v-show="producerAddrErr" class="err">{{ producerAddrErr }}</span>
                 </div>
+                <span class="tips" :class="{
+                    'active': tipsType === 'addr'
+                }">{{ $t('SBP.section1.addrHint') }}</span>
                 <div class="input-item all __ellipsis">
-                    <input v-model="producerAddr" type="text" 
+                    <input v-model="producerAddr" type="text"
+                           @blur="hideTips" @focus="showTips('addr')"
                            :placeholder="$t('SBP.section1.addrPlaceholder')" />
                 </div>
             </div>
@@ -80,12 +88,13 @@ export default {
             nodeNameErr: '',
             producerAddr: '',
             producerAddrErr: '',
+            tipsType: '',
 
             activeAccount,
             quotaAddr: activeAccount.getDefaultAddr(),
 
             stopWatch: false,
-            loading: false
+            loading: false,
         };
     },
     computed: {
@@ -120,6 +129,7 @@ export default {
         producerAddr: function() {
             clearTimeout(addrTimeout);
             addrTimeout = null;
+            this.hideTips();
 
             if (this.stopWatch) {
                 return;
@@ -133,6 +143,7 @@ export default {
         nodeName: function() {
             clearTimeout(nameTimeout);
             nameTimeout = null;
+            this.hideTips();
 
             if (this.stopWatch) {
                 return;
@@ -175,6 +186,13 @@ export default {
             }
 
             this.producerAddrErr = '';
+        },
+
+        hideTips() {
+            this.tipsType = '';
+        },
+        showTips(type) {
+            this.tipsType = type;
         },
 
         clearAll() {
@@ -251,6 +269,7 @@ export default {
         justify-content: space-between;
         flex-wrap: wrap;
         .item {
+            position: relative;
             display: inline-block;
             width: 49%;
             min-width: 470px;
@@ -292,8 +311,38 @@ export default {
             }
         }
     }
-
+    .tips {
+        position: absolute;
+        min-width: 300px;
+        left: 50%;
+        bottom: 52px;
+        transform: translate(-50%, 0);
+        background: #fff;
+        box-shadow: 0 5px 20px 0 rgba(0,0,0,0.10);
+        border-radius: 8px;
+        font-size: 14px;
+        color: #3E4A59;
+        padding: 13px 10px;
+        box-sizing: border-box;
+        font-family: $font-normal;
+        opacity: 0;
+        transition: all 0.5s ease-in-out;   
+        &.active {
+            opacity: 1;
+        }
+        &:after {
+            content: ' ';
+            display: inline-block;
+            border: 6px solid transparent;
+            border-top: 6px solid #fff;
+            position: absolute;
+            bottom: -12px;
+            left: 50%;
+            margin-left: -6px;
+        }
+    }
     .input-item {
+        position: relative;
         box-sizing: border-box;
         height: 40px;
         line-height: 40px;
@@ -323,6 +372,12 @@ export default {
     }
 }
 
+@media only screen and (max-width: 1209px) {
+    .register-wrapper .row .btn {
+        bottom: -11px;
+    }
+}
+
 @media only screen and (max-width: 750px) {
     .register-wrapper {
         margin-top: 20px;
@@ -333,6 +388,12 @@ export default {
         &:first-child {
             margin-right: 0px;
         }
+    }
+}
+
+@media only screen and (max-width: 550px) {
+    .register-wrapper {
+        padding: 0px 20px 30px 20px;
     }
 }
 </style>

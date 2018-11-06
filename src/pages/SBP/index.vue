@@ -11,8 +11,9 @@
 
         <div v-if="!loadingToken" class="section">
             <div class="title">{{ $t('SBP.section2.title') }}</div>
-            <list class="content" :showConfirm="showConfirm"
-                  :tokenInfo="tokenInfo" :sendTx="sendTx"></list>
+            <div class="list-content content">
+                <list :showConfirm="showConfirm" :tokenInfo="tokenInfo" :sendTx="sendTx"></list>
+            </div>
         </div>
 
         <div v-if="showConfirmType" class="gray-wrapper">
@@ -323,6 +324,10 @@ export default {
         box-shadow: 0 2px 48px 1px rgba(176,192,237,0.42);
         border-radius: 2px;
     }
+    .list-content {
+        width: 100%;
+        overflow: auto;
+    }
 }
 
 .row {
@@ -363,6 +368,15 @@ export default {
         color: #FF2929;
         line-height: 16px;
         text-align: right;
+    }
+}
+
+@media only screen and (max-width: 550px) {
+    .SBP-wrapper {
+        padding: 15px;
+    }
+    .section {
+        padding-top: 20px;
     }
 }
 </style>
