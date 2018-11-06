@@ -269,6 +269,7 @@ module.exports = {
             producerAddr: '出块地址',
             quotaAddr: '抵押地址',
             quotaTime: '抵押周期',
+            allReward: '全部可提取的出块奖励',
             time: '7776000个快照块（约90天）',
             quotaAmount: '抵押金额',
             confirmBtn: '提交注册',
