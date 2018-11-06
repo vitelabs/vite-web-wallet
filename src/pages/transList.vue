@@ -106,6 +106,7 @@ export default {
                     date: date(trans.timestamp, this.$i18n.locale),
                     status,
                     type,
+                    hash: trans.hash,
                     transAddr: trans.transAddr,
                     amount: trans.amount,
                     token: trans.token
@@ -122,6 +123,7 @@ export default {
                 nowList.push({
                     type: `<img class="icon" src='${typeImg}'/>`,
                     amount: trans.amount + ' ' + trans.token,
+                    hash: trans.hash,
                     transAddr: trans.transAddr
                 });
             });
