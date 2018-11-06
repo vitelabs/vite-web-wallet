@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import timer from 'utils/asyncFlow';
+import {timer} from 'utils/asyncFlow';
 
 let quotaInst;
 

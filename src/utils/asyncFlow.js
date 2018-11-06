@@ -1,4 +1,4 @@
-export default class timer {
+export  class timer {
     constructor( loopFunc, interval = 1000 ) {
         this.interval = interval;
         this.timeHandler = null;

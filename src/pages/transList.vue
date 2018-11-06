@@ -59,7 +59,7 @@ import receiveImg from 'assets/imgs/receive.svg';
 import pagination from 'components/pagination.vue';
 import tabelList from 'components/tabelList.vue';
 import date from 'utils/date.js';
-import timer from 'utils/asyncFlow';
+import {timer} from 'utils/asyncFlow';
 import loopTime from 'config/loopTime';
 
 let transListInst = null;

@@ -19,7 +19,7 @@ import accountHead from './head';
 import tokenCard from './tokenCard';
 import transaction from './transaction';
 
-import timer from 'utils/asyncFlow';
+import {timer} from 'utils/asyncFlow';
 import loopTime from 'config/loopTime';
 
 let balanceInfoInst = null;
