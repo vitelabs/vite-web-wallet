@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import version from 'version';
+import version from 'config/version';
 import localStorage from 'utils/localStorage';
 
 const version_key = 'version';
