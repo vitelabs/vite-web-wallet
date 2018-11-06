@@ -40,11 +40,8 @@
 </template>
 
 <script>
-import {timer} from 'utils/asyncFlow';
 import ellipsisAddr from 'utils/ellipsisAddr.js';
 import { quotaConfirm } from 'components/quota/index';
-
-let listInst;
 
 export default {
     props: {
@@ -64,10 +61,7 @@ export default {
         }
     },
     created() {
-        this.startLoopList();
-    },
-    destroyed() {
-        this.stopLoopList();
+        this.fetchList();
     },
     data() {
         let activeAccount = this.$wallet.getActiveAccount();
@@ -80,7 +74,6 @@ export default {
     },
     computed: {
         list() {
-            console.log(this.tokenInfo);
             if (!this.tokenInfo || !this.tokenInfo.tokenId) {
                 return [];
             }
@@ -114,17 +107,6 @@ export default {
         }
     },
     methods: {
-        startLoopList() {
-            this.stopLoopList();
-            listInst = new timer(()=>{
-                return this.fetchList();
-            }, 2000);
-            listInst.start();
-        },
-        stopLoopList() {
-            listInst && listInst.stop();
-            listInst = null;
-        },
         fetchList() {
             return this.$store.dispatch('fetchRegistrationList', this.address);
         },
@@ -155,7 +137,6 @@ export default {
                     });
                 }
             }, true);
-            console.log(item.rawData);
         },
         edit(item) {
             if (item.isCancel) {
@@ -168,11 +149,6 @@ export default {
                 return;
             }
             this.showConfirm('reward', item.rawData);
-        },
-
-        _sendTx(type, item) {
-            console.log(type);
-            console.log(item);
         }
     }
 };
