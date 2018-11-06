@@ -14,7 +14,7 @@
                     <div class="__tb_row" v-for="v in voteList" :key="v.nodeName">
                         <div class="__tb_cell">{{v.nodeName}}</div>
                         <div class="__tb_cell">{{v.nodeStatusText}} <i v-if="v.nodeStatus==='cancelRegister'" class="tipsicon hoveraction">
-                                <tooltips :content="$t('vote.section1.hoverHelp')"></tooltips>
+                                <tooltips :content="$t('vote.section1.hoverHelp',{nodeName:v.nodeName})"></tooltips>
                             </i></div>
                         <div class="__tb_cell">{{v.voteNum}}</div>
                         <div class="__tb_cell">{{v.voteStatusText}}</div>
@@ -33,12 +33,14 @@
                     <div class="__tb_cell" v-for="v in $t('vote.section2.head')" :key="v">{{v}}</div>
                 </div>
                 <div class="__tb_content">
-                    <div class="__tb_row __tb_content_row" v-for="v in nodeList" :key="v.nodeName">
+                    <div class="__tb_row __tb_content_row" v-if="nodeList.length" v-for="v in nodeList" :key="v.nodeName">
                         <div class="__tb_cell">{{v.nodeName}}</div>
                         <div class="__tb_cell">{{v.nodeAddr}}</div>
                         <div class="__tb_cell">{{v.voteNum}}</div>
                         <div class="__tb_cell" :class="v.voteStatus==='voting'?'unclickable':'clickable'" @click="vote(v)">{{v.operate}}</div>
                     </div>
+                    <div v-else-if="this.filterKey" class="__tb_row __tb_content_row">{{$t("vote.section2.noSearchData")}}</div>
+                    <div v-else class="__tb_row __tb_content_row">{{$t("vote.section2.noData")}}</div>
                 </div>
             </div>
         </section>
@@ -53,7 +55,7 @@ import c from "config/constant";
 import secTitle from "components/secTitle";
 import pwdConfirm from "components/password";
 import loading from "components/loading";
-import { doUntill } from "utils/asyncFlow";
+import { doUntill, timer } from "utils/asyncFlow";
 export default {
   components: { secTitle, tooltips, search, loading },
   beforeMount() {
@@ -71,6 +73,7 @@ export default {
     }
     this.updateVoteData();
     this.updateNodeData();
+    this.nodeDataTimer = new timer(this.updateNodeData, 75 * 1000);
   },
   data() {
     return {
@@ -80,44 +83,69 @@ export default {
       voteData: [],
       loadingToken: false,
       tokenInfo: null,
-      cache: null
+      cache: null,
+      nodeDataTimer: null
     };
   },
   methods: {
     updateVoteData() {
+        console.log(99999)
       return $ViteJS.Vite.vote_getVoteInfo(
         c.gid,
         this.$wallet.getActiveAccount().getDefaultAddr()
       ).then(data => {
+          console.log(8988888)
         this.voteData = data.result ? [data.result] : [];
-        this.voteData[0]&&(this.voteData[0].voteStatus='voted');
+        this.voteData[0] && (this.voteData[0].voteStatus = "voted");
         return this.voteData;
       });
     },
     updateNodeData() {
       return $ViteJS.Vite.register_getCandidateList(c.gid).then(data => {
-        this.nodeData = data.result.map(v=>{
+        this.nodeData =
+          data.result.map(v => {
             return {
-                ...v,
-                nodeName:v.name
-            }
-        }) || [];
+              ...v,
+              nodeName: v.name
+            };
+          }) || [];
         return this.nodeData;
       });
     },
     cancelVote(v) {
       const activeAccount = this.$wallet.getActiveAccount();
+      const quotaConfirm = {
+        title: this.$t("vote.section1.quotaConfirm.title"),
+        content: this.$t("vote.section1.quotaConfirm.content"),
+        cancelText: this.$t("vote.section1.quotaConfirm.cancelText"),
+        submitText: this.$t("vote.section1.quotaConfirm.submitText"),
+        submit: () => {
+          this.$router.push({
+            name: "quota"
+          });
+        }
+      };
       const successCancel = () => {
         activeAccount
-          .sendTx({ tokenId: this.tokenInfo.tokenId,nodeName:this.voteList[0].nodeName }, "cancelVoteBlock")
+          .sendTx(
+            {
+              tokenId: this.tokenInfo.tokenId,
+              nodeName: this.voteList[0].nodeName
+            },
+            "cancelVoteBlock"
+          )
           .then(d => {
             const t = Object.assign({}, v);
             t.isCache = true;
             t.voteStatus = "canceling"; // 撤销投票中
             this.cache = t;
-            doUntill({createPromise:this.updateVoteData, test:({ resolve, reject }) => {
-              return this.cache === null;
-            }});
+            this.$toast(this.$t("vote.section1.toast"));
+            doUntill({
+              createPromise: this.updateVoteData,
+              test: ({ resolve, reject }) => {
+                return this.cache === null;
+              }
+            });
           });
       };
       activeAccount.initPwd(
@@ -132,21 +160,45 @@ export default {
     },
     vote(v) {
       const activeAccount = this.$wallet.getActiveAccount();
+      const quotaConfirm = {
+        title: this.$t("vote.section2.quotaConfirm.title"),
+        content: this.$t("vote.section2.quotaConfirm.content"),
+        cancelText: this.$t("vote.section2.quotaConfirm.cancelText"),
+        submitText: this.$t("vote.section2.quotaConfirm.submitText"),
+        submit: () => {
+          this.$router.push({
+            name: "quota"
+          });
+        }
+      };
       const successVote = () => {
         activeAccount
           .sendTx(
             { nodeName: v.name, tokenId: this.tokenInfo.tokenId },
             "voteBlock"
           )
-          .then(d => {
-            const t = Object.assign({}, v);
-            t.isCache = true;
-            t.voteStatus = 'voting'; // 投票中
-            this.cache = t;
-            doUntill({createPromise:this.updateVoteData, test:({ resolve, reject }) => {
-              return this.cache === null; // 直到缓存清空即停止轮询问。
-            }});
-          });
+          .then(
+            d => {
+              const t = Object.assign({}, v);
+              t.isCache = true;
+              t.voteStatus = "voting"; // 投票中
+              t.nodeStatus = 1;
+              this.cache = t;
+              this.$toast(this.$t("vote.section2.toast"));
+              doUntill({
+                createPromise: this.updateVoteData,
+                test: ({ resolve, reject }) => {
+                  return this.cache === null; // 直到缓存清空即停止轮询问。
+                }
+              });
+            },
+            e => {
+              const code = e && e.error ? e.error.code || -1 : e ? e.code : -1;
+              if (code === -35002) {
+                quotaConfirm;
+              }
+            }
+          );
       };
       const t = this.haveVote ? "cover" : "normal";
       activeAccount.initPwd(
@@ -179,11 +231,14 @@ export default {
         }
         this.voteData[0] = Object.assign({}, this.cache); // 否则只展示缓存
       }
-      this.voteData[0]&&this.voteData[0].nodeStatus===2&&(this.voteData[0].voteStatus="voteNotWork");// 取消注册情况下作废投票，优先级最高
-    const voteList = this.voteData.map(v => {
+      this.voteData[0] &&
+        this.voteData[0].nodeStatus === 2 &&
+        (this.voteData[0].voteStatus = "voteNotWork"); // 取消注册情况下作废投票，优先级最高
+      const voteList = this.voteData.map(v => {
         v.nodeStatusText = this.$t(`vote.section1.nodeStatusMap`)[v.nodeStatus];
-        v.voteStatusText = this.$t(`vote.section1.voteStatusMap`)[v.voteStatus]||'注册中';
-        v.voteNum = v.balance||0; // tans
+        v.voteStatusText =
+          this.$t(`vote.section1.voteStatusMap`)[v.voteStatus] || "注册中";
+        v.voteNum = v.balance || 0; // tans
         v.operate = "撤销";
         return v;
       });
@@ -206,6 +261,9 @@ export default {
           );
         });
     }
+  },
+  beforeDestroy() {
+    this.nodeDataTimer && this.nodeDataTimer.stop;
   }
 };
 </script>

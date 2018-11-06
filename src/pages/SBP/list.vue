@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import timer from 'utils/asyncFlow';
+import {timer} from 'utils/asyncFlow';
 import ellipsisAddr from 'utils/ellipsisAddr.js';
 
 let listInst;

@@ -6,31 +6,38 @@ import './assets/scss/mixins.scss';
 import Vue from 'vue';
 Vue.config.devtools = true;
 import VueRouter from 'vue-router';
-import VueI18n from 'vue-i18n';
 
 import App from 'pages/index.vue';
 import start from 'pages/start.vue';
 import login from 'pages/login/index.vue';
 
 import routes from 'routes/index';
-import i18nCon from 'i18n';
+
 
 import 'utils/eventEmitter.js';
 import 'utils/viteWallet/index.js';
 
 import store from './store';
 import statistics from 'utils/statistics';
-import Wallet from 'utils/wallet/index.js';
-let wallet = new Wallet();
-
-import initMixin from './mixin.js';
-initMixin(wallet);
-
 import { initPwdConfirm } from 'components/password/index.js';
 
-Vue.use(VueRouter);
-Vue.use(VueI18n);
 
+import plugin from 'utils/plugins/addPlugin';
+import Wallet from 'utils/wallet/index.js';
+const  wallet = new Wallet();
+Vue.use(plugin,{wallet});
+Vue.use(VueRouter);
+import {i18n} from 'i18n';
+
+
+document.addEventListener('drop', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+});
+document.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+});
 // Start loading animate
 let element  = document.getElementById('loading');
 element.className += 'spinner big-spinner';
@@ -38,10 +45,8 @@ element.className += 'spinner big-spinner';
 setTimeout(() => {
     element.className += ' dis';
 }, 800);
-
 // Loading finish, app init finish also.
 setTimeout(() => {    
-    const i18n = new VueI18n( i18nCon() );
     initPwdConfirm(i18n);
 
     wallet.reSave();

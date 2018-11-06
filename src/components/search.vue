@@ -1,6 +1,6 @@
 <template>
-    <div class="search" @click="focusInput">
-        <i class="icon"></i><input :placeholder="placeholder" ref="i" type="text" v-model="v" @input.prevent="updateKey">
+    <div class="search" @click="$refs.i.focus()">
+        <i class="icon"></i><input :placeholder="placeholder" autocomplete="organization" ref="i" type="text" v-model="v" @input.prevent="updateKey">
     </div>
 </template>
 <script>
@@ -17,9 +17,6 @@ export default {
         }
     },
     methods: {
-        focusInput(){
-            this.$refs.i.focus()
-        },
         updateKey: throttle(function() {
             this.$emit("input", this.v);
         }, 500)
