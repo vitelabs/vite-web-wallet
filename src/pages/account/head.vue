@@ -108,9 +108,7 @@ export default {
 
             // IE 11
             let userAgent = navigator.userAgent;
-            if (userAgent.indexOf('compatible') > -1 && 
-                userAgent.indexOf('MSIE') > -1 && 
-                userAgent.indexOf('Opera') === -1) {
+            if (userAgent.indexOf('Trident')) {
                 let oPop = window.open(this.qrcode,'','width=1, height=1, top=5000, left=5000');
                 for(; oPop.document.readyState != 'complete'; ){
                     if (oPop.document.readyState == 'complete')break;
