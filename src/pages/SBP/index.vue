@@ -169,11 +169,15 @@ export default {
                 return;
             }
 
-            if (this.showConfirmType === 'edit') {
-                this.sendUpdateTx();
-            } else {
-                this.sendRewardTx();
-            }
+            this.activeAccount.initPwd({
+                submit: () => {
+                    if (this.showConfirmType === 'edit') {
+                        this.sendUpdateTx();
+                    } else {
+                        this.sendRewardTx();
+                    }
+                }
+            });
         },
         sendUpdateTx() {
             this.loading = true;
