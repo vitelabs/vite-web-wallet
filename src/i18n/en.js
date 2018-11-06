@@ -223,12 +223,12 @@ module.exports = {
             confirms: 'Confirming',
             confirmed: 'Confirmed',
         },
-        valid:{
-            addr:'Address format error',
-            bal:'Insufficient balance',
-            pswd:'Password error',
-            amt:'Amount format error',
-            succ:'Transaction successful!'
+        valid: {
+            addr: 'Address format error',
+            bal: 'Insufficient balance',
+            pswd: 'Password error',
+            amt: 'Amount format error',
+            succ: 'Transaction successful!'
         },
         timestamp: 'Timestamp',
         tAddress: 'Address',
@@ -311,25 +311,66 @@ module.exports = {
         title: '投票',
         help: {
             title: '了解投票与投票收益',
-            text: '您可以参与投票选出共25个SBP（Snapshot Block Producer），官方SBP获得的出块奖励的70%会分发给那些将票投给官方SBP的地址。', 
+            text: '您可以参与投票选出共25个SBP（Snapshot Block Producer），每轮投票时间共75秒，您的投票数为投票地址所拥有的VITE数量，默认为您保持上一轮的投票意向；得票量排名前25名的候选节点将当选SBP。',
         },
-        section1:{
-            title:'我的投票',
-            head:['节点名称', '节点状态', '当前投票数', '投票状态', '操作'],
-            nodeStatusMap:{
-                cancelRegister:'取消注册',
-                registering:'注册中'
+        section1: {
+            title: '我的投票',
+            head: ['节点名称', '节点状态', '当前投票数', '投票状态', '操作'],
+            nodeStatusMap: {
+                1: '注册中',
+                2: '取消注册'
             },
-            voteStatusMap:{
-                cancelVote:'取消投票',
-                voting:'投票中'
+            voteStatusMap: {
+                voted: '已投票',
+                voting: '正在投票中',
+                canceling: '撤销中',
+                voteNoWork: '投票作废'
             },
-            hoverHelp:'您投票的“SBP2”已经取消注册，您可以直接重新投票、或者撤销投票；如果您不重新投票或撤销投票，“SBP2”重新注册后，您原来的投票立即恢复生效。'
+            hoverHelp: '您投票的{nodeName}已经取消注册，您可以直接重新投票、或者撤销投票；如果您不重新投票或撤销投票，{nodeName}重新注册后，您原来的投票将恢复生效。',
+            confirm: {
+                title: '撤销投票',
+                cancelText: '确认撤销',
+                submitText: '暂不撤销'
+            },
+            toast: '撤销投票请求已发送',
+            quotaConfirm: {
+                title: '配额不足',
+                content: '当前配额不足，无法进行撤销，您需要抵押vite配额获取配额才可以投票',
+                cancelText: '暂不投票',
+                submitText: '获取配额'
+            },
+            operate:'撤销投票',
+            operateBtn:'撤销'
         },
 
-        section2:{
-            title:'候选节点列表',
-            head:['节点名称', '出块地址', '当前投票数', '操作']
+        section2: {
+            title: '候选节点列表',
+            head: ['节点名称', '出块地址', '当前投票数', '操作'],
+            confirm: {
+                normal: {
+                    title: '投票',
+                    cancelText: '暂不投票',
+                    submitText: '确认投票',
+                    content: ''
+                },
+                cover: {
+                    title: '投票',
+                    content: '您已经投过票，再次投票将会覆盖上一次投票',
+                    cancelText: '确认覆盖上次投票',
+                    submitText: '取消保持原投票'
+                }
+            },
+            toast: '投票请求已发送',
+            quotaConfirm: {
+                title: '配额不足',
+                content: '当前配额不足，无法进行投票，您需要抵押vite配额获取配额才可以投票',
+                cancelText: '暂不投票',
+                submitText: '获取配额'
+            },
+            noSearchData:'无结果，换个输入试试',
+            noData:'暂无数据',
+            operate:'投票',
+            operateBtn:'投票'
         }
     },
 
@@ -365,7 +406,7 @@ module.exports = {
         first: 'First',
         last: 'Last',
     },
-    hint:{
+    hint: {
         create: 'Creation failed',
         logoutErr: 'Logout Error!',
         pwErr: 'Incorrect password!',
