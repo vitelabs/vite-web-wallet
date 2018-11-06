@@ -107,8 +107,7 @@ export default {
             }
 
             // IE
-            let userAgent = navigator.userAgent;
-            if (userAgent.indexOf('Trident')) {
+            if(!!window.ActiveXObject || 'ActiveXObject' in window) {
                 var arr = this.qrcode.split(',');
                 var mime = arr[0].match(/:(.*?);/)[1];
                 var bstr = atob(arr[1]);
