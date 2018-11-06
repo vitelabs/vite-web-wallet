@@ -313,13 +313,13 @@ module.exports = {
             title: '我的投票',
             head: ['节点名称', '节点状态', '当前投票数', '投票状态', '操作'],
             nodeStatusMap: {
-                1: '注册中',
-                2: '取消注册'
+                1: '正在候选',
+                2: '停止候选'
             },
             voteStatusMap: {
                 voted: '已投票',
                 voting: '正在投票中',
-                canceling: '撤销中',
+                canceling: '正在撤销中',
                 voteNoWork: '投票作废'
             },
             hoverHelp: '您投票的{nodeName}已经取消注册，您可以直接重新投票、或者撤销投票；如果您不重新投票或撤销投票，{nodeName}重新注册后，您原来的投票将恢复生效。',
@@ -352,8 +352,8 @@ module.exports = {
                 cover: {
                     title: '投票',
                     content: '您已经投过票，再次投票将会覆盖上一次投票',
-                    cancelText: '取消覆盖',
-                    submitText: '确认覆盖'
+                    cancelText: '确认覆盖',
+                    submitText: '取消覆盖'
                 }
             },
             toast: '投票请求已发送',
