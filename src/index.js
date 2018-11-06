@@ -1,3 +1,4 @@
+// import '@babel/polyfill';
 require('es6-promise').polyfill();
 
 import 'utils/performance';
@@ -20,6 +21,7 @@ import 'utils/viteWallet/index.js';
 import store from './store';
 import statistics from 'utils/statistics';
 import { initPwdConfirm } from 'components/password/index.js';
+import { initQuotaConfirm } from 'components/quota/index.js';
 
 
 import plugin from 'utils/plugins/addPlugin';
@@ -48,7 +50,7 @@ setTimeout(() => {
 // Loading finish, app init finish also.
 setTimeout(() => {    
     initPwdConfirm(i18n);
-
+    
     wallet.reSave();
     let { Ledger } = viteWallet;
     Ledger.getDefaultTokenList();
@@ -87,6 +89,8 @@ setTimeout(() => {
         statistics.pageView(to.path);
         next();
     });
+
+    initQuotaConfirm(i18n, router);
 
     new Vue({
         el: '#app',

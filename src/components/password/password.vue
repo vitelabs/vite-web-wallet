@@ -8,8 +8,8 @@
         }">
             <input v-model="password" :placeholder="$t('pwdConfirm.placeholder')" type="password"/>
         </div>
-        <div v-show="isShowPWD" class="hold-pwd" @click="toggleHold">
-            <span v-show="isPwdHold">hold</span>
+        <div v-show="isShowPWDHold" class="hold-pwd" @click="toggleHold">
+            <span :class="{ 'active': isPwdHold }"></span>
             {{ $t('pwdConfirm.conf') }}
         </div>
     </confirm>
@@ -54,6 +54,10 @@ export default {
             default: ''
         },
         isShowPWD: {
+            type: Boolean,
+            default: true
+        },
+        isShowPWDHold: {
             type: Boolean,
             default: true
         }
@@ -114,6 +118,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '~assets/scss/vars.scss';
+
 .pass-input {
     width: 100%;
     background: #FFFFFF;
@@ -129,6 +135,26 @@ export default {
     input {
         width: 100%;
         font-size: 14px;
+    }
+}
+.hold-pwd {
+    font-family: $font-normal;
+    font-size: 14px;
+    color: #1D2024;
+    margin-top: 12px;
+    span {
+        display: inline-block;
+        margin-bottom: -3px;
+        width: 16px;
+        height: 16px;
+        box-sizing: border-box;
+        background: #FFFFFF;
+        border: 1px solid #D4DEE7;
+        border-radius: 16px;
+        &.active {
+            background: url('../../assets/imgs/presnet.svg') no-repeat center;
+            background-size: 16px 16px;
+        }
     }
 }
 </style>

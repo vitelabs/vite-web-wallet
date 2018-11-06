@@ -85,16 +85,22 @@ export default {
         };
     },
     computed: {
+        regNameList() {
+            return this.$store.getters.regNameList;
+        },
+        regAddrList() {
+            return this.$store.getters.regAddrList;
+        },
         btnUnuse() {
             if (!this.tokenInfo || !this.tokenInfo.tokenId) {
                 return true;
             }
 
-            // let balance = this.tokenBalList[this.tokenInfo.tokenId].totalAmount;
-            // let minAmount = viteWallet.BigNumber.toMin(amount, this.tokenInfo.decimals);
-            // if (viteWallet.BigNumber.compared(balance, minAmount) < 0) {
-            //     return true;
-            // }
+            let balance = this.tokenBalList[this.tokenInfo.tokenId] ? this.tokenBalList[this.tokenInfo.tokenId].totalAmount : 0;
+            let minAmount = viteWallet.BigNumber.toMin(amount, this.tokenInfo.decimals);
+            if (viteWallet.BigNumber.compared(balance, minAmount) < 0) {
+                return true;
+            }
 
             return this.loading || !this.nodeName || !this.producerAddr || this.nodeNameErr || this.producerAddrErr;
         },
@@ -132,12 +138,20 @@ export default {
     },
     methods: {
         testName() {
-            if (!this.nodeName || 
-                !/^[a-zA-Z0-9_\.]+$/g.test(this.nodeName) ||
-                this.nodeName.length > 40) {
+            let nodeName = this.nodeName.trim();
+
+            if (!nodeName || 
+                !/^[a-zA-Z0-9_\.]+$/g.test(nodeName) ||
+                nodeName.length > 40) {
                 this.nodeNameErr = this.$t('SBP.section1.nameErr');
                 return;
             }
+
+            if (this.regNameList.indexOf(nodeName) !== -1) {
+                this.nodeNameErr = this.$t('SBP.section1.nameUsed');
+                return;
+            }
+
             this.nodeNameErr = '';
         },
         testAddr() {
@@ -146,6 +160,12 @@ export default {
                 this.producerAddrErr = this.$t('SBP.section1.addrErr');
                 return;
             }
+
+            if (this.regAddrList.indexOf(this.producerAddr) !== -1) {
+                this.producerAddrErr = this.$t('SBP.section1.addrUsed');
+                return;
+            }
+
             this.producerAddrErr = '';
         },
 
@@ -187,19 +207,22 @@ export default {
                 producerAddr: this.producerAddr,
                 amount,
                 nodeName: this.nodeName
-            }, 'registerBlock', (result) => {
+            }, 'registerBlock').then(() => {
                 this.loading = false;
-
-                if (!result) {
-                    this.$toast(this.$t('SBP.section1.registerFail'));
-                    return;
-                }
-
                 this.$toast(this.$t('SBP.section1.registerSuccess'));
                 this.clearAll();
                 Vue.nextTick(() => {
                     this.stopWatch = false;
                 });
+            }).catch((err) => {
+                console.log(err);
+                this.loading = false;
+
+                if (err && err.error && err.error.code && err.error.code === -35002) {
+                    
+                    return;
+                }
+                this.$toast(this.$t('SBP.section1.registerFail'));
             });
         }
     }
