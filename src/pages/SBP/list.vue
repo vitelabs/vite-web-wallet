@@ -17,13 +17,18 @@
                 <div class="__tb_cell height">{{ item.withdrawHeight }}</div>
                 <div class="__tb_cell reward">{{ item.availableReward }}</div>
                 <div class="__tb_cell operate">
-                    <span class="btn __pointer" :class="{
+                    <span class="btn" :class="{
+                        '__pointer': !item.isCancel,
                         'unuse': item.isCancel    
                     }" @click="edit(item)">edit</span>
-                    <span class="btn __pointer" :class="{
+                    <span class="btn" :class="{
+                        '__pointer': item.isMaturity && !item.isCancel,
                         'unuse': !item.isMaturity || item.isCancel    
                     }" @click="cancel(item)">cancel</span>
-                    <span class="btn __pointer" @click="reward(item)">reward</span>
+                    <span class="btn" :class="{
+                        '__pointer': item.isReward,
+                        'unuse': !item.isReward
+                    }" @click="reward(item)">reward</span>
                 </div>
             </div>
         </div>
@@ -82,30 +87,18 @@ export default {
             let decimals = this.tokenInfo.decimals;
             let currentHeight = viteWallet.Ledger.getHeight() || 0;
 
-            // this.$store.state.SBP.registrationList || 
-            let registrationList = [{
-                'name': 'super',
-                'nodeAddr': 'vite_8b3c663cdfa1e4e75fa30d1b2ec341de016570cf986a4ff157',
-                'pledgeAddr': 'vite_8b3c663cdfa1e4e75fa30d1b2ec341de016570cf986a4ff157',
-                'pledgeAmount': 500000000000000000000000,
-                'withdrawHeight': 100,
-                'withdrawTime': 23232323,
-                'cancelHeight': 0,
-                'availableReward': 1051200000,
-                'availableRewardOneTx': 1051200000,
-                'rewardStartHeight': 1,
-                'rewardEndHeight': 100
-            }];
-  
+            let registrationList = this.$store.state.SBP.registrationList || [];  
             let list = [];
 
             registrationList.forEach(item => {
                 let isMaturity = viteWallet.BigNumber.compared(item.withdrawHeight, currentHeight) <= 0;
-                let isCancel = !!item.cancelHeight;
+                let isCancel = item.cancelHeight && !viteWallet.BigNumber.isEqual(item.cancelHeight, 0);
+                let isReward = !viteWallet.BigNumber.isEqual(item.availableReward, 0);
 
                 list.push({
                     isMaturity,
                     isCancel,
+                    isReward,
                     name: item.name,
                     nodeAddr: ellipsisAddr(item.nodeAddr),
                     pledgeAmount: viteWallet.BigNumber.toBasic(item.pledgeAmount, decimals) + ' ' +  this.tokenInfo.tokenSymbol,
@@ -164,6 +157,9 @@ export default {
             this.showConfirm('edit', item.rawData);
         },
         reward(item) {
+            if (!item.isReward) {
+                return;
+            }
             this.showConfirm('reward', item.rawData);
         },
 
