@@ -56,6 +56,7 @@ import secTitle from "components/secTitle";
 import pwdConfirm from "components/password";
 import loading from "components/loading";
 import { doUntill, timer } from "utils/asyncFlow";
+import {quotaConfirm} from "components/quota";
 export default {
   components: { secTitle, tooltips, search, loading },
   beforeMount() {
@@ -89,12 +90,10 @@ export default {
   },
   methods: {
     updateVoteData() {
-        console.log(99999)
       return $ViteJS.Vite.vote_getVoteInfo(
         c.gid,
         this.$wallet.getActiveAccount().getDefaultAddr()
       ).then(data => {
-          console.log(8988888)
         this.voteData = data.result ? [data.result] : [];
         this.voteData[0] && (this.voteData[0].voteStatus = "voted");
         return this.voteData;
@@ -114,17 +113,6 @@ export default {
     },
     cancelVote(v) {
       const activeAccount = this.$wallet.getActiveAccount();
-      const quotaConfirm = {
-        title: this.$t("vote.section1.quotaConfirm.title"),
-        content: this.$t("vote.section1.quotaConfirm.content"),
-        cancelText: this.$t("vote.section1.quotaConfirm.cancelText"),
-        submitText: this.$t("vote.section1.quotaConfirm.submitText"),
-        submit: () => {
-          this.$router.push({
-            name: "quota"
-          });
-        }
-      };
       const successCancel = () => {
         activeAccount
           .sendTx(
@@ -146,8 +134,15 @@ export default {
                 return this.cache === null;
               }
             });
+          })
+          .catch(e => {
+            const code = e && e.error ? e.error.code || -1 : e ? e.code : -1;
+            if (code === -35002) {
+              quotaConfirm({ operate: this.$t("vote.section1.operate") });
+            }
           });
       };
+
       activeAccount.initPwd(
         {
           title: this.$t("vote.section1.confirm.title"),
@@ -160,45 +155,32 @@ export default {
     },
     vote(v) {
       const activeAccount = this.$wallet.getActiveAccount();
-      const quotaConfirm = {
-        title: this.$t("vote.section2.quotaConfirm.title"),
-        content: this.$t("vote.section2.quotaConfirm.content"),
-        cancelText: this.$t("vote.section2.quotaConfirm.cancelText"),
-        submitText: this.$t("vote.section2.quotaConfirm.submitText"),
-        submit: () => {
-          this.$router.push({
-            name: "quota"
-          });
-        }
-      };
       const successVote = () => {
         activeAccount
           .sendTx(
             { nodeName: v.name, tokenId: this.tokenInfo.tokenId },
             "voteBlock"
           )
-          .then(
-            d => {
-              const t = Object.assign({}, v);
-              t.isCache = true;
-              t.voteStatus = "voting"; // 投票中
-              t.nodeStatus = 1;
-              this.cache = t;
-              this.$toast(this.$t("vote.section2.toast"));
-              doUntill({
-                createPromise: this.updateVoteData,
-                test: ({ resolve, reject }) => {
-                  return this.cache === null; // 直到缓存清空即停止轮询问。
-                }
-              });
-            },
-            e => {
-              const code = e && e.error ? e.error.code || -1 : e ? e.code : -1;
-              if (code === -35002) {
-                quotaConfirm;
+          .then(d => {
+            const t = Object.assign({}, v);
+            t.isCache = true;
+            t.voteStatus = "voting"; // 投票中
+            t.nodeStatus = 1;
+            this.cache = t;
+            this.$toast(this.$t("vote.section2.toast"));
+            doUntill({
+              createPromise: this.updateVoteData,
+              test: ({ resolve, reject }) => {
+                return this.cache === null; // 直到缓存清空即停止轮询问。
               }
+            });
+          })
+          .catch(e => {
+            const code = e && e.error ? e.error.code || -1 : e ? e.code : -1;
+            if (code === -35002) {
+              quotaConfirm({ operate: this.$t("vote.section2.operate") });
             }
-          );
+          });
       };
       const t = this.haveVote ? "cover" : "normal";
       activeAccount.initPwd(
@@ -239,7 +221,7 @@ export default {
         v.voteStatusText =
           this.$t(`vote.section1.voteStatusMap`)[v.voteStatus] || "注册中";
         v.voteNum = v.balance || 0; // tans
-        v.operate = "撤销";
+        v.operate = this.$t('vote.section1.operateBtn');
         return v;
       });
       return voteList;
@@ -248,7 +230,7 @@ export default {
       return this.nodeData
         .map(v => {
           v.voteNum = v.voteNum || 0;
-          v.operate = "投票";
+          v.operate = this.$t('vote.section2.operateBtn');
           return v;
         })
         .filter(v => {

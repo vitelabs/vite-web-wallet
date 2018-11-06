@@ -334,7 +334,9 @@ module.exports = {
                 content: '当前配额不足，无法进行撤销，您需要抵押vite配额获取配额才可以投票',
                 cancelText: '暂不投票',
                 submitText: '获取配额'
-            }
+            },
+            operate:'撤销投票',
+            operateBtn:'撤销'
         },
 
         section2: {
@@ -362,7 +364,9 @@ module.exports = {
                 submitText: '获取配额'
             },
             noSearchData:'无结果，换个输入试试',
-            noData:'暂无数据'
+            noData:'暂无数据',
+            operate:'投票',
+            operateBtn:'投票'
         }
     },
 
