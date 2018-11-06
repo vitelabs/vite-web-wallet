@@ -28,6 +28,7 @@ import initMixin from './mixin.js';
 initMixin(wallet);
 
 import { initPwdConfirm } from 'components/password/index.js';
+import { initQuotaConfirm } from 'components/quota/index.js';
 
 Vue.use(VueRouter);
 Vue.use(VueI18n);
@@ -44,7 +45,7 @@ setTimeout(() => {
 setTimeout(() => {    
     const i18n = new VueI18n( i18nCon() );
     initPwdConfirm(i18n);
-
+    
     wallet.reSave();
     let { Ledger } = viteWallet;
     Ledger.getDefaultTokenList();
@@ -83,6 +84,8 @@ setTimeout(() => {
         statistics.pageView(to.path);
         next();
     });
+
+    initQuotaConfirm(i18n, router);
 
     new Vue({
         el: '#app',

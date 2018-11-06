@@ -58,6 +58,7 @@
 import secTitle from 'components/secTitle';
 import loading from 'components/loading';
 import confirm from 'components/confirm';
+import { quotaConfirm } from 'components/quota/index';
 import register from './register';
 import list from './list';
 
@@ -163,27 +164,30 @@ export default {
         },
 
         validTx() {
-            this.testAddr();
-            if (this.btnUnuse) {
-                return;
-            }
-
-            let showConfirmType = this.showConfirmType;
-            this.showConfirmType = '';
-            console.log(this.addr);
-            this.activeAccount.initPwd({
-                cancel: () => {
-                    this.showConfirm(showConfirmType);
-                },
-                submit: () => {
-                    this.showConfirm(showConfirmType);
-                    if (showConfirmType === 'edit') {
-                        this.sendUpdateTx();
-                    } else {
-                        this.sendRewardTx();
-                    }
-                }
+            quotaConfirm({
+                // operate: this.$t('')
             });
+            // this.testAddr();
+            // if (this.btnUnuse) {
+            //     return;
+            // }
+
+            // let showConfirmType = this.showConfirmType;
+            // this.showConfirmType = '';
+            // console.log(this.addr);
+            // this.activeAccount.initPwd({
+            //     cancel: () => {
+            //         this.showConfirm(showConfirmType);
+            //     },
+            //     submit: () => {
+            //         this.showConfirm(showConfirmType);
+            //         if (showConfirmType === 'edit') {
+            //             this.sendUpdateTx();
+            //         } else {
+            //             this.sendRewardTx();
+            //         }
+            //     }
+            // });
         },
         sendUpdateTx() {
             this.loading = true;
@@ -205,38 +209,40 @@ export default {
             });
         },
         sendRewardTx() {
-            this.loading = true;
+            // this.loading = true;
 
-            this.sendTx({
-                rewardAddress: this.addr
-            }, 'rewardBlock').then(() => {
-                this.loading = false;
-                this.$toast(this.$t('SBP.section2.rewardSuccess'));
-                this.closeConfirm();
-            }).catch((err) => {
-                console.log(err);
-                this.loading = false;
+            // this.sendTx({
+            //     rewardAddress: this.addr
+            // }, 'rewardBlock').then(() => {
+            //     this.loading = false;
+            //     this.$toast(this.$t('SBP.section2.rewardSuccess'));
+            //     this.closeConfirm();
+            // }).catch((err) => {
+            //     console.log(err);
+            //     this.loading = false;
 
-                if (err && err.error && err.error.code && err.error.code === -35002) {
-                    return;
-                }
-                this.$toast(this.$t('SBP.section2.rewardFail'));
+            //     if (err && err.error && err.error.code && err.error.code === -35002) {
+            quotaConfirm({
+                operate: 'hjjhkhk'
             });
+            //         return;
+            //     }
+            //     this.$toast(this.$t('SBP.section2.rewardFail'));
+            // });
         },
 
         sendTx({
-            producerAddr, amount, nodeName, rewardAddress
+            producerAddr, rewardAddress
         }, type) {
             if (!viteWallet.Net.getNetStatus()) {
                 this.$toast(this.$t('nav.noNet'));
                 return Promise.reject(false);
             }
-
-            amount = viteWallet.BigNumber.toMin(amount || 0, this.tokenInfo.decimals);            
+          
             return this.activeAccount.sendTx({
                 tokenId: this.tokenInfo.tokenId,
                 nodeName: this.activeItem.name,
-                producerAddr, nodeName, amount, rewardAddress
+                producerAddr, rewardAddress
             }, type);
         }
     }
