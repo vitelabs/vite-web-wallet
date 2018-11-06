@@ -61,7 +61,6 @@ import confirm from 'components/confirm';
 import register from './register';
 import list from './list';
 
-const amount = 500000;
 let addrTimeout;
 
 export default {
@@ -141,7 +140,7 @@ export default {
         showConfirm(type, activeItem) {
             this.showConfirmType = type;
 
-            if (!this.tokenInfo) {
+            if (!this.tokenInfo || !activeItem) {
                 return;
             }
 
@@ -169,9 +168,16 @@ export default {
                 return;
             }
 
+            let showConfirmType = this.showConfirmType;
+            this.showConfirmType = '';
+            console.log(this.addr);
             this.activeAccount.initPwd({
+                cancel: () => {
+                    this.showConfirm(showConfirmType);
+                },
                 submit: () => {
-                    if (this.showConfirmType === 'edit') {
+                    this.showConfirm(showConfirmType);
+                    if (showConfirmType === 'edit') {
                         this.sendUpdateTx();
                     } else {
                         this.sendRewardTx();
@@ -181,11 +187,10 @@ export default {
         },
         sendUpdateTx() {
             this.loading = true;
+
             this.sendTx({
-                producerAddr: this.editAddr,
-                amount,
-                nodeName: this.activeItem.name
-            }).then(() => {
+                producerAddr: this.addr
+            }, 'updateRegisterBlock').then(() => {
                 this.loading = false;
                 this.$toast(this.$t('SBP.section2.updateSuccess'));
                 this.closeConfirm();
@@ -200,29 +205,27 @@ export default {
             });
         },
         sendRewardTx() {
-            // this.loading = true;
-            // this.sendTx({
-            //     producerAddr: this.editAddr,
-            //     amount,
-            //     nodeName: this.activeItem.name
-            // }).then(() => {
-            //     this.updateLoading = false;
-            //     this.$toast(this.$t('SBP.section2.updateSuccess'));
-            //     this.closeConfirm();
-            // }).catch((err) => {
-            //     console.log(err);
-            //     this.updateLoading = false;
+            this.loading = true;
 
-            //     if (err && err.error && err.error.code && err.error.code === -35002) {
-                    
-            //         return;
-            //     }
-            //     this.$toast(this.$t('SBP.section2.updateFail'));
-            // });
+            this.sendTx({
+                rewardAddress: this.addr
+            }, 'rewardBlock').then(() => {
+                this.loading = false;
+                this.$toast(this.$t('SBP.section2.rewardSuccess'));
+                this.closeConfirm();
+            }).catch((err) => {
+                console.log(err);
+                this.loading = false;
+
+                if (err && err.error && err.error.code && err.error.code === -35002) {
+                    return;
+                }
+                this.$toast(this.$t('SBP.section2.rewardFail'));
+            });
         },
 
         sendTx({
-            producerAddr, amount, nodeName
+            producerAddr, amount, nodeName, rewardAddress
         }, type) {
             if (!viteWallet.Net.getNetStatus()) {
                 this.$toast(this.$t('nav.noNet'));
@@ -232,7 +235,8 @@ export default {
             amount = viteWallet.BigNumber.toMin(amount || 0, this.tokenInfo.decimals);            
             return this.activeAccount.sendTx({
                 tokenId: this.tokenInfo.tokenId,
-                producerAddr, nodeName, amount
+                nodeName: this.activeItem.name,
+                producerAddr, nodeName, amount, rewardAddress
             }, type);
         }
     }
