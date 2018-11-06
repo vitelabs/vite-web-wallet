@@ -13,7 +13,7 @@
                 <div class="__tb_content">
                     <div class="__tb_row" v-for="v in voteList" :key="v.nodeName">
                         <div class="__tb_cell">{{v.nodeName}}</div>
-                        <div class="__tb_cell">{{v.nodeStatusText}} <i v-if="v.nodeStatus==='cancelRegister'" class="tipsicon hoveraction">
+                        <div class="__tb_cell">{{v.nodeStatusText}} <i v-if="v.nodeStatus===2" class="tipsicon hoveraction">
                                 <tooltips :content="$t('vote.section1.hoverHelp',{nodeName:v.nodeName})"></tooltips>
                             </i></div>
                         <div class="__tb_cell">{{v.voteNum}}</div>
@@ -153,7 +153,7 @@ export default {
           title: this.$t("vote.section1.confirm.title"),
           submitTxt: this.$t("vote.section1.confirm.submitText"),
           cancelTxt: this.$t("vote.section1.confirm.cancelText"),
-          submit: successCancel
+          cancel: successCancel
         },
         true
       );
@@ -194,7 +194,8 @@ export default {
           submitTxt: this.$t(`vote.section2.confirm.${t}.submitText`),
           cancelTxt: this.$t(`vote.section2.confirm.${t}.cancelText`),
           content: this.$t(`vote.section2.confirm.${t}.content`),
-          submit: successVote
+          submit: this.haveVote?undefined:successVote,
+          cancel:this.haveVote?successVote:undefined
         },
         true
       );
@@ -292,6 +293,7 @@ export default {
     margin-bottom: 29px;
     .__tb_content {
       padding-bottom: 78px;
+      overflow: visible;
     }
   }
   .node_list {
