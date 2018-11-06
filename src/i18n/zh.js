@@ -275,11 +275,11 @@ module.exports = {
             confirmBtn: '提交注册',
             namePlaceholder: '请输入节点名称',
             nameHint: '40个字符以内, 支持大小写英文字母、数字、\'_\'、\'.',
-            nameErr: '节点名称不合法，请输入合法节点名称',
+            nameErr: '节点名称不合法',
             nameUsed: '此节点名称已被注册',
             addrPlaceholder: '请输入快照块出块地址',
             addrHint: '出块地址必须是全节点地址且保持运行状态',
-            addrErr: '出块地址不合法，请输入合法出块地址',
+            addrErr: '出块地址不合法',
             addrUsed: '此出块地址已被使用',
             registerSuccess: '注册请求已发出',
             registerFail: '注册请求失败'
