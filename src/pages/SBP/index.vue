@@ -335,6 +335,7 @@ export default {
             background: #F3F6F9;
             font-size: 14px;
             color: #5E6875;
+            font-family: $font-normal;
         }
         input {
             width: 100%;

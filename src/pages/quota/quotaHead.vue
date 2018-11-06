@@ -1,18 +1,18 @@
 <template>
-    <div class="quota-head-wrapper">
-        <span class="title">{{ $t('quota.title') }}</span>
-        <div @click="showHelp" class="qa __pointer">
-            <img src="../../assets/imgs/help.svg" />{{ $t('quota.Q1') }}
-        </div>
-    </div>
+    <sec-title :showHelp="showHelp"></sec-title>
 </template>
 
 <script>
+import secTitle from 'components/secTitle';
+
 export default {
+    components: {
+        secTitle
+    },
     methods: {
         showHelp() {
             this.$confirm({
-                title: this.$t('quota.Q1'), 
+                title: this.$t('quota.help.title'), 
                 singleBtn: true, 
                 closeBtn: {
                     show: false
