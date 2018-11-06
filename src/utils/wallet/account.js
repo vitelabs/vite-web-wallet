@@ -41,6 +41,7 @@ class Account {
         passTimeout && clearTimeout(passTimeout);
         passTimeout = null;
         this.isHoldPWD = false;
+        window.isShowPWD = false;
     }
 
     initPwd({
@@ -218,7 +219,7 @@ class Account {
     }
 
     getBlock({
-        toAddr, tokenId, amount, message, nodeName, producerAddr
+        toAddr, tokenId, amount, message, nodeName, producerAddr, rewardAddress
     }, type = 'sendBlock', isPow = false) {
         return new Promise((res, rej) => {
             let accountAddress = this.addrs[this.defaultInx].hexAddr;
@@ -228,7 +229,7 @@ class Account {
                 toAddress: toAddr, 
                 tokenId, amount, message, 
                 nodeName, producerAddr,
-                Gid
+                Gid, rewardAddress
             }).then((block)=>{
                 if (!isPow) {
                     return res(block);
@@ -248,13 +249,13 @@ class Account {
     }
 
     sendTx({
-        toAddr, tokenId, amount, message, nodeName, producerAddr
+        toAddr, tokenId, amount, message, nodeName, producerAddr, rewardAddress
     }, type = 'sendBlock') {
         let privKey = this.addrs[this.defaultInx].privKey;
-
+        console.log(rewardAddress);
         return new Promise((res, rej) => {
             this.getBlock({
-                toAddr, tokenId, amount, message, nodeName, producerAddr
+                toAddr, tokenId, amount, message, nodeName, producerAddr, rewardAddress
             }, type).then((block) => {
                 this.sendRawTx(block, privKey).then((data) => {
                     return res(data);

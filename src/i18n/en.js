@@ -151,7 +151,9 @@ module.exports = {
 
     quota: {
         title: 'Get Quota',
-        Q1: 'Quick understanding of quota',
+        help: {
+            title: 'Quick understanding of quota'
+        },
         myQuota: 'My Quota',
         maxTxNum: 'Maximum number of Txs',
         beneficialAddr: 'Profit Address',
@@ -236,22 +238,72 @@ module.exports = {
     },
 
     // SBP
-    SBP: {
-        title: '注册SBP',
+    SBP: { // [TODO]
+        title: 'SBP Registration',
         help: {
-            title: '了解SBP及成为SBP的收益',
-            text: 'SBP（Snapshot Block Producer）是打包快照块的节点，每一轮75秒时间内25个SBP轮流出块。SBP经过投票产生，打包一个快照块将获得0.9482 VITE。'
+            title: 'About SBP',
+            text: 'SBP（Snapshot Block Producer）is a node that packs snapshot block, each round  是打包快照块的节点，每一轮75秒时间内25个SBP轮流出块。SBP经过投票产生，打包一个快照块将获得0.9482 VITE。'
+        },
+        confirm: {
+            title: '注册SBP候选节点',
+            describe: '提交注册后，当前地址的 {amount} VITE将被锁定约90天，解锁后金额将退回抵押地址',
+            leftBtn: '暂不注册',
+            rightBtn: '确认注册',
+            edit: {
+                title: '更换出块地址',
+                placeholder: '请输入新的出块地址',
+                btn: '确认修改'
+            },
+            reward: {
+                title: '提取出块奖励',
+                placeholder: '请输入接收出块奖励地址',
+                btn: '提取奖励'
+            }
         },
         section1: {
-            title: '提交注册'
+            title: '提交注册',
+            nodeName: '节点名称',
+            producerAddr: '出块地址',
+            quotaAddr: '抵押地址',
+            quotaTime: '抵押周期',
+            time: '7776000个快照块（约90天）',
+            quotaAmount: '抵押金额',
+            confirmBtn: '提交注册',
+            allReward: '全部可提取出块奖励',
+            namePlaceholder: '请输入节点名称',
+            nameHint: '40个字符以内, 支持大小写英文字母、数字、\'_\'、\'.',
+            nameErr: '节点名称不合法，请输入合法节点名称',
+            nameUsed: '此节点名称已被注册',
+            addrPlaceholder: '请输入快照块出块地址',
+            addrHint: '出块地址必须是全节点地址且保持运行状态',
+            addrErr: '出块地址不合法，请输入合法出块地址',
+            addrUsed: '此出块地址已被使用',
+            registerSuccess: '注册请求已发出',
+            registerFail: '注册请求失败'
         },
         section2: {
-            title: '注册信息'
+            title: '注册信息',
+            updateSuccess: '修改请求已发送',
+            updateFail: '修改请求发送失败',
+            rewardSuccess: '提取奖励请求已发送',
+            rewardFail: '提取奖励请求发送失败',
+            allReward: '全部可提取的出块奖励',
+            nowReward: '本次可提取的快照块高度范围及奖励金额',
+            rewardAddr: '提取奖励地址',
+            section2: {
+                title: '注册信息',
+                cancelSuccess: '撤销请求已发送',
+                cancelFail: '撤销请求发送失败'
+            },
+            cancelConfirm: {
+                title: '撤销注册SBP',
+                describe: '撤销后您的抵押金额将退回抵押地址；若想成为SBP，您需重新提交注册申请'
+            }
         }
     },
 
     // vote
-    vote: {
+    vote: { // [TODO]
         title: '投票',
         help: {
             title: '了解投票与投票收益',
@@ -315,10 +367,17 @@ module.exports = {
     },
 
 
-    pwdConfirm: {
-        conf: '开启10分钟内免密操作',
+    pwdConfirm: {   // [TODO]
+        conf: '开启5分钟内免密操作',
         title: '输入钱包密码',
         placeholder: '请输入钱包密码'
+    },
+
+    quotaConfirm: {
+        title: '配额不足',
+        describe: '当前配额不足，无法进行{operate}，您需要抵押VITE获取配额才可以{operate}',
+        leftBtn: '暂不{operate}获取配额',
+        rightBtn: '获取配额'
     },
 
     //common

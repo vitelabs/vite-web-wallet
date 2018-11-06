@@ -251,7 +251,7 @@ export default {
     min-width: 150px;
 }
 .height {
-    min-width: 140px;
+    min-width: 185px;
     width: 20%;
 }
 .time {
@@ -266,5 +266,8 @@ export default {
     &.active {
         color: #007AFF;
     }
+}
+.operate {
+    min-width: 210px;
 }
 </style>
