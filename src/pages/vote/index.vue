@@ -18,7 +18,7 @@
                             </i></div>
                         <div class="__tb_cell">{{v.voteNum}}</div>
                         <div class="__tb_cell">{{v.voteStatusText}}</div>
-                        <div class="__tb_cell" :class="v.voteStatus==='voting'||v.voteStatus==='canceling'?'unclickable':'clickable'" @click="cancelVote(v)">{{v.operate}}</div>
+                        <div class="__tb_cell" :class="this.cache?'unclickable':'clickable'" @click="cancelVote(v)">{{v.operate}}</div>
                     </div>
                 </div>
             </div>
@@ -37,7 +37,7 @@
                         <div class="__tb_cell">{{v.nodeName}}</div>
                         <div class="__tb_cell">{{v.nodeAddr}}</div>
                         <div class="__tb_cell">{{v.voteNum}}</div>
-                        <div class="__tb_cell" :class="v.voteStatus==='voting'?'unclickable':'clickable'" @click="vote(v)">{{v.operate}}</div>
+                        <div class="__tb_cell" :class="this.cache?'unclickable':'clickable'" @click="vote(v)">{{v.operate}}</div>
                     </div>
                     <div v-else-if="this.filterKey" class="__tb_row __tb_content_row">{{$t("vote.section2.noSearchData")}}</div>
                     <div v-else class="__tb_row __tb_content_row">{{$t("vote.section2.noData")}}</div>
@@ -56,7 +56,7 @@ import secTitle from "components/secTitle";
 import pwdConfirm from "components/password";
 import loading from "components/loading";
 import { doUntill, timer } from "utils/asyncFlow";
-import {quotaConfirm} from "components/quota";
+import { quotaConfirm } from "components/quota";
 export default {
   components: { secTitle, tooltips, search, loading },
   beforeMount() {
@@ -79,7 +79,6 @@ export default {
   data() {
     return {
       filterKey: "",
-      haveVote: "false",
       nodeData: [],
       voteData: [],
       loadingToken: false,
@@ -196,6 +195,9 @@ export default {
     }
   },
   computed: {
+    haveVote() {
+      return this.voteList[0] && this.voteList[0].voteStatus === "voted";
+    },
     voteList() {
       if (this.cache) {
         // 缓存消费策略
@@ -221,7 +223,7 @@ export default {
         v.voteStatusText =
           this.$t(`vote.section1.voteStatusMap`)[v.voteStatus] || "注册中";
         v.voteNum = v.balance || 0; // tans
-        v.operate = this.$t('vote.section1.operateBtn');
+        v.operate = this.$t("vote.section1.operateBtn");
         return v;
       });
       return voteList;
@@ -230,7 +232,7 @@ export default {
       return this.nodeData
         .map(v => {
           v.voteNum = v.voteNum || 0;
-          v.operate = this.$t('vote.section2.operateBtn');
+          v.operate = this.$t("vote.section2.operateBtn");
           return v;
         })
         .filter(v => {
@@ -238,14 +240,17 @@ export default {
             return true;
           }
           return (
-            new RegExp(this.filterKey, "i").test(v.name) ||
-            new RegExp(this.filterKey, "i").test(v.addr)
+            new RegExp(this.filterKey.trim(), "i").test(v.name) ||
+            new RegExp(this.filterKey.trim(), "i").test(v.addr)
           );
+        })
+        .sort((a, b) => {
+          return a.voteNum - b.voteNum;
         });
     }
   },
   beforeDestroy() {
-    this.nodeDataTimer && this.nodeDataTimer.stop;
+    this.nodeDataTimer && this.nodeDataTimer.stop();
   }
 };
 </script>

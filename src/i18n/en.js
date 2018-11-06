@@ -352,8 +352,8 @@ module.exports = {
                 cover: {
                     title: '投票',
                     content: '您已经投过票，再次投票将会覆盖上一次投票',
-                    cancelText: '确认覆盖上次投票',
-                    submitText: '取消保持原投票'
+                    cancelText: '确认覆盖',
+                    submitText: '取消覆盖'
                 }
             },
             toast: '投票请求已发送',
