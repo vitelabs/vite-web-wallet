@@ -239,6 +239,10 @@ module.exports = {
     // SBP
     SBP: {
         title: '注册SBP',
+        edit: '编辑',
+        reward: '提取奖励',
+        register: '注册SBP',
+        cancel: '撤销注册SBP',
         help: {
             title: '关于SBP',
             text: 'SBP（Snapshot Block Producer）为具有出块权利的节点，您可以通过抵押一定数量的VITE注册成为SBP候选节点；每轮（时长75秒）会选举出25个SBP，每轮得票数前25名中随机选出23个作为SBP，得票数26-100名中随机选出2个作为SBP；出块奖励的50%将作为按块奖励分配给该块的出块节点，另外50%将作为按票奖励分配给该轮次得票数排名前100的节点。'

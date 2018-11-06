@@ -50,6 +50,7 @@
 
 <script>
 import Vue from 'vue';
+import { quotaConfirm } from 'components/quota/index';
 
 const amount = 500000;
 let nameTimeout = null;
@@ -202,7 +203,7 @@ export default {
         },
         sendRegisterTx() {
             this.loading = true;
-
+            console.log(this.nodeName);
             this.sendTx({
                 producerAddr: this.producerAddr,
                 amount,
@@ -219,7 +220,9 @@ export default {
                 this.loading = false;
 
                 if (err && err.error && err.error.code && err.error.code === -35002) {
-                    
+                    quotaConfirm({
+                        operate: this.$t('SBP.register')
+                    });
                     return;
                 }
                 this.$toast(this.$t('SBP.section1.registerFail'));
