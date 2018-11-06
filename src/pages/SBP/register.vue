@@ -36,7 +36,10 @@
 
         <div class="row">
             <div class="item">
-                <div class="title">{{ $t('SBP.section1.quotaAmount') }}</div>
+                <div class="title">
+                    {{ $t('SBP.section1.quotaAmount') }}
+                    <span v-show="amountErr" class="err">{{ amountErr }}</span>
+                </div>
                 <div class="input-item all unuse __ellipsis">500,000 VITE</div>
             </div>
             <div class="item">
@@ -92,18 +95,22 @@ export default {
         regAddrList() {
             return this.$store.getters.regAddrList;
         },
+        amountErr() {
+            if (!this.tokenInfo || !this.tokenInfo.tokenId) {
+                return '';
+            }
+            let balance = this.tokenBalList[this.tokenInfo.tokenId] ? this.tokenBalList[this.tokenInfo.tokenId].totalAmount : 0;
+            let minAmount = viteWallet.BigNumber.toMin(amount, this.tokenInfo.decimals);
+            if (viteWallet.BigNumber.compared(balance, minAmount) < 0) {
+                return this.$t('transList.valid.bal');
+            }
+            return '';
+        },
         btnUnuse() {
             if (!this.tokenInfo || !this.tokenInfo.tokenId) {
                 return true;
             }
-
-            let balance = this.tokenBalList[this.tokenInfo.tokenId] ? this.tokenBalList[this.tokenInfo.tokenId].totalAmount : 0;
-            let minAmount = viteWallet.BigNumber.toMin(amount, this.tokenInfo.decimals);
-            if (viteWallet.BigNumber.compared(balance, minAmount) < 0) {
-                return true;
-            }
-
-            return this.loading || !this.nodeName || !this.producerAddr || this.nodeNameErr || this.producerAddrErr;
+            return this.amountErr || this.loading || !this.nodeName || !this.producerAddr || this.nodeNameErr || this.producerAddrErr;
         },
         tokenBalList() {
             return this.$store.state.account.balance.balanceInfos;
