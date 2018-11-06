@@ -164,30 +164,27 @@ export default {
         },
 
         validTx() {
-            quotaConfirm({
-                // operate: this.$t('')
-            });
-            // this.testAddr();
-            // if (this.btnUnuse) {
-            //     return;
-            // }
+            this.testAddr();
+            if (this.btnUnuse) {
+                return;
+            }
 
-            // let showConfirmType = this.showConfirmType;
-            // this.showConfirmType = '';
-            // console.log(this.addr);
-            // this.activeAccount.initPwd({
-            //     cancel: () => {
-            //         this.showConfirm(showConfirmType);
-            //     },
-            //     submit: () => {
-            //         this.showConfirm(showConfirmType);
-            //         if (showConfirmType === 'edit') {
-            //             this.sendUpdateTx();
-            //         } else {
-            //             this.sendRewardTx();
-            //         }
-            //     }
-            // });
+            let showConfirmType = this.showConfirmType;
+            this.showConfirmType = '';
+
+            this.activeAccount.initPwd({
+                cancel: () => {
+                    this.showConfirm(showConfirmType);
+                },
+                submit: () => {
+                    this.showConfirm(showConfirmType);
+                    if (showConfirmType === 'edit') {
+                        this.sendUpdateTx();
+                    } else {
+                        this.sendRewardTx();
+                    }
+                }
+            });
         },
         sendUpdateTx() {
             this.loading = true;
@@ -203,45 +200,52 @@ export default {
 
                 this.loading = false;
                 if (err && err.error && err.error.code && err.error.code === -35002) {
+                    quotaConfirm({
+                        operate: this.$t('SBP.edit')
+                    });
                     return;
                 }
                 this.$toast(this.$t('SBP.section2.updateFail'));
             });
         },
         sendRewardTx() {
-            // this.loading = true;
+            this.loading = true;
 
-            // this.sendTx({
-            //     rewardAddress: this.addr
-            // }, 'rewardBlock').then(() => {
-            //     this.loading = false;
-            //     this.$toast(this.$t('SBP.section2.rewardSuccess'));
-            //     this.closeConfirm();
-            // }).catch((err) => {
-            //     console.log(err);
-            //     this.loading = false;
+            this.sendTx({
+                rewardAddress: this.addr
+            }, 'rewardBlock').then(() => {
+                this.loading = false;
+                this.$toast(this.$t('SBP.section2.rewardSuccess'));
+                this.closeConfirm();
+            }).catch((err) => {
+                console.log(err);
+                this.loading = false;
 
-            //     if (err && err.error && err.error.code && err.error.code === -35002) {
-            quotaConfirm({
-                operate: 'hjjhkhk'
+                if (err && err.error && err.error.code && err.error.code === -35002) {
+                    quotaConfirm({
+                        operate: this.$t('SBP.reward')
+                    });
+                    return;
+                }
+                this.$toast(this.$t('SBP.section2.rewardFail'));
             });
-            //         return;
-            //     }
-            //     this.$toast(this.$t('SBP.section2.rewardFail'));
-            // });
         },
 
         sendTx({
-            producerAddr, rewardAddress
+            producerAddr, rewardAddress, nodeName, amount
         }, type) {
             if (!viteWallet.Net.getNetStatus()) {
                 this.$toast(this.$t('nav.noNet'));
                 return Promise.reject(false);
             }
           
+            console.log(amount);
+            let toAmount = viteWallet.BigNumber.toMin(amount || 0, this.tokenInfo.decimals);
+            console.log(toAmount);
             return this.activeAccount.sendTx({
                 tokenId: this.tokenInfo.tokenId,
-                nodeName: this.activeItem.name,
+                nodeName: nodeName || this.activeItem.name,
+                amount: toAmount,
                 producerAddr, rewardAddress
             }, type);
         }

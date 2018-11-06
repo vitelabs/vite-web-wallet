@@ -240,6 +240,10 @@ module.exports = {
     // SBP
     SBP: { // [TODO]
         title: 'SBP Registration',
+        edit: '编辑',
+        reward: '提取奖励',
+        register: '注册SBP',
+        cancel: '撤销注册SBP',
         help: {
             title: 'About SBP',
             text: 'SBP（Snapshot Block Producer）is a node that packs snapshot block, each round  是打包快照块的节点，每一轮75秒时间内25个SBP轮流出块。SBP经过投票产生，打包一个快照块将获得0.9482 VITE。'

@@ -42,6 +42,7 @@
 <script>
 import timer from 'utils/asyncFlow';
 import ellipsisAddr from 'utils/ellipsisAddr.js';
+import { quotaConfirm } from 'components/quota/index';
 
 let listInst;
 
@@ -143,7 +144,13 @@ export default {
                         nodeName: item.rawData.name
                     }, 'cancelRegisterBlock').then(()=>{
                         this.$toast(this.$t('SBP.section2.cancelSuccess'));
-                    }).catch(()=>{
+                    }).catch((err)=>{
+                        if (err && err.error && err.error.code && err.error.code === -35002) {
+                            quotaConfirm({
+                                operate: this.$t('SBP.cancel')
+                            });
+                            return;
+                        }
                         this.$toast(this.$t('SBP.section2.cancelFail'));
                     });
                 }

@@ -41,7 +41,8 @@ const getters = {
     regAddrList(state) {
         let list = [];
         state.registrationList.forEach((item) => {
-            list.push(item.nodeAddr);
+            let isCancel = item.cancelHeight && !viteWallet.BigNumber.isEqual(item.cancelHeight, 0);
+            !isCancel && list.push(item.nodeAddr);
         });
         return list;
     }
