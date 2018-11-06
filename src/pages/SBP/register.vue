@@ -228,7 +228,7 @@ export default {
         },
         sendRegisterTx() {
             this.loading = true;
-            console.log(this.nodeName);
+
             this.sendTx({
                 producerAddr: this.producerAddr,
                 amount,

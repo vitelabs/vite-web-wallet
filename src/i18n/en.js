@@ -384,7 +384,7 @@ module.exports = {
     quotaConfirm: {
         title: '配额不足',
         describe: '当前配额不足，无法进行{operate}，您需要抵押VITE获取配额才可以{operate}',
-        leftBtn: '暂不{operate}获取配额',
+        leftBtn: '暂不{operate}',
         rightBtn: '获取配额'
     },
 
