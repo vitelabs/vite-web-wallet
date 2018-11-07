@@ -30,7 +30,7 @@
     box-shadow: 0 2px 15px 1px rgba(176,192,237,0.17);
     border-radius: 8px;
     .hover-title {
-        font-family: $font-bold;
+        font-family: $font-bold, arial, sans-serif;
         text-align: left;
         font-size: 16px;
         line-height: 16px;

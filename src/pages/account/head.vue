@@ -218,7 +218,7 @@ export default {
         font-size: 14px;
         letter-spacing: 0.35px;
         padding-bottom: 24px;
-        font-family: $font-bold;
+        font-family: $font-bold, arial, sans-serif;
         .edit {
             display: inline-block;
             width: 20px;
@@ -284,7 +284,7 @@ export default {
         font-size: 24px;
         color: #1d2024;
         text-align: left;
-        font-family: $font-bold;    
+        font-family: $font-bold, arial, sans-serif;    
         max-width: 24%;
         word-break: break-all;
         .name {
@@ -304,7 +304,7 @@ export default {
     }
     .btn-group {
         width: 212px;
-        font-family: $font-normal-b;
+        font-family: $font-normal-b, arial, sans-serif;
         padding-right: 20px;
         padding-bottom: 30px;
         .btn__small {

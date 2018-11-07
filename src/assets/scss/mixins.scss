@@ -43,7 +43,7 @@ textarea {
 }
 
 .__title {
-    font-family: $font-bold;
+    font-family: $font-bold, arial, sans-serif;
     font-size: 26px;
     color: #FFFFFF;
     letter-spacing: 0;
@@ -64,14 +64,14 @@ textarea {
     background: #007AFF;
     color: #FFFFFF;
     border-radius: 3px;
-    font-family: $font-bold;
+    font-family: $font-bold, arial, sans-serif;
 }
 
 .__btn_border {
     border-radius: 2px;
     background: #fff;
     color: #195ADD;
-    font-family: $font-bold;
+    font-family: $font-bold, arial, sans-serif;
 }
 
 .__btn_input {
@@ -79,7 +79,7 @@ textarea {
     border-radius: 2px;
     overflow: hidden;
     text-align: left;
-    font-family: PingFang-SC-Regular;
+    font-family: $font-normal, arial, sans-serif;
     padding: 0 16px;
     input {
         width: 100%;
@@ -93,7 +93,7 @@ textarea {
     text-align: center;
     font-size: 16px;
     color: #fff;
-    font-family: $font-bold;
+    font-family: $font-bold, arial, sans-serif;
 }
 
 .__ellipsis {

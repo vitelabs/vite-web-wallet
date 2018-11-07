@@ -39,7 +39,7 @@ export default {
     font-size: 24px;
     color: #1D2024;
     .title {
-        font-family: $font-bold;
+        font-family: $font-bold, arial, sans-serif;
     }
 }
 .qa {

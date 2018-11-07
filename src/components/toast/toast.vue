@@ -61,7 +61,7 @@ export default {
     padding: 30px;
     z-index: 1000;
     word-break: keep-all;
-    font-family: $font-bold;
+    font-family: $font-bold, arial, sans-serif;
     font-size: 16px;
     line-height: 24px;
     color: #1D2024;

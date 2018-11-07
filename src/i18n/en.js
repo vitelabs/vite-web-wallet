@@ -11,11 +11,12 @@ module.exports = {
         text3: 'Please make sure that the seed phrase is a hundred percent correct if you choose to restore address with it. Otherwise, any tiny little difference will lead to the result that your address cannot be restored successfully.',
         text4: 'The current version of wallet is preview version, the Vite test tokens you obtained is only for testing and has no any actual value. Meanwhile, the official will occasionally clear test tokens.'
     },
+
     test: { // [TODO]
         t: 'Preview Version',
-        txt1: 'Vite’s Web wallet is a lightweight-node wallet.',
-        txt2: 'Now, it can generate account based on DAG ledger, check account balance, send and receive transactions in default mode, acquire test tokens, check tokens issued by system and etc.',
-        txt3: 'Support finding the mnemonic seed phrase of account and login by importing keystore file.',
+        txt1: 'The preview version of wallet is a lightweight-node wallet officially issued by VITE.',
+        txt2: 'The current version supports functions of checking account balance, sending transactions, receiving transactions in default, acquiring test tokens, staking VITE tokens for TPS quota and etc.',
+        txt3: 'Support acquiring test tokens and experiencing the product by using them, the test tokens issued by VITE official can be only used for testing and with no actual value, it will be cleared by VITE official sporadically',
         v: 'Current version: 1.0.2'
     },
 

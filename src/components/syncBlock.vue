@@ -47,7 +47,7 @@ export default {
 @import "~assets/scss/vars.scss";
 
 .sync-block-wrapper {
-    font-family: $font-bold;
+    font-family: $font-bold, arial, sans-serif;
     font-size: 16px;
     color: #1D2024;
     line-height: 20px;

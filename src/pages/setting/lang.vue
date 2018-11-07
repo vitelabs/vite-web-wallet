@@ -48,7 +48,7 @@ export default {
     font-size: 14px;
     color: #1D2024;
     letter-spacing: 0.35px;
-    font-family: $font-bold;
+    font-family: $font-bold, arial, sans-serif;
     margin-bottom: 16px;
 }
 .lang-list {

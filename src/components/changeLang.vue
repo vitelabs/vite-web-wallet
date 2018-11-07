@@ -42,7 +42,7 @@ export default {
     color: #FFFFFF;
     letter-spacing: 0;
     margin-top: 5px;
-    font-family: $font-bold;
+    font-family: $font-bold, arial, sans-serif;
     z-index: 101;
     &:before {
         content: ' ';
@@ -70,7 +70,7 @@ export default {
     border: 1px solid #E5EDF3;
     box-shadow: 0 6px 36px 0 rgba(176,192,237,0.04);
     border-radius: 4px;
-    font-family: $font-normal;
+    font-family: $font-normal, arial, sans-serif;
     font-size: 14px;
     color: #5E6875;
     letter-spacing: 0;

@@ -216,13 +216,13 @@ export default {
     padding: 8px 40px 8px 20px;
     text-align: left;
     .name {
-        font-family: $font-bold;
+        font-family: $font-bold, arial, sans-serif;
         font-size: 14px;
         color: #333333;
         line-height: 20px;
     }
     .address {
-        font-family: $font-normal-b;
+        font-family: $font-normal-b, arial, sans-serif;
         font-size: 12px;
         line-height: 20px;
         color: #333333;
