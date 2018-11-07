@@ -29,10 +29,10 @@
                         '__pointer': item.isMaturity && !item.isCancel,
                         'unuse': !item.isMaturity || item.isCancel    
                     }" @click="cancel(item)">cancel</span>
-                    <span class="btn" :class="{
+                    <!-- <span class="btn" :class="{
                         '__pointer': item.isReward,
                         'unuse': !item.isReward
-                    }" @click="reward(item)">reward</span>
+                    }" @click="reward(item)">reward</span> -->
                 </div>
             </div>
         </div>
