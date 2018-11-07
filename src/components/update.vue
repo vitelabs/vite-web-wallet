@@ -23,6 +23,12 @@ export default {
         };
     },
     mounted() {
+        // "1": {
+        //     "version": "0.0.1",
+        //     "zh": "0.0.1 中文版 版本描述",
+        //     "en": "0.0.1 english version",
+        //     "time": "22329382932"
+        // }
         let lastVersion = localStorage.getItem(version_key) || null;
 
         let currentCode = lastVersion ? lastVersion.currentCode || 0 : 0;
