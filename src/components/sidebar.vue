@@ -123,9 +123,9 @@ export default {
             this.logoutHover = false;
         },
         logout() {
-            let activeAccount = this.$wallet.getActiveAccount();
-            activeAccount && activeAccount.lock();
-            activeAccount && activeAccount.releasePWD();
+            // let activeAccount = this.$wallet.getActiveAccount();
+            // activeAccount && activeAccount.lock();
+            // activeAccount && activeAccount.releasePWD();
             this.$router.push({
                 name: 'login'
             });

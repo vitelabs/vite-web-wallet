@@ -60,6 +60,10 @@ export default {
             this.$wallet.clearActiveAccount();
 
             // clear all
+            let activeAccount = this.$wallet.getActiveAccount();
+            activeAccount && activeAccount.lock();
+            activeAccount && activeAccount.releasePWD();
+            
             this.$store.commit('commitClearBalance');
             this.$store.commit('commitClearTransList');
             this.$store.commit('commitClearPledge');
