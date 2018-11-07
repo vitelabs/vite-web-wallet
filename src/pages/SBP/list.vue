@@ -5,17 +5,21 @@
             <div class="__tb_cell addr">{{ $t('SBP.section1.producerAddr') }}</div>
             <div class="__tb_cell amount">{{ $t('SBP.section1.quotaAmount') }}</div>
             <div class="__tb_cell height">{{ $t('quota.list.withdrawHeight') }}</div>
-            <div class="__tb_cell reward">{{ $t('SBP.section1.allReward') }}</div>
             <div class="__tb_cell operate">{{ $t('quota.list.operate') }}</div>
         </div>
         
         <div v-show="list && list.length" class="__tb_content">
-            <div class="__tb_row __tb_content_row" v-for="item in list" :key="item.name">
+            <div class="__tb_row __tb_content_row" v-for="(item, index) in list" :key="item.name">
                 <div class="__tb_cell name">{{ item.name }}</div>
                 <div class="__tb_cell addr">{{ item.nodeAddr }}</div>
                 <div class="__tb_cell amount">{{ item.pledgeAmount }}</div>
-                <div class="__tb_cell height">{{ item.withdrawHeight }}</div>
-                <div class="__tb_cell reward">{{ item.availableReward }}</div>
+                <div class="__tb_cell height">
+                    {{ item.withdrawHeight }}
+                    <i :ref="`toolTips${index}`" @click="showTime(index)" class="tipsicon __pointer">
+                        <tooltips v-show="showTimeTips === index" 
+                                  :content="$t('SBP.section2.expireDate', { time: item.time })"></tooltips>
+                    </i>
+                </div>
                 <div class="__tb_cell operate">
                     <span class="btn" :class="{
                         '__pointer': !item.isCancel,
@@ -40,10 +44,14 @@
 </template>
 
 <script>
-import ellipsisAddr from 'utils/ellipsisAddr.js';
 import { quotaConfirm } from 'components/quota/index';
+import tooltips from 'components/tooltips';
+import date from 'utils/date.js';
 
 export default {
+    components: {
+        tooltips
+    },
     props: {
         showConfirm: {
             type: Function,
@@ -69,7 +77,8 @@ export default {
 
         return {
             activeAccount,
-            address
+            address,
+            showTimeTips: -1
         };
     },
     computed: {
@@ -88,16 +97,36 @@ export default {
                 let isMaturity = viteWallet.BigNumber.compared(item.withdrawHeight, currentHeight) <= 0;
                 let isCancel = item.cancelHeight && !viteWallet.BigNumber.isEqual(item.cancelHeight, 0);
                 let isReward = !viteWallet.BigNumber.isEqual(item.availableReward, 0);
-
+                
+                let day = date(item.withdrawTime * 1000, this.$i18n.locale);
                 list.push({
                     isMaturity,
                     isCancel,
                     isReward,
                     name: item.name,
-                    nodeAddr: ellipsisAddr(item.nodeAddr),
+                    nodeAddr: item.nodeAddr,
                     pledgeAmount: viteWallet.BigNumber.toBasic(item.pledgeAmount, decimals) + ' ' +  this.tokenInfo.tokenSymbol,
                     withdrawHeight: item.withdrawHeight,
-                    time: '?',
+                    time: day,
+                    availableReward: viteWallet.BigNumber.toBasic(item.availableReward, decimals) + ' ' +  this.tokenInfo.tokenSymbol,
+                    rawData: item
+                });
+            });
+            registrationList.forEach(item => {
+                let isMaturity = viteWallet.BigNumber.compared(item.withdrawHeight, currentHeight) <= 0;
+                let isCancel = item.cancelHeight && !viteWallet.BigNumber.isEqual(item.cancelHeight, 0);
+                let isReward = !viteWallet.BigNumber.isEqual(item.availableReward, 0);
+                
+                let day = date(item.withdrawTime * 1000, this.$i18n.locale);
+                list.push({
+                    isMaturity,
+                    isCancel,
+                    isReward,
+                    name: '2938203',
+                    nodeAddr: item.nodeAddr,
+                    pledgeAmount: viteWallet.BigNumber.toBasic(item.pledgeAmount, decimals) + ' ' +  this.tokenInfo.tokenSymbol,
+                    withdrawHeight: item.withdrawHeight,
+                    time: day,
                     availableReward: viteWallet.BigNumber.toBasic(item.availableReward, decimals) + ' ' +  this.tokenInfo.tokenSymbol,
                     rawData: item
                 });
@@ -109,6 +138,24 @@ export default {
     methods: {
         fetchList() {
             return this.$store.dispatch('fetchRegistrationList', this.address);
+        },
+        showTime(index) {
+            this.showTimeTips = index;
+        },
+        hideTime(e) {
+            if (!e || !e.target || this.showTimeTips < 0) {
+                return;
+            }
+
+            let toolTips = this.$refs[`toolTips${this.showTimeTips}`];
+            let toolTipsContainer = toolTips && toolTips.length ? toolTips[0] : null;
+            if (!toolTipsContainer || 
+                e.target === toolTipsContainer ||
+                toolTipsContainer.contains( e.target )) {
+                return;
+            }
+
+            this.showTimeTips = -1;
         },
 
         cancel(item) {
@@ -157,6 +204,28 @@ export default {
 <style lang="scss" scoped>
 @import '~assets/scss/table.scss';
 
+.tipsicon {
+    position: relative;
+    display: inline-block;
+    background: url(~assets/imgs/hover_help.svg);
+    overflow: visible;
+    width: 16px;
+    height: 16px;
+    vertical-align: sub;
+
+    // > div {
+    //     display: none;
+    //     font-size: 14px;
+    //     color: #3e4a59;
+    //     line-height: 20px;
+    // }
+    // &:hover {
+    //     > div {
+    //         display: flex;
+    //     }
+    // }
+}
+
 .btn {
     font-size: 14px;
     color: #007AFF;
@@ -170,7 +239,7 @@ export default {
     min-width: 140px;
 }
 .addr {
-    min-width: 240px;
+    min-width: 470px;
     width: 25%;
 }
 .amount {
@@ -180,10 +249,6 @@ export default {
 .height {
     min-width: 185px;
     width: 20%;
-}
-.reward {
-    width: 14%;
-    min-width: 150px;
 }
 .operate {
     min-width: 205px;
