@@ -1,5 +1,5 @@
 <template>
-    <div class="SBP-wrapper">
+    <div class="SBP-wrapper" @click="hideTimeTips">
         <sec-title></sec-title>
 
         <loading v-if="loadingToken" class="loading"></loading>
@@ -12,7 +12,7 @@
         <div v-if="!loadingToken" class="section">
             <div class="title">{{ $t('SBP.section2.title') }}</div>
             <div class="list-content content">
-                <list :showConfirm="showConfirm" :tokenInfo="tokenInfo" :sendTx="sendTx"></list>
+                <list ref="regList" :showConfirm="showConfirm" :tokenInfo="tokenInfo" :sendTx="sendTx"></list>
             </div>
         </div>
 
@@ -31,7 +31,7 @@
 
                 <div v-if="showConfirmType === 'reward'">
                     <div class="row">
-                        <div class="row-t">{{ $t(`SBP.section2.allReward`) }}</div>
+                        <div class="row-t">{{ $t(`SBP.section1.allReward`) }}</div>
                         <div class="row-content unuse">{{ activeItem.showAvailableReward }}</div>
                     </div>
 
@@ -137,6 +137,9 @@ export default {
             }
 
             this.addrErr = '';
+        },
+        hideTimeTips(e) {
+            this.$refs.regList && this.$refs.regList.hideTime(e);
         },
 
         showConfirm(type, activeItem) {

@@ -290,14 +290,11 @@ module.exports = {
             updateFail: '修改请求发送失败',
             rewardSuccess: '提取奖励请求已发送',
             rewardFail: '提取奖励请求发送失败',
-            allReward: '全部可提取的出块奖励',
+            cancelSuccess: '撤销请求已发送',
+            cancelFail: '撤销请求发送失败',
             nowReward: '本次可提取的快照块高度范围及奖励金额',
             rewardAddr: '提取奖励地址',
-            section2: {
-                title: '注册信息',
-                cancelSuccess: '撤销请求已发送',
-                cancelFail: '撤销请求发送失败'
-            },
+            expireDate: '预计到期时间: {time}',
             cancelConfirm: {
                 title: '撤销注册SBP',
                 describe: '撤销后您的抵押金额将退回抵押地址；若想成为SBP，您需重新提交注册申请'

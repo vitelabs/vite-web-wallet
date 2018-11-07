@@ -1,6 +1,7 @@
 import toast from 'components/toast/index.js';
 import confirm from 'components/confirm/index.js';
 import statistics from 'utils/statistics';
+
 export default {
     install(Vue, { wallet }) {
         Vue.mixin({

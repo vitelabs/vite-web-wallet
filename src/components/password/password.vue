@@ -56,14 +56,11 @@ export default {
         isShowPWD: {
             type: Boolean,
             default: true
-        },
-        isShowPWDHold: {
-            type: Boolean,
-            default: true
         }
     },
     data() {
         return {
+            isShowPWDHold: !window.isShowPWD,
             password: '',
             isPwdHold: false
         };
@@ -71,7 +68,6 @@ export default {
     methods: {
         clear() {
             this.password = '';
-            this.isPwdHold = false;
         },
         toggleHold() {
             if (!this.isShowPWD) {
