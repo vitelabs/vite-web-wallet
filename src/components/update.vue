@@ -3,7 +3,7 @@
         <div class="version-wrapper" v-for="(version, index) in versionList" :key="index">
             <img @click="close(index)" src="../assets/imgs/close.svg" class="close __pointer"/>
             <div class="version">{{ version.version }}</div>
-            <div class="describe">{{ $t('lang') === '中文' ? version.zh : version.en }}</div>
+            <div class="describe" v-html="$t('lang') === '中文' ? version.zh : version.en"></div>
         </div>
     </div>
 </template>
