@@ -11,8 +11,9 @@
 
         <div v-if="!loadingToken" class="section">
             <div class="title">{{ $t('SBP.section2.title') }}</div>
-            <list class="content" :showConfirm="showConfirm"
-                  :tokenInfo="tokenInfo" :sendTx="sendTx"></list>
+            <div class="list-content content">
+                <list :showConfirm="showConfirm" :tokenInfo="tokenInfo" :sendTx="sendTx"></list>
+            </div>
         </div>
 
         <div v-if="showConfirmType" class="gray-wrapper">
@@ -164,30 +165,27 @@ export default {
         },
 
         validTx() {
-            quotaConfirm({
-                // operate: this.$t('')
-            });
-            // this.testAddr();
-            // if (this.btnUnuse) {
-            //     return;
-            // }
+            this.testAddr();
+            if (this.btnUnuse) {
+                return;
+            }
 
-            // let showConfirmType = this.showConfirmType;
-            // this.showConfirmType = '';
-            // console.log(this.addr);
-            // this.activeAccount.initPwd({
-            //     cancel: () => {
-            //         this.showConfirm(showConfirmType);
-            //     },
-            //     submit: () => {
-            //         this.showConfirm(showConfirmType);
-            //         if (showConfirmType === 'edit') {
-            //             this.sendUpdateTx();
-            //         } else {
-            //             this.sendRewardTx();
-            //         }
-            //     }
-            // });
+            let showConfirmType = this.showConfirmType;
+            this.showConfirmType = '';
+
+            this.activeAccount.initPwd({
+                cancel: () => {
+                    this.showConfirm(showConfirmType);
+                },
+                submit: () => {
+                    this.showConfirm(showConfirmType);
+                    if (showConfirmType === 'edit') {
+                        this.sendUpdateTx();
+                    } else {
+                        this.sendRewardTx();
+                    }
+                }
+            });
         },
         sendUpdateTx() {
             this.loading = true;
@@ -203,45 +201,50 @@ export default {
 
                 this.loading = false;
                 if (err && err.error && err.error.code && err.error.code === -35002) {
+                    quotaConfirm({
+                        operate: this.$t('SBP.edit')
+                    });
                     return;
                 }
                 this.$toast(this.$t('SBP.section2.updateFail'));
             });
         },
         sendRewardTx() {
-            // this.loading = true;
+            this.loading = true;
 
-            // this.sendTx({
-            //     rewardAddress: this.addr
-            // }, 'rewardBlock').then(() => {
-            //     this.loading = false;
-            //     this.$toast(this.$t('SBP.section2.rewardSuccess'));
-            //     this.closeConfirm();
-            // }).catch((err) => {
-            //     console.log(err);
-            //     this.loading = false;
+            this.sendTx({
+                rewardAddress: this.addr
+            }, 'rewardBlock').then(() => {
+                this.loading = false;
+                this.$toast(this.$t('SBP.section2.rewardSuccess'));
+                this.closeConfirm();
+            }).catch((err) => {
+                console.log(err);
+                this.loading = false;
 
-            //     if (err && err.error && err.error.code && err.error.code === -35002) {
-            quotaConfirm({
-                operate: 'hjjhkhk'
+                if (err && err.error && err.error.code && err.error.code === -35002) {
+                    quotaConfirm({
+                        operate: this.$t('SBP.reward')
+                    });
+                    return;
+                }
+                this.$toast(this.$t('SBP.section2.rewardFail'));
             });
-            //         return;
-            //     }
-            //     this.$toast(this.$t('SBP.section2.rewardFail'));
-            // });
         },
 
         sendTx({
-            producerAddr, rewardAddress
+            producerAddr, rewardAddress, nodeName, amount
         }, type) {
             if (!viteWallet.Net.getNetStatus()) {
                 this.$toast(this.$t('nav.noNet'));
                 return Promise.reject(false);
             }
           
+            let toAmount = viteWallet.BigNumber.toMin(amount || 0, this.tokenInfo.decimals);
             return this.activeAccount.sendTx({
                 tokenId: this.tokenInfo.tokenId,
-                nodeName: this.activeItem.name,
+                nodeName: nodeName || this.activeItem.name,
+                amount: toAmount,
                 producerAddr, rewardAddress
             }, type);
         }
@@ -319,6 +322,10 @@ export default {
         box-shadow: 0 2px 48px 1px rgba(176,192,237,0.42);
         border-radius: 2px;
     }
+    .list-content {
+        width: 100%;
+        overflow: auto;
+    }
 }
 
 .row {
@@ -359,6 +366,15 @@ export default {
         color: #FF2929;
         line-height: 16px;
         text-align: right;
+    }
+}
+
+@media only screen and (max-width: 550px) {
+    .SBP-wrapper {
+        padding: 15px;
+    }
+    .section {
+        padding-top: 20px;
     }
 }
 </style>

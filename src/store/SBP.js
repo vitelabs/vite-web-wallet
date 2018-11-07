@@ -1,5 +1,4 @@
 const Gid = '00000000000000000001';
-let lastFetchTime = null;
 
 const state = {
     registrationList: []
@@ -16,15 +15,9 @@ const mutations = {
 
 const actions = {
     fetchRegistrationList({ commit }, address) {
-        let fetchTime = new Date().getTime();
-        lastFetchTime = fetchTime;
-
         return viteWallet.Vite['register_getRegistrationList'](Gid, address).then((data)=>{
-            if (fetchTime !== lastFetchTime || !data || !data.result) {
-                return null;
-            }
-            console.log(data);
-            commit('commitRegistrationList', data.result);
+            let result = data && data.result ? data.result : [];
+            commit('commitRegistrationList', result);
             return data;
         });
     }
@@ -41,7 +34,8 @@ const getters = {
     regAddrList(state) {
         let list = [];
         state.registrationList.forEach((item) => {
-            list.push(item.nodeAddr);
+            let isCancel = item.cancelHeight && !viteWallet.BigNumber.isEqual(item.cancelHeight, 0);
+            !isCancel && list.push(item.nodeAddr);
         });
         return list;
     }

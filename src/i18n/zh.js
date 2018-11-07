@@ -13,10 +13,10 @@ module.exports = {
     },
     test: {
         t: '预览版',
-        txt1: 'Vite的Web版钱包是轻节点钱包。',
-        txt2: '目前可以生成基于DAG账本结构的账户、查询账户余额、对外发送交易、默认签收交易，以及获取测试代币、查看目前系统铸造的多种代币等功能。支持账户的助记词找回和加密文件的加载登录。',
-        txt3: 'VITE测试代币仅用于测试，无任何实际价值，同时官方会不定期对测试代币进行清零。',
-        v: '当前版本：预览版'
+        txt1: '预览版钱包是VITE官方发布的轻节点钱包',
+        txt2: '当前版本钱包支持查询账户余额、对外发送交易、默认签收交易、抵押VITE获取配额等功能。',
+        txt3: '同时支持获取测试代币，支持用户使用测试代币体验产品，官方发布的测试代币仅用于测试，无任何实际价值，同时官方会不定期对测试代币进行清零。',
+        v: '当前版本：1.0.2'
     },
 
     mnemonic: {
@@ -100,7 +100,7 @@ module.exports = {
     accDetail: {
         title: '账户详情',
         transfer: '转账',
-        getTestToken: '获取VITE测试代币',
+        getTestToken: '获取测试代币',
         transDetail: '查看账户更多交易详情',
         name: '账户名称',
         address: '我的地址',
@@ -125,7 +125,7 @@ module.exports = {
             remarksLong: '备注请勿超出180个英文字符（或标点符号，一个汉字=6个英文字符）'
         },
         hint: {
-            token: '系统已向您转入一笔VITE测试代币，请注意接收',
+            token: '系统已向您转入一笔VV测试代币，请注意接收',
             tErr: '获取测试代币失败！',
             low: '账户余额不足',
             wrong: '密码错误',
@@ -239,6 +239,10 @@ module.exports = {
     // SBP
     SBP: {
         title: '注册SBP',
+        edit: '编辑',
+        reward: '提取奖励',
+        register: '注册SBP',
+        cancel: '撤销注册SBP',
         help: {
             title: '关于SBP',
             text: 'SBP（Snapshot Block Producer）为具有出块权利的节点，您可以通过抵押一定数量的VITE注册成为SBP候选节点；每轮（时长75秒）会选举出25个SBP，每轮得票数前25名中随机选出23个作为SBP，得票数26-100名中随机选出2个作为SBP；出块奖励的50%将作为按块奖励分配给该块的出块节点，另外50%将作为按票奖励分配给该轮次得票数排名前100的节点。'
@@ -265,16 +269,17 @@ module.exports = {
             producerAddr: '出块地址',
             quotaAddr: '抵押地址',
             quotaTime: '抵押周期',
+            allReward: '全部可提取的出块奖励',
             time: '7776000个快照块（约90天）',
             quotaAmount: '抵押金额',
             confirmBtn: '提交注册',
             namePlaceholder: '请输入节点名称',
             nameHint: '40个字符以内, 支持大小写英文字母、数字、\'_\'、\'.',
-            nameErr: '节点名称不合法，请输入合法节点名称',
+            nameErr: '节点名称不合法',
             nameUsed: '此节点名称已被注册',
             addrPlaceholder: '请输入快照块出块地址',
             addrHint: '出块地址必须是全节点地址且保持运行状态',
-            addrErr: '出块地址不合法，请输入合法出块地址',
+            addrErr: '出块地址不合法',
             addrUsed: '此出块地址已被使用',
             registerSuccess: '注册请求已发出',
             registerFail: '注册请求失败'

@@ -1,7 +1,7 @@
 <template>
     <div class="sec-title-container">
         <span>{{ $t(title) }}</span>
-        <span class="help">
+        <span class="help __pointer">
             <i class="icon"></i>
             <span @click="_showHelp">{{ $t(helpTitle) }}</span>
         </span>
@@ -56,24 +56,34 @@ export default {
 @import "~assets/scss/vars.scss";
 
 .sec-title-container {
-    display: flex;
-    justify-content: space-between;
     font-family: $font-bold;
     font-size: 24px;
     color: #1d2024;
     line-height: 32px;
     .help {
+        float: right;   // iPhone 5/SE
+        margin-top: 6px;
         align-items: center;
         display: flex;
         font-size: 14px;
         color: #007aff;
         text-align: right;
         line-height: 20px;
-        cursor: pointer;
         .icon {
             background: url(~assets/imgs/detail.svg);
             width: 20px;
             height: 20px;
+            margin-bottom: 1px;
+        }
+    }
+}
+
+@media only screen and (max-width: 374px) {
+    .sec-title-container {
+        font-size: 22px;
+        .help {
+            margin-top: 7px;
+            font-size: 12px;
         }
     }
 }

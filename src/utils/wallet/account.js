@@ -252,7 +252,7 @@ class Account {
         toAddr, tokenId, amount, message, nodeName, producerAddr, rewardAddress
     }, type = 'sendBlock') {
         let privKey = this.addrs[this.defaultInx].privKey;
-        console.log(rewardAddress);
+
         return new Promise((res, rej) => {
             this.getBlock({
                 toAddr, tokenId, amount, message, nodeName, producerAddr, rewardAddress

@@ -19,26 +19,9 @@ import accountHead from './head';
 import tokenCard from './tokenCard';
 import transaction from './transaction';
 
-import {timer} from 'utils/asyncFlow';
-import loopTime from 'config/loopTime';
-
-let balanceInfoInst = null;
-
 export default {
     components: {
         accountHead, syncBlock, tokenCard, transaction
-    },
-    beforeMount() {
-        const activeAccount = this.$wallet.getActiveAccount();
-
-        this.clearTime();
-        balanceInfoInst = new timer(()=>{
-            return this.$store.dispatch('getBalanceInfo', activeAccount);
-        }, loopTime.ledger_getBalance);
-        balanceInfoInst.start();
-    },
-    beforeDestroy () {
-        this.clearTime();
     },
     data() {
         return {
@@ -52,10 +35,6 @@ export default {
         }
     },
     methods: {
-        clearTime() {
-            balanceInfoInst && balanceInfoInst.stop();
-            balanceInfoInst = null;
-        },
         showTrans(token) {
             if (!token.id) {
                 return;

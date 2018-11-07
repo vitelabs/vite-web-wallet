@@ -11,12 +11,12 @@ module.exports = {
         text3: 'Please make sure that the seed phrase is a hundred percent correct if you choose to restore address with it. Otherwise, any tiny little difference will lead to the result that your address cannot be restored successfully.',
         text4: 'The current version of wallet is preview version, the Vite test tokens you obtained is only for testing and has no any actual value. Meanwhile, the official will occasionally clear test tokens.'
     },
-    test: {
+    test: { // [TODO]
         t: 'Preview Version',
         txt1: 'Vite’s Web wallet is a lightweight-node wallet.',
         txt2: 'Now, it can generate account based on DAG ledger, check account balance, send and receive transactions in default mode, acquire test tokens, check tokens issued by system and etc.',
         txt3: 'Support finding the mnemonic seed phrase of account and login by importing keystore file.',
-        v: 'Current version: Preview Version'
+        v: 'Current version: 1.0.2'
     },
 
     mnemonic: {
@@ -125,7 +125,7 @@ module.exports = {
             remarksLong: 'Notes do not exceed 180 English characters (or punctuations, 1 Chinese character = 6 English characters)'
         },
         hint: {
-            token: 'VITE test tokens have be sent to your account, please check your account!',
+            token: 'VV test tokens have be sent to your account, please check your account!',
             tErr: 'Get test token failed!',
             low: 'Insufficient account balance',
             wrong: 'Wrong Password!',
@@ -136,7 +136,6 @@ module.exports = {
         },
         quota: {
             title: 'Insufficient Quota',
-            // [TODO]
             describe: 'Not available to send a transaction due to lack of quota, please delete descriptive text and run PoW, or gain quota by staking token to resume.',
             left: 'Run PoW',
             right: 'Stake VITE'
@@ -240,6 +239,10 @@ module.exports = {
     // SBP
     SBP: { // [TODO]
         title: 'SBP Registration',
+        edit: '编辑',
+        reward: '提取奖励',
+        register: '注册SBP',
+        cancel: '撤销注册SBP',
         help: {
             title: 'About SBP',
             text: 'SBP（Snapshot Block Producer）is a node that packs snapshot block, each round  是打包快照块的节点，每一轮75秒时间内25个SBP轮流出块。SBP经过投票产生，打包一个快照块将获得0.9482 VITE。'
@@ -266,17 +269,17 @@ module.exports = {
             producerAddr: '出块地址',
             quotaAddr: '抵押地址',
             quotaTime: '抵押周期',
+            allReward: '全部可提取的出块奖励',
             time: '7776000个快照块（约90天）',
             quotaAmount: '抵押金额',
             confirmBtn: '提交注册',
-            allReward: '全部可提取出块奖励',
             namePlaceholder: '请输入节点名称',
             nameHint: '40个字符以内, 支持大小写英文字母、数字、\'_\'、\'.',
-            nameErr: '节点名称不合法，请输入合法节点名称',
+            nameErr: '节点名称不合法',
             nameUsed: '此节点名称已被注册',
             addrPlaceholder: '请输入快照块出块地址',
             addrHint: '出块地址必须是全节点地址且保持运行状态',
-            addrErr: '出块地址不合法，请输入合法出块地址',
+            addrErr: '出块地址不合法',
             addrUsed: '此出块地址已被使用',
             registerSuccess: '注册请求已发出',
             registerFail: '注册请求失败'
@@ -380,7 +383,7 @@ module.exports = {
     quotaConfirm: {
         title: '配额不足',
         describe: '当前配额不足，无法进行{operate}，您需要抵押VITE获取配额才可以{operate}',
-        leftBtn: '暂不{operate}获取配额',
+        leftBtn: '暂不{operate}',
         rightBtn: '获取配额'
     },
 

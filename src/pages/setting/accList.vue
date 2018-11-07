@@ -67,6 +67,8 @@ export default {
             this.defaultAddr = this.activeAccount.getDefaultAddr();
 
             // clear all
+            let activeAccount = this.$wallet.getActiveAccount();
+            activeAccount && activeAccount.releasePWD();
             this.$store.commit('commitClearBalance');
             this.$store.commit('commitClearTransList');
             this.$store.commit('commitClearPledge');
