@@ -21,13 +21,13 @@ WS_RPC.on('connect', () => {
     viteWallet && viteWallet.Ledger.getDefaultTokenList();
 });
 WS_RPC.on('close', () => {
-    if (reconnectTimes > 5) {
+    if (reconnectTimes > 10) {
         return;
     }
     setTimeout(() => {
         reconnectTimes++;
         WS_RPC.reconnect();
-    }, 5000);
+    }, 10000);
 });
 
 window.$ViteJS = new ViteJS(WS_RPC);
