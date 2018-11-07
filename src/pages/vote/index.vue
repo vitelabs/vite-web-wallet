@@ -13,8 +13,8 @@
                 <div class="__tb_content">
                     <div class="__tb_row" v-for="v in voteList" :key="v.nodeName">
                         <div class="__tb_cell">{{v.nodeName}}</div>
-                        <div class="__tb_cell">{{v.nodeStatusText}} <i v-if="v.nodeStatus===2" class="tipsicon hoveraction">
-                                <tooltips :content="$t('vote.section1.hoverHelp',{nodeName:v.nodeName})"></tooltips>
+                        <div class="__tb_cell">{{v.nodeStatusText}} <i v-if="v.nodeStatus===2" class="tipsicon hoveraction" @click.stop="toggleTips">
+                                <tooltips   v-if="isResisterTipsShow" class="unregister-tips" :content="$t('vote.section1.hoverHelp',{nodeName:v.nodeName})"></tooltips>
                             </i></div>
                         <div class="__tb_cell">{{v.voteNum}}</div>
                         <div class="__tb_cell">{{v.voteStatusText}}</div>
@@ -32,15 +32,19 @@
                 <div class="__tb_row __tb_head">
                     <div class="__tb_cell" v-for="v in $t('vote.section2.head')" :key="v">{{v}}</div>
                 </div>
-                <div class="__tb_content">
-                    <div class="__tb_row __tb_content_row" v-if="nodeList.length" v-for="v in nodeList" :key="v.nodeName">
+                <div class="__tb_content" v-if="!!nodeList.length">
+                    <div class="__tb_row __tb_content_row" v-for="v in nodeList" :key="v.nodeName">
                         <div class="__tb_cell">{{v.nodeName}}</div>
                         <div class="__tb_cell">{{v.nodeAddr}}</div>
                         <div class="__tb_cell">{{v.voteNum}}</div>
-                        <div class="__tb_cell" :class="cache?'unclickable':'clickable'" @click="vote(v)">{{v.operate}}</div>
+                        <div class="__tb_cell" :class="cache&&cache.nodeName===v.nodeName?'unclickable':'clickable'" @click="vote(v)">{{v.operate}}</div>
                     </div>
-                    <div class="__tb_no_data" v-else-if="this.filterKey">{{$t("vote.section2.noSearchData")}}</div>
-                    <div class="__tb_no_data" v-else>{{$t("vote.section2.noData")}}</div>
+                </div>
+                <div class="__tb_content" v-else-if="this.filterKey">
+                    <div class="__tb_no_data">{{$t("vote.section2.noSearchData")}}</div>
+                </div>
+                <div class="__tb_content" v-else>
+                    <div class="__tb_no_data">{{$t("vote.section2.noData")}}</div>
                 </div>
             </div>
         </section>
@@ -84,14 +88,18 @@ export default {
       loadingToken: false,
       tokenInfo: null,
       cache: null,
-      nodeDataTimer: null
+      nodeDataTimer: null,
+      isResisterTipsShow: false
     };
   },
   methods: {
+      hideTips(){
+          this.isResisterTipsShow=false
+      },
+    toggleTips(){
+        this.isResisterTipsShow=!this.isResisterTipsShow
+    },
     updateVoteData() {
-      if (this.cache) {
-        return Promise.resolve();
-      }
       return $ViteJS.Vite.vote_getVoteInfo(
         c.gid,
         this.$wallet.getActiveAccount().getDefaultAddr()
@@ -102,9 +110,6 @@ export default {
       });
     },
     updateNodeData() {
-      if (this.cache) {
-        return Promise.resolve();
-      }
       return $ViteJS.Vite.register_getCandidateList(c.gid).then(data => {
         this.nodeData =
           data.result.map(v => {
@@ -117,8 +122,11 @@ export default {
       });
     },
     cancelVote(v) {
+      if (this.cache) {
+        return;
+      }
       const activeAccount = this.$wallet.getActiveAccount();
-      const successCancel = () => {
+      const sendCancel = () => {
         activeAccount
           .sendTx(
             {
@@ -144,6 +152,8 @@ export default {
             const code = e && e.error ? e.error.code || -1 : e ? e.code : -1;
             if (code === -35002) {
               quotaConfirm({ operate: this.$t("vote.section1.operate") });
+            } else {
+              this.$toast(this.$t("vote.section1.cancelVoteErr"));
             }
           });
       };
@@ -153,14 +163,17 @@ export default {
           title: this.$t("vote.section1.confirm.title"),
           submitTxt: this.$t("vote.section1.confirm.submitText"),
           cancelTxt: this.$t("vote.section1.confirm.cancelText"),
-          cancel: successCancel
+          cancel: sendCancel
         },
         true
       );
     },
     vote(v) {
+      if (this.cache&&this.cache.nodeName===v.nodeName) {
+        return;
+      }
       const activeAccount = this.$wallet.getActiveAccount();
-      const successVote = () => {
+      const sendVote = () => {
         activeAccount
           .sendTx(
             { nodeName: v.name, tokenId: this.tokenInfo.tokenId },
@@ -184,6 +197,8 @@ export default {
             const code = e && e.error ? e.error.code || -1 : e ? e.code : -1;
             if (code === -35002) {
               quotaConfirm({ operate: this.$t("vote.section2.operate") });
+            } else {
+              this.$toast(this.$t("vote.section2.voteErr"));
             }
           });
       };
@@ -194,8 +209,8 @@ export default {
           submitTxt: this.$t(`vote.section2.confirm.${t}.submitText`),
           cancelTxt: this.$t(`vote.section2.confirm.${t}.cancelText`),
           content: this.$t(`vote.section2.confirm.${t}.content`),
-          submit: this.haveVote?undefined:successVote,
-          cancel:this.haveVote?successVote:undefined
+          submit: this.haveVote ? undefined : sendVote,
+          cancel: this.haveVote ? sendVote : undefined
         },
         true
       );
@@ -209,30 +224,48 @@ export default {
       if (this.cache) {
         // 缓存消费策略
         if (
-          this.cache.nodeStatus === 3 &&
+          this.cache.voteStatus === "voting" &&
           this.voteData[0] &&
           this.voteData[0].nodeName === this.cache.nodeName
         ) {
           //投票中且投票成功
           this.cache = null;
-        }
-        if (this.cache.nodeStatus === 4 && this.voteData.length === 0) {
+        } else if (
+          this.cache.voteStatus === "canceling" &&
+          this.voteData.length === 0
+        ) {
           // 撤销中且撤销成功
           this.cache = null;
+        } else {
+          this.voteData[0] = Object.assign({}, this.cache); // 否则只展示缓存
         }
-        this.voteData[0] = Object.assign({}, this.cache); // 否则只展示缓存
       }
-      this.voteData[0] &&
+      let voteList = [];
+      if (this.voteData.length > 0) {
+        // 从nodeList更新voteList中节点状态；
+        this.nodeList.some(v => {
+          return v.nodeName === this.voteData[0].nodeName;
+        })
+          ? (this.voteData[0].nodeStatus = 1)
+          : (this.voteData[0].nodeStatus = 2);
+        // 取消注册情况下作废投票，优先级最高
         this.voteData[0].nodeStatus === 2 &&
-        (this.voteData[0].voteStatus = "voteNotWork"); // 取消注册情况下作废投票，优先级最高
-      const voteList = this.voteData.map(v => {
-        v.nodeStatusText = this.$t(`vote.section1.nodeStatusMap`)[v.nodeStatus];
-        v.voteStatusText =
-          this.$t(`vote.section1.voteStatusMap`)[v.voteStatus] || "注册中";
-        v.voteNum = v.balance || 0; // tans
-        v.operate = this.$t("vote.section1.operateBtn");
-        return v;
-      });
+          (this.voteData[0].voteStatus = "voteNotWork");
+        //投票数目
+        voteList = this.voteData.map(v => {
+          v.nodeStatusText = this.$t(`vote.section1.nodeStatusMap`)[
+            v.nodeStatus
+          ];
+          v.voteStatusText = this.$t(`vote.section1.voteStatusMap`)[
+            v.voteStatus
+          ];
+          const token = viteWallet.Ledger.getTokenInfo();
+          v.voteNum =
+            viteWallet.BigNumber.toBasic(v.balance, token.decimals) || 0; // tans
+          v.operate = this.$t("vote.section1.operateBtn");
+          return v;
+        });
+      }
       return voteList;
     },
     nodeList() {
@@ -315,16 +348,13 @@ export default {
         height: 16px;
         vertical-align: sub;
         cursor: pointer;
-        > div {
-          display: none;
+        .unregister-tips {
+          width: 314px;
+          height: 100px;
+          padding: 10px;
           font-size: 14px;
           color: #3e4a59;
           line-height: 20px;
-        }
-        &:hover {
-          > div {
-            display: flex;
-          }
         }
       }
     }

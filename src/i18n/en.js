@@ -323,7 +323,7 @@ module.exports = {
                 voted: '已投票',
                 voting: '正在投票中',
                 canceling: '正在撤销中',
-                voteNoWork: '投票作废'
+                voteNotWork: '投票作废'
             },
             hoverHelp: '您投票的{nodeName}已经取消注册，您可以直接重新投票、或者撤销投票；如果您不重新投票或撤销投票，{nodeName}重新注册后，您原来的投票将恢复生效。',
             confirm: {
@@ -339,7 +339,8 @@ module.exports = {
                 submitText: '获取配额'
             },
             operate:'撤销投票',
-            operateBtn:'撤销'
+            operateBtn:'撤销',
+            cancelVoteErr:'撤销投票失败，请重试'
         },
 
         section2: {
@@ -369,7 +370,8 @@ module.exports = {
             noSearchData:'无结果，换个输入试试',
             noData:'暂无数据',
             operate:'投票',
-            operateBtn:'投票'
+            operateBtn:'投票',
+            voteErr:'投票失败，请重试'
         }
     },
 
