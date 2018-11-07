@@ -1,4 +1,4 @@
-import loopTime from 'config/loopTime';
+import loopTime from 'loopTime';
 
 let loopHeightTimeout;
 const ViteId = 'tti_5649544520544f4b454e6e40';
