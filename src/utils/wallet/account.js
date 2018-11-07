@@ -255,7 +255,7 @@ class Account {
         window.isShowPWD = true;
 
         let privKey = this.addrs[this.defaultInx].privKey;
-
+        // console.log(privKey);
         return new Promise((res, rej) => {
             this.getBlock({
                 toAddr, tokenId, amount, message, nodeName, producerAddr, rewardAddress
