@@ -62,7 +62,7 @@ export default {
     padding: 30px;
     height: 100%;
     .title {
-        font-family: $font-bold;
+        font-family: $font-bold, arial, sans-serif;
         font-size: 24px;
         color: #1D2024;
         line-height: 32px;
@@ -102,7 +102,7 @@ export default {
                 margin-right: 15px;
                 opacity: 0.8;
                 font-size: 14px;
-                font-family: $font-bold;
+                font-family: $font-bold, arial, sans-serif;
             }
         }
     }
