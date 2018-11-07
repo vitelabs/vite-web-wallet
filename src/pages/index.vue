@@ -57,13 +57,13 @@ export default {
             if (!fromHome) {
                 return;
             }
-            this.$wallet.clearActiveAccount();
 
             // clear all
             let activeAccount = this.$wallet.getActiveAccount();
             activeAccount && activeAccount.lock();
             activeAccount && activeAccount.releasePWD();
-            
+            this.$wallet.clearActiveAccount();
+                        
             this.$store.commit('commitClearBalance');
             this.$store.commit('commitClearTransList');
             this.$store.commit('commitClearPledge');
