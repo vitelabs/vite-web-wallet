@@ -1,6 +1,7 @@
 <template>
     <confirm :title="$t('quotaConfirm.title')" :showMask="showMask"
              :leftBtnTxt="$t('quotaConfirm.leftBtn', { 'operate': operate })"
+             :leftBtnClick="_cancel"
              :rightBtnTxt="$t('quotaConfirm.rightBtn')" :rightBtnClick="_submit">
         {{ $t('quotaConfirm.describe', { 'operate': operate }) }}
     </confirm>
