@@ -40,10 +40,8 @@
 </template>
 
 <script>
-import {timer} from 'utils/asyncFlow';
 import ellipsisAddr from 'utils/ellipsisAddr.js';
-
-let listInst;
+import { quotaConfirm } from 'components/quota/index';
 
 export default {
     props: {
@@ -63,10 +61,7 @@ export default {
         }
     },
     created() {
-        this.startLoopList();
-    },
-    destroyed() {
-        this.stopLoopList();
+        this.fetchList();
     },
     data() {
         let activeAccount = this.$wallet.getActiveAccount();
@@ -79,7 +74,6 @@ export default {
     },
     computed: {
         list() {
-            console.log(this.tokenInfo);
             if (!this.tokenInfo || !this.tokenInfo.tokenId) {
                 return [];
             }
@@ -113,17 +107,6 @@ export default {
         }
     },
     methods: {
-        startLoopList() {
-            this.stopLoopList();
-            listInst = new timer(()=>{
-                return this.fetchList();
-            }, 2000);
-            listInst.start();
-        },
-        stopLoopList() {
-            listInst && listInst.stop();
-            listInst = null;
-        },
         fetchList() {
             return this.$store.dispatch('fetchRegistrationList', this.address);
         },
@@ -143,12 +126,17 @@ export default {
                         nodeName: item.rawData.name
                     }, 'cancelRegisterBlock').then(()=>{
                         this.$toast(this.$t('SBP.section2.cancelSuccess'));
-                    }).catch(()=>{
+                    }).catch((err)=>{
+                        if (err && err.error && err.error.code && err.error.code === -35002) {
+                            quotaConfirm({
+                                operate: this.$t('SBP.cancel')
+                            });
+                            return;
+                        }
                         this.$toast(this.$t('SBP.section2.cancelFail'));
                     });
                 }
             }, true);
-            console.log(item.rawData);
         },
         edit(item) {
             if (item.isCancel) {
@@ -161,11 +149,6 @@ export default {
                 return;
             }
             this.showConfirm('reward', item.rawData);
-        },
-
-        _sendTx(type, item) {
-            console.log(type);
-            console.log(item);
         }
     }
 };
