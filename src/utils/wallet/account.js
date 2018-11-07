@@ -1,7 +1,7 @@
 import acc from './storeAcc.js';
 import { pwdConfirm } from 'components/password/index.js';
+import config from 'config/constant';
 
-const Gid = '00000000000000000001';
 const namePre = 'account';
 let passTimeout;
 
@@ -227,9 +227,9 @@ class Account {
             return $ViteJS.Vite.Ledger[type]({
                 accountAddress, 
                 toAddress: toAddr, 
+                Gid: config.gid,
                 tokenId, amount, message, 
-                nodeName, producerAddr,
-                Gid, rewardAddress
+                nodeName, producerAddr, rewardAddress
             }).then((block)=>{
                 if (!isPow) {
                     return res(block);

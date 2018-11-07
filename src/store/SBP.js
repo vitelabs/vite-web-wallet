@@ -1,4 +1,4 @@
-const Gid = '00000000000000000001';
+import config from 'config/constant';
 
 const state = {
     registrationList: []
@@ -15,7 +15,7 @@ const mutations = {
 
 const actions = {
     fetchRegistrationList({ commit }, address) {
-        return viteWallet.Vite['register_getRegistrationList'](Gid, address).then((data)=>{
+        return viteWallet.Vite['register_getRegistrationList'](config.gid, address).then((data)=>{
             let result = data && data.result ? data.result : [];
             commit('commitRegistrationList', result);
             return data;
