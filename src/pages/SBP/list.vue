@@ -1,5 +1,5 @@
 <template>
-    <div class="list-content __tb">
+    <div class="__tb tb-list">
         <div class="__tb_row __tb_head __pointer">
             <div class="__tb_cell name">{{ $t('SBP.section1.nodeName') }}</div>
             <div class="__tb_cell addr">{{ $t('SBP.section1.producerAddr') }}</div>
@@ -184,7 +184,9 @@ export default {
 
 <style lang="scss" scoped>
 @import '~assets/scss/table.scss';
-
+.__tb.tb-list {
+    min-width: 1150px;
+}
 .tipsicon {
     position: relative;
     display: inline-block;
@@ -193,18 +195,6 @@ export default {
     width: 16px;
     height: 16px;
     vertical-align: sub;
-
-    // > div {
-    //     display: none;
-    //     font-size: 14px;
-    //     color: #3e4a59;
-    //     line-height: 20px;
-    // }
-    // &:hover {
-    //     > div {
-    //         display: flex;
-    //     }
-    // }
 }
 
 .btn {

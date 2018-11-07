@@ -259,6 +259,9 @@ module.exports = {
             },
             reward: {
                 title: '提取出块奖励',
+                amount: '本次可提奖励金额（约）',
+                hint: '为了您的资金安全，接收出块奖励地址应尽量与出块地址不同',
+                time: '本次可提时间范围',
                 placeholder: '请输入接收出块奖励地址',
                 btn: '提取奖励'
             }
@@ -288,7 +291,7 @@ module.exports = {
             title: '注册信息',
             updateSuccess: '修改请求已发送',
             updateFail: '修改请求发送失败',
-            rewardSuccess: '提取奖励请求已发送',
+            rewardSuccess: '提取奖励请求已发送，请您稍后查询账户余额',
             rewardFail: '提取奖励请求发送失败',
             cancelSuccess: '撤销请求已发送',
             cancelFail: '撤销请求发送失败',

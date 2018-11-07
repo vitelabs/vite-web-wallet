@@ -311,36 +311,6 @@ export default {
             }
         }
     }
-    .tips {
-        position: absolute;
-        min-width: 300px;
-        left: 50%;
-        bottom: 52px;
-        transform: translate(-50%, 0);
-        background: #fff;
-        box-shadow: 0 5px 20px 0 rgba(0,0,0,0.10);
-        border-radius: 8px;
-        font-size: 14px;
-        color: #3E4A59;
-        padding: 13px 10px;
-        box-sizing: border-box;
-        font-family: $font-normal;
-        opacity: 0;
-        transition: all 0.5s ease-in-out;   
-        &.active {
-            opacity: 1;
-        }
-        &:after {
-            content: ' ';
-            display: inline-block;
-            border: 6px solid transparent;
-            border-top: 6px solid #fff;
-            position: absolute;
-            bottom: -12px;
-            left: 50%;
-            margin-left: -6px;
-        }
-    }
     .input-item {
         position: relative;
         box-sizing: border-box;
