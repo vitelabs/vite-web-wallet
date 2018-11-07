@@ -1,6 +1,7 @@
 <template>
-    <div class="tool-tips" v-html="content">
+    <div class="tool-tips">
         <div class="trigle"></div>
+        {{content}}
     </div>
 </template>
 <script>
@@ -18,15 +19,12 @@ export default {
   position: absolute;
   display: flex;
   align-content: center;
-  left: 100%;
+  left: calc(100% + 7px);
   top: 50%;
   transform: translateY(-50%);
   background: #ffffff;
   box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.1);
   border-radius: 2px;
-  width: 314px;
-  height: 100px;
-  padding: 10px;
   box-sizing: border-box;
   .trigle {
     border-top: 7px solid transparent;
@@ -34,6 +32,11 @@ export default {
     border-right: 7px solid #fff;
     height: 0;
     width: 0;
+    position: absolute;
+    box-sizing: border-box;
+    top: 50%;
+    transform: translateY(-50%);
+    left: -7px;
   }
 }
 </style>
