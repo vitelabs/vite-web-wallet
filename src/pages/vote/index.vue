@@ -13,8 +13,8 @@
                 <div class="__tb_content">
                     <div class="__tb_row" v-for="v in voteList" :key="v.nodeName">
                         <div class="__tb_cell">{{v.nodeName}}</div>
-                        <div class="__tb_cell">{{v.nodeStatusText}} <i v-if="v.nodeStatus===2" class="tipsicon hoveraction" @click.stop="toggleTips">
-                                <tooltips v-if="isResisterTipsShow" class="unregister-tips" :content="$t('vote.section1.hoverHelp',{nodeName:v.nodeName})"></tooltips>
+                        <div class="__tb_cell">{{v.nodeStatusText}} <i v-if="v.nodeStatus===2" class="tipsicon hoveraction" @click.self.stop="toggleTips">
+                                <tooltips v-if="isResisterTipsShow" v-click-outside @clickoutside="hideTips" class="unregister-tips" :content="$t('vote.section1.hoverHelp',{nodeName:v.nodeName})"></tooltips>
                             </i></div>
                         <div class="__tb_cell">{{v.voteNum}}</div>
                         <div class="__tb_cell">{{v.voteStatusText}}</div>
