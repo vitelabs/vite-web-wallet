@@ -31,12 +31,12 @@
 
                 <div v-if="showConfirmType === 'reward'">
                     <div class="row">
-                        <div class="row-t">{{ $t(`SBP.section1.allReward`) }}</div>
+                        <div class="row-t">{{ $t(`SBP.confirm.reward.amount`) }}</div>
                         <div class="row-content unuse">{{ activeItem.showAvailableReward }}</div>
                     </div>
 
                     <div class="row">
-                        <div class="row-t">{{ $t(`SBP.section2.nowReward`) }}</div>
+                        <div class="row-t">{{ $t(`SBP.confirm.reward.time`) }}</div>
                         <div class="row-content unuse">{{ activeItem.showAvailableRewardOneTx }}</div>
                     </div>
 
@@ -45,8 +45,10 @@
                             {{ $t(`SBP.section2.rewardAddr`)  }}
                             <span v-show="addrErr" class="err">{{ addrErr }}</span>
                         </div>
+                        <span class="tips" :class="{ 'active': tips }">{{ $t('SBP.confirm.reward.hint') }}</span>
                         <div class="row-content">
-                            <input v-model="addr" :placeholder="$t(`SBP.confirm.${showConfirmType}.placeholder`)" />
+                            <input v-model="addr" @blur="hideTips" @focus="showTips" 
+                                   :placeholder="$t(`SBP.confirm.${showConfirmType}.placeholder`)" />
                         </div>
                     </div>
                 </div>
@@ -97,7 +99,8 @@ export default {
 
             loading: false,
             addr: '',
-            addrErr: ''
+            addrErr: '',
+            tips: false
         };
     },
     computed: {
@@ -112,6 +115,7 @@ export default {
         addr: function() {
             clearTimeout(addrTimeout);
             addrTimeout = null;
+            this.hideTips();
 
             if (this.stopWatch) {
                 return;
@@ -140,6 +144,12 @@ export default {
         },
         hideTimeTips(e) {
             this.$refs.regList && this.$refs.regList.hideTime(e);
+        },
+        showTips() {
+            this.tips = true;
+        },
+        hideTips() {
+            this.tips = false;
         },
 
         showConfirm(type, activeItem) {
@@ -332,6 +342,7 @@ export default {
 }
 
 .row {
+    position: relative;
     margin-top: 20px;
     &:first-child {
         margin-top: 0;
@@ -381,3 +392,40 @@ export default {
     }
 }
 </style>
+
+<style lang="scss">
+@import "~assets/scss/vars.scss";
+
+.tips {
+    position: absolute;
+    min-width: 300px;
+    left: 50%;
+    bottom: 52px;
+    transform: translate(-50%, 0);
+    background: #fff;
+    box-shadow: 0 5px 20px 0 rgba(0,0,0,0.10);
+    border-radius: 8px;
+    font-size: 14px;
+    color: #3E4A59;
+    padding: 13px 10px;
+    box-sizing: border-box;
+    font-family: $font-normal;
+    opacity: 0;
+    transition: all 0.5s ease-in-out;   
+    &.active {
+        opacity: 1;
+    }
+    &:after {
+        content: ' ';
+        display: inline-block;
+        border: 6px solid transparent;
+        border-top: 6px solid #fff;
+        position: absolute;
+        bottom: -12px;
+        left: 50%;
+        margin-left: -6px;
+    }
+}
+</style>
+
+
