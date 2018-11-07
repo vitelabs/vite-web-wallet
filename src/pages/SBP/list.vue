@@ -15,8 +15,9 @@
                 <div class="__tb_cell amount">{{ item.pledgeAmount }}</div>
                 <div class="__tb_cell height">
                     {{ item.withdrawHeight }}
-                    <i :ref="`toolTips${index}`" @click="showTime(index)" class="tipsicon __pointer">
+                    <i @click.self.stop="showTime(index)" class="tipsicon __pointer">
                         <tooltips v-show="showTimeTips === index" class="sbp-tooltips"
+                                  v-click-outside @clickoutside="hideTime"
                                   :content="$t('SBP.section2.expireDate', { time: item.time })"></tooltips>
                     </i>
                 </div>
@@ -123,19 +124,7 @@ export default {
         showTime(index) {
             this.showTimeTips = index;
         },
-        hideTime(e) {
-            if (!e || !e.target || this.showTimeTips < 0) {
-                return;
-            }
-
-            let toolTips = this.$refs[`toolTips${this.showTimeTips}`];
-            let toolTipsContainer = toolTips && toolTips.length ? toolTips[0] : null;
-            if (!toolTipsContainer || 
-                e.target === toolTipsContainer ||
-                toolTipsContainer.contains( e.target )) {
-                return;
-            }
-
+        hideTime() {
             this.showTimeTips = -1;
         },
 
