@@ -55,7 +55,8 @@ module.exports = {
         firstDoing: 'Initializing',
         blockHeight: 'Snapshot Block Height'
     },
-    test: {
+
+    test: { // [TODO]
         t: 'Preview Version',
         txt1: 'Vite’s Web wallet is a lightweight-node wallet.',
         txt2: 'Now, it can generate account based on DAG ledger, check account balance, send and receive transactions in default mode, acquire test tokens, check tokens issued by system and etc.',
@@ -126,7 +127,7 @@ module.exports = {
             remarksLong: 'Notes do not exceed 180 English characters (or punctuations, 1 Chinese character = 6 English characters)'
         },
         hint: {
-            token: 'VITE test tokens have be sent to your account, please check your account!',
+            token: 'VV test tokens have be sent to your account, please check your account!',
             tErr: 'Get test token failed!',
             low: 'Insufficient account balance',
             wrong: 'Wrong Password!',
@@ -137,7 +138,6 @@ module.exports = {
         },
         quota: {
             title: 'Insufficient Quota',
-            // [TODO]
             describe: 'Not available to send a transaction due to lack of quota, please delete descriptive text and run PoW, or gain quota by staking token to resume.',
             left: 'Run PoW',
             right: 'Stake VITE'
