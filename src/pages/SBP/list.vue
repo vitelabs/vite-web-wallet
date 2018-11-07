@@ -112,25 +112,6 @@ export default {
                     rawData: item
                 });
             });
-            registrationList.forEach(item => {
-                let isMaturity = viteWallet.BigNumber.compared(item.withdrawHeight, currentHeight) <= 0;
-                let isCancel = item.cancelHeight && !viteWallet.BigNumber.isEqual(item.cancelHeight, 0);
-                let isReward = !viteWallet.BigNumber.isEqual(item.availableReward, 0);
-                
-                let day = date(item.withdrawTime * 1000, this.$i18n.locale);
-                list.push({
-                    isMaturity,
-                    isCancel,
-                    isReward,
-                    name: '2938203',
-                    nodeAddr: item.nodeAddr,
-                    pledgeAmount: viteWallet.BigNumber.toBasic(item.pledgeAmount, decimals) + ' ' +  this.tokenInfo.tokenSymbol,
-                    withdrawHeight: item.withdrawHeight,
-                    time: day,
-                    availableReward: viteWallet.BigNumber.toBasic(item.availableReward, decimals) + ' ' +  this.tokenInfo.tokenSymbol,
-                    rawData: item
-                });
-            });
 
             return list;
         }

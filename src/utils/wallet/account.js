@@ -251,6 +251,9 @@ class Account {
     sendTx({
         toAddr, tokenId, amount, message, nodeName, producerAddr, rewardAddress
     }, type = 'sendBlock') {
+        // First tx
+        window.isShowPWD = true;
+
         let privKey = this.addrs[this.defaultInx].privKey;
 
         return new Promise((res, rej) => {
