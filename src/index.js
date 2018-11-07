@@ -42,9 +42,6 @@ setTimeout(() => {
     const i18n = new VueI18n( i18nCon() );
 
     wallet.reSave();
-    let { Ledger } = viteWallet;
-    Ledger.getDefaultTokenList();
-    
     let list = wallet.getList();
     let rootRoute = {
         name: 'index',
