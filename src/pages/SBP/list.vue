@@ -16,7 +16,7 @@
                 <div class="__tb_cell height">
                     {{ item.withdrawHeight }}
                     <i :ref="`toolTips${index}`" @click="showTime(index)" class="tipsicon __pointer">
-                        <tooltips v-show="showTimeTips === index" 
+                        <tooltips v-show="showTimeTips === index" class="sbp-tooltips"
                                   :content="$t('SBP.section2.expireDate', { time: item.time })"></tooltips>
                     </i>
                 </div>
@@ -195,6 +195,9 @@ export default {
     width: 16px;
     height: 16px;
     vertical-align: sub;
+    .sbp-tooltips {
+        min-width: 300px;
+    }
 }
 
 .btn {
