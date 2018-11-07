@@ -30,9 +30,6 @@ export default {
     mounted() {
         this.operate();
     },
-    destroyed() {
-        this.logout();
-    },
     methods: {
         operate() {
             clearTimeout(operateTimeout);
@@ -42,14 +39,6 @@ export default {
                 operateTimeout = null;
                 location.reload();
             }, 5 * 60 * 1000);
-        },
-        logout() {
-            let activeAccount = this.$wallet.getActiveAccount();
-            activeAccount && activeAccount.lock();
-            activeAccount && activeAccount.releasePWD();
-            this.$router.push({
-                name: 'login'
-            });
         }
     }
 };
