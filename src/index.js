@@ -14,7 +14,6 @@ import login from 'pages/login/index.vue';
 
 import routes from 'routes/index';
 
-
 import 'utils/eventEmitter.js';
 import 'utils/viteWallet/index.js';
 
@@ -23,14 +22,12 @@ import statistics from 'utils/statistics';
 import { initPwdConfirm } from 'components/password/index.js';
 import { initQuotaConfirm } from 'components/quota/index.js';
 
-
 import plugin from 'utils/plugins/addPlugin';
 import Wallet from 'utils/wallet/index.js';
 const  wallet = new Wallet();
-Vue.use(plugin,{wallet});
+Vue.use(plugin, { wallet });
 Vue.use(VueRouter);
 import {i18n} from 'i18n';
-
 
 document.addEventListener('drop', (e) => {
     e.preventDefault();
@@ -40,6 +37,7 @@ document.addEventListener('dragover', (e) => {
     e.preventDefault();
     e.stopPropagation();
 });
+
 // Start loading animate
 let element  = document.getElementById('loading');
 element.className += 'spinner big-spinner';
@@ -47,6 +45,7 @@ element.className += 'spinner big-spinner';
 setTimeout(() => {
     element.className += ' dis';
 }, 800);
+
 // Loading finish, app init finish also.
 setTimeout(() => {    
     initPwdConfirm(i18n);
