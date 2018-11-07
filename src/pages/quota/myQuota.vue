@@ -65,7 +65,7 @@ export default {
     padding: 35px 24px;
 }
 .row {
-    font-family: $font-bold;
+    font-family: $font-bold, arial, sans-serif;
     &:first-child {
         margin-bottom: 40px;
     }

@@ -107,7 +107,7 @@ export default {
         line-height: 40px;
         background: #007AFF;
         border-radius: 2px;
-        font-family: $font-normal-b;
+        font-family: $font-normal-b, arial, sans-serif;
         font-size: 14px;
         color: #FFFFFF;
         &.unuse {

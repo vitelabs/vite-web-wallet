@@ -385,7 +385,7 @@ export default {
 
 .title {
     line-height: 32px;
-    font-family: $font-bold;
+    font-family: $font-bold, arial, sans-serif;
     background: #268EFF;
     font-size: 16px;
     color: #FFFFFF;
@@ -405,7 +405,7 @@ export default {
         margin-top: 20px;
         .row-t {
             position: relative;
-            font-family: $font-bold;
+            font-family: $font-bold, arial, sans-serif;
             font-size: 14px;
             color: #1D2024;
             letter-spacing: 0.35px;
@@ -440,7 +440,7 @@ export default {
         text-align: center;
         color: #FFFFFF;
         margin-top: 30px;
-        font-family: $font-bold;
+        font-family: $font-bold, arial, sans-serif;
         font-size: 16px;
         &.unuse {
             background: #efefef;

@@ -62,7 +62,7 @@ export default {
     box-shadow: 0 6px 36px 0 rgba(176,192,237,0.4);
     .title {
         font-size: 16px;
-        font-family: $font-bold;
+        font-family: $font-bold, arial, sans-serif;
         text-align: center;
     }
     .first-notice {

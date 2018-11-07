@@ -104,7 +104,7 @@ export default {
     box-sizing: border-box;
     position: absolute;
     top: 64px;
-    font-family: $font-bold;
+    font-family: $font-bold, arial, sans-serif;
     font-size: 14px;
     color: #1D2024;
     letter-spacing: 0.35px;

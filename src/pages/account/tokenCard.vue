@@ -79,13 +79,13 @@ export default {
     .tokenName {
         margin-left: 10px;
         font-size: 18px;
-        font-family: $font-bold;
+        font-family: $font-bold, arial, sans-serif;
     }
 }
 .body {
     padding: 0 30px 20px;
     .item {
-        font-family: $font-bold;
+        font-family: $font-bold, arial, sans-serif;
         height: 22px;
         line-height: 22px;
         display: flex;

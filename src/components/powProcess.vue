@@ -70,7 +70,7 @@ export default {
 @import "~assets/scss/vars.scss";
 
 .pow-process-wrapper {
-    font-family: $font-bold;
+    font-family: $font-bold, arial, sans-serif;
     width: 90%;
     max-width: 460px;
     padding: 50px 0 40px;
