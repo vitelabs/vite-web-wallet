@@ -6,12 +6,12 @@
 </template>
 <script>
 export default {
-  props: {
-    content: {
-      type: String,
-      default: ""
+    props: {
+        content: {
+            type: String,
+            default: ''
+        }
     }
-  }
 };
 </script>
 <style lang="scss" scoped>
