@@ -30,7 +30,7 @@ export default {
     color: #FFFFFF;
     padding: 6px;
     opacity: 0;
-    font-family: $font-normal;
+    font-family: $font-normal, arial, sans-serif;
     &.show {
         opacity: 1;
     }

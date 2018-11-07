@@ -90,7 +90,7 @@ export default {
     margin-bottom: 20px;
     box-sizing: border-box;
     padding: 30px;
-    font-family: $font-bold;
+    font-family: $font-bold, arial, sans-serif;
     word-wrap: break-word;
     &:before {
         content: '';

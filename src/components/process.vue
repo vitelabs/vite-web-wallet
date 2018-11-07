@@ -76,7 +76,7 @@ export default {
     }
 }
 .words {
-    font-family: $font-bold;
+    font-family: $font-bold, arial, sans-serif;
     font-size: 14px;
     line-height: 20px;
     color: #FFFFFF;

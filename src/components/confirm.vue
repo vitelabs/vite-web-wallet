@@ -88,7 +88,7 @@ export default {
         height: 60px;
         line-height: 60px;
         padding-left: 30px;
-        font-family: $font-bold;
+        font-family: $font-bold, arial, sans-serif;
         font-size: 16px;
         color: #FFFFFF;
         .close-icon {
@@ -107,7 +107,7 @@ export default {
         box-sizing: border-box;
         padding: 30px;
         overflow: auto;
-        font-family: $font-bold;
+        font-family: $font-bold, arial, sans-serif;
         font-size: 18px;
         color: #1D2024;
         line-height: 26px;
@@ -125,7 +125,7 @@ export default {
             display: inline-block;
             width: 48%;
             max-width: 190px;
-            font-family: $font-bold;
+            font-family: $font-bold, arial, sans-serif;
             color: #FFFFFF;
             &.btn-left {
                 box-sizing: border-box;

@@ -188,7 +188,7 @@ export default {
     padding: 40px;
     height: 100%;
     .title {
-        font-family: $font-bold;
+        font-family: $font-bold, arial, sans-serif;
         font-size: 24px;
         color: #1D2024;
         line-height: 32px;
@@ -249,15 +249,15 @@ export default {
     min-width: 70px;
 }
 .pink {
-    font-family: $font-bold;
+    font-family: $font-bold, arial, sans-serif;
     color: #EA60AC;
 }
 .blue {
-    font-family: $font-bold;
+    font-family: $font-bold, arial, sans-serif;
     color: #409EFF;
 }
 .green {
-    font-family: $font-bold;
+    font-family: $font-bold, arial, sans-serif;
     color: #67C23A;
 }
 .icon {

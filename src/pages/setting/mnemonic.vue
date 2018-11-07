@@ -100,7 +100,7 @@ export default {
         color: #1D2024;
         letter-spacing: 0.35px;
         line-height: 16px;
-        font-family: $font-bold;
+        font-family: $font-bold, arial, sans-serif;
     }
     .icon {
         display: block;
