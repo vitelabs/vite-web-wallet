@@ -18,15 +18,15 @@
                             </i></div>
                         <div class="__tb_cell">{{v.voteNum}}</div>
                         <div class="__tb_cell">{{v.voteStatusText}}</div>
-                        <div class="__tb_cell" :class="v.voteStatus==='voting'||v.voteStatus==='canceling'?'unclickable':'clickable'" @click="cancelVote(v)">{{v.operate}}</div>
+                        <div class="__tb_cell" :class="cache?'unclickable':'clickable'" @click="cancelVote(v)">{{v.operate}}</div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <search v-model="filterKey" class="filter"></search>
         <section class="node_list">
-            <div class="title">{{$t('vote.section2.title')}}</div>
+            <div class="title">{{$t('vote.section2.title')}}<search v-model="filterKey" class="filter"></search>
+            </div>
 
             <div class="__tb">
                 <div class="__tb_row __tb_head">
@@ -37,10 +37,10 @@
                         <div class="__tb_cell">{{v.nodeName}}</div>
                         <div class="__tb_cell">{{v.nodeAddr}}</div>
                         <div class="__tb_cell">{{v.voteNum}}</div>
-                        <div class="__tb_cell" :class="v.voteStatus==='voting'?'unclickable':'clickable'" @click="vote(v)">{{v.operate}}</div>
+                        <div class="__tb_cell" :class="cache?'unclickable':'clickable'" @click="vote(v)">{{v.operate}}</div>
                     </div>
-                    <div v-else-if="this.filterKey" class="__tb_row __tb_content_row">{{$t("vote.section2.noSearchData")}}</div>
-                    <div v-else class="__tb_row __tb_content_row">{{$t("vote.section2.noData")}}</div>
+                    <div class="__tb_no_data" v-else-if="this.filterKey">{{$t("vote.section2.noSearchData")}}</div>
+                    <div class="__tb_no_data" v-else>{{$t("vote.section2.noData")}}</div>
                 </div>
             </div>
         </section>
@@ -56,7 +56,7 @@ import secTitle from "components/secTitle";
 import pwdConfirm from "components/password";
 import loading from "components/loading";
 import { doUntill, timer } from "utils/asyncFlow";
-import {quotaConfirm} from "components/quota";
+import { quotaConfirm } from "components/quota";
 export default {
   components: { secTitle, tooltips, search, loading },
   beforeMount() {
@@ -79,7 +79,6 @@ export default {
   data() {
     return {
       filterKey: "",
-      haveVote: "false",
       nodeData: [],
       voteData: [],
       loadingToken: false,
@@ -90,6 +89,9 @@ export default {
   },
   methods: {
     updateVoteData() {
+      if (this.cache) {
+        return Promise.resolve();
+      }
       return $ViteJS.Vite.vote_getVoteInfo(
         c.gid,
         this.$wallet.getActiveAccount().getDefaultAddr()
@@ -100,6 +102,9 @@ export default {
       });
     },
     updateNodeData() {
+      if (this.cache) {
+        return Promise.resolve();
+      }
       return $ViteJS.Vite.register_getCandidateList(c.gid).then(data => {
         this.nodeData =
           data.result.map(v => {
@@ -146,8 +151,8 @@ export default {
       activeAccount.initPwd(
         {
           title: this.$t("vote.section1.confirm.title"),
-          submitTxt: this.$t("vote.section1.confirm.cancelText"),
-          cancelTxt: this.$t("vote.section1.confirm.submitText"),
+          submitTxt: this.$t("vote.section1.confirm.submitText"),
+          cancelTxt: this.$t("vote.section1.confirm.cancelText"),
           submit: successCancel
         },
         true
@@ -186,9 +191,9 @@ export default {
       activeAccount.initPwd(
         {
           title: this.$t(`vote.section2.confirm.${t}.title`),
-          submitTxt: this.$t(`vote.section2.confirm.${t}.cancelText`),
-          cancelTxt: this.$t(`vote.section2.confirm.${t}.submitText`),
-          content: this.$t(`vote.section2.confirm.${t}.submitText`),
+          submitTxt: this.$t(`vote.section2.confirm.${t}.submitText`),
+          cancelTxt: this.$t(`vote.section2.confirm.${t}.cancelText`),
+          content: this.$t(`vote.section2.confirm.${t}.content`),
           submit: successVote
         },
         true
@@ -196,6 +201,9 @@ export default {
     }
   },
   computed: {
+    haveVote() {
+      return this.voteList[0] && this.voteList[0].voteStatus === "voted";
+    },
     voteList() {
       if (this.cache) {
         // 缓存消费策略
@@ -221,7 +229,7 @@ export default {
         v.voteStatusText =
           this.$t(`vote.section1.voteStatusMap`)[v.voteStatus] || "注册中";
         v.voteNum = v.balance || 0; // tans
-        v.operate = this.$t('vote.section1.operateBtn');
+        v.operate = this.$t("vote.section1.operateBtn");
         return v;
       });
       return voteList;
@@ -230,7 +238,7 @@ export default {
       return this.nodeData
         .map(v => {
           v.voteNum = v.voteNum || 0;
-          v.operate = this.$t('vote.section2.operateBtn');
+          v.operate = this.$t("vote.section2.operateBtn");
           return v;
         })
         .filter(v => {
@@ -238,14 +246,17 @@ export default {
             return true;
           }
           return (
-            new RegExp(this.filterKey, "i").test(v.name) ||
-            new RegExp(this.filterKey, "i").test(v.addr)
+            new RegExp(this.filterKey.trim(), "i").test(v.name) ||
+            new RegExp(this.filterKey.trim(), "i").test(v.addr)
           );
+        })
+        .sort((a, b) => {
+          return a.voteNum - b.voteNum;
         });
     }
   },
   beforeDestroy() {
-    this.nodeDataTimer && this.nodeDataTimer.stop;
+    this.nodeDataTimer && this.nodeDataTimer.stop();
   }
 };
 </script>
@@ -262,13 +273,16 @@ export default {
     align-self: flex-end;
   }
   .title {
+    display: flex;
+    flex: none;
+    justify-content: space-between;
     border-left: 2px solid rgba(0, 122, 255, 0.7);
     font-family: $font-bold;
     font-size: 18px;
     color: #1d2024;
-    line-height: 18px;
-    height: 18px;
-    margin-bottom: 28px;
+    line-height: 40px;
+    height: 40px;
+    margin-bottom: 24px;
     padding-left: 10px;
   }
   .vote_list {
@@ -276,6 +290,9 @@ export default {
     overflow-y: hidden;
     margin: 40px 0;
     margin-bottom: 29px;
+    .__tb_content {
+      padding-bottom: 78px;
+    }
   }
   .node_list {
     flex: 1;
