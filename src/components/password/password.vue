@@ -8,7 +8,7 @@
         }">
             <input v-model="password" :placeholder="$t('pwdConfirm.placeholder')" type="password"/>
         </div>
-        <div v-show="isShowPWDHold" class="hold-pwd __pointer" @click="toggleHold">
+        <div v-show="isShowPWD && isShowPWDHold" class="hold-pwd __pointer" @click="toggleHold">
             <span :class="{ 'active': isPwdHold }"></span>
             {{ $t('pwdConfirm.conf') }}
         </div>
