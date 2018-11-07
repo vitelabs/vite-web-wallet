@@ -1,40 +1,38 @@
-import request from 'utils/request';
 import loopTime from 'loopTime';
 
 let loopHeightTimeout;
 const ViteId = 'tti_5649544520544f4b454e6e40';
+const defaultTokenList = [{
+    'tokenName': 'Vite Token',
+    'tokenSymbol': 'VITE',
+    'decimals': 18,
+    'tokenId': 'tti_5649544520544f4b454e6e40'
+}, {
+    'tokenName': 'Vite Community Point',
+    'tokenSymbol': 'VCP',
+    'decimals': 0,
+    'tokenId': 'tti_12ea0c02170304090a5ac879'
+}, {
+    'tokenName': 'Vite Voucher',
+    'tokenSymbol': 'VV',
+    'decimals': 18,
+    'tokenId': 'tti_b6187a150d175e5a165b1c5b'
+}];
 
 class Ledger {
     constructor() {
         this.defaultTokenIds = {};
         this.tokenInfoMaps = {};
-
-        this.currentHeight = '';        
-        this.loopHeight();
+        this.currentHeight = '';
     }
 
     getDefaultTokenList() {
-        let toRequest = window.viteWalletRequest || request;
-
-        toRequest({
-            method: 'GET',
-            path: '/api/version/config?app=web&channel=token&version=default',
-            type: 'form'    // Client Wallet
-        }).then((data)=>{
-            if (!data) {
-                return;
-            }
-
-            data = JSON.parse(data);
-            data.forEach((item) => {
-                this.defaultTokenIds[item.tokenId] = item.tokenSymbol;
-                this.setTokenInfo({
-                    tokenSymbol: item.tokenSymbol
-                }, item.tokenId);
-                this.fetchTokenInfo(item.tokenId);
-            });
-        }).catch((err) => {
-            console.error(err);
+        defaultTokenList.forEach((item) => {
+            this.defaultTokenIds[item.tokenId] = item.tokenSymbol;
+            this.setTokenInfo({
+                tokenSymbol: item.tokenSymbol
+            }, item.tokenId);
+            this.fetchTokenInfo(item.tokenId);
         });
     }
 
