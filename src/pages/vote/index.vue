@@ -269,9 +269,10 @@ export default {
             return voteList;
         },
         nodeList() {
+            const token = viteWallet.Ledger.getTokenInfo();
             return this.nodeData
                 .map(v => {
-                    v.voteNum = v.voteNum || 0;
+                    v.voteNum =  viteWallet.BigNumber.toBasic(v.voteNum, token.decimals) || 0; // tans
                     v.operate = this.$t('vote.section2.operateBtn');
                     return v;
                 })
