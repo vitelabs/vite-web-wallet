@@ -64,7 +64,8 @@ export default {
             editName: '',
             copySuccess: false,
             qrcode: null,
-            qrcodeShow: false
+            qrcodeShow: false,
+            getTestTokenAble:true
         };
     },
     mounted() {
@@ -314,6 +315,10 @@ export default {
         font-family: $font-normal-b, arial, sans-serif;
         padding-right: 20px;
         padding-bottom: 30px;
+        .un_clickable{
+            background-color:#bfbfbf!important;
+            cursor:default!important;
+        }
         .btn__small {
             box-sizing: border-box;
             width: 210px;
