@@ -89,7 +89,17 @@ const getters = {
                 decimals: '0'
             };
         }
-
+        // balanceInfo.sort(v=>{
+        //     return Number(v.balance);
+        // });
+        const i=balanceInfo.findIndex(v=>{
+            return v.symbol==='VITE';
+        });
+        if(i>=0){
+            const vite=balanceInfo.splice(i,1);
+            balanceInfo.unshift(vite);
+        }
+        
         return balanceInfo;
     }
 };
