@@ -78,7 +78,7 @@ export default {
         }
         this.updateVoteData();
         this.updateNodeData();
-        this.nodeDataTimer = new timer(this.updateNodeData, 75 * 1000);
+        this.nodeDataTimer = new timer(this.updateNodeData, 3 * 1000);
     },
     data() {
         return {
