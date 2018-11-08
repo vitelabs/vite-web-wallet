@@ -1,4 +1,4 @@
-import ViteJS from '@vitelabs/vite.js';
+import ViteJS from '@vite/vitejs';
 
 import net from './net';
 import ledger from './ledger';
