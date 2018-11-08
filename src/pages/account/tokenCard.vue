@@ -25,7 +25,7 @@
 <script>
 import viteIcon from 'assets/imgs/vite.svg';
 import vcpIcon from 'assets/imgs/VCC.svg';
-import vvIcon from 'assets/imgs/vv.svg';
+import vttIcon from 'assets/imgs/vtt.svg';
 
 export default {
     props: {
@@ -48,7 +48,7 @@ export default {
             iconMap: {
                 VITE: viteIcon,
                 VCP: vcpIcon,
-                VV: vvIcon,
+                VTT: vttIcon,
                 default: viteIcon
             }
         };
