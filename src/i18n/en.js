@@ -127,7 +127,7 @@ module.exports = {
             remarksLong: 'Notes do not exceed 180 English characters (or punctuations, 1 Chinese character = 6 English characters)'
         },
         hint: {
-            token: 'VV test tokens have be sent to your account, please check your account!',
+            token: 'VTT test tokens have be sent to your account, please check your account!',
             tErr: 'Get test token failed!',
             low: 'Insufficient account balance',
             wrong: 'Wrong Password!',

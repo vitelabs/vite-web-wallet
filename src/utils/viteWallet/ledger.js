@@ -11,12 +11,12 @@ const defaultTokenList = [{
     'tokenName': 'Vite Community Point',
     'tokenSymbol': 'VCP',
     'decimals': 0,
-    'tokenId': 'tti_12ea0c02170304090a5ac879'
+    'tokenId': 'tti_fb40bfa541eeaa0bd81fe14a'
 }, {
-    'tokenName': 'Vite Voucher',
-    'tokenSymbol': 'VV',
+    'tokenName': 'Vite Test Token',
+    'tokenSymbol': 'VTT',
     'decimals': 18,
-    'tokenId': 'tti_b6187a150d175e5a165b1c5b'
+    'tokenId': 'tti_36c24fc55bb8ad188273b43a'
 }];
 
 class Ledger {
