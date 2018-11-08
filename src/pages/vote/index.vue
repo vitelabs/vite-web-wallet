@@ -284,9 +284,6 @@ export default {
             new RegExp(this.filterKey.trim(), 'i').test(v.addr)
                     );
                 })
-                .sort((a, b) => {
-                    return a.voteNum - b.voteNum;
-                });
         }
     },
     beforeDestroy() {
