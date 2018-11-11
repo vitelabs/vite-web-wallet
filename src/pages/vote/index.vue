@@ -1,7 +1,7 @@
 <template>
     <loading v-if="loadingToken" class="loading"></loading>
     <div class="vote" v-else>
-
+        <powProcess ref="pow"></powProcess>
         <secTitle></secTitle>
 
         <section class="vote_list">
@@ -60,9 +60,11 @@ import secTitle from 'components/secTitle';
 import pwdConfirm from 'components/password';
 import loading from 'components/loading';
 import { doUntill, timer } from 'utils/asyncFlow';
-import { quotaConfirm } from 'components/quota';
+import confirm from 'components/confirm';
+import powProcess from 'components/powProcess';
+
 export default {
-    components: { secTitle, tooltips, search, loading },
+    components: { secTitle, tooltips, search, loading,confirm,powProcess },
     beforeMount() {
         this.tokenInfo = viteWallet.Ledger.getTokenInfo();
         if (!this.tokenInfo) {
@@ -89,7 +91,8 @@ export default {
             tokenInfo: null,
             cache: null,
             nodeDataTimer: null,
-            isResisterTipsShow: false
+            isResisterTipsShow: false,
+            startpow:this.$refs.pow.startPowTx
         };
     },
     methods: {
@@ -151,7 +154,7 @@ export default {
                     .catch(e => {
                         const code = e && e.error ? e.error.code || -1 : e ? e.code : -1;
                         if (code === -35002) {
-                            quotaConfirm({ operate: this.$t('vote.section1.operate') });
+                            quotaConfirm({ operate: this.$t('vote.section1.operate') ,leftBtnTxt:'',cancel:''});
                         } else {
                             this.$toast(this.$t('vote.section1.cancelVoteErr'));
                         }
