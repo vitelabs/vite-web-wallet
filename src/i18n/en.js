@@ -332,9 +332,9 @@ module.exports = {
             toast: '撤销投票请求已发送',
             quotaConfirm: {
                 title: '配额不足',
-                content: '当前配额不足，无法进行撤销，您需要抵押vite配额获取配额才可以投票',
+                content: '无法撤销投票，您需运行PoW或抵押配额才可以撤销投票',
                 cancelText: '暂不投票',
-                submitText: '获取配额'
+                submitText: '运行POW'
             },
             operate:'撤销投票',
             operateBtn:'撤销',
@@ -349,7 +349,7 @@ module.exports = {
                     title: '投票',
                     cancelText: '暂不投票',
                     submitText: '确认投票',
-                    content: ''
+                    content: '您只能给一个节点投票，确认投票给此节点吗？'
                 },
                 cover: {
                     title: '投票',
@@ -361,9 +361,9 @@ module.exports = {
             toast: '投票请求已发送',
             quotaConfirm: {
                 title: '配额不足',
-                content: '当前配额不足，无法进行投票，您需要抵押vite配额获取配额才可以投票',
+                content: '无法投票，您需运行PoW或抵押配额才可以投票',
                 cancelText: '暂不投票',
-                submitText: '获取配额'
+                submitText: '运行POW'
             },
             noSearchData:'无结果，换个输入试试',
             noData:'暂无数据',

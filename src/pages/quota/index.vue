@@ -18,7 +18,7 @@
                 </div>
             </confirm>
 
-            <pow-process ref="powProcess" v-if="showConfirmType === 'pow'"></pow-process>
+            <pow-process ref="powProcess" v-if="showConfirmType === 'pow'" @pow-finsih="closeConfirm"></pow-process>
         </div>
 
         <div v-show="!loadingToken">            
@@ -79,7 +79,8 @@ export default {
             activeAmountLimit: '',
             cancelAmount: '',
             amountErr: '',
-            stopWatch: false
+            stopWatch: false,
+            startPowTx:this.$refs.powProcess.startPowTx
         };
     },
     computed: {
@@ -155,18 +156,6 @@ export default {
                 }
             });
         },
-        stopPow(cb) {
-            let powProcessEle = this.$refs.powProcess;
-            if (!powProcessEle) {
-                return;
-            }
-
-            powProcessEle.gotoFinish();
-            setTimeout(() => {
-                this.closeConfirm();
-                cb && cb();
-            }, 1000);
-        },
 
         sendPledgeTx({
             toAddr, amount
@@ -187,33 +176,12 @@ export default {
             }).catch((err) => {
                 console.log(err);
                 if (err && err.error && err.error.code && err.error.code === -35002) {
+                    this.showConfirmType = type;
                     this.startPowTx({
                         toAddr, amount
                     }, type, cb);
                     return;
                 }
-                cb && cb(false);
-            });
-        },
-        startPowTx({
-            toAddr, amount
-        }, type, cb) {
-            this.showConfirm('pow');
-
-            this.activeAccount.getBlock({
-                tokenId: this.tokenInfo.tokenId,
-                toAddr,
-                amount
-            }, type, true).then((block) => {
-                this.stopPow(() => {
-                    this.activeAccount.sendRawTx(block).then(() => {
-                        cb && cb(true);
-                    }).catch(() => {
-                        cb && cb(false);
-                    });
-                });
-            }).catch(() => {
-                this.closeConfirm();
                 cb && cb(false);
             });
         }

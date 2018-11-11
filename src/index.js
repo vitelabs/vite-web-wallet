@@ -24,10 +24,10 @@ import { initQuotaConfirm } from 'components/quota/index.js';
 
 import plugin from 'utils/plugins/addPlugin';
 import clickOutside from 'utils/plugins/clickOutside';
-import Wallet from 'utils/wallet/index.js';
+import wallet from 'utils/wallet/index.js';
 
-const  wallet = new Wallet();
-Vue.use(plugin, { wallet });
+
+Vue.use(plugin);
 Vue.use(VueRouter);
 Vue.use(clickOutside);
 import {i18n} from 'i18n';
