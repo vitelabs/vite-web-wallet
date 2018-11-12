@@ -1,9 +1,10 @@
 import toast from 'components/toast/index.js';
 import confirm from 'components/confirm/index.js';
 import statistics from 'utils/statistics';
+import wallet from 'utils/wallet';
 
 export default {
-    install(Vue, { wallet }) {
+    install(Vue) {
         Vue.mixin({
             beforeCreate: function () {
                 this.$onEnterKey = (cb) => {
