@@ -1,11 +1,13 @@
 <template>
-    <div class="pow-process-wrapper">
-        <div class="pow">{{ $t('pow') }}</div>
-        <div class="loading-wrapper __pointer">
-            <loading></loading>
-            <div class="process-num">{{ processNum + '%' }}</div>
+    <div class="gray-wrapper" v-if="isShow">
+        <div class="pow-process-wrapper">
+            <div class="pow">{{ $t('pow') }}</div>
+            <div class="loading-wrapper __pointer">
+                <loading></loading>
+                <div class="process-num">{{ processNum + '%' }}</div>
+            </div>
+            <div v-show="isShowCancel" @click="_cancel" class="btn __pointer">{{ $t('btn.cancel') }}</div>
         </div>
-        <div v-show="isShowCancel" @click="_cancel" class="btn __pointer">{{ $t('btn.cancel') }}</div>
     </div>
 </template>
 
@@ -29,7 +31,8 @@ export default {
   },
   data() {
     return {
-      processNum: 0
+      processNum: 0,
+      isShow: false
     };
   },
   mounted() {
@@ -62,41 +65,41 @@ export default {
       this.clearProcessTimeout();
       this.cancel();
     },
-    startPowTx({ toAddr, amount,difficulty }, type, cb) {
-    //   this.showConfirm("pow"); ???
-
-      this.activeAccount
-        .getBlock(
-          {
-            tokenId: this.tokenInfo.tokenId,
-            toAddr,
-            amount,
-            difficulty
-          },
-          type,
-          true
-        )
-        .then(block => {
-          this.stopPow(() => {
-            this.activeAccount
-              .sendRawTx(block)
-              .then(() => {
-                cb && cb(true);
-              })
-              .catch(() => {
-                cb && cb(false);
-              });
+    startPowTx(t, type, cb) {
+      this.isShow = true;
+      const activeAccount = this.$wallet.getActiveAccount();
+      return new Promise((res, rej) => {
+        activeAccount
+          .getBlock(t, type, true)
+          .then(block => {
+            this.stopPow(() => {
+              activeAccount
+                .sendRawTx(block)
+                .then(data => {
+                  this.isShow = false;
+                  cb && cb(true);
+                  res(data);
+                })
+                .catch(e => {
+                  this.isShow = false;
+                  cb && cb(false);
+                  rej(e);
+                });
+            });
+          })
+          .catch(() => {
+            this.isShow = false;
+            this.$emit("pow-finsish");
+            cb && cb(false);
+            rej(e);
           });
-        })
-        .catch(() => {
-        this.$emit("pow-finsish")
-          cb && cb(false);
-        });
+      });
     },
     stopPow(cb) {
       this.gotoFinish();
       setTimeout(() => {
-        this.$emit('pow-finish')
+        this.isShow = false;
+        this.$emit("pow-finish");
         cb && cb();
       }, 1000);
     }
@@ -106,7 +109,19 @@ export default {
 
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
-
+.gray-wrapper {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  overflow: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 100;
+}
 .pow-process-wrapper {
   font-family: $font-bold, arial, sans-serif;
   width: 90%;
