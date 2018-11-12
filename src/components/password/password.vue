@@ -2,7 +2,7 @@
     <confirm :title="title || $t('pwdConfirm.title')" 
              :content="content" :showMask="showMask"
              :leftBtnTxt="cancelTxt || $t('btn.cancel')" :rightBtnTxt="submitTxt || $t('btn.submit')"
-             :leftBtnClick="_cancle"  :rightBtnClick="_submit">
+             :leftBtnClick="exchange?_submit:_cancle"  :rightBtnClick="exchange?_cancle:_submit">
         <div v-show="isShowPWD" class="pass-input" :class="{
             'distance': !!content
         }">
@@ -56,6 +56,10 @@ export default {
         isShowPWD: {
             type: Boolean,
             default: true
+        },
+        exchange:{
+            type:Boolean,
+            default:false
         }
     },
     data() {
