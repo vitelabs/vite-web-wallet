@@ -3,7 +3,7 @@
         <quota-head></quota-head>
 
         <loading v-if="loadingToken" class="loading"></loading>
-
+            <pow-process ref="powProcess"  @pow-finsih="closeConfirm"></pow-process>
         <div v-if="showConfirmType" class="gray-wrapper">
             <confirm v-if="showConfirmType === 'cancel'" 
                      :title="$t(`quota.confirm.cancel.title`)" :closeIcon="false"
@@ -17,8 +17,6 @@
                            :placeholder="$t('quota.cancelAmount')" />
                 </div>
             </confirm>
-
-            <pow-process ref="powProcess" v-if="showConfirmType === 'pow'" @pow-finsih="closeConfirm"></pow-process>
         </div>
 
         <div v-show="!loadingToken">            
@@ -79,8 +77,7 @@ export default {
             activeAmountLimit: '',
             cancelAmount: '',
             amountErr: '',
-            stopWatch: false,
-            startPowTx:this.$refs.powProcess.startPowTx
+            stopWatch: false
         };
     },
     computed: {
@@ -176,9 +173,8 @@ export default {
             }).catch((err) => {
                 console.log(err);
                 if (err && err.error && err.error.code && err.error.code === -35002) {
-                    this.showConfirmType = type;
-                    this.startPowTx({
-                        toAddr, amount
+                    this.$refs.powProcess.startPowTx({
+                        toAddr, amount,tokenId:this.tokenInfo.tokenId
                     }, type, cb);
                     return;
                 }

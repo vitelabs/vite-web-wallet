@@ -333,8 +333,8 @@ module.exports = {
             quotaConfirm: {
                 title: '配额不足',
                 content: '无法撤销投票，您需运行PoW或抵押配额才可以撤销投票',
-                cancelText: '暂不投票',
-                submitText: '运行POW'
+                leftBtn: {text:'抵押配额'},
+                rightBtn: {text:'运行POW'}
             },
             operate:'撤销投票',
             operateBtn:'撤销',
@@ -362,8 +362,8 @@ module.exports = {
             quotaConfirm: {
                 title: '配额不足',
                 content: '无法投票，您需运行PoW或抵押配额才可以投票',
-                cancelText: '暂不投票',
-                submitText: '运行POW'
+                leftBtn: {text:'抵押配额'},
+                rightBtn: {text:'运行POW'}
             },
             noSearchData:'无结果，换个输入试试',
             noData:'暂无数据',
