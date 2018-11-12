@@ -51,7 +51,8 @@ class Account {
         cancel = () => {},
         content = '',
         submitTxt = '',
-        cancelTxt = ''
+        cancelTxt = '',
+        exchange=false
     }, isConfirm = false) {
         let isHide = !isConfirm && this.isHoldPWD;
 
@@ -61,7 +62,7 @@ class Account {
         }
 
         pwdConfirm({
-            showMask, title, submit, content, cancel, cancelTxt, submitTxt
+            showMask, title, submit, content, cancel, cancelTxt, submitTxt,exchange
         }, !this.isHoldPWD);
         return false;
     }

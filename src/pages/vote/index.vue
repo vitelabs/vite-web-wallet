@@ -164,7 +164,7 @@ export default {
               .then(successCancel)
               .catch(failCancel);
           }),
-            (c.closeIcon = true);
+            (c.closeBtn = {show:true});
           this.$confirm(c);
         } else {
           this.$toast(this.$t("vote.section1.cancelVoteErr"));
@@ -188,7 +188,8 @@ export default {
           title: this.$t("vote.section1.confirm.title"),
           submitTxt: this.$t("vote.section1.confirm.submitText"),
           cancelTxt: this.$t("vote.section1.confirm.cancelText"),
-          cancel: sendCancel
+          submit: sendCancel,
+          exchange:true
         },
         true
       );
@@ -235,7 +236,7 @@ export default {
               .then(successVote)
               .catch(failVote);
           };
-          c.closeIcon = true;
+          c.closeBtn = {show:true};
           this.$confirm(c);
         } else {
           this.$toast(this.$t("vote.section2.voteErr"));
@@ -257,8 +258,8 @@ export default {
           submitTxt: this.$t(`vote.section2.confirm.${t}.submitText`),
           cancelTxt: this.$t(`vote.section2.confirm.${t}.cancelText`),
           content: this.$t(`vote.section2.confirm.${t}.content`,{nodeName:v.nodeName}),
-          submit: this.haveVote ? undefined : sendVote,
-          cancel: this.haveVote ? sendVote : undefined
+          submit: sendVote,
+          exchange:this.haveVote
         },
         true
       );
