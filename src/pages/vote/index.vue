@@ -145,29 +145,27 @@ export default {
       const failCancel = e => {
         const code = e && e.error ? e.error.code || -1 : e ? e.code : -1;
         if (code === -35002) {
-          this.$confirm(
-            Object.assign({}, this.$t("vote.section1.quotaConfirm"), {
-              leftBtn: {
-                click: () => {
-                  this.$router.push({
-                    name: "quota"
-                  });
-                }
-              },
-              rightBtn: {
-                click: () => {
-                  this.$refs.pow.startPowTx(
-                    {
-                      tokenId: this.tokenInfo.tokenId,
-                      nodeName: this.voteList[0].nodeName,
-                      difficulty: "201564160"
-                    },
-                    "cancelVoteBlock"
-                  ).then(successCancel).catch(failCancel);
-                }
-              }
-            })
-          );
+          const c = Object.assign({}, this.$t("vote.section1.quotaConfirm"));
+          c.leftBtn.click = () => {
+            this.$router.push({
+              name: "quota"
+            });
+          };
+          (c.rightBtn.click = () => {
+            this.$refs.pow
+              .startPowTx(
+                {
+                  tokenId: this.tokenInfo.tokenId,
+                  nodeName: this.voteList[0].nodeName,
+                  difficulty: "201564160"
+                },
+                "cancelVoteBlock"
+              )
+              .then(successCancel)
+              .catch(failCancel);
+          }),
+            (c.closeIcon = true);
+          this.$confirm(c);
         } else {
           this.$toast(this.$t("vote.section1.cancelVoteErr"));
         }
@@ -217,26 +215,28 @@ export default {
       const failVote = e => {
         const code = e && e.error ? e.error.code || -1 : e ? e.code : -1;
         if (code === -35002) {
-            const c=Object.assign({},this.$t("vote.section1.quotaConfirm"));
-            c.leftBtn.click=() => {
-                  this.$router.push({
-                    name: "quota"
-                  });
-                }
-            c.rightBtn.click=() => {
-                  this.$refs.pow
-                    .startPowTx(
-                      {
-                        nodeName: v.name,
-                        tokenId: this.tokenInfo.tokenId,
-                        difficulty: "201564160"
-                      },
-                      "voteBlock"
-                    )
-                    .then(successVote).catch(failVote);
-                }
-          this.$confirm(c
-          );
+          const c = Object.assign({}, this.$t("vote.section2.quotaConfirm"));
+          console.log(888,c)
+          c.leftBtn.click = () => {
+            this.$router.push({
+              name: "quota"
+            });
+          };
+          c.rightBtn.click = () => {
+            this.$refs.pow
+              .startPowTx(
+                {
+                  nodeName: v.name,
+                  tokenId: this.tokenInfo.tokenId,
+                  difficulty: "201564160"
+                },
+                "voteBlock"
+              )
+              .then(successVote)
+              .catch(failVote);
+          };
+          c.closeIcon = true;
+          this.$confirm(c);
         } else {
           this.$toast(this.$t("vote.section2.voteErr"));
         }
@@ -256,7 +256,7 @@ export default {
           title: this.$t(`vote.section2.confirm.${t}.title`),
           submitTxt: this.$t(`vote.section2.confirm.${t}.submitText`),
           cancelTxt: this.$t(`vote.section2.confirm.${t}.cancelText`),
-          content: this.$t(`vote.section2.confirm.${t}.content`),
+          content: this.$t(`vote.section2.confirm.${t}.content`,{nodeName:this.voteList[0]['nodeName']}),
           submit: this.haveVote ? undefined : sendVote,
           cancel: this.haveVote ? sendVote : undefined
         },
@@ -291,9 +291,10 @@ export default {
       let voteList = [];
       if (this.voteData.length > 0) {
         // 从nodeList更新voteList中节点状态；
-        this.nodeList.some(v => {// todo anytime will be fasle?
+        this.nodeList.some(v => {
+          // todo anytime will be fasle?
           return v.nodeName === this.voteData[0].nodeName;
-        })||!this.voteData[0].isCache
+        }) || !this.voteData[0].isCache
           ? (this.voteData[0].nodeStatus = 1)
           : (this.voteData[0].nodeStatus = 2);
         // 取消注册情况下作废投票，优先级最高
