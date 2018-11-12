@@ -219,7 +219,7 @@ class Account {
     }
 
     getBlock({
-        toAddr, tokenId, amount, message, nodeName, producerAddr, rewardAddress
+        toAddr, tokenId, amount, message, nodeName, producerAddr, rewardAddress,difficulty
     }, type = 'sendBlock', isPow = false) {
         return new Promise((res, rej) => {
             let accountAddress = this.addrs[this.defaultInx].hexAddr;
@@ -235,7 +235,7 @@ class Account {
                     return res(block);
                 }
 
-                viteWallet.Pow.getNonce(accountAddress, block.prevHash).then((data) => {
+                viteWallet.Pow.getNonce(accountAddress, block.prevHash,difficulty).then((data) => {
                     block.difficulty = data.difficulty;
                     block.nonce = data.nonce;
                     return res(block);

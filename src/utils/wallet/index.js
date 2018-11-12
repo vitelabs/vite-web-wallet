@@ -294,7 +294,7 @@ class Wallet {
     }
 }
 
-export default Wallet;
+export default  new Wallet();
 
 function getAccFromEntropy(entropy) {
     let list = acc.getList();
