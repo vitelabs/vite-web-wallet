@@ -185,6 +185,9 @@ export default {
             this.showConfirmType = '';
 
             this.activeAccount.initPwd({
+                cancel: () => {
+                    this.closeConfirm();
+                },
                 submit: () => {
                     this.showConfirm(showConfirmType);
                     if (showConfirmType === 'edit') {
