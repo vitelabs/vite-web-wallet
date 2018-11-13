@@ -1,15 +1,13 @@
 <template>
     <div class="account-wrapper" @click="closeQrCode">
-        <div>
-            <sync-block class="sync-block item"></sync-block>
-            <account-head ref="accountHead" class="item"></account-head>
-            <div class="token-list item">
-                <tokenCard v-for="token in tokenList" :key="token.id"
-                           :opt="token" :sendTransaction="showTrans"></tokenCard>
-            </div>
-
-            <transaction v-if="isShowTrans" :token="activeToken" :closeTrans="closeTrans"></transaction>
+        <sync-block class="sync-block item"></sync-block>
+        <account-head ref="accountHead" class="item"></account-head>
+        <div class="token-list item">
+            <tokenCard v-for="token in tokenList" :key="token.id"
+                       :opt="token" :sendTransaction="showTrans"></tokenCard>
         </div>
+
+        <transaction v-if="isShowTrans" :token="activeToken" :closeTrans="closeTrans"></transaction>
     </div>
 </template>
 

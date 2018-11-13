@@ -151,6 +151,7 @@ export default {
 
         showConfirm(type, activeItem) {
             this.showConfirmType = type;
+            this.stopWatch = false;
 
             if (!this.tokenInfo || !activeItem) {
                 return;
@@ -185,7 +186,7 @@ export default {
 
             this.activeAccount.initPwd({
                 cancel: () => {
-                    this.showConfirm(showConfirmType);
+                    this.closeConfirm();
                 },
                 submit: () => {
                     this.showConfirm(showConfirmType);

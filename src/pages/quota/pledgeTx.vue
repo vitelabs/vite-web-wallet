@@ -125,9 +125,10 @@ export default {
                 return false;
             }
 
-            if (this.tokenInfo && this.tokenInfo.tokenId && 
-                this.tokenBalList && this.tokenBalList[this.tokenInfo.tokenId]) {
-                let balance = this.tokenBalList[this.tokenInfo.tokenId].totalAmount;
+            let balance = this.tokenBalList && this.tokenBalList[this.tokenInfo.tokenId] ? 
+                this.tokenBalList[this.tokenInfo.tokenId].totalAmount : 0;
+
+            if (this.tokenInfo && this.tokenInfo.tokenId) {
                 let amount = viteWallet.BigNumber.toMin(this.amount, this.tokenInfo.decimals);
                 if (viteWallet.BigNumber.compared(balance, amount) < 0) {
                     this.amountErr = this.$t('transList.valid.bal');
