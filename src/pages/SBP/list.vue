@@ -10,7 +10,7 @@
         
         <div v-show="list && list.length" class="__tb_content">
             <div class="__tb_row __tb_content_row" v-for="(item, index) in list" :key="item.name">
-                <div class="__tb_cell name">{{ item.name }}</div>
+                <div class="__tb_cell name __ellipsis">{{ item.name }}</div>
                 <div class="__tb_cell addr">{{ item.nodeAddr }}</div>
                 <div class="__tb_cell amount">{{ item.pledgeAmount }}</div>
                 <div class="__tb_cell height">
