@@ -32,3 +32,4 @@
 - error code :
    - -35001 hash valid fail
    - -35002 out of quota
+   - -36001 addr not exist
