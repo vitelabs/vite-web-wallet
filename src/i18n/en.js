@@ -275,7 +275,7 @@ module.exports = {
             quotaAmount: '抵押金额',
             confirmBtn: '提交注册',
             namePlaceholder: '请输入节点名称',
-            nameHint: '40个字符以内, 支持大小写英文字母、数字、\'_\'、\'.',
+            nameHint: '40个字符以内, 支持大小写英文字母、数字、\'_\'、\'.\'',
             nameErr: '节点名称不合法',
             nameUsed: '此节点名称已被注册',
             addrPlaceholder: '请输入快照块出块地址',
@@ -397,7 +397,8 @@ module.exports = {
         back: 'Back',
         submit: 'Submit',
         next: 'Next Step',
-        understand: 'I understand'
+        understand: 'I understand',
+        edit: 'edit'
     },
     paging: {
         pre: 'Prev',
