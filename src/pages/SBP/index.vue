@@ -151,6 +151,7 @@ export default {
 
         showConfirm(type, activeItem) {
             this.showConfirmType = type;
+            this.stopWatch = false;
 
             if (!this.tokenInfo || !activeItem) {
                 return;
