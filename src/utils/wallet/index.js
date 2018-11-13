@@ -204,6 +204,10 @@ class Wallet {
                 name: acc.name
             });
 
+            if (!encryptObj.id) {
+                this.activeAccount.save();
+            }
+
             setLast({
                 entropy,
                 name: acc.name

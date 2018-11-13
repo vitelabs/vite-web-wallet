@@ -97,6 +97,7 @@ class Account {
         }
 
         acc.add({
+            id: getHexId(this.addrs[0].addr),
             defaultInx: this.defaultInx, 
             addrNum: this.addrs.length, 
             name: this.name, 
@@ -256,7 +257,6 @@ class Account {
         window.isShowPWD = true;
 
         let privKey = this.addrs[this.defaultInx].privKey;
-        // console.log(privKey);
         return new Promise((res, rej) => {
             this.getBlock({
                 toAddr, tokenId, amount, message, nodeName, producerAddr, rewardAddress
@@ -288,4 +288,11 @@ function checkName(name) {
     name = `${namePre}${count}`;
     acc.setNameCount(count + 1);
     return name;
+}
+
+function getHexId(key) {
+    let keyByte = viteWallet.utils.hexToBytes(key);
+    let idByte = viteWallet.utils.blake2b(keyByte, null, 32);
+    let idHex = viteWallet.utils.bytesToHex(idByte);
+    return idHex;
 }
