@@ -1,4 +1,17 @@
 import config from 'config/constant';
+import { timer } from 'utils/asyncFlow';
+
+const loopTime = 5000;
+let regListInst = null;
+let listNum = 0;
+
+const apis = {
+    fetchRegistrationList(address) {
+        return viteWallet.Vite['register_getRegistrationList'](config.gid, address).then((data)=>{
+            return data && data.result ? data.result : [];
+        });
+    }
+};
 
 const state = {
     registrationList: []
@@ -15,11 +28,33 @@ const mutations = {
 
 const actions = {
     fetchRegistrationList({ commit }, address) {
-        return viteWallet.Vite['register_getRegistrationList'](config.gid, address).then((data)=>{
-            let result = data && data.result ? data.result : [];
+        return apis.fetchRegistrationList(address).then((result) => {
             commit('commitRegistrationList', result);
-            return data;
         });
+    },
+    loopRegList({ state, dispatch }, address) {
+        if (!regListInst) {
+            let regListNum = state.registrationList ? state.registrationList.length : 0;
+            listNum = regListNum + 1;
+        } else {
+            listNum = listNum ? listNum + 1 : state.registrationList ? state.registrationList.length : 0;
+            return;
+        }
+
+        regListInst = new timer(()=>{
+            let regListNum = state.registrationList ? state.registrationList.length : 0;
+            if (listNum === regListNum) {
+                dispatch('stopLoopRegList');
+                return;
+            }
+            
+            return dispatch('fetchRegistrationList', address);
+        }, loopTime);
+        regListInst.start();
+    },
+    stopLoopRegList() {
+        regListInst && regListInst.stop();
+        regListInst = null;
     }
 };
 
