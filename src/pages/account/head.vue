@@ -31,7 +31,9 @@
         </div>
         
         <div class="btn-group">
-            <div class="btn__small __pointer __btn-test" @click="getTestToken">
+            <div class="btn__small __pointer __btn-test" :class="{
+                'unuse': waitTestToken
+            }" @click="getTestToken">
                 <span>{{ $t('accDetail.getTestToken') }}</span>
                 <img src="../../assets/imgs/Vite_icon.svg" class="icon" />
             </div>
@@ -64,7 +66,8 @@ export default {
             editName: '',
             copySuccess: false,
             qrcode: null,
-            qrcodeShow: false
+            qrcodeShow: false,
+            waitTestToken: false
         };
     },
     mounted() {
@@ -130,6 +133,10 @@ export default {
         },
 
         getTestToken() {
+            if (this.waitTestToken) {
+                return;
+            }
+
             if (!viteWallet.Net.getNetStatus()) {
                 this.$toast(this.$t('nav.noNet'));
                 return;
@@ -139,6 +146,10 @@ export default {
                 this.$toast( this.$t('accDetail.hint.tErr') );
             }
             
+            this.waitTestToken = true;
+            setTimeout(() => {
+                this.waitTestToken = false;
+            }, 3000);
             viteWallet.TestToken.get(this.account.addr).then(() => {
                 this.$toast( this.$t('accDetail.hint.token') );
             }).catch((err) => {
@@ -321,6 +332,10 @@ export default {
             color: #ffffff;
             height: 35px;
             line-height: 35px;
+            &.unuse {
+                background: #efefef;
+                color: #666;
+            }
         }
         .__btn-detail {
             border: 1px solid #007aff;

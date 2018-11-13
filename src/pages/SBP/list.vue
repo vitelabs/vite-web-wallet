@@ -25,11 +25,11 @@
                     <span class="btn" :class="{
                         '__pointer': !item.isCancel,
                         'unuse': item.isCancel    
-                    }" @click="edit(item)">edit</span>
+                    }" @click="edit(item)">{{ $t('btn.edit') }}</span>
                     <span class="btn" :class="{
                         '__pointer': item.isMaturity && !item.isCancel,
                         'unuse': !item.isMaturity || item.isCancel    
-                    }" @click="cancel(item)">cancel</span>
+                    }" @click="cancel(item)">{{ $t('btn.cancel') }}</span>
                     <!-- <span class="btn" :class="{
                         '__pointer': item.isReward,
                         'unuse': !item.isReward
