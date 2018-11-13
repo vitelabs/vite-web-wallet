@@ -264,7 +264,7 @@ export default {
           submitTxt: this.$t(`vote.section2.confirm.${t}.submitText`),
           cancelTxt: this.$t(`vote.section2.confirm.${t}.cancelText`),
           content: this.$t(`vote.section2.confirm.${t}.content`, {
-            nodeName: v.nodeName
+            nodeName: this.voteList[0].nodeName
           }),
           submit: sendVote,
           exchange: this.haveVote
