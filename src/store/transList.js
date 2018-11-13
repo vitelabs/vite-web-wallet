@@ -74,6 +74,7 @@ const getters = {
             let isSend = [1, 2, 3].indexOf(+item.blockType) > -1;
             let timestamp = item.timestamp * 1000;
             let transAddr = ellipsisAddr( isSend ? item.toAddress : item.fromAddress );
+            let smallTransAddr = ellipsisAddr( isSend ? item.toAddress : item.fromAddress, 6 );
 
             let amount = item.tokenInfo && item.tokenInfo.decimals ?
                 viteWallet.BigNumber.toBasic(item.amount, item.tokenInfo.decimals) :
@@ -86,6 +87,7 @@ const getters = {
                 confirms: `(${confirms})`,
                 timestamp,
                 transAddr,
+                smallTransAddr,
                 amount: isSend && !isZero ? ('-' + amount) : amount,
                 hash: item.hash,
                 token: item.tokenInfo && item.tokenInfo.tokenSymbol ? item.tokenInfo.tokenSymbol : '--'
