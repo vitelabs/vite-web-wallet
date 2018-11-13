@@ -6,45 +6,49 @@
 
         <section class="vote_list">
             <div class="title">{{$t('vote.section1.title')}}</div>
+
             <div class="__tb">
                 <div class="__tb_row __tb_head">
                     <div class="__tb_cell" v-for="v in $t('vote.section1.head')" :key="v"> {{v}}</div>
                 </div>
-                <div class="__tb_content">
-                    <div class="__tb_row" v-for="v in voteList" :key="v.nodeName">
-                        <div class="__tb_cell">{{v.nodeName}}</div>
-                        <div class="__tb_cell">{{v.nodeStatusText}} <i v-if="v.nodeStatus===2" class="tipsicon hoveraction" @click.self.stop="toggleTips">
-                                <tooltips v-if="isResisterTipsShow" v-click-outside @clickoutside="hideTips" class="unregister-tips" :content="$t('vote.section1.hoverHelp',{nodeName:v.nodeName})"></tooltips>
-                            </i></div>
-                        <div class="__tb_cell">{{v.voteNum}}</div>
-                        <div class="__tb_cell">{{v.voteStatusText}}</div>
-                        <div class="__tb_cell" :class="cache?'unclickable':'clickable'" @click="cancelVote(v)">{{v.operate}}</div>
+                    <div class="__tb_content">
+                        <div class="__tb_row" v-for="v in voteList" :key="v.nodeName">
+                            <div class="__tb_cell nodename">{{v.nodeName}}</div>
+                            <div class="__tb_cell">{{v.nodeStatusText}} <i v-if="v.nodeStatus===2" class="tipsicon hoveraction" @click.self.stop="toggleTips">
+                                    <tooltips v-if="isResisterTipsShow" v-click-outside @clickoutside="hideTips" class="unregister-tips" :content="$t('vote.section1.hoverHelp',{nodeName:v.nodeName})"></tooltips>
+                                </i></div>
+                            <div class="__tb_cell">{{v.voteNum}}</div>
+                            <div class="__tb_cell">{{v.voteStatusText}}</div>
+                            <div class="__tb_cell" :class="cache?'unclickable':'clickable'" @click="cancelVote(v)">{{v.operate}}</div>
+                        </div>
+                        <div class="__tb_row seat">
+                        </div>
                     </div>
-                </div>
             </div>
         </section>
 
         <section class="node_list">
             <div class="title">{{$t('vote.section2.title')}}<search v-model="filterKey" class="filter"></search>
             </div>
-
-            <div class="__tb">
-                <div class="__tb_row __tb_head">
-                    <div class="__tb_cell" v-for="v in $t('vote.section2.head')" :key="v">{{v}}</div>
-                </div>
-                <div class="__tb_content" v-if="!!nodeList.length">
-                    <div class="__tb_row __tb_content_row" v-for="v in nodeList" :key="v.nodeName">
-                        <div class="__tb_cell">{{v.nodeName}}</div>
-                        <div class="__tb_cell">{{v.nodeAddr}}</div>
-                        <div class="__tb_cell">{{v.voteNum}}</div>
-                        <div class="__tb_cell" :class="cache&&cache.nodeName===v.nodeName?'unclickable':'clickable'" @click="vote(v)">{{v.operate}}</div>
+            <div class="tb_container">
+                <div class="__tb">
+                    <div class="__tb_row __tb_head">
+                        <div class="__tb_cell" v-for="v in $t('vote.section2.head')" :key="v">{{v}}</div>
                     </div>
-                </div>
-                <div class="__tb_content" v-else-if="this.filterKey">
-                    <div class="__tb_no_data">{{$t("vote.section2.noSearchData")}}</div>
-                </div>
-                <div class="__tb_content" v-else>
-                    <div class="__tb_no_data">{{$t("vote.section2.noData")}}</div>
+                    <div class="__tb_content" v-if="!!nodeList.length">
+                        <div class="__tb_row __tb_content_row" v-for="v in nodeList" :key="v.nodeName">
+                            <div class="__tb_cell nodename">{{v.nodeName}}</div>
+                            <div class="__tb_cell">{{v.nodeAddr}}</div>
+                            <div class="__tb_cell">{{v.voteNum}}</div>
+                            <div class="__tb_cell" :class="cache&&cache.nodeName===v.nodeName?'unclickable':'clickable'" @click="vote(v)">{{v.operate}}</div>
+                        </div>
+                    </div>
+                    <div class="__tb_content" v-else-if="this.filterKey">
+                        <div class="__tb_no_data">{{$t("vote.section2.noSearchData")}}</div>
+                    </div>
+                    <div class="__tb_content" v-else>
+                        <div class="__tb_no_data">{{$t("vote.section2.noData")}}</div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -164,7 +168,7 @@ export default {
               .then(successCancel)
               .catch(failCancel);
           }),
-            (c.closeBtn = {show:true});
+            (c.closeBtn = { show: true });
           this.$confirm(c);
         } else {
           this.$toast(this.$t("vote.section1.cancelVoteErr"));
@@ -189,7 +193,7 @@ export default {
           submitTxt: this.$t("vote.section1.confirm.submitText"),
           cancelTxt: this.$t("vote.section1.confirm.cancelText"),
           submit: sendCancel,
-          exchange:true
+          exchange: true
         },
         true
       );
@@ -217,7 +221,7 @@ export default {
         const code = e && e.error ? e.error.code || -1 : e ? e.code : -1;
         if (code === -35002) {
           const c = Object.assign({}, this.$t("vote.section2.quotaConfirm"));
-          console.log(888,c)
+          console.log(888, c);
           c.leftBtn.click = () => {
             this.$router.push({
               name: "quota"
@@ -236,9 +240,11 @@ export default {
               .then(successVote)
               .catch(failVote);
           };
-          c.closeBtn = {show:true};
+          c.closeBtn = { show: true };
           this.$confirm(c);
-        } else {
+        } else if(code=-36001){
+            this.$toast(this.$t('vote.addrNoExistErr'))
+        }else {
           this.$toast(this.$t("vote.section2.voteErr"));
         }
       };
@@ -257,9 +263,11 @@ export default {
           title: this.$t(`vote.section2.confirm.${t}.title`),
           submitTxt: this.$t(`vote.section2.confirm.${t}.submitText`),
           cancelTxt: this.$t(`vote.section2.confirm.${t}.cancelText`),
-          content: this.$t(`vote.section2.confirm.${t}.content`,{nodeName:v.nodeName}),
+          content: this.$t(`vote.section2.confirm.${t}.content`, {
+            nodeName: v.nodeName
+          }),
           submit: sendVote,
-          exchange:this.haveVote
+          exchange: this.haveVote
         },
         true
       );
@@ -368,13 +376,18 @@ export default {
     margin-bottom: 24px;
     padding-left: 10px;
   }
+  .__tb{
+      width: 100%;
+  }
   .vote_list {
     overflow-x: auto;
     overflow-y: hidden;
     margin: 40px 0;
     margin-bottom: 29px;
+    .__tb_row.seat{
+        height: 78px;
+    }
     .__tb_content {
-      padding-bottom: 78px;
       overflow: visible;
     }
   }
@@ -384,9 +397,20 @@ export default {
     overflow-y: hidden;
     display: flex;
     flex-direction: column;
+    .tb_container {
+      height: calc(100% - 64px);
+      overflow: auto;
+    }
   }
   .__tb_cell {
     min-width: 150px;
+    &.nodename{
+        overflow:hidden; 
+        text-overflow:ellipsis;
+        white-space:nowrap; 
+        max-width: 180px;
+        padding-right: 15px;
+    }
     .hoveraction {
       &.tipsicon {
         position: relative;
