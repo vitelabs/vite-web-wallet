@@ -3,7 +3,9 @@
         <quota-head></quota-head>
 
         <loading v-if="loadingToken" class="loading"></loading>
-            <pow-process ref="powProcess"  @pow-finsih="closeConfirm"></pow-process>
+
+        <pow-process ref="powProcess"  @pow-finsih="closeConfirm"></pow-process>
+
         <div v-if="showConfirmType" class="gray-wrapper">
             <confirm v-if="showConfirmType === 'cancel'" 
                      :title="$t(`quota.confirm.cancel.title`)" :closeIcon="false"
