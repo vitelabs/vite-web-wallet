@@ -166,7 +166,7 @@ export default {
         align-items: center;
         width: 100%;
         height: 54px;
-        margin-top: 48px;
+        margin-top: 43px;
         &.active:before {
             content: '';
             position: absolute;
