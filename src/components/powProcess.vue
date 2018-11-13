@@ -12,98 +12,98 @@
 </template>
 
 <script>
-import loading from "components/loading";
+import loading from 'components/loading';
 let processTimeout;
 
 export default {
-  components: {
-    loading
-  },
-  props: {
-    cancel: {
-      type: Function,
-      default: () => {}
+    components: {
+        loading
     },
-    isShowCancel: {
-      type: Boolean,
-      default: false
-    }
-  },
-  data() {
-    return {
-      processNum: 0,
-      isShow: false
-    };
-  },
-  mounted() {
-    let addProcessNum = () => {
-      this.clearProcessTimeout();
-      if (this.processNum >= 99) {
-        return;
-      }
-      this.processNum++;
+    props: {
+        cancel: {
+            type: Function,
+            default: () => {}
+        },
+        isShowCancel: {
+            type: Boolean,
+            default: false
+        }
+    },
+    data() {
+        return {
+            processNum: 0,
+            isShow: false
+        };
+    },
+    mounted() {
+        let addProcessNum = () => {
+            this.clearProcessTimeout();
+            if (this.processNum >= 99) {
+                return;
+            }
+            this.processNum++;
 
-      processTimeout = window.setTimeout(() => {
+            processTimeout = window.setTimeout(() => {
+                addProcessNum();
+            }, 600);
+        };
         addProcessNum();
-      }, 600);
-    };
-    addProcessNum();
-  },
-  destroyed() {
-    this.clearProcessTimeout();
-  },
-  methods: {
-    clearProcessTimeout() {
-      window.clearTimeout(processTimeout);
-      processTimeout = null;
     },
-    gotoFinish() {
-      this.clearProcessTimeout();
-      this.processNum = 100;
+    destroyed() {
+        this.clearProcessTimeout();
     },
-    _cancel() {
-      this.clearProcessTimeout();
-      this.cancel();
-    },
-    startPowTx(t, type, cb) {
-      this.isShow = true;
-      const activeAccount = this.$wallet.getActiveAccount();
-      return new Promise((res, rej) => {
-        activeAccount
-          .getBlock(t, type, true)
-          .then(block => {
-            this.stopPow(() => {
-              activeAccount
-                .sendRawTx(block)
-                .then(data => {
-                  this.isShow = false;
-                  cb && cb(true);
-                  res(data);
-                })
-                .catch(e => {
-                  this.isShow = false;
-                  cb && cb(false);
-                  rej(e);
-                });
+    methods: {
+        clearProcessTimeout() {
+            window.clearTimeout(processTimeout);
+            processTimeout = null;
+        },
+        gotoFinish() {
+            this.clearProcessTimeout();
+            this.processNum = 100;
+        },
+        _cancel() {
+            this.clearProcessTimeout();
+            this.cancel();
+        },
+        startPowTx(t, type, cb) {
+            this.isShow = true;
+            const activeAccount = this.$wallet.getActiveAccount();
+            return new Promise((res, rej) => {
+                activeAccount
+                    .getBlock(t, type, true)
+                    .then(block => {
+                        this.stopPow(() => {
+                            activeAccount
+                                .sendRawTx(block)
+                                .then(data => {
+                                    this.isShow = false;
+                                    cb && cb(true);
+                                    res(data);
+                                })
+                                .catch(e => {
+                                    this.isShow = false;
+                                    cb && cb(false);
+                                    rej(e);
+                                });
+                        });
+                    })
+                    .catch((e) => {
+                        this.isShow = false;
+                        this.$emit('pow-finish');
+                        cb && cb(false);
+                        rej(e);
+                    });
             });
-          })
-          .catch(() => {
-            this.isShow = false;
-            this.$emit("pow-finsish");
-            cb && cb(false);
-            rej(e);
-          });
-      });
-    },
-    stopPow(cb) {
-      this.gotoFinish();
-      setTimeout(() => {
-        this.isShow = false;
-        this.$emit("pow-finish");
-        cb && cb();
-      }, 1000);
+        },
+        stopPow(cb) {
+            this.gotoFinish();
+            setTimeout(() => {
+                this.isShow = false;
+                this.$emit('pow-finish');
+                cb && cb();
+            }, 1000);
+        }
     }
-  }
 };
 </script>
 
