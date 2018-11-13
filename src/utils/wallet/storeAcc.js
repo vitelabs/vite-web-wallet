@@ -15,6 +15,7 @@ export default {
         for(i=0; i<data.length; i++) {
             let acc = data[i];
             if ((acc.entropy && account.entropy && account.entropy === acc.entropy) || 
+                (acc.id && account.id && account.id === acc.id) ||
                 (acc.addr && account.addr && account.addr === acc.addr)) {
                 data[i] = account;
                 break;

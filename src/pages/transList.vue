@@ -124,7 +124,7 @@ export default {
                     type: `<img class="icon" src='${typeImg}'/>`,
                     amount: trans.amount + ' ' + trans.token,
                     hash: trans.hash,
-                    transAddr: trans.transAddr
+                    transAddr: trans.smallTransAddr
                 });
             });
             return nowList;
@@ -275,13 +275,8 @@ export default {
     }
     .address {
         overflow: hidden;
-        min-width: 200px;
+        min-width: 180px;
         width: 25%;
-    }
-    .sum {
-        width: 14%;
-        float: right;
-        min-width: 60px;
     }
 }
 </style>
