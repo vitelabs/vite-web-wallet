@@ -97,6 +97,9 @@ export default {
             loading: false,
         };
     },
+    destroyed() {
+        this.$store.dispatch('stopLoopRegList');
+    },
     computed: {
         regNameList() {
             return this.$store.getters.regNameList;
@@ -237,6 +240,8 @@ export default {
                 this.loading = false;
                 this.$toast(this.$t('SBP.section1.registerSuccess'));
                 this.clearAll();
+
+                this.$store.dispatch('loopRegList', this.quotaAddr);
                 Vue.nextTick(() => {
                     this.stopWatch = false;
                 });

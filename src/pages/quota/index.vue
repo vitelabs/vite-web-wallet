@@ -4,7 +4,7 @@
 
         <loading v-if="loadingToken" class="loading"></loading>
 
-        <pow-process ref="powProcess"  @pow-finsih="closeConfirm"></pow-process>
+        <pow-process ref="powProcess" @pow-finish="closeConfirm"></pow-process>
 
         <div v-if="showConfirmType" class="gray-wrapper">
             <confirm v-if="showConfirmType === 'cancel'" 
