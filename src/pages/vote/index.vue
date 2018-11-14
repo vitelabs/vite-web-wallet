@@ -19,7 +19,7 @@
                             </i></div>
                         <div class="__tb_cell">{{v.voteNum}}</div>
                         <div class="__tb_cell">{{v.voteStatusText}}</div>
-                        <div class="__tb_cell" :class="cache?'unclickable':'clickable'"   @click="cancelVote(v)">{{v.operate}}</div>
+                        <div class="__tb_cell" :class="cache?'unclickable':'clickable'" @click="cancelVote(v)">{{v.operate}}</div>
                     </div>
                     <div class="__tb_row seat">
                     </div>
@@ -130,7 +130,7 @@ export default {
       });
     },
     cancelVote(v) {
-        if (this.cache) {
+      if (this.cache) {
         return;
       }
       const activeAccount = this.$wallet.getActiveAccount();
@@ -282,7 +282,8 @@ export default {
         // 缓存消费策略
         if (
           this.cache.voteStatus === "voting" &&
-          this.voteData[0] &&!this.voteData[0].isCache&&
+          this.voteData[0] &&
+          !this.voteData[0].isCache &&
           this.voteData[0].nodeName === this.cache.nodeName
         ) {
           //投票中且投票成功
@@ -291,7 +292,7 @@ export default {
           this.cache.voteStatus === "canceling" &&
           this.voteData.length === 0
         ) {
-            console.log(999)
+          console.log(999);
           // 撤销中且撤销成功
           this.cache = null;
         } else {
@@ -402,6 +403,12 @@ export default {
       height: calc(100% - 64px);
       overflow: auto;
     }
+    .__tb_cell {
+      min-width: 150px;
+      &:nth-child(2) {
+        width: 40%;
+      }
+    }
   }
   .__tb_cell {
     min-width: 150px;
@@ -409,8 +416,7 @@ export default {
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
-      max-width: 180px;
-      padding-right: 15px;
+      width:150px;
     }
     .hoveraction {
       &.tipsicon {
