@@ -11,19 +11,19 @@
                 <div class="__tb_row __tb_head">
                     <div class="__tb_cell" v-for="v in $t('vote.section1.head')" :key="v"> {{v}}</div>
                 </div>
-                    <div class="__tb_content">
-                        <div class="__tb_row" v-for="v in voteList" :key="v.nodeName">
-                            <div class="__tb_cell nodename">{{v.nodeName}}</div>
-                            <div class="__tb_cell">{{v.nodeStatusText}} <i v-if="v.nodeStatus===2" class="tipsicon hoveraction" @click.self.stop="toggleTips">
-                                    <tooltips v-if="isResisterTipsShow" v-click-outside @clickoutside="hideTips" class="unregister-tips" :content="$t('vote.section1.hoverHelp',{nodeName:v.nodeName})"></tooltips>
-                                </i></div>
-                            <div class="__tb_cell">{{v.voteNum}}</div>
-                            <div class="__tb_cell">{{v.voteStatusText}}</div>
-                            <div class="__tb_cell" :class="cache?'unclickable':'clickable'" @click="cancelVote(v)">{{v.operate}}</div>
-                        </div>
-                        <div class="__tb_row seat">
-                        </div>
+                <div class="__tb_content">
+                    <div class="__tb_row" v-for="v in voteList" :key="v.nodeName">
+                        <div class="__tb_cell nodename">{{v.nodeName}}</div>
+                        <div class="__tb_cell">{{v.nodeStatusText}} <i v-if="v.nodeStatus===2" class="tipsicon hoveraction" @click.self.stop="toggleTips">
+                                <tooltips v-if="isResisterTipsShow" v-click-outside @clickoutside="hideTips" class="unregister-tips" :content="$t('vote.section1.hoverHelp',{nodeName:v.nodeName})"></tooltips>
+                            </i></div>
+                        <div class="__tb_cell">{{v.voteNum}}</div>
+                        <div class="__tb_cell">{{v.voteStatusText}}</div>
+                        <div class="__tb_cell" :class="cache?'unclickable':'clickable'"   @click="cancelVote(v)">{{v.operate}}</div>
                     </div>
+                    <div class="__tb_row seat">
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -40,7 +40,7 @@
                             <div class="__tb_cell nodename">{{v.nodeName}}</div>
                             <div class="__tb_cell">{{v.nodeAddr}}</div>
                             <div class="__tb_cell">{{v.voteNum}}</div>
-                            <div class="__tb_cell" :class="cache&&cache.nodeName===v.nodeName?'unclickable':'clickable'" @click="vote(v)">{{v.operate}}</div>
+                            <div class="__tb_cell clickable" @click="vote(v)">{{v.operate}}</div>
                         </div>
                     </div>
                     <div class="__tb_content" v-else-if="this.filterKey">
@@ -86,6 +86,7 @@ export default {
     this.updateVoteData();
     this.updateNodeData();
     this.nodeDataTimer = new timer(this.updateNodeData, 3 * 1000);
+    this.nodeDataTimer.start();
   },
   data() {
     return {
@@ -129,7 +130,7 @@ export default {
       });
     },
     cancelVote(v) {
-      if (this.cache) {
+        if (this.cache) {
         return;
       }
       const activeAccount = this.$wallet.getActiveAccount();
@@ -192,16 +193,12 @@ export default {
           title: this.$t("vote.section1.confirm.title"),
           submitTxt: this.$t("vote.section1.confirm.submitText"),
           cancelTxt: this.$t("vote.section1.confirm.cancelText"),
-          submit: sendCancel,
-          exchange: true
+          submit: sendCancel
         },
         true
       );
     },
     vote(v) {
-      if (this.cache && this.cache.nodeName === v.nodeName) {
-        return;
-      }
       const activeAccount = this.$wallet.getActiveAccount();
       const successVote = d => {
         const t = Object.assign({}, v);
@@ -221,7 +218,6 @@ export default {
         const code = e && e.error ? e.error.code || -1 : e ? e.code : -1;
         if (code === -35002) {
           const c = Object.assign({}, this.$t("vote.section2.quotaConfirm"));
-          console.log(888, c);
           c.leftBtn.click = () => {
             this.$router.push({
               name: "quota"
@@ -242,9 +238,9 @@ export default {
           };
           c.closeBtn = { show: true };
           this.$confirm(c);
-        } else if(code===-36001){
-            this.$toast(this.$t('vote.addrNoExistErr'))
-        }else {
+        } else if (code === -36001) {
+          this.$toast(this.$t("vote.addrNoExistErr"));
+        } else {
           this.$toast(this.$t("vote.section2.voteErr"));
         }
       };
@@ -264,7 +260,7 @@ export default {
           submitTxt: this.$t(`vote.section2.confirm.${t}.submitText`),
           cancelTxt: this.$t(`vote.section2.confirm.${t}.cancelText`),
           content: this.$t(`vote.section2.confirm.${t}.content`, {
-            nodeName: this.voteList[0]&&this.voteList[0].nodeName
+            nodeName: this.voteList[0] && this.voteList[0].nodeName
           }),
           submit: sendVote,
           exchange: this.haveVote
@@ -275,14 +271,18 @@ export default {
   },
   computed: {
     haveVote() {
-      return this.voteList[0] && this.voteList[0].voteStatus === "voted";
+      return (
+        this.voteList[0] &&
+        (this.voteList[0].voteStatus === "voting" ||
+          this.voteList[0].voteStatus === "voted")
+      );
     },
     voteList() {
       if (this.cache) {
         // 缓存消费策略
         if (
           this.cache.voteStatus === "voting" &&
-          this.voteData[0] &&
+          this.voteData[0] &&!this.voteData[0].isCache&&
           this.voteData[0].nodeName === this.cache.nodeName
         ) {
           //投票中且投票成功
@@ -291,6 +291,7 @@ export default {
           this.cache.voteStatus === "canceling" &&
           this.voteData.length === 0
         ) {
+            console.log(999)
           // 撤销中且撤销成功
           this.cache = null;
         } else {
@@ -376,16 +377,16 @@ export default {
     margin-bottom: 24px;
     padding-left: 10px;
   }
-  .__tb{
-      width: 100%;
+  .__tb {
+    width: 100%;
   }
   .vote_list {
     overflow-x: auto;
     overflow-y: hidden;
     margin: 40px 0;
     margin-bottom: 29px;
-    .__tb_row.seat{
-        height: 78px;
+    .__tb_row.seat {
+      height: 78px;
     }
     .__tb_content {
       overflow: visible;
@@ -404,12 +405,12 @@ export default {
   }
   .__tb_cell {
     min-width: 150px;
-    &.nodename{
-        overflow:hidden; 
-        text-overflow:ellipsis;
-        white-space:nowrap; 
-        max-width: 180px;
-        padding-right: 15px;
+    &.nodename {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      max-width: 180px;
+      padding-right: 15px;
     }
     .hoveraction {
       &.tipsicon {
