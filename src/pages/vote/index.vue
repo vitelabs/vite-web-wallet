@@ -193,7 +193,8 @@ export default {
           title: this.$t("vote.section1.confirm.title"),
           submitTxt: this.$t("vote.section1.confirm.submitText"),
           cancelTxt: this.$t("vote.section1.confirm.cancelText"),
-          submit: sendCancel
+          submit: sendCancel,
+          exchange:true
         },
         true
       );
