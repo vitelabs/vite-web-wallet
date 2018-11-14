@@ -387,6 +387,12 @@ export default {
     overflow-y: hidden;
     margin: 40px 0;
     margin-bottom: 29px;
+    .__tb_cell{
+    &:first-child {
+        width: 30%;
+      }
+    }
+
     .__tb_row.seat {
       height: 78px;
     }
