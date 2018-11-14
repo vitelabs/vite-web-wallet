@@ -1,7 +1,7 @@
 @import "~assets/scss/vars.scss";
 
 .__tb {
-    display: table;
+    display: flex;
     flex-direction: column;
     max-height: 100%;
     min-width: 1050px;
@@ -9,15 +9,13 @@
     background: #FFF;
     box-shadow: 0 2px 15px 1px rgba(176, 192, 237, 0.17);
     border-radius: 8px;
-    border-collapse: collapse; 
+
     .__tb_content {
-        display: table-row-group;
         position: relative;
         overflow-x: hidden;
         overflow-y: auto;
     }
     .__tb_no_data {
-        display: table-cell;
         height: 75px;
         line-height: 75px;
         text-align: center;
@@ -35,15 +33,14 @@
         color: #1D2024;
     }
     .__tb_row {
-        display: table-row;
+        display: flex;
         justify-content: space-between;
         border-bottom: 1px solid #f3f6f9;
-        height: 63px;
-        line-height: 63px;
+        height: 48px;
+        line-height: 48px;
         box-sizing: border-box;
     }
     .__tb_content_row {
-
         color: #5E6875;
         &:last-child {
             border: none;
@@ -54,7 +51,7 @@
     }
 
     .__tb_cell {
-        display: table-cell;
+        display: inline-block;
         text-align: left;
         font-size: 14px;
         &:first-child {
