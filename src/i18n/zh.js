@@ -306,6 +306,7 @@ module.exports = {
     },
 
     // vote
+    // vote
     vote: { // [TODO]
         title: '投票',
         help: {
@@ -329,8 +330,8 @@ module.exports = {
             hoverHelp: '您投票的{nodeName}已经取消注册，您可以直接重新投票、或者撤销投票；如果您不重新投票或撤销投票，{nodeName}重新注册后，您原来的投票将恢复生效。',
             confirm: {
                 title: '撤销投票',
-                cancelText: '暂不撤销',
-                submitText: '确认撤销'
+                cancelText: '确认撤销',
+                submitText: '暂不撤销'
             },
             toast: '撤销投票请求已发送',
             quotaConfirm: {
@@ -357,8 +358,8 @@ module.exports = {
                 cover: {
                     title: '投票',
                     content: '您已经投票给{nodeName}，请确认是否覆盖当前投票',
-                    cancelText: '确认覆盖',
-                    submitText: '取消覆盖'
+                    cancelText: '确认',
+                    submitText: '取消'
                 }
             },
             toast: '投票请求已发送',
