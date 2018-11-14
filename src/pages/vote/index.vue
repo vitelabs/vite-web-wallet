@@ -242,7 +242,7 @@ export default {
           };
           c.closeBtn = { show: true };
           this.$confirm(c);
-        } else if(code=-36001){
+        } else if(code===-36001){
             this.$toast(this.$t('vote.addrNoExistErr'))
         }else {
           this.$toast(this.$t("vote.section2.voteErr"));
