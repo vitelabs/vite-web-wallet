@@ -313,7 +313,7 @@ module.exports = {
         addrNoExistErr:'您的地址未发生过交易，暂不能投票',
         section1: {
             title: '我的投票',
-            head: ['节点名称', '节点状态', '当前投票数', '投票状态', '操作'],
+            head: ['节点名称', '节点状态', '我的投票', '投票状态', '操作'],
             nodeStatusMap: {
                 1: '正在候选',
                 2: '停止候选'
@@ -327,8 +327,8 @@ module.exports = {
             hoverHelp: '您投票的{nodeName}已经取消注册，您可以直接重新投票、或者撤销投票；如果您不重新投票或撤销投票，{nodeName}重新注册后，您原来的投票将恢复生效。',
             confirm: {
                 title: '撤销投票',
-                cancelText: '确认撤销',
-                submitText: '暂不撤销'
+                cancelText: '暂不撤销',
+                submitText: '确认撤销'
             },
             toast: '撤销投票请求已发送',
             quotaConfirm: {
@@ -344,7 +344,7 @@ module.exports = {
 
         section2: {
             title: '候选节点列表',
-            head: ['节点名称', '出块地址', '当前投票数', '操作'],
+            head: ['节点名称', '出块地址', '当前票数', '操作'],
             confirm: {
                 normal: {
                     title: '投票',
