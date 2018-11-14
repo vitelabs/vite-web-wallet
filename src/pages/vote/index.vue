@@ -387,11 +387,6 @@ export default {
     overflow-y: hidden;
     margin: 40px 0;
     margin-bottom: 29px;
-    .__tb_cell{
-    &:first-child {
-        width: 30%;
-      }
-    }
 
     .__tb_row.seat {
       height: 78px;
@@ -411,7 +406,10 @@ export default {
       overflow: auto;
     }
     .__tb_cell {
-      min-width: 150px;
+      min-width: 100px;
+    &:first-child {
+        width: 30%;
+      }
       &:nth-child(2) {
         width: 40%;
       }
