@@ -306,7 +306,6 @@ module.exports = {
     },
 
     // vote
-    // vote
     vote: { // [TODO]
         title: '投票',
         help: {
@@ -322,7 +321,7 @@ module.exports = {
                 2: '停止候选'
             },
             voteStatusMap: {
-                voted: '已投票',
+                voted: '投票成功',
                 voting: '正在投票中',
                 canceling: '正在撤销中',
                 voteNotWork: '投票作废'
