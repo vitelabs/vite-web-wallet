@@ -36,7 +36,7 @@
             </div>
         </confirm>
 
-        <pow-process ref="powProcess" v-if="isShowPow" :isShowCancel="true" :cancel="stopPow"></pow-process>
+        <pow-process ref="powProcess" :isShowCancel="true" :cancel="closeTrans"></pow-process>
     </div>
 </template>
 
@@ -90,9 +90,7 @@ export default {
             messageErr: '',
 
             isShowTrans: true,
-            isShowPow: false,
-            loading: false,
-            powing: false
+            loading: false
         };
     },
     computed: {
@@ -171,14 +169,6 @@ export default {
                 },
                 content: this.$t('accDetail.quota.describe')
             });
-        },
-        showPow() {
-            this.isShowPow = true;
-        },
-        stopPow() {
-            this.isShowPow = false;
-            this.loading = false;
-            this.closeTrans();
         },
 
         testAmount() {
@@ -310,59 +300,35 @@ export default {
 
             let transError = (errMsg) => {
                 this.loading = false;
-                this.isShowPow = false;
                 this.isShowTrans = true;
                 this.$toast(errMsg || this.$t('accDetail.trans.err'));
             };
 
-            this.showPow();
             this.loading = true;
-
             let amount =  viteWallet.BigNumber.toMin(this.amount, this.token.decimals);
 
-            let sendRawTx = (block)=>{
-                if (!this.loading) {
-                    return;
-                }
-
-                activeAccount.sendRawTx(block).then(() => {
-                    this.transSuccess();
-                }).catch((err) => {
-                    console.warn('pow trans', err);
-                    let code  = err && err.error ? err.error.code || -1 : 
-                        err ? err.code : -1;
-                    if (code === -35002) {
-                        transError(this.$t('accDetail.trans.powTransErr'));
-                        return;
-                    }
-                    transError();
-                });
-            };
-
-            activeAccount.getBlock({
-                toAddr: this.inAddress,
-                tokenId: this.token.id,
+            this.$refs.powProcess && this.$refs.powProcess.startPowTx({
+                toAddr: this.inAddress, 
                 amount,
+                tokenId: this.token.id,
                 message: this.message
-            }, 'sendBlock', true).then((block) => {
-                if (!this.loading) {
+            }, 'sendBlock').then(() => {
+                this.transSuccess();
+            }).catch((err, type) => {
+                console.warn(type, err);
+
+                if (type === 0) {
+                    transError( this.$t('accDetail.trans.powErr') );
                     return;
                 }
 
-                let powProcessEle = this.$refs.powProcess;
-                powProcessEle.gotoFinish();
-
-                if (powProcessEle) {
-                    setTimeout(() => {
-                        this.isShowPow = false;
-                        sendRawTx(block);
-                    }, 1000);
+                let code  = err && err.error ? err.error.code || -1 : 
+                    err ? err.code : -1;
+                if (code === -35002) {
+                    transError(this.$t('accDetail.trans.powTransErr'));
                     return;
                 }
-                sendRawTx();
-            }).catch(err => {
-                console.warn('pow', err);
-                transError( this.$t('accDetail.trans.powErr') );
+                transError();
             });
         },
 

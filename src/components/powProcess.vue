@@ -63,15 +63,20 @@ export default {
         },
         _cancel() {
             this.clearProcessTimeout();
+            this.isShow = false;
             this.cancel();
         },
         startPowTx(t, type, cb) {
             this.isShow = true;
             const activeAccount = this.$wallet.getActiveAccount();
+
             return new Promise((res, rej) => {
                 activeAccount
                     .getBlock(t, type, true)
                     .then(block => {
+                        if (!this.isShow) {
+                            return;
+                        }
                         this.stopPow(() => {
                             activeAccount
                                 .sendRawTx(block)
@@ -83,7 +88,7 @@ export default {
                                 .catch(e => {
                                     this.isShow = false;
                                     cb && cb(false);
-                                    rej(e);
+                                    rej(e, 1);
                                 });
                         });
                     })
@@ -91,7 +96,7 @@ export default {
                         this.isShow = false;
                         this.$emit('pow-finish');
                         cb && cb(false);
-                        rej(e);
+                        rej(e, 0);
                     });
             });
         },

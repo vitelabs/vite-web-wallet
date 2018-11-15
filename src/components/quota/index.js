@@ -28,7 +28,6 @@ export function quotaConfirm ({
     instance.showMask = showMask;
     instance.operate = operate;
     instance.cancel = ()=>{
-        console.log('quota confirm');
         _close();
         cancel && cancel();
     };

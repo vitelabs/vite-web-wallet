@@ -62,7 +62,8 @@ const getters = {
     regNameList(state) {
         let list = [];
         state.registrationList.forEach((item) => {
-            list.push(item.name);
+            let isCancel = item.cancelHeight && !viteWallet.BigNumber.isEqual(item.cancelHeight, 0);
+            !isCancel && list.push(item.name);
         });
         return list;
     },
