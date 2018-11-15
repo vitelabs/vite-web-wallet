@@ -122,7 +122,6 @@ export default {
         c.gid,
         this.$wallet.getActiveAccount().getDefaultAddr()
       ).then(data => {
-          console.log(999999)
         this.voteData = data.result ? [data.result] : [];
         this.voteData[0] && (this.voteData[0].voteStatus = "voted");
         return this.voteData;
@@ -137,7 +136,6 @@ export default {
               nodeName: v.name
             };
           }) || [];
-        console.log(88888888)
         return this.nodeData;
       });
     },
