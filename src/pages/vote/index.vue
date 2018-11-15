@@ -96,6 +96,8 @@ export default {
     this.updateNodeData();
     this.nodeDataTimer = new timer(this.updateNodeData, 3 * 1000);
     this.nodeDataTimer.start();
+    this.voteDataTimer = new timer(this.updatevoteData, 3 * 1000);
+    this.voteDataTimer.start();
   },
   data() {
     return {
@@ -149,12 +151,6 @@ export default {
         t.voteStatus = "canceling"; // 撤销投票中
         this.cache = t;
         this.$toast(this.$t("vote.section1.toast"));
-        doUntill({
-          createPromise: this.updateVoteData,
-          test: ({ resolve, reject }) => {
-            return this.cache === null;
-          }
-        });
       };
       const failCancel = e => {
         const code = e && e.error ? e.error.code || -1 : e ? e.code : -1;
@@ -217,12 +213,6 @@ export default {
         t.nodeStatus = 1;
         this.cache = t;
         this.$toast(this.$t("vote.section2.toast"));
-        doUntill({
-          createPromise: this.updateVoteData,
-          test: ({ resolve, reject }) => {
-            return this.cache === null; // 直到缓存清空即停止轮询问。
-          }
-        });
       };
       const failVote = e => {
         const code = e && e.error ? e.error.code || -1 : e ? e.code : -1;
@@ -364,6 +354,7 @@ export default {
   },
   beforeDestroy() {
     this.nodeDataTimer && this.nodeDataTimer.stop();
+    this.voteDataTimer&&this.voteDataTimer.stop();
   }
 };
 </script>
