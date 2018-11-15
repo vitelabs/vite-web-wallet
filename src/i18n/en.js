@@ -17,7 +17,7 @@ module.exports = {
         txt1: 'The preview version of wallet is a lightweight-node wallet officially issued by VITE.',
         txt2: 'The current version supports functions of checking account balance, sending transactions, receiving transactions in default, acquiring test tokens, staking VITE tokens for TPS quota and etc.',
         txt3: 'Support acquiring test tokens and experiencing the product by using them, the test tokens issued by VITE official can be only used for testing and with no actual value, it will be cleared by VITE official sporadically',
-        v: 'Current version: 1.0.2'
+        v: 'Current version: {version}'
     },
 
     mnemonic: {
