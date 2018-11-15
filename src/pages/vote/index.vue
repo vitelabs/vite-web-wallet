@@ -78,7 +78,6 @@ import powProcess from "components/powProcess";
 export default {
   components: { secTitle, tooltips, search, loading, confirm, powProcess },
   beforeMount() {
-    window.yzthis = this;
     this.tokenInfo = viteWallet.Ledger.getTokenInfo();
     if (!this.tokenInfo) {
       this.loadingToken = true;
@@ -96,6 +95,8 @@ export default {
     this.updateNodeData();
     this.nodeDataTimer = new timer(this.updateNodeData, 3 * 1000);
     this.nodeDataTimer.start();
+    this.voteDataTimer = new timer(this.updateVoteData, 3 * 1000);
+    this.voteDataTimer.start();
   },
   data() {
     return {
@@ -149,12 +150,6 @@ export default {
         t.voteStatus = "canceling"; // 撤销投票中
         this.cache = t;
         this.$toast(this.$t("vote.section1.toast"));
-        doUntill({
-          createPromise: this.updateVoteData,
-          test: ({ resolve, reject }) => {
-            return this.cache === null;
-          }
-        });
       };
       const failCancel = e => {
         const code = e && e.error ? e.error.code || -1 : e ? e.code : -1;
@@ -217,12 +212,6 @@ export default {
         t.nodeStatus = 1;
         this.cache = t;
         this.$toast(this.$t("vote.section2.toast"));
-        doUntill({
-          createPromise: this.updateVoteData,
-          test: ({ resolve, reject }) => {
-            return this.cache === null; // 直到缓存清空即停止轮询问。
-          }
-        });
       };
       const failVote = e => {
         const code = e && e.error ? e.error.code || -1 : e ? e.code : -1;
@@ -293,12 +282,35 @@ export default {
       );
     },
     voteList() {
+      const c = voteRecord => {
+        const data=Object.assign({},voteRecord)
+        // update nodestatus from nodelist or voteNum from balance
+        this.nodeList.some(v => {
+          return v.nodeName === data.nodeName;
+        })
+          ? (data.nodeStatus = 1)
+          : (data.nodeStatus = 2);
+        // voteNotWork first
+        data.nodeStatus === 2 && (data.voteStatus = "voteNotWork");
+        data.nodeStatusText = this.$t("vote.section1.nodeStatusMap")[
+          data.nodeStatus
+        ];
+        data.voteStatusText = this.$t("vote.section1.voteStatusMap")[
+          data.voteStatus
+        ];
+        const token = viteWallet.Ledger.getTokenInfo();
+        data.voteNum =
+          viteWallet.BigNumber.toBasic(data.balance, token.decimals) ||
+          this.balance ||
+          0; // tans
+        data.operate = this.$t("vote.section1.operateBtn");
+        return data;
+      };
       if (this.cache) {
-        // 缓存消费策略
+        // update cache
         if (
           this.cache.voteStatus === "voting" &&
           this.voteData[0] &&
-          !this.voteData[0].isCache &&
           this.voteData[0].nodeName === this.cache.nodeName
         ) {
           //投票中且投票成功
@@ -307,43 +319,17 @@ export default {
           this.cache.voteStatus === "canceling" &&
           this.voteData.length === 0
         ) {
-          console.log(999);
           // 撤销中且撤销成功
           this.cache = null;
-        } else {
-          this.voteData[0] = Object.assign({}, this.cache); // 否则只展示缓存
         }
       }
-      let voteList = [];
-      if (this.voteData.length > 0) {
-        // 从nodeList更新voteList中节点状态；
-        this.nodeList.some(v => {
-          // todo anytime will be fasle?
-          return v.nodeName === this.voteData[0].nodeName;
-        }) || !this.voteData[0].isCache
-          ? (this.voteData[0].nodeStatus = 1)
-          : (this.voteData[0].nodeStatus = 2);
-        // 取消注册情况下作废投票，优先级最高
-        this.voteData[0].nodeStatus === 2 &&
-          (this.voteData[0].voteStatus = "voteNotWork");
-        //投票数目
-        voteList = this.voteData.map(v => {
-          v.nodeStatusText = this.$t("vote.section1.nodeStatusMap")[
-            v.nodeStatus
-          ];
-          v.voteStatusText = this.$t("vote.section1.voteStatusMap")[
-            v.voteStatus
-          ];
-          const token = viteWallet.Ledger.getTokenInfo();
-          v.voteNum =
-            viteWallet.BigNumber.toBasic(v.balance, token.decimals) ||
-            this.balance ||
-            0; // tans
-          v.operate = this.$t("vote.section1.operateBtn");
-          return v;
-        });
+      if (this.cache) {
+        return [c(this.cache)];
+      } else if (this.voteData[0]) {
+        return [c(this.voteData[0])];
+      } else {
+        return [];
       }
-      return voteList;
     },
     nodeList() {
       const token = viteWallet.Ledger.getTokenInfo();
@@ -367,6 +353,7 @@ export default {
   },
   beforeDestroy() {
     this.nodeDataTimer && this.nodeDataTimer.stop();
+    this.voteDataTimer&&this.voteDataTimer.stop();
   }
 };
 </script>
@@ -455,8 +442,9 @@ export default {
         vertical-align: sub;
         cursor: pointer;
         .unregister-tips {
-          width: 314px;
-          height: 100px;
+          word-break: break-all;
+          min-width: 314px;
+          min-height: 100px;
           padding: 10px;
           font-size: 14px;
           color: #3e4a59;
