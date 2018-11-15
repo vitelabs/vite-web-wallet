@@ -93,5 +93,11 @@ export default {
     right: 0;
     bottom: 0;
     overflow: auto;
+    min-height: 720px;
+}
+@media only screen and (max-width: 1000px) {
+    .app-wrapper {
+        min-height: auto;
+    }
 }
 </style>
