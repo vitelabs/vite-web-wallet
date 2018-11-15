@@ -5,7 +5,11 @@
         <secTitle></secTitle>
 
         <section class="vote_list">
-            <div class="title">{{$t('vote.section1.title')}}</div>
+            <div class="title">
+                <div class="ct">
+                    {{$t('vote.section1.title')}}
+                </div>
+            </div>
 
             <div class="__tb">
                 <div class="__tb_row __tb_head">
@@ -19,7 +23,7 @@
                             </i></div>
                         <div class="__tb_cell">{{v.voteNum}}</div>
                         <div class="__tb_cell">{{v.voteStatusText}}</div>
-                        <div class="__tb_cell" :class="cache?'unclickable':'clickable'"   @click="cancelVote(v)">{{v.operate}}</div>
+                        <div class="__tb_cell" :class="cache?'unclickable':'clickable'" @click="cancelVote(v)">{{v.operate}}</div>
                     </div>
                     <div class="__tb_row seat">
                     </div>
@@ -28,7 +32,11 @@
         </section>
 
         <section class="node_list">
-            <div class="title">{{$t('vote.section2.title')}}<search v-model="filterKey" class="filter"></search>
+            <div class="title">
+                <div class="ct">
+                    {{$t('vote.section2.title')}}
+                </div>
+                <search v-model="filterKey" class="filter"></search>
             </div>
             <div class="tb_container">
                 <div class="__tb">
@@ -83,6 +91,7 @@ export default {
           console.warn(err);
         });
     }
+    this.$store.dispatch("getBalanceInfo", this.$wallet.getActiveAccount());
     this.updateVoteData();
     this.updateNodeData();
     this.nodeDataTimer = new timer(this.updateNodeData, 3 * 1000);
@@ -130,7 +139,7 @@ export default {
       });
     },
     cancelVote(v) {
-        if (this.cache) {
+      if (this.cache) {
         return;
       }
       const activeAccount = this.$wallet.getActiveAccount();
@@ -193,7 +202,8 @@ export default {
           title: this.$t("vote.section1.confirm.title"),
           submitTxt: this.$t("vote.section1.confirm.submitText"),
           cancelTxt: this.$t("vote.section1.confirm.cancelText"),
-          submit: sendCancel
+          submit: sendCancel,
+          exchange: true
         },
         true
       );
@@ -270,6 +280,11 @@ export default {
     }
   },
   computed: {
+    balance() {
+      const token =
+        this.$store.getters.tokenBalanceList[this.tokenInfo.tokenId] || {};
+      return token.balance || 0;
+    },
     haveVote() {
       return (
         this.voteList[0] &&
@@ -282,7 +297,8 @@ export default {
         // 缓存消费策略
         if (
           this.cache.voteStatus === "voting" &&
-          this.voteData[0] &&!this.voteData[0].isCache&&
+          this.voteData[0] &&
+          !this.voteData[0].isCache &&
           this.voteData[0].nodeName === this.cache.nodeName
         ) {
           //投票中且投票成功
@@ -291,7 +307,7 @@ export default {
           this.cache.voteStatus === "canceling" &&
           this.voteData.length === 0
         ) {
-            console.log(999)
+          console.log(999);
           // 撤销中且撤销成功
           this.cache = null;
         } else {
@@ -320,7 +336,9 @@ export default {
           ];
           const token = viteWallet.Ledger.getTokenInfo();
           v.voteNum =
-            viteWallet.BigNumber.toBasic(v.balance, token.decimals) || 0; // tans
+            viteWallet.BigNumber.toBasic(v.balance, token.decimals) ||
+            this.balance ||
+            0; // tans
           v.operate = this.$t("vote.section1.operateBtn");
           return v;
         });
@@ -368,14 +386,19 @@ export default {
     display: flex;
     flex: none;
     justify-content: space-between;
-    border-left: 2px solid rgba(0, 122, 255, 0.7);
     font-family: $font-bold;
     font-size: 18px;
     color: #1d2024;
-    line-height: 40px;
     height: 40px;
     margin-bottom: 24px;
-    padding-left: 10px;
+    line-height: 40px;
+
+    .ct {
+      border-left: 2px solid rgba(0, 122, 255, 0.7);
+      padding-left: 10px;
+      height: 18px;
+      line-height: 18px;
+    }
   }
   .__tb {
     width: 100%;
@@ -385,6 +408,7 @@ export default {
     overflow-y: hidden;
     margin: 40px 0;
     margin-bottom: 29px;
+
     .__tb_row.seat {
       height: 78px;
     }
@@ -402,6 +426,15 @@ export default {
       height: calc(100% - 64px);
       overflow: auto;
     }
+    .__tb_cell {
+      min-width: 100px;
+      &:first-child {
+        width: 30%;
+      }
+      &:nth-child(2) {
+        width: 40%;
+      }
+    }
   }
   .__tb_cell {
     min-width: 150px;
@@ -409,8 +442,7 @@ export default {
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
-      max-width: 180px;
-      padding-right: 15px;
+      width: 150px;
     }
     .hoveraction {
       &.tipsicon {
