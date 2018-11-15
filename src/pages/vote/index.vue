@@ -452,6 +452,9 @@ export default {
         vertical-align: sub;
         cursor: pointer;
         .unregister-tips {
+          word-break: break-all;
+          min-width: 314px;
+          min-height: 100px;
           padding: 10px;
           font-size: 14px;
           color: #3e4a59;
