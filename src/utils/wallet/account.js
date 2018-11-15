@@ -83,7 +83,7 @@ class Account {
         return $ViteJS.Wallet.Keystore.decrypt(JSON.stringify(this.keystore), pass);
     }
 
-    save() {
+    save(index = -1) {
         this.name = checkName(this.name);
 
         if (!this.isWalletAcc) {
@@ -97,13 +97,13 @@ class Account {
         }
 
         acc.add({
-            id: getHexId(this.addrs[0].addr),
+            id: getHexId(this.addrs[0].hexAddr),
             defaultInx: this.defaultInx, 
             addrNum: this.addrs.length, 
             name: this.name, 
             entropy: this.entropy,
             encryptObj: this.encryptObj
-        });
+        }, index);
     }
 
     getMnemonic() {
@@ -291,7 +291,7 @@ function checkName(name) {
 }
 
 function getHexId(key) {
-    let keyByte = viteWallet.utils.hexToBytes(key);
+    let keyByte = viteWallet.utils.utf8ToBytes(key);
     let idByte = viteWallet.utils.blake2b(keyByte, null, 32);
     let idHex = viteWallet.utils.bytesToHex(idByte);
     return idHex;

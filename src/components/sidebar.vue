@@ -166,7 +166,7 @@ export default {
         align-items: center;
         width: 100%;
         height: 54px;
-        margin-top: 40px;
+        margin-top: 30px;
         &.active:before {
             content: '';
             position: absolute;
@@ -188,7 +188,7 @@ export default {
             margin-top: 0;
         }
         .setting {
-            margin-bottom: 35px;
+            margin-bottom: 30px;
         }
         .logout {
             height: 30px;
