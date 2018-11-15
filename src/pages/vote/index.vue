@@ -70,6 +70,7 @@ import powProcess from "components/powProcess";
 export default {
   components: { secTitle, tooltips, search, loading, confirm, powProcess },
   beforeMount() {
+      window.yzthis=this;
     this.tokenInfo = viteWallet.Ledger.getTokenInfo();
     if (!this.tokenInfo) {
       this.loadingToken = true;
@@ -82,6 +83,7 @@ export default {
           console.warn(err);
         });
     }
+    this.$store.dispatch('getBalanceInfo',this.$wallet.getActiveAccount())
     this.updateVoteData();
     this.updateNodeData();
     this.nodeDataTimer = new timer(this.updateNodeData, 3 * 1000);
@@ -271,8 +273,8 @@ export default {
   },
   computed: {
     balance(){
-        const token=this.$store.getters.tokenBalanceInfo[this.tokenInfo.tokenId]||{};
-          return token.fundFloat||0
+        const token=this.$store.getters.tokenBalanceList[this.tokenInfo.tokenId]||{};
+          return token.balance||0
       },
     haveVote() {
       return (
