@@ -18,10 +18,10 @@ import indexLayout from 'components/indexLayout.vue';
 import pageLayout from 'components/pageLayout.vue';
 import update from 'components/update.vue';
 import firstNotice from 'components/firstNotice.vue';
-import {timer} from 'utils/asyncFlow';
+import { timer } from 'utils/asyncFlow';
 import loopTime from 'config/loopTime';
 
-const homeLayouts = ['account', 'transList', 'setting', 'quota', 'SBP', 'vote'];
+import routeConfig from 'routes';
 let balanceInfoInst = null;
 
 export default {
@@ -43,8 +43,9 @@ export default {
     },
     methods: {
         changeLayout(to, from) {
-            let toHome = homeLayouts.indexOf(to) !== -1;
-            let fromHome = homeLayouts.indexOf(from) !== -1;
+            console.log(to);
+            let toHome = routeConfig.indexLayoutRoutes.indexOf(to) === -1 && to !== 'index';
+            let fromHome = routeConfig.indexLayoutRoutes.indexOf(from) === -1 && to !== 'index';
 
             if (toHome) {
                 this.layoutType = 'home';

@@ -1,3 +1,5 @@
+/**  vite-wallet index-layout */
+
 <template>
     <div class="login-wrapper">
         <div class="__title">{{$t('nav.head.login')}}</div>

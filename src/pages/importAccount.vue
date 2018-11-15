@@ -1,3 +1,5 @@
+/**  vite-wallet index-layout */
+
 <template>
     <div class="import-account-wrapper">
         <div class="__title">{{ $t('nav.head.imported') }}</div>
