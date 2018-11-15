@@ -1,6 +1,7 @@
 <template>
     <div class="app-wrapper">
         <index-layout v-if="layoutType === 'index'">
+            <start v-if="active === 'index'"></start>
             <router-view/>
         </index-layout>
 
@@ -18,6 +19,7 @@ import indexLayout from 'components/indexLayout.vue';
 import pageLayout from 'components/pageLayout.vue';
 import update from 'components/update.vue';
 import firstNotice from 'components/firstNotice.vue';
+import start from 'components/start/index.vue';
 import { timer } from 'utils/asyncFlow';
 import loopTime from 'config/loopTime';
 
@@ -26,7 +28,7 @@ let balanceInfoInst = null;
 
 export default {
     components: {
-        indexLayout, pageLayout, update, firstNotice
+        indexLayout, pageLayout, update, firstNotice, start
     },
     mounted() {
         this.changeLayout(this.$route.name);
@@ -43,7 +45,6 @@ export default {
     },
     methods: {
         changeLayout(to, from) {
-            console.log(to);
             let toHome = routeConfig.indexLayoutRoutes.indexOf(to) === -1 && to !== 'index';
             let fromHome = routeConfig.indexLayoutRoutes.indexOf(from) === -1 && to !== 'index';
 

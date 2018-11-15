@@ -8,14 +8,15 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 
 import App from 'pages/index.vue';
-import start from 'pages/start.vue';
-import login from 'pages/login/index.vue';
+// import start from 'pages/start.vue';
+// import login from 'pages/login/index.vue';
 
 import routeConfig from 'routes';
 
 import 'utils/eventEmitter.js';
 import 'utils/viteWallet/index.js';
 
+import { i18n } from 'i18n';
 import store from './store';
 import statistics from 'utils/statistics';
 import { initPwdConfirm } from 'components/password/index.js';
@@ -25,20 +26,9 @@ import plugin from 'utils/plugins/addPlugin';
 import clickOutside from 'utils/plugins/clickOutside';
 import wallet from 'utils/wallet/index.js';
 
-
 Vue.use(plugin);
 Vue.use(VueRouter);
 Vue.use(clickOutside);
-import {i18n} from 'i18n';
-
-document.addEventListener('drop', (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-});
-document.addEventListener('dragover', (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-});
 
 // Start loading animate
 let element  = document.getElementById('loading');
@@ -49,17 +39,15 @@ setTimeout(() => {
 }, 800);
 
 // Loading finish and App init finish also.
-setTimeout(() => {    
-    initPwdConfirm(i18n);
-    
+setTimeout(() => {
     wallet.reSave();
-    let list = wallet.getList();
-    let rootRoute = {
-        name: 'index',
-        path: '/'
-    };
-    rootRoute.component = list && list.length ? login : start;
-    routeConfig.routes.push(rootRoute);
+    // let list = wallet.getList();
+    // let rootRoute = {
+    //     name: 'index',
+    //     path: '/'
+    // };
+    // rootRoute.component = list && list.length ? login : start;
+    // routeConfig.routes.push(rootRoute);
 
     const router = new VueRouter({
         mode: process.env.NODE_ENV === 'dev' ? 'hash' : 'history',
@@ -76,7 +64,6 @@ setTimeout(() => {
             return;
         }
 
-        // if (process.env.NODE_ENV !== 'dev' && !from.name && to.name !== 'index') {
         if (!from.name && to.name !== 'index') {
             router.replace({
                 name: 'index'
@@ -88,8 +75,8 @@ setTimeout(() => {
         next();
     });
 
+    initPwdConfirm(i18n);
     initQuotaConfirm(i18n, router);
-
     new Vue({
         el: '#app',
         components: { App },
