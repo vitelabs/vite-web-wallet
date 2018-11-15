@@ -70,7 +70,7 @@ import powProcess from "components/powProcess";
 export default {
   components: { secTitle, tooltips, search, loading, confirm, powProcess },
   beforeMount() {
-    window.yzthis = this;
+      window.yzthis=this;
     this.tokenInfo = viteWallet.Ledger.getTokenInfo();
     if (!this.tokenInfo) {
       this.loadingToken = true;
@@ -83,6 +83,7 @@ export default {
           console.warn(err);
         });
     }
+    this.$store.dispatch('getBalanceInfo',this.$wallet.getActiveAccount())
     this.updateVoteData();
     this.updateNodeData();
     this.nodeDataTimer = new timer(this.updateNodeData, 3 * 1000);
@@ -271,6 +272,10 @@ export default {
     }
   },
   computed: {
+    balance(){
+        const token=this.$store.getters.tokenBalanceList[this.tokenInfo.tokenId]||{};
+          return token.balance||0
+      },
     haveVote() {
       return (
         this.voteList[0] &&
@@ -322,7 +327,7 @@ export default {
           ];
           const token = viteWallet.Ledger.getTokenInfo();
           v.voteNum =
-            viteWallet.BigNumber.toBasic(v.balance, token.decimals) || 0; // tans
+            viteWallet.BigNumber.toBasic(v.balance, token.decimals) || this.balance||0; // tans
           v.operate = this.$t("vote.section1.operateBtn");
           return v;
         });
