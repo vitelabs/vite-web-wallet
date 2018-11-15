@@ -3,6 +3,15 @@ import confirm from 'components/confirm/index.js';
 import statistics from 'utils/statistics';
 import wallet from 'utils/wallet';
 
+document.addEventListener('drop', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+});
+document.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+});
+
 export default {
     install(Vue) {
         Vue.mixin({

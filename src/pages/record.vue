@@ -54,7 +54,7 @@ export default {
         login() {
             this.activeAccount.save();
             this.$router.push({
-                name: 'login'
+                name: 'index'
             });
         }
     }

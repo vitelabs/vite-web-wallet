@@ -172,7 +172,7 @@ export default {
         restoreAccount() {
             this.$wallet.restoreAccount(this.name, this.pass1);
             this.$router.push({
-                name: 'login'
+                name: 'index'
             });
         }
     }
