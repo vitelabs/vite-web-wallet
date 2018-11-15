@@ -1,3 +1,5 @@
+/**  vite-wallet index-layout */
+
 <template>
     <div class="create-account-wrapper">
         <div class="__title">{{ activeAccount ? $t('nav.head.reset') : $t('nav.head.setting')}}</div>

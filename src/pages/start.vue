@@ -1,3 +1,5 @@
+/**  vite-wallet index-layout */
+
 <template>
     <div class="start-wrapper">
         <div class="__title">{{$t('nav.head.create')}}</div>

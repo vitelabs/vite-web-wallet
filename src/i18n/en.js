@@ -4,6 +4,18 @@ module.exports = {
     start: 'Start',
     logout: 'Logout',
 
+    errCode: {
+        35003: '{name}ID发生冲突，请您稍后重新提交',
+        35004: '内置合约发生错误，请稍后重试（35004）',
+        35005: '交易发送频繁，请您稍后再次尝试',
+        35006: '内置合约发生错误，请稍后重试（35006）',
+        36001: '您需要接收一笔交易之后才可发起转账',
+        36002: '系统校验不通过，请稍后重试（36002）',
+        36003: '系统校验不通过，请稍后重试（36003）',
+        36004: '系统校验不通过，请稍后重试（36004）',
+        36005: '快照块高度不合法，请您稍后再试'
+    },
+    
     firstNotice: {
         title: 'Read Before Use',
         text1: 'Please be sure to backup your seed phrase when creating account. We cannot guarantee to restore your assets in case of you visit scam sites or lose your backups.',
@@ -123,7 +135,7 @@ module.exports = {
         },
         valid: {
             remarksFormat: 'Format error! Remarks can only contain Chinese, English and punctuations.',
-            remarksLong: 'Notes do not exceed 180 English characters (or punctuations, 1 Chinese character = 6 English characters)'
+            remarksLong: '剩余字节：{len}'
         },
         hint: {
             token: 'VTT test tokens have be sent to your account, please check your account!',
@@ -137,7 +149,7 @@ module.exports = {
         },
         quota: {
             title: 'Insufficient Quota',
-            describe: 'Not available to send a transaction due to lack of quota, please delete descriptive text and run PoW, or gain quota by staking token to resume.',
+            describe: '配额不足，建议您点击运行PoW获取免费配额或抵押VITE获取配额',
             left: 'Run PoW',
             right: 'Stake VITE'
         },

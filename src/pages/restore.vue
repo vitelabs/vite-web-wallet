@@ -1,3 +1,5 @@
+/**  vite-wallet index-layout */
+
 <template>
     <mnemonic title="mnemonic.restore" :submit="validMnemonic" :isLoading="isLoading">
         <div class="wrapper">

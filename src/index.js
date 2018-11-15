@@ -5,14 +5,13 @@ import 'utils/performance';
 import './assets/scss/mixins.scss';
 
 import Vue from 'vue';
-Vue.config.devtools = true;
 import VueRouter from 'vue-router';
 
 import App from 'pages/index.vue';
 import start from 'pages/start.vue';
 import login from 'pages/login/index.vue';
 
-import routes from 'routes/index';
+import routeConfig from 'routes';
 
 import 'utils/eventEmitter.js';
 import 'utils/viteWallet/index.js';
@@ -49,7 +48,7 @@ setTimeout(() => {
     element.className += ' dis';
 }, 800);
 
-// Loading finish, app init finish also.
+// Loading finish and App init finish also.
 setTimeout(() => {    
     initPwdConfirm(i18n);
     
@@ -60,11 +59,11 @@ setTimeout(() => {
         path: '/'
     };
     rootRoute.component = list && list.length ? login : start;
-    routes.push(rootRoute);
+    routeConfig.routes.push(rootRoute);
 
     const router = new VueRouter({
         mode: process.env.NODE_ENV === 'dev' ? 'hash' : 'history',
-        routes
+        routes: routeConfig.routes
     });
 
     router.beforeEach((to, from, next) => {

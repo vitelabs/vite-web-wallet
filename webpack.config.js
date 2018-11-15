@@ -1,3 +1,5 @@
+require('./buildRoutes');
+
 const merge = require('webpack-merge');
 const devConfig = require('./webpackConf/dev.config.js');
 

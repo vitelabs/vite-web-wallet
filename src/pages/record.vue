@@ -1,3 +1,5 @@
+/**  vite-wallet index-layout */
+
 <template>
     <div>
         <mnemonic :title="'mnemonic.record'" :submit="login">
