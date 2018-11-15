@@ -78,7 +78,6 @@ import powProcess from "components/powProcess";
 export default {
   components: { secTitle, tooltips, search, loading, confirm, powProcess },
   beforeMount() {
-    window.yzthis = this;
     this.tokenInfo = viteWallet.Ledger.getTokenInfo();
     if (!this.tokenInfo) {
       this.loadingToken = true;
@@ -96,7 +95,7 @@ export default {
     this.updateNodeData();
     this.nodeDataTimer = new timer(this.updateNodeData, 3 * 1000);
     this.nodeDataTimer.start();
-    this.voteDataTimer = new timer(this.updatevoteData, 3 * 1000);
+    this.voteDataTimer = new timer(this.updateVoteData, 3 * 1000);
     this.voteDataTimer.start();
   },
   data() {
@@ -123,6 +122,7 @@ export default {
         c.gid,
         this.$wallet.getActiveAccount().getDefaultAddr()
       ).then(data => {
+          console.log(999999)
         this.voteData = data.result ? [data.result] : [];
         this.voteData[0] && (this.voteData[0].voteStatus = "voted");
         return this.voteData;
@@ -137,6 +137,7 @@ export default {
               nodeName: v.name
             };
           }) || [];
+        console.log(88888888)
         return this.nodeData;
       });
     },
