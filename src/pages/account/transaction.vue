@@ -8,8 +8,7 @@
             <div class="row">
                 <div class="row-t">{{ $t('accDetail.balance') }}</div>
                 <div class="row-content balance">
-                    {{ token.symbol }}
-                    {{ showAccBalance }}
+                    {{ token.symbol }} <span>{{ showAccBalance }}</span>
                 </div>
             </div>
 
@@ -381,6 +380,10 @@ export default {
         border: 1px solid #D4DEE7;
         border-radius: 2px;
         font-size: 14px;
+        line-height: normal;
+        &.balance span {
+            float: right;
+        }
         input {
             width: 100%;
         }
@@ -403,5 +406,12 @@ export default {
 .confirm-container.trans-confirm .confirm-wrapper {
     width: 515px;
     max-width: 90%;
+}
+.confirm-container.trans-confirm .confirm-wrapper .bottom {
+    min-height: 70px;
+    .__btn{
+        height: 40px;
+        line-height: 40px;
+    }
 }
 </style>
