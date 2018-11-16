@@ -137,7 +137,7 @@ module.exports = {
         },
         quota: {
             title: 'Insufficient Quota',
-            describe: 'Not available to send a transaction due to lack of quota, please delete descriptive text and run PoW, or gain quota by staking token to resume.',
+            describe: 'Short in quota, you can acquire quota by running PoW or staking VITE.',
             left: 'Run PoW',
             right: 'Stake VITE'
         },
@@ -334,7 +334,7 @@ module.exports = {
             toast: '撤销投票请求已发送',
             quotaConfirm: {
                 title: '配额不足',
-                content: '无法撤销投票，您需运行PoW或抵押配额才可以撤销投票',
+                content: 'Short in quota, you can acquire quota by running PoW or staking VITE',
                 leftBtn: {text:'抵押配额'},
                 rightBtn: {text:'运行POW'}
             },
@@ -342,7 +342,7 @@ module.exports = {
             operateBtn:'撤销',
             cancelVoteErr:'撤销投票失败，请重试'
         },
-
+    
         section2: {
             title: '候选节点列表',
             head: ['节点名称', '出块地址', '当前票数', '操作'],
@@ -363,7 +363,7 @@ module.exports = {
             toast: '投票请求已发送',
             quotaConfirm: {
                 title: '配额不足',
-                content: '无法投票，您需运行PoW或抵押配额才可以投票',
+                content: 'Short in quota, you can acquire quota by running PoW or staking VITE',
                 leftBtn: {text:'抵押配额'},
                 rightBtn: {text:'运行POW'}
             },
