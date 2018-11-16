@@ -136,7 +136,7 @@ module.exports = {
         },
         quota: {
             title: '配额不足',
-            describe: '配额不足，无法进行交易，您需要删除描述文字并运行PoW 或 抵押VITE才可以继续转账',
+            describe: '配额不足，建议您点击运行PoW获取配额或抵押VITE获取配额',
             left: '运行PoW',
             right: '抵押VITE'
         },
@@ -336,7 +336,7 @@ module.exports = {
             toast: '撤销投票请求已发送',
             quotaConfirm: {
                 title: '配额不足',
-                content: '无法撤销投票，您需运行PoW或抵押配额才可以撤销投票',
+                content: '配额不足，建议您点击运行PoW获取配额或抵押VITE获取配额',
                 leftBtn: {text:'抵押配额'},
                 rightBtn: {text:'运行POW'}
             },
@@ -365,7 +365,7 @@ module.exports = {
             toast: '投票请求已发送',
             quotaConfirm: {
                 title: '配额不足',
-                content: '无法投票，您需运行PoW或抵押配额才可以投票',
+                content: '配额不足，建议您点击运行PoW获取配额或抵押VITE获取配额',
                 leftBtn: {text:'抵押配额'},
                 rightBtn: {text:'运行POW'}
             },
