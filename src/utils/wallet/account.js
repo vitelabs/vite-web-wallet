@@ -105,7 +105,9 @@ class Account {
             encryptObj: this.encryptObj
         }, index);
     }
+    changeMnemonic(len) {
 
+    }
     getMnemonic() {
         if (!this.decryptEntropy) {
             return null;

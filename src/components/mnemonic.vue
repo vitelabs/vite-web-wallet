@@ -3,7 +3,7 @@
         <div class="__title">{{ $t(`${title}`) }}</div>
 
         <div v-show="isRecord" class="note">{{ $t('mnemonic.prompt') }}</div>
-        <div class="input-wrapper"> <slot></slot> </div>
+        <slot></slot>
         <div v-show="isRestore" class="note hint">{{ $t('mnemonic.hint') }}</div>
 
         <div class="__btn_list">
@@ -62,16 +62,6 @@ export default {
     &.hint {
         margin-top: 30px;
     }
-}
-.input-wrapper {
-    box-sizing: border-box;
-    position: relative;
-    background: #F3F6F9;
-    border: 1px solid #D4DEE7;
-    border-radius: 3px;
-    text-align: center;
-    font-size: 14px;
-    color: #1D2024;
 }
 .__btn_list {
     margin-top: 20px;

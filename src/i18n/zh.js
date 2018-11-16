@@ -40,7 +40,8 @@ module.exports = {
         empty: '助记词输入为空',
         error: '助记词错误',
         hint: '助记词格式：单词、空格、单词...空格、单词',
-        netErr: '节点异常，请您稍后重试'
+        netErr: '节点异常，请您稍后重试',
+        change: '切换{len}个助记词'
     },
 
     setting: {
@@ -413,7 +414,8 @@ module.exports = {
         submit: '确定',
         next: '下一步',
         understand: '我已了解',
-        edit: '编辑'
+        edit: '编辑',
+        copy: '复制'
     },
     paging: {
         pre: '上一页',

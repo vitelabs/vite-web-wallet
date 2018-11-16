@@ -68,6 +68,13 @@ export default {
 .wrapper {
     box-sizing: border-box;
     position: relative;
+    background: #F3F6F9;
+    border-radius: 3px;
+    text-align: center;
+    font-size: 14px;
+    color: #1D2024;
+    box-sizing: border-box;
+    position: relative;
     padding: 20px;
     height: 120px;
     color: rgba(94,104,117,0.30);
