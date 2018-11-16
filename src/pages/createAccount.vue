@@ -20,7 +20,7 @@
         </div>
         <div class="__btn __btn_input" 
              :class="{ 'active': !!pass2 || inputItem === 'pass2' }">
-            <input ref="pass2" v-model="pass2" type='password'
+            <input ref="pass2" v-model="pass2" type='password' autocomplete="off"
                    :placeholder="$t('create.again')"
                    @focus="inputFocus('pass2')"
                    @blur="inputBlur('pass2')" />
