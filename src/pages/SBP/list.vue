@@ -139,10 +139,19 @@ export default {
                     amount: item.pledgeAmount
                 }),
                 submit: () => {
+                    let nodeName = item.rawData.name;
+                    let producer = item.rawData.nodeAddr;
+
                     this.sendTx({
-                        nodeName: item.rawData.name
+                        nodeName
                     }, 'cancelRegisterBlock').then(()=>{
                         this.$toast(this.$t('SBP.section2.cancelSuccess'));
+                        this.$store.dispatch('loopRegList', {
+                            address: this.address,
+                            nodeName, 
+                            operate: 0, 
+                            producer
+                        });
                     }).catch((err)=>{
                         if (err && err.error && err.error.code && err.error.code === -35002) {
                             quotaConfirm({
