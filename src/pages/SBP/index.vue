@@ -6,7 +6,7 @@
 
         <div v-if="!loadingToken" class="section">
             <div class="title">{{ $t('SBP.section1.title') }}</div>
-            <register :tokenInfo="tokenInfo" :sendTx="sendTx" class="content"></register>
+            <register :tokenInfo="tokenInfo" :canUseAddr="canUseAddr" :sendTx="sendTx" class="content"></register>
         </div>
 
         <div v-if="!loadingToken" class="section">
@@ -128,6 +128,20 @@ export default {
         },
     },
     methods: {
+        canUseAddr(nodeName, addr) {
+            let usedAddrList = [];
+            for (let name in this.regAddrList) {
+                let canUseCancelAddr = (name === nodeName);
+                this.regAddrList[name].forEach(item => {
+                    if (item.isCancel && canUseCancelAddr) {
+                        return;
+                    }
+                    usedAddrList.push(item.nodeAddr);
+                });
+            }
+
+            return usedAddrList.indexOf(addr) === -1;
+        },
         testAddr() {
             if (!this.addr || 
                 !viteWallet.Types.isValidHexAddr(this.addr)) {
@@ -135,7 +149,7 @@ export default {
                 return;
             }
 
-            if (this.regAddrList.indexOf(this.addr) !== -1) {
+            if (!this.canUseAddr(this.activeItem.name, this.addr)) {
                 this.addrErr = this.$t('SBP.section1.addrUsed');
                 return;
             }
@@ -201,12 +215,20 @@ export default {
         sendUpdateTx() {
             this.loading = true;
 
+            let nodeName = this.activeItem.name;
+            let producer = this.addr;
             this.sendTx({
-                producerAddr: this.addr
+                producerAddr: producer
             }, 'updateRegisterBlock').then(() => {
                 this.loading = false;
                 this.$toast(this.$t('SBP.section2.updateSuccess'));
                 this.closeConfirm();
+                this.$store.dispatch('loopRegList', {
+                    address: this.activeAccount.getDefaultAddr(),
+                    nodeName,
+                    operate: 2, 
+                    producer
+                });
             }).catch((err) => {
                 console.log(err);
 
