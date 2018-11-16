@@ -6,7 +6,11 @@
                  :closeIcon="true" :close="closeTrans" :singleBtn="true" 
                  :leftBtnClick="validTrans" :leftBtnTxt="$t('accDetail.transfer')" >
             <div class="row">
-                <div class="row-t">余额：{{ showAccBalance + ' ' + token.symbol }}</div>
+                <div class="row-t">{{ $t('accDetail.balance') }}</div>
+                <div class="row-content balance">
+                    {{ token.symbol }}
+                    {{ showAccBalance }}
+                </div>
             </div>
 
             <div class="row">
@@ -369,8 +373,11 @@ export default {
         line-height: 16px;
         padding-bottom: 15px;
     }
+    .balance {
+        background: rgba(243,246,249,1);
+    }
     .row-content {
-        padding: 10px 15px;
+        padding: 9px 15px;
         border: 1px solid #D4DEE7;
         border-radius: 2px;
         font-size: 14px;
