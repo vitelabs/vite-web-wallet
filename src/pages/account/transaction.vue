@@ -5,9 +5,11 @@
                  :btnUnuse="unTrans"
                  :closeIcon="true" :close="closeTrans" :singleBtn="true" 
                  :leftBtnClick="validTrans" :leftBtnTxt="$t('accDetail.transfer')" >
+
             <div class="row">
                 <div class="row-t">{{ $t('accDetail.balance') }}</div>
                 <div class="row-content balance">
+                    <img v-if="token.icon" :src="token.icon" class="icon" />
                     {{ token.symbol }} <span>{{ showAccBalance }}</span>
                 </div>
             </div>
@@ -381,8 +383,14 @@ export default {
         border-radius: 2px;
         font-size: 14px;
         line-height: normal;
-        &.balance span {
-            float: right;
+        &.balance { 
+            span {
+                float: right;
+                color: rgba(0,122,255,1);
+            }
+            .icon {
+                margin-bottom: -4px;
+            }
         }
         input {
             width: 100%;
