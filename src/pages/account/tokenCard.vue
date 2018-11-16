@@ -1,7 +1,7 @@
 <template>
     <div class="token-card">
         <div class="title">
-            <img :src="iconMap[opt.symbol] || iconMap['default']" class="icon" />
+            <img v-if="opt.icon" :src="opt.icon" class="icon" />
             <span class="tokenName">{{ opt.symbol }}</span>
         </div>
         <div class="body">
@@ -48,8 +48,7 @@ export default {
             iconMap: {
                 VITE: viteIcon,
                 VCP: vcpIcon,
-                VTT: vttIcon,
-                default: viteIcon
+                VTT: vttIcon
             }
         };
     }
