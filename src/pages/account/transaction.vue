@@ -41,7 +41,7 @@
                     </span>
                 </div>
                 <div class="row-content">
-                    <input v-model="message" :placeholder="$t('accDetail.placeholder.remarks')"  />
+                    <input v-model="message" :placeholder="$t('accDetail.placeholder.remarks')" autocomplete="off" />
                 </div>
             </div>
         </confirm>

@@ -3,7 +3,7 @@ import { timer } from 'utils/asyncFlow';
 
 const loopTime = 5000;
 let regListInst = null;
-let listNum = 0;
+let nodeNameList = {};
 
 const apis = {
     fetchRegistrationList(address) {
@@ -32,18 +32,52 @@ const actions = {
             commit('commitRegistrationList', result);
         });
     },
-    loopRegList({ state, dispatch }, address) {
-        if (!regListInst) {
-            let regListNum = state.registrationList ? state.registrationList.length : 0;
-            listNum = regListNum + 1;
-        } else {
-            listNum = listNum ? listNum + 1 : state.registrationList ? state.registrationList.length : 0;
+    loopRegList({ state, dispatch }, {
+        address, nodeName, operate, producer
+    }) {
+        // operate ==> 0: cancel / 1: reg / 2: update
+        state.registrationList.forEach((regItem) => {
+            if (regItem.name !== nodeName) {
+                return;
+            }
+            nodeNameList[nodeName] = {
+                nodeName, operate, producer
+            };
+        });
+
+        if (regListInst) {
             return;
         }
 
         regListInst = new timer(()=>{
-            let regListNum = state.registrationList ? state.registrationList.length : 0;
-            if (listNum === regListNum) {
+            state.registrationList.forEach((item) => {
+                let nodeName = item.name;
+                if (!nodeNameList[nodeName]) {
+                    return;
+                }
+ 
+                let operate = nodeNameList[nodeName].operate;
+                let isCancel = item.cancelHeight && !viteWallet.BigNumber.isEqual(item.cancelHeight, 0);
+                switch(operate) {
+                case 0: // cancel
+                    isCancel && delete nodeNameList[nodeName];
+                    break;
+                case 1: // reg
+                    !isCancel && nodeNameList[nodeName].operate && delete nodeNameList[nodeName];
+                    break;
+                case 2: // update
+                    nodeNameList[nodeName].producer === item.nodeAddr && delete nodeNameList[nodeName];
+                    break;
+                default: break;
+                }
+            });
+
+            let length = 0;
+            for (let name in nodeNameList) {
+                name && length++;
+            }
+
+            if (!length) {
                 dispatch('stopLoopRegList');
                 return;
             }
@@ -68,10 +102,14 @@ const getters = {
         return list;
     },
     regAddrList(state) {
-        let list = [];
+        let list = {};
         state.registrationList.forEach((item) => {
             let isCancel = item.cancelHeight && !viteWallet.BigNumber.isEqual(item.cancelHeight, 0);
-            !isCancel && list.push(item.nodeAddr);
+            list[item.name] = list[item.name] || [];
+            list[item.name].push({
+                nodeAddr: item.nodeAddr,
+                isCancel
+            });
         });
         return list;
     }

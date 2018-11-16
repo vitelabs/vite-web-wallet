@@ -78,6 +78,10 @@ export default {
         sendTx: {
             type: Function,
             default: () => {}
+        },
+        canUseAddr: {
+            type: Function,
+            default: () => {}
         }
     },
     data() {
@@ -174,6 +178,7 @@ export default {
                 return;
             }
 
+            this.testAddr();
             this.nodeNameErr = '';
         },
         testAddr() {
@@ -183,7 +188,8 @@ export default {
                 return;
             }
 
-            if (this.regAddrList.indexOf(this.producerAddr) !== -1) {
+            let nodeName = this.nodeName.trim();
+            if (!this.canUseAddr(nodeName, this.producerAddr)) {
                 this.producerAddrErr = this.$t('SBP.section1.addrUsed');
                 return;
             }
@@ -231,17 +237,21 @@ export default {
         },
         sendRegisterTx() {
             this.loading = true;
+            let nodeName = this.nodeName;
+            let producerAddr = this.producerAddr;
 
             this.sendTx({
-                producerAddr: this.producerAddr,
-                amount,
-                nodeName: this.nodeName
+                producerAddr, amount, nodeName
             }, 'registerBlock').then(() => {
                 this.loading = false;
                 this.$toast(this.$t('SBP.section1.registerSuccess'));
                 this.clearAll();
-
-                this.$store.dispatch('loopRegList', this.quotaAddr);
+                this.$store.dispatch('loopRegList', {
+                    address: this.quotaAddr,
+                    nodeName, 
+                    operate: 1, 
+                    producer: producerAddr
+                });
                 Vue.nextTick(() => {
                     this.stopWatch = false;
                 });
