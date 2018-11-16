@@ -41,7 +41,8 @@ module.exports = {
         empty: 'The input of seed phrase cannot be empty',
         error: 'Incorrect seed phrase. Try again',
         hint: 'Mnemonic format: words, spaces, words... spaces, words.',
-        netErr: 'The full node is abnormal, please try again later.'
+        netErr: 'The full node is abnormal, please try again later.',
+        change: '切换{len}个助记词'
     },
 
     setting: {
@@ -412,7 +413,8 @@ module.exports = {
         submit: 'Submit',
         next: 'Next Step',
         understand: 'I understand',
-        edit: 'edit'
+        edit: 'edit',
+        copy: 'copy'
     },
     paging: {
         pre: 'Prev',
