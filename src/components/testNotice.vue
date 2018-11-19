@@ -5,10 +5,20 @@
             <div class="hover-content">{{ $t('test.txt1') }}</div>
             <div class="hover-content">{{ $t('test.txt2') }}</div>
             <div class="hover-content">{{ $t('test.txt3') }}</div>
-            <div class="hover-content bold">{{ $t('test.v') }}</div>
+            <div class="hover-content bold">{{ $t('test.v', { version }) }}</div>
         </div>
     </div>
 </template>
+
+<script>
+export default {
+    data() {
+        return {
+            version: process.env.version
+        };
+    }
+};
+</script>
 
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";

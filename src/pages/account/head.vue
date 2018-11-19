@@ -3,7 +3,7 @@
         <div class="custom-name">
             <div class="head-title">
                 <span>{{ $t('accDetail.name') }}</span>
-                <img @click="startRename" class="edit __pointer" src="../../assets/imgs/edit_icon.svg"/>
+                <img @click="startRename" class="edit __pointer" src="../../assets/imgs/edit_default.svg"/>
             </div>
             <div v-show="!isShowNameInput" class="name" :class="{
                 'small-font': account.name && account.name.length > 16
@@ -333,6 +333,10 @@ export default {
             color: #ffffff;
             height: 35px;
             line-height: 35px;
+            &.unuse {
+                background: #efefef;
+                color: #666;
+            }
         }
         .__btn-detail {
             border: 1px solid #007aff;

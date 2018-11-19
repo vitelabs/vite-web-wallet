@@ -48,15 +48,13 @@ let toAddrTimeout = null;
 
 export default {
     props: {
+        tokenInfo: {
+            type: Object,
+            default: ()=>{
+                return {};
+            }
+        },
         sendPledgeTx: {
-            type: Function,
-            default: () => {}
-        },
-        showConfirm: {
-            type: Function,
-            default: () => {}
-        },
-        testAmount: {
             type: Function,
             default: () => {}
         }
@@ -81,6 +79,9 @@ export default {
     computed: {
         btnUnuse() {
             return this.loading || !this.isValidAddress || this.amountErr || !this.amount || !this.toAddr;
+        },
+        tokenBalList() {
+            return this.$store.state.account.balance.balanceInfos;
         }
     },
     watch: {
@@ -107,23 +108,36 @@ export default {
 
             amountTimeout = setTimeout(()=> {
                 amountTimeout = null;
-                this._testAmount();
+                this.testAmount();
             }, 500);
         },
     },
     methods: {
-        _testAmount() {
-            let result = this.testAmount(this.amount);
+        testAmount() {
+            let result = this.$validAmount(this.amount);
             if (!result) {
                 this.amountErr = this.$t('transList.valid.amt');
                 return false;
             }
-            if (viteWallet.BigNumber.compared(this.amount, 10) >= 0) {
-                this.amountErr = '';
-                return true;
+
+            if (viteWallet.BigNumber.compared(this.amount, 10) < 0) {
+                this.amountErr = this.$t('quota.limitAmt');
+                return false;
             }
-            this.amountErr = this.$t('quota.limitAmt');
-            return false;
+
+            let balance = this.tokenBalList && this.tokenBalList[this.tokenInfo.tokenId] ? 
+                this.tokenBalList[this.tokenInfo.tokenId].totalAmount : 0;
+
+            if (this.tokenInfo && this.tokenInfo.tokenId) {
+                let amount = viteWallet.BigNumber.toMin(this.amount, this.tokenInfo.decimals);
+                if (viteWallet.BigNumber.compared(balance, amount) < 0) {
+                    this.amountErr = this.$t('transList.valid.bal');
+                    return false;
+                }
+            }
+
+            this.amountErr = '';
+            return true;
         },
         testAddr() {
             if (!this.toAddr) {
@@ -156,13 +170,23 @@ export default {
 
             this.$statistics.event('Vite_web_wallet', 'quota', 'SubmitQuota');
 
-            this._testAmount();
+            this.testAmount();
             this.testAddr();
             if (this.amountErr || !this.isValidAddress) {
                 return;
             }
 
-            this.showConfirm('submit', this.amount);
+            this.activeAccount.initPwd({
+                title: this.$t('quota.confirm.submit.title'),
+                submitTxt: this.$t('quota.confirm.submit.rightBtn'),
+                cancelTxt: this.$t('quota.confirm.submit.leftBtn'),
+                content: this.$t('quota.confirm.submit.describe', {
+                    amount: this.amount
+                }),
+                submit: () => {
+                    this._sendPledgeTx();
+                }
+            }, true);
         },
         _sendPledgeTx() {
             this.$statistics.event('Vite_web_wallet', 'quota', 'ConfirmQuota');
@@ -171,7 +195,7 @@ export default {
             this.sendPledgeTx({
                 toAddr: this.toAddr,
                 amount: this.amount
-            }, 'get', (result) => {
+            }, 'pledgeBlock', (result) => {
                 this.loading = false;
                 if (!result) {
                     this.$toast(this.$t('quota.pledgeFail'));
@@ -195,13 +219,6 @@ export default {
 .pledge-tx-wrapper {
     position: relative;
     margin-top: 40px;
-
-    .loading {
-        width: 60px;
-        height: 60px;
-        margin-top: -30px;
-        margin-left: -30px;
-    }
     .row {
         display: flex;
         justify-content: space-between;

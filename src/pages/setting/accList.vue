@@ -61,12 +61,14 @@ export default {
         setDefault(addr) {
             let res = this.activeAccount.setDefaultAddr(addr);
             if (!res) {
-                this.$toast(this.$t('transList.valid.err'));
+                this.$toast(this.$t('hint.err'));
                 return;
             }
             this.defaultAddr = this.activeAccount.getDefaultAddr();
 
             // clear all
+            let activeAccount = this.$wallet.getActiveAccount();
+            activeAccount && activeAccount.releasePWD();
             this.$store.commit('commitClearBalance');
             this.$store.commit('commitClearTransList');
             this.$store.commit('commitClearPledge');

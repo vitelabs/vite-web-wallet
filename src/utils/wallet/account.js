@@ -1,6 +1,9 @@
 import acc from './storeAcc.js';
+import { pwdConfirm } from 'components/password/index.js';
+import config from 'config/constant';
 
 const namePre = 'account';
+let passTimeout;
 
 class Account {
     constructor({
@@ -8,6 +11,7 @@ class Account {
     }) {
         this.isWalletAcc = !keystore;
         this.name = checkName(name);
+        this.isHoldPWD = false;
 
         // Keystore account
         this.keystore = keystore;
@@ -23,6 +27,44 @@ class Account {
         this.addrs = (!this.isWalletAcc && !addrs) ? [{
             hexAddr: keystore.hexaddress
         }] : addrs;
+    }
+    
+    holdPWD(pwd, time) {
+        this.pass = pwd;
+        this.isHoldPWD = true;
+        passTimeout = setTimeout(() => {
+            this.releasePWD();
+        }, time);
+    }
+
+    releasePWD() {
+        passTimeout && clearTimeout(passTimeout);
+        passTimeout = null;
+        this.isHoldPWD = false;
+        window.isShowPWD = false;
+    }
+
+    initPwd({
+        showMask = true,
+        title,
+        submit = () => {},
+        cancel = () => {},
+        content = '',
+        submitTxt = '',
+        cancelTxt = '',
+        exchange=false
+    }, isConfirm = false) {
+        let isHide = !isConfirm && this.isHoldPWD;
+
+        if (isHide) {
+            submit && submit();
+            return true;
+        }
+
+        pwdConfirm({
+            showMask, title, submit, content, cancel, cancelTxt, submitTxt,exchange
+        }, !this.isHoldPWD);
+        return false;
     }
 
     verify(pass) {
@@ -41,7 +83,7 @@ class Account {
         return $ViteJS.Wallet.Keystore.decrypt(JSON.stringify(this.keystore), pass);
     }
 
-    save() {
+    save(index = -1) {
         this.name = checkName(this.name);
 
         if (!this.isWalletAcc) {
@@ -55,12 +97,13 @@ class Account {
         }
 
         acc.add({
+            id: getHexId(this.addrs[0].hexAddr),
             defaultInx: this.defaultInx, 
             addrNum: this.addrs.length, 
             name: this.name, 
             entropy: this.entropy,
             encryptObj: this.encryptObj
-        });
+        }, index);
     }
 
     getMnemonic() {
@@ -137,7 +180,26 @@ class Account {
 
         let addr = this.addrs[this.defaultInx].hexAddr;
         let privKey = this.addrs[this.defaultInx].privKey;
-        $ViteJS.Wallet.Account.autoReceiveTX(addr, privKey, process.env.powDifficulty);
+
+        $ViteJS.Wallet.Account.autoReceiveTX(addr, privKey, (err, accountBlock, res, rej) => {
+            if (!err || !err.error || !err.error.code || err.error.code !== -35002) {
+                return rej(err);
+            }
+
+            viteWallet.Pow.getNonce(addr, accountBlock.prevHash).then((data) => {
+                accountBlock.difficulty = data.difficulty;
+                accountBlock.nonce = data.nonce;
+
+                this.sendRawTx(accountBlock, privKey).then((data) => {
+                    return res(data);
+                }).catch((err) => {
+                    return rej(err);
+                });
+
+            }).catch((err) => {
+                rej(err);
+            });
+        });
     }
 
     lock() {
@@ -153,50 +215,58 @@ class Account {
         $ViteJS.Wallet.Account.stopAutoReceiveTX(addr.hexAddr);
     }
 
-    getPowTxBlock({
-        toAddr, tokenId, amount, message
-    }, pledgeType = '') {
-        let fromAddr = this.addrs[this.defaultInx].hexAddr;
-
-        return $ViteJS.Vite.Ledger.getSendBlock({
-            fromAddr, toAddr, tokenId, amount, message
-        }, pledgeType, process.env.powDifficulty);
-    }
-
     sendRawTx(block, privKey) {
         privKey = privKey || this.addrs[this.defaultInx].privKey;
         return $ViteJS.Wallet.Account.sendRawTx(block, privKey);
     }
 
-    sendTx({
-        toAddr, pass, tokenId, amount, message
-    }, pledgeType = '') {
-        if (!pledgeType) {
-            let verifyRes = this.verify(pass);
-            if (!verifyRes) {
-                return Promise.reject({
-                    code: -34001,
-                    message: 'passErr'
-                });
-            }
-        }
-
-        let fromAddr = this.addrs[this.defaultInx].hexAddr;
-        let privKey = this.addrs[this.defaultInx].privKey;
-
+    getBlock({
+        toAddr, tokenId, amount, message, nodeName, producerAddr, rewardAddress,difficulty
+    }, type = 'sendBlock', isPow = false) {
         return new Promise((res, rej) => {
-            $ViteJS.Vite.Ledger.getSendBlock({
-                fromAddr, toAddr, tokenId, amount, message
-            }, pledgeType).then((block)=>{
-                if (!block) {
-                    return rej('Block null');
+            let accountAddress = this.addrs[this.defaultInx].hexAddr;
+            
+            return $ViteJS.Vite.Ledger[type]({
+                accountAddress, 
+                toAddress: toAddr, 
+                Gid: config.gid,
+                tokenId, amount, message, 
+                nodeName, producerAddr, rewardAddress
+            }).then((block)=>{
+                if (!isPow) {
+                    return res(block);
                 }
+
+                viteWallet.Pow.getNonce(accountAddress, block.prevHash,difficulty).then((data) => {
+                    block.difficulty = data.difficulty;
+                    block.nonce = data.nonce;
+                    return res(block);
+                }).catch((err) => {
+                    rej(err);
+                });
+            }).catch((err)=>{
+                return rej(err);
+            });
+        });
+    }
+
+    sendTx({
+        toAddr, tokenId, amount, message, nodeName, producerAddr, rewardAddress
+    }, type = 'sendBlock') {
+        // First tx
+        window.isShowPWD = true;
+
+        let privKey = this.addrs[this.defaultInx].privKey;
+        return new Promise((res, rej) => {
+            this.getBlock({
+                toAddr, tokenId, amount, message, nodeName, producerAddr, rewardAddress
+            }, type).then((block) => {
                 this.sendRawTx(block, privKey).then((data) => {
                     return res(data);
                 }).catch(err => {
                     return rej(err);
                 });
-            }).catch((err)=>{
+            }).catch(err => {
                 return rej(err);
             });
         });
@@ -218,4 +288,11 @@ function checkName(name) {
     name = `${namePre}${count}`;
     acc.setNameCount(count + 1);
     return name;
+}
+
+function getHexId(key) {
+    let keyByte = viteWallet.utils.utf8ToBytes(key);
+    let idByte = viteWallet.utils.blake2b(keyByte, null, 32);
+    let idHex = viteWallet.utils.bytesToHex(idByte);
+    return idHex;
 }

@@ -36,9 +36,9 @@ import userImg from 'assets/imgs/mine.svg';
 import pagination from 'components/pagination.vue';
 import tabelList from 'components/tabelList.vue';
 import date from 'utils/date.js';
-import timer from 'utils/asyncFlow';
+import {timer} from 'utils/asyncFlow';
 import ellipsisAddr from 'utils/ellipsisAddr.js';
-import loopTime from 'loopTime';
+import loopTime from 'config/loopTime';
 
 let pledgeListInst;
 
@@ -81,12 +81,19 @@ export default {
     },
     computed: {
         totalAmount() {
+            if (!this.tokenInfo) {
+                return 0;
+            }
             return viteWallet.BigNumber.toBasic(this.$store.state.pledge.totalPledgeAmount || 0, this.tokenInfo.decimals);
         },
         totalPage() {
             return this.$store.getters.totalPledgePage;
         },
         pledgeList() {
+            if (!this.tokenInfo) {
+                return [];
+            }
+
             let pledgeList = this.$store.getters.pledgeList;
             let currentHeight = viteWallet.Ledger.getHeight() || 0;
 
@@ -151,7 +158,7 @@ export default {
             this.sendPledgeTx({
                 toAddr: this.activeItem.beneficialAddr,
                 amount
-            }, 'getCancel', (result) => {
+            }, 'cancelPledgeBlock', (result) => {
                 this.loading = false;
                 this.activeItem = null;
                 result && this.$toast(this.$t('quota.canclePledgeSuccess'));
@@ -244,12 +251,15 @@ export default {
     min-width: 150px;
 }
 .height {
-    min-width: 140px;
+    min-width: 185px;
     width: 20%;
 }
 .time {
     min-width: 200px;
     width: 20%;
+}
+.operate {
+    min-width: 205px;
 }
 .cancel {
     color: #CED1D5;

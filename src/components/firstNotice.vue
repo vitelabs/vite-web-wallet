@@ -8,7 +8,7 @@
                 <li>{{ $t('firstNotice.text3') }}</li>
                 <li>{{ $t('firstNotice.text4') }}</li>
             </ul>
-            <div class="__btn __btn_all_in" @click="close">{{ $t('firstNotice.btn') }}</div>
+            <div class="__btn __btn_all_in" @click="close">{{ $t('btn.understand') }}</div>
         </div>
     </div>
 </template>

@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import timer from 'utils/asyncFlow';
+import {timer} from 'utils/asyncFlow';
 
 let quotaInst;
 
@@ -79,6 +79,12 @@ export default {
         font-size: 24px;
         color: #1D2024;
         line-height: 32px;
+    }
+}
+
+@media only screen and (max-width: 550px) {
+    .my-quota-wrapper {
+        margin-top: 20px;
     }
 }
 </style>
