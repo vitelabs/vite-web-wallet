@@ -50,8 +50,7 @@ export default {
 
 .mint-toast {
     box-sizing: border-box;
-    position: absolute;
-    padding: 30px 0;
+    position: fixed;
     background: #FFFFFF;
     box-shadow: 0 2px 48px 1px rgba(176,192,237,0.42);
     border-radius: 2px;

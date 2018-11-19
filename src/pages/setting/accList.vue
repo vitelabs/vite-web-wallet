@@ -9,7 +9,6 @@
             <div ref="listWrapper" class="list-wrapper">
                 <div ref="list">
                     <div class="acc-item" v-for="(addr, index) in addrList" :key="index">
-                        <copyOK class="copy-wrapper" :copySuccess="copyAddr === addr"></copyOK>
                         <span @click="setDefault(addr)" class="select" :class="{
                             'active': defaultAddr === addr
                         }"></span>
@@ -28,13 +27,9 @@
 
 <script>
 import Vue from 'vue';
-import copyOK from 'components/copyOK';
 import copy from 'utils/copy';
 
 export default {
-    components: {
-        copyOK
-    },
     data() {
         let activeAccount = this.$wallet.getActiveAccount();
 
@@ -49,10 +44,7 @@ export default {
     methods: {
         copy(addr) {
             copy(addr);
-            this.copyAddr = addr;
-            setTimeout(()=>{
-                this.copyAddr = '';
-            }, 2000);
+            this.$toast(this.$t('accDetail.hint.copy'));
         },
         addAddr() {
             let addrList = this.activeAccount.getAddrList();
@@ -120,6 +112,10 @@ export default {
     background: #FFFFFF;
     border: 1px solid #D4DEE7;
     border-radius: 2px;
+    .list-wrapper {
+        max-height: 190px;
+        overflow: auto;
+    }
     .acc-item {
         line-height: 20px;
         position: relative;
@@ -128,10 +124,6 @@ export default {
         display: flex;
         &:last-child {
             border: none;
-        }
-        .copy-wrapper {
-            top: -50%;
-            bottom: unset;
         }
     }
     .add {
