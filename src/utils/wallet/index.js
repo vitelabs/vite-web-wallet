@@ -35,16 +35,13 @@ class Wallet {
 
         try {
             let { addr, entropy } = $ViteJS.Wallet.Address.newAddr();
-            let encryptObj = $ViteJS.Wallet.Account.encrypt(entropy, pass);
-            let obj = JSON.parse(encryptObj);
     
             this.newActiveAcc({
                 defaultInx: 0,
                 addrNum: 1, 
                 name,
                 decryptEntropy: entropy,
-                entropy: obj.encryptentropy,
-                encryptObj: obj,
+                pass,
                 addrs: [addr]
             });
         } catch(err) {

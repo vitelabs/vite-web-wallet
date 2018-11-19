@@ -83,6 +83,17 @@ class Account {
         return $ViteJS.Wallet.Keystore.decrypt(JSON.stringify(this.keystore), pass);
     }
 
+    encrypt() {
+        if (!this.decryptEntropy || !this.pass) {
+            return false;
+        }
+        console.log(this.pass);
+        let encryptObj = $ViteJS.Wallet.Account.encrypt(this.decryptEntropy, this.pass);
+        console.log(encryptObj);
+        let obj = JSON.parse(encryptObj);
+        this.entropy = obj.encryptentropy;
+        this.encryptObj = obj;
+    }
     save(index = -1) {
         this.name = checkName(this.name);
 
@@ -106,7 +117,12 @@ class Account {
         }, index);
     }
     changeMnemonic(len) {
-        console.log(len);
+        let bits = len === 12 ? 128 : 256;
+        let { addr, entropy } = $ViteJS.Wallet.Address.newAddr(bits);
+        this.decryptEntropy = entropy;
+        this.addrs = [addr];
+        this.defaultInx = 0;
+        this.addrNum = 1;
     }
     getMnemonic() {
         if (!this.decryptEntropy) {
