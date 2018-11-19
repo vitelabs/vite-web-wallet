@@ -17,8 +17,8 @@
                 <span>{{ opt.onroadNum || 0 }} {{ $t('accDetail.pend') }}</span>
             </div>
         </div>
-        <div class="btn __pointer" :class="{ unuse: !opt.id }" 
-             @click="sendTransaction(opt)">{{ $t('accDetail.sendTrans') }}</div>
+        <div class="btn __pointer" :class="{ 'unuse': !opt.id || !opt.balance }" 
+             @click="_sendTx">{{ $t('accDetail.sendTrans') }}</div>
     </div>
 </template>
 
@@ -51,6 +51,14 @@ export default {
                 VTT: vttIcon
             }
         };
+    },
+    methods: {
+        _sendTx() {
+            if (!this.opt.id || !this.opt.balance) {
+                return;
+            }
+            this.sendTransaction && this.sendTransaction(this.opt);
+        }
     }
 };
 </script>

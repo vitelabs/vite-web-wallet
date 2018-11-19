@@ -8,9 +8,6 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 
 import App from 'pages/index.vue';
-// import start from 'pages/start.vue';
-// import login from 'pages/login/index.vue';
-
 import routeConfig from 'routes';
 
 import 'utils/eventEmitter.js';
@@ -41,21 +38,14 @@ setTimeout(() => {
 // Loading finish and App init finish also.
 setTimeout(() => {
     wallet.reSave();
-    // let list = wallet.getList();
-    // let rootRoute = {
-    //     name: 'index',
-    //     path: '/'
-    // };
-    // rootRoute.component = list && list.length ? login : start;
-    // routeConfig.routes.push(rootRoute);
 
+    // Init router
     const router = new VueRouter({
         mode: process.env.NODE_ENV === 'dev' ? 'hash' : 'history',
         routes: routeConfig.routes
     });
-
     router.beforeEach((to, from, next) => {
-        // windows APP
+        // Windows APP
         if (!to.name && to.path) {
             let arr = to.path.split('/');
             router.replace({

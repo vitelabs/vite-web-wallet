@@ -35,7 +35,6 @@ export default {
             }
         });
 
-
         Vue.prototype.$wallet = wallet;
         Vue.prototype.$validAmount = (amount = '') => {
             return /(^(\d+)$)|(^(\d+[.]\d{1,8})$)/g.test(amount);
