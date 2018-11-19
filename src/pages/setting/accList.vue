@@ -8,11 +8,13 @@
         <div class="acc-list __pointer">
             <div ref="listWrapper" class="list-wrapper">
                 <div ref="list">
-                    <div @click="setDefault(addr)" class="acc-item" v-for="(addr, index) in addrList" :key="index">
-                        <span class="describe __ellipsis">{{(index + 1) + '. ' + addr}}</span>
-                        <span class="select" :class="{
+                    <div class="acc-item" v-for="(addr, index) in addrList" :key="index">
+                        <copyOK class="copy-wrapper" :copySuccess="copyAddr === addr"></copyOK>
+                        <span @click="setDefault(addr)" class="select" :class="{
                             'active': defaultAddr === addr
                         }"></span>
+                        <span @click="setDefault(addr)" class="describe __ellipsis">{{(index + 1) + '. ' + addr}}</span>
+                        <img @click="copy(addr)" class="copy __pointer" src="../../assets/imgs/copy_default.svg"/>
                     </div>
                 </div>
             </div>
@@ -26,8 +28,13 @@
 
 <script>
 import Vue from 'vue';
+import copyOK from 'components/copyOK';
+import copy from 'utils/copy';
 
 export default {
+    components: {
+        copyOK
+    },
     data() {
         let activeAccount = this.$wallet.getActiveAccount();
 
@@ -35,10 +42,18 @@ export default {
             activeAccount,
             isWalletAcc: activeAccount.isWalletAcc,
             addrList: activeAccount.getAddrList(),
-            defaultAddr: activeAccount.getDefaultAddr()
+            defaultAddr: activeAccount.getDefaultAddr(),
+            copyAddr: ''
         };
     },
     methods: {
+        copy(addr) {
+            copy(addr);
+            this.copyAddr = addr;
+            setTimeout(()=>{
+                this.copyAddr = '';
+            }, 2000);
+        },
         addAddr() {
             let addrList = this.activeAccount.getAddrList();
             if (addrList && addrList.length >= 10) {
@@ -105,16 +120,18 @@ export default {
     background: #FFFFFF;
     border: 1px solid #D4DEE7;
     border-radius: 2px;
-    .list-wrapper {
-        max-height: 190px;
-        overflow: auto;
-    }
     .acc-item {
+        line-height: 20px;
         position: relative;
         padding: 10px 15px;
         border-bottom: 1px solid #D4DEE7;
+        display: flex;
         &:last-child {
             border: none;
+        }
+        .copy-wrapper {
+            top: -50%;
+            bottom: unset;
         }
     }
     .add {
@@ -148,9 +165,7 @@ export default {
         color: #5E6875;
     }
     .select {
-        position: absolute;
-        top: 12px;
-        right: 10px;
+        margin: 2px 10px 0 0;
         display: block;
         box-sizing: border-box;
         width: 16px;
