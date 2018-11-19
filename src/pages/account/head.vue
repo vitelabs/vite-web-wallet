@@ -31,9 +31,7 @@
         </div>
         
         <div class="btn-group">
-            <div class="btn__small __pointer __btn-test" :class="{
-                'unuse': waitTestToken
-            }" @click="getTestToken">
+            <div class="btn__small __pointer __btn-test" @click="getTestToken" :class="{'un_clickable':!getTestTokenAble}">
                 <span>{{ $t('accDetail.getTestToken') }}</span>
                 <img src="../../assets/imgs/Vite_icon.svg" class="icon" />
             </div>
@@ -67,7 +65,7 @@ export default {
             copySuccess: false,
             qrcode: null,
             qrcodeShow: false,
-            waitTestToken: false
+            getTestTokenAble:true
         };
     },
     mounted() {
@@ -133,10 +131,9 @@ export default {
         },
 
         getTestToken() {
-            if (this.waitTestToken) {
+            if (!this.getTestTokenAble){
                 return;
-            }
-
+            };
             if (!viteWallet.Net.getNetStatus()) {
                 this.$toast(this.$t('nav.noNet'));
                 return;
@@ -145,14 +142,14 @@ export default {
             if (!this.account || !this.account.addr) {
                 this.$toast( this.$t('accDetail.hint.tErr') );
             }
-            
-            this.waitTestToken = true;
-            setTimeout(() => {
-                this.waitTestToken = false;
-            }, 3000);
+            this.getTestTokenAble=false;
             viteWallet.TestToken.get(this.account.addr).then(() => {
                 this.$toast( this.$t('accDetail.hint.token') );
+                setTimeout(()=>{
+                    this.getTestTokenAble=true;
+                },3000)
             }).catch((err) => {
+                this.getTestTokenAble=true;
                 console.warn(err);
                 this.$toast( this.$t('accDetail.hint.tErr') );
             });
@@ -318,6 +315,10 @@ export default {
         font-family: $font-normal-b, arial, sans-serif;
         padding-right: 20px;
         padding-bottom: 30px;
+        .un_clickable{
+            background-color:#bfbfbf!important;
+            cursor:default!important;
+        }
         .btn__small {
             box-sizing: border-box;
             width: 210px;
