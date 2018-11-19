@@ -50,6 +50,8 @@ import tooltips from 'components/tooltips';
 import date from 'utils/date.js';
 import ellipsisAddr from 'utils/ellipsisAddr.js';
 
+const amount = 500000;
+
 export default {
     components: {
         tooltips
@@ -84,6 +86,20 @@ export default {
         };
     },
     computed: {
+        amountErr() {
+            if (!this.tokenInfo || !this.tokenInfo.tokenId) {
+                return '';
+            }
+            let balance = this.tokenBalList[this.tokenInfo.tokenId] ? this.tokenBalList[this.tokenInfo.tokenId].totalAmount : 0;
+            let minAmount = viteWallet.BigNumber.toMin(amount, this.tokenInfo.decimals);
+            if (viteWallet.BigNumber.compared(balance, minAmount) < 0) {
+                return this.$t('transList.valid.bal');
+            }
+            return '';
+        },
+        tokenBalList() {
+            return this.$store.state.account.balance.balanceInfos;
+        },
         list() {
             if (!this.tokenInfo || !this.tokenInfo.tokenId) {
                 return [];
@@ -130,6 +146,48 @@ export default {
             this.showTimeTips = -1;
         },
 
+        sendRegisterTx(item) {
+            let rawData = item.rawData;
+            let nodeName = rawData.name;
+            let producerAddr = rawData.nodeAddr;
+
+            this.sendTx({
+                producerAddr, amount, nodeName
+            }, 'registerBlock').then(() => {
+                this.$toast(this.$t('SBP.section1.registerSuccess'));
+                this.$store.dispatch('loopRegList', {
+                    address: this.address,
+                    nodeName, 
+                    operate: 1, 
+                    producer: producerAddr
+                });
+            }).catch((err) => {
+                console.log(err);
+                if (err && err.error && err.error.code && err.error.code === -35002) {
+                    quotaConfirm({
+                        operate: this.$t('SBP.register')
+                    });
+                    return;
+                }
+                this.$toast(this.$t('SBP.section1.registerFail'));
+            });
+        },
+        reg(item) {
+            if (this.amountErr) {
+                this.$toast(this.amountErr);
+                return;
+            }
+
+            this.activeAccount.initPwd({
+                title: this.$t('SBP.confirm.title'),
+                submitTxt: this.$t('SBP.confirm.rightBtn'),
+                cancelTxt: this.$t('SBP.confirm.leftBtn'),
+                content: this.$t('SBP.confirm.describe', { amount }),
+                submit: () => {
+                    this.sendRegisterTx(item);
+                }
+            }, true);
+        },
         cancel(item) {
             if (!item.isMaturity || item.isCancel) {
                 return;
