@@ -309,6 +309,7 @@ module.exports = {
     // vote
     vote: { // [TODO]
         title: '投票',
+        search: '请输入候选节点名称或者出块地址',
         help: {
             title: '关于投票',
             text: '您可以参与投票选出共25个SBP（Snapshot Block Producer），每轮投票时间共75秒，您的投票数为投票地址所拥有的VITE数量，默认为您保持上一轮的投票意向；每轮得票量排名前25名的候选节点中随机23个及排名26-100名的候选节点中随机2个共25个节点将当选SBP。',
