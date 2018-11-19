@@ -29,7 +29,17 @@ export default {
     },
     computed: {
         tokenList() {
-            return this.$store.getters.tokenBalanceList;
+            // force vite at first
+            const tokenList=JSON.parse(JSON.stringify(this.$store.getters.tokenBalanceList));
+            const l=[];
+            if(tokenList['tti_5649544520544f4b454e6e40']){
+                l.push(tokenList['tti_5649544520544f4b454e6e40']);
+                delete tokenList['tti_5649544520544f4b454e6e40'];
+            }
+            Object.keys(tokenList).forEach(k=>{
+                l.push(tokenList[k])
+            })
+            return l;
         }
     },
     methods: {
