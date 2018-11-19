@@ -356,7 +356,7 @@ module.exports = {
                 },
                 cover: {
                     title: 'Voting',
-                    content: 'You\'ve already voted for{nodeName}, are you sure to overwrite current voting record?',
+                    content: 'You\'ve already voted for {nodeName}, are you sure to overwrite current voting record?',
                     cancelText: 'Confirm',
                     submitText: 'Cancel'
                 }
