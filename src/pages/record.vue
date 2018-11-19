@@ -51,7 +51,7 @@ export default {
             this.copySuccess = true;
             setTimeout(()=>{
                 this.copySuccess = false;
-            }, 1000);
+            }, 2000);
         },
         change() {
             // this.activeAccount.changeMnemonic(this.len);

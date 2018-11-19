@@ -106,7 +106,7 @@ class Account {
         }, index);
     }
     changeMnemonic(len) {
-
+        console.log(len);
     }
     getMnemonic() {
         if (!this.decryptEntropy) {
