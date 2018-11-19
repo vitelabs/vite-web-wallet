@@ -12,7 +12,7 @@ module.exports = {
         text4: 'The current version of wallet is preview version, the Vite test tokens you obtained is only for testing and has no any actual value. Meanwhile, the official will occasionally clear test tokens.'
     },
 
-    test: { // [TODO]
+    test: {
         t: 'Preview Version',
         txt1: 'The preview version of wallet is a lightweight-node wallet officially issued by VITE.',
         txt2: 'The current version supports functions of checking account balance, sending transactions, receiving transactions in default, acquiring test tokens, staking VITE tokens for TPS quota and etc.',
@@ -137,7 +137,7 @@ module.exports = {
         },
         quota: {
             title: 'Insufficient Quota',
-            describe: 'Not available to send a transaction due to lack of quota, please delete descriptive text and run PoW, or gain quota by staking token to resume.',
+            describe: 'your left quotas turn out to be insufficient, you can acquire more quotas by running PoW or staking VITE',
             left: 'Run PoW',
             right: 'Stake VITE'
         },
@@ -156,7 +156,7 @@ module.exports = {
         },
         myQuota: 'My Quota',
         maxTxNum: 'Maximum number of Txs',
-        beneficialAddr: 'Profit Address',
+        beneficialAddr: 'Quota Recipient Address',
         fromAddr: 'Deduction address',
         amount: 'Staking amount',
         time: 'Staking frozen duration',
@@ -238,154 +238,155 @@ module.exports = {
     },
 
     // SBP
-    SBP: { // [TODO]
+    SBP: {
         title: 'SBP Registration',
-        edit: '编辑',
-        reward: '提取奖励',
-        register: '注册SBP',
-        cancel: '撤销注册SBP',
+        edit: 'Edit',
+        reward: 'Retrieval of SBP rewards',
+        register: 'SBP Registration',
+        cancel: 'SBP Cancellation',
+        cancelBtn: 'Cancel',
         help: {
             title: 'About SBP',
-            text: 'SBP（Snapshot Block Producer）为具有出块权利的节点，您可以通过抵押一定数量的VITE注册成为SBP候选节点；每轮（时长75秒）会选举出25个SBP，每轮得票数前25名中随机选出23个作为SBP，得票数26-100名中随机选出2个作为SBP；出块奖励的50%将作为按块奖励分配给该块的出块节点，另外50%将作为按票奖励分配给该轮次得票数排名前100的节点。<br/><br/>一个注册地址（抵押地址）可以注册多个出块节点（节点名称），节点名称被一个注册地址使用后不能再被其他注册地址使用；节点名称可以更换出块地址，出块地址被一个节点名称使用后不能再被其他节点名称使用。'
+            text: 'SBP（Snapshot Block Producer）is a node that has right to creating blocks, you can register to be a SBP candidate by staking a certain amount of VITE, each round (about 75 seconds) will elect 25 SBPs, the SBPs will be elected from random 23 out of top 25 candidate nodes, plus random 2 out of the candidate nodes ranking 26th-100th on the list. The 50% of block creating rewards will be allocated to the block creating node, the other 50% will be allocated to nodes that are ranked on top 100 as voting rewards. <br/><br/> One registration address (staking address) can register multiple block creating nodes (node names), a node name cannot be used if the node name has been registered by a registration address. A node name can switch block creating address, however, block creating address cannot be reused by other node names.'
         },
         confirm: {
-            title: '注册SBP候选节点',
-            describe: '提交注册后，当前地址的 {amount} VITE将被锁定约90天，解锁后金额将退回抵押地址',
-            leftBtn: '暂不注册',
-            rightBtn: '确认注册',
+            title: 'Registration of SBP candidates',
+            describe: 'The {amount} VITE of current address will be locked about 90 days when you submit registration,  the amount will be returned to staking address after being unlocked',
+            leftBtn: 'Not register yet',
+            rightBtn: 'Ready to register',
             edit: {
-                title: '更换出块地址',
-                placeholder: '请输入新的出块地址',
-                btn: '确认修改'
+                title: 'Change block creating address',
+                placeholder: 'please input new block creating address',
+                btn: 'Confirm to change'
             },
             reward: {
-                title: '提取出块奖励',
-                placeholder: '请输入接收出块奖励地址',
-                btn: '提取奖励'
+                title: 'Retrieve block creating rewards',
+                placeholder: 'Please input rewards recipient address',
+                btn: 'Retrieval of Rewards'
             }
         },
         section1: {
-            title: '提交注册',
-            nodeName: '节点名称',
-            producerAddr: '出块地址',
-            quotaAddr: '抵押地址',
-            quotaTime: '抵押周期',
-            allReward: '全部可提取的出块奖励',
-            time: '7776000个快照块（约90天）',
-            quotaAmount: '抵押金额',
-            confirmBtn: '提交注册',
-            namePlaceholder: '请输入节点名称',
-            nameHint: '40个字符以内, 支持大小写英文字母、数字、\'_\'、\'.\'',
-            nameErr: '节点名称不合法',
-            nameUsed: '此节点名称已被注册',
-            addrPlaceholder: '请输入快照块出块地址',
-            addrHint: '出块地址必须是全节点地址且保持运行状态',
-            addrErr: '出块地址不合法',
-            addrUsed: '此出块地址已被使用',
-            registerSuccess: '注册请求已发出',
-            registerFail: '注册请求失败'
+            title: 'Submit Registration',
+            nodeName: 'Node Name',
+            producerAddr: 'Block Creation Address',
+            quotaAddr: 'Staking Address',
+            quotaTime: 'Staking Period',
+            allReward: 'All of the retrievable block creating rewards',
+            time: '7776000 snapshot blocks（approximately 90 days）',
+            quotaAmount: 'Staking Amount',
+            confirmBtn: 'Submit Registration',
+            namePlaceholder: 'Please input node name',
+            nameHint: 'Within 40 characters, support English letters (both upper and lower cases), numbers, \'_\'、\'.\'',
+            nameErr: 'This node name is illegal',
+            nameUsed: 'This node name is occupied',
+            addrPlaceholder: 'Please input snapshot block creating address',
+            addrHint: 'The block creating address must be a full node and keep up running',
+            addrErr: 'Illegal address',
+            addrUsed: 'This address has been occupied',
+            registerSuccess: 'Registration request has sent',
+            registerFail: 'Registration request failed'
         },
         section2: {
-            title: '注册信息',
-            updateSuccess: '修改请求已发送',
-            updateFail: '修改请求发送失败',
-            rewardSuccess: '提取奖励请求已发送',
-            rewardFail: '提取奖励请求发送失败',
-            cancelSuccess: '撤销请求已发送',
-            cancelFail: '撤销请求发送失败',
-            nowReward: '本次可提取的快照块高度范围及奖励金额',
-            rewardAddr: '提取奖励地址',
-            expireDate: '预计到期时间: {time}',
+            title: 'Registration Information',
+            updateSuccess: 'Modify request has sent',
+            updateFail: 'Failed to send modify request',
+            rewardSuccess: 'Request of Rewards retrieval has sent',
+            rewardFail: 'Failed to send the request of rewards retrieving',
+            cancelSuccess: 'Revoking request has sent',
+            cancelFail: 'Failed to send revoking request',
+            nowReward: 'The range of snapshot block height and reward that can be requested at this time',
+            rewardAddr: 'Retrieval Address',
+            expireDate: 'Expire Date: {time}',
             cancelConfirm: {
-                title: '撤销注册SBP',
-                describe: '撤销后您的抵押金额将退回抵押地址；若想成为SBP，您需重新提交注册申请'
+                title: 'Revoke registration of SBP',
+                describe: 'The staking amount will be returned back to your staking address after revoking, you have to re-submit the registration to become a SBP'
             }
         }
     },
 
     // vote
-    vote: { // [TODO]
-        title: '投票',
+    vote: {
+        title: 'Voting',
         help: {
-            title: '关于投票',
-            text: '您可以参与投票选出共25个SBP（Snapshot Block Producer），每轮投票时间共75秒，您的投票数为投票地址所拥有的VITE数量，默认为您保持上一轮的投票意向；每轮得票量排名前25名的候选节点中随机23个及排名26-100名的候选节点中随机2个共25个节点将当选SBP。',
+            title: 'About Voting',
+            text: 'You can join and vote for 25 SBPs （Snapshot Block Producer), each round of voting lasts 75s, the polls you can use for voting are equivalent to the amount of VITE tokens owned by voting address, the default selection is the choice of previous round, the SBPs will be chosen from random 23 out of top 25 candidate nodes, plus random 2 out of the candidate nodes ranking 26th-100th on the list, 25 SBPs in total.',
         },
-        addrNoExistErr:'您的地址未发生过交易，暂不能投票',
+        addrNoExistErr:'You aren\'t able to vote for now as your address has no transaction record before',
         section1: {
-            title: '我的投票',
-            head: ['节点名称', '节点状态', '我的投票', '投票状态', '操作'],
+            title: 'My Vote',
+            head: ['Name', 'Status', 'My Vote', 'Status of Voting', 'Operation'],
             nodeStatusMap: {
-                1: '正在候选',
-                2: '停止候选'
+                1: 'Active',
+                2: 'Suspended'
             },
             voteStatusMap: {
-                voted: '投票成功',
-                voting: '正在投票中',
-                canceling: '正在撤销中',
-                voteNotWork: '投票作废'
+                voted: 'Voting Successful',
+                voting: 'Voting',
+                canceling: 'Under revoking',
+                voteNotWork: 'Revoked voting'
             },
-            hoverHelp: '您投票的{nodeName}已经取消注册，您可以直接重新投票、或者撤销投票；如果您不重新投票或撤销投票，{nodeName}重新注册后，您原来的投票将恢复生效。',
+            hoverHelp: 'The node {nodeName} you are voted for has been revoked, you may vote again directly or revoke your voting, If you do not do so, your original voting result will be recovered after the {nodeName} re-registering',
             confirm: {
-                title: '撤销投票',
-                cancelText: '确认撤销',
-                submitText: '暂不撤销'
+                title: 'Revoke voting',
+                cancelText: 'Confirm',
+                submitText: 'Not yet'
             },
-            toast: '撤销投票请求已发送',
+            toast: 'Revoking request has sent',
             quotaConfirm: {
-                title: '配额不足',
-                content: '无法撤销投票，您需运行PoW或抵押配额才可以撤销投票',
-                leftBtn: {text:'抵押配额'},
-                rightBtn: {text:'运行POW'}
+                title: 'Insufficient Quota',
+                content: 'your left quotas turn out to be insufficient, you can acquire more quotas by running PoW or staking VITE',
+                leftBtn: {text:'Stake Quota'},
+                rightBtn: {text:'Run POW'}
             },
-            operate:'撤销投票',
-            operateBtn:'撤销',
-            cancelVoteErr:'撤销投票失败，请重试'
+            operate:'Revoke Voting',
+            operateBtn:'Revoke',
+            cancelVoteErr:'Failed to revoke voting, please try again'
         },
-
+    
         section2: {
-            title: '候选节点列表',
-            head: ['节点名称', '出块地址', '当前票数', '操作'],
+            title: 'SBP candidates',
+            head: ['Node Name', 'Address', 'Votes', 'Operation'],
             confirm: {
                 normal: {
-                    title: '投票',
-                    cancelText: '暂不投票',
-                    submitText: '确认投票',
-                    content: '您只能给一个节点投票，确认投票给此节点吗？'
+                    title: 'Voting',
+                    cancelText: 'Not yet',
+                    submitText: 'Ready to vote',
+                    content: 'You can vote for only one SBP, are you sure you want to give your vote?'
                 },
                 cover: {
-                    title: '投票',
-                    content: '您已经投票给{nodeName}，请确认是否覆盖当前投票',
-                    cancelText: '确认',
-                    submitText: '取消'
+                    title: 'Voting',
+                    content: 'You\'ve already voted for{nodeName}, are you sure to overwrite current voting record?',
+                    cancelText: 'Confirm',
+                    submitText: 'Cancel'
                 }
             },
-            toast: '投票请求已发送',
+            toast: 'The voting request has sent',
             quotaConfirm: {
-                title: '配额不足',
-                content: '无法投票，您需运行PoW或抵押配额才可以投票',
-                leftBtn: {text:'抵押配额'},
-                rightBtn: {text:'运行POW'}
+                title: 'Insufficient Quota',
+                content: 'your left quotas turn out to be insufficient, you can acquire more quotas by running PoW or staking VITE',
+                leftBtn: {text:'Stake for quota'},
+                rightBtn: {text:'Run POW'}
             },
-            noSearchData:'无结果，换个输入试试',
-            noData:'暂无数据',
-            operate:'投票',
-            operateBtn:'投票',
-            voteErr:'投票失败，请重试'
+            noSearchData:'No content found, please try another input',
+            noData:'No data',
+            operate:'Voting',
+            operateBtn:'Vote',
+            voteErr:'Failed to vote, please try again'
         }
     },
 
 
-    pwdConfirm: {   // [TODO]
-        conf: '开启5分钟内免密操作',
-        title: '输入钱包密码',
-        placeholder: '请输入钱包密码'
+    pwdConfirm: {
+        conf: 'Open password-free mode within 5 minutes',
+        title: 'Password',
+        placeholder: 'Please input password of wallet'
     },
 
     quotaConfirm: {
-        title: '配额不足',
-        describe: '当前配额不足，无法进行{operate}，您需要抵押VITE获取配额才可以{operate}',
-        leftBtn: '暂不{operate}',
-        rightBtn: '获取配额'
+        title: 'Insufficient Quota',
+        describe: 'You cannot {operate} due to insufficient TPS quota. You need to stake VITE for quota to {operate}',
+        leftBtn: 'Not {operate} yet',
+        rightBtn: 'Get Quota'
     },
 
     //common
