@@ -254,7 +254,7 @@ module.exports = {
     SBP: {
         title: 'SBP Registration',
         edit: 'Edit',
-        reward: 'Retrieval of SBP ewards',
+        reward: 'Retrieval of SBP rewards',
         register: 'SBP Registration',
         cancel: 'SBP Cancellation',
         cancelBtn: 'Cancel',
@@ -320,6 +320,7 @@ module.exports = {
     // vote
     vote: {
         title: 'Voting',
+        search: 'Please input node name or block creating address',
         help: {
             title: 'About Voting',
             text: 'You can join and vote for 25 SBPs （Snapshot Block Producer), each round of voting lasts 75s, the polls you can use for voting are equivalent to the amount of VITE tokens owned by voting address, the default selection is the choice of previous round, the SBPs will be chosen from random 23 out of top 25 candidate nodes, plus random 2 out of the candidate nodes ranking 26th-100th on the list, 25 SBPs in total.',

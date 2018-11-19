@@ -4,26 +4,26 @@
     </div>
 </template>
 <script>
-import throttle from "lodash/throttle";
+import throttle from 'lodash/throttle';
 export default {
     props: {
         placeholder: {
             type: String,
-            default: "请输入候选节点名称或者出块地址"
+            default: ''
         },
         value: {
             type: String,
-            default: ""
+            default: ''
         }
     },
     methods: {
         updateKey: throttle(function() {
-            this.$emit("input", this.v);
+            this.$emit('input', this.v);
         }, 500)
     },
     data() {
         return {
-            v: ""
+            v: ''
         };
     }
 };

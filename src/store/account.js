@@ -91,7 +91,6 @@ const getters = {
             };
             balanceInfo[tokenId].icon = defaultToken.icon;
         }
-
         return balanceInfo;
     }
 };
