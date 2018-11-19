@@ -195,10 +195,10 @@ export default {
             this.sendPledgeTx({
                 toAddr: this.toAddr,
                 amount: this.amount
-            }, 'pledgeBlock', (result) => {
+            }, 'pledgeBlock', (result, err) => {
                 this.loading = false;
                 if (!result) {
-                    this.$toast(this.$t('quota.pledgeFail'));
+                    err && this.$toast(this.$t('quota.pledgeFail'), err);
                     return;
                 }
 

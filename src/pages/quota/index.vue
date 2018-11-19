@@ -180,7 +180,7 @@ export default {
                     }, type, cb);
                     return;
                 }
-                cb && cb(false);
+                cb && cb(false, err);
             });
         }
     }

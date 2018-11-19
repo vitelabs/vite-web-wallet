@@ -278,8 +278,6 @@ export default {
                 this.loading = false;
                 let code  = err && err.error ? err.error.code || -1 : 
                     err ? err.code : -1;
-                let message  = err && err.message ? err.message : 
-                    err.error ? err.error.message || '' : '';
 
                 if (code === -35001) {
                     this.$toast(this.$t('transList.valid.bal'));
@@ -290,7 +288,7 @@ export default {
                     return;
                 }
 
-                this.$toast(message || this.$t('hint.err'));
+                this.$toast(null, err);
             });
         },
         startPow() {
@@ -300,10 +298,10 @@ export default {
                 return;
             }
 
-            let transError = (errMsg) => {
+            let transError = (err) => {
                 this.loading = false;
                 this.isShowTrans = true;
-                this.$toast(errMsg || this.$t('accDetail.trans.err'));
+                this.$toast(null, err);
             };
 
             this.loading = true;
@@ -330,7 +328,7 @@ export default {
                     transError(this.$t('accDetail.trans.powTransErr'));
                     return;
                 }
-                transError();
+                transError(err);
             });
         },
 
