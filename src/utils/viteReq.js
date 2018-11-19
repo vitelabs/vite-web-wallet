@@ -22,6 +22,4 @@ WS_RPC.on('close', () => {
     }, 10000);
 });
 
-console.log(WS_RPC);
-
 export default WS_RPC;
