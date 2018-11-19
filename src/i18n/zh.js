@@ -432,6 +432,7 @@ module.exports = {
         acEmpty: '账号不可为空',
         pwEmpty: '密码不能为空',
         noData: '暂无数据',
-        err: '发生错误'
+        err: '发生错误',
+        request: '{name}请求已发送，请耐心等待'
     }
 };

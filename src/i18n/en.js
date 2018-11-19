@@ -369,7 +369,7 @@ module.exports = {
                 },
                 cover: {
                     title: 'Voting',
-                    content: 'You\'ve already voted for{nodeName}, are you sure to overwrite current voting record?',
+                    content: 'You\'ve already voted for {nodeName}, are you sure to overwrite current voting record?',
                     cancelText: 'Confirm',
                     submitText: 'Cancel'
                 }
@@ -431,6 +431,7 @@ module.exports = {
         acEmpty: 'Account cannot be empty!',
         pwEmpty: 'Password cannot be empty!',
         noData: 'No Data',
-        err: 'Oops, error occurs'
+        err: 'Oops, error occurs',
+        request: '{name}请求已发送，请耐心等待'
     }
 };
