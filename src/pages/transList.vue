@@ -1,6 +1,6 @@
 <template>
     <div class="trans-list-wrapper">
-        <div class="title __pointer">{{ $t('transList.title') }}</div>
+        <sec-title class="title" :isShowHelp="false"></sec-title>
 
         <div class="trans-list-content">
             <tabel-list class="big-trans" :headList="[{
@@ -55,9 +55,9 @@
 <script>
 import sendImg from 'assets/imgs/send.svg';
 import receiveImg from 'assets/imgs/receive.svg';
-
 import pagination from 'components/pagination.vue';
 import tabelList from 'components/tabelList.vue';
+import secTitle from 'components/secTitle';
 import date from 'utils/date.js';
 import { timer } from 'utils/asyncFlow';
 import loopTime from 'config/loopTime';
@@ -66,7 +66,7 @@ let transListInst = null;
 
 export default {
     components: {
-        pagination, tabelList
+        pagination, tabelList, secTitle
     },
     mounted() {
         this.currentPage = this.$store.state.transList.currentPage;
@@ -188,10 +188,6 @@ export default {
     padding: 40px;
     height: 100%;
     .title {
-        font-family: $font-bold, arial, sans-serif;
-        font-size: 24px;
-        color: #1D2024;
-        line-height: 32px;
         margin-bottom: 40px;
     }
     .trans-list-content {

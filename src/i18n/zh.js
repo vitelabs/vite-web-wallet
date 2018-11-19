@@ -417,7 +417,8 @@ module.exports = {
         understand: '我已了解',
         edit: '编辑',
         copy: '复制',
-        reReg: '重新注册'
+        reReg: '重新注册',
+        otherProd: '使用 Vite 其他产品'
     },
     paging: {
         pre: '上一页',

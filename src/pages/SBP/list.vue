@@ -243,7 +243,7 @@ export default {
 <style lang="scss" scoped>
 @import '~assets/scss/table.scss';
 .__tb.tb-list {
-    min-width: 980px;
+    min-width: 1080px;
 }
 .tipsicon {
     position: relative;
@@ -271,7 +271,7 @@ export default {
 }
 .name {
     width: 20%;
-    min-width: 200px;
+    min-width: 300px;
 }
 .addr {
     min-width: 200px;
