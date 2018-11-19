@@ -9,7 +9,6 @@
             <tokenCard v-for="token in tokenList" :key="token.id"
                        :opt="token" :sendTransaction="showTrans"></tokenCard>
         </div>
-
         <transaction v-if="isShowTrans" :token="activeToken" :closeTrans="closeTrans"></transaction>
     </div>
 </template>
@@ -32,18 +31,23 @@ export default {
         };
     },
     computed: {
-        tokenList() {
-            // force vite at first
-            const tokenList=JSON.parse(JSON.stringify(this.$store.getters.tokenBalanceList));
-            const l=[];
-            if(tokenList['tti_5649544520544f4b454e6e40']){
-                l.push(tokenList['tti_5649544520544f4b454e6e40']);
-                delete tokenList['tti_5649544520544f4b454e6e40'];
+        tokenList() {   // Force vite at first
+            const tokenList = JSON.parse(JSON.stringify(this.$store.getters.tokenBalanceList));
+            let viteTokenInfo = viteWallet.Ledger.getTokenInfo();
+            if (!viteTokenInfo) {
+                return tokenList;
+            }
+
+            const list = [];
+            let viteId = viteTokenInfo.tokenId;
+            if (tokenList[viteId]) {
+                list.push(tokenList[viteId]);
+                delete tokenList[viteId];
             }
             Object.keys(tokenList).forEach(k=>{
-                l.push(tokenList[k]);
+                list.push(tokenList[k]);
             });
-            return l;
+            return list;
         }
     },
     methods: {

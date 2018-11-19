@@ -31,10 +31,8 @@ traversing('./src/pages/', (fPath, next, val) => {
     // pages/XXX.vue
     if (tmpPath === val && val.indexOf('.vue') === val.length - 4) {
         let name = val.replace('.vue', '');
-        if (name === 'index') {
-            return;
-        }
         pushRoute(fPath, tmpPath, name);
+        return;
     }
 
     // pages/XXX/XXX/XXX/index.vue
