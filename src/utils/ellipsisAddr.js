@@ -1,6 +1,9 @@
-export default function(addr) {
+export default function(addr, len = 10) {
     if (!addr) {
         return '';
     }
-    return addr.length > 25 ? addr.slice(0, 15) + '......' + addr.slice(-10) : '';
+    let beforeLen = 5 + len;
+    let afterLen = len;
+    return addr.length > (beforeLen + afterLen) ? 
+        addr.slice(0, beforeLen) + '......' + addr.slice(-afterLen) : '';
 }

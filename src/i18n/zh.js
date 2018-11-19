@@ -9,8 +9,14 @@ module.exports = {
         text1: '创建账户时，请务必备份您的助记词，如果您访问了一个钓鱼网站或者丢失了您的备份，本站无法为您恢复资金。',
         text2: '由于本站不存储你的私钥或助记词，如果您更换浏览器、电脑或者清除浏览器缓存，需要通过备份助记词恢复账号。',
         text3: '如果使用了从助记词恢复地址的方式，请保证助记词绝对正确，如果有细微的不同都可能无法恢复您的地址。',
-        text4: '当前版本钱包为预览版，您获得的VITE测试代币仅用于测试，无任何实际价值，同时官方会不定期对测试代币进行清零。',
-        btn: '我已了解'
+        text4: '当前版本钱包为预览版，您获得的VITE测试代币仅用于测试，无任何实际价值，同时官方会不定期对测试代币进行清零。'
+    },
+    test: {
+        t: '预览版',
+        txt1: '预览版钱包是VITE官方发布的轻节点钱包',
+        txt2: '当前版本钱包支持查询账户余额、对外发送交易、默认签收交易、抵押VITE获取配额等功能。',
+        txt3: '同时支持获取测试代币，支持用户使用测试代币体验产品，官方发布的测试代币仅用于测试，无任何实际价值，同时官方会不定期对测试代币进行清零。',
+        v: '当前版本：{version}'
     },
 
     mnemonic: {
@@ -54,14 +60,6 @@ module.exports = {
         firstDone: '初始化已完成',
         firstDoing: '初始化中',
         blockHeight: '快照块高度'
-    },
-    
-    test: {
-        t: '预览版',
-        txt1: '预览版钱包是VITE官方发布的轻节点钱包',
-        txt2: '当前版本钱包支持查询账户余额、对外发送交易、默认签收交易、抵押VITE获取配额等功能。',
-        txt3: '同时支持获取测试代币，支持用户使用测试代币体验产品，官方发布的测试代币仅用于测试，无任何实际价值，同时官方会不定期对测试代币进行清零。',
-        v: '当前版本：预览版'
     },
 
     // account list
@@ -138,7 +136,7 @@ module.exports = {
         },
         quota: {
             title: '配额不足',
-            describe: '配额不足，无法进行交易，您需要删除描述文字并运行PoW 或 抵押VITE才可以继续转账',
+            describe: '配额不足，建议您点击运行PoW获取配额或抵押VITE获取配额',
             left: '运行PoW',
             right: '抵押VITE'
         },
@@ -149,11 +147,12 @@ module.exports = {
         }
     },
 
-    pow: '运行PoW...',
-
+    // quota
     quota: {
         title: '获取配额',
-        Q1: '快速理解配额',
+        help: {
+            title: '快速理解配额'
+        },
         myQuota: '我的当前配额',
         maxTxNum: '最大交易笔数',
         beneficialAddr: '配额受益地址',
@@ -175,7 +174,6 @@ module.exports = {
         maxAmt: '取回金额在0~{amount}之间”，{amount}为当前可取回最大金额',
         confirm: {
             help: {
-                btn: '我已了解',
                 t1: '什么是配额',
                 txt1: '在Vite系统中，用户不是通过支付手续费的方式来购买一次交易所需的燃料，而是通过一种基于配额的模型来获取计算资源，发送交易所需配额=基础配额(请求)+配额(附带的文本资料)，接受交易所需配额=基础配额(响应)。这个基于配额的资源配置协议允许用户通过两种方式来获取更高的资源配额：抵押Vite获取配额、运行PoW',
                 t2: '什么是抵押',
@@ -229,8 +227,7 @@ module.exports = {
             bal:'余额不足',
             pswd:'密码错误',
             amt:'金额格式错误',
-            succ:'转账成功',
-            err: '发生错误'
+            succ:'转账成功'
         },
         timestamp: '时间戳',
         tAddress: '交易方地址',
@@ -239,7 +236,163 @@ module.exports = {
         tDetail: '交易详情',
     },
 
+    // SBP
+    SBP: {
+        title: '注册SBP',
+        edit: '编辑',
+        reward: '提取奖励',
+        register: '注册SBP',
+        cancel: '撤销注册SBP',
+        cancelBtn: '撤销',
+        help: {
+            title: '关于SBP',
+            text: 'SBP（Snapshot Block Producer）为具有出块权利的节点，您可以通过抵押一定数量的VITE注册成为SBP候选节点；每轮（时长75秒）会选举出25个SBP，每轮得票数前25名中随机选出23个作为SBP，得票数26-100名中随机选出2个作为SBP；出块奖励的50%将作为按块奖励分配给该块的出块节点，另外50%将作为按票奖励分配给该轮次得票数排名前100的节点。<br/><br/>一个注册地址（抵押地址）可以注册多个出块节点（节点名称），节点名称被一个注册地址使用后不能再被其他注册地址使用；节点名称可以更换出块地址，出块地址被一个节点名称使用后不能再被其他节点名称使用。'
+        },
+        confirm: {
+            title: '注册SBP候选节点',
+            describe: '提交注册后，当前地址的{amount}VITE将被锁定约90天，解锁后可以撤销注册，抵押金额将退回抵押地址',
+            leftBtn: '暂不注册',
+            rightBtn: '确认注册',
+            edit: {
+                title: '更换出块地址',
+                placeholder: '请输入新的出块地址',
+                btn: '确认修改'
+            },
+            reward: {
+                title: '提取出块奖励',
+                amount: '本次可提奖励金额（约）',
+                hint: '为了您的资金安全，接收出块奖励地址应尽量与出块地址不同',
+                time: '本次可提时间范围',
+                placeholder: '请输入接收出块奖励地址',
+                btn: '提取奖励'
+            }
+        },
+        section1: {
+            title: '提交注册',
+            nodeName: '节点名称',
+            producerAddr: '出块地址',
+            quotaAddr: '抵押地址',
+            quotaTime: '抵押周期',
+            allReward: '全部可提取的出块奖励',
+            time: '7776000个快照块（约90天）',
+            quotaAmount: '抵押金额',
+            confirmBtn: '提交注册',
+            namePlaceholder: '请输入节点名称',
+            nameHint: '40个字符以内, 支持大小写英文字母、数字、\'_\'、\'.\'',
+            nameErr: '节点名称不合法',
+            nameUsed: '此节点名称已被注册',
+            addrPlaceholder: '请输入快照块出块地址',
+            addrHint: '出块地址必须是全节点地址且保持运行状态',
+            addrErr: '出块地址不合法',
+            addrUsed: '此出块地址已被使用',
+            registerSuccess: '注册请求已发出',
+            registerFail: '注册请求失败'
+        },
+        section2: {
+            title: '注册信息',
+            updateSuccess: '修改请求已发送',
+            updateFail: '修改请求发送失败',
+            rewardSuccess: '提取奖励请求已发送，请您稍后查询账户余额',
+            rewardFail: '提取奖励请求发送失败',
+            cancelSuccess: '撤销请求已发送',
+            cancelFail: '撤销请求发送失败',
+            nowReward: '本次可提取的快照块高度范围及奖励金额',
+            rewardAddr: '提取奖励地址',
+            expireDate: '预计到期时间: {time}',
+            cancelConfirm: {
+                title: '撤销注册SBP',
+                describe: '撤销后您的抵押金额将退回抵押地址；若想成为SBP，您需重新提交注册申请'
+            }
+        }
+    },
+
+    // vote
+    vote: { // [TODO]
+        title: '投票',
+        search: '请输入候选节点名称或者出块地址',
+        help: {
+            title: '关于投票',
+            text: '您可以参与投票选出共25个SBP（Snapshot Block Producer），每轮投票时间共75秒，您的投票数为投票地址所拥有的VITE数量，默认为您保持上一轮的投票意向；每轮得票量排名前25名的候选节点中随机23个及排名26-100名的候选节点中随机2个共25个节点将当选SBP。',
+        },
+        addrNoExistErr:'您的地址未发生过交易，暂不能投票',
+        section1: {
+            title: '我的投票',
+            head: ['节点名称', '节点状态', '我的投票', '投票状态', '操作'],
+            nodeStatusMap: {
+                1: '正在候选',
+                2: '停止候选'
+            },
+            voteStatusMap: {
+                voted: '投票成功',
+                voting: '正在投票中',
+                canceling: '正在撤销中',
+                voteNotWork: '投票作废'
+            },
+            hoverHelp: '您投票的{nodeName}已经取消注册，您可以直接重新投票、或者撤销投票；如果您不重新投票或撤销投票，{nodeName}重新注册后，您原来的投票将恢复生效。',
+            confirm: {
+                title: '撤销投票',
+                cancelText: '确认撤销',
+                submitText: '暂不撤销'
+            },
+            toast: '撤销投票请求已发送',
+            quotaConfirm: {
+                title: '配额不足',
+                content: '配额不足，建议您点击运行PoW获取配额或抵押VITE获取配额',
+                leftBtn: {text:'抵押配额'},
+                rightBtn: {text:'运行POW'}
+            },
+            operate:'撤销投票',
+            operateBtn:'撤销',
+            cancelVoteErr:'撤销投票失败，请重试'
+        },
+
+        section2: {
+            title: '候选节点列表',
+            head: ['节点名称', '出块地址', '当前票数', '操作'],
+            confirm: {
+                normal: {
+                    title: '投票',
+                    cancelText: '暂不投票',
+                    submitText: '确认投票',
+                    content: '您只能给一个节点投票，确认投票给此节点吗？'
+                },
+                cover: {
+                    title: '投票',
+                    content: '您已经投票给{nodeName}，请确认是否覆盖当前投票',
+                    cancelText: '确认',
+                    submitText: '取消'
+                }
+            },
+            toast: '投票请求已发送',
+            quotaConfirm: {
+                title: '配额不足',
+                content: '配额不足，建议您点击运行PoW获取配额或抵押VITE获取配额',
+                leftBtn: {text:'抵押配额'},
+                rightBtn: {text:'运行POW'}
+            },
+            noSearchData:'无结果，换个输入试试',
+            noData:'暂无数据',
+            operate:'投票',
+            operateBtn:'投票',
+            voteErr:'投票失败，请重试'
+        }
+    },
+
+    pwdConfirm: {
+        conf: '开启5分钟内免密操作',
+        title: '输入钱包密码',
+        placeholder: '请输入钱包密码'
+    },
+
+    quotaConfirm: {
+        title: '配额不足',
+        describe: '当前配额不足，无法进行{operate}，您需要抵押VITE获取配额才可以{operate}',
+        leftBtn: '暂不{operate}',
+        rightBtn: '获取配额'
+    },
+
     // common
+    pow: '运行PoW...',    
     btn: {
         create: '创建',
         cancel: '取消',
@@ -248,6 +401,8 @@ module.exports = {
         back: '返回',
         submit: '确定',
         next: '下一步',
+        understand: '我已了解',
+        edit: '编辑'
     },
     paging: {
         pre: '上一页',
@@ -261,6 +416,7 @@ module.exports = {
         pwErr: '密码错误',
         acEmpty: '账号不可为空',
         pwEmpty: '密码不能为空',
-        noData: '暂无数据'
+        noData: '暂无数据',
+        err: '发生错误'
     }
 };

@@ -1,13 +1,13 @@
 import Vue from 'vue';
-import confirmComponent from './confirm.vue';
+import confirmComponent from '../confirm.vue';
 
 const Confirm = Vue.extend(confirmComponent);
 let instance = new Confirm({
     el: document.createElement('div')
 });
-document.body.appendChild(instance.$el);
 
 export default function({
+    showMask = true,
     title, 
     singleBtn = false, 
     closeBtn = {
@@ -21,21 +21,35 @@ export default function({
     rightBtn = {
         text: '',
         click: () => {}
-    }
+    },
+    content = ''
 }) {
+    let _close = (cb) => {
+        try {
+            document.body.removeChild(instance.$el);
+        } catch(err) {
+            console.warn(err);
+        }
+        cb && cb();
+    };
+
+    instance.showMask = showMask;
     instance.title = title;
     instance.singleBtn = singleBtn;
     instance.closeIcon = closeBtn.show;
-    instance.close = closeBtn.click;
+    instance.close = ()=>{
+        _close(closeBtn ? closeBtn.click : null);
+    };
     instance.leftBtnTxt = leftBtn.text;
-    instance.leftBtnClick = leftBtn.click;
+    instance.leftBtnClick = () => {
+        _close(leftBtn ? leftBtn.click : null);
+    };
     instance.rightBtnTxt = rightBtn.text;
-    instance.rightBtnClick = rightBtn.click;
+    instance.rightBtnClick = () => {
+        _close(rightBtn ? rightBtn.click : null);
+    };
+    instance.content = content || '';
 
-    // Vue.nextTick(() => {
-    //     instance.show = true;
-    //     setTimeout(() => {
-    //         instance.show = false;
-    //     }, toastDuration);
-    // });
+    document.body.appendChild(instance.$el);
+    return true;
 }

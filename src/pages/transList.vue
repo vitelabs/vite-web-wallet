@@ -59,8 +59,8 @@ import receiveImg from 'assets/imgs/receive.svg';
 import pagination from 'components/pagination.vue';
 import tabelList from 'components/tabelList.vue';
 import date from 'utils/date.js';
-import timer from 'utils/asyncFlow';
-import loopTime from 'loopTime';
+import { timer } from 'utils/asyncFlow';
+import loopTime from 'config/loopTime';
 
 let transListInst = null;
 
@@ -124,7 +124,7 @@ export default {
                     type: `<img class="icon" src='${typeImg}'/>`,
                     amount: trans.amount + ' ' + trans.token,
                     hash: trans.hash,
-                    transAddr: trans.transAddr
+                    transAddr: trans.smallTransAddr
                 });
             });
             return nowList;
@@ -266,7 +266,7 @@ export default {
 }
 
 @media only screen and (max-width: 500px) {    
-    .small-trans.tabel-list {
+    .small-trans.__tb{
         min-width: 0;
     }
     .tType {
@@ -275,13 +275,8 @@ export default {
     }
     .address {
         overflow: hidden;
-        min-width: 200px;
+        min-width: 180px;
         width: 25%;
-    }
-    .sum {
-        width: 14%;
-        float: right;
-        min-width: 60px;
     }
 }
 </style>

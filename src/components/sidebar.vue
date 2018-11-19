@@ -18,6 +18,20 @@
             <img v-show="active !== 'quota'" :src="quota" />
             <img v-show="active === 'quota'" :src="quotaActive"  />
         </router-link>
+
+        <router-link class="__pointer icon" :class="{
+            'active': active === 'SBP'
+        }" :to="{ name: 'SBP' }">
+            <img v-show="active !== 'SBP'" :src="SBP" />
+            <img v-show="active === 'SBP'" :src="SBPActive"  />
+        </router-link>
+
+        <router-link class="__pointer icon" :class="{
+            'active': active === 'vote'
+        }" :to="{ name: 'vote' }">
+            <img v-show="active !== 'vote'" :src="vote" />
+            <img v-show="active === 'vote'" :src="voteActive"  />
+        </router-link>
         
         <router-link class="__pointer icon" :class="{
             'active': active === 'transList'
@@ -57,6 +71,10 @@ import logoutDefault from 'assets/imgs/logout_default.svg';
 import logoutActive from 'assets/imgs/logout_pressed.svg';
 import quota from 'assets/imgs/quota_default.svg';
 import quotaActive from 'assets/imgs/quota_pressed.svg';
+import SBP from 'assets/imgs/SBP_default.svg';
+import SBPActive from 'assets/imgs/SBP_active.svg';
+import vote from 'assets/imgs/vote_default.svg';
+import voteActive from 'assets/imgs/vote_active.svg';
 
 export default {
     components: {
@@ -83,7 +101,11 @@ export default {
             logoutDefault,
             logoutActive,
             quota,
-            quotaActive
+            quotaActive,
+            SBP,
+            SBPActive,
+            vote,
+            voteActive
         };
     },
     methods: {
@@ -101,8 +123,6 @@ export default {
             this.logoutHover = false;
         },
         logout() {
-            let activeAccount = this.$wallet.getActiveAccount();
-            activeAccount && activeAccount.lock();
             this.$router.push({
                 name: 'login'
             });
@@ -146,7 +166,7 @@ export default {
         align-items: center;
         width: 100%;
         height: 54px;
-        margin-top: 48px;
+        margin-top: 30px;
         &.active:before {
             content: '';
             position: absolute;
@@ -162,10 +182,13 @@ export default {
     }
     ._bottom {
         position: absolute;
-        bottom: 60px;
+        bottom: 50px;
         width: 100%;
+        .icon {
+            margin-top: 0;
+        }
         .setting {
-            margin-bottom: 35px;
+            margin-bottom: 30px;
         }
         .logout {
             height: 30px;

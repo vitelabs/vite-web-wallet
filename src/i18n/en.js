@@ -9,8 +9,15 @@ module.exports = {
         text1: 'Please be sure to backup your seed phrase when creating account. We cannot guarantee to restore your assets in case of you visit scam sites or lose your backups.',
         text2: 'Noted that our site don\'t reserve your private key or seed phrase. Therefore, you need to restore your account via seed phrase if you decide to change browser, clear local cookies or even replace your PC.',
         text3: 'Please make sure that the seed phrase is a hundred percent correct if you choose to restore address with it. Otherwise, any tiny little difference will lead to the result that your address cannot be restored successfully.',
-        text4: 'The current version of wallet is preview version, the Vite test tokens you obtained is only for testing and has no any actual value. Meanwhile, the official will occasionally clear test tokens.',
-        btn: 'I understand'
+        text4: 'The current version of wallet is preview version, the Vite test tokens you obtained is only for testing and has no any actual value. Meanwhile, the official will occasionally clear test tokens.'
+    },
+
+    test: {
+        t: 'Preview Version',
+        txt1: 'The preview version of wallet is a lightweight-node wallet officially issued by VITE.',
+        txt2: 'The current version supports functions of checking account balance, sending transactions, receiving transactions in default, acquiring test tokens, staking VITE tokens for TPS quota and etc.',
+        txt3: 'Support acquiring test tokens and experiencing the product by using them, the test tokens issued by VITE official can be only used for testing and with no actual value, it will be cleared by VITE official sporadically',
+        v: 'Current version: {version}'
     },
 
     mnemonic: {
@@ -54,14 +61,6 @@ module.exports = {
         firstDone: 'Init Done',
         firstDoing: 'Initializing',
         blockHeight: 'Snapshot Block Height'
-    },
-
-    test: { // [TODO]
-        t: 'Preview Version',
-        txt1: 'The preview version of wallet is a lightweight-node wallet officially issued by VITE.',
-        txt2: 'The current version supports functions of checking account balance, sending transactions, receiving transactions in default, acquiring test tokens, staking VITE tokens for TPS quota and etc.',
-        txt3: 'Support acquiring test tokens and experiencing the product by using them, the test tokens issued by VITE official can be only used for testing and with no actual value, it will be cleared by VITE official sporadically',
-        v: 'Current version: Preview Version'
     },
 
     // account list
@@ -138,7 +137,7 @@ module.exports = {
         },
         quota: {
             title: 'Insufficient Quota',
-            describe: 'Not available to send a transaction due to lack of quota, please delete descriptive text and run PoW, or gain quota by staking token to resume.',
+            describe: 'your left quotas turn out to be insufficient, you can acquire more quotas by running PoW or staking VITE',
             left: 'Run PoW',
             right: 'Stake VITE'
         },
@@ -149,14 +148,15 @@ module.exports = {
         }
     },
 
-    pow: 'Running PoW...',
 
     quota: {
         title: 'Get Quota',
-        Q1: 'Quick understanding of quota',
+        help: {
+            title: 'Quick understanding of quota'
+        },
         myQuota: 'My Quota',
         maxTxNum: 'Maximum number of Txs',
-        beneficialAddr: 'Profit Address',
+        beneficialAddr: 'Quota Recipient Address',
         fromAddr: 'Deduction address',
         amount: 'Staking amount',
         time: 'Staking frozen duration',
@@ -175,7 +175,6 @@ module.exports = {
         maxAmt: 'Receiving amount between 0~{amount}”, the current maximum amount is {amount}',
         confirm: {
             help: {
-                btn: 'I understand',
                 t1: 'What is quota? ',
                 txt1: 'In the Vite system, users do not purchase the gas required for a transaction by paying a fee, but acquire the computing resource through a quota-based model. Required quota for sending a transaction = the basic quota (request) + quota ( The attached text data), Quota required to accept a transaction = the basic quota (response). This quota-based resource configuration protocol allows users to obtain higher resource quotas in two ways: Staking VITE to obtain quotas and run PoW.',
                 t2: 'What is staking?',
@@ -224,13 +223,12 @@ module.exports = {
             confirms: 'Confirming',
             confirmed: 'Confirmed',
         },
-        valid:{
-            addr:'Address format error',
-            bal:'Insufficient balance',
-            pswd:'Password error',
-            amt:'Amount format error',
-            succ:'Transaction successful!',
-            err: 'Oops, error occurs'
+        valid: {
+            addr: 'Address format error',
+            bal: 'Insufficient balance',
+            pswd: 'Password error',
+            amt: 'Amount format error',
+            succ: 'Transaction successful!'
         },
         timestamp: 'Timestamp',
         tAddress: 'Address',
@@ -238,8 +236,162 @@ module.exports = {
         sum: 'Amount',
         tDetail: 'Transaction Detail'
     },
+
+    // SBP
+    SBP: {
+        title: 'SBP Registration',
+        edit: 'Edit',
+        reward: 'Retrieval of SBP rewards',
+        register: 'SBP Registration',
+        cancel: 'SBP Cancellation',
+        cancelBtn: 'Cancel',
+        help: {
+            title: 'About SBP',
+            text: 'SBP（Snapshot Block Producer）is a node that has right to creating blocks, you can register to be a SBP candidate by staking a certain amount of VITE, each round (about 75 seconds) will elect 25 SBPs, the SBPs will be elected from random 23 out of top 25 candidate nodes, plus random 2 out of the candidate nodes ranking 26th-100th on the list. The 50% of block creating rewards will be allocated to the block creating node, the other 50% will be allocated to nodes that are ranked on top 100 as voting rewards. <br/><br/> One registration address (staking address) can register multiple block creating nodes (node names), a node name cannot be used if the node name has been registered by a registration address. A node name can switch block creating address, however, block creating address cannot be reused by other node names.'
+        },
+        confirm: {
+            title: 'Registration of SBP candidates',
+            describe: 'The {amount} VITE of current address will be locked about 90 days when you submit registration,  the amount will be returned to staking address after being unlocked',
+            leftBtn: 'Not register yet',
+            rightBtn: 'Ready to register',
+            edit: {
+                title: 'Change block creating address',
+                placeholder: 'please input new block creating address',
+                btn: 'Confirm to change'
+            },
+            reward: {
+                title: 'Retrieve block creating rewards',
+                placeholder: 'Please input rewards recipient address',
+                btn: 'Retrieval of Rewards'
+            }
+        },
+        section1: {
+            title: 'Submit Registration',
+            nodeName: 'Node Name',
+            producerAddr: 'Block Creation Address',
+            quotaAddr: 'Staking Address',
+            quotaTime: 'Staking Period',
+            allReward: 'All of the retrievable block creating rewards',
+            time: '7776000 snapshot blocks（approximately 90 days）',
+            quotaAmount: 'Staking Amount',
+            confirmBtn: 'Submit Registration',
+            namePlaceholder: 'Please input node name',
+            nameHint: 'Within 40 characters, support English letters (both upper and lower cases), numbers, \'_\'、\'.\'',
+            nameErr: 'This node name is illegal',
+            nameUsed: 'This node name is occupied',
+            addrPlaceholder: 'Please input snapshot block creating address',
+            addrHint: 'The block creating address must be a full node and keep up running',
+            addrErr: 'Illegal address',
+            addrUsed: 'This address has been occupied',
+            registerSuccess: 'Registration request has sent',
+            registerFail: 'Registration request failed'
+        },
+        section2: {
+            title: 'Registration Information',
+            updateSuccess: 'Modify request has sent',
+            updateFail: 'Failed to send modify request',
+            rewardSuccess: 'Request of Rewards retrieval has sent',
+            rewardFail: 'Failed to send the request of rewards retrieving',
+            cancelSuccess: 'Revoking request has sent',
+            cancelFail: 'Failed to send revoking request',
+            nowReward: 'The range of snapshot block height and reward that can be requested at this time',
+            rewardAddr: 'Retrieval Address',
+            expireDate: 'Expire Date: {time}',
+            cancelConfirm: {
+                title: 'Revoke registration of SBP',
+                describe: 'The staking amount will be returned back to your staking address after revoking, you have to re-submit the registration to become a SBP'
+            }
+        }
+    },
+
+    // vote
+    vote: {
+        title: 'Voting',
+        search: 'Please input node name or block creating address',
+        help: {
+            title: 'About Voting',
+            text: 'You can join and vote for 25 SBPs （Snapshot Block Producer), each round of voting lasts 75s, the polls you can use for voting are equivalent to the amount of VITE tokens owned by voting address, the default selection is the choice of previous round, the SBPs will be chosen from random 23 out of top 25 candidate nodes, plus random 2 out of the candidate nodes ranking 26th-100th on the list, 25 SBPs in total.',
+        },
+        addrNoExistErr:'You aren\'t able to vote for now as your address has no transaction record before',
+        section1: {
+            title: 'My Vote',
+            head: ['Name', 'Status', 'My Vote', 'Status of Voting', 'Operation'],
+            nodeStatusMap: {
+                1: 'Active',
+                2: 'Suspended'
+            },
+            voteStatusMap: {
+                voted: 'Voting Successful',
+                voting: 'Voting',
+                canceling: 'Under revoking',
+                voteNotWork: 'Revoked voting'
+            },
+            hoverHelp: 'The node {nodeName} you are voted for has been revoked, you may vote again directly or revoke your voting, If you do not do so, your original voting result will be recovered after the {nodeName} re-registering',
+            confirm: {
+                title: 'Revoke voting',
+                cancelText: 'Confirm',
+                submitText: 'Not yet'
+            },
+            toast: 'Revoking request has sent',
+            quotaConfirm: {
+                title: 'Insufficient Quota',
+                content: 'your left quotas turn out to be insufficient, you can acquire more quotas by running PoW or staking VITE',
+                leftBtn: {text:'Stake Quota'},
+                rightBtn: {text:'Run POW'}
+            },
+            operate:'Revoke Voting',
+            operateBtn:'Revoke',
+            cancelVoteErr:'Failed to revoke voting, please try again'
+        },
     
+        section2: {
+            title: 'SBP candidates',
+            head: ['Node Name', 'Address', 'Votes', 'Operation'],
+            confirm: {
+                normal: {
+                    title: 'Voting',
+                    cancelText: 'Not yet',
+                    submitText: 'Ready to vote',
+                    content: 'You can vote for only one SBP, are you sure you want to give your vote?'
+                },
+                cover: {
+                    title: 'Voting',
+                    content: 'You\'ve already voted for {nodeName}, are you sure to overwrite current voting record?',
+                    cancelText: 'Confirm',
+                    submitText: 'Cancel'
+                }
+            },
+            toast: 'The voting request has sent',
+            quotaConfirm: {
+                title: 'Insufficient Quota',
+                content: 'your left quotas turn out to be insufficient, you can acquire more quotas by running PoW or staking VITE',
+                leftBtn: {text:'Stake for quota'},
+                rightBtn: {text:'Run POW'}
+            },
+            noSearchData:'No content found, please try another input',
+            noData:'No data',
+            operate:'Voting',
+            operateBtn:'Vote',
+            voteErr:'Failed to vote, please try again'
+        }
+    },
+
+
+    pwdConfirm: {
+        conf: 'Open password-free mode within 5 minutes',
+        title: 'Password',
+        placeholder: 'Please input password of wallet'
+    },
+
+    quotaConfirm: {
+        title: 'Insufficient Quota',
+        describe: 'You cannot {operate} due to insufficient TPS quota. You need to stake VITE for quota to {operate}',
+        leftBtn: 'Not {operate} yet',
+        rightBtn: 'Get Quota'
+    },
+
     //common
+    pow: 'Running PoW...',
     btn: {
         create: 'Create',
         cancel: 'Cancel',
@@ -248,6 +400,8 @@ module.exports = {
         back: 'Back',
         submit: 'Submit',
         next: 'Next Step',
+        understand: 'I understand',
+        edit: 'edit'
     },
     paging: {
         pre: 'Prev',
@@ -255,12 +409,13 @@ module.exports = {
         first: 'First',
         last: 'Last',
     },
-    hint:{
+    hint: {
         create: 'Creation failed',
         logoutErr: 'Logout Error!',
         pwErr: 'Incorrect password!',
         acEmpty: 'Account cannot be empty!',
         pwEmpty: 'Password cannot be empty!',
-        noData: 'No Data'
+        noData: 'No Data',
+        err: 'Oops, error occurs'
     }
 };

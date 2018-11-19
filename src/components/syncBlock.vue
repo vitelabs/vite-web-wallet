@@ -16,7 +16,6 @@ let heightEvent = null;
 export default {
     data() {
         return {
-            statusText: '',
             netStatus: false,
             blockHeight: ''
         };
@@ -36,9 +35,9 @@ export default {
         webViteEventEmitter.off(netEvent);
         webViteEventEmitter.off(heightEvent);
     },
-    watch: {
-        netStatus: function() {
-            this.statusText = !this.netStatus ? 'noNet' : 'sync';
+    computed: {
+        statusText() {
+            return !this.netStatus ? 'noNet' : 'sync';
         }
     }
 };

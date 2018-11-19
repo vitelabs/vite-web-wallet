@@ -16,11 +16,21 @@
                 {{ $t('quota.title') }}
             </div>
 
+            <div class="item" @click="go('SBP')" 
+                 :class="{ 'active': active === 'SBP'}">
+                {{ $t('SBP.title') }}
+            </div>
+
+            <div class="item" @click="go('vote')" 
+                 :class="{ 'active': active === 'vote'}">
+                {{ $t('vote.title') }}
+            </div>
+
             <div class="item" @click="go('transList')" 
                  :class="{ 'active': active === 'transList'}">
                 {{ $t('transList.title') }}
             </div>
-            
+
             <div class="item" @click="go('setting')" 
                  :class="{ 'active': active === 'setting'}">
                 {{ $t('setting.title') }}
@@ -60,8 +70,6 @@ export default {
         },
 
         logout() {
-            let activeAccount = this.$wallet.getActiveAccount();
-            activeAccount && activeAccount.lock();
             this.$router.push({
                 name: 'login'
             });
@@ -116,7 +124,7 @@ export default {
     overflow: hidden;
     transition: all 0.3s ease-in-out;
     &.show {
-        height: 300px;
+        height: 420px;
     }
     .item {
         margin-top: 0px;

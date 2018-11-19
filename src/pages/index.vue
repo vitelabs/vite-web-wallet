@@ -18,8 +18,11 @@ import indexLayout from 'components/indexLayout.vue';
 import pageLayout from 'components/pageLayout.vue';
 import update from 'components/update.vue';
 import firstNotice from 'components/firstNotice.vue';
+import {timer} from 'utils/asyncFlow';
+import loopTime from 'config/loopTime';
 
-const homeLayouts = ['account', 'transList', 'setting', 'quota'];
+const homeLayouts = ['account', 'transList', 'setting', 'quota', 'SBP', 'vote'];
+let balanceInfoInst = null;
 
 export default {
     components: {
@@ -45,19 +48,38 @@ export default {
 
             if (toHome) {
                 this.layoutType = 'home';
+                this.startLoopBalance();
                 return;
             }
-
+        
+            this.stopLoopBalance();
             this.layoutType = 'index';
             if (!fromHome) {
                 return;
             }
-            this.$wallet.clearActiveAccount();
 
             // clear all
+            let activeAccount = this.$wallet.getActiveAccount();
+            activeAccount && activeAccount.lock();
+            activeAccount && activeAccount.releasePWD();
+            this.$wallet.clearActiveAccount();
+                        
             this.$store.commit('commitClearBalance');
             this.$store.commit('commitClearTransList');
             this.$store.commit('commitClearPledge');
+        },
+
+        startLoopBalance() {
+            this.stopLoopBalance();
+            let activeAccount = this.$wallet.getActiveAccount();
+            balanceInfoInst = new timer(()=>{
+                return this.$store.dispatch('getBalanceInfo', activeAccount);
+            }, loopTime.ledger_getBalance);
+            balanceInfoInst.start();
+        },
+        stopLoopBalance() {
+            balanceInfoInst && balanceInfoInst.stop();
+            balanceInfoInst = null;
         }
     }
 };
@@ -71,5 +93,11 @@ export default {
     right: 0;
     bottom: 0;
     overflow: auto;
+    min-height: 720px;
+}
+@media only screen and (max-width: 1000px) {
+    .app-wrapper {
+        min-height: auto;
+    }
 }
 </style>

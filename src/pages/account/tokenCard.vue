@@ -13,7 +13,7 @@
                 <span>{{ $t('accDetail.fundFloat') }}</span>
                 <span class="balance">{{ opt.fundFloat || 0 }}</span>
             </div>
-            <div class="tips">
+            <div class="token-tips">
                 <span>{{ opt.onroadNum || 0 }} {{ $t('accDetail.pend') }}</span>
             </div>
         </div>
@@ -97,7 +97,7 @@ export default {
             margin-left: 20px;
         }
     }
-    .tips {
+    .token-tips {
         margin-top: 8px;
         font-size: 12px;
         color: #5b638d;

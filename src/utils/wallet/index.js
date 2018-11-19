@@ -10,7 +10,7 @@ class Wallet {
     constructor() {
         this.activeAccount = null;
     }
-    
+
     getActiveAccount() {
         return this.activeAccount;
     }
@@ -121,13 +121,15 @@ class Wallet {
     }
 
     login({
-        entropy, addr
+        id, entropy, addr
     }, pass) {
         if ( (!entropy && !addr) || !pass ) {
             return false;
         }
 
-        let loginRes = addr ? this._loginKeystore(addr, pass) : this._loginWalletAcc(entropy, pass);
+        let loginRes = addr ? this._loginKeystore(addr, pass) : this._loginWalletAcc({
+            id, entropy, pass
+        });
         if (!loginRes) {
             return false;
         }
@@ -177,11 +179,25 @@ class Wallet {
         return true;
     }
 
-    _loginWalletAcc(entropy, pass) {
+    _loginWalletAcc({
+        id, entropy, pass
+    }) {
         try {
-            let acc = getAccFromEntropy(entropy);
+            let acc;
+            let i;
+            if (id) {
+                acc = getAccFromId(id);
+            } else {
+                let result = getAccFromEntropy(entropy);
+                if (result) {
+                    acc = result.account;
+                    i = result.index;
+                    id = result.id || null;
+                }
+            }
+
             let encryptObj = acc.encryptObj;
-            encryptObj.encryptentropy = entropy;
+            entropy = entropy || encryptObj.encryptentropy;
 
             let before = new Date().getTime();
             let decryptEntropy = $ViteJS.Wallet.Account.decrypt(JSON.stringify(encryptObj), pass);
@@ -204,7 +220,13 @@ class Wallet {
                 name: acc.name
             });
 
+            if (entropy && !id) {
+                statistics.event('keystore', 'resave-id');
+                this.activeAccount.save(i);
+            }
+
             setLast({
+                id,
                 entropy,
                 name: acc.name
             });
@@ -229,7 +251,18 @@ class Wallet {
             return null;
         }
 
-        let acc = last.addr ? getAccFromAddr(last.addr) : getAccFromEntropy(last.entropy);
+        let acc;
+        if (last.addr) {
+            acc = getAccFromAddr(last.addr);
+        } else if (last.id) {
+            acc = getAccFromId(last.id);
+        } else {
+            let result = getAccFromEntropy(last.entropy);
+            if (result) {
+                acc = result.account;
+            }
+        }
+        
         if (!acc) {
             return null;
         }
@@ -294,16 +327,37 @@ class Wallet {
     }
 }
 
-export default Wallet;
+export default  new Wallet();
 
-function getAccFromEntropy(entropy) {
+function getAccFromId(id) {
     let list = acc.getList();
     for(let i=0; i<list.length; i++) {
-        if (list[i].entropy === entropy) {
+        if (list[i].id && list[i].id === id) {
             return list[i];
         }
     }
     return null;
+}
+
+function getAccFromEntropy(entropy) {
+    let result = null;
+    let list = acc.getList();
+    for(let i=0; i<list.length; i++) {
+        if (list[i].entropy === entropy) {
+            if (!list[i].id) {
+                return {
+                    account: list[i],
+                    index: i
+                };
+            }
+            result = {
+                account: list[i],
+                index: i,
+                id: list[i].id
+            };
+        }
+    }
+    return result;
 }
 
 function getAccFromAddr(address) {
