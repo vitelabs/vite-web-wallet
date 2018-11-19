@@ -1,8 +1,8 @@
 {
     "1": {
-        "version": "1.0.0",
-        "zh": "1、新增抵押VITE获取配额功能<br/>2、优化性能，提升钱包登录速度",
+        "version": "1.1.0",
+        "zh": "1. 新增注册SBP（Snapshot Block Producer）功能<br/>2. 新增投票选举SBP功能",
         "en": "1. Added a new feature of staking VITE tokens for TPS quota.<br/>2. Optimized performance to speed up log in.",
-        "time": "1541596987336"
+        "time": "1542620385730"
     }
 }
