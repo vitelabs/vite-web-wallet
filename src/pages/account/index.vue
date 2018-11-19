@@ -1,6 +1,9 @@
 <template>
     <div class="account-wrapper" @click="closeQrCode">
-        <sync-block class="sync-block item"></sync-block>
+        <div class="head">
+            <sync-block class="sync-block"></sync-block>
+            <go-net-btn class="net-btn"></go-net-btn>
+        </div>
         <account-head ref="accountHead" class="item"></account-head>
         <div class="token-list item">
             <tokenCard v-for="token in tokenList" :key="token.id"
@@ -13,13 +16,14 @@
 
 <script>
 import syncBlock from 'components/syncBlock';
+import goNetBtn from 'components/goNetBtn';
 import accountHead from './head';
 import tokenCard from './tokenCard';
 import transaction from './transaction';
 
 export default {
     components: {
-        accountHead, syncBlock, tokenCard, transaction
+        accountHead, syncBlock, tokenCard, transaction, goNetBtn
     },
     data() {
         return {
@@ -37,8 +41,8 @@ export default {
                 delete tokenList['tti_5649544520544f4b454e6e40'];
             }
             Object.keys(tokenList).forEach(k=>{
-                l.push(tokenList[k])
-            })
+                l.push(tokenList[k]);
+            });
             return l;
         }
     },
@@ -71,9 +75,18 @@ export default {
     overflow: auto;
     height: 100%;
     padding: 0 40px;
-    .sync-block {
-        width: 100%;
+    .head {
+        position: relative;
         text-align: center;
+        margin-top: 20px;
+        line-height: 40px;
+    }
+    .sync-block {
+        display: inline-block;
+    }
+    .net-btn {
+        position: absolute;
+        right: 0px;
     }
 }
 .item {
@@ -82,6 +95,24 @@ export default {
 .token-list {
     display: flex;
     flex-wrap: wrap;
+}
+
+@media only screen and (max-width: 850px) {
+    .account-wrapper .head {
+        text-align: left;
+    }
+}
+
+@media only screen and (max-width: 700px) {
+    .account-wrapper {
+        .sync-block {
+            display: block;
+        }
+        .net-btn {
+            position: relative;
+            margin-top: 20px;
+        }
+    } 
 }
 
 @media only screen and (max-width: 550px) {

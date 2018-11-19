@@ -2,8 +2,7 @@
     <div class="acc-list-wrapper">
         <div class="row">
             <span class="title">{{ $t('accList.addr') }}</span>
-            <span class="title meta">{{ $t('accList.addrList') }}</span>
-            <span class="describe">{{ $t('accList.default') }}</span>
+            <div class="describe">{{ $t('accList.default') }}</div>
         </div>
         <div class="acc-list __pointer">
             <div ref="listWrapper" class="list-wrapper">
@@ -89,23 +88,21 @@ export default {
 
 .row {
     width: 100%;
-    margin-bottom: 16px;
-    line-height: 22px;
+    margin-bottom: 10px;
+    line-height: 20px;
 
     .title {
         font-size: 14px;
         color: #1D2024;
         letter-spacing: 0.35px;
         font-family: $font-bold, arial, sans-serif;
-        &.meta {
-            display: none;
-        }
     }
     .describe {
-        float: right;
         font-size: 12px;
         color: #5E6875;
         letter-spacing: 0.3px;
+        line-height: 16px;
+        margin-top: 8px;
     }
 }
 .acc-list {
@@ -173,12 +170,6 @@ export default {
 }
 
 @media only screen and (max-width: 500px) {
-    .row .title {
-        display: none;
-        &.meta {
-            display: inline;
-        }
-    }
     .acc-list .list-wrapper {
         max-height: unset;
     }

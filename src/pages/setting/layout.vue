@@ -1,6 +1,6 @@
 <template>
     <div class="setting-wrapper">
-        <div class="title  __pointer">{{ $t('setting.title') }}</div>
+        <sec-title :isShowHelp="false"></sec-title>
         <div class="content-wrapper">
             <div class="content">
                 <slot></slot>
@@ -32,9 +32,14 @@
 </template>
 
 <script>
+import secTitle from 'components/secTitle';
+
 let heightEvent = null;
 
 export default {
+    components: {
+        secTitle
+    },
     data() {
         return {
             height: '',
@@ -61,12 +66,6 @@ export default {
     box-sizing: border-box;
     padding: 30px;
     height: 100%;
-    .title {
-        font-family: $font-bold, arial, sans-serif;
-        font-size: 24px;
-        color: #1D2024;
-        line-height: 32px;
-    }
     .content-wrapper {
         position: absolute;
         top: 92px;
