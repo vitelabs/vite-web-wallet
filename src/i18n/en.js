@@ -414,7 +414,8 @@ module.exports = {
         next: 'Next Step',
         understand: 'I understand',
         edit: 'edit',
-        copy: 'copy'
+        copy: 'copy',
+        reReg: '重新注册'
     },
     paging: {
         pre: 'Prev',

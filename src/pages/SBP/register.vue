@@ -178,7 +178,7 @@ export default {
                 return;
             }
 
-            this.testAddr();
+            this.producerAddr && this.testAddr();
             this.nodeNameErr = '';
         },
         testAddr() {

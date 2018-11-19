@@ -9,27 +9,27 @@
         </div>
         
         <div v-show="list && list.length" class="__tb_content">
-            <div class="__tb_row __tb_content_row" v-for="(item, index) in list" :key="item.name">
+            <div class="__tb_row __tb_content_row" :class="{
+                'unuse': !!item.isCancel
+            }" v-for="(item, index) in list" :key="item.name">
                 <div class="__tb_cell name __ellipsis">{{ item.name }}</div>
                 <div class="__tb_cell addr">{{ item.nodeAddr }}</div>
-                <div class="__tb_cell amount">{{ item.pledgeAmount }}</div>
+                <div class="__tb_cell amount">{{ item.isCancel ? '--' : item.pledgeAmount }}</div>
                 <div class="__tb_cell height">
-                    {{ item.withdrawHeight }}
-                    <i @click.self.stop="showTime(index)" class="tipsicon __pointer">
+                    {{ item.isCancel ? '--' : item.withdrawHeight }}
+                    <i v-if="!item.isCancel" @click.self.stop="showTime(index)" class="tipsicon __pointer">
                         <tooltips v-show="showTimeTips === index" class="sbp-tooltips"
                                   v-click-outside @clickoutside="hideTime"
                                   :content="$t('SBP.section2.expireDate', { time: item.time })"></tooltips>
                     </i>
                 </div>
                 <div class="__tb_cell operate">
-                    <span class="btn" :class="{
-                        '__pointer': !item.isCancel,
-                        'unuse': item.isCancel    
-                    }" @click="edit(item)">{{ $t('btn.edit') }}</span>
-                    <span class="btn" :class="{
-                        '__pointer': item.isMaturity && !item.isCancel,
-                        'unuse': !item.isMaturity || item.isCancel    
+                    <span v-if="!item.isCancel" class="btn __pointer" @click="edit(item)">{{ $t('btn.edit') }}</span>
+                    <span v-if="!item.isCancel" class="btn" :class="{
+                        '__pointer': item.isMaturity,
+                        'unuse': !item.isMaturity   
                     }" @click="cancel(item)">{{ $t('SBP.cancelBtn') }}</span>
+                    <span v-if="item.isCancel" class="btn __pointer" @click="reg(item)">{{ $t('btn.reReg') }}</span>
                     <!-- <span class="btn" :class="{
                         '__pointer': item.isReward,
                         'unuse': !item.isReward
@@ -48,6 +48,7 @@
 import { quotaConfirm } from 'components/quota/index';
 import tooltips from 'components/tooltips';
 import date from 'utils/date.js';
+import ellipsisAddr from 'utils/ellipsisAddr.js';
 
 export default {
     components: {
@@ -98,6 +99,7 @@ export default {
                 let isMaturity = viteWallet.BigNumber.compared(item.withdrawHeight, currentHeight) <= 0;
                 let isCancel = item.cancelHeight && !viteWallet.BigNumber.isEqual(item.cancelHeight, 0);
                 let isReward = !viteWallet.BigNumber.isEqual(item.availableReward, 0);
+                let addr = ellipsisAddr(item.nodeAddr, 6);
                 
                 let day = date(item.withdrawTime * 1000, this.$i18n.locale);
                 list.push({
@@ -105,7 +107,7 @@ export default {
                     isCancel,
                     isReward,
                     name: item.name,
-                    nodeAddr: item.nodeAddr,
+                    nodeAddr: addr,
                     pledgeAmount: viteWallet.BigNumber.toBasic(item.pledgeAmount, decimals) + ' ' +  this.tokenInfo.tokenSymbol,
                     withdrawHeight: item.withdrawHeight,
                     time: day,
@@ -183,7 +185,7 @@ export default {
 <style lang="scss" scoped>
 @import '~assets/scss/table.scss';
 .__tb.tb-list {
-    min-width: 1150px;
+    min-width: 980px;
 }
 .tipsicon {
     position: relative;
@@ -206,20 +208,23 @@ export default {
         color: #CED1D5;
     }
 }
+.__tb_row.__tb_content_row.unuse {
+    color: #CED1D5;
+}
 .name {
-    width: 5%;
-    min-width: 140px;
+    width: 20%;
+    min-width: 200px;
 }
 .addr {
-    min-width: 470px;
-    width: 25%;
+    min-width: 200px;
+    width: 20%;
 }
 .amount {
     width: 17%;
-    min-width: 150px;
+    min-width: 180px;
 }
 .height {
-    min-width: 185px;
+    min-width: 190px;
     width: 20%;
 }
 .operate {
