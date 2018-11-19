@@ -241,7 +241,7 @@ module.exports = {
     SBP: {
         title: 'SBP Registration',
         edit: 'Edit',
-        reward: 'Retrieval of SBP ewards',
+        reward: 'Retrieval of SBP rewards',
         register: 'SBP Registration',
         cancel: 'SBP Cancellation',
         cancelBtn: 'Cancel',

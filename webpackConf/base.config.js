@@ -26,7 +26,7 @@ let plugins = [
     }),
     new VueLoaderPlugin(),
     new webpack.DefinePlugin({
-        'process.env.powDifficulty': '"67108863"',
+        'process.env.powDifficulty': '"157108864"',
         'process.env.version': `"${packJson.version}"`,
         'process.env.NODE_ENV': `"${process.env.NODE_ENV}"`,
         'process.env.goViteServer': goViteServer[process.env.NODE_ENV || 'dev'],

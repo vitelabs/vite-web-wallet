@@ -89,7 +89,6 @@ const getters = {
                 decimals: '0'
             };
         }
-
         return balanceInfo;
     }
 };
