@@ -31,7 +31,6 @@ export default {
     mounted() {
         this.activeAccount = this.$wallet.getActiveAccount();
         this.mnemonic = this.activeAccount.getMnemonic() || '';
-        this.mnemonicList = this.mnemonic.split(/\s/);
     },
     data() {
         let activeAccount = this.$wallet.getActiveAccount();
@@ -40,10 +39,14 @@ export default {
         return {
             activeAccount,
             mnemonic,
-            mnemonicList: [],
-            len: 24,
+            len: 12,
             copySuccess: false
         };
+    },
+    computed: {
+        mnemonicList() {
+            return this.mnemonic.split(/\s/);
+        }
     },
     methods: {
         copy() {
@@ -54,10 +57,12 @@ export default {
             }, 2000);
         },
         change() {
-            // this.activeAccount.changeMnemonic(this.len);
+            this.activeAccount.changeMnemonic(this.len);
             this.len = this.len === 24 ? 12 : 24;
+            this.mnemonic = this.activeAccount.getMnemonic() || '';
         },
         login() {
+            this.activeAccount.encrypt();
             this.activeAccount.save();
             this.$router.push({
                 name: 'index'
