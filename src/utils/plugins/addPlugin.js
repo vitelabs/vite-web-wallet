@@ -43,7 +43,18 @@ export default {
             return msg.replace(/(^\s*)|(\s*$)/g, '');
         };
 
-        Vue.prototype.$toast = toast;
+        Vue.prototype.$toast = function(mesage, err, type, position) {
+            if (!err) {
+                toast(mesage, type, position);
+                return ;
+            }
+
+            let code  = err && err.error ? err.error.code || -1 : 
+                err ? err.code : -1;
+            let msg = code === -1 || !this.$i18n.messages.zh.errCode[code] ? 
+                mesage || this.$t('hint.err') : this.$t(`errCode.${code}`);
+            toast(msg, type, position);
+        };
         Vue.prototype.$confirm = confirm;
         Vue.prototype.$statistics = statistics;
     }

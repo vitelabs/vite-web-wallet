@@ -169,7 +169,7 @@ export default {
                     });
                     return;
                 }
-                this.$toast(this.$t('SBP.section1.registerFail'));
+                this.$toast(this.$t('SBP.section1.registerFail'), err);
             });
         },
         reg(item) {
@@ -219,7 +219,7 @@ export default {
                             });
                             return;
                         }
-                        this.$toast(this.$t('SBP.section2.cancelFail'));
+                        this.$toast(this.$t('SBP.section2.cancelFail'), err);
                     });
                 }
             }, true);

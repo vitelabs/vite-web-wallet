@@ -158,13 +158,13 @@ export default {
             this.sendPledgeTx({
                 toAddr: this.activeItem.beneficialAddr,
                 amount
-            }, 'cancelPledgeBlock', (result) => {
+            }, 'cancelPledgeBlock', (result, err) => {
                 this.loading = false;
                 this.activeItem = null;
                 result && this.$toast(this.$t('hint.request', {
                     name: this.$t('quota.list.cancel') 
                 }));
-                !result && this.$toast(this.$t('quota.canclePledgeFail'));
+                !result && err && this.$toast(this.$t('quota.canclePledgeFail'), err);
             });
         },
 
