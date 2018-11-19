@@ -19,8 +19,8 @@
                     <div class="__tb_row" v-for="v in voteList" :key="v.nodeName">
                         <div class="__tb_cell nodename">{{v.nodeName}}</div>
                         <div class="__tb_cell">{{v.nodeStatusText}} <i v-if="v.nodeStatus===2" class="tipsicon hoveraction" @click.self.stop="toggleTips">
-                                <tooltips v-if="isResisterTipsShow" v-click-outside @clickoutside="hideTips" class="unregister-tips" :content="$t('vote.section1.hoverHelp',{nodeName:v.nodeName})"></tooltips>
-                            </i></div>
+                            <tooltips v-if="isResisterTipsShow" v-click-outside @clickoutside="hideTips" class="unregister-tips" :content="$t('vote.section1.hoverHelp',{nodeName:v.nodeName})"></tooltips>
+                        </i></div>
                         <div class="__tb_cell">{{v.voteNum}}</div>
                         <div class="__tb_cell">{{v.voteStatusText}}</div>
                         <div class="__tb_cell" :class="cache?'unclickable':'clickable'" @click="cancelVote(v)">{{v.operate}}</div>
@@ -36,7 +36,7 @@
                 <div class="ct">
                     {{$t('vote.section2.title')}}
                 </div>
-                <search v-model="filterKey" class="filter"></search>
+                <search v-model="filterKey" :placeholder="$t('vote.search')" class="filter"></search>
             </div>
             <div class="tb_container">
                 <div class="__tb">
@@ -64,297 +64,295 @@
 </template>
 
 <script>
-import mockdata from "mock/vote";
-import tooltips from "components/tooltips";
-import search from "components/search";
-import c from "config/constant";
-import secTitle from "components/secTitle";
-import pwdConfirm from "components/password";
-import loading from "components/loading";
-import { doUntill, timer } from "utils/asyncFlow";
-import confirm from "components/confirm";
-import powProcess from "components/powProcess";
+import tooltips from 'components/tooltips';
+import search from 'components/search';
+import c from 'config/constant';
+import secTitle from 'components/secTitle';
+import loading from 'components/loading';
+import { timer } from 'utils/asyncFlow';
+import confirm from 'components/confirm';
+import powProcess from 'components/powProcess';
 
 export default {
-  components: { secTitle, tooltips, search, loading, confirm, powProcess },
-  beforeMount() {
-    this.tokenInfo = viteWallet.Ledger.getTokenInfo();
-    if (!this.tokenInfo) {
-      this.loadingToken = true;
-      viteWallet.Ledger.fetchTokenInfo()
-        .then(tokenInfo => {
-          this.loadingToken = false;
-          this.tokenInfo = tokenInfo;
-        })
-        .catch(err => {
-          console.warn(err);
-        });
-    }
-    this.$store.dispatch("getBalanceInfo", this.$wallet.getActiveAccount());
-    this.updateVoteData();
-    this.updateNodeData();
-    this.nodeDataTimer = new timer(this.updateNodeData, 3 * 1000);
-    this.nodeDataTimer.start();
-    this.voteDataTimer = new timer(this.updateVoteData, 3 * 1000);
-    this.voteDataTimer.start();
-  },
-  data() {
-    return {
-      filterKey: "",
-      nodeData: [],
-      voteData: [],
-      loadingToken: false,
-      tokenInfo: null,
-      cache: null,
-      nodeDataTimer: null,
-      isResisterTipsShow: false
-    };
-  },
-  methods: {
-    hideTips() {
-      this.isResisterTipsShow = false;
+    components: { secTitle, tooltips, search, loading, confirm, powProcess },
+    beforeMount() {
+        this.tokenInfo = viteWallet.Ledger.getTokenInfo();
+        if (!this.tokenInfo) {
+            this.loadingToken = true;
+            viteWallet.Ledger.fetchTokenInfo()
+                .then(tokenInfo => {
+                    this.loadingToken = false;
+                    this.tokenInfo = tokenInfo;
+                })
+                .catch(err => {
+                    console.warn(err);
+                });
+        }
+        this.$store.dispatch('getBalanceInfo', this.$wallet.getActiveAccount());
+        this.updateVoteData();
+        this.updateNodeData();
+        this.nodeDataTimer = new timer(this.updateNodeData, 3 * 1000);
+        this.nodeDataTimer.start();
+        this.voteDataTimer = new timer(this.updateVoteData, 3 * 1000);
+        this.voteDataTimer.start();
     },
-    toggleTips() {
-      this.isResisterTipsShow = !this.isResisterTipsShow;
+    data() {
+        return {
+            filterKey: '',
+            nodeData: [],
+            voteData: [],
+            loadingToken: false,
+            tokenInfo: null,
+            cache: null,
+            nodeDataTimer: null,
+            isResisterTipsShow: false
+        };
     },
-    updateVoteData() {
-      return $ViteJS.Vite.vote_getVoteInfo(
-        c.gid,
-        this.$wallet.getActiveAccount().getDefaultAddr()
-      ).then(data => {
-        this.voteData = data.result ? [data.result] : [];
-        this.voteData[0] && (this.voteData[0].voteStatus = "voted");
-        return this.voteData;
-      });
-    },
-    updateNodeData() {
-      return $ViteJS.Vite.register_getCandidateList(c.gid).then(data => {
-        this.nodeData =
+    methods: {
+        hideTips() {
+            this.isResisterTipsShow = false;
+        },
+        toggleTips() {
+            this.isResisterTipsShow = !this.isResisterTipsShow;
+        },
+        updateVoteData() {
+            return $ViteJS.Vite.vote_getVoteInfo(
+                c.gid,
+                this.$wallet.getActiveAccount().getDefaultAddr()
+            ).then(data => {
+                this.voteData = data.result ? [data.result] : [];
+                this.voteData[0] && (this.voteData[0].voteStatus = 'voted');
+                return this.voteData;
+            });
+        },
+        updateNodeData() {
+            return $ViteJS.Vite.register_getCandidateList(c.gid).then(data => {
+                this.nodeData =
           data.result.map(v => {
-            return {
-              ...v,
-              nodeName: v.name
-            };
+              return {
+                  ...v,
+                  nodeName: v.name
+              };
           }) || [];
-        return this.nodeData;
-      });
-    },
-    cancelVote(v) {
-      if (this.cache) {
-        return;
-      }
-      const activeAccount = this.$wallet.getActiveAccount();
-      const successCancel = d => {
-        const t = Object.assign({}, v);
-        t.isCache = true;
-        t.voteStatus = "canceling"; // 撤销投票中
-        this.cache = t;
-        this.$toast(this.$t("vote.section1.toast"));
-      };
-      const failCancel = e => {
-        const code = e && e.error ? e.error.code || -1 : e ? e.code : -1;
-        if (code === -35002) {
-          const c = Object.assign({}, this.$t("vote.section1.quotaConfirm"));
-          c.leftBtn.click = () => {
-            this.$router.push({
-              name: "quota"
+                return this.nodeData;
             });
-          };
-          (c.rightBtn.click = () => {
-            this.$refs.pow
-              .startPowTx(
-                {
-                  tokenId: this.tokenInfo.tokenId,
-                  nodeName: this.voteList[0].nodeName,
-                  difficulty: "201564160"
-                },
-                "cancelVoteBlock"
-              )
-              .then(successCancel)
-              .catch(failCancel);
-          }),
-            (c.closeBtn = { show: true });
-          this.$confirm(c);
-        } else {
-          this.$toast(this.$t("vote.section1.cancelVoteErr"));
-        }
-      };
-      const sendCancel = () => {
-        activeAccount
-          .sendTx(
-            {
-              tokenId: this.tokenInfo.tokenId,
-              nodeName: this.voteList[0].nodeName
-            },
-            "cancelVoteBlock"
-          )
-          .then(successCancel)
-          .catch(failCancel);
-      };
+        },
+        cancelVote(v) {
+            if (this.cache) {
+                return;
+            }
+            const activeAccount = this.$wallet.getActiveAccount();
+            const successCancel = () => {
+                const t = Object.assign({}, v);
+                t.isCache = true;
+                t.voteStatus = 'canceling'; // 撤销投票中
+                this.cache = t;
+                this.$toast(this.$t('vote.section1.toast'));
+            };
+            const failCancel = e => {
+                const code = e && e.error ? e.error.code || -1 : e ? e.code : -1;
+                if (code === -35002) {
+                    const c = Object.assign({}, this.$t('vote.section1.quotaConfirm'));
+                    c.leftBtn.click = () => {
+                        this.$router.push({
+                            name: 'quota'
+                        });
+                    };
+                    (c.rightBtn.click = () => {
+                        this.$refs.pow
+                            .startPowTx(
+                                {
+                                    tokenId: this.tokenInfo.tokenId,
+                                    nodeName: this.voteList[0].nodeName,
+                                    difficulty: '201564160'
+                                },
+                                'cancelVoteBlock'
+                            )
+                            .then(successCancel)
+                            .catch(failCancel);
+                    }),
+                    (c.closeBtn = { show: true });
+                    this.$confirm(c);
+                } else {
+                    this.$toast(this.$t('vote.section1.cancelVoteErr'));
+                }
+            };
+            const sendCancel = () => {
+                activeAccount
+                    .sendTx(
+                        {
+                            tokenId: this.tokenInfo.tokenId,
+                            nodeName: this.voteList[0].nodeName
+                        },
+                        'cancelVoteBlock'
+                    )
+                    .then(successCancel)
+                    .catch(failCancel);
+            };
 
-      activeAccount.initPwd(
-        {
-          title: this.$t("vote.section1.confirm.title"),
-          submitTxt: this.$t("vote.section1.confirm.submitText"),
-          cancelTxt: this.$t("vote.section1.confirm.cancelText"),
-          submit: sendCancel,
-          exchange: true
-        },
-        true
-      );
-    },
-    vote(v) {
-      const activeAccount = this.$wallet.getActiveAccount();
-      const successVote = d => {
-        const t = Object.assign({}, v);
-        t.isCache = true;
-        t.voteStatus = "voting"; // 投票中
-        t.nodeStatus = 1;
-        this.cache = t;
-        this.$toast(this.$t("vote.section2.toast"));
-      };
-      const failVote = e => {
-        const code = e && e.error ? e.error.code || -1 : e ? e.code : -1;
-        if (code === -35002) {
-          const c = Object.assign({}, this.$t("vote.section2.quotaConfirm"));
-          c.leftBtn.click = () => {
-            this.$router.push({
-              name: "quota"
-            });
-          };
-          c.rightBtn.click = () => {
-            this.$refs.pow
-              .startPowTx(
+            activeAccount.initPwd(
                 {
-                  nodeName: v.name,
-                  tokenId: this.tokenInfo.tokenId,
-                  difficulty: "201564160"
+                    title: this.$t('vote.section1.confirm.title'),
+                    submitTxt: this.$t('vote.section1.confirm.submitText'),
+                    cancelTxt: this.$t('vote.section1.confirm.cancelText'),
+                    submit: sendCancel,
+                    exchange: true
                 },
-                "voteBlock"
-              )
-              .then(successVote)
-              .catch(failVote);
-          };
-          c.closeBtn = { show: true };
-          this.$confirm(c);
-        } else if (code === -36001) {
-          this.$toast(this.$t("vote.addrNoExistErr"));
-        } else {
-          this.$toast(this.$t("vote.section2.voteErr"));
-        }
-      };
-      const sendVote = () => {
-        activeAccount
-          .sendTx(
-            { nodeName: v.name, tokenId: this.tokenInfo.tokenId },
-            "voteBlock"
-          )
-          .then(successVote)
-          .catch(failVote);
-      };
-      const t = this.haveVote ? "cover" : "normal";
-      activeAccount.initPwd(
-        {
-          title: this.$t(`vote.section2.confirm.${t}.title`),
-          submitTxt: this.$t(`vote.section2.confirm.${t}.submitText`),
-          cancelTxt: this.$t(`vote.section2.confirm.${t}.cancelText`),
-          content: this.$t(`vote.section2.confirm.${t}.content`, {
-            nodeName: this.voteList[0] && this.voteList[0].nodeName
-          }),
-          submit: sendVote,
-          exchange: this.haveVote
+                true
+            );
         },
-        true
-      );
-    }
-  },
-  computed: {
-    balance() {
-      const token =
+        vote(v) {
+            const activeAccount = this.$wallet.getActiveAccount();
+            const successVote = d => {
+                const t = Object.assign({}, v);
+                t.isCache = true;
+                t.voteStatus = 'voting'; // 投票中
+                t.nodeStatus = 1;
+                this.cache = t;
+                this.$toast(this.$t('vote.section2.toast'));
+            };
+            const failVote = e => {
+                const code = e && e.error ? e.error.code || -1 : e ? e.code : -1;
+                if (code === -35002) {
+                    const c = Object.assign({}, this.$t('vote.section2.quotaConfirm'));
+                    c.leftBtn.click = () => {
+                        this.$router.push({
+                            name: 'quota'
+                        });
+                    };
+                    c.rightBtn.click = () => {
+                        this.$refs.pow
+                            .startPowTx(
+                                {
+                                    nodeName: v.name,
+                                    tokenId: this.tokenInfo.tokenId,
+                                    difficulty: '201564160'
+                                },
+                                'voteBlock'
+                            )
+                            .then(successVote)
+                            .catch(failVote);
+                    };
+                    c.closeBtn = { show: true };
+                    this.$confirm(c);
+                } else if (code === -36001) {
+                    this.$toast(this.$t('vote.addrNoExistErr'));
+                } else {
+                    this.$toast(this.$t('vote.section2.voteErr'));
+                }
+            };
+            const sendVote = () => {
+                activeAccount
+                    .sendTx(
+                        { nodeName: v.name, tokenId: this.tokenInfo.tokenId },
+                        'voteBlock'
+                    )
+                    .then(successVote)
+                    .catch(failVote);
+            };
+            const t = this.haveVote ? 'cover' : 'normal';
+            activeAccount.initPwd(
+                {
+                    title: this.$t(`vote.section2.confirm.${t}.title`),
+                    submitTxt: this.$t(`vote.section2.confirm.${t}.submitText`),
+                    cancelTxt: this.$t(`vote.section2.confirm.${t}.cancelText`),
+                    content: this.$t(`vote.section2.confirm.${t}.content`, {
+                        nodeName: this.voteList[0] && this.voteList[0].nodeName
+                    }),
+                    submit: sendVote,
+                    exchange: this.haveVote
+                },
+                true
+            );
+        }
+    },
+    computed: {
+        balance() {
+            const token =
         this.$store.getters.tokenBalanceList[this.tokenInfo.tokenId] || {};
-      return token.balance || 0;
-    },
-    haveVote() {
-      return (
-        this.voteList[0] &&
-        (this.voteList[0].voteStatus === "voting" ||
-          this.voteList[0].voteStatus === "voted")
-      );
-    },
-    voteList() {
-      const c = voteRecord => {
-        const data=Object.assign({},voteRecord)
-        // update nodestatus from nodelist or voteNum from balance
-        this.nodeList.some(v => {
-          return v.nodeName === data.nodeName;
-        })
-          ? (data.nodeStatus = 1)
-          : (data.nodeStatus = 2);
-        // voteNotWork first
-        data.nodeStatus === 2 && (data.voteStatus = "voteNotWork");
-        data.nodeStatusText = this.$t("vote.section1.nodeStatusMap")[
-          data.nodeStatus
-        ];
-        data.voteStatusText = this.$t("vote.section1.voteStatusMap")[
-          data.voteStatus
-        ];
-        const token = viteWallet.Ledger.getTokenInfo();
-        data.voteNum =
+            return token.balance || 0;
+        },
+        haveVote() {
+            return (
+                this.voteList[0] &&
+        (this.voteList[0].voteStatus === 'voting' ||
+          this.voteList[0].voteStatus === 'voted')
+            );
+        },
+        voteList() {
+            const c = voteRecord => {
+                const data=Object.assign({},voteRecord);
+                // update nodestatus from nodelist or voteNum from balance
+                this.nodeList.some(v => {
+                    return v.nodeName === data.nodeName;
+                })
+                    ? (data.nodeStatus = 1)
+                    : (data.nodeStatus = 2);
+                // voteNotWork first
+                data.nodeStatus === 2 && (data.voteStatus = 'voteNotWork');
+                data.nodeStatusText = this.$t('vote.section1.nodeStatusMap')[
+                    data.nodeStatus
+                ];
+                data.voteStatusText = this.$t('vote.section1.voteStatusMap')[
+                    data.voteStatus
+                ];
+                const token = viteWallet.Ledger.getTokenInfo();
+                data.voteNum =
           viteWallet.BigNumber.toBasic(data.balance, token.decimals) ||
           this.balance ||
           0; // tans
-        data.operate = this.$t("vote.section1.operateBtn");
-        return data;
-      };
-      if (this.cache) {
-        // update cache
-        if (
-          this.cache.voteStatus === "voting" &&
+                data.operate = this.$t('vote.section1.operateBtn');
+                return data;
+            };
+            if (this.cache) {
+                // update cache
+                if (
+                    this.cache.voteStatus === 'voting' &&
           this.voteData[0] &&
           this.voteData[0].nodeName === this.cache.nodeName
-        ) {
-          //投票中且投票成功
-          this.cache = null;
-        } else if (
-          this.cache.voteStatus === "canceling" &&
+                ) {
+                    //投票中且投票成功
+                    this.cache = null;
+                } else if (
+                    this.cache.voteStatus === 'canceling' &&
           this.voteData.length === 0
-        ) {
-          // 撤销中且撤销成功
-          this.cache = null;
-        }
-      }
-      if (this.cache) {
-        return [c(this.cache)];
-      } else if (this.voteData[0]) {
-        return [c(this.voteData[0])];
-      } else {
-        return [];
-      }
-    },
-    nodeList() {
-      const token = viteWallet.Ledger.getTokenInfo();
-      return this.nodeData
-        .map(v => {
-          v.voteNum =
+                ) {
+                    // 撤销中且撤销成功
+                    this.cache = null;
+                }
+            }
+            if (this.cache) {
+                return [c(this.cache)];
+            } else if (this.voteData[0]) {
+                return [c(this.voteData[0])];
+            } else {
+                return [];
+            }
+        },
+        nodeList() {
+            const token = viteWallet.Ledger.getTokenInfo();
+            return this.nodeData
+                .map(v => {
+                    v.voteNum =
             viteWallet.BigNumber.toBasic(v.voteNum, token.decimals) || 0; // tans
-          v.operate = this.$t("vote.section2.operateBtn");
-          return v;
-        })
-        .filter(v => {
-          if (this.filterKey.trim() === "") {
-            return true;
-          }
-          return (
-            new RegExp(this.filterKey.trim(), "i").test(v.nodeName) ||
-            new RegExp(this.filterKey.trim(), "i").test(v.nodeAddr)
-          );
-        });
+                    v.operate = this.$t('vote.section2.operateBtn');
+                    return v;
+                })
+                .filter(v => {
+                    if (this.filterKey.trim() === '') {
+                        return true;
+                    }
+                    return (
+                        new RegExp(this.filterKey.trim(), 'i').test(v.nodeName) ||
+            new RegExp(this.filterKey.trim(), 'i').test(v.nodeAddr)
+                    );
+                });
+        }
+    },
+    beforeDestroy() {
+        this.nodeDataTimer && this.nodeDataTimer.stop();
+        this.voteDataTimer&&this.voteDataTimer.stop();
     }
-  },
-  beforeDestroy() {
-    this.nodeDataTimer && this.nodeDataTimer.stop();
-    this.voteDataTimer&&this.voteDataTimer.stop();
-  }
 };
 </script>
 <style lang="scss" scoped>
