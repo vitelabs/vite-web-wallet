@@ -161,7 +161,9 @@ export default {
             }, 'cancelPledgeBlock', (result) => {
                 this.loading = false;
                 this.activeItem = null;
-                result && this.$toast(this.$t('quota.canclePledgeSuccess'));
+                result && this.$toast(this.$t('hint.request', {
+                    name: this.$t('quota.list.cancel') 
+                }));
                 !result && this.$toast(this.$t('quota.canclePledgeFail'));
             });
         },

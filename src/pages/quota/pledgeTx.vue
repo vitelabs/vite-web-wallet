@@ -202,7 +202,9 @@ export default {
                     return;
                 }
 
-                this.$toast(this.$t('quota.pledgeSuccess'));
+                this.$toast(this.$t('hint.request', {
+                    name: this.$t('quota.btn') 
+                }));
                 this.clearAll();
                 Vue.nextTick(() => {
                     this.stopWatch = false;
