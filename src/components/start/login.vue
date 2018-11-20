@@ -141,10 +141,15 @@ export default {
 
             this.isLoading = true;
             window.setTimeout(()=>{
-                let result = this.$wallet.login(this.activeAccount, this.password);
-                this.isLoading = false;
-                result && loginSuccess();
-                !result && this.$toast(this.$t('hint.pwErr'), 'error');
+                this.$wallet.login(this.activeAccount, this.password).then((result) => {
+                    console.log(result);
+                    this.isLoading = false;
+                    result && loginSuccess();
+                    !result && this.$toast(this.$t('hint.pwErr'));
+                }).catch(() => {
+                    this.isLoading = false;
+                    this.$toast(this.$t('hint.pwErr'));
+                });
             }, 10);
         }
     }
