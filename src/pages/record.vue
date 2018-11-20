@@ -64,10 +64,11 @@ export default {
             this.mnemonic = this.activeAccount.getMnemonic() || '';
         },
         login() {
-            this.activeAccount.encrypt();
-            this.activeAccount.save();
-            this.$router.push({
-                name: 'index'
+            this.activeAccount.encrypt().then(() => {
+                this.activeAccount.save();
+                this.$router.push({
+                    name: 'index'
+                });
             });
         }
     }

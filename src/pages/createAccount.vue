@@ -170,9 +170,10 @@ export default {
             }, 0);
         },
         restoreAccount() {
-            this.$wallet.restoreAccount(this.name, this.pass1);
-            this.$router.push({
-                name: 'index'
+            this.$wallet.restoreAccount(this.name, this.pass1).then(() => {
+                this.$router.push({
+                    name: 'index'
+                });
             });
         }
     }

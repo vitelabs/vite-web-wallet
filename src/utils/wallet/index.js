@@ -4,8 +4,10 @@ import toast from 'components/toast/index.js';
 import storage from 'utils/localStorage.js';
 import statistics from 'utils/statistics';
 
-import scrypt from './scrypt.js';
-console.log(scrypt);
+// let scrypt = require('./scrypt.js');
+// import asyncScryptsy from './scrypt.js';
+// console.log(4444,scrypt);
+// console.log(4444,scrypt);
 
 const LAST_KEY = 'ACC_LAST';
 
@@ -108,7 +110,7 @@ class Wallet {
 
     restoreAccount(name, pass) {
         if (!this.activeAccount || !this.activeAccount.decryptEntropy) {
-            return;
+            return Promise.reject();
         }
 
         return this.activeAccount.encrypt(pass).then(() => {
