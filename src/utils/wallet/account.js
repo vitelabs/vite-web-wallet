@@ -69,30 +69,33 @@ class Account {
 
     verify(pass) {
         if (this.pass) {
-            return this.pass === pass;
+            return Promise.resolve(this.pass === pass);
         }
 
         if (this.isWalletAcc) {
-            return !this.encryptObj ? false : $ViteJS.Wallet.Account.verify(this.encryptObj, pass);
+            return !this.encryptObj ? Promise.resolve(false) : $ViteJS.Wallet.Account.verify(this.encryptObj, pass);
         }
 
         if (!this.keystore) {
-            return false;
+            return Promise.resolve(false);
         }
         
         return $ViteJS.Wallet.Keystore.decrypt(JSON.stringify(this.keystore), pass);
     }
 
-    encrypt() {
-        if (!this.decryptEntropy || !this.pass) {
-            return false;
+    encrypt(pass) {
+        if (!this.decryptEntropy || (!this.pass && !pass)) {
+            return Promise.reject(false);
         }
-        console.log(this.pass);
-        let encryptObj = $ViteJS.Wallet.Account.encrypt(this.decryptEntropy, this.pass);
-        console.log(encryptObj);
-        let obj = JSON.parse(encryptObj);
-        this.entropy = obj.encryptentropy;
-        this.encryptObj = obj;
+
+        pass && (this.pass = pass);
+
+        return $ViteJS.Wallet.Account.encrypt(this.decryptEntropy, this.pass).then((encryptObj) => {
+            let obj = JSON.parse(encryptObj);
+            this.entropy = obj.encryptentropy;
+            this.encryptObj = obj;
+            return encryptObj;
+        });
     }
     save(index = -1) {
         this.name = checkName(this.name);

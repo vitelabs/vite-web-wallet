@@ -9,7 +9,9 @@
             </div>
             <div class="wrapper">
                 <copyOK class="copy-wrapper" :copySuccess="copySuccess"></copyOK>
-                <span class="item __ellipsis" v-for="(item, index) in mnemonicList" :key="index">
+                <span class="item" :class="{
+                    'long-item': mnemonicList.length === 12
+                }" v-for="(item, index) in mnemonicList" :key="index">
                     {{ item }}
                 </span>
             </div>
@@ -78,7 +80,7 @@ export default {
 .wrapper {
     position: relative;
     box-sizing: border-box;
-    padding: 6px 10px 10px;
+    padding: 4px 8px 8px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -88,7 +90,7 @@ export default {
     .item {
         background: #FFFFFF;
         border-radius: 2px;
-        flex-basis: 53px;
+        flex-basis: 55px;
         height: 24px;
         line-height: 24px;
         margin-top: 0;
@@ -96,6 +98,9 @@ export default {
         color: #1D2024;
         text-align: center;
         margin-top: 4px;
+        &.long-item {
+            flex-basis: 110px;
+        }
     }
 }
 .row {

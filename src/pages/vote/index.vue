@@ -203,7 +203,7 @@ export default {
         },
         vote(v) {
             const activeAccount = this.$wallet.getActiveAccount();
-            const successVote = d => {
+            const successVote = () => {
                 const t = Object.assign({}, v);
                 t.isCache = true;
                 t.voteStatus = 'voting'; // 投票中
@@ -238,6 +238,7 @@ export default {
                 } else if (code === -36001) {
                     this.$toast(this.$t('vote.addrNoExistErr'));
                 } else {
+                    console.warn('vote', e);
                     this.$toast(this.$t('vote.section2.voteErr'), e);
                 }
             };
