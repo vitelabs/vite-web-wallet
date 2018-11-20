@@ -48,9 +48,15 @@ export default {
             }
 
             this.isSubmiting = true;
-            this.lock = !this.activeAccount.verify(this.pass);
-            this.isSubmiting = false;
-            this.lock && this.$toast( this.$t('accDetail.hint.wrong') );
+            this.activeAccount.verify(this.pass).then((result) => {
+                this.isSubmiting = false;
+                this.lock = !result;
+                this.lock && this.$toast( this.$t('accDetail.hint.wrong') );
+            }).catch(() => {
+                this.isSubmiting = false;
+                this.lock = true;
+                this.$toast( this.$t('accDetail.hint.wrong') );
+            });
         }
     }
 };
