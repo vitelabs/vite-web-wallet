@@ -3,62 +3,71 @@ var path = require('path');
 
 var routesPath = path.join(__dirname, 'routes.js');
 
-var result = fs.existsSync(routesPath);
-// Not exists
-if (result) {
-    fs.unlinkSync(routesPath);
+try {
+    var result = fs.existsSync(routesPath);
+    // Not exists
+    if (result) {
+        fs.unlinkSync(routesPath);
+    }
+} catch(err) {
+    console.warn(err);
 }
+
 
 // Write routes file
 let routesStr = '';
 let routes = 'export default { routes: [';
 let indexRoutes = [];
 
-traversing('./src/pages/', (fPath, next, val) => {
-    let stats = fs.statSync(fPath);
-
-    if (stats.isDirectory()) {
-        next(fPath);
-        return;
-    }
-
-    if (!stats.isFile()) {
-        return;
-    }
-
-    let tmpPath = fPath.replace(/src\/pages\//, '');
-
-    // pages/XXX.vue
-    if (tmpPath === val && val.indexOf('.vue') === val.length - 4) {
-        let name = val.replace('.vue', '');
-        pushRoute(fPath, tmpPath, name);
-        return;
-    }
-
-    // pages/XXX/XXX/XXX/index.vue
-    if (val === 'index.vue') {
-        let path = '/' + tmpPath.replace(/\/index.vue$/, '');
-
-        let nList = path.split('/');
-        let name = '';
-        nList.forEach((n) => {
-            if (!n) {
-                return;
-            }
-            if (!name) {
-                name += n;
-                return;
-            }
-            name += (n ? n[0].toLocaleUpperCase() + n.slice(1) : '');
-        });
-
-        if (!name) {
+try {
+    traversing('./src/pages/', (fPath, next, val) => {
+        let stats = fs.statSync(fPath);
+    
+        if (stats.isDirectory()) {
+            next(fPath);
             return;
         }
-        
-        pushRoute(fPath, tmpPath, name);
-    }
-}, './');
+    
+        if (!stats.isFile()) {
+            return;
+        }
+    
+        let tmpPath = fPath.replace(/src\/pages\//, '');
+    
+        // pages/XXX.vue
+        if (tmpPath === val && val.indexOf('.vue') === val.length - 4) {
+            let name = val.replace('.vue', '');
+            pushRoute(fPath, tmpPath, name);
+            return;
+        }
+    
+        // pages/XXX/XXX/XXX/index.vue
+        if (val === 'index.vue') {
+            let path = '/' + tmpPath.replace(/\/index.vue$/, '');
+    
+            let nList = path.split('/');
+            let name = '';
+            nList.forEach((n) => {
+                if (!n) {
+                    return;
+                }
+                if (!name) {
+                    name += n;
+                    return;
+                }
+                name += (n ? n[0].toLocaleUpperCase() + n.slice(1) : '');
+            });
+    
+            if (!name) {
+                return;
+            }
+            
+            pushRoute(fPath, tmpPath, name);
+        }
+    }, './');
+} catch(err) {
+    console.warn(err);
+}
 
 routes += '],';
 routesStr += routes;
