@@ -274,7 +274,7 @@ module.exports = {
         cancelBtn: 'Cancel',
         help: {
             title: 'About SBP',
-            text: 'SBP（Snapshot Block Producer）is a node that has right to creating blocks, you can register to be a SBP candidate by staking a certain amount of VITE, each round (about 75 seconds) will elect 25 SBPs, the SBPs will be elected from random 23 out of top 25 candidate nodes, plus random 2 out of the candidate nodes ranking 26th-100th on the list. The 50% of block creating rewards will be allocated to the block creating node, the other 50% will be allocated to nodes that are ranked on top 100 as voting rewards. <br/><br/> One registration address (staking address) can register multiple block creating nodes (node names), a node name cannot be used if the node name has been registered by a registration address. A node name can switch block creating address, however, block creating address cannot be reused by other node names.'
+            text: 'SBP（Snapshot Block Producer）is a node that has right to creating blocks, you can register to be a SBP candidate by staking a certain amount of VITE, each round (about 75 seconds) will elect 25 SBPs, the SBPs will be elected from random 23 out of top 25 candidate nodes, plus random 2 out of the candidate nodes ranking 26th-100th on the list. The 50% of block creation rewards will be allocated to the block creation node, the other 50% will be allocated to nodes that are ranked on top 100 as voting rewards. <br/><br/> One registration address (staking address) can register multiple block creation nodes (node names), a node name cannot be used if the node name has been registered by a registration address. A node name can switch block creation address, however, block creation address cannot be reused by other node names.'
         },
         confirm: {
             title: 'Registration of SBP candidates',
@@ -282,12 +282,12 @@ module.exports = {
             leftBtn: 'Not register yet',
             rightBtn: 'Ready to register',
             edit: {
-                title: 'Change block creating address',
-                placeholder: 'please input new block creating address',
+                title: 'Change block creation address',
+                placeholder: 'please input new block creation address',
                 btn: 'Confirm to change'
             },
             reward: {
-                title: 'Retrieve block creating rewards',
+                title: 'Retrieve block creation rewards',
                 placeholder: 'Please input rewards recipient address',
                 btn: 'Retrieval of Rewards'
             }
@@ -298,7 +298,7 @@ module.exports = {
             producerAddr: 'Block Creation Address',
             quotaAddr: 'Staking Address',
             quotaTime: 'Staking Period',
-            allReward: 'All of the retrievable block creating rewards',
+            allReward: 'All of the retrievable block creation rewards',
             time: '7776000 snapshot blocks（approximately 90 days）',
             quotaAmount: 'Staking Amount',
             confirmBtn: 'Submit Registration',
@@ -306,8 +306,8 @@ module.exports = {
             nameHint: 'Within 40 characters, support English letters (both upper and lower cases), numbers, \'_\'、\'.\'',
             nameErr: 'This node name is illegal',
             nameUsed: 'This node name is occupied',
-            addrPlaceholder: 'Please input snapshot block creating address',
-            addrHint: 'The block creating address must be a full node and keep up running',
+            addrPlaceholder: 'Please input snapshot block creation address',
+            addrHint: 'The block creation address must be a full node and keep up running',
             addrErr: 'Illegal address',
             addrUsed: 'This address has been occupied',
             registerSuccess: 'Registration request has sent',
@@ -334,7 +334,7 @@ module.exports = {
     // vote
     vote: {
         title: 'Voting',
-        search: 'Please input node name or block creating address',
+        search: 'Please input node name or block creation address',
         help: {
             title: 'About Voting',
             text: 'You can join and vote for 25 SBPs （Snapshot Block Producer), each round of voting lasts 75s, the polls you can use for voting are equivalent to the amount of VITE tokens owned by voting address, the default selection is the choice of previous round, the SBPs will be chosen from random 23 out of top 25 candidate nodes, plus random 2 out of the candidate nodes ranking 26th-100th on the list, 25 SBPs in total.',
