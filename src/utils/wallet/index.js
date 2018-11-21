@@ -4,10 +4,8 @@ import toast from 'components/toast/index.js';
 import storage from 'utils/localStorage.js';
 import statistics from 'utils/statistics';
 
-// let scrypt = require('./scrypt.js');
-// import asyncScryptsy from './scrypt.js';
-// console.log(4444,scrypt);
-// console.log(4444,scrypt);
+import vitecrypto from 'testwebworker';
+// import vitecrypto from './vitecrypto.js';
 
 const LAST_KEY = 'ACC_LAST';
 
@@ -40,7 +38,6 @@ class Wallet {
 
         try {
             let { addr, entropy } = $ViteJS.Wallet.Address.newAddr();
-    
             this.newActiveAcc({
                 defaultInx: 0,
                 addrNum: 1, 
@@ -127,9 +124,10 @@ class Wallet {
         }
 
         if (addr) {
-            let loginRes = this._loginKeystore(addr, pass);
-            loginRes && this.activeAccount.unLock();
-            return Promise.resolve(loginRes);
+            return this._loginKeystore(addr, pass).then((loginRes) => {
+                loginRes && this.activeAccount.unLock();
+                return loginRes;
+            });
         }
 
         return this._loginWalletAcc({
@@ -145,40 +143,56 @@ class Wallet {
         let keystore = acc.keystore;
 
         let before = new Date().getTime();
-        let privKey = $ViteJS.Wallet.Keystore.decrypt(JSON.stringify(keystore), pass);
-        if (!privKey) {
-            return false;
-        }
 
-        // Reduce the difficulty.
-        let after = new Date().getTime();
-        let n = ( keystore.crypto && keystore.crypto.scryptparams && keystore.crypto.scryptparams.n) ? 
-            keystore.crypto.scryptparams.n : 0;
-        statistics.event('keystore-decrypt', n, 'time', after - before);
+        return new Promise((res, rej) => {
+            $ViteJS.Wallet.Keystore.decrypt(JSON.stringify(keystore), pass, vitecrypto).then((privKey) => {
+                // Reduce the difficulty.
+                let after = new Date().getTime();
+                let n = ( keystore.crypto && keystore.crypto.scryptparams && keystore.crypto.scryptparams.n) ? 
+                    keystore.crypto.scryptparams.n : 0;
+                statistics.event('keystore-decrypt', n, 'time', after - before);
+    
+                if (n !== 262144) {
+                    this.newActiveAcc({
+                        pass,
+                        keystore,
+                        addrs: [{
+                            hexAddr: addr,
+                            privKey
+                        }],
+                        name: acc.name
+                    });
+                    return res(true);
+                }
 
-        // 262144 to 4096
-        if (n === 262144) {
-            let obj = $ViteJS.Vite.Account.newHexAddr(privKey);
-            let keystoreStr = $ViteJS.Wallet.Keystore.encrypt(obj, pass);
-            keystore = JSON.parse(keystoreStr);
-        }
-
-        this.newActiveAcc({
-            pass,
-            keystore,
-            addrs: [{
-                hexAddr: addr,
-                privKey
-            }],
-            name: acc.name
+                // 262144 to 4096
+                let obj = $ViteJS.Vite.Account.newHexAddr(privKey);
+                $ViteJS.Wallet.Keystore.encrypt(obj, pass, vitecrypto).then((keystoreStr) => {
+                    keystore = JSON.parse(keystoreStr);
+                    this.newActiveAcc({
+                        pass,
+                        keystore,
+                        addrs: [{
+                            hexAddr: addr,
+                            privKey
+                        }],
+                        name: acc.name
+                    });
+                    this.activeAccount.save();
+        
+                    setLast({
+                        addr,
+                        name: acc.name
+                    });
+                    return res(true);
+                }).catch((err) => {
+                    console.log(err)
+                    return rej(err);
+                });
+            }).catch((err) => {
+                rej(err);
+            });
         });
-        this.activeAccount.save();
-
-        setLast({
-            addr,
-            name: acc.name
-        });
-        return true;
     }
 
     _loginWalletAcc({
@@ -204,7 +218,7 @@ class Wallet {
     
                 let before = new Date().getTime();
                 
-                $ViteJS.Wallet.Account.decrypt(JSON.stringify(encryptObj), pass).then((decryptEntropy) => {
+                $ViteJS.Wallet.Account.decrypt(JSON.stringify(encryptObj), pass, vitecrypto).then((decryptEntropy) => {
                     let after = new Date().getTime();
                     statistics.event('mnemonic-decrypt', encryptObj.version || '1', 'time', after - before);
         
@@ -310,7 +324,7 @@ class Wallet {
                 encryptPwd: item.encryptObj.encryptP
             };
             let entropy = item.entropy;
-            pList.push( $ViteJS.Wallet.Account.encrypt(entropy, null, scryptP).then((encryptObj) => {
+            pList.push( $ViteJS.Wallet.Account.encrypt(entropy, null, scryptP, vitecrypto).then((encryptObj) => {
                 let obj = JSON.parse(encryptObj);
                 item.entropy = obj.encryptentropy;
                 item.encryptObj = {
