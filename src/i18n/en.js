@@ -4,6 +4,32 @@ module.exports = {
     start: 'Start',
     logout: 'Logout',
 
+    errCode: {
+        35003: '{name}ID发生冲突，请您稍后重新提交',
+        35004: '内置合约发生错误，请稍后重试（35004）',
+        35005: '交易发送频繁，请您稍后再次尝试',
+        35006: '内置合约发生错误，请稍后重试（35006）',
+        36001: '您需要接收一笔交易之后才可发起转账',
+        36002: '系统校验不通过，请稍后重试（36002）',
+        36003: '系统校验不通过，请稍后重试（36003）',
+        36004: '系统校验不通过，请稍后重试（36004）',
+        36005: '快照块高度不合法，请您稍后再试'
+    },
+
+    txType: {
+        0: '注册',
+        1: '更新注册',
+        2: '撤销注册',
+        3: '提取奖励',
+        4: '投票',
+        5: '撤销投票',
+        6: '获取配额',
+        7: '取回配额抵押',
+        8: '铸币',
+        9: '取回铸币抵押',
+        10: '转账'
+    },
+    
     firstNotice: {
         title: 'Read Before Use',
         text1: 'Please be sure to backup your seed phrase when creating account. We cannot guarantee to restore your assets in case of you visit scam sites or lose your backups.',
@@ -29,7 +55,8 @@ module.exports = {
         empty: 'The input of seed phrase cannot be empty',
         error: 'Incorrect seed phrase. Try again',
         hint: 'Mnemonic format: words, spaces, words... spaces, words.',
-        netErr: 'The full node is abnormal, please try again later.'
+        netErr: 'The full node is abnormal, please try again later.',
+        change: '切换{len}个助记词'
     },
 
     setting: {
@@ -123,7 +150,7 @@ module.exports = {
         },
         valid: {
             remarksFormat: 'Format error! Remarks can only contain Chinese, English and punctuations.',
-            remarksLong: 'Notes do not exceed 180 English characters (or punctuations, 1 Chinese character = 6 English characters)'
+            remarksLong: '剩余字节：{len}'
         },
         hint: {
             token: 'VTT test tokens have be sent to your account, please check your account!',
@@ -247,7 +274,7 @@ module.exports = {
         cancelBtn: 'Cancel',
         help: {
             title: 'About SBP',
-            text: 'SBP（Snapshot Block Producer）is a node that has right to creating blocks, you can register to be a SBP candidate by staking a certain amount of VITE, each round (about 75 seconds) will elect 25 SBPs, the SBPs will be elected from random 23 out of top 25 candidate nodes, plus random 2 out of the candidate nodes ranking 26th-100th on the list. The 50% of block creating rewards will be allocated to the block creating node, the other 50% will be allocated to nodes that are ranked on top 100 as voting rewards. <br/><br/> One registration address (staking address) can register multiple block creating nodes (node names), a node name cannot be used if the node name has been registered by a registration address. A node name can switch block creating address, however, block creating address cannot be reused by other node names.'
+            text: 'SBP（Snapshot Block Producer）is a node that has right to creating blocks, you can register to be a SBP candidate by staking a certain amount of VITE, each round (about 75 seconds) will elect 25 SBPs, the SBPs will be elected from random 23 out of top 25 candidate nodes, plus random 2 out of the candidate nodes ranking 26th-100th on the list. The 50% of block creation rewards will be allocated to the block creation node, the other 50% will be allocated to nodes that are ranked on top 100 as voting rewards. <br/><br/> One registration address (staking address) can register multiple block creation nodes (node names), a node name cannot be used if the node name has been registered by a registration address. A node name can switch block creation address, however, block creation address cannot be reused by other node names.'
         },
         confirm: {
             title: 'Registration of SBP candidates',
@@ -255,12 +282,12 @@ module.exports = {
             leftBtn: 'Not register yet',
             rightBtn: 'Ready to register',
             edit: {
-                title: 'Change block creating address',
-                placeholder: 'please input new block creating address',
+                title: 'Change block creation address',
+                placeholder: 'please input new block creation address',
                 btn: 'Confirm to change'
             },
             reward: {
-                title: 'Retrieve block creating rewards',
+                title: 'Retrieve block creation rewards',
                 placeholder: 'Please input rewards recipient address',
                 btn: 'Retrieval of Rewards'
             }
@@ -271,7 +298,7 @@ module.exports = {
             producerAddr: 'Block Creation Address',
             quotaAddr: 'Staking Address',
             quotaTime: 'Staking Period',
-            allReward: 'All of the retrievable block creating rewards',
+            allReward: 'All of the retrievable block creation rewards',
             time: '7776000 snapshot blocks（approximately 90 days）',
             quotaAmount: 'Staking Amount',
             confirmBtn: 'Submit Registration',
@@ -279,8 +306,8 @@ module.exports = {
             nameHint: 'Within 40 characters, support English letters (both upper and lower cases), numbers, \'_\'、\'.\'',
             nameErr: 'This node name is illegal',
             nameUsed: 'This node name is occupied',
-            addrPlaceholder: 'Please input snapshot block creating address',
-            addrHint: 'The block creating address must be a full node and keep up running',
+            addrPlaceholder: 'Please input snapshot block creation address',
+            addrHint: 'The block creation address must be a full node and keep up running',
             addrErr: 'Illegal address',
             addrUsed: 'This address has been occupied',
             registerSuccess: 'Registration request has sent',
@@ -307,7 +334,7 @@ module.exports = {
     // vote
     vote: {
         title: 'Voting',
-        search: 'Please input node name or block creating address',
+        search: 'Please input node name or block creation address',
         help: {
             title: 'About Voting',
             text: 'You can join and vote for 25 SBPs （Snapshot Block Producer), each round of voting lasts 75s, the polls you can use for voting are equivalent to the amount of VITE tokens owned by voting address, the default selection is the choice of previous round, the SBPs will be chosen from random 23 out of top 25 candidate nodes, plus random 2 out of the candidate nodes ranking 26th-100th on the list, 25 SBPs in total.',
@@ -401,7 +428,10 @@ module.exports = {
         submit: 'Submit',
         next: 'Next Step',
         understand: 'I understand',
-        edit: 'edit'
+        edit: 'edit',
+        copy: 'copy',
+        reReg: '重新注册',
+        otherProd: '使用 Vite 其他产品'
     },
     paging: {
         pre: 'Prev',
@@ -416,6 +446,7 @@ module.exports = {
         acEmpty: 'Account cannot be empty!',
         pwEmpty: 'Password cannot be empty!',
         noData: 'No Data',
-        err: 'Oops, error occurs'
+        err: 'Oops, error occurs',
+        request: '{name}请求已发送，请耐心等待'
     }
 };

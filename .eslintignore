@@ -3,3 +3,5 @@
 # Ignore built files except build/index.js
 static/*
 viteJS/*
+routes.js
+scrypt.js

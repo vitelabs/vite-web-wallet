@@ -174,7 +174,7 @@ export default {
                     (c.closeBtn = { show: true });
                     this.$confirm(c);
                 } else {
-                    this.$toast(this.$t('vote.section1.cancelVoteErr'));
+                    this.$toast(this.$t('vote.section1.cancelVoteErr'), e);
                 }
             };
             const sendCancel = () => {
@@ -203,7 +203,7 @@ export default {
         },
         vote(v) {
             const activeAccount = this.$wallet.getActiveAccount();
-            const successVote = d => {
+            const successVote = () => {
                 const t = Object.assign({}, v);
                 t.isCache = true;
                 t.voteStatus = 'voting'; // 投票中
@@ -238,7 +238,8 @@ export default {
                 } else if (code === -36001) {
                     this.$toast(this.$t('vote.addrNoExistErr'));
                 } else {
-                    this.$toast(this.$t('vote.section2.voteErr'));
+                    console.warn('vote', e);
+                    this.$toast(this.$t('vote.section2.voteErr'), e);
                 }
             };
             const sendVote = () => {

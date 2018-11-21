@@ -71,7 +71,7 @@ export default {
 
         logout() {
             this.$router.push({
-                name: 'login'
+                name: 'index'
             });
         }
     }

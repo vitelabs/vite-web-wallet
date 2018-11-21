@@ -1,7 +1,6 @@
 <template>
     <div class="trans-list-wrapper">
-        <div class="title __pointer">{{ $t('transList.title') }}</div>
-
+        <sec-title class="title" :isShowHelp="false"></sec-title>
         <div class="trans-list-content">
             <tabel-list class="big-trans" :headList="[{
                 class: 'tType',
@@ -26,7 +25,7 @@
             },{
                 class: 'token',
                 text: 'Token',
-                cell: 'token'
+                cell: 'tokenSymbol'
             }]" :contentList="transList" :clickRow="goDetail">
                 <pagination class="__tb_pagination" :currentPage="currentPage + 1" 
                             :totalPage="totalPage" :toPage="toPage"></pagination>
@@ -35,16 +34,16 @@
             <tabel-list class="small-trans" :headList="[{
                 class: 'tType',
                 text: $t('transList.tType.symbol'),
-                cell: 'type'
+                cell: 'smallType'
             },{
                 class: 'address',
                 text: $t('transList.tAddress'),
-                cell: 'transAddr'
+                cell: 'smallTransAddr'
             },{
                 class: 'sum',
                 text: $t('transList.sum'),
-                cell: 'amount'
-            }]" :contentList="smallTransList" :clickRow="goDetail">
+                cell: 'smallAmount'
+            }]" :contentList="transList" :clickRow="goDetail">
                 <pagination class="__tb_pagination" :currentPage="currentPage + 1" 
                             :totalPage="totalPage" :toPage="toPage"></pagination>
             </tabel-list>
@@ -53,20 +52,27 @@
 </template>
 
 <script>
-import sendImg from 'assets/imgs/send.svg';
-import receiveImg from 'assets/imgs/receive.svg';
+import txQuotaImg from 'assets/imgs/txQuota.svg';
+import txRegImg from 'assets/imgs/txReg.svg';
+import txRewardImg from 'assets/imgs/txReward.svg';
+import txTokenImg from 'assets/imgs/txToken.svg';
+import txTransImg from 'assets/imgs/txTrans.svg';
+import txVoteImg from 'assets/imgs/txVote.svg';
 
 import pagination from 'components/pagination.vue';
 import tabelList from 'components/tabelList.vue';
+import secTitle from 'components/secTitle';
 import date from 'utils/date.js';
 import { timer } from 'utils/asyncFlow';
+import ellipsisAddr from 'utils/ellipsisAddr.js';
 import loopTime from 'config/loopTime';
 
 let transListInst = null;
+let txImgs = [txRegImg, txRegImg, txRegImg, txRewardImg, txVoteImg, txVoteImg, txQuotaImg, txQuotaImg, txTokenImg, txTokenImg, txTransImg];
 
 export default {
     components: {
-        pagination, tabelList
+        pagination, tabelList, secTitle
     },
     mounted() {
         this.currentPage = this.$store.state.transList.currentPage;
@@ -90,45 +96,38 @@ export default {
         },
         transList() {
             let transList = this.$store.getters.transList;
-
             let nowList = [];
+
             transList.forEach((trans) => {
-                let typeImg = trans.type === 'send' ? sendImg : receiveImg;
-                let type = `<img class="icon" src='${typeImg}'/>` + this.$t(`transList.tType.${trans.type}`);
+                let typeImg = `<img class="icon" src='${txImgs[trans.rawData.txType]}'/>`;
 
-                let statusClass = trans.status === 'confirmed' ? 'green' : 
-                    trans.status === 'unconfirmed' ? 'pink': 'blue';
-                let statusText = this.$t(`transList.status.${trans.status}`) + (trans.status === 'confirms' ? trans.confirms : '');
-                let status = `<span class="${statusClass}">${statusText}</span>`;
+                let status = ['unconfirmed', 'confirms', 'confirmed'][trans.status];
+                let statusClass = status === 'confirmed' ? 'green' : 
+                    status === 'unconfirmed' ? 'pink': 'blue';
+                let statusText = this.$t(`transList.status.${status}`) + (status === 'confirms' ? `(${trans.confirms})` : '');
 
-                trans.date = date(trans.timestamp, this.$i18n.locale);
+                let isZero = viteWallet.BigNumber.isEqual(trans.amount, 0);
+                let amount = trans.amount;
+                if (!isZero) {
+                    amount = trans.isSend ? ('-' + trans.amount) : ('+' + trans.amount);
+                }
+
                 nowList.push({
+                    type: typeImg + this.$t(`txType.${trans.rawData.txType}`),
+                    smallType: typeImg,
                     date: date(trans.timestamp, this.$i18n.locale),
-                    status,
-                    type,
-                    hash: trans.hash,
-                    transAddr: trans.transAddr,
-                    amount: trans.amount,
-                    token: trans.token
+                    status: `<span class="${statusClass}">${statusText}</span>`,
+                    hash: trans.rawData.hash,
+                    transAddr: ellipsisAddr(trans.transAddr),
+                    smallTransAddr: ellipsisAddr(trans.transAddr, 6),
+                    amount: `<span class="${trans.isSend ? 'red' : 'green'}">${amount}</span>`,
+                    smallAmount: `<span class="${trans.isSend ? 'red' : 'green'}">${amount}</span> ` + trans.tokenSymbol,
+                    tokenSymbol: trans.tokenSymbol,
+                    rawData: trans.rawData
                 });
             });
             return nowList;
         },
-        smallTransList() {
-            let transList = this.$store.getters.transList;
-
-            let nowList = [];
-            transList.forEach((trans) => {
-                let typeImg = trans.type === 'send' ? sendImg : receiveImg;
-                nowList.push({
-                    type: `<img class="icon" src='${typeImg}'/>`,
-                    amount: trans.amount + ' ' + trans.token,
-                    hash: trans.hash,
-                    transAddr: trans.smallTransAddr
-                });
-            });
-            return nowList;
-        }
     },
     beforeDestroy() {
         this.stopLoopTransList();
@@ -136,7 +135,7 @@ export default {
     methods: {
         goDetail(trans) {
             let locale = this.$i18n.locale === 'zh' ? 'zh/' : '';
-            window.open(`${process.env.viteNet}${locale}transaction/${trans.hash}`);
+            window.open(`${process.env.viteNet}${locale}transaction/${trans.rawData.hash}`);
         },
 
         toPage(pageNumber) {
@@ -188,10 +187,6 @@ export default {
     padding: 40px;
     height: 100%;
     .title {
-        font-family: $font-bold, arial, sans-serif;
-        font-size: 24px;
-        color: #1D2024;
-        line-height: 32px;
         margin-bottom: 40px;
     }
     .trans-list-content {
@@ -254,11 +249,15 @@ export default {
 }
 .blue {
     font-family: $font-bold, arial, sans-serif;
-    color: #409EFF;
+    color: #007AFF;
 }
 .green {
     font-family: $font-bold, arial, sans-serif;
-    color: #67C23A;
+    color: #5BC500;
+}
+.red {
+    font-family: $font-bold, arial, sans-serif;
+    color: #FF0008;
 }
 .icon {
     margin-right: 6px;

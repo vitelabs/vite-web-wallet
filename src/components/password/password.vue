@@ -103,15 +103,22 @@ export default {
                 return false;
             }
 
-            let result = activeAccount.verify(password);
-            if (!result) {
-                this.$toast( this.$t('hint.pwErr') );
-                return false;
-            }
+            let deal = (result) => {
+                if (!result) {
+                    this.$toast( this.$t('hint.pwErr') );
+                    return false;
+                }
 
-            this.isPwdHold && activeAccount.holdPWD(password, holdTime);
-            this.clear();
-            this.submit && this.submit();
+                this.isPwdHold && activeAccount.holdPWD(password, holdTime);
+                this.clear();
+                this.submit && this.submit();
+            };
+
+            activeAccount.verify(password).then((result) => {
+                deal(result);
+            }).catch(() => {
+                deal(false);
+            });
         }
     }
 };
