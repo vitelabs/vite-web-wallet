@@ -1,0 +1,5 @@
+[Settings]
+    ID = "361282e2-43ab-49df-a708-61b14abe467a"
+[build]
+    publish = "static"
+    command = "npm run build:test"
