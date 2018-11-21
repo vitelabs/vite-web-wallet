@@ -6,7 +6,7 @@
         "clean:hack": "rm -rf ./node_modules/node-libs-browser/node_modules/buffer",
         "clean": "rm -rf ./static",
         "build": "npm run clean && NODE_ENV=production webpack && node build.js",
-        "build:test": "NODE_ENV=test webpack && NODE_ENV=test node build.js",
+        "build:test": "NODE_ENV=test webpack",
         "dev": "npm run clean:hack && NODE_ENV=dev webpack-dev-server",
         "analyzer": "analyzer=true webpack-dev-server",
         "lint": "eslint ./ --cache --fix"
