@@ -1,8 +1,9 @@
 import acc from './storeAcc.js';
 import { pwdConfirm } from 'components/password/index.js';
 import config from 'config/constant';
-import vitecrypto from 'testwebworker';
+// import vitecrypto from 'testwebworker';
 // import vitecrypto from './vitecrypto.js';
+let vitecrypto = null;
 
 const namePre = 'account';
 let passTimeout;
