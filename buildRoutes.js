@@ -15,13 +15,13 @@ try {
 
 
 // Write routes file
-let routesStr = '';
-let routes = 'export default { routes: [';
-let indexRoutes = [];
+var routesStr = '';
+var routes = 'export default { routes: [';
+var indexRoutes = [];
 
 try {
     traversing('./src/pages/', (fPath, next, val) => {
-        let stats = fs.statSync(fPath);
+        var stats = fs.statSync(fPath);
     
         if (stats.isDirectory()) {
             next(fPath);
@@ -32,37 +32,37 @@ try {
             return;
         }
     
-        let tmpPath = fPath.replace(/src\/pages\//, '');
+        var tmpPath = fPath.replace(/src\/pages\//, '');
     
         // pages/XXX.vue
         if (tmpPath === val && val.indexOf('.vue') === val.length - 4) {
-            let name = val.replace('.vue', '');
+            var name = val.replace('.vue', '');
             pushRoute(fPath, tmpPath, name);
             return;
         }
     
         // pages/XXX/XXX/XXX/index.vue
         if (val === 'index.vue') {
-            let path = '/' + tmpPath.replace(/\/index.vue$/, '');
+            var path = '/' + tmpPath.replace(/\/index.vue$/, '');
     
-            let nList = path.split('/');
-            let name = '';
+            var nList = path.split('/');
+            var pageName = '';
             nList.forEach((n) => {
                 if (!n) {
                     return;
                 }
-                if (!name) {
+                if (!pageName) {
                     name += n;
                     return;
                 }
-                name += (n ? n[0].toLocaleUpperCase() + n.slice(1) : '');
+                pageName += (n ? n[0].toLocaleUpperCase() + n.slice(1) : '');
             });
     
-            if (!name) {
+            if (!pageName) {
                 return;
             }
             
-            pushRoute(fPath, tmpPath, name);
+            pushRoute(fPath, tmpPath, pageName);
         }
     }, './');
 } catch(err) {
@@ -76,7 +76,7 @@ routesStr += `indexLayoutRoutes: ${JSON.stringify(indexRoutes)}}`;
 fs.writeFileSync(routesPath, routesStr);
 
 function pushRoute(fPath, tmpPath, name) {
-    let file = fs.readFileSync(fPath);
+    var file = fs.readFileSync(fPath);
     if (file.indexOf('/**  vite-wallet index-layout */') !== -1) {
         indexRoutes.push(name);
     }
@@ -86,10 +86,10 @@ function pushRoute(fPath, tmpPath, name) {
 
 function traversing (startPath, cb) {
     function readdirSync (startPath) {
-        let files = fs.readdirSync(startPath);
+        var files = fs.readdirSync(startPath);
 
         files.forEach((val) => {
-            let fPath = path.join(startPath, val);
+            var fPath = path.join(startPath, val);
             cb && cb(fPath, readdirSync, val);
         });
     }
