@@ -91,8 +91,7 @@ class Account {
         }
 
         pass && (this.pass = pass);
-
-        return $ViteJS.Wallet.Account.encrypt(this.decryptEntropy, this.pass, vitecrypto).then((encryptObj) => {
+        return $ViteJS.Wallet.Account.encrypt(this.decryptEntropy, this.pass, null, vitecrypto).then((encryptObj) => {
             let obj = JSON.parse(encryptObj);
             this.entropy = obj.encryptentropy;
             this.encryptObj = obj;

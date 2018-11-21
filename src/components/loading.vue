@@ -1,8 +1,30 @@
 <template>
-    <div class="loading-ring"> <div></div> </div>    
+    <div class="loading-wrapper">
+        <div v-if="loadingType === 'ring'" class="loading-ring"> <div></div> </div>
+        <div v-if="loadingType === 'dot'" class="dot">
+            <div class="bounce1"></div>
+            <div class="bounce2"></div>
+            <div class="bounce3"></div>
+        </div>
+    </div>
 </template>
 
+<script>
+export default {
+    props: {
+        loadingType: {
+            type: String,
+            default: 'ring'
+        }
+    }
+};
+</script>
+
 <style lang="scss" scoped>
+.loading-wrapper {
+    display: inline-block;
+}
+
 .loading-ring {
     box-sizing: border-box;
     display: inline-block;
@@ -34,6 +56,35 @@
     }
     100% {
         transform: rotate(360deg);
+    }
+}
+
+.dot {
+    display: inline-block;
+}
+.dot > div {
+    width: 8px;
+    height: 8px;
+    background-color: #fff;
+    border-radius: 100%;
+    display: inline-block;
+    animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+}
+.dot .bounce1 {
+    animation-delay: -0.32s;
+}
+.dot .bounce2 {
+    animation-delay: -0.16s;
+}
+
+@keyframes sk-bouncedelay {
+    0%, 80%, 100% { 
+        opacity: 0.1;
+        transform: scale(0.3);
+    } 
+    40% {
+        opacity: 1;
+        transform: scale(1.0);
     }
 }
 </style>

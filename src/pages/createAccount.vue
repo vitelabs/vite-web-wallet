@@ -27,12 +27,13 @@
         </div>
 
         <div class="__btn_list">
-            <span class="__btn __btn_border __pointer" :class="{
-                'unuse': isCreating
-            }" @click="back" >{{ $t('btn.back') }}</span>
-            <span class="__btn __btn_all_in __pointer" :class="{
-                'unuse': isCreating
-            }" @click="valid">{{ activeAccount ? $t('create.finish') : $t('btn.next')}}</span>
+            <span class="__btn __btn_border __pointer" @click="back" >
+                {{ $t('btn.back') }}
+            </span>
+            <div class="__btn __btn_all_in __pointer" @click="valid">
+                <span v-show="!isLoading">{{ activeAccount ? $t('create.finish') : $t('btn.next')}}</span>
+                <loading v-show="isLoading" loadingType="dot"></loading>
+            </div>
         </div>
 
         <process v-show="showPro" class="process" active="createAccount"></process>
@@ -42,16 +43,20 @@
 <script>
 import Vue from 'vue';
 import process from 'components/process';
+import loading from 'components/loading';
 
 export default {
     components: {
-        process
+        process, loading
     },
     mounted() {
         this.focusName();
         this.$onEnterKey(() => {
             this.valid();
         });
+    },
+    destroyed() {
+        this.isLoading = false;
     },
     data() {
         let activeAccount = this.$wallet.getActiveAccount();
@@ -63,7 +68,7 @@ export default {
             pass1: '',
             pass2: '',
             inputItem: '',
-            isCreating: false
+            isLoading: false
         };
     },
     methods: {
@@ -74,9 +79,6 @@ export default {
             text === this.inputItem && (this.inputItem = '');
         },
         back() {
-            if (this.isCreating) {
-                return;
-            }
             this.$router.go(-1);
         },
 
@@ -97,10 +99,6 @@ export default {
         },
 
         valid() {
-            if (this.isCreating) {
-                return;
-            }
-            
             // [NOTICE] Order fix
             // Name not empty
             if (!this.name) {
@@ -160,20 +158,27 @@ export default {
             this.restoreAccount();
         },
         createAccount() {
-            this.isCreating = true;
-            window.setTimeout(() => {
-                this.$wallet.create(this.name, this.pass1);
-                this.isCreating = false;
-                this.$router.push({
-                    name: 'record'
-                });
-            }, 0);
+            this.$wallet.create(this.name, this.pass1);
+            this.$router.push({
+                name: 'record'
+            });
         },
         restoreAccount() {
+            this.isLoading = true;
             this.$wallet.restoreAccount(this.name, this.pass1).then(() => {
+                if (!this.isLoading) {
+                    return;
+                }
+                this.isLoading = false;
+                this.activeAccount.rename(name);
+                this.activeAccount.save();
                 this.$router.push({
                     name: 'index'
                 });
+            }).catch((err) => {
+                this.isLoading = false;
+                console.warn(err);
+                this.$toast(this.$t('hint.err'));
             });
         }
     }

@@ -122,19 +122,11 @@ class Wallet {
         if ( (!entropy && !addr) || !pass ) {
             return Promise.reject(false);
         }
-
         if (addr) {
-            return this._loginKeystore(addr, pass).then((loginRes) => {
-                loginRes && this.activeAccount.unLock();
-                return loginRes;
-            });
+            return this._loginKeystore(addr, pass);
         }
-
         return this._loginWalletAcc({
             id, entropy, pass
-        }).then((loginRes) => {
-            loginRes && this.activeAccount.unLock();
-            return loginRes;
         });
     }
 
@@ -186,7 +178,7 @@ class Wallet {
                     });
                     return res(true);
                 }).catch((err) => {
-                    console.log(err)
+                    console.log(err);
                     return rej(err);
                 });
             }).catch((err) => {
