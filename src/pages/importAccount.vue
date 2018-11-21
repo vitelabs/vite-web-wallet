@@ -1,3 +1,5 @@
+/**  vite-wallet index-layout */
+
 <template>
     <div class="import-account-wrapper">
         <div class="__title">{{ $t('nav.head.imported') }}</div>
@@ -61,7 +63,7 @@ export default {
                 }
 
                 this.$router.push({
-                    name: 'login'
+                    name: 'index'
                 });
             };
             reader.readAsText(file);

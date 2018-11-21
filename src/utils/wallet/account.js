@@ -1,6 +1,8 @@
 import acc from './storeAcc.js';
 import { pwdConfirm } from 'components/password/index.js';
 import config from 'config/constant';
+import vitecrypto from 'testwebworker';
+// import vitecrypto from './vitecrypto.js';
 
 const namePre = 'account';
 let passTimeout;
@@ -69,20 +71,33 @@ class Account {
 
     verify(pass) {
         if (this.pass) {
-            return this.pass === pass;
+            return Promise.resolve(this.pass === pass);
         }
 
         if (this.isWalletAcc) {
-            return !this.encryptObj ? false : $ViteJS.Wallet.Account.verify(this.encryptObj, pass);
+            return !this.encryptObj ? Promise.resolve(false) : $ViteJS.Wallet.Account.verify(this.encryptObj, pass, vitecrypto);
         }
 
         if (!this.keystore) {
-            return false;
+            return Promise.resolve(false);
         }
         
-        return $ViteJS.Wallet.Keystore.decrypt(JSON.stringify(this.keystore), pass);
+        return $ViteJS.Wallet.Keystore.decrypt(JSON.stringify(this.keystore), pass, vitecrypto);
     }
 
+    encrypt(pass) {
+        if (!this.decryptEntropy || (!this.pass && !pass)) {
+            return Promise.reject(false);
+        }
+
+        pass && (this.pass = pass);
+        return $ViteJS.Wallet.Account.encrypt(this.decryptEntropy, this.pass, null, vitecrypto).then((encryptObj) => {
+            let obj = JSON.parse(encryptObj);
+            this.entropy = obj.encryptentropy;
+            this.encryptObj = obj;
+            return encryptObj;
+        });
+    }
     save(index = -1) {
         this.name = checkName(this.name);
 
@@ -105,7 +120,14 @@ class Account {
             encryptObj: this.encryptObj
         }, index);
     }
-
+    changeMnemonic(len) {
+        let bits = len === 12 ? 128 : 256;
+        let { addr, entropy } = $ViteJS.Wallet.Address.newAddr(bits);
+        this.decryptEntropy = entropy;
+        this.addrs = [addr];
+        this.defaultInx = 0;
+        this.addrNum = 1;
+    }
     getMnemonic() {
         if (!this.decryptEntropy) {
             return null;

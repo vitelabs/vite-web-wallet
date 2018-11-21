@@ -1,7 +1,7 @@
 <template>
     <div class="token-card">
         <div class="title">
-            <img :src="iconMap[opt.symbol] || iconMap['default']" class="icon" />
+            <img v-if="opt.icon" :src="opt.icon" class="icon" />
             <span class="tokenName">{{ opt.symbol }}</span>
         </div>
         <div class="body">
@@ -17,8 +17,8 @@
                 <span>{{ opt.onroadNum || 0 }} {{ $t('accDetail.pend') }}</span>
             </div>
         </div>
-        <div class="btn __pointer" :class="{ unuse: !opt.id }" 
-             @click="sendTransaction(opt)">{{ $t('accDetail.sendTrans') }}</div>
+        <div class="btn __pointer" :class="{ 'unuse': !opt.id || !opt.balance }" 
+             @click="_sendTx">{{ $t('accDetail.sendTrans') }}</div>
     </div>
 </template>
 
@@ -48,10 +48,17 @@ export default {
             iconMap: {
                 VITE: viteIcon,
                 VCP: vcpIcon,
-                VTT: vttIcon,
-                default: viteIcon
+                VTT: vttIcon
             }
         };
+    },
+    methods: {
+        _sendTx() {
+            if (!this.opt.id || !this.opt.balance) {
+                return;
+            }
+            this.sendTransaction && this.sendTransaction(this.opt);
+        }
     }
 };
 </script>

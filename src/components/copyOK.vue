@@ -21,7 +21,7 @@ export default {
     position: absolute;
     bottom: 6px;
     left: 50%;
-    margin-left: -62px; 
+    transform: translateX(-50%);
     background: #5B638D;
     box-sizing: border-box;
     border-radius: 6px;

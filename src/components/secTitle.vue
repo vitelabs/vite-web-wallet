@@ -1,20 +1,30 @@
 <template>
     <div class="sec-title-container">
         <span>{{ $t(title) }}</span>
-        <span class="help __pointer">
+        <span v-if="isShowHelp" @click="_showHelp" class="help __pointer">
             <i class="icon"></i>
-            <span @click="_showHelp" v-html="$t(helpTitle)"></span>
+            <span class="help-text" v-html="$t(helpTitle)"></span>
         </span>
+        <go-net-btn class="other-prod"></go-net-btn>
     </div>
 </template>
 
 <script>
+import goNetBtn from './goNetBtn.vue';
+
 export default {
+    components: {
+        goNetBtn
+    },
     props: {
         title: {
             default: function() {
                 return `${this.$route.name}.title`;
             }
+        },
+        isShowHelp: {
+            type: Boolean,
+            default: true
         },
         helpTitle: {
             default: function() {
@@ -56,34 +66,48 @@ export default {
 @import "~assets/scss/vars.scss";
 
 .sec-title-container {
-    font-family: $font-bold;
+    font-family: $font-bold, arial, sans-serif;
     font-size: 24px;
     color: #1d2024;
-    line-height: 32px;
+    line-height: 40px;
     .help {
-        float: right;   // iPhone 5/SE
         margin-top: 6px;
         align-items: center;
-        display: flex;
         font-size: 14px;
         color: #007aff;
         text-align: right;
         line-height: 20px;
+        margin-left: 16px;
+        display: inline-block;
+        white-space: nowrap;
         .icon {
             background: url(~assets/imgs/detail.svg);
             width: 20px;
             height: 20px;
-            margin-bottom: 1px;
+            display: inline-block;
+            margin-right: 0; 
         }
+        .help-text {
+            position: relative;
+            bottom: 2px;
+        }
+    }
+    .other-prod {
+        float: right;
     }
 }
 
-@media only screen and (max-width: 374px) {
+@media only screen and (max-width: 740px) {
     .sec-title-container {
-        font-size: 22px;
         .help {
-            margin-top: 7px;
-            font-size: 12px;
+            margin-left: 0; 
+            margin-top: 8px;
+            text-align: left;
+            display: block;
+        }
+        .other-prod {
+            float: unset;
+            margin-top: 10px;
         }
     }
 }

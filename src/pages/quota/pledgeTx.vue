@@ -195,14 +195,16 @@ export default {
             this.sendPledgeTx({
                 toAddr: this.toAddr,
                 amount: this.amount
-            }, 'pledgeBlock', (result) => {
+            }, 'pledgeBlock', (result, err) => {
                 this.loading = false;
                 if (!result) {
-                    this.$toast(this.$t('quota.pledgeFail'));
+                    err && this.$toast(this.$t('quota.pledgeFail'), err);
                     return;
                 }
 
-                this.$toast(this.$t('quota.pledgeSuccess'));
+                this.$toast(this.$t('hint.request', {
+                    name: this.$t('quota.btn') 
+                }));
                 this.clearAll();
                 Vue.nextTick(() => {
                     this.stopWatch = false;
