@@ -1,6 +1,8 @@
 import acc from './storeAcc.js';
 import { pwdConfirm } from 'components/password/index.js';
 import config from 'config/constant';
+import vitecrypto from 'testwebworker';
+// import vitecrypto from './vitecrypto.js';
 
 const namePre = 'account';
 let passTimeout;
@@ -73,14 +75,14 @@ class Account {
         }
 
         if (this.isWalletAcc) {
-            return !this.encryptObj ? Promise.resolve(false) : $ViteJS.Wallet.Account.verify(this.encryptObj, pass);
+            return !this.encryptObj ? Promise.resolve(false) : $ViteJS.Wallet.Account.verify(this.encryptObj, pass, vitecrypto);
         }
 
         if (!this.keystore) {
             return Promise.resolve(false);
         }
         
-        return $ViteJS.Wallet.Keystore.decrypt(JSON.stringify(this.keystore), pass);
+        return $ViteJS.Wallet.Keystore.decrypt(JSON.stringify(this.keystore), pass, vitecrypto);
     }
 
     encrypt(pass) {
@@ -90,7 +92,7 @@ class Account {
 
         pass && (this.pass = pass);
 
-        return $ViteJS.Wallet.Account.encrypt(this.decryptEntropy, this.pass).then((encryptObj) => {
+        return $ViteJS.Wallet.Account.encrypt(this.decryptEntropy, this.pass, vitecrypto).then((encryptObj) => {
             let obj = JSON.parse(encryptObj);
             this.entropy = obj.encryptentropy;
             this.encryptObj = obj;

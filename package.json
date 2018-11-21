@@ -64,6 +64,7 @@
         "node-libs-browser": "^2.1.0",
         "qrcode.es": "^1.0.0",
         "qs": "^6.5.2",
+        "testwebworker": "git+https://github.com/vitelabs/cryptojsAccelerator.git",
         "vuex": "^3.0.1"
     }
 }

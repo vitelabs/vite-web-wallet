@@ -146,7 +146,8 @@ export default {
                     this.isLoading = false;
                     result && loginSuccess();
                     !result && this.$toast(this.$t('hint.pwErr'));
-                }).catch(() => {
+                }).catch((err) => {
+                    console.log(err)
                     this.isLoading = false;
                     this.$toast(this.$t('hint.pwErr'));
                 });
