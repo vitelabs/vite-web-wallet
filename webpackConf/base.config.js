@@ -118,7 +118,7 @@ module.exports = {
             components: path.join(SRC_PATH, '/components'),
             pages: path.join(SRC_PATH, '/pages'),
             assets: path.join(SRC_PATH, '/assets'),
-            routes: path.join(__dirname, '../routes'),
+            routes: path.join(SRC_PATH, '../routes'),
             utils: path.join(SRC_PATH, '/utils'),
             i18n: path.join(SRC_PATH, '/i18n'),
             config:path.join(SRC_PATH, '../config'),
