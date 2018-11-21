@@ -379,7 +379,7 @@ module.exports = {
                     title: 'Voting',
                     cancelText: 'Not yet',
                     submitText: 'Ready to vote',
-                    content: 'You can vote for only one SBP, are you sure you want to give your vote?'
+                    content: 'You can vote for only one SBP, are you sure you want to vote for {name}?'
                 },
                 cover: {
                     title: 'Voting',
