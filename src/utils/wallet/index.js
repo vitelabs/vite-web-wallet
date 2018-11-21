@@ -3,10 +3,7 @@ import account from './account.js';
 import toast from 'components/toast/index.js';
 import storage from 'utils/localStorage.js';
 import statistics from 'utils/statistics';
-
-let vitecrypto = null;
-// import vitecrypto from 'testwebworker';
-// import vitecrypto from './vitecrypto.js';
+import vitecrypto from 'testwebworker';
 
 const LAST_KEY = 'ACC_LAST';
 
