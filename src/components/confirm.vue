@@ -151,6 +151,7 @@ export default {
         box-sizing: border-box;
         justify-content: space-between;
         .__btn {
+            white-space: nowrap;
             display: inline-block;
             width: 48%;
             max-width: 190px;
