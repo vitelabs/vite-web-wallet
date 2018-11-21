@@ -44,7 +44,7 @@
                         <div class="__tb_cell" v-for="v in $t('vote.section2.head')" :key="v">{{v}}</div>
                     </div>
                     <div class="__tb_content" v-if="!!nodeList.length">
-                        <div class="__tb_row __tb_content_row" v-for="v in nodeList" :key="v.nodeName">
+                        <div class="__tb_row __tb_content_row active __pointer" v-for="v in nodeList" :key="v.nodeName">
                             <div class="__tb_cell nodename">{{v.nodeName}}</div>
                             <div class="__tb_cell">{{v.nodeAddr}}</div>
                             <div class="__tb_cell">{{v.voteNum}}</div>
@@ -258,7 +258,8 @@ export default {
                     submitTxt: this.$t(`vote.section2.confirm.${t}.submitText`),
                     cancelTxt: this.$t(`vote.section2.confirm.${t}.cancelText`),
                     content: this.$t(`vote.section2.confirm.${t}.content`, {
-                        nodeName: this.voteList[0] && this.voteList[0].nodeName
+                        nodeName: this.voteList[0] && this.voteList[0].nodeName,
+                        name: v.name
                     }),
                     submit: sendVote,
                     exchange: this.haveVote

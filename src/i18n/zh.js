@@ -381,7 +381,7 @@ module.exports = {
                     title: '投票',
                     cancelText: '暂不投票',
                     submitText: '确认投票',
-                    content: '您只能给一个节点投票，确认投票给此节点吗？'
+                    content: '您只能给一个节点投票，确认投票给{name}吗？'
                 },
                 cover: {
                     title: '投票',
