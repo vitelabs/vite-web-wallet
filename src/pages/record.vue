@@ -2,7 +2,7 @@
 
 <template>
     <div>
-        <mnemonic :title="'mnemonic.record'" :submit="login">
+        <mnemonic :title="'mnemonic.record'" :isLoading="isLoading" :submit="login">
             <div class="row">
                 <span @click="change" class="change __pointer">{{ $t('mnemonic.change', { len }) }}</span>
                 <img @click="copy" class="copy __pointer" src="../assets/imgs/copy_white.svg"/>
@@ -34,6 +34,9 @@ export default {
         this.activeAccount = this.$wallet.getActiveAccount();
         this.mnemonic = this.activeAccount.getMnemonic() || '';
     },
+    destroyed() {
+        this.isLoading = false;
+    },
     data() {
         let activeAccount = this.$wallet.getActiveAccount();
         let mnemonic = activeAccount.getMnemonic() || '';
@@ -42,7 +45,8 @@ export default {
             activeAccount,
             mnemonic,
             len: 12,
-            copySuccess: false
+            copySuccess: false,
+            isLoading: false
         };
     },
     computed: {
@@ -64,7 +68,12 @@ export default {
             this.mnemonic = this.activeAccount.getMnemonic() || '';
         },
         login() {
+            this.isLoading = true;
             this.activeAccount.encrypt().then(() => {
+                if (!this.isLoading) {
+                    return;
+                }
+                this.isLoading = false;
                 this.activeAccount.save();
                 this.$router.push({
                     name: 'index'
