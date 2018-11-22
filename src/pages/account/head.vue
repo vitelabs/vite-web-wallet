@@ -16,7 +16,8 @@
         <div class="addr-wrapper">
             <div class="head-title">
                 <span>{{ $t('accDetail.address') }}</span>
-                <span ref="codeContainer" class="title_icon __pointer qrcode"><img src="../../assets/imgs/qrcode_default.svg" @click="toggleQrCode" />
+                <span v-click-outside="closeQrCode" ref="codeContainer" class="title_icon __pointer qrcode">
+                    <img src="../../assets/imgs/qrcode_default.svg" @click="toggleQrCode" />
                     <div class="code-container" v-show="qrcodeShow">
                         <div class="code">
                             <qrcode :text="addressStr" :options="{ size:146 }" @genImage="getImage"></qrcode>
@@ -133,7 +134,7 @@ export default {
         getTestToken() {
             if (!this.getTestTokenAble){
                 return;
-            };
+            }
             if (!viteWallet.Net.getNetStatus()) {
                 this.$toast(this.$t('nav.noNet'));
                 return;
@@ -147,7 +148,7 @@ export default {
                 this.$toast( this.$t('accDetail.hint.token') );
                 setTimeout(()=>{
                     this.getTestTokenAble=true;
-                },3000)
+                },3000);
             }).catch((err) => {
                 this.getTestTokenAble=true;
                 console.warn(err);

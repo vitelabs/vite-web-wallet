@@ -18,8 +18,7 @@
                 <div class="__tb_cell height">
                     {{ item.isCancel ? '--' : item.withdrawHeight }}
                     <i v-if="!item.isCancel" @click.self.stop="showTime(index)" class="tipsicon __pointer">
-                        <tooltips v-show="showTimeTips === index" class="sbp-tooltips"
-                                  v-click-outside @clickoutside="hideTime"
+                        <tooltips v-show="showTimeTips === index" v-click-outside="hideTime" class="sbp-tooltips"
                                   :content="$t('SBP.section2.expireDate', { time: item.time })"></tooltips>
                     </i>
                 </div>

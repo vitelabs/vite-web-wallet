@@ -1,10 +1,10 @@
 <template>
-    <div class="account-wrapper" @click="closeQrCode">
+    <div class="account-wrapper">
         <div class="head">
             <sync-block class="sync-block"></sync-block>
             <go-net-btn class="net-btn"></go-net-btn>
         </div>
-        <account-head ref="accountHead" class="item"></account-head>
+        <account-head class="item"></account-head>
         <div class="token-list item">
             <tokenCard v-for="token in tokenList" :key="token.id"
                        :opt="token" :sendTransaction="showTrans"></tokenCard>
@@ -61,10 +61,6 @@ export default {
         closeTrans() {
             this.isShowTrans = false;
             this.activeToken = null;
-        },
-        closeQrCode(e) {
-            let accountHead = this.$refs.accountHead;
-            accountHead && accountHead.closeQrCode(e);
         }
     }
 };
