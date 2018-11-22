@@ -5,29 +5,29 @@ module.exports = {
     logout: 'Logout',
 
     errCode: {
-        35003: '{name}ID发生冲突，请您稍后重新提交',
-        35004: '内置合约发生错误，请稍后重试（35004）',
-        35005: '交易发送频繁，请您稍后再次尝试',
-        35006: '内置合约发生错误，请稍后重试（35006）',
-        36001: '您需要接收一笔交易之后才可发起转账',
-        36002: '系统校验不通过，请稍后重试（36002）',
-        36003: '系统校验不通过，请稍后重试（36003）',
-        36004: '系统校验不通过，请稍后重试（36004）',
-        36005: '快照块高度不合法，请您稍后再试'
+        35003: '{name} ID conflict occurs, please re-submit later',
+        35004: 'Built-in contract error, please try again later（35004）',
+        35005: 'Transactions are sent too frequent, please try again later',
+        35006: 'Built-in contract method not exist, please try again later（35006）',
+        36001: 'You cannot make any transfer until you receive a transaction',
+        36002: 'System verify failed, please try again later（36002）',
+        36003: 'System verify failed, please try again later（36003）',
+        36004: 'System verify failed, please try again later（36004）',
+        36005: 'napshot block height is illegal, please try again later'
     },
 
     txType: {
-        0: '注册SBP',
-        1: '更新注册',
-        2: '撤销注册',
-        3: '提取奖励',
-        4: '投票',
-        5: '撤销投票',
-        6: '获取配额',
-        7: '取回配额抵押',
-        8: '铸币',
-        9: '取回铸币抵押',
-        10: '转账'
+        0: 'SBP Registration',
+        1: 'Update Registration',
+        2: 'Revoke Registration',
+        3: 'Retrieve Reward',
+        4: 'Voting',
+        5: 'Revoke Voting',
+        6: 'Get TPS Quota',
+        7: 'Withdrawal of staking quota',
+        8: 'Token Issuance',
+        9: 'Withdrawal of staking token',
+        10: 'Transfer'
     },
     
     firstNotice: {
@@ -150,7 +150,7 @@ module.exports = {
         },
         valid: {
             remarksFormat: 'Format error! Remarks can only contain Chinese, English and punctuations.',
-            remarksLong: '剩余字节：{len}'
+            remarksLong: '{len} bytes left'
         },
         hint: {
             token: 'VTT test tokens have be sent to your account, please check your account!',
@@ -333,7 +333,7 @@ module.exports = {
 
     // vote
     vote: {
-        toReward: '查看我的奖励',
+        toReward: 'View my rewards',
         title: 'Voting',
         search: 'Please input node name or block creation address',
         help: {
@@ -342,11 +342,11 @@ module.exports = {
         },
         addrNoExistErr:'You aren\'t able to vote for now as your address has no transaction record before',
         section1: {
-            title: 'My Vote',
-            head: ['Name', 'Status', 'My Vote', 'Status of Voting', 'Operation'],
+            title: 'My Voting',
+            head: ['Name', 'Status', 'My Voting', 'Status of Voting', 'Operation'],
             nodeStatusMap: {
                 1: 'Active',
-                2: 'Suspended'
+                2: 'Standby'
             },
             voteStatusMap: {
                 voted: 'Voting Successful',
@@ -429,10 +429,10 @@ module.exports = {
         submit: 'Submit',
         next: 'Next Step',
         understand: 'I understand',
-        edit: 'edit',
-        copy: 'copy',
-        reReg: '重新注册',
-        otherProd: '使用 Vite 其他产品'
+        edit: 'Edit',
+        copy: 'Copy',
+        reReg: 'Re-register',
+        otherProd: 'Experience other products of Vite'
     },
     paging: {
         pre: 'Prev',
@@ -448,6 +448,6 @@ module.exports = {
         pwEmpty: 'Password cannot be empty!',
         noData: 'No Data',
         err: 'Oops, error occurs',
-        request: '{name}请求已发送，请耐心等待'
+        request: '{name} request has sent, please wait'
     }
 };
