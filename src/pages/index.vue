@@ -1,3 +1,5 @@
+/**  vite-wallet index-layout */
+
 <template>
     <div class="app-wrapper">
         <index-layout v-if="layoutType === 'index'">
@@ -45,8 +47,8 @@ export default {
     },
     methods: {
         changeLayout(to, from) {
-            let toHome = routeConfig.indexLayoutRoutes.indexOf(to) === -1 && to !== 'index';
-            let fromHome = routeConfig.indexLayoutRoutes.indexOf(from) === -1 && to !== 'index';
+            let toHome = routeConfig.indexLayoutRoutes.indexOf(to) === -1;
+            let fromHome = routeConfig.indexLayoutRoutes.indexOf(from) === -1;
 
             if (toHome) {
                 this.layoutType = 'home';
