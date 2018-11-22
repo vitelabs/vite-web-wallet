@@ -334,7 +334,8 @@ module.exports = {
     },
 
     // vote
-    vote: { // [TODO]
+    vote: {
+        toReward: '查看我的奖励',
         title: '投票',
         search: '请输入候选节点名称或者出块地址',
         help: {
