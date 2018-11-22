@@ -17,7 +17,7 @@ module.exports = {
     },
 
     txType: {
-        0: '注册',
+        0: '注册SBP',
         1: '更新注册',
         2: '撤销注册',
         3: '提取奖励',
@@ -41,7 +41,7 @@ module.exports = {
     test: {
         t: 'Preview Version',
         txt1: 'The preview version of wallet is a lightweight-node wallet officially issued by VITE.',
-        txt2: 'The current version supports functions of checking account balance, sending transactions, receiving transactions in default, acquiring test tokens, staking VITE tokens for TPS quota and etc.',
+        txt2: 'The current version supports functions of checking account balance, sending transactions, receiving transactions in default, acquiring test tokens, staking VITE tokens for TPS quota, SBP registration, vote and etc.',
         txt3: 'Support acquiring test tokens and experiencing the product by using them, the test tokens issued by VITE official can be only used for testing and with no actual value, it will be cleared by VITE official sporadically',
         v: 'Current version: {version}'
     },
@@ -333,6 +333,7 @@ module.exports = {
 
     // vote
     vote: {
+        toReward: '查看我的奖励',
         title: 'Voting',
         search: 'Please input node name or block creation address',
         help: {
@@ -379,7 +380,7 @@ module.exports = {
                     title: 'Voting',
                     cancelText: 'Not yet',
                     submitText: 'Ready to vote',
-                    content: 'You can vote for only one SBP, are you sure you want to give your vote?'
+                    content: 'You can vote for only one SBP, are you sure you want to vote for {name}?'
                 },
                 cover: {
                     title: 'Voting',
