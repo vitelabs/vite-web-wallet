@@ -38,10 +38,10 @@ module.exports = {
         text4: 'The current version of wallet is preview version, the Vite test tokens you obtained is only for testing and has no any actual value. Meanwhile, the official will occasionally clear test tokens.'
     },
 
-    test: { // [TODO]
+    test: {
         t: 'Preview Version',
         txt1: 'The preview version of wallet is a lightweight-node wallet officially issued by VITE.',
-        txt2: 'The current version supports functions of checking account balance, sending transactions, receiving transactions in default, acquiring test tokens, staking VITE tokens for TPS quota and、注册SBP、投票and etc.',
+        txt2: 'The current version supports functions of checking account balance, sending transactions, receiving transactions in default, acquiring test tokens, staking VITE tokens for TPS quota, SBP registration, vote and etc.',
         txt3: 'Support acquiring test tokens and experiencing the product by using them, the test tokens issued by VITE official can be only used for testing and with no actual value, it will be cleared by VITE official sporadically',
         v: 'Current version: {version}'
     },
