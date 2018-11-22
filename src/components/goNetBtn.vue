@@ -6,7 +6,8 @@
 export default {
     methods: {
         gotoNet() {
-            window.open('https://vite.net/');
+            let locale = this.$i18n.locale === 'zh' ? 'zh/' : '';
+            window.open(`https://vite.net/${locale}`);
         }
     }
 };

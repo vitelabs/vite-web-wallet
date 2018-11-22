@@ -13,7 +13,9 @@
                     <span class="title">{{ $t('setting.version') }}</span>{{ version }}
                 </div>
                 <div class="row">
-                    <span class="title">{{ $t('setting.service') }}</span><span class="link">info@vite.org</span>
+                    <a href="mailto:info@vite.org"  target="_blank">
+                        <span class="title">{{ $t('setting.service') }}</span><span class="link">info@vite.org</span>
+                    </a>
                     <a href="https://vite.org/" target="_blank">
                         <span class="title">{{ $t('setting.site') }}</span><span class="link">vite.org</span>
                     </a>
