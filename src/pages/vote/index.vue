@@ -18,12 +18,18 @@
                 <div class="__tb_content">
                     <div class="__tb_row" v-for="v in voteList" :key="v.nodeName">
                         <div class="__tb_cell nodename">{{v.nodeName}}</div>
-                        <div class="__tb_cell">{{v.nodeStatusText}} <i v-if="v.nodeStatus===2" class="tipsicon hoveraction" @click.self.stop="toggleTips">
-                            <tooltips v-if="isResisterTipsShow" v-click-outside @clickoutside="hideTips" class="unregister-tips" :content="$t('vote.section1.hoverHelp',{nodeName:v.nodeName})"></tooltips>
-                        </i></div>
+                        <div class="__tb_cell">
+                            {{v.nodeStatusText}} 
+                            <i v-if="v.nodeStatus===2" class="tipsicon hoveraction" @click.self.stop="toggleTips">
+                                <tooltips v-if="isResisterTipsShow" v-click-outside @clickoutside="hideTips" class="unregister-tips" :content="$t('vote.section1.hoverHelp',{nodeName:v.nodeName})"></tooltips>
+                            </i>
+                        </div>
                         <div class="__tb_cell">{{v.voteNum}}</div>
                         <div class="__tb_cell">{{v.voteStatusText}}</div>
-                        <div class="__tb_cell" :class="cache?'unclickable':'clickable'" @click="cancelVote(v)">{{v.operate}}</div>
+                        <div class="__tb_cell" :class="cache ? 'unclickable' : 'clickable'">
+                            <span @click="cancelVote(v)">{{ v.operate }}</span>
+                            <span class="reward" @click="openReward(v)">{{ $t('vote.toReward') }}</span>
+                        </div>
                     </div>
                     <div class="__tb_row seat">
                     </div>
@@ -44,9 +50,9 @@
                         <div class="__tb_cell" v-for="v in $t('vote.section2.head')" :key="v">{{v}}</div>
                     </div>
                     <div class="__tb_content" v-if="!!nodeList.length">
-                        <div class="__tb_row __tb_content_row active __pointer" v-for="v in nodeList" :key="v.nodeName">
+                        <div class="__tb_row __tb_content_row active" v-for="v in nodeList" :key="v.nodeName">
                             <div class="__tb_cell nodename">{{v.nodeName}}</div>
-                            <div class="__tb_cell">{{v.nodeAddr}}</div>
+                            <div @click="goToDetail(v.nodeAddr)" class="__tb_cell clickable">{{v.nodeAddr}}</div>
                             <div class="__tb_cell">{{v.voteNum}}</div>
                             <div class="__tb_cell clickable" @click="vote(v)">{{v.operate}}</div>
                         </div>
@@ -136,6 +142,18 @@ export default {
           }) || [];
                 return this.nodeData;
             });
+        },
+        goToDetail(addr) {
+            let locale = this.$i18n.locale === 'zh' ? 'zh/' : '';
+            window.open(`${process.env.viteNet}${locale}account/${addr}`);
+        },
+        openReward() {
+            if (this.cache) {
+                return;
+            }
+            const activeAccount = this.$wallet.getActiveAccount();
+            let locale = this.$i18n.locale === 'zh' ? 'zh' : 'en';
+            window.open(`https://reward.vite.net?language=${locale}&address=${activeAccount.getDefaultAddr()}`);
         },
         cancelVote(v) {
             if (this.cache) {
@@ -424,7 +442,10 @@ export default {
     }
   }
   .__tb_cell {
-    min-width: 150px;
+    min-width: 180px;
+    .reward {
+        margin-left: 10px;
+    }
     &.nodename {
       overflow: hidden;
       text-overflow: ellipsis;

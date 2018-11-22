@@ -333,6 +333,7 @@ module.exports = {
 
     // vote
     vote: {
+        toReward: '查看我的奖励',
         title: 'Voting',
         search: 'Please input node name or block creation address',
         help: {
