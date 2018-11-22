@@ -3,7 +3,7 @@
         <div class="__title">{{$t('nav.head.login')}}</div>
 
         <div class="bottom __btn __pointer">
-            <div @click="toggleAccountList">
+            <div v-click-outside="hideAccountList" @click="toggleAccountList">
                 <div v-show="!activeAccount" class="__btn_input">{{ $t('create.choose') }}</div>
 
                 <div v-show="activeAccount && !activeAccount.addr" class="__btn __btn_input">
