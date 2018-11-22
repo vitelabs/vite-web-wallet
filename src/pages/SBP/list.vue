@@ -271,7 +271,7 @@ export default {
 }
 .name {
     width: 20%;
-    min-width: 300px;
+    min-width: 330px;
 }
 .addr {
     min-width: 200px;
