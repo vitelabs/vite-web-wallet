@@ -346,7 +346,7 @@ module.exports = {
             head: ['Name', 'Status', 'My Voting', 'Status of Voting', 'Operation'],
             nodeStatusMap: {
                 1: 'Active',
-                2: 'Standby'
+                2: 'Inactive'
             },
             voteStatusMap: {
                 voted: 'Voting Successful',
