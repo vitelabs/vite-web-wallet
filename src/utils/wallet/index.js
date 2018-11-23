@@ -200,6 +200,7 @@ class Wallet {
             entropy = entropy || encryptObj.encryptentropy;
 
             let before = new Date().getTime();
+            encryptObj.encryptentropy = encryptObj.encryptentropy || entropy;   // Very very impotant!!!!!
             let decryptEntropy = $ViteJS.Wallet.Account.decrypt(JSON.stringify(encryptObj), pass);
             let after = new Date().getTime();
             statistics.event('mnemonic-decrypt', encryptObj.version || '1', 'time', after - before);
