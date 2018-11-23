@@ -175,15 +175,15 @@ export default {
                 leftBtn: {
                     text: this.$t('accDetail.quota.left'),
                     click: () => {
-                        this.startPow();
+                        this.$router.push({
+                            name: 'quota'
+                        });
                     }
                 },
                 rightBtn: {
                     text: this.$t('accDetail.quota.right'),
                     click: () => {
-                        this.$router.push({
-                            name: 'quota'
-                        });
+                        this.startPow();
                     }
                 },
                 content: this.$t('accDetail.quota.describe')

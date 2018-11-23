@@ -220,9 +220,9 @@ export default {
 <style lang="scss">
 @import "~assets/scss/vars.scss";
 
-.tType {
-    min-width: 140px;
-    width: 10%;
+.tType {    
+    min-width: 160px;
+    width: 15%;
 }
 .status {
     min-width: 120px;

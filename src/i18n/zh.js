@@ -164,8 +164,8 @@ module.exports = {
         quota: {
             title: '配额不足',
             describe: '配额不足，建议您点击运行PoW获取配额或抵押VITE获取配额',
-            left: '运行PoW',
-            right: '抵押VITE'
+            left: '抵押VITE',
+            right: '运行PoW'
         },
         trans: {
             powErr: '运行PoW错误，请重新发起转账',
