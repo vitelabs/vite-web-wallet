@@ -93,9 +93,9 @@ module.exports = {
     // account list
     accList: {
         balance: 'Balance',
-        addAcc: 'Add Account',
-        addr: 'Address Lists of Accounts',
-        addrList: 'Address List',
+        addAcc: 'Add Address',
+        addr: 'Addresses of Accounts',
+        addrList: 'Addresses',
         default: 'Select Default User'
     },
 
@@ -191,7 +191,7 @@ module.exports = {
         btn: 'Submit Staking',
         myQuotaList: 'My Staking List',
         amountPlaceholder: 'Please input staking amount, minimum 10 VITE',
-        addrPlaceholder: 'Please input quota receiving address',
+        addrPlaceholder: 'Please input quota recipient address',
         cancelAmount: 'Please input withdraw amount',
         pledgeSuccess: 'Successfully Submitted',
         pledgeFail: 'Failed to Submit',
