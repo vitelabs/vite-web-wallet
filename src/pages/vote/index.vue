@@ -309,8 +309,8 @@ export default {
                     ? (data.nodeStatus = 1)
                     : (data.nodeStatus = 2);
                 // voteNotWork first
-                data.nodeStatus === 2 && (data.voteStatus = 'voteNotWork');
                 this.voteData[0]&&this.voteData[0].nodeName===data.nodeName&&(data.voteStatus=this.voteData[0].voteStatus);
+                data.nodeStatus === 2 && (data.voteStatus = 'voteNotWork');
                 data.nodeStatusText = this.$t('vote.section1.nodeStatusMap')[
                     data.nodeStatus
                 ];
