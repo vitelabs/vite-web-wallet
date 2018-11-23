@@ -227,10 +227,10 @@ module.exports = {
             title: 'My Staking List',
             total: 'Staking {amount} VITE in total',
             amount: 'Amount',
-            withdrawHeight: 'Matured snapshot height',
+            withdrawHeight: 'Expected snapshot height',
             withdrawTime: 'Expected due date',
             cancel: 'Withdrawal of staked token',
-            operate: 'Operation',
+            operate: 'Action',
             unexpired: 'Temporarily cannot make withdrawal of staked token until due date'
         }
     },
@@ -343,7 +343,7 @@ module.exports = {
         addrNoExistErr:'You aren\'t able to vote for now as your address has no transaction record before',
         section1: {
             title: 'My Voting',
-            head: ['Name', 'Status', 'My Voting', 'Status of Voting', 'Operation'],
+            head: ['Name', 'Status', 'My Voting', 'Status of Voting', 'Action'],
             nodeStatusMap: {
                 1: 'Active',
                 2: 'Inactive'
@@ -374,7 +374,7 @@ module.exports = {
     
         section2: {
             title: 'SBP candidates',
-            head: ['Node Name', 'Address', 'Votes', 'Operation'],
+            head: ['Node Name', 'Address', 'Votes', 'Action'],
             confirm: {
                 normal: {
                     title: 'Voting',
