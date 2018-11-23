@@ -205,6 +205,7 @@ class Wallet {
     
                 let encryptObj = acc.encryptObj;
                 entropy = entropy || encryptObj.encryptentropy;
+                encryptObj.encryptentropy = encryptObj.encryptentropy || entropy;   // Very very impotant!!!!!
     
                 let before = new Date().getTime();
                 

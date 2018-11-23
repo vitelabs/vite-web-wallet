@@ -92,7 +92,7 @@ module.exports = {
     // account list
     accList: {
         balance: '余额',
-        addAcc: '新添加一个账户',
+        addAcc: '添加地址',
         addr: '账户地址列表',
         addrList: '账户地址列表',
         default: '选择默认用户'
@@ -164,8 +164,8 @@ module.exports = {
         quota: {
             title: '配额不足',
             describe: '配额不足，建议您点击运行PoW获取配额或抵押VITE获取配额',
-            left: '运行PoW',
-            right: '抵押VITE'
+            left: '抵押VITE',
+            right: '运行PoW'
         },
         trans: {
             powErr: '运行PoW错误，请重新发起转账',
