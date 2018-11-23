@@ -198,7 +198,7 @@ module.exports = {
         canclePledgeFail: '操作失败',
         limitAmt: '抵押金额需填写大于等于10的数字',
         maturity: '抵押已到期',
-        maxAmt: '取回金额在0~{amount}之间”，{amount}为当前可取回最大金额',
+        maxAmt: '取回金额应在 (0,{amount}] 之内',
         confirm: {
             help: {
                 t1: '什么是配额',
