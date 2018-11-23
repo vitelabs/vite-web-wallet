@@ -221,7 +221,7 @@ export default {
 @import "~assets/scss/vars.scss";
 
 .tType {    
-    min-width: 160px;
+    min-width: 230px;
     width: 15%;
 }
 .status {
