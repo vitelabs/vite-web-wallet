@@ -93,9 +93,9 @@ module.exports = {
     // account list
     accList: {
         balance: 'Balance',
-        addAcc: 'Add Account',
-        addr: 'Address Lists of Accounts',
-        addrList: 'Address List',
+        addAcc: 'Add Address',
+        addr: 'Addresses of Accounts',
+        addrList: 'Addresses',
         default: 'Select Default User'
     },
 
@@ -165,8 +165,8 @@ module.exports = {
         quota: {
             title: 'Insufficient Quota',
             describe: 'your left quotas turn out to be insufficient, you can acquire more quotas by running PoW or staking VITE',
-            left: 'Run PoW',
-            right: 'Stake VITE'
+            left: 'Stake VITE',
+            right: 'Run PoW'
         },
         trans: {
             powErr: 'Error occurs when running PoW, please try again',
@@ -191,7 +191,7 @@ module.exports = {
         btn: 'Submit Staking',
         myQuotaList: 'My Staking List',
         amountPlaceholder: 'Please input staking amount, minimum 10 VITE',
-        addrPlaceholder: 'Please input quota receiving address',
+        addrPlaceholder: 'Please input quota recipient address',
         cancelAmount: 'Please input withdraw amount',
         pledgeSuccess: 'Successfully Submitted',
         pledgeFail: 'Failed to Submit',
@@ -227,10 +227,10 @@ module.exports = {
             title: 'My Staking List',
             total: 'Staking {amount} VITE in total',
             amount: 'Amount',
-            withdrawHeight: 'Matured snapshot height',
+            withdrawHeight: 'Expected snapshot height',
             withdrawTime: 'Expected due date',
             cancel: 'Withdrawal of staked token',
-            operate: 'Operation',
+            operate: 'Action',
             unexpired: 'Temporarily cannot make withdrawal of staked token until due date'
         }
     },
@@ -343,10 +343,10 @@ module.exports = {
         addrNoExistErr:'You aren\'t able to vote for now as your address has no transaction record before',
         section1: {
             title: 'My Voting',
-            head: ['Name', 'Status', 'My Voting', 'Status of Voting', 'Operation'],
+            head: ['Name', 'Status', 'My Voting', 'Status of Voting', 'Action'],
             nodeStatusMap: {
                 1: 'Active',
-                2: 'Standby'
+                2: 'Inactive'
             },
             voteStatusMap: {
                 voted: 'Voting Successful',
@@ -374,7 +374,7 @@ module.exports = {
     
         section2: {
             title: 'SBP candidates',
-            head: ['Node Name', 'Address', 'Votes', 'Operation'],
+            head: ['Node Name', 'Address', 'Votes', 'Action'],
             confirm: {
                 normal: {
                     title: 'Voting',
