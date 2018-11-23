@@ -17,7 +17,7 @@ export default {
 @import "~assets/scss/vars.scss";
 
 .copy-success {
-    transition: all 0.3s ease-in-out;
+    transition: opacity 0.3s ease-in-out;
     position: absolute;
     bottom: 6px;
     left: 50%;
@@ -28,11 +28,13 @@ export default {
     font-size: 12px;
     line-height: 12px;
     color: #FFFFFF;
-    padding: 6px;
     opacity: 0;
+    height: 0;
     font-family: $font-normal, arial, sans-serif;
+    padding: 6px;
     &.show {
         opacity: 1;
+        height: auto;
     }
     &:after {
         content: ' ';

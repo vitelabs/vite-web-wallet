@@ -56,7 +56,7 @@ module.exports = {
         error: 'Incorrect seed phrase. Try again',
         hint: 'Mnemonic format: words, spaces, words... spaces, words.',
         netErr: 'The full node is abnormal, please try again later.',
-        change: '切换{len}个助记词'
+        change: 'Switch to {len} Mnemonic Words'
     },
 
     setting: {
