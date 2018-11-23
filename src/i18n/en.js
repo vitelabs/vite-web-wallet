@@ -165,8 +165,8 @@ module.exports = {
         quota: {
             title: 'Insufficient Quota',
             describe: 'your left quotas turn out to be insufficient, you can acquire more quotas by running PoW or staking VITE',
-            left: 'Run PoW',
-            right: 'Stake VITE'
+            left: 'Stake VITE',
+            right: 'Run PoW'
         },
         trans: {
             powErr: 'Error occurs when running PoW, please try again',
