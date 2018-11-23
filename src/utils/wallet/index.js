@@ -132,11 +132,10 @@ class Wallet {
         let acc = getAccFromAddr(addr);
         let keystore = acc.keystore;
 
-        let before = new Date().getTime();
 
         return new Promise((res, rej) => {
+            let before = new Date().getTime();
             $ViteJS.Wallet.Keystore.decrypt(JSON.stringify(keystore), pass, vitecrypto).then((privKey) => {
-                // Reduce the difficulty.
                 let after = new Date().getTime();
                 let n = ( keystore.crypto && keystore.crypto.scryptparams && keystore.crypto.scryptparams.n) ? 
                     keystore.crypto.scryptparams.n : 0;
@@ -155,7 +154,7 @@ class Wallet {
                     return res(true);
                 }
 
-                // 262144 to 4096
+                // Reduce the difficuly. 262144 to 4096
                 let obj = $ViteJS.Vite.Account.newHexAddr(privKey);
                 $ViteJS.Wallet.Keystore.encrypt(obj, pass, vitecrypto).then((keystoreStr) => {
                     keystore = JSON.parse(keystoreStr);
