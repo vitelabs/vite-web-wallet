@@ -199,7 +199,7 @@ module.exports = {
         canclePledgeFail: 'Failed',
         limitAmt: 'Staking amount should not be less than 10.',
         maturity: 'Staking has expired!',
-        maxAmt: 'Receiving amount between 0~{amount}”, the current maximum amount is {amount}',
+        maxAmt: 'Withdraw amount should be in (0, {amount}]',
         confirm: {
             help: {
                 t1: 'What is quota? ',
