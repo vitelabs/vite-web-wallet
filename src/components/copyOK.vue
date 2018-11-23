@@ -1,5 +1,5 @@
 <template>
-    <span class="copy-success" :class="{'show': copySuccess}">{{ $t('accDetail.hint.copy') }}</span>
+    <span class="copy-success" :class="{'show': copySuccess}">{{ copySuccess ? $t('accDetail.hint.copy') : ''}}</span>
 </template>
 
 <script>
@@ -17,7 +17,7 @@ export default {
 @import "~assets/scss/vars.scss";
 
 .copy-success {
-    transition: opacity 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
     position: absolute;
     bottom: 6px;
     left: 50%;
@@ -30,21 +30,24 @@ export default {
     color: #FFFFFF;
     opacity: 0;
     height: 0;
+    width: 0;
     font-family: $font-normal, arial, sans-serif;
-    padding: 6px;
     &.show {
         opacity: 1;
-        height: auto;
-    }
-    &:after {
-        content: ' ';
-        display: inline-block;
-        border: 6px solid transparent;
-        border-top: 6px solid #5B638D;
-        position: absolute;
-        bottom: -12px;
-        left: 50%;
-        margin-left: -6px;
+        padding: 0 6px;
+        width: auto;
+        height: 24px;
+        line-height: 24px;
+        &:after {
+            content: ' ';
+            display: inline-block;
+            border: 6px solid transparent;
+            border-top: 6px solid #5B638D;
+            position: absolute;
+            bottom: -12px;
+            left: 50%;
+            margin-left: -6px;
+        }
     }
 }
 </style>
