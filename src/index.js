@@ -22,6 +22,7 @@ import { initQuotaConfirm } from 'components/quota/index.js';
 import plugin from 'utils/plugins/addPlugin';
 import clickOutside from 'utils/plugins/clickOutside';
 import wallet from 'utils/wallet/index.js';
+import sw from '../serviceWorker/index';
 
 Vue.use(plugin);
 Vue.use(VueRouter);
@@ -37,6 +38,8 @@ setTimeout(() => {
 
 // Loading finish and App init finish also.
 setTimeout(() => {
+    sw();
+    
     wallet.reSave();
 
     // Init router

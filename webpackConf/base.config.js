@@ -13,7 +13,8 @@ module.exports = {
     devtool: 'source-map',
 
     entry: {
-        index: path.join(SRC_PATH, '/index.js')
+        index: path.join(SRC_PATH, '/index.js'),
+        sw: path.join(__dirname, '../serviceWorker/sw.js')
     },
     output: {
         path: STATIC_PATH,
