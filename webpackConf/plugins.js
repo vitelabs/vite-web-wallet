@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const OfflinePlugin = require('offline-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const packJson = require('../package.json');
@@ -15,6 +16,11 @@ const goViteServer = {
     test: '\'wss://testnet.vitewallet.com/test/ws\'',
     dev: '\'wss://testnet.vitewallet.com/test/ws\''
 };
+
+const copyPath = [
+    path.join(__dirname, '../redirects/_redirects'), 
+    path.join(__dirname, '../manifest.json')
+];
 
 let plugins = [
     new HtmlWebpackPlugin({
@@ -33,7 +39,8 @@ let plugins = [
     new webpack.NormalModuleReplacementPlugin(/\/buffer\//, function(resource) {
         resource.request = Buffer_Path;
     }),
-    new OfflinePlugin()
+    new OfflinePlugin(),
+    new CopyWebpackPlugin(copyPath)
 ];
 
 (process.env.analyzer === 'true') && plugins.push(new BundleAnalyzerPlugin());

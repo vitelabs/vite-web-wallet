@@ -4,8 +4,8 @@
     "description": "",
     "scripts": {
         "clean": "rm -rf ./static",
-        "build": "npm run clean && NODE_ENV=production webpack && node build.js",
-        "build:test": "npm run clean && NODE_ENV=test webpack && NODE_ENV=test node build.js",
+        "build": "npm run clean && NODE_ENV=production webpack",
+        "build:test": "npm run clean && NODE_ENV=test webpack",
         "dev": "NODE_ENV=dev webpack-dev-server",
         "analyzer": "analyzer=true webpack-dev-server",
         "lint": "eslint ./ --cache --fix"
@@ -29,6 +29,7 @@
         "babel-eslint": "^9.0.0",
         "babel-loader": "^8.0.2",
         "connect": "^3.6.6",
+        "copy-webpack-plugin": "^4.6.0",
         "css-loader": "^1.0.0",
         "eslint": "^5.9.0",
         "eslint-plugin-vue": "^4.7.1",

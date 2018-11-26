@@ -14,12 +14,12 @@ module.exports = {
 
     entry: {
         index: path.join(SRC_PATH, '/index.js')
-        // sw: path.join(__dirname, '../serviceWorker/sw.js')
     },
     output: {
         path: STATIC_PATH,
         filename: '[name].[hash].js'
     },
+    
     plugins,
     optimization: {
         splitChunks:{
