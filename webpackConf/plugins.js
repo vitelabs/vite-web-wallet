@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const OfflinePlugin = require('offline-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
@@ -31,7 +32,8 @@ let plugins = [
     }),
     new webpack.NormalModuleReplacementPlugin(/\/buffer\//, function(resource) {
         resource.request = Buffer_Path;
-    })
+    }),
+    new OfflinePlugin()
 ];
 
 (process.env.analyzer === 'true') && plugins.push(new BundleAnalyzerPlugin());

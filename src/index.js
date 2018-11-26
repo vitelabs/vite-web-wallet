@@ -1,3 +1,5 @@
+require('offline-plugin/runtime').install();
+
 // import '@babel/polyfill';
 require('es6-promise').polyfill();
 
@@ -22,7 +24,7 @@ import { initQuotaConfirm } from 'components/quota/index.js';
 import plugin from 'utils/plugins/addPlugin';
 import clickOutside from 'utils/plugins/clickOutside';
 import wallet from 'utils/wallet/index.js';
-import sw from '../serviceWorker/index';
+import appType from 'utils/appType.js';
 
 Vue.use(plugin);
 Vue.use(VueRouter);
@@ -38,8 +40,16 @@ setTimeout(() => {
 
 // Loading finish and App init finish also.
 setTimeout(() => {
-    sw();
-    
+    // In APP no PWA
+    let app = appType();
+    if (app === 1 && 'serviceWorker' in navigator) {
+        navigator.serviceWorker.getRegistration().then((registration) => {
+            registration && registration.unregister().then((boolean) => {
+                boolean ? console.log('success') : console.log('fail');
+            });
+        });
+    }
+
     wallet.reSave();
 
     // Init router
