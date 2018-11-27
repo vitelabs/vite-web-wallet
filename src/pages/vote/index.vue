@@ -49,9 +49,14 @@
             <div class="__tb_cell">{{v.voteStatusText}}</div>
             <div
               class="__tb_cell"
-              :class="cache?'unclickable':'clickable'"
-              @click="cancelVote(v)"
-            >{{v.operate}}</div>
+              :class="cache ? 'unclickable' : 'clickable'"
+            >
+              <span @click="cancelVote(v)">{{ v.operate }}</span>
+              <span
+                class="reward"
+                @click="openReward(v)"
+              >{{ $t('vote.toReward') }}</span>
+            </div>
           </div>
           <div class="__tb_row seat">
           </div>
@@ -84,7 +89,7 @@
             v-if="!!nodeList.length"
           >
             <div
-              class="__tb_row __tb_content_row"
+              class="__tb_row __tb_content_row active"
               v-for="(v,i) in nodeList"
               :key="v.nodeName"
             >
