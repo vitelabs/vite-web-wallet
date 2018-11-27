@@ -95,7 +95,10 @@
             >
               <div class="__tb_cell rank">{{i+1}}</div>
               <div class="__tb_cell nodename">{{v.nodeName}}</div>
-              <div class="__tb_cell">{{v.nodeAddr}}</div>
+              <div
+                @click="goToDetail(v.nodeAddr)"
+                class="__tb_cell clickable"
+              >{{v.nodeAddr}}</div>
               <div class="__tb_cell">{{v.voteNum}}</div>
               <div
                 class="__tb_cell clickable"
@@ -501,8 +504,14 @@ export default {
       }
       &:nth-child(3) {
         width: 40%;
+        min-width: 450px;
+      }
+        &:nth-child(4) {
+        width: 15%;
+        min-width: 150px;
       }
       &:last-child{
+          width: 5%;
           min-width: 50px;
       }
     }
