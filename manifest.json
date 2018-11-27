@@ -5,6 +5,14 @@
         "src": "logo.png",
         "type": "image/png",
         "sizes": "64x64"
+    }, {
+        "src": "vite_256_256.png",
+        "type": "image/png",
+        "sizes": "256x256"
+    }, {
+        "src": "vite_512_512.png",
+        "type": "image/png",
+        "sizes": "512x512"
     }],
     "theme_color": "#ffffff",
     "background_color": "#ffffff",

@@ -19,7 +19,9 @@ const goViteServer = {
 
 const copyPath = [
     path.join(__dirname, '../redirects/_redirects'), 
-    path.join(__dirname, '../manifest.json')
+    path.join(__dirname, '../manifest.json'),
+    path.join(__dirname, '../src/assets/imgs/icon/vite_256_256.png'),
+    path.join(__dirname, '../src/assets/imgs/icon/vite_512_512.png')
 ];
 
 let plugins = [
