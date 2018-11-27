@@ -3,22 +3,26 @@
         <div class="__title">{{ $t(`${title}`) }}</div>
 
         <div v-show="isRecord" class="note">{{ $t('mnemonic.prompt') }}</div>
-        <div class="input-wrapper"> <slot></slot> </div>
+        <slot></slot>
         <div v-show="isRestore" class="note hint">{{ $t('mnemonic.hint') }}</div>
 
         <div class="__btn_list">
             <span class="__btn __btn_border __pointer" @click="back">{{ $t('btn.back') }}</span>
-            <span class="__btn __btn_all_in __pointer" :class="{
-                'unuse': isLoading
-            }" @click="submit">
-                {{ isRestore ? $t('btn.submit') : $t('create.finish') }}
+            <span class="__btn __btn_all_in __pointer" @click="_submit">
+                <span v-show="!isLoading">{{ isRestore ? $t('btn.submit') : $t('create.finish') }}</span>
+                <loading v-show="isLoading" loadingType="dot"></loading>
             </span>
         </div>
     </div>
 </template>
 
 <script>
+import loading from 'components/loading.vue';
+
 export default {
+    components: {
+        loading
+    },
     props: {
         title: {
             type: String,
@@ -47,6 +51,12 @@ export default {
         back() {
             this.$wallet.clearActiveAccount();
             this.$router.go(-1);
+        },
+        _submit() {
+            if (this.isLoading) {
+                return;
+            }
+            this.submit && this.submit();
         }
     }
 };
@@ -63,23 +73,7 @@ export default {
         margin-top: 30px;
     }
 }
-.input-wrapper {
-    box-sizing: border-box;
-    position: relative;
-    background: #F3F6F9;
-    border: 1px solid #D4DEE7;
-    border-radius: 3px;
-    text-align: center;
-    font-size: 14px;
-    color: #1D2024;
-}
 .__btn_list {
     margin-top: 20px;
-    .__btn.__btn_all_in {
-        &.unuse {
-            background: #efefef;
-            color: #666;
-        }
-    }
 }
 </style>

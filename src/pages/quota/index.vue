@@ -180,7 +180,7 @@ export default {
                     }, type, cb);
                     return;
                 }
-                cb && cb(false);
+                cb && cb(false, err);
             });
         }
     }
@@ -205,9 +205,11 @@ export default {
     .cancel-amount {
         position: absolute;
         right: 30px;
+        left: 30px;
         font-size: 12px;
         color: #FF2929;
-        line-height: 26px;
+        line-height: 22px;
+        word-break: break-word;
     }
     .cancel-input {
         background: #FFFFFF;

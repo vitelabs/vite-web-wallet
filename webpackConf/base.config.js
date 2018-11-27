@@ -1,40 +1,11 @@
-const webpack = require('webpack');
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-const packJson = require('../package.json');
+const plugins = require('./plugins.js');
 
 const SRC_PATH = path.join(__dirname, '../src');
-const TEMPLATE_PATH = path.join(__dirname, '../index.html');
 const STATIC_PATH = process.env.APP === 'true' ?
     path.join(__dirname, '../../app/walletPages') : 
     path.join(__dirname, '../static');
-
-const goViteServer = {
-    production: '\'wss://testnet.vitewallet.com/ws\'',
-    test: '\'wss://testnet.vitewallet.com/test/ws\'',
-    dev: '\'wss://testnet.vitewallet.com/test/ws\''
-};
-
-let plugins = [
-    new HtmlWebpackPlugin({
-        title: 'Vite Wallet',
-        favicon: path.join(SRC_PATH, 'assets/imgs/logo.png'),
-        template: TEMPLATE_PATH
-    }),
-    new VueLoaderPlugin(),
-    new webpack.DefinePlugin({
-        'process.env.powDifficulty': '"157108864"',
-        'process.env.version': `"${packJson.version}"`,
-        'process.env.NODE_ENV': `"${process.env.NODE_ENV}"`,
-        'process.env.goViteServer': goViteServer[process.env.NODE_ENV || 'dev'],
-        'process.env.viteNet': process.env.NODE_ENV === 'production' ? '\'https://testnet.vite.net/\'' : '\'http://132.232.134.168:8080/\''
-    })
-];
-(process.env.analyzer === 'true') && plugins.push(new BundleAnalyzerPlugin());
-
 let development = ['dev', 'test'];
 
 module.exports = {
@@ -118,7 +89,7 @@ module.exports = {
             components: path.join(SRC_PATH, '/components'),
             pages: path.join(SRC_PATH, '/pages'),
             assets: path.join(SRC_PATH, '/assets'),
-            routes: path.join(SRC_PATH, '/routes'),
+            routes: path.join(SRC_PATH, '../routes'),
             utils: path.join(SRC_PATH, '/utils'),
             i18n: path.join(SRC_PATH, '/i18n'),
             config:path.join(SRC_PATH, '../config'),

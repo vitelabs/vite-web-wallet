@@ -3,6 +3,32 @@ module.exports = {
 
     start: '开始',
     logout: '退出登录',
+
+    errCode: {
+        35003: '{name}ID发生冲突，请您稍后重新提交',
+        35004: '内置合约发生错误，请稍后重试（35004）',
+        35005: '交易发送频繁，请您稍后再次尝试',
+        35006: '内置合约发生错误，请稍后重试（35006）',
+        36001: '您需要接收一笔交易之后才可发起转账',
+        36002: '系统校验不通过，请稍后重试（36002）',
+        36003: '系统校验不通过，请稍后重试（36003）',
+        36004: '系统校验不通过，请稍后重试（36004）',
+        36005: '快照块高度不合法，请您稍后再试'
+    },
+
+    txType: {
+        0: '注册SBP',
+        1: '更新注册',
+        2: '撤销注册',
+        3: '提取奖励',
+        4: '投票',
+        5: '撤销投票',
+        6: '获取配额',
+        7: '取回配额抵押',
+        8: '铸币',
+        9: '取回铸币抵押',
+        10: '转账'
+    },
     
     firstNotice: {
         title: '使用前必读',
@@ -14,7 +40,7 @@ module.exports = {
     test: {
         t: '预览版',
         txt1: '预览版钱包是VITE官方发布的轻节点钱包',
-        txt2: '当前版本钱包支持查询账户余额、对外发送交易、默认签收交易、抵押VITE获取配额等功能。',
+        txt2: '当前版本钱包支持查询账户余额、对外发送交易、默认签收交易、抵押VITE获取配额、注册SBP、投票等功能。',
         txt3: '同时支持获取测试代币，支持用户使用测试代币体验产品，官方发布的测试代币仅用于测试，无任何实际价值，同时官方会不定期对测试代币进行清零。',
         v: '当前版本：{version}'
     },
@@ -28,7 +54,8 @@ module.exports = {
         empty: '助记词输入为空',
         error: '助记词错误',
         hint: '助记词格式：单词、空格、单词...空格、单词',
-        netErr: '节点异常，请您稍后重试'
+        netErr: '节点异常，请您稍后重试',
+        change: '切换{len}个助记词'
     },
 
     setting: {
@@ -65,7 +92,7 @@ module.exports = {
     // account list
     accList: {
         balance: '余额',
-        addAcc: '新添加一个账户',
+        addAcc: '添加地址',
         addr: '账户地址列表',
         addrList: '账户地址列表',
         default: '选择默认用户'
@@ -122,7 +149,7 @@ module.exports = {
         },
         valid: {
             remarksFormat: '格式输入错误，备注仅支持中英文和标点符号',
-            remarksLong: '备注请勿超出180个英文字符（或标点符号，一个汉字=6个英文字符）'
+            remarksLong: '剩余字节：{len}'
         },
         hint: {
             token: '系统已向您转入一笔VTT测试代币，请注意接收',
@@ -137,8 +164,8 @@ module.exports = {
         quota: {
             title: '配额不足',
             describe: '配额不足，建议您点击运行PoW获取配额或抵押VITE获取配额',
-            left: '运行PoW',
-            right: '抵押VITE'
+            left: '抵押VITE',
+            right: '运行PoW'
         },
         trans: {
             powErr: '运行PoW错误，请重新发起转账',
@@ -171,7 +198,7 @@ module.exports = {
         canclePledgeFail: '操作失败',
         limitAmt: '抵押金额需填写大于等于10的数字',
         maturity: '抵押已到期',
-        maxAmt: '取回金额在0~{amount}之间”，{amount}为当前可取回最大金额',
+        maxAmt: '取回金额应在 (0,{amount}] 之内',
         confirm: {
             help: {
                 t1: '什么是配额',
@@ -307,7 +334,8 @@ module.exports = {
     },
 
     // vote
-    vote: { // [TODO]
+    vote: {
+        toReward: '查看我的奖励',
         title: '投票',
         search: '请输入候选节点名称或者出块地址',
         help: {
@@ -354,7 +382,7 @@ module.exports = {
                     title: '投票',
                     cancelText: '暂不投票',
                     submitText: '确认投票',
-                    content: '您只能给一个节点投票，确认投票给此节点吗？'
+                    content: '您只能给一个节点投票，确认投票给{name}吗？'
                 },
                 cover: {
                     title: '投票',
@@ -402,7 +430,10 @@ module.exports = {
         submit: '确定',
         next: '下一步',
         understand: '我已了解',
-        edit: '编辑'
+        edit: '编辑',
+        copy: '复制',
+        reReg: '重新注册',
+        otherProd: '使用 Vite 其他产品'
     },
     paging: {
         pre: '上一页',
@@ -417,6 +448,7 @@ module.exports = {
         acEmpty: '账号不可为空',
         pwEmpty: '密码不能为空',
         noData: '暂无数据',
-        err: '发生错误'
+        err: '发生错误',
+        request: '{name}请求已发送，请耐心等待'
     }
 };

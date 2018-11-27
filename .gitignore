@@ -5,3 +5,5 @@ static
 .idea
 .vscode
 viteJS
+routes.js
+.netlify

@@ -5,10 +5,19 @@
                  :btnUnuse="unTrans"
                  :closeIcon="true" :close="closeTrans" :singleBtn="true" 
                  :leftBtnClick="validTrans" :leftBtnTxt="$t('accDetail.transfer')" >
+
+            <div class="row">
+                <div class="row-t">{{ $t('accDetail.balance') }}</div>
+                <div class="row-content balance">
+                    <img v-if="token.icon" :src="token.icon" class="icon" />
+                    {{ token.symbol }} <span>{{ showAccBalance }}</span>
+                </div>
+            </div>
+
             <div class="row">
                 <div class="row-t">
                     {{ $t('accDetail.inAddress') }}
-                    <span v-show="!isValidAddress" class="err">{{ $t('transList.valid.addr') }}</span>
+                    <span v-show="!isValidAddress" class="err hint">{{ $t('transList.valid.addr') }}</span>
                 </div>
                 <div class="row-content">
                     <input ref="inAddr" v-model="inAddress" :placeholder="$t('accDetail.placeholder.addr')" />
@@ -18,7 +27,7 @@
             <div class="row">
                 <div class="row-t">
                     {{ $t('accDetail.sum') }}
-                    <span v-show="amountErr" class="err">{{ amountErr }}</span>
+                    <span v-show="amountErr" class="err hint">{{ amountErr }}</span>
                 </div>
                 <div class="row-content __btn_text __input">
                     <input v-model="amount" :placeholder="$t('accDetail.placeholder.amount')"  />
@@ -28,7 +37,9 @@
             <div class="row">
                 <div class="row-t">
                     {{ $t('accDetail.remarks')}}
-                    <span v-show="messageErr" class="err">{{ messageErr }}</span>
+                    <span class="hint" :class="{ err: messageErr }">
+                        {{ $t('accDetail.valid.remarksLong', { len: msgBalance}) }}
+                    </span>
                 </div>
                 <div class="row-content">
                     <input v-model="message" :placeholder="$t('accDetail.placeholder.remarks')" autocomplete="off" />
@@ -87,7 +98,6 @@ export default {
 
             isValidAddress: true,
             amountErr: '',
-            messageErr: '',
 
             isShowTrans: true,
             loading: false
@@ -97,8 +107,26 @@ export default {
         unTrans() {
             return !!(!this.amount || !this.inAddress || this.loading || this.amountErr || !this.isValidAddress || this.messageErr);
         },
+        accBalance() {
+            if (!this.tokenBalList || !this.tokenBalList[this.token.id]) {
+                return 0;
+            }
+            let balance = this.tokenBalList[this.token.id].totalAmount;
+            return balance;
+        },
+        showAccBalance() {
+            return viteWallet.BigNumber.toBasic(this.accBalance, this.token.decimals);
+        },
         tokenBalList() {
             return this.$store.state.account.balance.balanceInfos;
+        },
+        msgBalance() {
+            let message = this.$trim(this.message);
+            let length = viteWallet.utils.getBytesSize(message);
+            return 120 - length;
+        },
+        messageErr() {
+            return this.msgBalance < 0;
         }
     },
     watch: {
@@ -131,15 +159,6 @@ export default {
                 this.testAmount();
             }, 500);
         },
-        message: function() {
-            clearTimeout(messageTimeout);
-            messageTimeout = null;
-
-            messageTimeout = setTimeout(()=> {
-                messageTimeout = null;
-                this.testMessage();
-            }, 500);
-        }
     },
     methods: {
         showQuota() {
@@ -156,15 +175,15 @@ export default {
                 leftBtn: {
                     text: this.$t('accDetail.quota.left'),
                     click: () => {
-                        this.startPow();
+                        this.$router.push({
+                            name: 'quota'
+                        });
                     }
                 },
                 rightBtn: {
                     text: this.$t('accDetail.quota.right'),
                     click: () => {
-                        this.$router.push({
-                            name: 'quota'
-                        });
+                        this.startPow();
                     }
                 },
                 content: this.$t('accDetail.quota.describe')
@@ -184,27 +203,13 @@ export default {
                 return false;
             }
 
-            if (this.tokenBalList && this.tokenBalList[this.token.id]) {
-                let balance = this.tokenBalList[this.token.id].totalAmount;
-                let amount = viteWallet.BigNumber.toMin(this.amount, this.token.decimals);
-                if (viteWallet.BigNumber.compared(balance, amount) < 0) {
-                    this.amountErr = this.$t('transList.valid.bal');
-                    return false;
-                }
-            }
-            
-            this.amountErr = '';
-            return true;
-        },
-        testMessage() {
-            let message = this.$trim(this.message);
-            let str = encodeURIComponent(message);
-            if (str.length > 180) {
-                this.messageErr = this.$t('accDetail.valid.remarksLong');
-                return;
+            let amount = viteWallet.BigNumber.toMin(this.amount, this.token.decimals);
+            if (viteWallet.BigNumber.compared(this.accBalance, amount) < 0) {
+                this.amountErr = this.$t('transList.valid.bal');
+                return false;
             }
 
-            this.messageErr = '';
+            this.amountErr = '';
             return true;
         },
 
@@ -216,10 +221,7 @@ export default {
             if (!this.inAddress) {
                 this.isValidAddress = false;
             }
-            if (this.amountErr || !this.isValidAddress) {
-                return;
-            }
-            if (!this.testAmount() || !this.testMessage()) {
+            if (this.amountErr || this.messageErr || !this.isValidAddress || !this.testAmount()) {
                 return;
             }
 
@@ -276,8 +278,6 @@ export default {
                 this.loading = false;
                 let code  = err && err.error ? err.error.code || -1 : 
                     err ? err.code : -1;
-                let message  = err && err.message ? err.message : 
-                    err.error ? err.error.message || '' : '';
 
                 if (code === -35001) {
                     this.$toast(this.$t('transList.valid.bal'));
@@ -288,7 +288,7 @@ export default {
                     return;
                 }
 
-                this.$toast(message || this.$t('hint.err'));
+                this.$toast(null, err);
             });
         },
         startPow() {
@@ -298,10 +298,10 @@ export default {
                 return;
             }
 
-            let transError = (errMsg) => {
+            let transError = (err) => {
                 this.loading = false;
                 this.isShowTrans = true;
-                this.$toast(errMsg || this.$t('accDetail.trans.err'));
+                this.$toast(null, err);
             };
 
             this.loading = true;
@@ -328,7 +328,7 @@ export default {
                     transError(this.$t('accDetail.trans.powTransErr'));
                     return;
                 }
-                transError();
+                transError(err);
             });
         },
 
@@ -372,23 +372,38 @@ export default {
         line-height: 16px;
         padding-bottom: 15px;
     }
+    .balance {
+        background: rgba(243,246,249,1);
+    }
     .row-content {
-        padding: 10px 15px;
+        padding: 9px 15px;
         border: 1px solid #D4DEE7;
         border-radius: 2px;
         font-size: 14px;
+        line-height: normal;
+        &.balance { 
+            span {
+                float: right;
+                color: rgba(0,122,255,1);
+            }
+            .icon {
+                margin-bottom: -4px;
+            }
+        }
         input {
             width: 100%;
         }
     }
-    .err {
+    .hint {
         position: absolute;
         left: 90px;
         right: 0;
         font-size: 12px;
-        color: #FF2929;
         line-height: 16px;
         text-align: right;
+    }
+    .err {
+        color: #FF2929;
     }
 }
 </style>
@@ -397,5 +412,12 @@ export default {
 .confirm-container.trans-confirm .confirm-wrapper {
     width: 515px;
     max-width: 90%;
+}
+.confirm-container.trans-confirm .confirm-wrapper .bottom {
+    min-height: 70px;
+    .__btn{
+        height: 40px;
+        line-height: 40px;
+    }
 }
 </style>

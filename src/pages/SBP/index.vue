@@ -239,7 +239,7 @@ export default {
                     });
                     return;
                 }
-                this.$toast(this.$t('SBP.section2.updateFail'));
+                this.$toast(this.$t('SBP.section2.updateFail'), err);
             });
         },
         sendRewardTx() {
@@ -261,7 +261,7 @@ export default {
                     });
                     return;
                 }
-                this.$toast(this.$t('SBP.section2.rewardFail'));
+                this.$toast(this.$t('SBP.section2.rewardFail'), err);
             });
         },
 
@@ -447,5 +447,3 @@ export default {
     }
 }
 </style>
-
-
