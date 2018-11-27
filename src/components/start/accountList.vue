@@ -17,6 +17,7 @@
 
 <script>
 import ellipsisAddr from 'utils/ellipsisAddr.js';
+
 export default {
     props: {
         clickAccount: {

@@ -1,24 +1,26 @@
 
 import loopTime from 'config/loopTime';
 
+import viteIcon from 'assets/imgs/vite.svg';
+import vcpIcon from 'assets/imgs/VCC.svg';
+import vttIcon from 'assets/imgs/vtt.svg';
+
 let loopHeightTimeout;
 const ViteId = 'tti_5649544520544f4b454e6e40';
-const defaultTokenList = [{
-    'tokenName': 'Vite Token',
-    'tokenSymbol': 'VITE',
-    'decimals': 18,
-    'tokenId': 'tti_5649544520544f4b454e6e40'
-}, {
-    'tokenName': 'Vite Community Point',
-    'tokenSymbol': 'VCP',
-    'decimals': 0,
-    'tokenId': 'tti_251a3e67a41b5ea2373936c8'
-}, {
-    'tokenName': 'Vite Test Token',
-    'tokenSymbol': 'VTT',
-    'decimals': 18,
-    'tokenId': 'tti_c55ec37a916b7f447575ae59'
-}];
+const defaultTokenList = {
+    'tti_5649544520544f4b454e6e40': {
+        'tokenSymbol': 'VITE',
+        icon: viteIcon
+    }, 
+    'tti_251a3e67a41b5ea2373936c8': {
+        'tokenSymbol': 'VCP',
+        icon: vcpIcon
+    }, 
+    'tti_c55ec37a916b7f447575ae59': {
+        'tokenSymbol': 'VTT',
+        icon: vttIcon
+    }
+};
 
 class Ledger {
     constructor() {
@@ -28,13 +30,10 @@ class Ledger {
     }
 
     getDefaultTokenList() {
-        defaultTokenList.forEach((item) => {
-            this.defaultTokenIds[item.tokenId] = item.tokenSymbol;
-            this.setTokenInfo({
-                tokenSymbol: item.tokenSymbol
-            }, item.tokenId);
-            this.fetchTokenInfo(item.tokenId);
-        });
+        this.defaultTokenIds = defaultTokenList;
+        for (let tokenId in defaultTokenList) {
+            this.fetchTokenInfo(tokenId);
+        }
     }
 
     setTokenInfo(tokenInfo, tokenId) {
@@ -44,6 +43,9 @@ class Ledger {
         tokenId = tokenId || tokenInfo.tokenId;
         this.tokenInfoMaps[tokenId] = tokenInfo;
         this.tokenInfoMaps[tokenId].tokenId = tokenId;
+        if (defaultTokenList[tokenId]) {
+            this.tokenInfoMaps[tokenId].icon = defaultTokenList[tokenId].icon;
+        }
     }
 
     getTokenInfo(id = ViteId) {

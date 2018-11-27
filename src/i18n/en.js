@@ -4,6 +4,32 @@ module.exports = {
     start: 'Start',
     logout: 'Logout',
 
+    errCode: {
+        35003: '{name} ID conflict occurs, please re-submit later',
+        35004: 'Built-in contract error, please try again later（35004）',
+        35005: 'Transactions are sent too frequent, please try again later',
+        35006: 'Built-in contract method not exist, please try again later（35006）',
+        36001: 'You cannot make any transfer until you receive a transaction',
+        36002: 'System verify failed, please try again later（36002）',
+        36003: 'System verify failed, please try again later（36003）',
+        36004: 'System verify failed, please try again later（36004）',
+        36005: 'napshot block height is illegal, please try again later'
+    },
+
+    txType: {
+        0: 'SBP Registration',
+        1: 'Update Registration',
+        2: 'Revoke Registration',
+        3: 'Retrieve Reward',
+        4: 'Voting',
+        5: 'Revoke Voting',
+        6: 'Get TPS Quota',
+        7: 'Withdrawal of staking quota',
+        8: 'Token Issuance',
+        9: 'Withdrawal of staking token',
+        10: 'Transfer'
+    },
+    
     firstNotice: {
         title: 'Read Before Use',
         text1: 'Please be sure to backup your seed phrase when creating account. We cannot guarantee to restore your assets in case of you visit scam sites or lose your backups.',
@@ -15,7 +41,7 @@ module.exports = {
     test: {
         t: 'Preview Version',
         txt1: 'The preview version of wallet is a lightweight-node wallet officially issued by VITE.',
-        txt2: 'The current version supports functions of checking account balance, sending transactions, receiving transactions in default, acquiring test tokens, staking VITE tokens for TPS quota and etc.',
+        txt2: 'The current version supports functions of checking account balance, sending transactions, receiving transactions in default, acquiring test tokens, staking VITE tokens for TPS quota, SBP registration, vote and etc.',
         txt3: 'Support acquiring test tokens and experiencing the product by using them, the test tokens issued by VITE official can be only used for testing and with no actual value, it will be cleared by VITE official sporadically',
         v: 'Current version: {version}'
     },
@@ -29,7 +55,8 @@ module.exports = {
         empty: 'The input of seed phrase cannot be empty',
         error: 'Incorrect seed phrase. Try again',
         hint: 'Mnemonic format: words, spaces, words... spaces, words.',
-        netErr: 'The full node is abnormal, please try again later.'
+        netErr: 'The full node is abnormal, please try again later.',
+        change: 'Switch to {len} Mnemonic Words'
     },
 
     setting: {
@@ -66,9 +93,9 @@ module.exports = {
     // account list
     accList: {
         balance: 'Balance',
-        addAcc: 'Add Account',
-        addr: 'Address Lists of Accounts',
-        addrList: 'Address List',
+        addAcc: 'Add Address',
+        addr: 'Addresses of Accounts',
+        addrList: 'Addresses',
         default: 'Select Default User'
     },
 
@@ -123,7 +150,7 @@ module.exports = {
         },
         valid: {
             remarksFormat: 'Format error! Remarks can only contain Chinese, English and punctuations.',
-            remarksLong: 'Notes do not exceed 180 English characters (or punctuations, 1 Chinese character = 6 English characters)'
+            remarksLong: '{len} bytes left'
         },
         hint: {
             token: 'VTT test tokens have be sent to your account, please check your account!',
@@ -138,8 +165,8 @@ module.exports = {
         quota: {
             title: 'Insufficient Quota',
             describe: 'your left quotas turn out to be insufficient, you can acquire more quotas by running PoW or staking VITE',
-            left: 'Run PoW',
-            right: 'Stake VITE'
+            left: 'Stake VITE',
+            right: 'Run PoW'
         },
         trans: {
             powErr: 'Error occurs when running PoW, please try again',
@@ -164,7 +191,7 @@ module.exports = {
         btn: 'Submit Staking',
         myQuotaList: 'My Staking List',
         amountPlaceholder: 'Please input staking amount, minimum 10 VITE',
-        addrPlaceholder: 'Please input quota receiving address',
+        addrPlaceholder: 'Please input quota recipient address',
         cancelAmount: 'Please input withdraw amount',
         pledgeSuccess: 'Successfully Submitted',
         pledgeFail: 'Failed to Submit',
@@ -172,7 +199,7 @@ module.exports = {
         canclePledgeFail: 'Failed',
         limitAmt: 'Staking amount should not be less than 10.',
         maturity: 'Staking has expired!',
-        maxAmt: 'Receiving amount between 0~{amount}”, the current maximum amount is {amount}',
+        maxAmt: 'Withdraw amount should be in (0, {amount}]',
         confirm: {
             help: {
                 t1: 'What is quota? ',
@@ -200,10 +227,10 @@ module.exports = {
             title: 'My Staking List',
             total: 'Staking {amount} VITE in total',
             amount: 'Amount',
-            withdrawHeight: 'Matured snapshot height',
+            withdrawHeight: 'Expected snapshot height',
             withdrawTime: 'Expected due date',
             cancel: 'Withdrawal of staked token',
-            operate: 'Operation',
+            operate: 'Action',
             unexpired: 'Temporarily cannot make withdrawal of staked token until due date'
         }
     },
@@ -306,6 +333,7 @@ module.exports = {
 
     // vote
     vote: {
+        toReward: 'View my rewards',
         title: 'Voting',
         search: 'Please input node name or block creation address',
         help: {
@@ -314,11 +342,11 @@ module.exports = {
         },
         addrNoExistErr:'You aren\'t able to vote for now as your address has no transaction record before',
         section1: {
-            title: 'My Vote',
-            head: ['Rank','Name', 'Status', 'My Vote', 'Status of Voting', 'Operation'],
+            title: 'My Voting',
+            head: ['Rank','Name', 'Status', 'My Voting', 'Status of Voting', 'Action'],
             nodeStatusMap: {
                 1: 'Active',
-                2: 'Suspended'
+                2: 'Inactive'
             },
             voteStatusMap: {
                 voted: 'Voting Successful',
@@ -346,13 +374,13 @@ module.exports = {
     
         section2: {
             title: 'SBP candidates',
-            head: ['Node Name', 'Address', 'Votes', 'Operation'],
+            head: ['Node Name', 'Address', 'Votes', 'Action'],
             confirm: {
                 normal: {
                     title: 'Voting',
                     cancelText: 'Not yet',
                     submitText: 'Ready to vote',
-                    content: 'You can vote for only one SBP, are you sure you want to give your vote?'
+                    content: 'You can vote for only one SBP, are you sure you want to vote for {name}?'
                 },
                 cover: {
                     title: 'Voting',
@@ -401,7 +429,10 @@ module.exports = {
         submit: 'Submit',
         next: 'Next Step',
         understand: 'I understand',
-        edit: 'edit'
+        edit: 'Edit',
+        copy: 'Copy',
+        reReg: 'Re-register',
+        otherProd: 'Use other products of Vite'
     },
     paging: {
         pre: 'Prev',
@@ -416,6 +447,7 @@ module.exports = {
         acEmpty: 'Account cannot be empty!',
         pwEmpty: 'Password cannot be empty!',
         noData: 'No Data',
-        err: 'Oops, error occurs'
+        err: 'Oops, error occurs',
+        request: '{name} request has sent, please wait'
     }
 };

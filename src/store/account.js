@@ -81,13 +81,15 @@ const getters = {
                 break;
             }
 
-            let symbol = viteWallet.Ledger.tokenInfoMaps[tokenId].tokenSymbol || viteWallet.Ledger.defaultTokenIds[tokenId];
+            let defaultToken = viteWallet.Ledger.defaultTokenIds[tokenId];
+            let symbol = viteWallet.Ledger.tokenInfoMaps[tokenId].tokenSymbol || defaultToken.tokenSymbol;
             balanceInfo[tokenId] = balanceInfo[tokenId] || {
                 balance: '0',
                 fundFloat: '0',
                 symbol,
                 decimals: '0'
             };
+            balanceInfo[tokenId].icon = defaultToken.icon;
         }
         return balanceInfo;
     }

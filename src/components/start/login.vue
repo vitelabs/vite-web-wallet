@@ -3,7 +3,7 @@
         <div class="__title">{{$t('nav.head.login')}}</div>
 
         <div class="bottom __btn __pointer">
-            <div @click="toggleAccountList">
+            <div v-click-outside="hideAccountList" @click="toggleAccountList">
                 <div v-show="!activeAccount" class="__btn_input">{{ $t('create.choose') }}</div>
 
                 <div v-show="activeAccount && !activeAccount.addr" class="__btn __btn_input">
@@ -34,9 +34,10 @@
                    @focus="inputFocus('pass')" @blur="inputBlur('pass')" />
         </div>
 
-        <div class="bottom __btn __pointer __btn_all_in" :class="{
-            'disable': isLoading
-        }" @click="login">{{ $t('btn.login') + (isLoading ? ' ...' : '') }}</div>
+        <div class="bottom __btn __pointer __btn_all_in" @click="login">
+            <span v-show="!isLoading">{{ $t('btn.login') }}</span>
+            <loading v-show="isLoading" loadingType="dot"></loading>
+        </div>
 
         <div class="btn-list" :class="{ zh: $t('lang') === '中文' }">
             <router-link class="__btn_link" :class="{
@@ -54,16 +55,22 @@
 import Vue from 'vue';
 import accountList from './accountList.vue';
 import ellipsisAddr from 'utils/ellipsisAddr.js';
+import loading from 'components/loading.vue';
 
 export default {
     components: {
-        accountList
+        accountList, loading
     },
     mounted() {
         this.$onEnterKey(() => {
             this.login();
         });
         this.activeAccount = this.getLoginAcc();
+    },
+    destroyed() {
+        this.password = '';
+        this.isLoading = false;
+        this.$offEnterKey();
     },
     data() {
         return {
@@ -72,7 +79,7 @@ export default {
             isLoading: false,
             accountList: [],
             isShowAccountList: false,
-            inputItem: ''
+            inputItem: '',
         };
     },
     methods: {
@@ -117,13 +124,17 @@ export default {
         chooseAccount(account) {
             this.activeAccount = account;
             this.isShowAccountList = false;
+            this.password = '';
         },
         toggleAccountList() {
             this.isShowAccountList = !this.isShowAccountList;
         },
+        hideAccountList() {
+            this.isShowAccountList = false;
+        },
 
         login() {
-            if (!this.activeAccount) {
+            if (!this.activeAccount || this.isLoading) {
                 return;
             }
 
@@ -134,18 +145,28 @@ export default {
             }
 
             let loginSuccess = () => {
-                this.$offEnterKey();
-                this.password = '';
+                if (!this.isLoading) {
+                    return;
+                }
+
+                this.isLoading = false;
+                let activeAccount = this.$wallet.getActiveAccount();
+                activeAccount.unLock();
                 this.$router.push({ name: 'account' });
             };
 
             this.isLoading = true;
-            window.setTimeout(()=>{
-                let result = this.$wallet.login(this.activeAccount, this.password);
-                this.isLoading = false;
+            this.$wallet.login(this.activeAccount, this.password).then((result) => {
                 result && loginSuccess();
-                !result && this.$toast(this.$t('hint.pwErr'), 'error');
-            }, 10);
+                !result && this.$toast(this.$t('hint.pwErr'));
+            }).catch((err) => {
+                console.warn(err);
+                if (!this.isLoading) {
+                    return;
+                }
+                this.isLoading = false;
+                this.$toast(this.$t('hint.pwErr'));
+            });
         }
     }
 };
@@ -155,9 +176,6 @@ export default {
 .login-wrapper {
     .__btn {
         position: relative;
-        &.disable {
-            background: #bfbfbf;
-        }
         &.__btn_input {
             .name {
                 width: 89%;

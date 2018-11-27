@@ -1,5 +1,3 @@
-import ellipsisAddr from 'utils/ellipsisAddr.js';
-
 const pageCount = 50;
 let lastFetchTime = null;
 
@@ -62,35 +60,32 @@ const getters = {
         let nowList = [];
 
         list.forEach((item) => {
-            let confirms = item.confirmedTimes || 0;
+            let confirms = item.confirmedTimes || 0;    // ( confirms )
 
-            let status = 'unconfirmed';
+            let status = 0; // unconfirmed
             if (confirms && confirms > 0 && confirms <= 50) {
-                status = 'confirms';
+                status = 1; // confirms
             } else if (confirms && confirms > 50) {
-                status = 'confirmed';
+                status = 2; // confirmed
             }
 
             let isSend = [1, 2, 3].indexOf(+item.blockType) > -1;
             let timestamp = item.timestamp * 1000;
-            let transAddr = ellipsisAddr( isSend ? item.toAddress : item.fromAddress );
-            let smallTransAddr = ellipsisAddr( isSend ? item.toAddress : item.fromAddress, 6 );
+            let transAddr = isSend ? item.toAddress : item.fromAddress; // ellipsisAddr  // ellipsisAddr( , 6 )
 
             let amount = item.tokenInfo && item.tokenInfo.decimals ?
                 viteWallet.BigNumber.toBasic(item.amount, item.tokenInfo.decimals) :
                 item.amount;
-            let isZero = viteWallet.BigNumber.isEqual(amount, 0);
 
             nowList.push({
-                type: isSend ? 'send' : 'receive',
+                isSend,
                 status,
-                confirms: `(${confirms})`,
+                confirms,
                 timestamp,
                 transAddr,
-                smallTransAddr,
-                amount: isSend && !isZero ? ('-' + amount) : amount,
-                hash: item.hash,
-                token: item.tokenInfo && item.tokenInfo.tokenSymbol ? item.tokenInfo.tokenSymbol : '--'
+                amount,
+                tokenSymbol: item.tokenInfo && item.tokenInfo.tokenSymbol ? item.tokenInfo.tokenSymbol : '--',
+                rawData: item
             });
         });
         return nowList;

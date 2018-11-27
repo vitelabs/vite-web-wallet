@@ -190,6 +190,18 @@ export default {
                 return this.nodeData;
             });
         },
+        goToDetail(addr) {
+            let locale = this.$i18n.locale === 'zh' ? 'zh/' : '';
+            window.open(`${process.env.viteNet}${locale}account/${addr}`);
+        },
+        openReward() {
+            if (this.cache) {
+                return;
+            }
+            const activeAccount = this.$wallet.getActiveAccount();
+            let locale = this.$i18n.locale === 'zh' ? 'zh' : 'en';
+            window.open(`https://reward.vite.net?language=${locale}&address=${activeAccount.getDefaultAddr()}`);
+        },
         cancelVote(v) {
             if (this.cache) {
                 return;
@@ -227,7 +239,7 @@ export default {
                     (c.closeBtn = { show: true });
                     this.$confirm(c);
                 } else {
-                    this.$toast(this.$t('vote.section1.cancelVoteErr'));
+                    this.$toast(this.$t('vote.section1.cancelVoteErr'), e);
                 }
             };
             const sendCancel = () => {
@@ -256,7 +268,7 @@ export default {
         },
         vote(v) {
             const activeAccount = this.$wallet.getActiveAccount();
-            const successVote = d => {
+            const successVote = () => {
                 const t = Object.assign({}, v);
                 t.isCache = true;
                 t.voteStatus = 'voting'; // 投票中
@@ -291,7 +303,8 @@ export default {
                 } else if (code === -36001) {
                     this.$toast(this.$t('vote.addrNoExistErr'));
                 } else {
-                    this.$toast(this.$t('vote.section2.voteErr'));
+                    console.warn('vote', e);
+                    this.$toast(this.$t('vote.section2.voteErr'), e);
                 }
             };
             const sendVote = () => {
@@ -310,7 +323,8 @@ export default {
                     submitTxt: this.$t(`vote.section2.confirm.${t}.submitText`),
                     cancelTxt: this.$t(`vote.section2.confirm.${t}.cancelText`),
                     content: this.$t(`vote.section2.confirm.${t}.content`, {
-                        nodeName: this.voteList[0] && this.voteList[0].nodeName
+                        nodeName: this.voteList[0] && this.voteList[0].nodeName,
+                        name: v.name
                     }),
                     submit: sendVote,
                     exchange: this.haveVote
@@ -409,63 +423,66 @@ export default {
     }
 };
 </script>
+
 <style lang="scss" scoped>
 @import "~assets/scss/table.scss";
+
 .vote {
-  height: 100%;
-  overflow: hidden;
-  padding: 40px;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  .filter {
-    align-self: flex-end;
-  }
-  .title {
-    display: flex;
-    flex: none;
-    justify-content: space-between;
-    font-family: $font-bold;
-    font-size: 18px;
-    color: #1d2024;
-    height: 40px;
-    margin-bottom: 24px;
-    line-height: 40px;
-
-    .ct {
-      border-left: 2px solid rgba(0, 122, 255, 0.7);
-      padding-left: 10px;
-      height: 18px;
-      line-height: 18px;
-    }
-  }
-  .__tb {
-    width: 100%;
-  }
-  .vote_list {
-    overflow-x: auto;
-    overflow-y: hidden;
-    margin: 40px 0;
-    margin-bottom: 29px;
-
-    .__tb_row.seat {
-      height: 78px;
-    }
-    .__tb_content {
-      overflow: visible;
-    }
-  }
-  .node_list {
-    flex: 1;
-    overflow-x: auto;
-    overflow-y: hidden;
+    height: 100%;
+    overflow: hidden;
+    padding: 40px;
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    .tb_container {
-      height: calc(100% - 64px);
-      overflow: auto;
+    .filter {
+        align-self: flex-end;
     }
-    .__tb_cell {
+    .title {
+        display: flex;
+        flex: none;
+        justify-content: space-between;
+        font-family: $font-bold;
+        font-size: 18px;
+        color: #1d2024;
+        height: 40px;
+        margin-bottom: 24px;
+        line-height: 40px;
+
+        .ct {
+        border-left: 2px solid rgba(0, 122, 255, 0.7);
+        padding-left: 10px;
+        height: 18px;
+        line-height: 18px;
+        }
+    }
+    .__tb {
+        width: 100%;
+    }
+
+    .vote_list {
+        overflow-x: auto;
+        overflow-y: hidden;
+        margin: 40px 0;
+        margin-bottom: 29px;
+
+        .__tb_row.seat {
+            height: 78px;
+        }
+        .__tb_content {
+            overflow: visible;
+        }
+    }
+    .node_list {
+        flex: 1;
+        overflow-x: auto;
+        overflow-y: hidden;
+        display: flex;
+        flex-direction: column;
+        .tb_container {
+            height: calc(100% - 64px);
+            overflow: auto;
+        }
+        .__tb_cell {
       min-width: 100px;
         text-overflow: hidden;
         margin: 0 5px;
@@ -484,43 +501,54 @@ export default {
           min-width: 50px;
       }
     }
-  }
-  .__tb_cell {
-    min-width: 150px;
-    &.nodename {
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      width: 150px;
     }
-    .hoveraction {
-      &.tipsicon {
-        position: relative;
-        display: inline-block;
-        background: url(~assets/imgs/hover_help.svg);
-        overflow: visible;
-        width: 16px;
-        height: 16px;
-        vertical-align: sub;
-        cursor: pointer;
-        .unregister-tips {
-          word-break: break-all;
-          min-width: 314px;
-          min-height: 100px;
-          padding: 10px;
-          font-size: 14px;
-          color: #3e4a59;
-          line-height: 20px;
+    .__tb_cell {
+        min-width: 180px;
+        .reward {
+            margin-left: 10px;
         }
-      }
+        &.nodename {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            width: 150px;
+        }
+        .hoveraction {
+            &.tipsicon {
+                position: relative;
+                display: inline-block;
+                background: url(~assets/imgs/hover_help.svg);
+                overflow: visible;
+                width: 16px;
+                height: 16px;
+                vertical-align: sub;
+                cursor: pointer;
+                .unregister-tips {
+                    word-break: break-all;
+                    min-width: 314px;
+                    min-height: 100px;
+                    padding: 10px;
+                    font-size: 14px;
+                    color: #3e4a59;
+                    line-height: 20px;
+                }
+            }
+        }
     }
-  }
 }
 .clickable {
-  color: #007aff;
-  cursor: pointer;
+    color: #007aff;
+    cursor: pointer;
 }
 .unclickable {
-  color: #ced1d5;
+    color: #ced1d5;
+}
+
+@media only screen and (max-width: 550px) {
+    .vote {
+        overflow: auto;
+        padding: 15px;
+        display: block;
+    }
 }
 </style>

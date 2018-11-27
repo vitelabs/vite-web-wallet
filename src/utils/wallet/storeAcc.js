@@ -42,9 +42,9 @@ export default {
             } else if (acc.addr && account.addr && account.addr === acc.addr) {
                 if (saveIndex === -1) {
                     saveIndex = saveList.length;
-                    saveList.push(acc);
+                    saveList.push(account);
                 } else {
-                    saveList[saveIndex] = acc;
+                    saveList[saveIndex] = account;
                 }
             } else {
                 saveList.push(acc);

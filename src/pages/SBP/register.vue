@@ -178,7 +178,7 @@ export default {
                 return;
             }
 
-            this.testAddr();
+            this.producerAddr && this.testAddr();
             this.nodeNameErr = '';
         },
         testAddr() {
@@ -265,7 +265,7 @@ export default {
                     });
                     return;
                 }
-                this.$toast(this.$t('SBP.section1.registerFail'));
+                this.$toast(this.$t('SBP.section1.registerFail'), err);
             });
         }
     }
