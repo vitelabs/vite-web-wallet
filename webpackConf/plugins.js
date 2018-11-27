@@ -12,7 +12,7 @@ const TEMPLATE_PATH = path.join(__dirname, '../index.html');
 const goViteServer = {
     production: '\'wss://testnet.vitewallet.com/ws\'',
     test: '\'wss://testnet.vitewallet.com/test/ws\'',
-    dev: '\'wss://testnet.vitewallet.com/test/ws\''
+    dev: '\'wss://testnet.vitewallet.com/ws\''
 };
 
 let plugins = [
