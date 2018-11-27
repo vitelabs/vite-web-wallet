@@ -374,7 +374,7 @@ module.exports = {
     
         section2: {
             title: 'SBP candidates',
-            head: ['Node Name', 'Address', 'Votes', 'Action'],
+            head: ['Rank','Node Name', 'Address', 'Votes', 'Action'],
             confirm: {
                 normal: {
                     title: 'Voting',
