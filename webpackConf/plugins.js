@@ -41,7 +41,10 @@ let plugins = [
     new webpack.NormalModuleReplacementPlugin(/\/buffer\//, function(resource) {
         resource.request = Buffer_Path;
     }),
-    new OfflinePlugin(),
+    new OfflinePlugin({
+        AppCache: false,
+        autoUpdate: true
+    }),
     new CopyWebpackPlugin(copyPath)
 ];
 
