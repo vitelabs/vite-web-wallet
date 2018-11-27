@@ -315,7 +315,7 @@ module.exports = {
         addrNoExistErr:'You aren\'t able to vote for now as your address has no transaction record before',
         section1: {
             title: 'My Vote',
-            head: ['Name', 'Status', 'My Vote', 'Status of Voting', 'Operation'],
+            head: ['Rank','Name', 'Status', 'My Vote', 'Status of Voting', 'Operation'],
             nodeStatusMap: {
                 1: 'Active',
                 2: 'Suspended'
