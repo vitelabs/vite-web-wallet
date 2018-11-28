@@ -1,5 +1,5 @@
 <template>
-    <div class="menu-wrapper">
+    <div v-click-outside="hideMenu" class="menu-wrapper">
         <div class="header">
             <img class="vite-logo" :src="viteLogo" />
             <span class="menu" @click="clickMenu"></span>
@@ -63,9 +63,12 @@ export default {
         clickMenu() {
             this.showList = !this.showList;
         },
+        hideMenu () {
+            this.showList = false;
+        },
 
         go(name) {
-            this.showList = false;
+            this.hideMenu();
             (this.active !== name) && this.$router.push({ name });
         },
 
