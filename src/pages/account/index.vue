@@ -104,6 +104,11 @@ export default {
 @media only screen and (max-width: 850px) {
     .account-wrapper .head {
         text-align: left;
+        margin-top: 0px;
+        margin-bottom: 20px;
+    }
+    .page-content .account-wrapper.__wrapper {
+        padding-top: 40px;
     }
 }
 
@@ -120,6 +125,9 @@ export default {
 }
 
 @media only screen and (max-width: 550px) {
+    .account-wrapper .head {
+        margin-bottom: 0px;
+    }
     .token-list {
         display: block;
     }

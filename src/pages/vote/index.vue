@@ -385,7 +385,7 @@ export default {
     display: flex;
     flex-direction: column;
     .filter {
-        align-self: flex-end;
+        margin-top: 10px;
     }
 
     .ct {
@@ -401,9 +401,10 @@ export default {
         display: flex;
         flex: none;
         justify-content: space-between;
+        flex-wrap: wrap;
         margin-bottom: 24px;
         .ct {
-            margin-top: 10px;
+            margin-top: 20px;
         }
     }
     .__tb {
@@ -413,7 +414,7 @@ export default {
         overflow-x: auto;
         overflow-y: hidden;
         margin: 40px 0;
-        margin-bottom: 29px;
+        margin-bottom: 20px;
 
         .__tb_row.seat {
             height: 78px;

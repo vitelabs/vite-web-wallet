@@ -111,7 +111,7 @@ export default {
     }
 }
 
-@media only screen and (max-width: 550px) {
+@media only screen and (max-width: 750px) {
     .setting-wrapper {
         padding: 15px;
     }
