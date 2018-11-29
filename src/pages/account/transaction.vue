@@ -8,7 +8,7 @@
 
             <div class="row">
                 <div class="row-t">{{ $t('accDetail.balance') }}</div>
-                <div class="row-content balance">
+                <div class="balance">
                     <img v-if="token.icon" :src="token.icon" class="icon" />
                     {{ token.symbol }} <span>{{ showAccBalance }}</span>
                 </div>
@@ -19,9 +19,8 @@
                     {{ $t('accDetail.inAddress') }}
                     <span v-show="!isValidAddress" class="err hint">{{ $t('transList.valid.addr') }}</span>
                 </div>
-                <div class="row-content">
-                    <input ref="inAddr" v-model="inAddress" :placeholder="$t('accDetail.placeholder.addr')" autocomplete="off" />
-                </div>
+                <vite-input v-model="inAddress" :valid="validAddr"
+                            :placeholder="$t('accDetail.placeholder.addr')"></vite-input>
             </div>
 
             <div class="row">
@@ -29,9 +28,8 @@
                     {{ $t('accDetail.sum') }}
                     <span v-show="amountErr" class="err hint">{{ amountErr }}</span>
                 </div>
-                <div class="row-content __btn_text __input">
-                    <input v-model="amount" :placeholder="$t('accDetail.placeholder.amount')" autocomplete="off"  />
-                </div>
+                <vite-input v-model="amount" :valid="testAmount"
+                            :placeholder="$t('accDetail.placeholder.amount')"></vite-input>
             </div>
 
             <div class="row">
@@ -41,9 +39,7 @@
                         {{ $t('accDetail.valid.remarksLong', { len: msgBalance}) }}
                     </span>
                 </div>
-                <div class="row-content">
-                    <input v-model="message" :placeholder="$t('accDetail.placeholder.remarks')" autocomplete="off" />
-                </div>
+                <vite-input v-model="message" :placeholder="$t('accDetail.placeholder.remarks')"></vite-input>
             </div>
         </confirm>
 
@@ -55,14 +51,11 @@
 import Vue from 'vue';
 import confirm from 'components/confirm';
 import powProcess from 'components/powProcess';
-
-let inAddrTimeout = null;
-let amountTimeout = null;
-let messageTimeout = null;
+import viteInput from 'components/viteInput';
 
 export default {
     components: {
-        powProcess, confirm
+        powProcess, confirm, viteInput
     },
     props: {
         token: {
@@ -84,11 +77,6 @@ export default {
         this.$onEnterKey(() => {
             this.validTrans();
         });
-    },
-    destroyed() {
-        clearTimeout(amountTimeout);
-        clearTimeout(inAddrTimeout);
-        clearTimeout(messageTimeout);
     },
     data() {
         return {
@@ -129,38 +117,20 @@ export default {
             return this.msgBalance < 0;
         }
     },
-    watch: {
-        inAddress: function() {
-            clearTimeout(inAddrTimeout);
-            inAddrTimeout = null;
-
-            inAddrTimeout = setTimeout(()=> {
-                inAddrTimeout = null;
-                
-                if (!this.inAddress) {
-                    this.isValidAddress = false;
-                    return;
-                }
-
-                try {
-                    this.isValidAddress = viteWallet.Types.isValidHexAddr(this.inAddress);
-                } catch(err) {
-                    console.warn(err);
-                    this.isValidAddress = false;
-                }
-            }, 500);
-        },
-        amount: function() {
-            clearTimeout(amountTimeout);
-            amountTimeout = null;
-
-            amountTimeout = setTimeout(()=> {
-                amountTimeout = null;
-                this.testAmount();
-            }, 500);
-        },
-    },
     methods: {
+        validAddr() {
+            if (!this.inAddress) {
+                this.isValidAddress = false;
+                return;
+            }
+
+            try {
+                this.isValidAddress = viteWallet.Types.isValidHexAddr(this.inAddress);
+            } catch(err) {
+                console.warn(err);
+                this.isValidAddress = false;
+            }
+        },
         showQuota() {
             this.isShowTrans = false;
             this.$confirm({
@@ -357,7 +327,6 @@ export default {
     background: rgba(0, 0, 0, 0.6);
     z-index: 100;
 }
-
 .row {
     margin-top: 20px;
     &:first-child {
@@ -373,25 +342,18 @@ export default {
         padding-bottom: 15px;
     }
     .balance {
-        background: rgba(243,246,249,1);
-    }
-    .row-content {
         padding: 9px 15px;
         border: 1px solid #D4DEE7;
         border-radius: 2px;
         font-size: 14px;
         line-height: normal;
-        &.balance { 
-            span {
-                float: right;
-                color: rgba(0,122,255,1);
-            }
-            .icon {
-                margin-bottom: -4px;
-            }
+        background: rgba(243,246,249,1);
+        span {
+            float: right;
+            color: rgba(0,122,255,1);
         }
-        input {
-            width: 100%;
+        .icon {
+            margin-bottom: -4px;
         }
     }
     .hint {

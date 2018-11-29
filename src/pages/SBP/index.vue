@@ -23,13 +23,11 @@
                      :btnUnuse="!!btnUnuse">
                 <div v-if="showConfirmType === 'edit'">
                     <div class="input-err" v-show="addrErr">{{ addrErr }}</div>
-                    <div class="confirm-input">
-                        <input type="text" v-model="addr" autocomplete="off"
-                               :placeholder="$t(`SBP.confirm.${showConfirmType}.placeholder`)" />
-                    </div>
+                    <vite-input v-model="addr" :valid="testAddr"
+                                :placeholder="$t(`SBP.confirm.${showConfirmType}.placeholder`)"></vite-input>
                 </div>
 
-                <div v-if="showConfirmType === 'reward'">
+                <!-- <div v-if="showConfirmType === 'reward'">
                     <div class="row">
                         <div class="row-t">{{ $t(`SBP.confirm.reward.amount`) }}</div>
                         <div class="row-content unuse">{{ activeItem.showAvailableReward }}</div>
@@ -45,13 +43,13 @@
                             {{ $t(`SBP.section2.rewardAddr`)  }}
                             <span v-show="addrErr" class="err">{{ addrErr }}</span>
                         </div>
-                        <span class="tips" :class="{ 'active': tips }">{{ $t('SBP.confirm.reward.hint') }}</span>
+                        <span class="tips" :class="{ 'active': tips }">{{ tips ? $t('SBP.confirm.reward.hint') : '' }}</span>
                         <div class="row-content">
                             <input v-model="addr" @blur="hideTips" @focus="showTips" autocomplete="off" 
                                    :placeholder="$t(`SBP.confirm.${showConfirmType}.placeholder`)" />
                         </div>
                     </div>
-                </div>
+                </div> -->
             </confirm>
         </div>
     </div>
@@ -62,14 +60,13 @@ import secTitle from 'components/secTitle';
 import loading from 'components/loading';
 import confirm from 'components/confirm';
 import { quotaConfirm } from 'components/quota/index';
+import viteInput from 'components/viteInput';
 import register from './register';
 import list from './list';
 
-let addrTimeout;
-
 export default {
     components: {
-        secTitle, register, list, loading, confirm
+        secTitle, register, list, loading, confirm, viteInput
     },
     created() {
         this.tokenInfo = viteWallet.Ledger.getTokenInfo();
@@ -111,22 +108,6 @@ export default {
             return this.$store.getters.regAddrList;
         }
     },
-    watch: {
-        addr: function() {
-            clearTimeout(addrTimeout);
-            addrTimeout = null;
-            this.hideTips();
-
-            if (this.stopWatch) {
-                return;
-            }
-
-            addrTimeout = setTimeout(()=> {
-                addrTimeout = null;
-                this.testAddr();
-            }, 500);
-        },
-    },
     methods: {
         canUseAddr(nodeName, addr) {
             let usedAddrList = [];
@@ -143,6 +124,10 @@ export default {
             return usedAddrList.indexOf(addr) === -1;
         },
         testAddr() {
+            if (this.stopWatch) {
+                return;
+            }
+
             if (!this.addr || 
                 !viteWallet.Types.isValidHexAddr(this.addr)) {
                 this.addrErr = this.$t('SBP.section1.addrErr');
@@ -184,7 +169,6 @@ export default {
         },
         clearAll() {
             this.stopWatch = true;
-            clearTimeout(addrTimeout);
             this.addr = '';
             this.addrErr = '';
         },
@@ -321,18 +305,6 @@ export default {
         color: #FF2929;
         line-height: 26px;
     }
-    .confirm-input {
-        background: #FFFFFF;
-        border: 1px solid #D4DEE7;
-        border-radius: 2px;
-        height: 40px;
-        line-height: 40px;
-        input {
-            width: 100%;
-            text-indent: 15px;
-            font-size: 14px;
-        }
-    }
 }
 
 .section {
@@ -417,7 +389,6 @@ export default {
 
 .tips {
     position: absolute;
-    min-width: 300px;
     left: 50%;
     bottom: 52px;
     transform: translate(-50%, 0);
@@ -426,13 +397,17 @@ export default {
     border-radius: 8px;
     font-size: 14px;
     color: #3E4A59;
-    padding: 13px 10px;
     box-sizing: border-box;
     font-family: $font-normal;
     opacity: 0;
-    transition: all 0.5s ease-in-out;   
+    transition: opacity 0.5s ease-in-out;
+    width: 0;
+    height: 0; 
     &.active {
+        min-width: 300px;
+        height: auto;
         opacity: 1;
+        padding: 13px 10px;
     }
     &:after {
         content: ' ';

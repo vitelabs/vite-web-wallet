@@ -13,6 +13,7 @@
 
 <script>
 import loading from 'components/loading';
+
 let processTimeout;
 
 export default {
