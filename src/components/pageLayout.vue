@@ -88,9 +88,9 @@ export default {
     }
 }
 
-@media only screen and (max-width: 550px) {
+@media only screen and (max-width: 750px) {
     .page-wrapper .page-content .__wrapper {
-        padding: 0 15px;
+        padding: 15px;
     }
 }
 
