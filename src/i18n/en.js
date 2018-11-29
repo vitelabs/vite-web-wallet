@@ -274,11 +274,11 @@ module.exports = {
         cancelBtn: 'Cancel',
         help: {
             title: 'About SBP',
-            text: 'SBP（Snapshot Block Producer）is a node that has right to creating blocks, you can register to be a SBP candidate by staking a certain amount of VITE, each round (about 75 seconds) will elect 25 SBPs, the SBPs will be elected from random 23 out of top 25 candidate nodes, plus random 2 out of the candidate nodes ranking 26th-100th on the list. The 50% of block creation rewards will be allocated to the block creation node, the other 50% will be allocated to nodes that are ranked on top 100 as voting rewards. <br/><br/> One registration address (staking address) can register multiple block creation nodes (node names), a node name cannot be used if the node name has been registered by a registration address. A node name can switch block creation address, however, block creation address cannot be reused by other node names.'
+            text: 'SBP（Snapshot Block Producer）is a node that has right to create blocks, you can register to become a SBP candidate by staking a certain amount of VITE, each round (about 75 seconds) will elect 25 SBPs, the SBPs will be elected from random 23 out of top 25 candidate nodes, plus random 2 out of the candidate nodes ranking 26th-100th on the list. The 50% of block creation rewards will be allocated to the block creation node, the other 50% will be allocated to nodes that are ranked on top 100 as voting rewards. <br/><br/> One registration address (staking address) can register multiple block creation nodes (node names), a node name cannot be used if the node name has been registered by a registration address. A node name can switch block creation address, however, block creation address cannot be reused by other node names.'
         },
         confirm: {
             title: 'Registration of SBP candidates',
-            describe: 'The {amount} VITE of current address will be locked about 90 days when you submit registration,  the amount will be returned to staking address after being unlocked',
+            describe: 'The {amount} VITE of current address will be locked about 90 days when you submit the registration,  the amount will be returned to staking address after being unlocked',
             leftBtn: 'Not register yet',
             rightBtn: 'Ready to register',
             edit: {
@@ -293,7 +293,7 @@ module.exports = {
             }
         },
         section1: {
-            title: 'Submit Registration',
+            title: 'Registration Form',
             nodeName: 'Node Name',
             producerAddr: 'Block Creation Address',
             quotaAddr: 'Staking Address',
@@ -301,7 +301,7 @@ module.exports = {
             allReward: 'All of the retrievable block creation rewards',
             time: '7776000 snapshot blocks（approximately 90 days）',
             quotaAmount: 'Staking Amount',
-            confirmBtn: 'Submit Registration',
+            confirmBtn: 'Submit',
             namePlaceholder: 'Please input node name',
             nameHint: 'Within 40 characters, support English letters (both upper and lower cases), numbers, \'_\'、\'.\'',
             nameErr: 'This node name is illegal',
@@ -374,7 +374,7 @@ module.exports = {
     
         section2: {
             title: 'SBP candidates',
-            head: ['Node Name', 'Address', 'Votes', 'Action'],
+            head: ['Rank','Node Name', 'Address', 'Votes', 'Action'],
             confirm: {
                 normal: {
                     title: 'Voting',
