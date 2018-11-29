@@ -7,6 +7,14 @@
 <script>
 import secTitle from 'components/secTitle';
 import ethWallet from 'utils/ethWallet/index.js';
+import { timer } from 'utils/asyncFlow';
+
+const minGwei = 3;
+const maxGwei = 99;
+const defaultGwei = 41;
+const balanceTime = 5000;
+
+let balanceInfoInst = null;
 
 export default {
     components: {
@@ -19,13 +27,31 @@ export default {
             mnemonic
         });
 
-        this.ethWallet.getBalance();
-        console.log(this.ethWallet);
+        this.startLoopBalance();
+    },
+    destroyed() {
+        this.stopLoopBalance();
     },
     data() {
         return {
-            ethWallet: null
+            ethWallet: null,
+            balance: null
         };
+    },
+    methods: {        
+        startLoopBalance() {
+            this.stopLoopBalance();
+            balanceInfoInst = new timer(()=>{
+                return this.ethWallet.getBalance((res) => {
+                    this.balance = res;
+                });
+            }, balanceTime);
+            balanceInfoInst.start();
+        },
+        stopLoopBalance() {
+            balanceInfoInst && balanceInfoInst.stop();
+            balanceInfoInst = null;
+        }
     }
 };
 </script>
