@@ -43,7 +43,9 @@
                         <div class="__tb_cell" v-for="v in $t('vote.section2.head')" :key="v">{{v}}</div>
                     </div>
                     <div class="__tb_content" v-if="!!nodeList.length">
-                        <div class="__tb_row __tb_content_row active" v-for="v in nodeList" :key="v.nodeName">
+                        <div class="__tb_row __tb_content_row active" 
+                             v-for="(v,i) in nodeList" :key="v.nodeName">
+                            <div class="__tb_cell rank">{{i+1}}</div>
                             <div class="__tb_cell nodename">{{v.nodeName}}</div>
                             <div @click="goToDetail(v.nodeAddr)" class="__tb_cell clickable">{{v.nodeAddr}}</div>
                             <div class="__tb_cell">{{v.voteNum}}</div>
@@ -408,6 +410,7 @@ export default {
     .__tb {
         width: 100%;
     }
+
     .vote_list {
         overflow-x: auto;
         overflow-y: hidden;
@@ -433,14 +436,30 @@ export default {
             overflow: auto;
         }
         .__tb_cell {
-            min-width: 100px;
-            &:first-child {
-                width: 30%;
-            }
-            &:nth-child(2) {
-                width: 40%;
-            }
-        }
+      min-width: 100px;
+        text-overflow: hidden;
+        margin: 0 5px;
+        text-overflow: ellipsis;
+      &:first-child{
+          width:5%;
+          min-width: 30px;
+      }
+      &:nth-child(2) {
+        width: 30%;
+      }
+      &:nth-child(3) {
+        width: 40%;
+        min-width: 450px;
+      }
+        &:nth-child(4) {
+        width: 15%;
+        min-width: 150px;
+      }
+      &:last-child{
+          width: 5%;
+          min-width: 50px;
+      }
+    }
     }
     .__tb_cell {
         min-width: 180px;

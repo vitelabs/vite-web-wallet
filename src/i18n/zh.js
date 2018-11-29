@@ -376,7 +376,7 @@ module.exports = {
 
         section2: {
             title: '候选节点列表',
-            head: ['节点名称', '出块地址', '当前票数', '操作'],
+            head: ['排名','节点名称', '出块地址', '当前票数', '操作'],
             confirm: {
                 normal: {
                     title: '投票',
