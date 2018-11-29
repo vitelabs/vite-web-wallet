@@ -1,12 +1,11 @@
 <template>
-    <loading v-if="loadingToken" class="loading"></loading>
-
-    <div class="vote __wrapper" v-else>
+    <div class="vote __wrapper">
         <powProcess ref="pow"></powProcess>
-
         <secTitle></secTitle>
 
-        <section class="vote_list">
+        <loading v-if="loadingToken" class="loading"></loading>
+
+        <section v-if="!loadingToken" class="vote_list">
             <div class="title ct">{{ $t('vote.section1.title')}}</div>
             <div class="__tb">
                 <div class="__tb_row __tb_head">
@@ -28,17 +27,14 @@
                             <span class="reward" @click="openReward(v)">{{ $t('vote.toReward') }}</span>
                         </div>
                     </div>
-                    <div class="__tb_row seat">
-                    </div>
+                    <div class="__tb_no_data">{{ voteList.length ? '' : $t('hint.noData') }}</div>
                 </div>
             </div>
         </section>
 
-        <section class="node_list">
+        <section v-if="!loadingToken" class="node_list">
             <div class="title">
-                <div class="ct">
-                    {{$t('vote.section2.title')}}
-                </div>
+                <div class="ct">{{ $t('vote.section2.title') }}</div>
                 <search v-model="filterKey" :placeholder="$t('vote.search')" class="filter"></search>
             </div>
             <div class="tb_container">
@@ -77,7 +73,9 @@ import confirm from 'components/confirm';
 import powProcess from 'components/powProcess';
 
 export default {
-    components: { secTitle, tooltips, search, loading, confirm, powProcess },
+    components: {
+        secTitle, tooltips, search, loading, confirm, powProcess
+    },
     beforeMount() {
         this.tokenInfo = viteWallet.Ledger.getTokenInfo();
         if (!this.tokenInfo) {
@@ -416,8 +414,9 @@ export default {
         margin: 40px 0;
         margin-bottom: 20px;
 
-        .__tb_row.seat {
+        .seat {
             height: 78px;
+            text-align: center;
         }
         .__tb_content {
             overflow: visible;

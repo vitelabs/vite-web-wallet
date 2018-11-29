@@ -14,10 +14,8 @@
                      :rightBtnClick="submit" :btnUnuse="!!cancelUnuse">
                 {{ $t(`quota.confirm.cancel.describe`, { amount: activeAmountLimit }) }}
                 <div class="cancel-amount" v-show="amountErr">{{ amountErr }}</div>
-                <div class="cancel-input">
-                    <input type="text" v-model="cancelAmount" autocomplete="off"
-                           :placeholder="$t('quota.cancelAmount')" />
-                </div>
+                <vite-input class="cancel-input" v-model="cancelAmount" :valid="testAmount"
+                            :placeholder="$t('quota.cancelAmount')"></vite-input>
             </confirm>
         </div>
 
@@ -44,12 +42,11 @@ import list from './list';
 import confirm from 'components/confirm';
 import powProcess from 'components/powProcess';
 import loading from 'components/loading';
-
-let amountTimeout = null;
+import viteInput from 'components/viteInput';
 
 export default {
     components: {
-        quotaHead, myQuota, pledgeTx, confirm, list, powProcess, loading
+        quotaHead, myQuota, pledgeTx, confirm, list, powProcess, loading, viteInput
     },
     created() {
         this.tokenInfo = viteWallet.Ledger.getTokenInfo();
@@ -63,9 +60,6 @@ export default {
                 console.warn(err);
             });
         }
-    },
-    destroyed() {
-        clearTimeout(amountTimeout);
     },
     data() {
         let activeAccount = this.$wallet.getActiveAccount();
@@ -87,22 +81,12 @@ export default {
             return this.showConfirmType === 'cancel' && (!this.cancelAmount || this.amountErr);
         }
     },
-    watch: {
-        cancelAmount: function() {
-            clearTimeout(amountTimeout);
-            amountTimeout = null;
+    methods: {
+        testAmount() {
             if (this.stopWatch) {
                 return;
             }
 
-            amountTimeout = setTimeout(()=> {
-                amountTimeout = null;
-                this.testAmount();
-            }, 500);
-        }
-    },
-    methods: {
-        testAmount() {
             let result = this.$validAmount(this.cancelAmount);
             if (!result) {
                 this.amountErr = this.$t('transList.valid.amt');
@@ -128,7 +112,6 @@ export default {
         },
         closeConfirm() {
             this.stopWatch = true;
-            clearTimeout(amountTimeout);
             this.cancelAmount = '';
             this.amountErr = '';
             Vue.nextTick(() => {
@@ -211,17 +194,7 @@ export default {
         word-break: break-word;
     }
     .cancel-input {
-        background: #FFFFFF;
-        border: 1px solid #D4DEE7;
-        border-radius: 2px;
-        height: 40px;
         margin-top: 27px;
-        line-height: 40px;
-        input {
-            width: 100%;
-            text-indent: 15px;
-            font-size: 14px;
-        }
     }
 }
 

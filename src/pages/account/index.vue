@@ -16,8 +16,8 @@
 <script>
 import syncBlock from 'components/syncBlock';
 import goNetBtn from 'components/goNetBtn';
+import tokenCard from 'components/tokenCard';
 import accountHead from './head';
-import tokenCard from './tokenCard';
 import transaction from './transaction';
 
 export default {

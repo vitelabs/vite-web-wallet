@@ -294,7 +294,7 @@ export default {
         color: #1d2024;
         text-align: left;
         font-family: $font-bold, arial, sans-serif;    
-        max-width: 24%;
+        max-width: 26%;
         word-break: break-all;
         .name {
             display: inline-block;
