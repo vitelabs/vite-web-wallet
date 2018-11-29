@@ -26,7 +26,7 @@ export default {
 .hover-wrapper {
     position: absolute;
     top: 0px;
-    left: 110px;
+    left: 65px;
     padding: 20px 0 0 20px;
     width: 350px;
     z-index: 100;

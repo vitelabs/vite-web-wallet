@@ -1,5 +1,5 @@
 <template>
-    <div class="quota-wrapper">
+    <div class="quota-wrapper __wrapper">
         <quota-head></quota-head>
 
         <loading v-if="loadingToken" class="loading"></loading>
@@ -15,7 +15,7 @@
                 {{ $t(`quota.confirm.cancel.describe`, { amount: activeAmountLimit }) }}
                 <div class="cancel-amount" v-show="amountErr">{{ amountErr }}</div>
                 <div class="cancel-input">
-                    <input type="text" v-model="cancelAmount"
+                    <input type="text" v-model="cancelAmount" autocomplete="off"
                            :placeholder="$t('quota.cancelAmount')" />
                 </div>
             </confirm>
@@ -192,7 +192,6 @@ export default {
 
 .quota-wrapper {
     position: relative;
-    padding: 40px;
     box-sizing: border-box;
     overflow: auto;
     height: 100%;

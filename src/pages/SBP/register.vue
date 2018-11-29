@@ -10,7 +10,7 @@
                     'active': tipsType === 'name'
                 }">{{ $t('SBP.section1.nameHint') }}</span>
                 <div class="input-item all __ellipsis">
-                    <input v-model="nodeName" type="text"
+                    <input v-model="nodeName" type="text" autocomplete="off"
                            @blur="hideTips" @focus="showTips('name')"
                            :placeholder="$t('SBP.section1.namePlaceholder')" />
                 </div>
@@ -24,7 +24,7 @@
                     'active': tipsType === 'addr'
                 }">{{ $t('SBP.section1.addrHint') }}</span>
                 <div class="input-item all __ellipsis">
-                    <input v-model="producerAddr" type="text"
+                    <input v-model="producerAddr" type="text" autocomplete="off"
                            @blur="hideTips" @focus="showTips('addr')"
                            :placeholder="$t('SBP.section1.addrPlaceholder')" />
                 </div>

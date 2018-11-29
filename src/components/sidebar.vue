@@ -5,39 +5,12 @@
             <test-notice class="notice" :class="{'hide': !isShowNotice}"></test-notice>
         </div>
 
-        <router-link class="__pointer icon" :class="{
-            'active': active === 'account'
-        }" :to="{ name: 'account' }">
-            <img v-show="active !== 'account'" :src="home" />
-            <img v-show="active === 'account'" :src="homeActive"  />
-        </router-link>
-
-        <router-link class="__pointer icon" :class="{
-            'active': active === 'quota'
-        }" :to="{ name: 'quota' }">
-            <img v-show="active !== 'quota'" :src="quota" />
-            <img v-show="active === 'quota'" :src="quotaActive"  />
-        </router-link>
-
-        <router-link class="__pointer icon" :class="{
-            'active': active === 'SBP'
-        }" :to="{ name: 'SBP' }">
-            <img v-show="active !== 'SBP'" :src="SBP" />
-            <img v-show="active === 'SBP'" :src="SBPActive"  />
-        </router-link>
-
-        <router-link class="__pointer icon" :class="{
-            'active': active === 'vote'
-        }" :to="{ name: 'vote' }">
-            <img v-show="active !== 'vote'" :src="vote" />
-            <img v-show="active === 'vote'" :src="voteActive"  />
-        </router-link>
-        
-        <router-link class="__pointer icon" :class="{
-            'active': active === 'transList'
-        }" :to="{ name: 'transList' }">
-            <img v-show="active !== 'transList'" :src="send" />
-            <img v-show="active === 'transList'" :src="sendActive"  />
+        <router-link v-for="(name, index) in pageList" :key="index"
+                     class="__pointer icon" :class="{
+                         'active': active === name
+        }" :to="{ 'name': name }">
+            <img v-show="active !== name" :src="icon[name]" />
+            <img v-show="active === name" :src="icon[`${name}Active`]"  />
         </router-link>
 
         <div class="_bottom">
@@ -60,11 +33,11 @@
 <script>
 import testNotice from 'components/testNotice';
 
-import viteLogo from 'assets/imgs/ViteLogo2.svg';
-import home from 'assets/imgs/index_icon_default.svg';
-import homeActive from 'assets/imgs/index_icon_pressed.svg';
-import send from 'assets/imgs/transfer_default.svg';
-import sendActive from 'assets/imgs/transfer_pressed.svg';
+import viteLogo from 'assets/imgs/sidebar_logo.svg';
+import account from 'assets/imgs/index_icon_default.svg';
+import accountActive from 'assets/imgs/index_icon_pressed.svg';
+import transList from 'assets/imgs/transfer_default.svg';
+import transListActive from 'assets/imgs/transfer_pressed.svg';
 import setting from 'assets/imgs/settings_default.svg';
 import settingActive from 'assets/imgs/settings_pressed.svg';
 import logoutDefault from 'assets/imgs/logout_default.svg';
@@ -92,20 +65,26 @@ export default {
             logoutHover: false,
 
             viteLogo,
-            home,
-            homeActive,
-            send,
-            sendActive,
+
+            pageList: ['account', 'quota', 'SBP', 'vote', 'transList', 'gateway'],
+            icon: {
+                account,
+                accountActive,
+                transList,
+                transListActive,
+                quota,
+                quotaActive,
+                SBP,
+                SBPActive,
+                vote,
+                voteActive,
+                gateway: '',
+                gatewayActive: ''
+            },
             setting,
             settingActive,
             logoutDefault,
-            logoutActive,
-            quota,
-            quotaActive,
-            SBP,
-            SBPActive,
-            vote,
-            voteActive
+            logoutActive
         };
     },
     methods: {
@@ -165,18 +144,22 @@ export default {
         justify-content: center;
         align-items: center;
         width: 100%;
-        height: 54px;
+        height: 40px;
         margin-top: 30px;
+        img {
+            width: 24px;
+            height: 24px;
+        }
         &.active:before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             bottom: 0;
-            right: 4.5px;
+            right: 4px;
             display: inline-block;
-            width: 4.5px;
-            height: 54px;
+            width: 4px;
+            height: 40px;
             background-image: linear-gradient(-90deg, #1B3BD8 100%, #176CE0 100%, #0B92E7 100%, #0BB6EB 100%, #00E0F2 100%);
         }
     }

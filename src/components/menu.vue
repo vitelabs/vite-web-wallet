@@ -11,29 +11,10 @@
                 {{ $t('nav.home') }}
             </div>
 
-            <div class="item" @click="go('quota')" 
-                 :class="{ 'active': active === 'quota'}">
-                {{ $t('quota.title') }}
-            </div>
-
-            <div class="item" @click="go('SBP')" 
-                 :class="{ 'active': active === 'SBP'}">
-                {{ $t('SBP.title') }}
-            </div>
-
-            <div class="item" @click="go('vote')" 
-                 :class="{ 'active': active === 'vote'}">
-                {{ $t('vote.title') }}
-            </div>
-
-            <div class="item" @click="go('transList')" 
-                 :class="{ 'active': active === 'transList'}">
-                {{ $t('transList.title') }}
-            </div>
-
-            <div class="item" @click="go('setting')" 
-                 :class="{ 'active': active === 'setting'}">
-                {{ $t('setting.title') }}
+            <div v-for="(name, i) in pageList" :key="i"
+                 class="item" @click="go(name)"
+                 :class="{ 'active': active === name}">
+                {{ $t(`${name}.title`) }}
             </div>
 
             <div class="item" @click="logout" >
@@ -55,6 +36,7 @@ export default {
     },
     data() {
         return {
+            pageList: ['quota', 'SBP', 'vote', 'transList', 'gateway', 'setting'],
             viteLogo,
             showList: false
         };
@@ -124,7 +106,7 @@ export default {
     overflow: hidden;
     transition: all 0.3s ease-in-out;
     &.show {
-        height: 420px;
+        height: 488px;
     }
     .item {
         margin-top: 0px;

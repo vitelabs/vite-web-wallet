@@ -20,7 +20,7 @@
                     <span v-show="!isValidAddress" class="err hint">{{ $t('transList.valid.addr') }}</span>
                 </div>
                 <div class="row-content">
-                    <input ref="inAddr" v-model="inAddress" :placeholder="$t('accDetail.placeholder.addr')" />
+                    <input ref="inAddr" v-model="inAddress" :placeholder="$t('accDetail.placeholder.addr')" autocomplete="off" />
                 </div>
             </div>
 
@@ -30,7 +30,7 @@
                     <span v-show="amountErr" class="err hint">{{ amountErr }}</span>
                 </div>
                 <div class="row-content __btn_text __input">
-                    <input v-model="amount" :placeholder="$t('accDetail.placeholder.amount')"  />
+                    <input v-model="amount" :placeholder="$t('accDetail.placeholder.amount')" autocomplete="off"  />
                 </div>
             </div>
 

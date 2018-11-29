@@ -404,7 +404,15 @@ module.exports = {
         }
     },
 
-
+    // gateway
+    gateway: {
+        title: 'VITE网关',
+        help: {
+            title: '快速理解VITE网关',
+            text: ''
+        },
+    },
+    
     pwdConfirm: {
         conf: 'Open password-free mode within 5 minutes',
         title: 'Password',

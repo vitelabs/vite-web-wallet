@@ -11,7 +11,7 @@
                     <span v-show="amountErr" class="err">{{ amountErr }}</span>
                 </div>
                 <div class="input-item all __ellipsis">
-                    <input v-model="amount" class="amount" type="text" 
+                    <input v-model="amount" class="amount" type="text" autocomplete="off"
                            :placeholder="$t('quota.amountPlaceholder')" />
                     <span class="unit">VITE</span>
                 </div>
@@ -25,7 +25,7 @@
                     <span v-show="!isValidAddress" class="err">{{ $t('transList.valid.addr') }}</span>
                 </div>
                 <div class="input-item all __ellipsis">
-                    <input v-model="toAddr" type="text" 
+                    <input v-model="toAddr" type="text" autocomplete="off"
                            :placeholder="$t('quota.addrPlaceholder')" />
                 </div>
             </div>

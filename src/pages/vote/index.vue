@@ -1,16 +1,13 @@
 <template>
     <loading v-if="loadingToken" class="loading"></loading>
-    <div class="vote" v-else>
+
+    <div class="vote __wrapper" v-else>
         <powProcess ref="pow"></powProcess>
+
         <secTitle></secTitle>
 
         <section class="vote_list">
-            <div class="title">
-                <div class="ct">
-                    {{$t('vote.section1.title')}}
-                </div>
-            </div>
-
+            <div class="title ct">{{ $t('vote.section1.title')}}</div>
             <div class="__tb">
                 <div class="__tb_row __tb_head">
                     <div class="__tb_cell" v-for="v in $t('vote.section1.head')" :key="v"> {{v}}</div>
@@ -390,22 +387,23 @@ export default {
     .filter {
         align-self: flex-end;
     }
-    .title {
-        display: flex;
-        flex: none;
-        justify-content: space-between;
-        font-family: $font-bold;
-        font-size: 18px;
-        color: #1d2024;
-        height: 40px;
-        margin-bottom: 24px;
-        line-height: 40px;
 
-        .ct {
+    .ct {
         border-left: 2px solid rgba(0, 122, 255, 0.7);
         padding-left: 10px;
         height: 18px;
         line-height: 18px;
+        font-family: $font-bold;
+        font-size: 18px;
+        color: #1d2024;
+    }
+    .title {
+        display: flex;
+        flex: none;
+        justify-content: space-between;
+        margin-bottom: 24px;
+        .ct {
+            margin-top: 10px;
         }
     }
     .__tb {

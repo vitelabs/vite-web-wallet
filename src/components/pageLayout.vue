@@ -76,12 +76,21 @@ export default {
     }
     .sidebar {
         float: left;
-        width: 118px;
+        width: 70px;
     }
-    .page-content {
-        margin-left: 118px;
-        height: 100%;
-        overflow: auto;
+}
+.page-content {
+    margin-left: 70px;
+    height: 100%;
+    overflow: auto;
+    .__wrapper {
+        padding: 40px;
+    }
+}
+
+@media only screen and (max-width: 550px) {
+    .page-wrapper .page-content .__wrapper {
+        padding: 0 15px;
     }
 }
 

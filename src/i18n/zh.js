@@ -406,6 +406,15 @@ module.exports = {
         }
     },
 
+    // gateway
+    gateway: {
+        title: 'VITE网关',
+        help: {
+            title: '快速理解VITE网关',
+            text: ''
+        },
+    },
+
     pwdConfirm: {
         conf: '开启5分钟内免密操作',
         title: '输入钱包密码',
