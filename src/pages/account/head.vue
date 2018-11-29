@@ -10,7 +10,7 @@
             }" @click="startRename">{{ account.name }}</div>
             <input ref="nameInput" v-show="isShowNameInput" type="text"
                    v-model="editName" :placeholder="account.name"
-                   @blur="rename"/>
+                   @blur="rename" autocomplete="off"/>
         </div>
 
         <div class="addr-wrapper">

@@ -1,5 +1,5 @@
 <template>
-    <div class="SBP-wrapper">
+    <div class="SBP-wrapper __wrapper">
         <sec-title></sec-title>
 
         <loading v-if="loadingToken" class="loading"></loading>
@@ -24,7 +24,7 @@
                 <div v-if="showConfirmType === 'edit'">
                     <div class="input-err" v-show="addrErr">{{ addrErr }}</div>
                     <div class="confirm-input">
-                        <input type="text" v-model="addr"
+                        <input type="text" v-model="addr" autocomplete="off"
                                :placeholder="$t(`SBP.confirm.${showConfirmType}.placeholder`)" />
                     </div>
                 </div>
@@ -47,7 +47,7 @@
                         </div>
                         <span class="tips" :class="{ 'active': tips }">{{ $t('SBP.confirm.reward.hint') }}</span>
                         <div class="row-content">
-                            <input v-model="addr" @blur="hideTips" @focus="showTips" 
+                            <input v-model="addr" @blur="hideTips" @focus="showTips" autocomplete="off" 
                                    :placeholder="$t(`SBP.confirm.${showConfirmType}.placeholder`)" />
                         </div>
                     </div>
@@ -290,7 +290,6 @@ export default {
 
 .SBP-wrapper {
     position: relative;
-    padding: 40px;
     box-sizing: border-box;
     overflow: auto;
     height: 100%;
