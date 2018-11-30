@@ -24,9 +24,9 @@ module.exports = {
         4: 'Voting',
         5: 'Revoke Voting',
         6: 'Get TPS Quota',
-        7: 'Withdrawal of staking quota',
+        7: 'Withdrawal of Staking Quota',
         8: 'Token Issuance',
-        9: 'Withdrawal of staking token',
+        9: 'Withdrawal of Staking Token',
         10: 'Transfer'
     },
     
@@ -179,15 +179,15 @@ module.exports = {
     quota: {
         title: 'Get Quota',
         help: {
-            title: 'Quick understanding of quota'
+            title: 'Quick Understanding of Quota'
         },
         myQuota: 'My Quota',
         maxTxNum: 'Maximum number of Txs',
         beneficialAddr: 'Quota Recipient Address',
         fromAddr: 'Deduction address',
-        amount: 'Staking amount',
-        time: 'Staking frozen duration',
-        aboutDays: 'About 3 days',
+        amount: 'Staking Amount',
+        time: 'Staking Freeze Duration',
+        aboutDays: 'Approx 3 days',
         btn: 'Submit Staking',
         myQuotaList: 'My Staking List',
         amountPlaceholder: 'Please input staking amount, minimum 10 VITE',
@@ -195,22 +195,22 @@ module.exports = {
         cancelAmount: 'Please input withdraw amount',
         pledgeSuccess: 'Successfully Submitted',
         pledgeFail: 'Failed to Submit',
-        canclePledgeSuccess: 'Successful',
+        canclePledgeSuccess: 'Success',
         canclePledgeFail: 'Failed',
         limitAmt: 'Staking amount should not be less than 10.',
         maturity: 'Staking has expired!',
         maxAmt: 'Withdraw amount should be in (0, {amount}]',
         confirm: {
             help: {
-                t1: 'What is quota? ',
-                txt1: 'In the Vite system, users do not purchase the gas required for a transaction by paying a fee, but acquire the computing resource through a quota-based model. Required quota for sending a transaction = the basic quota (request) + quota ( The attached text data), Quota required to accept a transaction = the basic quota (response). This quota-based resource configuration protocol allows users to obtain higher resource quotas in two ways: Staking VITE to obtain quotas and run PoW.',
-                t2: 'What is staking?',
-                txt2: 'In the Vite system, the user can stake VITE to obtain a certain amount of quota, the minimum value of the staking is 10 VITE, there is no maximum limit; meanwhile, Vite system also support that the A-address stakes a part of the VITE and allocates the obtained quota to the B address; When users apply to stake, The VITE will be sent to the smart contract address instead of some user, and only the user who apply for staking has access to manage the staking amount.',
+                t1: 'What is Quota?',
+                txt1: 'In the Vite system, users do not purchase the gas required for a transaction by paying a fee, but acquire the computing resource through a quota-based model. Required quota for sending a transaction = the basic quota (request) + quota (the attached text data), quota required to accept a transaction = the basic quota (response). This quota-based resource configuration protocol allows users to obtain higher resource quotas in two ways: Staking VITE to obtain quota and running PoW.',
+                t2: 'What is Staking?',
+                txt2: 'In the Vite system, the user can stake VITE to obtain a certain amount of quota. The minimum value for staking is 10 VITE, and there is no maximum limit; meanwhile, Vite system also supports that the A-address stakes a part of the VITE and allocates the obtained quota to the B address. When users apply to stake, VITE will be sent to the smart contract address instead of another user, and only the user who applies for staking has access to manage the staking amount.',
                 t3: 'What is PoW?',
-                txt3: 'Proof of Work (PoW), to be brief is a protocol to confirm that you have done a certain amount of work, also it is an economic measure to deter DDoS attacks and other service abuse. It requires the initiator to conduct a certain amount of computing, which means that it may take some time for the computer; in the Vite system, Users can obtain a free quota by running the PoW, and also can send a transaction without any annotated information through obtained quota.'
+                txt3: 'Proof of Work (PoW), is a protocol to confirm that you have done a certain amount of work, and is also an economic measure to deter DDoS attacks and other service abuse. It requires the initiator to conduct a certain amount of computing, which means that it may take some time for the computer. In the Vite system, users can obtain a free quota by running the PoW, and also can send a transaction without any annotated information through obtained quota.'
             },
             cancel: {
-                title: 'Withdrawal of staked token',
+                title: 'Withdrawal of Staked Token',
                 describe: 'Your current staked amount is {amount} VITE, please confirm to withdraw.',
                 placeholder: 'Please input withdraw amount',
                 rightBtn: 'Ready to go',
@@ -227,8 +227,8 @@ module.exports = {
             title: 'My Staking List',
             total: 'Staking {amount} VITE in total',
             amount: 'Amount',
-            withdrawHeight: 'Expected snapshot height',
-            withdrawTime: 'Expected due date',
+            withdrawHeight: 'Expected Snapshot Height',
+            withdrawTime: 'Expected Due Date',
             cancel: 'Withdrawal of staked token',
             operate: 'Action',
             unexpired: 'Temporarily cannot make withdrawal of staked token until due date'
@@ -363,7 +363,7 @@ module.exports = {
             toast: 'Revoking request has sent',
             quotaConfirm: {
                 title: 'Insufficient Quota',
-                content: 'your left quotas turn out to be insufficient, you can acquire more quotas by running PoW or staking VITE',
+                content: 'your left quota turn out to be insufficient, you can acquire more quota by running PoW or staking VITE',
                 leftBtn: {text:'Stake Quota'},
                 rightBtn: {text:'Run POW'}
             },
@@ -392,7 +392,7 @@ module.exports = {
             toast: 'The voting request has sent',
             quotaConfirm: {
                 title: 'Insufficient Quota',
-                content: 'your left quotas turn out to be insufficient, you can acquire more quotas by running PoW or staking VITE',
+                content: 'your left quota turn out to be insufficient, you can acquire more quota by running PoW or staking VITE',
                 leftBtn: {text:'Stake for quota'},
                 rightBtn: {text:'Run POW'}
             },
