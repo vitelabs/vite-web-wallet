@@ -1,19 +1,25 @@
-
 class Pow {
-    constructor(provider, utils) {
-        this.provider = provider;
-        this.utils = utils;
+    constructor(utils) {
+        this.encoder = utils.encoder;
+        this.addressLibs = utils.address;
     }
     
-    getNonce(addr, prevHash, difficulty = process.env.powDifficulty) {
-        let realAddr = $ViteJS.Wallet.Address.getAddrFromHexAddr(addr);
-        let hash = this.utils.bytesToHex(this.utils.blake2b(this.utils.hexToBytes(realAddr + prevHash), null, 32));
-        return this.provider.request('pow_getPowNonce', [difficulty, hash]).then((data) => {
-            return {
-                nonce: data.result,
-                difficulty
-            };
-        });
+    // http: ??
+    async getNonce(addr, prevHash, difficulty = process.env.powDifficulty) {
+        let realAddr = this.addressLibs.getAddrFromHexAddr(addr);
+        let hash = this.encoder.bytesToHex(
+            this.encoder.blake2b(
+                this.encoder.hexToBytes(realAddr + prevHash), 
+                null, 
+                32
+            )
+        );
+
+        const data = await $ViteJS._provider.request('pow_getPowNonce', [difficulty, hash]);
+        return {
+            nonce: data.result,
+            difficulty
+        };
     }
 }
 

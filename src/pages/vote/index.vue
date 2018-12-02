@@ -119,7 +119,7 @@ export default {
             this.isResisterTipsShow = !this.isResisterTipsShow;
         },
         updateVoteData() {
-            return $ViteJS.Vite.vote_getVoteInfo(
+            return $ViteJS.vote.getVoteInfo(
                 c.gid,
                 this.$wallet.getActiveAccount().getDefaultAddr()
             ).then(data => {
@@ -129,7 +129,7 @@ export default {
             });
         },
         updateNodeData() {
-            return $ViteJS.Vite.register_getCandidateList(c.gid).then(data => {
+            return $ViteJS.register.getCandidateList(c.gid).then(data => {
                 this.nodeData =
           data.result.map(v => {
               return {

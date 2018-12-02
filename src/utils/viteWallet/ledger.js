@@ -1,11 +1,8 @@
-
 import loopTime from 'config/loopTime';
-
 import viteIcon from 'assets/imgs/vite.svg';
 import vcpIcon from 'assets/imgs/VCC.svg';
 import vttIcon from 'assets/imgs/vtt.svg';
 
-let loopHeightTimeout;
 const ViteId = 'tti_5649544520544f4b454e6e40';
 const defaultTokenList = {
     'tti_5649544520544f4b454e6e40': {
@@ -21,6 +18,8 @@ const defaultTokenList = {
         icon: vttIcon
     }
 };
+
+let loopHeightTimeout;
 
 class Ledger {
     constructor() {
@@ -57,7 +56,7 @@ class Ledger {
     }
 
     fetchTokenInfo(tokenId = ViteId) {
-        return $ViteJS.Vite['ledger_getTokenMintage'](tokenId).then(({ result }) => {
+        return $ViteJS.ledger.getTokenMintage(tokenId).then((result) => {
             this.setTokenInfo(result, tokenId);
             return this.tokenInfoMaps[tokenId];
         });
@@ -72,12 +71,9 @@ class Ledger {
             }, loopTime.ledger_getSnapshotChainHeight);
         };
 
-        $ViteJS.Vite['ledger_getSnapshotChainHeight']().then(({ result })=>{
-            if (result) {
-                this.currentHeight = result;
-                webViteEventEmitter.emit('currentHeight', this.currentHeight);
-            }
-
+        $ViteJS.ledger.getSnapshotChainHeight().then((result)=>{
+            this.currentHeight = result || 0;
+            webViteEventEmitter.emit('currentHeight', this.currentHeight);
             loop();
         }).catch(()=>{
             loop();
