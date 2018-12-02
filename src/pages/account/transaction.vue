@@ -110,7 +110,7 @@ export default {
         },
         msgBalance() {
             let message = this.$trim(this.message);
-            let length = viteWallet.utils.getBytesSize(message);
+            let length = viteWallet.encoder.getBytesSize(message);
             return 120 - length;
         },
         messageErr() {
@@ -119,17 +119,7 @@ export default {
     },
     methods: {
         validAddr() {
-            if (!this.inAddress) {
-                this.isValidAddress = false;
-                return;
-            }
-
-            try {
-                this.isValidAddress = viteWallet.Types.isValidHexAddr(this.inAddress);
-            } catch(err) {
-                console.warn(err);
-                this.isValidAddress = false;
-            }
+            this.isValidAddress = !this.inAddress && viteWallet.address.isValidHexAddr(this.inAddress);
         },
         showQuota() {
             this.isShowTrans = false;

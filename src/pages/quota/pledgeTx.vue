@@ -126,7 +126,7 @@ export default {
             }
 
             try {
-                this.isValidAddress = viteWallet.Types.isValidHexAddr(this.toAddr);
+                this.isValidAddress = viteWallet.address.isValidHexAddr(this.toAddr);
             } catch(err) {
                 console.warn(err);
                 this.isValidAddress = false;

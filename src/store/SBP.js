@@ -7,7 +7,7 @@ let nodeNameList = {};
 
 const apis = {
     fetchRegistrationList(address) {
-        return viteWallet.Vite['register_getRegistrationList'](config.gid, address).then((data)=>{
+        return $ViteJS.register.getRegistrationList(config.gid, address).then((data)=>{
             return data && data.result ? data.result : [];
         });
     }

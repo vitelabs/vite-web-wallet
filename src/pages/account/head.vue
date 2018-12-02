@@ -144,7 +144,7 @@ export default {
                 this.$toast( this.$t('accDetail.hint.tErr') );
             }
             this.getTestTokenAble=false;
-            viteWallet.TestToken.get(this.account.addr).then(() => {
+            viteWallet.getTestToken(this.account.addr).then(() => {
                 this.$toast( this.$t('accDetail.hint.token') );
                 setTimeout(()=>{
                     this.getTestTokenAble=true;

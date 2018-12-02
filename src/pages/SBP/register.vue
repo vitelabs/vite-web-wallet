@@ -167,7 +167,7 @@ export default {
             }
 
             if (!this.producerAddr || 
-                !viteWallet.Types.isValidHexAddr(this.producerAddr)) {
+                !viteWallet.address.isValidHexAddr(this.producerAddr)) {
                 this.producerAddrErr = this.$t('SBP.section1.addrErr');
                 return;
             }

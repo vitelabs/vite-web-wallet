@@ -312,8 +312,8 @@ function checkName(name) {
 }
 
 function getHexId(key) {
-    let keyByte = viteWallet.utils.utf8ToBytes(key);
-    let idByte = viteWallet.utils.blake2b(keyByte, null, 32);
-    let idHex = viteWallet.utils.bytesToHex(idByte);
+    let keyByte = viteWallet.encoder.utf8ToBytes(key);
+    let idByte = viteWallet.encoder.blake2b(keyByte, null, 32);
+    let idHex = viteWallet.encoder.bytesToHex(idByte);
     return idHex;
 }
