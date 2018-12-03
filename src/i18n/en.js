@@ -431,7 +431,7 @@ module.exports = {
         edit: 'Edit',
         copy: 'Copy',
         reReg: 'Re-register',
-        otherProd: 'Use other products of Vite'
+        otherProd: 'Use Other Products of Vite'
     },
     paging: {
         pre: 'Prev',
