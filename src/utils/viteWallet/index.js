@@ -1,4 +1,4 @@
-import { client, utils } from '@vite/vitejs';
+import { wallet, utils } from '@vite/vitejs';
 import provider from '@vite/vitejs/dist/es5/provider/WS.js';
 
 import BigNumber from './bignumber';
@@ -14,15 +14,14 @@ WS_RPC.on('connect', () => {
     viteWallet && viteWallet.Ledger.getDefaultTokenList();
 });
 
-window.$ViteJS = new client(WS_RPC);
-console.log($ViteJS);
+window.$ViteJS = new wallet(WS_RPC);
 
 window.viteWallet = {
     encoder: utils.encoder,
     address: utils.address,
     BigNumber,
     getTestToken: (addr) => {
-        $ViteJS.request('testapi_getTestToken', addr);
+        return $ViteJS.request('testapi_getTestToken', addr);
     },
     Net: new net(),
     Pow: new pow(utils),

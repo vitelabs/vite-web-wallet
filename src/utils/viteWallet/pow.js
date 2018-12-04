@@ -6,7 +6,7 @@ class Pow {
     
     // http: ??
     async getNonce(addr, prevHash, difficulty = process.env.powDifficulty) {
-        let realAddr = this.addressLibs.getAddrFromHexAddr(addr);
+        let realAddr = this.addressLibs.privToAddr.getAddrFromHexAddr(addr);
         let hash = this.encoder.bytesToHex(
             this.encoder.blake2b(
                 this.encoder.hexToBytes(realAddr + prevHash), 
