@@ -202,7 +202,7 @@ export default {
         },
         goToNodeDetail(nodeName) {
             let locale = this.$i18n.locale === 'zh' ? 'zh/' : '';
-            window.open(`${process.env.viteNet}${locale}SBPDetail/${addr}`);
+            window.open(`${process.env.viteNet}${locale}SBPDetail/${nodeName}`);
         },
         goToDetail(addr) {
             let locale = this.$i18n.locale === 'zh' ? 'zh/' : '';
