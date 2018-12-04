@@ -1,127 +1,129 @@
 <template>
-  <loading
-    v-if="loadingToken"
-    class="loading"
-  ></loading>
-  <div
-    class="vote"
-    v-else
-  >
-    <powProcess ref="pow"></powProcess>
-    <secTitle></secTitle>
+    <loading
+        v-if="loadingToken"
+        class="loading"
+    ></loading>
+    <div
+        class="vote"
+        v-else
+    >
+        <powProcess ref="pow"></powProcess>
+        <secTitle></secTitle>
 
-    <section class="vote_list">
-      <div class="title">
-        <div class="ct">
-          {{$t('vote.section1.title')}}
-        </div>
-      </div>
-
-      <div class="__tb">
-        <div class="__tb_row __tb_head">
-          <div
-            class="__tb_cell"
-            v-for="v in $t('vote.section1.head')"
-            :key="v"
-          > {{v}}</div>
-        </div>
-        <div class="__tb_content">
-          <div
-            class="__tb_row"
-            v-for="v in voteList"
-            :key="v.nodeName"
-          >
-            <div class="__tb_cell nodename">{{v.nodeName}}</div>
-            <div class="__tb_cell">{{v.nodeStatusText}} <i
-                v-if="v.nodeStatus===2"
-                class="tipsicon hoveraction"
-                @click.self.stop="toggleTips"
-              >
-                <tooltips
-                  v-if="isResisterTipsShow"
-                  v-click-outside
-                  @clickoutside="hideTips"
-                  class="unregister-tips"
-                  :content="$t('vote.section1.hoverHelp',{nodeName:v.nodeName})"
-                ></tooltips>
-              </i></div>
-            <div class="__tb_cell">{{v.voteNum}}</div>
-            <div class="__tb_cell">{{v.voteStatusText}}</div>
-            <div
-              class="__tb_cell"
-              :class="cache ? 'unclickable' : 'clickable'"
-            >
-              <span @click="cancelVote(v)">{{ v.operate }}</span>
-              <span
-                class="reward"
-                @click="openReward(v)"
-              >{{ $t('vote.toReward') }}</span>
+        <section class="vote_list">
+            <div class="title">
+                <div class="ct">
+                    {{$t('vote.section1.title')}}
+                </div>
             </div>
-          </div>
-          <div class="__tb_row seat">
-          </div>
-        </div>
-      </div>
-    </section>
 
-    <section class="node_list">
-      <div class="title">
-        <div class="ct">
-          {{$t('vote.section2.title')}}
-        </div>
-        <search
-          v-model="filterKey"
-          :placeholder="$t('vote.search')"
-          class="filter"
-        ></search>
-      </div>
-      <div class="tb_container">
-        <div class="__tb">
-          <div class="__tb_row __tb_head">
-            <div
-              class="__tb_cell"
-              v-for="v in $t('vote.section2.head')"
-              :key="v"
-            >{{v}}</div>
-          </div>
-          <div
-            class="__tb_content"
-            v-if="!!nodeList.length"
-          >
-            <div
-              class="__tb_row __tb_content_row active"
-              v-for="(v,i) in nodeList"
-              :key="v.nodeName"
-            >
-              <div class="__tb_cell rank">{{i+1}}</div>
-              <div class="__tb_cell nodename">{{v.nodeName}}</div>
-              <div
-                @click="goToDetail(v.nodeAddr)"
-                class="__tb_cell clickable"
-              >{{v.nodeAddr}}</div>
-              <div class="__tb_cell">{{v.voteNum}}</div>
-              <div
-                class="__tb_cell clickable"
-                @click="vote(v)"
-              >{{v.operate}}</div>
+            <div class="__tb">
+                <div class="__tb_row __tb_head">
+                    <div
+                        class="__tb_cell"
+                        v-for="v in $t('vote.section1.head')"
+                        :key="v"
+                    > {{v}}</div>
+                </div>
+                <div class="__tb_content">
+                    <div
+                        class="__tb_row"
+                        v-for="v in voteList"
+                        :key="v.nodeName"
+                    >
+                        <div class="__tb_cell nodename">{{v.nodeName}}</div>
+                        <div class="__tb_cell">{{v.nodeStatusText}} <i
+                            v-if="v.nodeStatus===2"
+                            class="tipsicon hoveraction"
+                            @click.self.stop="toggleTips"
+                        >
+                            <tooltips
+                                v-if="isResisterTipsShow"
+                                v-click-outside
+                                @clickoutside="hideTips"
+                                class="unregister-tips"
+                                :content="$t('vote.section1.hoverHelp',{nodeName:v.nodeName})"
+                            ></tooltips>
+                        </i></div>
+                        <div class="__tb_cell">{{v.voteNum}}</div>
+                        <div class="__tb_cell">{{v.voteStatusText}}</div>
+                        <div
+                            class="__tb_cell"
+                            :class="cache ? 'unclickable' : 'clickable'"
+                        >
+                            <span @click="cancelVote(v)">{{ v.operate }}</span>
+                            <span
+                                class="reward"
+                                @click="openReward(v)"
+                            >{{ $t('vote.toReward') }}</span>
+                        </div>
+                    </div>
+                    <div class="__tb_row seat">
+                    </div>
+                </div>
             </div>
-          </div>
-          <div
-            class="__tb_content"
-            v-else-if="this.filterKey"
-          >
-            <div class="__tb_no_data">{{$t("vote.section2.noSearchData")}}</div>
-          </div>
-          <div
-            class="__tb_content"
-            v-else
-          >
-            <div class="__tb_no_data">{{$t("vote.section2.noData")}}</div>
-          </div>
-        </div>
-      </div>
-    </section>
-  </div>
+        </section>
+
+        <section class="node_list">
+            <div class="title">
+                <div class="ct">
+                    {{$t('vote.section2.title')}}
+                </div>
+                <search
+                    v-model="filterKey"
+                    :placeholder="$t('vote.search')"
+                    class="filter"
+                ></search>
+            </div>
+            <div class="tb_container">
+                <div class="__tb">
+                    <div class="__tb_row __tb_head">
+                        <div
+                            class="__tb_cell"
+                            v-for="v in $t('vote.section2.head')"
+                            :key="v"
+                        >{{v}}</div>
+                    </div>
+                    <div
+                        class="__tb_content"
+                        v-if="!!nodeList.length"
+                    >
+                        <div
+                            class="__tb_row __tb_content_row active"
+                            v-for="(v,i) in nodeList"
+                            :key="v.nodeName"
+                        >
+                            <div class="__tb_cell rank">{{i+1}}</div>
+                            <div class="__tb_cell nodename clickable" 
+                                 @click="goToNodeDetail(v.nodeName)"
+                            >{{v.nodeName}}</div>
+                            <div
+                                @click="goToDetail(v.nodeAddr)"
+                                class="__tb_cell clickable"
+                            >{{v.nodeAddr}}</div>
+                            <div class="__tb_cell">{{v.voteNum}}</div>
+                            <div
+                                class="__tb_cell clickable"
+                                @click="vote(v)"
+                            >{{v.operate}}</div>
+                        </div>
+                    </div>
+                    <div
+                        class="__tb_content"
+                        v-else-if="this.filterKey"
+                    >
+                        <div class="__tb_no_data">{{$t("vote.section2.noSearchData")}}</div>
+                    </div>
+                    <div
+                        class="__tb_content"
+                        v-else
+                    >
+                        <div class="__tb_no_data">{{$t("vote.section2.noData")}}</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
 </template>
 
 <script>
@@ -197,6 +199,10 @@ export default {
           }) || [];
                 return this.nodeData;
             });
+        },
+        goToNodeDetail(nodeName) {
+            let locale = this.$i18n.locale === 'zh' ? 'zh/' : '';
+            window.open(`${process.env.viteNet}${locale}SBPDetail/${nodeName}`);
         },
         goToDetail(addr) {
             let locale = this.$i18n.locale === 'zh' ? 'zh/' : '';
