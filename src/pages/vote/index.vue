@@ -46,7 +46,7 @@
                         <div class="__tb_row __tb_content_row active" 
                              v-for="(v,i) in nodeList" :key="v.nodeName">
                             <div class="__tb_cell rank">{{i+1}}</div>
-                            <div class="__tb_cell nodename">{{v.nodeName}}</div>
+                            <div @click="goToNodeDetail(v.nodeName)" class="__tb_cell nodename clickable">{{v.nodeName}}</div>
                             <div @click="goToDetail(v.nodeAddr)" class="__tb_cell clickable">{{v.nodeAddr}}</div>
                             <div class="__tb_cell">{{v.voteNum}}</div>
                             <div class="__tb_cell clickable" @click="vote(v)">{{v.operate}}</div>
@@ -139,6 +139,10 @@ export default {
           }) || [];
                 return this.nodeData;
             });
+        },
+        goToNodeDetail(nodeName) {
+            let locale = this.$i18n.locale === 'zh' ? 'zh/' : '';
+            window.open(`${process.env.viteNet}${locale}SBPDetail/${nodeName}`);
         },
         goToDetail(addr) {
             let locale = this.$i18n.locale === 'zh' ? 'zh/' : '';
