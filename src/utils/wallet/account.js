@@ -1,7 +1,12 @@
+import { utils } from '@vite/vitejs';
+
 import acc from './storeAcc.js';
 import { pwdConfirm } from 'components/password/index.js';
 import config from 'config/constant';
 import vitecrypto from 'testwebworker';
+
+const _keystore = utils.keystore;
+const _hdAddr = utils.address.hdAddr;
 
 const namePre = 'account';
 let passTimeout;
@@ -28,6 +33,15 @@ class Account {
         this.addrs = (!this.isWalletAcc && !addrs) ? [{
             hexAddr: keystore.hexaddress
         }] : addrs;
+
+        if (this.addrs && this.addrs.length) {
+            this.id = getHexId(this.addrs[0].hexAddr);
+        } else if (this.decryptEntropy) {
+            let mnemonic = _hdAddr.getMnemonicFromEntropy(this.decryptEntropy);
+            let addr = _hdAddr.getAddrFromMnemonic(mnemonic, 0);
+            this.addrs = [addr];
+            this.id = getHexId(addr.hexAddr);
+        }
     }
     
     holdPWD(pwd, time) {
@@ -74,14 +88,16 @@ class Account {
         }
 
         if (this.isWalletAcc) {
-            return !this.encryptObj ? Promise.resolve(false) : $ViteJS.Wallet.Account.verify(this.encryptObj, pass, vitecrypto);
+            return !this.encryptObj ? 
+                Promise.resolve(false) : 
+                _keystore.decrypt(JSON.stringify(this.encryptObj), pass, vitecrypto);
         }
 
         if (!this.keystore) {
             return Promise.resolve(false);
         }
         
-        return $ViteJS.Wallet.Keystore.decrypt(JSON.stringify(this.keystore), pass, vitecrypto);
+        return _keystore.decrypt(JSON.stringify(this.keystore), pass, vitecrypto);
     }
 
     encrypt(pass) {
@@ -90,9 +106,8 @@ class Account {
         }
 
         pass && (this.pass = pass);
-        return $ViteJS.Wallet.Account.encrypt(this.decryptEntropy, this.pass, null, vitecrypto).then((encryptObj) => {
+        return _keystore.encrypt(this.decryptEntropy, this.pass, null, vitecrypto).then((encryptObj) => {
             let obj = JSON.parse(encryptObj);
-            this.entropy = obj.encryptentropy;
             this.encryptObj = obj;
             return encryptObj;
         });
@@ -111,7 +126,7 @@ class Account {
         }
 
         acc.add({
-            id: getHexId(this.addrs[0].hexAddr),
+            id: this.id || getHexId(this.addrs[0].hexAddr),
             defaultInx: this.defaultInx, 
             addrNum: this.addrs.length, 
             name: this.name, 
@@ -121,7 +136,7 @@ class Account {
     }
     changeMnemonic(len) {
         let bits = len === 12 ? 128 : 256;
-        let { addr, entropy } = $ViteJS.Wallet.Address.newAddr(bits);
+        let { addr, entropy } = _hdAddr.newAddr(bits);
         this.decryptEntropy = entropy;
         this.addrs = [addr];
         this.defaultInx = 0;
@@ -131,7 +146,7 @@ class Account {
         if (!this.decryptEntropy) {
             return null;
         }
-        return $ViteJS.Wallet.Address.getMnemonicFromEntropy(this.decryptEntropy);
+        return _hdAddr.getMnemonicFromEntropy(this.decryptEntropy);
     }
 
     getName() {
@@ -152,7 +167,7 @@ class Account {
         }
         
         let index = this.addrs.length;
-        let addr = $ViteJS.Wallet.Address.newAddrFromMnemonic(this.getMnemonic(), index);
+        let addr = _hdAddr.getAddrFromMnemonic(this.getMnemonic(), index);
 
         this.addrs.push(addr);
         this.addrNum = this.addrs.length;
@@ -202,7 +217,7 @@ class Account {
         let addr = this.addrs[this.defaultInx].hexAddr;
         let privKey = this.addrs[this.defaultInx].privKey;
 
-        $ViteJS.Wallet.Account.autoReceiveTX(addr, privKey, (err, accountBlock, res, rej) => {
+        $ViteJS.autoReceiveTX(addr, privKey, (err, accountBlock, res, rej) => {
             if (!err || !err.error || !err.error.code || err.error.code !== -35002) {
                 return rej(err);
             }
@@ -233,12 +248,12 @@ class Account {
             return;
         }
 
-        $ViteJS.Wallet.Account.stopAutoReceiveTX(addr.hexAddr);
+        $ViteJS.stopAutoReceiveTX(addr.hexAddr);
     }
 
     sendRawTx(block, privKey) {
         privKey = privKey || this.addrs[this.defaultInx].privKey;
-        return $ViteJS.Wallet.Account.sendRawTx(block, privKey);
+        return $ViteJS.sendRawTx(block, privKey);
     }
 
     getBlock({
@@ -247,7 +262,7 @@ class Account {
         return new Promise((res, rej) => {
             let accountAddress = this.addrs[this.defaultInx].hexAddr;
             
-            return $ViteJS.Vite.Ledger[type]({
+            return $ViteJS.builtin[type]({
                 accountAddress, 
                 toAddress: toAddr, 
                 Gid: config.gid,
@@ -295,7 +310,7 @@ class Account {
 
     getBalance() {
         let addr = this.getDefaultAddr();
-        return $ViteJS.Vite.Ledger.getBalance(addr);
+        return $ViteJS.builtin.getBalance(addr);
     }
 }
 

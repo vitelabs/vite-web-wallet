@@ -92,7 +92,8 @@ export default {
                     name: account.name || '',
                     addr,
                     showAddr,
-                    entropy: account.entropy || ''
+                    entropy: account.entropy || '',
+                    id: account.id || ''
                 };
             }
 
