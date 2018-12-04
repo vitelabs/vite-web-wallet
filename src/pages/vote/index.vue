@@ -1,6 +1,12 @@
 <template>
-    <loading v-if="loadingToken" class="loading"></loading>
-    <div class="vote" v-else>
+    <loading
+        v-if="loadingToken"
+        class="loading"
+    ></loading>
+    <div
+        class="vote"
+        v-else
+    >
         <powProcess ref="pow"></powProcess>
         <secTitle></secTitle>
 
@@ -13,22 +19,43 @@
 
             <div class="__tb">
                 <div class="__tb_row __tb_head">
-                    <div class="__tb_cell" v-for="v in $t('vote.section1.head')" :key="v"> {{v}}</div>
+                    <div
+                        class="__tb_cell"
+                        v-for="v in $t('vote.section1.head')"
+                        :key="v"
+                    > {{v}}</div>
                 </div>
                 <div class="__tb_content">
-                    <div class="__tb_row" v-for="v in voteList" :key="v.nodeName">
+                    <div
+                        class="__tb_row"
+                        v-for="v in voteList"
+                        :key="v.nodeName"
+                    >
                         <div class="__tb_cell nodename">{{v.nodeName}}</div>
-                        <div class="__tb_cell">
-                            {{v.nodeStatusText}} 
-                            <i v-if="v.nodeStatus===2" class="tipsicon hoveraction" @click.self.stop="toggleTips">
-                                <tooltips v-if="isResisterTipsShow" v-click-outside="hideTips" class="unregister-tips" :content="$t('vote.section1.hoverHelp',{nodeName:v.nodeName})"></tooltips>
-                            </i>
-                        </div>
+                        <div class="__tb_cell">{{v.nodeStatusText}} <i
+                            v-if="v.nodeStatus===2"
+                            class="tipsicon hoveraction"
+                            @click.self.stop="toggleTips"
+                        >
+                            <tooltips
+                                v-if="isResisterTipsShow"
+                                v-click-outside
+                                @clickoutside="hideTips"
+                                class="unregister-tips"
+                                :content="$t('vote.section1.hoverHelp',{nodeName:v.nodeName})"
+                            ></tooltips>
+                        </i></div>
                         <div class="__tb_cell">{{v.voteNum}}</div>
                         <div class="__tb_cell">{{v.voteStatusText}}</div>
-                        <div class="__tb_cell" :class="cache ? 'unclickable' : 'clickable'">
+                        <div
+                            class="__tb_cell"
+                            :class="cache ? 'unclickable' : 'clickable'"
+                        >
                             <span @click="cancelVote(v)">{{ v.operate }}</span>
-                            <span class="reward" @click="openReward(v)">{{ $t('vote.toReward') }}</span>
+                            <span
+                                class="reward"
+                                @click="openReward(v)"
+                            >{{ $t('vote.toReward') }}</span>
                         </div>
                     </div>
                     <div class="__tb_row seat">
@@ -42,25 +69,55 @@
                 <div class="ct">
                     {{$t('vote.section2.title')}}
                 </div>
-                <search v-model="filterKey" :placeholder="$t('vote.search')" class="filter"></search>
+                <search
+                    v-model="filterKey"
+                    :placeholder="$t('vote.search')"
+                    class="filter"
+                ></search>
             </div>
             <div class="tb_container">
                 <div class="__tb">
                     <div class="__tb_row __tb_head">
-                        <div class="__tb_cell" v-for="v in $t('vote.section2.head')" :key="v">{{v}}</div>
+                        <div
+                            class="__tb_cell"
+                            v-for="v in $t('vote.section2.head')"
+                            :key="v"
+                        >{{v}}</div>
                     </div>
-                    <div class="__tb_content" v-if="!!nodeList.length">
-                        <div class="__tb_row __tb_content_row active" v-for="v in nodeList" :key="v.nodeName">
-                            <div class="__tb_cell nodename">{{v.nodeName}}</div>
-                            <div @click="goToDetail(v.nodeAddr)" class="__tb_cell clickable">{{v.nodeAddr}}</div>
+                    <div
+                        class="__tb_content"
+                        v-if="!!nodeList.length"
+                    >
+                        <div
+                            class="__tb_row __tb_content_row active"
+                            v-for="(v,i) in nodeList"
+                            :key="v.nodeName"
+                        >
+                            <div class="__tb_cell rank">{{i+1}}</div>
+                            <div class="__tb_cell nodename clickable" 
+                                 @click="goToNodeDetail(v.nodeName)"
+                            >{{v.nodeName}}</div>
+                            <div
+                                @click="goToDetail(v.nodeAddr)"
+                                class="__tb_cell clickable"
+                            >{{v.nodeAddr}}</div>
                             <div class="__tb_cell">{{v.voteNum}}</div>
-                            <div class="__tb_cell clickable" @click="vote(v)">{{v.operate}}</div>
+                            <div
+                                class="__tb_cell clickable"
+                                @click="vote(v)"
+                            >{{v.operate}}</div>
                         </div>
                     </div>
-                    <div class="__tb_content" v-else-if="this.filterKey">
+                    <div
+                        class="__tb_content"
+                        v-else-if="this.filterKey"
+                    >
                         <div class="__tb_no_data">{{$t("vote.section2.noSearchData")}}</div>
                     </div>
-                    <div class="__tb_content" v-else>
+                    <div
+                        class="__tb_content"
+                        v-else
+                    >
                         <div class="__tb_no_data">{{$t("vote.section2.noData")}}</div>
                     </div>
                 </div>
@@ -142,6 +199,10 @@ export default {
           }) || [];
                 return this.nodeData;
             });
+        },
+        goToNodeDetail(nodeName) {
+            let locale = this.$i18n.locale === 'zh' ? 'zh/' : '';
+            window.open(`${process.env.viteNet}${locale}SBPDetail/${addr}`);
         },
         goToDetail(addr) {
             let locale = this.$i18n.locale === 'zh' ? 'zh/' : '';
@@ -376,111 +437,138 @@ export default {
     }
 };
 </script>
+
 <style lang="scss" scoped>
 @import "~assets/scss/table.scss";
+
 .vote {
-  height: 100%;
-  overflow: hidden;
-  padding: 40px;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  .filter {
-    align-self: flex-end;
-  }
-  .title {
-    display: flex;
-    flex: none;
-    justify-content: space-between;
-    font-family: $font-bold;
-    font-size: 18px;
-    color: #1d2024;
-    height: 40px;
-    margin-bottom: 24px;
-    line-height: 40px;
-
-    .ct {
-      border-left: 2px solid rgba(0, 122, 255, 0.7);
-      padding-left: 10px;
-      height: 18px;
-      line-height: 18px;
-    }
-  }
-  .__tb {
-    width: 100%;
-  }
-  .vote_list {
-    overflow-x: auto;
-    overflow-y: hidden;
-    margin: 40px 0;
-    margin-bottom: 29px;
-
-    .__tb_row.seat {
-      height: 78px;
-    }
-    .__tb_content {
-      overflow: visible;
-    }
-  }
-  .node_list {
-    flex: 1;
-    overflow-x: auto;
-    overflow-y: hidden;
+    height: 100%;
+    overflow: hidden;
+    padding: 40px;
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    .tb_container {
-      height: calc(100% - 64px);
-      overflow: auto;
+    .filter {
+        align-self: flex-end;
     }
-    .__tb_cell {
+    .title {
+        display: flex;
+        flex: none;
+        justify-content: space-between;
+        font-family: $font-bold;
+        font-size: 18px;
+        color: #1d2024;
+        height: 40px;
+        margin-bottom: 24px;
+        line-height: 40px;
+
+        .ct {
+        border-left: 2px solid rgba(0, 122, 255, 0.7);
+        padding-left: 10px;
+        height: 18px;
+        line-height: 18px;
+        }
+    }
+    .__tb {
+        width: 100%;
+    }
+
+    .vote_list {
+        overflow-x: auto;
+        overflow-y: hidden;
+        margin: 40px 0;
+        margin-bottom: 29px;
+
+        .__tb_row.seat {
+            height: 78px;
+        }
+        .__tb_content {
+            overflow: visible;
+        }
+    }
+    .node_list {
+        flex: 1;
+        overflow-x: auto;
+        overflow-y: hidden;
+        display: flex;
+        flex-direction: column;
+        .tb_container {
+            height: calc(100% - 64px);
+            overflow: auto;
+        }
+        .__tb_cell {
       min-width: 100px;
-      &:first-child {
-        width: 30%;
+        text-overflow: hidden;
+        margin: 0 5px;
+        text-overflow: ellipsis;
+      &:first-child{
+          width:5%;
+          min-width: 30px;
       }
       &:nth-child(2) {
+        width: 30%;
+      }
+      &:nth-child(3) {
         width: 40%;
+        min-width: 450px;
+      }
+        &:nth-child(4) {
+        width: 15%;
+        min-width: 150px;
+      }
+      &:last-child{
+          width: 5%;
+          min-width: 50px;
       }
     }
-  }
-  .__tb_cell {
-    min-width: 180px;
-    .reward {
-        margin-left: 10px;
     }
-    &.nodename {
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      width: 150px;
-    }
-    .hoveraction {
-      &.tipsicon {
-        position: relative;
-        display: inline-block;
-        background: url(~assets/imgs/hover_help.svg);
-        overflow: visible;
-        width: 16px;
-        height: 16px;
-        vertical-align: sub;
-        cursor: pointer;
-        .unregister-tips {
-          word-break: break-all;
-          min-width: 314px;
-          min-height: 100px;
-          padding: 10px;
-          font-size: 14px;
-          color: #3e4a59;
-          line-height: 20px;
+    .__tb_cell {
+        min-width: 180px;
+        .reward {
+            margin-left: 10px;
         }
-      }
+        &.nodename {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            width: 150px;
+        }
+        .hoveraction {
+            &.tipsicon {
+                position: relative;
+                display: inline-block;
+                background: url(~assets/imgs/hover_help.svg);
+                overflow: visible;
+                width: 16px;
+                height: 16px;
+                vertical-align: sub;
+                cursor: pointer;
+                .unregister-tips {
+                    word-break: break-all;
+                    min-width: 314px;
+                    min-height: 100px;
+                    padding: 10px;
+                    font-size: 14px;
+                    color: #3e4a59;
+                    line-height: 20px;
+                }
+            }
+        }
     }
-  }
 }
 .clickable {
-  color: #007aff;
-  cursor: pointer;
+    color: #007aff;
+    cursor: pointer;
 }
 .unclickable {
-  color: #ced1d5;
+    color: #ced1d5;
+}
+
+@media only screen and (max-width: 550px) {
+    .vote {
+        overflow: auto;
+        padding: 15px;
+        display: block;
+    }
 }
 </style>
