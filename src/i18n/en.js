@@ -35,7 +35,6 @@ module.exports = {
         text1: 'Please be sure to backup your seed phrase when creating account. We cannot guarantee the restoration of your assets in the instance that you visit a scam site or lose your private keys or seed phrase.',
         text2: 'Please note that our websites do not store your private keys or seed phrase. Therefore, you will need to restore your account via seed phrase if you decide to change browsers, clear local cookies, or change PCs.',
         text3: 'Please take proper precautions in ensuring that you accurately record and safely store your seed phrase. Even the slightest error will result in you not being able to successfully restore your address.',
-        text4: 'The current version of the wallet is the preview version. The Vite test tokens you obtain are only for testing and does not have any actual value. However, official Vite tokens will eventually replace the test tokens.'
     },
 
     test: {
@@ -432,7 +431,7 @@ module.exports = {
         edit: 'Edit',
         copy: 'Copy',
         reReg: 'Re-register',
-        otherProd: 'Use other products of Vite'
+        otherProd: 'Use Other Products of Vite'
     },
     paging: {
         pre: 'Prev',
