@@ -87,7 +87,7 @@ class Ledger {
     getBlocks({
         addr, index, pageCount = 50
     }) {
-        return $ViteJS.Vite.Ledger.getBlocks({
+        return $ViteJS.builtin.getBlocks({
             addr, index, pageCount
         });
     }

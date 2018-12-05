@@ -15,9 +15,9 @@ class Pow {
             )
         );
 
-        const data = await $ViteJS._provider.request('pow_getPowNonce', [difficulty, hash]);
+        const result = await $ViteJS.request('pow_getPowNonce', difficulty, hash);
         return {
-            nonce: data.result,
+            nonce: result,
             difficulty
         };
     }
