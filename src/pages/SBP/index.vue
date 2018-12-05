@@ -129,7 +129,7 @@ export default {
             }
 
             if (!this.addr || 
-                !viteWallet.address.isValidHexAddr(this.addr)) {
+                !viteWallet.address.privToAddr.isValidHexAddr(this.addr)) {
                 this.addrErr = this.$t('SBP.section1.addrErr');
                 return;
             }

@@ -122,21 +122,20 @@ export default {
             return $ViteJS.vote.getVoteInfo(
                 c.gid,
                 this.$wallet.getActiveAccount().getDefaultAddr()
-            ).then(data => {
-                this.voteData = data.result ? [data.result] : [];
+            ).then(result => {
+                this.voteData = result ? [result] : [];
                 this.voteData[0] && (this.voteData[0].voteStatus = 'voted');
                 return this.voteData;
             });
         },
         updateNodeData() {
-            return $ViteJS.register.getCandidateList(c.gid).then(data => {
-                this.nodeData =
-          data.result.map(v => {
-              return {
-                  ...v,
-                  nodeName: v.name
-              };
-          }) || [];
+            return $ViteJS.register.getCandidateList(c.gid).then(result => {
+                this.nodeData = result.map(v => {
+                    return {
+                        ...v,
+                        nodeName: v.name
+                    };
+                }) || [];
                 return this.nodeData;
             });
         },

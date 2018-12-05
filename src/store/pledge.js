@@ -44,13 +44,13 @@ const actions = {
         let fetchTime = new Date().getTime();
         lastFetchQuotaTime = fetchTime;
 
-        return viteWallet.Pledge.getPledgeQuota(address).then((data)=>{
-            if (fetchTime !== lastFetchQuotaTime || !data || !data.result) {
+        return viteWallet.Pledge.getPledgeQuota(address).then((result)=>{
+            if (fetchTime !== lastFetchQuotaTime || !result) {
                 return null;
             }
 
-            commit('commitQuota', data.result);
-            return data.result;
+            commit('commitQuota', result);
+            return result;
         });
     },
     fetchPledgeList({ commit, state }, { address, pageIndex }) {
@@ -62,15 +62,15 @@ const actions = {
             addr: address,
             index: pageIndex,
             pageCount
-        }).then((data)=>{
+        }).then((result)=>{
             if (pageIndex !== state.currentPage || 
                 fetchTime !== lastFetchTime ||
-                !data || !data.result) {
+                !result) {
                 return null;
             }
 
-            commit('commitPledgeList', data.result);
-            return data.result;
+            commit('commitPledgeList', result);
+            return result;
         });
     }
 };

@@ -119,7 +119,8 @@ export default {
     },
     methods: {
         validAddr() {
-            this.isValidAddress = !this.inAddress && viteWallet.address.isValidHexAddr(this.inAddress);
+            console.log('???');
+            this.isValidAddress = this.inAddress && viteWallet.address.privToAddr.isValidHexAddr(this.inAddress);
         },
         showQuota() {
             this.isShowTrans = false;
