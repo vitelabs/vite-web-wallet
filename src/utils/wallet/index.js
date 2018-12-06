@@ -80,7 +80,7 @@ class Wallet {
 
         let requests = [];
         for (let i=0; i<num; i++) {
-            requests.push( $ViteJS.builtin.getBalance(addrs[i].hexAddr) );
+            requests.push( $ViteJS.buildinLedger.getBalance(addrs[i].hexAddr) );
         }
 
         return Promise.all(requests).then((data)=>{

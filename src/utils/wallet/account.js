@@ -257,17 +257,18 @@ class Account {
     }
 
     getBlock({
-        toAddr, tokenId, amount, message, nodeName, producerAddr, rewardAddress,difficulty
+        toAddr, tokenId, amount, message, nodeName, producerAddr, rewardAddress, difficulty
     }, type = 'sendBlock', isPow = false) {
         return new Promise((res, rej) => {
             let accountAddress = this.addrs[this.defaultInx].hexAddr;
+            let toAddress = toAddr || producerAddr || rewardAddress;
             
-            return $ViteJS.builtin[type]({
+            return $ViteJS.buildinTxBlock[type]({
                 accountAddress, 
-                toAddress: toAddr, 
+                toAddress, 
                 Gid: config.gid,
                 tokenId, amount, message, 
-                nodeName, producerAddr, rewardAddress
+                nodeName
             }).then((block)=>{
                 if (!isPow) {
                     return res(block);
@@ -289,6 +290,19 @@ class Account {
     sendTx({
         toAddr, tokenId, amount, message, nodeName, producerAddr, rewardAddress
     }, type = 'sendBlock') {
+        let types = {
+            receiveBlock: 'asyncReceiveTx',
+            sendBlock: 'asyncSendTx',
+            cancelPledgeBlock: 'withdrawalOfQuota',
+            pledgeBlock: 'getQuota',
+            updateRegisterBlock: 'updateReg',
+            rewardBlock: 'retrieveReward',
+            registerBlock: 'SBPreg',
+            cancelRegisterBlock: 'revokeReg',
+            cancelVoteBlock: 'revokeVoting',
+            voteBlock: 'voting'
+        };
+
         // First tx
         window.isShowPWD = true;
 
@@ -296,7 +310,7 @@ class Account {
         return new Promise((res, rej) => {
             this.getBlock({
                 toAddr, tokenId, amount, message, nodeName, producerAddr, rewardAddress
-            }, type).then((block) => {
+            }, types[type]).then((block) => {
                 this.sendRawTx(block, privKey).then((data) => {
                     return res(data);
                 }).catch(err => {
@@ -310,7 +324,7 @@ class Account {
 
     getBalance() {
         let addr = this.getDefaultAddr();
-        return $ViteJS.builtin.getBalance(addr);
+        return $ViteJS.buildinLedger.getBalance(addr);
     }
 }
 

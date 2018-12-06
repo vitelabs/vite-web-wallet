@@ -1,6 +1,8 @@
 import { wallet, utils } from '@vite/vitejs';
 import provider from '@vite/vitejs/dist/es5/provider/WS.js';
 
+console.log(utils);
+
 import BigNumber from './bignumber';
 import pow from './pow';
 import net from './net';
@@ -15,10 +17,11 @@ WS_RPC.on('connect', () => {
 });
 
 window.$ViteJS = new wallet(WS_RPC);
+console.log($ViteJS);
 
 window.viteWallet = {
     encoder: utils.encoder,
-    address: utils.address,
+    address: utils.address.hdAddr,
     BigNumber,
     getTestToken: (addr) => {
         return $ViteJS.request('testapi_getTestToken', addr);

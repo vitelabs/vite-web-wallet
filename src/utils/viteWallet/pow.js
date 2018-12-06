@@ -1,12 +1,12 @@
 class Pow {
     constructor(utils) {
         this.encoder = utils.encoder;
-        this.addressLibs = utils.address;
+        this.hdAddr = utils.address._hdAddr;
     }
     
     // http: ??
     async getNonce(addr, prevHash, difficulty = process.env.powDifficulty) {
-        let realAddr = this.addressLibs.privToAddr.getAddrFromHexAddr(addr);
+        let realAddr = this.hdAddr.getAddrFromHexAddr(addr);
         let hash = this.encoder.bytesToHex(
             this.encoder.blake2b(
                 this.encoder.hexToBytes(realAddr + prevHash), 
