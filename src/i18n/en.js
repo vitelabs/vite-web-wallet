@@ -27,7 +27,12 @@ module.exports = {
         7: 'Withdrawal of Staking Quota',
         8: 'Token Issuance',
         9: 'Withdrawal of Staking Token',
-        10: 'Transfer'
+        10: 'Transfer',
+        11: 'Transfer',
+        12: 'Transfer',
+        13: 'Transfer',
+        14: 'Transfer',
+        15: 'Transfer'
     },
     
     firstNotice: {

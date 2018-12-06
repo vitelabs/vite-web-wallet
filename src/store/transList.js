@@ -45,6 +45,7 @@ const actions = {
                 return null;
             }
 
+            console.log(data);
             commit('commitTransList', data);
             return data;
         });

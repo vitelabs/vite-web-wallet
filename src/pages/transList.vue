@@ -68,7 +68,7 @@ import ellipsisAddr from 'utils/ellipsisAddr.js';
 import loopTime from 'config/loopTime';
 
 let transListInst = null;
-let txImgs = [txRegImg, txRegImg, txRegImg, txRewardImg, txVoteImg, txVoteImg, txQuotaImg, txQuotaImg, txTokenImg, txTokenImg, txTransImg];
+let txImgs = [txRegImg, txRegImg, txRegImg, txRewardImg, txVoteImg, txVoteImg, txQuotaImg, txQuotaImg, txTokenImg, txTokenImg, txTransImg, txTransImg, txTransImg, txTransImg, txTransImg, txTransImg];
 
 export default {
     components: {
