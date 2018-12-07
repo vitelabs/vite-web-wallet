@@ -52,6 +52,8 @@ import Vue from 'vue';
 import confirm from 'components/confirm';
 import powProcess from 'components/powProcess';
 import viteInput from 'components/viteInput';
+import BigNumber from 'utils/BigNumber';
+import { encoder, address } from 'utils/tools';
 
 export default {
     components: {
@@ -103,14 +105,14 @@ export default {
             return balance;
         },
         showAccBalance() {
-            return viteWallet.BigNumber.toBasic(this.accBalance, this.token.decimals);
+            return BigNumber.toBasic(this.accBalance, this.token.decimals);
         },
         tokenBalList() {
             return this.$store.state.account.balance.balanceInfos;
         },
         msgBalance() {
             let message = this.$trim(this.message);
-            let length = viteWallet.encoder.getBytesSize(message);
+            let length = encoder.getBytesSize(message);
             return 120 - length;
         },
         messageErr() {
@@ -119,7 +121,7 @@ export default {
     },
     methods: {
         validAddr() {
-            this.isValidAddress = this.inAddress && viteWallet.address.isValidHexAddr(this.inAddress);
+            this.isValidAddress = this.inAddress && address.isValidHexAddr(this.inAddress);
         },
         showQuota() {
             this.isShowTrans = false;
@@ -158,13 +160,13 @@ export default {
                 return false;
             }
 
-            if (viteWallet.BigNumber.isEqual(this.amount, 0)) {
+            if (BigNumber.isEqual(this.amount, 0)) {
                 this.amountErr = this.$t('accDetail.hint.amount');
                 return false;
             }
 
-            let amount = viteWallet.BigNumber.toMin(this.amount, this.token.decimals);
-            if (viteWallet.BigNumber.compared(this.accBalance, amount) < 0) {
+            let amount = BigNumber.toMin(this.amount, this.token.decimals);
+            if (BigNumber.compared(this.accBalance, amount) < 0) {
                 this.amountErr = this.$t('transList.valid.bal');
                 return false;
             }
@@ -206,7 +208,7 @@ export default {
             }
             
             this.loading = true;
-            let amount =  viteWallet.BigNumber.toMin(this.amount, this.token.decimals);
+            let amount =  BigNumber.toMin(this.amount, this.token.decimals);
 
             let successText = this.$t('transList.valid.succ');
             let failText = this.$t('hint.err');
@@ -265,7 +267,7 @@ export default {
             };
 
             this.loading = true;
-            let amount =  viteWallet.BigNumber.toMin(this.amount, this.token.decimals);
+            let amount = BigNumber.toMin(this.amount, this.token.decimals);
 
             this.$refs.powProcess && this.$refs.powProcess.startPowTx({
                 toAddr: this.inAddress, 

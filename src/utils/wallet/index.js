@@ -5,6 +5,7 @@ import account from './account.js';
 import toast from 'components/toast/index.js';
 import storage from 'utils/localStorage.js';
 import statistics from 'utils/statistics';
+import { encoder } from 'utils/tools';
 import vitecrypto from 'testwebworker';
 
 const _keystore = utils.keystore;
@@ -392,8 +393,8 @@ function setLast(acc) {
 }
 
 function getHexId(key) {
-    let keyByte = viteWallet.encoder.utf8ToBytes(key);
-    let idByte = viteWallet.encoder.blake2b(keyByte, null, 32);
-    let idHex = viteWallet.encoder.bytesToHex(idByte);
+    let keyByte = encoder.utf8ToBytes(key);
+    let idByte = encoder.blake2b(keyByte, null, 32);
+    let idHex = encoder.bytesToHex(idByte);
     return idHex;
 }

@@ -43,6 +43,7 @@ import confirm from 'components/confirm';
 import powProcess from 'components/powProcess';
 import loading from 'components/loading';
 import viteInput from 'components/viteInput';
+import BigNumber from 'utils/BigNumber';
 
 export default {
     components: {
@@ -92,8 +93,8 @@ export default {
                 this.amountErr = this.$t('transList.valid.amt');
                 return false;
             }
-            if (viteWallet.BigNumber.isEqual(this.cancelAmount, 0) || 
-                viteWallet.BigNumber.compared(this.cancelAmount, this.activeAmountLimit) > 0) {
+            if (BigNumber.isEqual(this.cancelAmount, 0) || 
+                BigNumber.compared(this.cancelAmount, this.activeAmountLimit) > 0) {
                 this.amountErr = this.$t('quota.maxAmt', {
                     amount: this.activeAmountLimit
                 });
@@ -148,7 +149,7 @@ export default {
                 return;
             }
 
-            amount = viteWallet.BigNumber.toMin(amount || 0, this.tokenInfo.decimals);            
+            amount = BigNumber.toMin(amount || 0, this.tokenInfo.decimals);            
             this.activeAccount.sendTx({
                 tokenId: this.tokenInfo.tokenId,
                 toAddr,

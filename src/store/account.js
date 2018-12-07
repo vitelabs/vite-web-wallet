@@ -1,3 +1,5 @@
+import BigNumber from 'utils/BigNumber';
+
 const state = {
     onroad: {
         balanceInfos: {}
@@ -51,7 +53,7 @@ const getters = {
 
             let tokenInfo = item.tokenInfo;
             let decimals = tokenInfo.decimals;
-            let balance = viteWallet.BigNumber.toBasic(item.totalAmount, decimals);
+            let balance = BigNumber.toBasic(item.totalAmount, decimals);
 
             balanceInfo[tokenId] = tokenInfo[tokenId] || {};
             balanceInfo[tokenId].id = tokenId;
@@ -66,7 +68,7 @@ const getters = {
 
             let tokenInfo = item.tokenInfo;
             let decimals = tokenInfo.decimals;
-            let balance = viteWallet.BigNumber.toBasic(item.totalAmount, decimals);
+            let balance = BigNumber.toBasic(item.totalAmount, decimals);
 
             balanceInfo[tokenId] = balanceInfo[tokenId] || {};
             balanceInfo[tokenId].id = balanceInfo[tokenId].id || tokenInfo.id;

@@ -70,9 +70,10 @@ import search from 'components/search';
 import c from 'config/constant';
 import secTitle from 'components/secTitle';
 import loading from 'components/loading';
-import { timer } from 'utils/asyncFlow';
 import confirm from 'components/confirm';
 import powProcess from 'components/powProcess';
+import { timer } from 'utils/asyncFlow';
+import BigNumber from 'utils/BigNumber';
 
 export default {
     components: {
@@ -319,7 +320,7 @@ export default {
                 ];
                 const token = viteWallet.Ledger.getTokenInfo();
                 data.voteNum =
-          viteWallet.BigNumber.toBasic(data.balance, token.decimals) ||
+          BigNumber.toBasic(data.balance, token.decimals) ||
           this.balance ||
           0; // tans
                 data.operate = this.$t('vote.section1.operateBtn');
@@ -355,7 +356,7 @@ export default {
             return this.nodeData
                 .map(v => {
                     v.voteNum =
-            viteWallet.BigNumber.toBasic(v.voteNum, token.decimals) || 0; // tans
+            BigNumber.toBasic(v.voteNum, token.decimals) || 0; // tans
                     v.operate = this.$t('vote.section2.operateBtn');
                     return v;
                 })

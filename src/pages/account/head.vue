@@ -50,6 +50,7 @@ import qrcode from 'components/qrcode';
 import copyOK from 'components/copyOK';
 import copy from 'utils/copy';
 import { stringify } from 'utils/viteSchema';
+import { getTestToken } from 'services/testToken';
 
 let activeAccount = null;
 
@@ -144,7 +145,7 @@ export default {
                 this.$toast( this.$t('accDetail.hint.tErr') );
             }
             this.getTestTokenAble=false;
-            viteWallet.getTestToken(this.account.addr).then(() => {
+            getTestToken(this.account.addr).then(() => {
                 this.$toast( this.$t('accDetail.hint.token') );
                 setTimeout(()=>{
                     this.getTestTokenAble=true;

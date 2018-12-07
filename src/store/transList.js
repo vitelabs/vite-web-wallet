@@ -1,3 +1,5 @@
+import BigNumber from 'utils/BigNumber';
+
 const pageCount = 50;
 let lastFetchTime = null;
 
@@ -53,7 +55,7 @@ const actions = {
 
 const getters = {
     totalPage(state) {
-        return viteWallet.BigNumber.dividedToNumber(state.totalNum, pageCount);
+        return BigNumber.dividedToNumber(state.totalNum, pageCount);
     },
     transList(state) {
         let list = state.transList || [];
@@ -71,10 +73,10 @@ const getters = {
 
             let isSend = [1, 2, 3].indexOf(+item.blockType) > -1;
             let timestamp = item.timestamp * 1000;
-            let transAddr = isSend ? item.toAddress : item.fromAddress; // ellipsisAddr  // ellipsisAddr( , 6 )
+            let transAddr = isSend ? item.toAddress : item.fromAddress;
 
             let amount = item.tokenInfo && item.tokenInfo.decimals ?
-                viteWallet.BigNumber.toBasic(item.amount, item.tokenInfo.decimals) :
+                BigNumber.toBasic(item.amount, item.tokenInfo.decimals) :
                 item.amount;
 
             nowList.push({

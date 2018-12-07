@@ -40,6 +40,8 @@
 <script>
 import Vue from 'vue';
 import viteInput from 'components/viteInput';
+import BigNumber from 'utils/BigNumber';
+import { address } from 'utils/tools';
 
 let amountTimeout = null;
 
@@ -96,7 +98,7 @@ export default {
                 return false;
             }
 
-            if (viteWallet.BigNumber.compared(this.amount, 10) < 0) {
+            if (BigNumber.compared(this.amount, 10) < 0) {
                 this.amountErr = this.$t('quota.limitAmt');
                 return false;
             }
@@ -105,8 +107,8 @@ export default {
                 this.tokenBalList[this.tokenInfo.tokenId].totalAmount : 0;
 
             if (this.tokenInfo && this.tokenInfo.tokenId) {
-                let amount = viteWallet.BigNumber.toMin(this.amount, this.tokenInfo.decimals);
-                if (viteWallet.BigNumber.compared(balance, amount) < 0) {
+                let amount = BigNumber.toMin(this.amount, this.tokenInfo.decimals);
+                if (BigNumber.compared(balance, amount) < 0) {
                     this.amountErr = this.$t('transList.valid.bal');
                     return false;
                 }
@@ -126,7 +128,7 @@ export default {
             }
 
             try {
-                this.isValidAddress = viteWallet.address.isValidHexAddr(this.toAddr);
+                this.isValidAddress = address.isValidHexAddr(this.toAddr);
             } catch(err) {
                 console.warn(err);
                 this.isValidAddress = false;
