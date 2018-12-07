@@ -156,7 +156,7 @@ export default {
             }, type).then(() => {
                 cb && cb(true);
             }).catch((err) => {
-                console.log(err);
+                console.warn(err);
                 if (err && err.error && err.error.code && err.error.code === -35002) {
                     this.$refs.powProcess.startPowTx({
                         toAddr, amount, tokenId: this.tokenInfo.tokenId

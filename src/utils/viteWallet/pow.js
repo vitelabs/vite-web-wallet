@@ -1,7 +1,7 @@
 class Pow {
     constructor(utils) {
         this.encoder = utils.encoder;
-        this.hdAddr = utils.address._hdAddr;
+        this.hdAddr = utils.address.hdAddr;
     }
     
     // http: ??
