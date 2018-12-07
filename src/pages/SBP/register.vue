@@ -238,7 +238,7 @@ export default {
                     this.stopWatch = false;
                 });
             }).catch((err) => {
-                console.log(err);
+                console.warn(err);
                 this.loading = false;
 
                 if (err && err.error && err.error.code && err.error.code === -35002) {

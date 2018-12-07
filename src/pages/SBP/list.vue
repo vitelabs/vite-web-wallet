@@ -161,7 +161,7 @@ export default {
                     producer: producerAddr
                 });
             }).catch((err) => {
-                console.log(err);
+                console.warn(err);
                 if (err && err.error && err.error.code && err.error.code === -35002) {
                     quotaConfirm({
                         operate: this.$t('SBP.register')

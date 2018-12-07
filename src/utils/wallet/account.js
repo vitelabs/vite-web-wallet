@@ -217,24 +217,16 @@ class Account {
         let addr = this.addrs[this.defaultInx].hexAddr;
         let privKey = this.addrs[this.defaultInx].privKey;
 
-        $ViteJS.autoReceiveTX(addr, privKey, (err, accountBlock, res, rej) => {
+        $ViteJS.autoReceiveTX(addr, privKey, async (err, accountBlock) => {
             if (!err || !err.error || !err.error.code || err.error.code !== -35002) {
-                return rej(err);
+                return Promise.reject(err);
             }
 
-            viteWallet.Pow.getNonce(addr, accountBlock.prevHash).then((data) => {
-                accountBlock.difficulty = data.difficulty;
-                accountBlock.nonce = data.nonce;
+            let data = await viteWallet.Pow.getNonce(addr, accountBlock.prevHash);
+            accountBlock.difficulty = data.difficulty;
+            accountBlock.nonce = data.nonce;
 
-                this.sendRawTx(accountBlock, privKey).then((data) => {
-                    return res(data);
-                }).catch((err) => {
-                    return rej(err);
-                });
-
-            }).catch((err) => {
-                rej(err);
-            });
+            return this.sendRawTx(accountBlock, privKey);
         });
     }
 

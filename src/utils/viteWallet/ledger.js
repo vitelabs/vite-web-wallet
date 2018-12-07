@@ -87,7 +87,6 @@ class Ledger {
     getBlocks({
         addr, index, pageCount = 50
     }) {
-        console.log($ViteJS.buildinLedger.getTxList);
         return $ViteJS.buildinLedger.getTxList({
             addr, index, pageCount
         });
