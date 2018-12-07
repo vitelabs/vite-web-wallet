@@ -64,6 +64,7 @@ import tabelList from 'components/tabelList.vue';
 import secTitle from 'components/secTitle';
 import date from 'utils/date.js';
 import { timer } from 'utils/asyncFlow';
+import BigNumber from 'utils/BigNumber';
 import ellipsisAddr from 'utils/ellipsisAddr.js';
 import loopTime from 'config/loopTime';
 
@@ -106,7 +107,7 @@ export default {
                     status === 'unconfirmed' ? 'pink': 'blue';
                 let statusText = this.$t(`transList.status.${status}`) + (status === 'confirms' ? `(${trans.confirms})` : '');
 
-                let isZero = viteWallet.BigNumber.isEqual(trans.amount, 0);
+                let isZero = BigNumber.isEqual(trans.amount, 0);
                 let amount = trans.amount;
                 if (!isZero) {
                     amount = trans.isSend ? ('-' + trans.amount) : ('+' + trans.amount);

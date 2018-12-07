@@ -59,6 +59,8 @@
 import Vue from 'vue';
 import { quotaConfirm } from 'components/quota/index';
 import viteInput from 'components/viteInput';
+import BigNumber from 'utils/BigNumber';
+import { address } from 'utils/tools';
 
 const amount = 500000;
 
@@ -114,8 +116,8 @@ export default {
                 return '';
             }
             let balance = this.tokenBalList[this.tokenInfo.tokenId] ? this.tokenBalList[this.tokenInfo.tokenId].totalAmount : 0;
-            let minAmount = viteWallet.BigNumber.toMin(amount, this.tokenInfo.decimals);
-            if (viteWallet.BigNumber.compared(balance, minAmount) < 0) {
+            let minAmount = BigNumber.toMin(amount, this.tokenInfo.decimals);
+            if (BigNumber.compared(balance, minAmount) < 0) {
                 return this.$t('transList.valid.bal');
             }
             return '';
@@ -167,7 +169,7 @@ export default {
             }
 
             if (!this.producerAddr || 
-                !viteWallet.address.isValidHexAddr(this.producerAddr)) {
+                !address.isValidHexAddr(this.producerAddr)) {
                 this.producerAddrErr = this.$t('SBP.section1.addrErr');
                 return;
             }

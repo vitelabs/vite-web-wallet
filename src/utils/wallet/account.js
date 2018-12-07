@@ -1,9 +1,11 @@
 import { utils } from '@vite/vitejs';
-
-import acc from './storeAcc.js';
-import { pwdConfirm } from 'components/password/index.js';
-import config from 'config/constant';
 import vitecrypto from 'testwebworker';
+
+import config from 'config/constant';
+import { pwdConfirm } from 'components/password/index.js';
+import { getPowNonce } from 'services/pow';
+import { encoder } from 'utils/tools';
+import acc from './storeAcc.js';
 
 const _keystore = utils.keystore;
 const _hdAddr = utils.address.hdAddr;
@@ -222,7 +224,7 @@ class Account {
                 return Promise.reject(err);
             }
 
-            let data = await viteWallet.Pow.getNonce(addr, accountBlock.prevHash);
+            let data = await getPowNonce(addr, accountBlock.prevHash);
             accountBlock.difficulty = data.difficulty;
             accountBlock.nonce = data.nonce;
 
@@ -248,40 +250,9 @@ class Account {
         return $ViteJS.sendRawTx(block, privKey);
     }
 
-    getBlock({
+    async getBlock({
         toAddr, tokenId, amount, message, nodeName, producerAddr, rewardAddress, difficulty
     }, type = 'sendBlock', isPow = false) {
-        return new Promise((res, rej) => {
-            let accountAddress = this.addrs[this.defaultInx].hexAddr;
-            let toAddress = toAddr || producerAddr || rewardAddress;
-            
-            return $ViteJS.buildinTxBlock[type]({
-                accountAddress, 
-                toAddress, 
-                Gid: config.gid,
-                tokenId, amount, message, 
-                nodeName
-            }).then((block)=>{
-                if (!isPow) {
-                    return res(block);
-                }
-
-                viteWallet.Pow.getNonce(accountAddress, block.prevHash,difficulty).then((data) => {
-                    block.difficulty = data.difficulty;
-                    block.nonce = data.nonce;
-                    return res(block);
-                }).catch((err) => {
-                    rej(err);
-                });
-            }).catch((err)=>{
-                return rej(err);
-            });
-        });
-    }
-
-    sendTx({
-        toAddr, tokenId, amount, message, nodeName, producerAddr, rewardAddress
-    }, type = 'sendBlock') {
         let types = {
             receiveBlock: 'asyncReceiveTx',
             sendBlock: 'asyncSendTx',
@@ -295,6 +266,31 @@ class Account {
             voteBlock: 'voting'
         };
 
+        let accountAddress = this.addrs[this.defaultInx].hexAddr;
+        let toAddress = toAddr || producerAddr || rewardAddress;
+        
+        let block = await $ViteJS.buildinTxBlock[types[type]]({
+            accountAddress, 
+            toAddress, 
+            Gid: config.gid,
+            tokenId, amount, message, 
+            nodeName
+        });
+
+        if (!isPow) {
+            return block;
+        }
+        
+        let data = await getPowNonce(accountAddress, block.prevHash, difficulty);
+        block.difficulty = data.difficulty;
+        block.nonce = data.nonce;
+
+        return block;
+    }
+
+    sendTx({
+        toAddr, tokenId, amount, message, nodeName, producerAddr, rewardAddress
+    }, type = 'sendBlock') {
         // First tx
         window.isShowPWD = true;
 
@@ -302,7 +298,7 @@ class Account {
         return new Promise((res, rej) => {
             this.getBlock({
                 toAddr, tokenId, amount, message, nodeName, producerAddr, rewardAddress
-            }, types[type]).then((block) => {
+            }, type).then((block) => {
                 this.sendRawTx(block, privKey).then((data) => {
                     return res(data);
                 }).catch(err => {
@@ -333,8 +329,8 @@ function checkName(name) {
 }
 
 function getHexId(key) {
-    let keyByte = viteWallet.encoder.utf8ToBytes(key);
-    let idByte = viteWallet.encoder.blake2b(keyByte, null, 32);
-    let idHex = viteWallet.encoder.bytesToHex(idByte);
+    let keyByte = encoder.utf8ToBytes(key);
+    let idByte = encoder.blake2b(keyByte, null, 32);
+    let idHex = encoder.bytesToHex(idByte);
     return idHex;
 }

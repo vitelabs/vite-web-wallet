@@ -61,6 +61,8 @@ import loading from 'components/loading';
 import confirm from 'components/confirm';
 import { quotaConfirm } from 'components/quota/index';
 import viteInput from 'components/viteInput';
+import BigNumber from 'utils/BigNumber';
+import { address } from 'utils/tools';
 import register from './register';
 import list from './list';
 
@@ -129,7 +131,7 @@ export default {
             }
 
             if (!this.addr || 
-                !viteWallet.address.isValidHexAddr(this.addr)) {
+                !address.isValidHexAddr(this.addr)) {
                 this.addrErr = this.$t('SBP.section1.addrErr');
                 return;
             }
@@ -158,8 +160,8 @@ export default {
 
             let decimals = this.tokenInfo.decimals;
             let symbol = this.tokenInfo.tokenSymbol;
-            activeItem.showAvailableReward = viteWallet.BigNumber.toBasic(activeItem.availableReward , decimals) + ' ' +  symbol;
-            activeItem.showAvailableRewardOneTx = viteWallet.BigNumber.toBasic(activeItem.availableRewardOneTx , decimals) + ' ' +  symbol;
+            activeItem.showAvailableReward = BigNumber.toBasic(activeItem.availableReward , decimals) + ' ' +  symbol;
+            activeItem.showAvailableRewardOneTx = BigNumber.toBasic(activeItem.availableRewardOneTx , decimals) + ' ' +  symbol;
             this.activeItem = activeItem;
         },
         closeConfirm() {
@@ -256,7 +258,7 @@ export default {
                 return Promise.reject(false);
             }
           
-            let toAmount = viteWallet.BigNumber.toMin(amount || 0, this.tokenInfo.decimals);
+            let toAmount = BigNumber.toMin(amount || 0, this.tokenInfo.decimals);
             return this.activeAccount.sendTx({
                 tokenId: this.tokenInfo.tokenId,
                 nodeName: nodeName || this.activeItem.name,

@@ -1,5 +1,6 @@
 import config from 'config/constant';
 import { timer } from 'utils/asyncFlow';
+import BigNumber from 'utils/BigNumber';
 
 const loopTime = 5000;
 let regListInst = null;
@@ -57,7 +58,7 @@ const actions = {
                 }
  
                 let operate = nodeNameList[nodeName].operate;
-                let isCancel = item.cancelHeight && !viteWallet.BigNumber.isEqual(item.cancelHeight, 0);
+                let isCancel = item.cancelHeight && !BigNumber.isEqual(item.cancelHeight, 0);
                 switch(operate) {
                 case 0: // cancel
                     isCancel && delete nodeNameList[nodeName];
@@ -96,7 +97,7 @@ const getters = {
     regNameList(state) {
         let list = [];
         state.registrationList.forEach((item) => {
-            let isCancel = item.cancelHeight && !viteWallet.BigNumber.isEqual(item.cancelHeight, 0);
+            let isCancel = item.cancelHeight && !BigNumber.isEqual(item.cancelHeight, 0);
             !isCancel && list.push(item.name);
         });
         return list;
@@ -104,7 +105,7 @@ const getters = {
     regAddrList(state) {
         let list = {};
         state.registrationList.forEach((item) => {
-            let isCancel = item.cancelHeight && !viteWallet.BigNumber.isEqual(item.cancelHeight, 0);
+            let isCancel = item.cancelHeight && !BigNumber.isEqual(item.cancelHeight, 0);
             list[item.name] = list[item.name] || [];
             list[item.name].push({
                 nodeAddr: item.nodeAddr,
