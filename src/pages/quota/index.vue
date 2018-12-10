@@ -141,7 +141,7 @@ export default {
         },
 
         sendPledgeTx({
-            toAddr, amount
+            toAddress, amount
         }, type, cb) {
             if (!viteWallet.Net.getNetStatus()) {
                 this.$toast(this.$t('nav.noNet'));
@@ -149,19 +149,17 @@ export default {
                 return;
             }
 
-            amount = BigNumber.toMin(amount || 0, this.tokenInfo.decimals);            
-            this.activeAccount.sendTx({
+            amount = BigNumber.toMin(amount || 0, this.tokenInfo.decimals);     
+            this.activeAccount[type]({
                 tokenId: this.tokenInfo.tokenId,
-                toAddr,
+                toAddress,
                 amount
-            }, type).then(() => {
+            }).then(() => {
                 cb && cb(true);
             }).catch((err) => {
                 console.warn(err);
                 if (err && err.error && err.error.code && err.error.code === -35002) {
-                    this.$refs.powProcess.startPowTx({
-                        toAddr, amount, tokenId: this.tokenInfo.tokenId
-                    }, type, cb);
+                    this.$refs.powProcess.startPowTx(err.accountBlock, cb);
                     return;
                 }
                 cb && cb(false, err);

@@ -74,6 +74,7 @@ export default {
         let address = activeAccount.getDefaultAddr();
 
         return {
+            activeAccount,
             currentPage: 0,
             address,
             activeItem: null,
@@ -157,9 +158,9 @@ export default {
 
         _sendCancelPledgeTx(amount) {
             this.sendPledgeTx({
-                toAddr: this.activeItem.beneficialAddr,
+                toAddress: this.activeItem.beneficialAddr,
                 amount
-            }, 'cancelPledgeBlock', (result, err) => {
+            }, 'withdrawalOfQuota', (result, err) => {
                 this.loading = false;
                 this.activeItem = null;
                 result && this.$toast(this.$t('hint.request', {

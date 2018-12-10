@@ -153,7 +153,7 @@ export default {
 
             this.sendTx({
                 producerAddr, amount, nodeName
-            }, 'registerBlock').then(() => {
+            }, 'SBPreg').then(() => {
                 this.$toast(this.$t('SBP.section1.registerSuccess'));
                 this.$store.dispatch('loopRegList', {
                     address: this.address,
@@ -204,7 +204,7 @@ export default {
 
                     this.sendTx({
                         nodeName
-                    }, 'cancelRegisterBlock').then(()=>{
+                    }, 'revokeReg').then(()=>{
                         this.$toast(this.$t('SBP.section2.cancelSuccess'));
                         this.$store.dispatch('loopRegList', {
                             address: this.address,
