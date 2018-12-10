@@ -10,7 +10,19 @@ const state = {
 };
 
 const mutations = {
-    commitBalanceInfo(state, payload) {
+    commitBalanceInfo(state, activeAccount) {
+        let payload = activeAccount.syncGetBalance();
+
+        if (!payload) {
+            state.balance = {
+                balanceInfos:{}
+            };
+            state.onroad = {
+                balanceInfos:{}
+            };
+            return;
+        }
+
         state.balance = payload.balance || {};
         state.balance.balanceInfos = state.balance && state.balance.tokenBalanceInfoMap ? state.balance.tokenBalanceInfoMap : {};
 
@@ -24,23 +36,6 @@ const mutations = {
         state.onroad = {
             balanceInfos:{}
         };
-    }
-};
-
-const actions = {
-    getBalanceInfo({ commit }, activeAccount) {
-        return activeAccount.getBalance().then(data => {
-            commit('commitBalanceInfo', data);
-
-            let balanceInfos = data && data.balance && data.balance.tokenBalanceInfoMap ? 
-                data.balance.tokenBalanceInfoMap : {};
-            for (let tokenId in balanceInfos) {
-                let item = balanceInfos[tokenId];
-                viteWallet.Ledger.setTokenInfo(item.tokenInfo || null, tokenId);
-            }
-        }).catch(e => {
-            console.warn(e);
-        });
     }
 };
 
@@ -100,6 +95,5 @@ const getters = {
 export default {
     state,
     mutations,
-    actions,
     getters
 };

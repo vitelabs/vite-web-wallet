@@ -123,7 +123,7 @@ export default {
         validAddr() {
             this.isValidAddress = this.inAddress && address.isValidHexAddr(this.inAddress);
         },
-        showQuota() {
+        showQuota(accountBlock) {
             this.isShowTrans = false;
             this.$confirm({
                 showMask: false,
@@ -145,7 +145,7 @@ export default {
                 rightBtn: {
                     text: this.$t('accDetail.quota.right'),
                     click: () => {
-                        this.startPow();
+                        this.startPow(accountBlock);
                     }
                 },
                 content: this.$t('accDetail.quota.describe')
@@ -218,8 +218,9 @@ export default {
                 this.$toast(this.$t('hint.err'));
                 return;
             }
+            
             activeAccount.sendTx({
-                toAddr: this.inAddress,
+                toAddress: this.inAddress,
                 tokenId: this.token.id,
                 amount,
                 message: this.message
@@ -246,14 +247,14 @@ export default {
                     this.amountErr = this.$t('transList.valid.bal');
                     return;
                 } else if (code === -35002) {
-                    this.showQuota();
+                    this.showQuota(err.accountBlock);
                     return;
                 }
 
                 this.$toast(null, err);
             });
         },
-        startPow() {
+        startPow(accountBlock) {
             let activeAccount = this.$wallet.getActiveAccount();
             if (!activeAccount) {
                 this.$toast(this.$t('hint.err'));
@@ -267,14 +268,7 @@ export default {
             };
 
             this.loading = true;
-            let amount = BigNumber.toMin(this.amount, this.token.decimals);
-
-            this.$refs.powProcess && this.$refs.powProcess.startPowTx({
-                toAddr: this.inAddress, 
-                amount,
-                tokenId: this.token.id,
-                message: this.message
-            }, 'sendBlock').then(() => {
+            this.$refs.powProcess && this.$refs.powProcess.startPowTx(accountBlock).then(() => {
                 this.transSuccess();
             }).catch((err, type) => {
                 console.warn(type, err);

@@ -92,7 +92,6 @@ export default {
                     console.warn(err);
                 });
         }
-        this.$store.dispatch('getBalanceInfo', this.$wallet.getActiveAccount());
         this.updateVoteData();
         this.updateNodeData();
         this.nodeDataTimer = new timer(this.updateNodeData, 3 * 1000);
@@ -160,7 +159,9 @@ export default {
             if (this.cache) {
                 return;
             }
+
             const activeAccount = this.$wallet.getActiveAccount();
+
             const successCancel = () => {
                 const t = Object.assign({}, v);
                 t.isCache = true;
@@ -168,6 +169,7 @@ export default {
                 this.cache = t;
                 this.$toast(this.$t('vote.section1.toast'));
             };
+
             const failCancel = e => {
                 const code = e && e.error ? e.error.code || -1 : e ? e.code : -1;
                 if (code === -35002) {
@@ -178,15 +180,7 @@ export default {
                         });
                     };
                     (c.rightBtn.click = () => {
-                        this.$refs.pow
-                            .startPowTx(
-                                {
-                                    tokenId: this.tokenInfo.tokenId,
-                                    nodeName: this.voteList[0].nodeName,
-                                    difficulty: '201564160'
-                                },
-                                'cancelVoteBlock'
-                            )
+                        this.$refs.pow.startPowTx(e.accountBlock)
                             .then(successCancel)
                             .catch(failCancel);
                     }),
@@ -196,17 +190,11 @@ export default {
                     this.$toast(this.$t('vote.section1.cancelVoteErr'), e);
                 }
             };
+            
             const sendCancel = () => {
-                activeAccount
-                    .sendTx(
-                        {
-                            tokenId: this.tokenInfo.tokenId,
-                            nodeName: this.voteList[0].nodeName
-                        },
-                        'cancelVoteBlock'
-                    )
-                    .then(successCancel)
-                    .catch(failCancel);
+                activeAccount.revokeVoting({
+                    tokenId: this.tokenInfo.tokenId
+                }).then(successCancel).catch(failCancel);
             };
 
             activeAccount.initPwd(
@@ -222,6 +210,7 @@ export default {
         },
         vote(v) {
             const activeAccount = this.$wallet.getActiveAccount();
+            
             const successVote = () => {
                 const t = Object.assign({}, v);
                 t.isCache = true;
@@ -230,6 +219,7 @@ export default {
                 this.cache = t;
                 this.$toast(this.$t('vote.section2.toast'));
             };
+
             const failVote = e => {
                 const code = e && e.error ? e.error.code || -1 : e ? e.code : -1;
                 if (code === -35002) {
@@ -240,15 +230,7 @@ export default {
                         });
                     };
                     c.rightBtn.click = () => {
-                        this.$refs.pow
-                            .startPowTx(
-                                {
-                                    nodeName: v.name,
-                                    tokenId: this.tokenInfo.tokenId,
-                                    difficulty: '201564160'
-                                },
-                                'voteBlock'
-                            )
+                        this.$refs.pow.startPowTx(e.accountBlock)
                             .then(successVote)
                             .catch(failVote);
                     };
@@ -261,16 +243,16 @@ export default {
                     this.$toast(this.$t('vote.section2.voteErr'), e);
                 }
             };
+
             const sendVote = () => {
-                activeAccount
-                    .sendTx(
-                        { nodeName: v.name, tokenId: this.tokenInfo.tokenId },
-                        'voteBlock'
-                    )
-                    .then(successVote)
-                    .catch(failVote);
+                activeAccount.voting({ 
+                    nodeName: v.name, 
+                    tokenId: this.tokenInfo.tokenId 
+                }).then(successVote).catch(failVote);
             };
+
             const t = this.haveVote ? 'cover' : 'normal';
+
             activeAccount.initPwd(
                 {
                     title: this.$t(`vote.section2.confirm.${t}.title`),

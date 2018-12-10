@@ -1,61 +1,54 @@
 import { utils } from '@vite/vitejs';
-
-import acc from './storeAcc.js';
-import account from './account.js';
-import toast from 'components/toast/index.js';
-import storage from 'utils/localStorage.js';
-import statistics from 'utils/statistics';
-import { encoder } from 'utils/tools';
 import vitecrypto from 'testwebworker';
+import statistics from 'utils/statistics';
+import storage from 'utils/localStorage.js';
+// import toast from 'components/toast/index.js';
+
+import account from './account.js';
+import acc from './storeAcc.js';
 
 const _keystore = utils.keystore;
 const _hdAddr = utils.address.hdAddr;
-
+const _tools = utils.tools;
 
 const LAST_KEY = 'ACC_LAST';
 
-class Wallet {
+class _wallet {
     constructor() {
-        this.activeAccount = null;
+        this.activeWalletAcc = null;        
     }
 
     getActiveAccount() {
-        return this.activeAccount;
+        return this.activeWalletAcc;
     }
 
     clearActiveAccount() {
-        if (!this.activeAccount) {
+        if (!this.activeWalletAcc) {
             return;
         }
-        this.activeAccount.lock();
-        this.activeAccount = null;
+        this.activeWalletAcc.lock && this.activeWalletAcc.lock();
+        this.activeWalletAcc = null;
     }
 
     newActiveAcc(acc) {
         this.clearActiveAccount();
-        this.activeAccount = new account(acc);
+        this.activeWalletAcc = new account(acc);
     }
 
     create(name, pass) {
-        if (!name || !pass) {
+        let err = _tools.checkParams({ name, pass }, ['name', 'pass']);
+        if (err) {
+            console.error(new Error(err));
             return;
         }
 
-        try {
-            let { addr, entropy } = _hdAddr.newAddr();
-            this.newActiveAcc({
-                defaultInx: 0,
-                addrNum: 1, 
-                name,
-                decryptEntropy: entropy,
-                pass,
-                addrs: [addr]
-            });
-        } catch(err) {
-            console.error(err);
-            toast( JSON.stringify(err) );
-        }
-    }
+        this.newActiveAcc({
+            addrNum: 1, 
+            name,
+            pass,
+            type: 'wallet'
+        });
+    }    
 
     importKeystore(data) {
         let keystore = _keystore.isValid(data);
@@ -64,10 +57,11 @@ class Wallet {
         }
 
         this.newActiveAcc({
-            keystore
+            keystore,
+            type: 'keystore'
         });
-        this.activeAccount.save();
-        return this.activeAccount.getDefaultAddr();
+        this.activeWalletAcc.save();
+        return keystore.hexaddress;
     }
 
     restoreAddrs(mnemonic) {
@@ -97,27 +91,23 @@ class Wallet {
                 }
             });
 
-            let finalAddrs = addrs.slice(0, index+1);
-            let entropy = _hdAddr.getEntropyFromMnemonic(mnemonic);
-
             this.newActiveAcc({
-                defaultInx: 0,
                 addrNum: index + 1,
-                decryptEntropy: entropy,
-                addrs: finalAddrs
+                mnemonic,
+                type: 'wallet'
             });
             return data;
         });
     }
 
     restoreAccount(name, pass) {
-        if (!this.activeAccount || !this.activeAccount.decryptEntropy) {
+        if (!this.activeWalletAcc) {
             return Promise.reject();
         }
 
-        return this.activeAccount.encrypt(pass).then(() => {
-            this.activeAccount.name = name;
-            this.activeAccount.save();
+        return this.activeWalletAcc.encrypt(pass).then(() => {
+            this.activeWalletAcc.pass = pass;
+            this.activeWalletAcc.rename(name);
         });
     }
 
@@ -128,138 +118,122 @@ class Wallet {
             return Promise.reject(false);
         }
         if (addr) {
-            return this._loginKeystore(addr, pass);
+            return this._loginKeystoreAcc(addr, pass);
         }
         return this._loginWalletAcc({
             id, entropy, pass
         });
     }
 
-    _loginKeystore(addr, pass) {
+    async _loginKeystoreAcc(addr, pass) {
         let acc = getAccFromAddr(addr);
         let keystore = acc.keystore;
 
-        return new Promise((res, rej) => {
-            let before = new Date().getTime();
-            _keystore.decrypt(JSON.stringify(keystore), pass, vitecrypto).then((privKey) => {
-                let after = new Date().getTime();
-                let n = ( keystore.crypto && keystore.crypto.scryptparams && keystore.crypto.scryptparams.n) ? 
-                    keystore.crypto.scryptparams.n : 0;
-                statistics.event('keystore-decrypt', n, 'time', after - before);
-    
-                if (n !== 262144) {
-                    this.newActiveAcc({
-                        pass,
-                        keystore,
-                        addrs: [{
-                            hexAddr: addr,
-                            privKey
-                        }],
-                        name: acc.name
-                    });
-                    return res(true);
-                }
+        let before = new Date().getTime();
 
-                // Reduce the difficuly. 262144 to 4096
-                _keystore.encryptOldKeystore(privKey, pass, vitecrypto).then((keystoreStr) => {
-                    keystore = JSON.parse(keystoreStr);
-                    this.newActiveAcc({
-                        pass,
-                        keystore,
-                        addrs: [{
-                            hexAddr: addr,
-                            privKey
-                        }],
-                        name: acc.name
-                    });
-                    this.activeAccount.save();
-        
-                    setLast({
-                        addr,
-                        name: acc.name
-                    });
-                    return res(true);
-                }).catch((err) => {
-                    return rej(err);
-                });
-            }).catch((err) => {
-                rej(err);
+        const privKey = await _keystore.decrypt(JSON.stringify(keystore), pass, vitecrypto);
+
+        let after = new Date().getTime();
+        let n = ( keystore.crypto && keystore.crypto.scryptparams && keystore.crypto.scryptparams.n) ? 
+            keystore.crypto.scryptparams.n : 0;
+        statistics.event('keystore-decrypt', n, 'time', after - before);
+
+        if (n !== 262144) {
+            this.newActiveAcc({
+                name: acc.name,
+                pass,
+                keystore,
+                privateKey: privKey,
+                type: 'keystore'
             });
+            return true;
+        }
+
+        // Reduce the difficuly. 262144 to 4096
+        let keystoreStr = await _keystore.encryptOldKeystore(privKey, pass, vitecrypto);
+        this.newActiveAcc({
+            name: acc.name,
+            pass,
+            keystore: JSON.parse(keystoreStr),
+            privateKey: privKey,
+            type: 'keystore'
         });
+        this.activeWalletAcc.save();
+
+        setLast({
+            addr,
+            name: acc.name
+        });
+        return true;
     }
 
-    _loginWalletAcc({
+    async _loginWalletAcc({
         id, entropy, pass
     }) {
-        return new Promise((res, rej) => {
-            try {
-                let acc;
-                let i;
-                if (id) {
-                    acc = getAccFromId(id);
-                } else {
-                    let result = getAccFromEntropy(entropy);
-                    if (result) {
-                        acc = result.account;
-                        i = result.index;
-                        id = result.id || null;
-                    }
-                }
+        let acc;
+        let i;
 
-                let encryptObj = acc.encryptObj;
-                entropy = entropy || encryptObj.encryptentropy;
-                encryptObj.encryptentropy = encryptObj.encryptentropy || entropy;   // Very very impotant!!!!!
-    
-                let before = new Date().getTime();
-                _keystore.decrypt(JSON.stringify(encryptObj), pass, vitecrypto).then((decryptEntropy) => {
-                    let after = new Date().getTime();
-                    statistics.event('mnemonic-decrypt', encryptObj.version || '1', 'time', after - before);
-        
-                    if (!decryptEntropy) {
-                        return false;
-                    }
-        
-                    let mnemonic = _hdAddr.getMnemonicFromEntropy(decryptEntropy);
-                    let addrs = _hdAddr.getAddrsFromMnemonic(mnemonic, 0, acc.addrNum);
-                    let defaultInx = +acc.defaultInx > 10 || +acc.defaultInx < 0 ? 0 : +acc.defaultInx;
-        
-                    this.newActiveAcc({
-                        pass,
-                        entropy, defaultInx, addrs, decryptEntropy,
-                        encryptObj: acc.encryptObj, 
-                        addrNum: acc.addrNum, 
-                        name: acc.name
-                    });
-        
-                    if (entropy && !id) {
-                        statistics.event('keystore', 'resave-id');
-                        this.activeAccount.save(i);
-                    }
-        
-                    setLast({
-                        id,
-                        entropy,
-                        name: acc.name
-                    });
-                    return res(true);
-                }).catch((err) => {
-                    console.warn(err);
-                    return rej(err);
-                });
-            } catch(err) {
-                console.warn(err);
-                return rej(false);
+        if (id) {
+            acc = getAccFromId(id);
+        } else {
+            let result = getAccFromEntropy(entropy);
+            if (result) {
+                acc = result.account;
+                i = result.index;
+                id = result.id || null;
             }
+        }
+
+        let encryptObj = acc.encryptObj;
+        entropy = entropy || encryptObj.encryptentropy;
+        encryptObj.encryptentropy = encryptObj.encryptentropy || entropy;   // Very very impotant!!!!!
+    
+        let before = new Date().getTime();
+        let decryptEntropy = await _keystore.decrypt(JSON.stringify(encryptObj), pass, vitecrypto);
+        let after = new Date().getTime();
+        statistics.event('mnemonic-decrypt', encryptObj.version || '1', 'time', after - before);
+
+        if (!decryptEntropy) {
+            return false;
+        }
+
+        let mnemonic = _hdAddr.getMnemonicFromEntropy(decryptEntropy);
+        let defaultInx = +acc.defaultInx > 10 || +acc.defaultInx < 0 ? 0 : +acc.defaultInx;
+
+        this.newActiveAcc({
+            pass,
+            defaultInx,
+            encryptObj: acc.encryptObj, 
+            addrNum: acc.addrNum, 
+            name: acc.name,
+            mnemonic,
+            type: 'wallet'
         });
+
+        if (!id) {
+            statistics.event('keystore', 'resave-id');
+            this.activeWalletAcc.save(i);
+        }
+
+        setLast({
+            id,
+            entropy,
+            name: acc.name
+        });
+        return true;
+    }
+
+    getList() {
+        return acc.getList();
     }
 
     getLast() {
-        if (this.activeAccount) {
+        if (this.activeWalletAcc) {
             return {
-                id: this.activeAccount.id,
-                entropy: this.activeAccount.entropy,
-                addr: this.activeAccount.isWalletAcc ? null : this.activeAccount.getDefaultAddr(),
-                name: this.activeAccount.name,
+                id: this.activeWalletAcc.getId(),
+                entropy: this.activeWalletAcc.getEntropy(),
+                addr: this.activeWalletAcc.type === 'wallet' ? null : this.activeWalletAcc.getDefaultAddr(),
+                name: this.activeWalletAcc.name,
             };
         }
 
@@ -286,62 +260,61 @@ class Wallet {
         
         return acc;
     }
-
-    getList() {
-        return acc.getList();
-    }
-
-    // VCP VV ===>  later
-    reSave() {
-        let list = acc.getList();
-        if (!list || !list.length) {
-            return;
-        }
-    
-        let last = getLast();
-        let reList = [];
-        let isChange = false;
-    
-        list.forEach((item) => {
-            if (!item) {
-                return;
-            }
-    
-            if (!item.entropy || !item.encryptObj || +item.encryptObj.version !== 1 || !item.encryptObj.scryptParams) {
-                reList.push(item);
-                return;
-            }
-    
-            isChange = true;
-
-            let entropy = item.entropy;
-            let keystore = _keystore.encryptV1ToV3(entropy, JSON.stringify(item.encryptObj));
-            
-            keystore = JSON.parse(keystore);
-
-            let mnemonic = _hdAddr.getMnemonicFromEntropy(entropy);
-            let addr = _hdAddr.getAddrFromMnemonic(mnemonic, 0);
-
-            item.id = getHexId(addr.hexAddr);
-            item.encryptObj = keystore;
-
-            if (last && last.entropy && last.entropy === entropy) {
-                last.entropy = item.entropy;
-            }
-            reList.push(item);
-        });
-    
-        if (!isChange) {
-            return;
-        }
-        
-        statistics.event('keystore', 'resave');
-        setLast(last);
-        acc.setAccList(reList);
-    }
 }
 
-export default new Wallet();
+
+export const wallet = _wallet;
+
+export const reSave = _reSave;
+
+
+
+// VCP VV ===>  later
+function  _reSave() {
+    let list = acc.getList();
+    if (!list || !list.length) {
+        return;
+    }
+
+    let last = getLast();
+    let reList = [];
+    let isChange = false;
+
+    list.forEach((item) => {
+        if (!item) {
+            return;
+        }
+
+        if (!item.entropy || !item.encryptObj || +item.encryptObj.version !== 1 || !item.encryptObj.scryptParams) {
+            reList.push(item);
+            return;
+        }
+
+        isChange = true;
+
+        let entropy = item.entropy;
+        let keystore = _keystore.encryptV1ToV3(entropy, JSON.stringify(item.encryptObj));
+        
+        keystore = JSON.parse(keystore);
+
+        let mnemonic = _hdAddr.getMnemonicFromEntropy(entropy);
+        item.id = _hdAddr.getId(mnemonic);
+        item.encryptObj = keystore;
+
+        if (last && last.entropy && last.entropy === entropy) {
+            last.entropy = item.entropy;
+        }
+        reList.push(item);
+    });
+
+    if (!isChange) {
+        return;
+    }
+    
+    statistics.event('keystore', 'resave');
+    setLast(last);
+    acc.setAccList(reList);
+}
 
 function getAccFromId(id) {
     let list = acc.getList();
@@ -390,11 +363,4 @@ function getLast() {
 
 function setLast(acc) {  
     storage.setItem(LAST_KEY, acc);
-}
-
-function getHexId(key) {
-    let keyByte = encoder.utf8ToBytes(key);
-    let idByte = encoder.blake2b(keyByte, null, 32);
-    let idHex = encoder.bytesToHex(idByte);
-    return idHex;
 }

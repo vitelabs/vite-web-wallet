@@ -1,51 +1,73 @@
-import { utils } from '@vite/vitejs';
-import vitecrypto from 'testwebworker';
-
-import config from 'config/constant';
+// import { utils } from '@vite/vitejs';
 import { pwdConfirm } from 'components/password/index.js';
 import { getPowNonce } from 'services/pow';
-import { encoder } from 'utils/tools';
+
+import keystoreAcc from './keystoreAccount';
+import walletAcc from './walletAccount';
 import acc from './storeAcc.js';
 
-const _keystore = utils.keystore;
-const _hdAddr = utils.address.hdAddr;
-
-const namePre = 'account';
+const NamePre = 'account';
+const AccountType = {
+    keystore: 'keystore',
+    wallet: 'wallet'
+};
 let passTimeout;
 
-class Account {
+class account {
+    // required (mnemonic || keystore || name) and type
+    // type (keystore || wallet)
     constructor({
-        entropy, encryptObj, addrNum, defaultInx, addrs, name, keystore, pass, decryptEntropy
+        name, pass, type,                               // walletAcc
+        addrNum, defaultInx, mnemonic, encryptObj,      // walletAccount
+        keystore, privateKey                             // keystoreAccount
     }) {
-        this.isWalletAcc = !keystore;
-        this.name = checkName(name);
         this.isHoldPWD = false;
+        this.type = type;
+        this.pass = pass || '';
+        this.name = checkName(name);
 
-        // Keystore account
-        this.keystore = keystore;
-        this.pass = pass;
+        let receiveFail = async (err) => {
+            if (!err || !err.error || !err.error.code || err.error.code !== -35002 || !err.accountBlock) {
+                return Promise.reject(err);
+            }
 
-        // Wallet account
-        this.decryptEntropy = decryptEntropy;
-        this.entropy = entropy;
-        this.encryptObj = encryptObj;
+            let accountBlock = err.accountBlock;
+            let data = await getPowNonce(accountBlock.accountAddress, accountBlock.prevHash);
+            accountBlock.difficulty = data.difficulty;
+            accountBlock.nonce = data.nonce;
 
-        this.defaultInx = !this.isWalletAcc ? 0 : defaultInx || 0;
-        this.addrNum = !this.isWalletAcc ? 1 : addrNum;
-        this.addrs = (!this.isWalletAcc && !addrs) ? [{
-            hexAddr: keystore.hexaddress
-        }] : addrs;
+            return this.account.sendRawTx(accountBlock);
+        };
 
-        if (this.addrs && this.addrs.length) {
-            this.id = getHexId(this.addrs[0].hexAddr);
-        } else if (this.decryptEntropy) {
-            let mnemonic = _hdAddr.getMnemonicFromEntropy(this.decryptEntropy);
-            let addr = _hdAddr.getAddrFromMnemonic(mnemonic, 0);
-            this.addrs = [addr];
-            this.id = getHexId(addr.hexAddr);
+        this.keystore = null;
+        if (this.type === AccountType.keystore) {
+            if (privateKey) {
+                this.account = new keystoreAcc({
+                    keystore, privateKey, receiveFail
+                });
+            } else {
+                this.keystore = keystore;
+            }
+        } else if (this.type === AccountType.wallet) {
+            this.account = new walletAcc({
+                addrNum, defaultInx, mnemonic, encryptObj, receiveFail
+            });
+        } else {
+            this.account = null;
         }
+
+        this.account && this.checkFunc();
     }
-    
+
+    checkFunc() {
+        let funcName = ['lock', 'getBalance', 'sendRawTx', 'sendTx', 'receiveTx', 'SBPreg', 'updateReg', 'revokeReg', 'retrieveReward', 'voting', 'revokeVoting', 'getQuota', 'withdrawalOfQuota'];
+        funcName.forEach((name) => {
+            this[name] = (...args) => {
+                return this.account[name](...args);
+            };
+        });
+    }
+
     holdPWD(pwd, time) {
         this.pass = pwd;
         this.isHoldPWD = true;
@@ -84,71 +106,63 @@ class Account {
         return false;
     }
 
+    getId() {
+        if (this.type === AccountType.keystore) {
+            return null;
+        }
+        return this.account.id;
+    }
+
+    getEntropy() {
+        if (this.type === AccountType.keystore) {
+            return null;
+        }
+        return this.account.entropy;
+    }
+
     verify(pass) {
         if (this.pass) {
             return Promise.resolve(this.pass === pass);
         }
-
-        if (this.isWalletAcc) {
-            return !this.encryptObj ? 
-                Promise.resolve(false) : 
-                _keystore.decrypt(JSON.stringify(this.encryptObj), pass, vitecrypto);
-        }
-
-        if (!this.keystore) {
-            return Promise.resolve(false);
-        }
-        
-        return _keystore.decrypt(JSON.stringify(this.keystore), pass, vitecrypto);
+        return this.account.verify(pass);
     }
 
     encrypt(pass) {
-        if (!this.decryptEntropy || (!this.pass && !pass)) {
+        if (this.type !== AccountType.wallet || (!this.pass && !pass)) {
             return Promise.reject(false);
         }
-
         pass && (this.pass = pass);
-        return _keystore.encrypt(this.decryptEntropy, this.pass, null, vitecrypto).then((encryptObj) => {
-            let obj = JSON.parse(encryptObj);
-            this.encryptObj = obj;
-            return encryptObj;
-        });
+        return this.account.encrypt(this.pass);
     }
+
     save(index = -1) {
         this.name = checkName(this.name);
-
-        if (!this.isWalletAcc) {
-            let item = {
+        if (!this.account && this.type === AccountType.keystore) {
+            acc.add({
                 name: this.name,
                 addr: this.keystore.hexaddress,
                 keystore: this.keystore
-            };
-            acc.add(item);
+            });
             return;
         }
-
-        acc.add({
-            id: this.id || getHexId(this.addrs[0].hexAddr),
-            defaultInx: this.defaultInx, 
-            addrNum: this.addrs.length, 
-            name: this.name, 
-            entropy: this.entropy,
-            encryptObj: this.encryptObj
-        }, index);
+        this.account.save(this.name, index);
     }
+
     changeMnemonic(len) {
         let bits = len === 12 ? 128 : 256;
-        let { addr, entropy } = _hdAddr.newAddr(bits);
-        this.decryptEntropy = entropy;
-        this.addrs = [addr];
-        this.defaultInx = 0;
-        this.addrNum = 1;
+
+        this.type = AccountType.wallet;
+        this.account = new walletAcc({
+            addrNum: 1,
+            bits
+        });
     }
+
     getMnemonic() {
-        if (!this.decryptEntropy) {
+        if (this.type === AccountType.keystore) {
             return null;
         }
-        return _hdAddr.getMnemonicFromEntropy(this.decryptEntropy);
+        return this.account.mnemonic;
     }
 
     getName() {
@@ -164,173 +178,68 @@ class Account {
     }
 
     addAddr() {
-        if (!this.isWalletAcc || this.addrs.length >= 10) {
-            return;
+        if (this.type === AccountType.keystore) {
+            return false;
         }
-        
-        let index = this.addrs.length;
-        let addr = _hdAddr.getAddrFromMnemonic(this.getMnemonic(), index);
-
-        this.addrs.push(addr);
-        this.addrNum = this.addrs.length;
-        this.save();
+        this.account.addAddr();
+        this.account.save(this.name);
+        return true;
     }
 
     getAddrList() {
+        if (this.type === AccountType.keystore) {
+            return [this.account.address];
+        }
+
         let addrs = [];
-        this.addrs.forEach(({ hexAddr }) => {
+        let list = this.account.addrList;
+        list.forEach(({ hexAddr }) => {
             addrs.push(hexAddr);
         });
         return addrs;
     }
 
-    setDefaultAddr(addr) {
-        if (!this.isWalletAcc) {
+    setDefaultAddr(addr, index) {
+        if (this.type === AccountType.keystore) {
             return true;
         }
-
-        let i;
-        for(i=0; i<this.addrs.length; i++) {
-            if (this.addrs[i].hexAddr === addr) {
-                break;
-            }
-        }
-
-        if (i >= this.addrs.length) {
-            return false;
-        }
-
-        this.lock();    // Lock current default address
-        this.defaultInx = i;    // Change default address
-        this.save();    // Save default
-        this.unLock();  // Unlock the current default address
-        return true;
+        return this.account.setDefaultAddr(addr, index);
     }
 
     getDefaultAddr() {
-        return this.addrs[this.defaultInx].hexAddr;
+        if (!this.account && this.type === AccountType.keystore) {
+            return this.keystore.hexaddress;
+        }
+        return this.account.getDefaultAddr();
     }
 
-    unLock() {
-        if (!this.addrs || !this.addrs.length) {
-            return;
+    unlock() {
+        if (!this.account) {
+            return false;
         }
 
-        let addr = this.addrs[this.defaultInx].hexAddr;
-        let privKey = this.addrs[this.defaultInx].privKey;
-
-        $ViteJS.autoReceiveTX(addr, privKey, async (err, accountBlock) => {
-            if (!err || !err.error || !err.error.code || err.error.code !== -35002) {
-                return Promise.reject(err);
-            }
-
-            let data = await getPowNonce(addr, accountBlock.prevHash);
-            accountBlock.difficulty = data.difficulty;
-            accountBlock.nonce = data.nonce;
-
-            return this.sendRawTx(accountBlock, privKey);
-        });
+        let result = this.account.unlock(2000);
+        return result;
     }
 
-    lock() {
-        if (!this.addrs || !this.addrs.length) {
-            return;
+    syncGetBalance() {
+        if (!this.account) {
+            return null;
         }
-
-        let addr = this.addrs[this.defaultInx];
-        if (!addr) {
-            return;
-        }
-
-        $ViteJS.stopAutoReceiveTX(addr.hexAddr);
-    }
-
-    sendRawTx(block, privKey) {
-        privKey = privKey || this.addrs[this.defaultInx].privKey;
-        return $ViteJS.sendRawTx(block, privKey);
-    }
-
-    async getBlock({
-        toAddr, tokenId, amount, message, nodeName, producerAddr, rewardAddress, difficulty
-    }, type = 'sendBlock', isPow = false) {
-        let types = {
-            receiveBlock: 'asyncReceiveTx',
-            sendBlock: 'asyncSendTx',
-            cancelPledgeBlock: 'withdrawalOfQuota',
-            pledgeBlock: 'getQuota',
-            updateRegisterBlock: 'updateReg',
-            rewardBlock: 'retrieveReward',
-            registerBlock: 'SBPreg',
-            cancelRegisterBlock: 'revokeReg',
-            cancelVoteBlock: 'revokeVoting',
-            voteBlock: 'voting'
-        };
-
-        let accountAddress = this.addrs[this.defaultInx].hexAddr;
-        let toAddress = toAddr || producerAddr || rewardAddress;
-        
-        let block = await $ViteJS.buildinTxBlock[types[type]]({
-            accountAddress, 
-            toAddress, 
-            Gid: config.gid,
-            tokenId, amount, message, 
-            nodeName
-        });
-
-        if (!isPow) {
-            return block;
-        }
-        
-        let data = await getPowNonce(accountAddress, block.prevHash, difficulty);
-        block.difficulty = data.difficulty;
-        block.nonce = data.nonce;
-
-        return block;
-    }
-
-    sendTx({
-        toAddr, tokenId, amount, message, nodeName, producerAddr, rewardAddress
-    }, type = 'sendBlock') {
-        // First tx
-        window.isShowPWD = true;
-
-        let privKey = this.addrs[this.defaultInx].privKey;
-        return new Promise((res, rej) => {
-            this.getBlock({
-                toAddr, tokenId, amount, message, nodeName, producerAddr, rewardAddress
-            }, type).then((block) => {
-                this.sendRawTx(block, privKey).then((data) => {
-                    return res(data);
-                }).catch(err => {
-                    return rej(err);
-                });
-            }).catch(err => {
-                return rej(err);
-            });
-        });
-    }
-
-    getBalance() {
-        let addr = this.getDefaultAddr();
-        return $ViteJS.buildinLedger.getBalance(addr);
+        return this.account.balance;
     }
 }
 
-export default Account;
+export default account;
+
+
 
 function checkName(name) {
     if (name) {
         return name;
     }
     let count = acc.getNameCount();
-    name = `${namePre}${count}`;
+    name = `${NamePre}${count}`;
     acc.setNameCount(count + 1);
     return name;
-}
-
-function getHexId(key) {
-    let keyByte = encoder.utf8ToBytes(key);
-    let idByte = encoder.blake2b(keyByte, null, 32);
-    let idHex = encoder.bytesToHex(idByte);
-    return idHex;
 }

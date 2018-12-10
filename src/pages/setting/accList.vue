@@ -34,7 +34,7 @@ export default {
 
         return {
             activeAccount,
-            isWalletAcc: activeAccount.isWalletAcc,
+            isWalletAcc: activeAccount.type === 'wallet',
             addrList: activeAccount.getAddrList(),
             defaultAddr: activeAccount.getDefaultAddr(),
             copyAddr: ''

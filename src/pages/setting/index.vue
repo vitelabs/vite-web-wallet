@@ -26,7 +26,7 @@ export default {
     },
     data() {
         let activeAccount = this.$wallet.getActiveAccount();
-        let showPassWrapper = activeAccount ? !!activeAccount.isWalletAcc : false;
+        let showPassWrapper = activeAccount ? activeAccount.type === 'wallet' : false;
 
         return {
             isSubmiting: false,

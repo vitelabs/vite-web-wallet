@@ -226,7 +226,7 @@ export default {
 
             this.sendTx({
                 producerAddr, amount, nodeName
-            }, 'registerBlock').then(() => {
+            }, 'SBPreg').then(() => {
                 this.loading = false;
                 this.$toast(this.$t('SBP.section1.registerSuccess'));
                 this.clearAll();

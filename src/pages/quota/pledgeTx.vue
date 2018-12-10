@@ -174,9 +174,9 @@ export default {
             this.loading = true;
             
             this.sendPledgeTx({
-                toAddr: this.toAddr,
+                toAddress: this.toAddr,
                 amount: this.amount
-            }, 'pledgeBlock', (result, err) => {
+            }, 'getQuota', (result, err) => {
                 this.loading = false;
                 if (!result) {
                     err && this.$toast(this.$t('quota.pledgeFail'), err);

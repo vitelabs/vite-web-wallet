@@ -205,7 +205,7 @@ export default {
             let producer = this.addr;
             this.sendTx({
                 producerAddr: producer
-            }, 'updateRegisterBlock').then(() => {
+            }, 'updateReg').then(() => {
                 this.loading = false;
                 this.$toast(this.$t('SBP.section2.updateSuccess'));
                 this.closeConfirm();
@@ -232,7 +232,7 @@ export default {
 
             this.sendTx({
                 rewardAddress: this.addr
-            }, 'rewardBlock').then(() => {
+            }, 'retrieveReward').then(() => {
                 this.loading = false;
                 this.$toast(this.$t('SBP.section2.rewardSuccess'));
                 this.closeConfirm();
@@ -259,12 +259,12 @@ export default {
             }
           
             let toAmount = BigNumber.toMin(amount || 0, this.tokenInfo.decimals);
-            return this.activeAccount.sendTx({
+            return this.activeAccount[type]({
                 tokenId: this.tokenInfo.tokenId,
                 nodeName: nodeName || this.activeItem.name,
                 amount: toAmount,
-                producerAddr, rewardAddress
-            }, type);
+                toAddress: producerAddr || rewardAddress
+            });
         }
     }
 };
