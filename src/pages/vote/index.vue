@@ -173,6 +173,7 @@ export default {
             const failCancel = e => {
                 const code = e && e.error ? e.error.code || -1 : e ? e.code : -1;
                 if (code === -35002) {
+                    let startTime = new Date().getTime();
                     const c = Object.assign({}, this.$t('vote.section1.quotaConfirm'));
                     c.leftBtn.click = () => {
                         this.$router.push({
@@ -180,7 +181,7 @@ export default {
                         });
                     };
                     (c.rightBtn.click = () => {
-                        this.$refs.pow.startPowTx(e.accountBlock)
+                        this.$refs.pow.startPowTx(e.accountBlock, startTime)
                             .then(successCancel)
                             .catch(failCancel);
                     }),
@@ -223,6 +224,7 @@ export default {
             const failVote = e => {
                 const code = e && e.error ? e.error.code || -1 : e ? e.code : -1;
                 if (code === -35002) {
+                    let startTime = new Date().getTime();
                     const c = Object.assign({}, this.$t('vote.section2.quotaConfirm'));
                     c.leftBtn.click = () => {
                         this.$router.push({
@@ -230,7 +232,7 @@ export default {
                         });
                     };
                     c.rightBtn.click = () => {
-                        this.$refs.pow.startPowTx(e.accountBlock)
+                        this.$refs.pow.startPowTx(e.accountBlock, startTime)
                             .then(successVote)
                             .catch(failVote);
                     };
