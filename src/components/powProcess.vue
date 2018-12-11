@@ -68,7 +68,21 @@ export default {
             this.isShow = false;
             this.cancel();
         },
-        async startPowTx(accountBlock, cb) {
+        async startPowTx(accountBlock, startTime) {
+            let now = new Date().getTime();
+            if (startTime && now - startTime > 2000) {
+                accountBlock.prevHash = null;
+                accountBlock.height = null;
+                accountBlock.snapshotHash = null;
+                try {
+                    accountBlock = await $ViteJS.buildinTxBlock.getAccountBlock.async(accountBlock);
+                } catch(e) {
+                    this.isShow = false;
+                    this.$emit('pow-finish');
+                    return Promise.reject(e, 0);
+                }
+            }
+
             this.isShow = true;
             const activeAccount = this.$wallet.getActiveAccount();
 
@@ -84,18 +98,15 @@ export default {
                     this.stopPow(() => {
                         activeAccount.sendRawTx(accountBlock).then(data => {
                             this.isShow = false;
-                            cb && cb(true);
                             res(data);
                         }).catch(e => {
                             this.isShow = false;
-                            cb && cb(false);
                             rej(e, 1);
                         });
                     });
                 }).catch((e) => {
                     this.isShow = false;
                     this.$emit('pow-finish');
-                    cb && cb(false);
                     rej(e, 0);
                 });
             });

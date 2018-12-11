@@ -123,7 +123,7 @@ export default {
         validAddr() {
             this.isValidAddress = this.inAddress && address.isValidHexAddr(this.inAddress);
         },
-        showQuota(accountBlock) {
+        showQuota(accountBlock, startTime) {
             this.isShowTrans = false;
             this.$confirm({
                 showMask: false,
@@ -145,7 +145,7 @@ export default {
                 rightBtn: {
                     text: this.$t('accDetail.quota.right'),
                     click: () => {
-                        this.startPow(accountBlock);
+                        this.startPow(accountBlock, startTime);
                     }
                 },
                 content: this.$t('accDetail.quota.describe')
@@ -247,14 +247,14 @@ export default {
                     this.amountErr = this.$t('transList.valid.bal');
                     return;
                 } else if (code === -35002) {
-                    this.showQuota(err.accountBlock);
+                    this.showQuota(err.accountBlock, new Date().getTime());
                     return;
                 }
 
                 this.$toast(null, err);
             });
         },
-        startPow(accountBlock) {
+        startPow(accountBlock, startTime) {
             let activeAccount = this.$wallet.getActiveAccount();
             if (!activeAccount) {
                 this.$toast(this.$t('hint.err'));
@@ -268,7 +268,7 @@ export default {
             };
 
             this.loading = true;
-            this.$refs.powProcess && this.$refs.powProcess.startPowTx(accountBlock).then(() => {
+            this.$refs.powProcess && this.$refs.powProcess.startPowTx(accountBlock, startTime).then(() => {
                 this.transSuccess();
             }).catch((err, type) => {
                 console.warn(type, err);
