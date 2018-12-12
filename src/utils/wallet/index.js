@@ -2,7 +2,6 @@ import { utils } from '@vite/vitejs';
 import vitecrypto from 'testwebworker';
 import statistics from 'utils/statistics';
 import storage from 'utils/localStorage.js';
-// import toast from 'components/toast/index.js';
 
 import account from './account.js';
 import acc from './storeAcc.js';

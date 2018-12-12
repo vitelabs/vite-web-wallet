@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.4 (67378) - http://www.bohemiancoding.com/sketch -->
+    <title>Group 13</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="网关" transform="translate(-136.000000, -340.000000)" fill="#010101">
+            <g id="Group-8" transform="translate(111.000000, 322.000000)">
+                <g id="Group-13">
+                    <g id="eth" transform="translate(25.000000, 18.000000)">
+                        <g id="Group-11">
+                            <g id="Group" opacity="0.6" transform="translate(4.007646, 7.381520)">
+                                <polygon id="Path" points="6.15126704 0.00964904633 0.0144735695 2.8006357 6.15126704 6.42626486 12.2856482 2.8006357"></polygon>
+                            </g>
+                            <g id="Group" opacity="0.45" transform="translate(4.007646, 0.000000)">
+                                <polygon id="Path" points="0.0144735695 10.1821561 6.15126704 13.8077853 6.15126704 0"></polygon>
+                            </g>
+                            <g id="Group" opacity="0.8" transform="translate(10.158913, 0.000000)">
+                                <polygon id="Path" points="0 0 0 13.8077853 6.13438121 10.1821561"></polygon>
+                            </g>
+                            <g id="Group" opacity="0.45" transform="translate(4.007646, 11.337629)">
+                                <polygon id="Path" points="0.0144735695 0.00723678475 6.15126704 8.6527823 6.15126704 3.63286594"></polygon>
+                            </g>
+                            <g id="Group" opacity="0.8" transform="translate(10.158913, 11.337629)">
+                                <polygon id="Path" points="0 3.63286594 0 8.6527823 6.13920573 0.00723678475"></polygon>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
