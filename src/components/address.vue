@@ -10,7 +10,7 @@
                                 :options="{ size:146 }" 
                                 @genImage="getImage"></qrcode>
                     </div>
-                    <div class="btn" @click="downLoadQrCode">{{ $t('accDetail.saveQrcode') }}</div>
+                    <div class="btn" @click="downLoadQrCode">{{ $t('account.saveQrcode') }}</div>
                 </div>
             </span>
             <img src="../assets/imgs/copy_default.svg" @click="copy" class="title_icon copy __pointer"/>

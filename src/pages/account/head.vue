@@ -2,7 +2,7 @@
     <div class="account-head-wrapper">
         <div class="custom-name">
             <div class="head-title">
-                <span>{{ $t('accDetail.name') }}</span>
+                <span>{{ $t('account.name') }}</span>
                 <img @click="startRename" class="edit __pointer" src="../../assets/imgs/edit_default.svg"/>
             </div>
             <div v-show="!isShowNameInput" class="name" :class="{
@@ -13,16 +13,16 @@
                    @blur="rename" autocomplete="off"/>
         </div>
 
-        <vite-address :title="$t('accDetail.address')" :address="account.addr" 
+        <vite-address :title="$t('account.address')" :address="account.addr" 
                       :addressQrcode="addressStr"></vite-address>
         
         <div class="btn-group">
             <div class="btn__small __pointer __btn-test" @click="getTestToken" :class="{'un_clickable':!getTestTokenAble}">
-                <span>{{ $t('accDetail.getTestToken') }}</span>
+                <span>{{ $t('account.getTestToken') }}</span>
                 <img src="../../assets/imgs/Vite_icon.svg" class="icon" />
             </div>
             <div @click="goDetail" class="btn__small __pointer __btn-detail">
-                {{ $t('accDetail.transDetail') }}
+                {{ $t('account.transDetail') }}
                 <img src="../../assets/imgs/more.svg" class="more-icon" />
             </div>
         </div>
@@ -74,18 +74,18 @@ export default {
             }
 
             if (!this.account || !this.account.addr) {
-                this.$toast( this.$t('accDetail.hint.tErr') );
+                this.$toast( this.$t('account.hint.tErr') );
             }
             this.getTestTokenAble=false;
             getTestToken(this.account.addr).then(() => {
-                this.$toast( this.$t('accDetail.hint.token') );
+                this.$toast( this.$t('account.hint.token') );
                 setTimeout(()=>{
                     this.getTestTokenAble=true;
                 },3000);
             }).catch((err) => {
                 this.getTestTokenAble=true;
                 console.warn(err);
-                this.$toast( this.$t('accDetail.hint.tErr') );
+                this.$toast( this.$t('account.hint.tErr') );
             });
         },
         getSimpleAcc() {

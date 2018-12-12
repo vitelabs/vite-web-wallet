@@ -5,10 +5,10 @@
         </div>
         <div class="content">
             <div class="balance">
-                {{ $t('accDetail.balance') }}<span class="num">{{ balance || 0 }}</span>
+                {{ $t('account.balance') }}<span class="num">{{ balance || 0 }}</span>
             </div>
             <div class="btn-list">
-                <div class="btn" @click="sendTx('eth')">{{ $t('accDetail.sendTrans') }}</div>
+                <div class="btn" @click="sendTx('eth')">{{ $t('account.sendTrans') }}</div>
                 <div v-show="tokenName === 'VITE'" class="btn" @click="sendTx('vite')"
                      :class="{ '__btn_all_in': balance && balance !== 0 }">{{ $t('gateway.exchangeVite') }}</div>
             </div>

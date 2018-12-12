@@ -2,7 +2,7 @@
     <div class="gateway-wrapper __wrapper">
         <sec-title></sec-title>
         <div class='title'> <img src="../../assets/imgs/eth_logo.svg"/>ETH </div>
-        <vite-address :title="$t('accDetail.address')" :address="address"></vite-address>
+        <vite-address :title="$t('account.address')" :address="address"></vite-address>
         <div class="token-list">
             <token tokenName="VITE" :sendTx="showTrans" :balance="showBalance.vite"></token>
             <token tokenName="ETH" :sendTx="showTrans" :balance="showBalance.eth"></token>

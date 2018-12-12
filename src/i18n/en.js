@@ -129,7 +129,7 @@ module.exports = {
     },
 
     // account detail
-    accDetail: {
+    account: {
         title: 'Account Detail',
         transfer: 'Transfer',
         getTestToken: 'Get Test Tokens',
