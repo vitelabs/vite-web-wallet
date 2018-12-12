@@ -128,7 +128,7 @@ module.exports = {
     },
 
     // account detail
-    accDetail: {
+    account: {
         title: '账户详情',
         transfer: '转账',
         getTestToken: '获取测试代币',

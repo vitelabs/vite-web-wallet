@@ -43,7 +43,7 @@ export default {
     methods: {
         copy(addr) {
             copy(addr);
-            this.$toast(this.$t('accDetail.hint.copy'));
+            this.$toast(this.$t('account.hint.copy'));
         },
         addAddr() {
             let addrList = this.activeAccount.getAddrList();

@@ -1,13 +1,13 @@
 <template>
     <div class="trans-wrapper">
         <confirm v-show="isShowTrans" class="trans-confirm"
-                 :title="$t('accDetail.transfer')"
+                 :title="$t('account.transfer')"
                  :btnUnuse="unTrans"
                  :closeIcon="true" :close="closeTrans" :singleBtn="true" 
-                 :leftBtnClick="validTrans" :leftBtnTxt="$t('accDetail.transfer')" >
+                 :leftBtnClick="validTrans" :leftBtnTxt="$t('account.transfer')" >
 
             <div class="row">
-                <div class="row-t">{{ $t('accDetail.balance') }}</div>
+                <div class="row-t">{{ $t('account.balance') }}</div>
                 <div class="balance">
                     <img v-if="token.icon" :src="token.icon" class="icon" />
                     {{ token.symbol }} <span>{{ showAccBalance }}</span>
@@ -16,30 +16,30 @@
 
             <div class="row">
                 <div class="row-t">
-                    {{ $t('accDetail.inAddress') }}
+                    {{ $t('account.inAddress') }}
                     <span v-show="!isValidAddress" class="err hint">{{ $t('transList.valid.addr') }}</span>
                 </div>
                 <vite-input v-model="inAddress" :valid="validAddr"
-                            :placeholder="$t('accDetail.placeholder.addr')"></vite-input>
+                            :placeholder="$t('account.placeholder.addr')"></vite-input>
             </div>
 
             <div class="row">
                 <div class="row-t">
-                    {{ $t('accDetail.sum') }}
+                    {{ $t('account.sum') }}
                     <span v-show="amountErr" class="err hint">{{ amountErr }}</span>
                 </div>
                 <vite-input v-model="amount" :valid="testAmount"
-                            :placeholder="$t('accDetail.placeholder.amount')"></vite-input>
+                            :placeholder="$t('account.placeholder.amount')"></vite-input>
             </div>
 
             <div class="row">
                 <div class="row-t">
-                    {{ $t('accDetail.remarks')}}
+                    {{ $t('account.remarks')}}
                     <span class="hint" :class="{ err: messageErr }">
-                        {{ $t('accDetail.valid.remarksLong', { len: msgBalance}) }}
+                        {{ $t('account.valid.remarksLong', { len: msgBalance}) }}
                     </span>
                 </div>
-                <vite-input v-model="message" :placeholder="$t('accDetail.placeholder.remarks')"></vite-input>
+                <vite-input v-model="message" :placeholder="$t('account.placeholder.remarks')"></vite-input>
             </div>
         </confirm>
 
@@ -127,7 +127,7 @@ export default {
             this.isShowTrans = false;
             this.$confirm({
                 showMask: false,
-                title: this.$t('accDetail.quota.title'),
+                title: this.$t('account.quota.title'),
                 closeBtn: {
                     show: true,
                     click: () => {
@@ -135,7 +135,7 @@ export default {
                     }
                 },
                 leftBtn: {
-                    text: this.$t('accDetail.quota.left'),
+                    text: this.$t('account.quota.left'),
                     click: () => {
                         this.$router.push({
                             name: 'quota'
@@ -143,12 +143,12 @@ export default {
                     }
                 },
                 rightBtn: {
-                    text: this.$t('accDetail.quota.right'),
+                    text: this.$t('account.quota.right'),
                     click: () => {
                         this.startPow(accountBlock, startTime);
                     }
                 },
-                content: this.$t('accDetail.quota.describe')
+                content: this.$t('account.quota.describe')
             });
         },
 
@@ -161,7 +161,7 @@ export default {
             }
 
             if (BigNumber.isEqual(this.amount, 0)) {
-                this.amountErr = this.$t('accDetail.hint.amount');
+                this.amountErr = this.$t('account.hint.amount');
                 return false;
             }
 
@@ -274,14 +274,14 @@ export default {
                 console.warn(type, err);
 
                 if (type === 0) {
-                    transError( this.$t('accDetail.trans.powErr') );
+                    transError( this.$t('account.trans.powErr') );
                     return;
                 }
 
                 let code  = err && err.error ? err.error.code || -1 : 
                     err ? err.code : -1;
                 if (code === -35002) {
-                    transError(this.$t('accDetail.trans.powTransErr'));
+                    transError(this.$t('account.trans.powTransErr'));
                     return;
                 }
                 transError(err);
