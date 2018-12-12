@@ -52,7 +52,7 @@ import Vue from 'vue';
 import confirm from 'components/confirm';
 import powProcess from 'components/powProcess';
 import viteInput from 'components/viteInput';
-import BigNumber from 'utils/BigNumber';
+import BigNumber from 'utils/bigNumber';
 import { encoder, address } from 'utils/tools';
 
 export default {

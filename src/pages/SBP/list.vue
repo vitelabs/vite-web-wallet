@@ -48,7 +48,7 @@ import { quotaConfirm } from 'components/quota/index';
 import tooltips from 'components/tooltips';
 import date from 'utils/date.js';
 import ellipsisAddr from 'utils/ellipsisAddr.js';
-import BigNumber from 'utils/BigNumber';
+import BigNumber from 'utils/bigNumber';
 
 const amount = 500000;
 

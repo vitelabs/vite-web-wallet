@@ -43,7 +43,7 @@ import confirm from 'components/confirm';
 import powProcess from 'components/powProcess';
 import loading from 'components/loading';
 import viteInput from 'components/viteInput';
-import BigNumber from 'utils/BigNumber';
+import BigNumber from 'utils/bigNumber';
 
 export default {
     components: {
