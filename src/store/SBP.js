@@ -1,6 +1,6 @@
 import config from 'config/constant';
 import { timer } from 'utils/asyncFlow';
-import BigNumber from 'utils/BigNumber';
+import BigNumber from 'utils/bigNumber';
 
 const loopTime = 5000;
 let regListInst = null;

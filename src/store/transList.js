@@ -1,4 +1,4 @@
-import BigNumber from 'utils/BigNumber';
+import BigNumber from 'utils/bigNumber';
 
 const pageCount = 50;
 let lastFetchTime = null;

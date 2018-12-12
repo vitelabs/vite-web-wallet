@@ -15,7 +15,7 @@
 
 <script>
 import { timer } from 'utils/asyncFlow';
-import BigNumber from 'utils/bignumber';
+import BigNumber from 'utils/bigNumber';
 import _ethWallet from 'utils/ethWallet/index.js';
 import secTitle from 'components/secTitle';
 import viteAddress from 'components/address';

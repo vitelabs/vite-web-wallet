@@ -7,7 +7,7 @@ const ethProvider = require('web3-providers-ws');
 // const tx = require('ethereumjs-tx');
 // console.log(tx);
 
-// import Bignumber from 'utils/bignumber';
+// import Bignumber from 'utils/bigNumber';
 // import request from 'utils/request';
 import { timer } from 'utils/asyncFlow';
 

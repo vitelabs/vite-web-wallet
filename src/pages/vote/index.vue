@@ -73,7 +73,7 @@ import loading from 'components/loading';
 import confirm from 'components/confirm';
 import powProcess from 'components/powProcess';
 import { timer } from 'utils/asyncFlow';
-import BigNumber from 'utils/BigNumber';
+import BigNumber from 'utils/bigNumber';
 
 export default {
     components: {

@@ -59,7 +59,7 @@
 import Vue from 'vue';
 import { quotaConfirm } from 'components/quota/index';
 import viteInput from 'components/viteInput';
-import BigNumber from 'utils/BigNumber';
+import BigNumber from 'utils/bigNumber';
 import { address } from 'utils/tools';
 
 const amount = 500000;

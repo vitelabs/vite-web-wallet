@@ -40,7 +40,7 @@
 <script>
 import Vue from 'vue';
 import viteInput from 'components/viteInput';
-import BigNumber from 'utils/BigNumber';
+import BigNumber from 'utils/bigNumber';
 import { address } from 'utils/tools';
 
 let amountTimeout = null;

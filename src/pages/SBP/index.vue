@@ -61,7 +61,7 @@ import loading from 'components/loading';
 import confirm from 'components/confirm';
 import { quotaConfirm } from 'components/quota/index';
 import viteInput from 'components/viteInput';
-import BigNumber from 'utils/BigNumber';
+import BigNumber from 'utils/bigNumber';
 import { address } from 'utils/tools';
 import register from './register';
 import list from './list';

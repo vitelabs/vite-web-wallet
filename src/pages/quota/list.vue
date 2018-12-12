@@ -37,7 +37,7 @@ import pagination from 'components/pagination.vue';
 import tabelList from 'components/tabelList.vue';
 import date from 'utils/date.js';
 import {timer} from 'utils/asyncFlow';
-import BigNumber from 'utils/BigNumber';
+import BigNumber from 'utils/bigNumber';
 import ellipsisAddr from 'utils/ellipsisAddr.js';
 import loopTime from 'config/loopTime';
 
