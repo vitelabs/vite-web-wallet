@@ -1,35 +1,58 @@
 <template>
     <div class="token-wrapper">
         <div class="title">
-            <img src="../../assets/imgs/eth_logo.svg"/>{{ tokenName }}
+            <img src="../../assets/imgs/eth_logo.svg"/>{{ token.symbol }}
         </div>
         <div class="content">
             <div class="balance">
-                {{ $t('account.balance') }}<span class="num">{{ balance || 0 }}</span>
+                {{ $t('account.balance') }}<span class="num">{{ balance }}</span>
             </div>
             <div class="btn-list">
-                <div class="btn" @click="sendTx('eth')">{{ $t('account.sendTrans') }}</div>
-                <div v-show="tokenName === 'VITE'" class="btn" @click="sendTx('vite')"
-                     :class="{ '__btn_all_in': balance && balance !== 0 }">{{ $t('gateway.exchangeVite') }}</div>
+                <!-- @click="_sendTx('transfer', token.name)" -->
+                <div class="btn unuse __pointer">{{ $t('account.sendTrans') }}</div>
+                <div v-show="token.symbol === 'VITE'" @click="_sendTx('exchange', token.name)"
+                     class="btn __pointer" :class="{ 
+                         '__btn_all_in': balance && balance !== 0,
+                         'unuse': !balance || balance === 0 }">
+                    {{ $t('gateway.exchange.vite') }}</div>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+import BigNumber from 'utils/bigNumber';
+
 export default {
     props: {
         tokenName: {
             type: String,
             default: ''
         },
-        balance: {
-            type: String,
-            default: ''
+        token: {
+            type: Object,
+            default: () => {
+                return {};
+            }
         },
         sendTx: {
             type: Function,
             default: () => {}
+        }
+    },
+    computed: {
+        balance() {
+            let decimals = this.token.decimals;
+            let balance = this.token.balance;
+            return +balance ? BigNumber.toBasic(balance, decimals) : 0;
+        }
+    },
+    methods: {
+        _sendTx(...args) {
+            if (!this.balance || this.balance === 0) {
+                return;
+            }
+            this.sendTx && this.sendTx(...args);
         }
     }
 };
@@ -81,13 +104,15 @@ export default {
                 padding: 0 20px;
                 height: 40px;
                 line-height: 40px;
-                background: rgba(238,241,245,1);
                 border-radius: 2px;
                 font-size:14px;
-                color: rgba(255,255,255,1);
                 flex: 1;
                 text-align: center;
                 margin-left: 10px;
+                &.unuse {
+                    background: rgba(238,241,245,1);
+                    color: rgba(255,255,255,1);
+                }
                 &:first-child {
                     margin-left: 0;
                 }

@@ -1,32 +1,30 @@
 <template>
     <div class="gateway-wrapper __wrapper">
         <sec-title></sec-title>
+
         <div class='title'> <img src="../../assets/imgs/eth_logo.svg"/>ETH </div>
-        <vite-address :title="$t('account.address')" :address="address"></vite-address>
+
+        <vite-address :title="$t('account.address')" :address="address" :addressQrcode="'ethereum:' + address"></vite-address>
+
         <div class="token-list">
-            <token tokenName="VITE" :sendTx="showTrans" :balance="showBalance.vite"></token>
-            <token tokenName="ETH" :sendTx="showTrans" :balance="showBalance.eth"></token>
+            <token v-for="(token, index) in tokenList" :key="index" 
+                   :sendTx="showTrans" :token="token"></token>
         </div>
-        <div v-show="showTransType" class="trans-wrapper">
-            <transaction v-click-outside="hideTrans"></transaction>
-        </div>
+        
+        <transaction v-show="!!transType" :closeTrans="hideTrans" :ethWallet="ethWallet"
+                     :transType="transType" :token="tokenList[transToken]"></transaction>
     </div>
 </template>
 
 <script>
 import { timer } from 'utils/asyncFlow';
-import BigNumber from 'utils/bigNumber';
 import _ethWallet from 'utils/ethWallet/index.js';
 import secTitle from 'components/secTitle';
 import viteAddress from 'components/address';
 import token from './token';
 import transaction from './transaction';
 
-// const minGwei = 3;
-// const maxGwei = 99;
-// const defaultGwei = 41;
 const balanceTime = 2000;
-
 let balanceInfoInst = null;
 
 export default {
@@ -50,39 +48,23 @@ export default {
     },
     data() {
         return {
-            showTransType: '',
-            balance: null,
+            transType: '',
+            transToken: '',
+
+            tokenList: {},
             ethWallet: null,
             address: '',
             viteAddress: '',
         };
     },
-    computed: {
-        showBalance() {
-            if (!this.balance) {
-                return {
-                    vite: 0,
-                    eth: 0
-                };
-            }
-
-            let vite = this.balance.vite.balance || 0;
-            let eth = this.balance.eth.balance  || 0;
-            let showVite = BigNumber.toBasic(vite, this.balance.vite.decimals);
-            let showEth = BigNumber.toBasic(eth, this.balance.eth.decimals);
-
-            return {
-                vite: showVite,
-                eth: showEth
-            };
-        }
-    },
     methods: {
-        showTrans(type) {
-            this.showTransType = type;
+        showTrans(type, tokenName) {
+            this.transType = type;
+            this.transToken = tokenName;
         },
         hideTrans() {
-            this.showTransType = '';
+            this.transType = '';
+            this.transToken = '';
         },
         
         startLoopBalance() {
@@ -100,7 +82,7 @@ export default {
         },
 
         getBalance() {
-            this.balance = this.ethWallet.getBalance();
+            this.tokenList = this.ethWallet.tokenList;
             return Promise.resolve(this.balance);
         }
     }
@@ -119,19 +101,6 @@ export default {
     box-shadow: 0px 2px 48px 1px rgba(176,192,237,0.42);
     border-radius: 2px;
     border: 1px solid rgba(246,245,245,1);
-}
-.trans-wrapper {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    overflow: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: rgba(0, 0, 0, 0.6);
-    z-index: 100;
 }
 .title {
     img {

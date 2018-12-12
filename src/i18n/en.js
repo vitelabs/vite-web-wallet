@@ -415,6 +415,13 @@ module.exports = {
             title: '快速理解VITE网关',
             text: ''
         },
+        exchange: {
+            vite: '置换VITE',
+            viteAddr: '接收VITE地址',
+            viteAmount: '置换VITE金额',
+            gas: '矿工费用',
+            btn: '确认置换'
+        }
     },
     
     pwdConfirm: {

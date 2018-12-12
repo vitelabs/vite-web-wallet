@@ -1,41 +1,41 @@
 <template>
-    <div class="trans-wrapper">
+    <div class="__trans-wrapper">
         <confirm v-show="isShowTrans" class="trans-confirm"
                  :title="$t('account.transfer')"
                  :btnUnuse="unTrans"
                  :closeIcon="true" :close="closeTrans" :singleBtn="true" 
                  :leftBtnClick="validTrans" :leftBtnTxt="$t('account.transfer')" >
 
-            <div class="row">
-                <div class="row-t">{{ $t('account.balance') }}</div>
-                <div class="balance">
-                    <img v-if="token.icon" :src="token.icon" class="icon" />
-                    {{ token.symbol }} <span>{{ showAccBalance }}</span>
+            <div class="__row">
+                <div class="__row-t">{{ $t('account.balance') }}</div>
+                <div class="__unuse-row">
+                    <img v-if="token.icon" :src="token.icon" class="__icon" />
+                    {{ token.symbol }} <span class="__right">{{ showAccBalance }}</span>
                 </div>
             </div>
 
-            <div class="row">
-                <div class="row-t">
+            <div class="__row">
+                <div class="__row-t">
                     {{ $t('account.inAddress') }}
-                    <span v-show="!isValidAddress" class="err hint">{{ $t('transList.valid.addr') }}</span>
+                    <span v-show="!isValidAddress" class="__err __hint">{{ $t('transList.valid.addr') }}</span>
                 </div>
                 <vite-input v-model="inAddress" :valid="validAddr"
                             :placeholder="$t('account.placeholder.addr')"></vite-input>
             </div>
 
-            <div class="row">
-                <div class="row-t">
+            <div class="__row">
+                <div class="__row-t">
                     {{ $t('account.sum') }}
-                    <span v-show="amountErr" class="err hint">{{ amountErr }}</span>
+                    <span v-show="amountErr" class="__err __hint">{{ amountErr }}</span>
                 </div>
                 <vite-input v-model="amount" :valid="testAmount"
                             :placeholder="$t('account.placeholder.amount')"></vite-input>
             </div>
 
-            <div class="row">
-                <div class="row-t">
+            <div class="__row">
+                <div class="__row-t">
                     {{ $t('account.remarks')}}
-                    <span class="hint" :class="{ err: messageErr }">
+                    <span class="__hint" :class="{ err: messageErr }">
                         {{ $t('account.valid.remarksLong', { len: msgBalance}) }}
                     </span>
                 </div>
@@ -298,62 +298,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~assets/scss/vars.scss";
-
-.trans-wrapper {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    overflow: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: rgba(0, 0, 0, 0.6);
-    z-index: 100;
-}
-.row {
-    margin-top: 20px;
-    &:first-child {
-        margin-top: 0;
-    }
-    .row-t {
-        position: relative;
-        font-family: $font-bold;
-        font-size: 14px;
-        color: #1D2024;
-        letter-spacing: 0.35px;
-        line-height: 16px;
-        padding-bottom: 15px;
-    }
-    .balance {
-        padding: 9px 15px;
-        border: 1px solid #D4DEE7;
-        border-radius: 2px;
-        font-size: 14px;
-        line-height: normal;
-        background: rgba(243,246,249,1);
-        span {
-            float: right;
-            color: rgba(0,122,255,1);
-        }
-        .icon {
-            margin-bottom: -4px;
-        }
-    }
-    .hint {
-        position: absolute;
-        left: 90px;
-        right: 0;
-        font-size: 12px;
-        line-height: 16px;
-        text-align: right;
-    }
-    .err {
-        color: #FF2929;
-    }
-}
+@import "~assets/scss/trans.scss";
 </style>
 
 <style lang="scss">

@@ -54,5 +54,4 @@ export default function request({ method = 'GET', path, params = {} }) {
             rej();
         };
     });
-
 }
