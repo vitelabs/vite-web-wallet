@@ -312,7 +312,7 @@ export default {
     padding-top: 40px;
     .title {
         border-left: 2px solid rgba(0, 122, 255, 0.7);
-        font-family: $font-bold;
+        font-family: $font-bold, arial, sans-serif;
         font-size: 18px;
         color: #1d2024;
         line-height: 18px;
@@ -341,7 +341,7 @@ export default {
     }
     .row-t {
         position: relative;
-        font-family: $font-bold;
+        font-family: $font-bold, arial, sans-serif;
         font-size: 14px;
         color: #1D2024;
         letter-spacing: 0.35px;
@@ -358,7 +358,7 @@ export default {
             background: #F3F6F9;
             font-size: 14px;
             color: #5E6875;
-            font-family: $font-normal;
+            font-family: $font-normal, arial, sans-serif;
         }
         input {
             width: 100%;
@@ -399,7 +399,7 @@ export default {
     font-size: 14px;
     color: #3E4A59;
     box-sizing: border-box;
-    font-family: $font-normal;
+    font-family: $font-normal, arial, sans-serif;
     opacity: 0;
     transition: opacity 0.5s ease-in-out;
     width: 0;
