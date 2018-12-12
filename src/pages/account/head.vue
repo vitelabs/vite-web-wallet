@@ -13,23 +13,8 @@
                    @blur="rename" autocomplete="off"/>
         </div>
 
-        <div class="addr-wrapper">
-            <div class="head-title">
-                <span>{{ $t('accDetail.address') }}</span>
-                <span v-click-outside="closeQrCode" ref="codeContainer" class="title_icon __pointer qrcode">
-                    <img src="../../assets/imgs/qrcode_default.svg" @click="toggleQrCode" />
-                    <div class="code-container" v-show="qrcodeShow">
-                        <div class="code">
-                            <qrcode :text="addressStr" :options="{ size:146 }" @genImage="getImage"></qrcode>
-                        </div>
-                        <div class="btn" @click="downLoadQrCode">{{ $t('accDetail.saveQrcode') }}</div>
-                    </div>
-                </span>
-                <img src="../../assets/imgs/copy_default.svg" @click="copy" class="title_icon copy __pointer"/>
-                <copyOK :copySuccess="copySuccess"></copyOK>
-            </div>
-            <div class="copy addr-content">{{ account.addr }}</div>
-        </div>
+        <vite-address :title="$t('accDetail.address')" :address="account.addr" 
+                      :addressQrcode="addressStr"></vite-address>
         
         <div class="btn-group">
             <div class="btn__small __pointer __btn-test" @click="getTestToken" :class="{'un_clickable':!getTestTokenAble}">
@@ -46,9 +31,7 @@
 
 <script>
 import Vue from 'vue';
-import qrcode from 'components/qrcode';
-import copyOK from 'components/copyOK';
-import copy from 'utils/copy';
+import viteAddress from 'components/address';
 import { stringify } from 'utils/viteSchema';
 import { getTestToken } from 'services/testToken';
 
@@ -56,7 +39,7 @@ let activeAccount = null;
 
 export default {
     components: { 
-        qrcode, copyOK
+        viteAddress
     },
     data() {
         return {
@@ -76,57 +59,6 @@ export default {
         this.addressStr = stringify({ targetAddress: this.account.addr });
     },
     methods: {
-        getImage(i) {
-            this.qrcode = i;
-        },
-        copy() {
-            copy(this.account.addr);
-
-            this.copySuccess = true;
-            setTimeout(() => {
-                this.copySuccess = false;
-            }, 1000);
-        },
-        toggleQrCode() {
-            this.qrcodeShow = !this.qrcodeShow;
-        },
-        closeQrCode(e) {
-            if (!e || !e.target) {
-                return;
-            }
-
-            let codeContainer = this.$refs.codeContainer;
-            if (!codeContainer || 
-                e.target === codeContainer ||
-                codeContainer.contains( e.target )) {
-                return;
-            }
-            
-            this.qrcodeShow = false;
-        },
-        downLoadQrCode(){
-            if (!this.qrcode) {
-                return;
-            }
-
-            // IE
-            if(!!window.ActiveXObject || 'ActiveXObject' in window) {
-                var arr = this.qrcode.split(',');
-                var mime = arr[0].match(/:(.*?);/)[1];
-                var bstr = atob(arr[1]);
-                var n = bstr.length;
-                var u8arr = new Uint8Array(n);
-                while (n--) {
-                    u8arr[n] = bstr.charCodeAt(n);
-                }
-                window.navigator.msSaveBlob(new Blob([u8arr], {
-                    type:mime
-                }), 'download.png');
-            } else {
-                location.href = this.qrcode.replace('image/png', 'image/octet-stream');
-            }
-            this.qrcodeShow = false;
-        },
         goDetail() {
             let locale = this.$i18n.locale === 'zh' ? 'zh/' : '';
             window.open(`${process.env.viteNet}${locale}account/${this.account.addr}`);
@@ -235,39 +167,6 @@ export default {
             height: 20px;
             margin-left: 20px;
         }
-        .title_icon {
-            float: right;
-            &.qrcode {
-                position: relative;
-            }
-            .code-container {
-                box-shadow: 0 2px 48px 1px rgba(176, 192, 237, 0.42);
-                width: 166px;
-                padding: 10px;
-                position: absolute;
-                right: 100%;
-                transform: translateX(20px);
-                background: #fff;
-                z-index: 1;
-                .code {
-                    width: 146px;
-                    height: 146px;
-                    margin: 10px;
-                }
-                .btn {
-                    background: #007aff;
-                    border-radius: 2px;
-                    color: #fff;
-                    margin: 10px 8px;
-                    height: 28px;
-                    text-align: center;
-                    line-height: 28px;
-                }
-            }
-            &.copy {
-                margin-right: 10px;
-            }
-        }
     }
     .addr-wrapper {
         padding-right: 20px;
@@ -275,18 +174,6 @@ export default {
         display: inline-block;
         max-width: 510px;
         text-align: left;
-        .addr-content {
-            font-size: 14px;
-            word-break: break-all;
-            width: 100%;
-            line-height: 40px;
-            box-sizing: border-box;
-            background: #f3f6f9;
-            border: 1px solid #d4dee7;
-            border-radius: 2px;
-            padding: 0 10px ;
-            color: #283d4a;
-        }
     }
     .custom-name {
         padding-right: 20px;

@@ -417,6 +417,7 @@ module.exports = {
             title: '快速理解VITE网关',
             text: ''
         },
+        exchangeVite: '置换VITE'
     },
 
     pwdConfirm: {

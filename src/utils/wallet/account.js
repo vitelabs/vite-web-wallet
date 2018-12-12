@@ -1,4 +1,3 @@
-// import { utils } from '@vite/vitejs';
 import { pwdConfirm } from 'components/password/index.js';
 import { getPowNonce } from 'services/pow';
 
@@ -14,12 +13,10 @@ const AccountType = {
 let passTimeout;
 
 class account {
-    // required (mnemonic || keystore || name) and type
-    // type (keystore || wallet)
     constructor({
-        name, pass, type,                               // walletAcc
+        name, pass, type,                               // account
         addrNum, defaultInx, mnemonic, encryptObj,      // walletAccount
-        keystore, privateKey                             // keystoreAccount
+        keystore, privateKey                            // keystoreAccount
     }) {
         this.isHoldPWD = false;
         this.type = type;

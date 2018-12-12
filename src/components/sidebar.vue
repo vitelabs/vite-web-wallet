@@ -48,6 +48,8 @@ import SBP from 'assets/imgs/SBP_default.svg';
 import SBPActive from 'assets/imgs/SBP_active.svg';
 import vote from 'assets/imgs/vote_default.svg';
 import voteActive from 'assets/imgs/vote_active.svg';
+import gateway from 'assets/imgs/gateway_default.svg';
+import gatewayActive from 'assets/imgs/gateway_pressed.svg';
 
 export default {
     components: {
@@ -60,13 +62,17 @@ export default {
         }
     },
     data() {
+        let activeAccount = this.$wallet.getActiveAccount();
+        let pageList = ['account', 'quota', 'SBP', 'vote', 'transList'];
+        if (activeAccount.type === 'wallet') {
+            pageList.push('gateway');
+        }
+
         return {
             isShowNotice: false,
             logoutHover: false,
-
             viteLogo,
-
-            pageList: ['account', 'quota', 'SBP', 'vote', 'transList', 'gateway'],
+            pageList,
             icon: {
                 account,
                 accountActive,
@@ -78,8 +84,8 @@ export default {
                 SBPActive,
                 vote,
                 voteActive,
-                gateway: '',
-                gatewayActive: ''
+                gateway,
+                gatewayActive
             },
             setting,
             settingActive,

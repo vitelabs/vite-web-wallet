@@ -35,8 +35,15 @@ export default {
         }
     },
     data() {
+        let activeAccount = this.$wallet.getActiveAccount();
+        let pageList = ['account', 'quota', 'SBP', 'vote', 'transList'];
+        if (activeAccount.type === 'wallet') {
+            pageList.push('gateway');
+        }
+        pageList.push('setting');
+
         return {
-            pageList: ['quota', 'SBP', 'vote', 'transList', 'gateway', 'setting'],
+            pageList,
             viteLogo,
             showList: false
         };

@@ -1,6 +1,6 @@
 import qs from 'qs';
 
-export default  function request({ method = 'GET', path, params = {} }) {
+export default function request({ method = 'GET', path, params = {} }) {
     method = method.toUpperCase();
 
     const xhr = new XMLHttpRequest();
