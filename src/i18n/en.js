@@ -420,7 +420,8 @@ module.exports = {
             viteAddr: '接收VITE地址',
             viteAmount: '置换VITE金额',
             gas: '矿工费用',
-            btn: '确认置换'
+            btn: '确认置换',
+            success: '置换操作成功，预计20分钟后到账'
         }
     },
     

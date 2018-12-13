@@ -30,6 +30,11 @@
         padding-bottom: 15px;
     }
 
+    .__right {
+        float: right;
+        color: rgba(0,122,255,1);
+    }
+
     .__unuse-row {
         padding: 9px 15px;
         border: 1px solid #D4DEE7;
@@ -44,10 +49,6 @@
         }
         .__icon {
             margin-bottom: -4px;
-        }
-        .__right {
-            float: right;
-            color: rgba(0,122,255,1);
         }
     }
 

@@ -293,10 +293,6 @@ export default {
     .account-head-wrapper .addr-wrapper {
         width: 100%;
         min-width: 0;
-        .addr-content {
-            padding: 10px;
-            line-height: 20px;
-        }
     }
 }
 </style>

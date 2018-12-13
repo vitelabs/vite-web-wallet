@@ -1,6 +1,6 @@
 const web3 = require('web3');
-const ethProvider = require('web3-providers-ws');
 const Tx = require('ethereumjs-tx');
+const ethProvider = require('web3-providers-ws');
 
 import { bind as gwBind } from 'services/gateway';
 import { timer } from 'utils/asyncFlow';
@@ -9,14 +9,16 @@ import { viteContractAbi, viteContractAddr, blackHole, signBinding } from './vit
 
 const gas = 60000;
 const balanceTime = 2000;
+let provider = null;
+
+// console.log(signBinding());
 
 class ethWallet {
     constructor({
         mnemonic
     }) {
-        let provider = new ethProvider(process.env.ethServer);
+        provider = provider || new ethProvider(process.env.ethServer);
         this.web3 = new web3(provider);
-
         this.mnemonic = mnemonic;
         this.defaultAddrInx = 0;
         this.addrs = [];
@@ -118,13 +120,33 @@ class ethWallet {
         return addrObj.hexAddr;
     }
 
+    isAddress(address) {
+        return this.web3.utils.isAddress(address);
+    }
+
     // ETH
     async sendTx({
         toAddress, value, gwei
     }) {
-        const ethTxHash = await getTxHash.call(this, {
+        const { ethTxHash } = await getTxHash.call(this, {
             toAddress, value, gwei,
             data: ''
+        });
+
+        return sendEthTx.call(this, ethTxHash);
+    }
+
+    async sendContractTx({
+        toAddress, value, gwei
+    }) {
+        const { ethTxHash } = await getTxHash.call(this, {
+            toAddress: viteContractAddr, 
+            value: '0x00',
+            gwei,
+            // contranctMethod(transfer), signature hash
+            // toEthAddress (Remove 0x and filled up to 64 bits)
+            // value (Remove 0x and filled up to 64 bits)
+            data: '0xa9059cbb' + addPreZero( toAddress.slice(2) ) + addPreZero( this.web3.utils.toHex(value).substr(2) ), 
         });
 
         return sendEthTx.call(this, ethTxHash);
@@ -133,30 +155,35 @@ class ethWallet {
     async exchangeVite({
         viteAddr, value, gwei
     }) {
+        console.log(value);
+
         let acount = this.addrs[this.defaultAddrInx];
         let ethAddr = acount.hexAddr;
         let privateKey = acount.wallet.privKey;
-        let publicKey = acount.wallet.pubKey;
+        // let publicKey = acount.wallet.pubKey;
 
-        const ethTxHash = await getTxHash.call(this, {
+        const { ethTxHash, hash } = await getTxHash.call(this, {
             toAddress: viteContractAddr, 
-            value, gwei,
+            value: '0x00',
+            gwei,
             // contranctMethod(transfer), signature hash
             // toEthAddress (Remove 0x and filled up to 64 bits)
             // value (Remove 0x and filled up to 64 bits)
             data: '0xa9059cbb' + addPreZero( blackHole.slice(2) ) + addPreZero( this.web3.utils.toHex(value).substr(2) ), 
         });
 
+        console.log(hash);
+
         let signResult = signBinding({
-            ethTxHash, viteAddr, value, privateKey, publicKey, ethAddr
+            hash, viteAddr, value, privateKey, ethAddr
         });
         console.log(signResult);
 
         const bindres = await gwBind(signResult);
         console.log(bindres);
 
-        return bindres;
-        // return sendEthTx.call(this, ethTxHash);
+        // return bindres;
+        return sendEthTx.call(this, ethTxHash);
     }
 }
 
@@ -176,7 +203,7 @@ function addPreZero(num){
 async function getTxHash({
     toAddress, value, data, gwei
 }) {
-    let g = gwei * gas;
+    let g = gwei * gas * 1000;
 
     let acount = this.addrs[this.defaultAddrInx];
     let ethAddr = acount.hexAddr;
@@ -191,18 +218,20 @@ async function getTxHash({
         to: toAddress,
         from: ethAddr,
         value,
-        data
+        data,
+        chainId: process.env.NODE_ENV === 'production' ? 1 : 3
     };
-
-    console.log(txData);
-
     let tx = new Tx(txData);
     tx.sign(privateKey);
 
+    let hash = tx.hash().toString('hex');
     let serializedTx = tx.serialize().toString('hex');
     let ethTxHash = '0x' + serializedTx.toString('hex');
 
-    return ethTxHash;
+    return {
+        hash: '0x' + hash,
+        ethTxHash
+    };
 }
 
 function sendEthTx(ethTxHash) {

@@ -8,12 +8,10 @@
                 {{ $t('account.balance') }}<span class="num">{{ balance }}</span>
             </div>
             <div class="btn-list">
-                <!-- @click="_sendTx('transfer', token.name)" -->
-                <div class="btn unuse __pointer">{{ $t('account.sendTrans') }}</div>
+                <div class="btn __pointer" :class="classList" 
+                     @click="_sendTx('transfer', token.name)">{{ $t('account.sendTrans') }}</div>
                 <div v-show="token.symbol === 'VITE'" @click="_sendTx('exchange', token.name)"
-                     class="btn __pointer" :class="{ 
-                         '__btn_all_in': balance && balance !== 0,
-                         'unuse': !balance || balance === 0 }">
+                     class="btn __pointer" :class="classList">
                     {{ $t('gateway.exchange.vite') }}</div>
             </div>
         </div>
@@ -45,6 +43,13 @@ export default {
             let decimals = this.token.decimals;
             let balance = this.token.balance;
             return +balance ? BigNumber.toBasic(balance, decimals) : 0;
+        },
+        classList() {
+            let haveBalance = this.balance && this.balance !== 0;
+            return {
+                '__btn_all_in': haveBalance,
+                'unuse': !haveBalance
+            };    
         }
     },
     methods: {
@@ -118,6 +123,14 @@ export default {
                 }
             }
         }
+    }
+}
+
+@media only screen and (max-width: 550px) {
+    .token-wrapper {
+        width: 100%;
+        margin-top: 15px;
+        margin-right: 0px;
     }
 }
 </style>
