@@ -156,11 +156,10 @@ class ethWallet {
         viteAddr, value, gwei
     }) {
         console.log(value);
-
+        // console.log(gwei = 80);
         let acount = this.addrs[this.defaultAddrInx];
         let ethAddr = acount.hexAddr;
         let privateKey = acount.wallet.privKey;
-        // let publicKey = acount.wallet.pubKey;
 
         const { ethTxHash, hash } = await getTxHash.call(this, {
             toAddress: viteContractAddr, 
@@ -177,12 +176,9 @@ class ethWallet {
         let signResult = signBinding({
             hash, viteAddr, value, privateKey, ethAddr
         });
-        console.log(signResult);
 
-        const bindres = await gwBind(signResult);
-        console.log(bindres);
+        await gwBind(signResult);
 
-        // return bindres;
         return sendEthTx.call(this, ethTxHash);
     }
 }
@@ -221,6 +217,8 @@ async function getTxHash({
         data,
         chainId: process.env.NODE_ENV === 'production' ? 1 : 3
     };
+    console.log(txData);
+
     let tx = new Tx(txData);
     tx.sign(privateKey);
 
