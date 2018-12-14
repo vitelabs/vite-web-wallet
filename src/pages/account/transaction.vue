@@ -1,49 +1,45 @@
 <template>
-    <div class="trans-wrapper">
+    <div class="__trans-wrapper">
         <confirm v-show="isShowTrans" class="trans-confirm"
-                 :title="$t('accDetail.transfer')"
+                 :title="$t('account.transfer')"
                  :btnUnuse="unTrans"
                  :closeIcon="true" :close="closeTrans" :singleBtn="true" 
-                 :leftBtnClick="validTrans" :leftBtnTxt="$t('accDetail.transfer')" >
+                 :leftBtnClick="validTrans" :leftBtnTxt="$t('account.transfer')" >
 
-            <div class="row">
-                <div class="row-t">{{ $t('accDetail.balance') }}</div>
-                <div class="row-content balance">
-                    <img v-if="token.icon" :src="token.icon" class="icon" />
-                    {{ token.symbol }} <span>{{ showAccBalance }}</span>
+            <div class="__row">
+                <div class="__row-t">{{ $t('account.balance') }}</div>
+                <div class="__unuse-row">
+                    <img v-if="token.icon" :src="token.icon" class="__icon" />
+                    {{ token.symbol }} <span class="__right">{{ showAccBalance }}</span>
                 </div>
             </div>
 
-            <div class="row">
-                <div class="row-t">
-                    {{ $t('accDetail.inAddress') }}
-                    <span v-show="!isValidAddress" class="err hint">{{ $t('transList.valid.addr') }}</span>
+            <div class="__row">
+                <div class="__row-t">
+                    {{ $t('account.inAddress') }}
+                    <span v-show="!isValidAddress" class="__err __hint">{{ $t('transList.valid.addr') }}</span>
                 </div>
-                <div class="row-content">
-                    <input ref="inAddr" v-model="inAddress" :placeholder="$t('accDetail.placeholder.addr')" />
-                </div>
+                <vite-input v-model="inAddress" :valid="validAddr"
+                            :placeholder="$t('account.placeholder.addr')"></vite-input>
             </div>
 
-            <div class="row">
-                <div class="row-t">
-                    {{ $t('accDetail.sum') }}
-                    <span v-show="amountErr" class="err hint">{{ amountErr }}</span>
+            <div class="__row">
+                <div class="__row-t">
+                    {{ $t('account.sum') }}
+                    <span v-show="amountErr" class="__err __hint">{{ amountErr }}</span>
                 </div>
-                <div class="row-content __btn_text __input">
-                    <input v-model="amount" :placeholder="$t('accDetail.placeholder.amount')"  />
-                </div>
+                <vite-input v-model="amount" :valid="testAmount"
+                            :placeholder="$t('account.placeholder.amount')"></vite-input>
             </div>
 
-            <div class="row">
-                <div class="row-t">
-                    {{ $t('accDetail.remarks')}}
-                    <span class="hint" :class="{ err: messageErr }">
-                        {{ $t('accDetail.valid.remarksLong', { len: msgBalance}) }}
+            <div class="__row">
+                <div class="__row-t">
+                    {{ $t('account.remarks')}}
+                    <span class="__hint" :class="{ err: messageErr }">
+                        {{ $t('account.valid.remarksLong', { len: msgBalance}) }}
                     </span>
                 </div>
-                <div class="row-content">
-                    <input v-model="message" :placeholder="$t('accDetail.placeholder.remarks')" autocomplete="off" />
-                </div>
+                <vite-input v-model="message" :placeholder="$t('account.placeholder.remarks')"></vite-input>
             </div>
         </confirm>
 
@@ -55,14 +51,13 @@
 import Vue from 'vue';
 import confirm from 'components/confirm';
 import powProcess from 'components/powProcess';
-
-let inAddrTimeout = null;
-let amountTimeout = null;
-let messageTimeout = null;
+import viteInput from 'components/viteInput';
+import BigNumber from 'utils/bigNumber';
+import { encoder, address } from 'utils/tools';
 
 export default {
     components: {
-        powProcess, confirm
+        powProcess, confirm, viteInput
     },
     props: {
         token: {
@@ -84,11 +79,6 @@ export default {
         this.$onEnterKey(() => {
             this.validTrans();
         });
-    },
-    destroyed() {
-        clearTimeout(amountTimeout);
-        clearTimeout(inAddrTimeout);
-        clearTimeout(messageTimeout);
     },
     data() {
         return {
@@ -115,57 +105,29 @@ export default {
             return balance;
         },
         showAccBalance() {
-            return viteWallet.BigNumber.toBasic(this.accBalance, this.token.decimals);
+            return BigNumber.toBasic(this.accBalance, this.token.decimals);
         },
         tokenBalList() {
             return this.$store.state.account.balance.balanceInfos;
         },
         msgBalance() {
             let message = this.$trim(this.message);
-            let length = viteWallet.utils.getBytesSize(message);
+            let length = encoder.getBytesSize(message);
             return 120 - length;
         },
         messageErr() {
             return this.msgBalance < 0;
         }
     },
-    watch: {
-        inAddress: function() {
-            clearTimeout(inAddrTimeout);
-            inAddrTimeout = null;
-
-            inAddrTimeout = setTimeout(()=> {
-                inAddrTimeout = null;
-                
-                if (!this.inAddress) {
-                    this.isValidAddress = false;
-                    return;
-                }
-
-                try {
-                    this.isValidAddress = viteWallet.Types.isValidHexAddr(this.inAddress);
-                } catch(err) {
-                    console.warn(err);
-                    this.isValidAddress = false;
-                }
-            }, 500);
-        },
-        amount: function() {
-            clearTimeout(amountTimeout);
-            amountTimeout = null;
-
-            amountTimeout = setTimeout(()=> {
-                amountTimeout = null;
-                this.testAmount();
-            }, 500);
-        },
-    },
     methods: {
-        showQuota() {
+        validAddr() {
+            this.isValidAddress = this.inAddress && address.isValidHexAddr(this.inAddress);
+        },
+        showQuota(accountBlock, startTime) {
             this.isShowTrans = false;
             this.$confirm({
                 showMask: false,
-                title: this.$t('accDetail.quota.title'),
+                title: this.$t('account.quota.title'),
                 closeBtn: {
                     show: true,
                     click: () => {
@@ -173,7 +135,7 @@ export default {
                     }
                 },
                 leftBtn: {
-                    text: this.$t('accDetail.quota.left'),
+                    text: this.$t('account.quota.left'),
                     click: () => {
                         this.$router.push({
                             name: 'quota'
@@ -181,12 +143,12 @@ export default {
                     }
                 },
                 rightBtn: {
-                    text: this.$t('accDetail.quota.right'),
+                    text: this.$t('account.quota.right'),
                     click: () => {
-                        this.startPow();
+                        this.startPow(accountBlock, startTime);
                     }
                 },
-                content: this.$t('accDetail.quota.describe')
+                content: this.$t('account.quota.describe')
             });
         },
 
@@ -198,13 +160,13 @@ export default {
                 return false;
             }
 
-            if (viteWallet.BigNumber.isEqual(this.amount, 0)) {
-                this.amountErr = this.$t('accDetail.hint.amount');
+            if (BigNumber.isEqual(this.amount, 0)) {
+                this.amountErr = this.$t('account.hint.amount');
                 return false;
             }
 
-            let amount = viteWallet.BigNumber.toMin(this.amount, this.token.decimals);
-            if (viteWallet.BigNumber.compared(this.accBalance, amount) < 0) {
+            let amount = BigNumber.toMin(this.amount, this.token.decimals);
+            if (BigNumber.compared(this.accBalance, amount) < 0) {
                 this.amountErr = this.$t('transList.valid.bal');
                 return false;
             }
@@ -246,7 +208,7 @@ export default {
             }
             
             this.loading = true;
-            let amount =  viteWallet.BigNumber.toMin(this.amount, this.token.decimals);
+            let amount =  BigNumber.toMin(this.amount, this.token.decimals);
 
             let successText = this.$t('transList.valid.succ');
             let failText = this.$t('hint.err');
@@ -256,8 +218,9 @@ export default {
                 this.$toast(this.$t('hint.err'));
                 return;
             }
+            
             activeAccount.sendTx({
-                toAddr: this.inAddress,
+                toAddress: this.inAddress,
                 tokenId: this.token.id,
                 amount,
                 message: this.message
@@ -284,14 +247,14 @@ export default {
                     this.amountErr = this.$t('transList.valid.bal');
                     return;
                 } else if (code === -35002) {
-                    this.showQuota();
+                    this.showQuota(err.accountBlock, new Date().getTime());
                     return;
                 }
 
                 this.$toast(null, err);
             });
         },
-        startPow() {
+        startPow(accountBlock, startTime) {
             let activeAccount = this.$wallet.getActiveAccount();
             if (!activeAccount) {
                 this.$toast(this.$t('hint.err'));
@@ -305,27 +268,20 @@ export default {
             };
 
             this.loading = true;
-            let amount =  viteWallet.BigNumber.toMin(this.amount, this.token.decimals);
-
-            this.$refs.powProcess && this.$refs.powProcess.startPowTx({
-                toAddr: this.inAddress, 
-                amount,
-                tokenId: this.token.id,
-                message: this.message
-            }, 'sendBlock').then(() => {
+            this.$refs.powProcess && this.$refs.powProcess.startPowTx(accountBlock, startTime).then(() => {
                 this.transSuccess();
             }).catch((err, type) => {
                 console.warn(type, err);
 
                 if (type === 0) {
-                    transError( this.$t('accDetail.trans.powErr') );
+                    transError( this.$t('account.trans.powErr') );
                     return;
                 }
 
                 let code  = err && err.error ? err.error.code || -1 : 
                     err ? err.code : -1;
                 if (code === -35002) {
-                    transError(this.$t('accDetail.trans.powTransErr'));
+                    transError(this.$t('account.trans.powTransErr'));
                     return;
                 }
                 transError(err);
@@ -342,70 +298,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~assets/scss/vars.scss";
-
-.trans-wrapper {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    overflow: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: rgba(0, 0, 0, 0.6);
-    z-index: 100;
-}
-
-.row {
-    margin-top: 20px;
-    &:first-child {
-        margin-top: 0;
-    }
-    .row-t {
-        position: relative;
-        font-family: $font-bold;
-        font-size: 14px;
-        color: #1D2024;
-        letter-spacing: 0.35px;
-        line-height: 16px;
-        padding-bottom: 15px;
-    }
-    .balance {
-        background: rgba(243,246,249,1);
-    }
-    .row-content {
-        padding: 9px 15px;
-        border: 1px solid #D4DEE7;
-        border-radius: 2px;
-        font-size: 14px;
-        line-height: normal;
-        &.balance { 
-            span {
-                float: right;
-                color: rgba(0,122,255,1);
-            }
-            .icon {
-                margin-bottom: -4px;
-            }
-        }
-        input {
-            width: 100%;
-        }
-    }
-    .hint {
-        position: absolute;
-        left: 90px;
-        right: 0;
-        font-size: 12px;
-        line-height: 16px;
-        text-align: right;
-    }
-    .err {
-        color: #FF2929;
-    }
-}
+@import "~assets/scss/trans.scss";
 </style>
 
 <style lang="scss">

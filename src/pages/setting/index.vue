@@ -26,7 +26,7 @@ export default {
     },
     data() {
         let activeAccount = this.$wallet.getActiveAccount();
-        let showPassWrapper = activeAccount ? !!activeAccount.isWalletAcc : false;
+        let showPassWrapper = activeAccount ? activeAccount.type === 'wallet' : false;
 
         return {
             isSubmiting: false,
@@ -43,7 +43,7 @@ export default {
             }
 
             if (!this.pass) {
-                this.$toast( this.$t('accDetail.hint.wrong') );
+                this.$toast( this.$t('account.hint.wrong') );
                 return;
             }
 
@@ -51,11 +51,11 @@ export default {
             this.activeAccount.verify(this.pass).then((result) => {
                 this.isSubmiting = false;
                 this.lock = !result;
-                this.lock && this.$toast( this.$t('accDetail.hint.wrong') );
+                this.lock && this.$toast( this.$t('account.hint.wrong') );
             }).catch(() => {
                 this.isSubmiting = false;
                 this.lock = true;
-                this.$toast( this.$t('accDetail.hint.wrong') );
+                this.$toast( this.$t('account.hint.wrong') );
             });
         }
     }

@@ -1,5 +1,5 @@
 <template>
-    <div class="account-wrapper">
+    <div class="account-wrapper __wrapper">
         <div class="head">
             <sync-block class="sync-block"></sync-block>
             <go-net-btn class="net-btn"></go-net-btn>
@@ -16,8 +16,8 @@
 <script>
 import syncBlock from 'components/syncBlock';
 import goNetBtn from 'components/goNetBtn';
+import tokenCard from 'components/tokenCard';
 import accountHead from './head';
-import tokenCard from './tokenCard';
 import transaction from './transaction';
 
 export default {
@@ -67,6 +67,11 @@ export default {
 </script>
 
 <style lang="scss" rel="stylesheet/scss">
+.page-content .account-wrapper.__wrapper {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
 .account-wrapper {
     position: relative;
     box-sizing: border-box;
@@ -74,7 +79,6 @@ export default {
     flex-direction: column;
     overflow: auto;
     height: 100%;
-    padding: 0 40px;
     .head {
         position: relative;
         text-align: center;
@@ -100,6 +104,11 @@ export default {
 @media only screen and (max-width: 850px) {
     .account-wrapper .head {
         text-align: left;
+        margin-top: 0px;
+        margin-bottom: 20px;
+    }
+    .page-content .account-wrapper.__wrapper {
+        padding-top: 40px;
     }
 }
 
@@ -116,8 +125,8 @@ export default {
 }
 
 @media only screen and (max-width: 550px) {
-    .account-wrapper {
-        padding: 0 15px;
+    .account-wrapper .head {
+        margin-bottom: 0px;
     }
     .token-list {
         display: block;

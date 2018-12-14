@@ -1,3 +1,5 @@
+import BigNumber from 'utils/bigNumber';
+
 const state = {
     onroad: {
         balanceInfos: {}
@@ -8,7 +10,19 @@ const state = {
 };
 
 const mutations = {
-    commitBalanceInfo(state, payload) {
+    commitBalanceInfo(state, activeAccount) {
+        let payload = activeAccount.syncGetBalance();
+
+        if (!payload) {
+            state.balance = {
+                balanceInfos:{}
+            };
+            state.onroad = {
+                balanceInfos:{}
+            };
+            return;
+        }
+
         state.balance = payload.balance || {};
         state.balance.balanceInfos = state.balance && state.balance.tokenBalanceInfoMap ? state.balance.tokenBalanceInfoMap : {};
 
@@ -25,23 +39,6 @@ const mutations = {
     }
 };
 
-const actions = {
-    getBalanceInfo({ commit }, activeAccount) {
-        return activeAccount.getBalance().then(data => {
-            commit('commitBalanceInfo', data);
-
-            let balanceInfos = data && data.balance && data.balance.tokenBalanceInfoMap ? 
-                data.balance.tokenBalanceInfoMap : {};
-            for (let tokenId in balanceInfos) {
-                let item = balanceInfos[tokenId];
-                viteWallet.Ledger.setTokenInfo(item.tokenInfo || null, tokenId);
-            }
-        }).catch(e => {
-            console.warn(e);
-        });
-    }
-};
-
 const getters = {
     tokenBalanceList(state) {
         let balanceInfo = Object.create(null);
@@ -51,7 +48,7 @@ const getters = {
 
             let tokenInfo = item.tokenInfo;
             let decimals = tokenInfo.decimals;
-            let balance = viteWallet.BigNumber.toBasic(item.totalAmount, decimals);
+            let balance = BigNumber.toBasic(item.totalAmount, decimals);
 
             balanceInfo[tokenId] = tokenInfo[tokenId] || {};
             balanceInfo[tokenId].id = tokenId;
@@ -66,7 +63,7 @@ const getters = {
 
             let tokenInfo = item.tokenInfo;
             let decimals = tokenInfo.decimals;
-            let balance = viteWallet.BigNumber.toBasic(item.totalAmount, decimals);
+            let balance = BigNumber.toBasic(item.totalAmount, decimals);
 
             balanceInfo[tokenId] = balanceInfo[tokenId] || {};
             balanceInfo[tokenId].id = balanceInfo[tokenId].id || tokenInfo.id;
@@ -98,6 +95,5 @@ const getters = {
 export default {
     state,
     mutations,
-    actions,
     getters
 };

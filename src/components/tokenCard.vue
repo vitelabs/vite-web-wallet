@@ -6,19 +6,19 @@
         </div>
         <div class="body">
             <div class="item">
-                <span>{{ $t('accDetail.balance') }}</span>
+                <span>{{ $t('account.balance') }}</span>
                 <span class="balance">{{ opt.balance || 0 }}</span>
             </div>
             <div class="item">
-                <span>{{ $t('accDetail.fundFloat') }}</span>
+                <span>{{ $t('account.fundFloat') }}</span>
                 <span class="balance">{{ opt.fundFloat || 0 }}</span>
             </div>
             <div class="token-tips">
-                <span>{{ opt.onroadNum || 0 }} {{ $t('accDetail.pend') }}</span>
+                <span>{{ opt.onroadNum || 0 }} {{ $t('account.pend') }}</span>
             </div>
         </div>
         <div class="btn __pointer" :class="{ 'unuse': !opt.id || !opt.balance }" 
-             @click="_sendTx">{{ $t('accDetail.sendTrans') }}</div>
+             @click="_sendTx">{{ $t('account.sendTrans') }}</div>
     </div>
 </template>
 

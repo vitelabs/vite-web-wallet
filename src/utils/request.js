@@ -1,6 +1,6 @@
 import qs from 'qs';
 
-export default  function request({ method = 'GET', path, params = {} }) {
+export default function request({ method = 'GET', path, params = {} }) {
     method = method.toUpperCase();
 
     const xhr = new XMLHttpRequest();
@@ -13,9 +13,12 @@ export default  function request({ method = 'GET', path, params = {} }) {
     );
 
     xhr.open(method, path, true);
-    xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded; charset=utf-8');
+    xhr.setRequestHeader('content-type', 'application/json; charset=utf-8');
+
+    console.log(xhr.body);
+
     if (method === 'POST') {
-        xhr.send(qsStr);
+        xhr.send(JSON.stringify(params));
     } else {
         xhr.send();
     }
@@ -24,8 +27,9 @@ export default  function request({ method = 'GET', path, params = {} }) {
         xhr.onload = function () {
             if (xhr.status == 200) {
                 try {
+                    console.log(xhr.responseText);
                     let { code, msg, data, error } = JSON.parse(xhr.responseText);
-                    if (code !== 0) {
+                    if (code !== 200) {
                         return rej({
                             code,
                             message: msg || error
@@ -54,5 +58,4 @@ export default  function request({ method = 'GET', path, params = {} }) {
             rej();
         };
     });
-
 }

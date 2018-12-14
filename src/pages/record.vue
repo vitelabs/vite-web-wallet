@@ -78,6 +78,10 @@ export default {
                 this.$router.push({
                     name: 'index'
                 });
+            }).catch((err) => {
+                console.warn(err);
+                this.isLoading = false;
+                this.$toast( this.$t('hint.err') );
             });
         }
     }
