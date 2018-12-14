@@ -29,7 +29,7 @@ export default function request({ method = 'GET', path, params = {} }) {
                 try {
                     console.log(xhr.responseText);
                     let { code, msg, data, error } = JSON.parse(xhr.responseText);
-                    if (code !== 0) {
+                    if (code !== 200) {
                         return rej({
                             code,
                             message: msg || error
