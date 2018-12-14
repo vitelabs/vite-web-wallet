@@ -27,7 +27,12 @@ module.exports = {
         7: 'Withdrawal of Staking Quota',
         8: 'Token Issuance',
         9: 'Withdrawal of Staking Token',
-        10: 'Transfer'
+        10: 'Transfer',
+        11: 'Transfer',
+        12: 'Transfer',
+        13: 'Transfer',
+        14: 'Transfer',
+        15: 'Transfer'
     },
     
     firstNotice: {
@@ -124,7 +129,7 @@ module.exports = {
     },
 
     // account detail
-    accDetail: {
+    account: {
         title: 'Account Detail',
         transfer: 'Transfer',
         getTestToken: 'Get Test Tokens',
@@ -403,7 +408,23 @@ module.exports = {
         }
     },
 
-
+    // gateway
+    gateway: {
+        title: 'VITE网关',
+        help: {
+            title: '快速理解VITE网关',
+            text: ''
+        },
+        exchange: {
+            vite: '置换VITE',
+            viteAddr: '接收VITE地址',
+            viteAmount: '置换VITE金额',
+            gas: '矿工费用',
+            btn: '确认置换',
+            success: '置换操作成功，预计20分钟后到账'
+        }
+    },
+    
     pwdConfirm: {
         conf: 'Open password-free mode within 5 minutes',
         title: 'Password',

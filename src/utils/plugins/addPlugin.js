@@ -1,7 +1,7 @@
 import toast from 'components/toast/index.js';
 import confirm from 'components/confirm/index.js';
 import statistics from 'utils/statistics';
-import wallet from 'utils/wallet';
+import { wallet } from 'utils/wallet';
 
 document.addEventListener('drop', (e) => {
     e.preventDefault();
@@ -35,7 +35,7 @@ export default {
             }
         });
 
-        Vue.prototype.$wallet = wallet;
+        Vue.prototype.$wallet = new wallet();
         Vue.prototype.$validAmount = (amount = '') => {
             return /(^(\d+)$)|(^(\d+[.]\d{1,8})$)/g.test(amount);
         };

@@ -77,7 +77,7 @@ export default {
             this.stopLoopBalance();
             let activeAccount = this.$wallet.getActiveAccount();
             balanceInfoInst = new timer(()=>{
-                return this.$store.dispatch('getBalanceInfo', activeAccount);
+                return this.$store.commit('commitBalanceInfo', activeAccount);
             }, loopTime.ledger_getBalance);
             balanceInfoInst.start();
         },

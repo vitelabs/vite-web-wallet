@@ -6,7 +6,12 @@ module.exports = {
         proxy: {
             '/api': {
                 target: 'https://testnet.vite.net',
-                changeOrigin:true,
+                changeOrigin: true,
+                secure: false
+            },
+            '/gw': {
+                target: 'http://132.232.60.116:8000',
+                changeOrigin: true,
                 secure: false
             }
         }

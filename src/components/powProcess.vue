@@ -13,6 +13,8 @@
 
 <script>
 import loading from 'components/loading';
+import { getPowNonce } from 'services/pow';
+
 let processTimeout;
 
 export default {
@@ -66,38 +68,47 @@ export default {
             this.isShow = false;
             this.cancel();
         },
-        startPowTx(t, type, cb) {
+        async startPowTx(accountBlock, startTime) {
+            let now = new Date().getTime();
+            if (startTime && now - startTime > 2000) {
+                accountBlock.prevHash = null;
+                accountBlock.height = null;
+                accountBlock.snapshotHash = null;
+                try {
+                    accountBlock = await $ViteJS.buildinTxBlock.getAccountBlock.async(accountBlock);
+                } catch(e) {
+                    this.isShow = false;
+                    this.$emit('pow-finish');
+                    return Promise.reject(e, 0);
+                }
+            }
+
             this.isShow = true;
             const activeAccount = this.$wallet.getActiveAccount();
 
             return new Promise((res, rej) => {
-                activeAccount
-                    .getBlock(t, type, true)
-                    .then(block => {
-                        if (!this.isShow) {
-                            return;
-                        }
-                        this.stopPow(() => {
-                            activeAccount
-                                .sendRawTx(block)
-                                .then(data => {
-                                    this.isShow = false;
-                                    cb && cb(true);
-                                    res(data);
-                                })
-                                .catch(e => {
-                                    this.isShow = false;
-                                    cb && cb(false);
-                                    rej(e, 1);
-                                });
+                getPowNonce(activeAccount.getDefaultAddr(), accountBlock.prevHash).then((data) => {
+                    accountBlock.difficulty = data.difficulty;
+                    accountBlock.nonce = data.nonce;
+
+                    if (!this.isShow) {
+                        return;
+                    }
+
+                    this.stopPow(() => {
+                        activeAccount.sendRawTx(accountBlock).then(data => {
+                            this.isShow = false;
+                            res(data);
+                        }).catch(e => {
+                            this.isShow = false;
+                            rej(e, 1);
                         });
-                    })
-                    .catch((e) => {
-                        this.isShow = false;
-                        this.$emit('pow-finish');
-                        cb && cb(false);
-                        rej(e, 0);
                     });
+                }).catch((e) => {
+                    this.isShow = false;
+                    this.$emit('pow-finish');
+                    rej(e, 0);
+                });
             });
         },
         stopPow(cb) {

@@ -48,6 +48,7 @@ import { quotaConfirm } from 'components/quota/index';
 import tooltips from 'components/tooltips';
 import date from 'utils/date.js';
 import ellipsisAddr from 'utils/ellipsisAddr.js';
+import BigNumber from 'utils/bigNumber';
 
 const amount = 500000;
 
@@ -90,8 +91,8 @@ export default {
                 return '';
             }
             let balance = this.tokenBalList[this.tokenInfo.tokenId] ? this.tokenBalList[this.tokenInfo.tokenId].totalAmount : 0;
-            let minAmount = viteWallet.BigNumber.toMin(amount, this.tokenInfo.decimals);
-            if (viteWallet.BigNumber.compared(balance, minAmount) < 0) {
+            let minAmount = BigNumber.toMin(amount, this.tokenInfo.decimals);
+            if (BigNumber.compared(balance, minAmount) < 0) {
                 return this.$t('transList.valid.bal');
             }
             return '';
@@ -111,9 +112,9 @@ export default {
             let list = [];
 
             registrationList.forEach(item => {
-                let isMaturity = viteWallet.BigNumber.compared(item.withdrawHeight, currentHeight) <= 0;
-                let isCancel = item.cancelHeight && !viteWallet.BigNumber.isEqual(item.cancelHeight, 0);
-                let isReward = !viteWallet.BigNumber.isEqual(item.availableReward, 0);
+                let isMaturity = BigNumber.compared(item.withdrawHeight, currentHeight) <= 0;
+                let isCancel = item.cancelHeight && !BigNumber.isEqual(item.cancelHeight, 0);
+                let isReward = !BigNumber.isEqual(item.availableReward, 0);
                 let addr = ellipsisAddr(item.nodeAddr, 6);
                 
                 let day = date(item.withdrawTime * 1000, this.$i18n.locale);
@@ -123,10 +124,10 @@ export default {
                     isReward,
                     name: item.name,
                     nodeAddr: addr,
-                    pledgeAmount: viteWallet.BigNumber.toBasic(item.pledgeAmount, decimals) + ' ' +  this.tokenInfo.tokenSymbol,
+                    pledgeAmount: BigNumber.toBasic(item.pledgeAmount, decimals) + ' ' +  this.tokenInfo.tokenSymbol,
                     withdrawHeight: item.withdrawHeight,
                     time: day,
-                    availableReward: viteWallet.BigNumber.toBasic(item.availableReward, decimals) + ' ' +  this.tokenInfo.tokenSymbol,
+                    availableReward: BigNumber.toBasic(item.availableReward, decimals) + ' ' +  this.tokenInfo.tokenSymbol,
                     rawData: item
                 });
             });
@@ -152,7 +153,7 @@ export default {
 
             this.sendTx({
                 producerAddr, amount, nodeName
-            }, 'registerBlock').then(() => {
+            }, 'SBPreg').then(() => {
                 this.$toast(this.$t('SBP.section1.registerSuccess'));
                 this.$store.dispatch('loopRegList', {
                     address: this.address,
@@ -161,7 +162,7 @@ export default {
                     producer: producerAddr
                 });
             }).catch((err) => {
-                console.log(err);
+                console.warn(err);
                 if (err && err.error && err.error.code && err.error.code === -35002) {
                     quotaConfirm({
                         operate: this.$t('SBP.register')
@@ -203,7 +204,7 @@ export default {
 
                     this.sendTx({
                         nodeName
-                    }, 'cancelRegisterBlock').then(()=>{
+                    }, 'revokeReg').then(()=>{
                         this.$toast(this.$t('SBP.section2.cancelSuccess'));
                         this.$store.dispatch('loopRegList', {
                             address: this.address,

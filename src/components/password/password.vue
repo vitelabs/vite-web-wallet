@@ -145,7 +145,7 @@ export default {
     }
 }
 .hold-pwd {
-    font-family: $font-normal;
+    font-family: $font-normal, arial, sans-serif;
     font-size: 14px;
     color: #1D2024;
     margin-top: 12px;

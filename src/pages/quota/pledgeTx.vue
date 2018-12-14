@@ -10,11 +10,10 @@
                     {{ $t('quota.amount') }}
                     <span v-show="amountErr" class="err">{{ amountErr }}</span>
                 </div>
-                <div class="input-item all __ellipsis">
-                    <input v-model="amount" class="amount" type="text" 
-                           :placeholder="$t('quota.amountPlaceholder')" />
+                <vite-input v-model="amount" :valid="testAmount"
+                            :placeholder="$t('quota.amountPlaceholder')">
                     <span class="unit">VITE</span>
-                </div>
+                </vite-input>
             </div>
         </div>
 
@@ -24,10 +23,8 @@
                     {{ $t('quota.beneficialAddr') }}
                     <span v-show="!isValidAddress" class="err">{{ $t('transList.valid.addr') }}</span>
                 </div>
-                <div class="input-item all __ellipsis">
-                    <input v-model="toAddr" type="text" 
-                           :placeholder="$t('quota.addrPlaceholder')" />
-                </div>
+                <vite-input v-model="toAddr" :valid="testAddr"
+                            :placeholder="$t('quota.addrPlaceholder')"></vite-input>
             </div>
             <div class="item">
                 <div class="title">{{ $t('quota.time') }}</div>
@@ -42,11 +39,16 @@
 
 <script>
 import Vue from 'vue';
+import viteInput from 'components/viteInput';
+import BigNumber from 'utils/bigNumber';
+import { address } from 'utils/tools';
 
 let amountTimeout = null;
-let toAddrTimeout = null;
 
 export default {
+    components: {
+        viteInput
+    },
     props: {
         tokenInfo: {
             type: Object,
@@ -84,43 +86,19 @@ export default {
             return this.$store.state.account.balance.balanceInfos;
         }
     },
-    watch: {
-        toAddr: function() {
-            clearTimeout(toAddrTimeout);
-            toAddrTimeout = null;
-
-            if (this.stopWatch) {
-                return;
-            }
-
-            toAddrTimeout = setTimeout(()=> {
-                toAddrTimeout = null;
-                this.testAddr();
-            }, 500);
-        },
-        amount: function() {
-            clearTimeout(amountTimeout);
-            amountTimeout = null;
-
-            if (this.stopWatch) {
-                return;
-            }
-
-            amountTimeout = setTimeout(()=> {
-                amountTimeout = null;
-                this.testAmount();
-            }, 500);
-        },
-    },
     methods: {
         testAmount() {
+            if (this.stopWatch) {
+                return;
+            }
+
             let result = this.$validAmount(this.amount);
             if (!result) {
                 this.amountErr = this.$t('transList.valid.amt');
                 return false;
             }
 
-            if (viteWallet.BigNumber.compared(this.amount, 10) < 0) {
+            if (BigNumber.compared(this.amount, 10) < 0) {
                 this.amountErr = this.$t('quota.limitAmt');
                 return false;
             }
@@ -129,8 +107,8 @@ export default {
                 this.tokenBalList[this.tokenInfo.tokenId].totalAmount : 0;
 
             if (this.tokenInfo && this.tokenInfo.tokenId) {
-                let amount = viteWallet.BigNumber.toMin(this.amount, this.tokenInfo.decimals);
-                if (viteWallet.BigNumber.compared(balance, amount) < 0) {
+                let amount = BigNumber.toMin(this.amount, this.tokenInfo.decimals);
+                if (BigNumber.compared(balance, amount) < 0) {
                     this.amountErr = this.$t('transList.valid.bal');
                     return false;
                 }
@@ -140,13 +118,17 @@ export default {
             return true;
         },
         testAddr() {
+            if (this.stopWatch) {
+                return;
+            }
+
             if (!this.toAddr) {
                 this.isValidAddress = false;
                 return;
             }
 
             try {
-                this.isValidAddress = viteWallet.Types.isValidHexAddr(this.toAddr);
+                this.isValidAddress = address.isValidHexAddr(this.toAddr);
             } catch(err) {
                 console.warn(err);
                 this.isValidAddress = false;
@@ -156,7 +138,6 @@ export default {
         clearAll() {
             this.stopWatch = true;
             clearTimeout(amountTimeout);
-            clearTimeout(toAddrTimeout);
             this.toAddr = '';
             this.amount = '';
             this.amountErr = '';
@@ -193,9 +174,9 @@ export default {
             this.loading = true;
             
             this.sendPledgeTx({
-                toAddr: this.toAddr,
+                toAddress: this.toAddr,
                 amount: this.amount
-            }, 'pledgeBlock', (result, err) => {
+            }, 'getQuota', (result, err) => {
                 this.loading = false;
                 if (!result) {
                     err && this.$toast(this.$t('quota.pledgeFail'), err);
@@ -263,7 +244,9 @@ export default {
             }
         }
     }
-
+    .unit {
+        padding: 0 15px;
+    }
     .input-item {
         box-sizing: border-box;
         height: 40px;
@@ -279,18 +262,6 @@ export default {
         }
         &.unuse {
             background: #F3F6F9;
-        }
-        .unit {
-            float: right;
-        }
-        input {
-            width: 100%;
-            background: transparent;
-            font-size: 14px;
-            &.amount {
-                width: 80%;
-                min-width: 397px;
-            }
         }
     }
 }
@@ -311,9 +282,6 @@ export default {
         &:first-child {
             margin-right: 0px;
         }
-    }
-    .pledge-tx-wrapper .input-item input.amount {
-        min-width: 0;
     }
 }
 </style>

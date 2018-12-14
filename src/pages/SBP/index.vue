@@ -1,5 +1,5 @@
 <template>
-    <div class="SBP-wrapper">
+    <div class="SBP-wrapper __wrapper">
         <sec-title></sec-title>
 
         <loading v-if="loadingToken" class="loading"></loading>
@@ -23,13 +23,11 @@
                      :btnUnuse="!!btnUnuse">
                 <div v-if="showConfirmType === 'edit'">
                     <div class="input-err" v-show="addrErr">{{ addrErr }}</div>
-                    <div class="confirm-input">
-                        <input type="text" v-model="addr"
-                               :placeholder="$t(`SBP.confirm.${showConfirmType}.placeholder`)" />
-                    </div>
+                    <vite-input v-model="addr" :valid="testAddr"
+                                :placeholder="$t(`SBP.confirm.${showConfirmType}.placeholder`)"></vite-input>
                 </div>
 
-                <div v-if="showConfirmType === 'reward'">
+                <!-- <div v-if="showConfirmType === 'reward'">
                     <div class="row">
                         <div class="row-t">{{ $t(`SBP.confirm.reward.amount`) }}</div>
                         <div class="row-content unuse">{{ activeItem.showAvailableReward }}</div>
@@ -45,13 +43,13 @@
                             {{ $t(`SBP.section2.rewardAddr`)  }}
                             <span v-show="addrErr" class="err">{{ addrErr }}</span>
                         </div>
-                        <span class="tips" :class="{ 'active': tips }">{{ $t('SBP.confirm.reward.hint') }}</span>
+                        <span class="tips" :class="{ 'active': tips }">{{ tips ? $t('SBP.confirm.reward.hint') : '' }}</span>
                         <div class="row-content">
-                            <input v-model="addr" @blur="hideTips" @focus="showTips" 
+                            <input v-model="addr" @blur="hideTips" @focus="showTips" autocomplete="off" 
                                    :placeholder="$t(`SBP.confirm.${showConfirmType}.placeholder`)" />
                         </div>
                     </div>
-                </div>
+                </div> -->
             </confirm>
         </div>
     </div>
@@ -62,14 +60,15 @@ import secTitle from 'components/secTitle';
 import loading from 'components/loading';
 import confirm from 'components/confirm';
 import { quotaConfirm } from 'components/quota/index';
+import viteInput from 'components/viteInput';
+import BigNumber from 'utils/bigNumber';
+import { address } from 'utils/tools';
 import register from './register';
 import list from './list';
 
-let addrTimeout;
-
 export default {
     components: {
-        secTitle, register, list, loading, confirm
+        secTitle, register, list, loading, confirm, viteInput
     },
     created() {
         this.tokenInfo = viteWallet.Ledger.getTokenInfo();
@@ -111,22 +110,6 @@ export default {
             return this.$store.getters.regAddrList;
         }
     },
-    watch: {
-        addr: function() {
-            clearTimeout(addrTimeout);
-            addrTimeout = null;
-            this.hideTips();
-
-            if (this.stopWatch) {
-                return;
-            }
-
-            addrTimeout = setTimeout(()=> {
-                addrTimeout = null;
-                this.testAddr();
-            }, 500);
-        },
-    },
     methods: {
         canUseAddr(nodeName, addr) {
             let usedAddrList = [];
@@ -143,8 +126,12 @@ export default {
             return usedAddrList.indexOf(addr) === -1;
         },
         testAddr() {
+            if (this.stopWatch) {
+                return;
+            }
+
             if (!this.addr || 
-                !viteWallet.Types.isValidHexAddr(this.addr)) {
+                !address.isValidHexAddr(this.addr)) {
                 this.addrErr = this.$t('SBP.section1.addrErr');
                 return;
             }
@@ -173,8 +160,8 @@ export default {
 
             let decimals = this.tokenInfo.decimals;
             let symbol = this.tokenInfo.tokenSymbol;
-            activeItem.showAvailableReward = viteWallet.BigNumber.toBasic(activeItem.availableReward , decimals) + ' ' +  symbol;
-            activeItem.showAvailableRewardOneTx = viteWallet.BigNumber.toBasic(activeItem.availableRewardOneTx , decimals) + ' ' +  symbol;
+            activeItem.showAvailableReward = BigNumber.toBasic(activeItem.availableReward , decimals) + ' ' +  symbol;
+            activeItem.showAvailableRewardOneTx = BigNumber.toBasic(activeItem.availableRewardOneTx , decimals) + ' ' +  symbol;
             this.activeItem = activeItem;
         },
         closeConfirm() {
@@ -184,7 +171,6 @@ export default {
         },
         clearAll() {
             this.stopWatch = true;
-            clearTimeout(addrTimeout);
             this.addr = '';
             this.addrErr = '';
         },
@@ -219,7 +205,7 @@ export default {
             let producer = this.addr;
             this.sendTx({
                 producerAddr: producer
-            }, 'updateRegisterBlock').then(() => {
+            }, 'updateReg').then(() => {
                 this.loading = false;
                 this.$toast(this.$t('SBP.section2.updateSuccess'));
                 this.closeConfirm();
@@ -230,8 +216,7 @@ export default {
                     producer
                 });
             }).catch((err) => {
-                console.log(err);
-
+                console.warn(err);
                 this.loading = false;
                 if (err && err.error && err.error.code && err.error.code === -35002) {
                     quotaConfirm({
@@ -247,12 +232,12 @@ export default {
 
             this.sendTx({
                 rewardAddress: this.addr
-            }, 'rewardBlock').then(() => {
+            }, 'retrieveReward').then(() => {
                 this.loading = false;
                 this.$toast(this.$t('SBP.section2.rewardSuccess'));
                 this.closeConfirm();
             }).catch((err) => {
-                console.log(err);
+                console.warn(err);
                 this.loading = false;
 
                 if (err && err.error && err.error.code && err.error.code === -35002) {
@@ -273,13 +258,13 @@ export default {
                 return Promise.reject(false);
             }
           
-            let toAmount = viteWallet.BigNumber.toMin(amount || 0, this.tokenInfo.decimals);
-            return this.activeAccount.sendTx({
+            let toAmount = BigNumber.toMin(amount || 0, this.tokenInfo.decimals);
+            return this.activeAccount[type]({
                 tokenId: this.tokenInfo.tokenId,
                 nodeName: nodeName || this.activeItem.name,
                 amount: toAmount,
-                producerAddr, rewardAddress
-            }, type);
+                toAddress: producerAddr || rewardAddress
+            });
         }
     }
 };
@@ -290,7 +275,6 @@ export default {
 
 .SBP-wrapper {
     position: relative;
-    padding: 40px;
     box-sizing: border-box;
     overflow: auto;
     height: 100%;
@@ -322,25 +306,13 @@ export default {
         color: #FF2929;
         line-height: 26px;
     }
-    .confirm-input {
-        background: #FFFFFF;
-        border: 1px solid #D4DEE7;
-        border-radius: 2px;
-        height: 40px;
-        line-height: 40px;
-        input {
-            width: 100%;
-            text-indent: 15px;
-            font-size: 14px;
-        }
-    }
 }
 
 .section {
     padding-top: 40px;
     .title {
         border-left: 2px solid rgba(0, 122, 255, 0.7);
-        font-family: $font-bold;
+        font-family: $font-bold, arial, sans-serif;
         font-size: 18px;
         color: #1d2024;
         line-height: 18px;
@@ -369,7 +341,7 @@ export default {
     }
     .row-t {
         position: relative;
-        font-family: $font-bold;
+        font-family: $font-bold, arial, sans-serif;
         font-size: 14px;
         color: #1D2024;
         letter-spacing: 0.35px;
@@ -386,7 +358,7 @@ export default {
             background: #F3F6F9;
             font-size: 14px;
             color: #5E6875;
-            font-family: $font-normal;
+            font-family: $font-normal, arial, sans-serif;
         }
         input {
             width: 100%;
@@ -418,7 +390,6 @@ export default {
 
 .tips {
     position: absolute;
-    min-width: 300px;
     left: 50%;
     bottom: 52px;
     transform: translate(-50%, 0);
@@ -427,13 +398,17 @@ export default {
     border-radius: 8px;
     font-size: 14px;
     color: #3E4A59;
-    padding: 13px 10px;
     box-sizing: border-box;
-    font-family: $font-normal;
+    font-family: $font-normal, arial, sans-serif;
     opacity: 0;
-    transition: all 0.5s ease-in-out;   
+    transition: opacity 0.5s ease-in-out;
+    width: 0;
+    height: 0; 
     &.active {
+        min-width: 300px;
+        height: auto;
         opacity: 1;
+        padding: 13px 10px;
     }
     &:after {
         content: ' ';

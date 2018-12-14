@@ -37,6 +37,7 @@ import pagination from 'components/pagination.vue';
 import tabelList from 'components/tabelList.vue';
 import date from 'utils/date.js';
 import {timer} from 'utils/asyncFlow';
+import BigNumber from 'utils/bigNumber';
 import ellipsisAddr from 'utils/ellipsisAddr.js';
 import loopTime from 'config/loopTime';
 
@@ -73,6 +74,7 @@ export default {
         let address = activeAccount.getDefaultAddr();
 
         return {
+            activeAccount,
             currentPage: 0,
             address,
             activeItem: null,
@@ -84,7 +86,7 @@ export default {
             if (!this.tokenInfo) {
                 return 0;
             }
-            return viteWallet.BigNumber.toBasic(this.$store.state.pledge.totalPledgeAmount || 0, this.tokenInfo.decimals);
+            return BigNumber.toBasic(this.$store.state.pledge.totalPledgeAmount || 0, this.tokenInfo.decimals);
         },
         totalPage() {
             return this.$store.getters.totalPledgePage;
@@ -102,7 +104,7 @@ export default {
                 let addrIcon = pledge.beneficialAddr === this.address ? `<img class="beneficial-img" src="${userImg}"/>` : '';
                 let addr = `<span class="beneficial-addr">${ ellipsisAddr(pledge.beneficialAddr) }</span>`;
 
-                let isMaturity = viteWallet.BigNumber.compared(pledge.withdrawHeight, currentHeight) <= 0;
+                let isMaturity = BigNumber.compared(pledge.withdrawHeight, currentHeight) <= 0;
                 let cancelClass = isMaturity ? 'cancel active' : 'cancel';
                 let cancel = `<span class="${cancelClass}">${this.$t('quota.list.cancel')}</span>`;
 
@@ -110,7 +112,7 @@ export default {
                     this.$t('quota.maturity') : 
                     date(pledge.withdrawTime * 1000, this.$i18n.locale);
 
-                let showAmount = viteWallet.BigNumber.toBasic(pledge.amount || 0, this.tokenInfo.decimals);
+                let showAmount = BigNumber.toBasic(pledge.amount || 0, this.tokenInfo.decimals);
 
                 nowList.push({
                     beneficialAddr: pledge.beneficialAddr,
@@ -150,15 +152,15 @@ export default {
                 return;
             }
             this.activeItem = item;
-            let amount = viteWallet.BigNumber.toBasic(item.amount || 0, this.tokenInfo.decimals);
+            let amount = BigNumber.toBasic(item.amount || 0, this.tokenInfo.decimals);
             this.showConfirm('cancel', amount);
         },
 
         _sendCancelPledgeTx(amount) {
             this.sendPledgeTx({
-                toAddr: this.activeItem.beneficialAddr,
+                toAddress: this.activeItem.beneficialAddr,
                 amount
-            }, 'cancelPledgeBlock', (result, err) => {
+            }, 'withdrawalOfQuota', (result, err) => {
                 this.loading = false;
                 this.activeItem = null;
                 result && this.$toast(this.$t('hint.request', {
