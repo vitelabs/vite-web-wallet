@@ -1,4 +1,5 @@
-const web3 = require('web3');
+const web3Eth = require('web3-eth');
+const utils = require('web3-utils');
 const Tx = require('ethereumjs-tx');
 const ethProvider = require('web3-providers-ws');
 
@@ -11,20 +12,18 @@ const gas = 60000;
 const balanceTime = 2000;
 let provider = null;
 
-// console.log(signBinding());
-
 class ethWallet {
     constructor({
         mnemonic
     }) {
         provider = provider || new ethProvider(process.env.ethServer);
-        this.web3 = new web3(provider);
+        this.web3 = new web3Eth(provider);
         this.mnemonic = mnemonic;
         this.defaultAddrInx = 0;
         this.addrs = [];
         this.addAddr();
 
-        this.contract = new this.web3.eth.Contract(viteContractAbi, viteContractAddr);
+        this.contract = new this.web3.Contract(viteContractAbi, viteContractAddr);
         this.tokenList = {
             vite: {
                 name: 'vite',
@@ -35,7 +34,7 @@ class ethWallet {
             eth: {
                 name: 'eth',
                 symbol: 'ETH',
-                decimals: web3.utils.unitMap.ether.length -1, // 18
+                decimals: utils.unitMap.ether.length - 1, // 18
                 balance: 0,
             }
         };
@@ -101,7 +100,7 @@ class ethWallet {
         });
     }
     getEthBalance() {
-        return this.web3.eth.getBalance(this.getDefaultAddr()).then((balance) => {
+        return this.web3.getBalance(this.getDefaultAddr()).then((balance) => {
             this.tokenList.eth.balance = balance;
             return balance;
         });
@@ -121,7 +120,7 @@ class ethWallet {
     }
 
     isAddress(address) {
-        return this.web3.utils.isAddress(address);
+        return utils.isAddress(address);
     }
 
     // ETH
@@ -146,7 +145,7 @@ class ethWallet {
             // contranctMethod(transfer), signature hash
             // toEthAddress (Remove 0x and filled up to 64 bits)
             // value (Remove 0x and filled up to 64 bits)
-            data: '0xa9059cbb' + addPreZero( toAddress.slice(2) ) + addPreZero( this.web3.utils.toHex(value).substr(2) ), 
+            data: '0xa9059cbb' + addPreZero( toAddress.slice(2) ) + addPreZero( utils.toHex(value).substr(2) ), 
         });
 
         return sendEthTx.call(this, ethTxHash);
@@ -168,7 +167,7 @@ class ethWallet {
             // contranctMethod(transfer), signature hash
             // toEthAddress (Remove 0x and filled up to 64 bits)
             // value (Remove 0x and filled up to 64 bits)
-            data: '0xa9059cbb' + addPreZero( blackHole.slice(2) ) + addPreZero( this.web3.utils.toHex(value).substr(2) ), 
+            data: '0xa9059cbb' + addPreZero( blackHole.slice(2) ) + addPreZero( utils.toHex(value).substr(2) ), 
         });
 
         console.log(hash);
@@ -205,12 +204,12 @@ async function getTxHash({
     let ethAddr = acount.hexAddr;
     let privateKey = acount.wallet.privKey;
 
-    let nonce = await this.web3.eth.getTransactionCount(ethAddr, this.web3.eth.defaultBlock.pending);
+    let nonce = await this.web3.getTransactionCount(ethAddr, this.web3.defaultBlock.pending);
 
     let txData = {
-        nonce: this.web3.utils.toHex(nonce++),
-        gasLimit: this.web3.utils.toHex(99000),    // ???
-        gasPrice: this.web3.utils.toHex(g),  
+        nonce: utils.toHex(nonce++),
+        gasLimit: utils.toHex(99000),    // ???
+        gasPrice: utils.toHex(g),  
         to: toAddress,
         from: ethAddr,
         value,
@@ -234,7 +233,7 @@ async function getTxHash({
 
 function sendEthTx(ethTxHash) {
     return new Promise((res, rej) => {
-        this.web3.eth.sendSignedTransaction(ethTxHash, (err, hash) => {
+        this.web3.sendSignedTransaction(ethTxHash, (err, hash) => {
             if (!err) {
                 console.log(hash);
                 return res(hash);
