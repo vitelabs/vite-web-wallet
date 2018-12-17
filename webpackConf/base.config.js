@@ -83,7 +83,7 @@ module.exports = {
     },
     resolve: {
         alias: {
-            WSprovider: '@vite/vitejs/dist/provider/WS',
+            WSprovider: '@vite/vitejs/dist/es5/provider/WS',
             vue: 'vue/dist/vue.js',
             src: SRC_PATH,
             services: path.join(SRC_PATH, '/services'),
