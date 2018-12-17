@@ -54,10 +54,16 @@ export default {
     },
     methods: {
         _sendTx(...args) {
-            if (!this.balance || this.balance === 0) {
+            if (!this.balance || this.balance === 0 || !this.sendTx) {
                 return;
             }
-            this.sendTx && this.sendTx(...args);
+
+            let activeAccount = this.$wallet.getActiveAccount();
+            activeAccount.initPwd({
+                submit: () => {
+                    this.sendTx(...args);
+                }
+            });
         }
     }
 };
