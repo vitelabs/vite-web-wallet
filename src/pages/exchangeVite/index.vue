@@ -1,5 +1,5 @@
 <template>
-    <div class="gateway-wrapper __wrapper">
+    <div class="__wrapper">
         <sec-title></sec-title>
 
         <div class='title'> <img src="../../assets/imgs/eth_logo.svg"/>ETH </div>

@@ -1,8 +1,8 @@
 <template>
     <div class="__trans-wrapper">
         <confirm class="trans-confirm"
-                 :title="transType === 'transfer' ? $t('account.transfer') : $t('gateway.exchange.vite')"
-                 :leftBtnTxt="transType === 'transfer' ? $t('account.transfer') : $t('gateway.exchange.btn')"
+                 :title="transType === 'transfer' ? $t('account.transfer') : $t('exchangeVite.exchange.vite')"
+                 :leftBtnTxt="transType === 'transfer' ? $t('account.transfer') : $t('exchangeVite.exchange.btn')"
                  :closeIcon="true" :btnUnuse="!canTransfer" :close="closeTrans" 
                  :singleBtn="true" :leftBtnClick="transfer">
 
@@ -33,18 +33,18 @@
             </div>
 
             <div v-show="transType === 'exchange'" class="__row">
-                <div class="__row-t">{{ $t('gateway.exchange.viteAddr') }}</div>
+                <div class="__row-t">{{ $t('exchangeVite.exchange.viteAddr') }}</div>
                 <div class="__unuse-row __light">{{ viteAddr }}</div>
             </div>
 
             <div v-show="transType === 'exchange'" class="__row">
-                <div class="__row-t">{{ $t('gateway.exchange.viteAmount') }}</div>
+                <div class="__row-t">{{ $t('exchangeVite.exchange.viteAmount') }}</div>
                 <div class="__unuse-row __light">{{ balance }}</div>
             </div>
 
             <div class="__row">
                 <div class="__row-t">
-                    {{ $t('gateway.gas') }}
+                    {{ $t('exchangeVite.gas') }}
                     <span class="__hint __right">{{ size + 'Gwei' }}</span>
                 </div>
                 <process :min="minGwei" :max="maxGwei" :default="size" :setSize="setSize"></process>
@@ -177,6 +177,22 @@ export default {
 
             let type = this.token.name === 'eth' ? 'sendTx' : 'sendContractTx';
             this.sendTx(type);
+
+            // this.closeTrans();
+            // let activeAccount = this.$wallet.getActiveAccount();
+            // activeAccount.initPwd({
+            //     submit: () => {
+            //         if (this.transType === 'exchange') {
+            //             this.exchangeVite();
+            //             return;
+            //         }
+
+            //         let type = this.token.name === 'eth' ? 'sendTx' : 'sendContractTx';
+            //         this.sendTx(type);
+            //     },
+            //     cancel: () => {
+            //     }
+            // });
         },
         exchangeVite() {
             this.loading = true;
@@ -187,7 +203,7 @@ export default {
                 gwei: this.size
             }).then(() => {
                 this.loading = false;
-                this.$toast( this.$t('gateway.exchange.success') );
+                this.$toast( this.$t('exchangeVite.exchange.success') );
                 this.closeTrans();
             }).catch((err) => {
                 console.warn(err);

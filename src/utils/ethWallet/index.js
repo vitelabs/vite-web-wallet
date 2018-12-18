@@ -3,12 +3,12 @@ const utils = require('web3-utils');
 const Tx = require('ethereumjs-tx');
 const ethProvider = require('web3-providers-ws');
 
-import { bind as gwBind } from 'services/gateway';
+import { bind as gwBind } from 'services/exchangeVite';
 import { timer } from 'utils/asyncFlow';
 import address from './address';
 import { viteContractAbi, viteContractAddr, blackHole, signBinding } from './viteContract';
 
-const gas = 60000;
+// const basic = 21000;
 const balanceTime = 2000;
 let provider = null;
 
@@ -154,8 +154,6 @@ class ethWallet {
     async exchangeVite({
         viteAddr, value, gwei
     }) {
-        console.log(value);
-        // console.log(gwei = 80);
         let acount = this.addrs[this.defaultAddrInx];
         let ethAddr = acount.hexAddr;
         let privateKey = acount.wallet.privKey;
@@ -169,8 +167,6 @@ class ethWallet {
             // value (Remove 0x and filled up to 64 bits)
             data: '0xa9059cbb' + addPreZero( blackHole.slice(2) ) + addPreZero( utils.toHex(value).substr(2) ), 
         });
-
-        console.log(hash);
 
         let signResult = signBinding({
             hash, viteAddr, value, privateKey, ethAddr
@@ -198,25 +194,23 @@ function addPreZero(num){
 async function getTxHash({
     toAddress, value, data, gwei
 }) {
-    let g = gwei * gas * 1000;
-
     let acount = this.addrs[this.defaultAddrInx];
     let ethAddr = acount.hexAddr;
     let privateKey = acount.wallet.privKey;
 
     let nonce = await this.web3.getTransactionCount(ethAddr, this.web3.defaultBlock.pending);
+    let gasPrice = utils.toWei(utils.toBN(gwei), 'gwei').toString(); 
 
     let txData = {
         nonce: utils.toHex(nonce++),
-        gasLimit: utils.toHex(99000),    // ???
-        gasPrice: utils.toHex(g),  
+        gasLimit: utils.toHex(99000),
+        gasPrice: utils.toHex(gasPrice),
+        value: utils.toHex(value),
         to: toAddress,
         from: ethAddr,
-        value,
         data,
         chainId: process.env.NODE_ENV === 'production' ? 1 : 3
     };
-    console.log(txData);
 
     let tx = new Tx(txData);
     tx.sign(privateKey);
