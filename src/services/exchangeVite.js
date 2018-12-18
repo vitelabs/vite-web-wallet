@@ -1,7 +1,5 @@
 import request from 'utils/request';
 
-// const path = process.env.gatewayServer + '/gw';
-// const path = 'http://localhost:8081/gw';
 const path = '/gw';
 
 export const bind = function({
