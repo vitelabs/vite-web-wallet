@@ -410,13 +410,13 @@ module.exports = {
         }
     },
 
-    // gateway
-    gateway: {
-        title: 'VITE网关',
+    // exchangeVite
+    exchangeVite: {
+        title: '置换VITE',
         gas: '矿工费用',
         help: {
-            title: '快速理解VITE网关',
-            text: ''
+            title: '快速理解置换VITE',
+            text: '通过VITE置换功能，可以将以太网络上的ERC20 VITE代币置换到VITE网络中，在置换过程中，你的ERC20 VITE将被转入黑洞地址：XXXX，当黑洞地址收到交易并被确认后，VITE将为您发放等值的VITE至您的VITE地址中'
         },
         exchange: {
             vite: '置换VITE',

@@ -12,7 +12,7 @@
                      @click="_sendTx('transfer', token.name)">{{ $t('account.sendTrans') }}</div>
                 <div v-show="token.symbol === 'VITE'" @click="_sendTx('exchange', token.name)"
                      class="btn __pointer" :class="classList">
-                    {{ $t('gateway.exchange.vite') }}</div>
+                    {{ $t('exchangeVite.exchange.vite') }}</div>
             </div>
         </div>
     </div>
@@ -57,6 +57,8 @@ export default {
             if (!this.balance || this.balance === 0 || !this.sendTx) {
                 return;
             }
+            // this.sendTx(...args);
+
 
             let activeAccount = this.$wallet.getActiveAccount();
             activeAccount.initPwd({
