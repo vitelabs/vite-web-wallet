@@ -38,7 +38,7 @@ export default {
         let activeAccount = this.$wallet.getActiveAccount();
         let pageList = ['account', 'quota', 'SBP', 'vote', 'transList'];
         if (activeAccount.type === 'wallet') {
-            pageList.push('gateway');
+            pageList.push('exchangeVite');
         }
         pageList.push('setting');
 
