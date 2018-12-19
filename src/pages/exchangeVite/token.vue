@@ -23,9 +23,11 @@ import BigNumber from 'utils/bigNumber';
 
 export default {
     props: {
-        tokenName: {
-            type: String,
-            default: ''
+        ethToken: {
+            type: Object,
+            default: () => {
+                return {};
+            }
         },
         token: {
             type: Object,
@@ -45,7 +47,8 @@ export default {
             return +balance ? BigNumber.toBasic(balance, decimals) : 0;
         },
         classList() {
-            let haveBalance = this.balance && this.balance !== 0;
+            let haveBalance = +this.token.balance && +this.ethToken.balance;
+
             return {
                 '__btn_all_in': haveBalance,
                 'unuse': !haveBalance
@@ -54,7 +57,7 @@ export default {
     },
     methods: {
         _sendTx(...args) {
-            if (!this.balance || this.balance === 0 || !this.sendTx) {
+            if (!+this.token.balance || !+this.ethToken.balance || !this.sendTx) {
                 return;
             }
             this.sendTx(...args);

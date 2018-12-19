@@ -8,7 +8,7 @@
 
         <div class="token-list">
             <token v-for="(token, index) in tokenList" :key="index" 
-                   :sendTx="showTrans" :token="token"></token>
+                   :sendTx="showTrans" :token="token" :ethToken="tokenList.eth"></token>
         </div>
         
         <transaction v-if="!!transType" :closeTrans="hideTrans" :ethWallet="ethWallet"
