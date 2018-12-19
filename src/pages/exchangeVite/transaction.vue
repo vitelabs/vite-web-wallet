@@ -1,6 +1,6 @@
 <template>
     <div class="__trans-wrapper">
-        <confirm class="trans-confirm"
+        <confirm class="trans-confirm" v-show="isShowTrans"
                  :title="transType === 'transfer' ? $t('account.transfer') : $t('exchangeVite.exchange.vite')"
                  :leftBtnTxt="transType === 'transfer' ? $t('account.transfer') : $t('exchangeVite.exchange.btn')"
                  :closeIcon="true" :btnUnuse="!canTransfer" :close="closeTrans" 
@@ -89,8 +89,6 @@ export default {
             default: ()=>{}
         }
     },
-    created() {
-    },
     mounted() {
         this.$onEnterKey(() => {
             this.transfer();
@@ -107,6 +105,7 @@ export default {
             minGwei,
             maxGwei,
             size: defaultGwei,
+            isShowTrans: true,
 
             toAddress: '',
             amount: '',
@@ -170,29 +169,25 @@ export default {
                 return;
             }
 
-            if (this.transType === 'exchange') {
-                this.exchangeVite();
-                return;
-            }
+            this.isShowTrans = false;
 
-            let type = this.token.name === 'eth' ? 'sendTx' : 'sendContractTx';
-            this.sendTx(type);
+            let activeAccount = this.$wallet.getActiveAccount();
+            activeAccount.initPwd({
+                submit: () => {
+                    this.isShowTrans = true;
 
-            // this.closeTrans();
-            // let activeAccount = this.$wallet.getActiveAccount();
-            // activeAccount.initPwd({
-            //     submit: () => {
-            //         if (this.transType === 'exchange') {
-            //             this.exchangeVite();
-            //             return;
-            //         }
+                    if (this.transType === 'exchange') {
+                        this.exchangeVite();
+                        return;
+                    }
 
-            //         let type = this.token.name === 'eth' ? 'sendTx' : 'sendContractTx';
-            //         this.sendTx(type);
-            //     },
-            //     cancel: () => {
-            //     }
-            // });
+                    let type = this.token.name === 'eth' ? 'sendTx' : 'sendContractTx';
+                    this.sendTx(type);
+                },
+                cancel: () => {
+                    this.closeTrans();
+                }
+            });
         },
         exchangeVite() {
             this.loading = true;
