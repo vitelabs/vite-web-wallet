@@ -57,15 +57,7 @@ export default {
             if (!this.balance || this.balance === 0 || !this.sendTx) {
                 return;
             }
-            // this.sendTx(...args);
-
-
-            let activeAccount = this.$wallet.getActiveAccount();
-            activeAccount.initPwd({
-                submit: () => {
-                    this.sendTx(...args);
-                }
-            });
+            this.sendTx(...args);
         }
     }
 };
