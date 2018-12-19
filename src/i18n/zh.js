@@ -416,7 +416,7 @@ module.exports = {
         gas: '矿工费用',
         help: {
             title: '快速理解置换VITE',
-            text: '通过VITE置换功能，可以将以太网络上的ERC20 VITE代币置换到VITE网络中，在置换过程中，你的ERC20 VITE将被转入黑洞地址：XXXX，当黑洞地址收到交易并被确认后，VITE将为您发放等值的VITE至您的VITE地址中'
+            text: '通过VITE置换功能，可以将以太网络上的ERC20 VITE代币置换到VITE网络中，在置换过程中，你的ERC20 VITE将被转入黑洞地址：{blackAddr}，当黑洞地址收到交易并被确认后，VITE将为您发放等值的VITE至您的VITE地址中'
         },
         exchange: {
             vite: '置换VITE',
@@ -424,7 +424,7 @@ module.exports = {
             viteAmount: '置换VITE金额',
             gas: '矿工费用',
             btn: '确认置换',
-            success: '置换操作成功，预计20分钟后到账'
+            success: '置换请求成功，预计以太网交易被确认后20分钟到账'
         }
     },
 
