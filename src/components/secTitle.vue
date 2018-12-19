@@ -11,6 +11,7 @@
 
 <script>
 import goNetBtn from './goNetBtn.vue';
+import { blackHole } from 'utils/ethWallet/viteContract';
 
 export default {
     components: {
@@ -55,7 +56,9 @@ export default {
                 leftBtn: {
                     text: this.$t('btn.understand')
                 },
-                content: this.$t(this.helpText)
+                content: this.$t(this.helpText, { 
+                    blackAddr: blackHole 
+                })
             });
         }
     }
