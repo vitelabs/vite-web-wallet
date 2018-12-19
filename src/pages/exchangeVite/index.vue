@@ -11,7 +11,7 @@
                    :sendTx="showTrans" :token="token"></token>
         </div>
         
-        <transaction v-show="!!transType" :closeTrans="hideTrans" :ethWallet="ethWallet"
+        <transaction v-if="!!transType" :closeTrans="hideTrans" :ethWallet="ethWallet"
                      :transType="transType" :token="tokenList[transToken]"></transaction>
     </div>
 </template>
