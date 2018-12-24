@@ -33,6 +33,7 @@ class ethWallet {
 
         console.log('ethProvider', ethProvider);
         console.log(process.env.ethServer);
+        debugger;
         provider = provider || new ethProvider(process.env.ethServer);
         console.log('provider', provider);
 
