@@ -45,7 +45,9 @@
             <div class="__row">
                 <div class="__row-t">
                     {{ $t('exchangeVite.gas') }}
-                    <span class="__hint __right">{{ size + 'Gwei' }}</span>
+                    <span class="__hint __right">
+                        {{ $t('exchangeVite.aboutPrice', { amount: gasTotalPrice }) }}
+                    </span>
                 </div>
                 <process :min="minGwei" :max="maxGwei" :default="size" :setSize="setSize"></process>
             </div>
@@ -63,7 +65,7 @@ import process from './process';
 const minGwei = 3;
 const maxGwei = 99;
 const defaultGwei = 41;
-// 0x5e7f57510dd06225a18f58c724996bf91592cdad
+let estimateTimeout;
 
 export default {
     components: {
@@ -107,6 +109,7 @@ export default {
             size: defaultGwei,
             isShowTrans: true,
 
+            gas: 21000,
             toAddress: '',
             amount: '',
             isValidAddress: true,
@@ -114,6 +117,15 @@ export default {
         };
     },
     computed: {
+        canEstimate () {
+            return this.toAddress && this.isValidAddress && this.amount && !this.amountErr && !this.loading;
+        },
+        transactionType () {
+            if (this.transType === 'exchange') {
+                return 'exchangeVite';
+            }
+            return this.token.name === 'eth' ? 'sendTx' : 'sendContractTx';
+        },
         balance() {
             let decimals = this.token.decimals;
             let balance = this.token.balance;
@@ -124,11 +136,24 @@ export default {
                 this.transType === 'exchange' ||
                 (this.toAddress && this.amount && this.isValidAddress && !this.amountErr)
             );
+        },
+        gasTotalPrice() {
+            let gwei = this.size * this.gas;
+            let decimals = this.ethWallet.utils.unitMap.gwei.length - 1;
+            return BigNumber.toBasic(gwei, decimals);
+        }
+    },
+    watch: {
+        'toAddress': function() {
+            this.toEstimateGas();
+        },
+        'amount': function() {
+            this.toEstimateGas();
         }
     },
     methods: {
         validAddr() {
-            this.isValidAddress = this.toAddress && this.ethWallet.isAddress(this.toAddress);
+            this.isValidAddress = this.toAddress && this.ethWallet.utils.isAddress(this.toAddress);
         },
         testAmount() {
             let result = this.$validAmount(this.amount);
@@ -156,6 +181,32 @@ export default {
         setSize(size) {
             this.size = parseInt( (this.maxGwei - this.minGwei) * size/100 + this.minGwei );
         },
+        toEstimateGas() {
+            if (!this.canEstimate) {
+                return;
+            }
+
+            estimateTimeout && clearTimeout(estimateTimeout);
+            estimateTimeout = setTimeout(() => {
+                this.estimateGas();
+            }, 500);
+        },
+        estimateGas() {
+            if (!this.canEstimate) {
+                return;
+            }
+
+            let amount = this.amount;
+            let toAddress = this.toAddress;
+            this.ethWallet.estimateGas(toAddress, amount, this.transactionType).then((gas) => {
+                if (!this || amount !== this.amount || toAddress !== this.toAddress) {
+                    return;
+                }
+                this.gas = gas;
+            }).catch(err => {
+                console.warn(err);
+            });
+        },
 
         transfer() {
             this.validAddr();
@@ -180,9 +231,7 @@ export default {
                         this.exchangeVite();
                         return;
                     }
-
-                    let type = this.token.name === 'eth' ? 'sendTx' : 'sendContractTx';
-                    this.sendTx(type);
+                    this.sendTx();
                 },
                 cancel: () => {
                     this.closeTrans();
@@ -206,11 +255,11 @@ export default {
                 this.$toast( this.$t('hint.err') );
             });
         },
-        sendTx(type) {
+        sendTx() {
             let value = BigNumber.toMin(this.amount, this.token.decimals);
             this.loading = true;
 
-            this.ethWallet[type]({
+            this.ethWallet[this.transactionType]({
                 toAddress: this.toAddress,
                 value, 
                 gwei: this.size

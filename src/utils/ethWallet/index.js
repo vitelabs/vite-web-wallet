@@ -8,7 +8,6 @@ import { timer } from 'utils/asyncFlow';
 import address from './address';
 import { viteContractAbi, viteContractAddr, blackHole, signBinding } from './viteContract';
 
-// const basic = 21000;
 const balanceTime = 2000;
 let provider = null;
 
@@ -18,6 +17,8 @@ class ethWallet {
     }) {
         provider = provider || new ethProvider(process.env.ethServer);
         this.web3 = new web3Eth(provider);
+        this.utils = utils;
+
         this.mnemonic = mnemonic;
         this.defaultAddrInx = 0;
         this.addrs = [];
@@ -119,10 +120,21 @@ class ethWallet {
         return addrObj.hexAddr;
     }
 
-    isAddress(address) {
-        return utils.isAddress(address);
+    getTxData(value, toAddr, type) {
+        if (type === 'sendTx') {
+            return '';
+        }
+        return '0xa9059cbb' + addPreZero( toAddr.slice(2) ) + addPreZero( utils.toHex(value).substr(2) );
     }
-
+    estimateGas(toAddr, value, type) {
+        let to = type === 'exchange' ? blackHole : toAddr;
+        let v = type === 'sendContractTx' ? '0' : value;
+        return this.web3.estimateGas({
+            to,
+            data: this.getTxData(v, to, type)
+        });
+    }
+    
     // ETH
     async sendTx({
         toAddress, value, gwei
@@ -145,7 +157,7 @@ class ethWallet {
             // contranctMethod(transfer), signature hash
             // toEthAddress (Remove 0x and filled up to 64 bits)
             // value (Remove 0x and filled up to 64 bits)
-            data: '0xa9059cbb' + addPreZero( toAddress.slice(2) ) + addPreZero( utils.toHex(value).substr(2) ), 
+            data: this.getTxData(value, toAddress, 'sendContractTx')
         });
 
         return sendEthTx.call(this, ethTxHash);
@@ -165,7 +177,7 @@ class ethWallet {
             // contranctMethod(transfer), signature hash
             // toEthAddress (Remove 0x and filled up to 64 bits)
             // value (Remove 0x and filled up to 64 bits)
-            data: '0xa9059cbb' + addPreZero( blackHole.slice(2) ) + addPreZero( utils.toHex(value).substr(2) ), 
+            data: this.getTxData(value, blackHole, 'sendContractTx')
         });
 
         let signResult = signBinding({
