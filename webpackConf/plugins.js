@@ -20,9 +20,9 @@ const viteNet = {
     dev: '\'http://132.232.134.168:8080/\''
 };
 const ethServer = {
-    production: '\'wss:\/\/mainnet.infura.io\/ws\'',
-    test: '\'wss://ropsten.infura.io/ws\'',
-    dev: '\'wss://ropsten.infura.io/ws\''
+    production: '\'https:\/\/mainnet.infura.io\/http\'',
+    test: '\'https://ropsten.infura.io/http\'',
+    dev: '\'https://ropsten.infura.io/http\''
 };
 const contractAddress = {
     production: '\'0x1b793e49237758dbd8b752afc9eb4b329d5da016\'',

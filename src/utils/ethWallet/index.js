@@ -1,8 +1,8 @@
-var url = require('url');
 const web3Eth = require('web3-eth');
 const utils = require('web3-utils');
 const Tx = require('ethereumjs-tx');
-const ethProvider = require('web3-providers-ws');
+// Web3-providers-ws cannot work in IE.
+const ethProvider = require('web3-providers-http');
 
 import { bind as gwBind } from 'services/exchangeVite';
 import { timer } from 'utils/asyncFlow';
@@ -17,24 +17,13 @@ class ethWallet {
         mnemonic
     }) {
         this.utils = utils;
-        console.log('utils', this.utils);
-
         this.mnemonic = mnemonic;
-        console.log('mnemonic', this.mnemonic);
 
         this.defaultAddrInx = 0;
         this.addrs = [];
         this.addAddr();
-        console.log('addrs', this.addrs);
 
-        console.log('ethProvider', ethProvider);
-        console.log(process.env.ethServer);
-        // IE
-        if (!!window.ActiveXObject || 'ActiveXObject' in window) {
-            window.URL = url.URL;
-        }
         provider = provider || new ethProvider(process.env.ethServer);
-        console.log('provider', provider);
 
         this.web3 = new web3Eth(provider);
         console.log('web3', this.web3);
