@@ -15,6 +15,10 @@ class ethWallet {
     constructor({
         mnemonic
     }) {
+        // IE
+        if(!!window.ActiveXObject || 'ActiveXObject' in window) {
+            window.WebSocket = undefined;
+        }
 
         this.utils = utils;
         console.log('utils', this.utils);
