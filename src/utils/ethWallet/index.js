@@ -1,10 +1,4 @@
-// IE
-if (!!window.ActiveXObject || 'ActiveXObject' in window) {
-    var url = require('url');
-    window.URL = url.URL;
-}
-
-
+var url = require('url');
 const web3Eth = require('web3-eth');
 const utils = require('web3-utils');
 const Tx = require('ethereumjs-tx');
@@ -35,7 +29,10 @@ class ethWallet {
 
         console.log('ethProvider', ethProvider);
         console.log(process.env.ethServer);
-        debugger;
+        // IE
+        if (!!window.ActiveXObject || 'ActiveXObject' in window) {
+            window.URL = url.URL;
+        }
         provider = provider || new ethProvider(process.env.ethServer);
         console.log('provider', provider);
 
