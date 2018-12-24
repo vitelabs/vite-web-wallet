@@ -1,7 +1,7 @@
-// const web3Eth = require('web3-eth');
+const web3Eth = require('web3-eth');
 const utils = require('web3-utils');
 const Tx = require('ethereumjs-tx');
-// const ethProvider = require('web3-providers-ws');
+const ethProvider = require('web3-providers-ws');
 
 import { bind as gwBind } from 'services/exchangeVite';
 import { timer } from 'utils/asyncFlow';
@@ -15,13 +15,6 @@ class ethWallet {
     constructor({
         mnemonic
     }) {
-        console.log('provider?????', provider);
-
-        // provider = provider || new ethProvider(process.env.ethServer);
-        // console.log('provider', provider);
-
-        // this.web3 = new web3Eth(provider);
-        // console.log('web3', this.web3);
 
         this.utils = utils;
         console.log('utils', this.utils);
@@ -34,6 +27,11 @@ class ethWallet {
         this.addAddr();
         console.log('addrs', this.addrs);
 
+        provider = provider || new ethProvider(process.env.ethServer);
+        console.log('provider', provider);
+
+        this.web3 = new web3Eth(provider);
+        console.log('web3', this.web3);
 
         this.contract = new this.web3.Contract(viteContractAbi, viteContractAddr);
         this.tokenList = {
