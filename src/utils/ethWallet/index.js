@@ -24,9 +24,7 @@ class ethWallet {
         this.addAddr();
 
         provider = provider || new ethProvider(process.env.ethServer);
-
         this.web3 = new web3Eth(provider);
-        console.log('web3', this.web3);
 
         this.contract = new this.web3.Contract(viteContractAbi, viteContractAddr);
         this.tokenList = {
@@ -113,22 +111,14 @@ class ethWallet {
 
     getDefaultAddr() {
         if (!this.addrs || !this.addrs.length) {
-            console.log('defaultAddr', null);
             return null;
         }
-        console.log('defaultAddr', this.addrs[this.defaultAddrInx].hexAddr);
-
         return this.addrs[this.defaultAddrInx].hexAddr;
     }
     addAddr() {
         let index = this.addrs.length;
-        console.log('add index', index);
         let addrObj = address(this.mnemonic, index);
-        console.log('addrObj', addrObj);
-
         this.addrs.push(addrObj);
-        console.log('addrObj', this.addrs);
-
         return addrObj.hexAddr;
     }
 
@@ -253,7 +243,6 @@ function sendEthTx(ethTxHash) {
     return new Promise((res, rej) => {
         this.web3.sendSignedTransaction(ethTxHash, (err, hash) => {
             if (!err) {
-                console.log(hash);
                 return res(hash);
             }
             return rej(err);

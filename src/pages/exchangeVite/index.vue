@@ -32,22 +32,13 @@ export default {
         secTitle, viteAddress, token, transaction
     },
     created() {
-        console.log('create');
         let activeAccount = this.$wallet.getActiveAccount();
-        console.log('activeAcc', activeAccount);
-
         let mnemonic = activeAccount.getMnemonic();
-        console.log('mnemonic', mnemonic);
-
         this.ethWallet = new _ethWallet({
             mnemonic
         });
-
-        console.log('new ethWallet', this.ethWallet);
-
         this.address = this.ethWallet.getDefaultAddr();
         this.viteAddress = activeAccount.getDefaultAddr();
-
         this.startLoopBalance();
     },
     destroyed() {
