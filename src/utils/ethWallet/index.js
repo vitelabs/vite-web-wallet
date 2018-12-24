@@ -1,3 +1,9 @@
+// IE
+if(!!window.ActiveXObject || 'ActiveXObject' in window) {
+    window.WebSocket = undefined;
+}
+
+
 const web3Eth = require('web3-eth');
 const utils = require('web3-utils');
 const Tx = require('ethereumjs-tx');
@@ -15,11 +21,6 @@ class ethWallet {
     constructor({
         mnemonic
     }) {
-        // IE
-        if(!!window.ActiveXObject || 'ActiveXObject' in window) {
-            window.WebSocket = undefined;
-        }
-
         this.utils = utils;
         console.log('utils', this.utils);
 
