@@ -1,6 +1,7 @@
 // IE
-if(!!window.ActiveXObject || 'ActiveXObject' in window) {
-    window.WebSocket = undefined;
+if (!!window.ActiveXObject || 'ActiveXObject' in window) {
+    var url = require('url');
+    window.URL = url.URL;
 }
 
 
