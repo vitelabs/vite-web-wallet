@@ -27,6 +27,8 @@ class ethWallet {
         this.addAddr();
         console.log('addrs', this.addrs);
 
+        console.log('ethProvider', ethProvider);
+        console.log(process.env.ethServer);
         provider = provider || new ethProvider(process.env.ethServer);
         console.log('provider', provider);
 
