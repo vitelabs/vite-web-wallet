@@ -16,13 +16,22 @@ class ethWallet {
         mnemonic
     }) {
         provider = provider || new ethProvider(process.env.ethServer);
+        console.log('provider', provider);
+
         this.web3 = new web3Eth(provider);
+        console.log('web3', this.web3);
+
         this.utils = utils;
+        console.log('utils', this.utils);
 
         this.mnemonic = mnemonic;
+        console.log('mnemonic', this.mnemonic);
+
         this.defaultAddrInx = 0;
         this.addrs = [];
         this.addAddr();
+        console.log('addrs', this.addrs);
+
 
         this.contract = new this.web3.Contract(viteContractAbi, viteContractAddr);
         this.tokenList = {
@@ -109,14 +118,22 @@ class ethWallet {
 
     getDefaultAddr() {
         if (!this.addrs || !this.addrs.length) {
+            console.log('defaultAddr', null);
             return null;
         }
+        console.log('defaultAddr', this.addrs[this.defaultAddrInx].hexAddr);
+
         return this.addrs[this.defaultAddrInx].hexAddr;
     }
     addAddr() {
         let index = this.addrs.length;
+        console.log('add index', index);
         let addrObj = address(this.mnemonic, index);
+        console.log('addrObj', addrObj);
+
         this.addrs.push(addrObj);
+        console.log('addrObj', this.addrs);
+
         return addrObj.hexAddr;
     }
 
