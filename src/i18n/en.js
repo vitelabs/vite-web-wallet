@@ -419,7 +419,8 @@ module.exports = {
             text: 'You can migrate ERC20 tokens into VITE into our TestNet by VITE conversion function. In TesTNet, casting your vote for official SBPs to collect rewards, the annualized ratio may reach 20%. Your ERC20 VITE tokens will be transferred to Ethereum black hole address: {blackAddr}, you will receive the same amount of VITE at your Vite address when Ethereum black hole address has received the transaction and confirmed. Once you are in the conversion process, confirm that there are enough VITE and ETH (as gas) in your Ethereum address of Vite wallet.'
         },
         exchange: {
-            vite: 'VITE Conversion',
+            vite: 'Conversion',
+            sendTrans: 'Send',
             viteAddr: 'Receiving Address',
             viteAmount: 'Conversion Amount',
             gas: 'Mining Fee',

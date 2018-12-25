@@ -133,5 +133,7 @@ export default {
 }
 .token-list {
     display: flex;
+    max-width: 548px;
+    justify-content: space-between;
 }
 </style>
