@@ -1,5 +1,7 @@
 <template>
     <div class="input-wrapper">
+        <!-- Safari autocomplete -->
+        <input fake_pass type="password" style="display:none"/>
         <input v-model="value" @input.prevent="update" type="text"
                :placeholder="placeholder" autocomplete="off"
                @blur="_blur" @focus="_focus"/>

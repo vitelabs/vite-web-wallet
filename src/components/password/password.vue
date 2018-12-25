@@ -6,7 +6,9 @@
         <div v-show="isShowPWD" class="pass-input" :class="{
             'distance': !!content
         }">
-            <input v-model="password" autocomplete="off" :placeholder="$t('pwdConfirm.placeholder')" type="password"/>
+            <!-- Safari autocomplete -->
+            <input fake_pass type="password" style="display:none"/>
+            <input v-model="password" :placeholder="$t('pwdConfirm.placeholder')" type="password"/>
         </div>
         <div v-show="isShowPWD && isShowPWDHold" class="hold-pwd __pointer" @click="toggleHold">
             <span :class="{ 'active': isPwdHold }"></span>
