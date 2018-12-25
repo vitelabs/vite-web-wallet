@@ -2,7 +2,10 @@
     <div class="__wrapper">
         <sec-title></sec-title>
 
-        <div class='title'> <img src="../../assets/imgs/eth_logo.svg"/>ETH </div>
+        <div class='title'>
+            <img src="../../assets/imgs/eth_logo.svg"/>ETH
+            <span class="record" @click="toRecord">{{ $t('exchangeVite.record') }}</span>
+        </div>
 
         <vite-address :title="$t('account.address')" :address="address" :addressQrcode="'ethereum:' + address"></vite-address>
 
@@ -65,7 +68,10 @@ export default {
             this.transType = '';
             this.transToken = '';
         },
-        
+        toRecord() {
+            window.open(`${process.env.ethNet}/address/${this.address}`);
+        },
+
         startLoopBalance() {
             this.stopLoopBalance();
 
@@ -102,6 +108,12 @@ export default {
     border: 1px solid rgba(246,245,245,1);
 }
 .title {
+    max-width: 548px;
+    margin: 30px 0;
+    font-size: 18px;
+    font-family: $font-bold, arial, sans-serif;
+    font-weight: 600;
+    color: rgba(29,32,36,1);
     img {
         display: inline-block;
         width: 30px;
@@ -109,12 +121,15 @@ export default {
         margin-bottom: -8px;
         margin-right: 6px;
     }
-    margin: 30px 0;
-    font-size: 18px;
-    font-family: $font-bold, arial, sans-serif;
-    font-weight: 600;
-    color: rgba(29,32,36,1);
     line-height: 30px;
+    .record {
+        float: right;
+        background: #EDF1FF;
+        border-radius: 2px;
+        padding: 0px 12px;
+        font-size: 14px;
+        color: #007AFF;
+    }
 }
 .token-list {
     display: flex;

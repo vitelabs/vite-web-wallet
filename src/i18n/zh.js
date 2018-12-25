@@ -414,6 +414,7 @@ module.exports = {
     exchangeVite: {
         title: '置换VITE',
         gas: '矿工费用',
+        record: '置换记录',
         aboutPrice: '约 {amount} ether',
         help: {
             title: '快速理解置换VITE',
