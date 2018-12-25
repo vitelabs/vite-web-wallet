@@ -1,6 +1,6 @@
 <template>
     <div class="input-wrapper">
-        <input v-model="value" @input.prevent="update" 
+        <input v-model="value" @input.prevent="update" type="text"
                :placeholder="placeholder" autocomplete="off"
                @blur="_blur" @focus="_focus"/>
         <slot></slot>
