@@ -422,6 +422,7 @@ module.exports = {
         },
         exchange: {
             vite: '置换VITE',
+            sendTrans: '发送交易',
             viteAddr: '接收VITE地址',
             viteAmount: '置换VITE金额',
             gas: '矿工费用',
