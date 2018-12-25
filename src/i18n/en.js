@@ -416,8 +416,7 @@ module.exports = {
         aboutPrice: 'Approx {amount} ETH',
         help: {
             title: 'Quick Understanding of VITE Conversion',
-            // text: '通过VITE置换功能，可以将以太网络上的ERC20 VITE代币置换到VITE网络中，在VITE网络中可以投票官方超级节点赚取奖励，年化收益达20%。在置换过程中，你的ERC20 VITE将被转入黑洞地址：{blackAddr}，当黑洞地址收到交易并被确认后，置换系统将为您发放等值的VITE至您的VITE地址中。在置换过程中，您需要将ERC20的VITE 与 少量ETH（用于置换消耗gas）转入至VITE钱包的ETH地址中。'
-            text: 'You can migrate ERC20 tokens into VITE into our TestNet by VITE conversion function. Your ERC20 VITE tokens will be transferred to Ethereum black hole address: {blackAddr}, you will receive the same amount of VITE at your Vite address when Ethereum black hole address has received the transaction and confirmed.'
+            text: 'You can migrate ERC20 tokens into VITE into our TestNet by VITE conversion function. In TesTNet, casting your vote for official SBPs to collect rewards, the annualized ratio may reach 20%. Your ERC20 VITE tokens will be transferred to Ethereum black hole address: {blackAddr}, you will receive the same amount of VITE at your Vite address when Ethereum black hole address has received the transaction and confirmed. Once you are in the conversion process, confirm that there are enough VITE and ETH (as gas) in your Ethereum address of Vite wallet.'
         },
         exchange: {
             vite: 'VITE Conversion',
