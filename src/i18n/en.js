@@ -412,7 +412,7 @@ module.exports = {
     exchangeVite: {
         title: 'VITE Conversion',
         gas: 'Mining Fee',
-        record: '置换记录',
+        record: 'Conversion History',
         aboutPrice: 'Approx {amount} ETH',
         help: {
             title: 'Quick Understanding of VITE Conversion',
