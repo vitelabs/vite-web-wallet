@@ -410,21 +410,21 @@ module.exports = {
 
     // exchangeVite
     exchangeVite: {
-        title: '置换VITE',
-        gas: '矿工费用',
+        title: 'VITE Conversion',
+        gas: 'Mining Fee',
         record: '置换记录',
-        aboutPrice: '约 {amount} ether',
+        aboutPrice: 'Approx {amount} ETH',
         help: {
-            title: '快速理解置换VITE',
-            text: '通过VITE置换功能，可以将以太网络上的ERC20 VITE代币置换到VITE网络中，在置换过程中，你的ERC20 VITE将被转入黑洞地址：{blackAddr}，当黑洞地址收到交易并被确认后，VITE将为您发放等值的VITE至您的VITE地址中'
+            title: 'Quick Understanding of VITE Conversion',
+            text: 'You can migrate ERC20 tokens into VITE into our TestNet by VITE conversion function. Your ERC20 VITE tokens will be transferred to Ethereum black hole address: {blackAddr}, you will receive the same amount of VITE at your Vite address when Ethereum black hole address has received the transaction and confirmed.'
         },
         exchange: {
-            vite: '置换VITE',
-            viteAddr: '接收VITE地址',
-            viteAmount: '置换VITE金额',
-            gas: '矿工费用',
-            btn: '确认置换',
-            success: '置换请求成功，预计以太网交易被确认后20分钟到账'
+            vite: 'VITE Conversion',
+            viteAddr: 'Receiving Address',
+            viteAmount: 'Conversion Amount',
+            gas: 'Mining Fee',
+            btn: 'Confirm Conversion',
+            success: 'Conversion Successful. It may take approx 20 minutes to get VITE into your account after the Ethereum transaction is confirmed.'
         }
     },
     
