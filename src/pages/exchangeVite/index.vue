@@ -69,7 +69,7 @@ export default {
             this.transToken = '';
         },
         toRecord() {
-            window.open(`${process.env.ethNet}/address/${this.address}`);
+            window.open(`${process.env.ethNet}/address/${this.address}#tokentxns`);
         },
 
         startLoopBalance() {
