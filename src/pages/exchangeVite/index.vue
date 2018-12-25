@@ -4,7 +4,7 @@
 
         <div class='title'>
             <img src="../../assets/imgs/eth_logo.svg"/>ETH
-            <span class="record" @click="toRecord">{{ $t('exchangeVite.record') }}</span>
+            <span class="record __prointer" @click="toRecord">{{ $t('exchangeVite.record') }}</span>
         </div>
 
         <vite-address :title="$t('account.address')" :address="address" :addressQrcode="'ethereum:' + address"></vite-address>
