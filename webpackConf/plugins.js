@@ -34,6 +34,11 @@ const exchangeViteServer = {
     test: '\'http://132.232.60.116:8000\'',
     dev: '\'http://132.232.60.116:8000\''
 };
+const ethNet = {
+    production: '\'https://etherscan.io\'',
+    test: '\'https://ropsten.etherscan.io\'',
+    dev: '\'https://ropsten.etherscan.io\''
+};
 
 let ENV = process.env.NODE_ENV || 'dev';
 
@@ -52,7 +57,8 @@ let plugins = [
         'process.env.viteNet': viteNet[ENV],
         'process.env.contractAddress': contractAddress[ENV],
         'process.env.ethServer': ethServer[ENV],
-        'process.env.exchangeViteServer': exchangeViteServer[ENV]
+        'process.env.exchangeViteServer': exchangeViteServer[ENV],
+        'process.env.ethNet': ethNet[ENV]
     }),
     new webpack.NormalModuleReplacementPlugin(/\/buffer\//, function(resource) {
         resource.request = Buffer_Path;
