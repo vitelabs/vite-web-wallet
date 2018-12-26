@@ -3,7 +3,11 @@
         <i class="icon"></i>
         <!-- Safari autocomplete -->
         <input fake_pass type="password" style="display:none"/>
-        <input :placeholder="placeholder" name="search" autocomplete="off" ref="i" type="text" v-model="v" @input.prevent="updateKey">
+        <input readonly onfocus="this.removeAttribute('readonly');" 
+               :placeholder="placeholder" name="search" 
+               autocomplete="off" ref="i" type="text" 
+               v-model="v" @input.prevent="updateKey">
+        <input fake_pass type="password" style="display:none"/>
     </div>
 </template>
 <script>
