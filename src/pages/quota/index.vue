@@ -88,7 +88,7 @@ export default {
                 return;
             }
 
-            let result = this.$validAmount(this.cancelAmount);
+            let result = this.$validAmount(this.cancelAmount, this.tokenInfo.decimals);
             if (!result) {
                 this.amountErr = this.$t('transList.valid.amt');
                 return false;

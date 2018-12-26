@@ -153,7 +153,7 @@ export default {
         },
 
         testAmount() {
-            let result = this.$validAmount(this.amount);
+            let result = this.$validAmount(this.amount, this.token.decimals);
             
             if (!result) {
                 this.amountErr = this.$t('transList.valid.amt');
