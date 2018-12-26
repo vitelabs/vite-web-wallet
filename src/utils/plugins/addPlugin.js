@@ -39,7 +39,7 @@ export default {
         Vue.prototype.$validAmount = (amount = '', decimals) => {
             let limit = decimals >= 8 ? 8 : decimals;
             let decimalNum = new RegExp(`^\\d+[.]\\d{1,${limit}}$`);
-            let num = new RegExp('^(\d+)$');
+            let num = new RegExp('^(\\d+)$');
             return num.test(amount) || decimalNum.test(amount);
         };
         Vue.prototype.$trim = (msg = '') => {
