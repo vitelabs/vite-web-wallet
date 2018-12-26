@@ -198,7 +198,9 @@ export default {
 
             let amount = this.amount;
             let toAddress = this.toAddress;
-            this.ethWallet.estimateGas(toAddress, amount, this.transactionType).then((gas) => {
+            let value = BigNumber.toMin(amount, this.token.decimals);
+            
+            this.ethWallet.estimateGas(toAddress, value, this.transactionType).then((gas) => {
                 if (!this || amount !== this.amount || toAddress !== this.toAddress) {
                     return;
                 }
