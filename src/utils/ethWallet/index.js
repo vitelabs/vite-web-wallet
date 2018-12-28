@@ -212,7 +212,7 @@ async function getTxHash({
     let privateKey = acount.wallet.privKey;
 
     let nonce = await this.web3.getTransactionCount(ethAddr, this.web3.defaultBlock.pending);
-    let gasPrice = utils.toWei(gwei + '', 'gwei');
+    let gasPrice = utils.toWei(gwei + '', 'gwei').toString();
 
     let txData = {
         nonce: utils.toHex(nonce++),
