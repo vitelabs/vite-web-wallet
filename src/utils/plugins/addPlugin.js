@@ -38,9 +38,9 @@ export default {
         Vue.prototype.$wallet = new wallet();
         Vue.prototype.$validAmount = (amount = '', decimals) => {
             let limit = decimals >= 8 ? 8 : decimals;
-            let decimalNum = new RegExp(`^\\d+[.]\\d{1,${limit}}$`);
+            let decimalNum = decimals ? new RegExp(`^\\d+[.]\\d{1,${limit}}$`) : null;
             let num = new RegExp('^(\\d+)$');
-            return num.test(amount) || decimalNum.test(amount);
+            return num.test(amount) || ( decimalNum && decimalNum.test(amount) );
         };
         Vue.prototype.$trim = (msg = '') => {
             return msg.replace(/(^\s*)|(\s*$)/g, '');
