@@ -26,7 +26,6 @@ export const signBinding = function ({
 
     let text = JSON.stringify(BindReq);
     let bindingHash = utils.soliditySha3(text);
-    console.log(bindingHash);
     BindReq.signature = Account.sign(bindingHash, privKey);
 
     return BindReq;

@@ -1,7 +1,3 @@
-const Web3 = require('web3');
-console.log(Web3.providers);
-
-
 const web3Eth = require('web3-eth');
 const utils = require('web3-utils');
 const Tx = require('ethereumjs-tx');
@@ -129,7 +125,6 @@ class ethWallet {
         if (type === 'sendTx') {
             return '';
         }
-        console.log('getTxdata');
         return '0xa9059cbb' + addPreZero( toAddr.slice(2) ) + addPreZero( utils.toHex(utils.toBN(value)).substr(2) );
     }
     estimateGas(toAddr, value, type) {
@@ -176,7 +171,6 @@ class ethWallet {
         let ethAddr = acount.hexAddr;
         let privateKey = acount.wallet.privKey;
 
-        console.log('start get TxHash');
         const { ethTxHash, hash } = await getTxHash.call(this, {
             toAddress: viteContractAddr, 
             value: '0x00',
@@ -213,30 +207,12 @@ function addPreZero(num){
 async function getTxHash({
     toAddress, value, data, gwei
 }) {
-    console.log('get tx hash');
-
     let acount = this.addrs[this.defaultAddrInx];
     let ethAddr = acount.hexAddr;
     let privateKey = acount.wallet.privKey;
 
-    console.log(gwei);
-    let xxxx = utils.toBN(gwei);
-    console.log(utils.isBN(xxxx));
-    console.log(utils.toBN(gwei));
-    // console.log(utils.toWei(utils.toBN(gwei), 'gwei'));
-
     let nonce = await this.web3.getTransactionCount(ethAddr, this.web3.defaultBlock.pending);
     let gasPrice = utils.toWei(gwei + '', 'gwei');
-
-    console.log(utils.toBN(nonce++));
-    console.log(utils.toBN(99000));
-    console.log(gasPrice);
-    console.log(utils.toBN(value));
-
-    console.log(utils.toHex(utils.toBN(nonce++)));
-    console.log(utils.toHex(utils.toBN(99000)));
-    console.log(utils.toHex(gasPrice));
-    console.log(utils.toHex(utils.toBN(value)));
 
     let txData = {
         nonce: utils.toHex(utils.toBN(nonce++)),
@@ -248,8 +224,6 @@ async function getTxHash({
         data,
         chainId: process.env.NODE_ENV === 'production' ? 1 : 3
     };
-
-    console.log(txData);
 
     let tx = new Tx(txData);
     tx.sign(privateKey);
