@@ -416,6 +416,7 @@ module.exports = {
         gas: '矿工费用',
         record: '置换记录',
         aboutPrice: '约 {amount} ETH',
+        note: '官方提示：提交置换后请您耐心等待，置换VITE到账需要等以太交易被确认30个块，以太交易可以在置换记录中查看',
         help: {
             title: '快速理解置换VITE',
             text: '通过VITE置换功能，可以将以太网络上的ERC20 VITE代币置换到VITE网络中，在VITE网络中可以投票官方超级节点赚取奖励，年化收益达20%。在置换过程中，你的ERC20 VITE将被转入黑洞地址：{blackAddr}，当黑洞地址收到交易并被确认后，置换系统将为您发放等值的VITE至您的VITE地址中。在置换过程中，您需要将ERC20的VITE 与 少量ETH（用于置换消耗gas）转入至VITE钱包的ETH地址中。'
