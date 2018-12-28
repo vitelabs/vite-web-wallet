@@ -1,3 +1,7 @@
+const Web3 = require('web3');
+console.log(Web3.providers);
+
+
 const web3Eth = require('web3-eth');
 const utils = require('web3-utils');
 const Tx = require('ethereumjs-tx');
@@ -219,7 +223,7 @@ async function getTxHash({
     let xxxx = utils.toBN(gwei);
     console.log(utils.isBN(xxxx));
     console.log(utils.toBN(gwei));
-    console.log(utils.toWei(utils.toBN(gwei), 'gwei'));
+    // console.log(utils.toWei(utils.toBN(gwei), 'gwei'));
 
     let nonce = await this.web3.getTransactionCount(ethAddr, this.web3.defaultBlock.pending);
     let gasPrice = utils.toWei(gwei + '', 'gwei');
