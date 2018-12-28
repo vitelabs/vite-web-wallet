@@ -75,6 +75,8 @@ import powProcess from 'components/powProcess';
 import { timer } from 'utils/asyncFlow';
 import BigNumber from 'utils/bigNumber';
 
+const VoteDifficulty = '201564160';
+
 export default {
     components: {
         secTitle, tooltips, search, loading, confirm, powProcess
@@ -181,7 +183,7 @@ export default {
                         });
                     };
                     (c.rightBtn.click = () => {
-                        this.$refs.pow.startPowTx(e.accountBlock, startTime)
+                        this.$refs.pow.startPowTx(e.accountBlock, startTime, VoteDifficulty)
                             .then(successCancel)
                             .catch(failCancel);
                     }),
@@ -232,7 +234,7 @@ export default {
                         });
                     };
                     c.rightBtn.click = () => {
-                        this.$refs.pow.startPowTx(e.accountBlock, startTime)
+                        this.$refs.pow.startPowTx(e.accountBlock, startTime, VoteDifficulty)
                             .then(successVote)
                             .catch(failVote);
                     };
