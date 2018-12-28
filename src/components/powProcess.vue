@@ -68,7 +68,7 @@ export default {
             this.isShow = false;
             this.cancel();
         },
-        async startPowTx(accountBlock, startTime) {
+        async startPowTx(accountBlock, startTime, difficulty) {
             let now = new Date().getTime();
             if (startTime && now - startTime > 2000) {
                 accountBlock.prevHash = null;
@@ -87,7 +87,7 @@ export default {
             const activeAccount = this.$wallet.getActiveAccount();
 
             return new Promise((res, rej) => {
-                getPowNonce(activeAccount.getDefaultAddr(), accountBlock.prevHash).then((data) => {
+                getPowNonce(activeAccount.getDefaultAddr(), accountBlock.prevHash, difficulty).then((data) => {
                     accountBlock.difficulty = data.difficulty;
                     accountBlock.nonce = data.nonce;
 
