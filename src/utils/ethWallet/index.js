@@ -125,7 +125,7 @@ class ethWallet {
         if (type === 'sendTx') {
             return '';
         }
-        return '0xa9059cbb' + addPreZero( toAddr.slice(2) ) + addPreZero( utils.toHex(utils.toBN(value)).substr(2) );
+        return '0xa9059cbb' + addPreZero( toAddr.slice(2) ) + addPreZero( utils.toHex(value).substr(2) );
     }
     estimateGas(toAddr, value, type) {
         let to = type === 'exchange' ? blackHole : toAddr;
