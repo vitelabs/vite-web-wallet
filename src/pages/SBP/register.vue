@@ -6,28 +6,24 @@
                     {{ $t('SBP.section1.nodeName') }}
                     <span v-show="nodeNameErr" class="err">{{ nodeNameErr }}</span>
                 </div>
-                <span class="tips" :class="{
-                    'active': tipsType === 'name'
-                }">{{ $t('SBP.section1.nameHint') }}</span>
-                <div class="input-item all __ellipsis">
-                    <input v-model="nodeName" type="text"
-                           @blur="hideTips" @focus="showTips('name')"
-                           :placeholder="$t('SBP.section1.namePlaceholder')" />
-                </div>
+                <span class="tips" :class="{'active': tipsType === 'name'}">
+                    {{  tipsType === 'name' ? $t('SBP.section1.nameHint') : '' }}
+                </span>
+                <vite-input v-model="nodeName" :valid="testName"
+                            :placeholder="$t('SBP.section1.namePlaceholder')"
+                            @blur="hideTips" @focus="showTips('name')"></vite-input>
             </div>
             <div class="item">
                 <div class="title">
                     {{ $t('SBP.section1.producerAddr') }}
                     <span v-show="producerAddrErr" class="err">{{ producerAddrErr }}</span>
                 </div>
-                <span class="tips" :class="{
-                    'active': tipsType === 'addr'
-                }">{{ $t('SBP.section1.addrHint') }}</span>
-                <div class="input-item all __ellipsis">
-                    <input v-model="producerAddr" type="text"
-                           @blur="hideTips" @focus="showTips('addr')"
-                           :placeholder="$t('SBP.section1.addrPlaceholder')" />
-                </div>
+                <span class="tips" :class="{'active': tipsType === 'addr'}">
+                    {{ tipsType === 'addr' ? $t('SBP.section1.addrHint') : '' }}
+                </span>
+                <vite-input v-model="producerAddr" :valid="testAddr"
+                            :placeholder="$t('SBP.section1.addrPlaceholder')"
+                            @blur="hideTips" @focus="showTips('addr')"></vite-input>
             </div>
         </div>
 
@@ -62,12 +58,16 @@
 <script>
 import Vue from 'vue';
 import { quotaConfirm } from 'components/quota/index';
+import viteInput from 'components/viteInput';
+import BigNumber from 'utils/bigNumber';
+import { address } from 'utils/tools';
 
 const amount = 500000;
-let nameTimeout = null;
-let addrTimeout = null;
 
 export default {
+    components: {
+        viteInput
+    },
     props: {
         tokenInfo: {
             type: Object,
@@ -116,8 +116,8 @@ export default {
                 return '';
             }
             let balance = this.tokenBalList[this.tokenInfo.tokenId] ? this.tokenBalList[this.tokenInfo.tokenId].totalAmount : 0;
-            let minAmount = viteWallet.BigNumber.toMin(amount, this.tokenInfo.decimals);
-            if (viteWallet.BigNumber.compared(balance, minAmount) < 0) {
+            let minAmount = BigNumber.toMin(amount, this.tokenInfo.decimals);
+            if (BigNumber.compared(balance, minAmount) < 0) {
                 return this.$t('transList.valid.bal');
             }
             return '';
@@ -134,36 +134,18 @@ export default {
     },
     watch: {
         producerAddr: function() {
-            clearTimeout(addrTimeout);
-            addrTimeout = null;
             this.hideTips();
-
-            if (this.stopWatch) {
-                return;
-            }
-
-            addrTimeout = setTimeout(()=> {
-                addrTimeout = null;
-                this.testAddr();
-            }, 500);
         },
         nodeName: function() {
-            clearTimeout(nameTimeout);
-            nameTimeout = null;
             this.hideTips();
-
-            if (this.stopWatch) {
-                return;
-            }
-
-            nameTimeout = setTimeout(()=> {
-                nameTimeout = null;
-                this.testName();
-            }, 500);
-        },
+        }
     },
     methods: {
         testName() {
+            if (this.stopWatch) {
+                return;
+            }
+
             let nodeName = this.nodeName.trim();
 
             if (!nodeName || 
@@ -182,8 +164,12 @@ export default {
             this.nodeNameErr = '';
         },
         testAddr() {
+            if (this.stopWatch) {
+                return;
+            }
+
             if (!this.producerAddr || 
-                !viteWallet.Types.isValidHexAddr(this.producerAddr)) {
+                !address.isValidHexAddr(this.producerAddr)) {
                 this.producerAddrErr = this.$t('SBP.section1.addrErr');
                 return;
             }
@@ -206,8 +192,6 @@ export default {
 
         clearAll() {
             this.stopWatch = true;
-            clearTimeout(nameTimeout);
-            clearTimeout(addrTimeout);
             this.producerAddr = '';
             this.nodeName = '';
             this.nodeNameErr = '';
@@ -242,7 +226,7 @@ export default {
 
             this.sendTx({
                 producerAddr, amount, nodeName
-            }, 'registerBlock').then(() => {
+            }, 'SBPreg').then(() => {
                 this.loading = false;
                 this.$toast(this.$t('SBP.section1.registerSuccess'));
                 this.clearAll();
@@ -256,7 +240,7 @@ export default {
                     this.stopWatch = false;
                 });
             }).catch((err) => {
-                console.log(err);
+                console.warn(err);
                 this.loading = false;
 
                 if (err && err.error && err.error.code && err.error.code === -35002) {
@@ -294,7 +278,7 @@ export default {
             } 
         }
         .title {
-            font-family: $font-bold;
+            font-family: $font-bold, arial, sans-serif;
             font-size: 14px;
             color: #1D2024;
             letter-spacing: 0.35px;
@@ -316,7 +300,7 @@ export default {
             height: 40px;
             line-height: 40px;
             text-align: center;
-            font-family: $font-bold;
+            font-family: $font-bold, arial, sans-serif;
             font-size: 14px;
             color: #FBFBFB;
             &.unuse {

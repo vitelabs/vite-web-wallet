@@ -92,7 +92,7 @@ export default {
                     name: account.name || '',
                     addr,
                     showAddr,
-                    entropy: account.entropy || ''
+                    id: account.id || ''
                 };
             }
 
@@ -151,7 +151,7 @@ export default {
 
                 this.isLoading = false;
                 let activeAccount = this.$wallet.getActiveAccount();
-                activeAccount.unLock();
+                activeAccount.unlock();
                 this.$router.push({ name: 'account' });
             };
 

@@ -1,5 +1,5 @@
 <template>
-    <div class="setting-wrapper">
+    <div class="setting-wrapper __wrapper">
         <sec-title :isShowHelp="false"></sec-title>
         <div class="content-wrapper">
             <div class="content">
@@ -66,11 +66,10 @@ export default {
 .setting-wrapper {
     position: relative;
     box-sizing: border-box;
-    padding: 30px;
     height: 100%;
     .content-wrapper {
         position: absolute;
-        top: 92px;
+        top: 102px;
         bottom: 30px;
         left: 30px;
         right: 30px;
@@ -112,7 +111,7 @@ export default {
     }
 }
 
-@media only screen and (max-width: 550px) {
+@media only screen and (max-width: 750px) {
     .setting-wrapper {
         padding: 15px;
     }

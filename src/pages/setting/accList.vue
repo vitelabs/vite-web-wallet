@@ -8,10 +8,10 @@
             <div ref="listWrapper" class="list-wrapper">
                 <div ref="list">
                     <div class="acc-item" v-for="(addr, index) in addrList" :key="index">
-                        <span @click="setDefault(addr)" class="select" :class="{
+                        <span @click="setDefault(addr, index)" class="select" :class="{
                             'active': defaultAddr === addr
                         }"></span>
-                        <span @click="setDefault(addr)" class="describe __ellipsis">{{(index + 1) + '. ' + addr}}</span>
+                        <span @click="setDefault(addr, index)" class="describe __ellipsis">{{(index + 1) + '. ' + addr}}</span>
                         <img @click="copy(addr)" class="copy __pointer" src="../../assets/imgs/copy_default.svg"/>
                     </div>
                 </div>
@@ -34,7 +34,7 @@ export default {
 
         return {
             activeAccount,
-            isWalletAcc: activeAccount.isWalletAcc,
+            isWalletAcc: activeAccount.type === 'wallet',
             addrList: activeAccount.getAddrList(),
             defaultAddr: activeAccount.getDefaultAddr(),
             copyAddr: ''
@@ -43,7 +43,7 @@ export default {
     methods: {
         copy(addr) {
             copy(addr);
-            this.$toast(this.$t('accDetail.hint.copy'));
+            this.$toast(this.$t('account.hint.copy'));
         },
         addAddr() {
             let addrList = this.activeAccount.getAddrList();
@@ -64,8 +64,8 @@ export default {
                 this.$refs.listWrapper.scrollTop = height - wrapperHeight;
             });
         },
-        setDefault(addr) {
-            let res = this.activeAccount.setDefaultAddr(addr);
+        setDefault(addr, index) {
+            let res = this.activeAccount.setDefaultAddr(addr, index);
             if (!res) {
                 this.$toast(this.$t('hint.err'));
                 return;

@@ -1,5 +1,5 @@
 <template>
-    <div class="quota-wrapper">
+    <div class="quota-wrapper __wrapper">
         <quota-head></quota-head>
 
         <loading v-if="loadingToken" class="loading"></loading>
@@ -14,10 +14,8 @@
                      :rightBtnClick="submit" :btnUnuse="!!cancelUnuse">
                 {{ $t(`quota.confirm.cancel.describe`, { amount: activeAmountLimit }) }}
                 <div class="cancel-amount" v-show="amountErr">{{ amountErr }}</div>
-                <div class="cancel-input">
-                    <input type="text" v-model="cancelAmount"
-                           :placeholder="$t('quota.cancelAmount')" />
-                </div>
+                <vite-input class="cancel-input" v-model="cancelAmount" :valid="testAmount"
+                            :placeholder="$t('quota.cancelAmount')"></vite-input>
             </confirm>
         </div>
 
@@ -44,12 +42,12 @@ import list from './list';
 import confirm from 'components/confirm';
 import powProcess from 'components/powProcess';
 import loading from 'components/loading';
-
-let amountTimeout = null;
+import viteInput from 'components/viteInput';
+import BigNumber from 'utils/bigNumber';
 
 export default {
     components: {
-        quotaHead, myQuota, pledgeTx, confirm, list, powProcess, loading
+        quotaHead, myQuota, pledgeTx, confirm, list, powProcess, loading, viteInput
     },
     created() {
         this.tokenInfo = viteWallet.Ledger.getTokenInfo();
@@ -63,9 +61,6 @@ export default {
                 console.warn(err);
             });
         }
-    },
-    destroyed() {
-        clearTimeout(amountTimeout);
     },
     data() {
         let activeAccount = this.$wallet.getActiveAccount();
@@ -87,29 +82,19 @@ export default {
             return this.showConfirmType === 'cancel' && (!this.cancelAmount || this.amountErr);
         }
     },
-    watch: {
-        cancelAmount: function() {
-            clearTimeout(amountTimeout);
-            amountTimeout = null;
+    methods: {
+        testAmount() {
             if (this.stopWatch) {
                 return;
             }
 
-            amountTimeout = setTimeout(()=> {
-                amountTimeout = null;
-                this.testAmount();
-            }, 500);
-        }
-    },
-    methods: {
-        testAmount() {
-            let result = this.$validAmount(this.cancelAmount);
+            let result = this.$validAmount(this.cancelAmount, this.tokenInfo.decimals);
             if (!result) {
                 this.amountErr = this.$t('transList.valid.amt');
                 return false;
             }
-            if (viteWallet.BigNumber.isEqual(this.cancelAmount, 0) || 
-                viteWallet.BigNumber.compared(this.cancelAmount, this.activeAmountLimit) > 0) {
+            if (BigNumber.isEqual(this.cancelAmount, 0) || 
+                BigNumber.compared(this.cancelAmount, this.activeAmountLimit) > 0) {
                 this.amountErr = this.$t('quota.maxAmt', {
                     amount: this.activeAmountLimit
                 });
@@ -128,7 +113,6 @@ export default {
         },
         closeConfirm() {
             this.stopWatch = true;
-            clearTimeout(amountTimeout);
             this.cancelAmount = '';
             this.amountErr = '';
             Vue.nextTick(() => {
@@ -157,7 +141,7 @@ export default {
         },
 
         sendPledgeTx({
-            toAddr, amount
+            toAddress, amount
         }, type, cb) {
             if (!viteWallet.Net.getNetStatus()) {
                 this.$toast(this.$t('nav.noNet'));
@@ -165,19 +149,21 @@ export default {
                 return;
             }
 
-            amount = viteWallet.BigNumber.toMin(amount || 0, this.tokenInfo.decimals);            
-            this.activeAccount.sendTx({
+            amount = BigNumber.toMin(amount || 0, this.tokenInfo.decimals);     
+            this.activeAccount[type]({
                 tokenId: this.tokenInfo.tokenId,
-                toAddr,
+                toAddress,
                 amount
-            }, type).then(() => {
+            }).then(() => {
                 cb && cb(true);
             }).catch((err) => {
-                console.log(err);
+                console.warn(err);
                 if (err && err.error && err.error.code && err.error.code === -35002) {
-                    this.$refs.powProcess.startPowTx({
-                        toAddr, amount, tokenId: this.tokenInfo.tokenId
-                    }, type, cb);
+                    this.$refs.powProcess.startPowTx(err.accountBlock, 0).then(() => {
+                        cb && cb(true);
+                    }).catch(() => {
+                        cb && cb(false, err);
+                    });
                     return;
                 }
                 cb && cb(false, err);
@@ -192,7 +178,6 @@ export default {
 
 .quota-wrapper {
     position: relative;
-    padding: 40px;
     box-sizing: border-box;
     overflow: auto;
     height: 100%;
@@ -212,17 +197,7 @@ export default {
         word-break: break-word;
     }
     .cancel-input {
-        background: #FFFFFF;
-        border: 1px solid #D4DEE7;
-        border-radius: 2px;
-        height: 40px;
         margin-top: 27px;
-        line-height: 40px;
-        input {
-            width: 100%;
-            text-indent: 15px;
-            font-size: 14px;
-        }
     }
 }
 

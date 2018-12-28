@@ -63,7 +63,7 @@ module.exports = {
             }
         }, {
             test: /\.js$/,
-            exclude: /node_modules/,
+            exclude: /node_modules(?!\/base-x)/,
             use: {
                 loader: 'babel-loader',
                 options: {
@@ -83,6 +83,7 @@ module.exports = {
     },
     resolve: {
         alias: {
+            WSprovider: '@vite/vitejs/dist/es5/provider/WS',
             vue: 'vue/dist/vue.js',
             src: SRC_PATH,
             services: path.join(SRC_PATH, '/services'),

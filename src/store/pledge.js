@@ -1,3 +1,5 @@
+import BigNumber from 'utils/bigNumber';
+
 const pageCount = 50;
 
 let lastFetchTime = null;
@@ -44,13 +46,13 @@ const actions = {
         let fetchTime = new Date().getTime();
         lastFetchQuotaTime = fetchTime;
 
-        return viteWallet.Pledge.getPledgeQuota(address).then((data)=>{
-            if (fetchTime !== lastFetchQuotaTime || !data || !data.result) {
+        return $ViteJS.pledge.getPledgeQuota(address).then((result)=>{
+            if (fetchTime !== lastFetchQuotaTime || !result) {
                 return null;
             }
 
-            commit('commitQuota', data.result);
-            return data.result;
+            commit('commitQuota', result);
+            return result;
         });
     },
     fetchPledgeList({ commit, state }, { address, pageIndex }) {
@@ -58,26 +60,22 @@ const actions = {
         lastFetchTime = fetchTime;
         commit('commitSetCurrent', pageIndex);
 
-        return viteWallet.Pledge.getPledgeList({
-            addr: address,
-            index: pageIndex,
-            pageCount
-        }).then((data)=>{
+        return $ViteJS.pledge.getPledgeList(address, pageIndex, pageCount).then((result)=>{
             if (pageIndex !== state.currentPage || 
                 fetchTime !== lastFetchTime ||
-                !data || !data.result) {
+                !result) {
                 return null;
             }
 
-            commit('commitPledgeList', data.result);
-            return data.result;
+            commit('commitPledgeList', result);
+            return result;
         });
     }
 };
 
 const getters = {
     totalPledgePage(state) {
-        return viteWallet.BigNumber.dividedToNumber(state.totalNum || 0, pageCount);
+        return BigNumber.dividedToNumber(state.totalNum || 0, pageCount);
     },
     pledgeList(state) {
         let list = state.pledgeList || [];

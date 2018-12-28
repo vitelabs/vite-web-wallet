@@ -27,7 +27,12 @@ module.exports = {
         7: 'Withdrawal of Staking Quota',
         8: 'Token Issuance',
         9: 'Withdrawal of Staking Token',
-        10: 'Transfer'
+        10: 'Transfer',
+        11: 'Transfer',
+        12: 'Transfer',
+        13: 'Transfer',
+        14: 'Transfer',
+        15: 'Transfer'
     },
     
     firstNotice: {
@@ -124,7 +129,7 @@ module.exports = {
     },
 
     // account detail
-    accDetail: {
+    account: {
         title: 'Account Detail',
         transfer: 'Transfer',
         getTestToken: 'Get Test Tokens',
@@ -403,7 +408,27 @@ module.exports = {
         }
     },
 
-
+    // exchangeVite
+    exchangeVite: {
+        title: 'VITE Conversion',
+        gas: 'Mining Fee',
+        record: 'Conversion History',
+        aboutPrice: 'Approx {amount} ETH',
+        help: {
+            title: 'Quick Understanding of VITE Conversion',
+            text: 'You can migrate ERC20 tokens into VITE into our TestNet by VITE conversion function. In TesTNet, casting your vote for official SBPs to collect rewards, the annualized ratio may reach 20%. Your ERC20 VITE tokens will be transferred to Ethereum black hole address: {blackAddr}, you will receive the same amount of VITE at your Vite address when Ethereum black hole address has received the transaction and confirmed. Once you are in the conversion process, confirm that there are enough VITE and ETH (as gas) in your Ethereum address of Vite wallet.'
+        },
+        exchange: {
+            vite: 'Conversion',
+            sendTrans: 'Send',
+            viteAddr: 'Receiving Address',
+            viteAmount: 'Conversion Amount',
+            gas: 'Mining Fee',
+            btn: 'Confirm Conversion',
+            success: 'Conversion Successful. It may take approx 20 minutes to get VITE into your account after the Ethereum transaction is confirmed.'
+        }
+    },
+    
     pwdConfirm: {
         conf: 'Open password-free mode within 5 minutes',
         title: 'Password',

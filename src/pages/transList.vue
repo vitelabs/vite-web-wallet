@@ -1,5 +1,5 @@
 <template>
-    <div class="trans-list-wrapper">
+    <div class="trans-list-wrapper __wrapper">
         <sec-title class="title" :isShowHelp="false"></sec-title>
         <div class="trans-list-content">
             <tabel-list class="big-trans" :headList="[{
@@ -64,11 +64,12 @@ import tabelList from 'components/tabelList.vue';
 import secTitle from 'components/secTitle';
 import date from 'utils/date.js';
 import { timer } from 'utils/asyncFlow';
+import BigNumber from 'utils/bigNumber';
 import ellipsisAddr from 'utils/ellipsisAddr.js';
 import loopTime from 'config/loopTime';
 
 let transListInst = null;
-let txImgs = [txRegImg, txRegImg, txRegImg, txRewardImg, txVoteImg, txVoteImg, txQuotaImg, txQuotaImg, txTokenImg, txTokenImg, txTransImg];
+let txImgs = [txRegImg, txRegImg, txRegImg, txRewardImg, txVoteImg, txVoteImg, txQuotaImg, txQuotaImg, txTokenImg, txTokenImg, txTransImg, txTransImg, txTransImg, txTransImg, txTransImg, txTransImg];
 
 export default {
     components: {
@@ -106,7 +107,7 @@ export default {
                     status === 'unconfirmed' ? 'pink': 'blue';
                 let statusText = this.$t(`transList.status.${status}`) + (status === 'confirms' ? `(${trans.confirms})` : '');
 
-                let isZero = viteWallet.BigNumber.isEqual(trans.amount, 0);
+                let isZero = BigNumber.isEqual(trans.amount, 0);
                 let amount = trans.amount;
                 if (!isZero) {
                     amount = trans.isSend ? ('-' + trans.amount) : ('+' + trans.amount);
