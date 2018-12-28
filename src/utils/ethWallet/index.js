@@ -210,12 +210,28 @@ function addPreZero(num){
 async function getTxHash({
     toAddress, value, data, gwei
 }) {
+    console.log('get tx hash');
+
     let acount = this.addrs[this.defaultAddrInx];
     let ethAddr = acount.hexAddr;
     let privateKey = acount.wallet.privKey;
 
+    console.log(gwei);
+    console.log(utils.toBN(gwei));
+    console.log(utils.toWei(utils.toBN(gwei), 'gwei'));
+
     let nonce = await this.web3.getTransactionCount(ethAddr, this.web3.defaultBlock.pending);
-    let gasPrice = utils.toWei(utils.toBN(gwei), 'gwei').toString(); 
+    let gasPrice = utils.toWei(utils.toBN(gwei), 'gwei');
+
+    console.log(utils.toBN(nonce++));
+    console.log(utils.toBN(99000));
+    console.log(gasPrice);
+    console.log(utils.toBN(value));
+
+    console.log(utils.toHex(utils.toBN(nonce++)));
+    console.log(utils.toHex(utils.toBN(99000)));
+    console.log(utils.toHex(gasPrice));
+    console.log(utils.toHex(utils.toBN(value)));
 
     let txData = {
         nonce: utils.toHex(utils.toBN(nonce++)),
@@ -227,6 +243,8 @@ async function getTxHash({
         data,
         chainId: process.env.NODE_ENV === 'production' ? 1 : 3
     };
+
+    console.log(txData);
 
     let tx = new Tx(txData);
     tx.sign(privateKey);
