@@ -55,6 +55,8 @@ import viteInput from 'components/viteInput';
 import BigNumber from 'utils/bigNumber';
 import { encoder, address } from 'utils/tools';
 
+const SendDifficulty = '157108864';
+
 export default {
     components: {
         powProcess, confirm, viteInput
@@ -268,7 +270,7 @@ export default {
             };
 
             this.loading = true;
-            this.$refs.powProcess && this.$refs.powProcess.startPowTx(accountBlock, startTime).then(() => {
+            this.$refs.powProcess && this.$refs.powProcess.startPowTx(accountBlock, startTime, SendDifficulty).then(() => {
                 this.transSuccess();
             }).catch((err, type) => {
                 console.warn(type, err);
