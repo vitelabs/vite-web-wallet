@@ -15,8 +15,6 @@ export default function request({ method = 'GET', path, params = {} }) {
     xhr.open(method, path, true);
     xhr.setRequestHeader('content-type', 'application/json; charset=utf-8');
 
-    console.log(xhr.body);
-
     if (method === 'POST') {
         xhr.send(JSON.stringify(params));
     } else {
@@ -27,7 +25,6 @@ export default function request({ method = 'GET', path, params = {} }) {
         xhr.onload = function () {
             if (xhr.status == 200) {
                 try {
-                    console.log(xhr.responseText);
                     let { code, msg, data, error } = JSON.parse(xhr.responseText);
                     if (code !== 200) {
                         return rej({
