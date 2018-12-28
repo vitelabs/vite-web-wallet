@@ -27,15 +27,19 @@ module.exports = {
         7: '取回配额抵押',
         8: '铸币',
         9: '取回铸币抵押',
-        10: '转账'
+        10: '转账',
+        11: '转账',
+        12: '转账',
+        13: '转账',
+        14: '转账',
+        15: '转账'
     },
     
     firstNotice: {
         title: '使用前必读',
         text1: '创建账户时，请务必备份您的助记词，如果您访问了一个钓鱼网站或者丢失了您的备份，本站无法为您恢复资金。',
         text2: '由于本站不存储你的私钥或助记词，如果您更换浏览器、电脑或者清除浏览器缓存，需要通过备份助记词恢复账号。',
-        text3: '如果使用了从助记词恢复地址的方式，请保证助记词绝对正确，如果有细微的不同都可能无法恢复您的地址。',
-        text4: '当前版本钱包为预览版，您获得的VITE测试代币仅用于测试，无任何实际价值，同时官方会不定期对测试代币进行清零。'
+        text3: '如果使用了从助记词恢复地址的方式，请保证助记词绝对正确，如果有细微的不同都可能无法恢复您的地址。'
     },
     test: {
         t: '预览版',
@@ -124,7 +128,7 @@ module.exports = {
     },
 
     // account detail
-    accDetail: {
+    account: {
         title: '账户详情',
         transfer: '转账',
         getTestToken: '获取测试代币',
@@ -403,6 +407,27 @@ module.exports = {
             operate:'投票',
             operateBtn:'投票',
             voteErr:'投票失败，请重试'
+        }
+    },
+
+    // exchangeVite
+    exchangeVite: {
+        title: '置换VITE',
+        gas: '矿工费用',
+        record: '置换记录',
+        aboutPrice: '约 {amount} ETH',
+        help: {
+            title: '快速理解置换VITE',
+            text: '通过VITE置换功能，可以将以太网络上的ERC20 VITE代币置换到VITE网络中，在VITE网络中可以投票官方超级节点赚取奖励，年化收益达20%。在置换过程中，你的ERC20 VITE将被转入黑洞地址：{blackAddr}，当黑洞地址收到交易并被确认后，置换系统将为您发放等值的VITE至您的VITE地址中。在置换过程中，您需要将ERC20的VITE 与 少量ETH（用于置换消耗gas）转入至VITE钱包的ETH地址中。'
+        },
+        exchange: {
+            vite: '置换VITE',
+            sendTrans: '发送交易',
+            viteAddr: '接收VITE地址',
+            viteAmount: '置换VITE金额',
+            gas: '矿工费用',
+            btn: '确认置换',
+            success: '置换请求成功，预计以太网交易被确认后20分钟到账'
         }
     },
 

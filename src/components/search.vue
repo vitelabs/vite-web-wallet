@@ -1,6 +1,13 @@
 <template>
     <div class="search" @click="$refs.i.focus()">
-        <i class="icon"></i><input :placeholder="placeholder" name="search" autocomplete="off" ref="i" type="text" v-model="v" @input.prevent="updateKey">
+        <i class="icon"></i>
+        <!-- Safari autocomplete -->
+        <input fake_pass type="password" style="display:none"/>
+        <input readonly onfocus="this.removeAttribute('readonly');" 
+               :placeholder="placeholder" name="search" 
+               autocomplete="off" ref="i" type="text" 
+               v-model="v" @input.prevent="updateKey">
+        <input fake_pass type="password" style="display:none"/>
     </div>
 </template>
 <script>

@@ -1,123 +1,61 @@
 <template>
-    <loading
-        v-if="loadingToken"
-        class="loading"
-    ></loading>
-    <div
-        class="vote"
-        v-else
-    >
+    <div class="vote __wrapper">
         <powProcess ref="pow"></powProcess>
         <secTitle></secTitle>
 
-        <section class="vote_list">
-            <div class="title">
-                <div class="ct">
-                    {{$t('vote.section1.title')}}
-                </div>
-            </div>
+        <loading v-if="loadingToken" class="loading"></loading>
 
+        <section v-if="!loadingToken" class="vote_list">
+            <div class="title ct">{{ $t('vote.section1.title')}}</div>
             <div class="__tb">
                 <div class="__tb_row __tb_head">
-                    <div
-                        class="__tb_cell"
-                        v-for="v in $t('vote.section1.head')"
-                        :key="v"
-                    > {{v}}</div>
+                    <div class="__tb_cell" v-for="v in $t('vote.section1.head')" :key="v"> {{v}}</div>
                 </div>
                 <div class="__tb_content">
-                    <div
-                        class="__tb_row"
-                        v-for="v in voteList"
-                        :key="v.nodeName"
-                    >
+                    <div class="__tb_row" v-for="v in voteList" :key="v.nodeName">
                         <div class="__tb_cell nodename">{{v.nodeName}}</div>
-                        <div class="__tb_cell">{{v.nodeStatusText}} <i
-                            v-if="v.nodeStatus===2"
-                            class="tipsicon hoveraction"
-                            @click.self.stop="toggleTips"
-                        >
-                            <tooltips
-                                v-if="isResisterTipsShow"
-                                v-click-outside
-                                @clickoutside="hideTips"
-                                class="unregister-tips"
-                                :content="$t('vote.section1.hoverHelp',{nodeName:v.nodeName})"
-                            ></tooltips>
-                        </i></div>
+                        <div class="__tb_cell">
+                            {{v.nodeStatusText}} 
+                            <i v-if="v.nodeStatus===2" class="tipsicon hoveraction" @click.self.stop="toggleTips">
+                                <tooltips v-if="isResisterTipsShow" v-click-outside="hideTips" class="unregister-tips" :content="$t('vote.section1.hoverHelp',{nodeName:v.nodeName})"></tooltips>
+                            </i>
+                        </div>
                         <div class="__tb_cell">{{v.voteNum}}</div>
                         <div class="__tb_cell">{{v.voteStatusText}}</div>
-                        <div
-                            class="__tb_cell"
-                            :class="cache ? 'unclickable' : 'clickable'"
-                        >
+                        <div class="__tb_cell" :class="cache ? 'unclickable' : 'clickable'">
                             <span @click="cancelVote(v)">{{ v.operate }}</span>
-                            <span
-                                class="reward"
-                                @click="openReward(v)"
-                            >{{ $t('vote.toReward') }}</span>
+                            <span class="reward" @click="openReward(v)">{{ $t('vote.toReward') }}</span>
                         </div>
                     </div>
-                    <div class="__tb_row seat">
-                    </div>
+                    <div class="__tb_no_data">{{ voteList.length ? '' : $t('hint.noData') }}</div>
                 </div>
             </div>
         </section>
 
-        <section class="node_list">
+        <section v-if="!loadingToken" class="node_list">
             <div class="title">
-                <div class="ct">
-                    {{$t('vote.section2.title')}}
-                </div>
-                <search
-                    v-model="filterKey"
-                    :placeholder="$t('vote.search')"
-                    class="filter"
-                ></search>
+                <div class="ct">{{ $t('vote.section2.title') }}</div>
+                <search v-model="filterKey" :placeholder="$t('vote.search')" class="filter"></search>
             </div>
             <div class="tb_container">
                 <div class="__tb">
                     <div class="__tb_row __tb_head">
-                        <div
-                            class="__tb_cell"
-                            v-for="v in $t('vote.section2.head')"
-                            :key="v"
-                        >{{v}}</div>
+                        <div class="__tb_cell" v-for="v in $t('vote.section2.head')" :key="v">{{v}}</div>
                     </div>
-                    <div
-                        class="__tb_content"
-                        v-if="!!nodeList.length"
-                    >
-                        <div
-                            class="__tb_row __tb_content_row active"
-                            v-for="(v,i) in nodeList"
-                            :key="v.nodeName"
-                        >
+                    <div class="__tb_content" v-if="!!nodeList.length">
+                        <div class="__tb_row __tb_content_row active" 
+                             v-for="(v,i) in nodeList" :key="v.nodeName">
                             <div class="__tb_cell rank">{{i+1}}</div>
-                            <div class="__tb_cell nodename clickable" 
-                                 @click="goToNodeDetail(v.nodeName)"
-                            >{{v.nodeName}}</div>
-                            <div
-                                @click="goToDetail(v.nodeAddr)"
-                                class="__tb_cell clickable"
-                            >{{v.nodeAddr}}</div>
+                            <div @click="goToNodeDetail(v.nodeName)" class="__tb_cell nodename clickable">{{v.nodeName}}</div>
+                            <div @click="goToDetail(v.nodeAddr)" class="__tb_cell clickable">{{v.nodeAddr}}</div>
                             <div class="__tb_cell">{{v.voteNum}}</div>
-                            <div
-                                class="__tb_cell clickable"
-                                @click="vote(v)"
-                            >{{v.operate}}</div>
+                            <div class="__tb_cell clickable" @click="vote(v)">{{v.operate}}</div>
                         </div>
                     </div>
-                    <div
-                        class="__tb_content"
-                        v-else-if="this.filterKey"
-                    >
+                    <div class="__tb_content" v-else-if="this.filterKey">
                         <div class="__tb_no_data">{{$t("vote.section2.noSearchData")}}</div>
                     </div>
-                    <div
-                        class="__tb_content"
-                        v-else
-                    >
+                    <div class="__tb_content" v-else>
                         <div class="__tb_no_data">{{$t("vote.section2.noData")}}</div>
                     </div>
                 </div>
@@ -132,12 +70,15 @@ import search from 'components/search';
 import c from 'config/constant';
 import secTitle from 'components/secTitle';
 import loading from 'components/loading';
-import { timer } from 'utils/asyncFlow';
 import confirm from 'components/confirm';
 import powProcess from 'components/powProcess';
+import { timer } from 'utils/asyncFlow';
+import BigNumber from 'utils/bigNumber';
 
 export default {
-    components: { secTitle, tooltips, search, loading, confirm, powProcess },
+    components: {
+        secTitle, tooltips, search, loading, confirm, powProcess
+    },
     beforeMount() {
         this.tokenInfo = viteWallet.Ledger.getTokenInfo();
         if (!this.tokenInfo) {
@@ -151,7 +92,6 @@ export default {
                     console.warn(err);
                 });
         }
-        this.$store.dispatch('getBalanceInfo', this.$wallet.getActiveAccount());
         this.updateVoteData();
         this.updateNodeData();
         this.nodeDataTimer = new timer(this.updateNodeData, 3 * 1000);
@@ -179,24 +119,23 @@ export default {
             this.isResisterTipsShow = !this.isResisterTipsShow;
         },
         updateVoteData() {
-            return $ViteJS.Vite.vote_getVoteInfo(
+            return $ViteJS.vote.getVoteInfo(
                 c.gid,
                 this.$wallet.getActiveAccount().getDefaultAddr()
-            ).then(data => {
-                this.voteData = data.result ? [data.result] : [];
+            ).then(result => {
+                this.voteData = result ? [result] : [];
                 this.voteData[0] && (this.voteData[0].voteStatus = 'voted');
                 return this.voteData;
             });
         },
         updateNodeData() {
-            return $ViteJS.Vite.register_getCandidateList(c.gid).then(data => {
-                this.nodeData =
-          data.result.map(v => {
-              return {
-                  ...v,
-                  nodeName: v.name
-              };
-          }) || [];
+            return $ViteJS.register.getCandidateList(c.gid).then(result => {
+                this.nodeData = result.map(v => {
+                    return {
+                        ...v,
+                        nodeName: v.name
+                    };
+                }) || [];
                 return this.nodeData;
             });
         },
@@ -220,7 +159,9 @@ export default {
             if (this.cache) {
                 return;
             }
+
             const activeAccount = this.$wallet.getActiveAccount();
+
             const successCancel = () => {
                 const t = Object.assign({}, v);
                 t.isCache = true;
@@ -228,9 +169,11 @@ export default {
                 this.cache = t;
                 this.$toast(this.$t('vote.section1.toast'));
             };
+
             const failCancel = e => {
                 const code = e && e.error ? e.error.code || -1 : e ? e.code : -1;
                 if (code === -35002) {
+                    let startTime = new Date().getTime();
                     const c = Object.assign({}, this.$t('vote.section1.quotaConfirm'));
                     c.leftBtn.click = () => {
                         this.$router.push({
@@ -238,15 +181,7 @@ export default {
                         });
                     };
                     (c.rightBtn.click = () => {
-                        this.$refs.pow
-                            .startPowTx(
-                                {
-                                    tokenId: this.tokenInfo.tokenId,
-                                    nodeName: this.voteList[0].nodeName,
-                                    difficulty: '201564160'
-                                },
-                                'cancelVoteBlock'
-                            )
+                        this.$refs.pow.startPowTx(e.accountBlock, startTime)
                             .then(successCancel)
                             .catch(failCancel);
                     }),
@@ -256,17 +191,11 @@ export default {
                     this.$toast(this.$t('vote.section1.cancelVoteErr'), e);
                 }
             };
+            
             const sendCancel = () => {
-                activeAccount
-                    .sendTx(
-                        {
-                            tokenId: this.tokenInfo.tokenId,
-                            nodeName: this.voteList[0].nodeName
-                        },
-                        'cancelVoteBlock'
-                    )
-                    .then(successCancel)
-                    .catch(failCancel);
+                activeAccount.revokeVoting({
+                    tokenId: this.tokenInfo.tokenId
+                }).then(successCancel).catch(failCancel);
             };
 
             activeAccount.initPwd(
@@ -282,6 +211,7 @@ export default {
         },
         vote(v) {
             const activeAccount = this.$wallet.getActiveAccount();
+            
             const successVote = () => {
                 const t = Object.assign({}, v);
                 t.isCache = true;
@@ -290,9 +220,11 @@ export default {
                 this.cache = t;
                 this.$toast(this.$t('vote.section2.toast'));
             };
+
             const failVote = e => {
                 const code = e && e.error ? e.error.code || -1 : e ? e.code : -1;
                 if (code === -35002) {
+                    let startTime = new Date().getTime();
                     const c = Object.assign({}, this.$t('vote.section2.quotaConfirm'));
                     c.leftBtn.click = () => {
                         this.$router.push({
@@ -300,15 +232,7 @@ export default {
                         });
                     };
                     c.rightBtn.click = () => {
-                        this.$refs.pow
-                            .startPowTx(
-                                {
-                                    nodeName: v.name,
-                                    tokenId: this.tokenInfo.tokenId,
-                                    difficulty: '201564160'
-                                },
-                                'voteBlock'
-                            )
+                        this.$refs.pow.startPowTx(e.accountBlock, startTime)
                             .then(successVote)
                             .catch(failVote);
                     };
@@ -321,16 +245,16 @@ export default {
                     this.$toast(this.$t('vote.section2.voteErr'), e);
                 }
             };
+
             const sendVote = () => {
-                activeAccount
-                    .sendTx(
-                        { nodeName: v.name, tokenId: this.tokenInfo.tokenId },
-                        'voteBlock'
-                    )
-                    .then(successVote)
-                    .catch(failVote);
+                activeAccount.voting({ 
+                    nodeName: v.name, 
+                    tokenId: this.tokenInfo.tokenId 
+                }).then(successVote).catch(failVote);
             };
+
             const t = this.haveVote ? 'cover' : 'normal';
+
             activeAccount.initPwd(
                 {
                     title: this.$t(`vote.section2.confirm.${t}.title`),
@@ -380,7 +304,7 @@ export default {
                 ];
                 const token = viteWallet.Ledger.getTokenInfo();
                 data.voteNum =
-          viteWallet.BigNumber.toBasic(data.balance, token.decimals) ||
+          BigNumber.toBasic(data.balance, token.decimals) ||
           this.balance ||
           0; // tans
                 data.operate = this.$t('vote.section1.operateBtn');
@@ -416,7 +340,7 @@ export default {
             return this.nodeData
                 .map(v => {
                     v.voteNum =
-            viteWallet.BigNumber.toBasic(v.voteNum, token.decimals) || 0; // tans
+            BigNumber.toBasic(v.voteNum, token.decimals) || 0; // tans
                     v.operate = this.$t('vote.section2.operateBtn');
                     return v;
                 })
@@ -449,24 +373,26 @@ export default {
     display: flex;
     flex-direction: column;
     .filter {
-        align-self: flex-end;
+        margin-top: 10px;
+    }
+
+    .ct {
+        border-left: 2px solid rgba(0, 122, 255, 0.7);
+        padding-left: 10px;
+        height: 18px;
+        line-height: 18px;
+        font-family: $font-bold, arial, sans-serif;
+        font-size: 18px;
+        color: #1d2024;
     }
     .title {
         display: flex;
         flex: none;
         justify-content: space-between;
-        font-family: $font-bold;
-        font-size: 18px;
-        color: #1d2024;
-        height: 40px;
+        flex-wrap: wrap;
         margin-bottom: 24px;
-        line-height: 40px;
-
         .ct {
-        border-left: 2px solid rgba(0, 122, 255, 0.7);
-        padding-left: 10px;
-        height: 18px;
-        line-height: 18px;
+            margin-top: 20px;
         }
     }
     .__tb {
@@ -477,10 +403,11 @@ export default {
         overflow-x: auto;
         overflow-y: hidden;
         margin: 40px 0;
-        margin-bottom: 29px;
+        margin-bottom: 20px;
 
-        .__tb_row.seat {
+        .seat {
             height: 78px;
+            text-align: center;
         }
         .__tb_content {
             overflow: visible;

@@ -6,7 +6,7 @@
 
         <div class="__btn __btn_input" 
              :class="{ 'active': !!name || inputItem === 'name' }">
-            <input ref="name" v-model="name" type='text'
+            <input ref="name" v-model="name" type='text' autocomplete="off"
                    :placeholder="$t('create.accName')"
                    @focus="inputFocus('name')"
                    @blur="inputBlur('name')" />

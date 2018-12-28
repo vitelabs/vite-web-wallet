@@ -6,7 +6,7 @@ const NAME_KEY = 'NAME_COUNT';
 export default {
     getList,
     add(account, index = -1) {
-        if (!account.addr && !account.entropy) {
+        if (!account.addr && !account.entropy && !account.id) {
             return;
         }
 

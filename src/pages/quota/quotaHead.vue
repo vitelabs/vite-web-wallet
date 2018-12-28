@@ -61,7 +61,7 @@ export default {
 @import "~assets/scss/vars.scss";
 
 .help-t {
-    font-family: $font-bold;
+    font-family: $font-bold, arial, sans-serif;
     font-size: 16px;
     line-height: 16px;
     margin-bottom: 16px;
