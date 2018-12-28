@@ -215,10 +215,10 @@ async function getTxHash({
     let gasPrice = utils.toWei(gwei + '', 'gwei');
 
     let txData = {
-        nonce: utils.toHex(utils.toBN(nonce++)),
-        gasLimit: utils.toHex(utils.toBN(150000)),
+        nonce: utils.toHex(nonce++),
+        gasLimit: utils.toHex(150000),
         gasPrice: utils.toHex(gasPrice),
-        value: utils.toHex(utils.toBN(value)),
+        value: utils.toHex(value),
         to: toAddress,
         from: ethAddr,
         data,
