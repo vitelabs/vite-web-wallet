@@ -425,7 +425,7 @@ module.exports = {
             viteAddr: 'Receiving Address',
             viteAmount: 'Conversion Amount',
             gas: 'Mining Fee',
-            btn: 'Confirm Conversion',
+            btn: 'Ready to Convert',
             success: 'Conversion Successful. It may take approx 20 minutes to get VITE into your account after the Ethereum transaction is confirmed.'
         }
     },
