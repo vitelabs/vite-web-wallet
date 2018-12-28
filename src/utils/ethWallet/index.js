@@ -216,7 +216,7 @@ async function getTxHash({
 
     let txData = {
         nonce: utils.toHex(utils.toBN(nonce++)),
-        gasLimit: utils.toHex(utils.toBN(99000)),
+        gasLimit: utils.toHex(utils.toBN(150000)),
         gasPrice: utils.toHex(gasPrice),
         value: utils.toHex(utils.toBN(value)),
         to: toAddress,
