@@ -126,7 +126,8 @@ class ethWallet {
         if (type === 'sendTx') {
             return '';
         }
-        return '0xa9059cbb' + addPreZero( toAddr.slice(2) ) + addPreZero( utils.toHex(value).substr(2) );
+        console.log('getTxdata');
+        return '0xa9059cbb' + addPreZero( toAddr.slice(2) ) + addPreZero( utils.toHex(utils.toBN(value)).substr(2) );
     }
     estimateGas(toAddr, value, type) {
         let to = type === 'exchange' ? blackHole : toAddr;
@@ -172,6 +173,7 @@ class ethWallet {
         let ethAddr = acount.hexAddr;
         let privateKey = acount.wallet.privKey;
 
+        console.log('start get TxHash');
         const { ethTxHash, hash } = await getTxHash.call(this, {
             toAddress: viteContractAddr, 
             value: '0x00',
@@ -216,10 +218,10 @@ async function getTxHash({
     let gasPrice = utils.toWei(utils.toBN(gwei), 'gwei').toString(); 
 
     let txData = {
-        nonce: utils.toHex(nonce++),
-        gasLimit: utils.toHex(99000),
+        nonce: utils.toHex(utils.toBN(nonce++)),
+        gasLimit: utils.toHex(utils.toBN(99000)),
         gasPrice: utils.toHex(gasPrice),
-        value: utils.toHex(value),
+        value: utils.toHex(utils.toBN(value)),
         to: toAddress,
         from: ethAddr,
         data,
