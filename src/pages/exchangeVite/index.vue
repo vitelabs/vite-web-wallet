@@ -13,6 +13,8 @@
             <token v-for="(token, index) in tokenList" :key="index" 
                    :sendTx="showTrans" :token="token" :ethToken="tokenList.eth"></token>
         </div>
+
+        <div class="note">{{ $t('exchangeVite.note') }}</div>
         
         <transaction v-if="!!transType" :closeTrans="hideTrans" :ethWallet="ethWallet"
                      :transType="transType" :token="tokenList[transToken]"></transaction>
@@ -135,5 +137,18 @@ export default {
     display: flex;
     max-width: 548px;
     justify-content: space-between;
+}
+.note {
+    box-sizing: border-box;
+    margin-top: 48px;
+    max-width: 548px;
+    border-radius: 2px;
+    padding: 20px 30px;
+    font-size: 12px;
+    background:rgba(237,241,255,1);
+    font-weight: 400;
+    color: rgba(94,104,117,1);
+    line-height: 17px;
+    word-wrap: break-word;
 }
 </style>

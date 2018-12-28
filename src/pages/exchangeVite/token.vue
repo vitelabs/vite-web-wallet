@@ -139,6 +139,9 @@ export default {
     .token-wrapper {
         width: 100%;
         margin-top: 15px;
+        .content .btn-list .btn {
+            flex: 1;
+        }
     }
 }
 </style>
