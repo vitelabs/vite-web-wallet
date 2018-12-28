@@ -1,8 +1,7 @@
 const web3Eth = require('web3-eth');
 const utils = require('web3-utils');
 const Tx = require('ethereumjs-tx');
-// Web3-providers-ws cannot work in IE.
-const ethProvider = require('web3-providers-http');
+const ethProvider = require('web3-providers-http'); // Web3-providers-ws cannot work in IE.
 
 import { bind as gwBind } from 'services/exchangeVite';
 import { timer } from 'utils/asyncFlow';
@@ -217,11 +216,13 @@ async function getTxHash({
     let privateKey = acount.wallet.privKey;
 
     console.log(gwei);
+    let xxxx = utils.toBN(gwei);
+    console.log(utils.isBN(xxxx));
     console.log(utils.toBN(gwei));
     console.log(utils.toWei(utils.toBN(gwei), 'gwei'));
 
     let nonce = await this.web3.getTransactionCount(ethAddr, this.web3.defaultBlock.pending);
-    let gasPrice = utils.toWei(utils.toBN(gwei), 'gwei');
+    let gasPrice = utils.toWei(gwei + '', 'gwei');
 
     console.log(utils.toBN(nonce++));
     console.log(utils.toBN(99000));
