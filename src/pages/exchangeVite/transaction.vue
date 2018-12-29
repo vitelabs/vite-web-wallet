@@ -254,7 +254,7 @@ export default {
             }).catch((err) => {
                 console.warn(err);
                 this.loading = false;
-                this.$toast( this.$t('hint.err') );
+                this.$toast(err && err.message ? err.message : this.$t('hint.err'), 4000);
             });
         },
         sendTx() {
@@ -272,7 +272,7 @@ export default {
             }).catch((err) => {
                 console.warn(err);
                 this.loading = false;
-                this.$toast( this.$t('hint.err') );
+                this.$toast(err && err.message ? err.message : this.$t('hint.err'), 4000);
             });
         }
     }
