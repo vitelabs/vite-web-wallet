@@ -39,7 +39,7 @@ export default function request({ method = 'GET', path, params = {} }) {
                     rej(e);
                 }
             } else {
-                rej();
+                rej( JSON.parse(xhr.responseText) );
             }
         };
         xhr.onerror = function (err) {

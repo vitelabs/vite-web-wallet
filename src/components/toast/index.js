@@ -9,7 +9,7 @@ document.body.appendChild(instance.$el);
 
 const toastDuration = 2000;
 
-export default function(message, type = 'info', position = 'top') {
+export default function(message, duration = toastDuration,  type = 'info', position = 'top') {
     if (!message) {
         return;
     }
@@ -28,6 +28,6 @@ export default function(message, type = 'info', position = 'top') {
         instance.show = true;
         setTimeout(() => {
             instance.show = false;
-        }, toastDuration);
+        }, duration);
     });
 }

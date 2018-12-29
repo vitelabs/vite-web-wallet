@@ -185,7 +185,14 @@ class ethWallet {
             hash, viteAddr, value, privateKey, ethAddr
         });
 
-        await gwBind(signResult);
+        try {
+            await gwBind(signResult);
+        } catch(err) {
+            if (+err.code === 201) {
+                return sendEthTx.call(this, ethTxHash);
+            }
+            return Promise.reject(err);
+        }
 
         return sendEthTx.call(this, ethTxHash);
     }
