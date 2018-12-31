@@ -3,7 +3,7 @@ const utils = require('web3-utils');
 const Tx = require('ethereumjs-tx');
 const ethProvider = require('web3-providers-http'); // Web3-providers-ws cannot work in IE.
 
-import { bind as gwBind } from 'services/exchangeVite';
+import { bind as gwBind, balance as gwBalance } from 'services/exchangeVite';
 import { timer } from 'utils/asyncFlow';
 import address from './address';
 import { viteContractAbi, viteContractAddr, blackHole, signBinding } from './viteContract';
@@ -87,19 +87,26 @@ class ethWallet {
     }
 
     getViteBalance() {
-        return new Promise((res, rej) => {
-            let _this = this;
-            this.contract.methods.balanceOf(this.getDefaultAddr()).call({
-                from: this.getDefaultAddr()
-            }, function(error, result) {
-                if(!error) {
-                    _this.tokenList.vite.balance = result;
-                    res(result);
-                } else {
-                    rej(error);
-                }
-            });
+        return gwBalance({
+            address: this.getDefaultAddr()
+        }).then((data) => {
+            console.log(data);
+            this.tokenList.vite.balance = data && data.VITE ? data.VITE.Balance || 0 : 0;
         });
+
+        // return new Promise((res, rej) => {
+        //     let _this = this;
+        //     this.contract.methods.balanceOf(this.getDefaultAddr()).call({
+        //         from: this.getDefaultAddr()
+        //     }, function(error, result) {
+        //         if(!error) {
+        //             _this.tokenList.vite.balance = result;
+        //             res(result);
+        //         } else {
+        //             rej(error);
+        //         }
+        //     });
+        // });
     }
     getEthBalance() {
         return this.web3.getBalance(this.getDefaultAddr()).then((balance) => {

@@ -13,3 +13,15 @@ export const bind = function({
         }
     });
 };
+
+export const balance = function({
+    address
+}) {
+    return request({
+        path: path + '/balance',
+        method: 'GET',
+        params: {
+            address, token: 'VITE'
+        }
+    });
+};
