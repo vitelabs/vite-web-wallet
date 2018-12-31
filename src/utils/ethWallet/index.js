@@ -90,7 +90,6 @@ class ethWallet {
         return gwBalance({
             address: this.getDefaultAddr()
         }).then((data) => {
-            console.log(data);
             this.tokenList.vite.balance = data && data.VITE ? data.VITE.Balance || 0 : 0;
         });
 
