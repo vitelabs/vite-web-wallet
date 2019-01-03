@@ -13,7 +13,7 @@
                 cell: 'showAmount'
             },{
                 class: 'height',
-                text: $t('common.withdrawHeight'),
+                text: $t('withdrawHeight'),
                 cell: 'withdrawHeight'
             },{
                 class: 'time',

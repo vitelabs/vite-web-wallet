@@ -90,7 +90,7 @@ export default {
 
             let result = this.$validAmount(this.cancelAmount, this.tokenInfo.decimals);
             if (!result) {
-                this.amountErr = this.$t('transList.valid.amt');
+                this.amountErr = this.$t('hint.amtFormat');
                 return false;
             }
             if (BigNumber.isEqual(this.cancelAmount, 0) || 
@@ -144,7 +144,7 @@ export default {
             toAddress, amount
         }, type, cb) {
             if (!viteWallet.Net.getNetStatus()) {
-                this.$toast(this.$t('nav.noNet'));
+                this.$toast(this.$t('hint.noNet'));
                 cb && cb(false);
                 return;
             }

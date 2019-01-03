@@ -2,7 +2,7 @@
 
 <template>
     <div class="create-account-wrapper">
-        <div class="__title">{{ activeAccount ? $t('nav.reset') : $t('nav.setting')}}</div>
+        <div class="__title">{{ activeAccount ? $t('resetAcc') : $t('settingAcc')}}</div>
 
         <div class="__btn __btn_input" 
              :class="{ 'active': !!name || inputItem === 'name' }">

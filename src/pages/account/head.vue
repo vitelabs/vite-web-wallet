@@ -69,7 +69,7 @@ export default {
                 return;
             }
             if (!viteWallet.Net.getNetStatus()) {
-                this.$toast(this.$t('nav.noNet'));
+                this.$toast(this.$t('hint.noNet'));
                 return;
             }
 

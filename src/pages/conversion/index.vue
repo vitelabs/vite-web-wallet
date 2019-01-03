@@ -4,7 +4,7 @@
 
         <div class='title'>
             <img src="../../assets/imgs/eth_logo.svg"/>ETH
-            <span class="record __pointer" @click="toRecord">{{ $t('exchangeVite.record') }}</span>
+            <span class="record __pointer" @click="toRecord">{{ $t('conversion.record') }}</span>
         </div>
 
         <vite-address :title="$t('account.address')" :address="address" :addressQrcode="'ethereum:' + address"></vite-address>
@@ -14,7 +14,7 @@
                    :sendTx="showTrans" :token="token" :ethToken="tokenList.eth"></token>
         </div>
 
-        <div class="note">{{ $t('exchangeVite.note') }}</div>
+        <div class="note">{{ $t('conversion.note') }}</div>
         
         <transaction v-if="!!transType" :closeTrans="hideTrans" :ethWallet="ethWallet"
                      :transType="transType" :token="tokenList[transToken]"></transaction>
