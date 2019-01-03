@@ -169,7 +169,9 @@ export default {
                 t.isCache = true;
                 t.voteStatus = 'canceling'; // 撤销投票中
                 this.cache = t;
-                this.$toast(this.$t('vote.section1.toast'));
+                this.$toast(this.$t('hint.request', {
+                    name: this.$t('vote.section1.revoke') 
+                }));
             };
 
             const failCancel = e => {
@@ -220,7 +222,9 @@ export default {
                 t.voteStatus = 'voting'; // 投票中
                 t.nodeStatus = 1;
                 this.cache = t;
-                this.$toast(this.$t('vote.section2.toast'));
+                this.$toast(this.$t('hint.request', {
+                    name: this.$t('vote.Voting') 
+                }));
             };
 
             const failVote = e => {

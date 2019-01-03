@@ -2,7 +2,7 @@
     <div>
         <login v-if="isShowLogin"></login>
         <div class="start-wrapper" v-if="!isShowLogin">
-            <div class="__title">{{$t('nav.create')}}</div>
+            <div class="__title">{{$t('createAcc')}}</div>
             
             <router-link class="__btn __btn_all_in" :to="{
                 name: 'createAccount'

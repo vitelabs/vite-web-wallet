@@ -9,22 +9,33 @@ const MyVoting = '我的投票';
 module.exports = {
     lang: '中文',
 
+    // Title
     start: '开始',
     login: '登录账户',
+    createAcc: '新建账户',
+    settingAcc: '设置账户',
+    resetAcc: '重新设置账号',
     logout: '退出登录',
-    pow: '运行PoW...',
+
+    // Noun
+    blockHeight: '快照块高度',
     accountName: '账户名',
     action: Action,
+    stakingAmount: '抵押金额',
+    withdrawHeight: '到期快照高度',
+    balance: '账户余额',
+
+    // Verb
+    pow: '运行PoW...',
     addAccount: '添加账户',
-
-    nav: {
-        create: '新建账户',
-        setting: '设置账户',
-        reset: '重新设置账号',
-        noNet: '网络无法连接',
-        blockHeight: '快照块高度'
+    saveQrcode: '保存二维码图片',
+    sendTrans: {
+        send: '发送交易',
+        symbol: '发送交易'
     },
+    submitStaking: '提交抵押',
 
+    // Enum
     errCode: {
         35003: '{name}ID发生冲突，请您稍后重新提交',
         35004: '内置合约发生错误，请稍后重试（35004）',
@@ -36,7 +47,6 @@ module.exports = {
         36004: '系统校验不通过，请稍后重试（36004）',
         36005: '快照块高度不合法，请您稍后再试'
     },
-
     txType: {
         0: SBPRegistration,
         1: '更新注册',
@@ -56,7 +66,7 @@ module.exports = {
         15: '转账'
     },
     
-    // common
+    // Button
     btn: {
         cancel: '取消',
         login: '登录',
@@ -69,22 +79,21 @@ module.exports = {
         reReg: '重新注册',
         otherProd: '使用 Vite 其他产品'
     },
+
+    // Hint
     hint: {
+        noNet: '网络无法连接',
         pwErr: '密码错误',
         pwEmpty: '密码不能为空',
         noData: '暂无数据',
         err: '发生错误',
         request: '{name}请求已发送，请耐心等待',
-        copy: '复制成功'
-    },
-    common: {
-        sendTrans: '发送交易',
-        send: '发送交易',
-        stakingAmount: '抵押金额',
-        submitStaking: '提交抵押',
-        withdrawHeight: '到期快照高度',
-        balance: '账户余额',
+        copy: '复制成功',
+        addrFormat: '账户地址格式错误',
+        amtFormat: '金额格式错误',
+        transSucc: '转账成功',
         insufficientBalance: '余额不足',
+        nodeErr: '节点异常，请您稍后重试'
     },
     
     beforeUse: {
@@ -118,7 +127,7 @@ module.exports = {
         rightBtn: { text: '运行PoW' }
     },
 
-    // mnemonic
+    // Mnemonic
     mnemonic: {
         title: '助记词',
         restore: '助记词恢复账户',
@@ -128,11 +137,10 @@ module.exports = {
         empty: '助记词输入为空',
         error: '助记词错误',
         hint: '助记词格式：单词、空格、单词...空格、单词',
-        netErr: '节点异常，请您稍后重试',
         change: '切换{len}个助记词'
     },
 
-    // setting
+    // Setting
     setting: {
         title: '设置',
         unlock: '解锁安全信息',
@@ -148,7 +156,7 @@ module.exports = {
         setDefault: '选择默认用户'
     },
 
-    // create account
+    // Create Account
     create: {
         input: '请输入密码',
         again: '请再次输入密码',
@@ -164,7 +172,7 @@ module.exports = {
         }
     },
 
-    // imported
+    // Import
     imported: {
         title: '导入账户',
         dragDrop: {
@@ -176,7 +184,7 @@ module.exports = {
         },
     },
 
-    // account detail
+    // Account Detail
     account: {
         title: '账户详情',
         transfer: '转账',
@@ -187,7 +195,6 @@ module.exports = {
         pend: '笔交易待确认',
         inAddress: '接收账户地址',
         sum: '金额',
-        saveQrcode: '保存二维码图片',
         remarks: '备注',
         remarksLong: '剩余字节：{len}',
         placeholder: {
@@ -206,7 +213,7 @@ module.exports = {
         }
     },
 
-    // quota
+    // Get Quota
     quota: {
         title: '获取配额',
         help: {
@@ -269,28 +276,21 @@ module.exports = {
             confirms: '确认数',
             confirmed: '已确认',
         },
-        valid:{
-            addr:'账户地址格式错误',
-            amt:'金额格式错误',
-            succ:'转账成功'
-        },
         timestamp: '时间戳',
         tAddress: '交易方地址',
-        tAddr: '交易方',
         sum: '金额'
     },
 
     // SBP
     SBP: {
         title: SBPRegistration,
-        reward: '提取奖励',
-        register: SBPRegistration,
-        cancel: '撤销注册SBP',
-        cancelBtn: '撤销',
         help: {
             title: '关于SBP',
             text: 'SBP（Snapshot Block Producer）为具有出块权利的节点，您可以通过抵押一定数量的VITE注册成为SBP候选节点；每轮（时长75秒）会选举出25个SBP，每轮得票数前25名中随机选出23个作为SBP，得票数26-100名中随机选出2个作为SBP；出块奖励的50%将作为按块奖励分配给该块的出块节点，另外50%将作为按票奖励分配给该轮次得票数排名前100的节点。<br/><br/>一个注册地址（抵押地址）可以注册多个出块节点（节点名称），节点名称被一个注册地址使用后不能再被其他注册地址使用；节点名称可以更换出块地址，出块地址被一个节点名称使用后不能再被其他节点名称使用。'
         },
+        register: SBPRegistration,
+        cancel: '撤销注册SBP',
+        cancelBtn: '撤销',
         confirm: {
             title: '注册SBP候选节点',
             describe: '提交注册后，当前地址的{amount}VITE将被锁定约90天，解锁后可以撤销注册，抵押金额将退回抵押地址',
@@ -300,11 +300,6 @@ module.exports = {
                 title: '更换出块地址',
                 placeholder: '请输入新的出块地址',
                 btn: '确认修改'
-            },
-            reward: {
-                amount: '本次可提奖励金额（约）',
-                hint: '为了您的资金安全，接收出块奖励地址应尽量与出块地址不同',
-                time: '本次可提时间范围'
             }
         },
         section1: {
@@ -313,7 +308,6 @@ module.exports = {
             producerAddr: '出块地址',
             quotaAddr: '抵押地址',
             quotaTime: '抵押周期',
-            allReward: '全部可提取的出块奖励',
             time: '7776000个快照块（约90天）',
             confirmBtn: '提交注册',
             namePlaceholder: '请输入节点名称',
@@ -329,14 +323,10 @@ module.exports = {
         },
         section2: {
             title: '注册信息',
-            updateSuccess: '修改请求已发送',
+            update: '修改',
             updateFail: '修改请求发送失败',
-            rewardSuccess: '提取奖励请求已发送，请您稍后查询账户余额',
-            rewardFail: '提取奖励请求发送失败',
-            cancelSuccess: '撤销请求已发送',
+            cancel: '撤销',
             cancelFail: '撤销请求发送失败',
-            nowReward: '本次可提取的快照块高度范围及奖励金额',
-            rewardAddr: '提取奖励地址',
             expireDate: '预计到期时间: {time}',
             cancelConfirm: {
                 title: '撤销注册SBP',
@@ -345,16 +335,16 @@ module.exports = {
         }
     },
 
-    // vote
+    // Voting
     vote: {
-        toReward: '查看我的奖励',
         title: Voting,
-        Voting,
-        search: '请输入候选节点名称或者出块地址',
         help: {
             title: '关于投票',
             text: '您可以参与投票选出共25个SBP（Snapshot Block Producer），每轮投票时间共75秒，您的投票数为投票地址所拥有的VITE数量，默认为您保持上一轮的投票意向；每轮得票量排名前25名的候选节点中随机23个及排名26-100名的候选节点中随机2个共25个节点将当选SBP。',
         },
+        toReward: '查看我的奖励',
+        Voting,
+        search: '请输入候选节点名称或者出块地址',
         addrNoExistErr: '您的地址未发生过交易，暂不能投票',
         revokeVoting: '撤销投票',
         section1: {
@@ -375,11 +365,10 @@ module.exports = {
                 cancelText: '确认撤销',
                 submitText: '暂不撤销'
             },
-            toast: '撤销投票请求已发送',
+            revoke: '撤销投票',
             operateBtn: '撤销',
             cancelVoteErr: '撤销投票失败，请重试'
         },
-
         section2: {
             title: '候选节点列表',
             head: ['排名', NodeName, '出块地址', '当前票数', Action],
@@ -395,29 +384,27 @@ module.exports = {
                     submitText: '取消'
                 }
             },
-            toast: '投票请求已发送',
             noSearchData: '无结果，换个输入试试',
             operateBtn: '投票',
             voteErr: '投票失败，请重试'
         }
     },
 
-    // exchangeVite
-    exchangeVite: {
+    // VITE Conversion
+    conversion: {
         title: '置换VITE',
-        gas: '矿工费用',
-        record: '置换记录',
-        aboutPrice: '约 {amount} ETH',
-        note: '官方提示：提交置换后请您耐心等待，置换VITE到账需要等以太交易被确认30个块，以太交易可以在置换记录中查看',
         help: {
             title: '快速理解置换VITE',
             text: '通过VITE置换功能，可以将以太网络上的ERC20 VITE代币置换到VITE网络中，在VITE网络中可以投票官方超级节点赚取奖励，年化收益达20%。在置换过程中，你的ERC20 VITE将被转入黑洞地址：{blackAddr}，当黑洞地址收到交易并被确认后，置换系统将为您发放等值的VITE至您的VITE地址中。在置换过程中，您需要将ERC20的VITE 与 少量ETH（用于置换消耗gas）转入至VITE钱包的ETH地址中。'
         },
+        gas: '矿工费用',
+        record: '置换记录',
+        aboutPrice: '约 {amount} ETH',
+        note: '官方提示：提交置换后请您耐心等待，置换VITE到账需要等以太交易被确认30个块，以太交易可以在置换记录中查看',
         exchange: {
             vite: '置换VITE',
             viteAddr: '接收VITE地址',
             viteAmount: '置换VITE金额',
-            gas: '矿工费用',
             btn: '确认置换',
             success: '置换请求成功，预计以太网交易被确认后20分钟到账'
         }

@@ -1,10 +1,10 @@
 <template>
     <div class="sync-block-wrapper">
         <span class="status-text" v-show="!netStatus">
-            {{ $t(`nav.noNet`) }}
+            {{ $t(`hint.noNet`) }}
         </span>
         <span v-show="netStatus">
-            {{ $t(`nav.blockHeight`) + ': ' + (blockHeight || '----') }}
+            {{ $t(`blockHeight`) + ': ' + (blockHeight || '----') }}
         </span>
     </div>
 </template>

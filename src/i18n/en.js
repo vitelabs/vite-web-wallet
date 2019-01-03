@@ -9,22 +9,33 @@ const MyVoting = 'My Voting';
 module.exports = {
     lang: 'EN',
 
+    // Title
     start: 'Start',
     login: 'Log in',
+    createAcc: 'Create',
+    settingAcc: 'Setting Account',
+    resetAcc: 'Account Reset',
     logout: 'Logout',
-    pow: 'Running PoW...',
+
+    // Noun
+    blockHeight: 'Snapshot Block Height',
     accountName: 'Account name',
     action: Action,
-    addAccount: '添加账户',
+    stakingAmount: 'Staking Amount',
+    submitStaking: 'Submit Staking',
+    withdrawHeight: 'Expected Snapshot Height',
+    balance: 'Balance',
 
-    nav: {
-        setting: 'Setting Account',
-        reset: 'Account Reset',
-        create: 'Create',
-        noNet: 'No network detected',
-        blockHeight: 'Snapshot Block Height'
+    // Verb
+    pow: 'Running PoW...',
+    addAccount: '添加账户',
+    saveQrcode: 'Save QR code image',
+    sendTrans: {
+        send: 'Send Transaction',
+        symbol: 'Send'
     },
 
+    // Enum
     errCode: {
         35003: '{name} ID conflict occurs, please re-submit later',
         35004: 'Built-in contract error, please try again later（35004）',
@@ -36,7 +47,6 @@ module.exports = {
         36004: 'System verify failed, please try again later（36004）',
         36005: 'napshot block height is illegal, please try again later'
     },
-
     txType: {
         0: SBPRegistration,
         1: 'Update Registration',
@@ -56,7 +66,7 @@ module.exports = {
         15: 'Transfer'
     },
 
-    //common
+    // Button
     btn: {
         cancel: 'Cancel',
         login: 'Login',
@@ -69,22 +79,21 @@ module.exports = {
         reReg: 'Re-register',
         otherProd: 'Use Other Products of Vite'
     },
+
+    // Hint
     hint: {
+        noNet: 'No network detected',
         pwErr: 'Incorrect password!',
         pwEmpty: 'Password cannot be empty!',
         noData: 'No Data',
         err: 'Oops, error occurs',
         request: '{name} request has sent, please wait',
-        copy: 'Successfully copied'
-    },
-    common: {
-        sendTrans: 'Send Transaction',
-        send: 'Send',
-        stakingAmount: 'Staking Amount',
-        submitStaking: 'Submit Staking',
-        withdrawHeight: 'Expected Snapshot Height',
-        balance: 'Balance',
-        insufficientBalance: 'Insufficient balance'
+        copy: 'Successfully copied',
+        addrFormat: 'Address format error',
+        amtFormat: 'Amount format error',
+        transSucc: 'Transaction successful!',
+        insufficientBalance: 'Insufficient balance',
+        nodeErr: 'The full node is abnormal, please try again later.'
     },
 
     beforeUse: {
@@ -114,15 +123,11 @@ module.exports = {
     quotaConfirmPoW: {
         title: InsufficientQuota,
         content: 'your left quota turn out to be insufficient, you can acquire more quota by running PoW or staking VITE',
-        leftBtn: {
-            text: StakeVITE
-        },
-        rightBtn: {
-            text: 'Run PoW'
-        }
+        leftBtn: { text: StakeVITE },
+        rightBtn: { text: 'Run PoW' }
     },
 
-    // mnemonic
+    // Mnemonic
     mnemonic: {
         title: 'Mnemonic',
         restore: 'Restore Account by Seed Phrase',
@@ -132,11 +137,10 @@ module.exports = {
         empty: 'The input of seed phrase cannot be empty',
         error: 'Incorrect seed phrase. Try again',
         hint: 'Mnemonic format: words, spaces, words... spaces, words.',
-        netErr: 'The full node is abnormal, please try again later.',
         change: 'Switch to {len} Mnemonic Words'
     },
 
-    // setting
+    // Setting
     setting: {
         title: 'Settings',
         unlock: 'Unlock Secure Information',
@@ -152,7 +156,7 @@ module.exports = {
         setDefault: 'Select Default User'
     },
 
-    //create account
+    // Create Account
     create: {
         input: 'Please input password',
         again: 'Please input password again!',
@@ -168,7 +172,7 @@ module.exports = {
         }
     },
 
-    // imported
+    // Import
     imported: {
         title: 'Import',
         dragDrop: {
@@ -180,19 +184,17 @@ module.exports = {
         }
     },
 
-    // account detail
+    // Account Detail
     account: {
         title: 'Account Detail',
         transfer: 'Transfer',
         getTestToken: 'Get Test Tokens',
         transDetail: 'More Transaction Details',
-        name: 'Account Name',
         address: 'My Address',
         fundFloat: 'Unreceived',
         pend: 'Pending',
         inAddress: 'Receive Address',
         sum: 'Amount',
-        saveQrcode: 'Save QR code image',
         remarks: 'Comment',
         remarksLong: '{len} bytes left',
         placeholder: {
@@ -211,7 +213,7 @@ module.exports = {
         }
     },
 
-    // quota
+    // Get Quota
     quota: {
         title: 'Get Quota',
         help: {
@@ -274,28 +276,21 @@ module.exports = {
             confirms: 'Confirming',
             confirmed: 'Confirmed',
         },
-        valid: {
-            addr: 'Address format error',
-            amt: 'Amount format error',
-            succ: 'Transaction successful!'
-        },
         timestamp: 'Timestamp',
         tAddress: 'Address',
-        tAddr: 'Address',
         sum: 'Amount'
     },
 
     // SBP
     SBP: {
         title: SBPRegistration,
-        reward: 'Retrieval of SBP rewards',
-        register: SBPRegistration,
-        cancel: 'SBP Cancellation',
-        cancelBtn: 'Cancel',
         help: {
             title: 'About SBP',
             text: 'SBP（Snapshot Block Producer）is a node that has right to create blocks, you can register to become a SBP candidate by staking a certain amount of VITE, each round (about 75 seconds) will elect 25 SBPs, the SBPs will be elected from random 23 out of top 25 candidate nodes, plus random 2 out of the candidate nodes ranking 26th-100th on the list. The 50% of block creation rewards will be allocated to the block creation node, the other 50% will be allocated to nodes that are ranked on top 100 as voting rewards. <br/><br/> One registration address (staking address) can register multiple block creation nodes (node names), a node name cannot be used if the node name has been registered by a registration address. A node name can switch block creation address, however, block creation address cannot be reused by other node names.'
         },
+        register: SBPRegistration,
+        cancel: 'SBP Cancellation',
+        cancelBtn: 'Cancel',
         confirm: {
             title: 'Registration of SBP candidates',
             describe: 'The {amount} VITE of current address will be locked about 90 days when you submit the registration,  the amount will be returned to staking address after being unlocked',
@@ -305,11 +300,6 @@ module.exports = {
                 title: 'Change block creation address',
                 placeholder: 'please input new block creation address',
                 btn: 'Confirm to change'
-            },
-            reward: {
-                amount: '本次可提奖励金额（约）',
-                hint: '为了您的资金安全，接收出块奖励地址应尽量与出块地址不同',
-                time: '本次可提时间范围'
             }
         },
         section1: {
@@ -318,7 +308,6 @@ module.exports = {
             producerAddr: 'Block Creation Address',
             quotaAddr: 'Staking Address',
             quotaTime: 'Staking Period',
-            allReward: 'All of the retrievable block creation rewards',
             time: '7776000 snapshot blocks（approximately 90 days）',
             confirmBtn: 'Submit',
             namePlaceholder: 'Please input node name',
@@ -334,14 +323,10 @@ module.exports = {
         },
         section2: {
             title: 'Registration Information',
-            updateSuccess: 'Modify request has sent',
+            update: 'Modify',
             updateFail: 'Failed to send modify request',
-            rewardSuccess: 'Request of Rewards retrieval has sent',
-            rewardFail: 'Failed to send the request of rewards retrieving',
-            cancelSuccess: 'Revoking request has sent',
+            cancel: 'Revoking',
             cancelFail: 'Failed to send revoking request',
-            nowReward: 'The range of snapshot block height and reward that can be requested at this time',
-            rewardAddr: 'Retrieval Address',
             expireDate: 'Expire Date: {time}',
             cancelConfirm: {
                 title: 'Revoke registration of SBP',
@@ -350,16 +335,16 @@ module.exports = {
         }
     },
 
-    // vote
+    // Voting
     vote: {
-        toReward: 'View my rewards',
         title: Voting,
-        Voting,
-        search: 'Please input node name or block creation address',
         help: {
             title: 'About Voting',
             text: 'You can join and vote for 25 SBPs （Snapshot Block Producer), each round of voting lasts 75s, the polls you can use for voting are equivalent to the amount of VITE tokens owned by voting address, the default selection is the choice of previous round, the SBPs will be chosen from random 23 out of top 25 candidate nodes, plus random 2 out of the candidate nodes ranking 26th-100th on the list, 25 SBPs in total.',
         },
+        toReward: 'View my rewards',
+        Voting,
+        search: 'Please input node name or block creation address',
         addrNoExistErr:'You aren\'t able to vote for now as your address has no transaction record before',
         revokeVoting: 'Revoke voting',
         section1: {
@@ -380,7 +365,7 @@ module.exports = {
                 cancelText: 'Confirm',
                 submitText: 'Not yet'
             },
-            toast: 'Revoking request has sent',
+            revoke: 'Revoking',
             operateBtn: 'Revoke',
             cancelVoteErr:'Failed to revoke voting, please try again'
         },
@@ -399,29 +384,27 @@ module.exports = {
                     submitText: 'Cancel'
                 }
             },
-            toast: 'The voting request has sent',
             noSearchData:'No content found, please try another input',
             operateBtn: 'Vote',
             voteErr: 'Failed to vote, please try again'
         }
     },
 
-    // exchangeVite
-    exchangeVite: {
+    // VITE Conversion
+    conversion: {
         title: 'VITE Conversion',
-        gas: 'Mining Fee',
-        record: 'Conversion History',
-        aboutPrice: 'Approx {amount} ETH',
-        note: 'Please wait in patient after submitting the conversion. You cannot receive the converted VITE until you have got 30 Ethereum transaction confirmations. Ehtereum transaction records can be viewed in Conversion History section.',
         help: {
             title: 'Quick Understanding of VITE Conversion',
             text: 'You can migrate ERC20 tokens into VITE into our TestNet by VITE conversion function. In TestNet, casting your vote for official SBPs to collect rewards, the annualized rate can reach 20%. Your ERC20 VITE tokens will be transferred to Ethereum black hole address: {blackAddr}, you will receive the same amount of VITE at your Vite address when Ethereum black hole address has received the transaction and confirmed. Once you are in the conversion process, confirm that there are enough VITE and ETH (as gas) in your Ethereum address of Vite wallet.'
         },
+        gas: 'Mining Fee',
+        record: 'Conversion History',
+        aboutPrice: 'Approx {amount} ETH',
+        note: 'Please wait in patient after submitting the conversion. You cannot receive the converted VITE until you have got 30 Ethereum transaction confirmations. Ehtereum transaction records can be viewed in Conversion History section.',
         exchange: {
             vite: 'Convert',
             viteAddr: 'Receiving Address',
             viteAmount: 'Conversion Amount',
-            gas: 'Mining Fee',
             btn: 'Ready to Convert',
             success: 'Conversion Successful. It may take approx 20 minutes to get VITE into your account after the Ethereum transaction is confirmed.'
         }
