@@ -3,9 +3,9 @@
         <div class="__tb_row __tb_head __pointer">
             <div class="__tb_cell name">{{ $t('SBP.section1.nodeName') }}</div>
             <div class="__tb_cell addr">{{ $t('SBP.section1.producerAddr') }}</div>
-            <div class="__tb_cell amount">{{ $t('SBP.section1.quotaAmount') }}</div>
-            <div class="__tb_cell height">{{ $t('quota.list.withdrawHeight') }}</div>
-            <div class="__tb_cell operate">{{ $t('quota.list.operate') }}</div>
+            <div class="__tb_cell amount">{{ $t('common.stakingAmount') }}</div>
+            <div class="__tb_cell height">{{ $t('common.withdrawHeight') }}</div>
+            <div class="__tb_cell operate">{{ $t('action') }}</div>
         </div>
         
         <div v-show="list && list.length" class="__tb_content">
@@ -93,7 +93,7 @@ export default {
             let balance = this.tokenBalList[this.tokenInfo.tokenId] ? this.tokenBalList[this.tokenInfo.tokenId].totalAmount : 0;
             let minAmount = BigNumber.toMin(amount, this.tokenInfo.decimals);
             if (BigNumber.compared(balance, minAmount) < 0) {
-                return this.$t('transList.valid.bal');
+                return this.$t('common.insufficientBalance');
             }
             return '';
         },

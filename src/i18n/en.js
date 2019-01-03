@@ -1,8 +1,29 @@
+const InsufficientQuota = 'Insufficient Quota';
+const StakeVITE = 'Stake VITE';
+const Action = 'Action';
+const SBPRegistration = 'SBP Registration';
+const NodeName = 'Node Name';
+const Voting = 'Voting';
+const MyVoting = 'My Voting';
+
 module.exports = {
     lang: 'EN',
 
     start: 'Start',
+    login: 'Log in',
     logout: 'Logout',
+    pow: 'Running PoW...',
+    accountName: 'Account name',
+    action: Action,
+    addAccount: '添加账户',
+
+    nav: {
+        setting: 'Setting Account',
+        reset: 'Account Reset',
+        create: 'Create',
+        noNet: 'No network detected',
+        blockHeight: 'Snapshot Block Height'
+    },
 
     errCode: {
         35003: '{name} ID conflict occurs, please re-submit later',
@@ -17,11 +38,11 @@ module.exports = {
     },
 
     txType: {
-        0: 'SBP Registration',
+        0: SBPRegistration,
         1: 'Update Registration',
         2: 'Revoke Registration',
         3: 'Retrieve Reward',
-        4: 'Voting',
+        4: Voting,
         5: 'Revoke Voting',
         6: 'Get TPS Quota',
         7: 'Withdrawal of Staking Quota',
@@ -34,22 +55,74 @@ module.exports = {
         14: 'Transfer',
         15: 'Transfer'
     },
-    
-    firstNotice: {
+
+    //common
+    btn: {
+        cancel: 'Cancel',
+        login: 'Login',
+        imported: 'Import Account',
+        back: 'Back',
+        submit: 'Submit',
+        next: 'Next Step',
+        understand: 'I understand',
+        edit: 'Edit',
+        reReg: 'Re-register',
+        otherProd: 'Use Other Products of Vite'
+    },
+    hint: {
+        pwErr: 'Incorrect password!',
+        pwEmpty: 'Password cannot be empty!',
+        noData: 'No Data',
+        err: 'Oops, error occurs',
+        request: '{name} request has sent, please wait',
+        copy: 'Successfully copied'
+    },
+    common: {
+        sendTrans: 'Send Transaction',
+        send: 'Send',
+        stakingAmount: 'Staking Amount',
+        submitStaking: 'Submit Staking',
+        withdrawHeight: 'Expected Snapshot Height',
+        balance: 'Balance',
+        insufficientBalance: 'Insufficient balance'
+    },
+
+    beforeUse: {
         title: 'Read Before Use',
         text1: 'Please be sure to backup your seed phrase when creating account. We cannot guarantee the restoration of your assets in the instance that you visit a scam site or lose your private keys or seed phrase.',
         text2: 'Please note that our websites do not store your private keys or seed phrase. Therefore, you will need to restore your account via seed phrase if you decide to change browsers, clear local cookies, or change PCs.',
         text3: 'Please take proper precautions in ensuring that you accurately record and safely store your seed phrase. Even the slightest error will result in you not being able to successfully restore your address.',
     },
-
-    test: {
+    preview: {
         t: 'Preview Version',
         txt1: 'The preview version of wallet is a lightweight-node wallet officially issued by VITE.',
         txt2: 'The current version supports functions of checking account balance, sending transactions, receiving transactions in default, acquiring test tokens, staking VITE tokens for TPS quota, SBP registration, vote and etc.',
         txt3: 'Support acquiring test tokens and experiencing the product by using them, the test tokens issued by VITE official can be only used for testing and with no actual value, it will be cleared by VITE official sporadically',
         v: 'Current version: {version}'
     },
+    pwdConfirm: {
+        conf: 'Open password-free mode within 5 minutes',
+        title: 'Password',
+        placeholder: 'Please input password of wallet'
+    },
+    quotaConfirmCancel: {
+        title: InsufficientQuota,
+        describe: 'You cannot {operate} due to insufficient TPS quota. You need to stake VITE for quota to {operate}',
+        leftBtn: 'Not {operate} yet',
+        rightBtn: StakeVITE
+    },
+    quotaConfirmPoW: {
+        title: InsufficientQuota,
+        content: 'your left quota turn out to be insufficient, you can acquire more quota by running PoW or staking VITE',
+        leftBtn: {
+            text: StakeVITE
+        },
+        rightBtn: {
+            text: 'Run PoW'
+        }
+    },
 
+    // mnemonic
     mnemonic: {
         title: 'Mnemonic',
         restore: 'Restore Account by Seed Phrase',
@@ -63,6 +136,7 @@ module.exports = {
         change: 'Switch to {len} Mnemonic Words'
     },
 
+    // setting
     setting: {
         title: 'Settings',
         unlock: 'Unlock Secure Information',
@@ -72,40 +146,14 @@ module.exports = {
         service: 'Customer Service',
         site: 'Official Website of Vite',
         sys: 'System Portal',
-        open: 'Vite Github'
-    },
-
-    nav: {
-        home: 'Home',
-        head: {
-            title: 'Account',
-            create: 'Create',
-            imported: 'Import',
-            backup: 'Back Up',
-            setting: 'Setting Account',
-            reset: 'Account Reset',
-            login: 'Log in'
-        },
-        sync: 'Wallet initializing, transactions cannot be made temporarily.',
-        noNet: 'No network detected',
-        noP2P: 'Unable to connect to other nodes',
-        firstDone: 'Init Done',
-        firstDoing: 'Initializing',
-        blockHeight: 'Snapshot Block Height'
-    },
-
-    // account list
-    accList: {
-        balance: 'Balance',
-        addAcc: 'Add Address',
-        addr: 'Addresses of Accounts',
-        addrList: 'Addresses',
-        default: 'Select Default User'
+        open: 'Vite Github',
+        addAddr: 'Add Address',
+        addrList: 'Addresses of Accounts',
+        setDefault: 'Select Default User'
     },
 
     //create account
     create: {
-        accName: 'Account name',
         input: 'Please input password',
         again: 'Please input password again!',
         choose: 'Choose account',
@@ -116,16 +164,20 @@ module.exports = {
             long: 'Your input cannot exceed 32 characters!',
             name: 'Account name only supports Chinese, English, numbers and underscores',
             consistency: 'Please enter the same password!',
-            pwFormat: 'Wrong password format. The password only supports English, half-width symbols, numbers.',
-            save: 'Your private key stored in {0}，please keep it carefully，your account and password cannot be retrieved at current version!'
+            pwFormat: 'Wrong password format. The password only supports English, half-width symbols, numbers.'
         }
     },
-    dragDrop: {
-        text: 'Drag and drop files there',
-        err1: 'Imported illegal file!',
-        err2: 'Only one file can be imported!',
-        guide: 'Open folder to import',
-        hint: 'Noted that login by importing keystore file cannot support creating multi addresses, using mnemonic seed phrase is recommended in cross-platform situations.'
+
+    // imported
+    imported: {
+        title: 'Import',
+        dragDrop: {
+            text: 'Drag and drop files there',
+            err1: 'Imported illegal file!',
+            err2: 'Only one file can be imported!',
+            guide: 'Open folder to import',
+            hint: 'Noted that login by importing keystore file cannot support creating multi addresses, using mnemonic seed phrase is recommended in cross-platform situations.'
+        }
     },
 
     // account detail
@@ -136,50 +188,30 @@ module.exports = {
         transDetail: 'More Transaction Details',
         name: 'Account Name',
         address: 'My Address',
-        balance: 'Balance',
         fundFloat: 'Unreceived',
         pend: 'Pending',
-        copy: 'Copy Address',
-        outAddress: 'My Address',
         inAddress: 'Receive Address',
         sum: 'Amount',
-        password: 'Password',
         saveQrcode: 'Save QR code image',
-        sendTrans: 'Send Transaction',
         remarks: 'Comment',
+        remarksLong: '{len} bytes left',
         placeholder: {
             amount: 'Please input amount',
             remarks: 'Please input comments',
             addr: 'Please input address'
         },
-        valid: {
-            remarksFormat: 'Format error! Remarks can only contain Chinese, English and punctuations.',
-            remarksLong: '{len} bytes left'
-        },
         hint: {
             token: 'VTT test tokens have be sent to your account, please check your account!',
             tErr: 'Get test token failed!',
-            low: 'Insufficient account balance',
-            wrong: 'Wrong Password!',
-            amount: 'Amount must be greater than 0',
-            punctuation: 'Punctuations are not allowed!',
-            rename: 'Rename failed',
-            copy: 'Successfully copied'
-        },
-        quota: {
-            title: 'Insufficient Quota',
-            describe: 'your left quotas turn out to be insufficient, you can acquire more quotas by running PoW or staking VITE',
-            left: 'Stake VITE',
-            right: 'Run PoW'
+            amount: 'Amount must be greater than 0'
         },
         trans: {
             powErr: 'Error occurs when running PoW, please try again',
-            powTransErr: 'Insufficient quota of PoW, we\'d recommend that you stake VITE to obtain quota.',
-            err: 'Error occurs in transaction, please try again'
+            powTransErr: 'Insufficient quota of PoW, we\'d recommend that you stake VITE to obtain quota.'
         }
     },
 
-
+    // quota
     quota: {
         title: 'Get Quota',
         help: {
@@ -189,21 +221,17 @@ module.exports = {
         maxTxNum: 'Maximum number of Txs',
         beneficialAddr: 'Quota Recipient Address',
         fromAddr: 'Deduction address',
-        amount: 'Staking Amount',
         time: 'Staking Freeze Duration',
-        aboutDays: 'Approx 3 days',
-        btn: 'Submit Staking',
-        myQuotaList: 'My Staking List',
+        aboutDays: 'Approx {day} days',
         amountPlaceholder: 'Please input staking amount, minimum 10 VITE',
         addrPlaceholder: 'Please input quota recipient address',
-        cancelAmount: 'Please input withdraw amount',
-        pledgeSuccess: 'Successfully Submitted',
+        inputWithdrawAmount: 'Please input withdraw amount',
         pledgeFail: 'Failed to Submit',
-        canclePledgeSuccess: 'Success',
         canclePledgeFail: 'Failed',
         limitAmt: 'Staking amount should not be less than 10.',
         maturity: 'Staking has expired!',
         maxAmt: 'Withdraw amount should be in (0, {amount}]',
+        withdrawalStaking: 'Withdrawal of Staked Token',
         confirm: {
             help: {
                 t1: 'What is Quota?',
@@ -214,14 +242,11 @@ module.exports = {
                 txt3: 'Proof of Work (PoW), is a protocol to confirm that you have done a certain amount of work, and is also an economic measure to deter DDoS attacks and other service abuse. It requires the initiator to conduct a certain amount of computing, which means that it may take some time for the computer. In the Vite system, users can obtain a free quota by running the PoW, and also can send a transaction without any annotated information through obtained quota.'
             },
             cancel: {
-                title: 'Withdrawal of Staked Token',
                 describe: 'Your current staked amount is {amount} VITE, please confirm to withdraw.',
-                placeholder: 'Please input withdraw amount',
                 rightBtn: 'Ready to go',
                 leftBtn: 'Cancel withdraw'
             },
             submit: {
-                title: 'Submit Staking',
                 describe: 'Make sure to stake {amount} VITE to obtain quota, you cannot withdraw until about 3 days after staking comes into effect.',
                 rightBtn: 'Confirm',
                 leftBtn: 'Cancel'
@@ -231,10 +256,7 @@ module.exports = {
             title: 'My Staking List',
             total: 'Staking {amount} VITE in total',
             amount: 'Amount',
-            withdrawHeight: 'Expected Snapshot Height',
             withdrawTime: 'Expected Due Date',
-            cancel: 'Withdrawal of staked token',
-            operate: 'Action',
             unexpired: 'Temporarily cannot make withdrawal of staked token until due date'
         }
     },
@@ -244,9 +266,7 @@ module.exports = {
         title: 'Transactions',
         tType: {
             title: 'Type',
-            symbol: 'Type',
-            send: 'Send',
-            receive: 'Receive',
+            symbol: 'Type'
         },
         status: {
             title: 'Status',
@@ -256,24 +276,20 @@ module.exports = {
         },
         valid: {
             addr: 'Address format error',
-            bal: 'Insufficient balance',
-            pswd: 'Password error',
             amt: 'Amount format error',
             succ: 'Transaction successful!'
         },
         timestamp: 'Timestamp',
         tAddress: 'Address',
         tAddr: 'Address',
-        sum: 'Amount',
-        tDetail: 'Transaction Detail'
+        sum: 'Amount'
     },
 
     // SBP
     SBP: {
-        title: 'SBP Registration',
-        edit: 'Edit',
+        title: SBPRegistration,
         reward: 'Retrieval of SBP rewards',
-        register: 'SBP Registration',
+        register: SBPRegistration,
         cancel: 'SBP Cancellation',
         cancelBtn: 'Cancel',
         help: {
@@ -291,20 +307,19 @@ module.exports = {
                 btn: 'Confirm to change'
             },
             reward: {
-                title: 'Retrieve block creation rewards',
-                placeholder: 'Please input rewards recipient address',
-                btn: 'Retrieval of Rewards'
+                amount: '本次可提奖励金额（约）',
+                hint: '为了您的资金安全，接收出块奖励地址应尽量与出块地址不同',
+                time: '本次可提时间范围'
             }
         },
         section1: {
             title: 'Registration Form',
-            nodeName: 'Node Name',
+            nodeName: NodeName,
             producerAddr: 'Block Creation Address',
             quotaAddr: 'Staking Address',
             quotaTime: 'Staking Period',
             allReward: 'All of the retrievable block creation rewards',
             time: '7776000 snapshot blocks（approximately 90 days）',
-            quotaAmount: 'Staking Amount',
             confirmBtn: 'Submit',
             namePlaceholder: 'Please input node name',
             nameHint: 'Within 40 characters, support English letters (both upper and lower cases), numbers, \'_\'、\'.\'',
@@ -338,16 +353,18 @@ module.exports = {
     // vote
     vote: {
         toReward: 'View my rewards',
-        title: 'Voting',
+        title: Voting,
+        Voting,
         search: 'Please input node name or block creation address',
         help: {
             title: 'About Voting',
             text: 'You can join and vote for 25 SBPs （Snapshot Block Producer), each round of voting lasts 75s, the polls you can use for voting are equivalent to the amount of VITE tokens owned by voting address, the default selection is the choice of previous round, the SBPs will be chosen from random 23 out of top 25 candidate nodes, plus random 2 out of the candidate nodes ranking 26th-100th on the list, 25 SBPs in total.',
         },
         addrNoExistErr:'You aren\'t able to vote for now as your address has no transaction record before',
+        revokeVoting: 'Revoke voting',
         section1: {
-            title: 'My Voting',
-            head: ['Name', 'Status', 'My Voting', 'Status of Voting', 'Action'],
+            title: MyVoting,
+            head: ['Name', 'Status', MyVoting, 'Status of Voting', Action],
             nodeStatusMap: {
                 1: 'Active',
                 2: 'Inactive'
@@ -360,51 +377,32 @@ module.exports = {
             },
             hoverHelp: 'The node {nodeName} you are voted for has been revoked, you may vote again directly or revoke your voting, If you do not do so, your original voting result will be recovered after the {nodeName} re-registering',
             confirm: {
-                title: 'Revoke voting',
                 cancelText: 'Confirm',
                 submitText: 'Not yet'
             },
             toast: 'Revoking request has sent',
-            quotaConfirm: {
-                title: 'Insufficient Quota',
-                content: 'your left quota turn out to be insufficient, you can acquire more quota by running PoW or staking VITE',
-                leftBtn: {text:'Stake Quota'},
-                rightBtn: {text:'Run POW'}
-            },
-            operate:'Revoke Voting',
-            operateBtn:'Revoke',
+            operateBtn: 'Revoke',
             cancelVoteErr:'Failed to revoke voting, please try again'
         },
-    
         section2: {
             title: 'SBP candidates',
-            head: ['Rank','Node Name', 'Address', 'Votes', 'Action'],
+            head: ['Rank', NodeName, 'Address', 'Votes', Action],
             confirm: {
                 normal: {
-                    title: 'Voting',
+                    content: 'You can vote for only one SBP, are you sure you want to vote for {name}?',
                     cancelText: 'Not yet',
                     submitText: 'Ready to vote',
-                    content: 'You can vote for only one SBP, are you sure you want to vote for {name}?'
                 },
                 cover: {
-                    title: 'Voting',
                     content: 'You\'ve already voted for {nodeName}, are you sure to overwrite current voting record?',
                     cancelText: 'Confirm',
                     submitText: 'Cancel'
                 }
             },
             toast: 'The voting request has sent',
-            quotaConfirm: {
-                title: 'Insufficient Quota',
-                content: 'your left quota turn out to be insufficient, you can acquire more quota by running PoW or staking VITE',
-                leftBtn: {text:'Stake for quota'},
-                rightBtn: {text:'Run POW'}
-            },
             noSearchData:'No content found, please try another input',
-            noData:'No data',
-            operate:'Voting',
-            operateBtn:'Vote',
-            voteErr:'Failed to vote, please try again'
+            operateBtn: 'Vote',
+            voteErr: 'Failed to vote, please try again'
         }
     },
 
@@ -421,58 +419,11 @@ module.exports = {
         },
         exchange: {
             vite: 'Convert',
-            sendTrans: 'Send',
             viteAddr: 'Receiving Address',
             viteAmount: 'Conversion Amount',
             gas: 'Mining Fee',
             btn: 'Ready to Convert',
             success: 'Conversion Successful. It may take approx 20 minutes to get VITE into your account after the Ethereum transaction is confirmed.'
         }
-    },
-    
-    pwdConfirm: {
-        conf: 'Open password-free mode within 5 minutes',
-        title: 'Password',
-        placeholder: 'Please input password of wallet'
-    },
-
-    quotaConfirm: {
-        title: 'Insufficient Quota',
-        describe: 'You cannot {operate} due to insufficient TPS quota. You need to stake VITE for quota to {operate}',
-        leftBtn: 'Not {operate} yet',
-        rightBtn: 'Get Quota'
-    },
-
-    //common
-    pow: 'Running PoW...',
-    btn: {
-        create: 'Create',
-        cancel: 'Cancel',
-        login: 'Login',
-        imported: 'Import Account',
-        back: 'Back',
-        submit: 'Submit',
-        next: 'Next Step',
-        understand: 'I understand',
-        edit: 'Edit',
-        copy: 'Copy',
-        reReg: 'Re-register',
-        otherProd: 'Use Other Products of Vite'
-    },
-    paging: {
-        pre: 'Prev',
-        next: 'Next',
-        first: 'First',
-        last: 'Last',
-    },
-    hint: {
-        create: 'Creation failed',
-        logoutErr: 'Logout Error!',
-        pwErr: 'Incorrect password!',
-        acEmpty: 'Account cannot be empty!',
-        pwEmpty: 'Password cannot be empty!',
-        noData: 'No Data',
-        err: 'Oops, error occurs',
-        request: '{name} request has sent, please wait'
     }
 };

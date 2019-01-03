@@ -8,15 +8,26 @@ const _walletAccount = wallet.walletAccount;
 
 class walletAccount extends _walletAccount {
     constructor({
-        addrNum, defaultInx, mnemonic, bits, encryptObj, receiveFail
+        addrNum, defaultInx, mnemonic, bits, encryptObj, receiveFail, lang
     }) {
         super({
-            client: $ViteJS, mnemonic, bits, addrNum
+            client: $ViteJS, mnemonic, bits, addrNum, lang
         }, {});
 
         this.defaultInx = defaultInx || 0;
         this.encryptObj = encryptObj || null;
         this.receiveFail = receiveFail;
+        this.unlockAcc = null;
+
+        let funcName = ['getBalance', 'sendRawTx', 'sendTx', 'receiveTx', 'SBPreg', 'updateReg', 'revokeReg', 'retrieveReward', 'voting', 'revokeVoting', 'getQuota', 'withdrawalOfQuota'];
+        funcName.forEach((name) => {
+            this[name] = (...args) => {
+                if (!this.unlockAcc) {
+                    return Promise.reject('No unlockAcc');
+                }
+                return this.unlockAcc[name](...args);
+            };
+        });
     }
 
     verify(pass) {
@@ -40,6 +51,7 @@ class walletAccount extends _walletAccount {
         acc.add({
             name, 
             id: this.id,
+            lang: this.lang,
             defaultInx: this.defaultInx, 
             addrNum: this.addrList.length, 
             encryptObj: this.encryptObj
@@ -53,7 +65,7 @@ class walletAccount extends _walletAccount {
         }
 
         this.defaultInx = index;
-        this.unlock({ address });
+        this.unlock();
         return true;
     }
 
@@ -61,19 +73,27 @@ class walletAccount extends _walletAccount {
         return this.addrList[this.defaultInx].hexAddr;
     }
 
-    unlock(intervals) {
-        let result = this.activateAccount({
+    unlock(intervals = 2000) {
+        this.lock();
+        this.unlockAcc = this.activateAccount({
             index: this.defaultInx
         }, {
             intervals,
             receiveFailAction: this.receiveFail, 
             duration: -1
         });
-        return !!result;
+        return !!this.unlockAcc;
     }
 
     lock() {
-        this.freezeAccount();
+        this.unlockAcc && this.freezeAccount(this.unlockAcc);
+    }
+
+    get balance() {
+        if (!this.unlockAcc) {
+            return null;
+        }
+        return this.unlockAcc.balance;
     }
 }
 

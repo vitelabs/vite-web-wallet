@@ -13,7 +13,7 @@
                 cell: 'showAmount'
             },{
                 class: 'height',
-                text: $t('quota.list.withdrawHeight'),
+                text: $t('common.withdrawHeight'),
                 cell: 'withdrawHeight'
             },{
                 class: 'time',
@@ -21,7 +21,7 @@
                 cell: 'pledgeDate'
             },{
                 class: 'operate __pointer',
-                text: $t('quota.list.operate'),
+                text: $t('action'),
                 cell: 'cancel'
             }]" :contentList="pledgeList" :clickCell="clickCell">
                 <pagination class="__tb_pagination" :currentPage="currentPage + 1" 
@@ -106,7 +106,7 @@ export default {
 
                 let isMaturity = BigNumber.compared(pledge.withdrawHeight, currentHeight) <= 0;
                 let cancelClass = isMaturity ? 'cancel active' : 'cancel';
-                let cancel = `<span class="${cancelClass}">${this.$t('quota.list.cancel')}</span>`;
+                let cancel = `<span class="${cancelClass}">${this.$t('quota.withdrawalStaking')}</span>`;
 
                 let pledgeDate = isMaturity ? 
                     this.$t('quota.maturity') : 
@@ -164,7 +164,7 @@ export default {
                 this.loading = false;
                 this.activeItem = null;
                 result && this.$toast(this.$t('hint.request', {
-                    name: this.$t('quota.list.cancel') 
+                    name: this.$t('quota.withdrawalStaking') 
                 }));
                 !result && err && this.$toast(this.$t('quota.canclePledgeFail'), err);
             });

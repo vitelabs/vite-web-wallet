@@ -11,7 +11,7 @@
             }"></span>
         </div>
         <div class="words">
-            <span class="setting">{{ $t('nav.head.setting') }}</span>
+            <span class="setting">{{ $t('nav.setting') }}</span>
             <span class="record">{{ $t('mnemonic.record') }}</span>
         </div>
     </div>

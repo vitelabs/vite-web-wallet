@@ -4,13 +4,13 @@
             <div class="__btn_input_active" 
                  v-for="(account, i) in accountList" :key="i" 
                  @click="clickAccount(account)">
-                <div class="name">{{account.name}}</div>
-                <div class="address __ellipsis">{{account.showAddr}}</div>
+                <div class="name">{{ account.name }}</div>
+                <div class="address __ellipsis">{{ account.showAddr }}</div>
             </div>
         </div>
 
         <span class="__btn add-acc" @click="addAcc"> 
-            <img class="icon" src="../../assets/imgs/add_icon.svg"/>{{ $t('accList.addAcc') }}
+            <img class="icon" src="../../assets/imgs/add_icon.svg"/>{{ $t('addAccount') }}
         </span>
     </div>
 </template>
