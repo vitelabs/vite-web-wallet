@@ -1,9 +1,9 @@
 <template>
     <div class="sync-block-wrapper">
-        <span class="status-text" v-show="statusText && statusText !== 'sync'">
-            {{ statusText ? $t(`nav.${statusText}`) : '' }}
+        <span class="status-text" v-show="!netStatus">
+            {{ $t(`nav.noNet`) }}
         </span>
-        <span v-show="statusText === 'sync'">
+        <span v-show="netStatus">
             {{ $t(`nav.blockHeight`) + ': ' + (blockHeight || '----') }}
         </span>
     </div>
@@ -34,11 +34,6 @@ export default {
     destroyed() {
         webViteEventEmitter.off(netEvent);
         webViteEventEmitter.off(heightEvent);
-    },
-    computed: {
-        statusText() {
-            return !this.netStatus ? 'noNet' : 'sync';
-        }
     }
 };
 </script>

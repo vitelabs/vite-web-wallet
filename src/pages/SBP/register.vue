@@ -41,7 +41,7 @@
         <div class="row">
             <div class="item">
                 <div class="title">
-                    {{ $t('SBP.section1.quotaAmount') }}
+                    {{ $t('common.stakingAmount') }}
                     <span v-show="amountErr" class="err">{{ amountErr }}</span>
                 </div>
                 <div class="input-item all unuse __ellipsis">500,000 VITE</div>
@@ -118,7 +118,7 @@ export default {
             let balance = this.tokenBalList[this.tokenInfo.tokenId] ? this.tokenBalList[this.tokenInfo.tokenId].totalAmount : 0;
             let minAmount = BigNumber.toMin(amount, this.tokenInfo.decimals);
             if (BigNumber.compared(balance, minAmount) < 0) {
-                return this.$t('transList.valid.bal');
+                return this.$t('common.insufficientBalance');
             }
             return '';
         },

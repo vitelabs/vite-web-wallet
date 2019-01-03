@@ -6,11 +6,6 @@
         </div>
 
         <div class="menu-list" :class="{ 'show': showList }">
-            <div class="item" @click="go('account')" 
-                 :class="{ 'active': active === 'account'}">
-                {{ $t('nav.home') }}
-            </div>
-
             <div v-for="(name, i) in pageList" :key="i"
                  class="item" @click="go(name)"
                  :class="{ 'active': active === name}">

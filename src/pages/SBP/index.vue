@@ -220,7 +220,7 @@ export default {
                 this.loading = false;
                 if (err && err.error && err.error.code && err.error.code === -35002) {
                     quotaConfirm({
-                        operate: this.$t('SBP.edit')
+                        operate: this.$t('btn.edit')
                     });
                     return;
                 }

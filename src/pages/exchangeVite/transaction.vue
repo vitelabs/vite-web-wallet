@@ -7,7 +7,7 @@
                  :singleBtn="true" :leftBtnClick="transfer">
 
             <div class="__row">
-                <div class="__row-t">{{ $t('account.balance') }}</div>
+                <div class="__row-t">{{ $t('common.balance') }}</div>
                 <div class="__unuse-row">
                     <img :src="icon" class="__icon" />
                     {{ token.symbol }} <span class="__right">{{ balance }}</span>
@@ -170,7 +170,7 @@ export default {
 
             let amount = BigNumber.toMin(this.amount, this.token.decimals);
             if (BigNumber.compared(this.token.balance, amount) < 0) {
-                this.amountErr = this.$t('transList.valid.bal');
+                this.amountErr = this.$t('common.insufficientBalance');
                 return false;
             }
 

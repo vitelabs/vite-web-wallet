@@ -1,10 +1,12 @@
 import { pwdConfirm } from 'components/password/index.js';
 import { getPowNonce } from 'services/pow';
+import { constant } from '@vite/vitejs';
 
 import keystoreAcc from './keystoreAccount';
 import walletAcc from './walletAccount';
 import acc from './storeAcc.js';
 
+const { type } = constant;
 const NamePre = 'account';
 const AccountType = {
     keystore: 'keystore',
@@ -14,9 +16,9 @@ let passTimeout;
 
 class account {
     constructor({
-        name, pass, type,                               // account
-        addrNum, defaultInx, mnemonic, encryptObj,      // walletAccount
-        keystore, privateKey                            // keystoreAccount
+        name, pass, type,                                   // account
+        addrNum, defaultInx, mnemonic, encryptObj, lang,    // walletAccount
+        keystore, privateKey                                // keystoreAccount
     }) {
         this.isHoldPWD = false;
         this.type = type;
@@ -47,7 +49,7 @@ class account {
             }
         } else if (this.type === AccountType.wallet) {
             this.account = new walletAcc({
-                addrNum, defaultInx, mnemonic, encryptObj, receiveFail
+                addrNum, defaultInx, mnemonic, encryptObj, receiveFail, lang
             });
         } else {
             this.account = null;
@@ -145,13 +147,14 @@ class account {
         this.account.save(this.name, index);
     }
 
-    changeMnemonic(len) {
+    changeMnemonic(len, lang = type.LangList.english) {
         let bits = len === 12 ? 128 : 256;
 
         this.type = AccountType.wallet;
         this.account = new walletAcc({
             addrNum: 1,
-            bits
+            bits,
+            lang
         });
     }
 
