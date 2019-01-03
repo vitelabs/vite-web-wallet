@@ -1,5 +1,7 @@
 import qs from 'qs';
 
+const reqTimeout = 30000;
+
 export default function request({ method = 'GET', path, params = {} }) {
     method = method.toUpperCase();
 
@@ -22,37 +24,61 @@ export default function request({ method = 'GET', path, params = {} }) {
     }
 
     return new Promise((res, rej) => {
+        let _t = setTimeout(() => {
+            _t = null;
+            xhr.abort && xhr.abort();
+            rej('timeout');
+        }, reqTimeout);
+        
+        let _rej = (err) => {
+            if (!_t) {
+                return;
+            }
+            _t && clearTimeout(_t);
+            _t = null;
+            return rej(err);
+        };
+
+        let _res = (data) => {
+            if (!_t) {
+                return;
+            }
+            _t && clearTimeout(_t);
+            _t = null;
+            return res(data);
+        };
+
         xhr.onload = function () {
             if (xhr.status == 200) {
                 try {
                     let { code, msg, data, error } = JSON.parse(xhr.responseText);
                     if (code !== 200) {
-                        return rej({
+                        return _rej({
                             code,
                             message: msg || error
                         });
                     }
 
                     data = data || null;
-                    res(data);
+                    _res(data);
                 } catch (e) {
                     rej(e);
                 }
             } else {
-                rej( JSON.parse(xhr.responseText) );
+                _rej( JSON.parse(xhr.responseText) );
             }
         };
         xhr.onerror = function (err) {
             console.error(err);
-            rej();
+            _rej(err);
         };
         xhr.onabort = function (x) {
             console.warn(x);
-            rej();
+            _rej(x);
         };
         xhr.ontimeout = function (time) {
             console.warn(time);
-            rej();
+            _rej('timeout');
         };
     });
 }
