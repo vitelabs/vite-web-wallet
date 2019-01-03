@@ -203,7 +203,9 @@ class account {
         if (this.type === AccountType.keystore) {
             return true;
         }
-        return this.account.setDefaultAddr(addr, index);
+        let result = this.account.setDefaultAddr(addr, index);
+        result && this.save();
+        return result;
     }
 
     getDefaultAddr() {
