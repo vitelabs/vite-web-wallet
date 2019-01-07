@@ -83,8 +83,8 @@ module.exports = {
             imported: 'Import',
             backup: 'Back Up',
             setting: 'Setting Account',
-            reset: 'Account Reset',
-            login: 'Log in'
+            reset: 'Reset Your Account',
+            login: 'Log In'
         },
         sync: 'Wallet initializing, transactions cannot be made temporarily.',
         noNet: 'No network detected',
@@ -107,7 +107,7 @@ module.exports = {
     create: {
         accName: 'Account name',
         input: 'Please input password',
-        again: 'Please input password again!',
+        again: 'Please input password again',
         choose: 'Choose account',
         finish: 'Done',
         hint: {
