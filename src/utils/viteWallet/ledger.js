@@ -2,6 +2,10 @@ import loopTime from 'config/loopTime';
 import viteIcon from 'assets/imgs/vite.svg';
 import vcpIcon from 'assets/imgs/VCC.svg';
 import vttIcon from 'assets/imgs/vtt.svg';
+import { utils, constant } from '@vite/vitejs';
+
+const { accountBlock } = utils;
+const { type } = constant;
 
 const ViteId = 'tti_5649544520544f4b454e6e40';
 const defaultTokenList = {
@@ -84,12 +88,37 @@ class Ledger {
         return this.currentHeight;
     }
 
-    getBlocks({
+    async getBlocks({
         addr, index, pageCount = 50
     }) {
-        return $ViteJS.buildinLedger.getTxList({
-            addr, index, pageCount
+        const requests = [{
+            methodName: 'ledger_getBlocksByAccAddr',
+            params: [ addr, index, pageCount ]
+        }, {
+            methodName: 'ledger_getAccountByAccAddr',
+            params: [ addr ]
+        }];
+
+        const data = await $ViteJS.batch(requests);
+
+        let rawList;
+        let totalNum;
+        requests.forEach((_r, i) => {
+            if (_r.methodName === 'ledger_getAccountByAccAddr') {
+                totalNum = data[i].result ? data[i].result.totalNumber : 0;
+                return;
+            }
+            rawList = data[i].result || [];
         });
+
+        let list = [];
+        rawList.forEach((item) => {
+            let txType = accountBlock.getBuiltinTxType(item.toAddress, item.data, +item.blockType);
+            item.txType = type.BuiltinTxType[txType];
+            list.push(item);
+        });
+
+        return { list, totalNum };
     }
 }
 
