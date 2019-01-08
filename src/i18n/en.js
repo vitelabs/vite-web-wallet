@@ -11,10 +11,10 @@ module.exports = {
 
     // Title
     start: 'Start',
-    login: 'Log in',
+    login: 'Log In',
     createAcc: 'Create',
     settingAcc: 'Setting Account',
-    resetAcc: 'Account Reset',
+    resetAcc: 'Reset Your Account',
     logout: 'Logout',
 
     // Noun
@@ -27,8 +27,8 @@ module.exports = {
     balance: 'Balance',
 
     // Verb
-    pow: 'Running PoW...',
-    addAccount: '添加账户',
+    pow: 'Running PoW...',    
+    addAccount: '添加账户', // addAcc: 'Add Address',
     saveQrcode: 'Save QR code image',
     sendTrans: {
         send: 'Send Transaction',
@@ -136,13 +136,13 @@ module.exports = {
         placeholder: 'Please input your mnemonic seed phrase',
         empty: 'The input of seed phrase cannot be empty',
         error: 'Incorrect seed phrase. Try again',
-        hint: 'Mnemonic format: words, spaces, words... spaces, words.',
+        hint: 'Example: apple banana peach mango pear ...',
         change: 'Switch to {len} Mnemonic Words'
     },
 
     // Setting
     setting: {
-        title: 'Settings',
+        title: 'Setting Account',   // Not only account?????
         unlock: 'Unlock Secure Information',
         lang: 'Language',
         block: 'Current Height',
@@ -159,7 +159,7 @@ module.exports = {
     // Create Account
     create: {
         input: 'Please input password',
-        again: 'Please input password again!',
+        again: 'Please input password again',
         choose: 'Choose account',
         finish: 'Done',
         hint: {
