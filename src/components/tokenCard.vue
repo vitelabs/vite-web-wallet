@@ -6,7 +6,7 @@
         </div>
         <div class="body">
             <div class="item">
-                <span>{{ $t('account.balance') }}</span>
+                <span>{{ $t('balance') }}</span>
                 <span class="balance">{{ opt.balance || 0 }}</span>
             </div>
             <div class="item">
@@ -18,7 +18,7 @@
             </div>
         </div>
         <div class="btn __pointer" :class="{ 'unuse': !opt.id || !opt.balance }" 
-             @click="_sendTx">{{ $t('account.sendTrans') }}</div>
+             @click="_sendTx">{{ $t('sendTrans.send') }}</div>
     </div>
 </template>
 

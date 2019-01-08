@@ -3,9 +3,9 @@
         <div class="__tb_row __tb_head __pointer">
             <div class="__tb_cell name">{{ $t('SBP.section1.nodeName') }}</div>
             <div class="__tb_cell addr">{{ $t('SBP.section1.producerAddr') }}</div>
-            <div class="__tb_cell amount">{{ $t('SBP.section1.quotaAmount') }}</div>
-            <div class="__tb_cell height">{{ $t('quota.list.withdrawHeight') }}</div>
-            <div class="__tb_cell operate">{{ $t('quota.list.operate') }}</div>
+            <div class="__tb_cell amount">{{ $t('stakingAmount') }}</div>
+            <div class="__tb_cell height">{{ $t('withdrawHeight') }}</div>
+            <div class="__tb_cell operate">{{ $t('action') }}</div>
         </div>
         
         <div v-show="list && list.length" class="__tb_content">
@@ -29,10 +29,6 @@
                         'unuse': !item.isMaturity   
                     }" @click="cancel(item)">{{ $t('SBP.cancelBtn') }}</span>
                     <span v-if="item.isCancel" class="btn __pointer" @click="reg(item)">{{ $t('btn.reReg') }}</span>
-                    <!-- <span class="btn" :class="{
-                        '__pointer': item.isReward,
-                        'unuse': !item.isReward
-                    }" @click="reward(item)">reward</span> -->
                 </div>
             </div>
         </div>
@@ -93,7 +89,7 @@ export default {
             let balance = this.tokenBalList[this.tokenInfo.tokenId] ? this.tokenBalList[this.tokenInfo.tokenId].totalAmount : 0;
             let minAmount = BigNumber.toMin(amount, this.tokenInfo.decimals);
             if (BigNumber.compared(balance, minAmount) < 0) {
-                return this.$t('transList.valid.bal');
+                return this.$t('hint.insufficientBalance');
             }
             return '';
         },
@@ -114,20 +110,17 @@ export default {
             registrationList.forEach(item => {
                 let isMaturity = BigNumber.compared(item.withdrawHeight, currentHeight) <= 0;
                 let isCancel = item.cancelHeight && !BigNumber.isEqual(item.cancelHeight, 0);
-                let isReward = !BigNumber.isEqual(item.availableReward, 0);
                 let addr = ellipsisAddr(item.nodeAddr, 6);
                 
                 let day = date(item.withdrawTime * 1000, this.$i18n.locale);
                 list.push({
                     isMaturity,
                     isCancel,
-                    isReward,
                     name: item.name,
                     nodeAddr: addr,
                     pledgeAmount: BigNumber.toBasic(item.pledgeAmount, decimals) + ' ' +  this.tokenInfo.tokenSymbol,
                     withdrawHeight: item.withdrawHeight,
                     time: day,
-                    availableReward: BigNumber.toBasic(item.availableReward, decimals) + ' ' +  this.tokenInfo.tokenSymbol,
                     rawData: item
                 });
             });
@@ -205,7 +198,9 @@ export default {
                     this.sendTx({
                         nodeName
                     }, 'revokeReg').then(()=>{
-                        this.$toast(this.$t('SBP.section2.cancelSuccess'));
+                        this.$toast(this.$t('hint.request', {
+                            name: this.$t('SBP.section2.cancel')
+                        }));
                         this.$store.dispatch('loopRegList', {
                             address: this.address,
                             nodeName, 
@@ -229,12 +224,6 @@ export default {
                 return;
             }
             this.showConfirm('edit', item.rawData);
-        },
-        reward(item) {
-            if (!item.isReward) {
-                return;
-            }
-            this.showConfirm('reward', item.rawData);
         }
     }
 };

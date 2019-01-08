@@ -5,14 +5,14 @@
         </div>
         <div class="content">
             <div class="balance">
-                {{ $t('account.balance') }}<span class="num">{{ balance }}</span>
+                {{ $t('balance') }}<span class="num">{{ balance }}</span>
             </div>
             <div class="btn-list">
                 <div class="btn __pointer" :class="classList" 
-                     @click="_sendTx('transfer', token.name)">{{ $t('exchangeVite.exchange.sendTrans') }}</div>
+                     @click="_sendTx('transfer', token.name)">{{ $t('sendTrans.symbol') }}</div>
                 <div v-show="token.symbol === 'VITE'" @click="_sendTx('exchange', token.name)"
                      class="btn __pointer" :class="classList">
-                    {{ $t('exchangeVite.exchange.vite') }}</div>
+                    {{ $t('conversion.exchange.vite') }}</div>
             </div>
         </div>
     </div>

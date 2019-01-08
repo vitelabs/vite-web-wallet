@@ -2,7 +2,7 @@
     <div class="account-head-wrapper">
         <div class="custom-name">
             <div class="head-title">
-                <span>{{ $t('account.name') }}</span>
+                <span>{{ $t('accountName') }}</span>
                 <img @click="startRename" class="edit __pointer" src="../../assets/imgs/edit_default.svg"/>
             </div>
             <div v-show="!isShowNameInput" class="name" :class="{
@@ -69,7 +69,7 @@ export default {
                 return;
             }
             if (!viteWallet.Net.getNetStatus()) {
-                this.$toast(this.$t('nav.noNet'));
+                this.$toast(this.$t('hint.noNet'));
                 return;
             }
 

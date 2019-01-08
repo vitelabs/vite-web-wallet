@@ -1,6 +1,6 @@
 <template>
     <div class="login-wrapper">
-        <div class="__title">{{$t('nav.head.login')}}</div>
+        <div class="__title">{{$t('login')}}</div>
 
         <div class="bottom __btn __pointer">
             <div v-click-outside="hideAccountList" @click="toggleAccountList">

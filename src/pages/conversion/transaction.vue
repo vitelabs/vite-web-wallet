@@ -1,13 +1,13 @@
 <template>
     <div class="__trans-wrapper">
         <confirm class="trans-confirm" v-show="isShowTrans"
-                 :title="transType === 'transfer' ? $t('account.transfer') : $t('exchangeVite.exchange.vite')"
-                 :leftBtnTxt="transType === 'transfer' ? $t('account.transfer') : $t('exchangeVite.exchange.btn')"
+                 :title="transType === 'transfer' ? $t('account.transfer') : $t('conversion.exchange.vite')"
+                 :leftBtnTxt="transType === 'transfer' ? $t('account.transfer') : $t('conversion.exchange.btn')"
                  :closeIcon="true" :btnUnuse="!canTransfer" :close="closeTrans" 
                  :singleBtn="true" :leftBtnClick="transfer">
 
             <div class="__row">
-                <div class="__row-t">{{ $t('account.balance') }}</div>
+                <div class="__row-t">{{ $t('balance') }}</div>
                 <div class="__unuse-row">
                     <img :src="icon" class="__icon" />
                     {{ token.symbol }} <span class="__right">{{ balance }}</span>
@@ -17,7 +17,7 @@
             <div v-show="transType === 'transfer'" class="__row">
                 <div class="__row-t">
                     {{ $t('account.inAddress') }}
-                    <span v-show="!isValidAddress" class="__err __hint">{{ $t('transList.valid.addr') }}</span>
+                    <span v-show="!isValidAddress" class="__err __hint">{{ $t('hint.addrFormat') }}</span>
                 </div>
                 <vite-input v-model="toAddress" :valid="validAddr"
                             :placeholder="$t('account.placeholder.addr')"></vite-input>
@@ -33,20 +33,20 @@
             </div>
 
             <div v-show="transType === 'exchange'" class="__row">
-                <div class="__row-t">{{ $t('exchangeVite.exchange.viteAddr') }}</div>
+                <div class="__row-t">{{ $t('conversion.exchange.viteAddr') }}</div>
                 <div class="__unuse-row __light">{{ viteAddr }}</div>
             </div>
 
             <div v-show="transType === 'exchange'" class="__row">
-                <div class="__row-t">{{ $t('exchangeVite.exchange.viteAmount') }}</div>
+                <div class="__row-t">{{ $t('conversion.exchange.viteAmount') }}</div>
                 <div class="__unuse-row __light">{{ balance }}</div>
             </div>
 
             <div class="__row">
                 <div class="__row-t">
-                    {{ $t('exchangeVite.gas') }}
+                    {{ $t('conversion.gas') }}
                     <span class="__hint __right">
-                        {{ $t('exchangeVite.aboutPrice', { amount: gasTotalPrice }) }}
+                        {{ $t('conversion.aboutPrice', { amount: gasTotalPrice }) }}
                     </span>
                 </div>
                 <process :min="minGwei" :max="maxGwei" :default="size" :setSize="setSize"></process>
@@ -159,7 +159,7 @@ export default {
             let result = this.$validAmount(this.amount, this.token.decimals);
             
             if (!result) {
-                this.amountErr = this.$t('transList.valid.amt');
+                this.amountErr = this.$t('hint.amtFormat');
                 return false;
             }
 
@@ -170,7 +170,7 @@ export default {
 
             let amount = BigNumber.toMin(this.amount, this.token.decimals);
             if (BigNumber.compared(this.token.balance, amount) < 0) {
-                this.amountErr = this.$t('transList.valid.bal');
+                this.amountErr = this.$t('hint.insufficientBalance');
                 return false;
             }
 
@@ -218,7 +218,7 @@ export default {
             }
 
             if (!viteWallet.Net.getNetStatus()) {
-                this.$toast(this.$t('nav.noNet'));
+                this.$toast(this.$t('hint.noNet'));
                 return;
             }
 
@@ -267,7 +267,7 @@ export default {
                 gwei: this.size
             }).then(() => {
                 this.loading = false;
-                this.$toast( this.$t('transList.valid.succ') );
+                this.$toast( this.$t('hint.transSucc') );
                 this.closeTrans();
             }).catch((err) => {
                 console.warn(err);

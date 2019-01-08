@@ -2,12 +2,12 @@
 
 <template>
     <div class="create-account-wrapper">
-        <div class="__title">{{ activeAccount ? $t('nav.head.reset') : $t('nav.head.setting')}}</div>
+        <div class="__title">{{ activeAccount ? $t('resetAcc') : $t('settingAcc')}}</div>
 
         <div class="__btn __btn_input" 
              :class="{ 'active': !!name || inputItem === 'name' }">
             <input ref="name" v-model="name" type='text' autocomplete="off"
-                   :placeholder="$t('create.accName')"
+                   :placeholder="$t('accountName')"
                    @focus="inputFocus('name')"
                    @blur="inputBlur('name')" />
         </div>

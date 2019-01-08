@@ -43,7 +43,7 @@ export default {
             }
 
             if (!this.pass) {
-                this.$toast( this.$t('account.hint.wrong') );
+                this.$toast( this.$t('hint.pwErr') );
                 return;
             }
 
@@ -51,11 +51,11 @@ export default {
             this.activeAccount.verify(this.pass).then((result) => {
                 this.isSubmiting = false;
                 this.lock = !result;
-                this.lock && this.$toast( this.$t('account.hint.wrong') );
+                this.lock && this.$toast( this.$t('hint.pwErr') );
             }).catch(() => {
                 this.isSubmiting = false;
                 this.lock = true;
-                this.$toast( this.$t('account.hint.wrong') );
+                this.$toast( this.$t('hint.pwErr') );
             });
         }
     }
@@ -80,6 +80,7 @@ export default {
     .title {
         font-size: 14px;
         color: #1D2024;
+        font-family: $font-bold, arial, sans-serif;
         letter-spacing: 0.35px;
         line-height: 16px;
         margin-bottom: 16px;
