@@ -1,5 +1,5 @@
 module.exports = {
-    lang: 'EN',
+    lang: 'HK',
 
     start: 'Start',
     logout: 'Logout',
@@ -17,7 +17,7 @@ module.exports = {
     },
 
     txType: {
-        0: 'SBP Registration',
+        0: "sbp 註冊",
         1: 'Update Registration',
         2: 'Revoke Registration',
         3: 'Retrieve Reward',
