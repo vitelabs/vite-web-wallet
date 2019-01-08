@@ -100,7 +100,8 @@ export default {
             let nowList = [];
 
             transList.forEach((trans) => {
-                let typeImg = `<img class="icon" src='${txImgs[trans.rawData.txType]}'/>`;
+                let txType = !trans.rawData.txType && trans.rawData.txType !== 0 ? txImgs.length - 1 : trans.rawData.txType;
+                let typeImg = `<img class="icon" src='${txImgs[txType]}'/>`;
 
                 let status = ['unconfirmed', 'confirms', 'confirmed'][trans.status];
                 let statusClass = status === 'confirmed' ? 'green' : 
@@ -114,7 +115,7 @@ export default {
                 }
 
                 nowList.push({
-                    type: typeImg + this.$t(`txType.${trans.rawData.txType}`),
+                    type: typeImg + this.$t(`txType.${txType}`),
                     smallType: typeImg,
                     date: date(trans.timestamp, this.$i18n.locale),
                     status: `<span class="${statusClass}">${statusText}</span>`,
