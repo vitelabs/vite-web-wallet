@@ -132,7 +132,7 @@
         "open": "Vite项目开源代码",
         "addAddr": "添加地址",
         "addrList": "账户地址列表",
-        "setDefault": "选择默认用户"
+        "setDefault": "选择默认地址"
     },
     "create": {
         "input": "请输入密码",
