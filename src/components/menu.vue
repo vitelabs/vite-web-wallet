@@ -6,11 +6,6 @@
         </div>
 
         <div class="menu-list" :class="{ 'show': showList }">
-            <div class="item" @click="go('account')" 
-                 :class="{ 'active': active === 'account'}">
-                {{ $t('nav.home') }}
-            </div>
-
             <div v-for="(name, i) in pageList" :key="i"
                  class="item" @click="go(name)"
                  :class="{ 'active': active === name}">
@@ -38,7 +33,7 @@ export default {
         let activeAccount = this.$wallet.getActiveAccount();
         let pageList = ['account', 'quota', 'SBP', 'vote', 'transList'];
         if (activeAccount.type === 'wallet') {
-            pageList.push('exchangeVite');
+            pageList.push('conversion');
         }
         pageList.push('setting');
 

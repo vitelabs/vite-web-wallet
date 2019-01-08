@@ -1,11 +1,11 @@
 <template>
     <div class="first-notice-wrapper" v-show="isFirst">
         <div class="wrapper">
-            <div class="title">{{ $t('firstNotice.title') }}</div>
+            <div class="title">{{ $t('beforeUse.title') }}</div>
             <ul class="first-notice">
-                <li>{{ $t('firstNotice.text1') }}</li>
-                <li>{{ $t('firstNotice.text2') }}</li>
-                <li>{{ $t('firstNotice.text3') }}</li>
+                <li>{{ $t('beforeUse.text1') }}</li>
+                <li>{{ $t('beforeUse.text2') }}</li>
+                <li>{{ $t('beforeUse.text3') }}</li>
             </ul>
             <div class="__btn __btn_all_in" @click="close">{{ $t('btn.understand') }}</div>
         </div>

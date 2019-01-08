@@ -7,7 +7,7 @@
                  :leftBtnClick="validTrans" :leftBtnTxt="$t('account.transfer')" >
 
             <div class="__row">
-                <div class="__row-t">{{ $t('account.balance') }}</div>
+                <div class="__row-t">{{ $t('balance') }}</div>
                 <div class="__unuse-row">
                     <img v-if="token.icon" :src="token.icon" class="__icon" />
                     {{ token.symbol }} <span class="__right">{{ showAccBalance }}</span>
@@ -17,7 +17,7 @@
             <div class="__row">
                 <div class="__row-t">
                     {{ $t('account.inAddress') }}
-                    <span v-show="!isValidAddress" class="__err __hint">{{ $t('transList.valid.addr') }}</span>
+                    <span v-show="!isValidAddress" class="__err __hint">{{ $t('hint.addrFormat') }}</span>
                 </div>
                 <vite-input v-model="inAddress" :valid="validAddr"
                             :placeholder="$t('account.placeholder.addr')"></vite-input>
@@ -36,7 +36,7 @@
                 <div class="__row-t">
                     {{ $t('account.remarks')}}
                     <span class="__hint" :class="{ err: messageErr }">
-                        {{ $t('account.valid.remarksLong', { len: msgBalance}) }}
+                        {{ $t('account.remarksLong', { len: msgBalance}) }}
                     </span>
                 </div>
                 <vite-input v-model="message" :placeholder="$t('account.placeholder.remarks')"></vite-input>
@@ -129,7 +129,7 @@ export default {
             this.isShowTrans = false;
             this.$confirm({
                 showMask: false,
-                title: this.$t('account.quota.title'),
+                title: this.$t('quotaConfirmPoW.title'),
                 closeBtn: {
                     show: true,
                     click: () => {
@@ -137,7 +137,7 @@ export default {
                     }
                 },
                 leftBtn: {
-                    text: this.$t('account.quota.left'),
+                    text: this.$t('quotaConfirmPoW.leftBtn.text'),
                     click: () => {
                         this.$router.push({
                             name: 'quota'
@@ -145,12 +145,12 @@ export default {
                     }
                 },
                 rightBtn: {
-                    text: this.$t('account.quota.right'),
+                    text: this.$t('quotaConfirmPoW.rightBtn.text'),
                     click: () => {
                         this.startPow(accountBlock, startTime);
                     }
                 },
-                content: this.$t('account.quota.describe')
+                content: this.$t('quotaConfirmPoW.content')
             });
         },
 
@@ -158,7 +158,7 @@ export default {
             let result = this.$validAmount(this.amount, this.token.decimals);
             
             if (!result) {
-                this.amountErr = this.$t('transList.valid.amt');
+                this.amountErr = this.$t('hint.amtFormat');
                 return false;
             }
 
@@ -169,7 +169,7 @@ export default {
 
             let amount = BigNumber.toMin(this.amount, this.token.decimals);
             if (BigNumber.compared(this.accBalance, amount) < 0) {
-                this.amountErr = this.$t('transList.valid.bal');
+                this.amountErr = this.$t('hint.insufficientBalance');
                 return false;
             }
 
@@ -205,14 +205,14 @@ export default {
 
         transfer() {
             if (!viteWallet.Net.getNetStatus()) {
-                this.$toast(this.$t('nav.noNet'));
+                this.$toast(this.$t('hint.noNet'));
                 return;
             }
             
             this.loading = true;
             let amount =  BigNumber.toMin(this.amount, this.token.decimals);
 
-            let successText = this.$t('transList.valid.succ');
+            let successText = this.$t('hint.transSucc');
             let failText = this.$t('hint.err');
             
             let activeAccount = this.$wallet.getActiveAccount();
@@ -245,8 +245,8 @@ export default {
                     err ? err.code : -1;
 
                 if (code === -35001) {
-                    this.$toast(this.$t('transList.valid.bal'));
-                    this.amountErr = this.$t('transList.valid.bal');
+                    this.$toast(this.$t('hint.insufficientBalance'));
+                    this.amountErr = this.$t('hint.insufficientBalance');
                     return;
                 } else if (code === -35002) {
                     this.showQuota(err.accountBlock, new Date().getTime());
@@ -292,7 +292,7 @@ export default {
 
         transSuccess() {
             this.loading = false;
-            this.$toast(this.$t('transList.valid.succ'));
+            this.$toast(this.$t('hint.transSucc'));
             this.closeTrans();
         }
     }

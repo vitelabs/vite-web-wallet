@@ -26,30 +26,6 @@
                     <vite-input v-model="addr" :valid="testAddr"
                                 :placeholder="$t(`SBP.confirm.${showConfirmType}.placeholder`)"></vite-input>
                 </div>
-
-                <!-- <div v-if="showConfirmType === 'reward'">
-                    <div class="row">
-                        <div class="row-t">{{ $t(`SBP.confirm.reward.amount`) }}</div>
-                        <div class="row-content unuse">{{ activeItem.showAvailableReward }}</div>
-                    </div>
-
-                    <div class="row">
-                        <div class="row-t">{{ $t(`SBP.confirm.reward.time`) }}</div>
-                        <div class="row-content unuse">{{ activeItem.showAvailableRewardOneTx }}</div>
-                    </div>
-
-                    <div class="row">
-                        <div class="row-t">
-                            {{ $t(`SBP.section2.rewardAddr`)  }}
-                            <span v-show="addrErr" class="err">{{ addrErr }}</span>
-                        </div>
-                        <span class="tips" :class="{ 'active': tips }">{{ tips ? $t('SBP.confirm.reward.hint') : '' }}</span>
-                        <div class="row-content">
-                            <input v-model="addr" @blur="hideTips" @focus="showTips" autocomplete="off" 
-                                   :placeholder="$t(`SBP.confirm.${showConfirmType}.placeholder`)" />
-                        </div>
-                    </div>
-                </div> -->
             </confirm>
         </div>
     </div>
@@ -160,8 +136,6 @@ export default {
 
             let decimals = this.tokenInfo.decimals;
             let symbol = this.tokenInfo.tokenSymbol;
-            activeItem.showAvailableReward = BigNumber.toBasic(activeItem.availableReward , decimals) + ' ' +  symbol;
-            activeItem.showAvailableRewardOneTx = BigNumber.toBasic(activeItem.availableRewardOneTx , decimals) + ' ' +  symbol;
             this.activeItem = activeItem;
         },
         closeConfirm() {
@@ -190,11 +164,7 @@ export default {
                 },
                 submit: () => {
                     this.showConfirm(showConfirmType);
-                    if (showConfirmType === 'edit') {
-                        this.sendUpdateTx();
-                    } else {
-                        this.sendRewardTx();
-                    }
+                    (showConfirmType === 'edit') && this.sendUpdateTx();
                 }
             });
         },
@@ -207,7 +177,9 @@ export default {
                 producerAddr: producer
             }, 'updateReg').then(() => {
                 this.loading = false;
-                this.$toast(this.$t('SBP.section2.updateSuccess'));
+                this.$toast(this.$t('hint.request', {
+                    name: this.$t('SBP.section2.update')
+                }));
                 this.closeConfirm();
                 this.$store.dispatch('loopRegList', {
                     address: this.activeAccount.getDefaultAddr(),
@@ -220,41 +192,19 @@ export default {
                 this.loading = false;
                 if (err && err.error && err.error.code && err.error.code === -35002) {
                     quotaConfirm({
-                        operate: this.$t('SBP.edit')
+                        operate: this.$t('btn.edit')
                     });
                     return;
                 }
                 this.$toast(this.$t('SBP.section2.updateFail'), err);
             });
         },
-        sendRewardTx() {
-            this.loading = true;
-
-            this.sendTx({
-                rewardAddress: this.addr
-            }, 'retrieveReward').then(() => {
-                this.loading = false;
-                this.$toast(this.$t('SBP.section2.rewardSuccess'));
-                this.closeConfirm();
-            }).catch((err) => {
-                console.warn(err);
-                this.loading = false;
-
-                if (err && err.error && err.error.code && err.error.code === -35002) {
-                    quotaConfirm({
-                        operate: this.$t('SBP.reward')
-                    });
-                    return;
-                }
-                this.$toast(this.$t('SBP.section2.rewardFail'), err);
-            });
-        },
 
         sendTx({
-            producerAddr, rewardAddress, nodeName, amount
+            producerAddr, nodeName, amount
         }, type) {
             if (!viteWallet.Net.getNetStatus()) {
-                this.$toast(this.$t('nav.noNet'));
+                this.$toast(this.$t('hint.noNet'));
                 return Promise.reject(false);
             }
           
@@ -263,7 +213,7 @@ export default {
                 tokenId: this.tokenInfo.tokenId,
                 nodeName: nodeName || this.activeItem.name,
                 amount: toAmount,
-                toAddress: producerAddr || rewardAddress
+                toAddress: producerAddr || ''
             });
         }
     }

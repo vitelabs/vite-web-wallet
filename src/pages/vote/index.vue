@@ -56,7 +56,7 @@
                         <div class="__tb_no_data">{{$t("vote.section2.noSearchData")}}</div>
                     </div>
                     <div class="__tb_content" v-else>
-                        <div class="__tb_no_data">{{$t("vote.section2.noData")}}</div>
+                        <div class="__tb_no_data">{{$t("hint.noData")}}</div>
                     </div>
                 </div>
             </div>
@@ -169,14 +169,16 @@ export default {
                 t.isCache = true;
                 t.voteStatus = 'canceling'; // 撤销投票中
                 this.cache = t;
-                this.$toast(this.$t('vote.section1.toast'));
+                this.$toast(this.$t('hint.request', {
+                    name: this.$t('vote.section1.revoke') 
+                }));
             };
 
             const failCancel = e => {
                 const code = e && e.error ? e.error.code || -1 : e ? e.code : -1;
                 if (code === -35002) {
                     let startTime = new Date().getTime();
-                    const c = Object.assign({}, this.$t('vote.section1.quotaConfirm'));
+                    const c = Object.assign({}, this.$t('quotaConfirmPoW'));
                     c.leftBtn.click = () => {
                         this.$router.push({
                             name: 'quota'
@@ -202,7 +204,7 @@ export default {
 
             activeAccount.initPwd(
                 {
-                    title: this.$t('vote.section1.confirm.title'),
+                    title: this.$t('vote.revokeVoting'),
                     submitTxt: this.$t('vote.section1.confirm.submitText'),
                     cancelTxt: this.$t('vote.section1.confirm.cancelText'),
                     submit: sendCancel,
@@ -220,14 +222,16 @@ export default {
                 t.voteStatus = 'voting'; // 投票中
                 t.nodeStatus = 1;
                 this.cache = t;
-                this.$toast(this.$t('vote.section2.toast'));
+                this.$toast(this.$t('hint.request', {
+                    name: this.$t('vote.Voting') 
+                }));
             };
 
             const failVote = e => {
                 const code = e && e.error ? e.error.code || -1 : e ? e.code : -1;
                 if (code === -35002) {
                     let startTime = new Date().getTime();
-                    const c = Object.assign({}, this.$t('vote.section2.quotaConfirm'));
+                    const c = Object.assign({}, this.$t('vote.quotaConfirm'));
                     c.leftBtn.click = () => {
                         this.$router.push({
                             name: 'quota'
@@ -259,7 +263,7 @@ export default {
 
             activeAccount.initPwd(
                 {
-                    title: this.$t(`vote.section2.confirm.${t}.title`),
+                    title: this.$t('vote.voting'),
                     submitTxt: this.$t(`vote.section2.confirm.${t}.submitText`),
                     cancelTxt: this.$t(`vote.section2.confirm.${t}.cancelText`),
                     content: this.$t(`vote.section2.confirm.${t}.content`, {

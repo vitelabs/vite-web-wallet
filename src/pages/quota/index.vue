@@ -8,14 +8,14 @@
 
         <div v-if="showConfirmType" class="gray-wrapper">
             <confirm v-if="showConfirmType === 'cancel'" 
-                     :title="$t(`quota.confirm.cancel.title`)" :closeIcon="false"
+                     :title="$t(`quota.withdrawalStaking`)" :closeIcon="false"
                      :leftBtnTxt="$t(`quota.confirm.cancel.leftBtn`)" :leftBtnClick="closeConfirm"
                      :rightBtnTxt="$t(`quota.confirm.cancel.rightBtn`)" 
                      :rightBtnClick="submit" :btnUnuse="!!cancelUnuse">
                 {{ $t(`quota.confirm.cancel.describe`, { amount: activeAmountLimit }) }}
                 <div class="cancel-amount" v-show="amountErr">{{ amountErr }}</div>
                 <vite-input class="cancel-input" v-model="cancelAmount" :valid="testAmount"
-                            :placeholder="$t('quota.cancelAmount')"></vite-input>
+                            :placeholder="$t('quota.inputWithdrawAmount')"></vite-input>
             </confirm>
         </div>
 
@@ -90,7 +90,7 @@ export default {
 
             let result = this.$validAmount(this.cancelAmount, this.tokenInfo.decimals);
             if (!result) {
-                this.amountErr = this.$t('transList.valid.amt');
+                this.amountErr = this.$t('hint.amtFormat');
                 return false;
             }
             if (BigNumber.isEqual(this.cancelAmount, 0) || 
@@ -144,7 +144,7 @@ export default {
             toAddress, amount
         }, type, cb) {
             if (!viteWallet.Net.getNetStatus()) {
-                this.$toast(this.$t('nav.noNet'));
+                this.$toast(this.$t('hint.noNet'));
                 cb && cb(false);
                 return;
             }

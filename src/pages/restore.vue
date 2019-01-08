@@ -7,7 +7,7 @@
                 'center': !mnemonic
             }" :placeholder="$t('mnemonic.placeholder')"></textarea>
             <span v-show="errMsg" class="msg __err_msg" >
-                {{ errMsg === 'mnemonic.empty' || errMsg === 'mnemonic.error' || errMsg === 'mnemonic.netErr' ? $t(errMsg) : errMsg }}
+                {{ errMsg === 'mnemonic.empty' || errMsg === 'mnemonic.error' || errMsg === 'hint.nodeErr' ? $t(errMsg) : errMsg }}
             </span>
         </div>
     </mnemonic>
@@ -55,7 +55,7 @@ export default {
                 if (err && err.code === 500005) {
                     this.errMsg = 'mnemonic.error';
                 } else {
-                    this.errMsg = 'mnemonic.netErr';
+                    this.errMsg = 'hint.nodeErr';
                 }
                 this.isLoading = false;
             });

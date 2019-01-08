@@ -2,18 +2,18 @@
 
 <template>
     <div class="import-account-wrapper">
-        <div class="__title">{{ $t('nav.head.imported') }}</div>
+        <div class="__title">{{ $t('imported.title') }}</div>
 
         <div ref="fileArea" class="file-drag" @drop="dragFile">
-            {{ $t('dragDrop.text') }}
+            {{ $t('imported.dragDrop.text') }}
             <span class="msg __err_msg" v-show="errMsg" >
-                {{ errMsg === 'dragDrop.err2' || errMsg === 'dragDrop.err1' ? $t(errMsg) : errMsg }}
+                {{ errMsg === 'imported.dragDrop.err2' || errMsg === 'imported.dragDrop.err1' ? $t(errMsg) : errMsg }}
             </span>
         </div>
-        <div class="hint">{{ $t('dragDrop.hint') }}</div>
+        <div class="hint">{{ $t('imported.dragDrop.hint') }}</div>
         <div @click="openFile" class="__btn __btn_all_in __pointer">
             <input ref="file" type="file" name="file" style="display:none"/>
-            {{ $t('dragDrop.guide') }}
+            {{ $t('imported.dragDrop.guide') }}
         </div>
         <span class="__btn __btn_border __pointer" @click="back" >{{ $t('btn.back') }}</span>
     </div>
@@ -48,7 +48,7 @@ export default {
         },
         getFile(files) {
             if (files.length > 1) {
-                this.errMsg = 'dragDrop.err2';
+                this.errMsg = 'imported.dragDrop.err2';
                 return;
             }
 
@@ -58,7 +58,7 @@ export default {
                 let result = this.$wallet.importKeystore(e.target.result);
 
                 if (!result) {
-                    this.errMsg = 'dragDrop.err1';
+                    this.errMsg = 'imported.dragDrop.err1';
                     return;
                 }
 

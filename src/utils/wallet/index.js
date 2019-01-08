@@ -1,4 +1,4 @@
-import { utils } from '@vite/vitejs';
+import { utils, constant } from '@vite/vitejs';
 import vitecrypto from 'testwebworker';
 import statistics from 'utils/statistics';
 import storage from 'utils/localStorage.js';
@@ -6,6 +6,7 @@ import storage from 'utils/localStorage.js';
 import account from './account.js';
 import acc from './storeAcc.js';
 
+const { type } = constant;
 const _keystore = utils.keystore;
 const _hdAddr = utils.address.hdAddr;
 const _tools = utils.tools;
@@ -34,7 +35,7 @@ class _wallet {
         this.activeWalletAcc = new account(acc);
     }
 
-    create(name, pass) {
+    create(name, pass, lang = type.LangList.english) {
         let err = _tools.checkParams({ name, pass }, ['name', 'pass']);
         if (err) {
             console.error(new Error(err));
@@ -45,6 +46,7 @@ class _wallet {
             addrNum: 1, 
             name,
             pass,
+            lang,
             type: 'wallet'
         });
     }    
@@ -63,9 +65,9 @@ class _wallet {
         return keystore.hexaddress;
     }
 
-    restoreAddrs(mnemonic) {
+    restoreAddrs(mnemonic, lang = type.LangList.english) {
         let num = 10;
-        let addrs = _hdAddr.getAddrsFromMnemonic(mnemonic, 0, num);
+        let addrs = _hdAddr.getAddrsFromMnemonic(mnemonic, 0, num, lang);
         if (!addrs) {
             return Promise.reject({
                 code: 500005
@@ -93,6 +95,7 @@ class _wallet {
             this.newActiveAcc({
                 addrNum: index + 1,
                 mnemonic,
+                lang,
                 type: 'wallet'
             });
             return data;
@@ -196,7 +199,8 @@ class _wallet {
             return false;
         }
 
-        let mnemonic = _hdAddr.getMnemonicFromEntropy(decryptEntropy);
+        let lang = acc.lang || type.LangList.english;
+        let mnemonic = _hdAddr.getMnemonicFromEntropy(decryptEntropy, lang);
         let defaultInx = +acc.defaultInx > 10 || +acc.defaultInx < 0 ? 0 : +acc.defaultInx;
 
         this.newActiveAcc({
@@ -206,6 +210,7 @@ class _wallet {
             addrNum: acc.addrNum, 
             name: acc.name,
             mnemonic,
+            lang,
             type: 'wallet'
         });
 
@@ -256,7 +261,7 @@ class _wallet {
         if (!acc) {
             return null;
         }
-        
+
         return acc;
     }
 }
@@ -297,6 +302,7 @@ function  _reSave() {
         keystore = JSON.parse(keystore);
 
         let mnemonic = _hdAddr.getMnemonicFromEntropy(entropy);
+        item.lang = type.LangList.english;
         item.id = _hdAddr.getId(mnemonic);
         item.encryptObj = keystore;
 

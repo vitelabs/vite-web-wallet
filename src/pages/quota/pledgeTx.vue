@@ -7,7 +7,7 @@
             </div>
             <div class="item">
                 <div class="title">
-                    {{ $t('quota.amount') }}
+                    {{ $t('stakingAmount') }}
                     <span v-show="amountErr" class="err">{{ amountErr }}</span>
                 </div>
                 <vite-input v-model="amount" :valid="testAmount"
@@ -21,17 +21,17 @@
             <div class="item">
                 <div class="title">
                     {{ $t('quota.beneficialAddr') }}
-                    <span v-show="!isValidAddress" class="err">{{ $t('transList.valid.addr') }}</span>
+                    <span v-show="!isValidAddress" class="err">{{ $t('hint.addrFormat') }}</span>
                 </div>
                 <vite-input v-model="toAddr" :valid="testAddr"
                             :placeholder="$t('quota.addrPlaceholder')"></vite-input>
             </div>
             <div class="item">
                 <div class="title">{{ $t('quota.time') }}</div>
-                <span class="input-item unuse about">{{ $t('quota.aboutDays') }}</span>
+                <span class="input-item unuse about">{{ $t('quota.aboutDays', { day: '3' }) }}</span>
                 <span class="btn __pointer" :class="{
                     'unuse': btnUnuse
-                }" @click="validTx">{{ $t('quota.btn') }}</span>
+                }" @click="validTx">{{ $t('submitStaking') }}</span>
             </div>
         </div>
     </div>
@@ -94,7 +94,7 @@ export default {
 
             let result = this.$validAmount(this.amount, this.tokenInfo.decimals);
             if (!result) {
-                this.amountErr = this.$t('transList.valid.amt');
+                this.amountErr = this.$t('hint.amtFormat');
                 return false;
             }
 
@@ -109,7 +109,7 @@ export default {
             if (this.tokenInfo && this.tokenInfo.tokenId) {
                 let amount = BigNumber.toMin(this.amount, this.tokenInfo.decimals);
                 if (BigNumber.compared(balance, amount) < 0) {
-                    this.amountErr = this.$t('transList.valid.bal');
+                    this.amountErr = this.$t('hint.insufficientBalance');
                     return false;
                 }
             }
@@ -158,7 +158,7 @@ export default {
             }
 
             this.activeAccount.initPwd({
-                title: this.$t('quota.confirm.submit.title'),
+                title: this.$t('submitStaking'),
                 submitTxt: this.$t('quota.confirm.submit.rightBtn'),
                 cancelTxt: this.$t('quota.confirm.submit.leftBtn'),
                 content: this.$t('quota.confirm.submit.describe', {
@@ -184,7 +184,7 @@ export default {
                 }
 
                 this.$toast(this.$t('hint.request', {
-                    name: this.$t('quota.btn') 
+                    name: this.$t('submitStaking') 
                 }));
                 this.clearAll();
                 Vue.nextTick(() => {

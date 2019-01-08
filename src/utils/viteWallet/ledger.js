@@ -2,10 +2,6 @@ import loopTime from 'config/loopTime';
 import viteIcon from 'assets/imgs/vite.svg';
 import vcpIcon from 'assets/imgs/VCC.svg';
 import vttIcon from 'assets/imgs/vtt.svg';
-import { utils, constant } from '@vite/vitejs';
-
-const { accountBlock } = utils;
-const { type } = constant;
 
 const ViteId = 'tti_5649544520544f4b454e6e40';
 const defaultTokenList = {
@@ -22,6 +18,10 @@ const defaultTokenList = {
         icon: vttIcon
     }
 };
+
+// Test ENV
+// VCP tti_e1f1d23a9d3e5e1b6ca6c374
+// VTT tti_c23c7534356090754332f726
 
 let loopHeightTimeout;
 
@@ -88,37 +88,12 @@ class Ledger {
         return this.currentHeight;
     }
 
-    async getBlocks({
+    getBlocks({
         addr, index, pageCount = 50
     }) {
-        const requests = [{
-            methodName: 'ledger_getBlocksByAccAddr',
-            params: [ addr, index, pageCount ]
-        }, {
-            methodName: 'ledger_getAccountByAccAddr',
-            params: [ addr ]
-        }];
-
-        const data = await $ViteJS.batch(requests);
-
-        let rawList;
-        let totalNum;
-        requests.forEach((_r, i) => {
-            if (_r.methodName === 'ledger_getAccountByAccAddr') {
-                totalNum = data[i].result ? data[i].result.totalNumber : 0;
-                return;
-            }
-            rawList = data[i].result || [];
+        return $ViteJS.buildinLedger.getTxList({
+            addr, index, pageCount
         });
-
-        let list = [];
-        rawList.forEach((item) => {
-            let txType = accountBlock.getBuiltinTxType(item.toAddress, item.data, +item.blockType);
-            item.txType = type.BuiltinTxType[txType];
-            list.push(item);
-        });
-
-        return { list, totalNum };
     }
 }
 
