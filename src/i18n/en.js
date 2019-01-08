@@ -131,8 +131,8 @@ module.exports = {
     mnemonic: {
         title: 'Mnemonic',
         restore: 'Restore Account by Seed Phrase',
-        record: 'Backup Seed Phrase',
-        prompt: 'Mnemonic seed phrase is used to restore your wallet, better write it down and keep it in a safe place where only you can access, otherwise your assets will be at tremendous risks.',
+        record: 'Generate Seed Phrase',
+        prompt: 'Mnemonic seed phrase is the only way to restore your wallet. You are strongly advised to write down the phrase and keep it in a safe place where only you can access.',
         placeholder: 'Please input your mnemonic seed phrase',
         empty: 'The input of seed phrase cannot be empty',
         error: 'Incorrect seed phrase. Try again',
