@@ -28,7 +28,7 @@ module.exports = {
 
     // Verb
     pow: 'Running PoW...',    
-    addAccount: '添加账户', // addAcc: 'Add Address',
+    addAccount: 'Add a new account', // addAcc: 'Add Address',
     saveQrcode: 'Save QR code image',
     sendTrans: {
         send: 'Send Transaction',
