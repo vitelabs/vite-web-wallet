@@ -132,7 +132,7 @@
         "open": "Vite Github",
         "addAddr": "Add Address",
         "addrList": "Addresses of Accounts",
-        "setDefault": "Select Default User"
+        "setDefault": "Select Default Address"
     },
     "create": {
         "input": "Please input password",

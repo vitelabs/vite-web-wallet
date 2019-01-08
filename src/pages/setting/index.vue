@@ -80,6 +80,7 @@ export default {
     .title {
         font-size: 14px;
         color: #1D2024;
+        font-family: $font-bold, arial, sans-serif;
         letter-spacing: 0.35px;
         line-height: 16px;
         margin-bottom: 16px;
