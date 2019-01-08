@@ -1,480 +1,478 @@
 module.exports = {
-    lang: '中文',
+    lang: 'EN',
 
-    start: '开始',
-    logout: '退出登录',
+    start: 'Start',
+    logout: 'Logout',
 
     errCode: {
-        35003: '{name}ID发生冲突，请您稍后重新提交',
-        35004: '内置合约发生错误，请稍后重试（35004）',
-        35005: '交易发送频繁，请您稍后再次尝试',
-        35006: '内置合约发生错误，请稍后重试（35006）',
-        36001: '您需要接收一笔交易之后才可发起转账',
-        36002: '系统校验不通过，请稍后重试（36002）',
-        36003: '系统校验不通过，请稍后重试（36003）',
-        36004: '系统校验不通过，请稍后重试（36004）',
-        36005: '快照块高度不合法，请您稍后再试'
+        35003: '{name} ID conflict occurs, please re-submit later',
+        35004: 'Built-in contract error, please try again later（35004）',
+        35005: 'Transactions are sent too frequent, please try again later',
+        35006: 'Built-in contract method not exist, please try again later（35006）',
+        36001: 'You cannot make any transfer until you receive a transaction',
+        36002: 'System verify failed, please try again later（36002）',
+        36003: 'System verify failed, please try again later（36003）',
+        36004: 'System verify failed, please try again later（36004）',
+        36005: 'napshot block height is illegal, please try again later'
     },
 
     txType: {
-        0: '注册SBP',
-        1: '更新注册',
-        2: '撤销注册',
-        3: '提取奖励',
-        4: '投票',
-        5: '撤销投票',
-        6: '获取配额',
-        7: '取回配额抵押',
-        8: '铸币',
-        9: '取回铸币抵押',
-        10: '转账',
-        11: '转账',
-        12: '转账',
-        13: '转账',
-        14: '转账',
-        15: '转账'
+        0: 'SBP Registration',
+        1: 'Update Registration',
+        2: 'Revoke Registration',
+        3: 'Retrieve Reward',
+        4: 'Voting',
+        5: 'Revoke Voting',
+        6: 'Get TPS Quota',
+        7: 'Withdrawal of Staking Quota',
+        8: 'Token Issuance',
+        9: 'Withdrawal of Staking Token',
+        10: 'Transfer',
+        11: 'Transfer',
+        12: 'Transfer',
+        13: 'Transfer',
+        14: 'Transfer',
+        15: 'Transfer'
     },
     
     firstNotice: {
-        title: '使用前必读',
-        text1: '创建账户时，请务必备份您的助记词，如果您访问了一个钓鱼网站或者丢失了您的备份，本站无法为您恢复资金。',
-        text2: '由于本站不存储你的私钥或助记词，如果您更换浏览器、电脑或者清除浏览器缓存，需要通过备份助记词恢复账号。',
-        text3: '如果使用了从助记词恢复地址的方式，请保证助记词绝对正确，如果有细微的不同都可能无法恢复您的地址。'
+        title: 'Read Before Use',
+        text1: 'Please be sure to backup your seed phrase when creating account. We cannot guarantee the restoration of your assets in the instance that you visit a scam site or lose your private keys or seed phrase.',
+        text2: 'Please note that our websites do not store your private keys or seed phrase. Therefore, you will need to restore your account via seed phrase if you decide to change browsers, clear local cookies, or change PCs.',
+        text3: 'Please take proper precautions in ensuring that you accurately record and safely store your seed phrase. Even the slightest error will result in you not being able to successfully restore your address.',
     },
+
     test: {
-        t: '预览版',
-        txt1: '预览版钱包是VITE官方发布的轻节点钱包',
-        txt2: '当前版本钱包支持查询账户余额、对外发送交易、默认签收交易、抵押VITE获取配额、注册SBP、投票等功能。',
-        txt3: '同时支持获取测试代币，支持用户使用测试代币体验产品，官方发布的测试代币仅用于测试，无任何实际价值，同时官方会不定期对测试代币进行清零。',
-        v: '当前版本：{version}'
+        t: 'Preview Version',
+        txt1: 'The preview version of wallet is a lightweight-node wallet officially issued by VITE.',
+        txt2: 'The current version supports functions of checking account balance, sending transactions, receiving transactions in default, acquiring test tokens, staking VITE tokens for TPS quota, SBP registration, vote and etc.',
+        txt3: 'Support acquiring test tokens and experiencing the product by using them, the test tokens issued by VITE official can be only used for testing and with no actual value, it will be cleared by VITE official sporadically',
+        v: 'Current version: {version}'
     },
 
     mnemonic: {
-        title: '助记词',
-        restore: '助记词恢复账户',
-        record: '记录助记词',
-        prompt: '助记词是您恢复账户的重要手段，如给予他人，您的资产会被他人获取。请谨慎记录，以防丢失。',
-        placeholder: '请输入您的助记词',
-        empty: '助记词输入为空',
-        error: '助记词错误',
-        hint: '助记词格式：单词、空格、单词...空格、单词',
-        netErr: '节点异常，请您稍后重试',
-        change: '切换{len}个助记词'
+        title: 'Mnemonic',
+        restore: 'Restore Account by Seed Phrase',
+        record: 'Backup Seed Phrase',
+        prompt: 'Mnemonic seed phrase is used to restore your wallet, better write it down and keep it in a safe place where only you can access, otherwise your assets will be at tremendous risks.',
+        placeholder: 'Please input your mnemonic seed phrase',
+        empty: 'The input of seed phrase cannot be empty',
+        error: 'Incorrect seed phrase. Try again',
+        hint: 'Example: apple banana peach mango pear ...',
+        netErr: 'The full node is abnormal, please try again later.',
+        change: 'Switch to {len} Mnemonic Words'
     },
 
     setting: {
-        title: '设置',
-        unlock: '解锁安全信息',
-        lang: '语言',
-        block: '当前区块高度',
-        version: '版本',
-        service: '客户服务',
-        site: 'Vite官方网站',
-        sys: '系统门户网站',
-        open: 'Vite项目开源代码',
+        title: 'Settings',
+        unlock: 'Unlock Secure Information',
+        lang: 'Language',
+        block: 'Current Height',
+        version: 'Version',
+        service: 'Customer Service',
+        site: 'Official Website of Vite',
+        sys: 'System Portal',
+        open: 'Vite Github'
     },
 
     nav: {
-        home: '首页',
+        home: 'Home',
         head: {
-            title: '账户',
-            create: '新建账户',
-            imported: '导入账户',
-            backup: '备份账户',
-            setting: '设置账户',
-            reset: '重新设置账号',
-            login: '登录账户'
+            title: 'Account',
+            create: 'Create',
+            imported: 'Import',
+            backup: 'Back Up',
+            setting: 'Setting Account',
+            reset: 'Reset Your Account',
+            login: 'Log In'
         },
-        sync: '钱包初始化中，暂时无法发送交易',
-        noNet: '网络无法连接',
-        noP2P: '无法连接其他节点',
-        firstDone: '初始化已完成',
-        firstDoing: '初始化中',
-        blockHeight: '快照块高度'
+        sync: 'Wallet initializing, transactions cannot be made temporarily.',
+        noNet: 'No network detected',
+        noP2P: 'Unable to connect to other nodes',
+        firstDone: 'Init Done',
+        firstDoing: 'Initializing',
+        blockHeight: 'Snapshot Block Height'
     },
 
     // account list
     accList: {
-        balance: '余额',
-        addAcc: '添加地址',
-        addr: '账户地址列表',
-        addrList: '账户地址列表',
-        default: '选择默认用户'
+        balance: 'Balance',
+        addAcc: 'Add Address',
+        addr: 'Addresses of Accounts',
+        addrList: 'Addresses',
+        default: 'Select Default User'
     },
 
-    // create account
+    //create account
     create: {
-        accName: '账户昵称',
-        input: '请输入密码',
-        again: '请再次输入密码',
-        choose: '选择账户',
-        finish: '完成',
+        accName: 'Account name',
+        input: 'Please input password',
+        again: 'Please input password again',
+        choose: 'Choose account',
+        finish: 'Done',
         hint: {
-            nameInput: '请输入账户名称',
-            nameLong: '账户不得超出32个字符',
-            long: '密码不能大于32个字符',
-            name: '账户名称仅支持中英文、数字和下划线',
-            consistency: '请输入相同的密码',
-            pwFormat: '密码格式错误，密码仅支持英文、半角符号、数字',
-            save: '您的私钥文件保存在 {0} 中，请谨慎保存，当前版本丢失密码账户不可找回'
+            nameInput: 'Please input account name',
+            nameLong: 'Account name cannot exceed 32 characters!',
+            long: 'Your input cannot exceed 32 characters!',
+            name: 'Account name only supports Chinese, English, numbers and underscores',
+            consistency: 'Please enter the same password!',
+            pwFormat: 'Wrong password format. The password only supports English, half-width symbols, numbers.',
+            save: 'Your private key stored in {0}，please keep it carefully，your account and password cannot be retrieved at current version!'
         }
     },
     dragDrop: {
-        text: '拖拽账户文件进入文本区域',
-        err1: '导入的文件错误',
-        err2: '只能导入一个文件',
-        guide: '打开文件夹导入',
-        hint: '注：导入加密文件的方式仅支持单地址，不支持派生地址。推荐通过助记词进行跨平台操作。'
+        text: 'Drag and drop files there',
+        err1: 'Imported illegal file!',
+        err2: 'Only one file can be imported!',
+        guide: 'Open folder to import',
+        hint: 'Noted that login by importing keystore file cannot support creating multi addresses, using mnemonic seed phrase is recommended in cross-platform situations.'
     },
 
     // account detail
     account: {
-        title: '账户详情',
-        transfer: '转账',
-        getTestToken: '获取测试代币',
-        transDetail: '查看账户更多交易详情',
-        name: '账户名称',
-        address: '我的地址',
-        balance: '账户余额',
-        fundFloat: '待接收',
-        pend: '笔交易待确认',
-        copy: '复制账户地址',
-        outAddress: '我的账户地址',
-        inAddress: '接收账户地址',
-        sum: '金额',
-        password: '密码',
-        saveQrcode: '保存二维码图片',
-        sendTrans: '发送交易',
-        remarks: '备注',
+        title: 'Account Detail',
+        transfer: 'Transfer',
+        getTestToken: 'Get Test Tokens',
+        transDetail: 'More Transaction Details',
+        name: 'Account Name',
+        address: 'My Address',
+        balance: 'Balance',
+        fundFloat: 'Unreceived',
+        pend: 'Pending',
+        copy: 'Copy Address',
+        outAddress: 'My Address',
+        inAddress: 'Receive Address',
+        sum: 'Amount',
+        password: 'Password',
+        saveQrcode: 'Save QR code image',
+        sendTrans: 'Send Transaction',
+        remarks: 'Comment',
         placeholder: {
-            amount: '请输入金额',
-            remarks: '请输入备注',
-            addr: '请输入地址'
+            amount: 'Please input amount',
+            remarks: 'Please input comments',
+            addr: 'Please input address'
         },
         valid: {
-            remarksFormat: '格式输入错误，备注仅支持中英文和标点符号',
-            remarksLong: '剩余字节：{len}'
+            remarksFormat: 'Format error! Remarks can only contain Chinese, English and punctuations.',
+            remarksLong: '{len} bytes left'
         },
         hint: {
-            token: '系统已向您转入一笔VTT测试代币，请注意接收',
-            tErr: '获取测试代币失败！',
-            low: '账户余额不足',
-            wrong: '密码错误',
-            amount: '金额必须大于0',
-            punctuation: '不可以出现标点符号',
-            rename: '重命名失败',
-            copy: '复制成功'
+            token: 'VTT test tokens have be sent to your account, please check your account!',
+            tErr: 'Get test token failed!',
+            low: 'Insufficient account balance',
+            wrong: 'Wrong Password!',
+            amount: 'Amount must be greater than 0',
+            punctuation: 'Punctuations are not allowed!',
+            rename: 'Rename failed',
+            copy: 'Successfully copied'
         },
         quota: {
-            title: '配额不足',
-            describe: '配额不足，建议您点击运行PoW获取配额或抵押VITE获取配额',
-            left: '抵押VITE',
-            right: '运行PoW'
+            title: 'Insufficient Quota',
+            describe: 'your left quotas turn out to be insufficient, you can acquire more quotas by running PoW or staking VITE',
+            left: 'Stake VITE',
+            right: 'Run PoW'
         },
         trans: {
-            powErr: '运行PoW错误，请重新发起转账',
-            powTransErr: 'PoW获取的配额不足，建议您进行抵押VITE获取配额',
-            err: '转账发生错误，请重新发起转账'
+            powErr: 'Error occurs when running PoW, please try again',
+            powTransErr: 'Insufficient quota of PoW, we\'d recommend that you stake VITE to obtain quota.',
+            err: 'Error occurs in transaction, please try again'
         }
     },
 
-    // quota
+
     quota: {
-        title: '获取配额',
+        title: 'Get Quota',
         help: {
-            title: '快速理解配额'
+            title: 'Quick Understanding of Quota'
         },
-        myQuota: '我的当前配额',
-        maxTxNum: '最大交易笔数',
-        beneficialAddr: '配额受益地址',
-        fromAddr: '抵押金额扣除地址',
-        amount: '抵押金额',
-        time: '抵押锁定时长',
-        aboutDays: '约3天',
-        btn: '提交抵押',
-        myQuotaList: '我的抵押列表',
-        amountPlaceholder: '请输入抵押金额，最小10vite',
-        addrPlaceholder: '请输入获取配额地址',
-        cancelAmount: '请输入取回金额',
-        pledgeSuccess: '提交成功',
-        pledgeFail: '提交失败',
-        canclePledgeSuccess: '操作成功',
-        canclePledgeFail: '操作失败',
-        limitAmt: '抵押金额需填写大于等于10的数字',
-        maturity: '抵押已到期',
-        maxAmt: '取回金额应在 (0,{amount}] 之内',
+        myQuota: 'My Quota',
+        maxTxNum: 'Maximum number of Txs',
+        beneficialAddr: 'Quota Recipient Address',
+        fromAddr: 'Deduction address',
+        amount: 'Staking Amount',
+        time: 'Staking Freeze Duration',
+        aboutDays: 'Approx 3 days',
+        btn: 'Submit Staking',
+        myQuotaList: 'My Staking List',
+        amountPlaceholder: 'Please input staking amount, minimum 10 VITE',
+        addrPlaceholder: 'Please input quota recipient address',
+        cancelAmount: 'Please input withdraw amount',
+        pledgeSuccess: 'Successfully Submitted',
+        pledgeFail: 'Failed to Submit',
+        canclePledgeSuccess: 'Success',
+        canclePledgeFail: 'Failed',
+        limitAmt: 'Staking amount should not be less than 10.',
+        maturity: 'Staking has expired!',
+        maxAmt: 'Withdraw amount should be in (0, {amount}]',
         confirm: {
             help: {
-                t1: '什么是配额',
-                txt1: '在Vite系统中，用户不是通过支付手续费的方式来购买一次交易所需的燃料，而是通过一种基于配额的模型来获取计算资源，发送交易所需配额=基础配额(请求)+配额(附带的文本资料)，接受交易所需配额=基础配额(响应)。这个基于配额的资源配置协议允许用户通过两种方式来获取更高的资源配额：抵押Vite获取配额、运行PoW',
-                t2: '什么是抵押',
-                txt2: '在Vite系统中，用户可以抵押vite获取一定数量的配额，抵押最小值为10vite，没有最大抵押上限；同时支持A地址抵押一部分vite并将获得的配额分配给B地址；用户申请抵押后，会将这笔vite发送到智能合约地址而不是某一个用户，且只有申请抵押用户有权限支配抵押的金额',
-                t3: '什么是PoW',
-                txt3: '工作量证明(Proof of Work，简称PoW)，简单理解就是一份证明，用来确认你做过一定量的工作，同样也是应对拒绝服务攻击和其他服务滥用的经济对策。它要求发起者进行一定量的运算，也就意味着需要消耗计算机一定的时间；在VITE系统中，用户可以通过运行PoW获得免费的配额，用户可以通过获得的配额进行一次不带任何备注信息的交易'
+                t1: 'What is Quota?',
+                txt1: 'In the Vite system, users do not purchase the gas required for a transaction by paying a fee, but acquire the computing resource through a quota-based model. Required quota for sending a transaction = the basic quota (request) + quota (the attached text data), quota required to accept a transaction = the basic quota (response). This quota-based resource configuration protocol allows users to obtain higher resource quotas in two ways: Staking VITE to obtain quota and running PoW.',
+                t2: 'What is Staking?',
+                txt2: 'In the Vite system, the user can stake VITE to obtain a certain amount of quota. The minimum value for staking is 10 VITE, and there is no maximum limit; meanwhile, Vite system also supports that the A-address stakes a part of the VITE and allocates the obtained quota to the B address. When users apply to stake, VITE will be sent to the smart contract address instead of another user, and only the user who applies for staking has access to manage the staking amount.',
+                t3: 'What is PoW?',
+                txt3: 'Proof of Work (PoW), is a protocol to confirm that you have done a certain amount of work, and is also an economic measure to deter DDoS attacks and other service abuse. It requires the initiator to conduct a certain amount of computing, which means that it may take some time for the computer. In the Vite system, users can obtain a free quota by running the PoW, and also can send a transaction without any annotated information through obtained quota.'
             },
             cancel: {
-                title: '取回抵押',
-                describe: '目前抵押金额为 {amount} VITE，请确认取回金额',
-                placeholder: '请输入取回金额',
-                rightBtn: '确认取回',
-                leftBtn: '暂不取回'
+                title: 'Withdrawal of Staked Token',
+                describe: 'Your current staked amount is {amount} VITE, please confirm to withdraw.',
+                placeholder: 'Please input withdraw amount',
+                rightBtn: 'Ready to go',
+                leftBtn: 'Cancel withdraw'
             },
             submit: {
-                title: '提交抵押',
-                describe: '确认是否抵押 {amount} VITE 获取配额，抵押生效约3天之后才可取回',
-                rightBtn: '确认抵押',
-                leftBtn: '再等会儿'
+                title: 'Submit Staking',
+                describe: 'Make sure to stake {amount} VITE to obtain quota, you cannot withdraw until about 3 days after staking comes into effect.',
+                rightBtn: 'Confirm',
+                leftBtn: 'Cancel'
             }
         },
         list: {
-            title: '我的抵押列表',
-            total: '总计抵押 {amount} VITE',
-            amount: '抵押金额',
-            withdrawHeight: '到期快照高度',
-            withdrawTime: '预计到期时间',
-            cancel: '取回抵押',
-            operate: '操作',
-            unexpired: '还未到达取回时间，暂时无法取回抵押'
+            title: 'My Staking List',
+            total: 'Staking {amount} VITE in total',
+            amount: 'Amount',
+            withdrawHeight: 'Expected Snapshot Height',
+            withdrawTime: 'Expected Due Date',
+            cancel: 'Withdrawal of staked token',
+            operate: 'Action',
+            unexpired: 'Temporarily cannot make withdrawal of staked token until due date'
         }
     },
 
     // Transaction List
     transList: {
-        title: '交易记录',
+        title: 'Transactions',
         tType: {
-            title: '交易类型',
-            symbol: '类型',
-            send: '发送',
-            receive: '接收',
+            title: 'Type',
+            symbol: 'Type',
+            send: 'Send',
+            receive: 'Receive',
         },
         status: {
-            title: '状态',
-            unconfirmed: '待确认',
-            confirms: '确认数',
-            confirmed: '已确认',
+            title: 'Status',
+            unconfirmed: 'Unconfirmed',
+            confirms: 'Confirming',
+            confirmed: 'Confirmed',
         },
-        valid:{
-            addr:'账户地址格式错误',
-            bal:'余额不足',
-            pswd:'密码错误',
-            amt:'金额格式错误',
-            succ:'转账成功'
+        valid: {
+            addr: 'Address format error',
+            bal: 'Insufficient balance',
+            pswd: 'Password error',
+            amt: 'Amount format error',
+            succ: 'Transaction successful!'
         },
-        timestamp: '时间戳',
-        tAddress: '交易方地址',
-        tAddr: '交易方',
-        sum: '金额',
-        tDetail: '交易详情',
+        timestamp: 'Timestamp',
+        tAddress: 'Address',
+        tAddr: 'Address',
+        sum: 'Amount',
+        tDetail: 'Transaction Detail'
     },
 
     // SBP
     SBP: {
-        title: '注册SBP',
-        edit: '编辑',
-        reward: '提取奖励',
-        register: '注册SBP',
-        cancel: '撤销注册SBP',
-        cancelBtn: '撤销',
+        title: 'SBP Registration',
+        edit: 'Edit',
+        reward: 'Retrieval of SBP rewards',
+        register: 'SBP Registration',
+        cancel: 'SBP Cancellation',
+        cancelBtn: 'Cancel',
         help: {
-            title: '关于SBP',
-            text: 'SBP（Snapshot Block Producer）为具有出块权利的节点，您可以通过抵押一定数量的VITE注册成为SBP候选节点；每轮（时长75秒）会选举出25个SBP，每轮得票数前25名中随机选出23个作为SBP，得票数26-100名中随机选出2个作为SBP；出块奖励的50%将作为按块奖励分配给该块的出块节点，另外50%将作为按票奖励分配给该轮次得票数排名前100的节点。<br/><br/>一个注册地址（抵押地址）可以注册多个出块节点（节点名称），节点名称被一个注册地址使用后不能再被其他注册地址使用；节点名称可以更换出块地址，出块地址被一个节点名称使用后不能再被其他节点名称使用。'
+            title: 'About SBP',
+            text: 'SBP（Snapshot Block Producer）is a node that has right to create blocks, you can register to become a SBP candidate by staking a certain amount of VITE, each round (about 75 seconds) will elect 25 SBPs, the SBPs will be elected from random 23 out of top 25 candidate nodes, plus random 2 out of the candidate nodes ranking 26th-100th on the list. The 50% of block creation rewards will be allocated to the block creation node, the other 50% will be allocated to nodes that are ranked on top 100 as voting rewards. <br/><br/> One registration address (staking address) can register multiple block creation nodes (node names), a node name cannot be used if the node name has been registered by a registration address. A node name can switch block creation address, however, block creation address cannot be reused by other node names.'
         },
         confirm: {
-            title: '注册SBP候选节点',
-            describe: '提交注册后，当前地址的{amount}VITE将被锁定约90天，解锁后可以撤销注册，抵押金额将退回抵押地址',
-            leftBtn: '暂不注册',
-            rightBtn: '确认注册',
+            title: 'Registration of SBP candidates',
+            describe: 'The {amount} VITE of current address will be locked about 90 days when you submit the registration,  the amount will be returned to staking address after being unlocked',
+            leftBtn: 'Not register yet',
+            rightBtn: 'Ready to register',
             edit: {
-                title: '更换出块地址',
-                placeholder: '请输入新的出块地址',
-                btn: '确认修改'
+                title: 'Change block creation address',
+                placeholder: 'please input new block creation address',
+                btn: 'Confirm to change'
             },
             reward: {
-                title: '提取出块奖励',
-                amount: '本次可提奖励金额（约）',
-                hint: '为了您的资金安全，接收出块奖励地址应尽量与出块地址不同',
-                time: '本次可提时间范围',
-                placeholder: '请输入接收出块奖励地址',
-                btn: '提取奖励'
+                title: 'Retrieve block creation rewards',
+                placeholder: 'Please input rewards recipient address',
+                btn: 'Retrieval of Rewards'
             }
         },
         section1: {
-            title: '提交注册',
-            nodeName: '节点名称',
-            producerAddr: '出块地址',
-            quotaAddr: '抵押地址',
-            quotaTime: '抵押周期',
-            allReward: '全部可提取的出块奖励',
-            time: '7776000个快照块（约90天）',
-            quotaAmount: '抵押金额',
-            confirmBtn: '提交注册',
-            namePlaceholder: '请输入节点名称',
-            nameHint: '40个字符以内, 支持大小写英文字母、数字、\'_\'、\'.\'',
-            nameErr: '节点名称不合法',
-            nameUsed: '此节点名称已被注册',
-            addrPlaceholder: '请输入快照块出块地址',
-            addrHint: '出块地址必须是全节点地址且保持运行状态',
-            addrErr: '出块地址不合法',
-            addrUsed: '此出块地址已被使用',
-            registerSuccess: '注册请求已发出',
-            registerFail: '注册请求失败'
+            title: 'Registration Form',
+            nodeName: 'Node Name',
+            producerAddr: 'Block Creation Address',
+            quotaAddr: 'Staking Address',
+            quotaTime: 'Staking Period',
+            allReward: 'All of the retrievable block creation rewards',
+            time: '7776000 snapshot blocks（approximately 90 days）',
+            quotaAmount: 'Staking Amount',
+            confirmBtn: 'Submit',
+            namePlaceholder: 'Please input node name',
+            nameHint: 'Within 40 characters, support English letters (both upper and lower cases), numbers, \'_\'、\'.\'',
+            nameErr: 'This node name is illegal',
+            nameUsed: 'This node name is occupied',
+            addrPlaceholder: 'Please input snapshot block creation address',
+            addrHint: 'The block creation address must be a full node and keep up running',
+            addrErr: 'Illegal address',
+            addrUsed: 'This address has been occupied',
+            registerSuccess: 'Registration request has sent',
+            registerFail: 'Registration request failed'
         },
         section2: {
-            title: '注册信息',
-            updateSuccess: '修改请求已发送',
-            updateFail: '修改请求发送失败',
-            rewardSuccess: '提取奖励请求已发送，请您稍后查询账户余额',
-            rewardFail: '提取奖励请求发送失败',
-            cancelSuccess: '撤销请求已发送',
-            cancelFail: '撤销请求发送失败',
-            nowReward: '本次可提取的快照块高度范围及奖励金额',
-            rewardAddr: '提取奖励地址',
-            expireDate: '预计到期时间: {time}',
+            title: 'Registration Information',
+            updateSuccess: 'Modify request has sent',
+            updateFail: 'Failed to send modify request',
+            rewardSuccess: 'Request of Rewards retrieval has sent',
+            rewardFail: 'Failed to send the request of rewards retrieving',
+            cancelSuccess: 'Revoking request has sent',
+            cancelFail: 'Failed to send revoking request',
+            nowReward: 'The range of snapshot block height and reward that can be requested at this time',
+            rewardAddr: 'Retrieval Address',
+            expireDate: 'Expire Date: {time}',
             cancelConfirm: {
-                title: '撤销注册SBP',
-                describe: '撤销后您的抵押金额将退回抵押地址；若想成为SBP，您需重新提交注册申请'
+                title: 'Revoke registration of SBP',
+                describe: 'The staking amount will be returned back to your staking address after revoking, you have to re-submit the registration to become a SBP'
             }
         }
     },
 
     // vote
     vote: {
-        toReward: '查看我的奖励',
-        title: '投票',
-        search: '请输入候选节点名称或者出块地址',
+        toReward: 'View my rewards',
+        title: 'Voting',
+        search: 'Please input node name or block creation address',
         help: {
-            title: '关于投票',
-            text: '您可以参与投票选出共25个SBP（Snapshot Block Producer），每轮投票时间共75秒，您的投票数为投票地址所拥有的VITE数量，默认为您保持上一轮的投票意向；每轮得票量排名前25名的候选节点中随机23个及排名26-100名的候选节点中随机2个共25个节点将当选SBP。',
+            title: 'About Voting',
+            text: 'You can join and vote for 25 SBPs （Snapshot Block Producer), each round of voting lasts 75s, the polls you can use for voting are equivalent to the amount of VITE tokens owned by voting address, the default selection is the choice of previous round, the SBPs will be chosen from random 23 out of top 25 candidate nodes, plus random 2 out of the candidate nodes ranking 26th-100th on the list, 25 SBPs in total.',
         },
-        addrNoExistErr:'您的地址未发生过交易，暂不能投票',
+        addrNoExistErr:'You aren\'t able to vote for now as your address has no transaction record before',
         section1: {
-            title: '我的投票',
-            head: ['节点名称', '节点状态', '我的投票', '投票状态', '操作'],
+            title: 'My Voting',
+            head: ['Name', 'Status', 'My Voting', 'Status of Voting', 'Action'],
             nodeStatusMap: {
-                1: '正在候选',
-                2: '停止候选'
+                1: 'Active',
+                2: 'Inactive'
             },
             voteStatusMap: {
-                voted: '投票成功',
-                voting: '正在投票中',
-                canceling: '正在撤销中',
-                voteNotWork: '投票作废'
+                voted: 'Voting Successful',
+                voting: 'Voting',
+                canceling: 'Under revoking',
+                voteNotWork: 'Revoked voting'
             },
-            hoverHelp: '您投票的{nodeName}已经取消注册，您可以直接重新投票、或者撤销投票；如果您不重新投票或撤销投票，{nodeName}重新注册后，您原来的投票将恢复生效。',
+            hoverHelp: 'The node {nodeName} you are voted for has been revoked, you may vote again directly or revoke your voting, If you do not do so, your original voting result will be recovered after the {nodeName} re-registering',
             confirm: {
-                title: '撤销投票',
-                cancelText: '确认撤销',
-                submitText: '暂不撤销'
+                title: 'Revoke voting',
+                cancelText: 'Confirm',
+                submitText: 'Not yet'
             },
-            toast: '撤销投票请求已发送',
+            toast: 'Revoking request has sent',
             quotaConfirm: {
-                title: '配额不足',
-                content: '配额不足，建议您点击运行PoW获取配额或抵押VITE获取配额',
-                leftBtn: {text:'抵押配额'},
-                rightBtn: {text:'运行POW'}
+                title: 'Insufficient Quota',
+                content: 'your left quota turn out to be insufficient, you can acquire more quota by running PoW or staking VITE',
+                leftBtn: {text:'Stake Quota'},
+                rightBtn: {text:'Run POW'}
             },
-            operate:'撤销投票',
-            operateBtn:'撤销',
-            cancelVoteErr:'撤销投票失败，请重试'
+            operate:'Revoke Voting',
+            operateBtn:'Revoke',
+            cancelVoteErr:'Failed to revoke voting, please try again'
         },
-
+    
         section2: {
-            title: '候选节点列表',
-            head: ['排名','节点名称', '出块地址', '当前票数', '操作'],
+            title: 'SBP candidates',
+            head: ['Rank','Node Name', 'Address', 'Votes', 'Action'],
             confirm: {
                 normal: {
-                    title: '投票',
-                    cancelText: '暂不投票',
-                    submitText: '确认投票',
-                    content: '您只能给一个节点投票，确认投票给{name}吗？'
+                    title: 'Voting',
+                    cancelText: 'Not yet',
+                    submitText: 'Ready to vote',
+                    content: 'You can vote for only one SBP, are you sure you want to vote for {name}?'
                 },
                 cover: {
-                    title: '投票',
-                    content: '您已经投票给{nodeName}，请确认是否覆盖当前投票',
-                    cancelText: '确认',
-                    submitText: '取消'
+                    title: 'Voting',
+                    content: 'You\'ve already voted for {nodeName}, are you sure to overwrite current voting record?',
+                    cancelText: 'Confirm',
+                    submitText: 'Cancel'
                 }
             },
-            toast: '投票请求已发送',
+            toast: 'The voting request has sent',
             quotaConfirm: {
-                title: '配额不足',
-                content: '配额不足，建议您点击运行PoW获取配额或抵押VITE获取配额',
-                leftBtn: {text:'抵押配额'},
-                rightBtn: {text:'运行POW'}
+                title: 'Insufficient Quota',
+                content: 'your left quota turn out to be insufficient, you can acquire more quota by running PoW or staking VITE',
+                leftBtn: {text:'Stake for quota'},
+                rightBtn: {text:'Run POW'}
             },
-            noSearchData:'无结果，换个输入试试',
-            noData:'暂无数据',
-            operate:'投票',
-            operateBtn:'投票',
-            voteErr:'投票失败，请重试'
+            noSearchData:'No content found, please try another input',
+            noData:'No data',
+            operate:'Voting',
+            operateBtn:'Vote',
+            voteErr:'Failed to vote, please try again'
         }
     },
 
     // exchangeVite
     exchangeVite: {
-        title: '置换VITE',
-        gas: '矿工费用',
-        record: '置换记录',
-        aboutPrice: '约 {amount} ETH',
-        note: '官方提示：提交置换后请您耐心等待，置换VITE到账需要等以太交易被确认30个块，以太交易可以在置换记录中查看',
+        title: 'VITE Conversion',
+        gas: 'Mining Fee',
+        record: 'Conversion History',
+        aboutPrice: 'Approx {amount} ETH',
+        note: 'Please wait in patient after submitting the conversion. You cannot receive the converted VITE until you have got 30 Ethereum transaction confirmations. Ehtereum transaction records can be viewed in Conversion History section.',
         help: {
-            title: '快速理解置换VITE',
-            text: '通过VITE置换功能，可以将以太网络上的ERC20 VITE代币置换到VITE网络中，在VITE网络中可以投票官方超级节点赚取奖励，年化收益达20%。在置换过程中，你的ERC20 VITE将被转入黑洞地址：{blackAddr}，当黑洞地址收到交易并被确认后，置换系统将为您发放等值的VITE至您的VITE地址中。在置换过程中，您需要将ERC20的VITE 与 少量ETH（用于置换消耗gas）转入至VITE钱包的ETH地址中。'
+            title: 'Quick Understanding of VITE Conversion',
+            text: 'You can migrate ERC20 tokens into VITE into our TestNet by VITE conversion function. In TestNet, casting your vote for official SBPs to collect rewards, the annualized rate can reach 20%. Your ERC20 VITE tokens will be transferred to Ethereum black hole address: {blackAddr}, you will receive the same amount of VITE at your Vite address when Ethereum black hole address has received the transaction and confirmed. Once you are in the conversion process, confirm that there are enough VITE and ETH (as gas) in your Ethereum address of Vite wallet.'
         },
         exchange: {
-            vite: '置换VITE',
-            sendTrans: '发送交易',
-            viteAddr: '接收VITE地址',
-            viteAmount: '置换VITE金额',
-            gas: '矿工费用',
-            btn: '确认置换',
-            success: '置换请求成功，预计以太网交易被确认后20分钟到账'
+            vite: 'Convert',
+            sendTrans: 'Send',
+            viteAddr: 'Receiving Address',
+            viteAmount: 'Conversion Amount',
+            gas: 'Mining Fee',
+            btn: 'Ready to Convert',
+            success: 'Conversion Successful. It may take approx 20 minutes to get VITE into your account after the Ethereum transaction is confirmed.'
         }
     },
-
+    
     pwdConfirm: {
-        conf: '开启5分钟内免密操作',
-        title: '输入钱包密码',
-        placeholder: '请输入钱包密码'
+        conf: 'Open password-free mode within 5 minutes',
+        title: 'Password',
+        placeholder: 'Please input password of wallet'
     },
 
     quotaConfirm: {
-        title: '配额不足',
-        describe: '当前配额不足，无法进行{operate}，您需要抵押VITE获取配额才可以{operate}',
-        leftBtn: '暂不{operate}',
-        rightBtn: '获取配额'
+        title: 'Insufficient Quota',
+        describe: 'You cannot {operate} due to insufficient TPS quota. You need to stake VITE for quota to {operate}',
+        leftBtn: 'Not {operate} yet',
+        rightBtn: 'Get Quota'
     },
 
-    // common
-    pow: '运行PoW...',    
+    //common
+    pow: 'Running PoW...',
     btn: {
-        create: '创建',
-        cancel: '取消',
-        login: '登录',
-        imported: '导入账号',
-        back: '返回',
-        submit: '确定',
-        next: '下一步',
-        understand: '我已了解',
-        edit: '编辑',
-        copy: '复制',
-        reReg: '重新注册',
-        otherProd: '使用 Vite 其他产品'
+        create: 'Create',
+        cancel: 'Cancel',
+        login: 'Login',
+        imported: 'Import Account',
+        back: 'Back',
+        submit: 'Submit',
+        next: 'Next Step',
+        understand: 'I understand',
+        edit: 'Edit',
+        copy: 'Copy',
+        reReg: 'Re-register',
+        otherProd: 'Use Other Products of Vite'
     },
     paging: {
-        pre: '上一页',
-        next: '下一页',
-        first: '首页',
-        last: '末页',
+        pre: 'Prev',
+        next: 'Next',
+        first: 'First',
+        last: 'Last',
     },
-    hint:{
-        create: '创建失败',
-        logoutErr: '退出有错误',
-        pwErr: '密码错误',
-        acEmpty: '账号不可为空',
-        pwEmpty: '密码不能为空',
-        noData: '暂无数据',
-        err: '发生错误',
-        request: '{name}请求已发送，请耐心等待'
+    hint: {
+        create: 'Creation failed',
+        logoutErr: 'Logout Error!',
+        pwErr: 'Incorrect password!',
+        acEmpty: 'Account cannot be empty!',
+        pwEmpty: 'Password cannot be empty!',
+        noData: 'No Data',
+        err: 'Oops, error occurs',
+        request: '{name} request has sent, please wait'
     }
 };
