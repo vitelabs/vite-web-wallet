@@ -19,6 +19,10 @@ const defaultTokenList = {
     }
 };
 
+// Test ENV
+// VCP tti_e1f1d23a9d3e5e1b6ca6c374
+// VTT tti_c23c7534356090754332f726
+
 let loopHeightTimeout;
 
 class Ledger {
