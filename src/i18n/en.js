@@ -58,7 +58,7 @@ module.exports = {
         placeholder: 'Please input your mnemonic seed phrase',
         empty: 'The input of seed phrase cannot be empty',
         error: 'Incorrect seed phrase. Try again',
-        hint: 'Mnemonic format: words, spaces, words... spaces, words.',
+        hint: 'Example: apple banana peach mango pear ...',
         netErr: 'The full node is abnormal, please try again later.',
         change: 'Switch to {len} Mnemonic Words'
     },
