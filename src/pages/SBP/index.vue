@@ -1,3 +1,5 @@
+/**  vite-wallet login */
+
 <template>
     <div class="SBP-wrapper __wrapper">
         <sec-title></sec-title>

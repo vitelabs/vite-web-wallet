@@ -1,8 +1,8 @@
 <template>
     <div class="page-layout-wrapper" @click="operate">
         <div class="page-wrapper">
-            <sidebar class="sidebar" :active="active"></sidebar>
-            <vite-menu class="menu" :active="active"></vite-menu>
+            <sidebar class="sidebar" :active="active" :go="go" :menuList="menuList" ></sidebar>
+            <vite-menu class="menu" :active="active" :go="go" :menuList="menuList"></vite-menu>
 
             <div class="page-content">
                 <slot></slot>
@@ -14,8 +14,10 @@
 <script>
 import sidebar from 'components/sidebar';
 import viteMenu from 'components/menu';
+import routeConfig from 'routes';
 
 let operateTimeout = null;
+const loginRoutes = routeConfig.loginRoutes;
 
 export default {
     components: {
@@ -27,14 +29,73 @@ export default {
             default: '',
         }
     },
+    data() {
+        return {
+            isLogin: false,
+            menuList: []
+        };
+    },
     mounted() {
-        this.operate();
+        this.isLogin = !!this.$wallet.isLogin;
+        this.setMenuList();
+        this.$wallet.onLogin(() => {
+            this.isLogin = true;
+        });
+        this.$wallet.onLogout(() => {
+            this.isLogin = false;
+        });
+    },
+    watch: {
+        isLogin: function() {
+            this.setMenuList();
+            if (this.isLogin) {
+                this.operate();
+                return;
+            }
+            this.clearOperate();
+        }
     },
     methods: {
-        operate() {
+        setMenuList() {
+            let activeAccount = this.$wallet.getActiveAccount();
+            let menuList = ['account', 'quota', 'SBP', 'vote', 'transList'];
+            if (activeAccount && activeAccount.type === 'wallet') {
+                menuList.push('conversion');
+            }
+            menuList.push('index');
+            menuList.push('setting');
+            this.isLogin && menuList.push('logout');
+            this.menuList = menuList;
+        },
+        go(name) {
+            if (name === 'logout') {
+                this.$wallet.logout();
+                this.$router.push({
+                    name: 'index'
+                });
+                return;
+            }
+
+            if (this.active === name) {
+                return;
+            }
+
+            if (loginRoutes.indexOf(name) === -1 || this.$wallet.isLogin) {
+                this.$router.push({ name });
+                return;
+            }
+
+            this.$wallet.setLastPage(name);
+            this.$router.push({
+                name: 'start'
+            });
+        },
+        clearOperate() {
             clearTimeout(operateTimeout);
             operateTimeout = null;
-
+        },
+        operate() {
+            this.clearOperate();
             operateTimeout = setTimeout(()=>{
                 operateTimeout = null;
                 location.reload();
