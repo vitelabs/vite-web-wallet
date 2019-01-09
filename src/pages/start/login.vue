@@ -99,7 +99,7 @@ export default {
             let list = this.$wallet.getList();
             if (!list || !list.length) {
                 this.$router.push({
-                    name: 'index'
+                    name: 'start'
                 });
                 return;
             }
@@ -153,7 +153,7 @@ export default {
                 let activeAccount = this.$wallet.getActiveAccount();
                 activeAccount.unlock();
                 this.$router.push({
-                    name: this.$wallet.lastPage || 'index'
+                    name: this.$wallet.lastPage || 'exchange'
                 });
                 this.$wallet.clearLastPage();
             };

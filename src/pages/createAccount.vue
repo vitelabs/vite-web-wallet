@@ -173,7 +173,7 @@ export default {
                 this.activeAccount.rename(name);
                 this.activeAccount.save();
                 this.$router.push({
-                    name: 'index'
+                    name: 'start'
                 });
             }).catch((err) => {
                 this.isLoading = false;

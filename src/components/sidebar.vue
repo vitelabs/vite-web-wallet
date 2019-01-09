@@ -6,10 +6,10 @@
         </div>
 
         <div v-for="(name, index) in menuTops" :key="index"
-             class="__pointer icon" :class="{ 'active': active === name }" 
+             class="__pointer icon" :class="{ 'active': active.indexOf(name) >= 0 }" 
              @click="go(name)">
-            <img v-show="active !== name" :src="icon[name]" />
-            <img v-show="active === name" :src="icon[`${name}Active`]"  />
+            <img v-show="active.indexOf(name) < 0" :src="icon[name]" />
+            <img v-show="active.indexOf(name) >= 0" :src="icon[`${name}Active`]"  />
         </div>
 
         <div class="_bottom">
@@ -45,8 +45,8 @@ import vote from 'assets/imgs/vote_default.svg';
 import voteActive from 'assets/imgs/vote_active.svg';
 import conversion from 'assets/imgs/conversion_default.svg';
 import conversionActive from 'assets/imgs/conversion_pressed.svg';
-import index from 'assets/imgs/conversion_default.svg';
-import indexActive from 'assets/imgs/conversion_pressed.svg';
+import exchange from 'assets/imgs/conversion_default.svg';
+import exchangeActive from 'assets/imgs/conversion_pressed.svg';
 
 export default {
     components: {
@@ -86,14 +86,16 @@ export default {
                 voteActive,
                 conversion,
                 conversionActive,
-                index,
-                indexActive,
+                exchange,
+                exchangeActive,
                 setting,
                 settingActive,
                 logout,
                 logoutActive,
                 login,
-                loginActive
+                loginActive,
+                index: exchange,
+                indexActive: exchange
             },
         };
     },

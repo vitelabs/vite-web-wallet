@@ -49,14 +49,14 @@ setTimeout(() => {
         if (!to.name && to.path) {
             let arr = to.path.split('/');
             router.replace({
-                name: arr[ arr.length - 1 ] || 'index'
+                name: arr[ arr.length - 1 ] || 'exchange'
             });
             return;
         }
 
-        if (!from.name && to.name !== 'index') {
+        if (!from.name && to.name !== 'exchange') {
             router.replace({
-                name: 'index'
+                name: 'exchange'
             });
             return;
         }

@@ -76,7 +76,7 @@ export default {
                 this.isLoading = false;
                 this.activeAccount.save();
                 this.$router.push({
-                    name: 'index'
+                    name: 'start'
                 });
             }).catch((err) => {
                 console.warn(err);

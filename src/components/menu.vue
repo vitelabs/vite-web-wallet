@@ -8,7 +8,7 @@
         <div class="menu-list" :style="`height: ${showList ? menuListHeight : 0}px`">
             <div v-for="(name, i) in menuList" :key="i"
                  class="item" :style="`height: ${itemHeight}px; line-height: ${itemHeight}px`" @click="_go(name)"
-                 :class="{ 'active': active === name}">
+                 :class="{ 'active': active.indexOf(name) >= 0 }">
                 {{ name !== 'logout' && name !== 'login' ? $t(`${name}.title`) : $t(name) }}
             </div>
         </div>

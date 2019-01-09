@@ -63,7 +63,7 @@ export default {
                 }
 
                 this.$router.push({
-                    name: 'index'
+                    name: 'start'
                 });
             };
             reader.readAsText(file);

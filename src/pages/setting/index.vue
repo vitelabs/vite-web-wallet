@@ -13,6 +13,7 @@
         <mnemonic :lock="lock" class="item"></mnemonic>
         <accList class="item"></accList>
         <lang class="item"></lang>
+        <auto-logout></auto-logout>
     </layout>
 </template>
 
@@ -21,10 +22,11 @@ import layout from './layout.vue';
 import accList from './accList.vue';
 import lang from './lang.vue';
 import mnemonic from './mnemonic.vue';
+import autoLogout from './autoLogout.vue';
 
 export default {
     components: {
-        layout, accList, lang, mnemonic
+        layout, accList, lang, mnemonic, autoLogout
     },
     data() {
         let activeAccount = this.$wallet.getActiveAccount();
