@@ -339,8 +339,8 @@
       "voteStatusMap": {
         "voted": "Voting Successful",
         "voting": "Voting",
-        "canceling": "Under revoking",
-        "voteNotWork": "Revoked voting"
+        "canceling": "Under Revoking",
+        "voteNotWork": "Invalid Vote"
       },
       "hoverHelp": "The node {nodeName} you are voted for has been revoked, you may vote again directly or revoke your voting, If you do not do so, your original voting result will be recovered after the {nodeName} re-registering",
       "confirm": {
