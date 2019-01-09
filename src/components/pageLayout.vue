@@ -14,10 +14,11 @@
 <script>
 import sidebar from 'components/sidebar';
 import viteMenu from 'components/menu';
-import routeConfig from 'routes';
+import localStorage from 'utils/localStorage';
 
-let operateTimeout = null;
-const loginRoutes = routeConfig.loginRoutes;
+let autoLogout = null;
+let _t = localStorage.getItem('autoLogoutTime') || 5;   // Minutes
+const autoLogoutTime = _t * 60 * 1000;
 
 export default {
     components: {
@@ -52,7 +53,7 @@ export default {
                 this.operate();
                 return;
             }
-            this.clearOperate();
+            this.clearAutoLogout();
         }
     },
     methods: {
@@ -62,7 +63,7 @@ export default {
             if (activeAccount && activeAccount.type === 'wallet') {
                 menuList.push('conversion');
             }
-            menuList.push('index');
+            menuList.push('exchange');
             menuList.push('setting');
             menuList.push(this.isLogin ? 'logout' : 'login');
             this.menuList = menuList;
@@ -70,44 +71,32 @@ export default {
         go(name) {
             if (name === 'logout') {
                 this.$wallet.logout();
-                this.$router.push({
-                    name: 'index'
-                });
                 return;
             }
 
             if (name === 'login') {
-                this.login(name);
+                this.$router.push({
+                    name: 'start'
+                });
                 return;
             }
 
             if (this.active === name) {
                 return;
             }
-
-            if (loginRoutes.indexOf(name) === -1 || this.$wallet.isLogin) {
-                this.$router.push({ name });
-                return;
-            }
-
-            this.login(name);
+            this.$router.push({ name });
         },
-        login(name) {
-            (name !== 'login') && this.$wallet.setLastPage(name);
-            this.$router.push({
-                name: 'start'
-            });
-        },
-        clearOperate() {
-            clearTimeout(operateTimeout);
-            operateTimeout = null;
+
+        clearAutoLogout() {
+            clearTimeout(autoLogout);
+            autoLogout = null;
         },
         operate() {
-            this.clearOperate();
-            operateTimeout = setTimeout(()=>{
-                operateTimeout = null;
+            this.clearAutoLogout();
+            autoLogout = setTimeout(()=>{
+                autoLogout = null;
                 location.reload();
-            }, 5 * 60 * 1000);
+            }, autoLogoutTime);
         }
     }
 };
