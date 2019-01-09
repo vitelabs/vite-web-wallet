@@ -64,7 +64,7 @@ export default {
             }
             menuList.push('index');
             menuList.push('setting');
-            this.isLogin && menuList.push('logout');
+            menuList.push(this.isLogin ? 'logout' : 'login');
             this.menuList = menuList;
         },
         go(name) {
@@ -73,6 +73,11 @@ export default {
                 this.$router.push({
                     name: 'index'
                 });
+                return;
+            }
+
+            if (name === 'login') {
+                this.login(name);
                 return;
             }
 
@@ -85,7 +90,10 @@ export default {
                 return;
             }
 
-            this.$wallet.setLastPage(name);
+            this.login();
+        },
+        login(name) {
+            (name !== 'login') && this.$wallet.setLastPage(name);
             this.$router.push({
                 name: 'start'
             });
