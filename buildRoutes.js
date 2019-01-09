@@ -32,7 +32,7 @@ traversing('./src/pages/', (fPath, next, val) => {
     // pages/XXX.vue
     if (tmpPath === val && val.indexOf('.vue') === val.length - 4) {
         let name = val.replace('.vue', '');
-        pushRoute(fPath, tmpPath, name);
+        (name !== 'index') && pushRoute(fPath, tmpPath, name);
         return;
     }
 
@@ -78,6 +78,9 @@ function pushRoute(fPath, tmpPath, name) {
                     indexRoutes.push(name);
                 } else if (item === 'login') {
                     loginRoutes.push(name);
+                } else if (item.indexOf('name') === 0) {
+                    let _n = item.slice(5);
+                    name = _n || name;
                 }
             });
         }        

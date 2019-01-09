@@ -5,7 +5,6 @@
         </index-layout>
 
         <page-layout :active="active" v-else>
-            <exchange v-if="active === 'index'"></exchange>
             <router-view/>
         </page-layout>
 
@@ -19,7 +18,6 @@ import indexLayout from 'components/indexLayout.vue';
 import pageLayout from 'components/pageLayout.vue';
 import update from 'components/update.vue';
 import firstNotice from 'components/firstNotice.vue';
-import exchange from 'components/exchange/index.vue';
 import { timer } from 'utils/asyncFlow';
 import loopTime from 'config/loopTime';
 
@@ -28,7 +26,7 @@ let balanceInfoInst = null;
 
 export default {
     components: {
-        indexLayout, pageLayout, update, firstNotice, exchange
+        indexLayout, pageLayout, update, firstNotice
     },
     mounted() {
         this.changeLayout(this.$route.name);
