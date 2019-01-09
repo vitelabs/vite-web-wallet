@@ -1,18 +1,16 @@
-/**  vite-wallet index-layout */
-
 <template>
     <div class="app-wrapper">
-        <index-layout v-if="layoutType === 'index'">
-            <start v-if="active === 'index'"></start>
+        <index-layout v-if="layoutType === 'start'">
             <router-view/>
         </index-layout>
 
         <page-layout :active="active" v-else>
+            <exchange v-if="active === 'index'"></exchange>
             <router-view/>
         </page-layout>
 
         <update></update>
-        <first-notice></first-notice>
+        <first-notice v-if="active === 'start'"></first-notice>
     </div>
 </template>
 
@@ -21,7 +19,7 @@ import indexLayout from 'components/indexLayout.vue';
 import pageLayout from 'components/pageLayout.vue';
 import update from 'components/update.vue';
 import firstNotice from 'components/firstNotice.vue';
-import start from 'components/start/index.vue';
+import exchange from 'components/exchange/index.vue';
 import { timer } from 'utils/asyncFlow';
 import loopTime from 'config/loopTime';
 
@@ -30,7 +28,7 @@ let balanceInfoInst = null;
 
 export default {
     components: {
-        indexLayout, pageLayout, update, firstNotice, start
+        indexLayout, pageLayout, update, firstNotice, exchange
     },
     mounted() {
         this.changeLayout(this.$route.name);
@@ -38,39 +36,33 @@ export default {
             this.changeLayout(to.name, from.name);
             this.active = to.name;
         });
+
+        this.$wallet.onLogin(() => {
+            this.login();
+        });
+        this.$wallet.onLogout(() => {
+            this.logout();
+        });
     },
     data() {
         return {
-            layoutType: 'index',
+            layoutType: 'start',
             active: this.$route.name
         };
     },
     methods: {
-        changeLayout(to, from) {
-            let toHome = routeConfig.indexLayoutRoutes.indexOf(to) === -1;
-            let fromHome = routeConfig.indexLayoutRoutes.indexOf(from) === -1;
-
-            if (toHome) {
-                this.layoutType = 'home';
-                this.startLoopBalance();
-                return;
-            }
-        
+        login() {
+            this.startLoopBalance();
+        },
+        logout() {
             this.stopLoopBalance();
-            this.layoutType = 'index';
-            if (!fromHome) {
-                return;
-            }
-
-            // clear all
-            let activeAccount = this.$wallet.getActiveAccount();
-            activeAccount && activeAccount.lock();
-            activeAccount && activeAccount.releasePWD();
-            this.$wallet.clearActiveAccount();
-                        
             this.$store.commit('commitClearBalance');
             this.$store.commit('commitClearTransList');
             this.$store.commit('commitClearPledge');
+        },
+        changeLayout(to) {
+            let toHome = routeConfig.indexLayoutRoutes.indexOf(to) === -1;
+            this.layoutType = toHome ? 'home' : 'start';
         },
 
         startLoopBalance() {

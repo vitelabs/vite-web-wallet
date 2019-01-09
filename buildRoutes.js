@@ -13,6 +13,7 @@ if (result) {
 let routesStr = '';
 let routes = 'export default { routes: [';
 let indexRoutes = [];
+let loginRoutes = [];
 
 traversing('./src/pages/', (fPath, next, val) => {
     let stats = fs.statSync(fPath);
@@ -62,15 +63,26 @@ traversing('./src/pages/', (fPath, next, val) => {
 
 routes += '],';
 routesStr += routes;
-routesStr += `indexLayoutRoutes: ${JSON.stringify(indexRoutes)}}`;
+routesStr += `indexLayoutRoutes: ${JSON.stringify(indexRoutes)}, loginRoutes: ${JSON.stringify(loginRoutes)}}`;
 
 fs.writeFileSync(routesPath, routesStr);
 
 function pushRoute(fPath, tmpPath, name) {
     let file = fs.readFileSync(fPath);
-    if (file.indexOf('/**  vite-wallet index-layout */') !== -1) {
-        indexRoutes.push(name);
+    if (file.indexOf('/**  vite-wallet ') === 0) {
+        let settingStrArr = file.toString().match(/^\/\*\*\s{2}vite-wallet (\w*\-*\w*\s*)* \*\//);
+        if (settingStrArr && settingStrArr.length) {
+            let setting = settingStrArr[0].split(' ');
+            setting.forEach((item) => {
+                if (item === 'index-layout') {
+                    indexRoutes.push(name);
+                } else if (item === 'login') {
+                    loginRoutes.push(name);
+                }
+            });
+        }        
     }
+
     routesStr += `import ${name} from \'pages/${tmpPath}\';`;
     routes += `{name:'${name}',path:'/${name}',component:${name}},`;
 }

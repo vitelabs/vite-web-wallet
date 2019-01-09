@@ -5,26 +5,19 @@
             <test-notice class="notice" :class="{'hide': !isShowNotice}"></test-notice>
         </div>
 
-        <router-link v-for="(name, index) in pageList" :key="index"
-                     class="__pointer icon" :class="{
-                         'active': active === name
-        }" :to="{ 'name': name }">
+        <div v-for="(name, index) in menuTops" :key="index"
+             class="__pointer icon" :class="{ 'active': active === name }" 
+             @click="go(name)">
             <img v-show="active !== name" :src="icon[name]" />
             <img v-show="active === name" :src="icon[`${name}Active`]"  />
-        </router-link>
+        </div>
 
         <div class="_bottom">
-            <router-link class="icon setting __pointer" :class="{
-                'active': active === 'setting'
-            }" :to="{ name: 'setting' }">
-                <img v-show="active !== 'setting'" :src="setting" />
-                <img v-show="active === 'setting'" :src="settingActive"  />
-            </router-link>
-
-            <div class="icon logout __pointer" @click="logout" 
-                 @mouseenter="enterLogout" @mouseleave="leaveLogout">
-                <img v-show="!logoutHover" :src="logoutDefault" />
-                <img v-show="logoutHover" :src="logoutActive" />
+            <div v-for="(name, index) in menuBottoms" :key="index" 
+                 class="icon __pointer" :class="{ 'active': active === name }" 
+                 @click="go(name)" @mouseenter="enterLogout(name)" @mouseleave="leaveLogout(name)">
+                <img v-show="active !== name && (name !== 'logout' || !logoutHover)" :src="icon[name]" />
+                <img v-show="active === name || (name === 'logout' && logoutHover) " :src="icon[`${name}Active`]"  />
             </div>
         </div>
     </div>
@@ -40,7 +33,7 @@ import transList from 'assets/imgs/transfer_default.svg';
 import transListActive from 'assets/imgs/transfer_pressed.svg';
 import setting from 'assets/imgs/settings_default.svg';
 import settingActive from 'assets/imgs/settings_pressed.svg';
-import logoutDefault from 'assets/imgs/logout_default.svg';
+import logout from 'assets/imgs/logout_default.svg';
 import logoutActive from 'assets/imgs/logout_pressed.svg';
 import quota from 'assets/imgs/quota_default.svg';
 import quotaActive from 'assets/imgs/quota_pressed.svg';
@@ -50,6 +43,8 @@ import vote from 'assets/imgs/vote_default.svg';
 import voteActive from 'assets/imgs/vote_active.svg';
 import conversion from 'assets/imgs/conversion_default.svg';
 import conversionActive from 'assets/imgs/conversion_pressed.svg';
+import index from 'assets/imgs/conversion_default.svg';
+import indexActive from 'assets/imgs/conversion_pressed.svg';
 
 export default {
     components: {
@@ -59,20 +54,23 @@ export default {
         active: {
             type: String,
             default: ''
+        },
+        menuList: {
+            type: Array,
+            default: () => {
+                return [];
+            }
+        },
+        go: {
+            type: Function,
+            default: () => {}
         }
     },
     data() {
-        let activeAccount = this.$wallet.getActiveAccount();
-        let pageList = ['account', 'quota', 'SBP', 'vote', 'transList'];
-        if (activeAccount.type === 'wallet') {
-            pageList.push('conversion');
-        }
-
         return {
             isShowNotice: false,
             logoutHover: false,
             viteLogo,
-            pageList,
             icon: {
                 account,
                 accountActive,
@@ -85,13 +83,26 @@ export default {
                 vote,
                 voteActive,
                 conversion,
-                conversionActive
+                conversionActive,
+                index,
+                indexActive,
+                setting,
+                settingActive,
+                logout,
+                logoutActive
             },
-            setting,
-            settingActive,
-            logoutDefault,
-            logoutActive
         };
+    },
+    computed: {
+        settingIndex() {
+            return this.menuList.indexOf('setting');
+        },
+        menuTops() {
+            return this.menuList.slice(0, this.settingIndex);
+        },
+        menuBottoms() {
+            return this.menuList.slice(this.settingIndex);
+        }
     },
     methods: {
         overLogo() {
@@ -101,16 +112,17 @@ export default {
             this.isShowNotice = false;
         },
 
-        enterLogout() {
+        enterLogout(name) {
+            if (name !== 'logout') {
+                return;
+            }
             this.logoutHover = true;
         },
-        leaveLogout() {
+        leaveLogout(name) {
+            if (name !== 'logout') {
+                return;
+            }
             this.logoutHover = false;
-        },
-        logout() {
-            this.$router.push({
-                name: 'index'
-            });
         }
     }
 };
@@ -175,12 +187,11 @@ export default {
         width: 100%;
         .icon {
             margin-top: 0;
-        }
-        .setting {
             margin-bottom: 30px;
-        }
-        .logout {
-            height: 30px;
+            &:last-child {
+                margin-bottom: 0;
+                height: 30px;
+            }
         }
     }
 }

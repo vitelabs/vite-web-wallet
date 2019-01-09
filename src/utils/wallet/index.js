@@ -15,7 +15,19 @@ const LAST_KEY = 'ACC_LAST';
 
 class _wallet {
     constructor() {
-        this.activeWalletAcc = null;        
+        this.activeWalletAcc = null;
+        this.isLogin = false;
+        this.onLoginList = [];
+        this.onLogoutList = [];
+        this.lastPage = '';    
+    }
+
+    setLastPage(name) {
+        this.lastPage = name;
+    }
+
+    clearLastPage() {
+        this.lastPage = '';
     }
 
     getActiveAccount() {
@@ -113,6 +125,26 @@ class _wallet {
         });
     }
 
+    onLogin(cb) {
+        this.onLoginList = this.onLoginList || [];
+        this.onLoginList.push(cb);
+    }
+
+    onLogout(cb) {
+        this.onLogoutList = this.onLogoutList || [];
+        this.onLogoutList.push(cb);
+    }
+
+    logout() {
+        this.activeWalletAcc && this.activeWalletAcc.lock();
+        this.activeWalletAcc && this.activeWalletAcc.releasePWD();
+        this.clearActiveAccount();
+        this.isLogin = false;
+        this.onLogoutList && this.onLogoutList.forEach((cb) => {
+            cb && cb();
+        });
+    }
+
     login({
         id, entropy, addr
     }, pass) {
@@ -124,6 +156,12 @@ class _wallet {
         }
         return this._loginWalletAcc({
             id, entropy, pass
+        }).then((data) => {
+            this.isLogin = true;
+            this.onLoginList && this.onLoginList.forEach((cb) => {
+                cb && cb();
+            });
+            return data;
         });
     }
 
