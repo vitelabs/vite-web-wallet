@@ -153,7 +153,7 @@ export default {
                 let activeAccount = this.$wallet.getActiveAccount();
                 activeAccount.unlock();
                 this.$router.push({
-                    name: this.$wallet.lastPage || 'exchange'
+                    name: this.$wallet.lastPage || 'index'
                 });
                 this.$wallet.clearLastPage();
             };

@@ -90,7 +90,7 @@ export default {
                 return;
             }
 
-            this.login();
+            this.login(name);
         },
         login(name) {
             (name !== 'login') && this.$wallet.setLastPage(name);
