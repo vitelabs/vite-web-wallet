@@ -231,7 +231,7 @@ export default {
                 const code = e && e.error ? e.error.code || -1 : e ? e.code : -1;
                 if (code === -35002) {
                     let startTime = new Date().getTime();
-                    const c = Object.assign({}, this.$t('vote.quotaConfirm'));
+                    const c = Object.assign({}, this.$t('quotaConfirmPoW'));
                     c.leftBtn.click = () => {
                         this.$router.push({
                             name: 'quota'
