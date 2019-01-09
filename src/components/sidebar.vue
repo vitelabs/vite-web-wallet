@@ -35,6 +35,8 @@ import setting from 'assets/imgs/settings_default.svg';
 import settingActive from 'assets/imgs/settings_pressed.svg';
 import logout from 'assets/imgs/logout_default.svg';
 import logoutActive from 'assets/imgs/logout_pressed.svg';
+import login from 'assets/imgs/logout_default.svg';
+import loginActive from 'assets/imgs/logout_pressed.svg';
 import quota from 'assets/imgs/quota_default.svg';
 import quotaActive from 'assets/imgs/quota_pressed.svg';
 import SBP from 'assets/imgs/SBP_default.svg';
@@ -89,7 +91,9 @@ export default {
                 setting,
                 settingActive,
                 logout,
-                logoutActive
+                logoutActive,
+                login,
+                loginActive
             },
         };
     },
