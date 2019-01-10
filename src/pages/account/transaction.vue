@@ -78,7 +78,7 @@ export default {
             this.$refs.inAddr && this.$refs.inAddr.focus();
         });
         
-        this.$onEnterKey(() => {
+        this.$onKeyDown(13, () => {
             this.validTrans();
         });
     },

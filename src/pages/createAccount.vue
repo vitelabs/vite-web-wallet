@@ -51,7 +51,7 @@ export default {
     },
     mounted() {
         this.focusName();
-        this.$onEnterKey(() => {
+        this.$onKeyDown(13, () => {
             this.valid();
         });
     },

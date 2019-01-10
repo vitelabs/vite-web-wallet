@@ -98,7 +98,7 @@ export default {
         clearEditName() {
             this.isShowNameInput = false;
             this.editName = '';
-            this.$offEnterKey();
+            this.$offKeyDown();
         },
         startRename() {
             if (this.isShowNameInput) {
@@ -106,7 +106,7 @@ export default {
             }
             this.isShowNameInput = true;
             Vue.nextTick(() => {
-                this.$onEnterKey(() => {
+                this.$onKeyDown(13, () => {
                     this.rename();
                 });
                 this.$refs.nameInput.focus();
