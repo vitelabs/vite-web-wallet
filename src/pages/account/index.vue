@@ -1,7 +1,7 @@
 /**  vite-wallet login */
 
 <template>
-    <div class="account-wrapper __wrapper">
+    <div class="account-wrapper __wrapper _p">
         <div class="head">
             <sync-block class="sync-block"></sync-block>
             <go-net-btn class="net-btn"></go-net-btn>
@@ -69,14 +69,12 @@ export default {
 </script>
 
 <style lang="scss" rel="stylesheet/scss">
-.page-content .__wrapper.account-wrapper {
+.page-content .__wrapper.account-wrapper._p {
     padding-top: 0;
 }
 .account-wrapper {
     position: relative;
     box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
     overflow: auto;
     height: 100%;
     .head {
@@ -99,7 +97,6 @@ export default {
 .token-list {
     display: flex;
     flex-wrap: wrap;
-    min-height: 250px;
 }
 
 @media only screen and (max-width: 850px) {
@@ -108,7 +105,7 @@ export default {
         margin-top: 0px;
         margin-bottom: 20px;
     }
-    .page-content .account-wrapper.__wrapper {
+    .page-content .account-wrapper.__wrapper._p {
         padding-top: 40px;
     }
 }
