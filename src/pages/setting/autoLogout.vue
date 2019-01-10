@@ -5,7 +5,7 @@
         <div class="list">
             <div v-for="(time, index) in timeList" :key="index"
                  class="item" @click="setTime(time)">
-                {{ time }}
+                {{ $t(`setting.timeList.${time}`) }}
             </div>
         </div>
     </div>

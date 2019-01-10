@@ -132,7 +132,15 @@
         "open": "Vite Github",
         "addAddr": "Add Address",
         "addrList": "Addresses of Accounts",
-        "setDefault": "Select Default Address"
+        "setDefault": "Select Default Address",
+        "autoLogout": "自动退出登录时间",
+        "timeList": {
+            "5": "5分钟",
+            "10": "10分钟",
+            "30": "30分钟",
+            "60": "1小时",
+            "720": "12小时"
+        }
     },
     "create": {
         "input": "Please input password",
