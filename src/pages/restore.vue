@@ -21,7 +21,7 @@ export default {
         mnemonic
     },
     mounted() {
-        this.$onEnterKey(() => {
+        this.$onKeyDown(13, () => {
             this.validMnemonic();
         });
     },

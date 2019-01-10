@@ -30,22 +30,23 @@ export default {
                 });
             },
             destroyed: function () {
-                this.$offEnterKey();
+                this.$offKeyDown();
             }
         });
 
-        Vue.prototype.$onEnterKey = function(cb) {
+        Vue.prototype.$onKeyDown = function(_code, cb) {
             window.document.onkeydown = e => {
                 e = e || window.event;
                 let code = e.keyCode || e.which;
-                if (!code || code !== 13) {
+                console.log(code);
+                if (!code || code !== _code) {
                     return;
                 }
                 cb && cb();
             };
         };
 
-        Vue.prototype.$offEnterKey = function() {
+        Vue.prototype.$offKeyDown = function() {
             window.document.onkeydown = null;
         };
 

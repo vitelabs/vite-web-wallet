@@ -62,7 +62,7 @@ export default {
         accountList, loading
     },
     mounted() {
-        this.$onEnterKey(() => {
+        this.$onKeyDown(13, () => {
             this.login();
         });
         this.activeAccount = this.getLoginAcc();
@@ -70,7 +70,7 @@ export default {
     destroyed() {
         this.password = '';
         this.isLoading = false;
-        this.$offEnterKey();
+        this.$offKeyDown();
     },
     data() {
         return {

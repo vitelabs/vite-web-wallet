@@ -92,7 +92,7 @@ export default {
         }
     },
     mounted() {
-        this.$onEnterKey(() => {
+        this.$onKeyDown(13, () => {
             this.transfer();
         });
     },
