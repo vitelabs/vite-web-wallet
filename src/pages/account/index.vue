@@ -69,6 +69,9 @@ export default {
 </script>
 
 <style lang="scss" rel="stylesheet/scss">
+.page-content .__wrapper.account-wrapper {
+    padding-top: 0;
+}
 .account-wrapper {
     position: relative;
     box-sizing: border-box;
@@ -76,8 +79,6 @@ export default {
     flex-direction: column;
     overflow: auto;
     height: 100%;
-    padding-top: 0!important;
-    padding-bottom: 0!important;
     .head {
         position: relative;
         text-align: center;
@@ -98,6 +99,7 @@ export default {
 .token-list {
     display: flex;
     flex-wrap: wrap;
+    min-height: 250px;
 }
 
 @media only screen and (max-width: 850px) {

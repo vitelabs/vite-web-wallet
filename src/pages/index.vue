@@ -29,19 +29,19 @@ export default {
         indexLayout, pageLayout, update, firstNotice
     },
     mounted() {
+        // Listen to change layout
         this.changeLayout(this.$route.name);
-
         this.$router.afterEach((to)=>{
             this.changeLayout(to.name);
             this.active = to.name;
         });
 
+        // Listen login status to loopBalance
         this.$wallet.onLogin(() => {
-            this.login();
+            this.startLoopBalance();
         });
-
         this.$wallet.onLogout(() => {
-            this.logout();
+            this.stopLoopBalance();
         });
     },
     data() {
@@ -51,18 +51,6 @@ export default {
         };
     },
     methods: {
-        login() {
-            this.startLoopBalance();
-        },
-        logout() {
-            this.stopLoopBalance();
-            this.$store.commit('commitClearBalance');
-            this.$store.commit('commitClearTransList');
-            this.$store.commit('commitClearPledge');
-            this.$router.push({
-                name: 'exchange'
-            });
-        },
         changeLayout(to) {
             let toHome = routeConfig.indexLayoutRoutes.indexOf(to) === -1;
             this.layoutType = toHome ? 'home' : 'start';
@@ -79,6 +67,9 @@ export default {
         stopLoopBalance() {
             balanceInfoInst && balanceInfoInst.stop();
             balanceInfoInst = null;
+            this.$store.commit('commitClearBalance');
+            this.$store.commit('commitClearTransList');
+            this.$store.commit('commitClearPledge');
         }
     }
 };
@@ -92,11 +83,5 @@ export default {
     right: 0;
     bottom: 0;
     overflow: auto;
-    min-height: 720px;
-}
-@media only screen and (max-width: 1000px) {
-    .app-wrapper {
-        min-height: auto;
-    }
 }
 </style>
