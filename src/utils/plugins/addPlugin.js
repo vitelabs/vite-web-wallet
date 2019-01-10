@@ -22,15 +22,13 @@ export default {
                 this.$router && this.$router.beforeEach((to, from, next) => {
                     if (loginRoutes.indexOf(to.name) >= 0 && !this.$wallet.isLogin) {
                         (to.name !== 'login') && this.$wallet.setLastPage(to.name);
-                        this.$router.push({
+                        this.$router.replace({
                             name: 'start'
                         });
+                        return;
                     }
                     next();
                 });
-            },
-            destroyed: function () {
-                this.$offKeyDown();
             }
         });
 
@@ -38,7 +36,6 @@ export default {
             window.document.onkeydown = e => {
                 e = e || window.event;
                 let code = e.keyCode || e.which;
-                console.log(code);
                 if (!code || code !== _code) {
                     return;
                 }
