@@ -20,10 +20,9 @@ import update from 'components/update.vue';
 import firstNotice from 'components/firstNotice.vue';
 import { timer } from 'utils/asyncFlow';
 import loopTime from 'config/loopTime';
-import routeConfig from 'routes';
+import routeConfig from 'router/routes';
 
 let balanceInfoInst = null;
-const loginRoutes = routeConfig.loginRoutes;
 
 export default {
     components: {
@@ -31,17 +30,6 @@ export default {
     },
     mounted() {
         this.changeLayout(this.$route.name);
-
-        this.$router.beforeEach((to, from, next)=>{
-            console.log(to.name);
-            if (loginRoutes.indexOf(to.name) >= 0 && !this.$wallet.isLogin) {
-                (to.name !== 'login') && this.$wallet.setLastPage(to.name);
-                this.$router.push({
-                    name: 'start'
-                });
-            }
-            next();
-        });
 
         this.$router.afterEach((to)=>{
             this.changeLayout(to.name);
