@@ -3,7 +3,7 @@
         <div class="title">{{ $t('quota.list.title') }}</div>
         <div class="total">{{ $t('quota.list.total', { amount: totalAmount }) }}</div>
         <div class="list">
-            <tabel-list :headList="[{
+            <table-list :headList="[{
                 class: 'addr __pointer',
                 text: $t('quota.beneficialAddr'),
                 cell: 'addr'
@@ -26,7 +26,7 @@
             }]" :contentList="pledgeList" :clickCell="clickCell">
                 <pagination class="__tb_pagination" :currentPage="currentPage + 1" 
                             :totalPage="totalPage" :toPage="toPage"></pagination>
-            </tabel-list>
+            </table-list>
         </div>
     </div>
 </template>
@@ -34,7 +34,7 @@
 <script>
 import userImg from 'assets/imgs/mine.svg';
 import pagination from 'components/pagination.vue';
-import tabelList from 'components/tabelList.vue';
+import tableList from 'components/tableList.vue';
 import date from 'utils/date.js';
 import {timer} from 'utils/asyncFlow';
 import BigNumber from 'utils/bigNumber';
@@ -45,7 +45,7 @@ let pledgeListInst;
 
 export default {
     components: {
-        pagination, tabelList
+        pagination, tableList
     },
     props: {
         tokenInfo: {
@@ -235,7 +235,7 @@ export default {
 </style>
 
 <style lang="scss">
-.list-wrapper .list .tabel-list {
+.list-wrapper .list .table-list {
     min-width: 1260px;
 }
 .beneficial-addr {

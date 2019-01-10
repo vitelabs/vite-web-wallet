@@ -4,7 +4,7 @@
     <div class="trans-list-wrapper __wrapper">
         <sec-title class="title" :isShowHelp="false"></sec-title>
         <div class="trans-list-content">
-            <tabel-list class="big-trans" :headList="[{
+            <table-list class="big-trans" :headList="[{
                 class: 'tType',
                 text: $t('transList.tType.title'),
                 cell: 'type'
@@ -31,9 +31,9 @@
             }]" :contentList="transList" :clickRow="goDetail">
                 <pagination class="__tb_pagination" :currentPage="currentPage + 1" 
                             :totalPage="totalPage" :toPage="toPage"></pagination>
-            </tabel-list>
+            </table-list>
 
-            <tabel-list class="small-trans" :headList="[{
+            <table-list class="small-trans" :headList="[{
                 class: 'tType',
                 text: $t('transList.tType.symbol'),
                 cell: 'smallType'
@@ -48,7 +48,7 @@
             }]" :contentList="transList" :clickRow="goDetail">
                 <pagination class="__tb_pagination" :currentPage="currentPage + 1" 
                             :totalPage="totalPage" :toPage="toPage"></pagination>
-            </tabel-list>
+            </table-list>
         </div>
     </div>
 </template>
@@ -62,7 +62,7 @@ import txTransImg from 'assets/imgs/txTrans.svg';
 import txVoteImg from 'assets/imgs/txVote.svg';
 
 import pagination from 'components/pagination.vue';
-import tabelList from 'components/tabelList.vue';
+import tableList from 'components/tableList.vue';
 import secTitle from 'components/secTitle';
 import date from 'utils/date.js';
 import { timer } from 'utils/asyncFlow';
@@ -75,7 +75,7 @@ let txImgs = [txRegImg, txRegImg, txRegImg, txRewardImg, txVoteImg, txVoteImg, t
 
 export default {
     components: {
-        pagination, tabelList, secTitle
+        pagination, tableList, secTitle
     },
     mounted() {
         this.currentPage = this.$store.state.transList.currentPage;

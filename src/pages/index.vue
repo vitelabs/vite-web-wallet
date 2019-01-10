@@ -29,10 +29,8 @@ export default {
         indexLayout, pageLayout, update, firstNotice
     },
     mounted() {
-        // Listen to change layout
         this.changeLayout(this.$route.name);
         this.$router.afterEach((to)=>{
-            this.changeLayout(to.name);
             this.active = to.name;
         });
 
@@ -50,9 +48,15 @@ export default {
             active: this.$route.name
         };
     },
+    watch: {
+        active: function() {
+            this.changeLayout();
+            this.$offKeyDown();
+        }
+    },
     methods: {
-        changeLayout(to) {
-            let toHome = routeConfig.indexLayoutRoutes.indexOf(to) === -1;
+        changeLayout() {
+            let toHome = routeConfig.indexLayoutRoutes.indexOf(this.active) === -1;
             this.layoutType = toHome ? 'home' : 'start';
         },
 
