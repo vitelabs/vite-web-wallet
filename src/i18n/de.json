@@ -1,5 +1,5 @@
 {
-  "lang": "EN",
+  "lang": "DE",
   "start": "Start",
   "logout": "Logout",
   "errCode": {
@@ -24,12 +24,12 @@
     "7": "Withdrawal of Staking Quota",
     "8": "Token Issuance",
     "9": "Withdrawal of Staking Token",
-    "10": "Transfer",
-    "11": "Transfer",
-    "12": "Transfer",
-    "13": "Transfer",
-    "14": "Transfer",
-    "15": "Transfer"
+    "10": "Transaktion",
+    "11": "Transaktion",
+    "12": "Transaktion",
+    "13": "Transaktion",
+    "14": "Transaktion",
+    "15": "Transaktion"
   },
   "firstNotice": {
     "title": "Read Before Use",
@@ -45,7 +45,7 @@
     "v": "Current version: {version}"
   },
   "mnemonic": {
-    "title": "Mnemonic",
+    "title": "Mnemonik",
     "restore": "Restore Account by Seed Phrase",
     "record": "Backup Seed Phrase",
     "prompt": "Mnemonic seed phrase is used to restore your wallet, better write it down and keep it in a safe place where only you can access, otherwise your assets will be at tremendous risks.",
@@ -57,7 +57,7 @@
     "change": "Switch to {len} Mnemonic Words"
   },
   "setting": {
-    "title": "Settings",
+    "title": "Einstellungen",
     "unlock": "Unlock Secure Information",
     "lang": "Language",
     "block": "Current Height",
@@ -86,18 +86,18 @@
     "blockHeight": "Snapshot Block Height"
   },
   "accList": {
-    "balance": "Balance",
-    "addAcc": "Add Address",
-    "addr": "Addresses of Accounts",
-    "addrList": "Addresses",
-    "default": "Select Default User"
+    "balance": "Kontostand",
+    "addAcc": "Adresse hinzufügen",
+    "addr": "Adressen der Konten",
+    "addrList": "Adressen",
+    "default": "Standardbenutzer auswählen"
   },
   "create": {
-    "accName": "Account name",
-    "input": "Please input password",
-    "again": "Please input password again",
-    "choose": "Choose account",
-    "finish": "Done",
+    "accName": "Kontenname",
+    "input": "Bitte Passwort eingeben",
+    "again": "Bitte Passwort erneut eingeben",
+    "choose": "Konto wählen",
+    "finish": "Fertig",
     "hint": {
       "nameInput": "Please input account name",
       "nameLong": "Account name cannot exceed 32 characters!",
@@ -120,10 +120,10 @@
     "transfer": "Transfer",
     "getTestToken": "Get Test Tokens",
     "transDetail": "More Transaction Details",
-    "name": "Account Name",
-    "address": "My Address",
-    "balance": "Balance",
-    "fundFloat": "Unreceived",
+    "name": "Kontenname",
+    "address": "Meine Adresse",
+    "balance": "Kontostand",
+    "fundFloat": "Ausständig",
     "pend": "Pending",
     "copy": "Copy Address",
     "outAddress": "My Address",
