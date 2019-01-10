@@ -1,23 +1,27 @@
 <template>
     <div class="sidebar-wrapper">
-        <div @mouseenter="overLogo"  @mouseleave="leaveLogo" class="logo __pointer">
-            <img :src="viteLogo" />
-            <test-notice class="notice" :class="{'hide': !isShowNotice}"></test-notice>
-        </div>
+        <div class="content">
+            <div @mouseenter="overLogo"  @mouseleave="leaveLogo" class="logo __pointer">
+                <img :src="viteLogo" />
+                <test-notice class="notice" :class="{'hide': !isShowNotice}"></test-notice>
+            </div>
 
-        <div v-for="(name, index) in menuTops" :key="index"
-             class="__pointer icon" :class="{ 'active': active.indexOf(name) >= 0 }" 
-             @click="go(name)">
-            <img v-show="active.indexOf(name) < 0" :src="icon[name]" />
-            <img v-show="active.indexOf(name) >= 0" :src="icon[`${name}Active`]"  />
-        </div>
+            <div class="_top">
+                <div v-for="(name, index) in menuTops" :key="index"
+                     class="__pointer icon" :class="{ 'active': active.indexOf(name) >= 0 }" 
+                     @click="go(name)">
+                    <img v-show="active.indexOf(name) < 0" :src="icon[name]" />
+                    <img v-show="active.indexOf(name) >= 0" :src="icon[`${name}Active`]"  />
+                </div>
+            </div>
 
-        <div class="_bottom">
-            <div v-for="(name, index) in menuBottoms" :key="index" 
-                 class="icon __pointer" :class="{ 'active': active === name }" 
-                 @click="go(name)" @mouseenter="enterLogout(name)" @mouseleave="leaveLogout(name)">
-                <img v-show="active !== name && (name !== 'logout' || !logoutHover)" :src="icon[name]" />
-                <img v-show="active === name || (name === 'logout' && logoutHover) " :src="icon[`${name}Active`]"  />
+            <div class="_bottom">
+                <div v-for="(name, index) in menuBottoms" :key="index" 
+                     class="icon __pointer" :class="{ 'active': active === name }" 
+                     @click="go(name)" @mouseenter="enterLogout(name)" @mouseleave="leaveLogout(name)">
+                    <img v-show="active !== name && (name !== 'logout' || !logoutHover)" :src="icon[name]" />
+                    <img v-show="active === name || (name === 'logout' && logoutHover) " :src="icon[`${name}Active`]"  />
+                </div>
             </div>
         </div>
     </div>
@@ -136,12 +140,17 @@ export default {
 
 <style lang="scss" scoped>
 .sidebar-wrapper {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 100%;
+    height: 100%;
+    overflow: auto;
     background: #fff;
     box-shadow: 0 2px 40px 1px rgba(221,229,252,0.50);
+    .content {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 100%;
+    }
     .logo {
         display: inline-block;
         margin-top: 24px;
@@ -187,10 +196,13 @@ export default {
             background-image: linear-gradient(-90deg, #1B3BD8 100%, #176CE0 100%, #0B92E7 100%, #0BB6EB 100%, #00E0F2 100%);
         }
     }
+    ._top {
+        flex: 1;
+    }
     ._bottom {
-        position: absolute;
-        bottom: 50px;
         width: 100%;
+        padding-top: 30px;
+        padding-bottom: 50px;
         .icon {
             margin-top: 0;
             margin-bottom: 30px;
