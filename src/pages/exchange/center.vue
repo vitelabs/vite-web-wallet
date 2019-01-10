@@ -1,9 +1,19 @@
 <template>
-    <div :class="{'full-screen': isFullScreen}" @click="fullScreen">center</div>
+    <div :class="{'full-screen': isFullScreen}">
+        <sec-title :isShowHelp="false"></sec-title>
+        <div @click="fullScreen" >fullScreen</div>
+        <change-lang class="change-lang __pointer"></change-lang>
+    </div>
 </template>
 
 <script>
+import secTitle from 'components/secTitle';
+import changeLang from 'components/changeLang';
+
 export default {
+    components: {
+        secTitle, changeLang
+    },
     created() {
         // ....
         this.$onKeyDown(27, () => {
@@ -32,5 +42,9 @@ export default {
     right: 0;
     background: #fff;
     z-index: 900;
+}
+.change-lang {
+    background: #000;
+    z-index: 1;
 }
 </style>

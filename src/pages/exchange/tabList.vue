@@ -1,9 +1,9 @@
 <template>
-    <ul>
+    <ul class="tab-list-wrapper">
         <li v-for="(tab, index) in tabList" :key="index" 
             class="tab" :class="{ 'active': active === tab }"
             @click="goTab(tab)" >
-            {{ tab }}
+            {{ $t(`${tab}.title`) }}
         </li>
     </ul>
 </template>
@@ -36,7 +36,19 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.tab-list-wrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
 .tab {
+    min-width: 100px;
+    background: #000;
+    color: #fff;
+    margin-right: 20px;
+    padding: 10px;
+    margin-top: 10px;
+    text-align: center;
     &.active {
         color: blue;
     }
