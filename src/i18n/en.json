@@ -394,5 +394,14 @@
     },
     "exchange": {
         "title": "交易所"
+    },
+    "exchangeAssets": {
+        "title": "资产管理"
+    },
+    "exchangeOpenOrders": {
+        "title": "当前委托"
+    },
+    "exchangeOrderHistory": {
+        "title": "历史委托"
     }
 }

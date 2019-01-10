@@ -145,7 +145,6 @@ export default {
     background: #fff;
     box-shadow: 0 2px 40px 1px rgba(221,229,252,0.50);
     .content {
-        position: relative;
         display: flex;
         flex-direction: column;
         width: 100%;
