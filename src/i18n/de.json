@@ -59,11 +59,11 @@
   "setting": {
     "title": "Einstellungen",
     "unlock": "Unlock Secure Information",
-    "lang": "Language",
-    "block": "Current Height",
+    "lang": "Sprache",
+    "block": "Aktuelle Block-Höhe",
     "version": "Version",
-    "service": "Customer Service",
-    "site": "Official Website of Vite",
+    "service": "Kundensupport",
+    "site": "Offizielle Vite-Website",
     "sys": "System Portal",
     "open": "Vite Github"
   },
@@ -75,12 +75,12 @@
       "imported": "Importieren",
       "backup": "Sicherung erstellen",
       "setting": "Setting Account",
-      "reset": "Reset Your Account",
+      "reset": "Konto zurücksetzen",
       "login": "Einloggen"
     },
     "sync": "Wallet initializing, transactions cannot be made temporarily.",
     "noNet": "No network detected",
-    "noP2P": "Unable to connect to other nodes",
+    "noP2P": "Konnte keine Verbindung mit anderen Nodes herstellen",
     "firstDone": "Init Done",
     "firstDoing": "Initializing",
     "blockHeight": "Snapshot Block Height"
