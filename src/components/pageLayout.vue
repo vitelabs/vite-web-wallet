@@ -81,10 +81,7 @@ export default {
                 return;
             }
 
-            if (this.active === name) {
-                return;
-            }
-            this.$router.push({ name });
+            (this.active !== name) && this.$router.push({ name });
         },
 
         clearAutoLogout() {

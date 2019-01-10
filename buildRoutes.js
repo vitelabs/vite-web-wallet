@@ -1,7 +1,7 @@
 var fs = require('fs');
 var path = require('path');
 
-var routesPath = path.join(__dirname, 'routes.js');
+var routesPath = path.join(__dirname, '/src/router/routes.js');
 
 var result = fs.existsSync(routesPath);
 // Not exists
@@ -134,10 +134,6 @@ function pushRoute(fPath, tmpPath, name, parent) {
         _route.path = `/${pageComName}`;
         _route.component = pageComName;
     });
-
-    console.log(parent);
-    console.log(pageComName);
-    console.log('================');
 
     // children
     if (parent !== pageComName) {

@@ -90,11 +90,11 @@ module.exports = {
             components: path.join(SRC_PATH, '/components'),
             pages: path.join(SRC_PATH, '/pages'),
             assets: path.join(SRC_PATH, '/assets'),
-            routes: path.join(SRC_PATH, '../routes'),
+            router: path.join(SRC_PATH, '/router'),
             utils: path.join(SRC_PATH, '/utils'),
             i18n: path.join(SRC_PATH, '/i18n'),
-            config:path.join(SRC_PATH, '../config'),
-            mock:path.join(SRC_PATH, '../mock')
+            config: path.join(SRC_PATH, '../config'),
+            mock: path.join(SRC_PATH, '../mock')
         },
         extensions: ['.js', '.scss', '.vue', '.json']
     }
