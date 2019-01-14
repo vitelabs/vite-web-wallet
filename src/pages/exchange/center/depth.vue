@@ -17,7 +17,10 @@
 
         <depth-table v-show="isShowBuy" class="depth-table" :depthData="depthBuy" :clickRow="setBuy"></depth-table>
 
-        <div class="price">dsdsd</div>
+        <div class="price">
+            <span>{{ activeTrans.upDown }}</span>
+            <span>{{ activeTrans.price }}</span>
+        </div>
         
         <depth-table v-show="isShowSell" class="depth-table" :depthData="depthSell" :clickRow="setSell"></depth-table>
     </div>
@@ -45,6 +48,9 @@ export default {
         },
         depthSell() {
             return this.$store.state.exchangeDepth.sell;
+        },
+        activeTrans() {
+            return this.$store.state.exchangeTransPairs.activeTrans;
         }
     },
     methods: {
