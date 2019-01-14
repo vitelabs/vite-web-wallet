@@ -3,11 +3,13 @@ const utils = require('web3-utils');
 const Tx = require('ethereumjs-tx');
 const ethProvider = require('web3-providers-http'); // Web3-providers-ws cannot work in IE.
 
+import localStorage from 'utils/localStorage';
 import { bind as gwBind, balance as gwBalance } from 'services/exchangeVite';
 import { timer } from 'utils/asyncFlow';
-import address from './address';
+import { getWalletAddr, getWrongWalletAddr } from './address';
 import { viteContractAbi, viteContractAddr, blackHole, signBinding } from './viteContract';
 
+const DefaultAddr = 'conversionDefaultAddr';
 const balanceTime = 2000;
 let provider = null;
 
@@ -18,9 +20,10 @@ class ethWallet {
         this.utils = utils;
         this.mnemonic = mnemonic;
 
-        this.defaultAddrInx = 0;
-        this.addrs = [];
-        this.addAddr();
+        this.addrNum = 0;   // initing --- 0, only true --- 1, only wrong --- 2
+        this.addrObj = getWalletAddr(this.mnemonic, 0);
+        this.wrongAddrObj = getWrongWalletAddr(this.mnemonic, 0);
+        this.activeAddr = this.addrObj;
 
         provider = provider || new ethProvider(process.env.ethServer);
         this.web3 = new web3Eth(provider);
@@ -44,10 +47,70 @@ class ethWallet {
 
         this.balanceInfoInst = null;
         this.viteBalanceInfoInst = null;
-        this._loopBalance();
+        this.wrongLoop = null;
+    }
+
+    init(cb) {
+        let _l = () => {
+            this._stopWrongLoop();
+            this.wrongLoop = setTimeout(() => {
+                this._loopWrong();
+            }, balanceTime);
+        };
+
+        this._getWrongBalance().then(({
+            viteBalance, ethBalance
+        }) => {
+            this._stopWrongLoop();
+            let haveBalance = +viteBalance || +ethBalance;
+            let lastActiveAddr = localStorage.getItem(DefaultAddr);
+
+            this.addrNum = haveBalance ? 2 : 1;
+            if (haveBalance && lastActiveAddr === this.wrongAddrObj.hexAddr) {
+                this.activeAddr = this.wrongAddrObj;
+                this.tokenList.vite.balance = viteBalance;
+                this.tokenList.eth.balance = ethBalance;
+            }
+            this._loopBalance();
+            cb && cb();
+        }).catch((err) => {
+            console.warn(err);
+            _l();
+        });
+    }
+
+    _stopWrongLoop() {
+        this.wrongLoop && clearTimeout(this.wrongLoop);
+        this.wrongLoop = null;
+    }
+
+    async _getWrongBalance() {
+        let wrongAddr = this.wrongAddrObj.hexAddr;
+
+        let viteBalance = await gwBalance({
+            address: wrongAddr
+        }).then((data) => {
+            return data && data.VITE ? data.VITE.Balance || 0 : 0;
+        });
+
+        let ethBalance = await this.web3.getBalance(wrongAddr);
+        return {
+            viteBalance, ethBalance
+        };
+    }
+
+    changeActiveAddr(addr) {
+        if (this.addrNum < 2 || addr !== this.wrongAddrObj && addr !== this.addrObj) {
+            return;
+        }
+        this.tokenList.vite.balance = 0;
+        this.tokenList.eth.balance = 0;
+        this.activeAddr = addr;
+        localStorage.setItem(DefaultAddr, addr.hexAddr);
     }
 
     destroyed() {
+        this._stopWrongLoop();
         this._stopLoopBalance();
     }
 
@@ -87,44 +150,27 @@ class ethWallet {
     }
 
     getViteBalance() {
-        return gwBalance({
-            address: this.getDefaultAddr()
-        }).then((data) => {
+        let address = this.getDefaultAddr();
+        return gwBalance({ address }).then((data) => {
+            if (address !== this.getDefaultAddr()) {
+                return;
+            }
             this.tokenList.vite.balance = data && data.VITE ? data.VITE.Balance || 0 : 0;
         });
-
-        // return new Promise((res, rej) => {
-        //     let _this = this;
-        //     this.contract.methods.balanceOf(this.getDefaultAddr()).call({
-        //         from: this.getDefaultAddr()
-        //     }, function(error, result) {
-        //         if(!error) {
-        //             _this.tokenList.vite.balance = result;
-        //             res(result);
-        //         } else {
-        //             rej(error);
-        //         }
-        //     });
-        // });
     }
     getEthBalance() {
-        return this.web3.getBalance(this.getDefaultAddr()).then((balance) => {
+        let address = this.getDefaultAddr();
+        return this.web3.getBalance(address).then((balance) => {
+            if (address !== this.getDefaultAddr()) {
+                return;
+            }
             this.tokenList.eth.balance = balance;
             return balance;
         });
     }
 
     getDefaultAddr() {
-        if (!this.addrs || !this.addrs.length) {
-            return null;
-        }
-        return this.addrs[this.defaultAddrInx].hexAddr;
-    }
-    addAddr() {
-        let index = this.addrs.length;
-        let addrObj = address(this.mnemonic, index);
-        this.addrs.push(addrObj);
-        return addrObj.hexAddr;
+        return this.activeAddr.hexAddr;
     }
 
     getTxData(value, toAddr, type) {
@@ -173,7 +219,7 @@ class ethWallet {
     async exchangeVite({
         viteAddr, value, gwei
     }) {
-        let acount = this.addrs[this.defaultAddrInx];
+        let acount = this.activeAddr;
         let ethAddr = acount.hexAddr;
         let privateKey = acount.wallet.privKey;
 
@@ -220,12 +266,13 @@ function addPreZero(num){
 async function getTxHash({
     toAddress, value, data, gwei
 }) {
-    let acount = this.addrs[this.defaultAddrInx];
+    let acount = this.activeAddr;
     let ethAddr = acount.hexAddr;
     let privateKey = acount.wallet.privKey;
 
     let nonce = await this.web3.getTransactionCount(ethAddr, this.web3.defaultBlock.pending);
     let gasPrice = utils.toWei(gwei + '', 'gwei').toString();
+    let gasLimit = process.env.NODE_ENV === 'production' ? 50000 : 99000;
 
     let gasLimit = process.env.NODE_ENV === 'production' ? 50000 : 99000;
     let txData = {
