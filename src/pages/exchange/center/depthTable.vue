@@ -1,10 +1,10 @@
 <template>
     <div class="depth-table-wrapper">
-        <div class="depth-row" @click="clickRow(item)"
+        <div class="__center-tb-row" @click="clickRow(item)"
              v-for="(item, i) in depthData" :key="i">
-            <span class="depth-item">{{ item.pirce }}</span>
-            <span class="depth-item">{{ item.num }}</span>
-            <span class="depth-item">{{ item.pirce * item.num }}</span>
+            <span class="__center-tb-item">{{ item.pirce }}</span>
+            <span class="__center-tb-item">{{ item.num }}</span>
+            <span class="__center-tb-item">{{ item.pirce * item.num }}</span>
         </div>
     </div>
 </template>

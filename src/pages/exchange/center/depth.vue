@@ -8,13 +8,17 @@
                 deep <span>8</span>
             </div>
         </div>
-        <div class="depth-row">
-            <span class="depth-item">all</span>
-            <span class="depth-item">all</span>
-            <span class="depth-item">all</span>
+
+        <div class="__center-tb-row">
+            <span class="__center-tb-item">all</span>
+            <span class="__center-tb-item">all</span>
+            <span class="__center-tb-item">all</span>
         </div>
+
         <depth-table v-show="isShowBuy" class="depth-table" :depthData="depthBuy" :clickRow="setBuy"></depth-table>
+
         <div class="price">dsdsd</div>
+        
         <depth-table v-show="isShowSell" class="depth-table" :depthData="depthSell" :clickRow="setSell"></depth-table>
     </div>
 </template>
