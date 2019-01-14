@@ -33,9 +33,6 @@ export default {
     components: {
         depthTable
     },
-    created() {
-
-    },
     data() {
         return {
             isShowBuy: true,
@@ -49,8 +46,8 @@ export default {
         depthSell() {
             return this.$store.state.exchangeDepth.sell;
         },
-        activeTrans() {
-            return this.$store.state.exchangeTransPairs.activeTrans;
+        isLoading() {
+            return this.$store.state.exchangeDepth.isLoading;
         }
     },
     methods: {

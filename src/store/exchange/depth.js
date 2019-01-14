@@ -30,20 +30,28 @@ const state = {
     },{
         pirce: 10,
         num: 10
-    }]
+    }],
+    isLoading: false
 };
 
-// const mutations = {
-//     commitS(state, pageIndex) {
+const mutations = {
+    exSetDepth(state, depthData) {
+        state.buy = depthData.buy;
+        state.sell = depthData.sell;
+    },
+    exSetDepthLoading(state, isLoading) {
+        state.isLoading = isLoading;
+    }
+};
 
-//     }
-// };
-
-// const actions = {
-//     fetchQ({ commit }, address) {
-
-//     }
-// };
+const actions = {
+    exFetchDepth({ commit, rootState }) {
+        let activeTrans = rootState.exchangeTransPairs.activeTrans;
+        commit('exSetDepthLoading', true);
+        
+        console.log(activeTrans);
+    }
+};
 
 // const getters = {
 //     tota(state) {
@@ -53,7 +61,7 @@ const state = {
 
 export default {
     state,
-    // mutations,
-    // actions,
+    mutations,
+    actions,
     // getters
 };
