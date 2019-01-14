@@ -267,7 +267,6 @@ async function getTxHash({
     let gasPrice = utils.toWei(gwei + '', 'gwei').toString();
     let gasLimit = process.env.NODE_ENV === 'production' ? 50000 : 99000;
 
-    let gasLimit = process.env.NODE_ENV === 'production' ? 50000 : 99000;
     let txData = {
         nonce: utils.toHex(nonce++),
         gasLimit: utils.toHex(gasLimit),
