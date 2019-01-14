@@ -23,7 +23,7 @@
 
 <script>
 import changeLang from 'components/changeLang';
-import center from './center/center';
+import center from './center/center.vue';
 
 export default {
     components: {
