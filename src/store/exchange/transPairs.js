@@ -87,7 +87,7 @@ const mutations = {
         if (i < 0) {
             return;
         }
-        this.activeTrans = transPair;
+        state.activeTrans = transPair;
     }
 };
 
