@@ -265,6 +265,7 @@ async function getTxHash({
 
     let nonce = await this.web3.getTransactionCount(ethAddr, this.web3.defaultBlock.pending);
     let gasPrice = utils.toWei(gwei + '', 'gwei').toString();
+    let gasLimit = process.env.NODE_ENV === 'production' ? 50000 : 99000;
 
     let gasLimit = process.env.NODE_ENV === 'production' ? 50000 : 99000;
     let txData = {
