@@ -20,12 +20,10 @@
     .left {
         width: 20%;
         height: 100%;
-        background: #000;
         float: left;
         .left-top {
             width: 100%;
             height: 50%;
-            background: #444;
         }
         .left-bottom {
             widows: 100%;
