@@ -100,6 +100,7 @@ export default {
 .change-lang {
     background: #000;
     float: right;
+    margin-top: 0;
 }
 .full-btn {
     float: right;
