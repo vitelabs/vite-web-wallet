@@ -82,7 +82,7 @@ const state = {
 };
 
 const mutations = {
-    exchangeActiveTransPair(state, transPair) {
+    exSetActiveTransPair(state, transPair) {
         let i = state.list.indexOf(transPair);
         if (i < 0) {
             return;
@@ -91,11 +91,13 @@ const mutations = {
     }
 };
 
-// const actions = {
-//     fetcsdsdhQ({ commit }, address) {
-
-//     }
-// };
+const actions = {
+    exFetchActiveTransPair({ dispatch, commit }, transPair) {
+        commit('exSetActiveTransPair', transPair);
+        dispatch('exFetchLatestTrans');
+        dispatch('exFetchDepth');
+    }
+};
 
 // const getters = {
 //     totsdsda(state) {
@@ -106,6 +108,6 @@ const mutations = {
 export default {
     state,
     mutations,
-    // actions,
+    actions,
     // getters
 };

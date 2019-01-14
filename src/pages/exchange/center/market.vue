@@ -64,7 +64,7 @@ export default {
             console.log(transPair);
         },
         setActiveTransPair(transPair) {
-            this.$store.commit('exchangeActiveTransPair', transPair);
+            this.$store.dispatch('exFetchActiveTransPair', transPair);
         }
     }
 };

@@ -24,11 +24,13 @@ const state = {
 //     }
 // };
 
-// const actions = {
-//     fetchQ({ commit }, address) {
-
-//     }
-// };
+const actions = {
+    exFetchLatestTrans({ rootState, commit }) {
+        let activeTrans = rootState.exchangeTransPairs.activeTrans;
+        console.log(commit);
+        console.log(activeTrans);
+    }
+};
 
 // const getters = {
 //     tota(state) {
@@ -39,6 +41,6 @@ const state = {
 export default {
     state,
     // mutations,
-    // actions,
+    actions,
     // getters
 };
