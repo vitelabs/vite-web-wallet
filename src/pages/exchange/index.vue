@@ -16,14 +16,14 @@
             <change-lang class="change-lang __pointer"></change-lang>
         </div>
 
-        <center v-if="active === 'exchange'"></center>
+        <center class="center-wrapper" v-if="active === 'exchange'"></center>
         <router-view></router-view>
     </div>
 </template>
 
 <script>
 import changeLang from 'components/changeLang';
-import center from './center';
+import center from './center/center';
 
 export default {
     components: {
