@@ -1,0 +1,8 @@
+.depth-row {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    .depth-item {
+        flex: 1;
+    }
+}

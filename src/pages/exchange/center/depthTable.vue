@@ -1,6 +1,11 @@
 <template>
     <div class="depth-table-wrapper">
-
+        <div class="depth-row" @click="clickRow(item)"
+             v-for="(item, i) in depthData" :key="i">
+            <span class="depth-item">{{ item.pirce }}</span>
+            <span class="depth-item">{{ item.num }}</span>
+            <span class="depth-item">{{ item.pirce * item.num }}</span>
+        </div>
     </div>
 </template>
 
@@ -13,6 +18,10 @@ export default {
             default: () => {
                 return [];
             }
+        },
+        clickRow: {
+            type: Function,
+            default: () => {}
         }
     },
     created() {
@@ -29,5 +38,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import './center.scss';
 
 </style>
