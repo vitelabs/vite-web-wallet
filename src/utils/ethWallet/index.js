@@ -3,11 +3,13 @@ const utils = require('web3-utils');
 const Tx = require('ethereumjs-tx');
 const ethProvider = require('web3-providers-http'); // Web3-providers-ws cannot work in IE.
 
+import localStorage from 'utils/localStorage';
 import { bind as gwBind, balance as gwBalance } from 'services/exchangeVite';
 import { timer } from 'utils/asyncFlow';
 import { getWalletAddr, getWrongWalletAddr } from './address';
 import { viteContractAbi, viteContractAddr, blackHole, signBinding } from './viteContract';
 
+const DefaultAddr = 'conversionDefaultAddr';
 const balanceTime = 2000;
 let provider = null;
 
@@ -61,8 +63,14 @@ class ethWallet {
         }) => {
             this._stopWrongLoop();
             let haveBalance = +viteBalance || +ethBalance;
+            let lastActiveAddr = localStorage.getItem(DefaultAddr);
+
             this.addrNum = haveBalance ? 2 : 1;
-            haveBalance && (this.activeAddr = this.wrongAddrObj);
+            if (haveBalance && lastActiveAddr === this.wrongAddrObj.hexAddr) {
+                this.activeAddr = this.wrongAddrObj;
+                this.tokenList.vite.balance = viteBalance;
+                this.tokenList.eth.balance = ethBalance;
+            }
             this._loopBalance();
             cb && cb();
         }).catch((err) => {
@@ -86,8 +94,6 @@ class ethWallet {
         });
 
         let ethBalance = await this.web3.getBalance(wrongAddr);
-
-        console.log(viteBalance, ethBalance);
         return {
             viteBalance, ethBalance
         };
@@ -100,6 +106,7 @@ class ethWallet {
         this.tokenList.vite.balance = 0;
         this.tokenList.eth.balance = 0;
         this.activeAddr = addr;
+        localStorage.setItem(DefaultAddr, addr.hexAddr);
     }
 
     destroyed() {
@@ -265,6 +272,7 @@ async function getTxHash({
 
     let nonce = await this.web3.getTransactionCount(ethAddr, this.web3.defaultBlock.pending);
     let gasPrice = utils.toWei(gwei + '', 'gwei').toString();
+    let gasLimit = process.env.NODE_ENV === 'production' ? 50000 : 99000;
 
     let gasLimit = process.env.NODE_ENV === 'production' ? 50000 : 99000;
     let txData = {
