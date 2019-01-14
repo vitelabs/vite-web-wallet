@@ -56,14 +56,13 @@ export default {
         }
         .center-bottom {
             width: 100%;
-            height: 500px;
+            height: 40%;
             background: #823;
         }
     }
     .right {
         width: 20%;
         height: 100%;
-        background: #93a;
         float: right;
     }
 }

@@ -1,8 +1,21 @@
 <template>
     <div class="depth-wrapper">
-        <depth-table :depthData="depthBuy"></depth-table>
-        <div class="price"></div>
-        <depth-table :depthData="depthSell"></depth-table>
+        <div class="depth-head">
+            <span @click="showTable(true, true)">all</span>
+            <span @click="showTable(false, true)">sell</span>
+            <span @click="showTable(true, false)">buy</span>
+            <div>
+                deep <span>8</span>
+            </div>
+        </div>
+        <div class="depth-row">
+            <span class="depth-item">all</span>
+            <span class="depth-item">all</span>
+            <span class="depth-item">all</span>
+        </div>
+        <depth-table v-show="isShowBuy" class="depth-table" :depthData="depthBuy" :clickRow="setBuy"></depth-table>
+        <div class="price">dsdsd</div>
+        <depth-table v-show="isShowSell" class="depth-table" :depthData="depthSell" :clickRow="setSell"></depth-table>
     </div>
 </template>
 
@@ -18,6 +31,8 @@ export default {
     },
     data() {
         return {
+            isShowBuy: true,
+            isShowSell: true
         };
     },
     computed: {
@@ -29,11 +44,33 @@ export default {
         }
     },
     methods: {
-
+        setBuy(data) {
+            console.log(data);
+        },
+        setSell(data) {
+            console.log(data);
+        },
+        showTable(isShowBuy, isShowSell) {
+            this.isShowBuy = isShowBuy;
+            this.isShowSell = isShowSell;
+        }
     }
 };
 </script>
 
 <style lang="scss" scoped>
+@import './center.scss';
 
+.depth-wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.price {
+    height: 50px;
+}
+.depth-table {
+    flex: 1;
+}
 </style>
