@@ -29,7 +29,7 @@
         <div v-for="(transPair, i) in transPairs" :key="i" 
              class="__center-tb-row" @click="setActiveTransPair(transPair)">
             <span class="__center-tb-item">
-                <span class="icon" @click="setFavorite(transPair)">selected</span>{{ transPair.market }}
+                <span class="icon" @click="setFavorite(transPair)">s</span>{{ transPair.market }}
             </span>
             <span class="__center-tb-item">{{ transPair.price }}</span>
             <span class="__center-tb-item">{{ transPair.upDown }}</span>
