@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="title">latest trans</div>
+        <div class="__center-title">{{ $t('exchange.latestTrans.title') }}</div>
         <div class="__center-tb-row">
             <span class="__center-tb-item">price</span>
             <span class="__center-tb-item">amount</span>

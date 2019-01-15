@@ -4,6 +4,10 @@ $down-font-color: rgba(0,122,255,1);
 $up-font-color: rgba(229,73,77,1);
 
 .__center-title {
+    height: 28px;
+    line-height: 28px;
+    padding: 0 6px;
+    border-bottom: 1px solid rgba(212,222,231,1);
     font-size: 14px;
     font-family: $font-bold, arial, sans-serif;
     font-weight: 600;

@@ -395,6 +395,9 @@
     },
     "exchange": {
         "title": "交易中心",
+        "latestTrans": {
+            "title": "最新交易"
+        },
         "limitPrice": {
             "title": "限价",
             "fee": "手续费",
