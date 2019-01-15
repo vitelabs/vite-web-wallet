@@ -3,6 +3,7 @@
         <depth slot="r"></depth>
         <market slot="lb1"></market>
         <latest-trans slot="lb2"></latest-trans>
+        <limit-price slot="lb4"></limit-price>
     </layout>
 </template>
 
@@ -11,10 +12,11 @@ import layout from './layout';
 import depth from './depth';
 import market from './market';
 import latestTrans from './latestTrans';
+import limitPrice from './limitPrice';
 
 export default {
     components: {
-        layout, depth, market, latestTrans
+        layout, depth, market, latestTrans, limitPrice
     },
     created() {
         // ....

@@ -2,6 +2,7 @@
     "lang": "中文",
     "start": "开始",
     "login": "登录账户",
+    "register": "注册",
     "createAcc": "新建账户",
     "settingAcc": "设置账户",
     "resetAcc": "重新设置账号",
@@ -393,7 +394,12 @@
         }
     },
     "exchange": {
-        "title": "交易中心"
+        "title": "交易中心",
+        "limitPrice": {
+            "title": "限价",
+            "fee": "手续费",
+            "text": "此页面为交易的预览，所有信息均为实时数据，请登录后查看??????"
+        }
     },
     "exchangeAssets": {
         "title": "资产管理"

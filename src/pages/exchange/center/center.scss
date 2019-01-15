@@ -1,3 +1,15 @@
+@import "~assets/scss/vars.scss";
+
+$down-font-color: rgba(0,122,255,1);
+$up-font-color: rgba(229,73,77,1);
+
+.__center-title {
+    font-size: 14px;
+    font-family: $font-bold, arial, sans-serif;
+    font-weight: 600;
+    color: rgba(36,39,43,1);
+}
+
 .__center-tb-row {
     width: 100%;
     display: flex;
