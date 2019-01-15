@@ -5,7 +5,7 @@
     }">
         <div class="header">
             <img class="header-logo __pointer" :src="logo" />
-            <change-lang class="change-lang __pointer"></change-lang>
+            <change-lang class="start change-lang __pointer"></change-lang>
         </div>
         <div class="confirm-wrapper">
             <div class="confirm"> <slot></slot> </div>

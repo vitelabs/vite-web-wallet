@@ -1,0 +1,54 @@
+
+@import "~assets/scss/vars.scss";
+
+.exchange.change-lang-wrapper {
+    position: relative;
+    .lang {
+        font-size: 14px;
+        font-family: $font-bold, arial, sans-serif;
+        color: rgba(94,104,117,1);
+        height: 100%;
+        &:after {
+            content: '';
+            display: inline-block;
+            width: 10px;
+            height: 6px;
+            margin-left: 8px;
+            margin-bottom: 2px;
+            background: url('~assets/imgs/langArrow.svg');
+            background-size: 100% 100%;
+
+        }
+        &.up {
+            &:after {
+                transform: rotate(180deg);
+            }
+        }
+    }
+    .lang-list {
+        position: absolute;
+        right: 0px;
+        min-width: 80px;
+        margin-top: 4px;
+        background: #FFFFFF;
+        border: 1px solid #E5EDF3;
+        border-top: 0;
+        box-shadow: 0 6px 36px 0 rgba(176,192,237,0.04);
+        font-family: $font-normal, arial, sans-serif;
+        font-size: 14px;
+        color: #5E6875;
+        letter-spacing: 0;
+        line-height: 16px;
+        li {
+            box-sizing: border-box;
+            width: 100%;
+            padding: 0 16px;
+            text-align: center;
+            height: 36px;
+            line-height: 36px;
+            &:hover {
+                background: rgba(75,116,255,0.10);
+            }
+        }
+    }
+}

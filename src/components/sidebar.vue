@@ -19,8 +19,8 @@
                 <div v-for="(name, index) in menuBottoms" :key="index" 
                      class="icon __pointer" :class="{ 'active': active === name }" 
                      @click="go(name)" @mouseenter="enterLogout(name)" @mouseleave="leaveLogout(name)">
-                    <img v-show="active !== name && (name !== 'logout' || !logoutHover)" :src="icon[name]" />
-                    <img v-show="active === name || (name === 'logout' && logoutHover) " :src="icon[`${name}Active`]"  />
+                    <img v-show="active !== name && (name !== iconHover)" :src="icon[name]" />
+                    <img v-show="active === name || (name === iconHover) " :src="icon[`${name}Active`]"  />
                 </div>
             </div>
         </div>
@@ -39,8 +39,8 @@ import setting from 'assets/imgs/settings_default.svg';
 import settingActive from 'assets/imgs/settings_pressed.svg';
 import logout from 'assets/imgs/logout_default.svg';
 import logoutActive from 'assets/imgs/logout_pressed.svg';
-import login from 'assets/imgs/logout_default.svg';
-import loginActive from 'assets/imgs/logout_pressed.svg';
+import login from 'assets/imgs/login_default.svg';
+import loginActive from 'assets/imgs/login_pressed.svg';
 import quota from 'assets/imgs/quota_default.svg';
 import quotaActive from 'assets/imgs/quota_pressed.svg';
 import SBP from 'assets/imgs/SBP_default.svg';
@@ -49,8 +49,8 @@ import vote from 'assets/imgs/vote_default.svg';
 import voteActive from 'assets/imgs/vote_active.svg';
 import conversion from 'assets/imgs/conversion_default.svg';
 import conversionActive from 'assets/imgs/conversion_pressed.svg';
-import exchange from 'assets/imgs/conversion_default.svg';
-import exchangeActive from 'assets/imgs/conversion_pressed.svg';
+import exchange from 'assets/imgs/exchange_default.svg';
+import exchangeActive from 'assets/imgs/exchange_pressed.svg';
 
 export default {
     components: {
@@ -75,7 +75,7 @@ export default {
     data() {
         return {
             isShowNotice: false,
-            logoutHover: false,
+            iconHover: false,
             viteLogo,
             icon: {
                 account,
@@ -123,16 +123,16 @@ export default {
         },
 
         enterLogout(name) {
-            if (name !== 'logout') {
+            if (name !== 'logout' && name !== 'login') {
                 return;
             }
-            this.logoutHover = true;
+            this.iconHover = name;
         },
         leaveLogout(name) {
-            if (name !== 'logout') {
+            if (name !== 'logout' && name !== 'login') {
                 return;
             }
-            this.logoutHover = false;
+            this.iconHover = '';
         }
     }
 };
@@ -154,7 +154,7 @@ export default {
         display: inline-block;
         margin-top: 24px;
         width: 100%;
-        height: 50px;
+        height: 46px;
         img {
             width: 100%;
             height: 100%;
@@ -179,8 +179,8 @@ export default {
         height: 40px;
         margin-top: 30px;
         img {
-            width: 24px;
-            height: 24px;
+            width: 22px;
+            height: 22px;
         }
         &.active:before {
             content: '';
@@ -200,8 +200,7 @@ export default {
     }
     ._bottom {
         width: 100%;
-        padding-top: 30px;
-        padding-bottom: 50px;
+        padding: 30px 0;
         .icon {
             margin-top: 0;
             margin-bottom: 30px;
