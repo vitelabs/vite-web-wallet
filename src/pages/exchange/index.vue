@@ -64,7 +64,6 @@ export default {
     height: 100%;
     .router-wrapper {
         flex: 1;
-        // margin: 10px;
         overflow: auto;
     }
 }
@@ -76,7 +75,6 @@ export default {
     line-height: 43px;
     margin: 0 10px;
     border-bottom: 1px solid rgba(198, 203, 212, 0.3);
-
     .change-lang {
         float: right;
         margin-top: 0;
@@ -86,7 +84,7 @@ export default {
 .tab-list-wrapper {
     display: inline-block;
     font-size:14px;
-    font-family: $font-bold;
+    font-family: $font-bold, arial, sans-serif;
     font-weight: 600;
     color: rgba(94, 104, 117, 1);
     .tab {
