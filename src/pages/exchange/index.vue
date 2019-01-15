@@ -1,7 +1,7 @@
 /**  vite-wallet name-exchange-index */
 
 <template>
-    <div :class="{'full-screen': isFullScreen}" class="__wrapper">
+    <div class="exchange-center-wrapper">
         <div class="head">
             <ul class="tab-list-wrapper">
                 <li v-for="(tab, index) in tabList" :key="index" 
@@ -10,14 +10,14 @@
                     {{ $t(`${tab}.title`) }}
                 </li>
             </ul>
-            <div v-if="active === 'exchange'" class="full-btn __pointer"
-                 :class="{'full': isFullScreen}" 
-                 @click="fullScreen" ></div>
-            <change-lang class="change-lang __pointer"></change-lang>
+
+            <change-lang class="exchange change-lang"></change-lang>
         </div>
 
-        <center class="center-wrapper" v-if="active === 'exchange'"></center>
-        <router-view></router-view>
+        <div class="router-wrapper">
+            <center v-if="active === 'exchange'"></center>
+            <router-view></router-view>
+        </div>
     </div>
 </template>
 
@@ -30,35 +30,17 @@ export default {
         center, changeLang
     }, 
     mounted() {
-        this.initFullScreen();
         this.$router.afterEach((to)=>{
             this.active = to.name;
         });
     },
     data() {
         return {
-            isFullScreen: false,
             active: this.$route.name,
             tabList: ['exchange', 'exchangeAssets', 'exchangeOpenOrders', 'exchangeOrderHistory']
         };
     },
-    watch: {
-        active: function() {
-            this.initFullScreen();
-        }
-    },
     methods: {
-        initFullScreen() {
-            if (this.active !== 'exchange') {
-                return;
-            }
-            this.$onKeyDown(27, () => {
-                this.isFullScreen = false;
-            });
-        },
-        fullScreen() {
-            this.isFullScreen = !this.isFullScreen;
-        },
         goTab(tab) {
             if (tab === this.active) {
                 return;
@@ -73,43 +55,62 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.tab-list-wrapper {
-    display: inline-block;
-    .tab {
-        display: inline-block;
-        min-width: 100px;
-        background: #000;
-        color: #fff;
-        margin-right: 20px;
-        padding: 10px;
-        text-align: center;
-        &.active {
-            color: blue;
-        }
+@import "~assets/scss/vars.scss";
+
+.exchange-center-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    .router-wrapper {
+        flex: 1;
+        // margin: 10px;
+        overflow: auto;
     }
 }
-.full-screen {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: #fff;
-    z-index: 900;
+
+.head {
+    flex-basis: 47px;
+    box-sizing: border-box;
+    padding: 0 10px;
+    line-height: 43px;
+    margin: 0 10px;
+    border-bottom: 1px solid rgba(198, 203, 212, 0.3);
+
+    .change-lang {
+        float: right;
+        margin-top: 0;
+    }
 }
-.change-lang {
-    background: #000;
-    float: right;
-    margin-top: 0;
-}
-.full-btn {
-    float: right;
-    width: 20px;
-    height: 20px;
-    background: #000;
-    margin-left: 10px;
-    &.full {
-        background: blue;
+
+.tab-list-wrapper {
+    display: inline-block;
+    font-size:14px;
+    font-family: $font-bold;
+    font-weight: 600;
+    color: rgba(94, 104, 117, 1);
+    .tab {
+        display: inline-block;
+        box-sizing: border-box;
+        height: 100%;
+        min-width: 112px;
+        padding: 0 28px;
+        text-align: center;
+        &.active {
+            position: relative;
+            color: rgba(29, 32, 36, 1);
+            border-bottom: 2px solid rgba(0,122,255,1);
+            &:after {
+                content: '';
+                display: inline-block;
+                border: 6px solid transparent;
+                border-bottom: 6px solid rgba(0,122,255,1);
+                position: absolute;
+                bottom: 0px;
+                left: 50%;
+                margin-left: -6px;
+            }
+        }
     }
 }
 </style>

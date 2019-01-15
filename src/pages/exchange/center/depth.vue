@@ -48,6 +48,9 @@ export default {
         },
         isLoading() {
             return this.$store.state.exchangeDepth.isLoading;
+        },
+        activeTrans() {
+            return this.$store.state.exchangeLatestTrans.trans;
         }
     },
     methods: {

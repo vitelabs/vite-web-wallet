@@ -1,8 +1,8 @@
 <template>
     <layout>
-        <depth slot="right"></depth>
-        <market slot="leftT"></market>
-        <latest-trans slot="leftB"></latest-trans>
+        <depth slot="r"></depth>
+        <market slot="lb1"></market>
+        <latest-trans slot="lb2"></latest-trans>
     </layout>
 </template>
 
