@@ -62,7 +62,7 @@ export default {
     computed: {
         secondMenuList() {
             if (this.active.indexOf('wallet') === 0) {
-                return ['wallet', 'walletConversion', 'walletQuota', 'walletSBP', 'walletTransList', 'walletVote'];
+                return ['wallet', 'walletQuota', 'walletSBP', 'walletVote', 'walletTransList', 'walletConversion'];
             } else if (this.active.indexOf('exchange') === 0) {
                 return ['exchange', 'exchangeAssets', 'exchangeOpenOrders', 'exchangeOrderHistory'];
             }
