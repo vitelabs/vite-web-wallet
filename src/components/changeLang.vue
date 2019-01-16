@@ -1,10 +1,10 @@
 <template>
-    <div class="change-lang-wrapper __pointer">
-        <span class="lang" :class="{
+    <div class="common-list-wrapper  __pointer">
+        <span class="list-title" :class="{
             'down': !showLang,
             'up': showLang
         }" @click="toggleLangList">{{ $t('lang') }}</span>
-        <ul class="lang-list" v-show="showLang">
+        <ul class="list" v-show="showLang">
             <li v-for="(key, index) in messages" v-show="key.lang !== $t('lang')" :key="index" 
                 @click="changeLocale(index)">{{key.lang}}</li>
         </ul>
@@ -36,6 +36,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~assets/scss/lang/start.scss";
-@import "~assets/scss/lang/setting.scss";
+@import "~assets/scss/list/start.scss";
+@import "~assets/scss/list/setting.scss";
 </style>
