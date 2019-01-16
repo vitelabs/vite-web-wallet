@@ -1,7 +1,7 @@
 /**  vite-wallet login */
 
 <template>
-    <div class="vote">
+    <div class="vote __wrapper">
         <powProcess ref="pow"></powProcess>
         <secTitle></secTitle>
 

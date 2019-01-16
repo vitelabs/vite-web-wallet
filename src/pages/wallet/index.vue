@@ -1,7 +1,7 @@
 /**  vite-wallet login */
 
 <template>
-    <div>
+    <div class="wallet-wrapper">
         <account v-if="active === 'wallet'"></account>
         <router-view></router-view>
     </div>
@@ -28,15 +28,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.exchange-center-wrapper {
-    min-width: 1300px;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
+.wallet-wrapper {
     height: 100%;
-    .router-wrapper {
-        flex: 1;
-        overflow: auto;
+}
+.__wrapper {
+    padding: 40px;
+}
+
+@media only screen and (max-width: 850px) {
+    .__wrapper {
+        padding: 15px;
     }
 }
 </style>

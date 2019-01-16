@@ -1,7 +1,7 @@
 /**  vite-wallet login */
 
 <template>
-    <div class="trans-list-wrapper">
+    <div class="trans-list-wrapper __wrapper">
         <sec-title class="title" :isShowHelp="false"></sec-title>
         <div class="trans-list-content">
             <table-list class="big-trans" :headList="[{
