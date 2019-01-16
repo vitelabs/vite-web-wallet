@@ -13,7 +13,7 @@
         <mnemonic v-if="!!activeAccount" :lock="lock" class="item"></mnemonic>
         <accList v-if="!!activeAccount" class="item"></accList>
         <lang class="item"></lang>
-        <auto-logout></auto-logout>
+        <auto-logout v-if="!!activeAccount" class="item"></auto-logout>
     </layout>
 </template>
 
