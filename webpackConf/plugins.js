@@ -29,7 +29,7 @@ const contractAddress = {
     test: '\'0x54b716345c14ba851f1b51dcc1491abee6ba8f44\'',
     dev: '\'0x54b716345c14ba851f1b51dcc1491abee6ba8f44\''
 };
-const exchangeViteServer = {
+const conversionServer = {
     production: '\'https://gateway.vite.net\'',
     test: '\'http://132.232.60.116:8000\'',
     dev: '\'http://132.232.60.116:8000\''
@@ -57,7 +57,7 @@ let plugins = [
         'process.env.viteNet': viteNet[ENV],
         'process.env.contractAddress': contractAddress[ENV],
         'process.env.ethServer': ethServer[ENV],
-        'process.env.exchangeViteServer': exchangeViteServer[ENV],
+        'process.env.conversionServer': conversionServer[ENV],
         'process.env.ethNet': ethNet[ENV]
     }),
     new webpack.NormalModuleReplacementPlugin(/\/buffer\//, function(resource) {

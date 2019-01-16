@@ -58,6 +58,7 @@ export default {
 @import "~assets/scss/vars.scss";
 
 .exchange-center-wrapper {
+    min-width: 1300px;
     display: flex;
     flex-direction: column;
     width: 100%;
