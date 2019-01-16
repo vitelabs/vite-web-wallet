@@ -1,7 +1,7 @@
 /**  vite-wallet login */
 
 <template>
-    <div class="account-wrapper _p">
+    <div class="account-wrapper __wrapper">
         <div class="head">
             <sync-block class="sync-block"></sync-block>
             <go-net-btn class="net-btn"></go-net-btn>
@@ -69,7 +69,7 @@ export default {
 </script>
 
 <style lang="scss" rel="stylesheet/scss">
-.page-content .account-wrapper._p {
+.page-content .account-wrapper.__wrapper {
     padding-top: 0;
 }
 .account-wrapper {
@@ -102,11 +102,7 @@ export default {
 @media only screen and (max-width: 850px) {
     .account-wrapper .head {
         text-align: left;
-        margin-top: 0px;
         margin-bottom: 20px;
-    }
-    .page-content .account-wrapper._p {
-        padding-top: 40px;
     }
 }
 

@@ -135,7 +135,7 @@ export default {
     }
 }
 
-@media only screen and (max-width: 550px) {
+@media only screen and (max-width: 620px) {
     .token-wrapper {
         width: 100%;
         margin-top: 15px;

@@ -6,7 +6,7 @@
         <div class="page-content">
             <second-menu class="second-menu" v-show="secondMenuList && secondMenuList.length" 
                          :tabList="secondMenuList"></second-menu>
-            <div class="page-wrapper" :class="{ '__wrapper': active.indexOf('exchange') !== 0 }">
+            <div class="page-wrapper">
                 <slot></slot>
             </div>
         </div>
@@ -133,16 +133,7 @@ export default {
         .page-wrapper {
             flex: 1;
             overflow: auto;
-            &.__wrapper {
-                padding: 40px;
-            }
         }
-    }
-}
-
-@media only screen and (max-width: 750px) {
-    .page-layout-wrapper .page-content .__wrapper {
-        padding: 15px;
     }
 }
 

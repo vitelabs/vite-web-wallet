@@ -1,7 +1,7 @@
 /**  vite-wallet login */
 
 <template>
-    <div>
+    <div class="__wrapper">
         <sec-title></sec-title>
 
         <div v-if="!loading">
