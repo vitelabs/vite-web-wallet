@@ -28,7 +28,7 @@
 }
 
 .exchange-layout {
-    min-width: 1300px;
+    width: 100%;
     min-height: 750px;
     height: 100%;
     padding: 10px;

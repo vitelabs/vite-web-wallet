@@ -4,7 +4,7 @@ const Tx = require('ethereumjs-tx');
 const ethProvider = require('web3-providers-http'); // Web3-providers-ws cannot work in IE.
 
 import localStorage from 'utils/localStorage';
-import { bind as gwBind, balance as gwBalance } from 'services/exchangeVite';
+import { bind as gwBind, balance as gwBalance } from 'services/conversion';
 import { timer } from 'utils/asyncFlow';
 import { getWalletAddr, getWrongWalletAddr } from './address';
 import { viteContractAbi, viteContractAddr, blackHole, signBinding } from './viteContract';
@@ -216,7 +216,7 @@ class ethWallet {
         return sendEthTx.call(this, ethTxHash);
     }
 
-    async exchangeVite({
+    async conversion({
         viteAddr, value, gwei
     }) {
         let acount = this.activeAddr;

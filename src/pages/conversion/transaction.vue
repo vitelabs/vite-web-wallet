@@ -122,7 +122,7 @@ export default {
         },
         transactionType () {
             if (this.transType === 'exchange') {
-                return 'exchangeVite';
+                return 'conversion';
             }
             return this.token.name === 'eth' ? 'sendTx' : 'sendContractTx';
         },
@@ -230,7 +230,7 @@ export default {
                     this.isShowTrans = true;
 
                     if (this.transType === 'exchange') {
-                        this.exchangeVite();
+                        this.conversion();
                         return;
                     }
                     this.sendTx();
@@ -240,16 +240,16 @@ export default {
                 }
             });
         },
-        exchangeVite() {
+        conversion() {
             this.loading = true;
 
-            this.ethWallet.exchangeVite({
+            this.ethWallet.conversion({
                 viteAddr: this.viteAddr,
                 value: this.token.balance,
                 gwei: this.size
             }).then(() => {
                 this.loading = false;
-                this.$toast( this.$t('exchangeVite.exchange.success') );
+                this.$toast( this.$t('conversion.exchange.success') );
                 this.closeTrans();
             }).catch((err) => {
                 console.warn(err);
