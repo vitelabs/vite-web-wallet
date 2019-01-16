@@ -2,13 +2,13 @@
     <div class="auto-logout-wrapper">
         <div class="title">{{ $t('setting.autoLogout') }}</div>
 
-        <div class="setting change-lang-wrapper __pointer">
-            <span class="lang" :class="{
+        <div class="setting common-list-wrapper __pointer">
+            <span class="list-title" :class="{
                 'down': !showTime,
                 'up': showTime
             }" @click="toggletimeList">{{ $t(`setting.timeList.${autoLogoutTime}`) }}</span>
-            <ul class="lang-list" v-show="showTime">
-                <li v-for="(time, index) in timeList" :key="index" 
+            <ul class="list" v-show="showTime">
+                <li v-for="(time, index) in timeList" :key="index" v-show="time !== autoLogoutTime"
                     @click="setTime(time)">{{ $t(`setting.timeList.${time}`) }}</li>
             </ul>
         </div>
@@ -40,7 +40,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~assets/scss/lang/setting.scss";
+@import "~assets/scss/list/setting.scss";
 
 .title {
     font-size: 14px;

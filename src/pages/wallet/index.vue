@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import account from './account/account.vue';
+import account from './account.vue';
 
 export default {
     components: {

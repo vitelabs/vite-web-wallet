@@ -7,12 +7,12 @@
                 <div v-show="!activeAccount" class="__btn_input">{{ $t('startCreate.choose') }}</div>
 
                 <div v-show="activeAccount && !activeAccount.addr" class="__btn __btn_input">
-                    <div class="name __ellipsis">{{activeAccount.name}}</div>
+                    <div class="name __ellipsis">{{ activeAccount.name }}</div>
                 </div>
 
                 <div v-show="activeAccount && activeAccount.addr" class="__btn __btn_input_active">
-                    <div class="name __ellipsis">{{activeAccount.name}}</div>
-                    <div class="address __ellipsis">{{activeAccount.showAddr}}</div>
+                    <div class="name __ellipsis">{{ activeAccount.name }}</div>
+                    <div class="address __ellipsis">{{ activeAccount.showAddr }}</div>
                 </div>
 
                 <span :class="{ 
