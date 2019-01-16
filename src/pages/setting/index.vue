@@ -1,5 +1,3 @@
-/**  vite-wallet */
-
 <template>
     <layout>
         <div v-show="showPassWrapper" class="item" :class="{ 'unlock': !lock }">
