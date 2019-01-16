@@ -1,7 +1,7 @@
 /**  vite-wallet login */
 
 <template>
-    <div class="quota-wrapper __wrapper">
+    <div class="quota-wrapper">
         <quota-head></quota-head>
 
         <loading v-if="loadingToken" class="loading"></loading>
@@ -10,14 +10,14 @@
 
         <div v-if="showConfirmType" class="gray-wrapper">
             <confirm v-if="showConfirmType === 'cancel'" 
-                     :title="$t(`quota.withdrawalStaking`)" :closeIcon="false"
-                     :leftBtnTxt="$t(`quota.confirm.cancel.leftBtn`)" :leftBtnClick="closeConfirm"
-                     :rightBtnTxt="$t(`quota.confirm.cancel.rightBtn`)" 
+                     :title="$t(`walletQuota.withdrawalStaking`)" :closeIcon="false"
+                     :leftBtnTxt="$t(`walletQuota.confirm.cancel.leftBtn`)" :leftBtnClick="closeConfirm"
+                     :rightBtnTxt="$t(`walletQuota.confirm.cancel.rightBtn`)" 
                      :rightBtnClick="submit" :btnUnuse="!!cancelUnuse">
-                {{ $t(`quota.confirm.cancel.describe`, { amount: activeAmountLimit }) }}
+                {{ $t(`walletQuota.confirm.cancel.describe`, { amount: activeAmountLimit }) }}
                 <div class="cancel-amount" v-show="amountErr">{{ amountErr }}</div>
                 <vite-input class="cancel-input" v-model="cancelAmount" :valid="testAmount"
-                            :placeholder="$t('quota.inputWithdrawAmount')"></vite-input>
+                            :placeholder="$t('walletQuota.inputWithdrawAmount')"></vite-input>
             </confirm>
         </div>
 
@@ -97,7 +97,7 @@ export default {
             }
             if (BigNumber.isEqual(this.cancelAmount, 0) || 
                 BigNumber.compared(this.cancelAmount, this.activeAmountLimit) > 0) {
-                this.amountErr = this.$t('quota.maxAmt', {
+                this.amountErr = this.$t('walletQuota.maxAmt', {
                     amount: this.activeAmountLimit
                 });
                 return false;

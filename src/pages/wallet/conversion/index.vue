@@ -1,16 +1,16 @@
 /**  vite-wallet login */
 
 <template>
-    <div class="__wrapper">
+    <div>
         <sec-title></sec-title>
 
         <div v-if="!loading">
             <div class='title'>
-                <img src="../../assets/imgs/eth_logo.svg"/>ETH
-                <span class="record __pointer" @click="toRecord">{{ $t('conversion.record') }}</span>
+                <img src="~assets/imgs/eth_logo.svg"/>ETH
+                <span class="record __pointer" @click="toRecord">{{ $t('walletConversion.record') }}</span>
             </div>
 
-            <vite-address :title="$t('account.address')" :address="address" 
+            <vite-address :title="$t('wallet.address')" :address="address" 
                           :showAddrContent="false" :addressQrcode="'ethereum:' + address">
                 <div class="address-wrapper" v-click-outside="hideAddrList">
                     <div class="active-addr __pointer" @click="showAddrList">
@@ -36,7 +36,7 @@
                        :sendTx="showTrans" :token="token" :ethToken="tokenList.eth"></token>
             </div>
 
-            <div class="note">{{ $t('conversion.note') }}</div>
+            <div class="note">{{ $t('walletConversion.note') }}</div>
             
             <transaction v-if="!!transType" :closeTrans="hideTrans" :ethWallet="ethWallet"
                          :transType="transType" :token="tokenList[transToken]"></transaction>
@@ -188,11 +188,11 @@ export default {
             height: 16px;
             margin-top: -6px;
             &.down {
-                background: url('../../assets/imgs/down_icon.svg');
+                background: url('~assets/imgs/down_icon.svg');
                 background-size: 16px 16px;
             }
             &.up {
-                background: url('../../assets/imgs/up_icon.svg');
+                background: url('~assets/imgs/up_icon.svg');
                 background-size: 16px 16px;
             }
         }

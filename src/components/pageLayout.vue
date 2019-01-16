@@ -4,7 +4,11 @@
         <vite-menu class="menu" :active="active" :go="go" :menuList="menuList"></vite-menu>
 
         <div class="page-content">
-            <slot></slot>
+            <second-menu class="second-menu" v-show="secondMenuList && secondMenuList.length" 
+                         :tabList="secondMenuList"></second-menu>
+            <div class="page-wrapper" :class="{ '__wrapper': active.indexOf('exchange') !== 0 }">
+                <slot></slot>
+            </div>
         </div>
     </div>
 </template>
@@ -12,6 +16,7 @@
 <script>
 import sidebar from 'components/sidebar';
 import viteMenu from 'components/menu';
+import secondMenu from 'components/secondMenu';
 import localStorage from 'utils/localStorage';
 
 let autoLogout = null;
@@ -20,7 +25,7 @@ const autoLogoutTime = _t * 60 * 1000;
 
 export default {
     components: {
-        sidebar, viteMenu
+        sidebar, viteMenu, secondMenu
     },
     props: {
         active: {
@@ -54,15 +59,19 @@ export default {
             this.clearAutoLogout();
         }
     },
+    computed: {
+        secondMenuList() {
+            if (this.active.indexOf('wallet') === 0) {
+                return ['wallet', 'walletConversion', 'walletQuota', 'walletSBP', 'walletTransList', 'walletVote'];
+            } else if (this.active.indexOf('exchange') === 0) {
+                return ['exchange', 'exchangeAssets', 'exchangeOpenOrders', 'exchangeOrderHistory'];
+            }
+            return [];
+        }
+    },
     methods: {
         setMenuList() {
-            let activeAccount = this.$wallet.getActiveAccount();
-            let menuList = ['account', 'quota', 'SBP', 'vote', 'transList'];
-            if (activeAccount && activeAccount.type === 'wallet') {
-                menuList.push('conversion');
-            }
-            menuList.push('exchange');
-            menuList.push('setting');
+            let menuList = ['wallet', 'exchange', 'setting'];
             menuList.push(this.isLogin ? 'logout' : 'login');
             this.menuList = menuList;
         },
@@ -118,9 +127,15 @@ export default {
     .page-content {
         flex: 1;
         height: 100%;
-        overflow: auto;
-        .__wrapper {
-            padding: 40px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        .page-wrapper {
+            flex: 1;
+            overflow: auto;
+            &.__wrapper {
+                padding: 40px;
+            }
         }
     }
 }

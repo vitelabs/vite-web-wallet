@@ -1,17 +1,17 @@
-/**  vite-wallet login */
+/**  vite-wallet */
 
 <template>
     <layout>
         <div v-show="showPassWrapper" class="item" :class="{ 'unlock': !lock }">
             <div class="title __pointer">{{ $t('setting.unlock') }}</div>
             <div class="input-wrapper">
-                <input :disabled="!lock" class="pass" v-model="pass" type="password" :placeholder="$t('create.input')" />
+                <input :disabled="!lock" class="pass" v-model="pass" type="password" :placeholder="$t('startCreate.input')" />
             </div>
             <span class="btn __pointer" @click="validPass">{{ $t('btn.submit') }}</span>
         </div>
 
-        <mnemonic :lock="lock" class="item"></mnemonic>
-        <accList class="item"></accList>
+        <mnemonic v-if="!!activeAccount" :lock="lock" class="item"></mnemonic>
+        <accList v-if="!!activeAccount" class="item"></accList>
         <lang class="item"></lang>
         <auto-logout></auto-logout>
     </layout>

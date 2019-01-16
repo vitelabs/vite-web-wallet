@@ -143,7 +143,7 @@
             "720": "12小时"
         }
     },
-    "create": {
+    "startCreate": {
         "input": "请输入密码",
         "again": "请再次输入密码",
         "choose": "选择账户",
@@ -157,7 +157,7 @@
             "pwFormat": "密码格式错误，密码仅支持英文、半角符号、数字"
         }
     },
-    "imported": {
+    "startImport": {
         "title": "导入账户",
         "dragDrop": {
             "text": "拖拽账户文件进入文本区域",
@@ -167,7 +167,7 @@
             "hint": "注：导入加密文件的方式仅支持单地址，不支持派生地址。推荐通过助记词进行跨平台操作。"
         }
     },
-    "account": {
+    "wallet": {
         "title": "账户详情",
         "transfer": "转账",
         "getTestToken": "获取测试代币",
@@ -194,7 +194,7 @@
             "powTransErr": "PoW获取的配额不足，建议您进行抵押VITE获取配额"
         }
     },
-    "quota": {
+    "walletQuota": {
         "title": "获取配额",
         "help": {
             "title": "快速理解配额"
@@ -242,7 +242,7 @@
             "unexpired": "还未到达取回时间，暂时无法取回抵押"
         }
     },
-    "transList": {
+    "walletTransList": {
         "title": "交易记录",
         "tType": {
             "title": "交易类型",
@@ -258,7 +258,7 @@
         "tAddress": "交易方地址",
         "sum": "金额"
     },
-    "SBP": {
+    "walletSBP": {
         "title": "注册SBP",
         "help": {
             "title": "关于SBP",
@@ -310,7 +310,7 @@
             }
         }
     },
-    "vote": {
+    "walletVote": {
         "title": "投票",
         "help": {
             "title": "关于投票",
@@ -375,7 +375,7 @@
             "voteErr": "投票失败，请重试"
         }
     },
-    "conversion": {
+    "walletConversion": {
         "title": "置换VITE",
         "help": {
             "title": "快速理解置换VITE",

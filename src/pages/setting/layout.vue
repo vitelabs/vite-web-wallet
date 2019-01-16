@@ -1,5 +1,5 @@
 <template>
-    <div class="setting-wrapper __wrapper">
+    <div class="setting-wrapper">
         <sec-title :isShowHelp="false"></sec-title>
         <div class="content-wrapper">
             <div class="content">
@@ -69,10 +69,10 @@ export default {
     height: 100%;
     .content-wrapper {
         position: absolute;
-        top: 102px;
-        bottom: 30px;
-        left: 30px;
-        right: 30px;
+        top: 72px;
+        bottom: 0;
+        left: 0px;
+        right: 0px;
         overflow: auto;
         background: #FFFFFF;
         box-shadow: 0 2px 48px 1px rgba(176,192,237,0.17);

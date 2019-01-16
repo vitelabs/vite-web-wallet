@@ -12,7 +12,7 @@ export default {
     methods: {
         showHelp() {
             this.$confirm({
-                title: this.$t('quota.help.title'), 
+                title: this.$t('walletQuota.help.title'), 
                 singleBtn: true, 
                 closeBtn: {
                     show: false
@@ -20,12 +20,12 @@ export default {
                 leftBtn: {
                     text: this.$t('btn.understand')
                 }, 
-                content: `<div class="help-t">${ this.$t('quota.confirm.help.t1') }</div>
-                        <div class="help-txt">${ this.$t('quota.confirm.help.txt1') }</div>
-                        <div class="help-t">${ this.$t('quota.confirm.help.t2') }</div>
-                        <div class="help-txt">${ this.$t('quota.confirm.help.txt2') }</div>
-                        <div class="help-t">${ this.$t('quota.confirm.help.t3') }</div>
-                        <div class="help-txt">${ this.$t('quota.confirm.help.txt3') }</div>`
+                content: `<div class="help-t">${ this.$t('walletQuota.confirm.help.t1') }</div>
+                        <div class="help-txt">${ this.$t('walletQuota.confirm.help.txt1') }</div>
+                        <div class="help-t">${ this.$t('walletQuota.confirm.help.t2') }</div>
+                        <div class="help-txt">${ this.$t('walletQuota.confirm.help.txt2') }</div>
+                        <div class="help-t">${ this.$t('walletQuota.confirm.help.t3') }</div>
+                        <div class="help-txt">${ this.$t('walletQuota.confirm.help.txt3') }</div>`
             });
         }
     }

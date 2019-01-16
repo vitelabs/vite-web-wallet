@@ -1,8 +1,8 @@
 <template>
     <div class="__trans-wrapper">
         <confirm class="trans-confirm" v-show="isShowTrans"
-                 :title="transType === 'transfer' ? $t('account.transfer') : $t('conversion.exchange.vite')"
-                 :leftBtnTxt="transType === 'transfer' ? $t('account.transfer') : $t('conversion.exchange.btn')"
+                 :title="transType === 'transfer' ? $t('wallet.transfer') : $t('walletConversion.exchange.vite')"
+                 :leftBtnTxt="transType === 'transfer' ? $t('wallet.transfer') : $t('walletConversion.exchange.btn')"
                  :closeIcon="true" :btnUnuse="!canTransfer" :close="closeTrans" 
                  :singleBtn="true" :leftBtnClick="transfer">
 
@@ -16,37 +16,37 @@
 
             <div v-show="transType === 'transfer'" class="__row">
                 <div class="__row-t">
-                    {{ $t('account.inAddress') }}
+                    {{ $t('wallet.inAddress') }}
                     <span v-show="!isValidAddress" class="__err __hint">{{ $t('hint.addrFormat') }}</span>
                 </div>
                 <vite-input v-model="toAddress" :valid="validAddr"
-                            :placeholder="$t('account.placeholder.addr')"></vite-input>
+                            :placeholder="$t('wallet.placeholder.addr')"></vite-input>
             </div>
 
             <div v-show="transType === 'transfer'" class="__row">
                 <div class="__row-t">
-                    {{ $t('account.sum') }}
+                    {{ $t('wallet.sum') }}
                     <span v-show="amountErr" class="__err __hint">{{ amountErr }}</span>
                 </div>
                 <vite-input v-model="amount" :valid="testAmount"
-                            :placeholder="$t('account.placeholder.amount')"></vite-input>
+                            :placeholder="$t('wallet.placeholder.amount')"></vite-input>
             </div>
 
             <div v-show="transType === 'exchange'" class="__row">
-                <div class="__row-t">{{ $t('conversion.exchange.viteAddr') }}</div>
+                <div class="__row-t">{{ $t('walletConversion.exchange.viteAddr') }}</div>
                 <div class="__unuse-row __light">{{ viteAddr }}</div>
             </div>
 
             <div v-show="transType === 'exchange'" class="__row">
-                <div class="__row-t">{{ $t('conversion.exchange.viteAmount') }}</div>
+                <div class="__row-t">{{ $t('walletConversion.exchange.viteAmount') }}</div>
                 <div class="__unuse-row __light">{{ balance }}</div>
             </div>
 
             <div class="__row">
                 <div class="__row-t">
-                    {{ $t('conversion.gas') }}
+                    {{ $t('walletConversion.gas') }}
                     <span class="__hint __right">
-                        {{ $t('conversion.aboutPrice', { amount: gasTotalPrice }) }}
+                        {{ $t('walletConversion.aboutPrice', { amount: gasTotalPrice }) }}
                     </span>
                 </div>
                 <process :min="minGwei" :max="maxGwei" :default="size" :setSize="setSize"></process>
@@ -164,7 +164,7 @@ export default {
             }
 
             if (BigNumber.isEqual(this.amount, 0)) {
-                this.amountErr = this.$t('account.hint.amount');
+                this.amountErr = this.$t('wallet.hint.amount');
                 return false;
             }
 
@@ -249,7 +249,7 @@ export default {
                 gwei: this.size
             }).then(() => {
                 this.loading = false;
-                this.$toast( this.$t('conversion.exchange.success') );
+                this.$toast( this.$t('walletConversion.exchange.success') );
                 this.closeTrans();
             }).catch((err) => {
                 console.warn(err);

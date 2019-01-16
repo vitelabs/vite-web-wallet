@@ -1,12 +1,10 @@
 <template>
     <div class="app-wrapper">
-        <index-layout v-if="layoutType === 'start'">
-            <router-view/>
-        </index-layout>
-
-        <page-layout :active="active" v-else>
+        <page-layout v-if="active.indexOf('start') !== 0" :active="active">
             <router-view/>
         </page-layout>
+
+        <router-view v-else />
 
         <update></update>
         <first-notice v-if="active === 'start'"></first-notice>
@@ -14,8 +12,7 @@
 </template>
 
 <script>
-import indexLayout from 'components/indexLayout.vue';
-import pageLayout from 'components/pageLayout.vue';
+import pageLayout from 'components/pageLayout';
 import update from 'components/update.vue';
 import firstNotice from 'components/firstNotice.vue';
 import { timer } from 'utils/asyncFlow';
@@ -26,7 +23,7 @@ let balanceInfoInst = null;
 
 export default {
     components: {
-        indexLayout, pageLayout, update, firstNotice
+        update, firstNotice, pageLayout
     },
     mounted() {
         this.changeLayout(this.$route.name);

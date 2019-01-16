@@ -9,7 +9,7 @@
         <div class="__btn_list">
             <span class="__btn __btn_border __pointer" @click="back">{{ $t('btn.back') }}</span>
             <span class="__btn __btn_all_in __pointer" @click="_submit">
-                <span v-show="!isLoading">{{ isRestore ? $t('btn.submit') : $t('create.finish') }}</span>
+                <span v-show="!isLoading">{{ isRestore ? $t('btn.submit') : $t('startCreate.finish') }}</span>
                 <loading v-show="isLoading" loadingType="dot"></loading>
             </span>
         </div>

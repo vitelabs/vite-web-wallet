@@ -1,32 +1,32 @@
 /**  vite-wallet login */
 
 <template>
-    <div class="SBP-wrapper __wrapper">
+    <div class="SBP-wrapper">
         <sec-title></sec-title>
 
         <loading v-if="loadingToken" class="loading"></loading>
 
         <div v-if="!loadingToken" class="section">
-            <div class="title">{{ $t('SBP.section1.title') }}</div>
+            <div class="title">{{ $t('walletSBP.section1.title') }}</div>
             <register :tokenInfo="tokenInfo" :canUseAddr="canUseAddr" :sendTx="sendTx" class="content"></register>
         </div>
 
         <div v-if="!loadingToken" class="section">
-            <div class="title">{{ $t('SBP.section2.title') }}</div>
+            <div class="title">{{ $t('walletSBP.section2.title') }}</div>
             <div class="list-content content">
                 <list :showConfirm="showConfirm" :tokenInfo="tokenInfo" :sendTx="sendTx"></list>
             </div>
         </div>
 
         <div v-if="showConfirmType" class="gray-wrapper">
-            <confirm :title="$t(`SBP.confirm.${showConfirmType}.title`)" :singleBtn="true"
+            <confirm :title="$t(`walletSBP.confirm.${showConfirmType}.title`)" :singleBtn="true"
                      :closeIcon="true" :close="closeConfirm"
-                     :leftBtnTxt="$t(`SBP.confirm.${showConfirmType}.btn`)" :leftBtnClick="validTx"
+                     :leftBtnTxt="$t(`walletSBP.confirm.${showConfirmType}.btn`)" :leftBtnClick="validTx"
                      :btnUnuse="!!btnUnuse">
                 <div v-if="showConfirmType === 'edit'">
                     <div class="input-err" v-show="addrErr">{{ addrErr }}</div>
                     <vite-input v-model="addr" :valid="testAddr"
-                                :placeholder="$t(`SBP.confirm.${showConfirmType}.placeholder`)"></vite-input>
+                                :placeholder="$t(`walletSBP.confirm.${showConfirmType}.placeholder`)"></vite-input>
                 </div>
             </confirm>
         </div>
@@ -110,12 +110,12 @@ export default {
 
             if (!this.addr || 
                 !address.isValidHexAddr(this.addr)) {
-                this.addrErr = this.$t('SBP.section1.addrErr');
+                this.addrErr = this.$t('walletSBP.section1.addrErr');
                 return;
             }
 
             if (!this.canUseAddr(this.activeItem.name, this.addr)) {
-                this.addrErr = this.$t('SBP.section1.addrUsed');
+                this.addrErr = this.$t('walletSBP.section1.addrUsed');
                 return;
             }
 
@@ -180,7 +180,7 @@ export default {
             }, 'updateReg').then(() => {
                 this.loading = false;
                 this.$toast(this.$t('hint.request', {
-                    name: this.$t('SBP.section2.update')
+                    name: this.$t('walletSBP.section2.update')
                 }));
                 this.closeConfirm();
                 this.$store.dispatch('loopRegList', {
@@ -198,7 +198,7 @@ export default {
                     });
                     return;
                 }
-                this.$toast(this.$t('SBP.section2.updateFail'), err);
+                this.$toast(this.$t('walletSBP.section2.updateFail'), err);
             });
         },
 

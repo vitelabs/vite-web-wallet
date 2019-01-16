@@ -1,10 +1,10 @@
 <template>
     <div class="__trans-wrapper">
         <confirm v-show="isShowTrans" class="trans-confirm"
-                 :title="$t('account.transfer')"
+                 :title="$t('wallet.transfer')"
                  :btnUnuse="unTrans"
                  :closeIcon="true" :close="closeTrans" :singleBtn="true" 
-                 :leftBtnClick="validTrans" :leftBtnTxt="$t('account.transfer')" >
+                 :leftBtnClick="validTrans" :leftBtnTxt="$t('wallet.transfer')" >
 
             <div class="__row">
                 <div class="__row-t">{{ $t('balance') }}</div>
@@ -16,30 +16,30 @@
 
             <div class="__row">
                 <div class="__row-t">
-                    {{ $t('account.inAddress') }}
+                    {{ $t('wallet.inAddress') }}
                     <span v-show="!isValidAddress" class="__err __hint">{{ $t('hint.addrFormat') }}</span>
                 </div>
                 <vite-input v-model="inAddress" :valid="validAddr"
-                            :placeholder="$t('account.placeholder.addr')"></vite-input>
+                            :placeholder="$t('wallet.placeholder.addr')"></vite-input>
             </div>
 
             <div class="__row">
                 <div class="__row-t">
-                    {{ $t('account.sum') }}
+                    {{ $t('wallet.sum') }}
                     <span v-show="amountErr" class="__err __hint">{{ amountErr }}</span>
                 </div>
                 <vite-input v-model="amount" :valid="testAmount"
-                            :placeholder="$t('account.placeholder.amount')"></vite-input>
+                            :placeholder="$t('wallet.placeholder.amount')"></vite-input>
             </div>
 
             <div class="__row">
                 <div class="__row-t">
-                    {{ $t('account.remarks')}}
+                    {{ $t('wallet.remarks')}}
                     <span class="__hint" :class="{ err: messageErr }">
-                        {{ $t('account.remarksLong', { len: msgBalance}) }}
+                        {{ $t('wallet.remarksLong', { len: msgBalance}) }}
                     </span>
                 </div>
-                <vite-input v-model="message" :placeholder="$t('account.placeholder.remarks')"></vite-input>
+                <vite-input v-model="message" :placeholder="$t('wallet.placeholder.remarks')"></vite-input>
             </div>
         </confirm>
 
@@ -140,7 +140,7 @@ export default {
                     text: this.$t('quotaConfirmPoW.leftBtn.text'),
                     click: () => {
                         this.$router.push({
-                            name: 'quota'
+                            name: 'walletQuota'
                         });
                     }
                 },
@@ -163,7 +163,7 @@ export default {
             }
 
             if (BigNumber.isEqual(this.amount, 0)) {
-                this.amountErr = this.$t('account.hint.amount');
+                this.amountErr = this.$t('wallet.hint.amount');
                 return false;
             }
 
@@ -276,14 +276,14 @@ export default {
                 console.warn(type, err);
 
                 if (type === 0) {
-                    transError( this.$t('account.trans.powErr') );
+                    transError( this.$t('wallet.trans.powErr') );
                     return;
                 }
 
                 let code  = err && err.error ? err.error.code || -1 : 
                     err ? err.code : -1;
                 if (code === -35002) {
-                    transError(this.$t('account.trans.powTransErr'));
+                    transError(this.$t('wallet.trans.powTransErr'));
                     return;
                 }
                 transError(err);

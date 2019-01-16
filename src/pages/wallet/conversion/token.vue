@@ -1,7 +1,7 @@
 <template>
     <div class="token-wrapper">
         <div class="title">
-            <img src="../../assets/imgs/eth_logo.svg"/>{{ token.symbol }}
+            <img src="~assets/imgs/eth_logo.svg"/>{{ token.symbol }}
         </div>
         <div class="content">
             <div class="balance">
@@ -12,7 +12,7 @@
                      @click="_sendTx('transfer', token.name)">{{ $t('sendTrans.symbol') }}</div>
                 <div v-show="token.symbol === 'VITE'" @click="_sendTx('exchange', token.name)"
                      class="btn __pointer" :class="classList">
-                    {{ $t('conversion.exchange.vite') }}</div>
+                    {{ $t('walletConversion.exchange.vite') }}</div>
             </div>
         </div>
     </div>
