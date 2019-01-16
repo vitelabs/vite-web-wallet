@@ -21,7 +21,7 @@ export default {
             created() {
                 this.$router && this.$router.beforeEach((to, from, next) => {
                     if (loginRoutes.indexOf(to.name) >= 0 && !this.$wallet.isLogin) {
-                        (to.name !== 'login') && this.$wallet.setLastPage(to.name);
+                        (to.name !== 'start') && this.$wallet.setLastPage(to.name);
                         this.$router.replace({
                             name: 'start'
                         });

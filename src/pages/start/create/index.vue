@@ -14,14 +14,14 @@
         <div class="__btn __btn_input" 
              :class="{ 'active': !!pass1 || inputItem === 'pass1' }">
             <input ref="pass1" v-model="pass1" type='password'
-                   :placeholder="$t('create.input')"
+                   :placeholder="$t('startCreate.input')"
                    @focus="inputFocus('pass1')"
                    @blur="inputBlur('pass1')" />
         </div>
         <div class="__btn __btn_input" 
              :class="{ 'active': !!pass2 || inputItem === 'pass2' }">
             <input ref="pass2" v-model="pass2" type='password' autocomplete="off"
-                   :placeholder="$t('create.again')"
+                   :placeholder="$t('startCreate.again')"
                    @focus="inputFocus('pass2')"
                    @blur="inputBlur('pass2')" />
         </div>
@@ -31,7 +31,7 @@
                 {{ $t('btn.back') }}
             </span>
             <div class="__btn __btn_all_in __pointer" @click="valid">
-                <span v-show="!isLoading">{{ activeAccount ? $t('create.finish') : $t('btn.next')}}</span>
+                <span v-show="!isLoading">{{ activeAccount ? $t('startCreate.finish') : $t('btn.next')}}</span>
                 <loading v-show="isLoading" loadingType="dot"></loading>
             </div>
         </div>
@@ -102,19 +102,19 @@ export default {
             // [NOTICE] Order fix
             // Name not empty
             if (!this.name) {
-                this.$toast(this.$t('create.hint.nameInput'));
+                this.$toast(this.$t('startCreate.hint.nameInput'));
                 this.focusName();
                 return;
             }
 
             if ( !/^[a-zA-Z0-9_\u4e00-\u9fa5]+$/g.test(this.name) ) {
-                this.$toast(this.$t('create.hint.name'));
+                this.$toast(this.$t('startCreate.hint.name'));
                 this.focusName();
                 return;
             }
 
             if (this.name.length > 32) {
-                this.$toast(this.$t('create.hint.nameLong'));
+                this.$toast(this.$t('startCreate.hint.nameLong'));
                 this.focusName();
                 return;
             }
@@ -127,25 +127,25 @@ export default {
             }
 
             if ( /[\u4e00-\u9fa5]|\s+/g.test(this.pass1) ) {    // Chinese
-                this.$toast(this.$t('create.hint.pwFormat'));
+                this.$toast(this.$t('startCreate.hint.pwFormat'));
                 this.focusPass1();
                 return;
             }
 
             if (this.pass1.length < 1 || this.pass1.length > 32) { // length limit
-                this.$toast(this.$t('create.hint.long'));
+                this.$toast(this.$t('startCreate.hint.long'));
                 this.focusPass1();
                 return;
             }
 
             if (!this.pass2) { // not empty
-                this.$toast(this.$t('create.again'));
+                this.$toast(this.$t('startCreate.again'));
                 this.focusPass2();
                 return;
             }
 
             if (this.pass1 !== this.pass2) { // same password
-                this.$toast(this.$t('create.hint.consistency'));
+                this.$toast(this.$t('startCreate.hint.consistency'));
                 this.focusPass2();
                 return;
             }
@@ -160,7 +160,7 @@ export default {
         createAccount() {
             this.$wallet.create(this.name, this.pass1);
             this.$router.push({
-                name: 'record'
+                name: 'startRecord'
             });
         },
         restoreAccount() {

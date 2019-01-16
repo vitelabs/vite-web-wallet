@@ -143,7 +143,7 @@
             "720": "12小时"
         }
     },
-    "create": {
+    "startCreate": {
         "input": "Please input password",
         "again": "Please input password again",
         "choose": "Choose account",
@@ -157,7 +157,7 @@
             "pwFormat": "Wrong password format. The password only supports English, half-width symbols, numbers."
         }
     },
-    "imported": {
+    "startImport": {
         "title": "Import",
         "dragDrop": {
             "text": "Drag and drop files there",
@@ -167,7 +167,7 @@
             "hint": "Noted that login by importing keystore file cannot support creating multi addresses, using mnemonic seed phrase is recommended in cross-platform situations."
         }
     },
-    "account": {
+    "wallet": {
         "title": "Account Detail",
         "transfer": "Transfer",
         "getTestToken": "Get Test Tokens",
@@ -194,7 +194,7 @@
             "powTransErr": "Insufficient quota of PoW, we'd recommend that you stake VITE to obtain quota."
         }
     },
-    "quota": {
+    "walletQuota": {
         "title": "Get Quota",
         "help": {
             "title": "Quick Understanding of Quota"
@@ -242,7 +242,7 @@
             "unexpired": "Temporarily cannot make withdrawal of staked token until due date"
         }
     },
-    "transList": {
+    "walletTransList": {
         "title": "Transactions",
         "tType": {
             "title": "Type",
@@ -258,7 +258,7 @@
         "tAddress": "Address",
         "sum": "Amount"
     },
-    "SBP": {
+    "walletSBP": {
         "title": "SBP Registration",
         "help": {
             "title": "About SBP",
@@ -310,7 +310,7 @@
             }
         }
     },
-    "vote": {
+    "walletVote": {
         "title": "Voting",
         "help": {
             "title": "About Voting",
@@ -375,7 +375,7 @@
             "voteErr": "Failed to vote, please try again"
         }
     },
-    "conversion": {
+    "walletConversion": {
         "title": "VITE Conversion",
         "help": {
             "title": "Quick Understanding of VITE Conversion",

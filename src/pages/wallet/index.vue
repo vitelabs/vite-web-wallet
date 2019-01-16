@@ -1,18 +1,18 @@
-/**  vite-wallet name-exchange-index */
+/**  vite-wallet login */
 
 <template>
-    <div class="exchange-center-wrapper">
-        <center v-if="active === 'exchange'"></center>
+    <div>
+        <account v-if="active === 'wallet'"></account>
         <router-view></router-view>
     </div>
 </template>
 
 <script>
-import center from './center/center.vue';
+import account from './account/account.vue';
 
 export default {
     components: {
-        center
+        account
     },
     mounted() {
         this.$router.afterEach((to)=>{
@@ -22,7 +22,6 @@ export default {
     data() {
         return {
             active: this.$route.name,
-            tabList: ['exchange', 'exchangeAssets', 'exchangeOpenOrders', 'exchangeOrderHistory']
         };
     }
 };
@@ -41,3 +40,4 @@ export default {
     }
 }
 </style>
+

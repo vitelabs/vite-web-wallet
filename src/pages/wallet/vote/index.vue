@@ -1,17 +1,17 @@
 /**  vite-wallet login */
 
 <template>
-    <div class="vote __wrapper">
+    <div class="vote">
         <powProcess ref="pow"></powProcess>
         <secTitle></secTitle>
 
         <loading v-if="loadingToken" class="loading"></loading>
 
         <section v-if="!loadingToken" class="vote_list">
-            <div class="title ct">{{ $t('vote.section1.title')}}</div>
+            <div class="title ct">{{ $t('walletVote.section1.title')}}</div>
             <div class="__tb">
                 <div class="__tb_row __tb_head">
-                    <div class="__tb_cell" v-for="v in $t('vote.section1.head')" :key="v"> {{v}}</div>
+                    <div class="__tb_cell" v-for="v in $t('walletVote.section1.head')" :key="v"> {{v}}</div>
                 </div>
                 <div class="__tb_content">
                     <div class="__tb_row" v-for="v in voteList" :key="v.nodeName">
@@ -26,7 +26,7 @@
                         <div class="__tb_cell">{{v.voteStatusText}}</div>
                         <div class="__tb_cell" :class="cache ? 'unclickable' : 'clickable'">
                             <span @click="cancelVote(v)">{{ v.operate }}</span>
-                            <span class="reward" @click="openReward(v)">{{ $t('vote.toReward') }}</span>
+                            <span class="reward" @click="openReward(v)">{{ $t('walletVote.toReward') }}</span>
                         </div>
                     </div>
                     <div class="__tb_no_data">{{ voteList.length ? '' : $t('hint.noData') }}</div>
@@ -36,13 +36,13 @@
 
         <section v-if="!loadingToken" class="node_list">
             <div class="title">
-                <div class="ct">{{ $t('vote.section2.title') }}</div>
-                <search v-model="filterKey" :placeholder="$t('vote.search')" class="filter"></search>
+                <div class="ct">{{ $t('walletVote.section2.title') }}</div>
+                <search v-model="filterKey" :placeholder="$t('walletVote.search')" class="filter"></search>
             </div>
             <div class="tb_container">
                 <div class="__tb">
                     <div class="__tb_row __tb_head">
-                        <div class="__tb_cell" v-for="v in $t('vote.section2.head')" :key="v">{{v}}</div>
+                        <div class="__tb_cell" v-for="v in $t('walletVote.section2.head')" :key="v">{{v}}</div>
                     </div>
                     <div class="__tb_content" v-if="!!nodeList.length">
                         <div class="__tb_row __tb_content_row active" 
@@ -55,7 +55,7 @@
                         </div>
                     </div>
                     <div class="__tb_content" v-else-if="this.filterKey">
-                        <div class="__tb_no_data">{{$t("vote.section2.noSearchData")}}</div>
+                        <div class="__tb_no_data">{{$t("walletVote.section2.noSearchData")}}</div>
                     </div>
                     <div class="__tb_content" v-else>
                         <div class="__tb_no_data">{{$t("hint.noData")}}</div>
@@ -172,7 +172,7 @@ export default {
                 t.voteStatus = 'canceling'; // 撤销投票中
                 this.cache = t;
                 this.$toast(this.$t('hint.request', {
-                    name: this.$t('vote.section1.revoke') 
+                    name: this.$t('walletVote.section1.revoke') 
                 }));
             };
 
@@ -183,7 +183,7 @@ export default {
                     const c = Object.assign({}, this.$t('quotaConfirmPoW'));
                     c.leftBtn.click = () => {
                         this.$router.push({
-                            name: 'quota'
+                            name: 'walletQuota'
                         });
                     };
                     (c.rightBtn.click = () => {
@@ -194,7 +194,7 @@ export default {
                     (c.closeBtn = { show: true });
                     this.$confirm(c);
                 } else {
-                    this.$toast(this.$t('vote.section1.cancelVoteErr'), e);
+                    this.$toast(this.$t('walletVote.section1.cancelVoteErr'), e);
                 }
             };
             
@@ -206,9 +206,9 @@ export default {
 
             activeAccount.initPwd(
                 {
-                    title: this.$t('vote.revokeVoting'),
-                    submitTxt: this.$t('vote.section1.confirm.submitText'),
-                    cancelTxt: this.$t('vote.section1.confirm.cancelText'),
+                    title: this.$t('walletVote.revokeVoting'),
+                    submitTxt: this.$t('walletVote.section1.confirm.submitText'),
+                    cancelTxt: this.$t('walletVote.section1.confirm.cancelText'),
                     submit: sendCancel,
                     exchange: true
                 },
@@ -225,7 +225,7 @@ export default {
                 t.nodeStatus = 1;
                 this.cache = t;
                 this.$toast(this.$t('hint.request', {
-                    name: this.$t('vote.Voting') 
+                    name: this.$t('walletVote.Voting') 
                 }));
             };
 
@@ -236,7 +236,7 @@ export default {
                     const c = Object.assign({}, this.$t('quotaConfirmPoW'));
                     c.leftBtn.click = () => {
                         this.$router.push({
-                            name: 'quota'
+                            name: 'walletQuota'
                         });
                     };
                     c.rightBtn.click = () => {
@@ -247,10 +247,10 @@ export default {
                     c.closeBtn = { show: true };
                     this.$confirm(c);
                 } else if (code === -36001) {
-                    this.$toast(this.$t('vote.addrNoExistErr'));
+                    this.$toast(this.$t('walletVote.addrNoExistErr'));
                 } else {
                     console.warn('vote', e);
-                    this.$toast(this.$t('vote.section2.voteErr'), e);
+                    this.$toast(this.$t('walletVote.section2.voteErr'), e);
                 }
             };
 
@@ -265,10 +265,10 @@ export default {
 
             activeAccount.initPwd(
                 {
-                    title: this.$t('vote.voting'),
-                    submitTxt: this.$t(`vote.section2.confirm.${t}.submitText`),
-                    cancelTxt: this.$t(`vote.section2.confirm.${t}.cancelText`),
-                    content: this.$t(`vote.section2.confirm.${t}.content`, {
+                    title: this.$t('walletVote.voting'),
+                    submitTxt: this.$t(`walletVote.section2.confirm.${t}.submitText`),
+                    cancelTxt: this.$t(`walletVote.section2.confirm.${t}.cancelText`),
+                    content: this.$t(`walletVote.section2.confirm.${t}.content`, {
                         nodeName: this.voteList[0] && this.voteList[0].nodeName,
                         name: v.name
                     }),
@@ -304,10 +304,10 @@ export default {
                 // voteNotWork first
                 this.voteData[0]&&this.voteData[0].nodeName===data.nodeName&&(data.nodeStatus=this.voteData[0].nodeStatus);
                 data.nodeStatus === 2 && (data.voteStatus = 'voteNotWork');
-                data.nodeStatusText = this.$t('vote.section1.nodeStatusMap')[
+                data.nodeStatusText = this.$t('walletVote.section1.nodeStatusMap')[
                     data.nodeStatus
                 ];
-                data.voteStatusText = this.$t('vote.section1.voteStatusMap')[
+                data.voteStatusText = this.$t('walletVote.section1.voteStatusMap')[
                     data.voteStatus
                 ];
                 const token = viteWallet.Ledger.getTokenInfo();
@@ -315,7 +315,7 @@ export default {
           BigNumber.toBasic(data.balance, token.decimals) ||
           this.balance ||
           0; // tans
-                data.operate = this.$t('vote.section1.operateBtn');
+                data.operate = this.$t('walletVote.section1.operateBtn');
                 return data;
             };
             if (this.cache) {
@@ -349,7 +349,7 @@ export default {
                 .map(v => {
                     v.voteNum =
             BigNumber.toBasic(v.voteNum, token.decimals) || 0; // tans
-                    v.operate = this.$t('vote.section2.operateBtn');
+                    v.operate = this.$t('walletVote.section2.operateBtn');
                     return v;
                 })
                 .filter(v => {
@@ -376,7 +376,6 @@ export default {
 .vote {
     height: 100%;
     overflow: hidden;
-    padding: 40px;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;

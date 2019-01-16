@@ -1,15 +1,15 @@
 <template>
     <div class="list-wrapper">
-        <div class="title">{{ $t('quota.list.title') }}</div>
-        <div class="total">{{ $t('quota.list.total', { amount: totalAmount }) }}</div>
+        <div class="title">{{ $t('walletQuota.list.title') }}</div>
+        <div class="total">{{ $t('walletQuota.list.total', { amount: totalAmount }) }}</div>
         <div class="list">
             <table-list :headList="[{
                 class: 'addr __pointer',
-                text: $t('quota.beneficialAddr'),
+                text: $t('walletQuota.beneficialAddr'),
                 cell: 'addr'
             },{
                 class: 'amount',
-                text: $t('quota.list.amount'),
+                text: $t('walletQuota.list.amount'),
                 cell: 'showAmount'
             },{
                 class: 'height',
@@ -17,7 +17,7 @@
                 cell: 'withdrawHeight'
             },{
                 class: 'time',
-                text: $t('quota.list.withdrawTime'),
+                text: $t('walletQuota.list.withdrawTime'),
                 cell: 'pledgeDate'
             },{
                 class: 'operate __pointer',
@@ -106,10 +106,10 @@ export default {
 
                 let isMaturity = BigNumber.compared(pledge.withdrawHeight, currentHeight) <= 0;
                 let cancelClass = isMaturity ? 'cancel active' : 'cancel';
-                let cancel = `<span class="${cancelClass}">${this.$t('quota.withdrawalStaking')}</span>`;
+                let cancel = `<span class="${cancelClass}">${this.$t('walletQuota.withdrawalStaking')}</span>`;
 
                 let pledgeDate = isMaturity ? 
-                    this.$t('quota.maturity') : 
+                    this.$t('walletQuota.maturity') : 
                     date(pledge.withdrawTime * 1000, this.$i18n.locale);
 
                 let showAmount = BigNumber.toBasic(pledge.amount || 0, this.tokenInfo.decimals);
@@ -141,7 +141,7 @@ export default {
                 this.showCancel(item, index);
                 return;
             }
-            this.$toast(this.$t('quota.list.unexpired'));
+            this.$toast(this.$t('walletQuota.list.unexpired'));
         },
         gotoDetail(addr) {
             let locale = this.$i18n.locale === 'zh' ? 'zh/' : '';
@@ -164,9 +164,9 @@ export default {
                 this.loading = false;
                 this.activeItem = null;
                 result && this.$toast(this.$t('hint.request', {
-                    name: this.$t('quota.withdrawalStaking') 
+                    name: this.$t('walletQuota.withdrawalStaking') 
                 }));
-                !result && err && this.$toast(this.$t('quota.canclePledgeFail'), err);
+                !result && err && this.$toast(this.$t('walletQuota.canclePledgeFail'), err);
             });
         },
 

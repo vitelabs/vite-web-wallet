@@ -1,28 +1,28 @@
 /**  vite-wallet login */
 
 <template>
-    <div class="trans-list-wrapper __wrapper">
+    <div class="trans-list-wrapper">
         <sec-title class="title" :isShowHelp="false"></sec-title>
         <div class="trans-list-content">
             <table-list class="big-trans" :headList="[{
                 class: 'tType',
-                text: $t('transList.tType.title'),
+                text: $t('walletTransList.tType.title'),
                 cell: 'type'
             },{
                 class: 'status',
-                text: $t('transList.status.title'),
+                text: $t('walletTransList.status.title'),
                 cell: 'status'
             },{
                 class: 'time',
-                text: $t('transList.timestamp'),
+                text: $t('walletTransList.timestamp'),
                 cell: 'date'
             },{
                 class: 'address',
-                text: $t('transList.tAddress'),
+                text: $t('walletTransList.tAddress'),
                 cell: 'transAddr'
             },{
                 class: 'sum',
-                text: $t('transList.sum'),
+                text: $t('walletTransList.sum'),
                 cell: 'amount'
             },{
                 class: 'token',
@@ -35,15 +35,15 @@
 
             <table-list class="small-trans" :headList="[{
                 class: 'tType',
-                text: $t('transList.tType.symbol'),
+                text: $t('walletTransList.tType.symbol'),
                 cell: 'smallType'
             },{
                 class: 'address',
-                text: $t('transList.tAddress'),
+                text: $t('walletTransList.tAddress'),
                 cell: 'smallTransAddr'
             },{
                 class: 'sum',
-                text: $t('transList.sum'),
+                text: $t('walletTransList.sum'),
                 cell: 'smallAmount'
             }]" :contentList="transList" :clickRow="goDetail">
                 <pagination class="__tb_pagination" :currentPage="currentPage + 1" 
@@ -108,7 +108,7 @@ export default {
                 let status = ['unconfirmed', 'confirms', 'confirmed'][trans.status];
                 let statusClass = status === 'confirmed' ? 'green' : 
                     status === 'unconfirmed' ? 'pink': 'blue';
-                let statusText = this.$t(`transList.status.${status}`) + (status === 'confirms' ? `(${trans.confirms})` : '');
+                let statusText = this.$t(`walletTransList.status.${status}`) + (status === 'confirms' ? `(${trans.confirms})` : '');
 
                 let isZero = BigNumber.isEqual(trans.amount, 0);
                 let amount = trans.amount;
@@ -188,7 +188,6 @@ export default {
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
-    padding: 40px;
     height: 100%;
     .title {
         margin-bottom: 40px;

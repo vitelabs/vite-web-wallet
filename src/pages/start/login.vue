@@ -4,7 +4,7 @@
 
         <div class="bottom __btn __pointer">
             <div v-click-outside="hideAccountList" @click="toggleAccountList">
-                <div v-show="!activeAccount" class="__btn_input">{{ $t('create.choose') }}</div>
+                <div v-show="!activeAccount" class="__btn_input">{{ $t('startCreate.choose') }}</div>
 
                 <div v-show="activeAccount && !activeAccount.addr" class="__btn __btn_input">
                     <div class="name __ellipsis">{{activeAccount.name}}</div>
@@ -29,7 +29,7 @@
 
         <div class="bottom __btn __btn_input" 
              :class="{ 'active': !!password || inputItem === 'pass' }">
-            <input ref="passInput" autofocus :placeholder="$t('create.input')" 
+            <input ref="passInput" autofocus :placeholder="$t('startCreate.input')" 
                    v-model="password" :type="'password'"
                    @focus="inputFocus('pass')" @blur="inputBlur('pass')" />
         </div>
@@ -42,11 +42,11 @@
         <div class="btn-list" :class="{ zh: $t('lang') === '中文' }">
             <router-link class="__btn_link" :class="{
                 en: $t('lang') === 'English'  
-            }" :to="{ name: 'importAccount' }">{{ $t('btn.imported') }}</router-link>
+            }" :to="{ name: 'startImport' }">{{ $t('btn.imported') }}</router-link>
             <span class="line" v-show="$t('lang') === '中文'"></span>
             <router-link class="__btn_link" :class="{
                 en: $t('lang') === 'English'  
-            }" :to="{ name: 'restore' }">{{$t('mnemonic.restore')}}</router-link>
+            }" :to="{ name: 'startRestore' }">{{$t('mnemonic.restore')}}</router-link>
         </div>
     </div>
 </template>
@@ -139,7 +139,7 @@ export default {
             }
 
             if (!this.password) {
-                this.$toast(this.$t('create.input'), 'error');
+                this.$toast(this.$t('startCreate.input'), 'error');
                 this.focusPass();
                 return;
             }
@@ -197,11 +197,11 @@ export default {
         height: 16px;
         margin-top: -6px;
         &.down {
-            background: url('../../assets/imgs/down_icon.svg');
+            background: url('~assets/imgs/down_icon.svg');
             background-size: 16px 16px;
         }
         &.up {
-            background: url('../../assets/imgs/up_icon.svg');
+            background: url('~assets/imgs/up_icon.svg');
             background-size: 16px 16px;
         }
     }

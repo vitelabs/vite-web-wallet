@@ -38,7 +38,7 @@ export default {
         addAcc() {
             this.$wallet.clearActiveAccount();
             this.$router.push({
-                name: 'createAccount'
+                name: 'startCreate'
             });
         }
     }

@@ -29,11 +29,6 @@ const contractAddress = {
     test: '\'0x54b716345c14ba851f1b51dcc1491abee6ba8f44\'',
     dev: '\'0x54b716345c14ba851f1b51dcc1491abee6ba8f44\''
 };
-const conversionServer = {
-    production: '\'https://gateway.vite.net\'',
-    test: '\'http://132.232.60.116:8000\'',
-    dev: '\'http://132.232.60.116:8000\''
-};
 const ethNet = {
     production: '\'https://etherscan.io\'',
     test: '\'https://ropsten.etherscan.io\'',
@@ -50,14 +45,12 @@ let plugins = [
     }),
     new VueLoaderPlugin(),
     new webpack.DefinePlugin({
-        'process.env.powDifficulty': '"157108864"',
         'process.env.version': `"${packJson.version}"`,
         'process.env.NODE_ENV': `"${ENV}"`,
         'process.env.goViteServer': goViteServer[ENV],
         'process.env.viteNet': viteNet[ENV],
         'process.env.contractAddress': contractAddress[ENV],
         'process.env.ethServer': ethServer[ENV],
-        'process.env.conversionServer': conversionServer[ENV],
         'process.env.ethNet': ethNet[ENV]
     }),
     new webpack.NormalModuleReplacementPlugin(/\/buffer\//, function(resource) {

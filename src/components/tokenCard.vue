@@ -10,11 +10,11 @@
                 <span class="balance">{{ opt.balance || 0 }}</span>
             </div>
             <div class="item">
-                <span>{{ $t('account.fundFloat') }}</span>
+                <span>{{ $t('wallet.fundFloat') }}</span>
                 <span class="balance">{{ opt.fundFloat || 0 }}</span>
             </div>
             <div class="token-tips">
-                <span>{{ opt.onroadNum || 0 }} {{ $t('account.pend') }}</span>
+                <span>{{ opt.onroadNum || 0 }} {{ $t('wallet.pend') }}</span>
             </div>
         </div>
         <div class="btn __pointer" :class="{ 'unuse': !opt.id || !opt.balance }" 

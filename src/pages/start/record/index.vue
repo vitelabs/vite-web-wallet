@@ -5,7 +5,7 @@
         <mnemonic :title="'mnemonic.record'" :isLoading="isLoading" :submit="login">
             <div class="row">
                 <span @click="change" class="change __pointer">{{ $t('mnemonic.change', { len }) }}</span>
-                <img @click="copy" class="copy __pointer" src="../assets/imgs/copy_white.svg"/>
+                <img @click="copy" class="copy __pointer" src="~assets/imgs/copy_white.svg"/>
             </div>
             <div class="wrapper">
                 <copyOK class="copy-wrapper" :copySuccess="copySuccess"></copyOK>

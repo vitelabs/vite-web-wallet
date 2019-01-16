@@ -31,24 +31,14 @@
 import testNotice from 'components/testNotice';
 
 import viteLogo from 'assets/imgs/sidebar_logo.svg';
-import account from 'assets/imgs/index_icon_default.svg';
-import accountActive from 'assets/imgs/index_icon_pressed.svg';
-import transList from 'assets/imgs/transfer_default.svg';
-import transListActive from 'assets/imgs/transfer_pressed.svg';
+import wallet from 'assets/imgs/wallet_default.svg';
+import walletActive from 'assets/imgs/wallet_pressed.svg';
 import setting from 'assets/imgs/settings_default.svg';
 import settingActive from 'assets/imgs/settings_pressed.svg';
 import logout from 'assets/imgs/logout_default.svg';
 import logoutActive from 'assets/imgs/logout_pressed.svg';
 import login from 'assets/imgs/login_default.svg';
 import loginActive from 'assets/imgs/login_pressed.svg';
-import quota from 'assets/imgs/quota_default.svg';
-import quotaActive from 'assets/imgs/quota_pressed.svg';
-import SBP from 'assets/imgs/SBP_default.svg';
-import SBPActive from 'assets/imgs/SBP_active.svg';
-import vote from 'assets/imgs/vote_default.svg';
-import voteActive from 'assets/imgs/vote_active.svg';
-import conversion from 'assets/imgs/conversion_default.svg';
-import conversionActive from 'assets/imgs/conversion_pressed.svg';
 import exchange from 'assets/imgs/exchange_default.svg';
 import exchangeActive from 'assets/imgs/exchange_pressed.svg';
 
@@ -78,18 +68,8 @@ export default {
             iconHover: false,
             viteLogo,
             icon: {
-                account,
-                accountActive,
-                transList,
-                transListActive,
-                quota,
-                quotaActive,
-                SBP,
-                SBPActive,
-                vote,
-                voteActive,
-                conversion,
-                conversionActive,
+                wallet,
+                walletActive,
                 exchange,
                 exchangeActive,
                 setting,

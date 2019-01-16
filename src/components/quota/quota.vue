@@ -38,7 +38,7 @@ export default {
         },
         _submit() {
             this.$router.push({
-                name: 'quota'
+                name: 'walletQuota'
             });
             this.submit && this.submit();
         }

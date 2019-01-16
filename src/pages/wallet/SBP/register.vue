@@ -3,38 +3,38 @@
         <div class="row">
             <div class="item">
                 <div class="title">
-                    {{ $t('SBP.section1.nodeName') }}
+                    {{ $t('walletSBP.section1.nodeName') }}
                     <span v-show="nodeNameErr" class="err">{{ nodeNameErr }}</span>
                 </div>
                 <span class="tips" :class="{'active': tipsType === 'name'}">
-                    {{  tipsType === 'name' ? $t('SBP.section1.nameHint') : '' }}
+                    {{  tipsType === 'name' ? $t('walletSBP.section1.nameHint') : '' }}
                 </span>
                 <vite-input v-model="nodeName" :valid="testName"
-                            :placeholder="$t('SBP.section1.namePlaceholder')"
+                            :placeholder="$t('walletSBP.section1.namePlaceholder')"
                             @blur="hideTips" @focus="showTips('name')"></vite-input>
             </div>
             <div class="item">
                 <div class="title">
-                    {{ $t('SBP.section1.producerAddr') }}
+                    {{ $t('walletSBP.section1.producerAddr') }}
                     <span v-show="producerAddrErr" class="err">{{ producerAddrErr }}</span>
                 </div>
                 <span class="tips" :class="{'active': tipsType === 'addr'}">
-                    {{ tipsType === 'addr' ? $t('SBP.section1.addrHint') : '' }}
+                    {{ tipsType === 'addr' ? $t('walletSBP.section1.addrHint') : '' }}
                 </span>
                 <vite-input v-model="producerAddr" :valid="testAddr"
-                            :placeholder="$t('SBP.section1.addrPlaceholder')"
+                            :placeholder="$t('walletSBP.section1.addrPlaceholder')"
                             @blur="hideTips" @focus="showTips('addr')"></vite-input>
             </div>
         </div>
 
         <div class="row">
             <div class="item">
-                <div class="title">{{ $t('SBP.section1.quotaAddr') }}</div>
+                <div class="title">{{ $t('walletSBP.section1.quotaAddr') }}</div>
                 <div class="input-item all unuse __ellipsis">{{ quotaAddr }}</div>
             </div>
             <div class="item">
-                <div class="title">{{ $t('SBP.section1.quotaTime') }}</div>
-                <div class="input-item all unuse __ellipsis">{{ $t('SBP.section1.time') }}</div>
+                <div class="title">{{ $t('walletSBP.section1.quotaTime') }}</div>
+                <div class="input-item all unuse __ellipsis">{{ $t('walletSBP.section1.time') }}</div>
             </div>
         </div>
 
@@ -49,7 +49,7 @@
             <div class="item">
                 <div class="btn all __pointer" :class="{
                     'unuse': btnUnuse
-                }" @click="validTx">{{ $t('SBP.section1.confirmBtn') }}</div>
+                }" @click="validTx">{{ $t('walletSBP.section1.confirmBtn') }}</div>
             </div>
         </div>
     </div>
@@ -151,12 +151,12 @@ export default {
             if (!nodeName || 
                 !/^[a-zA-Z0-9_\.]+$/g.test(nodeName) ||
                 nodeName.length > 40) {
-                this.nodeNameErr = this.$t('SBP.section1.nameErr');
+                this.nodeNameErr = this.$t('walletSBP.section1.nameErr');
                 return;
             }
 
             if (this.regNameList.indexOf(nodeName) !== -1) {
-                this.nodeNameErr = this.$t('SBP.section1.nameUsed');
+                this.nodeNameErr = this.$t('walletSBP.section1.nameUsed');
                 return;
             }
 
@@ -170,13 +170,13 @@ export default {
 
             if (!this.producerAddr || 
                 !address.isValidHexAddr(this.producerAddr)) {
-                this.producerAddrErr = this.$t('SBP.section1.addrErr');
+                this.producerAddrErr = this.$t('walletSBP.section1.addrErr');
                 return;
             }
 
             let nodeName = this.nodeName.trim();
             if (!this.canUseAddr(nodeName, this.producerAddr)) {
-                this.producerAddrErr = this.$t('SBP.section1.addrUsed');
+                this.producerAddrErr = this.$t('walletSBP.section1.addrUsed');
                 return;
             }
 
@@ -210,10 +210,10 @@ export default {
             }
 
             this.activeAccount.initPwd({
-                title: this.$t('SBP.confirm.title'),
-                submitTxt: this.$t('SBP.confirm.rightBtn'),
-                cancelTxt: this.$t('SBP.confirm.leftBtn'),
-                content: this.$t('SBP.confirm.describe', { amount }),
+                title: this.$t('walletSBP.confirm.title'),
+                submitTxt: this.$t('walletSBP.confirm.rightBtn'),
+                cancelTxt: this.$t('walletSBP.confirm.leftBtn'),
+                content: this.$t('walletSBP.confirm.describe', { amount }),
                 submit: () => {
                     this.sendRegisterTx();
                 }
@@ -228,7 +228,7 @@ export default {
                 producerAddr, amount, nodeName
             }, 'SBPreg').then(() => {
                 this.loading = false;
-                this.$toast(this.$t('SBP.section1.registerSuccess'));
+                this.$toast(this.$t('walletSBP.section1.registerSuccess'));
                 this.clearAll();
                 this.$store.dispatch('loopRegList', {
                     address: this.quotaAddr,
@@ -245,11 +245,11 @@ export default {
 
                 if (err && err.error && err.error.code && err.error.code === -35002) {
                     quotaConfirm({
-                        operate: this.$t('SBP.register')
+                        operate: this.$t('walletSBP.register')
                     });
                     return;
                 }
-                this.$toast(this.$t('SBP.section1.registerFail'), err);
+                this.$toast(this.$t('walletSBP.section1.registerFail'), err);
             });
         }
     }

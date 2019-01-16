@@ -1,11 +1,11 @@
 <template>
     <div class="my-quota-wrapper">
         <div class="row">
-            <div class="title">{{ $t('quota.myQuota') }}</div>
+            <div class="title">{{ $t('walletQuota.myQuota') }}</div>
             <div class="text">{{ quota || 0 }}</div>
         </div>
         <div class="row">
-            <div class="title">{{ $t('quota.maxTxNum') }}</div>
+            <div class="title">{{ $t('walletQuota.maxTxNum') }}</div>
             <div class="text">{{ txNum || 0 }}</div>
         </div>
     </div>

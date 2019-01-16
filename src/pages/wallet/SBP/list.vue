@@ -1,8 +1,8 @@
 <template>
     <div class="__tb tb-list">
         <div class="__tb_row __tb_head __pointer">
-            <div class="__tb_cell name">{{ $t('SBP.section1.nodeName') }}</div>
-            <div class="__tb_cell addr">{{ $t('SBP.section1.producerAddr') }}</div>
+            <div class="__tb_cell name">{{ $t('walletSBP.section1.nodeName') }}</div>
+            <div class="__tb_cell addr">{{ $t('walletSBP.section1.producerAddr') }}</div>
             <div class="__tb_cell amount">{{ $t('stakingAmount') }}</div>
             <div class="__tb_cell height">{{ $t('withdrawHeight') }}</div>
             <div class="__tb_cell operate">{{ $t('action') }}</div>
@@ -19,7 +19,7 @@
                     {{ item.isCancel ? '--' : item.withdrawHeight }}
                     <i v-if="!item.isCancel" @click.self.stop="showTime(index)" class="tipsicon __pointer">
                         <tooltips v-show="showTimeTips === index" v-click-outside="hideTime" class="sbp-tooltips"
-                                  :content="$t('SBP.section2.expireDate', { time: item.time })"></tooltips>
+                                  :content="$t('walletSBP.section2.expireDate', { time: item.time })"></tooltips>
                     </i>
                 </div>
                 <div class="__tb_cell operate">
@@ -27,7 +27,7 @@
                     <span v-if="!item.isCancel" class="btn" :class="{
                         '__pointer': item.isMaturity,
                         'unuse': !item.isMaturity   
-                    }" @click="cancel(item)">{{ $t('SBP.cancelBtn') }}</span>
+                    }" @click="cancel(item)">{{ $t('walletSBP.cancelBtn') }}</span>
                     <span v-if="item.isCancel" class="btn __pointer" @click="reg(item)">{{ $t('btn.reReg') }}</span>
                 </div>
             </div>
@@ -147,7 +147,7 @@ export default {
             this.sendTx({
                 producerAddr, amount, nodeName
             }, 'SBPreg').then(() => {
-                this.$toast(this.$t('SBP.section1.registerSuccess'));
+                this.$toast(this.$t('walletSBP.section1.registerSuccess'));
                 this.$store.dispatch('loopRegList', {
                     address: this.address,
                     nodeName, 
@@ -158,11 +158,11 @@ export default {
                 console.warn(err);
                 if (err && err.error && err.error.code && err.error.code === -35002) {
                     quotaConfirm({
-                        operate: this.$t('SBP.register')
+                        operate: this.$t('walletSBP.register')
                     });
                     return;
                 }
-                this.$toast(this.$t('SBP.section1.registerFail'), err);
+                this.$toast(this.$t('walletSBP.section1.registerFail'), err);
             });
         },
         reg(item) {
@@ -172,10 +172,10 @@ export default {
             }
 
             this.activeAccount.initPwd({
-                title: this.$t('SBP.confirm.title'),
-                submitTxt: this.$t('SBP.confirm.rightBtn'),
-                cancelTxt: this.$t('SBP.confirm.leftBtn'),
-                content: this.$t('SBP.confirm.describe', { amount }),
+                title: this.$t('walletSBP.confirm.title'),
+                submitTxt: this.$t('walletSBP.confirm.rightBtn'),
+                cancelTxt: this.$t('walletSBP.confirm.leftBtn'),
+                content: this.$t('walletSBP.confirm.describe', { amount }),
                 submit: () => {
                     this.sendRegisterTx(item);
                 }
@@ -187,8 +187,8 @@ export default {
             }
 
             this.activeAccount.initPwd({
-                title: this.$t('SBP.section2.cancelConfirm.title'),
-                content: this.$t('SBP.section2.cancelConfirm.describe', {
+                title: this.$t('walletSBP.section2.cancelConfirm.title'),
+                content: this.$t('walletSBP.section2.cancelConfirm.describe', {
                     amount: item.pledgeAmount
                 }),
                 submit: () => {
@@ -199,7 +199,7 @@ export default {
                         nodeName
                     }, 'revokeReg').then(()=>{
                         this.$toast(this.$t('hint.request', {
-                            name: this.$t('SBP.section2.cancel')
+                            name: this.$t('walletSBP.section2.cancel')
                         }));
                         this.$store.dispatch('loopRegList', {
                             address: this.address,
@@ -210,11 +210,11 @@ export default {
                     }).catch((err)=>{
                         if (err && err.error && err.error.code && err.error.code === -35002) {
                             quotaConfirm({
-                                operate: this.$t('SBP.cancel')
+                                operate: this.$t('walletSBP.cancel')
                             });
                             return;
                         }
-                        this.$toast(this.$t('SBP.section2.cancelFail'), err);
+                        this.$toast(this.$t('walletSBP.section2.cancelFail'), err);
                     });
                 }
             }, true);

@@ -38,7 +38,7 @@ export default {
         },
         register() {
             this.$router.push({
-                name: 'createAccount'
+                name: 'startCreate'
             });
         }
     }

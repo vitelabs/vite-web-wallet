@@ -48,7 +48,7 @@ export default {
             this.$wallet.restoreAddrs(mnemonic).then(()=>{
                 this.isLoading = false;
                 this.$router.push({
-                    name: 'createAccount'
+                    name: 'startCreate'
                 });
             }).catch(err => {
                 console.warn(err);

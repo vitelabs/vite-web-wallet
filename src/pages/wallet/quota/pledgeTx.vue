@@ -2,7 +2,7 @@
     <div class="pledge-tx-wrapper">
         <div class="row">
             <div class="item">
-                <div class="title">{{ $t('quota.fromAddr') }}</div>
+                <div class="title">{{ $t('walletQuota.fromAddr') }}</div>
                 <div class="input-item all unuse __ellipsis">{{ addr }}</div>
             </div>
             <div class="item">
@@ -11,7 +11,7 @@
                     <span v-show="amountErr" class="err">{{ amountErr }}</span>
                 </div>
                 <vite-input v-model="amount" :valid="testAmount"
-                            :placeholder="$t('quota.amountPlaceholder')">
+                            :placeholder="$t('walletQuota.amountPlaceholder')">
                     <span class="unit">VITE</span>
                 </vite-input>
             </div>
@@ -20,15 +20,15 @@
         <div class="row">
             <div class="item">
                 <div class="title">
-                    {{ $t('quota.beneficialAddr') }}
+                    {{ $t('walletQuota.beneficialAddr') }}
                     <span v-show="!isValidAddress" class="err">{{ $t('hint.addrFormat') }}</span>
                 </div>
                 <vite-input v-model="toAddr" :valid="testAddr"
-                            :placeholder="$t('quota.addrPlaceholder')"></vite-input>
+                            :placeholder="$t('walletQuota.addrPlaceholder')"></vite-input>
             </div>
             <div class="item">
-                <div class="title">{{ $t('quota.time') }}</div>
-                <span class="input-item unuse about">{{ $t('quota.aboutDays', { day: '3' }) }}</span>
+                <div class="title">{{ $t('walletQuota.time') }}</div>
+                <span class="input-item unuse about">{{ $t('walletQuota.aboutDays', { day: '3' }) }}</span>
                 <span class="btn __pointer" :class="{
                     'unuse': btnUnuse
                 }" @click="validTx">{{ $t('submitStaking') }}</span>
@@ -99,7 +99,7 @@ export default {
             }
 
             if (BigNumber.compared(this.amount, 10) < 0) {
-                this.amountErr = this.$t('quota.limitAmt');
+                this.amountErr = this.$t('walletQuota.limitAmt');
                 return false;
             }
 
@@ -159,9 +159,9 @@ export default {
 
             this.activeAccount.initPwd({
                 title: this.$t('submitStaking'),
-                submitTxt: this.$t('quota.confirm.submit.rightBtn'),
-                cancelTxt: this.$t('quota.confirm.submit.leftBtn'),
-                content: this.$t('quota.confirm.submit.describe', {
+                submitTxt: this.$t('walletQuota.confirm.submit.rightBtn'),
+                cancelTxt: this.$t('walletQuota.confirm.submit.leftBtn'),
+                content: this.$t('walletQuota.confirm.submit.describe', {
                     amount: this.amount
                 }),
                 submit: () => {
@@ -179,7 +179,7 @@ export default {
             }, 'getQuota', (result, err) => {
                 this.loading = false;
                 if (!result) {
-                    err && this.$toast(this.$t('quota.pledgeFail'), err);
+                    err && this.$toast(this.$t('walletQuota.pledgeFail'), err);
                     return;
                 }
 
