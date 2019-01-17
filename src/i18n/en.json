@@ -317,7 +317,7 @@
             "text": "You can join and vote for 25 SBPs （Snapshot Block Producer), each round of voting lasts 75s, the polls you can use for voting are equivalent to the amount of VITE tokens owned by voting address, the default selection is the choice of previous round, the SBPs will be chosen from random 23 out of top 25 candidate nodes, plus random 2 out of the candidate nodes ranking 26th-100th on the list, 25 SBPs in total."
         },
         "toReward": "View my rewards",
-        "Voting": "Voting",
+        "voting": "Voting",
         "search": "Please input node name or block creation address",
         "addrNoExistErr": "You aren't able to vote for now as your address has no transaction record before",
         "revokeVoting": "Revoke voting",
@@ -395,6 +395,11 @@
     },
     "exchange": {
         "title": "交易中心",
+        "search": "查询",
+        "txPair": "交易对",
+        "price": "价格",
+        "upDown": "涨跌幅",
+        "txNum": "交易量",
         "latestTrans": {
             "title": "最新交易"
         },

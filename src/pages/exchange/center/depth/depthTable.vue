@@ -38,6 +38,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import './center.scss';
+@import '../center.scss';
 
 </style>

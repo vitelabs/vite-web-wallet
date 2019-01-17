@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="10px" height="10px" viewBox="0 0 10 10" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
+    <title>小菜单</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="309" height="377" rx="2"></rect>
+        <filter x="-5.7%" y="-4.1%" width="111.3%" height="109.3%" filterUnits="objectBoundingBox" id="filter-2">
+            <feMorphology radius="0.5" operator="dilate" in="SourceAlpha" result="shadowSpreadOuter1"></feMorphology>
+            <feOffset dx="0" dy="2" in="shadowSpreadOuter1" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0.690196078   0 0 0 0 0.752941176   0 0 0 0 0.929411765  0 0 0 0.422186368 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="交易所-0114" transform="translate(-86.000000, -240.000000)">
+            <g id="K线图" fill="#FFFFFF" fill-rule="nonzero">
+                <rect id="矩形" x="0" y="0" width="1440" height="820"></rect>
+            </g>
+            <g id="交易中心" transform="translate(80.000000, 124.000000)">
+                <g id="Rectangle-2">
+                    <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                    <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-1"></use>
+                </g>
+                <g id="交易对-0111-未收藏" transform="translate(0.000000, 111.000000)">
+                    <rect id="矩形" fill="#FFFFFF" fill-rule="nonzero" x="0" y="0" width="309" height="20"></rect>
+                    <text id="0.00753" font-family="PingFang-SC-Regular, PingFang SC" font-size="12" font-weight="normal" fill="#5E6875">
+                        <tspan x="106" y="15">0.00753</tspan>
+                    </text>
+                    <text id="-5.87" font-family="PingFang-SC-Regular, PingFang SC" font-size="12" font-weight="normal" fill="#E5494D">
+                        <tspan x="196" y="15">-5.87</tspan>
+                    </text>
+                    <text id="5078" font-family="PingFang-SC-Regular, PingFang SC" font-size="12" font-weight="normal" fill="#5E6875">
+                        <tspan x="274" y="14.5">5078</tspan>
+                    </text>
+                    <text id="ADA/BNB" font-family="PingFang-SC-Regular, PingFang SC" font-size="12" font-weight="normal" fill="#5E6875">
+                        <tspan x="26" y="15">ADA/BNB</tspan>
+                    </text>
+                    <g id="分组" stroke-width="1" fill-rule="evenodd" transform="translate(6.000000, 5.000000)" stroke="#CED1D5">
+                        <path d="M7.54048695,8.49668031 L7.05529712,5.66780652 L9.11059424,3.66438697 L6.27024348,3.25165984 L5,0.677865439 L3.72975652,3.25165984 L0.889405761,3.66438697 L2.94470288,5.66780652 L2.45951305,8.49668031 L5,7.16106728 L7.54048695,8.49668031 Z" id="星形" stroke-width="0.6" fill-rule="nonzero"></path>
+                    </g>
+                </g>
+                <g id="交易对-0111-copy" transform="translate(0.000000, 111.000000)" fill-rule="nonzero">
+                    <rect id="矩形" fill="#FFFFFF" x="0" y="0" width="309" height="20"></rect>
+                    <g id="分组" transform="translate(6.000000, 5.000000)" stroke="#CED1D5" stroke-width="0.6">
+                        <path d="M7.54048695,8.49668031 L7.05529712,5.66780652 L9.11059424,3.66438697 L6.27024348,3.25165984 L5,0.677865439 L3.72975652,3.25165984 L0.889405761,3.66438697 L2.94470288,5.66780652 L2.45951305,8.49668031 L5,7.16106728 L7.54048695,8.49668031 Z" id="星形"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

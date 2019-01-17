@@ -12,7 +12,7 @@
                 </div>
                 <vite-input v-model="amount" :valid="testAmount"
                             :placeholder="$t('walletQuota.amountPlaceholder')">
-                    <span class="unit">VITE</span>
+                    <span slot="after" class="unit">VITE</span>
                 </vite-input>
             </div>
         </div>
