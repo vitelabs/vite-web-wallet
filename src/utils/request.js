@@ -49,8 +49,8 @@ export default function request({ method = 'GET', path, params = {} }) {
         };
 
         xhr.onload = function () {
-            if (xhr.status == 200) {
-                try {
+            try {
+                if (xhr.status == 200) {
                     let { code, msg, data, error } = JSON.parse(xhr.responseText);
                     if (code !== 200) {
                         return _rej({
@@ -61,11 +61,14 @@ export default function request({ method = 'GET', path, params = {} }) {
 
                     data = data || null;
                     _res(data);
-                } catch (e) {
-                    rej(e);
+                } else {
+                    _rej( JSON.parse(xhr.responseText) );
                 }
-            } else {
-                _rej( JSON.parse(xhr.responseText) );
+            } catch (e) {
+                _rej({
+                    status: xhr.status,
+                    message: xhr.responseText || e
+                });
             }
         };
         xhr.onerror = function (err) {

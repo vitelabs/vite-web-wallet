@@ -15,7 +15,8 @@ const state = {
         price: 10,
         num: 10,
         time: 293023
-    }]
+    }],
+    isLoading: true
 };
 
 // const mutations = {

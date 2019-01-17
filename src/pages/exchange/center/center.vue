@@ -9,8 +9,8 @@
 
 <script>
 import layout from './layout';
-import depth from './depth';
-import market from './market';
+import depth from './depth/depth.vue';
+import market from './market/market.vue';
 import latestTrans from './latestTrans';
 import limitPrice from './limitPrice';
 
@@ -19,10 +19,11 @@ export default {
         layout, depth, market, latestTrans, limitPrice
     },
     created() {
-        // ....
+
     },
     data() {
         return {
+
         };
     },
     methods: {

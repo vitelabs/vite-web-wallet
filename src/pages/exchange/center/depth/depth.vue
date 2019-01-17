@@ -50,7 +50,7 @@ export default {
             return this.$store.state.exchangeDepth.isLoading;
         },
         activeTrans() {
-            return this.$store.state.exchangeLatestTrans.trans;
+            return this.$store.state.exchangeLatestTx.trans;
         }
     },
     methods: {
@@ -69,7 +69,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import './center.scss';
+@import '../center.scss';
 
 .depth-wrapper {
     width: 100%;

@@ -19,7 +19,7 @@
 export default {
     computed: {
         latestTrans() {
-            return this.$store.state.exchangeLatestTrans.trans;
+            return this.$store.state.exchangeLatestTx.trans;
         }
     },
     methods: {

@@ -31,7 +31,7 @@ const state = {
         pirce: 10,
         num: 10
     }],
-    isLoading: false
+    isLoading: true
 };
 
 const mutations = {
