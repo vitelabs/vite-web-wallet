@@ -51,13 +51,6 @@ class ethWallet {
     }
 
     init(cb) {
-        let _l = () => {
-            this._stopWrongLoop();
-            this.wrongLoop = setTimeout(() => {
-                this._loopWrong();
-            }, balanceTime);
-        };
-
         this._getWrongBalance().then(({
             viteBalance, ethBalance
         }) => {
@@ -75,7 +68,11 @@ class ethWallet {
             cb && cb();
         }).catch((err) => {
             console.warn(err);
-            _l();
+
+            this._stopWrongLoop();
+            this.wrongLoop = setTimeout(() => {
+                this.init();
+            }, balanceTime);
         });
     }
 
