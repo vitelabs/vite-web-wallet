@@ -2,7 +2,7 @@ import qs from 'qs';
 
 const reqTimeout = 30000;
 
-export default function request({ method = 'GET', path, params = {} }) {
+export default function request({ method = 'GET', path, params = {}, timeout = reqTimeout }) {
     method = method.toUpperCase();
 
     const xhr = new XMLHttpRequest();
@@ -28,7 +28,7 @@ export default function request({ method = 'GET', path, params = {} }) {
             _t = null;
             xhr.abort && xhr.abort();
             rej('timeout');
-        }, reqTimeout);
+        }, timeout);
         
         let _rej = (err) => {
             if (!_t) {
