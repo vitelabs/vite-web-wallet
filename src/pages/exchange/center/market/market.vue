@@ -274,7 +274,7 @@ export default {
                 // Done
                 this.txPairList = list;
 
-                this.startLoopList();
+                // this.startLoopList();
             } catch(err) {
                 console.warn(err);
                 this.isLoading = false;

@@ -24,6 +24,11 @@ export default {
         num2 = new BigNumber(num2);
         return num1.isEqualTo(num2);
     },
+    minus(x, y) {
+        x = new BigNumber(x);
+        y = new BigNumber(y);
+        return x.minus(y);
+    },
     dividedToNumber(num1, num2, fix = 0) {
         num1 = new BigNumber(num1);
         num2 = new BigNumber(num2);
