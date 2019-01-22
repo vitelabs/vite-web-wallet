@@ -46,10 +46,10 @@ const mutations = {
 
 const actions = {
     exFetchDepth({ commit, rootState }) {
-        let activeTrans = rootState.exchangeTransPairs.activeTrans;
+        let activeTx = rootState.exchangeActiveTxPair.activeTx;
         commit('exSetDepthLoading', true);
         
-        console.log(activeTrans);
+        console.log(activeTx);
     }
 };
 

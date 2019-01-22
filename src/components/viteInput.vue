@@ -21,6 +21,10 @@ export default {
         placeholder: {
             type: String,
             default: ''
+        },
+        _value: {
+            type: String,
+            default: ''
         }
     },
     destroyed () {
@@ -29,10 +33,16 @@ export default {
     data() {
         return {
             valueTimeout: null,
-            value: ''
+            value: this._value
         };
     },
+    model: {
+        prop: '_value'
+    },
     watch: {
+        _value: function() {
+            this.value = this._value;
+        },
         value: function() {
             this.clear();
             this.valueTimeout = setTimeout(()=> {

@@ -2,7 +2,7 @@
     <div class="market-wrapper">
         <tab-list :setToTokenId="setToTokenId"></tab-list>
 
-        <vite-input class="search-input" v-model="searchText" :placeholder="$t('exchange.search')">
+        <vite-input class="search-input" :valid="fetchSearchList" v-model="searchText" :placeholder="$t('exchange.search')">
             <img slot="before" class="icon" src="~assets/imgs/search.svg"/>
         </vite-input>
 
@@ -27,19 +27,21 @@
             </div>
         </div>
 
-        <tx-pair-list :list="txPairs" :activeCode="activeCode" :currentRule="currentOrderRule"
-                      :setActiveTransPair="setActiveTransPair" :setFavorite="setFavorite"></tx-pair-list>
+        <loading v-show="isLoading"></loading>
+        <div class="hint" v-show="isShowSearchErr">{{ searchErr }}</div>
+        <div class="hint" v-show="!isShowSearchErr && isShowNoData">{{ noData }}</div>
+        <tx-pair-list v-show="isShowList" :list="activeTxPairList"
+                      :favoritePairs="favoritePairs" :currentRule="currentOrderRule"
+                      :setFavorite="setFavorite"></tx-pair-list>
     </div>
 </template>
 
 <script>
 import viteInput from 'components/viteInput';
 import loading from 'components/loading';
-
-// import { defaultPair, assignPair } from 'services/exchange';
-
 import localStorage from 'utils/localStorage';
 import { timer } from 'utils/asyncFlow';
+import { defaultPair, assignPair, pairSearch } from 'services/exchange';
 
 import orderArrow from './orderArrow';
 import tabList from './tabList';
@@ -53,76 +55,96 @@ export default {
         viteInput, loading, orderArrow, tabList, txPairList
     },
     destroyed() {
-        this.stopLoopTxPair();
+        this.stopLoopList();
     },
     data() {
-        let favoritePairsCode = localStorage.getItem(FavoriteKey) || [];
-
         return {
-            toTokenId: '',
-            defaultList: [],
-
-            favoritePairsCode,
-            favoriteList: [],
-
+            isLoading: false,
             currentOrderRule: 'txPair',
             isOnlyFavorite: false,
 
-            // sdsdsdsd
+            favoritePairs: localStorage.getItem(FavoriteKey) || {},
+
+            toTokenId: '',
+            txPairList: [],
+
+            isShowSearch: false,
+            searchErr: '',
             searchText: '',
             searchList: []
         };
     },
     watch: {
         toTokenId: function() {
-            this.fetchDefaultPair();
-        },
-        favoritePairsCode: function() {
-            let codeList = [];
-            this.favoritePairsCode.forEach((code) => {
-                for(let i = 0; i<this.defaultList.length; i++) {
-                    let txPair = this.defaultList[i];
-                    if (txPair.pairCode === code) {
-                        return;
-                    }
-                }
-                codeList.push(code);
-            });
-            this.fetchAssignPairs(codeList);
+            this.init();
         }
     },
     computed: {
-        pairCodeList() {
-            let codeList= [];
-            this.txPairs.forEach((_t) => {
-                codeList.push(_t.pairCode);
+        isShowSearchErr() {
+            return this.searchText && this.isShowSearch && this.searchErr;
+        },
+        isShowNoData() {
+            return !this.activeTxPairList || !this.activeTxPairList.length;
+        },
+        isShowList() {
+            return !this.isShowSearchErr && !this.isShowNoData;
+        },
+        txPairCodeList() {
+            let codeList = [];
+            this.txPairList.forEach((txPair) => {
+                codeList.push(txPair.pairCode);
             });
             return codeList;
         },
-        txPairs() {
-            if (this.searchText) {
-                return this.searchList;
+        favoriteCodeList() {
+            let codeList = [];
+            for (let code in this.favoritePairs) {
+                let item = this.favoritePairs[code];
+                if (!item || !item.toTokenId || item.toTokenId !== this.toTokenId) {
+                    return;
+                }
+                codeList.push(code);
             }
-
-            // isOnlyFavorite
-            // favoriteList, defaultList, currentOrderRule, activeTxPair
-
-            let txPairs = this.defaultList || [];
-            txPairs.concat(this.favoriteList || []);
+            return codeList;
+        },
+        noData() {
+            if (this.searchText && this.isShowSearch) {
+                return this.$t('exchange.noData.search');
+            }
+            if (this.isOnlyFavorite) {
+                return this.$t('exchange.noData.favorite');
+            }
+            return this.$t('hint.noData');
+        },
+        activeTxPairList() {
+            let list = this.searchText && this.isShowSearch ? this.searchList : 
+                this.isOnlyFavorite ? this.activeFavoriteList :
+                    this.txPairList;
 
             let i;
-            for (i=0; i<txPairs.length; i++) {
-                if (txPairs[i].pairCode === this.activeCode) {
+            for (i=0; i<list.length; i++) {
+                if (list[i].pairCode === this.activePairCode) {
                     break;
-                }   
-            }
-            if (i === txPairs.length && this.activeTxPair) {
-                txPairs.push(this.activeTxPair);
+                }
             }
 
-            return txPairs;
+            if (i === list.length && this.activeTxPair) {
+                list.push(this.activeTxPair);
+            }
+
+            return list;
         },
-        activeCode() {
+        activeFavoriteList() {
+            let list = [];
+            this.txPairList.forEach((txPair) => {
+                if (this.favoriteCodeList.indexOf(txPair.pairCode) === -1) {
+                    return;
+                }
+                list.push(txPair);
+            });
+            return list;
+        },
+        activePairCode() {
             return this.activeTxPair ? this.activeTxPair.pairCode || null : null;
         },
         activeTxPair() {
@@ -136,116 +158,183 @@ export default {
         toggleShowFavorite() {
             this.isOnlyFavorite = !this.isOnlyFavorite;
         },
-        setFavorite(transPair) {
-            let pairCode = transPair.pairCode;
-            let i = this.favoritePairsCode.indexOf(pairCode);
-            if (i < 0) {
-                this.favoritePairsCode.push(pairCode);
-            } else {
-                this.favoritePairsCode.splice(i, 1);
-            }
-            localStorage.setItem(FavoriteKey, this.favoritePairsCode);
-        },
         setOrderRule(rule) {
-            console.log(rule);
             this.currentOrderRule = rule;
         },
-        setActiveTransPair(transPair) {
-            this.$store.dispatch('exFetchActiveTxPair', transPair);
+        setFavorite(txPair) {
+            let pairCode = txPair.pairCode;
+            let toTokenId = txPair.tToken;
+
+            this.favoritePairs = this.favoritePairs || {};
+            if (this.favoritePairs[pairCode]) {
+                delete this.favoritePairs[pairCode];
+            } else {
+                this.favoritePairs[pairCode] = { toTokenId };
+            }
+            this.favoritePairs = Object.assign({}, this.favoritePairs);
+
+            localStorage.setItem(FavoriteKey, this.favoritePairs);
         },
 
-        startLoopTxPair() {
+        async init() {
+            // First, clear.
+            this.searchText = '';
+            this.searchList = [];
+            this.stopLoopList();
+
+            // Second, wait txPairList.
+            this.isLoading = true;
+            let toTokenId = this.toTokenId;
+
+            try {
+                let _r = [[{
+                    'pairCode': '11', //交易对Id
+                    'fToken': '23232', //fromTokenId
+                    'fTokenShow': 'TBIJN', //fromToken简称 
+                    'tToken': '1', //toTokenId
+                    'tTokenShow': 'TBIJN', //toToken简称 
+                    'priceBefore24h': '232323', 
+                    'pricePrev': '2323232', 
+                    'price': '23.23232323', 
+                    'price24hChange': '232323', 
+                    'price24hHigh': '232323', 
+                    'price24hLow': '232323', 
+                    'quantity24h': '232233323', 
+                    'amount24h': '232323' 
+                }, {
+                    'pairCode': '12', //交易对Id
+                    'fToken': '23232', //fromTokenId
+                    'fTokenShow': 'ABIJN', //fromToken简称 
+                    'tToken': '1', //toTokenId
+                    'tTokenShow': 'TBIJN', //toToken简称 
+                    'priceBefore24h': '232323', 
+                    'pricePrev': '2323232', 
+                    'price': '23.23232323', 
+                    'price24hChange': '232323', 
+                    'price24hHigh': '232323', 
+                    'price24hLow': '232323', 
+                    'quantity24h': '232233323', 
+                    'amount24h': '232323' 
+                }, {
+                    'pairCode': '13', //交易对Id
+                    'fToken': 'WOEPJ', //fromTokenId
+                    'fTokenShow': 'WOEPJ', //fromToken简称 
+                    'tToken': '1', //toTokenId
+                    'tTokenShow': 'WOEPJ', //toToken简称 
+                    'priceBefore24h': '23483', 
+                    'pricePrev': '23483', 
+                    'price': '23', 
+                    'price24hChange': '2324', 
+                    'price24hHigh': '3183041', 
+                    'price24hLow': '41341341', 
+                    'quantity24h': '232341341', 
+                    'amount24h': '142341' 
+                }], [{
+                    'pairCode': '13', //交易对Id
+                    'fToken': 'WOEPJ', //fromTokenId
+                    'fTokenShow': 'WOEPJ', //fromToken简称 
+                    'tToken': '1', //toTokenId
+                    'tTokenShow': 'WOEPJ', //toToken简称 
+                    'priceBefore24h': '23483', 
+                    'pricePrev': '23483', 
+                    'price': '23', 
+                    'price24hChange': '2324', 
+                    'price24hHigh': '3183041', 
+                    'price24hLow': '41341341', 
+                    'quantity24h': '232341341', 
+                    'amount24h': '142341' 
+                }]];
+                // let _r = await Promise.all([
+                //     this.fetchDefaultList(), this.fetchFavoriteList()
+                // ]);
+                if (toTokenId !== this.toTokenId) {
+                    return;
+                }
+
+                // Third, txPairList finish. Get final list.
+                this.isLoading = false;
+                let defaultList = _r[0] || [];
+                let favoriteList = _r[1] || [];
+
+                let list = [];
+                let codeList = [];
+                // Add default
+                defaultList.forEach((txPair) => {
+                    list.push(txPair);
+                    codeList.push(txPair.pairCode);
+                });
+                // Add favorite
+                favoriteList.forEach((txPair) => {
+                    if (codeList.indexOf(txPair.pairCode) !== -1) {
+                        return;
+                    }
+                    list.push(txPair);
+                    codeList.push(txPair.pairCode);
+                });
+                // Done
+                this.txPairList = list;
+
+                this.startLoopList();
+            } catch(err) {
+                console.warn(err);
+                this.isLoading = false;
+            }
+        },
+
+        startLoopList() {
+            this.stopLoopList();
             pairTimer = new timer(()=>{
-                if (!this.pairCodeList || !this.pairCodeList.length) {
+                if (!this.txPairCodeList || !this.txPairCodeList.length) {
                     return Promise.resolve();
                 }
-                return this.fetchAssignPairs(this.pairCodeList);
+                return this.fetchTxPairList();
             }, 2000);
             pairTimer.start();
         },
-        stopLoopTxPair() {
+        stopLoopList() {
             pairTimer && pairTimer.stop();
             pairTimer = null;
         },
 
-        fetchDefaultPair() {
-            this.defaultList = [{
-                'pairCode': '4232', //交易对Id
-                'fToken': '23232', //fromTokenId
-                'fTokenShow': 'TBIJN', //fromToken简称 
-                'tToken': '232323', //toTokenId
-                'tTokenShow': 'TBIJN', //toToken简称 
-                'priceBefore24h': '232323', 
-                'pricePrev': '2323232', 
-                'price': '23.23232323', 
-                'price24hChange': '232323', 
-                'price24hHigh': '232323', 
-                'price24hLow': '232323', 
-                'quantity24h': '232233323', 
-                'amount24h': '232323' 
-            }, {
-                'pairCode': '4232', //交易对Id
-                'fToken': '23232', //fromTokenId
-                'fTokenShow': 'ABIJN', //fromToken简称 
-                'tToken': '232323', //toTokenId
-                'tTokenShow': 'TBIJN', //toToken简称 
-                'priceBefore24h': '232323', 
-                'pricePrev': '2323232', 
-                'price': '23.23232323', 
-                'price24hChange': '232323', 
-                'price24hHigh': '232323', 
-                'price24hLow': '232323', 
-                'quantity24h': '232233323', 
-                'amount24h': '232323' 
-            }, {
-                'pairCode': 'dfad', //交易对Id
-                'fToken': 'WOEPJ', //fromTokenId
-                'fTokenShow': 'WOEPJ', //fromToken简称 
-                'tToken': '41wfss', //toTokenId
-                'tTokenShow': 'WOEPJ', //toToken简称 
-                'priceBefore24h': '23483', 
-                'pricePrev': '23483', 
-                'price': '23', 
-                'price24hChange': '2324', 
-                'price24hHigh': '3183041', 
-                'price24hLow': '41341341', 
-                'quantity24h': '232341341', 
-                'amount24h': '142341' 
-            }];
+        fetchSearchList() {
+            if (!this.searchText) {
+                return;
+            }
 
-            // defaultPair({
-            //     toTokenId: this.toTokenId
-            // }).then((data) => {
-            //     this.defaultList = data;
-            // }).catch((err) => {
-            //     console.warn(err);
-            // });
+            this.isLoading = true;
+            let _fromTokenShow = this.searchText;
+            return pairSearch({
+                fromTokenShow: _fromTokenShow
+            }).then((data) => {
+                if (this.searchText !== _fromTokenShow) {
+                    return;
+                }
+                this.isLoading = false;
+                this.isShowSearch = true;
+                this.searchList = data;
+            }).catch((err) => {
+                console.warn(err);
+                this.isLoading = false;
+                this.isShowSearch = true;
+                this.searchErr = this.$t('hint.err');
+            });
         },
-        fetchAssignPairs(codes) {
-            console.log(codes);
-            this.favoriteList = [{
-                'parCode': 'dfawed', //交易对Id
-                'fToken': 'dfwe2423', //fromTokenId
-                'fTokenShow': '231413', //fromToken简称 
-                'tToken': '41wfss', //toTokenId
-                'tTokenShow': '23483', //toToken简称 
-                'priceBefore24h': '23483', 
-                'pricePrev': '23483', 
-                'price': '23', 
-                'price24hChange': '2324', 
-                'price24hHigh': '3183041', 
-                'price24hLow': '41341341', 
-                'quantity24h': '2341341', 
-                'amount24h': '142341' 
-            }];
-
-            // assignPair({
-            //     pairs: codes
-            // }).then((data) => {
-            //     this.favoriteList = data;
-            // }).catch((err) => {
-            //     console.warn(err);
-            // });
+        fetchDefaultList() {
+            return defaultPair({
+                toTokenId: this.toTokenId
+            });
+        },
+        fetchFavoriteList() {
+            return assignPair({
+                pairs: this.favoriteCodeList
+            });
+        },
+        fetchTxPairList() {
+            return assignPair({
+                pairs: this.txPairCodeList
+            }).then((data) => {
+                this.txPairList = data;
+            });
         }
     }
 };
@@ -261,6 +350,13 @@ export default {
     .describe {
         position: relative;
         bottom: 9px;
+    }
+    .hint {
+        text-align: center;
+        font-size: 12px;
+        font-weight: 400;
+        color: rgba(94,104,117,1);
+        margin-top: 20px;
     }
 }
 </style>
@@ -280,7 +376,7 @@ export default {
         input {
             text-indent: 0px;
             font-weight: 400;
-            color: rgba(206,209,213,1);
+            // color: rgba(206,209,213,1);
             font-size: 12px;
         }
     }
