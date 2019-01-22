@@ -1,13 +1,13 @@
 const state = {
-    activeTx: {
-        'parCode': '283904284', //交易对Id
-        'fToken': '232323', //fromTokenId
-        'fTokenShow': '323232', //fromToken简称 
-        'tToken': '2323232', //toTokenId
-        'tTokenShow': '23244234', //toToken简称 
+    activeTxPair: {
+        'pairCode': '283904284',
+        'fToken': '232323',
+        'fTokenShow': 'ABHD',
+        'tToken': '2323232',
+        'tTokenShow': 'ABHD',
         'priceBefore24h': '341341', 
         'pricePrev': '2323232', 
-        'price': '313413', 
+        'price': '341341', 
         'price24hChange': '2314141', 
         'price24hHigh': '2314341', 
         'price24hLow': '2314141', 
@@ -17,14 +17,14 @@ const state = {
 };
 
 const mutations = {
-    exSetActiveTxPair(state, transPair) {
-        state.activeTx = transPair;
+    exSetActiveTxPair(state, txPair) {
+        state.activeTxPair = txPair;
     }
 };
 
 const actions = {
-    exFetchActiveTxPair({ dispatch, commit }, transPair) {
-        commit('exSetActiveTxPair', transPair);
+    exFetchActiveTxPair({ dispatch, commit }, txPair) {
+        commit('exSetActiveTxPair', txPair);
         dispatch('exFetchLatestTx');
         dispatch('exFetchDepth');
     }

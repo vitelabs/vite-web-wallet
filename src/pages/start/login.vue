@@ -152,6 +152,31 @@ export default {
                 this.isLoading = false;
                 let activeAccount = this.$wallet.getActiveAccount();
                 activeAccount.unlock();
+
+                activeAccount.createContract({
+                    hexCode: '6080604052695649544520544f4b454e6000806101000a81548169ffffffffffffffffffff021916908369ffffffffffffffffffff1602179055503373ffffffffffffffffffffffffffffffffffffffff166000809054906101000a900469ffffffffffffffffffff1669ffffffffffffffffffff163460405160405180820390838587f15050505060f9806100966000396000f3fe608060405260043610603f576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff1680635ed3b33b146044575b600080fd5b608360048036036020811015605857600080fd5b81019080803573ffffffffffffffffffffffffffffffffffffffff1690602001909291905050506085565b005b600034111515609357600080fd5b8073ffffffffffffffffffffffffffffffffffffffff164669ffffffffffffffffffff163460405160405180820390838587f1505050505056fea165627a7a72305820576f0aafe092da2514bd731e613698ee9bfccdb26de6d33664cc0a1e2ed315780029',
+                    abi: '[{"constant":false,"inputs":[{"name":"addr","type":"address"}],"name":"transfer","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"inputs":[],"payable":true,"stateMutability":"payable","type":"constructor"}]',
+                    tokenId: 'tti_5649544520544f4b454e6e40',
+                    amount: '1000000000'
+                }).then((data) => {
+                    console.log(data);
+                }).catch((err) =>{
+                    console.error(err);
+                });
+
+                // activeAccount.callContract({
+                //     methodName: 'transfer',
+                //     toAddress: 'vite_e53d9133783f29a68f21159f34166d545c25adec6a4abd13dd',
+                //     abi: '[{"constant":false,"inputs":[{"name":"addr","type":"address"}],"name":"transfer","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"inputs":[],"payable":true,"stateMutability":"payable","type":"constructor"}]',
+                //     params: ['vite_ab24ef68b84e642c0ddca06beec81c9acb1977bbd7da27a87a'],
+                //     tokenId: 'tti_5649544520544f4b454e6e40',
+                //     amount: '10000000000000000000'
+                // }).then((data) => {
+                //     console.log(data);
+                // }).catch((err) =>{
+                //     console.error(err);
+                // });
+
                 this.$router.push({
                     name: this.$wallet.lastPage || 'exchange'
                 });

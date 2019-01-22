@@ -26,10 +26,10 @@ const state = {
 // };
 
 const actions = {
-    exFetchLatestTrans({ rootState, commit }) {
-        let activeTrans = rootState.exchangeTransPairs.activeTrans;
+    exFetchLatestTx({ rootState, commit }) {
+        let activeTx = rootState.exchangeActiveTxPair.activeTx;
         console.log(commit);
-        console.log(activeTrans);
+        console.log(activeTx);
     }
 };
 

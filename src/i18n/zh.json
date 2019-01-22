@@ -400,6 +400,10 @@
         "price": "价格",
         "upDown": "涨跌幅",
         "txNum": "交易量",
+        "noData": {
+            "favorite": "您还未添加任何自选",
+            "search": "暂无搜索结果"
+        },
         "latestTrans": {
             "title": "最新交易"
         },
