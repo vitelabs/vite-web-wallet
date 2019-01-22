@@ -1,20 +1,20 @@
 const state = {
-    trans: [{
+    txList: [{
         price: 10,
         num: 10,
-        time: 293023
+        time: 1548150873040
     },{
         price: 10,
         num: 10,
-        time: 293023
+        time: 1548150873040
     },{
         price: 10,
         num: 10,
-        time: 293023
+        time: 1548150873040
     },{
         price: 10,
         num: 10,
-        time: 293023
+        time: 1548150873040
     }],
     isLoading: true
 };

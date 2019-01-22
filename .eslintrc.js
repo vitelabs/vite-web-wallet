@@ -13,6 +13,7 @@ module.exports = {
         "sourceType": "module"
     },
     "globals": {
+        "TradingView": true,
         "window": true,
         "viteWallet": true,
         "$ViteJS": true,

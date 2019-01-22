@@ -117,7 +117,7 @@ export default {
 @import '../center.scss';
 
 .__center-tb-row.active {
-    background: #ff0;
+    background: rgba(75,116,255,0.10);;
 }
 .__center-tb-row .describe {
     position: relative;

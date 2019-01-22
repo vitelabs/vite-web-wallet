@@ -407,6 +407,11 @@
             "lowPrice": "24h最低价",
             "quantity": "24h成交量"
         },
+        "latestTx": {
+            "price": "价格({price})",
+            "amount": "数量({amount})",
+            "time": "时间"
+        },
         "noData": {
             "favorite": "您还未添加任何自选",
             "search": "暂无搜索结果"
