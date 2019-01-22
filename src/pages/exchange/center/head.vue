@@ -18,7 +18,7 @@
             <div class="token-title">{{ $t('exchange.head.latestPrice') }}</div>
             <div class="token-content">
                 <span class="price">{{ activeTxPair.price }}</span>
-                ${{ realPrice }}
+                {{ realPrice }}
             </div>
         </div>
         <div class="updown">
@@ -61,9 +61,6 @@ export default {
         tTokenIcon() {
             return this.getTokenIcon(this.activeTxPair.tToken);
         },
-        activePairCode() {
-            return this.activeTxPair ? this.activeTxPair.pairCode || null : null;
-        },
         activeTxPair() {
             return this.$store.state.exchangeActiveTxPair.activeTxPair;
         },
@@ -75,7 +72,17 @@ export default {
             return upDown + '%';
         },
         realPrice() {
-            return this.activeTxPair.price;
+            let pre = '$';
+            if (this.$i18n.locale === 'zh') {
+                pre = '￥';
+            }
+            return pre + this.activeTxPair.price * this.rate;
+        },
+        rate() {
+            let rateList = this.$store.state.exchangeRate.rateList || {};
+            let tokenId = this.activeTxPair && this.activeTxPair.tToken ? this.activeTxPair.tToken : null;
+            let coin = this.$store.state.exchangeRate.coins[this.$i18n.locale || 'zh'];
+            return rateList[tokenId][coin] || null;
         }
     },
     methods: {
@@ -104,9 +111,9 @@ export default {
     justify-content: space-between;
     box-sizing: border-box;
     padding: 10px 14px;
-    font-family: $font-normal, arial, sans-serif;
+    font-family: $font-bold, arial, sans-serif;
     font-size: 12px;
-    font-weight: 400;
+    font-weight: 600;
     line-height: 16px;
     .token {
         flex-basis: 180px;
@@ -150,7 +157,9 @@ export default {
     }
 
     .token-title {
+        font-family: $font-normal, arial, sans-serif;
         color: rgba(94,104,117,1);
+        font-weight: 400;
     }
     .token-content {
         margin-top: 8px;

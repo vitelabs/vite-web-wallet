@@ -1,34 +1,29 @@
 import { timer } from 'utils/asyncFlow';
 import { rate } from 'services/exchange';
 
-const coins = {
-    en: 'cny',
-    zh: 'usd'
-};
 const loopTime = 2 * 60 * 1000 * 1000;
 let rateTimer = null;
 
 const state = {
-    rateList: []
+    rateList: {
+        'tti_5649544520544f4b454e6e40': {
+            'tokenCode': 'tti_5649544520544f4b454e6e40',
+            'tokenName': 'tokenName',
+            'usd': '0.2323',
+            'cny': '0.43434'
+        }
+    },
+    coins: {
+        en: 'cny',
+        zh: 'usd'
+    }
 };
-// {
-//     "tokenCode": "", //tokenId
-//     "tokenName": "", //tokenName
-//     "usd": 0.00000000, //与usd汇率
-//     "cny": 0.00000000 //与cny汇率
-//   }
 
 const mutations = {
     setExchangeRate(state, rateList) {
-        state.rateList = [];
+        state.rateList = {};
         rateList && rateList.forEach((rate) => {
-            if (!rate) {
-                return;
-            }
-            for(let _c in coins) {
-                rate[_c] = rate[coins[_c]];
-            }
-            state.rateList.push(rate);
+            state.rateList[rate.tokenCode] = rate;
         });
     }
 };
