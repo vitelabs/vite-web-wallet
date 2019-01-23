@@ -6,48 +6,8 @@ let buyTimer = null;
 let sellTimer = null;
 
 const state = {
-    buy: [{
-        price: 100000,
-        quantity: 10,
-        amount: 2390239
-    },{
-        price: 10000,
-        quantity: 10,
-        amount: 2390239
-    },{
-        price: 1000,
-        quantity: 10,
-        amount: 2390239
-    },{
-        price: 2389,
-        quantity: 10,
-        amount: 2390239
-    },{
-        price: 289,
-        quantity: 10,
-        amount: 2390239
-    }],
-    sell: [{
-        price: 2389,
-        quantity: 10,
-        amount: 2390239
-    },{
-        price: 89,
-        quantity: 10,
-        amount: 2390239
-    },{
-        price: 4389,
-        quantity: 10,
-        amount: 2390239
-    },{
-        price: 2489,
-        quantity: 10,
-        amount: 2390239
-    },{
-        price: 389,
-        quantity: 10,
-        amount: 2390239
-    }],
+    buy: [],
+    sell: [],
     isBuyLoading: false,
     isSellLoading: false
 };
@@ -82,8 +42,8 @@ const actions = {
 
         let _f = (cb) => {
             return depthBuy({
-                fToken: activeTxPair.fToken,
-                tToken: activeTxPair.tToken
+                ftoken: activeTxPair.ftoken,
+                ttoken: activeTxPair.ttoken
             }).then((data) => {
                 cb && cb();
                 commit('exSetDepthBuy', data);
@@ -111,8 +71,8 @@ const actions = {
 
         let _f = (cb) => {
             return depthSell({
-                fToken: activeTxPair.fToken,
-                tToken: activeTxPair.tToken
+                ftoken: activeTxPair.ftoken,
+                ttoken: activeTxPair.ttoken
             }).then((data) => {
                 cb && cb();
                 commit('exSetDepthSell', data);

@@ -3,61 +3,61 @@ import request from 'utils/request';
 const path = '/api/v1';
 
 export const klineMinute = function ({
-    fDate, tDate, fToken, tToken
+    fDate, tDate, ftoken, ttoken
 }) {
     return request({
         path: path + '/kline/minute',
         method: 'GET',
         params: {
-            fDate, tDate, fToken, tToken
+            fDate, tDate, fToken: ftoken, tToken: ttoken
         }
     });
 };
 
 export const klineHour = function ({
-    fDate, tDate, fToken, tToken
+    fDate, tDate, ftoken, ttoken
 }) {
     return request({
         path: path + '/kline/hour',
         method: 'GET',
         params: {
-            fDate, tDate, fToken, tToken
+            fDate, tDate, fToken: ftoken, tToken: ttoken
         }
     });
 };
 
 export const depthBuy = function ({
-    fToken, tToken
+    ftoken, ttoken
 }) {
     return request({
         path: path + '/depth/buy',
         method: 'GET',
         params: {
-            fToken, tToken
+            fToken: ftoken, tToken: ttoken
         }
     });
 };
 
 export const depthSell = function ({
-    fToken, tToken
+    ftoken, ttoken
 }) {
     return request({
         path: path + '/depth/sell',
         method: 'GET',
         params: {
-            fToken, tToken
+            fToken: ftoken, tToken: ttoken
         }
     });
 };
 
 export const order = function ({
-    address, fDate, tDate, fToken, tToken, orderSide, pageNo, pageSize, status
+    address, fDate, tDate, ftoken, ttoken, orderSide, pageNo, pageSize, status
 }) {
     return request({
         path: path + '/order/query',
         method: 'GET',
         params: {
-            address, fDate, tDate, fToken, tToken, orderSide, pageNo, pageSize, status
+            address, fDate, tDate, fToken: ftoken, tToken: ttoken, orderSide, pageNo, pageSize, status
         }
     });
 };
@@ -75,13 +75,14 @@ export const orderDetail = function({
 };
 
 export const latestTx = function ({
-    fToken, tToken
+    ftoken, ttoken
 }) {
     return request({
         path: path + '/tx/latest',
         method: 'GET',
         params: {
-            fToken, tToken
+            fToken: ftoken, 
+            tToken: ttoken
         }
     });
 };
