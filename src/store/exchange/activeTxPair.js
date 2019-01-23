@@ -1,23 +1,7 @@
 import BigNumber from 'utils/bigNumber';
 
-
-
 const state = {
-    activeTxPair: {
-        'pairCode': '283904284',
-        'fToken': '232323',
-        'fTokenShow': 'ABHD',
-        'tToken': 'tti_5649544520544f4b454e6e40',
-        'tTokenShow': 'ABHD',
-        'priceBefore24h': '341341', 
-        'pricePrev': '2323232332', 
-        'price': '34141', 
-        'price24hChange': '2314141', 
-        'price24hHigh': '2314341', 
-        'price24hLow': '2314141', 
-        'quantity24h': '2314134', 
-        'amount24h': '231341413' 
-    }
+    activeTxPair: null
 };
 
 const mutations = {
@@ -43,6 +27,10 @@ const getters = {
         let upDown = BigNumber.minus(activeTxPair.price, activeTxPair.priceBefore24h).toString();
         let upDownPre = BigNumber.minus(activeTxPair.price, activeTxPair.pricePrev).toString();
 
+        activeTxPair.price = BigNumber.toBasic(activeTxPair.price);
+        activeTxPair.price24hHigh = BigNumber.toBasic(activeTxPair.price24hHigh);
+        activeTxPair.price24hLow = BigNumber.toBasic(activeTxPair.price24hLow);
+        activeTxPair.quantity24h = BigNumber.toBasic(activeTxPair.quantity24h);
         activeTxPair.upDown = upDown;
         activeTxPair.upDownPercent = BigNumber.dividedToNumber(upDown, activeTxPair.priceBefore24h * 100, 2).toString() + '%';
         activeTxPair.upDownPre = upDownPre;

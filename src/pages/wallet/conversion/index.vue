@@ -228,6 +228,10 @@ export default {
         padding: 0px 12px;
         font-size: 14px;
         color: #007AFF;
+        &:active {
+            background: #007AFF;
+            color: #EDF1FF;
+        }
     }
 }
 .token-list {

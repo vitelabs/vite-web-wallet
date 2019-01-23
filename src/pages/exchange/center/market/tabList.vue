@@ -1,13 +1,13 @@
 <template>
     <ul class="ex-tab-list">
-        <li v-for="(_t, i) in tokenList" :key="i" class="ex-tab __pointer" 
+        <li v-for="(_t, i) in toTokenList" :key="i" class="ex-tab __pointer" 
             :class="{'active': _t.token === activeTokenId}" 
             @click="changeToken(_t)">{{ _t.name }}</li>
     </ul>
 </template>
 
 <script>
-// import { baseToken } from 'services/exchange';
+import { baseToken } from 'services/exchange';
 
 export default {
     props: {
@@ -17,26 +17,13 @@ export default {
         }
     },
     created() {
-        // baseToken().then((data) => {
-        let data = null;
-        this.tokenList = data || [{
-            'token': '1',
-            'name': '11'
-        }, {
-            'token': '2',
-            'name': '11'
-        }, {
-            'token': '3',
-            'name': '11'
-        }, {
-            'token': '4',
-            'name': '11'
-        }];
-        this.activeTokenId = this.tokenList && this.tokenList.length ? 
-            this.tokenList[0].token : '';
-        // }).catch((err) => {
-        //     console.warn(err);
-        // });
+        baseToken().then((data) => {
+            this.toTokenList = data || [];
+            this.activeTokenId = this.toTokenList && this.toTokenList.length ? 
+                this.toTokenList[0].token : '';
+        }).catch((err) => {
+            console.warn(err);
+        });
     },
     data() {
         return {

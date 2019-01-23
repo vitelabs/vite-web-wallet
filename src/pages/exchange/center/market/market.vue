@@ -101,7 +101,7 @@ export default {
             for (let code in this.favoritePairs) {
                 let item = this.favoritePairs[code];
                 if (!item || !item.toTokenId || item.toTokenId !== this.toTokenId) {
-                    return;
+                    continue;
                 }
                 codeList.push(code);
             }
@@ -163,7 +163,7 @@ export default {
         },
         setFavorite(txPair) {
             let pairCode = txPair.pairCode;
-            let toTokenId = txPair.tToken;
+            let toTokenId = txPair.ttoken;
 
             this.favoritePairs = this.favoritePairs || {};
             if (this.favoritePairs[pairCode]) {
@@ -187,66 +187,10 @@ export default {
             let toTokenId = this.toTokenId;
 
             try {
-                let _r = [[{
-                    'pairCode': '11', //交易对Id
-                    'fToken': '23232', //fromTokenId
-                    'fTokenShow': 'TBIJN', //fromToken简称 
-                    'tToken': '1', //toTokenId
-                    'tTokenShow': 'TBIJN', //toToken简称 
-                    'priceBefore24h': '232323', 
-                    'pricePrev': '2323232', 
-                    'price': '23.23232323', 
-                    'price24hChange': '232323', 
-                    'price24hHigh': '232323', 
-                    'price24hLow': '232323', 
-                    'quantity24h': '232233323', 
-                    'amount24h': '232323' 
-                }, {
-                    'pairCode': '12', //交易对Id
-                    'fToken': '23232', //fromTokenId
-                    'fTokenShow': 'ABIJN', //fromToken简称 
-                    'tToken': '1', //toTokenId
-                    'tTokenShow': 'TBIJN', //toToken简称 
-                    'priceBefore24h': '232323', 
-                    'pricePrev': '2323232', 
-                    'price': '23.23232323', 
-                    'price24hChange': '232323', 
-                    'price24hHigh': '232323', 
-                    'price24hLow': '232323', 
-                    'quantity24h': '232233323', 
-                    'amount24h': '232323' 
-                }, {
-                    'pairCode': '13', //交易对Id
-                    'fToken': 'WOEPJ', //fromTokenId
-                    'fTokenShow': 'WOEPJ', //fromToken简称 
-                    'tToken': '1', //toTokenId
-                    'tTokenShow': 'WOEPJ', //toToken简称 
-                    'priceBefore24h': '23483', 
-                    'pricePrev': '23483', 
-                    'price': '23', 
-                    'price24hChange': '2324', 
-                    'price24hHigh': '3183041', 
-                    'price24hLow': '41341341', 
-                    'quantity24h': '232341341', 
-                    'amount24h': '142341' 
-                }], [{
-                    'pairCode': '13', //交易对Id
-                    'fToken': 'WOEPJ', //fromTokenId
-                    'fTokenShow': 'WOEPJ', //fromToken简称 
-                    'tToken': '1', //toTokenId
-                    'tTokenShow': 'WOEPJ', //toToken简称 
-                    'priceBefore24h': '23483', 
-                    'pricePrev': '23483', 
-                    'price': '23', 
-                    'price24hChange': '2324', 
-                    'price24hHigh': '3183041', 
-                    'price24hLow': '41341341', 
-                    'quantity24h': '232341341', 
-                    'amount24h': '142341' 
-                }]];
-                // let _r = await Promise.all([
-                //     this.fetchDefaultList(), this.fetchFavoriteList()
-                // ]);
+                let _q = [this.fetchDefaultList()];
+                this.favoriteCodeList && this.favoriteCodeList.length && _q.push(this.fetchFavoriteList());
+                let _r = await Promise.all(_q);
+
                 if (toTokenId !== this.toTokenId) {
                     return;
                 }
@@ -254,7 +198,7 @@ export default {
                 // Third, txPairList finish. Get final list.
                 this.isLoading = false;
                 let defaultList = _r[0] || [];
-                let favoriteList = _r[1] || [];
+                let favoriteList = _r.length === 2 ? _r[1] || [] : [];
 
                 let list = [];
                 let codeList = [];
@@ -271,6 +215,7 @@ export default {
                     list.push(txPair);
                     codeList.push(txPair.pairCode);
                 });
+
                 // Done
                 this.txPairList = list;
 

@@ -76,6 +76,8 @@ $up-font-color: $green;
 .__center-tb-item {
     text-align: right;
     flex: 1;
+    overflow: hidden;
+    white-space: nowrap;
     &:first-child {
         text-align: left;
     }

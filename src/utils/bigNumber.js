@@ -44,7 +44,7 @@ export default {
             return '';
         }
         try {
-            return num.dividedBy(min).decimalPlaces(decimalPlaces).toFormat();
+            return num.dividedBy(min).decimalPlaces(decimalPlaces, 1).toFormat();
         } catch(err) {
             return '';
         }

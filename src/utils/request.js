@@ -52,7 +52,8 @@ export default function request({ method = 'GET', path, params = {}, timeout = r
             try {
                 if (xhr.status == 200) {
                     let { code, msg, data, error } = JSON.parse(xhr.responseText);
-                    if (code !== 200) {
+                    let rightCode = path.indexOf('api') === 1 ? 0 : 200;
+                    if (code !== rightCode) {
                         return _rej({
                             code,
                             message: msg || error

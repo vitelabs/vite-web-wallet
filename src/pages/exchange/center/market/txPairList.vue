@@ -64,14 +64,15 @@ export default {
 
                 let item = {};
                 item.pairCode = _t.pairCode;
-                item.price = _t.price;
-                item.quantity24h = _t.quantity24h;
-                item.showPair = `${_t.fTokenShow}/${_t.tTokenShow}`;
+                item.price = BigNumber.toBasic(_t.price);
+                item.quantity24h = BigNumber.toBasic(_t.quantity24h);
+                item.showPair = `${_t.ftokenShow}/${_t.ttokenShow}`;
                 item.upDown = BigNumber.dividedToNumber(upDown, _t.priceBefore24h * 100, 2).toString();
                 item.rawData = _t;
                 
                 _l.push(item);
             });
+
             return _l;
         }
     },
@@ -102,7 +103,7 @@ export default {
                 case 'txNumDown': 
                     return b.quantity24h - a.quantity24h;
                 default:
-                    return compareStr(a.fTokenShow, b.fTokenShow);
+                    return compareStr(a.ftokenShow, b.ftokenShow);
                 }
             });
         },

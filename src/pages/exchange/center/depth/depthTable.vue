@@ -2,7 +2,7 @@
     <div class="depth-table-wrapper">
         <loading loadingType="dot" class="ex-center-loading" v-show="isLoading"></loading>
         
-        <div class="__center-tb-row" @click="clickRow(item)"
+        <div class="__center-tb-row __pointer" @click="clickRow(item)"
              v-for="(item, i) in depthData" :key="i">
             <span class="__center-tb-item" :class="dataType">{{ item.price }}</span>
             <span class="__center-tb-item">{{ item.quantity }}</span>

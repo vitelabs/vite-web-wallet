@@ -4,12 +4,12 @@
         <div class="__center-tb-title">
             <span class="__center-tb-item">
                 {{ $t('exchange.latestTx.price', { 
-                    price: activeTxPair && activeTxPair.tTokenShow ? activeTxPair.tTokenShow : '' 
+                    price: activeTxPair && activeTxPair.ttokenShow ? activeTxPair.ttokenShow : '' 
                 })}}
             </span>
             <span class="__center-tb-item">
                 {{ $t('exchange.latestTx.amount', { 
-                    amount: activeTxPair && activeTxPair.fTokenShow ? activeTxPair.fTokenShow : ''
+                    amount: activeTxPair && activeTxPair.ftokenShow ? activeTxPair.ftokenShow : ''
                 })}}
             </span>
             <span class="__center-tb-item tx-time">{{ $t('exchange.latestTx.time') }}</span>

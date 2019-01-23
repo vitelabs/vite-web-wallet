@@ -5,22 +5,7 @@ const latestTxTime = 2000;
 let latestTxTimer = null;
 
 const state = {
-    txList: [{
-        'txSide': 1, //0:bug,1:sell
-        'price': '0.00000000', //成交价
-        'quantity': '0.00000000', //交易数量 
-        'txTime': 1548150873040 //时间戳
-    },{
-        'txSide': 0, //0:bug,1:sell
-        'price': '2323', //成交价
-        'quantity': '3290184', //交易数量 
-        'txTime': 1548150873040 //时间戳
-    },{
-        'txSide': 1, //0:bug,1:sell
-        'price': '2323', //成交价
-        'quantity': '0000000', //交易数量 
-        'txTime': 1548150873040 //时间戳
-    }],
+    txList: [],
     isLoading: false
 };
 
@@ -42,8 +27,8 @@ const actions = {
 
         let _f = (cb) => {
             return latestTx({
-                fToken: activeTxPair.fToken,
-                tToken: activeTxPair.tToken
+                ftoken: activeTxPair.ftoken,
+                ttoken: activeTxPair.ttoken
             }).then((data) => {
                 cb && cb();
                 commit('exSetLatestTxList', data);
@@ -53,13 +38,13 @@ const actions = {
             });
         };
 
-        // Init
+        // Init;
         commit('exSetLatestTxLoading', true);
         _f(() => {
             commit('exSetLatestTxLoading', false);
         });
 
-        // Loop
+        // Loop;
         stopLatestTimer();
         latestTxTimer = new timer(()=>{
             return _f();
@@ -76,15 +61,8 @@ function stopLatestTimer() {
     latestTxTimer = null;
 }
 
-// const getters = {
-//     tota(state) {
-
-//     }
-// };
-
 export default {
     state,
     mutations,
-    actions,
-    // getters
+    actions
 };

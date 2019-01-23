@@ -3,11 +3,11 @@
         <div class="token">
             <div class="t-item">
                 <div class="t-icon">
-                    <img :src="fTokenIcon"/>
-                    {{ activeTxPair && activeTxPair.fTokenShow ? activeTxPair.fTokenShow : '' }}
+                    <img :src="ftokenIcon"/>
+                    {{ activeTxPair && activeTxPair.ftokenShow ? activeTxPair.ftokenShow : '' }}
                 </div>
                 <div class="id">
-                    {{ activeTxPair && activeTxPair.fToken ? activeTxPair.fToken : '' }}
+                    {{ activeTxPair && activeTxPair.ftoken ? activeTxPair.ftoken : '' }}
                 </div>
             </div>
             <div class="t-item">
@@ -15,11 +15,11 @@
                 <div class="id">/</div>
             </div>
             <div class="t-item">
-                <div class="t-icon"><img :src="tTokenIcon"/>
-                    {{ activeTxPair && activeTxPair.tTokenShow ? activeTxPair.tTokenShow : '' }}
+                <div class="t-icon"><img :src="ttokenIcon"/>
+                    {{ activeTxPair && activeTxPair.ttokenShow ? activeTxPair.ttokenShow : '' }}
                 </div>
                 <div class="id">
-                    {{ activeTxPair && activeTxPair.tToken ? activeTxPair.tToken : '' }}
+                    {{ activeTxPair && activeTxPair.ttoken ? activeTxPair.ttoken : '' }}
                 </div>
             </div>
         </div>
@@ -65,7 +65,6 @@
 <script>
 import Identicon from 'identicon.js';
 import { encoder } from 'utils/tools';
-// import BigNumber from 'utils/bigNumber';
 
 const iconConfig = {
     size: 100,
@@ -74,17 +73,17 @@ const iconConfig = {
 
 export default {
     computed: {
-        fTokenIcon() {
-            if (!this.activeTxPair || !this.activeTxPair.fToken) {
+        ftokenIcon() {
+            if (!this.activeTxPair || !this.activeTxPair.ftoken) {
                 return '';
             }
-            return this.getTokenIcon(this.activeTxPair.fToken);
+            return this.getTokenIcon(this.activeTxPair.ftoken);
         },
-        tTokenIcon() {
-            if (!this.activeTxPair || !this.activeTxPair.tToken) {
+        ttokenIcon() {
+            if (!this.activeTxPair || !this.activeTxPair.ttoken) {
                 return '';
             }
-            return this.getTokenIcon(this.activeTxPair.tToken);
+            return this.getTokenIcon(this.activeTxPair.ttoken);
         },
         activeTxPair() {
             return this.$store.getters.exActiveTxPair;
@@ -104,7 +103,7 @@ export default {
         },
         rate() {
             let rateList = this.$store.state.exchangeRate.rateList || {};
-            let tokenId = this.activeTxPair && this.activeTxPair.tToken ? this.activeTxPair.tToken : null;
+            let tokenId = this.activeTxPair && this.activeTxPair.ttoken ? this.activeTxPair.ttoken : null;
             let coin = this.$store.state.exchangeRate.coins[this.$i18n.locale || 'zh'];
             if (!tokenId || !rateList[tokenId]) {
                 return null;
@@ -166,7 +165,6 @@ export default {
                     height: 12px;
                     border-radius: 12px;
                     margin-bottom: 1px;
-                    margin-right: 4px;
                 }
             }
             .line {
