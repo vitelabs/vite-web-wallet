@@ -10,7 +10,7 @@
                 <span class="describe">{{ txPair.showPair }}</span>
             </span>
             <span class="__center-tb-item">{{ txPair.price }}</span>
-            <span class="__center-tb-item" :class="{
+            <span class="__center-tb-item percent" :class="{
                 'up': +txPair.upDown > 0,
                 'down': +txPair.upDown < 0
             }">{{ txPair.upDown + '%' }}</span>
@@ -59,13 +59,14 @@ export default {
             }
 
             let _l = [];
+
             list.forEach((_t) => {
                 let upDown = BigNumber.minus(_t.price, _t.priceBefore24h).toString();
 
                 let item = {};
                 item.pairCode = _t.pairCode;
-                item.price = BigNumber.toBasic(_t.price);
-                item.quantity24h = BigNumber.toBasic(_t.quantity24h);
+                item.price = _t.price;
+                item.quantity24h = _t.quantity24h;
                 item.showPair = `${_t.ftokenShow}/${_t.ttokenShow}`;
                 item.upDown = BigNumber.dividedToNumber(upDown, _t.priceBefore24h * 100, 2).toString();
                 item.rawData = _t;

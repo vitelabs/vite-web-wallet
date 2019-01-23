@@ -407,7 +407,17 @@
             "updown": "24h涨跌",
             "highPrice": "24h最高价",
             "lowPrice": "24h最低价",
-            "quantity": "24h成交量"
+            "quantity": "24h成交量",
+            "tokenName": "代币名称",
+            "tokenShow": "代币简称",
+            "tokenId": "TokenID",
+            "publisher": "发行者",
+            "total": "总金额",
+            "tokenDigit": "小数位数",
+            "publisherDate": "发行日期",
+            "type": "类型",
+            "tokenType0": "可增发",
+            "tokenType1": "永不增发"
         },
         "latestTx": {
             "title": "最新交易",

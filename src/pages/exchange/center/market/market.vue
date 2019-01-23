@@ -17,7 +17,7 @@
                 <span class="describe">{{ $t('exchange.price') }}</span>
                 <order-arrow orderItem="price" :setOrderRule="setOrderRule"></order-arrow>
             </div>
-            <div class="__center-tb-item">
+            <div class="__center-tb-item percent">
                 <span class="describe">{{ $t('exchange.upDown') }}</span>
                 <order-arrow orderItem="upDown" :setOrderRule="setOrderRule"></order-arrow>
             </div>
@@ -30,7 +30,7 @@
         <loading loadingType="dot" class="ex-center-loading" v-show="isLoading"></loading>
         <div class="hint" v-show="isShowSearchErr">{{ searchErr }}</div>
         <div class="hint" v-show="!isShowSearchErr && isShowNoData">{{ noData }}</div>
-        <tx-pair-list v-show="isShowList" :list="activeTxPairList"
+        <tx-pair-list v-show="isShowList" class="tx-list" :list="activeTxPairList"
                       :favoritePairs="favoritePairs" :currentRule="currentOrderRule"
                       :setFavorite="setFavorite"></tx-pair-list>
     </div>
@@ -292,6 +292,8 @@ export default {
     position: relative;
     width: 100%;
     height: 100%;
+    display: flex;
+    flex-direction: column;
     .describe {
         position: relative;
         bottom: 9px;
@@ -302,6 +304,10 @@ export default {
         font-weight: 400;
         color: rgba(94,104,117,1);
         margin-top: 20px;
+    }
+    .tx-list {
+        flex: 1;
+        overflow: auto;
     }
 }
 </style>
