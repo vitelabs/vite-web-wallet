@@ -3,8 +3,8 @@
         <center-head slot="lt"></center-head>
         <depth slot="r"></depth>
         <market slot="lb1"></market>
-        <latest-trans slot="lb2"></latest-trans>
-        <kline slot="lb3"></kline>
+        <latest-tx slot="lb2"></latest-tx>
+        <center-view slot="lb3"></center-view>
         <limit-price slot="lb4"></limit-price>
     </layout>
 </template>
@@ -13,29 +13,37 @@
 import layout from './layout';
 import depth from './depth/depth.vue';
 import market from './market/market.vue';
-import latestTrans from './latestTrans';
+import latestTx from './latestTx';
 import limitPrice from './limitPrice';
 import centerHead from './head';
-import kline from './kline';
+import centerView from './view/view.vue';
 
 export default {
     components: {
-        layout, depth, market, latestTrans, limitPrice, centerHead, kline
+        layout, depth, market, latestTx, limitPrice, centerHead, centerView
     },
     created() {
-
-    },
-    data() {
-        return {
-
-        };
-    },
-    methods: {
-
+        this.$store.dispatch('exFetchActiveTxPair');
     }
 };
 </script>
 
-<style lang="scss" scoped>
-
+<style lang="scss">
+.ex-center-loading {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    .dot {
+        position: relative;
+        top: 50%;
+        left: 50%;
+        margin-top: -11px;
+        margin-left: -17px;
+    }
+    .dot > div {
+        background-color: #007AFF;
+    }
+}
 </style>

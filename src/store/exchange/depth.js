@@ -1,34 +1,34 @@
 const state = {
     buy: [{
-        pirce: 10,
+        pirce: 100000,
         num: 10
     },{
-        pirce: 10,
+        pirce: 10000,
         num: 10
     },{
-        pirce: 10,
+        pirce: 1000,
         num: 10
     },{
-        pirce: 10,
+        pirce: 2389,
         num: 10
     },{
-        pirce: 10,
+        pirce: 289,
         num: 10
     }],
     sell: [{
-        pirce: 10,
+        pirce: 2389,
         num: 10
     },{
-        pirce: 10,
+        pirce: 89,
         num: 10
     },{
-        pirce: 10,
+        pirce: 4389,
         num: 10
     },{
-        pirce: 10,
+        pirce: 2489,
         num: 10
     },{
-        pirce: 10,
+        pirce: 389,
         num: 10
     }],
     isLoading: true
@@ -47,9 +47,10 @@ const mutations = {
 const actions = {
     exFetchDepth({ commit, rootState }) {
         let activeTx = rootState.exchangeActiveTxPair.activeTx;
+        if (!activeTx) {
+            return;
+        }
         commit('exSetDepthLoading', true);
-        
-        console.log(activeTx);
     }
 };
 
