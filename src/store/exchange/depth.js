@@ -1,68 +1,162 @@
+import { depthBuy, depthSell } from 'services/exchange';
+import { timer } from 'utils/asyncFlow';
+
+const time = 2000;
+let buyTimer = null;
+let sellTimer = null;
+
 const state = {
     buy: [{
-        pirce: 100000,
-        num: 10
+        price: 100000,
+        quantity: 10,
+        amount: 2390239
     },{
-        pirce: 10000,
-        num: 10
+        price: 10000,
+        quantity: 10,
+        amount: 2390239
     },{
-        pirce: 1000,
-        num: 10
+        price: 1000,
+        quantity: 10,
+        amount: 2390239
     },{
-        pirce: 2389,
-        num: 10
+        price: 2389,
+        quantity: 10,
+        amount: 2390239
     },{
-        pirce: 289,
-        num: 10
+        price: 289,
+        quantity: 10,
+        amount: 2390239
     }],
     sell: [{
-        pirce: 2389,
-        num: 10
+        price: 2389,
+        quantity: 10,
+        amount: 2390239
     },{
-        pirce: 89,
-        num: 10
+        price: 89,
+        quantity: 10,
+        amount: 2390239
     },{
-        pirce: 4389,
-        num: 10
+        price: 4389,
+        quantity: 10,
+        amount: 2390239
     },{
-        pirce: 2489,
-        num: 10
+        price: 2489,
+        quantity: 10,
+        amount: 2390239
     },{
-        pirce: 389,
-        num: 10
+        price: 389,
+        quantity: 10,
+        amount: 2390239
     }],
-    isLoading: true
+    isBuyLoading: false,
+    isSellLoading: false
 };
 
 const mutations = {
-    exSetDepth(state, depthData) {
-        state.buy = depthData.buy;
-        state.sell = depthData.sell;
+    exSetDepthBuy(state, depthData) {
+        state.buy = depthData;
     },
-    exSetDepthLoading(state, isLoading) {
-        state.isLoading = isLoading;
+    exSetDepthSell(state, depthData) {
+        state.sell = depthData;
+    },
+    exSetDepthBuyLoading(state, isLoading) {
+        state.isBuyLoading = isLoading;
+    },
+    exSetDepthSellLoading(state, isLoading) {
+        state.isSellLoading = isLoading;
     }
 };
 
 const actions = {
-    exFetchDepth({ commit, rootState }) {
-        let activeTx = rootState.exchangeActiveTxPair.activeTx;
-        if (!activeTx) {
+    exFetchDepth({ rootState, dispatch }) {
+        let activeTxPair = rootState.exchangeActiveTxPair.activeTxPair;
+        if (!activeTxPair) {
             return;
         }
-        commit('exSetDepthLoading', true);
+
+        dispatch('exFetchDepthBuy');
+        dispatch('exFetchDepthSell');
+    },
+    exFetchDepthBuy({ rootState, commit }) {
+        let activeTxPair = rootState.exchangeActiveTxPair.activeTxPair;
+
+        let _f = (cb) => {
+            return depthBuy({
+                fToken: activeTxPair.fToken,
+                tToken: activeTxPair.tToken
+            }).then((data) => {
+                cb && cb();
+                commit('exSetDepthBuy', data);
+            }).catch(err => {
+                console.warn(err);
+                cb && cb();
+            });
+        };
+
+        // Init
+        commit('exSetDepthBuyLoading', true);
+        _f(() => {
+            commit('exSetDepthBuyLoading', false);
+        });
+
+        // Loop
+        stopBuyTimer();
+        buyTimer = new timer(()=>{
+            return _f();
+        }, time);
+        buyTimer.start();
+    },
+    exFetchDepthSell({ rootState, commit }) {
+        let activeTxPair = rootState.exchangeActiveTxPair.activeTxPair;
+
+        let _f = (cb) => {
+            return depthSell({
+                fToken: activeTxPair.fToken,
+                tToken: activeTxPair.tToken
+            }).then((data) => {
+                cb && cb();
+                commit('exSetDepthSell', data);
+            }).catch(err => {
+                console.warn(err);
+                cb && cb();
+            });
+        };
+
+        // Init
+        commit('exSetDepthSellLoading', true);
+        _f(() => {
+            commit('exSetDepthSellLoading', false);
+        });
+
+        // Loop
+        stopSellTimer();
+        sellTimer = new timer(()=>{
+            return _f();
+        }, time);
+        sellTimer.start();
+    },
+    exStopDepthTimer() {
+        stopTimer();
     }
 };
 
-// const getters = {
-//     tota(state) {
+function stopBuyTimer() {
+    buyTimer && buyTimer.stop();
+    buyTimer = null;
+}
 
-//     }
-// };
+function stopSellTimer() {
+    sellTimer && sellTimer.stop();
+    sellTimer = null;
+}
+
+function stopTimer() {
+    stopBuyTimer();
+    stopSellTimer();
+}
 
 export default {
     state,
     mutations,
-    actions,
-    // getters
+    actions
 };

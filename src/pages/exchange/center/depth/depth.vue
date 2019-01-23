@@ -56,9 +56,6 @@ export default {
         depthSell() {
             return this.$store.state.exchangeDepth.sell;
         },
-        isLoading() {
-            return this.$store.state.exchangeDepth.isLoading;
-        },
         activeTxPair() {
             return this.$store.getters.exActiveTxPair;
         },
