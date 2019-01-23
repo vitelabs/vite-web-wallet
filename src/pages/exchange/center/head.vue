@@ -2,22 +2,33 @@
     <div class="txpair-head-wrapper">
         <div class="token">
             <div class="t-item">
-                <div class="t-icon"><img :src="fTokenIcon"/>{{ activeTxPair.fTokenShow }}</div>
-                <div class="id">{{ activeTxPair.fToken }}</div>
+                <div class="t-icon">
+                    <img :src="fTokenIcon"/>
+                    {{ activeTxPair && activeTxPair.fTokenShow ? activeTxPair.fTokenShow : '' }}
+                </div>
+                <div class="id">
+                    {{ activeTxPair && activeTxPair.fToken ? activeTxPair.fToken : '' }}
+                </div>
             </div>
             <div class="t-item">
                 <div class="line">/</div>
                 <div class="id">/</div>
             </div>
             <div class="t-item">
-                <div class="t-icon"><img :src="tTokenIcon"/>{{ activeTxPair.tTokenShow }}</div>
-                <div class="id">{{ activeTxPair.tToken }}</div>
+                <div class="t-icon"><img :src="tTokenIcon"/>
+                    {{ activeTxPair && activeTxPair.tTokenShow ? activeTxPair.tTokenShow : '' }}
+                </div>
+                <div class="id">
+                    {{ activeTxPair && activeTxPair.tToken ? activeTxPair.tToken : '' }}
+                </div>
             </div>
         </div>
         <div class="latest-price">
             <div class="token-title">{{ $t('exchange.head.latestPrice') }}</div>
             <div class="token-content">
-                <span class="price">{{ activeTxPair.price }}</span>
+                <span class="price">
+                    {{ activeTxPair && activeTxPair.price ? activeTxPair.price : '' }}
+                </span>
                 {{ realPrice }}
             </div>
         </div>
@@ -26,19 +37,27 @@
             <div class="token-content" :class="{
                 'up': +upDown > 0,
                 'down': +upDown < 0
-            }">{{ upDown }} {{ upDownPercent }}</div>
+            }">{{ upDown }} 
+                {{ activeTxPair && activeTxPair.upDownPercent ? activeTxPair.upDownPercent : '' }}
+            </div>
         </div>
         <div class="high-price">
             <div class="token-title">{{ $t('exchange.head.highPrice') }}</div>
-            <div class="token-content">{{ activeTxPair.price24hHigh }}</div>
+            <div class="token-content">
+                {{ activeTxPair && activeTxPair.price24hHigh ? activeTxPair.price24hHigh : '' }}
+            </div>
         </div>
         <div class="low-price">
             <div class="token-title">{{ $t('exchange.head.lowPrice') }}</div>
-            <div class="token-content">{{ activeTxPair.price24hLow }}</div>
+            <div class="token-content">
+                {{ activeTxPair && activeTxPair.price24hLow ? activeTxPair.price24hLow : '' }}
+            </div>
         </div>
         <div class="quantity">
             <div class="token-title">{{ $t('exchange.head.quantity') }}</div>
-            <div class="token-content">{{ activeTxPair.quantity24h + ' ' + activeTxPair.fTokenShow }}</div>
+            <div class="token-content">
+                {{ activeTxPair && activeTxPair.quantity24h ? activeTxPair.quantity24h : '' }}
+            </div>
         </div>
     </div>
 </template>
@@ -46,7 +65,7 @@
 <script>
 import Identicon from 'identicon.js';
 import { encoder } from 'utils/tools';
-import BigNumber from 'utils/bigNumber';
+// import BigNumber from 'utils/bigNumber';
 
 const iconConfig = {
     size: 100,
@@ -56,25 +75,30 @@ const iconConfig = {
 export default {
     computed: {
         fTokenIcon() {
+            if (!this.activeTxPair || !this.activeTxPair.fToken) {
+                return '';
+            }
             return this.getTokenIcon(this.activeTxPair.fToken);
         },
         tTokenIcon() {
+            if (!this.activeTxPair || !this.activeTxPair.tToken) {
+                return '';
+            }
             return this.getTokenIcon(this.activeTxPair.tToken);
         },
         activeTxPair() {
-            return this.$store.state.exchangeActiveTxPair.activeTxPair;
+            return this.$store.getters.exActiveTxPair;
         },
         upDown() {
-            return BigNumber.minus(this.activeTxPair.price, this.activeTxPair.priceBefore24h).toString();
-        },
-        upDownPercent() {
-            let upDown = BigNumber.dividedToNumber(this.upDown, this.activeTxPair.priceBefore24h * 100, 2).toString();
-            return upDown + '%';
+            return this.activeTxPair && this.activeTxPair.upDown ? this.activeTxPair.upDown : '0';
         },
         realPrice() {
             let pre = '$';
             if (this.$i18n.locale === 'zh') {
                 pre = '￥';
+            }
+            if (!this.activeTxPair) {
+                return pre + '0';
             }
             return pre + this.activeTxPair.price * this.rate;
         },
@@ -82,6 +106,9 @@ export default {
             let rateList = this.$store.state.exchangeRate.rateList || {};
             let tokenId = this.activeTxPair && this.activeTxPair.tToken ? this.activeTxPair.tToken : null;
             let coin = this.$store.state.exchangeRate.coins[this.$i18n.locale || 'zh'];
+            if (!tokenId || !rateList[tokenId]) {
+                return null;
+            }
             return rateList[tokenId][coin] || null;
         }
     },
@@ -149,7 +176,7 @@ export default {
                 font-family: $font-normal, arial, sans-serif;
                 font-size: 12px;
                 font-weight: 400;
-                color: rgba(0,122,255,1);
+                color: $blue;
                 line-height: 14px;
                 margin-top: 10px;
             }
@@ -172,7 +199,7 @@ export default {
             color: $up-font-color
         }
         .price {
-            color: rgba(0,122,255,1);
+            color: $blue;
         }
     }
 }

@@ -1,7 +1,10 @@
 @import "~assets/scss/vars.scss";
 
-$down-font-color: #E5494D;
-$up-font-color: #5BC500;
+$blue: #007AFF;
+$red: #E5494D;
+$green: #5BC500;
+$down-font-color: $red;
+$up-font-color: $green;
 
 .down {
     color: $down-font-color;
@@ -9,13 +12,19 @@ $up-font-color: #5BC500;
 .up {
     color: $up-font-color
 }
+.buy {
+    color: $green;
+}
+.sell {
+    color: $red;
+}
 
 .ex-tab-list {
     box-sizing: border-box;
     padding: 10px 6px 0;
     width: 100%;
     height: 34px;
-    border-bottom: 1px solid rgba(0,122,255,1);
+    border-bottom: 1px solid $blue;
     .ex-tab {
         display: inline-block;
         padding: 4px 13px;
@@ -24,7 +33,7 @@ $up-font-color: #5BC500;
         line-height: 16px;
         color: rgba(29,32,36,1);
         &.active {
-            background:rgba(0,122,255,1);
+            background: $blue;
             border-radius: 4px 4px 0px 0px;
             color: rgba(255,255,255,1);
         }
@@ -54,6 +63,7 @@ $up-font-color: #5BC500;
     color: rgba(94,104,117,1);
 }
 .__center-tb-row {
+    position: relative;
     height: 20px;
     line-height: 20px;
     padding: 0 6px;

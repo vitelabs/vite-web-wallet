@@ -27,7 +27,7 @@
             </div>
         </div>
 
-        <loading v-show="isLoading"></loading>
+        <loading loadingType="dot" class="ex-center-loading" v-show="isLoading"></loading>
         <div class="hint" v-show="isShowSearchErr">{{ searchErr }}</div>
         <div class="hint" v-show="!isShowSearchErr && isShowNoData">{{ noData }}</div>
         <tx-pair-list v-show="isShowList" :list="activeTxPairList"
