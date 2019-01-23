@@ -1,10 +1,12 @@
 <template>
     <div class="depth-table-wrapper">
+        <loading loadingType="dot" class="ex-center-loading" v-show="isLoading"></loading>
+        
         <div class="__center-tb-row" @click="clickRow(item)"
              v-for="(item, i) in depthData" :key="i">
-            <span class="__center-tb-item" :class="dataType">{{ item.pirce }}</span>
-            <span class="__center-tb-item">{{ item.num }}</span>
-            <span class="__center-tb-item">{{ item.pirce * item.num }}</span>
+            <span class="__center-tb-item" :class="dataType">{{ item.price }}</span>
+            <span class="__center-tb-item">{{ item.quantity }}</span>
+            <span class="__center-tb-item">{{ item.amount}}</span>
             <span class="percent-wrapper" :class="dataType" :style="{ 'width': getWidth(item) + '%' }"></span>
         </div>
     </div>
@@ -12,8 +14,12 @@
 
 <script>
 import BigNumber from 'utils/bigNumber';
+import loading from 'components/loading';
 
 export default {
+    components: {
+        loading
+    },
     props: {
         dataType: {
             type: String,
@@ -26,9 +32,21 @@ export default {
             }
         }
     },
+    destroyed() {
+        this.$store.dispatch('exStopDepthTimer');
+    },
+    computed: {
+        isLoading() {
+            if (this.dataType === 'buy') {
+                return this.$store.state.exchangeDepth.isBuyLoading;
+            }
+            return this.$store.state.exchangeDepth.isSellLoading;
+        }
+    },
     methods: {
         getWidth(item) {
-            return BigNumber.dividedToNumber(item.pirce, 10000, 2).toString() * 100;
+            let width = BigNumber.dividedToNumber(item.price, 10000, 2).toString() * 100;
+            return width > 100 ? 100 : width;
         },
         clickRow(data) {
             console.log(data);
@@ -39,7 +57,9 @@ export default {
 
 <style lang="scss" scoped>
 @import '../center.scss';
-
+.depth-table-wrapper {
+    position: relative;
+}
 .percent-wrapper {
     position: absolute;
     right: 0;

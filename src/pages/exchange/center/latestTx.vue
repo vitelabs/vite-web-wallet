@@ -15,7 +15,7 @@
             <span class="__center-tb-item tx-time">{{ $t('exchange.latestTx.time') }}</span>
         </div>
 
-        <loading loadingType="dot" class="ex-center-loading" v-show="latestTxLoading"></loading>
+        <loading loadingType="dot" class="ex-center-loading" v-show="isLoading"></loading>
         <div class="__center-tb-row __pointer" @click="clickRow(tx)" 
              v-for="(tx, i) in latestTxList" :key="i">
             <span class="__center-tb-item"  :class="{
@@ -46,7 +46,7 @@ export default {
         activeTxPair() {
             return this.$store.state.exchangeActiveTxPair.activeTxPair;
         },
-        latestTxLoading() {
+        isLoading() {
             return this.$store.state.exchangeLatestTx.isLoading;
         }
     },
