@@ -11,7 +11,7 @@
     "36002": "System verify failed, please try again later（36002）",
     "36003": "System verify failed, please try again later（36003）",
     "36004": "System verify failed, please try again later（36004）",
-    "36005": "napshot block height is illegal, please try again later"
+    "36005": "Snapshot block height is illegal, please try again later"
   },
   "txType": {
     "0": "SBP Registration",
@@ -165,7 +165,7 @@
     }
   },
   "quota": {
-    "title": "Get Quota",
+    "title": "Acquire Quota",
     "help": {
       "title": "Quick Understanding of Quota"
     },
@@ -177,7 +177,7 @@
     "time": "Staking Freeze Duration",
     "aboutDays": "Approx 3 days",
     "btn": "Submit Staking",
-    "myQuotaList": "My Staking List",
+    "myQuotaList": "List of My Staked Tokens",
     "amountPlaceholder": "Please input staking amount, minimum 10 VITE",
     "addrPlaceholder": "Please input quota recipient address",
     "cancelAmount": "Please input withdraw amount",
@@ -213,7 +213,7 @@
     },
     "list": {
       "title": "My Staking List",
-      "total": "Staking {amount} VITE in total",
+      "total": "Currently Amount Staked: {amount}",
       "amount": "Amount",
       "withdrawHeight": "Expected Snapshot Height",
       "withdrawTime": "Expected Due Date",
@@ -257,7 +257,7 @@
     "cancel": "SBP Cancellation",
     "cancelBtn": "Cancel",
     "help": {
-      "title": "About SBP",
+      "title": "SBP Information",
       "text": "SBP（Snapshot Block Producer）is a node that has right to create blocks, you can register to become a SBP candidate by staking a certain amount of VITE, each round (about 75 seconds) will elect 25 SBPs, the SBPs will be elected from random 23 out of top 25 candidate nodes, plus random 2 out of the candidate nodes ranking 26th-100th on the list. The 50% of block creation rewards will be allocated to the block creation node, the other 50% will be allocated to nodes that are ranked on top 100 as voting rewards. <br/><br/> One registration address (staking address) can register multiple block creation nodes (node names), a node name cannot be used if the node name has been registered by a registration address. A node name can switch block creation address, however, block creation address cannot be reused by other node names."
     },
     "confirm": {
@@ -319,8 +319,8 @@
     "title": "Voting",
     "search": "Please input node name or block creation address",
     "help": {
-      "title": "About Voting",
-      "text": "You can join and vote for 25 SBPs （Snapshot Block Producer), each round of voting lasts 75s, the polls you can use for voting are equivalent to the amount of VITE tokens owned by voting address, the default selection is the choice of previous round, the SBPs will be chosen from random 23 out of top 25 candidate nodes, plus random 2 out of the candidate nodes ranking 26th-100th on the list, 25 SBPs in total."
+      "title": "Voting Information",
+      "text": "You can join and vote for 25 SBPs (Snapshot Block Producers). Each voting round lasts 75 seconds. The weight of your votes corresponds to the balance of your Vite address. Your vote for an SBP will remain in place, until you either manually revoke your vote from the round or vote for another Supernode. 23 out of the top 25 SBP candidates are chosen at random to be elected as block producers. Additionally, 2 more candidates are randomly selected, ranked between the 26th and 100th spot. In total, 25 SBPs get chosen by these guidelines."
     },
     "addrNoExistErr": "You aren't able to vote for now as your address has no transaction record before",
     "section1": {
@@ -448,7 +448,7 @@
     "edit": "Edit",
     "copy": "Copy",
     "reReg": "Re-register",
-    "otherProd": "Use Other Products of Vite"
+    "otherProd": "Use Other Vite Products"
   },
   "paging": {
     "pre": "Prev",
