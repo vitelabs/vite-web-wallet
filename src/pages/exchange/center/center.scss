@@ -82,7 +82,10 @@ $up-font-color: $green;
         text-align: left;
     }
     &.txPair {
-        flex-basis: 50px;
+        // flex-basis: 50px;
+    }
+    &.percent {
+        // flex-basis: 40px;
     }
 }
 

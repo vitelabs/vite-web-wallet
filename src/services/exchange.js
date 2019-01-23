@@ -9,7 +9,7 @@ export const klineMinute = function ({
         path: path + '/kline/minute',
         method: 'GET',
         params: {
-            fDate, tDate, fToken: ftoken, tToken: ttoken
+            fDate, tDate, ftoken, ttoken
         }
     });
 };
@@ -21,7 +21,7 @@ export const klineHour = function ({
         path: path + '/kline/hour',
         method: 'GET',
         params: {
-            fDate, tDate, fToken: ftoken, tToken: ttoken
+            fDate, tDate, ftoken, ttoken
         }
     });
 };
@@ -33,7 +33,7 @@ export const depthBuy = function ({
         path: path + '/depth/buy',
         method: 'GET',
         params: {
-            fToken: ftoken, tToken: ttoken
+            ftoken, ttoken
         }
     });
 };
@@ -45,7 +45,7 @@ export const depthSell = function ({
         path: path + '/depth/sell',
         method: 'GET',
         params: {
-            fToken: ftoken, tToken: ttoken
+            ftoken, ttoken
         }
     });
 };
@@ -57,7 +57,7 @@ export const order = function ({
         path: path + '/order/query',
         method: 'GET',
         params: {
-            address, fDate, tDate, fToken: ftoken, tToken: ttoken, orderSide, pageNo, pageSize, status
+            address, fDate, tDate, ftoken, ttoken, orderSide, pageNo, pageSize, status
         }
     });
 };
@@ -81,8 +81,7 @@ export const latestTx = function ({
         path: path + '/tx/latest',
         method: 'GET',
         params: {
-            fToken: ftoken, 
-            tToken: ttoken
+            ftoken, ttoken
         }
     });
 };

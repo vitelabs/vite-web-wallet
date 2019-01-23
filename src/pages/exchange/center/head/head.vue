@@ -1,28 +1,6 @@
 <template>
     <div class="txpair-head-wrapper">
-        <div class="token">
-            <div class="t-item">
-                <div class="t-icon">
-                    <img :src="ftokenIcon"/>
-                    {{ activeTxPair && activeTxPair.ftokenShow ? activeTxPair.ftokenShow : '' }}
-                </div>
-                <div class="id">
-                    {{ activeTxPair && activeTxPair.ftoken ? activeTxPair.ftoken : '' }}
-                </div>
-            </div>
-            <div class="t-item">
-                <div class="line">/</div>
-                <div class="id">/</div>
-            </div>
-            <div class="t-item">
-                <div class="t-icon"><img :src="ttokenIcon"/>
-                    {{ activeTxPair && activeTxPair.ttokenShow ? activeTxPair.ttokenShow : '' }}
-                </div>
-                <div class="id">
-                    {{ activeTxPair && activeTxPair.ttoken ? activeTxPair.ttoken : '' }}
-                </div>
-            </div>
-        </div>
+        <token></token>
         <div class="latest-price">
             <div class="token-title">{{ $t('exchange.head.latestPrice') }}</div>
             <div class="token-content">
@@ -63,28 +41,13 @@
 </template>
 
 <script>
-import Identicon from 'identicon.js';
-import { encoder } from 'utils/tools';
-
-const iconConfig = {
-    size: 100,
-    format: 'svg'
-};
+import token from './token';
 
 export default {
+    components: {
+        token
+    },
     computed: {
-        ftokenIcon() {
-            if (!this.activeTxPair || !this.activeTxPair.ftoken) {
-                return '';
-            }
-            return this.getTokenIcon(this.activeTxPair.ftoken);
-        },
-        ttokenIcon() {
-            if (!this.activeTxPair || !this.activeTxPair.ttoken) {
-                return '';
-            }
-            return this.getTokenIcon(this.activeTxPair.ttoken);
-        },
         activeTxPair() {
             return this.$store.getters.exActiveTxPair;
         },
@@ -110,24 +73,12 @@ export default {
             }
             return rateList[tokenId][coin] || null;
         }
-    },
-    methods: {
-        getTokenIcon(tokenId) {
-            let defaultToken = viteWallet.Ledger.tokenInfoMaps[tokenId];
-            if (defaultToken && defaultToken.icon) {
-                return defaultToken.icon;
-            }
-
-            let tokenHash = encoder.blake2b(tokenId);
-            let hexStr = encoder._Buffer(tokenHash).toString('hex');
-            return 'data:image/svg+xml;base64,' + new Identicon(hexStr, iconConfig).toString(); 
-        }
     }
 };
 </script>
 
 <style lang="scss" scoped>
-@import './center.scss';
+@import '../center.scss';
 
 .txpair-head-wrapper {
     width: 100%;
@@ -141,46 +92,6 @@ export default {
     font-size: 12px;
     font-weight: 600;
     line-height: 16px;
-    .token {
-        flex-basis: 180px;
-        white-space: nowrap;
-        .t-item {
-            max-width: 85px;
-            overflow: hidden;
-            display: inline-block;
-            font-size: 14px;
-            font-family: $font-bold, arial, sans-serif;
-            font-weight: 600;
-            color: rgba(29,32,36,1);
-            // &:first-child {
-            //     .id {
-            //         text-align: right;
-            //     }
-            // }
-            .t-icon {
-                white-space: nowrap;
-                font-size: 20px;
-                img {
-                    width: 12px;
-                    height: 12px;
-                    border-radius: 12px;
-                    margin-bottom: 1px;
-                }
-            }
-            .line {
-                margin-bottom: 4px;
-            }
-            .id {
-                font-family: $font-normal, arial, sans-serif;
-                font-size: 12px;
-                font-weight: 400;
-                color: $blue;
-                line-height: 14px;
-                margin-top: 10px;
-            }
-        }
-    }
-
     .token-title {
         font-family: $font-normal, arial, sans-serif;
         color: rgba(94,104,117,1);
