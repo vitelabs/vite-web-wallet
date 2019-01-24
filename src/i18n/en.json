@@ -411,6 +411,9 @@
         "title": "当前委托"
     },
     "exchangeOrderHistory": {
-        "title": "历史委托"
+        "title": "历史委托",
+        "table":{
+            "heads":["委托时间","市场","方向","委托价格","委托数量(#tokenSymbol#)","已成交(#tokenSymbol#)","成交率","成交均价","手续费","状态"]
+        }
     }
 }
