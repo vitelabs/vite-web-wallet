@@ -1,38 +1,38 @@
 {
-  "lang": "EN",
+  "lang": "DE",
   "start": "Start",
-  "logout": "Logout",
+  "logout": "Abmelden",
   "errCode": {
-    "35003": "{name} ID conflict occurs, please re-submit later",
-    "35004": "Built-in contract error, please try again later（35004）",
-    "35005": "Transactions are sent too frequent, please try again later",
-    "35006": "Built-in contract method not exist, please try again later（35006）",
-    "36001": "You cannot make any transfer until you receive a transaction",
-    "36002": "System verify failed, please try again later（36002）",
-    "36003": "System verify failed, please try again later（36003）",
-    "36004": "System verify failed, please try again later（36004）",
-    "36005": "napshot block height is illegal, please try again later"
+    "35003": "{name} ID-Konflikt aufgetreten, bitte später erneut versuchen",
+    "35004": "Fehler bei integriertem Contract, bitte später erneut versuchen (35004)",
+    "35005": "Transaktionen werden zu häufig gesendet, bitte später erneut versuchen",
+    "35006": "Methode des Contracts existiert nicht, bitte später erneut versuchen（35006）",
+    "36001": "Sie können keine Überweisung vornehmen, bis Sie eine Transaktion erhalten",
+    "36002": "System-Verifikationsfehler, bitte später erneut versuchen（36002）",
+    "36003": "System-Verifikationsfehler, bitte später erneut versuchen（36003）",
+    "36004": "System-Verifikationsfehler, bitte später erneut versuchen（36004）",
+    "36005": "Snapshot block height is illegal, please try again later"
   },
   "txType": {
-    "0": "SBP Registration",
-    "1": "Update Registration",
-    "2": "Revoke Registration",
-    "3": "Retrieve Reward",
+    "0": "SBP-Registrierung",
+    "1": "Registrierung aktualisieren",
+    "2": "Registration widerrufen",
+    "3": "Belohnung erhalten",
     "4": "Voting",
-    "5": "Revoke Voting",
-    "6": "Get TPS Quota",
-    "7": "Withdrawal of Staking Quota",
-    "8": "Token Issuance",
-    "9": "Withdrawal of Staking Token",
-    "10": "Transfer",
-    "11": "Transfer",
-    "12": "Transfer",
-    "13": "Transfer",
-    "14": "Transfer",
-    "15": "Transfer"
+    "5": "Voting widerrufen",
+    "6": "TPS-Quote erhalten",
+    "7": "Rücknahme der Kontingentquote",
+    "8": "Tokenausgabe",
+    "9": "Kontingenttoken zurückziehen",
+    "10": "Transaktion",
+    "11": "Transaktion",
+    "12": "Transaktion",
+    "13": "Transaktion",
+    "14": "Transaktion",
+    "15": "Transaktion"
   },
   "firstNotice": {
-    "title": "Read Before Use",
+    "title": "Vor Gebrauch sorgfältig lesen",
     "text1": "Please be sure to backup your seed phrase when creating account. We cannot guarantee the restoration of your assets in the instance that you visit a scam site or lose your private keys or seed phrase.",
     "text2": "Please note that our websites do not store your private keys or seed phrase. Therefore, you will need to restore your account via seed phrase if you decide to change browsers, clear local cookies, or change PCs.",
     "text3": "Please take proper precautions in ensuring that you accurately record and safely store your seed phrase. Even the slightest error will result in you not being able to successfully restore your address."
@@ -45,7 +45,7 @@
     "v": "Current version: {version}"
   },
   "mnemonic": {
-    "title": "Mnemonic",
+    "title": "Mnemonik",
     "restore": "Restore Account by Seed Phrase",
     "record": "Backup Seed Phrase",
     "prompt": "Mnemonic seed phrase is used to restore your wallet, better write it down and keep it in a safe place where only you can access, otherwise your assets will be at tremendous risks.",
@@ -57,47 +57,47 @@
     "change": "Switch to {len} Mnemonic Words"
   },
   "setting": {
-    "title": "Settings",
+    "title": "Einstellungen",
     "unlock": "Unlock Secure Information",
-    "lang": "Language",
-    "block": "Current Height",
+    "lang": "Sprache",
+    "block": "Aktuelle Block-Höhe",
     "version": "Version",
-    "service": "Customer Service",
-    "site": "Official Website of Vite",
+    "service": "Kundensupport",
+    "site": "Offizielle Vite-Website",
     "sys": "System Portal",
     "open": "Vite Github"
   },
   "nav": {
-    "home": "Home",
+    "home": "Start",
     "head": {
-      "title": "Account",
-      "create": "Create",
-      "imported": "Import",
-      "backup": "Back Up",
+      "title": "Konto",
+      "create": "Erstellen",
+      "imported": "Importieren",
+      "backup": "Sicherung erstellen",
       "setting": "Setting Account",
-      "reset": "Reset Your Account",
-      "login": "Log In"
+      "reset": "Konto zurücksetzen",
+      "login": "Einloggen"
     },
     "sync": "Wallet initializing, transactions cannot be made temporarily.",
     "noNet": "No network detected",
-    "noP2P": "Unable to connect to other nodes",
+    "noP2P": "Konnte keine Verbindung mit anderen Nodes herstellen",
     "firstDone": "Init Done",
     "firstDoing": "Initializing",
     "blockHeight": "Snapshot Block Height"
   },
   "accList": {
-    "balance": "Balance",
-    "addAcc": "Add Address",
-    "addr": "Addresses of Accounts",
-    "addrList": "Addresses",
-    "default": "Select Default User"
+    "balance": "Kontostand",
+    "addAcc": "Adresse hinzufügen",
+    "addr": "Adressen der Konten",
+    "addrList": "Adressen",
+    "default": "Standardbenutzer auswählen"
   },
   "create": {
-    "accName": "Account name",
-    "input": "Please input password",
-    "again": "Please input password again",
-    "choose": "Choose account",
-    "finish": "Done",
+    "accName": "Kontenname",
+    "input": "Bitte Passwort eingeben",
+    "again": "Bitte Passwort erneut eingeben",
+    "choose": "Konto wählen",
+    "finish": "Fertig",
     "hint": {
       "nameInput": "Please input account name",
       "nameLong": "Account name cannot exceed 32 characters!",
@@ -118,29 +118,29 @@
   "account": {
     "title": "Account Detail",
     "transfer": "Transfer",
-    "getTestToken": "Get Test Tokens",
-    "transDetail": "More Transaction Details",
-    "name": "Account Name",
-    "address": "My Address",
-    "balance": "Balance",
-    "fundFloat": "Unreceived",
-    "pend": "Pending",
-    "copy": "Copy Address",
-    "outAddress": "My Address",
-    "inAddress": "Receive Address",
-    "sum": "Amount",
-    "password": "Password",
-    "saveQrcode": "Save QR code image",
-    "sendTrans": "Send Transaction",
-    "remarks": "Comment",
+    "getTestToken": "Test-Token erhalten",
+    "transDetail": "Transaktionsdetails anzeigen",
+    "name": "Kontenname",
+    "address": "Meine Adresse",
+    "balance": "Kontostand",
+    "fundFloat": "Ausständig",
+    "pend": "Ausstehend",
+    "copy": "Adresse kopieren",
+    "outAddress": "Meine Adresse",
+    "inAddress": "Empfängeradresse",
+    "sum": "Betrag",
+    "password": "Passwort",
+    "saveQrcode": "Bild des QR-Code speichern",
+    "sendTrans": "Transaktion senden",
+    "remarks": "Kommentar",
     "placeholder": {
-      "amount": "Please input amount",
-      "remarks": "Please input comments",
-      "addr": "Please input address"
+      "amount": "Bitte Betrag eingeben",
+      "remarks": "Bitte Kommentar eingeben",
+      "addr": "Bitte Adresse eingeben"
     },
     "valid": {
       "remarksFormat": "Format error! Remarks can only contain Chinese, English and punctuations.",
-      "remarksLong": "{len} bytes left"
+      "remarksLong": "{len} Bytes verbleibend"
     },
     "hint": {
       "token": "VTT test tokens have be sent to your account, please check your account!",
@@ -165,7 +165,7 @@
     }
   },
   "quota": {
-    "title": "Get Quota",
+    "title": "Acquire Quota",
     "help": {
       "title": "Quick Understanding of Quota"
     },
@@ -177,7 +177,7 @@
     "time": "Staking Freeze Duration",
     "aboutDays": "Approx 3 days",
     "btn": "Submit Staking",
-    "myQuotaList": "My Staking List",
+    "myQuotaList": "List of My Staked Tokens",
     "amountPlaceholder": "Please input staking amount, minimum 10 VITE",
     "addrPlaceholder": "Please input quota recipient address",
     "cancelAmount": "Please input withdraw amount",
@@ -213,7 +213,7 @@
     },
     "list": {
       "title": "My Staking List",
-      "total": "Staking {amount} VITE in total",
+      "total": "Currently Amount Staked: {amount}",
       "amount": "Amount",
       "withdrawHeight": "Expected Snapshot Height",
       "withdrawTime": "Expected Due Date",
@@ -257,7 +257,7 @@
     "cancel": "SBP Cancellation",
     "cancelBtn": "Cancel",
     "help": {
-      "title": "About SBP",
+      "title": "SBP Information",
       "text": "SBP（Snapshot Block Producer）is a node that has right to create blocks, you can register to become a SBP candidate by staking a certain amount of VITE, each round (about 75 seconds) will elect 25 SBPs, the SBPs will be elected from random 23 out of top 25 candidate nodes, plus random 2 out of the candidate nodes ranking 26th-100th on the list. The 50% of block creation rewards will be allocated to the block creation node, the other 50% will be allocated to nodes that are ranked on top 100 as voting rewards. <br/><br/> One registration address (staking address) can register multiple block creation nodes (node names), a node name cannot be used if the node name has been registered by a registration address. A node name can switch block creation address, however, block creation address cannot be reused by other node names."
     },
     "confirm": {
@@ -319,8 +319,8 @@
     "title": "Voting",
     "search": "Please input node name or block creation address",
     "help": {
-      "title": "About Voting",
-      "text": "You can join and vote for 25 SBPs （Snapshot Block Producer), each round of voting lasts 75s, the polls you can use for voting are equivalent to the amount of VITE tokens owned by voting address, the default selection is the choice of previous round, the SBPs will be chosen from random 23 out of top 25 candidate nodes, plus random 2 out of the candidate nodes ranking 26th-100th on the list, 25 SBPs in total."
+      "title": "Voting Information",
+      "text": "You can join and vote for 25 SBPs (Snapshot Block Producers). Each voting round lasts 75 seconds. The weight of your votes corresponds to the balance of your Vite address. Your vote for an SBP will remain in place, until you either manually revoke your vote from the round or vote for another Supernode. 23 out of the top 25 SBP candidates are chosen at random to be elected as block producers. Additionally, 2 more candidates are randomly selected, ranked between the 26th and 100th spot. In total, 25 SBPs get chosen by these guidelines."
     },
     "addrNoExistErr": "You aren't able to vote for now as your address has no transaction record before",
     "section1": {
@@ -339,8 +339,8 @@
       "voteStatusMap": {
         "voted": "Voting Successful",
         "voting": "Voting",
-        "canceling": "Under revoking",
-        "voteNotWork": "Revoked voting"
+        "canceling": "Under Revoking",
+        "voteNotWork": "Invalid Vote"
       },
       "hoverHelp": "The node {nodeName} you are voted for has been revoked, you may vote again directly or revoke your voting, If you do not do so, your original voting result will be recovered after the {nodeName} re-registering",
       "confirm": {
@@ -448,7 +448,7 @@
     "edit": "Edit",
     "copy": "Copy",
     "reReg": "Re-register",
-    "otherProd": "Use Other Products of Vite"
+    "otherProd": "Use Other Vite Products"
   },
   "paging": {
     "pre": "Prev",
