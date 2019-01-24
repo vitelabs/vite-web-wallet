@@ -400,8 +400,9 @@
         "price": "价格",
         "upDown": "涨跌幅",
         "txNum": "交易量",
-        "num": "数量",
-        "quantity": "成交额",
+        "quantityTitle": "成交额({quantity})",
+        "priceTitle": "价格({price})",
+        "amountTitle": "数量({amount})",
         "head": {
             "latestPrice": "最新价",
             "updown": "24h涨跌",
@@ -421,8 +422,6 @@
         },
         "latestTx": {
             "title": "最新交易",
-            "price": "价格({price})",
-            "amount": "数量({amount})",
             "time": "时间"
         },
         "depth": {

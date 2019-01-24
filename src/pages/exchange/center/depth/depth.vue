@@ -13,9 +13,15 @@
         </div>
 
         <div class="__center-tb-title">
-            <span class="__center-tb-item">{{ $t('exchange.price') }}</span>
-            <span class="__center-tb-item">{{ $t('exchange.num') }}</span>
-            <span class="__center-tb-item">{{ $t('exchange.quantity') }}</span>
+            <span class="__center-tb-item">{{ $t('exchange.priceTitle', { 
+                price: activeTxPair && activeTxPair.ttokenShow ? activeTxPair.ttokenShow : '' 
+            }) }}</span>
+            <span class="__center-tb-item">{{ $t('exchange.amountTitle', { 
+                amount: activeTxPair && activeTxPair.ftokenShow ? activeTxPair.ftokenShow : ''
+            }) }}</span>
+            <span class="__center-tb-item">{{ $t('exchange.quantityTitle', { 
+                quantity: activeTxPair && activeTxPair.ttokenShow ? activeTxPair.ttokenShow : ''
+            }) }}</span>
         </div>
 
         <depth-table v-show="isShowBuy" class="depth-table" dataType="buy" :depthData="depthBuy"></depth-table>
@@ -44,6 +50,9 @@ export default {
         },
         depthSell() {
             return this.$store.state.exchangeDepth.sell;
+        },
+        activeTxPair() {
+            return this.$store.state.exchangeActiveTxPair.activeTxPair;
         }
     },
     methods: {
@@ -67,5 +76,6 @@ export default {
 
 .depth-table {
     flex: 1;
+    overflow: auto;
 }
 </style>

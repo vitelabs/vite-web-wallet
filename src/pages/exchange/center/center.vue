@@ -14,7 +14,7 @@ import layout from './layout';
 import depth from './depth/depth.vue';
 import market from './market/market.vue';
 import latestTx from './latestTx';
-import limitPrice from './limitPrice';
+import limitPrice from './limitPrice/limitPrice.vue';
 import centerHead from './head/head.vue';
 import centerView from './view/view.vue';
 
