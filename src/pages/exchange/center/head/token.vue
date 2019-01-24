@@ -100,18 +100,18 @@ export default {
                 return {};
             }
 
+            detail = Object.assign({}, detail);
             detail.publisher = ellipsisAddr(detail.publisher);
-            detail.tokenType = detail.tokenType || 
-                (detail.tokenType === 0 ? this.$t('exchange.head.tokenType0') :
-                    detail.tokenType === 1 ? this.$t('exchange.head.tokenType1') : '');
+            detail.tokenType = detail.tokenType === 0 ? this.$t('exchange.head.tokenType0') :
+                detail.tokenType === 1 ? this.$t('exchange.head.tokenType1') : '';
             detail.publisherDate = detail.publisherDate ? date(detail.publisherDate, 'zh') : '';
             return detail;
         }
     },
     watch: {
         activeTxPair: function() {
-            this.fetchTtoken();
-            this.fetchFtoken();
+            this.fetchToken('ttoken');
+            this.fetchToken('ftoken');
         }
     },
     methods: {
@@ -131,32 +131,17 @@ export default {
             let hexStr = encoder._Buffer(tokenHash).toString('hex');
             return 'data:image/svg+xml;base64,' + new Identicon(hexStr, iconConfig).toString(); 
         },
-        fetchTtoken() {
-            if (!this.activeTxPair || !this.activeTxPair.ttoken) {
+        fetchToken(type = 'ttoken') {
+            if (!this.activeTxPair || !this.activeTxPair[type]) {
                 return;
             }
 
-            let tokenId = this.activeTxPair.ttoken;
+            let tokenId = this.activeTxPair[type];
             tokenDetail({ tokenId }).then((data) => {
-                if (tokenId !== this.activeTxPair.ttoken) {
+                if (tokenId !== this.activeTxPair[type]) {
                     return;
                 }
-                this.ttokenDetail = data;
-            }).catch((err) => {
-                console.warn(err);
-            });
-        },
-        fetchFtoken() {
-            if (!this.activeTxPair || !this.activeTxPair.ftoken) {
-                return;
-            }
-
-            let tokenId = this.activeTxPair.ftoken;
-            tokenDetail({ tokenId }).then((data) => {
-                if (tokenId !== this.activeTxPair.ftoken) {
-                    return;
-                }
-                this.ftokenDetail = data;
+                this[`${type}Detail`] = data;
             }).catch((err) => {
                 console.warn(err);
             });
@@ -235,5 +220,3 @@ export default {
     }
 }
 </style>
-
-
