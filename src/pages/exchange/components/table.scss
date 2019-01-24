@@ -1,0 +1,59 @@
+@import "assets/scss/vars.scss";
+@mixin rowWith () {
+    .head-row>div,
+    .row>div {
+        @content
+    }
+}
+
+.ex_tb {
+    padding-top: 71px;
+    position: relative;
+    box-shadow: 0px 2px 48px 1px rgba(176, 192, 237, 0.42);
+    border-radius: 2px;
+    background: #fff;
+    .head-row {
+        position: absolute;
+        top: 0;
+        height: 71px;
+        color: #1D2024;
+        width: 100%;
+        font: $font-bold;
+        display: flex;
+        padding: 0 30px;
+        >div {
+            display: flex;
+            margin: 0 5px;
+            align-items: center;
+            .sort-btn {
+                width: 16px;
+                margin-left: 2px;
+                background: #1D2024;
+                height: 16px;
+                cursor: pointer;
+            }
+        }
+    }
+    .row-container{
+        height: 100%;
+        overflow: auto;
+    }
+    .row {
+        height: 65px;
+        color: #5E6875;
+        line-height: 65px;
+        border-bottom: 1px solid #C6CBD4;
+        display: flex;
+        width: 100%;
+        padding: 0 30px;
+        .click-able {
+            cursor: pointer;
+            color: #007AFF;
+        }
+        >div {
+            display: flex;
+            margin: 0 5px;
+            align-items: center;
+        }
+    }
+}
