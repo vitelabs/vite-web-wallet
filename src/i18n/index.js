@@ -1,5 +1,9 @@
 import en from './en';
 import zh from './zh';
+// import de from './de';
+// import fr from './fr';
+// import ja from './ja';
+// import ru from './ru';
 import localStorage from 'utils/localStorage';
 import Vue from 'vue';
 
@@ -15,7 +19,11 @@ function i18nCon() {
         fallbackLocale: 'en',
         messages: {
             en, 
-            zh
+            zh,
+            // de,
+            // fr,
+            // ja,
+            // ru
         }
     };
 }
