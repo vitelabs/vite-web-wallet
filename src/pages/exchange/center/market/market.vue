@@ -327,7 +327,6 @@ export default {
         input {
             text-indent: 0px;
             font-weight: 400;
-            // color: rgba(206,209,213,1);
             font-size: 12px;
         }
     }

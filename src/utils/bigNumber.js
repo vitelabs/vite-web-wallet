@@ -24,10 +24,15 @@ export default {
         num2 = new BigNumber(num2);
         return num1.isEqualTo(num2);
     },
-    minus(x, y) {
+    minus(x, y, fix = 8) {
         x = new BigNumber(x);
         y = new BigNumber(y);
-        return x.minus(y);
+        return x.minus(y).toFormat(fix);
+    },
+    multi(x, y, fix = 8) {
+        x = new BigNumber(x);
+        y = new BigNumber(y);
+        return x.multipliedBy(y).toFormat(fix);
     },
     dividedToNumber(num1, num2, fix = 0) {
         num1 = new BigNumber(num1);

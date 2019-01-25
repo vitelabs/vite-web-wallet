@@ -61,14 +61,14 @@ export default {
             let _l = [];
 
             list.forEach((_t) => {
-                let upDown = BigNumber.minus(_t.price, _t.priceBefore24h).toString();
+                let upDown = BigNumber.minus(_t.price, _t.priceBefore24h);
 
                 let item = {};
                 item.pairCode = _t.pairCode;
                 item.price = _t.price;
                 item.quantity24h = _t.quantity24h;
                 item.showPair = `${_t.ftokenShow}/${_t.ttokenShow}`;
-                item.upDown = BigNumber.dividedToNumber(upDown, _t.priceBefore24h * 100, 2).toString();
+                item.upDown = BigNumber.dividedToNumber(upDown, _t.priceBefore24h * 100, 2);
                 item.rawData = _t;
                 
                 _l.push(item);
