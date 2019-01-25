@@ -4,9 +4,9 @@
             {{ $t('exchange.limitPrice.title') }}
             <span class="fee">{{ $t('exchange.limitPrice.fee') }} Taker（0.0XX%）/ Maker（0.0XX%）</span>
         </div>
-        <!-- <logout v-show="!isLogin"></logout>
-        <login v-show="isLogin"></login> -->
-        <login></login>
+        <logout v-show="!isLogin"></logout>
+        <login v-show="isLogin"></login>
+        <!-- <login></login> -->
     </div>
 </template>
 
@@ -19,6 +19,8 @@ export default {
         logout, login
     },
     created() {
+        this.isLogin = !!this.$wallet.isLogin;
+        this.getBalance();
         this.$wallet.onLogin(() => {
             this.isLogin = true;
         });
@@ -26,10 +28,29 @@ export default {
             this.isLogin = false;
         });
     },
+    destroyed() {
+        this.$store.dispatch('stopLoopExchangeBalance');
+    },
     data() {
         return {
             isLogin: !!this.$wallet.isLogin
         };
+    },
+    watch: {
+        isLogin: function() {
+            this.getBalance();
+        }
+    },
+    methods: {
+        getBalance() {
+            if (!this.isLogin) {
+                this.$store.dispatch('stopLoopExchangeBalance');
+                return;
+            }
+            let activeAccount = this.$wallet.getActiveAccount();
+            let addr = activeAccount.getDefaultAddr();
+            this.$store.dispatch('startLoopExchangeBalance', addr);
+        }
     }
 };
 </script>

@@ -18,7 +18,7 @@ export const klineHour = function ({
     fDate, tDate, ftoken, ttoken
 }) {
     return request({
-        path: path + '/kline/hour',
+        path: path + '/kline/minute/hour',
         method: 'GET',
         params: {
             fDate, tDate, ftoken, ttoken
@@ -88,7 +88,30 @@ export const latestTx = function ({
 
 export const rate = function() {
     return request({
-        path: path + '/coin/rate'
+        path: path + '/market/rate'
+    });
+};
+
+export const rateStandard = function() {
+    return request({
+        path: path + '/market/rate/standard'
+    });
+};
+
+export const rateFiat = function() {
+    return request({
+        path: path + '/market/rate/fiat'
+    });
+};
+
+export const rateToken = function({
+    tokenIdList
+}) {
+    return request({
+        path: path + '/market/rate/exchange',
+        params: {
+            list: tokenIdList
+        }
     });
 };
 
@@ -106,13 +129,15 @@ export const defaultPair = function({
 
 
 export const assignPair = function({
-    pairs
+    pairs = []
 }) {
+    let pairsStr = pairs.join(',');
+
     return request({
         path: path + '/pair/assign',
         method: 'GET',
         params: {
-            pairs
+            pairs: pairsStr
         }
     });
 };
