@@ -24,11 +24,11 @@ const getters = {
             return null;
         }
         let activeTxPair = Object.assign({}, state.activeTxPair);
-        let upDown = BigNumber.minus(activeTxPair.price, activeTxPair.priceBefore24h).toString();
-        let upDownPre = BigNumber.minus(activeTxPair.price, activeTxPair.pricePrev).toString();
+        let upDown = BigNumber.minus(activeTxPair.price, activeTxPair.priceBefore24h);
+        let upDownPre = BigNumber.minus(activeTxPair.price, activeTxPair.pricePrev);
 
         activeTxPair.upDown = upDown;
-        activeTxPair.upDownPercent = BigNumber.dividedToNumber(upDown, activeTxPair.priceBefore24h * 100, 2).toString() + '%';
+        activeTxPair.upDownPercent = BigNumber.dividedToNumber(upDown, activeTxPair.priceBefore24h * 100, 2) + '%';
         activeTxPair.upDownPre = upDownPre;
 
         return activeTxPair;

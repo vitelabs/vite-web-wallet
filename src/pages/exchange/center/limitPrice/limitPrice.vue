@@ -52,3 +52,15 @@ export default {
     }
 }
 </style>
+
+<style lang="scss">
+    @import "~assets/scss/vars.scss";
+
+    .order-input.input-wrapper input {
+        text-indent: 6px;
+        color: #24272B;
+        font-size: 12px;
+        font-family: $font-normal, arial, sans-serif;
+        font-weight: 400;
+    }
+</style>

@@ -403,6 +403,17 @@
         "quantityTitle": "成交额({quantity})",
         "priceTitle": "价格({price})",
         "amountTitle": "数量({amount})",
+        "quantity": "成交金额",
+        "buy": {
+            "title": "买入{token}",
+            "price": "买入价",
+            "amount": "买入量"
+        },
+        "sell": {
+            "title": "卖出{token}",
+            "price": "卖出价",
+            "amount": "卖出量"
+        },
         "head": {
             "latestPrice": "最新价",
             "updown": "24h涨跌",

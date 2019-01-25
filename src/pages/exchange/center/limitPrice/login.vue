@@ -1,18 +1,17 @@
 <template>
     <div class="ex-center-login">
-        <buy class="order-wrapper"></buy>
+        <order orderType="buy"></order>
         <div class="order-border"></div>
-        <sell class="order-wrapper"></sell>
+        <order orderType="sell" class="order-wrapper"></order>
     </div>
 </template>
 
 <script>
-import buy from './buy';
-import sell from './sell';
+import order from './order.vue';
 
 export default {
     components: {
-        buy, sell
+        order
     }
 };
 </script>
@@ -26,13 +25,8 @@ export default {
     width: 100%;
     height: 100%;
     box-sizing: border-box;
-    padding: 10px 0;
-    .order-wrapper {
-        flex: 1;
-        padding: 0 22px;
-    }
+    padding: 8px 0 10px;
     .order-border {
-        width: 1px;
         height: 100%;
         opacity: 0.136;
         border: 1px solid rgba(212,222,231,1);
