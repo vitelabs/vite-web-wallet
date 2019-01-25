@@ -1,13 +1,13 @@
 <template>
-    <div class="input-wrapper">
+    <form class="input-wrapper" autocomplete="off">
         <slot name="before"></slot>
         <!-- Safari autocomplete -->
         <input fake_pass type="password" style="display:none"/>
         <input v-model="value" @input.prevent="update" type="text"
-               :placeholder="placeholder" autocomplete="off"
+               :placeholder="placeholder" autocomplete="false"
                @blur="_blur" @focus="_focus"/>
         <slot name="after"></slot>
-    </div>
+    </form>
 </template>
 
 <script>
@@ -25,6 +25,10 @@ export default {
         _value: {
             type: String,
             default: ''
+        },
+        _delay: {
+            type: Number,
+            default: 500
         }
     },
     destroyed () {
@@ -48,7 +52,7 @@ export default {
             this.valueTimeout = setTimeout(()=> {
                 this.clear();
                 this.valid();
-            }, 500);
+            }, this._delay);
         }
     },
     methods: {    

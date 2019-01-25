@@ -12,47 +12,52 @@
 
         <div class="order-row-title">{{ $t(`exchange.${orderType}.price`) }}</div>
         <vite-input class="order-input" :class="{'err': isPriceErr}" 
-                    v-model="price" :valid="validPrice">
+                    v-model="price">
             <span class="ex-order-token" slot="after">{{ ttokenShow }}</span>
         </vite-input>
 
         <div class="order-row-title">{{ $t(`exchange.${orderType}.amount`) }}
             <ul class="amount-percent">
                 <li class="__pointer" :class="{
-                    'active': percent === 0.25
+                    'active': +percent === 0.25
                 }" @click="amountPercent(0.25)">25%</li>
                 <li class="__pointer" :class="{
-                    'active': percent === 0.5
+                    'active': +percent === 0.5
                 }" @click="amountPercent(0.5)">50%</li>
                 <li class="__pointer" :class="{
-                    'active': percent === 0.75
+                    'active': +percent === 0.75
                 }" @click="amountPercent(0.75)">75%</li>
                 <li class="__pointer" :class="{
-                    'active': percent === 1
+                    'active': +percent === 1
                 }" @click="amountPercent(1)">100%</li>
             </ul>
         </div>
         <vite-input class="order-input" :class="{'err': isAmountErr}"  
-                    v-model="amount" :valid="validAmount">
+                    v-model="amount">
             <span class="ex-order-token" slot="after">{{ ftokenShow }}</span>
         </vite-input>
 
         <div class="order-row-title">{{ $t('exchange.quantity') }}</div>
+        <input fake_pass type="password" style="display:none"/>
         <vite-input class="order-input" :class="{'err': isQuantityErr}"  
-                    v-model="quantity"  :valid="validQuantity">
+                    v-model="quantity">
+            <input fake_pass type="password" style="display:none"/>
             <span class="ex-order-token" slot="after">{{ ttokenShow }}</span>
         </vite-input>
 
         <div class="order-btn __pointer" :class="{
             'red': orderType === 'sell',
             'blue': orderType === 'buy'
-        }">{{ $t(`exchange.${orderType}.title`, { token: ftokenShow }) }}</div>
+        }" @click="_clickBtn">{{ $t(`exchange.${orderType}.title`, { token: ftokenShow }) }}</div>
     </div>
 </template>
 
 <script>
 import viteInput from 'components/viteInput';
 import BigNumber from 'utils/bigNumber';
+
+let validTimeout = null;
+let changeVal = null;
 
 export default {
     components: {
@@ -62,7 +67,17 @@ export default {
         orderType: {
             type: String,
             default: ''
+        },
+        clickBtn: {
+            type: Function,
+            default: () => {}
         }
+    },
+    created() {
+        this.price = this.activeTxPair && this.activeTxPair.price ? this.activeTxPair.price : '';
+    },
+    destroyed() {
+        this.clearValidTimeout();
     },
     data() {
         return {
@@ -72,7 +87,8 @@ export default {
             isPriceErr: false,
             isAmountErr: false,
             isQuantityErr: false,
-            percent: 0
+            percent: 0,
+            watchAQ: false
         };
     },
     watch: {
@@ -82,13 +98,50 @@ export default {
             }
             this.price = this.activeTxPair && this.activeTxPair.price ? this.activeTxPair.price : '';
         },
+        amount: function() {
+            changeVal = 'amount';
+            this.watchAQ = !this.watchAQ;
+        },
+        quantity: function() {
+            changeVal = 'quantity';
+            this.watchAQ = !this.watchAQ;
+        },
+        price: function() {
+            changeVal = 'price';
+            this.watchAQ = !this.watchAQ;
+        },
         percent: function() {
-            this.amount = BigNumber.multi(this.percent, this.balance);
+            changeVal = 'percent';
+            this.watchAQ = !this.watchAQ;
+        },
+        balance: function() {
+            changeVal = 'balance';
+            this.watchAQ = !this.watchAQ;
+        },
+        watchAQ: function() {
+            this.clearValidTimeout();
+            validTimeout = setTimeout(() => {
+                this.clearValidTimeout();
+                changeVal && this[`${changeVal}Changed`]();
+                this.validPrice();
+                this.validAmount();
+                this.validQuantity();
+            }, 300);
         }
     },
     computed: {
         balance() {
-            return 0;
+            let tokenId = this.activeTxPair && this.activeTxPair.ftoken ? this.activeTxPair.ftoken : '';
+            if (this.orderType === 'buy') {
+                tokenId = this.activeTxPair && this.activeTxPair.ttoken ? this.activeTxPair.ttoken : '';
+            }
+            let balanceList = this.$store.state.exchangeBalance.balanceList;
+            if (!tokenId || !balanceList || !balanceList[tokenId]) {
+                return '2000';
+            }
+            let tokenInfo = balanceList[tokenId].tokenInfo;
+            let balance = balanceList[tokenId].available || 0;
+            return BigNumber.toBasic(balance, tokenInfo.decimals);
         },
         ftokenShow() {
             return this.activeTxPair && this.activeTxPair.ftokenShow ? this.activeTxPair.ftokenShow : '';
@@ -101,34 +154,167 @@ export default {
         }
     },
     methods: {
+        clearValidTimeout() {
+            validTimeout && clearTimeout(validTimeout);
+            validTimeout = null;
+        },
         amountPercent(percent) {
             this.percent = percent;
         },
-        validPrice() {
-            this.isPriceErr = !this.$validAmount(this.price);
-            if (this.isPriceErr || !this.amount || this.isAmountErr) {
+
+        percentChanged() {
+            let price = this.price;
+            let quantity = this.quantity;
+            let amount = this.amount;
+            let percent = this.percent;
+
+            if (this.orderType === 'buy') {
+                quantity = this.getPercentBalance(percent);
+                amount = this.getAmount(price, quantity);
+            } else {
+                amount = this.getPercentBalance(percent);
+                quantity = this.getQuantity(price, amount);
+            }
+
+            !BigNumber.isEqual(quantity, this.quantity) && (this.quantity = quantity);
+            !BigNumber.isEqual(amount, this.amount) && (this.amount = amount);
+        },
+        balanceChanged() {
+            if (!+percent || +percent%25 === 0) {
+                let percent = this.getPercent(this.orderType === 'buy' ? this.quantity : this.amount);
+                !BigNumber.isEqual(percent, this.percent) && (this.percent = percent);
                 return;
             }
-            let quantity = BigNumber.multi(this.price, this.amount);
+            
+            let quantity = this.quantity;
+            let amount = this.amount;
+            let percent = this.percent;
+            let price = this.price;
+
+            if (this.orderType === 'buy') {
+                quantity = this.getPercentBalance(percent);
+                amount = this.getAmount(price, quantity);
+            } else {
+                amount = this.getPercentBalance(percent);
+                quantity = this.getQuantity(price, amount);
+            }
+
             !BigNumber.isEqual(quantity, this.quantity) && (this.quantity = quantity);
+            !BigNumber.isEqual(amount, this.amount) && (this.amount = amount);
+        },
+        amountChanged() {
+            let price = this.price;
+            let quantity = this.quantity;
+            let amount = this.amount;
+            let percent = this.percent;
+
+            quantity = this.getQuantity(price, amount);
+            percent = this.getPercent(this.orderType === 'buy' ? quantity : amount);
+
+            !BigNumber.isEqual(quantity, this.quantity) && (this.quantity = quantity);
+            !BigNumber.isEqual(percent, this.percent) && (this.percent = percent);
+        },
+        priceChanged() {
+            let price = this.price;
+            let quantity = this.quantity;
+            let amount = this.amount;
+            let percent = this.percent;
+
+            quantity = this.getQuantity(price, amount);
+            percent = this.getPercent(this.orderType === 'buy' ? quantity : amount);
+
+            !BigNumber.isEqual(quantity, this.quantity) && (this.quantity = quantity);
+            !BigNumber.isEqual(percent, this.percent) && (this.percent = percent);
+        },
+        quantityChanged() {
+            let price = this.price;
+            let quantity = this.quantity;
+            let amount = this.amount;
+            let percent = this.percent;
+
+            amount = this.getAmount(price, quantity);
+            percent = this.getPercent(this.orderType === 'buy' ? quantity : amount);
+
+            !BigNumber.isEqual(amount, this.amount) && (this.amount = amount);
+            !BigNumber.isEqual(percent, this.percent) && (this.percent = percent);
+        },
+
+        getPercentBalance(percent) {
+            if (!this.balance || BigNumber.isEqual(this.balance, 0)) {
+                return '';
+            }
+            let result = BigNumber.multi(percent, this.balance, 8, 'nofix');
+            return BigNumber.isEqual(result, 0) ? '' : result;
+        },
+        getQuantity(price, amount) {
+            let isRightPrice = price && this.$validAmount(price) && !BigNumber.isEqual(price, 0);
+            if (!isRightPrice) {
+                return '';
+            }
+
+            let isRightAmount = amount && this.$validAmount(amount) && !BigNumber.isEqual(amount, 0);
+            if (!isRightAmount) {
+                return '';
+            }
+
+            return BigNumber.multi(price, amount, 8, 'nofix');
+        },
+        getAmount(price, quantity) {
+            let isRightPrice = price && this.$validAmount(price) && !BigNumber.isEqual(price, 0);
+            if (!isRightPrice) {
+                return '';
+            }
+
+            let isRightQuantity = quantity && this.$validAmount(quantity) && !BigNumber.isEqual(quantity, 0);
+            if (!isRightQuantity) {
+                return '';
+            }
+
+            return BigNumber.dividedToNumber(quantity, price, 8, 'nofix');
+        },
+        getPercent(val) {
+            if (!this.balance || BigNumber.isEqual(this.balance, 0) || 
+                !val || !this.$validAmount(val) || BigNumber.isEqual(val, 0)) {
+                return 0;
+            }
+
+            return BigNumber.dividedToNumber(val, this.balance, 2);
+        },
+
+        validPrice() {
+            this.isPriceErr = this.price && !this.$validAmount(this.price);
         },
         validAmount() {
-            this.isAmountErr = !this.$validAmount(this.amount);
-            if (this.isAmountErr || !this.price || this.isPriceErr) {
-                return;
-            }
-            this.percent = +this.balance ? BigNumber.dividedToNumber(this.amount, this.balance) : 0;
-
-            let quantity = BigNumber.multi(this.price, this.amount);
-            !BigNumber.isEqual(quantity, this.quantity) && (this.quantity = quantity);
+            this.isAmountErr = this.amount && !this.$validAmount(this.amount) ||
+                (this.orderType === 'sell' && BigNumber.compared(this.balance, this.amount) < 0);
         },
         validQuantity() {
-            this.isQuantityErr = !this.$validAmount(this.quantity);
-            if (this.isQuantityErr || !this.price || this.isPriceErr) {
+            this.isQuantityErr = (this.quantity && !this.$validAmount(this.quantity)) ||
+                (this.orderType === 'buy' && BigNumber.compared(this.balance, this.quantity) < 0);
+        },
+
+        _clickBtn() {
+            this.validPrice();
+            this.validAmount();
+            this.validQuantity();
+            this.isPriceErr = this.isPriceErr || !this.price;
+            this.isAmountErr = this.isAmountErr || !this.amount;
+            this.isQuantityErr = this.isQuantityErr || !this.quantity;
+
+            if (this.isPriceErr || this.isAmountErr || this.isQuantityErr) {
                 return;
             }
-            let amount = BigNumber.dividedToNumber(this.quantity, this.price, 8);
-            !BigNumber.isEqual(amount, this.amount) && (this.amount = amount);
+
+            let activeAccount = this.$wallet.getActiveAccount();
+            activeAccount.initPwd({
+                submit: () => {
+                    this.clickBtn({
+                        price: this.price,
+                        amount: this.amount,
+                        quantity: this.quantity
+                    });
+                }
+            });
         }
     }
 };
