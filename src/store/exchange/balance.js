@@ -9,10 +9,7 @@ const state = {
 
 const mutations = {
     setExchangeBalance(state, balanceList) {
-        state.balanceList = {};
-        balanceList && balanceList.forEach((balanceInfo) => {
-            state.balanceList[balanceInfo.tokenCode] = balanceInfo;
-        });
+        state.balanceList = balanceList;
     }
 };
 
