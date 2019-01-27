@@ -65,6 +65,7 @@
         "koa-router": "^7.4.0",
         "lodash": "^4.17.11",
         "node-libs-browser": "^2.1.0",
+        "protobufjs": "^6.8.8",
         "qrcode.es": "^1.0.0",
         "qs": "^6.5.2",
         "testwebworker": "git+https://github.com/vitelabs/cryptojsAccelerator.git",

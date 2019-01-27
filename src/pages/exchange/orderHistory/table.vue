@@ -425,7 +425,7 @@ export default {
 <style lang="scss" scoped>
 @import "../components/table.scss";
 .ex_tb{
-    margin:20px 10px 10px;
+    height: 100%;
     padding-bottom: 10px;
 }
 @include rowWith {
