@@ -405,15 +405,51 @@
         }
     },
     "exchangeAssets": {
-        "title": "资产管理"
+        "title": "资产管理",
+        "table":{
+            "heads": ["代币名称","钱包余额","交易所账户余额","委托中","价值"],
+            "rowMap":{
+                "recharge":"充币至交易所",
+                "withdraw":"提币至钱包",
+                "detail":"查看明细"
+            }
+        }
     },
     "exchangeOpenOrders": {
-        "title": "当前委托"
+        "title": "当前委托",
+        "table": {
+            "heads": [
+                "委托时间",
+                "市场",
+                "方向",
+                "委托价格",
+                "委托数量(#tokenSymbol#)",
+                "已成交(#tokenSymbol#)",
+                "成交率",
+                "成交均价"
+            ],
+            "rowMap": {
+                "cancel": "撤销",
+                "sale": "卖",
+                "buy": "买"
+            }
+        }
     },
     "exchangeOrderHistory": {
         "title": "历史委托",
-        "table":{
-            "heads":["委托时间","市场","方向","委托价格","委托数量(#tokenSymbol#)","已成交(#tokenSymbol#)","成交率","成交均价","手续费","状态"]
+        "table": {
+            "heads": [
+                "委托时间",
+                "市场",
+                "方向",
+                "委托价格",
+                "委托数量(#tokenSymbol#)",
+                "已成交(#tokenSymbol#)",
+                "成交率",
+                "成交均价",
+                "手续费",
+                "状态"
+            ]
         }
     }
 }

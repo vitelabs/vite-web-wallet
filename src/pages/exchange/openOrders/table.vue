@@ -2,25 +2,23 @@
   <div class="ex_tb">
     <div class="head-row">
       <div
-        v-for="(h,i) in $t('exchangeOrderHistory.table.heads')"
+        v-for="(h) in $t('exchangeOpenOrders.table.heads')"
         :key="h"
-      >{{h.replace("#tokenSymbol#","vite")}} <div
-          class="sort-btn"
-          @click="sortBy(i)"
-        ></div>
+      >{{h.replace("#tokenSymbol#","vite")}}
       </div>
-
+    <div></div>
     </div>
     <div class="row-container">
     <div
       class="row"
-      v-for="l in sortedList"
+      v-for="l in list"
       :key="l[0]"
     >
       <div
         v-for="c in l"
         :key="c"
       >{{c}}</div>
+      <div @click="cancel" class="click-able">{{$t("exchangeOpenOrders.table.rowMap.cancel")}}</div>
     </div>
     </div>
   </div>
@@ -30,372 +28,143 @@ export default {
   props: {
     list: {
       type: Array,
-      default: () => [
-        [
-          Date.now(),
-          "adsfsad",
-          "adfds",
-          "lkklklklk",
-          "ikilljn",
-          "xzvgfbd",
-          "dsafc",
-          "ikilljn",
-          "xzvgfbd",
-          "dsafc"
-        ],        [
-          Date.now(),
-          "adsfsad",
-          "adfds",
-          "lkklklklk",
-          "ikilljn",
-          "xzvgfbd",
-          "dsafc",
-          "ikilljn",
-          "xzvgfbd",
-          "dsafc"
-        ],        [
-          Date.now(),
-          "adsfsad",
-          "adfds",
-          "lkklklklk",
-          "ikilljn",
-          "xzvgfbd",
-          "dsafc",
-          "ikilljn",
-          "xzvgfbd",
-          "dsafc"
-        ],        [
-          Date.now(),
-          "adsfsad",
-          "adfds",
-          "lkklklklk",
-          "ikilljn",
-          "xzvgfbd",
-          "dsafc",
-          "ikilljn",
-          "xzvgfbd",
-          "dsafc"
-        ],        [
-          Date.now(),
-          "adsfsad",
-          "adfds",
-          "lkklklklk",
-          "ikilljn",
-          "xzvgfbd",
-          "dsafc",
-          "ikilljn",
-          "xzvgfbd",
-          "dsafc"
-        ],        [
-          Date.now(),
-          "adsfsad",
-          "adfds",
-          "lkklklklk",
-          "ikilljn",
-          "xzvgfbd",
-          "dsafc",
-          "ikilljn",
-          "xzvgfbd",
-          "dsafc"
-        ],        [
-          Date.now(),
-          "adsfsad",
-          "adfds",
-          "lkklklklk",
-          "ikilljn",
-          "xzvgfbd",
-          "dsafc",
-          "ikilljn",
-          "xzvgfbd",
-          "dsafc"
-        ],        [
-          Date.now(),
-          "adsfsad",
-          "adfds",
-          "lkklklklk",
-          "ikilljn",
-          "xzvgfbd",
-          "dsafc",
-          "ikilljn",
-          "xzvgfbd",
-          "dsafc"
-        ],        [
-          Date.now(),
-          "adsfsad",
-          "adfds",
-          "lkklklklk",
-          "ikilljn",
-          "xzvgfbd",
-          "dsafc",
-          "ikilljn",
-          "xzvgfbd",
-          "dsafc"
-        ],        [
-          Date.now(),
-          "adsfsad",
-          "adfds",
-          "lkklklklk",
-          "ikilljn",
-          "xzvgfbd",
-          "dsafc",
-          "ikilljn",
-          "xzvgfbd",
-          "dsafc"
-        ],        [
-          Date.now(),
-          "adsfsad",
-          "adfds",
-          "lkklklklk",
-          "ikilljn",
-          "xzvgfbd",
-          "dsafc",
-          "ikilljn",
-          "xzvgfbd",
-          "dsafc"
-        ],        [
-          Date.now(),
-          "adsfsad",
-          "adfds",
-          "lkklklklk",
-          "ikilljn",
-          "xzvgfbd",
-          "dsafc",
-          "ikilljn",
-          "xzvgfbd",
-          "dsafc"
-        ],        [
-          Date.now(),
-          "adsfsad",
-          "adfds",
-          "lkklklklk",
-          "ikilljn",
-          "xzvgfbd",
-          "dsafc",
-          "ikilljn",
-          "xzvgfbd",
-          "dsafc"
-        ],        [
-          Date.now(),
-          "adsfsad",
-          "adfds",
-          "lkklklklk",
-          "ikilljn",
-          "xzvgfbd",
-          "dsafc",
-          "ikilljn",
-          "xzvgfbd",
-          "dsafc"
-        ],        [
-          Date.now(),
-          "adsfsad",
-          "adfds",
-          "lkklklklk",
-          "ikilljn",
-          "xzvgfbd",
-          "dsafc",
-          "ikilljn",
-          "xzvgfbd",
-          "dsafc"
-        ],        [
-          Date.now(),
-          "adsfsad",
-          "adfds",
-          "lkklklklk",
-          "ikilljn",
-          "xzvgfbd",
-          "dsafc",
-          "ikilljn",
-          "xzvgfbd",
-          "dsafc"
-        ],        [
-          Date.now(),
-          "adsfsad",
-          "adfds",
-          "lkklklklk",
-          "ikilljn",
-          "xzvgfbd",
-          "dsafc",
-          "ikilljn",
-          "xzvgfbd",
-          "dsafc"
-        ],        [
-          Date.now(),
-          "adsfsad",
-          "adfds",
-          "lkklklklk",
-          "ikilljn",
-          "xzvgfbd",
-          "dsafc",
-          "ikilljn",
-          "xzvgfbd",
-          "dsafc"
-        ],        [
-          Date.now(),
-          "adsfsad",
-          "adfds",
-          "lkklklklk",
-          "ikilljn",
-          "xzvgfbd",
-          "dsafc",
-          "ikilljn",
-          "xzvgfbd",
-          "dsafc"
-        ],        [
-          Date.now(),
-          "adsfsad",
-          "adfds",
-          "lkklklklk",
-          "ikilljn",
-          "xzvgfbd",
-          "dsafc",
-          "ikilljn",
-          "xzvgfbd",
-          "dsafc"
-        ],        [
-          Date.now(),
-          "adsfsad",
-          "adfds",
-          "lkklklklk",
-          "ikilljn",
-          "xzvgfbd",
-          "dsafc",
-          "ikilljn",
-          "xzvgfbd",
-          "dsafc"
-        ],        [
-          Date.now(),
-          "adsfsad",
-          "adfds",
-          "lkklklklk",
-          "ikilljn",
-          "xzvgfbd",
-          "dsafc",
-          "ikilljn",
-          "xzvgfbd",
-          "dsafc"
-        ],        [
-          Date.now(),
-          "adsfsad",
-          "adfds",
-          "lkklklklk",
-          "ikilljn",
-          "xzvgfbd",
-          "dsafc",
-          "ikilljn",
-          "xzvgfbd",
-          "dsafc"
-        ],        [
-          Date.now(),
-          "adsfsad",
-          "adfds",
-          "lkklklklk",
-          "ikilljn",
-          "xzvgfbd",
-          "dsafc",
-          "ikilljn",
-          "xzvgfbd",
-          "dsafc"
-        ],        [
-          Date.now(),
-          "adsfsad",
-          "adfds",
-          "lkklklklk",
-          "ikilljn",
-          "xzvgfbd",
-          "dsafc",
-          "ikilljn",
-          "xzvgfbd",
-          "dsafc"
-        ],        [
-          Date.now(),
-          "adsfsad",
-          "adfds",
-          "lkklklklk",
-          "ikilljn",
-          "xzvgfbd",
-          "dsafc",
-          "ikilljn",
-          "xzvgfbd",
-          "dsafc"
-        ],        [
-          Date.now(),
-          "adsfsad",
-          "adfds",
-          "lkklklklk",
-          "ikilljn",
-          "xzvgfbd",
-          "dsafc",
-          "ikilljn",
-          "xzvgfbd",
-          "dsafc"
-        ],        [
-          Date.now(),
-          "adsfsad",
-          "adfds",
-          "lkklklklk",
-          "ikilljn",
-          "xzvgfbd",
-          "dsafc",
-          "ikilljn",
-          "xzvgfbd",
-          "dsafc"
-        ],        [
-          Date.now(),
-          "adsfsad",
-          "adfds",
-          "lkklklklk",
-          "ikilljn",
-          "xzvgfbd",
-          "dsafc",
-          "ikilljn",
-          "xzvgfbd",
-          "dsafc"
-        ],        [
-          Date.now(),
-          "adsfsad",
-          "adfds",
-          "lkklklklk",
-          "ikilljn",
-          "xzvgfbd",
-          "dsafc",
-          "ikilljn",
-          "xzvgfbd",
-          "dsafc"
-        ],        [
-          Date.now(),
-          "adsfsad",
-          "adfds",
-          "lkklklklk",
-          "ikilljn",
-          "xzvgfbd",
-          "dsafc",
-          "ikilljn",
-          "xzvgfbd",
-          "dsafc"
-        ],        [
-          Date.now(),
-          "adsfsad",
-          "adfds",
-          "lkklklklk",
-          "ikilljn",
-          "xzvgfbd",
-          "dsafc",
-          "ikilljn",
-          "xzvgfbd",
-          "dsafc"
-        ],        [
-          Date.now(),
-          "adsfsad",
-          "adfds",
-          "lkklklklk",
-          "ikilljn",
-          "xzvgfbd",
-          "dsafc",
-          "ikilljn",
-          "xzvgfbd",
-          "dsafc"
-        ]
-      ]
+      default: () => [[
+          Date.now().toString(),
+          "ABC/VITE",
+          "1",
+          "1.2432222",
+          "50.00000",
+          "23.99%",
+          "1.22"
+        ],[
+          Date.now().toString(),
+          "ABC/VITE",
+          "1",
+          "1.2432222",
+          "50.00000",
+          "23.99%",
+          "1.22"
+        ],[
+          Date.now().toString(),
+          "ABC/VITE",
+          "1",
+          "1.2432222",
+          "50.00000",
+          "23.99%",
+          "1.22"
+        ],[
+          Date.now().toString(),
+          "ABC/VITE",
+          "1",
+          "1.2432222",
+          "50.00000",
+          "23.99%",
+          "1.22"
+        ],[
+          Date.now().toString(),
+          "ABC/VITE",
+          "1",
+          "1.2432222",
+          "50.00000",
+          "23.99%",
+          "1.22"
+        ],[
+          Date.now().toString(),
+          "ABC/VITE",
+          "1",
+          "1.2432222",
+          "50.00000",
+          "23.99%",
+          "1.22"
+        ],[
+          Date.now().toString(),
+          "ABC/VITE",
+          "1",
+          "1.2432222",
+          "50.00000",
+          "23.99%",
+          "1.22"
+        ],[
+          Date.now().toString(),
+          "ABC/VITE",
+          "1",
+          "1.2432222",
+          "50.00000",
+          "23.99%",
+          "1.22"
+        ],[
+          Date.now().toString(),
+          "ABC/VITE",
+          "1",
+          "1.2432222",
+          "50.00000",
+          "23.99%",
+          "1.22"
+        ],[
+          Date.now().toString(),
+          "ABC/VITE",
+          "1",
+          "1.2432222",
+          "50.00000",
+          "23.99%",
+          "1.22"
+        ],[
+          Date.now().toString(),
+          "ABC/VITE",
+          "1",
+          "1.2432222",
+          "50.00000",
+          "23.99%",
+          "1.22"
+        ],[
+          Date.now().toString(),
+          "ABC/VITE",
+          "1",
+          "1.2432222",
+          "50.00000",
+          "23.99%",
+          "1.22"
+        ],[
+          Date.now().toString(),
+          "ABC/VITE",
+          "1",
+          "1.2432222",
+          "50.00000",
+          "23.99%",
+          "1.22"
+        ],[
+          Date.now().toString(),
+          "ABC/VITE",
+          "1",
+          "1.2432222",
+          "50.00000",
+          "23.99%",
+          "1.22"
+        ],[
+          Date.now().toString(),
+          "ABC/VITE",
+          "1",
+          "1.2432222",
+          "50.00000",
+          "23.99%",
+          "1.22"
+        ],[
+          Date.now().toString(),
+          "ABC/VITE",
+          "1",
+          "1.2432222",
+          "50.00000",
+          "23.99%",
+          "1.22"
+        ],[
+          Date.now().toString(),
+          "ABC/VITE",
+          "1",
+          "1.2432222",
+          "50.00000",
+          "23.99%",
+          "1.22"
+        ]]
     }
   },
   data() {
@@ -405,27 +174,15 @@ export default {
     };
   },
   methods: {
-    sortBy(i) {
-      if (i === this.sortIndex) {
-        this.sortType *= -1;
-        return;
-      }
-      this.sortIndex = i;
-    }
   },
   computed: {
-    sortedList() {
-      return this.list.sort((a, b) => {
-        return this.sortType * (a[this.sortIndex] - b[this.sortIndex]);
-      });
-    }
   }
 };
 </script>
 <style lang="scss" scoped>
 @import "../components/table.scss";
 .ex_tb{
-    margin:20px 10px 10px;
+    height: 100%;
     padding-bottom: 10px;
 }
 @include rowWith {
