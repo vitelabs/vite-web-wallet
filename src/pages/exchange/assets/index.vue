@@ -11,7 +11,8 @@ export default {
   components: {
     Filters,
     Table
-  }
+  },
+
 };
 </script>
 <style lang="scss" scoped>
