@@ -77,6 +77,14 @@ export default {
     watch: {
         toTokenId: function() {
             this.init();
+        },
+        txPairList: function() {
+            this.txPairList && this.txPairList.forEach((txPair) => {
+                if (!this.activePairCode || txPair.pairCode !== this.activePairCode) {
+                    return;
+                }
+                this.$store.commit('exSetActiveTxPair', txPair);
+            });
         }
     },
     computed: {

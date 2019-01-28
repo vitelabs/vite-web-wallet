@@ -3,7 +3,7 @@
         <div class="order-title">
             {{ $t(`exchange.${orderType}.title`, { token: ftokenShow }) }}
             <div class="wallet">
-                {{ balance }}
+                {{ balance || '--' }}
                 <span class="ex-order-token">
                     {{ orderType === 'buy' ? ttokenShow : ftokenShow }}
                 </span>
@@ -67,10 +67,6 @@ export default {
         orderType: {
             type: String,
             default: ''
-        },
-        clickBtn: {
-            type: Function,
-            default: () => {}
         }
     },
     created() {
@@ -137,7 +133,7 @@ export default {
             }
             let balanceList = this.$store.state.exchangeBalance.balanceList;
             if (!tokenId || !balanceList || !balanceList[tokenId]) {
-                return '2000';
+                return '';
             }
             let tokenInfo = balanceList[tokenId].tokenInfo;
             let balance = balanceList[tokenId].available || 0;
@@ -308,13 +304,23 @@ export default {
             let activeAccount = this.$wallet.getActiveAccount();
             activeAccount.initPwd({
                 submit: () => {
-                    this.clickBtn({
+                    this[`${this.orderType}Order`]({
                         price: this.price,
                         amount: this.amount,
                         quantity: this.quantity
                     });
                 }
             });
+        },
+        buyOrder({
+            price, amount, quantity
+        }) {
+            console.log(price, amount, quantity);
+        },
+        sellOrder({
+            price, amount, quantity
+        }) {
+            console.log(price, amount, quantity);
         }
     }
 };

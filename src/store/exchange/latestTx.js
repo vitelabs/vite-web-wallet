@@ -3,6 +3,8 @@ import { timer } from 'utils/asyncFlow';
 
 const latestTxTime = 2000;
 let latestTxTimer = null;
+let ftoken = null;
+let ttoken = null;
 
 const state = {
     txList: [],
@@ -25,10 +27,16 @@ const actions = {
             return;
         }
 
+        if (ftoken === activeTxPair.ftoken && ttoken === activeTxPair.ttoken) {
+            return;
+        }
+
+        ftoken = activeTxPair.ftoken;
+        ttoken = activeTxPair.ttoken;
+
         let _f = (cb) => {
             return latestTx({
-                ftoken: activeTxPair.ftoken,
-                ttoken: activeTxPair.ttoken
+                ftoken, ttoken
             }).then((data) => {
                 cb && cb();
                 commit('exSetLatestTxList', data);
