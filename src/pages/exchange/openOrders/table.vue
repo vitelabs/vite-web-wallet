@@ -18,7 +18,7 @@
         v-for="c in l"
         :key="c"
       >{{c}}</div>
-      <div @click="cancel" class="click-able">{{$t("exchangeOpenOrders.table.rowMap.cancel")}}</div>
+      <div @click="cancel()" class="click-able">{{$t("exchangeOpenOrders.table.rowMap.cancel")}}</div>
     </div>
     </div>
   </div>
@@ -28,143 +28,7 @@ export default {
   props: {
     list: {
       type: Array,
-      default: () => [[
-          Date.now().toString(),
-          "ABC/VITE",
-          "1",
-          "1.2432222",
-          "50.00000",
-          "23.99%",
-          "1.22"
-        ],[
-          Date.now().toString(),
-          "ABC/VITE",
-          "1",
-          "1.2432222",
-          "50.00000",
-          "23.99%",
-          "1.22"
-        ],[
-          Date.now().toString(),
-          "ABC/VITE",
-          "1",
-          "1.2432222",
-          "50.00000",
-          "23.99%",
-          "1.22"
-        ],[
-          Date.now().toString(),
-          "ABC/VITE",
-          "1",
-          "1.2432222",
-          "50.00000",
-          "23.99%",
-          "1.22"
-        ],[
-          Date.now().toString(),
-          "ABC/VITE",
-          "1",
-          "1.2432222",
-          "50.00000",
-          "23.99%",
-          "1.22"
-        ],[
-          Date.now().toString(),
-          "ABC/VITE",
-          "1",
-          "1.2432222",
-          "50.00000",
-          "23.99%",
-          "1.22"
-        ],[
-          Date.now().toString(),
-          "ABC/VITE",
-          "1",
-          "1.2432222",
-          "50.00000",
-          "23.99%",
-          "1.22"
-        ],[
-          Date.now().toString(),
-          "ABC/VITE",
-          "1",
-          "1.2432222",
-          "50.00000",
-          "23.99%",
-          "1.22"
-        ],[
-          Date.now().toString(),
-          "ABC/VITE",
-          "1",
-          "1.2432222",
-          "50.00000",
-          "23.99%",
-          "1.22"
-        ],[
-          Date.now().toString(),
-          "ABC/VITE",
-          "1",
-          "1.2432222",
-          "50.00000",
-          "23.99%",
-          "1.22"
-        ],[
-          Date.now().toString(),
-          "ABC/VITE",
-          "1",
-          "1.2432222",
-          "50.00000",
-          "23.99%",
-          "1.22"
-        ],[
-          Date.now().toString(),
-          "ABC/VITE",
-          "1",
-          "1.2432222",
-          "50.00000",
-          "23.99%",
-          "1.22"
-        ],[
-          Date.now().toString(),
-          "ABC/VITE",
-          "1",
-          "1.2432222",
-          "50.00000",
-          "23.99%",
-          "1.22"
-        ],[
-          Date.now().toString(),
-          "ABC/VITE",
-          "1",
-          "1.2432222",
-          "50.00000",
-          "23.99%",
-          "1.22"
-        ],[
-          Date.now().toString(),
-          "ABC/VITE",
-          "1",
-          "1.2432222",
-          "50.00000",
-          "23.99%",
-          "1.22"
-        ],[
-          Date.now().toString(),
-          "ABC/VITE",
-          "1",
-          "1.2432222",
-          "50.00000",
-          "23.99%",
-          "1.22"
-        ],[
-          Date.now().toString(),
-          "ABC/VITE",
-          "1",
-          "1.2432222",
-          "50.00000",
-          "23.99%",
-          "1.22"
-        ]]
+      default: () => []
     }
   },
   data() {
@@ -173,7 +37,10 @@ export default {
       sortType: 1
     };
   },
-  methods: {
+  methods:{
+      cancel(){
+          
+      }
   },
   computed: {
   }
