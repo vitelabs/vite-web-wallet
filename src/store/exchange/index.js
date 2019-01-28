@@ -1,11 +1,13 @@
 import rate from './rate.js';
 import depth from './depth.js';
-import transPairs from './transPairs';
-import latestTrans from './latestTrans';
+import activeTxPair from './activeTxPair';
+import latestTx from './latestTx';
+import balance from './balance';
 
 export default {
     exchangeRate: rate,
     exchangeDepth: depth,
-    exchangeTransPairs: transPairs,
-    exchangeLatestTrans: latestTrans
+    exchangeActiveTxPair: activeTxPair,
+    exchangeLatestTx: latestTx,
+    exchangeBalance: balance
 };

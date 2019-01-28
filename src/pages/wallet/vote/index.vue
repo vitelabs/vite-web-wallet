@@ -225,7 +225,7 @@ export default {
                 t.nodeStatus = 1;
                 this.cache = t;
                 this.$toast(this.$t('hint.request', {
-                    name: this.$t('walletVote.Voting') 
+                    name: this.$t('walletVote.voting') 
                 }));
             };
 

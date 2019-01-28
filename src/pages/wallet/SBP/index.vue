@@ -135,9 +135,6 @@ export default {
             if (!this.tokenInfo || !activeItem) {
                 return;
             }
-
-            let decimals = this.tokenInfo.decimals;
-            let symbol = this.tokenInfo.tokenSymbol;
             this.activeItem = activeItem;
         },
         closeConfirm() {

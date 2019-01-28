@@ -1,12 +1,12 @@
 @import "~assets/scss/vars.scss";
 
-.setting.change-lang-wrapper {
+.setting.common-list-wrapper {
     width: 250px;
     border: 1px solid #D4DEE7;
     border-radius: 2px;
     font-size: 14px;
     color: #5E6875;
-    .lang {
+    .list-title {
         position: relative;
         display: inline-block;
         width: 100%;
@@ -36,7 +36,7 @@
             }
         }
     }
-    .lang-list {
+    .list {
         li {
             box-sizing: border-box;
             padding: 10px 12px;

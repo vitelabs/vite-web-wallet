@@ -317,7 +317,7 @@
             "text": "您可以参与投票选出共25个SBP（Snapshot Block Producer），每轮投票时间共75秒，您的投票数为投票地址所拥有的VITE数量，默认为您保持上一轮的投票意向；每轮得票量排名前25名的候选节点中随机23个及排名26-100名的候选节点中随机2个共25个节点将当选SBP。"
         },
         "toReward": "查看我的奖励",
-        "Voting": "投票",
+        "voting": "投票",
         "search": "请输入候选节点名称或者出块地址",
         "addrNoExistErr": "您的地址未发生过交易，暂不能投票",
         "revokeVoting": "撤销投票",
@@ -395,8 +395,54 @@
     },
     "exchange": {
         "title": "交易中心",
-        "latestTrans": {
-            "title": "最新交易"
+        "search": "查询",
+        "txPair": "交易对",
+        "price": "价格",
+        "upDown": "涨跌幅",
+        "txNum": "交易量",
+        "quantityTitle": "成交额({quantity})",
+        "priceTitle": "价格({price})",
+        "amountTitle": "数量({amount})",
+        "quantity": "成交金额",
+        "buy": {
+            "title": "买入{token}",
+            "price": "买入价",
+            "amount": "买入量"
+        },
+        "sell": {
+            "title": "卖出{token}",
+            "price": "卖出价",
+            "amount": "卖出量"
+        },
+        "head": {
+            "latestPrice": "最新价",
+            "updown": "24h涨跌",
+            "highPrice": "24h最高价",
+            "lowPrice": "24h最低价",
+            "quantity": "24h成交量",
+            "tokenName": "代币名称",
+            "tokenShow": "代币简称",
+            "tokenId": "TokenID",
+            "publisher": "发行者",
+            "total": "总金额",
+            "tokenDigit": "小数位数",
+            "publisherDate": "发行日期",
+            "type": "类型",
+            "tokenType0": "可增发",
+            "tokenType1": "永不增发"
+        },
+        "latestTx": {
+            "title": "最新交易",
+            "time": "时间"
+        },
+        "depth": {
+            "buy": "买入",
+            "sell": "卖出",
+            "all": "全部"
+        },
+        "noData": {
+            "favorite": "您还未添加任何自选",
+            "search": "暂无搜索结果"
         },
         "limitPrice": {
             "title": "限价",
