@@ -16,32 +16,30 @@
             <span class="ex-order-token" slot="after">{{ ttokenShow }}</span>
         </vite-input>
 
-        <div class="order-row-title">{{ $t(`exchange.${orderType}.amount`) }}
-            <ul class="amount-percent">
+        <div class="order-row-title">{{ $t(`exchange.${orderType}.quantity`) }}
+            <ul class="quantity-percent">
                 <li class="__pointer" :class="{
                     'active': +percent === 0.25
-                }" @click="amountPercent(0.25)">25%</li>
+                }" @click="quantityPercent(0.25)">25%</li>
                 <li class="__pointer" :class="{
                     'active': +percent === 0.5
-                }" @click="amountPercent(0.5)">50%</li>
+                }" @click="quantityPercent(0.5)">50%</li>
                 <li class="__pointer" :class="{
                     'active': +percent === 0.75
-                }" @click="amountPercent(0.75)">75%</li>
+                }" @click="quantityPercent(0.75)">75%</li>
                 <li class="__pointer" :class="{
                     'active': +percent === 1
-                }" @click="amountPercent(1)">100%</li>
+                }" @click="quantityPercent(1)">100%</li>
             </ul>
         </div>
-        <vite-input class="order-input" :class="{'err': isAmountErr}"  
-                    v-model="amount">
+        <vite-input class="order-input" :class="{'err': isQuantityErr}"  
+                    v-model="quantity">
             <span class="ex-order-token" slot="after">{{ ftokenShow }}</span>
         </vite-input>
 
-        <div class="order-row-title">{{ $t('exchange.quantity') }}</div>
-        <input fake_pass type="password" style="display:none"/>
-        <vite-input class="order-input" :class="{'err': isQuantityErr}"  
-                    v-model="quantity">
-            <input fake_pass type="password" style="display:none"/>
+        <div class="order-row-title">{{ $t('exchange.amount') }}</div>
+        <vite-input class="order-input" :class="{'err': isAmountErr}"  
+                    v-model="amount">
             <span class="ex-order-token" slot="after">{{ ttokenShow }}</span>
         </vite-input>
 
@@ -84,7 +82,7 @@ export default {
             isAmountErr: false,
             isQuantityErr: false,
             percent: 0,
-            watchAQ: false
+            watchAQ: 0
         };
     },
     watch: {
@@ -96,23 +94,23 @@ export default {
         },
         amount: function() {
             changeVal = 'amount';
-            this.watchAQ = !this.watchAQ;
+            this.watchAQ++;
         },
         quantity: function() {
             changeVal = 'quantity';
-            this.watchAQ = !this.watchAQ;
+            this.watchAQ++;
         },
         price: function() {
             changeVal = 'price';
-            this.watchAQ = !this.watchAQ;
+            this.watchAQ++;
         },
         percent: function() {
-            changeVal = 'percent';
-            this.watchAQ = !this.watchAQ;
+            changeVal = 'percent';            
+            this.watchAQ++;
         },
         balance: function() {
             changeVal = 'balance';
-            this.watchAQ = !this.watchAQ;
+            this.watchAQ++;
         },
         watchAQ: function() {
             this.clearValidTimeout();
@@ -123,6 +121,13 @@ export default {
                 this.validAmount();
                 this.validQuantity();
             }, 300);
+        },
+        activeTx: function() {
+            if ((this.activeTx.txSide === 0 && this.orderType === 'buy') ||
+                (this.activeTx.txSide === 1 && this.orderType === 'sell')){
+                this.price = this.activeTx.price;
+                this.quantity = this.activeTx.quantity;
+            }
         }
     },
     computed: {
@@ -133,7 +138,7 @@ export default {
             }
             let balanceList = this.$store.state.exchangeBalance.balanceList;
             if (!tokenId || !balanceList || !balanceList[tokenId]) {
-                return '';
+                return '2000';
             }
             let tokenInfo = balanceList[tokenId].tokenInfo;
             let balance = balanceList[tokenId].available || 0;
@@ -147,6 +152,9 @@ export default {
         },
         activeTxPair() {
             return this.$store.state.exchangeActiveTxPair.activeTxPair;
+        },
+        activeTx() {
+            return this.$store.state.exchangeActiveTx.activeTx;
         }
     },
     methods: {
@@ -154,7 +162,7 @@ export default {
             validTimeout && clearTimeout(validTimeout);
             validTimeout = null;
         },
-        amountPercent(percent) {
+        quantityPercent(percent) {
             this.percent = percent;
         },
 
@@ -164,20 +172,24 @@ export default {
             let amount = this.amount;
             let percent = this.percent;
 
+            if (percent * 100 % 25 !== 0) {
+                return;
+            }
+
             if (this.orderType === 'buy') {
-                quantity = this.getPercentBalance(percent);
-                amount = this.getAmount(price, quantity);
-            } else {
                 amount = this.getPercentBalance(percent);
                 quantity = this.getQuantity(price, amount);
+            } else {
+                quantity = this.getPercentBalance(percent);
+                amount = this.getAmount(price, quantity);
             }
 
             !BigNumber.isEqual(quantity, this.quantity) && (this.quantity = quantity);
             !BigNumber.isEqual(amount, this.amount) && (this.amount = amount);
         },
         balanceChanged() {
-            if (!+percent || +percent%25 === 0) {
-                let percent = this.getPercent(this.orderType === 'buy' ? this.quantity : this.amount);
+            if (!+percent || +percent * 100 % 25 === 0) {
+                let percent = this.getPercent(this.orderType === 'buy' ? this.amount : this.quantity);
                 !BigNumber.isEqual(percent, this.percent) && (this.percent = percent);
                 return;
             }
@@ -188,11 +200,11 @@ export default {
             let price = this.price;
 
             if (this.orderType === 'buy') {
-                quantity = this.getPercentBalance(percent);
-                amount = this.getAmount(price, quantity);
-            } else {
                 amount = this.getPercentBalance(percent);
                 quantity = this.getQuantity(price, amount);
+            } else {
+                quantity = this.getPercentBalance(percent);
+                amount = this.getAmount(price, quantity);
             }
 
             !BigNumber.isEqual(quantity, this.quantity) && (this.quantity = quantity);
@@ -205,7 +217,7 @@ export default {
             let percent = this.percent;
 
             quantity = this.getQuantity(price, amount);
-            percent = this.getPercent(this.orderType === 'buy' ? quantity : amount);
+            percent = this.getPercent(this.orderType === 'buy' ? amount : quantity);
 
             !BigNumber.isEqual(quantity, this.quantity) && (this.quantity = quantity);
             !BigNumber.isEqual(percent, this.percent) && (this.percent = percent);
@@ -216,10 +228,10 @@ export default {
             let amount = this.amount;
             let percent = this.percent;
 
-            quantity = this.getQuantity(price, amount);
-            percent = this.getPercent(this.orderType === 'buy' ? quantity : amount);
+            amount = this.getAmount(price, quantity);
+            percent = this.getPercent(this.orderType === 'buy' ? amount : quantity);
 
-            !BigNumber.isEqual(quantity, this.quantity) && (this.quantity = quantity);
+            !BigNumber.isEqual(amount, this.amount) && (this.amount = amount);
             !BigNumber.isEqual(percent, this.percent) && (this.percent = percent);
         },
         quantityChanged() {
@@ -229,7 +241,7 @@ export default {
             let percent = this.percent;
 
             amount = this.getAmount(price, quantity);
-            percent = this.getPercent(this.orderType === 'buy' ? quantity : amount);
+            percent = this.getPercent(this.orderType === 'buy' ? amount : quantity);
 
             !BigNumber.isEqual(amount, this.amount) && (this.amount = amount);
             !BigNumber.isEqual(percent, this.percent) && (this.percent = percent);
@@ -242,19 +254,6 @@ export default {
             let result = BigNumber.multi(percent, this.balance, 8, 'nofix');
             return BigNumber.isEqual(result, 0) ? '' : result;
         },
-        getQuantity(price, amount) {
-            let isRightPrice = price && this.$validAmount(price) && !BigNumber.isEqual(price, 0);
-            if (!isRightPrice) {
-                return '';
-            }
-
-            let isRightAmount = amount && this.$validAmount(amount) && !BigNumber.isEqual(amount, 0);
-            if (!isRightAmount) {
-                return '';
-            }
-
-            return BigNumber.multi(price, amount, 8, 'nofix');
-        },
         getAmount(price, quantity) {
             let isRightPrice = price && this.$validAmount(price) && !BigNumber.isEqual(price, 0);
             if (!isRightPrice) {
@@ -266,7 +265,20 @@ export default {
                 return '';
             }
 
-            return BigNumber.dividedToNumber(quantity, price, 8, 'nofix');
+            return BigNumber.multi(price, quantity, 8, 'nofix');
+        },
+        getQuantity(price, amount) {
+            let isRightPrice = price && this.$validAmount(price) && !BigNumber.isEqual(price, 0);
+            if (!isRightPrice) {
+                return '';
+            }
+
+            let isRightAmount = amount && this.$validAmount(amount) && !BigNumber.isEqual(amount, 0);
+            if (!isRightAmount) {
+                return '';
+            }
+
+            return BigNumber.dividedToNumber(amount, price, 8, 'nofix');
         },
         getPercent(val) {
             if (!this.balance || BigNumber.isEqual(this.balance, 0) || 
@@ -282,11 +294,11 @@ export default {
         },
         validAmount() {
             this.isAmountErr = this.amount && !this.$validAmount(this.amount) ||
-                (this.orderType === 'sell' && BigNumber.compared(this.balance, this.amount) < 0);
+                (this.orderType === 'buy' && BigNumber.compared(this.balance, this.amount) < 0);
         },
         validQuantity() {
             this.isQuantityErr = (this.quantity && !this.$validAmount(this.quantity)) ||
-                (this.orderType === 'buy' && BigNumber.compared(this.balance, this.quantity) < 0);
+                (this.orderType === 'sell' && BigNumber.compared(this.balance, this.quantity) < 0);
         },
 
         _clickBtn() {
@@ -370,7 +382,7 @@ $font-black: rgba(36,39,43,1);
         font-weight: 400;
         color: $font-black;
         margin-top: 5px;
-        .amount-percent {
+        .quantity-percent {
             display: block;
             float: right;
             font-size: 11px;
