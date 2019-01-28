@@ -56,8 +56,8 @@ export default {
         getDate(timestamp) {
             return date(timestamp, 'zh');
         },
-        clickRow(trans) {
-            console.log(trans);
+        clickRow(tx) {
+            this.$store.commit('exSetActiveTx', tx);
         }
     }
 };

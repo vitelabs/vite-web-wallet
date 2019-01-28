@@ -49,7 +49,12 @@ export default {
             return width > 100 ? 100 : width;
         },
         clickRow(data) {
-            console.log(data);
+            let price = data.price;
+            let quantity = data.quantity;
+            let txSide = this.dataType === 'buy' ? 0 : 1;
+            this.$store.commit('exSetActiveTx', {
+                price, quantity, txSide
+            });
         }
     }
 };
