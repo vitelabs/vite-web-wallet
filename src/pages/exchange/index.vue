@@ -15,9 +15,13 @@ export default {
         center
     },
     mounted() {
+        this.$store.dispatch('startLoopExchangeRate');
         this.$router.afterEach((to)=>{
             this.active = to.name;
         });
+    },
+    destroyed() {
+        this.$store.dispatch('stopLoopExchangeRate');
     },
     data() {
         return {

@@ -1,6 +1,6 @@
 @import "~assets/scss/vars.scss";
 
-.start.change-lang-wrapper {
+.start.common-list-wrapper{
     position: relative;
     height: 100%;
     font-size: 14px;
@@ -9,14 +9,14 @@
     margin-top: 5px;
     font-family: $font-bold, arial, sans-serif;
     z-index: 101;
-    .lang {
+    .list-title {
         display: inline-block;
         min-width: 50px;
         text-align: center;
         height: 100%;
         padding: 10px 30px;
     }
-    .lang-list {
+    .list {
         position: absolute;
         right: 20px;
         min-width: 80px;

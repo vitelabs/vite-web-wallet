@@ -5,7 +5,7 @@ module.exports = {
         port: 8081,
         proxy: {
             '/api': {
-                target: 'https://testnet.vite.net',
+                target: 'http://132.232.65.121:8080/test',
                 changeOrigin: true,
                 secure: false
             },
