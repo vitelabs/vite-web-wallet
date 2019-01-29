@@ -60,7 +60,6 @@
             .l1 {
                 flex: 1;
                 margin-bottom: 10px;
-                overflow: auto;
             }
             .l2 {
                 flex-basis: 300px;
