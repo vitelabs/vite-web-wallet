@@ -131,17 +131,23 @@ export default {
         }
     },
     computed: {
-        balance() {
+        rawBalance() {
             let tokenId = this.activeTxPair && this.activeTxPair.ftoken ? this.activeTxPair.ftoken : '';
             if (this.orderType === 'buy') {
                 tokenId = this.activeTxPair && this.activeTxPair.ttoken ? this.activeTxPair.ttoken : '';
             }
             let balanceList = this.$store.state.exchangeBalance.balanceList;
             if (!tokenId || !balanceList || !balanceList[tokenId]) {
-                return '2000';
+                return null;
             }
-            let tokenInfo = balanceList[tokenId].tokenInfo;
-            let balance = balanceList[tokenId].available || 0;
+            return balanceList[tokenId];
+        },
+        balance() {
+            if (!this.rawBalance) {
+                return '';
+            }
+            let tokenInfo = this.rawBalance.tokenInfo;
+            let balance = this.rawBalance.available || 0;
             return BigNumber.toBasic(balance, tokenInfo.decimals);
         },
         ftokenShow() {

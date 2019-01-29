@@ -30,6 +30,7 @@
         <loading loadingType="dot" class="ex-center-loading" v-show="isLoading"></loading>
         <div class="hint" v-show="isShowSearchErr">{{ searchErr }}</div>
         <div class="hint" v-show="!isShowSearchErr && isShowNoData">{{ noData }}</div>
+
         <tx-pair-list v-show="isShowList" class="tx-list" :list="activeTxPairList"
                       :favoritePairs="favoritePairs" :currentRule="currentOrderRule"
                       :setFavorite="setFavorite"></tx-pair-list>

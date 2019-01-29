@@ -3,18 +3,24 @@
         <div v-for="(txPair, i) in showList" :key="i" 
              class="__center-tb-row __pointer" 
              :class="{'active': txPair && txPair.pairCode === activePairCode}"
+             @mouseenter="showRealPrice(txPair)"
+             @mouseleave="hideRealPrice"
              @click="setActiveTxPair(txPair.rawData)">
             <span class="__center-tb-item txPair">
                 <span class="favorite-icon" :class="{'active': !!favoritePairs[txPair.pairCode]}"
                       @click.stop="setFavorite(txPair.rawData)"></span>
                 <span class="describe">{{ txPair.showPair }}</span>
             </span>
-            <span class="__center-tb-item">{{ txPair.price }}</span>
+            <span class="__center-tb-item">
+                {{ txPair.price }}
+                <span v-show="txPair.pairCode === pairCode && isShowRealPrice && realPrice" class="real-price">{{ realPrice || '2930239' }}</span>
+            </span>
             <span class="__center-tb-item percent" :class="{
                 'up': +txPair.upDown > 0,
                 'down': +txPair.upDown < 0
             }">{{ txPair.upDown + '%' }}</span>
             <span class="__center-tb-item">{{ txPair.quantity24h }}</span>
+
         </div>
     </div>
 </template>
@@ -44,6 +50,13 @@ export default {
             type: Function,
             default: () => {}
         }
+    },
+    data() {
+        return {
+            pairCode: '',
+            realPrice: '',
+            isShowRealPrice: false
+        };
     },
     computed: {
         activePairCode() {
@@ -75,9 +88,38 @@ export default {
             });
 
             return _l;
+        },
+        rate() {
+            let rateList = this.$store.state.exchangeRate.rateList || {};
+            let tokenId = this.activeTxPair && this.activeTxPair.ttoken ? this.activeTxPair.ttoken : null;
+            let coin = this.$store.state.exchangeRate.coins[this.$i18n.locale || 'zh'];
+            if (!tokenId || !rateList[tokenId]) {
+                return null;
+            }
+            return rateList[tokenId][coin] || null;
         }
     },
     methods: {
+        showRealPrice(txPair) {
+            this.pairCode = txPair.pairCode;
+            // this.realPrice = this.getRealPrice(txPair);
+            this.realPrice = '32323';
+            this.isShowRealPrice = true;
+        },
+        hideRealPrice() {
+            this.isShowRealPrice = false;
+            console.log('hide');
+        },
+        getRealPrice(txPair) {
+            if (!txPair || !this.rate) {
+                return '';
+            }
+            let pre = '$';
+            if (this.$i18n.locale === 'zh') {
+                pre = '￥';
+            }
+            return pre + txPair.price * this.rate;
+        },
         orderList(list) {
             let compareStr = (aStr, bStr) => {
                 for (let i=0; i<aStr.length; i++) {
@@ -118,11 +160,46 @@ export default {
 <style lang="scss" scoped>
 @import '../center.scss';
 
-.__center-tb-row.active {
-    background: rgba(75,116,255,0.10);;
+.__center-tb-row {
+    .__center-tb-item {
+        position: relative;
+        overflow: visible;
+    }
+    .describe {
+        position: relative;
+        bottom: 6px;
+    }
+    &.active {
+        background: rgba(75,116,255,0.10);;
+    }
 }
-.__center-tb-row .describe {
-    position: relative;
-    bottom: 6px;
+
+.real-price {
+    position: absolute;
+    padding: 2px 6px;
+    right: -10px;
+    top: -2px;
+    z-index: 1;
+    transform: translateX(100%);
+    background: #5B638D;
+    opacity: 0.8;
+    box-sizing: border-box;
+    border-radius: 2px;
+    font-size: 12px;
+    color: #FFFFFF;
+    line-height: 16px;
+    font-family: PingFangSC-Regular, arial, sans-serif;
+    font-weight: 400;
+    &::after {
+        content: ' ';
+        display: inline-block;
+        border: 4px solid transparent;
+        border-right: 4px solid #5B638D;
+        position: absolute;
+        top: 50%;
+        left: 0;
+        margin-top: -4px;
+        margin-left: -8px;
+    }
 }
 </style>
