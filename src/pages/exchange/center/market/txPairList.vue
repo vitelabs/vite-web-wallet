@@ -1,26 +1,26 @@
 <template>
     <div class="tx-pair-wrapper">
-        <div v-for="(txPair, i) in showList" :key="i" 
-             class="__center-tb-row __pointer" 
-             :class="{'active': txPair && txPair.pairCode === activePairCode}"
-             @mouseenter="showRealPrice(txPair)"
-             @mouseleave="hideRealPrice"
-             @click="setActiveTxPair(txPair.rawData)">
-            <span class="__center-tb-item txPair">
-                <span class="favorite-icon" :class="{'active': !!favoritePairs[txPair.pairCode]}"
-                      @click.stop="setFavorite(txPair.rawData)"></span>
-                <span class="describe">{{ txPair.showPair }}</span>
-            </span>
-            <span class="__center-tb-item">
-                {{ txPair.price }}
-                <span v-show="txPair.pairCode === pairCode && isShowRealPrice && realPrice" class="real-price">{{ realPrice || '2930239' }}</span>
-            </span>
-            <span class="__center-tb-item percent" :class="{
-                'up': +txPair.upDown > 0,
-                'down': +txPair.upDown < 0
-            }">{{ txPair.upDown + '%' }}</span>
-            <span class="__center-tb-item">{{ txPair.quantity24h }}</span>
+        <span v-show="pairCode && realPrice" class="real-price" :style="`top: ${top}px`">{{ realPrice }}</span>
 
+        <div ref="txList" class="tx-list">
+            <div :ref="`txPair${i}`" v-for="(txPair, i) in showList" :key="i" 
+                 class="__center-tb-row __pointer" 
+                 :class="{'active': txPair && txPair.pairCode === activePairCode}"
+                 @mouseenter="showRealPrice(txPair, i)"
+                 @mouseleave="hideRealPrice(txPair)"
+                 @click="setActiveTxPair(txPair.rawData)">
+                <span class="__center-tb-item txPair">
+                    <span class="favorite-icon" :class="{'active': !!favoritePairs[txPair.pairCode]}"
+                          @click.stop="setFavorite(txPair.rawData)"></span>
+                    <span class="describe">{{ txPair.showPair }}</span>
+                </span>
+                <span class="__center-tb-item">{{ txPair.price }}</span>
+                <span class="__center-tb-item percent" :class="{
+                    'up': +txPair.upDown > 0,
+                    'down': +txPair.upDown < 0
+                }">{{ txPair.upDown + '%' }}</span>
+                <span class="__center-tb-item">{{ txPair.quantity24h }}</span>
+            </div>
         </div>
     </div>
 </template>
@@ -53,9 +53,9 @@ export default {
     },
     data() {
         return {
-            pairCode: '',
+            pairCode: null,
             realPrice: '',
-            isShowRealPrice: false
+            top: 0
         };
     },
     computed: {
@@ -100,15 +100,25 @@ export default {
         }
     },
     methods: {
-        showRealPrice(txPair) {
+        showRealPrice(txPair, i) {
+            let elTop = this.$refs[`txPair${i}`][0].getBoundingClientRect().top;
+            let listTop = this.$refs.txList.getBoundingClientRect().top;
+            let height = this.$refs.txList.clientHeight;
+            let top =  elTop - listTop - 10;
+
+            if (top > listTop + height) {
+                this.hideRealPrice();
+                return;
+            }
+
+            this.top = top;
             this.pairCode = txPair.pairCode;
-            // this.realPrice = this.getRealPrice(txPair);
-            this.realPrice = '32323';
-            this.isShowRealPrice = true;
+            this.realPrice = this.getRealPrice(txPair);
         },
-        hideRealPrice() {
-            this.isShowRealPrice = false;
-            console.log('hide');
+        hideRealPrice(txPair) {
+            if (!txPair || this.pairCode === txPair.pairCode) {
+                this.pairCode = null;
+            }
         },
         getRealPrice(txPair) {
             if (!txPair || !this.rate) {
@@ -159,6 +169,40 @@ export default {
 
 <style lang="scss" scoped>
 @import '../center.scss';
+.tx-pair-wrapper {
+    position: relative;
+    flex: 1;
+    display: flex;
+    .real-price {
+        position: absolute;
+        padding: 10px;
+        line-height: 20px;
+        right: -6px;
+        z-index: 1;
+        transform: translateX(100%);
+        background: rgba(255,255,255,1);
+        box-shadow: 0px 5px 20px 0px rgba(0,0,0,0.1);
+        font-size: 14px;
+        color: rgba(36,39,43,1);;
+        font-family: PingFangSC-Regular, arial, sans-serif;
+        font-weight: 400;
+        &::after {
+            content: ' ';
+            display: inline-block;
+            border: 8px solid transparent;
+            border-right: 8px solid #fff;
+            position: absolute;
+            top: 50%;
+            left: 0;
+            margin-top: -8px;
+            margin-left: -16px;
+        }
+    }
+    .tx-list {
+        flex: 1;
+        overflow: auto;
+    }
+}
 
 .__center-tb-row {
     .__center-tb-item {
@@ -174,32 +218,4 @@ export default {
     }
 }
 
-.real-price {
-    position: absolute;
-    padding: 2px 6px;
-    right: -10px;
-    top: -2px;
-    z-index: 1;
-    transform: translateX(100%);
-    background: #5B638D;
-    opacity: 0.8;
-    box-sizing: border-box;
-    border-radius: 2px;
-    font-size: 12px;
-    color: #FFFFFF;
-    line-height: 16px;
-    font-family: PingFangSC-Regular, arial, sans-serif;
-    font-weight: 400;
-    &::after {
-        content: ' ';
-        display: inline-block;
-        border: 4px solid transparent;
-        border-right: 4px solid #5B638D;
-        position: absolute;
-        top: 50%;
-        left: 0;
-        margin-top: -4px;
-        margin-left: -8px;
-    }
-}
 </style>
