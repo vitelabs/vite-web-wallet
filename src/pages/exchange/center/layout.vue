@@ -2,14 +2,14 @@
     <div class="exchange-layout __flex_row">
         <div class="left __flex_column">
             <div class="left-top __border"> <slot name="lt"></slot> </div>
-            <div class="left-bottom __flex_row">
-                <div class="l __flex_column">
-                    <div class="l1 __border"> <slot name="lb1"></slot> </div>
-                    <div class="l2 __border"> <slot name="lb2"></slot> </div>
+            <div class="left-bottom __flex_column">
+                <div class="t __flex_row">
+                    <div class="l __border"> <slot name="lb1"></slot> </div>
+                    <div class="r __border"> <slot name="lb2"></slot> </div>
                 </div>
-                <div class="r __flex_column">
-                    <div class="l1 __border"> <slot name="lb3"></slot> </div>
-                    <div class="l2 __border"> <slot name="lb4"></slot> </div>
+                <div class="b __flex_row">
+                    <div class="l __border"> <slot name="lb3"></slot> </div>
+                    <div class="r __border"> <slot name="lb4"></slot> </div>
                 </div>
             </div>
         </div>
@@ -50,19 +50,19 @@
         .left-bottom {
             flex: 1;
             margin-top: 10px;
+            .t {
+                flex: 1;
+                margin-bottom: 10px;
+            }
+            .b {
+                flex-basis: 300px;
+            }
             .l {
                 flex-basis: 32%;
                 margin-right: 10px;
             }
             .r {
                 flex: 1;
-            }
-            .l1 {
-                flex: 1;
-                margin-bottom: 10px;
-            }
-            .l2 {
-                flex-basis: 300px;
                 overflow: auto;
             }
         }

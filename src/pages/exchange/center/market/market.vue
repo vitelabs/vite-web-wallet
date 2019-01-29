@@ -31,7 +31,7 @@
         <div class="hint" v-show="isShowSearchErr">{{ searchErr }}</div>
         <div class="hint" v-show="!isShowSearchErr && isShowNoData">{{ noData }}</div>
 
-        <tx-pair-list v-show="isShowList" class="tx-list" :list="activeTxPairList"
+        <tx-pair-list v-show="isShowList" :list="activeTxPairList"
                       :favoritePairs="favoritePairs" :currentRule="currentOrderRule"
                       :setFavorite="setFavorite"></tx-pair-list>
     </div>
@@ -313,10 +313,6 @@ export default {
         font-weight: 400;
         color: rgba(94,104,117,1);
         margin-top: 20px;
-    }
-    .tx-list {
-        flex: 1;
-        overflow: auto;
     }
 }
 </style>
