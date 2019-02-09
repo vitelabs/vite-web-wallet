@@ -7,16 +7,17 @@ let rateTimer = null;
 const state = {
     rateList: null,
     coins: {
-        en: 'cny',
-        zh: 'usd'
+        en: 'usd',
+        zh: 'cny'
     }
 };
 
 const mutations = {
     setExchangeRate(state, rateList) {
+        console.log(rateList);
         state.rateList = {};
         rateList && rateList.forEach((rate) => {
-            state.rateList[rate.tokenCode] = rate;
+            state.rateList[rate.tokenId] = rate;
         });
     }
 };

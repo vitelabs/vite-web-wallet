@@ -1,5 +1,8 @@
 import { client } from '@vite/vitejs';
+import * as _s from '@vite/vitejs';
 import provider from 'WSprovider';
+
+console.log(_s);
 
 import net from './net';
 import ledger from './ledger';
