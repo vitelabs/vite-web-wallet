@@ -63,13 +63,13 @@ export const order = function ({
 };
 
 export const orderDetail = function({
-    orderId
+    orderId, ftoken, ttoken
 }) {
     return request({
         path: path + '/tx/details',
         method: 'GET',
         params: {
-            orderId
+            orderId, ftoken, ttoken
         }
     });
 };
@@ -88,19 +88,19 @@ export const latestTx = function ({
 
 export const rate = function() {
     return request({
-        path: path + '/market/rate'
+        path: path + '/rate/usd2cny'
     });
 };
 
-export const rateStandard = function() {
+export const rateUstd = function() {
     return request({
-        path: path + '/market/rate/standard'
+        path: path + '/rate/ustd'
     });
 };
 
 export const rateFiat = function() {
     return request({
-        path: path + '/market/rate/fiat'
+        path: path + '/rate/fiat'
     });
 };
 
@@ -108,9 +108,9 @@ export const rateToken = function({
     tokenIdList
 }) {
     return request({
-        path: path + '/market/rate/exchange',
+        path: path + '/rate/assign',
         params: {
-            list: tokenIdList
+            tokens: tokenIdList
         }
     });
 };
@@ -143,13 +143,13 @@ export const assignPair = function({
 };
 
 export const pairSearch = function({
-    fromTokenShow
+    key, ttoken
 }) {
     return request({
         path: path + '/pair/search',
         method: 'GET',
         params: {
-            key: fromTokenShow
+            key, ttoken
         }
     });
 };

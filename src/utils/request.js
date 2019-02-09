@@ -36,9 +36,7 @@ export default function request({ method = 'GET', path, params = {}, timeout = r
                             message: msg || error
                         });
                     }
-
-                    data = data || null;
-                    res(data);
+                    res(data || null);
                 } else {
                     rej( JSON.parse(xhr.responseText) );
                 }

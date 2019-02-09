@@ -93,7 +93,8 @@ export default {
             return this.searchText && this.isShowSearch && this.searchErr;
         },
         isShowNoData() {
-            return !this.activeTxPairList || !this.activeTxPairList.length;
+            return !this.activeTxPairList || !this.activeTxPairList.length || 
+                (this.isShowSearch && !this.searchList.length && !this.isLoading && this.searchText);
         },
         isShowList() {
             return !this.isShowSearchErr && !this.isShowNoData;
@@ -129,6 +130,7 @@ export default {
             let list = this.searchText && this.isShowSearch ? this.searchList : 
                 this.isOnlyFavorite ? this.activeFavoriteList :
                     this.txPairList;
+            list = [].concat(list);
 
             let i;
             for (i=0; i<list.length; i++) {
@@ -258,7 +260,8 @@ export default {
             this.isLoading = true;
             let _fromTokenShow = this.searchText;
             return pairSearch({
-                fromTokenShow: _fromTokenShow
+                key: _fromTokenShow,
+                ttoken: this.activeTxPair.ttoken
             }).then((data) => {
                 if (this.searchText !== _fromTokenShow) {
                     return;
