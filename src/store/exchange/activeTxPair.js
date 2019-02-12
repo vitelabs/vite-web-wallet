@@ -6,7 +6,15 @@ const state = {
 
 const mutations = {
     exSetActiveTxPair(state, txPair) {
-        state.activeTxPair = Object.assign({}, txPair);
+        let old = state.activeTxPair;
+        let isChange = !old;
+        for (let key in old) {
+            if (txPair[key] !==  old[key]) {
+                isChange = true;
+                break;
+            }
+        }
+        isChange && (state.activeTxPair = Object.assign({}, txPair));
     }
 };
 

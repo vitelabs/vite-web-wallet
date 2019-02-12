@@ -400,19 +400,19 @@
         "price": "价格",
         "upDown": "涨跌幅",
         "txNum": "交易量",
-        "quantityTitle": "成交额({quantity})",
+        "quantityTitle": "数量({quantity})",
         "priceTitle": "价格({price})",
-        "amountTitle": "数量({amount})",
-        "quantity": "成交金额",
+        "amountTitle": "成交额({amount})",
+        "amount": "成交金额",
         "buy": {
             "title": "买入{token}",
             "price": "买入价",
-            "amount": "买入量"
+            "quantity": "买入量"
         },
         "sell": {
             "title": "卖出{token}",
             "price": "卖出价",
-            "amount": "卖出量"
+            "quantity": "卖出量"
         },
         "head": {
             "latestPrice": "最新价",

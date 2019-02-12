@@ -30,7 +30,8 @@
         <loading loadingType="dot" class="ex-center-loading" v-show="isLoading"></loading>
         <div class="hint" v-show="isShowSearchErr">{{ searchErr }}</div>
         <div class="hint" v-show="!isShowSearchErr && isShowNoData">{{ noData }}</div>
-        <tx-pair-list v-show="isShowList" class="tx-list" :list="activeTxPairList"
+
+        <tx-pair-list v-show="isShowList" :list="activeTxPairList"
                       :favoritePairs="favoritePairs" :currentRule="currentOrderRule"
                       :setFavorite="setFavorite"></tx-pair-list>
     </div>
@@ -77,6 +78,14 @@ export default {
     watch: {
         toTokenId: function() {
             this.init();
+        },
+        txPairList: function() {
+            this.txPairList && this.txPairList.forEach((txPair) => {
+                if (!this.activePairCode || txPair.pairCode !== this.activePairCode) {
+                    return;
+                }
+                this.$store.commit('exSetActiveTxPair', txPair);
+            });
         }
     },
     computed: {
@@ -84,7 +93,8 @@ export default {
             return this.searchText && this.isShowSearch && this.searchErr;
         },
         isShowNoData() {
-            return !this.activeTxPairList || !this.activeTxPairList.length;
+            return !this.activeTxPairList || !this.activeTxPairList.length || 
+                (this.isShowSearch && !this.searchList.length && !this.isLoading && this.searchText);
         },
         isShowList() {
             return !this.isShowSearchErr && !this.isShowNoData;
@@ -120,6 +130,7 @@ export default {
             let list = this.searchText && this.isShowSearch ? this.searchList : 
                 this.isOnlyFavorite ? this.activeFavoriteList :
                     this.txPairList;
+            list = [].concat(list);
 
             let i;
             for (i=0; i<list.length; i++) {
@@ -249,7 +260,8 @@ export default {
             this.isLoading = true;
             let _fromTokenShow = this.searchText;
             return pairSearch({
-                fromTokenShow: _fromTokenShow
+                key: _fromTokenShow,
+                ttoken: this.activeTxPair.ttoken
             }).then((data) => {
                 if (this.searchText !== _fromTokenShow) {
                     return;
@@ -304,10 +316,6 @@ export default {
         font-weight: 400;
         color: rgba(94,104,117,1);
         margin-top: 20px;
-    }
-    .tx-list {
-        flex: 1;
-        overflow: auto;
     }
 }
 </style>

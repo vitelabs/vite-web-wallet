@@ -4,6 +4,8 @@ import { timer } from 'utils/asyncFlow';
 const time = 2000;
 let buyTimer = null;
 let sellTimer = null;
+let ftoken = null;
+let ttoken = null;
 
 const state = {
     buy: [],
@@ -33,6 +35,13 @@ const actions = {
         if (!activeTxPair) {
             return;
         }
+
+        if (ftoken === activeTxPair.ftoken && ttoken === activeTxPair.ttoken) {
+            return;
+        }
+
+        ftoken = activeTxPair.ftoken;
+        ttoken = activeTxPair.ttoken;
 
         dispatch('exFetchDepthBuy');
         dispatch('exFetchDepthSell');
