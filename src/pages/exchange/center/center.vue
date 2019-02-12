@@ -3,8 +3,8 @@
         <center-head slot="lt"></center-head>
         <depth slot="r"></depth>
         <market slot="lb1"></market>
-        <latest-tx slot="lb2"></latest-tx>
-        <center-view slot="lb3"></center-view>
+        <center-view slot="lb2"></center-view>
+        <latest-tx slot="lb3"></latest-tx>
         <limit-price slot="lb4"></limit-price>
     </layout>
 </template>
