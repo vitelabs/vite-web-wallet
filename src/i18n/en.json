@@ -402,7 +402,7 @@
         "txNum": "交易量",
         "quantityTitle": "成交额({quantity})",
         "priceTitle": "价格({price})",
-        "amountTitle": "数量({amount})",        
+        "amountTitle": "数量({amount})",
         "quantity": "成交金额",
         "buy": {
             "title": "买入{token}",
@@ -452,17 +452,27 @@
     },
     "exchangeAssets": {
         "title": "资产管理",
-        "table":{
-            "heads": ["代币名称","钱包余额","交易所账户余额","委托中","价值"],
-            "rowMap":{
-                "recharge":"充币至交易所",
-                "withdraw":"提币至钱包",
-                "detail":"查看明细"
+        "table": {
+            "heads": [
+                "代币名称",
+                "钱包余额",
+                "交易所账户余额",
+                "委托中",
+                "价值"
+            ],
+            "rowMap": {
+                "recharge": "充币至交易所",
+                "withdraw": "提币至钱包",
+                "detail": "查看明细"
             }
         }
     },
     "exchangeOpenOrders": {
         "title": "当前委托",
+        "side": {
+            "1": "卖",
+            "0": "买"
+        },
         "table": {
             "heads": [
                 "委托时间",
@@ -475,14 +485,16 @@
                 "成交均价"
             ],
             "rowMap": {
-                "cancel": "撤销",
-                "sale": "卖",
-                "buy": "买"
+                "cancel": "撤销"
             }
         }
     },
     "exchangeOrderHistory": {
         "title": "历史委托",
+        "side": {
+            "1": "卖",
+            "0": "买"
+        },
         "table": {
             "heads": [
                 "委托时间",
