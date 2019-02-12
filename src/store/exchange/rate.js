@@ -5,7 +5,7 @@ const loopTime = 2 * 60 * 1000 * 1000;
 let rateTimer = null;
 
 const state = {
-    rateList: null,
+    rateMap: {},
     coins: {
         en: 'cny',
         zh: 'usd'
@@ -14,9 +14,9 @@ const state = {
 
 const mutations = {
     setExchangeRate(state, rateList) {
-        state.rateList = {};
+        state.rateMap = {};
         rateList && rateList.forEach((rate) => {
-            state.rateList[rate.tokenCode] = rate;
+            state.rateMap[rate.tokenId] = rate;
         });
     }
 };

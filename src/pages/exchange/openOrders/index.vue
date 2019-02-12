@@ -26,7 +26,6 @@
 //         "type": 1 //Limited=0(限价单),Market=1(市价单)
 //       }
 import Table from "./table";
-import { order } from "services/exchange";
 export default {
     data(){
         return {
@@ -35,15 +34,6 @@ export default {
     },
   components: {
     Table
-  },
-  beforeMount() {
-    order({
-      address: "vite_7318d099aa0cd15b2c372f05209e5a61c61732dbcb22f1e119"
-    }).then((data) => {
-        this.data=data.map(v=>{
-            return [v.date,`${v.ftokenShow}/${v.ttokenShow}`,v.side,v.price,v.amount,v.filledQ,v.rate,v.average];
-        })
-    });
   }
 };
 </script>

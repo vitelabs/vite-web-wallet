@@ -1,4 +1,5 @@
 import request from 'utils/request';
+import {wallet} from 'utils/walletInstance';
 
 const path = '/api/v1';
 
@@ -88,19 +89,19 @@ export const latestTx = function ({
 
 export const rate = function() {
     return request({
-        path: path + '/market/rate'
+        path: path + '/rate'
     });
 };
 
 export const rateStandard = function() {
     return request({
-        path: path + '/market/rate/standard'
+        path: path + '/rate/standard'
     });
 };
 
 export const rateFiat = function() {
     return request({
-        path: path + '/market/rate/fiat'
+        path: path + '/rate/fiat'
     });
 };
 
@@ -108,7 +109,7 @@ export const rateToken = function({
     tokenIdList
 }) {
     return request({
-        path: path + '/market/rate/exchange',
+        path: path + '/rate/exchange',
         params: {
             list: tokenIdList
         }
@@ -183,4 +184,14 @@ export const tokenMap = function({
             token: tokenId
         }
     });
+};
+
+export const deposit=async function({tokenId,amount}){
+    // const abi=utils.abi.encodeFunctionCall({'type':'function','name':'DexFundUserDeposit', 'inputs':[]},[]);
+    return await wallet.getActiveAccount().callContract({toAddress:'vite_000000000000000000000000000000000000000617d47459a8', jsonInterface:{'type':'function','name':'DexFundUserDeposit', 'inputs':[]}, tokenId, amount});
+};
+
+export const withdraw=async function({tokenId,amount}){
+    // const abi=utils.abi.encodeFunctionCall({'type':'function','name':'DexFundUserDeposit', 'inputs':[]},[]);
+    return await wallet.getActiveAccount().callContract({toAddress:'vite_000000000000000000000000000000000000000617d47459a8', jsonInterface:{'type':'function','name':'DexFundUserDeposit', 'inputs':[]}, tokenId, amount});
 };

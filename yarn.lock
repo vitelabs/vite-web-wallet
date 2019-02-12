@@ -1108,10 +1108,10 @@
   resolved "http://registry.npm.taobao.org/@types/node/download/@types/node-10.12.18.tgz#1d3ca764718915584fcd9f6344621b7672665c67"
   integrity sha1-HTynZHGJFVhPzZ9jRGIbdnJmXGc=
 
-"@vite/vitejs@^1.1.2":
-  version "1.1.3"
-  resolved "http://registry.npm.taobao.org/@vite/vitejs/download/@vite/vitejs-1.1.3.tgz#3c761f4fcdf36a0553dd81dbc2a25b70250f999a"
-  integrity sha1-PHYfT83zagVT3YHbwqJbcCUPmZo=
+"@vite/vitejs@^1.1.4":
+  version "1.1.4"
+  resolved "http://registry.npm.taobao.org/@vite/vitejs/download/@vite/vitejs-1.1.4.tgz#1b66416eed7c5b3911423f91446120aeb608a5cc"
+  integrity sha1-G2ZBbu18WzkRQj+RRGEgrrYIpcw=
   dependencies:
     "@sisi/ed25519-blake2b-hd-key" "^1.0.2"
     "@sisi/tweetnacl-blake2b" "^1.0.0"
@@ -4384,6 +4384,11 @@ icss-utils@^2.1.0:
   integrity sha1-g/Cg7DeL8yRheLbCrZE28TWxyWI=
   dependencies:
     postcss "^6.0.1"
+
+identicon.js@^2.3.3:
+  version "2.3.3"
+  resolved "http://registry.npm.taobao.org/identicon.js/download/identicon.js-2.3.3.tgz#c505b8d60ecc6ea13bbd991a33964c44c1ad60a1"
+  integrity sha1-xQW41g7MbqE7vZkaM5ZMRMGtYKE=
 
 idna-uts46-hx@^2.3.1:
   version "2.3.1"

@@ -29,24 +29,24 @@ export default {
 .filter-root {
   display: flex;
   align-items: flex-end;
-  margin: 28px 10px 0px;
+  margin-bottom: 10px;
   .filter {
-    width: 140px;
-    > * {
-      width: 100%;
+    height: 40px;
+    &:first-child {
+      width: 400px;
+      input {
+        width: 100%;
+        height: 100%;
+      }
     }
-    input,
-    select {
-      color: #5e6875;
-      padding-left: 10px;
-      font-size: 14px;
-    }
-    &:first-child,
-    &:nth-child(3) {
-      width: 180px;
-    }
-    &.end {
-      margin-right: 18px;
+    &:last-child {
+      margin-left: 18px;
+      input{
+          margin-right: 10px;
+      }
+      width: 140px;
+      display: flex;
+      align-items: center;
     }
   }
   .filter_content {
