@@ -1,5 +1,9 @@
 import BigNumber from 'utils/bigNumber';
+import { timer } from 'utils/asyncFlow';
+import { wallet } from 'utils/walletInstance';
+import loopTime from 'config/loopTime';
 
+let balanceInfoInst = null;
 const state = {
     onroad: {
         balanceInfos: {}
@@ -15,10 +19,10 @@ const mutations = {
 
         if (!payload) {
             state.balance = {
-                balanceInfos:{}
+                balanceInfos: {}
             };
             state.onroad = {
-                balanceInfos:{}
+                balanceInfos: {}
             };
             return;
         }
@@ -31,14 +35,29 @@ const mutations = {
     },
     commitClearBalance(state) {
         state.balance = {
-            balanceInfos:{}
+            balanceInfos: {}
         };
         state.onroad = {
-            balanceInfos:{}
+            balanceInfos: {}
         };
     }
 };
-
+const actions = {
+    startLoopBalance({ commit, dispatch }) {
+        dispatch('stopLoopBalance');
+        balanceInfoInst = new timer(() => {
+            return commit('commitBalanceInfo', wallet.getActiveAccount());
+        }, loopTime.ledger_getBalance);
+        balanceInfoInst.start();
+    },
+    stopLoopBalance({ commit }) {
+        balanceInfoInst && balanceInfoInst.stop();
+        balanceInfoInst = null;
+        commit('commitClearBalance');
+        commit('commitClearTransList');
+        commit('commitClearPledge');
+    }
+};
 const getters = {
     tokenBalanceList(state) {
         let balanceInfo = Object.create(null);
@@ -95,5 +114,6 @@ const getters = {
 export default {
     state,
     mutations,
-    getters
+    getters,
+    actions
 };

@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package protocol;
+
+option java_package = "org.vite.data.dex.bean.protocol";
+option java_outer_classname = "DexProto";
+
+message DexProtocol {
+    string token = 1;""
+    string event_key = 2;"tti_d6bb135b8b35b093d51a50ee(ttoken),tti_5649544520544f4b454e6e40(ftoken)"
+    int32 type = 3;2
+    string message = 4;
+}
+
