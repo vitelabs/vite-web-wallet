@@ -19,8 +19,8 @@ const actions = {
         let f = () => {
             return $ViteJS.request('dexfund_getAccountFundInfo', address).then((data) => {
                 commit('setExchangeBalance', data);
-            }).catch(err => {
-                console.warn(err);
+            }).catch(() => {
+                // console.warn(err);
             });
         };
 
