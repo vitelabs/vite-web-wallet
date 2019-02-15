@@ -5,7 +5,7 @@ const loopTime = 2 * 60 * 1000 * 1000;
 let rateTimer = null;
 
 const state = {
-    rateList: null,
+    rateMap: {},
     coins: {
         en: 'usd',
         zh: 'cny'
