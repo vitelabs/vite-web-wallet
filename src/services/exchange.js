@@ -1,5 +1,5 @@
 import request from 'utils/request';
-import {wallet} from 'utils/walletInstance';
+import { wallet } from 'utils/walletInstance';
 
 const path = '/api/v1';
 
@@ -194,4 +194,28 @@ export const deposit=async function({tokenId,amount}){
 export const withdraw=async function({tokenId,amount}){
     // const abi=utils.abi.encodeFunctionCall({'type':'function','name':'DexFundUserDeposit', 'inputs':[]},[]);
     return await wallet.getActiveAccount().callContract({toAddress:'vite_000000000000000000000000000000000000000617d47459a8', jsonInterface:{'type':'function','name':'DexFundUserDeposit', 'inputs':[]}, tokenId, amount});
+};
+
+export const newBuyOrder = function({
+    tokenId, amount
+}) {
+    return wallet.getActiveAccount().callContract({
+        toAddress:'vite_000000000000000000000000000000000000000617d47459a8',
+        jsonInterface: {'type':'function','name':'DexTradeNewOrder', 'inputs':[{'name':'data','type':'bytes'}]}, 
+        params: [],
+        tokenId,
+        amount
+    });
+};
+
+export const newSellOrder = function({
+    tokenId, amount
+}) {
+    return wallet.getActiveAccount().callContract({
+        toAddress:'vite_000000000000000000000000000000000000000617d47459a8', 
+        jsonInterface:{'type':'function','name':'DexTradeNewOrder', 'inputs':[{'name':'data','type':'bytes'}]}, 
+        params: [],
+        tokenId,
+        amount
+    });
 };

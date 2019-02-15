@@ -36,8 +36,8 @@
     </div>
 </template>
 <script>
-import confirm from "components/confirm";
-import {deposit} from "services/exchange"
+// import confirm from 'components/confirm';
+import {deposit} from 'services/exchange';
 export default {
     data() {
         return {
@@ -47,12 +47,14 @@ export default {
     },
     methods: {
         withdraw(tokenId) {
-            deposit({tokenId,amount:'1'})
+            deposit({tokenId,amount:'1'});
         },
         recharge(tokenId) {
-            deposit({tokenId,amount:'1'})
+            deposit({tokenId,amount:'1'});
         },
-        detail(token) {}
+        detail(token) {
+            console.log(token);
+        }
     },
     computed: {
         balance() {
@@ -64,7 +66,7 @@ export default {
                     available: exB[t].available,
                     lock: exB[t].lock,
                     balance: 0,
-                    icon: "",
+                    icon: '',
                     id: t,
                     symbol: exB[t].tokenInfo.tokenSymbol
                 };
@@ -86,12 +88,12 @@ export default {
             });
             Object.keys(res).forEach(t => {
                 if(!this.$store.state.exchangeRate.rateMap[t]){
-                    res[t].worth="-";
+                    res[t].worth='-';
                     return;
                 }
-                res[t].worth = `${this.$i18n.locale === "zh" ? "¥" : "$"}${
+                res[t].worth = `${this.$i18n.locale === 'zh' ? '¥' : '$'}${
                     this.$store.state.exchangeRate.rateMap[t][
-                        this.$i18n.locale === "zh" ? "cny" : "usd"
+                        this.$i18n.locale === 'zh' ? 'cny' : 'usd'
                     ]
                 }`;
             });

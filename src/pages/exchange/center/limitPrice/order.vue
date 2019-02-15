@@ -116,15 +116,14 @@ export default {
             this.clearValidTimeout();
             validTimeout = setTimeout(() => {
                 this.clearValidTimeout();
+                this.validAll();
                 changeVal && this[`${changeVal}Changed`]();
-                this.validPrice();
-                this.validAmount();
-                this.validQuantity();
+                this.validAll();
             }, 300);
         },
         activeTx: function() {
-            if ((this.activeTx.txSide === 0 && this.orderType === 'buy') ||
-                (this.activeTx.txSide === 1 && this.orderType === 'sell')){
+            if ((this.activeTx.txSide === 0 && this.orderType === 'sell') ||
+                (this.activeTx.txSide === 1 && this.orderType === 'buy')){
                 this.price = this.activeTx.price;
                 this.quantity = this.activeTx.quantity;
             }
@@ -217,6 +216,10 @@ export default {
             !BigNumber.isEqual(amount, this.amount) && (this.amount = amount);
         },
         amountChanged() {
+            if (this.isAmountErr) {
+                return;
+            }
+
             let price = this.price;
             let quantity = this.quantity;
             let amount = this.amount;
@@ -229,6 +232,10 @@ export default {
             !BigNumber.isEqual(percent, this.percent) && (this.percent = percent);
         },
         priceChanged() {
+            if (this.isPriceErr) {
+                return;
+            }
+
             let price = this.price;
             let quantity = this.quantity;
             let amount = this.amount;
@@ -241,6 +248,10 @@ export default {
             !BigNumber.isEqual(percent, this.percent) && (this.percent = percent);
         },
         quantityChanged() {
+            if (this.isQuantityErr) {
+                return;
+            }
+
             let price = this.price;
             let quantity = this.quantity;
             let amount = this.amount;
@@ -305,6 +316,11 @@ export default {
         validQuantity() {
             this.isQuantityErr = (this.quantity && !this.$validAmount(this.quantity)) ||
                 (this.orderType === 'sell' && BigNumber.compared(this.balance, this.quantity) < 0);
+        },
+        validAll() {
+            this.validPrice();
+            this.validAmount();
+            this.validQuantity();
         },
 
         _clickBtn() {

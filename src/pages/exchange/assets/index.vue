@@ -5,8 +5,8 @@
     </div>
 </template>
 <script>
-import Filters from "./filters";
-import Table from "./table";
+import Filters from './filters';
+import Table from './table';
 export default {
     components: {
         Filters,
