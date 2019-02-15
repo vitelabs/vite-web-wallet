@@ -1,7 +1,7 @@
 <template>
-  <div class="open-order-ct">
-    <Table :list="data"></Table>
-  </div>
+    <div class="open-order-ct">
+        <Table :list="data"></Table>
+    </div>
 </template>
 <script>
 //status Pending=0，PartialExecuted=1，FullyExecuted=2，Cancelled=3
@@ -25,16 +25,16 @@
 //         "status": 1, //Pending=0，PartialExecuted=1，FullyExecuted=2，Cancelled=3
 //         "type": 1 //Limited=0(限价单),Market=1(市价单)
 //       }
-import Table from "./table";
+import Table from './table';
 export default {
     data(){
         return {
             data:[]
-        }
+        };
     },
-  components: {
-    Table
-  }
+    components: {
+        Table
+    }
 };
 </script>
 <style lang="scss" scoped>

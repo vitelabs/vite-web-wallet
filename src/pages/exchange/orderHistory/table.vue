@@ -5,9 +5,9 @@
                 v-for="(h,i) in $t('exchangeOrderHistory.table.heads')"
                 :key="h"
             >{{h.replace("#tokenSymbol#","vite")}} <div
-                    class="sort-btn"
-                    @click="sortBy(i)"
-                ></div>
+                class="sort-btn"
+                @click="sortBy(i)"
+            ></div>
             </div>
 
         </div>
@@ -52,13 +52,16 @@ export default {
                 return;
             }
             this.sortIndex = i;
+        },
+        sortList(list) {
+            return list.sort((a, b) => {
+                return this.sortType * (a[this.sortIndex] - b[this.sortIndex]);
+            });
         }
     },
     computed: {
         sortedList() {
-            return this.list.sort((a, b) => {
-                return this.sortType * (a[this.sortIndex] - b[this.sortIndex]);
-            });
+            return this.sortList(this.list);
         }
     }
 };

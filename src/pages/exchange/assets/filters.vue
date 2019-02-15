@@ -1,26 +1,26 @@
 /**  vite-wallet login */
 
 <template>
-  <div class="filter-root">
-    <div class="filter"><input type="text"></div>
-    <div class="filter"><input type="checkbox">隐藏0元代币</div>
-  </div>
+    <div class="filter-root">
+        <div class="filter"><input type="text"></div>
+        <div class="filter"><input type="checkbox">隐藏0元代币</div>
+    </div>
 </template>
 
 <script>
 export default {
-  data() {
-    return {
-      fromDate: "",
-      toDate: "",
-      tradeType: 1
-    };
-  },
-  methods: {
-    submit() {
-      this.$emit("submit");
+    data() {
+        return {
+            fromDate: '',
+            toDate: '',
+            tradeType: 1
+        };
+    },
+    methods: {
+        submit() {
+            this.$emit('submit');
+        }
     }
-  }
 };
 </script>
 

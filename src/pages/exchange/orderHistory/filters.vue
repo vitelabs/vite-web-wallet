@@ -1,67 +1,67 @@
 /**  vite-wallet login */
 
 <template>
-  <div class="filter-root">
-    <div class="filter">
-      <div class="filter_label">起始日期</div>
-      <FlatPickr
-        v-model="fromDate"
-        class="filter_content"
-      ></FlatPickr>
+    <div class="filter-root">
+        <div class="filter">
+            <div class="filter_label">起始日期</div>
+            <FlatPickr
+                v-model="fromDate"
+                class="filter_content"
+            ></FlatPickr>
+        </div>
+        <div class="separator">-</div>
+        <div class="filter end">
+            <div class="filter_label">终止日期</div>
+            <FlatPickr
+                v-model="toDate"
+                class="filter_content"
+            ></FlatPickr>
+        </div>
+        <div class="filter">
+            <div class="filter_label">币种</div>
+            <input class="filter_content" />
+        </div>
+        <div class="separator">-</div>
+        <div class="filter end">
+            <select class="filter_content">
+                <option value="vite">vite</option>
+                <option value="eth">eth</option>
+                <option value="btc">btc</option>
+            </select>
+        </div>
+        <div class="filter end">
+            <div class="filter_label">方向</div>
+            <select
+                v-model="tradeType"
+                class="filter_content"
+            >
+                <option value="1">买</option>
+                <option value="-1">卖</option>
+            </select>
+        </div>
+        <div @click="submit" class="search">搜索</div>
     </div>
-    <div class="separator">-</div>
-    <div class="filter end">
-      <div class="filter_label">终止日期</div>
-      <FlatPickr
-        v-model="toDate"
-        class="filter_content"
-      ></FlatPickr>
-    </div>
-    <div class="filter">
-      <div class="filter_label">币种</div>
-      <input class="filter_content" />
-    </div>
-    <div class="separator">-</div>
-    <div class="filter end">
-      <select class="filter_content">
-        <option value="vite">vite</option>
-        <option value="eth">eth</option>
-        <option value="btc">btc</option>
-      </select>
-    </div>
-    <div class="filter end">
-      <div class="filter_label">方向</div>
-      <select
-        v-model="tradeType"
-        class="filter_content"
-      >
-        <option value="1">买</option>
-        <option value="-1">卖</option>
-      </select>
-    </div>
-    <div @click="submit" class="search">搜索</div>
-  </div>
 </template>
 
 <script>
-import FlatPickr from "vue-flatpickr-component";
-import "flatpickr/dist/flatpickr.css";
+import FlatPickr from 'vue-flatpickr-component';
+import 'flatpickr/dist/flatpickr.css';
 export default {
-  data() {
-    return {
-      fromDate: "",
-      toDate: "",
-      tradeType: 1
-    };
-  },
-  components: {
-    FlatPickr
-  },
-  methods: {
-    submit() {
-      this.$emit("submit");
+    data() {
+        return {
+            fromDate: '',
+            toDate: '',
+            tradeType: 1
+        };
+    },
+    components: {
+        FlatPickr
+    },
+    methods: {
+        submit() {
+            this.$emit('submit');
+        }
     }
-  }
 };
 </script>
 

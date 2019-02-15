@@ -32,7 +32,7 @@
     </div>
 </template>
 <script>
-import { order } from "services/exchange";
+import { order } from 'services/exchange';
 export default {
     data() {
         return {
@@ -46,7 +46,7 @@ export default {
     },
     beforeMount() {
         order({
-            address: "vite_272c94c456e72e698616500acd73b7ffd130708d99f05e4880",
+            address: 'vite_272c94c456e72e698616500acd73b7ffd130708d99f05e4880',
             status: 2
         }).then(data => {
             this.list = data;
