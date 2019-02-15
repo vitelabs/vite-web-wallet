@@ -82,7 +82,11 @@ export default {
             isAmountErr: false,
             isQuantityErr: false,
             percent: 0,
-            watchAQ: 0
+            watchAQ: 0,
+
+            oldPrice: '',
+            oldAmount: '',
+            oldQuantity: ''
         };
     },
     watch: {
@@ -92,15 +96,30 @@ export default {
             }
             this.price = this.activeTxPair && this.activeTxPair.price ? this.activeTxPair.price : '';
         },
-        amount: function() {
+        amount: function(val) {
+            this.validAmount();
+            if (!this.isAmountErr) {
+                this.oldAmount = val;
+                return;
+            }
             changeVal = 'amount';
             this.watchAQ++;
         },
-        quantity: function() {
+        quantity: function(val) {
+            this.validQuantity();
+            if (!this.isQuantityErr) {
+                this.oldQuantity = val;
+                return;
+            }
             changeVal = 'quantity';
             this.watchAQ++;
         },
-        price: function() {
+        price: function(val) {
+            this.validPrice();
+            if (!this.isPriceErr) {
+                this.oldPrice = val;
+                return;
+            }
             changeVal = 'price';
             this.watchAQ++;
         },
@@ -117,6 +136,20 @@ export default {
             validTimeout = setTimeout(() => {
                 this.clearValidTimeout();
                 this.validAll();
+                let isErr = false;
+                isErr = this.isPriceErr || this.isAmountErr || this.isQuantityErr;
+                if (this.isPriceErr) {
+                    this.price = this.oldPrice;
+                }
+                if (this.isAmountErr) {
+                    this.amount = this.oldAmount;
+                }
+                if (this.isQuantityErr) {
+                    this.quantity = this.oldQuantity;
+                }
+                if (isErr) {
+                    return;
+                }
                 changeVal && this[`${changeVal}Changed`]();
                 this.validAll();
             }, 300);
@@ -177,7 +210,7 @@ export default {
             let amount = this.amount;
             let percent = this.percent;
 
-            if (percent * 100 % 25 !== 0) {
+            if (percent <= 0 || percent * 100 % 25 !== 0) {
                 return;
             }
 
