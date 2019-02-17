@@ -2,90 +2,144 @@
     <div class="market-wrapper">
         <tab-list :setToTokenId="setToTokenId"></tab-list>
 
-        <vite-input class="search-input" :valid="fetchSearchList" v-model="searchText" :placeholder="$t('exchange.search')">
-            <img slot="before" class="icon" src="~assets/imgs/search.svg"/>
+        <vite-input
+            class="search-input"
+            :valid="fetchSearchList"
+            v-model="searchText"
+            :placeholder="$t('exchange.search')"
+        >
+            <img
+                slot="before"
+                class="icon"
+                src="~assets/imgs/search.svg"
+            />
         </vite-input>
 
         <div class="__center-tb-title">
             <div class="__center-tb-item txPair">
-                <span @click="toggleShowFavorite" class="favorite-icon __pointer"
-                      :class="{'active': isOnlyFavorite}"></span>
-                <span @click="setOrderRule('transPairs')" 
-                      class="describe __pointer">{{ $t('exchange.txPair') }}</span>
+                <span
+                    @click="toggleShowFavorite"
+                    class="favorite-icon __pointer"
+                    :class="{'active': isOnlyFavorite}"
+                ></span>
+                <span
+                    @click="setOrderRule('transPairs')"
+                    class="describe __pointer"
+                >{{ $t('exchange.txPair') }}</span>
             </div>
             <div class="__center-tb-item">
                 <span class="describe">{{ $t('exchange.price') }}</span>
-                <order-arrow orderItem="price" :setOrderRule="setOrderRule"></order-arrow>
+                <order-arrow
+                    orderItem="price"
+                    :setOrderRule="setOrderRule"
+                ></order-arrow>
             </div>
             <div class="__center-tb-item percent">
                 <span class="describe">{{ $t('exchange.upDown') }}</span>
-                <order-arrow orderItem="upDown" :setOrderRule="setOrderRule"></order-arrow>
+                <order-arrow
+                    orderItem="upDown"
+                    :setOrderRule="setOrderRule"
+                ></order-arrow>
             </div>
             <div class="__center-tb-item">
                 <span class="describe">{{ $t('exchange.txNum') }}</span>
-                <order-arrow orderItem="txNum" :setOrderRule="setOrderRule"></order-arrow>
+                <order-arrow
+                    orderItem="txNum"
+                    :setOrderRule="setOrderRule"
+                ></order-arrow>
             </div>
         </div>
 
-        <loading loadingType="dot" class="ex-center-loading" v-show="isLoading"></loading>
-        <div class="hint" v-show="isShowSearchErr">{{ searchErr }}</div>
-        <div class="hint" v-show="!isShowSearchErr && isShowNoData">{{ noData }}</div>
+        <loading
+            loadingType="dot"
+            class="ex-center-loading"
+            v-show="isLoading"
+        ></loading>
+        <div
+            class="hint"
+            v-show="isShowSearchErr"
+        >{{ searchErr }}</div>
+        <div
+            class="hint"
+            v-show="!isShowSearchErr && isShowNoData"
+        >{{ noData }}</div>
 
-        <tx-pair-list v-show="isShowList" :list="activeTxPairList"
-                      :favoritePairs="favoritePairs" :currentRule="currentOrderRule"
-                      :setFavorite="setFavorite"></tx-pair-list>
+        <tx-pair-list
+            v-show="isShowList"
+            :list="activeTxPairList"
+            :favoritePairs="favoritePairs"
+            :currentRule="currentOrderRule"
+            :setFavorite="setFavorite"
+        ></tx-pair-list>
     </div>
 </template>
 
 <script>
-import viteInput from 'components/viteInput';
-import loading from 'components/loading';
-import localStorage from 'utils/localStorage';
-import { timer } from 'utils/asyncFlow';
-import { defaultPair, assignPair, pairSearch } from 'services/exchange';
+import viteInput from "components/viteInput";
+import loading from "components/loading";
+import localStorage from "utils/localStorage";
+import { timer } from "utils/asyncFlow";
+import { defaultPair, assignPair, pairSearch } from "services/exchange";
 
-import orderArrow from './orderArrow';
-import tabList from './tabList';
-import txPairList from './txPairList';
+import orderArrow from "./orderArrow";
+import tabList from "./tabList";
+import txPairList from "./txPairList";
+import { client } from "utils/proto";
 
-const FavoriteKey = 'favoriteTxPairs';
+const FavoriteKey = "favoriteTxPairs";
 let pairTimer = null;
 
 export default {
     components: {
-        viteInput, loading, orderArrow, tabList, txPairList
+        viteInput,
+        loading,
+        orderArrow,
+        tabList,
+        txPairList
     },
     destroyed() {
         this.stopLoopList();
     },
+    beforeMount() {
+        this.toTokenId && client.subscribe(this.toTokenId);
+    },
     data() {
         return {
             isLoading: false,
-            currentOrderRule: 'txPair',
+            currentOrderRule: "txPair",
             isOnlyFavorite: false,
 
             favoritePairs: localStorage.getItem(FavoriteKey) || {},
 
-            toTokenId: '',
+            toTokenId: "",
             txPairList: [],
 
             isShowSearch: false,
-            searchErr: '',
-            searchText: '',
+            searchErr: "",
+            searchText: "",
             searchList: []
         };
     },
     watch: {
         toTokenId: function() {
+            if (this.toTokenId) {
+                client.sub(this.toTokenId, data => {
+                    console.log(data);
+                });
+            }
             this.init();
         },
         txPairList: function() {
-            this.txPairList && this.txPairList.forEach((txPair) => {
-                if (!this.activePairCode || txPair.pairCode !== this.activePairCode) {
-                    return;
-                }
-                this.$store.commit('exSetActiveTxPair', txPair);
-            });
+            this.txPairList &&
+                this.txPairList.forEach(txPair => {
+                    if (
+                        !this.activePairCode ||
+                        txPair.pairCode !== this.activePairCode
+                    ) {
+                        return;
+                    }
+                    this.$store.commit("exSetActiveTxPair", txPair);
+                });
         }
     },
     computed: {
@@ -93,15 +147,21 @@ export default {
             return this.searchText && this.isShowSearch && this.searchErr;
         },
         isShowNoData() {
-            return !this.activeTxPairList || !this.activeTxPairList.length || 
-                (this.isShowSearch && !this.searchList.length && !this.isLoading && this.searchText);
+            return (
+                !this.activeTxPairList ||
+                !this.activeTxPairList.length ||
+                (this.isShowSearch &&
+                    !this.searchList.length &&
+                    !this.isLoading &&
+                    this.searchText)
+            );
         },
         isShowList() {
             return !this.isShowSearchErr && !this.isShowNoData;
         },
         txPairCodeList() {
             let codeList = [];
-            this.txPairList.forEach((txPair) => {
+            this.txPairList.forEach(txPair => {
                 codeList.push(txPair.pairCode);
             });
             return codeList;
@@ -110,7 +170,11 @@ export default {
             let codeList = [];
             for (let code in this.favoritePairs) {
                 let item = this.favoritePairs[code];
-                if (!item || !item.toTokenId || item.toTokenId !== this.toTokenId) {
+                if (
+                    !item ||
+                    !item.toTokenId ||
+                    item.toTokenId !== this.toTokenId
+                ) {
                     continue;
                 }
                 codeList.push(code);
@@ -119,21 +183,24 @@ export default {
         },
         noData() {
             if (this.searchText && this.isShowSearch) {
-                return this.$t('exchange.noData.search');
+                return this.$t("exchange.noData.search");
             }
             if (this.isOnlyFavorite) {
-                return this.$t('exchange.noData.favorite');
+                return this.$t("exchange.noData.favorite");
             }
-            return this.$t('hint.noData');
+            return this.$t("hint.noData");
         },
         activeTxPairList() {
-            let list = this.searchText && this.isShowSearch ? this.searchList : 
-                this.isOnlyFavorite ? this.activeFavoriteList :
-                    this.txPairList;
+            let list =
+                this.searchText && this.isShowSearch
+                    ? this.searchList
+                    : this.isOnlyFavorite
+                    ? this.activeFavoriteList
+                    : this.txPairList;
             list = [].concat(list);
 
             let i;
-            for (i=0; i<list.length; i++) {
+            for (i = 0; i < list.length; i++) {
                 if (list[i].pairCode === this.activePairCode) {
                     break;
                 }
@@ -147,7 +214,7 @@ export default {
         },
         activeFavoriteList() {
             let list = [];
-            this.txPairList.forEach((txPair) => {
+            this.txPairList.forEach(txPair => {
                 if (this.favoriteCodeList.indexOf(txPair.pairCode) === -1) {
                     return;
                 }
@@ -156,7 +223,9 @@ export default {
             return list;
         },
         activePairCode() {
-            return this.activeTxPair ? this.activeTxPair.pairCode || null : null;
+            return this.activeTxPair
+                ? this.activeTxPair.pairCode || null
+                : null;
         },
         activeTxPair() {
             return this.$store.state.exchangeActiveTxPair.activeTxPair;
@@ -189,7 +258,7 @@ export default {
 
         async init() {
             // First, clear.
-            this.searchText = '';
+            this.searchText = "";
             this.searchList = [];
             this.stopLoopList();
 
@@ -199,7 +268,9 @@ export default {
 
             try {
                 let _q = [this.fetchDefaultList()];
-                this.favoriteCodeList && this.favoriteCodeList.length && _q.push(this.fetchFavoriteList());
+                this.favoriteCodeList &&
+                    this.favoriteCodeList.length &&
+                    _q.push(this.fetchFavoriteList());
                 let _r = await Promise.all(_q);
 
                 if (toTokenId !== this.toTokenId) {
@@ -214,12 +285,12 @@ export default {
                 let list = [];
                 let codeList = [];
                 // Add default
-                defaultList.forEach((txPair) => {
+                defaultList.forEach(txPair => {
                     list.push(txPair);
                     codeList.push(txPair.pairCode);
                 });
                 // Add favorite
-                favoriteList.forEach((txPair) => {
+                favoriteList.forEach(txPair => {
                     if (codeList.indexOf(txPair.pairCode) !== -1) {
                         return;
                     }
@@ -231,7 +302,7 @@ export default {
                 this.txPairList = list;
 
                 // this.startLoopList();
-            } catch(err) {
+            } catch (err) {
                 console.warn(err);
                 this.isLoading = false;
             }
@@ -239,7 +310,7 @@ export default {
 
         startLoopList() {
             this.stopLoopList();
-            pairTimer = new timer(()=>{
+            pairTimer = new timer(() => {
                 if (!this.txPairCodeList || !this.txPairCodeList.length) {
                     return Promise.resolve();
                 }
@@ -262,19 +333,21 @@ export default {
             return pairSearch({
                 key: _fromTokenShow,
                 ttoken: this.activeTxPair.ttoken
-            }).then((data) => {
-                if (this.searchText !== _fromTokenShow) {
-                    return;
-                }
-                this.isLoading = false;
-                this.isShowSearch = true;
-                this.searchList = data;
-            }).catch((err) => {
-                console.warn(err);
-                this.isLoading = false;
-                this.isShowSearch = true;
-                this.searchErr = this.$t('hint.err');
-            });
+            })
+                .then(data => {
+                    if (this.searchText !== _fromTokenShow) {
+                        return;
+                    }
+                    this.isLoading = false;
+                    this.isShowSearch = true;
+                    this.searchList = data;
+                })
+                .catch(err => {
+                    console.warn(err);
+                    this.isLoading = false;
+                    this.isShowSearch = true;
+                    this.searchErr = this.$t("hint.err");
+                });
         },
         fetchDefaultList() {
             return defaultPair({
@@ -289,7 +362,7 @@ export default {
         fetchTxPairList() {
             return assignPair({
                 pairs: this.txPairCodeList
-            }).then((data) => {
+            }).then(data => {
                 this.txPairList = data;
             });
         }
@@ -298,7 +371,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../center.scss';
+@import "../center.scss";
 
 .market-wrapper {
     position: relative;
@@ -314,29 +387,29 @@ export default {
         text-align: center;
         font-size: 12px;
         font-weight: 400;
-        color: rgba(94,104,117,1);
+        color: rgba(94, 104, 117, 1);
         margin-top: 20px;
     }
 }
 </style>
 
 <style lang="scss">
-    .search-input.input-wrapper {
-        box-sizing: border-box;
-        height: 28px;
-        line-height: 28px;
-        border: none;
-        border-bottom: 1px solid rgba(212,222,231,1);
-        .icon {
-            width: 12px;
-            height: 12px;
-            margin: 8px 6px;
-        }
-        input {
-            text-indent: 0px;
-            font-weight: 400;
-            font-size: 12px;
-        }
+.search-input.input-wrapper {
+    box-sizing: border-box;
+    height: 28px;
+    line-height: 28px;
+    border: none;
+    border-bottom: 1px solid rgba(212, 222, 231, 1);
+    .icon {
+        width: 12px;
+        height: 12px;
+        margin: 8px 6px;
     }
+    input {
+        text-indent: 0px;
+        font-weight: 400;
+        font-size: 12px;
+    }
+}
 </style>
 

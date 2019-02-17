@@ -19,14 +19,12 @@
     </div>
     <div class="filter">
       <div class="filter_label">币种</div>
-      <input class="filter_content" />
+      <input class="filter_content" v-model="fToken" />
     </div>
     <div class="separator">-</div>
     <div class="filter end">
-      <select class="filter_content">
-        <option value="vite">vite</option>
-        <option value="eth">eth</option>
-        <option value="btc">btc</option>
+      <select class="filter_content" v-model="tToken">
+        <option :value="t.token" v-for="t in tokenMap" :key="t.token">{{t.symbol}}</option>
       </select>
     </div>
     <div class="filter end">
@@ -35,8 +33,8 @@
         v-model="tradeType"
         class="filter_content"
       >
-        <option value="1">买</option>
-        <option value="-1">卖</option>
+        <option value="0">买</option>
+        <option value="1">卖</option>
       </select>
     </div>
     <div @click="submit" class="search">搜索</div>
@@ -46,20 +44,35 @@
 <script>
 import FlatPickr from "vue-flatpickr-component";
 import "flatpickr/dist/flatpickr.css";
+import {baseToken} from "services/exchange"
 export default {
   data() {
     return {
       fromDate: "",
       toDate: "",
-      tradeType: 1
+      tradeType: "",
+      fToken:"",
+      tToken:"",
+      tokenMap:[]
     };
+  },
+  beforeMount(){
+      baseToken().then(data=>{
+          this.tokenMap=data
+      })
   },
   components: {
     FlatPickr
   },
   methods: {
     submit() {
-      this.$emit("submit");
+      this.$emit("submit",{
+          fDate:this.fromDate,
+          tDate:this.toDate,
+          orderSide:this.tradeType,
+          fToken:this.fToken,
+          tToken:this.tToken
+      });
     }
   }
 };
@@ -70,7 +83,7 @@ export default {
 .filter-root {
   display: flex;
   align-items: flex-end;
-  margin: 28px 10px 0px;
+  margin: 0px 10px 20px;
   .filter {
     width: 140px;
     > * {

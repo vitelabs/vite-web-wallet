@@ -1,7 +1,7 @@
 <template>
-  <div class="open-order-ct">
-    <Table :list="data"></Table>
-  </div>
+    <div class="open-order-ct">
+        <Table :list="data"></Table>
+    </div>
 </template>
 <script>
 //status Pending=0，PartialExecuted=1，FullyExecuted=2，Cancelled=3
@@ -9,7 +9,7 @@
 // {
 //         "date": 12345678, //时间戳
 //         "fTokenShow": "0.00000000", //交易对fromToken简称
-//         "tTokenShow": "0.00000000", //交易对toToken简称 
+//         "tTokenShow": "0.00000000", //交易对toToken简称
 //         "fToken": "0.00000000", //fromTokenId
 //         "tToken": "0.00000000", //toTokenId
 //         "side": 1, //方向
@@ -27,20 +27,22 @@
 //       }
 import Table from "./table";
 export default {
-    data(){
+    data() {
         return {
-            data:[]
-        }
+            data: []
+        };
     },
-  components: {
-    Table
-  }
+    components: {
+        Table
+    }
 };
 </script>
 <style lang="scss" scoped>
 .open-order-ct {
-  height: 100%;
-  overflow: hidden;
-  padding: 20px 10px 10px;
+    height: 100%;
+    overflow: hidden;
+    padding: 20px 10px 10px;
+    display: flex;
+    flex-direction: column;
 }
 </style>
