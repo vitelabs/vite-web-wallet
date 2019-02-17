@@ -26,9 +26,11 @@
             margin: 0 5px;
             align-items: center;
             .sort-btn {
+                background: url(~assets/imgs/exchange/ascend.png) ,url(~assets/imgs/exchange/decend.png) 0 8px;
+                background-size: contain;
+                background-repeat: no-repeat;
                 width: 16px;
                 margin-left: 2px;
-                background: #1D2024;
                 height: 16px;
                 cursor: pointer;
             }
