@@ -394,69 +394,69 @@
         }
     },
     "exchange": {
-        "title": "交易中心",
-        "search": "查询",
-        "txPair": "交易对",
-        "price": "价格",
-        "upDown": "涨跌幅",
-        "txNum": "交易量",
-        "quantityTitle": "数量({quantity})",
-        "priceTitle": "价格({price})",
-        "amountTitle": "成交额({amount})",
-        "amount": "成交金额",
+        "title": "Exchange",
+        "search": "Search",
+        "txPair": "Pair",
+        "price": "Price",
+        "upDown": "Change%",
+        "txNum": "Amount",
+        "quantityTitle": "Amount({quantity})",
+        "priceTitle": "Price({price})",
+        "amountTitle": "Filled({amount})",
+        "amount": "Total",
         "buy": {
-            "title": "买入{token}",
-            "price": "买入价",
-            "amount": "买入量"
+            "title": "Buy{token}",
+            "price": "Price",
+            "amount": "Amount"
         },
         "sell": {
-            "title": "卖出{token}",
-            "price": "卖出价",
-            "amount": "卖出量"
+            "title": "Sell{token}",
+            "price": "Price",
+            "amount": "Amount"
         },
         "head": {
-            "latestPrice": "最新价",
-            "updown": "24h涨跌",
-            "highPrice": "24h最高价",
-            "lowPrice": "24h最低价",
-            "quantity": "24h成交量",
-            "tokenName": "代币名称",
-            "tokenShow": "代币简称",
-            "tokenId": "TokenID",
-            "publisher": "发行者",
-            "total": "总金额",
-            "tokenDigit": "小数位数",
-            "publisherDate": "发行日期",
-            "type": "类型",
-            "tokenType0": "可增发",
-            "tokenType1": "永不增发"
+            "latestPrice": "Last Price",
+            "updown": "24h Change",
+            "highPrice": "24h High",
+            "lowPrice": "24h Low",
+            "quantity": "24h Volume",
+            "tokenName": "Token",
+            "tokenShow": "Abbr",
+            "tokenId": "Token ID",
+            "publisher": "Issuer",
+            "total": "Total",
+            "tokenDigit": "decimals",
+            "publisherDate": "Issuance Date",
+            "type": "Status",
+            "tokenType0": "Issuance Available",
+            "tokenType1": "Never Issued"
         },
         "latestTx": {
-            "title": "最新交易",
-            "time": "时间"
+            "title": "Last Transaction",
+            "time": "Time"
         },
         "depth": {
-            "buy": "买入",
-            "sell": "卖出",
-            "all": "全部"
+            "buy": "Buy",
+            "sell": "Sell",
+            "all": "All"
         },
         "noData": {
-            "favorite": "您还未添加任何自选",
-            "search": "暂无搜索结果"
+            "favorite": "You have no favorite yet",
+            "search": "No result found"
         },
         "limitPrice": {
-            "title": "限价",
-            "fee": "手续费",
-            "text": "此页面为交易的预览，所有信息均为实时数据，请登录后查看??????"
+            "title": "Limit",
+            "fee": "Fee",
+            "text": "This page is a preview page of displaying real-time transaction data. Please log in to find out more."
         }
     },
     "exchangeAssets": {
-        "title": "资产管理"
+        "title": "Funds"
     },
     "exchangeOpenOrders": {
-        "title": "当前委托"
+        "title": "Open Orders"
     },
     "exchangeOrderHistory": {
-        "title": "历史委托"
+        "title": "Order History"
     }
 }
