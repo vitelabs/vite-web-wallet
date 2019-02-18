@@ -32,6 +32,7 @@ export default {
             data: []
         };
     },
+
     components: {
         Table
     }

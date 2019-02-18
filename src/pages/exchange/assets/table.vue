@@ -54,30 +54,42 @@
                     ></div>
             </div>
         </confirm>
-        <!-- <confirm>
+        <alert
+            v-show="detailConfirm"
+            :list="detailList"
+            :heads="$t('exchangeAssets.confirmTable.heads')"
+        >
 
-        </confirm> -->
+        </alert>
 
     </div>
 </template>
 <script>
+import alert from "../components/alert.vue";
 import confirm from "components/confirm.vue";
-import { deposit, withdraw } from "services/exchange";
+import { deposit, withdraw, chargeDetail } from "services/exchange";
 import BigNumber from "utils/bigNumber";
 export default {
-    props:{
-        filter:{type:Object}
+    props: {
+        filter: { type: Object }
     },
     components: {
-        confirm
+        confirm,
+        alert
+    },
+    beforeMount() {
+        this.acc = this.$wallet.getActiveAccount();
+        if (!this.acc) return;
+        this.acc && (this.addr = this.acc.getDefaultAddr());
     },
     data() {
         return {
-            sortIndex: 0,
-            sortType: 1,
+            detailConifrm: false,
             c: {},
             opNumber: "",
-            confirmShow: false
+            confirmShow: false,
+            detailList: [],
+            detailConfirm: false
         };
     },
     methods: {
@@ -87,7 +99,16 @@ export default {
         recharge(tokenId) {
             this.showConfirm({ tokenId, type: "Charge" });
         },
-        detail(token) {},
+        detail(tokenId) {
+            this.detailConfirm = true;
+            chargeDetail({ address: this.address, tokenId }).then(data => {
+                this.detailList = data;
+            });
+        },
+        close() {
+            this.detailList = [];
+            this.detailConfirm = false;
+        },
         showConfirm({ tokenId, type }) {
             const t = this.$t(`exchangeAssets.confirm${type}`);
             t.tokenId = tokenId;
@@ -97,10 +118,16 @@ export default {
         },
         confirmClick() {
             if (!this.testAmount()) return;
+            const tokenId = this.c.tokenId;
+            const amount = BigNumber.toMin(
+                this.opNumber,
+                this.balance[tokenId].decimals
+            );
+            console.log(amount);
             this.c.type.toLowerCase() === "charge" &&
-                deposit({ tokenId: this.c.tokenId, amount: this.opNumber });
+                deposit({ tokenId, amount });
             this.c.type.toLowerCase() === "withdraw" &&
-                withdraw({ tokenId: this.c.tokenId, amount: this.opNumber });
+                withdraw({ tokenId, amount });
         },
         testAmount() {
             const amountBalance =
@@ -178,8 +205,13 @@ export default {
         list() {
             return Object.keys(this.balance)
                 .map(k => this.balance[k])
-                .filter(v => v)
-                .sort((a, b) => a.available - b.available);
+                .filter(v => {
+                    const NOTnoZero = this.filter.hideZero && v.balance === "0";
+                    const NOTmatchKey =
+                        this.filter.filterKey &&
+                        !v.symbol.match(new RegExp(this.filter.filterKey));
+                    return !(NOTnoZero || NOTmatchKey);
+                });
         }
     }
 };
@@ -189,7 +221,7 @@ export default {
 .ex_tb {
     height: 100%;
     padding-bottom: 10px;
-    flex:1;
+    flex: 1;
 }
 @include rowWith {
     width: 8%;

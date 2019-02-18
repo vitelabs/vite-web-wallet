@@ -27,11 +27,22 @@
                 <div>{{v.average}}</div>
                 <div>{{v.fee}}</div>
                 <div>{{v.status}}</div>
+                <div @click="showDetail(v)">{{$t("exchangeOrderHistory.rowMap.detail")}}</div>
             </div>
         </div>
+        <confirm
+            v-show="detailConfirm"
+            :list="detailList"
+            :close="close"
+            :heads="$t('exchangeOrderHistory.confirmTable.heads')"
+        >
+
+        </confirm>
     </div>
 </template>
 <script>
+import confirm from "../components/alert";
+import {orderDetail} from "services/exchange";
 export default {
     props: {
         list: {
@@ -39,13 +50,28 @@ export default {
             default: () => []
         }
     },
+    components:{
+        confirm
+    },
     data() {
         return {
             sortIndex: 0,
-            sortType: 1
+            sortType: 1,
+            detailList:[],
+            detailConfirm:false
         };
     },
     methods: {
+        close(){
+            this.detailList=[];
+            this.detailConfirm=false;
+        },
+        showDetail(order){
+            orderDetail({orderId:order.orderId,fToken:order.fToken,tToken:order.tToken,pageNo:1,pageSize:100}).then(data=>{
+                this.detailList=data;
+            })
+            this.detailConfirm=true;
+        },
         sortBy(i) {
             if (i === this.sortIndex) {
                 this.sortType *= -1;

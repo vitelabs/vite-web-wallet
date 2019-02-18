@@ -16,15 +16,19 @@
     </div>
 </template>
 <script>
+// optype: 1充值，2提现； optime单位是秒；
 import Table from "./table";
 import Search from "components/search"
 export default {
     data() {
         return {
             hideZero: false,
-            filterKey: ""
+            filterKey: "",
+            acc:null,
+            addr:""
         };
     },
+
     components: {
         Table,
         Search

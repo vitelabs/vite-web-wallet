@@ -5,7 +5,7 @@
             :list="data"
             class="tb"
         ></Table>
-        <Pagination></Pagination>
+        <Pagination :currentPage="currentPage" :toPage="toPage" :totalPage="totalPage"></Pagination>
     </div>
 </template>
 <script>
@@ -13,6 +13,7 @@ import Filters from "./filters";
 import Table from "./table";
 import { order } from "services/exchange";
 import Pagination from "components/pagination";
+const pageSize=10;
 export default {
     components: {
         Filters,
@@ -22,13 +23,17 @@ export default {
     data() {
         return {
             data: [],
-            currentIndex:1
+            currentPage:0,
+            totalPage:0
         };
     },
     beforeMount() {
         this.update();
     },
     methods: {
+        toPage(){
+            this.update(this.filters)
+        },
         submit(v){
             this.update(v)
         },
@@ -37,9 +42,10 @@ export default {
             if (!account) return;
             const address=account.getDefaultAddr()
             order({
-                address,...filters,pageNum:10,pageIndex:this.currentIndex
+                address,...filters,pageNum:10,pageIndex:this.currentPage
             }).then(data => {
-                this.data = data;
+                this.totalPage=Math.ceil(this.data.totalSize/pageSize)
+                this.data = data.orders||[];
             });
         }
     }
