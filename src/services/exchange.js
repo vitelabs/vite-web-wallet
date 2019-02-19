@@ -64,13 +64,13 @@ export const order = function ({
 };
 
 export const orderDetail = function({
-    orderId, ftoken, ttoken
+    orderId, ftoken, ttoken,pageNo,pageSize
 }) {
     return request({
         path: path + '/tx/details',
         method: 'GET',
         params: {
-            orderId, ftoken, ttoken
+            orderId, ftoken, ttoken,pageNo,pageSize
         }
     });
 };
@@ -187,10 +187,12 @@ export const tokenMap = function({
 };
 export async function chargeDetail({tokenId,address}){
     return await request({
-        pageSize:10,
-        pageNo:1,
-        tokenId,
-        address
+        path: path + '/fund/record',
+        method: 'GET',
+        params: { pageSize:100,
+            pageNo:1,
+            tokenId,
+            address}
     });
 }
 export const deposit=async function({tokenId,amount}){
@@ -202,3 +204,8 @@ export const withdraw=async function({tokenId,amount}){
     // const abi=utils.abi.encodeFunctionCall({'type':'function','name':'DexFundUserDeposit', 'inputs':[]},[]);
     return await wallet.getActiveAccount().callContract({toAddress:'vite_000000000000000000000000000000000000000617d47459a8', jsonInterface:{'type':'function','name':'DexFundUserWithdraw', 'inputs':[{'name':'token','type':'tokenId'},{'name':'amount','type':'uint256'}]}, params:[tokenId, amount],tokenId,amount:'0'});
 };
+
+// export const cancel =async function({orderId,tradeToken,side}){
+//     		// return await wallet.getActiveAccount().callContract({'type':'function','name':'DexTradeCancelOrder', 'inputs':[{'name':'orderId','type':'bytes'}, {'name':'tradeToken','type':'tokenId'}, {'name':',quoteToken','type':'tokenId'}, {'name':'side', 'type':'bool'}]}),param:[];
+
+// };

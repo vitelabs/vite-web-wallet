@@ -2,6 +2,7 @@
     <div class="confirm-container gray" >
         <div class="confirm-wrapper">
             <div class="title">
+                <span>{{title}}</span>
                 <span @click="close" class="close-icon __pointer"></span>
             </div>
             <div class="content-wrapper" >
@@ -10,9 +11,8 @@
             <div
                 v-for="(h) in heads"
                 :key="h"
-            >{{h.replace("#tokenSymbol#","vite")}}
+            >{{h}}
             </div>
-            <div></div>
         </div>
         <div class="row-container">
             <div
@@ -43,6 +43,10 @@ export default {
         list:{
             type:Array,
             default:[]
+        },
+        title:{
+            type:String,
+            default:""
         }
     }
 };
@@ -56,12 +60,9 @@ export default {
     padding-bottom: 10px;
 }
 @include rowWith {
-    width: 8%;
-    &:first-child,
-    &:nth-child(4),
-    &:nth-child(5),
-    &:nth-child(6) {
-        width: 15%;
+    width: 20%;
+    &:first-child{
+        width:40%
     }
 }
 .buy {
@@ -90,69 +91,38 @@ export default {
 
 .confirm-wrapper {
     width: 90%;
-    max-width: 460px;
+    max-width: 960px;
     max-height: 85%;
     display: flex;
     flex-direction: column;
     background: #FFFFFF;
-    box-shadow: 0 2px 48px 1px rgba(176,192,237,0.42);
     border-radius: 2px;
     .title {
         height: 60px;
         line-height: 60px;
-        padding-left: 30px;
+        padding:0 30px;
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px solid #ccc;
         font-family: $font-bold, arial, sans-serif;
         font-size: 16px;
-        color: #FFFFFF;
+        color: #5E6875;
+        align-items: center;
         .close-icon {
             box-sizing: border-box;
-            display: block;
-            float: right;
-            padding: 30px;
             width: 20px;
             height: 20px;
-            background: url('~assets/imgs/confirm_close.svg') no-repeat center;
+            background: url('~assets/imgs/exchange/close.svg') no-repeat center;
             background-size: 20px 20px;
         }
     }
     .content-wrapper {
         position: relative;
         box-sizing: border-box;
-        padding: 30px;
         overflow: auto;
-        font-family: $font-bold, arial, sans-serif;
         font-size: 18px;
         color: #1D2024;
         line-height: 26px;
-    }
-    .bottom {
-        padding: 0 30px;
-        display: flex;
-        min-height: 80px;
-        box-sizing: border-box;
-        justify-content: space-between;
-        .__btn {
-            white-space: nowrap;
-            display: inline-block;
-            width: 48%;
-            max-width: 190px;
-            font-family: $font-bold, arial, sans-serif;
-            color: #FFFFFF;
-            &.btn-left {
-                box-sizing: border-box;
-                border: 1px solid #007AFF;
-                border-radius: 2px;
-                color: #007AFF;
-            }
-            &.unuse {
-                background: #efefef;
-                color: #666;
-            }
-        }
-        .btn-single {
-            width: 100%;
-            max-width: 100%;
-        }
     }
 }
 </style>

@@ -58,6 +58,8 @@
             v-show="detailConfirm"
             :list="detailList"
             :heads="$t('exchangeAssets.confirmTable.heads')"
+            :title="'成交记录'"
+            :close="close"
         >
 
         </alert>
@@ -69,6 +71,7 @@ import alert from "../components/alert.vue";
 import confirm from "components/confirm.vue";
 import { deposit, withdraw, chargeDetail } from "services/exchange";
 import BigNumber from "utils/bigNumber";
+const VoteDifficulty = '201564160';
 export default {
     props: {
         filter: { type: Object }
@@ -89,7 +92,9 @@ export default {
             opNumber: "",
             confirmShow: false,
             detailList: [],
-            detailConfirm: false
+            detailConfirm: false,
+            acc:null,
+            addr:""
         };
     },
     methods: {
@@ -101,8 +106,8 @@ export default {
         },
         detail(tokenId) {
             this.detailConfirm = true;
-            chargeDetail({ address: this.address, tokenId }).then(data => {
-                this.detailList = data;
+            chargeDetail({ address: this.addr, tokenId }).then(data => {
+                this.detailList = data.records;
             });
         },
         close() {
@@ -123,11 +128,46 @@ export default {
                 this.opNumber,
                 this.balance[tokenId].decimals
             );
-            console.log(amount);
-            this.c.type.toLowerCase() === "charge" &&
-                deposit({ tokenId, amount });
-            this.c.type.toLowerCase() === "withdraw" &&
-                withdraw({ tokenId, amount });
+            const failSubmit=e => {
+                const code = e && e.error ? e.error.code || -1 : e ? e.code : -1;
+                if (code === -35002) {
+                    let startTime = new Date().getTime();
+                    const c = Object.assign({}, this.$t('quotaConfirmPoW'));
+                    c.leftBtn.click = () => {
+                        this.$router.push({
+                            name: 'walletQuota'
+                        });
+                    };
+                    (c.rightBtn.click = () => {
+                        this.$refs.pow.startPowTx(e.accountBlock, startTime, VoteDifficulty)
+                            .then(successSubmit)
+                            .catch(failSubmit);
+                    }),
+                    (c.closeBtn = { show: true });
+                    this.$confirm(c);
+                } else {
+                    this.$toast(this.$t('walletVote.section1.cancelVoteErr'), e);
+                }
+            };
+            const successSubmit=()=>{
+                this.$toast("提现成功")
+            }
+            this.acc.initPwd(
+                {
+                    submitTxt: this.$t(
+                        "walletVote.section1.confirm.submitText"
+                    ),
+                    cancelTxt: this.$t(
+                        "walletVote.section1.confirm.cancelText"
+                    ),
+                    submit: () => {
+                        this.c.type.toLowerCase() === "charge"
+                            ? deposit({ tokenId, amount })
+                            : withdraw({ tokenId, amount });
+                    }
+                },
+                true
+            );
         },
         testAmount() {
             const amountBalance =
@@ -136,7 +176,6 @@ export default {
                     : this.balance[this.c.tokenId].balance;
             const decimals = this.balance[this.c.tokenId].decimals;
             const result = this.$validAmount(this.opNumber, decimals);
-            console.log(4444, result);
             if (!result) {
                 this.c.errTips = this.$t("hint.amtFormat");
                 return false;
@@ -222,6 +261,8 @@ export default {
     height: 100%;
     padding-bottom: 10px;
     flex: 1;
+    box-shadow: 0px 2px 48px 1px rgba(176, 192, 237, 0.42);
+
 }
 @include rowWith {
     width: 8%;

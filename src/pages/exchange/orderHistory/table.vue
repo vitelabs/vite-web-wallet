@@ -9,7 +9,7 @@
                     @click="sortBy(i)"
                 ></div>
             </div>
-
+    <div></div>
         </div>
         <div class="row-container">
             <div
@@ -27,7 +27,7 @@
                 <div>{{v.average}}</div>
                 <div>{{v.fee}}</div>
                 <div>{{v.status}}</div>
-                <div @click="showDetail(v)">{{$t("exchangeOrderHistory.rowMap.detail")}}</div>
+                <div @click="showDetail(v)"  class="click-able">{{$t("exchangeOrderHistory.table.rowMap.detail")}}</div>
             </div>
         </div>
         <confirm
@@ -67,8 +67,8 @@ export default {
             this.detailConfirm=false;
         },
         showDetail(order){
-            orderDetail({orderId:order.orderId,fToken:order.fToken,tToken:order.tToken,pageNo:1,pageSize:100}).then(data=>{
-                this.detailList=data;
+            orderDetail({orderId:order.orderId,ftoken:order.ftoken,ttoken:order.ttoken,pageNo:1,pageSize:100}).then(data=>{
+                this.detailList=data.details;
             })
             this.detailConfirm=true;
         },
