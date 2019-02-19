@@ -45,7 +45,6 @@ export default {
     },
     watch: {
         _value: function() {
-            console.log(this._value);
             this.value = this._value;
         },
         value: function() {
