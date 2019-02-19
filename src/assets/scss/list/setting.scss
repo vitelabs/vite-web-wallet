@@ -1,0 +1,47 @@
+@import "~assets/scss/vars.scss";
+
+.setting.common-list-wrapper {
+    width: 250px;
+    border: 1px solid #D4DEE7;
+    border-radius: 2px;
+    font-size: 14px;
+    color: #5E6875;
+    .list-title {
+        position: relative;
+        display: inline-block;
+        width: 100%;
+        box-sizing: border-box;
+        padding: 10px 12px;
+        background: #FFFFFF;
+        &:after {
+            content: '';
+            display: inline-block;
+            position: absolute;
+            top: 50%;
+            right: 20px;
+            width: 16px;
+            height: 16px;
+            margin-top: -8px;
+        }
+        &.down {
+            &:after {
+                background: url('~assets/imgs/down_icon.svg');
+                background-size: 16px 16px;
+            }
+        }
+        &.up {
+            &:after {
+                background: url('~assets/imgs/up_icon.svg');
+                background-size: 16px 16px;
+            }
+        }
+    }
+    .list {
+        li {
+            box-sizing: border-box;
+            padding: 10px 12px;
+            background: #FFFFFF;
+            border-top: 1px solid #D4DEE7;
+        }
+    }
+}

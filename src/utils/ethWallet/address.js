@@ -1,5 +1,6 @@
 const bip39 = require('bip39');
 const hdkey = require('ethereumjs-wallet/hdkey');
+
 const hdPathString = 'm/44\'/60\'/0\'/0';
 
 export function getWalletAddr(mnemonic, index) {
@@ -23,6 +24,7 @@ export function getWrongWalletAddr(mnemonic, index) {
     };
 }
 
+// It's Wrong !!!!!!!!!!
 function getRootByHex(mnemonic) {
     let seed = bip39.mnemonicToSeedHex(mnemonic);
     let hdWallet = hdkey.fromMasterSeed(seed);

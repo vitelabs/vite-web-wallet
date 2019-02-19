@@ -1,89 +1,62 @@
-/**  vite-wallet index-layout */
-
 <template>
     <div class="app-wrapper">
-        <index-layout v-if="layoutType === 'index'">
-            <start v-if="active === 'index'"></start>
-            <router-view/>
-        </index-layout>
-
-        <page-layout :active="active" v-else>
-            <router-view/>
+        <page-layout
+            v-if="active.indexOf('start') !== 0"
+            :active="active"
+        >
+            <router-view />
         </page-layout>
 
+        <router-view v-else />
+
         <update></update>
-        <first-notice></first-notice>
+        <first-notice v-if="active === 'start'"></first-notice>
     </div>
 </template>
 
 <script>
-import indexLayout from 'components/indexLayout.vue';
-import pageLayout from 'components/pageLayout.vue';
+import pageLayout from 'components/pageLayout';
 import update from 'components/update.vue';
 import firstNotice from 'components/firstNotice.vue';
-import start from 'components/start/index.vue';
-import { timer } from 'utils/asyncFlow';
-import loopTime from 'config/loopTime';
-
-import routeConfig from 'routes';
-let balanceInfoInst = null;
+import routeConfig from 'router/routes';
 
 export default {
     components: {
-        indexLayout, pageLayout, update, firstNotice, start
+        update,
+        firstNotice,
+        pageLayout
     },
     mounted() {
         this.changeLayout(this.$route.name);
-        this.$router.afterEach((to, from)=>{
-            this.changeLayout(to.name, from.name);
+        this.$router.afterEach(to => {
             this.active = to.name;
+        });
+
+        // Listen login status to loopBalance
+        this.$wallet.onLogin(() => {
+            this.$store.dispatch('startLoopBalance');
+        });
+        this.$wallet.onLogout(() => {
+            this.$store.dispatch('stopLoopBalance');
         });
     },
     data() {
         return {
-            layoutType: 'index',
+            layoutType: 'start',
             active: this.$route.name
         };
     },
+    watch: {
+        active: function() {
+            this.changeLayout();
+            this.$offKeyDown();
+        }
+    },
     methods: {
-        changeLayout(to, from) {
-            let toHome = routeConfig.indexLayoutRoutes.indexOf(to) === -1;
-            let fromHome = routeConfig.indexLayoutRoutes.indexOf(from) === -1;
-
-            if (toHome) {
-                this.layoutType = 'home';
-                this.startLoopBalance();
-                return;
-            }
-        
-            this.stopLoopBalance();
-            this.layoutType = 'index';
-            if (!fromHome) {
-                return;
-            }
-
-            // clear all
-            let activeAccount = this.$wallet.getActiveAccount();
-            activeAccount && activeAccount.lock();
-            activeAccount && activeAccount.releasePWD();
-            this.$wallet.clearActiveAccount();
-                        
-            this.$store.commit('commitClearBalance');
-            this.$store.commit('commitClearTransList');
-            this.$store.commit('commitClearPledge');
-        },
-
-        startLoopBalance() {
-            this.stopLoopBalance();
-            let activeAccount = this.$wallet.getActiveAccount();
-            balanceInfoInst = new timer(()=>{
-                return this.$store.commit('commitBalanceInfo', activeAccount);
-            }, loopTime.ledger_getBalance);
-            balanceInfoInst.start();
-        },
-        stopLoopBalance() {
-            balanceInfoInst && balanceInfoInst.stop();
-            balanceInfoInst = null;
+        changeLayout() {
+            let toHome =
+                routeConfig.indexLayoutRoutes.indexOf(this.active) === -1;
+            this.layoutType = toHome ? 'home' : 'start';
         }
     }
 };
@@ -97,11 +70,5 @@ export default {
     right: 0;
     bottom: 0;
     overflow: auto;
-    min-height: 720px;
-}
-@media only screen and (max-width: 1000px) {
-    .app-wrapper {
-        min-height: auto;
-    }
 }
 </style>

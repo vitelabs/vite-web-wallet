@@ -5,17 +5,17 @@ import 'utils/performance';
 import './assets/scss/mixins.scss';
 
 import Vue from 'vue';
+Vue.config.devtools = process.env.NODE_ENV === 'dev';
 import VueRouter from 'vue-router';
 
 import App from 'pages/index.vue';
-import routeConfig from 'routes';
+import initRouter from 'router/index.js';
 
 import 'utils/eventEmitter.js';
 import 'utils/viteWallet/index.js';
 
 import { i18n } from 'i18n';
 import store from './store';
-import statistics from 'utils/statistics';
 import { initPwdConfirm } from 'components/password/index.js';
 import { initQuotaConfirm } from 'components/quota/index.js';
 
@@ -28,7 +28,7 @@ Vue.use(VueRouter);
 Vue.use(clickOutside);
 
 // Start loading animate
-let element  = document.getElementById('loading');
+let element = document.getElementById('loading');
 element.className += 'spinner big-spinner';
 
 setTimeout(() => {
@@ -39,31 +39,7 @@ setTimeout(() => {
 setTimeout(() => {
     reSave();
 
-    // Init router
-    const router = new VueRouter({
-        mode: process.env.NODE_ENV === 'dev' ? 'hash' : 'history',
-        routes: routeConfig.routes
-    });
-    router.beforeEach((to, from, next) => {
-        // Windows APP
-        if (!to.name && to.path) {
-            let arr = to.path.split('/');
-            router.replace({
-                name: arr[ arr.length - 1 ] || 'index'
-            });
-            return;
-        }
-
-        if (!from.name && to.name !== 'index') {
-            router.replace({
-                name: 'index'
-            });
-            return;
-        }
-
-        statistics.pageView(to.path);
-        next();
-    });
+    const router = initRouter(VueRouter);
 
     initPwdConfirm(i18n);
     initQuotaConfirm(i18n, router);

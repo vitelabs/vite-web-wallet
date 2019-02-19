@@ -3,13 +3,13 @@
              :content="content" :showMask="showMask"
              :leftBtnTxt="cancelTxt || $t('btn.cancel')" :rightBtnTxt="submitTxt || $t('btn.submit')"
              :leftBtnClick="exchange?_submit:_cancle"  :rightBtnClick="exchange?_cancle:_submit">
-        <div v-show="isShowPWD" class="pass-input" :class="{
+        <form autocomplete="off" v-show="isShowPWD" class="pass-input" :class="{
             'distance': !!content
         }">
             <!-- Safari autocomplete -->
             <!-- <input fake_pass type="password" style="display:none"/> -->
             <input v-model="password" :placeholder="$t('pwdConfirm.placeholder')" type="password"/>
-        </div>
+        </form>
         <div v-show="isShowPWD && isShowPWDHold" class="hold-pwd __pointer" @click="toggleHold">
             <span :class="{ 'active': isPwdHold }"></span>
             {{ $t('pwdConfirm.conf') }}

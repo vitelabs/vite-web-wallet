@@ -2,6 +2,7 @@
     "lang": "EN",
     "start": "Start",
     "login": "Log In",
+    "register": "注册",
     "createAcc": "Create",
     "settingAcc": "Setting Account",
     "resetAcc": "Reset Your Account",
@@ -132,9 +133,17 @@
         "open": "Vite Github",
         "addAddr": "Add Address",
         "addrList": "Addresses of Accounts",
-        "setDefault": "Select Default Address"
+        "setDefault": "Select Default Address",
+        "autoLogout": "自动退出登录时间",
+        "timeList": {
+            "5": "5分钟",
+            "10": "10分钟",
+            "30": "30分钟",
+            "60": "1小时",
+            "720": "12小时"
+        }
     },
-    "create": {
+    "startCreate": {
         "input": "Please input password",
         "again": "Please input password again",
         "choose": "Choose account",
@@ -148,7 +157,7 @@
             "pwFormat": "Wrong password format. The password only supports English, half-width symbols, numbers."
         }
     },
-    "imported": {
+    "startImport": {
         "title": "Import",
         "dragDrop": {
             "text": "Drag and drop files there",
@@ -158,8 +167,8 @@
             "hint": "Noted that login by importing keystore file cannot support creating multi addresses, using mnemonic seed phrase is recommended in cross-platform situations."
         }
     },
-    "account": {
-        "title": "Account Detail",
+    "wallet": {
+        "title": "资产",
         "transfer": "Transfer",
         "getTestToken": "Get Test Tokens",
         "transDetail": "More Transaction Details",
@@ -185,8 +194,8 @@
             "powTransErr": "Insufficient quota of PoW, we'd recommend that you stake VITE to obtain quota."
         }
     },
-    "quota": {
-        "title": "Get Quota",
+    "walletQuota": {
+        "title": "配额管理",
         "help": {
             "title": "Quick Understanding of Quota"
         },
@@ -196,12 +205,12 @@
         "fromAddr": "Deduction address",
         "time": "Staking Freeze Duration",
         "aboutDays": "Approx {day} days",
-        "amountPlaceholder": "Please input staking amount, minimum 10 VITE",
+        "amountPlaceholder": "Please input staking amount, minimum {num} VITE",
+        "limitAmt": "Staking amount should not be less than {num}.",
         "addrPlaceholder": "Please input quota recipient address",
         "inputWithdrawAmount": "Please input withdraw amount",
         "pledgeFail": "Failed to Submit",
         "canclePledgeFail": "Failed",
-        "limitAmt": "Staking amount should not be less than 10.",
         "maturity": "Staking has expired!",
         "maxAmt": "Withdraw amount should be in (0, {amount}]",
         "withdrawalStaking": "Withdrawal of Staked Token",
@@ -233,7 +242,7 @@
             "unexpired": "Temporarily cannot make withdrawal of staked token until due date"
         }
     },
-    "transList": {
+    "walletTransList": {
         "title": "Transactions",
         "tType": {
             "title": "Type",
@@ -249,8 +258,8 @@
         "tAddress": "Address",
         "sum": "Amount"
     },
-    "SBP": {
-        "title": "SBP Registration",
+    "walletSBP": {
+        "title": "SBP",
         "help": {
             "title": "About SBP",
             "text": "SBP（Snapshot Block Producer）is a node that has right to create blocks, you can register to become a SBP candidate by staking a certain amount of VITE, each round (about 75 seconds) will elect 25 SBPs, the SBPs will be elected from random 23 out of top 25 candidate nodes, plus random 2 out of the candidate nodes ranking 26th-100th on the list. The 50% of block creation rewards will be allocated to the block creation node, the other 50% will be allocated to nodes that are ranked on top 100 as voting rewards. <br/><br/> One registration address (staking address) can register multiple block creation nodes (node names), a node name cannot be used if the node name has been registered by a registration address. A node name can switch block creation address, however, block creation address cannot be reused by other node names."
@@ -301,14 +310,14 @@
             }
         }
     },
-    "vote": {
+    "walletVote": {
         "title": "Voting",
         "help": {
             "title": "About Voting",
             "text": "You can join and vote for 25 SBPs （Snapshot Block Producer), each round of voting lasts 75s, the polls you can use for voting are equivalent to the amount of VITE tokens owned by voting address, the default selection is the choice of previous round, the SBPs will be chosen from random 23 out of top 25 candidate nodes, plus random 2 out of the candidate nodes ranking 26th-100th on the list, 25 SBPs in total."
         },
         "toReward": "View my rewards",
-        "Voting": "Voting",
+        "voting": "Voting",
         "search": "Please input node name or block creation address",
         "addrNoExistErr": "You aren't able to vote for now as your address has no transaction record before",
         "revokeVoting": "Revoke voting",
@@ -366,7 +375,7 @@
             "voteErr": "Failed to vote, please try again"
         }
     },
-    "conversion": {
+    "walletConversion": {
         "title": "VITE Conversion",
         "help": {
             "title": "Quick Understanding of VITE Conversion",
@@ -382,6 +391,155 @@
             "viteAmount": "Conversion Amount",
             "btn": "Ready to Convert",
             "success": "Conversion Successful. It may take approx 20 minutes to get VITE into your account after the Ethereum transaction is confirmed."
+        }
+    },
+    "exchange": {
+        "title": "Exchange",
+        "search": "Search",
+        "txPair": "Pair",
+        "price": "Price",
+        "upDown": "Change%",
+        "txNum": "Amount",
+        "quantityTitle": "Amount({quantity})",
+        "priceTitle": "Price({price})",
+        "amountTitle": "Filled({amount})",
+        "amount": "Total",
+        "newOrderSuccess": "提单成功",
+        "buy": {
+            "title": "Buy {token}",
+            "price": "Price",
+            "quantity": "Amount"
+        },
+        "sell": {
+            "title": "Sell {token}",
+            "price": "Price",
+            "quantity": "Amount"
+        },
+        "head": {
+            "latestPrice": "Last Price",
+            "updown": "24h Change",
+            "highPrice": "24h High",
+            "lowPrice": "24h Low",
+            "quantity": "24h Volume",
+            "tokenName": "Token",
+            "tokenShow": "Abbr",
+            "tokenId": "Token ID",
+            "publisher": "Issuer",
+            "total": "Total",
+            "tokenDigit": "decimals",
+            "publisherDate": "Issuance Date",
+            "type": "Status",
+            "tokenType0": "Issuance Available",
+            "tokenType1": "Never Issued"
+        },
+        "latestTx": {
+            "title": "Last Transaction",
+            "time": "Time"
+        },
+        "depth": {
+            "buy": "Buy",
+            "sell": "Sell",
+            "all": "All"
+        },
+        "noData": {
+            "favorite": "You have no favorite yet",
+            "search": "No result found"
+        },
+        "limitPrice": {
+            "title": "Limit",
+            "fee": "Fee",
+            "text": "此页面为交易预览信息，请登录后进行交易"
+        }
+    },
+    "exchangeAssets": {
+        "title": "Funds",
+        "search":"请输入代币名称",
+        "confirmTable": {
+            "heads": [
+                "日期",
+                "代币名称",
+                "交易类型",
+                "交易金额"
+            ]
+        },
+        "table": {
+            "heads": [
+                "代币名称",
+                "钱包余额",
+                "交易所账户余额",
+                "委托中",
+                "价值"
+            ],
+            "rowMap": {
+                "recharge": "充币至交易所",
+                "withdraw": "提币至钱包",
+                "detail": "查看明细"
+            }
+        },
+        "confirmrecharge": {
+            "title": "充币至交易所",
+            "lable1": "钱包余额",
+            "lable2": "充币金额",
+            "tips": "钱包账户余额不足",
+            "placeholder": "请输入充币金额",
+            "btn": "充币至交易所"
+        },
+        "confirmwithdraw": {
+            "title": "提币至钱包",
+            "lable1": "可提币余额",
+            "lable2": "提币金额",
+            "tips": "钱包账户余额不足",
+            "placeholder": "请输入提币金额",
+            "btn": "提币至钱包"
+        }
+    },
+    "exchangeOpenOrders": {
+        "title": "Open Orders",
+        "side": {
+            "1": "卖",
+            "0": "买"
+        },
+        "table": {
+            "heads": [
+                "委托时间",
+                "市场",
+                "方向",
+                "委托价格",
+                "委托数量(#tokenSymbol#)",
+                "已成交(#tokenSymbol#)",
+                "成交率",
+                "成交均价"
+            ],
+            "rowMap": {
+                "cancel": "撤销"
+            }
+        }
+    },
+    "exchangeOrderHistory": {
+        "title": "Order History",
+        "side": {
+            "1": "卖",
+            "0": "买"
+        },
+        "confirmTable":{
+            "heads":["成交时间", "成交价", "成交量", "手续费" ,"成交金额"]
+        },
+        "table": {
+            "heads": [
+                "委托时间",
+                "市场",
+                "方向",
+                "委托价格",
+                "委托数量(#tokenSymbol#)",
+                "已成交(#tokenSymbol#)",
+                "成交率",
+                "成交均价",
+                "手续费",
+                "状态"
+            ],
+            "rowMap": {
+                "detail": "查看明细"
+            }
         }
     }
 }

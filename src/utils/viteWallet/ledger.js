@@ -4,7 +4,7 @@ import vcpIcon from 'assets/imgs/VCC.svg';
 import vttIcon from 'assets/imgs/vtt.svg';
 
 const ViteId = 'tti_5649544520544f4b454e6e40';
-const defaultTokenList = {
+const defaultTokenList = process.env.NODE_ENV === 'production' ? {
     'tti_5649544520544f4b454e6e40': {
         'tokenSymbol': 'VITE',
         icon: viteIcon
@@ -17,11 +17,20 @@ const defaultTokenList = {
         'tokenSymbol': 'VTT',
         icon: vttIcon
     }
+} : {
+    'tti_5649544520544f4b454e6e40': {
+        'tokenSymbol': 'VITE',
+        icon: viteIcon
+    }, 
+    'tti_2d95b4ae402bbcf1429aa1e5': {
+        'tokenSymbol': 'VCP',
+        icon: vcpIcon
+    }, 
+    'tti_6ac4abf1b4e855ba31620f0a': {
+        'tokenSymbol': 'VTT',
+        icon: vttIcon
+    }
 };
-
-// Test ENV
-// VCP tti_e1f1d23a9d3e5e1b6ca6c374
-// VTT tti_c23c7534356090754332f726
 
 let loopHeightTimeout;
 
