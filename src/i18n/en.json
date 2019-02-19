@@ -453,6 +453,15 @@
     },
     "exchangeAssets": {
         "title": "Funds",
+        "search":"请输入代币名称",
+        "confirmTable": {
+            "heads": [
+                "日期",
+                "代币名称",
+                "交易类型",
+                "交易金额"
+            ]
+        },
         "table": {
             "heads": [
                 "代币名称",
@@ -466,6 +475,22 @@
                 "withdraw": "提币至钱包",
                 "detail": "查看明细"
             }
+        },
+        "confirmrecharge": {
+            "title": "充币至交易所",
+            "lable1": "钱包余额",
+            "lable2": "充币金额",
+            "tips": "钱包账户余额不足",
+            "placeholder": "请输入充币金额",
+            "btn": "充币至交易所"
+        },
+        "confirmwithdraw": {
+            "title": "提币至钱包",
+            "lable1": "可提币余额",
+            "lable2": "提币金额",
+            "tips": "钱包账户余额不足",
+            "placeholder": "请输入提币金额",
+            "btn": "提币至钱包"
         }
     },
     "exchangeOpenOrders": {
@@ -496,6 +521,9 @@
             "1": "卖",
             "0": "买"
         },
+        "confirmTable":{
+            "heads":["成交时间", "成交价", "成交量", "手续费" ,"成交金额"]
+        },
         "table": {
             "heads": [
                 "委托时间",
@@ -508,7 +536,10 @@
                 "成交均价",
                 "手续费",
                 "状态"
-            ]
+            ],
+            "rowMap": {
+                "detail": "查看明细"
+            }
         }
     }
 }

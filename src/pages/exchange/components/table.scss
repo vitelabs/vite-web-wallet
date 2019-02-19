@@ -9,7 +9,6 @@
 .ex_tb {
     padding-top: 71px;
     position: relative;
-    box-shadow: 0px 2px 48px 1px rgba(176, 192, 237, 0.42);
     border-radius: 2px;
     background: #fff;
     .head-row {
@@ -18,28 +17,39 @@
         height: 71px;
         color: #1D2024;
         width: 100%;
+        box-sizing: border-box;
         font: $font-bold;
         display: flex;
         padding: 0 30px;
         >div {
+            justify-content: center;
             display: flex;
             margin: 0 5px;
             align-items: center;
+            &:first-child {
+                justify-content: flex-start;
+            }
+            &:last-child {
+                justify-content: flex-end;
+            }
             .sort-btn {
+                background: url(~assets/imgs/exchange/ascend.png), url(~assets/imgs/exchange/decend.png) 0 8px;
+                background-size: contain;
+                background-repeat: no-repeat;
                 width: 16px;
                 margin-left: 2px;
-                background: #1D2024;
                 height: 16px;
                 cursor: pointer;
             }
         }
     }
-    .row-container{
+    .row-container {
         height: 100%;
         overflow-x: hidden;
-        overflow-y:scroll;
+        overflow-y: scroll;
     }
     .row {
+        box-sizing: border-box;
         height: 65px;
         color: #5E6875;
         line-height: 65px;
@@ -55,6 +65,13 @@
             display: flex;
             margin: 0 5px;
             align-items: center;
+            justify-content: center;
+            &:first-child {
+                justify-content: flex-start;
+            }
+            &:last-child {
+                justify-content: flex-end;
+            }
         }
     }
 }

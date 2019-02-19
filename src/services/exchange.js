@@ -66,13 +66,13 @@ export const order = function ({
 };
 
 export const orderDetail = function({
-    orderId, ftoken, ttoken
+    orderId, ftoken, ttoken,pageNo,pageSize
 }) {
     return request({
         path: path + '/tx/details',
         method: 'GET',
         params: {
-            orderId, ftoken, ttoken
+            orderId, ftoken, ttoken,pageNo,pageSize
         }
     });
 };
@@ -187,25 +187,32 @@ export const tokenMap = function({
         }
     });
 };
-
-export const deposit=async function({tokenId,amount}){
-    return await wallet.getActiveAccount().callContract({
-        toAddress:'vite_000000000000000000000000000000000000000617d47459a8', 
-        jsonInterface:{'type':'function','name':'DexFundUserDeposit', 'inputs':[]}, 
-        tokenId, amount
+export async function chargeDetail({tokenId,address}){
+    return await request({
+        path: path + '/fund/record',
+        method: 'GET',
+        params: { pageSize:100,
+            pageNo:1,
+            tokenId,
+            address}
     });
+}
+export const deposit=async function({tokenId,amount}){
+    // const abi=utils.abi.encodeFunctionCall({'type':'function','name':'DexFundUserDeposit', 'inputs':[]},[]);
+    return await wallet.getActiveAccount().callContract({toAddress:'vite_000000000000000000000000000000000000000617d47459a8', jsonInterface:{'type':'function','name':'DexFundUserDeposit', 'inputs':[]}, tokenId, amount,params:[]});
 };
 
 export const withdraw=async function({tokenId,amount}){
-    return await wallet.getActiveAccount().callContract({
-        toAddress:'vite_000000000000000000000000000000000000000617d47459a8', 
-        jsonInterface:{'type':'function','name':'DexFundUserDeposit', 'inputs':[]}, 
-        tokenId, amount
-    });
+    // const abi=utils.abi.encodeFunctionCall({'type':'function','name':'DexFundUserDeposit', 'inputs':[]},[]);
+    return await wallet.getActiveAccount().callContract({toAddress:'vite_000000000000000000000000000000000000000617d47459a8', jsonInterface:{'type':'function','name':'DexFundUserWithdraw', 'inputs':[{'name':'token','type':'tokenId'},{'name':'amount','type':'uint256'}]}, params:[tokenId, amount],tokenId,amount:'0'});
 };
 
+// export const cancel =async function({orderId,tradeToken,side}){
+//     		// return await wallet.getActiveAccount().callContract({'type':'function','name':'DexTradeCancelOrder', 'inputs':[{'name':'orderId','type':'bytes'}, {'name':'tradeToken','type':'tokenId'}, {'name':',quoteToken','type':'tokenId'}, {'name':'side', 'type':'bool'}]}),param:[];
+// };
+
 export const newOrder = function({
-    tradeToken, side, quoteToken, price, quantity
+    tradeToken, quoteToken, side, price, quantity
 }) {
     let orderId = getOrderId();
     return wallet.getActiveAccount().callContract({
