@@ -54,7 +54,7 @@
 import date from 'utils/date';
 import ellipsisAddr from 'utils/ellipsisAddr';
 import { tokenDetail } from 'services/exchange';
-import getTokenIcon from "utils/getTokenIcon"
+import getTokenIcon from 'utils/getTokenIcon';
 
 export default {
     data() {
