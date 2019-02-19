@@ -35,12 +35,14 @@ export default {
             this.update(this.filters);
         },
         submit(v){
-            this.update(v);
+            this.filters=v;
+            this.update(this.filters);
         },
         update(filters={}) {
             const account=this.$wallet.getActiveAccount();
             if (!account) return;
             const address=account.getDefaultAddr();
+            debugger
             order({
                 address,...filters,pageNum:10,pageIndex:this.currentPage
             }).then(data => {

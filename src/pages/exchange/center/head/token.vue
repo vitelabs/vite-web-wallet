@@ -51,16 +51,10 @@
 </template>
 
 <script>
-import Identicon from 'identicon.js';
 import date from 'utils/date';
-import { encoder } from 'utils/tools';
 import ellipsisAddr from 'utils/ellipsisAddr';
 import { tokenDetail } from 'services/exchange';
-
-const iconConfig = {
-    size: 100,
-    format: 'svg'
-};
+import getTokenIcon from "utils/getTokenIcon"
 
 export default {
     data() {
@@ -75,13 +69,13 @@ export default {
             if (!this.activeTxPair || !this.activeTxPair.ftoken) {
                 return '';
             }
-            return this.getTokenIcon(this.activeTxPair.ftoken);
+            return getTokenIcon(this.activeTxPair.ftoken);
         },
         ttokenIcon() {
             if (!this.activeTxPair || !this.activeTxPair.ttoken) {
                 return '';
             }
-            return this.getTokenIcon(this.activeTxPair.ttoken);
+            return getTokenIcon(this.activeTxPair.ttoken);
         },
         activeTxPair() {
             return this.$store.getters.exActiveTxPair;
@@ -120,16 +114,6 @@ export default {
         },
         hideToken() {
             this.showTokenType = '';
-        },
-        getTokenIcon(tokenId) {
-            let defaultToken = viteWallet.Ledger.tokenInfoMaps[tokenId];
-            if (defaultToken && defaultToken.icon) {
-                return defaultToken.icon;
-            }
-
-            let tokenHash = encoder.blake2b(tokenId);
-            let hexStr = encoder._Buffer(tokenHash).toString('hex');
-            return 'data:image/svg+xml;base64,' + new Identicon(hexStr, iconConfig).toString(); 
         },
         fetchToken(type = 'ttoken') {
             if (!this.activeTxPair || !this.activeTxPair[type]) {
