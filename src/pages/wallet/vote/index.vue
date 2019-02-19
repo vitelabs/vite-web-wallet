@@ -116,6 +116,9 @@ export default {
         };
     },
     methods: {
+        cleanCache() {
+            this.cache = null;
+        },
         hideTips() {
             this.isResisterTipsShow = false;
         },
@@ -325,14 +328,14 @@ export default {
           this.voteData[0] &&
           this.voteData[0].nodeName === this.cache.nodeName
                 ) {
-                    //投票中且投票成功
-                    this.cache = null;
+                    // voting and voting success
+                    this.cleanCache();
                 } else if (
                     this.cache.voteStatus === 'canceling' &&
           this.voteData.length === 0
                 ) {
-                    // 撤销中且撤销成功
-                    this.cache = null;
+                    // cancel and cancel success
+                    this.cleanCache();
                 }
             }
             if (this.cache) {

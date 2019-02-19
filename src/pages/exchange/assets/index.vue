@@ -8,24 +8,24 @@
             ></Search>
 
             <div class="filter"><input
-                    type="checkbox"
-                    v-model="hideZero"
-                >隐藏0元代币</div>
+                type="checkbox"
+                v-model="hideZero"
+            >隐藏0元代币</div>
         </div>
         <Table :filter="{hideZero,filterKey}"></Table>
     </div>
 </template>
 <script>
 // optype: 1充值，2提现； optime单位是秒；
-import Table from "./table";
-import Search from "components/search"
+import Table from './table';
+import Search from 'components/search';
 export default {
     data() {
         return {
             hideZero: false,
-            filterKey: "",
+            filterKey: '',
             acc:null,
-            addr:""
+            addr:''
         };
     },
 

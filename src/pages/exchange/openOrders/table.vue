@@ -32,7 +32,7 @@
     </div>
 </template>
 <script>
-import { order } from "services/exchange";
+import { order } from 'services/exchange';
 export default {
     data() {
         return {
@@ -40,7 +40,7 @@ export default {
             sortIndex: 0,
             sortType: 1,
             acc:null,
-            addr:""
+            addr:''
         };
     },
     methods: {

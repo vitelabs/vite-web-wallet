@@ -25,7 +25,7 @@
 //         "status": 1, //Pending=0，PartialExecuted=1，FullyExecuted=2，Cancelled=3
 //         "type": 1 //Limited=0(限价单),Market=1(市价单)
 //       }
-import Table from "./table";
+import Table from './table';
 export default {
     data() {
         return {
