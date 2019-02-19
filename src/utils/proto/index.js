@@ -69,4 +69,4 @@ class WsProtoClient {
     }
 
 }
-export const client = new WsProtoClient('ws://132.232.65.121:11211/websocket');
+export const client = new WsProtoClient('wss://132.232.65.121:11211/websocket');
