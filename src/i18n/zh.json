@@ -448,16 +448,67 @@
         "limitPrice": {
             "title": "限价",
             "fee": "手续费",
-            "text": "此页面为交易的预览，所有信息均为实时数据，请登录后查看??????"
+            "text": "此页面为交易预览信息，请登录后进行交易"
         }
     },
     "exchangeAssets": {
-        "title": "资产管理"
+        "title": "Funds",
+        "table": {
+            "heads": [
+                "代币名称",
+                "钱包余额",
+                "交易所账户余额",
+                "委托中",
+                "价值"
+            ],
+            "rowMap": {
+                "recharge": "充币至交易所",
+                "withdraw": "提币至钱包",
+                "detail": "查看明细"
+            }
+        }
     },
     "exchangeOpenOrders": {
-        "title": "当前委托"
+        "title": "Open Orders",
+        "side": {
+            "1": "卖",
+            "0": "买"
+        },
+        "table": {
+            "heads": [
+                "委托时间",
+                "市场",
+                "方向",
+                "委托价格",
+                "委托数量(#tokenSymbol#)",
+                "已成交(#tokenSymbol#)",
+                "成交率",
+                "成交均价"
+            ],
+            "rowMap": {
+                "cancel": "撤销"
+            }
+        }
     },
     "exchangeOrderHistory": {
-        "title": "历史委托"
+        "title": "Order History",
+        "side": {
+            "1": "卖",
+            "0": "买"
+        },
+        "table": {
+            "heads": [
+                "委托时间",
+                "市场",
+                "方向",
+                "委托价格",
+                "委托数量(#tokenSymbol#)",
+                "已成交(#tokenSymbol#)",
+                "成交率",
+                "成交均价",
+                "手续费",
+                "状态"
+            ]
+        }
     }
 }

@@ -448,7 +448,7 @@
         "limitPrice": {
             "title": "Limit",
             "fee": "Fee",
-            "text": "This page is a preview page of displaying real-time transaction data. Please log in to find out more."
+            "text": "此页面为交易预览信息，请登录后进行交易"
         }
     },
     "exchangeAssets": {

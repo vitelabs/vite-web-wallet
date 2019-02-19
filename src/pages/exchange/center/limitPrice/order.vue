@@ -102,26 +102,14 @@ export default {
             this.price = this.activeTxPair && this.activeTxPair.price ? this.activeTxPair.price : '';
         },
         amount: function() {
-            this.validAmount();
-            // if (!this.isAmountErr) {
-            //     this.oldAmount = val;
-            // }
             changeVal = 'amount';
             this.watchAQ++;
         },
         quantity: function() {
-            this.validQuantity();
-            // if (!this.isQuantityErr) {
-            //     this.oldQuantity = val;
-            // }
             changeVal = 'quantity';
             this.watchAQ++;
         },
         price: function() {
-            this.validPrice();
-            // if (!this.isPriceErr) {
-            //     this.oldPrice = val;
-            // }
             changeVal = 'price';
             this.watchAQ++;
         },
@@ -139,15 +127,15 @@ export default {
                 this.clearValidTimeout();
                 this.validAll();
                 let isErr = this.isPriceErr || this.isAmountErr || this.isQuantityErr;
-                if (this.isPriceErr) {
-                    this.price = this.oldPrice;
-                }
-                if (this.isAmountErr) {
-                    this.amount = this.oldAmount;
-                }
-                if (this.isQuantityErr) {
-                    this.quantity = this.oldQuantity;
-                }
+                // if (this.isPriceErr) {
+                //     this.price = this.oldPrice;
+                // }
+                // if (this.isAmountErr) {
+                //     this.amount = this.oldAmount;
+                // }
+                // if (this.isQuantityErr) {
+                //     this.quantity = this.oldQuantity;
+                // }
                 if (isErr) {
                     return;
                 }
@@ -356,6 +344,10 @@ export default {
             this.validAmount();
             this.validQuantity();
         },
+        clearAll() {
+            this.amount = '';
+            this.quantity = '';
+        },
 
         _clickBtn() {
             if (this.isLoading) {
@@ -383,7 +375,6 @@ export default {
                 }
             });
         },
-
         newOrder({
             price, quantity
         }) {
@@ -405,9 +396,9 @@ export default {
                 quantity
             }).then(() => {
                 this.isLoading = false;
+                this.clearAll();
                 this.$toast( this.$t('exchange.newOrderSuccess') );
             }).catch((err) => {
-                console.warn(err);
                 if (!err || !err.error || !err.error.code || err.error.code !== -35002) {
                     this.isLoading = false;
                     return;
@@ -415,6 +406,7 @@ export default {
 
                 this.$refs.powProcess.startPowTx(err.accountBlock, 0).then(() => {
                     this.isLoading = false;
+                    this.clearAll();
                     this.$toast( this.$t('exchange.newOrderSuccess') );
                 }).catch((err) => {
                     this.isLoading = false;
