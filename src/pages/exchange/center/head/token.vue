@@ -70,6 +70,10 @@ export default {
             ftokenDetail: null
         };
     },
+    mounted() {
+        this.fetchToken('ttoken');
+        this.fetchToken('ftoken');
+    },
     computed: {
         ftokenIcon() {
             if (!this.activeTxPair || !this.activeTxPair.ftoken) {
