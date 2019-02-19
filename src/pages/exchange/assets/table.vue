@@ -67,7 +67,7 @@
         >
 
         </alert>
-
+        <powProcess ref="pow"></powProcess>
     </div>
 </template>
 <script>
@@ -76,6 +76,7 @@ import confirm from 'components/confirm.vue';
 import { deposit, withdraw, chargeDetail } from 'services/exchange';
 import BigNumber from 'utils/bigNumber';
 import getTokenIcon from 'utils/getTokenIcon';
+import powProcess from 'components/powProcess';
 const VoteDifficulty = '201564160';
 export default {
     props: {
@@ -83,7 +84,8 @@ export default {
     },
     components: {
         confirm,
-        alert
+        alert,
+        powProcess
     },
     beforeMount() {
         this.acc = this.$wallet.getActiveAccount();
@@ -138,18 +140,19 @@ export default {
                 this.opNumber,
                 this.balance[tokenId].decimals
             );
+            const c=this.c;
             const failSubmit = e => {
                 const code =
                     e && e.error ? e.error.code || -1 : e ? e.code : -1;
                 if (code === -35002) {
                     let startTime = new Date().getTime();
-                    const c = Object.assign({}, this.$t('quotaConfirmPoW'));
-                    c.leftBtn.click = () => {
+                    const powTxt = Object.assign({}, this.$t('quotaConfirmPoW'));
+                    powTxt.leftBtn.click = () => {
                         this.$router.push({
                             name: 'walletQuota'
                         });
                     };
-                    (c.rightBtn.click = () => {
+                    (powTxt.rightBtn.click = () => {
                         this.$refs.pow
                             .startPowTx(
                                 e.accountBlock,
@@ -159,25 +162,21 @@ export default {
                             .then(successSubmit)
                             .catch(failSubmit);
                     }),
-                    (c.closeBtn = { show: true });
-                    this.$confirm(c);
+                    (powTxt.closeBtn = { show: true });
+                    this.$confirm(powTxt);
                 } else {
-                    this.$toast(
-                        this.$t('walletVote.section1.cancelVoteErr'),
-                        e
-                    );
+                    this.$toast(this.$t(`exchangeAssets.confirm${c.type}.failToast`));
                 }
             };
             const successSubmit = () => {
-                this.$toast('提现成功');
+                this.$toast(this.$t(`exchangeAssets.confirm${c.type}.successToast`));
             };
-            const c=this.c;
+
             this.closeNumConfirm();
-            debugger;
             this.acc.initPwd(
                 {
                     submitTxt: this.$t(`exchangeAssets.table.rowMap.${c.type}`),
-                    cancelTxt: this.$t('取消'),
+                    cancelTxt: this.$t(`exchangeAssets.pwdConfirm.cancelTxt`),
                     submit: () => {
                         c.type === 'recharge'
                             ? deposit({ tokenId, amount }).then(successSubmit).catch(e => {
@@ -222,7 +221,7 @@ export default {
         detailList() {
             return Object.keys(this.detailData).map(k => {
                 const o = this.detailData[k];
-                return [o.optime, o.tokenName, o.optype, o.amount];
+                return [new Date(o.optime).toLocaleString(), o.tokenName, o.optype, o.amount];
             });
         },
         balance() {
