@@ -17,7 +17,7 @@
                 v-for="v in sortedList"
                 :key="v.orderId"
             >
-                <div>{{v.date}}</div>
+                <div>{{new Date(v.date).toLocaleString()}}</div>
                 <div>{{`${v.ftokenShow}/${v.ttokenShow}`}}</div>
                 <div :class="{buy:v.side===0,sell:v.side===1}">{{$t("exchangeOrderHistory.side")[v.side]}}</div>
                 <div>{{v.price}}</div>
@@ -26,7 +26,7 @@
                 <div>{{v.rate}}</div>
                 <div>{{v.average}}</div>
                 <div>{{v.fee}}</div>
-                <div>{{v.status}}</div>
+                <div>{{$t('exchangeOrderHistory.table.rowMap.statusMap')[v.status]}}</div>
                 <div @click="showDetail(v)"  class="click-able">{{$t("exchangeOrderHistory.table.rowMap.detail")}}</div>
             </div>
         </div>
@@ -92,7 +92,7 @@ export default {
         detailList(){
             return Object.keys(this.detailData).map(k=>{
                 const o=this.detailData[k];
-                return [o.txTime,`${o.price} ${o.token}`,`${o.quantity} ${o.token}`,`${o.fee} ${o.token}`,`${o.amount} ${o.token}`];
+                return [new Date(o.txTime).toLocaleString(),`${o.price} ${o.token}`,`${o.quantity} ${o.token}`,`${o.fee} ${o.token}`,`${o.amount} ${o.token}`];
 
             });
         },
