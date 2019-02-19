@@ -95,13 +95,21 @@ export default {
                 this.amountErr = this.$t('hint.amtFormat');
                 return false;
             }
-            if (BigNumber.isEqual(this.cancelAmount, 0) || 
-                BigNumber.compared(this.cancelAmount, this.activeAmountLimit) > 0) {
+
+            let isEqualBalance = BigNumber.compared(this.cancelAmount, this.activeAmountLimit);
+
+            if (BigNumber.isEqual(this.cancelAmount, 0) || isEqualBalance > 0) {
                 this.amountErr = this.$t('walletQuota.maxAmt', {
                     amount: this.activeAmountLimit
                 });
                 return false;
             }
+
+            if (isEqualBalance === 0 && 
+                BigNumber.compared(this.cancelAmount, 1000) < 0) {
+                this.amountErr = '????';
+            }
+
             this.amountErr = '';
             return true;
         },
