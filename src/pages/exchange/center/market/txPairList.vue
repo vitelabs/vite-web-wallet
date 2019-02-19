@@ -14,12 +14,12 @@
                           @click.stop="setFavorite(txPair.rawData)"></span>
                     <span class="describe">{{ txPair.showPair }}</span>
                 </span>
-                <span class="__center-tb-item">{{ txPair.price }}</span>
+                <span class="__center-tb-item">{{ txPair.price || '--' }}</span>
                 <span class="__center-tb-item percent" :class="{
                     'up': +txPair.upDown > 0,
                     'down': +txPair.upDown < 0
                 }">{{ txPair.upDown + '%' }}</span>
-                <span class="__center-tb-item">{{ txPair.quantity24h }}</span>
+                <span class="__center-tb-item">{{ txPair.quantity24h || '--' }}</span>
             </div>
         </div>
     </div>
@@ -74,14 +74,15 @@ export default {
             let _l = [];
 
             list.forEach((_t) => {
-                let upDown = BigNumber.minus(_t.price, _t.priceBefore24h);
+                let upDown = BigNumber.minus(_t.price || 0, _t.priceBefore24h || 0);
 
                 let item = {};
                 item.pairCode = _t.pairCode;
                 item.price = _t.price;
                 item.quantity24h = _t.quantity24h;
                 item.showPair = `${_t.ftokenShow}/${_t.ttokenShow}`;
-                item.upDown = BigNumber.dividedToNumber(upDown, _t.priceBefore24h * 100, 2);
+                item.upDown = !_t.priceBefore24h || _t.priceBefore24h === 0 ? 
+                    '0.00' : BigNumber.dividedToNumber(upDown || 0, _t.priceBefore24h * 100, 2);
                 item.rawData = _t;
                 
                 _l.push(item);
