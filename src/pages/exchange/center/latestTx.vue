@@ -24,7 +24,7 @@
                     'sell': tx.txSide === 1
                 }">{{ tx.price }}</span>
                 <span class="__center-tb-item">{{ tx.quantity }}</span>
-                <span class="__center-tb-item tx-time">{{ getDate(tx.txTime) }}</span>
+                <span class="__center-tb-item tx-time">{{ getDate(tx.txTime * 1000) }}</span>
             </div>
         </div>
     </div>
