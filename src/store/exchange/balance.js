@@ -1,4 +1,5 @@
 import { timer } from 'utils/asyncFlow';
+import BigNumber from 'utils/BigNumber';
 
 const loopTime = 2 * 1000;
 let balanceTimer = null;
@@ -18,13 +19,13 @@ const actions = {
         let f = () => {
             return $ViteJS.request('dexfund_getAccountFundInfo', address).then((data) => {
                 commit('setExchangeBalance', data);
-            }).catch(err => {
-                console.warn(err);
+            }).catch(() => {
+                // console.warn(err);
             });
         };
 
         f();
-        balanceTimer = new timer(()=>{
+        balanceTimer = new timer(() => {
             return f();
         }, loopTime);
         balanceTimer.start();
@@ -35,8 +36,22 @@ const actions = {
     }
 };
 
+const getters = {
+    exBalanceList(state) {
+        const balance = {};
+        Object.keys(state.balanceList).forEach(k => {
+            balance[k]={};
+            balance[k].available= BigNumber.toBasic(state.balanceList[k].available,state.balanceList[k].tokenInfo.decimals);
+            balance[k].lock= BigNumber.toBasic(state.balanceList[k].lock,state.balanceList[k].tokenInfo.decimals);
+            balance[k].tokenInfo=state.balanceList[k].tokenInfo;
+        });
+        return balance;
+    }
+};
+
 export default {
     state,
     mutations,
-    actions
+    actions,
+    getters
 };

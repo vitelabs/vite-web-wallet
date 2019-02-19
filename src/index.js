@@ -5,6 +5,7 @@ import 'utils/performance';
 import './assets/scss/mixins.scss';
 
 import Vue from 'vue';
+Vue.config.devtools = process.env.NODE_ENV === 'dev';
 import VueRouter from 'vue-router';
 
 import App from 'pages/index.vue';
@@ -27,7 +28,7 @@ Vue.use(VueRouter);
 Vue.use(clickOutside);
 
 // Start loading animate
-let element  = document.getElementById('loading');
+let element = document.getElementById('loading');
 element.className += 'spinner big-spinner';
 
 setTimeout(() => {
