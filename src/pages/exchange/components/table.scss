@@ -1,0 +1,77 @@
+@import "assets/scss/vars.scss";
+@mixin rowWith () {
+    .head-row>div,
+    .row>div {
+        @content
+    }
+}
+
+.ex_tb {
+    padding-top: 71px;
+    position: relative;
+    border-radius: 2px;
+    background: #fff;
+    .head-row {
+        position: absolute;
+        top: 0;
+        height: 71px;
+        color: #1D2024;
+        width: 100%;
+        box-sizing: border-box;
+        font: $font-bold;
+        display: flex;
+        padding: 0 30px;
+        >div {
+            justify-content: center;
+            display: flex;
+            margin: 0 5px;
+            align-items: center;
+            &:first-child {
+                justify-content: flex-start;
+            }
+            &:last-child {
+                justify-content: flex-end;
+            }
+            .sort-btn {
+                background: url(~assets/imgs/exchange/ascend.png), url(~assets/imgs/exchange/decend.png) 0 8px;
+                background-size: contain;
+                background-repeat: no-repeat;
+                width: 16px;
+                margin-left: 2px;
+                height: 16px;
+                cursor: pointer;
+            }
+        }
+    }
+    .row-container {
+        height: 100%;
+        overflow-x: hidden;
+        overflow-y: scroll;
+    }
+    .row {
+        box-sizing: border-box;
+        height: 65px;
+        color: #5E6875;
+        line-height: 65px;
+        border-bottom: 1px solid #C6CBD4;
+        display: flex;
+        width: 100%;
+        padding: 0 30px;
+        .click-able {
+            cursor: pointer;
+            color: #007AFF;
+        }
+        >div {
+            display: flex;
+            margin: 0 5px;
+            align-items: center;
+            justify-content: center;
+            &:first-child {
+                justify-content: flex-start;
+            }
+            &:last-child {
+                justify-content: flex-end;
+            }
+        }
+    }
+}

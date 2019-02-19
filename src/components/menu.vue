@@ -2,18 +2,14 @@
     <div v-click-outside="hideMenu" class="menu-wrapper">
         <div class="header">
             <img class="vite-logo" :src="viteLogo" />
-            <span class="menu" @click="clickMenu"></span>
+            <span class="menu __pointer" @click="clickMenu"></span>
         </div>
 
-        <div class="menu-list" :class="{ 'show': showList }">
-            <div v-for="(name, i) in pageList" :key="i"
-                 class="item" @click="go(name)"
-                 :class="{ 'active': active === name}">
-                {{ $t(`${name}.title`) }}
-            </div>
-
-            <div class="item" @click="logout" >
-                {{ $t('logout') }}
+        <div class="menu-list" :style="`height: ${showList ? menuListHeight : 0}px`">
+            <div v-for="(name, i) in menuList" :key="i"
+                 class="item" :style="`height: ${itemHeight}px; line-height: ${itemHeight}px`" @click="_go(name)"
+                 :class="{ 'active': active.indexOf(name) >= 0 }">
+                {{ name !== 'logout' && name !== 'login' ? $t(`${name}.title`) : $t(name) }}
             </div>
         </div>
     </div>
@@ -22,26 +18,36 @@
 <script>
 import viteLogo from 'assets/imgs/ViteLogo2.svg';
 
+const itemHeight = 60;
+
 export default {
     props: {
         active: {
             type: String,
             default: ''
+        },
+        menuList: {
+            type: Array,
+            default: () => {
+                return [];
+            }
+        },
+        go: {
+            type: Function,
+            default: () => {}
         }
     },
     data() {
-        let activeAccount = this.$wallet.getActiveAccount();
-        let pageList = ['account', 'quota', 'SBP', 'vote', 'transList'];
-        if (activeAccount.type === 'wallet') {
-            pageList.push('conversion');
-        }
-        pageList.push('setting');
-
         return {
-            pageList,
             viteLogo,
+            itemHeight,
             showList: false
         };
+    },
+    computed: {
+        menuListHeight() {
+            return itemHeight * this.menuList.length;
+        }
     },
     methods: {
         clickMenu() {
@@ -51,15 +57,9 @@ export default {
             this.showList = false;
         },
 
-        go(name) {
+        _go(name) {
             this.hideMenu();
-            (this.active !== name) && this.$router.push({ name });
-        },
-
-        logout() {
-            this.$router.push({
-                name: 'index'
-            });
+            this.go(name);
         }
     }
 };
@@ -107,16 +107,11 @@ export default {
     width: 100%;
     background: #FFFFFF;
     box-shadow: 0 6px 36px 0 rgba(0,62,100,0.04);
-    height: 0px;
     overflow: hidden;
     transition: all 0.3s ease-in-out;
-    &.show {
-        height: 488px;
-    }
     .item {
+        box-sizing: border-box;
         margin-top: 0px;
-        height: 60px;
-        line-height: 60px;
         border-bottom: 1px solid #d7dce5;
         &:last-child {
             border: none;

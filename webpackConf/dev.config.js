@@ -1,11 +1,15 @@
 module.exports = {
     devServer: {
         quiet: false,
-        host: '127.0.0.1',
+        host: '0.0.0.0',
         port: 8081,
         proxy: {
+            '/ws': {
+                target: 'ws://132.232.65.121:11211',
+                ws: true
+            },
             '/api': {
-                target: 'https://testnet.vite.net',
+                target: 'http://132.232.65.121:8080/test',
                 changeOrigin: true,
                 secure: false
             },

@@ -1,7 +1,10 @@
 import toast from 'components/toast/index.js';
 import confirm from 'components/confirm/index.js';
 import statistics from 'utils/statistics';
-import { wallet } from 'utils/wallet';
+import { wallet } from 'utils/walletInstance';
+import routeConfig from 'router/routes';
+
+const loginRoutes = routeConfig.loginRoutes;
 
 document.addEventListener('drop', (e) => {
     e.preventDefault();
@@ -15,33 +18,44 @@ document.addEventListener('dragover', (e) => {
 export default {
     install(Vue) {
         Vue.mixin({
-            beforeCreate: function () {
-                this.$onEnterKey = (cb) => {
-                    window.document.onkeydown = e => {
-                        e = e || window.event;
-                        let code = e.keyCode || e.which;
-                        if (!code || code !== 13) {
-                            return;
-                        }
-                        cb && cb();
-                    };
-                };
-                this.$offEnterKey = () => {
-                    window.document.onkeydown = null;
-                };
-            },
-            destroyed: function () {
-                this.$offEnterKey();
+            created() {
+                this.$router && this.$router.beforeEach((to, from, next) => {
+                    if (loginRoutes.indexOf(to.name) >= 0 && !wallet.isLogin) {
+                        (to.name !== 'start') && wallet.setLastPage(to.name);
+                        this.$router.replace({
+                            name: 'start'
+                        });
+                        return;
+                    }
+                    next();
+                });
             }
         });
 
-        Vue.prototype.$wallet = new wallet();
-        Vue.prototype.$validAmount = (amount = '', decimals) => {
+        Vue.prototype.$onKeyDown = function(_code, cb) {
+            window.document.onkeydown = e => {
+                e = e || window.event;
+                let code = e.keyCode || e.which;
+                if (!code || code !== _code) {
+                    return;
+                }
+                cb && cb();
+            };
+        };
+
+        Vue.prototype.$offKeyDown = function() {
+            window.document.onkeydown = null;
+        };
+
+        Vue.prototype.$wallet = wallet;
+
+        Vue.prototype.$validAmount = (amount = '', decimals = 8) => {
             let limit = decimals >= 8 ? 8 : decimals;
             let decimalNum = decimals ? new RegExp(`^\\d+[.]\\d{1,${limit}}$`) : null;
             let num = new RegExp('^(\\d+)$');
             return num.test(amount) || ( decimalNum && decimalNum.test(amount) );
         };
+
         Vue.prototype.$trim = (msg = '') => {
             return msg.replace(/(^\s*)|(\s*$)/g, '');
         };
@@ -59,7 +73,9 @@ export default {
                 mesage || this.$t('hint.err') : this.$t(`errCode.${Math.abs(code)}`);
             toast(msg, type, position);
         };
+
         Vue.prototype.$confirm = confirm;
+
         Vue.prototype.$statistics = statistics;
     }
 };
