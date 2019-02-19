@@ -452,7 +452,7 @@
     },
     "exchangeAssets": {
         "title": "资产管理",
-        "search":"请输入代币名称",
+        "search": "请输入代币名称",
         "confirmTable": {
             "heads": [
                 "日期",
@@ -460,6 +460,9 @@
                 "交易类型",
                 "交易金额"
             ]
+        },
+        "pwdConfirm": {
+            "cancelTxt": "取消"
         },
         "table": {
             "heads": [
@@ -476,6 +479,8 @@
             }
         },
         "confirmrecharge": {
+            "successToast":"充值成功",
+            "failToast":"充值失败",
             "title": "充币至交易所",
             "lable1": "钱包余额",
             "lable2": "充币金额",
@@ -484,6 +489,8 @@
             "btn": "充币至交易所"
         },
         "confirmwithdraw": {
+            "successToast":"提币成功",
+            "failToast":"提币失败",
             "title": "提币至钱包",
             "lable1": "可提币余额",
             "lable2": "提币金额",
@@ -520,8 +527,14 @@
             "1": "卖",
             "0": "买"
         },
-        "confirmTable":{
-            "heads":["成交时间", "成交价", "成交量", "手续费" ,"成交金额"]
+        "confirmTable": {
+            "heads": [
+                "成交时间",
+                "成交价",
+                "成交量",
+                "手续费",
+                "成交金额"
+            ]
         },
         "table": {
             "heads": [
@@ -537,6 +550,11 @@
                 "状态"
             ],
             "rowMap": {
+                "statusMap": {
+                    "1": "委托中",
+                    "2": "已完成",
+                    "3": "取消"
+                },
                 "detail": "查看明细"
             }
         }
