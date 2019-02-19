@@ -25,66 +25,15 @@ class account {
         this.pass = pass || '';
         this.name = checkName(name);
 
-        //         accountAddress: "vite_17db10f302569b79adbb31f7dd96a11f09f740459c2e0d8638"
-        // blockType: 4
-        // fromBlockHash: "865f7ed68d67a4782104abf216f33829e51989c63d13b6a0324a0bbc9e9d57af"
-        // hash: "0253ecf78aa15abffc83a8787c69a30509d3ccb53b6c1980c0341c9451f104f1"
-        // height: "6"
-        // prevHash: "3bfe4a1e4093d3a7a0195d1042e65008d03d202b03aaa4e2a18cb10dbd03325b"
-        // publicKey: "kuzthX/o/WfqSQy+cA+TFFPIrJpaf6+74LAnQhUmoVM="
-        // signature: "j+YvgU7qgidWtAmmPuh+2eAnvzlq9CoS18gh5qmfTqtVYMvF3XHi0uJTwDReI8yNcGGR9fVq0e9ohEvy0a89CA=="
-        // snapshotHash: "2dcb96e8fe69723f9598dea136c038681f92d38e80025ddeb95c5b69574df816"
-        // timestamp: 1550561026
-
-        // accountAddress: "vite_17db10f302569b79adbb31f7dd96a11f09f740459c2e0d8638"
-        // blockType: 4
-        // difficulty: "67108864"
-        // fromBlockHash: "865f7ed68d67a4782104abf216f33829e51989c63d13b6a0324a0bbc9e9d57af"
-        // hash: "0253ecf78aa15abffc83a8787c69a30509d3ccb53b6c1980c0341c9451f104f1"
-        // height: "6"
-        // nonce: "KMgNkdjRn8c="
-        // prevHash: "3bfe4a1e4093d3a7a0195d1042e65008d03d202b03aaa4e2a18cb10dbd03325b"
-        // publicKey: "kuzthX/o/WfqSQy+cA+TFFPIrJpaf6+74LAnQhUmoVM="
-        // signature: "j+YvgU7qgidWtAmmPuh+2eAnvzlq9CoS18gh5qmfTqtVYMvF3XHi0uJTwDReI8yNcGGR9fVq0e9ohEvy0a89CA=="
-        // snapshotHash: "2dcb96e8fe69723f9598dea136c038681f92d38e80025ddeb95c5b69574df816"
-        // timestamp: 1550561026
-
-        // accountAddress: "vite_17db10f302569b79adbb31f7dd96a11f09f740459c2e0d8638"
-        // blockType: 4
-        // fromBlockHash: "865f7ed68d67a4782104abf216f33829e51989c63d13b6a0324a0bbc9e9d57af"
-        // hash: "0d42cd491dd9900f5b08f6c85b7af132fce3a3cf3a87e27a1e58d387464e16e5"
-        // height: "6"
-        // prevHash: "3bfe4a1e4093d3a7a0195d1042e65008d03d202b03aaa4e2a18cb10dbd03325b"
-        // publicKey: "kuzthX/o/WfqSQy+cA+TFFPIrJpaf6+74LAnQhUmoVM="
-        // signature: "Z06DOJowDLrDkTyLrM1lURrtRWyz/ABdrpzK3ux/H5oSj0UxW/xo3EdEeF64Xxhxsjk6I1SyFhfQwnqDz6UrCA=="
-        // snapshotHash: "365e27569d5e70824b6c6ed3ab92764ca72e6e1cc4e2529aff3a36445e507173"
-        // timestamp: 1550560982
-
-        // 'vite_17db10f302569b79adbb31f7dd96a11f09f740459c2e0d8638';
-        // 4;
-        // '67108864';
-        // '865f7ed68d67a4782104abf216f33829e51989c63d13b6a0324a0bbc9e9d57af';
-        // '664d2f8eec04a87ca69035a04919f76cc9aed43f8ff9b8309ef6e6ea9a7d958d';
-        // '6';
-        // 'Nmli03y18UY=';
-        // '3bfe4a1e4093d3a7a0195d1042e65008d03d202b03aaa4e2a18cb10dbd03325b';
-        // 'kuzthX/o/WfqSQy+cA+TFFPIrJpaf6+74LAnQhUmoVM=';
-        // 'weNU0PORgEhEwMfybmOAgHTxXpbbd3LN2jWuAfk6l6bQ7NqSAKMp14ptK3nFkTHMVHCpsNtGWDaqPXvR4FmnAg==';
-        // 'f8131da001630b46526ff398ef2dd3a053c76976f664ad0bbee07a75fff174ab';
-        // 1550560562;
         let receiveFail = async (err) => {
             if (!err || !err.error || !err.error.code || err.error.code !== -35002 || !err.accountBlock) {
                 return Promise.reject(err);
             }
 
             let accountBlock = err.accountBlock;
-            let x = Object.assign({}, accountBlock);
-            console.log('error', x);
-
             let data = await getPowNonce(accountBlock.accountAddress, accountBlock.prevHash);
             accountBlock.difficulty = data.difficulty;
             accountBlock.nonce = data.nonce;
-            console.log('error2', accountBlock);
 
             return this.account.sendRawTx(accountBlock);
         };
