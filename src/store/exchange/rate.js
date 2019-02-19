@@ -16,7 +16,7 @@ const mutations = {
     setExchangeRate(state, rateList) {
         state.rateList = {};
         rateList && rateList.forEach((rate) => {
-            state.rateList[rate.tokenId] = rate;
+            state.rateMap[rate.tokenId] = rate;
         });
     }
 };

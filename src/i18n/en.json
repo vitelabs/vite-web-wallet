@@ -404,6 +404,7 @@
         "priceTitle": "价格({price})",
         "amountTitle": "成交额({amount})",
         "amount": "成交金额",
+        "newOrderSuccess": "提单成功",
         "buy": {
             "title": "买入{token}",
             "price": "买入价",
