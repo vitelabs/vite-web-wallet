@@ -129,8 +129,8 @@ export default {
     .setting-wrapper {
         background: #fff;
     }
-    .setting-wrapper .content-wrapper {
-        top: 77px;
+    .setting-wrapper .content-wrapper { 
+        top: 122px;
         left: 15px;
         right: 15px;
         bottom: 15px;

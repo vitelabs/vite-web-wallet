@@ -38,18 +38,23 @@ export default {
         return {
             list:[],
             sortIndex: 0,
-            sortType: 1
+            sortType: 1,
+            acc:null,
+            addr:''
         };
     },
     methods: {
         cancel() {}
     },
     beforeMount() {
+        this.acc=this.$wallet.getActiveAccount();
+        if(!this.acc)return;
+        this.acc&&(this.addr=this.acc.getDefaultAddr());
         order({
-            address: 'vite_272c94c456e72e698616500acd73b7ffd130708d99f05e4880',
+            address: this.addr,
             status: 2
         }).then(data => {
-            this.list = data;
+            this.list = data.orders;
         });
     },
     computed: {}
