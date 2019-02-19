@@ -176,7 +176,7 @@ export default {
             this.acc.initPwd(
                 {
                     submitTxt: this.$t(`exchangeAssets.table.rowMap.${c.type}`),
-                    cancelTxt: this.$t(`exchangeAssets.pwdConfirm.cancelTxt`),
+                    cancelTxt: this.$t('exchangeAssets.pwdConfirm.cancelTxt'),
                     submit: () => {
                         c.type === 'recharge'
                             ? deposit({ tokenId, amount }).then(successSubmit).catch(e => {
