@@ -452,16 +452,7 @@
         }
     },
     "exchangeAssets": {
-<<<<<<< HEAD
-        "title": "Funds"
-    },
-    "exchangeOpenOrders": {
-        "title": "Open Orders"
-    },
-    "exchangeOrderHistory": {
-        "title": "Order History"
-=======
-        "title": "资产管理",
+        "title": "Funds",
         "table": {
             "heads": [
                 "代币名称",
@@ -478,7 +469,7 @@
         }
     },
     "exchangeOpenOrders": {
-        "title": "当前委托",
+        "title": "Open Orders",
         "side": {
             "1": "卖",
             "0": "买"
@@ -500,7 +491,7 @@
         }
     },
     "exchangeOrderHistory": {
-        "title": "历史委托",
+        "title": "Order History",
         "side": {
             "1": "卖",
             "0": "买"
@@ -519,6 +510,5 @@
                 "状态"
             ]
         }
->>>>>>> dev/1.4.0-cs
     }
 }
