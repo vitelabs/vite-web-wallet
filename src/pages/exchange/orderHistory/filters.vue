@@ -7,6 +7,7 @@
             <FlatPickr
                 v-model="fromDate"
                 class="filter_content"
+                :config="{dateFormat:'Z',enableTime:true,time_24hr:true}"
             ></FlatPickr>
         </div>
         <div class="separator">-</div>
@@ -43,6 +44,10 @@
             @click="submit"
             class="search"
         >搜索</div>
+                <div
+            @click="reset"
+            class="search active"
+        >重置</div>
     </div>
 </template>
 
@@ -70,10 +75,13 @@ export default {
         FlatPickr
     },
     methods: {
+        reset(){
+
+        },
         submit() {
             this.$emit('submit', {
-                fDate: this.fromDate,
-                tDate: this.toDate,
+                fDate: this.fromDate?new Date(this.fromDate).getTime()/1000:"",
+                tDate: this.toDate?new Date(this.toDate).getTime()/1000:"",
                 orderSide: this.tradeType,
                 fToken: this.fToken,
                 tToken: this.tToken
@@ -102,7 +110,7 @@ export default {
         }
         &:first-child,
         &:nth-child(3) {
-            width: 180px;
+            width: 220px;
         }
         &.end {
             margin-right: 18px;
@@ -133,8 +141,9 @@ export default {
         border: 1px solid #007aff;
         text-align: center;
         line-height: 30px;
+        margin-right: 18px;
         cursor: pointer;
-        &:active {
+        &:active,&.actvie {
             background: rgba(0, 122, 255, 1);
             color: #fff;
         }

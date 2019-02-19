@@ -1,5 +1,5 @@
 import { timer } from 'utils/asyncFlow';
-import BigNumber from 'utils/BigNumber';
+import BigNumber from 'utils/bigNumber';
 
 const loopTime = 2 * 1000;
 let balanceTimer = null;

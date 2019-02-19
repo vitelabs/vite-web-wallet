@@ -7,6 +7,8 @@
             >{{h.replace("#tokenSymbol#","vite")}}
             </div>
             <div></div>
+            <div></div>
+            <div></div>
         </div>
         <div class="row-container">
             <div
@@ -17,7 +19,7 @@
                 <div>{{token.symbol}}</div>
                 <div>{{token.balance}}</div>
                 <div>{{token.available}}</div>
-                <div>{{token.lock}}</div>
+                <div>{{token.lock||0}}</div>
                 <div>{{token.worth}}</div>
                 <div
                     @click="recharge(token.id)"
@@ -39,26 +41,28 @@
             :singleBtn="true"
             :leftBtnTxt="c.btn"
             :leftBtnClick="confirmClick"
+            :closeIcon="true"
+            :close="closeNumConfirm"
             v-if="confirmShow"
         >
             <div class="confirm">
                 <div class="lable">{{c.lable1}}</div>
-                <div class="input un-click-able"><img :src="c.icon" />{{balance[c.tokenId].symbol}} <div class="num">{{c.type.toLowerCase()==="charge"?balance[c.tokenId].balance:balance[c.tokenId].available}}</div>
+                <div class="input un-click-able"><img :src="c.icon" />{{balance[c.tokenId].symbol}} <div class="num">{{c.type.toLowerCase()==="recharge"?balance[c.tokenId].balance:balance[c.tokenId].available}}</div>
                 </div>
-                <div class="lable">{{c.lable2}} <div class="tips">{{c.errTips}}</div>
+                <div class="lable">{{c.lable2}} <div class="errtips">{{c.errTips}}</div>
                 </div>
                 <div class="input"><input
-                    type="text"
-                    :placeholder="c.placeholder"
-                    v-model="opNumber"
-                ></div>
+                        type="text"
+                        :placeholder="c.placeholder"
+                        v-model="opNumber"
+                    ></div>
             </div>
         </confirm>
         <alert
             v-show="detailConfirm"
             :list="detailList"
             :heads="$t('exchangeAssets.confirmTable.heads')"
-            :title="'成交记录'"
+            :title="'充值记录'"
             :close="close"
         >
 
@@ -67,11 +71,12 @@
     </div>
 </template>
 <script>
-import alert from '../components/alert.vue';
-import confirm from 'components/confirm.vue';
-import { deposit, withdraw, chargeDetail } from 'services/exchange';
-import BigNumber from 'utils/bigNumber';
-const VoteDifficulty = '201564160';
+import alert from "../components/alert.vue";
+import confirm from "components/confirm.vue";
+import { deposit, withdraw, chargeDetail } from "services/exchange";
+import BigNumber from "utils/bigNumber";
+import getTokenIcon from "utils/getTokenIcon";
+const VoteDifficulty = "201564160";
 export default {
     props: {
         filter: { type: Object }
@@ -89,35 +94,40 @@ export default {
         return {
             detailConifrm: false,
             c: {},
-            opNumber: '',
+            opNumber: "",
             confirmShow: false,
-            detailList: [],
+            detailData: [],
             detailConfirm: false,
-            acc:null,
-            addr:''
+            acc: null,
+            addr: ""
         };
     },
     methods: {
         withdraw(tokenId) {
-            this.showConfirm({ tokenId, type: 'Withdraw' });
+            this.showConfirm({ tokenId, type: "withdraw" });
         },
         recharge(tokenId) {
-            this.showConfirm({ tokenId, type: 'Charge' });
+            this.showConfirm({ tokenId, type: "recharge" });
         },
         detail(tokenId) {
             this.detailConfirm = true;
             chargeDetail({ address: this.addr, tokenId }).then(data => {
-                this.detailList = data.records;
+                this.detailData = data.records;
             });
         },
+        closeNumConfirm(){
+            this.c={};
+            this.confirmShow=false;
+        },
         close() {
-            this.detailList = [];
+            this.detailData = [];
             this.detailConfirm = false;
         },
         showConfirm({ tokenId, type }) {
             const t = this.$t(`exchangeAssets.confirm${type}`);
             t.tokenId = tokenId;
             t.type = type;
+            t.icon=this.balance[tokenId].icon;
             this.c = t;
             this.confirmShow = true;
         },
@@ -128,46 +138,54 @@ export default {
                 this.opNumber,
                 this.balance[tokenId].decimals
             );
-            const failSubmit=e => {
-                const code = e && e.error ? e.error.code || -1 : e ? e.code : -1;
+            const failSubmit = e => {
+                const code =
+                    e && e.error ? e.error.code || -1 : e ? e.code : -1;
                 if (code === -35002) {
                     let startTime = new Date().getTime();
-                    const c = Object.assign({}, this.$t('quotaConfirmPoW'));
+                    const c = Object.assign({}, this.$t("quotaConfirmPoW"));
                     c.leftBtn.click = () => {
                         this.$router.push({
-                            name: 'walletQuota'
+                            name: "walletQuota"
                         });
                     };
                     (c.rightBtn.click = () => {
-                        this.$refs.pow.startPowTx(e.accountBlock, startTime, VoteDifficulty)
+                        this.$refs.pow
+                            .startPowTx(
+                                e.accountBlock,
+                                startTime,
+                                VoteDifficulty
+                            )
                             .then(successSubmit)
                             .catch(failSubmit);
                     }),
-                    (c.closeBtn = { show: true });
+                        (c.closeBtn = { show: true });
                     this.$confirm(c);
                 } else {
-                    this.$toast(this.$t('walletVote.section1.cancelVoteErr'), e);
+                    this.$toast(
+                        this.$t("walletVote.section1.cancelVoteErr"),
+                        e
+                    );
                 }
             };
-            const successSubmit=()=>{
-                this.$toast('提现成功');
+            const successSubmit = () => {
+                this.$toast("提现成功");
             };
+            const c=this.c;
+            this.closeNumConfirm();
+            debugger
             this.acc.initPwd(
                 {
-                    submitTxt: this.$t(
-                        'walletVote.section1.confirm.submitText'
-                    ),
-                    cancelTxt: this.$t(
-                        'walletVote.section1.confirm.cancelText'
-                    ),
+                    submitTxt: this.$t(`exchangeAssets.table.rowMap.${c.type}`),
+                    cancelTxt: this.$t("取消"),
                     submit: () => {
-                        this.c.type.toLowerCase() === 'charge'
-                            ? deposit({ tokenId, amount }).catch(e=>{
-                                failSubmit(e);
-                            })
-                            : withdraw({ tokenId, amount }).catch(e=>{
-                                failSubmit(e);
-                            });
+                        c.type === "recharge"
+                            ? deposit({ tokenId, amount }).then(successSubmit).catch(e => {
+                                  failSubmit(e);
+                              })
+                            : withdraw({ tokenId, amount }).then(successSubmit).catch(e => {
+                                  failSubmit(e);
+                              });
                     }
                 },
                 true
@@ -175,32 +193,38 @@ export default {
         },
         testAmount() {
             const amountBalance =
-                this.c.type.toLowerCase() === 'charge'
+                this.c.type.toLowerCase() === "recharge"
                     ? this.balance[this.c.tokenId].balance
                     : this.balance[this.c.tokenId].balance;
             const decimals = this.balance[this.c.tokenId].decimals;
             const result = this.$validAmount(this.opNumber, decimals);
             if (!result) {
-                this.c.errTips = this.$t('hint.amtFormat');
+                this.c.errTips = this.$t("hint.amtFormat");
                 return false;
             }
 
             if (BigNumber.isEqual(this.opNumber, 0)) {
-                this.c.errTips = this.$t('wallet.hint.amount');
+                this.c.errTips = this.$t("wallet.hint.amount");
                 return false;
             }
 
             // const amount = BigNumber.toMin(this.opNumber, decimals);
             if (BigNumber.compared(amountBalance, this.opNumber) < 0) {
-                this.c.errTips = this.$t('hint.insufficientBalance');
+                this.c.errTips = this.$t("hint.insufficientBalance");
                 return false;
             }
 
-            this.c.errTips = '';
+            this.c.errTips = "";
             return true;
         }
     },
     computed: {
+        detailList() {
+            return Object.keys(this.detailData).map(k => {
+                const o = this.detailData[k];
+                return [o.optime, o.tokenName, o.optype, o.amount];
+            });
+        },
         balance() {
             const exB = this.$store.getters.exBalanceList;
             const walletB = this.$store.getters.tokenBalanceList;
@@ -210,7 +234,7 @@ export default {
                     available: exB[t].available,
                     lock: exB[t].lock,
                     balance: 0,
-                    icon: '',
+                    icon: "",
                     id: t,
                     symbol: exB[t].tokenInfo.tokenSymbol,
                     decimals: exB[t].tokenInfo.decimals
@@ -233,13 +257,14 @@ export default {
                 };
             });
             Object.keys(res).forEach(t => {
+                res[t].icon = res[t].icon || getTokenIcon(res[t].id);
                 if (!this.$store.state.exchangeRate.rateMap[t]) {
-                    res[t].worth = '-';
+                    res[t].worth = "-";
                     return;
                 }
-                res[t].worth = `${this.$i18n.locale === 'zh' ? '¥' : '$'}${
+                res[t].worth = `${this.$i18n.locale === "zh" ? "¥" : "$"}${
                     this.$store.state.exchangeRate.rateMap[t][
-                        this.$i18n.locale === 'zh' ? 'cny' : 'usd'
+                        this.$i18n.locale === "zh" ? "cny" : "usd"
                     ]
                 }`;
             });
@@ -249,10 +274,10 @@ export default {
             return Object.keys(this.balance)
                 .map(k => this.balance[k])
                 .filter(v => {
-                    const NOTnoZero = this.filter.hideZero && v.balance === '0';
+                    const NOTnoZero = this.filter.hideZero && v.balance === "0";
                     const NOTmatchKey =
                         this.filter.filterKey &&
-                        !v.symbol.match(new RegExp(this.filter.filterKey));
+                        !v.symbol.match(new RegExp(this.filter.filterKey, "i"));
                     return !(NOTnoZero || NOTmatchKey);
                 });
         }
@@ -266,11 +291,11 @@ export default {
     padding-bottom: 10px;
     flex: 1;
     box-shadow: 0px 2px 48px 1px rgba(176, 192, 237, 0.42);
-
 }
 @include rowWith {
     width: 8%;
     &:first-child,
+    &:nth-child(3),
     &:nth-child(4),
     &:nth-child(5),
     &:nth-child(6) {
@@ -292,6 +317,8 @@ export default {
         box-sizing: border-box;
         img {
             margin-right: 10px;
+            width:20px;
+            height: 20px;
         }
         input {
             width: 100%;
@@ -309,7 +336,7 @@ export default {
         font-size: 16px;
         margin-bottom: 16px;
         margin-top: 19px;
-        .tips {
+        .errtips {
             color: #ff2929;
             font-size: 12px;
             margin-left: auto;

@@ -57,18 +57,21 @@ export default {
         return {
             sortIndex: 0,
             sortType: 1,
-            detailList:[],
+            detailData:[],
             detailConfirm:false
         };
     },
     methods: {
         close(){
-            this.detailList=[];
+            this.detailData=[];
             this.detailConfirm=false;
         },
         showDetail(order){
             orderDetail({orderId:order.orderId,ftoken:order.ftoken,ttoken:order.ttoken,pageNo:1,pageSize:100}).then(data=>{
-                this.detailList=data.details;
+                this.detailData=data.details.map(v=>{
+                     v.token=order.ttokenShow;
+                     return v;
+                });
             });
             this.detailConfirm=true;
         },
@@ -86,6 +89,13 @@ export default {
         }
     },
     computed: {
+        detailList(){
+            return Object.keys(this.detailData).map(k=>{
+                const o=this.detailData[k];
+                return [o.txTime,`${o.price} ${o.token}`,`${o.quantity} ${o.token}`,`${o.fee} ${o.token}`,`${o.amount} ${o.token}`];
+
+            })
+        },
         sortedList() {
             return this.sortList(this.list);
         }
@@ -103,7 +113,8 @@ export default {
     &:first-child,
     &:nth-child(4),
     &:nth-child(5),
-    &:nth-child(6) {
+    &:nth-child(6),
+    &:nth-child(8) {
         width: 15%;
     }
 }

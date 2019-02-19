@@ -452,6 +452,7 @@
     },
     "exchangeAssets": {
         "title": "资产管理",
+        "search":"请输入代币名称",
         "confirmTable": {
             "heads": [
                 "日期",
@@ -474,7 +475,7 @@
                 "detail": "查看明细"
             }
         },
-        "confirmCharge": {
+        "confirmrecharge": {
             "title": "充币至交易所",
             "lable1": "钱包余额",
             "lable2": "充币金额",
@@ -482,7 +483,7 @@
             "placeholder": "请输入充币金额",
             "btn": "充币至交易所"
         },
-        "confirmWithdraw": {
+        "confirmwithdraw": {
             "title": "提币至钱包",
             "lable1": "可提币余额",
             "lable2": "提币金额",
