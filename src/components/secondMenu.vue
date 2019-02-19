@@ -60,6 +60,8 @@ export default {
         font-family: $font-bold, arial, sans-serif;
         font-weight: 600;
         color: rgba(94, 104, 117, 1);
+        display: flex;
+        flex-wrap: wrap;
         .tab {
             display: inline-block;
             box-sizing: border-box;
@@ -67,6 +69,7 @@ export default {
             min-width: 112px;
             padding: 0 28px;
             text-align: center;
+            white-space: nowrap;
             &.active {
                 position: relative;
                 color: rgba(29, 32, 36, 1);
@@ -83,6 +86,13 @@ export default {
                 }
             }
         }
+    }
+}
+@media only screen and (max-width: 900px) {
+    .head .tab-list-wrapper .tab {
+        box-sizing: border-box;
+        padding: 0 10px;
+        flex-basis: 130px;
     }
 }
 </style>
