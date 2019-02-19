@@ -406,14 +406,14 @@
         "amount": "Total",
         "newOrderSuccess": "提单成功",
         "buy": {
-            "title": "Buy{token}",
+            "title": "Buy {token}",
             "price": "Price",
-            "amount": "Amount"
+            "quantity": "Amount"
         },
         "sell": {
-            "title": "Sell{token}",
+            "title": "Sell {token}",
             "price": "Price",
-            "amount": "Amount"
+            "quantity": "Amount"
         },
         "head": {
             "latestPrice": "Last Price",
