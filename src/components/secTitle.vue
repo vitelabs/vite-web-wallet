@@ -100,7 +100,7 @@ export default {
     }
 }
 
-@media only screen and (max-width: 740px) {
+@media only screen and (max-width: 900px) {
     .sec-title-container {
         .help {
             margin-left: 0; 
