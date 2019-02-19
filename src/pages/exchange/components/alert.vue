@@ -6,24 +6,24 @@
                 <span @click="close" class="close-icon __pointer"></span>
             </div>
             <div class="content-wrapper" >
-                    <div class="ex_tb">
-        <div class="head-row">
-            <div
-                v-for="(h) in heads"
-                :key="h"
-            >{{h}}
-            </div>
-        </div>
-        <div class="row-container">
-            <div
-                class="row"
-                v-for="(v,i) in list"
-                :key="i"
-            >
-            <div v-for="(item,j) in v " :key="j">{{item}}</div>
-            </div>
-        </div>
-    </div>
+                <div class="ex_tb">
+                    <div class="head-row">
+                        <div
+                            v-for="(h) in heads"
+                            :key="h"
+                        >{{h}}
+                        </div>
+                    </div>
+                    <div class="row-container">
+                        <div
+                            class="row"
+                            v-for="(v,i) in list"
+                            :key="i"
+                        >
+                            <div v-for="(item,j) in v " :key="j">{{item}}</div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -38,15 +38,15 @@ export default {
         },
         heads:{
             type:Array,
-            default:[]
+            default:()=>[]
         },
         list:{
             type:Array,
-            default:[]
+            default:()=>[]
         },
         title:{
             type:String,
-            default:""
+            default:''
         }
     }
 };

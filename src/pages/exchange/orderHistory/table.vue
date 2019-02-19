@@ -5,11 +5,11 @@
                 v-for="(h,i) in $t('exchangeOrderHistory.table.heads')"
                 :key="h"
             >{{h.replace("#tokenSymbol#","vite")}} <div
-                    class="sort-btn"
-                    @click="sortBy(i)"
-                ></div>
+                class="sort-btn"
+                @click="sortBy(i)"
+            ></div>
             </div>
-    <div></div>
+            <div></div>
         </div>
         <div class="row-container">
             <div
@@ -41,8 +41,8 @@
     </div>
 </template>
 <script>
-import confirm from "../components/alert";
-import {orderDetail} from "services/exchange";
+import confirm from '../components/alert';
+import {orderDetail} from 'services/exchange';
 export default {
     props: {
         list: {
@@ -69,7 +69,7 @@ export default {
         showDetail(order){
             orderDetail({orderId:order.orderId,ftoken:order.ftoken,ttoken:order.ttoken,pageNo:1,pageSize:100}).then(data=>{
                 this.detailList=data.details;
-            })
+            });
             this.detailConfirm=true;
         },
         sortBy(i) {
@@ -78,13 +78,16 @@ export default {
                 return;
             }
             this.sortIndex = i;
+        },
+        sortList(list) {
+            return list.sort((a, b) => {
+                return this.sortType * (a[this.sortIndex] - b[this.sortIndex]);
+            });
         }
     },
     computed: {
         sortedList() {
-            return this.list.sort((a, b) => {
-                return this.sortType * (a[this.sortIndex] - b[this.sortIndex]);
-            });
+            return this.sortList(this.list);
         }
     }
 };

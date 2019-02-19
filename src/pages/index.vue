@@ -15,12 +15,10 @@
 </template>
 
 <script>
-import pageLayout from "components/pageLayout";
-import update from "components/update.vue";
-import firstNotice from "components/firstNotice.vue";
-import routeConfig from "router/routes";
-
-let balanceInfoInst = null;
+import pageLayout from 'components/pageLayout';
+import update from 'components/update.vue';
+import firstNotice from 'components/firstNotice.vue';
+import routeConfig from 'router/routes';
 
 export default {
     components: {
@@ -36,15 +34,15 @@ export default {
 
         // Listen login status to loopBalance
         this.$wallet.onLogin(() => {
-            this.$store.dispatch("startLoopBalance");
+            this.$store.dispatch('startLoopBalance');
         });
         this.$wallet.onLogout(() => {
-            this.$store.dispatch("stopLoopBalance");
+            this.$store.dispatch('stopLoopBalance');
         });
     },
     data() {
         return {
-            layoutType: "start",
+            layoutType: 'start',
             active: this.$route.name
         };
     },
@@ -58,7 +56,7 @@ export default {
         changeLayout() {
             let toHome =
                 routeConfig.indexLayoutRoutes.indexOf(this.active) === -1;
-            this.layoutType = toHome ? "home" : "start";
+            this.layoutType = toHome ? 'home' : 'start';
         }
     }
 };

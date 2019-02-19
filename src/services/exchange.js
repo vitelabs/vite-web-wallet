@@ -1,5 +1,5 @@
 import request from 'utils/request';
-import {wallet} from 'utils/walletInstance';
+import { wallet } from 'utils/walletInstance';
 
 const path = '/api/v1';
 
@@ -209,3 +209,27 @@ export const withdraw=async function({tokenId,amount}){
 //     		// return await wallet.getActiveAccount().callContract({'type':'function','name':'DexTradeCancelOrder', 'inputs':[{'name':'orderId','type':'bytes'}, {'name':'tradeToken','type':'tokenId'}, {'name':',quoteToken','type':'tokenId'}, {'name':'side', 'type':'bool'}]}),param:[];
 
 // };
+
+export const newBuyOrder = function({
+    tokenId, amount
+}) {
+    return wallet.getActiveAccount().callContract({
+        toAddress:'vite_000000000000000000000000000000000000000617d47459a8',
+        jsonInterface: {'type':'function','name':'DexTradeNewOrder', 'inputs':[{'name':'data','type':'bytes'}]}, 
+        params: [],
+        tokenId,
+        amount
+    });
+};
+
+export const newSellOrder = function({
+    tokenId, amount
+}) {
+    return wallet.getActiveAccount().callContract({
+        toAddress:'vite_000000000000000000000000000000000000000617d47459a8', 
+        jsonInterface:{'type':'function','name':'DexTradeNewOrder', 'inputs':[{'name':'data','type':'bytes'}]}, 
+        params: [],
+        tokenId,
+        amount
+    });
+};

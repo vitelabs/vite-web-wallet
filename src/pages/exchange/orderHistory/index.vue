@@ -9,10 +9,10 @@
     </div>
 </template>
 <script>
-import Filters from "./filters";
-import Table from "./table";
-import { order } from "services/exchange";
-import Pagination from "components/pagination";
+import Filters from './filters';
+import Table from './table';
+import { order } from 'services/exchange';
+import Pagination from 'components/pagination';
 const pageSize=10;
 export default {
     components: {
@@ -32,19 +32,19 @@ export default {
     },
     methods: {
         toPage(){
-            this.update(this.filters)
+            this.update(this.filters);
         },
         submit(v){
-            this.update(v)
+            this.update(v);
         },
         update(filters={}) {
             const account=this.$wallet.getActiveAccount();
             if (!account) return;
-            const address=account.getDefaultAddr()
+            const address=account.getDefaultAddr();
             order({
                 address,...filters,pageNum:10,pageIndex:this.currentPage
             }).then(data => {
-                this.totalPage=Math.ceil(this.data.totalSize/pageSize)
+                this.totalPage=Math.ceil(this.data.totalSize/pageSize);
                 this.data = data.orders||[];
             });
         }

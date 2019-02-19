@@ -75,18 +75,18 @@
 </template>
 
 <script>
-import viteInput from "components/viteInput";
-import loading from "components/loading";
-import localStorage from "utils/localStorage";
-import { timer } from "utils/asyncFlow";
-import { defaultPair, assignPair, pairSearch } from "services/exchange";
+import viteInput from 'components/viteInput';
+import loading from 'components/loading';
+import localStorage from 'utils/localStorage';
+import { timer } from 'utils/asyncFlow';
+import { defaultPair, assignPair, pairSearch } from 'services/exchange';
 
-import orderArrow from "./orderArrow";
-import tabList from "./tabList";
-import txPairList from "./txPairList";
-import { client } from "utils/proto";
+import orderArrow from './orderArrow';
+import tabList from './tabList';
+import txPairList from './txPairList';
+import { client } from 'utils/proto';
 
-const FavoriteKey = "favoriteTxPairs";
+const FavoriteKey = 'favoriteTxPairs';
 let pairTimer = null;
 
 export default {
@@ -106,17 +106,17 @@ export default {
     data() {
         return {
             isLoading: false,
-            currentOrderRule: "txPair",
+            currentOrderRule: 'txPair',
             isOnlyFavorite: false,
 
             favoritePairs: localStorage.getItem(FavoriteKey) || {},
 
-            toTokenId: "",
+            toTokenId: '',
             txPairList: [],
 
             isShowSearch: false,
-            searchErr: "",
-            searchText: "",
+            searchErr: '',
+            searchText: '',
             searchList: []
         };
     },
@@ -138,7 +138,7 @@ export default {
                     ) {
                         return;
                     }
-                    this.$store.commit("exSetActiveTxPair", txPair);
+                    this.$store.commit('exSetActiveTxPair', txPair);
                 });
         }
     },
@@ -183,20 +183,20 @@ export default {
         },
         noData() {
             if (this.searchText && this.isShowSearch) {
-                return this.$t("exchange.noData.search");
+                return this.$t('exchange.noData.search');
             }
             if (this.isOnlyFavorite) {
-                return this.$t("exchange.noData.favorite");
+                return this.$t('exchange.noData.favorite');
             }
-            return this.$t("hint.noData");
+            return this.$t('hint.noData');
         },
         activeTxPairList() {
             let list =
                 this.searchText && this.isShowSearch
                     ? this.searchList
                     : this.isOnlyFavorite
-                    ? this.activeFavoriteList
-                    : this.txPairList;
+                        ? this.activeFavoriteList
+                        : this.txPairList;
             list = [].concat(list);
 
             let i;
@@ -258,7 +258,7 @@ export default {
 
         async init() {
             // First, clear.
-            this.searchText = "";
+            this.searchText = '';
             this.searchList = [];
             this.stopLoopList();
 
@@ -346,7 +346,7 @@ export default {
                     console.warn(err);
                     this.isLoading = false;
                     this.isShowSearch = true;
-                    this.searchErr = this.$t("hint.err");
+                    this.searchErr = this.$t('hint.err');
                 });
         },
         fetchDefaultList() {

@@ -48,10 +48,10 @@
                 <div class="lable">{{c.lable2}} <div class="tips">{{c.errTips}}</div>
                 </div>
                 <div class="input"><input
-                        type="text"
-                        :placeholder="c.placeholder"
-                        v-model="opNumber"
-                    ></div>
+                    type="text"
+                    :placeholder="c.placeholder"
+                    v-model="opNumber"
+                ></div>
             </div>
         </confirm>
         <alert
@@ -67,10 +67,10 @@
     </div>
 </template>
 <script>
-import alert from "../components/alert.vue";
-import confirm from "components/confirm.vue";
-import { deposit, withdraw, chargeDetail } from "services/exchange";
-import BigNumber from "utils/bigNumber";
+import alert from '../components/alert.vue';
+import confirm from 'components/confirm.vue';
+import { deposit, withdraw, chargeDetail } from 'services/exchange';
+import BigNumber from 'utils/bigNumber';
 const VoteDifficulty = '201564160';
 export default {
     props: {
@@ -89,20 +89,20 @@ export default {
         return {
             detailConifrm: false,
             c: {},
-            opNumber: "",
+            opNumber: '',
             confirmShow: false,
             detailList: [],
             detailConfirm: false,
             acc:null,
-            addr:""
+            addr:''
         };
     },
     methods: {
         withdraw(tokenId) {
-            this.showConfirm({ tokenId, type: "Withdraw" });
+            this.showConfirm({ tokenId, type: 'Withdraw' });
         },
         recharge(tokenId) {
-            this.showConfirm({ tokenId, type: "Charge" });
+            this.showConfirm({ tokenId, type: 'Charge' });
         },
         detail(tokenId) {
             this.detailConfirm = true;
@@ -150,20 +150,24 @@ export default {
                 }
             };
             const successSubmit=()=>{
-                this.$toast("提现成功")
-            }
+                this.$toast('提现成功');
+            };
             this.acc.initPwd(
                 {
                     submitTxt: this.$t(
-                        "walletVote.section1.confirm.submitText"
+                        'walletVote.section1.confirm.submitText'
                     ),
                     cancelTxt: this.$t(
-                        "walletVote.section1.confirm.cancelText"
+                        'walletVote.section1.confirm.cancelText'
                     ),
                     submit: () => {
-                        this.c.type.toLowerCase() === "charge"
-                            ? deposit({ tokenId, amount })
-                            : withdraw({ tokenId, amount });
+                        this.c.type.toLowerCase() === 'charge'
+                            ? deposit({ tokenId, amount }).catch(e=>{
+                                failSubmit(e);
+                            })
+                            : withdraw({ tokenId, amount }).catch(e=>{
+                                failSubmit(e);
+                            });
                     }
                 },
                 true
@@ -171,28 +175,28 @@ export default {
         },
         testAmount() {
             const amountBalance =
-                this.c.type.toLowerCase() === "charge"
+                this.c.type.toLowerCase() === 'charge'
                     ? this.balance[this.c.tokenId].balance
                     : this.balance[this.c.tokenId].balance;
             const decimals = this.balance[this.c.tokenId].decimals;
             const result = this.$validAmount(this.opNumber, decimals);
             if (!result) {
-                this.c.errTips = this.$t("hint.amtFormat");
+                this.c.errTips = this.$t('hint.amtFormat');
                 return false;
             }
 
             if (BigNumber.isEqual(this.opNumber, 0)) {
-                this.c.errTips = this.$t("wallet.hint.amount");
+                this.c.errTips = this.$t('wallet.hint.amount');
                 return false;
             }
 
             // const amount = BigNumber.toMin(this.opNumber, decimals);
             if (BigNumber.compared(amountBalance, this.opNumber) < 0) {
-                this.c.errTips = this.$t("hint.insufficientBalance");
+                this.c.errTips = this.$t('hint.insufficientBalance');
                 return false;
             }
 
-            this.c.errTips = "";
+            this.c.errTips = '';
             return true;
         }
     },
@@ -206,7 +210,7 @@ export default {
                     available: exB[t].available,
                     lock: exB[t].lock,
                     balance: 0,
-                    icon: "",
+                    icon: '',
                     id: t,
                     symbol: exB[t].tokenInfo.tokenSymbol,
                     decimals: exB[t].tokenInfo.decimals
@@ -230,12 +234,12 @@ export default {
             });
             Object.keys(res).forEach(t => {
                 if (!this.$store.state.exchangeRate.rateMap[t]) {
-                    res[t].worth = "-";
+                    res[t].worth = '-';
                     return;
                 }
-                res[t].worth = `${this.$i18n.locale === "zh" ? "¥" : "$"}${
+                res[t].worth = `${this.$i18n.locale === 'zh' ? '¥' : '$'}${
                     this.$store.state.exchangeRate.rateMap[t][
-                        this.$i18n.locale === "zh" ? "cny" : "usd"
+                        this.$i18n.locale === 'zh' ? 'cny' : 'usd'
                     ]
                 }`;
             });
@@ -245,7 +249,7 @@ export default {
             return Object.keys(this.balance)
                 .map(k => this.balance[k])
                 .filter(v => {
-                    const NOTnoZero = this.filter.hideZero && v.balance === "0";
+                    const NOTnoZero = this.filter.hideZero && v.balance === '0';
                     const NOTmatchKey =
                         this.filter.filterKey &&
                         !v.symbol.match(new RegExp(this.filter.filterKey));

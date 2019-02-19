@@ -82,7 +82,11 @@ export default {
             isAmountErr: false,
             isQuantityErr: false,
             percent: 0,
-            watchAQ: 0
+            watchAQ: 0,
+
+            oldPrice: '',
+            oldAmount: '',
+            oldQuantity: ''
         };
     },
     watch: {
@@ -92,15 +96,30 @@ export default {
             }
             this.price = this.activeTxPair && this.activeTxPair.price ? this.activeTxPair.price : '';
         },
-        amount: function() {
+        amount: function(val) {
+            this.validAmount();
+            if (!this.isAmountErr) {
+                this.oldAmount = val;
+                return;
+            }
             changeVal = 'amount';
             this.watchAQ++;
         },
-        quantity: function() {
+        quantity: function(val) {
+            this.validQuantity();
+            if (!this.isQuantityErr) {
+                this.oldQuantity = val;
+                return;
+            }
             changeVal = 'quantity';
             this.watchAQ++;
         },
-        price: function() {
+        price: function(val) {
+            this.validPrice();
+            if (!this.isPriceErr) {
+                this.oldPrice = val;
+                return;
+            }
             changeVal = 'price';
             this.watchAQ++;
         },
@@ -116,15 +135,28 @@ export default {
             this.clearValidTimeout();
             validTimeout = setTimeout(() => {
                 this.clearValidTimeout();
+                this.validAll();
+                let isErr = false;
+                isErr = this.isPriceErr || this.isAmountErr || this.isQuantityErr;
+                if (this.isPriceErr) {
+                    this.price = this.oldPrice;
+                }
+                if (this.isAmountErr) {
+                    this.amount = this.oldAmount;
+                }
+                if (this.isQuantityErr) {
+                    this.quantity = this.oldQuantity;
+                }
+                if (isErr) {
+                    return;
+                }
                 changeVal && this[`${changeVal}Changed`]();
-                this.validPrice();
-                this.validAmount();
-                this.validQuantity();
+                this.validAll();
             }, 300);
         },
         activeTx: function() {
-            if ((this.activeTx.txSide === 0 && this.orderType === 'buy') ||
-                (this.activeTx.txSide === 1 && this.orderType === 'sell')){
+            if ((this.activeTx.txSide === 0 && this.orderType === 'sell') ||
+                (this.activeTx.txSide === 1 && this.orderType === 'buy')){
                 this.price = this.activeTx.price;
                 this.quantity = this.activeTx.quantity;
             }
@@ -178,7 +210,7 @@ export default {
             let amount = this.amount;
             let percent = this.percent;
 
-            if (percent * 100 % 25 !== 0) {
+            if (percent <= 0 || percent * 100 % 25 !== 0) {
                 return;
             }
 
@@ -217,6 +249,10 @@ export default {
             !BigNumber.isEqual(amount, this.amount) && (this.amount = amount);
         },
         amountChanged() {
+            if (this.isAmountErr) {
+                return;
+            }
+
             let price = this.price;
             let quantity = this.quantity;
             let amount = this.amount;
@@ -229,6 +265,10 @@ export default {
             !BigNumber.isEqual(percent, this.percent) && (this.percent = percent);
         },
         priceChanged() {
+            if (this.isPriceErr) {
+                return;
+            }
+
             let price = this.price;
             let quantity = this.quantity;
             let amount = this.amount;
@@ -241,6 +281,10 @@ export default {
             !BigNumber.isEqual(percent, this.percent) && (this.percent = percent);
         },
         quantityChanged() {
+            if (this.isQuantityErr) {
+                return;
+            }
+
             let price = this.price;
             let quantity = this.quantity;
             let amount = this.amount;
@@ -305,6 +349,11 @@ export default {
         validQuantity() {
             this.isQuantityErr = (this.quantity && !this.$validAmount(this.quantity)) ||
                 (this.orderType === 'sell' && BigNumber.compared(this.balance, this.quantity) < 0);
+        },
+        validAll() {
+            this.validPrice();
+            this.validAmount();
+            this.validQuantity();
         },
 
         _clickBtn() {
