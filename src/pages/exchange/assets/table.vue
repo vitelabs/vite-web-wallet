@@ -52,10 +52,10 @@
                 <div class="lable">{{c.lable2}} <div class="errtips">{{c.errTips}}</div>
                 </div>
                 <div class="input"><input
-                        type="text"
-                        :placeholder="c.placeholder"
-                        v-model="opNumber"
-                    ></div>
+                    type="text"
+                    :placeholder="c.placeholder"
+                    v-model="opNumber"
+                ></div>
             </div>
         </confirm>
         <alert
@@ -71,12 +71,12 @@
     </div>
 </template>
 <script>
-import alert from "../components/alert.vue";
-import confirm from "components/confirm.vue";
-import { deposit, withdraw, chargeDetail } from "services/exchange";
-import BigNumber from "utils/bigNumber";
-import getTokenIcon from "utils/getTokenIcon";
-const VoteDifficulty = "201564160";
+import alert from '../components/alert.vue';
+import confirm from 'components/confirm.vue';
+import { deposit, withdraw, chargeDetail } from 'services/exchange';
+import BigNumber from 'utils/bigNumber';
+import getTokenIcon from 'utils/getTokenIcon';
+const VoteDifficulty = '201564160';
 export default {
     props: {
         filter: { type: Object }
@@ -94,20 +94,20 @@ export default {
         return {
             detailConifrm: false,
             c: {},
-            opNumber: "",
+            opNumber: '',
             confirmShow: false,
             detailData: [],
             detailConfirm: false,
             acc: null,
-            addr: ""
+            addr: ''
         };
     },
     methods: {
         withdraw(tokenId) {
-            this.showConfirm({ tokenId, type: "withdraw" });
+            this.showConfirm({ tokenId, type: 'withdraw' });
         },
         recharge(tokenId) {
-            this.showConfirm({ tokenId, type: "recharge" });
+            this.showConfirm({ tokenId, type: 'recharge' });
         },
         detail(tokenId) {
             this.detailConfirm = true;
@@ -143,10 +143,10 @@ export default {
                     e && e.error ? e.error.code || -1 : e ? e.code : -1;
                 if (code === -35002) {
                     let startTime = new Date().getTime();
-                    const c = Object.assign({}, this.$t("quotaConfirmPoW"));
+                    const c = Object.assign({}, this.$t('quotaConfirmPoW'));
                     c.leftBtn.click = () => {
                         this.$router.push({
-                            name: "walletQuota"
+                            name: 'walletQuota'
                         });
                     };
                     (c.rightBtn.click = () => {
@@ -159,33 +159,33 @@ export default {
                             .then(successSubmit)
                             .catch(failSubmit);
                     }),
-                        (c.closeBtn = { show: true });
+                    (c.closeBtn = { show: true });
                     this.$confirm(c);
                 } else {
                     this.$toast(
-                        this.$t("walletVote.section1.cancelVoteErr"),
+                        this.$t('walletVote.section1.cancelVoteErr'),
                         e
                     );
                 }
             };
             const successSubmit = () => {
-                this.$toast("提现成功");
+                this.$toast('提现成功');
             };
             const c=this.c;
             this.closeNumConfirm();
-            debugger
+            debugger;
             this.acc.initPwd(
                 {
                     submitTxt: this.$t(`exchangeAssets.table.rowMap.${c.type}`),
-                    cancelTxt: this.$t("取消"),
+                    cancelTxt: this.$t('取消'),
                     submit: () => {
-                        c.type === "recharge"
+                        c.type === 'recharge'
                             ? deposit({ tokenId, amount }).then(successSubmit).catch(e => {
-                                  failSubmit(e);
-                              })
+                                failSubmit(e);
+                            })
                             : withdraw({ tokenId, amount }).then(successSubmit).catch(e => {
-                                  failSubmit(e);
-                              });
+                                failSubmit(e);
+                            });
                     }
                 },
                 true
@@ -193,28 +193,28 @@ export default {
         },
         testAmount() {
             const amountBalance =
-                this.c.type.toLowerCase() === "recharge"
+                this.c.type.toLowerCase() === 'recharge'
                     ? this.balance[this.c.tokenId].balance
                     : this.balance[this.c.tokenId].balance;
             const decimals = this.balance[this.c.tokenId].decimals;
             const result = this.$validAmount(this.opNumber, decimals);
             if (!result) {
-                this.c.errTips = this.$t("hint.amtFormat");
+                this.c.errTips = this.$t('hint.amtFormat');
                 return false;
             }
 
             if (BigNumber.isEqual(this.opNumber, 0)) {
-                this.c.errTips = this.$t("wallet.hint.amount");
+                this.c.errTips = this.$t('wallet.hint.amount');
                 return false;
             }
 
             // const amount = BigNumber.toMin(this.opNumber, decimals);
             if (BigNumber.compared(amountBalance, this.opNumber) < 0) {
-                this.c.errTips = this.$t("hint.insufficientBalance");
+                this.c.errTips = this.$t('hint.insufficientBalance');
                 return false;
             }
 
-            this.c.errTips = "";
+            this.c.errTips = '';
             return true;
         }
     },
@@ -234,7 +234,7 @@ export default {
                     available: exB[t].available,
                     lock: exB[t].lock,
                     balance: 0,
-                    icon: "",
+                    icon: '',
                     id: t,
                     symbol: exB[t].tokenInfo.tokenSymbol,
                     decimals: exB[t].tokenInfo.decimals
@@ -259,12 +259,12 @@ export default {
             Object.keys(res).forEach(t => {
                 res[t].icon = res[t].icon || getTokenIcon(res[t].id);
                 if (!this.$store.state.exchangeRate.rateMap[t]) {
-                    res[t].worth = "-";
+                    res[t].worth = '-';
                     return;
                 }
-                res[t].worth = `${this.$i18n.locale === "zh" ? "¥" : "$"}${
+                res[t].worth = `${this.$i18n.locale === 'zh' ? '¥' : '$'}${
                     this.$store.state.exchangeRate.rateMap[t][
-                        this.$i18n.locale === "zh" ? "cny" : "usd"
+                        this.$i18n.locale === 'zh' ? 'cny' : 'usd'
                     ]
                 }`;
             });
@@ -274,10 +274,10 @@ export default {
             return Object.keys(this.balance)
                 .map(k => this.balance[k])
                 .filter(v => {
-                    const NOTnoZero = this.filter.hideZero && v.balance === "0";
+                    const NOTnoZero = this.filter.hideZero && v.balance === '0';
                     const NOTmatchKey =
                         this.filter.filterKey &&
-                        !v.symbol.match(new RegExp(this.filter.filterKey, "i"));
+                        !v.symbol.match(new RegExp(this.filter.filterKey, 'i'));
                     return !(NOTnoZero || NOTmatchKey);
                 });
         }

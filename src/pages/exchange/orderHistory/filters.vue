@@ -44,7 +44,7 @@
             @click="submit"
             class="search"
         >搜索</div>
-                <div
+        <div
             @click="reset"
             class="search active"
         >重置</div>
@@ -80,8 +80,8 @@ export default {
         },
         submit() {
             this.$emit('submit', {
-                fDate: this.fromDate?new Date(this.fromDate).getTime()/1000:"",
-                tDate: this.toDate?new Date(this.toDate).getTime()/1000:"",
+                fDate: this.fromDate?new Date(this.fromDate).getTime()/1000:'',
+                tDate: this.toDate?new Date(this.toDate).getTime()/1000:'',
                 orderSide: this.tradeType,
                 fToken: this.fToken,
                 tToken: this.tToken
