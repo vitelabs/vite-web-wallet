@@ -1,5 +1,8 @@
 import request from 'utils/request';
+import { wallet } from 'utils/walletInstance';
+import { utils } from '@vite/vitejs';
 
+const privToAddr = utils.address.privToAddr;
 const path = '/api/v1';
 
 export const klineMinute = function ({
@@ -184,3 +187,37 @@ export const tokenMap = function({
         }
     });
 };
+
+export const deposit=async function({tokenId,amount}){
+    return await wallet.getActiveAccount().callContract({
+        toAddress:'vite_000000000000000000000000000000000000000617d47459a8', 
+        jsonInterface:{'type':'function','name':'DexFundUserDeposit', 'inputs':[]}, 
+        tokenId, amount
+    });
+};
+
+export const withdraw=async function({tokenId,amount}){
+    return await wallet.getActiveAccount().callContract({
+        toAddress:'vite_000000000000000000000000000000000000000617d47459a8', 
+        jsonInterface:{'type':'function','name':'DexFundUserDeposit', 'inputs':[]}, 
+        tokenId, amount
+    });
+};
+
+export const newOrder = function({
+    tradeToken, side, quoteToken, price, quantity
+}) {
+    let orderId = getOrderId();
+    return wallet.getActiveAccount().callContract({
+        toAddress:'vite_000000000000000000000000000000000000000617d47459a8',
+        jsonInterface: {'type':'function','name':'DexFundNewOrder', 'inputs':[{'name':'orderId','type':'bytes'}, {'name':'tradeToken','type':'tokenId'}, {'name':'quoteToken','type':'tokenId'}, {'name':'side', 'type':'bool'}, {'name':'orderType', 'type':'uint32'}, {'name':'price', 'type':'string'}, {'name':'quantity', 'type':'uint256'}]}, 
+        params: ['0x'+orderId, tradeToken, quoteToken, side, 0, price, quantity],
+        tokenId: tradeToken
+    });
+};
+
+
+
+function getOrderId() {
+    return privToAddr.newHexAddr().addr;
+}

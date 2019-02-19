@@ -1,7 +1,7 @@
 import toast from 'components/toast/index.js';
 import confirm from 'components/confirm/index.js';
 import statistics from 'utils/statistics';
-import { wallet } from 'utils/wallet';
+import { wallet } from 'utils/walletInstance';
 import routeConfig from 'router/routes';
 
 const loginRoutes = routeConfig.loginRoutes;
@@ -20,8 +20,8 @@ export default {
         Vue.mixin({
             created() {
                 this.$router && this.$router.beforeEach((to, from, next) => {
-                    if (loginRoutes.indexOf(to.name) >= 0 && !this.$wallet.isLogin) {
-                        (to.name !== 'start') && this.$wallet.setLastPage(to.name);
+                    if (loginRoutes.indexOf(to.name) >= 0 && !wallet.isLogin) {
+                        (to.name !== 'start') && wallet.setLastPage(to.name);
                         this.$router.replace({
                             name: 'start'
                         });
@@ -47,7 +47,7 @@ export default {
             window.document.onkeydown = null;
         };
 
-        Vue.prototype.$wallet = new wallet();
+        Vue.prototype.$wallet = wallet;
 
         Vue.prototype.$validAmount = (amount = '', decimals = 8) => {
             let limit = decimals >= 8 ? 8 : decimals;
