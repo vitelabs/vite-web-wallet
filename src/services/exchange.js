@@ -207,7 +207,12 @@ export const withdraw=async function({tokenId,amount}){
 };
 
 export const cancelOrder =async function({orderId,tradeToken,side,quoteToken}){
-    return await wallet.getActiveAccount().callContract({toAddress:constant.tradAddr,jsonInterface:{'type':'function','name':'DexTradeCancelOrder', 'inputs':[{'name':'orderId','type':'bytes'}, {'name':'tradeToken','type':'tokenId'}, {'name':',quoteToken','type':'tokenId'}, {'name':'side', 'type':'bool'}]},param:[orderId,tradeToken,side,quoteToken]});
+    
+    return await wallet.getActiveAccount().callContract({
+        tokenId:tradeToken,
+        toAddress:constant.contract.DexTrade_Addr,
+        jsonInterface:{'type':'function','name':'DexTradeCancelOrder', 'inputs':[{'name':'orderId','type':'bytes'}, {'name':'tradeToken','type':'tokenId'}, {'name':',quoteToken','type':'tokenId'}, {'name':'side', 'type':'bool'}]},
+        params:[`0x${Buffer.from(orderId,'base64').toString('hex')}`,tradeToken,quoteToken,side]});
 
 };
 
