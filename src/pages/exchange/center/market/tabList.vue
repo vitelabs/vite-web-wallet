@@ -14,7 +14,7 @@
 export default {
     methods: {
         changeToken(_token) {
-            this.$store.commit("setCurrentMarket", _token);
+            this.$store.commit('setCurrentMarket', _token);
         }
     },
     computed: {
