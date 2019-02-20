@@ -2,7 +2,7 @@
     "lang": "EN",
     "start": "Start",
     "login": "Log In",
-    "register": "注册",
+    "register": "Sign Up",
     "createAcc": "Create",
     "settingAcc": "Setting Account",
     "resetAcc": "Reset Your Account",
@@ -474,8 +474,8 @@
                 "Value"
             ],
             "rowMap": {
-                "recharge": "Deposit tokens in the exchange",
-                "withdraw": "Withdraw token to wallet",
+                "recharge": "Deposit",
+                "withdraw": "Withdraw",
                 "detail": "Details"
             }
         },
@@ -498,7 +498,8 @@
             "tips": "Insufficient Wallet Balance",
             "placeholder": "Please input withdrawal amount",
             "btn": "Make a Withdrawal"
-        }
+        },
+        "zero": "Hide Zero Tokens"
     },
     "exchangeOpenOrders": {
         "confirm":{
