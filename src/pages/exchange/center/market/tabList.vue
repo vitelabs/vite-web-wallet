@@ -7,38 +7,20 @@
 </template>
 
 <script>
-import { baseToken } from 'services/exchange';
-
 export default {
-    props: {
-        setToTokenId: {
-            type: Function,
-            default: () => {}
-        }
-    },
-    created() {
-        baseToken().then((data) => {
-            this.toTokenList = data || [];
-            this.activeTokenId = this.toTokenList && this.toTokenList.length ? 
-                this.toTokenList[0].token : '';
-        }).catch((err) => {
-            console.warn(err);
-        });
-    },
     data() {
         return {
-            toTokenList: [],
-            activeTokenId: ''
+            toTokenList: []
         };
-    },
-    watch: {
-        activeTokenId: function() {
-            this.setToTokenId( this.activeTokenId );
-        }
     },
     methods: {
         changeToken(_token) {
-            this.activeTokenId = _token.token;
+            this.$store.commit('setCurrentMarket',_token);
+        }
+    },
+    computed:{
+        activeTokenId(){
+            return this.$store.state.exchangeMarket.currentMarket;
         }
     }
 };

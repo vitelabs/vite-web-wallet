@@ -25,9 +25,7 @@
         <div class="separator">-</div>
         <div class="filter end">
             <select class="filter_content">
-                <option value="vite">vite</option>
-                <option value="eth">eth</option>
-                <option value="btc">btc</option>
+                <option v-for="t in marketMap" :value="t.token" :key="t.token">{{t.name}}</option>
             </select>
         </div>
         <div class="filter end">
@@ -54,7 +52,6 @@
 <script>
 import FlatPickr from 'vue-flatpickr-component';
 import 'flatpickr/dist/flatpickr.css';
-import { baseToken } from 'services/exchange';
 export default {
     data() {
         return {
@@ -66,13 +63,13 @@ export default {
             tokenMap: []
         };
     },
-    beforeMount() {
-        baseToken().then(data => {
-            this.tokenMap = data;
-        });
-    },
     components: {
         FlatPickr
+    },
+    computed:{
+        marketMap(){
+            return this.$store.state.exchangeMarket.marketMap;
+        }
     },
     methods: {
         reset(){
