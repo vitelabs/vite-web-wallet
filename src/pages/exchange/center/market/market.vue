@@ -194,18 +194,6 @@ export default {
                         ? this.activeFavoriteList
                         : this.txPairList;
             list = [].concat(list);
-
-            let i;
-            for (i = 0; i < list.length; i++) {
-                if (list[i].pairCode === this.activePairCode) {
-                    break;
-                }
-            }
-
-            if (i === list.length && this.activeTxPair) {
-                list.push(this.activeTxPair);
-            }
-
             return list;
         },
         activeFavoriteList() {
