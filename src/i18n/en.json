@@ -2,7 +2,7 @@
     "lang": "EN",
     "start": "Start",
     "login": "Log In",
-    "register": "注册",
+    "register": "Sign Up",
     "createAcc": "Create",
     "settingAcc": "Setting Account",
     "resetAcc": "Reset Your Account",
@@ -134,13 +134,13 @@
         "addAddr": "Add Address",
         "addrList": "Addresses of Accounts",
         "setDefault": "Select Default Address",
-        "autoLogout": "自动退出登录时间",
+        "autoLogout": "Auto Logout Time",
         "timeList": {
-            "5": "5分钟",
-            "10": "10分钟",
-            "30": "30分钟",
-            "60": "1小时",
-            "720": "12小时"
+            "5": "5 Minutes",
+            "10": "10 Minutes",
+            "30": "30 Minutes",
+            "60": "1 Hour",
+            "720": "12 Hours"
         }
     },
     "startCreate": {
@@ -474,8 +474,8 @@
                 "Value"
             ],
             "rowMap": {
-                "recharge": "Deposit tokens in the exchange",
-                "withdraw": "Withdraw token to wallet",
+                "recharge": "Deposit",
+                "withdraw": "Withdraw",
                 "detail": "Details"
             }
         },
@@ -498,7 +498,8 @@
             "tips": "Insufficient Wallet Balance",
             "placeholder": "Please input withdrawal amount",
             "btn": "Make a Withdrawal"
-        }
+        },
+        "zero": "Hide Zero Tokens"
     },
     "exchangeOpenOrders": {
         "confirm":{
@@ -564,6 +565,16 @@
                 },
                 "detail": "Details"
             }
+        },
+        "filter": {
+            "start": "From",
+            "end": "To",
+            "type": "Type",
+            "side": "Side",
+            "buy": "Buy",
+            "sell": "Sell",
+            "search": "Search",
+            "reset": "Reset"
         }
     }
 }
