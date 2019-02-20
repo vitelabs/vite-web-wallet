@@ -2,7 +2,7 @@
 
 <template>
     <div class="order-history-ct">
-        <Filters @submit="submit($event)"></Filters>
+        <Filters @submit="submit($event)" v-if="!isBuiltIn"></Filters>
         <Table
             :list="data"
             class="tb"
@@ -22,6 +22,12 @@ export default {
         Table,
         Pagination
     },
+    props:{
+        isBuiltIn:{
+            type:Boolean,
+            default:false
+        }
+    },
     data() {
         return {
             data: [],
@@ -40,11 +46,16 @@ export default {
             this.filters=v;
             this.update(this.filters);
         },
+        currentMarket(){
+            return this.$store.state.exchangeMarket.currentMarket;
+        },
         update(filters={}) {
             const account=this.$wallet.getActiveAccount();
             if (!account) return;
             const address=account.getDefaultAddr();
-            
+            if(this.isBuiltIn){
+                filters={totoken:this.currentMarket};
+            }
             order({
                 address,...filters,pageNum:10,pageIndex:this.currentPage
             }).then(data => {
