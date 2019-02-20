@@ -404,7 +404,7 @@
         "priceTitle": "Price({price})",
         "amountTitle": "Filled({amount})",
         "amount": "Total",
-        "newOrderSuccess": "提单成功",
+        "newOrderSuccess": "Ordered Successful",
         "buy": {
             "title": "Buy {token}",
             "price": "Price",
@@ -448,121 +448,121 @@
         "limitPrice": {
             "title": "Limit",
             "fee": "Fee",
-            "text": "此页面为交易预览信息，请登录后进行交易"
+            "text": "This page is a preview page of transaction data. Please log in to trade."
         }
     },
     "exchangeAssets": {
-        "title": "资产管理",
-        "search": "请输入代币名称",
+        "title": "Funds",
+        "search": "Please input token name",
         "confirmTable": {
             "heads": [
-                "日期",
-                "代币名称",
-                "交易类型",
-                "交易金额"
+                "Date",
+                "Token",
+                "Type",
+                "Amount"
             ]
         },
         "pwdConfirm": {
-            "cancelTxt": "取消"
+            "cancelTxt": "Cancel"
         },
         "table": {
             "heads": [
-                "代币名称",
-                "钱包余额",
-                "交易所账户余额",
-                "委托中",
-                "价值"
+                "Token",
+                "Balance",
+                "Exchange Balance",
+                "In Order",
+                "Value"
             ],
             "rowMap": {
-                "recharge": "充币至交易所",
-                "withdraw": "提币至钱包",
-                "detail": "查看明细"
+                "recharge": "Deposit tokens in the exchange",
+                "withdraw": "Withdraw token to wallet",
+                "detail": "Details"
             }
         },
         "confirmrecharge": {
-            "successToast":"充值成功",
-            "failToast":"充值失败",
-            "title": "充币至交易所",
-            "lable1": "钱包余额",
-            "lable2": "充币金额",
-            "tips": "钱包账户余额不足",
-            "placeholder": "请输入充币金额",
-            "btn": "充币至交易所"
+            "successToast":"Deposit successful",
+            "failToast":"Failed to deposit",
+            "title": "Deposit tokens in the exchange",
+            "lable1": "Wallet Balance",
+            "lable2": "Deposit Amount",
+            "tips": "Insufficient Wallet Balance",
+            "placeholder": "Please input deposit amount",
+            "btn": "Ready to Deposit"
         },
         "confirmwithdraw": {
-            "successToast":"提币成功",
-            "failToast":"提币失败",
-            "title": "提币至钱包",
-            "lable1": "可提币余额",
-            "lable2": "提币金额",
-            "tips": "钱包账户余额不足",
-            "placeholder": "请输入提币金额",
-            "btn": "提币至钱包"
+            "successToast":"Withdrawal Successful",
+            "failToast":"Withdrawal Failed",
+            "title": "Withdraw token to the wallet",
+            "lable1": "Available Balance",
+            "lable2": "Withdrawal Amount",
+            "tips": "Insufficient Wallet Balance",
+            "placeholder": "Please input withdrawal amount",
+            "btn": "Make a Withdrawal"
         }
     },
     "exchangeOpenOrders": {
         "confirm":{
-            "successToast":"撤销交易发送成功",
-            "failToast":"撤销交易发送失败",
-            "submitTxt":"确认撤销",
-            "cancelTxt":"取消"
+            "successToast":"Revoking Transaction Successful",
+            "failToast":"Revoking Transaction Failed",
+            "submitTxt":"Confirm to revoke",
+            "cancelTxt":"Cancel"
         },
-        "title": "当前委托",
+        "title": "Open Orders",
         "side": {
-            "1": "卖",
-            "0": "买"
+            "1": "Sell",
+            "0": "Buy"
         },
         "table": {
             "heads": [
-                "委托时间",
-                "市场",
-                "方向",
-                "委托价格",
-                "委托数量(#tokenSymbol#)",
-                "已成交(#tokenSymbol#)",
-                "成交率",
-                "成交均价"
+                "Date",
+                "Pair",
+                "Side",
+                "Price",
+                "Amount(#tokenSymbol#)",
+                "Filled(#tokenSymbol#)",
+                "Filled%",
+                "Avg Price"
             ],
             "rowMap": {
-                "cancel": "撤销"
+                "cancel": "Cancel"
             }
         }
     },
     "exchangeOrderHistory": {
         "title": "Order History",
         "side": {
-            "1": "卖",
-            "0": "买"
+            "1": "Sell",
+            "0": "Buy"
         },
         "confirmTable": {
             "heads": [
-                "成交时间",
-                "成交价",
-                "成交量",
-                "手续费",
-                "成交金额"
+                "Time",
+                "Price",
+                "Volume",
+                "Fee",
+                "Amount"
             ]
         },
         "table": {
             "heads": [
-                "委托时间",
-                "市场",
-                "方向",
-                "委托价格",
-                "委托数量(#tokenSymbol#)",
-                "已成交(#tokenSymbol#)",
-                "成交率",
-                "成交均价",
-                "手续费",
-                "状态"
+                "Date",
+                "Pair",
+                "Side",
+                "Price",
+                "Amount(#tokenSymbol#)",
+                "Filled(#tokenSymbol#)",
+                "Filled%",
+                "Avg Price",
+                "Fee",
+                "Status"
             ],
             "rowMap": {
                 "statusMap": {
-                    "1": "委托中",
-                    "2": "已完成",
-                    "3": "取消"
+                    "1": "In Order",
+                    "2": "Completed",
+                    "3": "Cancel"
                 },
-                "detail": "查看明细"
+                "detail": "Details"
             }
         }
     }
