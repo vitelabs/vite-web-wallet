@@ -509,7 +509,7 @@ $font-black: rgba(36,39,43,1);
             background: $red;
         }
         &.blue {
-            background: $blue;
+            background: $green;
         }
         &.gray {
             background: rgba(0, 0, 0, 0.4);
