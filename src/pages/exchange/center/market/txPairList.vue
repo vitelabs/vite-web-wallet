@@ -91,7 +91,7 @@ export default {
             return _l;
         },
         rate() {
-            let rateList = this.$store.state.exchangeRate.rateList || {};
+            let rateList = this.$store.state.exchangeRate.rateMap || {};
             let tokenId = this.activeTxPair && this.activeTxPair.ttoken ? this.activeTxPair.ttoken : null;
             let coin = this.$store.state.exchangeRate.coins[this.$i18n.locale || 'zh'];
             if (!tokenId || !rateList[tokenId]) {
