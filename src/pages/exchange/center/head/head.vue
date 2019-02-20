@@ -4,7 +4,10 @@
         <div class="latest-price">
             <div class="token-title">{{ $t('exchange.head.latestPrice') }}</div>
             <div class="token-content">
-                <span class="price">
+                <span :class="{
+                    'up': +upDown > 0,
+                    'down': +upDown < 0
+                }">
                     {{ activeTxPair && activeTxPair.price ? activeTxPair.price : '' }}
                 </span>
                 {{ realPrice }}
@@ -94,7 +97,7 @@ export default {
     line-height: 16px;
     .token-title {
         font-family: $font-normal, arial, sans-serif;
-        color: rgba(94,104,117,1);
+        color: #6f7986;
         font-weight: 400;
     }
     .token-content {
