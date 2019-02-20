@@ -42,7 +42,7 @@ export default {
 .filter-root {
     display: flex;
     align-items: flex-end;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     .filter {
         height: 40px;
         &:first-child {
