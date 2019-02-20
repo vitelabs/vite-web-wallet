@@ -52,7 +52,7 @@ export default {
             if (!account) return;
             const address=account.getDefaultAddr();
             if(this.isBuiltIn){
-                filters={totoken:this.currentMarket}
+                filters={totoken:this.currentMarket};
             }
             order({
                 address,...filters,pageNum:10,pageIndex:this.currentPage
