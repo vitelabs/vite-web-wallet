@@ -105,11 +105,13 @@ export default {
 <style lang="scss" scoped>
 @import "../components/table.scss";
 .ex_tb {
-    height: 100%;
     padding-bottom: 10px;
 }
 @include rowWith {
     width: 8%;
+    &:first-child{
+        min-width: 160px;
+    }
     &:first-child,
     &:nth-child(4),
     &:nth-child(5),
