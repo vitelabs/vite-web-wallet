@@ -4,7 +4,7 @@
             <div
                 v-for="(h) in $t('exchangeOpenOrders.table.heads')"
                 :key="h"
-            >{{h.replace("#tokenSymbol#","vite")}}
+            >{{h.replace("#tokenSymbol#",currentMarketNmae)}}
             </div>
             <div></div>
         </div>
@@ -118,7 +118,11 @@ export default {
             this.list = data.orders;
         });
     },
-    computed: {}
+    computed: {
+        currentMarketNmae(){
+            return this.$store.getters.currentMarketName;
+        }
+    }
 };
 </script>
 <style lang="scss" scoped>
