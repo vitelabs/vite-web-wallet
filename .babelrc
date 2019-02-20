@@ -1,5 +1,5 @@
 {
-    "presets": [["@babel/preset-env",{"module":true}]],
+    "presets": [["@babel/preset-env",{"module":false}]],
     "plugins": [
         ["@babel/plugin-transform-runtime", {
             "corejs": false,
