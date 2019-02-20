@@ -5,7 +5,7 @@
         <center v-if="active === 'exchange'"></center>
         <div
             class="order"
-            v-if="active === 'exchange'&&$wallet.isLogin"
+            v-if="active === 'exchange'"
         >
             <div class="tap">
                 <div
