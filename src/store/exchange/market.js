@@ -1,7 +1,7 @@
 import { baseToken } from 'services/exchange';
 const state = {
     currentMarket: '',
-    marketMap:[]
+    marketMap:[],
 };
 
 const mutations = {
@@ -22,6 +22,12 @@ const actions ={
         });
     }
 };
+const getters={
+    currentMarketName(state){
+        const token= state.marketMap.filter(n=>n.token===state.currentMarket)[0]||{};
+        return token.name||'';
+    }
+};
 export default {
-    state, mutations,actions
+    state, mutations,actions,getters
 };
