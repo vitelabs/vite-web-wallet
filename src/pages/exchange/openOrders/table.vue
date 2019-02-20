@@ -29,7 +29,7 @@
                 >{{$t("exchangeOpenOrders.table.rowMap.cancel")}}</div>
             </div>
         </div>
-         <powProcess ref="pow"></powProcess>
+        <powProcess ref="pow"></powProcess>
     </div>
 </template>
 <script>
@@ -77,18 +77,18 @@ export default {
                     this.$confirm(powTxt);
                 } else {
                     this.$toast(
-                        this.$t(`exchangeOpenOrders.confirm.failToast`),e
+                        this.$t('exchangeOpenOrders.confirm.failToast'),e
                     );
                 }
             };
             const successSubmit = () => {
                 this.$toast(
-                    this.$t(`exchangeOpenOrders.confirm.successToast`)
+                    this.$t('exchangeOpenOrders.confirm.successToast')
                 );
             };
             this.acc.initPwd(
                 {
-                    submitTxt: this.$t(`exchangeOpenOrders.confirm.submitTxt`),
+                    submitTxt: this.$t('exchangeOpenOrders.confirm.submitTxt'),
                     cancelTxt: this.$t('exchangeOpenOrders.confirm.cancelTxt'),
                     submit: () => {
                         cancelOrder({
