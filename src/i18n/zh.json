@@ -452,7 +452,7 @@
         }
     },
     "exchangeAssets": {
-        "title": "Funds",
+        "title": "资产管理",
         "table": {
             "heads": [
                 "代币名称",
@@ -469,7 +469,7 @@
         }
     },
     "exchangeOpenOrders": {
-        "title": "Open Orders",
+        "title": "当前委托",
         "side": {
             "1": "卖",
             "0": "买"
@@ -491,7 +491,7 @@
         }
     },
     "exchangeOrderHistory": {
-        "title": "Order History",
+        "title": "历史委托",
         "side": {
             "1": "卖",
             "0": "买"
