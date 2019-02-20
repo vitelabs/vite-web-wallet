@@ -310,13 +310,15 @@ export default {
             }
 
             this.isLoading = true;
-            let _fromTokenShow = this.searchText;
+            let _fromTokenShow = this.$trim(this.searchText);
+
             return pairSearch({
                 key: _fromTokenShow,
                 ttoken: this.activeTxPair.ttoken
             })
                 .then(data => {
-                    if (this.searchText !== _fromTokenShow) {
+                    let currentText = this.$trim(this.searchText);
+                    if (currentText !== _fromTokenShow) {
                         return;
                     }
                     this.isLoading = false;
