@@ -11,6 +11,7 @@
     position: relative;
     border-radius: 2px;
     background: #fff;
+    font-size: 14px;
     .head-row {
         position: absolute;
         top: 0;
@@ -18,7 +19,7 @@
         color: #1D2024;
         width: 100%;
         box-sizing: border-box;
-        font: $font-bold;
+        font-family: $font-bold;
         display: flex;
         padding: 0 30px;
         >div {
