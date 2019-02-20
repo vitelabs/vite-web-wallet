@@ -564,6 +564,16 @@
                 },
                 "detail": "Details"
             }
+        },
+        "filter": {
+            "start": "From",
+            "end": "To",
+            "type": "Type",
+            "side": "Side",
+            "buy": "Buy",
+            "sell": "Sell",
+            "search": "Search",
+            "reset": "Reset"
         }
     }
 }
