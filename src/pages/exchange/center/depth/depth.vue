@@ -2,14 +2,14 @@
     <div class="depth-wrapper">
         <div class="ex-tab-list"> 
             <span class="ex-tab __pointer" 
+                  :class="{'active': isShowSell && isShowBuy}" 
+                  @click="showTable(true, true)">{{ $t('exchange.depth.all') }}</span>
+            <span class="ex-tab __pointer" 
                   :class="{'active': isShowBuy && !isShowSell}" 
                   @click="showTable(true, false)">{{ $t('exchange.depth.buy') }}</span>
             <span class="ex-tab __pointer" 
                   :class="{'active': isShowSell && !isShowBuy}" 
                   @click="showTable(false, true)">{{ $t('exchange.depth.sell') }}</span>
-            <span class="ex-tab __pointer" 
-                  :class="{'active': isShowSell && isShowBuy}" 
-                  @click="showTable(true, true)">{{ $t('exchange.depth.all') }}</span>
         </div>
 
         <div class="__center-tb-title">
