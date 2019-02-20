@@ -44,7 +44,7 @@ export default {
             const account=this.$wallet.getActiveAccount();
             if (!account) return;
             const address=account.getDefaultAddr();
-            debugger;
+            
             order({
                 address,...filters,pageNum:10,pageIndex:this.currentPage
             }).then(data => {
