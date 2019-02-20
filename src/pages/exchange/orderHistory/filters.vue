@@ -73,7 +73,8 @@ export default {
     },
     methods: {
         reset(){
-
+            this.$emit('submit', {
+            });
         },
         submit() {
             this.$emit('submit', {

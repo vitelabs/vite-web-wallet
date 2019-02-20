@@ -24,9 +24,9 @@
             }) }}</span>
         </div>
 
-        <depth-table v-show="isShowBuy" class="depth-table" dataType="buy" :depthData="depthBuy"></depth-table>
-        <price></price>
         <depth-table v-show="isShowSell" class="depth-table" dataType="sell" :depthData="depthSell"></depth-table>
+        <price></price>
+        <depth-table v-show="isShowBuy" class="depth-table" dataType="buy" :depthData="depthBuy"></depth-table>
     </div>
 </template>
 
