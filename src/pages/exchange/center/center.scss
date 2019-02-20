@@ -41,13 +41,12 @@ $up-font-color: $green;
 }
 
 .__center-title {
-    height: 28px;
-    line-height: 28px;
+    height: 34px;
+    line-height: 34px;
     padding: 0 6px;
-    border-bottom: 1px solid rgba(212,222,231,1);
+    border-bottom: 1px solid $blue;
     font-size: 14px;
-    font-family: $font-bold, arial, sans-serif;
-    font-weight: 600;
+    font-family: $font-normal, arial, sans-serif;
     color: rgba(36,39,43,1);
     box-sizing: border-box;
 }
