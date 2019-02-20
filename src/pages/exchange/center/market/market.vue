@@ -96,6 +96,10 @@ export default {
         tabList,
         txPairList
     },
+
+    beforeMount(){
+        this.init();
+    },
     destroyed() {
         this.stopLoopList();
     },
