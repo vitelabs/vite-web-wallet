@@ -1,6 +1,6 @@
 <template>
     <div class="market-wrapper">
-        <tab-list :setToTokenId="setToTokenId"></tab-list>
+        <tab-list></tab-list>
 
         <vite-input
             class="search-input"
@@ -84,7 +84,6 @@ import { defaultPair, assignPair, pairSearch } from 'services/exchange';
 import orderArrow from './orderArrow';
 import tabList from './tabList';
 import txPairList from './txPairList';
-import { client } from 'utils/proto';
 
 const FavoriteKey = 'favoriteTxPairs';
 let pairTimer = null;
@@ -97,11 +96,12 @@ export default {
         tabList,
         txPairList
     },
+
+    beforeMount(){
+        this.init();
+    },
     destroyed() {
         this.stopLoopList();
-    },
-    beforeMount() {
-        this.toTokenId && client.subscribe(this.toTokenId);
     },
     data() {
         return {
@@ -110,8 +110,6 @@ export default {
             isOnlyFavorite: false,
 
             favoritePairs: localStorage.getItem(FavoriteKey) || {},
-
-            toTokenId: '',
             txPairList: [],
 
             isShowSearch: false,
@@ -122,11 +120,6 @@ export default {
     },
     watch: {
         toTokenId: function() {
-            if (this.toTokenId) {
-                client.sub(this.toTokenId, data => {
-                    console.log(data);
-                });
-            }
             this.init();
         },
         txPairList: function() {
@@ -143,6 +136,9 @@ export default {
         }
     },
     computed: {
+        toTokenId(){
+            return this.$store.state.exchangeMarket.currentMarket;
+        },
         isShowSearchErr() {
             return this.searchText && this.isShowSearch && this.searchErr;
         },
@@ -198,18 +194,6 @@ export default {
                         ? this.activeFavoriteList
                         : this.txPairList;
             list = [].concat(list);
-
-            let i;
-            for (i = 0; i < list.length; i++) {
-                if (list[i].pairCode === this.activePairCode) {
-                    break;
-                }
-            }
-
-            if (i === list.length && this.activeTxPair) {
-                list.push(this.activeTxPair);
-            }
-
             return list;
         },
         activeFavoriteList() {
@@ -232,9 +216,6 @@ export default {
         }
     },
     methods: {
-        setToTokenId(toTokenId) {
-            this.toTokenId = toTokenId;
-        },
         toggleShowFavorite() {
             this.isOnlyFavorite = !this.isOnlyFavorite;
         },

@@ -19,5 +19,5 @@ store.registerModule('SBP', SBPStore);
 for (let moduleName in exchange) {
     store.registerModule(moduleName, exchange[moduleName]);
 }
-
+store.dispatch('updateMarketMap');
 export default store;

@@ -6,8 +6,8 @@
             <div :ref="`txPair${i}`" v-for="(txPair, i) in showList" :key="i" 
                  class="__center-tb-row __pointer" 
                  :class="{'active': txPair && txPair.pairCode === activePairCode}"
-                 @mouseenter="showRealPrice(txPair, i)"
-                 @mouseleave="hideRealPrice(txPair)"
+                 @mouseover="showRealPrice(txPair, i)"
+                 @mouseout="hideRealPrice(txPair)"
                  @click="setActiveTxPair(txPair.rawData)">
                 <span class="__center-tb-item txPair">
                     <span class="favorite-icon" :class="{'active': !!favoritePairs[txPair.pairCode]}"
