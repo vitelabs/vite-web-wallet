@@ -12,7 +12,7 @@
             <div class="filter"><input
                 type="checkbox"
                 v-model="hideZero"
-            >隐藏0元代币</div>
+            >{{ $t("exchangeAssets.zero") }}</div>
         </div>
         <Table :filter="{hideZero,filterKey}"></Table>
     </div>

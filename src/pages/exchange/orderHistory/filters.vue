@@ -3,7 +3,7 @@
 <template>
     <div class="filter-root">
         <div class="filter">
-            <div class="filter_label">起始日期</div>
+            <div class="filter_label"> {{ $t("exchangeOrderHistory.filter.start") }} </div>
             <FlatPickr
                 v-model="fromDate"
                 class="filter_content"
@@ -12,14 +12,14 @@
         </div>
         <div class="separator">-</div>
         <div class="filter end">
-            <div class="filter_label">终止日期</div>
+            <div class="filter_label">{{ $t("exchangeOrderHistory.filter.end") }}</div>
             <FlatPickr
                 v-model="toDate"
                 class="filter_content"
             ></FlatPickr>
         </div>
         <div class="filter">
-            <div class="filter_label">币种</div>
+            <div class="filter_label">{{ $t("exchangeOrderHistory.filter.type") }}</div>
             <input class="filter_content" />
         </div>
         <div class="separator">-</div>
@@ -29,23 +29,23 @@
             </select>
         </div>
         <div class="filter end">
-            <div class="filter_label">方向</div>
+            <div class="filter_label">{{ $t("exchangeOrderHistory.filter.side") }}</div>
             <select
                 v-model="tradeType"
                 class="filter_content"
             >
-                <option value="1">买</option>
-                <option value="-1">卖</option>
+                <option value="1">{{ $t("exchangeOrderHistory.filter.buy") }}</option>
+                <option value="-1">{{ $t("exchangeOrderHistory.filter.sell") }}</option>
             </select>
         </div>
         <div
             @click="submit"
             class="search"
-        >搜索</div>
+        >{{ $t("exchangeOrderHistory.filter.search") }}</div>
         <div
             @click="reset"
             class="search active"
-        >重置</div>
+        >{{ $t("exchangeOrderHistory.filter.reset") }}</div>
     </div>
 </template>
 
