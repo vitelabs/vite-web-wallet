@@ -18,7 +18,7 @@
                 >{{$t('exchangeOrderHistory.title')}}</div>
             </div>
             <openOrder v-if="tap==='openOrder'" class="item"></openOrder>
-            <historyOrder v-if="tap==='historyOrder'" class="item"></historyOrder>
+            <historyOrder v-if="tap==='historyOrder'" class="item" :isBuiltIn="true"></historyOrder>
         </div>
         <router-view></router-view>
     </div>
@@ -67,6 +67,11 @@ export default {
     width: 100%;
     height: 100%;
     .order {
+        background:#fff;
+        box-shadow:0px 2px 48px 1px rgba(176,192,237,0.42);
+        margin: 10px;
+        margin-top:0;
+        border-radius: 2px;
         .tap {
             height: 34px;
             display: flex;
@@ -74,7 +79,6 @@ export default {
             align-items: flex-end;
             > div {
                 font-size: 14px;
-                height: 24px;
                 color: #24272b;
                 cursor: pointer;
                 margin: 0 10px;
@@ -88,6 +92,8 @@ export default {
         }
         .item{
             height: 411px;
+            margin: 0;
+            padding:0;
         }
     }
     .router-wrapper {
