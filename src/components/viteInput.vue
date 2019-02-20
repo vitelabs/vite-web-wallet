@@ -1,5 +1,5 @@
 <template>
-    <form class="input-wrapper" autocomplete="off">
+    <div class="input-wrapper">
         <slot name="before"></slot>
         <!-- Safari autocomplete -->
         <input fake_pass type="password" style="display:none"/>
@@ -7,7 +7,7 @@
                :placeholder="placeholder" autocomplete="false"
                @blur="_blur" @focus="_focus"/>
         <slot name="after"></slot>
-    </form>
+    </div>
 </template>
 
 <script>
