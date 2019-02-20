@@ -466,7 +466,8 @@
                 "withdraw": "提币至钱包",
                 "detail": "查看明细"
             }
-        }
+        },
+        "zero": "隐藏0元代币"
     },
     "exchangeOpenOrders": {
         "title": "当前委托",
