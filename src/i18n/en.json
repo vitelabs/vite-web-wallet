@@ -474,20 +474,20 @@
                 "Value"
             ],
             "rowMap": {
-                "recharge": "Recharge tokens in the exchange",
+                "recharge": "Deposit tokens in the exchange",
                 "withdraw": "Withdraw token to wallet",
                 "detail": "Details"
             }
         },
         "confirmrecharge": {
-            "successToast":"Top up successful",
-            "failToast":"Failed to top up",
-            "title": "Recharge tokens in the exchange",
+            "successToast":"Deposit successful",
+            "failToast":"Failed to deposit",
+            "title": "Deposit tokens in the exchange",
             "lable1": "Wallet Balance",
-            "lable2": "Top-up Amount",
+            "lable2": "Deposit Amount",
             "tips": "Insufficient Wallet Balance",
-            "placeholder": "Please input top-up amount",
-            "btn": "Ready to recharge"
+            "placeholder": "Please input deposit amount",
+            "btn": "Ready to Deposit"
         },
         "confirmwithdraw": {
             "successToast":"Withdrawal Successful",
