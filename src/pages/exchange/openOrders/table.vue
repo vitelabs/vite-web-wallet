@@ -14,7 +14,7 @@
                 v-for="v in list"
                 :key="v.orderId"
             >
-                <div>{{v.date}}</div>
+                <div>{{(new Date(v.date)).toLocaleString()}}</div>
                 <div>{{`${v.ftokenShow}/${v.ttokenShow}`}}</div>
                 <!-- //0:buy,1:sell -->
                 <div :class="{buy:v.side===0,sell:v.side===1}">{{$t("exchangeOrderHistory.side")[v.side]}}</div>
