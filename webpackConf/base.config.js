@@ -4,6 +4,7 @@ const plugins = require('./plugins.js');
 // const px2rem = require('postcss-px2rem');
 
 const SRC_PATH = path.join(__dirname, '../src');
+const CHARTING_PATH = path.join(__dirname, '../charting_library');
 const STATIC_PATH = process.env.APP === 'true' ?
     path.join(__dirname, '../../app/walletPages') : 
     path.join(__dirname, '../static');
@@ -91,6 +92,7 @@ module.exports = {
         alias: {
             WSprovider: '@vite/vitejs/dist/es5/provider/WS',
             vue: 'vue/dist/vue.js',
+            charting: CHARTING_PATH,
             src: SRC_PATH,
             services: path.join(SRC_PATH, '/services'),
             components: path.join(SRC_PATH, '/components'),
