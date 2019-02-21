@@ -199,12 +199,12 @@ export async function chargeDetail({tokenId,address}){
 }
 export const deposit=async function({tokenId,amount}){
     // const abi=utils.abi.encodeFunctionCall({'type':'function','name':'DexFundUserDeposit', 'inputs':[]},[]);
-    return await wallet.getActiveAccount().callContract({toAddress:'vite_000000000000000000000000000000000000000617d47459a8', jsonInterface:{'type':'function','name':'DexFundUserDeposit', 'inputs':[]}, tokenId, amount,params:[]});
+    return await wallet.getActiveAccount().callContract({toAddress:'vite_000000000000000000000000000000000000000617d47459a8', abi:{'type':'function','name':'DexFundUserDeposit', 'inputs':[]}, tokenId, amount,params:[]});
 };
 
 export const withdraw=async function({tokenId,amount}){
     // const abi=utils.abi.encodeFunctionCall({'type':'function','name':'DexFundUserDeposit', 'inputs':[]},[]);
-    return await wallet.getActiveAccount().callContract({toAddress:'vite_000000000000000000000000000000000000000617d47459a8', jsonInterface:{'type':'function','name':'DexFundUserWithdraw', 'inputs':[{'name':'token','type':'tokenId'},{'name':'amount','type':'uint256'}]}, params:[tokenId, amount],tokenId,amount:'0'});
+    return await wallet.getActiveAccount().callContract({toAddress:'vite_000000000000000000000000000000000000000617d47459a8', abi:{'type':'function','name':'DexFundUserWithdraw', 'inputs':[{'name':'token','type':'tokenId'},{'name':'amount','type':'uint256'}]}, params:[tokenId, amount],tokenId,amount:'0'});
 };
 
 export const cancelOrder =async function({orderId,tradeToken,side,quoteToken}){
@@ -212,7 +212,7 @@ export const cancelOrder =async function({orderId,tradeToken,side,quoteToken}){
     return await wallet.getActiveAccount().callContract({
         tokenId:tradeToken,
         toAddress:constant.contract.DexTrade_Addr,
-        jsonInterface:{'type':'function','name':'DexTradeCancelOrder', 'inputs':[{'name':'orderId','type':'bytes'}, {'name':'tradeToken','type':'tokenId'}, {'name':',quoteToken','type':'tokenId'}, {'name':'side', 'type':'bool'}]},
+        abi:{'type':'function','name':'DexTradeCancelOrder', 'inputs':[{'name':'orderId','type':'bytes'}, {'name':'tradeToken','type':'tokenId'}, {'name':',quoteToken','type':'tokenId'}, {'name':'side', 'type':'bool'}]},
         params:[`0x${Buffer.from(orderId,'base64').toString('hex')}`,tradeToken,quoteToken,side]});
 
 };
@@ -223,7 +223,7 @@ export const newOrder = function({
     let orderId = getOrderId();
     return wallet.getActiveAccount().callContract({
         toAddress:'vite_000000000000000000000000000000000000000617d47459a8',
-        jsonInterface: {'type':'function','name':'DexFundNewOrder', 'inputs':[{'name':'orderId','type':'bytes'}, {'name':'tradeToken','type':'tokenId'}, {'name':'quoteToken','type':'tokenId'}, {'name':'side', 'type':'bool'}, {'name':'orderType', 'type':'uint32'}, {'name':'price', 'type':'string'}, {'name':'quantity', 'type':'uint256'}]}, 
+        abi: {'type':'function','name':'DexFundNewOrder', 'inputs':[{'name':'orderId','type':'bytes'}, {'name':'tradeToken','type':'tokenId'}, {'name':'quoteToken','type':'tokenId'}, {'name':'side', 'type':'bool'}, {'name':'orderType', 'type':'uint32'}, {'name':'price', 'type':'string'}, {'name':'quantity', 'type':'uint256'}]}, 
         params: ['0x'+orderId, tradeToken, quoteToken, side, 0, price, quantity],
         tokenId: tradeToken
     });
