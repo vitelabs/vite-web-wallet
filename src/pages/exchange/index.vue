@@ -65,7 +65,6 @@ export default {
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 100%;
     .order {
         background:#fff;
         box-shadow:0px 2px 48px 1px rgba(176,192,237,0.42);
