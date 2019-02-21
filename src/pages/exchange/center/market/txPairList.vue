@@ -121,9 +121,9 @@ export default {
             this.realPrice = this.getRealPrice(txPair);
         },
         toggleOver(isOver) {
-            this.isOver = isOver;
+            // this.isOver = isOver;
             console.log(isOver);
-            console.log(this.isHide);
+            // console.log(this.isHide);
             if (!this.isOver && this.isHide) {
                 this.pairCode = null;                
             }
