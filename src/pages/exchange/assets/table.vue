@@ -188,8 +188,7 @@ export default {
                                 failSubmit(e);
                             });
                     }
-                },
-                true
+                }
             );
         },
         testAmount() {
