@@ -264,7 +264,7 @@ export default {
                 res[t].worth = `${this.$i18n.locale === 'zh' ? '¥' : '$'}${
                     (this.$store.state.exchangeRate.rateMap[t][
                         this.$i18n.locale === 'zh' ? 'cny' : 'usd'
-                    ]*res[t].balance).toFixed(2)
+                    ]*(res[t].balance+res[t].available+res[t].lock)).toFixed(2)
                 }`;
             });
             return res;
