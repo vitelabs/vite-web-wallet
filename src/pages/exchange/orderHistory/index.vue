@@ -7,7 +7,7 @@
             :list="data"
             class="tb"
         ></Table>
-        <Pagination :currentPage="currentPage" :toPage="toPage" :totalPage="totalPage"></Pagination>
+        <Pagination :currentPage="currentPage" :toPage="toPage" :totalPage="totalPage" class="page-filter"></Pagination>
     </div>
 </template>
 <script>
@@ -31,7 +31,7 @@ export default {
     data() {
         return {
             data: [],
-            currentPage:0,
+            currentPage:1,
             totalPage:0
         };
     },
@@ -59,7 +59,7 @@ export default {
             order({
                 address,...filters,pageNum:10,pageIndex:this.currentPage
             }).then(data => {
-                this.totalPage=Math.ceil(this.data.totalSize/pageSize);
+                this.totalPage=Math.ceil(data.totalSize/pageSize);
                 this.data = data.orders||[];
             });
         }
@@ -74,6 +74,11 @@ export default {
     flex-direction: column;
     .tb {
         flex: 1;
+    }
+    .page-filter{
+        display: flex;
+        justify-content: center;
+        background:#fff;
     }
 }
 </style>
