@@ -378,14 +378,9 @@ export default {
         newOrder({
             price, quantity
         }) {
-            let tokenId = this.activeTxPair && this.activeTxPair.ftoken ? this.activeTxPair.ftoken : '';
+            let tradeToken = this.activeTxPair && this.activeTxPair.ftoken ? this.activeTxPair.ftoken : '';
             let quoteToken = this.activeTxPair && this.activeTxPair.ttoken ? this.activeTxPair.ttoken : '';
-            let tradeToken = tokenId;
-            if (this.orderType === 'buy') {
-                tradeToken = quoteToken;
-                quoteToken = tokenId;
-            }
-
+            
             this.isLoading = true;
 
             newOrder({
