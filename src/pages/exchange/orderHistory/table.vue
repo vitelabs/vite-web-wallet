@@ -17,7 +17,7 @@
                 v-for="v in sortedList"
                 :key="v.orderId"
             >
-                <div>{{new Date(v.date).toLocaleString()}}</div>
+                <div>{{new Date(v.date*1000).toLocaleString()}}</div>
                 <div>{{`${v.ftokenShow}/${v.ttokenShow}`}}</div>
                 <div :class="{buy:v.side===0,sell:v.side===1}">{{$t("exchangeOrderHistory.side")[v.side]}}</div>
                 <div>{{v.price}}</div>
@@ -92,7 +92,7 @@ export default {
         detailList(){
             return Object.keys(this.detailData).map(k=>{
                 const o=this.detailData[k];
-                return [new Date(o.txTime).toLocaleString(),`${o.price} ${o.token}`,`${o.quantity} ${o.token}`,`${o.fee} ${o.token}`,`${o.amount} ${o.token}`];
+                return [new Date(o.txTime*1000).toLocaleString(),`${o.price} ${o.token}`,`${o.quantity} ${o.token}`,`${o.fee} ${o.token}`,`${o.amount} ${o.token}`];
 
             });
         },
