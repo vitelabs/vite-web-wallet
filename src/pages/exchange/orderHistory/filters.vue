@@ -40,11 +40,11 @@
         </div>
         <div
             @click="submit"
-            class="search"
+            class="search active"
         >{{ $t("exchangeOrderHistory.filter.search") }}</div>
         <div
             @click="reset"
-            class="search active"
+            class="search"
         >{{ $t("exchangeOrderHistory.filter.reset") }}</div>
     </div>
 </template>
@@ -141,7 +141,7 @@ export default {
         line-height: 30px;
         margin-right: 18px;
         cursor: pointer;
-        &:active,&.actvie {
+        &:active,&.active {
             background: rgba(0, 122, 255, 1);
             color: #fff;
         }

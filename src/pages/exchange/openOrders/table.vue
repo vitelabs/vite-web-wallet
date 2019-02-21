@@ -33,21 +33,39 @@
     </div>
 </template>
 <script>
-import { order, cancelOrder } from 'services/exchange';
-import powProcess from 'components/powProcess';
-const VoteDifficulty = '201564160';
+import { order, cancelOrder } from "services/exchange";
+import powProcess from "components/powProcess";
+const VoteDifficulty = "201564160";
 export default {
+    props: {
+        filterObj: {
+            type: Object,
+            default: ()=>({})
+        }
+    },
     data() {
         return {
             list: [],
             sortIndex: 0,
             sortType: 1,
             acc: null,
-            addr: ''
+            addr: ""
         };
     },
-    components:{powProcess},
+    components: { powProcess },
     methods: {
+        update() {
+            this.acc = this.$wallet.getActiveAccount();
+            if (!this.acc) return;
+            this.acc && (this.addr = this.acc.getDefaultAddr());
+            order({
+                address: this.addr,
+                status: 1,
+                ...this.filterObj
+            }).then(data => {
+                this.list = data.orders;
+            });
+        },
         cancel(order) {
             const failSubmit = e => {
                 const code =
@@ -56,11 +74,11 @@ export default {
                     let startTime = new Date().getTime();
                     const powTxt = Object.assign(
                         {},
-                        this.$t('quotaConfirmPoW')
+                        this.$t("quotaConfirmPoW")
                     );
                     powTxt.leftBtn.click = () => {
                         this.$router.push({
-                            name: 'walletQuota'
+                            name: "walletQuota"
                         });
                     };
                     (powTxt.rightBtn.click = () => {
@@ -73,23 +91,22 @@ export default {
                             .then(successSubmit)
                             .catch(failSubmit);
                     }),
-                    (powTxt.closeBtn = { show: true });
+                        (powTxt.closeBtn = { show: true });
                     this.$confirm(powTxt);
                 } else {
                     this.$toast(
-                        this.$t('exchangeOpenOrders.confirm.failToast'),e
+                        this.$t("exchangeOpenOrders.confirm.failToast"),
+                        e
                     );
                 }
             };
             const successSubmit = () => {
-                this.$toast(
-                    this.$t('exchangeOpenOrders.confirm.successToast')
-                );
+                this.$toast(this.$t("exchangeOpenOrders.confirm.successToast"));
             };
             this.acc.initPwd(
                 {
-                    submitTxt: this.$t('exchangeOpenOrders.confirm.submitTxt'),
-                    cancelTxt: this.$t('exchangeOpenOrders.confirm.cancelTxt'),
+                    submitTxt: this.$t("exchangeOpenOrders.confirm.submitTxt"),
+                    cancelTxt: this.$t("exchangeOpenOrders.confirm.cancelTxt"),
                     submit: () => {
                         cancelOrder({
                             orderId: order.orderId,
@@ -108,18 +125,15 @@ export default {
         }
     },
     beforeMount() {
-        this.acc = this.$wallet.getActiveAccount();
-        if (!this.acc) return;
-        this.acc && (this.addr = this.acc.getDefaultAddr());
-        order({
-            address: this.addr,
-            status: 1
-        }).then(data => {
-            this.list = data.orders;
-        });
+        this.update();
+    },
+    watch: {
+        filterObj() {
+            this.update();
+        }
     },
     computed: {
-        currentMarketNmae(){
+        currentMarketNmae() {
             return this.$store.getters.currentMarketName;
         }
     }

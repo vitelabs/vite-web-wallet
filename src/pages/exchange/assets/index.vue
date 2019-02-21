@@ -14,7 +14,7 @@
                 v-model="hideZero"
             >{{ $t("exchangeAssets.zero") }}</div>
         </div>
-        <Table :filter="{hideZero,filterKey}"></Table>
+        <Table :filter="{hideZero,filterKey:filterKey.trim()}"></Table>
     </div>
 </template>
 <script>
