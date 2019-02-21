@@ -13,8 +13,8 @@
 <script>
 export default {
     methods: {
-        changeToken(_token) {
-            this.$store.commit('setCurrentMarket', _token);
+        changeToken(_t) {
+            this.$store.commit('setCurrentMarket', _t.token);
         }
     },
     computed: {
