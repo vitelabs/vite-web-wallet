@@ -46,8 +46,8 @@ export default {
     },
     computed:{
         activeTxPair(){
-        return this.$store.state.exchangeActiveTxPair.activeTxPair||{}
-    }
+            return this.$store.state.exchangeActiveTxPair.activeTxPair||{};
+        }
     },
     data() {
         return {

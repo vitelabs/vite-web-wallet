@@ -223,7 +223,7 @@ export default {
         detailList() {
             return Object.keys(this.detailData).map(k => {
                 const o = this.detailData[k];
-                return [new Date(o.optime*1000).toLocaleString(), o.tokenName, this.$t("exchangeAssets.table.rowMap.sideMap")[o.optype], o.amount];
+                return [new Date(o.optime*1000).toLocaleString(), o.tokenName, this.$t('exchangeAssets.table.rowMap.sideMap')[o.optype], o.amount];
             });
         },
         balance() {
