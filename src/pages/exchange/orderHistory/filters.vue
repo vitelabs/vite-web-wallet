@@ -16,6 +16,7 @@
             <FlatPickr
                 v-model="toDate"
                 class="filter_content"
+                :config="{dateFormat:'Z',enableTime:true,time_24hr:true}"
             ></FlatPickr>
         </div>
         <div class="filter">
@@ -78,8 +79,8 @@ export default {
         },
         submit() {
             this.$emit('submit', {
-                fDate: this.fromDate?new Date(this.fromDate).getTime()/1000:'',
-                tDate: this.toDate?new Date(this.toDate).getTime()/1000:'',
+                fdate: this.fromDate?new Date(this.fromDate).getTime()/1000:'',
+                tdate: this.toDate?new Date(this.toDate).getTime()/1000:'',
                 orderSide: this.tradeType,
                 fToken: this.fToken,
                 tToken: this.tToken
