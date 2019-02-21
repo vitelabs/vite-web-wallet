@@ -17,7 +17,7 @@
                     :class="{active:tap==='historyOrder'}"
                 >{{$t('exchangeOrderHistory.title')}}</div>
             </div>
-            <openOrder v-if="tap==='openOrder'" class="item"></openOrder>
+            <openOrder v-if="tap==='openOrder'" class="item" :filterObj="{ftoken:activeTxPair.ftoken,ttoken:activeTxPair.ttoken}"></openOrder>
             <historyOrder v-if="tap==='historyOrder'" class="item" :isBuiltIn="true"></historyOrder>
         </div>
         <router-view></router-view>
@@ -44,6 +44,11 @@ export default {
     destroyed() {
         this.$store.dispatch('stopLoopExchangeRate');
     },
+    computed:{
+        activeTxPair(){
+            return this.$store.state.exchangeActiveTxPair.activeTxPair||{};
+        }
+    },
     data() {
         return {
             tap: 'openOrder',
@@ -64,6 +69,7 @@ export default {
     min-width: 1300px;
     display: flex;
     flex-direction: column;
+    height: 100%;
     width: 100%;
     .order {
         background:#fff;
