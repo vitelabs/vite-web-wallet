@@ -455,6 +455,7 @@
         "title": "Funds",
         "search": "Please input token name",
         "confirmTable": {
+            "title":"充提记录",
             "heads": [
                 "Date",
                 "Token",
@@ -476,7 +477,11 @@
             "rowMap": {
                 "recharge": "Deposit",
                 "withdraw": "Withdraw",
-                "detail": "Details"
+                "detail": "Details",
+                "sideMap":{
+                    "1":"充值",
+                    "2":"提现"
+                }
             }
         },
         "confirmrecharge": {
