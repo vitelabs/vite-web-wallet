@@ -168,7 +168,7 @@
         }
     },
     "wallet": {
-        "title": "资产",
+        "title": "Assets",
         "transfer": "Transfer",
         "getTestToken": "Get Test Tokens",
         "transDetail": "More Transaction Details",
@@ -195,7 +195,7 @@
         }
     },
     "walletQuota": {
-        "title": "配额管理",
+        "title": "Quota Management",
         "help": {
             "title": "Quick Understanding of Quota"
         },
