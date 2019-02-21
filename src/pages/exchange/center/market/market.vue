@@ -61,7 +61,7 @@
         >{{ searchErr }}</div>
         <div
             class="hint"
-            v-show="!isShowSearchErr && isShowNoData"
+            v-show="!isLoading && !isShowSearchErr && isShowNoData"
         >{{ noData }}</div>
 
         <tx-pair-list
@@ -241,6 +241,7 @@ export default {
             // First, clear.
             this.searchText = '';
             this.searchList = [];
+            this.txPairList = [];
             this.stopLoopList();
 
             // Second, wait txPairList.
@@ -282,7 +283,7 @@ export default {
                 // Done
                 this.txPairList = list;
 
-                // this.startLoopList();
+                this.startLoopList();
             } catch (err) {
                 console.warn(err);
                 this.isLoading = false;
