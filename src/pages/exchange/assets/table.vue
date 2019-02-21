@@ -128,7 +128,7 @@ export default {
         showConfirm({ tokenId, type }) {
             this.opNumber= '';
             this.c= {};
-            const t = this.$t(`exchangeAssets.confirm${type}`);
+            const t = Object.assign({},this.$t(`exchangeAssets.confirm${type}`));
             t.tokenId = tokenId;
             t.type = type;
             t.icon=this.balance[tokenId].icon;
