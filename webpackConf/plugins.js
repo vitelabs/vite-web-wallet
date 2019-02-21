@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const px2rem = require('postcss-px2rem');
 
 const packJson = require('../package.json');
 const SRC_PATH = path.join(__dirname, '../src');
@@ -61,6 +62,16 @@ let plugins = [
     }),
     new webpack.NormalModuleReplacementPlugin(/\/buffer\//, function(resource) {
         resource.request = Buffer_Path;
+    }),
+    new webpack.LoaderOptionsPlugin({
+        vue: {
+            postcss: [
+                px2rem({ 
+                    remUnit: 75, 
+                    propWhiteList: [] 
+                })
+            ]
+        },
     })
 ];
 

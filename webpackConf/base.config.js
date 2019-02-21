@@ -1,6 +1,7 @@
 const path = require('path');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const plugins = require('./plugins.js');
+// const px2rem = require('postcss-px2rem');
 
 const SRC_PATH = path.join(__dirname, '../src');
 const STATIC_PATH = process.env.APP === 'true' ?
@@ -78,8 +79,13 @@ module.exports = {
                 loader: 'css-loader'
             }, {
                 loader: 'sass-loader'
+            }, {
+                loader: 'postcss-loader'
             }]
-        }]
+        }],
+        // postcss: function() {
+        //     return [px2rem({remUnit: 75})];
+        // }
     },
     resolve: {
         alias: {
