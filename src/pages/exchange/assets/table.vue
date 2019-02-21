@@ -62,7 +62,7 @@
             v-show="detailConfirm"
             :list="detailList"
             :heads="$t('exchangeAssets.confirmTable.heads')"
-            :title="'充值记录'"
+            :title="$t('exchangeAssets.confirmTable.title')"
             :close="close"
         >
 
@@ -126,6 +126,8 @@ export default {
             this.detailConfirm = false;
         },
         showConfirm({ tokenId, type }) {
+            this.opNumber= '';
+            this.c= {};
             const t = this.$t(`exchangeAssets.confirm${type}`);
             t.tokenId = tokenId;
             t.type = type;
@@ -221,7 +223,7 @@ export default {
         detailList() {
             return Object.keys(this.detailData).map(k => {
                 const o = this.detailData[k];
-                return [new Date(o.optime*1000).toLocaleString(), o.tokenName, o.optype, o.amount];
+                return [new Date(o.optime*1000).toLocaleString(), o.tokenName, this.$t('exchangeAssets.table.rowMap.sideMap')[o.optype], o.amount];
             });
         },
         balance() {
@@ -230,8 +232,8 @@ export default {
             const res = {};
             Object.keys(exB).forEach(t => {
                 res[t] = {
-                    available: exB[t].available,
-                    lock: exB[t].lock,
+                    available: Number(exB[t].available),
+                    lock: Number(exB[t].lock),
                     balance: 0,
                     icon: '',
                     id: t,
@@ -248,7 +250,7 @@ export default {
                 res[t] = {
                     available: 0,
                     lock: 0,
-                    balance: walletB[t].balance,
+                    balance: Number(walletB[t].balance),
                     icon: walletB[t].icon,
                     id: t,
                     symbol: walletB[t].symbol,
@@ -264,7 +266,7 @@ export default {
                 res[t].worth = `${this.$i18n.locale === 'zh' ? '¥' : '$'}${
                     (this.$store.state.exchangeRate.rateMap[t][
                         this.$i18n.locale === 'zh' ? 'cny' : 'usd'
-                    ]*(res[t].balance+res[t].available+res[t].lock)).toFixed(2)
+                    ]*(res[t].available+res[t].lock)).toFixed(2)
                 }`;
             });
             return res;
