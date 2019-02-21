@@ -33,9 +33,9 @@
     </div>
 </template>
 <script>
-import { order, cancelOrder } from "services/exchange";
-import powProcess from "components/powProcess";
-const VoteDifficulty = "201564160";
+import { order, cancelOrder } from 'services/exchange';
+import powProcess from 'components/powProcess';
+const VoteDifficulty = '201564160';
 export default {
     props: {
         filterObj: {
@@ -49,7 +49,7 @@ export default {
             sortIndex: 0,
             sortType: 1,
             acc: null,
-            addr: ""
+            addr: ''
         };
     },
     components: { powProcess },
@@ -74,11 +74,11 @@ export default {
                     let startTime = new Date().getTime();
                     const powTxt = Object.assign(
                         {},
-                        this.$t("quotaConfirmPoW")
+                        this.$t('quotaConfirmPoW')
                     );
                     powTxt.leftBtn.click = () => {
                         this.$router.push({
-                            name: "walletQuota"
+                            name: 'walletQuota'
                         });
                     };
                     (powTxt.rightBtn.click = () => {
@@ -91,22 +91,22 @@ export default {
                             .then(successSubmit)
                             .catch(failSubmit);
                     }),
-                        (powTxt.closeBtn = { show: true });
+                    (powTxt.closeBtn = { show: true });
                     this.$confirm(powTxt);
                 } else {
                     this.$toast(
-                        this.$t("exchangeOpenOrders.confirm.failToast"),
+                        this.$t('exchangeOpenOrders.confirm.failToast'),
                         e
                     );
                 }
             };
             const successSubmit = () => {
-                this.$toast(this.$t("exchangeOpenOrders.confirm.successToast"));
+                this.$toast(this.$t('exchangeOpenOrders.confirm.successToast'));
             };
             this.acc.initPwd(
                 {
-                    submitTxt: this.$t("exchangeOpenOrders.confirm.submitTxt"),
-                    cancelTxt: this.$t("exchangeOpenOrders.confirm.cancelTxt"),
+                    submitTxt: this.$t('exchangeOpenOrders.confirm.submitTxt'),
+                    cancelTxt: this.$t('exchangeOpenOrders.confirm.cancelTxt'),
                     submit: () => {
                         cancelOrder({
                             orderId: order.orderId,
