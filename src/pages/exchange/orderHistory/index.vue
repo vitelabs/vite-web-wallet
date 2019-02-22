@@ -2,12 +2,21 @@
 
 <template>
     <div class="order-history-ct">
-        <Filters @submit="submit($event)" v-if="!isBuiltIn"></Filters>
+        <Filters
+            @submit="submit($event)"
+            v-if="!isEmbed"
+        ></Filters>
         <Table
             :list="data"
             class="tb"
         ></Table>
-        <Pagination :currentPage="currentPage" :toPage="toPage" :totalPage="totalPage" class="page-filter"></Pagination>
+        <Pagination
+            :currentPage="currentPage"
+            :toPage="toPage"
+            :totalPage="totalPage"
+            class="page-filter"
+            v-if="!isEmbed"
+        ></Pagination>
     </div>
 </template>
 <script>
@@ -16,70 +25,75 @@ import Table from './table';
 import { order } from 'services/exchange';
 import Pagination from 'components/pagination';
 import { timer } from 'utils/asyncFlow';
-const pageSize=10;
+const pageSize = 10;
 export default {
     components: {
         Filters,
         Table,
         Pagination
     },
-    props:{
-        isBuiltIn:{
-            type:Boolean,
-            default:false
+    props: {
+        isEmbed: {
+            type: Boolean,
+            default: false
         },
-        filterObj:{
-            type:Object,
-            default:()=>({})
+        filterObj: {
+            type: Object,
+            default: () => ({})
         }
     },
     data() {
         return {
             data: [],
-            currentPage:1,
-            totalPage:0,
-            filters:{},
-            timer:null
+            currentPage: 1,
+            totalPage: 0,
+            filters: {},
+            timer: null
         };
     },
     beforeMount() {
-        this.timer=new timer(()=>this.update(),5000);
-        this.timer.start();
+        if (this.isEmbed) {
+            this.timer = new timer(() => this.update(), 5000);
+            this.timer.start();
+        }
         this.update();
     },
-    beforeDestroy(){
-        this.timer.stop();
+    beforeDestroy() {
+        this.timer && this.timer.stop();
     },
-    watch:{
-        filterObj(){
+    watch: {
+        filterObj() {
             this.update();
         }
     },
     methods: {
-        toPage(pageNo){
-            this.update(Object.assign(this.filters,{pageNo}));
+        toPage(pageNo) {
+            this.update(Object.assign(this.filters, { pageNo }));
         },
-        submit(v){
-            this.filters=v;
+        submit(v) {
+            this.filters = v;
             this.update(this.filters);
         },
-        currentMarket(){
+        currentMarket() {
             return this.$store.state.exchangeMarket.currentMarket;
         },
-        update(filters={}) {
-            const account=this.$wallet.getActiveAccount();
+        update(filters = {}) {
+            const account = this.$wallet.getActiveAccount();
             if (!account) return;
-            const address=account.getDefaultAddr();
-            if(this.isBuiltIn){
-                filters={totoken:this.currentMarket};
+            const address = account.getDefaultAddr();
+            if (this.isEmbed) {
+                filters = { totoken: this.currentMarket };
             }
-            filters=Object.assign({pageNo:this.currentPage},filters);
+            filters = Object.assign({ pageNo: this.currentPage }, filters);
             order({
-                address,...filters,pageSize,...this.filterObj
+                address,
+                ...filters,
+                pageSize,
+                ...this.filterObj
             }).then(data => {
-                this.totalPage=Math.ceil(data.totalSize/pageSize);
-                this.data = data.orders||[];
-                this.currentPage=filters.pageNo;
+                this.totalPage = Math.ceil(data.totalSize / pageSize);
+                this.data = data.orders || [];
+                this.currentPage = filters.pageNo;
             });
         }
     }
@@ -94,10 +108,10 @@ export default {
     .tb {
         flex: 1;
     }
-    .page-filter{
+    .page-filter {
         display: flex;
         justify-content: center;
-        background:#fff;
+        background: #fff;
     }
 }
 </style>

@@ -4,7 +4,7 @@
             <div
                 v-for="(h) in $t('exchangeOpenOrders.table.heads')"
                 :key="h"
-            >{{h.replace("#tokenSymbol#",currentMarketNmae)}}
+            >{{h}}
             </div>
             <div></div>
         </div>
@@ -42,6 +42,10 @@ export default {
         filterObj: {
             type: Object,
             default: ()=>({})
+        },
+        isEmbed:{
+            type:Boolean,
+            default:false
         }
     },
     data() {
@@ -128,11 +132,14 @@ export default {
     },
     beforeMount() {
         this.update();
-        this.timer=new timer(()=>this.update(),5000);
-        this.timer.start();
+        if(this.isEmbed){
+            this.timer=new timer(()=>this.update(),5000);
+            this.timer.start();
+        }
+
     },
     beforeDestroy(){
-        this.timer.stop();
+        this.timer&&this.timer.stop();
     },
     watch: {
         filterObj() {
