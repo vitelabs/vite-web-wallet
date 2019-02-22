@@ -147,7 +147,6 @@ export default {
             if ((this.activeTx.txSide === 0 && this.orderType === 'sell') ||
                 (this.activeTx.txSide === 1 && this.orderType === 'buy')){
                 this.price = this.activeTx.price;
-                this.quantity = this.activeTx.quantity;
             }
         }
     },
