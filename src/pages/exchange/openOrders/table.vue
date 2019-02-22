@@ -35,7 +35,7 @@
 <script>
 import { order, cancelOrder } from 'services/exchange';
 import powProcess from 'components/powProcess';
-import { timer } from "utils/asyncFlow";
+import { timer } from 'utils/asyncFlow';
 const VoteDifficulty = '201564160';
 export default {
     props: {
