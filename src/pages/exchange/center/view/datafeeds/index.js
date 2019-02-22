@@ -4,7 +4,6 @@ export default class dataFeeds {
     constructor(activeTxPair) {
         this.activeTxPair = activeTxPair;
         this.symbolName = activeTxPair.ftokenShow + '/' + activeTxPair.ttokenShow;
-        console.log(this.activeTxPair);
     }
     onReady(callback) {
         callback({
@@ -53,7 +52,7 @@ export default class dataFeeds {
         // }).catch((err) => {
         //     onErrorCallback(err);
         // });
-        // console.log(symbolInfo, resolution, from, to, onHistoryCallback, onErrorCallback, firstDataRequest);
+        console.log(symbolInfo, resolution, from, to, onHistoryCallback, onErrorCallback, firstDataRequest);
     }
     subscribeBars(symbolInfo, resolution, onRealtimeCallback, subscriberUID, onResetCacheNeededCallback) {
         console.log('subscribeBars');
@@ -62,8 +61,8 @@ export default class dataFeeds {
     unsubscribeBars(subscriberUID) {
         console.log(subscriberUID);
     }
-    calculateHistoryDepth() {
-        // console.log(resolution, resolutionBack, intervalBack)
+    calculateHistoryDepth(resolution, resolutionBack, intervalBack) {
+        console.log(resolution, resolutionBack, intervalBack);
     }
     getMarks(symbolInfo, from, to, onDataCallback, resolution) {
         console.log('getMarks');
