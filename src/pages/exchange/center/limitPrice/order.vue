@@ -48,7 +48,7 @@
         <div class="order-btn __pointer" :class="{
             'red': orderType === 'sell',
             'blue': orderType === 'buy',
-            'gray': isLoading
+            'gray': isLoading || isAmountErr || isPriceErr || isQuantityErr
         }" @click="_clickBtn">{{ $t(`exchange.${orderType}.title`, { token: ftokenShow }) }}</div>
     </div>
 </template>
@@ -395,6 +395,7 @@ export default {
             }).catch((err) => {
                 if (!err || !err.error || !err.error.code || err.error.code !== -35002) {
                     this.isLoading = false;
+                    this.$toast( this.$t('exchange.newOrderFail') );
                     return;
                 }
 
@@ -404,6 +405,7 @@ export default {
                     this.$toast( this.$t('exchange.newOrderSuccess') );
                 }).catch((err) => {
                     this.isLoading = false;
+                    this.$toast( this.$t('exchange.newOrderFail') );
                     console.warn(err);
                 });
             });
