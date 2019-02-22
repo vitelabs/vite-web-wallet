@@ -3,10 +3,10 @@
         <div class="t-item __pointer" @click="showToken('ftoken')">
             <div class="t-icon">
                 <img :src="ftokenIcon"/>
-                {{ activeTxPair && activeTxPair.ftokenShow ? activeTxPair.ftokenShow : '' }}
+                {{ ftokenDetail ? ftokenDetail.tokenShow : '' }}
             </div>
             <div class="id __ellipsis">
-                {{ activeTxPair && activeTxPair.ftoken ? activeTxPair.ftoken : '' }}
+                {{ ftokenDetail ? ftokenDetail.tokenId : '' }}
             </div>
         </div>
         <div class="t-item">
@@ -15,10 +15,10 @@
         </div>
         <div class="t-item __pointer" @click="showToken('ttoken')">
             <div class="t-icon"><img :src="ttokenIcon"/>
-                {{ activeTxPair && activeTxPair.ttokenShow ? activeTxPair.ttokenShow : '' }}
+                {{ ttokenDetail ? ttokenDetail.tokenShow : '' }}
             </div>
             <div class="id __ellipsis">
-                {{ activeTxPair && activeTxPair.ttoken ? activeTxPair.ttoken : '' }}
+                {{ ttokenDetail ? ttokenDetail.tokenId : '' }}
             </div>
         </div>
         <div v-show="showTokenType" class="detail">
@@ -53,45 +53,41 @@
 <script>
 import date from 'utils/date';
 import ellipsisAddr from 'utils/ellipsisAddr';
-import { tokenDetail } from 'services/exchange';
 import getTokenIcon from 'utils/getTokenIcon';
 
 export default {
     data() {
         return {
-            showTokenType: '',
-            ttokenDetail: null,
-            ftokenDetail: null
+            showTokenType: ''
         };
     },
-    mounted() {
-        this.fetchToken('ttoken');
-        this.fetchToken('ftoken');
-    },
     computed: {
+        ttokenDetail() {
+            return this.$store.state.exchangeTokens.ttoken;
+        },
+        ftokenDetail() {
+            return this.$store.state.exchangeTokens.ftoken;
+        },
         ftokenIcon() {
-            if (!this.activeTxPair || !this.activeTxPair.ftoken) {
+            if (!this.ftokenDetail) {
                 return '';
             }
-            return getTokenIcon(this.activeTxPair.ftoken);
+            return getTokenIcon(this.ftokenDetail.tokenId);
         },
         ttokenIcon() {
-            if (!this.activeTxPair || !this.activeTxPair.ttoken) {
+            if (!this.ttokenDetail) {
                 return '';
             }
-            return getTokenIcon(this.activeTxPair.ttoken);
-        },
-        activeTxPair() {
-            return this.$store.getters.exActiveTxPair;
+            return getTokenIcon(this.ttokenDetail.tokenId);
         },
         tokenDetail() {
             if (!this.showTokenType) {
                 return {};
             }
 
-            let detail = this.ftokenDetail;
+            let detail = this.$store.state.exchangeTokens.ftoken;
             if (this.showTokenType === 'ttoken') {
-                detail = this.ttokenDetail;
+                detail = this.$store.state.exchangeTokens.ttoken;
             }
 
             if (!detail) {
@@ -106,33 +102,12 @@ export default {
             return detail;
         }
     },
-    watch: {
-        activeTxPair: function() {
-            this.fetchToken('ttoken');
-            this.fetchToken('ftoken');
-        }
-    },
     methods: {
         showToken(type) {
             this.showTokenType = type;
         },
         hideToken() {
             this.showTokenType = '';
-        },
-        fetchToken(type = 'ttoken') {
-            if (!this.activeTxPair || !this.activeTxPair[type]) {
-                return;
-            }
-
-            let tokenId = this.activeTxPair[type];
-            tokenDetail({ tokenId }).then((data) => {
-                if (tokenId !== this.activeTxPair[type]) {
-                    return;
-                }
-                this[`${type}Detail`] = data;
-            }).catch((err) => {
-                console.warn(err);
-            });
         }
     }
 };
@@ -200,7 +175,7 @@ export default {
             line-height: 20px;
             color: rgba(36,39,43,1);
             .token-title {
-                min-width: 75px;
+                min-width: 95px;
                 color: #5e6875;
                 display: inline-block;
             }
