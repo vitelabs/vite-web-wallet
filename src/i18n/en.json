@@ -402,7 +402,7 @@
         "txNum": "Amount",
         "quantityTitle": "Amount({quantity})",
         "priceTitle": "Price({price})",
-        "amountTitle": "Filled({amount})",
+        "amountTitle": "Amount({amount})",
         "amount": "Total",
         "newOrderSuccess": "Ordered Successful",
         "buy": {

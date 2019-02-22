@@ -6,25 +6,25 @@ const privToAddr = utils.address.privToAddr;
 const path = '/api/v1';
 
 export const klineMinute = function ({
-    fDate, tDate, ftoken, ttoken
+    fdate, tdate, ftoken, ttoken
 }) {
     return request({
         path: path + '/kline/minute',
         method: 'GET',
         params: {
-            fDate, tDate, ftoken, ttoken
+            fdate, tdate, ftoken, ttoken
         }
     });
 };
 
 export const klineHour = function ({
-    fDate, tDate, ftoken, ttoken
+    fdate, tdate, ftoken, ttoken
 }) {
     return request({
-        path: path + '/kline/minute/hour',
+        path: path + '/kline/hour',
         method: 'GET',
         params: {
-            fDate, tDate, ftoken, ttoken
+            fdate, tdate, ftoken, ttoken
         }
     });
 };
