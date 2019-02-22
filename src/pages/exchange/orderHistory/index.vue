@@ -27,6 +27,10 @@ export default {
         isBuiltIn:{
             type:Boolean,
             default:false
+        },
+        filterObj:{
+            type:Object,
+            default:()=>({})
         }
     },
     data() {
@@ -45,6 +49,11 @@ export default {
     },
     beforeDestroy(){
         this.timer.stop();
+    },
+    watch:{
+        filterObj(){
+            this.update()
+        }
     },
     methods: {
         toPage(pageNo){
@@ -66,7 +75,7 @@ export default {
             }
             filters=Object.assign({pageNo:this.currentPage},filters);
             order({
-                address,...filters,pageSize
+                address,...filters,pageSize,...this.filterObj
             }).then(data => {
                 this.totalPage=Math.ceil(data.totalSize/pageSize);
                 this.data = data.orders||[];

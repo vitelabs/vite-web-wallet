@@ -2,7 +2,7 @@
 
 <template>
     <div class="open-order-ct">
-        <Table :list="data"></Table>
+        <Table :list="data" :filterObj="filterObj"></Table>
     </div>
 </template>
 <script>
@@ -34,7 +34,12 @@ export default {
             data: []
         };
     },
-
+    props:{
+        filterObj:{
+            type:Object,
+            default:()=>({})
+        }
+    },
     components: {
         Table
     }
