@@ -23,7 +23,7 @@ export default {
     // },
     computed: {
         buyList() {
-            let buyList = this.$store.state.exchangeDepth.buy || [];
+            let buyList = [].concat(this.$store.state.exchangeDepth.buy || []);
             let list = buyList.sort((a, b) => {
                 return b.amount - a.amount;
             });
@@ -34,7 +34,7 @@ export default {
             return _l;
         },
         sellList() {
-            let sellList = this.$store.state.exchangeDepth.sell || [];
+            let sellList = [].concat(this.$store.state.exchangeDepth.sell || []);
             let list = sellList.sort((a, b) => {
                 return a.amount - b.amount;
             });
