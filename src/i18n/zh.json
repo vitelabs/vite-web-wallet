@@ -405,6 +405,7 @@
         "amountTitle": "数量({amount})",
         "amount": "成交金额",
         "newOrderSuccess": "提单成功",
+        "newOrderFail": "提单失败",
         "buy": {
             "title": "买入{token}",
             "price": "买入价",
