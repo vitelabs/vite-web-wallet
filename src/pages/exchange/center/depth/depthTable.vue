@@ -45,7 +45,9 @@ export default {
     },
     methods: {
         getWidth(item) {
-            let width = BigNumber.dividedToNumber(item.price, 10000, 2).toString() * 100;
+            // let maxPrice = this.depthData[0].price;
+            let maxPrice = 10000;
+            let width = BigNumber.dividedToNumber(item.price, maxPrice, 2).toString() * 100;
             return width > 100 ? 100 : width;
         },
         clickRow(data) {
