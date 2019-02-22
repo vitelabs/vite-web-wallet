@@ -1,4 +1,4 @@
-import { klineHour } from 'services/exchange';
+// import { klineMinute, klineHour } from 'services/exchange';
 
 export default class dataFeeds {
     constructor(activeTxPair) {
@@ -23,17 +23,37 @@ export default class dataFeeds {
         console.log(symbolName, onSymbolResolvedCallback, onResolveErrorCallback);
         onSymbolResolvedCallback({
             name: this.symbolName,
-            description: this.symbolName
+            description: this.symbolName,
+            type: 'bitcoin'
         });
     }
     getBars(symbolInfo, resolution, from, to, onHistoryCallback, onErrorCallback, firstDataRequest) {
-        console.log('getBars');
-        klineHour().then((data) => {
-            onHistoryCallback(data);
-        }).catch((err) => {
-            onErrorCallback(err);
-        });
-        console.log(symbolInfo, resolution, from, to, onHistoryCallback, onErrorCallback, firstDataRequest);
+        console.log('getBars', symbolInfo, resolution, from, to, onErrorCallback, onHistoryCallback, firstDataRequest);
+        // console.log(firstDataRequest);
+        // firstDataRequest && klineMinute({
+        //     fdate: from, 
+        //     tdate: to,
+        //     ftoken: this.activeTxPair.ftoken, 
+        //     ttoken: this.activeTxPair.ttoken
+        // }).then((data) => {
+        //     let list = [];
+        //     data && data.forEach(_d => {
+        //         list.push({
+        //             time: _d.txUnit * 1000,
+        //             close: _d.closePrice,
+        //             open: _d.openPrice,
+        //             high: _d.highPrice,
+        //             low: _d.lowPrice,
+        //             volume: _d.amount
+        //         });
+        //     });
+        //     onHistoryCallback(list, {
+        //         noData: !list || !list.length
+        //     });
+        // }).catch((err) => {
+        //     onErrorCallback(err);
+        // });
+        // console.log(symbolInfo, resolution, from, to, onHistoryCallback, onErrorCallback, firstDataRequest);
     }
     subscribeBars(symbolInfo, resolution, onRealtimeCallback, subscriberUID, onResetCacheNeededCallback) {
         console.log('subscribeBars');
