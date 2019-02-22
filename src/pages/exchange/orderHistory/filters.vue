@@ -21,11 +21,11 @@
         </div>
         <div class="filter">
             <div class="filter_label">{{ $t("exchangeOrderHistory.filter.type") }}</div>
-            <input class="filter_content" />
+            <input class="filter_content" v-model="ftoken" />
         </div>
         <div class="separator">-</div>
         <div class="filter end">
-            <select class="filter_content">
+            <select class="filter_content" v-model="ttoken">
                 <option v-for="t in marketMap" :value="t.token" :key="t.token">{{t.name}}</option>
             </select>
         </div>
@@ -59,8 +59,8 @@ export default {
             fromDate: '',
             toDate: '',
             tradeType: '',
-            fToken: '',
-            tToken: '',
+            ftoken: '',
+            ttoken: '',
             tokenMap: []
         };
     },
@@ -82,8 +82,8 @@ export default {
                 fdate: this.fromDate?new Date(this.fromDate).getTime()/1000:'',
                 tdate: this.toDate?new Date(this.toDate).getTime()/1000:'',
                 orderSide: this.tradeType,
-                fToken: this.fToken,
-                tToken: this.tToken
+                ftoken: this.ftoken,
+                ttoken: this.ttoken
             });
         }
     }
