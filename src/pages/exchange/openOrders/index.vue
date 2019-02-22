@@ -54,7 +54,5 @@ export default {
     height: 100%;
     overflow: hidden;
     padding: 20px 10px 10px;
-    display: flex;
-    flex-direction: column;
 }
 </style>
