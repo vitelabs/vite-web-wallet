@@ -133,6 +133,9 @@ export default {
         }
     },
     computed: {
+        sortedList(){
+            return this.list.slice(0).sort((a,b)=>(a.date-b.date));
+        },
         currentMarketNmae() {
             return this.$store.getters.currentMarketName;
         }

@@ -35,8 +35,8 @@
                 v-model="tradeType"
                 class="filter_content"
             >
-                <option value="1">{{ $t("exchangeOrderHistory.filter.buy") }}</option>
-                <option value="-1">{{ $t("exchangeOrderHistory.filter.sell") }}</option>
+                <option value="0">{{ $t("exchangeOrderHistory.filter.buy") }}</option>
+                <option value="1">{{ $t("exchangeOrderHistory.filter.sell") }}</option>
             </select>
         </div>
         <div

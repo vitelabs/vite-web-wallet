@@ -83,6 +83,7 @@ export default {
             this.sortIndex = i;
         },
         sortList(list) {
+            debugger;
             return list.sort((a, b) => {
                 return this.sortType * (a[this.sortIndex] - b[this.sortIndex]);
             });
