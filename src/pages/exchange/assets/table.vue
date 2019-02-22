@@ -52,10 +52,10 @@
                 <div class="lable">{{c.lable2}} <div class="errtips">{{c.errTips}}</div>
                 </div>
                 <div class="input"><input
-                        type="text"
-                        :placeholder="c.placeholder"
-                        v-model="opNumber"
-                    ></div>
+                    type="text"
+                    :placeholder="c.placeholder"
+                    v-model="opNumber"
+                ></div>
             </div>
         </confirm>
         <alert
@@ -71,13 +71,13 @@
     </div>
 </template>
 <script>
-import alert from "../components/alert.vue";
-import confirm from "components/confirm.vue";
-import { deposit, withdraw, chargeDetail } from "services/exchange";
-import BigNumber from "utils/bigNumber";
-import getTokenIcon from "utils/getTokenIcon";
-import powProcess from "components/powProcess";
-const VoteDifficulty = "201564160";
+import alert from '../components/alert.vue';
+import confirm from 'components/confirm.vue';
+import { deposit, withdraw, chargeDetail } from 'services/exchange';
+import BigNumber from 'utils/bigNumber';
+import getTokenIcon from 'utils/getTokenIcon';
+import powProcess from 'components/powProcess';
+const VoteDifficulty = '201564160';
 export default {
     props: {
         filter: { type: Object }
@@ -91,29 +91,29 @@ export default {
         this.acc = this.$wallet.getActiveAccount();
         if (!this.acc) return;
         this.acc && (this.addr = this.acc.getDefaultAddr());
-        this.$store.dispatch("startLoopExchangeBalance", this.addr);
+        this.$store.dispatch('startLoopExchangeBalance', this.addr);
     },
     destroyed() {
-        this.$store.dispatch("stopLoopExchangeBalance");
+        this.$store.dispatch('stopLoopExchangeBalance');
     },
     data() {
         return {
             detailConifrm: false,
             c: {},
-            opNumber: "",
+            opNumber: '',
             confirmShow: false,
             detailData: [],
             detailConfirm: false,
             acc: null,
-            addr: ""
+            addr: ''
         };
     },
     methods: {
         withdraw(tokenId) {
-            this.showConfirm({ tokenId, type: "withdraw" });
+            this.showConfirm({ tokenId, type: 'withdraw' });
         },
         recharge(tokenId) {
-            this.showConfirm({ tokenId, type: "recharge" });
+            this.showConfirm({ tokenId, type: 'recharge' });
         },
         detail(tokenId) {
             this.detailConfirm = true;
@@ -130,7 +130,7 @@ export default {
             this.detailConfirm = false;
         },
         showConfirm({ tokenId, type }) {
-            this.opNumber = "";
+            this.opNumber = '';
             this.c = {};
             const t = Object.assign(
                 {},
@@ -157,11 +157,11 @@ export default {
                     let startTime = new Date().getTime();
                     const powTxt = Object.assign(
                         {},
-                        this.$t("quotaConfirmPoW")
+                        this.$t('quotaConfirmPoW')
                     );
                     powTxt.leftBtn.click = () => {
                         this.$router.push({
-                            name: "walletQuota"
+                            name: 'walletQuota'
                         });
                     };
                     (powTxt.rightBtn.click = () => {
@@ -174,7 +174,7 @@ export default {
                             .then(successSubmit)
                             .catch(failSubmit);
                     }),
-                        (powTxt.closeBtn = { show: true });
+                    (powTxt.closeBtn = { show: true });
                     this.$confirm(powTxt);
                 } else {
                     this.$toast(
@@ -191,46 +191,46 @@ export default {
             this.closeNumConfirm();
             this.acc.initPwd({
                 submitTxt: this.$t(`exchangeAssets.table.rowMap.${c.type}`),
-                cancelTxt: this.$t("exchangeAssets.pwdConfirm.cancelTxt"),
+                cancelTxt: this.$t('exchangeAssets.pwdConfirm.cancelTxt'),
                 submit: () => {
-                    c.type === "recharge"
+                    c.type === 'recharge'
                         ? deposit({ tokenId, amount })
-                              .then(successSubmit)
-                              .catch(e => {
-                                  failSubmit(e);
-                              })
+                            .then(successSubmit)
+                            .catch(e => {
+                                failSubmit(e);
+                            })
                         : withdraw({ tokenId, amount })
-                              .then(successSubmit)
-                              .catch(e => {
-                                  failSubmit(e);
-                              });
+                            .then(successSubmit)
+                            .catch(e => {
+                                failSubmit(e);
+                            });
                 }
             });
         },
         testAmount() {
             const amountBalance =
-                this.c.type.toLowerCase() === "recharge"
+                this.c.type.toLowerCase() === 'recharge'
                     ? this.balance[this.c.tokenId].balance
                     : this.balance[this.c.tokenId].balance;
             const decimals = this.balance[this.c.tokenId].decimals;
             const result = this.$validAmount(this.opNumber, decimals);
             if (!result) {
-                this.c.errTips = this.$t("hint.amtFormat");
+                this.c.errTips = this.$t('hint.amtFormat');
                 return false;
             }
 
             if (BigNumber.isEqual(this.opNumber, 0)) {
-                this.c.errTips = this.$t("wallet.hint.amount");
+                this.c.errTips = this.$t('wallet.hint.amount');
                 return false;
             }
 
             // const amount = BigNumber.toMin(this.opNumber, decimals);
             if (BigNumber.compared(amountBalance, this.opNumber) < 0) {
-                this.c.errTips = this.$t("hint.insufficientBalance");
+                this.c.errTips = this.$t('hint.insufficientBalance');
                 return false;
             }
 
-            this.c.errTips = "";
+            this.c.errTips = '';
             return true;
         }
     },
@@ -241,7 +241,7 @@ export default {
                 return [
                     new Date(o.optime * 1000).toLocaleString(),
                     o.tokenName,
-                    this.$t("exchangeAssets.table.rowMap.sideMap")[o.optype],
+                    this.$t('exchangeAssets.table.rowMap.sideMap')[o.optype],
                     o.amount
                 ];
             });
@@ -255,7 +255,7 @@ export default {
                     available: Number(exB[t].available),
                     lock: Number(exB[t].lock),
                     balance: 0,
-                    icon: "",
+                    icon: '',
                     id: t,
                     symbol: exB[t].tokenInfo.tokenSymbol,
                     decimals: exB[t].tokenInfo.decimals
@@ -280,12 +280,12 @@ export default {
             Object.keys(res).forEach(t => {
                 res[t].icon = res[t].icon || getTokenIcon(res[t].id);
                 if (!this.$store.state.exchangeRate.rateMap[t]) {
-                    res[t].worth = "-";
+                    res[t].worth = '-';
                     return;
                 }
-                res[t].worth = `${this.$i18n.locale === "zh" ? "¥" : "$"}${(
+                res[t].worth = `${this.$i18n.locale === 'zh' ? '¥' : '$'}${(
                     this.$store.state.exchangeRate.rateMap[t][
-                        this.$i18n.locale === "zh" ? "cny" : "usd"
+                        this.$i18n.locale === 'zh' ? 'cny' : 'usd'
                     ] *
                     (res[t].available + res[t].lock)
                 ).toFixed(2)}`;
@@ -299,7 +299,7 @@ export default {
                     const NOTnoZero = this.filter.hideZero && v.balance === 0;
                     const NOTmatchKey =
                         this.filter.filterKey &&
-                        !v.symbol.match(new RegExp(this.filter.filterKey, "i"));
+                        !v.symbol.match(new RegExp(this.filter.filterKey, 'i'));
                     return !(NOTnoZero || NOTmatchKey);
                 });
         }
