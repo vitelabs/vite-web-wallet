@@ -160,7 +160,7 @@ export default {
 @import "../components/table.scss";
 .ex_tb {
     height: 100%;
-    padding-bottom: 10px;
+    margin-bottom: 10px;
 }
 @include rowWith {
     width: 8%;
