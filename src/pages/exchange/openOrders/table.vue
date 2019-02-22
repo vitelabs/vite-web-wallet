@@ -11,7 +11,7 @@
         <div class="row-container">
             <div
                 class="row"
-                v-for="v in list"
+                v-for="v in sortedList"
                 :key="v.orderId"
             >
                 <div>{{(new Date(v.date*1000)).toLocaleString()}}</div>
