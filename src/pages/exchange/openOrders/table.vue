@@ -14,12 +14,12 @@
                 v-for="v in list"
                 :key="v.orderId"
             >
-                <div>{{v.date}}</div>
+                <div>{{(new Date(v.date*1000)).toLocaleString()}}</div>
                 <div>{{`${v.ftokenShow}/${v.ttokenShow}`}}</div>
                 <!-- //0:buy,1:sell -->
                 <div :class="{buy:v.side===0,sell:v.side===1}">{{$t("exchangeOrderHistory.side")[v.side]}}</div>
                 <div>{{v.price}}</div>
-                <div>{{v.amount}}</div>
+                <div>{{v.quantity}}</div>
                 <div>{{v.filledQ}}</div>
                 <div>{{v.rate}}</div>
                 <div>{{v.average}}</div>
@@ -133,6 +133,9 @@ export default {
         }
     },
     computed: {
+        sortedList(){
+            return this.list.slice(0).sort((a,b)=>(a.date-b.date));
+        },
         currentMarketNmae() {
             return this.$store.getters.currentMarketName;
         }
