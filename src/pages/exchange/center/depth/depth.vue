@@ -16,11 +16,11 @@
             <span class="__center-tb-item">{{ $t('exchange.priceTitle', { 
                 price: activeTxPair && activeTxPair.ttokenShow ? activeTxPair.ttokenShow : '' 
             }) }}</span>
-            <span class="__center-tb-item">{{ $t('exchange.quantityTitle', { 
-                quantity: activeTxPair && activeTxPair.ftokenShow ? activeTxPair.ftokenShow : ''
-            }) }}</span>
             <span class="__center-tb-item">{{ $t('exchange.amountTitle', { 
-                amount: activeTxPair && activeTxPair.ttokenShow ? activeTxPair.ttokenShow : ''
+                amount: activeTxPair && activeTxPair.ftokenShow ? activeTxPair.ftokenShow : ''
+            }) }}</span>
+            <span class="__center-tb-item">{{ $t('exchange.quantityTitle', { 
+                quantity: activeTxPair && activeTxPair.ttokenShow ? activeTxPair.ttokenShow : ''
             }) }}</span>
         </div>
 
