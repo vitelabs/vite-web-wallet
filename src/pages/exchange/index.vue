@@ -66,7 +66,7 @@ export default {
 
 <style lang="scss" scoped>
 .exchange-center-wrapper {
-    min-width: 1400px;
+    min-width: 1350px;
     display: flex;
     flex-direction: column;
     height: 100%;
