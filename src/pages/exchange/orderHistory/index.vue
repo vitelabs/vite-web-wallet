@@ -15,6 +15,7 @@ import Filters from './filters';
 import Table from './table';
 import { order } from 'services/exchange';
 import Pagination from 'components/pagination';
+import { timer } from 'utils/asyncFlow';
 const pageSize=10;
 export default {
     components: {
@@ -26,6 +27,10 @@ export default {
         isBuiltIn:{
             type:Boolean,
             default:false
+        },
+        filterObj:{
+            type:Object,
+            default:()=>({})
         }
     },
     data() {
@@ -33,11 +38,22 @@ export default {
             data: [],
             currentPage:1,
             totalPage:0,
-            filters:{}
+            filters:{},
+            timer:null
         };
     },
     beforeMount() {
+        this.timer=new timer(()=>this.update(),5000);
+        this.timer.start();
         this.update();
+    },
+    beforeDestroy(){
+        this.timer.stop();
+    },
+    watch:{
+        filterObj(){
+            this.update();
+        }
     },
     methods: {
         toPage(pageNo){
@@ -59,7 +75,7 @@ export default {
             }
             filters=Object.assign({pageNo:this.currentPage},filters);
             order({
-                address,...filters,pageSize
+                address,...filters,pageSize,...this.filterObj
             }).then(data => {
                 this.totalPage=Math.ceil(data.totalSize/pageSize);
                 this.data = data.orders||[];

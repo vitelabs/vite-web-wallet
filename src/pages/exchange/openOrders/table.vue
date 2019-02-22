@@ -35,6 +35,7 @@
 <script>
 import { order, cancelOrder } from 'services/exchange';
 import powProcess from 'components/powProcess';
+import { timer } from 'utils/asyncFlow';
 const VoteDifficulty = '201564160';
 export default {
     props: {
@@ -49,7 +50,8 @@ export default {
             sortIndex: 0,
             sortType: 1,
             acc: null,
-            addr: ''
+            addr: '',
+            timer:null
         };
     },
     components: { powProcess },
@@ -126,6 +128,11 @@ export default {
     },
     beforeMount() {
         this.update();
+        this.timer=new timer(()=>this.update(),5000);
+        this.timer.start();
+    },
+    beforeDestroy(){
+        this.timer.stop();
     },
     watch: {
         filterObj() {

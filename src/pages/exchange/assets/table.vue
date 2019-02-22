@@ -91,6 +91,10 @@ export default {
         this.acc = this.$wallet.getActiveAccount();
         if (!this.acc) return;
         this.acc && (this.addr = this.acc.getDefaultAddr());
+        this.$store.dispatch('startLoopExchangeBalance', this.addr);
+    },
+    destroyed() {
+        this.$store.dispatch('stopLoopExchangeBalance');
     },
     data() {
         return {
@@ -117,21 +121,24 @@ export default {
                 this.detailData = data.records;
             });
         },
-        closeNumConfirm(){
-            this.c={};
-            this.confirmShow=false;
+        closeNumConfirm() {
+            this.c = {};
+            this.confirmShow = false;
         },
         close() {
             this.detailData = [];
             this.detailConfirm = false;
         },
         showConfirm({ tokenId, type }) {
-            this.opNumber= '';
-            this.c= {};
-            const t = Object.assign({},this.$t(`exchangeAssets.confirm${type}`));
+            this.opNumber = '';
+            this.c = {};
+            const t = Object.assign(
+                {},
+                this.$t(`exchangeAssets.confirm${type}`)
+            );
             t.tokenId = tokenId;
             t.type = type;
-            t.icon=this.balance[tokenId].icon;
+            t.icon = this.balance[tokenId].icon;
             this.c = t;
             this.confirmShow = true;
         },
@@ -142,13 +149,16 @@ export default {
                 this.opNumber,
                 this.balance[tokenId].decimals
             );
-            const c=this.c;
+            const c = this.c;
             const failSubmit = e => {
                 const code =
                     e && e.error ? e.error.code || -1 : e ? e.code : -1;
                 if (code === -35002) {
                     let startTime = new Date().getTime();
-                    const powTxt = Object.assign({}, this.$t('quotaConfirmPoW'));
+                    const powTxt = Object.assign(
+                        {},
+                        this.$t('quotaConfirmPoW')
+                    );
                     powTxt.leftBtn.click = () => {
                         this.$router.push({
                             name: 'walletQuota'
@@ -167,29 +177,35 @@ export default {
                     (powTxt.closeBtn = { show: true });
                     this.$confirm(powTxt);
                 } else {
-                    this.$toast(this.$t(`exchangeAssets.confirm${c.type}.failToast`));
+                    this.$toast(
+                        this.$t(`exchangeAssets.confirm${c.type}.failToast`)
+                    );
                 }
             };
             const successSubmit = () => {
-                this.$toast(this.$t(`exchangeAssets.confirm${c.type}.successToast`));
+                this.$toast(
+                    this.$t(`exchangeAssets.confirm${c.type}.successToast`)
+                );
             };
 
             this.closeNumConfirm();
-            this.acc.initPwd(
-                {
-                    submitTxt: this.$t(`exchangeAssets.table.rowMap.${c.type}`),
-                    cancelTxt: this.$t('exchangeAssets.pwdConfirm.cancelTxt'),
-                    submit: () => {
-                        c.type === 'recharge'
-                            ? deposit({ tokenId, amount }).then(successSubmit).catch(e => {
+            this.acc.initPwd({
+                submitTxt: this.$t(`exchangeAssets.table.rowMap.${c.type}`),
+                cancelTxt: this.$t('exchangeAssets.pwdConfirm.cancelTxt'),
+                submit: () => {
+                    c.type === 'recharge'
+                        ? deposit({ tokenId, amount })
+                            .then(successSubmit)
+                            .catch(e => {
                                 failSubmit(e);
                             })
-                            : withdraw({ tokenId, amount }).then(successSubmit).catch(e => {
+                        : withdraw({ tokenId, amount })
+                            .then(successSubmit)
+                            .catch(e => {
                                 failSubmit(e);
                             });
-                    }
                 }
-            );
+            });
         },
         testAmount() {
             const amountBalance =
@@ -222,7 +238,12 @@ export default {
         detailList() {
             return Object.keys(this.detailData).map(k => {
                 const o = this.detailData[k];
-                return [new Date(o.optime*1000).toLocaleString(), o.tokenName, this.$t('exchangeAssets.table.rowMap.sideMap')[o.optype], o.amount];
+                return [
+                    new Date(o.optime * 1000).toLocaleString(),
+                    o.tokenName,
+                    this.$t('exchangeAssets.table.rowMap.sideMap')[o.optype],
+                    o.amount
+                ];
             });
         },
         balance() {
@@ -243,7 +264,7 @@ export default {
             Object.keys(walletB).forEach(t => {
                 if (res[t]) {
                     res[t].icon = walletB[t].icon;
-                    res[t].balance = walletB[t].balance;
+                    res[t].balance = Number(walletB[t].balance);
                     return;
                 }
                 res[t] = {
@@ -262,11 +283,12 @@ export default {
                     res[t].worth = '-';
                     return;
                 }
-                res[t].worth = `${this.$i18n.locale === 'zh' ? '¥' : '$'}${
-                    (this.$store.state.exchangeRate.rateMap[t][
+                res[t].worth = `${this.$i18n.locale === 'zh' ? '¥' : '$'}${(
+                    this.$store.state.exchangeRate.rateMap[t][
                         this.$i18n.locale === 'zh' ? 'cny' : 'usd'
-                    ]*(res[t].available+res[t].lock)).toFixed(2)
-                }`;
+                    ] *
+                    (res[t].available + res[t].lock)
+                ).toFixed(2)}`;
             });
             return res;
         },
@@ -317,7 +339,7 @@ export default {
         box-sizing: border-box;
         img {
             margin-right: 10px;
-            width:20px;
+            width: 20px;
             height: 20px;
         }
         input {
