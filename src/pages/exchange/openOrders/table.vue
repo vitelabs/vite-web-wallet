@@ -4,25 +4,25 @@
             <div
                 v-for="(h) in $t('exchangeOpenOrders.table.heads')"
                 :key="h"
-            >{{h.replace("#tokenSymbol#",currentMarketNmae)}}
+            >{{h}}
             </div>
             <div></div>
         </div>
         <div class="row-container">
             <div
                 class="row"
-                v-for="v in list"
+                v-for="v in sortedList"
                 :key="v.orderId"
             >
                 <div>{{(new Date(v.date*1000)).toLocaleString()}}</div>
                 <div>{{`${v.ftokenShow}/${v.ttokenShow}`}}</div>
                 <!-- //0:buy,1:sell -->
                 <div :class="{buy:v.side===0,sell:v.side===1}">{{$t("exchangeOrderHistory.side")[v.side]}}</div>
-                <div>{{v.price}}</div>
-                <div>{{v.quantity}}</div>
-                <div>{{v.filledQ}}</div>
-                <div>{{v.rate}}</div>
-                <div>{{v.average}}</div>
+                <div>{{v.price}} {{v.ttokenShow}}</div>
+                <div>{{v.quantity}} {{v.ftokenShow}}</div>
+                <div>{{v.filledQ}} {{v.ftokenShow}}</div>
+                <div>{{`${(v.rate*100).toFixed(2)}%`}}</div>
+                <div>{{v.average}} {{v.ttokenShow}}</div>
                 <div
                     @click="cancel(v)"
                     class="click-able"
@@ -35,12 +35,17 @@
 <script>
 import { order, cancelOrder } from 'services/exchange';
 import powProcess from 'components/powProcess';
+import { timer } from 'utils/asyncFlow';
 const VoteDifficulty = '201564160';
 export default {
     props: {
         filterObj: {
             type: Object,
             default: ()=>({})
+        },
+        isEmbed:{
+            type:Boolean,
+            default:false
         }
     },
     data() {
@@ -49,7 +54,8 @@ export default {
             sortIndex: 0,
             sortType: 1,
             acc: null,
-            addr: ''
+            addr: '',
+            timer:null
         };
     },
     components: { powProcess },
@@ -61,6 +67,8 @@ export default {
             order({
                 address: this.addr,
                 status: 1,
+                pageNo:1,
+                pageSize:100,
                 ...this.filterObj
             }).then(data => {
                 this.list = data.orders;
@@ -126,6 +134,14 @@ export default {
     },
     beforeMount() {
         this.update();
+        if(this.isEmbed){
+            this.timer=new timer(()=>this.update(),5000);
+            this.timer.start();
+        }
+
+    },
+    beforeDestroy(){
+        this.timer&&this.timer.stop();
     },
     watch: {
         filterObj() {
@@ -134,7 +150,7 @@ export default {
     },
     computed: {
         sortedList(){
-            return this.list.slice(0).sort((a,b)=>(a.date-b.date));
+            return this.list.slice(0).sort((a,b)=>(b.date-a.date));
         },
         currentMarketNmae() {
             return this.$store.getters.currentMarketName;
@@ -146,14 +162,15 @@ export default {
 @import "../components/table.scss";
 .ex_tb {
     height: 100%;
-    padding-bottom: 10px;
+    margin-bottom: 10px;
 }
 @include rowWith {
     width: 8%;
     &:first-child,
     &:nth-child(4),
     &:nth-child(5),
-    &:nth-child(6) {
+    &:nth-child(6),
+    &:nth-child(8) {
         width: 15%;
     }
 }

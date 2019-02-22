@@ -2,7 +2,7 @@
 
 <template>
     <div class="open-order-ct">
-        <Table :list="data"></Table>
+        <Table :list="data" :filterObj="filterObj" :isEmbed="isEmbed"></Table>
     </div>
 </template>
 <script>
@@ -34,7 +34,16 @@ export default {
             data: []
         };
     },
-
+    props:{
+        filterObj:{
+            type:Object,
+            default:()=>({})
+        },
+        isEmbed:{
+            type:Boolean,
+            default:false
+        }
+    },
     components: {
         Table
     }
@@ -43,9 +52,6 @@ export default {
 <style lang="scss" scoped>
 .open-order-ct {
     height: 100%;
-    overflow: hidden;
     padding: 20px 10px 10px;
-    display: flex;
-    flex-direction: column;
 }
 </style>
