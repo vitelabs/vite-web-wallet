@@ -32,15 +32,16 @@ export default {
         return {
             data: [],
             currentPage:1,
-            totalPage:0
+            totalPage:0,
+            filters:{}
         };
     },
     beforeMount() {
         this.update();
     },
     methods: {
-        toPage(){
-            this.update(this.filters);
+        toPage(pageNo){
+            this.update(Object.assign(this.filters,{pageNo}));
         },
         submit(v){
             this.filters=v;
@@ -56,11 +57,13 @@ export default {
             if(this.isBuiltIn){
                 filters={totoken:this.currentMarket};
             }
+            filters=Object.assign({pageNo:this.currentPage},filters);
             order({
-                address,...filters,pageNum:10,pageIndex:this.currentPage
+                address,...filters,pageSize
             }).then(data => {
                 this.totalPage=Math.ceil(data.totalSize/pageSize);
                 this.data = data.orders||[];
+                this.currentPage=filters.pageNo;
             });
         }
     }
