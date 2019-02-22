@@ -57,7 +57,7 @@ export default {
             if(this.isBuiltIn){
                 filters={totoken:this.currentMarket};
             }
-            filters=Object.assign({pageNo:this.currentPage},filters)
+            filters=Object.assign({pageNo:this.currentPage},filters);
             order({
                 address,...filters,pageSize
             }).then(data => {
