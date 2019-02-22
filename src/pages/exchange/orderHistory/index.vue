@@ -22,11 +22,11 @@
     </div>
 </template>
 <script>
-import Filters from "./filters";
-import Table from "./table";
-import { order } from "services/exchange";
-import Pagination from "components/pagination";
-import { timer } from "utils/asyncFlow";
+import Filters from './filters';
+import Table from './table';
+import { order } from 'services/exchange';
+import Pagination from 'components/pagination';
+import { timer } from 'utils/asyncFlow';
 const pageSize = 10;
 export default {
     components: {
