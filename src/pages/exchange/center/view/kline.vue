@@ -1,7 +1,5 @@
 <template>
-    <div id="tv_chart_container" class="tradingview-widget-container">
-
-    </div>
+    <div id="tv_chart_container" class="tradingview-widget-container"></div>
 </template>
 
 <script>
@@ -29,7 +27,7 @@ export default {
             const widgetOptions = {
                 symbol: this.symbol,
                 datafeed: new datafeed(this.activeTxPair),
-                interval: 'M',
+                interval: 'D',
                 container_id: 'tv_chart_container',
                 library_path: '/charting_library/',
                 locale: this.$i18n.locale,
