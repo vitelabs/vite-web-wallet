@@ -15,6 +15,7 @@ import Filters from './filters';
 import Table from './table';
 import { order } from 'services/exchange';
 import Pagination from 'components/pagination';
+import { timer } from "utils/asyncFlow";
 const pageSize=10;
 export default {
     components: {
@@ -33,11 +34,17 @@ export default {
             data: [],
             currentPage:1,
             totalPage:0,
-            filters:{}
+            filters:{},
+            timer:null
         };
     },
     beforeMount() {
+        this.timer=new timer(()=>this.update(),5000);
+        this.timer.start();
         this.update();
+    },
+    beforeDestroy(){
+        this.timer.stop();
     },
     methods: {
         toPage(pageNo){
