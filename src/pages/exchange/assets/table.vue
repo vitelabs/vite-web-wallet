@@ -309,8 +309,8 @@ export default {
 <style lang="scss" scoped>
 @import "../components/table.scss";
 .ex_tb {
-    height: 100%;
-    padding-bottom: 10px;
+    height: calc(100% - 60px);
+    margin-bottom: 10px;
     flex: 1;
     box-shadow: 0px 2px 48px 1px rgba(176, 192, 237, 0.42);
 }

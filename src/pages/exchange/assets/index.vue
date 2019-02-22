@@ -73,7 +73,6 @@ export default {
 }
 .assets-ct {
     height: 100%;
-    overflow: hidden;
     padding: 20px 10px 10px;
 }
 </style>
