@@ -2,12 +2,9 @@
     <div class="ex_tb">
         <div class="head-row">
             <div
-                v-for="(h,i) in $t('exchangeOrderHistory.table.heads')"
+                v-for="h in $t('exchangeOrderHistory.table.heads')"
                 :key="h"
-            >{{h.replace("#tokenSymbol#","vite")}} <div
-                class="sort-btn"
-                @click="sortBy(i)"
-            ></div>
+            >{{h}}
             </div>
             <div></div>
         </div>
@@ -55,8 +52,6 @@ export default {
     },
     data() {
         return {
-            sortIndex: 0,
-            sortType: 1,
             detailData:[],
             detailConfirm:false
         };
@@ -75,29 +70,17 @@ export default {
             });
             this.detailConfirm=true;
         },
-        sortBy(i) {
-            if (i === this.sortIndex) {
-                this.sortType *= -1;
-                return;
-            }
-            this.sortIndex = i;
-        },
-        sortList(list) {
-            return list.sort((a, b) => {
-                return this.sortType * (a[this.sortIndex] - b[this.sortIndex]);
-            });
-        }
     },
     computed: {
+        sortedList(){
+            return this.list.slice(0).sort((a,b)=>(a.date-b.date));
+        },
         detailList(){
             return Object.keys(this.detailData).map(k=>{
                 const o=this.detailData[k];
                 return [new Date(o.txTime*1000).toLocaleString(),`${o.price} ${o.token}`,`${o.quantity} ${o.token}`,`${o.fee} ${o.token}`,`${o.amount} ${o.token}`];
 
             });
-        },
-        sortedList() {
-            return this.sortList(this.list);
         }
     }
 };

@@ -2,7 +2,7 @@
 
 <template>
     <div class="open-order-ct">
-        <Table :list="data" :filterObj="filterObj"></Table>
+        <Table :list="data" :filterObj="filterObj" :isEmbed="isEmbed"></Table>
     </div>
 </template>
 <script>
@@ -38,6 +38,10 @@ export default {
         filterObj:{
             type:Object,
             default:()=>({})
+        },
+        isEmbed:{
+            type:Boolean,
+            default:false
         }
     },
     components: {

@@ -17,8 +17,8 @@
                     :class="{active:tap==='historyOrder'}"
                 >{{$t('exchangeOrderHistory.title')}}</div>
             </div>
-            <openOrder v-if="tap==='openOrder'" class="item" :filterObj="{ftoken:activeTxPair.ftoken,ttoken:activeTxPair.ttoken}"></openOrder>
-            <historyOrder v-if="tap==='historyOrder'" class="item" :isBuiltIn="true" :filterObj="{ftoken:activeTxPair.ftoken,ttoken:activeTxPair.ttoken}"></historyOrder>
+            <openOrder v-if="tap==='openOrder'" class="item" :filterObj="{ftoken:activeTxPair.ftoken,ttoken:activeTxPair.ttoken}" :isEmbed="true"></openOrder>
+            <historyOrder v-if="tap==='historyOrder'" class="item" :isEmbed="true" :filterObj="{ftoken:activeTxPair.ftoken,ttoken:activeTxPair.ttoken}"></historyOrder>
         </div>
         <router-view></router-view>
     </div>
