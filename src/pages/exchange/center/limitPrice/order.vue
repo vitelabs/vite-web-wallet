@@ -125,8 +125,8 @@ export default {
             this.clearValidTimeout();
             validTimeout = setTimeout(() => {
                 this.clearValidTimeout();
-                this.validAll();
-                let isErr = this.isPriceErr || this.isAmountErr || this.isQuantityErr;
+                // this.validAll();
+                // let isErr = this.isPriceErr || this.isAmountErr || this.isQuantityErr;
                 // if (this.isPriceErr) {
                 //     this.price = this.oldPrice;
                 // }
@@ -136,9 +136,9 @@ export default {
                 // if (this.isQuantityErr) {
                 //     this.quantity = this.oldQuantity;
                 // }
-                if (isErr) {
-                    return;
-                }
+                // if (isErr) {
+                //     return;
+                // }
                 changeVal && this[`${changeVal}Changed`]();
                 this.validAll();
             }, 300);
@@ -331,12 +331,12 @@ export default {
             this.isPriceErr = this.price && !this.$validAmount(this.price);
         },
         validAmount() {
-            this.isAmountErr = this.amount && !this.$validAmount(this.amount);
-            // (this.orderType === 'buy' && BigNumber.compared(this.balance, this.amount) < 0);
+            this.isAmountErr = this.amount && !this.$validAmount(this.amount) ||
+                (this.orderType === 'buy' && BigNumber.compared(this.balance, this.amount) < 0);
         },
         validQuantity() {
-            this.isQuantityErr = this.quantity && !this.$validAmount(this.quantity);
-            // (this.orderType === 'sell' && BigNumber.compared(this.balance, this.quantity) < 0);
+            this.isQuantityErr = this.quantity && !this.$validAmount(this.quantity) ||
+                (this.orderType === 'sell' && BigNumber.compared(this.balance || 0, this.quantity) < 0);
         },
         validAll() {
             this.validPrice();
