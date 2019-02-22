@@ -102,9 +102,7 @@ export default {
 <style lang="scss" scoped>
 .order-history-ct {
     height: 100%;
-    display: flex;
     padding: 20px 10px 10px;
-    flex-direction: column;
     .tb {
         flex: 1;
     }
