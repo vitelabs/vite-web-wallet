@@ -23,6 +23,7 @@
         box-sizing: border-box;
         font-family: $font-bold;
         display: flex;
+        justify-content: space-between;
         padding: 0 30px;
         >div {
             justify-content: center;
@@ -60,6 +61,7 @@
         display: flex;
         width: 100%;
         padding: 0 30px;
+        justify-content: space-between;
         .click-able {
             cursor: pointer;
             color: #007AFF;
