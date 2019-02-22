@@ -264,7 +264,7 @@ export default {
             Object.keys(walletB).forEach(t => {
                 if (res[t]) {
                     res[t].icon = walletB[t].icon;
-                    res[t].balance = walletB[t].balance;
+                    res[t].balance = Number(walletB[t].balance);
                     return;
                 }
                 res[t] = {
