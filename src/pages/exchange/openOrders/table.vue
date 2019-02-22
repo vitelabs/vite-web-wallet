@@ -19,7 +19,7 @@
                 <!-- //0:buy,1:sell -->
                 <div :class="{buy:v.side===0,sell:v.side===1}">{{$t("exchangeOrderHistory.side")[v.side]}}</div>
                 <div>{{v.price}}</div>
-                <div>{{v.amount}}</div>
+                <div>{{v.quantity}}</div>
                 <div>{{v.filledQ}}</div>
                 <div>{{v.rate}}</div>
                 <div>{{v.average}}</div>
