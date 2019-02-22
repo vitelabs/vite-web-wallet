@@ -36,8 +36,7 @@ const getters = {
         let upDownPre = BigNumber.minus(activeTxPair.price || 0, activeTxPair.pricePrev || 0);
 
         activeTxPair.upDown = upDown;
-        activeTxPair.upDownPercent = activeTxPair.priceBefore24h && activeTxPair.priceBefore24h !== 0 ?
-            BigNumber.dividedToNumber(upDown, activeTxPair.priceBefore24h * 100, 2) + '%' : '';
+        activeTxPair.upDownPercent = activeTxPair.price24hChange ? BigNumber.multi(activeTxPair.price24hChange, 100, 2) + '%' : '';
         activeTxPair.upDownPre = upDownPre;
 
         return activeTxPair;
