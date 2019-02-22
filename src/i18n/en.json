@@ -470,7 +470,7 @@
         "table": {
             "heads": [
                 "Token",
-                "Balance",
+                "交易所总余额",
                 "Exchange Balance",
                 "In Order",
                 "Value"
@@ -478,7 +478,7 @@
             "rowMap": {
                 "recharge": "Deposit",
                 "withdraw": "Withdraw",
-                "detail": "Details",
+                "detail": "充提记录",
                 "sideMap":{
                     "1":"充值",
                     "2":"提现"
@@ -542,6 +542,7 @@
             "0": "Buy"
         },
         "confirmTable": {
+            "title":"撮合记录",
             "heads": [
                 "Time",
                 "Price",

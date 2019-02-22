@@ -6,25 +6,27 @@
             @submit="submit($event)"
             v-if="!isEmbed"
         ></Filters>
-        <Table
-            :list="data"
-            class="tb"
-        ></Table>
-        <Pagination
-            :currentPage="currentPage"
-            :toPage="toPage"
-            :totalPage="totalPage"
-            class="page-filter"
-            v-if="!isEmbed"
-        ></Pagination>
+        <div class="combine">
+            <Table
+                :list="data"
+                class="tb"
+            ></Table>
+            <Pagination
+                :currentPage="currentPage"
+                :toPage="toPage"
+                :totalPage="totalPage"
+                class="page-filter"
+                v-if="!isEmbed"
+            ></Pagination>
+        </div>
     </div>
 </template>
 <script>
-import Filters from './filters';
-import Table from './table';
-import { order } from 'services/exchange';
-import Pagination from 'components/pagination';
-import { timer } from 'utils/asyncFlow';
+import Filters from "./filters";
+import Table from "./table";
+import { order } from "services/exchange";
+import Pagination from "components/pagination";
+import { timer } from "utils/asyncFlow";
 const pageSize = 10;
 export default {
     components: {
@@ -106,10 +108,14 @@ export default {
     .tb {
         flex: 1;
     }
+    .combine {
+        box-shadow: 0px 2px 48px 1px rgba(176, 192, 237, 0.42);
+    }
     .page-filter {
         display: flex;
         justify-content: center;
         background: #fff;
+        padding: 10px 0;
     }
 }
 </style>

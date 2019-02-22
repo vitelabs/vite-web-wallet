@@ -60,9 +60,9 @@ export default {
     padding-bottom: 10px;
 }
 @include rowWith {
-    min-width: 20%;
+    width: 15%;
     &:first-child{
-        flex:1;
+        min-width: 160px;
     }
 }
 .buy {
