@@ -128,7 +128,7 @@ export default {
         showConfirm({ tokenId, type }) {
             this.opNumber= '';
             this.c= {};
-            const t = this.$t(`exchangeAssets.confirm${type}`);
+            const t = Object.assign({},this.$t(`exchangeAssets.confirm${type}`));
             t.tokenId = tokenId;
             t.type = type;
             t.icon=this.balance[tokenId].icon;
@@ -274,7 +274,7 @@ export default {
             return Object.keys(this.balance)
                 .map(k => this.balance[k])
                 .filter(v => {
-                    const NOTnoZero = this.filter.hideZero && v.balance === '0';
+                    const NOTnoZero = this.filter.hideZero && v.balance === 0;
                     const NOTmatchKey =
                         this.filter.filterKey &&
                         !v.symbol.match(new RegExp(this.filter.filterKey, 'i'));
