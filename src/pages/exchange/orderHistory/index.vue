@@ -52,7 +52,7 @@ export default {
     },
     watch:{
         filterObj(){
-            this.update()
+            this.update();
         }
     },
     methods: {
