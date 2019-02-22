@@ -53,7 +53,6 @@ export default {
     padding: 0 10px;
     line-height: 43px;
     margin: 0 10px;
-    border-bottom: 1px solid rgba(198, 203, 212, 0.3);
     .tab-list-wrapper {
         display: inline-block;
         font-size:14px;
@@ -62,6 +61,7 @@ export default {
         color: rgba(94, 104, 117, 1);
         display: flex;
         flex-wrap: wrap;
+        border-bottom: 1px solid rgba(198, 203, 212, 0.3);
         .tab {
             display: inline-block;
             box-sizing: border-box;
