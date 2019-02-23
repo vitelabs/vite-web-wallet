@@ -1,4 +1,4 @@
-// import { klineMinute, klineHour } from 'services/exchange';
+import { klineMinute, klineHour } from 'services/exchange';
 
 export default class dataFeeds {
     constructor(activeTxPair) {
@@ -6,54 +6,57 @@ export default class dataFeeds {
         this.symbolName = activeTxPair.ftokenShow + '/' + activeTxPair.ttokenShow;
     }
     onReady(callback) {
-        callback({
-            exchanges: [],
-            symbols_types: [],
-            supported_resolutions: ['1', '15', '240', 'D', '6M'],
-            supports_marks: true,
-            supports_timescale_marks: true,
-            supports_time: false
-        });
+        return setTimeout(() => {
+            callback({
+                exchanges: [],
+                symbols_types: [],
+                supported_resolutions: ['1', '60'],
+                supports_marks: true,
+                supports_timescale_marks: true,
+                supports_time: false
+            });
+        }, 0);
     }
-    searchSymbols(userInput, exchange, symbolType, onResultReadyCallback) {
-        console.log(userInput, exchange, symbolType, onResultReadyCallback);
-    }
-    resolveSymbol(symbolName, onSymbolResolvedCallback, onResolveErrorCallback) {
-        console.log(symbolName, onSymbolResolvedCallback, onResolveErrorCallback);
-        onSymbolResolvedCallback({
-            name: this.symbolName,
-            description: this.symbolName,
-            type: 'bitcoin'
-        });
+    resolveSymbol(symbolName, onSymbolResolvedCallback) {
+        return setTimeout(() => {
+            onSymbolResolvedCallback({
+                name: this.symbolName,
+                description: this.symbolName,
+                type: 'bitcoin'
+            });
+        }, 0);
     }
     getBars(symbolInfo, resolution, from, to, onHistoryCallback, onErrorCallback, firstDataRequest) {
         console.log('getBars', symbolInfo, resolution, from, to, onErrorCallback, onHistoryCallback, firstDataRequest);
         // console.log(firstDataRequest);
-        // firstDataRequest && klineMinute({
-        //     fdate: from, 
-        //     tdate: to,
-        //     ftoken: this.activeTxPair.ftoken, 
-        //     ttoken: this.activeTxPair.ttoken
-        // }).then((data) => {
-        //     let list = [];
-        //     data && data.forEach(_d => {
-        //         list.push({
-        //             time: _d.txUnit * 1000,
-        //             close: _d.closePrice,
-        //             open: _d.openPrice,
-        //             high: _d.highPrice,
-        //             low: _d.lowPrice,
-        //             volume: _d.amount
-        //         });
-        //     });
-        //     onHistoryCallback(list, {
-        //         noData: !list || !list.length
-        //     });
-        // }).catch((err) => {
-        //     onErrorCallback(err);
-        // });
-        console.log(symbolInfo, resolution, from, to, onHistoryCallback, onErrorCallback, firstDataRequest);
+        firstDataRequest && klineMinute({
+            fdate: from, 
+            tdate: to,
+            ftoken: this.activeTxPair.ftoken, 
+            ttoken: this.activeTxPair.ttoken
+        }).then((data) => {
+            let list = [];
+            data && data.forEach(_d => {
+                list.push({
+                    time: _d.txUnit * 1000,
+                    close: _d.closePrice,
+                    open: _d.openPrice,
+                    high: _d.highPrice,
+                    low: _d.lowPrice,
+                    volume: _d.amount
+                });
+            });
+            onHistoryCallback(list, {
+                noData: !list || !list.length,
+                nextTime: new Date().getTime()
+            });
+        }).catch((err) => {
+            onErrorCallback(err);
+        });
     }
+
+
+
     subscribeBars(symbolInfo, resolution, onRealtimeCallback, subscriberUID, onResetCacheNeededCallback) {
         console.log('subscribeBars');
         console.log(symbolInfo, resolution, onRealtimeCallback, subscriberUID, onResetCacheNeededCallback);
@@ -63,6 +66,7 @@ export default class dataFeeds {
     }
     calculateHistoryDepth(resolution, resolutionBack, intervalBack) {
         console.log(resolution, resolutionBack, intervalBack);
+        return undefined;
     }
     getMarks(symbolInfo, from, to, onDataCallback, resolution) {
         console.log('getMarks');

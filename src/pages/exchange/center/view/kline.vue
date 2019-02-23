@@ -27,7 +27,7 @@ export default {
             const widgetOptions = {
                 symbol: this.symbol,
                 datafeed: new datafeed(this.activeTxPair),
-                interval: 'D',
+                interval: '1',
                 container_id: 'tv_chart_container',
                 library_path: '/charting_library/',
                 locale: this.$i18n.locale,
@@ -41,14 +41,8 @@ export default {
             this.tvWidget = tvWidget;
 
             this.tvWidget.onChartReady(() => {
-                // console.log('???');
                 this.init();
             });
-        },
-        activeTxPair: function() {
-            // this.tvWidget.setSymbol({
-            //     name: this.activeTxPair.ftokenShow + '/' + this.activeTxPair.ttokenShow
-            // });
         }
     },
     data() {
@@ -60,7 +54,7 @@ export default {
         init() {
             this.tvWidget.setSymbol({
                 name: this.activeTxPair.ftokenShow + '/' + this.activeTxPair.ttokenShow
-            });
+            }, '1');
         }
     }
 };
