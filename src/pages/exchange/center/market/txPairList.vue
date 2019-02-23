@@ -196,7 +196,7 @@ export default {
         position: absolute;
         padding: 10px;
         line-height: 20px;
-        right: 10px;
+        right: -6px;
         z-index: 1;
         transform: translateX(100%);
         background: rgba(255,255,255,1);
