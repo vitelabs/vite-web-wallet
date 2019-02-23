@@ -1,4 +1,4 @@
-import { klineMinute, klineHour } from 'services/exchange';
+import { klineMinute } from 'services/exchange';
 
 export default class dataFeeds {
     constructor(activeTxPair) {
