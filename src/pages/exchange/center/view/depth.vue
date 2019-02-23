@@ -1,5 +1,5 @@
 <template>
-    <e-charts auto-resize :options="deptChartOption" @legendselectchanged="legendSelectChanged"></e-charts>
+    <e-charts class="e-charts-wrapper" auto-resize :options="deptChartOption" @legendselectchanged="legendSelectChanged"></e-charts>
 </template>
 
 <script>
@@ -27,8 +27,11 @@ export default {
             let list = buyList.sort((a, b) => {
                 return b.amount - a.amount;
             });
+            return list;
+        },
+        buyAmountList() {
             let _l = [];
-            list.forEach((item) => {
+            this.buyList.forEach((item) => {
                 _l.push(item.amount);
             });
             return _l;
@@ -38,14 +41,22 @@ export default {
             let list = sellList.sort((a, b) => {
                 return a.amount - b.amount;
             });
+            return list;
+        },
+        sellAmountList() {
             let _l = [];
-            list.forEach((item) => {
+            this.sellList.forEach((item) => {
                 _l.push(item.amount);
             });
             return _l;
         },
-        list() {
-            return [].concat(this.buyList, this.sellList);
+        priceList() {
+            let list = [].concat(this.buyList, this.sellList);
+            let _l = [];
+            list.forEach((item) => {
+                _l.push(item.price);
+            });
+            return _l;
         },
         deptChartOption() {
             return {
@@ -53,39 +64,25 @@ export default {
                 tooltip: {
                     confine: true,
                     trigger: 'axis',
-                    axisPointer: {type: 'line', lineStyle: {color: 'rgba(0, 0, 0, 0)'}},
-                    backgroundColor: '#355475',
-                    textStyle: {color: '#fff', fontSize: '14px'},
+                    // axisPointer: {type: 'line', lineStyle: {color: 'rgba(0, 0, 0, 1)'}},
+                    backgroundColor: '#afafaf',
+                    textStyle: { color: '#fff', fontSize: '12px' },
                     // extraCssText: 'box-shadow: 0 0 16px 0 rgba(0, 0, 0, .2);border-radius: 4px;'
-                },
-                legend: {
-                    data: [
-                        {name: '买单', icon: 'rect'},
-                        {name: '卖单', icon: 'rect'}
-                    ],
-                    selected: {
-                        '买单': true,
-                        '卖单': true
-                    },
-                    itemWidth: 10,
-                    itemHeight: 10,
-                    textStyle: {color: '#fff'},
-                    pageIconColor: '#4CC453'
                 },
                 xAxis: {
                     type: 'category',
-                    axisLine: {show: false},
-                    axisTick: {show: false},
-                    axisLabel: {show: false},
-                    boundaryGap: false,
-                    data: this.list
+                    axisLine: { show: false },
+                    axisTick: { show: false },
+                    axisLabel: { show: false },
+                    // boundaryGap: false,
+                    data: this.priceList
                 },
                 yAxis: [{
                     type: 'value',
-                    axisLine: {show: false},
-                    axisTick: {show: false},
-                    axisLabel: {show: false},
-                    splitLine: {show: false}
+                    axisLine: { show: false },
+                    axisTick: { show: false },
+                    axisLabel: { show: false },
+                    splitLine: { show: false }
                 }],
                 series: [
                     {
@@ -99,7 +96,7 @@ export default {
                         itemStyle: {normal: {color: '#4cc453'}},
                         lineStyle: {normal: {color: '#5BC500'}},
                         areaStyle: {color: '#5BC500'},
-                        data: this.buyList
+                        data: this.buyAmountList
                     },
                     {
                         name: '卖单',
@@ -112,7 +109,7 @@ export default {
                         itemStyle: {normal: {color: '#e94c4c'}},
                         lineStyle: {normal: {color: '#E5494D'}},
                         areaStyle: {color: '#E5494D'},
-                        data: this.sellList
+                        data: this.sellAmountList
                     }
                 ]
             };
@@ -137,3 +134,11 @@ export default {
     }
 };
 </script>
+
+<style lang="scss" scoped>
+.e-charts-wrapper {
+    width: 100%;
+    height: 100%;
+}
+</style>
+
