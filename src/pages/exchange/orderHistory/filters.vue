@@ -7,7 +7,7 @@
             <FlatPickr
                 v-model="fromDate"
                 class="filter_content"
-                :config="{dateFormat:'Z',enableTime:true,time_24hr:true}"
+                :config="{dateFormat:'Y-m-d H:i',enableTime:true,time_24hr:true}"
             ></FlatPickr>
         </div>
         <div class="separator">-</div>
@@ -16,7 +16,7 @@
             <FlatPickr
                 v-model="toDate"
                 class="filter_content"
-                :config="{dateFormat:'Z',enableTime:true,time_24hr:true}"
+                :config="{dateFormat:'Y-m-d H:i',enableTime:true,time_24hr:true}"
             ></FlatPickr>
         </div>
         <div class="filter">
@@ -68,12 +68,18 @@ export default {
             ftokenMap:[]
         };
     },
+    beforeMount(){
+        this.ttoken=this.currentToken;
+    },
     components: {
         FlatPickr
     },
     computed:{
         marketMap(){
             return this.$store.state.exchangeMarket.marketMap;
+        },
+        currentToken(){
+            return this.$store.state.exchangeMarket.currentMarket;
         }
     },
     watch:{
@@ -85,6 +91,11 @@ export default {
     },
     methods: {
         reset(){
+            this.fromDate='';
+            this.toDate='';
+            this.tradeType='';
+            this.ftoken= '';
+            this.ttoken=this.currentToken;
             this.$emit('submit', {
             });
         },

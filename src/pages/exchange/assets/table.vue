@@ -210,7 +210,7 @@ export default {
             const amountBalance =
                 this.c.type.toLowerCase() === 'recharge'
                     ? this.balance[this.c.tokenId].balance
-                    : this.balance[this.c.tokenId].balance;
+                    : this.balance[this.c.tokenId].available;
             const decimals = this.balance[this.c.tokenId].decimals;
             const result = this.$validAmount(this.opNumber, decimals);
             if (!result) {
