@@ -35,7 +35,7 @@
                 >{{$t("exchangeAssets.table.rowMap.detail")}}</div>
             </div>
         </div>
-
+        <img @click="update" class="refresh" src="~assets/imgs/exchange/refresh.svg" />
         <confirm
             :title="c.title"
             :singleBtn="true"
@@ -91,10 +91,6 @@ export default {
         this.acc = this.$wallet.getActiveAccount();
         if (!this.acc) return;
         this.acc && (this.addr = this.acc.getDefaultAddr());
-        this.$store.dispatch('startLoopExchangeBalance', this.addr);
-    },
-    destroyed() {
-        this.$store.dispatch('stopLoopExchangeBalance');
     },
     data() {
         return {
@@ -109,6 +105,9 @@ export default {
         };
     },
     methods: {
+        update(){
+            this.addr&&this.$store.dispatch('updateExBalance',this.addr);
+        },
         withdraw(tokenId) {
             this.showConfirm({ tokenId, type: 'withdraw' });
         },
@@ -211,7 +210,7 @@ export default {
             const amountBalance =
                 this.c.type.toLowerCase() === 'recharge'
                     ? this.balance[this.c.tokenId].balance
-                    : this.balance[this.c.tokenId].balance;
+                    : this.balance[this.c.tokenId].available;
             const decimals = this.balance[this.c.tokenId].decimals;
             const result = this.$validAmount(this.opNumber, decimals);
             if (!result) {
@@ -313,6 +312,14 @@ export default {
     margin-bottom: 10px;
     flex: 1;
     box-shadow: 0px 2px 48px 1px rgba(176, 192, 237, 0.42);
+    .refresh{
+        position: absolute;
+        height: 20px;
+        width: 20px;
+        cursor: pointer;
+        top: 25px;
+        right: 40px;
+    }
 }
 @include rowWith {
     width: 8%;
