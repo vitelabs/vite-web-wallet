@@ -80,7 +80,7 @@ export default {
         ttoken(){
             tokenMap({tokenId:this.ttoken}).then(
                 data=>(this.ftokenMap=data)
-            )
+            );
         }
     },
     methods: {
