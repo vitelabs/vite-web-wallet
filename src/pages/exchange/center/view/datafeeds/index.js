@@ -1,4 +1,4 @@
-import { klineMinute } from 'services/exchange';
+import { klineMinute, klineHour } from 'services/exchange';
 
 export default class dataFeeds {
     constructor(activeTxPair) {
@@ -22,23 +22,45 @@ export default class dataFeeds {
             onSymbolResolvedCallback({
                 name: this.symbolName,
                 description: this.symbolName,
-                type: 'bitcoin'
+                type: 'crypto',
+                session: '24x7',
+                timezone: 'Etc/UTC',
+                ticker: symbolName,
+                // exchange: split_data[0],
+                minmov: 1,
+                pricescale: 100000000,
+                has_intraday: true,
+                intraday_multipliers: ['1', '60'],
+                // supported_resolution:  supportedResolutions,
+                volume_precision: 8,
+                data_status: 'streaming'
+                // name: this.symbolName,
+                // description: this.symbolName,
+                // type: 'bitcoin'
             });
         }, 0);
     }
     getBars(symbolInfo, resolution, from, to, onHistoryCallback, onErrorCallback, firstDataRequest) {
-        console.log('getBars', symbolInfo, resolution, from, to, onErrorCallback, onHistoryCallback, firstDataRequest);
-        // console.log(firstDataRequest);
-        firstDataRequest && klineMinute({
+        // console.log('getBars', symbolInfo, resolution, from, to, onErrorCallback, onHistoryCallback, firstDataRequest);
+
+        if (!firstDataRequest) {
+            return;
+        }
+
+        let func = +resolution === 1 ? klineMinute : klineHour;
+
+        func({
             fdate: from, 
             tdate: to,
             ftoken: this.activeTxPair.ftoken, 
             ttoken: this.activeTxPair.ttoken
         }).then((data) => {
             let list = [];
+            let timeDiff = +resolution === 1 ? 60 * 1000 : 60 * 60 * 1000;
             data && data.forEach(_d => {
+                let time = _d.txUnit * timeDiff;
                 list.push({
-                    time: _d.txUnit * 1000,
+                    time,
                     close: _d.closePrice,
                     open: _d.openPrice,
                     high: _d.highPrice,
@@ -46,6 +68,7 @@ export default class dataFeeds {
                     volume: _d.amount
                 });
             });
+
             onHistoryCallback(list, {
                 noData: !list || !list.length,
                 nextTime: new Date().getTime()
@@ -57,24 +80,25 @@ export default class dataFeeds {
 
 
 
-    subscribeBars(symbolInfo, resolution, onRealtimeCallback, subscriberUID, onResetCacheNeededCallback) {
-        console.log('subscribeBars');
-        console.log(symbolInfo, resolution, onRealtimeCallback, subscriberUID, onResetCacheNeededCallback);
+    subscribeBars() {
+        // console.log(symbolInfo, resolution, onRealtimeCallback, subscriberUID, onResetCacheNeededCallback);
+        return undefined;
     }
-    unsubscribeBars(subscriberUID) {
-        console.log(subscriberUID);
+    unsubscribeBars() {
+        // console.log(subscriberUID);
+        return undefined;
     }
-    calculateHistoryDepth(resolution, resolutionBack, intervalBack) {
-        console.log(resolution, resolutionBack, intervalBack);
+    calculateHistoryDepth() {
+        // console.log(resolution, resolutionBack, intervalBack);
         return undefined;
     }
     getMarks(symbolInfo, from, to, onDataCallback, resolution) {
-        console.log('getMarks');
         console.log(symbolInfo, from, to, onDataCallback, resolution);
+        return undefined;
     }
     getTimescaleMarks(symbolInfo, from, to, onDataCallback, resolution) {
-        console.log('getTimescaleMarks');
         console.log(symbolInfo, from, to, onDataCallback, resolution);
+        return undefined;
     }
     getServerTime() {
         // console.log(callback);

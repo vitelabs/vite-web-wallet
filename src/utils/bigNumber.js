@@ -30,6 +30,12 @@ export default {
         let result = x.minus(y);
         return type === 'fix' ? result.toFormat(fix) : result.decimalPlaces(fix, 1).toFormat();
     },
+    plus(x, y, fix = 8, type = 'fix') {
+        x = new BigNumber(x);
+        y = new BigNumber(y);
+        let result = x.plus(y);
+        return type === 'fix' ? result.toFormat(fix) : result.decimalPlaces(fix, 1).toFormat();
+    },
     multi(x, y, fix = 8) {
         x = new BigNumber(x);
         y = new BigNumber(y);
