@@ -71,7 +71,7 @@ export default {
     height: 100%;
     width: 100%;
     .order-wrapper {
-        height: 30px;
+        height: 40px;
     }
     .order {
         background:#fff;
