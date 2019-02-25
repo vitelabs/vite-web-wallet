@@ -21,7 +21,9 @@
         </div>
         <div class="filter">
             <div class="filter_label">{{ $t("exchangeOrderHistory.filter.type") }}</div>
-            <input class="filter_content" v-model="ftoken" />
+            <select class="filter_content" v-model="ftoken">
+                <option :value="token.token" v-for="token in ftokenMap" :key="token.token">{{token.name}}</option>
+            </select>
         </div>
         <div class="separator">-</div>
         <div class="filter end">
@@ -52,6 +54,7 @@
 
 <script>
 import FlatPickr from 'vue-flatpickr-component';
+import {tokenMap} from 'services/exchange';
 import 'flatpickr/dist/flatpickr.css';
 export default {
     data() {
@@ -61,7 +64,8 @@ export default {
             tradeType: '',
             ftoken: '',
             ttoken: '',
-            tokenMap: []
+            tokenMap: [],
+            ftokenMap:[]
         };
     },
     components: {
@@ -70,6 +74,13 @@ export default {
     computed:{
         marketMap(){
             return this.$store.state.exchangeMarket.marketMap;
+        }
+    },
+    watch:{
+        ttoken(){
+            tokenMap({tokenId:this.ttoken}).then(
+                data=>(this.ftokenMap=data)
+            )
         }
     },
     methods: {
