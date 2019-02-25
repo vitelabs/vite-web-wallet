@@ -24,6 +24,26 @@ export default {
                 return;
             }
 
+            // if (this.tvWidget) {
+            //     this.tvWidget.setSymbol({
+            //         name: this.activeTxPair.ftokenShow + '/' + this.activeTxPair.ttokenShow,
+            //         description: this.activeTxPair.ftokenShow + '/' + this.activeTxPair.ttokenShow,
+            //         type: 'crypto',
+            //         session: '24x7',
+            //         timezone: 'Etc/UTC',
+            //         // ticker: symbolName,
+            //         // exchange: split_data[0],
+            //         minmov: 1,
+            //         pricescale: 100000000,
+            //         has_intraday: true,
+            //         intraday_multipliers: ['1', '60'],
+            //         // supported_resolution:  supportedResolutions,
+            //         volume_precision: 8,
+            //         data_status: 'streaming'
+            //     }, '1');
+            //     return;
+            // }
+
             const widgetOptions = {
                 fullscreen: false,
                 autosize: true,
@@ -32,7 +52,7 @@ export default {
                 allow_symbol_change: true,
                 container_id: 'tv_chart_container',
                 datafeed: new datafeed(this.activeTxPair),
-                library_path: './charting_library/',
+                library_path: 'charting_library/',
                 locale: this.$i18n.locale,
                 drawings_access: { type: 'black', tools: [ { name: 'Trend Line' } ] },
                 disabled_features: ['use_localstorage_for_settings', 'volume_force_overlay', 'header_compare', 'header_symbol_search', 'header_indicators', 'header_chart_type'],

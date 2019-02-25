@@ -18,6 +18,7 @@ export default class dataFeeds {
         }, 0);
     }
     resolveSymbol(symbolName, onSymbolResolvedCallback) {
+        console.log(symbolName);
         return setTimeout(() => {
             onSymbolResolvedCallback({
                 name: this.symbolName,
