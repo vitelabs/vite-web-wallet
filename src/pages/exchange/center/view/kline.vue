@@ -4,7 +4,7 @@
 
 <script>
 import { widget } from 'charting/charting_library.min';
-import datafeed from './datafeeds/index.js';
+import datafeed from './datafeeds.js';
 
 export default {
     computed: {
@@ -24,18 +24,6 @@ export default {
                 return;
             }
 
-            // const widgetOptions = {
-            //     symbol: this.symbol,
-            //     datafeed: new datafeed(this.activeTxPair),
-            //     interval: '1',
-            //     container_id: 'tv_chart_container',
-            //     library_path: '/charting_library/',
-            //     locale: this.$i18n.locale,
-            //     disabled_features: ['use_localstorage_for_settings'],
-            //     enabled_features: ['study_templates'],
-            //     fullscreen: false,
-            //     autosize: true
-            // };
             const widgetOptions = {
                 fullscreen: false,
                 autosize: true,
