@@ -1,9 +1,9 @@
 <template>
     <div class="ex-view-container">
-        <!-- <div class="choose-list">
+        <div class="choose-list">
             <span class="kline" @click="showKline">kline</span>
             <span class="depth" @click="showDepth">depth</span>
-        </div> -->
+        </div>
         <div class="view">
             <kline v-show="showView === 'kline'"></kline>
             <depth v-show="showView === 'depth'"></depth>
