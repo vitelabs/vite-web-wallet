@@ -35,7 +35,7 @@
                 >{{$t("exchangeAssets.table.rowMap.detail")}}</div>
             </div>
         </div>
-        <img @click="update" class="refresh" src="~assets/imgs/exchange/refresh.svg" />
+        <img @click="update" class="refresh" :class="{rotate:isRotate}" src="~assets/imgs/exchange/refresh.svg" />
         <confirm
             :title="c.title"
             :singleBtn="true"
@@ -77,6 +77,9 @@ import { deposit, withdraw, chargeDetail } from 'services/exchange';
 import BigNumber from 'utils/bigNumber';
 import getTokenIcon from 'utils/getTokenIcon';
 import powProcess from 'components/powProcess';
+import debounce from 'lodash/debounce';
+import { setTimeout } from 'timers';
+
 const VoteDifficulty = '201564160';
 export default {
     props: {
@@ -91,7 +94,7 @@ export default {
         this.acc = this.$wallet.getActiveAccount();
         if (!this.acc) return;
         this.acc && (this.addr = this.acc.getDefaultAddr());
-        this.update();
+        this.addr&&this.$store.dispatch('updateExBalance',this.addr);
     },
     data() {
         return {
@@ -102,13 +105,18 @@ export default {
             detailData: [],
             detailConfirm: false,
             acc: null,
-            addr: ''
+            addr: '',
+            isRotate:false
         };
     },
     methods: {
-        update(){
+        update:debounce(function (){
+            this.isRotate=true;
+            setTimeout(()=>{
+                this.isRotate=false;
+            },2000)
             this.addr&&this.$store.dispatch('updateExBalance',this.addr);
-        },
+        },0.1),
         withdraw(tokenId) {
             this.showConfirm({ tokenId, type: 'withdraw' });
         },
@@ -318,8 +326,12 @@ export default {
         height: 20px;
         width: 20px;
         cursor: pointer;
-        top: 25px;
-        right: 40px;
+        top: 30px;
+        right: 30px;
+        &.rotate{
+            transform:rotate(360deg);
+            transition:all ease-in-out 1s;
+        }
     }
 }
 @include rowWith {
