@@ -23,6 +23,7 @@ const actions = {
         txPair && commit('exSetActiveTxPair', txPair);
         dispatch('exFetchLatestTx');
         dispatch('exFetchDepth');
+        dispatch('exFetchActiveTokens');
     }
 };
 
