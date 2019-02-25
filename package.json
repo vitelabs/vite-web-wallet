@@ -3,7 +3,7 @@
     "version": "1.4.0",
     "description": "",
     "scripts": {
-        "clean": "rm -rf ./static",
+        "clean": "rm -rf ./dist",
         "build": "npm run clean && NODE_ENV=production webpack && node build.js",
         "build:test": "npm run clean && NODE_ENV=test webpack && NODE_ENV=test node build.js",
         "dev": "NODE_ENV=dev webpack-dev-server",
