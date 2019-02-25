@@ -7,9 +7,9 @@ var redirect = process.env.NODE_ENV === 'test' ?
     path.join(__dirname, 'netlifyConf/_redirects_test') :
     path.join(__dirname, 'netlifyConf/_redirects');
 
-var staticPath = path.join(__dirname, 'static');
+var staticPath = path.join(__dirname, 'dist');
 var chartPath = path.join(__dirname, 'charting_library');
-var chartStaticPath = path.join(__dirname, 'static/charting_library');
+var chartStaticPath = path.join(__dirname, 'dist/charting_library');
 
 var result = fs.existsSync(staticPath);
 // Not exists
