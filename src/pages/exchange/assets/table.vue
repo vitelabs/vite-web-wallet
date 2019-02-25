@@ -114,7 +114,7 @@ export default {
             this.isRotate=true;
             setTimeout(()=>{
                 this.isRotate=false;
-            },2000)
+            },2000);
             this.addr&&this.$store.dispatch('updateExBalance',this.addr);
         },0.1),
         withdraw(tokenId) {
