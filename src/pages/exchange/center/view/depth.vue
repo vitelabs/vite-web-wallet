@@ -4,6 +4,7 @@
 
 <script>
 import ECharts from 'vue-echarts/components/ECharts';
+import BigNumber from 'utils/bigNumber.js';
 
 require('echarts/lib/chart/line');
 require('echarts/lib/component/tooltip');
@@ -17,15 +18,18 @@ export default {
         buyList() {
             let buyList = [].concat(this.$store.state.exchangeDepth.buy || []);
             let list = buyList.sort((a, b) => {
-                return b.price - a.price;
+                return a.price - b.price;
             });
             return list;
         },
         buyAmountList() {
             let _l = [];
+            let sum = 0;
             this.buyList.forEach((item) => {
-                _l.push(item.quantity);
+                sum = BigNumber.plus(sum, item);
+                _l.push(sum);
             });
+            _l.reverse();
             return _l;
         },
         sellList() {
@@ -40,8 +44,11 @@ export default {
             this.buyList.forEach(() => {
                 _l.push(null);
             });
+
+            let sum = 0;
             this.sellList.forEach((item) => {
-                _l.push(item.quantity);
+                sum = BigNumber.plus(sum, item.quantity);
+                _l.push(sum);
             });
             return _l;
         },
