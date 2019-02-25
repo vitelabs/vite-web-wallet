@@ -21,7 +21,7 @@ export default {
     },
     data() {
         return {
-            showView: 'kline'
+            showView: 'depth'
         };
     },
     methods: {

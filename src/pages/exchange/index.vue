@@ -3,22 +3,21 @@
 <template>
     <div class="exchange-center-wrapper">
         <center v-if="active === 'exchange'"></center>
-        <div
-            class="order"
-            v-if="active === 'exchange'"
-        >
-            <div class="tap">
-                <div
-                    @click="tap='openOrder'"
-                    :class="{active:tap==='openOrder'}"
-                >{{$t('exchangeOpenOrders.title')}}</div>
-                <div
-                    @click="tap='historyOrder'"
-                    :class="{active:tap==='historyOrder'}"
-                >{{$t('exchangeOrderHistory.title')}}</div>
+        <div class="order-wrapper" v-if="active === 'exchange'">
+            <div class="order">
+                <div class="tap">
+                    <div
+                        @click="tap='openOrder'"
+                        :class="{active:tap==='openOrder'}"
+                    >{{$t('exchangeOpenOrders.title')}}</div>
+                    <div
+                        @click="tap='historyOrder'"
+                        :class="{active:tap==='historyOrder'}"
+                    >{{$t('exchangeOrderHistory.title')}}</div>
+                </div>
+                <openOrder v-if="tap==='openOrder'" class="item" :filterObj="{ftoken:activeTxPair.ftoken,ttoken:activeTxPair.ttoken}" :isEmbed="true"></openOrder>
+                <historyOrder v-if="tap==='historyOrder'" class="item" :isEmbed="true" :filterObj="{ftoken:activeTxPair.ftoken,ttoken:activeTxPair.ttoken}"></historyOrder>
             </div>
-            <openOrder v-if="tap==='openOrder'" class="item" :filterObj="{ftoken:activeTxPair.ftoken,ttoken:activeTxPair.ttoken}" :isEmbed="true"></openOrder>
-            <historyOrder v-if="tap==='historyOrder'" class="item" :isEmbed="true" :filterObj="{ftoken:activeTxPair.ftoken,ttoken:activeTxPair.ttoken}"></historyOrder>
         </div>
         <router-view></router-view>
     </div>
@@ -71,13 +70,15 @@ export default {
     flex-direction: column;
     height: 100%;
     width: 100%;
+    .order-wrapper {
+        height: 30px;
+    }
     .order {
         background:#fff;
         box-shadow:0px 2px 48px 1px rgba(176,192,237,0.42);
         margin: 10px;
         margin-top:0;
         border-radius: 2px;
-        height: 30px;
         .tap {
             height: 34px;
             display: flex;
