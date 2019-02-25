@@ -5,6 +5,7 @@ import activeTx from './activeTx';
 import latestTx from './latestTx';
 import balance from './balance';
 import market from './market';
+import tokens from './tokens';
 
 export default {
     exchangeRate: rate,
@@ -13,5 +14,6 @@ export default {
     exchangeActiveTxPair: activeTxPair,
     exchangeLatestTx: latestTx,
     exchangeBalance: balance,
-    exchangeMarket:market
+    exchangeMarket: market,
+    exchangeTokens: tokens
 };

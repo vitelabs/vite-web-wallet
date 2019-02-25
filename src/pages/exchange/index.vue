@@ -66,7 +66,7 @@ export default {
 
 <style lang="scss" scoped>
 .exchange-center-wrapper {
-    min-width: 1400px;
+    min-width: 1350px;
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -77,6 +77,7 @@ export default {
         margin: 10px;
         margin-top:0;
         border-radius: 2px;
+        height: 30px;
         .tap {
             height: 34px;
             display: flex;
