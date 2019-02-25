@@ -105,9 +105,10 @@ export default {
                 return false;
             }
 
-            if (isEqualBalance === 0 && 
+            if (isEqualBalance <= 0 && BigNumber.compared(this.activeAmountLimit, 1000) >= 0 &&
                 BigNumber.compared(this.cancelAmount, 1000) < 0) {
                 this.amountErr = '????';
+                return false;
             }
 
             this.amountErr = '';
