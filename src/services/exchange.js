@@ -54,13 +54,13 @@ export const depthSell = function ({
 };
 
 export const order = function ({
-    address, fDate, tDate, ftoken, ttoken, orderSide, pageNo, pageSize, status
+    address, fdate, tdate, ftoken, ttoken, orderSide, pageNo, pageSize, status
 }) {
     return request({
         path: path + '/order/query',
         method: 'GET',
         params: {
-            address, fDate, tDate, ftoken, ttoken, orderSide, pageNo, pageSize, status
+            address, fdate, tdate, ftoken, ttoken, orderSide, pageNo, pageSize, status
         }
     });
 };
