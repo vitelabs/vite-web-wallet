@@ -7,7 +7,7 @@
             <FlatPickr
                 v-model="fromDate"
                 class="filter_content"
-                :config="{dateFormat:'Z',enableTime:true,time_24hr:true}"
+                :config="{dateFormat:'Y-m-d H:i',enableTime:true,time_24hr:true}"
             ></FlatPickr>
         </div>
         <div class="separator">-</div>
@@ -16,12 +16,14 @@
             <FlatPickr
                 v-model="toDate"
                 class="filter_content"
-                :config="{dateFormat:'Z',enableTime:true,time_24hr:true}"
+                :config="{dateFormat:'Y-m-d H:i',enableTime:true,time_24hr:true}"
             ></FlatPickr>
         </div>
         <div class="filter">
             <div class="filter_label">{{ $t("exchangeOrderHistory.filter.type") }}</div>
-            <input class="filter_content" v-model="ftoken" />
+            <select class="filter_content" v-model="ftoken">
+                <option :value="token.token" v-for="token in ftokenMap" :key="token.token">{{token.name}}</option>
+            </select>
         </div>
         <div class="separator">-</div>
         <div class="filter end">
@@ -52,6 +54,7 @@
 
 <script>
 import FlatPickr from 'vue-flatpickr-component';
+import {tokenMap} from 'services/exchange';
 import 'flatpickr/dist/flatpickr.css';
 export default {
     data() {
@@ -61,8 +64,12 @@ export default {
             tradeType: '',
             ftoken: '',
             ttoken: '',
-            tokenMap: []
+            tokenMap: [],
+            ftokenMap:[]
         };
+    },
+    beforeMount(){
+        this.ttoken=this.currentToken;
     },
     components: {
         FlatPickr
@@ -70,10 +77,25 @@ export default {
     computed:{
         marketMap(){
             return this.$store.state.exchangeMarket.marketMap;
+        },
+        currentToken(){
+            return this.$store.state.exchangeMarket.currentMarket;
+        }
+    },
+    watch:{
+        ttoken(){
+            tokenMap({tokenId:this.ttoken}).then(
+                data=>(this.ftokenMap=data)
+            );
         }
     },
     methods: {
         reset(){
+            this.fromDate='';
+            this.toDate='';
+            this.tradeType='';
+            this.ftoken= '';
+            this.ttoken=this.currentToken;
             this.$emit('submit', {
             });
         },
