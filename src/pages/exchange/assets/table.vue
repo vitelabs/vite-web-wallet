@@ -91,6 +91,7 @@ export default {
         this.acc = this.$wallet.getActiveAccount();
         if (!this.acc) return;
         this.acc && (this.addr = this.acc.getDefaultAddr());
+        this.update();
     },
     data() {
         return {
@@ -295,7 +296,7 @@ export default {
             return Object.keys(this.balance)
                 .map(k => this.balance[k])
                 .filter(v => {
-                    const NOTnoZero = this.filter.hideZero && v.balance === 0;
+                    const NOTnoZero = this.filter.hideZero && (v.available+v.lock) === 0;
                     const NOTmatchKey =
                         this.filter.filterKey &&
                         !v.symbol.match(new RegExp(this.filter.filterKey, 'i'));
