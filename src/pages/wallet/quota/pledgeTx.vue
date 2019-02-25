@@ -38,7 +38,6 @@
 </template>
 
 <script>
-import Vue from 'vue';
 import viteInput from 'components/viteInput';
 import BigNumber from 'utils/bigNumber';
 import { address } from 'utils/tools';
@@ -76,8 +75,7 @@ export default {
             toAddr: '',
             isValidAddress: true,
             amountErr: '',
-            loading: false,
-            stopWatch: false
+            loading: false
         };
     },
     computed: {
@@ -90,8 +88,8 @@ export default {
     },
     methods: {
         testAmount() {
-            if (this.stopWatch) {
-                return;
+            if (!this.amount) {
+                return true;
             }
 
             let result = this.$validAmount(this.amount, this.tokenInfo.decimals);
@@ -120,8 +118,8 @@ export default {
             return true;
         },
         testAddr() {
-            if (this.stopWatch) {
-                return;
+            if (!this.toAddr) {
+                return true;
             }
 
             if (!this.toAddr) {
@@ -138,12 +136,10 @@ export default {
         },
 
         clearAll() {
-            this.stopWatch = true;
             clearTimeout(amountTimeout);
             this.toAddr = '';
             this.amount = '';
             this.amountErr = '';
-            this.isValidAddress = true;
         },
 
         validTx() {
@@ -189,9 +185,6 @@ export default {
                     name: this.$t('submitStaking') 
                 }));
                 this.clearAll();
-                Vue.nextTick(() => {
-                    this.stopWatch = false;
-                });
             });
         }
     }
