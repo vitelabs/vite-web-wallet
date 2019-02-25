@@ -175,9 +175,9 @@ export default {
     }
 }
 .buy {
-    color: #ff0008;
+    color: #5bc500;
 }
 .sell {
-    color: #5bc500;
+    color: #ff0008;
 }
 </style>
