@@ -403,6 +403,7 @@
         "quantityTitle": "Amount({quantity})",
         "priceTitle": "Price({price})",
         "amountTitle": "Amount({amount})",
+        "amountTable": "数量",
         "amount": "Total",
         "newOrderSuccess": "Ordered Successful",
         "newOrderFail": "提单失败",
