@@ -403,6 +403,7 @@
         "quantityTitle": "成交额({quantity})",
         "priceTitle": "价格({price})",
         "amountTitle": "数量({amount})",
+        "amountTable": "数量",
         "amount": "成交额",
         "newOrderSuccess": "提单成功",
         "newOrderFail": "提单失败",
