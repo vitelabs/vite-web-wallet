@@ -403,10 +403,10 @@
         "quantityTitle": "Amount({quantity})",
         "priceTitle": "Price({price})",
         "amountTitle": "Amount({amount})",
-        "amountTable": "数量",
+        "amountTable": "Qty",
         "amount": "Total",
         "newOrderSuccess": "Ordered Successful",
-        "newOrderFail": "提单失败",
+        "newOrderFail": "Order Failed",
         "buy": {
             "title": "Buy {token}",
             "price": "Price",
@@ -457,7 +457,7 @@
         "title": "Funds",
         "search": "Please input token name",
         "confirmTable": {
-            "title":"充提记录",
+            "title":"Records",
             "heads": [
                 "Date",
                 "Token",
@@ -471,7 +471,7 @@
         "table": {
             "heads": [
                 "Token",
-                "交易所总余额",
+                "Total Balance",
                 "Exchange Balance",
                 "In Order",
                 "Value"
@@ -479,10 +479,10 @@
             "rowMap": {
                 "recharge": "Deposit",
                 "withdraw": "Withdraw",
-                "detail": "充提记录",
+                "detail": "Trade",
                 "sideMap":{
-                    "1":"充值",
-                    "2":"提现"
+                    "1":"Deposit",
+                    "2":"Withdraw"
                 }
             }
         },
@@ -543,7 +543,7 @@
             "0": "Buy"
         },
         "confirmTable": {
-            "title":"撮合记录",
+            "title":"Order Book",
             "heads": [
                 "Time",
                 "Price",

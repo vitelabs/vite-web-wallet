@@ -6,7 +6,7 @@
         </div>
         <div class="view">
             <kline v-show="showView === 'kline'"></kline>
-            <depth v-show="showView === 'depth'"></depth>
+            <depth v-if="showView === 'depth'"></depth>
         </div>
     </div>
 </template>
@@ -21,7 +21,7 @@ export default {
     },
     data() {
         return {
-            showView: 'depth'
+            showView: 'kline'
         };
     },
     methods: {
