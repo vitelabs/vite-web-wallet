@@ -106,7 +106,7 @@ export default {
     },
     methods: {
         update(){
-            this.addr&&this.$store.dispatch('updateExBalance',this.addr)
+            this.addr&&this.$store.dispatch('updateExBalance',this.addr);
         },
         withdraw(tokenId) {
             this.showConfirm({ tokenId, type: 'withdraw' });
