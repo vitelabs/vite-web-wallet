@@ -18,7 +18,7 @@ export default class dataFeeds {
         }, 0);
     }
     resolveSymbol(symbolName, onSymbolResolvedCallback) {
-        console.log(symbolName);
+        // console.log(symbolName);
         return setTimeout(() => {
             onSymbolResolvedCallback({
                 name: this.symbolName,
@@ -93,12 +93,12 @@ export default class dataFeeds {
         // console.log(resolution, resolutionBack, intervalBack);
         return undefined;
     }
-    getMarks(symbolInfo, from, to, onDataCallback, resolution) {
-        console.log(symbolInfo, from, to, onDataCallback, resolution);
+    getMarks() {
+        // console.log(symbolInfo, from, to, onDataCallback, resolution);
         return undefined;
     }
-    getTimescaleMarks(symbolInfo, from, to, onDataCallback, resolution) {
-        console.log(symbolInfo, from, to, onDataCallback, resolution);
+    getTimescaleMarks() {
+        // console.log(symbolInfo, from, to, onDataCallback, resolution);
         return undefined;
     }
     getServerTime() {

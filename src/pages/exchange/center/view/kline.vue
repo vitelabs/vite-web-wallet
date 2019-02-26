@@ -55,6 +55,7 @@ export default {
                 library_path: 'charting_library/',
                 locale: this.$i18n.locale,
                 drawings_access: { type: 'black', tools: [ { name: 'Trend Line' } ] },
+                // main_series_scale_menu
                 disabled_features: ['use_localstorage_for_settings', 'volume_force_overlay', 'header_compare', 'header_symbol_search', 'header_indicators', 'header_chart_type'],
                 enabled_features: ['move_logo_to_main_pane'],
                 overrides: {
@@ -66,7 +67,7 @@ export default {
                     'bollinger bands.median.color': '#33FF88',
                     'bollinger bands.upper.linewidth': 7
                 },
-                debug: true,
+                // debug: true,
                 time_frames: [
                     { text: '1d', resolution: '1' },
                 ],
