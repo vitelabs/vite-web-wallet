@@ -26,7 +26,8 @@ export default {
             let _l = [];
             let sum = 0;
             this.buyList.forEach((item) => {
-                sum = BigNumber.plus(sum, item);
+                sum = BigNumber.plus(sum, item.quantity || 0);
+
                 _l.push(sum);
             });
             _l.reverse();
@@ -47,7 +48,7 @@ export default {
 
             let sum = 0;
             this.sellList.forEach((item) => {
-                sum = BigNumber.plus(sum, item.quantity);
+                sum = BigNumber.plus(sum, item.quantity || 0);
                 _l.push(sum);
             });
             return _l;

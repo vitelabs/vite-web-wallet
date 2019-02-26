@@ -25,7 +25,7 @@ export default class dataFeeds {
                 description: this.symbolName,
                 type: 'crypto',
                 session: '24x7',
-                timezone: 'Etc/UTC',
+                timezone: 'UTC',
                 ticker: symbolName,
                 // exchange: split_data[0],
                 minmov: 1,
