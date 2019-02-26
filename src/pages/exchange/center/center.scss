@@ -72,6 +72,9 @@ $up-font-color: $green;
     font-size: 12px;
     font-weight: 400;
     color: #6f7986;
+    &:hover {
+        background: rgba(75, 116, 255, 0.1);    
+    }
 }
 .__center-tb-item {
     text-align: right;
