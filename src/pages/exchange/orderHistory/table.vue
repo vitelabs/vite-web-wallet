@@ -65,7 +65,7 @@ export default {
             orderDetail({orderId:order.orderId,ftoken:order.ftoken,ttoken:order.ttoken,pageNo:1,pageSize:100}).then(data=>{
                 this.detailData=data.details.map(v=>{
                     v.token=order.ttokenShow;
-                    v.ftoken=order.ftoken;
+                    v.ftokenShow=order.ftokenShow;
                     return v;
                 });
             });
@@ -79,7 +79,7 @@ export default {
         detailList(){
             return Object.keys(this.detailData).map(k=>{
                 const o=this.detailData[k];
-                return [new Date(o.txTime*1000).toLocaleString(),`${o.price} ${o.token}`,`${o.quantity} ${o.ftoken}`,`${o.fee} ${o.token}`,`${o.amount} ${o.token}`];
+                return [new Date(o.txTime*1000).toLocaleString(),`${o.price} ${o.token}`,`${o.quantity} ${o.ftokenShow}`,`${o.fee} ${o.token}`,`${o.amount} ${o.token}`];
 
             });
         }
