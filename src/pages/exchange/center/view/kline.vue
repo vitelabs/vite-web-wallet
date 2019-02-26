@@ -17,6 +17,9 @@ export default {
             default: () => {}
         }
     },
+    mounted() {
+        this.symbol && this.init();
+    },
     computed: {
         symbol() {
             if (!this.activeTxPair) {
@@ -30,30 +33,16 @@ export default {
     },
     watch: {
         symbol: function() {
-            if (!this.symbol) {
-                return;
-            }
-
-            // if (this.tvWidget) {
-            //     this.tvWidget.setSymbol({
-            //         name: this.activeTxPair.ftokenShow + '/' + this.activeTxPair.ttokenShow,
-            //         description: this.activeTxPair.ftokenShow + '/' + this.activeTxPair.ttokenShow,
-            //         type: 'crypto',
-            //         session: '24x7',
-            //         timezone: 'Etc/UTC',
-            //         // ticker: symbolName,
-            //         // exchange: split_data[0],
-            //         minmov: 1,
-            //         pricescale: 100000000,
-            //         has_intraday: true,
-            //         intraday_multipliers: ['1', '60'],
-            //         // supported_resolution:  supportedResolutions,
-            //         volume_precision: 8,
-            //         data_status: 'streaming'
-            //     }, '1');
-            //     return;
-            // }
-
+            this.symbol && this.init();
+        }
+    },
+    data() {
+        return {
+            tvWidget: null
+        };
+    },
+    methods: {
+        init() {
             this.tvWidget && this.tvWidget.remove();
 
             const widgetOptions = {
@@ -99,27 +88,13 @@ export default {
             this.tvWidget = tvWidget;
 
             this.tvWidget.onChartReady(() => {
-                this.init();
-            });
-        }
-    },
-    data() {
-        return {
-            tvWidget: null
-        };
-    },
-    methods: {
-        init() {
-            // this.tvWidget.setSymbol({
-            //     name: this.activeTxPair.ftokenShow + '/' + this.activeTxPair.ttokenShow
-            // }, '1');
-            let button = this.tvWidget.createButton({ 
-                align: 'right' 
-            })[0];
-            button.textContent = this.$t('exchange.depthView');
-            // button.setAttribute('style', `background: ${this.showView === 'depth' ? '#007AFF' : '#fff'}`);
-            button.addEventListener('click', () => {
-                this.toogleDepth();
+                let button = this.tvWidget.createButton({ 
+                    align: 'right' 
+                })[0];
+                button.textContent = this.$t('exchange.depthView');
+                button.addEventListener('click', () => {
+                    this.toogleDepth();
+                });
             });
         }
     }
