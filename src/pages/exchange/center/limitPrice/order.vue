@@ -149,14 +149,19 @@ export default {
     },
     computed: {
         rawBalance() {
-            let tokenId = this.ftokenDetail ? this.ftokenDetail.tokenId : '';
+            let tokenId = this.activeTxPair.ftoken;
             if (this.orderType === 'buy') {
-                tokenId = this.ttokenDetail ? this.ttokenDetail.tokenId : '';
+                tokenId = this.activeTxPair.ttoken;
             }
+            if (!tokenId) {
+                return null;
+            }
+
             let balanceList = this.$store.state.exchangeBalance.balanceList;
             if (!tokenId || !balanceList || !balanceList[tokenId]) {
                 return null;
             }
+            
             return balanceList[tokenId];
         },
         balance() {
@@ -167,17 +172,11 @@ export default {
             let balance = this.rawBalance.available || 0;
             return BigNumber.toBasic(balance, tokenInfo.decimals);
         },
-        ttokenDetail() {
-            return this.$store.state.exchangeTokens.ttoken;
-        },
-        ftokenDetail() {
-            return this.$store.state.exchangeTokens.ftoken;
-        },
         ftokenShow() {
-            return this.ftokenDetail ? this.ftokenDetail.tokenShow : '';
+            return this.activeTxPair ? this.activeTxPair.ftokenShow : '';
         },
         ttokenShow() {
-            return this.ttokenDetail ? this.ttokenDetail.tokenShow : '';
+            return this.activeTxPair ? this.activeTxPair.ttokenShow : '';
         },
         activeTxPair() {
             return this.$store.state.exchangeActiveTxPair.activeTxPair;
@@ -380,8 +379,8 @@ export default {
         newOrder({
             price, quantity
         }) {
-            let tradeToken = this.ftokenDetail ? this.ftokenDetail.tokenId : '';
-            let quoteToken = this.ttokenDetail ? this.ttokenDetail.tokenId : '';
+            let tradeToken = this.activeTxPair ? this.activeTxPair.ftoken : '';
+            let quoteToken = this.activeTxPair ? this.activeTxPair.ttoken : '';
             
             this.isLoading = true;
 
@@ -389,8 +388,8 @@ export default {
                 tradeToken,
                 quoteToken,
                 side: this.orderType === 'buy' ? 0 : 1,
-                price: BigNumber.toMin(price, this.ttokenDetail.tokenDigit),
-                quantity: BigNumber.toMin(quantity, this.ftokenDetail.tokenDigit)
+                price,
+                quantity
             }).then(() => {
                 this.isLoading = false;
                 this.clearAll();
