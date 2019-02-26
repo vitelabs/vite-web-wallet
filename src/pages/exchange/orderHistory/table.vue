@@ -65,7 +65,7 @@ export default {
             orderDetail({orderId:order.orderId,ftoken:order.ftoken,ttoken:order.ttoken,pageNo:1,pageSize:100}).then(data=>{
                 this.detailData=data.details.map(v=>{
                     v.token=order.ttokenShow;
-                    v.ftoken=order.ftoken
+                    v.ftoken=order.ftoken;
                     return v;
                 });
             });
