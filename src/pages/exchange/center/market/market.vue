@@ -8,8 +8,16 @@
                 <img slot="before" class="icon" src="~assets/imgs/search.svg"/>
             </vite-input>
 
-            <span class="select-icon" @click="toogleShowCol('updown')">{{ $t('exchange.upDown') }}</span>
-            <span class="select-icon" @click="toogleShowCol('txNum')">{{ $t('exchange.txNum') }}</span>
+            <div class="select-icon-wrapper __pointer" @click="toogleShowCol('updown')">
+                <span class="select-icon" :class="{
+                    active: showCol === 'updown'
+                }"></span>{{ $t('exchange.upDown') }}
+            </div>
+            <div class="select-icon-wrapper __pointer" @click="toogleShowCol('txNum')">
+                <span class="select-icon" :class="{
+                    active: showCol === 'txNum'
+                }"></span>{{ $t('exchange.txNum') }}
+            </div>
         </div>
 
         <div class="__center-tb-title">
@@ -372,12 +380,38 @@ export default {
         .search-input {
             flex: 1;
         }
-        .select-icon {
+        .select-icon-wrapper {
             font-size: 11px;
             font-family: $font-normal;
             font-weight: 400;
             color: rgba(94,104,117,1);
             margin-left: 12px;
+            .select-icon {
+                position: relative;
+                display: inline-block;
+                box-sizing: border-box;
+                width: 12px;
+                height: 12px;
+                border-radius: 10px;
+                border: 1px solid rgba(188,196,201,1);
+                margin-right: 4px; 
+                margin-bottom: -2px;
+                &.active {
+                    &::after {
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        margin-top: -2px;
+                        margin-left: -2px;
+                        content: ' ';
+                        display: inline-block;
+                        width: 4px;
+                        height: 4px;
+                        background: #007AFF;
+                        border-radius: 5px;
+                    }
+                }
+            }
         }
     }
 }

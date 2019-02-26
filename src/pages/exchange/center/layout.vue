@@ -57,7 +57,7 @@
                 flex-basis: 300px;
             }
             .l {
-                flex-basis: 380px;
+                flex-basis: 320px;
                 margin-right: 10px;
             }
             .r {
