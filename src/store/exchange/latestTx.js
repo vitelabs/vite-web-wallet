@@ -27,10 +27,6 @@ const actions = {
             return;
         }
 
-        if (ftoken === activeTxPair.ftoken && ttoken === activeTxPair.ttoken) {
-            return;
-        }
-
         ftoken = activeTxPair.ftoken;
         ttoken = activeTxPair.ttoken;
 

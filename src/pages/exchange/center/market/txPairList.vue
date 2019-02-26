@@ -15,11 +15,11 @@
                     <span class="describe">{{ txPair.showPair }}</span>
                 </span>
                 <span class="__center-tb-item">{{ txPair.price || '--' }}</span>
-                <span class="__center-tb-item percent" :class="{
+                <span v-show="showCol === 'updown'" class="__center-tb-item percent" :class="{
                     'up': +txPair.upDown > 0,
                     'down': +txPair.upDown < 0
                 }">{{ txPair.upDown || '--' }}</span>
-                <span class="__center-tb-item">{{ txPair.quantity24h || '--' }}</span>
+                <span v-show="showCol === 'txNum'" class="__center-tb-item">{{ txPair.quantity24h || '--' }}</span>
             </div>
         </div>
     </div>
@@ -49,6 +49,10 @@ export default {
         setFavorite: {
             type: Function,
             default: () => {}
+        },
+        showCol: {
+            type: String,
+            default: 'updown'
         }
     },
     data() {
