@@ -2,26 +2,24 @@
     <div class="tx-pair-wrapper">
         <span v-show="pairCode && realPrice" class="real-price" :style="`top: ${top}px`">{{ realPrice }}</span>
 
-        <div ref="txList" class="tx-list"> 
-            <div @mouseover="toggleOver(true)" @mouseleave="toggleOver(false)" ref="txListWrapper">
-                <div :ref="`txPair${i}`" v-for="(txPair, i) in showList" :key="i" 
-                     class="__center-tb-row __pointer" 
-                     :class="{'active': txPair && txPair.pairCode === activePairCode}"
-                     @mouseenter="showRealPrice(txPair, i)"
-                     @mouseout="hideRealPrice(txPair)"
-                     @click="setActiveTxPair(txPair.rawData)">
-                    <span class="__center-tb-item txPair">
-                        <span class="favorite-icon" :class="{'active': !!favoritePairs[txPair.pairCode]}"
-                              @click.stop="setFavorite(txPair.rawData)"></span>
-                        <span class="describe">{{ txPair.showPair }}</span>
-                    </span>
-                    <span class="__center-tb-item">{{ txPair.price || '--' }}</span>
-                    <span class="__center-tb-item percent" :class="{
-                        'up': +txPair.upDown > 0,
-                        'down': +txPair.upDown < 0
-                    }">{{ txPair.upDown || '--' }}</span>
-                    <span class="__center-tb-item">{{ txPair.quantity24h || '--' }}</span>
-                </div>
+        <div ref="txList" class="tx-list">
+            <div :ref="`txPair${i}`" v-for="(txPair, i) in showList" :key="i" 
+                 class="__center-tb-row __pointer" 
+                 :class="{'active': txPair && txPair.pairCode === activePairCode}"
+                 @mouseenter="showRealPrice(txPair, i)"
+                 @mouseleave="hideRealPrice(txPair)"
+                 @click="setActiveTxPair(txPair.rawData)">
+                <span class="__center-tb-item txPair">
+                    <span class="favorite-icon" :class="{'active': !!favoritePairs[txPair.pairCode]}"
+                          @click.stop="setFavorite(txPair.rawData)"></span>
+                    <span class="describe">{{ txPair.showPair }}</span>
+                </span>
+                <span class="__center-tb-item">{{ txPair.price || '--' }}</span>
+                <span class="__center-tb-item percent" :class="{
+                    'up': +txPair.upDown > 0,
+                    'down': +txPair.upDown < 0
+                }">{{ txPair.upDown || '--' }}</span>
+                <span class="__center-tb-item">{{ txPair.quantity24h || '--' }}</span>
             </div>
         </div>
     </div>
@@ -57,9 +55,7 @@ export default {
         return {
             pairCode: null,
             realPrice: '',
-            top: 0,
-            isOver: false,
-            isHide: false
+            top: 0
         };
     },
     computed: {
@@ -117,27 +113,10 @@ export default {
             this.pairCode = txPair.pairCode;
             this.realPrice = this.getRealPrice(txPair);
         },
-        toggleOver(isOver) {
-            // this.isOver = isOver;
-            console.log(isOver);
-            // console.log(this.isHide);
-            if (!this.isOver && this.isHide) {
+        hideRealPrice(txPair) {
+            if (this.pairCode && txPair.pairCode === this.pairCode) {
                 this.pairCode = null;                
             }
-        },
-        hideRealPrice(txPair) {
-            console.log(txPair);
-            // let container = this.$refs.txListWrapper;
-            // console.log(e.target);
-            // if (container === e.target || container.contains(e.target)) {
-            //     return;
-            // }
-            this.isHide = true;
-            // console.log(this.isOver);
-
-            // if (!this.isOver && this.pairCode && txPair.pairCode === this.pairCode) {
-            //     this.pairCode = null;                
-            // }
         },
         getRealPrice(txPair) {
             if (!txPair || !this.rate) {
@@ -196,7 +175,7 @@ export default {
         position: absolute;
         padding: 10px;
         line-height: 20px;
-        right: -6px;
+        right: -10px;
         z-index: 1;
         transform: translateX(100%);
         background: rgba(255,255,255,1);
@@ -207,14 +186,13 @@ export default {
         font-weight: 400;
         &::after {
             content: ' ';
-            display: inline-block;
-            border: 8px solid transparent;
-            border-right: 8px solid #fff;
+            border: 5px solid transparent;
+            border-right: 5px solid #fff;
             position: absolute;
             top: 50%;
             left: 0;
-            margin-top: -8px;
-            margin-left: -16px;
+            margin-top: -5px;
+            margin-left: -10px;
         }
     }
     .tx-list {
