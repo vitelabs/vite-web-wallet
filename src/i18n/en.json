@@ -213,7 +213,7 @@
         "canclePledgeFail": "Failed",
         "maturity": "Staking has expired!",
         "maxAmt": "Withdraw amount should be in (0, {amount}]",
-        "cancelLimitAmt": "抵押金额不能小于{num}",
+        "cancelLimitAmt": "Staking amount cannot be less than {num}",
         "withdrawalStaking": "Withdrawal of Staked Token",
         "confirm": {
             "help": {
@@ -408,8 +408,8 @@
         "amount": "Total",
         "newOrderSuccess": "Ordered Successful",
         "newOrderFail": "Order Failed",
-        "depthView": "深度图",
-        "klineView": "k线图",
+        "depthView": "Depth",
+        "klineView": "TradingView",
         "buy": {
             "title": "Buy {token}",
             "price": "Price",
