@@ -213,6 +213,7 @@
         "canclePledgeFail": "操作失败",
         "maturity": "抵押已到期",
         "maxAmt": "取回金额应在 (0,{amount}] 之内",
+        "cancelLimitAmt": "抵押金额不能小于{num}",
         "withdrawalStaking": "取回抵押",
         "confirm": {
             "help": {

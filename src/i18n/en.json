@@ -213,6 +213,7 @@
         "canclePledgeFail": "Failed",
         "maturity": "Staking has expired!",
         "maxAmt": "Withdraw amount should be in (0, {amount}]",
+        "cancelLimitAmt": "抵押金额不能小于{num}",
         "withdrawalStaking": "Withdrawal of Staked Token",
         "confirm": {
             "help": {
