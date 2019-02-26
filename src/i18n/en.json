@@ -408,6 +408,7 @@
         "amount": "Total",
         "newOrderSuccess": "Ordered Successful",
         "newOrderFail": "Order Failed",
+        "depthView": "深度图",
         "buy": {
             "title": "Buy {token}",
             "price": "Price",

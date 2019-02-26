@@ -172,6 +172,12 @@ export default {
             let balance = this.rawBalance.available || 0;
             return BigNumber.toBasic(balance, tokenInfo.decimals);
         },
+        ttokenDetail() {
+            return this.$store.state.exchangeTokens.ttoken;
+        },
+        ftokenDetail() {
+            return this.$store.state.exchangeTokens.ftoken;
+        },
         ftokenShow() {
             return this.activeTxPair ? this.activeTxPair.ftokenShow : '';
         },
@@ -205,10 +211,10 @@ export default {
             }
 
             if (this.orderType === 'buy') {
-                amount = this.getPercentBalance(percent);
+                amount = this.getPercentBalance(percent, this.ttokenDetail.tokenDigit);
                 quantity = this.getQuantity(price, amount);
             } else {
-                quantity = this.getPercentBalance(percent);
+                quantity = this.getPercentBalance(percent, this.ftokenDetail.tokenDigit);
                 amount = this.getAmount(price, quantity);
             }
 
@@ -287,11 +293,12 @@ export default {
             !BigNumber.isEqual(percent, this.percent) && (this.percent = percent);
         },
 
-        getPercentBalance(percent) {
+        getPercentBalance(percent, decimals) {
             if (!this.balance || BigNumber.isEqual(this.balance, 0)) {
                 return '';
             }
-            let result = BigNumber.multi(percent, this.balance, 8, 'nofix');
+            let limit = decimals >= 8 ? 8 : decimals;
+            let result = BigNumber.multi(percent, this.balance, limit, 'nofix');
             return BigNumber.isEqual(result, 0) ? '' : result;
         },
         getAmount(price, quantity) {
@@ -305,7 +312,9 @@ export default {
                 return '';
             }
 
-            return BigNumber.multi(price, quantity, 8, 'nofix');
+            let tokenDigit = this.ttokenDetail.tokenDigit;
+            let limit = tokenDigit >= 8 ? 8 : tokenDigit;
+            return BigNumber.multi(price, quantity, limit, 'nofix');
         },
         getQuantity(price, amount) {
             let isRightPrice = price && this.$validAmount(price) && !BigNumber.isEqual(price, 0);
@@ -318,7 +327,9 @@ export default {
                 return '';
             }
 
-            return BigNumber.dividedToNumber(amount, price, 8, 'nofix');
+            let tokenDigit = this.ftokenDetail.tokenDigit;
+            let limit = tokenDigit >= 8 ? 8 : tokenDigit;
+            return BigNumber.dividedToNumber(amount, price, limit, 'nofix');
         },
         getPercent(val) {
             if (!this.balance || BigNumber.isEqual(this.balance, 0) || 
@@ -330,14 +341,17 @@ export default {
         },
 
         validPrice() {
-            this.isPriceErr = this.price && !this.$validAmount(this.price);
+            let tokenDigit = this.ttokenDetail.tokenDigit;
+            this.isPriceErr = this.price && !this.$validAmount(this.price, tokenDigit);
         },
         validAmount() {
-            this.isAmountErr = this.amount && !this.$validAmount(this.amount) ||
+            let tokenDigit = this.ttokenDetail.tokenDigit;
+            this.isAmountErr = this.amount && !this.$validAmount(this.amount, tokenDigit) ||
                 (this.orderType === 'buy' && BigNumber.compared(this.balance, this.amount) < 0);
         },
         validQuantity() {
-            this.isQuantityErr = this.quantity && !this.$validAmount(this.quantity) ||
+            let tokenDigit = this.ftokenDetail.tokenDigit;
+            this.isQuantityErr = this.quantity && !this.$validAmount(this.quantity, tokenDigit) ||
                 (this.orderType === 'sell' && BigNumber.compared(this.balance || 0, this.quantity) < 0);
         },
         validAll() {
@@ -383,6 +397,8 @@ export default {
             let quoteToken = this.activeTxPair ? this.activeTxPair.ttoken : '';
             
             this.isLoading = true;
+            let tokenDigit = this.ftokenDetail.tokenDigit;
+            quantity = BigNumber.toMin(quantity, tokenDigit);
 
             newOrder({
                 tradeToken,
