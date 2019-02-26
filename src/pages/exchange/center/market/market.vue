@@ -2,18 +2,15 @@
     <div class="market-wrapper">
         <tab-list></tab-list>
 
-        <vite-input
-            class="search-input"
-            :valid="fetchSearchList"
-            v-model="searchText"
-            :placeholder="$t('exchange.search')"
-        >
-            <img
-                slot="before"
-                class="icon"
-                src="~assets/imgs/search.svg"
-            />
-        </vite-input>
+        <div class="search-wrapper">
+            <vite-input class="search-input" :valid="fetchSearchList"
+                        v-model="searchText" :placeholder="$t('exchange.search')">
+                <img slot="before" class="icon" src="~assets/imgs/search.svg"/>
+            </vite-input>
+
+            <span class="select-icon" @click="toogleShowCol('updown')">{{ $t('exchange.upDown') }}</span>
+            <span class="select-icon" @click="toogleShowCol('txNum')">{{ $t('exchange.txNum') }}</span>
+        </div>
 
         <div class="__center-tb-title">
             <div class="__center-tb-item txPair">
@@ -34,14 +31,14 @@
                     :setOrderRule="setOrderRule"
                 ></order-arrow>
             </div>
-            <div class="__center-tb-item percent">
+            <div v-show="showCol === 'updown'" class="__center-tb-item percent">
                 <span class="describe">{{ $t('exchange.upDown') }}</span>
                 <order-arrow
                     orderItem="upDown"
                     :setOrderRule="setOrderRule"
                 ></order-arrow>
             </div>
-            <div class="__center-tb-item">
+            <div v-show="showCol === 'txNum'" class="__center-tb-item">
                 <span class="describe">{{ $t('exchange.txNum') }}</span>
                 <order-arrow
                     orderItem="txNum"
@@ -50,26 +47,13 @@
             </div>
         </div>
 
-        <loading
-            loadingType="dot"
-            class="ex-center-loading"
-            v-show="isLoading"
-        ></loading>
-        <div
-            class="hint"
-            v-show="isShowSearchErr"
-        >{{ searchErr }}</div>
-        <div
-            class="hint"
-            v-show="!isLoading && !isShowSearchErr && isShowNoData"
-        >{{ noData }}</div>
+        <loading loadingType="dot" class="ex-center-loading" v-show="isLoading"></loading>
+        <div class="hint" v-show="isShowSearchErr">{{ searchErr }}</div>
+        <div class="hint" v-show="!isLoading && !isShowSearchErr && isShowNoData">{{ noData }}</div>
 
-        <tx-pair-list
-            v-show="isShowList"
-            :list="activeTxPairList"
-            :favoritePairs="favoritePairs"
-            :currentRule="currentOrderRule"
-            :setFavorite="setFavorite"
+        <tx-pair-list v-show="isShowList" :list="activeTxPairList" 
+                      :favoritePairs="favoritePairs" :currentRule="currentOrderRule"
+                      :setFavorite="setFavorite" :showCol="showCol"
         ></tx-pair-list>
     </div>
 </template>
@@ -108,6 +92,7 @@ export default {
             isLoading: false,
             currentOrderRule: 'txPair',
             isOnlyFavorite: false,
+            showCol: 'updown',
 
             favoritePairs: localStorage.getItem(FavoriteKey) || {},
             txPairList: [],
@@ -218,6 +203,9 @@ export default {
     methods: {
         toggleShowFavorite() {
             this.isOnlyFavorite = !this.isOnlyFavorite;
+        },
+        toogleShowCol(showCol) {
+            this.showCol = showCol;
         },
         setOrderRule(rule) {
             this.currentOrderRule = rule;
@@ -374,6 +362,24 @@ export default {
         color: rgba(94, 104, 117, 1);
         margin-top: 20px;
     }
+
+    .search-wrapper {
+        display: flex;
+        border-bottom: 1px solid rgba(212, 222, 231, 1);
+        line-height: 28px;
+        padding: 0 6px;
+        box-sizing: border-box;
+        .search-input {
+            flex: 1;
+        }
+        .select-icon {
+            font-size: 11px;
+            font-family: $font-normal;
+            font-weight: 400;
+            color: rgba(94,104,117,1);
+            margin-left: 12px;
+        }
+    }
 }
 </style>
 
@@ -383,11 +389,10 @@ export default {
     height: 28px;
     line-height: 28px;
     border: none;
-    border-bottom: 1px solid rgba(212, 222, 231, 1);
     .icon {
         width: 12px;
         height: 12px;
-        margin: 8px 6px;
+        margin: 8px 6px 8px 0;
     }
     input {
         text-indent: 0px;
