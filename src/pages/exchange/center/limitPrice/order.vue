@@ -149,6 +149,10 @@ export default {
     },
     computed: {
         rawBalance() {
+            if (!this.activeTxPair) {
+                return null;
+            }
+
             let tokenId = this.activeTxPair.ftoken;
             if (this.orderType === 'buy') {
                 tokenId = this.activeTxPair.ttoken;
@@ -210,6 +214,11 @@ export default {
                 return;
             }
 
+            let _p = this.getPercent(this.orderType === 'buy' ? amount : quantity);
+            if (BigNumber.isEqual(_p, percent)) {
+                return;
+            }
+
             if (this.orderType === 'buy') {
                 amount = this.getPercentBalance(percent, this.ttokenDetail.tokenDigit);
                 quantity = this.getQuantity(price, amount);
@@ -222,7 +231,7 @@ export default {
             !BigNumber.isEqual(amount, this.amount) && (this.amount = amount);
         },
         balanceChanged() {
-            if (!+percent || +percent * 100 % 25 === 0) {
+            if (!+this.percent || +this.percent * 100 % 25 !== 0) {
                 let percent = this.getPercent(this.orderType === 'buy' ? this.amount : this.quantity);
                 !BigNumber.isEqual(percent, this.percent) && (this.percent = percent);
                 return;
