@@ -1,5 +1,8 @@
 <template>
-    <e-charts class="e-charts-wrapper" auto-resize :options="deptChartOption"></e-charts>
+    <div class="depth-wrapper">
+        <div @click="toogleDepth" class="btn __pointer">{{ $t('exchange.klineView') }}</div>
+        <e-charts class="e-charts-wrapper" auto-resize :options="deptChartOption"></e-charts>
+    </div>
 </template>
 
 <script>
@@ -13,6 +16,16 @@ require('echarts/lib/component/legendScroll');
 export default {
     components: {
         ECharts
+    },
+    props: {
+        showView: {
+            type: String,
+            default: 'kline'
+        },
+        toogleDepth: {
+            type: Function,
+            default: () => {}
+        }
     },
     computed: {
         buyList() {
@@ -107,9 +120,23 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.e-charts-wrapper {
+.depth-wrapper {
+    display: flex;
+    flex-direction: column;
     width: 100%;
     height: 100%;
+    .btn {
+        line-height: 40px;
+        flex-basis: 40px;
+        color: #4c525e;
+        padding: 0 10px;
+        text-align: right
+    }
+    .e-charts-wrapper {
+        flex: 1;
+        width: 100%;
+        height: 100%;
+    }
 }
 </style>
 
