@@ -47,7 +47,7 @@
 
         <div class="order-btn __pointer" :class="{
             'red': orderType === 'sell',
-            'blue': orderType === 'buy',
+            'green': orderType === 'buy',
             'gray': isLoading || isAmountErr || isPriceErr || isQuantityErr
         }" @click="_clickBtn">{{ $t(`exchange.${orderType}.title`, { token: ftokenShow }) }}</div>
     </div>
@@ -530,10 +530,10 @@ $font-black: rgba(36,39,43,1);
         font-weight: 600;
         color: #fff;
         &.red {
-            background: $red;
+            background: linear-gradient(315deg,rgba(226,43,116,1) 0%,rgba(237,81,88,1) 100%);;
         }
-        &.blue {
-            background: $green;
+        &.green {
+            background: linear-gradient(315deg,rgba(0,212,208,1) 0%,rgba(0,215,100,1) 100%);;
         }
         &.gray {
             background: rgba(0, 0, 0, 0.4);
