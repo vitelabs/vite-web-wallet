@@ -18,7 +18,7 @@
                 <div>{{`${v.ftokenShow}/${v.ttokenShow}`}}</div>
                 <div :class="{buy:v.side===0,sell:v.side===1}">{{$t("exchangeOrderHistory.side")[v.side]}}</div>
                 <div>{{v.price}} {{v.ttokenShow}}</div>
-                <div>{{v.amount}} {{v.ftokenShow}}</div>
+                <div>{{v.quantity}} {{v.ftokenShow}}</div>
                 <div>{{v.filledQ}} {{v.ftokenShow}}</div>
                 <div>{{`${(v.rate*100).toFixed(2)}%`}}</div>
                 <div>{{v.average}} {{v.ttokenShow}}</div>
@@ -65,6 +65,7 @@ export default {
             orderDetail({orderId:order.orderId,ftoken:order.ftoken,ttoken:order.ttoken,pageNo:1,pageSize:100}).then(data=>{
                 this.detailData=data.details.map(v=>{
                     v.token=order.ttokenShow;
+                    v.ftoken=order.ftoken
                     return v;
                 });
             });
@@ -78,7 +79,7 @@ export default {
         detailList(){
             return Object.keys(this.detailData).map(k=>{
                 const o=this.detailData[k];
-                return [new Date(o.txTime*1000).toLocaleString(),`${o.price} ${o.token}`,`${o.quantity} ${o.token}`,`${o.fee} ${o.token}`,`${o.amount} ${o.token}`];
+                return [new Date(o.txTime*1000).toLocaleString(),`${o.price} ${o.token}`,`${o.quantity} ${o.ftoken}`,`${o.fee} ${o.token}`,`${o.amount} ${o.token}`];
 
             });
         }

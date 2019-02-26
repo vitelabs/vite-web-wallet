@@ -180,10 +180,10 @@ export const tokenMap = function({
     tokenId
 }) {
     return request({
-        path: path + '/token/mapping',
+        path: path + '/token/search',
         method: 'GET',
         params: {
-            token: tokenId
+            key: tokenId
         }
     });
 };
