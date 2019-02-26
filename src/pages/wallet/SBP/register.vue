@@ -56,7 +56,6 @@
 </template>
 
 <script>
-import Vue from 'vue';
 import { quotaConfirm } from 'components/quota/index';
 import viteInput from 'components/viteInput';
 import BigNumber from 'utils/bigNumber';
@@ -96,9 +95,7 @@ export default {
 
             activeAccount,
             quotaAddr: activeAccount.getDefaultAddr(),
-
-            stopWatch: false,
-            loading: false,
+            loading: false
         };
     },
     destroyed() {
@@ -142,11 +139,10 @@ export default {
     },
     methods: {
         testName() {
-            if (this.stopWatch) {
+            let nodeName = this.nodeName.trim();
+            if (!nodeName) {
                 return;
             }
-
-            let nodeName = this.nodeName.trim();
 
             if (!nodeName || 
                 !/^[a-zA-Z0-9_\.]+$/g.test(nodeName) ||
@@ -164,12 +160,11 @@ export default {
             this.nodeNameErr = '';
         },
         testAddr() {
-            if (this.stopWatch) {
+            if (!this.producerAddr) {
                 return;
             }
 
-            if (!this.producerAddr || 
-                !address.isValidHexAddr(this.producerAddr)) {
+            if (!address.isValidHexAddr(this.producerAddr)) {
                 this.producerAddrErr = this.$t('walletSBP.section1.addrErr');
                 return;
             }
@@ -191,7 +186,6 @@ export default {
         },
 
         clearAll() {
-            this.stopWatch = true;
             this.producerAddr = '';
             this.nodeName = '';
             this.nodeNameErr = '';
@@ -235,9 +229,6 @@ export default {
                     nodeName, 
                     operate: 1, 
                     producer: producerAddr
-                });
-                Vue.nextTick(() => {
-                    this.stopWatch = false;
                 });
             }).catch((err) => {
                 console.warn(err);
