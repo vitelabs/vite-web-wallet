@@ -1,13 +1,9 @@
 <template>
-    <div class="ex-view-container">
-        <div class="choose-list">
-            <span class="kline" @click="showKline">kline</span>
-            <span class="depth" @click="showDepth">depth</span>
-        </div>
-        <div class="view">
-            <kline v-show="showView === 'kline'"></kline>
-            <depth v-if="showView === 'depth'"></depth>
-        </div>
+    <div class="ex-view-container"> 
+        <!-- <div class="view"> -->
+        <kline :toogleDepth="toogleDepth" :showView="showView" v-show="showView === 'kline'"></kline>
+        <depth v-if="showView === 'depth'"></depth>
+        <!-- </div> -->
     </div>
 </template>
 
@@ -25,11 +21,8 @@ export default {
         };
     },
     methods: {
-        showKline() {
-            this.showView = 'kline';
-        },
-        showDepth() {
-            this.showView = 'depth';
+        toogleDepth() {
+            this.showView = this.showView === 'depth' ? 'kline' : 'depth';
         }
     }
 };

@@ -408,6 +408,7 @@
         "amount": "成交额",
         "newOrderSuccess": "提单成功",
         "newOrderFail": "提单失败",
+        "depthView": "深度图",
         "buy": {
             "title": "买入{token}",
             "price": "买入价",

@@ -7,6 +7,16 @@ import { widget } from 'charting/charting_library.min';
 import datafeed from './datafeeds.js';
 
 export default {
+    props: {
+        showView: {
+            type: String,
+            default: 'kline'
+        },
+        toogleDepth: {
+            type: Function,
+            default: () => {}
+        }
+    },
     computed: {
         symbol() {
             if (!this.activeTxPair) {
@@ -44,6 +54,8 @@ export default {
             //     return;
             // }
 
+            this.tvWidget && this.tvWidget.remove();
+
             const widgetOptions = {
                 fullscreen: false,
                 autosize: true,
@@ -66,6 +78,9 @@ export default {
                 studies_overrides: {
                     'bollinger bands.median.color': '#33FF88',
                     'bollinger bands.upper.linewidth': 7
+                },
+                loading_screen: {
+                    foregroundColor: '#007AFF'
                 },
                 // debug: true,
                 time_frames: [
@@ -95,9 +110,17 @@ export default {
     },
     methods: {
         init() {
-            this.tvWidget.setSymbol({
-                name: this.activeTxPair.ftokenShow + '/' + this.activeTxPair.ttokenShow
-            }, '1');
+            // this.tvWidget.setSymbol({
+            //     name: this.activeTxPair.ftokenShow + '/' + this.activeTxPair.ttokenShow
+            // }, '1');
+            let button = this.tvWidget.createButton({ 
+                align: 'right' 
+            })[0];
+            button.textContent = this.$t('exchange.depthView');
+            button.setAttribute('style', `background: ${this.showView === 'depth' ? '#007AFF' : '#fff'}`);
+            button.addEventListener('click', () => {
+                this.toogleDepth();
+            });
         }
     }
 };

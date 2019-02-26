@@ -22,7 +22,7 @@ export default {
     components: {
         layout, depth, market, latestTx, limitPrice, centerHead, centerView
     },
-    created() {
+    mounted() {
         this.$store.dispatch('exFetchActiveTxPair');
     }
 };
