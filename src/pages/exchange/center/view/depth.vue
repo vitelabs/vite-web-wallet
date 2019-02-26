@@ -102,15 +102,15 @@ export default {
                     name: this.$t('exchange.amountTable'),
                     type: 'line',
                     itemStyle: { normal: {color: '#4cc453'} },
-                    lineStyle: { normal: {color: '#5BC500'} },
-                    areaStyle: { color: '#5BC500' },
+                    lineStyle: { normal: {color: '#00D764'} },
+                    areaStyle: { color: '#00D764' },
                     data: this.buyAmountList
                 },{
                     name: this.$t('exchange.amountTable'),
                     type: 'line',
                     itemStyle: { normal: {color: '#e94c4c'} },
-                    lineStyle: { normal: {color: '#E5494D'} },
-                    areaStyle: { color: '#E5494D' },
+                    lineStyle: { normal: {color: '#ED5158'} },
+                    areaStyle: { color: '#ED5158' },
                     data: this.sellAmountList
                 }]
             };
