@@ -46,10 +46,7 @@ const actions = {
             };
         });
 
-        if (regListInst) {
-            return;
-        }
-
+        dispatch('stopLoopRegList');
         regListInst = new timer(()=>{
             state.registrationList.forEach((item) => {
                 let nodeName = item.name;

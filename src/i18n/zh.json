@@ -409,6 +409,7 @@
         "newOrderSuccess": "提单成功",
         "newOrderFail": "提单失败",
         "depthView": "深度图",
+        "klineView": "k线图",
         "buy": {
             "title": "买入{token}",
             "price": "买入价",
