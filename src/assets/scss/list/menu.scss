@@ -8,6 +8,7 @@
     line-height: 45px;
     .list {
         position: absolute;
+        z-index: 100;
         top: 45px;
         right: -30px;
         width: 90px;
