@@ -116,8 +116,12 @@ export default {
     .head .tab-list-wrapper {
         width: 100%;
     }
+    .head .change-lang-wrapper {
+        float: left;
+        margin-left: 20px;
+    }
     .head .go-net-wrapper {
-        float: none;
+        float: left;
     }
 }
 </style>
