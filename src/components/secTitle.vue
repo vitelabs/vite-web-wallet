@@ -5,7 +5,6 @@
             <i class="icon"></i>
             <span class="help-text" v-html="$t(helpTitle)"></span>
         </span>
-        <go-net-btn class="other-prod"></go-net-btn>
     </div>
 </template>
 
@@ -107,10 +106,6 @@ export default {
             margin-top: 8px;
             text-align: left;
             display: block;
-        }
-        .other-prod {
-            float: unset;
-            margin-top: 10px;
         }
     }
 }

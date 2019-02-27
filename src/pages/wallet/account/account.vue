@@ -4,7 +4,6 @@
     <div class="account-wrapper __wrapper">
         <div class="head">
             <sync-block class="sync-block"></sync-block>
-            <go-net-btn class="net-btn"></go-net-btn>
         </div>
         <account-head class="item"></account-head>
         <div class="token-list item">
@@ -17,14 +16,13 @@
 
 <script>
 import syncBlock from 'components/syncBlock';
-import goNetBtn from 'components/goNetBtn';
 import tokenCard from 'components/tokenCard';
 import accountHead from './head';
 import transaction from './transaction';
 
 export default {
     components: {
-        accountHead, syncBlock, tokenCard, transaction, goNetBtn
+        accountHead, syncBlock, tokenCard, transaction
     },
     data() {
         return {
@@ -97,25 +95,6 @@ export default {
 .token-list {
     display: flex;
     flex-wrap: wrap;
-}
-
-@media only screen and (max-width: 850px) {
-    .account-wrapper .head {
-        text-align: left;
-        margin-bottom: 20px;
-    }
-}
-
-@media only screen and (max-width: 700px) {
-    .account-wrapper {
-        .sync-block {
-            display: block;
-        }
-        .net-btn {
-            position: relative;
-            margin-top: 20px;
-        }
-    } 
 }
 
 @media only screen and (max-width: 550px) {

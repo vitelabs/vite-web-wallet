@@ -382,7 +382,7 @@ export default {
         }
         .select-icon-wrapper {
             font-size: 11px;
-            font-family: $font-normal;
+            font-family: $font-normal, arial, sans-serif;
             font-weight: 400;
             color: rgba(94,104,117,1);
             margin-left: 12px;
