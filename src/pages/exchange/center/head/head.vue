@@ -37,7 +37,7 @@
         <div class="quantity">
             <div class="token-title">{{ $t('exchange.head.quantity') }}</div>
             <div class="token-content">
-                {{ activeTxPair && activeTxPair.quantity24h ? activeTxPair.quantity24h : '--' }}
+                {{ activeTxPair && activeTxPair.quantity24h ? activeTxPair.quantity24h + ' ' + activeTxPair.ttokenShow : '--' }}
             </div>
         </div>
     </div>
