@@ -22,8 +22,8 @@
                 <span class="__center-tb-item"  :class="{
                     'buy': tx.txSide === 0,
                     'sell': tx.txSide === 1
-                }">{{ tx.price }}</span>
-                <span class="__center-tb-item">{{ tx.quantity }}</span>
+                }">{{ formatNum(tx.price, 'ttoken') }}</span>
+                <span class="__center-tb-item">{{ formatNum(tx.quantity, 'ftoken') }}</span>
                 <span class="__center-tb-item tx-time">{{ getDate(tx.txTime * 1000) }}</span>
             </div>
         </div>
@@ -32,6 +32,7 @@
 
 <script>
 import date from 'utils/date';
+import BigNumber from 'utils/bigNumber';
 import loading from 'components/loading';
 
 export default {
@@ -50,9 +51,21 @@ export default {
         },
         isLoading() {
             return this.$store.state.exchangeLatestTx.isLoading;
+        },
+        ttoken() {
+            return this.$store.state.exchangeTokens.ttoken;
+        },
+        ftoken() {
+            return this.$store.state.exchangeTokens.ftoken;
         }
     },
     methods: {
+        formatNum(num, type) {
+            if (!this[type]) {
+                return BigNumber.formatNum(num);
+            }
+            return BigNumber.formatNum(num, this[type].tokenDigit); 
+        },
         getDate(timestamp) {
             return date(timestamp, 'zh', true);
         },
