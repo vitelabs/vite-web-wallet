@@ -6,17 +6,22 @@
 
         <div class="__btn __btn_input" 
              :class="{ 'active': !!name || inputItem === 'name' }">
-            <input ref="name" v-model="name" type='text' autocomplete="off"
-                   :placeholder="$t('accountName')"
-                   @focus="inputFocus('name')"
-                   @blur="inputBlur('name')" />
+            <form  autocomplete="off">
+                <input ref="name" v-model="name" type='text' autocomplete="off"
+                       :placeholder="$t('accountName')"
+                       @focus="inputFocus('name')"
+                       @blur="inputBlur('name')" />
+
+            </form>
         </div>
         <div class="__btn __btn_input" 
              :class="{ 'active': !!pass1 || inputItem === 'pass1' }">
-            <input ref="pass1" v-model="pass1" type='password'
-                   :placeholder="$t('startCreate.input')"
-                   @focus="inputFocus('pass1')"
-                   @blur="inputBlur('pass1')" />
+            <form  autocomplete="off">
+                <input ref="pass1" v-model="pass1" type='password'
+                       :placeholder="$t('startCreate.input')"
+                       @focus="inputFocus('pass1')"
+                       @blur="inputBlur('pass1')" />
+            </form>
         </div>
         <div class="__btn __btn_input" 
              :class="{ 'active': !!pass2 || inputItem === 'pass2' }">
