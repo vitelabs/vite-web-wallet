@@ -56,8 +56,8 @@
         </div>
 
         <loading loadingType="dot" class="ex-center-loading" v-show="isLoading"></loading>
-        <div class="hint" v-show="isShowSearchErr">{{ searchErr }}</div>
-        <div class="hint" v-show="!isLoading && !isShowSearchErr && isShowNoData">{{ noData }}</div>
+        <div class="hint" v-show="!isLoading && isShowSearchErr">{{ searchErr }}</div>
+        <div class="hint" v-show="!isShowSearchErr && isShowNoData">{{ noData }}</div>
 
         <tx-pair-list v-show="isShowList" :list="activeTxPairList" 
                       :favoritePairs="favoritePairs" :currentRule="currentOrderRule"
@@ -136,12 +136,11 @@ export default {
             return this.searchText && this.isShowSearch && this.searchErr;
         },
         isShowNoData() {
-            return (
+            return !this.isLoading && (
                 !this.activeTxPairList ||
                 !this.activeTxPairList.length ||
                 (this.isShowSearch &&
                     !this.searchList.length &&
-                    !this.isLoading &&
                     this.searchText)
             );
         },
@@ -180,6 +179,9 @@ export default {
             return this.$t('hint.noData');
         },
         activeTxPairList() {
+            if (this.isLoading) {
+                return [];
+            }
             let list =
                 this.searchText && this.isShowSearch
                     ? this.searchList
