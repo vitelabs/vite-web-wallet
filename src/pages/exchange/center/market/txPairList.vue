@@ -18,7 +18,7 @@
                 <span v-show="showCol === 'updown'" class="__center-tb-item percent" :class="{
                     'up': +txPair.upDown > 0,
                     'down': +txPair.upDown < 0
-                }">{{ txPair.upDown || '--' }}</span>
+                }">{{ txPair.upDown ? txPair.upDown + '%' : '--' }}</span>
                 <span v-show="showCol === 'txNum'" class="__center-tb-item">{{ txPair.quantity24h || '--' }}</span>
             </div>
         </div>
@@ -83,7 +83,7 @@ export default {
                 item.price = _t.price;
                 item.quantity24h = _t.quantity24h;
                 item.showPair = `${_t.ftokenShow}/${_t.ttokenShow}`;
-                item.upDown = _t.price24hChange ? BigNumber.multi(_t.price24hChange, 100, 2) + '%' : '';
+                item.upDown = _t.price24hChange ? BigNumber.multi(_t.price24hChange, 100, 2) : '';
                 item.rawData = _t;
                 
                 _l.push(item);
