@@ -37,9 +37,9 @@
 </template>
 
 <script>
-import center from "./center/center.vue";
-import historyOrder from "./orderHistory";
-import openOrder from "./openOrders";
+import center from './center/center.vue';
+import historyOrder from './orderHistory';
+import openOrder from './openOrders';
 
 export default {
     components: {
@@ -48,13 +48,13 @@ export default {
         historyOrder
     },
     mounted() {
-        this.$store.dispatch("startLoopExchangeRate");
+        this.$store.dispatch('startLoopExchangeRate');
         this.$router.afterEach(to => {
             this.active = to.name;
         });
     },
     destroyed() {
-        this.$store.dispatch("stopLoopExchangeRate");
+        this.$store.dispatch('stopLoopExchangeRate');
     },
     computed: {
         activeTxPair() {
@@ -63,13 +63,13 @@ export default {
     },
     data() {
         return {
-            tap: "openOrder",
+            tap: 'openOrder',
             active: this.$route.name,
             tabList: [
-                "exchange",
-                "exchangeAssets",
-                "exchangeOpenOrders",
-                "exchangeOrderHistory"
+                'exchange',
+                'exchangeAssets',
+                'exchangeOpenOrders',
+                'exchangeOrderHistory'
             ]
         };
     }
