@@ -7,11 +7,19 @@
                 {{ $t(`${tab}.title`) }}
             </li>
         </ul>
+        <go-net-btn class="go-net-wrapper"></go-net-btn>
+        <change-lang class="menu change-lang-wrapper"></change-lang>
     </div>
 </template>
 
 <script>
+import changeLang from 'components/changeLang';
+import goNetBtn from './goNetBtn.vue';
+
 export default {
+    components: {
+        goNetBtn, changeLang
+    },
     props: {
         tabList: {
             type: Array,
@@ -48,20 +56,20 @@ export default {
 @import "~assets/scss/vars.scss";
 
 .head {
-    flex-basis: 47px;
     box-sizing: border-box;
     padding: 0 10px;
     line-height: 43px;
     margin: 0 10px;
+    border-bottom: 1px solid rgba(198, 203, 212, 0.3);
     .tab-list-wrapper {
-        display: inline-block;
-        font-size:14px;
+        display: block;
+        font-size: 14px;
         font-family: $font-bold, arial, sans-serif;
         font-weight: 600;
         color: rgba(94, 104, 117, 1);
         display: flex;
         flex-wrap: wrap;
-        border-bottom: 1px solid rgba(198, 203, 212, 0.3);
+        float: left;
         .tab {
             display: inline-block;
             box-sizing: border-box;
@@ -87,7 +95,15 @@ export default {
             }
         }
     }
+    .go-net-wrapper {
+        float: right;
+        margin-top: 8px;
+    }
+    .change-lang-wrapper {
+        float: right;
+    }
 }
+
 @media only screen and (max-width: 900px) {
     .head .tab-list-wrapper .tab {
         box-sizing: border-box;
@@ -95,4 +111,17 @@ export default {
         flex-basis: 130px;
     }
 }
+
+@media only screen and (max-width: 940px) {
+    .head .tab-list-wrapper {
+        width: 100%;
+    }
+    .head .go-net-wrapper {
+        float: none;
+    }
+}
+</style>
+
+<style lang="scss">
+
 </style>
