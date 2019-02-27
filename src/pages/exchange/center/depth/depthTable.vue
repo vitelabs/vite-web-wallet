@@ -4,9 +4,9 @@
         
         <div class="__center-tb-row __pointer" @click="clickRow(item)"
              v-for="(item, i) in depthData" :key="i">
-            <span class="__center-tb-item" :class="dataType">{{ item.price }}</span>
-            <span class="__center-tb-item">{{ item.quantity }}</span>
-            <span class="__center-tb-item">{{ item.amount}}</span>
+            <span class="__center-tb-item" :class="dataType">{{ formatNum(item.price, 'ttoken') }}</span>
+            <span class="__center-tb-item">{{ formatNum(item.quantity, 'ftoken') }}</span>
+            <span class="__center-tb-item">{{ formatNum(item.amount, 'ttoken') }}</span>
             <span class="percent-wrapper" :class="dataType" :style="{ 'width': getWidth(item) + '%' }"></span>
         </div>
     </div>
@@ -41,9 +41,21 @@ export default {
                 return this.$store.state.exchangeDepth.isBuyLoading;
             }
             return this.$store.state.exchangeDepth.isSellLoading;
+        },
+        ttoken() {
+            return this.$store.state.exchangeTokens.ttoken;
+        },
+        ftoken() {
+            return this.$store.state.exchangeTokens.ftoken;
         }
     },
     methods: {
+        formatNum(num, type) {
+            if (!this[type]) {
+                return BigNumber.formatNum(num);
+            }
+            return BigNumber.formatNum(num, this[type].tokenDigit); 
+        },
         getWidth(item) {
             // let maxPrice = this.depthData[0].price;
             let maxPrice = 10000;
