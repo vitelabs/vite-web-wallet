@@ -8,9 +8,12 @@
             <div v-show="!isShowNameInput" class="name" :class="{
                 'small-font': account.name && account.name.length > 16
             }" @click="startRename">{{ account.name }}</div>
-            <input ref="nameInput" v-show="isShowNameInput" type="text"
-                   v-model="editName" :placeholder="account.name"
-                   @blur="rename" autocomplete="off"/>
+            <!-- <input fake_pass type="password" style="display:none"/> -->
+            <form autocomplete="off">
+                <input ref="nameInput" v-show="isShowNameInput" type="text"
+                       v-model="editName" :placeholder="account.name"
+                       @blur="rename" autocomplete="off"/>
+            </form>
         </div>
 
         <vite-address :title="$t('wallet.address')" :address="account.addr" 
