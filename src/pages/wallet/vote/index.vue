@@ -19,7 +19,7 @@
                         <div class="__tb_cell">
                             {{v.nodeStatusText}} 
                             <i v-if="v.nodeStatus===2" class="tipsicon hoveraction" @click.self.stop="toggleTips">
-                                <tooltips v-if="isResisterTipsShow" v-click-outside="hideTips" class="unregister-tips" :content="$t('vote.section1.hoverHelp',{nodeName:v.nodeName})"></tooltips>
+                                <tooltips v-if="isResisterTipsShow" v-click-outside="hideTips" class="unregister-tips" :content="$t('walletVote.section1.hoverHelp',{nodeName:v.nodeName})"></tooltips>
                             </i>
                         </div>
                         <div class="__tb_cell">{{v.voteNum}}</div>

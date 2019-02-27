@@ -27,7 +27,7 @@ import Table from './table';
 import { order } from 'services/exchange';
 import Pagination from 'components/pagination';
 import { timer } from 'utils/asyncFlow';
-const pageSize = 10;
+const pageSize = 35;
 export default {
     components: {
         Filters,
