@@ -3,7 +3,10 @@
 <template>
     <div class="exchange-center-wrapper">
         <center v-if="active === 'exchange'"></center>
-        <div class="order-wrapper" v-if="active === 'exchange'">
+        <div
+            class="order-wrapper"
+            v-if="active === 'exchange'"
+        >
             <div class="order">
                 <div class="tap">
                     <div
@@ -15,8 +18,18 @@
                         :class="{active:tap==='historyOrder'}"
                     >{{$t('exchangeOrderHistory.title')}}</div>
                 </div>
-                <openOrder v-if="tap==='openOrder'" class="item" :filterObj="{ftoken:activeTxPair.ftoken,ttoken:activeTxPair.ttoken}" :isEmbed="true"></openOrder>
-                <historyOrder v-if="tap==='historyOrder'" class="item" :isEmbed="true" :filterObj="{ftoken:activeTxPair.ftoken,ttoken:activeTxPair.ttoken}"></historyOrder>
+                <openOrder
+                    v-if="tap==='openOrder'"
+                    class="item"
+                    :filterObj="{ftoken:activeTxPair.ftoken,ttoken:activeTxPair.ttoken}"
+                    :isEmbed="true"
+                ></openOrder>
+                <historyOrder
+                    v-if="tap==='historyOrder'"
+                    class="item"
+                    :isEmbed="true"
+                    :filterObj="{ftoken:activeTxPair.ftoken,ttoken:activeTxPair.ttoken}"
+                ></historyOrder>
             </div>
         </div>
         <router-view></router-view>
@@ -24,9 +37,9 @@
 </template>
 
 <script>
-import center from './center/center.vue';
-import historyOrder from './orderHistory';
-import openOrder from './openOrders';
+import center from "./center/center.vue";
+import historyOrder from "./orderHistory";
+import openOrder from "./openOrders";
 
 export default {
     components: {
@@ -35,28 +48,28 @@ export default {
         historyOrder
     },
     mounted() {
-        this.$store.dispatch('startLoopExchangeRate');
+        this.$store.dispatch("startLoopExchangeRate");
         this.$router.afterEach(to => {
             this.active = to.name;
         });
     },
     destroyed() {
-        this.$store.dispatch('stopLoopExchangeRate');
+        this.$store.dispatch("stopLoopExchangeRate");
     },
-    computed:{
-        activeTxPair(){
-            return this.$store.state.exchangeActiveTxPair.activeTxPair||{};
+    computed: {
+        activeTxPair() {
+            return this.$store.state.exchangeActiveTxPair.activeTxPair || {};
         }
     },
     data() {
         return {
-            tap: 'openOrder',
+            tap: "openOrder",
             active: this.$route.name,
             tabList: [
-                'exchange',
-                'exchangeAssets',
-                'exchangeOpenOrders',
-                'exchangeOrderHistory'
+                "exchange",
+                "exchangeAssets",
+                "exchangeOpenOrders",
+                "exchangeOrderHistory"
             ]
         };
     }
@@ -74,10 +87,10 @@ export default {
         height: 40px;
     }
     .order {
-        background:#fff;
-        box-shadow:0px 2px 48px 1px rgba(176,192,237,0.42);
+        background: #fff;
+        box-shadow: 0px 2px 48px 1px rgba(176, 192, 237, 0.42);
         margin: 10px;
-        margin-top:0;
+        margin-top: 0;
         border-radius: 2px;
         .tap {
             height: 34px;
@@ -90,17 +103,24 @@ export default {
                 cursor: pointer;
                 margin: 0 10px;
                 border-radius: 4px 4px 0 0;
-                padding:4px 13px;
+                padding: 4px 13px;
                 &.active {
                     background: rgba(0, 122, 255, 1);
                     color: #fff;
                 }
             }
         }
-        .item{
-            height: 411px;
+        .item {
+            max-height: 411px;
             margin: 0;
-            padding:0;
+            padding: 0;
+            overflow: hidden;
+            .ex-tb {
+                padding-top: 27px !important;
+            }
+            .head-row {
+                height: 27px !important;
+            }
         }
     }
     .router-wrapper {
