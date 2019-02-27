@@ -20,12 +20,10 @@ export default {
     display: inline-block;
     background: #EDF1FF;
     border-radius: 2px;
-    padding: 10px 20px;
+    padding: 6px 10px;
     font-family: $font-bold, arial, sans-serif;
     font-size: 14px;
     color: #007AFF;
-    line-height: 20px;
+    line-height: 16px;
 }
 </style>
-
-

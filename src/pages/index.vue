@@ -1,9 +1,6 @@
 <template>
     <div class="app-wrapper">
-        <page-layout
-            v-if="active.indexOf('start') !== 0"
-            :active="active"
-        >
+        <page-layout v-if="active.indexOf('start') !== 0" :active="active">
             <router-view />
         </page-layout>
 
