@@ -43,6 +43,7 @@ export default {
     display: flex;
     align-items: flex-end;
     margin-bottom: 20px;
+    font-size: 14px;
     .filter {
         height: 40px;
         &:first-child {
