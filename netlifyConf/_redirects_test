@@ -10,3 +10,15 @@
 /exchange    /index.html   200
 /start    /index.html   200
 /wallet    /index.html   200
+/exchangeAssets /index.html 200
+/exchangeOpenOrders /index.html 200
+/exchangeOrderHistory /index.html 200
+/startCreate /index.html 200
+/startImport /index.html 200
+/startRecord /index.html 200
+/startRestore /index.html  200
+/walletSBP /index.html 200
+/walletConversion /index.html 200
+/walletQuota /index.html 200
+/walletTransList /index.html 200
+/walletVote /index.html 200
