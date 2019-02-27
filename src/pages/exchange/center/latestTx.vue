@@ -54,7 +54,7 @@ export default {
     },
     methods: {
         getDate(timestamp) {
-            return date(timestamp, 'zh');
+            return date(timestamp, 'zh', true);
         },
         clickRow(tx) {
             this.$store.commit('exSetActiveTx', tx);
