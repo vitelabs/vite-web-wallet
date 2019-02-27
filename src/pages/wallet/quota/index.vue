@@ -106,10 +106,11 @@ export default {
             }
 
             const limitAmt = 1000;
-            if (isEqualBalance <= 0 && BigNumber.compared(this.activeAmountLimit, limitAmt) >= 0 &&
-                BigNumber.compared(this.cancelAmount, limitAmt) < 0) {
+            let cancelBalance = BigNumber.minus(this.activeAmountLimit, this.cancelAmount);
+            if ( BigNumber.compared(cancelBalance, limitAmt) < 0 && 
+                 !BigNumber.isEqual(cancelBalance, 0) ) {
                 this.amountErr = this.$t('walletQuota.cancelLimitAmt', { num: limitAmt });
-                return false;
+                return false;                
             }
 
             this.amountErr = '';
