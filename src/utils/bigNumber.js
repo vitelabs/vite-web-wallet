@@ -3,8 +3,8 @@ import BigNumber from 'bignumber.js';
 BigNumber.config({ 
     FORMAT: {
         decimalSeparator: '.',
-        groupSeparator: '',
-        groupSize: 0,
+        groupSeparator: ',',
+        groupSize: 3,
         secondaryGroupSize: 0,
         fractionGroupSeparator: ' ',
         fractionGroupSize: 0
@@ -78,12 +78,6 @@ export default {
     formatNum(num, decimal = 8) {
         decimal = decimal >= 8 ? 8 : decimal;
         let n = new BigNumber(num);
-        return n.toFormat(decimal, 0, {
-            prefix: '=> ',
-            decimalSeparator: ',',
-            groupSeparator: ',',
-            groupSize: 3,
-            secondaryGroupSize: 2
-        });
+        return n.toFormat(decimal);
     }
 };
