@@ -45,7 +45,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~assets/scss/vars.scss";
+@import '../center.scss';
 
 .price-wrapper {
     height: 30px;
@@ -57,6 +57,12 @@ export default {
     font-weight: 600;
     .price {
         font-size: 14px;
+        &.down {
+            color: $down-font-color;
+        }
+        &.up {
+            color: $up-font-color
+        }
     }
     .p-icon {
         display: inline-block;
