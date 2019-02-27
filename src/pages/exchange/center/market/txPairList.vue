@@ -186,7 +186,7 @@ export default {
         box-shadow: 0px 5px 20px 0px rgba(0,0,0,0.1);
         font-size: 14px;
         color: rgba(36,39,43,1);;
-        font-family: PingFangSC-Regular, arial, sans-serif;
+        font-family: $font-normal, arial, sans-serif;
         font-weight: 400;
         &::after {
             content: ' ';

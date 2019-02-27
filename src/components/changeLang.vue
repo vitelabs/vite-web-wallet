@@ -29,6 +29,7 @@ export default {
             this.$i18n.locale = locale;
             window.viteWalletI18n && window.viteWalletI18n.setLocale(locale);
             localStorage.setItem('lang', locale);
+            webViteEventEmitter.emit('changeLang', locale);
             this.toggleLangList();
         }
     }
@@ -38,4 +39,5 @@ export default {
 <style lang="scss" scoped>
 @import "~assets/scss/list/start.scss";
 @import "~assets/scss/list/setting.scss";
+@import "~assets/scss/list/menu.scss";
 </style>
