@@ -74,5 +74,16 @@ export default {
         } catch(err) {
             return '';
         }
+    },
+    formatNum(num, decimal = 8) {
+        decimal = decimal >= 8 ? 8 : decimal;
+        let n = new BigNumber(num);
+        return n.toFormat(decimal, 0, {
+            prefix: '=> ',
+            decimalSeparator: ',',
+            groupSeparator: ',',
+            groupSize: 3,
+            secondaryGroupSize: 2
+        });
     }
 };
