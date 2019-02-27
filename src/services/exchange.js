@@ -1,9 +1,12 @@
 import request from 'utils/request';
 import { wallet } from 'utils/walletInstance';
-import { utils,constant } from '@vite/vitejs';
+import { utils } from '@vite/vitejs';
 
 const privToAddr = utils.address.privToAddr;
 const path = '/api/v1';
+
+// export const DexFund_Addr = 'vite_000000000000000000000000000000000000000617d47459a8';
+export const DexTrade_Addr = 'vite_000000000000000000000000000000000000000768ef0e6238';
 
 export const klineMinute = function ({
     fdate, tdate, ftoken, ttoken
@@ -208,12 +211,11 @@ export const withdraw=async function({tokenId,amount}){
 };
 
 export const cancelOrder =async function({orderId,tradeToken,side,quoteToken}){
-    
     return await wallet.getActiveAccount().callContract({
-        tokenId:tradeToken,
-        toAddress:constant.contract.DexTrade_Addr,
-        abi:{'type':'function','name':'DexTradeCancelOrder', 'inputs':[{'name':'orderId','type':'bytes'}, {'name':'tradeToken','type':'tokenId'}, {'name':',quoteToken','type':'tokenId'}, {'name':'side', 'type':'bool'}]},
-        params:[`0x${Buffer.from(orderId,'base64').toString('hex')}`,tradeToken,quoteToken,side]});
+        tokenId: tradeToken,
+        toAddress: DexTrade_Addr,
+        abi: {'type':'function','name':'DexTradeCancelOrder', 'inputs':[{'name':'orderId','type':'bytes'}, {'name':'tradeToken','type':'tokenId'}, {'name':',quoteToken','type':'tokenId'}, {'name':'side', 'type':'bool'}]},
+        params: [`0x${Buffer.from(orderId,'base64').toString('hex')}`,tradeToken,quoteToken,side]});
 
 };
 
