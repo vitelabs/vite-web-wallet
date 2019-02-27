@@ -54,10 +54,10 @@
                 margin-bottom: 10px;
             }
             .b {
-                flex-basis: 300px;
+                flex-basis: 306px;
             }
             .l {
-                flex-basis: 320px;
+                flex-basis: 290px;
                 margin-right: 10px;
             }
             .r {

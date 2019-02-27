@@ -57,7 +57,7 @@ export default {
 
 .head {
     box-sizing: border-box;
-    padding: 0 10px;
+    padding-left: 10px;
     line-height: 43px;
     margin: 0 10px;
     border-bottom: 1px solid rgba(198, 203, 212, 0.3);
