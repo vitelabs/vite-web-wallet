@@ -38,7 +38,8 @@ export default {
         buyAmountList() {
             let _l = [];
             let sum = 0;
-            this.buyList.forEach((item) => {
+            let buyList = [].concat(this.buyList).reverse();
+            buyList.forEach((item) => {
                 sum = BigNumber.plus(sum, item.quantity || 0);
 
                 _l.push(sum);
