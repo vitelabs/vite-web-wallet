@@ -497,6 +497,7 @@ $font-black: rgba(36,39,43,1);
                 color: $blue;
                 height: 16px;
                 line-height: 16px;
+                padding: 0 2px;
                 border-radius: 2px;
                 &.active {
                     background: $blue;
