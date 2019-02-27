@@ -1,12 +1,6 @@
 // 2018.05.04 21:33:46
-function getCNTime(timestamp) {
+function getCNTime(timestamp, isOnlyTime) {
     let date = new Date(timestamp);
-    
-    let year = date.getFullYear();
-    let month = date.getMonth() + 1;
-    month = month < 10 ? `0${month}` : month;
-    let day = date.getDate();
-    day = day < 10 ? `0${day}` : day;
 
     let hour = date.getHours();
     hour = hour < 10 ? `0${hour}` : hour;
@@ -14,7 +8,17 @@ function getCNTime(timestamp) {
     minutes = minutes < 10 ? `0${minutes}` : minutes;
     let seconds = date.getSeconds();
     seconds = seconds < 10 ? `0${seconds}` : seconds;
+
+    if (isOnlyTime) {
+        return `${hour}:${minutes}:${seconds}`;
+    }
     
+    let year = date.getFullYear();
+    let month = date.getMonth() + 1;
+    month = month < 10 ? `0${month}` : month;
+    let day = date.getDate();
+    day = day < 10 ? `0${day}` : day;
+
     return `${year}.${month}.${day} ${hour}:${minutes}:${seconds}`;
 }
 
@@ -43,6 +47,6 @@ function getENTime(timestamp) {
     return `${month}-${day}-${year} ${hour}:${minutes}:${seconds} ${time}`;
 }
 
-export default function (timestamp, lang) {
-    return lang === 'zh' ? getCNTime(timestamp) : getENTime(timestamp);
+export default function (timestamp, lang, isOnlyTime) {
+    return lang === 'zh' ? getCNTime(timestamp, isOnlyTime) : getENTime(timestamp);
 }
