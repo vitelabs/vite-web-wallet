@@ -118,6 +118,7 @@ export default {
     display: flex;
     align-items: flex-end;
     margin: 0px 10px 20px;
+    font-size: 14px;
     .filter {
         width: 140px;
         > * {
