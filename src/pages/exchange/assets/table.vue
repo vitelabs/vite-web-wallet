@@ -78,7 +78,8 @@ import BigNumber from 'utils/bigNumber';
 import getTokenIcon from 'utils/getTokenIcon';
 import powProcess from 'components/powProcess';
 import debounce from 'lodash/debounce';
-import { setTimeout } from 'timers';
+import d from 'dayjs';
+
 
 const VoteDifficulty = '201564160';
 export default {
@@ -247,7 +248,7 @@ export default {
             return Object.keys(this.detailData).map(k => {
                 const o = this.detailData[k];
                 return [
-                    new Date(o.optime * 1000).toLocaleString(),
+                    d.unix(o.optime).format('YYYY-MM-DD HH:mm'),
                     o.tokenName,
                     this.$t('exchangeAssets.table.rowMap.sideMap')[o.optype],
                     o.amount
