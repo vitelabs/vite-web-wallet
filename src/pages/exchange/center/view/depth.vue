@@ -28,6 +28,9 @@ export default {
         }
     },
     computed: {
+        activeTxPair() {
+            return this.$store.state.exchangeActiveTxPair.activeTxPair;
+        },
         buyList() {
             let buyList = [].concat(this.$store.state.exchangeDepth.buy || []);
             let list = buyList.sort((a, b) => {
@@ -79,6 +82,13 @@ export default {
             return {
                 tooltip: {
                     confine: true,
+                    formatter: (params) => {
+                        var res = `${this.$t('exchange.priceTitle', {
+                            price: this.activeTxPair ? this.activeTxPair.ttokenShow : ''
+                        })}: ` + params[0].name;
+                        res += '<br/>' + params[0].seriesName + ' : ' + params[0].value;
+                        return res;
+                    },
                     trigger: 'axis',
                     axisPointer: {
                         type: 'line', 

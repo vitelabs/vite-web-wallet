@@ -90,8 +90,9 @@ export default class dataFeeds {
         // console.log(subscriberUID);
         return undefined;
     }
-    calculateHistoryDepth() {
-        // console.log(resolution, resolutionBack, intervalBack);
+    calculateHistoryDepth(resolution, resolutionBack, intervalBack) {
+        // klineHistory
+        console.log(resolution, resolutionBack, intervalBack);
         return undefined;
     }
     getMarks() {
