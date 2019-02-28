@@ -3,10 +3,14 @@
         <sidebar class="sidebar" :active="active" :go="go" :menuList="menuList" ></sidebar>
         <vite-menu class="menu" :active="active" :go="go" :menuList="menuList"></vite-menu>
 
-        <div class="page-content">
+        <div class="page-content" :class="{
+            'page-scroll': active.indexOf('exchange') === 0
+        }">
             <second-menu class="second-menu" v-show="secondMenuList && secondMenuList.length" 
                          :tabList="secondMenuList"></second-menu>
-            <div class="page-wrapper">
+            <div class="page-wrapper" :class="{
+                'page-scroll': active.indexOf('exchange') === 0
+            }">
                 <slot></slot>
             </div>
         </div>
@@ -130,9 +134,15 @@ export default {
         overflow: hidden;
         display: flex;
         flex-direction: column;
+        &.page-scroll {
+            overflow: auto;
+        }
         .page-wrapper {
             flex: 1;
             overflow: auto;
+            &.page-scroll {
+                overflow: visible;
+            }
         }
     }
 }

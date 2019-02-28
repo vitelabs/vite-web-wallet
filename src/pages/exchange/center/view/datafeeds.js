@@ -4,6 +4,8 @@ export default class dataFeeds {
     constructor(activeTxPair) {
         this.activeTxPair = activeTxPair;
         this.symbolName = activeTxPair.ftokenShow + '/' + activeTxPair.ttokenShow;
+        this.lastResolution = null;
+        this.list = {};
     }
     onReady(callback) {
         return setTimeout(() => {
@@ -18,7 +20,7 @@ export default class dataFeeds {
         }, 0);
     }
     resolveSymbol(symbolName, onSymbolResolvedCallback) {
-        // console.log(symbolName);
+        console.log('resolveSymbol', symbolName);
         return setTimeout(() => {
             onSymbolResolvedCallback({
                 name: this.symbolName,
@@ -44,10 +46,11 @@ export default class dataFeeds {
     getBars(symbolInfo, resolution, from, to, onHistoryCallback, onErrorCallback, firstDataRequest) {
         console.log('getBars', symbolInfo, resolution, from, to, onErrorCallback, onHistoryCallback, firstDataRequest);
 
-        if (!firstDataRequest) {
+        if (this.lastResolution === resolution) {
             return;
         }
 
+        this.lastResolution = resolution;
         let func = +resolution === 1 ? klineMinute : klineHour;
 
         func({
@@ -60,7 +63,6 @@ export default class dataFeeds {
             let timeDiff = +resolution === 1 ? 60 * 1000 : 60 * 60 * 1000;
             data && data.forEach(_d => {
                 let time = _d.txUnit * timeDiff;
-                console.log(new Date(time));
                 list.push({
                     time,
                     close: _d.closePrice,
@@ -71,9 +73,10 @@ export default class dataFeeds {
                 });
             });
 
+            this.list[resolution] = list;
             onHistoryCallback(list, {
                 noData: !list || !list.length,
-                nextTime: new Date().getTime()
+                nextTime: !list || !list.length ? to + timeDiff : null
             });
         }).catch((err) => {
             onErrorCallback(err);
@@ -82,12 +85,13 @@ export default class dataFeeds {
 
 
 
-    subscribeBars() {
-        // console.log(symbolInfo, resolution, onRealtimeCallback, subscriberUID, onResetCacheNeededCallback);
+    subscribeBars(symbolInfo, resolution, onRealtimeCallback, subscriberUID, onResetCacheNeededCallback) {
+        console.log(symbolInfo, resolution, onRealtimeCallback, subscriberUID, onResetCacheNeededCallback);
+        // return onRealtimeCallback(this.list[resolution]);
         return undefined;
     }
-    unsubscribeBars() {
-        // console.log(subscriberUID);
+    unsubscribeBars(subscriberUID) {
+        console.log(subscriberUID);
         return undefined;
     }
     calculateHistoryDepth(resolution, resolutionBack, intervalBack) {
@@ -95,12 +99,12 @@ export default class dataFeeds {
         console.log(resolution, resolutionBack, intervalBack);
         return undefined;
     }
-    getMarks() {
-        // console.log(symbolInfo, from, to, onDataCallback, resolution);
+    getMarks(symbolInfo, from, to, onDataCallback, resolution) {
+        console.log(symbolInfo, from, to, onDataCallback, resolution);
         return undefined;
     }
-    getTimescaleMarks() {
-        // console.log(symbolInfo, from, to, onDataCallback, resolution);
+    getTimescaleMarks(symbolInfo, from, to, onDataCallback, resolution) {
+        console.log(symbolInfo, from, to, onDataCallback, resolution);
         return undefined;
     }
     getServerTime() {
