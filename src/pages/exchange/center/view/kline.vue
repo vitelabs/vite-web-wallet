@@ -90,7 +90,7 @@ export default {
                 // user_id: 'public_user',
                 favorites: {
                     intervals: ['1', '60'],
-                    chartTypes: ['Area', 'Line']
+                    chartTypes: ['CANDLES']
                 }
             };
 
@@ -99,6 +99,7 @@ export default {
 
             this.tvWidget.onChartReady(() => {
                 this.createDepthBtn();
+                this.tvWidget.chart().setChartType(1);
             });
         },
         resetLang() {
