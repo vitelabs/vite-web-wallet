@@ -32,7 +32,7 @@
     height: 100%;
     padding: 10px;
     box-sizing: border-box;
-    min-height: 750px;
+    min-height: 850px;
     .__border {
         border-radius: 2px;
         background: rgba(255,255,255,1);
