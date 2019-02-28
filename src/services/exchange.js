@@ -32,6 +32,18 @@ export const klineHour = function ({
     });
 };
 
+export const klineHistory = function ( {
+    resolution, symbol, from, to
+}) {
+    return request({
+        path: path + '/kline/history',
+        method: 'GET',
+        params: {
+            resolution, symbol, from, to
+        }
+    });
+};
+
 export const depthBuy = function ({
     ftoken, ttoken
 }) {
