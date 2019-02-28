@@ -14,7 +14,7 @@
                 v-for="v in sortedList"
                 :key="v.orderId"
             >
-                <div>{{(new Date(v.date*1000)).toLocaleString()}}</div>
+                <div>{{v.date|d}}</div>
                 <div>{{`${v.ftokenShow}/${v.ttokenShow}`}}</div>
                 <!-- //0:buy,1:sell -->
                 <div :class="{buy:v.side===0,sell:v.side===1}">{{$t("exchangeOrderHistory.side")[v.side]}}</div>
@@ -36,6 +36,7 @@
 import { order, cancelOrder } from 'services/exchange';
 import powProcess from 'components/powProcess';
 import { timer } from 'utils/asyncFlow';
+import d from "dayjs";
 const VoteDifficulty = '201564160';
 export default {
     props: {
@@ -46,6 +47,11 @@ export default {
         isEmbed:{
             type:Boolean,
             default:false
+        }
+    },
+    filters:{
+        d(v){
+            return d.unix(v).format('YYYY-MM-DD HH:mm')
         }
     },
     data() {
