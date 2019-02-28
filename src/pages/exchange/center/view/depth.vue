@@ -65,6 +65,7 @@ export default {
                 sum = BigNumber.plus(sum, item.quantity || 0);
                 _l.push(sum);
             });
+            console.log(_l);
             return _l;
         },
         priceList() {
