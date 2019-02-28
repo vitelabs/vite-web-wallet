@@ -81,7 +81,6 @@ export default {
     },
     toMin(num, minUnit) {
         BigNumber.config(normalFormat);
-
         let min = new BigNumber(10).exponentiatedBy(minUnit);
         num = new BigNumber(num);
         if (num.c == null) {

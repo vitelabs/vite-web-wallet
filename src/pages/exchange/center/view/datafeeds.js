@@ -42,7 +42,7 @@ export default class dataFeeds {
         }, 0);
     }
     getBars(symbolInfo, resolution, from, to, onHistoryCallback, onErrorCallback, firstDataRequest) {
-        // console.log('getBars', symbolInfo, resolution, from, to, onErrorCallback, onHistoryCallback, firstDataRequest);
+        console.log('getBars', symbolInfo, resolution, from, to, onErrorCallback, onHistoryCallback, firstDataRequest);
 
         if (!firstDataRequest) {
             return;
