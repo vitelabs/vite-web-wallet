@@ -40,7 +40,7 @@
 <script>
 import confirm from '../components/alert';
 import {orderDetail} from 'services/exchange';
-import d from "dayjs";
+import d from 'dayjs';
 export default {
     props: {
         list: {
@@ -53,7 +53,7 @@ export default {
     },
     filters:{
         d(v){
-            return d.unix(v).format('YYYY-MM-DD HH:mm')
+            return d.unix(v).format('YYYY-MM-DD HH:mm');
         }
     },
     data() {
