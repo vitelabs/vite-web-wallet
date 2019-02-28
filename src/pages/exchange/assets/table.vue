@@ -78,7 +78,7 @@ import BigNumber from 'utils/bigNumber';
 import getTokenIcon from 'utils/getTokenIcon';
 import powProcess from 'components/powProcess';
 import debounce from 'lodash/debounce';
-import d from "dayjs";
+import d from 'dayjs';
 
 
 const VoteDifficulty = '201564160';

@@ -36,7 +36,7 @@
 import { order, cancelOrder } from 'services/exchange';
 import powProcess from 'components/powProcess';
 import { timer } from 'utils/asyncFlow';
-import d from "dayjs";
+import d from 'dayjs';
 const VoteDifficulty = '201564160';
 export default {
     props: {
@@ -51,7 +51,7 @@ export default {
     },
     filters:{
         d(v){
-            return d.unix(v).format('YYYY-MM-DD HH:mm')
+            return d.unix(v).format('YYYY-MM-DD HH:mm');
         }
     },
     data() {
