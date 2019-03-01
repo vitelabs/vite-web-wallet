@@ -47,6 +47,10 @@
 
         <table-list class="list" :headList="[{
             class: 'mintage-table-item',
+            text: 'tokenId',
+            cell: 'tokenId'
+        },{
+            class: 'mintage-table-item',
             text: 'decimals',
             cell: 'decimals'
         },{
