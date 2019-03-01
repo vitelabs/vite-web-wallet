@@ -59,7 +59,11 @@ class account {
     }
 
     checkFunc() {
-        let funcName = ['lock', 'getBalance', 'sendRawTx', 'sendTx', 'receiveTx', 'SBPreg', 'updateReg', 'revokeReg', 'retrieveReward', 'voting', 'revokeVoting', 'getQuota', 'withdrawalOfQuota', 'createContract', 'callContract'];
+        let funcName = ['lock', 'getBalance', 'sendRawTx', 'sendTx', 'receiveTx', 
+            'SBPreg', 'updateReg', 'revokeReg', 'retrieveReward', 
+            'voting', 'revokeVoting', 'getQuota', 'withdrawalOfQuota', 
+            'createContract', 'callContract', 'mintage',
+            'mintageIssue', 'mintageBurn', 'changeTokenType', 'changeTransferOwner', 'mintageCancelPledge'];
         funcName.forEach((name) => {
             this[name] = (...args) => {
                 return this.account[name](...args);

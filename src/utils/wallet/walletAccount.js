@@ -19,7 +19,11 @@ class walletAccount extends _walletAccount {
         this.receiveFail = receiveFail;
         this.unlockAcc = null;
 
-        let funcName = ['getBalance', 'sendRawTx', 'sendTx', 'receiveTx', 'SBPreg', 'updateReg', 'revokeReg', 'retrieveReward', 'voting', 'revokeVoting', 'getQuota', 'withdrawalOfQuota', 'createContract', 'callContract'];
+        let funcName = ['getBalance', 'sendRawTx', 'sendTx', 'receiveTx', 
+            'SBPreg', 'updateReg', 'revokeReg', 'retrieveReward', 
+            'voting', 'revokeVoting', 'getQuota', 'withdrawalOfQuota', 
+            'createContract', 'callContract', 'mintage',
+            'mintageIssue', 'mintageBurn', 'changeTokenType', 'changeTransferOwner', 'mintageCancelPledge'];
         funcName.forEach((name) => {
             this[name] = (...args) => {
                 if (!this.unlockAcc) {
