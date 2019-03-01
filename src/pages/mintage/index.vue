@@ -45,39 +45,41 @@
 
         <div class="__btn_all_in btn" @click="getOwnerToken">Get owner token list</div>
 
-        <table-list class="list" :headList="[{
-            class: 'mintage-table-item',
-            text: 'tokenId',
-            cell: 'tokenId'
-        },{
-            class: 'mintage-table-item',
-            text: 'decimals',
-            cell: 'decimals'
-        },{
-            class: 'mintage-table-item',
-            text: 'isReIssuable',
-            cell: 'isReIssuable'
-        },{
-            class: 'mintage-table-item',
-            text: 'maxSupply',
-            cell: 'maxSupply'
-        },{
-            class: 'mintage-table-item',
-            text: 'ownerBurnOnly',
-            cell: 'ownerBurnOnly'
-        },{
-            class: 'mintage-table-item',
-            text: 'totalSupply',
-            cell: 'totalSupply'
-        },{
-            class: 'mintage-table-item',
-            text: 'tokenName',
-            cell: 'tokenName'
-        },{
-            class: 'mintage-table-item',
-            text: 'tokenSymbol',
-            cell: 'tokenSymbol'
-        }]" :contentList="tokenList"></table-list>
+        <div class="list-wrapper">
+            <table-list :headList="[{
+                class: 'mintage-table-big-item',
+                text: 'tokenId',
+                cell: 'tokenId'
+            },{
+                class: 'mintage-table-small-item',
+                text: 'decimals',
+                cell: 'decimals'
+            },{
+                class: 'mintage-table-small-item',
+                text: 'isReIssuable',
+                cell: 'isReIssuable'
+            },{
+                class: 'mintage-table-big-item',
+                text: 'maxSupply',
+                cell: 'maxSupply'
+            },{
+                class: 'mintage-table-small-item',
+                text: 'ownerBurnOnly',
+                cell: 'ownerBurnOnly'
+            },{
+                class: 'mintage-table-big-item',
+                text: 'totalSupply',
+                cell: 'totalSupply'
+            },{
+                class: 'mintage-table-big-item',
+                text: 'tokenName',
+                cell: 'tokenName'
+            },{
+                class: 'mintage-table-big-item',
+                text: 'tokenSymbol',
+                cell: 'tokenSymbol'
+            }]" :contentList="tokenList"></table-list>
+        </div>
     </div>
 </template>
 
@@ -172,8 +174,11 @@ export default {
 @import "~assets/scss/vars.scss";
 
 .mintage-wrapper {
+    width: 100%;
+    box-sizing: border-box;
     padding: 20px;
-    .list {
+    overflow: auto;
+    .list-wrapper {
         margin-top: 20px;
     }
     .order-row-title {
@@ -235,8 +240,11 @@ export default {
 <style lang="scss">
 @import "~assets/scss/vars.scss";
 
-.mintage-table-item {    
-    min-width: 200px;
+.mintage-table-big-item {    
+    min-width: 250px;
+}
+.mintage-table-small-item {
+    min-width: 110px;
 }
 </style>
 
