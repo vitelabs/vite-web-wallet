@@ -90,7 +90,7 @@ module.exports = {
     },
     resolve: {
         alias: {
-            WSprovider: '@vite/vitejs/dist/es5/provider/WS',
+            WSprovider: '@vite/vitejs/dist/providers/WS',
             vue: 'vue/dist/vue.js',
             charting: CHARTING_PATH,
             src: SRC_PATH,
