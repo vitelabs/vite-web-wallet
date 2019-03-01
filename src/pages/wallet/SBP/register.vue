@@ -224,6 +224,7 @@ export default {
                 this.loading = false;
                 this.$toast(this.$t('walletSBP.section1.registerSuccess'));
                 this.clearAll();
+                console.log('start');
                 this.$store.dispatch('loopRegList', {
                     address: this.quotaAddr,
                     nodeName, 
