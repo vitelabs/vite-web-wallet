@@ -12,6 +12,8 @@
         <accList v-if="!!activeAccount" class="item"></accList>
         <lang class="item"></lang>
         <auto-logout v-if="!!activeAccount" class="item"></auto-logout>
+
+        <router-link v-if="!!activeAccount && isTestEnv" :to="{ name: 'mintage' }">mintage</router-link>
     </layout>
 </template>
 
@@ -35,7 +37,8 @@ export default {
             activeAccount,
             showPassWrapper,
             pass: '',
-            lock: true
+            lock: true,
+            isTestEnv: process.env.NODE_ENV === 'dev' || process.env.NODE_ENV === 'test'
         };
     },
     methods: {
