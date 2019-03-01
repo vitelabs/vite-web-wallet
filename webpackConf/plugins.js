@@ -41,7 +41,8 @@ const ethNet = {
     dev: '\'https://ropsten.etherscan.io\''
 };
 
-let ENV = process.env.NODE_ENV || 'dev';
+let Node_Env = process.env.NODE_ENV || 'dev';
+let ENV = Node_Env === 'testout' ? 'test' : Node_Env;
 
 let plugins = [
     new HtmlWebpackPlugin({
@@ -52,7 +53,7 @@ let plugins = [
     new VueLoaderPlugin(),
     new webpack.DefinePlugin({
         'process.env.version': `"${packJson.version}"`,
-        'process.env.NODE_ENV': `"${ENV}"`,
+        'process.env.NODE_ENV': `"${Node_Env}"`,
         'process.env.goViteServer': goViteServer[ENV],
         'process.env.viteNet': viteNet[ENV],
         'process.env.contractAddress': contractAddress[ENV],
