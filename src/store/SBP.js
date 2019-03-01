@@ -37,15 +37,23 @@ const actions = {
         address, nodeName, operate, producer
     }) {
         // operate ==> 0: cancel / 1: reg / 2: update
+        let isInList = false;
         state.registrationList.forEach((regItem) => {
             if (regItem.name !== nodeName) {
                 return;
             }
+            isInList = true;
             nodeNameList[nodeName] = {
                 nodeName, operate, producer
             };
         });
 
+        if (!state.registrationList.length || !isInList) {
+            nodeNameList[nodeName] = {
+                nodeName, operate, producer
+            };
+        }
+        
         dispatch('stopLoopRegList');
         regListInst = new timer(()=>{
             state.registrationList.forEach((item) => {
