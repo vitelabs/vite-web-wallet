@@ -3,7 +3,7 @@ var path = require('path');
 
 console.log(`Write netlifyConf ${process.env.NODE_ENV}`);
 
-var redirect = process.env.NODE_ENV === 'test' ? 
+var redirect = process.env.NODE_ENV.indexOf('test') === 0 ? 
     path.join(__dirname, 'netlifyConf/_redirects_test') :
     path.join(__dirname, 'netlifyConf/_redirects');
 

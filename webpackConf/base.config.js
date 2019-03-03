@@ -8,7 +8,7 @@ const CHARTING_PATH = path.join(__dirname, '../charting_library');
 const STATIC_PATH = process.env.APP === 'true' ?
     path.join(__dirname, '../../app/walletPages') : 
     path.join(__dirname, '../dist');
-let development = ['dev', 'test'];
+let development = ['dev', 'test', 'testout'];
 
 module.exports = {
     mode: development.indexOf(process.env.NODE_ENV) > -1 ? 'development' : 'production',
