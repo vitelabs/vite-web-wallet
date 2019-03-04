@@ -27,7 +27,7 @@ import Table from './table';
 import { order } from 'services/exchange';
 import Pagination from 'components/pagination';
 import { timer } from 'utils/asyncFlow';
-const pageSize = 10;
+const pageSize = 35;
 export default {
     components: {
         Filters,
@@ -55,7 +55,7 @@ export default {
     },
     beforeMount() {
         if (this.isEmbed) {
-            this.timer = new timer(() => this.update(), 5000);
+            this.timer = new timer(() => this.update(), 1000);
             this.timer.start();
         }
         this.update();
