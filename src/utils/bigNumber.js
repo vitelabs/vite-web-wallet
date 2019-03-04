@@ -104,11 +104,11 @@ export default {
             return '';
         }
     },
-    formatNum(num, decimal = 8) {
+    formatNum(num, decimal = 8, fix = 8) {
         BigNumber.config({
             FORMAT: groupFormat
         });
-        decimal = decimal >= 8 ? 8 : decimal;
+        decimal = decimal >= fix ? fix : decimal;
         let n = new BigNumber(num);
         return n.toFormat(decimal);
     }
