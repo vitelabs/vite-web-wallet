@@ -21,14 +21,14 @@
                 <openOrder
                     v-if="tap==='openOrder'"
                     class="item"
-                    :filterObj="{ftoken:activeTxPair.ftoken,ttoken:activeTxPair.ttoken}"
+                    :filterObj="{ftoken:activeTxPair.ftoken,ttoken:activeTxPair.ttoken,pageSize:10}"
                     :isEmbed="true"
                 ></openOrder>
                 <historyOrder
                     v-if="tap==='historyOrder'"
                     class="item"
                     :isEmbed="true"
-                    :filterObj="{ftoken:activeTxPair.ftoken,ttoken:activeTxPair.ttoken}"
+                    :filterObj="{ftoken:activeTxPair.ftoken,ttoken:activeTxPair.ttoken,pageSize:10}"
                 ></historyOrder>
             </div>
         </div>

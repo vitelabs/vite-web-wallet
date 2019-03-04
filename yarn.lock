@@ -1108,10 +1108,10 @@
   resolved "http://registry.npm.taobao.org/@types/node/download/@types/node-10.12.18.tgz#1d3ca764718915584fcd9f6344621b7672665c67"
   integrity sha1-HTynZHGJFVhPzZ9jRGIbdnJmXGc=
 
-"@vite/vitejs@^1.1.5-8":
-  version "1.1.5-8"
-  resolved "https://registry.yarnpkg.com/@vite/vitejs/-/vitejs-1.1.5-8.tgz#73ca609b104c87643c3666fdc01f3c665de88cd2"
-  integrity sha512-LOMLS1JkpB5exO3rbqeL/86pkvR9g0nBfpwOTj5o1u6b1PknyRBLUtdKS2KGYSkUtZHSEiRnC3xxdJRaWUQLQQ==
+"@vite/vitejs@^1.1.5-11":
+  version "1.1.5-11"
+  resolved "http://registry.npm.taobao.org/@vite/vitejs/download/@vite/vitejs-1.1.5-11.tgz#81dfa4a2b3fb11b39a4287afe39be305f772a481"
+  integrity sha1-gd+korP7EbOaQoev45vjBfdypIE=
   dependencies:
     "@sisi/ed25519-blake2b-hd-key" "^1.0.2"
     "@sisi/tweetnacl-blake2b" "^1.0.0"
@@ -1128,6 +1128,7 @@
     jsonrpc-lite "^1.3.1"
     net "^1.0.2"
     pure-uuid "^1.5.3"
+    qs "^6.6.0"
     scryptsy "^2.0.0"
     ts-node "^7.0.1"
     websocket "^1.0.26"
@@ -6735,7 +6736,7 @@ qs@6.5.2, qs@~6.5.2:
   resolved "http://registry.npm.taobao.org/qs/download/qs-6.5.2.tgz#cb3ae806e8740444584ef154ce8ee98d403f3e36"
   integrity sha1-yzroBuh0BERYTvFUzo7pjUA/PjY=
 
-qs@^6.5.2:
+qs@^6.5.2, qs@^6.6.0:
   version "6.6.0"
   resolved "http://registry.npm.taobao.org/qs/download/qs-6.6.0.tgz#a99c0f69a8d26bf7ef012f871cdabb0aee4424c2"
   integrity sha1-qZwPaajSa/fvAS+HHNq7Cu5EJMI=
