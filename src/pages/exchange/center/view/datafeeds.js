@@ -69,7 +69,7 @@ export default class dataFeeds {
                     open: _d.openPrice,
                     high: _d.highPrice,
                     low: _d.lowPrice,
-                    volume: _d.amount
+                    volume: _d.quantity
                 });
             });
 
