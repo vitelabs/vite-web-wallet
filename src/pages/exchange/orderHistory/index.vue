@@ -55,7 +55,7 @@ export default {
     },
     beforeMount() {
         if (this.isEmbed) {
-            this.timer = new timer(() => this.update(), 5000);
+            this.timer = new timer(() => this.update(), 1000);
             this.timer.start();
         }
         this.update();
