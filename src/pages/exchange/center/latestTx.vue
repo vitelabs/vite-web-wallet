@@ -23,7 +23,7 @@
                     'buy': tx.txSide === 0,
                     'sell': tx.txSide === 1
                 }">{{ formatNum(tx.price, 'ttoken') }}</span>
-                <span class="__center-tb-item">{{ formatNum(tx.quantity, 'ftoken') }}</span>
+                <span class="__center-tb-item">{{ formatNum(tx.quantity, 'ftoken', 6) }}</span>
                 <span class="__center-tb-item tx-time">{{ getDate(tx.txTime * 1000) }}</span>
             </div>
         </div>
@@ -60,11 +60,11 @@ export default {
         }
     },
     methods: {
-        formatNum(num, type) {
+        formatNum(num, type, fix) {
             if (!this[type]) {
-                return BigNumber.formatNum(num);
+                return BigNumber.formatNum(num, fix);
             }
-            return BigNumber.formatNum(num, this[type].tokenDigit); 
+            return BigNumber.formatNum(num, this[type].tokenDigit, fix); 
         },
         getDate(timestamp) {
             return date(timestamp, 'zh', true);
