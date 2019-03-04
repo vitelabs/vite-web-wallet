@@ -47,6 +47,13 @@ export default {
         },
         ftoken() {
             return this.$store.state.exchangeTokens.ftoken;
+        },
+        maxQuantity() {
+            let arr = [].concat(this.depthData);
+            arr.sort((a, b) => {
+                return b.quantity - a.quantity;
+            });
+            return arr && arr[0] ? arr[0].quantity : 0;
         }
     },
     methods: {
@@ -57,9 +64,7 @@ export default {
             return BigNumber.formatNum(num, this[type].tokenDigit); 
         },
         getWidth(item) {
-            // let maxPrice = this.depthData[0].price;
-            let maxPrice = 10000;
-            let width = BigNumber.dividedToNumber(item.price, maxPrice, 2).toString() * 100;
+            let width = BigNumber.dividedToNumber(item.quantity, this.maxQuantity, 2).toString() * 100;
             return width > 100 ? 100 : width;
         },
         clickRow(data) {
