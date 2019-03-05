@@ -17,7 +17,7 @@
                 :key="token.id"
             >
                 <div>{{token.symbol}}</div>
-                <div>{{token.available+token.lock}}</div>
+                <div>{{Number((token.available+token.lock).toFixed(8))}}</div>
                 <div>{{token.available}}</div>
                 <div>{{token.lock||0}}</div>
                 <div>{{token.worth}}</div>
