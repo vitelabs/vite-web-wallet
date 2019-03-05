@@ -19,7 +19,9 @@
                     'up': +txPair.upDown > 0,
                     'down': +txPair.upDown < 0
                 }">{{ txPair.upDown ? txPair.upDown + '%' : '--' }}</span>
-                <span v-show="showCol === 'txNum'" class="__center-tb-item">{{ txPair.quantity24h || '--' }}</span>
+                <span v-show="showCol === 'txNum'" class="__center-tb-item">
+                    {{ txPair.quantity24h ? formatNum(txPair.quantity24h) : '--' }}
+                </span>
             </div>
         </div>
     </div>
@@ -67,6 +69,7 @@ export default {
             return this.activeTxPair ? this.activeTxPair.pairCode || null : null;
         },
         activeTxPair() {
+
             return this.$store.state.exchangeActiveTxPair.activeTxPair;
         },
         showList() {
@@ -102,6 +105,9 @@ export default {
         }
     },
     methods: {
+        formatNum(num) {
+            return BigNumber.formatNum(num, 1); 
+        },
         showRealPrice(txPair, i) {
             let elTop = this.$refs[`txPair${i}`][0].getBoundingClientRect().top;
             let listTop = this.$refs.txList.getBoundingClientRect().top;
