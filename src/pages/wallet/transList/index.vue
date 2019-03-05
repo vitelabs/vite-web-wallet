@@ -71,7 +71,29 @@ import ellipsisAddr from 'utils/ellipsisAddr.js';
 import loopTime from 'config/loopTime';
 
 let transListInst = null;
-let txImgs = [txRegImg, txRegImg, txRegImg, txRewardImg, txVoteImg, txVoteImg, txQuotaImg, txQuotaImg, txTokenImg, txTokenImg, txTransImg, txTransImg, txTransImg, txTransImg, txTransImg, txTransImg];
+let txImgs = [
+    txRegImg, 
+    txRegImg, 
+    txRegImg, 
+    txRewardImg, 
+    txVoteImg, 
+    txVoteImg, 
+    txQuotaImg, 
+    txQuotaImg, 
+    txTokenImg, 
+    txTokenImg, 
+    txTokenImg, 
+    txTokenImg, 
+    txTokenImg, 
+    txTransImg, 
+    txTransImg, 
+    txTransImg, 
+    txTransImg, 
+    txTransImg, 
+    txTransImg, 
+    txTransImg, 
+    txTransImg
+];
 
 export default {
     components: {
@@ -102,8 +124,9 @@ export default {
             let nowList = [];
 
             transList.forEach((trans) => {
+                console.log(trans.rawData.txType);
                 let txType = !trans.rawData.txType && trans.rawData.txType !== 0 ? txImgs.length - 1 : trans.rawData.txType;
-                let typeImg = `<img class="icon" src='${txImgs[txType]}'/>`;
+                let typeImg = `<img class="icon" src='${txImgs[txType] ? txImgs[txType] : txImgs[15]}'/>`;
 
                 let status = ['unconfirmed', 'confirms', 'confirmed'][trans.status];
                 let statusClass = status === 'confirmed' ? 'green' : 
