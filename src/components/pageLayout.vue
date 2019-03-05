@@ -3,15 +3,13 @@
         <sidebar class="sidebar" :active="active" :go="go" :menuList="menuList" ></sidebar>
         <vite-menu class="menu" :active="active" :go="go" :menuList="menuList"></vite-menu>
 
-        <div class="page-content" :class="{
-            'page-scroll': active.indexOf('exchange') === 0
-        }">
-            <second-menu class="second-menu" v-show="secondMenuList && secondMenuList.length" 
-                         :tabList="secondMenuList"></second-menu>
-            <div class="page-wrapper" :class="{
-                'page-scroll': active.indexOf('exchange') === 0
-            }">
-                <slot></slot>
+        <div class="page-content" :class="{'page-scroll': active.indexOf('exchange') === 0}">
+            <div class="page-scroll-wrapper">
+                <second-menu class="second-menu" v-show="secondMenuList && secondMenuList.length" 
+                             :tabList="secondMenuList"></second-menu>
+                <div class="page-wrapper">
+                    <slot></slot>
+                </div>
             </div>
         </div>
     </div>
@@ -132,17 +130,21 @@ export default {
         flex: 1;
         height: 100%;
         overflow: hidden;
-        display: flex;
-        flex-direction: column;
+        .page-scroll-wrapper {
+            display: flex;
+            flex-direction: column;
+        }
         &.page-scroll {
             overflow: auto;
+            .page-scroll-wrapper {    
+                width: 100%;
+                height: 100%;
+                min-width: 1350px;
+            }
         }
         .page-wrapper {
             flex: 1;
             overflow: auto;
-            &.page-scroll {
-                overflow: visible;
-            }
         }
     }
 }
