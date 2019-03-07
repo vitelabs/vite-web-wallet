@@ -4,9 +4,9 @@
         
         <div class="__center-tb-row __pointer" @click="clickRow(item)"
              v-for="(item, i) in depthData" :key="i">
-            <span class="__center-tb-item" :class="dataType">{{ formatNum(item.price, 'ttoken') }}</span>
-            <span class="__center-tb-item">{{ formatNum(item.quantity, 'ftoken', 6) }}</span>
-            <span class="__center-tb-item">{{ formatNum(item.amount, 'ttoken', 6) }}</span>
+            <span class="__center-tb-item depth price" :class="dataType">{{ formatNum(item.price, 'ttoken') }}</span>
+            <span class="__center-tb-item depth quantity">{{ formatNum(item.quantity, 'ftoken', 6) }}</span>
+            <span class="__center-tb-item depth amount">{{ formatNum(item.amount, 'ttoken', 6) }}</span>
             <span class="percent-wrapper" :class="dataType" :style="{ 'width': getWidth(item) + '%' }"></span>
         </div>
     </div>

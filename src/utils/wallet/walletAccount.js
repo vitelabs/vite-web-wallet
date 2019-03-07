@@ -56,7 +56,8 @@ class walletAccount extends _walletAccount {
             name, 
             id: this.id,
             lang: this.lang,
-            defaultInx: this.defaultInx, 
+            defaultInx: this.defaultInx,
+            addr: this.getDefaultAddr(),
             addrNum: this.addrList.length, 
             encryptObj: this.encryptObj
         }, index);
