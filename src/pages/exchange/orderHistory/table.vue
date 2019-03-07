@@ -31,6 +31,7 @@
             v-show="detailConfirm"
             :list="detailList"
             :close="close"
+            :tilte="$t('exchangeOrderHistory.confirmTable.title')"
             :heads="$t('exchangeOrderHistory.confirmTable.heads')"
         >
 
