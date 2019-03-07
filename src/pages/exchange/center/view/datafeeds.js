@@ -62,7 +62,7 @@ export default class dataFeeds {
             let list = [];
             let timeDiff = +resolution === 1 ? 60 * 1000 : 60 * 60 * 1000;
             console.log(data);
-            debugger;
+
             data && data.forEach(_d => {
                 let time = _d.txUnit * timeDiff;
                 list.push({
