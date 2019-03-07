@@ -61,6 +61,8 @@ export default class dataFeeds {
         }).then((data) => {
             let list = [];
             let timeDiff = +resolution === 1 ? 60 * 1000 : 60 * 60 * 1000;
+            console.log(data);
+
             data && data.forEach(_d => {
                 let time = _d.txUnit * timeDiff;
                 list.push({
@@ -74,11 +76,16 @@ export default class dataFeeds {
             });
 
             this.list[resolution] = list;
+            console.log({
+                noData: !list || !list.length,
+                nextTime: !list || !list.length ? to + timeDiff : null
+            });
             onHistoryCallback(list, {
                 noData: !list || !list.length,
                 nextTime: !list || !list.length ? to + timeDiff : null
             });
         }).catch((err) => {
+            console.log(err);
             onErrorCallback(err);
         });
     }

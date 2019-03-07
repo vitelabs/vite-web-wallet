@@ -13,13 +13,13 @@
         </div>
 
         <div class="__center-tb-title">
-            <span class="__center-tb-item">{{ $t('exchange.priceTitle', { 
+            <span class="__center-tb-item depth price">{{ $t('exchange.priceTitle', { 
                 price: activeTxPair && activeTxPair.ttokenShow ? activeTxPair.ttokenShow : '' 
             }) }}</span>
-            <span class="__center-tb-item">{{ $t('exchange.amountTitle', { 
+            <span class="__center-tb-item depth quantity">{{ $t('exchange.amountTitle', { 
                 amount: activeTxPair && activeTxPair.ftokenShow ? activeTxPair.ftokenShow : ''
             }) }}</span>
-            <span class="__center-tb-item">{{ $t('exchange.quantityTitle', { 
+            <span class="__center-tb-item depth amount">{{ $t('exchange.quantityTitle', { 
                 quantity: activeTxPair && activeTxPair.ttokenShow ? activeTxPair.ttokenShow : ''
             }) }}</span>
         </div>
