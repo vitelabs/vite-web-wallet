@@ -36,6 +36,7 @@
 import { order, cancelOrder } from 'services/exchange';
 import powProcess from 'components/powProcess';
 import { timer } from 'utils/asyncFlow';
+let task=null;
 import d from 'dayjs';
 const VoteDifficulty = '201564160';
 export default {
@@ -138,16 +139,18 @@ export default {
             );
         }
     },
-    beforeMount() {
+    mounted(){
         this.update();
+    },
+    activated() {
         if(this.isEmbed){
-            this.timer=new timer(()=>this.update(),1000);
-            this.timer.start();
+            task=new timer(()=>this.update(),1000);
+            task.start();
         }
 
     },
-    beforeDestroy(){
-        this.timer&&this.timer.stop();
+    deactivated(){
+        task&&task.stop();
     },
     watch: {
         filterObj() {
