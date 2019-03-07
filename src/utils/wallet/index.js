@@ -20,6 +20,8 @@ class _wallet {
         this.onLoginList = [];
         this.onLogoutList = [];
         this.lastPage = '';    
+
+        console.log(this.getLast());
     }
 
     setLastPage(name) {
@@ -151,7 +153,7 @@ class _wallet {
         if ( (!entropy && !addr && !id) || !pass ) {
             return Promise.reject(false);
         }
-        if (addr) {
+        if (addr && !entropy && !id) {
             return this._loginKeystoreAcc(addr, pass);
         }
         return this._loginWalletAcc({
@@ -262,6 +264,7 @@ class _wallet {
             entropy,
             name: acc.name
         });
+        this.activeWalletAcc.save(acc.name);
         return true;
     }
 

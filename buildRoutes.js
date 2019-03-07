@@ -62,7 +62,7 @@ traversing('./src/pages/', (fPath, next, val) => {
         let parent = nList[1];
         pushRoute(fPath, tmpPath, name, parent);
     }
-}, './');
+});
 
 
 let _routes = '';

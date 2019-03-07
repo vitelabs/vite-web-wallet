@@ -250,7 +250,7 @@ export default {
     min-width: 240px;
     width: 25%;
 }
-.amount {
+.list-wrapper .amount {
     width: 17%;
     min-width: 150px;
 }

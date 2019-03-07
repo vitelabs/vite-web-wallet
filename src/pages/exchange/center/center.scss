@@ -85,6 +85,20 @@ $up-font-color: $green;
     &:first-child {
         text-align: left;
     }
+
+    &.depth {
+        flex: none;
+        &.price {
+            width: 30%;
+        }
+        &.quantity {
+            width: 25%;
+        }
+        &.amount {
+            width: 45%;
+        }
+    }
+
     &.txPair {
         // flex-basis: 50px;
     }
