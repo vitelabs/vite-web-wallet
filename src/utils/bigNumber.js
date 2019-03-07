@@ -55,5 +55,11 @@ export default {
         } catch(err) {
             return '';
         }
+    },
+    minus(x, y, fix = 8, type = 'fix') {
+        x = new BigNumber(x);
+        y = new BigNumber(y);
+        let result = x.minus(y);
+        return type === 'fix' ? result.toFormat(fix) : result.decimalPlaces(fix, 1).toFormat();
     }
 };

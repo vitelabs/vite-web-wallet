@@ -1,16 +1,16 @@
 <template>
     <div class="input-wrapper">
+        <slot name="before"></slot>
         <!-- Safari autocomplete -->
         <input fake_pass type="password" style="display:none"/>
         <input v-model="value" @input.prevent="update" type="text"
-               :placeholder="placeholder" autocomplete="off"
+               :placeholder="placeholder" autocomplete="false"
                @blur="_blur" @focus="_focus"/>
-        <slot></slot>
+        <slot name="after"></slot>
     </div>
 </template>
 
 <script>
-
 export default {
     props: {
         valid: {
@@ -20,6 +20,14 @@ export default {
         placeholder: {
             type: String,
             default: ''
+        },
+        _value: {
+            type: String,
+            default: ''
+        },
+        _delay: {
+            type: Number,
+            default: 500
         }
     },
     destroyed () {
@@ -28,16 +36,22 @@ export default {
     data() {
         return {
             valueTimeout: null,
-            value: ''
+            value: this._value
         };
     },
+    model: {
+        prop: '_value'
+    },
     watch: {
+        _value: function() {
+            this.value = this._value;
+        },
         value: function() {
             this.clear();
             this.valueTimeout = setTimeout(()=> {
                 this.clear();
                 this.valid();
-            }, 500);
+            }, this._delay);
         }
     },
     methods: {    
