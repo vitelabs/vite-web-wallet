@@ -92,6 +92,11 @@ export default {
                 return true;
             }
 
+            if (!this.amount) {
+                this.amountErr = '';
+                return true;
+            }
+
             let result = this.$validAmount(this.amount, this.tokenInfo.decimals);
             if (!result) {
                 this.amountErr = this.$t('hint.amtFormat');
@@ -123,7 +128,7 @@ export default {
             }
 
             if (!this.toAddr) {
-                this.isValidAddress = false;
+                this.isValidAddress = true;
                 return;
             }
 
