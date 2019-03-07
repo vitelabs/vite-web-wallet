@@ -124,7 +124,6 @@ export default {
             let nowList = [];
 
             transList.forEach((trans) => {
-                console.log(trans.rawData.txType);
                 let txType = !trans.rawData.txType && trans.rawData.txType !== 0 ? txImgs.length - 1 : trans.rawData.txType;
                 let typeImg = `<img class="icon" src='${txImgs[txType] ? txImgs[txType] : txImgs[15]}'/>`;
 
