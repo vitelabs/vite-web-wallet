@@ -93,13 +93,23 @@ export default {
                 this.amountErr = this.$t('transList.valid.amt');
                 return false;
             }
-            if (BigNumber.isEqual(this.cancelAmount, 0) || 
-                BigNumber.compared(this.cancelAmount, this.activeAmountLimit) > 0) {
+
+            let isEqualBalance = BigNumber.compared(this.cancelAmount, this.activeAmountLimit);
+            if (BigNumber.isEqual(this.cancelAmount, 0) || isEqualBalance > 0) {
                 this.amountErr = this.$t('quota.maxAmt', {
                     amount: this.activeAmountLimit
                 });
                 return false;
             }
+
+            const limitAmt = 1000;
+            let cancelBalance = BigNumber.minus(this.activeAmountLimit, this.cancelAmount);
+            if ( BigNumber.compared(cancelBalance, limitAmt) < 0 && 
+                 !BigNumber.isEqual(cancelBalance, 0) ) {
+                this.amountErr = this.$t('quota.cancelLimitAmt', { num: limitAmt });
+                return false;   
+            }
+
             this.amountErr = '';
             return true;
         },

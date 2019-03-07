@@ -11,7 +11,7 @@
                     <span v-show="amountErr" class="err">{{ amountErr }}</span>
                 </div>
                 <vite-input v-model="amount" :valid="testAmount"
-                            :placeholder="$t('quota.amountPlaceholder')">
+                            :placeholder="$t('quota.amountPlaceholder', { num: minNum })">
                     <span class="unit">VITE</span>
                 </vite-input>
             </div>
@@ -44,6 +44,7 @@ import BigNumber from 'utils/bigNumber';
 import { address } from 'utils/tools';
 
 let amountTimeout = null;
+const minNum = 1000;
 
 export default {
     components: {
@@ -75,7 +76,8 @@ export default {
             isValidAddress: true,
             amountErr: '',
             loading: false,
-            stopWatch: false
+            stopWatch: false,
+            minNum
         };
     },
     computed: {
@@ -92,14 +94,19 @@ export default {
                 return;
             }
 
+            if (!this.amount) {
+                this.amountErr = '';
+                return true;
+            }
+
             let result = this.$validAmount(this.amount, this.tokenInfo.decimals);
             if (!result) {
                 this.amountErr = this.$t('transList.valid.amt');
                 return false;
             }
 
-            if (BigNumber.compared(this.amount, 10) < 0) {
-                this.amountErr = this.$t('quota.limitAmt');
+            if (BigNumber.compared(this.amount, minNum) < 0) {
+                this.amountErr = this.$t('quota.limitAmt', { num: minNum });
                 return false;
             }
 
@@ -123,7 +130,7 @@ export default {
             }
 
             if (!this.toAddr) {
-                this.isValidAddress = false;
+                this.isValidAddress = true;
                 return;
             }
 
