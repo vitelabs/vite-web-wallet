@@ -19,20 +19,20 @@
                     >{{$t('exchangeOrderHistory.title')}}</div>
                 </div>
                 <keep-alive>
-                <openOrder
-                    v-if="tap==='openOrder'"
-                    class="item"
-                    :filterObj="{ftoken:activeTxPair.ftoken,ttoken:activeTxPair.ttoken,pageSize:10}"
-                    :isEmbed="true"
-                ></openOrder>
+                    <openOrder
+                        v-if="tap==='openOrder'"
+                        class="item"
+                        :filterObj="{ftoken:activeTxPair.ftoken,ttoken:activeTxPair.ttoken,pageSize:10}"
+                        :isEmbed="true"
+                    ></openOrder>
                 </keep-alive>
                 <keep-alive>
-                <historyOrder
-                    v-if="tap==='historyOrder'"
-                    class="item"
-                    :isEmbed="true"
-                    :filterObj="{ftoken:activeTxPair.ftoken,ttoken:activeTxPair.ttoken,pageSize:10}"
-                ></historyOrder>
+                    <historyOrder
+                        v-if="tap==='historyOrder'"
+                        class="item"
+                        :isEmbed="true"
+                        :filterObj="{ftoken:activeTxPair.ftoken,ttoken:activeTxPair.ttoken,pageSize:10}"
+                    ></historyOrder>
                 </keep-alive>
             </div>
         </div>
