@@ -24,13 +24,15 @@
             }) }}</span>
         </div>
 
-        <div class="depth-table" :class="{'show-all': isShowBuy && isShowSell}">
-            <depth-table v-show="isShowSell" class="sell" dataType="sell" :depthData="depthSell"></depth-table>
+        <div class="depth-content-wrapper" :class="{'one': (isShowBuy || isShowSell) && !(isShowBuy && isShowSell)}">
+            <div class="depth-table" :class="{'show-all': isShowBuy && isShowSell}">
+                <depth-table v-show="isShowSell" class="sell" dataType="sell" :depthData="depthSell"></depth-table>
+            </div>
+            <price></price>
+            <depth-table v-show="isShowBuy" class="depth-table" :class="{
+                'show-all': isShowBuy && isShowSell
+            }" dataType="buy" :depthData="depthBuy"></depth-table>
         </div>
-        <price></price>
-        <depth-table v-show="isShowBuy" class="depth-table" :class="{
-            'show-all': isShowBuy && isShowSell
-        }" dataType="buy" :depthData="depthBuy"></depth-table>
     </div>
 </template>
 
@@ -76,6 +78,16 @@ export default {
     height: 100%;
     display: flex;
     flex-direction: column;
+    .depth-content-wrapper {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        &.one {
+            flex: 1;
+            overflow: auto;
+        }
+    }
 
     .depth-table {
         position: relative;
