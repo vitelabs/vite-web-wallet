@@ -17,6 +17,7 @@ const updateExBalance=(commit,address) => {
     return $ViteJS.request('dexfund_getAccountFundInfo', address).then((data) => {
         commit('setExchangeBalance', data);
     }).catch((e) => {
+        commit('setExchangeBalance',[]);
         console.error(e);
     });
 };
