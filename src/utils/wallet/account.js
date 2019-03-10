@@ -6,7 +6,7 @@ import keystoreAcc from './keystoreAccount';
 import walletAcc from './walletAccount';
 import acc from './storeAcc.js';
 
-const { type } = constant;
+const { LangList } = constant;
 const NamePre = 'account';
 const AccountType = {
     keystore: 'keystore',
@@ -151,7 +151,7 @@ class account {
         this.account.save(this.name, index);
     }
 
-    changeMnemonic(len, lang = type.LangList.english) {
+    changeMnemonic(len, lang = LangList.english) {
         let bits = len === 12 ? 128 : 256;
 
         this.type = AccountType.wallet;
