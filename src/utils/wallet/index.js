@@ -1,4 +1,4 @@
-import { utils, constant } from '@vite/vitejs';
+import { hdAddr as _hdAddr, keystore as _keystore, utils, constant } from '@vite/vitejs';
 import vitecrypto from 'testwebworker';
 import statistics from 'utils/statistics';
 import storage from 'utils/localStorage.js';
@@ -6,9 +6,7 @@ import storage from 'utils/localStorage.js';
 import account from './account.js';
 import acc from './storeAcc.js';
 
-const { type } = constant;
-const _keystore = utils.keystore;
-const _hdAddr = utils.address.hdAddr;
+const { LangList } = constant;
 const _tools = utils.tools;
 
 const LAST_KEY = 'ACC_LAST';
@@ -20,8 +18,6 @@ class _wallet {
         this.onLoginList = [];
         this.onLogoutList = [];
         this.lastPage = '';    
-
-        console.log(this.getLast());
     }
 
     setLastPage(name) {
@@ -49,7 +45,7 @@ class _wallet {
         this.activeWalletAcc = new account(acc);
     }
 
-    create(name, pass, lang = type.LangList.english) {
+    create(name, pass, lang = LangList.english) {
         let err = _tools.checkParams({ name, pass }, ['name', 'pass']);
         if (err) {
             console.error(new Error(err));
@@ -79,7 +75,7 @@ class _wallet {
         return keystore.hexaddress;
     }
 
-    restoreAddrs(mnemonic, lang = type.LangList.english) {
+    restoreAddrs(mnemonic, lang = LangList.english) {
         let num = 10;
         let addrs = _hdAddr.getAddrsFromMnemonic(mnemonic, 0, num, lang);
         if (!addrs) {
@@ -231,6 +227,8 @@ class _wallet {
         encryptObj.encryptentropy = encryptObj.encryptentropy || entropy;   // Very very impotant!!!!!
     
         let before = new Date().getTime();
+        debugger;
+
         let decryptEntropy = await _keystore.decrypt(JSON.stringify(encryptObj), pass, vitecrypto);
         let after = new Date().getTime();
         statistics.event('mnemonic-decrypt', encryptObj.version || '1', 'time', after - before);
@@ -239,7 +237,7 @@ class _wallet {
             return false;
         }
 
-        let lang = acc.lang || type.LangList.english;
+        let lang = acc.lang || LangList.english;
         let mnemonic = _hdAddr.getMnemonicFromEntropy(decryptEntropy, lang);
         let defaultInx = +acc.defaultInx > 10 || +acc.defaultInx < 0 ? 0 : +acc.defaultInx;
 
@@ -343,7 +341,7 @@ function  _reSave() {
         keystore = JSON.parse(keystore);
 
         let mnemonic = _hdAddr.getMnemonicFromEntropy(entropy);
-        item.lang = type.LangList.english;
+        item.lang = LangList.english;
         item.id = _hdAddr.getId(mnemonic);
         item.encryptObj = keystore;
 

@@ -1,3 +1,5 @@
+// import * as v from '@vite/vitejs';
+// console.log(v);
 // import '@babel/polyfill';
 require('es6-promise').polyfill();
 

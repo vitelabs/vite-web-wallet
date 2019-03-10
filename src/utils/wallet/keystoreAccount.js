@@ -1,9 +1,6 @@
-import { utils, wallet  } from '@vite/vitejs';
+import { account as _account, keystore as _keystore  } from '@vite/vitejs';
 import vitecrypto from 'testwebworker';
 import acc from './storeAcc.js';
-
-const _keystore = utils.keystore;
-const _account = wallet.account;
 
 class keystoreAccount extends _account {
     constructor({
