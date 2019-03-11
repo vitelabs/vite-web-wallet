@@ -204,7 +204,9 @@ export default {
                 this.$toast(this.$t('hint.noNet'));
                 return Promise.reject(false);
             }
-          
+
+            this.activeAccount = this.$wallet.getActiveAccount();
+
             let toAmount = BigNumber.toMin(amount || 0, this.tokenInfo.decimals);
             return this.activeAccount[type]({
                 tokenId: this.tokenInfo.tokenId,
