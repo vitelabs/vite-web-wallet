@@ -28,7 +28,6 @@ export default {
         this.$router.afterEach(to => {
             this.active = to.name;
         });
-        
         this.$store.dispatch('startLoopBalance');
     },
     data() {
