@@ -14,20 +14,6 @@ class walletAccount extends _walletAccount {
         this.encryptObj = encryptObj || null;
         this.receiveFail = receiveFail;
         this.unlockAcc = null;
-
-        let funcName = ['getBalance', 'sendRawTx', 'sendTx', 'receiveTx', 
-            'SBPreg', 'updateReg', 'revokeReg', 'retrieveReward', 
-            'voting', 'revokeVoting', 'getQuota', 'withdrawalOfQuota', 
-            'createContract', 'callContract', 'mintage',
-            'mintageIssue', 'mintageBurn', 'changeTokenType', 'changeTransferOwner', 'mintageCancelPledge'];
-        funcName.forEach((name) => {
-            this[name] = (...args) => {
-                if (!this.unlockAcc) {
-                    return Promise.reject('No unlockAcc');
-                }
-                return this.unlockAcc[name](...args);
-            };
-        });
     }
 
     verify(pass) {

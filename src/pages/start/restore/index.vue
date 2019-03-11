@@ -1,4 +1,4 @@
-/**  vite-wallet index-layout */
+/**  pageConfig layout:index */
 
 <template>
     <mnemonic title="mnemonic.restore" :submit="validMnemonic" :isLoading="isLoading">

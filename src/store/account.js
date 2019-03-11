@@ -14,9 +14,7 @@ const state = {
 };
 
 const mutations = {
-    commitBalanceInfo(state, activeAccount) {
-        let payload = activeAccount.syncGetBalance();
-
+    commitBalanceInfo(state, payload) {
         if (!payload) {
             state.balance = {
                 balanceInfos: {}
@@ -46,7 +44,13 @@ const actions = {
     startLoopBalance({ commit, dispatch }) {
         dispatch('stopLoopBalance');
         balanceInfoInst = new timer(() => {
-            return commit('commitBalanceInfo', wallet.getActiveAccount());
+            let account = wallet.getActiveAccount();
+            if (account.type !== 'address') {
+                return commit('commitBalanceInfo', account.syncGetBalance());
+            }
+            return account.getBalance().then((data) => {
+                commit('commitBalanceInfo', data);
+            });
         }, loopTime.ledger_getBalance);
         balanceInfoInst.start();
     },

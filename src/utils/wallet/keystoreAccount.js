@@ -12,6 +12,7 @@ class keystoreAccount extends _account {
 
         this.keystore = keystore;
         this.receiveFail = receiveFail;
+        this.unlockAcc = null;
     }
 
     verify(pass) {
@@ -35,11 +36,13 @@ class keystoreAccount extends _account {
 
     unlock(intervals) {
         this.activate(intervals, this.receiveFail);
+        this.unlockAcc = this;
         return true;
     }
 
     lock() {
         this.freeze();
+        this.unlockAcc = null;
     }
 }
 

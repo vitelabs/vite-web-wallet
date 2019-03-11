@@ -4,18 +4,21 @@ import { constant } from '@vite/vitejs';
 
 import keystoreAcc from './keystoreAccount';
 import walletAcc from './walletAccount';
+import addrAcc from './addrAccount';
 import acc from './storeAcc.js';
 
 const { LangList } = constant;
 const NamePre = 'account';
 const AccountType = {
     keystore: 'keystore',
-    wallet: 'wallet'
+    wallet: 'wallet',
+    addr: 'address'
 };
 let passTimeout;
 
 class account {
     constructor({
+        address, id, entropy,                               // addrAccount
         name, pass, type,                                   // account
         addrNum, defaultInx, mnemonic, encryptObj, lang,    // walletAccount
         keystore, privateKey                                // keystoreAccount
@@ -51,6 +54,10 @@ class account {
             this.account = new walletAcc({
                 addrNum, defaultInx, mnemonic, encryptObj, receiveFail, lang
             });
+        } else if (this.type === AccountType.addr) {
+            this.account = new addrAcc({
+                address, id, entropy
+            });
         } else {
             this.account = null;
         }
@@ -58,15 +65,28 @@ class account {
         this.account && this.checkFunc();
     }
 
+    get isLogin() {
+        return !this.type === AccountType.addr;
+    }
+
     checkFunc() {
-        let funcName = ['lock', 'getBalance', 'sendRawTx', 'sendTx', 'receiveTx', 
+        let funcName = ['sendRawTx', 'sendTx', 'receiveTx', 
             'SBPreg', 'updateReg', 'revokeReg', 'retrieveReward', 
             'voting', 'revokeVoting', 'getQuota', 'withdrawalOfQuota', 
             'createContract', 'callContract', 'mintage',
             'mintageIssue', 'mintageBurn', 'changeTokenType', 'changeTransferOwner', 'mintageCancelPledge'];
         funcName.forEach((name) => {
             this[name] = (...args) => {
-                return this.account[name](...args);
+                if (!this.account || !this.account.unlockAcc) {
+                    return Promise.reject('No unlockAcc');
+                }
+                return this.account.unlockAcc[name](...args);
+            };
+        });
+
+        ['getBalance', 'lock'].forEach((name) => {
+            this[name] = (...args) => {
+                return this.account[name] && this.account[name](...args);
             };
         });
     }
@@ -191,7 +211,7 @@ class account {
     }
 
     getAddrList() {
-        if (this.type === AccountType.keystore) {
+        if (this.type !== AccountType.wallet) {
             return [this.account.address];
         }
 
