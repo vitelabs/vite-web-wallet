@@ -37,8 +37,7 @@ class account {
             let data = await getPowNonce(accountBlock.accountAddress, accountBlock.prevHash);
             accountBlock.difficulty = data.difficulty;
             accountBlock.nonce = data.nonce;
-
-            return this.account.sendRawTx(accountBlock);
+            return this.sendRawTx(accountBlock);
         };
 
         this.keystore = null;
