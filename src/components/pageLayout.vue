@@ -63,12 +63,17 @@ export default {
     },
     computed: {
         secondMenuList() {
-            if (this.active.indexOf('wallet') === 0) {
-                return ['wallet', 'walletQuota', 'walletSBP', 'walletVote', 'walletTransList', 'walletConversion'];
-            } else if (this.active.indexOf('exchange') === 0) {
+            if (this.active.indexOf('exchange') === 0) {
                 return ['exchange', 'exchangeAssets', 'exchangeOpenOrders', 'exchangeOrderHistory'];
             }
-            return [];
+            if (this.active.indexOf('wallet') !== 0) {
+                return [];
+            }
+            let list = ['wallet', 'walletQuota', 'walletSBP', 'walletVote', 'walletTransList'];
+
+            let activeAccount = this.$wallet.getActiveAccount();
+            this.isLogin && activeAccount.type === 'wallet' && list.push('walletConversion');
+            return list;
         }
     },
     methods: {
@@ -93,7 +98,19 @@ export default {
                 return;
             }
 
-            (this.active !== name) && this.$router.push({ name });
+            if (this.active === name) {
+                return;
+            }
+
+            let account = this.$wallet.getActiveAccount();
+            if (!account && name !== 'setting') {
+                this.$router.push({
+                    name: 'start'
+                });
+                return;
+            }
+            
+            this.$router.push({ name });
         },
 
         clearAutoLogout() {

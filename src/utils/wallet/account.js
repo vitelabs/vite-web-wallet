@@ -18,7 +18,7 @@ let passTimeout;
 
 class account {
     constructor({
-        address,                                            // addrAccount
+        address, id, entropy,                               // addrAccount
         name, pass, type,                                   // account
         addrNum, defaultInx, mnemonic, encryptObj, lang,    // walletAccount
         keystore, privateKey                                // keystoreAccount
@@ -56,7 +56,7 @@ class account {
             });
         } else if (this.type === AccountType.addr) {
             this.account = new addrAcc({
-                address
+                address, id, entropy
             });
         } else {
             this.account = null;
@@ -77,6 +77,8 @@ class account {
             'mintageIssue', 'mintageBurn', 'changeTokenType', 'changeTransferOwner', 'mintageCancelPledge'];
         funcName.forEach((name) => {
             this[name] = (...args) => {
+                console.log(this.account);
+                console.log(this.account.unlockAcc);
                 if (!this.account || !this.account.unlockAcc) {
                     return Promise.reject('No unlockAcc');
                 }
@@ -86,7 +88,7 @@ class account {
 
         ['getBalance', 'lock'].forEach((name) => {
             this[name] = (...args) => {
-                this.account[name] && this.account[name](...args);
+                return this.account[name] && this.account[name](...args);
             };
         });
     }
@@ -211,7 +213,7 @@ class account {
     }
 
     getAddrList() {
-        if (this.type === AccountType.keystore) {
+        if (this.type !== AccountType.wallet) {
             return [this.account.address];
         }
 

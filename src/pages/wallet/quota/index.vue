@@ -160,6 +160,8 @@ export default {
                 return;
             }
 
+            this.activeAccount = this.$wallet.getActiveAccount();
+
             amount = BigNumber.toMin(amount || 0, this.tokenInfo.decimals);     
             this.activeAccount[type]({
                 tokenId: this.tokenInfo.tokenId,

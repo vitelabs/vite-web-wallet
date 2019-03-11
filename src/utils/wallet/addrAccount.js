@@ -2,11 +2,13 @@ import { addrAccount as _addrAccount } from '@vite/vitejs';
 
 class addrAccount extends _addrAccount {
     constructor({
-        address
+        address, id, entropy
     }) {
         super({
             client: $ViteJS, address
         });
+        this.id = id;
+        this.entropy = entropy;
     }
 
     getDefaultAddr() {
