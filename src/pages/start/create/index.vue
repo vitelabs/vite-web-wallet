@@ -1,4 +1,4 @@
-/**  vite-wallet index-layout */
+/**  page-config layout:index */
 
 <template>
     <div class="create-account-wrapper">

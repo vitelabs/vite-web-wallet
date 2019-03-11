@@ -1,4 +1,4 @@
-/**  vite-wallet index-layout */
+/**  pageConfig layout:index */
 
 <template>
     <div class="import-account-wrapper">

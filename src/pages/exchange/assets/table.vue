@@ -89,7 +89,9 @@ export default {
     },
     beforeMount() {
         this.acc = this.$wallet.getActiveAccount();
-        if (!this.acc) return;
+        if (!this.acc) {
+            return;
+        }
         this.acc && (this.addr = this.acc.getDefaultAddr());
     },
     data() {

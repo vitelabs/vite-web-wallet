@@ -1,2 +1,3 @@
-import {wallet as Wallet} from 'utils/wallet';
-export const wallet=new Wallet();
+import { wallet as Wallet } from 'utils/wallet';
+
+export const wallet = new Wallet();

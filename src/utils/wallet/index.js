@@ -17,7 +17,18 @@ class _wallet {
         this.isLogin = false;
         this.onLoginList = [];
         this.onLogoutList = [];
-        this.lastPage = '';    
+        this.lastPage = ''; 
+
+        let lastAccount = this.getLast();
+        if (!lastAccount) {
+            return;
+        }
+
+        this.newActiveAcc({
+            type: 'address',
+            address: lastAccount.addr,
+            name: lastAccount.name
+        });
     }
 
     setLastPage(name) {
