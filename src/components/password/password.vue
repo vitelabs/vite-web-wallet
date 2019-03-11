@@ -100,7 +100,7 @@ export default {
             }
 
             let activeAccount = this.$wallet.getActiveAccount();
-            if (!activeAccount) {
+            if (!activeAccount || !activeAccount.isLogin) {
                 this.$toast( this.$t('hint.err') );
                 return false;
             }

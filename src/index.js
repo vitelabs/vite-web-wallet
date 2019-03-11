@@ -4,15 +4,15 @@ require('es6-promise').polyfill();
 import 'utils/performance';
 import './assets/scss/mixins.scss';
 
+import 'utils/eventEmitter.js';
+import 'utils/viteWallet/index.js';
+
 import Vue from 'vue';
 Vue.config.devtools = process.env.NODE_ENV === 'dev';
 import VueRouter from 'vue-router';
 
 import App from 'pages/index.vue';
 import initRouter from 'router/index.js';
-
-import 'utils/eventEmitter.js';
-import 'utils/viteWallet/index.js';
 
 import { i18n } from 'i18n';
 import store from './store';
@@ -21,6 +21,7 @@ import { initQuotaConfirm } from 'components/quota/index.js';
 
 import plugin from 'utils/plugins/addPlugin';
 import clickOutside from 'utils/plugins/clickOutside';
+console.log('resave');
 import { reSave } from 'utils/wallet/index.js';
 
 Vue.use(plugin);

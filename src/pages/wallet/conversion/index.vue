@@ -1,4 +1,4 @@
-/**  vite-wallet login */
+/**  pageConfig isLogin:true */
 
 <template>
     <div class="__wrapper">

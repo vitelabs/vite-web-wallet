@@ -1,5 +1,3 @@
-/**  vite-wallet index-layout */
-
 <template>
     <div>
         <login v-if="isShowLogin"></login>

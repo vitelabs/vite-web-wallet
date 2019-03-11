@@ -1,5 +1,3 @@
-/**  vite-wallet login */
-
 <template>
     <div class="wallet-wrapper">
         <account v-if="active === 'wallet'"></account>

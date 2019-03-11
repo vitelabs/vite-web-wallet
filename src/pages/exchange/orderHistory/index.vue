@@ -1,5 +1,3 @@
-/**  vite-wallet login */
-
 <template>
     <div class="order-history-ct">
         <Filters
