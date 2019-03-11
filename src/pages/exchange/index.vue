@@ -1,4 +1,4 @@
-/**  vite-wallet name-exchange-index */
+/**  pageConfig name:exchange-index */
 
 <template>
     <div class="exchange-center-wrapper">

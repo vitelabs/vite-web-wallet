@@ -1,5 +1,3 @@
-/**  vite-wallet login */
-
 <template>
     <div class="quota-wrapper __wrapper">
         <quota-head></quota-head>
@@ -161,6 +159,8 @@ export default {
                 cb && cb(false);
                 return;
             }
+
+            this.activeAccount = this.$wallet.getActiveAccount();
 
             amount = BigNumber.toMin(amount || 0, this.tokenInfo.decimals);     
             this.activeAccount[type]({

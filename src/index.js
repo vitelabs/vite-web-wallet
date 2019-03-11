@@ -4,15 +4,15 @@ require('es6-promise').polyfill();
 import 'utils/performance';
 import './assets/scss/mixins.scss';
 
+import 'utils/eventEmitter.js';
+import 'utils/viteWallet/index.js';
+
 import Vue from 'vue';
 Vue.config.devtools = process.env.NODE_ENV === 'dev';
 import VueRouter from 'vue-router';
 
 import App from 'pages/index.vue';
 import initRouter from 'router/index.js';
-
-import 'utils/eventEmitter.js';
-import 'utils/viteWallet/index.js';
 
 import { i18n } from 'i18n';
 import store from './store';

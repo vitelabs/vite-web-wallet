@@ -1,5 +1,3 @@
-/**  vite-wallet login */
-
 <template>
     <div class="account-wrapper __wrapper">
         <div class="head">

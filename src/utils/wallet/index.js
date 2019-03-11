@@ -17,7 +17,20 @@ class _wallet {
         this.isLogin = false;
         this.onLoginList = [];
         this.onLogoutList = [];
-        this.lastPage = '';    
+        this.lastPage = ''; 
+
+        let lastAccount = this.getLast();
+        if (!lastAccount) {
+            return;
+        }
+
+        this.newActiveAcc({
+            type: 'address',
+            address: lastAccount.addr,
+            name: lastAccount.name,
+            id: lastAccount.id,
+            entropy: lastAccount.entropy
+        });
     }
 
     setLastPage(name) {
@@ -150,7 +163,8 @@ class _wallet {
             return Promise.reject(false);
         }
         if (addr && !entropy && !id) {
-            return this._loginKeystoreAcc(addr, pass);
+            this.isLogin = this._loginKeystoreAcc(addr, pass);
+            return this.isLogin;
         }
         return this._loginWalletAcc({
             id, entropy, pass
@@ -183,6 +197,10 @@ class _wallet {
                 keystore,
                 privateKey: privKey,
                 type: 'keystore'
+            });
+            setLast({
+                addr,
+                name: acc.name
             });
             return true;
         }

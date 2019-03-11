@@ -1,5 +1,3 @@
-/**  vite-wallet login */
-
 <template>
     <div class="filter-root">
         <div class="filter">
