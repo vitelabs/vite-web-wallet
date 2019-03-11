@@ -227,8 +227,6 @@ class _wallet {
         encryptObj.encryptentropy = encryptObj.encryptentropy || entropy;   // Very very impotant!!!!!
     
         let before = new Date().getTime();
-        debugger;
-
         let decryptEntropy = await _keystore.decrypt(JSON.stringify(encryptObj), pass, vitecrypto);
         let after = new Date().getTime();
         statistics.event('mnemonic-decrypt', encryptObj.version || '1', 'time', after - before);
