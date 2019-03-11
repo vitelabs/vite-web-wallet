@@ -77,8 +77,6 @@ class account {
             'mintageIssue', 'mintageBurn', 'changeTokenType', 'changeTransferOwner', 'mintageCancelPledge'];
         funcName.forEach((name) => {
             this[name] = (...args) => {
-                console.log(this.account);
-                console.log(this.account.unlockAcc);
                 if (!this.account || !this.account.unlockAcc) {
                     return Promise.reject('No unlockAcc');
                 }

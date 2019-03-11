@@ -21,7 +21,6 @@ import { initQuotaConfirm } from 'components/quota/index.js';
 
 import plugin from 'utils/plugins/addPlugin';
 import clickOutside from 'utils/plugins/clickOutside';
-console.log('resave');
 import { reSave } from 'utils/wallet/index.js';
 
 Vue.use(plugin);
