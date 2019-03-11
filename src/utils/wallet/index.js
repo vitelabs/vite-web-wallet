@@ -19,18 +19,7 @@ class _wallet {
         this.onLogoutList = [];
         this.lastPage = ''; 
 
-        let lastAccount = this.getLast();
-        if (!lastAccount) {
-            return;
-        }
-
-        this.newActiveAcc({
-            type: 'address',
-            address: lastAccount.addr,
-            name: lastAccount.name,
-            id: lastAccount.id,
-            entropy: lastAccount.entropy
-        });
+        this.setLastActiveAcc();
     }
 
     setLastPage(name) {
@@ -50,11 +39,25 @@ class _wallet {
             return;
         }
         this.activeWalletAcc.lock && this.activeWalletAcc.lock();
-        this.activeWalletAcc = null;
+        this.setLastActiveAcc();
     }
 
+    setLastActiveAcc() {
+        let lastAccount = this.getLast();
+        if (!lastAccount) {
+            return;
+        }
+
+        this.newActiveAcc({
+            type: 'address',
+            address: lastAccount.addr,
+            name: lastAccount.name,
+            id: lastAccount.id,
+            entropy: lastAccount.entropy
+        });
+    }
     newActiveAcc(acc) {
-        this.clearActiveAccount();
+        this.activeWalletAcc && this.activeWalletAcc.lock && this.activeWalletAcc.lock();
         this.activeWalletAcc = new account(acc);
     }
 
@@ -291,7 +294,7 @@ class _wallet {
             return {
                 id: this.activeWalletAcc.getId(),
                 entropy: this.activeWalletAcc.getEntropy(),
-                addr: this.activeWalletAcc.type === 'wallet' ? null : this.activeWalletAcc.getDefaultAddr(),
+                addr: this.activeWalletAcc.getDefaultAddr(),
                 name: this.activeWalletAcc.name,
             };
         }
