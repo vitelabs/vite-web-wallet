@@ -69,7 +69,6 @@ class walletAccount extends _walletAccount {
             receiveFailAction: this.receiveFail, 
             duration: -1
         });
-        console.log(this.unlockAcc);
         return !!this.unlockAcc;
     }
 
