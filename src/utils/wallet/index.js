@@ -381,6 +381,9 @@ function  _reSave() {
 
 function getAccFromId(id) {
     let list = acc.getList();
+    if (!list) {
+        return null;
+    }
     for(let i=0; i<list.length; i++) {
         if (list[i].id && list[i].id === id) {
             return list[i];

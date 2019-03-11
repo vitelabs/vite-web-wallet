@@ -45,6 +45,9 @@ const actions = {
         dispatch('stopLoopBalance');
         balanceInfoInst = new timer(() => {
             let account = wallet.getActiveAccount();
+            if (!account) {
+                return;
+            }
             if (account.type !== 'address') {
                 return commit('commitBalanceInfo', account.syncGetBalance());
             }
