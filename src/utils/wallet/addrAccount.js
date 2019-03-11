@@ -1,4 +1,5 @@
 import { addrAccount as _addrAccount } from '@vite/vitejs';
+import acc from './storeAcc.js';
 
 class addrAccount extends _addrAccount {
     constructor({
@@ -13,6 +14,23 @@ class addrAccount extends _addrAccount {
 
     getDefaultAddr() {
         return this.address;
+    }
+
+    save(name) {
+        let accList = acc.getList();
+        let i;
+        for (i=0; i<accList.length; i++) {
+            let acc = accList[i];
+            if (acc.id === this.id || acc.entropy === this.entropy || acc.addr === this.address) {
+                break;
+            }
+        }
+        if (i >= accList.length) {
+            return;
+        }
+
+        accList[i].name = name;
+        acc.add(accList[i]);
     }
 }
 
