@@ -2,6 +2,8 @@
     "lang": "中文",
     "start": "开始",
     "login": "登录账户",
+    "regAcc": "注册账户",
+    "dexToken": "交易所上币",
     "unlockAcc": "解锁当前账户",
     "changeAcc": "切换其他账户",
     "register": "注册",

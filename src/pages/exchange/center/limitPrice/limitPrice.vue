@@ -75,6 +75,8 @@ export default {
         float: right;
         font-size: 12px;
         color: rgba(94,104,117,1);
+        font-family: $font-normal, arial, sans-serif;
+        font-weight: 400;
     }
 }
 .ex-center-login {

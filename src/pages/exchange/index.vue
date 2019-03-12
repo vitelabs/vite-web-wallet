@@ -5,18 +5,18 @@
         <center v-if="active === 'exchange'"></center>
         <div class="order-wrapper" v-if="active === 'exchange'">
             <div class="order">
-                <div class="tap">
-                    <div
-                        @click="tap='openOrder'"
-                        :class="{active:tap==='openOrder'}"
-                    >{{$t('exchangeOpenOrders.title')}}</div>
-                    <div
-                        @click="tap='historyOrder'"
-                        :class="{active:tap==='historyOrder'}"
-                    >{{$t('exchangeOrderHistory.title')}}</div>
+                <div class="ex-tab-list">
+                    <div @click="tap='openOrder'" class="ex-tab __pointer" 
+                         :class="{'active': tap === 'openOrder'}">
+                        {{$t('exchangeOpenOrders.title')}}</div>
+                    <div @click="tap='historyOrder'" class="ex-tab __pointer" 
+                         :class="{'active': tap === 'historyOrder'}">
+                        {{$t('exchangeOrderHistory.title')}}</div>
                 </div>
-                <openOrder v-if="tap==='openOrder'" class="item" :filterObj="{ftoken:activeTxPair.ftoken,ttoken:activeTxPair.ttoken}" :isEmbed="true"></openOrder>
-                <historyOrder v-if="tap==='historyOrder'" class="item" :isEmbed="true" :filterObj="{ftoken:activeTxPair.ftoken,ttoken:activeTxPair.ttoken}"></historyOrder>
+                <openOrder v-if="tap==='openOrder'" class="item" :isEmbed="true"
+                           :filterObj="{ftoken:activeTxPair.ftoken,ttoken:activeTxPair.ttoken}"></openOrder>
+                <historyOrder v-if="tap==='historyOrder'" class="item" :isEmbed="true" 
+                              :filterObj="{ftoken:activeTxPair.ftoken,ttoken:activeTxPair.ttoken}"></historyOrder>
             </div>
         </div>
         <router-view></router-view>
@@ -30,9 +30,7 @@ import openOrder from './openOrders';
 
 export default {
     components: {
-        center,
-        openOrder,
-        historyOrder
+        center, openOrder, historyOrder
     },
     mounted() {
         this.$store.dispatch('startLoopExchangeRate');
@@ -64,6 +62,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "./center/center.scss";
+
 .exchange-center-wrapper {
     min-width: 1350px;
     display: flex;
@@ -98,7 +98,7 @@ export default {
             }
         }
         .item{
-            height: 411px;
+            height: 264px;
             margin: 0;
             padding:0;
         }
@@ -109,3 +109,15 @@ export default {
     }
 }
 </style>
+
+<style lang="scss">
+.exchange-center-wrapper .order {
+    .combine {
+        box-shadow: none;
+    }
+    .ex_tb {
+        box-shadow: none;
+    }
+}
+</style>
+
