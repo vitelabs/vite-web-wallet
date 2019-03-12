@@ -132,10 +132,10 @@ export default {
             white-space: nowrap;
             font-size: 20px;
             img {
-                width: 12px;
-                height: 12px;
-                border-radius: 12px;
-                margin-bottom: 1px;
+                width: 20px;
+                height: 20px;
+                border-radius: 20px;
+                margin-bottom: -3px;
             }
         }
         .line {
