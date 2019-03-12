@@ -1,7 +1,5 @@
-/**  pageConfig layout:index */
-
 <template>
-    <mnemonic title="mnemonic.restore" :submit="validMnemonic" :isLoading="isLoading">
+    <div>
         <div class="wrapper">
             <textarea v-model="mnemonic" :class="{
                 'center': !mnemonic
@@ -10,19 +8,23 @@
                 {{ errMsg === 'mnemonic.empty' || errMsg === 'mnemonic.error' || errMsg === 'hint.nodeErr' ? $t(errMsg) : errMsg }}
             </span>
         </div>
-    </mnemonic>
+
+        <create ref="createDom" :submit="validMnemonic"></create>
+
+        <div class="note">{{ $t('mnemonic.hint') }}</div>
+    </div>
 </template>
 
 <script>
-import mnemonic from 'components/mnemonic.vue';
+import create from './create.vue';
 
 export default {
     components: {
-        mnemonic
+        create
     },
     mounted() {
         this.$onKeyDown(13, () => {
-            this.validMnemonic();
+            this.valid();
         });
     },
     data() {
@@ -33,7 +35,10 @@ export default {
         };
     },
     methods: {
-        validMnemonic() {
+        valid() {
+            this.$refs.createDom && this.$refs.createDom.valid();                   
+        },
+        validMnemonic(name, pass) {
             if (this.isLoading) {
                 return;
             }
@@ -46,10 +51,7 @@ export default {
 
             this.isLoading = true;
             this.$wallet.restoreAddrs(mnemonic).then(()=>{
-                this.isLoading = false;
-                this.$router.push({
-                    name: 'startCreate'
-                });
+                this.restoreAccount(name, pass);
             }).catch(err => {
                 console.warn(err);
                 if (err && err.code === 500005) {
@@ -58,6 +60,27 @@ export default {
                     this.errMsg = 'hint.nodeErr';
                 }
                 this.isLoading = false;
+            });
+        },
+        restoreAccount(name, pass) {
+            this.isLoading = true;
+            this.$wallet.restoreAccount(name, pass).then(() => {
+                if (!this.isLoading) {
+                    return;
+                }
+                this.isLoading = false;
+
+                let activeAccount = this.$wallet.getActiveAccount();
+                activeAccount.rename(name);
+                activeAccount.save();
+
+                this.$router.push({
+                    name: 'start'
+                });
+            }).catch((err) => {
+                this.isLoading = false;
+                console.warn(err);
+                this.$toast(this.$t('hint.err'));
             });
         }
     }
@@ -68,7 +91,7 @@ export default {
 .wrapper {
     box-sizing: border-box;
     position: relative;
-    background: #F3F6F9;
+    background: #fff;
     border-radius: 3px;
     text-align: center;
     font-size: 14px;
@@ -76,8 +99,9 @@ export default {
     box-sizing: border-box;
     position: relative;
     padding: 20px;
-    height: 120px;
+    height: 100px;
     color: rgba(94,104,117,0.30);
+    margin-bottom: 20px;
     textarea {
         width: 100%;
         height: 100%;
@@ -86,7 +110,7 @@ export default {
         word-wrap: break-word;
         &.center {
             text-align: center;
-            line-height: 80px;
+            line-height: 60px;
         }
     }
     .msg {
@@ -94,5 +118,12 @@ export default {
         left: 0;
         bottom: 0;
     }
+}
+.note {
+    font-size: 14px;
+    color: #FFFFFF;
+    text-align: left;
+    line-height: 20px;
+    margin: 30px 0;
 }
 </style>

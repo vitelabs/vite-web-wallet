@@ -319,8 +319,8 @@ export default {
         height: 20px;
         width: 20px;
         cursor: pointer;
-        top: 25px;
-        right: 40px;
+        top: 10px;
+        right: 6px;
     }
 }
 @include rowWith {

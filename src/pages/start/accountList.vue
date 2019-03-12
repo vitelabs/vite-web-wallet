@@ -8,10 +8,6 @@
                 <div class="address __ellipsis">{{ account.showAddr }}</div>
             </div>
         </div>
-
-        <span class="__btn add-acc" @click="addAcc"> 
-            <img class="icon" src="../../assets/imgs/add_icon.svg"/>{{ $t('addAccount') }}
-        </span>
     </div>
 </template>
 
@@ -33,14 +29,6 @@ export default {
         return {
             accountList: list
         };
-    },
-    methods: {
-        addAcc() {
-            this.$wallet.clearActiveAccount();
-            this.$router.push({
-                name: 'startCreate'
-            });
-        }
     }
 };
 </script>
