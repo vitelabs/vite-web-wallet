@@ -66,7 +66,7 @@ export default {
         font-size: 14px;
         font-family: $font-bold, arial, sans-serif;
         font-weight: 600;
-        color: rgba(94, 104, 117, 1);
+        color: rgba(29,32,36,0.6);
         display: flex;
         flex-wrap: wrap;
         float: left;
@@ -74,13 +74,12 @@ export default {
             display: inline-block;
             box-sizing: border-box;
             height: 100%;
-            min-width: 112px;
-            padding: 0 28px;
-            text-align: center;
             white-space: nowrap;
+            margin-right: 28px;
+            text-align: center;
             &.active {
                 position: relative;
-                color: rgba(29, 32, 36, 1);
+                color: rgba(0,122,255,1);;
                 border-bottom: 2px solid rgba(0,122,255,1);
                 &:after {
                     content: '';
@@ -108,7 +107,6 @@ export default {
     .head .tab-list-wrapper .tab {
         box-sizing: border-box;
         padding: 0 10px;
-        flex-basis: 130px;
     }
 }
 
@@ -124,8 +122,4 @@ export default {
         float: left;
     }
 }
-</style>
-
-<style lang="scss">
-
 </style>

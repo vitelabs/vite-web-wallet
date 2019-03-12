@@ -30,7 +30,7 @@ export default {
     height: 100%;
 }
 .__wrapper {
-    padding: 40px;
+    padding: 30px;
 }
 
 @media only screen and (max-width: 850px) {
