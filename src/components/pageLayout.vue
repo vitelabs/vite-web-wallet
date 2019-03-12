@@ -5,8 +5,10 @@
 
         <div class="page-content" :class="{'page-scroll': active.indexOf('exchange') === 0}">
             <div class="page-scroll-wrapper">
-                <second-menu class="second-menu" v-show="secondMenuList && secondMenuList.length" 
-                             :tabList="secondMenuList"></second-menu>
+                <second-menu v-show="secondMenuList && secondMenuList.length" 
+                             class="second-menu" :tabList="secondMenuList"
+                             :class="{'have-padding': active.indexOf('exchange') !== 0}">
+                </second-menu>
                 <div class="page-wrapper">
                     <slot></slot>
                 </div>
@@ -151,6 +153,9 @@ export default {
             display: flex;
             flex-direction: column;
             height: 100%;
+        }
+        .second-menu.have-padding {
+            margin: 0 30px;
         }
         &.page-scroll {
             overflow: auto;

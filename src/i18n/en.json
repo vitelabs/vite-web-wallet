@@ -225,6 +225,8 @@
         "maxAmt": "Withdraw amount should be in (0, {amount}]",
         "cancelLimitAmt": "Staking amount cannot be less than {num}",
         "withdrawalStaking": "Withdrawal of Staked Token",
+        "VX": "挖矿VX",
+        "myAddr": "我的",
         "confirm": {
             "help": {
                 "t1": "What is Quota?",

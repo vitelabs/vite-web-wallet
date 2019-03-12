@@ -225,6 +225,8 @@
         "maxAmt": "取回金额应在 (0,{amount}] 之内",
         "cancelLimitAmt": "抵押金额不能小于{num}",
         "withdrawalStaking": "取回抵押",
+        "VX": "挖矿VX",
+        "myAddr": "我的",
         "confirm": {
             "help": {
                 "t1": "什么是配额",
