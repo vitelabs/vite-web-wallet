@@ -2,6 +2,8 @@
     "lang": "EN",
     "start": "Start",
     "login": "Log In",
+    "unlockAcc": "解锁当前账户",
+    "changeAcc": "切换其他账户",
     "register": "Sign Up",
     "createAcc": "Create",
     "settingAcc": "Setting Account",
@@ -47,15 +49,15 @@
         "11": "MintageTransferOwner",
         "12": "MintageChangeTokenType",
         "13": "MintageCancelPledge",
-        "14": "DexFundUserDeposit",
-        "15": "DexFundUserWithdraw",
-        "16": "DexFundNewOrder",
-        "17": "DexTradeCancelOrder",
+        "14": "ViteX充币",
+        "15": "ViteX提币",
+        "16": "ViteX挂单",
+        "17": "ViteX撤单",
         "18": "CreateContractReq",
-        "19": "转账",
-        "20": "转账",
-        "21": "转账",
-        "22": "转账"
+        "19": "Transfer",
+        "20": "Transfer",
+        "21": "Transfer",
+        "22": "Transfer"
     },
     "btn": {
         "cancel": "Cancel",
@@ -99,7 +101,8 @@
     "pwdConfirm": {
         "conf": "Open password-free mode within 5 minutes",
         "title": "Password",
-        "placeholder": "Please input password of wallet"
+        "placeholder": "Please input password of wallet",
+        "unlockAcc": "请输入密码解锁 {name} 账户"
     },
     "quotaConfirmCancel": {
         "title": "Insufficient Quota",
