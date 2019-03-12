@@ -1,22 +1,39 @@
 <template>
     <div class="logout">
         <div class="text">{{ $t('exchange.limitPrice.text') }}</div>
-        <div class="btn btn-login __pointer" @click="login">{{ $t('login') }}</div>
-        <div class="btn btn-register __pointer" @click="register">{{ $t('register') }}</div>
+        <div class="btn btn-login __pointer" @click="leftClick">{{ isHaveUsers ? $t('unlockAcc') : $t('login')  }}</div>
+        <div class="btn btn-register __pointer" @click="rightClick">{{ isHaveUsers ? $t('changeAcc') : $t('register') }}</div>
     </div>
 </template>
         
 <script>
 export default {
+    data() {
+        let activeAccount = this.$wallet.getActiveAccount();
+        return {
+            isHaveUsers: !!activeAccount
+        };
+    },
     methods: {
-        login() {
+        leftClick() {
+            if (!this.isHaveUsers) {
+                this.$router.push({
+                    name: 'start'
+                });
+                return;
+            }
+            let activeAccount = this.$wallet.getActiveAccount();
+            activeAccount.initPwd({});
+        },
+        rightClick() {
+            if (!this.isHaveUsers) {
+                this.$router.push({
+                    name: 'startCreate'
+                });
+                return;
+            }
             this.$router.push({
                 name: 'start'
-            });
-        },
-        register() {
-            this.$router.push({
-                name: 'startCreate'
             });
         }
     }

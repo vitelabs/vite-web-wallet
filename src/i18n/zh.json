@@ -2,6 +2,8 @@
     "lang": "中文",
     "start": "开始",
     "login": "登录账户",
+    "unlockAcc": "解锁当前账户",
+    "changeAcc": "切换其他账户",
     "register": "注册",
     "createAcc": "新建账户",
     "settingAcc": "设置账户",
@@ -47,10 +49,10 @@
         "11": "MintageTransferOwner",
         "12": "MintageChangeTokenType",
         "13": "MintageCancelPledge",
-        "14": "DexFundUserDeposit",
-        "15": "DexFundUserWithdraw",
-        "16": "DexFundNewOrder",
-        "17": "DexTradeCancelOrder",
+        "14": "ViteX充币",
+        "15": "ViteX提币",
+        "16": "ViteX挂单",
+        "17": "ViteX撤单",
         "18": "CreateContractReq",
         "19": "转账",
         "20": "转账",
@@ -99,7 +101,8 @@
     "pwdConfirm": {
         "conf": "开启5分钟内免密操作",
         "title": "输入钱包密码",
-        "placeholder": "请输入钱包密码"
+        "placeholder": "请输入钱包密码",
+        "unlockAcc": "请输入密码解锁 {name} 账户"
     },
     "quotaConfirmCancel": {
         "title": "配额不足",

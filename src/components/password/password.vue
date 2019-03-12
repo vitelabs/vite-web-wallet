@@ -1,5 +1,5 @@
 <template>
-    <confirm :title="title || $t('pwdConfirm.title')" 
+    <confirm :title="pwdTitle" 
              :content="content" :showMask="showMask" :btnUnuse="isLoading"
              :leftBtnTxt="cancelTxt || $t('btn.cancel')" :rightBtnTxt="submitTxt || $t('btn.submit')"
              :leftBtnClick="exchange?_submit:_cancle"  :rightBtnClick="exchange?_cancle:_submit">
@@ -65,12 +65,25 @@ export default {
         }
     },
     data() {
+        let activeAccount = this.$wallet.getActiveAccount();
+
         return {
             isShowPWDHold: !window.isShowPWD,
             password: '',
             isPwdHold: false,
-            isLoading: false
+            isLoading: false,
+            isLogin: activeAccount && activeAccount.isLogin
         };
+    },
+    computed: {
+        pwdTitle() {
+            if (this.isLogin) {
+                return this.title || this.$t('pwdConfirm.title');
+            }
+            let activeAccount = this.$wallet.getActiveAccount();
+            let name = activeAccount ? activeAccount.getName() : '';
+            return this.$t('pwdConfirm.unlockAcc', { name });
+        }
     },
     methods: {
         clear() {
