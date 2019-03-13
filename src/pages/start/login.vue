@@ -39,21 +39,23 @@
                        v-model="password" :type="'password'"
                        @focus="inputFocus('pass')" @blur="inputBlur('pass')" />
             </div>
-        </div>
 
-        <restore ref="restoreDom" v-show="!isShowExisting"></restore>
-
-        <div class="__btn_list">
-            <span class="__btn __btn_border __pointer" @click="addAcc" >
-                {{ $t('addAccount') }}
-            </span>
-            <div class="__btn __btn_all_in __pointer" @click="login">
-                <span v-show="!isLoading">
-                    {{ isShowExisting ? $t('btn.login') : $t('startCreate.finish') }}
+            <div class="__btn_list">
+                <span class="__btn __btn_border __pointer" @click="addAcc" >
+                    {{ $t('addAccount') }}
                 </span>
-                <loading v-show="isLoading" loadingType="dot"></loading>
+                <div class="__btn __btn_all_in __pointer" @click="login">
+                    <span v-show="!isLoading">
+                        {{ isShowExisting ? $t('btn.login') : $t('startCreate.finish') }}
+                    </span>
+                    <loading v-show="isLoading" loadingType="dot"></loading>
+                </div>
             </div>
         </div>
+
+        <restore ref="restoreDom" v-show="!isShowExisting"
+                 :leftClick="addAcc" leftTxt="createAcc"
+                 :finishCb="showExisting"></restore>
     </div>
 </template>
 
@@ -90,7 +92,18 @@ export default {
             isShowExisting: true
         };
     },
+    watch: {
+        isShowExisting: function() {
+            if (!this.isShowExisting) {
+                return;
+            }
+            this.activeAccount = this.getLoginAcc();
+        }
+    },
     methods: {
+        showExisting() {
+            this.isShowExisting = true;
+        },
         toggleShowExisting() {
             this.isShowExisting = !this.isShowExisting;
         },
