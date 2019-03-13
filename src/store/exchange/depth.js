@@ -45,8 +45,7 @@ const actions = {
                 ftoken: activeTxPair.ftoken,
                 ttoken: activeTxPair.ttoken
             }).then((data) => {
-                cb && cb();
-                commit('exSetDepthBuy', data);
+                cb && cb(data || []);
             }).catch(err => {
                 console.warn(err);
                 cb && cb();
@@ -55,7 +54,12 @@ const actions = {
 
         // Init
         commit('exSetDepthBuyLoading', true);
-        _f(() => {
+        _f((data) => {
+            let _activeTxPair = rootState.exchangeActiveTxPair.activeTxPair;
+            if (_activeTxPair.pairCode !== activeTxPair.pairCode) {
+                return;
+            }
+            data && commit('exSetDepthBuy', data);
             commit('exSetDepthBuyLoading', false);
         });
 
@@ -74,8 +78,7 @@ const actions = {
                 ftoken: activeTxPair.ftoken,
                 ttoken: activeTxPair.ttoken
             }).then((data) => {
-                cb && cb();
-                commit('exSetDepthSell', data);
+                cb && cb(data || []);
             }).catch(err => {
                 console.warn(err);
                 cb && cb();
@@ -84,7 +87,12 @@ const actions = {
 
         // Init
         commit('exSetDepthSellLoading', true);
-        _f(() => {
+        _f((data) => {
+            let _activeTxPair = rootState.exchangeActiveTxPair.activeTxPair;
+            if (_activeTxPair.pairCode !== activeTxPair.pairCode) {
+                return;
+            }
+            data && commit('exSetDepthSell', data);
             commit('exSetDepthSellLoading', false);
         });
 
