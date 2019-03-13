@@ -91,6 +91,7 @@ export default {
         height: 100%;
         opacity: 0.136;
         border: 1px solid rgba(212,222,231,1);
+        margin: 0 6px;
     }
 }
 </style>

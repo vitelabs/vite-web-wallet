@@ -1,43 +1,46 @@
 <template>
     <div class="ex_tb">
         <div class="head-row">
-            <div
-                v-for="(h) in $t('exchangeOpenOrders.table.heads')"
-                :key="h"
-            >{{h}}
+            <div v-for="(h) in $t('exchangeOpenOrders.table.heads')" :key="h">
+                {{ h }}
             </div>
-            <div></div>
         </div>
         <div class="row-container">
-            <div
-                class="row"
-                v-for="v in sortedList"
-                :key="v.orderId"
-            >
-                <div>{{(new Date(v.date*1000)).toLocaleString()}}</div>
-                <div>{{`${v.ftokenShow}/${v.ttokenShow}`}}</div>
-                <!-- //0:buy,1:sell -->
-                <div :class="{buy:v.side===0,sell:v.side===1}">{{$t("exchangeOrderHistory.side")[v.side]}}</div>
-                <div>{{v.price}} {{v.ttokenShow}}</div>
-                <div>{{v.quantity}} {{v.ftokenShow}}</div>
-                <div>{{v.filledQ}} {{v.ftokenShow}}</div>
-                <div>{{`${(v.rate*100).toFixed(2)}%`}}</div>
-                <div>{{v.average}} {{v.ttokenShow}}</div>
-                <div
-                    @click="cancel(v)"
-                    class="click-able"
-                >{{$t("exchangeOpenOrders.table.rowMap.cancel")}}</div>
+            <div class="row" v-for="v in sortedList" :key="v.orderId">
+                <div>{{ (new Date(v.date*1000)).toLocaleString() }}</div>
+                <div>{{ `${v.ftokenShow}/${v.ttokenShow}` }}</div>
+                <div :class="{
+                    'buy': v.side===0,
+                    'sell': v.side===1
+                }">{{ $t("exchangeOrderHistory.side")[v.side] }}</div>
+                <div>{{ v.price + ' ' + v.ttokenShow }}</div>
+                <div>{{ v.quantity + ' ' + v.ftokenShow }}</div>
+                <div>{{ v.filledQ + ' ' + v.ftokenShow }}</div>
+                <div>{{ `${(v.rate*100).toFixed(2)}%` }}</div>
+                <div>{{ v.average + ' ' + v.ttokenShow }}</div>
+                <div @click="cancel(v)" class="click-able">
+                    {{ $t("exchangeOpenOrders.table.rowMap.cancel") }}
+                </div>
+            </div>
+            <div class="no-data" v-show="!sortedList || !sortedList.length">
+                <div>{{ $t('hint.noData') }}</div>
             </div>
         </div>
         <powProcess ref="pow"></powProcess>
     </div>
 </template>
+
 <script>
 import { order, cancelOrder } from 'services/exchange';
 import powProcess from 'components/powProcess';
 import { timer } from 'utils/asyncFlow';
+
 const VoteDifficulty = '201564160';
+
 export default {
+    components: { 
+        powProcess 
+    },
     props: {
         filterObj: {
             type: Object,
@@ -58,7 +61,6 @@ export default {
             timer:null
         };
     },
-    components: { powProcess },
     methods: {
         update() {
             this.acc = this.$wallet.getActiveAccount();
@@ -158,8 +160,10 @@ export default {
     }
 };
 </script>
+
 <style lang="scss" scoped>
 @import "../components/table.scss";
+
 .ex_tb {
     height: 100%;
     margin-bottom: 10px;

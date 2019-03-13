@@ -2,18 +2,23 @@
     <div class="head">
         <ul class="tab-list-wrapper">
             <li v-for="(tab, index) in tabList" :key="index" 
-                class="tab __pointer" :class="{ 'active': active === tab }"
-                @click="goTab(tab)" >
+                class="tab __pointer" :class="{ 
+                    'active': active === tab,
+                    'dex': active.indexOf('exchange') === 0
+            }" @click="goTab(tab)" >
                 {{ $t(`${tab}.title`) }}
             </li>
         </ul>
         
         <go-net-btn class="go-net-wrapper"></go-net-btn>
-        <change-lang class="menu change-lang-wrapper"></change-lang>
+        <change-lang class="menu change-lang-wrapper" 
+                     :class="{'dex': active.indexOf('exchange') === 0}"></change-lang>
         <ul class="right-lab-list">
-            <div v-show="!isLogin" @click="goTab('start')" class="tab __pointer">{{ $t('login') }}</div>  
-            <div v-show="!isLogin" @click="goTab('startCreate')" class="tab __pointer">{{ $t('regAcc') }}</div>  
-            <div v-show="active === 'exchange'" class="tab __pointer">{{ $t('dexToken') }}</div>
+            <div v-show="!isLogin" @click="goTab('start')" class="tab __pointer" 
+                 :class="{'dex': active.indexOf('exchange') === 0}">{{ $t('login') }}</div>  
+            <div v-show="!isLogin" @click="goTab('startCreate')" class="tab __pointer"
+                 :class="{'dex': active.indexOf('exchange') === 0}">{{ $t('regAcc') }}</div>  
+            <div v-show="active === 'exchange'" class="tab dex __pointer">{{ $t('dexToken') }}</div>
         </ul>
     </div>
 </template>
@@ -95,6 +100,9 @@ export default {
         white-space: nowrap;
         margin-right: 28px;
         text-align: center;
+        &.dex {
+            color: rgba(189,193,209,1);
+        }
         &.active {
             position: relative;
             color: rgba(0,122,255,1);;

@@ -13,14 +13,14 @@
     border-radius: 2px;
     background: #fff;
     font-size: 12px;
-    box-shadow:0px 2px 48px 1px rgba(176, 192, 237, 0.42);
+    box-shadow: 0px 2px 10px 1px rgba(176,192,237,0.42);
     .head-row {
         position: absolute;
         top: 0;
         height: 40px;
         width: 100%;
         box-sizing: border-box;
-        font-weight:400;
+        font-weight: 400;
         font-family: $font-normal, arial, sans-serif;
         display: flex;
         justify-content: space-between;
@@ -77,6 +77,24 @@
             &:last-child {
                 justify-content: flex-end;
             }
+        }
+    }
+    .no-data {
+        width: 100%;
+        padding: 35px 0 25px;
+        font-size: 12px;
+        font-family: $font-normal, arial, sans-serif;
+        font-weight: 400;
+        color: rgba(94,104,117,0.58);
+        line-height: 16px;
+        text-align: center;
+        &:before {
+            display: inline-block;
+            margin-bottom: 16px;
+            content: ' ';
+            width: 60px;
+            height: 60px;
+            background: url('~assets/imgs/dexEmpty.svg') 100% 100%;
         }
     }
 }
