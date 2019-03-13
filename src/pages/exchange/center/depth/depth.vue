@@ -1,16 +1,21 @@
 <template>
     <div class="depth-wrapper">
-        <div class="ex-tab-list"> 
-            <span class="ex-tab __pointer" 
-                  :class="{'active': isShowSell && isShowBuy}" 
-                  @click="showTable(true, true)">{{ $t('exchange.depth.all') }}</span>
-            <span class="ex-tab __pointer" 
-                  :class="{'active': isShowBuy && !isShowSell}" 
-                  @click="showTable(true, false)">{{ $t('exchange.depth.buy') }}</span>
-            <span class="ex-tab __pointer" 
-                  :class="{'active': isShowSell && !isShowBuy}" 
-                  @click="showTable(false, true)">{{ $t('exchange.depth.sell') }}</span>
-        </div>
+        <ul class="ex-tab-list"> 
+            <li :class="{
+                    'active': isShowSell && isShowBuy
+                }" class="ex-tab __pointer" 
+                @click="showTable(true, true)">{{ $t('exchange.depth.all') }}</li>
+            <li :class="{
+                    'active': isShowBuy && !isShowSell,
+                    'active-side': isShowSell && isShowBuy
+                }" class="ex-tab __pointer" 
+                @click="showTable(true, false)">{{ $t('exchange.depth.buy') }}</li>
+            <li :class="{
+                    'active': isShowSell && !isShowBuy,
+                    'active-side': isShowBuy && !isShowSell
+                }" class="ex-tab __pointer" 
+                @click="showTable(false, true)">{{ $t('exchange.depth.sell') }}</li>
+        </ul>
 
         <div class="__center-tb-title">
             <span class="__center-tb-item depth price">{{ $t('exchange.priceTitle', { 

@@ -51,6 +51,7 @@ export default {
         height: 24px;
         border-radius: 24px;
         margin-bottom: 19px;
+        margin-right: 0;
     }
     .default {
         border: 2px solid #68D2FF;

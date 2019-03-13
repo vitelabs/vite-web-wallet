@@ -2,13 +2,24 @@
     <div class="head">
         <ul class="tab-list-wrapper">
             <li v-for="(tab, index) in tabList" :key="index" 
-                class="tab __pointer" :class="{ 'active': active === tab }"
-                @click="goTab(tab)" >
+                class="tab __pointer" :class="{ 
+                    'active': active === tab,
+                    'dex': active.indexOf('exchange') === 0
+            }" @click="go(tab)" >
                 {{ $t(`${tab}.title`) }}
             </li>
         </ul>
+        
         <go-net-btn class="go-net-wrapper"></go-net-btn>
-        <change-lang class="menu change-lang-wrapper"></change-lang>
+        <change-lang class="menu change-lang-wrapper" 
+                     :class="{'dex': active.indexOf('exchange') === 0}"></change-lang>
+        <ul class="right-lab-list">
+            <div v-show="!isLogin" @click="go('start')" class="tab __pointer" 
+                 :class="{'dex': active.indexOf('exchange') === 0}">{{ $t('login') }}</div>  
+            <div v-show="!isLogin" @click="go('startCreate')" class="tab __pointer"
+                 :class="{'dex': active.indexOf('exchange') === 0}">{{ $t('regAcc') }}</div>  
+            <div v-show="active === 'exchange'" class="tab dex __pointer">{{ $t('dexToken') }}</div>
+        </ul>
     </div>
 </template>
 
@@ -26,28 +37,29 @@ export default {
             default: () => {
                 return [];
             }
+        },
+        go: {
+            type: Function,
+            default: () => {}
         }
     },
     mounted() {
         this.$router.afterEach((to)=>{
             this.active = to.name;
         });
+        this.isLogin = !!this.$wallet.isLogin;
+        this.$wallet.onLogin(() => {
+            this.isLogin = true;
+        });
+        this.$wallet.onLogout(() => {
+            this.isLogin = false;
+        });
     },
     data() {
         return {
-            active: this.$route.name
+            active: this.$route.name,
+            isLogin: false
         };
-    },
-    methods: {
-        goTab(tab) {
-            if (tab === this.active) {
-                return;
-            }
-
-            this.$router.push({ 
-                name: tab
-            });
-        }
     }
 };
 </script>
@@ -63,35 +75,40 @@ export default {
     border-bottom: 1px solid rgba(198, 203, 212, 0.3);
     .tab-list-wrapper {
         display: block;
-        font-size: 14px;
-        font-family: $font-bold, arial, sans-serif;
-        font-weight: 600;
-        color: rgba(94, 104, 117, 1);
         display: flex;
         flex-wrap: wrap;
         float: left;
-        .tab {
-            display: inline-block;
-            box-sizing: border-box;
-            height: 100%;
-            min-width: 112px;
-            padding: 0 28px;
-            text-align: center;
-            white-space: nowrap;
-            &.active {
-                position: relative;
-                color: rgba(29, 32, 36, 1);
-                border-bottom: 2px solid rgba(0,122,255,1);
-                &:after {
-                    content: '';
-                    display: inline-block;
-                    border: 6px solid transparent;
-                    border-bottom: 6px solid rgba(0,122,255,1);
-                    position: absolute;
-                    bottom: 0px;
-                    left: 50%;
-                    margin-left: -6px;
-                }
+    }
+    .right-lab-list {
+        float: right;
+    }
+    .tab {
+        font-size: 14px;
+        font-family: $font-bold, arial, sans-serif;
+        font-weight: 600;
+        color: rgba(29,32,36,0.6);
+        display: inline-block;
+        box-sizing: border-box;
+        height: 100%;
+        white-space: nowrap;
+        margin-right: 28px;
+        text-align: center;
+        &.dex {
+            color: rgba(189,193,209,1);
+        }
+        &.active {
+            position: relative;
+            color: rgba(0,122,255,1);;
+            border-bottom: 2px solid rgba(0,122,255,1);
+            &:after {
+                content: '';
+                display: inline-block;
+                border: 6px solid transparent;
+                border-bottom: 6px solid rgba(0,122,255,1);
+                position: absolute;
+                bottom: 0px;
+                left: 50%;
+                margin-left: -6px;
             }
         }
     }
@@ -104,14 +121,6 @@ export default {
     }
 }
 
-@media only screen and (max-width: 900px) {
-    .head .tab-list-wrapper .tab {
-        box-sizing: border-box;
-        padding: 0 10px;
-        flex-basis: 130px;
-    }
-}
-
 @media only screen and (max-width: 940px) {
     .head .tab-list-wrapper {
         width: 100%;
@@ -120,12 +129,20 @@ export default {
         float: left;
         margin-left: 20px;
     }
-    .head .go-net-wrapper {
-        float: left;
+    .head {
+        .go-net-wrapper {
+            float: left;
+        }
+        .right-lab-list {
+            float: left;
+        }
     }
 }
-</style>
 
-<style lang="scss">
-
+@media only screen and (max-width: 900px) {
+    .head .tab-list-wrapper .tab {
+        box-sizing: border-box;
+        padding: 0 10px;
+    }
+}
 </style>

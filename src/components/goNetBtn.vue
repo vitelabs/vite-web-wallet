@@ -18,8 +18,8 @@ export default {
 
 .other-prod {
     display: inline-block;
-    background: #EDF1FF;
     border-radius: 2px;
+    border: 1px solid rgba(0,122,255,0.7);
     padding: 6px 10px;
     font-family: $font-bold, arial, sans-serif;
     font-size: 14px;

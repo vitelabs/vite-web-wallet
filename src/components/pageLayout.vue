@@ -5,8 +5,10 @@
 
         <div class="page-content" :class="{'page-scroll': active.indexOf('exchange') === 0}">
             <div class="page-scroll-wrapper">
-                <second-menu class="second-menu" v-show="secondMenuList && secondMenuList.length" 
-                             :tabList="secondMenuList"></second-menu>
+                <second-menu v-show="secondMenuList && secondMenuList.length" 
+                             :go="go" class="second-menu" :tabList="secondMenuList"
+                             :class="{'have-padding': active.indexOf('exchange') !== 0}">
+                </second-menu>
                 <div class="page-wrapper">
                     <slot></slot>
                 </div>
@@ -63,12 +65,17 @@ export default {
     },
     computed: {
         secondMenuList() {
-            if (this.active.indexOf('wallet') === 0) {
-                return ['wallet', 'walletQuota', 'walletSBP', 'walletVote', 'walletTransList', 'walletConversion'];
-            } else if (this.active.indexOf('exchange') === 0) {
+            if (this.active.indexOf('exchange') === 0) {
                 return ['exchange', 'exchangeAssets', 'exchangeOpenOrders', 'exchangeOrderHistory'];
             }
-            return [];
+            if (this.active.indexOf('wallet') !== 0) {
+                return [];
+            }
+            let list = ['wallet', 'walletQuota', 'walletSBP', 'walletVote', 'walletTransList'];
+
+            let activeAccount = this.$wallet.getActiveAccount();
+            this.isLogin && activeAccount.type === 'wallet' && list.push('walletConversion');
+            return list;
         }
     },
     methods: {
@@ -93,7 +100,19 @@ export default {
                 return;
             }
 
-            (this.active !== name) && this.$router.push({ name });
+            if (this.active === name) {
+                return;
+            }
+
+            let account = this.$wallet.getActiveAccount();
+            if (!account && name !== 'setting') {
+                this.$router.push({
+                    name: 'start'
+                });
+                return;
+            }
+            
+            this.$router.push({ name });
         },
 
         clearAutoLogout() {
@@ -134,6 +153,9 @@ export default {
             display: flex;
             flex-direction: column;
             height: 100%;
+        }
+        .second-menu.have-padding {
+            margin: 0 30px;
         }
         &.page-scroll {
             overflow: auto;

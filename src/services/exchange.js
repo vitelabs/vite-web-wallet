@@ -1,8 +1,7 @@
 import request from 'utils/request';
 import { wallet } from 'utils/walletInstance';
-import { utils } from '@vite/vitejs';
+import { privToAddr } from '@vite/vitejs';
 
-const privToAddr = utils.address.privToAddr;
 const path = '/api/v1';
 
 // export const DexFund_Addr = 'vite_000000000000000000000000000000000000000617d47459a8';

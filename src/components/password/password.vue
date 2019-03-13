@@ -1,6 +1,6 @@
 <template>
-    <confirm :title="title || $t('pwdConfirm.title')" 
-             :content="content" :showMask="showMask"
+    <confirm :title="pwdTitle" 
+             :content="content" :showMask="showMask" :btnUnuse="isLoading"
              :leftBtnTxt="cancelTxt || $t('btn.cancel')" :rightBtnTxt="submitTxt || $t('btn.submit')"
              :leftBtnClick="exchange?_submit:_cancle"  :rightBtnClick="exchange?_cancle:_submit">
         <form autocomplete="off" v-show="isShowPWD" class="pass-input" :class="{
@@ -65,11 +65,25 @@ export default {
         }
     },
     data() {
+        let activeAccount = this.$wallet.getActiveAccount();
+
         return {
             isShowPWDHold: !window.isShowPWD,
             password: '',
-            isPwdHold: false
+            isPwdHold: false,
+            isLoading: false,
+            isLogin: activeAccount && activeAccount.isLogin
         };
+    },
+    computed: {
+        pwdTitle() {
+            if (this.isLogin) {
+                return this.title || this.$t('pwdConfirm.title');
+            }
+            let activeAccount = this.$wallet.getActiveAccount();
+            let name = activeAccount ? activeAccount.getName() : '';
+            return this.$t('pwdConfirm.unlockAcc', { name });
+        }
     },
     methods: {
         clear() {
@@ -110,11 +124,30 @@ export default {
                     this.$toast( this.$t('hint.pwErr') );
                     return false;
                 }
-
+                
                 this.isPwdHold && activeAccount.holdPWD(password, holdTime);
                 this.clear();
                 this.submit && this.submit();
             };
+
+            if (!activeAccount.isLogin) {
+                this.isLoading = true;
+                this.$wallet.login({
+                    id: activeAccount.getId(), 
+                    entropy: activeAccount.getEntropy(), 
+                    addr: activeAccount.getDefaultAddr()
+                }, password).then(() => {
+                    this.isLoading = false;
+                    activeAccount = this.$wallet.getActiveAccount();
+                    let result = activeAccount.unlock();
+                    deal(result);
+                }).catch((err) => {
+                    this.isLoading = false;
+                    console.warn(err);
+                    deal(false);
+                });
+                return;
+            }
 
             activeAccount.verify(password).then((result) => {
                 deal(result);

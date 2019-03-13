@@ -28,14 +28,7 @@ export default {
         this.$router.afterEach(to => {
             this.active = to.name;
         });
-
-        // Listen login status to loopBalance
-        this.$wallet.onLogin(() => {
-            this.$store.dispatch('startLoopBalance');
-        });
-        this.$wallet.onLogout(() => {
-            this.$store.dispatch('stopLoopBalance');
-        });
+        this.$store.dispatch('startLoopBalance');
     },
     data() {
         return {

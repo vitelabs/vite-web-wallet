@@ -53,7 +53,7 @@ export default {
             copySuccess: false,
             qrcode: null,
             qrcodeShow: false,
-            getTestTokenAble:true
+            getTestTokenAble: true
         };
     },
     mounted() {

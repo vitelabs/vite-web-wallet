@@ -1,5 +1,3 @@
-/**  vite-wallet login */
-
 <template>
     <div class="vote __wrapper">
         <powProcess ref="pow"></powProcess>
@@ -167,7 +165,7 @@ export default {
                 return;
             }
 
-            const activeAccount = this.$wallet.getActiveAccount();
+            let activeAccount = this.$wallet.getActiveAccount();
 
             const successCancel = () => {
                 const t = Object.assign({}, v);
@@ -202,6 +200,7 @@ export default {
             };
             
             const sendCancel = () => {
+                activeAccount = this.$wallet.getActiveAccount();
                 activeAccount.revokeVoting({
                     tokenId: this.tokenInfo.tokenId
                 }).then(successCancel).catch(failCancel);
@@ -219,7 +218,7 @@ export default {
             );
         },
         vote(v) {
-            const activeAccount = this.$wallet.getActiveAccount();
+            let activeAccount = this.$wallet.getActiveAccount();
             
             const successVote = () => {
                 const t = Object.assign({}, v);
@@ -258,6 +257,7 @@ export default {
             };
 
             const sendVote = () => {
+                activeAccount = this.$wallet.getActiveAccount();
                 activeAccount.voting({ 
                     nodeName: v.name, 
                     tokenId: this.tokenInfo.tokenId 

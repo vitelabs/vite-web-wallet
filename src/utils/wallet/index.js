@@ -1,4 +1,4 @@
-import { utils, constant } from '@vite/vitejs';
+import { hdAddr as _hdAddr, keystore as _keystore, utils, constant } from '@vite/vitejs';
 import vitecrypto from 'testwebworker';
 import statistics from 'utils/statistics';
 import storage from 'utils/localStorage.js';
@@ -6,9 +6,7 @@ import storage from 'utils/localStorage.js';
 import account from './account.js';
 import acc from './storeAcc.js';
 
-const { type } = constant;
-const _keystore = utils.keystore;
-const _hdAddr = utils.address.hdAddr;
+const { LangList } = constant;
 const _tools = utils.tools;
 
 const LAST_KEY = 'ACC_LAST';
@@ -19,9 +17,9 @@ class _wallet {
         this.isLogin = false;
         this.onLoginList = [];
         this.onLogoutList = [];
-        this.lastPage = '';    
+        this.lastPage = ''; 
 
-        console.log(this.getLast());
+        this.setLastActiveAcc();
     }
 
     setLastPage(name) {
@@ -41,15 +39,29 @@ class _wallet {
             return;
         }
         this.activeWalletAcc.lock && this.activeWalletAcc.lock();
-        this.activeWalletAcc = null;
+        this.setLastActiveAcc();
     }
 
+    setLastActiveAcc() {
+        let lastAccount = this.getLast();
+        if (!lastAccount) {
+            return;
+        }
+
+        this.newActiveAcc({
+            type: 'address',
+            address: lastAccount.addr,
+            name: lastAccount.name,
+            id: lastAccount.id,
+            entropy: lastAccount.entropy
+        });
+    }
     newActiveAcc(acc) {
-        this.clearActiveAccount();
+        this.activeWalletAcc && this.activeWalletAcc.lock && this.activeWalletAcc.lock();
         this.activeWalletAcc = new account(acc);
     }
 
-    create(name, pass, lang = type.LangList.english) {
+    create(name, pass, lang = LangList.english) {
         let err = _tools.checkParams({ name, pass }, ['name', 'pass']);
         if (err) {
             console.error(new Error(err));
@@ -79,7 +91,7 @@ class _wallet {
         return keystore.hexaddress;
     }
 
-    restoreAddrs(mnemonic, lang = type.LangList.english) {
+    restoreAddrs(mnemonic, lang = LangList.english) {
         let num = 10;
         let addrs = _hdAddr.getAddrsFromMnemonic(mnemonic, 0, num, lang);
         if (!addrs) {
@@ -154,7 +166,8 @@ class _wallet {
             return Promise.reject(false);
         }
         if (addr && !entropy && !id) {
-            return this._loginKeystoreAcc(addr, pass);
+            this.isLogin = this._loginKeystoreAcc(addr, pass);
+            return this.isLogin;
         }
         return this._loginWalletAcc({
             id, entropy, pass
@@ -187,6 +200,10 @@ class _wallet {
                 keystore,
                 privateKey: privKey,
                 type: 'keystore'
+            });
+            setLast({
+                addr,
+                name: acc.name
             });
             return true;
         }
@@ -239,7 +256,7 @@ class _wallet {
             return false;
         }
 
-        let lang = acc.lang || type.LangList.english;
+        let lang = acc.lang || LangList.english;
         let mnemonic = _hdAddr.getMnemonicFromEntropy(decryptEntropy, lang);
         let defaultInx = +acc.defaultInx > 10 || +acc.defaultInx < 0 ? 0 : +acc.defaultInx;
 
@@ -277,7 +294,7 @@ class _wallet {
             return {
                 id: this.activeWalletAcc.getId(),
                 entropy: this.activeWalletAcc.getEntropy(),
-                addr: this.activeWalletAcc.type === 'wallet' ? null : this.activeWalletAcc.getDefaultAddr(),
+                addr: this.activeWalletAcc.getDefaultAddr(),
                 name: this.activeWalletAcc.name,
             };
         }
@@ -343,7 +360,7 @@ function  _reSave() {
         keystore = JSON.parse(keystore);
 
         let mnemonic = _hdAddr.getMnemonicFromEntropy(entropy);
-        item.lang = type.LangList.english;
+        item.lang = LangList.english;
         item.id = _hdAddr.getId(mnemonic);
         item.encryptObj = keystore;
 
@@ -364,6 +381,9 @@ function  _reSave() {
 
 function getAccFromId(id) {
     let list = acc.getList();
+    if (!list) {
+        return null;
+    }
     for(let i=0; i<list.length; i++) {
         if (list[i].id && list[i].id === id) {
             return list[i];

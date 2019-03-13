@@ -21,10 +21,13 @@
             <div class="item">
                 <div class="title">
                     {{ $t('walletQuota.beneficialAddr') }}
-                    <span v-show="!isValidAddress" class="err">{{ $t('hint.addrFormat') }}</span>
+                    <span v-show="!isValidAddress" class="err no-right">{{ $t('hint.addrFormat') }}</span>
+                    <span @click="addToAddr('mine')" class="toaddr __pointer">{{ $t('walletQuota.myAddr') }}</span>
+                    <span @click="addToAddr('dex')" class="toaddr __pointer">{{ $t('walletQuota.VX') }}</span>
                 </div>
                 <vite-input v-model="toAddr" :valid="testAddr"
-                            :placeholder="$t('walletQuota.addrPlaceholder')"></vite-input>
+                            :placeholder="$t('walletQuota.addrPlaceholder')">
+                </vite-input>
             </div>
             <div class="item">
                 <div class="title">{{ $t('walletQuota.time') }}</div>
@@ -147,6 +150,9 @@ export default {
             this.amountErr = '';
         },
 
+        addToAddr(type) {
+            this.toAddr = type === 'mine' ? this.activeAccount.getDefaultAddr() : 'dexAddr';
+        },
         validTx() {
             if (this.btnUnuse) {
                 return;
@@ -224,6 +230,20 @@ export default {
                 font-size: 12px;
                 color: #FF2929;
                 line-height: 16px;
+                &.no-right {
+                    float: none;
+                    margin-left: 10px;
+                }
+            }
+            .toaddr {
+                float: right;
+                font-size: 14px;
+                font-family: $font-normal, arial, sans-serif;
+                font-weight:400;
+                color: rgba(0,122,255,1);
+                line-height: 18px;
+                border-bottom: 1px dashed #007AFF;
+                margin-left: 10px;
             }
         }
         .about, .btn {
@@ -246,6 +266,10 @@ export default {
     }
     .unit {
         padding: 0 15px;
+        position: relative;
+        .list {
+            position: absolute;
+        }
     }
     .input-item {
         box-sizing: border-box;
