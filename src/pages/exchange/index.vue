@@ -6,10 +6,10 @@
         <div class="order-wrapper" v-if="active === 'exchange'">
             <div class="order">
                 <div class="ex-tab-list">
-                    <div @click="tap='openOrder'" class="ex-tab __pointer" 
+                    <div @click="tap='openOrder'" class="ex-tab active-side __pointer" 
                          :class="{'active': tap === 'openOrder'}">
                         {{$t('exchangeOpenOrders.title')}}</div>
-                    <div @click="tap='historyOrder'" class="ex-tab __pointer" 
+                    <div @click="tap='historyOrder'" class="ex-tab active-side __pointer" 
                          :class="{'active': tap === 'historyOrder'}">
                         {{$t('exchangeOrderHistory.title')}}</div>
                 </div>
@@ -117,6 +117,13 @@ export default {
     }
     .ex_tb {
         box-shadow: none;
+        padding-top: 34px;
+        .head-row {
+            height: 34px;
+        }
+        .row {
+            height: 32px;
+        }
     }
 }
 </style>
