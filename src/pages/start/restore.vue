@@ -12,20 +12,43 @@
         <create ref="createDom" :submit="validMnemonic"></create>
 
         <div class="note">{{ $t('mnemonic.hint') }}</div>
+
+        <div class="__btn_list">
+            <span class="__btn __btn_border __pointer" @click="leftClick" >{{ $t(leftTxt) }}</span>
+            <div class="__btn __btn_all_in __pointer" @click="valid">
+                <span v-show="!isLoading">{{ $t('startCreate.finish') }}</span>
+                <loading v-show="isLoading" loadingType="dot"></loading>
+            </div>
+        </div>
     </div>
 </template>
 
 <script>
 import create from './create.vue';
+import loading from 'components/loading.vue';
 
 export default {
     components: {
-        create
+        create, loading
     },
     mounted() {
         this.$onKeyDown(13, () => {
             this.valid();
         });
+    },
+    props: {
+        leftClick: {
+            type: Function,
+            default: () => {}
+        },
+        leftTxt: {
+            type: String,
+            default: ''
+        },
+        finishCb: {
+            type: Function,
+            default: () => {}
+        }
     },
     data() {
         return {
@@ -74,6 +97,7 @@ export default {
                 activeAccount.rename(name);
                 activeAccount.save();
 
+                this.finishCb && this.finishCb();
                 this.$router.push({
                     name: 'start'
                 });
