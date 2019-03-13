@@ -6,7 +6,7 @@
         <div class="page-content" :class="{'page-scroll': active.indexOf('exchange') === 0}">
             <div class="page-scroll-wrapper">
                 <second-menu v-show="secondMenuList && secondMenuList.length" 
-                             class="second-menu" :tabList="secondMenuList"
+                             :go="go" class="second-menu" :tabList="secondMenuList"
                              :class="{'have-padding': active.indexOf('exchange') !== 0}">
                 </second-menu>
                 <div class="page-wrapper">
