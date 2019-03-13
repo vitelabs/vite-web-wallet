@@ -5,7 +5,7 @@
                 class="tab __pointer" :class="{ 
                     'active': active === tab,
                     'dex': active.indexOf('exchange') === 0
-            }" @click="goTab(tab)" >
+            }" @click="go(tab)" >
                 {{ $t(`${tab}.title`) }}
             </li>
         </ul>
@@ -14,9 +14,9 @@
         <change-lang class="menu change-lang-wrapper" 
                      :class="{'dex': active.indexOf('exchange') === 0}"></change-lang>
         <ul class="right-lab-list">
-            <div v-show="!isLogin" @click="goTab('start')" class="tab __pointer" 
+            <div v-show="!isLogin" @click="go('start')" class="tab __pointer" 
                  :class="{'dex': active.indexOf('exchange') === 0}">{{ $t('login') }}</div>  
-            <div v-show="!isLogin" @click="goTab('startCreate')" class="tab __pointer"
+            <div v-show="!isLogin" @click="go('startCreate')" class="tab __pointer"
                  :class="{'dex': active.indexOf('exchange') === 0}">{{ $t('regAcc') }}</div>  
             <div v-show="active === 'exchange'" class="tab dex __pointer">{{ $t('dexToken') }}</div>
         </ul>
@@ -37,6 +37,10 @@ export default {
             default: () => {
                 return [];
             }
+        },
+        go: {
+            type: Function,
+            default: () => {}
         }
     },
     mounted() {
@@ -56,17 +60,6 @@ export default {
             active: this.$route.name,
             isLogin: false
         };
-    },
-    methods: {
-        goTab(tab) {
-            if (tab === this.active) {
-                return;
-            }
-
-            this.$router.push({ 
-                name: tab
-            });
-        }
     }
 };
 </script>
