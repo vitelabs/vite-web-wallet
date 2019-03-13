@@ -1,6 +1,9 @@
 var fs = require('fs');
 var path = require('path');
 
+// routeConfig > pageConfig
+var routeConfig = require('./src/router/config.js');
+
 var routesPath = path.join(__dirname, '/src/router/routes.js');
 
 var result = fs.existsSync(routesPath);
@@ -17,6 +20,7 @@ let loginRoutes = [];
 
 traversing('./src/pages/', (fPath, next, val) => {
     let stats = fs.statSync(fPath);
+
     if (stats.isDirectory()) {
         next(fPath);
         return;
@@ -35,41 +39,43 @@ traversing('./src/pages/', (fPath, next, val) => {
         return;
     }
 
-    // pages/XXX/XXX/index.vue
-    if (val === 'index.vue') {
-        let path = '/' + tmpPath.replace(/\/index.vue$/, '');
-        let nList = path.split('/');
-        if (!nList || !nList.length || nList.length > 3) {
-            return;
-        }
-
-        let name = '';
-        nList.forEach((n) => {
-            if (!n) {
-                return;
-            }
-            if (!name) {
-                name += n;
-                return;
-            }
-            name += (n ? n[0].toLocaleUpperCase() + n.slice(1) : '');
-        });
-
-        if (!name) {
-            return;
-        }
-        
-        let parent = nList[1];
-        pushRoute(fPath, tmpPath, name, parent);
+    if (val !== 'index.vue') {
+        return;
     }
+
+    // pages/XXX/XXX/index.vue
+    let path = tmpPath.replace(/\/index.vue$/, '');
+
+    let nList = path.split('/');
+    if (!nList || !nList.length || nList.length > 2) {
+        return;
+    }
+
+    let name = '';
+    nList.forEach((n) => {
+        if (!name) {
+            name += n;
+            return;
+        }
+        name += (n ? n[0].toLocaleUpperCase() + n.slice(1) : '');
+    });
+
+    if (!name) {
+        return;
+    }
+    
+    pushRoute(fPath, tmpPath, name, nList[0]);
 });
 
 
 let _routes = '';
 for(let key in routes) {
     let _k = routes[key];
+
     _routes += `{name: '${_k.name}', path: '${_k.path}', component: ${_k.component}`;
-    _k.alias && (_routes += `, alias: '${_k.alias}'`);
+
+    let alias = routeConfig[key] && routeConfig[key].alias ? routeConfig[key].alias : _k.alias;
+    alias && (_routes += `, alias: '${alias}'`);
 
     if (!_k.children || !_k.children.length) {
         _routes += '},';
@@ -79,13 +85,26 @@ for(let key in routes) {
     _routes += ', children: [';
     _k.children.forEach(_kr => {
         _routes += `{name: '${_kr.name}', path: '${_kr.path}', component: ${_kr.component}`;
-        _kr.alias && (_routes += `, alias: '${_kr.alias}'`);
+
+        let alias = routeConfig[_kr.name] && routeConfig[_kr.name].alias ? routeConfig[_kr.name].alias : _kr.alias;
+        alias && (_routes += `, alias: '${alias}'`);
+
         _routes += '},';
     });
     _routes += ']},';
 }
-
 routesStr += `export default { routes: [${_routes}],`;
+
+for (let key in routeConfig) {
+    if (routeConfig[key].layout === 'index' && indexRoutes.indexOf(key) === -1) {
+        indexRoutes.push(key);
+    }
+
+    if (routeConfig[key].isLogin && loginRoutes.indexOf(key) === -1) {
+        loginRoutes.push(key);
+    }
+}
+
 routesStr += `indexLayoutRoutes: ${JSON.stringify(indexRoutes)}, loginRoutes: ${JSON.stringify(loginRoutes)}}`;
 
 fs.writeFileSync(routesPath, routesStr);
@@ -95,16 +114,23 @@ fs.writeFileSync(routesPath, routesStr);
 function pushRoute(fPath, tmpPath, name, parent) {
     let file = fs.readFileSync(fPath);
 
-    if (file.indexOf('/**  vite-wallet ') === 0) {
-        let settingStrArr = file.toString().match(/^\/\*\*\s{2}vite-wallet (\w*\-*\w*\s*)* \*\//);
+    // Page config. 
+    // eg: /**  pageConfig name:exchange-index layout:index isLogin:true */
+
+    if (file.indexOf('/**  pageConfig ') === 0) {
+        let settingStrArr = file.toString().match(/^\/\*\*\s{2}pageConfig (\w*\:*\w*-*\s*)* \*\//);
 
         if (settingStrArr && settingStrArr.length) {
             let setting = settingStrArr[0].split(' ');
+
             setting.forEach((item) => {
-                if (item === 'index-layout') {
-                    indexRoutes.push(name);
-                } else if (item === 'login') {
-                    loginRoutes.push(name);
+                if (item.indexOf('layout:') === 0) {
+                    let layoutStyle = item.split(':');
+                    let isIndex = layoutStyle[1] === 'index';
+                    isIndex && indexRoutes.push(name);
+                } else if (item.indexOf('isLogin') === 0) {
+                    let isLogin = item.split(':')[1] === 'true';
+                    isLogin && loginRoutes.push(name);
                 } else if (item.indexOf('name') === 0) {
                     let _n = item.slice(5);
                     name = _n || name;

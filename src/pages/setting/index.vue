@@ -8,12 +8,12 @@
             <span class="btn __pointer" @click="validPass">{{ $t('btn.submit') }}</span>
         </div>
 
-        <mnemonic v-if="!!activeAccount" :lock="lock" class="item"></mnemonic>
+        <mnemonic v-if="!!isLogin" :lock="lock" class="item"></mnemonic>
         <accList v-if="!!activeAccount" class="item"></accList>
         <lang class="item"></lang>
-        <auto-logout v-if="!!activeAccount" class="item"></auto-logout>
+        <auto-logout v-if="!!isLogin" class="item"></auto-logout>
 
-        <router-link v-if="!!activeAccount && isTestEnv" :to="{ name: 'mintage' }">mintage</router-link>
+        <router-link v-if="!!isLogin && isTestEnv" :to="{ name: 'mintage' }">mintage</router-link>
     </layout>
 </template>
 
@@ -33,6 +33,7 @@ export default {
         let showPassWrapper = activeAccount ? activeAccount.type === 'wallet' : false;
 
         return {
+            isLogin: !!this.$wallet.isLogin,
             isSubmiting: false,
             activeAccount,
             showPassWrapper,

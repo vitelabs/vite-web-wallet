@@ -1,5 +1,3 @@
-/**  vite-wallet login */
-
 <template>
     <div class="wallet-wrapper">
         <account v-if="active === 'wallet'"></account>
@@ -32,7 +30,7 @@ export default {
     height: 100%;
 }
 .__wrapper {
-    padding: 40px;
+    padding: 30px;
 }
 
 @media only screen and (max-width: 850px) {

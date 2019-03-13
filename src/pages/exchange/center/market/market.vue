@@ -376,18 +376,19 @@ export default {
     .search-wrapper {
         display: flex;
         border-bottom: 1px solid rgba(212, 222, 231, 1);
-        line-height: 28px;
-        padding: 0 6px;
+        padding: 4px 6px;
         box-sizing: border-box;
         .search-input {
             flex: 1;
+            background: rgba(245,250,255,1);
+            border-radius: 2px;
         }
         .select-icon-wrapper {
             font-size: 11px;
             font-family: $font-normal, arial, sans-serif;
             font-weight: 400;
             color: rgba(94,104,117,1);
-            margin-left: 12px;
+            margin-left: 10px;
             .select-icon {
                 position: relative;
                 display: inline-block;
@@ -422,18 +423,19 @@ export default {
 <style lang="scss">
 .search-input.input-wrapper {
     box-sizing: border-box;
-    height: 28px;
-    line-height: 28px;
+    height: 20px;
+    line-height: 20px;
     border: none;
     .icon {
         width: 12px;
         height: 12px;
-        margin: 8px 6px 8px 0;
+        margin: 4px 6px 4px 6px;
     }
     input {
         text-indent: 0px;
         font-weight: 400;
-        font-size: 12px;
+        font-size: 11px;
+        background: rgba(245,250,255,1);
     }
 }
 </style>

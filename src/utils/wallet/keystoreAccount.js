@@ -1,9 +1,6 @@
-import { utils, wallet  } from '@vite/vitejs';
+import { account as _account, keystore as _keystore  } from '@vite/vitejs';
 import vitecrypto from 'testwebworker';
 import acc from './storeAcc.js';
-
-const _keystore = utils.keystore;
-const _account = wallet.account;
 
 class keystoreAccount extends _account {
     constructor({
@@ -15,6 +12,7 @@ class keystoreAccount extends _account {
 
         this.keystore = keystore;
         this.receiveFail = receiveFail;
+        this.unlockAcc = null;
     }
 
     verify(pass) {
@@ -38,11 +36,13 @@ class keystoreAccount extends _account {
 
     unlock(intervals) {
         this.activate(intervals, this.receiveFail);
+        this.unlockAcc = this;
         return true;
     }
 
     lock() {
         this.freeze();
+        this.unlockAcc = null;
     }
 }
 

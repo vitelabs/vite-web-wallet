@@ -90,7 +90,7 @@ export default {
     top: 0;
     bottom: 0;
     &.buy {
-        background: rgba(91,197,0,0.05);;
+        background: rgba(79,227,148,0.05);
     }
     &.sell {
         background: rgba(229,73,77,0.05);

@@ -35,65 +35,65 @@
                 >{{$t("exchangeAssets.table.rowMap.detail")}}</div>
             </div>
         </div>
+
         <img @click="update" class="refresh" :class="{rotate:isRotate}" src="~assets/imgs/exchange/refresh.svg" />
-        <confirm
-            :title="c.title"
-            :singleBtn="true"
-            :leftBtnTxt="c.btn"
-            :leftBtnClick="confirmClick"
-            :closeIcon="true"
-            :close="closeNumConfirm"
-            v-if="confirmShow"
-        >
+
+        <confirm :title="c.title" :singleBtn="true"
+                 :leftBtnTxt="c.btn" :leftBtnClick="confirmClick"
+                 :closeIcon="true" :close="closeNumConfirm"
+                 v-if="confirmShow">
             <div class="confirm">
-                <div class="lable">{{c.lable1}}</div>
-                <div class="input un-click-able"><img :src="c.icon" />{{balance[c.tokenId].symbol}} <div class="num">{{c.type.toLowerCase()==="recharge"?balance[c.tokenId].balance:balance[c.tokenId].available}}</div>
+                <div class="lable">{{ c.lable1 }}</div>
+                <div class="input un-click-able">
+                    <img :src="c.icon" />
+                    {{balance[c.tokenId].symbol}} 
+                    <div class="num">
+                        {{ c.type.toLowerCase()==="recharge" ? balance[c.tokenId].balance : balance[c.tokenId].available }}
+                    </div>
                 </div>
-                <div class="lable">{{c.lable2}} <div class="errtips">{{c.errTips}}</div>
+                <div class="lable">{{ c.lable2 }} 
+                    <div class="errtips">{{ c.errTips }}</div>
                 </div>
-                <div class="input"><input
-                    type="text"
-                    :placeholder="c.placeholder"
-                    v-model="opNumber"
-                ></div>
+                <div class="input">
+                    <input type="text" :placeholder="c.placeholder" v-model="opNumber">
+                </div>
             </div>
         </confirm>
-        <alert
-            v-show="detailConfirm"
-            :list="detailList"
-            :heads="$t('exchangeAssets.confirmTable.heads')"
-            :title="$t('exchangeAssets.confirmTable.title')"
-            :close="close"
-        >
 
-        </alert>
+        <alert v-show="detailConfirm" :list="detailList"
+               :heads="$t('exchangeAssets.confirmTable.heads')"
+               :title="$t('exchangeAssets.confirmTable.title')"
+               :close="close"></alert>
+
         <powProcess ref="pow"></powProcess>
     </div>
 </template>
+
 <script>
 import alert from '../components/alert.vue';
-import confirm from 'components/confirm.vue';
-import { deposit, withdraw, chargeDetail } from 'services/exchange';
 import BigNumber from 'utils/bigNumber';
 import getTokenIcon from 'utils/getTokenIcon';
+import confirm from 'components/confirm.vue';
 import powProcess from 'components/powProcess';
 import debounce from 'lodash/debounce';
 import d from 'dayjs';
 
+import { deposit, withdraw, chargeDetail } from 'services/exchange';
 
 const VoteDifficulty = '201564160';
+
 export default {
+    components: {
+        confirm, alert, powProcess
+    },
     props: {
         filter: { type: Object }
     },
-    components: {
-        confirm,
-        alert,
-        powProcess
-    },
     beforeMount() {
         this.acc = this.$wallet.getActiveAccount();
-        if (!this.acc) return;
+        if (!this.acc) {
+            return;
+        }
         this.acc && (this.addr = this.acc.getDefaultAddr());
         this.addr&&this.$store.dispatch('updateExBalance',this.addr);
     },
@@ -111,15 +111,17 @@ export default {
         };
     },
     methods: {
-        update:debounce(function (){
+        update: debounce(function (){
             this.isRotate=true;
             setTimeout(()=>{
                 this.isRotate=false;
             },2000);
-            this.addr&&this.$store.dispatch('updateExBalance',this.addr);
-        },0.1),
+            this.addr && this.$store.dispatch('updateExBalance', this.addr);
+        }, 0.1),
         withdraw(tokenId) {
-            this.showConfirm({ tokenId, type: 'withdraw' });
+            this.showConfirm({ 
+                tokenId, type: 'withdraw' 
+            });
         },
         recharge(tokenId) {
             this.showConfirm({ tokenId, type: 'recharge' });
@@ -327,11 +329,11 @@ export default {
         height: 20px;
         width: 20px;
         cursor: pointer;
-        top: 5px;
-        right: 30px;
+        top: 10px;
+        right: 6px;
         &.rotate{
-            transform:rotate(360deg);
-            transition:all ease-in-out 1s;
+            transform: rotate(360deg);
+            transition: all ease-in-out 1s;
         }
     }
 }

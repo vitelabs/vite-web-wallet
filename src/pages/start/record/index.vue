@@ -1,34 +1,45 @@
-/**  vite-wallet index-layout */
+/**  pageConfig layout:index */
 
 <template>
-    <div>
-        <mnemonic :title="'mnemonic.record'" :isLoading="isLoading" :submit="login">
-            <div class="row">
-                <span @click="change" class="change __pointer">{{ $t('mnemonic.change', { len }) }}</span>
-                <img @click="copy" class="copy __pointer" src="~assets/imgs/copy_white.svg"/>
-            </div>
-            <div class="wrapper">
-                <copyOK class="copy-wrapper" :copySuccess="copySuccess"></copyOK>
-                <span class="item" :class="{
-                    'long-item': mnemonicList.length === 12
-                }" v-for="(item, index) in mnemonicList" :key="index">
-                    {{ item }}
-                </span>
-            </div>
-        </mnemonic>
+    <div class="import-account-wrapper">
+        <div class="__title">{{ $t('mnemonic.record') }}</div>
+        <div class="note">{{ $t('mnemonic.prompt') }}</div>
+
+        <div class="row">
+            <span @click="change" class="change __pointer">{{ $t('mnemonic.change', { len }) }}</span>
+            <img @click="copy" class="copy __pointer" src="~assets/imgs/copy_white.svg"/>
+        </div>
+        
+        <div class="wrapper">
+            <copyOK class="copy-wrapper" :copySuccess="copySuccess"></copyOK>
+            <span class="item" :class="{
+                'long-item': mnemonicList.length === 12
+            }" v-for="(item, index) in mnemonicList" :key="index">
+                {{ item }}
+            </span>
+        </div>
+
+        <div class="__btn_list">
+            <span class="__btn __btn_border __pointer" @click="back">{{ $t('btn.back') }}</span>
+            <span class="__btn __btn_all_in __pointer" @click="login">
+                <span v-show="!isLoading">{{ $t('btn.submit') }}</span>
+                <loading v-show="isLoading" loadingType="dot"></loading>
+            </span>
+        </div>
+
         <process class="process" active="record"></process>
     </div>
 </template>
 
 <script>
-import mnemonic from 'components/mnemonic.vue';
 import process from 'components/process';
 import copyOK from 'components/copyOK';
+import loading from 'components/loading.vue';
 import copy from 'utils/copy';
 
 export default {
     components: {
-        mnemonic, process, copyOK
+        process, copyOK, loading
     },
     mounted() {
         this.activeAccount = this.$wallet.getActiveAccount();
@@ -55,6 +66,10 @@ export default {
         }
     },
     methods: {
+        back() {
+            this.$wallet.clearActiveAccount();
+            this.$router.go(-1);
+        },
         copy() {
             copy(this.mnemonic);
             this.copySuccess = true;
@@ -68,6 +83,10 @@ export default {
             this.mnemonic = this.activeAccount.getMnemonic() || '';
         },
         login() {
+            if (this.isLoading) {
+                return;
+            }
+            
             this.isLoading = true;
             this.activeAccount.encrypt().then(() => {
                 if (!this.isLoading) {
@@ -116,6 +135,16 @@ export default {
             flex-basis: 110px;
         }
     }
+}
+.note {
+    font-size: 14px;
+    color: #FFFFFF;
+    text-align: left;
+    line-height: 20px;
+    margin-bottom: 30px;
+}
+.__btn_list {
+    margin-top: 20px;
 }
 .row {
     margin-bottom: 8px;
