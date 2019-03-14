@@ -34,7 +34,7 @@
                 <span class="input-item unuse about">{{ $t('walletQuota.aboutDays', { day: '3' }) }}</span>
                 <span class="btn __pointer" :class="{
                     'unuse': btnUnuse
-                }" @click="validTx">{{ $t('submitStaking') }}</span>
+                }" v-unlock-account="validTx">{{ $t('submitStaking') }}</span>
             </div>
         </div>
     </div>

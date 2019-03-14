@@ -44,7 +44,7 @@ class _wallet {
 
     setLastActiveAcc() {
         let lastAccount = this.getLast();
-        if (!lastAccount) {
+        if (!lastAccount || !lastAccount.addr) {
             return;
         }
 

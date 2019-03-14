@@ -27,9 +27,8 @@ const actions = {
         dispatch('exFetchActiveFtoken', activeTxPair.ftoken);
     },
     exFetchActiveTtoken({ rootState, commit }, tokenId) {
-        let activeTxPair = rootState.exchangeActiveTxPair.activeTxPair;
-
         tokenDetail({ tokenId }).then((data) => {
+            let activeTxPair = rootState.exchangeActiveTxPair.activeTxPair;
             if (tokenId !== activeTxPair.ttoken) {
                 return;
             }
@@ -39,9 +38,8 @@ const actions = {
         });
     },
     exFetchActiveFtoken({ rootState, commit }, tokenId) {
-        let activeTxPair = rootState.exchangeActiveTxPair.activeTxPair;
-
         tokenDetail({ tokenId }).then((data) => {
+            let activeTxPair = rootState.exchangeActiveTxPair.activeTxPair;
             if (tokenId !== activeTxPair.ftoken) {
                 return;
             }

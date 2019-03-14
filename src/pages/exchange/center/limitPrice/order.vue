@@ -356,7 +356,7 @@ export default {
         validAmount() {
             let tokenDigit = this.ttokenDetail.tokenDigit;
             this.isAmountErr = this.amount && !this.$validAmount(this.amount, tokenDigit) ||
-                (this.orderType === 'buy' && BigNumber.compared(this.balance, this.amount) < 0);
+                (this.orderType === 'buy' && BigNumber.compared(this.balance || 0, this.amount) < 0);
         },
         validQuantity() {
             let tokenDigit = this.ftokenDetail.tokenDigit;
@@ -561,7 +561,8 @@ $font-black: rgba(36,39,43,1);
             background: linear-gradient(270deg,rgba(0,212,208,1) 0%,rgba(0,215,100,1) 100%);
         }
         &.gray {
-            background: rgba(0, 0, 0, 0.4);
+            color: rgba(29, 32, 36, 0.6);
+            background: #f3f5f9;
         }
     }
 }
