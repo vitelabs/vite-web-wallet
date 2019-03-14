@@ -4,6 +4,7 @@
             <div v-for="(h) in $t('exchangeOpenOrders.table.heads')" :key="h">
                 {{ h }}
             </div>
+            <div></div>
         </div>
         <div class="row-container">
             <div class="row" v-for="v in sortedList" :key="v.orderId">

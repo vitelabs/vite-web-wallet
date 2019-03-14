@@ -19,7 +19,7 @@ export default {
             default: () => {}
         }
     },
-    created() {
+    mounted() {
         this.symbol && this.init();
 
         changeLangEvent = webViteEventEmitter.on('changeLang', () => {
