@@ -12,6 +12,7 @@ export function initPwdConfirm(i18n) {
 }
 
 export function pwdConfirm({
+    type = 'normal',
     showMask = true,
     title,
     cancel = () => { },
@@ -34,6 +35,7 @@ export function pwdConfirm({
     instance.isShowPWD = isShowPWD;
     instance.title = title;
     instance.exchange = exchange;
+    instance.type = type;
 
     instance.cancel = () => {
         _close();

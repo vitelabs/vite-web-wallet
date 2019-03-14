@@ -20,12 +20,12 @@ import { initPwdConfirm } from 'components/password/index.js';
 import { initQuotaConfirm } from 'components/quota/index.js';
 
 import plugin from 'utils/plugins/addPlugin';
-import clickOutside from 'utils/plugins/clickOutside';
+import directives from 'utils/plugins/directives';
 import { reSave } from 'utils/wallet/index.js';
 
 Vue.use(plugin);
 Vue.use(VueRouter);
-Vue.use(clickOutside);
+Vue.use(directives);
 
 // Start loading animate
 let element = document.getElementById('loading');

@@ -10,7 +10,7 @@
             <!-- <input fake_pass type="password" style="display:none"/> -->
             <input v-model="password" :placeholder="$t('pwdConfirm.placeholder')" type="password"/>
         </form>
-        <div v-show="isShowPWD && isShowPWDHold" class="hold-pwd __pointer" @click="toggleHold">
+        <div v-show="type === 'normal' && isShowPWD && isShowPWDHold" class="hold-pwd __pointer" @click="toggleHold">
             <span :class="{ 'active': isPwdHold }"></span>
             {{ $t('pwdConfirm.conf') }}
         </div>
@@ -27,6 +27,10 @@ export default {
         confirm
     },
     props: {
+        type: {
+            type: String,
+            default: 'normal'
+        },
         showMask: {
             type: Boolean,
             default: true
@@ -65,21 +69,19 @@ export default {
         }
     },
     data() {
-        let activeAccount = this.$wallet.getActiveAccount();
-
         return {
             isShowPWDHold: !window.isShowPWD,
             password: '',
             isPwdHold: false,
-            isLoading: false,
-            isLogin: activeAccount && activeAccount.isLogin
+            isLoading: false
         };
     },
     computed: {
         pwdTitle() {
-            if (this.isLogin) {
+            if (this.type === 'normal') {
                 return this.title || this.$t('pwdConfirm.title');
             }
+
             let activeAccount = this.$wallet.getActiveAccount();
             let name = activeAccount ? activeAccount.getName() : '';
             return this.$t('pwdConfirm.unlockAcc', { name });

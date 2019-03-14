@@ -105,6 +105,13 @@ class account {
         window.isShowPWD = false;
     }
 
+    unlockAccount() {
+        if (this.isLogin) {
+            return;
+        }
+        pwdConfirm({ type: 'unlockAccount' });
+    }
+
     initPwd({
         showMask = true,
         title,
@@ -113,7 +120,7 @@ class account {
         content = '',
         submitTxt = '',
         cancelTxt = '',
-        exchange=false
+        exchange = false
     }, isConfirm = false) {
         let isHide = !isConfirm && this.isHoldPWD;
 
@@ -123,7 +130,7 @@ class account {
         }
 
         pwdConfirm({
-            showMask, title, submit, content, cancel, cancelTxt, submitTxt,exchange
+            showMask, title, submit, content, cancel, cancelTxt, submitTxt, exchange
         }, !this.isHoldPWD);
         return false;
     }
