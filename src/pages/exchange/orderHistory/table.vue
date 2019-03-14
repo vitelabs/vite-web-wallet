@@ -91,9 +91,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import "../components/table.scss";
-.ex_tb {
-    box-shadow: none;
-}
+
 @include rowWith {
     width: 8%;
     &:first-child{
