@@ -3,7 +3,7 @@
     "start": "Start",
     "login": "Log In",
     "regAcc": "Register",
-    "dexToken": "Listing Coins",
+    "dexToken": "Token Listing",
     "unlockAcc": "Unlock current account",
     "changeAcc": "Switch to other account",
     "existingAcc": "Existing Accounts",
@@ -35,7 +35,7 @@
         "36002": "System verify failed, please try again later（36002）",
         "36003": "System verify failed, please try again later（36003）",
         "36004": "System verify failed, please try again later（36004）",
-        "36005": "napshot block height is illegal, please try again later"
+        "36005": "Snapshot block height is illegal, please try again later"
     },
     "txType": {
         "0": "SBP Registration",
@@ -54,8 +54,8 @@
         "13": "MintageCancelPledge",
         "14": "ViteX Deposit",
         "15": "ViteX Withdrawal",
-        "16": "ViteX Trade",
-        "17": "ViteX Cancel Trade",
+        "16": "ViteX Creating Orders",
+        "17": "ViteX Revoking Orders",
         "18": "CreateContractReq",
         "19": "Transfer",
         "20": "Transfer",
