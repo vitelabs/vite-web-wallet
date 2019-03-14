@@ -34,8 +34,7 @@ const actions = {
             return latestTx({
                 ftoken, ttoken
             }).then((data) => {
-                cb && cb();
-                commit('exSetLatestTxList', data);
+                cb && cb(data || []);
             }).catch(err => {
                 console.warn(err);
                 cb && cb();
@@ -44,7 +43,12 @@ const actions = {
 
         // Init;
         commit('exSetLatestTxLoading', true);
-        _f(() => {
+        _f((data) => {
+            let _activeTxPair = rootState.exchangeActiveTxPair.activeTxPair;
+            if (_activeTxPair.pairCode !== activeTxPair.pairCode) {
+                return;
+            }
+            data && commit('exSetLatestTxList', data);
             commit('exSetLatestTxLoading', false);
         });
 

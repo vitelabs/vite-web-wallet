@@ -23,7 +23,7 @@ export default {
                 return;
             }
             let activeAccount = this.$wallet.getActiveAccount();
-            activeAccount.initPwd({});
+            activeAccount && activeAccount.unlockAccount();
         },
         rightClick() {
             if (!this.isHaveUsers) {
