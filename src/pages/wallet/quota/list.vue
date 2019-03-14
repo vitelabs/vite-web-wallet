@@ -137,11 +137,16 @@ export default {
             if (cell !== 'cancel') {
                 return;
             }
-            if (item.isMaturity) {
+            if (!item.isMaturity) {
+                this.$toast(this.$t('walletQuota.list.unexpired'));
+                return;
+            }
+            if (this.$wallet.isLogin) {
                 this.showCancel(item, index);
                 return;
             }
-            this.$toast(this.$t('walletQuota.list.unexpired'));
+            let activeAccount = this.$wallet.getActiveAccount();
+            activeAccount && activeAccount.unlockAccount();
         },
         gotoDetail(addr) {
             let locale = this.$i18n.locale === 'zh' ? 'zh/' : '';
