@@ -105,12 +105,9 @@ export default {
 <style lang="scss" scoped>
 .order-history-ct {
     height: 100%;
-    padding: 20px 10px 10px;
+    padding: 20px 10px 28px;
     .tb {
         flex: 1;
-    }
-    .combine {
-        box-shadow: 0px 2px 48px 1px rgba(176, 192, 237, 0.42);
     }
     .page-filter {
         display: flex;

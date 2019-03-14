@@ -20,18 +20,10 @@
 
         <div class="order-row-title">{{ $t(`exchange.${orderType}.quantity`) }}
             <ul class="quantity-percent">
-                <li class="__pointer" :class="{
-                    'active': +percent === 0.25
-                }" @click="quantityPercent(0.25)">25%</li>
-                <li class="__pointer" :class="{
-                    'active': +percent === 0.5
-                }" @click="quantityPercent(0.5)">50%</li>
-                <li class="__pointer" :class="{
-                    'active': +percent === 0.75
-                }" @click="quantityPercent(0.75)">75%</li>
-                <li class="__pointer" :class="{
-                    'active': +percent === 1
-                }" @click="quantityPercent(1)">100%</li>
+                <li class="__pointer" @click="quantityPercent(0.25)">25%</li>
+                <li class="__pointer" @click="quantityPercent(0.5)">50%</li>
+                <li class="__pointer" @click="quantityPercent(0.75)">75%</li>
+                <li class="__pointer" @click="quantityPercent(1)">100%</li>
             </ul>
         </div>
         <vite-input class="order-input" :class="{'err': isQuantityErr}"  
@@ -125,23 +117,9 @@ export default {
             this.clearValidTimeout();
             validTimeout = setTimeout(() => {
                 this.clearValidTimeout();
-                // this.validAll();
-                // let isErr = this.isPriceErr || this.isAmountErr || this.isQuantityErr;
-                // if (this.isPriceErr) {
-                //     this.price = this.oldPrice;
-                // }
-                // if (this.isAmountErr) {
-                //     this.amount = this.oldAmount;
-                // }
-                // if (this.isQuantityErr) {
-                //     this.quantity = this.oldQuantity;
-                // }
-                // if (isErr) {
-                //     return;
-                // }
-                changeVal && this[`${changeVal}Changed`]();
+                changeVal && this[`${changeVal}Changed`] && this[`${changeVal}Changed`]();
                 this.validAll();
-            }, 300);
+            }, 30);
         },
         activeTx: function() {
             this.price = this.activeTx.price;
@@ -205,53 +183,28 @@ export default {
         },
 
         percentChanged() {
+            if (!this.percent) {
+                return;
+            }
+            
             let price = this.price;
             let quantity = this.quantity;
             let amount = this.amount;
             let percent = this.percent;
-
-            if (percent <= 0 || percent * 100 % 25 !== 0) {
-                return;
-            }
-
-            let _p = this.getPercent(this.orderType === 'buy' ? amount : quantity);
-            if (BigNumber.isEqual(_p, percent)) {
-                return;
-            }
 
             if (this.orderType === 'buy') {
                 amount = this.getPercentBalance(percent, this.ttokenDetail.tokenDigit);
                 quantity = this.getQuantity(price, amount);
+                console.log(amount);
             } else {
                 quantity = this.getPercentBalance(percent, this.ftokenDetail.tokenDigit);
                 amount = this.getAmount(price, quantity);
+                console.log(quantity);
             }
 
             !BigNumber.isEqual(quantity, this.quantity) && (this.quantity = quantity);
             !BigNumber.isEqual(amount, this.amount) && (this.amount = amount);
-        },
-        balanceChanged() {
-            if (!+this.percent || +this.percent * 100 % 25 !== 0) {
-                let percent = this.getPercent(this.orderType === 'buy' ? this.amount : this.quantity);
-                !BigNumber.isEqual(percent, this.percent) && (this.percent = percent);
-                return;
-            }
-            
-            let quantity = this.quantity;
-            let amount = this.amount;
-            let percent = this.percent;
-            let price = this.price;
-
-            if (this.orderType === 'buy') {
-                amount = this.getPercentBalance(percent);
-                quantity = this.getQuantity(price, amount);
-            } else {
-                quantity = this.getPercentBalance(percent);
-                amount = this.getAmount(price, quantity);
-            }
-
-            !BigNumber.isEqual(quantity, this.quantity) && (this.quantity = quantity);
-            !BigNumber.isEqual(amount, this.amount) && (this.amount = amount);
+            this.percent = '';
         },
         amountChanged() {
             if (this.isAmountErr) {
@@ -261,13 +214,9 @@ export default {
             let price = this.price;
             let quantity = this.quantity;
             let amount = this.amount;
-            let percent = this.percent;
 
             quantity = this.getQuantity(price, amount);
-            percent = this.getPercent(this.orderType === 'buy' ? amount : quantity);
-
             !BigNumber.isEqual(quantity, this.quantity) && (this.quantity = quantity);
-            !BigNumber.isEqual(percent, this.percent) && (this.percent = percent);
         },
         priceChanged() {
             if (this.isPriceErr) {
@@ -277,13 +226,9 @@ export default {
             let price = this.price;
             let quantity = this.quantity;
             let amount = this.amount;
-            let percent = this.percent;
 
             amount = this.getAmount(price, quantity);
-            percent = this.getPercent(this.orderType === 'buy' ? amount : quantity);
-
             !BigNumber.isEqual(amount, this.amount) && (this.amount = amount);
-            !BigNumber.isEqual(percent, this.percent) && (this.percent = percent);
         },
         quantityChanged() {
             if (this.isQuantityErr) {
@@ -293,13 +238,9 @@ export default {
             let price = this.price;
             let quantity = this.quantity;
             let amount = this.amount;
-            let percent = this.percent;
 
             amount = this.getAmount(price, quantity);
-            percent = this.getPercent(this.orderType === 'buy' ? amount : quantity);
-
             !BigNumber.isEqual(amount, this.amount) && (this.amount = amount);
-            !BigNumber.isEqual(percent, this.percent) && (this.percent = percent);
         },
 
         getPercentBalance(percent, decimals) {
@@ -523,7 +464,7 @@ $font-black: rgba(36,39,43,1);
                 color: $blue;
                 line-height: 16px;
                 margin-left: 10px;
-                &.active {
+                &:active {
                     background: $blue;
                     color: #fff;
                 }
