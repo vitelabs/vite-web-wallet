@@ -106,6 +106,33 @@ export default {
     }
 }
 
+.exchange.confirm-container.gray {
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.exchange .confirm-wrapper {
+    max-width: 515px;
+    .title {
+        height: 58px;
+        line-height: 58px;
+        font-size: 14px;
+        font-weight: 600;
+    }
+    .content-wrapper {
+        padding: 20px 30px;
+    }
+    .bottom {
+        min-height: 74px;
+        .__btn {
+            height: 44px;
+            line-height: 44px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+    }
+
+}
+
 .confirm-wrapper {
     width: 90%;
     max-width: 460px;

@@ -4,6 +4,7 @@
             <div v-for="h in $t('exchangeOrderHistory.table.heads')" :key="h">
                 {{ h }}
             </div>
+            <div></div>
         </div>
         <div class="row-container">
             <div class="row" v-for="v in sortedList" :key="v.orderId">
@@ -28,6 +29,7 @@
                 <div>{{ $t('hint.noData') }}</div>
             </div>
         </div>
+        <slot></slot>
         <confirm v-show="detailConfirm" :list="detailList" :close="close"
                  :title="$t('exchangeOrderHistory.confirmTable.title')"
                  :heads="$t('exchangeOrderHistory.confirmTable.heads')">
