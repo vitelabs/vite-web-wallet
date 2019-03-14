@@ -410,7 +410,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "../center.scss";
-$font-black: rgba(36,39,43,1);
+$font-black: rgba(36,39,43,.8);
 
 .order-wrapper {
     flex: 1;

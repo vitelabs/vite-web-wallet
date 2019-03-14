@@ -5,17 +5,12 @@
             v-if="!isEmbed"
         ></Filters>
         <div class="combine">
-            <Table
-                :list="data"
-                class="tb"
-            ></Table>
-            <Pagination
-                :currentPage="currentPage"
-                :toPage="toPage"
-                :totalPage="totalPage"
-                class="page-filter"
-                v-if="!isEmbed"
-            ></Pagination>
+            <Table :list="data" class="tb">
+                <Pagination :currentPage="currentPage" :toPage="toPage"
+                            :totalPage="totalPage" class="page-filter"
+                            v-if="!isEmbed"></Pagination>
+            </Table>
+
         </div>
     </div>
 </template>

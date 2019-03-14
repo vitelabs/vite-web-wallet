@@ -36,7 +36,7 @@ export default {
                     if (!isLogin) {
                         return;
                     }
-                    vnode.data.on.unlocked();
+                    vnode.data.on && vnode.data.on.unlocked();
                 });
             },
             unbind() {

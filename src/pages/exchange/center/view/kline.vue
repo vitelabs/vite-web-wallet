@@ -19,7 +19,7 @@ export default {
             default: () => {}
         }
     },
-    created() {
+    mounted() {
         this.symbol && this.init();
 
         changeLangEvent = webViteEventEmitter.on('changeLang', () => {
@@ -100,6 +100,16 @@ export default {
             this.tvWidget.onChartReady(() => {
                 this.createDepthBtn();
                 this.tvWidget.chart().setChartType(1);
+
+                let studies = [];
+                let id = this.tvWidget.chart().createStudy('Moving Average', false, false, [7], null, {'Plot.color': 'rgb(116,149,187)'});
+                studies.push(id);
+                id = this.tvWidget.chart().createStudy('Moving Average', false, false, [30],null,{'plot.color': 'rgb(118,32,99)'});
+                studies.push(id);
+                var state = 1;
+                for(var i = 0; i < studies.length; i++){
+                    this.tvWidget.chart().getStudyById(studies[i]).setVisible(state);
+                }
             });
         },
         resetLang() {
