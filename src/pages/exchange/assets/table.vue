@@ -21,13 +21,11 @@
                 <div>{{token.available}}</div>
                 <div>{{token.lock||0}}</div>
                 <div>{{token.worth}}</div>
-                <div
-                    @click="recharge(token.id)"
-                    class="click-able"
+                <div v-unlock-account @unlocked="recharge(token.id)"
+                     class="click-able"
                 >{{$t("exchangeAssets.table.rowMap.recharge")}}</div>
-                <div
-                    @click="withdraw(token.id)"
-                    class="click-able"
+                <div v-unlock-account @unlocked="withdraw(token.id)"
+                     class="click-able"
                 >{{$t("exchangeAssets.table.rowMap.withdraw")}}</div>
                 <div
                     @click="detail(token.id)"
