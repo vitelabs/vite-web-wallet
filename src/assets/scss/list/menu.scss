@@ -6,6 +6,28 @@
     color: rgba(29,32,36,0.6);
     margin-right: 39px;
     line-height: 45px;
+    &.dex .list-title {
+        color: rgba(189,193,209,1);
+        &:after {
+            width: 20px;
+            height: 12px;
+            margin-left: 0;
+            margin-top: -6px;
+        }
+        &.down {
+            &:after {
+                background: url('~assets/imgs/grayLangArrow.svg');
+                background-size: 20px 12px;
+            }
+        }
+        &.up {
+            &:after {
+                background: url('~assets/imgs/grayLangArrow.svg');
+                transform: rotate(180deg);
+                background-size: 20px 12px;
+            }
+        }
+    }
     .list {
         position: absolute;
         z-index: 100;

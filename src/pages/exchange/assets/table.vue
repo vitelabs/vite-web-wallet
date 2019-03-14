@@ -17,7 +17,7 @@
                 :key="token.id"
             >
                 <div>{{token.symbol}}</div>
-                <div>{{token.available+token.lock}}</div>
+                <div>{{Number((token.available+token.lock).toFixed(8))}}</div>
                 <div>{{token.available}}</div>
                 <div>{{token.lock||0}}</div>
                 <div>{{token.worth}}</div>
@@ -35,57 +35,59 @@
                 >{{$t("exchangeAssets.table.rowMap.detail")}}</div>
             </div>
         </div>
-        <img @click="update" class="refresh" src="~assets/imgs/exchange/refresh.svg" />
-        <confirm
-            :title="c.title"
-            :singleBtn="true"
-            :leftBtnTxt="c.btn"
-            :leftBtnClick="confirmClick"
-            :closeIcon="true"
-            :close="closeNumConfirm"
-            v-if="confirmShow"
-        >
+
+        <img @click="update" class="refresh" :class="{rotate:isRotate}" src="~assets/imgs/exchange/refresh.svg" />
+
+        <confirm :title="c.title" :singleBtn="true"
+                 :leftBtnTxt="c.btn" :leftBtnClick="confirmClick"
+                 :closeIcon="true" :close="closeNumConfirm"
+                 v-if="confirmShow">
             <div class="confirm">
-                <div class="lable">{{c.lable1}}</div>
-                <div class="input un-click-able"><img :src="c.icon" />{{balance[c.tokenId].symbol}} <div class="num">{{c.type.toLowerCase()==="recharge"?balance[c.tokenId].balance:balance[c.tokenId].available}}</div>
+                <div class="lable">{{ c.lable1 }}</div>
+                <div class="input un-click-able">
+                    <img :src="c.icon" />
+                    {{balance[c.tokenId].symbol}} 
+                    <div class="num">
+                        {{ c.type.toLowerCase()==="recharge" ? balance[c.tokenId].balance : balance[c.tokenId].available }}
+                    </div>
                 </div>
-                <div class="lable">{{c.lable2}} <div class="errtips">{{c.errTips}}</div>
+                <div class="lable">{{ c.lable2 }} 
+                    <div class="errtips">{{ c.errTips }}</div>
                 </div>
-                <div class="input"><input
-                    type="text"
-                    :placeholder="c.placeholder"
-                    v-model="opNumber"
-                ></div>
+                <div class="input">
+                    <input type="text" :placeholder="c.placeholder" v-model="opNumber">
+                </div>
             </div>
         </confirm>
-        <alert
-            v-show="detailConfirm"
-            :list="detailList"
-            :heads="$t('exchangeAssets.confirmTable.heads')"
-            :title="$t('exchangeAssets.confirmTable.title')"
-            :close="close"
-        >
 
-        </alert>
+        <alert v-show="detailConfirm" :list="detailList"
+               :heads="$t('exchangeAssets.confirmTable.heads')"
+               :title="$t('exchangeAssets.confirmTable.title')"
+               :close="close"></alert>
+
         <powProcess ref="pow"></powProcess>
     </div>
 </template>
+
 <script>
 import alert from '../components/alert.vue';
-import confirm from 'components/confirm.vue';
-import { deposit, withdraw, chargeDetail } from 'services/exchange';
 import BigNumber from 'utils/bigNumber';
 import getTokenIcon from 'utils/getTokenIcon';
+import confirm from 'components/confirm.vue';
 import powProcess from 'components/powProcess';
+import debounce from 'lodash/debounce';
+import d from 'dayjs';
+
+import { deposit, withdraw, chargeDetail } from 'services/exchange';
+
 const VoteDifficulty = '201564160';
+
 export default {
+    components: {
+        confirm, alert, powProcess
+    },
     props: {
         filter: { type: Object }
-    },
-    components: {
-        confirm,
-        alert,
-        powProcess
     },
     beforeMount() {
         this.acc = this.$wallet.getActiveAccount();
@@ -93,6 +95,7 @@ export default {
             return;
         }
         this.acc && (this.addr = this.acc.getDefaultAddr());
+        this.addr&&this.$store.dispatch('updateExBalance',this.addr);
     },
     data() {
         return {
@@ -103,15 +106,22 @@ export default {
             detailData: [],
             detailConfirm: false,
             acc: null,
-            addr: ''
+            addr: '',
+            isRotate:false
         };
     },
     methods: {
-        update(){
-            this.addr&&this.$store.dispatch('updateExBalance',this.addr);
-        },
+        update: debounce(function (){
+            this.isRotate=true;
+            setTimeout(()=>{
+                this.isRotate=false;
+            },2000);
+            this.addr && this.$store.dispatch('updateExBalance', this.addr);
+        }, 0.1),
         withdraw(tokenId) {
-            this.showConfirm({ tokenId, type: 'withdraw' });
+            this.showConfirm({ 
+                tokenId, type: 'withdraw' 
+            });
         },
         recharge(tokenId) {
             this.showConfirm({ tokenId, type: 'recharge' });
@@ -240,7 +250,7 @@ export default {
             return Object.keys(this.detailData).map(k => {
                 const o = this.detailData[k];
                 return [
-                    new Date(o.optime * 1000).toLocaleString(),
+                    d.unix(o.optime).format('YYYY-MM-DD HH:mm'),
                     o.tokenName,
                     this.$t('exchangeAssets.table.rowMap.sideMap')[o.optype],
                     o.amount
@@ -297,7 +307,7 @@ export default {
             return Object.keys(this.balance)
                 .map(k => this.balance[k])
                 .filter(v => {
-                    const NOTnoZero = this.filter.hideZero && v.balance === 0;
+                    const NOTnoZero = this.filter.hideZero && (v.available+v.lock) === 0;
                     const NOTmatchKey =
                         this.filter.filterKey &&
                         !v.symbol.match(new RegExp(this.filter.filterKey, 'i'));
@@ -319,8 +329,12 @@ export default {
         height: 20px;
         width: 20px;
         cursor: pointer;
-        top: 25px;
-        right: 40px;
+        top: 10px;
+        right: 6px;
+        &.rotate{
+            transform: rotate(360deg);
+            transition: all ease-in-out 1s;
+        }
     }
 }
 @include rowWith {

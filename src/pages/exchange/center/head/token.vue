@@ -1,5 +1,5 @@
 <template>
-    <div v-click-outside="hideToken" class="token">
+    <div ref="tContainer" v-click-outside="hideToken" class="token">
         <div class="t-item __pointer" @click="showToken('ftoken')">
             <div class="t-icon">
                 <img :src="ftokenIcon"/>
@@ -21,7 +21,7 @@
                 {{ ttokenDetail ? ttokenDetail.tokenId : '' }}
             </div>
         </div>
-        <div v-show="showTokenType" class="detail">
+        <div v-show="showTokenType" class="detail" :class="{'right': showTokenType === 'ttoken'}">
             <div class="token-row">
                 <span class="token-title">{{ $t('exchange.head.tokenName') }} :</span>{{ tokenDetail.tokenName || '--' }}
             </div>
@@ -106,7 +106,14 @@ export default {
         showToken(type) {
             this.showTokenType = type;
         },
-        hideToken() {
+        hideToken(e) {
+            let tContainer = this.$refs.tContainer;
+            if (!tContainer || 
+                e.target === tContainer ||
+                tContainer.contains( e.target )) {
+                return;
+            }
+
             this.showTokenType = '';
         }
     }
@@ -162,10 +169,15 @@ export default {
         font-family: $font-normal, arial, sans-serif;
         font-weight: 400;
         font-size: 11px;
+        &.right {
+            &:after {
+                left: 130px;
+            }
+        }
         &:after {
             position: absolute;
             top: -12px;
-            left: 60px;
+            left: 40px;
             content: ' ';
             display: inline-block;
             border: 6px solid transparent;

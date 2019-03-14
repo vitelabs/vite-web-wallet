@@ -1,63 +1,73 @@
 <template>
     <div class="assets-ct">
         <div class="filter-root">
-            <Search
-                class="filter"
-                v-model="filterKey"
-                :placeholder="$t('exchangeAssets.search')"
-            ></Search>
-
-            <div class="filter"><input
-                type="checkbox"
-                v-model="hideZero"
-            >{{ $t("exchangeAssets.zero") }}</div>
+            <Search class="filter" v-model="filterKey"
+                    :placeholder="$t('exchangeAssets.search')">
+            </Search>
+            <div class="filter">
+                <input type="checkbox" v-model="hideZero">
+                {{ $t("exchangeAssets.zero") }}
+            </div>
         </div>
         <Table :filter="{hideZero,filterKey:filterKey.trim()}"></Table>
     </div>
 </template>
+
 <script>
-// optype: 1充值，2提现； optime单位是秒；
 import Table from './table';
 import Search from 'components/search';
+
 export default {
+    components: {
+        Table, Search
+    },
     data() {
+        // optype: 1充值，2提现； optime单位是秒；
+    
         return {
             hideZero: false,
             filterKey: '',
-            acc:null,
-            addr:''
+            acc: null,
+            addr: ''
         };
     },
 
-    components: {
-        Table,
-        Search
-    },
-    computed: {}
 };
 </script>
+
 <style lang="scss" scoped>
+@import "~assets/scss/vars.scss";
+
 .filter-root {
     display: flex;
     align-items: flex-end;
-    margin-bottom: 20px;
+    margin-bottom: 14px;
     .filter {
-        height: 40px;
+        box-sizing: border-box;
+        height: 28px;
+        padding: 6px;
+        font-size: 12px;
+        font-family: $font-normal, arial, sans-serif;
+        font-weight: 400;
+        color: rgba(206,209,213,1);
+        line-height: 17px;
+
         &:first-child {
-            width: 400px;
+            width: 260px;
             input {
                 width: 100%;
                 height: 100%;
             }
         }
         &:last-child {
-            margin-left: 18px;
-            input {
-                margin-right: 10px;
-            }
+            margin-left: 20px;
+            color: #5E6875;
             width: 140px;
             display: flex;
             align-items: center;
+            input {
+                margin-right: 10px;
+            }
         }
     }
     .filter_content {
@@ -71,6 +81,17 @@ export default {
 }
 .assets-ct {
     height: 100%;
-    padding: 20px 10px 10px;
+    padding: 14px 10px 28px 10px;
 }
 </style>
+
+<style lang="scss">
+.filter.search .icon {
+    width: 12px;
+    height: 12px;
+    background-size: 12px 12px;
+    margin-top: 2px;
+    margin-right: 3px;
+}
+</style>
+

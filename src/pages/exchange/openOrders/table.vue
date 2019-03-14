@@ -1,43 +1,48 @@
 <template>
     <div class="ex_tb">
         <div class="head-row">
-            <div
-                v-for="(h) in $t('exchangeOpenOrders.table.heads')"
-                :key="h"
-            >{{h}}
+            <div v-for="(h) in $t('exchangeOpenOrders.table.heads')" :key="h">
+                {{ h }}
             </div>
-            <div></div>
         </div>
         <div class="row-container">
-            <div
-                class="row"
-                v-for="v in sortedList"
-                :key="v.orderId"
-            >
-                <div>{{(new Date(v.date*1000)).toLocaleString()}}</div>
-                <div>{{`${v.ftokenShow}/${v.ttokenShow}`}}</div>
-                <!-- //0:buy,1:sell -->
-                <div :class="{buy:v.side===0,sell:v.side===1}">{{$t("exchangeOrderHistory.side")[v.side]}}</div>
-                <div>{{v.price}} {{v.ttokenShow}}</div>
-                <div>{{v.quantity}} {{v.ftokenShow}}</div>
-                <div>{{v.filledQ}} {{v.ftokenShow}}</div>
-                <div>{{`${(v.rate*100).toFixed(2)}%`}}</div>
-                <div>{{v.average}} {{v.ttokenShow}}</div>
-                <div
-                    @click="cancel(v)"
-                    class="click-able"
-                >{{$t("exchangeOpenOrders.table.rowMap.cancel")}}</div>
+            <div class="row" v-for="v in sortedList" :key="v.orderId">
+                <div>{{ v.date|d }}</div>
+                <div>{{ `${v.ftokenShow}/${v.ttokenShow}` }}</div>
+                <div :class="{
+                    'buy': v.side===0,
+                    'sell': v.side===1
+                }">{{ $t("exchangeOrderHistory.side")[v.side] }}</div>
+                <div>{{ v.price + ' ' + v.ttokenShow }}</div>
+                <div>{{ v.quantity + ' ' + v.ftokenShow }}</div>
+                <div>{{ v.filledQ + ' ' + v.ftokenShow }}</div>
+                <div>{{ `${(v.rate*100).toFixed(2)}%` }}</div>
+                <div>{{ v.average + ' ' + v.ttokenShow }}</div>
+                <div @click="cancel(v)" class="click-able">
+                    {{ $t("exchangeOpenOrders.table.rowMap.cancel") }}
+                </div>
+            </div>
+            <div class="no-data" v-show="!sortedList || !sortedList.length">
+                <div>{{ $t('hint.noData') }}</div>
             </div>
         </div>
         <powProcess ref="pow"></powProcess>
     </div>
 </template>
+
 <script>
 import { order, cancelOrder } from 'services/exchange';
 import powProcess from 'components/powProcess';
 import { timer } from 'utils/asyncFlow';
+import d from 'dayjs';
+
 const VoteDifficulty = '201564160';
+let task=null;
+
 export default {
+    components: { 
+        powProcess 
+    },
     props: {
         filterObj: {
             type: Object,
@@ -46,6 +51,11 @@ export default {
         isEmbed:{
             type:Boolean,
             default:false
+        }
+    },
+    filters:{
+        d(v){
+            return d.unix(v).format('YYYY-MM-DD HH:mm');
         }
     },
     data() {
@@ -58,7 +68,6 @@ export default {
             timer:null
         };
     },
-    components: { powProcess },
     methods: {
         update() {
             this.acc = this.$wallet.getActiveAccount();
@@ -132,16 +141,18 @@ export default {
             );
         }
     },
-    beforeMount() {
+    mounted(){
         this.update();
+    },
+    activated() {
         if(this.isEmbed){
-            this.timer=new timer(()=>this.update(),5000);
-            this.timer.start();
+            task=new timer(()=>this.update(),1000);
+            task.start();
         }
 
     },
-    beforeDestroy(){
-        this.timer&&this.timer.stop();
+    deactivated(){
+        task&&task.stop();
     },
     watch: {
         filterObj() {
@@ -158,8 +169,10 @@ export default {
     }
 };
 </script>
+
 <style lang="scss" scoped>
 @import "../components/table.scss";
+
 .ex_tb {
     height: 100%;
     margin-bottom: 10px;

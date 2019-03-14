@@ -3,20 +3,25 @@
 <template>
     <div class="exchange-center-wrapper">
         <center v-if="active === 'exchange'"></center>
-        <div class="order-wrapper" v-if="active === 'exchange'">
+        <div
+            class="order-wrapper"
+            v-if="active === 'exchange'"
+        >
             <div class="order">
                 <div class="ex-tab-list">
-                    <div @click="tap='openOrder'" class="ex-tab __pointer" 
+                    <div @click="tap='openOrder'" class="ex-tab active-side __pointer" 
                          :class="{'active': tap === 'openOrder'}">
                         {{$t('exchangeOpenOrders.title')}}</div>
-                    <div @click="tap='historyOrder'" class="ex-tab __pointer" 
+                    <div @click="tap='historyOrder'" class="ex-tab active-side __pointer" 
                          :class="{'active': tap === 'historyOrder'}">
                         {{$t('exchangeOrderHistory.title')}}</div>
                 </div>
                 <openOrder v-if="tap==='openOrder'" class="item" :isEmbed="true"
-                           :filterObj="{ftoken:activeTxPair.ftoken,ttoken:activeTxPair.ttoken}"></openOrder>
+                           :filterObj="{ftoken:activeTxPair.ftoken,ttoken:activeTxPair.ttoken,pageSize:10}">
+                </openOrder>
                 <historyOrder v-if="tap==='historyOrder'" class="item" :isEmbed="true" 
-                              :filterObj="{ftoken:activeTxPair.ftoken,ttoken:activeTxPair.ttoken}"></historyOrder>
+                              :filterObj="{ftoken:activeTxPair.ftoken,ttoken:activeTxPair.ttoken,pageSize:10}">
+                </historyOrder>
             </div>
         </div>
         <router-view></router-view>
@@ -41,9 +46,9 @@ export default {
     destroyed() {
         this.$store.dispatch('stopLoopExchangeRate');
     },
-    computed:{
-        activeTxPair(){
-            return this.$store.state.exchangeActiveTxPair.activeTxPair||{};
+    computed: {
+        activeTxPair() {
+            return this.$store.state.exchangeActiveTxPair.activeTxPair || {};
         }
     },
     data() {
@@ -74,10 +79,10 @@ export default {
         height: 40px;
     }
     .order {
-        background:#fff;
-        box-shadow:0px 2px 48px 1px rgba(176,192,237,0.42);
+        background: #fff;
+        box-shadow: 0px 2px 48px 1px rgba(176, 192, 237, 0.42);
         margin: 10px;
-        margin-top:0;
+        margin-top: 0;
         border-radius: 2px;
         .tap {
             height: 34px;
@@ -90,7 +95,7 @@ export default {
                 cursor: pointer;
                 margin: 0 10px;
                 border-radius: 4px 4px 0 0;
-                padding:4px 13px;
+                padding: 4px 13px;
                 &.active {
                     background: rgba(0, 122, 255, 1);
                     color: #fff;
@@ -100,7 +105,14 @@ export default {
         .item{
             height: 264px;
             margin: 0;
-            padding:0;
+            padding: 0;
+            overflow: hidden;
+            .ex-tb {
+                padding-top: 27px !important;
+            }
+            .head-row {
+                height: 27px !important;
+            }
         }
     }
     .router-wrapper {
@@ -117,6 +129,13 @@ export default {
     }
     .ex_tb {
         box-shadow: none;
+        padding-top: 34px;
+        .head-row {
+            height: 34px;
+        }
+        .row {
+            height: 32px;
+        }
     }
 }
 </style>

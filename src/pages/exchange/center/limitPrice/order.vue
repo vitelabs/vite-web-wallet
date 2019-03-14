@@ -473,7 +473,7 @@ $font-black: rgba(36,39,43,1);
 
 .order-wrapper {
     flex: 1;
-    padding: 0 22px;
+    padding: 0 6px;
     .order-title {
         height: 17px;
         line-height: 17px;
@@ -514,16 +514,15 @@ $font-black: rgba(36,39,43,1);
         .quantity-percent {
             display: block;
             float: right;
-            font-size: 11px;
+            font-size: 12px;
             li {
                 display: inline-block;
                 box-sizing: border-box;
-                border: 1px solid $blue;
+                border-bottom: 1px dashed $blue;
+                font-family: $font-normal, arial, sans-serif;
                 color: $blue;
-                height: 16px;
                 line-height: 16px;
-                padding: 0 2px;
-                border-radius: 2px;
+                margin-left: 10px;
                 &.active {
                     background: $blue;
                     color: #fff;
@@ -556,10 +555,10 @@ $font-black: rgba(36,39,43,1);
         font-weight: 600;
         color: #fff;
         &.red {
-            background: linear-gradient(315deg,rgba(226,43,116,1) 0%,rgba(237,81,88,1) 100%);;
+            background: linear-gradient(270deg,rgba(226,43,116,1) 0%,rgba(237,81,88,1) 100%);
         }
         &.green {
-            background: linear-gradient(315deg,rgba(0,212,208,1) 0%,rgba(0,215,100,1) 100%);;
+            background: linear-gradient(270deg,rgba(0,212,208,1) 0%,rgba(0,215,100,1) 100%);
         }
         &.gray {
             background: rgba(0, 0, 0, 0.4);
