@@ -53,6 +53,6 @@ export default {
 <style lang="scss" scoped>
 .open-order-ct {
     height: 100%;
-    padding: 20px 10px 10px;
+    padding: 20px 10px 28px;
 }
 </style>
