@@ -74,8 +74,6 @@ export default {
         },
 
         valid() {
-            console.log('??????');
-
             // [NOTICE] Order fix
             // Name not empty
             if (!this.name) {

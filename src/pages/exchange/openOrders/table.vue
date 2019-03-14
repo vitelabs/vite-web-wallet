@@ -18,7 +18,7 @@
                 <div>{{ v.filledQ + ' ' + v.ftokenShow }}</div>
                 <div>{{ `${(v.rate*100).toFixed(2)}%` }}</div>
                 <div>{{ v.average + ' ' + v.ttokenShow }}</div>
-                <div @click="cancel(v)" class="click-able">
+                <div v-unlock-account v-on:unlocked="cancel(v)" class="click-able">
                     {{ $t("exchangeOpenOrders.table.rowMap.cancel") }}
                 </div>
             </div>
