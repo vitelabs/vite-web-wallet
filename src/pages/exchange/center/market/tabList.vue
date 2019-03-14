@@ -1,10 +1,10 @@
 <template>
     <ul class="ex-tab-list">
-        <li
-            v-for="(_t, i) in toTokenList"
-            :key="i"
-            class="ex-tab __pointer"
-            :class="{'active': _t.token === activeTokenId}"
+        <li v-for="(_t, i) in toTokenList" :key="i"
+            :class="{
+                'active': _t.token === activeTokenId,
+                'active-side': toTokenList[i-1] && toTokenList[i-1].token === activeTokenId
+            }" class="ex-tab __pointer"
             @click="changeToken(_t)"
         >{{ _t.name }}</li>
     </ul>

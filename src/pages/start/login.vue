@@ -1,65 +1,74 @@
 <template>
     <div class="login-wrapper">
-        <div class="__title">{{$t('login')}}</div>
+        <div class="__title">{{ $t('login') }}</div>
 
-        <div class="bottom __btn __pointer">
-            <div v-click-outside="hideAccountList" @click="toggleAccountList">
-                <div v-show="!activeAccount" class="__btn_input">{{ $t('startCreate.choose') }}</div>
+        <div @click="toggleShowExisting" class="switch-btn" :class="{'radius': isShowExisting}">
+            <div class="btn-item __pointer" :class="{'active': isShowExisting}">
+                {{ $t('existingAcc') }}</div>
+            <div class="btn-item __pointer" :class="{'active': !isShowExisting}">
+                {{ $t('mnemonic.restore') }}</div>
+        </div>
 
-                <div v-show="activeAccount && !activeAccount.addr" class="__btn __btn_input">
-                    <div class="name __ellipsis">{{ activeAccount.name }}</div>
+        <div v-show="isShowExisting" class="existing-acc">
+            <div class="bottom __btn __pointer">
+                <div v-click-outside="hideAccountList" @click="toggleAccountList">
+                    <div v-show="activeAccount && !activeAccount.addr" class="__btn __btn_input">
+                        <div class="name __ellipsis">{{ activeAccount.name }}</div>
+                    </div>
+
+                    <div v-show="activeAccount && activeAccount.addr" class="__btn __btn_input_active">
+                        <div class="name __ellipsis">{{ activeAccount.name }}</div>
+                        <div class="address __ellipsis">{{ activeAccount.showAddr }}</div>
+                    </div>
+
+                    <span :class="{ 
+                        'slide': true,
+                        'down': !isShowAccountList,
+                        'up': isShowAccountList
+                    }"></span>
                 </div>
-
-                <div v-show="activeAccount && activeAccount.addr" class="__btn __btn_input_active">
-                    <div class="name __ellipsis">{{ activeAccount.name }}</div>
-                    <div class="address __ellipsis">{{ activeAccount.showAddr }}</div>
-                </div>
-
-                <span :class="{ 
-                    'slide': true,
-                    'down': !isShowAccountList,
-                    'up': isShowAccountList
-                }"></span>
+                
+                <account-list v-show="isShowAccountList" 
+                              :accountList="accountList"
+                              :clickAccount="chooseAccount"></account-list>
             </div>
-            
-            <account-list v-show="isShowAccountList" 
-                          :accountList="accountList"
-                          :clickAccount="chooseAccount"></account-list>
+
+            <div class="bottom __btn __btn_input" 
+                 :class="{ 'active': !!password || inputItem === 'pass' }">
+                <input ref="passInput" autofocus :placeholder="$t('startCreate.input')" 
+                       v-model="password" :type="'password'"
+                       @focus="inputFocus('pass')" @blur="inputBlur('pass')" />
+            </div>
+
+            <div class="__btn_list">
+                <span class="__btn __btn_border __pointer" @click="addAcc" >
+                    {{ $t('addAccount') }}
+                </span>
+                <div class="__btn __btn_all_in __pointer" @click="login">
+                    <span v-show="!isLoading">
+                        {{ isShowExisting ? $t('btn.login') : $t('startCreate.finish') }}
+                    </span>
+                    <loading v-show="isLoading" loadingType="dot"></loading>
+                </div>
+            </div>
         </div>
 
-        <div class="bottom __btn __btn_input" 
-             :class="{ 'active': !!password || inputItem === 'pass' }">
-            <input ref="passInput" autofocus :placeholder="$t('startCreate.input')" 
-                   v-model="password" :type="'password'"
-                   @focus="inputFocus('pass')" @blur="inputBlur('pass')" />
-        </div>
-
-        <div class="bottom __btn __pointer __btn_all_in" @click="login">
-            <span v-show="!isLoading">{{ $t('btn.login') }}</span>
-            <loading v-show="isLoading" loadingType="dot"></loading>
-        </div>
-
-        <div class="btn-list" :class="{ zh: $t('lang') === '中文' }">
-            <router-link class="__btn_link" :class="{
-                en: $t('lang') === 'English'  
-            }" :to="{ name: 'startImport' }">{{ $t('btn.imported') }}</router-link>
-            <span class="line" v-show="$t('lang') === '中文'"></span>
-            <router-link class="__btn_link" :class="{
-                en: $t('lang') === 'English'  
-            }" :to="{ name: 'startRestore' }">{{$t('mnemonic.restore')}}</router-link>
-        </div>
+        <restore ref="restoreDom" v-show="!isShowExisting"
+                 :leftClick="addAcc" leftTxt="createAcc"
+                 :finishCb="showExisting"></restore>
     </div>
 </template>
 
 <script>
 import Vue from 'vue';
+import restore from './restore.vue';
 import accountList from './accountList.vue';
-import ellipsisAddr from 'utils/ellipsisAddr.js';
 import loading from 'components/loading.vue';
+import ellipsisAddr from 'utils/ellipsisAddr.js';
 
 export default {
     components: {
-        accountList, loading
+        accountList, loading, restore
     },
     mounted() {
         this.$onKeyDown(13, () => {
@@ -80,9 +89,24 @@ export default {
             accountList: [],
             isShowAccountList: false,
             inputItem: '',
+            isShowExisting: true
         };
     },
+    watch: {
+        isShowExisting: function() {
+            if (!this.isShowExisting) {
+                return;
+            }
+            this.activeAccount = this.getLoginAcc();
+        }
+    },
     methods: {
+        showExisting() {
+            this.isShowExisting = true;
+        },
+        toggleShowExisting() {
+            this.isShowExisting = !this.isShowExisting;
+        },
         getLoginAcc() {
             let account = this.$wallet.getLast();
             if (account) {
@@ -133,7 +157,18 @@ export default {
             this.isShowAccountList = false;
         },
 
+        addAcc() {
+            this.$wallet.clearActiveAccount();
+            this.$router.push({
+                name: 'startCreate'
+            });
+        },
         login() {
+            if (!this.isShowExisting) {
+                this.$refs.restoreDom && this.$refs.restoreDom.valid();
+                return;
+            }
+
             if (!this.activeAccount || this.isLoading) {
                 return;
             }
@@ -177,6 +212,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "~assets/scss/vars.scss";
+
 .login-wrapper {
     .__btn {
         position: relative;
@@ -226,6 +263,34 @@ export default {
         .__btn_link.en:first-child {
             display: block;
             margin-bottom: 10px;
+        }
+    }
+
+    .switch-btn {
+        display: inline-block;
+        margin-bottom: 20px;
+        border-radius: 16px;
+        background: #007AFF;
+        box-shadow: 0px 0px 4px 0px rgba(0,105,219,1);
+        padding-left: 12px;
+        &.radius {
+            padding-left: 0;
+            padding-right: 12px;
+        }
+        .btn-item {
+            display: inline-block;
+            color: #fff;
+            font-size: 14px;
+            font-family: $font-bold, arial, sans-serif;
+            font-weight: 600;
+            color: rgba(255,255,255,1);
+            line-height: 18px;
+            &.active {
+                background:rgba(51,187,255,1);
+                border-radius: 16px;
+                padding: 6px 12px;
+                box-shadow: 0px 0px 4px 0px rgba(0,105,219,1);
+            }
         }
     }
 }

@@ -1,45 +1,43 @@
 <template>
     <div class="ex_tb">
         <div class="head-row">
-            <div
-                v-for="h in $t('exchangeOrderHistory.table.heads')"
-                :key="h"
-            >{{h}}
+            <div v-for="h in $t('exchangeOrderHistory.table.heads')" :key="h">
+                {{ h }}
             </div>
-            <div></div>
         </div>
         <div class="row-container">
-            <div
-                class="row"
-                v-for="v in sortedList"
-                :key="v.orderId"
-            >
-                <div>{{new Date(v.date*1000).toLocaleString()}}</div>
-                <div>{{`${v.ftokenShow}/${v.ttokenShow}`}}</div>
-                <div :class="{buy:v.side===0,sell:v.side===1}">{{$t("exchangeOrderHistory.side")[v.side]}}</div>
-                <div>{{v.price}} {{v.ttokenShow}}</div>
-                <div>{{v.amount}} {{v.ftokenShow}}</div>
-                <div>{{v.filledQ}} {{v.ftokenShow}}</div>
-                <div>{{`${(v.rate*100).toFixed(2)}%`}}</div>
-                <div>{{v.average}} {{v.ttokenShow}}</div>
-                <div>{{v.fee}} {{v.ttokenShow}}</div>
-                <div>{{$t('exchangeOrderHistory.table.rowMap.statusMap')[v.status]}}</div>
-                <div @click="showDetail(v)"  class="click-able">{{$t("exchangeOrderHistory.table.rowMap.detail")}}</div>
+            <div class="row" v-for="v in sortedList" :key="v.orderId">
+                <div>{{ v.date|d }}</div>
+                <div>{{ `${v.ftokenShow}/${v.ttokenShow}` }}</div>
+                <div :class="{
+                    'buy': v.side===0,
+                    'sell': v.side===1
+                }">{{ $t("exchangeOrderHistory.side")[v.side] }}</div>
+                <div>{{ v.price }} {{ v.ttokenShow }}</div>
+                <div>{{ v.amount }} {{ v.ftokenShow }}</div>
+                <div>{{ v.filledQ }} {{v.ftokenShow }}</div>
+                <div>{{ `${(v.rate*100).toFixed(2)}%` }}</div>
+                <div>{{ v.average }} {{ v.ttokenShow }}</div>
+                <div>{{ v.fee }} {{ v.ttokenShow }}</div>
+                <div>{{ $t('exchangeOrderHistory.table.rowMap.statusMap')[v.status] }}</div>
+                <div @click="showDetail(v)" class="click-able">
+                    {{ $t("exchangeOrderHistory.table.rowMap.detail") }}
+                </div>
+            </div>
+            <div class="no-data" v-show="!sortedList || !sortedList.length">
+                <div>{{ $t('hint.noData') }}</div>
             </div>
         </div>
-        <confirm
-            v-show="detailConfirm"
-            :list="detailList"
-            :close="close"
-            :heads="$t('exchangeOrderHistory.confirmTable.heads')"
-        >
-
+        <confirm v-show="detailConfirm" :list="detailList" :close="close"
+                 :title="$t('exchangeOrderHistory.confirmTable.title')"
+                 :heads="$t('exchangeOrderHistory.confirmTable.heads')">
         </confirm>
     </div>
 </template>
 <script>
 import confirm from '../components/alert';
 import {orderDetail} from 'services/exchange';
+import d from 'dayjs';
 export default {
     props: {
         list: {
@@ -49,6 +47,11 @@ export default {
     },
     components:{
         confirm
+    },
+    filters:{
+        d(v){
+            return d.unix(v).format('YYYY-MM-DD HH:mm');
+        }
     },
     data() {
         return {
@@ -65,6 +68,7 @@ export default {
             orderDetail({orderId:order.orderId,ftoken:order.ftoken,ttoken:order.ttoken,pageNo:1,pageSize:100}).then(data=>{
                 this.detailData=data.details.map(v=>{
                     v.token=order.ttokenShow;
+                    v.ftokenShow=order.ftokenShow;
                     return v;
                 });
             });
@@ -78,7 +82,7 @@ export default {
         detailList(){
             return Object.keys(this.detailData).map(k=>{
                 const o=this.detailData[k];
-                return [new Date(o.txTime*1000).toLocaleString(),`${o.price} ${o.token}`,`${o.quantity} ${o.token}`,`${o.fee} ${o.token}`,`${o.amount} ${o.token}`];
+                return [d.unix(o.txTime).format('YYYY-MM-DDTHH:mm'),`${o.price} ${o.token}`,`${o.quantity} ${o.ftokenShow}`,`${o.fee} ${o.token}`,`${o.amount} ${o.token}`];
 
             });
         }

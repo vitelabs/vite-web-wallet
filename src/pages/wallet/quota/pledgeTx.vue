@@ -22,8 +22,8 @@
                 <div class="title">
                     {{ $t('walletQuota.beneficialAddr') }}
                     <span v-show="!isValidAddress" class="err no-right">{{ $t('hint.addrFormat') }}</span>
-                    <span @click="addToAddr('mine')" class="toaddr">{{ $t('walletQuota.myAddr') }}</span>
-                    <span @click="addToAddr('dex')" class="toaddr">{{ $t('walletQuota.VX') }}</span>
+                    <span @click="addToAddr('mine')" class="toaddr __pointer">{{ $t('walletQuota.myAddr') }}</span>
+                    <span @click="addToAddr('dex')" class="toaddr __pointer">{{ $t('walletQuota.VX') }}</span>
                 </div>
                 <vite-input v-model="toAddr" :valid="testAddr"
                             :placeholder="$t('walletQuota.addrPlaceholder')">

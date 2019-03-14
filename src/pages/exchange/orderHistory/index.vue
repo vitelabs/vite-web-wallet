@@ -25,7 +25,8 @@ import Table from './table';
 import { order } from 'services/exchange';
 import Pagination from 'components/pagination';
 import { timer } from 'utils/asyncFlow';
-const pageSize = 10;
+const pageSize = 35;
+let task=null;
 export default {
     components: {
         Filters,
@@ -51,15 +52,17 @@ export default {
             timer: null
         };
     },
-    beforeMount() {
-        if (this.isEmbed) {
-            this.timer = new timer(() => this.update(), 5000);
-            this.timer.start();
-        }
+    mounted(){
         this.update();
     },
-    beforeDestroy() {
-        this.timer && this.timer.stop();
+    activated() {
+        if(this.isEmbed){
+            task=new timer(()=>this.update(),1000);
+            task.start();
+        }
+    },
+    deactivated() {
+        task && task.stop();
     },
     watch: {
         filterObj() {

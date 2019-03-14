@@ -3,7 +3,10 @@
         <Table :list="data" :filterObj="filterObj" :isEmbed="isEmbed"></Table>
     </div>
 </template>
+
 <script>
+import Table from './table';
+
 //status Pending=0，PartialExecuted=1，FullyExecuted=2，Cancelled=3
 // 0 buy 1 sell
 // {
@@ -25,7 +28,6 @@
 //         "status": 1, //Pending=0，PartialExecuted=1，FullyExecuted=2，Cancelled=3
 //         "type": 1 //Limited=0(限价单),Market=1(市价单)
 //       }
-import Table from './table';
 export default {
     data() {
         return {
@@ -47,6 +49,7 @@ export default {
     }
 };
 </script>
+
 <style lang="scss" scoped>
 .open-order-ct {
     height: 100%;
