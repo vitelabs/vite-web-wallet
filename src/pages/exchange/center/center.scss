@@ -104,6 +104,8 @@ $up-font-color: $green;
         }
         &.amount {
             width: 44%;
+            padding-right: 6px;
+            box-sizing: border-box;
         }
     }
 }
