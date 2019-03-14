@@ -175,7 +175,6 @@ export default {
 
 .ex_tb {
     height: 100%;
-    margin-bottom: 10px;
 }
 @include rowWith {
     width: 8%;
