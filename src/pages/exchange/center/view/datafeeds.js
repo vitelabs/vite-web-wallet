@@ -20,7 +20,7 @@ export default class dataFeeds {
         }, 0);
     }
     resolveSymbol(symbolName, onSymbolResolvedCallback) {
-        console.log('resolveSymbol', symbolName);
+        // console.log('resolveSymbol', symbolName);
         return setTimeout(() => {
             onSymbolResolvedCallback({
                 name: this.symbolName,
@@ -45,6 +45,9 @@ export default class dataFeeds {
     }
     getBars(symbolInfo, resolution, from, to, onHistoryCallback, onErrorCallback, firstDataRequest) {
         console.log('getBars', symbolInfo, resolution, from, to, onErrorCallback, onHistoryCallback, firstDataRequest);
+        console.log(1000 * 60 * 60 * 24);
+        console.log(from * 1000, to * 1000, to * 1000 - from * 1000);
+
 
         if (this.lastResolution === resolution) {
             return;
