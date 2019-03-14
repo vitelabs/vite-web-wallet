@@ -18,8 +18,8 @@
             <div class="token-content" :class="{
                 'up': +upDown > 0,
                 'down': +upDown < 0
-            }">{{ upDown }} 
-                {{ activeTxPair && activeTxPair.upDownPercent ? activeTxPair.upDownPercent : '--' }}
+            }">{{ upDownIcon + upDown }} 
+                {{ activeTxPair && activeTxPair.upDownPercent ?  upDownIcon + activeTxPair.upDownPercent : '--' }}
             </div>
         </div>
         <div class="high-price item-left">
@@ -56,6 +56,12 @@ export default {
         },
         upDown() {
             return this.activeTxPair && this.activeTxPair.upDown ? this.activeTxPair.upDown : '0';
+        },
+        upDownIcon() {
+            if (this.upDown && this.upDown > 0) {
+                return '+';
+            }
+            return '';
         },
         realPrice() {
             let pre = '$';

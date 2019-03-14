@@ -17,8 +17,8 @@
                 <span>{{ opt.onroadNum || 0 }} {{ $t('wallet.pend') }}</span>
             </div>
         </div>
-        <div class="btn __pointer" :class="{ 'unuse': !opt.id || !opt.balance }" 
-             @click="_sendTx">{{ $t('sendTrans.send') }}</div>
+        <div v-unlock-account="_sendTx" class="btn __pointer" 
+             :class="{ 'unuse': !opt.id || !opt.balance }">{{ $t('sendTrans.send') }}</div>
     </div>
 </template>
 
