@@ -6,26 +6,26 @@ const state = {
 
 const mutations = {
     setCurrentMarket(state, tokenId){
-        state.currentMarket=tokenId;
+        state.currentMarket = tokenId;
     },
     setMarketMap(state, marketMap) {
-        state.marketMap=marketMap;
+        state.marketMap = marketMap;
     },
 };
 
-const actions ={
+const actions = {
     updateMarketMap({commit,state}){
         baseToken().then((data) => {
             commit('setMarketMap',data || []);
             const currentMarket = state.marketMap;
-            commit('setCurrentMarket',currentMarket[0]?currentMarket[0].token:'');
+            commit('setCurrentMarket',currentMarket[0] ? currentMarket[0].token : '');
         });
     }
 };
-const getters={
-    currentMarketName(state){
-        const token= state.marketMap.filter(n=>n.token===state.currentMarket)[0]||{};
-        return token.name||'';
+const getters = {
+    currentMarketName(state) {
+        const token = state.marketMap.filter(n => n.token === state.currentMarket)[0] || {};
+        return token.name || '';
     }
 };
 export default {

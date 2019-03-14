@@ -49,7 +49,7 @@
             <div class="item">
                 <div class="btn all __pointer" :class="{
                     'unuse': btnUnuse
-                }" @click="validTx">{{ $t('walletSBP.section1.confirmBtn') }}</div>
+                }" v-unlock-account="validTx">{{ $t('walletSBP.section1.confirmBtn') }}</div>
             </div>
         </div>
     </div>
