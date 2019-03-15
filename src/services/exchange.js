@@ -133,13 +133,13 @@ export const rateToken = function({
 };
 
 export const defaultPair = function({
-    toTokenId
+    ttoken
 }) {
     return request({
         path: path + '/pair/default',
         method: 'GET',
         params: {
-            token: toTokenId
+            token: ttoken
         }
     });
 };

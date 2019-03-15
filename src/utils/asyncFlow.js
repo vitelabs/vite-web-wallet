@@ -13,12 +13,11 @@ export  class timer {
         if (this.timeHandler) {
             return;
         }
-
+        this.loopFunc();// exec immediately for once
         const _task = () => {
             if (!this.loopFunc) {
                 return;
             }
-
             this.timeHandler = window.setTimeout(() => {
                 const triggered = this.loopFunc();
 
