@@ -9,18 +9,32 @@
         >
             <div class="order">
                 <div class="ex-tab-list">
-                    <div @click="tap='openOrder'" class="ex-tab active-side __pointer" 
-                         :class="{'active': tap === 'openOrder'}">
+                    <div
+                        @click="tap='openOrder'"
+                        class="ex-tab active-side __pointer"
+                        :class="{'active': tap === 'openOrder'}"
+                    >
                         {{$t('exchangeOpenOrders.title')}}</div>
-                    <div @click="tap='historyOrder'" class="ex-tab active-side __pointer" 
-                         :class="{'active': tap === 'historyOrder'}">
+                    <div
+                        @click="tap='historyOrder'"
+                        class="ex-tab active-side __pointer"
+                        :class="{'active': tap === 'historyOrder'}"
+                    >
                         {{$t('exchangeOrderHistory.title')}}</div>
                 </div>
-                <openOrder v-if="tap==='openOrder'" class="item" :isEmbed="true"
-                           :filterObj="{ftoken:activeTxPair.ftoken,ttoken:activeTxPair.ttoken,pageSize:10}">
+                <openOrder
+                    v-if="tap==='openOrder'"
+                    class="item"
+                    :isEmbed="true"
+                    :filterObj="{ftoken:activeTxPair.ftoken,ttoken:activeTxPair.ttoken,pageSize:10}"
+                >
                 </openOrder>
-                <historyOrder v-if="tap==='historyOrder'" class="item" :isEmbed="true" 
-                              :filterObj="{ftoken:activeTxPair.ftoken,ttoken:activeTxPair.ttoken,pageSize:10}">
+                <historyOrder
+                    v-if="tap==='historyOrder'"
+                    class="item"
+                    :isEmbed="true"
+                    :filterObj="{ftoken:activeTxPair.ftoken,ttoken:activeTxPair.ttoken,pageSize:10}"
+                >
                 </historyOrder>
             </div>
         </div>
@@ -32,10 +46,11 @@
 import center from './center/center.vue';
 import historyOrder from './orderHistory';
 import openOrder from './openOrders';
-
 export default {
     components: {
-        center, openOrder, historyOrder
+        center,
+        openOrder,
+        historyOrder
     },
     mounted() {
         this.$store.dispatch('startLoopExchangeRate');
@@ -102,7 +117,7 @@ export default {
                 }
             }
         }
-        .item{
+        .item {
             height: 264px;
             margin: 0;
             padding: 0;

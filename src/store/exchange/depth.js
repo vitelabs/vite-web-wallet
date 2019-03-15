@@ -38,12 +38,12 @@ const actions = {
     },
     exFetchDepthBuy({ commit,getters }) {
         commit('exSetDepthBuyLoading', true);
-        debugger;
         buyTask=buyTask||new subTask('depthBuy',(data)=>{
             commit('exSetDepthBuyLoading', false);
             commit('exSetDepthBuy', data);
         });
-        buyTask.start(getters.exActiveTxPair);
+        console.log('buy');
+        buyTask.start(()=>getters.exActiveTxPair);
     },
     exFetchDepthSell({ commit,getters }) {
         commit('exSetDepthSellLoading', true);
@@ -54,8 +54,9 @@ const actions = {
 
         // Loop
         stopSellTimer();
+        console.log('sell');
         sellTask =sellTask|| new subTask('depthSell',dataCallback,time);
-        sellTask.start(getters.exActiveTxPair);
+        sellTask.start(()=>getters.exActiveTxPair);
     },
     exStopDepthTimer() {
         stopTimer();

@@ -7,7 +7,6 @@ export  class timer {
     stop() {
         window.clearTimeout(this.timeHandler);
         this.timeHandler = null;
-        this.loopFunc = null;
     }
     start() {
         if (this.timeHandler) {

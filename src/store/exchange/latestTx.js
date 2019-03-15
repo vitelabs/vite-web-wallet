@@ -1,10 +1,7 @@
-import { latestTx } from 'services/exchange';
-import { timer } from 'utils/asyncFlow';
+import {subTask} from 'utils/proto/subTask';
 
 const latestTxTime = 2000;
-let latestTxTimer = null;
-let ftoken = null;
-let ttoken = null;
+let latestTxTask = null;
 
 const state = {
     txList: [],
@@ -21,43 +18,13 @@ const mutations = {
 };
 
 const actions = {
-    exFetchLatestTx({ rootState, commit }) {
-        let activeTxPair = rootState.exchangeActiveTxPair.activeTxPair;
-        if (!activeTxPair) {
-            return;
-        }
-
-        ftoken = activeTxPair.ftoken;
-        ttoken = activeTxPair.ttoken;
-
-        let _f = (cb) => {
-            return latestTx({
-                ftoken, ttoken
-            }).then((data) => {
-                cb && cb(data || []);
-            }).catch(err => {
-                console.warn(err);
-                cb && cb();
-            });
-        };
-
+    exFetchLatestTx({ getters, commit }) {
         // Init;
         commit('exSetLatestTxLoading', true);
-        _f((data) => {
-            let _activeTxPair = rootState.exchangeActiveTxPair.activeTxPair;
-            if (_activeTxPair.pairCode !== activeTxPair.pairCode) {
-                return;
-            }
-            data && commit('exSetLatestTxList', data);
-            commit('exSetLatestTxLoading', false);
-        });
-
         // Loop;
         stopLatestTimer();
-        latestTxTimer = new timer(()=>{
-            return _f();
-        }, latestTxTime);
-        latestTxTimer.start();
+        latestTxTask = new subTask('latestTx',(data)=>{data && commit('exSetLatestTxList', data);commit('exSetLatestTxLoading', false);}, latestTxTime);
+        latestTxTask.start(()=>getters.exActiveTxPair);
     },
     exStopLatestTimer() {
         stopLatestTimer();
@@ -65,8 +32,7 @@ const actions = {
 };
 
 function stopLatestTimer() {
-    latestTxTimer && latestTxTimer.stop();
-    latestTxTimer = null;
+    latestTxTask && latestTxTask.stop();
 }
 
 export default {
