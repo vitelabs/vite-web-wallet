@@ -22,29 +22,37 @@
             </div>
         </div>
         <div v-show="showTokenType" class="detail" :class="{'right': showTokenType === 'ttoken'}">
-            <div class="token-row">
-                <span class="token-title">{{ $t('exchange.head.tokenName') }} :</span>{{ tokenDetail.tokenName || '--' }}
+            <div @click="goNetToken(tokenDetail.tokenId)" class="token-row __pointer">
+                <span class="token-title">{{ $t('exchange.head.tokenName') }} :</span>
+                <span class="active">{{ tokenDetail.tokenName || '--' }}</span>
             </div>
             <div class="token-row">
-                <span class="token-title">{{ $t('exchange.head.tokenShow') }} :</span>{{ tokenDetail.tokenShow || '--' }}
+                <span class="token-title">{{ $t('exchange.head.tokenShow') }} :</span>
+                {{ tokenDetail.tokenShow || '--' }}
             </div>
             <div class="token-row">
-                <span class="token-title">{{ $t('exchange.head.tokenId') }} :</span>{{ tokenDetail.tokenId || '--' }}
+                <span class="token-title">{{ $t('exchange.head.tokenId') }} :</span>
+                {{ tokenDetail.tokenId || '--' }}
+            </div>
+            <div @click="goNetAddr(tokenDetail.publisher)" class="token-row __pointer">
+                <span class="token-title">{{ $t('exchange.head.publisher') }} :</span>
+                <span class="active">{{ tokenDetail.publisher || '--' }}</span>
             </div>
             <div class="token-row">
-                <span class="token-title">{{ $t('exchange.head.publisher') }} :</span>{{ tokenDetail.publisher || '--' }}
+                <span class="token-title">{{ $t('exchange.head.total') }} :</span>
+                {{ tokenDetail.total || '--' }}
             </div>
             <div class="token-row">
-                <span class="token-title">{{ $t('exchange.head.total') }} :</span>{{ tokenDetail.total || '--' }}
+                <span class="token-title">{{ $t('exchange.head.tokenDigit') }} :</span>
+                {{ tokenDetail.tokenDigit || '--' }}
             </div>
             <div class="token-row">
-                <span class="token-title">{{ $t('exchange.head.tokenDigit') }} :</span>{{ tokenDetail.tokenDigit || '--' }}
+                <span class="token-title">{{ $t('exchange.head.publisherDate') }} :</span>
+                {{ tokenDetail.publisherDate || '--' }}
             </div>
             <div class="token-row">
-                <span class="token-title">{{ $t('exchange.head.publisherDate') }} :</span>{{ tokenDetail.publisherDate || '--' }}
-            </div>
-            <div class="token-row">
-                <span class="token-title">{{ $t('exchange.head.type') }} :</span>{{ tokenDetail.tokenType || '--' }}
+                <span class="token-title">{{ $t('exchange.head.type') }} :</span>
+                {{ tokenDetail.tokenType || '--' }}
             </div>
         </div>
     </div>
@@ -81,6 +89,10 @@ export default {
             return getTokenIcon(this.ttokenDetail.tokenId);
         },
         tokenDetail() {
+
+
+
+
             if (!this.showTokenType) {
                 return {};
             }
@@ -115,6 +127,14 @@ export default {
             }
 
             this.showTokenType = '';
+        },
+        goNetToken(tokenId) {
+            let locale = this.$i18n.locale === 'zh' ? 'zh/' : '';
+            window.open(`${process.env.viteNet}${locale}token/${tokenId}`);
+        },
+        goNetAddr(addr) {
+            let locale = this.$i18n.locale === 'zh' ? 'zh/' : '';
+            window.open(`${process.env.viteNet}${locale}account/${addr}`);
         }
     }
 };
@@ -184,11 +204,13 @@ export default {
             border-bottom: 6px solid #fff;
         }
         .token-row {
-            line-height: 20px;
-            color: rgba(36,39,43,1);
+            line-height: 23px;
+            color: rgba(29,32,36,0.7);
+            .active {
+                color: rgba(0,122,255,1);
+            }
             .token-title {
-                min-width: 95px;
-                color: #5e6875;
+                color: rgba(94,104,117,0.7);;
                 display: inline-block;
             }
         }

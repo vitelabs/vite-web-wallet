@@ -21,12 +21,17 @@
             <div class="item">
                 <div class="title">
                     {{ $t('walletQuota.beneficialAddr') }}
-                    <span v-show="!isValidAddress" class="err no-right">{{ $t('hint.addrFormat') }}</span>
-                    <span @click="addToAddr('mine')" class="toaddr __pointer">{{ $t('walletQuota.myAddr') }}</span>
-                    <span @click="addToAddr('dex')" class="toaddr __pointer">{{ $t('walletQuota.VX') }}</span>
+                    <span v-show="!isValidAddress" class="err">{{ $t('hint.addrFormat') }}</span>
                 </div>
                 <vite-input v-model="toAddr" :valid="testAddr"
                             :placeholder="$t('walletQuota.addrPlaceholder')">
+                    <div slot="after" @click="toggleAddrList" class="add-unit __pointer">
+                        <span>+++</span>
+                        <ul v-show="isShowAddrList" class="list">
+                            <li @click="addToAddr('mine')" class="toaddr __pointer">{{ $t('walletQuota.myAddr') }}</li>
+                            <li @click="addToAddr('dex')" class="toaddr __pointer">{{ $t('walletQuota.VX') }}</li>
+                        </ul>
+                    </div>
                 </vite-input>
             </div>
             <div class="item">
@@ -78,7 +83,8 @@ export default {
             toAddr: '',
             isValidAddress: true,
             amountErr: '',
-            loading: false
+            loading: false,
+            isShowAddrList: false
         };
     },
     computed: {
@@ -150,6 +156,9 @@ export default {
             this.amountErr = '';
         },
 
+        toggleAddrList() {
+            this.isShowAddrList = !this.isShowAddrList;
+        },
         addToAddr(type) {
             this.toAddr = type === 'mine' ? this.activeAccount.getDefaultAddr() : 'dexAddr';
         },
@@ -230,20 +239,6 @@ export default {
                 font-size: 12px;
                 color: #FF2929;
                 line-height: 16px;
-                &.no-right {
-                    float: none;
-                    margin-left: 10px;
-                }
-            }
-            .toaddr {
-                float: right;
-                font-size: 14px;
-                font-family: $font-normal, arial, sans-serif;
-                font-weight:400;
-                color: rgba(0,122,255,1);
-                line-height: 18px;
-                border-bottom: 1px dashed #007AFF;
-                margin-left: 10px;
             }
         }
         .about, .btn {
@@ -266,9 +261,32 @@ export default {
     }
     .unit {
         padding: 0 15px;
+
+    }
+    .add-unit {
+        padding: 0 10px;
         position: relative;
         .list {
             position: absolute;
+            right: -4px;
+            padding: 10px;
+            font-size: 14px;
+            font-family: $font-normal, arial, sans-serif;;
+            font-weight: 400;
+            color: rgba(94,104,117,1);
+            line-height: 24px;
+            white-space: nowrap;
+            background: rgba(255,255,255,1);
+            box-shadow: 0px 5px 20px 0px rgba(0,0,0,0.1);
+            &:after {
+                content: ' ';
+                display: inline-block;
+                border: 6px solid transparent;
+                border-bottom: 6px solid #fff;
+                position: absolute;
+                top: -12px;
+                left: 50%;
+            }
         }
     }
     .input-item {

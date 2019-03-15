@@ -92,6 +92,8 @@ export default {
     width: 90%;
     max-width: 960px;
     max-height: 85%;
+    min-height: 300px;
+    min-width: 500px;
     display: flex;
     flex-direction: column;
     background: #FFFFFF;
