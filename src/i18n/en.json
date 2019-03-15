@@ -22,6 +22,7 @@
     "pow": "Running PoW...",
     "addAccount": "Add a new account",
     "saveQrcode": "Save QR code image",
+    "unlockSuccess": "解锁成功",
     "sendTrans": {
         "send": "Send Transaction",
         "symbol": "Send"
@@ -429,6 +430,7 @@
             "title": "开通交易对",
             "fee": "上币费",
             "market": "开通市场",
+            "link": "前往浏览器查询",
             "name": "开通代币名称",
             "id": "开通代币TokenID",
             "hint": "交易对开通成功后，如果想要添加网关标识（如BTC.V），请发邮件联系我们：info@vite.org",

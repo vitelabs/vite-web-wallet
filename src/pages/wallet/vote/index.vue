@@ -378,7 +378,7 @@ export default {
 
 .vote {
     height: 100%;
-    overflow: hidden;
+    overflow: auto;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
@@ -414,7 +414,7 @@ export default {
         overflow-y: hidden;
         margin: 40px 0;
         margin-bottom: 20px;
-
+        min-height: 213px;
         .seat {
             height: 78px;
             text-align: center;
@@ -424,6 +424,7 @@ export default {
         }
     }
     .node_list {
+        min-height: 300px;
         flex: 1;
         overflow-x: auto;
         overflow-y: hidden;
