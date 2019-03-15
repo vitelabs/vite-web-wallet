@@ -195,11 +195,9 @@ export default {
             if (this.orderType === 'buy') {
                 amount = this.getPercentBalance(percent, this.ttokenDetail.tokenDigit);
                 quantity = this.getQuantity(price, amount);
-                console.log(amount);
             } else {
                 quantity = this.getPercentBalance(percent, this.ftokenDetail.tokenDigit);
                 amount = this.getAmount(price, quantity);
-                console.log(quantity);
             }
 
             !BigNumber.isEqual(quantity, this.quantity) && (this.quantity = quantity);
