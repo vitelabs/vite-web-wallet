@@ -51,22 +51,32 @@ export default class dataFeeds {
 
         this.lastResolution = resolution;
 
-        let day = 60 * 60 * 24;
+        let num = 60 * 24;
+        let timeList = {
+            '1': 60,
+            '30': 30 * 60,
+            '60': 60 * 60,
+            '360': 360 * 60,
+            '720': 720 * 60,
+            '1D': 24 * 60 * 60,
+            '1W': 7 * 24 * 60 * 60
+        };
         let historyReq = [];
         let i;
-        for (i=from; i<to; i+=day) {
+        let timeDiff = timeList[resolution] * num;
+        for (i=from; i<to; i+=timeDiff) {
             if (i === from) {
                 continue;
             }
             historyReq.push(klineHistory({
-                from: i - day, to: i, 
+                from: i - timeDiff, to: i, 
                 resolution,
                 ftoken: this.activeTxPair.ftoken, 
                 ttoken: this.activeTxPair.ttoken
             }));
         }
-        (i-day < to) && historyReq.push(klineHistory({
-            from: i-day, to, 
+        (i - timeDiff < to) && historyReq.push(klineHistory({
+            from: i- timeDiff, to, 
             resolution,
             ftoken: this.activeTxPair.ftoken, 
             ttoken: this.activeTxPair.ttoken
@@ -124,15 +134,6 @@ export default class dataFeeds {
 
         let _list = [];
         let index = 0;
-        let timeList = {
-            '1': 1 * 60,
-            '30': 30 * 60,
-            '60': 60 * 60,
-            '360': 360 * 60,
-            '720': 720 * 60,
-            '1D': 24 * 60 * 60,
-            '1W': 7 * 24 * 60 * 60
-        };
 
         for (let time=list[0].time; time<to; time+=timeList[resolution]) {
             if (list[index] && time === list[index].time) {

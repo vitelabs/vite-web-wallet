@@ -67,13 +67,13 @@
 <script>
 import tooltips from 'components/tooltips';
 import search from 'components/search';
-import c from 'config/constant';
 import secTitle from 'components/secTitle';
 import loading from 'components/loading';
 import confirm from 'components/confirm';
 import powProcess from 'components/powProcess';
 import { timer } from 'utils/asyncFlow';
 import BigNumber from 'utils/bigNumber';
+import { constant } from '@vite/vitejs';
 
 const VoteDifficulty = '201564160';
 
@@ -125,7 +125,7 @@ export default {
         },
         updateVoteData() {
             return $ViteJS.vote.getVoteInfo(
-                c.gid,
+                constant.Snapshot_Gid,
                 this.$wallet.getActiveAccount().getDefaultAddr()
             ).then(result => {
                 this.voteData = result ? [result] : [];
@@ -134,7 +134,7 @@ export default {
             });
         },
         updateNodeData() {
-            return $ViteJS.register.getCandidateList(c.gid).then(result => {
+            return $ViteJS.register.getCandidateList(constant.Snapshot_Gid).then(result => {
                 this.nodeData = result.map(v => {
                     return {
                         ...v,
