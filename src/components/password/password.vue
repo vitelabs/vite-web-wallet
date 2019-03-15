@@ -141,8 +141,9 @@ export default {
                 }, password).then(() => {
                     this.isLoading = false;
                     activeAccount = this.$wallet.getActiveAccount();
-                    let result = activeAccount.unlock();
-                    deal(result);
+                    activeAccount.unlock();
+                    this.$toast( this.$t('unlockSuccess') );
+                    deal(true);
                 }).catch((err) => {
                     this.isLoading = false;
                     console.warn(err);
