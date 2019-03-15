@@ -23,12 +23,14 @@
                     </i>
                 </div>
                 <div class="__tb_cell operate">
-                    <span v-if="!item.isCancel" class="btn __pointer" @click="edit(item)">{{ $t('btn.edit') }}</span>
+                    <span v-if="!item.isCancel" class="btn __pointer" 
+                          v-unlock-account @unlocked="edit(item)">{{ $t('btn.edit') }}</span>
                     <span v-if="!item.isCancel" class="btn" :class="{
                         '__pointer': item.isMaturity,
                         'unuse': !item.isMaturity   
-                    }" @click="cancel(item)">{{ $t('walletSBP.cancelBtn') }}</span>
-                    <span v-if="item.isCancel" class="btn __pointer" @click="reg(item)">{{ $t('btn.reReg') }}</span>
+                    }" v-unlock-account @unlocked="cancel(item)">{{ $t('walletSBP.cancelBtn') }}</span>
+                    <span v-if="item.isCancel" class="btn __pointer" 
+                          v-unlock-account @unlocked="reg(item)">{{ $t('btn.reReg') }}</span>
                 </div>
             </div>
         </div>

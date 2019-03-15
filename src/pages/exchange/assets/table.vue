@@ -21,13 +21,11 @@
                 <div>{{token.available}}</div>
                 <div>{{token.lock||0}}</div>
                 <div>{{token.worth}}</div>
-                <div
-                    @click="recharge(token.id)"
-                    class="click-able"
+                <div v-unlock-account @unlocked="recharge(token.id)"
+                     class="click-able"
                 >{{$t("exchangeAssets.table.rowMap.recharge")}}</div>
-                <div
-                    @click="withdraw(token.id)"
-                    class="click-able"
+                <div v-unlock-account @unlocked="withdraw(token.id)"
+                     class="click-able"
                 >{{$t("exchangeAssets.table.rowMap.withdraw")}}</div>
                 <div
                     @click="detail(token.id)"
@@ -320,10 +318,8 @@ export default {
 <style lang="scss" scoped>
 @import "../components/table.scss";
 .ex_tb {
-    height: calc(100% - 60px);
-    margin-bottom: 10px;
+    height: calc(100% - 42px);
     flex: 1;
-    box-shadow: 0px 2px 48px 1px rgba(176, 192, 237, 0.42);
     .refresh{
         position: absolute;
         height: 20px;

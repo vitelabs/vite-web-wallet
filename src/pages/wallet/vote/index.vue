@@ -23,7 +23,7 @@
                         <div class="__tb_cell">{{v.voteNum}}</div>
                         <div class="__tb_cell">{{v.voteStatusText}}</div>
                         <div class="__tb_cell" :class="cache ? 'unclickable' : 'clickable'">
-                            <span @click="cancelVote(v)">{{ v.operate }}</span>
+                            <span v-unlock-account @unlocked="cancelVote(v)">{{ v.operate }}</span>
                             <span class="reward" @click="openReward(v)">{{ $t('walletVote.toReward') }}</span>
                         </div>
                     </div>
@@ -49,7 +49,7 @@
                             <div @click="goToNodeDetail(v.nodeName)" class="__tb_cell nodename clickable">{{v.nodeName}}</div>
                             <div @click="goToDetail(v.nodeAddr)" class="__tb_cell clickable">{{v.nodeAddr}}</div>
                             <div class="__tb_cell">{{v.voteNum}}</div>
-                            <div class="__tb_cell clickable" @click="vote(v)">{{v.operate}}</div>
+                            <div class="__tb_cell clickable" v-unlock-account @unlocked="vote(v)">{{v.operate}}</div>
                         </div>
                     </div>
                     <div class="__tb_content" v-else-if="this.filterKey">

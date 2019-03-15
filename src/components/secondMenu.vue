@@ -18,18 +18,62 @@
                  :class="{'dex': active.indexOf('exchange') === 0}">{{ $t('login') }}</div>  
             <div v-show="!isLogin" @click="go('startCreate')" class="tab __pointer"
                  :class="{'dex': active.indexOf('exchange') === 0}">{{ $t('regAcc') }}</div>  
-            <div v-show="active === 'exchange'" class="tab dex __pointer">{{ $t('dexToken') }}</div>
+            <div v-show="active === 'exchange'" @click="showToken" 
+                 class="tab dex __pointer">{{ $t('dexToken') }}</div>
         </ul>
+
+        <confirm v-show="isShowDexTokenConfirm" class="exchange" 
+                 :showMask="true" :singleBtn="true"
+                 :title="$t('exchange.dexToken.title')" :closeIcon="true"
+                 :close="closeToken" :leftBtnTxt="$t('exchange.dexToken.btn')">
+
+            <div class="__row">
+                <div class="__row-t">{{ $t('exchange.dexToken.market') }}</div>
+                <vite-input v-model="market" :valid="validMarket">
+                    <span class="down-icon" slot="after"></span>
+                </vite-input>
+            </div>
+
+            <div class="__row">
+                <div class="__row-t">
+                    {{ $t('exchange.dexToken.name') }}
+                    <!-- <span v-show="!isValidAddress" class="__err __hint">{{ $t('hint.addrFormat') }}</span> -->
+                </div>
+                <vite-input v-model="tokenName" :valid="validTokenName">
+                    <span class="down-icon" slot="after"></span>
+                </vite-input>
+            </div>
+
+            <div class="__row">
+                <div class="__row-t">
+                    {{ $t('exchange.dexToken.id') }}
+                    <!-- <span v-show="amountErr" class="__err __hint">{{ amountErr }}</span> -->
+                </div>
+                <vite-input v-model="tokenId" :valid="validTokenId">
+                    <span class="down-icon" slot="after"></span>
+                </vite-input>
+            </div>
+
+            <div class="__row">
+                <div class="__row-t">{{ $t('exchange.dexToken.fee') }}</div>
+                <div class="no-input">{{ spend }} VITE</div>
+            </div>
+            <div class="hint"><span>{{ $t('exchange.dexToken.hint') }}</span></div>
+        </confirm>
     </div>
 </template>
 
 <script>
 import changeLang from 'components/changeLang';
+import confirm from 'components/confirm';
+import viteInput from 'components/viteInput';
 import goNetBtn from './goNetBtn.vue';
+
+const spend = 1000;
 
 export default {
     components: {
-        goNetBtn, changeLang
+        goNetBtn, changeLang, confirm, viteInput
     },
     props: {
         tabList: {
@@ -58,14 +102,37 @@ export default {
     data() {
         return {
             active: this.$route.name,
-            isLogin: false
+            isLogin: false,
+            isShowDexTokenConfirm: false,
+            spend,
+            market: '',
+            tokenId: '',
+            tokenName: ''
         };
+    },
+    methods: {
+        validMarket() {
+
+        },
+        validTokenName() {
+
+        },
+        validTokenId() {
+
+        },
+        showToken() {
+            this.isShowDexTokenConfirm = true;
+        },
+        closeToken() {
+            this.isShowDexTokenConfirm = false;
+        }
     }
 };
 </script>
 
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
+@import "~assets/scss/confirmInput.scss";
 
 .head {
     box-sizing: border-box;
