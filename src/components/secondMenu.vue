@@ -90,7 +90,6 @@ export default {
         },
         dexChange() {
             if (!this.isHaveUsers) {
-                console.log('???');
                 this.$router.push({
                     name: 'startCreate'
                 });

@@ -49,6 +49,7 @@
 import viteInput from 'components/viteInput';
 import BigNumber from 'utils/bigNumber';
 import { address } from 'utils/tools';
+import { constant } from '@vite/vitejs';
 
 let amountTimeout = null;
 const minNum = 1000;
@@ -163,7 +164,7 @@ export default {
             this.isShowAddrList = !this.isShowAddrList;
         },
         addToAddr(type) {
-            this.toAddr = type === 'mine' ? this.activeAccount.getDefaultAddr() : 'dexAddr';
+            this.toAddr = type === 'mine' ? this.activeAccount.getDefaultAddr() : constant.DexFund_Addr;
         },
         validTx() {
             if (this.btnUnuse) {
