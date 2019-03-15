@@ -34,7 +34,7 @@ export default class dataFeeds {
                 pricescale: 100000000,
                 has_intraday: true,
                 intraday_multipliers: ['1', '60'],
-                // supported_resolution:  supportedResolutions,
+                supported_resolution: ['1', '30', '60', '360', '720', '1D', '1W'],
                 volume_precision: 8,
                 data_status: 'streaming'
                 // name: this.symbolName,
@@ -44,11 +44,6 @@ export default class dataFeeds {
         }, 0);
     }
     async getBars(symbolInfo, resolution, from, to, onHistoryCallback, onErrorCallback) {
-        // firstDataRequest
-        if (resolution === this.lastResolution) {
-            return;
-        }
-
         this.lastResolution = resolution;
 
         let num = 60 * 24;
@@ -135,14 +130,17 @@ export default class dataFeeds {
         let _list = [];
         let index = 0;
 
-        for (let time=list[0].time; time<to; time+=timeList[resolution]) {
+        for (let time=from - from % 60; time<to; time+=timeList[resolution]) {
             if (list[index] && time === list[index].time) {
                 _list.push(list[index]);
                 index++;
                 continue;
             }
 
-            let lastItem = _list[_list.length - 1];
+            let lastItem = _list.length === 0 ? {
+                close: 0
+            } : _list[_list.length - 1];
+
             _list.push({
                 time: time * 1000,
                 close: lastItem.close,
@@ -168,8 +166,22 @@ export default class dataFeeds {
         return undefined;
     }
     calculateHistoryDepth(resolution, resolutionBack, intervalBack) {
-        // klineHistory
+        // let timeList = {
+        //     '1': 60,
+        //     '30': 30 * 60,
+        //     '60': 60 * 60,
+        //     '360': 360 * 60,
+        //     '720': 720 * 60,
+        //     '1D': 24 * 60 * 60,
+        //     '1W': 7 * 24 * 60 * 60
+        // };
         console.log(resolution, resolutionBack, intervalBack);
+        if (resolution === '30') {
+            return {
+                resolutionBack: 'D',
+                intervalBack: 1
+            };
+        }
         return undefined;
     }
     getMarks(symbolInfo, from, to, onDataCallback, resolution) {
