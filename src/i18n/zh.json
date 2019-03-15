@@ -21,6 +21,7 @@
     "pow": "运行PoW...",
     "addAccount": "添加账户",
     "saveQrcode": "保存二维码图片",
+    "unlockSuccess": "解锁成功",
     "sendTrans": {
         "send": "发送交易",
         "symbol": "发送交易"
@@ -428,6 +429,7 @@
         "dexToken": {
             "title": "开通交易对",
             "fee": "上币费",
+            "link": "前往浏览器查询",
             "market": "开通市场",
             "name": "开通代币名称",
             "id": "开通代币TokenID",

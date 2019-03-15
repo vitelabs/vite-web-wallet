@@ -13,67 +13,30 @@
         <go-net-btn class="go-net-wrapper"></go-net-btn>
         <change-lang class="menu change-lang-wrapper" 
                      :class="{'dex': active.indexOf('exchange') === 0}"></change-lang>
+
         <ul class="right-lab-list">
-            <div v-show="!isLogin" @click="go('start')" class="tab __pointer" 
-                 :class="{'dex': active.indexOf('exchange') === 0}">{{ $t('login') }}</div>  
-            <div v-show="!isLogin" @click="go('startCreate')" class="tab __pointer"
-                 :class="{'dex': active.indexOf('exchange') === 0}">{{ $t('regAcc') }}</div>  
-            <div v-show="active === 'exchange'" @click="showToken" 
+            <div v-show="!isLogin" @click="dexStart" class="tab __pointer" 
+                 :class="{'dex': active.indexOf('exchange') === 0}">
+                {{ isHaveUsers ? $t('unlockAcc') : $t('login')  }}</div>
+            <div v-show="!isLogin" @click="dexChange" class="tab __pointer"
+                 :class="{'dex': active.indexOf('exchange') === 0}">
+                {{ isHaveUsers ? $t('changeAcc') : $t('register') }}</div>  
+            <div v-show="active === 'exchange'" v-unlock-account="showToken" 
                  class="tab dex __pointer">{{ $t('dexToken') }}</div>
         </ul>
 
-        <confirm v-show="isShowDexTokenConfirm" class="exchange" 
-                 :showMask="true" :singleBtn="true"
-                 :title="$t('exchange.dexToken.title')" :closeIcon="true"
-                 :close="closeToken" :leftBtnTxt="$t('exchange.dexToken.btn')">
-
-            <div class="__row">
-                <div class="__row-t">{{ $t('exchange.dexToken.market') }}</div>
-                <vite-input v-model="market" :valid="validMarket">
-                    <span class="down-icon" slot="after"></span>
-                </vite-input>
-            </div>
-
-            <div class="__row">
-                <div class="__row-t">
-                    {{ $t('exchange.dexToken.name') }}
-                    <!-- <span v-show="!isValidAddress" class="__err __hint">{{ $t('hint.addrFormat') }}</span> -->
-                </div>
-                <vite-input v-model="tokenName" :valid="validTokenName">
-                    <span class="down-icon" slot="after"></span>
-                </vite-input>
-            </div>
-
-            <div class="__row">
-                <div class="__row-t">
-                    {{ $t('exchange.dexToken.id') }}
-                    <!-- <span v-show="amountErr" class="__err __hint">{{ amountErr }}</span> -->
-                </div>
-                <vite-input v-model="tokenId" :valid="validTokenId">
-                    <span class="down-icon" slot="after"></span>
-                </vite-input>
-            </div>
-
-            <div class="__row">
-                <div class="__row-t">{{ $t('exchange.dexToken.fee') }}</div>
-                <div class="no-input">{{ spend }} VITE</div>
-            </div>
-            <div class="hint"><span>{{ $t('exchange.dexToken.hint') }}</span></div>
-        </confirm>
+        <dex-token v-show="isShowDexToken" :close="closeToken"></dex-token>
     </div>
 </template>
 
 <script>
 import changeLang from 'components/changeLang';
-import confirm from 'components/confirm';
-import viteInput from 'components/viteInput';
+import dexToken from 'components/dexToken';
 import goNetBtn from './goNetBtn.vue';
-
-const spend = 1000;
 
 export default {
     components: {
-        goNetBtn, changeLang, confirm, viteInput
+        goNetBtn, changeLang, dexToken
     },
     props: {
         tabList: {
@@ -100,31 +63,40 @@ export default {
         });
     },
     data() {
+        let activeAccount = this.$wallet.getActiveAccount();
+
         return {
             active: this.$route.name,
             isLogin: false,
-            isShowDexTokenConfirm: false,
-            spend,
-            market: '',
-            tokenId: '',
-            tokenName: ''
+            isShowDexToken: false,
+            isHaveUsers: !!activeAccount
         };
     },
     methods: {
-        validMarket() {
-
-        },
-        validTokenName() {
-
-        },
-        validTokenId() {
-
-        },
         showToken() {
-            this.isShowDexTokenConfirm = true;
+            this.isShowDexToken = true;
         },
         closeToken() {
-            this.isShowDexTokenConfirm = false;
+            this.isShowDexToken = false;
+        },
+
+        dexStart() {
+            if (!this.isHaveUsers) {
+                this.go('start');
+                return;
+            }
+            let activeAccount = this.$wallet.getActiveAccount();
+            activeAccount && activeAccount.unlockAccount();
+        },
+        dexChange() {
+            if (!this.isHaveUsers) {
+                console.log('???');
+                this.$router.push({
+                    name: 'startCreate'
+                });
+                return;
+            }
+            this.go('start');
         }
     }
 };
@@ -132,7 +104,6 @@ export default {
 
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
-@import "~assets/scss/confirmInput.scss";
 
 .head {
     box-sizing: border-box;
