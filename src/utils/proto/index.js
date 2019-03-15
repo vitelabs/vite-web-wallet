@@ -36,9 +36,8 @@ class WsProtoClient {
                 // bytes: String,
                 // // see ConversionOptions
             });
-            console.log('PROTO_DATA',data.event_key,data.op_type,data.message);
             if (data.op_type !== this.MESSAGETYPE.PUSH) return;
-            const realData=data.error_code===0?JSON.parse(data.message):null;
+            const realData=!data.error_code?JSON.parse(data.message):null;
             const error=data.error_code||undefined;
             this._subKeys[data.event_key] && this._subKeys[data.event_key].forEach(c => {
                 c(realData,error);
@@ -68,7 +67,6 @@ class WsProtoClient {
     }
     send(event_key='', type = this.MESSAGETYPE.PING) {
         if (!this.ready) return;
-        console.log('PROTO_SEND',event_key,type);
         const payload = {
             event_key: event_key,
             op_type: type,
@@ -84,32 +82,6 @@ class WsProtoClient {
     }
 
 }
-
-class businessClient extends WsProtoClient {
-    constructor(...args) {
-        super(...args);
-        this.TOPICTYPE = {
-            KLINE: 'kline',
-            DEPTH: 'depth',
-            DETAIL: 'detail',
-            DETAILS: 'details',
-            TRADE: 'trade'
-        };
-        this.SIDETYPE = {
-            BUY: 'buy',
-            SELL: 'sell',
-            LATEST: 'latest'
-        };
-    }
-    subOrder(address, callback) {
-        this.sub(`order.${address}.latest`, callback);
-    }
-    subMarket({ ftoken, ttoken, topic, side },callback) {
-        this.sub(`market.${ftoken}${ttoken ? ('-' + ttoken) : ''}.${topic}.${side}`,callback);
-    }
-
-
-}
-// 192.168.31.190:8085
+// 192.168.31.190:11211
 // ws://132.232.65.121:11211/websocket
-export const client = new businessClient('ws://132.232.65.121:11211/websocket');
+export const client = new WsProtoClient(process.env.pushServer);
