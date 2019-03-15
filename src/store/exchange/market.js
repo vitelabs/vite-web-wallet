@@ -1,7 +1,7 @@
 import { baseToken } from 'services/exchange';
 const state = {
     currentMarket: '',
-    marketMap:[],
+    marketMap: [],
 };
 
 const mutations = {
