@@ -36,12 +36,12 @@
 
         <img @click="update" class="refresh" :class="{rotate:isRotate}" src="~assets/imgs/exchange/refresh.svg" />
 
-        <confirm :title="c.title" :singleBtn="true"
+        <confirm :title="c.title" :singleBtn="true" class="exchange" 
                  :leftBtnTxt="c.btn" :leftBtnClick="confirmClick"
                  :closeIcon="true" :close="closeNumConfirm"
                  v-if="confirmShow">
-            <div class="confirm">
-                <div class="lable">{{ c.lable1 }}</div>
+            <div class="__row">
+                <div class="__row-t">{{ c.lable1 }}</div>
                 <div class="input un-click-able">
                     <img :src="c.icon" />
                     {{balance[c.tokenId].symbol}} 
@@ -49,12 +49,12 @@
                         {{ c.type.toLowerCase()==="recharge" ? balance[c.tokenId].balance : balance[c.tokenId].available }}
                     </div>
                 </div>
-                <div class="lable">{{ c.lable2 }} 
-                    <div class="errtips">{{ c.errTips }}</div>
+            </div>
+            <div class="__row">
+                <div class="__row-t">{{ c.lable2 }}
+                    <span class="__err __hint">{{ c.errTips }}</span>
                 </div>
-                <div class="input">
-                    <input type="text" :placeholder="c.placeholder" v-model="opNumber">
-                </div>
+                <vite-input v-model="opNumber" :placeholder="c.placeholder"></vite-input>
             </div>
         </confirm>
 
@@ -71,6 +71,7 @@
 import alert from '../components/alert.vue';
 import BigNumber from 'utils/bigNumber';
 import getTokenIcon from 'utils/getTokenIcon';
+import viteInput from 'components/viteInput';
 import confirm from 'components/confirm.vue';
 import powProcess from 'components/powProcess';
 import debounce from 'lodash/debounce';
@@ -82,7 +83,7 @@ const VoteDifficulty = '201564160';
 
 export default {
     components: {
-        confirm, alert, powProcess
+        confirm, alert, powProcess, viteInput
     },
     props: {
         filter: { type: Object }
@@ -316,7 +317,9 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+@import "~assets/scss/confirmInput.scss";
 @import "../components/table.scss";
+
 .ex_tb {
     height: calc(100% - 42px);
     flex: 1;
@@ -343,48 +346,42 @@ export default {
         width: 15%;
     }
 }
-.confirm {
+
+.input {
+    height: 40px;
+    border-radius: 2px;
+    border: 1px solid rgba(212, 222, 231, 1);
+    width: 100%;
     display: flex;
-    flex-direction: column;
-    .input {
-        height: 40px;
-        border-radius: 2px;
-        border: 1px solid rgba(212, 222, 231, 1);
-        width: 100%;
-        display: flex;
-        font-size: 14px;
-        padding: 0 15px;
-        align-items: center;
-        box-sizing: border-box;
-        img {
-            margin-right: 10px;
-            width: 20px;
-            height: 20px;
-        }
-        input {
-            width: 100%;
-            height: 100%;
-        }
-        .num {
-            margin-left: auto;
-            color: #007aff;
-        }
-        &.un-click-able {
-            background: rgba(243, 246, 249, 1);
-        }
+    font-size: 14px;
+    padding: 0 15px;
+    align-items: center;
+    box-sizing: border-box;
+    img {
+        margin-right: 10px;
+        width: 20px;
+        height: 20px;
+        border-radius: 20px;
     }
-    .lable {
-        font-size: 16px;
-        margin-bottom: 16px;
-        margin-top: 19px;
-        .errtips {
-            color: #ff2929;
-            font-size: 12px;
-            margin-left: auto;
-        }
-        &:first-child {
-            margin-top: 0;
-        }
+    .num {
+        margin-left: auto;
+        color: #007aff;
+    }
+    &.un-click-able {
+        background: rgba(243, 246, 249, 1);
+    }
+}
+.lable {
+    font-size: 16px;
+    margin-bottom: 16px;
+    margin-top: 19px;
+    .errtips {
+        color: #ff2929;
+        font-size: 12px;
+        margin-left: auto;
+    }
+    &:first-child {
+        margin-top: 0;
     }
 }
 </style>

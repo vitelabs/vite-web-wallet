@@ -25,8 +25,8 @@
                 </div>
                 <vite-input v-model="toAddr" :valid="testAddr"
                             :placeholder="$t('walletQuota.addrPlaceholder')">
-                    <div slot="after" @click="toggleAddrList" class="add-unit __pointer">
-                        <span>+++</span>
+                    <div slot="after" @click="toggleAddrList" v-click-outside="closeAddrList" class="add-unit __pointer">
+                        <span class="add-icon"></span>
                         <ul v-show="isShowAddrList" class="list">
                             <li @click="addToAddr('mine')" class="toaddr __pointer">{{ $t('walletQuota.myAddr') }}</li>
                             <li @click="addToAddr('dex')" class="toaddr __pointer">{{ $t('walletQuota.VX') }}</li>
@@ -49,6 +49,7 @@
 import viteInput from 'components/viteInput';
 import BigNumber from 'utils/bigNumber';
 import { address } from 'utils/tools';
+import { constant } from '@vite/vitejs';
 
 let amountTimeout = null;
 const minNum = 1000;
@@ -156,11 +157,14 @@ export default {
             this.amountErr = '';
         },
 
+        closeAddrList() {
+            this.isShowAddrList = false;
+        },
         toggleAddrList() {
             this.isShowAddrList = !this.isShowAddrList;
         },
         addToAddr(type) {
-            this.toAddr = type === 'mine' ? this.activeAccount.getDefaultAddr() : 'dexAddr';
+            this.toAddr = type === 'mine' ? this.activeAccount.getDefaultAddr() : constant.DexFund_Addr;
         },
         validTx() {
             if (this.btnUnuse) {
@@ -266,6 +270,14 @@ export default {
     .add-unit {
         padding: 0 10px;
         position: relative;
+        .add-icon {
+            display: inline-block;
+            margin-top: 11px;
+            width: 18px;
+            height: 18px;
+            background: url('~assets/imgs/add-quota-icon.svg');
+            background-size: 18px 18px;
+        }
         .list {
             position: absolute;
             right: -4px;
