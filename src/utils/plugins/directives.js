@@ -10,7 +10,6 @@ const isEventInDom = function (e, d) {
 export default {
     install(Vue) {
         document.addEventListener('click', (e) => {
-            console.log(e.target);
             vnodes.forEach(v => {
                 let directives = v && v.data ? v.data.directives || [] : [];
                 directives.forEach((d) => {
@@ -32,10 +31,12 @@ export default {
 
         Vue.directive('UnlockAccount', {
             bind(el, binding, vnode) {
-                console.log(binding);
                 el.addEventListener('click', (e) => {
-
-                    unlockAccount(vnode, e, binding.expression || '');
+                    let isLogin = unlockAccount(vnode, e, binding.expression || '');
+                    if (!isLogin) {
+                        return;
+                    }
+                    vnode.data.on && vnode.data.on.unlocked();
                 });
             },
             unbind() {
@@ -61,9 +62,10 @@ function clickOutside(v, e, funcName) {
 function unlockAccount(v, e, funcName) {
     if (wallet.isLogin) {
         funcName && v.context && v.context[funcName](e);
-        return;
+        return true;
     }
 
     let activeAccount = wallet.getActiveAccount();
     activeAccount && activeAccount.unlockAccount();
+    return false;
 }

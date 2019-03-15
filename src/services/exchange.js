@@ -7,38 +7,26 @@ const path = '/api/v1';
 // export const DexFund_Addr = 'vite_000000000000000000000000000000000000000617d47459a8';
 export const DexTrade_Addr = 'vite_000000000000000000000000000000000000000768ef0e6238';
 
-export const klineMinute = function ({
-    fdate, tdate, ftoken, ttoken
-}) {
-    return request({
-        path: path + '/kline/minute',
-        method: 'GET',
-        params: {
-            fdate, tdate, ftoken, ttoken
-        }
-    });
-};
 
-export const klineHour = function ({
-    fdate, tdate, ftoken, ttoken
+export const klineHistory = function ({
+    from, to, ftoken, ttoken, resolution
 }) {
-    return request({
-        path: path + '/kline/hour',
-        method: 'GET',
-        params: {
-            fdate, tdate, ftoken, ttoken
-        }
-    });
-};
-
-export const klineHistory = function ( {
-    resolution, symbol, from, to
-}) {
+    let resList = {
+        '1': 'minute',
+        '30': 'minute30',
+        '60': 'hour',
+        '360': 'hour6',
+        '720': 'hour12',
+        '1D': 'day',
+        '1W': 'week'
+    };
     return request({
         path: path + '/kline/history',
         method: 'GET',
         params: {
-            resolution, symbol, from, to
+            from, to, 
+            resolution: resList[resolution],
+            symbol: `${ftoken},${ttoken}`
         }
     });
 };

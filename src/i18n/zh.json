@@ -425,6 +425,15 @@
         "newOrderFail": "提单失败",
         "depthView": "深度图",
         "klineView": "k线图",
+        "dexToken": {
+            "title": "开通交易对",
+            "fee": "上币费",
+            "market": "开通市场",
+            "name": "开通代币名称",
+            "id": "开通代币TokenID",
+            "hint": "交易对开通成功后，如果想要添加网关标识（如BTC.V），请发邮件联系我们：info@vite.org",
+            "btn": "提交申请"
+        },
         "buy": {
             "title": "买入{token}",
             "price": "买入价",

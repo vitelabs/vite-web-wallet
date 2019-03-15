@@ -4,6 +4,7 @@
             <div v-for="(h) in $t('exchangeOpenOrders.table.heads')" :key="h">
                 {{ h }}
             </div>
+            <div></div>
         </div>
         <div class="row-container">
             <div class="row" v-for="v in sortedList" :key="v.orderId">
@@ -18,7 +19,7 @@
                 <div>{{ v.filledQ + ' ' + v.ftokenShow }}</div>
                 <div>{{ `${(v.rate*100).toFixed(2)}%` }}</div>
                 <div>{{ v.average + ' ' + v.ttokenShow }}</div>
-                <div @click="cancel(v)" class="click-able">
+                <div v-unlock-account v-on:unlocked="cancel(v)" class="click-able">
                     {{ $t("exchangeOpenOrders.table.rowMap.cancel") }}
                 </div>
             </div>
@@ -175,7 +176,6 @@ export default {
 
 .ex_tb {
     height: 100%;
-    margin-bottom: 10px;
 }
 @include rowWith {
     width: 8%;

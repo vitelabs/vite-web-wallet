@@ -101,7 +101,7 @@ export default {
 
 .order-input.input-wrapper input {
     text-indent: 6px;
-    color: #24272B;
+    color: rgba(36,39,43,.8);
     font-size: 12px;
     font-family: $font-normal, arial, sans-serif;
     font-weight: 400;
