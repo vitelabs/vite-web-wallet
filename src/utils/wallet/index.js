@@ -88,7 +88,7 @@ class _wallet {
         return keystore.hexaddress;
     }
 
-    restoreAddrs(mnemonic, lang = LangList.english) {
+    async restoreAccount(mnemonic, name, pass, lang = LangList.english) {
         let num = 10;
         let addrs = _hdAddr.getAddrsFromMnemonic(mnemonic, 0, num, lang);
         if (!addrs) {
@@ -102,33 +102,26 @@ class _wallet {
             requests.push( $ViteJS.buildinLedger.getBalance(addrs[i].hexAddr) );
         }
 
-        return Promise.all(requests).then((data)=>{
-            let index = 0;
-            data.forEach((item, i) => {
-                if (!item) {
-                    return;
-                }
-                let account = item.balance;
-                let onroad = item.onroad;
-                if ( (account && +account.totalNumber) || (onroad && +onroad.totalNumber) ) {
-                    index = i;
-                }
-            });
+        let data = await Promise.all(requests);
+        let index = 0;
 
-            this.newActiveAcc({
-                addrNum: index + 1,
-                mnemonic,
-                lang,
-                type: 'wallet'
-            });
-            return data;
+        data.forEach((item, i) => {
+            if (!item) {
+                return;
+            }
+            let account = item.balance;
+            let onroad = item.onroad;
+            if ( (account && +account.totalNumber) || (onroad && +onroad.totalNumber) ) {
+                index = i;
+            }
         });
-    }
 
-    restoreAccount(name, pass) {
-        if (!this.activeWalletAcc) {
-            return Promise.reject();
-        }
+        this.newActiveAcc({
+            addrNum: index + 1,
+            mnemonic,
+            lang,
+            type: 'wallet'
+        });
 
         return this.activeWalletAcc.encrypt(pass).then(() => {
             this.activeWalletAcc.pass = pass;

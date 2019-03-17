@@ -72,25 +72,15 @@ export default {
                 return;
             }
 
-            this.isLoading = true;
-            this.$wallet.restoreAddrs(mnemonic).then(()=>{
-                this.restoreAccount(name, pass);
-            }).catch(err => {
-                console.warn(err);
-                if (err && err.code === 500005) {
-                    this.errMsg = 'mnemonic.error';
-                } else {
-                    this.errMsg = 'hint.nodeErr';
-                }
-                this.isLoading = false;
-            });
+            this.restoreAccount(mnemonic, name, pass);
         },
-        restoreAccount(name, pass) {
+        restoreAccount(mnemonic, name, pass) {
             this.isLoading = true;
-            this.$wallet.restoreAccount(name, pass).then(() => {
+            this.$wallet.restoreAccount(mnemonic, name, pass).then(()=>{
                 if (!this.isLoading) {
                     return;
                 }
+
                 this.isLoading = false;
 
                 let activeAccount = this.$wallet.getActiveAccount();
@@ -101,10 +91,14 @@ export default {
                 this.$router.push({
                     name: 'start'
                 });
-            }).catch((err) => {
-                this.isLoading = false;
+            }).catch(err => {
                 console.warn(err);
-                this.$toast(this.$t('hint.err'));
+                if (err && err.code === 500005) {
+                    this.errMsg = 'mnemonic.error';
+                } else {
+                    this.errMsg = 'hint.nodeErr';
+                }
+                this.isLoading = false;
             });
         }
     }
