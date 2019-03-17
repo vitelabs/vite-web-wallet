@@ -3,7 +3,7 @@
         <div class="confirm-wrapper">
             <div class="title">
                 {{ title }}
-                <span v-show="closeIcon" @click="close" class="close-icon __pointer"></span>
+                <span v-show="showClose" @click="close" class="close-icon __pointer"></span>
             </div>
             <div class="content-wrapper" >
                 <div v-if="content" v-html="content"></div>
@@ -12,12 +12,12 @@
             <div class="bottom">
                 <div v-show="singleBtn" class="__btn btn-single __btn_all_in __pointer" 
                      :class="{'unuse': btnUnuse }"
-                     @click="_leftBtnClick">{{ leftBtnTxt }}</div>
+                     @click="_leftBtnClick">{{ lTxt }}</div>
                 <div v-show="!singleBtn" class="__btn btn-left __pointer" 
-                     @click="_leftBtnClick">{{ leftBtnTxt }}</div>
+                     @click="_leftBtnClick">{{ lTxt }}</div>
                 <div v-show="!singleBtn" class="__btn __btn_all_in __pointer" 
                      :class="{'unuse': btnUnuse }"
-                     @click="_rightBtnClick">{{ rightBtnTxt }}</div>
+                     @click="_rightBtnClick">{{ rTxt }}</div>
             </div>
         </div>
     </div>
@@ -34,7 +34,7 @@ export default {
             type: String,
             default: ''
         },
-        closeIcon: {
+        showClose: {
             type: Boolean,
             default: false
         },
@@ -42,25 +42,13 @@ export default {
             type: Function,
             default: ()=>{}
         },
-        singleBtn: {
-            type: Boolean,
-            default: false
-        },
-        leftBtnTxt: {
+        lTxt: {
             type: String,
             default: ''
         },
-        rightBtnTxt: {
+        rTxt: {
             type: String,
             default: ''
-        },
-        leftBtnClick: {
-            type: Function,
-            default: ()=>{}
-        },
-        rightBtnClick: {
-            type: Function,
-            default: ()=>{}
         },
         btnUnuse: {
             type: Boolean,
@@ -69,7 +57,15 @@ export default {
         content: {
             type: String,
             default: ''
-        }
+        },
+        lClick: {
+            type: Function,
+            default: ()=>{}
+        },
+        rClick: {
+            type: Function,
+            default: ()=>{}
+        },
     },
     methods: {
         _rightBtnClick() {
@@ -83,6 +79,11 @@ export default {
                 return;
             }
             this.leftBtnClick && this.leftBtnClick();
+        }
+    },
+    computed:{
+        singleBtn(){
+            return !!this.sTxt;
         }
     }
 };
@@ -104,33 +105,6 @@ export default {
     &.gray {
         background: rgba(0, 0, 0, 0.6);
     }
-}
-
-.exchange.confirm-container.gray {
-    background: rgba(0, 0, 0, 0.4);
-}
-
-.exchange .confirm-wrapper {
-    max-width: 515px;
-    .title {
-        height: 58px;
-        line-height: 58px;
-        font-size: 14px;
-        font-weight: 600;
-    }
-    .content-wrapper {
-        padding: 20px 30px;
-    }
-    .bottom {
-        min-height: 74px;
-        .__btn {
-            height: 44px;
-            line-height: 44px;
-            font-size: 14px;
-            font-weight: 600;
-        }
-    }
-
 }
 
 .confirm-wrapper {
@@ -157,7 +131,7 @@ export default {
             padding: 30px;
             width: 20px;
             height: 20px;
-            background: url('../assets/imgs/confirm_close.svg') no-repeat center;
+            background: url('~assets/imgs/confirm_close.svg') no-repeat center;
             background-size: 20px 20px;
         }
     }

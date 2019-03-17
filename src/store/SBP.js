@@ -1,6 +1,6 @@
-import config from 'config/constant';
 import { timer } from 'utils/asyncFlow';
 import BigNumber from 'utils/bigNumber';
+import { constant } from '@vite/vitejs';
 
 const loopTime = 5000;
 let regListInst = null;
@@ -8,7 +8,7 @@ let nodeNameList = {};
 
 const apis = {
     fetchRegistrationList(address) {
-        return $ViteJS.register.getRegistrationList(config.gid, address).then((result)=>{
+        return $ViteJS.register.getRegistrationList(constant.Snapshot_Gid, address).then((result)=>{
             return result || [];
         });
     }

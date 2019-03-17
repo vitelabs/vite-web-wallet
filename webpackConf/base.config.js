@@ -1,7 +1,6 @@
 const path = require('path');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const plugins = require('./plugins.js');
-// const px2rem = require('postcss-px2rem');
 
 const SRC_PATH = path.join(__dirname, '../src');
 const CHARTING_PATH = path.join(__dirname, '../charting_library');
@@ -99,6 +98,7 @@ module.exports = {
             assets: path.join(SRC_PATH, '/assets'),
             router: path.join(SRC_PATH, '/router'),
             utils: path.join(SRC_PATH, '/utils'),
+            plugins: path.join(SRC_PATH, '/plugins'),
             i18n: path.join(SRC_PATH, '/i18n'),
             config: path.join(SRC_PATH, '../config'),
             mock: path.join(SRC_PATH, '../mock')

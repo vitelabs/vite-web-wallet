@@ -8,24 +8,30 @@ import 'utils/eventEmitter.js';
 import 'utils/viteWallet/index.js';
 
 import Vue from 'vue';
-Vue.config.devtools = process.env.NODE_ENV === 'dev';
 import VueRouter from 'vue-router';
+import VueI18n from 'vue-i18n';
 
 import App from 'pages/index.vue';
 import initRouter from 'router/index.js';
 
-import { i18n } from 'i18n';
+import i18nConf from 'i18n';
 import store from './store';
+
+import plugin from 'plugins/addPlugin';
+import directives from 'plugins/directives';
+import resaveAccKeystore from 'utils/resaveAccKeystore.js';
+
 import { initPwdConfirm } from 'components/password/index.js';
 import { initQuotaConfirm } from 'components/quota/index.js';
-
-import plugin from 'utils/plugins/addPlugin';
-import directives from 'utils/plugins/directives';
-import { reSave } from 'utils/wallet/index.js';
 
 Vue.use(plugin);
 Vue.use(VueRouter);
 Vue.use(directives);
+Vue.use(VueI18n);
+
+const i18n = new VueI18n( i18nConf );
+
+Vue.config.devtools = process.env.NODE_ENV !== 'production';
 
 // Start loading animate
 let element = document.getElementById('loading');
@@ -37,7 +43,7 @@ setTimeout(() => {
 
 // Loading finish and App init finish also.
 setTimeout(() => {
-    reSave();
+    resaveAccKeystore();
 
     const router = initRouter(VueRouter);
 

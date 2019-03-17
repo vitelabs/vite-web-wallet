@@ -13,23 +13,30 @@
         <go-net-btn class="go-net-wrapper"></go-net-btn>
         <change-lang class="menu change-lang-wrapper" 
                      :class="{'dex': active.indexOf('exchange') === 0}"></change-lang>
+
         <ul class="right-lab-list">
-            <div v-show="!isLogin" @click="go('start')" class="tab __pointer" 
-                 :class="{'dex': active.indexOf('exchange') === 0}">{{ $t('login') }}</div>  
-            <div v-show="!isLogin" @click="go('startCreate')" class="tab __pointer"
-                 :class="{'dex': active.indexOf('exchange') === 0}">{{ $t('regAcc') }}</div>  
-            <div v-show="active === 'exchange'" class="tab dex __pointer">{{ $t('dexToken') }}</div>
+            <div v-show="!isLogin" @click="dexStart" class="tab __pointer" 
+                 :class="{'dex': active.indexOf('exchange') === 0}">
+                {{ isHaveUsers ? $t('unlockAcc') : $t('login')  }}</div>
+            <div v-show="!isLogin" @click="dexChange" class="tab __pointer"
+                 :class="{'dex': active.indexOf('exchange') === 0}">
+                {{ isHaveUsers ? $t('changeAcc') : $t('register') }}</div>  
+            <div v-show="active === 'exchange'" v-unlock-account="showToken" 
+                 class="tab dex __pointer">{{ $t('dexToken') }}</div>
         </ul>
+
+        <dex-token v-show="isShowDexToken" :close="closeToken"></dex-token>
     </div>
 </template>
 
 <script>
 import changeLang from 'components/changeLang';
+import dexToken from 'components/dexToken';
 import goNetBtn from './goNetBtn.vue';
 
 export default {
     components: {
-        goNetBtn, changeLang
+        goNetBtn, changeLang, dexToken
     },
     props: {
         tabList: {
@@ -56,10 +63,40 @@ export default {
         });
     },
     data() {
+        let activeAccount = this.$wallet.getActiveAccount();
+
         return {
             active: this.$route.name,
-            isLogin: false
+            isLogin: false,
+            isShowDexToken: false,
+            isHaveUsers: !!activeAccount
         };
+    },
+    methods: {
+        showToken() {
+            this.isShowDexToken = true;
+        },
+        closeToken() {
+            this.isShowDexToken = false;
+        },
+
+        dexStart() {
+            if (!this.isHaveUsers) {
+                this.go('start');
+                return;
+            }
+            let activeAccount = this.$wallet.getActiveAccount();
+            activeAccount && activeAccount.unlockAccount();
+        },
+        dexChange() {
+            if (!this.isHaveUsers) {
+                this.$router.push({
+                    name: 'startCreate'
+                });
+                return;
+            }
+            this.go('start');
+        }
     }
 };
 </script>

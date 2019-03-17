@@ -127,6 +127,9 @@ export default {
                     return false;
                 }
                 
+                if (this.type !== 'normal') {
+                    this.$toast( this.$t('unlockSuccess') );                    
+                }
                 this.isPwdHold && activeAccount.holdPWD(password, holdTime);
                 this.clear();
                 this.submit && this.submit();
@@ -141,8 +144,8 @@ export default {
                 }, password).then(() => {
                     this.isLoading = false;
                     activeAccount = this.$wallet.getActiveAccount();
-                    let result = activeAccount.unlock();
-                    deal(result);
+                    activeAccount.unlock();
+                    deal(true);
                 }).catch((err) => {
                     this.isLoading = false;
                     console.warn(err);

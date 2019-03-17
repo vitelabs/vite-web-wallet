@@ -40,6 +40,10 @@ const ethNet = {
     test: '\'https://ropsten.etherscan.io\'',
     dev: '\'https://ropsten.etherscan.io\''
 };
+const pushServer={
+    test:'"ws://132.232.65.121:11211/websocket"',
+    dev:'"wss://192.168.31.190:11211/websocket"'
+};
 
 let Node_Env = process.env.NODE_ENV || 'dev';
 let ENV = Node_Env === 'testout' ? 'test' : Node_Env;
@@ -59,7 +63,8 @@ let plugins = [
         'process.env.contractAddress': contractAddress[ENV],
         'process.env.ethServer': ethServer[ENV],
         'process.env.conversionHost': conversionHost[ENV],
-        'process.env.ethNet': ethNet[ENV]
+        'process.env.ethNet': ethNet[ENV],
+        'process.env.pushServer':pushServer[ENV]
     }),
     new webpack.NormalModuleReplacementPlugin(/\/buffer\//, function(resource) {
         resource.request = Buffer_Path;

@@ -69,7 +69,6 @@ export default {
             return this.activeTxPair ? this.activeTxPair.pairCode || null : null;
         },
         activeTxPair() {
-
             return this.$store.state.exchangeActiveTxPair.activeTxPair;
         },
         showList() {

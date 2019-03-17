@@ -1,15 +1,12 @@
 import { hdAddr as _hdAddr, keystore as _keystore, utils, constant } from '@vite/vitejs';
 import vitecrypto from 'testwebworker';
+import storeAcc from 'utils/storeAcc.js';
 import statistics from 'utils/statistics';
-import storage from 'utils/localStorage.js';
 
 import account from './account.js';
-import acc from './storeAcc.js';
 
 const { LangList } = constant;
 const _tools = utils.tools;
-
-const LAST_KEY = 'ACC_LAST';
 
 class _wallet {
     constructor() {
@@ -201,7 +198,7 @@ class _wallet {
                 privateKey: privKey,
                 type: 'keystore'
             });
-            setLast({
+            storeAcc.setLast({
                 addr,
                 name: acc.name
             });
@@ -219,7 +216,7 @@ class _wallet {
         });
         this.activeWalletAcc.save();
 
-        setLast({
+        storeAcc.setLast({
             addr,
             name: acc.name
         });
@@ -276,7 +273,7 @@ class _wallet {
             this.activeWalletAcc.save(i);
         }
 
-        setLast({
+        storeAcc.setLast({
             id,
             entropy,
             name: acc.name
@@ -286,7 +283,7 @@ class _wallet {
     }
 
     getList() {
-        return acc.getList();
+        return storeAcc.getList();
     }
 
     getLast() {
@@ -299,7 +296,7 @@ class _wallet {
             };
         }
 
-        let last = getLast();
+        let last = storeAcc.getLast();
         if (!last) {
             return null;
         }
@@ -327,60 +324,11 @@ class _wallet {
 
 export const wallet = _wallet;
 
-export const reSave = _reSave;
 
 
-
-// VCP VV ===>  later
-function  _reSave() {
-    let list = acc.getList();
-    if (!list || !list.length) {
-        return;
-    }
-
-    let last = getLast();
-    let reList = [];
-    let isChange = false;
-
-    list.forEach((item) => {
-        if (!item) {
-            return;
-        }
-
-        if (!item.entropy || !item.encryptObj || +item.encryptObj.version !== 1 || !item.encryptObj.scryptParams) {
-            reList.push(item);
-            return;
-        }
-
-        isChange = true;
-
-        let entropy = item.entropy;
-        let keystore = _keystore.encryptV1ToV3(entropy, JSON.stringify(item.encryptObj));
-        
-        keystore = JSON.parse(keystore);
-
-        let mnemonic = _hdAddr.getMnemonicFromEntropy(entropy);
-        item.lang = LangList.english;
-        item.id = _hdAddr.getId(mnemonic);
-        item.encryptObj = keystore;
-
-        if (last && last.entropy && last.entropy === entropy) {
-            last.entropy = item.entropy;
-        }
-        reList.push(item);
-    });
-
-    if (!isChange) {
-        return;
-    }
-    
-    statistics.event('keystore', 'resave');
-    setLast(last);
-    acc.setAccList(reList);
-}
 
 function getAccFromId(id) {
-    let list = acc.getList();
+    let list = storeAcc.getList();
     if (!list) {
         return null;
     }
@@ -394,7 +342,7 @@ function getAccFromId(id) {
 
 function getAccFromEntropy(entropy) {
     let result = null;
-    let list = acc.getList();
+    let list = storeAcc.getList();
     for(let i=0; i<list.length; i++) {
         if (list[i].entropy === entropy) {
             if (!list[i].id) {
@@ -414,19 +362,11 @@ function getAccFromEntropy(entropy) {
 }
 
 function getAccFromAddr(address) {
-    let list = acc.getList();
+    let list = storeAcc.getList();
     for(let i=0; i<list.length; i++) {
         if (list[i].addr === address) {
             return list[i];
         }
     }
     return null;
-}
-
-function getLast() {
-    return storage.getItem(LAST_KEY);
-}
-
-function setLast(acc) {  
-    storage.setItem(LAST_KEY, acc);
 }

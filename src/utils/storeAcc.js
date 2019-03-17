@@ -1,6 +1,7 @@
 import storage from 'utils/localStorage.js';
 
 const ACC_KEY = 'ACC_LIST';
+const LAST_KEY = 'ACC_LAST';
 const NAME_KEY = 'NAME_COUNT';
 
 export default {
@@ -61,9 +62,16 @@ export default {
         storage.setItem(NAME_KEY, count);
     },
     getNameCount() {
-        return storage.getItem(NAME_KEY) || 0;
+    },
+    getLast() {
+        return storage.getItem(LAST_KEY);
+    },
+    setLast(acc) {  
+        storage.setItem(LAST_KEY, acc);
     }
 };
+
+
 
 function getList() {
     return storage.getItem(ACC_KEY);

@@ -27,7 +27,12 @@ export default function request({ method = 'GET', path, params = {}, timeout = r
     return new Promise((res, rej) => {        
         xhr.onload = function () {
             try {
-                if (xhr.status == 200) {
+                if (xhr.status == 200) {                    
+                    if (path.indexOf('kline') !== -1) {
+                        res(JSON.parse(xhr.responseText));
+                        return;
+                    }
+
                     let { code, msg, data, error } = JSON.parse(xhr.responseText);
                     let rightCode = path.indexOf('api') === 1 ? 0 : 200;
                     if (code !== rightCode) {
@@ -36,6 +41,7 @@ export default function request({ method = 'GET', path, params = {}, timeout = r
                             message: msg || error
                         });
                     }
+
                     res(data || null);
                 } else {
                     rej( JSON.parse(xhr.responseText) );
