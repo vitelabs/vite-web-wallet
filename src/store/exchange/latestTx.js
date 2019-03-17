@@ -1,4 +1,4 @@
-import {subTask} from 'utils/proto/subTask';
+import { subTask } from 'utils/proto/subTask';
 
 const latestTxTime = 2000;
 let latestTxTask = null;
@@ -23,7 +23,10 @@ const actions = {
         commit('exSetLatestTxLoading', true);
         // Loop;
         stopLatestTimer();
-        latestTxTask = new subTask('latestTx',(data)=>{data && commit('exSetLatestTxList', data);commit('exSetLatestTxLoading', false);}, latestTxTime);
+        latestTxTask = new subTask('latestTx', ({ data }) => {
+            data && commit('exSetLatestTxList', data);
+            commit('exSetLatestTxLoading', false);
+        }, latestTxTime);
         
         getters.exActiveTxPair && latestTxTask.start(() => getters.exActiveTxPair);
     },
