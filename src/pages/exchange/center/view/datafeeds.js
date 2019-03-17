@@ -20,7 +20,6 @@ export default class dataFeeds {
         }, 0);
     }
     resolveSymbol(symbolName, onSymbolResolvedCallback) {
-        // console.log('resolveSymbol', symbolName);
         return setTimeout(() => {
             onSymbolResolvedCallback({
                 name: this.symbolName,
@@ -165,8 +164,6 @@ export default class dataFeeds {
         onHistoryCallback(_list, { noData: false });
     }
 
-
-
     subscribeBars(symbolInfo, resolution, onRealtimeCallback, subscriberUID, onResetCacheNeededCallback) {
         console.log(symbolInfo, resolution, onRealtimeCallback, subscriberUID, onResetCacheNeededCallback);
         // return onRealtimeCallback(this.list[resolution]);
@@ -176,34 +173,17 @@ export default class dataFeeds {
         console.log(subscriberUID);
         return undefined;
     }
-    calculateHistoryDepth(resolution, resolutionBack, intervalBack) {
-        // let timeList = {
-        //     '1': 60,
-        //     '30': 30 * 60,
-        //     '60': 60 * 60,
-        //     '360': 360 * 60,
-        //     '720': 720 * 60,
-        //     '1D': 24 * 60 * 60,
-        //     '1W': 7 * 24 * 60 * 60
-        // };
-        console.log(resolution, resolutionBack, intervalBack);
-        if (resolution === '30') {
-            return {
-                resolutionBack: 'D',
-                intervalBack: 1
-            };
-        }
+
+    calculateHistoryDepth() {
+        // resolution, resolutionBack, intervalBack
         return undefined;
     }
-    getMarks(symbolInfo, from, to, onDataCallback, resolution) {
-        console.log(symbolInfo, from, to, onDataCallback, resolution);
+    getMarks() {
+        // console.log(symbolInfo, from, to, onDataCallback, resolution);
         return undefined;
     }
-    getTimescaleMarks(symbolInfo, from, to, onDataCallback, resolution) {
-        console.log(symbolInfo, from, to, onDataCallback, resolution);
+    getTimescaleMarks() {
+        // console.log(symbolInfo, from, to, onDataCallback, resolution);
         return undefined;
-    }
-    getServerTime() {
-        // console.log(callback);
     }
 }
