@@ -1,4 +1,4 @@
-import {subTask} from 'utils/proto/subTask';
+import { subTask } from 'utils/proto/subTask';
 
 const time = 2000;
 let buyTask = null;
@@ -13,10 +13,10 @@ const state = {
 
 const mutations = {
     exSetDepthBuy(state, depthData) {
-        state.buy = depthData;
+        state.buy = depthData || [];
     },
     exSetDepthSell(state, depthData) {
-        state.sell = depthData;
+        state.sell = depthData || [];
     },
     exSetDepthBuyLoading(state, isLoading) {
         state.isBuyLoading = isLoading;
@@ -36,30 +36,29 @@ const actions = {
         dispatch('exFetchDepthBuy');
         dispatch('exFetchDepthSell');
     },
-    exFetchDepthBuy({ commit,getters }) {
+    exFetchDepthBuy({ commit, getters }) {
         commit('exSetDepthBuyLoading', true);
-        buyTask=buyTask||new subTask('depthBuy',({ data })=>{
+
+        buyTask = buyTask || new subTask('depthBuy', ({ data }) => {
             commit('exSetDepthBuyLoading', false);
             commit('exSetDepthBuy', data);
-        });
-        console.log('buy');
-        buyTask.start(()=>getters.exActiveTxPair);
-    },
-    exFetchDepthSell({ commit,getters }) {
-        commit('exSetDepthSellLoading', true);
-        const dataCallback=({ data }) => {
-            data && commit('exSetDepthSell', data);
-            commit('exSetDepthSellLoading', false);
-        };
+        }, time);
 
-        // Loop
-        stopSellTimer();
-        console.log('sell');
-        sellTask =sellTask|| new subTask('depthSell',dataCallback,time);
-        sellTask.start(()=>getters.exActiveTxPair);
+        buyTask.start(() => getters.exActiveTxPair);
+    },
+    exFetchDepthSell({ commit, getters }) {
+        commit('exSetDepthSellLoading', true);
+
+        sellTask = sellTask || new subTask('depthSell', ({ data }) => {
+            commit('exSetDepthSellLoading', false);
+            commit('exSetDepthSell', data);
+        }, time);
+
+        sellTask.start(() => getters.exActiveTxPair);
     },
     exStopDepthTimer() {
-        stopTimer();
+        stopBuyTimer();
+        stopSellTimer();
     }
 };
 
@@ -68,12 +67,7 @@ function stopBuyTimer() {
 }
 
 function stopSellTimer() {
-    buyTask && buyTask.stop();
-}
-
-function stopTimer() {
-    stopBuyTimer();
-    stopSellTimer();
+    sellTask && sellTask.stop();
 }
 
 export default {

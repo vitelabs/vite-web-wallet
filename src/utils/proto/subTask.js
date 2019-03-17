@@ -77,7 +77,11 @@ export class subTask extends timer {
             }
 
             let args = this.args;
+            let key = this.subKey;
             httpServicesMap[this.key] && httpServicesMap[this.key](args).then((data) => {
+                if (this.subKey !== key) {
+                    return;
+                }
                 this.callback && this.callback({
                     args, data
                 });
@@ -96,7 +100,11 @@ export class subTask extends timer {
 
         // get all data from http at first
         let args = this.args;
+        let key = this.subKey;
         httpServicesMap[this.key] && httpServicesMap[this.key](args).then((data) => {
+            if (this.subKey !== key) {
+                return;
+            }
             this.callback && this.callback({
                 args, data
             });
@@ -123,7 +131,11 @@ export class subTask extends timer {
         client.unSub(oldkey, this.callback);
 
         let args = this.args;
+        let key = this.subKey;
         client.sub(this.subKey, (data) => {
+            if (this.subKey !== key) {
+                return;
+            }
             this.callback && this.callback({ 
                 args, data 
             });

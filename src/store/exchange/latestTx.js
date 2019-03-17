@@ -10,7 +10,7 @@ const state = {
 
 const mutations = {
     exSetLatestTxList(state, list) {
-        state.txList = list;
+        state.txList = list || [];
     },
     exSetLatestTxLoading(state, isLoading) {
         state.isLoading = isLoading;
@@ -19,12 +19,10 @@ const mutations = {
 
 const actions = {
     exFetchLatestTx({ getters, commit }) {
-        // Init;
         commit('exSetLatestTxLoading', true);
-        // Loop;
-        stopLatestTimer();
-        latestTxTask = new subTask('latestTx', ({ data }) => {
-            data && commit('exSetLatestTxList', data);
+
+        latestTxTask = latestTxTask || new subTask('latestTx', ({ data }) => {
+            commit('exSetLatestTxList', data);
             commit('exSetLatestTxLoading', false);
         }, latestTxTime);
         
