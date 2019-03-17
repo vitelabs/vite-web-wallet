@@ -130,7 +130,18 @@ export default class dataFeeds {
         let _list = [];
         let index = 0;
 
-        for (let time=from - from % 60; time<to; time+=timeList[resolution]) {
+        for (let time = list[0].time; time >= from; time -= timeList[resolution]) {
+            _list.push({
+                time: time * 1000,
+                close: 0,
+                open: 0,
+                high: 0,
+                low: 0,
+                volume: 0,
+            });
+        }
+
+        for (let time = list[0].time; time < to; time += timeList[resolution]) {
             if (list[index] && time === list[index].time) {
                 _list.push(list[index]);
                 index++;
