@@ -300,7 +300,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~assets/scss/trans.scss";
+@import "~assets/scss/confirmInput.scss";
 </style>
 
 <style lang="scss">

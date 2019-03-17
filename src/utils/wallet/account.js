@@ -1,11 +1,11 @@
 import { pwdConfirm } from 'components/password/index.js';
 import { getPowNonce } from 'services/pow';
 import { constant } from '@vite/vitejs';
+import acc from 'utils/storeAcc.js';
 
 import keystoreAcc from './keystoreAccount';
 import walletAcc from './walletAccount';
 import addrAcc from './addrAccount';
-import acc from './storeAcc.js';
 
 const { LangList } = constant;
 const NamePre = 'account';

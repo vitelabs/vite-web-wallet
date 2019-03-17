@@ -1,5 +1,5 @@
 import { addrAccount as _addrAccount } from '@vite/vitejs';
-import acc from './storeAcc.js';
+import acc from 'utils/storeAcc.js';
 
 class addrAccount extends _addrAccount {
     constructor({

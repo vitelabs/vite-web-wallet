@@ -3,8 +3,8 @@
         <tab-list></tab-list>
 
         <div class="search-wrapper">
-            <vite-input class="search-input" :valid="fetchSearchList"
-                        v-model="searchText" :placeholder="$t('exchange.search')">
+            <vite-input class="search-input" v-model="searchText" 
+                        :placeholder="$t('exchange.search')">
                 <img slot="before" class="icon" src="~assets/imgs/search.svg"/>
             </vite-input>
 
@@ -56,13 +56,10 @@
         </div>
 
         <loading loadingType="dot" class="ex-center-loading" v-show="isLoading"></loading>
-        <div class="hint" v-show="!isLoading && isShowSearchErr">{{ searchErr }}</div>
-        <div class="hint" v-show="!isShowSearchErr && isShowNoData">{{ noData }}</div>
-
-        <tx-pair-list v-show="isShowList" :list="activeTxPairList" 
+        <div class="hint" v-show="isShowNoData">{{ noData }}</div>
+        <tx-pair-list v-show="!isShowNoData && !isLoading" :list="activeTxPairList" 
                       :favoritePairs="favoritePairs" :currentRule="currentOrderRule"
-                      :setFavorite="setFavorite" :showCol="showCol"
-        ></tx-pair-list>
+                      :setFavorite="setFavorite" :showCol="showCol"></tx-pair-list>
     </div>
 </template>
 
@@ -70,15 +67,15 @@
 import viteInput from 'components/viteInput';
 import loading from 'components/loading';
 import localStorage from 'utils/localStorage';
-import { timer } from 'utils/asyncFlow';
-import { defaultPair, assignPair, pairSearch } from 'services/exchange';
+import { subTask } from 'utils/proto/subTask';
 
 import orderArrow from './orderArrow';
 import tabList from './tabList';
 import txPairList from './txPairList';
 
 const FavoriteKey = 'favoriteTxPairs';
-let pairTimer = null;
+
+let defaultPairTimer = null;
 
 export default {
     components: {
@@ -89,11 +86,24 @@ export default {
         txPairList
     },
 
-    beforeMount(){
-        this.init();
+    beforeMount() {
+        defaultPairTimer = new subTask('defaultPair', ({ args, data }) => {
+            if (args.ttoken !== this.toTokenId) {
+                return;
+            }
+            this.isLoading = false;
+            this.txPairList = data || [];
+        }, 2000);
+
+        defaultPairTimer.start(() => { 
+            return {
+                ttoken: this.toTokenId
+            };
+        });
     },
     destroyed() {
-        this.stopLoopList();
+        defaultPairTimer && defaultPairTimer.stop();
+        defaultPairTimer = null;
     },
     data() {
         return {
@@ -105,15 +115,15 @@ export default {
             favoritePairs: localStorage.getItem(FavoriteKey) || {},
             txPairList: [],
 
-            isShowSearch: false,
-            searchErr: '',
             searchText: '',
             searchList: []
         };
     },
     watch: {
         toTokenId: function() {
-            this.init();
+            this.searchText = '';
+            this.searchList = [];
+            this.isLoading = true;
         },
         txPairList: function() {
             this.txPairList &&
@@ -126,34 +136,32 @@ export default {
                     }
                     this.$store.commit('exSetActiveTxPair', txPair);
                 });
+        },
+        searchText: function() {
+            let list = [];
+            let searchText = this.$trim(this.searchText).toLowerCase();
+            this.txPairList.forEach((tx) => {
+                let ftokenShow = tx.ftokenShow.toLowerCase();
+                if (ftokenShow.indexOf(searchText) !== -1) {
+                    list.push(tx);
+                }
+            });
+            this.searchList = list;
         }
     },
     computed: {
         toTokenId(){
             return this.$store.state.exchangeMarket.currentMarket;
         },
-        isShowSearchErr() {
-            return this.searchText && this.isShowSearch && this.searchErr;
-        },
         isShowNoData() {
             return !this.isLoading && (
                 !this.activeTxPairList ||
                 !this.activeTxPairList.length ||
-                (this.isShowSearch &&
-                    !this.searchList.length &&
+                (!this.searchList.length &&
                     this.searchText)
             );
         },
-        isShowList() {
-            return !this.isShowSearchErr && !this.isShowNoData;
-        },
-        txPairCodeList() {
-            let codeList = [];
-            this.txPairList.forEach(txPair => {
-                codeList.push(txPair.pairCode);
-            });
-            return codeList;
-        },
+
         favoriteCodeList() {
             let codeList = [];
             for (let code in this.favoritePairs) {
@@ -170,7 +178,7 @@ export default {
             return codeList;
         },
         noData() {
-            if (this.searchText && this.isShowSearch) {
+            if (this.searchText) {
                 return this.$t('exchange.noData.search');
             }
             if (this.isOnlyFavorite) {
@@ -183,7 +191,7 @@ export default {
                 return [];
             }
             let list =
-                this.searchText && this.isShowSearch
+                this.searchText
                     ? this.searchList
                     : this.isOnlyFavorite
                         ? this.activeFavoriteList
@@ -233,120 +241,6 @@ export default {
             this.favoritePairs = Object.assign({}, this.favoritePairs);
 
             localStorage.setItem(FavoriteKey, this.favoritePairs);
-        },
-
-        async init() {
-            // First, clear.
-            this.searchText = '';
-            this.searchList = [];
-            this.txPairList = [];
-            this.stopLoopList();
-
-            // Second, wait txPairList.
-            this.isLoading = true;
-            let toTokenId = this.toTokenId;
-
-            try {
-                let _q = [this.fetchDefaultList()];
-                this.favoriteCodeList &&
-                    this.favoriteCodeList.length &&
-                    _q.push(this.fetchFavoriteList());
-                let _r = await Promise.all(_q);
-
-                if (toTokenId !== this.toTokenId) {
-                    return;
-                }
-
-                // Third, txPairList finish. Get final list.
-                this.isLoading = false;
-                let defaultList = _r[0] || [];
-                let favoriteList = _r.length === 2 ? _r[1] || [] : [];
-
-                let list = [];
-                let codeList = [];
-                // Add default
-                defaultList.forEach(txPair => {
-                    list.push(txPair);
-                    codeList.push(txPair.pairCode);
-                });
-                // Add favorite
-                favoriteList.forEach(txPair => {
-                    if (codeList.indexOf(txPair.pairCode) !== -1) {
-                        return;
-                    }
-                    list.push(txPair);
-                    codeList.push(txPair.pairCode);
-                });
-
-                // Done
-                this.txPairList = list;
-
-                this.startLoopList();
-            } catch (err) {
-                console.warn(err);
-                this.isLoading = false;
-            }
-        },
-
-        startLoopList() {
-            this.stopLoopList();
-            pairTimer = new timer(() => {
-                if (!this.txPairCodeList || !this.txPairCodeList.length) {
-                    return Promise.resolve();
-                }
-                return this.fetchTxPairList();
-            }, 2000);
-            pairTimer.start();
-        },
-        stopLoopList() {
-            pairTimer && pairTimer.stop();
-            pairTimer = null;
-        },
-
-        fetchSearchList() {
-            if (!this.searchText) {
-                return;
-            }
-
-            this.isLoading = true;
-            let _fromTokenShow = this.$trim(this.searchText);
-
-            return pairSearch({
-                key: _fromTokenShow,
-                ttoken: this.activeTxPair.ttoken
-            })
-                .then(data => {
-                    let currentText = this.$trim(this.searchText);
-                    if (currentText !== _fromTokenShow) {
-                        return;
-                    }
-                    this.isLoading = false;
-                    this.isShowSearch = true;
-                    this.searchList = data;
-                })
-                .catch(err => {
-                    console.warn(err);
-                    this.isLoading = false;
-                    this.isShowSearch = true;
-                    this.searchErr = this.$t('hint.err');
-                });
-        },
-        fetchDefaultList() {
-            return defaultPair({
-                toTokenId: this.toTokenId
-            });
-        },
-        fetchFavoriteList() {
-            return assignPair({
-                pairs: this.favoriteCodeList
-            });
-        },
-        fetchTxPairList() {
-            return assignPair({
-                pairs: this.txPairCodeList
-            }).then(data => {
-                this.txPairList = data;
-            });
         }
     }
 };
@@ -439,4 +333,3 @@ export default {
     }
 }
 </style>
-
