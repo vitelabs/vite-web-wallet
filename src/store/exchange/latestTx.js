@@ -24,7 +24,8 @@ const actions = {
         // Loop;
         stopLatestTimer();
         latestTxTask = new subTask('latestTx',(data)=>{data && commit('exSetLatestTxList', data);commit('exSetLatestTxLoading', false);}, latestTxTime);
-        latestTxTask.start(()=>getters.exActiveTxPair);
+        
+        getters.exActiveTxPair && latestTxTask.start(() => getters.exActiveTxPair);
     },
     exStopLatestTimer() {
         stopLatestTimer();
