@@ -1,9 +1,8 @@
-import { depthBuy, depthSell } from 'services/exchange';
-import { timer } from 'utils/asyncFlow';
+import {subTask} from 'utils/proto/subTask';
 
 const time = 2000;
-let buyTimer = null;
-let sellTimer = null;
+let buyTask = null;
+let sellTask = null;
 
 const state = {
     buy: [],
@@ -37,71 +36,27 @@ const actions = {
         dispatch('exFetchDepthBuy');
         dispatch('exFetchDepthSell');
     },
-    exFetchDepthBuy({ rootState, commit }) {
-        let activeTxPair = rootState.exchangeActiveTxPair.activeTxPair;
-
-        let _f = (cb) => {
-            return depthBuy({
-                ftoken: activeTxPair.ftoken,
-                ttoken: activeTxPair.ttoken
-            }).then((data) => {
-                cb && cb(data || []);
-            }).catch(err => {
-                console.warn(err);
-                cb && cb();
-            });
-        };
-
-        // Init
+    exFetchDepthBuy({ commit,getters }) {
         commit('exSetDepthBuyLoading', true);
-        _f((data) => {
-            let _activeTxPair = rootState.exchangeActiveTxPair.activeTxPair;
-            if (_activeTxPair.pairCode !== activeTxPair.pairCode) {
-                return;
-            }
-            data && commit('exSetDepthBuy', data);
+        buyTask=buyTask||new subTask('depthBuy',(data)=>{
             commit('exSetDepthBuyLoading', false);
+            commit('exSetDepthBuy', data);
         });
-
-        // Loop
-        stopBuyTimer();
-        buyTimer = new timer(()=>{
-            return _f();
-        }, time);
-        buyTimer.start();
+        console.log('buy');
+        buyTask.start(()=>getters.exActiveTxPair);
     },
-    exFetchDepthSell({ rootState, commit }) {
-        let activeTxPair = rootState.exchangeActiveTxPair.activeTxPair;
-
-        let _f = (cb) => {
-            return depthSell({
-                ftoken: activeTxPair.ftoken,
-                ttoken: activeTxPair.ttoken
-            }).then((data) => {
-                cb && cb(data || []);
-            }).catch(err => {
-                console.warn(err);
-                cb && cb();
-            });
-        };
-
-        // Init
+    exFetchDepthSell({ commit,getters }) {
         commit('exSetDepthSellLoading', true);
-        _f((data) => {
-            let _activeTxPair = rootState.exchangeActiveTxPair.activeTxPair;
-            if (_activeTxPair.pairCode !== activeTxPair.pairCode) {
-                return;
-            }
+        const dataCallback=(data) => {
             data && commit('exSetDepthSell', data);
             commit('exSetDepthSellLoading', false);
-        });
+        };
 
         // Loop
         stopSellTimer();
-        sellTimer = new timer(()=>{
-            return _f();
-        }, time);
-        sellTimer.start();
+        console.log('sell');
+        sellTask =sellTask|| new subTask('depthSell',dataCallback,time);
+        sellTask.start(()=>getters.exActiveTxPair);
     },
     exStopDepthTimer() {
         stopTimer();
@@ -109,13 +64,11 @@ const actions = {
 };
 
 function stopBuyTimer() {
-    buyTimer && buyTimer.stop();
-    buyTimer = null;
+    buyTask && buyTask.stop();
 }
 
 function stopSellTimer() {
-    sellTimer && sellTimer.stop();
-    sellTimer = null;
+    buyTask && buyTask.stop();
 }
 
 function stopTimer() {

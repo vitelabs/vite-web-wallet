@@ -333,7 +333,7 @@ export default {
         },
         fetchDefaultList() {
             return defaultPair({
-                toTokenId: this.toTokenId
+                ttoken: this.toTokenId
             });
         },
         fetchFavoriteList() {
