@@ -57,8 +57,7 @@
 
         <loading loadingType="dot" class="ex-center-loading" v-show="isLoading"></loading>
         <div class="hint" v-show="isShowNoData">{{ noData }}</div>
-
-        <tx-pair-list v-show="isShowList" :list="activeTxPairList" 
+        <tx-pair-list v-show="!isShowNoData && !isLoading" :list="activeTxPairList" 
                       :favoritePairs="favoritePairs" :currentRule="currentOrderRule"
                       :setFavorite="setFavorite" :showCol="showCol"></tx-pair-list>
     </div>
@@ -68,15 +67,15 @@
 import viteInput from 'components/viteInput';
 import loading from 'components/loading';
 import localStorage from 'utils/localStorage';
-import { timer } from 'utils/asyncFlow';
-import { defaultPair } from 'services/exchange';
+import { subTask } from 'utils/proto/subTask';
 
 import orderArrow from './orderArrow';
 import tabList from './tabList';
 import txPairList from './txPairList';
 
 const FavoriteKey = 'favoriteTxPairs';
-let pairTimer = null;
+
+let defaultPairTimer = null;
 
 export default {
     components: {
@@ -87,11 +86,24 @@ export default {
         txPairList
     },
 
-    beforeMount(){
-        this.init();
+    beforeMount() {
+        defaultPairTimer = new subTask('defaultPair', ({ args, data }) => {
+            if (args.ttoken !== this.toTokenId) {
+                return;
+            }
+            this.isLoading = false;
+            this.txPairList = data || [];
+        }, 2000);
+
+        defaultPairTimer.start(() => { 
+            return {
+                ttoken: this.toTokenId
+            };
+        });
     },
     destroyed() {
-        this.stopLoopList();
+        defaultPairTimer && defaultPairTimer.stop();
+        defaultPairTimer = null;
     },
     data() {
         return {
@@ -109,7 +121,9 @@ export default {
     },
     watch: {
         toTokenId: function() {
-            this.init();
+            this.searchText = '';
+            this.searchList = [];
+            this.isLoading = true;
         },
         txPairList: function() {
             this.txPairList &&
@@ -147,16 +161,7 @@ export default {
                     this.searchText)
             );
         },
-        isShowList() {
-            return !this.isShowNoData;
-        },
-        txPairCodeList() {
-            let codeList = [];
-            this.txPairList.forEach(txPair => {
-                codeList.push(txPair.pairCode);
-            });
-            return codeList;
-        },
+
         favoriteCodeList() {
             let codeList = [];
             for (let code in this.favoritePairs) {
@@ -236,49 +241,6 @@ export default {
             this.favoritePairs = Object.assign({}, this.favoritePairs);
 
             localStorage.setItem(FavoriteKey, this.favoritePairs);
-        },
-
-        async init() {
-            this.searchText = '';
-            this.searchList = [];
-
-            this.txPairList = [];
-            this.stopLoopList();
-
-            this.isLoading = true;
-
-            try {
-                await this.fetchDefaultList();
-                this.isLoading = false;
-                this.startLoopList();
-            } catch (err) {
-                console.warn(err);
-                this.isLoading = false;
-            }
-        },
-
-        startLoopList() {
-            this.stopLoopList();
-            pairTimer = new timer(() => {
-                if (!this.txPairCodeList || !this.txPairCodeList.length) {
-                    return Promise.resolve();
-                }
-                return this.fetchDefaultList();
-            }, 2000);
-            pairTimer.start();
-        },
-        stopLoopList() {
-            pairTimer && pairTimer.stop();
-            pairTimer = null;
-        },
-        fetchDefaultList() {
-            let ttoken = this.toTokenId;
-            return defaultPair({ ttoken }).then((data) => {
-                if (this.toTokenId !== ttoken) {
-                    return;
-                }
-                this.txPairList = data;
-            });
         }
     }
 };

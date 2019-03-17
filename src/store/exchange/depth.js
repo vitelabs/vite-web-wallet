@@ -38,7 +38,7 @@ const actions = {
     },
     exFetchDepthBuy({ commit,getters }) {
         commit('exSetDepthBuyLoading', true);
-        buyTask=buyTask||new subTask('depthBuy',(data)=>{
+        buyTask=buyTask||new subTask('depthBuy',({ data })=>{
             commit('exSetDepthBuyLoading', false);
             commit('exSetDepthBuy', data);
         });
@@ -47,7 +47,7 @@ const actions = {
     },
     exFetchDepthSell({ commit,getters }) {
         commit('exSetDepthSellLoading', true);
-        const dataCallback=(data) => {
+        const dataCallback=({ data }) => {
             data && commit('exSetDepthSell', data);
             commit('exSetDepthSellLoading', false);
         };

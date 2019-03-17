@@ -24,7 +24,6 @@ export const defaultPairWs = function ({
     // `market.${ttokenId}.details.latest`
     const key = `market.${ttoken}.details.latest`;
     return key;
-
 };
 
 export const assignPairWs = function ({
@@ -72,9 +71,19 @@ export class subTask extends timer {
         super();
         this.interval = interval;
         this.loopFunc = () => {
-            if (!client.closed && this.subStatus) return;// use http if sub unavalible
-            httpServicesMap[this.key] && httpServicesMap[this.key](this.args).then(this.callback);
+            // use http if sub unavalible
+            if (!client.closed && this.subStatus) {
+                return;
+            }
+
+            let args = this.args;
+            httpServicesMap[this.key] && httpServicesMap[this.key](args).then((data) => {
+                this.callback && this.callback({
+                    args, data
+                });
+            });
         };
+
         this.key = key;
         this.subKey = '';
         this.args = [];
@@ -82,13 +91,20 @@ export class subTask extends timer {
         this.subStatus = true;
     }
     start(argsGetter) {
-        this.argsGetter=argsGetter;
+        this.argsGetter = argsGetter;
         super.start();
-        httpServicesMap[this.key] && httpServicesMap[this.key](this.args).then(this.callback);// get all data from http at first
+
+        // get all data from http at first
+        let args = this.args;
+        httpServicesMap[this.key] && httpServicesMap[this.key](args).then((data) => {
+            this.callback && this.callback({
+                args, data
+            });
+        });
     }
     get args() {
-        const args=this.argsGetter();
-        this.subKey=wsServicesMap[this.key](args);
+        const args = this.argsGetter();
+        this.subKey = wsServicesMap[this.key](args);
         return args;
     }
     set args(value){
@@ -98,12 +114,20 @@ export class subTask extends timer {
         return this._subKey;
     }
     set subKey(v){
-        if(this._subKey===v) return;
-        const oldkey=this.subKey;
-        this._subKey=v;
-        if(!this.timeHandler)return;
-        client.unSub(oldkey,this.callback);
-        client.sub(this.subKey,this.callback, (data, err) => {
+        if (this._subKey === v) return;
+
+        const oldkey = this.subKey;
+        this._subKey = v;
+        if (!this.timeHandler) return;
+
+        client.unSub(oldkey, this.callback);
+
+        let args = this.args;
+        client.sub(this.subKey, (data) => {
+            this.callback && this.callback({ 
+                args, data 
+            });
+        }, (data, err) => {
             if (err) {
                 this.subStatus = false;
                 this.subKey = '';
