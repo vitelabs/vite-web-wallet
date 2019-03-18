@@ -15,7 +15,6 @@ if (result) {
 // Write routes file
 let routesStr = '';
 let routes = {};
-let indexRoutes = [];
 let loginRoutes = [];
 
 traversing('./src/pages/', (fPath, next, val) => {
@@ -96,16 +95,12 @@ for(let key in routes) {
 routesStr += `export default { routes: [${_routes}],`;
 
 for (let key in routeConfig) {
-    if (routeConfig[key].layout === 'index' && indexRoutes.indexOf(key) === -1) {
-        indexRoutes.push(key);
-    }
-
     if (routeConfig[key].isLogin && loginRoutes.indexOf(key) === -1) {
         loginRoutes.push(key);
     }
 }
 
-routesStr += `indexLayoutRoutes: ${JSON.stringify(indexRoutes)}, loginRoutes: ${JSON.stringify(loginRoutes)}}`;
+routesStr += `loginRoutes: ${JSON.stringify(loginRoutes)}}`;
 
 fs.writeFileSync(routesPath, routesStr);
 
@@ -115,7 +110,7 @@ function pushRoute(fPath, tmpPath, name, parent) {
     let file = fs.readFileSync(fPath);
 
     // Page config. 
-    // eg: /**  pageConfig name:exchange-index layout:index isLogin:true */
+    // eg: /**  pageConfig name:exchange-index isLogin:true */
 
     if (file.indexOf('/**  pageConfig ') === 0) {
         let settingStrArr = file.toString().match(/^\/\*\*\s{2}pageConfig (\w*\:*\w*-*\s*)* \*\//);
@@ -124,11 +119,7 @@ function pushRoute(fPath, tmpPath, name, parent) {
             let setting = settingStrArr[0].split(' ');
 
             setting.forEach((item) => {
-                if (item.indexOf('layout:') === 0) {
-                    let layoutStyle = item.split(':');
-                    let isIndex = layoutStyle[1] === 'index';
-                    isIndex && indexRoutes.push(name);
-                } else if (item.indexOf('isLogin') === 0) {
+                if (item.indexOf('isLogin') === 0) {
                     let isLogin = item.split(':')[1] === 'true';
                     isLogin && loginRoutes.push(name);
                 } else if (item.indexOf('name') === 0) {

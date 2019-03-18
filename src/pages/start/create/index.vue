@@ -1,5 +1,3 @@
-/**  page-config layout:index */
-
 <template>
     <div class="create-account-wrapper">
         <div class="__title">{{ $t('settingAcc')}}</div>
