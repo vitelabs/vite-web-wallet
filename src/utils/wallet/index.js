@@ -2,6 +2,7 @@ import { hdAddr as _hdAddr, keystore as _keystore, utils, constant } from '@vite
 import vitecrypto from 'testwebworker';
 import storeAcc from 'utils/storeAcc.js';
 import statistics from 'utils/statistics';
+import $ViteJS from 'utils/viteClient';
 
 import account from './account.js';
 

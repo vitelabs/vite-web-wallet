@@ -15,7 +15,6 @@ module.exports = {
     "globals": {
         "TradingView": true,
         "window": true,
-        "$ViteJS": true,
         "_hmt": true,
         "viteWalletStorage": true
     },
