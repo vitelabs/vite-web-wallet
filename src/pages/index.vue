@@ -15,7 +15,6 @@
 import pageLayout from 'components/pageLayout';
 import update from 'components/update.vue';
 import firstNotice from 'components/firstNotice.vue';
-import routeConfig from 'router/routes';
 
 export default {
     components: {
@@ -44,8 +43,7 @@ export default {
     },
     methods: {
         changeLayout() {
-            let toHome =
-                routeConfig.indexLayoutRoutes.indexOf(this.active) === -1;
+            let toHome = this.active.indexOf('start') !== -1;
             this.layoutType = toHome ? 'home' : 'start';
         }
     }

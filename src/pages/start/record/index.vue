@@ -1,5 +1,3 @@
-/**  pageConfig layout:index */
-
 <template>
     <div class="import-account-wrapper">
         <div class="__title">{{ $t('mnemonic.record') }}</div>
