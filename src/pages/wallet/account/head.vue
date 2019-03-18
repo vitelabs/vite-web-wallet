@@ -61,6 +61,11 @@ export default {
         this.account = this.getSimpleAcc();
         this.addressStr = stringify({ targetAddress: this.account.addr });
     },
+    computed: {
+        netStatus() {
+            return this.$store.state.env.clientStatus;
+        }
+    },
     methods: {
         goDetail() {
             let locale = this.$i18n.locale === 'zh' ? 'zh/' : '';
@@ -71,7 +76,7 @@ export default {
             if (!this.getTestTokenAble){
                 return;
             }
-            if (!viteWallet.Net.getNetStatus()) {
+            if (!this.netStatus) {
                 this.$toast(this.$t('hint.noNet'));
                 return;
             }

@@ -82,18 +82,18 @@ export default {
         secTitle, tooltips, search, loading, confirm, powProcess
     },
     beforeMount() {
-        this.tokenInfo = viteWallet.Ledger.getTokenInfo();
+        this.tokenInfo = this.$store.getters.viteTokenInfo;
+
         if (!this.tokenInfo) {
             this.loadingToken = true;
-            viteWallet.Ledger.fetchTokenInfo()
-                .then(tokenInfo => {
-                    this.loadingToken = false;
-                    this.tokenInfo = tokenInfo;
-                })
-                .catch(err => {
-                    console.warn(err);
-                });
+            this.$store.dispatch('fetchTokenInfo').then(tokenInfo => {
+                this.loadingToken = false;
+                this.tokenInfo = tokenInfo;
+            }).catch(err => {
+                console.warn(err);
+            });
         }
+
         this.updateVoteData();
         this.updateNodeData();
         this.nodeDataTimer = new timer(this.updateNodeData, 3 * 1000);
@@ -284,8 +284,26 @@ export default {
     },
     computed: {
         balance() {
-            const token =
-        this.$store.getters.tokenBalanceList[this.tokenInfo.tokenId] || {};
+            let tokenList = [].concat(this.$store.getters.tokenBalanceList);
+            for (let tokenId in this.$store.state.ledger.defaultTokenIds) {
+                if (!this.$store.state.ledger.tokenInfoMaps[tokenId] && !tokenList[tokenId]) {
+                    break;
+                }
+
+                let token = this.$store.state.ledger.tokenInfoMaps[tokenId] || tokenList[tokenId];
+                let defaultToken = this.$store.state.ledger.defaultTokenIds[tokenId];
+                let symbol = token.tokenSymbol || defaultToken.tokenSymbol;
+                
+                tokenList[tokenId] = tokenList[tokenId] || {
+                    balance: '0',
+                    fundFloat: '0',
+                    symbol,
+                    decimals: '0'
+                };
+                tokenList[tokenId].icon = defaultToken.icon;
+            }
+
+            const token = tokenList[this.tokenInfo.tokenId] || {};
             return token.balance || 0;
         },
         haveVote() {
@@ -313,7 +331,7 @@ export default {
                 data.voteStatusText = this.$t('walletVote.section1.voteStatusMap')[
                     data.voteStatus
                 ];
-                const token = viteWallet.Ledger.getTokenInfo();
+                const token = this.$store.getters.viteTokenInfo;
                 data.voteNum =
           BigNumber.toBasic(data.balance, token.decimals) ||
           this.balance ||
@@ -347,7 +365,7 @@ export default {
             }
         },
         nodeList() {
-            const token = viteWallet.Ledger.getTokenInfo();
+            const token = this.$store.getters.viteTokenInfo;
             return this.nodeData
                 .map(v => {
                     v.voteNum =

@@ -27,6 +27,8 @@ export default {
         this.$router.afterEach(to => {
             this.active = to.name;
         });
+
+        this.$store.commit('setLang', this.$i18n.locale);
         this.$store.dispatch('startLoopBalance');
     },
     data() {

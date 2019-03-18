@@ -16,12 +16,6 @@ const mutations = {
     commitTransList(state, payload) {
         state.totalNum = payload.totalNum || 0;
         state.transList = payload.list || [];
-
-        for(let i=0; i<state.transList.length; i++) {
-            let item = state.transList[i];
-            let tokenId = item.tokenId;
-            viteWallet.Ledger.setTokenInfo(item.tokenInfo || null, tokenId);
-        }
     },
     commitClearTransList(state) {
         state.transList = [];
@@ -31,12 +25,12 @@ const mutations = {
 };
 
 const actions = {
-    fetchTransList({ commit, state }, { address, pageIndex }) {
+    fetchTransList({ commit, state, dispatch }, { address, pageIndex }) {
         let fetchTime = new Date().getTime();
         lastFetchTime = fetchTime;
         commit('commitSetCurrent', pageIndex);
 
-        return viteWallet.Ledger.getBlocks({
+        return $ViteJS.buildinLedger.getTxList({
             addr: address,
             index: pageIndex,
             pageCount
@@ -48,6 +42,7 @@ const actions = {
             }
 
             commit('commitTransList', data);
+            dispatch('setTokenInfoList', data.list || []);
             return data;
         });
     }

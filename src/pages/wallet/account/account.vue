@@ -31,7 +31,26 @@ export default {
     computed: {
         tokenList() {   // Force vite at first
             const tokenList = JSON.parse(JSON.stringify(this.$store.getters.tokenBalanceList));
-            let viteTokenInfo = viteWallet.Ledger.getTokenInfo();
+
+            for (let tokenId in this.$store.state.ledger.defaultTokenIds) {
+                if (!this.$store.state.ledger.tokenInfoMaps[tokenId] && !tokenList[tokenId]) {
+                    break;
+                }
+
+                let token = this.$store.state.ledger.tokenInfoMaps[tokenId] || tokenList[tokenId];
+                let defaultToken = this.$store.state.ledger.defaultTokenIds[tokenId];
+                let symbol = token.tokenSymbol || defaultToken.tokenSymbol;
+
+                tokenList[tokenId] = tokenList[tokenId] || {
+                    balance: '0',
+                    fundFloat: '0',
+                    symbol,
+                    decimals: '0'
+                };
+                tokenList[tokenId].icon = defaultToken.icon;
+            }
+
+            let viteTokenInfo = this.$store.getters.viteTokenInfo;
             if (!viteTokenInfo) {
                 return tokenList;
             }
