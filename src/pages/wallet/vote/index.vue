@@ -74,6 +74,7 @@ import powProcess from 'components/powProcess';
 import { timer } from 'utils/asyncFlow';
 import BigNumber from 'utils/bigNumber';
 import { constant } from '@vite/vitejs';
+import $ViteJS from 'utils/viteClient';
 
 const VoteDifficulty = '201564160';
 

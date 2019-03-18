@@ -14,6 +14,7 @@
 <script>
 import loading from 'components/loading';
 import { getPowNonce } from 'services/pow';
+import $ViteJS from 'utils/viteClient';
 
 let processTimeout;
 

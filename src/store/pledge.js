@@ -1,4 +1,5 @@
 import BigNumber from 'utils/bigNumber';
+import $ViteJS from 'utils/viteClient';
 
 const pageCount = 50;
 

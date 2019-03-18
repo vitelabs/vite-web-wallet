@@ -1,5 +1,6 @@
 import { timer } from 'utils/asyncFlow';
 import BigNumber from 'utils/bigNumber';
+import $ViteJS from 'utils/viteClient';
 
 const loopTime = 2 * 1000;
 let balanceTimer = null;

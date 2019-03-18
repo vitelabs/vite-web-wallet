@@ -1,5 +1,6 @@
 import { constant } from '@vite/vitejs';
 import { timer } from 'utils/asyncFlow';
+import $ViteJS from 'utils/viteClient';
 
 import viteIcon from 'assets/imgs/vite.svg';
 import vcpIcon from 'assets/imgs/VCC.svg';
