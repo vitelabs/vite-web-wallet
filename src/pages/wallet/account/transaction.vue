@@ -119,6 +119,9 @@ export default {
         },
         messageErr() {
             return this.msgBalance < 0;
+        },
+        netStatus() {
+            return this.$store.state.env.clientStatus;
         }
     },
     methods: {
@@ -204,7 +207,7 @@ export default {
         },
 
         transfer() {
-            if (!viteWallet.Net.getNetStatus()) {
+            if (!this.netStatus) {
                 this.$toast(this.$t('hint.noNet'));
                 return;
             }

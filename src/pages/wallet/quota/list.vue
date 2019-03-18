@@ -39,7 +39,6 @@ import date from 'utils/date.js';
 import {timer} from 'utils/asyncFlow';
 import BigNumber from 'utils/bigNumber';
 import ellipsisAddr from 'utils/ellipsisAddr.js';
-import loopTime from 'config/loopTime';
 
 let pledgeListInst;
 
@@ -91,20 +90,22 @@ export default {
         totalPage() {
             return this.$store.getters.totalPledgePage;
         },
+        currentHeight() {
+            return this.$store.state.ledger.currentHeight || 0;
+        },
         pledgeList() {
             if (!this.tokenInfo) {
                 return [];
             }
 
             let pledgeList = this.$store.getters.pledgeList;
-            let currentHeight = viteWallet.Ledger.getHeight() || 0;
 
             let nowList = [];
             pledgeList.forEach((pledge) => {
                 let addrIcon = pledge.beneficialAddr === this.address ? `<img class="beneficial-img" src="${userImg}"/>` : '';
                 let addr = `<span class="beneficial-addr">${ ellipsisAddr(pledge.beneficialAddr) }</span>`;
 
-                let isMaturity = BigNumber.compared(pledge.withdrawHeight, currentHeight) <= 0;
+                let isMaturity = BigNumber.compared(pledge.withdrawHeight, this.currentHeight) <= 0;
                 let cancelClass = isMaturity ? 'cancel active' : 'cancel';
                 let cancel = `<span class="${cancelClass}">${this.$t('walletQuota.withdrawalStaking')}</span>`;
 
@@ -196,7 +197,7 @@ export default {
             this.stopLoopPledgeList();
             pledgeListInst = new timer(()=>{
                 return this.fetchPledgeList(this.currentPage);
-            }, loopTime.pledge_getPledgeList);
+            }, 1000);
             pledgeListInst.start();
         },
         stopLoopPledgeList() {

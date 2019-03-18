@@ -315,8 +315,7 @@ class _wallet {
 }
 
 
-export const wallet = _wallet;
-
+export const wallet = new _wallet();
 
 
 

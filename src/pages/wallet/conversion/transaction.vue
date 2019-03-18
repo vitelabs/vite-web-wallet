@@ -117,6 +117,9 @@ export default {
         };
     },
     computed: {
+        netStatus() {
+            return this.$store.state.env.clientStatus;
+        },
         canEstimate () {
             return this.toAddress && this.isValidAddress && this.amount && !this.amountErr && !this.loading;
         },
@@ -217,7 +220,7 @@ export default {
                 return;
             }
 
-            if (!viteWallet.Net.getNetStatus()) {
+            if (!this.netStatus) {
                 this.$toast(this.$t('hint.noNet'));
                 return;
             }

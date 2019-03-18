@@ -50,11 +50,11 @@ export default {
         quotaHead, myQuota, pledgeTx, confirm, list, powProcess, loading, viteInput
     },
     created() {
-        this.tokenInfo = viteWallet.Ledger.getTokenInfo();
+        this.tokenInfo = this.$store.getters.viteTokenInfo;
 
         if (!this.tokenInfo) {
             this.loadingToken = true;
-            viteWallet.Ledger.fetchTokenInfo().then((tokenInfo) => {
+            this.$store.dispatch('fetchTokenInfo').then((tokenInfo) => {
                 this.loadingToken = false;
                 this.tokenInfo = tokenInfo;
             }).catch((err) => {
@@ -80,6 +80,9 @@ export default {
     computed: {
         cancelUnuse() {
             return this.showConfirmType === 'cancel' && (!this.cancelAmount || this.amountErr);
+        },
+        netStatus() {
+            return this.$store.state.env.clientStatus;
         }
     },
     methods: {
@@ -154,7 +157,7 @@ export default {
         sendPledgeTx({
             toAddress, amount
         }, type, cb) {
-            if (!viteWallet.Net.getNetStatus()) {
+            if (!this.netStatus) {
                 this.$toast(this.$t('hint.noNet'));
                 cb && cb(false);
                 return;

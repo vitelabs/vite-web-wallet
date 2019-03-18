@@ -1,7 +1,7 @@
 import toast from 'components/toast/index.js';
 import confirm from 'components/confirm/index.js';
 import statistics from 'utils/statistics';
-import { wallet } from 'utils/walletInstance';
+import { wallet } from 'utils/wallet';
 
 const loginRoutes = ['walletConversion'];
 

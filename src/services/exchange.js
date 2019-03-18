@@ -1,5 +1,5 @@
 import request from 'utils/request';
-import { wallet } from 'utils/walletInstance';
+import { wallet } from 'utils/wallet';
 import { privToAddr, constant } from '@vite/vitejs';
 
 const path = '/api/v1';

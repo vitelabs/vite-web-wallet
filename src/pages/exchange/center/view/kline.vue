@@ -6,8 +6,6 @@
 import { widget } from 'charting/charting_library.min';
 import datafeed from './datafeeds.js';
 
-let changeLangEvent = null;
-
 export default {
     props: {
         showView: {
@@ -21,14 +19,6 @@ export default {
     },
     mounted() {
         this.symbol && this.init();
-
-        changeLangEvent = webViteEventEmitter.on('changeLang', () => {
-            this.resetLang();
-        });
-    },
-    destroyed() {
-        changeLangEvent && webViteEventEmitter.off(changeLangEvent);
-        changeLangEvent = null;
     },
     computed: {
         symbol() {
@@ -39,10 +29,16 @@ export default {
         },
         activeTxPair() {
             return this.$store.state.exchangeActiveTxPair.activeTxPair;
+        },
+        lang() {
+            return this.$store.state.env.lang;
         }
     },
     watch: {
         symbol: function() {
+            this.symbol && this.init();
+        },
+        lang: function() {
             this.symbol && this.init();
         }
     },
@@ -111,9 +107,6 @@ export default {
                     this.tvWidget.chart().getStudyById(studies[i]).setVisible(state);
                 }
             });
-        },
-        resetLang() {
-            this.init();
         },
         createDepthBtn() {
             let button = this.tvWidget.createButton({ 
