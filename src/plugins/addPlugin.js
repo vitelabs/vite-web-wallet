@@ -3,8 +3,6 @@ import confirm from 'components/confirm/index.js';
 import statistics from 'utils/statistics';
 import { wallet } from 'utils/wallet';
 
-const loginRoutes = ['walletConversion'];
-
 document.addEventListener('drop', (e) => {
     e.preventDefault();
     e.stopPropagation();
@@ -18,16 +16,7 @@ export default {
     install(Vue) {
         Vue.mixin({
             created() {
-                this.$router && this.$router.beforeEach((to, from, next) => {
-                    if (loginRoutes.indexOf(to.name) >= 0 && !wallet.isLogin) {
-                        (to.name !== 'start') && wallet.setLastPage(to.name);
-                        this.$router.replace({
-                            name: 'start'
-                        });
-                        return;
-                    }
-                    next();
-                });
+
             }
         });
 
