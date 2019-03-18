@@ -6,7 +6,7 @@
             <div class="btn-item __pointer" :class="{'active': isShowExisting}">
                 {{ $t('existingAcc') }}</div>
             <div class="btn-item __pointer" :class="{'active': !isShowExisting}">
-                {{ $t('mnemonic.restore') }}</div>
+                {{ $t('restore') }}</div>
         </div>
 
         <div v-show="isShowExisting" class="existing-acc">

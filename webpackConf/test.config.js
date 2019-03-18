@@ -1,10 +1,10 @@
-const path=require('path');
-const SRC_PATH = path.join(__dirname, '../src');
+// const path=require('path');
+// const SRC_PATH = path.join(__dirname, '../src');
 
 module.exports = {
-    entry: {
-        index: path.join(SRC_PATH, '/components/confirmClass/test.js')
-    },
+    // entry: {
+    //     index: path.join(SRC_PATH, '/components/confirmClass/test.js')
+    // },
     devServer: {
         quiet: false,
         host: '0.0.0.0',
