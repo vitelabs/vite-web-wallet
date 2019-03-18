@@ -1,5 +1,8 @@
 import statistics from 'utils/statistics';
+import { wallet } from 'utils/wallet';
 import routeConfig from './routes';
+
+const loginRoutes = ['walletConversion'];
 
 export default function (VueRouter) {
     // Init router
@@ -21,6 +24,14 @@ export default function (VueRouter) {
         if (!from.name && to.name !== 'exchange') {
             router.replace({
                 name: 'exchange'
+            });
+            return;
+        }
+
+        if (loginRoutes.indexOf(to.name) >= 0 && !wallet.isLogin) {
+            (to.name !== 'start') && wallet.setLastPage(to.name);
+            router.replace({
+                name: 'start'
             });
             return;
         }
