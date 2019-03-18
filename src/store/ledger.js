@@ -25,7 +25,7 @@ const defaultTokenList = process.env.NODE_ENV === 'production' ? {
         'tokenSymbol': 'VITE',
         icon: viteIcon
     }, 
-    'tti_2d95b4ae402bbcf1429aa1e5': {
+    'tti_c2695839043cf966f370ac84': {
         'tokenSymbol': 'VCP',
         icon: vcpIcon
     }, 
