@@ -2,9 +2,8 @@ import toast from 'components/toast/index.js';
 import confirm from 'components/confirm/index.js';
 import statistics from 'utils/statistics';
 import { wallet } from 'utils/walletInstance';
-import routeConfig from 'router/routes';
 
-const loginRoutes = routeConfig.loginRoutes;
+const loginRoutes = ['walletConversion'];
 
 document.addEventListener('drop', (e) => {
     e.preventDefault();

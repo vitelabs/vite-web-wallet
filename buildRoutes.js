@@ -15,7 +15,6 @@ if (result) {
 // Write routes file
 let routesStr = '';
 let routes = {};
-let loginRoutes = [];
 
 traversing('./src/pages/', (fPath, next, val) => {
     let stats = fs.statSync(fPath);
@@ -66,7 +65,6 @@ traversing('./src/pages/', (fPath, next, val) => {
     pushRoute(fPath, tmpPath, name, nList[0]);
 });
 
-
 let _routes = '';
 for(let key in routes) {
     let _k = routes[key];
@@ -92,83 +90,35 @@ for(let key in routes) {
     });
     _routes += ']},';
 }
-routesStr += `export default { routes: [${_routes}],`;
-
-for (let key in routeConfig) {
-    if (routeConfig[key].isLogin && loginRoutes.indexOf(key) === -1) {
-        loginRoutes.push(key);
-    }
-}
-
-routesStr += `loginRoutes: ${JSON.stringify(loginRoutes)}}`;
+routesStr += `export default { routes: [${_routes}] }`;
 
 fs.writeFileSync(routesPath, routesStr);
 
 
 
 function pushRoute(fPath, tmpPath, name, parent) {
-    let file = fs.readFileSync(fPath);
-
-    // Page config. 
-    // eg: /**  pageConfig name:exchange-index isLogin:true */
-
-    if (file.indexOf('/**  pageConfig ') === 0) {
-        let settingStrArr = file.toString().match(/^\/\*\*\s{2}pageConfig (\w*\:*\w*-*\s*)* \*\//);
-
-        if (settingStrArr && settingStrArr.length) {
-            let setting = settingStrArr[0].split(' ');
-
-            setting.forEach((item) => {
-                if (item.indexOf('isLogin') === 0) {
-                    let isLogin = item.split(':')[1] === 'true';
-                    isLogin && loginRoutes.push(name);
-                } else if (item.indexOf('name') === 0) {
-                    let _n = item.slice(5);
-                    name = _n || name;
-                }
-            });
-        }        
-    }
-
-    let list = name.split('-');
-    if (!list || !list.length) {
+    if (!name) {
         return;
     }
 
-    let pageComName;
     let _route = {};
-    list = list.splice(0, 2);
 
-    list.forEach((n) => {
-        if (pageComName) {
-            _route.alias = `/${n}`;
-            return;
-        }
+    routesStr += `import ${name} from \'pages/${tmpPath}\';`;
+    _route.name = name;
+    _route.path = `/${name}`;
+    _route.component = name;
 
-        pageComName = n;
-        routesStr += `import ${pageComName} from \'pages/${tmpPath}\';`;
-        _route.name = pageComName;
-        _route.path = `/${pageComName}`;
-        _route.component = pageComName;
-    });
-
-    // children
-    if (parent !== pageComName) {
+    // _route is children, push children
+    if (parent !== name) {
         routes[parent] = routes[parent] || {};
         routes[parent].children = routes[parent].children || [];
         routes[parent].children.push(_route);
         return;
     }
 
-    // parent
-    if (routes[parent]) {
-        routes[parent].name = routes[parent].name || _route.name;
-        routes[parent].path = routes[parent].path || _route.path;
-        routes[parent].alias = routes[parent].alias || _route.alias;
-        routes[parent].component = routes[parent].component || _route.component;
-    } else {
-        routes[parent] = _route;
-    }
+    // _route is parent
+    routes[parent] = Object.assign(routes[parent] || {}, _route);
+    routes[parent].component = routes[parent].component || _route.component;
     routes[parent].children = routes[parent].children || [];
 }
 
