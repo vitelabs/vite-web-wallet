@@ -1,5 +1,3 @@
-/**  pageConfig isLogin:true */
-
 <template>
     <div class="__wrapper">
         <sec-title></sec-title>

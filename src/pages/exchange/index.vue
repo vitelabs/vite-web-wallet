@@ -1,5 +1,3 @@
-/**  pageConfig name:exchange-index */
-
 <template>
     <div class="exchange-center-wrapper">
         <center v-if="active === 'exchange'"></center>
