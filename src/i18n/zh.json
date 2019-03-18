@@ -7,6 +7,7 @@
     "unlockAcc": "解锁当前账户",
     "changeAcc": "切换其他账户",
     "existingAcc": "本地已有账户",
+    "restore": "助记词导入",
     "register": "注册",
     "createAcc": "新建账户",
     "settingAcc": "设置账户",
