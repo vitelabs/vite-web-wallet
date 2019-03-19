@@ -1,6 +1,6 @@
 let eventList = [];
 
-window.webViteEventEmitter = {
+export default {
     on: function(name, cb) {
         let event = {
             name,

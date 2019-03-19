@@ -66,7 +66,6 @@ import date from 'utils/date.js';
 import { timer } from 'utils/asyncFlow';
 import BigNumber from 'utils/bigNumber';
 import ellipsisAddr from 'utils/ellipsisAddr.js';
-import loopTime from 'config/loopTime';
 
 let transListInst = null;
 let txImgs = [
@@ -183,7 +182,7 @@ export default {
             this.stopLoopTransList();
             transListInst = new timer(()=>{
                 return this.fetchTransList(this.currentPage);
-            }, loopTime.ledger_getBlocks);
+            }, 2000);
             transListInst.start();
         },
         stopLoopTransList() {

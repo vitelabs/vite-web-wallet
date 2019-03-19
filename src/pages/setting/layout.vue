@@ -36,26 +36,19 @@
 <script>
 import secTitle from 'components/secTitle';
 
-let heightEvent = null;
-
 export default {
     components: {
         secTitle
     },
     data() {
         return {
-            height: '',
             version: process.env.version
         };
     },
-    mounted() {
-        this.height = viteWallet.Ledger.getHeight();
-        heightEvent = webViteEventEmitter.on('currentHeight', (height) => {
-            this.height = height;
-        });
-    },
-    destroyed() {
-        webViteEventEmitter.off(heightEvent);
+    computed: {
+        height() {
+            return this.$store.state.ledger.currentHeight;
+        }
     }
 };
 </script>

@@ -29,7 +29,7 @@ export default {
             this.$i18n.locale = locale;
             window.viteWalletI18n && window.viteWalletI18n.setLocale(locale);
             localStorage.setItem('lang', locale);
-            webViteEventEmitter.emit('changeLang', locale);
+            this.$store.commit('setLang', locale);
             this.toggleLangList();
         }
     }

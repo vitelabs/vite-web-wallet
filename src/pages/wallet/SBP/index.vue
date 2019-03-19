@@ -47,11 +47,11 @@ export default {
         secTitle, register, list, loading, confirm, viteInput
     },
     created() {
-        this.tokenInfo = viteWallet.Ledger.getTokenInfo();
+        this.tokenInfo = this.$store.getters.viteTokenInfo;
 
         if (!this.tokenInfo) {
             this.loadingToken = true;
-            viteWallet.Ledger.fetchTokenInfo().then((tokenInfo) => {
+            this.$store.dispatch('fetchTokenInfo').then((tokenInfo) => {
                 this.loadingToken = false;
                 this.tokenInfo = tokenInfo;
             }).catch((err) => {
@@ -84,6 +84,9 @@ export default {
         },
         regAddrList() {
             return this.$store.getters.regAddrList;
+        },
+        netStatus() {
+            return this.$store.state.env.clientStatus;
         }
     },
     methods: {
@@ -200,7 +203,7 @@ export default {
         sendTx({
             producerAddr, nodeName, amount
         }, type) {
-            if (!viteWallet.Net.getNetStatus()) {
+            if (!this.netStatus) {
                 this.$toast(this.$t('hint.noNet'));
                 return Promise.reject(false);
             }
