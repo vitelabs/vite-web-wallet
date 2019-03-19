@@ -14,12 +14,6 @@ document.addEventListener('dragover', (e) => {
 
 export default {
     install(Vue) {
-        Vue.mixin({
-            created() {
-
-            }
-        });
-
         Vue.prototype.$onKeyDown = function(_code, cb) {
             window.document.onkeydown = e => {
                 e = e || window.event;

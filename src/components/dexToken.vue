@@ -43,6 +43,8 @@
 <script>
 import confirm from 'components/confirm';
 import viteInput from 'components/viteInput';
+import { newMarket } from 'services/exchange';
+// import BigNumber from 'utils/bigNumber';
 
 const spend = 1000;
 
@@ -77,6 +79,9 @@ export default {
         },
         tokenList() {
             return this.$store.state.exchangeTokenList.list;
+        },
+        viteTokenInfo() {
+            return this.$store.getters.viteTokenInfo;
         },
         btnUnuse() {
             return !this.market || !this.token;
@@ -120,7 +125,18 @@ export default {
             this.tokenName = this.token.name;
         },
         trans() {
+            if (!this.viteTokenInfo) {
+                this.$toast('err');
+                return;
+            }
 
+            newMarket({
+                amount: 10000
+            }).then(() => {
+
+            }).catch((err) => {
+                console.warn(err);
+            });
         }
     }
 };

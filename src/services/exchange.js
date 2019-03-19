@@ -3,6 +3,7 @@ import { wallet } from 'utils/wallet';
 import { privToAddr, constant } from '@vite/vitejs';
 
 const path = process.env.dexApiServer + 'v1';
+const ViteId = constant.Vite_TokenId;
 
 export const klineHistory = function ({
     from, to, ftoken, ttoken, resolution
@@ -128,7 +129,6 @@ export const defaultPair = function({
     });
 };
 
-
 export const assignPair = function({
     pairs = []
 }) {
@@ -238,6 +238,17 @@ export const newOrder = function({
         abi: constant.DexFundNewOrder_Abi,
         params: ['0x'+orderId, tradeToken, quoteToken, side, 0, price, quantity],
         tokenId: tradeToken
+    });
+};
+
+export const newMarket = function({
+    tokenId = ViteId, amount, tradeToken, quoteToken
+}) {
+    return wallet.getActiveAccount().callContract({
+        toAddress: constant.DexFund_Addr,
+        abi: constant.DexFundNewMarket_Abi,
+        params: [tradeToken, quoteToken],
+        tokenId, amount
     });
 };
 

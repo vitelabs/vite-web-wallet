@@ -22,9 +22,11 @@ import resaveAccKeystore from 'utils/resaveAccKeystore.js';
 import { initPwdConfirm } from 'components/password/index.js';
 import { initQuotaConfirm } from 'components/quota/index.js';
 
+// $onKeyDown $offKeyDown $validAmount $trim $toast $confirm $statistics $wallet
 Vue.use(plugin);
-Vue.use(VueRouter);
+// v-click-outside v-unlock-account
 Vue.use(directives);
+Vue.use(VueRouter);
 Vue.use(VueI18n);
 
 const i18n = new VueI18n( i18nConf );
