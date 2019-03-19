@@ -1,10 +1,7 @@
 import toast from 'components/toast/index.js';
 import confirm from 'components/confirm/index.js';
 import statistics from 'utils/statistics';
-import { wallet } from 'utils/walletInstance';
-import routeConfig from 'router/routes';
-
-const loginRoutes = routeConfig.loginRoutes;
+import { wallet } from 'utils/wallet';
 
 document.addEventListener('drop', (e) => {
     e.preventDefault();
@@ -19,16 +16,7 @@ export default {
     install(Vue) {
         Vue.mixin({
             created() {
-                this.$router && this.$router.beforeEach((to, from, next) => {
-                    if (loginRoutes.indexOf(to.name) >= 0 && !wallet.isLogin) {
-                        (to.name !== 'start') && wallet.setLastPage(to.name);
-                        this.$router.replace({
-                            name: 'start'
-                        });
-                        return;
-                    }
-                    next();
-                });
+
             }
         });
 

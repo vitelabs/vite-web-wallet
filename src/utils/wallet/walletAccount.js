@@ -1,6 +1,7 @@
 import { keystore as _keystore, hdAccount as _walletAccount } from '@vite/vitejs';
 import vitecrypto from 'testwebworker';
 import acc from 'utils/storeAcc.js';
+import $ViteJS from 'utils/viteClient';
 
 class walletAccount extends _walletAccount {
     constructor({

@@ -7,23 +7,28 @@
 
         <div v-click-outside="hideMarketList" @click="toggleMarketList" class="__row _r_m __pointer">
             <div class="__row-t">{{ $t('exchange.dexToken.market') }}</div>
-            <div class="market input-wrapper">{{ market.name }}
+            <div class="market input-wrapper">{{ market ? market.name : '' }}
                 <span class="down-icon" slot="after"></span>
             </div>
             <ul v-show="isShowMarketList" class="market-list">
                 <li @click="setMarket(_market)" class="market input-wrapper"
                     v-for="(_market, i) in marketList" :key="i"
-                    v-show="_market.token !== market.token">{{ _market.name }} / {{ _market.token }}</li>
+                    v-show="market && _market.token !== market.token">{{ _market.name }} / {{ _market.token }}</li>
             </ul>
         </div>
 
-        <div class="__row">
+        <div v-click-outside="hideTokenList" class="__row">
             <div class="__row-t">
                 {{ $t('exchange.dexToken.name') }}
                 <span class="link __pointer" @click="goNet">{{ $t('exchange.dexToken.link') }}</span>
             </div>
-            <vite-input v-model="tokenName">
-                <span class="down-icon" slot="after"></span>
+            <vite-input class="token-wrapper" v-model="tokenName">
+                <div class="down-icon __pointer" @click="toggleTokenList" slot="after">
+                    <ul v-show="isShowTokenList" class="market-list">
+                        <li @click="setToken(_token)" class="market input-wrapper"
+                            v-for="(_token, i) in tokenList" :key="i">{{ _token.name }} / {{ _token.token }}</li>
+                    </ul>
+                </div>
             </vite-input>
         </div>
 
@@ -52,23 +57,42 @@ export default {
         }
     },
     mounted() {
-        this.market = this.marketList && this.marketList.length ? this.marketList[0] : '';
+        this.market = this.marketList && this.marketList.length ? this.marketList[0] : null;
+        this.token = this.tokenList && this.tokenList.length ? this.tokenList[0] : null;
+        this.tokenName = this.token ? this.token.name : '';
     },
     data() {
         return {
             spend,
-            market: '',
-            tokenId: '',
+            market: null,
+            token: null,
             tokenName: '',
-            isShowMarketList: false
+            isShowMarketList: false,
+            isShowTokenList: false,
         };
     },
     computed: {
         marketList() {
             return this.$store.state.exchangeMarket.marketMap;
         },
+        tokenList() {
+            return this.$store.state.exchangeTokenList.list;
+        },
         btnUnuse() {
-            return !this.market || !this.tokenId;
+            return !this.market || !this.token;
+        }
+    },
+    watch: {
+        tokenList: function() {
+            if (!this.tokenName && this.tokenList && this.tokenList.length) {
+                this.tokenName = this.tokenList[0].name;
+            }
+        },
+        tokenName: function() {
+            if (this.token && this.token.name !== this.tokenName) {
+                this.token = null;
+            }
+            
         }
     },
     methods: {
@@ -78,12 +102,22 @@ export default {
         toggleMarketList() {
             this.isShowMarketList = !this.isShowMarketList;
         },
+        hideTokenList() {
+            this.isShowTokenList = false;
+        },
+        toggleTokenList() {
+            this.isShowTokenList = !this.isShowTokenList;
+        },
         goNet() {
             let locale = this.$i18n.locale === 'zh' ? 'zh/' : '';
             window.open(`${process.env.viteNet}${locale}tokenList`);
         },
         setMarket(market) {
             this.market = market;
+        },
+        setToken(token) {
+            this.token = token;
+            this.tokenName = this.token.name;
         },
         trans() {
 
@@ -114,7 +148,7 @@ export default {
 }
 .market.input-wrapper {
     box-sizing: border-box;
-    padding: 0 15px;
+    padding-left: 15px;
     height: 40px;
     line-height: 40px;
     background: rgba(255,255,255,1);
@@ -126,6 +160,14 @@ export default {
     color: rgba(206,209,213,1);
     .down-icon {
         float: right;
+    }
+}
+.token-wrapper {
+    box-sizing: border-box;
+    position: relative;
+    .market-list {
+        left: 0;
+        top: 39px;
     }
 }
 </style>

@@ -80,13 +80,13 @@ export default {
             if (!this.ftokenDetail) {
                 return '';
             }
-            return getTokenIcon(this.ftokenDetail.tokenId);
+            return this.getTokenIcon(this.ftokenDetail.tokenId);
         },
         ttokenIcon() {
             if (!this.ttokenDetail) {
                 return '';
             }
-            return getTokenIcon(this.ttokenDetail.tokenId);
+            return this.getTokenIcon(this.ttokenDetail.tokenId);
         },
         tokenDetail() {
 
@@ -115,6 +115,13 @@ export default {
         }
     },
     methods: {
+        getTokenIcon(tokenId) {
+            let defaultToken = this.$store.state.ledger.tokenInfoMaps[tokenId];
+            if (defaultToken && defaultToken.icon) {
+                return defaultToken.icon;
+            }
+            return getTokenIcon(tokenId);
+        },
         showToken(type) {
             this.showTokenType = type;
         },

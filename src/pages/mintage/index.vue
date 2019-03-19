@@ -87,6 +87,7 @@
 import { getPowNonce } from 'services/pow';
 import viteInput from 'components/viteInput';
 import tableList from 'components/tableList.vue';
+import $ViteJS from 'utils/viteClient';
 
 export default {
     components: {

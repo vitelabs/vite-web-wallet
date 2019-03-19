@@ -1,6 +1,7 @@
 import { timer } from 'utils/asyncFlow';
 import BigNumber from 'utils/bigNumber';
 import { constant } from '@vite/vitejs';
+import $ViteJS from 'utils/viteClient';
 
 const loopTime = 5000;
 let regListInst = null;

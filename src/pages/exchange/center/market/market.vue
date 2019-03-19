@@ -87,23 +87,10 @@ export default {
     },
 
     beforeMount() {
-        defaultPairTimer = new subTask('defaultPair', ({ args, data }) => {
-            if (args.ttoken !== this.toTokenId) {
-                return;
-            }
-            this.isLoading = false;
-            this.txPairList = data || [];
-        }, 2000);
-
-        defaultPairTimer.start(() => { 
-            return {
-                ttoken: this.toTokenId
-            };
-        });
+        this.init();
     },
     destroyed() {
-        defaultPairTimer && defaultPairTimer.stop();
-        defaultPairTimer = null;
+        this.stopLoop();
     },
     data() {
         return {
@@ -124,6 +111,8 @@ export default {
             this.searchText = '';
             this.searchList = [];
             this.isLoading = true;
+            this.stopLoop();
+            this.init();
         },
         txPairList: function() {
             this.txPairList &&
@@ -219,6 +208,41 @@ export default {
         }
     },
     methods: {
+        init() {
+            defaultPairTimer = defaultPairTimer || new subTask('defaultPair', ({ args, data }) => {
+                if (args.ttoken !== this.toTokenId) {
+                    return;
+                }
+
+                this.isLoading = false;
+
+                if (data instanceof Array) {
+                    this.txPairList = data || [];
+                    return;
+                }
+                
+                if (!data) {
+                    return;
+                }
+                for (let i=0; i<this.txPairList.length; i++) {
+                    if (this.txPairList[i].pairCode === data.pairCode) {
+                        this.txPairList[i] = data;
+                        break;
+                    }
+                }
+                this.txPairList = [].concat(this.txPairList);
+            }, 2000);
+
+            defaultPairTimer.start(() => { 
+                return {
+                    ttoken: this.toTokenId
+                };
+            });
+        },
+        stopLoop() {
+            defaultPairTimer && defaultPairTimer.stop();
+            defaultPairTimer = null;
+        },
         toggleShowFavorite() {
             this.isOnlyFavorite = !this.isOnlyFavorite;
         },

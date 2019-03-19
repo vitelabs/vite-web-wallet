@@ -98,19 +98,21 @@ export default {
         tokenBalList() {
             return this.$store.state.account.balance.balanceInfos;
         },
+        currentHeight() {
+            return this.$store.state.ledger.currentHeight || 0;
+        },
         list() {
             if (!this.tokenInfo || !this.tokenInfo.tokenId) {
                 return [];
             }
 
             let decimals = this.tokenInfo.decimals;
-            let currentHeight = viteWallet.Ledger.getHeight() || 0;
 
             let registrationList = this.$store.state.SBP.registrationList || [];  
             let list = [];
 
             registrationList.forEach(item => {
-                let isMaturity = BigNumber.compared(item.withdrawHeight, currentHeight) <= 0;
+                let isMaturity = BigNumber.compared(item.withdrawHeight, this.currentHeight) <= 0;
                 let isCancel = item.cancelHeight && !BigNumber.isEqual(item.cancelHeight, 0);
                 let addr = ellipsisAddr(item.nodeAddr, 6);
                 

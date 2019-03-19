@@ -2,10 +2,8 @@
 require('es6-promise').polyfill();
 
 import 'utils/performance';
-import './assets/scss/mixins.scss';
-
-import 'utils/eventEmitter.js';
-import 'utils/viteWallet/index.js';
+import 'assets/scss/mixins.scss';
+import 'utils/viteClient.js';
 
 import Vue from 'vue';
 import VueRouter from 'vue-router';

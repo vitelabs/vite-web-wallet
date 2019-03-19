@@ -1,7 +1,6 @@
 import BigNumber from 'utils/bigNumber';
 import { timer } from 'utils/asyncFlow';
-import { wallet } from 'utils/walletInstance';
-import loopTime from 'config/loopTime';
+import { wallet } from 'utils/wallet';
 
 let balanceInfoInst = null;
 const state = {
@@ -54,7 +53,7 @@ const actions = {
             return account.getBalance().then((data) => {
                 commit('commitBalanceInfo', data);
             });
-        }, loopTime.ledger_getBalance);
+        }, 1000);
         balanceInfoInst.start();
     },
     stopLoopBalance({ commit }) {
@@ -65,6 +64,7 @@ const actions = {
         commit('commitClearPledge');
     }
 };
+
 const getters = {
     tokenBalanceList(state) {
         let balanceInfo = Object.create(null);
@@ -98,22 +98,7 @@ const getters = {
             balanceInfo[tokenId].symbol = balanceInfo[tokenId].symbol || tokenInfo.tokenSymbol;
             balanceInfo[tokenId].onroadNum = item.number;
         }
-
-        for (let tokenId in viteWallet.Ledger.defaultTokenIds) {
-            if (!viteWallet.Ledger.tokenInfoMaps[tokenId] && !balanceInfo[tokenId]) {
-                break;
-            }
-
-            let defaultToken = viteWallet.Ledger.defaultTokenIds[tokenId];
-            let symbol = viteWallet.Ledger.tokenInfoMaps[tokenId].tokenSymbol || defaultToken.tokenSymbol;
-            balanceInfo[tokenId] = balanceInfo[tokenId] || {
-                balance: '0',
-                fundFloat: '0',
-                symbol,
-                decimals: '0'
-            };
-            balanceInfo[tokenId].icon = defaultToken.icon;
-        }
+        
         return balanceInfo;
     }
 };

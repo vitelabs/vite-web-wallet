@@ -1,5 +1,5 @@
 import request from 'utils/request';
-import { wallet } from 'utils/walletInstance';
+import { wallet } from 'utils/wallet';
 import { privToAddr, constant } from '@vite/vitejs';
 
 const path = process.env.dexApiServer + 'v1';
@@ -164,6 +164,13 @@ export const tokenDetail = function({
         params: {
             token: tokenId
         }
+    });
+};
+
+export const tokenList = function() {
+    return request({
+        path: path + '/token/list',
+        method: 'GET'
     });
 };
 
