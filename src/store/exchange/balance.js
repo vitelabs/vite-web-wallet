@@ -17,9 +17,9 @@ const mutations = {
 const updateExBalance=(commit,address) => {
     return $ViteJS.request('dexfund_getAccountFundInfo', address).then((data) => {
         commit('setExchangeBalance', data);
-    }).catch((e) => {
+    }).catch(() => {
         commit('setExchangeBalance',[]);
-        console.error(e);
+        // console.error(e);
     });
 };
 const actions = {

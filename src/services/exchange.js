@@ -2,7 +2,7 @@ import request from 'utils/request';
 import { wallet } from 'utils/wallet';
 import { privToAddr, constant } from '@vite/vitejs';
 
-const path = '/api/v1';
+const path = process.env.dexApiServer + 'v1';
 
 export const klineHistory = function ({
     from, to, ftoken, ttoken, resolution
@@ -164,6 +164,13 @@ export const tokenDetail = function({
         params: {
             token: tokenId
         }
+    });
+};
+
+export const tokenList = function() {
+    return request({
+        path: path + '/token/list',
+        method: 'GET'
     });
 };
 
