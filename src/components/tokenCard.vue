@@ -18,7 +18,7 @@
             </div>
         </div>
         <div v-unlock-account="_sendTx" class="btn __pointer" 
-             :class="{ 'unuse': !opt.id || !opt.balance }">{{ $t('sendTrans.send') }}</div>
+             :class="{ 'unuse': !opt.id || !+opt.balance }">{{ $t('sendTrans.send') }}</div>
     </div>
 </template>
 
