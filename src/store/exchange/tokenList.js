@@ -12,7 +12,6 @@ const mutations = {
 
 const actions = {
     dexFetchTokenList({ commit }) {
-        console.log('?????????');
         tokenList().then((data) => {
             commit('dexSetTokenList', data || []);
         });
