@@ -41,8 +41,8 @@ const ethNet = {
     dev: '\'https://ropsten.etherscan.io\''
 };
 const pushServer={
-    test:'"ws://132.232.65.121:11211/websocket"',
-    dev:'"wss://192.168.31.190:11211/websocket"'
+    test:'"wss://vitex.vite.net/test/websocket"',
+    dev:'"wss://vitex.vite.net/test/websocket"'
 };
 
 let Node_Env = process.env.NODE_ENV || 'dev';
