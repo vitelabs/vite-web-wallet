@@ -10,15 +10,6 @@ module.exports = {
         host: '0.0.0.0',
         port: 8081,
         proxy: {
-            '/ws': {
-                target: 'ws://132.232.65.121:11211',
-                ws: true
-            },
-            '/api': {
-                target: 'http://132.232.65.121:8080/test',
-                changeOrigin: true,
-                secure: false
-            },
             '/gw': {
                 target: 'http://132.232.60.116:8000',
                 changeOrigin: true,
