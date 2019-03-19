@@ -14,7 +14,6 @@ export default function request({ method = 'GET', path, params = {}, timeout = r
             (path = `${path}?${qsStr}`) : 
             (path = `${path}${qsStr}`)
     );
-
     xhr.open(method, path, true);
     xhr.setRequestHeader('content-type', 'application/json; charset=utf-8');
 
@@ -27,14 +26,14 @@ export default function request({ method = 'GET', path, params = {}, timeout = r
     return new Promise((res, rej) => {        
         xhr.onload = function () {
             try {
-                if (xhr.status == 200) {                    
+                if (xhr.status == 200) {                 
                     if (path.indexOf('kline') !== -1) {
                         res(JSON.parse(xhr.responseText));
                         return;
                     }
 
                     let { code, msg, data, error } = JSON.parse(xhr.responseText);
-                    let rightCode = path.indexOf('api') === 1 ? 0 : 200;
+                    let rightCode = path.indexOf('api') !== -1 ? 0 : 200;
                     if (code !== rightCode) {
                         return rej({
                             code,

@@ -8,7 +8,7 @@ class WsProtoClient {
         this.MESSAGETYPE = {
             SUB: 'sub', UNSUB: 'un_sub', PING: 'ping', PONG: 'pong', PUSH: 'push'
         };
-        this._client_id = random(10);
+        this._clientId = random(10);
         this._subKeys = {};
         this._heartBeat = new timer(() => {
             if (!this.ready) return;
@@ -20,8 +20,8 @@ class WsProtoClient {
         const connect = new WebSocket(wsUrl);
         this.connect = connect;
         connect.binaryType = 'arraybuffer';
-        this._sub_key && this.subscribe({
-            event_key: this._sub_key
+        this._subKey && this.subscribe({
+            event_key: this._subKey
         });
         connect.onopen = () => {
             this.send('');
@@ -70,7 +70,7 @@ class WsProtoClient {
         const payload = {
             event_key: event_key,
             op_type: type,
-            client_id: this._client_id,
+            client_id: this._clientId,
             message: '',
             error_code: 0
         };

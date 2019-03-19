@@ -52,6 +52,8 @@ export default {
     },
     mounted() {
         this.$store.dispatch('startLoopExchangeRate');
+        this.$store.dispatch('dexFetchTokenList');
+
         this.$router.afterEach(to => {
             this.active = to.name;
         });

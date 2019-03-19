@@ -88,11 +88,29 @@ export default {
 
     beforeMount() {
         defaultPairTimer = new subTask('defaultPair', ({ args, data }) => {
+            console.log(data);
+
             if (args.ttoken !== this.toTokenId) {
                 return;
             }
+
             this.isLoading = false;
-            this.txPairList = data || [];
+
+            if (data instanceof Array) {
+                this.txPairList = data || [];
+                return;
+            }
+            
+            if (!data) {
+                return;
+            }
+            for (let i=0; i<this.txPairList.length; i++) {
+                if (this.txPairList[i].pairCode === data.pairCode) {
+                    this.txPairList[i] = data;
+                    break;
+                }
+            }
+            this.txPairList = [].concat(this.txPairList);
         }, 2000);
 
         defaultPairTimer.start(() => { 
@@ -126,6 +144,7 @@ export default {
             this.isLoading = true;
         },
         txPairList: function() {
+            console.log(this.txPairList);
             this.txPairList &&
                 this.txPairList.forEach(txPair => {
                     if (
