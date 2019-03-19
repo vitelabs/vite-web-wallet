@@ -42,4 +42,3 @@ export default function (VueRouter) {
 
     return router;
 }
-

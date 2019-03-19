@@ -82,6 +82,7 @@ let txImgs = [
     txTokenImg, 
     txTokenImg, 
     txTokenImg, 
+    txTokenImg, 
     txTransImg, 
     txTransImg, 
     txTransImg, 
@@ -89,6 +90,7 @@ let txImgs = [
     txTransImg, 
     txTransImg, 
     txTransImg, 
+    txTransImg,
     txTransImg
 ];
 
