@@ -2,7 +2,7 @@ import request from 'utils/request';
 import { wallet } from 'utils/walletInstance';
 import { privToAddr, constant } from '@vite/vitejs';
 
-const path = '/api/v1';
+const path = process.env.dexApiServer + 'v1';
 
 export const klineHistory = function ({
     from, to, ftoken, ttoken, resolution
