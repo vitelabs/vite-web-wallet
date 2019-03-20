@@ -56,11 +56,14 @@
         "webpack-merge": "^4.1.3"
     },
     "dependencies": {
+        "@types/bip32": "^1.0.2",
         "@vite/vitejs": "^2.0.0-alpha.8",
         "@vite/vitejs-ws": "^2.0.0-alpha.8",
         "axios": "^0.18.0",
         "bignumber.js": "^7.2.1",
+        "bip32": "^2.0.0",
         "bip39": "^2.5.0",
+        "bitcoinjs-lib": "^4.0.3",
         "buffer": "^5.2.1",
         "dayjs": "^1.8.8",
         "echarts": "^4.2.0-rc.2",
