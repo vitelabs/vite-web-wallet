@@ -1,15 +1,11 @@
-import { keystore as _keystore, hdAccount as _walletAccount } from '@vite/vitejs';
+import {keystore as _keystore, hdAccount as _walletAccount} from '@vite/vitejs';
 import vitecrypto from 'testwebworker';
 import acc from 'utils/storeAcc.js';
 import $ViteJS from 'utils/viteClient';
 
 class walletAccount extends _walletAccount {
-    constructor({
-        addrNum, defaultInx, mnemonic, bits, encryptObj, receiveFail, lang
-    }) {
-        super({
-            client: $ViteJS, mnemonic, bits, addrNum, lang
-        }, {});
+    constructor({addrNum, defaultInx, mnemonic, bits, encryptObj, receiveFail, lang}) {
+        super({client: $ViteJS, mnemonic, bits, addrNum, lang}, {});
 
         this.defaultInx = defaultInx || 0;
         this.encryptObj = encryptObj || null;
@@ -18,17 +14,18 @@ class walletAccount extends _walletAccount {
     }
 
     verify(pass) {
-        return !this.encryptObj ? 
-            Promise.resolve(false) : 
-            _keystore.decrypt(JSON.stringify(this.encryptObj), pass, vitecrypto);
+        return this.encryptObj
+            ? _keystore.decrypt(JSON.stringify(this.encryptObj), pass, vitecrypto)
+            : Promise.resolve(false);
     }
 
     encrypt(pass) {
         if (!pass) {
             return Promise.reject(false);
         }
-        return _keystore.encrypt(this.entropy, pass, null, vitecrypto).then((encryptObj) => {
-            let obj = JSON.parse(encryptObj);
+
+        return _keystore.encrypt(this.entropy, pass, null, vitecrypto).then(encryptObj => {
+            const obj = JSON.parse(encryptObj);
             this.encryptObj = obj;
             return encryptObj;
         });
@@ -36,18 +33,18 @@ class walletAccount extends _walletAccount {
 
     save(name, index) {
         acc.add({
-            name, 
+            name,
             id: this.id,
             lang: this.lang,
             defaultInx: this.defaultInx,
             addr: this.getDefaultAddr(),
-            addrNum: this.addrList.length, 
+            addrNum: this.addrList.length,
             encryptObj: this.encryptObj
         }, index);
     }
 
     setDefaultAddr(address, index) {
-        let addrObj = this.addrList[index];
+        const addrObj = this.addrList[index];
         if (!addrObj || addrObj.hexAddr !== address) {
             return false;
         }
@@ -67,7 +64,7 @@ class walletAccount extends _walletAccount {
             index: this.defaultInx
         }, {
             intervals,
-            receiveFailAction: this.receiveFail, 
+            receiveFailAction: this.receiveFail,
             duration: -1
         });
         return !!this.unlockAcc;

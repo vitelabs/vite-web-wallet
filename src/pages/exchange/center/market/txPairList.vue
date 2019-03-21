@@ -3,8 +3,8 @@
         <span v-show="pairCode && realPrice" class="real-price" :style="`top: ${top}px`">{{ realPrice }}</span>
 
         <div ref="txList" class="tx-list">
-            <div :ref="`txPair${i}`" v-for="(txPair, i) in showList" :key="i" 
-                 class="__center-tb-row __pointer" 
+            <div :ref="`txPair${i}`" v-for="(txPair, i) in showList" :key="i"
+                 class="__center-tb-row __pointer"
                  :class="{'active': txPair && txPair.pairCode === activePairCode}"
                  @mouseenter="showRealPrice(txPair, i)"
                  @mouseleave="hideRealPrice(txPair)"
@@ -44,9 +44,7 @@ export default {
         },
         list: {
             type: Array,
-            default: () => {
-                return [];
-            }
+            default: () => []
         },
         setFavorite: {
             type: Function,
@@ -72,49 +70,51 @@ export default {
             return this.$store.state.exchangeActiveTxPair.activeTxPair;
         },
         showList() {
-            let list = this.orderList(this.list);
+            const list = this.orderList(this.list);
             if (!this.activeTxPair && list && list.length) {
                 this.setActiveTxPair(list[0]);
             }
 
-            let _l = [];
+            const _l = [];
 
-            list.forEach((_t) => {
-                let item = {};
+            list.forEach(_t => {
+                const item = {};
                 item.pairCode = _t.pairCode;
                 item.price = _t.price;
                 item.quantity24h = _t.quantity24h;
-                item.showPair = `${_t.ftokenShow}/${_t.ttokenShow}`;
+                item.showPair = `${ _t.ftokenShow }/${ _t.ttokenShow }`;
                 item.upDown = _t.price24hChange ? BigNumber.multi(_t.price24hChange, 100, 2) : '';
                 item.rawData = _t;
-                
+
                 _l.push(item);
             });
 
             return _l;
         },
         rate() {
-            let rateList = this.$store.state.exchangeRate.rateMap || {};
-            let tokenId = this.activeTxPair && this.activeTxPair.ttoken ? this.activeTxPair.ttoken : null;
-            let coin = this.$store.state.exchangeRate.coins[this.$i18n.locale || 'zh'];
+            const rateList = this.$store.state.exchangeRate.rateMap || {};
+            const tokenId = this.activeTxPair && this.activeTxPair.ttoken ? this.activeTxPair.ttoken : null;
+            const coin = this.$store.state.exchangeRate.coins[this.$i18n.locale || 'zh'];
             if (!tokenId || !rateList[tokenId]) {
                 return null;
             }
+
             return rateList[tokenId][coin] || null;
         }
     },
     methods: {
         formatNum(num) {
-            return BigNumber.formatNum(num, 1); 
+            return BigNumber.formatNum(num, 1);
         },
         showRealPrice(txPair, i) {
-            let elTop = this.$refs[`txPair${i}`][0].getBoundingClientRect().top;
-            let listTop = this.$refs.txList.getBoundingClientRect().top;
-            let height = this.$refs.txList.clientHeight;
-            let top =  elTop - listTop - 10;
+            const elTop = this.$refs[`txPair${ i }`][0].getBoundingClientRect().top;
+            const listTop = this.$refs.txList.getBoundingClientRect().top;
+            const height = this.$refs.txList.clientHeight;
+            const top = elTop - listTop - 10;
 
             if (top > listTop + height) {
                 this.hideRealPrice();
+
                 return;
             }
 
@@ -124,7 +124,7 @@ export default {
         },
         hideRealPrice(txPair) {
             if (this.pairCode && txPair.pairCode === this.pairCode) {
-                this.pairCode = null;                
+                this.pairCode = null;
             }
         },
         getRealPrice(txPair) {
@@ -135,22 +135,25 @@ export default {
             if (this.$i18n.locale === 'zh') {
                 pre = '￥';
             }
+
             return pre + txPair.price * this.rate;
         },
         orderList(list) {
-            let compareStr = (aStr, bStr) => {
-                for (let i=0; i<aStr.length; i++) {
+            const compareStr = (aStr, bStr) => {
+                for (let i = 0; i < aStr.length; i++) {
                     if (!bStr[i]) {
                         return 1;
                     }
+
                     return aStr[i].charCodeAt() - bStr[i].charCodeAt();
                 }
+
                 return -1;
             };
 
             return list.sort((a, b) => {
                 switch (this.currentRule) {
-                case 'priceUp': 
+                case 'priceUp':
                     return a.price - b.price;
                 case 'priceDown':
                     return b.price - a.price;
@@ -160,7 +163,7 @@ export default {
                     return (b.price - b.priceBefore24h) - (a.price - a.priceBefore24h);
                 case 'txNumUp':
                     return a.quantity24h - b.quantity24h;
-                case 'txNumDown': 
+                case 'txNumDown':
                     return b.quantity24h - a.quantity24h;
                 default:
                     return compareStr(a.ftokenShow, b.ftokenShow);

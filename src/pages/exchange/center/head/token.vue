@@ -65,9 +65,7 @@ import getTokenIcon from 'utils/getTokenIcon';
 
 export default {
     data() {
-        return {
-            showTokenType: ''
-        };
+        return {showTokenType: ''};
     },
     computed: {
         ttokenDetail() {
@@ -80,19 +78,17 @@ export default {
             if (!this.ftokenDetail) {
                 return '';
             }
+
             return this.getTokenIcon(this.ftokenDetail.tokenId);
         },
         ttokenIcon() {
             if (!this.ttokenDetail) {
                 return '';
             }
+
             return this.getTokenIcon(this.ttokenDetail.tokenId);
         },
         tokenDetail() {
-
-
-
-
             if (!this.showTokenType) {
                 return {};
             }
@@ -108,40 +104,42 @@ export default {
 
             detail = Object.assign({}, detail);
             detail.publisher = ellipsisAddr(detail.publisher);
-            detail.tokenType = detail.tokenType === 0 ? this.$t('exchange.head.tokenType0') :
-                detail.tokenType === 1 ? this.$t('exchange.head.tokenType1') : '';
+            detail.tokenType = detail.tokenType === 0 ? this.$t('exchange.head.tokenType0')
+                : detail.tokenType === 1 ? this.$t('exchange.head.tokenType1') : '';
             detail.publisherDate = detail.publisherDate ? date(detail.publisherDate, 'zh') : '';
+
             return detail;
         }
     },
     methods: {
         getTokenIcon(tokenId) {
-            let defaultToken = this.$store.state.ledger.tokenInfoMaps[tokenId];
+            const defaultToken = this.$store.state.ledger.tokenInfoMaps[tokenId];
             if (defaultToken && defaultToken.icon) {
                 return defaultToken.icon;
             }
+
             return getTokenIcon(tokenId);
         },
         showToken(type) {
             this.showTokenType = type;
         },
         hideToken(e) {
-            let tContainer = this.$refs.tContainer;
-            if (!tContainer || 
-                e.target === tContainer ||
-                tContainer.contains( e.target )) {
+            const tContainer = this.$refs.tContainer;
+            if (!tContainer
+                || e.target === tContainer
+                || tContainer.contains(e.target)) {
                 return;
             }
 
             this.showTokenType = '';
         },
         goNetToken(tokenId) {
-            let locale = this.$i18n.locale === 'zh' ? 'zh/' : '';
-            window.open(`${process.env.viteNet}${locale}token/${tokenId}`);
+            const locale = this.$i18n.locale === 'zh' ? 'zh/' : '';
+            window.open(`${ process.env.viteNet }${ locale }token/${ tokenId }`);
         },
         goNetAddr(addr) {
-            let locale = this.$i18n.locale === 'zh' ? 'zh/' : '';
-            window.open(`${process.env.viteNet}${locale}account/${addr}`);
+            const locale = this.$i18n.locale === 'zh' ? 'zh/' : '';
+            window.open(`${ process.env.viteNet }${ locale }account/${ addr }`);
         }
     }
 };
@@ -187,7 +185,7 @@ export default {
 
     .detail {
         position: absolute;
-        left: 0;    
+        left: 0;
         top: 50px;
         z-index: 1;
         background: rgba(255,255,255,1);

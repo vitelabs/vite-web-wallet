@@ -1,5 +1,5 @@
 <template>
-    <confirm :title="pwdTitle" 
+    <confirm :title="pwdTitle"
              :content="content" :showMask="showMask" :btnUnuse="isLoading"
              :leftBtnTxt="cancelTxt || $t('btn.cancel')" :rightBtnTxt="submitTxt || $t('btn.submit')"
              :leftBtnClick="exchange?_submit:_cancle"  :rightBtnClick="exchange?_cancle:_submit">
@@ -23,9 +23,7 @@ import confirm from 'components/confirm.vue';
 const holdTime = 5 * 60 * 1000;
 
 export default {
-    components: {
-        confirm
-    },
+    components: {confirm},
     props: {
         type: {
             type: String,
@@ -63,9 +61,9 @@ export default {
             type: Boolean,
             default: true
         },
-        exchange:{
-            type:Boolean,
-            default:false
+        exchange: {
+            type: Boolean,
+            default: false
         }
     },
     data() {
@@ -82,9 +80,10 @@ export default {
                 return this.title || this.$t('pwdConfirm.title');
             }
 
-            let activeAccount = this.$wallet.getActiveAccount();
-            let name = activeAccount ? activeAccount.getName() : '';
-            return this.$t('pwdConfirm.unlockAcc', { name });
+            const activeAccount = this.$wallet.getActiveAccount();
+            const name = activeAccount ? activeAccount.getName() : '';
+
+            return this.$t('pwdConfirm.unlockAcc', {name});
         }
     },
     methods: {
@@ -106,29 +105,33 @@ export default {
             if (!this.isShowPWD) {
                 this.clear();
                 this.submit && this.submit();
+
                 return;
             }
 
-            let password = this.$trim(this.password);
+            const password = this.$trim(this.password);
             if (!password) {
-                this.$toast( this.$t('hint.pwEmpty') );
+                this.$toast(this.$t('hint.pwEmpty'));
+
                 return false;
             }
 
             let activeAccount = this.$wallet.getActiveAccount();
             if (!activeAccount) {
-                this.$toast( this.$t('hint.err') );
+                this.$toast(this.$t('hint.err'));
+
                 return false;
             }
 
-            let deal = (result) => {
+            const deal = result => {
                 if (!result) {
-                    this.$toast( this.$t('hint.pwErr') );
+                    this.$toast(this.$t('hint.pwErr'));
+
                     return false;
                 }
-                
+
                 if (this.type !== 'normal') {
-                    this.$toast( this.$t('unlockSuccess') );                    
+                    this.$toast(this.$t('unlockSuccess'));
                 }
                 this.isPwdHold && activeAccount.holdPWD(password, holdTime);
                 this.clear();
@@ -138,27 +141,30 @@ export default {
             if (!activeAccount.isLogin) {
                 this.isLoading = true;
                 this.$wallet.login({
-                    id: activeAccount.getId(), 
-                    entropy: activeAccount.getEntropy(), 
+                    id: activeAccount.getId(),
+                    entropy: activeAccount.getEntropy(),
                     addr: activeAccount.getDefaultAddr()
                 }, password).then(() => {
                     this.isLoading = false;
                     activeAccount = this.$wallet.getActiveAccount();
                     activeAccount.unlock();
                     deal(true);
-                }).catch((err) => {
-                    this.isLoading = false;
-                    console.warn(err);
-                    deal(false);
-                });
+                })
+                    .catch(err => {
+                        this.isLoading = false;
+                        console.warn(err);
+                        deal(false);
+                    });
+
                 return;
             }
 
-            activeAccount.verify(password).then((result) => {
+            activeAccount.verify(password).then(result => {
                 deal(result);
-            }).catch(() => {
-                deal(false);
-            });
+            })
+                .catch(() => {
+                    deal(false);
+                });
         }
     }
 };

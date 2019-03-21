@@ -8,12 +8,12 @@
                 <span class="record __pointer" @click="toRecord">{{ $t('walletConversion.record') }}</span>
             </div>
 
-            <vite-address :title="$t('wallet.address')" :address="address" 
+            <vite-address :title="$t('wallet.address')" :address="address"
                           :showAddrContent="false" :addressQrcode="'ethereum:' + address">
                 <div class="address-wrapper" v-click-outside="hideAddrList">
                     <div class="active-addr __pointer" @click="showAddrList">
-                        {{ address }} 
-                        <span v-show="addrList && addrList.length" :class="{ 
+                        {{ address }}
+                        <span v-show="addrList && addrList.length" :class="{
                             'slide': true,
                             'down': !isShowAddrList,
                             'up': isShowAddrList
@@ -30,12 +30,12 @@
             </vite-address>
 
             <div class="token-list">
-                <token v-for="(token, index) in tokenList" :key="index" 
+                <token v-for="(token, index) in tokenList" :key="index"
                        :sendTx="showTrans" :token="token" :ethToken="tokenList.eth"></token>
             </div>
 
             <div class="note">{{ $t('walletConversion.note') }}</div>
-            
+
             <transaction v-if="!!transType" :closeTrans="hideTrans" :ethWallet="ethWallet"
                          :transType="transType" :token="tokenList[transToken]"></transaction>
         </div>
@@ -45,7 +45,7 @@
 </template>
 
 <script>
-import { timer } from 'utils/asyncFlow';
+import {timer} from 'utils/asyncFlow';
 import _ethWallet from 'utils/ethWallet/index.js';
 import secTitle from 'components/secTitle';
 import viteAddress from 'components/address';
@@ -57,16 +57,12 @@ const balanceTime = 2000;
 let balanceInfoInst = null;
 
 export default {
-    components: {
-        secTitle, viteAddress, token, transaction, loading
-    },
+    components: {secTitle, viteAddress, token, transaction, loading},
     created() {
-        let activeAccount = this.$wallet.getActiveAccount();
+        const activeAccount = this.$wallet.getActiveAccount();
         this.viteAddress = activeAccount.getDefaultAddr();
-        let mnemonic = activeAccount.getMnemonic();
-        this.ethWallet = new _ethWallet({
-            mnemonic
-        });
+        const mnemonic = activeAccount.getMnemonic();
+        this.ethWallet = new _ethWallet({mnemonic});
         this.ethWallet.init(() => {
             this.loading = false;
         });
@@ -92,7 +88,7 @@ export default {
         };
     },
     watch: {
-        loading: function() {
+        loading: function () {
             this.address = this.ethWallet.getDefaultAddr();
             this.startLoopBalance();
             if (this.ethWallet.addrNum > 1) {
@@ -123,16 +119,14 @@ export default {
             this.transToken = '';
         },
         toRecord() {
-            window.open(`${process.env.ethNet}/address/${this.address}#tokentxns`);
+            window.open(`${ process.env.ethNet }/address/${ this.address }#tokentxns`);
         },
 
         startLoopBalance() {
             this.stopLoopBalance();
 
             this.getBalance();
-            balanceInfoInst = new timer(()=>{
-                return this.getBalance();
-            }, balanceTime);
+            balanceInfoInst = new timer(() => this.getBalance(), balanceTime);
             balanceInfoInst.start();
         },
         stopLoopBalance() {
@@ -142,12 +136,13 @@ export default {
 
         getBalance() {
             this.tokenList = this.ethWallet.tokenList;
+
             return Promise.resolve(this.balance);
         }
     }
 };
 </script>
-    
+
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
 .loading {

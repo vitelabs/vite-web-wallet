@@ -10,12 +10,12 @@
                 <slot></slot>
             </div>
             <div class="bottom">
-                <div v-show="singleBtn" class="__btn btn-single __btn_all_in __pointer" 
+                <div v-show="singleBtn" class="__btn btn-single __btn_all_in __pointer"
                      :class="{'unuse': btnUnuse }"
                      @click="_leftBtnClick">{{ leftBtnTxt }}</div>
-                <div v-show="!singleBtn" class="__btn btn-left __pointer" 
+                <div v-show="!singleBtn" class="__btn btn-left __pointer"
                      @click="_leftBtnClick">{{ leftBtnTxt }}</div>
-                <div v-show="!singleBtn" class="__btn __btn_all_in __pointer" 
+                <div v-show="!singleBtn" class="__btn __btn_all_in __pointer"
                      :class="{'unuse': btnUnuse }"
                      @click="_rightBtnClick">{{ rightBtnTxt }}</div>
             </div>
@@ -40,7 +40,7 @@ export default {
         },
         close: {
             type: Function,
-            default: ()=>{}
+            default: () => {}
         },
         singleBtn: {
             type: Boolean,
@@ -56,11 +56,11 @@ export default {
         },
         leftBtnClick: {
             type: Function,
-            default: ()=>{}
+            default: () => {}
         },
         rightBtnClick: {
             type: Function,
-            default: ()=>{}
+            default: () => {}
         },
         btnUnuse: {
             type: Boolean,

@@ -7,7 +7,7 @@
             <div class="__tb_cell height">{{ $t('withdrawHeight') }}</div>
             <div class="__tb_cell operate">{{ $t('action') }}</div>
         </div>
-        
+
         <div v-show="list && list.length" class="__tb_content">
             <div class="__tb_row __tb_content_row" :class="{
                 'unuse': !!item.isCancel
@@ -23,13 +23,13 @@
                     </i>
                 </div>
                 <div class="__tb_cell operate">
-                    <span v-if="!item.isCancel" class="btn __pointer" 
+                    <span v-if="!item.isCancel" class="btn __pointer"
                           v-unlock-account @unlocked="edit(item)">{{ $t('btn.edit') }}</span>
                     <span v-if="!item.isCancel" class="btn" :class="{
                         '__pointer': item.isMaturity,
-                        'unuse': !item.isMaturity   
+                        'unuse': !item.isMaturity
                     }" v-unlock-account @unlocked="cancel(item)">{{ $t('walletSBP.cancelBtn') }}</span>
-                    <span v-if="item.isCancel" class="btn __pointer" 
+                    <span v-if="item.isCancel" class="btn __pointer"
                           v-unlock-account @unlocked="reg(item)">{{ $t('btn.reReg') }}</span>
                 </div>
             </div>
@@ -42,7 +42,7 @@
 </template>
 
 <script>
-import { quotaConfirm } from 'components/quota/index';
+import {quotaConfirm} from 'components/quota/index';
 import tooltips from 'components/tooltips';
 import date from 'utils/date.js';
 import ellipsisAddr from 'utils/ellipsisAddr.js';
@@ -51,9 +51,7 @@ import BigNumber from 'utils/bigNumber';
 const amount = 500000;
 
 export default {
-    components: {
-        tooltips
-    },
+    components: {tooltips},
     props: {
         showConfirm: {
             type: Function,
@@ -74,8 +72,8 @@ export default {
         this.fetchList();
     },
     data() {
-        let activeAccount = this.$wallet.getActiveAccount();
-        let address = activeAccount.getDefaultAddr();
+        const activeAccount = this.$wallet.getActiveAccount();
+        const address = activeAccount.getDefaultAddr();
 
         return {
             activeAccount,
@@ -88,11 +86,12 @@ export default {
             if (!this.tokenInfo || !this.tokenInfo.tokenId) {
                 return '';
             }
-            let balance = this.tokenBalList[this.tokenInfo.tokenId] ? this.tokenBalList[this.tokenInfo.tokenId].totalAmount : 0;
-            let minAmount = BigNumber.toMin(amount, this.tokenInfo.decimals);
+            const balance = this.tokenBalList[this.tokenInfo.tokenId] ? this.tokenBalList[this.tokenInfo.tokenId].totalAmount : 0;
+            const minAmount = BigNumber.toMin(amount, this.tokenInfo.decimals);
             if (BigNumber.compared(balance, minAmount) < 0) {
                 return this.$t('hint.insufficientBalance');
             }
+
             return '';
         },
         tokenBalList() {
@@ -106,23 +105,23 @@ export default {
                 return [];
             }
 
-            let decimals = this.tokenInfo.decimals;
+            const decimals = this.tokenInfo.decimals;
 
-            let registrationList = this.$store.state.SBP.registrationList || [];  
-            let list = [];
+            const registrationList = this.$store.state.SBP.registrationList || [];
+            const list = [];
 
             registrationList.forEach(item => {
-                let isMaturity = BigNumber.compared(item.withdrawHeight, this.currentHeight) <= 0;
-                let isCancel = item.cancelHeight && !BigNumber.isEqual(item.cancelHeight, 0);
-                let addr = ellipsisAddr(item.nodeAddr, 6);
-                
-                let day = date(item.withdrawTime * 1000, this.$i18n.locale);
+                const isMaturity = BigNumber.compared(item.withdrawHeight, this.currentHeight) <= 0;
+                const isCancel = item.cancelHeight && !BigNumber.isEqual(item.cancelHeight, 0);
+                const addr = ellipsisAddr(item.nodeAddr, 6);
+
+                const day = date(item.withdrawTime * 1000, this.$i18n.locale);
                 list.push({
                     isMaturity,
                     isCancel,
                     name: item.name,
                     nodeAddr: addr,
-                    pledgeAmount: BigNumber.toBasic(item.pledgeAmount, decimals) + ' ' +  this.tokenInfo.tokenSymbol,
+                    pledgeAmount: `${ BigNumber.toBasic(item.pledgeAmount, decimals) } ${ this.tokenInfo.tokenSymbol }`,
                     withdrawHeight: item.withdrawHeight,
                     time: day,
                     rawData: item
@@ -144,34 +143,33 @@ export default {
         },
 
         sendRegisterTx(item) {
-            let rawData = item.rawData;
-            let nodeName = rawData.name;
-            let producerAddr = rawData.nodeAddr;
+            const rawData = item.rawData;
+            const nodeName = rawData.name;
+            const producerAddr = rawData.nodeAddr;
 
-            this.sendTx({
-                producerAddr, amount, nodeName
-            }, 'SBPreg').then(() => {
+            this.sendTx({producerAddr, amount, nodeName}, 'SBPreg').then(() => {
                 this.$toast(this.$t('walletSBP.section1.registerSuccess'));
                 this.$store.dispatch('loopRegList', {
                     address: this.address,
-                    nodeName, 
-                    operate: 1, 
+                    nodeName,
+                    operate: 1,
                     producer: producerAddr
                 });
-            }).catch((err) => {
-                console.warn(err);
-                if (err && err.error && err.error.code && err.error.code === -35002) {
-                    quotaConfirm({
-                        operate: this.$t('walletSBP.register')
-                    });
-                    return;
-                }
-                this.$toast(this.$t('walletSBP.section1.registerFail'), err);
-            });
+            })
+                .catch(err => {
+                    console.warn(err);
+                    if (err && err.error && err.error.code && err.error.code === -35002) {
+                        quotaConfirm({operate: this.$t('walletSBP.register')});
+
+                        return;
+                    }
+                    this.$toast(this.$t('walletSBP.section1.registerFail'), err);
+                });
         },
         reg(item) {
             if (this.amountErr) {
                 this.$toast(this.amountErr);
+
                 return;
             }
 
@@ -179,7 +177,7 @@ export default {
                 title: this.$t('walletSBP.confirm.title'),
                 submitTxt: this.$t('walletSBP.confirm.rightBtn'),
                 cancelTxt: this.$t('walletSBP.confirm.leftBtn'),
-                content: this.$t('walletSBP.confirm.describe', { amount }),
+                content: this.$t('walletSBP.confirm.describe', {amount}),
                 submit: () => {
                     this.sendRegisterTx(item);
                 }
@@ -192,34 +190,28 @@ export default {
 
             this.activeAccount.initPwd({
                 title: this.$t('walletSBP.section2.cancelConfirm.title'),
-                content: this.$t('walletSBP.section2.cancelConfirm.describe', {
-                    amount: item.pledgeAmount
-                }),
+                content: this.$t('walletSBP.section2.cancelConfirm.describe', {amount: item.pledgeAmount}),
                 submit: () => {
-                    let nodeName = item.rawData.name;
-                    let producer = item.rawData.nodeAddr;
+                    const nodeName = item.rawData.name;
+                    const producer = item.rawData.nodeAddr;
 
-                    this.sendTx({
-                        nodeName
-                    }, 'revokeReg').then(()=>{
-                        this.$toast(this.$t('hint.request', {
-                            name: this.$t('walletSBP.section2.cancel')
-                        }));
+                    this.sendTx({nodeName}, 'revokeReg').then(() => {
+                        this.$toast(this.$t('hint.request', {name: this.$t('walletSBP.section2.cancel')}));
                         this.$store.dispatch('loopRegList', {
                             address: this.address,
-                            nodeName, 
-                            operate: 0, 
+                            nodeName,
+                            operate: 0,
                             producer
                         });
-                    }).catch((err)=>{
-                        if (err && err.error && err.error.code && err.error.code === -35002) {
-                            quotaConfirm({
-                                operate: this.$t('walletSBP.cancel')
-                            });
-                            return;
-                        }
-                        this.$toast(this.$t('walletSBP.section2.cancelFail'), err);
-                    });
+                    })
+                        .catch(err => {
+                            if (err && err.error && err.error.code && err.error.code === -35002) {
+                                quotaConfirm({operate: this.$t('walletSBP.cancel')});
+
+                                return;
+                            }
+                            this.$toast(this.$t('walletSBP.section2.cancelFail'), err);
+                        });
                 }
             }, true);
         },

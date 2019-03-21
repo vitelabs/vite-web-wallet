@@ -49,10 +49,10 @@ const pushServer = {
     dev: '"wss://vitex.vite.net/test/websocket"'
 };
 
-let Node_Env = process.env.NODE_ENV || 'dev';
-let ENV = Node_Env === 'testout' ? 'test' : Node_Env;
+const Node_Env = process.env.NODE_ENV || 'dev';
+const ENV = Node_Env === 'testout' ? 'test' : Node_Env;
 
-let plugins = [
+const plugins = [
     new HtmlWebpackPlugin({
         title: 'Vite Wallet',
         favicon: path.join(SRC_PATH, 'assets/imgs/logo.png'),
@@ -60,8 +60,8 @@ let plugins = [
     }),
     new VueLoaderPlugin(),
     new webpack.DefinePlugin({
-        'process.env.version': `"${packJson.version}"`,
-        'process.env.NODE_ENV': `"${Node_Env}"`,
+        'process.env.version': `"${ packJson.version }"`,
+        'process.env.NODE_ENV': `"${ Node_Env }"`,
         'process.env.goViteServer': goViteServer[ENV],
         'process.env.viteNet': viteNet[ENV],
         'process.env.contractAddress': contractAddress[ENV],
@@ -71,18 +71,18 @@ let plugins = [
         'process.env.pushServer': pushServer[ENV],
         'process.env.dexApiServer': dexApiServer[ENV]
     }),
-    new webpack.NormalModuleReplacementPlugin(/\/buffer\//, function(resource) {
+    new webpack.NormalModuleReplacementPlugin(/\/buffer\//, function (resource) {
         resource.request = Buffer_Path;
     }),
     new webpack.LoaderOptionsPlugin({
         vue: {
             postcss: [
-                px2rem({ 
-                    remUnit: 75, 
-                    propWhiteList: [] 
+                px2rem({
+                    remUnit: 75,
+                    propWhiteList: []
                 })
             ]
-        },
+        }
     })
 ];
 

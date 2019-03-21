@@ -8,7 +8,7 @@
                 {{ $t('balance') }}<span class="num">{{ balance }}</span>
             </div>
             <div class="btn-list">
-                <div class="btn __pointer" :class="classList" 
+                <div class="btn __pointer" :class="classList"
                      @click="_sendTx('transfer', token.name)">{{ $t('sendTrans.symbol') }}</div>
                 <div v-show="token.symbol === 'VITE'" @click="_sendTx('exchange', token.name)"
                      class="btn __pointer" :class="classList">
@@ -42,12 +42,13 @@ export default {
     },
     computed: {
         balance() {
-            let decimals = this.token.decimals;
-            let balance = this.token.balance;
+            const decimals = this.token.decimals;
+            const balance = this.token.balance;
+
             return +balance ? BigNumber.toBasic(balance, decimals) : 0;
         },
         classList() {
-            let haveBalance = +this.token.balance && +this.ethToken.balance;
+            const haveBalance = +this.token.balance && +this.ethToken.balance;
 
             return {
                 '__btn_all_in': haveBalance,

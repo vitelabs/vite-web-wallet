@@ -30,20 +30,19 @@ export default {
             default: () => {}
         }
     },
-    data () {
-        let size = this.default / (this.max - this.min);
-        return {
-            size: size * 100
-        };
+    data() {
+        const size = this.default / (this.max - this.min);
+
+        return {size: size * 100};
     },
     methods: {
         drag(e) {
-            let allWidth = this.$refs.wrapper.clientWidth;
-            let eWidth = this.$refs.line.clientWidth;
-            let startX = e.clientX;
+            const allWidth = this.$refs.wrapper.clientWidth;
+            const eWidth = this.$refs.line.clientWidth;
+            const startX = e.clientX;
 
-            document.onmousemove = (ev) => {
-                let distance = ev.clientX - startX;
+            document.onmousemove = ev => {
+                const distance = ev.clientX - startX;
                 let curentWidth = eWidth + distance;
                 curentWidth = curentWidth > 0 ? curentWidth : 0;
                 curentWidth = curentWidth > allWidth ? allWidth : curentWidth;
@@ -61,7 +60,7 @@ export default {
                 return;
             }
 
-            let allWidth = this.$refs.wrapper.clientWidth;
+            const allWidth = this.$refs.wrapper.clientWidth;
             let currentWidth = e.offsetX - this.$refs.wrapper.clientLeft;
 
             currentWidth = currentWidth > 0 ? currentWidth : 0;

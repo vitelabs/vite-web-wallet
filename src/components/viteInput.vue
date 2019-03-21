@@ -30,7 +30,7 @@ export default {
             default: 500
         }
     },
-    destroyed () {
+    destroyed() {
         this.clear();
     },
     data() {
@@ -39,22 +39,20 @@ export default {
             value: this._value
         };
     },
-    model: {
-        prop: '_value'
-    },
+    model: {prop: '_value'},
     watch: {
-        _value: function() {
+        _value: function () {
             this.value = this._value;
         },
-        value: function() {
+        value: function () {
             this.clear();
-            this.valueTimeout = setTimeout(()=> {
+            this.valueTimeout = setTimeout(() => {
                 this.clear();
                 this.valid();
             }, this._delay);
         }
     },
-    methods: {    
+    methods: {
         update() {
             this.$emit('input', this.value);
         },

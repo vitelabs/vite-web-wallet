@@ -1,8 +1,8 @@
 <template>
     <div class="account-list-wrapper">
         <div class="list-wrapper">
-            <div class="__btn_input_active" 
-                 v-for="(account, i) in accountList" :key="i" 
+            <div class="__btn_input_active"
+                 v-for="(account, i) in accountList" :key="i"
                  @click="clickAccount(account)">
                 <div class="name">{{ account.name }}</div>
                 <div class="address __ellipsis">{{ account.showAddr }}</div>
@@ -18,17 +18,16 @@ export default {
     props: {
         clickAccount: {
             type: Function,
-            default: ()=>{}
+            default: () => {}
         }
     },
     data() {
-        let list = this.$wallet.getList() || [];
+        const list = this.$wallet.getList() || [];
         list.forEach(acc => {
             acc.showAddr = ellipsisAddr(acc.addr);
         });
-        return {
-            accountList: list
-        };
+
+        return {accountList: list};
     }
 };
 </script>

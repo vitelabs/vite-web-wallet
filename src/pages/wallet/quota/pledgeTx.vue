@@ -48,20 +48,18 @@
 <script>
 import viteInput from 'components/viteInput';
 import BigNumber from 'utils/bigNumber';
-import { address } from 'utils/tools';
-import { constant } from '@vite/vitejs';
+import {address} from 'utils/tools';
+import {constant} from '@vite/vitejs';
 
-let amountTimeout = null;
+const amountTimeout = null;
 const minNum = 1000;
 
 export default {
-    components: {
-        viteInput
-    },
+    components: {viteInput},
     props: {
         tokenInfo: {
             type: Object,
-            default: ()=>{
+            default: () => {
                 return {};
             }
         },
@@ -74,7 +72,7 @@ export default {
         this.clearAll();
     },
     data() {
-        let activeAccount = this.$wallet.getActiveAccount();
+        const activeAccount = this.$wallet.getActiveAccount();
 
         return {
             minNum,
@@ -104,32 +102,37 @@ export default {
 
             if (!this.amount) {
                 this.amountErr = '';
+
                 return true;
             }
 
-            let result = this.$validAmount(this.amount, this.tokenInfo.decimals);
+            const result = this.$validAmount(this.amount, this.tokenInfo.decimals);
             if (!result) {
                 this.amountErr = this.$t('hint.amtFormat');
+
                 return false;
             }
 
             if (BigNumber.compared(this.amount, minNum) < 0) {
-                this.amountErr = this.$t('walletQuota.limitAmt', { num: minNum });
+                this.amountErr = this.$t('walletQuota.limitAmt', {num: minNum});
+
                 return false;
             }
 
-            let balance = this.tokenBalList && this.tokenBalList[this.tokenInfo.tokenId] ? 
-                this.tokenBalList[this.tokenInfo.tokenId].totalAmount : 0;
+            const balance = this.tokenBalList && this.tokenBalList[this.tokenInfo.tokenId]
+                ? this.tokenBalList[this.tokenInfo.tokenId].totalAmount : 0;
 
             if (this.tokenInfo && this.tokenInfo.tokenId) {
-                let amount = BigNumber.toMin(this.amount, this.tokenInfo.decimals);
+                const amount = BigNumber.toMin(this.amount, this.tokenInfo.decimals);
                 if (BigNumber.compared(balance, amount) < 0) {
                     this.amountErr = this.$t('hint.insufficientBalance');
+
                     return false;
                 }
             }
 
             this.amountErr = '';
+
             return true;
         },
         testAddr() {
@@ -139,12 +142,13 @@ export default {
 
             if (!this.toAddr) {
                 this.isValidAddress = true;
+
                 return;
             }
 
             try {
                 this.isValidAddress = address.isValidHexAddr(this.toAddr);
-            } catch(err) {
+            } catch (err) {
                 console.warn(err);
                 this.isValidAddress = false;
             }
@@ -183,9 +187,7 @@ export default {
                 title: this.$t('submitStaking'),
                 submitTxt: this.$t('walletQuota.confirm.submit.rightBtn'),
                 cancelTxt: this.$t('walletQuota.confirm.submit.leftBtn'),
-                content: this.$t('walletQuota.confirm.submit.describe', {
-                    amount: this.amount
-                }),
+                content: this.$t('walletQuota.confirm.submit.describe', {amount: this.amount}),
                 submit: () => {
                     this._sendPledgeTx();
                 }
@@ -194,7 +196,7 @@ export default {
         _sendPledgeTx() {
             this.$statistics.event('Vite_web_wallet', 'quota', 'ConfirmQuota');
             this.loading = true;
-            
+
             this.sendPledgeTx({
                 toAddress: this.toAddr,
                 amount: this.amount
@@ -202,12 +204,11 @@ export default {
                 this.loading = false;
                 if (!result) {
                     err && this.$toast(this.$t('walletQuota.pledgeFail'), err);
+
                     return;
                 }
 
-                this.$toast(this.$t('hint.request', {
-                    name: this.$t('submitStaking') 
-                }));
+                this.$toast(this.$t('hint.request', {name: this.$t('submitStaking')}));
                 this.clearAll();
             });
         }

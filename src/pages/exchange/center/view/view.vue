@@ -1,5 +1,5 @@
 <template>
-    <div class="ex-view-container"> 
+    <div class="ex-view-container">
         <kline :toogleDepth="toogleDepth" :showView="showView" v-show="showView === 'kline'"></kline>
         <depth :toogleDepth="toogleDepth" v-if="showView === 'depth'"></depth>
     </div>
@@ -10,13 +10,9 @@ import kline from './kline.vue';
 import depth from './depth.vue';
 
 export default {
-    components: {
-        kline, depth
-    },
+    components: {kline, depth},
     data() {
-        return {
-            showView: 'kline'
-        };
+        return {showView: 'kline'};
     },
     methods: {
         toogleDepth() {

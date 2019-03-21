@@ -13,15 +13,13 @@
 
 <script>
 import loading from 'components/loading';
-import { getPowNonce } from 'services/pow';
+import {getPowNonce} from 'services/pow';
 import $ViteJS from 'utils/viteClient';
 
 let processTimeout;
 
 export default {
-    components: {
-        loading
-    },
+    components: {loading},
     props: {
         cancel: {
             type: Function,
@@ -39,7 +37,7 @@ export default {
         };
     },
     mounted() {
-        let addProcessNum = () => {
+        const addProcessNum = () => {
             this.clearProcessTimeout();
             if (this.processNum >= 99) {
                 return;
@@ -70,16 +68,17 @@ export default {
             this.cancel();
         },
         async startPowTx(accountBlock, startTime, difficulty) {
-            let now = new Date().getTime();
+            const now = new Date().getTime();
             if (startTime && now - startTime > 2000) {
                 accountBlock.prevHash = null;
                 accountBlock.height = null;
                 accountBlock.snapshotHash = null;
                 try {
                     accountBlock = await $ViteJS.buildinTxBlock.getAccountBlock.async(accountBlock);
-                } catch(e) {
+                } catch (e) {
                     this.isShow = false;
                     this.$emit('pow-finish');
+
                     return Promise.reject(e, 0);
                 }
             }
@@ -88,7 +87,7 @@ export default {
             const activeAccount = this.$wallet.getActiveAccount();
 
             return new Promise((res, rej) => {
-                getPowNonce(activeAccount.getDefaultAddr(), accountBlock.prevHash, difficulty).then((data) => {
+                getPowNonce(activeAccount.getDefaultAddr(), accountBlock.prevHash, difficulty).then(data => {
                     accountBlock.difficulty = data.difficulty;
                     accountBlock.nonce = data.nonce;
 
@@ -100,16 +99,18 @@ export default {
                         activeAccount.sendRawTx(accountBlock).then(data => {
                             this.isShow = false;
                             res(data);
-                        }).catch(e => {
-                            this.isShow = false;
-                            rej(e, 1);
-                        });
+                        })
+                            .catch(e => {
+                                this.isShow = false;
+                                rej(e, 1);
+                            });
                     });
-                }).catch((e) => {
-                    this.isShow = false;
-                    this.$emit('pow-finish');
-                    rej(e, 0);
-                });
+                })
+                    .catch(e => {
+                        this.isShow = false;
+                        this.$emit('pow-finish');
+                        rej(e, 0);
+                    });
             });
         },
         stopPow(cb) {

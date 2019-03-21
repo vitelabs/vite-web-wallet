@@ -6,20 +6,14 @@
 import secTitle from 'components/secTitle';
 
 export default {
-    components: {
-        secTitle
-    },
+    components: {secTitle},
     methods: {
         showHelp() {
             this.$confirm({
-                title: this.$t('walletQuota.help.title'), 
-                singleBtn: true, 
-                closeBtn: {
-                    show: false
-                },
-                leftBtn: {
-                    text: this.$t('btn.understand')
-                }, 
+                title: this.$t('walletQuota.help.title'),
+                singleBtn: true,
+                closeBtn: {show: false},
+                leftBtn: {text: this.$t('btn.understand')},
                 content: `<div class="help-t">${ this.$t('walletQuota.confirm.help.t1') }</div>
                         <div class="help-txt">${ this.$t('walletQuota.confirm.help.txt1') }</div>
                         <div class="help-t">${ this.$t('walletQuota.confirm.help.t2') }</div>

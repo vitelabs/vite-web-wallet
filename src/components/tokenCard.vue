@@ -17,7 +17,7 @@
                 <span>{{ opt.onroadNum || 0 }} {{ $t('wallet.pend') }}</span>
             </div>
         </div>
-        <div v-unlock-account="_sendTx" class="btn __pointer" 
+        <div v-unlock-account="_sendTx" class="btn __pointer"
              :class="{ 'unuse': !opt.id || !+opt.balance }">{{ $t('sendTrans.send') }}</div>
     </div>
 </template>
@@ -31,19 +31,21 @@ export default {
     props: {
         opt: {
             type: Object,
-            default: () => ({
-                symbol: '--',
-                balance: '--',
-                fundFloat: '--',
-                unConfirmes: '--'
-            })
+            default: () => {
+                return {
+                    symbol: '--',
+                    balance: '--',
+                    fundFloat: '--',
+                    unConfirmes: '--'
+                };
+            }
         },
         sendTransaction: {
             type: Function,
             default: () => {}
         }
     },
-    data () {
+    data() {
         return {
             iconMap: {
                 VITE: viteIcon,

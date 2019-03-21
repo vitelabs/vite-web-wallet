@@ -10,6 +10,7 @@
         "dev": "NODE_ENV=dev webpack-dev-server",
         "production": "NODE_ENV=production webpack-dev-server",
         "analyzer": "analyzer=true webpack-dev-server",
+        "lint:all": "eslint --ext js,vue --fix .",
         "lint": "eslint --ext js,vue --cache --fix ."
     },
     "pre-commit": [

@@ -28,9 +28,7 @@ import create from './create.vue';
 import loading from 'components/loading.vue';
 
 export default {
-    components: {
-        create, loading
-    },
+    components: {create, loading},
     mounted() {
         this.$onKeyDown(13, () => {
             this.valid();
@@ -59,16 +57,17 @@ export default {
     },
     methods: {
         valid() {
-            this.$refs.createDom && this.$refs.createDom.valid();                   
+            this.$refs.createDom && this.$refs.createDom.valid();
         },
         validMnemonic(name, pass) {
             if (this.isLoading) {
                 return;
             }
 
-            let mnemonic = this.$trim(this.mnemonic);
+            const mnemonic = this.$trim(this.mnemonic);
             if (!mnemonic) {
                 this.errMsg = 'mnemonic.empty';
+
                 return;
             }
 
@@ -76,30 +75,29 @@ export default {
         },
         restoreAccount(mnemonic, name, pass) {
             this.isLoading = true;
-            this.$wallet.restoreAccount(mnemonic, name, pass).then(()=>{
+            this.$wallet.restoreAccount(mnemonic, name, pass).then(() => {
                 if (!this.isLoading) {
                     return;
                 }
 
                 this.isLoading = false;
 
-                let activeAccount = this.$wallet.getActiveAccount();
+                const activeAccount = this.$wallet.getActiveAccount();
                 activeAccount.rename(name);
                 activeAccount.save();
 
                 this.finishCb && this.finishCb();
-                this.$router.push({
-                    name: 'start'
+                this.$router.push({name: 'start'});
+            })
+                .catch(err => {
+                    console.warn(err);
+                    if (err && err.code === 500005) {
+                        this.errMsg = 'mnemonic.error';
+                    } else {
+                        this.errMsg = 'hint.nodeErr';
+                    }
+                    this.isLoading = false;
                 });
-            }).catch(err => {
-                console.warn(err);
-                if (err && err.code === 500005) {
-                    this.errMsg = 'mnemonic.error';
-                } else {
-                    this.errMsg = 'hint.nodeErr';
-                }
-                this.isLoading = false;
-            });
         }
     }
 };
