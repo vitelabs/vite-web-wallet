@@ -122,7 +122,6 @@ export default class dataFeeds {
 
         if (isError) {
             onErrorCallback(errMsg);
-
             return;
         }
 
@@ -131,14 +130,13 @@ export default class dataFeeds {
                 noData: true,
                 nextTime
             });
-
             return;
         }
 
-        const _list = [];
+        let _list = [];
         let index = 0;
 
-        for (let time = list[0].time; time >= from; time -= timeList[resolution]) {
+        for (let time = list[0].time - timeList[resolution]; time >= from; time -= timeList[resolution]) {
             _list.push({
                 time: time * 1000,
                 close: 0,
@@ -149,8 +147,11 @@ export default class dataFeeds {
             });
         }
 
+        _list = _list.reverse();
+
         for (let time = list[0].time; time < to; time += timeList[resolution]) {
             if (list[index] && time === list[index].time) {
+                list[index].time = list[index].time * 1000;
                 _list.push(list[index]);
                 index++;
                 continue;
