@@ -9,6 +9,6 @@ export default {
     methods:{
 
     }
-}
+};
 </script>
 
