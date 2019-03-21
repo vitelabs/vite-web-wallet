@@ -37,13 +37,9 @@
 import secTitle from 'components/secTitle';
 
 export default {
-    components: {
-        secTitle
-    },
+    components: {secTitle},
     data() {
-        return {
-            version: process.env.version
-        };
+        return {version: process.env.version};
     },
     computed: {
         height() {
@@ -122,13 +118,13 @@ export default {
     .setting-wrapper {
         background: #fff;
     }
-    .setting-wrapper .content-wrapper { 
+    .setting-wrapper .content-wrapper {
         top: 122px;
         left: 15px;
         right: 15px;
         bottom: 15px;
         box-shadow: none;
-        border-radius: 0px; 
+        border-radius: 0px;
         .content {
             padding: 0;
         }

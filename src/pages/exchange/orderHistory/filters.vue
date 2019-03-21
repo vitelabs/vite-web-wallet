@@ -63,44 +63,39 @@ export default {
             ftoken: '',
             ttoken: '',
             tokenMap: [],
-            ftokenMap:[]
+            ftokenMap: []
         };
     },
-    beforeMount(){
-        this.ttoken=this.currentToken;
+    beforeMount() {
+        this.ttoken = this.currentToken;
     },
-    components: {
-        FlatPickr
-    },
-    computed:{
-        marketMap(){
+    components: {FlatPickr},
+    computed: {
+        marketMap() {
             return this.$store.state.exchangeMarket.marketMap;
         },
-        currentToken(){
+        currentToken() {
             return this.$store.state.exchangeMarket.currentMarket;
         }
     },
-    watch:{
-        ttoken(){
-            tokenMap({tokenId:this.ttoken}).then(
-                data=>(this.ftokenMap=data)
-            );
+    watch: {
+        ttoken() {
+            tokenMap({tokenId: this.ttoken}).then(data => (this.ftokenMap = data));
         }
     },
     methods: {
-        reset(){
-            this.fromDate='';
-            this.toDate='';
-            this.tradeType='';
-            this.ftoken= '';
-            this.ttoken=this.currentToken;
-            this.$emit('submit', {
-            });
+        reset() {
+            this.fromDate = '';
+            this.toDate = '';
+            this.tradeType = '';
+            this.ftoken = '';
+            this.ttoken = this.currentToken;
+            this.$emit('submit', {});
         },
         submit() {
             this.$emit('submit', {
-                fdate: this.fromDate?new Date(this.fromDate).getTime()/1000:'',
-                tdate: this.toDate?new Date(this.toDate).getTime()/1000:'',
+                fdate: this.fromDate ? new Date(this.fromDate).getTime() / 1000 : '',
+                tdate: this.toDate ? new Date(this.toDate).getTime() / 1000 : '',
                 orderSide: this.tradeType,
                 ftoken: this.ftoken,
                 ttoken: this.ttoken

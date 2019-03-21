@@ -7,7 +7,7 @@
             <span @click="change" class="change __pointer">{{ $t('mnemonic.change', { len }) }}</span>
             <img @click="copy" class="copy __pointer" src="~assets/imgs/copy_white.svg"/>
         </div>
-        
+
         <div class="wrapper">
             <copyOK class="copy-wrapper" :copySuccess="copySuccess"></copyOK>
             <span class="item" :class="{
@@ -36,9 +36,7 @@ import loading from 'components/loading.vue';
 import copy from 'utils/copy';
 
 export default {
-    components: {
-        process, copyOK, loading
-    },
+    components: {process, copyOK, loading},
     mounted() {
         this.activeAccount = this.$wallet.getActiveAccount();
         this.mnemonic = this.activeAccount.getMnemonic() || '';
@@ -47,8 +45,8 @@ export default {
         this.isLoading = false;
     },
     data() {
-        let activeAccount = this.$wallet.getActiveAccount();
-        let mnemonic = activeAccount.getMnemonic() || '';
+        const activeAccount = this.$wallet.getActiveAccount();
+        const mnemonic = activeAccount.getMnemonic() || '';
 
         return {
             activeAccount,
@@ -71,7 +69,7 @@ export default {
         copy() {
             copy(this.mnemonic);
             this.copySuccess = true;
-            setTimeout(()=>{
+            setTimeout(() => {
                 this.copySuccess = false;
             }, 2000);
         },
@@ -84,7 +82,7 @@ export default {
             if (this.isLoading) {
                 return;
             }
-            
+
             this.isLoading = true;
             this.activeAccount.encrypt().then(() => {
                 if (!this.isLoading) {
@@ -92,14 +90,13 @@ export default {
                 }
                 this.isLoading = false;
                 this.activeAccount.save();
-                this.$router.push({
-                    name: 'start'
+                this.$router.push({name: 'start'});
+            })
+                .catch(err => {
+                    console.warn(err);
+                    this.isLoading = false;
+                    this.$toast(this.$t('hint.err'));
                 });
-            }).catch((err) => {
-                console.warn(err);
-                this.isLoading = false;
-                this.$toast( this.$t('hint.err') );
-            });
         }
     }
 };

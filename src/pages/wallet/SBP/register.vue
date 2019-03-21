@@ -56,21 +56,19 @@
 </template>
 
 <script>
-import { quotaConfirm } from 'components/quota/index';
+import {quotaConfirm} from 'components/quota/index';
 import viteInput from 'components/viteInput';
 import BigNumber from 'utils/bigNumber';
-import { address } from 'utils/tools';
+import {address} from 'utils/tools';
 
 const amount = 500000;
 
 export default {
-    components: {
-        viteInput
-    },
+    components: {viteInput},
     props: {
         tokenInfo: {
             type: Object,
-            default: ()=>{
+            default: () => {
                 return {};
             }
         },
@@ -84,7 +82,7 @@ export default {
         }
     },
     data() {
-        let activeAccount = this.$wallet.getActiveAccount();
+        const activeAccount = this.$wallet.getActiveAccount();
 
         return {
             nodeName: '',
@@ -112,17 +110,19 @@ export default {
             if (!this.tokenInfo || !this.tokenInfo.tokenId) {
                 return '';
             }
-            let balance = this.tokenBalList[this.tokenInfo.tokenId] ? this.tokenBalList[this.tokenInfo.tokenId].totalAmount : 0;
-            let minAmount = BigNumber.toMin(amount, this.tokenInfo.decimals);
+            const balance = this.tokenBalList[this.tokenInfo.tokenId] ? this.tokenBalList[this.tokenInfo.tokenId].totalAmount : 0;
+            const minAmount = BigNumber.toMin(amount, this.tokenInfo.decimals);
             if (BigNumber.compared(balance, minAmount) < 0) {
                 return this.$t('hint.insufficientBalance');
             }
+
             return '';
         },
         btnUnuse() {
             if (!this.tokenInfo || !this.tokenInfo.tokenId) {
                 return true;
             }
+
             return this.amountErr || this.loading || !this.nodeName || !this.producerAddr || this.nodeNameErr || this.producerAddrErr;
         },
         tokenBalList() {
@@ -130,29 +130,31 @@ export default {
         }
     },
     watch: {
-        producerAddr: function() {
+        producerAddr: function () {
             this.hideTips();
         },
-        nodeName: function() {
+        nodeName: function () {
             this.hideTips();
         }
     },
     methods: {
         testName() {
-            let nodeName = this.nodeName.trim();
+            const nodeName = this.nodeName.trim();
             if (!nodeName) {
                 return;
             }
 
-            if (!nodeName || 
-                !/^[a-zA-Z0-9_\.]+$/g.test(nodeName) ||
-                nodeName.length > 40) {
+            if (!nodeName
+                || !/^[a-zA-Z0-9_\.]+$/g.test(nodeName)
+                || nodeName.length > 40) {
                 this.nodeNameErr = this.$t('walletSBP.section1.nameErr');
+
                 return;
             }
 
             if (this.regNameList.indexOf(nodeName) !== -1) {
                 this.nodeNameErr = this.$t('walletSBP.section1.nameUsed');
+
                 return;
             }
 
@@ -166,12 +168,14 @@ export default {
 
             if (!address.isValidHexAddr(this.producerAddr)) {
                 this.producerAddrErr = this.$t('walletSBP.section1.addrErr');
+
                 return;
             }
 
-            let nodeName = this.nodeName.trim();
+            const nodeName = this.nodeName.trim();
             if (!this.canUseAddr(nodeName, this.producerAddr)) {
                 this.producerAddrErr = this.$t('walletSBP.section1.addrUsed');
+
                 return;
             }
 
@@ -207,7 +211,7 @@ export default {
                 title: this.$t('walletSBP.confirm.title'),
                 submitTxt: this.$t('walletSBP.confirm.rightBtn'),
                 cancelTxt: this.$t('walletSBP.confirm.leftBtn'),
-                content: this.$t('walletSBP.confirm.describe', { amount }),
+                content: this.$t('walletSBP.confirm.describe', {amount}),
                 submit: () => {
                     this.sendRegisterTx();
                 }
@@ -215,34 +219,32 @@ export default {
         },
         sendRegisterTx() {
             this.loading = true;
-            let nodeName = this.nodeName;
-            let producerAddr = this.producerAddr;
+            const nodeName = this.nodeName;
+            const producerAddr = this.producerAddr;
 
-            this.sendTx({
-                producerAddr, amount, nodeName
-            }, 'SBPreg').then(() => {
+            this.sendTx({producerAddr, amount, nodeName}, 'SBPreg').then(() => {
                 this.loading = false;
                 this.$toast(this.$t('walletSBP.section1.registerSuccess'));
                 this.clearAll();
 
                 this.$store.dispatch('loopRegList', {
                     address: this.quotaAddr,
-                    nodeName, 
-                    operate: 1, 
+                    nodeName,
+                    operate: 1,
                     producer: producerAddr
                 });
-            }).catch((err) => {
-                console.warn(err);
-                this.loading = false;
+            })
+                .catch(err => {
+                    console.warn(err);
+                    this.loading = false;
 
-                if (err && err.error && err.error.code && err.error.code === -35002) {
-                    quotaConfirm({
-                        operate: this.$t('walletSBP.register')
-                    });
-                    return;
-                }
-                this.$toast(this.$t('walletSBP.section1.registerFail'), err);
-            });
+                    if (err && err.error && err.error.code && err.error.code === -35002) {
+                        quotaConfirm({operate: this.$t('walletSBP.register')});
+
+                        return;
+                    }
+                    this.$toast(this.$t('walletSBP.section1.registerFail'), err);
+                });
         }
     }
 };
@@ -267,7 +269,7 @@ export default {
             margin-top: 30px;
             &:first-child {
                 margin-right: 10px;
-            } 
+            }
         }
         .title {
             font-family: $font-bold, arial, sans-serif;
@@ -358,4 +360,4 @@ export default {
     }
 }
 </style>
-           
+

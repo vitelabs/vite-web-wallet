@@ -15,7 +15,7 @@
                     'sell': v.side===1
                 }">{{ $t("exchangeOrderHistory.side")[v.side] }}</div>
                 <div>{{ v.price }} {{ v.ttokenShow }}</div>
-                <div>{{ v.amount }} {{ v.ftokenShow }}</div>
+                <div>{{ v.quantity }} {{ v.ftokenShow }}</div>
                 <div>{{ v.filledQ }} {{v.ftokenShow }}</div>
                 <div>{{ `${(v.rate*100).toFixed(2)}%` }}</div>
                 <div>{{ v.average }} {{ v.ttokenShow }}</div>
@@ -47,45 +47,44 @@ export default {
             default: () => []
         }
     },
-    components:{
-        confirm
-    },
-    filters:{
-        d(v){
+    components: {confirm},
+    filters: {
+        d(v) {
             return d.unix(v).format('YYYY-MM-DD HH:mm');
         }
     },
     data() {
         return {
-            detailData:[],
-            detailConfirm:false
+            detailData: [],
+            detailConfirm: false
         };
     },
     methods: {
-        close(){
-            this.detailData=[];
-            this.detailConfirm=false;
+        close() {
+            this.detailData = [];
+            this.detailConfirm = false;
         },
-        showDetail(order){
-            orderDetail({orderId:order.orderId,ftoken:order.ftoken,ttoken:order.ttoken,pageNo:1,pageSize:100}).then(data=>{
-                this.detailData=data.details.map(v=>{
-                    v.token=order.ttokenShow;
-                    v.ftokenShow=order.ftokenShow;
+        showDetail(order) {
+            orderDetail({orderId: order.orderId, ftoken: order.ftoken, ttoken: order.ttoken, pageNo: 1, pageSize: 100}).then(data => {
+                this.detailData = data.details.map(v => {
+                    v.token = order.ttokenShow;
+                    v.ftokenShow = order.ftokenShow;
+
                     return v;
                 });
             });
-            this.detailConfirm=true;
-        },
+            this.detailConfirm = true;
+        }
     },
     computed: {
-        sortedList(){
-            return this.list.slice(0).sort((a,b)=>(b.date-a.date));
+        sortedList() {
+            return this.list.slice(0).sort((a, b) => (b.date - a.date));
         },
-        detailList(){
-            return Object.keys(this.detailData).map(k=>{
-                const o=this.detailData[k];
-                return [d.unix(o.txTime).format('YYYY-MM-DDTHH:mm'),`${o.price} ${o.token}`,`${o.quantity} ${o.ftokenShow}`,`${o.fee} ${o.token}`,`${o.amount} ${o.token}`];
+        detailList() {
+            return Object.keys(this.detailData).map(k => {
+                const o = this.detailData[k];
 
+                return [ d.unix(o.txTime).format('YYYY-MM-DDTHH:mm'), `${ o.price } ${ o.token }`, `${ o.quantity } ${ o.ftokenShow }`, `${ o.fee } ${ o.token }`, `${ o.amount } ${ o.token }` ];
             });
         }
     }

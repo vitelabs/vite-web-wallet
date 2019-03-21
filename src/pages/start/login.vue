@@ -21,21 +21,21 @@
                         <div class="address __ellipsis">{{ activeAccount.showAddr }}</div>
                     </div>
 
-                    <span :class="{ 
+                    <span :class="{
                         'slide': true,
                         'down': !isShowAccountList,
                         'up': isShowAccountList
                     }"></span>
                 </div>
-                
-                <account-list v-show="isShowAccountList" 
+
+                <account-list v-show="isShowAccountList"
                               :accountList="accountList"
                               :clickAccount="chooseAccount"></account-list>
             </div>
 
-            <div class="bottom __btn __btn_input" 
+            <div class="bottom __btn __btn_input"
                  :class="{ 'active': !!password || inputItem === 'pass' }">
-                <input ref="passInput" autofocus :placeholder="$t('startCreate.input')" 
+                <input ref="passInput" autofocus :placeholder="$t('startCreate.input')"
                        v-model="password" :type="'password'"
                        @focus="inputFocus('pass')" @blur="inputBlur('pass')" />
             </div>
@@ -67,9 +67,7 @@ import loading from 'components/loading.vue';
 import ellipsisAddr from 'utils/ellipsisAddr.js';
 
 export default {
-    components: {
-        accountList, loading, restore
-    },
+    components: {accountList, loading, restore},
     mounted() {
         this.$onKeyDown(13, () => {
             this.login();
@@ -93,7 +91,7 @@ export default {
         };
     },
     watch: {
-        isShowExisting: function() {
+        isShowExisting: function () {
             if (!this.isShowExisting) {
                 return;
             }
@@ -110,8 +108,9 @@ export default {
         getLoginAcc() {
             let account = this.$wallet.getLast();
             if (account) {
-                let addr = account.addr || '';
-                let showAddr = account.addr ? ellipsisAddr(account.addr) : '';
+                const addr = account.addr || '';
+                const showAddr = account.addr ? ellipsisAddr(account.addr) : '';
+
                 return {
                     name: account.name || '',
                     addr,
@@ -120,16 +119,16 @@ export default {
                 };
             }
 
-            let list = this.$wallet.getList();
+            const list = this.$wallet.getList();
             if (!list || !list.length) {
-                this.$router.push({
-                    name: 'start'
-                });
+                this.$router.push({name: 'start'});
+
                 return;
             }
 
             account = list[0];
             account.showAddr = account.addr ? ellipsisAddr(account.addr) : '';
+
             return account;
         },
 
@@ -140,7 +139,7 @@ export default {
             text === this.inputItem && (this.inputItem = '');
         },
         focusPass() {
-            Vue.nextTick(()=>{
+            Vue.nextTick(() => {
                 this.$refs.passInput && this.$refs.passInput.focus();
             });
         },
@@ -159,13 +158,12 @@ export default {
 
         addAcc() {
             this.$wallet.clearActiveAccount();
-            this.$router.push({
-                name: 'startCreate'
-            });
+            this.$router.push({name: 'startCreate'});
         },
         login() {
             if (!this.isShowExisting) {
                 this.$refs.restoreDom && this.$refs.restoreDom.valid();
+
                 return;
             }
 
@@ -176,36 +174,36 @@ export default {
             if (!this.password) {
                 this.$toast(this.$t('startCreate.input'), 'error');
                 this.focusPass();
+
                 return;
             }
 
-            let loginSuccess = () => {
+            const loginSuccess = () => {
                 if (!this.isLoading) {
                     return;
                 }
 
                 this.isLoading = false;
-                let activeAccount = this.$wallet.getActiveAccount();
+                const activeAccount = this.$wallet.getActiveAccount();
                 activeAccount.unlock();
 
-                this.$router.push({
-                    name: this.$wallet.lastPage || 'exchange'
-                });
+                this.$router.push({name: this.$wallet.lastPage || 'exchange'});
                 this.$wallet.clearLastPage();
             };
 
             this.isLoading = true;
-            this.$wallet.login(this.activeAccount, this.password).then((result) => {
+            this.$wallet.login(this.activeAccount, this.password).then(result => {
                 result && loginSuccess();
                 !result && this.$toast(this.$t('hint.pwErr'));
-            }).catch((err) => {
-                console.warn(err);
-                if (!this.isLoading) {
-                    return;
-                }
-                this.isLoading = false;
-                this.$toast(this.$t('hint.pwErr'));
-            });
+            })
+                .catch(err => {
+                    console.warn(err);
+                    if (!this.isLoading) {
+                        return;
+                    }
+                    this.isLoading = false;
+                    this.$toast(this.$t('hint.pwErr'));
+                });
         }
     }
 };

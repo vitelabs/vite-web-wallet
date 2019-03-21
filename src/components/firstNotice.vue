@@ -20,9 +20,7 @@ export default {
         this.isFirst = !localStorage.getItem('first');
     },
     data() {
-        return {
-            isFirst: false
-        };
+        return {isFirst: false};
     },
     methods: {
         close() {
@@ -49,7 +47,7 @@ export default {
     background: rgba(0, 0, 0, 0);
     z-index: 100;
 }
-.wrapper { 
+.wrapper {
     background: #fff;
     width: 90%;
     max-height: 600px;

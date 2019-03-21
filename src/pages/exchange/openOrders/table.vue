@@ -38,24 +38,26 @@ import { timer } from 'utils/asyncFlow';
 import d from 'dayjs';
 
 const VoteDifficulty = '201564160';
-let task=null;
+let task = null;
 
 export default {
-    components: { 
-        powProcess 
+    components: {
+        powProcess
     },
     props: {
         filterObj: {
             type: Object,
-            default: ()=>({})
+            default: () => {
+                return {};
+            }
         },
-        isEmbed:{
-            type:Boolean,
-            default:false
+        isEmbed: {
+            type: Boolean,
+            default: false
         }
     },
-    filters:{
-        d(v){
+    filters: {
+        d(v) {
             return d.unix(v).format('YYYY-MM-DD HH:mm');
         }
     },
@@ -66,7 +68,7 @@ export default {
             sortType: 1,
             acc: null,
             addr: '',
-            timer:null
+            timer: null
         };
     },
     methods: {
@@ -74,11 +76,12 @@ export default {
             this.acc = this.$wallet.getActiveAccount();
             if (!this.acc) return;
             this.acc && (this.addr = this.acc.getDefaultAddr());
+
             order({
                 address: this.addr,
                 status: 1,
-                pageNo:1,
-                pageSize:100,
+                pageNo: 1,
+                pageSize: 100,
                 ...this.filterObj
             }).then(data => {
                 this.list = data.orders;
@@ -86,74 +89,63 @@ export default {
         },
         cancel(order) {
             const failSubmit = e => {
-                const code =
-                    e && e.error ? e.error.code || -1 : e ? e.code : -1;
+                const code
+                    = e && e.error ? e.error.code || -1 : e ? e.code : -1;
                 if (code === -35002) {
-                    let startTime = new Date().getTime();
-                    const powTxt = Object.assign(
-                        {},
-                        this.$t('quotaConfirmPoW')
-                    );
+                    const startTime = new Date().getTime();
+                    const powTxt = Object.assign({},
+                        this.$t('quotaConfirmPoW'));
                     powTxt.leftBtn.click = () => {
-                        this.$router.push({
-                            name: 'walletQuota'
-                        });
+                        this.$router.push({name: 'walletQuota'});
                     };
                     (powTxt.rightBtn.click = () => {
                         this.$refs.pow
-                            .startPowTx(
-                                e.accountBlock,
+                            .startPowTx(e.accountBlock,
                                 startTime,
-                                VoteDifficulty
-                            )
+                                VoteDifficulty)
                             .then(successSubmit)
                             .catch(failSubmit);
                     }),
-                    (powTxt.closeBtn = { show: true });
+                    (powTxt.closeBtn = {show: true});
                     this.$confirm(powTxt);
                 } else {
-                    this.$toast(
-                        this.$t('exchangeOpenOrders.confirm.failToast'),
-                        e
-                    );
+                    this.$toast(this.$t('exchangeOpenOrders.confirm.failToast'),
+                        e);
                 }
             };
             const successSubmit = () => {
                 this.$toast(this.$t('exchangeOpenOrders.confirm.successToast'));
             };
-            this.acc.initPwd(
-                {
-                    submitTxt: this.$t('exchangeOpenOrders.confirm.submitTxt'),
-                    cancelTxt: this.$t('exchangeOpenOrders.confirm.cancelTxt'),
-                    submit: () => {
-                        cancelOrder({
-                            orderId: order.orderId,
-                            tradeToken: order.ftoken,
-                            side: order.side,
-                            quoteToken: order.ttoken
-                        })
-                            .then(successSubmit)
-                            .catch(e => {
-                                failSubmit(e);
-                            });
-                    }
-                },
-                true
-            );
+            this.acc.initPwd({
+                submitTxt: this.$t('exchangeOpenOrders.confirm.submitTxt'),
+                cancelTxt: this.$t('exchangeOpenOrders.confirm.cancelTxt'),
+                submit: () => {
+                    cancelOrder({
+                        orderId: order.orderId,
+                        tradeToken: order.ftoken,
+                        side: order.side,
+                        quoteToken: order.ttoken
+                    })
+                        .then(successSubmit)
+                        .catch(e => {
+                            failSubmit(e);
+                        });
+                }
+            },
+            true);
         }
     },
-    mounted(){
+    mounted() {
         this.update();
     },
     activated() {
-        if(this.isEmbed){
-            task=new timer(()=>this.update(),1000);
+        if (this.isEmbed) {
+            task = new timer(() => this.update(), 1000);
             task.start();
         }
-
     },
-    deactivated(){
-        task&&task.stop();
+    deactivated() {
+        task && task.stop();
     },
     watch: {
         filterObj() {
@@ -161,8 +153,8 @@ export default {
         }
     },
     computed: {
-        sortedList(){
-            return this.list.slice(0).sort((a,b)=>(b.date-a.date));
+        sortedList() {
+            return this.list.slice(0).sort((a, b) => (b.date - a.date));
         },
         currentMarketNmae() {
             return this.$store.getters.currentMarketName;

@@ -1,13 +1,13 @@
 <template>
-    <span @click="gotoNet" class="other-prod __pointer">{{ $t('btn.otherProd') }}</span>    
+    <span @click="gotoNet" class="other-prod __pointer">{{ $t('btn.otherProd') }}</span>
 </template>
 
 <script>
 export default {
     methods: {
         gotoNet() {
-            let locale = this.$i18n.locale === 'zh' ? 'zh/' : '';
-            window.open(`https://vite.net/${locale}`);
+            const locale = this.$i18n.locale === 'zh' ? 'zh/' : '';
+            window.open(`https://vite.net/${ locale }`);
         }
     }
 };

@@ -3,12 +3,12 @@
         <div class="__center-title">{{ $t('exchange.latestTx.title') }}</div>
         <div class="__center-tb-title">
             <span class="__center-tb-item">
-                {{ $t('exchange.priceTitle', { 
-                    price: activeTxPair && activeTxPair.ttokenShow ? activeTxPair.ttokenShow : '' 
+                {{ $t('exchange.priceTitle', {
+                    price: activeTxPair && activeTxPair.ttokenShow ? activeTxPair.ttokenShow : ''
                 }) }}
             </span>
             <span class="__center-tb-item">
-                {{ $t('exchange.amountTitle', { 
+                {{ $t('exchange.amountTitle', {
                     amount: activeTxPair && activeTxPair.ftokenShow ? activeTxPair.ftokenShow : ''
                 })}}
             </span>
@@ -17,7 +17,7 @@
 
         <loading loadingType="dot" class="ex-center-loading" v-show="isLoading"></loading>
         <div class="tx-list-wrapper">
-            <div class="__center-tb-row __pointer" @click="clickRow(tx)" 
+            <div class="__center-tb-row __pointer" @click="clickRow(tx)"
                  v-for="(tx, i) in latestTxList" :key="i">
                 <span class="__center-tb-item"  :class="{
                     'buy': tx.txSide === 0,
@@ -36,9 +36,7 @@ import BigNumber from 'utils/bigNumber';
 import loading from 'components/loading';
 
 export default {
-    components: {
-        loading
-    },
+    components: {loading},
     destroyed() {
         this.$store.dispatch('exStopLatestTimer');
     },
@@ -64,7 +62,8 @@ export default {
             if (!this[type]) {
                 return BigNumber.formatNum(num, fix);
             }
-            return BigNumber.formatNum(num, this[type].tokenDigit, fix); 
+
+            return BigNumber.formatNum(num, this[type].tokenDigit, fix);
         },
         getDate(timestamp) {
             return date(timestamp, 'zh', true);

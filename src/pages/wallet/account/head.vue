@@ -16,9 +16,9 @@
             </form>
         </div>
 
-        <vite-address :title="$t('wallet.address')" :address="account.addr" 
+        <vite-address :title="$t('wallet.address')" :address="account.addr"
                       :addressQrcode="addressStr"></vite-address>
-        
+
         <div class="btn-group">
             <div class="btn__small __pointer __btn-test" @click="getTestToken" :class="{'un_clickable':!getTestTokenAble}">
                 <span>{{ $t('wallet.getTestToken') }}</span>
@@ -35,15 +35,13 @@
 <script>
 import Vue from 'vue';
 import viteAddress from 'components/address';
-import { stringify } from 'utils/viteSchema';
-import { getTestToken } from 'services/testToken';
+import {stringify} from 'utils/viteSchema';
+import {getTestToken} from 'services/testToken';
 
 let activeAccount = null;
 
 export default {
-    components: { 
-        viteAddress
-    },
+    components: {viteAddress},
     data() {
         return {
             account: {},
@@ -59,7 +57,7 @@ export default {
     mounted() {
         activeAccount = this.$wallet.getActiveAccount();
         this.account = this.getSimpleAcc();
-        this.addressStr = stringify({ targetAddress: this.account.addr });
+        this.addressStr = stringify({targetAddress: this.account.addr});
     },
     computed: {
         netStatus() {
@@ -68,33 +66,35 @@ export default {
     },
     methods: {
         goDetail() {
-            let locale = this.$i18n.locale === 'zh' ? 'zh/' : '';
-            window.open(`${process.env.viteNet}${locale}account/${this.account.addr}`);
+            const locale = this.$i18n.locale === 'zh' ? 'zh/' : '';
+            window.open(`${ process.env.viteNet }${ locale }account/${ this.account.addr }`);
         },
 
         getTestToken() {
-            if (!this.getTestTokenAble){
+            if (!this.getTestTokenAble) {
                 return;
             }
             if (!this.netStatus) {
                 this.$toast(this.$t('hint.noNet'));
+
                 return;
             }
 
             if (!this.account || !this.account.addr) {
-                this.$toast( this.$t('wallet.hint.tErr') );
+                this.$toast(this.$t('wallet.hint.tErr'));
             }
-            this.getTestTokenAble=false;
+            this.getTestTokenAble = false;
             getTestToken(this.account.addr).then(() => {
-                this.$toast( this.$t('wallet.hint.token') );
-                setTimeout(()=>{
-                    this.getTestTokenAble=true;
-                },3000);
-            }).catch((err) => {
-                this.getTestTokenAble=true;
-                console.warn(err);
-                this.$toast( this.$t('wallet.hint.tErr') );
-            });
+                this.$toast(this.$t('wallet.hint.token'));
+                setTimeout(() => {
+                    this.getTestTokenAble = true;
+                }, 3000);
+            })
+                .catch(err => {
+                    this.getTestTokenAble = true;
+                    console.warn(err);
+                    this.$toast(this.$t('wallet.hint.tErr'));
+                });
         },
         getSimpleAcc() {
             return {
@@ -123,18 +123,21 @@ export default {
         rename() {
             if (!this.editName) {
                 this.clearEditName();
+
                 return;
             }
 
             if (!/^[a-zA-Z0-9_\u4e00-\u9fa5]+$/g.test(this.editName)) {
                 this.$toast(this.$t('startCreate.hint.name'), 'error');
                 this.clearEditName();
+
                 return;
             }
 
             if (this.editName.length > 32) {
                 this.$toast(this.$t('startCreate.hint.nameLong'), 'error');
                 this.clearEditName();
+
                 return;
             }
 
@@ -189,7 +192,7 @@ export default {
         font-size: 24px;
         color: #1d2024;
         text-align: left;
-        font-family: $font-bold, arial, sans-serif;    
+        font-family: $font-bold, arial, sans-serif;
         max-width: 26%;
         word-break: break-all;
         .name {

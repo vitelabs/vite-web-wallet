@@ -26,22 +26,22 @@
 
 <script>
 export default {
-    props:{
-        close:{
-            type:Function,
-            default:()=>{}
+    props: {
+        close: {
+            type: Function,
+            default: () => {}
         },
-        heads:{
-            type:Array,
-            default:()=>[]
+        heads: {
+            type: Array,
+            default: () => []
         },
-        list:{
-            type:Array,
-            default:()=>[]
+        list: {
+            type: Array,
+            default: () => []
         },
-        title:{
-            type:String,
-            default:''
+        title: {
+            type: String,
+            default: ''
         }
     }
 };

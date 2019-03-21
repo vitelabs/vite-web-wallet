@@ -1,4 +1,4 @@
-import { tokenDetail } from 'services/exchange';
+import {tokenDetail} from 'services/exchange';
 
 const state = {
     ttoken: null,
@@ -15,8 +15,9 @@ const mutations = {
 };
 
 const actions = {
-    exFetchActiveTokens({ rootState, dispatch, commit }) {
-        let activeTxPair = rootState.exchangeActiveTxPair.activeTxPair;
+    exFetchActiveTokens({rootState, dispatch, commit}) {
+        const activeTxPair = rootState.exchangeActiveTxPair.activeTxPair;
+
         if (!activeTxPair) {
             commit('exSetActiveTtoken', null);
             commit('exSetActiveFtoken', null);
@@ -26,25 +27,27 @@ const actions = {
         dispatch('exFetchActiveTtoken', activeTxPair.ttoken);
         dispatch('exFetchActiveFtoken', activeTxPair.ftoken);
     },
-    exFetchActiveTtoken({ rootState, commit }, tokenId) {
-        tokenDetail({ tokenId }).then((data) => {
-            let activeTxPair = rootState.exchangeActiveTxPair.activeTxPair;
+    exFetchActiveTtoken({rootState, commit}, tokenId) {
+        tokenDetail({tokenId}).then(data => {
+            const activeTxPair = rootState.exchangeActiveTxPair.activeTxPair;
             if (tokenId !== activeTxPair.ttoken) {
                 return;
             }
+
             commit('exSetActiveTtoken', data);
-        }).catch((err) => {
+        }).catch(err => {
             console.warn(err);
         });
     },
-    exFetchActiveFtoken({ rootState, commit }, tokenId) {
-        tokenDetail({ tokenId }).then((data) => {
-            let activeTxPair = rootState.exchangeActiveTxPair.activeTxPair;
+    exFetchActiveFtoken({rootState, commit}, tokenId) {
+        tokenDetail({tokenId}).then(data => {
+            const activeTxPair = rootState.exchangeActiveTxPair.activeTxPair;
             if (tokenId !== activeTxPair.ftoken) {
                 return;
             }
+
             commit('exSetActiveFtoken', data);
-        }).catch((err) => {
+        }).catch(err => {
             console.warn(err);
         });
     }

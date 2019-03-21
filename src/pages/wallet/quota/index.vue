@@ -7,10 +7,10 @@
         <pow-process ref="powProcess" @pow-finish="closeConfirm"></pow-process>
 
         <div v-if="showConfirmType" class="gray-wrapper">
-            <confirm v-if="showConfirmType === 'cancel'" 
+            <confirm v-if="showConfirmType === 'cancel'"
                      :title="$t(`walletQuota.withdrawalStaking`)" :closeIcon="false"
                      :leftBtnTxt="$t(`walletQuota.confirm.cancel.leftBtn`)" :leftBtnClick="closeConfirm"
-                     :rightBtnTxt="$t(`walletQuota.confirm.cancel.rightBtn`)" 
+                     :rightBtnTxt="$t(`walletQuota.confirm.cancel.rightBtn`)"
                      :rightBtnClick="submit" :btnUnuse="!!cancelUnuse">
                 {{ $t(`walletQuota.confirm.cancel.describe`, { amount: activeAmountLimit }) }}
                 <div class="cancel-amount" v-show="amountErr">{{ amountErr }}</div>
@@ -19,14 +19,14 @@
             </confirm>
         </div>
 
-        <div v-show="!loadingToken">            
+        <div v-show="!loadingToken">
             <div class="content">
                 <my-quota class="my-quota _content_border"></my-quota>
                 <pledge-tx class="pledge-tx _content_border"
                            :sendPledgeTx="sendPledgeTx" :tokenInfo="tokenInfo"></pledge-tx>
             </div>
 
-            <list ref="txList" :sendPledgeTx="sendPledgeTx" 
+            <list ref="txList" :sendPledgeTx="sendPledgeTx"
                   :tokenInfo="tokenInfo"
                   :showConfirm="showConfirm"></list>
         </div>
@@ -46,24 +46,23 @@ import viteInput from 'components/viteInput';
 import BigNumber from 'utils/bigNumber';
 
 export default {
-    components: {
-        quotaHead, myQuota, pledgeTx, confirm, list, powProcess, loading, viteInput
-    },
+    components: {quotaHead, myQuota, pledgeTx, confirm, list, powProcess, loading, viteInput},
     created() {
         this.tokenInfo = this.$store.getters.viteTokenInfo;
 
         if (!this.tokenInfo) {
             this.loadingToken = true;
-            this.$store.dispatch('fetchTokenInfo').then((tokenInfo) => {
+            this.$store.dispatch('fetchTokenInfo').then(tokenInfo => {
                 this.loadingToken = false;
                 this.tokenInfo = tokenInfo;
-            }).catch((err) => {
-                console.warn(err);
-            });
+            })
+                .catch(err => {
+                    console.warn(err);
+                });
         }
     },
     data() {
-        let activeAccount = this.$wallet.getActiveAccount();
+        const activeAccount = this.$wallet.getActiveAccount();
 
         return {
             activeAccount,
@@ -91,30 +90,32 @@ export default {
                 return;
             }
 
-            let result = this.$validAmount(this.cancelAmount, this.tokenInfo.decimals);
+            const result = this.$validAmount(this.cancelAmount, this.tokenInfo.decimals);
             if (!result) {
                 this.amountErr = this.$t('hint.amtFormat');
+
                 return false;
             }
 
-            let isEqualBalance = BigNumber.compared(this.cancelAmount, this.activeAmountLimit);
+            const isEqualBalance = BigNumber.compared(this.cancelAmount, this.activeAmountLimit);
 
             if (BigNumber.isEqual(this.cancelAmount, 0) || isEqualBalance > 0) {
-                this.amountErr = this.$t('walletQuota.maxAmt', {
-                    amount: this.activeAmountLimit
-                });
+                this.amountErr = this.$t('walletQuota.maxAmt', {amount: this.activeAmountLimit});
+
                 return false;
             }
 
             const limitAmt = 1000;
-            let cancelBalance = BigNumber.minus(this.activeAmountLimit, this.cancelAmount);
-            if ( BigNumber.compared(cancelBalance, limitAmt) < 0 && 
-                 !BigNumber.isEqual(cancelBalance, 0) ) {
-                this.amountErr = this.$t('walletQuota.cancelLimitAmt', { num: limitAmt });
-                return false;                
+            const cancelBalance = BigNumber.minus(this.activeAmountLimit, this.cancelAmount);
+            if (BigNumber.compared(cancelBalance, limitAmt) < 0
+                 && !BigNumber.isEqual(cancelBalance, 0)) {
+                this.amountErr = this.$t('walletQuota.cancelLimitAmt', {num: limitAmt});
+
+                return false;
             }
 
             this.amountErr = '';
+
             return true;
         },
 
@@ -140,12 +141,12 @@ export default {
                 return;
             }
 
-            let amount = this.cancelAmount;
+            const amount = this.cancelAmount;
             this.closeConfirm();
 
             this.activeAccount.initPwd({
                 submit: () => {
-                    let txListEle = this.$refs.txList;
+                    const txListEle = this.$refs.txList;
                     if (!txListEle) {
                         return;
                     }
@@ -154,36 +155,38 @@ export default {
             });
         },
 
-        sendPledgeTx({
-            toAddress, amount
-        }, type, cb) {
+        sendPledgeTx({toAddress, amount}, type, cb) {
             if (!this.netStatus) {
                 this.$toast(this.$t('hint.noNet'));
                 cb && cb(false);
+
                 return;
             }
 
             this.activeAccount = this.$wallet.getActiveAccount();
 
-            amount = BigNumber.toMin(amount || 0, this.tokenInfo.decimals);     
+            amount = BigNumber.toMin(amount || 0, this.tokenInfo.decimals);
             this.activeAccount[type]({
                 tokenId: this.tokenInfo.tokenId,
                 toAddress,
                 amount
             }).then(() => {
                 cb && cb(true);
-            }).catch((err) => {
-                console.warn(err);
-                if (err && err.error && err.error.code && err.error.code === -35002) {
-                    this.$refs.powProcess.startPowTx(err.accountBlock, 0).then(() => {
-                        cb && cb(true);
-                    }).catch(() => {
-                        cb && cb(false, err);
-                    });
-                    return;
-                }
-                cb && cb(false, err);
-            });
+            })
+                .catch(err => {
+                    console.warn(err);
+                    if (err && err.error && err.error.code && err.error.code === -35002) {
+                        this.$refs.powProcess.startPowTx(err.accountBlock, 0).then(() => {
+                            cb && cb(true);
+                        })
+                            .catch(() => {
+                                cb && cb(false, err);
+                            });
+
+                        return;
+                    }
+                    cb && cb(false, err);
+                });
         }
     }
 };

@@ -11,33 +11,34 @@ export default {
             return;
         }
 
-        let data = getList() || [];
+        const data = getList() || [];
         if (index > -1 && index < data.length) {
             data.splice(index, 1);
         }
 
         let i;
-        let saveList = [];
+        const saveList = [];
         let saveIndex = -1;
 
-        let pushWalletAcc = (acc) => {
+        const pushWalletAcc = acc => {
             if (saveIndex === -1) {
                 saveIndex = saveList.length;
                 saveList.push(acc);
+
                 return;
             }
 
-            let saveAcc = saveList[saveIndex];
+            const saveAcc = saveList[saveIndex];
             acc.addrNum = acc.addrNum >= saveAcc.addrNum ? acc.addrNum : saveAcc.addrNum;
             saveList[saveIndex] = acc;
         };
 
-        for(i=0; i<data.length; i++) {
-            let acc = data[i];
+        for (i = 0; i < data.length; i++) {
+            const acc = data[i];
 
             // Wallet account repeat
-            if ((acc.id && account.id && account.id === acc.id) ||
-                (acc.entropy && account.entropy && account.entropy === acc.entropy)) {
+            if ((acc.id && account.id && account.id === acc.id)
+                || (acc.entropy && account.entropy && account.entropy === acc.entropy)) {
                 account.addrNum = account.addrNum >= acc.addrNum ? account.addrNum : acc.addrNum;
                 pushWalletAcc(account);
             } else if (acc.addr && account.addr && account.addr === acc.addr) {
@@ -66,11 +67,10 @@ export default {
     getLast() {
         return storage.getItem(LAST_KEY);
     },
-    setLast(acc) {  
+    setLast(acc) {
         storage.setItem(LAST_KEY, acc);
     }
 };
-
 
 
 function getList() {

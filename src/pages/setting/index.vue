@@ -25,12 +25,10 @@ import mnemonic from './mnemonic.vue';
 import autoLogout from './autoLogout.vue';
 
 export default {
-    components: {
-        layout, accList, lang, mnemonic, autoLogout
-    },
+    components: {layout, accList, lang, mnemonic, autoLogout},
     data() {
-        let activeAccount = this.$wallet.getActiveAccount();
-        let showPassWrapper = activeAccount ? activeAccount.type === 'wallet' : false;
+        const activeAccount = this.$wallet.getActiveAccount();
+        const showPassWrapper = activeAccount ? activeAccount.type === 'wallet' : false;
 
         return {
             isLogin: !!this.$wallet.isLogin,
@@ -39,7 +37,7 @@ export default {
             showPassWrapper,
             pass: '',
             lock: true,
-            isTestEnv: process.env.NODE_ENV === 'dev' || process.env.NODE_ENV === 'test' || process.env.NODE_ENV === 'testout' 
+            isTestEnv: process.env.NODE_ENV === 'dev' || process.env.NODE_ENV === 'test' || process.env.NODE_ENV === 'testout'
         };
     },
     methods: {
@@ -49,19 +47,20 @@ export default {
             }
 
             if (!this.pass) {
-                this.$toast( this.$t('hint.pwErr') );
+                this.$toast(this.$t('hint.pwErr'));
+
                 return;
             }
 
             this.isSubmiting = true;
-            this.activeAccount.verify(this.pass).then((result) => {
+            this.activeAccount.verify(this.pass).then(result => {
                 this.isSubmiting = false;
                 this.lock = !result;
-                this.lock && this.$toast( this.$t('hint.pwErr') );
+                this.lock && this.$toast(this.$t('hint.pwErr'));
             }).catch(() => {
                 this.isSubmiting = false;
                 this.lock = true;
-                this.$toast( this.$t('hint.pwErr') );
+                this.$toast(this.$t('hint.pwErr'));
             });
         }
     }

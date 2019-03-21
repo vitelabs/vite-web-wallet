@@ -27,7 +27,7 @@
                 text: 'Token',
                 cell: 'tokenSymbol'
             }]" :contentList="transList" :clickRow="goDetail">
-                <pagination class="__tb_pagination" :currentPage="currentPage + 1" 
+                <pagination class="__tb_pagination" :currentPage="currentPage + 1"
                             :totalPage="totalPage" :toPage="toPage"></pagination>
             </table-list>
 
@@ -44,7 +44,7 @@
                 text: $t('walletTransList.sum'),
                 cell: 'smallAmount'
             }]" :contentList="transList" :clickRow="goDetail">
-                <pagination class="__tb_pagination" :currentPage="currentPage + 1" 
+                <pagination class="__tb_pagination" :currentPage="currentPage + 1"
                             :totalPage="totalPage" :toPage="toPage"></pagination>
             </table-list>
         </div>
@@ -63,49 +63,51 @@ import pagination from 'components/pagination.vue';
 import tableList from 'components/tableList.vue';
 import secTitle from 'components/secTitle';
 import date from 'utils/date.js';
-import { timer } from 'utils/asyncFlow';
+import {timer} from 'utils/asyncFlow';
 import BigNumber from 'utils/bigNumber';
 import ellipsisAddr from 'utils/ellipsisAddr.js';
 
 let transListInst = null;
-let txImgs = [
-    txRegImg, 
-    txRegImg, 
-    txRegImg, 
-    txRewardImg, 
-    txVoteImg, 
-    txVoteImg, 
-    txQuotaImg, 
-    txQuotaImg, 
-    txTokenImg, 
-    txTokenImg, 
-    txTokenImg, 
-    txTokenImg, 
-    txTokenImg, 
-    txTransImg, 
-    txTransImg, 
-    txTransImg, 
-    txTransImg, 
-    txTransImg, 
-    txTransImg, 
-    txTransImg, 
+const txImgs = [
+    txRegImg,
+    txRegImg,
+    txRegImg,
+    txRewardImg,
+    txVoteImg,
+    txVoteImg,
+    txQuotaImg,
+    txQuotaImg,
+    txTokenImg,
+    txTokenImg,
+    txTokenImg,
+    txTokenImg,
+    txTokenImg,
+    txTokenImg,
+    txTransImg,
+    txTransImg,
+    txTransImg,
+    txTransImg,
+    txTransImg,
+    txTransImg,
+    txTransImg,
+    txTransImg,
+    txTransImg,
     txTransImg
 ];
 
 export default {
-    components: {
-        pagination, tableList, secTitle
-    },
+    components: {pagination, tableList, secTitle},
     mounted() {
         this.currentPage = this.$store.state.transList.currentPage;
         this.startLoopTransList();
     },
     data() {
-        let activeAccount = this.$wallet.getActiveAccount();
-        let address = activeAccount.getDefaultAddr();
+        const activeAccount = this.$wallet.getActiveAccount();
+        const address = activeAccount.getDefaultAddr();
+
         return {
             acc: activeAccount,
-            address, 
+            address,
             currentPage: this.$store.state.transList.currentPage
         };
     },
@@ -114,55 +116,56 @@ export default {
             return this.$store.getters.totalPage;
         },
         pageNumber() {
-            return `${this.currentPage + 1}/${this.totalPage}`;
+            return `${ this.currentPage + 1 }/${ this.totalPage }`;
         },
         transList() {
-            let transList = this.$store.getters.transList;
-            let nowList = [];
+            const transList = this.$store.getters.transList;
+            const nowList = [];
 
-            transList.forEach((trans) => {
-                let txType = !trans.rawData.txType && trans.rawData.txType !== 0 ? txImgs.length - 1 : trans.rawData.txType;
-                let typeImg = `<img class="icon" src='${txImgs[txType] ? txImgs[txType] : txImgs[15]}'/>`;
+            transList.forEach(trans => {
+                const txType = !trans.rawData.txType && trans.rawData.txType !== 0 ? txImgs.length - 1 : trans.rawData.txType;
+                const typeImg = `<img class="icon" src='${ txImgs[txType] ? txImgs[txType] : txImgs[15] }'/>`;
 
-                let status = ['unconfirmed', 'confirms', 'confirmed'][trans.status];
-                let statusClass = status === 'confirmed' ? 'green' : 
-                    status === 'unconfirmed' ? 'pink': 'blue';
-                let statusText = this.$t(`walletTransList.status.${status}`) + (status === 'confirms' ? `(${trans.confirms})` : '');
+                const status = [ 'unconfirmed', 'confirms', 'confirmed' ][trans.status];
+                const statusClass = status === 'confirmed' ? 'green'
+                    : status === 'unconfirmed' ? 'pink' : 'blue';
+                const statusText = this.$t(`walletTransList.status.${ status }`) + (status === 'confirms' ? `(${ trans.confirms })` : '');
 
-                let isZero = BigNumber.isEqual(trans.amount, 0);
+                const isZero = BigNumber.isEqual(trans.amount, 0);
                 let amount = trans.amount;
                 if (!isZero) {
-                    amount = trans.isSend ? ('-' + trans.amount) : ('+' + trans.amount);
+                    amount = trans.isSend ? (`-${ trans.amount }`) : (`+${ trans.amount }`);
                 }
 
                 nowList.push({
-                    type: typeImg + this.$t(`txType.${txType}`),
+                    type: typeImg + this.$t(`txType.${ txType }`),
                     smallType: typeImg,
                     date: date(trans.timestamp, this.$i18n.locale),
-                    status: `<span class="${statusClass}">${statusText}</span>`,
+                    status: `<span class="${ statusClass }">${ statusText }</span>`,
                     hash: trans.rawData.hash,
                     transAddr: ellipsisAddr(trans.transAddr),
                     smallTransAddr: ellipsisAddr(trans.transAddr, 6),
-                    amount: `<span class="${trans.isSend ? 'red' : 'green'}">${amount}</span>`,
-                    smallAmount: `<span class="${trans.isSend ? 'red' : 'green'}">${amount}</span> ` + trans.tokenSymbol,
+                    amount: `<span class="${ trans.isSend ? 'red' : 'green' }">${ amount }</span>`,
+                    smallAmount: `<span class="${ trans.isSend ? 'red' : 'green' }">${ amount }</span> ${ trans.tokenSymbol }`,
                     tokenSymbol: trans.tokenSymbol,
                     rawData: trans.rawData
                 });
             });
+
             return nowList;
-        },
+        }
     },
     beforeDestroy() {
         this.stopLoopTransList();
     },
     methods: {
         goDetail(trans) {
-            let locale = this.$i18n.locale === 'zh' ? 'zh/' : '';
-            window.open(`${process.env.viteNet}${locale}transaction/${trans.rawData.hash}`);
+            const locale = this.$i18n.locale === 'zh' ? 'zh/' : '';
+            window.open(`${ process.env.viteNet }${ locale }transaction/${ trans.rawData.hash }`);
         },
 
         toPage(pageNumber) {
-            let pageIndex = pageNumber - 1;
+            const pageIndex = pageNumber - 1;
             if ((pageIndex >= this.totalPage && pageIndex) || pageIndex < 0) {
                 return;
             }
@@ -170,19 +173,18 @@ export default {
             this.currentPage = pageIndex;
             this.stopLoopTransList();
 
-            this.fetchTransList(this.currentPage, true).then((data)=>{
+            this.fetchTransList(this.currentPage, true).then(data => {
                 data && this.$refs.tableContent && (this.$refs.tableContent.scrollTop = 0);
                 this.startLoopTransList();
-            }).catch(()=>{
-                this.startLoopTransList();
-            });
+            })
+                .catch(() => {
+                    this.startLoopTransList();
+                });
         },
 
         startLoopTransList() {
             this.stopLoopTransList();
-            transListInst = new timer(()=>{
-                return this.fetchTransList(this.currentPage);
-            }, 2000);
+            transListInst = new timer(() => this.fetchTransList(this.currentPage), 2000);
             transListInst.start();
         },
         stopLoopTransList() {
@@ -242,7 +244,7 @@ export default {
 <style lang="scss">
 @import "~assets/scss/vars.scss";
 
-.tType {    
+.tType {
     min-width: 230px;
     width: 15%;
 }
@@ -286,7 +288,7 @@ export default {
     margin-bottom: -2px;
 }
 
-@media only screen and (max-width: 500px) {    
+@media only screen and (max-width: 500px) {
     .small-trans.__tb{
         min-width: 0;
     }

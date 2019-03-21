@@ -26,9 +26,9 @@
                 <span class="token-title">{{ $t('exchange.head.tokenName') }} :</span>
                 <span class="active">{{ tokenDetail.tokenName || '--' }}</span>
             </div>
-            <div class="token-row">
-                <span class="token-title">{{ $t('exchange.head.tokenShow') }} :</span>
-                {{ tokenDetail.tokenShow || '--' }}
+            <div class="token-row __pointer">
+                <span class="token-title">{{ $t('exchange.head.originalSymbol') }} :</span>
+                <span>{{ tokenDetail.originalSymbol || '--' }}</span>
             </div>
             <div class="token-row">
                 <span class="token-title">{{ $t('exchange.head.tokenId') }} :</span>
@@ -38,9 +38,9 @@
                 <span class="token-title">{{ $t('exchange.head.publisher') }} :</span>
                 <span class="active">{{ tokenDetail.publisher || '--' }}</span>
             </div>
-            <div class="token-row">
-                <span class="token-title">{{ $t('exchange.head.total') }} :</span>
-                {{ tokenDetail.total || '--' }}
+            <div class="token-row __pointer">
+                <span class="token-title">{{ $t('exchange.head.gateway') }} :</span>
+                <span>{{ tokenDetail.gateway || '--' }}</span>
             </div>
             <div class="token-row">
                 <span class="token-title">{{ $t('exchange.head.tokenDigit') }} :</span>
@@ -51,8 +51,24 @@
                 {{ tokenDetail.publisherDate || '--' }}
             </div>
             <div class="token-row">
+                <span class="token-title">{{ $t('exchange.head.total') }} :</span>
+                {{ tokenDetail.total || '--' }}
+            </div>
+            <div class="token-row">
+                <span class="token-title">{{ $t('exchange.head.website') }} :</span>
+                {{ tokenDetail.website || '--' }}
+            </div>
+            <div class="token-row">
+                <span class="token-title">{{ $t('exchange.head.explorer') }} :</span>
+                {{ tokenDetail.links && tokenDetail.links.explorer ? tokenDetail.links.explorer : '--' }}
+            </div>
+            <div class="token-row">
                 <span class="token-title">{{ $t('exchange.head.type') }} :</span>
                 {{ tokenDetail.tokenType || '--' }}
+            </div>
+            <div class="token-row">
+                <span class="token-title">{{ $t('exchange.head.overview') }} :</span>
+                {{ tokenDetail.overview && tokenDetail.overview[$i18n.locale] ? tokenDetail.overview[$i18n.locale] : '--' }}
             </div>
         </div>
     </div>
@@ -65,9 +81,7 @@ import getTokenIcon from 'utils/getTokenIcon';
 
 export default {
     data() {
-        return {
-            showTokenType: ''
-        };
+        return {showTokenType: ''};
     },
     computed: {
         ttokenDetail() {
@@ -89,10 +103,6 @@ export default {
             return this.getTokenIcon(this.ttokenDetail.tokenId);
         },
         tokenDetail() {
-
-
-
-
             if (!this.showTokenType) {
                 return {};
             }
@@ -108,15 +118,16 @@ export default {
 
             detail = Object.assign({}, detail);
             detail.publisher = ellipsisAddr(detail.publisher);
-            detail.tokenType = detail.tokenType === 0 ? this.$t('exchange.head.tokenType0') :
-                detail.tokenType === 1 ? this.$t('exchange.head.tokenType1') : '';
+            detail.tokenType = detail.tokenType === 0 ? this.$t('exchange.head.tokenType0')
+                : detail.tokenType === 1 ? this.$t('exchange.head.tokenType1') : '';
             detail.publisherDate = detail.publisherDate ? date(detail.publisherDate, 'zh') : '';
+
             return detail;
         }
     },
     methods: {
         getTokenIcon(tokenId) {
-            let defaultToken = this.$store.state.ledger.tokenInfoMaps[tokenId];
+            const defaultToken = this.$store.state.ledger.tokenInfoMaps[tokenId];
             if (defaultToken && defaultToken.icon) {
                 return defaultToken.icon;
             }
@@ -126,22 +137,21 @@ export default {
             this.showTokenType = type;
         },
         hideToken(e) {
-            let tContainer = this.$refs.tContainer;
-            if (!tContainer || 
-                e.target === tContainer ||
-                tContainer.contains( e.target )) {
+            const tContainer = this.$refs.tContainer;
+            if (!tContainer
+                || e.target === tContainer
+                || tContainer.contains(e.target)) {
                 return;
             }
-
             this.showTokenType = '';
         },
         goNetToken(tokenId) {
-            let locale = this.$i18n.locale === 'zh' ? 'zh/' : '';
-            window.open(`${process.env.viteNet}${locale}token/${tokenId}`);
+            const locale = this.$i18n.locale === 'zh' ? 'zh/' : '';
+            window.open(`${ process.env.viteNet }${ locale }token/${ tokenId }`);
         },
         goNetAddr(addr) {
-            let locale = this.$i18n.locale === 'zh' ? 'zh/' : '';
-            window.open(`${process.env.viteNet}${locale}account/${addr}`);
+            const locale = this.$i18n.locale === 'zh' ? 'zh/' : '';
+            window.open(`${ process.env.viteNet }${ locale }account/${ addr }`);
         }
     }
 };
@@ -187,7 +197,7 @@ export default {
 
     .detail {
         position: absolute;
-        left: 0;    
+        left: 0;
         top: 50px;
         z-index: 1;
         background: rgba(255,255,255,1);

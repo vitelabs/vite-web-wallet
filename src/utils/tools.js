@@ -1,4 +1,4 @@
-import { utils, hdAddr } from '@vite/vitejs';
+import {utils, hdAddr} from '@vite/vitejs';
 
 export const encoder = utils.encoder;
 

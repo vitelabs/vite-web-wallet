@@ -84,15 +84,13 @@
 </template>
 
 <script>
-import { getPowNonce } from 'services/pow';
+import {getPowNonce} from 'services/pow';
 import viteInput from 'components/viteInput';
 import tableList from 'components/tableList.vue';
 import $ViteJS from 'utils/viteClient';
 
 export default {
-    components: {
-        viteInput, tableList
-    },
+    components: {viteInput, tableList},
     created() {
         this.getOwnerToken();
     },
@@ -121,7 +119,7 @@ export default {
             this.ownerBurnOnly = ownerBurnOnly;
         },
         mintage() {
-            let activeAccount = this.$wallet.getActiveAccount();
+            const activeAccount = this.$wallet.getActiveAccount();
 
             activeAccount.mintage({
                 decimals: this.decimals,
@@ -133,39 +131,43 @@ export default {
                 tokenSymbol: this.tokenSymbol
             }).then(() => {
                 this.$toast('Mintage success');
-            }).catch((err) => {
-                this.$toast(`Mintage fail. ${err.error.message || err.error.msg}`);
+            })
+                .catch(err => {
+                    this.$toast(`Mintage fail. ${ err.error.message || err.error.msg }`);
 
-                if (err.error.code !== -35002) {
-                    return;
-                }
+                    if (err.error.code !== -35002) {
+                        return;
+                    }
 
-                let accountBlock = err.accountBlock;
-                getPowNonce(accountBlock.accountAddress, accountBlock.prevHash).then((data) => {
-                    accountBlock.difficulty = data.difficulty;
-                    accountBlock.nonce = data.nonce;
+                    const accountBlock = err.accountBlock;
+                    getPowNonce(accountBlock.accountAddress, accountBlock.prevHash).then(data => {
+                        accountBlock.difficulty = data.difficulty;
+                        accountBlock.nonce = data.nonce;
 
-                    activeAccount.sendRawTx(accountBlock).then(() => {
-                        this.$toast('Mintage success');
-                    }).catch((err) => {
-                        this.$toast(`Mintage fail. ${err.error.message || err.error.msg}`);
-                        console.warn(err);
-                    });
-                }).catch((err) => {
-                    this.$toast('Pow failed.');
-                    console.warn(err);
+                        activeAccount.sendRawTx(accountBlock).then(() => {
+                            this.$toast('Mintage success');
+                        })
+                            .catch(err => {
+                                this.$toast(`Mintage fail. ${ err.error.message || err.error.msg }`);
+                                console.warn(err);
+                            });
+                    })
+                        .catch(err => {
+                            this.$toast('Pow failed.');
+                            console.warn(err);
+                        });
                 });
-            });
         },
         getOwnerToken() {
-            let activeAccount = this.$wallet.getActiveAccount();
+            const activeAccount = this.$wallet.getActiveAccount();
 
-            $ViteJS.mintage.getTokenInfoListByOwner(activeAccount.getDefaultAddr()).then((data) => {
+            $ViteJS.mintage.getTokenInfoListByOwner(activeAccount.getDefaultAddr()).then(data => {
                 this.tokenList = data;
-            }).catch(err => {
-                console.warn(err);
-                this.$toast('Get list failed');
-            });
+            })
+                .catch(err => {
+                    console.warn(err);
+                    this.$toast('Get list failed');
+                });
         }
     }
 };
@@ -216,7 +218,7 @@ export default {
             height: 12px;
             border-radius: 10px;
             border: 1px solid rgba(188,196,201,1);
-            margin-right: 4px; 
+            margin-right: 4px;
             margin-bottom: -2px;
             &.active {
                 &::after {
@@ -241,7 +243,7 @@ export default {
 <style lang="scss">
 @import "~assets/scss/vars.scss";
 
-.mintage-table-big-item {    
+.mintage-table-big-item {
     min-width: 250px;
 }
 .mintage-table-small-item {

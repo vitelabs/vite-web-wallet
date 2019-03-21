@@ -18,20 +18,17 @@ import Table from './table';
 import Search from 'components/search';
 
 export default {
-    components: {
-        Table, Search
-    },
+    components: {Table, Search},
     data() {
-        // optype: 1充值，2提现； optime单位是秒；
-    
+        // Optype: 1充值，2提现； optime单位是秒；
+
         return {
             hideZero: false,
             filterKey: '',
             acc: null,
             addr: ''
         };
-    },
-
+    }
 };
 </script>
 

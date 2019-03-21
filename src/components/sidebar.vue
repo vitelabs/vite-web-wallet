@@ -8,7 +8,7 @@
 
             <div class="_top">
                 <div v-for="(name, index) in menuTops" :key="index"
-                     class="__pointer icon" :class="{ 'active': active.indexOf(name) >= 0 }" 
+                     class="__pointer icon" :class="{ 'active': active.indexOf(name) >= 0 }"
                      @click="go(name)">
                     <img v-show="active.indexOf(name) < 0" :src="icon[name]" />
                     <img v-show="active.indexOf(name) >= 0" :src="icon[`${name}Active`]"  />
@@ -16,8 +16,8 @@
             </div>
 
             <div class="_bottom">
-                <div v-for="(name, index) in menuBottoms" :key="index" 
-                     class="icon __pointer" :class="{ 'active': active === name }" 
+                <div v-for="(name, index) in menuBottoms" :key="index"
+                     class="icon __pointer" :class="{ 'active': active === name }"
                      @click="go(name)" @mouseenter="enterLogout(name)" @mouseleave="leaveLogout(name)">
                     <img v-show="active !== name && (name !== iconHover)" :src="icon[name]" />
                     <img v-show="active === name || (name === iconHover) " :src="icon[`${name}Active`]"  />
@@ -43,9 +43,7 @@ import exchange from 'assets/imgs/exchange_default.svg';
 import exchangeActive from 'assets/imgs/exchange_pressed.svg';
 
 export default {
-    components: {
-        testNotice
-    },
+    components: {testNotice},
     props: {
         active: {
             type: String,
@@ -53,9 +51,7 @@ export default {
         },
         menuList: {
             type: Array,
-            default: () => {
-                return [];
-            }
+            default: () => []
         },
         go: {
             type: Function,
@@ -80,7 +76,7 @@ export default {
                 loginActive,
                 index: exchange,
                 indexActive: exchange
-            },
+            }
         };
     },
     computed: {

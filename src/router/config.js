@@ -1,11 +1,8 @@
-/** eg
-startImport: {
-     alias: '/index'
-}
-*/
+/**
+ * Eg
+ * startImport: {
+ * alias: '/index'
+ * }
+ */
 
-module.exports = {
-    exchange: {
-        alias: '/index'
-    }
-};
+module.exports = {exchange: {alias: '/index'}};

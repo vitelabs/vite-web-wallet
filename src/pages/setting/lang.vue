@@ -8,11 +8,7 @@
 <script>
 import changeLang from 'components/changeLang';
 
-export default {
-    components: {
-        changeLang
-    }
-};
+export default {components: {changeLang}};
 </script>
 
 <style lang="scss" scoped>

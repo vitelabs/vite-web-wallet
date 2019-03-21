@@ -5,36 +5,31 @@
         <div class="btn btn-register __pointer" @click="rightClick">{{ isHaveUsers ? $t('changeAcc') : $t('register') }}</div>
     </div>
 </template>
-        
+
 <script>
 export default {
     data() {
-        let activeAccount = this.$wallet.getActiveAccount();
-        return {
-            isHaveUsers: !!activeAccount
-        };
+        const activeAccount = this.$wallet.getActiveAccount();
+
+        return {isHaveUsers: !!activeAccount};
     },
     methods: {
         leftClick() {
             if (!this.isHaveUsers) {
-                this.$router.push({
-                    name: 'start'
-                });
+                this.$router.push({name: 'start'});
+
                 return;
             }
-            let activeAccount = this.$wallet.getActiveAccount();
+            const activeAccount = this.$wallet.getActiveAccount();
             activeAccount && activeAccount.unlockAccount();
         },
         rightClick() {
             if (!this.isHaveUsers) {
-                this.$router.push({
-                    name: 'startCreate'
-                });
+                this.$router.push({name: 'startCreate'});
+
                 return;
             }
-            this.$router.push({
-                name: 'start'
-            });
+            this.$router.push({name: 'start'});
         }
     }
 };

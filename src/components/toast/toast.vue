@@ -26,7 +26,7 @@ export default {
     },
     computed: {
         customClass() {
-            let classes = [];
+            const classes = [];
             switch (this.position) {
             case 'top':
                 classes.push('top');

@@ -20,7 +20,7 @@ store.registerModule('SBP', SBPStore);
 store.registerModule('ledger', ledgerStore);
 store.registerModule('env', envVariableStore);
 
-for (let moduleName in exchange) {
+for (const moduleName in exchange) {
     store.registerModule(moduleName, exchange[moduleName]);
 }
 

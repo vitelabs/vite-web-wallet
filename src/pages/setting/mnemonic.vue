@@ -18,9 +18,7 @@ import copy from 'utils/copy';
 import copyOK from 'components/copyOK';
 
 export default {
-    components: {
-        copyOK
-    },
+    components: {copyOK},
     props: {
         lock: {
             type: Boolean,
@@ -28,9 +26,9 @@ export default {
         }
     },
     data() {
-        let activeAccount = this.$wallet.getActiveAccount();
-        let mnemonic = activeAccount.getMnemonic();
-        let mnemonicStr = mnemonic ? this.getShowMnemonic(mnemonic) : '';
+        const activeAccount = this.$wallet.getActiveAccount();
+        const mnemonic = activeAccount.getMnemonic();
+        const mnemonicStr = mnemonic ? this.getShowMnemonic(mnemonic) : '';
 
         return {
             visible: false,
@@ -45,7 +43,7 @@ export default {
         }
     },
     watch: {
-        showMnemonic: function() {
+        showMnemonic: function () {
             this.mnemonicStr = this.mnemonic ? this.getShowMnemonic(this.mnemonic) : '';
         }
     },
@@ -56,7 +54,7 @@ export default {
             }
             copy(this.mnemonic);
             this.copySuccess = true;
-            setTimeout(()=>{
+            setTimeout(() => {
                 this.copySuccess = false;
             }, 1000);
         },
@@ -72,9 +70,10 @@ export default {
             }
 
             let showStr = '';
-            for (let i=0; i<mnemonic.length; i++) {
+            for (let i = 0; i < mnemonic.length; i++) {
                 showStr += '*';
             }
+
             return showStr;
         }
     }

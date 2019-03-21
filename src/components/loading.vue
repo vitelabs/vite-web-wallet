@@ -78,10 +78,10 @@ export default {
 }
 
 @keyframes sk-bouncedelay {
-    0%, 80%, 100% { 
+    0%, 80%, 100% {
         opacity: 0.1;
         transform: scale(0.3);
-    } 
+    }
     40% {
         opacity: 1;
         transform: scale(1.0);
