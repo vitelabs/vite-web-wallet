@@ -15,7 +15,8 @@ export function initQuotaConfirm(i18n, router) {
 export function quotaConfirm({
     showMask = true,
     operate,
-    cancel = () => {}
+    cancel = () => {},
+    submit = () => {}
 }) {
     const _close = cb => {
         try {
@@ -34,6 +35,7 @@ export function quotaConfirm({
     };
     instance.submit = () => {
         _close();
+        submit && submit();
     };
 
     document.body.appendChild(instance.$el);

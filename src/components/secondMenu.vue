@@ -25,7 +25,7 @@
                  class="tab dex __pointer">{{ $t('dexToken') }}</div>
         </ul>
 
-        <dex-token v-show="isShowDexToken" :close="closeToken"></dex-token>
+        <dex-token v-if="isShowDexToken" :close="closeToken"></dex-token>
     </div>
 </template>
 
