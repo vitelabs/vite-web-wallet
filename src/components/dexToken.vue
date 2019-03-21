@@ -1,5 +1,5 @@
 <template>
-    <confirm class="exchange" :btnUnuse="btnUnuse"
+    <confirm v-show="isShow" class="exchange" :btnUnuse="btnUnuse"
              :showMask="true" :singleBtn="true"
              :title="$t('exchange.dexToken.title')" :closeIcon="true"
              :close="close" :leftBtnTxt="$t('exchange.dexToken.btn')"
@@ -54,9 +54,10 @@
 import loading from 'components/loading';
 import confirm from 'components/confirm';
 import viteInput from 'components/viteInput';
-import { newMarket, marketsReserve } from 'services/exchange';
+import { quotaConfirm } from 'components/quota/index';
 import getTokenIcon from 'utils/getTokenIcon';
 import BigNumber from 'utils/bigNumber';
+import { newMarket, marketsReserve } from 'services/exchange';
 
 const spend = 10000;
 const currentFetchMarket = null;
@@ -88,7 +89,8 @@ export default {
             isShowTokenList: false,
             tokenList: [],
             searchList: [],
-            isLoading: false
+            isLoading: false,
+            isShow: true
         };
     },
     computed: {
@@ -202,9 +204,25 @@ export default {
                 tradeToken: this.token.token,
                 quoteToken: this.market.token
             }).then(() => {
-                this.$toast('ok');
+                this.$toast(this.$t('hint.request', {
+                    name: '上币'
+                }));
             }).catch(err => {
                 console.warn(err);
+                if (err && err.error && err.error.code && err.error.code === -35002) {
+                    this.isShow = false;
+                    quotaConfirm({
+                        operate: '上币',
+                        cancel: () => {
+                            this.isShow = true;
+                        },
+                        submit: () => {
+                            this.close && this.close();
+                        }
+                    });
+                    return;
+                }
+                this.$toast(this.$t('hint.reqError'), err);
             });
         }
     }
