@@ -112,7 +112,7 @@ export default {
             }
         }
         .item {
-            height: 264px;
+            min-height: 264px;
             margin: 0;
             padding: 0;
             overflow: hidden;
