@@ -17,10 +17,10 @@ const mutations = {
 const actions = {
     exFetchActiveTokens({rootState, dispatch, commit}) {
         const activeTxPair = rootState.exchangeActiveTxPair.activeTxPair;
+
         if (!activeTxPair) {
             commit('exSetActiveTtoken', null);
             commit('exSetActiveFtoken', null);
-
             return;
         }
 
@@ -33,11 +33,11 @@ const actions = {
             if (tokenId !== activeTxPair.ttoken) {
                 return;
             }
+
             commit('exSetActiveTtoken', data);
-        })
-            .catch(err => {
-                console.warn(err);
-            });
+        }).catch(err => {
+            console.warn(err);
+        });
     },
     exFetchActiveFtoken({rootState, commit}, tokenId) {
         tokenDetail({tokenId}).then(data => {
@@ -45,11 +45,11 @@ const actions = {
             if (tokenId !== activeTxPair.ftoken) {
                 return;
             }
+
             commit('exSetActiveFtoken', data);
-        })
-            .catch(err => {
-                console.warn(err);
-            });
+        }).catch(err => {
+            console.warn(err);
+        });
     }
 };
 

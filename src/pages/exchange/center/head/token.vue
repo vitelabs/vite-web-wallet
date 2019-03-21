@@ -26,9 +26,9 @@
                 <span class="token-title">{{ $t('exchange.head.tokenName') }} :</span>
                 <span class="active">{{ tokenDetail.tokenName || '--' }}</span>
             </div>
-            <div class="token-row">
-                <span class="token-title">{{ $t('exchange.head.tokenShow') }} :</span>
-                {{ tokenDetail.tokenShow || '--' }}
+            <div class="token-row __pointer">
+                <span class="token-title">{{ $t('exchange.head.originalSymbol') }} :</span>
+                <span>{{ tokenDetail.originalSymbol || '--' }}</span>
             </div>
             <div class="token-row">
                 <span class="token-title">{{ $t('exchange.head.tokenId') }} :</span>
@@ -38,9 +38,9 @@
                 <span class="token-title">{{ $t('exchange.head.publisher') }} :</span>
                 <span class="active">{{ tokenDetail.publisher || '--' }}</span>
             </div>
-            <div class="token-row">
-                <span class="token-title">{{ $t('exchange.head.total') }} :</span>
-                {{ tokenDetail.total || '--' }}
+            <div class="token-row __pointer">
+                <span class="token-title">{{ $t('exchange.head.gateway') }} :</span>
+                <span>{{ tokenDetail.gateway || '--' }}</span>
             </div>
             <div class="token-row">
                 <span class="token-title">{{ $t('exchange.head.tokenDigit') }} :</span>
@@ -51,8 +51,24 @@
                 {{ tokenDetail.publisherDate || '--' }}
             </div>
             <div class="token-row">
+                <span class="token-title">{{ $t('exchange.head.total') }} :</span>
+                {{ tokenDetail.total || '--' }}
+            </div>
+            <div class="token-row">
+                <span class="token-title">{{ $t('exchange.head.website') }} :</span>
+                {{ tokenDetail.website || '--' }}
+            </div>
+            <div class="token-row">
+                <span class="token-title">{{ $t('exchange.head.explorer') }} :</span>
+                {{ tokenDetail.links && tokenDetail.links.explorer ? tokenDetail.links.explorer : '--' }}
+            </div>
+            <div class="token-row">
                 <span class="token-title">{{ $t('exchange.head.type') }} :</span>
                 {{ tokenDetail.tokenType || '--' }}
+            </div>
+            <div class="token-row">
+                <span class="token-title">{{ $t('exchange.head.overview') }} :</span>
+                {{ tokenDetail.overview && tokenDetail.overview[$i18n.locale] ? tokenDetail.overview[$i18n.locale] : '--' }}
             </div>
         </div>
     </div>
@@ -78,14 +94,12 @@ export default {
             if (!this.ftokenDetail) {
                 return '';
             }
-
             return this.getTokenIcon(this.ftokenDetail.tokenId);
         },
         ttokenIcon() {
             if (!this.ttokenDetail) {
                 return '';
             }
-
             return this.getTokenIcon(this.ttokenDetail.tokenId);
         },
         tokenDetail() {
@@ -117,7 +131,6 @@ export default {
             if (defaultToken && defaultToken.icon) {
                 return defaultToken.icon;
             }
-
             return getTokenIcon(tokenId);
         },
         showToken(type) {
@@ -130,7 +143,6 @@ export default {
                 || tContainer.contains(e.target)) {
                 return;
             }
-
             this.showTokenType = '';
         },
         goNetToken(tokenId) {

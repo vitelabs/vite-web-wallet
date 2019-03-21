@@ -28,7 +28,11 @@ import Table from './table';
 // "status": 1, //Pending=0，PartialExecuted=1，FullyExecuted=2，Cancelled=3
 // "type": 1 //Limited=0(限价单),Market=1(市价单)
 // }
+
 export default {
+    components: {
+        Table
+    },
     data() {
         return {data: []};
     },
@@ -43,8 +47,7 @@ export default {
             type: Boolean,
             default: false
         }
-    },
-    components: {Table}
+    }
 };
 </script>
 

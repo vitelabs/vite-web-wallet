@@ -17,16 +17,16 @@
 <script>
 import Filters from './filters';
 import Table from './table';
-import {order} from 'services/exchange';
+import { order } from 'services/exchange';
 import Pagination from 'components/pagination';
-import {timer} from 'utils/asyncFlow';
+import { timer } from 'utils/asyncFlow';
+
 const pageSize = 35;
 let task = null;
+
 export default {
     components: {
-        Filters,
-        Table,
-        Pagination
+        Filters, Table, Pagination
     },
     props: {
         isEmbed: {
@@ -53,10 +53,12 @@ export default {
         this.update();
     },
     activated() {
-        if (this.isEmbed) {
-            task = new timer(() => this.update(), 1000);
-            task.start();
+        if (!this.isEmbed) {
+            return;
         }
+
+        task = new timer(() => this.update(), 1000);
+        task.start();
     },
     deactivated() {
         task && task.stop();
@@ -68,7 +70,9 @@ export default {
     },
     methods: {
         toPage(pageNo) {
-            this.update(Object.assign(this.filters, {pageNo}));
+            this.update(Object.assign(this.filters, {
+                pageNo
+            }));
         },
         submit(v) {
             this.filters = v;
@@ -80,11 +84,16 @@ export default {
         update(filters = {}) {
             const account = this.$wallet.getActiveAccount();
             if (!account) return;
+
             const address = account.getDefaultAddr();
             if (this.isEmbed) {
-                filters = {totoken: this.currentMarket};
+                filters = {
+                    totoken: this.currentMarket
+                };
             }
+
             filters = Object.assign({pageNo: this.currentPage}, filters);
+
             order({
                 address,
                 ...filters,

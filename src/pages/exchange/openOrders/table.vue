@@ -32,16 +32,18 @@
 </template>
 
 <script>
-import {order, cancelOrder} from 'services/exchange';
+import { order, cancelOrder } from 'services/exchange';
 import powProcess from 'components/powProcess';
-import {timer} from 'utils/asyncFlow';
+import { timer } from 'utils/asyncFlow';
 import d from 'dayjs';
 
 const VoteDifficulty = '201564160';
 let task = null;
 
 export default {
-    components: {powProcess},
+    components: {
+        powProcess
+    },
     props: {
         filterObj: {
             type: Object,
@@ -74,6 +76,7 @@ export default {
             this.acc = this.$wallet.getActiveAccount();
             if (!this.acc) return;
             this.acc && (this.addr = this.acc.getDefaultAddr());
+
             order({
                 address: this.addr,
                 status: 1,

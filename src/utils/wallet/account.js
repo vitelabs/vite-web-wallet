@@ -259,7 +259,6 @@ class account {
         }
 
         const result = this.account.unlock(2000);
-        console.log(result);
         return result;
     }
 

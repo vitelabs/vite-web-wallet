@@ -57,12 +57,11 @@ export default {
                 this.isSubmiting = false;
                 this.lock = !result;
                 this.lock && this.$toast(this.$t('hint.pwErr'));
-            })
-                .catch(() => {
-                    this.isSubmiting = false;
-                    this.lock = true;
-                    this.$toast(this.$t('hint.pwErr'));
-                });
+            }).catch(() => {
+                this.isSubmiting = false;
+                this.lock = true;
+                this.$toast(this.$t('hint.pwErr'));
+            });
         }
     }
 };
