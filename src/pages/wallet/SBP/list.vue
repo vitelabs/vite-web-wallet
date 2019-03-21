@@ -160,7 +160,6 @@ export default {
                     console.warn(err);
                     if (err && err.error && err.error.code && err.error.code === -35002) {
                         quotaConfirm({operate: this.$t('walletSBP.register')});
-
                         return;
                     }
                     this.$toast(this.$t('walletSBP.section1.registerFail'), err);
