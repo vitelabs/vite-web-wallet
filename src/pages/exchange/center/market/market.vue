@@ -222,19 +222,26 @@ export default {
 
                 if (data instanceof Array) {
                     this.txPairList = data || [];
-
                     return;
                 }
 
                 if (!data) {
                     return;
                 }
-                for (let i = 0; i < this.txPairList.length; i++) {
+
+                let i;
+                for (i = 0; i < this.txPairList.length; i++) {
                     if (this.txPairList[i].pairCode === data.pairCode) {
                         this.txPairList[i] = data;
                         break;
                     }
                 }
+
+                if (i === this.txPairList.length) {
+                    this.txPairList.push(data);
+                    return;
+                }
+
                 this.txPairList = [].concat(this.txPairList);
             }, 2000);
 

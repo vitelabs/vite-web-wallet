@@ -142,6 +142,9 @@ export default {
             this.isShowMarketList = !this.isShowMarketList;
         },
         hideTokenList(e) {
+            if (!this.$refs.searchInput) {
+                return;
+            }
             const tContainer = this.$refs.searchInput.$el;
             if (!tContainer
                 || e.target === tContainer
@@ -207,6 +210,7 @@ export default {
                 this.$toast(this.$t('hint.request', {
                     name: '上币'
                 }));
+                this.close();
             }).catch(err => {
                 console.warn(err);
                 if (err && err.error && err.error.code && err.error.code === -35002) {
