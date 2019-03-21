@@ -44,11 +44,15 @@ export const depthSell = function ({ftoken, ttoken}) {
     });
 };
 
-export const order = function ({address, fdate, tdate, ftoken, ttoken, orderSide, pageNo, pageSize, status}) {
+export const order = function ({
+    address, fdate, tdate, ftoken, ttoken, orderSide, pageNo, pageSize, status, paging = 1
+}) {
     return request({
         path: `${ path }/order/query`,
         method: 'GET',
-        params: {address, fdate, tdate, ftoken, ttoken, orderSide, pageNo, pageSize, status}
+        params: {
+            address, fdate, tdate, ftoken, ttoken, orderSide, pageNo, pageSize, status, paging
+        }
     });
 };
 
@@ -110,6 +114,14 @@ export const pairSearch = function ({key, ttoken}) {
         path: `${ path }/pair/search`,
         method: 'GET',
         params: {key, ttoken}
+    });
+};
+
+export const marketsReserve = function ({token}) {
+    return request({
+        path: `${ path }/markets/reserve`,
+        method: 'GET',
+        params: {token}
     });
 };
 

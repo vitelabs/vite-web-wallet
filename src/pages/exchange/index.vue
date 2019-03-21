@@ -1,38 +1,33 @@
 <template>
     <div class="exchange-center-wrapper">
         <center v-if="active === 'exchange'"></center>
-        <div
-            class="order-wrapper"
-            v-if="active === 'exchange'"
-        >
+        <div class="order-wrapper" v-if="active === 'exchange'">
             <div class="order">
                 <div class="ex-tab-list">
-                    <div
-                        @click="tap='openOrder'"
-                        class="ex-tab active-side __pointer"
-                        :class="{'active': tap === 'openOrder'}"
-                    >
+                    <div @click="tap='openOrder'"
+                         class="ex-tab active-side __pointer"
+                         :class="{'active': tap === 'openOrder'}">
                         {{$t('exchangeOpenOrders.title')}}</div>
-                    <div
-                        @click="tap='historyOrder'"
-                        class="ex-tab active-side __pointer"
-                        :class="{'active': tap === 'historyOrder'}"
-                    >
+                    <div @click="tap='historyOrder'"
+                         class="ex-tab active-side __pointer"
+                         :class="{'active': tap === 'historyOrder'}">
                         {{$t('exchangeOrderHistory.title')}}</div>
                 </div>
-                <openOrder
-                    v-if="tap==='openOrder'"
-                    class="item"
-                    :isEmbed="true"
-                    :filterObj="{ftoken:activeTxPair.ftoken,ttoken:activeTxPair.ttoken,pageSize:10}"
-                >
+                <openOrder v-if="tap==='openOrder'" class="item"
+                           :isEmbed="true"
+                           :filterObj="{
+                               ftoken: activeTxPair.ftoken,
+                               ttoken: activeTxPair.ttoken,
+                               pageSize: 10,
+                               paging: 0 }">
                 </openOrder>
-                <historyOrder
-                    v-if="tap==='historyOrder'"
-                    class="item"
-                    :isEmbed="true"
-                    :filterObj="{ftoken:activeTxPair.ftoken,ttoken:activeTxPair.ttoken,pageSize:10}"
-                >
+                <historyOrder v-if="tap==='historyOrder'" class="item"
+                              :isEmbed="true"
+                              :filterObj="{
+                                  ftoken: activeTxPair.ftoken,
+                                  ttoken: activeTxPair.ttoken,
+                                  pageSize: 10,
+                                  paging: 0 }">
                 </historyOrder>
             </div>
         </div>
@@ -52,7 +47,6 @@ export default {
     },
     mounted() {
         this.$store.dispatch('startLoopExchangeRate');
-        this.$store.dispatch('dexFetchTokenList');
 
         this.$router.afterEach(to => {
             this.active = to.name;
@@ -154,4 +148,3 @@ export default {
     }
 }
 </style>
-

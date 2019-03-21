@@ -15,7 +15,7 @@
                     'sell': v.side===1
                 }">{{ $t("exchangeOrderHistory.side")[v.side] }}</div>
                 <div>{{ v.price }} {{ v.ttokenShow }}</div>
-                <div>{{ v.amount }} {{ v.ftokenShow }}</div>
+                <div>{{ v.quantity }} {{ v.ftokenShow }}</div>
                 <div>{{ v.filledQ }} {{v.ftokenShow }}</div>
                 <div>{{ `${(v.rate*100).toFixed(2)}%` }}</div>
                 <div>{{ v.average }} {{ v.ttokenShow }}</div>
