@@ -6,24 +6,27 @@ function recordPerformance() {
             return;
         }
 
-        var fetchStart = window.performance.timing.fetchStart;  // any requests
+        // Any requests
+        const fetchStart = window.performance.timing.fetchStart;
 
         // DNS
-        var DNSStart = window.performance.timing.domainLookupStart; // dns end
-        var DNSEnd = window.performance.timing.domainLookupEnd; // dns end
-        var DNSTimes = DNSEnd - DNSStart;
+
+        // Dns start
+        const DNSStart = window.performance.timing.domainLookupStart;
+        // Dns end
+        const DNSEnd = window.performance.timing.domainLookupEnd;
+        const DNSTimes = DNSEnd - DNSStart;
         statistics.event('performance', 'DNS', 'time', DNSTimes);
 
-        // load
-        var firstByteTime = window.performance.timing.responseStart;
+        // Load
+        const firstByteTime = window.performance.timing.responseStart;
 
-        var whiteTimes = firstByteTime - fetchStart;
+        const whiteTimes = firstByteTime - fetchStart;
         statistics.event('performance', 'white', 'time', whiteTimes);
 
-        var loadedTimes = new Date().getTime() - fetchStart;
+        const loadedTimes = new Date().getTime() - fetchStart;
         statistics.event('performance', 'loaded', 'time', loadedTimes);
-
-    } catch(err) {
+    } catch (err) {
         console.warn(err);
     }
 }

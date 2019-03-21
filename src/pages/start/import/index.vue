@@ -30,39 +30,39 @@ export default {
             e.preventDefault();
             e.stopPropagation();
 
-            let files = e.dataTransfer.files;
+            const files = e.dataTransfer.files;
             files && files.length && this.getFile(files);
         },
         openFile() {
-            let fileDom = this.$refs.file;
+            const fileDom = this.$refs.file;
             if (!fileDom) {
                 return;
             }
             fileDom.click();
-            let _this = this;
-            fileDom.onchange = function () {     
+            const _this = this;
+            fileDom.onchange = function () {
                 _this.getFile(this.files);
             };
         },
         getFile(files) {
             if (files.length > 1) {
                 this.errMsg = 'startImport.dragDrop.err2';
+
                 return;
             }
 
-            let file = files[0];
-            let reader = new FileReader();
-            reader.onload = (e) => {
-                let result = this.$wallet.importKeystore(e.target.result);
+            const file = files[0];
+            const reader = new FileReader();
+            reader.onload = e => {
+                const result = this.$wallet.importKeystore(e.target.result);
 
                 if (!result) {
                     this.errMsg = 'startImport.dragDrop.err1';
+
                     return;
                 }
 
-                this.$router.push({
-                    name: 'start'
-                });
+                this.$router.push({name: 'start'});
             };
             reader.readAsText(file);
         },

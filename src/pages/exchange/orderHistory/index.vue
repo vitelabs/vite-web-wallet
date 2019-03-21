@@ -17,11 +17,11 @@
 <script>
 import Filters from './filters';
 import Table from './table';
-import { order } from 'services/exchange';
+import {order} from 'services/exchange';
 import Pagination from 'components/pagination';
-import { timer } from 'utils/asyncFlow';
+import {timer} from 'utils/asyncFlow';
 const pageSize = 35;
-let task=null;
+let task = null;
 export default {
     components: {
         Filters,
@@ -35,7 +35,9 @@ export default {
         },
         filterObj: {
             type: Object,
-            default: () => ({})
+            default: () => {
+                return {};
+            }
         }
     },
     data() {
@@ -47,12 +49,12 @@ export default {
             timer: null
         };
     },
-    mounted(){
+    mounted() {
         this.update();
     },
     activated() {
-        if(this.isEmbed){
-            task=new timer(()=>this.update(),1000);
+        if (this.isEmbed) {
+            task = new timer(() => this.update(), 1000);
             task.start();
         }
     },
@@ -66,7 +68,7 @@ export default {
     },
     methods: {
         toPage(pageNo) {
-            this.update(Object.assign(this.filters, { pageNo }));
+            this.update(Object.assign(this.filters, {pageNo}));
         },
         submit(v) {
             this.filters = v;
@@ -80,9 +82,9 @@ export default {
             if (!account) return;
             const address = account.getDefaultAddr();
             if (this.isEmbed) {
-                filters = { totoken: this.currentMarket };
+                filters = {totoken: this.currentMarket};
             }
-            filters = Object.assign({ pageNo: this.currentPage }, filters);
+            filters = Object.assign({pageNo: this.currentPage}, filters);
             order({
                 address,
                 ...filters,

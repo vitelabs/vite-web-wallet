@@ -22,7 +22,7 @@ export function pwdConfirm({
     submitTxt,
     exchange = false
 }, isShowPWD = true) {
-    let _close = (cb) => {
+    const _close = cb => {
         try {
             document.body.removeChild(instance.$el);
         } catch (err) {
@@ -51,5 +51,6 @@ export function pwdConfirm({
     instance.submitTxt = submitTxt || '';
 
     document.body.appendChild(instance.$el);
+
     return true;
 }

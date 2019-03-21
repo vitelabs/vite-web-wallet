@@ -30,7 +30,7 @@ import copy from 'utils/copy';
 
 export default {
     data() {
-        let activeAccount = this.$wallet.getActiveAccount();
+        const activeAccount = this.$wallet.getActiveAccount();
 
         return {
             activeAccount,
@@ -46,7 +46,7 @@ export default {
             this.$toast(this.$t('hint.copy'));
         },
         addAddr() {
-            let addrList = this.activeAccount.getAddrList();
+            const addrList = this.activeAccount.getAddrList();
             if (addrList && addrList.length >= 10) {
                 return;
             }
@@ -54,25 +54,26 @@ export default {
             this.activeAccount.addAddr();
             this.addrList = this.activeAccount.getAddrList();
 
-            Vue.nextTick(()=>{
+            Vue.nextTick(() => {
                 if (!this.$refs.list || !this.$refs.listWrapper) {
                     return;
                 }
 
-                let height = this.$refs.list.offsetHeight;
-                let wrapperHeight = this.$refs.listWrapper.offsetHeight;
+                const height = this.$refs.list.offsetHeight;
+                const wrapperHeight = this.$refs.listWrapper.offsetHeight;
                 this.$refs.listWrapper.scrollTop = height - wrapperHeight;
             });
         },
         setDefault(addr, index) {
-            let res = this.activeAccount.setDefaultAddr(addr, index);
+            const res = this.activeAccount.setDefaultAddr(addr, index);
             if (!res) {
                 this.$toast(this.$t('hint.err'));
+
                 return;
             }
             this.defaultAddr = this.activeAccount.getDefaultAddr();
 
-            // clear all
+            // Clear all
             this.$store.commit('commitClearBalance');
             this.$store.commit('commitClearTransList');
             this.$store.commit('commitClearPledge');

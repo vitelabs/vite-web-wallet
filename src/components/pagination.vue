@@ -35,7 +35,7 @@ export default {
         },
         toPage: {
             type: Function,
-            default: ()=>{}
+            default: () => {}
         }
     },
     computed: {
@@ -43,12 +43,12 @@ export default {
             if (!this.totalPage || !this.currentPage) {
                 return [];
             }
-    
+
             const min = 2;
             const max = this.totalPage - 1;
             const listNum = maxPageNumber - 3;
 
-            let list = [1];
+            const list = [1];
             let minNumber = this.currentPage - listNum / 2;
             let maxNumber = this.currentPage + listNum / 2 + (listNum % 2 ? 1 : 0);
 
@@ -56,19 +56,19 @@ export default {
             maxNumber = maxNumber > max ? max : maxNumber;
 
             if (maxNumber - minNumber !== listNum) {
-                let tempMax = minNumber + listNum;
+                const tempMax = minNumber + listNum;
                 maxNumber = tempMax > max ? max : tempMax;
             }
             if (maxNumber - minNumber !== listNum) {
-                let tempMin = maxNumber - listNum;
+                const tempMin = maxNumber - listNum;
                 minNumber = tempMin < min ? min : tempMin;
             }
 
             minNumber > 2 && list.push(ellipsis);
-            for (let i=minNumber; i<=maxNumber; i++) {
+            for (let i = minNumber; i <= maxNumber; i++) {
                 list.push(i);
             }
-            maxNumber < this.totalPage -1 && list.push(ellipsis);
+            maxNumber < this.totalPage - 1 && list.push(ellipsis);
             this.totalPage !== 1 && list.push(this.totalPage);
 
             return list;
@@ -76,8 +76,8 @@ export default {
     },
     methods: {
         _toPage(pageNumber) {
-            if (!pageNumber || pageNumber === ellipsis || 
-                pageNumber < 1 || pageNumber > this.totalPage) {
+            if (!pageNumber || pageNumber === ellipsis
+                || pageNumber < 1 || pageNumber > this.totalPage) {
                 return;
             }
             this.toPage(pageNumber);

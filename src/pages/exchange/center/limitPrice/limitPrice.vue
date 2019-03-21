@@ -20,9 +20,7 @@ import logoutView from './logout';
 import order from './order.vue';
 
 export default {
-    components: {
-        logoutView, order
-    },
+    components: {logoutView, order},
     created() {
         this.isLogin = !!this.$wallet.isLogin;
         this.getBalance();
@@ -37,12 +35,10 @@ export default {
         this.$store.dispatch('stopLoopExchangeBalance');
     },
     data() {
-        return {
-            isLogin: !!this.$wallet.isLogin
-        };
+        return {isLogin: !!this.$wallet.isLogin};
     },
     watch: {
-        isLogin: function() {
+        isLogin: function () {
             this.getBalance();
         }
     },
@@ -50,10 +46,11 @@ export default {
         getBalance() {
             if (!this.isLogin) {
                 this.$store.dispatch('stopLoopExchangeBalance');
+
                 return;
             }
-            let activeAccount = this.$wallet.getActiveAccount();
-            let addr = activeAccount.getDefaultAddr();
+            const activeAccount = this.$wallet.getActiveAccount();
+            const addr = activeAccount.getDefaultAddr();
             this.$store.dispatch('startLoopExchangeBalance', addr);
         }
     }

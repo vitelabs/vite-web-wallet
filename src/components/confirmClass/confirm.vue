@@ -10,12 +10,12 @@
                 <slot></slot>
             </div>
             <div class="bottom">
-                <div v-show="singleBtn" class="__btn btn-single __btn_all_in __pointer" 
+                <div v-show="singleBtn" class="__btn btn-single __btn_all_in __pointer"
                      :class="{'unuse': btnUnuse }"
                      @click="_leftBtnClick">{{ lTxt }}</div>
-                <div v-show="!singleBtn" class="__btn btn-left __pointer" 
+                <div v-show="!singleBtn" class="__btn btn-left __pointer"
                      @click="_leftBtnClick">{{ lTxt }}</div>
-                <div v-show="!singleBtn" class="__btn __btn_all_in __pointer" 
+                <div v-show="!singleBtn" class="__btn __btn_all_in __pointer"
                      :class="{'unuse': btnUnuse }"
                      @click="_rightBtnClick">{{ rTxt }}</div>
             </div>
@@ -40,7 +40,7 @@ export default {
         },
         close: {
             type: Function,
-            default: ()=>{}
+            default: () => {}
         },
         lTxt: {
             type: String,
@@ -60,12 +60,12 @@ export default {
         },
         lClick: {
             type: Function,
-            default: ()=>{}
+            default: () => {}
         },
         rClick: {
             type: Function,
-            default: ()=>{}
-        },
+            default: () => {}
+        }
     },
     methods: {
         _rightBtnClick() {
@@ -81,8 +81,8 @@ export default {
             this.leftBtnClick && this.leftBtnClick();
         }
     },
-    computed:{
-        singleBtn(){
+    computed: {
+        singleBtn() {
             return !!this.sTxt;
         }
     }

@@ -28,9 +28,7 @@ export default {
         },
         menuList: {
             type: Array,
-            default: () => {
-                return [];
-            }
+            default: () => []
         },
         go: {
             type: Function,
@@ -53,7 +51,7 @@ export default {
         clickMenu() {
             this.showList = !this.showList;
         },
-        hideMenu () {
+        hideMenu() {
             this.showList = false;
         },
 

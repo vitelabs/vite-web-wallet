@@ -10,25 +10,23 @@ const testConfig = require('./webpackConf/test.config.js');
 
 const SRC_PATH = path.join(__dirname, './src');
 const CHARTING_PATH = path.join(__dirname, './charting_library');
-const STATIC_PATH = process.env.APP === 'true' ?
-    path.join(__dirname, '../../app/walletPages') : 
-    path.join(__dirname, './dist');
-let development = ['dev', 'test'];
+const STATIC_PATH = process.env.APP === 'true'
+    ? path.join(__dirname, '../../app/walletPages')
+    : path.join(__dirname, './dist');
+const development = [ 'dev', 'test' ];
 
 let webpackConfig = {
     mode: development.indexOf(process.env.NODE_ENV) > -1 ? 'development' : 'production',
     devtool: 'source-map',
 
-    entry: {
-        index: path.join(SRC_PATH, '/index.js')
-    },
+    entry: {index: path.join(SRC_PATH, '/index.js')},
     output: {
         path: STATIC_PATH,
         filename: '[name].[hash].js'
     },
     plugins,
     optimization: {
-        splitChunks:{
+        splitChunks: {
             cacheGroups: {
                 vendors: {
                     test: /[\\/]node_modules[\\/]/,
@@ -43,7 +41,7 @@ let webpackConfig = {
             }
         },
         minimizer: [
-            // we specify a custom UglifyJsPlugin here to get source maps in production
+            // We specify a custom UglifyJsPlugin here to get source maps in production
             new UglifyJsPlugin({
                 cache: true,
                 parallel: true,
@@ -57,40 +55,29 @@ let webpackConfig = {
         ]
     },
     module: {
-        rules: [{
+        rules: [ {
             test: /\.vue$/,
-            use: [{
-                loader: 'vue-loader'
-            }]
+            use: [{loader: 'vue-loader'}]
         }, {
             test: /\.(svg|png|jpg|gif)$/,
             loader: 'url-loader',
             query: {
-                limit: 10 * 1024 //10KB
+                // 10KB
+                limit: 10 * 1024
             }
         }, {
             test: /\.js$/,
             exclude: /node_modules(?!\/base-x)/,
             use: {
                 loader: 'babel-loader',
-                options: {
-                    presets: ['@babel/preset-env']
-                }
+                options: {presets: ['@babel/preset-env']}
             }
         }, {
             test: /(\.scss$|\.css$|\.sass$)/,
-            use: [{
-                loader: 'style-loader'
-            }, {
-                loader: 'css-loader'
-            }, {
-                loader: 'sass-loader'
-            }, {
-                loader: 'postcss-loader'
-            }]
-        }],
-        // postcss: function() {
-        //     return [px2rem({remUnit: 75})];
+            use: [ {loader: 'style-loader'}, {loader: 'css-loader'}, {loader: 'sass-loader'}, {loader: 'postcss-loader'} ]
+        } ]
+        // Postcss: function() {
+        // return [px2rem({remUnit: 75})];
         // }
     },
     resolve: {
@@ -109,7 +96,7 @@ let webpackConfig = {
             version: path.join(SRC_PATH, '../version.json'),
             mock: path.join(SRC_PATH, '../mock')
         },
-        extensions: ['.js', '.scss', '.vue', '.json']
+        extensions: [ '.js', '.scss', '.vue', '.json' ]
     }
 };
 

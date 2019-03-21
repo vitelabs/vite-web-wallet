@@ -38,14 +38,14 @@ export default {
         };
     },
     watch: {
-        active: function() {
+        active: function () {
             this.changeLayout();
             this.$offKeyDown();
         }
     },
     methods: {
         changeLayout() {
-            let toHome = this.active.indexOf('start') !== -1;
+            const toHome = this.active.indexOf('start') !== -1;
             this.layoutType = toHome ? 'home' : 'start';
         }
     }

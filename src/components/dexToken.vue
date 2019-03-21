@@ -43,19 +43,17 @@
 <script>
 import confirm from 'components/confirm';
 import viteInput from 'components/viteInput';
-import { newMarket } from 'services/exchange';
-// import BigNumber from 'utils/bigNumber';
+import {newMarket} from 'services/exchange';
+// Import BigNumber from 'utils/bigNumber';
 
 const spend = 1000;
 
 export default {
-    components: {
-        confirm, viteInput
-    },
+    components: {confirm, viteInput},
     props: {
         close: {
             type: Function,
-            default: () => {} 
+            default: () => {}
         }
     },
     mounted() {
@@ -70,7 +68,7 @@ export default {
             token: null,
             tokenName: '',
             isShowMarketList: false,
-            isShowTokenList: false,
+            isShowTokenList: false
         };
     },
     computed: {
@@ -88,16 +86,15 @@ export default {
         }
     },
     watch: {
-        tokenList: function() {
+        tokenList: function () {
             if (!this.tokenName && this.tokenList && this.tokenList.length) {
                 this.tokenName = this.tokenList[0].name;
             }
         },
-        tokenName: function() {
+        tokenName: function () {
             if (this.token && this.token.name !== this.tokenName) {
                 this.token = null;
             }
-            
         }
     },
     methods: {
@@ -114,8 +111,8 @@ export default {
             this.isShowTokenList = !this.isShowTokenList;
         },
         goNet() {
-            let locale = this.$i18n.locale === 'zh' ? 'zh/' : '';
-            window.open(`${process.env.viteNet}${locale}tokenList`);
+            const locale = this.$i18n.locale === 'zh' ? 'zh/' : '';
+            window.open(`${ process.env.viteNet }${ locale }tokenList`);
         },
         setMarket(market) {
             this.market = market;
@@ -127,16 +124,16 @@ export default {
         trans() {
             if (!this.viteTokenInfo) {
                 this.$toast('err');
+
                 return;
             }
 
-            newMarket({
-                amount: 10000
-            }).then(() => {
+            newMarket({amount: 10000}).then(() => {
 
-            }).catch((err) => {
-                console.warn(err);
-            });
+            })
+                .catch(err => {
+                    console.warn(err);
+                });
         }
     }
 };

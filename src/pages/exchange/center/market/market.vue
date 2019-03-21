@@ -3,7 +3,7 @@
         <tab-list></tab-list>
 
         <div class="search-wrapper">
-            <vite-input class="search-input" v-model="searchText" 
+            <vite-input class="search-input" v-model="searchText"
                         :placeholder="$t('exchange.search')">
                 <img slot="before" class="icon" src="~assets/imgs/search.svg"/>
             </vite-input>
@@ -57,7 +57,7 @@
 
         <loading loadingType="dot" class="ex-center-loading" v-show="isLoading"></loading>
         <div class="hint" v-show="isShowNoData">{{ noData }}</div>
-        <tx-pair-list v-show="!isShowNoData && !isLoading" :list="activeTxPairList" 
+        <tx-pair-list v-show="!isShowNoData && !isLoading" :list="activeTxPairList"
                       :favoritePairs="favoritePairs" :currentRule="currentOrderRule"
                       :setFavorite="setFavorite" :showCol="showCol"></tx-pair-list>
     </div>
@@ -67,7 +67,7 @@
 import viteInput from 'components/viteInput';
 import loading from 'components/loading';
 import localStorage from 'utils/localStorage';
-import { subTask } from 'utils/proto/subTask';
+import {subTask} from 'utils/proto/subTask';
 
 import orderArrow from './orderArrow';
 import tabList from './tabList';
@@ -107,30 +107,30 @@ export default {
         };
     },
     watch: {
-        toTokenId: function() {
+        toTokenId: function () {
             this.searchText = '';
             this.searchList = [];
             this.isLoading = true;
             this.stopLoop();
             this.init();
         },
-        txPairList: function() {
-            this.txPairList &&
-                this.txPairList.forEach(txPair => {
+        txPairList: function () {
+            this.txPairList
+                && this.txPairList.forEach(txPair => {
                     if (
-                        !this.activePairCode ||
-                        txPair.pairCode !== this.activePairCode
+                        !this.activePairCode
+                        || txPair.pairCode !== this.activePairCode
                     ) {
                         return;
                     }
                     this.$store.commit('exSetActiveTxPair', txPair);
                 });
         },
-        searchText: function() {
-            let list = [];
-            let searchText = this.$trim(this.searchText).toLowerCase();
-            this.txPairList.forEach((tx) => {
-                let ftokenShow = tx.ftokenShow.toLowerCase();
+        searchText: function () {
+            const list = [];
+            const searchText = this.$trim(this.searchText).toLowerCase();
+            this.txPairList.forEach(tx => {
+                const ftokenShow = tx.ftokenShow.toLowerCase();
                 if (ftokenShow.indexOf(searchText) !== -1) {
                     list.push(tx);
                 }
@@ -139,31 +139,32 @@ export default {
         }
     },
     computed: {
-        toTokenId(){
+        toTokenId() {
             return this.$store.state.exchangeMarket.currentMarket;
         },
         isShowNoData() {
             return !this.isLoading && (
-                !this.activeTxPairList ||
-                !this.activeTxPairList.length ||
-                (!this.searchList.length &&
-                    this.searchText)
+                !this.activeTxPairList
+                || !this.activeTxPairList.length
+                || (!this.searchList.length
+                    && this.searchText)
             );
         },
 
         favoriteCodeList() {
-            let codeList = [];
-            for (let code in this.favoritePairs) {
-                let item = this.favoritePairs[code];
+            const codeList = [];
+            for (const code in this.favoritePairs) {
+                const item = this.favoritePairs[code];
                 if (
-                    !item ||
-                    !item.toTokenId ||
-                    item.toTokenId !== this.toTokenId
+                    !item
+                    || !item.toTokenId
+                    || item.toTokenId !== this.toTokenId
                 ) {
                     continue;
                 }
                 codeList.push(code);
             }
+
             return codeList;
         },
         noData() {
@@ -173,29 +174,32 @@ export default {
             if (this.isOnlyFavorite) {
                 return this.$t('exchange.noData.favorite');
             }
+
             return this.$t('hint.noData');
         },
         activeTxPairList() {
             if (this.isLoading) {
                 return [];
             }
-            let list =
-                this.searchText
+            let list
+                = this.searchText
                     ? this.searchList
                     : this.isOnlyFavorite
                         ? this.activeFavoriteList
                         : this.txPairList;
             list = [].concat(list);
+
             return list;
         },
         activeFavoriteList() {
-            let list = [];
+            const list = [];
             this.txPairList.forEach(txPair => {
                 if (this.favoriteCodeList.indexOf(txPair.pairCode) === -1) {
                     return;
                 }
                 list.push(txPair);
             });
+
             return list;
         },
         activePairCode() {
@@ -209,7 +213,7 @@ export default {
     },
     methods: {
         init() {
-            defaultPairTimer = defaultPairTimer || new subTask('defaultPair', ({ args, data }) => {
+            defaultPairTimer = defaultPairTimer || new subTask('defaultPair', ({args, data}) => {
                 if (args.ttoken !== this.toTokenId) {
                     return;
                 }
@@ -218,13 +222,14 @@ export default {
 
                 if (data instanceof Array) {
                     this.txPairList = data || [];
+
                     return;
                 }
-                
+
                 if (!data) {
                     return;
                 }
-                for (let i=0; i<this.txPairList.length; i++) {
+                for (let i = 0; i < this.txPairList.length; i++) {
                     if (this.txPairList[i].pairCode === data.pairCode) {
                         this.txPairList[i] = data;
                         break;
@@ -233,10 +238,8 @@ export default {
                 this.txPairList = [].concat(this.txPairList);
             }, 2000);
 
-            defaultPairTimer.start(() => { 
-                return {
-                    ttoken: this.toTokenId
-                };
+            defaultPairTimer.start(() => {
+                return {ttoken: this.toTokenId};
             });
         },
         stopLoop() {
@@ -253,14 +256,14 @@ export default {
             this.currentOrderRule = rule;
         },
         setFavorite(txPair) {
-            let pairCode = txPair.pairCode;
-            let toTokenId = txPair.ttoken;
+            const pairCode = txPair.pairCode;
+            const toTokenId = txPair.ttoken;
 
             this.favoritePairs = this.favoritePairs || {};
             if (this.favoritePairs[pairCode]) {
                 delete this.favoritePairs[pairCode];
             } else {
-                this.favoritePairs[pairCode] = { toTokenId };
+                this.favoritePairs[pairCode] = {toTokenId};
             }
             this.favoritePairs = Object.assign({}, this.favoritePairs);
 
@@ -315,7 +318,7 @@ export default {
                 height: 12px;
                 border-radius: 10px;
                 border: 1px solid rgba(188,196,201,1);
-                margin-right: 4px; 
+                margin-right: 4px;
                 margin-bottom: -2px;
                 &.active {
                     &::after {

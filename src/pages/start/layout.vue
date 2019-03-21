@@ -19,9 +19,7 @@ import bg from 'assets/imgs/bg.svg';
 import logo from 'assets/imgs/ViteLogo1.svg';
 
 export default {
-    components: {
-        changeLang
-    },
+    components: {changeLang},
     data() {
         return {
             bg,
@@ -39,7 +37,7 @@ export default {
     overflow: auto;
     animation: key-opacity 0.3s ease-in-out;
     @keyframes key-opacity {
-        0% { opacity: 0.1; } 
+        0% { opacity: 0.1; }
         100% { opacity: 1; }
     }
 

@@ -18,11 +18,10 @@ let quotaInst;
 
 export default {
     data() {
-        let activeAccount = this.$wallet.getActiveAccount();
-        let address = activeAccount.getDefaultAddr();
-        return {
-            address
-        };
+        const activeAccount = this.$wallet.getActiveAccount();
+        const address = activeAccount.getDefaultAddr();
+
+        return {address};
     },
     computed: {
         quota() {
@@ -41,9 +40,7 @@ export default {
     methods: {
         startLoopQuota() {
             this.stopLoopQuota();
-            quotaInst = new timer(()=>{
-                return this.fetchQuota();
-            }, 1000);
+            quotaInst = new timer(() => this.fetchQuota(), 1000);
             quotaInst.start();
         },
         stopLoopQuota() {

@@ -27,17 +27,19 @@ export default {
                 pre = '￥';
             }
             if (!this.activeTxPair) {
-                return pre + '0';
+                return `${ pre }0`;
             }
+
             return pre + this.activeTxPair.price * this.rate;
         },
         rate() {
-            let rateList = this.$store.state.exchangeRate.rateMap || {};
-            let tokenId = this.activeTxPair && this.activeTxPair.ttoken ? this.activeTxPair.ttoken : null;
-            let coin = this.$store.state.exchangeRate.coins[this.$i18n.locale || 'zh'];
+            const rateList = this.$store.state.exchangeRate.rateMap || {};
+            const tokenId = this.activeTxPair && this.activeTxPair.ttoken ? this.activeTxPair.ttoken : null;
+            const coin = this.$store.state.exchangeRate.coins[this.$i18n.locale || 'zh'];
             if (!tokenId || !rateList[tokenId]) {
                 return null;
             }
+
             return rateList[tokenId][coin] || null;
         }
     }

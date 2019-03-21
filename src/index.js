@@ -1,4 +1,4 @@
-// import '@babel/polyfill';
+// Import '@babel/polyfill';
 require('es6-promise').polyfill();
 
 import 'utils/performance';
@@ -19,22 +19,22 @@ import plugin from 'plugins/addPlugin';
 import directives from 'plugins/directives';
 import resaveAccKeystore from 'utils/resaveAccKeystore.js';
 
-import { initPwdConfirm } from 'components/password/index.js';
-import { initQuotaConfirm } from 'components/quota/index.js';
+import {initPwdConfirm} from 'components/password/index.js';
+import {initQuotaConfirm} from 'components/quota/index.js';
 
 // $onKeyDown $offKeyDown $validAmount $trim $toast $confirm $statistics $wallet
 Vue.use(plugin);
-// v-click-outside v-unlock-account
+// V-click-outside v-unlock-account
 Vue.use(directives);
 Vue.use(VueRouter);
 Vue.use(VueI18n);
 
-const i18n = new VueI18n( i18nConf );
+const i18n = new VueI18n(i18nConf);
 
 Vue.config.devtools = process.env.NODE_ENV !== 'production';
 
 // Start loading animate
-let element = document.getElementById('loading');
+const element = document.getElementById('loading');
 element.className += 'spinner big-spinner';
 
 setTimeout(() => {
@@ -51,7 +51,7 @@ setTimeout(() => {
     initQuotaConfirm(i18n, router);
     new Vue({
         el: '#app',
-        components: { App },
+        components: {App},
         template: '<App/>',
         store,
         router,

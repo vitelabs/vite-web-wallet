@@ -1,15 +1,13 @@
 import BigNumber from 'utils/bigNumber';
 
-const state = {
-    activeTxPair: null
-};
+const state = {activeTxPair: null};
 
 const mutations = {
     exSetActiveTxPair(state, txPair) {
-        let old = state.activeTxPair;
+        const old = state.activeTxPair;
         let isChange = !old;
-        for (let key in old) {
-            if (txPair[key] !==  old[key]) {
+        for (const key in old) {
+            if (txPair[key] !== old[key]) {
                 isChange = true;
                 break;
             }
@@ -19,7 +17,7 @@ const mutations = {
 };
 
 const actions = {
-    exFetchActiveTxPair({ dispatch, commit }, txPair) {
+    exFetchActiveTxPair({dispatch, commit}, txPair) {
         txPair && commit('exSetActiveTxPair', txPair);
         dispatch('exFetchLatestTx');
         dispatch('exFetchDepth');
@@ -32,12 +30,12 @@ const getters = {
         if (!state.activeTxPair) {
             return null;
         }
-        let activeTxPair = Object.assign({}, state.activeTxPair);
-        let upDown = BigNumber.minus(activeTxPair.price || 0, activeTxPair.priceBefore24h || 0);
-        let upDownPre = BigNumber.minus(activeTxPair.price || 0, activeTxPair.pricePrev || 0);
+        const activeTxPair = Object.assign({}, state.activeTxPair);
+        const upDown = BigNumber.minus(activeTxPair.price || 0, activeTxPair.priceBefore24h || 0);
+        const upDownPre = BigNumber.minus(activeTxPair.price || 0, activeTxPair.pricePrev || 0);
 
         activeTxPair.upDown = upDown;
-        activeTxPair.upDownPercent = activeTxPair.price24hChange ? BigNumber.multi(activeTxPair.price24hChange, 100, 2) + '%' : '';
+        activeTxPair.upDownPercent = activeTxPair.price24hChange ? `${ BigNumber.multi(activeTxPair.price24hChange, 100, 2) }%` : '';
         activeTxPair.upDownPre = upDownPre;
 
         return activeTxPair;

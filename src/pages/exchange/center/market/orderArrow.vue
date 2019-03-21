@@ -19,7 +19,7 @@ export default {
     },
     methods: {
         _setOrderRule(isUp) {
-            let rule = `${this.orderItem}${isUp ? 'Up' : 'Down'}`;
+            const rule = `${ this.orderItem }${ isUp ? 'Up' : 'Down' }`;
             this.setOrderRule && this.setOrderRule(rule);
         }
     }
