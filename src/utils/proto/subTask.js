@@ -1,47 +1,45 @@
 // Order.$address.latest;
-import {client} from './index';
-import {timer} from 'utils/asyncFlow';
-import {
-    depthBuy,
-    depthSell,
-    defaultPair,
-    assignPair,
-    latestTx
-} from 'services/exchange';
+import { client } from './index';
+import { timer } from 'utils/asyncFlow';
+import { depthBuy, depthSell, defaultPair, assignPair, latestTx } from 'services/exchange';
 
 export function depthBuyWs({ftoken, ttoken}) {
     const key = `market.${ ftoken }-${ ttoken }.depth.buy`;
-
     return key;
 }
+
 export function depthSellWs({ftoken, ttoken}) {
     const key = `market.${ ftoken }-${ ttoken }.depth.sell`;
-
     return key;
 }
+
 export const defaultPairWs = function ({ttoken}) {
     // `market.${ttokenId}.details.latest`
     const key = `market.${ ttoken }.details.latest`;
-
     return key;
 };
 
 export const assignPairWs = function ({ftoken, ttoken}) {
     const key = `market.${ ftoken }-${ ttoken }.detail.latest`;
-
     return key;
 };
 
 export const latestTxWs = function ({ftoken, ttoken}) {
     const key = `market.${ ftoken }-${ ttoken }.trade.latest`;
-
     return key;
 };
+
 export const latestOrderWs = function ({address}) {
     const key = `order.${ address }.latest`;
-
     return key;
 };
+
+// type = history | current
+export const orderQueryWs = function ({ftoken, ttoken, address, type}) {
+    const key = `market.${ ftoken }-${ ttoken }.order.${ address }.${ type }`;
+    return key;
+};
+
 const httpServicesMap = {
     depthBuy,
     depthSell,
@@ -56,7 +54,8 @@ const wsServicesMap = {
     defaultPair: defaultPairWs,
     assignPair: assignPairWs,
     latestTx: latestTxWs,
-    latestOrder: latestOrderWs
+    latestOrder: latestOrderWs,
+    orderQuery: orderQueryWs
 };
 
 // Http+ws 订阅任务；
@@ -109,7 +108,6 @@ export class subTask extends timer {
     get args() {
         const args = this.argsGetter();
         this.subKey = wsServicesMap[this.key](args);
-
         return args;
     }
 
