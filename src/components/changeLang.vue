@@ -5,7 +5,7 @@
             'up': showLang
         }" @click="toggleLangList">{{ $t('lang') }}</span>
         <ul class="list" v-show="showLang">
-            <li v-for="(key, index) in messages" v-show="key.lang !== $t('lang')" :key="index" 
+            <li v-for="(key, index) in messages" v-show="key.lang !== $t('lang')" :key="index"
                 @click="changeLocale(index)">{{key.lang}}</li>
         </ul>
     </div>

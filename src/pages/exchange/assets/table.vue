@@ -36,7 +36,7 @@
 
         <img @click="update" class="refresh" :class="{rotate:isRotate}" src="~assets/imgs/exchange/refresh.svg" />
 
-        <confirm :title="c.title" :singleBtn="true" class="exchange" 
+        <confirm :title="c.title" :singleBtn="true" class="exchange"
                  :leftBtnTxt="c.btn" :leftBtnClick="confirmClick"
                  :closeIcon="true" :close="closeNumConfirm"
                  v-if="confirmShow">
@@ -44,7 +44,7 @@
                 <div class="__row-t">{{ c.lable1 }}</div>
                 <div class="input un-click-able">
                     <img :src="c.icon" />
-                    {{balance[c.tokenId].symbol}} 
+                    {{balance[c.tokenId].symbol}}
                     <div class="num">
                         {{ c.type.toLowerCase()==="recharge" ? balance[c.tokenId].balance : balance[c.tokenId].available }}
                     </div>
@@ -77,24 +77,20 @@ import powProcess from 'components/powProcess';
 import debounce from 'lodash/debounce';
 import d from 'dayjs';
 
-import { deposit, withdraw, chargeDetail } from 'services/exchange';
+import {deposit, withdraw, chargeDetail} from 'services/exchange';
 
 const VoteDifficulty = '201564160';
 
 export default {
-    components: {
-        confirm, alert, powProcess, viteInput
-    },
-    props: {
-        filter: { type: Object }
-    },
+    components: {confirm, alert, powProcess, viteInput},
+    props: {filter: {type: Object}},
     beforeMount() {
         this.acc = this.$wallet.getActiveAccount();
         if (!this.acc) {
             return;
         }
         this.acc && (this.addr = this.acc.getDefaultAddr());
-        this.addr&&this.$store.dispatch('updateExBalance',this.addr);
+        this.addr && this.$store.dispatch('updateExBalance', this.addr);
     },
     data() {
         return {
@@ -106,28 +102,26 @@ export default {
             detailConfirm: false,
             acc: null,
             addr: '',
-            isRotate:false
+            isRotate: false
         };
     },
     methods: {
-        update: debounce(function (){
-            this.isRotate=true;
-            setTimeout(()=>{
-                this.isRotate=false;
-            },2000);
+        update: debounce(function () {
+            this.isRotate = true;
+            setTimeout(() => {
+                this.isRotate = false;
+            }, 2000);
             this.addr && this.$store.dispatch('updateExBalance', this.addr);
         }, 0.1),
         withdraw(tokenId) {
-            this.showConfirm({ 
-                tokenId, type: 'withdraw' 
-            });
+            this.showConfirm({tokenId, type: 'withdraw'});
         },
         recharge(tokenId) {
-            this.showConfirm({ tokenId, type: 'recharge' });
+            this.showConfirm({tokenId, type: 'recharge'});
         },
         detail(tokenId) {
             this.detailConfirm = true;
-            chargeDetail({ address: this.addr, tokenId }).then(data => {
+            chargeDetail({address: this.addr, tokenId}).then(data => {
                 this.detailData = data.records;
             });
         },
@@ -139,13 +133,11 @@ export default {
             this.detailData = [];
             this.detailConfirm = false;
         },
-        showConfirm({ tokenId, type }) {
+        showConfirm({tokenId, type}) {
             this.opNumber = '';
             this.c = {};
-            const t = Object.assign(
-                {},
-                this.$t(`exchangeAssets.confirm${type}`)
-            );
+            const t = Object.assign({},
+                this.$t(`exchangeAssets.confirm${ type }`));
             t.tokenId = tokenId;
             t.type = type;
             t.icon = this.balance[tokenId].icon;
@@ -155,61 +147,49 @@ export default {
         confirmClick() {
             if (!this.testAmount()) return;
             const tokenId = this.c.tokenId;
-            const amount = BigNumber.toMin(
-                this.opNumber,
-                this.balance[tokenId].decimals
-            );
+            const amount = BigNumber.toMin(this.opNumber,
+                this.balance[tokenId].decimals);
             const c = this.c;
             const failSubmit = e => {
-                const code =
-                    e && e.error ? e.error.code || -1 : e ? e.code : -1;
+                const code
+                    = e && e.error ? e.error.code || -1 : e ? e.code : -1;
                 if (code === -35002) {
-                    let startTime = new Date().getTime();
-                    const powTxt = Object.assign(
-                        {},
-                        this.$t('quotaConfirmPoW')
-                    );
+                    const startTime = new Date().getTime();
+                    const powTxt = Object.assign({},
+                        this.$t('quotaConfirmPoW'));
                     powTxt.leftBtn.click = () => {
-                        this.$router.push({
-                            name: 'walletQuota'
-                        });
+                        this.$router.push({name: 'walletQuota'});
                     };
                     (powTxt.rightBtn.click = () => {
                         this.$refs.pow
-                            .startPowTx(
-                                e.accountBlock,
+                            .startPowTx(e.accountBlock,
                                 startTime,
-                                VoteDifficulty
-                            )
+                                VoteDifficulty)
                             .then(successSubmit)
                             .catch(failSubmit);
                     }),
-                    (powTxt.closeBtn = { show: true });
+                    (powTxt.closeBtn = {show: true});
                     this.$confirm(powTxt);
                 } else {
-                    this.$toast(
-                        this.$t(`exchangeAssets.confirm${c.type}.failToast`)
-                    );
+                    this.$toast(this.$t(`exchangeAssets.confirm${ c.type }.failToast`));
                 }
             };
             const successSubmit = () => {
-                this.$toast(
-                    this.$t(`exchangeAssets.confirm${c.type}.successToast`)
-                );
+                this.$toast(this.$t(`exchangeAssets.confirm${ c.type }.successToast`));
             };
 
             this.closeNumConfirm();
             this.acc.initPwd({
-                submitTxt: this.$t(`exchangeAssets.table.rowMap.${c.type}`),
+                submitTxt: this.$t(`exchangeAssets.table.rowMap.${ c.type }`),
                 cancelTxt: this.$t('exchangeAssets.pwdConfirm.cancelTxt'),
                 submit: () => {
                     c.type === 'recharge'
-                        ? deposit({ tokenId, amount })
+                        ? deposit({tokenId, amount})
                             .then(successSubmit)
                             .catch(e => {
                                 failSubmit(e);
                             })
-                        : withdraw({ tokenId, amount })
+                        : withdraw({tokenId, amount})
                             .then(successSubmit)
                             .catch(e => {
                                 failSubmit(e);
@@ -218,29 +198,33 @@ export default {
             });
         },
         testAmount() {
-            const amountBalance =
-                this.c.type.toLowerCase() === 'recharge'
+            const amountBalance
+                = this.c.type.toLowerCase() === 'recharge'
                     ? this.balance[this.c.tokenId].balance
                     : this.balance[this.c.tokenId].available;
             const decimals = this.balance[this.c.tokenId].decimals;
             const result = this.$validAmount(this.opNumber, decimals);
             if (!result) {
                 this.c.errTips = this.$t('hint.amtFormat');
+
                 return false;
             }
 
             if (BigNumber.isEqual(this.opNumber, 0)) {
                 this.c.errTips = this.$t('wallet.hint.amount');
+
                 return false;
             }
 
-            // const amount = BigNumber.toMin(this.opNumber, decimals);
+            // Const amount = BigNumber.toMin(this.opNumber, decimals);
             if (BigNumber.compared(amountBalance, this.opNumber) < 0) {
                 this.c.errTips = this.$t('hint.insufficientBalance');
+
                 return false;
             }
 
             this.c.errTips = '';
+
             return true;
         }
     },
@@ -248,6 +232,7 @@ export default {
         detailList() {
             return Object.keys(this.detailData).map(k => {
                 const o = this.detailData[k];
+
                 return [
                     d.unix(o.optime).format('YYYY-MM-DD HH:mm'),
                     o.tokenName,
@@ -275,6 +260,7 @@ export default {
                 if (res[t]) {
                     res[t].icon = walletB[t].icon;
                     res[t].balance = Number(walletB[t].balance);
+
                     return;
                 }
                 res[t] = {
@@ -291,25 +277,28 @@ export default {
                 res[t].icon = res[t].icon || getTokenIcon(res[t].id);
                 if (!this.$store.state.exchangeRate.rateMap[t]) {
                     res[t].worth = '-';
+
                     return;
                 }
-                res[t].worth = `${this.$i18n.locale === 'zh' ? '¥' : '$'}${(
+                res[t].worth = `${ this.$i18n.locale === 'zh' ? '¥' : '$' }${ (
                     this.$store.state.exchangeRate.rateMap[t][
                         this.$i18n.locale === 'zh' ? 'cny' : 'usd'
-                    ] *
-                    (res[t].available + res[t].lock)
-                ).toFixed(2)}`;
+                    ]
+                    * (res[t].available + res[t].lock)
+                ).toFixed(2) }`;
             });
+
             return res;
         },
         list() {
             return Object.keys(this.balance)
                 .map(k => this.balance[k])
                 .filter(v => {
-                    const NOTnoZero = this.filter.hideZero && (v.available+v.lock) === 0;
-                    const NOTmatchKey =
-                        this.filter.filterKey &&
-                        !v.symbol.match(new RegExp(this.filter.filterKey, 'i'));
+                    const NOTnoZero = this.filter.hideZero && (v.available + v.lock) === 0;
+                    const NOTmatchKey
+                        = this.filter.filterKey
+                        && !v.symbol.match(new RegExp(this.filter.filterKey, 'i'));
+
                     return !(NOTnoZero || NOTmatchKey);
                 });
         }

@@ -18,7 +18,7 @@
             <div class="token-content" :class="{
                 'up': +upDown > 0,
                 'down': +upDown < 0
-            }">{{ upDownIcon + upDown }} 
+            }">{{ upDownIcon + upDown }}
                 {{ activeTxPair && activeTxPair.upDownPercent ?  upDownIcon + activeTxPair.upDownPercent : '--' }}
             </div>
         </div>
@@ -47,9 +47,7 @@
 import token from './token';
 
 export default {
-    components: {
-        token
-    },
+    components: {token},
     computed: {
         activeTxPair() {
             return this.$store.getters.exActiveTxPair;
@@ -61,6 +59,7 @@ export default {
             if (this.upDown && this.upDown > 0) {
                 return '+';
             }
+
             return '';
         },
         realPrice() {
@@ -69,17 +68,19 @@ export default {
                 pre = '￥';
             }
             if (!this.activeTxPair) {
-                return pre + '0';
+                return `${ pre }0`;
             }
+
             return pre + this.activeTxPair.price * this.rate;
         },
         rate() {
-            let rateList = this.$store.state.exchangeRate.rateMap || {};
-            let tokenId = this.activeTxPair && this.activeTxPair.ttoken ? this.activeTxPair.ttoken : null;
-            let coin = this.$store.state.exchangeRate.coins[this.$i18n.locale || 'zh'];
+            const rateList = this.$store.state.exchangeRate.rateMap || {};
+            const tokenId = this.activeTxPair && this.activeTxPair.ttoken ? this.activeTxPair.ttoken : null;
+            const coin = this.$store.state.exchangeRate.coins[this.$i18n.locale || 'zh'];
             if (!tokenId || !rateList[tokenId]) {
                 return null;
             }
+
             return rateList[tokenId][coin] || null;
         }
     }

@@ -10,16 +10,14 @@
 
 <script>
 import goNetBtn from './goNetBtn.vue';
-import { blackHole } from 'utils/ethWallet/viteContract';
+import {blackHole} from 'utils/ethWallet/viteContract';
 
 export default {
-    components: {
-        goNetBtn
-    },
+    components: {goNetBtn},
     props: {
         title: {
-            default: function() {
-                return `${this.$route.name}.title`;
+            default: function () {
+                return `${ this.$route.name }.title`;
             }
         },
         isShowHelp: {
@@ -27,37 +25,30 @@ export default {
             default: true
         },
         helpTitle: {
-            default: function() {
-                return `${this.$route.name}.help.title`;
+            default: function () {
+                return `${ this.$route.name }.help.title`;
             }
         },
         helpText: {
-            default: function() {
-                return `${this.$route.name}.help.text`;
+            default: function () {
+                return `${ this.$route.name }.help.text`;
             }
         },
-        showHelp: {
-            default: null
-        }
+        showHelp: {default: null}
     },
     methods: {
         _showHelp() {
             if (this.showHelp) {
                 this.showHelp();
+
                 return;
             }
             this.$confirm({
                 title: this.$t(this.helpTitle),
                 singleBtn: true,
-                closeBtn: {
-                    show: false
-                },
-                leftBtn: {
-                    text: this.$t('btn.understand')
-                },
-                content: this.$t(this.helpText, { 
-                    blackAddr: blackHole 
-                })
+                closeBtn: {show: false},
+                leftBtn: {text: this.$t('btn.understand')},
+                content: this.$t(this.helpText, {blackAddr: blackHole})
             });
         }
     }
@@ -87,7 +78,7 @@ export default {
             width: 20px;
             height: 20px;
             display: inline-block;
-            margin-right: 0; 
+            margin-right: 0;
         }
         .help-text {
             position: relative;
@@ -102,7 +93,7 @@ export default {
 @media only screen and (max-width: 900px) {
     .sec-title-container {
         .help {
-            margin-left: 0; 
+            margin-left: 0;
             margin-top: 8px;
             text-align: left;
             display: block;

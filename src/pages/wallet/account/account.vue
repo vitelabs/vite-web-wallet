@@ -19,9 +19,7 @@ import accountHead from './head';
 import transaction from './transaction';
 
 export default {
-    components: {
-        accountHead, syncBlock, tokenCard, transaction
-    },
+    components: {accountHead, syncBlock, tokenCard, transaction},
     data() {
         return {
             isShowTrans: false,
@@ -29,17 +27,18 @@ export default {
         };
     },
     computed: {
-        tokenList() {   // Force vite at first
+        // Force vite at first
+        tokenList() {
             const tokenList = JSON.parse(JSON.stringify(this.$store.getters.tokenBalanceList));
 
-            for (let tokenId in this.$store.state.ledger.defaultTokenIds) {
+            for (const tokenId in this.$store.state.ledger.defaultTokenIds) {
                 if (!this.$store.state.ledger.tokenInfoMaps[tokenId] && !tokenList[tokenId]) {
                     break;
                 }
 
-                let token = this.$store.state.ledger.tokenInfoMaps[tokenId] || tokenList[tokenId];
-                let defaultToken = this.$store.state.ledger.defaultTokenIds[tokenId];
-                let symbol = token.tokenSymbol || defaultToken.tokenSymbol;
+                const token = this.$store.state.ledger.tokenInfoMaps[tokenId] || tokenList[tokenId];
+                const defaultToken = this.$store.state.ledger.defaultTokenIds[tokenId];
+                const symbol = token.tokenSymbol || defaultToken.tokenSymbol;
 
                 tokenList[tokenId] = tokenList[tokenId] || {
                     balance: '0',
@@ -50,20 +49,21 @@ export default {
                 tokenList[tokenId].icon = defaultToken.icon;
             }
 
-            let viteTokenInfo = this.$store.getters.viteTokenInfo;
+            const viteTokenInfo = this.$store.getters.viteTokenInfo;
             if (!viteTokenInfo) {
                 return tokenList;
             }
 
             const list = [];
-            let viteId = viteTokenInfo.tokenId;
+            const viteId = viteTokenInfo.tokenId;
             if (tokenList[viteId]) {
                 list.push(tokenList[viteId]);
                 delete tokenList[viteId];
             }
-            Object.keys(tokenList).forEach(k=>{
+            Object.keys(tokenList).forEach(k => {
                 list.push(tokenList[k]);
             });
+
             return list;
         }
     },

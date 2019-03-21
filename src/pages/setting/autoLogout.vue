@@ -23,7 +23,8 @@ export default {
         return {
             autoLogoutTime: localStorage.getItem('autoLogoutTime') || 5,
             showTime: false,
-            timeList: [5, 10, 30, 60, 12 * 60]  // Minutes
+            // Minutes
+            timeList: [ 5, 10, 30, 60, 12 * 60 ]
         };
     },
     methods: {

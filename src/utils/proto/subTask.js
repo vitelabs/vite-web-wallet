@@ -1,6 +1,6 @@
-// order.$address.latest;
-import { client } from './index';
-import { timer } from 'utils/asyncFlow';
+// Order.$address.latest;
+import {client} from './index';
+import {timer} from 'utils/asyncFlow';
 import {
     depthBuy,
     depthSell,
@@ -9,40 +9,38 @@ import {
     latestTx
 } from 'services/exchange';
 
-export function depthBuyWs({ ftoken, ttoken }) {
-    const key = `market.${ftoken}-${ttoken}.depth.buy`;
-    return key;
-}
-export function depthSellWs({ ftoken, ttoken }) {
-    const key = `market.${ftoken}-${ttoken}.depth.sell`;
-    return key;
+export function depthBuyWs({ftoken, ttoken}) {
+    const key = `market.${ ftoken }-${ ttoken }.depth.buy`;
 
+    return key;
 }
-export const defaultPairWs = function ({
-    ttoken
-}) {
+export function depthSellWs({ftoken, ttoken}) {
+    const key = `market.${ ftoken }-${ ttoken }.depth.sell`;
+
+    return key;
+}
+export const defaultPairWs = function ({ttoken}) {
     // `market.${ttokenId}.details.latest`
-    const key = `market.${ttoken}.details.latest`;
+    const key = `market.${ ttoken }.details.latest`;
+
     return key;
 };
 
-export const assignPairWs = function ({
-    ftoken, ttoken
-}) {
-    const key = `market.${ftoken}-${ttoken}.detail.latest`;
+export const assignPairWs = function ({ftoken, ttoken}) {
+    const key = `market.${ ftoken }-${ ttoken }.detail.latest`;
+
     return key;
 };
 
-export const latestTxWs = function ({
-    ftoken, ttoken
-}) {
-    const key = `market.${ftoken}-${ttoken}.trade.latest`;
+export const latestTxWs = function ({ftoken, ttoken}) {
+    const key = `market.${ ftoken }-${ ttoken }.trade.latest`;
+
     return key;
 };
-export const latestOrderWs = function ({ address }) {
-    const key = `order.${address}.latest`;
-    return key;
+export const latestOrderWs = function ({address}) {
+    const key = `order.${ address }.latest`;
 
+    return key;
 };
 const httpServicesMap = {
     depthBuy,
@@ -61,7 +59,7 @@ const wsServicesMap = {
     latestOrder: latestOrderWs
 };
 
-// http+ws 订阅任务；
+// Http+ws 订阅任务；
 // 1，第一次启动以http方式拉全量数据；
 // 2，ws订阅失败时以轮询代替
 // 3，支持参数更新时自动切换订阅key
@@ -71,20 +69,18 @@ export class subTask extends timer {
         super();
         this.interval = interval;
         this.loopFunc = () => {
-            // use http if sub unavalible
+            // Use http if sub unavalible
             if (!client.closed && this.subStatus) {
                 return;
             }
 
-            let args = this.args;
-            let key = this.subKey;
-            httpServicesMap[this.key] && httpServicesMap[this.key](args).then((data) => {
+            const args = this.args;
+            const key = this.subKey;
+            httpServicesMap[this.key] && httpServicesMap[this.key](args).then(data => {
                 if (this.subKey !== key) {
                     return;
                 }
-                this.callback && this.callback({
-                    args, data
-                });
+                this.callback && this.callback({args, data});
             });
         };
 
@@ -94,34 +90,38 @@ export class subTask extends timer {
         this.callback = callback;
         this.subStatus = true;
     }
+
     start(argsGetter) {
         this.argsGetter = argsGetter;
         super.start();
 
-        // get all data from http at first
-        let args = this.args;
-        let key = this.subKey;
-        httpServicesMap[this.key] && httpServicesMap[this.key](args).then((data) => {
+        // Get all data from http at first
+        const args = this.args;
+        const key = this.subKey;
+        httpServicesMap[this.key] && httpServicesMap[this.key](args).then(data => {
             if (this.subKey !== key) {
                 return;
             }
-            this.callback && this.callback({
-                args, data
-            });
+            this.callback && this.callback({args, data});
         });
     }
+
     get args() {
         const args = this.argsGetter();
         this.subKey = wsServicesMap[this.key](args);
+
         return args;
     }
-    set args(value){
-        this._args=value;
+
+    set args(value) {
+        this._args = value;
     }
-    get subKey(){
+
+    get subKey() {
         return this._subKey;
     }
-    set subKey(v){
+
+    set subKey(v) {
         if (this._subKey === v) return;
 
         const oldkey = this.subKey;
@@ -130,15 +130,13 @@ export class subTask extends timer {
 
         client.unSub(oldkey, this.callback);
 
-        let args = this.args;
-        let key = this.subKey;
-        client.sub(this.subKey, (data) => {
+        const args = this.args;
+        const key = this.subKey;
+        client.sub(this.subKey, data => {
             if (this.subKey !== key) {
                 return;
             }
-            this.callback && this.callback({ 
-                args, data 
-            });
+            this.callback && this.callback({args, data});
         }, (data, err) => {
             if (err) {
                 this.subStatus = false;
@@ -148,6 +146,7 @@ export class subTask extends timer {
             }
         });
     }
+
     stop() {
         super.stop();
         this.args = [];

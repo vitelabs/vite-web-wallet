@@ -1,4 +1,4 @@
-import { subTask } from 'utils/proto/subTask';
+import {subTask} from 'utils/proto/subTask';
 
 const time = 2000;
 let buyTask = null;
@@ -27,8 +27,8 @@ const mutations = {
 };
 
 const actions = {
-    exFetchDepth({ rootState, dispatch }) {
-        let activeTxPair = rootState.exchangeActiveTxPair.activeTxPair;
+    exFetchDepth({rootState, dispatch}) {
+        const activeTxPair = rootState.exchangeActiveTxPair.activeTxPair;
         if (!activeTxPair) {
             return;
         }
@@ -36,20 +36,20 @@ const actions = {
         dispatch('exFetchDepthBuy');
         dispatch('exFetchDepthSell');
     },
-    exFetchDepthBuy({ commit, getters }) {
+    exFetchDepthBuy({commit, getters}) {
         commit('exSetDepthBuyLoading', true);
 
-        buyTask = buyTask || new subTask('depthBuy', ({ data }) => {
+        buyTask = buyTask || new subTask('depthBuy', ({data}) => {
             commit('exSetDepthBuyLoading', false);
             commit('exSetDepthBuy', data);
         }, time);
 
         buyTask.start(() => getters.exActiveTxPair);
     },
-    exFetchDepthSell({ commit, getters }) {
+    exFetchDepthSell({commit, getters}) {
         commit('exSetDepthSellLoading', true);
 
-        sellTask = sellTask || new subTask('depthSell', ({ data }) => {
+        sellTask = sellTask || new subTask('depthSell', ({data}) => {
             commit('exSetDepthSellLoading', false);
             commit('exSetDepthSell', data);
         }, time);

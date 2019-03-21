@@ -4,7 +4,7 @@
             <span class="icon" :class="{
                 'active': active === 'createAccount',
                 'finish': active !== 'createAccount'
-            }"></span><span class="line" :class="{'finish': active !== 'createAccount'}"></span><span 
+            }"></span><span class="line" :class="{'finish': active !== 'createAccount'}"></span><span
                 class="icon" :class="{
                     'active': active === 'record',
                     'default': active !== 'record'

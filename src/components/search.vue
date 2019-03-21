@@ -3,9 +3,9 @@
         <i class="icon"></i>
         <!-- Safari autocomplete -->
         <input fake_pass type="password" style="display:none"/>
-        <input readonly onfocus="this.removeAttribute('readonly');" 
-               :placeholder="placeholder" name="search" 
-               autocomplete="off" ref="i" type="text" 
+        <input readonly onfocus="this.removeAttribute('readonly');"
+               :placeholder="placeholder" name="search"
+               autocomplete="off" ref="i" type="text"
                v-model="v" @input.prevent="updateKey">
         <input fake_pass type="password" style="display:none"/>
     </div>
@@ -24,14 +24,12 @@ export default {
         }
     },
     methods: {
-        updateKey: throttle(function() {
+        updateKey: throttle(function () {
             this.$emit('input', this.v);
         }, 500)
     },
     data() {
-        return {
-            v: ''
-        };
+        return {v: ''};
     }
 };
 </script>

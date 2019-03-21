@@ -58,11 +58,12 @@
         "15": "ViteX提币",
         "16": "ViteX挂单",
         "17": "ViteX撤单",
-        "18": "CreateContractReq",
-        "19": "转账",
+        "18": "DexFundNewMarket",
+        "19": "CreateContractReq",
         "20": "转账",
         "21": "转账",
-        "22": "转账"
+        "22": "转账",
+        "23": "转账"
     },
     "btn": {
         "cancel": "取消",
@@ -435,7 +436,8 @@
             "name": "开通代币名称",
             "id": "开通代币TokenID",
             "hint": "交易对开通成功后，如果想要添加网关标识（如BTC.V），请发邮件联系我们：info@vite.org",
-            "btn": "提交申请"
+            "btn": "提交申请",
+            "search": "请输入代币名称"
         },
         "buy": {
             "title": "买入{token}",
@@ -455,6 +457,11 @@
             "quantity": "24h成交量",
             "tokenName": "代币名称",
             "tokenShow": "代币简称",
+            "originalSymbol": "跨链代币原称",
+            "gateway": "发行网关",
+            "website": "官网",
+            "explorer": "区块浏览器",
+            "overview": "代币描述",
             "tokenId": "TokenID",
             "publisher": "发行者",
             "total": "总金额",

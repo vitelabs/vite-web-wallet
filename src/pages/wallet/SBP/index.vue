@@ -35,35 +35,34 @@
 import secTitle from 'components/secTitle';
 import loading from 'components/loading';
 import confirm from 'components/confirm';
-import { quotaConfirm } from 'components/quota/index';
+import {quotaConfirm} from 'components/quota/index';
 import viteInput from 'components/viteInput';
 import BigNumber from 'utils/bigNumber';
-import { address } from 'utils/tools';
+import {address} from 'utils/tools';
 import register from './register';
 import list from './list';
 
 export default {
-    components: {
-        secTitle, register, list, loading, confirm, viteInput
-    },
+    components: {secTitle, register, list, loading, confirm, viteInput},
     created() {
         this.tokenInfo = this.$store.getters.viteTokenInfo;
 
         if (!this.tokenInfo) {
             this.loadingToken = true;
-            this.$store.dispatch('fetchTokenInfo').then((tokenInfo) => {
+            this.$store.dispatch('fetchTokenInfo').then(tokenInfo => {
                 this.loadingToken = false;
                 this.tokenInfo = tokenInfo;
-            }).catch((err) => {
-                console.warn(err);
-            });
+            })
+                .catch(err => {
+                    console.warn(err);
+                });
         }
     },
     destroyed() {
         this.clearAll();
     },
     data() {
-        let activeAccount = this.$wallet.getActiveAccount();
+        const activeAccount = this.$wallet.getActiveAccount();
 
         return {
             activeAccount,
@@ -91,9 +90,9 @@ export default {
     },
     methods: {
         canUseAddr(nodeName, addr) {
-            let usedAddrList = [];
-            for (let name in this.regAddrList) {
-                let canUseCancelAddr = (name === nodeName);
+            const usedAddrList = [];
+            for (const name in this.regAddrList) {
+                const canUseCancelAddr = (name === nodeName);
                 this.regAddrList[name].forEach(item => {
                     if (item.isCancel && canUseCancelAddr) {
                         return;
@@ -109,14 +108,16 @@ export default {
                 return;
             }
 
-            if (!this.addr || 
-                !address.isValidHexAddr(this.addr)) {
+            if (!this.addr
+                || !address.isValidHexAddr(this.addr)) {
                 this.addrErr = this.$t('walletSBP.section1.addrErr');
+
                 return;
             }
 
             if (!this.canUseAddr(this.activeItem.name, this.addr)) {
                 this.addrErr = this.$t('walletSBP.section1.addrUsed');
+
                 return;
             }
 
@@ -155,7 +156,7 @@ export default {
                 return;
             }
 
-            let showConfirmType = this.showConfirmType;
+            const showConfirmType = this.showConfirmType;
             this.showConfirmType = '';
 
             this.activeAccount.initPwd({
@@ -171,46 +172,42 @@ export default {
         sendUpdateTx() {
             this.loading = true;
 
-            let nodeName = this.activeItem.name;
-            let producer = this.addr;
-            this.sendTx({
-                producerAddr: producer
-            }, 'updateReg').then(() => {
+            const nodeName = this.activeItem.name;
+            const producer = this.addr;
+            this.sendTx({producerAddr: producer}, 'updateReg').then(() => {
                 this.loading = false;
-                this.$toast(this.$t('hint.request', {
-                    name: this.$t('walletSBP.section2.update')
-                }));
+                this.$toast(this.$t('hint.request', {name: this.$t('walletSBP.section2.update')}));
                 this.closeConfirm();
                 this.$store.dispatch('loopRegList', {
                     address: this.activeAccount.getDefaultAddr(),
                     nodeName,
-                    operate: 2, 
+                    operate: 2,
                     producer
                 });
-            }).catch((err) => {
-                console.warn(err);
-                this.loading = false;
-                if (err && err.error && err.error.code && err.error.code === -35002) {
-                    quotaConfirm({
-                        operate: this.$t('btn.edit')
-                    });
-                    return;
-                }
-                this.$toast(this.$t('walletSBP.section2.updateFail'), err);
-            });
+            })
+                .catch(err => {
+                    console.warn(err);
+                    this.loading = false;
+                    if (err && err.error && err.error.code && err.error.code === -35002) {
+                        quotaConfirm({operate: this.$t('btn.edit')});
+
+                        return;
+                    }
+                    this.$toast(this.$t('walletSBP.section2.updateFail'), err);
+                });
         },
 
-        sendTx({
-            producerAddr, nodeName, amount
-        }, type) {
+        sendTx({producerAddr, nodeName, amount}, type) {
             if (!this.netStatus) {
                 this.$toast(this.$t('hint.noNet'));
+
                 return Promise.reject(false);
             }
 
             this.activeAccount = this.$wallet.getActiveAccount();
 
-            let toAmount = BigNumber.toMin(amount || 0, this.tokenInfo.decimals);
+            const toAmount = BigNumber.toMin(amount || 0, this.tokenInfo.decimals);
+
             return this.activeAccount[type]({
                 tokenId: this.tokenInfo.tokenId,
                 nodeName: nodeName || this.activeItem.name,
@@ -355,7 +352,7 @@ export default {
     opacity: 0;
     transition: opacity 0.5s ease-in-out;
     width: 0;
-    height: 0; 
+    height: 0;
     &.active {
         min-width: 300px;
         height: auto;

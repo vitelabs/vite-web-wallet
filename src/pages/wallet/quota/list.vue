@@ -24,7 +24,7 @@
                 text: $t('action'),
                 cell: 'cancel'
             }]" :contentList="pledgeList" :clickCell="clickCell">
-                <pagination class="__tb_pagination" :currentPage="currentPage + 1" 
+                <pagination class="__tb_pagination" :currentPage="currentPage + 1"
                             :totalPage="totalPage" :toPage="toPage"></pagination>
             </table-list>
         </div>
@@ -43,9 +43,7 @@ import ellipsisAddr from 'utils/ellipsisAddr.js';
 let pledgeListInst;
 
 export default {
-    components: {
-        pagination, tableList
-    },
+    components: {pagination, tableList},
     props: {
         tokenInfo: {
             type: Object,
@@ -69,8 +67,8 @@ export default {
         this.stopLoopPledgeList();
     },
     data() {
-        let activeAccount = this.$wallet.getActiveAccount();
-        let address = activeAccount.getDefaultAddr();
+        const activeAccount = this.$wallet.getActiveAccount();
+        const address = activeAccount.getDefaultAddr();
 
         return {
             activeAccount,
@@ -85,6 +83,7 @@ export default {
             if (!this.tokenInfo) {
                 return 0;
             }
+
             return BigNumber.toBasic(this.$store.state.pledge.totalPledgeAmount || 0, this.tokenInfo.decimals);
         },
         totalPage() {
@@ -98,22 +97,22 @@ export default {
                 return [];
             }
 
-            let pledgeList = this.$store.getters.pledgeList;
+            const pledgeList = this.$store.getters.pledgeList;
 
-            let nowList = [];
-            pledgeList.forEach((pledge) => {
-                let addrIcon = pledge.beneficialAddr === this.address ? `<img class="beneficial-img" src="${userImg}"/>` : '';
-                let addr = `<span class="beneficial-addr">${ ellipsisAddr(pledge.beneficialAddr) }</span>`;
+            const nowList = [];
+            pledgeList.forEach(pledge => {
+                const addrIcon = pledge.beneficialAddr === this.address ? `<img class="beneficial-img" src="${ userImg }"/>` : '';
+                const addr = `<span class="beneficial-addr">${ ellipsisAddr(pledge.beneficialAddr) }</span>`;
 
-                let isMaturity = BigNumber.compared(pledge.withdrawHeight, this.currentHeight) <= 0;
-                let cancelClass = isMaturity ? 'cancel active' : 'cancel';
-                let cancel = `<span class="${cancelClass}">${this.$t('walletQuota.withdrawalStaking')}</span>`;
+                const isMaturity = BigNumber.compared(pledge.withdrawHeight, this.currentHeight) <= 0;
+                const cancelClass = isMaturity ? 'cancel active' : 'cancel';
+                const cancel = `<span class="${ cancelClass }">${ this.$t('walletQuota.withdrawalStaking') }</span>`;
 
-                let pledgeDate = isMaturity ? 
-                    this.$t('walletQuota.maturity') : 
-                    date(pledge.withdrawTime * 1000, this.$i18n.locale);
+                const pledgeDate = isMaturity
+                    ? this.$t('walletQuota.maturity')
+                    : date(pledge.withdrawTime * 1000, this.$i18n.locale);
 
-                let showAmount = BigNumber.toBasic(pledge.amount || 0, this.tokenInfo.decimals);
+                const showAmount = BigNumber.toBasic(pledge.amount || 0, this.tokenInfo.decimals);
 
                 nowList.push({
                     beneficialAddr: pledge.beneficialAddr,
@@ -126,13 +125,15 @@ export default {
                     cancel
                 });
             });
+
             return nowList;
-        },
+        }
     },
     methods: {
         clickCell(cell, item, index) {
             if (cell === 'addr') {
                 this.gotoDetail(item.beneficialAddr);
+
                 return;
             }
             if (cell !== 'cancel') {
@@ -140,25 +141,27 @@ export default {
             }
             if (!item.isMaturity) {
                 this.$toast(this.$t('walletQuota.list.unexpired'));
+
                 return;
             }
             if (this.$wallet.isLogin) {
                 this.showCancel(item, index);
+
                 return;
             }
-            let activeAccount = this.$wallet.getActiveAccount();
+            const activeAccount = this.$wallet.getActiveAccount();
             activeAccount && activeAccount.unlockAccount();
         },
         gotoDetail(addr) {
-            let locale = this.$i18n.locale === 'zh' ? 'zh/' : '';
-            window.open(`${process.env.viteNet}${locale}account/${addr}`);
+            const locale = this.$i18n.locale === 'zh' ? 'zh/' : '';
+            window.open(`${ process.env.viteNet }${ locale }account/${ addr }`);
         },
         showCancel(item) {
             if (this.loading) {
                 return;
             }
             this.activeItem = item;
-            let amount = BigNumber.toBasic(item.amount || 0, this.tokenInfo.decimals);
+            const amount = BigNumber.toBasic(item.amount || 0, this.tokenInfo.decimals);
             this.showConfirm('cancel', amount);
         },
 
@@ -169,15 +172,13 @@ export default {
             }, 'withdrawalOfQuota', (result, err) => {
                 this.loading = false;
                 this.activeItem = null;
-                result && this.$toast(this.$t('hint.request', {
-                    name: this.$t('walletQuota.withdrawalStaking') 
-                }));
+                result && this.$toast(this.$t('hint.request', {name: this.$t('walletQuota.withdrawalStaking')}));
                 !result && err && this.$toast(this.$t('walletQuota.canclePledgeFail'), err);
             });
         },
 
         toPage(pageNumber) {
-            let pageIndex = pageNumber - 1;
+            const pageIndex = pageNumber - 1;
             if ((pageIndex >= this.totalPage && pageIndex) || pageIndex < 0) {
                 return;
             }
@@ -185,19 +186,18 @@ export default {
             this.currentPage = pageIndex;
             this.stopLoopTransList();
 
-            this.fetchPledgeList(this.currentPage, true).then((data)=>{
+            this.fetchPledgeList(this.currentPage, true).then(data => {
                 data && this.$refs.tableContent && (this.$refs.tableContent.scrollTop = 0);
                 this.startLoopPledgeList();
-            }).catch(()=>{
-                this.startLoopPledgeList();
-            });
+            })
+                .catch(() => {
+                    this.startLoopPledgeList();
+                });
         },
 
         startLoopPledgeList() {
             this.stopLoopPledgeList();
-            pledgeListInst = new timer(()=>{
-                return this.fetchPledgeList(this.currentPage);
-            }, 1000);
+            pledgeListInst = new timer(() => this.fetchPledgeList(this.currentPage), 1000);
             pledgeListInst.start();
         },
         stopLoopPledgeList() {

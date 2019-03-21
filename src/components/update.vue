@@ -24,34 +24,35 @@ export default {
     },
     mounted() {
         // "1": {
-        //     "version": "0.0.1",
-        //     "zh": "0.0.1 中文版 版本描述",
-        //     "en": "0.0.1 english version",
-        //     "time": "22329382932"
+        // "version": "0.0.1",
+        // "zh": "0.0.1 中文版 版本描述",
+        // "en": "0.0.1 english version",
+        // "time": "22329382932"
         // }
-        let lastVersion = localStorage.getItem(version_key) || null;
+        const lastVersion = localStorage.getItem(version_key) || null;
 
-        let currentCode = lastVersion ? lastVersion.currentCode || 0 : 0;
+        const currentCode = lastVersion ? lastVersion.currentCode || 0 : 0;
         let lastList = lastVersion ? lastVersion.showList || [] : [];
 
         this.versionList = [];
-        for (let code in version) {
+        for (const code in version) {
             if (currentCode >= code) {
                 continue;
             }
 
             version[code].code = code;
-            this.versionList.push( version[code] );
+            this.versionList.push(version[code]);
         }
 
         if (this.versionList.length >= showNum) {
             this.versionList = this.versionList.slice(this.versionList.length - showNum);
             this.latestCode = this.versionList[this.versionList.length - 1].code;
             this.saveVersion();
+
             return;
         }
 
-        let len = showNum - this.versionList.length;
+        const len = showNum - this.versionList.length;
         lastList = lastList.length <= len ? lastList : lastList.slice(lastList.length - len);
         this.versionList = lastList.concat(this.versionList);
         this.latestCode = this.versionList.length ? this.versionList[this.versionList.length - 1].code : null;

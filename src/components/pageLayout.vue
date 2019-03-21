@@ -5,7 +5,7 @@
 
         <div class="page-content" :class="{'page-scroll': active.indexOf('exchange') === 0}">
             <div class="page-scroll-wrapper">
-                <second-menu v-show="secondMenuList && secondMenuList.length" 
+                <second-menu v-show="secondMenuList && secondMenuList.length"
                              :go="go" class="second-menu" :tabList="secondMenuList"
                              :class="{'have-padding': active.indexOf('exchange') !== 0}">
                 </second-menu>
@@ -24,17 +24,16 @@ import secondMenu from 'components/secondMenu';
 import localStorage from 'utils/localStorage';
 
 let autoLogout = null;
-let _t = localStorage.getItem('autoLogoutTime') || 5;   // Minutes
+// Minutes
+const _t = localStorage.getItem('autoLogoutTime') || 5;
 const autoLogoutTime = _t * 60 * 1000;
 
 export default {
-    components: {
-        sidebar, viteMenu, secondMenu
-    },
+    components: {sidebar, viteMenu, secondMenu},
     props: {
         active: {
             type: String,
-            default: '',
+            default: ''
         }
     },
     data() {
@@ -54,10 +53,11 @@ export default {
         });
     },
     watch: {
-        isLogin: function() {
+        isLogin: function () {
             this.setMenuList();
             if (this.isLogin) {
                 this.operate();
+
                 return;
             }
             this.clearAutoLogout();
@@ -66,37 +66,36 @@ export default {
     computed: {
         secondMenuList() {
             if (this.active.indexOf('exchange') === 0) {
-                return ['exchange', 'exchangeAssets', 'exchangeOpenOrders', 'exchangeOrderHistory'];
+                return [ 'exchange', 'exchangeAssets', 'exchangeOpenOrders', 'exchangeOrderHistory' ];
             }
             if (this.active.indexOf('wallet') !== 0) {
                 return [];
             }
-            let list = ['wallet', 'walletQuota', 'walletSBP', 'walletVote', 'walletTransList'];
+            const list = [ 'wallet', 'walletQuota', 'walletSBP', 'walletVote', 'walletTransList' ];
 
-            let activeAccount = this.$wallet.getActiveAccount();
+            const activeAccount = this.$wallet.getActiveAccount();
             this.isLogin && activeAccount.type === 'wallet' && list.push('walletConversion');
+
             return list;
         }
     },
     methods: {
         setMenuList() {
-            let menuList = ['wallet', 'exchange', 'setting'];
+            const menuList = [ 'wallet', 'exchange', 'setting' ];
             menuList.push(this.isLogin ? 'logout' : 'login');
             this.menuList = menuList;
         },
         go(name) {
             if (name === 'logout') {
                 this.$wallet.logout();
-                this.$router.push({ 
-                    name: 'exchange' 
-                });
+                this.$router.push({name: 'exchange'});
+
                 return;
             }
 
             if (name === 'login') {
-                this.$router.push({
-                    name: 'start'
-                });
+                this.$router.push({name: 'start'});
+
                 return;
             }
 
@@ -104,15 +103,14 @@ export default {
                 return;
             }
 
-            let account = this.$wallet.getActiveAccount();
+            const account = this.$wallet.getActiveAccount();
             if (!account && name !== 'setting') {
-                this.$router.push({
-                    name: 'start'
-                });
+                this.$router.push({name: 'start'});
+
                 return;
             }
-            
-            this.$router.push({ name });
+
+            this.$router.push({name});
         },
 
         clearAutoLogout() {
@@ -121,7 +119,7 @@ export default {
         },
         operate() {
             this.clearAutoLogout();
-            autoLogout = setTimeout(()=>{
+            autoLogout = setTimeout(() => {
                 autoLogout = null;
                 location.reload();
             }, autoLogoutTime);
@@ -159,7 +157,7 @@ export default {
         }
         &.page-scroll {
             overflow: auto;
-            .page-scroll-wrapper {    
+            .page-scroll-wrapper {
                 width: 100%;
                 height: 100%;
                 min-width: 1350px;
