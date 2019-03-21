@@ -84,6 +84,7 @@
         "noData": "No Data",
         "err": "Oops, error occurs",
         "request": "{name} request has sent, please wait",
+        "reqError": "请求失败",
         "copy": "Successfully copied",
         "addrFormat": "Address format error",
         "amtFormat": "Amount format error",
