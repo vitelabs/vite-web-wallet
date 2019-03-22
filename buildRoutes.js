@@ -92,7 +92,6 @@ routesStr += `export default { routes: [${ _routes }] }`;
 fs.writeFileSync(routesPath, routesStr);
 
 
-
 function pushRoute(fPath, tmpPath, name, parent) {
     if (!name) {
         return;
