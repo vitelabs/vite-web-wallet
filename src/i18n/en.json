@@ -84,7 +84,6 @@
         "noData": "No Data",
         "err": "Oops, error occurs",
         "request": "{name} request has sent, please wait",
-        "reqError": "请求失败",
         "copy": "Successfully copied",
         "addrFormat": "Address format error",
         "amtFormat": "Amount format error",
@@ -438,7 +437,9 @@
             "id": "开通代币TokenID",
             "hint": "交易对开通成功后，如果想要添加网关标识（如BTC.V），请发邮件联系我们：info@vite.org",
             "btn": "提交申请",
-            "search": "请输入代币名称"
+            "search": "请输入代币名称",
+            "reqSuccess": "提交申请成功，请稍后在市场中查看",
+            "reqError": "上币失败，请稍后重试"
         },
         "buy": {
             "title": "Buy {token}",
