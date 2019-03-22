@@ -47,7 +47,7 @@
 import token from './token';
 
 export default {
-    components: {token},
+    components: { token },
     computed: {
         activeTxPair() {
             return this.$store.getters.exActiveTxPair;

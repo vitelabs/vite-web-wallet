@@ -35,7 +35,7 @@ import dexToken from 'components/dexToken';
 import goNetBtn from './goNetBtn.vue';
 
 export default {
-    components: {goNetBtn, changeLang, dexToken},
+    components: { goNetBtn, changeLang, dexToken },
     props: {
         tabList: {
             type: Array,
@@ -87,7 +87,7 @@ export default {
         },
         dexChange() {
             if (!this.isHaveUsers) {
-                this.$router.push({name: 'startCreate'});
+                this.$router.push({ name: 'startCreate' });
 
                 return;
             }

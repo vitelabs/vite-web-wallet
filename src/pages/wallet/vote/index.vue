@@ -71,15 +71,15 @@ import secTitle from 'components/secTitle';
 import loading from 'components/loading';
 import confirm from 'components/confirm';
 import powProcess from 'components/powProcess';
-import {timer} from 'utils/asyncFlow';
+import { timer } from 'utils/asyncFlow';
 import BigNumber from 'utils/bigNumber';
-import {constant} from '@vite/vitejs';
+import { constant } from '@vite/vitejs';
 import $ViteJS from 'utils/viteClient';
 
 const VoteDifficulty = '201564160';
 
 export default {
-    components: {secTitle, tooltips, search, loading, confirm, powProcess},
+    components: { secTitle, tooltips, search, loading, confirm, powProcess },
     beforeMount() {
         this.tokenInfo = this.$store.getters.viteTokenInfo;
 
@@ -172,7 +172,7 @@ export default {
                 // 撤销投票中
                 t.voteStatus = 'canceling';
                 this.cache = t;
-                this.$toast(this.$t('hint.request', {name: this.$t('walletVote.section1.revoke')}));
+                this.$toast(this.$t('hint.request', { name: this.$t('walletVote.section1.revoke') }));
             };
 
             const failCancel = e => {
@@ -181,14 +181,14 @@ export default {
                     const startTime = new Date().getTime();
                     const c = Object.assign({}, this.$t('quotaConfirmPoW'));
                     c.leftBtn.click = () => {
-                        this.$router.push({name: 'walletQuota'});
+                        this.$router.push({ name: 'walletQuota' });
                     };
                     (c.rightBtn.click = () => {
                         this.$refs.pow.startPowTx(e.accountBlock, startTime, VoteDifficulty)
                             .then(successCancel)
                             .catch(failCancel);
                     }),
-                    (c.closeBtn = {show: true});
+                    (c.closeBtn = { show: true });
                     this.$confirm(c);
                 } else {
                     this.$toast(this.$t('walletVote.section1.cancelVoteErr'), e);
@@ -197,7 +197,7 @@ export default {
 
             const sendCancel = () => {
                 activeAccount = this.$wallet.getActiveAccount();
-                activeAccount.revokeVoting({tokenId: this.tokenInfo.tokenId}).then(successCancel)
+                activeAccount.revokeVoting({ tokenId: this.tokenInfo.tokenId }).then(successCancel)
                     .catch(failCancel);
             };
 
@@ -219,7 +219,7 @@ export default {
                 t.voteStatus = 'voting';
                 t.nodeStatus = 1;
                 this.cache = t;
-                this.$toast(this.$t('hint.request', {name: this.$t('walletVote.voting')}));
+                this.$toast(this.$t('hint.request', { name: this.$t('walletVote.voting') }));
             };
 
             const failVote = e => {
@@ -228,14 +228,14 @@ export default {
                     const startTime = Date.now();
                     const c = Object.assign({}, this.$t('quotaConfirmPoW'));
                     c.leftBtn.click = () => {
-                        this.$router.push({name: 'walletQuota'});
+                        this.$router.push({ name: 'walletQuota' });
                     };
                     c.rightBtn.click = () => {
                         this.$refs.pow.startPowTx(e.accountBlock, startTime, VoteDifficulty)
                             .then(successVote)
                             .catch(failVote);
                     };
-                    c.closeBtn = {show: true};
+                    c.closeBtn = { show: true };
                     this.$confirm(c);
                 } else if (code === -36001) {
                     this.$toast(this.$t('walletVote.addrNoExistErr'));

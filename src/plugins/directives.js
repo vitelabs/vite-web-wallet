@@ -1,4 +1,4 @@
-import {wallet} from 'utils/wallet';
+import { wallet } from 'utils/wallet';
 
 const vnodes = new Set();
 

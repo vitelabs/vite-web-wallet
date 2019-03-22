@@ -46,7 +46,7 @@ import viteInput from 'components/viteInput';
 import BigNumber from 'utils/bigNumber';
 
 export default {
-    components: {quotaHead, myQuota, pledgeTx, confirm, list, powProcess, loading, viteInput},
+    components: { quotaHead, myQuota, pledgeTx, confirm, list, powProcess, loading, viteInput },
     created() {
         this.tokenInfo = this.$store.getters.viteTokenInfo;
 
@@ -100,7 +100,7 @@ export default {
             const isEqualBalance = BigNumber.compared(this.cancelAmount, this.activeAmountLimit);
 
             if (BigNumber.isEqual(this.cancelAmount, 0) || isEqualBalance > 0) {
-                this.amountErr = this.$t('walletQuota.maxAmt', {amount: this.activeAmountLimit});
+                this.amountErr = this.$t('walletQuota.maxAmt', { amount: this.activeAmountLimit });
 
                 return false;
             }
@@ -109,7 +109,7 @@ export default {
             const cancelBalance = BigNumber.minus(this.activeAmountLimit, this.cancelAmount);
             if (BigNumber.compared(cancelBalance, limitAmt) < 0
                  && !BigNumber.isEqual(cancelBalance, 0)) {
-                this.amountErr = this.$t('walletQuota.cancelLimitAmt', {num: limitAmt});
+                this.amountErr = this.$t('walletQuota.cancelLimitAmt', { num: limitAmt });
 
                 return false;
             }
@@ -155,7 +155,7 @@ export default {
             });
         },
 
-        sendPledgeTx({toAddress, amount}, type, cb) {
+        sendPledgeTx({ toAddress, amount }, type, cb) {
             if (!this.netStatus) {
                 this.$toast(this.$t('hint.noNet'));
                 cb && cb(false);

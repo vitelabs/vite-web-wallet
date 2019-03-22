@@ -1,4 +1,4 @@
-import {subTask} from 'utils/proto/subTask';
+import { subTask } from 'utils/proto/subTask';
 
 const latestTxTime = 2000;
 let latestTxTask = null;
@@ -18,10 +18,10 @@ const mutations = {
 };
 
 const actions = {
-    exFetchLatestTx({getters, commit}) {
+    exFetchLatestTx({ getters, commit }) {
         commit('exSetLatestTxLoading', true);
 
-        latestTxTask = latestTxTask || new subTask('latestTx', ({data}) => {
+        latestTxTask = latestTxTask || new subTask('latestTx', ({ data }) => {
             commit('exSetLatestTxList', data);
             commit('exSetLatestTxLoading', false);
         }, latestTxTime);

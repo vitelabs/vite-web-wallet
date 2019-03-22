@@ -1,5 +1,5 @@
-import {constant} from '@vite/vitejs';
-import {timer} from 'utils/asyncFlow';
+import { constant } from '@vite/vitejs';
+import { timer } from 'utils/asyncFlow';
 import $ViteJS from 'utils/viteClient';
 
 import viteIcon from 'assets/imgs/vite.svg';
@@ -47,7 +47,7 @@ const mutations = {
     setCurrentHeight(state, height) {
         state.currentHeight = height || 0;
     },
-    setTokenInfo(state, {tokenInfo, tokenId}) {
+    setTokenInfo(state, { tokenInfo, tokenId }) {
         if (!tokenInfo || (!tokenInfo.tokenId && tokenId)) {
             return;
         }
@@ -68,27 +68,27 @@ const apis = {
 };
 
 const actions = {
-    setTokenInfoList({commit}, list) {
+    setTokenInfoList({ commit }, list) {
         for (let i = 0; i < list.length; i++) {
             const item = list[i];
             const tokenId = item.tokenId;
-            commit('setTokenInfo', {tokenInfo: item.tokenInfo || null, tokenId});
+            commit('setTokenInfo', { tokenInfo: item.tokenInfo || null, tokenId });
         }
     },
-    startLoopHeight({commit}) {
+    startLoopHeight({ commit }) {
         heightTimer = heightTimer || new timer(() => $ViteJS.ledger.getSnapshotChainHeight().then(result => {
             commit('setCurrentHeight', result);
         }), 2000);
         heightTimer.start();
     },
-    getDefaultTokenList({dispatch, state}) {
+    getDefaultTokenList({ dispatch, state }) {
         for (const tokenId in state.defaultTokenIds) {
             dispatch('fetchTokenInfo', tokenId);
         }
     },
-    fetchTokenInfo({commit, state}, tokenId) {
+    fetchTokenInfo({ commit, state }, tokenId) {
         return apis.fetchTokenInfo(tokenId).then(result => {
-            commit('setTokenInfo', {tokenInfo: result, tokenId});
+            commit('setTokenInfo', { tokenInfo: result, tokenId });
 
             return state.tokenInfoMaps[tokenId];
         });
@@ -106,4 +106,4 @@ const getters = {
     }
 };
 
-export default {state, mutations, getters, actions};
+export default { state, mutations, getters, actions };

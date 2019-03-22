@@ -11,12 +11,12 @@ export default {
     data() {
         const activeAccount = this.$wallet.getActiveAccount();
 
-        return {isHaveUsers: !!activeAccount};
+        return { isHaveUsers: !!activeAccount };
     },
     methods: {
         leftClick() {
             if (!this.isHaveUsers) {
-                this.$router.push({name: 'start'});
+                this.$router.push({ name: 'start' });
 
                 return;
             }
@@ -25,11 +25,11 @@ export default {
         },
         rightClick() {
             if (!this.isHaveUsers) {
-                this.$router.push({name: 'startCreate'});
+                this.$router.push({ name: 'startCreate' });
 
                 return;
             }
-            this.$router.push({name: 'start'});
+            this.$router.push({ name: 'start' });
         }
     }
 };

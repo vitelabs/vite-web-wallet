@@ -19,7 +19,7 @@ import bg from 'assets/imgs/bg.svg';
 import logo from 'assets/imgs/ViteLogo1.svg';
 
 export default {
-    components: {changeLang},
+    components: { changeLang },
     data() {
         return {
             bg,

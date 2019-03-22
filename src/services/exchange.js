@@ -1,11 +1,11 @@
 import request from 'utils/request';
-import {wallet} from 'utils/wallet';
-import {privToAddr, constant} from '@vite/vitejs';
+import { wallet } from 'utils/wallet';
+import { privToAddr, constant } from '@vite/vitejs';
 
 const path = `${ process.env.dexApiServer }v1`;
 const ViteId = constant.Vite_TokenId;
 
-export const klineHistory = function ({from, to, ftoken, ttoken, resolution}) {
+export const klineHistory = function ({ from, to, ftoken, ttoken, resolution }) {
     const resList = {
         '1': 'minute',
         '30': 'minute30',
@@ -28,108 +28,104 @@ export const klineHistory = function ({from, to, ftoken, ttoken, resolution}) {
     });
 };
 
-export const depthBuy = function ({ftoken, ttoken}) {
+export const depthBuy = function ({ ftoken, ttoken }) {
     return request({
         path: `${ path }/depth/buy`,
         method: 'GET',
-        params: {ftoken, ttoken}
+        params: { ftoken, ttoken }
     });
 };
 
-export const depthSell = function ({ftoken, ttoken}) {
+export const depthSell = function ({ ftoken, ttoken }) {
     return request({
         path: `${ path }/depth/sell`,
         method: 'GET',
-        params: {ftoken, ttoken}
+        params: { ftoken, ttoken }
     });
 };
 
-export const order = function ({
-    address, fdate, tdate, ftoken, ttoken, orderSide, pageNo, pageSize, status, paging = 1
-}) {
+export const order = function ({ address, fdate, tdate, ftoken, ttoken, orderSide, pageNo, pageSize, status, paging = 1 }) {
     return request({
         path: `${ path }/order/query`,
         method: 'GET',
-        params: {
-            address, fdate, tdate, ftoken, ttoken, orderSide, pageNo, pageSize, status, paging
-        }
+        params: { address, fdate, tdate, ftoken, ttoken, orderSide, pageNo, pageSize, status, paging }
     });
 };
 
-export const orderDetail = function ({orderId, ftoken, ttoken, pageNo, pageSize}) {
+export const orderDetail = function ({ orderId, ftoken, ttoken, pageNo, pageSize }) {
     return request({
         path: `${ path }/tx/details`,
         method: 'GET',
-        params: {orderId, ftoken, ttoken, pageNo, pageSize}
+        params: { orderId, ftoken, ttoken, pageNo, pageSize }
     });
 };
 
-export const latestTx = function ({ftoken, ttoken}) {
+export const latestTx = function ({ ftoken, ttoken }) {
     return request({
         path: `${ path }/tx/latest`,
         method: 'GET',
-        params: {ftoken, ttoken}
+        params: { ftoken, ttoken }
     });
 };
 
 export const rate = function () {
-    return request({path: `${ path }/rate/usd2cny`});
+    return request({ path: `${ path }/rate/usd2cny` });
 };
 
 export const rateUstd = function () {
-    return request({path: `${ path }/rate/ustd`});
+    return request({ path: `${ path }/rate/ustd` });
 };
 
 export const rateFiat = function () {
-    return request({path: `${ path }/rate/fiat`});
+    return request({ path: `${ path }/rate/fiat` });
 };
 
-export const rateToken = function ({tokenIdList}) {
+export const rateToken = function ({ tokenIdList }) {
     return request({
         path: `${ path }/rate/assign`,
-        params: {tokens: tokenIdList}
+        params: { tokens: tokenIdList }
     });
 };
 
-export const defaultPair = function ({ttoken}) {
+export const defaultPair = function ({ ttoken }) {
     return request({
         path: `${ path }/pair/default`,
         method: 'GET',
-        params: {token: ttoken}
+        params: { token: ttoken }
     });
 };
 
-export const assignPair = function ({pairs = []}) {
+export const assignPair = function ({ pairs = [] }) {
     const pairsStr = pairs.join(',');
 
     return request({
         path: `${ path }/pair/assign`,
         method: 'GET',
-        params: {pairs: pairsStr}
+        params: { pairs: pairsStr }
     });
 };
 
-export const pairSearch = function ({key, ttoken}) {
+export const pairSearch = function ({ key, ttoken }) {
     return request({
         path: `${ path }/pair/search`,
         method: 'GET',
-        params: {key, ttoken}
+        params: { key, ttoken }
     });
 };
 
-export const marketsReserve = function ({token}) {
+export const marketsReserve = function ({ token }) {
     return request({
         path: `${ path }/markets/reserve`,
         method: 'GET',
-        params: {token}
+        params: { token }
     });
 };
 
-export const tokenDetail = function ({tokenId}) {
+export const tokenDetail = function ({ tokenId }) {
     return request({
         path: `${ path }/token/detail`,
         method: 'GET',
-        params: {token: tokenId}
+        params: { token: tokenId }
     });
 };
 
@@ -147,15 +143,15 @@ export const baseToken = function () {
     });
 };
 
-export const tokenMap = function ({tokenId}) {
+export const tokenMap = function ({ tokenId }) {
     return request({
         path: `${ path }/token/mapping`,
         method: 'GET',
-        params: {token: tokenId}
+        params: { token: tokenId }
     });
 };
 
-export async function chargeDetail({tokenId, address}) {
+export async function chargeDetail({ tokenId, address }) {
     return await request({
         path: `${ path }/fund/record`,
         method: 'GET',
@@ -168,7 +164,7 @@ export async function chargeDetail({tokenId, address}) {
     });
 }
 
-export const deposit = async function ({tokenId, amount}) {
+export const deposit = async function ({ tokenId, amount }) {
     return await wallet.getActiveAccount().callContract({
         toAddress: constant.DexFund_Addr,
         abi: constant.DexFundUserDeposit_Abi,
@@ -178,7 +174,7 @@ export const deposit = async function ({tokenId, amount}) {
     });
 };
 
-export const withdraw = async function ({tokenId, amount}) {
+export const withdraw = async function ({ tokenId, amount }) {
     return await wallet.getActiveAccount().callContract({
         toAddress: constant.DexFund_Addr,
         abi: constant.DexFundUserWithdraw_Abi,
@@ -188,7 +184,7 @@ export const withdraw = async function ({tokenId, amount}) {
     });
 };
 
-export const cancelOrder = async function ({orderId, tradeToken, side, quoteToken}) {
+export const cancelOrder = async function ({ orderId, tradeToken, side, quoteToken }) {
     return await wallet.getActiveAccount().callContract({
         tokenId: tradeToken,
         toAddress: constant.DexTrade_Addr,
@@ -197,7 +193,7 @@ export const cancelOrder = async function ({orderId, tradeToken, side, quoteToke
     });
 };
 
-export const newOrder = function ({tradeToken, quoteToken, side, price, quantity}) {
+export const newOrder = function ({ tradeToken, quoteToken, side, price, quantity }) {
     const orderId = getOrderId();
 
     return wallet.getActiveAccount().callContract({
@@ -208,7 +204,7 @@ export const newOrder = function ({tradeToken, quoteToken, side, price, quantity
     });
 };
 
-export const newMarket = function ({tokenId = ViteId, amount, tradeToken, quoteToken}) {
+export const newMarket = function ({ tokenId = ViteId, amount, tradeToken, quoteToken }) {
     return wallet.getActiveAccount().callContract({
         toAddress: constant.DexFund_Addr,
         abi: constant.DexFundNewMarket_Abi,

@@ -35,13 +35,13 @@
 <script>
 import Vue from 'vue';
 import viteAddress from 'components/address';
-import {stringify} from 'utils/viteSchema';
-import {getTestToken} from 'services/testToken';
+import { stringify } from 'utils/viteSchema';
+import { getTestToken } from 'services/testToken';
 
 let activeAccount = null;
 
 export default {
-    components: {viteAddress},
+    components: { viteAddress },
     data() {
         return {
             account: {},
@@ -57,7 +57,7 @@ export default {
     mounted() {
         activeAccount = this.$wallet.getActiveAccount();
         this.account = this.getSimpleAcc();
-        this.addressStr = stringify({targetAddress: this.account.addr});
+        this.addressStr = stringify({ targetAddress: this.account.addr });
     },
     computed: {
         netStatus() {

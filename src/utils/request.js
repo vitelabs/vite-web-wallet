@@ -2,7 +2,7 @@ import qs from 'qs';
 
 const reqTimeout = 30000;
 
-export default function request({method = 'GET', path, params = {}, timeout = reqTimeout}) {
+export default function request({ method = 'GET', path, params = {}, timeout = reqTimeout }) {
     method = method.toUpperCase();
 
     const xhr = new XMLHttpRequest();
@@ -33,7 +33,7 @@ export default function request({method = 'GET', path, params = {}, timeout = re
                         return;
                     }
 
-                    const {code, msg, data, error} = JSON.parse(xhr.responseText);
+                    const { code, msg, data, error } = JSON.parse(xhr.responseText);
                     const rightCode = path.indexOf('api') === -1 ? 200 : 0;
                     if (code !== rightCode) {
                         return rej({

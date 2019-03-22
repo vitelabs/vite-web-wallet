@@ -1,4 +1,4 @@
-import {encoder, address} from 'utils/tools';
+import { encoder, address } from 'utils/tools';
 import $ViteJS from 'utils/viteClient';
 
 // [TODO] http ??

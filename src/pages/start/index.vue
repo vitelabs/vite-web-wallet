@@ -10,14 +10,14 @@ import layout from './layout';
 import start from './start';
 
 export default {
-    components: {layout, start},
+    components: { layout, start },
     mounted() {
         this.$router.afterEach(to => {
             this.active = to.name;
         });
     },
     data() {
-        return {active: this.$route.name};
+        return { active: this.$route.name };
     }
 };
 </script>

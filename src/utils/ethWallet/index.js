@@ -5,17 +5,17 @@ const Tx = require('ethereumjs-tx');
 const ethProvider = require('web3-providers-http');
 
 import localStorage from 'utils/localStorage';
-import {bind as gwBind, balance as gwBalance} from 'services/conversion';
-import {timer} from 'utils/asyncFlow';
-import {getWalletAddr, getWrongWalletAddr} from './address';
-import {viteContractAbi, viteContractAddr, blackHole, signBinding} from './viteContract';
+import { bind as gwBind, balance as gwBalance } from 'services/conversion';
+import { timer } from 'utils/asyncFlow';
+import { getWalletAddr, getWrongWalletAddr } from './address';
+import { viteContractAbi, viteContractAddr, blackHole, signBinding } from './viteContract';
 
 const DefaultAddr = 'conversionDefaultAddr';
 const balanceTime = 2000;
 let provider = null;
 
 class ethWallet {
-    constructor({mnemonic}) {
+    constructor({ mnemonic }) {
         this.utils = utils;
         this.mnemonic = mnemonic;
 
@@ -52,7 +52,7 @@ class ethWallet {
     }
 
     init(cb) {
-        this._getWrongBalance().then(({viteBalance, ethBalance}) => {
+        this._getWrongBalance().then(({ viteBalance, ethBalance }) => {
             this._stopWrongLoop();
             const haveBalance = +viteBalance || +ethBalance;
             const lastActiveAddr = localStorage.getItem(DefaultAddr);
@@ -84,11 +84,11 @@ class ethWallet {
     async _getWrongBalance() {
         const wrongAddr = this.wrongAddrObj.hexAddr;
 
-        const viteBalance = await gwBalance({address: wrongAddr}).then(data => data && data.VITE ? data.VITE.Balance || 0 : 0);
+        const viteBalance = await gwBalance({ address: wrongAddr }).then(data => data && data.VITE ? data.VITE.Balance || 0 : 0);
 
         const ethBalance = await this.web3.getBalance(wrongAddr);
 
-        return {viteBalance, ethBalance};
+        return { viteBalance, ethBalance };
     }
 
     changeActiveAddr(addr) {
@@ -108,10 +108,10 @@ class ethWallet {
 
     _initVite() {
         const _this = this;
-        this.contract.methods.decimals().call({from: this.getDefaultAddr()}, function (error, result) {
+        this.contract.methods.decimals().call({ from: this.getDefaultAddr() }, function (error, result) {
             !error && (_this.viteDecimals = result);
         });
-        this.contract.methods.symbol().call({from: this.getDefaultAddr()}, function (error, result) {
+        this.contract.methods.symbol().call({ from: this.getDefaultAddr() }, function (error, result) {
             !error && (_this.tokenList.vite.symbol = result);
         });
     }
@@ -138,7 +138,7 @@ class ethWallet {
     getViteBalance() {
         const address = this.getDefaultAddr();
 
-        return gwBalance({address}).then(data => {
+        return gwBalance({ address }).then(data => {
             if (address !== this.getDefaultAddr()) {
                 return;
             }
@@ -182,8 +182,8 @@ class ethWallet {
     }
 
     // ETH
-    async sendTx({toAddress, value, gwei}) {
-        const {ethTxHash} = await getTxHash.call(this, {
+    async sendTx({ toAddress, value, gwei }) {
+        const { ethTxHash } = await getTxHash.call(this, {
             toAddress,
             value,
             gwei,
@@ -193,8 +193,8 @@ class ethWallet {
         return sendEthTx.call(this, ethTxHash);
     }
 
-    async sendContractTx({toAddress, value, gwei}) {
-        const {ethTxHash} = await getTxHash.call(this, {
+    async sendContractTx({ toAddress, value, gwei }) {
+        const { ethTxHash } = await getTxHash.call(this, {
             toAddress: viteContractAddr,
             value: '0x00',
             gwei,
@@ -207,12 +207,12 @@ class ethWallet {
         return sendEthTx.call(this, ethTxHash);
     }
 
-    async conversion({viteAddr, value, gwei}) {
+    async conversion({ viteAddr, value, gwei }) {
         const acount = this.activeAddr;
         const ethAddr = acount.hexAddr;
         const privateKey = acount.wallet.privKey;
 
-        const {ethTxHash, hash} = await getTxHash.call(this, {
+        const { ethTxHash, hash } = await getTxHash.call(this, {
             toAddress: viteContractAddr,
             value: '0x00',
             gwei,
@@ -222,7 +222,7 @@ class ethWallet {
             data: this.getTxData(value, blackHole, 'sendContractTx')
         });
 
-        const signResult = signBinding({hash, viteAddr, value, privateKey, ethAddr});
+        const signResult = signBinding({ hash, viteAddr, value, privateKey, ethAddr });
 
         try {
             await gwBind(signResult);
@@ -251,7 +251,7 @@ function addPreZero(num) {
     return s + num;
 }
 
-async function getTxHash({toAddress, value, data, gwei}) {
+async function getTxHash({ toAddress, value, data, gwei }) {
     const acount = this.activeAddr;
     const ethAddr = acount.hexAddr;
     const privateKey = acount.wallet.privKey;

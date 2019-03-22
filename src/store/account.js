@@ -1,18 +1,18 @@
 import BigNumber from 'utils/bigNumber';
-import {timer} from 'utils/asyncFlow';
-import {wallet} from 'utils/wallet';
+import { timer } from 'utils/asyncFlow';
+import { wallet } from 'utils/wallet';
 
 let balanceInfoInst = null;
 const state = {
-    onroad: {balanceInfos: {}},
-    balance: {balanceInfos: {}}
+    onroad: { balanceInfos: {} },
+    balance: { balanceInfos: {} }
 };
 
 const mutations = {
     commitBalanceInfo(state, payload) {
         if (!payload) {
-            state.balance = {balanceInfos: {}};
-            state.onroad = {balanceInfos: {}};
+            state.balance = { balanceInfos: {} };
+            state.onroad = { balanceInfos: {} };
 
             return;
         }
@@ -24,12 +24,12 @@ const mutations = {
         state.onroad.balanceInfos = state.onroad && state.onroad.tokenBalanceInfoMap ? state.onroad.tokenBalanceInfoMap : {};
     },
     commitClearBalance(state) {
-        state.balance = {balanceInfos: {}};
-        state.onroad = {balanceInfos: {}};
+        state.balance = { balanceInfos: {} };
+        state.onroad = { balanceInfos: {} };
     }
 };
 const actions = {
-    startLoopBalance({commit, dispatch}) {
+    startLoopBalance({ commit, dispatch }) {
         dispatch('stopLoopBalance');
         balanceInfoInst = new timer(() => {
             const account = wallet.getActiveAccount();
@@ -46,7 +46,7 @@ const actions = {
         }, 1000);
         balanceInfoInst.start();
     },
-    stopLoopBalance({commit}) {
+    stopLoopBalance({ commit }) {
         balanceInfoInst && balanceInfoInst.stop();
         balanceInfoInst = null;
         commit('commitClearBalance');

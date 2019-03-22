@@ -32,18 +32,16 @@
 </template>
 
 <script>
-import { order, cancelOrder } from 'services/exchange';
-import powProcess from 'components/powProcess';
-import { timer } from 'utils/asyncFlow';
 import d from 'dayjs';
+import powProcess from 'components/powProcess';
+import { subTask } from 'utils/proto/subTask';
+import { order, cancelOrder } from 'services/exchange';
 
 const VoteDifficulty = '201564160';
 let task = null;
 
 export default {
-    components: {
-        powProcess
-    },
+    components: { powProcess },
     props: {
         filterObj: {
             type: Object,
@@ -56,10 +54,14 @@ export default {
             default: false
         }
     },
-    filters: {
-        d(v) {
-            return d.unix(v).format('YYYY-MM-DD HH:mm');
-        }
+    mounted() {
+        this.init();
+    },
+    activated() {
+        this.isEmbed && this.subscribe();
+    },
+    deactivated() {
+        this.unsubscribe();
     },
     data() {
         return {
@@ -71,7 +73,61 @@ export default {
             timer: null
         };
     },
+    filters: {
+        d(v) {
+            return d.unix(v).format('YYYY-MM-DD HH:mm');
+        }
+    },
+    computed: {
+        sortedList() {
+            return this.list.slice(0).sort((a, b) => (b.date - a.date));
+        },
+        currentMarketNmae() {
+            return this.$store.getters.currentMarketName;
+        }
+    },
+    watch: {
+        filterObj() {
+            this.init();
+        }
+    },
     methods: {
+        init() {
+            if (!this.isEmbed) {
+                this.update();
+                return;
+            }
+
+            this.unsubscribe();
+            this.subscribe();
+        },
+        subscribe() {
+            task = task || new subTask('orderQueryCurrent', ({ args, data }) => {
+                const currentAcc = this.$wallet.getActiveAccount();
+                const currentAddr = currentAcc.getDefaultAddr();
+
+                if (args.address !== currentAddr
+                    || this.filterObj.ttoken !== args.ttoken
+                    || this.filterObj.ftoken !== args.ftoken) {
+                    return;
+                }
+
+                this.list = data || [];
+            });
+
+            this.acc = this.$wallet.getActiveAccount();
+            this.addr = this.acc.getDefaultAddr();
+            task.start(() => {
+                return {
+                    address: this.addr,
+                    ...this.filterObj
+                };
+            });
+        },
+        unsubscribe() {
+            task && task.stop();
+            task = null;
+        },
         update() {
             this.acc = this.$wallet.getActiveAccount();
             if (!this.acc) return;
@@ -84,38 +140,39 @@ export default {
                 pageSize: 100,
                 ...this.filterObj
             }).then(data => {
-                this.list = data.orders;
+                this.list = data.orders || [];
             });
         },
         cancel(order) {
             const failSubmit = e => {
-                const code
-                    = e && e.error ? e.error.code || -1 : e ? e.code : -1;
-                if (code === -35002) {
-                    const startTime = new Date().getTime();
-                    const powTxt = Object.assign({},
-                        this.$t('quotaConfirmPoW'));
-                    powTxt.leftBtn.click = () => {
-                        this.$router.push({name: 'walletQuota'});
-                    };
-                    (powTxt.rightBtn.click = () => {
-                        this.$refs.pow
-                            .startPowTx(e.accountBlock,
-                                startTime,
-                                VoteDifficulty)
-                            .then(successSubmit)
-                            .catch(failSubmit);
-                    }),
-                    (powTxt.closeBtn = {show: true});
-                    this.$confirm(powTxt);
-                } else {
-                    this.$toast(this.$t('exchangeOpenOrders.confirm.failToast'),
-                        e);
+                const code = e && e.error ? e.error.code || -1 : e ? e.code : -1;
+
+                if (code !== -35002) {
+                    this.$toast(this.$t('exchangeOpenOrders.confirm.failToast'), e);
+                    return;
                 }
+
+                const startTime = new Date().getTime();
+                const powTxt = Object.assign({}, this.$t('quotaConfirmPoW'));
+
+                powTxt.leftBtn.click = () => {
+                    this.$router.push({ name: 'walletQuota' });
+                };
+                powTxt.rightBtn.click = () => {
+                    this.$refs.pow
+                        .startPowTx(e.accountBlock, startTime, VoteDifficulty)
+                        .then(successSubmit)
+                        .catch(failSubmit);
+                };
+                powTxt.closeBtn = { show: true };
+
+                this.$confirm(powTxt);
             };
+
             const successSubmit = () => {
                 this.$toast(this.$t('exchangeOpenOrders.confirm.successToast'));
             };
+
             this.acc.initPwd({
                 submitTxt: this.$t('exchangeOpenOrders.confirm.submitTxt'),
                 cancelTxt: this.$t('exchangeOpenOrders.confirm.cancelTxt'),
@@ -125,39 +182,11 @@ export default {
                         tradeToken: order.ftoken,
                         side: order.side,
                         quoteToken: order.ttoken
-                    })
-                        .then(successSubmit)
-                        .catch(e => {
-                            failSubmit(e);
-                        });
+                    }).then(successSubmit).catch(e => {
+                        failSubmit(e);
+                    });
                 }
-            },
-            true);
-        }
-    },
-    mounted() {
-        this.update();
-    },
-    activated() {
-        if (this.isEmbed) {
-            task = new timer(() => this.update(), 1000);
-            task.start();
-        }
-    },
-    deactivated() {
-        task && task.stop();
-    },
-    watch: {
-        filterObj() {
-            this.update();
-        }
-    },
-    computed: {
-        sortedList() {
-            return this.list.slice(0).sort((a, b) => (b.date - a.date));
-        },
-        currentMarketNmae() {
-            return this.$store.getters.currentMarketName;
+            }, true);
         }
     }
 };

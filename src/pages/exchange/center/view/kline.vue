@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import {widget} from 'charting/charting_library.min';
+import { widget } from 'charting/charting_library.min';
 import datafeed from './datafeeds.js';
 
 export default {
@@ -44,7 +44,7 @@ export default {
         }
     },
     data() {
-        return {tvWidget: null};
+        return { tvWidget: null };
     },
     methods: {
         init() {
@@ -62,7 +62,7 @@ export default {
                 locale: this.$i18n.locale,
                 drawings_access: {
                     type: 'black',
-                    tools: [{name: 'Trend Line'}]
+                    tools: [{ name: 'Trend Line' }]
                 },
                 // Main_series_scale_menu header_indicators
                 disabled_features: [ 'use_localstorage_for_settings', 'volume_force_overlay', 'header_compare', 'header_symbol_search', 'header_chart_type' ],
@@ -76,10 +76,10 @@ export default {
                     'bollinger bands.median.color': '#33FF88',
                     'bollinger bands.upper.linewidth': 7
                 },
-                loading_screen: {foregroundColor: '#007AFF'},
+                loading_screen: { foregroundColor: '#007AFF' },
                 // Debug: true,
                 time_frames: [
-                    {text: '1d', resolution: '1'}
+                    { text: '1d', resolution: '1' }
                 ],
                 // Charts_storage_url: 'http://saveload.tradingview.com',
                 // client_id: 'tradingview.com',
@@ -98,9 +98,9 @@ export default {
                 this.tvWidget.chart().setChartType(1);
 
                 const studies = [];
-                let id = this.tvWidget.chart().createStudy('Moving Average', false, false, [7], null, {'Plot.color': 'rgb(116,149,187)'});
+                let id = this.tvWidget.chart().createStudy('Moving Average', false, false, [7], null, { 'Plot.color': 'rgb(116,149,187)' });
                 studies.push(id);
-                id = this.tvWidget.chart().createStudy('Moving Average', false, false, [30], null, {'plot.color': 'rgb(118,32,99)'});
+                id = this.tvWidget.chart().createStudy('Moving Average', false, false, [30], null, { 'plot.color': 'rgb(118,32,99)' });
                 studies.push(id);
                 const state = 1;
                 for (let i = 0; i < studies.length; i++) {
@@ -110,7 +110,7 @@ export default {
             });
         },
         createDepthBtn() {
-            const button = this.tvWidget.createButton({align: 'right'})[0];
+            const button = this.tvWidget.createButton({ align: 'right' })[0];
             button.textContent = this.$t('exchange.depthView');
             button.addEventListener('click', () => {
                 this.toogleDepth();

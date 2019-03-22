@@ -1,9 +1,9 @@
-import {hdAddr as _hdAddr, keystore as _keystore, constant} from '@vite/vitejs';
+import { hdAddr as _hdAddr, keystore as _keystore, constant } from '@vite/vitejs';
 import acc from 'utils/storeAcc.js';
 import statistics from 'utils/statistics';
 import storage from 'utils/localStorage.js';
 
-const {LangList} = constant;
+const { LangList } = constant;
 const LAST_KEY = 'ACC_LAST';
 
 export default function () {

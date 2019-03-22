@@ -63,7 +63,7 @@ import pagination from 'components/pagination.vue';
 import tableList from 'components/tableList.vue';
 import secTitle from 'components/secTitle';
 import date from 'utils/date.js';
-import {timer} from 'utils/asyncFlow';
+import { timer } from 'utils/asyncFlow';
 import BigNumber from 'utils/bigNumber';
 import ellipsisAddr from 'utils/ellipsisAddr.js';
 
@@ -96,7 +96,7 @@ const txImgs = [
 ];
 
 export default {
-    components: {pagination, tableList, secTitle},
+    components: { pagination, tableList, secTitle },
     mounted() {
         this.currentPage = this.$store.state.transList.currentPage;
         this.startLoopTransList();

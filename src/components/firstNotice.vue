@@ -20,7 +20,7 @@ export default {
         this.isFirst = !localStorage.getItem('first');
     },
     data() {
-        return {isFirst: false};
+        return { isFirst: false };
     },
     methods: {
         close() {

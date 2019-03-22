@@ -1,33 +1,28 @@
 <template>
     <div class="order-history-ct">
-        <Filters
-            @submit="submit($event)"
-            v-if="!isEmbed"
-        ></Filters>
+        <Filters v-if="!isEmbed" @submit="submit($event)"></Filters>
         <div class="combine">
             <Table :list="data" class="tb">
                 <Pagination :currentPage="currentPage" :toPage="toPage"
                             :totalPage="totalPage" class="page-filter"
                             v-if="!isEmbed"></Pagination>
             </Table>
-
         </div>
     </div>
 </template>
+
 <script>
-import Filters from './filters';
-import Table from './table';
-import { order } from 'services/exchange';
 import Pagination from 'components/pagination';
-import { timer } from 'utils/asyncFlow';
+import { order } from 'services/exchange';
+import { subTask } from 'utils/proto/subTask';
+import Table from './table';
+import Filters from './filters';
 
 const pageSize = 35;
 let task = null;
 
 export default {
-    components: {
-        Filters, Table, Pagination
-    },
+    components: { Filters, Table, Pagination },
     props: {
         isEmbed: {
             type: Boolean,
@@ -50,29 +45,59 @@ export default {
         };
     },
     mounted() {
-        this.update();
+        this.init();
     },
     activated() {
-        if (!this.isEmbed) {
-            return;
-        }
-
-        task = new timer(() => this.update(), 1000);
-        task.start();
+        this.isEmbed && this.subscribe();
     },
     deactivated() {
-        task && task.stop();
+        this.unsubscribe();
     },
     watch: {
         filterObj() {
-            this.update();
+            this.init();
         }
     },
     methods: {
+        init() {
+            if (!this.isEmbed) {
+                this.update();
+                return;
+            }
+
+            this.unsubscribe();
+            this.subscribe();
+        },
+        subscribe() {
+            task = task || new subTask('orderQueryHistory', ({ args, data }) => {
+                const currentAcc = this.$wallet.getActiveAccount();
+                const currentAddr = currentAcc.getDefaultAddr();
+
+                if (args.address !== currentAddr
+                    || this.filterObj.ttoken !== args.ttoken
+                    || this.filterObj.ftoken !== args.ftoken) {
+                    return;
+                }
+
+                this.data = data || [];
+            });
+
+            const account = this.$wallet.getActiveAccount();
+            const address = account.getDefaultAddr();
+            task.start(() => {
+                return {
+                    address,
+                    ...this.filterObj
+                };
+            });
+        },
+        unsubscribe() {
+            task && task.stop();
+            task = null;
+        },
+
         toPage(pageNo) {
-            this.update(Object.assign(this.filters, {
-                pageNo
-            }));
+            this.update(Object.assign(this.filters, { pageNo }));
         },
         submit(v) {
             this.filters = v;
@@ -87,12 +112,10 @@ export default {
 
             const address = account.getDefaultAddr();
             if (this.isEmbed) {
-                filters = {
-                    totoken: this.currentMarket
-                };
+                filters = { totoken: this.currentMarket };
             }
 
-            filters = Object.assign({pageNo: this.currentPage}, filters);
+            filters = Object.assign({ pageNo: this.currentPage }, filters);
 
             order({
                 address,
@@ -108,6 +131,7 @@ export default {
     }
 };
 </script>
+
 <style lang="scss" scoped>
 .order-history-ct {
     height: 100%;

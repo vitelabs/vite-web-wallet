@@ -21,11 +21,11 @@
 import login from './login';
 
 export default {
-    components: {login},
+    components: { login },
     data() {
         const list = this.$wallet.getList();
 
-        return {isShowLogin: list && list.length};
+        return { isShowLogin: list && list.length };
     }
 };
 </script>

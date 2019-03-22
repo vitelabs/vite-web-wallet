@@ -1,4 +1,4 @@
-import {klineHistory} from 'services/exchange';
+import { klineHistory } from 'services/exchange';
 
 export default class dataFeeds {
     constructor(activeTxPair) {
@@ -157,7 +157,7 @@ export default class dataFeeds {
                 continue;
             }
 
-            const lastItem = _list.length === 0 ? {close: 0} : _list[_list.length - 1];
+            const lastItem = _list.length === 0 ? { close: 0 } : _list[_list.length - 1];
 
             _list.push({
                 time: time * 1000,
@@ -169,7 +169,7 @@ export default class dataFeeds {
             });
         }
 
-        onHistoryCallback(_list, {noData: false});
+        onHistoryCallback(_list, { noData: false });
     }
 
     subscribeBars(symbolInfo, resolution, onRealtimeCallback, subscriberUID, onResetCacheNeededCallback) {
@@ -197,6 +197,10 @@ export default class dataFeeds {
 
     getTimescaleMarks() {
         // Console.log(symbolInfo, from, to, onDataCallback, resolution);
+        return undefined;
+    }
+
+    getServerTime() {
         return undefined;
     }
 }

@@ -39,7 +39,7 @@ export default {
             value: this._value
         };
     },
-    model: {prop: '_value'},
+    model: { prop: '_value' },
     watch: {
         _value: function () {
             this.value = this._value;
