@@ -1,9 +1,11 @@
 .DS_Store
 node_modules
 dist
+static
 .eslintcache
 .idea
 .vscode
 viteJS
 routes.js
 .netlify
+package-lock.json

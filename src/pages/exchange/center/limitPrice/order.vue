@@ -291,6 +291,9 @@ export default {
         },
 
         validPrice() {
+            if (!this.ttokenDetail) {
+                return;
+            }
             const tokenDigit = this.ttokenDetail.tokenDigit;
             this.isPriceErr = this.price && !this.$validAmount(this.price, tokenDigit);
         },

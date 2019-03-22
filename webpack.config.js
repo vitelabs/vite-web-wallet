@@ -98,8 +98,7 @@ let webpackConfig = {
             utils: path.join(SRC_PATH, '/utils'),
             plugins: path.join(SRC_PATH, '/plugins'),
             i18n: path.join(SRC_PATH, '/i18n'),
-            version: path.join(SRC_PATH, '../version.json'),
-            mock: path.join(SRC_PATH, '../mock')
+            version: path.join(SRC_PATH, '../version.json')
         },
         extensions: [ '.js', '.scss', '.vue', '.json' ]
     }
