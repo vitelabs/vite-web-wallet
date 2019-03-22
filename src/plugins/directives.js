@@ -4,7 +4,6 @@ const vnodes = new Set();
 
 const isEventInDom = function (e, d) {
     const b = d.getBoundingClientRect();
-
     return e.clientX >= b.left && e.clientX <= b.right && e.clientY >= b.top && e.clientY <= b.bottom;
 };
 
@@ -37,6 +36,7 @@ export default {
                     if (!isLogin) {
                         return;
                     }
+                    
                     vnode.data.on && vnode.data.on.unlocked();
                 });
             },
@@ -63,7 +63,6 @@ function clickOutside(v, e, funcName) {
 function unlockAccount(v, e, funcName) {
     if (wallet.isLogin) {
         funcName && v.context && v.context[funcName](e);
-
         return true;
     }
 

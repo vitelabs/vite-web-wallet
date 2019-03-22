@@ -1,18 +1,17 @@
-# vite-web-wallet
+# vite-web-wallet (SPA)
 
-## Prerequisites
+## PreRequires
 
-* npm
+* yarn
 
 ## Building (webpack)
 
-`npm run build`
+`yarn run build`
 
 ## Starting
 
-1. `npm install`
-2. Configure eslint in your editor, rules like '.eslintrc'.
-3. `npm run dev`
+1. `yarn install`
+2. `yarn run dev`
 
 ### Branch naming rules
 
@@ -27,9 +26,11 @@
 
 `'dev/2.0.0/utf8' from 'dev/1.0.0' || 'master'`
 
+### 路由规则
 
-### rpc specification
-- error code :
-   - -35001 hash valid fail
-   - -35002 out of quota
-   - -36001 addr not exist
+以`src/pages`下的文件路径为规则自动生成路由（只有文件夹内有index.vue才会生成路由）
+可以在`src/router/config.js`中定义路由别名
+
+#### Examples
+
+`src/pages/exchange/openOrders/index.vue` => `/exchangeOpenOrders`
