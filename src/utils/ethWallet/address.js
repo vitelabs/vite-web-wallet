@@ -29,13 +29,11 @@ export function getWrongWalletAddr(mnemonic, index) {
 function getRootByHex(mnemonic) {
     const seed = bip39.mnemonicToSeedHex(mnemonic);
     const hdWallet = hdkey.fromMasterSeed(seed);
-
     return hdWallet.derivePath(hdPathString);
 }
 
 function getRoot(mnemonic) {
     const seed = bip39.mnemonicToSeed(mnemonic);
     const hdWallet = hdkey.fromMasterSeed(seed);
-
     return hdWallet.derivePath(hdPathString);
 }
