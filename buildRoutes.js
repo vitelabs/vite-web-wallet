@@ -5,7 +5,6 @@ const path = require('path');
 const routeConfig = require('./src/router/config.js');
 
 const routesPath = path.join(__dirname, '/src/router/routes.js');
-
 const result = fs.existsSync(routesPath);
 // Not exists
 if (result) {
@@ -21,7 +20,6 @@ traversing('./src/pages/', (fPath, next, val) => {
 
     if (stats.isDirectory()) {
         next(fPath);
-
         return;
     }
 
@@ -35,7 +33,6 @@ traversing('./src/pages/', (fPath, next, val) => {
     if (tmpPath === val && val.indexOf('.vue') === val.length - 4) {
         const name = val.replace('.vue', '');
         (name !== 'index') && pushRoute(fPath, tmpPath, name, name);
-
         return;
     }
 
@@ -55,7 +52,6 @@ traversing('./src/pages/', (fPath, next, val) => {
     nList.forEach(n => {
         if (!name) {
             name += n;
-
             return;
         }
         name += (n ? n[0].toLocaleUpperCase() + n.slice(1) : '');
@@ -85,10 +81,8 @@ for (const key in routes) {
     _routes += ', children: [';
     _k.children.forEach(_kr => {
         _routes += `{name: '${ _kr.name }', path: '${ _kr.path }', component: ${ _kr.component }`;
-
         const alias = routeConfig[_kr.name] && routeConfig[_kr.name].alias ? routeConfig[_kr.name].alias : _kr.alias;
         alias && (_routes += `, alias: '${ alias }'`);
-
         _routes += '},';
     });
     _routes += ']},';
@@ -115,7 +109,6 @@ function pushRoute(fPath, tmpPath, name, parent) {
         routes[parent] = routes[parent] || {};
         routes[parent].children = routes[parent].children || [];
         routes[parent].children.push(_route);
-
         return;
     }
 
@@ -128,7 +121,6 @@ function pushRoute(fPath, tmpPath, name, parent) {
 function traversing(startPath, cb) {
     function readdirSync(startPath) {
         const files = fs.readdirSync(startPath);
-
         files.forEach(val => {
             const fPath = path.join(startPath, val);
             cb && cb(fPath, readdirSync, val);

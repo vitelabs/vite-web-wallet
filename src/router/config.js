@@ -1,7 +1,8 @@
 /**
- * Eg
+ * Eg:
+ *
  * startImport: {
- * alias: '/index'
+ *      alias: '/index'
  * }
  */
 
