@@ -46,7 +46,7 @@ import depthTable from './depthTable';
 import price from './price';
 
 export default {
-    components: {depthTable, price},
+    components: { depthTable, price },
     data() {
         return {
             isShowBuy: true,

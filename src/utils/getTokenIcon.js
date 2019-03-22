@@ -1,5 +1,5 @@
 import Identicon from 'identicon.js';
-import {encoder} from 'utils/tools';
+import { encoder } from 'utils/tools';
 const iconConfig = {
     size: 100,
     format: 'svg'

@@ -29,7 +29,7 @@ export default {
         }, 500)
     },
     data() {
-        return {v: ''};
+        return { v: '' };
     }
 };
 </script>

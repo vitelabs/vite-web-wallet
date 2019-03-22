@@ -26,7 +26,7 @@ const mutations = {
 };
 
 const actions = {
-    fetchTransList({commit, state, dispatch}, {address, pageIndex}) {
+    fetchTransList({ commit, state, dispatch }, { address, pageIndex }) {
         const fetchTime = new Date().getTime();
         lastFetchTime = fetchTime;
         commit('commitSetCurrent', pageIndex);
@@ -59,7 +59,7 @@ const getters = {
         const nowList = [];
 
         list.forEach(item => {
-            // ( confirms )
+        // ( confirms )
             const confirms = item.confirmedTimes || 0;
 
             // Unconfirmed

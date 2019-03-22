@@ -29,7 +29,7 @@ const _t = localStorage.getItem('autoLogoutTime') || 5;
 const autoLogoutTime = _t * 60 * 1000;
 
 export default {
-    components: {sidebar, viteMenu, secondMenu},
+    components: { sidebar, viteMenu, secondMenu },
     props: {
         active: {
             type: String,
@@ -88,13 +88,13 @@ export default {
         go(name) {
             if (name === 'logout') {
                 this.$wallet.logout();
-                this.$router.push({name: 'exchange'});
+                this.$router.push({ name: 'exchange' });
 
                 return;
             }
 
             if (name === 'login') {
-                this.$router.push({name: 'start'});
+                this.$router.push({ name: 'start' });
 
                 return;
             }
@@ -105,12 +105,12 @@ export default {
 
             const account = this.$wallet.getActiveAccount();
             if (!account && name !== 'setting') {
-                this.$router.push({name: 'start'});
+                this.$router.push({ name: 'start' });
 
                 return;
             }
 
-            this.$router.push({name});
+            this.$router.push({ name });
         },
 
         clearAutoLogout() {

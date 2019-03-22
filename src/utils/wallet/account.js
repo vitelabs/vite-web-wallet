@@ -1,13 +1,13 @@
-import {pwdConfirm} from 'components/password/index.js';
-import {getPowNonce} from 'services/pow';
-import {constant} from '@vite/vitejs';
+import { pwdConfirm } from 'components/password/index.js';
+import { getPowNonce } from 'services/pow';
+import { constant } from '@vite/vitejs';
 import acc from 'utils/storeAcc.js';
 
 import keystoreAcc from './keystoreAccount';
 import walletAcc from './walletAccount';
 import addrAcc from './addrAccount';
 
-const {LangList} = constant;
+const { LangList } = constant;
 const NamePre = 'account';
 const AccountType = {
     keystore: 'keystore',
@@ -48,14 +48,14 @@ class account {
         this.keystore = null;
         if (this.type === AccountType.keystore) {
             if (privateKey) {
-                this.account = new keystoreAcc({keystore, privateKey, receiveFail});
+                this.account = new keystoreAcc({ keystore, privateKey, receiveFail });
             } else {
                 this.keystore = keystore;
             }
         } else if (this.type === AccountType.wallet) {
-            this.account = new walletAcc({addrNum, defaultInx, mnemonic, encryptObj, receiveFail, lang});
+            this.account = new walletAcc({ addrNum, defaultInx, mnemonic, encryptObj, receiveFail, lang });
         } else if (this.type === AccountType.addr) {
-            this.account = new addrAcc({address, id, entropy});
+            this.account = new addrAcc({ address, id, entropy });
         } else {
             this.account = null;
         }
@@ -107,7 +107,7 @@ class account {
         if (this.isLogin) {
             return;
         }
-        pwdConfirm({type: 'unlockAccount'});
+        pwdConfirm({ type: 'unlockAccount' });
     }
 
     initPwd({
@@ -128,7 +128,7 @@ class account {
             return true;
         }
 
-        pwdConfirm({showMask, title, submit, content, cancel, cancelTxt, submitTxt, exchange}, !this.isHoldPWD);
+        pwdConfirm({ showMask, title, submit, content, cancel, cancelTxt, submitTxt, exchange }, !this.isHoldPWD);
 
         return false;
     }
@@ -228,7 +228,7 @@ class account {
 
         const addrs = [];
         const list = this.account.addrList;
-        list.forEach(({hexAddr}) => {
+        list.forEach(({ hexAddr }) => {
             addrs.push(hexAddr);
         });
 

@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import {qrcode, modes, ecLevel} from 'qrcode.es';
+import { qrcode, modes, ecLevel } from 'qrcode.es';
 import logo from 'assets/imgs/qrcode_addr.png';
 
 const defaultOpt = {
@@ -26,7 +26,7 @@ export default {
         text: ''
     },
     data() {
-        return {qrcode: ''};
+        return { qrcode: '' };
     },
     mounted() {
         this.genCode();

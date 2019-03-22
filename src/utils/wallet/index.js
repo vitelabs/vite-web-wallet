@@ -1,4 +1,4 @@
-import {hdAddr as _hdAddr, keystore as _keystore, utils, constant} from '@vite/vitejs';
+import { hdAddr as _hdAddr, keystore as _keystore, utils, constant } from '@vite/vitejs';
 import vitecrypto from 'testwebworker';
 import storeAcc from 'utils/storeAcc.js';
 import statistics from 'utils/statistics';
@@ -6,7 +6,7 @@ import $ViteJS from 'utils/viteClient';
 
 import account from './account.js';
 
-const {LangList} = constant;
+const { LangList } = constant;
 const _tools = utils.tools;
 
 class _wallet {
@@ -61,7 +61,7 @@ class _wallet {
     }
 
     create(name, pass, lang = LangList.english) {
-        const err = _tools.checkParams({name, pass}, [ 'name', 'pass' ]);
+        const err = _tools.checkParams({ name, pass }, [ 'name', 'pass' ]);
         if (err) {
             console.error(new Error(err));
 
@@ -96,7 +96,7 @@ class _wallet {
         const num = 10;
         const addrs = _hdAddr.getAddrsFromMnemonic(mnemonic, 0, num, lang);
         if (!addrs) {
-            return Promise.reject({code: 500005});
+            return Promise.reject({ code: 500005 });
         }
 
         const requests = [];
@@ -151,7 +151,7 @@ class _wallet {
         });
     }
 
-    login({id, entropy, addr}, pass) {
+    login({ id, entropy, addr }, pass) {
         if ((!entropy && !addr && !id) || !pass) {
             return Promise.reject(false);
         }
@@ -161,7 +161,7 @@ class _wallet {
             return this.isLogin;
         }
 
-        return this._loginWalletAcc({id, entropy, pass}).then(data => {
+        return this._loginWalletAcc({ id, entropy, pass }).then(data => {
             this.isLogin = true;
             this.onLoginList && this.onLoginList.forEach(cb => {
                 cb && cb();
@@ -219,7 +219,7 @@ class _wallet {
         return true;
     }
 
-    async _loginWalletAcc({id, entropy, pass}) {
+    async _loginWalletAcc({ id, entropy, pass }) {
         let acc;
         let i;
 

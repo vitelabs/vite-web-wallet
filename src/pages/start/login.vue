@@ -67,7 +67,7 @@ import loading from 'components/loading.vue';
 import ellipsisAddr from 'utils/ellipsisAddr.js';
 
 export default {
-    components: {accountList, loading, restore},
+    components: { accountList, loading, restore },
     mounted() {
         this.$onKeyDown(13, () => {
             this.login();
@@ -121,7 +121,7 @@ export default {
 
             const list = this.$wallet.getList();
             if (!list || !list.length) {
-                this.$router.push({name: 'start'});
+                this.$router.push({ name: 'start' });
 
                 return;
             }
@@ -158,7 +158,7 @@ export default {
 
         addAcc() {
             this.$wallet.clearActiveAccount();
-            this.$router.push({name: 'startCreate'});
+            this.$router.push({ name: 'startCreate' });
         },
         login() {
             if (!this.isShowExisting) {
@@ -187,7 +187,7 @@ export default {
                 const activeAccount = this.$wallet.getActiveAccount();
                 activeAccount.unlock();
 
-                this.$router.push({name: this.$wallet.lastPage || 'exchange'});
+                this.$router.push({ name: this.$wallet.lastPage || 'exchange' });
                 this.$wallet.clearLastPage();
             };
 

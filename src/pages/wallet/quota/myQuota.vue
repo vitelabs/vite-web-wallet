@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import {timer} from 'utils/asyncFlow';
+import { timer } from 'utils/asyncFlow';
 
 let quotaInst;
 
@@ -21,7 +21,7 @@ export default {
         const activeAccount = this.$wallet.getActiveAccount();
         const address = activeAccount.getDefaultAddr();
 
-        return {address};
+        return { address };
     },
     computed: {
         quota() {

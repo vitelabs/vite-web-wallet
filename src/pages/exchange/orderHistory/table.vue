@@ -36,21 +36,18 @@
         </confirm>
     </div>
 </template>
+
 <script>
-import confirm from '../components/alert';
-import {orderDetail} from 'services/exchange';
 import d from 'dayjs';
+import { orderDetail } from 'services/exchange';
+import confirm from '../components/alert';
+
 export default {
+    components: { confirm },
     props: {
         list: {
             type: Array,
             default: () => []
-        }
-    },
-    components: {confirm},
-    filters: {
-        d(v) {
-            return d.unix(v).format('YYYY-MM-DD HH:mm');
         }
     },
     data() {
@@ -59,21 +56,9 @@ export default {
             detailConfirm: false
         };
     },
-    methods: {
-        close() {
-            this.detailData = [];
-            this.detailConfirm = false;
-        },
-        showDetail(order) {
-            orderDetail({orderId: order.orderId, ftoken: order.ftoken, ttoken: order.ttoken, pageNo: 1, pageSize: 100}).then(data => {
-                this.detailData = data.details.map(v => {
-                    v.token = order.ttokenShow;
-                    v.ftokenShow = order.ftokenShow;
-
-                    return v;
-                });
-            });
-            this.detailConfirm = true;
+    filters: {
+        d(v) {
+            return d.unix(v).format('YYYY-MM-DD HH:mm');
         }
     },
     computed: {
@@ -83,13 +68,42 @@ export default {
         detailList() {
             return Object.keys(this.detailData).map(k => {
                 const o = this.detailData[k];
-
-                return [ d.unix(o.txTime).format('YYYY-MM-DDTHH:mm'), `${ o.price } ${ o.token }`, `${ o.quantity } ${ o.ftokenShow }`, `${ o.fee } ${ o.token }`, `${ o.amount } ${ o.token }` ];
+                return [
+                    d.unix(o.txTime).format('YYYY-MM-DDTHH:mm'),
+                    `${ o.price } ${ o.token }`,
+                    `${ o.quantity } ${ o.ftokenShow }`,
+                    `${ o.fee } ${ o.token }`,
+                    `${ o.amount } ${ o.token }`
+                ];
             });
+        }
+    },
+    methods: {
+        close() {
+            this.detailData = [];
+            this.detailConfirm = false;
+        },
+        showDetail(order) {
+            orderDetail({
+                orderId: order.orderId,
+                ftoken: order.ftoken,
+                ttoken: order.ttoken,
+                pageNo: 1,
+                pageSize: 100
+            }).then(data => {
+                this.detailData = data.details.map(v => {
+                    v.token = order.ttokenShow;
+                    v.ftokenShow = order.ftokenShow;
+                    return v;
+                });
+            });
+
+            this.detailConfirm = true;
         }
     }
 };
 </script>
+
 <style lang="scss" scoped>
 @import "../components/table.scss";
 

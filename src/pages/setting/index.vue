@@ -25,7 +25,7 @@ import mnemonic from './mnemonic.vue';
 import autoLogout from './autoLogout.vue';
 
 export default {
-    components: {layout, accList, lang, mnemonic, autoLogout},
+    components: { layout, accList, lang, mnemonic, autoLogout },
     data() {
         const activeAccount = this.$wallet.getActiveAccount();
         const showPassWrapper = activeAccount ? activeAccount.type === 'wallet' : false;

@@ -1,10 +1,10 @@
-import {addrAccount as _addrAccount} from '@vite/vitejs';
+import { addrAccount as _addrAccount } from '@vite/vitejs';
 import acc from 'utils/storeAcc.js';
 import $ViteJS from 'utils/viteClient';
 
 class addrAccount extends _addrAccount {
-    constructor({address, id, entropy}) {
-        super({client: $ViteJS, address});
+    constructor({ address, id, entropy }) {
+        super({ client: $ViteJS, address });
         this.id = id;
         this.entropy = entropy;
     }

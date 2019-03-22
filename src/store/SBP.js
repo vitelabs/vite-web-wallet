@@ -1,6 +1,6 @@
-import {timer} from 'utils/asyncFlow';
+import { timer } from 'utils/asyncFlow';
 import BigNumber from 'utils/bigNumber';
-import {constant} from '@vite/vitejs';
+import { constant } from '@vite/vitejs';
 import $ViteJS from 'utils/viteClient';
 
 const loopTime = 5000;
@@ -13,7 +13,7 @@ const apis = {
     }
 };
 
-const state = {registrationList: []};
+const state = { registrationList: [] };
 
 const mutations = {
     commitRegistrationList(state, list) {
@@ -25,12 +25,12 @@ const mutations = {
 };
 
 const actions = {
-    fetchRegistrationList({commit}, address) {
+    fetchRegistrationList({ commit }, address) {
         return apis.fetchRegistrationList(address).then(result => {
             commit('commitRegistrationList', result);
         });
     },
-    loopRegList({state, dispatch}, {address, nodeName, operate, producer}) {
+    loopRegList({ state, dispatch }, { address, nodeName, operate, producer }) {
         // Operate ==> 0: cancel / 1: reg / 2: update
         let isInList = false;
         state.registrationList.forEach(regItem => {
@@ -38,11 +38,11 @@ const actions = {
                 return;
             }
             isInList = true;
-            nodeNameList[nodeName] = {nodeName, operate, producer};
+            nodeNameList[nodeName] = { nodeName, operate, producer };
         });
 
         if (!state.registrationList.length || !isInList) {
-            nodeNameList[nodeName] = {nodeName, operate, producer};
+            nodeNameList[nodeName] = { nodeName, operate, producer };
         }
 
         dispatch('stopLoopRegList');

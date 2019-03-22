@@ -19,8 +19,8 @@ import plugin from 'plugins/addPlugin';
 import directives from 'plugins/directives';
 import resaveAccKeystore from 'utils/resaveAccKeystore.js';
 
-import {initPwdConfirm} from 'components/password/index.js';
-import {initQuotaConfirm} from 'components/quota/index.js';
+import { initPwdConfirm } from 'components/password/index.js';
+import { initQuotaConfirm } from 'components/quota/index.js';
 
 // $onKeyDown $offKeyDown $validAmount $trim $toast $confirm $statistics $wallet
 Vue.use(plugin);
@@ -51,7 +51,7 @@ setTimeout(() => {
     initQuotaConfirm(i18n, router);
     new Vue({
         el: '#app',
-        components: {App},
+        components: { App },
         template: '<App/>',
         store,
         router,

@@ -36,7 +36,7 @@ import loading from 'components/loading.vue';
 import copy from 'utils/copy';
 
 export default {
-    components: {process, copyOK, loading},
+    components: { process, copyOK, loading },
     mounted() {
         this.activeAccount = this.$wallet.getActiveAccount();
         this.mnemonic = this.activeAccount.getMnemonic() || '';
@@ -90,7 +90,7 @@ export default {
                 }
                 this.isLoading = false;
                 this.activeAccount.save();
-                this.$router.push({name: 'start'});
+                this.$router.push({ name: 'start' });
             })
                 .catch(err => {
                     console.warn(err);

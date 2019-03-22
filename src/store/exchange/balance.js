@@ -1,11 +1,11 @@
-import {timer} from 'utils/asyncFlow';
+import { timer } from 'utils/asyncFlow';
 import BigNumber from 'utils/bigNumber';
 import $ViteJS from 'utils/viteClient';
 
 const loopTime = 2 * 1000;
 let balanceTimer = null;
 
-const state = {balanceList: {}};
+const state = { balanceList: {} };
 
 const mutations = {
     setExchangeBalance(state, balanceList) {
@@ -20,7 +20,7 @@ const updateExBalance = (commit, address) => $ViteJS.request('dexfund_getAccount
         // Console.error(e);
     });
 const actions = {
-    startLoopExchangeBalance({commit}, address) {
+    startLoopExchangeBalance({ commit }, address) {
         updateExBalance(commit, address);
         balanceTimer = new timer(() => updateExBalance(commit, address), loopTime);
         balanceTimer.start();
@@ -29,7 +29,7 @@ const actions = {
         balanceTimer && balanceTimer.stop();
         balanceTimer = null;
     },
-    updateExBalance({commit}, address) {
+    updateExBalance({ commit }, address) {
         updateExBalance(commit, address);
     }
 };

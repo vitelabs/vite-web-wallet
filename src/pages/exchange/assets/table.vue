@@ -77,13 +77,13 @@ import powProcess from 'components/powProcess';
 import debounce from 'lodash/debounce';
 import d from 'dayjs';
 
-import {deposit, withdraw, chargeDetail} from 'services/exchange';
+import { deposit, withdraw, chargeDetail } from 'services/exchange';
 
 const VoteDifficulty = '201564160';
 
 export default {
-    components: {confirm, alert, powProcess, viteInput},
-    props: {filter: {type: Object}},
+    components: { confirm, alert, powProcess, viteInput },
+    props: { filter: { type: Object } },
     beforeMount() {
         this.acc = this.$wallet.getActiveAccount();
         if (!this.acc) {
@@ -114,14 +114,14 @@ export default {
             this.addr && this.$store.dispatch('updateExBalance', this.addr);
         }, 0.1),
         withdraw(tokenId) {
-            this.showConfirm({tokenId, type: 'withdraw'});
+            this.showConfirm({ tokenId, type: 'withdraw' });
         },
         recharge(tokenId) {
-            this.showConfirm({tokenId, type: 'recharge'});
+            this.showConfirm({ tokenId, type: 'recharge' });
         },
         detail(tokenId) {
             this.detailConfirm = true;
-            chargeDetail({address: this.addr, tokenId}).then(data => {
+            chargeDetail({ address: this.addr, tokenId }).then(data => {
                 this.detailData = data.records;
             });
         },
@@ -133,7 +133,7 @@ export default {
             this.detailData = [];
             this.detailConfirm = false;
         },
-        showConfirm({tokenId, type}) {
+        showConfirm({ tokenId, type }) {
             this.opNumber = '';
             this.c = {};
             const t = Object.assign({},
@@ -158,7 +158,7 @@ export default {
                     const powTxt = Object.assign({},
                         this.$t('quotaConfirmPoW'));
                     powTxt.leftBtn.click = () => {
-                        this.$router.push({name: 'walletQuota'});
+                        this.$router.push({ name: 'walletQuota' });
                     };
                     (powTxt.rightBtn.click = () => {
                         this.$refs.pow
@@ -168,7 +168,7 @@ export default {
                             .then(successSubmit)
                             .catch(failSubmit);
                     }),
-                    (powTxt.closeBtn = {show: true});
+                    (powTxt.closeBtn = { show: true });
                     this.$confirm(powTxt);
                 } else {
                     this.$toast(this.$t(`exchangeAssets.confirm${ c.type }.failToast`));
@@ -184,12 +184,12 @@ export default {
                 cancelTxt: this.$t('exchangeAssets.pwdConfirm.cancelTxt'),
                 submit: () => {
                     c.type === 'recharge'
-                        ? deposit({tokenId, amount})
+                        ? deposit({ tokenId, amount })
                             .then(successSubmit)
                             .catch(e => {
                                 failSubmit(e);
                             })
-                        : withdraw({tokenId, amount})
+                        : withdraw({ tokenId, amount })
                             .then(successSubmit)
                             .catch(e => {
                                 failSubmit(e);

@@ -1,5 +1,5 @@
-import {timer} from 'utils/asyncFlow';
-import {rateFiat} from 'services/exchange';
+import { timer } from 'utils/asyncFlow';
+import { rateFiat } from 'services/exchange';
 
 const loopTime = 2 * 60 * 1000 * 1000;
 let rateTimer = null;
@@ -22,7 +22,7 @@ const mutations = {
 };
 
 const actions = {
-    startLoopExchangeRate({commit}) {
+    startLoopExchangeRate({ commit }) {
         const f = () => rateFiat().then(data => {
             commit('setExchangeRate', data);
         })

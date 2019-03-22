@@ -67,9 +67,7 @@ const spend = 10000;
 const currentFetchMarket = null;
 
 export default {
-    components: {
-        loading, confirm, viteInput, powProcess
-    },
+    components: { loading, confirm, viteInput, powProcess },
     props: {
         close: {
             type: Function,
@@ -218,9 +216,7 @@ export default {
             };
 
             const newMarketSuccess = () => {
-                this.$toast(this.$t('hint.request', {
-                    name: '上币'
-                }));
+                this.$toast(this.$t('hint.request', { name: '上币' }));
                 this.close();
             };
 

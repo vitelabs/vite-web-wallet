@@ -31,30 +31,30 @@
         </div>
         <div class="filter end">
             <div class="filter_label">{{ $t("exchangeOrderHistory.filter.side") }}</div>
-            <select
-                v-model="tradeType"
-                class="filter_content"
-            >
+            <select v-model="tradeType" class="filter_content">
                 <option value="0">{{ $t("exchangeOrderHistory.filter.buy") }}</option>
                 <option value="1">{{ $t("exchangeOrderHistory.filter.sell") }}</option>
             </select>
         </div>
-        <div
-            @click="submit"
-            class="search active"
-        >{{ $t("exchangeOrderHistory.filter.search") }}</div>
-        <div
-            @click="reset"
-            class="search"
-        >{{ $t("exchangeOrderHistory.filter.reset") }}</div>
+        <div @click="submit" class="search active">
+            {{ $t("exchangeOrderHistory.filter.search") }}
+        </div>
+        <div @click="reset" class="search">
+            {{ $t("exchangeOrderHistory.filter.reset") }}
+        </div>
     </div>
 </template>
 
 <script>
 import FlatPickr from 'vue-flatpickr-component';
-import {tokenMap} from 'services/exchange';
+import { tokenMap } from 'services/exchange';
 import 'flatpickr/dist/flatpickr.css';
+
 export default {
+    components: { FlatPickr },
+    beforeMount() {
+        this.ttoken = this.currentToken;
+    },
     data() {
         return {
             fromDate: '',
@@ -66,10 +66,6 @@ export default {
             ftokenMap: []
         };
     },
-    beforeMount() {
-        this.ttoken = this.currentToken;
-    },
-    components: {FlatPickr},
     computed: {
         marketMap() {
             return this.$store.state.exchangeMarket.marketMap;
@@ -80,7 +76,7 @@ export default {
     },
     watch: {
         ttoken() {
-            tokenMap({tokenId: this.ttoken}).then(data => (this.ftokenMap = data));
+            tokenMap({ tokenId: this.ttoken }).then(data => (this.ftokenMap = data));
         }
     },
     methods: {
