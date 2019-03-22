@@ -22,4 +22,3 @@ export default function (text) {
 
     document.body.removeChild(textArea);
 }
-

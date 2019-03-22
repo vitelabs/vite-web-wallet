@@ -73,17 +73,17 @@ export function doUntill({
                     return res(result);
                 }
                 setTimeout(tryAndTry, interval);
-            })
-                .catch(e => {
-                    if (test({ reject: e })) {
-                        return rej(e);
-                    }
+            }).catch(e => {
+                if (test({ reject: e })) {
+                    return rej(e);
+                }
 
-                    if (timeoutControl && (Date.now() - initTime) >= timeout || timesControl && t >= times) {
-                        return rej('重试超限');
-                    }
-                    setTimeout(tryAndTry, interval);
-                });
+                if (timeoutControl && (Date.now() - initTime) >= timeout || timesControl && t >= times) {
+                    return rej('重试超限');
+                }
+
+                setTimeout(tryAndTry, interval);
+            });
         };
         tryAndTry();
     });

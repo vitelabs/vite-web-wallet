@@ -1,4 +1,3 @@
-// Order.$address.latest;
 import { client } from './index';
 import { timer } from 'utils/asyncFlow';
 import { depthBuy, depthSell, defaultPair, assignPair, latestTx, order } from 'services/exchange';
@@ -14,7 +13,6 @@ export function depthSellWs({ ftoken, ttoken }) {
 }
 
 export const defaultPairWs = function ({ ttoken }) {
-    // `market.${ttokenId}.details.latest`
     const key = `market.${ ttoken }.details.latest`;
     return key;
 };
@@ -82,6 +80,7 @@ const wsServicesMap = {
 };
 
 // Http+ws 订阅任务；
+
 // 1，第一次启动以http方式拉全量数据；
 // 2，ws订阅失败时以轮询代替
 // 3，支持参数更新时自动切换订阅key

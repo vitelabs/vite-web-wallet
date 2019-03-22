@@ -1,6 +1,7 @@
 import { root } from './protoClass';
 import { random } from 'utils/random';
 import { timer } from 'utils/asyncFlow';
+
 const proto = root.lookupType('vite.DexProto');
 const HEARTBEAT = 10000;
 class WsProtoClient {
@@ -8,6 +9,7 @@ class WsProtoClient {
         this.MESSAGETYPE = { SUB: 'sub', UNSUB: 'un_sub', PING: 'ping', PONG: 'pong', PUSH: 'push' };
         this._clientId = random(10);
         this._subKeys = {};
+
         this._heartBeat = new timer(() => {
             if (!this.ready) return;
             this.send('');
@@ -17,6 +19,7 @@ class WsProtoClient {
         const connect = new WebSocket(wsUrl);
         this.connect = connect;
         connect.binaryType = 'arraybuffer';
+
         this._subKey && this.subscribe({ event_key: this._subKey });
         connect.onopen = () => {
             this.send('');
@@ -76,11 +79,11 @@ class WsProtoClient {
 
         const err = proto.verify(payload);
         if (err) throw Error(err);
+
         const message = proto.create(payload);
         const buffer = proto.encode(message).finish();
         this.connect.send(buffer);
     }
 }
-// 192.168.31.190:11211
-// ws://132.232.65.121:11211/websocket
+
 export const client = new WsProtoClient(process.env.pushServer);
