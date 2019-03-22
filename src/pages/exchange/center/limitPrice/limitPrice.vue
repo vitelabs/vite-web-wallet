@@ -46,7 +46,6 @@ export default {
         getBalance() {
             if (!this.isLogin) {
                 this.$store.dispatch('stopLoopExchangeBalance');
-
                 return;
             }
             const activeAccount = this.$wallet.getActiveAccount();

@@ -12,16 +12,23 @@ const mutations = {
         state.balanceList = balanceList;
     }
 };
-const updateExBalance = (commit, address) => $ViteJS.request('dexfund_getAccountFundInfo', address).then(data => {
-    commit('setExchangeBalance', data);
-})
-    .catch(() => {
+
+const updateExBalance = (commit, address) => {
+    $ViteJS.request('dexfund_getAccountFundInfo', address).then(data => {
+        commit('setExchangeBalance', data);
+    }).catch(() => {
         commit('setExchangeBalance', []);
-        // Console.error(e);
     });
+};
+
 const actions = {
     startLoopExchangeBalance({ commit }, address) {
         updateExBalance(commit, address);
+
+        // First stop last
+        balanceTimer && balanceTimer.stop();
+        balanceTimer = null;
+        // Second start next
         balanceTimer = new timer(() => updateExBalance(commit, address), loopTime);
         balanceTimer.start();
     },
