@@ -9,14 +9,14 @@
 import account from './account/account.vue';
 
 export default {
-    components: {account},
+    components: { account },
     mounted() {
         this.$router.afterEach(to => {
             this.active = to.name;
         });
     },
     data() {
-        return {active: this.$route.name};
+        return { active: this.$route.name };
     }
 };
 </script>

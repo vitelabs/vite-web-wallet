@@ -30,11 +30,9 @@ import Table from './table';
 // }
 
 export default {
-    components: {
-        Table
-    },
+    components: { Table },
     data() {
-        return {data: []};
+        return { data: [] };
     },
     props: {
         filterObj: {

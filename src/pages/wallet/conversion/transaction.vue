@@ -68,7 +68,7 @@ const defaultGwei = 41;
 let estimateTimeout;
 
 export default {
-    components: {confirm, viteInput, process},
+    components: { confirm, viteInput, process },
     props: {
         ethWallet: {
             type: Object,

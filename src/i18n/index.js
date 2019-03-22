@@ -14,15 +14,12 @@ if (appLocale) {
 }
 const locale = localStorage.getItem('lang') || appLocale || 'en';
 
+// De,
+// fr,
+// ja,
+// ru
 export default {
     locale,
     fallbackLocale: 'en',
-    messages: {
-        en,
-        zh
-        // De,
-        // fr,
-        // ja,
-        // ru
-    }
+    messages: { en, zh }
 };

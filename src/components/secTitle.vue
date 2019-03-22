@@ -10,10 +10,10 @@
 
 <script>
 import goNetBtn from './goNetBtn.vue';
-import {blackHole} from 'utils/ethWallet/viteContract';
+import { blackHole } from 'utils/ethWallet/viteContract';
 
 export default {
-    components: {goNetBtn},
+    components: { goNetBtn },
     props: {
         title: {
             default: function () {
@@ -34,7 +34,7 @@ export default {
                 return `${ this.$route.name }.help.text`;
             }
         },
-        showHelp: {default: null}
+        showHelp: { default: null }
     },
     methods: {
         _showHelp() {
@@ -46,9 +46,9 @@ export default {
             this.$confirm({
                 title: this.$t(this.helpTitle),
                 singleBtn: true,
-                closeBtn: {show: false},
-                leftBtn: {text: this.$t('btn.understand')},
-                content: this.$t(this.helpText, {blackAddr: blackHole})
+                closeBtn: { show: false },
+                leftBtn: { text: this.$t('btn.understand') },
+                content: this.$t(this.helpText, { blackAddr: blackHole })
             });
         }
     }

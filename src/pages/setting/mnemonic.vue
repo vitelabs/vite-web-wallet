@@ -18,7 +18,7 @@ import copy from 'utils/copy';
 import copyOK from 'components/copyOK';
 
 export default {
-    components: {copyOK},
+    components: { copyOK },
     props: {
         lock: {
             type: Boolean,

@@ -37,9 +37,9 @@
 import secTitle from 'components/secTitle';
 
 export default {
-    components: {secTitle},
+    components: { secTitle },
     data() {
-        return {version: process.env.version};
+        return { version: process.env.version };
     },
     computed: {
         height() {

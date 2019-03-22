@@ -27,7 +27,7 @@ export default {
             acc.showAddr = ellipsisAddr(acc.addr);
         });
 
-        return {accountList: list};
+        return { accountList: list };
     }
 };
 </script>

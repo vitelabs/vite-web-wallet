@@ -9,7 +9,7 @@
 import restore from '../restore.vue';
 
 export default {
-    components: {restore},
+    components: { restore },
     methods: {
         back() {
             this.$router.go(-1);

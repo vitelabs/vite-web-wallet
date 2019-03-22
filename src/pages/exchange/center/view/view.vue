@@ -10,9 +10,9 @@ import kline from './kline.vue';
 import depth from './depth.vue';
 
 export default {
-    components: {kline, depth},
+    components: { kline, depth },
     data() {
-        return {showView: 'kline'};
+        return { showView: 'kline' };
     },
     methods: {
         toogleDepth() {

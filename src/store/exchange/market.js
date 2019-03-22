@@ -1,4 +1,4 @@
-import {baseToken} from 'services/exchange';
+import { baseToken } from 'services/exchange';
 
 const state = {
     currentMarket: '',
@@ -15,7 +15,7 @@ const mutations = {
 };
 
 const actions = {
-    updateMarketMap({commit, state}) {
+    updateMarketMap({ commit, state }) {
         baseToken().then(data => {
             commit('setMarketMap', data || []);
             const currentMarket = state.marketMap;
@@ -32,4 +32,4 @@ const getters = {
     }
 };
 
-export default {state, mutations, actions, getters};
+export default { state, mutations, actions, getters };

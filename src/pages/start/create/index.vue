@@ -24,7 +24,7 @@ import process from 'components/process';
 import loading from 'components/loading';
 
 export default {
-    components: {create, process, loading},
+    components: { create, process, loading },
     mounted() {
         this.$onKeyDown(13, () => {
             this.valid();
@@ -51,7 +51,7 @@ export default {
         },
         createAccount(name, pass) {
             this.$wallet.create(name, pass);
-            this.$router.push({name: 'startRecord'});
+            this.$router.push({ name: 'startRecord' });
         }
     }
 };

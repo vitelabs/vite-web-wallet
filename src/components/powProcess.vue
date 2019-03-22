@@ -13,13 +13,13 @@
 
 <script>
 import loading from 'components/loading';
-import {getPowNonce} from 'services/pow';
+import { getPowNonce } from 'services/pow';
 import $ViteJS from 'utils/viteClient';
 
 let processTimeout;
 
 export default {
-    components: {loading},
+    components: { loading },
     props: {
         cancel: {
             type: Function,

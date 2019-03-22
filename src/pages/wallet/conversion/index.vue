@@ -45,7 +45,7 @@
 </template>
 
 <script>
-import {timer} from 'utils/asyncFlow';
+import { timer } from 'utils/asyncFlow';
 import _ethWallet from 'utils/ethWallet/index.js';
 import secTitle from 'components/secTitle';
 import viteAddress from 'components/address';
@@ -57,12 +57,12 @@ const balanceTime = 2000;
 let balanceInfoInst = null;
 
 export default {
-    components: {secTitle, viteAddress, token, transaction, loading},
+    components: { secTitle, viteAddress, token, transaction, loading },
     created() {
         const activeAccount = this.$wallet.getActiveAccount();
         this.viteAddress = activeAccount.getDefaultAddr();
         const mnemonic = activeAccount.getMnemonic();
-        this.ethWallet = new _ethWallet({mnemonic});
+        this.ethWallet = new _ethWallet({ mnemonic });
         this.ethWallet.init(() => {
             this.loading = false;
         });

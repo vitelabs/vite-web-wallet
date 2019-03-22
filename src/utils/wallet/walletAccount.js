@@ -1,11 +1,11 @@
-import {keystore as _keystore, hdAccount as _walletAccount} from '@vite/vitejs';
+import { keystore as _keystore, hdAccount as _walletAccount } from '@vite/vitejs';
 import vitecrypto from 'testwebworker';
 import acc from 'utils/storeAcc.js';
 import $ViteJS from 'utils/viteClient';
 
 class walletAccount extends _walletAccount {
-    constructor({addrNum, defaultInx, mnemonic, bits, encryptObj, receiveFail, lang}) {
-        super({client: $ViteJS, mnemonic, bits, addrNum, lang}, {});
+    constructor({ addrNum, defaultInx, mnemonic, bits, encryptObj, receiveFail, lang }) {
+        super({ client: $ViteJS, mnemonic, bits, addrNum, lang }, {});
 
         this.defaultInx = defaultInx || 0;
         this.encryptObj = encryptObj || null;
@@ -60,9 +60,7 @@ class walletAccount extends _walletAccount {
 
     unlock(intervals = 2000) {
         this.lock();
-        this.unlockAcc = this.activateAccount({
-            index: this.defaultInx
-        }, {
+        this.unlockAcc = this.activateAccount({ index: this.defaultInx }, {
             intervals,
             receiveFailAction: this.receiveFail,
             duration: -1

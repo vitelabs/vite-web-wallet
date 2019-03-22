@@ -14,7 +14,7 @@ require('echarts/lib/component/tooltip');
 require('echarts/lib/component/legendScroll');
 
 export default {
-    components: {ECharts},
+    components: { ECharts },
     props: {
         showView: {
             type: String,
@@ -82,7 +82,7 @@ export default {
                 tooltip: {
                     confine: true,
                     formatter: params => {
-                        let res = `${ this.$t('exchange.priceTitle', {price: this.activeTxPair ? this.activeTxPair.ttokenShow : ''}) }: ${ params[0].name }`;
+                        let res = `${ this.$t('exchange.priceTitle', { price: this.activeTxPair ? this.activeTxPair.ttokenShow : '' }) }: ${ params[0].name }`;
                         res += `<br/>${ params[0].seriesName } : ${ params[0].value }`;
 
                         return res;
@@ -90,7 +90,7 @@ export default {
                     trigger: 'axis',
                     axisPointer: {
                         type: 'line',
-                        lineStyle: {color: 'rgba(0, 0, 0, 1)'}
+                        lineStyle: { color: 'rgba(0, 0, 0, 1)' }
                     },
                     backgroundColor: '#afafaf',
                     textStyle: {
@@ -104,20 +104,20 @@ export default {
                     boundaryGap: false,
                     data: this.priceList
                 },
-                yAxis: [{type: 'value'}],
+                yAxis: [{ type: 'value' }],
                 series: [ {
                     name: this.$t('exchange.amountTable'),
                     type: 'line',
-                    itemStyle: {normal: {color: '#4cc453'}},
-                    lineStyle: {normal: {color: '#00D764'}},
-                    areaStyle: {color: '#00D764'},
+                    itemStyle: { normal: { color: '#4cc453' } },
+                    lineStyle: { normal: { color: '#00D764' } },
+                    areaStyle: { color: '#00D764' },
                     data: this.buyAmountList
                 }, {
                     name: this.$t('exchange.amountTable'),
                     type: 'line',
-                    itemStyle: {normal: {color: '#e94c4c'}},
-                    lineStyle: {normal: {color: '#ED5158'}},
-                    areaStyle: {color: '#ED5158'},
+                    itemStyle: { normal: { color: '#e94c4c' } },
+                    lineStyle: { normal: { color: '#ED5158' } },
+                    areaStyle: { color: '#ED5158' },
                     data: this.sellAmountList
                 } ]
             };

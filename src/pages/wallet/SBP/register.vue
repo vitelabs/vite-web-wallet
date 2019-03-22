@@ -56,15 +56,15 @@
 </template>
 
 <script>
-import {quotaConfirm} from 'components/quota/index';
+import { quotaConfirm } from 'components/quota/index';
 import viteInput from 'components/viteInput';
 import BigNumber from 'utils/bigNumber';
-import {address} from 'utils/tools';
+import { address } from 'utils/tools';
 
 const amount = 500000;
 
 export default {
-    components: {viteInput},
+    components: { viteInput },
     props: {
         tokenInfo: {
             type: Object,
@@ -211,7 +211,7 @@ export default {
                 title: this.$t('walletSBP.confirm.title'),
                 submitTxt: this.$t('walletSBP.confirm.rightBtn'),
                 cancelTxt: this.$t('walletSBP.confirm.leftBtn'),
-                content: this.$t('walletSBP.confirm.describe', {amount}),
+                content: this.$t('walletSBP.confirm.describe', { amount }),
                 submit: () => {
                     this.sendRegisterTx();
                 }
@@ -222,7 +222,7 @@ export default {
             const nodeName = this.nodeName;
             const producerAddr = this.producerAddr;
 
-            this.sendTx({producerAddr, amount, nodeName}, 'SBPreg').then(() => {
+            this.sendTx({ producerAddr, amount, nodeName }, 'SBPreg').then(() => {
                 this.loading = false;
                 this.$toast(this.$t('walletSBP.section1.registerSuccess'));
                 this.clearAll();
@@ -239,7 +239,7 @@ export default {
                     this.loading = false;
 
                     if (err && err.error && err.error.code && err.error.code === -35002) {
-                        quotaConfirm({operate: this.$t('walletSBP.register')});
+                        quotaConfirm({ operate: this.$t('walletSBP.register') });
 
                         return;
                     }

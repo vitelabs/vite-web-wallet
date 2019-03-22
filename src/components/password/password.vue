@@ -23,7 +23,7 @@ import confirm from 'components/confirm.vue';
 const holdTime = 5 * 60 * 1000;
 
 export default {
-    components: {confirm},
+    components: { confirm },
     props: {
         type: {
             type: String,
@@ -83,7 +83,7 @@ export default {
             const activeAccount = this.$wallet.getActiveAccount();
             const name = activeAccount ? activeAccount.getName() : '';
 
-            return this.$t('pwdConfirm.unlockAcc', {name});
+            return this.$t('pwdConfirm.unlockAcc', { name });
         }
     },
     methods: {

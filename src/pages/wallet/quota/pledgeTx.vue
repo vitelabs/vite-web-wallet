@@ -48,14 +48,14 @@
 <script>
 import viteInput from 'components/viteInput';
 import BigNumber from 'utils/bigNumber';
-import {address} from 'utils/tools';
-import {constant} from '@vite/vitejs';
+import { address } from 'utils/tools';
+import { constant } from '@vite/vitejs';
 
 const amountTimeout = null;
 const minNum = 1000;
 
 export default {
-    components: {viteInput},
+    components: { viteInput },
     props: {
         tokenInfo: {
             type: Object,
@@ -114,7 +114,7 @@ export default {
             }
 
             if (BigNumber.compared(this.amount, minNum) < 0) {
-                this.amountErr = this.$t('walletQuota.limitAmt', {num: minNum});
+                this.amountErr = this.$t('walletQuota.limitAmt', { num: minNum });
 
                 return false;
             }
@@ -187,7 +187,7 @@ export default {
                 title: this.$t('submitStaking'),
                 submitTxt: this.$t('walletQuota.confirm.submit.rightBtn'),
                 cancelTxt: this.$t('walletQuota.confirm.submit.leftBtn'),
-                content: this.$t('walletQuota.confirm.submit.describe', {amount: this.amount}),
+                content: this.$t('walletQuota.confirm.submit.describe', { amount: this.amount }),
                 submit: () => {
                     this._sendPledgeTx();
                 }
@@ -208,7 +208,7 @@ export default {
                     return;
                 }
 
-                this.$toast(this.$t('hint.request', {name: this.$t('submitStaking')}));
+                this.$toast(this.$t('hint.request', { name: this.$t('submitStaking') }));
                 this.clearAll();
             });
         }

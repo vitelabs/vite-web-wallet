@@ -81,7 +81,7 @@ import getTokenIcon from 'utils/getTokenIcon';
 
 export default {
     data() {
-        return {showTokenType: ''};
+        return { showTokenType: '' };
     },
     computed: {
         ttokenDetail() {

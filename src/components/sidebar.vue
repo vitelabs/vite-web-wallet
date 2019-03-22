@@ -43,7 +43,7 @@ import exchange from 'assets/imgs/exchange_default.svg';
 import exchangeActive from 'assets/imgs/exchange_pressed.svg';
 
 export default {
-    components: {testNotice},
+    components: { testNotice },
     props: {
         active: {
             type: String,

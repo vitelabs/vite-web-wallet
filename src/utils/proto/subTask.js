@@ -1,42 +1,46 @@
 // Order.$address.latest;
 import { client } from './index';
 import { timer } from 'utils/asyncFlow';
-import { depthBuy, depthSell, defaultPair, assignPair, latestTx } from 'services/exchange';
+import { depthBuy, depthSell, defaultPair, assignPair, latestTx, order } from 'services/exchange';
 
-export function depthBuyWs({ftoken, ttoken}) {
+export function depthBuyWs({ ftoken, ttoken }) {
     const key = `market.${ ftoken }-${ ttoken }.depth.buy`;
     return key;
 }
 
-export function depthSellWs({ftoken, ttoken}) {
+export function depthSellWs({ ftoken, ttoken }) {
     const key = `market.${ ftoken }-${ ttoken }.depth.sell`;
     return key;
 }
 
-export const defaultPairWs = function ({ttoken}) {
+export const defaultPairWs = function ({ ttoken }) {
     // `market.${ttokenId}.details.latest`
     const key = `market.${ ttoken }.details.latest`;
     return key;
 };
 
-export const assignPairWs = function ({ftoken, ttoken}) {
+export const assignPairWs = function ({ ftoken, ttoken }) {
     const key = `market.${ ftoken }-${ ttoken }.detail.latest`;
     return key;
 };
 
-export const latestTxWs = function ({ftoken, ttoken}) {
+export const latestTxWs = function ({ ftoken, ttoken }) {
     const key = `market.${ ftoken }-${ ttoken }.trade.latest`;
     return key;
 };
 
-export const latestOrderWs = function ({address}) {
+export const latestOrderWs = function ({ address }) {
     const key = `order.${ address }.latest`;
     return key;
 };
 
-// type = history | current
-export const orderQueryWs = function ({ftoken, ttoken, address, type}) {
-    const key = `market.${ ftoken }-${ ttoken }.order.${ address }.${ type }`;
+export const orderQueryHistoryWs = function ({ ftoken, ttoken, address }) {
+    const key = `market.${ ftoken }-${ ttoken }.order.${ address }.history`;
+    return key;
+};
+
+export const orderQueryCurrentWs = function ({ ftoken, ttoken, address }) {
+    const key = `market.${ ftoken }-${ ttoken }.order.${ address }.current`;
     return key;
 };
 
@@ -46,7 +50,25 @@ const httpServicesMap = {
     defaultPair,
     assignPair,
     latestTx,
-    latestOrder: () => Promise.resolve(null)
+    latestOrder: () => Promise.resolve(null),
+    orderQueryHistory: ({ ftoken, ttoken, address }) => order({
+        address,
+        ttoken,
+        ftoken,
+        pageNo: 1,
+        pageSize: 10,
+        status: 0,
+        paging: 0
+    }),
+    orderQueryCurrent: ({ ftoken, ttoken, address }) => order({
+        address,
+        ttoken,
+        ftoken,
+        pageNo: 1,
+        pageSize: 10,
+        status: 1,
+        paging: 0
+    })
 };
 const wsServicesMap = {
     depthBuy: depthBuyWs,
@@ -55,7 +77,8 @@ const wsServicesMap = {
     assignPair: assignPairWs,
     latestTx: latestTxWs,
     latestOrder: latestOrderWs,
-    orderQuery: orderQueryWs
+    orderQueryHistory: orderQueryHistoryWs,
+    orderQueryCurrent: orderQueryCurrentWs
 };
 
 // Http+ws 订阅任务；
@@ -79,7 +102,7 @@ export class subTask extends timer {
                 if (this.subKey !== key) {
                     return;
                 }
-                this.callback && this.callback({args, data});
+                this.callback && this.callback({ args, data });
             });
         };
 
@@ -101,7 +124,10 @@ export class subTask extends timer {
             if (this.subKey !== key) {
                 return;
             }
-            this.callback && this.callback({args, data});
+            if (this.key.indexOf('orderQuery') !== -1) {
+                data = data.orders || [];
+            }
+            this.callback && this.callback({ args, data });
         });
     }
 
@@ -130,11 +156,12 @@ export class subTask extends timer {
 
         const args = this.args;
         const key = this.subKey;
+        console.log(this.subKey);
         client.sub(this.subKey, data => {
             if (this.subKey !== key) {
                 return;
             }
-            this.callback && this.callback({args, data});
+            this.callback && this.callback({ args, data });
         }, (data, err) => {
             if (err) {
                 this.subStatus = false;

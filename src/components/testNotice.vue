@@ -13,7 +13,7 @@
 <script>
 export default {
     data() {
-        return {version: process.env.version};
+        return { version: process.env.version };
     }
 };
 </script>

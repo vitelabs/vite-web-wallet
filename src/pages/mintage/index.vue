@@ -90,7 +90,7 @@ import tableList from 'components/tableList.vue';
 import $ViteJS from 'utils/viteClient';
 
 export default {
-    components: {viteInput, tableList},
+    components: { viteInput, tableList },
     created() {
         this.getOwnerToken();
     },

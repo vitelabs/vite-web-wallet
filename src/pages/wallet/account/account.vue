@@ -19,7 +19,7 @@ import accountHead from './head';
 import transaction from './transaction';
 
 export default {
-    components: {accountHead, syncBlock, tokenCard, transaction},
+    components: { accountHead, syncBlock, tokenCard, transaction },
     data() {
         return {
             isShowTrans: false,
@@ -27,7 +27,6 @@ export default {
         };
     },
     computed: {
-        // Force vite at first
         tokenList() {
             const tokenList = JSON.parse(JSON.stringify(this.$store.getters.tokenBalanceList));
 
@@ -54,6 +53,7 @@ export default {
                 return tokenList;
             }
 
+            // Force vite at first
             const list = [];
             const viteId = viteTokenInfo.tokenId;
             if (tokenList[viteId]) {

@@ -29,13 +29,13 @@ export default {
             default: () => {}
         }
     },
-    components: {confirm},
+    components: { confirm },
     methods: {
         _cancel() {
             this.cancel && this.cancel();
         },
         _submit() {
-            this.$router.push({name: 'walletQuota'});
+            this.$router.push({ name: 'walletQuota' });
             this.submit && this.submit();
         }
     }
