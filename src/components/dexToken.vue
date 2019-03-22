@@ -1,62 +1,66 @@
 <template>
-    <confirm v-show="isShow" class="exchange" :btnUnuse="btnUnuse"
-             :showMask="true" :singleBtn="true"
-             :title="$t('exchange.dexToken.title')" :closeIcon="true"
-             :close="close" :leftBtnTxt="$t('exchange.dexToken.btn')"
-             :leftBtnClick="trans">
+    <div>
+        <confirm v-show="isShow" class="exchange" :btnUnuse="btnUnuse"
+                 :showMask="true" :singleBtn="true"
+                 :title="$t('exchange.dexToken.title')" :closeIcon="true"
+                 :close="close" :leftBtnTxt="$t('exchange.dexToken.btn')"
+                 :leftBtnClick="trans">
 
-        <div v-click-outside="hideMarketList" @click="toggleMarketList" class="__row _r_m __pointer">
-            <div class="__row-t">{{ $t('exchange.dexToken.market') }}</div>
-            <div class="market input-wrapper">{{ market ? market.name : '' }}
-                <span class="down-icon" slot="after"></span>
-            </div>
-            <ul v-show="isShowMarketList" class="market-list">
-                <li @click="setMarket(_market)" class="market input-wrapper border-bottom"
-                    v-for="(_market, i) in marketList" :key="i"
-                    v-show="market && _market.token !== market.token">{{ _market.name }} / {{ _market.token }}</li>
-            </ul>
-        </div>
-
-        <div v-click-outside="hideTokenList" class="__row">
-            <div class="__row-t">
-                {{ $t('exchange.dexToken.name') }}
-                <span class="link __pointer" @click="goNet">{{ $t('exchange.dexToken.link') }}</span>
-            </div>
-            <div @click="toggleTokenList" class="market input-wrapper __pointer">
-                {{ token ? token.name : '' }}<div class="down-icon"></div>
-            </div>
-            <div v-show="isShowTokenList" class="market-list">
-                <vite-input ref="searchInput" class="token-wrapper" v-model="tokenName"
-                            :placeholder="$t('exchange.dexToken.search')">
-                    <img slot="before" class="icon" src="~assets/imgs/search.svg"/>
-                </vite-input>
-                <loading loadingType="dot" v-show="isLoading && !tokenName"
-                         class="ex-center-loading token-loading"></loading>
-                <ul class="token-list __pointer">
-                    <li v-show="!list || !list.length" class="market input-wrapper no-data border-bottom">
-                        {{ tokenName ? $t('exchange.noData.search') : $t('hint.noData') }}</li>
-                    <li @click="setToken(_token)" class="market input-wrapper border-bottom"
-                        v-for="(_token, i) in list" :key="i">
-                        {{ _token.name }} / {{ _token.token }}</li>
+            <div v-click-outside="hideMarketList" @click="toggleMarketList" class="__row _r_m __pointer">
+                <div class="__row-t">{{ $t('exchange.dexToken.market') }}</div>
+                <div class="market input-wrapper">{{ market ? market.name : '' }}
+                    <span class="down-icon" slot="after"></span>
+                </div>
+                <ul v-show="isShowMarketList" class="market-list">
+                    <li @click="setMarket(_market)" class="market input-wrapper border-bottom"
+                        v-for="(_market, i) in marketList" :key="i"
+                        v-show="market && _market.token !== market.token">{{ _market.name }} / {{ _market.token }}</li>
                 </ul>
             </div>
-        </div>
 
-        <div class="__row">
-            <div class="__row-t">{{ $t('exchange.dexToken.fee') }}</div>
-            <div class="no-input">{{ spend }} VITE</div>
-        </div>
-        <div class="hint"><span>{{ $t('exchange.dexToken.hint') }}</span></div>
-    </confirm>
+            <div v-click-outside="hideTokenList" class="__row">
+                <div class="__row-t">
+                    {{ $t('exchange.dexToken.name') }}
+                    <span class="link __pointer" @click="goNet">{{ $t('exchange.dexToken.link') }}</span>
+                </div>
+                <div @click="toggleTokenList" class="market input-wrapper __pointer">
+                    {{ token ? token.name : '' }}<div class="down-icon"></div>
+                </div>
+                <div v-show="isShowTokenList" class="market-list">
+                    <vite-input ref="searchInput" class="token-wrapper" v-model="tokenName"
+                                :placeholder="$t('exchange.dexToken.search')">
+                        <img slot="before" class="icon" src="~assets/imgs/search.svg"/>
+                    </vite-input>
+                    <loading loadingType="dot" v-show="isLoading && !tokenName"
+                             class="ex-center-loading token-loading"></loading>
+                    <ul class="token-list __pointer">
+                        <li v-show="!list || !list.length" class="market input-wrapper no-data border-bottom">
+                            {{ tokenName ? $t('exchange.noData.search') : $t('hint.noData') }}</li>
+                        <li @click="setToken(_token)" class="market input-wrapper border-bottom"
+                            v-for="(_token, i) in list" :key="i">
+                            {{ _token.name }} / {{ _token.token }}</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="__row">
+                <div class="__row-t">{{ $t('exchange.dexToken.fee') }}</div>
+                <div class="no-input">{{ spend }} VITE</div>
+            </div>
+            <div class="hint"><span>{{ $t('exchange.dexToken.hint') }}</span></div>
+        </confirm>
+
+        <pow-process ref="powProcess" :isShowCancel="false"></pow-process>
+    </div>
 </template>
 
 <script>
 import loading from 'components/loading';
 import confirm from 'components/confirm';
 import viteInput from 'components/viteInput';
-import { quotaConfirm } from 'components/quota/index';
 import getTokenIcon from 'utils/getTokenIcon';
 import BigNumber from 'utils/bigNumber';
+import powProcess from 'components/powProcess';
 import { newMarket, marketsReserve } from 'services/exchange';
 
 const spend = 10000;
@@ -64,7 +68,7 @@ const currentFetchMarket = null;
 
 export default {
     components: {
-        loading, confirm, viteInput
+        loading, confirm, viteInput, powProcess
     },
     props: {
         close: {
@@ -90,7 +94,9 @@ export default {
             tokenList: [],
             searchList: [],
             isLoading: false,
-            isShow: true
+
+            isShow: true,
+            isMarketLoading: false
         };
     },
     computed: {
@@ -101,7 +107,7 @@ export default {
             return this.$store.getters.viteTokenInfo;
         },
         btnUnuse() {
-            return !this.market || !this.token;
+            return !this.market || !this.token || this.isMarketLoading;
         },
         list() {
             if (this.tokenName) {
@@ -202,31 +208,40 @@ export default {
                 return;
             }
 
+            this.isMarketLoading = true;
+
+            const newMarketFail = err => {
+                console.warn(err);
+                this.isMarketLoading = false;
+                this.isShow = true;
+                this.$toast(this.$t('hint.reqError'), err);
+            };
+
+            const newMarketSuccess = () => {
+                this.$toast(this.$t('hint.request', {
+                    name: '上币'
+                }));
+                this.close();
+            };
+
             newMarket({
                 amount: BigNumber.toMin(spend, this.viteTokenInfo.decimals),
                 tradeToken: this.token.token,
                 quoteToken: this.market.token
             }).then(() => {
-                this.$toast(this.$t('hint.request', {
-                    name: '上币'
-                }));
-                this.close();
+                newMarketSuccess();
             }).catch(err => {
-                console.warn(err);
-                if (err && err.error && err.error.code && err.error.code === -35002) {
-                    this.isShow = false;
-                    quotaConfirm({
-                        operate: '上币',
-                        cancel: () => {
-                            this.isShow = true;
-                        },
-                        submit: () => {
-                            this.close && this.close();
-                        }
-                    });
+                if (!err || !err.error || !err.error.code || err.error.code !== -35002) {
+                    newMarketFail(err);
                     return;
                 }
-                this.$toast(this.$t('hint.reqError'), err);
+
+                this.isShow = false;
+                this.$refs.powProcess && this.$refs.powProcess.startPowTx(err.accountBlock, 0).then(() => {
+                    newMarketSuccess();
+                }).catch(err => {
+                    newMarketFail(err);
+                });
             });
         }
     }

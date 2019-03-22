@@ -358,50 +358,47 @@ export default {
                 this.isLoading = false;
                 this.clearAll();
                 this.$toast(this.$t('exchange.newOrderSuccess'));
-            })
-                .catch(err => {
-                    console.warn(err);
-                    if (!err || !err.error || !err.error.code || err.error.code !== -35002) {
-                        this.isLoading = false;
-                        this.$toast(this.$t('exchange.newOrderFail'));
+            }).catch(err => {
+                console.warn(err);
 
-                        return;
-                    }
+                if (!err || !err.error || !err.error.code || err.error.code !== -35002) {
+                    this.isLoading = false;
+                    this.$toast(this.$t('exchange.newOrderFail'));
+                    return;
+                }
 
-
-                    this.$confirm({
-                        showMask: true,
-                        title: this.$t('quotaConfirmPoW.title'),
-                        closeBtn: {
-                            show: true,
-                            click: () => {
+                this.$confirm({
+                    showMask: true,
+                    title: this.$t('quotaConfirmPoW.title'),
+                    closeBtn: {
+                        show: true,
+                        click: () => {
+                            this.isLoading = false;
+                        }
+                    },
+                    leftBtn: {
+                        text: this.$t('quotaConfirmPoW.leftBtn.text'),
+                        click: () => {
+                            this.$router.push({name: 'walletQuota'});
+                        }
+                    },
+                    rightBtn: {
+                        text: this.$t('quotaConfirmPoW.rightBtn.text'),
+                        click: () => {
+                            this.$refs.powProcess.startPowTx(err.accountBlock, 0).then(() => {
                                 this.isLoading = false;
-                            }
-                        },
-                        leftBtn: {
-                            text: this.$t('quotaConfirmPoW.leftBtn.text'),
-                            click: () => {
-                                this.$router.push({name: 'walletQuota'});
-                            }
-                        },
-                        rightBtn: {
-                            text: this.$t('quotaConfirmPoW.rightBtn.text'),
-                            click: () => {
-                                this.$refs.powProcess.startPowTx(err.accountBlock, 0).then(() => {
-                                    this.isLoading = false;
-                                    this.clearAll();
-                                    this.$toast(this.$t('exchange.newOrderSuccess'));
-                                })
-                                    .catch(err => {
-                                        this.isLoading = false;
-                                        this.$toast(this.$t('exchange.newOrderFail'));
-                                        console.warn(err);
-                                    });
-                            }
-                        },
-                        content: this.$t('quotaConfirmPoW.content')
-                    });
+                                this.clearAll();
+                                this.$toast(this.$t('exchange.newOrderSuccess'));
+                            }).catch(err => {
+                                this.isLoading = false;
+                                this.$toast(this.$t('exchange.newOrderFail'));
+                                console.warn(err);
+                            });
+                        }
+                    },
+                    content: this.$t('quotaConfirmPoW.content')
                 });
+            });
         }
     }
 };

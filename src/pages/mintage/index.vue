@@ -84,7 +84,7 @@
 </template>
 
 <script>
-import {getPowNonce} from 'services/pow';
+import { getPowNonce } from 'services/pow';
 import viteInput from 'components/viteInput';
 import tableList from 'components/tableList.vue';
 import $ViteJS from 'utils/viteClient';
@@ -131,32 +131,30 @@ export default {
                 tokenSymbol: this.tokenSymbol
             }).then(() => {
                 this.$toast('Mintage success');
-            })
-                .catch(err => {
-                    this.$toast(`Mintage fail. ${ err.error.message || err.error.msg }`);
+            }).catch(err => {
+                this.$toast(`Mintage fail. ${ err.error.message || err.error.msg }`);
 
-                    if (err.error.code !== -35002) {
-                        return;
-                    }
+                if (err.error.code !== -35002) {
+                    return;
+                }
 
-                    const accountBlock = err.accountBlock;
-                    getPowNonce(accountBlock.accountAddress, accountBlock.prevHash).then(data => {
-                        accountBlock.difficulty = data.difficulty;
-                        accountBlock.nonce = data.nonce;
+                const accountBlock = err.accountBlock;
+                getPowNonce(accountBlock.accountAddress, accountBlock.prevHash).then(data => {
+                    accountBlock.difficulty = data.difficulty;
+                    accountBlock.nonce = data.nonce;
 
-                        activeAccount.sendRawTx(accountBlock).then(() => {
-                            this.$toast('Mintage success');
-                        })
-                            .catch(err => {
-                                this.$toast(`Mintage fail. ${ err.error.message || err.error.msg }`);
-                                console.warn(err);
-                            });
+                    activeAccount.sendRawTx(accountBlock).then(() => {
+                        this.$toast('Mintage success');
                     })
                         .catch(err => {
-                            this.$toast('Pow failed.');
+                            this.$toast(`Mintage fail. ${ err.error.message || err.error.msg }`);
                             console.warn(err);
                         });
+                }).catch(err => {
+                    this.$toast('Pow failed.');
+                    console.warn(err);
                 });
+            });
         },
         getOwnerToken() {
             const activeAccount = this.$wallet.getActiveAccount();
