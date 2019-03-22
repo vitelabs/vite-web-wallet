@@ -212,11 +212,11 @@ export default {
                 console.warn(err);
                 this.isMarketLoading = false;
                 this.isShow = true;
-                this.$toast(this.$t('hint.reqError'), err);
+                this.$toast(this.$t('exchange.dexToken.reqError'), err);
             };
 
             const newMarketSuccess = () => {
-                this.$toast(this.$t('hint.request', { name: '上币' }));
+                this.$toast(this.$t('exchange.dexToken.reqSuccess'));
                 this.close();
             };
 
