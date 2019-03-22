@@ -104,7 +104,7 @@ export default {
         subscribe() {
             task = task || new subTask('orderQueryCurrent', ({ args, data }) => {
                 const currentAcc = this.$wallet.getActiveAccount();
-                const currentAddr = currentAcc.getDefaultAddr();
+                const currentAddr = currentAcc ? currentAcc.getDefaultAddr() : '';
 
                 if (args.address !== currentAddr
                     || this.filterObj.ttoken !== args.ttoken
@@ -115,9 +115,9 @@ export default {
                 this.list = data || [];
             });
 
-            this.acc = this.$wallet.getActiveAccount();
-            this.addr = this.acc.getDefaultAddr();
             task.start(() => {
+                this.acc = this.$wallet.getActiveAccount();
+                this.addr = this.acc ? this.acc.getDefaultAddr() : '';
                 return {
                     address: this.addr,
                     ...this.filterObj
