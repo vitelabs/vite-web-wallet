@@ -19,7 +19,7 @@ let webpackConfig = {
     mode: development.indexOf(process.env.NODE_ENV) > -1 ? 'development' : 'production',
     devtool: 'source-map',
 
-    entry: {index: path.join(SRC_PATH, '/index.js')},
+    entry: { index: path.join(SRC_PATH, '/index.js') },
     output: {
         path: STATIC_PATH,
         filename: '[name].[hash].js'
@@ -41,7 +41,7 @@ let webpackConfig = {
             }
         },
         minimizer: [
-            // We specify a custom UglifyJsPlugin here to get source maps in production
+        // We specify a custom UglifyJsPlugin here to get source maps in production
             new UglifyJsPlugin({
                 cache: true,
                 parallel: true,
@@ -57,7 +57,7 @@ let webpackConfig = {
     module: {
         rules: [ {
             test: /\.vue$/,
-            use: [{loader: 'vue-loader'}]
+            use: [{ loader: 'vue-loader' }]
         }, {
             test: /\.(svg|png|jpg|gif)$/,
             loader: 'url-loader',
@@ -70,11 +70,16 @@ let webpackConfig = {
             exclude: /node_modules(?!\/base-x)/,
             use: {
                 loader: 'babel-loader',
-                options: {presets: ['@babel/preset-env']}
+                options: { presets: ['@babel/preset-env'] }
             }
         }, {
             test: /(\.scss$|\.css$|\.sass$)/,
-            use: [ {loader: 'style-loader'}, {loader: 'css-loader'}, {loader: 'sass-loader'}, {loader: 'postcss-loader'} ]
+            use: [
+                { loader: 'style-loader' },
+                { loader: 'css-loader' },
+                { loader: 'sass-loader' },
+                { loader: 'postcss-loader' }
+            ]
         } ]
         // Postcss: function() {
         // return [px2rem({remUnit: 75})];

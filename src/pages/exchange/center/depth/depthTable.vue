@@ -17,7 +17,7 @@ import BigNumber from 'utils/bigNumber';
 import loading from 'components/loading';
 
 export default {
-    components: {loading},
+    components: { loading },
     props: {
         dataType: {
             type: String,
@@ -69,7 +69,7 @@ export default {
             const price = data.price;
             const quantity = data.quantity;
             const txSide = this.dataType === 'buy' ? 0 : 1;
-            this.$store.commit('exSetActiveTx', {price, quantity, txSide});
+            this.$store.commit('exSetActiveTx', { price, quantity, txSide });
         }
     }
 };

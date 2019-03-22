@@ -1,11 +1,11 @@
-import {account as _account, keystore as _keystore} from '@vite/vitejs';
+import { account as _account, keystore as _keystore } from '@vite/vitejs';
 import vitecrypto from 'testwebworker';
 import acc from 'utils/storeAcc.js';
 import $ViteJS from 'utils/viteClient';
 
 class keystoreAccount extends _account {
-    constructor({keystore, privateKey, receiveFail}) {
-        super({privateKey, client: $ViteJS});
+    constructor({ keystore, privateKey, receiveFail }) {
+        super({ privateKey, client: $ViteJS });
 
         this.keystore = keystore;
         this.receiveFail = receiveFail;

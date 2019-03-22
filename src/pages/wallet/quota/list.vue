@@ -36,14 +36,14 @@ import userImg from 'assets/imgs/mine.svg';
 import pagination from 'components/pagination.vue';
 import tableList from 'components/tableList.vue';
 import date from 'utils/date.js';
-import {timer} from 'utils/asyncFlow';
+import { timer } from 'utils/asyncFlow';
 import BigNumber from 'utils/bigNumber';
 import ellipsisAddr from 'utils/ellipsisAddr.js';
 
 let pledgeListInst;
 
 export default {
-    components: {pagination, tableList},
+    components: { pagination, tableList },
     props: {
         tokenInfo: {
             type: Object,
@@ -172,7 +172,7 @@ export default {
             }, 'withdrawalOfQuota', (result, err) => {
                 this.loading = false;
                 this.activeItem = null;
-                result && this.$toast(this.$t('hint.request', {name: this.$t('walletQuota.withdrawalStaking')}));
+                result && this.$toast(this.$t('hint.request', { name: this.$t('walletQuota.withdrawalStaking') }));
                 !result && err && this.$toast(this.$t('walletQuota.canclePledgeFail'), err);
             });
         },

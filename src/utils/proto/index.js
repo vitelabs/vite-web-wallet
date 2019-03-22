@@ -1,11 +1,11 @@
-import {root} from './protoClass';
-import {random} from 'utils/random';
-import {timer} from 'utils/asyncFlow';
+import { root } from './protoClass';
+import { random } from 'utils/random';
+import { timer } from 'utils/asyncFlow';
 const proto = root.lookupType('vite.DexProto');
 const HEARTBEAT = 10000;
 class WsProtoClient {
     constructor(wsUrl) {
-        this.MESSAGETYPE = {SUB: 'sub', UNSUB: 'un_sub', PING: 'ping', PONG: 'pong', PUSH: 'push'};
+        this.MESSAGETYPE = { SUB: 'sub', UNSUB: 'un_sub', PING: 'ping', PONG: 'pong', PUSH: 'push' };
         this._clientId = random(10);
         this._subKeys = {};
         this._heartBeat = new timer(() => {
@@ -17,7 +17,7 @@ class WsProtoClient {
         const connect = new WebSocket(wsUrl);
         this.connect = connect;
         connect.binaryType = 'arraybuffer';
-        this._subKey && this.subscribe({event_key: this._subKey});
+        this._subKey && this.subscribe({ event_key: this._subKey });
         connect.onopen = () => {
             this.send('');
         };

@@ -1,4 +1,4 @@
-import {Confirm} from '.';
+import { Confirm } from '.';
 
 new Confirm({
     content: 'test',

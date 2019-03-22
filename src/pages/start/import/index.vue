@@ -62,7 +62,7 @@ export default {
                     return;
                 }
 
-                this.$router.push({name: 'start'});
+                this.$router.push({ name: 'start' });
             };
             reader.readAsText(file);
         },

@@ -2,7 +2,7 @@ import Vue from 'vue';
 import toastComponent from './toast.vue';
 
 const Toast = Vue.extend(toastComponent);
-const instance = new Toast({el: document.createElement('div')});
+const instance = new Toast({ el: document.createElement('div') });
 document.body.appendChild(instance.$el);
 
 const toastDuration = 2000;

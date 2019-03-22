@@ -43,7 +43,7 @@ const mutations = {
 };
 
 const actions = {
-    fetchQuota({commit}, address) {
+    fetchQuota({ commit }, address) {
         const fetchTime = new Date().getTime();
         lastFetchQuotaTime = fetchTime;
 
@@ -57,7 +57,7 @@ const actions = {
             return result;
         });
     },
-    fetchPledgeList({commit, state}, {address, pageIndex}) {
+    fetchPledgeList({ commit, state }, { address, pageIndex }) {
         const fetchTime = new Date().getTime();
         lastFetchTime = fetchTime;
         commit('commitSetCurrent', pageIndex);

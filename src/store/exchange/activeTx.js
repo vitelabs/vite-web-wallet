@@ -1,4 +1,4 @@
-const state = {activeTx: {}};
+const state = { activeTx: {} };
 
 const mutations = {
     exSetActiveTx(state, activeTx) {
@@ -6,4 +6,4 @@ const mutations = {
     }
 };
 
-export default {state, mutations};
+export default { state, mutations };

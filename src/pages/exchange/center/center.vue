@@ -19,7 +19,7 @@ import centerHead from './head/head.vue';
 import centerView from './view/view.vue';
 
 export default {
-    components: {layout, depth, market, latestTx, limitPrice, centerHead, centerView},
+    components: { layout, depth, market, latestTx, limitPrice, centerHead, centerView },
     mounted() {
         this.$store.dispatch('exFetchActiveTxPair');
     }

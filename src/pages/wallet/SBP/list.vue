@@ -42,7 +42,7 @@
 </template>
 
 <script>
-import {quotaConfirm} from 'components/quota/index';
+import { quotaConfirm } from 'components/quota/index';
 import tooltips from 'components/tooltips';
 import date from 'utils/date.js';
 import ellipsisAddr from 'utils/ellipsisAddr.js';
@@ -51,7 +51,7 @@ import BigNumber from 'utils/bigNumber';
 const amount = 500000;
 
 export default {
-    components: {tooltips},
+    components: { tooltips },
     props: {
         showConfirm: {
             type: Function,
@@ -147,7 +147,7 @@ export default {
             const nodeName = rawData.name;
             const producerAddr = rawData.nodeAddr;
 
-            this.sendTx({producerAddr, amount, nodeName}, 'SBPreg').then(() => {
+            this.sendTx({ producerAddr, amount, nodeName }, 'SBPreg').then(() => {
                 this.$toast(this.$t('walletSBP.section1.registerSuccess'));
                 this.$store.dispatch('loopRegList', {
                     address: this.address,
@@ -159,7 +159,7 @@ export default {
                 .catch(err => {
                     console.warn(err);
                     if (err && err.error && err.error.code && err.error.code === -35002) {
-                        quotaConfirm({operate: this.$t('walletSBP.register')});
+                        quotaConfirm({ operate: this.$t('walletSBP.register') });
                         return;
                     }
                     this.$toast(this.$t('walletSBP.section1.registerFail'), err);
@@ -176,7 +176,7 @@ export default {
                 title: this.$t('walletSBP.confirm.title'),
                 submitTxt: this.$t('walletSBP.confirm.rightBtn'),
                 cancelTxt: this.$t('walletSBP.confirm.leftBtn'),
-                content: this.$t('walletSBP.confirm.describe', {amount}),
+                content: this.$t('walletSBP.confirm.describe', { amount }),
                 submit: () => {
                     this.sendRegisterTx(item);
                 }
@@ -189,13 +189,13 @@ export default {
 
             this.activeAccount.initPwd({
                 title: this.$t('walletSBP.section2.cancelConfirm.title'),
-                content: this.$t('walletSBP.section2.cancelConfirm.describe', {amount: item.pledgeAmount}),
+                content: this.$t('walletSBP.section2.cancelConfirm.describe', { amount: item.pledgeAmount }),
                 submit: () => {
                     const nodeName = item.rawData.name;
                     const producer = item.rawData.nodeAddr;
 
-                    this.sendTx({nodeName}, 'revokeReg').then(() => {
-                        this.$toast(this.$t('hint.request', {name: this.$t('walletSBP.section2.cancel')}));
+                    this.sendTx({ nodeName }, 'revokeReg').then(() => {
+                        this.$toast(this.$t('hint.request', { name: this.$t('walletSBP.section2.cancel') }));
                         this.$store.dispatch('loopRegList', {
                             address: this.address,
                             nodeName,
@@ -205,7 +205,7 @@ export default {
                     })
                         .catch(err => {
                             if (err && err.error && err.error.code && err.error.code === -35002) {
-                                quotaConfirm({operate: this.$t('walletSBP.cancel')});
+                                quotaConfirm({ operate: this.$t('walletSBP.cancel') });
 
                                 return;
                             }

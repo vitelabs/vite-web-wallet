@@ -2,7 +2,7 @@ import Vue from 'vue';
 import confirmComponent from '../confirm.vue';
 
 const Confirm = Vue.extend(confirmComponent);
-const instance = new Confirm({el: document.createElement('div')});
+const instance = new Confirm({ el: document.createElement('div') });
 
 export default function ({
     showMask = true,

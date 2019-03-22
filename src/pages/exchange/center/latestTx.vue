@@ -36,7 +36,7 @@ import BigNumber from 'utils/bigNumber';
 import loading from 'components/loading';
 
 export default {
-    components: {loading},
+    components: { loading },
     destroyed() {
         this.$store.dispatch('exStopLatestTimer');
     },

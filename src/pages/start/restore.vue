@@ -28,7 +28,7 @@ import create from './create.vue';
 import loading from 'components/loading.vue';
 
 export default {
-    components: {create, loading},
+    components: { create, loading },
     mounted() {
         this.$onKeyDown(13, () => {
             this.valid();
@@ -87,7 +87,7 @@ export default {
                 activeAccount.save();
 
                 this.finishCb && this.finishCb();
-                this.$router.push({name: 'start'});
+                this.$router.push({ name: 'start' });
             })
                 .catch(err => {
                     console.warn(err);

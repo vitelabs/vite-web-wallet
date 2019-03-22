@@ -23,7 +23,7 @@ import copyOK from 'components/copyOK';
 import copy from 'utils/copy';
 
 export default {
-    components: {qrcode, copyOK},
+    components: { qrcode, copyOK },
     props: {
         title: {
             type: String,
@@ -89,7 +89,7 @@ export default {
                 while (n--) {
                     u8arr[n] = bstr.charCodeAt(n);
                 }
-                window.navigator.msSaveBlob(new Blob([u8arr], {type: mime}), 'download.png');
+                window.navigator.msSaveBlob(new Blob([u8arr], { type: mime }), 'download.png');
             } else {
                 location.href = this.qrcode.replace('image/png', 'image/octet-stream');
             }

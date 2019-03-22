@@ -13,7 +13,7 @@ const mutations = {
 };
 
 const actions = {
-    onNetStatus({commit}) {
+    onNetStatus({ commit }) {
         window.addEventListener('online', () => {
             commit('setClientNetStatus', navigator.onLine);
         });
@@ -23,4 +23,4 @@ const actions = {
     }
 };
 
-export default {state, mutations, actions};
+export default { state, mutations, actions };

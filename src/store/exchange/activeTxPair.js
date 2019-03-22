@@ -1,6 +1,6 @@
 import BigNumber from 'utils/bigNumber';
 
-const state = {activeTxPair: null};
+const state = { activeTxPair: null };
 
 const mutations = {
     exSetActiveTxPair(state, txPair) {
@@ -17,7 +17,7 @@ const mutations = {
 };
 
 const actions = {
-    exFetchActiveTxPair({dispatch, commit}, txPair) {
+    exFetchActiveTxPair({ dispatch, commit }, txPair) {
         txPair && commit('exSetActiveTxPair', txPair);
         dispatch('exFetchLatestTx');
         dispatch('exFetchDepth');

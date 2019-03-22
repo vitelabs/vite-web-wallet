@@ -49,13 +49,13 @@
 import viteInput from 'components/viteInput';
 import powProcess from 'components/powProcess';
 import BigNumber from 'utils/bigNumber';
-import {newOrder} from 'services/exchange';
+import { newOrder } from 'services/exchange';
 
 let validTimeout = null;
 let changeVal = null;
 
 export default {
-    components: {viteInput, powProcess},
+    components: { viteInput, powProcess },
     props: {
         orderType: {
             type: String,
@@ -340,7 +340,7 @@ export default {
                 }
             });
         },
-        newOrder({price, quantity}) {
+        newOrder({ price, quantity }) {
             const tradeToken = this.activeTxPair ? this.activeTxPair.ftoken : '';
             const quoteToken = this.activeTxPair ? this.activeTxPair.ttoken : '';
 
@@ -379,7 +379,7 @@ export default {
                     leftBtn: {
                         text: this.$t('quotaConfirmPoW.leftBtn.text'),
                         click: () => {
-                            this.$router.push({name: 'walletQuota'});
+                            this.$router.push({ name: 'walletQuota' });
                         }
                     },
                     rightBtn: {

@@ -35,15 +35,15 @@
 import secTitle from 'components/secTitle';
 import loading from 'components/loading';
 import confirm from 'components/confirm';
-import {quotaConfirm} from 'components/quota/index';
+import { quotaConfirm } from 'components/quota/index';
 import viteInput from 'components/viteInput';
 import BigNumber from 'utils/bigNumber';
-import {address} from 'utils/tools';
+import { address } from 'utils/tools';
 import register from './register';
 import list from './list';
 
 export default {
-    components: {secTitle, register, list, loading, confirm, viteInput},
+    components: { secTitle, register, list, loading, confirm, viteInput },
     created() {
         this.tokenInfo = this.$store.getters.viteTokenInfo;
 
@@ -174,9 +174,9 @@ export default {
 
             const nodeName = this.activeItem.name;
             const producer = this.addr;
-            this.sendTx({producerAddr: producer}, 'updateReg').then(() => {
+            this.sendTx({ producerAddr: producer }, 'updateReg').then(() => {
                 this.loading = false;
-                this.$toast(this.$t('hint.request', {name: this.$t('walletSBP.section2.update')}));
+                this.$toast(this.$t('hint.request', { name: this.$t('walletSBP.section2.update') }));
                 this.closeConfirm();
                 this.$store.dispatch('loopRegList', {
                     address: this.activeAccount.getDefaultAddr(),
@@ -189,7 +189,7 @@ export default {
                     console.warn(err);
                     this.loading = false;
                     if (err && err.error && err.error.code && err.error.code === -35002) {
-                        quotaConfirm({operate: this.$t('btn.edit')});
+                        quotaConfirm({ operate: this.$t('btn.edit') });
 
                         return;
                     }
@@ -197,7 +197,7 @@ export default {
                 });
         },
 
-        sendTx({producerAddr, nodeName, amount}, type) {
+        sendTx({ producerAddr, nodeName, amount }, type) {
             if (!this.netStatus) {
                 this.$toast(this.$t('hint.noNet'));
 

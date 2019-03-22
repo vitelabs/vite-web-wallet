@@ -53,7 +53,7 @@ export class timer {
 
 export function doUntill({
     createPromise,
-    test = ({resolve}) => resolve,
+    test = ({ resolve }) => resolve,
     interval = 3000,
     times = 100,
     timeout = 5 * 60 * 1000
@@ -69,13 +69,13 @@ export function doUntill({
         const tryAndTry = function () {
             t += 1;
             createPromise.call(that, ...args).then(result => {
-                if (test({resolve: result})) {
+                if (test({ resolve: result })) {
                     return res(result);
                 }
                 setTimeout(tryAndTry, interval);
             })
                 .catch(e => {
-                    if (test({reject: e})) {
+                    if (test({ reject: e })) {
                         return rej(e);
                     }
 

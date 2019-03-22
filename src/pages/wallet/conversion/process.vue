@@ -33,7 +33,7 @@ export default {
     data() {
         const size = this.default / (this.max - this.min);
 
-        return {size: size * 100};
+        return { size: size * 100 };
     },
     methods: {
         drag(e) {

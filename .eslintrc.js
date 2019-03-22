@@ -78,9 +78,10 @@ module.exports = {
         "no-unneeded-ternary": "error",
         "no-whitespace-before-property": "error",
         "nonblock-statement-body-position": ["error", "beside"],
-        "object-curly-newline": ["error", { 
-            "consistent": true 
+        "object-curly-newline": ["error", {
+            "multiline": true
         }],
+        "object-curly-spacing": ["error", "always"],
         "object-property-newline": ["error", { 
             "allowAllPropertiesOnSameLine": true 
         }],

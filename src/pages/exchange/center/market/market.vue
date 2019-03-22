@@ -67,7 +67,7 @@
 import viteInput from 'components/viteInput';
 import loading from 'components/loading';
 import localStorage from 'utils/localStorage';
-import {subTask} from 'utils/proto/subTask';
+import { subTask } from 'utils/proto/subTask';
 
 import orderArrow from './orderArrow';
 import tabList from './tabList';
@@ -213,7 +213,7 @@ export default {
     },
     methods: {
         init() {
-            defaultPairTimer = defaultPairTimer || new subTask('defaultPair', ({args, data}) => {
+            defaultPairTimer = defaultPairTimer || new subTask('defaultPair', ({ args, data }) => {
                 if (args.ttoken !== this.toTokenId) {
                     return;
                 }
@@ -246,7 +246,7 @@ export default {
             }, 2000);
 
             defaultPairTimer.start(() => {
-                return {ttoken: this.toTokenId};
+                return { ttoken: this.toTokenId };
             });
         },
         stopLoop() {
@@ -270,7 +270,7 @@ export default {
             if (this.favoritePairs[pairCode]) {
                 delete this.favoritePairs[pairCode];
             } else {
-                this.favoritePairs[pairCode] = {toTokenId};
+                this.favoritePairs[pairCode] = { toTokenId };
             }
             this.favoritePairs = Object.assign({}, this.favoritePairs);
 
