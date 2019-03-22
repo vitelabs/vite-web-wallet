@@ -120,6 +120,7 @@ export class subTask extends timer {
         // Get all data from http at first
         const args = this.args;
         const key = this.subKey;
+
         httpServicesMap[this.key] && httpServicesMap[this.key](args).then(data => {
             if (this.subKey !== key) {
                 return;
@@ -150,13 +151,13 @@ export class subTask extends timer {
 
         const oldkey = this.subKey;
         this._subKey = v;
+
         if (!this.timeHandler) return;
 
         client.unSub(oldkey, this.callback);
-
         const args = this.args;
         const key = this.subKey;
-        console.log(this.subKey);
+
         client.sub(this.subKey, data => {
             if (this.subKey !== key) {
                 return;
