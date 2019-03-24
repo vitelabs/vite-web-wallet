@@ -186,7 +186,7 @@ export default {
                         failSubmit(e);
                     });
                 }
-            }, true);
+            });
         }
     }
 };
