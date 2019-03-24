@@ -15,9 +15,6 @@
 import update from 'components/update.vue';
 import pageLayout from 'components/pageLayout';
 import firstNotice from 'components/firstNotice.vue';
-import { subTask } from 'utils/proto/subTask';
-
-let task = null;
 
 export default {
     components: {
@@ -33,17 +30,6 @@ export default {
 
         this.$store.commit('setLang', this.$i18n.locale);
         this.$store.dispatch('startLoopBalance');
-
-        task = task || new subTask('latestOrder', ({ args, data }) => {
-            console.log(args);
-            data && this.$toast(JSON.stringify(data));
-        });
-
-        task.start(() => {
-            const account = this.$wallet.getActiveAccount();
-            const address = account ? account.getDefaultAddr() : '';
-            return { address };
-        });
     },
     data() {
         return {
