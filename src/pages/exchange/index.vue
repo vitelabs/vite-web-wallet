@@ -39,6 +39,10 @@
 import center from './center/center.vue';
 import historyOrder from './orderHistory';
 import openOrder from './openOrders';
+import { subTask } from 'utils/proto/subTask';
+
+let task = null;
+
 export default {
     components: {
         center,
@@ -50,6 +54,24 @@ export default {
 
         this.$router.afterEach(to => {
             this.active = to.name;
+        });
+
+        task && task.stop();
+        task = null;
+
+        task = new subTask('latestOrder', ({ args, data }) => {
+            const account = this.$wallet.getActiveAccount();
+            const address = account ? account.getDefaultAddr() : '';
+            if (address !== args.address) {
+                return;
+            }
+            data && this.$toast(JSON.stringify(data));
+        });
+
+        task.start(() => {
+            const account = this.$wallet.getActiveAccount();
+            const address = account ? account.getDefaultAddr() : '';
+            return { address };
         });
     },
     destroyed() {
