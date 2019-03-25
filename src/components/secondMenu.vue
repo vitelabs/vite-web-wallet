@@ -21,8 +21,9 @@
             <div v-show="!isLogin" @click="dexChange" class="tab __pointer"
                  :class="{'dex': active.indexOf('exchange') === 0}">
                 {{ isHaveUsers ? $t('changeAcc') : $t('register') }}</div>
-            <div v-show="active === 'exchange'" v-unlock-account="showToken"
-                 class="tab dex __pointer">{{ $t('dexToken') }}</div>
+            <div v-show="active === 'exchange'" class="tab dex __pointer"
+                 v-unlock-account="showToken" @noactiveacc="dexStart">
+                {{ $t('dexToken') }}</div>
         </ul>
 
         <dex-token v-if="isShowDexToken" :close="closeToken"></dex-token>
@@ -79,7 +80,6 @@ export default {
         dexStart() {
             if (!this.isHaveUsers) {
                 this.go('start');
-
                 return;
             }
             const activeAccount = this.$wallet.getActiveAccount();
