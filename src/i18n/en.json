@@ -550,9 +550,9 @@
     },
     "exchangeOpenOrders": {
         "confirm":{
-            "successToast":"Revoking Transaction Successful",
-            "failToast":"Revoking Transaction Failed",
-            "submitTxt":"Confirm to revoke",
+            "successToast":"Revoking Order Success",
+            "failToast":"Revoking Order Failed",
+            "submitTxt":"Confirm to Revoke",
             "cancelTxt":"Cancel"
         },
         "title": "Open Orders",
