@@ -28,22 +28,22 @@ export default {
 
 <style lang="scss">
 .ex-center-loading {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
 
-  .dot {
-    position: relative;
-    top: 50%;
-    left: 50%;
-    margin-top: -11px;
-    margin-left: -17px;
-  }
+    .dot {
+        position: relative;
+        top: 50%;
+        left: 50%;
+        margin-top: -11px;
+        margin-left: -17px;
+    }
 
-  .dot > div {
-    background-color: #007aff;
-  }
+    .dot > div {
+        background-color: #007aff;
+    }
 }
 </style>

@@ -50,46 +50,46 @@ export default {
 @import '../center.scss';
 
 .price-wrapper {
-  height: 30px;
-  line-height: 30px;
-  border-top: 1px solid rgba(229, 237, 243, 1);
-  border-bottom: 1px solid rgba(229, 237, 243, 1);
-  text-align: center;
-  font-family: $font-bold, arial, sans-serif;
-  font-weight: 600;
+    height: 30px;
+    line-height: 30px;
+    border-top: 1px solid rgba(229, 237, 243, 1);
+    border-bottom: 1px solid rgba(229, 237, 243, 1);
+    text-align: center;
+    font-family: $font-bold, arial, sans-serif;
+    font-weight: 600;
 
-  .price {
-    font-size: 14px;
+    .price {
+        font-size: 14px;
 
-    &.down {
-      color: $down-font-color;
+        &.down {
+            color: $down-font-color;
+        }
+
+        &.up {
+            color: $up-font-color;
+        }
     }
 
-    &.up {
-      color: $up-font-color;
+    .p-icon {
+        display: inline-block;
+        width: 10px;
+        height: 12px;
+        margin-bottom: -1px;
+
+        &.up-icon {
+            background: url('~assets/imgs/ex-up-arrow.svg');
+            background-size: 100% 100%;
+        }
+
+        &.down-icon {
+            background: url('~assets/imgs/ex-down-arrow.svg');
+            background-size: 100% 100%;
+        }
     }
-  }
 
-  .p-icon {
-    display: inline-block;
-    width: 10px;
-    height: 12px;
-    margin-bottom: -1px;
-
-    &.up-icon {
-      background: url('~assets/imgs/ex-up-arrow.svg');
-      background-size: 100% 100%;
+    .real-price {
+        font-size: 12px;
+        color: #24272b;
     }
-
-    &.down-icon {
-      background: url('~assets/imgs/ex-down-arrow.svg');
-      background-size: 100% 100%;
-    }
-  }
-
-  .real-price {
-    font-size: 12px;
-    color: #24272b;
-  }
 }
 </style>

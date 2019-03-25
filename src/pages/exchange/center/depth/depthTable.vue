@@ -79,21 +79,21 @@ export default {
 @import '../center.scss';
 
 .depth-table-wrapper {
-  position: relative;
+    position: relative;
 }
 
 .percent-wrapper {
-  position: absolute;
-  right: 0;
-  top: 0;
-  bottom: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
 
-  &.buy {
-    background: rgba(79, 227, 148, 0.05);
-  }
+    &.buy {
+        background: rgba(79, 227, 148, 0.05);
+    }
 
-  &.sell {
-    background: rgba(229, 73, 77, 0.05);
-  }
+    &.sell {
+        background: rgba(229, 73, 77, 0.05);
+    }
 }
 </style>

@@ -26,13 +26,13 @@ export default {
 @import "~assets/scss/vars.scss";
 
 .sync-block-wrapper {
-  font-family: $font-bold, arial, sans-serif;
-  font-size: 16px;
-  color: #1d2024;
-  line-height: 20px;
+    font-family: $font-bold, arial, sans-serif;
+    font-size: 16px;
+    color: #1d2024;
+    line-height: 20px;
 
-  .status-text {
-    margin-right: 10px;
-  }
+    .status-text {
+        margin-right: 10px;
+    }
 }
 </style>

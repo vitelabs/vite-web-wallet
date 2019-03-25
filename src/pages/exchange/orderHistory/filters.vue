@@ -105,64 +105,64 @@ export default {
 @import "assets/scss/vars.scss";
 
 .filter-root {
-  display: flex;
-  align-items: flex-end;
-  margin: 0 10px 20px;
-  font-size: 12px;
-
-  .filter {
-    color: #5e6875;
-    font-family: $font-normal;
-    width: 132px;
-
-    > * {
-      width: 100%;
-    }
-
-    input,
- select {
-      padding-left: 10px;
-    }
-
-    &.end {
-      margin-right: 18px;
-    }
-  }
-
-  .separator {
-    height: 28px;
-    margin: 0 8px;
     display: flex;
-    color: #d4dee7;
-  }
+    align-items: flex-end;
+    margin: 0 10px 20px;
+    font-size: 12px;
 
-  .filter_content {
-    margin-top: 6px;
-    height: 28px;
-    background: #fff;
-    border-radius: 2px;
-    border: 1px solid rgba(212, 222, 231, 1);
-    box-sizing: border-box;
-  }
+    .filter {
+        color: #5e6875;
+        font-family: $font-normal;
+        width: 132px;
 
-  .search {
-    width: 60px;
-    height: 28px;
-    color: #007aff;
-    border-radius: 2px;
-    border: 1px solid #007aff;
-    font-family: Avenir-Book;
-    font-weight: normal;
-    text-align: center;
-    line-height: 28px;
-    margin-right: 8px;
-    cursor: pointer;
+        > * {
+            width: 100%;
+        }
 
-    &:active,
- &.active {
-      background: rgba(0, 122, 255, 1);
-      color: #fff;
+        input,
+        select {
+            padding-left: 10px;
+        }
+
+        &.end {
+            margin-right: 18px;
+        }
     }
-  }
+
+    .separator {
+        height: 28px;
+        margin: 0 8px;
+        display: flex;
+        color: #d4dee7;
+    }
+
+    .filter_content {
+        margin-top: 6px;
+        height: 28px;
+        background: #fff;
+        border-radius: 2px;
+        border: 1px solid rgba(212, 222, 231, 1);
+        box-sizing: border-box;
+    }
+
+    .search {
+        width: 60px;
+        height: 28px;
+        color: #007aff;
+        border-radius: 2px;
+        border: 1px solid #007aff;
+        font-family: Avenir-Book;
+        font-weight: normal;
+        text-align: center;
+        line-height: 28px;
+        margin-right: 8px;
+        cursor: pointer;
+
+        &:active,
+        &.active {
+            background: rgba(0, 122, 255, 1);
+            color: #fff;
+        }
+    }
 }
 </style>
