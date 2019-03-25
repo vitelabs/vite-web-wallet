@@ -2,13 +2,10 @@ import Vue from 'vue';
 import pwdComponent from './password.vue';
 
 const PwdComponent = Vue.extend(pwdComponent);
-let instance;
+let i18n;
 
-export function initPwdConfirm(i18n) {
-    instance = new PwdComponent({
-        el: document.createElement('div'),
-        i18n
-    });
+export function initPwdConfirm(_i18n) {
+    i18n = _i18n;
 }
 
 export function pwdConfirm({
@@ -22,12 +19,18 @@ export function pwdConfirm({
     submitTxt,
     exchange = false
 }, isShowPWD = true) {
+    let instance = new PwdComponent({
+        el: document.createElement('div'),
+        i18n
+    });
+
     const _close = cb => {
         try {
             document.body.removeChild(instance.$el);
         } catch (err) {
             console.warn(err);
         }
+        instance = null;
         cb && cb();
     };
 

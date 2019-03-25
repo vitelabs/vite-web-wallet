@@ -14,26 +14,26 @@
 
         <div class="order-row-title">{{ $t(`exchange.${orderType}.price`) }}</div>
         <vite-input class="order-input" :class="{'err': isPriceErr}"
-                    v-model="price">
+                    v-model="price" @input="priceChanged">
             <span class="ex-order-token" slot="after">{{ ttokenShow }}</span>
         </vite-input>
 
         <div class="order-row-title">{{ $t(`exchange.${orderType}.quantity`) }}
             <ul class="quantity-percent">
-                <li class="__pointer" @click="quantityPercent(0.25)">25%</li>
-                <li class="__pointer" @click="quantityPercent(0.5)">50%</li>
-                <li class="__pointer" @click="quantityPercent(0.75)">75%</li>
-                <li class="__pointer" @click="quantityPercent(1)">100%</li>
+                <li class="__pointer" @click="percentChanged(0.25)">25%</li>
+                <li class="__pointer" @click="percentChanged(0.5)">50%</li>
+                <li class="__pointer" @click="percentChanged(0.75)">75%</li>
+                <li class="__pointer" @click="percentChanged(1)">100%</li>
             </ul>
         </div>
         <vite-input class="order-input" :class="{'err': isQuantityErr}"
-                    v-model="quantity">
+                    v-model="quantity" @input="quantityChanged">
             <span class="ex-order-token" slot="after">{{ ftokenShow }}</span>
         </vite-input>
 
         <div class="order-row-title">{{ $t('exchange.amount') }}</div>
         <vite-input class="order-input" :class="{'err': isAmountErr}"
-                    v-model="amount">
+                    v-model="amount" @input="amountChanged">
             <span class="ex-order-token" slot="after">{{ ttokenShow }}</span>
         </vite-input>
 
@@ -51,9 +51,6 @@ import powProcess from 'components/powProcess';
 import BigNumber from 'utils/bigNumber';
 import { newOrder } from 'services/exchange';
 
-let validTimeout = null;
-let changeVal = null;
-
 export default {
     components: { viteInput, powProcess },
     props: {
@@ -65,9 +62,6 @@ export default {
     created() {
         this.price = this.activeTxPair && this.activeTxPair.price ? this.activeTxPair.price : '';
     },
-    destroyed() {
-        this.clearValidTimeout();
-    },
     data() {
         return {
             price: '',
@@ -76,8 +70,6 @@ export default {
             isPriceErr: false,
             isAmountErr: false,
             isQuantityErr: false,
-            percent: 0,
-            watchAQ: 0,
             isLoading: false,
             oldPrice: '',
             oldAmount: '',
@@ -91,33 +83,17 @@ export default {
             }
             this.price = this.activeTxPair && this.activeTxPair.price ? this.activeTxPair.price : '';
         },
+        balance: function () {
+            this.validAll();
+        },
         amount: function () {
-            changeVal = 'amount';
-            this.watchAQ++;
+            this.validAll();
         },
         quantity: function () {
-            changeVal = 'quantity';
-            this.watchAQ++;
+            this.validAll();
         },
         price: function () {
-            changeVal = 'price';
-            this.watchAQ++;
-        },
-        percent: function () {
-            changeVal = 'percent';
-            this.watchAQ++;
-        },
-        balance: function () {
-            changeVal = 'balance';
-            this.watchAQ++;
-        },
-        watchAQ: function () {
-            this.clearValidTimeout();
-            validTimeout = setTimeout(() => {
-                this.clearValidTimeout();
-                this.validAll();
-                changeVal && this[`${ changeVal }Changed`] && this[`${ changeVal }Changed`]();
-            }, 30);
+            this.validAll();
         },
         activeTx: function () {
             this.price = this.activeTx.price;
@@ -173,23 +149,12 @@ export default {
         }
     },
     methods: {
-        clearValidTimeout() {
-            validTimeout && clearTimeout(validTimeout);
-            validTimeout = null;
-        },
-        quantityPercent(percent) {
-            this.percent = percent;
-        },
-
-        percentChanged() {
-            if (!this.percent) {
-                return;
-            }
+        percentChanged(percent) {
+            this.validAll();
 
             const price = this.price;
             let quantity = this.quantity;
             let amount = this.amount;
-            const percent = this.percent;
 
             if (this.orderType === 'buy') {
                 amount = this.getPercentBalance(percent, this.ttokenDetail.tokenDigit);
@@ -201,9 +166,10 @@ export default {
 
             !BigNumber.isEqual(quantity, this.quantity) && (this.quantity = quantity);
             !BigNumber.isEqual(amount, this.amount) && (this.amount = amount);
-            this.percent = '';
         },
         amountChanged() {
+            this.validAll();
+
             if (this.isAmountErr) {
                 return;
             }
@@ -212,10 +178,17 @@ export default {
             let quantity = this.quantity;
             const amount = this.amount;
 
+            if (!+price && +quantity) {
+                this.price = this.getPrice(quantity, amount);
+                return;
+            }
+
             quantity = this.getQuantity(price, amount);
             !BigNumber.isEqual(quantity, this.quantity) && (this.quantity = quantity);
         },
         priceChanged() {
+            this.validAll();
+
             if (this.isPriceErr) {
                 return;
             }
@@ -228,6 +201,8 @@ export default {
             !BigNumber.isEqual(amount, this.amount) && (this.amount = amount);
         },
         quantityChanged() {
+            this.validAll();
+
             if (this.isQuantityErr) {
                 return;
             }
@@ -236,10 +211,31 @@ export default {
             const quantity = this.quantity;
             let amount = this.amount;
 
+            if (!+price && +amount) {
+                this.price = this.getPrice(quantity, amount);
+                return;
+            }
+
             amount = this.getAmount(price, quantity);
             !BigNumber.isEqual(amount, this.amount) && (this.amount = amount);
         },
 
+        getPrice(quantity, amount) {
+            const isRightQuantity = quantity && this.$validAmount(quantity) && !BigNumber.isEqual(quantity, 0);
+            if (!isRightQuantity) {
+                return '';
+            }
+
+            const isRightAmount = amount && this.$validAmount(amount) && !BigNumber.isEqual(amount, 0);
+            if (!isRightAmount) {
+                return '';
+            }
+
+            const tokenDigit = this.ttokenDetail.tokenDigit;
+            const limit = tokenDigit >= 8 ? 8 : tokenDigit;
+
+            return BigNumber.dividedToNumber(amount, quantity, limit, 'nofix');
+        },
         getPercentBalance(percent, decimals) {
             if (!this.balance || BigNumber.isEqual(this.balance, 0)) {
                 return '';

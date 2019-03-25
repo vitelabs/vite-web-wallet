@@ -17,18 +17,19 @@ export default {
         leftClick() {
             if (!this.isHaveUsers) {
                 this.$router.push({ name: 'start' });
-
                 return;
             }
+
             const activeAccount = this.$wallet.getActiveAccount();
+            console.log(activeAccount);
             activeAccount && activeAccount.unlockAccount();
         },
         rightClick() {
             if (!this.isHaveUsers) {
                 this.$router.push({ name: 'startCreate' });
-
                 return;
             }
+
             this.$router.push({ name: 'start' });
         }
     }
