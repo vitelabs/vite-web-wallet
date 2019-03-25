@@ -73,12 +73,12 @@ class account {
             'voting', 'revokeVoting', 'getQuota', 'withdrawalOfQuota',
             'createContract', 'callContract', 'mintage',
             'mintageIssue', 'mintageBurn', 'changeTokenType', 'changeTransferOwner', 'mintageCancelPledge' ];
+
         funcName.forEach(name => {
             this[name] = (...args) => {
                 if (!this.account || !this.account.unlockAcc) {
                     return Promise.reject('No unlockAcc');
                 }
-
                 return this.account.unlockAcc[name](...args);
             };
         });
@@ -167,6 +167,8 @@ class account {
     }
 
     save(index = -1) {
+        console.log('account save', index);
+
         this.name = checkName(this.name);
         if (!this.account && this.type === AccountType.keystore) {
             acc.add({
@@ -174,7 +176,6 @@ class account {
                 addr: this.keystore.hexaddress,
                 keystore: this.keystore
             });
-
             return;
         }
         this.account.save(this.name, index);
