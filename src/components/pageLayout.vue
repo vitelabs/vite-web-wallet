@@ -130,71 +130,71 @@ export default {
 
 <style lang="scss" scoped>
 .page-layout-wrapper {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  height: 100%;
-  padding: 0;
-  margin: 0;
-  background: #fafcff;
-
-  .menu {
-    display: none;
-  }
-
-  .sidebar {
-    width: 70px;
-  }
-
-  .page-content {
-    flex: 1;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
     height: 100%;
-    overflow: hidden;
+    padding: 0;
+    margin: 0;
+    background: #fafcff;
 
-    .page-scroll-wrapper {
-      display: flex;
-      flex-direction: column;
-      height: 100%;
+    .menu {
+        display: none;
     }
 
-    .second-menu.have-padding {
-      margin: 0 30px;
+    .sidebar {
+        width: 70px;
     }
 
-    &.page-scroll {
-      overflow: auto;
-
-      .page-scroll-wrapper {
-        width: 100%;
+    .page-content {
+        flex: 1;
         height: 100%;
-        min-width: 1350px;
-      }
-    }
+        overflow: hidden;
 
-    .page-wrapper {
-      flex: 1;
-      overflow: auto;
+        .page-scroll-wrapper {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .second-menu.have-padding {
+            margin: 0 30px;
+        }
+
+        &.page-scroll {
+            overflow: auto;
+
+            .page-scroll-wrapper {
+                width: 100%;
+                height: 100%;
+                min-width: 1350px;
+            }
+        }
+
+        .page-wrapper {
+            flex: 1;
+            overflow: auto;
+        }
     }
-  }
 }
 
 @media only screen and (max-width: 500px) {
-  .page-layout-wrapper {
-    display: flex;
-    flex-direction: column;
-  }
+    .page-layout-wrapper {
+        display: flex;
+        flex-direction: column;
+    }
 
-  .page-layout-wrapper .menu {
-    display: block;
-  }
+    .page-layout-wrapper .menu {
+        display: block;
+    }
 
-  .page-layout-wrapper .sidebar {
-    display: none;
-  }
+    .page-layout-wrapper .sidebar {
+        display: none;
+    }
 
-  .page-layout-wrapper .page-content {
-    flex: 1;
-    margin-left: 0;
-  }
+    .page-layout-wrapper .page-content {
+        flex: 1;
+        margin-left: 0;
+    }
 }
 </style>

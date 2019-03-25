@@ -88,57 +88,57 @@ export default {
 
 <style lang="scss" scoped>
 .pagination-wrapper {
-  display: inline-block;
+    display: inline-block;
 }
 
 .box {
-  text-align: center;
-  box-sizing: border-box;
-  display: inline-block;
-  width: 24px;
-  height: 24px;
-  border: 1px solid #c6cbd4;
-  border-radius: 2px;
-  line-height: 24px;
-  font-size: 14px;
-  color: #333;
-  margin-left: 6px;
+    text-align: center;
+    box-sizing: border-box;
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    border: 1px solid #c6cbd4;
+    border-radius: 2px;
+    line-height: 24px;
+    font-size: 14px;
+    color: #333;
+    margin-left: 6px;
 
-  &:first-child {
-    margin-left: 0;
-  }
+    &:first-child {
+        margin-left: 0;
+    }
 
-  &.unuse {
-    color: #999;
-  }
+    &.unuse {
+        color: #999;
+    }
 
-  &.active {
-    background: #007aff;
-    color: #fff;
-    border: none;
-    top: -1px;
-    position: relative;
-  }
+    &.active {
+        background: #007aff;
+        color: #fff;
+        border: none;
+        top: -1px;
+        position: relative;
+    }
 
-  &.ellipsis {
-    border: none;
-    cursor: default;
-  }
+    &.ellipsis {
+        border: none;
+        cursor: default;
+    }
 }
 
 .prev,
- .next {
-  position: relative;
-  top: 6px;
+.next {
+    position: relative;
+    top: 6px;
 }
 
 .prev {
-  background: url('../assets/imgs/left.svg');
-  background-size: 100% 100%;
+    background: url('../assets/imgs/left.svg');
+    background-size: 100% 100%;
 }
 
 .next {
-  background: url('../assets/imgs/right.svg');
-  background-size: 100% 100%;
+    background: url('../assets/imgs/right.svg');
+    background-size: 100% 100%;
 }
 </style>

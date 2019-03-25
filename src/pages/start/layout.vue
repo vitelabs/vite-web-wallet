@@ -31,55 +31,56 @@ export default {
 
 <style lang="scss" scoped>
 .index-layout-wrapper {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  animation: key-opacity 0.3s ease-in-out;
-
-  @keyframes key-opacity {
-    0% { opacity: 0.1; }
-    100% { opacity: 1; }
-  }
-
-  .header {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    padding: 40px;
-
-    .header-logo {
-      display: inline-block;
-      width: 90px;
-    }
-
-    .change-lang {
-      float: right;
-    }
-  }
-
-  .confirm-wrapper {
+    position: relative;
     width: 100%;
     height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     overflow: auto;
+    animation: key-opacity 0.3s ease-in-out;
 
-    .confirm {
-      position: relative;
-      width: 100%;
-      max-width: 360px;
-      text-align: center;
-      padding: 20px;
+    @keyframes key-opacity {
+        0% { opacity: 0.1; }
+
+        100% { opacity: 1; }
     }
-  }
+
+    .header {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        padding: 40px;
+
+        .header-logo {
+            display: inline-block;
+            width: 90px;
+        }
+
+        .change-lang {
+            float: right;
+        }
+    }
+
+    .confirm-wrapper {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: auto;
+
+        .confirm {
+            position: relative;
+            width: 100%;
+            max-width: 360px;
+            text-align: center;
+            padding: 20px;
+        }
+    }
 }
 
 @media only screen and (max-width: 500px) {
-  .index-layout-wrapper .header {
-    padding: 40px 0 40px 20px;
-  }
+    .index-layout-wrapper .header {
+        padding: 40px 0 40px 20px;
+    }
 }
 </style>

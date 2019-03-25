@@ -79,19 +79,19 @@ export default {
 @import './center.scss';
 
 .ex-latest-tx-wrapper {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
 }
 
 .__center-tb-item.tx-time {
-  flex-basis: 30px;
+    flex-basis: 30px;
 }
 
 .tx-list-wrapper {
-  flex: 1;
-  overflow: auto;
+    flex: 1;
+    overflow: auto;
 }
 </style>

@@ -11,10 +11,11 @@
         "production": "NODE_ENV=production webpack-dev-server",
         "analyzer": "analyzer=true webpack-dev-server",
         "lint:all": "eslint --ext js,vue --fix .",
-        "lint": "eslint --ext js,vue --cache --fix ."
+        "lint": "eslint --ext js,vue --cache --fix .",
+        "stylelint": "stylelint **/*.vue --custom-syntax postcss-html --fix"
     },
     "pre-commit": [
-        "lint"
+        "lint", "stylelint"
     ],
     "author": "",
     "license": "ISC",
@@ -45,6 +46,7 @@
         "pre-commit": "^1.2.2",
         "sass-loader": "^7.0.3",
         "style-loader": "^0.21.0",
+        "stylelint": "^9.10.1",
         "uglifyjs-webpack-plugin": "^2.0.1",
         "url-loader": "^1.1.2",
         "vue": "^2.5.16",
