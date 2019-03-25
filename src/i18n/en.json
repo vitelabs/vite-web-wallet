@@ -424,7 +424,7 @@
         "amountTitle": "Amount({amount})",
         "amountTable": "Qty",
         "amount": "Total",
-        "newOrderSuccess": "Ordered Successful",
+        "newOrderSuccess": "Order Success",
         "newOrderFail": "Order Failed",
         "depthView": "Depth",
         "klineView": "TradingView",
@@ -475,7 +475,7 @@
             "tokenType1": "Never Issued"
         },
         "latestTx": {
-            "title": "Last Transaction",
+            "title": "Last Orders",
             "time": "Time"
         },
         "depth": {
