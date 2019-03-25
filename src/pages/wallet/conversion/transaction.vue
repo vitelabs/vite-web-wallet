@@ -164,25 +164,21 @@ export default {
 
             if (!result) {
                 this.amountErr = this.$t('hint.amtFormat');
-
                 return false;
             }
 
             if (BigNumber.isEqual(this.amount, 0)) {
                 this.amountErr = this.$t('wallet.hint.amount');
-
                 return false;
             }
 
             const amount = BigNumber.toMin(this.amount, this.token.decimals);
             if (BigNumber.compared(this.token.balance, amount) < 0) {
                 this.amountErr = this.$t('hint.insufficientBalance');
-
                 return false;
             }
 
             this.amountErr = '';
-
             return true;
         },
 
@@ -213,10 +209,9 @@ export default {
                     return;
                 }
                 this.gas = gas;
-            })
-                .catch(err => {
-                    console.warn(err);
-                });
+            }).catch(err => {
+                console.warn(err);
+            });
         },
 
         transfer() {
@@ -228,7 +223,6 @@ export default {
 
             if (!this.netStatus) {
                 this.$toast(this.$t('hint.noNet'));
-
                 return;
             }
 
@@ -241,9 +235,9 @@ export default {
 
                     if (this.transType === 'exchange') {
                         this.conversion();
-
                         return;
                     }
+
                     this.sendTx();
                 },
                 cancel: () => {
@@ -262,12 +256,11 @@ export default {
                 this.loading = false;
                 this.$toast(this.$t('walletConversion.exchange.success'));
                 this.closeTrans();
-            })
-                .catch(err => {
-                    console.warn(err);
-                    this.loading = false;
-                    this.$toast(err && err.message ? err.message : this.$t('hint.err'), 4000);
-                });
+            }).catch(err => {
+                console.warn(err);
+                this.loading = false;
+                this.$toast(err && err.message ? err.message : this.$t('hint.err'), 4000);
+            });
         },
         sendTx() {
             const value = BigNumber.toMin(this.amount, this.token.decimals);
@@ -281,12 +274,11 @@ export default {
                 this.loading = false;
                 this.$toast(this.$t('hint.transSucc'));
                 this.closeTrans();
-            })
-                .catch(err => {
-                    console.warn(err);
-                    this.loading = false;
-                    this.$toast(err && err.message ? err.message : this.$t('hint.err'), 4000);
-                });
+            }).catch(err => {
+                console.warn(err);
+                this.loading = false;
+                this.$toast(err && err.message ? err.message : this.$t('hint.err'), 4000);
+            });
         }
     }
 };
