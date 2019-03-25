@@ -175,73 +175,73 @@ export default {
 @import "~assets/scss/vars.scss";
 
 .mintage-wrapper {
-  width: 100%;
-  box-sizing: border-box;
-  padding: 20px;
-  overflow: auto;
-
-  .list-wrapper {
-    margin-top: 20px;
-  }
-
-  .order-row-title {
-    height: 28px;
-    line-height: 28px;
-    font-size: 12px;
-    font-family: $font-normal, arial, sans-serif;
-    font-weight: 400;
-    color: #333;
-    margin-top: 5px;
-  }
-
-  .btn {
     width: 100%;
-    height: 40px;
-    line-height: 40px;
-    margin-top: 20px;
-    text-align: center;
+    box-sizing: border-box;
+    padding: 20px;
+    overflow: auto;
 
-    &.unuse {
-      background: #efefef;
-      color: #666;
+    .list-wrapper {
+        margin-top: 20px;
     }
-  }
 
-  .select-icon-wrapper {
-    font-size: 11px;
-    font-family: $font-normal, arial, sans-serif;
-    font-weight: 400;
-    color: rgba(94, 104, 117, 1);
-    margin-left: 12px;
+    .order-row-title {
+        height: 28px;
+        line-height: 28px;
+        font-size: 12px;
+        font-family: $font-normal, arial, sans-serif;
+        font-weight: 400;
+        color: #333;
+        margin-top: 5px;
+    }
 
-    .select-icon {
-      position: relative;
-      display: inline-block;
-      box-sizing: border-box;
-      width: 12px;
-      height: 12px;
-      border-radius: 10px;
-      border: 1px solid rgba(188, 196, 201, 1);
-      margin-right: 4px;
-      margin-bottom: -2px;
+    .btn {
+        width: 100%;
+        height: 40px;
+        line-height: 40px;
+        margin-top: 20px;
+        text-align: center;
 
-      &.active {
-        &::after {
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          margin-top: -2px;
-          margin-left: -2px;
-          content: ' ';
-          display: inline-block;
-          width: 4px;
-          height: 4px;
-          background: #007aff;
-          border-radius: 5px;
+        &.unuse {
+            background: #efefef;
+            color: #666;
         }
-      }
     }
-  }
+
+    .select-icon-wrapper {
+        font-size: 11px;
+        font-family: $font-normal, arial, sans-serif;
+        font-weight: 400;
+        color: rgba(94, 104, 117, 1);
+        margin-left: 12px;
+
+        .select-icon {
+            position: relative;
+            display: inline-block;
+            box-sizing: border-box;
+            width: 12px;
+            height: 12px;
+            border-radius: 10px;
+            border: 1px solid rgba(188, 196, 201, 1);
+            margin-right: 4px;
+            margin-bottom: -2px;
+
+            &.active {
+                &::after {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    margin-top: -2px;
+                    margin-left: -2px;
+                    content: ' ';
+                    display: inline-block;
+                    width: 4px;
+                    height: 4px;
+                    background: #007aff;
+                    border-radius: 5px;
+                }
+            }
+        }
+    }
 }
 </style>
 
@@ -249,11 +249,11 @@ export default {
 @import "~assets/scss/vars.scss";
 
 .mintage-table-big-item {
-  min-width: 250px;
+    min-width: 250px;
 }
 
 .mintage-table-small-item {
-  min-width: 110px;
+    min-width: 110px;
 }
 </style>
 

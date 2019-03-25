@@ -113,12 +113,15 @@ export default {
         margin-top: 8px;
         font-weight: 600;
         color: rgba(36, 39, 43, 1);
+
         &.down {
             color: $down-font-color;
         }
+
         &.up {
             color: $up-font-color;
         }
+
         .price {
             color: $blue;
         }

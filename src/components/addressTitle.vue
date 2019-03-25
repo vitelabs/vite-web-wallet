@@ -103,52 +103,52 @@ export default {
 @import "~assets/scss/vars.scss";
 
 .address-title {
-  position: relative;
-  display: block;
-  height: 20px;
-  line-height: 20px;
-  font-size: 14px;
-  letter-spacing: 0.35px;
-  padding-bottom: 24px;
-  font-family: $font-bold, arial, sans-serif;
+    position: relative;
+    display: block;
+    height: 20px;
+    line-height: 20px;
+    font-size: 14px;
+    letter-spacing: 0.35px;
+    padding-bottom: 24px;
+    font-family: $font-bold, arial, sans-serif;
 }
 
 .title_icon {
-  float: right;
+    float: right;
 
-  &.qrcode {
-    position: relative;
-  }
-
-  .code-container {
-    box-shadow: 0 2px 48px 1px rgba(176, 192, 237, 0.42);
-    width: 166px;
-    padding: 10px;
-    position: absolute;
-    right: 100%;
-    transform: translateX(20px);
-    background: #fff;
-    z-index: 1;
-
-    .code {
-      width: 146px;
-      height: 146px;
-      margin: 10px;
+    &.qrcode {
+        position: relative;
     }
 
-    .btn {
-      background: #007aff;
-      border-radius: 2px;
-      color: #fff;
-      margin: 10px 8px;
-      height: 28px;
-      text-align: center;
-      line-height: 28px;
-    }
-  }
+    .code-container {
+        box-shadow: 0 2px 48px 1px rgba(176, 192, 237, 0.42);
+        width: 166px;
+        padding: 10px;
+        position: absolute;
+        right: 100%;
+        transform: translateX(20px);
+        background: #fff;
+        z-index: 1;
 
-  &.copy {
-    margin-right: 10px;
-  }
+        .code {
+            width: 146px;
+            height: 146px;
+            margin: 10px;
+        }
+
+        .btn {
+            background: #007aff;
+            border-radius: 2px;
+            color: #fff;
+            margin: 10px 8px;
+            height: 28px;
+            text-align: center;
+            line-height: 28px;
+        }
+    }
+
+    &.copy {
+        margin-right: 10px;
+    }
 }
 </style>

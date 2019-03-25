@@ -149,165 +149,165 @@ export default {
 @import "~assets/scss/vars.scss";
 
 .account-head-wrapper {
-  position: relative;
-  padding: 30px 0 0 20px;
-  text-align: center;
-  background: #fff;
-  box-shadow: 0 2px 48px 1px rgba(176, 192, 237, 0.42);
-  border-radius: 2px;
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  justify-content: space-between;
-
-  .head-title {
     position: relative;
-    display: block;
-    height: 20px;
-    line-height: 20px;
-    font-size: 14px;
-    letter-spacing: 0.35px;
-    padding-bottom: 24px;
-    font-family: $font-bold, arial, sans-serif;
+    padding: 30px 0 0 20px;
+    text-align: center;
+    background: #fff;
+    box-shadow: 0 2px 48px 1px rgba(176, 192, 237, 0.42);
+    border-radius: 2px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
 
-    .edit {
-      display: inline-block;
-      width: 20px;
-      height: 20px;
-      margin-left: 20px;
-    }
-  }
+    .head-title {
+        position: relative;
+        display: block;
+        height: 20px;
+        line-height: 20px;
+        font-size: 14px;
+        letter-spacing: 0.35px;
+        padding-bottom: 24px;
+        font-family: $font-bold, arial, sans-serif;
 
-  .addr-wrapper {
-    padding-right: 20px;
-    padding-bottom: 30px;
-    display: inline-block;
-    max-width: 510px;
-    text-align: left;
-  }
-
-  .custom-name {
-    padding-right: 20px;
-    padding-bottom: 30px;
-    font-size: 24px;
-    color: #1d2024;
-    text-align: left;
-    font-family: $font-bold, arial, sans-serif;
-    max-width: 26%;
-    word-break: break-all;
-
-    .name {
-      display: inline-block;
-      line-height: 32px;
-
-      &.small-font {
-        font-size: 20px;
-        line-height: 26px;
-      }
+        .edit {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            margin-left: 20px;
+        }
     }
 
-    input {
-      height: 32px;
-      line-height: 32px;
-      font-size: 20px;
-      width: 100%;
-    }
-  }
-
-  .btn-group {
-    width: 212px;
-    font-family: $font-normal-b, arial, sans-serif;
-    padding-right: 20px;
-    padding-bottom: 30px;
-
-    .un_clickable {
-      background-color: #bfbfbf !important;
-      cursor: default !important;
+    .addr-wrapper {
+        padding-right: 20px;
+        padding-bottom: 30px;
+        display: inline-block;
+        max-width: 510px;
+        text-align: left;
     }
 
-    .btn__small {
-      box-sizing: border-box;
-      width: 210px;
-      height: 33px;
-      line-height: 33px;
-      text-align: center;
-      font-size: 14px;
-      border-radius: 2px;
+    .custom-name {
+        padding-right: 20px;
+        padding-bottom: 30px;
+        font-size: 24px;
+        color: #1d2024;
+        text-align: left;
+        font-family: $font-bold, arial, sans-serif;
+        max-width: 26%;
+        word-break: break-all;
+
+        .name {
+            display: inline-block;
+            line-height: 32px;
+
+            &.small-font {
+                font-size: 20px;
+                line-height: 26px;
+            }
+        }
+
+        input {
+            height: 32px;
+            line-height: 32px;
+            font-size: 20px;
+            width: 100%;
+        }
     }
 
-    .__btn-test {
-      background: #007aff;
-      color: #fff;
-      height: 35px;
-      line-height: 35px;
+    .btn-group {
+        width: 212px;
+        font-family: $font-normal-b, arial, sans-serif;
+        padding-right: 20px;
+        padding-bottom: 30px;
 
-      &.unuse {
-        background: #efefef;
-        color: #666;
-      }
-    }
+        .un_clickable {
+            background-color: #bfbfbf !important;
+            cursor: default !important;
+        }
 
-    .__btn-detail {
-      border: 1px solid #007aff;
-      color: #007aff;
-      margin-top: 12px;
-    }
+        .btn__small {
+            box-sizing: border-box;
+            width: 210px;
+            height: 33px;
+            line-height: 33px;
+            text-align: center;
+            font-size: 14px;
+            border-radius: 2px;
+        }
 
-    .icon {
-      margin-bottom: -7px;
-    }
+        .__btn-test {
+            background: #007aff;
+            color: #fff;
+            height: 35px;
+            line-height: 35px;
 
-    .more-icon {
-      margin-left: 4px;
+            &.unuse {
+                background: #efefef;
+                color: #666;
+            }
+        }
+
+        .__btn-detail {
+            border: 1px solid #007aff;
+            color: #007aff;
+            margin-top: 12px;
+        }
+
+        .icon {
+            margin-bottom: -7px;
+        }
+
+        .more-icon {
+            margin-left: 4px;
+        }
     }
-  }
 }
 
 @media only screen and (max-width: 640px) {
-  .account-head-wrapper {
-    display: block;
-    padding: 15px;
+    .account-head-wrapper {
+        display: block;
+        padding: 15px;
 
-    .head-title {
-      padding-bottom: 15px;
+        .head-title {
+            padding-bottom: 15px;
 
-      .edit {
-        float: right;
-      }
+            .edit {
+                float: right;
+            }
+        }
     }
-  }
 
-  .account-head-wrapper .custom-name {
-    padding: 0;
-    width: 100%;
-    max-width: 100%;
+    .account-head-wrapper .custom-name {
+        padding: 0;
+        width: 100%;
+        max-width: 100%;
 
-    input {
-      width: 100%;
+        input {
+            width: 100%;
+        }
     }
-  }
 
-  .account-head-wrapper .addr-wrapper {
-    padding: 0;
-    margin-top: 20px;
-    display: block;
-    width: 100%;
-    min-width: 0;
+    .account-head-wrapper .addr-wrapper {
+        padding: 0;
+        margin-top: 20px;
+        display: block;
+        width: 100%;
+        min-width: 0;
 
-    .addr-content {
-      padding: 10px;
-      line-height: 20px;
+        .addr-content {
+            padding: 10px;
+            line-height: 20px;
+        }
     }
-  }
 
-  .account-head-wrapper .btn-group {
-    padding: 0;
-    margin-top: 20px;
-    width: 100%;
+    .account-head-wrapper .btn-group {
+        padding: 0;
+        margin-top: 20px;
+        width: 100%;
 
-    .btn__small {
-      width: 100%;
+        .btn__small {
+            width: 100%;
+        }
     }
-  }
 }
 </style>

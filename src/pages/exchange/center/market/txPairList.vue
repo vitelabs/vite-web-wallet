@@ -181,56 +181,56 @@ export default {
 @import '../center.scss';
 
 .tx-pair-wrapper {
-  position: relative;
-  flex: 1;
-  display: flex;
-
-  .real-price {
-    position: absolute;
-    padding: 10px;
-    line-height: 20px;
-    right: -10px;
-    z-index: 1;
-    transform: translateX(100%);
-    background: rgba(255, 255, 255, 1);
-    box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.1);
-    font-size: 14px;
-    color: rgba(36, 39, 43, 1);
-    font-family: $font-normal, arial, sans-serif;
-    font-weight: 400;
-
-    &::after {
-      content: ' ';
-      border: 5px solid transparent;
-      border-right: 5px solid #fff;
-      position: absolute;
-      top: 50%;
-      left: 0;
-      margin-top: -5px;
-      margin-left: -10px;
-    }
-  }
-
-  .tx-list {
+    position: relative;
     flex: 1;
-    overflow: auto;
-  }
+    display: flex;
+
+    .real-price {
+        position: absolute;
+        padding: 10px;
+        line-height: 20px;
+        right: -10px;
+        z-index: 1;
+        transform: translateX(100%);
+        background: rgba(255, 255, 255, 1);
+        box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.1);
+        font-size: 14px;
+        color: rgba(36, 39, 43, 1);
+        font-family: $font-normal, arial, sans-serif;
+        font-weight: 400;
+
+        &::after {
+            content: ' ';
+            border: 5px solid transparent;
+            border-right: 5px solid #fff;
+            position: absolute;
+            top: 50%;
+            left: 0;
+            margin-top: -5px;
+            margin-left: -10px;
+        }
+    }
+
+    .tx-list {
+        flex: 1;
+        overflow: auto;
+    }
 }
 
 .__center-tb-row {
-  .__center-tb-item {
-    position: relative;
-    overflow: visible;
-  }
+    .__center-tb-item {
+        position: relative;
+        overflow: visible;
+    }
 
-  .describe {
-    position: relative;
-    bottom: 6px;
-  }
+    .describe {
+        position: relative;
+        bottom: 6px;
+    }
 
-  &.active {
-    background: rgba(75, 116, 255, 0.1);
-  }
+    &.active {
+        background: rgba(75, 116, 255, 0.1);
+    }
 }
 
 </style>

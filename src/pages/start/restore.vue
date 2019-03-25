@@ -105,45 +105,45 @@ export default {
 
 <style lang="scss" scoped>
 .wrapper {
-  box-sizing: border-box;
-  position: relative;
-  background: #fff;
-  border-radius: 3px;
-  text-align: center;
-  font-size: 14px;
-  color: #1d2024;
-  box-sizing: border-box;
-  position: relative;
-  padding: 20px;
-  height: 100px;
-  color: rgba(94, 104, 117, 0.3);
-  margin-bottom: 20px;
+    box-sizing: border-box;
+    position: relative;
+    background: #fff;
+    border-radius: 3px;
+    text-align: center;
+    font-size: 14px;
+    color: #1d2024;
+    box-sizing: border-box;
+    position: relative;
+    padding: 20px;
+    height: 100px;
+    color: rgba(94, 104, 117, 0.3);
+    margin-bottom: 20px;
 
-  textarea {
-    width: 100%;
-    height: 100%;
-    resize: none;
-    text-align: left;
-    word-wrap: break-word;
+    textarea {
+        width: 100%;
+        height: 100%;
+        resize: none;
+        text-align: left;
+        word-wrap: break-word;
 
-    &.center {
-      text-align: center;
-      line-height: 60px;
+        &.center {
+            text-align: center;
+            line-height: 60px;
+        }
     }
-  }
 
-  .msg {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-  }
+    .msg {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+    }
 }
 
 .note {
-  font-size: 14px;
-  color: #fff;
-  text-align: left;
-  line-height: 20px;
-  margin: 30px 0;
+    font-size: 14px;
+    color: #fff;
+    text-align: left;
+    line-height: 20px;
+    margin: 30px 0;
 }
 </style>

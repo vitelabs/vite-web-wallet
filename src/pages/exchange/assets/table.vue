@@ -312,77 +312,77 @@ export default {
 @import "../components/table.scss";
 
 .ex_tb {
-  height: calc(100% - 42px);
-  flex: 1;
+    height: calc(100% - 42px);
+    flex: 1;
 
-  .refresh {
-    position: absolute;
-    height: 20px;
-    width: 20px;
-    cursor: pointer;
-    top: 10px;
-    right: 6px;
+    .refresh {
+        position: absolute;
+        height: 20px;
+        width: 20px;
+        cursor: pointer;
+        top: 10px;
+        right: 6px;
 
-    &.rotate {
-      transform: rotate(360deg);
-      transition: all ease-in-out 1s;
+        &.rotate {
+            transform: rotate(360deg);
+            transition: all ease-in-out 1s;
+        }
     }
-  }
 }
 
 @include rowWith {
-  width: 8%;
+    width: 8%;
 
-  &:first-child,
-  &:nth-child(3),
-  &:nth-child(4),
-  &:nth-child(5),
-  &:nth-child(6) {
-    width: 15%;
-  }
+    &:first-child,
+    &:nth-child(3),
+    &:nth-child(4),
+    &:nth-child(5),
+    &:nth-child(6) {
+        width: 15%;
+    }
 }
 
 .input {
-  height: 40px;
-  border-radius: 2px;
-  border: 1px solid rgba(212, 222, 231, 1);
-  width: 100%;
-  display: flex;
-  font-size: 14px;
-  padding: 0 15px;
-  align-items: center;
-  box-sizing: border-box;
+    height: 40px;
+    border-radius: 2px;
+    border: 1px solid rgba(212, 222, 231, 1);
+    width: 100%;
+    display: flex;
+    font-size: 14px;
+    padding: 0 15px;
+    align-items: center;
+    box-sizing: border-box;
 
-  img {
-    margin-right: 10px;
-    width: 20px;
-    height: 20px;
-    border-radius: 20px;
-  }
+    img {
+        margin-right: 10px;
+        width: 20px;
+        height: 20px;
+        border-radius: 20px;
+    }
 
-  .num {
-    margin-left: auto;
-    color: #007aff;
-  }
+    .num {
+        margin-left: auto;
+        color: #007aff;
+    }
 
-  &.un-click-able {
-    background: rgba(243, 246, 249, 1);
-  }
+    &.un-click-able {
+        background: rgba(243, 246, 249, 1);
+    }
 }
 
 .lable {
-  font-size: 16px;
-  margin-bottom: 16px;
-  margin-top: 19px;
+    font-size: 16px;
+    margin-bottom: 16px;
+    margin-top: 19px;
 
-  .errtips {
-    color: #ff2929;
-    font-size: 12px;
-    margin-left: auto;
-  }
+    .errtips {
+        color: #ff2929;
+        font-size: 12px;
+        margin-left: auto;
+    }
 
-  &:first-child {
-    margin-top: 0;
-  }
+    &:first-child {
+        margin-top: 0;
+    }
 }
 </style>

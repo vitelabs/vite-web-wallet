@@ -44,11 +44,11 @@ export default {
 @import "~assets/scss/list/setting.scss";
 
 .title {
-  font-size: 14px;
-  color: #1d2024;
-  font-family: $font-bold, arial, sans-serif;
-  letter-spacing: 0.35px;
-  line-height: 16px;
-  margin-bottom: 16px;
+    font-size: 14px;
+    color: #1d2024;
+    font-family: $font-bold, arial, sans-serif;
+    letter-spacing: 0.35px;
+    line-height: 16px;
+    margin-bottom: 16px;
 }
 </style>
