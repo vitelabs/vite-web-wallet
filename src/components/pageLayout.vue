@@ -89,13 +89,11 @@ export default {
             if (name === 'logout') {
                 this.$wallet.logout();
                 this.$router.push({ name: 'exchange' });
-
                 return;
             }
 
             if (name === 'login') {
                 this.$router.push({ name: 'start' });
-
                 return;
             }
 
@@ -106,7 +104,6 @@ export default {
             const account = this.$wallet.getActiveAccount();
             if (!account && name !== 'setting') {
                 this.$router.push({ name: 'start' });
-
                 return;
             }
 
@@ -163,11 +160,14 @@ export default {
 
         &.page-scroll {
             overflow: auto;
-
             .page-scroll-wrapper {
                 width: 100%;
                 height: 100%;
                 min-width: 1350px;
+                .page-wrapper {
+                    flex: none;
+                    overflow: unset;
+                }
             }
         }
 

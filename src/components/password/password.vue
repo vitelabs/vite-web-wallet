@@ -112,21 +112,18 @@ export default {
             const password = this.$trim(this.password);
             if (!password) {
                 this.$toast(this.$t('hint.pwEmpty'));
-
                 return false;
             }
 
             let activeAccount = this.$wallet.getActiveAccount();
             if (!activeAccount) {
                 this.$toast(this.$t('hint.err'));
-
                 return false;
             }
 
             const deal = result => {
                 if (!result) {
                     this.$toast(this.$t('hint.pwErr'));
-
                     return false;
                 }
 
@@ -138,33 +135,31 @@ export default {
                 this.submit && this.submit();
             };
 
-            if (!activeAccount.isLogin) {
-                this.isLoading = true;
-                this.$wallet.login({
-                    id: activeAccount.getId(),
-                    entropy: activeAccount.getEntropy(),
-                    addr: activeAccount.getDefaultAddr()
-                }, password).then(() => {
-                    this.isLoading = false;
-                    activeAccount = this.$wallet.getActiveAccount();
-                    activeAccount.unlock();
-                    deal(true);
-                })
-                    .catch(err => {
-                        this.isLoading = false;
-                        console.warn(err);
-                        deal(false);
-                    });
+            if (activeAccount.isLogin) {
+                activeAccount.verify(password).then(result => {
+                    deal(result);
+                }).catch(() => {
+                    deal(false);
+                });
 
                 return;
             }
 
-            activeAccount.verify(password).then(result => {
-                deal(result);
-            })
-                .catch(() => {
-                    deal(false);
-                });
+            this.isLoading = true;
+            this.$wallet.login({
+                id: activeAccount.getId(),
+                entropy: activeAccount.getEntropy(),
+                addr: activeAccount.getDefaultAddr()
+            }, password).then(() => {
+                this.isLoading = false;
+                activeAccount = this.$wallet.getActiveAccount();
+                activeAccount.unlock();
+                deal(true);
+            }).catch(err => {
+                this.isLoading = false;
+                console.warn(err);
+                deal(false);
+            });
         }
     }
 };

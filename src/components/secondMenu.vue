@@ -1,12 +1,12 @@
 <template>
-    <div class="head">
+    <div class="head" :class="{
+        'dex': active.indexOf('exchange') === 0,
+        'no-dex': active.indexOf('exchange') !== 0
+    }">
         <ul class="tab-list-wrapper">
             <li v-for="(tab, index) in tabList" :key="index"
-                class="tab __pointer" :class="{
-                    'active': active === tab,
-                    'dex': active.indexOf('exchange') === 0
-            }" @click="go(tab)" >
-                {{ $t(`${tab}.title`) }}
+                class="tab __pointer" :class="{ 'active': active === tab }"
+                @click="go(tab)" > {{ $t(`${tab}.title`) }}
             </li>
         </ul>
 
@@ -15,14 +15,13 @@
                      :class="{'dex': active.indexOf('exchange') === 0}"></change-lang>
 
         <ul class="right-lab-list">
-            <div v-show="!isLogin" @click="dexStart" class="tab __pointer"
-                 :class="{'dex': active.indexOf('exchange') === 0}">
+            <div v-show="!isLogin" @click="dexStart" class="tab __pointer">
                 {{ isHaveUsers ? $t('unlockAcc') : $t('login')  }}</div>
-            <div v-show="!isLogin" @click="dexChange" class="tab __pointer"
-                 :class="{'dex': active.indexOf('exchange') === 0}">
+            <div v-show="!isLogin" @click="dexChange" class="tab __pointer">
                 {{ isHaveUsers ? $t('changeAcc') : $t('register') }}</div>
-            <div v-show="active === 'exchange'" v-unlock-account="showToken"
-                 class="tab dex __pointer">{{ $t('dexToken') }}</div>
+            <div v-show="active === 'exchange'" class="tab __pointer"
+                 v-unlock-account="showToken" @noactiveacc="dexStart">
+                {{ $t('dexToken') }}</div>
         </ul>
 
         <dex-token v-if="isShowDexToken" :close="closeToken"></dex-token>
@@ -79,7 +78,6 @@ export default {
         dexStart() {
             if (!this.isHaveUsers) {
                 this.go('start');
-
                 return;
             }
             const activeAccount = this.$wallet.getActiveAccount();
@@ -99,6 +97,10 @@ export default {
 
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
+
+.head.dex .tab {
+    color: rgba(189, 193, 209, 1);
+}
 
 .head {
     box-sizing: border-box;
@@ -130,10 +132,6 @@ export default {
         margin-right: 28px;
         text-align: center;
 
-        &.dex {
-            color: rgba(189, 193, 209, 1);
-        }
-
         &.active {
             position: relative;
             color: rgba(0, 122, 255, 1);
@@ -163,16 +161,16 @@ export default {
 }
 
 @media only screen and (max-width: 940px) {
-    .head .tab-list-wrapper {
+    .head.no-dex .tab-list-wrapper {
         width: 100%;
     }
 
-    .head .change-lang-wrapper {
+    .head.no-dex .change-lang-wrapper {
         float: left;
         margin-left: 20px;
     }
 
-    .head {
+    .head.no-dex {
         .go-net-wrapper {
             float: left;
         }
@@ -184,7 +182,7 @@ export default {
 }
 
 @media only screen and (max-width: 900px) {
-    .head .tab-list-wrapper .tab {
+    .head.no-dex .tab-list-wrapper .tab {
         box-sizing: border-box;
         padding: 0 10px;
     }
