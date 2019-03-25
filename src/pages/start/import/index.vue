@@ -10,7 +10,7 @@
         </div>
         <div class="hint">{{ $t('startImport.dragDrop.hint') }}</div>
         <div @click="openFile" class="__btn __btn_all_in __pointer">
-            <input ref="file" type="file" name="file" style="display:none"/>
+            <input ref="file" type="file" name="file" style="display:none;"/>
             {{ $t('startImport.dragDrop.guide') }}
         </div>
         <span class="__btn __btn_border __pointer" @click="back" >{{ $t('btn.back') }}</span>
@@ -75,38 +75,40 @@ export default {
 
 <style lang="scss" scoped>
 .hint {
-    font-size: 14px;
-    color: #FFFFFF;
-    text-align: center;
-    line-height: 20px;
-    margin-bottom: 30px;
-    margin-top: 30px;
+  font-size: 14px;
+  color: #fff;
+  text-align: center;
+  line-height: 20px;
+  margin-bottom: 30px;
+  margin-top: 30px;
 }
 
 .file-drag {
-    position: relative;
-    height: 228px;
-    background: #F3F6F9;
-    border: 1px solid #D4DEE7;
-    border-radius: 3px;
-    line-height: 228px;
-    text-align: center;
-    font-size: 16px;
-    color: rgba(94,104,117,0.30);
-    .msg {
-        position: absolute;
-        left: 0;
-        bottom: 0;
-    }
+  position: relative;
+  height: 228px;
+  background: #f3f6f9;
+  border: 1px solid #d4dee7;
+  border-radius: 3px;
+  line-height: 228px;
+  text-align: center;
+  font-size: 16px;
+  color: rgba(94, 104, 117, 0.3);
+
+  .msg {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+  }
 }
+
 @media only screen and (max-width: 500px) {
-    .file-drag {
-        height: 100px;
-        line-height: 100px;
-    }
+  .file-drag {
+    height: 100px;
+    line-height: 100px;
+  }
 }
 
 .__btn {
-    margin-top: 20px;
+  margin-top: 20px;
 }
 </style>

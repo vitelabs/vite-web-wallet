@@ -58,30 +58,34 @@ export default {
 @import "~assets/scss/vars.scss";
 
 .my-quota-wrapper {
-    margin-top: 40px;
-    padding: 35px 24px;
+  margin-top: 40px;
+  padding: 35px 24px;
 }
+
 .row {
-    font-family: $font-bold, arial, sans-serif;
-    &:first-child {
-        margin-bottom: 40px;
-    }
-    .title {
-        font-size: 14px;
-        color: #1D2024;
-        letter-spacing: 0.35px;
-        margin-bottom: 12px;
-    }
-    .text {
-        font-size: 24px;
-        color: #1D2024;
-        line-height: 32px;
-    }
+  font-family: $font-bold, arial, sans-serif;
+
+  &:first-child {
+    margin-bottom: 40px;
+  }
+
+  .title {
+    font-size: 14px;
+    color: #1d2024;
+    letter-spacing: 0.35px;
+    margin-bottom: 12px;
+  }
+
+  .text {
+    font-size: 24px;
+    color: #1d2024;
+    line-height: 32px;
+  }
 }
 
 @media only screen and (max-width: 550px) {
-    .my-quota-wrapper {
-        margin-top: 20px;
-    }
+  .my-quota-wrapper {
+    margin-top: 20px;
+  }
 }
 </style>

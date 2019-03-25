@@ -77,46 +77,51 @@ export default {
 @import "~assets/scss/vars.scss";
 
 .process-wrapper {
-    position: relative;
-    width: 100%;
-    height: 6px;
-    background: rgba(243,246,249,1);
+  position: relative;
+  width: 100%;
+  height: 6px;
+  background: rgba(243, 246, 249, 1);
+  border-radius: 4px;
+
+  .line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #007aff;
+    height: 100%;
     border-radius: 4px;
-    .line {
-        position: absolute;
-        top: 0;
-        left: 0;
-        background: #007AFF;
-        height: 100%;
-        border-radius: 4px;
-        .drag {
-            display: inline-block;
-            position: absolute;
-            top: -9px;
-            right: -9px;
-            width: 12px;
-            height: 12px;
-            border-radius: 12px;
-            box-shadow: 0px 2px 10px 1px rgba(176,192,237,0.42);
-            background: rgba(0,122,255,1);
-            border: 6px solid rgba(255,255,255,1);
-        }
+
+    .drag {
+      display: inline-block;
+      position: absolute;
+      top: -9px;
+      right: -9px;
+      width: 12px;
+      height: 12px;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px 1px rgba(176, 192, 237, 0.42);
+      background: rgba(0, 122, 255, 1);
+      border: 6px solid rgba(255, 255, 255, 1);
     }
-    .speed {
-        width: 100%;
-        font-size: 12px;
-        font-family: $font-normal, arial, sans-serif;
-        font-weight: 400;
-        color: rgba(94, 104, 117, 1);
-        line-height: 16px;
-        padding-top: 16px;
-        .left {
-            float: left;
-        }
-        .right {
-            float: right;
-        }
+  }
+
+  .speed {
+    width: 100%;
+    font-size: 12px;
+    font-family: $font-normal, arial, sans-serif;
+    font-weight: 400;
+    color: rgba(94, 104, 117, 1);
+    line-height: 16px;
+    padding-top: 16px;
+
+    .left {
+      float: left;
     }
+
+    .right {
+      float: right;
+    }
+  }
 }
 </style>
 

@@ -2,7 +2,7 @@
     <div class="input-wrapper">
         <slot name="before"></slot>
         <!-- Safari autocomplete -->
-        <input fake_pass type="password" style="display:none"/>
+        <input fake_pass type="password" style="display:none;"/>
         <input v-model="value" @input.prevent="update" type="text"
                :placeholder="placeholder" autocomplete="false"
                @blur="_blur" @focus="_focus"/>
@@ -72,18 +72,19 @@ export default {
 
 <style lang="scss" scoped>
 .input-wrapper {
-    display: flex;
+  display: flex;
+  width: 100%;
+  border: 1px solid #d4dee7;
+  border-radius: 2px;
+  font-size: 14px;
+  height: 40px;
+  line-height: 40px;
+
+  input {
+    flex: 1;
     width: 100%;
-    border: 1px solid #D4DEE7;
-    border-radius: 2px;
     font-size: 14px;
-    height: 40px;
-    line-height: 40px;
-    input {
-        flex: 1;
-        width: 100%;
-        font-size: 14px;
-        text-indent: 15px;
-    }
+    text-indent: 15px;
+  }
 }
 </style>

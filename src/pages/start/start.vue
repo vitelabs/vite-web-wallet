@@ -32,7 +32,7 @@ export default {
 
 <style lang="scss" scoped>
 ._top {
-    margin-top: 20px;
+  margin-top: 20px;
 }
 </style>
 

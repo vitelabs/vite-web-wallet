@@ -115,8 +115,8 @@ export default {
             this.clearValidTimeout();
             validTimeout = setTimeout(() => {
                 this.clearValidTimeout();
-                changeVal && this[`${ changeVal }Changed`] && this[`${ changeVal }Changed`]();
                 this.validAll();
+                changeVal && this[`${ changeVal }Changed`] && this[`${ changeVal }Changed`]();
             }, 30);
         },
         activeTx: function () {
@@ -366,7 +366,7 @@ export default {
 
                 if (!err || !err.error || !err.error.code || err.error.code !== -35002) {
                     this.isLoading = false;
-                    this.$toast(this.$t('exchange.newOrderFail'));
+                    this.$toast(this.$t('exchange.newOrderFail'), err);
                     return;
                 }
 
@@ -394,7 +394,7 @@ export default {
                                 this.$toast(this.$t('exchange.newOrderSuccess'));
                             }).catch(err => {
                                 this.isLoading = false;
-                                this.$toast(this.$t('exchange.newOrderFail'));
+                                this.$toast(this.$t('exchange.newOrderFail'), err);
                                 console.warn(err);
                             });
                         }
@@ -409,101 +409,117 @@ export default {
 
 <style lang="scss" scoped>
 @import "../center.scss";
-$font-black: rgba(36,39,43,.8);
+$font-black: rgba(36, 39, 43, 0.8);
 
 .order-wrapper {
-    flex: 1;
-    padding: 0 6px;
-    .order-title {
-        height: 17px;
-        line-height: 17px;
-        font-size: 12px;
-        font-family: $font-bold, arial, sans-serif;
-        font-weight: 600;
-        color: $font-black;
-        text-indent: 6px;
-        border-left: 2px solid $blue;
-        .wallet {
-            display: block;
-            float: right;
-            &:before {
-                content: '';
-                display: inline-block;
-                width: 16px;
-                height: 16px;
-                background: url('~assets/imgs/ex-wallet-icon.svg');
-                background-size: 100% 100%;
-                margin-bottom: -4px;
-            }
-        }
+  flex: 1;
+  padding: 0 6px;
+
+  .order-title {
+    height: 17px;
+    line-height: 17px;
+    font-size: 12px;
+    font-family: $font-bold, arial, sans-serif;
+    font-weight: 600;
+    color: $font-black;
+    text-indent: 6px;
+    border-left: 2px solid $blue;
+
+    .wallet {
+      display: block;
+      float: right;
+
+      &::before {
+        content: '';
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        background: url('~assets/imgs/ex-wallet-icon.svg');
+        background-size: 100% 100%;
+        margin-bottom: -4px;
+      }
     }
-    .ex-order-token {
-        font-size: 12px;
-        font-family: $font-normal, arial, sans-serif;
-        font-weight:400;
-        color:rgba(94,104,117,1);
-    }
-    .order-row-title {
-        height: 28px;
-        line-height: 28px;
-        font-size: 12px;
-        font-family: $font-normal, arial, sans-serif;
-        font-weight: 400;
-        color: $font-black;
-        margin-top: 5px;
-        .quantity-percent {
-            display: block;
-            float: right;
-            font-size: 12px;
-            li {
-                display: inline-block;
-                box-sizing: border-box;
-                border-bottom: 1px dashed $blue;
-                font-family: $font-normal, arial, sans-serif;
-                color: $blue;
-                line-height: 16px;
-                margin-left: 10px;
-                &:active {
-                    background: $blue;
-                    color: #fff;
-                }
-            }
-        }
-    }
-    .order-input {
-        height: 30px;
-        line-height: 30px;
+  }
+
+  .ex-order-token {
+    font-size: 12px;
+    font-family: $font-normal, arial, sans-serif;
+    font-weight: 400;
+    color: rgba(94, 104, 117, 1);
+  }
+
+  .order-row-title {
+    height: 28px;
+    line-height: 28px;
+    font-size: 12px;
+    font-family: $font-normal, arial, sans-serif;
+    font-weight: 400;
+    color: $font-black;
+    margin-top: 5px;
+
+    .quantity-percent {
+      display: block;
+      float: right;
+      font-size: 12px;
+
+      li {
+        display: inline-block;
         box-sizing: border-box;
-        &.err {
-            border: 1px solid $red;
+        border-bottom: 1px dashed $blue;
+        font-family: $font-normal, arial, sans-serif;
+        color: $blue;
+        line-height: 16px;
+        margin-left: 10px;
+
+        &:active {
+          background: $blue;
+          color: #fff;
         }
-        input {
-            text-indent: 6px;
-        }
-        .ex-order-token {
-            padding: 0 6px;
-        }
+      }
     }
-    .order-btn {
-        height: 30px;
-        line-height: 30px;
-        text-align: center;
-        margin-top: 16px;
-        border-radius: 2px;
-        font-size: 14px;
-        font-family: $font-bold, arial, sans-serif;
-        font-weight: 600;
-        color: #fff;
-        &.red {
-            background: linear-gradient(270deg,rgba(226,43,116,1) 0%,rgba(237,81,88,1) 100%);
-        }
-        &.green {
-            background: linear-gradient(270deg,rgba(0,212,208,1) 0%,rgba(0,215,100,1) 100%);
-        }
-        &.gray {
-            color: rgba(29, 32, 36, 0.6);
-            background: #f3f5f9;
-        }
+  }
+
+  .order-input {
+    height: 30px;
+    line-height: 30px;
+    box-sizing: border-box;
+
+    &.err {
+      border: 1px solid $red;
     }
+
+    input {
+      text-indent: 6px;
+    }
+
+    .ex-order-token {
+      padding: 0 6px;
+    }
+  }
+
+  .order-btn {
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    margin-top: 16px;
+    border-radius: 2px;
+    font-size: 14px;
+    font-family: $font-bold, arial, sans-serif;
+    font-weight: 600;
+    color: #fff;
+
+    &.red {
+      background: linear-gradient(270deg, rgba(226, 43, 116, 1) 0%, rgba(237, 81, 88, 1) 100%);
+    }
+
+    &.green {
+      background: linear-gradient(270deg, rgba(0, 212, 208, 1) 0%, rgba(0, 215, 100, 1) 100%);
+    }
+
+    &.gray {
+      color: rgba(29, 32, 36, 0.6);
+      background: #f3f5f9;
+    }
+  }
 }
 </style>

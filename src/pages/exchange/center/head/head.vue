@@ -101,25 +101,29 @@ export default {
     font-size: 12px;
     font-weight: 600;
     line-height: 16px;
+    white-space: nowrap;
+
     .token-title {
         font-family: $font-normal, arial, sans-serif;
-        color: #5E6875;
+        color: #5e6875;
         font-weight: 400;
     }
+
     .token-content {
         margin-top: 8px;
         font-weight: 600;
-        color: rgba(36,39,43,1);
+        color: rgba(36, 39, 43, 1);
         &.down {
             color: $down-font-color;
         }
         &.up {
-            color: $up-font-color
+            color: $up-font-color;
         }
         .price {
             color: $blue;
         }
     }
+
     .item-left {
         margin-left: 60px;
     }

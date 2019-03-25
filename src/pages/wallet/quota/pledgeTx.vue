@@ -208,7 +208,7 @@ export default {
                     return;
                 }
 
-                this.$toast(this.$t('hint.request', { name: this.$t('submitStaking') }));
+                this.$toast(this.$t('hint.request', { name: this.$t('submitStaking') }), err);
                 this.clearAll();
             });
         }
@@ -222,37 +222,42 @@ export default {
 .pledge-tx-wrapper {
     position: relative;
     margin-top: 40px;
+
     .row {
         display: flex;
         justify-content: space-between;
         flex-wrap: wrap;
+
         .item {
             display: inline-block;
             width: 49%;
-            min-width: 470px;
+            min-width: 510px;
             margin-top: 30px;
         }
+
         .title {
             font-family: $font-bold, arial, sans-serif;
             font-size: 14px;
-            color: #1D2024;
+            color: #1d2024;
             letter-spacing: 0.35px;
             line-height: 16px;
             margin-bottom: 16px;
             .err {
                 float: right;
                 font-size: 12px;
-                color: #FF2929;
+                color: #ff2929;
                 line-height: 16px;
             }
         }
+
         .about, .btn {
             display: inline-block;
             width: 48%;
         }
+
         .btn {
             border-radius: 2px;
-            background: #007AFF;
+            background: #007aff;
             color: #fff;
             line-height: 40px;
             text-align: center;
@@ -264,13 +269,15 @@ export default {
             }
         }
     }
+
     .unit {
         padding: 0 15px;
-
     }
+
     .add-unit {
         padding: 0 10px;
         position: relative;
+
         .add-icon {
             display: inline-block;
             margin-top: 11px;
@@ -279,19 +286,20 @@ export default {
             background: url('~assets/imgs/add-quota-icon.svg');
             background-size: 18px 18px;
         }
+
         .list {
             position: absolute;
             right: -4px;
             padding: 10px;
             font-size: 14px;
-            font-family: $font-normal, arial, sans-serif;;
+            font-family: $font-normal, arial, sans-serif;
             font-weight: 400;
-            color: rgba(94,104,117,1);
+            color: rgba(94, 104, 117, 1);
             line-height: 24px;
             white-space: nowrap;
-            background: rgba(255,255,255,1);
-            box-shadow: 0px 5px 20px 0px rgba(0,0,0,0.1);
-            &:after {
+            background: rgba(255, 255, 255, 1);
+            box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.1);
+            &::after {
                 content: ' ';
                 display: inline-block;
                 border: 6px solid transparent;
@@ -302,26 +310,27 @@ export default {
             }
         }
     }
+
     .input-item {
         box-sizing: border-box;
         height: 40px;
         line-height: 40px;
-        background: #FFFFFF;
-        border: 1px solid #D4DEE7;
+        background: #fff;
+        border: 1px solid #d4dee7;
         border-radius: 2px;
         font-size: 14px;
-        color: #5E6875;
+        color: #5e6875;
         padding: 0 15px;
         &.all {
             width: 100%;
         }
         &.unuse {
-            background: #F3F6F9;
+            background: #f3f6f9;
         }
     }
 }
 
-@media only screen and (max-width: 1419px) {
+@media only screen and (max-width: 1450px) {
     .pledge-tx-wrapper .row .item {
         margin-top: 20px;
     }
@@ -335,7 +344,7 @@ export default {
         width: 100%;
         min-width: 0;
         &:first-child {
-            margin-right: 0px;
+            margin-right: 0;
         }
     }
 }

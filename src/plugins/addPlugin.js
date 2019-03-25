@@ -42,7 +42,6 @@ export default {
         Vue.prototype.$toast = function (mesage, err, type, position) {
             if (!err) {
                 toast(mesage, type, position);
-
                 return ;
             }
 
