@@ -40,6 +40,7 @@ import center from './center/center.vue';
 import historyOrder from './orderHistory';
 import openOrder from './openOrders';
 import { subTask } from 'utils/proto/subTask';
+import date from 'utils/date';
 
 let task = null;
 
@@ -65,7 +66,12 @@ export default {
             if (address !== args.address) {
                 return;
             }
-            data && this.$toast(JSON.stringify(data));
+
+            data && this.$toast(this.$t('exchange.dealReminder', {
+                time: date(data.date * 1000, 'zh', true),
+                ftoken: data.ftokenShow,
+                ttoken: data.ttokenShow
+            }));
         });
 
         task.start(() => {
