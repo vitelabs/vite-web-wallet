@@ -1,49 +1,29 @@
 
 import Vue from 'vue';
 import component from './base.vue';
+import mixin from './mixin';
 
-const insert = function (props) {
-    let slot = props.slot || {};
-    const ConfirmComponent = Vue.extend(component, {
-        components: slot && { content: slot }
-    });
-    const componentInstance = new ConfirmComponent({
-        el: document.createElement('div'),
-        propsData: props,
-        slots: {
-            default: '<content></content>'
-        }
-    });
-    document.body.appendChild(componentInstance.$el);
-    return componentInstance;
-};
-const STATUS = {
-    'CLOSE': 'CLOSE',
-    'CANCEL': 'CANCEL',
-    'CONFIRMED':'CONFRIMED'
-};
-export class Dialog extends Promise {
-    constructor({ content, showMask, title, sTxt, showClose, lTxt, rTxt, slot}) {
-        super(function (res, rej) {
-            const close = () => {
-                this.destory();
-                rej(STATUS.CLOSE);
+export const getDialog=function (component) {
+    return function dialog({ content, showMask, title, sTxt, showClose, lTxt, rTxt }) {
+        const insert = function (props) {
+            component.mixins=component.mixins||[];
+            component.mixins.push(mixin);
+            const ConfirmComponent = Vue.extend(component);
+            const componentInstance = new ConfirmComponent({
+                el: document.createElement('div'),
+                propsData: props
+            });
+            document.body.appendChild(componentInstance.$el);
+            return componentInstance.$el;
+        };
+        return new Promise(function (resolve, reject) {
+            debugger;
+            const destory = () => {
+                document.body.removeChild(instance);
             };
-            const lClick = () => {
-                document.body.removeChild(this.instance.$el);
-                rej(STATUS.CANCEL);
-            };
-            const rClick = () => {
-                this.destory();
-                res({status:STATUS.CONFIRMED});
-            };
-            this.instance = insert({ content, showMask, title, sTxt, showClose, lTxt, rTxt, slot, rClick, lClick, close });
+            const instance = insert({ content, showMask, title, sTxt, showClose, lTxt, rTxt, promise: { reject, resolve }, destory });
+
         });
-
-
-    }
-    destory() {
-        this.instance && document.body.removeChild(this.instance);
-        this.instance = null;
-    }
-}
+    };
+};
+export const dialog= getDialog(component);

@@ -10,7 +10,7 @@
             <div class="order">
                 <div class="ex-tab-list">
                     <div
-                        @click="tap='openOrder'"
+                        @click="testDialog"
                         class="ex-tab active-side __pointer"
                         :class="{'active': tap === 'openOrder'}"
                     >
@@ -46,11 +46,18 @@
 import center from './center/center.vue';
 import historyOrder from './orderHistory';
 import openOrder from './openOrders';
+import passwordDialog from 'components/dialog/password';
 export default {
     components: {
         center,
         openOrder,
         historyOrder
+    },
+    methods:{
+        testDialog(){
+            const t=  passwordDialog({lTxt:'确认',rTxt:'取消'});
+            console.log(t)
+        }
     },
     mounted() {
         this.$store.dispatch('startLoopExchangeRate');

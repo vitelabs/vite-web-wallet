@@ -1,5 +1,14 @@
-export default{
+const STATUS = {
+    'CLOSE': 'CLOSE',
+    'CANCEL': 'CANCEL',
+    'CONFIRMED': 'CONFRIMED'
+};
+export default {
     props: {
+        destory: {
+            type: Function,
+            default: () => { }
+        },
         showMask: {
             type: Boolean,
             default: false
@@ -12,15 +21,15 @@ export default{
             type: Boolean,
             default: false
         },
-        close: {
-            type: Function,
-            default: ()=>{}
-        },
         lTxt: {
             type: String,
             default: ''
         },
         rTxt: {
+            type: String,
+            default: ''
+        },
+        sTxt: {
             type: String,
             default: ''
         },
@@ -32,18 +41,50 @@ export default{
             type: String,
             default: ''
         },
-        lClick: {
-            type: Function,
-            default: ()=>{}
-        },
-        rClick: {
-            type: Function,
-            default: ()=>{}
-        },
+        promise: {
+            type: Object,
+            required: true
+        }
     },
-    computed:{
-        singleBtn(){
+    computed: {
+        singleBtn() {
             return !!this.sTxt;
+        }
+    },
+    methods: {
+        lClick() {
+            if (this.inspector) {
+                this.inspector.then((data) => {
+
+                    this.promise.resolve({
+                        status: STATUS.CONFIRMED,
+                        data
+                    });
+                    this.destory();
+                }
+                );
+            } else {
+                this.promise.resolve({
+                    status: STATUS.CONFIRMED,
+                    data: null
+                });
+                this.destory();
+            }
+
+        },
+        rClick() {
+            this.destory();
+            this.promise.reject({
+                status: STATUS.CANCEL,
+                data: null
+            });
+        },
+        close() {
+            this.destory();
+            this.promise.reject({
+                status: STATUS.CLOSE,
+                data: null
+            });
         }
     }
 };

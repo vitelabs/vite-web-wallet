@@ -1,13 +1,20 @@
 <template>
-    <div>sadfsdfasdsfa</div>
+    <div>
+        fdsaffaf
+    </div>
 </template>
 
 <script>
-import base from './base.vue';
 export default {
-    extends:base,
-    methods:{
-
+    data() {
+        return {
+            inspector: [this.submit]
+        };
+    },
+    methods: {
+        submit() {
+            return Promise.resolve({});
+        }
     }
 };
 </script>
