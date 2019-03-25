@@ -11,6 +11,7 @@ export default {
             return;
         }
 
+        console.log(index);
         const data = getList() || [];
         if (index > -1 && index < data.length) {
             data.splice(index, 1);
