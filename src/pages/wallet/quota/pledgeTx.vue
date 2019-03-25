@@ -242,6 +242,7 @@ export default {
             letter-spacing: 0.35px;
             line-height: 16px;
             margin-bottom: 16px;
+
             .err {
                 float: right;
                 font-size: 12px;
@@ -262,6 +263,7 @@ export default {
             line-height: 40px;
             text-align: center;
             float: right;
+
             &.unuse {
                 background: #efefef;
                 color: #666;
@@ -299,6 +301,7 @@ export default {
             white-space: nowrap;
             background: rgba(255, 255, 255, 1);
             box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.1);
+
             &::after {
                 content: ' ';
                 display: inline-block;
@@ -321,9 +324,11 @@ export default {
         font-size: 14px;
         color: #5e6875;
         padding: 0 15px;
+
         &.all {
             width: 100%;
         }
+
         &.unuse {
             background: #f3f6f9;
         }
@@ -340,9 +345,11 @@ export default {
     .pledge-tx-wrapper {
         margin-top: 20px;
     }
+
     .pledge-tx-wrapper .row .item {
         width: 100%;
         min-width: 0;
+
         &:first-child {
             margin-right: 0;
         }

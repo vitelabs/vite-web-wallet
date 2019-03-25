@@ -93,97 +93,97 @@ export default {
 @import "~assets/scss/vars.scss";
 
 .confirm-container {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  overflow: auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 100;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    overflow: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
 
-  &.gray {
-    background: rgba(0, 0, 0, 0.6);
-  }
+    &.gray {
+        background: rgba(0, 0, 0, 0.6);
+    }
 }
 
 .confirm-wrapper {
-  width: 90%;
-  max-width: 460px;
-  max-height: 85%;
-  display: flex;
-  flex-direction: column;
-  background: #fff;
-  box-shadow: 0 2px 48px 1px rgba(176, 192, 237, 0.42);
-  border-radius: 2px;
-
-  .title {
-    background: #268eff;
-    height: 60px;
-    line-height: 60px;
-    padding-left: 30px;
-    font-family: $font-bold, arial, sans-serif;
-    font-size: 16px;
-    color: #fff;
-
-    .close-icon {
-      box-sizing: border-box;
-      display: block;
-      float: right;
-      padding: 30px;
-      width: 20px;
-      height: 20px;
-      background: url('~assets/imgs/confirm_close.svg') no-repeat center;
-      background-size: 20px 20px;
-    }
-  }
-
-  .content-wrapper {
-    position: relative;
-    box-sizing: border-box;
-    padding: 30px;
-    overflow: auto;
-    font-family: $font-bold, arial, sans-serif;
-    font-size: 18px;
-    color: #1d2024;
-    line-height: 26px;
-  }
-
-  .bottom {
-    padding: 0 30px;
+    width: 90%;
+    max-width: 460px;
+    max-height: 85%;
     display: flex;
-    min-height: 80px;
-    box-sizing: border-box;
-    justify-content: space-between;
+    flex-direction: column;
+    background: #fff;
+    box-shadow: 0 2px 48px 1px rgba(176, 192, 237, 0.42);
+    border-radius: 2px;
 
-    .__btn {
-      white-space: nowrap;
-      display: inline-block;
-      width: 48%;
-      max-width: 190px;
-      font-family: $font-bold, arial, sans-serif;
-      color: #fff;
+    .title {
+        background: #268eff;
+        height: 60px;
+        line-height: 60px;
+        padding-left: 30px;
+        font-family: $font-bold, arial, sans-serif;
+        font-size: 16px;
+        color: #fff;
 
-      &.btn-left {
+        .close-icon {
+            box-sizing: border-box;
+            display: block;
+            float: right;
+            padding: 30px;
+            width: 20px;
+            height: 20px;
+            background: url('~assets/imgs/confirm_close.svg') no-repeat center;
+            background-size: 20px 20px;
+        }
+    }
+
+    .content-wrapper {
+        position: relative;
         box-sizing: border-box;
-        border: 1px solid #007aff;
-        border-radius: 2px;
-        color: #007aff;
-      }
-
-      &.unuse {
-        background: #efefef;
-        color: #666;
-      }
+        padding: 30px;
+        overflow: auto;
+        font-family: $font-bold, arial, sans-serif;
+        font-size: 18px;
+        color: #1d2024;
+        line-height: 26px;
     }
 
-    .btn-single {
-      width: 100%;
-      max-width: 100%;
+    .bottom {
+        padding: 0 30px;
+        display: flex;
+        min-height: 80px;
+        box-sizing: border-box;
+        justify-content: space-between;
+
+        .__btn {
+            white-space: nowrap;
+            display: inline-block;
+            width: 48%;
+            max-width: 190px;
+            font-family: $font-bold, arial, sans-serif;
+            color: #fff;
+
+            &.btn-left {
+                box-sizing: border-box;
+                border: 1px solid #007aff;
+                border-radius: 2px;
+                color: #007aff;
+            }
+
+            &.unuse {
+                background: #efefef;
+                color: #666;
+            }
+        }
+
+        .btn-single {
+            width: 100%;
+            max-width: 100%;
+        }
     }
-  }
 }
 </style>
 

@@ -116,87 +116,87 @@ export default {
 
 <style lang="scss" scoped>
 .sidebar-wrapper {
-  height: 100%;
-  overflow: auto;
-  background: #fff;
-  box-shadow: 0 2px 40px 1px rgba(221, 229, 252, 0.5);
-
-  .content {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
     height: 100%;
-  }
+    overflow: auto;
+    background: #fff;
+    box-shadow: 0 2px 40px 1px rgba(221, 229, 252, 0.5);
 
-  .logo {
-    display: inline-block;
-    margin-top: 24px;
-    width: 100%;
-    height: 46px;
-
-    img {
-      width: 100%;
-      height: 100%;
+    .content {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 100%;
     }
 
-    .notice {
-      transition: opacity 0.5s ease-in-out;
-      opacity: 1;
+    .logo {
+        display: inline-block;
+        margin-top: 24px;
+        width: 100%;
+        height: 46px;
 
-      &.hide {
-        width: 0;
-        height: 0;
-        opacity: 0;
-        overflow: hidden;
-      }
+        img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .notice {
+            transition: opacity 0.5s ease-in-out;
+            opacity: 1;
+
+            &.hide {
+                width: 0;
+                height: 0;
+                opacity: 0;
+                overflow: hidden;
+            }
+        }
     }
-  }
-
-  .icon {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 40px;
-    margin-top: 30px;
-
-    img {
-      width: 22px;
-      height: 22px;
-    }
-
-    &.active::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      bottom: 0;
-      right: 4px;
-      display: inline-block;
-      width: 4px;
-      height: 40px;
-      background-image: linear-gradient(-90deg, #1b3bd8 100%, #176ce0 100%, #0b92e7 100%, #0bb6eb 100%, #00e0f2 100%);
-    }
-  }
-
-  ._top {
-    flex: 1;
-  }
-
-  ._bottom {
-    width: 100%;
-    padding: 30px 0;
 
     .icon {
-      margin-top: 0;
-      margin-bottom: 30px;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 40px;
+        margin-top: 30px;
 
-      &:last-child {
-        margin-bottom: 0;
-        height: 30px;
-      }
+        img {
+            width: 22px;
+            height: 22px;
+        }
+
+        &.active::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 4px;
+            display: inline-block;
+            width: 4px;
+            height: 40px;
+            background-image: linear-gradient(-90deg, #1b3bd8 100%, #176ce0 100%, #0b92e7 100%, #0bb6eb 100%, #00e0f2 100%);
+        }
     }
-  }
+
+    ._top {
+        flex: 1;
+    }
+
+    ._bottom {
+        width: 100%;
+        padding: 30px 0;
+
+        .icon {
+            margin-top: 0;
+            margin-bottom: 30px;
+
+            &:last-child {
+                margin-bottom: 0;
+                height: 30px;
+            }
+        }
+    }
 }
 </style>

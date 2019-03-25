@@ -248,95 +248,95 @@ export default {
 @import "~assets/scss/confirmInput.scss";
 
 .link {
-  float: right;
-  font-family: $font-normal, arial, sans-serif;
-  font-weight: 400;
-  color: rgba(0, 122, 255, 1);
+    float: right;
+    font-family: $font-normal, arial, sans-serif;
+    font-weight: 400;
+    color: rgba(0, 122, 255, 1);
 }
 
 ._r_m {
-  position: relative;
+    position: relative;
 }
 
 .ex-center-loading.token-loading {
-  position: relative;
-  width: 100%;
-  box-sizing: border-box;
-  border: 1px solid rgba(212, 222, 231, 1);
-  border-top: none;
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid rgba(212, 222, 231, 1);
+    border-top: none;
 }
 
 .market-list {
-  position: absolute;
-  width: 100%;
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  max-height: 140px;
-  border: 1px solid rgba(212, 222, 231, 1);
-  border-top: none;
-  box-sizing: border-box;
-  background: #fff;
-
-  .token-list {
-    flex: 1;
-    overflow: auto;
-  }
-
-  .market.input-wrapper {
+    position: absolute;
+    width: 100%;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    max-height: 140px;
+    border: 1px solid rgba(212, 222, 231, 1);
     border-top: none;
-  }
+    box-sizing: border-box;
+    background: #fff;
+
+    .token-list {
+        flex: 1;
+        overflow: auto;
+    }
+
+    .market.input-wrapper {
+        border-top: none;
+    }
 }
 
 .market.input-wrapper {
-  box-sizing: border-box;
-  padding-left: 15px;
-  width: 100%;
-  height: 40px;
-  line-height: 40px;
-  background: rgba(255, 255, 255, 1);
-  border-radius: 2px;
-  border: 1px solid rgba(212, 222, 231, 1);
-  font-size: 12px;
-  font-family: $font-normal, arial, sans-serif;
-  font-weight: 400;
-  color: rgba(206, 209, 213, 1);
+    box-sizing: border-box;
+    padding-left: 15px;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    background: rgba(255, 255, 255, 1);
+    border-radius: 2px;
+    border: 1px solid rgba(212, 222, 231, 1);
+    font-size: 12px;
+    font-family: $font-normal, arial, sans-serif;
+    font-weight: 400;
+    color: rgba(206, 209, 213, 1);
 
-  &.no-data {
-    padding: none;
-    text-align: center;
-  }
-
-  &.border-bottom {
-    border: none;
-    border-bottom: 1px solid rgba(212, 222, 231, 1);
-
-    &:last-child {
-      border-bottom: none;
+    &.no-data {
+        padding: none;
+        text-align: center;
     }
-  }
 
-  .down-icon {
-    float: right;
-  }
+    &.border-bottom {
+        border: none;
+        border-bottom: 1px solid rgba(212, 222, 231, 1);
+
+        &:last-child {
+            border-bottom: none;
+        }
+    }
+
+    .down-icon {
+        float: right;
+    }
 }
 
 .token-wrapper {
-  box-sizing: border-box;
-  border-top: none;
-  border-left: none;
-  border-right: none;
-  min-height: 40px;
+    box-sizing: border-box;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    min-height: 40px;
 
-  .icon {
-    margin-right: 0;
-    margin-left: 15px;
-  }
+    .icon {
+        margin-right: 0;
+        margin-left: 15px;
+    }
 
-  .market-list {
-    left: 0;
-    top: 39px;
-  }
+    .market-list {
+        left: 0;
+        top: 39px;
+    }
 }
 </style>
 

@@ -196,26 +196,26 @@ export default {
 @import "../components/table.scss";
 
 .ex_tb {
-  height: 100%;
+    height: 100%;
 }
 
 @include rowWith {
-  width: 8%;
+    width: 8%;
 
-  &:first-child,
-  &:nth-child(4),
-  &:nth-child(5),
-  &:nth-child(6),
-  &:nth-child(8) {
-    width: 15%;
-  }
+    &:first-child,
+    &:nth-child(4),
+    &:nth-child(5),
+    &:nth-child(6),
+    &:nth-child(8) {
+        width: 15%;
+    }
 }
 
 .buy {
-  color: #5bc500;
+    color: #5bc500;
 }
 
 .sell {
-  color: #ff0008;
+    color: #ff0008;
 }
 </style>
