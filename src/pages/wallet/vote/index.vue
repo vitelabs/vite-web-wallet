@@ -266,8 +266,7 @@ export default {
                 }),
                 submit: sendVote,
                 exchange: this.haveVote
-            },
-            true);
+            }, true);
         }
     },
     computed: {
@@ -292,14 +291,13 @@ export default {
             }
 
             const token = tokenList[this.tokenInfo.tokenId] || {};
-
             return token.balance || 0;
         },
         haveVote() {
             return (
                 this.voteList[0]
-        && (this.voteList[0].voteStatus === 'voting'
-          || this.voteList[0].voteStatus === 'voted')
+                && (this.voteList[0].voteStatus === 'voting'
+                    || this.voteList[0].voteStatus === 'voted')
             );
         },
         voteList() {
@@ -357,7 +355,6 @@ export default {
                 // Tans
                 v.voteNum = BigNumber.toBasic(v.voteNum, token.decimals) || 0;
                 v.operate = this.$t('walletVote.section2.operateBtn');
-
                 return v;
             }).filter(v => {
                 if (this.filterKey.trim() === '') {
