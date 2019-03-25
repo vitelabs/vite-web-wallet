@@ -202,7 +202,7 @@ export default {
         },
         trans() {
             if (!this.viteTokenInfo) {
-                this.$toast('err');
+                this.$toast(this.$t('exchange.dexToken.reqError'));
                 return;
             }
 
