@@ -67,6 +67,7 @@ function unlockAccount(v, e, funcName) {
     }
 
     const activeAccount = wallet.getActiveAccount();
+    console.log(activeAccount);
     activeAccount && activeAccount.unlockAccount();
 
     return false;

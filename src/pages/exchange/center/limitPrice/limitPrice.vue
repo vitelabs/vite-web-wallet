@@ -21,7 +21,7 @@ import order from './order.vue';
 
 export default {
     components: { logoutView, order },
-    created() {
+    mounted() {
         this.isLogin = !!this.$wallet.isLogin;
         this.getBalance();
         this.$wallet.onLogin(() => {

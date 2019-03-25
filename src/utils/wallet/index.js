@@ -155,9 +155,9 @@ class _wallet {
         if ((!entropy && !addr && !id) || !pass) {
             return Promise.reject(false);
         }
+
         if (addr && !entropy && !id) {
             this.isLogin = this._loginKeystoreAcc(addr, pass);
-
             return this.isLogin;
         }
 
@@ -273,7 +273,7 @@ class _wallet {
             entropy,
             name: acc.name
         });
-        this.activeWalletAcc.save(acc.name);
+        this.activeWalletAcc.save();
 
         return true;
     }
