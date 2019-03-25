@@ -44,7 +44,10 @@
             </div>
 
             <div class="__row">
-                <div class="__row-t">{{ $t('exchange.dexToken.fee') }}</div>
+                <div class="__row-t">
+                    {{ $t('exchange.dexToken.fee') }}
+                    <span v-show="!isHaveBalance" class="__err __hint">{{ $t('hint.insufficientBalance') }}</span>
+                </div>
                 <div class="no-input">{{ spend }} VITE</div>
             </div>
             <div class="hint"><span>{{ $t('exchange.dexToken.hint') }}</span></div>
@@ -105,13 +108,27 @@ export default {
             return this.$store.getters.viteTokenInfo;
         },
         btnUnuse() {
-            return !this.market || !this.token || this.isMarketLoading;
+            return !this.market || !this.token || this.isMarketLoading || !this.isHaveBalance;
         },
         list() {
             if (this.tokenName) {
                 return this.searchList;
             }
             return this.tokenList;
+        },
+        isHaveBalance() {
+            if (!this.viteTokenInfo) {
+                return false;
+            }
+
+            const viteBalance = this.$store.getters.tokenBalanceList
+                && this.$store.getters.tokenBalanceList[this.viteTokenInfo.tokenId]
+                ? this.$store.getters.tokenBalanceList[this.viteTokenInfo.tokenId].balance || 0
+                : 0;
+            const viteAmount = BigNumber.toMin(viteBalance, this.viteTokenInfo.decimals);
+            const amount = BigNumber.toMin(this.spend, this.viteTokenInfo.decimals);
+
+            return BigNumber.compared(viteAmount, amount) > 0;
         }
     },
     watch: {
@@ -201,11 +218,6 @@ export default {
             });
         },
         trans() {
-            if (!this.viteTokenInfo) {
-                this.$toast(this.$t('exchange.dexToken.reqError'));
-                return;
-            }
-
             this.isMarketLoading = true;
 
             const newMarketFail = err => {
