@@ -15,10 +15,10 @@ export default { components: { changeLang } };
 @import "~assets/scss/vars.scss";
 
 .title {
-    font-size: 14px;
-    color: #1D2024;
-    letter-spacing: 0.35px;
-    font-family: $font-bold, arial, sans-serif;
-    margin-bottom: 16px;
+  font-size: 14px;
+  color: #1d2024;
+  letter-spacing: 0.35px;
+  font-family: $font-bold, arial, sans-serif;
+  margin-bottom: 16px;
 }
 </style>

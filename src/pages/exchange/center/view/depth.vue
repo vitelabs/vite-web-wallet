@@ -128,22 +128,24 @@ export default {
 
 <style lang="scss" scoped>
 .depth-wrapper {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+
+  .btn {
+    line-height: 40px;
+    flex-basis: 40px;
+    color: #4c525e;
+    padding: 0 10px;
+    text-align: right;
+  }
+
+  .e-charts-wrapper {
+    flex: 1;
     width: 100%;
     height: 100%;
-    .btn {
-        line-height: 40px;
-        flex-basis: 40px;
-        color: #4c525e;
-        padding: 0 10px;
-        text-align: right
-    }
-    .e-charts-wrapper {
-        flex: 1;
-        width: 100%;
-        height: 100%;
-    }
+  }
 }
 </style>
 
