@@ -428,6 +428,7 @@
         "newOrderFail": "Order Failed",
         "depthView": "Depth",
         "klineView": "TradingView",
+        "dealReminder": "你于${time} 委托的 ${amount} ${ttoken} (${ftoken}/${ttoken})已完全成交，详细记录可在委托历史中查看。",
         "dexToken": {
             "title": "开通交易对",
             "fee": "上币费",
