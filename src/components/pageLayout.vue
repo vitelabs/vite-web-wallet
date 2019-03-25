@@ -167,6 +167,7 @@ export default {
                 .page-wrapper {
                     flex: none;
                     overflow: unset;
+                    height: calc(100% - 60px);
                 }
             }
         }
