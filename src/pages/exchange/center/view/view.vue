@@ -24,17 +24,19 @@ export default {
 
 <style lang="scss" scoped>
 .ex-view-container {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
+
 .choose-list {
-    height: 20px;
-    line-height: 20px;
+  height: 20px;
+  line-height: 20px;
 }
+
 .view {
-    flex: 1;
+  flex: 1;
 }
 </style>
 

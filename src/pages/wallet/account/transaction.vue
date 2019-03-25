@@ -305,14 +305,16 @@ export default {
 
 <style lang="scss">
 .confirm-container.trans-confirm .confirm-wrapper {
-    width: 515px;
-    max-width: 90%;
+  width: 515px;
+  max-width: 90%;
 }
+
 .confirm-container.trans-confirm .confirm-wrapper .bottom {
-    min-height: 70px;
-    .__btn{
-        height: 40px;
-        line-height: 40px;
-    }
+  min-height: 70px;
+
+  .__btn {
+    height: 40px;
+    line-height: 40px;
+  }
 }
 </style>

@@ -134,16 +134,18 @@ export default {
 
 <style lang="scss" scoped>
 .order-history-ct {
-    height: 100%;
-    padding: 20px 10px 28px;
-    .tb {
-        flex: 1;
-    }
-    .page-filter {
-        display: flex;
-        justify-content: center;
-        background: #fff;
-        padding: 10px 0;
-    }
+  height: 100%;
+  padding: 20px 10px 28px;
+
+  .tb {
+    flex: 1;
+  }
+
+  .page-filter {
+    display: flex;
+    justify-content: center;
+    background: #fff;
+    padding: 10px 0;
+  }
 }
 </style>

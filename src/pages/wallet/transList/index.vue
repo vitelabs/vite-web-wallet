@@ -206,38 +206,43 @@ export default {
 @import "~assets/scss/vars.scss";
 
 .trans-list-wrapper {
-    display: flex;
-    flex-direction: column;
-    box-sizing: border-box;
-    height: 100%;
-    .title {
-        margin-bottom: 40px;
-    }
-    .trans-list-content {
-        overflow: auto;
-        flex: 1;
-    }
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  height: 100%;
+
+  .title {
+    margin-bottom: 40px;
+  }
+
+  .trans-list-content {
+    overflow: auto;
+    flex: 1;
+  }
 }
+
 .small-trans {
-    display: none;
+  display: none;
 }
 
 @media only screen and (max-width: 550px) {
-    .trans-list-wrapper {
-        padding: 15px;
-    }
+  .trans-list-wrapper {
+    padding: 15px;
+  }
 }
 
 @media only screen and (max-width: 500px) {
-    .trans-list-wrapper .title {
-        margin-bottom: 15px;
-    }
-    .big-trans {
-        display: none;
-    }
-    .small-trans {
-        display: flex;
-    }
+  .trans-list-wrapper .title {
+    margin-bottom: 15px;
+  }
+
+  .big-trans {
+    display: none;
+  }
+
+  .small-trans {
+    display: flex;
+  }
 }
 </style>
 
@@ -245,61 +250,73 @@ export default {
 @import "~assets/scss/vars.scss";
 
 .tType {
-    min-width: 230px;
-    width: 15%;
+  min-width: 230px;
+  width: 15%;
 }
+
 .status {
-    min-width: 120px;
-    width: 10%;
+  min-width: 120px;
+  width: 10%;
 }
+
 .time {
-    min-width: 200px;
-    width: 20%;
+  min-width: 200px;
+  width: 20%;
 }
+
 .address {
-    min-width: 240px;
-    width: 25%;
+  min-width: 240px;
+  width: 25%;
 }
+
 .sum {
-    width: 14%;
-    min-width: 150px;
+  width: 14%;
+  min-width: 150px;
 }
+
 .token {
-    min-width: 70px;
+  min-width: 70px;
 }
+
 .pink {
-    font-family: $font-bold, arial, sans-serif;
-    color: #EA60AC;
+  font-family: $font-bold, arial, sans-serif;
+  color: #ea60ac;
 }
+
 .blue {
-    font-family: $font-bold, arial, sans-serif;
-    color: #007AFF;
+  font-family: $font-bold, arial, sans-serif;
+  color: #007aff;
 }
+
 .green {
-    font-family: $font-bold, arial, sans-serif;
-    color: #5BC500;
+  font-family: $font-bold, arial, sans-serif;
+  color: #5bc500;
 }
+
 .red {
-    font-family: $font-bold, arial, sans-serif;
-    color: #FF0008;
+  font-family: $font-bold, arial, sans-serif;
+  color: #ff0008;
 }
+
 .icon {
-    margin-right: 6px;
-    margin-bottom: -2px;
+  margin-right: 6px;
+  margin-bottom: -2px;
 }
 
 @media only screen and (max-width: 500px) {
-    .small-trans.__tb{
-        min-width: 0;
-    }
-    .tType {
-        min-width: 50px;
-        width: 10%;
-    }
-    .address {
-        overflow: hidden;
-        min-width: 180px;
-        width: 25%;
-    }
+  .small-trans.__tb {
+    min-width: 0;
+  }
+
+  .tType {
+    min-width: 50px;
+    width: 10%;
+  }
+
+  .address {
+    overflow: hidden;
+    min-width: 180px;
+    width: 25%;
+  }
 }
 </style>

@@ -85,41 +85,48 @@ export default {
 
 <style lang="scss" rel="stylesheet/scss">
 .page-content .account-wrapper.__wrapper {
-    padding-top: 0;
+  padding-top: 0;
 }
+
 .account-wrapper {
+  position: relative;
+  box-sizing: border-box;
+  overflow: auto;
+  height: 100%;
+
+  .head {
     position: relative;
-    box-sizing: border-box;
-    overflow: auto;
-    height: 100%;
-    .head {
-        position: relative;
-        text-align: center;
-        margin-top: 20px;
-        line-height: 40px;
-    }
-    .sync-block {
-        display: inline-block;
-    }
-    .net-btn {
-        position: absolute;
-        right: 0px;
-    }
-}
-.item {
+    text-align: center;
     margin-top: 20px;
+    line-height: 40px;
+  }
+
+  .sync-block {
+    display: inline-block;
+  }
+
+  .net-btn {
+    position: absolute;
+    right: 0;
+  }
 }
+
+.item {
+  margin-top: 20px;
+}
+
 .token-list {
-    display: flex;
-    flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 @media only screen and (max-width: 550px) {
-    .account-wrapper .head {
-        margin-bottom: 0px;
-    }
-    .token-list {
-        display: block;
-    }
+  .account-wrapper .head {
+    margin-bottom: 0;
+  }
+
+  .token-list {
+    display: block;
+  }
 }
 </style>

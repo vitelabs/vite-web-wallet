@@ -255,109 +255,122 @@ export default {
 @import "~assets/scss/vars.scss";
 
 .register-wrapper {
+  position: relative;
+  padding: 0 30px 30px 30px;
+
+  .row {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    .item {
+      position: relative;
+      display: inline-block;
+      width: 49%;
+      min-width: 470px;
+      margin-top: 30px;
+
+      &:first-child {
+        margin-right: 10px;
+      }
+    }
+
+    .title {
+      font-family: $font-bold, arial, sans-serif;
+      font-size: 14px;
+      color: #1d2024;
+      letter-spacing: 0.35px;
+      line-height: 16px;
+      margin-bottom: 16px;
+
+      .err {
+        float: right;
+        font-size: 12px;
+        color: #ff2929;
+        line-height: 16px;
+      }
+    }
+
+    .btn {
+      position: relative;
+      bottom: -31px;
+      border-radius: 2px;
+      background: #007aff;
+      color: #fff;
+      height: 40px;
+      line-height: 40px;
+      text-align: center;
+      font-family: $font-bold, arial, sans-serif;
+      font-size: 14px;
+      color: #fbfbfb;
+
+      &.unuse {
+        background: #efefef;
+        color: #666;
+        cursor: not-allowed;
+      }
+    }
+  }
+
+  .input-item {
     position: relative;
-    padding: 0px 30px 30px 30px;
-    .row {
-        display: flex;
-        justify-content: space-between;
-        flex-wrap: wrap;
-        .item {
-            position: relative;
-            display: inline-block;
-            width: 49%;
-            min-width: 470px;
-            margin-top: 30px;
-            &:first-child {
-                margin-right: 10px;
-            }
-        }
-        .title {
-            font-family: $font-bold, arial, sans-serif;
-            font-size: 14px;
-            color: #1D2024;
-            letter-spacing: 0.35px;
-            line-height: 16px;
-            margin-bottom: 16px;
-            .err {
-                float: right;
-                font-size: 12px;
-                color: #FF2929;
-                line-height: 16px;
-            }
-        }
-        .btn {
-            position: relative;
-            bottom: -31px;
-            border-radius: 2px;
-            background: #007AFF;
-            color: #fff;
-            height: 40px;
-            line-height: 40px;
-            text-align: center;
-            font-family: $font-bold, arial, sans-serif;
-            font-size: 14px;
-            color: #FBFBFB;
-            &.unuse {
-                background: #efefef;
-                color: #666;
-                cursor: not-allowed;
-            }
-        }
+    box-sizing: border-box;
+    height: 40px;
+    line-height: 40px;
+    background: #fff;
+    border: 1px solid #d4dee7;
+    border-radius: 2px;
+    font-size: 14px;
+    color: #5e6875;
+    padding: 0 15px;
+
+    &.all {
+      width: 100%;
     }
-    .input-item {
-        position: relative;
-        box-sizing: border-box;
-        height: 40px;
-        line-height: 40px;
-        background: #FFFFFF;
-        border: 1px solid #D4DEE7;
-        border-radius: 2px;
-        font-size: 14px;
-        color: #5E6875;
-        padding: 0 15px;
-        &.all {
-            width: 100%;
-        }
-        &.unuse {
-            background: #F3F6F9;
-        }
-        input {
-            width: 100%;
-            background: transparent;
-            font-size: 14px;
-        }
+
+    &.unuse {
+      background: #f3f6f9;
     }
+
+    input {
+      width: 100%;
+      background: transparent;
+      font-size: 14px;
+    }
+  }
 }
 
 @media only screen and (max-width: 1419px) {
-    .register-wrapper .row .item {
-        margin-top: 20px;
-    }
+  .register-wrapper .row .item {
+    margin-top: 20px;
+  }
 }
 
 @media only screen and (max-width: 1209px) {
-    .register-wrapper .row .btn {
-        bottom: -11px;
-    }
+  .register-wrapper .row .btn {
+    bottom: -11px;
+  }
 }
 
 @media only screen and (max-width: 750px) {
-    .register-wrapper {
-        margin-top: 20px;
+  .register-wrapper {
+    margin-top: 20px;
+  }
+
+  .register-wrapper .row .item {
+    width: 100%;
+    min-width: 0;
+
+    &:first-child {
+      margin-right: 0;
     }
-    .register-wrapper .row .item {
-        width: 100%;
-        min-width: 0;
-        &:first-child {
-            margin-right: 0px;
-        }
-    }
+  }
 }
 
 @media only screen and (max-width: 550px) {
-    .register-wrapper {
-        padding: 0px 20px 30px 20px;
-    }
+  .register-wrapper {
+    padding: 0 20px 30px 20px;
+  }
 }
 </style>
 

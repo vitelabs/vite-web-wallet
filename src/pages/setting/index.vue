@@ -48,7 +48,6 @@ export default {
 
             if (!this.pass) {
                 this.$toast(this.$t('hint.pwErr'));
-
                 return;
             }
 
@@ -71,70 +70,78 @@ export default {
 @import "~assets/scss/vars.scss";
 
 .item {
-    margin-bottom: 20px;
-    margin-top: 0;
-    &.unlock {
-        .pass {
-            border: 1px solid #efefef;
-        }
-        .btn {
-            background: #efefef;
-            color: #666;
-        }
+  margin-bottom: 20px;
+  margin-top: 0;
+
+  &.unlock {
+    .pass {
+      border: 1px solid #efefef;
     }
-    .title {
-        font-size: 14px;
-        color: #1D2024;
-        font-family: $font-bold, arial, sans-serif;
-        letter-spacing: 0.35px;
-        line-height: 16px;
-        margin-bottom: 16px;
-    }
-    .input-wrapper {
-        display: inline-block;
-        width: 83%;
-        height: 40px;
-        margin-right: 10px;
-        .pass {
-            display: inline-block;
-            box-sizing: border-box;
-            width: 100%;
-            height: 100%;
-            padding: 0 15px;
-            line-height: 40px;
-            background: #FFFFFF;
-            border: 1px solid #D4DEE7;
-            border-radius: 2px;
-            font-size: 14px;
-        }
-    }
+
     .btn {
-        position: relative;
-        top: -1px;
-        float: right;
-        width: 12%;
-        max-width: 60px;
-        height: 40px;
-        text-align: center;
-        line-height: 40px;
-        background: #007AFF;
-        border-radius: 2px;
-        font-family: $font-normal-b, arial, sans-serif;
-        font-size: 14px;
-        color: #FFFFFF;
-        &.unuse {
-            background: #efefef;
-            color: #666;
-        }
+      background: #efefef;
+      color: #666;
     }
+  }
+
+  .title {
+    font-size: 14px;
+    color: #1d2024;
+    font-family: $font-bold, arial, sans-serif;
+    letter-spacing: 0.35px;
+    line-height: 16px;
+    margin-bottom: 16px;
+  }
+
+  .input-wrapper {
+    display: inline-block;
+    width: 83%;
+    height: 40px;
+    margin-right: 10px;
+
+    .pass {
+      display: inline-block;
+      box-sizing: border-box;
+      width: 100%;
+      height: 100%;
+      padding: 0 15px;
+      line-height: 40px;
+      background: #fff;
+      border: 1px solid #d4dee7;
+      border-radius: 2px;
+      font-size: 14px;
+    }
+  }
+
+  .btn {
+    position: relative;
+    top: -1px;
+    float: right;
+    width: 12%;
+    max-width: 60px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    background: #007aff;
+    border-radius: 2px;
+    font-family: $font-normal-b, arial, sans-serif;
+    font-size: 14px;
+    color: #fff;
+
+    &.unuse {
+      background: #efefef;
+      color: #666;
+    }
+  }
 }
 
 @media only screen and (max-width: 500px) {
-    .item .input-wrapper {
-        width: 75%;
-    }
-    .item .btn {
-        width: 60px;
-    }
+  .item .input-wrapper {
+    width: 75%;
+  }
+
+  .item .btn {
+    width: 60px;
+  }
 }
 </style>
