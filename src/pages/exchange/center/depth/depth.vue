@@ -77,36 +77,41 @@ export default {
 @import '../center.scss';
 
 .depth-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  .depth-content-wrapper {
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
-    .depth-content-wrapper {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        &.one {
-            flex: 1;
-            overflow: auto;
-        }
+
+    &.one {
+      flex: 1;
+      overflow: auto;
+    }
+  }
+
+  .depth-table {
+    position: relative;
+    width: 100%;
+
+    &.show-all {
+      flex: 1;
+      overflow: hidden;
+
+      .sell {
+        position: absolute;
+        bottom: 0;
+      }
     }
 
-    .depth-table {
-        position: relative;
-        width: 100%;
-        &.show-all {
-            flex: 1;
-            overflow: hidden;
-            .sell {
-                position: absolute;
-                bottom: 0;
-            }
-        }
-        .sell {
-            width: 100%;
-        }
+    .sell {
+      width: 100%;
     }
+  }
 }
 
 

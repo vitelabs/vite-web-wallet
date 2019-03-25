@@ -380,136 +380,157 @@ export default {
 @import "~assets/scss/table.scss";
 
 .vote {
-    height: 100%;
-    overflow: auto;
-    box-sizing: border-box;
+  height: 100%;
+  overflow: auto;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+
+  .filter {
+    margin-top: 10px;
+  }
+
+  .ct {
+    border-left: 2px solid rgba(0, 122, 255, 0.7);
+    padding-left: 10px;
+    height: 18px;
+    line-height: 18px;
+    font-family: $font-bold, arial, sans-serif;
+    font-size: 18px;
+    color: #1d2024;
+  }
+
+  .title {
     display: flex;
-    flex-direction: column;
-    .filter {
-        margin-top: 10px;
-    }
+    flex: none;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
 
     .ct {
-        border-left: 2px solid rgba(0, 122, 255, 0.7);
-        padding-left: 10px;
-        height: 18px;
-        line-height: 18px;
-        font-family: $font-bold, arial, sans-serif;
-        font-size: 18px;
-        color: #1d2024;
+      margin-top: 20px;
     }
-    .title {
-        display: flex;
-        flex: none;
-        justify-content: space-between;
-        flex-wrap: wrap;
-        margin-bottom: 24px;
-        .ct {
-            margin-top: 20px;
-        }
-    }
-    .__tb {
-        width: 100%;
+  }
+
+  .__tb {
+    width: 100%;
+  }
+
+  .vote_list {
+    overflow-x: auto;
+    overflow-y: hidden;
+    margin: 40px 0;
+    margin-bottom: 20px;
+    min-height: 213px;
+
+    .seat {
+      height: 78px;
+      text-align: center;
     }
 
-    .vote_list {
-        overflow-x: auto;
-        overflow-y: hidden;
-        margin: 40px 0;
-        margin-bottom: 20px;
-        min-height: 213px;
-        .seat {
-            height: 78px;
-            text-align: center;
-        }
-        .__tb_content {
-            overflow: visible;
-        }
+    .__tb_content {
+      overflow: visible;
     }
-    .node_list {
-        min-height: 300px;
-        flex: 1;
-        overflow-x: auto;
-        overflow-y: hidden;
-        display: flex;
-        flex-direction: column;
-        .tb_container {
-            height: calc(100% - 64px);
-            overflow: auto;
-        }
-        .__tb_cell {
+  }
+
+  .node_list {
+    min-height: 300px;
+    flex: 1;
+    overflow-x: auto;
+    overflow-y: hidden;
+    display: flex;
+    flex-direction: column;
+
+    .tb_container {
+      height: calc(100% - 64px);
+      overflow: auto;
+    }
+
+    .__tb_cell {
       min-width: 100px;
-        text-overflow: hidden;
-        margin: 0 5px;
-        text-overflow: ellipsis;
-      &:first-child{
-          width:5%;
-          min-width: 30px;
+      text-overflow: hidden;
+      margin: 0 5px;
+      text-overflow: ellipsis;
+
+      &:first-child {
+        width: 5%;
+        min-width: 30px;
       }
+
       &:nth-child(2) {
         width: 30%;
       }
+
       &:nth-child(3) {
         width: 40%;
         min-width: 450px;
       }
-        &:nth-child(4) {
+
+      &:nth-child(4) {
         width: 15%;
         min-width: 150px;
       }
-      &:last-child{
-          width: 5%;
-          min-width: 50px;
+
+      &:last-child {
+        width: 5%;
+        min-width: 50px;
       }
     }
+  }
+
+  .__tb_cell {
+    min-width: 180px;
+
+    .reward {
+      margin-left: 10px;
     }
-    .__tb_cell {
-        min-width: 180px;
-        .reward {
-            margin-left: 10px;
-        }
-        &.nodename {
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            width: 150px;
-        }
-        .hoveraction {
-            &.tipsicon {
-                position: relative;
-                display: inline-block;
-                background: url(~assets/imgs/hover_help.svg);
-                overflow: visible;
-                width: 16px;
-                height: 16px;
-                vertical-align: sub;
-                cursor: pointer;
-                .unregister-tips {
-                    word-break: break-all;
-                    min-width: 314px;
-                    min-height: 100px;
-                    padding: 10px;
-                    font-size: 14px;
-                    color: #3e4a59;
-                    line-height: 20px;
-                }
-            }
-        }
+
+    &.nodename {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      width: 150px;
     }
+
+    .hoveraction {
+      &.tipsicon {
+        position: relative;
+        display: inline-block;
+        background: url(~assets/imgs/hover_help.svg);
+        overflow: visible;
+        width: 16px;
+        height: 16px;
+        vertical-align: sub;
+        cursor: pointer;
+
+        .unregister-tips {
+          word-break: break-all;
+          min-width: 314px;
+          min-height: 100px;
+          padding: 10px;
+          font-size: 14px;
+          color: #3e4a59;
+          line-height: 20px;
+        }
+      }
+    }
+  }
 }
+
 .clickable {
-    color: #007aff;
-    cursor: pointer;
+  color: #007aff;
+  cursor: pointer;
 }
+
 .unclickable {
-    color: #ced1d5;
+  color: #ced1d5;
 }
 
 @media only screen and (max-width: 550px) {
-    .vote {
-        overflow: auto;
-        padding: 15px;
-        display: block;
-    }
+  .vote {
+    overflow: auto;
+    padding: 15px;
+    display: block;
+  }
 }
 </style>

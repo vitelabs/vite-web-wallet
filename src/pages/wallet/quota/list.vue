@@ -133,22 +133,23 @@ export default {
         clickCell(cell, item, index) {
             if (cell === 'addr') {
                 this.gotoDetail(item.beneficialAddr);
-
                 return;
             }
+
             if (cell !== 'cancel') {
                 return;
             }
+
             if (!item.isMaturity) {
                 this.$toast(this.$t('walletQuota.list.unexpired'));
-
                 return;
             }
+
             if (this.$wallet.isLogin) {
                 this.showCancel(item, index);
-
                 return;
             }
+
             const activeAccount = this.$wallet.getActiveAccount();
             activeAccount && activeAccount.unlockAccount();
         },
@@ -216,68 +217,81 @@ export default {
 
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
+
 .list {
-    width: 100%;
-    overflow: auto;
-    background: #FFFFFF;
-    border: 1px solid #F6F5F5;
-    box-shadow: 0 2px 48px 1px rgba(176,192,237,0.42);
-    border-radius: 2px;
+  width: 100%;
+  overflow: auto;
+  background: #fff;
+  border: 1px solid #f6f5f5;
+  box-shadow: 0 2px 48px 1px rgba(176, 192, 237, 0.42);
+  border-radius: 2px;
 }
+
 .title {
-    font-family: $font-bold, arial, sans-serif;
-    font-size: 18px;
-    color: #1D2024;
-    line-height: 32px;
-    margin-bottom: 7px;
+  font-family: $font-bold, arial, sans-serif;
+  font-size: 18px;
+  color: #1d2024;
+  line-height: 32px;
+  margin-bottom: 7px;
 }
+
 .total {
-    font-size: 14px;
-    color: #5E6875;
-    letter-spacing: 0.35px;
-    line-height: 16px;
-    margin-bottom: 14px;
+  font-size: 14px;
+  color: #5e6875;
+  letter-spacing: 0.35px;
+  line-height: 16px;
+  margin-bottom: 14px;
 }
 </style>
 
 <style lang="scss">
 .list-wrapper .list .table-list {
-    min-width: 1260px;
+  min-width: 1260px;
 }
+
 .beneficial-addr {
-    font-size: 14px;
-    color: #007AFF;
+  font-size: 14px;
+  color: #007aff;
 }
+
 .beneficial-img {
-    margin-left: 8px;
-    margin-bottom: -1px;
+  margin-left: 8px;
+  margin-bottom: -1px;
 }
+
 .addr {
-    min-width: 240px;
-    width: 25%;
+  min-width: 240px;
+  width: 25%;
 }
+
 .list-wrapper .amount {
-    width: 17%;
-    min-width: 150px;
+  width: 17%;
+  min-width: 150px;
 }
+
 .height {
-    min-width: 185px;
-    width: 20%;
+  min-width: 185px;
+  width: 20%;
 }
+
 .time {
-    min-width: 200px;
-    width: 20%;
+  min-width: 200px;
+  width: 20%;
 }
+
 .operate {
-    min-width: 205px;
+  min-width: 205px;
 }
+
 .cancel {
-    color: #CED1D5;
-    &.active {
-        color: #007AFF;
-    }
+  color: #ced1d5;
+
+  &.active {
+    color: #007aff;
+  }
 }
+
 .operate {
-    min-width: 210px;
+  min-width: 210px;
 }
 </style>

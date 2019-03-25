@@ -79,7 +79,6 @@ export default {
             if (!this.name) {
                 this.$toast(this.$t('startCreate.hint.nameInput'));
                 this.focusName();
-
                 return;
             }
 
@@ -146,7 +145,7 @@ export default {
 
 <style lang="scss" scoped>
 .__btn {
-    margin-top: 20px;
+  margin-top: 20px;
 }
 </style>
 

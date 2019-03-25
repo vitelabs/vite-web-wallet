@@ -59,45 +59,49 @@ export default {
 @import "~assets/scss/vars.scss";
 
 .sec-title-container {
-    font-family: $font-bold, arial, sans-serif;
-    font-size: 24px;
-    color: #1d2024;
-    line-height: 40px;
-    .help {
-        margin-top: 6px;
-        align-items: center;
-        font-size: 14px;
-        color: #007aff;
-        text-align: right;
-        line-height: 20px;
-        margin-left: 16px;
-        display: inline-block;
-        white-space: nowrap;
-        .icon {
-            background: url(~assets/imgs/detail.svg);
-            width: 20px;
-            height: 20px;
-            display: inline-block;
-            margin-right: 0;
-        }
-        .help-text {
-            position: relative;
-            bottom: 2px;
-        }
+  font-family: $font-bold, arial, sans-serif;
+  font-size: 24px;
+  color: #1d2024;
+  line-height: 40px;
+
+  .help {
+    margin-top: 6px;
+    align-items: center;
+    font-size: 14px;
+    color: #007aff;
+    text-align: right;
+    line-height: 20px;
+    margin-left: 16px;
+    display: inline-block;
+    white-space: nowrap;
+
+    .icon {
+      background: url(~assets/imgs/detail.svg);
+      width: 20px;
+      height: 20px;
+      display: inline-block;
+      margin-right: 0;
     }
-    .other-prod {
-        float: right;
+
+    .help-text {
+      position: relative;
+      bottom: 2px;
     }
+  }
+
+  .other-prod {
+    float: right;
+  }
 }
 
 @media only screen and (max-width: 900px) {
-    .sec-title-container {
-        .help {
-            margin-left: 0;
-            margin-top: 8px;
-            text-align: left;
-            display: block;
-        }
+  .sec-title-container {
+    .help {
+      margin-left: 0;
+      margin-top: 8px;
+      text-align: left;
+      display: block;
     }
+  }
 }
 </style>
