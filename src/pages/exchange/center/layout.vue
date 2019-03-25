@@ -34,6 +34,7 @@
     padding: 10px;
     box-sizing: border-box;
     min-height: 850px;
+    max-height: 950px;
 
     .__border {
         border-radius: 2px;
