@@ -67,7 +67,10 @@ export default {
             this.isShow = false;
             this.cancel();
         },
+
         async startPowTx(accountBlock, startTime, difficulty) {
+            this.isShow = true;
+
             const now = new Date().getTime();
             if (startTime && now - startTime > 2000) {
                 accountBlock.prevHash = null;
@@ -83,43 +86,41 @@ export default {
                 }
             }
 
-            this.isShow = true;
             const activeAccount = this.$wallet.getActiveAccount();
+            let data;
 
-            return new Promise((res, rej) => {
-                getPowNonce(activeAccount.getDefaultAddr(), accountBlock.prevHash, difficulty).then(data => {
-                    accountBlock.difficulty = data.difficulty;
-                    accountBlock.nonce = data.nonce;
-
-                    if (!this.isShow) {
-                        return;
-                    }
-
-                    this.stopPow(() => {
-                        activeAccount.sendRawTx(accountBlock).then(data => {
-                            this.isShow = false;
-                            res(data);
-                        })
-                            .catch(e => {
-                                this.isShow = false;
-                                rej(e, 1);
-                            });
-                    });
-                })
-                    .catch(e => {
-                        this.isShow = false;
-                        this.$emit('pow-finish');
-                        rej(e, 0);
-                    });
-            });
-        },
-        stopPow(cb) {
-            this.gotoFinish();
-            setTimeout(() => {
+            try {
+                data = await getPowNonce(activeAccount.getDefaultAddr(), accountBlock.prevHash, difficulty);
+            } catch (e) {
                 this.isShow = false;
                 this.$emit('pow-finish');
-                cb && cb();
-            }, 1000);
+                return Promise.reject(e, 0);
+            }
+
+            accountBlock.difficulty = data.difficulty;
+            accountBlock.nonce = data.nonce;
+
+            if (!this.isShow) {
+                return;
+            }
+
+            return this.sendRawTx(activeAccount, accountBlock);
+        },
+        sendRawTx(activeAccount, accountBlock) {
+            return new Promise((res, rej) => {
+                this.gotoFinish();
+                setTimeout(() => {
+                    this.isShow = false;
+                    this.$emit('pow-finish');
+                    activeAccount.sendRawTx(accountBlock).then(data => {
+                        this.isShow = false;
+                        res(data);
+                    }).catch(e => {
+                        this.isShow = false;
+                        rej(e, 1);
+                    });
+                }, 1000);
+            });
         }
     }
 };
