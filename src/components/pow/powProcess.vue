@@ -14,7 +14,6 @@
 <script>
 import loading from 'components/loading';
 import { getPowNonce } from 'services/pow';
-import $ViteJS from 'utils/viteClient';
 
 let processTimeout;
 
@@ -71,21 +70,6 @@ export default {
         async startPowTx(accountBlock, startTime, difficulty) {
             this.isShow = true;
 
-            const now = new Date().getTime();
-            if (startTime && now - startTime > 2000) {
-                accountBlock.prevHash = null;
-                accountBlock.height = null;
-                accountBlock.snapshotHash = null;
-
-                try {
-                    accountBlock = await $ViteJS.buildinTxBlock.getAccountBlock.async(accountBlock);
-                } catch (e) {
-                    this.isShow = false;
-                    this.$emit('pow-finish');
-                    return Promise.reject(e, 0);
-                }
-            }
-
             const activeAccount = this.$wallet.getActiveAccount();
             let data;
 
@@ -106,6 +90,7 @@ export default {
 
             return this.sendRawTx(activeAccount, accountBlock);
         },
+
         sendRawTx(activeAccount, accountBlock) {
             return new Promise((res, rej) => {
                 this.gotoFinish();

@@ -162,7 +162,7 @@ export default {
                         powProcess({
                             accountBlock: e.accountBlock,
                             startTime,
-                            defficulty: VoteDifficulty
+                            difficulty: VoteDifficulty
                         }).then(successSubmit).catch(failSubmit);
                     }
                 });
