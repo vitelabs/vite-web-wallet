@@ -30,33 +30,18 @@ export function quotaConfirm(pow = false, config) {
 
 function quotaConfirmCancel({
     showMask = true,
-    operate,
-    cancel = () => {},
-    submit = () => {}
+    operate
 }) {
-    const _close = cb => {
-        try {
-            document.body.removeChild(cancelInstance.$el);
-        } catch (err) {
-            console.warn(err);
-        }
-        cb && cb();
-    };
-
     cancelInstance.showMask = showMask;
     cancelInstance.operate = operate;
     cancelInstance.cancel = () => {
-        _close();
-        cancel && cancel();
+        _close(null, cancelInstance.$el);
     };
     cancelInstance.submit = () => {
-        _close();
-        submit && submit();
+        _close(null, cancelInstance.$el);
     };
 
     document.body.appendChild(cancelInstance.$el);
-
-    return true;
 }
 
 
@@ -65,27 +50,27 @@ function quotaConfirmPow({
     closeBtnClick = () => {},
     rightBtnClick = () => {}
 }) {
-    const _close = cb => {
-        try {
-            document.body.removeChild(powInstance.$el);
-        } catch (err) {
-            console.warn(err);
-        }
-        cb && cb();
-    };
-
     powInstance.showMask = showMask;
     powInstance.leftBtnClick = () => {
-        _close();
+        _close(null, powInstance.$el);
     };
     powInstance.closeBtnClick = () => {
-        _close();
+        _close(null, powInstance.$el);
         closeBtnClick && closeBtnClick();
     };
     powInstance.rightBtnClick = () => {
-        _close();
+        _close(null, powInstance.$el);
         rightBtnClick && rightBtnClick();
     };
 
     document.body.appendChild(powInstance.$el);
 }
+
+const _close = (cb, el) => {
+    try {
+        document.body.removeChild(el);
+    } catch (err) {
+        console.warn(err);
+    }
+    cb && cb();
+};

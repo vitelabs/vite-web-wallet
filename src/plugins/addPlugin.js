@@ -39,9 +39,9 @@ export default {
 
         Vue.prototype.$trim = (msg = '') => msg.replace(/(^\s*)|(\s*$)/g, '');
 
-        Vue.prototype.$toast = function (mesage, err, type, position) {
+        Vue.prototype.$toast = function (message, err, type, position) {
             if (!err) {
-                toast(mesage, type, position);
+                toast(message, type, position);
                 return ;
             }
 
@@ -49,7 +49,7 @@ export default {
                 : err ? err.code : -1;
 
             const msg = code === -1 || !this.$i18n.messages.zh.errCode[Math.abs(code)]
-                ? mesage || this.$t('hint.err') : this.$t(`errCode.${ Math.abs(code) }`);
+                ? message || this.$t('hint.err') : this.$t(`errCode.${ Math.abs(code) }`);
             toast(msg, type, position);
         };
 

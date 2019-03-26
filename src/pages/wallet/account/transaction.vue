@@ -49,10 +49,9 @@
 import Vue from 'vue';
 import confirm from 'components/confirm';
 import viteInput from 'components/viteInput';
-import { powProcess } from 'components/pow/index';
-import { quotaConfirm } from 'components/quota/index';
 import BigNumber from 'utils/bigNumber';
 import { encoder, address } from 'utils/tools';
+import sendTx from 'utils/sendTx';
 
 const SendDifficulty = '157108864';
 
@@ -124,18 +123,6 @@ export default {
         validAddr() {
             this.isValidAddress = this.inAddress && address.isValidHexAddr(this.inAddress);
         },
-        showQuota(accountBlock, startTime) {
-            this.isShowTrans = false;
-            quotaConfirm(true, {
-                showMask: false,
-                closeBtnClick: () => {
-                    this.isShowTrans = true;
-                },
-                rightBtnClick: () => {
-                    this.startPow(accountBlock, startTime);
-                }
-            });
-        },
 
         testAmount() {
             const result = this.$validAmount(this.amount, this.token.decimals);
@@ -195,98 +182,71 @@ export default {
 
             this.loading = true;
 
-            const amount = BigNumber.toMin(this.amount, this.token.decimals);
-            const successText = this.$t('hint.transSucc');
-            const failText = this.$t('hint.err');
             const activeAccount = this.$wallet.getActiveAccount();
+            const amount = BigNumber.toMin(this.amount, this.token.decimals);
 
             if (!activeAccount) {
                 this.$toast(this.$t('hint.err'));
                 return;
             }
 
-            activeAccount.sendTx({
-                toAddress: this.inAddress,
-                tokenId: this.token.id,
-                amount,
-                message: this.message
-            }).then(() => {
-                if (!this) {
-                    this.$toast(successText);
-                    return;
-                }
-                this.transSuccess();
-            }).catch(err => {
-                console.warn(err);
-
-                if (!this) {
-                    this.$toast(failText);
-                    return;
-                }
-
+            const transError = (msg, err) => {
                 this.loading = false;
+                this.isShowTrans = true;
+
                 const code = err && err.error ? err.error.code || -1
                     : err ? err.code : -1;
-
                 if (code === -35001) {
                     this.$toast(this.$t('hint.insufficientBalance'));
                     this.amountErr = this.$t('hint.insufficientBalance');
                     return;
-                } else if (code === -35002) {
-                    this.showQuota(err.accountBlock, new Date().getTime());
-                    return;
                 }
 
-                this.$toast(null, err);
-            });
-        },
-        startPow(accountBlock, startTime) {
-            const activeAccount = this.$wallet.getActiveAccount();
-            if (!activeAccount) {
-                this.$toast(this.$t('hint.err'));
-                return;
-            }
-
-            const transError = err => {
-                this.loading = false;
-                this.isShowTrans = true;
-                this.$toast(null, err);
+                this.$toast(msg, err);
             };
 
-            this.loading = true;
-            powProcess({
-                accountBlock,
-                startTime,
-                difficulty: SendDifficulty,
-                isShowCancel: true,
-                cancel: () => {
-                    this.closeTrans();
+            sendTx(activeAccount.sendTx, {
+                toAddress: this.inAddress,
+                tokenId: this.token.id,
+                amount,
+                message: this.message
+            }, {
+                pow: true,
+                powConfig: {
+                    isShowCancel: true,
+                    cancel: () => {
+                        this.closeTrans();
+                    },
+                    difficulty: SendDifficulty
                 }
             }).then(() => {
-                this.transSuccess();
-            }).catch((err, type) => {
-                console.warn(type, err);
+                this.loading = false;
+                this.$toast(this.$t('hint.transSucc'));
+                this.closeTrans();
+            }).powStarted(() => {
+                this.isShowTrans = false;
+            })
+                .powFailed((err, type) => {
+                    console.warn(type, err);
 
-                if (type === 0) {
-                    transError(this.$t('wallet.trans.powErr'));
-                    return;
-                }
+                    if (type === 0) {
+                        transError(this.$t('wallet.trans.powErr'), err);
+                        return;
+                    }
 
-                const code = err && err.error ? err.error.code || -1
-                    : err ? err.code : -1;
-                if (code === -35002) {
-                    transError(this.$t('wallet.trans.powTransErr'));
-                    return;
-                }
+                    const code = err && err.error ? err.error.code || -1
+                        : err ? err.code : -1;
+                    if (code === -35002) {
+                        transError(this.$t('wallet.trans.powTransErr'));
+                        return;
+                    }
 
-                transError(err);
-            });
-        },
-
-        transSuccess() {
-            this.loading = false;
-            this.$toast(this.$t('hint.transSucc'));
-            this.closeTrans();
+                    transError(null, err);
+                })
+                .catch(err => {
+                    console.warn(err);
+                    transError(null, err);
+                });
         }
     }
 };
