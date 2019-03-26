@@ -212,7 +212,6 @@ export default {
     methods: {
         init() {
             defaultPairTimer = defaultPairTimer || new subTask('defaultPair', ({ args, data }) => {
-                console.log(data);
                 if (args.ttoken !== this.toTokenId) {
                     return;
                 }
