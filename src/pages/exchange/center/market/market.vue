@@ -74,7 +74,6 @@ import tabList from './tabList';
 import txPairList from './txPairList';
 
 const FavoriteKey = 'favoriteTxPairs';
-
 let defaultPairTimer = null;
 
 export default {
@@ -85,7 +84,6 @@ export default {
         tabList,
         txPairList
     },
-
     beforeMount() {
         this.init();
     },
@@ -214,6 +212,7 @@ export default {
     methods: {
         init() {
             defaultPairTimer = defaultPairTimer || new subTask('defaultPair', ({ args, data }) => {
+                console.log(data);
                 if (args.ttoken !== this.toTokenId) {
                     return;
                 }

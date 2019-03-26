@@ -128,7 +128,7 @@ export default {
             const viteAmount = BigNumber.toMin(viteBalance, this.viteTokenInfo.decimals);
             const amount = BigNumber.toMin(this.spend, this.viteTokenInfo.decimals);
 
-            return BigNumber.compared(viteAmount, amount) > 0;
+            return BigNumber.compared(viteAmount, amount) >= 0;
         }
     },
     watch: {

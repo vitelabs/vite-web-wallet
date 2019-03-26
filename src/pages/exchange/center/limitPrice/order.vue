@@ -48,6 +48,7 @@
 <script>
 import viteInput from 'components/viteInput';
 import powProcess from 'components/powProcess';
+import { quotaConfirm } from 'components/quota/index';
 import BigNumber from 'utils/bigNumber';
 import { newOrder } from 'services/exchange';
 
@@ -59,7 +60,7 @@ export default {
             default: ''
         }
     },
-    created() {
+    mounted() {
         this.price = this.activeTxPair && this.activeTxPair.price ? this.activeTxPair.price : '';
     },
     data() {
@@ -78,7 +79,7 @@ export default {
     },
     watch: {
         activeTxPair: function () {
-            if (this.price) {
+            if (+this.price) {
                 return;
             }
             this.price = this.activeTxPair && this.activeTxPair.price ? this.activeTxPair.price : '';
@@ -366,36 +367,21 @@ export default {
                     return;
                 }
 
-                this.$confirm({
-                    showMask: true,
-                    title: this.$t('quotaConfirmPoW.title'),
-                    closeBtn: {
-                        show: true,
-                        click: () => {
+                quotaConfirm(true, {
+                    closeBtnClick: () => {
+                        this.isLoading = false;
+                    },
+                    rightBtnClick: () => {
+                        this.$refs.powProcess.startPowTx(err.accountBlock, 0).then(() => {
                             this.isLoading = false;
-                        }
-                    },
-                    leftBtn: {
-                        text: this.$t('quotaConfirmPoW.leftBtn.text'),
-                        click: () => {
-                            this.$router.push({ name: 'walletQuota' });
-                        }
-                    },
-                    rightBtn: {
-                        text: this.$t('quotaConfirmPoW.rightBtn.text'),
-                        click: () => {
-                            this.$refs.powProcess.startPowTx(err.accountBlock, 0).then(() => {
-                                this.isLoading = false;
-                                this.clearAll();
-                                this.$toast(this.$t('exchange.newOrderSuccess'));
-                            }).catch(err => {
-                                this.isLoading = false;
-                                this.$toast(this.$t('exchange.newOrderFail'), err);
-                                console.warn(err);
-                            });
-                        }
-                    },
-                    content: this.$t('quotaConfirmPoW.content')
+                            this.clearAll();
+                            this.$toast(this.$t('exchange.newOrderSuccess'));
+                        }).catch(err => {
+                            this.isLoading = false;
+                            this.$toast(this.$t('exchange.newOrderFail'), err);
+                            console.warn(err);
+                        });
+                    }
                 });
             });
         }

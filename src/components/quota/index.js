@@ -1,18 +1,34 @@
 import Vue from 'vue';
-import quotaComponent from './quota.vue';
+import quotaCancelComponent from './cancel.vue';
+import quotaPowComponent from './pow.vue';
 
-const QuotaComponent = Vue.extend(quotaComponent);
-let instance;
+const QuotaCancelComponent = Vue.extend(quotaCancelComponent);
+const QuotaPowComponent = Vue.extend(quotaPowComponent);
+let cancelInstance;
+let powInstance;
 
 export function initQuotaConfirm(i18n, router) {
-    instance = new QuotaComponent({
+    cancelInstance = new QuotaCancelComponent({
+        el: document.createElement('div'),
+        i18n,
+        router
+    });
+    powInstance = new QuotaPowComponent({
         el: document.createElement('div'),
         i18n,
         router
     });
 }
 
-export function quotaConfirm({
+export function quotaConfirm(pow = false, config) {
+    if (!pow) {
+        quotaConfirmCancel(config);
+        return;
+    }
+    quotaConfirmPow(config);
+}
+
+function quotaConfirmCancel({
     showMask = true,
     operate,
     cancel = () => {},
@@ -20,25 +36,56 @@ export function quotaConfirm({
 }) {
     const _close = cb => {
         try {
-            document.body.removeChild(instance.$el);
+            document.body.removeChild(cancelInstance.$el);
         } catch (err) {
             console.warn(err);
         }
         cb && cb();
     };
 
-    instance.showMask = showMask;
-    instance.operate = operate;
-    instance.cancel = () => {
+    cancelInstance.showMask = showMask;
+    cancelInstance.operate = operate;
+    cancelInstance.cancel = () => {
         _close();
         cancel && cancel();
     };
-    instance.submit = () => {
+    cancelInstance.submit = () => {
         _close();
         submit && submit();
     };
 
-    document.body.appendChild(instance.$el);
+    document.body.appendChild(cancelInstance.$el);
 
     return true;
+}
+
+
+function quotaConfirmPow({
+    showMask = true,
+    closeBtnClick = () => {},
+    rightBtnClick = () => {}
+}) {
+    const _close = cb => {
+        try {
+            document.body.removeChild(powInstance.$el);
+        } catch (err) {
+            console.warn(err);
+        }
+        cb && cb();
+    };
+
+    powInstance.showMask = showMask;
+    powInstance.leftBtnClick = () => {
+        _close();
+    };
+    powInstance.closeBtnClick = () => {
+        _close();
+        closeBtnClick && closeBtnClick();
+    };
+    powInstance.rightBtnClick = () => {
+        _close();
+        rightBtnClick && rightBtnClick();
+    };
+
+    document.body.appendChild(powInstance.$el);
 }

@@ -1,36 +1,29 @@
 <template>
     <div class="ex_tb">
         <div class="head-row">
-            <div
-                v-for="(h) in $t('exchangeAssets.table.heads')"
-                :key="h"
-            >{{h.replace("#tokenSymbol#","vite")}}
+            <div v-for="(h) in $t('exchangeAssets.table.heads')"
+                 :key="h">
+                {{h.replace("#tokenSymbol#","vite")}}
             </div>
             <div></div>
             <div></div>
             <div></div>
         </div>
         <div class="row-container">
-            <div
-                class="row"
-                v-for="token in list"
-                :key="token.id"
-            >
+            <div class="row" v-for="token in list" :key="token.id">
                 <div>{{token.symbol}}</div>
                 <div>{{Number((token.available+token.lock).toFixed(8))}}</div>
                 <div>{{token.available}}</div>
                 <div>{{token.lock||0}}</div>
                 <div>{{token.worth}}</div>
                 <div v-unlock-account @unlocked="recharge(token.id)"
-                     class="click-able"
-                >{{$t("exchangeAssets.table.rowMap.recharge")}}</div>
+                     class="click-able">
+                    {{$t("exchangeAssets.table.rowMap.recharge")}}</div>
                 <div v-unlock-account @unlocked="withdraw(token.id)"
-                     class="click-able"
-                >{{$t("exchangeAssets.table.rowMap.withdraw")}}</div>
-                <div
-                    @click="detail(token.id)"
-                    class="click-able"
-                >{{$t("exchangeAssets.table.rowMap.detail")}}</div>
+                     class="click-able">
+                    {{$t("exchangeAssets.table.rowMap.withdraw")}}</div>
+                <div @click="detail(token.id)" class="click-able">
+                    {{$t("exchangeAssets.table.rowMap.detail")}}</div>
             </div>
         </div>
 
@@ -74,6 +67,7 @@ import getTokenIcon from 'utils/getTokenIcon';
 import viteInput from 'components/viteInput';
 import confirm from 'components/confirm.vue';
 import powProcess from 'components/powProcess';
+import { quotaConfirm } from 'components/quota/index';
 import debounce from 'lodash/debounce';
 import d from 'dayjs';
 
@@ -121,7 +115,10 @@ export default {
         },
         detail(tokenId) {
             this.detailConfirm = true;
-            chargeDetail({ address: this.addr, tokenId }).then(data => {
+            chargeDetail({
+                address: this.addr,
+                tokenId
+            }).then(data => {
                 this.detailData = data.records;
             });
         },
@@ -135,13 +132,14 @@ export default {
         },
         showConfirm({ tokenId, type }) {
             this.opNumber = '';
+
             this.c = {};
-            const t = Object.assign({},
-                this.$t(`exchangeAssets.confirm${ type }`));
+            const t = Object.assign({}, this.$t(`exchangeAssets.confirm${ type }`));
             t.tokenId = tokenId;
             t.type = type;
             t.icon = this.balance[tokenId].icon;
             this.c = t;
+
             this.confirmShow = true;
         },
         confirmClick() {
@@ -154,26 +152,21 @@ export default {
 
             const failSubmit = e => {
                 const code = e && e.error ? e.error.code || -1 : e ? e.code : -1;
+
                 if (code !== -35002) {
                     this.$toast(this.$t(`exchangeAssets.confirm${ c.type }.failToast`), e);
                     return;
                 }
+
                 const startTime = new Date().getTime();
-                const powTxt = Object.assign({},
-                    this.$t('quotaConfirmPoW'));
-                powTxt.leftBtn.click = () => {
-                    this.$router.push({ name: 'walletQuota' });
-                };
-                (powTxt.rightBtn.click = () => {
-                    this.$refs.pow
-                        .startPowTx(e.accountBlock,
-                            startTime,
-                            VoteDifficulty)
-                        .then(successSubmit)
-                        .catch(failSubmit);
-                }),
-                (powTxt.closeBtn = { show: true });
-                this.$confirm(powTxt);
+                quotaConfirm(true, {
+                    rightBtnClick: () => {
+                        this.$refs.pow
+                            .startPowTx(e.accountBlock, startTime, VoteDifficulty)
+                            .then(successSubmit)
+                            .catch(failSubmit);
+                    }
+                });
             };
 
             const successSubmit = () => {
@@ -200,33 +193,29 @@ export default {
             });
         },
         testAmount() {
-            const amountBalance
-                = this.c.type.toLowerCase() === 'recharge'
-                    ? this.balance[this.c.tokenId].balance
-                    : this.balance[this.c.tokenId].available;
+            const amountBalance = this.c.type.toLowerCase() === 'recharge'
+                ? this.balance[this.c.tokenId].balance
+                : this.balance[this.c.tokenId].available;
             const decimals = this.balance[this.c.tokenId].decimals;
             const result = this.$validAmount(this.opNumber, decimals);
+
             if (!result) {
                 this.c.errTips = this.$t('hint.amtFormat');
-
                 return false;
             }
 
             if (BigNumber.isEqual(this.opNumber, 0)) {
                 this.c.errTips = this.$t('wallet.hint.amount');
-
                 return false;
             }
 
             // Const amount = BigNumber.toMin(this.opNumber, decimals);
             if (BigNumber.compared(amountBalance, this.opNumber) < 0) {
                 this.c.errTips = this.$t('hint.insufficientBalance');
-
                 return false;
             }
 
             this.c.errTips = '';
-
             return true;
         }
     },
@@ -262,9 +251,9 @@ export default {
                 if (res[t]) {
                     res[t].icon = walletB[t].icon;
                     res[t].balance = Number(walletB[t].balance);
-
                     return;
                 }
+
                 res[t] = {
                     available: 0,
                     lock: 0,
@@ -279,9 +268,9 @@ export default {
                 res[t].icon = res[t].icon || getTokenIcon(res[t].id);
                 if (!this.$store.state.exchangeRate.rateMap[t]) {
                     res[t].worth = '-';
-
                     return;
                 }
+
                 res[t].worth = `${ this.$i18n.locale === 'zh' ? '¥' : '$' }${ (
                     this.$store.state.exchangeRate.rateMap[t][
                         this.$i18n.locale === 'zh' ? 'cny' : 'usd'
@@ -297,8 +286,7 @@ export default {
                 .map(k => this.balance[k])
                 .filter(v => {
                     const NOTnoZero = this.filter.hideZero && (v.available + v.lock) === 0;
-                    const NOTmatchKey
-                        = this.filter.filterKey
+                    const NOTmatchKey = this.filter.filterKey
                         && !v.symbol.match(new RegExp(this.filter.filterKey, 'i'));
 
                     return !(NOTnoZero || NOTmatchKey);
@@ -307,6 +295,7 @@ export default {
     }
 };
 </script>
+
 <style lang="scss" scoped>
 @import "~assets/scss/confirmInput.scss";
 @import "../components/table.scss";
@@ -322,7 +311,6 @@ export default {
         cursor: pointer;
         top: 10px;
         right: 6px;
-
         &.rotate {
             transform: rotate(360deg);
             transition: all ease-in-out 1s;
@@ -332,7 +320,6 @@ export default {
 
 @include rowWith {
     width: 8%;
-
     &:first-child,
     &:nth-child(3),
     &:nth-child(4),

@@ -71,6 +71,7 @@ import secTitle from 'components/secTitle';
 import loading from 'components/loading';
 import confirm from 'components/confirm';
 import powProcess from 'components/powProcess';
+import { quotaConfirm } from 'components/quota/index';
 import { timer } from 'utils/asyncFlow';
 import BigNumber from 'utils/bigNumber';
 import { constant } from '@vite/vitejs';
@@ -177,22 +178,20 @@ export default {
 
             const failCancel = e => {
                 const code = e && e.error ? e.error.code || -1 : e ? e.code : -1;
-                if (code === -35002) {
-                    const startTime = new Date().getTime();
-                    const c = Object.assign({}, this.$t('quotaConfirmPoW'));
-                    c.leftBtn.click = () => {
-                        this.$router.push({ name: 'walletQuota' });
-                    };
-                    (c.rightBtn.click = () => {
+
+                if (code !== -35002) {
+                    this.$toast(this.$t('walletVote.section1.cancelVoteErr'), e);
+                    return;
+                }
+
+                const startTime = new Date().getTime();
+                quotaConfirm(true, {
+                    rightBtnClick: () => {
                         this.$refs.pow.startPowTx(e.accountBlock, startTime, VoteDifficulty)
                             .then(successCancel)
                             .catch(failCancel);
-                    }),
-                    (c.closeBtn = { show: true });
-                    this.$confirm(c);
-                } else {
-                    this.$toast(this.$t('walletVote.section1.cancelVoteErr'), e);
-                }
+                    }
+                });
             };
 
             const sendCancel = () => {
@@ -224,25 +223,26 @@ export default {
 
             const failVote = e => {
                 const code = e && e.error ? e.error.code || -1 : e ? e.code : -1;
-                if (code === -35002) {
-                    const startTime = Date.now();
-                    const c = Object.assign({}, this.$t('quotaConfirmPoW'));
-                    c.leftBtn.click = () => {
-                        this.$router.push({ name: 'walletQuota' });
-                    };
-                    c.rightBtn.click = () => {
+
+                if (code === -36001) {
+                    this.$toast(this.$t('walletVote.addrNoExistErr'));
+                    return;
+                }
+
+                if (code !== -35002) {
+                    console.warn(e);
+                    this.$toast(this.$t('walletVote.section2.voteErr'), e);
+                    return;
+                }
+
+                const startTime = Date.now();
+                quotaConfirm(true, {
+                    rightBtnClick: () => {
                         this.$refs.pow.startPowTx(e.accountBlock, startTime, VoteDifficulty)
                             .then(successVote)
                             .catch(failVote);
-                    };
-                    c.closeBtn = { show: true };
-                    this.$confirm(c);
-                } else if (code === -36001) {
-                    this.$toast(this.$t('walletVote.addrNoExistErr'));
-                } else {
-                    console.warn('vote', e);
-                    this.$toast(this.$t('walletVote.section2.voteErr'), e);
-                }
+                    }
+                });
             };
 
             const sendVote = () => {
@@ -266,8 +266,7 @@ export default {
                 }),
                 submit: sendVote,
                 exchange: this.haveVote
-            },
-            true);
+            }, true);
         }
     },
     computed: {
@@ -292,14 +291,13 @@ export default {
             }
 
             const token = tokenList[this.tokenInfo.tokenId] || {};
-
             return token.balance || 0;
         },
         haveVote() {
             return (
                 this.voteList[0]
-        && (this.voteList[0].voteStatus === 'voting'
-          || this.voteList[0].voteStatus === 'voted')
+                && (this.voteList[0].voteStatus === 'voting'
+                    || this.voteList[0].voteStatus === 'voted')
             );
         },
         voteList() {
@@ -357,7 +355,6 @@ export default {
                 // Tans
                 v.voteNum = BigNumber.toBasic(v.voteNum, token.decimals) || 0;
                 v.operate = this.$t('walletVote.section2.operateBtn');
-
                 return v;
             }).filter(v => {
                 if (this.filterKey.trim() === '') {
