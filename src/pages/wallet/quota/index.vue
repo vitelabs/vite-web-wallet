@@ -172,21 +172,18 @@ export default {
                 amount
             }).then(() => {
                 cb && cb(true);
-            })
-                .catch(err => {
-                    console.warn(err);
-                    if (err && err.error && err.error.code && err.error.code === -35002) {
-                        this.$refs.powProcess.startPowTx(err.accountBlock, 0).then(() => {
-                            cb && cb(true);
-                        })
-                            .catch(() => {
-                                cb && cb(false, err);
-                            });
-
-                        return;
-                    }
-                    cb && cb(false, err);
-                });
+            }).catch(err => {
+                console.warn(err);
+                if (err && err.error && err.error.code && err.error.code === -35002) {
+                    this.$refs.powProcess.startPowTx(err.accountBlock, 0).then(() => {
+                        cb && cb(true);
+                    }).catch(() => {
+                        cb && cb(false, err);
+                    });
+                    return;
+                }
+                cb && cb(false, err);
+            });
         }
     }
 };

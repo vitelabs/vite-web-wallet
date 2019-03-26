@@ -1,4 +1,7 @@
 import { klineHistory } from 'services/exchange';
+import { subTask } from 'utils/proto/subTask';
+
+const timers = {};
 
 export default class dataFeeds {
     constructor(activeTxPair) {
@@ -87,7 +90,6 @@ export default class dataFeeds {
         } catch (err) {
             console.warn(err);
             onErrorCallback(err);
-
             return;
         }
 
@@ -172,17 +174,57 @@ export default class dataFeeds {
         onHistoryCallback(_list, { noData: false });
     }
 
-    subscribeBars(symbolInfo, resolution, onRealtimeCallback, subscriberUID, onResetCacheNeededCallback) {
-        console.log(symbolInfo, resolution, onRealtimeCallback, subscriberUID, onResetCacheNeededCallback);
+    subscribeBars(symbolInfo, resolution, onRealtimeCallback, subscriberUID) {
+        // onResetCacheNeededCallback
+        this.unsubscribeBars(subscriberUID);
 
-        // Return onRealtimeCallback(this.list[resolution]);
-        return undefined;
+        console.log('subscribeBars', resolution, subscriberUID);
+
+        timers[subscriberUID] = new subTask('kline', ({ args, data }) => {
+            if (args.ttoken !== this.activeTxPair.ttoken
+                || args.ftoken !== this.activeTxPair.ftoken
+                || args.resolution !== resolution) {
+                this.unsubscribeBars(subscriberUID);
+                return;
+            }
+            onRealtimeCallback(data);
+        });
+
+        const timeList = {
+            '1': 'minute',
+            '30': 'minute30',
+            '60': 'hour',
+            '360': 'hour6',
+            '720': 'hour12',
+            '1D': 'day',
+            '1W': 'week'
+        };
+        timers[subscriberUID].start(() => {
+            return {
+                ttoken: this.activeTxPair.ttoken,
+                ftoken: this.activeTxPair.ftoken,
+                resolution: timeList[resolution]
+            };
+        });
     }
 
     unsubscribeBars(subscriberUID) {
-        console.log(subscriberUID);
+        if (!subscriberUID) {
+            for (const _s in timers) {
+                timers[_s] && timers[_s].stop();
+                timers[_s] = null;
+            }
+            return;
+        }
 
-        return undefined;
+        if (!timers[subscriberUID]) {
+            return;
+        }
+
+        console.log('unsubscribeBars', subscriberUID);
+
+        timers[subscriberUID].stop();
+        timers[subscriberUID] = null;
     }
 
     calculateHistoryDepth() {

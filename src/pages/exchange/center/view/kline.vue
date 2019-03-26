@@ -6,6 +6,8 @@
 import { widget } from 'charting/charting_library.min';
 import datafeed from './datafeeds.js';
 
+let datafeedObj;
+
 export default {
     props: {
         showView: {
@@ -49,6 +51,8 @@ export default {
     methods: {
         init() {
             this.tvWidget && this.tvWidget.remove();
+            datafeedObj && datafeedObj.unsubscribeBars();
+            datafeedObj = new datafeed(this.activeTxPair);
 
             const widgetOptions = {
                 fullscreen: false,
@@ -57,7 +61,7 @@ export default {
                 toolbar_bg: '#f4f7f9',
                 allow_symbol_change: true,
                 container_id: 'tv_chart_container',
-                datafeed: new datafeed(this.activeTxPair),
+                datafeed: datafeedObj,
                 library_path: 'charting_library/',
                 locale: this.$i18n.locale,
                 drawings_access: {
@@ -104,8 +108,7 @@ export default {
                 studies.push(id);
                 const state = 1;
                 for (let i = 0; i < studies.length; i++) {
-                    this.tvWidget.chart().getStudyById(studies[i])
-                        .setVisible(state);
+                    this.tvWidget.chart().getStudyById(studies[i]).setVisible(state);
                 }
             });
         },
