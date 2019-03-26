@@ -1,9 +1,9 @@
 <template>
-    <confirm :title="$t('quotaConfirmCancel.title')" :showMask="showMask"
-             :leftBtnTxt="$t('quotaConfirmCancel.leftBtn', { 'operate': operate })"
+    <confirm :title="$t('quotaConfirm.title')" :showMask="showMask"
+             :leftBtnTxt="$t('quotaConfirm.noOperate', { 'operate': operate })"
              :leftBtnClick="_cancel"
-             :rightBtnTxt="$t('quotaConfirmCancel.rightBtn')" :rightBtnClick="_submit">
-        {{ $t('quotaConfirmCancel.describe', { 'operate': operate }) }}
+             :rightBtnTxt="$t('quotaConfirm.goQuota')" :rightBtnClick="_submit">
+        {{ $t('quotaConfirm.cancelContent', { 'operate': operate }) }}
     </confirm>
 </template>
 

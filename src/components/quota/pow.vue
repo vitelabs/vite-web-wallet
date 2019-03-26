@@ -1,11 +1,11 @@
 <template>
-    <confirm :title="$t('quotaConfirmPoW.title')" :showMask="showMask"
-             :leftBtnTxt="$t('quotaConfirmPoW.leftBtn.text')"
+    <confirm :title="$t('quotaConfirm.title')" :showMask="showMask"
+             :leftBtnTxt="$t('quotaConfirm.goQuota')"
              :leftBtnClick="_leftBtnClick"
-             :rightBtnTxt="$t('quotaConfirmPoW.rightBtn.text')"
+             :rightBtnTxt="$t('quotaConfirm.runPow')"
              :rightBtnClick="rightBtnClick"
              :closeIcon="true" :close="closeBtnClick">
-        {{ $t('quotaConfirmPoW.content') }}
+        {{ $t('quotaConfirm.powContent') }}
     </confirm>
 </template>
 

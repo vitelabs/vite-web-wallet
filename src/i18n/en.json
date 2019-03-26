@@ -37,7 +37,17 @@
         "36002": "System verify failed, please try again later（36002）",
         "36003": "System verify failed, please try again later（36003）",
         "36004": "System verify failed, please try again later（36004）",
-        "36005": "Snapshot block height is illegal, please try again later"
+        "36005": "Snapshot block height is illegal, please try again later",
+        "37001": "订单号格式错误",
+        "37002": "订单类型错误",
+        "37003": "订单价格格式错误",
+        "37004": "订单交易数量异常",
+        "37005": "订单交易金额过小",
+        "37006": "该交易市场已经存在",
+        "37007": "订单指定交易市场不存在",
+        "37008": "查询订单信息异常",
+        "37009": "撤销订单不属于当前地址",
+        "37010": "该订单状态不可以撤销"
     },
     "txType": {
         "0": "SBP Registration",
@@ -110,21 +120,13 @@
         "placeholder": "Please input password of wallet",
         "unlockAcc": "Please input password to unlock {name} account"
     },
-    "quotaConfirmCancel": {
+    "quotaConfirm": {
         "title": "Insufficient Quota",
-        "describe": "You cannot {operate} due to insufficient TPS quota. You need to stake VITE for quota to {operate}",
-        "leftBtn": "Not {operate} yet",
-        "rightBtn": "Stake VITE"
-    },
-    "quotaConfirmPoW": {
-        "title": "Insufficient Quota",
-        "content": "your left quota turn out to be insufficient, you can acquire more quota by running PoW or staking VITE",
-        "leftBtn": {
-            "text": "Stake VITE"
-        },
-        "rightBtn": {
-            "text": "Run PoW"
-        }
+        "cancelContent": "You cannot {operate} due to insufficient TPS quota. You need to stake VITE for quota to {operate}",
+        "powContent": "your left quota turn out to be insufficient, you can acquire more quota by running PoW or staking VITE",
+        "goQuota": "Stake VITE",
+        "noOperate": "Not {operate} yet",
+        "runPow": "Run PoW"
     },
     "mnemonic": {
         "title": "Mnemonic",
@@ -609,7 +611,7 @@
                 "statusMap": {
                     "1": "In Order",
                     "2": "Completed",
-                    "3": "Cancel"
+                    "3": "已撤销"
                 },
                 "detail": "Details"
             }

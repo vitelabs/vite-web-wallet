@@ -79,7 +79,7 @@ export default {
     },
     watch: {
         activeTxPair: function () {
-            if (this.price) {
+            if (+this.price) {
                 return;
             }
             this.price = this.activeTxPair && this.activeTxPair.price ? this.activeTxPair.price : '';
