@@ -158,7 +158,7 @@ export default {
             }).catch(err => {
                 console.warn(err);
                 if (err && err.error && err.error.code && err.error.code === -35002) {
-                    quotaConfirm({ operate: this.$t('walletSBP.register') });
+                    quotaConfirm(false, { operate: this.$t('walletSBP.register') });
                     return;
                 }
                 this.$toast(this.$t('walletSBP.section1.registerFail'), err);
@@ -202,7 +202,7 @@ export default {
                         });
                     }).catch(err => {
                         if (err && err.error && err.error.code && err.error.code === -35002) {
-                            quotaConfirm({ operate: this.$t('walletSBP.cancel') });
+                            quotaConfirm(false, { operate: this.$t('walletSBP.cancel') });
                             return;
                         }
                         this.$toast(this.$t('walletSBP.section2.cancelFail'), err);

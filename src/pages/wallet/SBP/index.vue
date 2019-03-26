@@ -188,7 +188,7 @@ export default {
                 console.warn(err);
                 this.loading = false;
                 if (err && err.error && err.error.code && err.error.code === -35002) {
-                    quotaConfirm({ operate: this.$t('btn.edit') });
+                    quotaConfirm(false, { operate: this.$t('btn.edit') });
                     return;
                 }
                 this.$toast(this.$t('walletSBP.section2.updateFail'), err);

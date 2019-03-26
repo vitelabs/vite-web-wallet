@@ -233,18 +233,16 @@ export default {
                     operate: 1,
                     producer: producerAddr
                 });
-            })
-                .catch(err => {
-                    console.warn(err);
-                    this.loading = false;
+            }).catch(err => {
+                console.warn(err);
+                this.loading = false;
 
-                    if (err && err.error && err.error.code && err.error.code === -35002) {
-                        quotaConfirm({ operate: this.$t('walletSBP.register') });
-
-                        return;
-                    }
-                    this.$toast(this.$t('walletSBP.section1.registerFail'), err);
-                });
+                if (err && err.error && err.error.code && err.error.code === -35002) {
+                    quotaConfirm(false, { operate: this.$t('walletSBP.register') });
+                    return;
+                }
+                this.$toast(this.$t('walletSBP.section1.registerFail'), err);
+            });
         }
     }
 };

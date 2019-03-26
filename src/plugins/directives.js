@@ -36,7 +36,7 @@ export default {
 
                     if (wallet.isLogin) {
                         funcName && vnode.context && vnode.context[funcName](e);
-                        vnode.data.on && vnode.data.on.unlocked();
+                        vnode.data.on && vnode.data.on.unlocked && vnode.data.on.unlocked();
                         return;
                     }
 
@@ -46,7 +46,7 @@ export default {
                         return;
                     }
 
-                    vnode.data.on && vnode.data.on.noactiveacc();
+                    vnode.data.on && vnode.data.on.noactiveacc && vnode.data.on.noactiveacc();
                 });
             },
             unbind() {
