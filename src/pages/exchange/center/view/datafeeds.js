@@ -175,22 +175,7 @@ export default class dataFeeds {
     }
 
     subscribeBars(symbolInfo, resolution, onRealtimeCallback, subscriberUID) {
-        // onResetCacheNeededCallback
         this.unsubscribeBars(subscriberUID);
-
-        console.log('subscribeBars', resolution, subscriberUID);
-
-        timers[subscriberUID] = new subTask('kline', ({ args, data }) => {
-            console.log(data);
-            if (args.ttoken !== this.activeTxPair.ttoken
-                || args.ftoken !== this.activeTxPair.ftoken
-                || args.resolution !== resolution) {
-                this.unsubscribeBars(subscriberUID);
-                return;
-            }
-            console.log(data);
-            onRealtimeCallback(data);
-        });
 
         const timeList = {
             '1': 'minute',
@@ -201,11 +186,31 @@ export default class dataFeeds {
             '1D': 'day',
             '1W': 'week'
         };
+        resolution = timeList[resolution];
+
+        timers[subscriberUID] = new subTask('kline', ({ args, data }) => {
+            if (args.ttoken !== this.activeTxPair.ttoken
+                || args.ftoken !== this.activeTxPair.ftoken
+                || args.resolution !== resolution) {
+                this.unsubscribeBars(subscriberUID);
+                return;
+            }
+
+            data && onRealtimeCallback({
+                time: data.t * 1000,
+                close: data.c,
+                open: data.o,
+                high: data.h,
+                low: data.l,
+                volume: data.v
+            });
+        });
+
         timers[subscriberUID].start(() => {
             return {
                 ttoken: this.activeTxPair.ttoken,
                 ftoken: this.activeTxPair.ftoken,
-                resolution: timeList[resolution]
+                resolution
             };
         });
     }
@@ -222,8 +227,6 @@ export default class dataFeeds {
         if (!timers[subscriberUID]) {
             return;
         }
-
-        console.log('unsubscribeBars', subscriberUID);
 
         timers[subscriberUID].stop();
         timers[subscriberUID] = null;

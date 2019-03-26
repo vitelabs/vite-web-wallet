@@ -164,7 +164,6 @@ export class subTask extends timer {
         const args = this.args;
         const key = this.subKey;
 
-        console.log(this.subKey);
         client.sub(this.subKey, data => {
             if (this.subKey !== key) {
                 return;

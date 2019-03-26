@@ -167,8 +167,6 @@ class account {
     }
 
     save(index = -1) {
-        console.log('account save', index);
-
         this.name = checkName(this.name);
         if (!this.account && this.type === AccountType.keystore) {
             acc.add({

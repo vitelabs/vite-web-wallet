@@ -21,7 +21,6 @@ export default {
             }
 
             const activeAccount = this.$wallet.getActiveAccount();
-            console.log(activeAccount);
             activeAccount && activeAccount.unlockAccount();
         },
         rightClick() {
