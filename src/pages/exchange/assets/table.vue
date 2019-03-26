@@ -55,8 +55,6 @@
                :heads="$t('exchangeAssets.confirmTable.heads')"
                :title="$t('exchangeAssets.confirmTable.title')"
                :close="close"></alert>
-
-        <powProcess ref="pow"></powProcess>
     </div>
 </template>
 
@@ -66,7 +64,7 @@ import BigNumber from 'utils/bigNumber';
 import getTokenIcon from 'utils/getTokenIcon';
 import viteInput from 'components/viteInput';
 import confirm from 'components/confirm.vue';
-import powProcess from 'components/powProcess';
+import { powProcess } from 'components/pow/index';
 import { quotaConfirm } from 'components/quota/index';
 import debounce from 'lodash/debounce';
 import d from 'dayjs';
@@ -76,7 +74,7 @@ import { deposit, withdraw, chargeDetail } from 'services/exchange';
 const VoteDifficulty = '201564160';
 
 export default {
-    components: { confirm, alert, powProcess, viteInput },
+    components: { confirm, alert, viteInput },
     props: { filter: { type: Object } },
     beforeMount() {
         this.acc = this.$wallet.getActiveAccount();
@@ -161,10 +159,11 @@ export default {
                 const startTime = new Date().getTime();
                 quotaConfirm(true, {
                     rightBtnClick: () => {
-                        this.$refs.pow
-                            .startPowTx(e.accountBlock, startTime, VoteDifficulty)
-                            .then(successSubmit)
-                            .catch(failSubmit);
+                        powProcess({
+                            accountBlock: e.accountBlock,
+                            startTime,
+                            defficulty: VoteDifficulty
+                        }).then(successSubmit).catch(failSubmit);
                     }
                 });
             };

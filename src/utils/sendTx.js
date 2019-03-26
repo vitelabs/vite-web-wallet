@@ -1,5 +1,6 @@
 import { wallet } from 'utils/wallet';
 import { getPowNonce } from 'services/pow';
+import { quotaConfirm } from 'components/quota/index';
 
 const defaultConfig = {
     pow: {
@@ -44,7 +45,7 @@ export default async function sendTx(methodName, data, config = defaultConfig) {
             throw err;
         }
 
-        return goonConfirm(activeAccount, err, config);
+        return goonConfirm(err, config);
     }
 }
 
@@ -74,11 +75,22 @@ async function goonConfirm(err, config) {
         return;
     }
 
+    // ???
+    if (config.quota) {
+        quotaConfirm(config.pow.isShow, config.confirm);
+        return;
+    }
+
     console.log(config);
     // let isShowConfirm = config.quota
 
     accountBlock = await getPowAccountBlock(accountBlock);
+    // let activeAccount = wallet.getActiveAccount;
 
+    // if (!activeAccount
+    //     || activeAccount.getDefaultAddr() !== accountBlock.accountAddress) {
+    //     return;
+    // }
     // activeAccount.sendRawTx(accountBlock).then(() => {
     //     this.$toast('Mintage success');
     // }).catch(err => {

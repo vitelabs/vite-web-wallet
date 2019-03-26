@@ -21,6 +21,7 @@ import resaveAccKeystore from 'utils/resaveAccKeystore.js';
 
 import { initPwdConfirm } from 'components/password/index.js';
 import { initQuotaConfirm } from 'components/quota/index.js';
+import { initPowProcess } from 'components/pow/index.js';
 
 // $onKeyDown $offKeyDown $validAmount $trim $toast $confirm $statistics $wallet
 Vue.use(plugin);
@@ -49,6 +50,7 @@ setTimeout(() => {
 
     initPwdConfirm(i18n);
     initQuotaConfirm(i18n, router);
+    initPowProcess(i18n);
     new Vue({
         el: '#app',
         components: { App },

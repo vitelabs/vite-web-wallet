@@ -42,16 +42,14 @@
                 <vite-input v-model="message" :placeholder="$t('wallet.placeholder.remarks')"></vite-input>
             </div>
         </confirm>
-
-        <pow-process ref="powProcess" :isShowCancel="true" :cancel="closeTrans"></pow-process>
     </div>
 </template>
 
 <script>
 import Vue from 'vue';
 import confirm from 'components/confirm';
-import powProcess from 'components/powProcess';
 import viteInput from 'components/viteInput';
+import { powProcess } from 'components/pow/index';
 import { quotaConfirm } from 'components/quota/index';
 import BigNumber from 'utils/bigNumber';
 import { encoder, address } from 'utils/tools';
@@ -59,7 +57,7 @@ import { encoder, address } from 'utils/tools';
 const SendDifficulty = '157108864';
 
 export default {
-    components: { powProcess, confirm, viteInput },
+    components: { confirm, viteInput },
     props: {
         token: {
             type: Object,
@@ -256,7 +254,15 @@ export default {
             };
 
             this.loading = true;
-            this.$refs.powProcess && this.$refs.powProcess.startPowTx(accountBlock, startTime, SendDifficulty).then(() => {
+            powProcess({
+                accountBlock,
+                startTime,
+                difficulty: SendDifficulty,
+                isShowCancel: true,
+                cancel: () => {
+                    this.closeTrans();
+                }
+            }).then(() => {
                 this.transSuccess();
             }).catch((err, type) => {
                 console.warn(type, err);
