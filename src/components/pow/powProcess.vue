@@ -73,12 +73,12 @@ export default {
                 accountBlock.prevHash = null;
                 accountBlock.height = null;
                 accountBlock.snapshotHash = null;
+
                 try {
                     accountBlock = await $ViteJS.buildinTxBlock.getAccountBlock.async(accountBlock);
                 } catch (e) {
                     this.isShow = false;
                     this.$emit('pow-finish');
-
                     return Promise.reject(e, 0);
                 }
             }

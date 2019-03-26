@@ -1,6 +1,5 @@
 <template>
     <div class="vote __wrapper">
-        <powProcess ref="pow"></powProcess>
         <secTitle></secTitle>
 
         <loading v-if="loadingToken" class="loading"></loading>
@@ -70,7 +69,7 @@ import search from 'components/search';
 import secTitle from 'components/secTitle';
 import loading from 'components/loading';
 import confirm from 'components/confirm';
-import powProcess from 'components/powProcess';
+import { powProcess } from 'components/pow/index';
 import { quotaConfirm } from 'components/quota/index';
 import { timer } from 'utils/asyncFlow';
 import BigNumber from 'utils/bigNumber';
@@ -80,7 +79,7 @@ import $ViteJS from 'utils/viteClient';
 const VoteDifficulty = '201564160';
 
 export default {
-    components: { secTitle, tooltips, search, loading, confirm, powProcess },
+    components: { secTitle, tooltips, search, loading, confirm },
     beforeMount() {
         this.tokenInfo = this.$store.getters.viteTokenInfo;
 
@@ -187,9 +186,11 @@ export default {
                 const startTime = new Date().getTime();
                 quotaConfirm(true, {
                     rightBtnClick: () => {
-                        this.$refs.pow.startPowTx(e.accountBlock, startTime, VoteDifficulty)
-                            .then(successCancel)
-                            .catch(failCancel);
+                        powProcess({
+                            accountBlock: e.accountBlock,
+                            startTime,
+                            difficulty: VoteDifficulty
+                        }).then(successCancel).catch(failCancel);
                     }
                 });
             };
@@ -238,9 +239,11 @@ export default {
                 const startTime = Date.now();
                 quotaConfirm(true, {
                     rightBtnClick: () => {
-                        this.$refs.pow.startPowTx(e.accountBlock, startTime, VoteDifficulty)
-                            .then(successVote)
-                            .catch(failVote);
+                        powProcess({
+                            accountBlock: e.accountBlock,
+                            startTime,
+                            difficulty: VoteDifficulty
+                        }).then(successVote).catch(failVote);
                     }
                 });
             };

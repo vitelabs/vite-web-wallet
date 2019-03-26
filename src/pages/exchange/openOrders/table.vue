@@ -27,13 +27,12 @@
                 <div>{{ $t('hint.noData') }}</div>
             </div>
         </div>
-        <powProcess ref="pow"></powProcess>
     </div>
 </template>
 
 <script>
 import d from 'dayjs';
-import powProcess from 'components/powProcess';
+import { powProcess } from 'components/pow/index';
 import { quotaConfirm } from 'components/quota/index';
 import { subTask } from 'utils/proto/subTask';
 import { order, cancelOrder } from 'services/exchange';
@@ -42,7 +41,6 @@ const VoteDifficulty = '201564160';
 let task = null;
 
 export default {
-    components: { powProcess },
     props: {
         filterObj: {
             type: Object,
@@ -157,10 +155,11 @@ export default {
 
                 quotaConfirm(true, {
                     rightBtnClick: () => {
-                        this.$refs.pow
-                            .startPowTx(e.accountBlock, startTime, VoteDifficulty)
-                            .then(successSubmit)
-                            .catch(failSubmit);
+                        powProcess({
+                            accountBlock: e.accountBlock,
+                            startTime,
+                            difficulty: VoteDifficulty
+                        }).then(successSubmit).catch(failSubmit);
                     }
                 });
             };
