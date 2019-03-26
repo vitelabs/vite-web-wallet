@@ -145,11 +145,10 @@ export default {
 
                     activeAccount.sendRawTx(accountBlock).then(() => {
                         this.$toast('Mintage success');
-                    })
-                        .catch(err => {
-                            this.$toast(`Mintage fail. ${ err.error.message || err.error.msg }`);
-                            console.warn(err);
-                        });
+                    }).catch(err => {
+                        this.$toast(`Mintage fail. ${ err.error.message || err.error.msg }`);
+                        console.warn(err);
+                    });
                 }).catch(err => {
                     this.$toast('Pow failed.');
                     console.warn(err);
