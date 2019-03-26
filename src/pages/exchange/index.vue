@@ -64,7 +64,6 @@ export default {
             const account = this.$wallet.getActiveAccount();
             const address = account ? account.getDefaultAddr() : '';
 
-            console.log('lastestOrder', data);
             if (address !== args.address) {
                 return;
             }
