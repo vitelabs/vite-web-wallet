@@ -54,6 +54,10 @@ export default {
             datafeedObj && datafeedObj.unsubscribeBars();
             datafeedObj = new datafeed(this.activeTxPair);
 
+            if (!this.symbol) {
+                return;
+            }
+
             const widgetOptions = {
                 fullscreen: false,
                 autosize: true,

@@ -181,12 +181,14 @@ export default class dataFeeds {
         console.log('subscribeBars', resolution, subscriberUID);
 
         timers[subscriberUID] = new subTask('kline', ({ args, data }) => {
+            console.log(data);
             if (args.ttoken !== this.activeTxPair.ttoken
                 || args.ftoken !== this.activeTxPair.ftoken
                 || args.resolution !== resolution) {
                 this.unsubscribeBars(subscriberUID);
                 return;
             }
+            console.log(data);
             onRealtimeCallback(data);
         });
 

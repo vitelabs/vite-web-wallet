@@ -428,7 +428,7 @@
         "newOrderFail": "Order Failed",
         "depthView": "Depth",
         "klineView": "TradingView",
-        "dealReminder": "Your order ${amount} ${ttoken} (${ftoken}/${ttoken}) at ${time} is a complete deal, visit Order History to find out more.",
+        "dealReminder": "Your order {amount} {ttoken} ({ftoken}/{ttoken}) at {time} is a complete deal, visit Order History to find out more.",
         "dexToken": {
             "title": "Open Trading Pair",
             "fee": "Token listing Fees",

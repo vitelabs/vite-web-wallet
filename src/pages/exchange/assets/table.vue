@@ -67,6 +67,7 @@ import getTokenIcon from 'utils/getTokenIcon';
 import viteInput from 'components/viteInput';
 import confirm from 'components/confirm.vue';
 import powProcess from 'components/powProcess';
+import { quotaConfirm } from 'components/quota/index';
 import debounce from 'lodash/debounce';
 import d from 'dayjs';
 
@@ -158,18 +159,14 @@ export default {
                 }
 
                 const startTime = new Date().getTime();
-                const powTxt = Object.assign({}, this.$t('quotaConfirmPoW'));
-                powTxt.leftBtn.click = () => {
-                    this.$router.push({ name: 'walletQuota' });
-                };
-                powTxt.rightBtn.click = () => {
-                    this.$refs.pow
-                        .startPowTx(e.accountBlock, startTime, VoteDifficulty)
-                        .then(successSubmit)
-                        .catch(failSubmit);
-                };
-                powTxt.closeBtn = { show: true };
-                this.$confirm(powTxt);
+                quotaConfirm(true, {
+                    rightBtnClick: () => {
+                        this.$refs.pow
+                            .startPowTx(e.accountBlock, startTime, VoteDifficulty)
+                            .then(successSubmit)
+                            .catch(failSubmit);
+                    }
+                });
             };
 
             const successSubmit = () => {

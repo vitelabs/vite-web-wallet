@@ -238,7 +238,7 @@ export default {
                 this.loading = false;
 
                 if (err && err.error && err.error.code && err.error.code === -35002) {
-                    quotaConfirm({ operate: this.$t('walletSBP.register') });
+                    quotaConfirm(false, { operate: this.$t('walletSBP.register') });
                     return;
                 }
                 this.$toast(this.$t('walletSBP.section1.registerFail'), err);

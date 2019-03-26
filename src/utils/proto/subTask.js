@@ -42,8 +42,8 @@ export const orderQueryCurrentWs = function ({ ftoken, ttoken, address }) {
     return key;
 };
 
-export const klineWs = function ({ ftoken, ttoken, type }) {
-    const key = `market.${ ftoken }-${ ttoken }.kline.${ type }`;
+export const klineWs = function ({ ftoken, ttoken, resolution }) {
+    const key = `market.${ ftoken }-${ ttoken }.kline.${ resolution }`;
     return key;
 };
 
@@ -164,6 +164,7 @@ export class subTask extends timer {
         const args = this.args;
         const key = this.subKey;
 
+        console.log(this.subKey);
         client.sub(this.subKey, data => {
             if (this.subKey !== key) {
                 return;

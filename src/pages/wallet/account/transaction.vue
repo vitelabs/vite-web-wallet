@@ -52,6 +52,7 @@ import Vue from 'vue';
 import confirm from 'components/confirm';
 import powProcess from 'components/powProcess';
 import viteInput from 'components/viteInput';
+import { quotaConfirm } from 'components/quota/index';
 import BigNumber from 'utils/bigNumber';
 import { encoder, address } from 'utils/tools';
 
@@ -127,28 +128,14 @@ export default {
         },
         showQuota(accountBlock, startTime) {
             this.isShowTrans = false;
-            this.$confirm({
+            quotaConfirm(true, {
                 showMask: false,
-                title: this.$t('quotaConfirmPoW.title'),
-                closeBtn: {
-                    show: true,
-                    click: () => {
-                        this.isShowTrans = true;
-                    }
+                closeBtnClick: () => {
+                    this.isShowTrans = true;
                 },
-                leftBtn: {
-                    text: this.$t('quotaConfirmPoW.leftBtn.text'),
-                    click: () => {
-                        this.$router.push({ name: 'walletQuota' });
-                    }
-                },
-                rightBtn: {
-                    text: this.$t('quotaConfirmPoW.rightBtn.text'),
-                    click: () => {
-                        this.startPow(accountBlock, startTime);
-                    }
-                },
-                content: this.$t('quotaConfirmPoW.content')
+                rightBtnClick: () => {
+                    this.startPow(accountBlock, startTime);
+                }
             });
         },
 
