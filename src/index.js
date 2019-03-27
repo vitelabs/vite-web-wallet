@@ -7,30 +7,24 @@ import 'utils/viteClient.js';
 
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import VueI18n from 'vue-i18n';
 
 import App from 'pages/index.vue';
 import initRouter from 'router/index.js';
 
-import i18nConf from 'i18n';
+import i18n from 'i18n';
 import store from './store';
 
 import plugin from 'plugins/addPlugin';
 import directives from 'plugins/directives';
 import resaveAccKeystore from 'utils/resaveAccKeystore.js';
 
-import { initPwdConfirm } from 'components/password/index.js';
 import { initQuotaConfirm } from 'components/quota/index.js';
-import { initPowProcess } from 'components/pow/index.js';
 
 // $onKeyDown $offKeyDown $validAmount $trim $toast $confirm $statistics $wallet
 Vue.use(plugin);
 // V-click-outside v-unlock-account
 Vue.use(directives);
 Vue.use(VueRouter);
-Vue.use(VueI18n);
-
-const i18n = new VueI18n(i18nConf);
 
 Vue.config.devtools = process.env.NODE_ENV !== 'production';
 
@@ -47,10 +41,8 @@ setTimeout(() => {
     resaveAccKeystore();
 
     const router = initRouter(VueRouter);
+    initQuotaConfirm(router);
 
-    initPwdConfirm(i18n);
-    initQuotaConfirm(i18n, router);
-    initPowProcess(i18n);
     new Vue({
         el: '#app',
         components: { App },

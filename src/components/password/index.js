@@ -1,12 +1,8 @@
 import Vue from 'vue';
+import i18n from 'i18n';
 import pwdComponent from './password.vue';
 
 const PwdComponent = Vue.extend(pwdComponent);
-let i18n;
-
-export function initPwdConfirm(_i18n) {
-    i18n = _i18n;
-}
 
 export function pwdConfirm({
     type = 'normal',

@@ -45,8 +45,7 @@
 
 <script>
 import viteInput from 'components/viteInput';
-import { powProcess } from 'components/pow/index';
-import { quotaConfirm } from 'components/quota/index';
+import sendTx from 'utils/sendTx';
 import BigNumber from 'utils/bigNumber';
 import { newOrder } from 'services/exchange';
 
@@ -346,7 +345,7 @@ export default {
             const tokenDigit = this.ftokenDetail.tokenDigit;
             quantity = BigNumber.toMin(quantity, tokenDigit);
 
-            newOrder({
+            sendTx(newOrder, {
                 tradeToken,
                 quoteToken,
                 side: this.orderType === 'buy' ? 0 : 1,
@@ -358,29 +357,8 @@ export default {
                 this.$toast(this.$t('exchange.newOrderSuccess'));
             }).catch(err => {
                 console.warn(err);
-
-                if (!err || !err.error || !err.error.code || err.error.code !== -35002) {
-                    this.isLoading = false;
-                    this.$toast(this.$t('exchange.newOrderFail'), err);
-                    return;
-                }
-
-                quotaConfirm(true, {
-                    closeBtnClick: () => {
-                        this.isLoading = false;
-                    },
-                    rightBtnClick: () => {
-                        powProcess({ accountBlock: err.accountBlock }).then(() => {
-                            this.isLoading = false;
-                            this.clearAll();
-                            this.$toast(this.$t('exchange.newOrderSuccess'));
-                        }).catch(err => {
-                            this.isLoading = false;
-                            this.$toast(this.$t('exchange.newOrderFail'), err);
-                            console.warn(err);
-                        });
-                    }
-                });
+                this.isLoading = false;
+                this.$toast(this.$t('exchange.newOrderFail'), err);
             });
         }
     }

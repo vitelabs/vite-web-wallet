@@ -64,8 +64,8 @@ import BigNumber from 'utils/bigNumber';
 import getTokenIcon from 'utils/getTokenIcon';
 import viteInput from 'components/viteInput';
 import confirm from 'components/confirm.vue';
-import { powProcess } from 'components/pow/index';
-import { quotaConfirm } from 'components/quota/index';
+import sendTx from 'utils/sendTx';
+
 import debounce from 'lodash/debounce';
 import d from 'dayjs';
 
@@ -149,27 +149,19 @@ export default {
             const c = this.c;
 
             const failSubmit = e => {
-                const code = e && e.error ? e.error.code || -1 : e ? e.code : -1;
-
-                if (code !== -35002) {
-                    this.$toast(this.$t(`exchangeAssets.confirm${ c.type }.failToast`), e);
-                    return;
-                }
-
-                const startTime = new Date().getTime();
-                quotaConfirm(true, {
-                    rightBtnClick: () => {
-                        powProcess({
-                            accountBlock: e.accountBlock,
-                            startTime,
-                            difficulty: VoteDifficulty
-                        }).then(successSubmit).catch(failSubmit);
-                    }
-                });
+                this.$toast(this.$t(`exchangeAssets.confirm${ c.type }.failToast`), e);
             };
 
             const successSubmit = () => {
                 this.$toast(this.$t(`exchangeAssets.confirm${ c.type }.successToast`));
+            };
+
+            const config = {
+                pow: true,
+                powConfig: {
+                    isShowCancel: false,
+                    difficulty: VoteDifficulty
+                }
             };
 
             this.closeNumConfirm();
@@ -178,12 +170,12 @@ export default {
                 cancelTxt: this.$t('exchangeAssets.pwdConfirm.cancelTxt'),
                 submit: () => {
                     c.type === 'recharge'
-                        ? deposit({ tokenId, amount })
+                        ? sendTx(deposit, { tokenId, amount }, config)
                             .then(successSubmit)
                             .catch(e => {
                                 failSubmit(e);
                             })
-                        : withdraw({ tokenId, amount })
+                        : sendTx(withdraw, { tokenId, amount }, config)
                             .then(successSubmit)
                             .catch(e => {
                                 failSubmit(e);

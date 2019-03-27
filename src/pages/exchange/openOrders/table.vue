@@ -32,8 +32,7 @@
 
 <script>
 import d from 'dayjs';
-import { powProcess } from 'components/pow/index';
-import { quotaConfirm } from 'components/quota/index';
+import sendTx from 'utils/sendTx';
 import { subTask } from 'utils/proto/subTask';
 import { order, cancelOrder } from 'services/exchange';
 
@@ -112,7 +111,7 @@ export default {
                 }
 
                 this.list = data || [];
-            });
+            }, 2000);
 
             task.start(() => {
                 this.acc = this.$wallet.getActiveAccount();
@@ -144,42 +143,35 @@ export default {
         },
         cancel(order) {
             const failSubmit = e => {
-                const code = e && e.error ? e.error.code || -1 : e ? e.code : -1;
-
-                if (code !== -35002) {
-                    this.$toast(this.$t('exchangeOpenOrders.confirm.failToast'), e);
-                    return;
-                }
-
-                const startTime = new Date().getTime();
-
-                quotaConfirm(true, {
-                    rightBtnClick: () => {
-                        powProcess({
-                            accountBlock: e.accountBlock,
-                            startTime,
-                            difficulty: VoteDifficulty
-                        }).then(successSubmit).catch(failSubmit);
-                    }
-                });
+                this.$toast(this.$t('exchangeOpenOrders.confirm.failToast'), e);
             };
 
             const successSubmit = () => {
                 this.$toast(this.$t('exchangeOpenOrders.confirm.successToast'));
             };
 
+            const config = {
+                pow: true,
+                powConfig: {
+                    isShowCancel: false,
+                    difficulty: VoteDifficulty
+                }
+            };
+
             this.acc.initPwd({
                 submitTxt: this.$t('exchangeOpenOrders.confirm.submitTxt'),
                 cancelTxt: this.$t('exchangeOpenOrders.confirm.cancelTxt'),
                 submit: () => {
-                    cancelOrder({
+                    sendTx(cancelOrder, {
                         orderId: order.orderId,
                         tradeToken: order.ftoken,
                         side: order.side,
                         quoteToken: order.ttoken
-                    }).then(successSubmit).catch(e => {
-                        failSubmit(e);
-                    });
+                    }, config)
+                        .then(successSubmit)
+                        .catch(e => {
+                            failSubmit(e);
+                        });
                 }
             });
         }

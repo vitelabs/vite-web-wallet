@@ -46,13 +46,13 @@ export default function sendTx(method, data, config = defaultConfig) {
             return;
         }
 
-        if (!config.pow) {
-            quotaConfirm(false, config.confirmConfig);
-            event.confirmAppearedCb && event.confirmAppearedCb(err);
+        if (config.pow) {
+            runPoW(err.accountBlock, config.powConfig, event);
             return;
         }
 
-        runPoW(err.accountBlock, config.powConfig, event);
+        quotaConfirm(config.confirmConfig);
+        event.confirmAppearedCb && event.confirmAppearedCb(err);
     });
 
     return event;
@@ -82,12 +82,14 @@ async function runPoW(accountBlock, powConfig, event) {
         } else {
             event.thenCb && event.thenCb(result);
         }
+        event.powFinishedCb && event.powFinishedCb(result);
     }).catch((...args) => {
         if (event.powFailedCb) {
             event.powFailedCb(...args);
         } else {
             event.catchCb && event.catchCb(...args);
         }
+        event.powFinishedCb && event.powFinishedCb(...args);
     });
 }
 
@@ -100,6 +102,7 @@ class EventEmitter {
         this.powSuccessedCb = null;
         this.powFailedCb = null;
         this.confirmAppearedCb = null;
+        this.powFinishedCb = null;
     }
 
     _setCb(type, cb) {
@@ -137,6 +140,10 @@ class EventEmitter {
 
     powFailed(cb) {
         return this._setCb('powFailed', cb);
+    }
+
+    powFinished(cb) {
+        return this._setCb('powFinished', cb);
     }
 }
 

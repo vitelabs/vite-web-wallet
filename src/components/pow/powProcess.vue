@@ -1,7 +1,8 @@
 <template>
     <div class="gray-wrapper" v-if="isShow">
         <div class="pow-process-wrapper">
-            <div class="pow">{{ $t('pow') }}</div>
+            <div class="pow">{{ $t('pow.ing') }}</div>
+            <div class="pow">{{ $t('pow.no') }}</div>
             <div class="loading-wrapper __pointer">
                 <loading></loading>
                 <div class="process-num">{{ processNum + '%' }}</div>
@@ -16,6 +17,7 @@ import loading from 'components/loading';
 import { getPowNonce } from 'services/pow';
 
 let processTimeout;
+let limitTimeout;
 
 export default {
     components: { loading },
@@ -35,27 +37,33 @@ export default {
             isShow: false
         };
     },
-    mounted() {
-        const addProcessNum = () => {
-            this.clearProcessTimeout();
-            if (this.processNum >= 99) {
-                return;
-            }
-            this.processNum++;
-
-            processTimeout = window.setTimeout(() => {
-                addProcessNum();
-            }, 600);
-        };
-        addProcessNum();
-    },
     destroyed() {
         this.clearProcessTimeout();
+        this.clearLimitTimeout();
     },
     methods: {
         clearProcessTimeout() {
             window.clearTimeout(processTimeout);
             processTimeout = null;
+        },
+        clearLimitTimeout() {
+            window.clearTimeout(limitTimeout);
+            limitTimeout = null;
+        },
+
+        startCount() {
+            const addProcessNum = () => {
+                this.clearProcessTimeout();
+                if (this.processNum >= 99) {
+                    return;
+                }
+                this.processNum++;
+
+                processTimeout = window.setTimeout(() => {
+                    addProcessNum();
+                }, 600);
+            };
+            addProcessNum();
         },
         gotoFinish() {
             this.clearProcessTimeout();
@@ -69,6 +77,16 @@ export default {
 
         async startPowTx(accountBlock, startTime, difficulty) {
             this.isShow = true;
+            this.startCount();
+
+            let isTimeUp = false;
+            let timtUpCb = null;
+
+            this.clearLimitTimeout();
+            limitTimeout = setTimeout(() => {
+                isTimeUp = true;
+                timtUpCb && timtUpCb();
+            }, 5000);
 
             const activeAccount = this.$wallet.getActiveAccount();
             let data;
@@ -76,8 +94,12 @@ export default {
             try {
                 data = await getPowNonce(activeAccount.getDefaultAddr(), accountBlock.prevHash, difficulty);
             } catch (e) {
+                if (!isTimeUp) {
+                    return new Promise((res, rej) => {
+                        timtUpCb = () => rej(e, 0);
+                    });
+                }
                 this.isShow = false;
-                this.$emit('pow-finish');
                 return Promise.reject(e, 0);
             }
 
@@ -88,7 +110,19 @@ export default {
                 return;
             }
 
-            return this.sendRawTx(activeAccount, accountBlock);
+            if (isTimeUp) {
+                return this.sendRawTx(activeAccount, accountBlock);
+            }
+
+            return new Promise((res, rej) => {
+                timtUpCb = () => {
+                    this.sendRawTx(activeAccount, accountBlock).then((...args) => {
+                        res(...args);
+                    }).catch((...args) => {
+                        rej(...args);
+                    });
+                };
+            });
         },
 
         sendRawTx(activeAccount, accountBlock) {
@@ -96,7 +130,6 @@ export default {
                 this.gotoFinish();
                 setTimeout(() => {
                     this.isShow = false;
-                    this.$emit('pow-finish');
                     activeAccount.sendRawTx(accountBlock).then(data => {
                         this.isShow = false;
                         res(data);

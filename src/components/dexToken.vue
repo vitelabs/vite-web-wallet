@@ -59,7 +59,7 @@ import confirm from 'components/confirm';
 import viteInput from 'components/viteInput';
 import getTokenIcon from 'utils/getTokenIcon';
 import BigNumber from 'utils/bigNumber';
-import { powProcess } from 'components/pow/index';
+import sendTx from 'utils/sendTx';
 import { newMarket, marketsReserve } from 'services/exchange';
 
 const spend = 10000;
@@ -228,25 +228,24 @@ export default {
                 this.close();
             };
 
+            sendTx(newMarket, {
+                amount: BigNumber.toMin(spend, this.viteTokenInfo.decimals),
+                tradeToken: this.token.token,
+                quoteToken: this.market.token
+            });
+
             newMarket({
                 amount: BigNumber.toMin(spend, this.viteTokenInfo.decimals),
                 tradeToken: this.token.token,
                 quoteToken: this.market.token
             }).then(() => {
                 newMarketSuccess();
-            }).catch(err => {
-                if (!err || !err.error || !err.error.code || err.error.code !== -35002) {
-                    newMarketFail(err);
-                    return;
-                }
-
+            }).powStarted(() => {
                 this.isShow = false;
-                powProcess({ accountBlock: err.accountBlock }).then(() => {
-                    newMarketSuccess();
-                }).catch(err => {
+            })
+                .catch(err => {
                     newMarketFail(err);
                 });
-            });
         }
     }
 };

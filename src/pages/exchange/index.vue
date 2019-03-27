@@ -73,7 +73,7 @@ export default {
                 ftoken: data.ftokenShow,
                 ttoken: data.ttokenShow
             }));
-        });
+        }, 2000);
 
         task.start(() => {
             const account = this.$wallet.getActiveAccount();
