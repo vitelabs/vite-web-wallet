@@ -559,6 +559,12 @@
             "cancelTxt":"Cancel"
         },
         "title": "Open Orders",
+        "hint": {
+            "fdate": "请选择起始日期",
+            "tdate": "请选择终止日期",
+            "dateErr": "终止日期必须晚于起始日期",
+            "ftoken": "请选择ftoken"
+        },
         "side": {
             "1": "Sell",
             "0": "Buy"
