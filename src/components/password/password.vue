@@ -21,6 +21,7 @@
 import confirm from 'components/confirm.vue';
 
 const holdTime = 5 * 60 * 1000;
+let lastE = null;
 
 export default {
     components: { confirm },
@@ -66,6 +67,14 @@ export default {
             default: false
         }
     },
+    mounted() {
+        lastE = this.$onKeyDown(13, () => {
+            this._submit();
+        });
+    },
+    beforeDestroyed() {
+        this.$onKeyDown(13, lastE);
+    },
     data() {
         return {
             isShowPWDHold: !window.isShowPWD,
@@ -105,7 +114,6 @@ export default {
             if (!this.isShowPWD) {
                 this.clear();
                 this.submit && this.submit();
-
                 return;
             }
 
@@ -135,13 +143,12 @@ export default {
                 this.submit && this.submit();
             };
 
-            if (activeAccount.isLogin) {
+            if (this.$wallet.isLogin) {
                 activeAccount.verify(password).then(result => {
                     deal(result);
                 }).catch(() => {
                     deal(false);
                 });
-
                 return;
             }
 
