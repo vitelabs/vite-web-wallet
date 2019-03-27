@@ -67,8 +67,8 @@
         "11": "Transfer of ownership",
         "12": "Edit token type",
         "13": "Retrieve Staked Tokens",
-        "14": "ViteX Deposit",
-        "15": "ViteX Withdrawal",
+        "14": "ViteX充值",
+        "15": "ViteX提现",
         "16": "ViteX Creating Orders",
         "17": "ViteX Revoking Orders",
         "18": "ViteX Token Listing",
@@ -520,8 +520,8 @@
                 "Value"
             ],
             "rowMap": {
-                "recharge": "Deposit",
-                "withdraw": "Withdraw",
+                "recharge": "充值至交易所",
+                "withdraw": "提现至钱包",
                 "detail": "Trade",
                 "sideMap":{
                     "1":"Deposit",
@@ -532,22 +532,22 @@
         "confirmrecharge": {
             "successToast":"Deposit successful",
             "failToast":"Failed to deposit",
-            "title": "Deposit tokens in the exchange",
+            "title": "充值至交易所",
             "lable1": "Wallet Balance",
             "lable2": "Deposit Amount",
             "tips": "Insufficient Wallet Balance",
             "placeholder": "Please input deposit amount",
-            "btn": "Ready to Deposit"
+            "btn": "充值至交易所Ready to Deposit"
         },
         "confirmwithdraw": {
             "successToast":"Withdrawal Successful",
             "failToast":"Withdrawal Failed",
-            "title": "Withdraw token to the wallet",
+            "title": "提现至钱包",
             "lable1": "Available Balance",
             "lable2": "Withdrawal Amount",
             "tips": "Insufficient Wallet Balance",
             "placeholder": "Please input withdrawal amount",
-            "btn": "Make a Withdrawal"
+            "btn": "提现至钱包Make a Withdrawal"
         },
         "zero": "Hide Zero Tokens"
     },

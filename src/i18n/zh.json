@@ -67,8 +67,8 @@
         "11": "转移所有权",
         "12": "修改代币类型",
         "13": "取回抵押",
-        "14": "ViteX充币",
-        "15": "ViteX提币",
+        "14": "ViteX充值",
+        "15": "ViteX提现",
         "16": "ViteX挂单",
         "17": "ViteX撤单",
         "18": "ViteX上币",
@@ -520,8 +520,8 @@
                 "价值"
             ],
             "rowMap": {
-                "recharge": "充币至交易所",
-                "withdraw": "提币至钱包",
+                "recharge": "充值至交易所",
+                "withdraw": "提现至钱包",
                 "detail": "充提记录",
                 "sideMap":{
                     "1":"充值",
@@ -532,22 +532,22 @@
         "confirmrecharge": {
             "successToast":"充值成功",
             "failToast":"充值失败",
-            "title": "充币至交易所",
+            "title": "充值至交易所",
             "lable1": "钱包余额",
             "lable2": "充币金额",
             "tips": "钱包账户余额不足",
             "placeholder": "请输入充币金额",
-            "btn": "充币至交易所"
+            "btn": "充值至交易所"
         },
         "confirmwithdraw": {
             "successToast":"提币成功",
             "failToast":"提币失败",
-            "title": "提币至钱包",
+            "title": "提现至钱包",
             "lable1": "可提币余额",
             "lable2": "提币金额",
             "tips": "钱包账户余额不足",
             "placeholder": "请输入提币金额",
-            "btn": "提币至钱包"
+            "btn": "提现至钱包"
         },
         "zero": "隐藏0元代币"
     },
