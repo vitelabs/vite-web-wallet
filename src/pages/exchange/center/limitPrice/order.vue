@@ -76,10 +76,9 @@ export default {
     },
     watch: {
         activeTxPair: function () {
-            if (+this.price) {
-                return;
-            }
             this.price = this.activeTxPair && this.activeTxPair.price ? this.activeTxPair.price : '';
+            this.quantity = '';
+            this.amount = '';
         },
         balance: function () {
             this.validAll();
