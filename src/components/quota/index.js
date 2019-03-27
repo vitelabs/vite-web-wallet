@@ -1,34 +1,19 @@
 import Vue from 'vue';
+import i18n from 'i18n';
 import quotaCancelComponent from './cancel.vue';
-import quotaPowComponent from './pow.vue';
 
 const QuotaCancelComponent = Vue.extend(quotaCancelComponent);
-const QuotaPowComponent = Vue.extend(quotaPowComponent);
 let cancelInstance;
-let powInstance;
 
-export function initQuotaConfirm(i18n, router) {
+export function initQuotaConfirm(router) {
     cancelInstance = new QuotaCancelComponent({
         el: document.createElement('div'),
         i18n,
         router
     });
-    powInstance = new QuotaPowComponent({
-        el: document.createElement('div'),
-        i18n,
-        router
-    });
 }
 
-export function quotaConfirm(pow = false, config) {
-    if (!pow) {
-        quotaConfirmCancel(config);
-        return;
-    }
-    quotaConfirmPow(config);
-}
-
-function quotaConfirmCancel({
+export function quotaConfirm({
     showMask = true,
     operate
 }) {
@@ -42,28 +27,6 @@ function quotaConfirmCancel({
     };
 
     document.body.appendChild(cancelInstance.$el);
-}
-
-
-function quotaConfirmPow({
-    showMask = true,
-    closeBtnClick = () => {},
-    rightBtnClick = () => {}
-}) {
-    powInstance.showMask = showMask;
-    powInstance.leftBtnClick = () => {
-        _close(null, powInstance.$el);
-    };
-    powInstance.closeBtnClick = () => {
-        _close(null, powInstance.$el);
-        closeBtnClick && closeBtnClick();
-    };
-    powInstance.rightBtnClick = () => {
-        _close(null, powInstance.$el);
-        rightBtnClick && rightBtnClick();
-    };
-
-    document.body.appendChild(powInstance.$el);
 }
 
 const _close = (cb, el) => {

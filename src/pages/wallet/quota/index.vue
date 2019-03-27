@@ -38,9 +38,9 @@ import myQuota from './myQuota';
 import pledgeTx from './pledgeTx';
 import list from './list';
 import confirm from 'components/confirm';
-import { powProcess } from 'components/pow/index';
 import loading from 'components/loading';
 import viteInput from 'components/viteInput';
+import sendTx from 'utils/sendTx';
 import BigNumber from 'utils/bigNumber';
 
 export default {
@@ -163,29 +163,24 @@ export default {
             this.activeAccount = this.$wallet.getActiveAccount();
 
             amount = BigNumber.toMin(amount || 0, this.tokenInfo.decimals);
-            this.activeAccount[type]({
+
+            sendTx(this.activeAccount[type], {
                 tokenId: this.tokenInfo.tokenId,
                 toAddress,
                 amount
             }).then(() => {
                 cb && cb(true);
             }).catch(err => {
-                console.warn(err);
-                if (err && err.error && err.error.code && err.error.code === -35002) {
-                    const _cb = (...args) => {
-                        this.closeConfirm();
-                        cb && cb(...args);
-                    };
-
-                    powProcess({ accountBlock: err.accountBlock }).then(() => {
-                        _cb && _cb(true);
-                    }).catch(() => {
-                        _cb && _cb(false, err);
-                    });
-                    return;
-                }
                 cb && cb(false, err);
-            });
+            })
+                .powSuccessed(() => {
+                    this.closeConfirm();
+                    cb && cb(true);
+                })
+                .powFailed(err => {
+                    this.closeConfirm();
+                    cb && cb(false, err);
+                });
         }
     }
 };

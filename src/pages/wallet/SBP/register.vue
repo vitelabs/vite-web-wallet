@@ -56,10 +56,10 @@
 </template>
 
 <script>
-import { quotaConfirm } from 'components/quota/index';
 import viteInput from 'components/viteInput';
 import BigNumber from 'utils/bigNumber';
 import { address } from 'utils/tools';
+import sendTx from 'utils/sendTx';
 
 const amount = 500000;
 
@@ -222,7 +222,13 @@ export default {
             const nodeName = this.nodeName;
             const producerAddr = this.producerAddr;
 
-            this.sendTx({ producerAddr, amount, nodeName }, 'SBPreg').then(() => {
+            sendTx(this.sendTx, { producerAddr, amount, nodeName, type: 'SBPreg' }, {
+                pow: false,
+                confirm: {
+                    showMask: true,
+                    operate: this.$t('walletSBP.register')
+                }
+            }).then(() => {
                 this.loading = false;
                 this.$toast(this.$t('walletSBP.section1.registerSuccess'));
                 this.clearAll();
@@ -236,11 +242,6 @@ export default {
             }).catch(err => {
                 console.warn(err);
                 this.loading = false;
-
-                if (err && err.error && err.error.code && err.error.code === -35002) {
-                    quotaConfirm(false, { operate: this.$t('walletSBP.register') });
-                    return;
-                }
                 this.$toast(this.$t('walletSBP.section1.registerFail'), err);
             });
         }

@@ -64,17 +64,16 @@
 </template>
 
 <script>
+import { constant } from '@vite/vitejs';
 import tooltips from 'components/tooltips';
 import search from 'components/search';
 import secTitle from 'components/secTitle';
 import loading from 'components/loading';
 import confirm from 'components/confirm';
-import { powProcess } from 'components/pow/index';
-import { quotaConfirm } from 'components/quota/index';
 import { timer } from 'utils/asyncFlow';
 import BigNumber from 'utils/bigNumber';
-import { constant } from '@vite/vitejs';
 import $ViteJS from 'utils/viteClient';
+import sendTx from 'utils/sendTx';
 
 const VoteDifficulty = '201564160';
 
@@ -176,37 +175,26 @@ export default {
             };
 
             const failCancel = e => {
-                const code = e && e.error ? e.error.code || -1 : e ? e.code : -1;
-
-                if (code !== -35002) {
-                    this.$toast(this.$t('walletVote.section1.cancelVoteErr'), e);
-                    return;
-                }
-
-                const startTime = new Date().getTime();
-                quotaConfirm(true, {
-                    rightBtnClick: () => {
-                        powProcess({
-                            accountBlock: e.accountBlock,
-                            startTime,
-                            difficulty: VoteDifficulty
-                        }).then(successCancel).catch(failCancel);
-                    }
-                });
+                this.$toast(this.$t('walletVote.section1.cancelVoteErr'), e);
             };
 
             const sendCancel = () => {
                 activeAccount = this.$wallet.getActiveAccount();
-                activeAccount.revokeVoting({ tokenId: this.tokenInfo.tokenId }).then(successCancel)
-                    .catch(failCancel);
+
+                sendTx(activeAccount.revokeVoting, { tokenId: this.tokenInfo.tokenId }, {
+                    pow: true,
+                    powConfig: {
+                        isShowCancel: false,
+                        difficulty: VoteDifficulty
+                    }
+                }).then(successCancel).catch(failCancel);
             };
 
             activeAccount.initPwd({
                 title: this.$t('walletVote.revokeVoting'),
                 submitTxt: this.$t('walletVote.section1.confirm.submitText'),
                 cancelTxt: this.$t('walletVote.section1.confirm.cancelText'),
-                submit: sendCancel,
-                exchange: true
+                submit: sendCancel
             }, true);
         },
         vote(v) {
@@ -223,6 +211,7 @@ export default {
             };
 
             const failVote = e => {
+                console.warn(e);
                 const code = e && e.error ? e.error.code || -1 : e ? e.code : -1;
 
                 if (code === -36001) {
@@ -230,31 +219,22 @@ export default {
                     return;
                 }
 
-                if (code !== -35002) {
-                    console.warn(e);
-                    this.$toast(this.$t('walletVote.section2.voteErr'), e);
-                    return;
-                }
-
-                const startTime = Date.now();
-                quotaConfirm(true, {
-                    rightBtnClick: () => {
-                        powProcess({
-                            accountBlock: e.accountBlock,
-                            startTime,
-                            difficulty: VoteDifficulty
-                        }).then(successVote).catch(failVote);
-                    }
-                });
+                this.$toast(this.$t('walletVote.section2.voteErr'), e);
             };
 
             const sendVote = () => {
                 activeAccount = this.$wallet.getActiveAccount();
-                activeAccount.voting({
+
+                sendTx(activeAccount.voting, {
                     nodeName: v.name,
                     tokenId: this.tokenInfo.tokenId
-                }).then(successVote)
-                    .catch(failVote);
+                }, {
+                    pow: true,
+                    powConfig: {
+                        isShowCancel: false,
+                        difficulty: VoteDifficulty
+                    }
+                }).then(successVote).catch(failVote);
             };
 
             const t = this.haveVote ? 'cover' : 'normal';
