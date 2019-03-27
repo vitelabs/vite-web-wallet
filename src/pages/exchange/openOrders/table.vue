@@ -7,7 +7,9 @@
             <div></div>
         </div>
         <div class="row-container">
-            <div class="row" v-for="v in sortedList" :key="v.orderId">
+            <div class="row" :class="{
+                'active': !!changeList[v.orderId]
+            }" v-for="v in sortedList" :key="v.orderId">
                 <div>{{ v.date|d }}</div>
                 <div>{{ `${v.ftokenShow}/${v.ttokenShow}` }}</div>
                 <div :class="{
@@ -68,7 +70,8 @@ export default {
             sortType: 1,
             acc: null,
             addr: '',
-            timer: null
+            timer: null,
+            changeList: {}
         };
     },
     filters: {
@@ -110,6 +113,35 @@ export default {
                     return;
                 }
 
+                const oldList = {};
+                this.list && this.list.forEach(_item => {
+                    oldList[_item.orderId] = {};
+                    oldList[_item.orderId].rate = _item.rate;
+                });
+
+                data && data.forEach(_item => {
+                    const orderId = _item.orderId;
+                    if (!oldList[orderId] || oldList[orderId].rate === _item.rate) {
+                        return;
+                    }
+
+                    this.changeList[orderId] = this.changeList[orderId] || {};
+                    this.changeList[orderId].rate = oldList[orderId].rate;
+                    this.changeList[orderId].time = new Date().getTime();
+                });
+
+                setTimeout(() => {
+                    const currentTime = new Date().getTime();
+                    for (const key in this.changeList) {
+                        console.log(this.changeList[key].time);
+                        if (currentTime - this.changeList[key].time >= 2000) {
+                            delete this.changeList[key];
+                        }
+                    }
+                    this.changeList = Object.assign({}, this.changeList);
+                }, 2000);
+
+                this.changeList = Object.assign({}, this.changeList);
                 this.list = data || [];
             }, 2000);
 
@@ -184,6 +216,12 @@ export default {
 
 .ex_tb {
     height: 100%;
+}
+.row {
+    transition: all 0.4s ease-in-out;
+    &.active {
+        background: #5bc500;
+    }
 }
 
 @include rowWith {

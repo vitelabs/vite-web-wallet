@@ -31,7 +31,7 @@ class account {
         this.type = type;
         this.pass = pass || '';
         this.name = checkName(name);
-        console.log(pass);
+
         const receiveFail = async err => {
             if (!err || !err.error || !err.error.code || err.error.code !== -35002 || !err.accountBlock) {
                 return Promise.reject(err);
@@ -148,11 +148,9 @@ class account {
     }
 
     verify(pass) {
-        console.log(pass);
         if (this.pass) {
             return Promise.resolve(this.pass === pass);
         }
-
         return this.account.verify(pass);
     }
 
