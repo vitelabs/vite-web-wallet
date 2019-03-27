@@ -95,6 +95,17 @@ export default {
         },
         activeTx: function () {
             this.price = this.activeTx.price;
+
+            if (!this.activeTx.num) {
+                return;
+            }
+
+            if (this.orderType === 'buy' && this.activeTx.txSide === 1) {
+                this.quantity = this.activeTx.num;
+            } else if (this.orderType === 'sell' && this.activeTx.txSide === 0) {
+                this.quantity = this.activeTx.num;
+            }
+            this.quantityChanged();
         }
     },
     computed: {
