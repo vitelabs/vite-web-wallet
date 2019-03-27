@@ -15,7 +15,6 @@ const result = fs.existsSync(staticPath);
 // Not exists
 if (!result) {
     console.error(new Error(`${ staticPath }     is not exists.`));
-
     return ;
 }
 
