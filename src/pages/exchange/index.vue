@@ -39,10 +39,6 @@
 import center from './center/center.vue';
 import historyOrder from './orderHistory';
 import openOrder from './openOrders';
-import { subTask } from 'utils/proto/subTask';
-import date from 'utils/date';
-
-let task = null;
 
 export default {
     components: {
@@ -55,30 +51,6 @@ export default {
 
         this.$router.afterEach(to => {
             this.active = to.name;
-        });
-
-        task && task.stop();
-        task = null;
-
-        task = new subTask('latestOrder', ({ args, data }) => {
-            const account = this.$wallet.getActiveAccount();
-            const address = account ? account.getDefaultAddr() : '';
-
-            if (address !== args.address) {
-                return;
-            }
-
-            data && this.$toast(this.$t('exchange.dealReminder', {
-                time: date(data.date * 1000, 'zh', true),
-                ftoken: data.ftokenShow,
-                ttoken: data.ttokenShow
-            }));
-        });
-
-        task.start(() => {
-            const account = this.$wallet.getActiveAccount();
-            const address = account ? account.getDefaultAddr() : '';
-            return { address };
         });
     },
     destroyed() {
