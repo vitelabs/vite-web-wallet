@@ -15,6 +15,7 @@ document.addEventListener('dragover', e => {
 export default {
     install(Vue) {
         Vue.prototype.$onKeyDown = function (_code, cb) {
+            const lastEvent = window.document.onkeydown;
             window.document.onkeydown = e => {
                 e = e || window.event;
                 const code = e.keyCode || e.which;
@@ -23,6 +24,7 @@ export default {
                 }
                 cb && cb();
             };
+            return lastEvent;
         };
 
         Vue.prototype.$offKeyDown = function () {
