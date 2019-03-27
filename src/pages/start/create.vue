@@ -145,7 +145,7 @@ export default {
 
 <style lang="scss" scoped>
 .__btn {
-  margin-top: 20px;
+    margin-top: 20px;
 }
 </style>
 

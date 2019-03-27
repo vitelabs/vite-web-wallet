@@ -42,13 +42,17 @@ export const orderQueryCurrentWs = function ({ ftoken, ttoken, address }) {
     return key;
 };
 
+export const klineWs = function ({ ftoken, ttoken, resolution }) {
+    const key = `market.${ ftoken }-${ ttoken }.kline.${ resolution }`;
+    return key;
+};
+
 const httpServicesMap = {
     depthBuy,
     depthSell,
     defaultPair,
     assignPair,
     latestTx,
-    latestOrder: () => Promise.resolve(null),
     orderQueryHistory: ({ ftoken, ttoken, address }) => order({
         address,
         ttoken,
@@ -76,7 +80,8 @@ const wsServicesMap = {
     latestTx: latestTxWs,
     latestOrder: latestOrderWs,
     orderQueryHistory: orderQueryHistoryWs,
-    orderQueryCurrent: orderQueryCurrentWs
+    orderQueryCurrent: orderQueryCurrentWs,
+    kline: klineWs
 };
 
 // Http+ws 订阅任务；
@@ -90,8 +95,9 @@ export class subTask extends timer {
         super();
         this.interval = interval;
         this.loopFunc = () => {
-            // Use http if sub unavalible
-            if (!client.closed && this.subStatus) {
+            // Use http if sub unavalible or the func is not exist.
+            if ((!client.closed && this.subStatus)
+                || !httpServicesMap[this.key]) {
                 return;
             }
 
@@ -124,6 +130,7 @@ export class subTask extends timer {
             if (this.subKey !== key) {
                 return;
             }
+            // The data should be same as the orderQueryWs return.
             if (this.key.indexOf('orderQuery') !== -1) {
                 data = data.orders || [];
             }

@@ -42,11 +42,11 @@
 </template>
 
 <script>
-import { quotaConfirm } from 'components/quota/index';
 import tooltips from 'components/tooltips';
 import date from 'utils/date.js';
 import ellipsisAddr from 'utils/ellipsisAddr.js';
 import BigNumber from 'utils/bigNumber';
+import sendTx from 'utils/sendTx';
 
 const amount = 500000;
 
@@ -147,7 +147,13 @@ export default {
             const nodeName = rawData.name;
             const producerAddr = rawData.nodeAddr;
 
-            this.sendTx({ producerAddr, amount, nodeName }, 'SBPreg').then(() => {
+            sendTx(this.sendTx, { producerAddr, amount, nodeName, type: 'SBPreg' }, {
+                pow: false,
+                confirm: {
+                    showMask: true,
+                    operate: this.$t('walletSBP.register')
+                }
+            }).then(() => {
                 this.$toast(this.$t('walletSBP.section1.registerSuccess'));
                 this.$store.dispatch('loopRegList', {
                     address: this.address,
@@ -157,10 +163,6 @@ export default {
                 });
             }).catch(err => {
                 console.warn(err);
-                if (err && err.error && err.error.code && err.error.code === -35002) {
-                    quotaConfirm({ operate: this.$t('walletSBP.register') });
-                    return;
-                }
                 this.$toast(this.$t('walletSBP.section1.registerFail'), err);
             });
         },
@@ -192,7 +194,13 @@ export default {
                     const nodeName = item.rawData.name;
                     const producer = item.rawData.nodeAddr;
 
-                    this.sendTx({ nodeName }, 'revokeReg').then(() => {
+                    sendTx(this.sendTx, { nodeName, type: 'revokeReg' }, {
+                        pow: false,
+                        confirm: {
+                            showMask: true,
+                            operate: this.$t('walletSBP.cancel')
+                        }
+                    }).then(() => {
                         this.$toast(this.$t('hint.request', { name: this.$t('walletSBP.section2.cancel') }));
                         this.$store.dispatch('loopRegList', {
                             address: this.address,
@@ -201,10 +209,6 @@ export default {
                             producer
                         });
                     }).catch(err => {
-                        if (err && err.error && err.error.code && err.error.code === -35002) {
-                            quotaConfirm({ operate: this.$t('walletSBP.cancel') });
-                            return;
-                        }
                         this.$toast(this.$t('walletSBP.section2.cancelFail'), err);
                     });
                 }
@@ -224,58 +228,58 @@ export default {
 @import '~assets/scss/table.scss';
 
 .__tb.tb-list {
-  min-width: 1080px;
+    min-width: 1080px;
 }
 
 .tipsicon {
-  position: relative;
-  display: inline-block;
-  background: url(~assets/imgs/hover_help.svg);
-  overflow: visible;
-  width: 16px;
-  height: 16px;
-  vertical-align: sub;
+    position: relative;
+    display: inline-block;
+    background: url(~assets/imgs/hover_help.svg);
+    overflow: visible;
+    width: 16px;
+    height: 16px;
+    vertical-align: sub;
 
-  .sbp-tooltips {
-    min-width: 300px;
-  }
+    .sbp-tooltips {
+        min-width: 300px;
+    }
 }
 
 .btn {
-  font-size: 14px;
-  color: #007aff;
-  margin-right: 18px;
+    font-size: 14px;
+    color: #007aff;
+    margin-right: 18px;
 
-  &.unuse {
-    color: #ced1d5;
-  }
+    &.unuse {
+        color: #ced1d5;
+    }
 }
 
 .__tb_row.__tb_content_row.unuse {
-  color: #ced1d5;
+    color: #ced1d5;
 }
 
 .name {
-  width: 20%;
-  min-width: 330px;
+    width: 20%;
+    min-width: 330px;
 }
 
 .addr {
-  min-width: 200px;
-  width: 20%;
+    min-width: 200px;
+    width: 20%;
 }
 
 .amount {
-  width: 17%;
-  min-width: 180px;
+    width: 17%;
+    min-width: 180px;
 }
 
 .height {
-  min-width: 190px;
-  width: 20%;
+    min-width: 190px;
+    width: 20%;
 }
 
 .operate {
-  min-width: 205px;
+    min-width: 205px;
 }
 </style>

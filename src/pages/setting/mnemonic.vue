@@ -85,66 +85,66 @@ export default {
 @import "~assets/scss/vars.scss";
 
 .mnemonic {
-  width: 100%;
-  position: relative;
+    width: 100%;
+    position: relative;
 
-  .copy-wrapper {
-    bottom: 90px;
-  }
+    .copy-wrapper {
+        bottom: 90px;
+    }
 }
 
 .row {
-  width: 100%;
-  margin-bottom: 16px;
+    width: 100%;
+    margin-bottom: 16px;
 
-  .title {
-    font-size: 14px;
-    color: #1d2024;
-    letter-spacing: 0.35px;
-    line-height: 16px;
-    font-family: $font-bold, arial, sans-serif;
-  }
-
-  .icon {
-    display: block;
-    width: 20px;
-    height: 20px;
-    float: right;
-  }
-
-  .eyes {
-    margin-right: 16px;
-    background-size: 20px 20px;
-    background: url('../../assets/imgs/eyeclose_default.svg');
-
-    &.visible {
-      background: url('../../assets/imgs/eyeopen_default.svg');
+    .title {
+        font-size: 14px;
+        color: #1d2024;
+        letter-spacing: 0.35px;
+        line-height: 16px;
+        font-family: $font-bold, arial, sans-serif;
     }
 
-    &.lock {
-      background: url('../../assets/imgs/eyeopen_disabled.svg');
-      cursor: not-allowed;
+    .icon {
+        display: block;
+        width: 20px;
+        height: 20px;
+        float: right;
     }
-  }
 
-  .copy {
-    background-size: 20px 20px;
-    background: url('../../assets/imgs/copy_default.svg');
+    .eyes {
+        margin-right: 16px;
+        background-size: 20px 20px;
+        background: url('../../assets/imgs/eyeclose_default.svg');
 
-    &.lock {
-      background: url('../../assets/imgs/copy_disabled.svg');
-      cursor: not-allowed;
+        &.visible {
+            background: url('../../assets/imgs/eyeopen_default.svg');
+        }
+
+        &.lock {
+            background: url('../../assets/imgs/eyeopen_disabled.svg');
+            cursor: not-allowed;
+        }
     }
-  }
+
+    .copy {
+        background-size: 20px 20px;
+        background: url('../../assets/imgs/copy_default.svg');
+
+        &.lock {
+            background: url('../../assets/imgs/copy_disabled.svg');
+            cursor: not-allowed;
+        }
+    }
 }
 
 .content {
-  background: #f3f6f9;
-  border: 1px solid #d4dee7;
-  border-radius: 2px;
-  padding: 10px 15px;
-  font-size: 14px;
-  color: #5e6875;
-  word-wrap: break-word;
+    background: #f3f6f9;
+    border: 1px solid #d4dee7;
+    border-radius: 2px;
+    padding: 10px 15px;
+    font-size: 14px;
+    color: #5e6875;
+    word-wrap: break-word;
 }
 </style>

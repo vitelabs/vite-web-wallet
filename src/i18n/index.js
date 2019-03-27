@@ -1,3 +1,5 @@
+import Vue from 'vue';
+import VueI18n from 'vue-i18n';
 import localStorage from 'utils/localStorage';
 
 import en from './en';
@@ -18,8 +20,11 @@ const locale = localStorage.getItem('lang') || appLocale || 'en';
 // fr,
 // ja,
 // ru
-export default {
+const i18nConf = {
     locale,
     fallbackLocale: 'en',
     messages: { en, zh }
 };
+
+Vue.use(VueI18n);
+export default new VueI18n(i18nConf);

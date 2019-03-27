@@ -23,17 +23,17 @@ export default {
 
 <style lang="scss" scoped>
 .wallet-wrapper {
-  height: 100%;
+    height: 100%;
 }
 
 .__wrapper {
-  padding: 30px;
+    padding: 30px;
 }
 
 @media only screen and (max-width: 850px) {
-  .__wrapper {
-    padding: 15px;
-  }
+    .__wrapper {
+        padding: 15px;
+    }
 }
 </style>
 

@@ -73,12 +73,12 @@ class account {
             'voting', 'revokeVoting', 'getQuota', 'withdrawalOfQuota',
             'createContract', 'callContract', 'mintage',
             'mintageIssue', 'mintageBurn', 'changeTokenType', 'changeTransferOwner', 'mintageCancelPledge' ];
+
         funcName.forEach(name => {
             this[name] = (...args) => {
                 if (!this.account || !this.account.unlockAcc) {
                     return Promise.reject('No unlockAcc');
                 }
-
                 return this.account.unlockAcc[name](...args);
             };
         });
@@ -124,12 +124,10 @@ class account {
 
         if (isHide) {
             submit && submit();
-
             return true;
         }
 
         pwdConfirm({ showMask, title, submit, content, cancel, cancelTxt, submitTxt, exchange }, !this.isHoldPWD);
-
         return false;
     }
 
@@ -153,7 +151,6 @@ class account {
         if (this.pass) {
             return Promise.resolve(this.pass === pass);
         }
-
         return this.account.verify(pass);
     }
 
@@ -174,7 +171,6 @@ class account {
                 addr: this.keystore.hexaddress,
                 keystore: this.keystore
             });
-
             return;
         }
         this.account.save(this.name, index);

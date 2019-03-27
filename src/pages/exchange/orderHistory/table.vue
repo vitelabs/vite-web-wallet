@@ -108,27 +108,34 @@ export default {
 @import "../components/table.scss";
 
 @include rowWith {
-  width: 8%;
+    width: 8%;
 
-  &:first-child {
-    min-width: 160px;
-  }
+    &:first-child {
+        min-width: 160px;
+    }
 
-  &:first-child,
-  &:nth-child(4),
-  &:nth-child(5),
-  &:nth-child(6),
-  &:nth-child(8),
-  &:nth-child(9) {
-    width: 15%;
-  }
+    &:first-child,
+    &:nth-child(4),
+    &:nth-child(5),
+    &:nth-child(6),
+    &:nth-child(8),
+    &:nth-child(9) {
+        width: 15%;
+    }
+
+    &:nth-child(4),
+    &:nth-child(5),
+    &:nth-child(6) {
+        text-align: right;
+        justify-content: right;
+    }
 }
 
 .buy {
-  color: #5bc500;
+    color: #5bc500;
 }
 
 .sell {
-  color: #ff0008;
+    color: #ff0008;
 }
 </style>

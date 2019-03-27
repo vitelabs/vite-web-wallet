@@ -42,23 +42,21 @@
                 <vite-input v-model="message" :placeholder="$t('wallet.placeholder.remarks')"></vite-input>
             </div>
         </confirm>
-
-        <pow-process ref="powProcess" :isShowCancel="true" :cancel="closeTrans"></pow-process>
     </div>
 </template>
 
 <script>
 import Vue from 'vue';
 import confirm from 'components/confirm';
-import powProcess from 'components/powProcess';
 import viteInput from 'components/viteInput';
 import BigNumber from 'utils/bigNumber';
 import { encoder, address } from 'utils/tools';
+import sendTx from 'utils/sendTx';
 
 const SendDifficulty = '157108864';
 
 export default {
-    components: { powProcess, confirm, viteInput },
+    components: { confirm, viteInput },
     props: {
         token: {
             type: Object,
@@ -125,32 +123,6 @@ export default {
         validAddr() {
             this.isValidAddress = this.inAddress && address.isValidHexAddr(this.inAddress);
         },
-        showQuota(accountBlock, startTime) {
-            this.isShowTrans = false;
-            this.$confirm({
-                showMask: false,
-                title: this.$t('quotaConfirmPoW.title'),
-                closeBtn: {
-                    show: true,
-                    click: () => {
-                        this.isShowTrans = true;
-                    }
-                },
-                leftBtn: {
-                    text: this.$t('quotaConfirmPoW.leftBtn.text'),
-                    click: () => {
-                        this.$router.push({ name: 'walletQuota' });
-                    }
-                },
-                rightBtn: {
-                    text: this.$t('quotaConfirmPoW.rightBtn.text'),
-                    click: () => {
-                        this.startPow(accountBlock, startTime);
-                    }
-                },
-                content: this.$t('quotaConfirmPoW.content')
-            });
-        },
 
         testAmount() {
             const result = this.$validAmount(this.amount, this.token.decimals);
@@ -210,90 +182,71 @@ export default {
 
             this.loading = true;
 
-            const amount = BigNumber.toMin(this.amount, this.token.decimals);
-            const successText = this.$t('hint.transSucc');
-            const failText = this.$t('hint.err');
             const activeAccount = this.$wallet.getActiveAccount();
+            const amount = BigNumber.toMin(this.amount, this.token.decimals);
 
             if (!activeAccount) {
                 this.$toast(this.$t('hint.err'));
                 return;
             }
 
-            activeAccount.sendTx({
-                toAddress: this.inAddress,
-                tokenId: this.token.id,
-                amount,
-                message: this.message
-            }).then(() => {
-                if (!this) {
-                    this.$toast(successText);
-                    return;
-                }
-                this.transSuccess();
-            }).catch(err => {
-                console.warn(err);
-
-                if (!this) {
-                    this.$toast(failText);
-                    return;
-                }
-
+            const transError = (msg, err) => {
                 this.loading = false;
+                this.isShowTrans = true;
+
                 const code = err && err.error ? err.error.code || -1
                     : err ? err.code : -1;
-
                 if (code === -35001) {
                     this.$toast(this.$t('hint.insufficientBalance'));
                     this.amountErr = this.$t('hint.insufficientBalance');
                     return;
-                } else if (code === -35002) {
-                    this.showQuota(err.accountBlock, new Date().getTime());
-                    return;
                 }
 
-                this.$toast(null, err);
-            });
-        },
-        startPow(accountBlock, startTime) {
-            const activeAccount = this.$wallet.getActiveAccount();
-            if (!activeAccount) {
-                this.$toast(this.$t('hint.err'));
-                return;
-            }
-
-            const transError = err => {
-                this.loading = false;
-                this.isShowTrans = true;
-                this.$toast(null, err);
+                this.$toast(msg, err);
             };
 
-            this.loading = true;
-            this.$refs.powProcess && this.$refs.powProcess.startPowTx(accountBlock, startTime, SendDifficulty).then(() => {
-                this.transSuccess();
-            }).catch((err, type) => {
-                console.warn(type, err);
-
-                if (type === 0) {
-                    transError(this.$t('wallet.trans.powErr'));
-                    return;
+            sendTx(activeAccount.sendTx, {
+                toAddress: this.inAddress,
+                tokenId: this.token.id,
+                amount,
+                message: this.message
+            }, {
+                pow: true,
+                powConfig: {
+                    isShowCancel: true,
+                    cancel: () => {
+                        this.closeTrans();
+                    },
+                    difficulty: SendDifficulty
                 }
+            }).then(() => {
+                this.loading = false;
+                this.$toast(this.$t('hint.transSucc'));
+                this.closeTrans();
+            }).powStarted(() => {
+                this.isShowTrans = false;
+            })
+                .powFailed((err, type) => {
+                    console.warn(type, err);
 
-                const code = err && err.error ? err.error.code || -1
-                    : err ? err.code : -1;
-                if (code === -35002) {
-                    transError(this.$t('wallet.trans.powTransErr'));
-                    return;
-                }
+                    if (type === 0) {
+                        transError(this.$t('wallet.trans.powErr'), err);
+                        return;
+                    }
 
-                transError(err);
-            });
-        },
+                    const code = err && err.error ? err.error.code || -1
+                        : err ? err.code : -1;
+                    if (code === -35002) {
+                        transError(this.$t('wallet.trans.powTransErr'));
+                        return;
+                    }
 
-        transSuccess() {
-            this.loading = false;
-            this.$toast(this.$t('hint.transSucc'));
-            this.closeTrans();
+                    transError(null, err);
+                })
+                .catch(err => {
+                    console.warn(err);
+                    transError(null, err);
+                });
         }
     }
 };
@@ -305,16 +258,16 @@ export default {
 
 <style lang="scss">
 .confirm-container.trans-confirm .confirm-wrapper {
-  width: 515px;
-  max-width: 90%;
+    width: 515px;
+    max-width: 90%;
 }
 
 .confirm-container.trans-confirm .confirm-wrapper .bottom {
-  min-height: 70px;
+    min-height: 70px;
 
-  .__btn {
-    height: 40px;
-    line-height: 40px;
-  }
+    .__btn {
+        height: 40px;
+        line-height: 40px;
+    }
 }
 </style>

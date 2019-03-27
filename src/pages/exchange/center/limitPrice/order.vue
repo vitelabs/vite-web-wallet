@@ -1,7 +1,5 @@
 <template>
     <div class="order-wrapper">
-        <pow-process ref="powProcess"></pow-process>
-
         <div class="order-title">
             {{ $t(`exchange.${orderType}.title`, { token: ftokenShow }) }}
             <div class="wallet">
@@ -20,20 +18,20 @@
 
         <div class="order-row-title">{{ $t(`exchange.${orderType}.quantity`) }}
             <ul class="quantity-percent">
-                <li class="__pointer" @click="quantityPercent(0.25)">25%</li>
-                <li class="__pointer" @click="quantityPercent(0.5)">50%</li>
-                <li class="__pointer" @click="quantityPercent(0.75)">75%</li>
-                <li class="__pointer" @click="quantityPercent(1)">100%</li>
+                <li class="__pointer" @click="percentChanged(0.25)">25%</li>
+                <li class="__pointer" @click="percentChanged(0.5)">50%</li>
+                <li class="__pointer" @click="percentChanged(0.75)">75%</li>
+                <li class="__pointer" @click="percentChanged(1)">100%</li>
             </ul>
         </div>
         <vite-input class="order-input" :class="{'err': isQuantityErr}"
-                    v-model="quantity">
+                    v-model="quantity" @input="quantityChanged">
             <span class="ex-order-token" slot="after">{{ ftokenShow }}</span>
         </vite-input>
 
         <div class="order-row-title">{{ $t('exchange.amount') }}</div>
         <vite-input class="order-input" :class="{'err': isAmountErr}"
-                    v-model="amount">
+                    v-model="amount" @input="amountChanged">
             <span class="ex-order-token" slot="after">{{ ttokenShow }}</span>
         </vite-input>
 
@@ -47,26 +45,20 @@
 
 <script>
 import viteInput from 'components/viteInput';
-import powProcess from 'components/powProcess';
+import sendTx from 'utils/sendTx';
 import BigNumber from 'utils/bigNumber';
 import { newOrder } from 'services/exchange';
 
-let validTimeout = null;
-let changeVal = null;
-
 export default {
-    components: { viteInput, powProcess },
+    components: { viteInput },
     props: {
         orderType: {
             type: String,
             default: ''
         }
     },
-    created() {
+    mounted() {
         this.price = this.activeTxPair && this.activeTxPair.price ? this.activeTxPair.price : '';
-    },
-    destroyed() {
-        this.clearValidTimeout();
     },
     data() {
         return {
@@ -76,8 +68,6 @@ export default {
             isPriceErr: false,
             isAmountErr: false,
             isQuantityErr: false,
-            percent: 0,
-            watchAQ: 0,
             isLoading: false,
             oldPrice: '',
             oldAmount: '',
@@ -86,38 +76,22 @@ export default {
     },
     watch: {
         activeTxPair: function () {
-            if (this.price) {
-                return;
-            }
             this.price = this.activeTxPair && this.activeTxPair.price ? this.activeTxPair.price : '';
-        },
-        amount: function () {
-            changeVal = 'amount';
-            this.watchAQ++;
-        },
-        quantity: function () {
-            changeVal = 'quantity';
-            this.watchAQ++;
-        },
-        price: function () {
-            changeVal = 'price';
-            this.watchAQ++;
-        },
-        percent: function () {
-            changeVal = 'percent';
-            this.watchAQ++;
+            this.quantity = '';
+            this.amount = '';
         },
         balance: function () {
-            changeVal = 'balance';
-            this.watchAQ++;
+            this.validAll();
         },
-        watchAQ: function () {
-            this.clearValidTimeout();
-            validTimeout = setTimeout(() => {
-                this.clearValidTimeout();
-                this.validAll();
-                changeVal && this[`${ changeVal }Changed`] && this[`${ changeVal }Changed`]();
-            }, 30);
+        amount: function () {
+            this.validAll();
+        },
+        quantity: function () {
+            this.validAll();
+        },
+        price: function () {
+            this.validAll();
+            this.priceChanged();
         },
         activeTx: function () {
             this.price = this.activeTx.price;
@@ -173,23 +147,12 @@ export default {
         }
     },
     methods: {
-        clearValidTimeout() {
-            validTimeout && clearTimeout(validTimeout);
-            validTimeout = null;
-        },
-        quantityPercent(percent) {
-            this.percent = percent;
-        },
-
-        percentChanged() {
-            if (!this.percent) {
-                return;
-            }
+        percentChanged(percent) {
+            this.validAll();
 
             const price = this.price;
             let quantity = this.quantity;
             let amount = this.amount;
-            const percent = this.percent;
 
             if (this.orderType === 'buy') {
                 amount = this.getPercentBalance(percent, this.ttokenDetail.tokenDigit);
@@ -201,9 +164,10 @@ export default {
 
             !BigNumber.isEqual(quantity, this.quantity) && (this.quantity = quantity);
             !BigNumber.isEqual(amount, this.amount) && (this.amount = amount);
-            this.percent = '';
         },
         amountChanged() {
+            this.validAll();
+
             if (this.isAmountErr) {
                 return;
             }
@@ -212,10 +176,17 @@ export default {
             let quantity = this.quantity;
             const amount = this.amount;
 
+            if (!+price && +quantity) {
+                this.price = this.getPrice(quantity, amount);
+                return;
+            }
+
             quantity = this.getQuantity(price, amount);
             !BigNumber.isEqual(quantity, this.quantity) && (this.quantity = quantity);
         },
         priceChanged() {
+            this.validAll();
+
             if (this.isPriceErr) {
                 return;
             }
@@ -228,6 +199,8 @@ export default {
             !BigNumber.isEqual(amount, this.amount) && (this.amount = amount);
         },
         quantityChanged() {
+            this.validAll();
+
             if (this.isQuantityErr) {
                 return;
             }
@@ -236,10 +209,31 @@ export default {
             const quantity = this.quantity;
             let amount = this.amount;
 
+            if (!+price && +amount) {
+                this.price = this.getPrice(quantity, amount);
+                return;
+            }
+
             amount = this.getAmount(price, quantity);
             !BigNumber.isEqual(amount, this.amount) && (this.amount = amount);
         },
 
+        getPrice(quantity, amount) {
+            const isRightQuantity = quantity && this.$validAmount(quantity) && !BigNumber.isEqual(quantity, 0);
+            if (!isRightQuantity) {
+                return '';
+            }
+
+            const isRightAmount = amount && this.$validAmount(amount) && !BigNumber.isEqual(amount, 0);
+            if (!isRightAmount) {
+                return '';
+            }
+
+            const tokenDigit = this.ttokenDetail.tokenDigit;
+            const limit = tokenDigit >= 8 ? 8 : tokenDigit;
+
+            return BigNumber.dividedToNumber(amount, quantity, limit, 'nofix');
+        },
         getPercentBalance(percent, decimals) {
             if (!this.balance || BigNumber.isEqual(this.balance, 0)) {
                 return '';
@@ -351,7 +345,7 @@ export default {
             const tokenDigit = this.ftokenDetail.tokenDigit;
             quantity = BigNumber.toMin(quantity, tokenDigit);
 
-            newOrder({
+            sendTx(newOrder, {
                 tradeToken,
                 quoteToken,
                 side: this.orderType === 'buy' ? 0 : 1,
@@ -363,44 +357,8 @@ export default {
                 this.$toast(this.$t('exchange.newOrderSuccess'));
             }).catch(err => {
                 console.warn(err);
-
-                if (!err || !err.error || !err.error.code || err.error.code !== -35002) {
-                    this.isLoading = false;
-                    this.$toast(this.$t('exchange.newOrderFail'), err);
-                    return;
-                }
-
-                this.$confirm({
-                    showMask: true,
-                    title: this.$t('quotaConfirmPoW.title'),
-                    closeBtn: {
-                        show: true,
-                        click: () => {
-                            this.isLoading = false;
-                        }
-                    },
-                    leftBtn: {
-                        text: this.$t('quotaConfirmPoW.leftBtn.text'),
-                        click: () => {
-                            this.$router.push({ name: 'walletQuota' });
-                        }
-                    },
-                    rightBtn: {
-                        text: this.$t('quotaConfirmPoW.rightBtn.text'),
-                        click: () => {
-                            this.$refs.powProcess.startPowTx(err.accountBlock, 0).then(() => {
-                                this.isLoading = false;
-                                this.clearAll();
-                                this.$toast(this.$t('exchange.newOrderSuccess'));
-                            }).catch(err => {
-                                this.isLoading = false;
-                                this.$toast(this.$t('exchange.newOrderFail'), err);
-                                console.warn(err);
-                            });
-                        }
-                    },
-                    content: this.$t('quotaConfirmPoW.content')
-                });
+                this.isLoading = false;
+                this.$toast(this.$t('exchange.newOrderFail'), err);
             });
         }
     }
@@ -412,114 +370,114 @@ export default {
 $font-black: rgba(36, 39, 43, 0.8);
 
 .order-wrapper {
-  flex: 1;
-  padding: 0 6px;
+    flex: 1;
+    padding: 0 6px;
 
-  .order-title {
-    height: 17px;
-    line-height: 17px;
-    font-size: 12px;
-    font-family: $font-bold, arial, sans-serif;
-    font-weight: 600;
-    color: $font-black;
-    text-indent: 6px;
-    border-left: 2px solid $blue;
+    .order-title {
+        height: 17px;
+        line-height: 17px;
+        font-size: 12px;
+        font-family: $font-bold, arial, sans-serif;
+        font-weight: 600;
+        color: $font-black;
+        text-indent: 6px;
+        border-left: 2px solid $blue;
 
-    .wallet {
-      display: block;
-      float: right;
+        .wallet {
+            display: block;
+            float: right;
 
-      &::before {
-        content: '';
-        display: inline-block;
-        width: 16px;
-        height: 16px;
-        background: url('~assets/imgs/ex-wallet-icon.svg');
-        background-size: 100% 100%;
-        margin-bottom: -4px;
-      }
-    }
-  }
-
-  .ex-order-token {
-    font-size: 12px;
-    font-family: $font-normal, arial, sans-serif;
-    font-weight: 400;
-    color: rgba(94, 104, 117, 1);
-  }
-
-  .order-row-title {
-    height: 28px;
-    line-height: 28px;
-    font-size: 12px;
-    font-family: $font-normal, arial, sans-serif;
-    font-weight: 400;
-    color: $font-black;
-    margin-top: 5px;
-
-    .quantity-percent {
-      display: block;
-      float: right;
-      font-size: 12px;
-
-      li {
-        display: inline-block;
-        box-sizing: border-box;
-        border-bottom: 1px dashed $blue;
-        font-family: $font-normal, arial, sans-serif;
-        color: $blue;
-        line-height: 16px;
-        margin-left: 10px;
-
-        &:active {
-          background: $blue;
-          color: #fff;
+            &::before {
+                content: '';
+                display: inline-block;
+                width: 16px;
+                height: 16px;
+                background: url('~assets/imgs/ex-wallet-icon.svg');
+                background-size: 100% 100%;
+                margin-bottom: -4px;
+            }
         }
-      }
-    }
-  }
-
-  .order-input {
-    height: 30px;
-    line-height: 30px;
-    box-sizing: border-box;
-
-    &.err {
-      border: 1px solid $red;
-    }
-
-    input {
-      text-indent: 6px;
     }
 
     .ex-order-token {
-      padding: 0 6px;
-    }
-  }
-
-  .order-btn {
-    height: 30px;
-    line-height: 30px;
-    text-align: center;
-    margin-top: 16px;
-    border-radius: 2px;
-    font-size: 14px;
-    font-family: $font-bold, arial, sans-serif;
-    font-weight: 600;
-    color: #fff;
-
-    &.red {
-      background: linear-gradient(270deg, rgba(226, 43, 116, 1) 0%, rgba(237, 81, 88, 1) 100%);
+        font-size: 12px;
+        font-family: $font-normal, arial, sans-serif;
+        font-weight: 400;
+        color: rgba(94, 104, 117, 1);
     }
 
-    &.green {
-      background: linear-gradient(270deg, rgba(0, 212, 208, 1) 0%, rgba(0, 215, 100, 1) 100%);
+    .order-row-title {
+        height: 28px;
+        line-height: 28px;
+        font-size: 12px;
+        font-family: $font-normal, arial, sans-serif;
+        font-weight: 400;
+        color: $font-black;
+        margin-top: 5px;
+
+        .quantity-percent {
+            display: block;
+            float: right;
+            font-size: 12px;
+
+            li {
+                display: inline-block;
+                box-sizing: border-box;
+                border-bottom: 1px dashed $blue;
+                font-family: $font-normal, arial, sans-serif;
+                color: $blue;
+                line-height: 16px;
+                margin-left: 10px;
+
+                &:active {
+                    background: $blue;
+                    color: #fff;
+                }
+            }
+        }
     }
 
-    &.gray {
-      color: rgba(29, 32, 36, 0.6);
-      background: #f3f5f9;
+    .order-input {
+        height: 30px;
+        line-height: 30px;
+        box-sizing: border-box;
+
+        &.err {
+            border: 1px solid $red;
+        }
+
+        input {
+            text-indent: 6px;
+        }
+
+        .ex-order-token {
+            padding: 0 6px;
+        }
     }
-  }
+
+    .order-btn {
+        height: 30px;
+        line-height: 30px;
+        text-align: center;
+        margin-top: 16px;
+        border-radius: 2px;
+        font-size: 14px;
+        font-family: $font-bold, arial, sans-serif;
+        font-weight: 600;
+        color: #fff;
+
+        &.red {
+            background: linear-gradient(270deg, rgba(226, 43, 116, 1) 0%, rgba(237, 81, 88, 1) 100%);
+        }
+
+        &.green {
+            background: linear-gradient(270deg, rgba(0, 212, 208, 1) 0%, rgba(0, 215, 100, 1) 100%);
+        }
+
+        &.gray {
+            color: rgba(29, 32, 36, 0.6);
+            background: #f3f5f9;
+        }
+    }
 }
 </style>

@@ -1,15 +1,8 @@
 import Vue from 'vue';
+import i18n from 'i18n';
 import pwdComponent from './password.vue';
 
 const PwdComponent = Vue.extend(pwdComponent);
-let instance;
-
-export function initPwdConfirm(i18n) {
-    instance = new PwdComponent({
-        el: document.createElement('div'),
-        i18n
-    });
-}
 
 export function pwdConfirm({
     type = 'normal',
@@ -22,12 +15,18 @@ export function pwdConfirm({
     submitTxt,
     exchange = false
 }, isShowPWD = true) {
+    let instance = new PwdComponent({
+        el: document.createElement('div'),
+        i18n
+    });
+
     const _close = cb => {
         try {
             document.body.removeChild(instance.$el);
         } catch (err) {
             console.warn(err);
         }
+        instance = null;
         cb && cb();
     };
 

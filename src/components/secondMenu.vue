@@ -1,12 +1,12 @@
 <template>
-    <div class="head">
+    <div class="head" :class="{
+        'dex': active.indexOf('exchange') === 0,
+        'no-dex': active.indexOf('exchange') !== 0
+    }">
         <ul class="tab-list-wrapper">
             <li v-for="(tab, index) in tabList" :key="index"
-                class="tab __pointer" :class="{
-                    'active': active === tab,
-                    'dex': active.indexOf('exchange') === 0
-            }" @click="go(tab)" >
-                {{ $t(`${tab}.title`) }}
+                class="tab __pointer" :class="{ 'active': active === tab }"
+                @click="go(tab)" > {{ $t(`${tab}.title`) }}
             </li>
         </ul>
 
@@ -15,14 +15,13 @@
                      :class="{'dex': active.indexOf('exchange') === 0}"></change-lang>
 
         <ul class="right-lab-list">
-            <div v-show="!isLogin" @click="dexStart" class="tab __pointer"
-                 :class="{'dex': active.indexOf('exchange') === 0}">
+            <div v-show="!isLogin" @click="dexStart" class="tab __pointer">
                 {{ isHaveUsers ? $t('unlockAcc') : $t('login')  }}</div>
-            <div v-show="!isLogin" @click="dexChange" class="tab __pointer"
-                 :class="{'dex': active.indexOf('exchange') === 0}">
+            <div v-show="!isLogin" @click="dexChange" class="tab __pointer">
                 {{ isHaveUsers ? $t('changeAcc') : $t('register') }}</div>
-            <div v-show="active === 'exchange'" v-unlock-account="showToken"
-                 class="tab dex __pointer">{{ $t('dexToken') }}</div>
+            <div v-show="active === 'exchange'" class="tab __pointer"
+                 v-unlock-account="showToken" @noactiveacc="dexStart">
+                {{ $t('dexToken') }}</div>
         </ul>
 
         <dex-token v-if="isShowDexToken" :close="closeToken"></dex-token>
@@ -79,7 +78,6 @@ export default {
         dexStart() {
             if (!this.isHaveUsers) {
                 this.go('start');
-
                 return;
             }
             const activeAccount = this.$wallet.getActiveAccount();
@@ -100,93 +98,93 @@ export default {
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
 
-.head {
-  box-sizing: border-box;
-  padding-left: 10px;
-  line-height: 43px;
-  margin: 0 10px;
-  border-bottom: 1px solid rgba(198, 203, 212, 0.3);
-
-  .tab-list-wrapper {
-    display: block;
-    display: flex;
-    flex-wrap: wrap;
-    float: left;
-  }
-
-  .right-lab-list {
-    float: right;
-  }
-
-  .tab {
-    font-size: 14px;
-    font-family: $font-bold, arial, sans-serif;
-    font-weight: 600;
-    color: rgba(29, 32, 36, 0.6);
-    display: inline-block;
-    box-sizing: border-box;
-    height: 100%;
-    white-space: nowrap;
-    margin-right: 28px;
-    text-align: center;
-
-    &.dex {
-      color: rgba(189, 193, 209, 1);
-    }
-
-    &.active {
-      position: relative;
-      color: rgba(0, 122, 255, 1);
-      border-bottom: 2px solid rgba(0, 122, 255, 1);
-
-      &::after {
-        content: '';
-        display: inline-block;
-        border: 6px solid transparent;
-        border-bottom: 6px solid rgba(0, 122, 255, 1);
-        position: absolute;
-        bottom: 0;
-        left: 50%;
-        margin-left: -6px;
-      }
-    }
-  }
-
-  .go-net-wrapper {
-    float: right;
-    margin-top: 8px;
-  }
-
-  .change-lang-wrapper {
-    float: right;
-  }
+.head.dex .tab {
+    color: rgba(189, 193, 209, 1);
 }
 
-@media only screen and (max-width: 940px) {
-  .head .tab-list-wrapper {
-    width: 100%;
-  }
+.head {
+    box-sizing: border-box;
+    padding-left: 10px;
+    line-height: 43px;
+    margin: 0 10px;
+    border-bottom: 1px solid rgba(198, 203, 212, 0.3);
 
-  .head .change-lang-wrapper {
-    float: left;
-    margin-left: 20px;
-  }
-
-  .head {
-    .go-net-wrapper {
-      float: left;
+    .tab-list-wrapper {
+        display: block;
+        display: flex;
+        flex-wrap: wrap;
+        float: left;
     }
 
     .right-lab-list {
-      float: left;
+        float: right;
     }
-  }
+
+    .tab {
+        font-size: 14px;
+        font-family: $font-bold, arial, sans-serif;
+        font-weight: 600;
+        color: rgba(29, 32, 36, 0.6);
+        display: inline-block;
+        box-sizing: border-box;
+        height: 100%;
+        white-space: nowrap;
+        margin-right: 28px;
+        text-align: center;
+
+        &.active {
+            position: relative;
+            color: rgba(0, 122, 255, 1);
+            border-bottom: 2px solid rgba(0, 122, 255, 1);
+
+            &::after {
+                content: '';
+                display: inline-block;
+                border: 6px solid transparent;
+                border-bottom: 6px solid rgba(0, 122, 255, 1);
+                position: absolute;
+                bottom: 0;
+                left: 50%;
+                margin-left: -6px;
+            }
+        }
+    }
+
+    .go-net-wrapper {
+        float: right;
+        margin-top: 8px;
+    }
+
+    .change-lang-wrapper {
+        float: right;
+    }
+}
+
+@media only screen and (max-width: 940px) {
+    .head.no-dex .tab-list-wrapper {
+        width: 100%;
+    }
+
+    .head.no-dex .change-lang-wrapper {
+        float: left;
+        margin-left: 20px;
+    }
+
+    .head.no-dex {
+        .go-net-wrapper {
+            float: left;
+        }
+
+        .right-lab-list {
+            float: left;
+        }
+    }
 }
 
 @media only screen and (max-width: 900px) {
-  .head .tab-list-wrapper .tab {
-    box-sizing: border-box;
-    padding: 0 10px;
-  }
+    .head.no-dex .tab-list-wrapper .tab {
+        box-sizing: border-box;
+        padding: 0 10px;
+    }
 }
 </style>

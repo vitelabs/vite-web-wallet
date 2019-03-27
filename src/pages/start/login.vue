@@ -219,95 +219,95 @@ export default {
 @import "~assets/scss/vars.scss";
 
 .login-wrapper {
-  .__btn {
-    position: relative;
+    .__btn {
+        position: relative;
 
-    &.__btn_input {
-      .name {
-        width: 89%;
-      }
-    }
-  }
-
-  .bottom {
-    margin-bottom: 20px;
-  }
-
-  .slide {
-    display: inline-block;
-    position: absolute;
-    top: 50%;
-    right: 20px;
-    width: 16px;
-    height: 16px;
-    margin-top: -6px;
-
-    &.down {
-      background: url('~assets/imgs/down_icon.svg');
-      background-size: 16px 16px;
+        &.__btn_input {
+            .name {
+                width: 89%;
+            }
+        }
     }
 
-    &.up {
-      background: url('~assets/imgs/up_icon.svg');
-      background-size: 16px 16px;
-    }
-  }
-
-  .btn-list {
-    width: 100%;
-    text-align: center;
-
-    &.zh {
-      height: 20px;
-      line-height: 20px;
+    .bottom {
+        margin-bottom: 20px;
     }
 
-    .line {
-      margin: 0 33px;
-      display: inline-block;
-      width: 1px;
-      height: 100%;
-      background: #e5edf3;
-      opacity: 0.3;
-      margin-bottom: -4px;
+    .slide {
+        display: inline-block;
+        position: absolute;
+        top: 50%;
+        right: 20px;
+        width: 16px;
+        height: 16px;
+        margin-top: -6px;
+
+        &.down {
+            background: url('~assets/imgs/down_icon.svg');
+            background-size: 16px 16px;
+        }
+
+        &.up {
+            background: url('~assets/imgs/up_icon.svg');
+            background-size: 16px 16px;
+        }
     }
 
-    .__btn_link.en:first-child {
-      display: block;
-      margin-bottom: 10px;
+    .btn-list {
+        width: 100%;
+        text-align: center;
+
+        &.zh {
+            height: 20px;
+            line-height: 20px;
+        }
+
+        .line {
+            margin: 0 33px;
+            display: inline-block;
+            width: 1px;
+            height: 100%;
+            background: #e5edf3;
+            opacity: 0.3;
+            margin-bottom: -4px;
+        }
+
+        .__btn_link.en:first-child {
+            display: block;
+            margin-bottom: 10px;
+        }
     }
-  }
 
-  .switch-btn {
-    display: inline-block;
-    margin-bottom: 20px;
-    border-radius: 16px;
-    background: #007aff;
-    box-shadow: 0 0 4px 0 rgba(0, 105, 219, 1);
-    padding-left: 12px;
-
-    &.radius {
-      padding-left: 0;
-      padding-right: 12px;
-    }
-
-    .btn-item {
-      display: inline-block;
-      color: #fff;
-      font-size: 14px;
-      font-family: $font-bold, arial, sans-serif;
-      font-weight: 600;
-      color: rgba(255, 255, 255, 1);
-      line-height: 18px;
-
-      &.active {
-        background: rgba(51, 187, 255, 1);
+    .switch-btn {
+        display: inline-block;
+        margin-bottom: 20px;
         border-radius: 16px;
-        padding: 6px 12px;
+        background: #007aff;
         box-shadow: 0 0 4px 0 rgba(0, 105, 219, 1);
-      }
+        padding-left: 12px;
+
+        &.radius {
+            padding-left: 0;
+            padding-right: 12px;
+        }
+
+        .btn-item {
+            display: inline-block;
+            color: #fff;
+            font-size: 14px;
+            font-family: $font-bold, arial, sans-serif;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 1);
+            line-height: 18px;
+
+            &.active {
+                background: rgba(51, 187, 255, 1);
+                border-radius: 16px;
+                padding: 6px 12px;
+                box-shadow: 0 0 4px 0 rgba(0, 105, 219, 1);
+            }
+        }
     }
-  }
 }
 </style>
 
@@ -315,24 +315,24 @@ export default {
 @import "~assets/scss/vars.scss";
 
 .__btn_input_active {
-  border: 1px solid #d4dee7;
-  padding: 8px 40px 8px 20px;
-  text-align: left;
+    border: 1px solid #d4dee7;
+    padding: 8px 40px 8px 20px;
+    text-align: left;
 
-  .name {
-    font-family: $font-bold, arial, sans-serif;
-    font-size: 14px;
-    color: #333;
-    line-height: 20px;
-  }
+    .name {
+        font-family: $font-bold, arial, sans-serif;
+        font-size: 14px;
+        color: #333;
+        line-height: 20px;
+    }
 
-  .address {
-    font-family: $font-normal-b, arial, sans-serif;
-    font-size: 12px;
-    line-height: 20px;
-    color: #333;
-  }
+    .address {
+        font-family: $font-normal-b, arial, sans-serif;
+        font-size: 12px;
+        line-height: 20px;
+        color: #333;
+    }
 
-  background: #fff;
+    background: #fff;
 }
 </style>

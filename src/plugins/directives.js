@@ -32,12 +32,21 @@ export default {
         Vue.directive('UnlockAccount', {
             bind(el, binding, vnode) {
                 el.addEventListener('click', e => {
-                    const isLogin = unlockAccount(vnode, e, binding.expression || '');
-                    if (!isLogin) {
+                    const funcName = binding.expression || '';
+
+                    if (wallet.isLogin) {
+                        funcName && vnode.context && vnode.context[funcName](e);
+                        vnode.data.on && vnode.data.on.unlocked && vnode.data.on.unlocked();
                         return;
                     }
 
-                    vnode.data.on && vnode.data.on.unlocked();
+                    const activeAccount = wallet.getActiveAccount();
+                    if (activeAccount) {
+                        activeAccount.unlockAccount();
+                        return;
+                    }
+
+                    vnode.data.on && vnode.data.on.noactiveacc && vnode.data.on.noactiveacc();
                 });
             },
             unbind() {
@@ -58,16 +67,4 @@ function clickOutside(v, e, funcName) {
     if (el && !isEventInDom(e, el)) {
         funcName && v.context && v.context[funcName](e);
     }
-}
-
-function unlockAccount(v, e, funcName) {
-    if (wallet.isLogin) {
-        funcName && v.context && v.context[funcName](e);
-        return true;
-    }
-
-    const activeAccount = wallet.getActiveAccount();
-    activeAccount && activeAccount.unlockAccount();
-
-    return false;
 }

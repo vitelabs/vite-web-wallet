@@ -1,0 +1,3 @@
+.chart-page :not(input):not(textarea):not(.selectable), .tv-profile .tags, .unselectable {
+    overflow: auto;
+}

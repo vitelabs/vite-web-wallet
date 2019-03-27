@@ -84,9 +84,9 @@
 </template>
 
 <script>
-import { getPowNonce } from 'services/pow';
 import viteInput from 'components/viteInput';
 import tableList from 'components/tableList.vue';
+import sendTx from 'utils/sendTx';
 import $ViteJS from 'utils/viteClient';
 
 export default {
@@ -120,8 +120,7 @@ export default {
         },
         mintage() {
             const activeAccount = this.$wallet.getActiveAccount();
-
-            activeAccount.mintage({
+            sendTx(activeAccount.mintage, {
                 decimals: this.decimals,
                 isReIssuable: this.isReIssuable,
                 maxSupply: this.maxSupply,
@@ -133,36 +132,15 @@ export default {
                 this.$toast('Mintage success');
             }).catch(err => {
                 this.$toast(`Mintage fail. ${ err.error.message || err.error.msg }`, err);
-
-                if (err.error.code !== -35002) {
-                    return;
-                }
-
-                const accountBlock = err.accountBlock;
-                getPowNonce(accountBlock.accountAddress, accountBlock.prevHash).then(data => {
-                    accountBlock.difficulty = data.difficulty;
-                    accountBlock.nonce = data.nonce;
-
-                    activeAccount.sendRawTx(accountBlock).then(() => {
-                        this.$toast('Mintage success');
-                    })
-                        .catch(err => {
-                            this.$toast(`Mintage fail. ${ err.error.message || err.error.msg }`);
-                            console.warn(err);
-                        });
-                }).catch(err => {
-                    this.$toast('Pow failed.');
-                    console.warn(err);
-                });
             });
         },
         getOwnerToken() {
             const activeAccount = this.$wallet.getActiveAccount();
 
-            $ViteJS.mintage.getTokenInfoListByOwner(activeAccount.getDefaultAddr()).then(data => {
-                this.tokenList = data;
-            })
-                .catch(err => {
+            $ViteJS.mintage.getTokenInfoListByOwner(activeAccount.getDefaultAddr())
+                .then(data => {
+                    this.tokenList = data;
+                }).catch(err => {
                     console.warn(err);
                     this.$toast('Get list failed');
                 });
@@ -175,73 +153,73 @@ export default {
 @import "~assets/scss/vars.scss";
 
 .mintage-wrapper {
-  width: 100%;
-  box-sizing: border-box;
-  padding: 20px;
-  overflow: auto;
-
-  .list-wrapper {
-    margin-top: 20px;
-  }
-
-  .order-row-title {
-    height: 28px;
-    line-height: 28px;
-    font-size: 12px;
-    font-family: $font-normal, arial, sans-serif;
-    font-weight: 400;
-    color: #333;
-    margin-top: 5px;
-  }
-
-  .btn {
     width: 100%;
-    height: 40px;
-    line-height: 40px;
-    margin-top: 20px;
-    text-align: center;
+    box-sizing: border-box;
+    padding: 20px;
+    overflow: auto;
 
-    &.unuse {
-      background: #efefef;
-      color: #666;
+    .list-wrapper {
+        margin-top: 20px;
     }
-  }
 
-  .select-icon-wrapper {
-    font-size: 11px;
-    font-family: $font-normal, arial, sans-serif;
-    font-weight: 400;
-    color: rgba(94, 104, 117, 1);
-    margin-left: 12px;
+    .order-row-title {
+        height: 28px;
+        line-height: 28px;
+        font-size: 12px;
+        font-family: $font-normal, arial, sans-serif;
+        font-weight: 400;
+        color: #333;
+        margin-top: 5px;
+    }
 
-    .select-icon {
-      position: relative;
-      display: inline-block;
-      box-sizing: border-box;
-      width: 12px;
-      height: 12px;
-      border-radius: 10px;
-      border: 1px solid rgba(188, 196, 201, 1);
-      margin-right: 4px;
-      margin-bottom: -2px;
+    .btn {
+        width: 100%;
+        height: 40px;
+        line-height: 40px;
+        margin-top: 20px;
+        text-align: center;
 
-      &.active {
-        &::after {
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          margin-top: -2px;
-          margin-left: -2px;
-          content: ' ';
-          display: inline-block;
-          width: 4px;
-          height: 4px;
-          background: #007aff;
-          border-radius: 5px;
+        &.unuse {
+            background: #efefef;
+            color: #666;
         }
-      }
     }
-  }
+
+    .select-icon-wrapper {
+        font-size: 11px;
+        font-family: $font-normal, arial, sans-serif;
+        font-weight: 400;
+        color: rgba(94, 104, 117, 1);
+        margin-left: 12px;
+
+        .select-icon {
+            position: relative;
+            display: inline-block;
+            box-sizing: border-box;
+            width: 12px;
+            height: 12px;
+            border-radius: 10px;
+            border: 1px solid rgba(188, 196, 201, 1);
+            margin-right: 4px;
+            margin-bottom: -2px;
+
+            &.active {
+                &::after {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    margin-top: -2px;
+                    margin-left: -2px;
+                    content: ' ';
+                    display: inline-block;
+                    width: 4px;
+                    height: 4px;
+                    background: #007aff;
+                    border-radius: 5px;
+                }
+            }
+        }
+    }
 }
 </style>
 
@@ -249,11 +227,11 @@ export default {
 @import "~assets/scss/vars.scss";
 
 .mintage-table-big-item {
-  min-width: 250px;
+    min-width: 250px;
 }
 
 .mintage-table-small-item {
-  min-width: 110px;
+    min-width: 110px;
 }
 </style>
 

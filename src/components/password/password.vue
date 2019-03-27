@@ -21,6 +21,7 @@
 import confirm from 'components/confirm.vue';
 
 const holdTime = 5 * 60 * 1000;
+let lastE = null;
 
 export default {
     components: { confirm },
@@ -66,6 +67,14 @@ export default {
             default: false
         }
     },
+    mounted() {
+        lastE = this.$onKeyDown(13, () => {
+            this._submit();
+        });
+    },
+    beforeDestroyed() {
+        this.$onKeyDown(13, lastE);
+    },
     data() {
         return {
             isShowPWDHold: !window.isShowPWD,
@@ -105,28 +114,24 @@ export default {
             if (!this.isShowPWD) {
                 this.clear();
                 this.submit && this.submit();
-
                 return;
             }
 
             const password = this.$trim(this.password);
             if (!password) {
                 this.$toast(this.$t('hint.pwEmpty'));
-
                 return false;
             }
 
             let activeAccount = this.$wallet.getActiveAccount();
             if (!activeAccount) {
                 this.$toast(this.$t('hint.err'));
-
                 return false;
             }
 
             const deal = result => {
                 if (!result) {
                     this.$toast(this.$t('hint.pwErr'));
-
                     return false;
                 }
 
@@ -138,33 +143,30 @@ export default {
                 this.submit && this.submit();
             };
 
-            if (!activeAccount.isLogin) {
-                this.isLoading = true;
-                this.$wallet.login({
-                    id: activeAccount.getId(),
-                    entropy: activeAccount.getEntropy(),
-                    addr: activeAccount.getDefaultAddr()
-                }, password).then(() => {
-                    this.isLoading = false;
-                    activeAccount = this.$wallet.getActiveAccount();
-                    activeAccount.unlock();
-                    deal(true);
-                })
-                    .catch(err => {
-                        this.isLoading = false;
-                        console.warn(err);
-                        deal(false);
-                    });
-
+            if (this.$wallet.isLogin) {
+                activeAccount.verify(password).then(result => {
+                    deal(result);
+                }).catch(() => {
+                    deal(false);
+                });
                 return;
             }
 
-            activeAccount.verify(password).then(result => {
-                deal(result);
-            })
-                .catch(() => {
-                    deal(false);
-                });
+            this.isLoading = true;
+            this.$wallet.login({
+                id: activeAccount.getId(),
+                entropy: activeAccount.getEntropy(),
+                addr: activeAccount.getDefaultAddr()
+            }, password).then(() => {
+                this.isLoading = false;
+                activeAccount = this.$wallet.getActiveAccount();
+                activeAccount.unlock();
+                deal(true);
+            }).catch(err => {
+                this.isLoading = false;
+                console.warn(err);
+                deal(false);
+            });
         }
     }
 };
@@ -174,45 +176,45 @@ export default {
 @import '~assets/scss/vars.scss';
 
 .pass-input {
-  width: 100%;
-  background: #fff;
-  border: 1px solid #d4dee7;
-  border-radius: 2px;
-  height: 40px;
-  line-height: 40px;
-  box-sizing: border-box;
-  padding: 0 15px;
-
-  &.distance {
-    margin-top: 30px;
-  }
-
-  input {
     width: 100%;
-    font-size: 14px;
-  }
+    background: #fff;
+    border: 1px solid #d4dee7;
+    border-radius: 2px;
+    height: 40px;
+    line-height: 40px;
+    box-sizing: border-box;
+    padding: 0 15px;
+
+    &.distance {
+        margin-top: 30px;
+    }
+
+    input {
+        width: 100%;
+        font-size: 14px;
+    }
 }
 
 .hold-pwd {
-  font-family: $font-normal, arial, sans-serif;
-  font-size: 14px;
-  color: #1d2024;
-  margin-top: 12px;
+    font-family: $font-normal, arial, sans-serif;
+    font-size: 14px;
+    color: #1d2024;
+    margin-top: 12px;
 
-  span {
-    display: inline-block;
-    margin-bottom: -3px;
-    width: 16px;
-    height: 16px;
-    box-sizing: border-box;
-    background: #fff;
-    border: 1px solid #d4dee7;
-    border-radius: 16px;
+    span {
+        display: inline-block;
+        margin-bottom: -3px;
+        width: 16px;
+        height: 16px;
+        box-sizing: border-box;
+        background: #fff;
+        border: 1px solid #d4dee7;
+        border-radius: 16px;
 
-    &.active {
-      background: url('../../assets/imgs/presnet.svg') no-repeat center;
-      background-size: 16px 16px;
+        &.active {
+            background: url('../../assets/imgs/presnet.svg') no-repeat center;
+            background-size: 16px 16px;
+        }
     }
-  }
 }
 </style>

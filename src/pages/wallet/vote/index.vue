@@ -1,6 +1,5 @@
 <template>
     <div class="vote __wrapper">
-        <powProcess ref="pow"></powProcess>
         <secTitle></secTitle>
 
         <loading v-if="loadingToken" class="loading"></loading>
@@ -65,21 +64,21 @@
 </template>
 
 <script>
+import { constant } from '@vite/vitejs';
 import tooltips from 'components/tooltips';
 import search from 'components/search';
 import secTitle from 'components/secTitle';
 import loading from 'components/loading';
 import confirm from 'components/confirm';
-import powProcess from 'components/powProcess';
 import { timer } from 'utils/asyncFlow';
 import BigNumber from 'utils/bigNumber';
-import { constant } from '@vite/vitejs';
 import $ViteJS from 'utils/viteClient';
+import sendTx from 'utils/sendTx';
 
 const VoteDifficulty = '201564160';
 
 export default {
-    components: { secTitle, tooltips, search, loading, confirm, powProcess },
+    components: { secTitle, tooltips, search, loading, confirm },
     beforeMount() {
         this.tokenInfo = this.$store.getters.viteTokenInfo;
 
@@ -176,37 +175,26 @@ export default {
             };
 
             const failCancel = e => {
-                const code = e && e.error ? e.error.code || -1 : e ? e.code : -1;
-                if (code === -35002) {
-                    const startTime = new Date().getTime();
-                    const c = Object.assign({}, this.$t('quotaConfirmPoW'));
-                    c.leftBtn.click = () => {
-                        this.$router.push({ name: 'walletQuota' });
-                    };
-                    (c.rightBtn.click = () => {
-                        this.$refs.pow.startPowTx(e.accountBlock, startTime, VoteDifficulty)
-                            .then(successCancel)
-                            .catch(failCancel);
-                    }),
-                    (c.closeBtn = { show: true });
-                    this.$confirm(c);
-                } else {
-                    this.$toast(this.$t('walletVote.section1.cancelVoteErr'), e);
-                }
+                this.$toast(this.$t('walletVote.section1.cancelVoteErr'), e);
             };
 
             const sendCancel = () => {
                 activeAccount = this.$wallet.getActiveAccount();
-                activeAccount.revokeVoting({ tokenId: this.tokenInfo.tokenId }).then(successCancel)
-                    .catch(failCancel);
+
+                sendTx(activeAccount.revokeVoting, { tokenId: this.tokenInfo.tokenId }, {
+                    pow: true,
+                    powConfig: {
+                        isShowCancel: false,
+                        difficulty: VoteDifficulty
+                    }
+                }).then(successCancel).catch(failCancel);
             };
 
             activeAccount.initPwd({
                 title: this.$t('walletVote.revokeVoting'),
                 submitTxt: this.$t('walletVote.section1.confirm.submitText'),
                 cancelTxt: this.$t('walletVote.section1.confirm.cancelText'),
-                submit: sendCancel,
-                exchange: true
+                submit: sendCancel
             }, true);
         },
         vote(v) {
@@ -223,35 +211,30 @@ export default {
             };
 
             const failVote = e => {
+                console.warn(e);
                 const code = e && e.error ? e.error.code || -1 : e ? e.code : -1;
-                if (code === -35002) {
-                    const startTime = Date.now();
-                    const c = Object.assign({}, this.$t('quotaConfirmPoW'));
-                    c.leftBtn.click = () => {
-                        this.$router.push({ name: 'walletQuota' });
-                    };
-                    c.rightBtn.click = () => {
-                        this.$refs.pow.startPowTx(e.accountBlock, startTime, VoteDifficulty)
-                            .then(successVote)
-                            .catch(failVote);
-                    };
-                    c.closeBtn = { show: true };
-                    this.$confirm(c);
-                } else if (code === -36001) {
+
+                if (code === -36001) {
                     this.$toast(this.$t('walletVote.addrNoExistErr'));
-                } else {
-                    console.warn('vote', e);
-                    this.$toast(this.$t('walletVote.section2.voteErr'), e);
+                    return;
                 }
+
+                this.$toast(this.$t('walletVote.section2.voteErr'), e);
             };
 
             const sendVote = () => {
                 activeAccount = this.$wallet.getActiveAccount();
-                activeAccount.voting({
+
+                sendTx(activeAccount.voting, {
                     nodeName: v.name,
                     tokenId: this.tokenInfo.tokenId
-                }).then(successVote)
-                    .catch(failVote);
+                }, {
+                    pow: true,
+                    powConfig: {
+                        isShowCancel: false,
+                        difficulty: VoteDifficulty
+                    }
+                }).then(successVote).catch(failVote);
             };
 
             const t = this.haveVote ? 'cover' : 'normal';
@@ -266,8 +249,7 @@ export default {
                 }),
                 submit: sendVote,
                 exchange: this.haveVote
-            },
-            true);
+            }, true);
         }
     },
     computed: {
@@ -292,14 +274,13 @@ export default {
             }
 
             const token = tokenList[this.tokenInfo.tokenId] || {};
-
             return token.balance || 0;
         },
         haveVote() {
             return (
                 this.voteList[0]
-        && (this.voteList[0].voteStatus === 'voting'
-          || this.voteList[0].voteStatus === 'voted')
+                && (this.voteList[0].voteStatus === 'voting'
+                    || this.voteList[0].voteStatus === 'voted')
             );
         },
         voteList() {
@@ -357,7 +338,6 @@ export default {
                 // Tans
                 v.voteNum = BigNumber.toBasic(v.voteNum, token.decimals) || 0;
                 v.operate = this.$t('walletVote.section2.operateBtn');
-
                 return v;
             }).filter(v => {
                 if (this.filterKey.trim() === '') {
@@ -380,157 +360,157 @@ export default {
 @import "~assets/scss/table.scss";
 
 .vote {
-  height: 100%;
-  overflow: auto;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-
-  .filter {
-    margin-top: 10px;
-  }
-
-  .ct {
-    border-left: 2px solid rgba(0, 122, 255, 0.7);
-    padding-left: 10px;
-    height: 18px;
-    line-height: 18px;
-    font-family: $font-bold, arial, sans-serif;
-    font-size: 18px;
-    color: #1d2024;
-  }
-
-  .title {
-    display: flex;
-    flex: none;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    margin-bottom: 24px;
-
-    .ct {
-      margin-top: 20px;
-    }
-  }
-
-  .__tb {
-    width: 100%;
-  }
-
-  .vote_list {
-    overflow-x: auto;
-    overflow-y: hidden;
-    margin: 40px 0;
-    margin-bottom: 20px;
-    min-height: 213px;
-
-    .seat {
-      height: 78px;
-      text-align: center;
-    }
-
-    .__tb_content {
-      overflow: visible;
-    }
-  }
-
-  .node_list {
-    min-height: 300px;
-    flex: 1;
-    overflow-x: auto;
-    overflow-y: hidden;
+    height: 100%;
+    overflow: auto;
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
 
-    .tb_container {
-      height: calc(100% - 64px);
-      overflow: auto;
+    .filter {
+        margin-top: 10px;
+    }
+
+    .ct {
+        border-left: 2px solid rgba(0, 122, 255, 0.7);
+        padding-left: 10px;
+        height: 18px;
+        line-height: 18px;
+        font-family: $font-bold, arial, sans-serif;
+        font-size: 18px;
+        color: #1d2024;
+    }
+
+    .title {
+        display: flex;
+        flex: none;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        margin-bottom: 24px;
+
+        .ct {
+            margin-top: 20px;
+        }
+    }
+
+    .__tb {
+        width: 100%;
+    }
+
+    .vote_list {
+        overflow-x: auto;
+        overflow-y: hidden;
+        margin: 40px 0;
+        margin-bottom: 20px;
+        min-height: 213px;
+
+        .seat {
+            height: 78px;
+            text-align: center;
+        }
+
+        .__tb_content {
+            overflow: visible;
+        }
+    }
+
+    .node_list {
+        min-height: 300px;
+        flex: 1;
+        overflow-x: auto;
+        overflow-y: hidden;
+        display: flex;
+        flex-direction: column;
+
+        .tb_container {
+            height: calc(100% - 64px);
+            overflow: auto;
+        }
+
+        .__tb_cell {
+            min-width: 100px;
+            text-overflow: hidden;
+            margin: 0 5px;
+            text-overflow: ellipsis;
+
+            &:first-child {
+                width: 5%;
+                min-width: 30px;
+            }
+
+            &:nth-child(2) {
+                width: 30%;
+            }
+
+            &:nth-child(3) {
+                width: 40%;
+                min-width: 450px;
+            }
+
+            &:nth-child(4) {
+                width: 15%;
+                min-width: 150px;
+            }
+
+            &:last-child {
+                width: 5%;
+                min-width: 50px;
+            }
+        }
     }
 
     .__tb_cell {
-      min-width: 100px;
-      text-overflow: hidden;
-      margin: 0 5px;
-      text-overflow: ellipsis;
+        min-width: 180px;
 
-      &:first-child {
-        width: 5%;
-        min-width: 30px;
-      }
-
-      &:nth-child(2) {
-        width: 30%;
-      }
-
-      &:nth-child(3) {
-        width: 40%;
-        min-width: 450px;
-      }
-
-      &:nth-child(4) {
-        width: 15%;
-        min-width: 150px;
-      }
-
-      &:last-child {
-        width: 5%;
-        min-width: 50px;
-      }
-    }
-  }
-
-  .__tb_cell {
-    min-width: 180px;
-
-    .reward {
-      margin-left: 10px;
-    }
-
-    &.nodename {
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      width: 150px;
-    }
-
-    .hoveraction {
-      &.tipsicon {
-        position: relative;
-        display: inline-block;
-        background: url(~assets/imgs/hover_help.svg);
-        overflow: visible;
-        width: 16px;
-        height: 16px;
-        vertical-align: sub;
-        cursor: pointer;
-
-        .unregister-tips {
-          word-break: break-all;
-          min-width: 314px;
-          min-height: 100px;
-          padding: 10px;
-          font-size: 14px;
-          color: #3e4a59;
-          line-height: 20px;
+        .reward {
+            margin-left: 10px;
         }
-      }
+
+        &.nodename {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            width: 150px;
+        }
+
+        .hoveraction {
+            &.tipsicon {
+                position: relative;
+                display: inline-block;
+                background: url(~assets/imgs/hover_help.svg);
+                overflow: visible;
+                width: 16px;
+                height: 16px;
+                vertical-align: sub;
+                cursor: pointer;
+
+                .unregister-tips {
+                    word-break: break-all;
+                    min-width: 314px;
+                    min-height: 100px;
+                    padding: 10px;
+                    font-size: 14px;
+                    color: #3e4a59;
+                    line-height: 20px;
+                }
+            }
+        }
     }
-  }
 }
 
 .clickable {
-  color: #007aff;
-  cursor: pointer;
+    color: #007aff;
+    cursor: pointer;
 }
 
 .unclickable {
-  color: #ced1d5;
+    color: #ced1d5;
 }
 
 @media only screen and (max-width: 550px) {
-  .vote {
-    overflow: auto;
-    padding: 15px;
-    display: block;
-  }
+    .vote {
+        overflow: auto;
+        padding: 15px;
+        display: block;
+    }
 }
 </style>

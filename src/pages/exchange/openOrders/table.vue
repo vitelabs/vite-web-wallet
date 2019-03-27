@@ -7,7 +7,9 @@
             <div></div>
         </div>
         <div class="row-container">
-            <div class="row" v-for="v in sortedList" :key="v.orderId">
+            <div class="row" :class="{
+                'active': !!changeList[v.orderId]
+            }" v-for="v in sortedList" :key="v.orderId">
                 <div>{{ v.date|d }}</div>
                 <div>{{ `${v.ftokenShow}/${v.ttokenShow}` }}</div>
                 <div :class="{
@@ -27,13 +29,12 @@
                 <div>{{ $t('hint.noData') }}</div>
             </div>
         </div>
-        <powProcess ref="pow"></powProcess>
     </div>
 </template>
 
 <script>
 import d from 'dayjs';
-import powProcess from 'components/powProcess';
+import sendTx from 'utils/sendTx';
 import { subTask } from 'utils/proto/subTask';
 import { order, cancelOrder } from 'services/exchange';
 
@@ -41,7 +42,6 @@ const VoteDifficulty = '201564160';
 let task = null;
 
 export default {
-    components: { powProcess },
     props: {
         filterObj: {
             type: Object,
@@ -70,7 +70,8 @@ export default {
             sortType: 1,
             acc: null,
             addr: '',
-            timer: null
+            timer: null,
+            changeList: {}
         };
     },
     filters: {
@@ -112,8 +113,37 @@ export default {
                     return;
                 }
 
+                const oldList = {};
+                this.list && this.list.forEach(_item => {
+                    oldList[_item.orderId] = {};
+                    oldList[_item.orderId].rate = _item.rate;
+                });
+
+                data && data.forEach(_item => {
+                    const orderId = _item.orderId;
+                    if (!oldList[orderId] || oldList[orderId].rate === _item.rate) {
+                        return;
+                    }
+
+                    this.changeList[orderId] = this.changeList[orderId] || {};
+                    this.changeList[orderId].rate = oldList[orderId].rate;
+                    this.changeList[orderId].time = new Date().getTime();
+                });
+
+                setTimeout(() => {
+                    const currentTime = new Date().getTime();
+                    for (const key in this.changeList) {
+                        console.log(this.changeList[key].time);
+                        if (currentTime - this.changeList[key].time >= 2000) {
+                            delete this.changeList[key];
+                        }
+                    }
+                    this.changeList = Object.assign({}, this.changeList);
+                }, 2000);
+
+                this.changeList = Object.assign({}, this.changeList);
                 this.list = data || [];
-            });
+            }, 2000);
 
             task.start(() => {
                 this.acc = this.$wallet.getActiveAccount();
@@ -145,46 +175,35 @@ export default {
         },
         cancel(order) {
             const failSubmit = e => {
-                const code = e && e.error ? e.error.code || -1 : e ? e.code : -1;
-
-                if (code !== -35002) {
-                    this.$toast(this.$t('exchangeOpenOrders.confirm.failToast'), e);
-                    return;
-                }
-
-                const startTime = new Date().getTime();
-                const powTxt = Object.assign({}, this.$t('quotaConfirmPoW'));
-
-                powTxt.leftBtn.click = () => {
-                    this.$router.push({ name: 'walletQuota' });
-                };
-                powTxt.rightBtn.click = () => {
-                    this.$refs.pow
-                        .startPowTx(e.accountBlock, startTime, VoteDifficulty)
-                        .then(successSubmit)
-                        .catch(failSubmit);
-                };
-                powTxt.closeBtn = { show: true };
-
-                this.$confirm(powTxt);
+                this.$toast(this.$t('exchangeOpenOrders.confirm.failToast'), e);
             };
 
             const successSubmit = () => {
                 this.$toast(this.$t('exchangeOpenOrders.confirm.successToast'));
             };
 
+            const config = {
+                pow: true,
+                powConfig: {
+                    isShowCancel: false,
+                    difficulty: VoteDifficulty
+                }
+            };
+
             this.acc.initPwd({
                 submitTxt: this.$t('exchangeOpenOrders.confirm.submitTxt'),
                 cancelTxt: this.$t('exchangeOpenOrders.confirm.cancelTxt'),
                 submit: () => {
-                    cancelOrder({
+                    sendTx(cancelOrder, {
                         orderId: order.orderId,
                         tradeToken: order.ftoken,
                         side: order.side,
                         quoteToken: order.ttoken
-                    }).then(successSubmit).catch(e => {
-                        failSubmit(e);
-                    });
+                    }, config)
+                        .then(successSubmit)
+                        .catch(e => {
+                            failSubmit(e);
+                        });
                 }
             });
         }
@@ -196,26 +215,39 @@ export default {
 @import "../components/table.scss";
 
 .ex_tb {
-  height: 100%;
+    height: 100%;
+}
+.row {
+    transition: all 0.4s ease-in-out;
+    &.active {
+        background: #5bc500;
+    }
 }
 
 @include rowWith {
-  width: 8%;
+    width: 8%;
 
-  &:first-child,
-  &:nth-child(4),
-  &:nth-child(5),
-  &:nth-child(6),
-  &:nth-child(8) {
-    width: 15%;
-  }
+    &:first-child,
+    &:nth-child(4),
+    &:nth-child(5),
+    &:nth-child(6),
+    &:nth-child(8) {
+        width: 15%;
+    }
+
+    &:nth-child(4),
+    &:nth-child(5),
+    &:nth-child(6) {
+        text-align: right;
+        justify-content: right;
+    }
 }
 
 .buy {
-  color: #5bc500;
+    color: #5bc500;
 }
 
 .sell {
-  color: #ff0008;
+    color: #ff0008;
 }
 </style>

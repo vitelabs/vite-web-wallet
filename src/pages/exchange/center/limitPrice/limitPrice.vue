@@ -21,7 +21,7 @@ import order from './order.vue';
 
 export default {
     components: { logoutView, order },
-    created() {
+    mounted() {
         this.isLogin = !!this.$wallet.isLogin;
         this.getBalance();
         this.$wallet.onLogin(() => {
@@ -60,38 +60,38 @@ export default {
 @import "../center.scss";
 
 .limit-price-wrapper {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 100%;
-  font-size: 14px;
-  font-family: $font-normal, arial, sans-serif;
-  font-weight: 400;
-
-  .fee {
-    float: right;
-    font-size: 12px;
-    color: rgba(94, 104, 117, 1);
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    font-size: 14px;
     font-family: $font-normal, arial, sans-serif;
     font-weight: 400;
-  }
+
+    .fee {
+        float: right;
+        font-size: 12px;
+        color: rgba(94, 104, 117, 1);
+        font-family: $font-normal, arial, sans-serif;
+        font-weight: 400;
+    }
 }
 
 .ex-center-login {
-  display: flex;
-  flex-direction: row;
-  flex: 1;
-  width: 100%;
-  height: 100%;
-  box-sizing: border-box;
-  padding: 8px 0 10px;
-
-  .order-border {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    width: 100%;
     height: 100%;
-    opacity: 0.136;
-    border: 1px solid rgba(212, 222, 231, 1);
-    margin: 0 6px;
-  }
+    box-sizing: border-box;
+    padding: 8px 0 10px;
+
+    .order-border {
+        height: 100%;
+        opacity: 0.136;
+        border: 1px solid rgba(212, 222, 231, 1);
+        margin: 0 6px;
+    }
 }
 </style>
 
@@ -99,10 +99,10 @@ export default {
 @import "~assets/scss/vars.scss";
 
 .order-input.input-wrapper input {
-  text-indent: 6px;
-  color: rgba(36, 39, 43, 0.8);
-  font-size: 12px;
-  font-family: $font-normal, arial, sans-serif;
-  font-weight: 400;
+    text-indent: 6px;
+    color: rgba(36, 39, 43, 0.8);
+    font-size: 12px;
+    font-family: $font-normal, arial, sans-serif;
+    font-weight: 400;
 }
 </style>

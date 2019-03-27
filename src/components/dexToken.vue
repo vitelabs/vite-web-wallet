@@ -1,57 +1,56 @@
 <template>
-    <div>
-        <confirm v-show="isShow" class="exchange" :btnUnuse="btnUnuse"
-                 :showMask="true" :singleBtn="true"
-                 :title="$t('exchange.dexToken.title')" :closeIcon="true"
-                 :close="close" :leftBtnTxt="$t('exchange.dexToken.btn')"
-                 :leftBtnClick="trans">
+    <confirm v-show="isShow" class="exchange" :btnUnuse="btnUnuse"
+             :showMask="true" :singleBtn="true"
+             :title="$t('exchange.dexToken.title')" :closeIcon="true"
+             :close="close" :leftBtnTxt="$t('exchange.dexToken.btn')"
+             :leftBtnClick="trans">
 
-            <div v-click-outside="hideMarketList" @click="toggleMarketList" class="__row _r_m __pointer">
-                <div class="__row-t">{{ $t('exchange.dexToken.market') }}</div>
-                <div class="market input-wrapper">{{ market ? market.name : '' }}
-                    <span class="down-icon" slot="after"></span>
-                </div>
-                <ul v-show="isShowMarketList" class="market-list">
-                    <li @click="setMarket(_market)" class="market input-wrapper border-bottom"
-                        v-for="(_market, i) in marketList" :key="i"
-                        v-show="market && _market.token !== market.token">{{ _market.name }} / {{ _market.token }}</li>
+        <div v-click-outside="hideMarketList" @click="toggleMarketList" class="__row _r_m __pointer">
+            <div class="__row-t">{{ $t('exchange.dexToken.market') }}</div>
+            <div class="market input-wrapper">{{ market ? market.name : '' }}
+                <span class="down-icon" slot="after"></span>
+            </div>
+            <ul v-show="isShowMarketList" class="market-list">
+                <li @click="setMarket(_market)" class="market input-wrapper border-bottom"
+                    v-for="(_market, i) in marketList" :key="i"
+                    v-show="market && _market.token !== market.token">{{ _market.name }} / {{ _market.token }}</li>
+            </ul>
+        </div>
+
+        <div v-click-outside="hideTokenList" class="__row">
+            <div class="__row-t">
+                {{ $t('exchange.dexToken.name') }}
+                <span class="link __pointer" @click="goNet">{{ $t('exchange.dexToken.link') }}</span>
+            </div>
+            <div @click="toggleTokenList" class="market input-wrapper __pointer">
+                {{ token ? token.name : '' }}<div class="down-icon"></div>
+            </div>
+            <div v-show="isShowTokenList" class="market-list">
+                <vite-input ref="searchInput" class="token-wrapper" v-model="tokenName"
+                            :placeholder="$t('exchange.dexToken.search')">
+                    <img slot="before" class="icon" src="~assets/imgs/search.svg"/>
+                </vite-input>
+                <loading loadingType="dot" v-show="isLoading && !tokenName"
+                         class="ex-center-loading token-loading"></loading>
+                <ul class="token-list __pointer">
+                    <li v-show="!list || !list.length" class="market input-wrapper no-data border-bottom">
+                        {{ tokenName ? $t('exchange.noData.search') : $t('hint.noData') }}</li>
+                    <li @click="setToken(_token)" class="market input-wrapper border-bottom"
+                        v-for="(_token, i) in list" :key="i">
+                        {{ _token.name }} / {{ _token.token }}</li>
                 </ul>
             </div>
+        </div>
 
-            <div v-click-outside="hideTokenList" class="__row">
-                <div class="__row-t">
-                    {{ $t('exchange.dexToken.name') }}
-                    <span class="link __pointer" @click="goNet">{{ $t('exchange.dexToken.link') }}</span>
-                </div>
-                <div @click="toggleTokenList" class="market input-wrapper __pointer">
-                    {{ token ? token.name : '' }}<div class="down-icon"></div>
-                </div>
-                <div v-show="isShowTokenList" class="market-list">
-                    <vite-input ref="searchInput" class="token-wrapper" v-model="tokenName"
-                                :placeholder="$t('exchange.dexToken.search')">
-                        <img slot="before" class="icon" src="~assets/imgs/search.svg"/>
-                    </vite-input>
-                    <loading loadingType="dot" v-show="isLoading && !tokenName"
-                             class="ex-center-loading token-loading"></loading>
-                    <ul class="token-list __pointer">
-                        <li v-show="!list || !list.length" class="market input-wrapper no-data border-bottom">
-                            {{ tokenName ? $t('exchange.noData.search') : $t('hint.noData') }}</li>
-                        <li @click="setToken(_token)" class="market input-wrapper border-bottom"
-                            v-for="(_token, i) in list" :key="i">
-                            {{ _token.name }} / {{ _token.token }}</li>
-                    </ul>
-                </div>
+        <div class="__row">
+            <div class="__row-t">
+                {{ $t('exchange.dexToken.fee') }}
+                <span v-show="!isHaveBalance" class="__err __hint">{{ $t('hint.insufficientBalance') }}</span>
             </div>
-
-            <div class="__row">
-                <div class="__row-t">{{ $t('exchange.dexToken.fee') }}</div>
-                <div class="no-input">{{ spend }} VITE</div>
-            </div>
-            <div class="hint"><span>{{ $t('exchange.dexToken.hint') }}</span></div>
-        </confirm>
-
-        <pow-process ref="powProcess" :isShowCancel="false"></pow-process>
-    </div>
+            <div class="no-input">{{ spend }} VITE</div>
+        </div>
+        <div class="hint"><span>{{ $t('exchange.dexToken.hint') }}</span></div>
+    </confirm>
 </template>
 
 <script>
@@ -60,14 +59,14 @@ import confirm from 'components/confirm';
 import viteInput from 'components/viteInput';
 import getTokenIcon from 'utils/getTokenIcon';
 import BigNumber from 'utils/bigNumber';
-import powProcess from 'components/powProcess';
+import sendTx from 'utils/sendTx';
 import { newMarket, marketsReserve } from 'services/exchange';
 
 const spend = 10000;
 const currentFetchMarket = null;
 
 export default {
-    components: { loading, confirm, viteInput, powProcess },
+    components: { loading, confirm, viteInput },
     props: {
         close: {
             type: Function,
@@ -105,13 +104,27 @@ export default {
             return this.$store.getters.viteTokenInfo;
         },
         btnUnuse() {
-            return !this.market || !this.token || this.isMarketLoading;
+            return !this.market || !this.token || this.isMarketLoading || !this.isHaveBalance;
         },
         list() {
             if (this.tokenName) {
                 return this.searchList;
             }
             return this.tokenList;
+        },
+        isHaveBalance() {
+            if (!this.viteTokenInfo) {
+                return false;
+            }
+
+            const viteBalance = this.$store.getters.tokenBalanceList
+                && this.$store.getters.tokenBalanceList[this.viteTokenInfo.tokenId]
+                ? this.$store.getters.tokenBalanceList[this.viteTokenInfo.tokenId].balance || 0
+                : 0;
+            const viteAmount = BigNumber.toMin(viteBalance, this.viteTokenInfo.decimals);
+            const amount = BigNumber.toMin(this.spend, this.viteTokenInfo.decimals);
+
+            return BigNumber.compared(viteAmount, amount) >= 0;
         }
     },
     watch: {
@@ -201,11 +214,6 @@ export default {
             });
         },
         trans() {
-            if (!this.viteTokenInfo) {
-                this.$toast(this.$t('exchange.dexToken.reqError'));
-                return;
-            }
-
             this.isMarketLoading = true;
 
             const newMarketFail = err => {
@@ -220,25 +228,24 @@ export default {
                 this.close();
             };
 
+            sendTx(newMarket, {
+                amount: BigNumber.toMin(spend, this.viteTokenInfo.decimals),
+                tradeToken: this.token.token,
+                quoteToken: this.market.token
+            });
+
             newMarket({
                 amount: BigNumber.toMin(spend, this.viteTokenInfo.decimals),
                 tradeToken: this.token.token,
                 quoteToken: this.market.token
             }).then(() => {
                 newMarketSuccess();
-            }).catch(err => {
-                if (!err || !err.error || !err.error.code || err.error.code !== -35002) {
-                    newMarketFail(err);
-                    return;
-                }
-
+            }).powStarted(() => {
                 this.isShow = false;
-                this.$refs.powProcess && this.$refs.powProcess.startPowTx(err.accountBlock, 0).then(() => {
-                    newMarketSuccess();
-                }).catch(err => {
+            })
+                .catch(err => {
                     newMarketFail(err);
                 });
-            });
         }
     }
 };
@@ -248,95 +255,95 @@ export default {
 @import "~assets/scss/confirmInput.scss";
 
 .link {
-  float: right;
-  font-family: $font-normal, arial, sans-serif;
-  font-weight: 400;
-  color: rgba(0, 122, 255, 1);
+    float: right;
+    font-family: $font-normal, arial, sans-serif;
+    font-weight: 400;
+    color: rgba(0, 122, 255, 1);
 }
 
 ._r_m {
-  position: relative;
+    position: relative;
 }
 
 .ex-center-loading.token-loading {
-  position: relative;
-  width: 100%;
-  box-sizing: border-box;
-  border: 1px solid rgba(212, 222, 231, 1);
-  border-top: none;
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid rgba(212, 222, 231, 1);
+    border-top: none;
 }
 
 .market-list {
-  position: absolute;
-  width: 100%;
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  max-height: 140px;
-  border: 1px solid rgba(212, 222, 231, 1);
-  border-top: none;
-  box-sizing: border-box;
-  background: #fff;
-
-  .token-list {
-    flex: 1;
-    overflow: auto;
-  }
-
-  .market.input-wrapper {
+    position: absolute;
+    width: 100%;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    max-height: 140px;
+    border: 1px solid rgba(212, 222, 231, 1);
     border-top: none;
-  }
+    box-sizing: border-box;
+    background: #fff;
+
+    .token-list {
+        flex: 1;
+        overflow: auto;
+    }
+
+    .market.input-wrapper {
+        border-top: none;
+    }
 }
 
 .market.input-wrapper {
-  box-sizing: border-box;
-  padding-left: 15px;
-  width: 100%;
-  height: 40px;
-  line-height: 40px;
-  background: rgba(255, 255, 255, 1);
-  border-radius: 2px;
-  border: 1px solid rgba(212, 222, 231, 1);
-  font-size: 12px;
-  font-family: $font-normal, arial, sans-serif;
-  font-weight: 400;
-  color: rgba(206, 209, 213, 1);
+    box-sizing: border-box;
+    padding-left: 15px;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    background: rgba(255, 255, 255, 1);
+    border-radius: 2px;
+    border: 1px solid rgba(212, 222, 231, 1);
+    font-size: 12px;
+    font-family: $font-normal, arial, sans-serif;
+    font-weight: 400;
+    color: rgba(206, 209, 213, 1);
 
-  &.no-data {
-    padding: none;
-    text-align: center;
-  }
-
-  &.border-bottom {
-    border: none;
-    border-bottom: 1px solid rgba(212, 222, 231, 1);
-
-    &:last-child {
-      border-bottom: none;
+    &.no-data {
+        padding: none;
+        text-align: center;
     }
-  }
 
-  .down-icon {
-    float: right;
-  }
+    &.border-bottom {
+        border: none;
+        border-bottom: 1px solid rgba(212, 222, 231, 1);
+
+        &:last-child {
+            border-bottom: none;
+        }
+    }
+
+    .down-icon {
+        float: right;
+    }
 }
 
 .token-wrapper {
-  box-sizing: border-box;
-  border-top: none;
-  border-left: none;
-  border-right: none;
-  min-height: 40px;
+    box-sizing: border-box;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    min-height: 40px;
 
-  .icon {
-    margin-right: 0;
-    margin-left: 15px;
-  }
+    .icon {
+        margin-right: 0;
+        margin-left: 15px;
+    }
 
-  .market-list {
-    left: 0;
-    top: 39px;
-  }
+    .market-list {
+        left: 0;
+        top: 39px;
+    }
 }
 </style>
 

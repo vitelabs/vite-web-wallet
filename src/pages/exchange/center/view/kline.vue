@@ -6,6 +6,8 @@
 import { widget } from 'charting/charting_library.min';
 import datafeed from './datafeeds.js';
 
+let datafeedObj;
+
 export default {
     props: {
         showView: {
@@ -49,6 +51,12 @@ export default {
     methods: {
         init() {
             this.tvWidget && this.tvWidget.remove();
+            datafeedObj && datafeedObj.unsubscribeBars();
+            datafeedObj = new datafeed(this.activeTxPair);
+
+            if (!this.symbol) {
+                return;
+            }
 
             const widgetOptions = {
                 fullscreen: false,
@@ -57,13 +65,14 @@ export default {
                 toolbar_bg: '#f4f7f9',
                 allow_symbol_change: true,
                 container_id: 'tv_chart_container',
-                datafeed: new datafeed(this.activeTxPair),
+                datafeed: datafeedObj,
                 library_path: 'charting_library/',
                 locale: this.$i18n.locale,
                 drawings_access: {
                     type: 'black',
                     tools: [{ name: 'Trend Line' }]
                 },
+                custom_css_url: '/charting_library/charting_custom.css',
                 // Main_series_scale_menu header_indicators
                 disabled_features: [ 'use_localstorage_for_settings', 'volume_force_overlay', 'header_compare', 'header_symbol_search', 'header_chart_type' ],
                 enabled_features: ['move_logo_to_main_pane'],
@@ -104,8 +113,7 @@ export default {
                 studies.push(id);
                 const state = 1;
                 for (let i = 0; i < studies.length; i++) {
-                    this.tvWidget.chart().getStudyById(studies[i])
-                        .setVisible(state);
+                    this.tvWidget.chart().getStudyById(studies[i]).setVisible(state);
                 }
             });
         },
@@ -122,8 +130,8 @@ export default {
 
 <style lang="scss" scoped>
 .tradingview-widget-container {
-  width: 100%;
-  height: 100%;
+    width: 100%;
+    height: 100%;
 }
 </style>
 

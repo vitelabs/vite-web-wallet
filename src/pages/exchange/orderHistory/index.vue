@@ -80,7 +80,7 @@ export default {
                 }
 
                 this.data = data || [];
-            });
+            }, 2000);
 
             const account = this.$wallet.getActiveAccount();
             const address = account.getDefaultAddr();
@@ -134,18 +134,18 @@ export default {
 
 <style lang="scss" scoped>
 .order-history-ct {
-  height: 100%;
-  padding: 20px 10px 28px;
+    height: 100%;
+    padding: 20px 10px 28px;
 
-  .tb {
-    flex: 1;
-  }
+    .tb {
+        flex: 1;
+    }
 
-  .page-filter {
-    display: flex;
-    justify-content: center;
-    background: #fff;
-    padding: 10px 0;
-  }
+    .page-filter {
+        display: flex;
+        justify-content: center;
+        background: #fff;
+        padding: 10px 0;
+    }
 }
 </style>
