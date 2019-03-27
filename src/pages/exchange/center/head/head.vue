@@ -18,7 +18,7 @@
             <div class="token-content" :class="{
                 'up': +upDown > 0,
                 'down': +upDown < 0
-            }">{{ upDownIcon + upDown }} 
+            }">{{ upDownIcon + upDown }}
                 {{ activeTxPair && activeTxPair.upDownPercent ?  upDownIcon + activeTxPair.upDownPercent : '--' }}
             </div>
         </div>
@@ -47,9 +47,7 @@
 import token from './token';
 
 export default {
-    components: {
-        token
-    },
+    components: { token },
     computed: {
         activeTxPair() {
             return this.$store.getters.exActiveTxPair;
@@ -61,6 +59,7 @@ export default {
             if (this.upDown && this.upDown > 0) {
                 return '+';
             }
+
             return '';
         },
         realPrice() {
@@ -69,17 +68,19 @@ export default {
                 pre = '￥';
             }
             if (!this.activeTxPair) {
-                return pre + '0';
+                return `${ pre }0`;
             }
+
             return pre + this.activeTxPair.price * this.rate;
         },
         rate() {
-            let rateList = this.$store.state.exchangeRate.rateMap || {};
-            let tokenId = this.activeTxPair && this.activeTxPair.ttoken ? this.activeTxPair.ttoken : null;
-            let coin = this.$store.state.exchangeRate.coins[this.$i18n.locale || 'zh'];
+            const rateList = this.$store.state.exchangeRate.rateMap || {};
+            const tokenId = this.activeTxPair && this.activeTxPair.ttoken ? this.activeTxPair.ttoken : null;
+            const coin = this.$store.state.exchangeRate.coins[this.$i18n.locale || 'zh'];
             if (!tokenId || !rateList[tokenId]) {
                 return null;
             }
+
             return rateList[tokenId][coin] || null;
         }
     }
@@ -100,25 +101,29 @@ export default {
     font-size: 12px;
     font-weight: 600;
     line-height: 16px;
+    white-space: nowrap;
+
     .token-title {
         font-family: $font-normal, arial, sans-serif;
-        color: #5E6875;
+        color: #5e6875;
         font-weight: 400;
     }
+
     .token-content {
         margin-top: 8px;
         font-weight: 600;
-        color: rgba(36,39,43,1);
+        color: rgba(36, 39, 43, 1);
         &.down {
             color: $down-font-color;
         }
         &.up {
-            color: $up-font-color
+            color: $up-font-color;
         }
         .price {
             color: $blue;
         }
     }
+
     .item-left {
         margin-left: 60px;
     }

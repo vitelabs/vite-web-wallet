@@ -1,5 +1,5 @@
 <template>
-    <confirm :title="pwdTitle" 
+    <confirm :title="pwdTitle"
              :content="content" :showMask="showMask" :btnUnuse="isLoading"
              :leftBtnTxt="cancelTxt || $t('btn.cancel')" :rightBtnTxt="submitTxt || $t('btn.submit')"
              :leftBtnClick="exchange?_submit:_cancle"  :rightBtnClick="exchange?_cancle:_submit">
@@ -23,9 +23,7 @@ import confirm from 'components/confirm.vue';
 const holdTime = 5 * 60 * 1000;
 
 export default {
-    components: {
-        confirm
-    },
+    components: { confirm },
     props: {
         type: {
             type: String,
@@ -63,9 +61,9 @@ export default {
             type: Boolean,
             default: true
         },
-        exchange:{
-            type:Boolean,
-            default:false
+        exchange: {
+            type: Boolean,
+            default: false
         }
     },
     data() {
@@ -82,8 +80,9 @@ export default {
                 return this.title || this.$t('pwdConfirm.title');
             }
 
-            let activeAccount = this.$wallet.getActiveAccount();
-            let name = activeAccount ? activeAccount.getName() : '';
+            const activeAccount = this.$wallet.getActiveAccount();
+            const name = activeAccount ? activeAccount.getName() : '';
+
             return this.$t('pwdConfirm.unlockAcc', { name });
         }
     },
@@ -106,29 +105,33 @@ export default {
             if (!this.isShowPWD) {
                 this.clear();
                 this.submit && this.submit();
+
                 return;
             }
 
-            let password = this.$trim(this.password);
+            const password = this.$trim(this.password);
             if (!password) {
-                this.$toast( this.$t('hint.pwEmpty') );
+                this.$toast(this.$t('hint.pwEmpty'));
+
                 return false;
             }
 
             let activeAccount = this.$wallet.getActiveAccount();
             if (!activeAccount) {
-                this.$toast( this.$t('hint.err') );
+                this.$toast(this.$t('hint.err'));
+
                 return false;
             }
 
-            let deal = (result) => {
+            const deal = result => {
                 if (!result) {
-                    this.$toast( this.$t('hint.pwErr') );
+                    this.$toast(this.$t('hint.pwErr'));
+
                     return false;
                 }
-                
+
                 if (this.type !== 'normal') {
-                    this.$toast( this.$t('unlockSuccess') );                    
+                    this.$toast(this.$t('unlockSuccess'));
                 }
                 this.isPwdHold && activeAccount.holdPWD(password, holdTime);
                 this.clear();
@@ -138,27 +141,30 @@ export default {
             if (!activeAccount.isLogin) {
                 this.isLoading = true;
                 this.$wallet.login({
-                    id: activeAccount.getId(), 
-                    entropy: activeAccount.getEntropy(), 
+                    id: activeAccount.getId(),
+                    entropy: activeAccount.getEntropy(),
                     addr: activeAccount.getDefaultAddr()
                 }, password).then(() => {
                     this.isLoading = false;
                     activeAccount = this.$wallet.getActiveAccount();
                     activeAccount.unlock();
                     deal(true);
-                }).catch((err) => {
-                    this.isLoading = false;
-                    console.warn(err);
-                    deal(false);
-                });
+                })
+                    .catch(err => {
+                        this.isLoading = false;
+                        console.warn(err);
+                        deal(false);
+                    });
+
                 return;
             }
 
-            activeAccount.verify(password).then((result) => {
+            activeAccount.verify(password).then(result => {
                 deal(result);
-            }).catch(() => {
-                deal(false);
-            });
+            })
+                .catch(() => {
+                    deal(false);
+                });
         }
     }
 };
@@ -168,40 +174,45 @@ export default {
 @import '~assets/scss/vars.scss';
 
 .pass-input {
+  width: 100%;
+  background: #fff;
+  border: 1px solid #d4dee7;
+  border-radius: 2px;
+  height: 40px;
+  line-height: 40px;
+  box-sizing: border-box;
+  padding: 0 15px;
+
+  &.distance {
+    margin-top: 30px;
+  }
+
+  input {
     width: 100%;
-    background: #FFFFFF;
-    border: 1px solid #D4DEE7;
-    border-radius: 2px;
-    height: 40px;
-    line-height: 40px;
-    box-sizing: border-box;
-    padding: 0 15px;
-    &.distance {
-        margin-top: 30px;
-    }
-    input {
-        width: 100%;
-        font-size: 14px;
-    }
-}
-.hold-pwd {
-    font-family: $font-normal, arial, sans-serif;
     font-size: 14px;
-    color: #1D2024;
-    margin-top: 12px;
-    span {
-        display: inline-block;
-        margin-bottom: -3px;
-        width: 16px;
-        height: 16px;
-        box-sizing: border-box;
-        background: #FFFFFF;
-        border: 1px solid #D4DEE7;
-        border-radius: 16px;
-        &.active {
-            background: url('../../assets/imgs/presnet.svg') no-repeat center;
-            background-size: 16px 16px;
-        }
+  }
+}
+
+.hold-pwd {
+  font-family: $font-normal, arial, sans-serif;
+  font-size: 14px;
+  color: #1d2024;
+  margin-top: 12px;
+
+  span {
+    display: inline-block;
+    margin-bottom: -3px;
+    width: 16px;
+    height: 16px;
+    box-sizing: border-box;
+    background: #fff;
+    border: 1px solid #d4dee7;
+    border-radius: 16px;
+
+    &.active {
+      background: url('../../assets/imgs/presnet.svg') no-repeat center;
+      background-size: 16px 16px;
     }
+  }
 }
 </style>

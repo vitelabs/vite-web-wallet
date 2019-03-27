@@ -19,7 +19,7 @@ export default {
     },
     methods: {
         _setOrderRule(isUp) {
-            let rule = `${this.orderItem}${isUp ? 'Up' : 'Down'}`;
+            const rule = `${ this.orderItem }${ isUp ? 'Up' : 'Down' }`;
             this.setOrderRule && this.setOrderRule(rule);
         }
     }
@@ -28,18 +28,21 @@ export default {
 
 <style lang="scss" scoped>
 .order-arrow-wrapper {
-    display: inline-block;
-    height: 100%;
-    .arrow-icon {
-        display: block;
-        width: 12px;
-        height: 50%;
-        &:first-child {
-            background: url("~assets/imgs/ascend.svg") bottom no-repeat;
-        }
-        &:last-child {
-            background: url("~assets/imgs/decend.svg") top no-repeat;
-        }
+  display: inline-block;
+  height: 100%;
+
+  .arrow-icon {
+    display: block;
+    width: 12px;
+    height: 50%;
+
+    &:first-child {
+      background: url("~assets/imgs/ascend.svg") bottom no-repeat;
     }
+
+    &:last-child {
+      background: url("~assets/imgs/decend.svg") top no-repeat;
+    }
+  }
 }
 </style>

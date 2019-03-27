@@ -1,7 +1,8 @@
 <script>
 export default {
     render() {
-        return {template:`<div
+        return {
+            template: `<div
         class="confirm-container"
         :class="{ 'gray': showMask }"
     >
@@ -41,7 +42,8 @@ export default {
                 >{{ rTxt }}</div>
             </div>
         </div>
-    </div>`};
+    </div>`
+        };
     }
 };
 </script>

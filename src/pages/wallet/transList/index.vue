@@ -27,7 +27,7 @@
                 text: 'Token',
                 cell: 'tokenSymbol'
             }]" :contentList="transList" :clickRow="goDetail">
-                <pagination class="__tb_pagination" :currentPage="currentPage + 1" 
+                <pagination class="__tb_pagination" :currentPage="currentPage + 1"
                             :totalPage="totalPage" :toPage="toPage"></pagination>
             </table-list>
 
@@ -44,7 +44,7 @@
                 text: $t('walletTransList.sum'),
                 cell: 'smallAmount'
             }]" :contentList="transList" :clickRow="goDetail">
-                <pagination class="__tb_pagination" :currentPage="currentPage + 1" 
+                <pagination class="__tb_pagination" :currentPage="currentPage + 1"
                             :totalPage="totalPage" :toPage="toPage"></pagination>
             </table-list>
         </div>
@@ -66,47 +66,48 @@ import date from 'utils/date.js';
 import { timer } from 'utils/asyncFlow';
 import BigNumber from 'utils/bigNumber';
 import ellipsisAddr from 'utils/ellipsisAddr.js';
-import loopTime from 'config/loopTime';
 
 let transListInst = null;
-let txImgs = [
-    txRegImg, 
-    txRegImg, 
-    txRegImg, 
-    txRewardImg, 
-    txVoteImg, 
-    txVoteImg, 
-    txQuotaImg, 
-    txQuotaImg, 
-    txTokenImg, 
-    txTokenImg, 
-    txTokenImg, 
-    txTokenImg, 
-    txTokenImg, 
-    txTransImg, 
-    txTransImg, 
-    txTransImg, 
-    txTransImg, 
-    txTransImg, 
-    txTransImg, 
-    txTransImg, 
+const txImgs = [
+    txRegImg,
+    txRegImg,
+    txRegImg,
+    txRewardImg,
+    txVoteImg,
+    txVoteImg,
+    txQuotaImg,
+    txQuotaImg,
+    txTokenImg,
+    txTokenImg,
+    txTokenImg,
+    txTokenImg,
+    txTokenImg,
+    txTokenImg,
+    txTransImg,
+    txTransImg,
+    txTransImg,
+    txTransImg,
+    txTransImg,
+    txTransImg,
+    txTransImg,
+    txTransImg,
+    txTransImg,
     txTransImg
 ];
 
 export default {
-    components: {
-        pagination, tableList, secTitle
-    },
+    components: { pagination, tableList, secTitle },
     mounted() {
         this.currentPage = this.$store.state.transList.currentPage;
         this.startLoopTransList();
     },
     data() {
-        let activeAccount = this.$wallet.getActiveAccount();
-        let address = activeAccount.getDefaultAddr();
+        const activeAccount = this.$wallet.getActiveAccount();
+        const address = activeAccount.getDefaultAddr();
+
         return {
             acc: activeAccount,
-            address, 
+            address,
             currentPage: this.$store.state.transList.currentPage
         };
     },
@@ -115,55 +116,56 @@ export default {
             return this.$store.getters.totalPage;
         },
         pageNumber() {
-            return `${this.currentPage + 1}/${this.totalPage}`;
+            return `${ this.currentPage + 1 }/${ this.totalPage }`;
         },
         transList() {
-            let transList = this.$store.getters.transList;
-            let nowList = [];
+            const transList = this.$store.getters.transList;
+            const nowList = [];
 
-            transList.forEach((trans) => {
-                let txType = !trans.rawData.txType && trans.rawData.txType !== 0 ? txImgs.length - 1 : trans.rawData.txType;
-                let typeImg = `<img class="icon" src='${txImgs[txType] ? txImgs[txType] : txImgs[15]}'/>`;
+            transList.forEach(trans => {
+                const txType = !trans.rawData.txType && trans.rawData.txType !== 0 ? txImgs.length - 1 : trans.rawData.txType;
+                const typeImg = `<img class="icon" src='${ txImgs[txType] ? txImgs[txType] : txImgs[15] }'/>`;
 
-                let status = ['unconfirmed', 'confirms', 'confirmed'][trans.status];
-                let statusClass = status === 'confirmed' ? 'green' : 
-                    status === 'unconfirmed' ? 'pink': 'blue';
-                let statusText = this.$t(`walletTransList.status.${status}`) + (status === 'confirms' ? `(${trans.confirms})` : '');
+                const status = [ 'unconfirmed', 'confirms', 'confirmed' ][trans.status];
+                const statusClass = status === 'confirmed' ? 'green'
+                    : status === 'unconfirmed' ? 'pink' : 'blue';
+                const statusText = this.$t(`walletTransList.status.${ status }`) + (status === 'confirms' ? `(${ trans.confirms })` : '');
 
-                let isZero = BigNumber.isEqual(trans.amount, 0);
+                const isZero = BigNumber.isEqual(trans.amount, 0);
                 let amount = trans.amount;
                 if (!isZero) {
-                    amount = trans.isSend ? ('-' + trans.amount) : ('+' + trans.amount);
+                    amount = trans.isSend ? (`-${ trans.amount }`) : (`+${ trans.amount }`);
                 }
 
                 nowList.push({
-                    type: typeImg + this.$t(`txType.${txType}`),
+                    type: typeImg + this.$t(`txType.${ txType }`),
                     smallType: typeImg,
                     date: date(trans.timestamp, this.$i18n.locale),
-                    status: `<span class="${statusClass}">${statusText}</span>`,
+                    status: `<span class="${ statusClass }">${ statusText }</span>`,
                     hash: trans.rawData.hash,
                     transAddr: ellipsisAddr(trans.transAddr),
                     smallTransAddr: ellipsisAddr(trans.transAddr, 6),
-                    amount: `<span class="${trans.isSend ? 'red' : 'green'}">${amount}</span>`,
-                    smallAmount: `<span class="${trans.isSend ? 'red' : 'green'}">${amount}</span> ` + trans.tokenSymbol,
+                    amount: `<span class="${ trans.isSend ? 'red' : 'green' }">${ amount }</span>`,
+                    smallAmount: `<span class="${ trans.isSend ? 'red' : 'green' }">${ amount }</span> ${ trans.tokenSymbol }`,
                     tokenSymbol: trans.tokenSymbol,
                     rawData: trans.rawData
                 });
             });
+
             return nowList;
-        },
+        }
     },
     beforeDestroy() {
         this.stopLoopTransList();
     },
     methods: {
         goDetail(trans) {
-            let locale = this.$i18n.locale === 'zh' ? 'zh/' : '';
-            window.open(`${process.env.viteNet}${locale}transaction/${trans.rawData.hash}`);
+            const locale = this.$i18n.locale === 'zh' ? 'zh/' : '';
+            window.open(`${ process.env.viteNet }${ locale }transaction/${ trans.rawData.hash }`);
         },
 
         toPage(pageNumber) {
-            let pageIndex = pageNumber - 1;
+            const pageIndex = pageNumber - 1;
             if ((pageIndex >= this.totalPage && pageIndex) || pageIndex < 0) {
                 return;
             }
@@ -171,19 +173,18 @@ export default {
             this.currentPage = pageIndex;
             this.stopLoopTransList();
 
-            this.fetchTransList(this.currentPage, true).then((data)=>{
+            this.fetchTransList(this.currentPage, true).then(data => {
                 data && this.$refs.tableContent && (this.$refs.tableContent.scrollTop = 0);
                 this.startLoopTransList();
-            }).catch(()=>{
-                this.startLoopTransList();
-            });
+            })
+                .catch(() => {
+                    this.startLoopTransList();
+                });
         },
 
         startLoopTransList() {
             this.stopLoopTransList();
-            transListInst = new timer(()=>{
-                return this.fetchTransList(this.currentPage);
-            }, loopTime.ledger_getBlocks);
+            transListInst = new timer(() => this.fetchTransList(this.currentPage), 2000);
             transListInst.start();
         },
         stopLoopTransList() {
@@ -205,100 +206,117 @@ export default {
 @import "~assets/scss/vars.scss";
 
 .trans-list-wrapper {
-    display: flex;
-    flex-direction: column;
-    box-sizing: border-box;
-    height: 100%;
-    .title {
-        margin-bottom: 40px;
-    }
-    .trans-list-content {
-        overflow: auto;
-        flex: 1;
-    }
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  height: 100%;
+
+  .title {
+    margin-bottom: 40px;
+  }
+
+  .trans-list-content {
+    overflow: auto;
+    flex: 1;
+  }
 }
+
 .small-trans {
-    display: none;
+  display: none;
 }
 
 @media only screen and (max-width: 550px) {
-    .trans-list-wrapper {
-        padding: 15px;
-    }
+  .trans-list-wrapper {
+    padding: 15px;
+  }
 }
 
 @media only screen and (max-width: 500px) {
-    .trans-list-wrapper .title {
-        margin-bottom: 15px;
-    }
-    .big-trans {
-        display: none;
-    }
-    .small-trans {
-        display: flex;
-    }
+  .trans-list-wrapper .title {
+    margin-bottom: 15px;
+  }
+
+  .big-trans {
+    display: none;
+  }
+
+  .small-trans {
+    display: flex;
+  }
 }
 </style>
 
 <style lang="scss">
 @import "~assets/scss/vars.scss";
 
-.tType {    
-    min-width: 230px;
-    width: 15%;
-}
-.status {
-    min-width: 120px;
-    width: 10%;
-}
-.time {
-    min-width: 200px;
-    width: 20%;
-}
-.address {
-    min-width: 240px;
-    width: 25%;
-}
-.sum {
-    width: 14%;
-    min-width: 150px;
-}
-.token {
-    min-width: 70px;
-}
-.pink {
-    font-family: $font-bold, arial, sans-serif;
-    color: #EA60AC;
-}
-.blue {
-    font-family: $font-bold, arial, sans-serif;
-    color: #007AFF;
-}
-.green {
-    font-family: $font-bold, arial, sans-serif;
-    color: #5BC500;
-}
-.red {
-    font-family: $font-bold, arial, sans-serif;
-    color: #FF0008;
-}
-.icon {
-    margin-right: 6px;
-    margin-bottom: -2px;
+.tType {
+  min-width: 230px;
+  width: 15%;
 }
 
-@media only screen and (max-width: 500px) {    
-    .small-trans.__tb{
-        min-width: 0;
-    }
-    .tType {
-        min-width: 50px;
-        width: 10%;
-    }
-    .address {
-        overflow: hidden;
-        min-width: 180px;
-        width: 25%;
-    }
+.status {
+  min-width: 120px;
+  width: 10%;
+}
+
+.time {
+  min-width: 200px;
+  width: 20%;
+}
+
+.address {
+  min-width: 240px;
+  width: 25%;
+}
+
+.sum {
+  width: 14%;
+  min-width: 150px;
+}
+
+.token {
+  min-width: 70px;
+}
+
+.pink {
+  font-family: $font-bold, arial, sans-serif;
+  color: #ea60ac;
+}
+
+.blue {
+  font-family: $font-bold, arial, sans-serif;
+  color: #007aff;
+}
+
+.green {
+  font-family: $font-bold, arial, sans-serif;
+  color: #5bc500;
+}
+
+.red {
+  font-family: $font-bold, arial, sans-serif;
+  color: #ff0008;
+}
+
+.icon {
+  margin-right: 6px;
+  margin-bottom: -2px;
+}
+
+@media only screen and (max-width: 500px) {
+  .small-trans.__tb {
+    min-width: 0;
+  }
+
+  .tType {
+    min-width: 50px;
+    width: 10%;
+  }
+
+  .address {
+    overflow: hidden;
+    min-width: 180px;
+    width: 25%;
+  }
 }
 </style>

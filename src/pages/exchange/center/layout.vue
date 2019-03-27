@@ -19,55 +19,64 @@
 
 <style lang="scss" scoped>
 .__flex_row {
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
 }
+
 .__flex_column {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .exchange-layout {
-    width: 100%;
-    height: 100%;
-    padding: 10px;
-    box-sizing: border-box;
-    min-height: 850px;
-    .__border {
-        border-radius: 2px;
-        background: rgba(255,255,255,1);
-        box-shadow: 0px 2px 10px 1px rgba(176,192,237,0.42);
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  min-height: 850px;
+
+  .__border {
+    border-radius: 2px;
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 0 2px 10px 1px rgba(176, 192, 237, 0.42);
+  }
+
+  .left {
+    flex: 1;
+    margin-right: 10px;
+
+    .left-top {
+      width: 100%;
+      height: 60px;
     }
 
-    .left {
+    .left-bottom {
+      flex: 1;
+      margin-top: 10px;
+
+      .t {
         flex: 1;
+        margin-bottom: 10px;
+      }
+
+      .b {
+        flex-basis: 306px;
+      }
+
+      .l {
+        flex-basis: 290px;
         margin-right: 10px;
-        .left-top {
-            width: 100%;
-            height: 60px;
-        }
-        .left-bottom {
-            flex: 1;
-            margin-top: 10px;
-            .t {
-                flex: 1;
-                margin-bottom: 10px;
-            }
-            .b {
-                flex-basis: 306px;
-            }
-            .l {
-                flex-basis: 290px;
-                margin-right: 10px;
-            }
-            .r {
-                flex: 1;
-                overflow: auto;
-            }
-        }
+      }
+
+      .r {
+        flex: 1;
+        overflow: auto;
+      }
     }
-    .right {
-        width: 300px;
-    }
+  }
+
+  .right {
+    width: 300px;
+  }
 }
 </style>

@@ -54,15 +54,13 @@ export default {
     methods: {
         lClick() {
             if (this.inspector) {
-                this.inspector.then((data) => {
-
+                this.inspector.then(data => {
                     this.promise.resolve({
                         status: STATUS.CONFIRMED,
                         data
                     });
                     this.destory();
-                }
-                );
+                });
             } else {
                 this.promise.resolve({
                     status: STATUS.CONFIRMED,
@@ -70,7 +68,6 @@ export default {
                 });
                 this.destory();
             }
-
         },
         rClick() {
             this.destory();

@@ -28,7 +28,7 @@ const mutations = {
 
 const actions = {
     exFetchDepth({ rootState, dispatch }) {
-        let activeTxPair = rootState.exchangeActiveTxPair.activeTxPair;
+        const activeTxPair = rootState.exchangeActiveTxPair.activeTxPair;
         if (!activeTxPair) {
             return;
         }

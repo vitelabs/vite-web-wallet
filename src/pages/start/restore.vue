@@ -28,9 +28,7 @@ import create from './create.vue';
 import loading from 'components/loading.vue';
 
 export default {
-    components: {
-        create, loading
-    },
+    components: { create, loading },
     mounted() {
         this.$onKeyDown(13, () => {
             this.valid();
@@ -59,16 +57,17 @@ export default {
     },
     methods: {
         valid() {
-            this.$refs.createDom && this.$refs.createDom.valid();                   
+            this.$refs.createDom && this.$refs.createDom.valid();
         },
         validMnemonic(name, pass) {
             if (this.isLoading) {
                 return;
             }
 
-            let mnemonic = this.$trim(this.mnemonic);
+            const mnemonic = this.$trim(this.mnemonic);
             if (!mnemonic) {
                 this.errMsg = 'mnemonic.empty';
+
                 return;
             }
 
@@ -76,30 +75,29 @@ export default {
         },
         restoreAccount(mnemonic, name, pass) {
             this.isLoading = true;
-            this.$wallet.restoreAccount(mnemonic, name, pass).then(()=>{
+            this.$wallet.restoreAccount(mnemonic, name, pass).then(() => {
                 if (!this.isLoading) {
                     return;
                 }
 
                 this.isLoading = false;
 
-                let activeAccount = this.$wallet.getActiveAccount();
+                const activeAccount = this.$wallet.getActiveAccount();
                 activeAccount.rename(name);
                 activeAccount.save();
 
                 this.finishCb && this.finishCb();
-                this.$router.push({
-                    name: 'start'
+                this.$router.push({ name: 'start' });
+            })
+                .catch(err => {
+                    console.warn(err);
+                    if (err && err.code === 500005) {
+                        this.errMsg = 'mnemonic.error';
+                    } else {
+                        this.errMsg = 'hint.nodeErr';
+                    }
+                    this.isLoading = false;
                 });
-            }).catch(err => {
-                console.warn(err);
-                if (err && err.code === 500005) {
-                    this.errMsg = 'mnemonic.error';
-                } else {
-                    this.errMsg = 'hint.nodeErr';
-                }
-                this.isLoading = false;
-            });
         }
     }
 };
@@ -107,41 +105,45 @@ export default {
 
 <style lang="scss" scoped>
 .wrapper {
-    box-sizing: border-box;
-    position: relative;
-    background: #fff;
-    border-radius: 3px;
-    text-align: center;
-    font-size: 14px;
-    color: #1D2024;
-    box-sizing: border-box;
-    position: relative;
-    padding: 20px;
-    height: 100px;
-    color: rgba(94,104,117,0.30);
-    margin-bottom: 20px;
-    textarea {
-        width: 100%;
-        height: 100%;
-        resize: none;
-        text-align: left;
-        word-wrap: break-word;
-        &.center {
-            text-align: center;
-            line-height: 60px;
-        }
-    }
-    .msg {
-        position: absolute;
-        left: 0;
-        bottom: 0;
-    }
-}
-.note {
-    font-size: 14px;
-    color: #FFFFFF;
+  box-sizing: border-box;
+  position: relative;
+  background: #fff;
+  border-radius: 3px;
+  text-align: center;
+  font-size: 14px;
+  color: #1d2024;
+  box-sizing: border-box;
+  position: relative;
+  padding: 20px;
+  height: 100px;
+  color: rgba(94, 104, 117, 0.3);
+  margin-bottom: 20px;
+
+  textarea {
+    width: 100%;
+    height: 100%;
+    resize: none;
     text-align: left;
-    line-height: 20px;
-    margin: 30px 0;
+    word-wrap: break-word;
+
+    &.center {
+      text-align: center;
+      line-height: 60px;
+    }
+  }
+
+  .msg {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+  }
+}
+
+.note {
+  font-size: 14px;
+  color: #fff;
+  text-align: left;
+  line-height: 20px;
+  margin: 30px 0;
 }
 </style>

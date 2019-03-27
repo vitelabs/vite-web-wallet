@@ -28,9 +28,7 @@ export default {
         },
         menuList: {
             type: Array,
-            default: () => {
-                return [];
-            }
+            default: () => []
         },
         go: {
             type: Function,
@@ -53,7 +51,7 @@ export default {
         clickMenu() {
             this.showList = !this.showList;
         },
-        hideMenu () {
+        hideMenu() {
             this.showList = false;
         },
 
@@ -69,56 +67,64 @@ export default {
 @import "~assets/scss/vars.scss";
 
 .menu-wrapper {
-    position: relative;
-    z-index: 50;
+  position: relative;
+  z-index: 50;
 }
+
 .header {
-    padding: 15px 15px 13px 15px;
-    background: #FFFFFF;
-    box-shadow: 0 6px 36px 0 rgba(0,62,100,0.04);
-    .vite-logo {
-        width: 67.5px;
-        height: 35px;
+  padding: 15px 15px 13px 15px;
+  background: #fff;
+  box-shadow: 0 6px 36px 0 rgba(0, 62, 100, 0.04);
+
+  .vite-logo {
+    width: 67.5px;
+    height: 35px;
+  }
+
+  .menu {
+    display: block;
+    float: right;
+    width: 35px;
+    height: 35px;
+    line-height: 35px;
+    background: url('../assets/imgs/menu.svg') no-repeat center;
+    background-size: 16px 14px;
+
+    &:active {
+      background: url('../assets/imgs/menu_presssed.svg') no-repeat center;
+      background-size: 16px 14px;
     }
-    .menu {
-        display: block;
-        float: right;
-        width: 35px;
-        height: 35px;
-        line-height: 35px;
-        background: url('../assets/imgs/menu.svg') no-repeat center;
-        background-size: 16px 14px;
-        &:active {
-            background: url('../assets/imgs/menu_presssed.svg') no-repeat center;
-            background-size: 16px 14px;
-        }
-    }
+  }
 }
+
 .menu-list {
-    margin-top: 5px;
+  margin-top: 5px;
+  box-sizing: border-box;
+  position: absolute;
+  top: 64px;
+  font-family: $font-bold, arial, sans-serif;
+  font-size: 14px;
+  color: #1d2024;
+  letter-spacing: 0.35px;
+  padding: 0 15px;
+  width: 100%;
+  background: #fff;
+  box-shadow: 0 6px 36px 0 rgba(0, 62, 100, 0.04);
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+
+  .item {
     box-sizing: border-box;
-    position: absolute;
-    top: 64px;
-    font-family: $font-bold, arial, sans-serif;
-    font-size: 14px;
-    color: #1D2024;
-    letter-spacing: 0.35px;
-    padding: 0 15px;
-    width: 100%;
-    background: #FFFFFF;
-    box-shadow: 0 6px 36px 0 rgba(0,62,100,0.04);
-    overflow: hidden;
-    transition: all 0.3s ease-in-out;
-    .item {
-        box-sizing: border-box;
-        margin-top: 0px;
-        border-bottom: 1px solid #d7dce5;
-        &:last-child {
-            border: none;
-        }
-        &.active {
-            color: #007AFF;
-        }
+    margin-top: 0;
+    border-bottom: 1px solid #d7dce5;
+
+    &:last-child {
+      border: none;
     }
+
+    &.active {
+      color: #007aff;
+    }
+  }
 }
 </style>

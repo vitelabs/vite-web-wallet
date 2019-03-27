@@ -7,9 +7,7 @@
 <script>
 export default {
     data() {
-        return {
-            inspector: [this.submit]
-        };
+        return { inspector: [this.submit] };
     },
     methods: {
         submit() {

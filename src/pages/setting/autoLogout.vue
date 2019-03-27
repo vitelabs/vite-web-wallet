@@ -23,7 +23,8 @@ export default {
         return {
             autoLogoutTime: localStorage.getItem('autoLogoutTime') || 5,
             showTime: false,
-            timeList: [5, 10, 30, 60, 12 * 60]  // Minutes
+            // Minutes
+            timeList: [ 5, 10, 30, 60, 12 * 60 ]
         };
     },
     methods: {
@@ -43,11 +44,11 @@ export default {
 @import "~assets/scss/list/setting.scss";
 
 .title {
-    font-size: 14px;
-    color: #1D2024;
-    font-family: $font-bold, arial, sans-serif;
-    letter-spacing: 0.35px;
-    line-height: 16px;
-    margin-bottom: 16px;
+  font-size: 14px;
+  color: #1d2024;
+  font-family: $font-bold, arial, sans-serif;
+  letter-spacing: 0.35px;
+  line-height: 16px;
+  margin-bottom: 16px;
 }
 </style>

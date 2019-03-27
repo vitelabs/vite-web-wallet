@@ -1,31 +1,31 @@
 <template>
     <div class="head">
         <ul class="tab-list-wrapper">
-            <li v-for="(tab, index) in tabList" :key="index" 
-                class="tab __pointer" :class="{ 
+            <li v-for="(tab, index) in tabList" :key="index"
+                class="tab __pointer" :class="{
                     'active': active === tab,
                     'dex': active.indexOf('exchange') === 0
             }" @click="go(tab)" >
                 {{ $t(`${tab}.title`) }}
             </li>
         </ul>
-        
+
         <go-net-btn class="go-net-wrapper"></go-net-btn>
-        <change-lang class="menu change-lang-wrapper" 
+        <change-lang class="menu change-lang-wrapper"
                      :class="{'dex': active.indexOf('exchange') === 0}"></change-lang>
 
         <ul class="right-lab-list">
-            <div v-show="!isLogin" @click="dexStart" class="tab __pointer" 
+            <div v-show="!isLogin" @click="dexStart" class="tab __pointer"
                  :class="{'dex': active.indexOf('exchange') === 0}">
                 {{ isHaveUsers ? $t('unlockAcc') : $t('login')  }}</div>
             <div v-show="!isLogin" @click="dexChange" class="tab __pointer"
                  :class="{'dex': active.indexOf('exchange') === 0}">
-                {{ isHaveUsers ? $t('changeAcc') : $t('register') }}</div>  
-            <div v-show="active === 'exchange'" v-unlock-account="showToken" 
+                {{ isHaveUsers ? $t('changeAcc') : $t('register') }}</div>
+            <div v-show="active === 'exchange'" v-unlock-account="showToken"
                  class="tab dex __pointer">{{ $t('dexToken') }}</div>
         </ul>
 
-        <dex-token v-show="isShowDexToken" :close="closeToken"></dex-token>
+        <dex-token v-if="isShowDexToken" :close="closeToken"></dex-token>
     </div>
 </template>
 
@@ -35,15 +35,11 @@ import dexToken from 'components/dexToken';
 import goNetBtn from './goNetBtn.vue';
 
 export default {
-    components: {
-        goNetBtn, changeLang, dexToken
-    },
+    components: { goNetBtn, changeLang, dexToken },
     props: {
         tabList: {
             type: Array,
-            default: () => {
-                return [];
-            }
+            default: () => []
         },
         go: {
             type: Function,
@@ -51,7 +47,7 @@ export default {
         }
     },
     mounted() {
-        this.$router.afterEach((to)=>{
+        this.$router.afterEach(to => {
             this.active = to.name;
         });
         this.isLogin = !!this.$wallet.isLogin;
@@ -63,7 +59,7 @@ export default {
         });
     },
     data() {
-        let activeAccount = this.$wallet.getActiveAccount();
+        const activeAccount = this.$wallet.getActiveAccount();
 
         return {
             active: this.$route.name,
@@ -83,16 +79,16 @@ export default {
         dexStart() {
             if (!this.isHaveUsers) {
                 this.go('start');
+
                 return;
             }
-            let activeAccount = this.$wallet.getActiveAccount();
+            const activeAccount = this.$wallet.getActiveAccount();
             activeAccount && activeAccount.unlockAccount();
         },
         dexChange() {
             if (!this.isHaveUsers) {
-                this.$router.push({
-                    name: 'startCreate'
-                });
+                this.$router.push({ name: 'startCreate' });
+
                 return;
             }
             this.go('start');
@@ -105,81 +101,92 @@ export default {
 @import "~assets/scss/vars.scss";
 
 .head {
+  box-sizing: border-box;
+  padding-left: 10px;
+  line-height: 43px;
+  margin: 0 10px;
+  border-bottom: 1px solid rgba(198, 203, 212, 0.3);
+
+  .tab-list-wrapper {
+    display: block;
+    display: flex;
+    flex-wrap: wrap;
+    float: left;
+  }
+
+  .right-lab-list {
+    float: right;
+  }
+
+  .tab {
+    font-size: 14px;
+    font-family: $font-bold, arial, sans-serif;
+    font-weight: 600;
+    color: rgba(29, 32, 36, 0.6);
+    display: inline-block;
     box-sizing: border-box;
-    padding-left: 10px;
-    line-height: 43px;
-    margin: 0 10px;
-    border-bottom: 1px solid rgba(198, 203, 212, 0.3);
-    .tab-list-wrapper {
-        display: block;
-        display: flex;
-        flex-wrap: wrap;
-        float: left;
+    height: 100%;
+    white-space: nowrap;
+    margin-right: 28px;
+    text-align: center;
+
+    &.dex {
+      color: rgba(189, 193, 209, 1);
     }
-    .right-lab-list {
-        float: right;
-    }
-    .tab {
-        font-size: 14px;
-        font-family: $font-bold, arial, sans-serif;
-        font-weight: 600;
-        color: rgba(29,32,36,0.6);
+
+    &.active {
+      position: relative;
+      color: rgba(0, 122, 255, 1);
+      border-bottom: 2px solid rgba(0, 122, 255, 1);
+
+      &::after {
+        content: '';
         display: inline-block;
-        box-sizing: border-box;
-        height: 100%;
-        white-space: nowrap;
-        margin-right: 28px;
-        text-align: center;
-        &.dex {
-            color: rgba(189,193,209,1);
-        }
-        &.active {
-            position: relative;
-            color: rgba(0,122,255,1);;
-            border-bottom: 2px solid rgba(0,122,255,1);
-            &:after {
-                content: '';
-                display: inline-block;
-                border: 6px solid transparent;
-                border-bottom: 6px solid rgba(0,122,255,1);
-                position: absolute;
-                bottom: 0px;
-                left: 50%;
-                margin-left: -6px;
-            }
-        }
+        border: 6px solid transparent;
+        border-bottom: 6px solid rgba(0, 122, 255, 1);
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        margin-left: -6px;
+      }
     }
-    .go-net-wrapper {
-        float: right;
-        margin-top: 8px;
-    }
-    .change-lang-wrapper {
-        float: right;
-    }
+  }
+
+  .go-net-wrapper {
+    float: right;
+    margin-top: 8px;
+  }
+
+  .change-lang-wrapper {
+    float: right;
+  }
 }
 
 @media only screen and (max-width: 940px) {
-    .head .tab-list-wrapper {
-        width: 100%;
+  .head .tab-list-wrapper {
+    width: 100%;
+  }
+
+  .head .change-lang-wrapper {
+    float: left;
+    margin-left: 20px;
+  }
+
+  .head {
+    .go-net-wrapper {
+      float: left;
     }
-    .head .change-lang-wrapper {
-        float: left;
-        margin-left: 20px;
+
+    .right-lab-list {
+      float: left;
     }
-    .head {
-        .go-net-wrapper {
-            float: left;
-        }
-        .right-lab-list {
-            float: left;
-        }
-    }
+  }
 }
 
 @media only screen and (max-width: 900px) {
-    .head .tab-list-wrapper .tab {
-        box-sizing: border-box;
-        padding: 0 10px;
-    }
+  .head .tab-list-wrapper .tab {
+    box-sizing: border-box;
+    padding: 0 10px;
+  }
 }
 </style>

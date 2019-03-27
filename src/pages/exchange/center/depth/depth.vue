@@ -1,30 +1,30 @@
 <template>
     <div class="depth-wrapper">
-        <ul class="ex-tab-list"> 
+        <ul class="ex-tab-list">
             <li :class="{
                     'active': isShowSell && isShowBuy
-                }" class="ex-tab __pointer" 
+                }" class="ex-tab __pointer"
                 @click="showTable(true, true)">{{ $t('exchange.depth.all') }}</li>
             <li :class="{
                     'active': isShowBuy && !isShowSell,
                     'active-side': isShowSell && isShowBuy
-                }" class="ex-tab __pointer" 
+                }" class="ex-tab __pointer"
                 @click="showTable(true, false)">{{ $t('exchange.depth.buy') }}</li>
             <li :class="{
                     'active': isShowSell && !isShowBuy,
                     'active-side': isShowBuy && !isShowSell
-                }" class="ex-tab __pointer" 
+                }" class="ex-tab __pointer"
                 @click="showTable(false, true)">{{ $t('exchange.depth.sell') }}</li>
         </ul>
 
         <div class="__center-tb-title">
-            <span class="__center-tb-item depth price">{{ $t('exchange.priceTitle', { 
-                price: activeTxPair && activeTxPair.ttokenShow ? activeTxPair.ttokenShow : '' 
+            <span class="__center-tb-item depth price">{{ $t('exchange.priceTitle', {
+                price: activeTxPair && activeTxPair.ttokenShow ? activeTxPair.ttokenShow : ''
             }) }}</span>
-            <span class="__center-tb-item depth quantity">{{ $t('exchange.amountTitle', { 
+            <span class="__center-tb-item depth quantity">{{ $t('exchange.amountTitle', {
                 amount: activeTxPair && activeTxPair.ftokenShow ? activeTxPair.ftokenShow : ''
             }) }}</span>
-            <span class="__center-tb-item depth amount">{{ $t('exchange.quantityTitle', { 
+            <span class="__center-tb-item depth amount">{{ $t('exchange.quantityTitle', {
                 quantity: activeTxPair && activeTxPair.ttokenShow ? activeTxPair.ttokenShow : ''
             }) }}</span>
         </div>
@@ -46,9 +46,7 @@ import depthTable from './depthTable';
 import price from './price';
 
 export default {
-    components: {
-        depthTable, price
-    },
+    components: { depthTable, price },
     data() {
         return {
             isShowBuy: true,
@@ -79,36 +77,41 @@ export default {
 @import '../center.scss';
 
 .depth-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  .depth-content-wrapper {
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
-    .depth-content-wrapper {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        &.one {
-            flex: 1;
-            overflow: auto;
-        }
+
+    &.one {
+      flex: 1;
+      overflow: auto;
+    }
+  }
+
+  .depth-table {
+    position: relative;
+    width: 100%;
+
+    &.show-all {
+      flex: 1;
+      overflow: hidden;
+
+      .sell {
+        position: absolute;
+        bottom: 0;
+      }
     }
 
-    .depth-table {
-        position: relative;
-        width: 100%;
-        &.show-all {
-            flex: 1;
-            overflow: hidden;
-            .sell {
-                position: absolute;
-                bottom: 0;
-            }
-        }
-        .sell {
-            width: 100%;
-        }
+    .sell {
+      width: 100%;
     }
+  }
 }
 
 

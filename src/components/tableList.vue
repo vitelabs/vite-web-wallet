@@ -1,7 +1,7 @@
 <template>
     <div class="__tb">
         <div class="__tb_row __tb_head __pointer">
-            <div v-for="(headItem, i) in headList" :key="i" 
+            <div v-for="(headItem, i) in headList" :key="i"
                  class="__tb_cell" :class="headItem.class || ''">
                 {{ headItem.text || '' }}
             </div>
@@ -13,9 +13,9 @@
                      'active': !!clickRow,
                      '__pointer': !!clickRow
             }" @click="_clickRow(rowItem)">
-                <span v-for="(headItem, i) in headList" :key="i" 
+                <span v-for="(headItem, i) in headList" :key="i"
                       @click="clickCell(headList[i].cell, rowItem, index)"
-                      v-html="rowItem[ headList[i].cell ]" 
+                      v-html="rowItem[ headList[i].cell ]"
                       :class="headItem.class || ''" class="__tb_cell">{{ i }}
                 </span>
             </div>
@@ -34,20 +34,16 @@ export default {
     props: {
         headList: {
             type: Array,
-            default: () => {
-                return [];
-            }
+            default: () => []
         },
         contentList: {
             type: Array,
-            default: () =>{
-                return [];
-            }
+            default: () => []
         },
         clickRow: null,
         clickCell: {
             type: Function,
-            default: ()=>{}
+            default: () => {}
         }
     },
     methods: {

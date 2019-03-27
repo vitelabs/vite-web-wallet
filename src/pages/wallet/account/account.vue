@@ -19,9 +19,7 @@ import accountHead from './head';
 import transaction from './transaction';
 
 export default {
-    components: {
-        accountHead, syncBlock, tokenCard, transaction
-    },
+    components: { accountHead, syncBlock, tokenCard, transaction },
     data() {
         return {
             isShowTrans: false,
@@ -29,22 +27,43 @@ export default {
         };
     },
     computed: {
-        tokenList() {   // Force vite at first
+        tokenList() {
             const tokenList = JSON.parse(JSON.stringify(this.$store.getters.tokenBalanceList));
-            let viteTokenInfo = viteWallet.Ledger.getTokenInfo();
+
+            for (const tokenId in this.$store.state.ledger.defaultTokenIds) {
+                if (!this.$store.state.ledger.tokenInfoMaps[tokenId] && !tokenList[tokenId]) {
+                    break;
+                }
+
+                const token = this.$store.state.ledger.tokenInfoMaps[tokenId] || tokenList[tokenId];
+                const defaultToken = this.$store.state.ledger.defaultTokenIds[tokenId];
+                const symbol = token.tokenSymbol || defaultToken.tokenSymbol;
+
+                tokenList[tokenId] = tokenList[tokenId] || {
+                    balance: '0',
+                    fundFloat: '0',
+                    symbol,
+                    decimals: '0'
+                };
+                tokenList[tokenId].icon = defaultToken.icon;
+            }
+
+            const viteTokenInfo = this.$store.getters.viteTokenInfo;
             if (!viteTokenInfo) {
                 return tokenList;
             }
 
+            // Force vite at first
             const list = [];
-            let viteId = viteTokenInfo.tokenId;
+            const viteId = viteTokenInfo.tokenId;
             if (tokenList[viteId]) {
                 list.push(tokenList[viteId]);
                 delete tokenList[viteId];
             }
-            Object.keys(tokenList).forEach(k=>{
+            Object.keys(tokenList).forEach(k => {
                 list.push(tokenList[k]);
             });
+
             return list;
         }
     },
@@ -66,41 +85,48 @@ export default {
 
 <style lang="scss" rel="stylesheet/scss">
 .page-content .account-wrapper.__wrapper {
-    padding-top: 0;
+  padding-top: 0;
 }
+
 .account-wrapper {
+  position: relative;
+  box-sizing: border-box;
+  overflow: auto;
+  height: 100%;
+
+  .head {
     position: relative;
-    box-sizing: border-box;
-    overflow: auto;
-    height: 100%;
-    .head {
-        position: relative;
-        text-align: center;
-        margin-top: 20px;
-        line-height: 40px;
-    }
-    .sync-block {
-        display: inline-block;
-    }
-    .net-btn {
-        position: absolute;
-        right: 0px;
-    }
-}
-.item {
+    text-align: center;
     margin-top: 20px;
+    line-height: 40px;
+  }
+
+  .sync-block {
+    display: inline-block;
+  }
+
+  .net-btn {
+    position: absolute;
+    right: 0;
+  }
 }
+
+.item {
+  margin-top: 20px;
+}
+
 .token-list {
-    display: flex;
-    flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 @media only screen and (max-width: 550px) {
-    .account-wrapper .head {
-        margin-bottom: 0px;
-    }
-    .token-list {
-        display: block;
-    }
+  .account-wrapper .head {
+    margin-bottom: 0;
+  }
+
+  .token-list {
+    display: block;
+  }
 }
 </style>

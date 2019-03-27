@@ -12,8 +12,8 @@
 </template>
 
 <script>
-import pageLayout from 'components/pageLayout';
 import update from 'components/update.vue';
+import pageLayout from 'components/pageLayout';
 import firstNotice from 'components/firstNotice.vue';
 
 export default {
@@ -27,6 +27,8 @@ export default {
         this.$router.afterEach(to => {
             this.active = to.name;
         });
+
+        this.$store.commit('setLang', this.$i18n.locale);
         this.$store.dispatch('startLoopBalance');
     },
     data() {
@@ -36,14 +38,14 @@ export default {
         };
     },
     watch: {
-        active: function() {
+        active: function () {
             this.changeLayout();
             this.$offKeyDown();
         }
     },
     methods: {
         changeLayout() {
-            let toHome = this.active.indexOf('start') !== -1;
+            const toHome = this.active.indexOf('start') !== -1;
             this.layoutType = toHome ? 'home' : 'start';
         }
     }
@@ -52,11 +54,11 @@ export default {
 
 <style lang="scss" scoped>
 .app-wrapper {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    overflow: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: auto;
 }
 </style>

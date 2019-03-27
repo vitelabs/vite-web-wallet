@@ -3,7 +3,7 @@
         <confirm v-show="isShowTrans" class="trans-confirm"
                  :title="$t('wallet.transfer')"
                  :btnUnuse="unTrans"
-                 :closeIcon="true" :close="closeTrans" :singleBtn="true" 
+                 :closeIcon="true" :close="closeTrans" :singleBtn="true"
                  :leftBtnClick="validTrans" :leftBtnTxt="$t('wallet.transfer')" >
 
             <div class="__row">
@@ -58,9 +58,7 @@ import { encoder, address } from 'utils/tools';
 const SendDifficulty = '157108864';
 
 export default {
-    components: {
-        powProcess, confirm, viteInput
-    },
+    components: { powProcess, confirm, viteInput },
     props: {
         token: {
             type: Object,
@@ -70,14 +68,14 @@ export default {
         },
         closeTrans: {
             type: Function,
-            default: ()=>{}
+            default: () => {}
         }
     },
     mounted() {
-        Vue.nextTick(()=>{
+        Vue.nextTick(() => {
             this.$refs.inAddr && this.$refs.inAddr.focus();
         });
-        
+
         this.$onKeyDown(13, () => {
             this.validTrans();
         });
@@ -103,8 +101,7 @@ export default {
             if (!this.tokenBalList || !this.tokenBalList[this.token.id]) {
                 return 0;
             }
-            let balance = this.tokenBalList[this.token.id].totalAmount;
-            return balance;
+            return this.tokenBalList[this.token.id].totalAmount;
         },
         showAccBalance() {
             return BigNumber.toBasic(this.accBalance, this.token.decimals);
@@ -113,12 +110,15 @@ export default {
             return this.$store.state.account.balance.balanceInfos;
         },
         msgBalance() {
-            let message = this.$trim(this.message);
-            let length = encoder.getBytesSize(message);
+            const message = this.$trim(this.message);
+            const length = encoder.getBytesSize(message);
             return 120 - length;
         },
         messageErr() {
             return this.msgBalance < 0;
+        },
+        netStatus() {
+            return this.$store.state.env.clientStatus;
         }
     },
     methods: {
@@ -139,9 +139,7 @@ export default {
                 leftBtn: {
                     text: this.$t('quotaConfirmPoW.leftBtn.text'),
                     click: () => {
-                        this.$router.push({
-                            name: 'walletQuota'
-                        });
+                        this.$router.push({ name: 'walletQuota' });
                     }
                 },
                 rightBtn: {
@@ -155,8 +153,8 @@ export default {
         },
 
         testAmount() {
-            let result = this.$validAmount(this.amount, this.token.decimals);
-            
+            const result = this.$validAmount(this.amount, this.token.decimals);
+
             if (!result) {
                 this.amountErr = this.$t('hint.amtFormat');
                 return false;
@@ -167,7 +165,7 @@ export default {
                 return false;
             }
 
-            let amount = BigNumber.toMin(this.amount, this.token.decimals);
+            const amount = BigNumber.toMin(this.amount, this.token.decimals);
             if (BigNumber.compared(this.accBalance, amount) < 0) {
                 this.amountErr = this.$t('hint.insufficientBalance');
                 return false;
@@ -185,12 +183,13 @@ export default {
             if (!this.inAddress) {
                 this.isValidAddress = false;
             }
+
             if (this.amountErr || this.messageErr || !this.isValidAddress || !this.testAmount()) {
                 return;
             }
 
-            let activeAccount = this.$wallet.getActiveAccount();
-            let isHold = activeAccount.initPwd({
+            const activeAccount = this.$wallet.getActiveAccount();
+            const isHold = activeAccount.initPwd({
                 showMask: false,
                 submit: () => {
                     this.isShowTrans = true;
@@ -199,28 +198,28 @@ export default {
                 cancel: () => {
                     this.isShowTrans = true;
                 }
-            }); 
+            });
             !isHold && (this.isShowTrans = false);
         },
 
         transfer() {
-            if (!viteWallet.Net.getNetStatus()) {
+            if (!this.netStatus) {
                 this.$toast(this.$t('hint.noNet'));
                 return;
             }
-            
-            this.loading = true;
-            let amount =  BigNumber.toMin(this.amount, this.token.decimals);
 
-            let successText = this.$t('hint.transSucc');
-            let failText = this.$t('hint.err');
-            
-            let activeAccount = this.$wallet.getActiveAccount();
+            this.loading = true;
+
+            const amount = BigNumber.toMin(this.amount, this.token.decimals);
+            const successText = this.$t('hint.transSucc');
+            const failText = this.$t('hint.err');
+            const activeAccount = this.$wallet.getActiveAccount();
+
             if (!activeAccount) {
                 this.$toast(this.$t('hint.err'));
                 return;
             }
-            
+
             activeAccount.sendTx({
                 toAddress: this.inAddress,
                 tokenId: this.token.id,
@@ -232,17 +231,17 @@ export default {
                     return;
                 }
                 this.transSuccess();
-            }).catch((err) => {
+            }).catch(err => {
                 console.warn(err);
 
                 if (!this) {
                     this.$toast(failText);
                     return;
                 }
-                
+
                 this.loading = false;
-                let code  = err && err.error ? err.error.code || -1 : 
-                    err ? err.code : -1;
+                const code = err && err.error ? err.error.code || -1
+                    : err ? err.code : -1;
 
                 if (code === -35001) {
                     this.$toast(this.$t('hint.insufficientBalance'));
@@ -257,13 +256,13 @@ export default {
             });
         },
         startPow(accountBlock, startTime) {
-            let activeAccount = this.$wallet.getActiveAccount();
+            const activeAccount = this.$wallet.getActiveAccount();
             if (!activeAccount) {
                 this.$toast(this.$t('hint.err'));
                 return;
             }
 
-            let transError = (err) => {
+            const transError = err => {
                 this.loading = false;
                 this.isShowTrans = true;
                 this.$toast(null, err);
@@ -276,16 +275,17 @@ export default {
                 console.warn(type, err);
 
                 if (type === 0) {
-                    transError( this.$t('wallet.trans.powErr') );
+                    transError(this.$t('wallet.trans.powErr'));
                     return;
                 }
 
-                let code  = err && err.error ? err.error.code || -1 : 
-                    err ? err.code : -1;
+                const code = err && err.error ? err.error.code || -1
+                    : err ? err.code : -1;
                 if (code === -35002) {
                     transError(this.$t('wallet.trans.powTransErr'));
                     return;
                 }
+
                 transError(err);
             });
         },
@@ -305,14 +305,16 @@ export default {
 
 <style lang="scss">
 .confirm-container.trans-confirm .confirm-wrapper {
-    width: 515px;
-    max-width: 90%;
+  width: 515px;
+  max-width: 90%;
 }
+
 .confirm-container.trans-confirm .confirm-wrapper .bottom {
-    min-height: 70px;
-    .__btn{
-        height: 40px;
-        line-height: 40px;
-    }
+  min-height: 70px;
+
+  .__btn {
+    height: 40px;
+    line-height: 40px;
+  }
 }
 </style>

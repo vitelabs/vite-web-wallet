@@ -6,8 +6,6 @@
 import { widget } from 'charting/charting_library.min';
 import datafeed from './datafeeds.js';
 
-let changeLangEvent = null;
-
 export default {
     props: {
         showView: {
@@ -21,35 +19,32 @@ export default {
     },
     mounted() {
         this.symbol && this.init();
-
-        changeLangEvent = webViteEventEmitter.on('changeLang', () => {
-            this.resetLang();
-        });
-    },
-    destroyed() {
-        changeLangEvent && webViteEventEmitter.off(changeLangEvent);
-        changeLangEvent = null;
     },
     computed: {
         symbol() {
             if (!this.activeTxPair) {
                 return '';
             }
-            return this.activeTxPair.ftokenShow + '/' + this.activeTxPair.ttokenShow;
+
+            return `${ this.activeTxPair.ftokenShow }/${ this.activeTxPair.ttokenShow }`;
         },
         activeTxPair() {
             return this.$store.state.exchangeActiveTxPair.activeTxPair;
+        },
+        lang() {
+            return this.$store.state.env.lang;
         }
     },
     watch: {
-        symbol: function() {
+        symbol: function () {
+            this.symbol && this.init();
+        },
+        lang: function () {
             this.symbol && this.init();
         }
     },
     data() {
-        return {
-            tvWidget: null
-        };
+        return { tvWidget: null };
     },
     methods: {
         init() {
@@ -65,31 +60,32 @@ export default {
                 datafeed: new datafeed(this.activeTxPair),
                 library_path: 'charting_library/',
                 locale: this.$i18n.locale,
-                drawings_access: { type: 'black', tools: [ { name: 'Trend Line' } ] },
-                // main_series_scale_menu header_indicators
-                disabled_features: ['use_localstorage_for_settings', 'volume_force_overlay', 'header_compare', 'header_symbol_search', 'header_chart_type'],
+                drawings_access: {
+                    type: 'black',
+                    tools: [{ name: 'Trend Line' }]
+                },
+                // Main_series_scale_menu header_indicators
+                disabled_features: [ 'use_localstorage_for_settings', 'volume_force_overlay', 'header_compare', 'header_symbol_search', 'header_chart_type' ],
                 enabled_features: ['move_logo_to_main_pane'],
                 overrides: {
                     'mainSeriesProperties.style': 0,
-                    'symbolWatermarkProperties.color' : '#944',
+                    'symbolWatermarkProperties.color': '#944',
                     'volumePaneSize': 'tiny'
                 },
                 studies_overrides: {
                     'bollinger bands.median.color': '#33FF88',
                     'bollinger bands.upper.linewidth': 7
                 },
-                loading_screen: {
-                    foregroundColor: '#007AFF'
-                },
-                // debug: true,
+                loading_screen: { foregroundColor: '#007AFF' },
+                // Debug: true,
                 time_frames: [
-                    { text: '1d', resolution: '1' },
+                    { text: '1d', resolution: '1' }
                 ],
-                // charts_storage_url: 'http://saveload.tradingview.com',
+                // Charts_storage_url: 'http://saveload.tradingview.com',
                 // client_id: 'tradingview.com',
                 // user_id: 'public_user',
                 favorites: {
-                    intervals: ['1', '60'],
+                    intervals: [ '1', '60' ],
                     chartTypes: ['CANDLES']
                 }
             };
@@ -101,24 +97,20 @@ export default {
                 this.createDepthBtn();
                 this.tvWidget.chart().setChartType(1);
 
-                let studies = [];
-                let id = this.tvWidget.chart().createStudy('Moving Average', false, false, [7], null, {'Plot.color': 'rgb(116,149,187)'});
+                const studies = [];
+                let id = this.tvWidget.chart().createStudy('Moving Average', false, false, [7], null, { 'Plot.color': 'rgb(116,149,187)' });
                 studies.push(id);
-                id = this.tvWidget.chart().createStudy('Moving Average', false, false, [30],null,{'plot.color': 'rgb(118,32,99)'});
+                id = this.tvWidget.chart().createStudy('Moving Average', false, false, [30], null, { 'plot.color': 'rgb(118,32,99)' });
                 studies.push(id);
-                var state = 1;
-                for(var i = 0; i < studies.length; i++){
-                    this.tvWidget.chart().getStudyById(studies[i]).setVisible(state);
+                const state = 1;
+                for (let i = 0; i < studies.length; i++) {
+                    this.tvWidget.chart().getStudyById(studies[i])
+                        .setVisible(state);
                 }
             });
         },
-        resetLang() {
-            this.init();
-        },
         createDepthBtn() {
-            let button = this.tvWidget.createButton({ 
-                align: 'right' 
-            })[0];
+            const button = this.tvWidget.createButton({ align: 'right' })[0];
             button.textContent = this.$t('exchange.depthView');
             button.addEventListener('click', () => {
                 this.toogleDepth();
@@ -130,8 +122,8 @@ export default {
 
 <style lang="scss" scoped>
 .tradingview-widget-container {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 }
 </style>
 

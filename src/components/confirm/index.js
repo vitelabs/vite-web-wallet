@@ -2,14 +2,12 @@ import Vue from 'vue';
 import confirmComponent from '../confirm.vue';
 
 const Confirm = Vue.extend(confirmComponent);
-let instance = new Confirm({
-    el: document.createElement('div')
-});
+const instance = new Confirm({ el: document.createElement('div') });
 
-export default function({
+export default function ({
     showMask = true,
-    title, 
-    singleBtn = false, 
+    title,
+    singleBtn = false,
     closeBtn = {
         show: false,
         click: () => {}
@@ -17,17 +15,17 @@ export default function({
     leftBtn = {
         text: '',
         click: () => {}
-    }, 
+    },
     rightBtn = {
         text: '',
         click: () => {}
     },
     content = ''
 }) {
-    let _close = (cb) => {
+    const _close = cb => {
         try {
             document.body.removeChild(instance.$el);
-        } catch(err) {
+        } catch (err) {
             console.warn(err);
         }
         cb && cb();
@@ -37,7 +35,7 @@ export default function({
     instance.title = title;
     instance.singleBtn = singleBtn;
     instance.closeIcon = closeBtn.show;
-    instance.close = ()=>{
+    instance.close = () => {
         _close(closeBtn ? closeBtn.click : null);
     };
     instance.leftBtnTxt = leftBtn.text;
@@ -51,5 +49,6 @@ export default function({
     instance.content = content || '';
 
     document.body.appendChild(instance.$el);
+
     return true;
 }

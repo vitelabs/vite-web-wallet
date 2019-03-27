@@ -87,11 +87,10 @@
 import { getPowNonce } from 'services/pow';
 import viteInput from 'components/viteInput';
 import tableList from 'components/tableList.vue';
+import $ViteJS from 'utils/viteClient';
 
 export default {
-    components: {
-        viteInput, tableList
-    },
+    components: { viteInput, tableList },
     created() {
         this.getOwnerToken();
     },
@@ -120,7 +119,7 @@ export default {
             this.ownerBurnOnly = ownerBurnOnly;
         },
         mintage() {
-            let activeAccount = this.$wallet.getActiveAccount();
+            const activeAccount = this.$wallet.getActiveAccount();
 
             activeAccount.mintage({
                 decimals: this.decimals,
@@ -132,39 +131,41 @@ export default {
                 tokenSymbol: this.tokenSymbol
             }).then(() => {
                 this.$toast('Mintage success');
-            }).catch((err) => {
-                this.$toast(`Mintage fail. ${err.error.message || err.error.msg}`);
+            }).catch(err => {
+                this.$toast(`Mintage fail. ${ err.error.message || err.error.msg }`, err);
 
                 if (err.error.code !== -35002) {
                     return;
                 }
 
-                let accountBlock = err.accountBlock;
-                getPowNonce(accountBlock.accountAddress, accountBlock.prevHash).then((data) => {
+                const accountBlock = err.accountBlock;
+                getPowNonce(accountBlock.accountAddress, accountBlock.prevHash).then(data => {
                     accountBlock.difficulty = data.difficulty;
                     accountBlock.nonce = data.nonce;
 
                     activeAccount.sendRawTx(accountBlock).then(() => {
                         this.$toast('Mintage success');
-                    }).catch((err) => {
-                        this.$toast(`Mintage fail. ${err.error.message || err.error.msg}`);
-                        console.warn(err);
-                    });
-                }).catch((err) => {
+                    })
+                        .catch(err => {
+                            this.$toast(`Mintage fail. ${ err.error.message || err.error.msg }`);
+                            console.warn(err);
+                        });
+                }).catch(err => {
                     this.$toast('Pow failed.');
                     console.warn(err);
                 });
             });
         },
         getOwnerToken() {
-            let activeAccount = this.$wallet.getActiveAccount();
+            const activeAccount = this.$wallet.getActiveAccount();
 
-            $ViteJS.mintage.getTokenInfoListByOwner(activeAccount.getDefaultAddr()).then((data) => {
+            $ViteJS.mintage.getTokenInfoListByOwner(activeAccount.getDefaultAddr()).then(data => {
                 this.tokenList = data;
-            }).catch(err => {
-                console.warn(err);
-                this.$toast('Get list failed');
-            });
+            })
+                .catch(err => {
+                    console.warn(err);
+                    this.$toast('Get list failed');
+                });
         }
     }
 };
@@ -174,77 +175,85 @@ export default {
 @import "~assets/scss/vars.scss";
 
 .mintage-wrapper {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 20px;
+  overflow: auto;
+
+  .list-wrapper {
+    margin-top: 20px;
+  }
+
+  .order-row-title {
+    height: 28px;
+    line-height: 28px;
+    font-size: 12px;
+    font-family: $font-normal, arial, sans-serif;
+    font-weight: 400;
+    color: #333;
+    margin-top: 5px;
+  }
+
+  .btn {
     width: 100%;
-    box-sizing: border-box;
-    padding: 20px;
-    overflow: auto;
-    .list-wrapper {
-        margin-top: 20px;
+    height: 40px;
+    line-height: 40px;
+    margin-top: 20px;
+    text-align: center;
+
+    &.unuse {
+      background: #efefef;
+      color: #666;
     }
-    .order-row-title {
-        height: 28px;
-        line-height: 28px;
-        font-size: 12px;
-        font-family: $font-normal, arial, sans-serif;
-        font-weight: 400;
-        color: #333;
-        margin-top: 5px;
-    }
-    .btn {
-        width: 100%;
-        height: 40px;
-        line-height: 40px;
-        margin-top: 20px;
-        text-align: center;
-        &.unuse {
-            background: #efefef;
-            color: #666;
+  }
+
+  .select-icon-wrapper {
+    font-size: 11px;
+    font-family: $font-normal, arial, sans-serif;
+    font-weight: 400;
+    color: rgba(94, 104, 117, 1);
+    margin-left: 12px;
+
+    .select-icon {
+      position: relative;
+      display: inline-block;
+      box-sizing: border-box;
+      width: 12px;
+      height: 12px;
+      border-radius: 10px;
+      border: 1px solid rgba(188, 196, 201, 1);
+      margin-right: 4px;
+      margin-bottom: -2px;
+
+      &.active {
+        &::after {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          margin-top: -2px;
+          margin-left: -2px;
+          content: ' ';
+          display: inline-block;
+          width: 4px;
+          height: 4px;
+          background: #007aff;
+          border-radius: 5px;
         }
+      }
     }
-    .select-icon-wrapper {
-        font-size: 11px;
-        font-family: $font-normal, arial, sans-serif;
-        font-weight: 400;
-        color: rgba(94,104,117,1);
-        margin-left: 12px;
-        .select-icon {
-            position: relative;
-            display: inline-block;
-            box-sizing: border-box;
-            width: 12px;
-            height: 12px;
-            border-radius: 10px;
-            border: 1px solid rgba(188,196,201,1);
-            margin-right: 4px; 
-            margin-bottom: -2px;
-            &.active {
-                &::after {
-                    position: absolute;
-                    top: 50%;
-                    left: 50%;
-                    margin-top: -2px;
-                    margin-left: -2px;
-                    content: ' ';
-                    display: inline-block;
-                    width: 4px;
-                    height: 4px;
-                    background: #007AFF;
-                    border-radius: 5px;
-                }
-            }
-        }
-    }
+  }
 }
 </style>
 
 <style lang="scss">
 @import "~assets/scss/vars.scss";
 
-.mintage-table-big-item {    
-    min-width: 250px;
+.mintage-table-big-item {
+  min-width: 250px;
 }
+
 .mintage-table-small-item {
-    min-width: 110px;
+  min-width: 110px;
 }
 </style>
 

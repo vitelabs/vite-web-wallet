@@ -1,15 +1,9 @@
-/** eg
-startImport: {
-     isLogin: true,
-     alias: '/index'
-}
-*/
+/**
+ * Eg:
+ *
+ * startImport: {
+ *      alias: '/index'
+ * }
+ */
 
-module.exports = { 
-    walletConversion: {
-        isLogin: true
-    },
-    exchange: {
-        alias: '/index'
-    }
-};
+module.exports = { exchange: { alias: '/index' } };

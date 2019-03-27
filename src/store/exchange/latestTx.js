@@ -25,7 +25,7 @@ const actions = {
             commit('exSetLatestTxList', data);
             commit('exSetLatestTxLoading', false);
         }, latestTxTime);
-        
+
         getters.exActiveTxPair && latestTxTask.start(() => getters.exActiveTxPair);
     },
     exStopLatestTimer() {

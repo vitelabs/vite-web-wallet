@@ -7,7 +7,7 @@
             <div class="__tb_cell height">{{ $t('withdrawHeight') }}</div>
             <div class="__tb_cell operate">{{ $t('action') }}</div>
         </div>
-        
+
         <div v-show="list && list.length" class="__tb_content">
             <div class="__tb_row __tb_content_row" :class="{
                 'unuse': !!item.isCancel
@@ -23,13 +23,13 @@
                     </i>
                 </div>
                 <div class="__tb_cell operate">
-                    <span v-if="!item.isCancel" class="btn __pointer" 
+                    <span v-if="!item.isCancel" class="btn __pointer"
                           v-unlock-account @unlocked="edit(item)">{{ $t('btn.edit') }}</span>
                     <span v-if="!item.isCancel" class="btn" :class="{
                         '__pointer': item.isMaturity,
-                        'unuse': !item.isMaturity   
+                        'unuse': !item.isMaturity
                     }" v-unlock-account @unlocked="cancel(item)">{{ $t('walletSBP.cancelBtn') }}</span>
-                    <span v-if="item.isCancel" class="btn __pointer" 
+                    <span v-if="item.isCancel" class="btn __pointer"
                           v-unlock-account @unlocked="reg(item)">{{ $t('btn.reReg') }}</span>
                 </div>
             </div>
@@ -51,9 +51,7 @@ import BigNumber from 'utils/bigNumber';
 const amount = 500000;
 
 export default {
-    components: {
-        tooltips
-    },
+    components: { tooltips },
     props: {
         showConfirm: {
             type: Function,
@@ -74,8 +72,8 @@ export default {
         this.fetchList();
     },
     data() {
-        let activeAccount = this.$wallet.getActiveAccount();
-        let address = activeAccount.getDefaultAddr();
+        const activeAccount = this.$wallet.getActiveAccount();
+        const address = activeAccount.getDefaultAddr();
 
         return {
             activeAccount,
@@ -88,39 +86,42 @@ export default {
             if (!this.tokenInfo || !this.tokenInfo.tokenId) {
                 return '';
             }
-            let balance = this.tokenBalList[this.tokenInfo.tokenId] ? this.tokenBalList[this.tokenInfo.tokenId].totalAmount : 0;
-            let minAmount = BigNumber.toMin(amount, this.tokenInfo.decimals);
+            const balance = this.tokenBalList[this.tokenInfo.tokenId] ? this.tokenBalList[this.tokenInfo.tokenId].totalAmount : 0;
+            const minAmount = BigNumber.toMin(amount, this.tokenInfo.decimals);
             if (BigNumber.compared(balance, minAmount) < 0) {
                 return this.$t('hint.insufficientBalance');
             }
+
             return '';
         },
         tokenBalList() {
             return this.$store.state.account.balance.balanceInfos;
+        },
+        currentHeight() {
+            return this.$store.state.ledger.currentHeight || 0;
         },
         list() {
             if (!this.tokenInfo || !this.tokenInfo.tokenId) {
                 return [];
             }
 
-            let decimals = this.tokenInfo.decimals;
-            let currentHeight = viteWallet.Ledger.getHeight() || 0;
+            const decimals = this.tokenInfo.decimals;
 
-            let registrationList = this.$store.state.SBP.registrationList || [];  
-            let list = [];
+            const registrationList = this.$store.state.SBP.registrationList || [];
+            const list = [];
 
             registrationList.forEach(item => {
-                let isMaturity = BigNumber.compared(item.withdrawHeight, currentHeight) <= 0;
-                let isCancel = item.cancelHeight && !BigNumber.isEqual(item.cancelHeight, 0);
-                let addr = ellipsisAddr(item.nodeAddr, 6);
-                
-                let day = date(item.withdrawTime * 1000, this.$i18n.locale);
+                const isMaturity = BigNumber.compared(item.withdrawHeight, this.currentHeight) <= 0;
+                const isCancel = item.cancelHeight && !BigNumber.isEqual(item.cancelHeight, 0);
+                const addr = ellipsisAddr(item.nodeAddr, 6);
+
+                const day = date(item.withdrawTime * 1000, this.$i18n.locale);
                 list.push({
                     isMaturity,
                     isCancel,
                     name: item.name,
                     nodeAddr: addr,
-                    pledgeAmount: BigNumber.toBasic(item.pledgeAmount, decimals) + ' ' +  this.tokenInfo.tokenSymbol,
+                    pledgeAmount: `${ BigNumber.toBasic(item.pledgeAmount, decimals) } ${ this.tokenInfo.tokenSymbol }`,
                     withdrawHeight: item.withdrawHeight,
                     time: day,
                     rawData: item
@@ -142,26 +143,22 @@ export default {
         },
 
         sendRegisterTx(item) {
-            let rawData = item.rawData;
-            let nodeName = rawData.name;
-            let producerAddr = rawData.nodeAddr;
+            const rawData = item.rawData;
+            const nodeName = rawData.name;
+            const producerAddr = rawData.nodeAddr;
 
-            this.sendTx({
-                producerAddr, amount, nodeName
-            }, 'SBPreg').then(() => {
+            this.sendTx({ producerAddr, amount, nodeName }, 'SBPreg').then(() => {
                 this.$toast(this.$t('walletSBP.section1.registerSuccess'));
                 this.$store.dispatch('loopRegList', {
                     address: this.address,
-                    nodeName, 
-                    operate: 1, 
+                    nodeName,
+                    operate: 1,
                     producer: producerAddr
                 });
-            }).catch((err) => {
+            }).catch(err => {
                 console.warn(err);
                 if (err && err.error && err.error.code && err.error.code === -35002) {
-                    quotaConfirm({
-                        operate: this.$t('walletSBP.register')
-                    });
+                    quotaConfirm({ operate: this.$t('walletSBP.register') });
                     return;
                 }
                 this.$toast(this.$t('walletSBP.section1.registerFail'), err);
@@ -190,30 +187,22 @@ export default {
 
             this.activeAccount.initPwd({
                 title: this.$t('walletSBP.section2.cancelConfirm.title'),
-                content: this.$t('walletSBP.section2.cancelConfirm.describe', {
-                    amount: item.pledgeAmount
-                }),
+                content: this.$t('walletSBP.section2.cancelConfirm.describe', { amount: item.pledgeAmount }),
                 submit: () => {
-                    let nodeName = item.rawData.name;
-                    let producer = item.rawData.nodeAddr;
+                    const nodeName = item.rawData.name;
+                    const producer = item.rawData.nodeAddr;
 
-                    this.sendTx({
-                        nodeName
-                    }, 'revokeReg').then(()=>{
-                        this.$toast(this.$t('hint.request', {
-                            name: this.$t('walletSBP.section2.cancel')
-                        }));
+                    this.sendTx({ nodeName }, 'revokeReg').then(() => {
+                        this.$toast(this.$t('hint.request', { name: this.$t('walletSBP.section2.cancel') }));
                         this.$store.dispatch('loopRegList', {
                             address: this.address,
-                            nodeName, 
-                            operate: 0, 
+                            nodeName,
+                            operate: 0,
                             producer
                         });
-                    }).catch((err)=>{
+                    }).catch(err => {
                         if (err && err.error && err.error.code && err.error.code === -35002) {
-                            quotaConfirm({
-                                operate: this.$t('walletSBP.cancel')
-                            });
+                            quotaConfirm({ operate: this.$t('walletSBP.cancel') });
                             return;
                         }
                         this.$toast(this.$t('walletSBP.section2.cancelFail'), err);
@@ -233,50 +222,60 @@ export default {
 
 <style lang="scss" scoped>
 @import '~assets/scss/table.scss';
+
 .__tb.tb-list {
-    min-width: 1080px;
+  min-width: 1080px;
 }
+
 .tipsicon {
-    position: relative;
-    display: inline-block;
-    background: url(~assets/imgs/hover_help.svg);
-    overflow: visible;
-    width: 16px;
-    height: 16px;
-    vertical-align: sub;
-    .sbp-tooltips {
-        min-width: 300px;
-    }
+  position: relative;
+  display: inline-block;
+  background: url(~assets/imgs/hover_help.svg);
+  overflow: visible;
+  width: 16px;
+  height: 16px;
+  vertical-align: sub;
+
+  .sbp-tooltips {
+    min-width: 300px;
+  }
 }
 
 .btn {
-    font-size: 14px;
-    color: #007AFF;
-    margin-right: 18px;
-    &.unuse {
-        color: #CED1D5;
-    }
+  font-size: 14px;
+  color: #007aff;
+  margin-right: 18px;
+
+  &.unuse {
+    color: #ced1d5;
+  }
 }
+
 .__tb_row.__tb_content_row.unuse {
-    color: #CED1D5;
+  color: #ced1d5;
 }
+
 .name {
-    width: 20%;
-    min-width: 330px;
+  width: 20%;
+  min-width: 330px;
 }
+
 .addr {
-    min-width: 200px;
-    width: 20%;
+  min-width: 200px;
+  width: 20%;
 }
+
 .amount {
-    width: 17%;
-    min-width: 180px;
+  width: 17%;
+  min-width: 180px;
 }
+
 .height {
-    min-width: 190px;
-    width: 20%;
+  min-width: 190px;
+  width: 20%;
 }
+
 .operate {
-    min-width: 205px;
+  min-width: 205px;
 }
 </style>

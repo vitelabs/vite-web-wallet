@@ -1,11 +1,9 @@
-// import '@babel/polyfill';
+// Import '@babel/polyfill';
 require('es6-promise').polyfill();
 
 import 'utils/performance';
-import './assets/scss/mixins.scss';
-
-import 'utils/eventEmitter.js';
-import 'utils/viteWallet/index.js';
+import 'assets/scss/mixins.scss';
+import 'utils/viteClient.js';
 
 import Vue from 'vue';
 import VueRouter from 'vue-router';
@@ -24,17 +22,19 @@ import resaveAccKeystore from 'utils/resaveAccKeystore.js';
 import { initPwdConfirm } from 'components/password/index.js';
 import { initQuotaConfirm } from 'components/quota/index.js';
 
+// $onKeyDown $offKeyDown $validAmount $trim $toast $confirm $statistics $wallet
 Vue.use(plugin);
-Vue.use(VueRouter);
+// V-click-outside v-unlock-account
 Vue.use(directives);
+Vue.use(VueRouter);
 Vue.use(VueI18n);
 
-const i18n = new VueI18n( i18nConf );
+const i18n = new VueI18n(i18nConf);
 
 Vue.config.devtools = process.env.NODE_ENV !== 'production';
 
 // Start loading animate
-let element = document.getElementById('loading');
+const element = document.getElementById('loading');
 element.className += 'spinner big-spinner';
 
 setTimeout(() => {

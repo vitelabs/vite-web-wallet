@@ -6,12 +6,8 @@ const iconConfig = {
 };
 
 export default function getTokenIcon(tokenId) {
-    let defaultToken = viteWallet.Ledger.tokenInfoMaps[tokenId];
-    if (defaultToken && defaultToken.icon) {
-        return defaultToken.icon;
-    }
+    const tokenHash = encoder.blake2b(tokenId);
+    const hexStr = encoder._Buffer(tokenHash).toString('hex');
 
-    let tokenHash = encoder.blake2b(tokenId);
-    let hexStr = encoder._Buffer(tokenHash).toString('hex');
-    return 'data:image/svg+xml;base64,' + new Identicon(hexStr, iconConfig).toString();
+    return `data:image/svg+xml;base64,${ new Identicon(hexStr, iconConfig).toString() }`;
 }

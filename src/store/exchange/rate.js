@@ -15,7 +15,7 @@ const state = {
 const mutations = {
     setExchangeRate(state, rateList) {
         state.rateMap = {};
-        rateList && rateList.forEach((rate) => {
+        rateList && rateList.forEach(rate => {
             state.rateMap[rate.tokenId] = rate;
         });
     }
@@ -23,18 +23,15 @@ const mutations = {
 
 const actions = {
     startLoopExchangeRate({ commit }) {
-        let f = () => {
-            return rateFiat().then((data) => {
-                commit('setExchangeRate', data);
-            }).catch((err) => {
+        const f = () => rateFiat().then(data => {
+            commit('setExchangeRate', data);
+        })
+            .catch(err => {
                 console.warn(err);
             });
-        };
 
         f();
-        rateTimer = new timer(()=>{
-            return f(); 
-        }, loopTime);
+        rateTimer = new timer(() => f(), loopTime);
         rateTimer.start();
     },
     stopLoopExchangeRate() {

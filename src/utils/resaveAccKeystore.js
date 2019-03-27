@@ -7,33 +7,34 @@ const { LangList } = constant;
 const LAST_KEY = 'ACC_LAST';
 
 export default function () {
-    let list = acc.getList();
+    const list = acc.getList();
     if (!list || !list.length) {
         return;
     }
 
-    let last = getLast();
-    let reList = [];
+    const last = getLast();
+    const reList = [];
     let isChange = false;
 
-    list.forEach((item) => {
+    list.forEach(item => {
         if (!item) {
             return;
         }
 
         if (!item.entropy || !item.encryptObj || +item.encryptObj.version !== 1 || !item.encryptObj.scryptParams) {
             reList.push(item);
+
             return;
         }
 
         isChange = true;
 
-        let entropy = item.entropy;
+        const entropy = item.entropy;
         let keystore = _keystore.encryptV1ToV3(entropy, JSON.stringify(item.encryptObj));
-        
+
         keystore = JSON.parse(keystore);
 
-        let mnemonic = _hdAddr.getMnemonicFromEntropy(entropy);
+        const mnemonic = _hdAddr.getMnemonicFromEntropy(entropy);
         item.lang = LangList.english;
         item.id = _hdAddr.getId(mnemonic);
         item.encryptObj = keystore;
@@ -47,18 +48,17 @@ export default function () {
     if (!isChange) {
         return;
     }
-    
+
     statistics.event('keystore', 'resave');
     setLast(last);
     acc.setAccList(reList);
 }
 
 
-
 function getLast() {
     return storage.getItem(LAST_KEY);
 }
 
-function setLast(acc) {  
+function setLast(acc) {
     storage.setItem(LAST_KEY, acc);
 }

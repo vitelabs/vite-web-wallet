@@ -10,11 +10,10 @@ export default function request({ method = 'GET', path, params = {}, timeout = r
     const qsStr = qs.stringify(params);
 
     method === 'GET' && (
-        path.indexOf('?') < 0 ? 
-            (path = `${path}?${qsStr}`) : 
-            (path = `${path}${qsStr}`)
+        path.indexOf('?') < 0
+            ? (path = `${ path }?${ qsStr }`)
+            : (path = `${ path }${ qsStr }`)
     );
-
     xhr.open(method, path, true);
     xhr.setRequestHeader('content-type', 'application/json; charset=utf-8');
 
@@ -24,17 +23,18 @@ export default function request({ method = 'GET', path, params = {}, timeout = r
         xhr.send();
     }
 
-    return new Promise((res, rej) => {        
+    return new Promise((res, rej) => {
         xhr.onload = function () {
             try {
-                if (xhr.status == 200) {                    
+                if (+xhr.status === 200) {
                     if (path.indexOf('kline') !== -1) {
                         res(JSON.parse(xhr.responseText));
+
                         return;
                     }
 
-                    let { code, msg, data, error } = JSON.parse(xhr.responseText);
-                    let rightCode = path.indexOf('api') === 1 ? 0 : 200;
+                    const { code, msg, data, error } = JSON.parse(xhr.responseText);
+                    const rightCode = path.indexOf('api') === -1 ? 200 : 0;
                     if (code !== rightCode) {
                         return rej({
                             code,
@@ -44,7 +44,7 @@ export default function request({ method = 'GET', path, params = {}, timeout = r
 
                     res(data || null);
                 } else {
-                    rej( JSON.parse(xhr.responseText) );
+                    rej(JSON.parse(xhr.responseText));
                 }
             } catch (e) {
                 rej({

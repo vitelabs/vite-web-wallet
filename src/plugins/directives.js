@@ -1,4 +1,4 @@
-import { wallet } from 'utils/walletInstance';
+import { wallet } from 'utils/wallet';
 
 const vnodes = new Set();
 
@@ -9,10 +9,10 @@ const isEventInDom = function (e, d) {
 
 export default {
     install(Vue) {
-        document.addEventListener('click', (e) => {
+        document.addEventListener('click', e => {
             vnodes.forEach(v => {
-                let directives = v && v.data ? v.data.directives || [] : [];
-                directives.forEach((d) => {
+                const directives = v && v.data ? v.data.directives || [] : [];
+                directives.forEach(d => {
                     if (d.rawName === 'v-click-outside') {
                         clickOutside(v, e, d.expression || '');
                     }
@@ -31,16 +31,17 @@ export default {
 
         Vue.directive('UnlockAccount', {
             bind(el, binding, vnode) {
-                el.addEventListener('click', (e) => {
-                    let isLogin = unlockAccount(vnode, e, binding.expression || '');
+                el.addEventListener('click', e => {
+                    const isLogin = unlockAccount(vnode, e, binding.expression || '');
                     if (!isLogin) {
                         return;
                     }
+
                     vnode.data.on && vnode.data.on.unlocked();
                 });
             },
             unbind() {
-                // el, binding, vnode
+                // El, binding, vnode
                 // vnode.removeEventListener();
             }
         });
@@ -53,7 +54,7 @@ function clickOutside(v, e, funcName) {
         return;
     }
 
-    let el = v ? v.elm || v.$el : null;
+    const el = v ? v.elm || v.$el : null;
     if (el && !isEventInDom(e, el)) {
         funcName && v.context && v.context[funcName](e);
     }
@@ -65,7 +66,8 @@ function unlockAccount(v, e, funcName) {
         return true;
     }
 
-    let activeAccount = wallet.getActiveAccount();
+    const activeAccount = wallet.getActiveAccount();
     activeAccount && activeAccount.unlockAccount();
+
     return false;
 }

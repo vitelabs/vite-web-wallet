@@ -13,7 +13,7 @@
         </div>
 
         <div class="order-row-title">{{ $t(`exchange.${orderType}.price`) }}</div>
-        <vite-input class="order-input" :class="{'err': isPriceErr}" 
+        <vite-input class="order-input" :class="{'err': isPriceErr}"
                     v-model="price">
             <span class="ex-order-token" slot="after">{{ ttokenShow }}</span>
         </vite-input>
@@ -26,13 +26,13 @@
                 <li class="__pointer" @click="quantityPercent(1)">100%</li>
             </ul>
         </div>
-        <vite-input class="order-input" :class="{'err': isQuantityErr}"  
+        <vite-input class="order-input" :class="{'err': isQuantityErr}"
                     v-model="quantity">
             <span class="ex-order-token" slot="after">{{ ftokenShow }}</span>
         </vite-input>
 
         <div class="order-row-title">{{ $t('exchange.amount') }}</div>
-        <vite-input class="order-input" :class="{'err': isAmountErr}"  
+        <vite-input class="order-input" :class="{'err': isAmountErr}"
                     v-model="amount">
             <span class="ex-order-token" slot="after">{{ ttokenShow }}</span>
         </vite-input>
@@ -55,9 +55,7 @@ let validTimeout = null;
 let changeVal = null;
 
 export default {
-    components: {
-        viteInput, powProcess
-    },
+    components: { viteInput, powProcess },
     props: {
         orderType: {
             type: String,
@@ -87,41 +85,41 @@ export default {
         };
     },
     watch: {
-        activeTxPair: function() {
+        activeTxPair: function () {
             if (this.price) {
                 return;
             }
             this.price = this.activeTxPair && this.activeTxPair.price ? this.activeTxPair.price : '';
         },
-        amount: function() {
+        amount: function () {
             changeVal = 'amount';
             this.watchAQ++;
         },
-        quantity: function() {
+        quantity: function () {
             changeVal = 'quantity';
             this.watchAQ++;
         },
-        price: function() {
+        price: function () {
             changeVal = 'price';
             this.watchAQ++;
         },
-        percent: function() {
-            changeVal = 'percent';            
+        percent: function () {
+            changeVal = 'percent';
             this.watchAQ++;
         },
-        balance: function() {
+        balance: function () {
             changeVal = 'balance';
             this.watchAQ++;
         },
-        watchAQ: function() {
+        watchAQ: function () {
             this.clearValidTimeout();
             validTimeout = setTimeout(() => {
                 this.clearValidTimeout();
-                changeVal && this[`${changeVal}Changed`] && this[`${changeVal}Changed`]();
                 this.validAll();
+                changeVal && this[`${ changeVal }Changed`] && this[`${ changeVal }Changed`]();
             }, 30);
         },
-        activeTx: function() {
+        activeTx: function () {
             this.price = this.activeTx.price;
         }
     },
@@ -139,19 +137,20 @@ export default {
                 return null;
             }
 
-            let balanceList = this.$store.state.exchangeBalance.balanceList;
+            const balanceList = this.$store.state.exchangeBalance.balanceList;
             if (!tokenId || !balanceList || !balanceList[tokenId]) {
                 return null;
             }
-            
+
             return balanceList[tokenId];
         },
         balance() {
             if (!this.rawBalance) {
                 return '';
             }
-            let tokenInfo = this.rawBalance.tokenInfo;
-            let balance = this.rawBalance.available || 0;
+            const tokenInfo = this.rawBalance.tokenInfo;
+            const balance = this.rawBalance.available || 0;
+
             return BigNumber.toBasic(balance, tokenInfo.decimals);
         },
         ttokenDetail() {
@@ -186,11 +185,11 @@ export default {
             if (!this.percent) {
                 return;
             }
-            
-            let price = this.price;
+
+            const price = this.price;
             let quantity = this.quantity;
             let amount = this.amount;
-            let percent = this.percent;
+            const percent = this.percent;
 
             if (this.orderType === 'buy') {
                 amount = this.getPercentBalance(percent, this.ttokenDetail.tokenDigit);
@@ -209,9 +208,9 @@ export default {
                 return;
             }
 
-            let price = this.price;
+            const price = this.price;
             let quantity = this.quantity;
-            let amount = this.amount;
+            const amount = this.amount;
 
             quantity = this.getQuantity(price, amount);
             !BigNumber.isEqual(quantity, this.quantity) && (this.quantity = quantity);
@@ -221,8 +220,8 @@ export default {
                 return;
             }
 
-            let price = this.price;
-            let quantity = this.quantity;
+            const price = this.price;
+            const quantity = this.quantity;
             let amount = this.amount;
 
             amount = this.getAmount(price, quantity);
@@ -233,8 +232,8 @@ export default {
                 return;
             }
 
-            let price = this.price;
-            let quantity = this.quantity;
+            const price = this.price;
+            const quantity = this.quantity;
             let amount = this.amount;
 
             amount = this.getAmount(price, quantity);
@@ -245,43 +244,46 @@ export default {
             if (!this.balance || BigNumber.isEqual(this.balance, 0)) {
                 return '';
             }
-            let limit = decimals >= 8 ? 8 : decimals;
-            let result = BigNumber.multi(percent, this.balance, limit, 'nofix');
+            const limit = decimals >= 8 ? 8 : decimals;
+            const result = BigNumber.multi(percent, this.balance, limit, 'nofix');
+
             return BigNumber.isEqual(result, 0) ? '' : result;
         },
         getAmount(price, quantity) {
-            let isRightPrice = price && this.$validAmount(price) && !BigNumber.isEqual(price, 0);
+            const isRightPrice = price && this.$validAmount(price) && !BigNumber.isEqual(price, 0);
             if (!isRightPrice) {
                 return '';
             }
 
-            let isRightQuantity = quantity && this.$validAmount(quantity) && !BigNumber.isEqual(quantity, 0);
+            const isRightQuantity = quantity && this.$validAmount(quantity) && !BigNumber.isEqual(quantity, 0);
             if (!isRightQuantity) {
                 return '';
             }
 
-            let tokenDigit = this.ttokenDetail.tokenDigit;
-            let limit = tokenDigit >= 8 ? 8 : tokenDigit;
+            const tokenDigit = this.ttokenDetail.tokenDigit;
+            const limit = tokenDigit >= 8 ? 8 : tokenDigit;
+
             return BigNumber.multi(price, quantity, limit, 'nofix');
         },
         getQuantity(price, amount) {
-            let isRightPrice = price && this.$validAmount(price) && !BigNumber.isEqual(price, 0);
+            const isRightPrice = price && this.$validAmount(price) && !BigNumber.isEqual(price, 0);
             if (!isRightPrice) {
                 return '';
             }
 
-            let isRightAmount = amount && this.$validAmount(amount) && !BigNumber.isEqual(amount, 0);
+            const isRightAmount = amount && this.$validAmount(amount) && !BigNumber.isEqual(amount, 0);
             if (!isRightAmount) {
                 return '';
             }
 
-            let tokenDigit = this.ftokenDetail.tokenDigit;
-            let limit = tokenDigit >= 8 ? 8 : tokenDigit;
+            const tokenDigit = this.ftokenDetail.tokenDigit;
+            const limit = tokenDigit >= 8 ? 8 : tokenDigit;
+
             return BigNumber.dividedToNumber(amount, price, limit, 'nofix');
         },
         getPercent(val) {
-            if (!this.balance || BigNumber.isEqual(this.balance, 0) || 
-                !val || !this.$validAmount(val) || BigNumber.isEqual(val, 0)) {
+            if (!this.balance || BigNumber.isEqual(this.balance, 0)
+                || !val || !this.$validAmount(val) || BigNumber.isEqual(val, 0)) {
                 return 0;
             }
 
@@ -289,18 +291,21 @@ export default {
         },
 
         validPrice() {
-            let tokenDigit = this.ttokenDetail.tokenDigit;
+            if (!this.ttokenDetail) {
+                return;
+            }
+            const tokenDigit = this.ttokenDetail.tokenDigit;
             this.isPriceErr = this.price && !this.$validAmount(this.price, tokenDigit);
         },
         validAmount() {
-            let tokenDigit = this.ttokenDetail.tokenDigit;
-            this.isAmountErr = this.amount && !this.$validAmount(this.amount, tokenDigit) ||
-                (this.orderType === 'buy' && BigNumber.compared(this.balance || 0, this.amount) < 0);
+            const tokenDigit = this.ttokenDetail.tokenDigit;
+            this.isAmountErr = this.amount && !this.$validAmount(this.amount, tokenDigit)
+                || (this.orderType === 'buy' && BigNumber.compared(this.balance || 0, this.amount) < 0);
         },
         validQuantity() {
-            let tokenDigit = this.ftokenDetail.tokenDigit;
-            this.isQuantityErr = this.quantity && !this.$validAmount(this.quantity, tokenDigit) ||
-                (this.orderType === 'sell' && BigNumber.compared(this.balance || 0, this.quantity) < 0);
+            const tokenDigit = this.ftokenDetail.tokenDigit;
+            this.isQuantityErr = this.quantity && !this.$validAmount(this.quantity, tokenDigit)
+                || (this.orderType === 'sell' && BigNumber.compared(this.balance || 0, this.quantity) < 0);
         },
         validAll() {
             this.validPrice();
@@ -328,7 +333,7 @@ export default {
                 return;
             }
 
-            let activeAccount = this.$wallet.getActiveAccount();
+            const activeAccount = this.$wallet.getActiveAccount();
             activeAccount.initPwd({
                 submit: () => {
                     this.newOrder({
@@ -338,14 +343,12 @@ export default {
                 }
             });
         },
-        newOrder({
-            price, quantity
-        }) {
-            let tradeToken = this.activeTxPair ? this.activeTxPair.ftoken : '';
-            let quoteToken = this.activeTxPair ? this.activeTxPair.ttoken : '';
-            
+        newOrder({ price, quantity }) {
+            const tradeToken = this.activeTxPair ? this.activeTxPair.ftoken : '';
+            const quoteToken = this.activeTxPair ? this.activeTxPair.ttoken : '';
+
             this.isLoading = true;
-            let tokenDigit = this.ftokenDetail.tokenDigit;
+            const tokenDigit = this.ftokenDetail.tokenDigit;
             quantity = BigNumber.toMin(quantity, tokenDigit);
 
             newOrder({
@@ -357,15 +360,15 @@ export default {
             }).then(() => {
                 this.isLoading = false;
                 this.clearAll();
-                this.$toast( this.$t('exchange.newOrderSuccess') );
-            }).catch((err) => {
+                this.$toast(this.$t('exchange.newOrderSuccess'));
+            }).catch(err => {
                 console.warn(err);
+
                 if (!err || !err.error || !err.error.code || err.error.code !== -35002) {
                     this.isLoading = false;
-                    this.$toast( this.$t('exchange.newOrderFail') );
+                    this.$toast(this.$t('exchange.newOrderFail'), err);
                     return;
                 }
-
 
                 this.$confirm({
                     showMask: true,
@@ -379,9 +382,7 @@ export default {
                     leftBtn: {
                         text: this.$t('quotaConfirmPoW.leftBtn.text'),
                         click: () => {
-                            this.$router.push({
-                                name: 'walletQuota'
-                            });
+                            this.$router.push({ name: 'walletQuota' });
                         }
                     },
                     rightBtn: {
@@ -390,10 +391,10 @@ export default {
                             this.$refs.powProcess.startPowTx(err.accountBlock, 0).then(() => {
                                 this.isLoading = false;
                                 this.clearAll();
-                                this.$toast( this.$t('exchange.newOrderSuccess') );
-                            }).catch((err) => {
+                                this.$toast(this.$t('exchange.newOrderSuccess'));
+                            }).catch(err => {
                                 this.isLoading = false;
-                                this.$toast( this.$t('exchange.newOrderFail') );
+                                this.$toast(this.$t('exchange.newOrderFail'), err);
                                 console.warn(err);
                             });
                         }
@@ -408,101 +409,117 @@ export default {
 
 <style lang="scss" scoped>
 @import "../center.scss";
-$font-black: rgba(36,39,43,.8);
+$font-black: rgba(36, 39, 43, 0.8);
 
 .order-wrapper {
-    flex: 1;
-    padding: 0 6px;
-    .order-title {
-        height: 17px;
-        line-height: 17px;
-        font-size: 12px;
-        font-family: $font-bold, arial, sans-serif;
-        font-weight: 600;
-        color: $font-black;
-        text-indent: 6px;
-        border-left: 2px solid $blue;
-        .wallet {
-            display: block;
-            float: right;
-            &:before {
-                content: '';
-                display: inline-block;
-                width: 16px;
-                height: 16px;
-                background: url('~assets/imgs/ex-wallet-icon.svg');
-                background-size: 100% 100%;
-                margin-bottom: -4px;
-            }
-        }
+  flex: 1;
+  padding: 0 6px;
+
+  .order-title {
+    height: 17px;
+    line-height: 17px;
+    font-size: 12px;
+    font-family: $font-bold, arial, sans-serif;
+    font-weight: 600;
+    color: $font-black;
+    text-indent: 6px;
+    border-left: 2px solid $blue;
+
+    .wallet {
+      display: block;
+      float: right;
+
+      &::before {
+        content: '';
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        background: url('~assets/imgs/ex-wallet-icon.svg');
+        background-size: 100% 100%;
+        margin-bottom: -4px;
+      }
     }
-    .ex-order-token {
-        font-size: 12px;
-        font-family: $font-normal, arial, sans-serif;
-        font-weight:400;
-        color:rgba(94,104,117,1);
-    }
-    .order-row-title {
-        height: 28px;
-        line-height: 28px;
-        font-size: 12px;
-        font-family: $font-normal, arial, sans-serif;
-        font-weight: 400;
-        color: $font-black;
-        margin-top: 5px;
-        .quantity-percent {
-            display: block;
-            float: right;
-            font-size: 12px;
-            li {
-                display: inline-block;
-                box-sizing: border-box;
-                border-bottom: 1px dashed $blue;
-                font-family: $font-normal, arial, sans-serif;
-                color: $blue;
-                line-height: 16px;
-                margin-left: 10px;
-                &:active {
-                    background: $blue;
-                    color: #fff;
-                }
-            }
-        }
-    }
-    .order-input {
-        height: 30px;
-        line-height: 30px;
+  }
+
+  .ex-order-token {
+    font-size: 12px;
+    font-family: $font-normal, arial, sans-serif;
+    font-weight: 400;
+    color: rgba(94, 104, 117, 1);
+  }
+
+  .order-row-title {
+    height: 28px;
+    line-height: 28px;
+    font-size: 12px;
+    font-family: $font-normal, arial, sans-serif;
+    font-weight: 400;
+    color: $font-black;
+    margin-top: 5px;
+
+    .quantity-percent {
+      display: block;
+      float: right;
+      font-size: 12px;
+
+      li {
+        display: inline-block;
         box-sizing: border-box;
-        &.err {
-            border: 1px solid $red;
+        border-bottom: 1px dashed $blue;
+        font-family: $font-normal, arial, sans-serif;
+        color: $blue;
+        line-height: 16px;
+        margin-left: 10px;
+
+        &:active {
+          background: $blue;
+          color: #fff;
         }
-        input {
-            text-indent: 6px;
-        }
-        .ex-order-token {
-            padding: 0 6px;
-        }
+      }
     }
-    .order-btn {
-        height: 30px;
-        line-height: 30px;
-        text-align: center;
-        margin-top: 16px;
-        border-radius: 2px;
-        font-size: 14px;
-        font-family: $font-bold, arial, sans-serif;
-        font-weight: 600;
-        color: #fff;
-        &.red {
-            background: linear-gradient(270deg,rgba(226,43,116,1) 0%,rgba(237,81,88,1) 100%);
-        }
-        &.green {
-            background: linear-gradient(270deg,rgba(0,212,208,1) 0%,rgba(0,215,100,1) 100%);
-        }
-        &.gray {
-            color: rgba(29, 32, 36, 0.6);
-            background: #f3f5f9;
-        }
+  }
+
+  .order-input {
+    height: 30px;
+    line-height: 30px;
+    box-sizing: border-box;
+
+    &.err {
+      border: 1px solid $red;
     }
+
+    input {
+      text-indent: 6px;
+    }
+
+    .ex-order-token {
+      padding: 0 6px;
+    }
+  }
+
+  .order-btn {
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    margin-top: 16px;
+    border-radius: 2px;
+    font-size: 14px;
+    font-family: $font-bold, arial, sans-serif;
+    font-weight: 600;
+    color: #fff;
+
+    &.red {
+      background: linear-gradient(270deg, rgba(226, 43, 116, 1) 0%, rgba(237, 81, 88, 1) 100%);
+    }
+
+    &.green {
+      background: linear-gradient(270deg, rgba(0, 212, 208, 1) 0%, rgba(0, 215, 100, 1) 100%);
+    }
+
+    &.gray {
+      color: rgba(29, 32, 36, 0.6);
+      background: #f3f5f9;
+    }
+  }
 }
 </style>

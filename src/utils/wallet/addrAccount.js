@@ -1,13 +1,10 @@
 import { addrAccount as _addrAccount } from '@vite/vitejs';
 import acc from 'utils/storeAcc.js';
+import $ViteJS from 'utils/viteClient';
 
 class addrAccount extends _addrAccount {
-    constructor({
-        address, id, entropy
-    }) {
-        super({
-            client: $ViteJS, address
-        });
+    constructor({ address, id, entropy }) {
+        super({ client: $ViteJS, address });
         this.id = id;
         this.entropy = entropy;
     }
@@ -17,10 +14,10 @@ class addrAccount extends _addrAccount {
     }
 
     save(name) {
-        let accList = acc.getList();
+        const accList = acc.getList();
         let i;
-        for (i=0; i<accList.length; i++) {
-            let acc = accList[i];
+        for (i = 0; i < accList.length; i++) {
+            const acc = accList[i];
             if (acc.id === this.id || acc.entropy === this.entropy || acc.addr === this.address) {
                 break;
             }

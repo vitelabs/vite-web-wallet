@@ -7,10 +7,10 @@
         <pow-process ref="powProcess" @pow-finish="closeConfirm"></pow-process>
 
         <div v-if="showConfirmType" class="gray-wrapper">
-            <confirm v-if="showConfirmType === 'cancel'" 
+            <confirm v-if="showConfirmType === 'cancel'"
                      :title="$t(`walletQuota.withdrawalStaking`)" :closeIcon="false"
                      :leftBtnTxt="$t(`walletQuota.confirm.cancel.leftBtn`)" :leftBtnClick="closeConfirm"
-                     :rightBtnTxt="$t(`walletQuota.confirm.cancel.rightBtn`)" 
+                     :rightBtnTxt="$t(`walletQuota.confirm.cancel.rightBtn`)"
                      :rightBtnClick="submit" :btnUnuse="!!cancelUnuse">
                 {{ $t(`walletQuota.confirm.cancel.describe`, { amount: activeAmountLimit }) }}
                 <div class="cancel-amount" v-show="amountErr">{{ amountErr }}</div>
@@ -19,14 +19,14 @@
             </confirm>
         </div>
 
-        <div v-show="!loadingToken">            
+        <div v-show="!loadingToken">
             <div class="content">
                 <my-quota class="my-quota _content_border"></my-quota>
                 <pledge-tx class="pledge-tx _content_border"
                            :sendPledgeTx="sendPledgeTx" :tokenInfo="tokenInfo"></pledge-tx>
             </div>
 
-            <list ref="txList" :sendPledgeTx="sendPledgeTx" 
+            <list ref="txList" :sendPledgeTx="sendPledgeTx"
                   :tokenInfo="tokenInfo"
                   :showConfirm="showConfirm"></list>
         </div>
@@ -46,24 +46,23 @@ import viteInput from 'components/viteInput';
 import BigNumber from 'utils/bigNumber';
 
 export default {
-    components: {
-        quotaHead, myQuota, pledgeTx, confirm, list, powProcess, loading, viteInput
-    },
+    components: { quotaHead, myQuota, pledgeTx, confirm, list, powProcess, loading, viteInput },
     created() {
-        this.tokenInfo = viteWallet.Ledger.getTokenInfo();
+        this.tokenInfo = this.$store.getters.viteTokenInfo;
 
         if (!this.tokenInfo) {
             this.loadingToken = true;
-            viteWallet.Ledger.fetchTokenInfo().then((tokenInfo) => {
+            this.$store.dispatch('fetchTokenInfo').then(tokenInfo => {
                 this.loadingToken = false;
                 this.tokenInfo = tokenInfo;
-            }).catch((err) => {
-                console.warn(err);
-            });
+            })
+                .catch(err => {
+                    console.warn(err);
+                });
         }
     },
     data() {
-        let activeAccount = this.$wallet.getActiveAccount();
+        const activeAccount = this.$wallet.getActiveAccount();
 
         return {
             activeAccount,
@@ -80,6 +79,9 @@ export default {
     computed: {
         cancelUnuse() {
             return this.showConfirmType === 'cancel' && (!this.cancelAmount || this.amountErr);
+        },
+        netStatus() {
+            return this.$store.state.env.clientStatus;
         }
     },
     methods: {
@@ -88,30 +90,32 @@ export default {
                 return;
             }
 
-            let result = this.$validAmount(this.cancelAmount, this.tokenInfo.decimals);
+            const result = this.$validAmount(this.cancelAmount, this.tokenInfo.decimals);
             if (!result) {
                 this.amountErr = this.$t('hint.amtFormat');
+
                 return false;
             }
 
-            let isEqualBalance = BigNumber.compared(this.cancelAmount, this.activeAmountLimit);
+            const isEqualBalance = BigNumber.compared(this.cancelAmount, this.activeAmountLimit);
 
             if (BigNumber.isEqual(this.cancelAmount, 0) || isEqualBalance > 0) {
-                this.amountErr = this.$t('walletQuota.maxAmt', {
-                    amount: this.activeAmountLimit
-                });
+                this.amountErr = this.$t('walletQuota.maxAmt', { amount: this.activeAmountLimit });
+
                 return false;
             }
 
             const limitAmt = 1000;
-            let cancelBalance = BigNumber.minus(this.activeAmountLimit, this.cancelAmount);
-            if ( BigNumber.compared(cancelBalance, limitAmt) < 0 && 
-                 !BigNumber.isEqual(cancelBalance, 0) ) {
+            const cancelBalance = BigNumber.minus(this.activeAmountLimit, this.cancelAmount);
+            if (BigNumber.compared(cancelBalance, limitAmt) < 0
+                 && !BigNumber.isEqual(cancelBalance, 0)) {
                 this.amountErr = this.$t('walletQuota.cancelLimitAmt', { num: limitAmt });
-                return false;                
+
+                return false;
             }
 
             this.amountErr = '';
+
             return true;
         },
 
@@ -137,12 +141,12 @@ export default {
                 return;
             }
 
-            let amount = this.cancelAmount;
+            const amount = this.cancelAmount;
             this.closeConfirm();
 
             this.activeAccount.initPwd({
                 submit: () => {
-                    let txListEle = this.$refs.txList;
+                    const txListEle = this.$refs.txList;
                     if (!txListEle) {
                         return;
                     }
@@ -151,36 +155,38 @@ export default {
             });
         },
 
-        sendPledgeTx({
-            toAddress, amount
-        }, type, cb) {
-            if (!viteWallet.Net.getNetStatus()) {
+        sendPledgeTx({ toAddress, amount }, type, cb) {
+            if (!this.netStatus) {
                 this.$toast(this.$t('hint.noNet'));
                 cb && cb(false);
+
                 return;
             }
 
             this.activeAccount = this.$wallet.getActiveAccount();
 
-            amount = BigNumber.toMin(amount || 0, this.tokenInfo.decimals);     
+            amount = BigNumber.toMin(amount || 0, this.tokenInfo.decimals);
             this.activeAccount[type]({
                 tokenId: this.tokenInfo.tokenId,
                 toAddress,
                 amount
             }).then(() => {
                 cb && cb(true);
-            }).catch((err) => {
-                console.warn(err);
-                if (err && err.error && err.error.code && err.error.code === -35002) {
-                    this.$refs.powProcess.startPowTx(err.accountBlock, 0).then(() => {
-                        cb && cb(true);
-                    }).catch(() => {
-                        cb && cb(false, err);
-                    });
-                    return;
-                }
-                cb && cb(false, err);
-            });
+            })
+                .catch(err => {
+                    console.warn(err);
+                    if (err && err.error && err.error.code && err.error.code === -35002) {
+                        this.$refs.powProcess.startPowTx(err.accountBlock, 0).then(() => {
+                            cb && cb(true);
+                        })
+                            .catch(() => {
+                                cb && cb(false, err);
+                            });
+
+                        return;
+                    }
+                    cb && cb(false, err);
+                });
         }
     }
 };
@@ -190,86 +196,94 @@ export default {
 @import "~assets/scss/vars.scss";
 
 .quota-wrapper {
-    position: relative;
-    box-sizing: border-box;
-    overflow: auto;
-    height: 100%;
-    .loading {
-        width: 60px;
-        height: 60px;
-        margin-top: -30px;
-        margin-left: -30px;
-    }
-    .cancel-amount {
-        position: absolute;
-        right: 30px;
-        left: 30px;
-        font-size: 12px;
-        color: #FF2929;
-        line-height: 22px;
-        word-break: break-word;
-    }
-    .cancel-input {
-        margin-top: 27px;
-    }
+  position: relative;
+  box-sizing: border-box;
+  overflow: auto;
+  height: 100%;
+
+  .loading {
+    width: 60px;
+    height: 60px;
+    margin-top: -30px;
+    margin-left: -30px;
+  }
+
+  .cancel-amount {
+    position: absolute;
+    right: 30px;
+    left: 30px;
+    font-size: 12px;
+    color: #ff2929;
+    line-height: 22px;
+    word-break: break-word;
+  }
+
+  .cancel-input {
+    margin-top: 27px;
+  }
 }
 
 .content {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    margin-bottom: 40px;
-    ._content_border {
-        background: #FFFFFF;
-        border: 1px solid #F6F5F5;
-        box-shadow: 0 2px 48px 1px rgba(176,192,237,0.42);
-        border-radius: 2px;
-    }
-    .my-quota {
-        box-sizing: border-box;
-        min-width: 170px;
-        margin-right: 40px;
-        padding: 30px;
-    }
-    .pledge-tx {
-        flex: 1;
-        max-width: 100%;
-        box-sizing: border-box;
-        padding: 0 30px 30px 30px;
-    }
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+
+  ._content_border {
+    background: #fff;
+    border: 1px solid #f6f5f5;
+    box-shadow: 0 2px 48px 1px rgba(176, 192, 237, 0.42);
+    border-radius: 2px;
+  }
+
+  .my-quota {
+    box-sizing: border-box;
+    min-width: 170px;
+    margin-right: 40px;
+    padding: 30px;
+  }
+
+  .pledge-tx {
+    flex: 1;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding: 0 30px 30px 30px;
+  }
 }
 
 .gray-wrapper {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    overflow: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: rgba(0, 0, 0, 0.6);
-    z-index: 100;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  overflow: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 100;
 }
 
 @media only screen and (max-width: 550px) {
-    .content ._content_border {
-        padding: 15px;
-    }
-    .content {
-        margin-bottom: 20px;
-    }
-    .quota-wrapper {
-        padding: 15px;
-    }
+  .content ._content_border {
+    padding: 15px;
+  }
+
+  .content {
+    margin-bottom: 20px;
+  }
+
+  .quota-wrapper {
+    padding: 15px;
+  }
 }
 
 @media only screen and (max-width: 950px) {
-    .content .my-quota {
-        margin-right: 0;
-        width: 100%;
-    }
+  .content .my-quota {
+    margin-right: 0;
+    width: 100%;
+  }
 }
 </style>
