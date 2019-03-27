@@ -20,7 +20,10 @@
     "submitStaking": "Submit Staking",
     "withdrawHeight": "Expected Snapshot Height",
     "balance": "Balance",
-    "pow": "Running PoW...",
+    "pow": {
+        "ing": "正在运行PoW获取配额",
+        "no": "如果您不想运行PoW，您可抵押VITE获取配额"
+    },
     "addAccount": "Add a new account",
     "saveQrcode": "Save QR code image",
     "unlockSuccess": "Unlock Success",
@@ -64,8 +67,8 @@
         "11": "Transfer of ownership",
         "12": "Edit token type",
         "13": "Retrieve Staked Tokens",
-        "14": "ViteX Deposit",
-        "15": "ViteX Withdrawal",
+        "14": "ViteX充值",
+        "15": "ViteX提现",
         "16": "ViteX Creating Orders",
         "17": "ViteX Revoking Orders",
         "18": "ViteX Token Listing",
@@ -123,10 +126,8 @@
     "quotaConfirm": {
         "title": "Insufficient Quota",
         "cancelContent": "You cannot {operate} due to insufficient TPS quota. You need to stake VITE for quota to {operate}",
-        "powContent": "your left quota turn out to be insufficient, you can acquire more quota by running PoW or staking VITE",
         "goQuota": "Stake VITE",
-        "noOperate": "Not {operate} yet",
-        "runPow": "Run PoW"
+        "noOperate": "Not {operate} yet"
     },
     "mnemonic": {
         "title": "Mnemonic",
@@ -363,8 +364,8 @@
             },
             "hoverHelp": "The node {nodeName} you are voted for has been revoked, you may vote again directly or revoke your voting, If you do not do so, your original voting result will be recovered after the {nodeName} re-registering",
             "confirm": {
-                "cancelText": "Confirm",
-                "submitText": "Not yet"
+                "cancelText": "Not yet",
+                "submitText": "Confirm"
             },
             "revoke": "Revoking",
             "operateBtn": "Revoke",
@@ -519,8 +520,8 @@
                 "Value"
             ],
             "rowMap": {
-                "recharge": "Deposit",
-                "withdraw": "Withdraw",
+                "recharge": "充值至交易所",
+                "withdraw": "提现至钱包",
                 "detail": "Trade",
                 "sideMap":{
                     "1":"Deposit",
@@ -531,22 +532,22 @@
         "confirmrecharge": {
             "successToast":"Deposit successful",
             "failToast":"Failed to deposit",
-            "title": "Deposit tokens in the exchange",
+            "title": "充值至交易所",
             "lable1": "Wallet Balance",
             "lable2": "Deposit Amount",
             "tips": "Insufficient Wallet Balance",
             "placeholder": "Please input deposit amount",
-            "btn": "Ready to Deposit"
+            "btn": "充值至交易所Ready to Deposit"
         },
         "confirmwithdraw": {
             "successToast":"Withdrawal Successful",
             "failToast":"Withdrawal Failed",
-            "title": "Withdraw token to the wallet",
+            "title": "提现至钱包",
             "lable1": "Available Balance",
             "lable2": "Withdrawal Amount",
             "tips": "Insufficient Wallet Balance",
             "placeholder": "Please input withdrawal amount",
-            "btn": "Make a Withdrawal"
+            "btn": "提现至钱包Make a Withdrawal"
         },
         "zero": "Hide Zero Tokens"
     },

@@ -204,7 +204,7 @@ export default class dataFeeds {
                 low: data.l,
                 volume: data.v
             });
-        });
+        }, 2000);
 
         timers[subscriberUID].start(() => {
             return {

@@ -124,12 +124,10 @@ class account {
 
         if (isHide) {
             submit && submit();
-
             return true;
         }
 
         pwdConfirm({ showMask, title, submit, content, cancel, cancelTxt, submitTxt, exchange }, !this.isHoldPWD);
-
         return false;
     }
 
@@ -153,7 +151,6 @@ class account {
         if (this.pass) {
             return Promise.resolve(this.pass === pass);
         }
-
         return this.account.verify(pass);
     }
 

@@ -1,32 +1,36 @@
-const eventList = [];
+export default class eventEmitter {
+    constructor() {
+        this.eventList = [];
+    }
 
-export default {
-    on: function (name, cb) {
+    on(name, cb) {
         const event = {
             name,
             cb
         };
-        eventList.push(event);
+        this.eventList.push(event);
 
         return event;
-    },
-    emit: function (name, data) {
-        eventList.forEach(event => {
+    }
+
+    emit(name, data) {
+        this.eventList.forEach(event => {
             event.name === name && event.cb && event.cb(data);
         });
-    },
-    off: function (event) {
+    }
+
+    off(event) {
         if (!event) {
             return;
         }
 
         let i;
-        for (i = 0; i < eventList.length; i++) {
-            if (event === eventList[i]) {
+        for (i = 0; i < this.eventList.length; i++) {
+            if (event === this.eventList[i]) {
                 break;
             }
         }
 
-        (i !== eventList.length) && eventList.splice(i, 1);
+        (i !== this.eventList.length) && this.eventList.splice(i, 1);
     }
-};
+}

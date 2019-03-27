@@ -1,7 +1,5 @@
 <template>
     <div class="order-wrapper">
-        <pow-process ref="powProcess"></pow-process>
-
         <div class="order-title">
             {{ $t(`exchange.${orderType}.title`, { token: ftokenShow }) }}
             <div class="wallet">
@@ -47,13 +45,12 @@
 
 <script>
 import viteInput from 'components/viteInput';
-import powProcess from 'components/powProcess';
-import { quotaConfirm } from 'components/quota/index';
+import sendTx from 'utils/sendTx';
 import BigNumber from 'utils/bigNumber';
 import { newOrder } from 'services/exchange';
 
 export default {
-    components: { viteInput, powProcess },
+    components: { viteInput },
     props: {
         orderType: {
             type: String,
@@ -79,10 +76,9 @@ export default {
     },
     watch: {
         activeTxPair: function () {
-            if (+this.price) {
-                return;
-            }
             this.price = this.activeTxPair && this.activeTxPair.price ? this.activeTxPair.price : '';
+            this.quantity = '';
+            this.amount = '';
         },
         balance: function () {
             this.validAll();
@@ -349,7 +345,7 @@ export default {
             const tokenDigit = this.ftokenDetail.tokenDigit;
             quantity = BigNumber.toMin(quantity, tokenDigit);
 
-            newOrder({
+            sendTx(newOrder, {
                 tradeToken,
                 quoteToken,
                 side: this.orderType === 'buy' ? 0 : 1,
@@ -361,29 +357,8 @@ export default {
                 this.$toast(this.$t('exchange.newOrderSuccess'));
             }).catch(err => {
                 console.warn(err);
-
-                if (!err || !err.error || !err.error.code || err.error.code !== -35002) {
-                    this.isLoading = false;
-                    this.$toast(this.$t('exchange.newOrderFail'), err);
-                    return;
-                }
-
-                quotaConfirm(true, {
-                    closeBtnClick: () => {
-                        this.isLoading = false;
-                    },
-                    rightBtnClick: () => {
-                        this.$refs.powProcess.startPowTx(err.accountBlock, 0).then(() => {
-                            this.isLoading = false;
-                            this.clearAll();
-                            this.$toast(this.$t('exchange.newOrderSuccess'));
-                        }).catch(err => {
-                            this.isLoading = false;
-                            this.$toast(this.$t('exchange.newOrderFail'), err);
-                            console.warn(err);
-                        });
-                    }
-                });
+                this.isLoading = false;
+                this.$toast(this.$t('exchange.newOrderFail'), err);
             });
         }
     }
