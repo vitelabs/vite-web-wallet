@@ -62,6 +62,7 @@
 
             .b {
                 flex-basis: 306px;
+                overflow: auto;
             }
 
             .l {
