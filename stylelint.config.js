@@ -6,6 +6,6 @@ module.exports = {
         'declaration-colon-space-after': 'always',
         'indentation': 4,
         'max-empty-lines': 1,
-        'unit-whitelist': [ 'px', '%', 'deg', 's' ]
+        'unit-whitelist': [ 'px', '%', 'deg', 's', 'vh' ]
     }
 };

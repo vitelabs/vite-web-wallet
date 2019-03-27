@@ -12,7 +12,7 @@
 
         <div class="order-row-title">{{ $t(`exchange.${orderType}.price`) }}</div>
         <vite-input class="order-input" :class="{'err': isPriceErr}"
-                    v-model="price" @input="priceChanged">
+                    v-model="price">
             <span class="ex-order-token" slot="after">{{ ttokenShow }}</span>
         </vite-input>
 
@@ -92,6 +92,7 @@ export default {
         },
         price: function () {
             this.validAll();
+            this.priceChanged();
         },
         activeTx: function () {
             this.price = this.activeTx.price;
