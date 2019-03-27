@@ -5,9 +5,10 @@ import $ViteJS from 'utils/viteClient';
 const DefaultDifficulty = '67108864';
 
 export async function getPowNonce(addr, prevHash, difficulty = DefaultDifficulty) {
+    difficulty = difficulty || DefaultDifficulty;
+
     const realAddr = address.getAddrFromHexAddr(addr);
     const hash = encoder.bytesToHex(encoder.blake2b(encoder.hexToBytes(realAddr + prevHash), null, 32));
-
     const result = await $ViteJS.request('pow_getPowNonce', difficulty, hash);
 
     return {

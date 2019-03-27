@@ -5,6 +5,7 @@ const pageCount = 50;
 
 let lastFetchTime = null;
 let lastFetchQuotaTime = null;
+let lastAddress = null;
 
 const state = {
     // Amount data
@@ -46,31 +47,34 @@ const actions = {
     fetchQuota({ commit }, address) {
         const fetchTime = new Date().getTime();
         lastFetchQuotaTime = fetchTime;
+        lastAddress = address;
 
         return $ViteJS.pledge.getPledgeQuota(address).then(result => {
-            if (fetchTime !== lastFetchQuotaTime || !result) {
+            if (fetchTime !== lastFetchQuotaTime
+                || !result
+                || address !== lastAddress) {
                 return null;
             }
 
             commit('commitQuota', result);
-
             return result;
         });
     },
     fetchPledgeList({ commit, state }, { address, pageIndex }) {
         const fetchTime = new Date().getTime();
         lastFetchTime = fetchTime;
+        lastAddress = address;
         commit('commitSetCurrent', pageIndex);
 
         return $ViteJS.pledge.getPledgeList(address, pageIndex, pageCount).then(result => {
             if (pageIndex !== state.currentPage
                 || fetchTime !== lastFetchTime
-                || !result) {
+                || !result
+                || lastAddress !== address) {
                 return null;
             }
 
             commit('commitPledgeList', result);
-
             return result;
         });
     }

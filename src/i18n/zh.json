@@ -19,7 +19,10 @@
     "stakingAmount": "抵押金额",
     "withdrawHeight": "到期快照高度",
     "balance": "账户余额",
-    "pow": "运行PoW...",
+    "pow": {
+        "ing": "正在运行PoW获取配额",
+        "no": "如果您不想运行PoW，您可抵押VITE获取配额"
+    },
     "addAccount": "添加账户",
     "saveQrcode": "保存二维码图片",
     "unlockSuccess": "解锁成功",
@@ -64,8 +67,8 @@
         "11": "转移所有权",
         "12": "修改代币类型",
         "13": "取回抵押",
-        "14": "ViteX充币",
-        "15": "ViteX提币",
+        "14": "ViteX充值",
+        "15": "ViteX提现",
         "16": "ViteX挂单",
         "17": "ViteX撤单",
         "18": "ViteX上币",
@@ -123,10 +126,8 @@
     "quotaConfirm": {
         "title": "配额不足",
         "cancelContent": "当前配额不足，无法进行{operate}，您需要抵押VITE获取配额才可以{operate}",
-        "powContent": "配额不足，建议您点击运行PoW获取配额或抵押VITE获取配额",
         "goQuota": "抵押VITE",
-        "noOperate": "暂不{operate}",
-        "runPow": "运行PoW"
+        "noOperate": "暂不{operate}"
     },
     "mnemonic": {
         "title": "助记词",
@@ -363,8 +364,8 @@
             },
             "hoverHelp": "您投票的{nodeName}已经取消注册，您可以直接重新投票、或者撤销投票；如果您不重新投票或撤销投票，{nodeName}重新注册后，您原来的投票将恢复生效。",
             "confirm": {
-                "cancelText": "确认撤销",
-                "submitText": "暂不撤销"
+                "cancelText": "暂不撤销",
+                "submitText": "确认撤销"
             },
             "revoke": "撤销投票",
             "operateBtn": "撤销",
@@ -519,8 +520,8 @@
                 "价值"
             ],
             "rowMap": {
-                "recharge": "充币至交易所",
-                "withdraw": "提币至钱包",
+                "recharge": "充值至交易所",
+                "withdraw": "提现至钱包",
                 "detail": "充提记录",
                 "sideMap":{
                     "1":"充值",
@@ -531,22 +532,22 @@
         "confirmrecharge": {
             "successToast":"充值成功",
             "failToast":"充值失败",
-            "title": "充币至交易所",
+            "title": "充值至交易所",
             "lable1": "钱包余额",
             "lable2": "充币金额",
             "tips": "钱包账户余额不足",
             "placeholder": "请输入充币金额",
-            "btn": "充币至交易所"
+            "btn": "充值至交易所"
         },
         "confirmwithdraw": {
             "successToast":"提币成功",
             "failToast":"提币失败",
-            "title": "提币至钱包",
+            "title": "提现至钱包",
             "lable1": "可提币余额",
             "lable2": "提币金额",
             "tips": "钱包账户余额不足",
             "placeholder": "请输入提币金额",
-            "btn": "提币至钱包"
+            "btn": "提现至钱包"
         },
         "zero": "隐藏0元代币"
     },

@@ -55,8 +55,6 @@
                :heads="$t('exchangeAssets.confirmTable.heads')"
                :title="$t('exchangeAssets.confirmTable.title')"
                :close="close"></alert>
-
-        <powProcess ref="pow"></powProcess>
     </div>
 </template>
 
@@ -66,8 +64,8 @@ import BigNumber from 'utils/bigNumber';
 import getTokenIcon from 'utils/getTokenIcon';
 import viteInput from 'components/viteInput';
 import confirm from 'components/confirm.vue';
-import powProcess from 'components/powProcess';
-import { quotaConfirm } from 'components/quota/index';
+import sendTx from 'utils/sendTx';
+
 import debounce from 'lodash/debounce';
 import d from 'dayjs';
 
@@ -76,7 +74,7 @@ import { deposit, withdraw, chargeDetail } from 'services/exchange';
 const VoteDifficulty = '201564160';
 
 export default {
-    components: { confirm, alert, powProcess, viteInput },
+    components: { confirm, alert, viteInput },
     props: { filter: { type: Object } },
     beforeMount() {
         this.acc = this.$wallet.getActiveAccount();
@@ -151,26 +149,19 @@ export default {
             const c = this.c;
 
             const failSubmit = e => {
-                const code = e && e.error ? e.error.code || -1 : e ? e.code : -1;
-
-                if (code !== -35002) {
-                    this.$toast(this.$t(`exchangeAssets.confirm${ c.type }.failToast`), e);
-                    return;
-                }
-
-                const startTime = new Date().getTime();
-                quotaConfirm(true, {
-                    rightBtnClick: () => {
-                        this.$refs.pow
-                            .startPowTx(e.accountBlock, startTime, VoteDifficulty)
-                            .then(successSubmit)
-                            .catch(failSubmit);
-                    }
-                });
+                this.$toast(this.$t(`exchangeAssets.confirm${ c.type }.failToast`), e);
             };
 
             const successSubmit = () => {
                 this.$toast(this.$t(`exchangeAssets.confirm${ c.type }.successToast`));
+            };
+
+            const config = {
+                pow: true,
+                powConfig: {
+                    isShowCancel: false,
+                    difficulty: VoteDifficulty
+                }
             };
 
             this.closeNumConfirm();
@@ -179,12 +170,12 @@ export default {
                 cancelTxt: this.$t('exchangeAssets.pwdConfirm.cancelTxt'),
                 submit: () => {
                     c.type === 'recharge'
-                        ? deposit({ tokenId, amount })
+                        ? sendTx(deposit, { tokenId, amount }, config)
                             .then(successSubmit)
                             .catch(e => {
                                 failSubmit(e);
                             })
-                        : withdraw({ tokenId, amount })
+                        : sendTx(withdraw, { tokenId, amount }, config)
                             .then(successSubmit)
                             .catch(e => {
                                 failSubmit(e);

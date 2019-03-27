@@ -1,7 +1,8 @@
 <template>
     <div class="gray-wrapper" v-if="isShow">
         <div class="pow-process-wrapper">
-            <div class="pow">{{ $t('pow') }}</div>
+            <div class="pow">{{ $t('pow.ing') }}</div>
+            <div class="pow">{{ $t('pow.no') }}</div>
             <div class="loading-wrapper __pointer">
                 <loading></loading>
                 <div class="process-num">{{ processNum + '%' }}</div>
@@ -14,9 +15,9 @@
 <script>
 import loading from 'components/loading';
 import { getPowNonce } from 'services/pow';
-import $ViteJS from 'utils/viteClient';
 
 let processTimeout;
+let limitTimeout;
 
 export default {
     components: { loading },
@@ -36,27 +37,33 @@ export default {
             isShow: false
         };
     },
-    mounted() {
-        const addProcessNum = () => {
-            this.clearProcessTimeout();
-            if (this.processNum >= 99) {
-                return;
-            }
-            this.processNum++;
-
-            processTimeout = window.setTimeout(() => {
-                addProcessNum();
-            }, 600);
-        };
-        addProcessNum();
-    },
     destroyed() {
         this.clearProcessTimeout();
+        this.clearLimitTimeout();
     },
     methods: {
         clearProcessTimeout() {
             window.clearTimeout(processTimeout);
             processTimeout = null;
+        },
+        clearLimitTimeout() {
+            window.clearTimeout(limitTimeout);
+            limitTimeout = null;
+        },
+
+        startCount() {
+            const addProcessNum = () => {
+                this.clearProcessTimeout();
+                if (this.processNum >= 99) {
+                    return;
+                }
+                this.processNum++;
+
+                processTimeout = window.setTimeout(() => {
+                    addProcessNum();
+                }, 600);
+            };
+            addProcessNum();
         },
         gotoFinish() {
             this.clearProcessTimeout();
@@ -67,59 +74,71 @@ export default {
             this.isShow = false;
             this.cancel();
         },
-        async startPowTx(accountBlock, startTime, difficulty) {
-            const now = new Date().getTime();
-            if (startTime && now - startTime > 2000) {
-                accountBlock.prevHash = null;
-                accountBlock.height = null;
-                accountBlock.snapshotHash = null;
-                try {
-                    accountBlock = await $ViteJS.buildinTxBlock.getAccountBlock.async(accountBlock);
-                } catch (e) {
-                    this.isShow = false;
-                    this.$emit('pow-finish');
 
-                    return Promise.reject(e, 0);
+        async startPowTx(accountBlock, startTime, difficulty) {
+            this.isShow = true;
+            this.startCount();
+
+            let isTimeUp = false;
+            let timtUpCb = null;
+
+            this.clearLimitTimeout();
+            limitTimeout = setTimeout(() => {
+                isTimeUp = true;
+                timtUpCb && timtUpCb();
+            }, 5000);
+
+            const activeAccount = this.$wallet.getActiveAccount();
+            let data;
+
+            try {
+                data = await getPowNonce(activeAccount.getDefaultAddr(), accountBlock.prevHash, difficulty);
+            } catch (e) {
+                if (!isTimeUp) {
+                    return new Promise((res, rej) => {
+                        timtUpCb = () => rej(e, 0);
+                    });
                 }
+                this.isShow = false;
+                return Promise.reject(e, 0);
             }
 
-            this.isShow = true;
-            const activeAccount = this.$wallet.getActiveAccount();
+            accountBlock.difficulty = data.difficulty;
+            accountBlock.nonce = data.nonce;
+
+            if (!this.isShow) {
+                return;
+            }
+
+            if (isTimeUp) {
+                return this.sendRawTx(activeAccount, accountBlock);
+            }
 
             return new Promise((res, rej) => {
-                getPowNonce(activeAccount.getDefaultAddr(), accountBlock.prevHash, difficulty).then(data => {
-                    accountBlock.difficulty = data.difficulty;
-                    accountBlock.nonce = data.nonce;
-
-                    if (!this.isShow) {
-                        return;
-                    }
-
-                    this.stopPow(() => {
-                        activeAccount.sendRawTx(accountBlock).then(data => {
-                            this.isShow = false;
-                            res(data);
-                        })
-                            .catch(e => {
-                                this.isShow = false;
-                                rej(e, 1);
-                            });
+                timtUpCb = () => {
+                    this.sendRawTx(activeAccount, accountBlock).then((...args) => {
+                        res(...args);
+                    }).catch((...args) => {
+                        rej(...args);
                     });
-                })
-                    .catch(e => {
-                        this.isShow = false;
-                        this.$emit('pow-finish');
-                        rej(e, 0);
-                    });
+                };
             });
         },
-        stopPow(cb) {
-            this.gotoFinish();
-            setTimeout(() => {
-                this.isShow = false;
-                this.$emit('pow-finish');
-                cb && cb();
-            }, 1000);
+
+        sendRawTx(activeAccount, accountBlock) {
+            return new Promise((res, rej) => {
+                this.gotoFinish();
+                setTimeout(() => {
+                    this.isShow = false;
+                    activeAccount.sendRawTx(accountBlock).then(data => {
+                        this.isShow = false;
+                        res(data);
+                    }).catch(e => {
+                        this.isShow = false;
+                        rej(e, 1);
+                    });
+                }, 1000);
+            });
         }
     }
 };
