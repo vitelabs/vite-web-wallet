@@ -122,6 +122,13 @@ export default {
     &:nth-child(9) {
         width: 15%;
     }
+
+    &:nth-child(4),
+    &:nth-child(5),
+    &:nth-child(6) {
+        text-align: right;
+        justify-content: right;
+    }
 }
 
 .buy {
