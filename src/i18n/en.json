@@ -21,8 +21,8 @@
     "withdrawHeight": "Expected Snapshot Height",
     "balance": "Balance",
     "pow": {
-        "ing": "正在运行PoW获取配额",
-        "no": "如果您不想运行PoW，您可抵押VITE获取配额"
+        "ing": "Running PoW to acquire quota",
+        "no": "You can stake VITE for quota in case you would not like to run PoW"
     },
     "addAccount": "Add a new account",
     "saveQrcode": "Save QR code image",
@@ -41,16 +41,16 @@
         "36003": "System verify failed, please try again later（36003）",
         "36004": "System verify failed, please try again later（36004）",
         "36005": "Snapshot block height is illegal, please try again later",
-        "37001": "订单号格式错误",
-        "37002": "订单类型错误",
-        "37003": "订单价格格式错误",
-        "37004": "订单交易数量异常",
-        "37005": "订单交易金额过小",
-        "37006": "该交易市场已经存在",
-        "37007": "订单指定交易市场不存在",
-        "37008": "查询订单信息异常",
-        "37009": "撤销订单不属于当前地址",
-        "37010": "该订单状态不可以撤销"
+        "37001": "Wrong order number format",
+        "37002": "Wrong order type",
+        "37003": "Wrong order price format",
+        "37004": "Exception occurs in order transaction volume",
+        "37005": "Order transaction amount too small",
+        "37006": "Existed trading market",
+        "37007": "Order trading market not exist",
+        "37008": "Exception occurs in searching order information",
+        "37009": "Revoked order doesn't belong to current address",
+        "37010": "This order status cannot be revoked"
     },
     "txType": {
         "0": "SBP Registration",
@@ -234,8 +234,8 @@
         "maxAmt": "Withdraw amount should be in (0, {amount}]",
         "cancelLimitAmt": "Staking amount cannot be less than {num}",
         "withdrawalStaking": "Withdrawal of Staked Token",
-        "VX": "挖矿VX",
-        "myAddr": "我的",
+        "VX": "Mining VX",
+        "myAddr": "Me",
         "confirm": {
             "help": {
                 "t1": "What is Quota?",
@@ -520,8 +520,8 @@
                 "Value"
             ],
             "rowMap": {
-                "recharge": "充值至交易所",
-                "withdraw": "提现至钱包",
+                "recharge": "Deposit to Exchange",
+                "withdraw": "Withdraw to Wallet",
                 "detail": "Trade",
                 "sideMap":{
                     "1":"Deposit",
@@ -532,22 +532,22 @@
         "confirmrecharge": {
             "successToast":"Deposit successful",
             "failToast":"Failed to deposit",
-            "title": "充值至交易所",
+            "title": "Deposit to Exchange",
             "lable1": "Wallet Balance",
             "lable2": "Deposit Amount",
             "tips": "Insufficient Wallet Balance",
             "placeholder": "Please input deposit amount",
-            "btn": "充值至交易所Ready to Deposit"
+            "btn": "Deposit"
         },
         "confirmwithdraw": {
             "successToast":"Withdrawal Successful",
             "failToast":"Withdrawal Failed",
-            "title": "提现至钱包",
+            "title": "Withdraw to Wallet",
             "lable1": "Available Balance",
             "lable2": "Withdrawal Amount",
             "tips": "Insufficient Wallet Balance",
             "placeholder": "Please input withdrawal amount",
-            "btn": "提现至钱包Make a Withdrawal"
+            "btn": "Withdraw"
         },
         "zero": "Hide Zero Tokens"
     },
@@ -560,10 +560,10 @@
         },
         "title": "Open Orders",
         "hint": {
-            "fdate": "请选择起始日期",
-            "tdate": "请选择终止日期",
-            "dateErr": "终止日期必须晚于起始日期",
-            "ftoken": "请选择ftoken"
+            "fdate": "Please select start date",
+            "tdate": "Please select end date",
+            "dateErr": "The end date must be later than the start date",
+            "ftoken": "Please select ftoken"
         },
         "side": {
             "1": "Sell",
@@ -618,7 +618,7 @@
                 "statusMap": {
                     "1": "In Order",
                     "2": "Completed",
-                    "3": "已撤销"
+                    "3": "Canceled"
                 },
                 "detail": "Details"
             }
