@@ -89,7 +89,8 @@ export default {
                 ftoken: order.ftoken,
                 ttoken: order.ttoken,
                 pageNo: 1,
-                pageSize: 100
+                pageSize: 100,
+                type: order.side
             }).then(data => {
                 this.detailData = data.details.map(v => {
                     v.token = order.ttokenShow;
