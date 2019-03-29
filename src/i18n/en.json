@@ -154,7 +154,7 @@
         "addrList": "Addresses of Accounts",
         "setDefault": "Select Default Address",
         "autoLogout": "Auto Logout Time",
-        "noPass": "Login Without Passworda",
+        "noPass": "Login Without Password",
         "timeList": {
             "5": "5 Minutes",
             "10": "10 Minutes",
