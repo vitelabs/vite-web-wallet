@@ -1,14 +1,9 @@
 import { client } from './index';
 import { timer } from 'utils/asyncFlow';
-import { depthBuy, depthSell, defaultPair, assignPair, latestTx, order } from 'services/exchange';
+import { depth, defaultPair, assignPair, latestTx, order } from 'services/exchange';
 
-export function depthBuyWs({ ftoken, ttoken }) {
-    const key = `market.${ ftoken }-${ ttoken }.depth.buy`;
-    return key;
-}
-
-export function depthSellWs({ ftoken, ttoken }) {
-    const key = `market.${ ftoken }-${ ttoken }.depth.sell`;
+export function depthWs({ ftoken, ttoken }) {
+    const key = `market.${ ftoken }-${ ttoken }.depth.latest`;
     return key;
 }
 
@@ -48,8 +43,7 @@ export const klineWs = function ({ ftoken, ttoken, resolution }) {
 };
 
 const httpServicesMap = {
-    depthBuy,
-    depthSell,
+    depth,
     defaultPair,
     assignPair,
     latestTx,
@@ -73,8 +67,7 @@ const httpServicesMap = {
     })
 };
 const wsServicesMap = {
-    depthBuy: depthBuyWs,
-    depthSell: depthSellWs,
+    depth: depthWs,
     defaultPair: defaultPairWs,
     assignPair: assignPairWs,
     latestTx: latestTxWs,

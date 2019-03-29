@@ -28,17 +28,9 @@ export const klineHistory = function ({ from, to, ftoken, ttoken, resolution }) 
     });
 };
 
-export const depthBuy = function ({ ftoken, ttoken }) {
+export const depth = function ({ ftoken, ttoken }) {
     return request({
-        path: `${ path }/depth/buy`,
-        method: 'GET',
-        params: { ftoken, ttoken }
-    });
-};
-
-export const depthSell = function ({ ftoken, ttoken }) {
-    return request({
-        path: `${ path }/depth/sell`,
+        path: `${ path }/depth`,
         method: 'GET',
         params: { ftoken, ttoken }
     });

@@ -1,14 +1,12 @@
 import { subTask } from 'utils/proto/subTask';
 
 const time = 2000;
-let buyTask = null;
-let sellTask = null;
+let depthTask = null;
 
 const state = {
     buy: [],
     sell: [],
-    isBuyLoading: false,
-    isSellLoading: false
+    isLoading: false
 };
 
 const mutations = {
@@ -18,57 +16,33 @@ const mutations = {
     exSetDepthSell(state, depthData) {
         state.sell = depthData || [];
     },
-    exSetDepthBuyLoading(state, isLoading) {
-        state.isBuyLoading = isLoading;
-    },
-    exSetDepthSellLoading(state, isLoading) {
-        state.isSellLoading = isLoading;
+    exSetDepthLoading(state, isLoading) {
+        state.isLoading = isLoading;
     }
 };
 
 const actions = {
-    exFetchDepth({ rootState, dispatch }) {
+    exFetchDepth({ rootState, commit, getters }) {
         const activeTxPair = rootState.exchangeActiveTxPair.activeTxPair;
         if (!activeTxPair) {
             return;
         }
 
-        dispatch('exFetchDepthBuy');
-        dispatch('exFetchDepthSell');
-    },
-    exFetchDepthBuy({ commit, getters }) {
-        commit('exSetDepthBuyLoading', true);
+        commit('exSetDepthLoading', true);
 
-        buyTask = buyTask || new subTask('depthBuy', ({ data }) => {
-            commit('exSetDepthBuyLoading', false);
-            commit('exSetDepthBuy', data);
+        depthTask = depthTask || new subTask('depth', ({ data }) => {
+            commit('exSetDepthLoading', false);
+            commit('exSetDepthBuy', data && data.asks ? data.asks || [] : []);
+            commit('exSetDepthSell', data && data.bids ? data.bids || [] : []);
         }, time);
 
-        buyTask.start(() => getters.exActiveTxPair);
-    },
-    exFetchDepthSell({ commit, getters }) {
-        commit('exSetDepthSellLoading', true);
-
-        sellTask = sellTask || new subTask('depthSell', ({ data }) => {
-            commit('exSetDepthSellLoading', false);
-            commit('exSetDepthSell', data);
-        }, time);
-
-        sellTask.start(() => getters.exActiveTxPair);
+        depthTask.start(() => getters.exActiveTxPair);
     },
     exStopDepthTimer() {
-        stopBuyTimer();
-        stopSellTimer();
+        depthTask && depthTask.stop();
+        depthTask = null;
     }
 };
-
-function stopBuyTimer() {
-    buyTask && buyTask.stop();
-}
-
-function stopSellTimer() {
-    sellTask && sellTask.stop();
-}
 
 export default {
     state,
