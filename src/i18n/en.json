@@ -118,7 +118,7 @@
         "v": "Current version: {version}"
     },
     "pwdConfirm": {
-        "conf": "Open password-free mode within 5 minutes",
+        "conf": "Open password-free mode within {time}",
         "title": "Password",
         "placeholder": "Please input password of wallet",
         "unlockAcc": "Please input password to unlock {name} account"
@@ -154,6 +154,7 @@
         "addrList": "Addresses of Accounts",
         "setDefault": "Select Default Address",
         "autoLogout": "Auto Logout Time",
+        "noPass": "免密时间设置",
         "timeList": {
             "5": "5 Minutes",
             "10": "10 Minutes",
