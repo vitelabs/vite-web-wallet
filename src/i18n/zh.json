@@ -118,7 +118,7 @@
         "v": "当前版本：{version}"
     },
     "pwdConfirm": {
-        "conf": "开启5分钟内免密操作",
+        "conf": "开启{time}内免密操作",
         "title": "输入钱包密码",
         "placeholder": "请输入钱包密码",
         "unlockAcc": "请输入密码解锁 {name} 账户"
@@ -154,6 +154,7 @@
         "addrList": "账户地址列表",
         "setDefault": "选择默认地址",
         "autoLogout": "自动退出登录时间",
+        "noPass": "免密时间设置",
         "timeList": {
             "5": "5分钟",
             "10": "10分钟",

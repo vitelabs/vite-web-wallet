@@ -13,7 +13,6 @@ const mutations = {
         if (!payload) {
             state.balance = { balanceInfos: {} };
             state.onroad = { balanceInfos: {} };
-
             return;
         }
 
