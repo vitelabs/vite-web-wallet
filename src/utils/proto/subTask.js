@@ -107,6 +107,9 @@ export class subTask extends timer {
                 if (this.subKey !== key) {
                     return;
                 }
+                if (this.key.indexOf('orderQuery') !== -1) {
+                    data = data.orders || [];
+                }
                 this.callback && this.callback({ args, data });
             });
         };

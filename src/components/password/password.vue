@@ -78,7 +78,6 @@ export default {
         this.$onKeyDown(13, lastE);
     },
     data() {
-        console.log(localStorage.getItem('noPass'));
         return {
             holdTime: localStorage.getItem('noPass') || 5,
             isShowPWDHold: !window.isShowPWD,

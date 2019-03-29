@@ -25,6 +25,9 @@
                 <div @click="detail(token.id)" class="click-able">
                     {{$t("exchangeAssets.table.rowMap.detail")}}</div>
             </div>
+            <div class="no-data" v-show="!list || !list.length">
+                <div>{{ $t('hint.noData') }}</div>
+            </div>
         </div>
 
         <img @click="update" class="refresh" :class="{rotate:isRotate}" src="~assets/imgs/exchange/refresh.svg" />
@@ -82,7 +85,6 @@ export default {
             return;
         }
         this.acc && (this.addr = this.acc.getDefaultAddr());
-        this.addr && this.$store.dispatch('updateExBalance', this.addr);
     },
     data() {
         return {
@@ -96,6 +98,81 @@ export default {
             addr: '',
             isRotate: false
         };
+    },
+    computed: {
+        detailList() {
+            return Object.keys(this.detailData).map(k => {
+                const o = this.detailData[k];
+
+                return [
+                    d.unix(o.optime).format('YYYY-MM-DD HH:mm'),
+                    o.tokenName,
+                    this.$t('exchangeAssets.table.rowMap.sideMap')[o.optype],
+                    o.amount
+                ];
+            });
+        },
+        balance() {
+            const exB = this.$store.getters.exBalanceList;
+            const walletB = this.$store.getters.tokenBalanceList;
+
+            const res = {};
+            Object.keys(exB).forEach(t => {
+                res[t] = {
+                    available: Number(exB[t].available),
+                    lock: Number(exB[t].lock),
+                    balance: 0,
+                    icon: '',
+                    id: t,
+                    symbol: exB[t].tokenInfo.tokenSymbol,
+                    decimals: exB[t].tokenInfo.decimals
+                };
+            });
+            Object.keys(walletB).forEach(t => {
+                if (res[t]) {
+                    res[t].icon = walletB[t].icon;
+                    res[t].balance = Number(walletB[t].balance);
+                    return;
+                }
+
+                res[t] = {
+                    available: 0,
+                    lock: 0,
+                    balance: Number(walletB[t].balance),
+                    icon: walletB[t].icon,
+                    id: t,
+                    symbol: walletB[t].symbol,
+                    decimals: walletB[t].decimals
+                };
+            });
+            Object.keys(res).forEach(t => {
+                res[t].icon = res[t].icon || getTokenIcon(res[t].id);
+                if (!this.$store.state.exchangeRate.rateMap[t]) {
+                    res[t].worth = '-';
+                    return;
+                }
+
+                res[t].worth = `${ this.$i18n.locale === 'zh' ? '¥' : '$' }${ (
+                    this.$store.state.exchangeRate.rateMap[t][
+                        this.$i18n.locale === 'zh' ? 'cny' : 'usd'
+                    ]
+                    * (res[t].available + res[t].lock)
+                ).toFixed(2) }`;
+            });
+
+            return res;
+        },
+        list() {
+            return Object.keys(this.balance)
+                .map(k => this.balance[k])
+                .filter(v => {
+                    const NOTnoZero = this.filter.hideZero && (v.available + v.lock) === 0;
+                    const NOTmatchKey = this.filter.filterKey
+                        && !v.symbol.match(new RegExp(this.filter.filterKey, 'i'));
+
+                    return !(NOTnoZero || NOTmatchKey);
+                });
+        }
     },
     methods: {
         update: debounce(function () {
@@ -208,80 +285,6 @@ export default {
 
             this.c.errTips = '';
             return true;
-        }
-    },
-    computed: {
-        detailList() {
-            return Object.keys(this.detailData).map(k => {
-                const o = this.detailData[k];
-
-                return [
-                    d.unix(o.optime).format('YYYY-MM-DD HH:mm'),
-                    o.tokenName,
-                    this.$t('exchangeAssets.table.rowMap.sideMap')[o.optype],
-                    o.amount
-                ];
-            });
-        },
-        balance() {
-            const exB = this.$store.getters.exBalanceList;
-            const walletB = this.$store.getters.tokenBalanceList;
-            const res = {};
-            Object.keys(exB).forEach(t => {
-                res[t] = {
-                    available: Number(exB[t].available),
-                    lock: Number(exB[t].lock),
-                    balance: 0,
-                    icon: '',
-                    id: t,
-                    symbol: exB[t].tokenInfo.tokenSymbol,
-                    decimals: exB[t].tokenInfo.decimals
-                };
-            });
-            Object.keys(walletB).forEach(t => {
-                if (res[t]) {
-                    res[t].icon = walletB[t].icon;
-                    res[t].balance = Number(walletB[t].balance);
-                    return;
-                }
-
-                res[t] = {
-                    available: 0,
-                    lock: 0,
-                    balance: Number(walletB[t].balance),
-                    icon: walletB[t].icon,
-                    id: t,
-                    symbol: walletB[t].symbol,
-                    decimals: walletB[t].decimals
-                };
-            });
-            Object.keys(res).forEach(t => {
-                res[t].icon = res[t].icon || getTokenIcon(res[t].id);
-                if (!this.$store.state.exchangeRate.rateMap[t]) {
-                    res[t].worth = '-';
-                    return;
-                }
-
-                res[t].worth = `${ this.$i18n.locale === 'zh' ? '¥' : '$' }${ (
-                    this.$store.state.exchangeRate.rateMap[t][
-                        this.$i18n.locale === 'zh' ? 'cny' : 'usd'
-                    ]
-                    * (res[t].available + res[t].lock)
-                ).toFixed(2) }`;
-            });
-
-            return res;
-        },
-        list() {
-            return Object.keys(this.balance)
-                .map(k => this.balance[k])
-                .filter(v => {
-                    const NOTnoZero = this.filter.hideZero && (v.available + v.lock) === 0;
-                    const NOTmatchKey = this.filter.filterKey
-                        && !v.symbol.match(new RegExp(this.filter.filterKey, 'i'));
-
-                    return !(NOTnoZero || NOTmatchKey);
-                });
         }
     }
 };
