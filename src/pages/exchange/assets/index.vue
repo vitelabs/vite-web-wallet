@@ -21,7 +21,6 @@ export default {
     components: { Table, Search },
     data() {
         // Optype: 1充值，2提现； optime单位是秒；
-
         return {
             hideZero: false,
             filterKey: '',

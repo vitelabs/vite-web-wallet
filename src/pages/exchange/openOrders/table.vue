@@ -133,7 +133,6 @@ export default {
                 setTimeout(() => {
                     const currentTime = new Date().getTime();
                     for (const key in this.changeList) {
-                        console.log(this.changeList[key].time);
                         if (currentTime - this.changeList[key].time >= 2000) {
                             delete this.changeList[key];
                         }
