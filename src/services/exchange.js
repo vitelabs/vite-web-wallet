@@ -52,11 +52,11 @@ export const order = function ({ address, fdate, tdate, ftoken, ttoken, orderSid
     });
 };
 
-export const orderDetail = function ({ orderId, ftoken, ttoken, pageNo, pageSize }) {
+export const orderDetail = function ({ orderId, ftoken, ttoken, pageNo, pageSize, type = 0 }) {
     return request({
         path: `${ path }/tx/details`,
         method: 'GET',
-        params: { orderId, ftoken, ttoken, pageNo, pageSize }
+        params: { orderId, ftoken, ttoken, pageNo, pageSize, type }
     });
 };
 

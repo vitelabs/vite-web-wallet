@@ -52,14 +52,19 @@ export default {
         this.$router.afterEach(to => {
             this.active = to.name;
         });
+
+        this.isLogin = !!this.$wallet.isLogin;
+        this.getBalance();
+        this.$wallet.onLogin(() => {
+            this.isLogin = true;
+        });
+        this.$wallet.onLogout(() => {
+            this.isLogin = false;
+        });
     },
     destroyed() {
+        this.$store.dispatch('stopLoopExchangeBalance');
         this.$store.dispatch('stopLoopExchangeRate');
-    },
-    computed: {
-        activeTxPair() {
-            return this.$store.state.exchangeActiveTxPair.activeTxPair || {};
-        }
     },
     data() {
         return {
@@ -70,8 +75,26 @@ export default {
                 'exchangeAssets',
                 'exchangeOpenOrders',
                 'exchangeOrderHistory'
-            ]
+            ],
+            isLogin: !!this.$wallet.isLogin
         };
+    },
+    computed: {
+        activeTxPair() {
+            return this.$store.state.exchangeActiveTxPair.activeTxPair || {};
+        }
+    },
+    watch: {
+        isLogin: function () {
+            this.getBalance();
+        }
+    },
+    methods: {
+        getBalance() {
+            const activeAccount = this.$wallet.getActiveAccount();
+            const addr = activeAccount.getDefaultAddr();
+            this.$store.dispatch('startLoopExchangeBalance', addr);
+        }
     }
 };
 </script>

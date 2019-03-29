@@ -23,7 +23,6 @@ export default {
     components: { logoutView, order },
     mounted() {
         this.isLogin = !!this.$wallet.isLogin;
-        this.getBalance();
         this.$wallet.onLogin(() => {
             this.isLogin = true;
         });
@@ -31,27 +30,8 @@ export default {
             this.isLogin = false;
         });
     },
-    destroyed() {
-        this.$store.dispatch('stopLoopExchangeBalance');
-    },
     data() {
         return { isLogin: !!this.$wallet.isLogin };
-    },
-    watch: {
-        isLogin: function () {
-            this.getBalance();
-        }
-    },
-    methods: {
-        getBalance() {
-            if (!this.isLogin) {
-                this.$store.dispatch('stopLoopExchangeBalance');
-                return;
-            }
-            const activeAccount = this.$wallet.getActiveAccount();
-            const addr = activeAccount.getDefaultAddr();
-            this.$store.dispatch('startLoopExchangeBalance', addr);
-        }
     }
 };
 </script>
