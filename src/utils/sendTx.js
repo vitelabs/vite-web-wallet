@@ -21,6 +21,36 @@ const { isObject } = utils.encoder;
  * }
  */
 
+/**
+ * For example
+ *
+ * sendTx(activeAccount.sendTx, {
+        toAddress: this.inAddress,
+        tokenId: this.token.id,
+        amount,
+        message: this.message
+    }, {
+        pow: true,
+        powConfig: {
+            isShowCancel: true,
+            cancel: () => {
+                this.closeTrans();
+            },
+            difficulty: SendDifficulty
+        }
+    }).then(() => {
+        // normal tx successed
+    }).powStarted(() => {
+        // pow start
+    }).powSuccessed(() => {
+        // pow td successed
+    }).powFailed((err, type) => {
+        // pow failed
+    }).catch(err => {
+        // normal tx failed
+    });
+ */
+
 const defaultConfig = {
     pow: true,
     powConfig: {
@@ -118,30 +148,37 @@ class EventEmitter {
         return this;
     }
 
+    // 交易发送成功。当监听 powSuccessed 事件时，运行PoW后成功则不进入 then 事件。
     then(cb) {
         return this._setCb('then', cb);
     }
 
+    // 交易发送失败。当监听 powFailed 事件时，运行PoW后失败则不进入 catch 事件。
     catch(cb) {
         return this._setCb('catch', cb);
     }
 
+    // confirm框出现。当关闭pow，配额不足出现确认框时调用此事件。
     confirmAppeared(cb) {
         return this._setCb('confirmAppeared', cb);
     }
 
+    // 开始运行PoW。当开启pow，开始运行时调用此事件。
     powStarted(cb) {
         return this._setCb('powStarted', cb);
     }
 
+    // 运行PoW后，交易成功。
     powSuccessed(cb) {
         return this._setCb('powSuccessed', cb);
     }
 
+    // 运行PoW后，交易失败。
     powFailed(cb) {
         return this._setCb('powFailed', cb);
     }
 
+    // 运行PoW后，交易完成。（无论成功或者失败，皆调用此事件）
     powFinished(cb) {
         return this._setCb('powFinished', cb);
     }

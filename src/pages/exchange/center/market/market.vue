@@ -113,16 +113,12 @@ export default {
             this.init();
         },
         txPairList: function () {
-            this.txPairList
-                && this.txPairList.forEach(txPair => {
-                    if (
-                        !this.activePairCode
-                        || txPair.pairCode !== this.activePairCode
-                    ) {
-                        return;
-                    }
-                    this.$store.commit('exSetActiveTxPair', txPair);
-                });
+            this.txPairList && this.txPairList.forEach(txPair => {
+                if (!this.activePairCode || txPair.pairCode !== this.activePairCode) {
+                    return;
+                }
+                this.$store.commit('exSetActiveTxPair', txPair);
+            });
         },
         searchText: function () {
             const list = [];
