@@ -127,8 +127,7 @@ export default {
     &:nth-child(4),
     &:nth-child(5),
     &:nth-child(6) {
-        text-align: right;
-        justify-content: right;
+        justify-content: flex-end;
     }
 }
 
