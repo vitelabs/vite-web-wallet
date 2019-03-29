@@ -75,7 +75,10 @@ export default {
         };
     },
     watch: {
-        activeTxPair: function () {
+        activeTxPair: function (val, old) {
+            if (old && old.pairCode === this.activeTxPair.pairCode) {
+                return;
+            }
             this.price = this.activeTxPair && this.activeTxPair.price ? this.activeTxPair.price : '';
             this.quantity = '';
             this.amount = '';
