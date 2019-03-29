@@ -21,6 +21,36 @@ const { isObject } = utils.encoder;
  * }
  */
 
+/**
+ * For example
+ *
+ * sendTx(activeAccount.sendTx, {
+        toAddress: this.inAddress,
+        tokenId: this.token.id,
+        amount,
+        message: this.message
+    }, {
+        pow: true,
+        powConfig: {
+            isShowCancel: true,
+            cancel: () => {
+                this.closeTrans();
+            },
+            difficulty: SendDifficulty
+        }
+    }).then(() => {
+        // normal tx successed
+    }).powStarted(() => {
+        // pow start
+    }).powSuccessed(() => {
+        // pow td successed
+    }).powFailed((err, type) => {
+        // pow failed
+    }).catch(err => {
+        // normal tx failed
+    });
+ */
+
 const defaultConfig = {
     pow: true,
     powConfig: {
@@ -138,15 +168,17 @@ class EventEmitter {
         return this._setCb('powStarted', cb);
     }
 
-    // PoW裕兴。当开启pow，开始运行时调用此事件。
+    // 运行PoW后，交易成功。
     powSuccessed(cb) {
         return this._setCb('powSuccessed', cb);
     }
 
+    // 运行PoW后，交易失败。
     powFailed(cb) {
         return this._setCb('powFailed', cb);
     }
 
+    // 运行PoW后，交易完成。（无论成功或者失败，皆调用此事件）
     powFinished(cb) {
         return this._setCb('powFinished', cb);
     }
