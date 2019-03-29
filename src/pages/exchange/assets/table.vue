@@ -25,6 +25,9 @@
                 <div @click="detail(token.id)" class="click-able">
                     {{$t("exchangeAssets.table.rowMap.detail")}}</div>
             </div>
+            <div class="no-data" v-show="!list || !list.length">
+                <div>{{ $t('hint.noData') }}</div>
+            </div>
         </div>
 
         <img @click="update" class="refresh" :class="{rotate:isRotate}" src="~assets/imgs/exchange/refresh.svg" />
@@ -55,8 +58,6 @@
                :heads="$t('exchangeAssets.confirmTable.heads')"
                :title="$t('exchangeAssets.confirmTable.title')"
                :close="close"></alert>
-
-        <powProcess ref="pow"></powProcess>
     </div>
 </template>
 
@@ -66,8 +67,8 @@ import BigNumber from 'utils/bigNumber';
 import getTokenIcon from 'utils/getTokenIcon';
 import viteInput from 'components/viteInput';
 import confirm from 'components/confirm.vue';
-import powProcess from 'components/powProcess';
-import { quotaConfirm } from 'components/quota/index';
+import sendTx from 'utils/sendTx';
+
 import debounce from 'lodash/debounce';
 import d from 'dayjs';
 
@@ -76,7 +77,7 @@ import { deposit, withdraw, chargeDetail } from 'services/exchange';
 const VoteDifficulty = '201564160';
 
 export default {
-    components: { confirm, alert, powProcess, viteInput },
+    components: { confirm, alert, viteInput },
     props: { filter: { type: Object } },
     beforeMount() {
         this.acc = this.$wallet.getActiveAccount();
@@ -84,7 +85,6 @@ export default {
             return;
         }
         this.acc && (this.addr = this.acc.getDefaultAddr());
-        this.addr && this.$store.dispatch('updateExBalance', this.addr);
     },
     data() {
         return {
@@ -98,126 +98,6 @@ export default {
             addr: '',
             isRotate: false
         };
-    },
-    methods: {
-        update: debounce(function () {
-            this.isRotate = true;
-            setTimeout(() => {
-                this.isRotate = false;
-            }, 2000);
-            this.addr && this.$store.dispatch('updateExBalance', this.addr);
-        }, 0.1),
-        withdraw(tokenId) {
-            this.showConfirm({ tokenId, type: 'withdraw' });
-        },
-        recharge(tokenId) {
-            this.showConfirm({ tokenId, type: 'recharge' });
-        },
-        detail(tokenId) {
-            this.detailConfirm = true;
-            chargeDetail({
-                address: this.addr,
-                tokenId
-            }).then(data => {
-                this.detailData = data.records;
-            });
-        },
-        closeNumConfirm() {
-            this.c = {};
-            this.confirmShow = false;
-        },
-        close() {
-            this.detailData = [];
-            this.detailConfirm = false;
-        },
-        showConfirm({ tokenId, type }) {
-            this.opNumber = '';
-
-            this.c = {};
-            const t = Object.assign({}, this.$t(`exchangeAssets.confirm${ type }`));
-            t.tokenId = tokenId;
-            t.type = type;
-            t.icon = this.balance[tokenId].icon;
-            this.c = t;
-
-            this.confirmShow = true;
-        },
-        confirmClick() {
-            if (!this.testAmount()) return;
-
-            const tokenId = this.c.tokenId;
-            const amount = BigNumber.toMin(this.opNumber,
-                this.balance[tokenId].decimals);
-            const c = this.c;
-
-            const failSubmit = e => {
-                const code = e && e.error ? e.error.code || -1 : e ? e.code : -1;
-
-                if (code !== -35002) {
-                    this.$toast(this.$t(`exchangeAssets.confirm${ c.type }.failToast`), e);
-                    return;
-                }
-
-                const startTime = new Date().getTime();
-                quotaConfirm(true, {
-                    rightBtnClick: () => {
-                        this.$refs.pow
-                            .startPowTx(e.accountBlock, startTime, VoteDifficulty)
-                            .then(successSubmit)
-                            .catch(failSubmit);
-                    }
-                });
-            };
-
-            const successSubmit = () => {
-                this.$toast(this.$t(`exchangeAssets.confirm${ c.type }.successToast`));
-            };
-
-            this.closeNumConfirm();
-            this.acc.initPwd({
-                submitTxt: this.$t(`exchangeAssets.table.rowMap.${ c.type }`),
-                cancelTxt: this.$t('exchangeAssets.pwdConfirm.cancelTxt'),
-                submit: () => {
-                    c.type === 'recharge'
-                        ? deposit({ tokenId, amount })
-                            .then(successSubmit)
-                            .catch(e => {
-                                failSubmit(e);
-                            })
-                        : withdraw({ tokenId, amount })
-                            .then(successSubmit)
-                            .catch(e => {
-                                failSubmit(e);
-                            });
-                }
-            });
-        },
-        testAmount() {
-            const amountBalance = this.c.type.toLowerCase() === 'recharge'
-                ? this.balance[this.c.tokenId].balance
-                : this.balance[this.c.tokenId].available;
-            const decimals = this.balance[this.c.tokenId].decimals;
-            const result = this.$validAmount(this.opNumber, decimals);
-
-            if (!result) {
-                this.c.errTips = this.$t('hint.amtFormat');
-                return false;
-            }
-
-            if (BigNumber.isEqual(this.opNumber, 0)) {
-                this.c.errTips = this.$t('wallet.hint.amount');
-                return false;
-            }
-
-            // Const amount = BigNumber.toMin(this.opNumber, decimals);
-            if (BigNumber.compared(amountBalance, this.opNumber) < 0) {
-                this.c.errTips = this.$t('hint.insufficientBalance');
-                return false;
-            }
-
-            this.c.errTips = '';
-            return true;
-        }
     },
     computed: {
         detailList() {
@@ -235,6 +115,7 @@ export default {
         balance() {
             const exB = this.$store.getters.exBalanceList;
             const walletB = this.$store.getters.tokenBalanceList;
+
             const res = {};
             Object.keys(exB).forEach(t => {
                 res[t] = {
@@ -291,6 +172,119 @@ export default {
 
                     return !(NOTnoZero || NOTmatchKey);
                 });
+        }
+    },
+    methods: {
+        update: debounce(function () {
+            this.isRotate = true;
+            setTimeout(() => {
+                this.isRotate = false;
+            }, 2000);
+            this.addr && this.$store.dispatch('updateExBalance', this.addr);
+        }, 0.1),
+        withdraw(tokenId) {
+            this.showConfirm({ tokenId, type: 'withdraw' });
+        },
+        recharge(tokenId) {
+            this.showConfirm({ tokenId, type: 'recharge' });
+        },
+        detail(tokenId) {
+            this.detailConfirm = true;
+            chargeDetail({
+                address: this.addr,
+                tokenId
+            }).then(data => {
+                this.detailData = data.records;
+            });
+        },
+        closeNumConfirm() {
+            this.c = {};
+            this.confirmShow = false;
+        },
+        close() {
+            this.detailData = [];
+            this.detailConfirm = false;
+        },
+        showConfirm({ tokenId, type }) {
+            this.opNumber = '';
+
+            this.c = {};
+            const t = Object.assign({}, this.$t(`exchangeAssets.confirm${ type }`));
+            t.tokenId = tokenId;
+            t.type = type;
+            t.icon = this.balance[tokenId].icon;
+            this.c = t;
+
+            this.confirmShow = true;
+        },
+        confirmClick() {
+            if (!this.testAmount()) return;
+
+            const tokenId = this.c.tokenId;
+            const amount = BigNumber.toMin(this.opNumber,
+                this.balance[tokenId].decimals);
+            const c = this.c;
+
+            const failSubmit = e => {
+                this.$toast(this.$t(`exchangeAssets.confirm${ c.type }.failToast`), e);
+            };
+
+            const successSubmit = () => {
+                this.$toast(this.$t(`exchangeAssets.confirm${ c.type }.successToast`));
+            };
+
+            const config = {
+                pow: true,
+                powConfig: {
+                    isShowCancel: false,
+                    difficulty: VoteDifficulty
+                }
+            };
+
+            this.closeNumConfirm();
+            this.acc.initPwd({
+                submitTxt: this.$t(`exchangeAssets.table.rowMap.${ c.type }`),
+                cancelTxt: this.$t('exchangeAssets.pwdConfirm.cancelTxt'),
+                submit: () => {
+                    c.type === 'recharge'
+                        ? sendTx(deposit, { tokenId, amount }, config)
+                            .then(successSubmit)
+                            .catch(e => {
+                                failSubmit(e);
+                            })
+                        : sendTx(withdraw, { tokenId, amount }, config)
+                            .then(successSubmit)
+                            .catch(e => {
+                                failSubmit(e);
+                            });
+                }
+            });
+        },
+        testAmount() {
+            const amountBalance = this.c.type.toLowerCase() === 'recharge'
+                ? this.balance[this.c.tokenId].balance
+                : this.balance[this.c.tokenId].available;
+            const decimals = this.balance[this.c.tokenId].decimals;
+            const result = this.$validAmount(this.opNumber, decimals);
+
+            if (!result) {
+                this.c.errTips = this.$t('hint.amtFormat');
+                return false;
+            }
+
+            if (BigNumber.isEqual(this.opNumber, 0)) {
+                this.c.errTips = this.$t('wallet.hint.amount');
+                return false;
+            }
+
+            // Const amount = BigNumber.toMin(this.opNumber, decimals);
+            if (BigNumber.compared(amountBalance, this.opNumber) < 0) {
+                this.c.errTips = this.$t('hint.insufficientBalance');
+                return false;
+            }
+
+            this.c.errTips = '';
+            return true;
         }
     }
 };

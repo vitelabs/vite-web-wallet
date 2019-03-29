@@ -15,6 +15,7 @@ document.addEventListener('dragover', e => {
 export default {
     install(Vue) {
         Vue.prototype.$onKeyDown = function (_code, cb) {
+            const lastEvent = window.document.onkeydown;
             window.document.onkeydown = e => {
                 e = e || window.event;
                 const code = e.keyCode || e.which;
@@ -23,6 +24,7 @@ export default {
                 }
                 cb && cb();
             };
+            return lastEvent;
         };
 
         Vue.prototype.$offKeyDown = function () {
@@ -39,9 +41,9 @@ export default {
 
         Vue.prototype.$trim = (msg = '') => msg.replace(/(^\s*)|(\s*$)/g, '');
 
-        Vue.prototype.$toast = function (mesage, err, type, position) {
+        Vue.prototype.$toast = function (message, err, type, position) {
             if (!err) {
-                toast(mesage, type, position);
+                toast(message, type, position);
                 return ;
             }
 
@@ -49,7 +51,7 @@ export default {
                 : err ? err.code : -1;
 
             const msg = code === -1 || !this.$i18n.messages.zh.errCode[Math.abs(code)]
-                ? mesage || this.$t('hint.err') : this.$t(`errCode.${ Math.abs(code) }`);
+                ? message || this.$t('hint.err') : this.$t(`errCode.${ Math.abs(code) }`);
             toast(msg, type, position);
         };
 

@@ -2,7 +2,7 @@
     <div class="depth-table-wrapper">
         <loading loadingType="dot" class="ex-center-loading" v-show="isLoading"></loading>
 
-        <div class="__center-tb-row __pointer" @click="clickRow(item)"
+        <div class="__center-tb-row __pointer" @click="clickRow(item, i)"
              v-for="(item, i) in depthData" :key="i">
             <span class="__center-tb-item depth price" :class="dataType">{{ formatNum(item.price, 'ttoken') }}</span>
             <span class="__center-tb-item depth quantity">{{ formatNum(item.quantity, 'ftoken', 6) }}</span>
@@ -33,11 +33,7 @@ export default {
     },
     computed: {
         isLoading() {
-            if (this.dataType === 'buy') {
-                return this.$store.state.exchangeDepth.isBuyLoading;
-            }
-
-            return this.$store.state.exchangeDepth.isSellLoading;
+            return this.$store.state.exchangeDepth.isLoading;
         },
         ttoken() {
             return this.$store.state.exchangeTokens.ttoken;
@@ -48,7 +44,6 @@ export default {
         maxQuantity() {
             const arr = [].concat(this.depthData);
             arr.sort((a, b) => b.quantity - a.quantity);
-
             return arr && arr[0] ? arr[0].quantity : 0;
         }
     },
@@ -57,19 +52,29 @@ export default {
             if (!this[type]) {
                 return BigNumber.formatNum(num, fix);
             }
-
             return BigNumber.formatNum(num, this[type].tokenDigit, fix);
         },
         getWidth(item) {
             const width = BigNumber.dividedToNumber(item.quantity, this.maxQuantity, 2).toString() * 100;
-
             return width > 100 ? 100 : width;
         },
-        clickRow(data) {
+        clickRow(data, index) {
             const price = data.price;
             const quantity = data.quantity;
             const txSide = this.dataType === 'buy' ? 0 : 1;
-            this.$store.commit('exSetActiveTx', { price, quantity, txSide });
+
+            let num = 0;
+            if (txSide) {
+                for (let i = index; i < this.depthData.length; i++) {
+                    num = BigNumber.plus(num, this.depthData[i].quantity, this.ftoken.tokenDigit);
+                }
+            } else {
+                for (let i = 0; i <= index; i++) {
+                    num = BigNumber.plus(num, this.depthData[i].quantity, this.ftoken.tokenDigit);
+                }
+            }
+
+            this.$store.commit('exSetActiveTx', { price, quantity, txSide, num });
         }
     }
 };

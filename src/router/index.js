@@ -16,20 +16,17 @@ export default function (VueRouter) {
         if (!to.name && to.path) {
             const arr = to.path.split('/');
             router.replace({ name: arr[ arr.length - 1 ] || 'exchange' });
-
             return;
         }
 
         if (!from.name && to.name !== 'exchange') {
             router.replace({ name: 'exchange' });
-
             return;
         }
 
         if (loginRoutes.indexOf(to.name) >= 0 && !wallet.isLogin) {
             (to.name !== 'start') && wallet.setLastPage(to.name);
             router.replace({ name: 'start' });
-
             return;
         }
 

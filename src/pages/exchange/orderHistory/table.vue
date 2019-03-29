@@ -69,7 +69,7 @@ export default {
             return Object.keys(this.detailData).map(k => {
                 const o = this.detailData[k];
                 return [
-                    d.unix(o.txTime).format('YYYY-MM-DDTHH:mm'),
+                    d.unix(o.txTime).format('YYYY-MM-DD HH:mm'),
                     `${ o.price } ${ o.token }`,
                     `${ o.quantity } ${ o.ftokenShow }`,
                     `${ o.fee } ${ o.token }`,
@@ -89,7 +89,8 @@ export default {
                 ftoken: order.ftoken,
                 ttoken: order.ttoken,
                 pageNo: 1,
-                pageSize: 100
+                pageSize: 100,
+                type: order.side
             }).then(data => {
                 this.detailData = data.details.map(v => {
                     v.token = order.ttokenShow;

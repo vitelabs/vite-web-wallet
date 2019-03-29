@@ -10,17 +10,20 @@
             <!-- <input fake_pass type="password" style="display:none"/> -->
             <input v-model="password" :placeholder="$t('pwdConfirm.placeholder')" type="password"/>
         </form>
-        <div v-show="type === 'normal' && isShowPWD && isShowPWDHold" class="hold-pwd __pointer" @click="toggleHold">
+        <div v-show="isShowPWD && isShowPWDHold" class="hold-pwd __pointer" @click="toggleHold">
             <span :class="{ 'active': isPwdHold }"></span>
-            {{ $t('pwdConfirm.conf') }}
+            {{ $t('pwdConfirm.conf', {
+                time: $t(`setting.timeList.${holdTime}`)
+            }) }}
         </div>
     </confirm>
 </template>
 
 <script>
+import localStorage from 'utils/localStorage';
 import confirm from 'components/confirm.vue';
 
-const holdTime = 5 * 60 * 1000;
+let lastE = null;
 
 export default {
     components: { confirm },
@@ -66,8 +69,17 @@ export default {
             default: false
         }
     },
+    mounted() {
+        lastE = this.$onKeyDown(13, () => {
+            this._submit();
+        });
+    },
+    beforeDestroyed() {
+        this.$onKeyDown(13, lastE);
+    },
     data() {
         return {
+            holdTime: localStorage.getItem('noPass') || 5,
             isShowPWDHold: !window.isShowPWD,
             password: '',
             isPwdHold: false,
@@ -105,7 +117,6 @@ export default {
             if (!this.isShowPWD) {
                 this.clear();
                 this.submit && this.submit();
-
                 return;
             }
 
@@ -130,18 +141,17 @@ export default {
                 if (this.type !== 'normal') {
                     this.$toast(this.$t('unlockSuccess'));
                 }
-                this.isPwdHold && activeAccount.holdPWD(password, holdTime);
+                this.isPwdHold && activeAccount.holdPWD(password, this.holdTime * 60 * 1000);
                 this.clear();
                 this.submit && this.submit();
             };
 
-            if (activeAccount.isLogin) {
+            if (this.$wallet.isLogin) {
                 activeAccount.verify(password).then(result => {
                     deal(result);
                 }).catch(() => {
                     deal(false);
                 });
-
                 return;
             }
 

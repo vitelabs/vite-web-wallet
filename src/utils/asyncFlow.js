@@ -8,10 +8,11 @@ export class timer {
     stop() {
         window.clearTimeout(this.timeHandler);
         this.timeHandler = null;
+        this.loopFunc = null;
     }
 
     start() {
-        if (this.timeHandler) {
+        if (this.timeHandler || !this.loopFunc) {
             return;
         }
 
@@ -21,6 +22,7 @@ export class timer {
             if (!this.loopFunc) {
                 return;
             }
+
             this.timeHandler = window.setTimeout(() => {
                 const triggered = this.loopFunc();
 
