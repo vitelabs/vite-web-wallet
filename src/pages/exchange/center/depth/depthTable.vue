@@ -33,11 +33,7 @@ export default {
     },
     computed: {
         isLoading() {
-            if (this.dataType === 'buy') {
-                return this.$store.state.exchangeDepth.isBuyLoading;
-            }
-
-            return this.$store.state.exchangeDepth.isSellLoading;
+            return this.$store.state.exchangeDepth.isLoading;
         },
         ttoken() {
             return this.$store.state.exchangeTokens.ttoken;
