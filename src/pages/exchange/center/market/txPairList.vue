@@ -16,11 +16,11 @@
                 </span>
                 <span class="__center-tb-item">{{ txPair.price || '--' }}</span>
                 <span v-show="showCol === 'updown'" class="__center-tb-item percent" :class="{
-                    'up': +txPair.upDown > 0,
-                    'down': +txPair.upDown < 0
-                }">{{ txPair.upDown ? txPair.upDown + '%' : '--' }}</span>
+                    'up': +txPair.price24hChange > 0,
+                    'down': +txPair.price24hChange < 0
+                }">{{ txPair.price24hChange ? formatNum(txPair.price24hChange, 2) + '%' : '--' }}</span>
                 <span v-show="showCol === 'txNum'" class="__center-tb-item">
-                    {{ txPair.quantity24h ? formatNum(txPair.quantity24h) : '--' }}
+                    {{ txPair.quantity24h ? formatNum(txPair.quantity24h, 1) : '--' }}
                 </span>
             </div>
         </div>
@@ -83,7 +83,7 @@ export default {
                 item.price = _t.price;
                 item.quantity24h = _t.quantity24h;
                 item.showPair = `${ _t.ftokenShow }/${ _t.ttokenShow }`;
-                item.upDown = _t.price24hChange ? BigNumber.multi(_t.price24hChange, 100, 2) : '';
+                item.price24hChange = _t.price24hChange;
                 item.rawData = _t;
 
                 _l.push(item);
@@ -103,8 +103,8 @@ export default {
         }
     },
     methods: {
-        formatNum(num) {
-            return BigNumber.formatNum(num, 1);
+        formatNum(num, fix) {
+            return BigNumber.formatNum(num, fix);
         },
         showRealPrice(txPair, i) {
             const elTop = this.$refs[`txPair${ i }`][0].getBoundingClientRect().top;
