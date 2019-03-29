@@ -4,8 +4,6 @@
 
         <loading v-if="loadingToken" class="loading"></loading>
 
-        <pow-process ref="powProcess" @pow-finish="closeConfirm"></pow-process>
-
         <div v-if="showConfirmType" class="gray-wrapper">
             <confirm v-if="showConfirmType === 'cancel'"
                      :title="$t(`walletQuota.withdrawalStaking`)" :closeIcon="false"
@@ -40,13 +38,13 @@ import myQuota from './myQuota';
 import pledgeTx from './pledgeTx';
 import list from './list';
 import confirm from 'components/confirm';
-import powProcess from 'components/powProcess';
 import loading from 'components/loading';
 import viteInput from 'components/viteInput';
+import sendTx from 'utils/sendTx';
 import BigNumber from 'utils/bigNumber';
 
 export default {
-    components: { quotaHead, myQuota, pledgeTx, confirm, list, powProcess, loading, viteInput },
+    components: { quotaHead, myQuota, pledgeTx, confirm, list, loading, viteInput },
     created() {
         this.tokenInfo = this.$store.getters.viteTokenInfo;
 
@@ -159,31 +157,30 @@ export default {
             if (!this.netStatus) {
                 this.$toast(this.$t('hint.noNet'));
                 cb && cb(false);
-
                 return;
             }
 
             this.activeAccount = this.$wallet.getActiveAccount();
 
             amount = BigNumber.toMin(amount || 0, this.tokenInfo.decimals);
-            this.activeAccount[type]({
+
+            sendTx(this.activeAccount[type], {
                 tokenId: this.tokenInfo.tokenId,
                 toAddress,
                 amount
             }).then(() => {
                 cb && cb(true);
             }).catch(err => {
-                console.warn(err);
-                if (err && err.error && err.error.code && err.error.code === -35002) {
-                    this.$refs.powProcess.startPowTx(err.accountBlock, 0).then(() => {
-                        cb && cb(true);
-                    }).catch(() => {
-                        cb && cb(false, err);
-                    });
-                    return;
-                }
                 cb && cb(false, err);
-            });
+            })
+                .powSuccessed(() => {
+                    this.closeConfirm();
+                    cb && cb(true);
+                })
+                .powFailed(err => {
+                    this.closeConfirm();
+                    cb && cb(false, err);
+                });
         }
     }
 };

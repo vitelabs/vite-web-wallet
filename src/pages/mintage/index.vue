@@ -84,9 +84,9 @@
 </template>
 
 <script>
-import { getPowNonce } from 'services/pow';
 import viteInput from 'components/viteInput';
 import tableList from 'components/tableList.vue';
+import sendTx from 'utils/sendTx';
 import $ViteJS from 'utils/viteClient';
 
 export default {
@@ -120,8 +120,7 @@ export default {
         },
         mintage() {
             const activeAccount = this.$wallet.getActiveAccount();
-
-            activeAccount.mintage({
+            sendTx(activeAccount.mintage, {
                 decimals: this.decimals,
                 isReIssuable: this.isReIssuable,
                 maxSupply: this.maxSupply,
@@ -133,35 +132,15 @@ export default {
                 this.$toast('Mintage success');
             }).catch(err => {
                 this.$toast(`Mintage fail. ${ err.error.message || err.error.msg }`, err);
-
-                if (err.error.code !== -35002) {
-                    return;
-                }
-
-                const accountBlock = err.accountBlock;
-                getPowNonce(accountBlock.accountAddress, accountBlock.prevHash).then(data => {
-                    accountBlock.difficulty = data.difficulty;
-                    accountBlock.nonce = data.nonce;
-
-                    activeAccount.sendRawTx(accountBlock).then(() => {
-                        this.$toast('Mintage success');
-                    }).catch(err => {
-                        this.$toast(`Mintage fail. ${ err.error.message || err.error.msg }`);
-                        console.warn(err);
-                    });
-                }).catch(err => {
-                    this.$toast('Pow failed.');
-                    console.warn(err);
-                });
             });
         },
         getOwnerToken() {
             const activeAccount = this.$wallet.getActiveAccount();
 
-            $ViteJS.mintage.getTokenInfoListByOwner(activeAccount.getDefaultAddr()).then(data => {
-                this.tokenList = data;
-            })
-                .catch(err => {
+            $ViteJS.mintage.getTokenInfoListByOwner(activeAccount.getDefaultAddr())
+                .then(data => {
+                    this.tokenList = data;
+                }).catch(err => {
                     console.warn(err);
                     this.$toast('Get list failed');
                 });

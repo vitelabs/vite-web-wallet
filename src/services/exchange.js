@@ -28,17 +28,9 @@ export const klineHistory = function ({ from, to, ftoken, ttoken, resolution }) 
     });
 };
 
-export const depthBuy = function ({ ftoken, ttoken }) {
+export const depth = function ({ ftoken, ttoken }) {
     return request({
-        path: `${ path }/depth/buy`,
-        method: 'GET',
-        params: { ftoken, ttoken }
-    });
-};
-
-export const depthSell = function ({ ftoken, ttoken }) {
-    return request({
-        path: `${ path }/depth/sell`,
+        path: `${ path }/depth`,
         method: 'GET',
         params: { ftoken, ttoken }
     });
@@ -52,11 +44,11 @@ export const order = function ({ address, fdate, tdate, ftoken, ttoken, orderSid
     });
 };
 
-export const orderDetail = function ({ orderId, ftoken, ttoken, pageNo, pageSize }) {
+export const orderDetail = function ({ orderId, ftoken, ttoken, pageNo, pageSize, type = 0 }) {
     return request({
         path: `${ path }/tx/details`,
         method: 'GET',
-        params: { orderId, ftoken, ttoken, pageNo, pageSize }
+        params: { orderId, ftoken, ttoken, pageNo, pageSize, type }
     });
 };
 

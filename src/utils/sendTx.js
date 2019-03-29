@@ -1,96 +1,178 @@
+import { utils } from '@vite/vitejs';
 import { wallet } from 'utils/wallet';
-import { getPowNonce } from 'services/pow';
+import { powProcess } from 'components/pow/index';
+import { quotaConfirm } from 'components/quota/index';
+
+console.log(utils.tools);
+const { isObject } = utils.encoder;
+
+/**
+ * config: {
+ *   pow: Boolean,
+ *   powConfig? : { // 当 PoW 开启时生效
+ *      isShowCancel: Boolean<true | false>,
+ *      cancel: Function,
+ *      difficulty: String
+ *   },
+ *   confirm? : { // 当 PoW 关闭时生效
+ *      showMask ?: Boolean<true | false>,
+ *      operate: String
+ *   }
+ * }
+ */
 
 const defaultConfig = {
-    pow: {
-        isShow: true,
-        isAuto: false,
-        isShowCancel: false
+    pow: true,
+    powConfig: {
+        isShowCancel: false,
+        cancel: () => {},
+        difficulty: ''
     },
-    confirm: {}
+    confirm: {
+        showMask: true,
+        operate: ''
+    }
 };
 
-export default async function sendTx(methodName, data, config = defaultConfig) {
-    const isLogin = wallet.isLogin;
-    const activeAccount = wallet.getActiveAccount;
-
-    if (!isLogin || !activeAccount) {
-        throw {
-            code: '-1000000000',
-            message: 'Unknow error.'
-        };
-    }
-
-    if (!activeAccount[methodName]) {
-        throw {
-            code: '-1000000001',
-            message: `Unknow method ${ methodName }.`
-        };
-    }
-
+export default function sendTx(method, data, config = defaultConfig) {
     config = formatConfig(config);
-    // if (!config) {
-    //     throw {
-    //         code: '-1000000002',
-    //         message: 'Invailid config. Please check again.'
-    //     };
-    // }
+    const event = new EventEmitter();
 
-    try {
-        const result = await activeAccount[methodName](data);
-        return result;
-    } catch (err) {
+    method(data).then(result => {
+        event.thenCb && event.thenCb(result);
+    }).catch(err => {
         if (!err || !err.error || !err.error.code || err.error.code !== -35002) {
-            throw err;
+            event.catchCb && event.catchCb(err);
+            return;
         }
 
-        return goonConfirm(activeAccount, err, config);
-    }
+        if (config.pow) {
+            runPoW(err.accountBlock, config.powConfig, event);
+            return;
+        }
+
+        quotaConfirm(config.confirmConfig);
+        event.confirmAppearedCb && event.confirmAppearedCb(err);
+    });
+
+    return event;
 }
 
 
-function formatConfig(config) {
-    const pow = config.pow || defaultConfig.pow;
-    const quota = !!pow.isAuto;
-    const confirm = quota ? config.confirm || defaultConfig.confirm : null;
-
-    return {
-        pow: {
-            isShow: !!pow.isShow,
-            isAuto: !!pow.isAuto,
-            isShowCancel: !!pow.isShowCancel
-        },
-        quota,
-        confirm
-    };
-}
-
-async function goonConfirm(err, config) {
-    let accountBlock = err.accountBlock;
-    const activeAccount = wallet.getActiveAccount;
+async function runPoW(accountBlock, powConfig, event) {
+    const activeAccount = wallet.getActiveAccount();
 
     if (!activeAccount
         || activeAccount.getDefaultAddr() !== accountBlock.accountAddress) {
+        event.catchCb && event.catchCb({
+            code: '1000000',
+            message: `${ accountBlock.accountAddress } is expired.`
+        });
         return;
     }
 
-    console.log(config);
-    // let isShowConfirm = config.quota
+    event.powStartedCb && event.powStartedCb();
 
-    accountBlock = await getPowAccountBlock(accountBlock);
-
-    // activeAccount.sendRawTx(accountBlock).then(() => {
-    //     this.$toast('Mintage success');
-    // }).catch(err => {
-    //     this.$toast(`Mintage fail. ${ err.error.message || err.error.msg }`);
-    //     console.warn(err);
-    // });
-    // console.log(err, config);
+    powProcess({
+        accountBlock,
+        ...powConfig
+    }).then(result => {
+        if (event.powSuccessedCb) {
+            event.powSuccessedCb(result);
+        } else {
+            event.thenCb && event.thenCb(result);
+        }
+        event.powFinishedCb && event.powFinishedCb(result);
+    }).catch((...args) => {
+        if (event.powFailedCb) {
+            event.powFailedCb(...args);
+        } else {
+            event.catchCb && event.catchCb(...args);
+        }
+        event.powFinishedCb && event.powFinishedCb(...args);
+    });
 }
 
-async function getPowAccountBlock(accountBlock) {
-    const data = await getPowNonce(accountBlock.accountAddress, accountBlock.prevHash);
-    accountBlock.difficulty = data.difficulty;
-    accountBlock.nonce = data.nonce;
-    return accountBlock;
+
+class EventEmitter {
+    constructor() {
+        this.thenCb = null;
+        this.catchCb = null;
+        this.powStartedCb = null;
+        this.powSuccessedCb = null;
+        this.powFailedCb = null;
+        this.confirmAppearedCb = null;
+        this.powFinishedCb = null;
+    }
+
+    _setCb(type, cb) {
+        if (!this[type]) {
+            throw new Error(`[Error] don\'t have this event ${ type }.`);
+        }
+
+        if (!cb || typeof cb !== 'function') {
+            throw new Error(`[Error] the ${ type } is not a function.`);
+        }
+
+        this[`${ type }Cb`] = cb;
+        return this;
+    }
+
+    then(cb) {
+        return this._setCb('then', cb);
+    }
+
+    catch(cb) {
+        return this._setCb('catch', cb);
+    }
+
+    confirmAppeared(cb) {
+        return this._setCb('confirmAppeared', cb);
+    }
+
+    powStarted(cb) {
+        return this._setCb('powStarted', cb);
+    }
+
+    powSuccessed(cb) {
+        return this._setCb('powSuccessed', cb);
+    }
+
+    powFailed(cb) {
+        return this._setCb('powFailed', cb);
+    }
+
+    powFinished(cb) {
+        return this._setCb('powFinished', cb);
+    }
+}
+
+function formatConfig(config) {
+    config = config || defaultConfig;
+
+    const pow = !!config.pow;
+    const powConfig = config.powConfig ? config.powConfig : defaultConfig.powConfig;
+
+    if (!isObject(powConfig)) {
+        throw new Error('[Error] utils/sendTx: config.powConfig should be an Object.');
+    }
+
+    if (powConfig.cancel && typeof powConfig.cancel !== 'function') {
+        throw new Error('[Error] utils/sendTx: config.pow[1].cancel should be a function.');
+    }
+
+    if (pow) {
+        return { pow, powConfig, confirmConfig: null };
+    }
+
+    const confirmConfig = config.confirm ? config.confirm : defaultConfig.confirm;
+    if (!isObject(confirmConfig)) {
+        throw new Error('[Error] utils/sendTx: config.confirm should be an object.');
+    }
+
+    if (!confirmConfig.operate || typeof confirmConfig.operate !== 'string') {
+        throw new Error('[Error] utils/sendTx: config.confirm.operate is required and should be a string, while pow is off.');
+    }
+
+    return { pow, powConfig, confirmConfig };
 }

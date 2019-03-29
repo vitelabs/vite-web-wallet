@@ -20,7 +20,10 @@
     "submitStaking": "Submit Staking",
     "withdrawHeight": "Expected Snapshot Height",
     "balance": "Balance",
-    "pow": "Running PoW...",
+    "pow": {
+        "ing": "Running PoW to acquire quota",
+        "no": "You can stake VITE for quota in case you would not like to run PoW"
+    },
     "addAccount": "Add a new account",
     "saveQrcode": "Save QR code image",
     "unlockSuccess": "Unlock Success",
@@ -38,16 +41,16 @@
         "36003": "System verify failed, please try again later（36003）",
         "36004": "System verify failed, please try again later（36004）",
         "36005": "Snapshot block height is illegal, please try again later",
-        "37001": "订单号格式错误",
-        "37002": "订单类型错误",
-        "37003": "订单价格格式错误",
-        "37004": "订单交易数量异常",
-        "37005": "订单交易金额过小",
-        "37006": "该交易市场已经存在",
-        "37007": "订单指定交易市场不存在",
-        "37008": "查询订单信息异常",
-        "37009": "撤销订单不属于当前地址",
-        "37010": "该订单状态不可以撤销"
+        "37001": "Wrong order number format",
+        "37002": "Wrong order type",
+        "37003": "Wrong order price format",
+        "37004": "Exception occurs in order transaction volume",
+        "37005": "Order transaction amount too small",
+        "37006": "Existed trading market",
+        "37007": "Order trading market not exist",
+        "37008": "Exception occurs in searching order information",
+        "37009": "Revoked order doesn't belong to current address",
+        "37010": "This order status cannot be revoked"
     },
     "txType": {
         "0": "SBP Registration",
@@ -115,7 +118,7 @@
         "v": "Current version: {version}"
     },
     "pwdConfirm": {
-        "conf": "Open password-free mode within 5 minutes",
+        "conf": "Open password-free mode within {time}",
         "title": "Password",
         "placeholder": "Please input password of wallet",
         "unlockAcc": "Please input password to unlock {name} account"
@@ -123,10 +126,8 @@
     "quotaConfirm": {
         "title": "Insufficient Quota",
         "cancelContent": "You cannot {operate} due to insufficient TPS quota. You need to stake VITE for quota to {operate}",
-        "powContent": "your left quota turn out to be insufficient, you can acquire more quota by running PoW or staking VITE",
         "goQuota": "Stake VITE",
-        "noOperate": "Not {operate} yet",
-        "runPow": "Run PoW"
+        "noOperate": "Not {operate} yet"
     },
     "mnemonic": {
         "title": "Mnemonic",
@@ -153,6 +154,7 @@
         "addrList": "Addresses of Accounts",
         "setDefault": "Select Default Address",
         "autoLogout": "Auto Logout Time",
+        "noPass": "Login Without Passworda",
         "timeList": {
             "5": "5 Minutes",
             "10": "10 Minutes",
@@ -233,8 +235,8 @@
         "maxAmt": "Withdraw amount should be in (0, {amount}]",
         "cancelLimitAmt": "Staking amount cannot be less than {num}",
         "withdrawalStaking": "Withdrawal of Staked Token",
-        "VX": "挖矿VX",
-        "myAddr": "我的",
+        "VX": "Mining VX",
+        "myAddr": "Me",
         "confirm": {
             "help": {
                 "t1": "What is Quota?",
@@ -363,8 +365,8 @@
             },
             "hoverHelp": "The node {nodeName} you are voted for has been revoked, you may vote again directly or revoke your voting, If you do not do so, your original voting result will be recovered after the {nodeName} re-registering",
             "confirm": {
-                "cancelText": "Confirm",
-                "submitText": "Not yet"
+                "cancelText": "Not yet",
+                "submitText": "Confirm"
             },
             "revoke": "Revoking",
             "operateBtn": "Revoke",
@@ -519,8 +521,8 @@
                 "Value"
             ],
             "rowMap": {
-                "recharge": "Deposit",
-                "withdraw": "Withdraw",
+                "recharge": "Deposit to Exchange",
+                "withdraw": "Withdraw to Wallet",
                 "detail": "Trade",
                 "sideMap":{
                     "1":"Deposit",
@@ -531,22 +533,22 @@
         "confirmrecharge": {
             "successToast":"Deposit successful",
             "failToast":"Failed to deposit",
-            "title": "Deposit tokens in the exchange",
+            "title": "Deposit to Exchange",
             "lable1": "Wallet Balance",
             "lable2": "Deposit Amount",
             "tips": "Insufficient Wallet Balance",
             "placeholder": "Please input deposit amount",
-            "btn": "Ready to Deposit"
+            "btn": "Deposit"
         },
         "confirmwithdraw": {
             "successToast":"Withdrawal Successful",
             "failToast":"Withdrawal Failed",
-            "title": "Withdraw token to the wallet",
+            "title": "Withdraw to Wallet",
             "lable1": "Available Balance",
             "lable2": "Withdrawal Amount",
             "tips": "Insufficient Wallet Balance",
             "placeholder": "Please input withdrawal amount",
-            "btn": "Make a Withdrawal"
+            "btn": "Withdraw"
         },
         "zero": "Hide Zero Tokens"
     },
@@ -558,6 +560,12 @@
             "cancelTxt":"Cancel"
         },
         "title": "Open Orders",
+        "hint": {
+            "fdate": "Please select start date",
+            "tdate": "Please select end date",
+            "dateErr": "The end date must be later than the start date",
+            "ftoken": "Please select ftoken"
+        },
         "side": {
             "1": "Sell",
             "0": "Buy"
@@ -611,7 +619,7 @@
                 "statusMap": {
                     "1": "In Order",
                     "2": "Completed",
-                    "3": "已撤销"
+                    "3": "Canceled"
                 },
                 "detail": "Details"
             }

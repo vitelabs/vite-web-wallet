@@ -80,7 +80,7 @@ export default {
                 }
 
                 this.data = data || [];
-            });
+            }, 2000);
 
             const account = this.$wallet.getActiveAccount();
             const address = account.getDefaultAddr();

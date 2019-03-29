@@ -12,6 +12,7 @@
         <accList v-if="!!activeAccount" class="item"></accList>
         <lang class="item"></lang>
         <auto-logout v-if="!!isLogin" class="item"></auto-logout>
+        <no-pass v-if="!!isLogin" class="item"></no-pass>
 
         <router-link v-if="!!isLogin && isTestEnv" :to="{ name: 'mintage' }">mintage</router-link>
     </layout>
@@ -23,9 +24,10 @@ import accList from './accList.vue';
 import lang from './lang.vue';
 import mnemonic from './mnemonic.vue';
 import autoLogout from './autoLogout.vue';
+import noPass from './noPass.vue';
 
 export default {
-    components: { layout, accList, lang, mnemonic, autoLogout },
+    components: { layout, accList, lang, mnemonic, autoLogout, noPass },
     data() {
         const activeAccount = this.$wallet.getActiveAccount();
         const showPassWrapper = activeAccount ? activeAccount.type === 'wallet' : false;

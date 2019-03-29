@@ -22,12 +22,11 @@ const updateExBalance = (commit, address) => {
 };
 
 const actions = {
-    startLoopExchangeBalance({ commit }, address) {
+    startLoopExchangeBalance({ commit, dispatch }, address) {
         updateExBalance(commit, address);
 
         // First stop last
-        balanceTimer && balanceTimer.stop();
-        balanceTimer = null;
+        dispatch('stopLoopExchangeBalance');
         // Second start next
         balanceTimer = new timer(() => updateExBalance(commit, address), loopTime);
         balanceTimer.start();

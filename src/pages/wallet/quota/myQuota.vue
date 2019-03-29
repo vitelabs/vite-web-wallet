@@ -34,7 +34,7 @@ export default {
     mounted() {
         this.startLoopQuota();
     },
-    destroyed() {
+    beforeDestroy() {
         this.stopLoopQuota();
     },
     methods: {

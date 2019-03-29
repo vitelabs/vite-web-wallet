@@ -345,8 +345,8 @@
       "hoverHelp": "The node {nodeName} you are voted for has been revoked, you may vote again directly or revoke your voting, If you do not do so, your original voting result will be recovered after the {nodeName} re-registering",
       "confirm": {
         "title": "Revoke voting",
-        "cancelText": "Confirm",
-        "submitText": "Not yet"
+        "cancelText": "Not yet",
+        "submitText": "Confirm"
       },
       "toast": "Revoking request has sent",
       "quotaConfirm": {
