@@ -92,6 +92,9 @@ export default {
     methods: {
         getBalance() {
             const activeAccount = this.$wallet.getActiveAccount();
+            if (!activeAccount) {
+                return;
+            }
             const addr = activeAccount.getDefaultAddr();
             this.$store.dispatch('startLoopExchangeBalance', addr);
         }
