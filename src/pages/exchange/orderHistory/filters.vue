@@ -52,9 +52,6 @@ import 'flatpickr/dist/flatpickr.css';
 
 export default {
     components: { FlatPickr },
-    beforeMount() {
-        this.ttoken = this.currentToken;
-    },
     data() {
         return {
             fromDate: '',
@@ -85,29 +82,29 @@ export default {
             this.toDate = '';
             this.tradeType = '';
             this.ftoken = '';
-            this.ttoken = this.currentToken;
+            this.ttoken = '';
             this.$emit('submit', {});
         },
         submit() {
             const fdate = this.fromDate ? new Date(this.fromDate).getTime() / 1000 : '';
             const tdate = this.toDate ? new Date(this.toDate).getTime() / 1000 : '';
 
-            if (fdate && !tdate) {
-                this.$toast(this.$t('exchangeOrderHistory.hint.tdate'));
-                return;
-            }
-            if (tdate && !fdate) {
-                this.$toast(this.$t('exchangeOrderHistory.hint.fdate'));
-                return;
-            }
+            // if (fdate && !tdate) {
+            //     this.$toast(this.$t('exchangeOrderHistory.hint.tdate'));
+            //     return;
+            // }
+            // if (tdate && !fdate) {
+            //     this.$toast(this.$t('exchangeOrderHistory.hint.fdate'));
+            //     return;
+            // }
             if (fdate && tdate && fdate >= tdate) {
                 this.$toast(this.$t('exchangeOrderHistory.hint.dateErr'));
                 return;
             }
-            if (!fdate && !tdate && this.ttoken && !this.ftoken) {
-                this.$toast(this.$t('exchangeOrderHistory.hint.ftoken'));
-                return;
-            }
+            // if (!fdate && !tdate && this.ttoken && !this.ftoken) {
+            //     this.$toast(this.$t('exchangeOrderHistory.hint.ftoken'));
+            //     return;
+            // }
 
             this.$emit('submit', {
                 fdate,
