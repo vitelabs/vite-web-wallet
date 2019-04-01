@@ -1,35 +1,33 @@
 <template>
     <div class="exchange-center-wrapper">
         <center v-if="active === 'exchange'"></center>
-        <div class="order-wrapper" v-if="active === 'exchange'">
-            <div class="order">
-                <div class="ex-tab-list">
-                    <div @click="tap='openOrder'"
-                         class="ex-tab active-side __pointer"
-                         :class="{'active': tap === 'openOrder'}">
-                        {{$t('exchangeOpenOrders.title')}}</div>
-                    <div @click="tap='historyOrder'"
-                         class="ex-tab active-side __pointer"
-                         :class="{'active': tap === 'historyOrder'}">
-                        {{$t('exchangeOrderHistory.title')}}</div>
-                </div>
-                <openOrder v-if="tap==='openOrder'" class="item"
-                           :isEmbed="true"
-                           :filterObj="{
-                               ftoken: activeTxPair.ftoken,
-                               ttoken: activeTxPair.ttoken,
-                               pageSize: 10,
-                               paging: 0 }">
-                </openOrder>
-                <historyOrder v-if="tap==='historyOrder'" class="item"
-                              :isEmbed="true"
-                              :filterObj="{
-                                  ftoken: activeTxPair.ftoken,
-                                  ttoken: activeTxPair.ttoken,
-                                  pageSize: 10,
-                                  paging: 0 }">
-                </historyOrder>
+        <div class="order" v-if="active === 'exchange'">
+            <div class="ex-tab-list">
+                <div @click="tap='openOrder'"
+                     class="ex-tab active-side __pointer"
+                     :class="{'active': tap === 'openOrder'}">
+                    {{$t('exchangeOpenOrders.title')}}</div>
+                <div @click="tap='historyOrder'"
+                     class="ex-tab active-side __pointer"
+                     :class="{'active': tap === 'historyOrder'}">
+                    {{$t('exchangeOrderHistory.title')}}</div>
             </div>
+            <openOrder v-if="tap==='openOrder'" class="item"
+                       :isEmbed="true"
+                       :filterObj="{
+                           ftoken: activeTxPair.ftoken,
+                           ttoken: activeTxPair.ttoken,
+                           pageSize: 10,
+                           paging: 0 }">
+            </openOrder>
+            <historyOrder v-if="tap==='historyOrder'" class="item"
+                          :isEmbed="true"
+                          :filterObj="{
+                              ftoken: activeTxPair.ftoken,
+                              ttoken: activeTxPair.ttoken,
+                              pageSize: 10,
+                              paging: 0 }">
+            </historyOrder>
         </div>
         <router-view></router-view>
     </div>
@@ -112,10 +110,6 @@ export default {
     height: 100%;
     width: 100%;
 
-    .order-wrapper {
-        height: 40px;
-    }
-
     .order {
         background: #fff;
         box-shadow: 0 2px 48px 1px rgba(176, 192, 237, 0.42);
@@ -145,18 +139,10 @@ export default {
         }
 
         .item {
-            min-height: 264px;
+            flex: 1;
             margin: 0;
             padding: 0;
             overflow: hidden;
-
-            .ex-tb {
-                padding-top: 27px !important;
-            }
-
-            .head-row {
-                height: 27px !important;
-            }
         }
     }
 
@@ -169,14 +155,17 @@ export default {
 
 <style lang="scss">
 .exchange-center-wrapper .order {
+    display: flex;
+    flex-direction: column;
+    min-height: 300px;
+
     .combine {
         box-shadow: none;
+        flex: 1;
     }
 
     .ex_tb {
         box-shadow: none;
-        padding-top: 34px;
-
         .head-row {
             height: 34px;
         }
