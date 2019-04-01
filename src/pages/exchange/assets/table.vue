@@ -5,9 +5,9 @@
                  :key="h">
                 {{h.replace("#tokenSymbol#","vite")}}
             </div>
-            <div></div>
-            <div></div>
-            <div></div>
+            <div>{{ $t('exchangeAssets.operate') }}
+                <img @click="update" class="refresh" :class="{rotate:isRotate}" src="~assets/imgs/exchange/refresh.svg" />
+            </div>
         </div>
         <div class="row-container">
             <div class="row" v-for="token in list" :key="token.id">
@@ -16,21 +16,21 @@
                 <div>{{token.available}}</div>
                 <div>{{token.lock||0}}</div>
                 <div>{{token.worth}}</div>
-                <div v-unlock-account @unlocked="recharge(token.id)"
-                     class="click-able">
-                    {{$t("exchangeAssets.table.rowMap.recharge")}}</div>
-                <div v-unlock-account @unlocked="withdraw(token.id)"
-                     class="click-able">
-                    {{$t("exchangeAssets.table.rowMap.withdraw")}}</div>
-                <div @click="detail(token.id)" class="click-able">
-                    {{$t("exchangeAssets.table.rowMap.detail")}}</div>
+                <div>
+                    <span v-unlock-account @unlocked="recharge(token.id)"
+                          class="click-able">
+                        {{$t("exchangeAssets.table.rowMap.recharge")}}</span>
+                    <span v-unlock-account @unlocked="withdraw(token.id)"
+                          class="click-able">
+                        {{$t("exchangeAssets.table.rowMap.withdraw")}}</span>
+                    <span @click="detail(token.id)" class="click-able">
+                        {{$t("exchangeAssets.table.rowMap.detail")}}</span>
+                </div>
             </div>
             <div class="no-data" v-show="!list || !list.length">
                 <div>{{ $t('hint.noData') }}</div>
             </div>
         </div>
-
-        <img @click="update" class="refresh" :class="{rotate:isRotate}" src="~assets/imgs/exchange/refresh.svg" />
 
         <confirm :title="c.title" :singleBtn="true" class="exchange"
                  :leftBtnTxt="c.btn" :leftBtnClick="confirmClick"
@@ -304,22 +304,34 @@ export default {
         width: 20px;
         cursor: pointer;
         top: 10px;
-        right: 6px;
+        right: 0;
         &.rotate {
             transform: rotate(360deg);
             transition: all ease-in-out 1s;
         }
     }
+    .head-row >div {
+        position: relative;
+        justify-content: flex-start;
+        &:last-child {
+            justify-content: flex-start;
+            width: 300px;
+        }
+    }
+    .row >div {
+        justify-content: flex-start;
+        &:last-child {
+            display: flex;
+            justify-content: space-between;
+            width: 300px;
+        }
+    }
 }
 
 @include rowWith {
-    width: 8%;
-    &:first-child,
-    &:nth-child(3),
-    &:nth-child(4),
-    &:nth-child(5),
-    &:nth-child(6) {
-        width: 15%;
+    width: 15%;
+    &:first-child {
+        width: 6%;
     }
 }
 

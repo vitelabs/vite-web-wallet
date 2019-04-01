@@ -1,6 +1,7 @@
 <template>
     <div class="txpair-head-wrapper">
         <token></token>
+
         <div class="latest-price item-left">
             <div class="token-title">{{ $t('exchange.head.latestPrice') }}</div>
             <div class="token-content">
@@ -37,7 +38,7 @@
         <div class="quantity item-left">
             <div class="token-title">{{ $t('exchange.head.quantity') }}</div>
             <div class="token-content">
-                {{ activeTxPair && activeTxPair.quantity24h ? activeTxPair.quantity24h + ' ' + activeTxPair.ttokenShow : '--' }}
+                {{ activeTxPair && activeTxPair.quantity24h ? activeTxPair.quantity24h + activeTxPair.ttokenShow : '--' }}
             </div>
         </div>
     </div>
@@ -102,6 +103,7 @@ export default {
     font-weight: 600;
     line-height: 16px;
     white-space: nowrap;
+    background: rgba(247,249,251,1);
 
     .token-title {
         font-family: $font-normal, arial, sans-serif;
@@ -128,7 +130,7 @@ export default {
     }
 
     .item-left {
-        margin-left: 60px;
+        margin-left: 20px;
     }
 }
 </style>

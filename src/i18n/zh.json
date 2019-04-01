@@ -500,6 +500,7 @@
     "exchangeAssets": {
         "title": "资产管理",
         "search": "请输入代币名称",
+        "operate": "操作",
         "confirmTable": {
             "title":"充提记录",
             "heads": [

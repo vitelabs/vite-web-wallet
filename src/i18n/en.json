@@ -500,6 +500,7 @@
     "exchangeAssets": {
         "title": "Funds",
         "search": "Please input token name",
+        "operate": "Action",
         "confirmTable": {
             "title":"Records",
             "heads": [

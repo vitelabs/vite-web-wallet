@@ -9,7 +9,7 @@
                 {{ $t("exchangeAssets.zero") }}
             </div>
         </div>
-        <Table :filter="{hideZero,filterKey:filterKey.trim()}"></Table>
+        <Table :filter="{ hideZero,filterKey: filterKey.trim() }"></Table>
     </div>
 </template>
 
@@ -81,7 +81,8 @@ export default {
 
 .assets-ct {
     height: 100%;
-    padding: 14px 10px 28px 10px;
+    box-sizing: border-box;
+    padding: 14px 10px 0px 10px;
 }
 </style>
 

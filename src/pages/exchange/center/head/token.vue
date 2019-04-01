@@ -84,6 +84,9 @@ export default {
         return { showTokenType: '' };
     },
     computed: {
+        defaultTokens() {
+            return this.$store.state.ledger.tokenInfoMaps;
+        },
         ttokenDetail() {
             return this.$store.state.exchangeTokens.ttoken;
         },
@@ -94,13 +97,27 @@ export default {
             if (!this.ftokenDetail) {
                 return '';
             }
-            return this.getTokenIcon(this.ftokenDetail.tokenId);
+
+            const tokenId = this.ftokenDetail.tokenId;
+            const defaultToken = this.defaultTokens[tokenId];
+
+            if (defaultToken && defaultToken.icon) {
+                return defaultToken.icon;
+            }
+            return getTokenIcon(tokenId);
         },
         ttokenIcon() {
             if (!this.ttokenDetail) {
                 return '';
             }
-            return this.getTokenIcon(this.ttokenDetail.tokenId);
+
+            const tokenId = this.ttokenDetail.tokenId;
+            const defaultToken = this.defaultTokens[tokenId];
+
+            if (defaultToken && defaultToken.icon) {
+                return defaultToken.icon;
+            }
+            return getTokenIcon(tokenId);
         },
         tokenDetail() {
             if (!this.showTokenType) {
@@ -126,13 +143,6 @@ export default {
         }
     },
     methods: {
-        getTokenIcon(tokenId) {
-            const defaultToken = this.$store.state.ledger.tokenInfoMaps[tokenId];
-            if (defaultToken && defaultToken.icon) {
-                return defaultToken.icon;
-            }
-            return getTokenIcon(tokenId);
-        },
         showToken(type) {
             this.showTokenType = type;
         },
@@ -162,11 +172,11 @@ export default {
 
 .token {
     position: relative;
-    flex-basis: 180px;
+    flex-basis: 160px;
     white-space: nowrap;
 
     .t-item {
-        max-width: 85px;
+        max-width: 70px;
         overflow: hidden;
         display: inline-block;
         font-size: 14px;
@@ -176,13 +186,12 @@ export default {
 
         .t-icon {
             white-space: nowrap;
-            font-size: 20px;
-
+            font-size: 18px;
             img {
-                width: 20px;
-                height: 20px;
-                border-radius: 20px;
-                margin-bottom: -3px;
+                width: 18px;
+                height: 18px;
+                border-radius: 18px;
+                margin-bottom: -2px;
             }
         }
 
@@ -196,7 +205,7 @@ export default {
             font-weight: 400;
             color: $blue;
             line-height: 14px;
-            margin-top: 10px;
+            margin-top: 5px;
         }
     }
 
