@@ -1,17 +1,15 @@
 <template>
     <div class="exchange-layout __flex_row">
         <div class="left __flex_column">
-            <div class="left-top __border"> <slot name="lt"></slot> </div>
-            <div class="left-bottom __flex_column">
-                <div class="t __flex_row">
-                    <div class="l __border"> <slot name="lb1"></slot> </div>
-                    <div class="r __border"> <slot name="lb2"></slot> </div>
-                </div>
-                <div class="b __flex_row">
-                    <div class="l __border"> <slot name="lb3"></slot> </div>
-                    <div class="r __border"> <slot name="lb4"></slot> </div>
-                </div>
+            <div class="t __border"> <slot name="lb1"></slot> </div>
+            <div class="b __border"> <slot name="lb3"></slot> </div>
+        </div>
+        <div class="center __flex_column">
+            <div class="t __flex_column __border">
+                <div class="t-t"> <slot name="lt"></slot> </div>
+                <div class="c"> <slot name="lb2"></slot> </div>
             </div>
+            <div class="b __border"> <slot name="lb4"></slot> </div>
         </div>
         <div class="right __border"> <slot name="r"></slot> </div>
     </div>
@@ -43,37 +41,36 @@
     }
 
     .left {
+        width: 260px;
+        margin-right: 10px;
+        .t {
+            flex: 1;
+            margin-bottom: 10px;
+            overflow: auto;
+        }
+        .b {
+            flex-basis: 306px;
+            overflow: auto;
+        }
+    }
+
+    .center {
         flex: 1;
         margin-right: 10px;
-
-        .left-top {
+        .t {
+            flex: 1;
+        }
+        .t-t {
             width: 100%;
             height: 60px;
         }
-
-        .left-bottom {
+        .c {
             flex: 1;
+            overflow: auto;
+        }
+        .b {
+            flex-basis: 306px;
             margin-top: 10px;
-
-            .t {
-                flex: 1;
-                margin-bottom: 10px;
-            }
-
-            .b {
-                flex-basis: 306px;
-                overflow: auto;
-            }
-
-            .l {
-                flex-basis: 290px;
-                margin-right: 10px;
-            }
-
-            .r {
-                flex: 1;
-                overflow: auto;
-            }
         }
     }
 

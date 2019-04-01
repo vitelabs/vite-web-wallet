@@ -71,7 +71,8 @@ export default {
             isLoading: false,
             oldPrice: '',
             oldAmount: '',
-            oldQuantity: ''
+            oldQuantity: '',
+            minAmount: ''
         };
     },
     watch: {
@@ -79,6 +80,7 @@ export default {
             if (old && old.pairCode === this.activeTxPair.pairCode) {
                 return;
             }
+            this.minAmount = this.activeTxPair.minAmount;
             this.price = this.activeTxPair && this.activeTxPair.price ? this.activeTxPair.price : '';
             this.quantity = '';
             this.amount = '';

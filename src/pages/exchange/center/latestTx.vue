@@ -7,7 +7,7 @@
                     price: activeTxPair && activeTxPair.ttokenShow ? activeTxPair.ttokenShow : ''
                 }) }}
             </span>
-            <span class="__center-tb-item">
+            <span class="__center-tb-item left">
                 {{ $t('exchange.amountTitle', {
                     amount: activeTxPair && activeTxPair.ftokenShow ? activeTxPair.ftokenShow : ''
                 })}}
@@ -23,7 +23,7 @@
                     'buy': tx.txSide === 0,
                     'sell': tx.txSide === 1
                 }">{{ formatNum(tx.price, 'ttoken') }}</span>
-                <span class="__center-tb-item">{{ formatNum(tx.quantity, 'ftoken', 6) }}</span>
+                <span class="__center-tb-item left">{{ formatNum(tx.quantity, 'ftoken', 6) }}</span>
                 <span class="__center-tb-item tx-time">{{ getDate(tx.txTime * 1000) }}</span>
             </div>
         </div>
@@ -87,7 +87,8 @@ export default {
 }
 
 .__center-tb-item.tx-time {
-    flex-basis: 30px;
+    width: 65px;
+    flex: unset;
 }
 
 .tx-list-wrapper {

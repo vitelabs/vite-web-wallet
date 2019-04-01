@@ -100,6 +100,7 @@ export default {
 
 .head.dex .tab {
     color: rgba(189, 193, 209, 1);
+    font-size: 13px;
 }
 
 .head {
