@@ -2,11 +2,10 @@
     <div class="order-history-ct">
         <Filters v-if="!isEmbed" @submit="submit($event)"></Filters>
         <div class="combine">
-            <Table :list="data" class="tb">
-                <Pagination :currentPage="currentPage" :toPage="toPage"
-                            :totalPage="totalPage" class="page-filter"
-                            v-if="!isEmbed"></Pagination>
-            </Table>
+            <Table :list="data" class="tb"></Table>
+            <Pagination :currentPage="currentPage" :toPage="toPage"
+                        :totalPage="totalPage" class="page-filter"
+                        v-if="!isEmbed"></Pagination>
         </div>
     </div>
 </template>

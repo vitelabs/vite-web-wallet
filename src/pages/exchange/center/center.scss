@@ -93,6 +93,9 @@ $up-font-color: $green;
     &:first-child {
         text-align: left;
     }
+    &.left {
+        text-align: left;
+    }
 
     &.depth {
         flex: none;

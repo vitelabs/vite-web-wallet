@@ -22,6 +22,7 @@ const actions = {
         commit('exSetLatestTxLoading', true);
 
         latestTxTask = latestTxTask || new subTask('latestTx', ({ data }) => {
+            console.log(data);
             commit('exSetLatestTxList', data);
             commit('exSetLatestTxLoading', false);
         }, latestTxTime);

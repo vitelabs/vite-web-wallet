@@ -5,9 +5,7 @@
                  :key="h">
                 {{h.replace("#tokenSymbol#","vite")}}
             </div>
-            <div></div>
-            <div></div>
-            <div></div>
+            <div>{{ $t('exchangeAssets.operate') }}</div>
         </div>
         <div class="row-container">
             <div class="row" v-for="token in list" :key="token.id">
@@ -16,14 +14,16 @@
                 <div>{{token.available}}</div>
                 <div>{{token.lock||0}}</div>
                 <div>{{token.worth}}</div>
-                <div v-unlock-account @unlocked="recharge(token.id)"
-                     class="click-able">
-                    {{$t("exchangeAssets.table.rowMap.recharge")}}</div>
-                <div v-unlock-account @unlocked="withdraw(token.id)"
-                     class="click-able">
-                    {{$t("exchangeAssets.table.rowMap.withdraw")}}</div>
-                <div @click="detail(token.id)" class="click-able">
-                    {{$t("exchangeAssets.table.rowMap.detail")}}</div>
+                <div>
+                    <span v-unlock-account @unlocked="recharge(token.id)"
+                          class="click-able">
+                        {{$t("exchangeAssets.table.rowMap.recharge")}}</span>
+                    <span v-unlock-account @unlocked="withdraw(token.id)"
+                          class="click-able">
+                        {{$t("exchangeAssets.table.rowMap.withdraw")}}</span>
+                    <span @click="detail(token.id)" class="click-able">
+                        {{$t("exchangeAssets.table.rowMap.detail")}}</span>
+                </div>
             </div>
             <div class="no-data" v-show="!list || !list.length">
                 <div>{{ $t('hint.noData') }}</div>
@@ -304,10 +304,21 @@ export default {
         width: 20px;
         cursor: pointer;
         top: 10px;
-        right: 6px;
+        right: 18px;
         &.rotate {
             transform: rotate(360deg);
             transition: all ease-in-out 1s;
+        }
+    }
+    .head-row >div:last-child {
+        width: 300px;
+        justify-content: flex-start;
+    }
+    .row {
+        >div:last-child {
+            display: flex;
+            justify-content: space-between;
+            width: 300px;
         }
     }
 }

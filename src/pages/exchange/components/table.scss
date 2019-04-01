@@ -36,6 +36,7 @@
             }
             &:last-child {
                 justify-content: flex-end;
+                margin: 0 20px 0 6px;
             }
             .sort-btn {
                 background: url(~assets/imgs/exchange/ascend.png), url(~assets/imgs/exchange/decend.png) 0 8px;
@@ -52,6 +53,7 @@
         height: 100%;
         overflow-x: hidden;
         overflow-y: scroll;
+        position: relative;
     }
     .row {
         white-space: nowrap;
@@ -77,12 +79,15 @@
             }
             &:last-child {
                 justify-content: flex-end;
+                margin: 0 20px 0 6px;
             }
         }
     }
     .no-data {
         width: 100%;
-        padding: 35px 0 25px;
+        position: absolute;
+        top: 50%;
+        margin-top: -48px;
         font-size: 12px;
         font-family: $font-normal, arial, sans-serif;
         font-weight: 400;

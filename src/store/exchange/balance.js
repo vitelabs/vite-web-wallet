@@ -10,17 +10,20 @@ const state = { balanceList: {} };
 const mutations = {
     setExchangeBalance(state, balanceList) {
         state.balanceList = balanceList;
+    },
+    clearDexBalance(state) {
+        state.balanceList = {};
     }
 };
 
-const updateExBalance = (commit, address) => {
+
+// .catch(() => {
+//     commit('setExchangeBalance', []);
+// });
+const updateExBalance = (commit, address) =>
     $ViteJS.request('dexfund_getAccountFundInfo', address).then(data => {
         commit('setExchangeBalance', data);
-    }).catch(() => {
-        commit('setExchangeBalance', []);
     });
-};
-
 const actions = {
     startLoopExchangeBalance({ commit, dispatch }, address) {
         updateExBalance(commit, address);
