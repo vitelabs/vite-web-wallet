@@ -1,12 +1,10 @@
 <template>
     <div class="order-history-ct">
         <Filters v-if="!isEmbed" @submit="submit($event)"></Filters>
-        <div class="combine">
-            <Table :list="data" class="tb"></Table>
-            <Pagination :currentPage="currentPage" :toPage="toPage"
-                        :totalPage="totalPage" class="page-filter"
-                        v-if="!isEmbed"></Pagination>
-        </div>
+        <Table :list="data" class="tb"></Table>
+        <Pagination :currentPage="currentPage" :toPage="toPage"
+                    :totalPage="totalPage" class="page-filter"
+                    v-if="!isEmbed"></Pagination>
     </div>
 </template>
 
@@ -134,10 +132,12 @@ export default {
 <style lang="scss" scoped>
 .order-history-ct {
     height: 100%;
-    padding: 20px 10px 28px;
+    padding: 20px 10px 0;
+    display: flex;
+    flex-direction: column;
 
     .tb {
-        flex: 1;
+        height: 100%;
     }
 
     .page-filter {
@@ -145,6 +145,7 @@ export default {
         justify-content: center;
         background: #fff;
         padding: 10px 0;
+        border-top: 1px solid rgba(198,203,212,0.3);
     }
 }
 </style>

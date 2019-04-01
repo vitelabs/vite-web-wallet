@@ -5,7 +5,9 @@
                  :key="h">
                 {{h.replace("#tokenSymbol#","vite")}}
             </div>
-            <div>{{ $t('exchangeAssets.operate') }}</div>
+            <div>{{ $t('exchangeAssets.operate') }}
+                <img @click="update" class="refresh" :class="{rotate:isRotate}" src="~assets/imgs/exchange/refresh.svg" />
+            </div>
         </div>
         <div class="row-container">
             <div class="row" v-for="token in list" :key="token.id">
@@ -29,8 +31,6 @@
                 <div>{{ $t('hint.noData') }}</div>
             </div>
         </div>
-
-        <img @click="update" class="refresh" :class="{rotate:isRotate}" src="~assets/imgs/exchange/refresh.svg" />
 
         <confirm :title="c.title" :singleBtn="true" class="exchange"
                  :leftBtnTxt="c.btn" :leftBtnClick="confirmClick"
@@ -304,18 +304,23 @@ export default {
         width: 20px;
         cursor: pointer;
         top: 10px;
-        right: 18px;
+        right: 0;
         &.rotate {
             transform: rotate(360deg);
             transition: all ease-in-out 1s;
         }
     }
-    .head-row >div:last-child {
-        width: 300px;
+    .head-row >div {
+        position: relative;
         justify-content: flex-start;
+        &:last-child {
+            justify-content: flex-start;
+            width: 300px;
+        }
     }
-    .row {
-        >div:last-child {
+    .row >div {
+        justify-content: flex-start;
+        &:last-child {
             display: flex;
             justify-content: space-between;
             width: 300px;
@@ -324,13 +329,9 @@ export default {
 }
 
 @include rowWith {
-    width: 8%;
-    &:first-child,
-    &:nth-child(3),
-    &:nth-child(4),
-    &:nth-child(5),
-    &:nth-child(6) {
-        width: 15%;
+    width: 15%;
+    &:first-child {
+        width: 6%;
     }
 }
 
