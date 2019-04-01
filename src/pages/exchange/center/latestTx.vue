@@ -87,7 +87,8 @@ export default {
 }
 
 .__center-tb-item.tx-time {
-    flex-basis: 30px;
+    width: 65px;
+    flex: unset;
 }
 
 .tx-list-wrapper {
