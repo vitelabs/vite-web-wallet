@@ -5,18 +5,17 @@
                 <span>{{title}}</span>
                 <span @click="close" class="close-icon __pointer"></span>
             </div>
-            <div class="content-wrapper" >
-                <div class="ex_tb">
-                    <div class="head-row">
-                        <div v-for="(h) in heads" :key="h">{{ h }}</div>
+
+            <div class="ex_tb">
+                <div class="head-row">
+                    <div v-for="(h) in heads" :key="h">{{ h }}</div>
+                </div>
+                <div class="row-container">
+                    <div class="row" v-for="(v,i) in list" :key="i">
+                        <div v-for="(item,j) in v " :key="j">{{item}}</div>
                     </div>
-                    <div class="row-container">
-                        <div class="row" v-for="(v,i) in list" :key="i">
-                            <div v-for="(item,j) in v " :key="j">{{item}}</div>
-                        </div>
-                        <div class="no-data" v-show="!list || !list.length">
-                            <div>{{ $t('hint.noData') }}</div>
-                        </div>
+                    <div class="no-data" v-show="!list || !list.length">
+                        <div>{{ $t('hint.noData') }}</div>
                     </div>
                 </div>
             </div>
@@ -52,9 +51,7 @@ export default {
 @import "./table.scss";
 
 .ex_tb {
-    height: 100%;
-    padding-bottom: 10px;
-    padding-top: 34px;
+    flex: 1;
     .head-row {
         height: 34px;
     }
