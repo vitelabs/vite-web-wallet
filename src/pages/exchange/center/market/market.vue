@@ -32,7 +32,7 @@
                     class="describe __pointer"
                 >{{ $t('exchange.txPair') }}</span>
             </div>
-            <div class="__center-tb-item">
+            <div class="__center-tb-item left">
                 <span class="describe">{{ $t('exchange.price') }}</span>
                 <order-arrow
                     orderItem="price"

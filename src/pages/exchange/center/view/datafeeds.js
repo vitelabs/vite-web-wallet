@@ -9,6 +9,7 @@ export default class dataFeeds {
         this.symbolName = `${ activeTxPair.ftokenShow }/${ activeTxPair.ttokenShow }`;
         this.lastResolution = null;
         this.list = {};
+        this.lastBar = null;
     }
 
     onReady(callback) {
@@ -128,6 +129,7 @@ export default class dataFeeds {
         }
 
         if (!isHaveData) {
+            console.log('getBars noData');
             onHistoryCallback([], {
                 noData: true,
                 nextTime
@@ -171,13 +173,16 @@ export default class dataFeeds {
             });
         }
 
+        console.log('getBars', new Date(_list[_list.length - 1].time * 1000));
+
+        this.lastBar = _list[_list.length - 1];
         onHistoryCallback(_list, { noData: false });
     }
 
     subscribeBars(symbolInfo, resolution, onRealtimeCallback, subscriberUID) {
         this.unsubscribeBars(subscriberUID);
 
-        const timeList = {
+        const timeListShow = {
             '1': 'minute',
             '30': 'minute30',
             '60': 'hour',
@@ -186,31 +191,61 @@ export default class dataFeeds {
             '1D': 'day',
             '1W': 'week'
         };
-        resolution = timeList[resolution];
+        const timeList = {
+            '1': 60,
+            '30': 30 * 60,
+            '60': 60 * 60,
+            '360': 360 * 60,
+            '720': 720 * 60,
+            '1D': 24 * 60 * 60,
+            '1W': 7 * 24 * 60 * 60
+        };
+        const reqResolution = timeListShow[resolution];
 
         timers[subscriberUID] = new subTask('kline', ({ args, data }) => {
+            console.log('subscribeBars', args, new Date(data.t * 1000), data);
+
             if (args.ttoken !== this.activeTxPair.ttoken
                 || args.ftoken !== this.activeTxPair.ftoken
-                || args.resolution !== resolution) {
+                || args.resolution !== reqResolution) {
                 this.unsubscribeBars(subscriberUID);
                 return;
             }
 
-            data && onRealtimeCallback({
+            if (!data) {
+                return;
+            }
+
+            if (this.lastBar && this.lastBar.time) {
+                const startTime = this.lastBar.time / 1000 + timeList[resolution];
+                for (let time = startTime ; time < data.t; time += timeList[resolution]) {
+                    onRealtimeCallback({
+                        time: time * 1000,
+                        close: this.lastBar.close,
+                        open: this.lastBar.close,
+                        high: this.lastBar.close,
+                        low: this.lastBar.close,
+                        volume: 0
+                    });
+                }
+            }
+
+            this.lastBar = {
                 time: data.t * 1000,
                 close: data.c,
                 open: data.o,
                 high: data.h,
                 low: data.l,
                 volume: data.v
-            });
+            };
+            onRealtimeCallback(this.lastBar);
         }, 2000);
 
         timers[subscriberUID].start(() => {
             return {
                 ttoken: this.activeTxPair.ttoken,
                 ftoken: this.activeTxPair.ftoken,
-                resolution
+                resolution: reqResolution
             };
         });
     }
