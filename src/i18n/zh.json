@@ -21,7 +21,7 @@
     "balance": "账户余额",
     "pow": {
         "ing": "正在运行PoW获取配额",
-        "no": "如果您不想运行PoW，您可抵押VITE获取配额"
+        "no": "如果您不想运行PoW，您可抵押VITE跳过此步骤"
     },
     "addAccount": "添加账户",
     "saveQrcode": "保存二维码图片",
