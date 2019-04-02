@@ -128,8 +128,7 @@ export default class dataFeeds {
 
         const _list = fillKlineData(list, _resolution);
 
-        console.log('[getBars end]', new Date(_list[_list.length - 1].time), _list[_list.length - 1]);
-        console.log('[getBars end]', list[list.length - 1], list[0]);
+        console.log('[getBars end]', new Date(_list[_list.length - 1].time), _list[_list.length - 1], list[list.length - 1], list[0]);
 
         this.lastBar = _list[_list.length - 1];
         onHistoryCallback(_list, { noData: false });
@@ -157,7 +156,7 @@ export default class dataFeeds {
         }
         (i - reqTimeDiff < to) && pushReq(i - reqTimeDiff, to);
 
-        console.log(historyReq.length);
+        console.log('[kline req num]', historyReq.length);
 
         return Promise.all(historyReq).then(res => formatReqKlineData(res));
     }
@@ -206,7 +205,7 @@ export default class dataFeeds {
             }
 
             // 补齐数据
-            const list = fillKlineData[{
+            const list = fillKlineData([ {
                 time: startTime,
                 close: this.lastBar.close,
                 open: this.lastBar.close,
@@ -220,7 +219,7 @@ export default class dataFeeds {
                 high: data.h,
                 low: data.l,
                 volume: data.v
-            }];
+            } ], args.resolution);
 
             this.lastBar = list[list.length - 1];
             for (let i = 0 ; i < list.length; i++) {
