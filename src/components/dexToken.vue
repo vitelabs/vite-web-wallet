@@ -232,12 +232,6 @@ export default {
                 amount: BigNumber.toMin(spend, this.viteTokenInfo.decimals),
                 tradeToken: this.token.token,
                 quoteToken: this.market.token
-            });
-
-            newMarket({
-                amount: BigNumber.toMin(spend, this.viteTokenInfo.decimals),
-                tradeToken: this.token.token,
-                quoteToken: this.market.token
             }).then(() => {
                 newMarketSuccess();
             }).powStarted(() => {

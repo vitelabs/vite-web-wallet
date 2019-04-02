@@ -168,6 +168,8 @@
         "again": "请再次输入密码",
         "choose": "选择账户",
         "finish": "完成",
+        "agreementPre": "同意Vite钱包和ViteX",
+        "agreement": "隐私政策与服务协议",
         "hint": {
             "nameInput": "请输入账户名称",
             "nameLong": "账户不得超出32个字符",
