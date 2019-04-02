@@ -15,10 +15,11 @@ export function powProcess({
         el: document.createElement('div'),
         i18n
     });
+    const appEl = document.getElementById('vite-wallet-app');
 
     const _close = cb => {
         try {
-            document.body.removeChild(powProcessInstance.$el);
+            appEl.removeChild(powProcessInstance.$el);
         } catch (err) {
             console.warn(err);
         }
@@ -31,7 +32,7 @@ export function powProcess({
         _close();
     };
     powProcessInstance.isShowCancel = isShowCancel;
-    document.body.appendChild(powProcessInstance.$el);
+    appEl.appendChild(powProcessInstance.$el);
 
     return powProcessInstance.startPowTx(accountBlock, startTime, difficulty);
 }

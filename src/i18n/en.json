@@ -22,7 +22,7 @@
     "balance": "Balance",
     "pow": {
         "ing": "Running PoW to acquire quota",
-        "no": "You can stake VITE for quota in case you would not like to run PoW"
+        "no": "如果您不想运行PoW，您可抵押VITE跳过此步骤==>? You can stake VITE for quota in case you would not like to run PoW"
     },
     "addAccount": "Add a new account",
     "saveQrcode": "Save QR code image",

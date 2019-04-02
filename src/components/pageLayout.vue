@@ -3,11 +3,10 @@
         <sidebar class="sidebar" :active="active" :go="go" :menuList="menuList" ></sidebar>
         <vite-menu class="menu" :active="active" :go="go" :menuList="menuList"></vite-menu>
 
-        <div class="page-content" :class="{'page-scroll': active.indexOf('exchange') === 0}">
+        <div class="page-content">
             <div class="page-scroll-wrapper">
                 <second-menu v-show="secondMenuList && secondMenuList.length"
-                             :go="go" class="second-menu" :tabList="secondMenuList"
-                             :class="{'have-padding': active.indexOf('exchange') !== 0}">
+                             :go="go" class="second-menu" :tabList="secondMenuList">
                 </second-menu>
                 <div class="page-wrapper">
                     <slot></slot>
@@ -126,6 +125,23 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.dex .page-layout-wrapper .page-content {
+    overflow: auto;
+    .page-scroll-wrapper {
+        width: 100%;
+        height: 100%;
+        min-width: 1370px;
+        .page-wrapper {
+            flex: none;
+            overflow: unset;
+            height: calc(100% - 60px);
+        }
+    }
+}
+.wallet .page-layout-wrapper .page-content .second-menu {
+    margin: 0 30px;
+}
+
 .page-layout-wrapper {
     display: flex;
     flex-direction: row;
@@ -152,24 +168,6 @@ export default {
             display: flex;
             flex-direction: column;
             height: 100%;
-        }
-
-        .second-menu.have-padding {
-            margin: 0 30px;
-        }
-
-        &.page-scroll {
-            overflow: auto;
-            .page-scroll-wrapper {
-                width: 100%;
-                height: 100%;
-                min-width: 1370px;
-                .page-wrapper {
-                    flex: none;
-                    overflow: unset;
-                    height: calc(100% - 60px);
-                }
-            }
         }
 
         .page-wrapper {

@@ -178,6 +178,15 @@ export default {
 <style lang="scss" scoped>
 @import '~assets/scss/vars.scss';
 
+.dex .hold-pwd {
+    font-size: 12px;
+    span {
+        margin-bottom: -3px;
+        width: 14px;
+        height: 14px;
+    }
+}
+
 .pass-input {
     width: 100%;
     background: #fff;
