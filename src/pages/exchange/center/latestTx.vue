@@ -59,6 +59,11 @@ export default {
     },
     methods: {
         formatNum(num, type, fix) {
+            fix = this.activeTxPair
+                ? this.activeTxPair.decimals < fix
+                    ? this.activeTxPair.decimals : fix
+                : fix;
+
             if (!this[type]) {
                 return BigNumber.formatNum(num, fix);
             }

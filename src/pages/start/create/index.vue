@@ -26,10 +26,9 @@
 <script>
 import create from '../create.vue';
 import process from 'components/process';
-import loading from 'components/loading';
 
 export default {
-    components: { create, process, loading },
+    components: { create, process },
     mounted() {
         this.$onKeyDown(13, () => {
             this.valid();

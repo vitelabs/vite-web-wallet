@@ -45,10 +45,17 @@ export default {
             const arr = [].concat(this.depthData);
             arr.sort((a, b) => b.quantity - a.quantity);
             return arr && arr[0] ? arr[0].quantity : 0;
+        },
+        activeTxPair() {
+            return this.$store.state.exchangeActiveTxPair.activeTxPair;
         }
     },
     methods: {
         formatNum(num, type, fix) {
+            fix = this.activeTxPair
+                ? this.activeTxPair.decimals < fix
+                    ? this.activeTxPair.decimals : fix
+                : fix;
             if (!this[type]) {
                 return BigNumber.formatNum(num, fix);
             }
