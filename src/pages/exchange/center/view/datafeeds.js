@@ -2,6 +2,49 @@ import { klineHistory } from 'services/exchange';
 import { subTask } from 'utils/proto/subTask';
 
 const timers = {};
+const maxReqBarNum = 1440;
+const timeList = {
+    '1': 60,
+    '30': 30 * 60,
+    '60': 60 * 60,
+    '360': 360 * 60,
+    '720': 720 * 60,
+    '1D': 24 * 60 * 60,
+    'D': 7 * 24 * 60 * 60,
+    '1W': 7 * 24 * 60 * 60
+};
+const timeListShow = {
+    '1': 'minute',
+    '30': 'minute30',
+    '60': 'hour',
+    '360': 'hour6',
+    '720': 'hour12',
+    '1D': 'day',
+    'D': 'week'
+};
+
+// 接口一次请求 1440 个柱（则请求时间间隔 = 时间间隔 * 1440）
+// tradingView 每次传递 1441 个柱
+// 当前支持的时间
+
+// tradingView传入getBars     接口入参        时间间隔
+//     1                      minute          60
+//     1                      minute30        30 * 60
+//     60                     hour            60 * 60
+//     60                     hour6           360 * 60
+//     60                     hour12          720 * 60
+//     1D                     day             24 * 60 * 60
+//     D                      week            7 * 24 * 60 * 60
+
+const _timeList = {
+    'minute': 60,
+    'minute30': 30 * 60,
+    'hour': 60 * 60,
+    'hour6': 360 * 60,
+    'hour12': 720 * 60,
+    'day': 24 * 60 * 60,
+    'week': 7 * 24 * 60 * 60
+};
 
 export default class dataFeeds {
     constructor(activeTxPair) {
@@ -21,6 +64,15 @@ export default class dataFeeds {
                 supports_marks: true,
                 supports_timescale_marks: true,
                 supports_time: false
+                // time_frames: [
+                //     { text: '1m', resolution: 'minute', description: '1 minute', title: '1m' },
+                //     { text: '30m', resolution: 'minute30', description: '30 minutes', title: '30m' },
+                //     { text: '60m', resolution: 'hour', description: '1 hour', title: '1h' },
+                //     { text: '360m', resolution: 'hour6', description: '6 hours', title: '6h' },
+                //     { text: '720m', resolution: 'hour12', description: '12 hours', title: '12h' },
+                //     { text: '1d', resolution: 'day', description: '1 day', title: '1D' },
+                //     { text: '7d', resolution: 'week', description: '1 week', title: '1W' }
+                // ]
             });
         }, 0);
     }
@@ -34,7 +86,6 @@ export default class dataFeeds {
                 session: '24x7',
                 timezone: 'UTC',
                 ticker: symbolName,
-                // Exchange: split_data[0],
                 minmov: 1,
                 pricescale: 100000000,
                 has_intraday: true,
@@ -50,88 +101,33 @@ export default class dataFeeds {
     }
 
     async getBars(symbolInfo, resolution, from, to, onHistoryCallback, onErrorCallback) {
-        console.log('getBars', from);
+        console.log('[getBars start]', resolution, from, to);
 
-        this.lastResolution = resolution;
+        const _resolution = formatResolution(resolution, from, to);
+        // if (this.lastResolution !== _resolution) {
+        //     this.subscribeBars(symbolInfo, resolution)
+        // }
+        this.lastResolution = _resolution;
 
-        const num = 60 * 24;
-        const timeList = {
-            '1': 60,
-            '30': 30 * 60,
-            '60': 60 * 60,
-            '360': 360 * 60,
-            '720': 720 * 60,
-            '1D': 24 * 60 * 60,
-            '1W': 7 * 24 * 60 * 60
-        };
-        const historyReq = [];
-        let i;
-        const timeDiff = timeList[resolution] * num;
-        for (i = from; i < to; i += timeDiff) {
-            if (i === from) {
-                continue;
-            }
-            historyReq.push(klineHistory({
-                from: i - timeDiff,
-                to: i,
-                resolution,
-                ftoken: this.activeTxPair.ftoken,
-                ttoken: this.activeTxPair.ttoken
-            }));
-        }
-        (i - timeDiff < to) && historyReq.push(klineHistory({
-            from: i - timeDiff,
-            to,
-            resolution,
-            ftoken: this.activeTxPair.ftoken,
-            ttoken: this.activeTxPair.ttoken
-        }));
-
-        let res;
+        let result;
         try {
-            res = await Promise.all(historyReq);
+            result = await this.fetchKlineData(_resolution, from, to);
         } catch (err) {
             console.warn(err);
             onErrorCallback(err);
             return;
         }
 
-        let isHaveData = false;
-        let isError = false;
-        let errMsg = '';
-        let nextTime;
-        const list = [];
-
-        res.forEach(res_item => {
-            isHaveData = isHaveData || res_item.s !== 'no_data';
-            isError = isError || res_item.s === 'error';
-
-            if (res_item.s === 'no_data' || isError) {
-                nextTime = nextTime || res_item.nextTime;
-                errMsg = res_item.errmsg;
-
-                return;
-            }
-
-            res_item.t.forEach((_t, i) => {
-                list.push({
-                    time: _t,
-                    close: res_item.c[i],
-                    open: res_item.o[i],
-                    high: res_item.h[i],
-                    low: res_item.l[i],
-                    volume: res_item.v[i]
-                });
-            });
-        });
+        const { isError, errMsg, isHaveData, nextTime, list } = result;
 
         if (isError) {
+            console.log('[getBars end] error');
             onErrorCallback(errMsg);
             return;
         }
 
         if (!isHaveData) {
-            console.log('getBars noData');
+            console.log('[getBars end] noData');
             onHistoryCallback([], {
                 noData: true,
                 nextTime
@@ -139,70 +135,45 @@ export default class dataFeeds {
             return;
         }
 
-        const _list = [];
-        let index = 0;
+        const _list = fillKlineData(list, _resolution);
 
-        // for (let time = list[0].time - timeList[resolution]; time >= from; time -= timeList[resolution]) {
-        //     _list.push({
-        //         time: time * 1000,
-        //         close: 0,
-        //         open: 0,
-        //         high: 0,
-        //         low: 0,
-        //         volume: 0
-        //     });
-        // }
-        // _list = _list.reverse();
-
-        for (let time = list[0].time; index < list.length; time += timeList[resolution]) {
-            if (list[index] && time === list[index].time) {
-                list[index].time = list[index].time * 1000;
-                _list.push(list[index]);
-                index++;
-                continue;
-            }
-
-            const lastItem = _list.length === 0 ? { close: 0 } : _list[_list.length - 1];
-
-            _list.push({
-                time: time * 1000,
-                close: lastItem.close,
-                open: lastItem.close,
-                high: lastItem.close,
-                low: lastItem.close,
-                volume: 0
-            });
-        }
-
-        console.log('getBars', new Date(_list[_list.length - 1].time), _list[_list.length - 1]);
-        console.log('getBars', list[list.length - 1], list[0]);
+        console.log('[getBars end]', new Date(_list[_list.length - 1].time), _list[_list.length - 1]);
+        console.log('[getBars end]', list[list.length - 1], list[0]);
 
         this.lastBar = _list[_list.length - 1];
-
         onHistoryCallback(_list, { noData: false });
+    }
+
+    async fetchKlineData(resolution, from, to) {
+        const historyReq = [];
+        const reqTimeDiff = _timeList[resolution] * maxReqBarNum;
+        const pushReq = (from, to) => {
+            historyReq.push(klineHistory({
+                from,
+                to,
+                resolution,
+                ftoken: this.activeTxPair.ftoken,
+                ttoken: this.activeTxPair.ttoken
+            }));
+        };
+
+        let i;
+        for (i = from; i < to; i += reqTimeDiff) {
+            if (i === from) {
+                continue;
+            }
+            pushReq(i - reqTimeDiff, i);
+        }
+        (i - reqTimeDiff < to) && pushReq(i - reqTimeDiff, to);
+
+        console.log(historyReq.length);
+
+        return Promise.all(historyReq).then(res => formatReqKlineData(res));
     }
 
     subscribeBars(symbolInfo, resolution, onRealtimeCallback, subscriberUID) {
         this.unsubscribeBars(subscriberUID);
 
-        const timeListShow = {
-            '1': 'minute',
-            '30': 'minute30',
-            '60': 'hour',
-            '360': 'hour6',
-            '720': 'hour12',
-            '1D': 'day',
-            '1W': 'week'
-        };
-        const timeList = {
-            '1': 60,
-            '30': 30 * 60,
-            '60': 60 * 60,
-            '360': 360 * 60,
-            '720': 720 * 60,
-            '1D': 24 * 60 * 60,
-            '1W': 7 * 24 * 60 * 60
-        };
         const reqResolution = timeListShow[resolution];
 
         timers[subscriberUID] = new subTask('kline', ({ args, data }) => {
@@ -219,29 +190,51 @@ export default class dataFeeds {
                 return;
             }
 
-            if (this.lastBar && this.lastBar.time) {
-                const startTime = this.lastBar.time / 1000 + timeList[resolution];
-                for (let time = startTime ; time < data.t; time += timeList[resolution]) {
-                    onRealtimeCallback({
-                        time: time * 1000,
-                        close: this.lastBar.close,
-                        open: this.lastBar.close,
-                        high: this.lastBar.close,
-                        low: this.lastBar.close,
-                        volume: 0
-                    });
-                }
+            const lastTime = this.lastBar && this.lastBar.time
+                ? this.lastBar.time / 1000
+                : null;
+
+            // 不能覆盖历史数据
+            if (lastTime > data.t) {
+                return;
             }
 
-            this.lastBar = {
-                time: data.t * 1000,
+            // 传递的是当前数据，不需要补齐
+            const startTime = lastTime + timeList[resolution];
+            if (startTime === data.t) {
+                this.lastBar = {
+                    time: data.t * 1000,
+                    close: data.c,
+                    open: data.o,
+                    high: data.h,
+                    low: data.l,
+                    volume: data.v
+                };
+                onRealtimeCallback(this.lastBar);
+                return;
+            }
+
+            // 补齐数据
+            const list = fillKlineData[{
+                time: startTime,
+                close: this.lastBar.close,
+                open: this.lastBar.close,
+                high: this.lastBar.close,
+                low: this.lastBar.close,
+                volume: 0
+            }, {
+                time: data.t,
                 close: data.c,
                 open: data.o,
                 high: data.h,
                 low: data.l,
                 volume: data.v
-            };
-            onRealtimeCallback(this.lastBar);
+            }];
+
+            this.lastBar = list[list.length - 1];
+            for (let i = 0 ; i < list.length; i++) {
+                onRealtimeCallback(list[i]);
+            }
         }, 2000);
 
         timers[subscriberUID].start(() => {
@@ -288,4 +281,110 @@ export default class dataFeeds {
     getServerTime() {
         return undefined;
     }
+}
+
+
+function formatResolution(resolution, from, to) {
+    if (_timeList[resolution]) {
+        return resolution;
+    }
+
+    const tradingViewMaxBars = 1441;
+
+    if (resolution === 'D') {
+        return 'week';
+    }
+    if (resolution === '1D') {
+        return 'day';
+    }
+
+    const diff = to - from;
+
+    if (resolution === '1') {
+        return diff > _timeList.minute * tradingViewMaxBars ? 'minute30' : 'minute';
+    }
+    if (resolution !== '60') {
+        return 'minute';
+    }
+
+    if (diff > _timeList.hour6 * tradingViewMaxBars) {
+        return 'hour12';
+    }
+    if (diff > _timeList.hour * tradingViewMaxBars) {
+        return 'hour6';
+    }
+    return 'hour';
+}
+
+function formatReqKlineData(res) {
+    let isHaveData = false;
+    let isError = false;
+    let errMsg = '';
+    let nextTime;
+    const list = [];
+
+    res.forEach(res_item => {
+        isHaveData = isHaveData || res_item.s !== 'no_data';
+        isError = isError || res_item.s === 'error';
+
+        if (res_item.s === 'no_data' || isError) {
+            nextTime = nextTime || res_item.nextTime;
+            errMsg = res_item.errmsg;
+            return;
+        }
+
+        res_item.t.forEach((_t, i) => {
+            list.push({
+                time: _t,
+                close: res_item.c[i],
+                open: res_item.o[i],
+                high: res_item.h[i],
+                low: res_item.l[i],
+                volume: res_item.v[i]
+            });
+        });
+    });
+
+    return { isError, errMsg, isHaveData, nextTime, list };
+}
+
+function fillKlineData(list, resolution) {
+    if (!list || !list.length) {
+        return [];
+    }
+
+    if (list.length < 2) {
+        list[0].time = list[0].time * 1000;
+        return list;
+    }
+
+    const startTime = list[0].time;
+    const endTime = list[list.length - 1].time;
+    const timeDiff = _timeList[resolution];
+
+    let index = 0;
+    const _list = [];
+
+    for (let time = startTime; time <= endTime; time += timeDiff) {
+        // Current data
+        if (list[index] && time === list[index].time) {
+            list[index].time = time * 1000;
+            _list.push(list[index]);
+            index++;
+            continue;
+        }
+
+        // Fill data by last data
+        const lastItem = _list[_list.length - 1];
+        _list.push({
+            time: time * 1000,
+            close: lastItem.close,
+            open: lastItem.close,
+            high: lastItem.close,
+            low: lastItem.close,
+            volume: 0
+        });
+    }
+
+    return _list;
 }

@@ -6,23 +6,14 @@ const path = `${ process.env.dexApiServer }v1`;
 const ViteId = constant.Vite_TokenId;
 
 export const klineHistory = function ({ from, to, ftoken, ttoken, resolution }) {
-    const resList = {
-        '1': 'minute',
-        '30': 'minute30',
-        '60': 'hour',
-        '360': 'hour6',
-        '720': 'hour12',
-        '1D': 'day',
-        '1W': 'week'
-    };
-
+    console.log(resolution);
     return request({
         path: `${ path }/kline/history`,
         method: 'GET',
         params: {
             from,
             to,
-            resolution: resList[resolution],
+            resolution,
             symbol: `${ ftoken },${ ttoken }`
         }
     });

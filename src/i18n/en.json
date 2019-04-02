@@ -168,6 +168,8 @@
         "again": "Please input password again",
         "choose": "Choose account",
         "finish": "Done",
+        "agreementPre": "同意Vite钱包和ViteX",
+        "agreement": "隐私政策与服务协议",
         "hint": {
             "nameInput": "Please input account name",
             "nameLong": "Account name cannot exceed 32 characters!",
