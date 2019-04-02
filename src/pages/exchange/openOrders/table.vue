@@ -104,8 +104,6 @@ export default {
         },
         subscribe() {
             task = task || new subTask('orderQueryCurrent', ({ args, data }) => {
-                console.log('orderQueryCurrent', data);
-
                 const currentAcc = this.$wallet.getActiveAccount();
                 const currentAddr = currentAcc ? currentAcc.getDefaultAddr() : '';
 
