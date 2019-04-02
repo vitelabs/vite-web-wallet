@@ -91,35 +91,21 @@ export default {
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
 
-.confirm-container {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    overflow: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 100;
-
-    &.gray {
-        background: rgba(0, 0, 0, 0.6);
+.dex {
+    .confirm-container.gray {
+        background: rgba(0, 0, 0, 0.4);
     }
 }
 
-.exchange.confirm-container.gray {
-    background: rgba(0, 0, 0, 0.4);
-}
-
-.exchange .confirm-wrapper {
-    max-width: 515px;
-
+.dex .confirm-wrapper {
     .title {
         height: 58px;
         line-height: 58px;
         font-size: 14px;
         font-weight: 600;
+        .close-icon {
+            padding: 29px;
+        }
     }
 
     .content-wrapper {
@@ -135,6 +121,23 @@ export default {
             font-size: 14px;
             font-weight: 600;
         }
+    }
+}
+
+.confirm-container {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    overflow: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+
+    &.gray {
+        background: rgba(0, 0, 0, 0.6);
     }
 }
 

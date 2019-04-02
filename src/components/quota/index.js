@@ -26,12 +26,14 @@ export function quotaConfirm({
         _close(null, cancelInstance.$el);
     };
 
-    document.body.appendChild(cancelInstance.$el);
+    const appEl = document.getElementById('vite-wallet-app');
+    appEl.appendChild(cancelInstance.$el);
 }
 
 const _close = (cb, el) => {
     try {
-        document.body.removeChild(el);
+        const appEl = document.getElementById('vite-wallet-app');
+        appEl.removeChild(el);
     } catch (err) {
         console.warn(err);
     }

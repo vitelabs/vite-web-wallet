@@ -22,9 +22,10 @@ export default function ({
     },
     content = ''
 }) {
+    const appEl = document.getElementById('vite-wallet-app');
     const _close = cb => {
         try {
-            document.body.removeChild(instance.$el);
+            appEl.removeChild(instance.$el);
         } catch (err) {
             console.warn(err);
         }
@@ -48,7 +49,7 @@ export default function ({
     };
     instance.content = content || '';
 
-    document.body.appendChild(instance.$el);
+    appEl.appendChild(instance.$el);
 
     return true;
 }

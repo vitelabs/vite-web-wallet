@@ -2,11 +2,11 @@
     <div class="gray-wrapper" v-if="isShow">
         <div class="pow-process-wrapper">
             <div class="pow">{{ $t('pow.ing') }}</div>
-            <div class="pow">{{ $t('pow.no') }}</div>
             <div class="loading-wrapper __pointer">
                 <loading></loading>
                 <div class="process-num">{{ processNum + '%' }}</div>
             </div>
+            <div class="pow no">{{ $t('pow.no') }}</div>
             <div v-show="isShowCancel" @click="_cancel" class="btn __pointer">{{ $t('btn.cancel') }}</div>
         </div>
     </div>
@@ -178,6 +178,11 @@ export default {
         font-size: 24px;
         color: #fff;
         margin-bottom: 36px;
+        &.no {
+            margin-bottom: 0;
+            margin-top: 36px;
+            font-size: 16px;
+        }
     }
 
     .btn {
