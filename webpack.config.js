@@ -50,7 +50,7 @@ let webpackConfig = {
                     ecma: 6,
                     mangle: true
                 },
-                sourceMap: false
+                sourceMap: true
             })
         ]
     },

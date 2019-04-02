@@ -64,15 +64,6 @@ export default class dataFeeds {
                 supports_marks: true,
                 supports_timescale_marks: true,
                 supports_time: false
-                // time_frames: [
-                //     { text: '1m', resolution: 'minute', description: '1 minute', title: '1m' },
-                //     { text: '30m', resolution: 'minute30', description: '30 minutes', title: '30m' },
-                //     { text: '60m', resolution: 'hour', description: '1 hour', title: '1h' },
-                //     { text: '360m', resolution: 'hour6', description: '6 hours', title: '6h' },
-                //     { text: '720m', resolution: 'hour12', description: '12 hours', title: '12h' },
-                //     { text: '1d', resolution: 'day', description: '1 day', title: '1D' },
-                //     { text: '7d', resolution: 'week', description: '1 week', title: '1W' }
-                // ]
             });
         }, 0);
     }
@@ -195,12 +186,12 @@ export default class dataFeeds {
                 : null;
 
             // 不能覆盖历史数据
-            if (lastTime > data.t) {
+            if (lastTime && lastTime > data.t) {
                 return;
             }
 
             // 传递的是当前数据，不需要补齐
-            const startTime = lastTime + timeList[resolution];
+            const startTime = lastTime ? lastTime + timeList[resolution] : data.t;
             if (startTime === data.t) {
                 this.lastBar = {
                     time: data.t * 1000,
