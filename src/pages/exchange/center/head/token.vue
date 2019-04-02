@@ -11,7 +11,7 @@
         </div>
         <div class="t-item">
             <div class="line">/</div>
-            <div class="id">/</div>
+            <div class="id line">/</div>
         </div>
         <div class="t-item __pointer" @click="showToken('ttoken')">
             <div class="t-icon"><img :src="ttokenIcon"/>
@@ -206,6 +206,10 @@ export default {
             color: $blue;
             line-height: 14px;
             margin-top: 5px;
+            &.line {
+                color: rgba(189,193,209,1);
+                margin-bottom: 0;
+            }
         }
     }
 

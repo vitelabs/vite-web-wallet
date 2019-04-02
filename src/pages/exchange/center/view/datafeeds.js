@@ -50,6 +50,8 @@ export default class dataFeeds {
     }
 
     async getBars(symbolInfo, resolution, from, to, onHistoryCallback, onErrorCallback) {
+        console.log('getBars', from);
+
         this.lastResolution = resolution;
 
         const num = 60 * 24;
@@ -137,23 +139,22 @@ export default class dataFeeds {
             return;
         }
 
-        let _list = [];
+        const _list = [];
         let index = 0;
 
-        for (let time = list[0].time - timeList[resolution]; time >= from; time -= timeList[resolution]) {
-            _list.push({
-                time: time * 1000,
-                close: 0,
-                open: 0,
-                high: 0,
-                low: 0,
-                volume: 0
-            });
-        }
+        // for (let time = list[0].time - timeList[resolution]; time >= from; time -= timeList[resolution]) {
+        //     _list.push({
+        //         time: time * 1000,
+        //         close: 0,
+        //         open: 0,
+        //         high: 0,
+        //         low: 0,
+        //         volume: 0
+        //     });
+        // }
+        // _list = _list.reverse();
 
-        _list = _list.reverse();
-
-        for (let time = list[0].time; time < to; time += timeList[resolution]) {
+        for (let time = list[0].time; index < list.length; time += timeList[resolution]) {
             if (list[index] && time === list[index].time) {
                 list[index].time = list[index].time * 1000;
                 _list.push(list[index]);
@@ -173,9 +174,11 @@ export default class dataFeeds {
             });
         }
 
-        console.log('getBars', new Date(_list[_list.length - 1].time * 1000));
+        console.log('getBars', new Date(_list[_list.length - 1].time), _list[_list.length - 1]);
+        console.log('getBars', list[list.length - 1], list[0]);
 
         this.lastBar = _list[_list.length - 1];
+
         onHistoryCallback(_list, { noData: false });
     }
 

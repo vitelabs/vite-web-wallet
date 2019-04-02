@@ -94,11 +94,11 @@ export default {
     bottom: 0;
 
     &.buy {
-        background: rgba(79, 227, 148, 0.05);
+        background: rgba(0, 215, 100, 0.08);
     }
 
     &.sell {
-        background: rgba(229, 73, 77, 0.05);
+        background: rgba(237, 81, 88, 0.08);
     }
 }
 </style>
