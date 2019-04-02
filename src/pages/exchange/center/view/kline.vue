@@ -87,9 +87,18 @@ export default {
                 },
                 loading_screen: { foregroundColor: '#007AFF' },
                 // Debug: true,
-                time_frames: [
-                    { text: '1d', resolution: '1' }
-                ],
+                // time_frames: [
+                //     { text: '1m', resolution: 'minute', description: '1 minute', title: '1m' },
+                //     { text: '30m', resolution: 'minute30', description: '30 minutes', title: '30m' },
+                //     { text: '60m', resolution: 'hour', description: '1 hour', title: '1h' },
+                //     { text: '360m', resolution: 'hour6', description: '6 hours', title: '6h' },
+                //     { text: '720m', resolution: 'hour12', description: '12 hours', title: '12h' },
+                //     { text: '1d', resolution: 'day', description: '1 day', title: '1D' },
+                //     { text: 'd', resolution: 'week', description: '1 week', title: '1W' }
+                // ],
+                // time_frames: [
+                //     { text: '1d', resolution: '1' }
+                // ],
                 // Charts_storage_url: 'http://saveload.tradingview.com',
                 // client_id: 'tradingview.com',
                 // user_id: 'public_user',
