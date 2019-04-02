@@ -4,7 +4,7 @@
             <div v-for="(h) in $t('exchangeOpenOrders.table.heads')" :key="h">
                 {{ h }}
             </div>
-            <div></div>
+            <div>{{ $t('exchangeAssets.operate') }}</div>
         </div>
         <div class="row-container">
             <div class="row" :class="{
@@ -104,6 +104,8 @@ export default {
         },
         subscribe() {
             task = task || new subTask('orderQueryCurrent', ({ args, data }) => {
+                console.log('orderQueryCurrent', data);
+
                 const currentAcc = this.$wallet.getActiveAccount();
                 const currentAddr = currentAcc ? currentAcc.getDefaultAddr() : '';
 
@@ -219,7 +221,7 @@ export default {
 .row {
     transition: all 0.4s ease-in-out;
     &.active {
-        background: #5bc500;
+        background: rgba(0,122,255,0.07);;
     }
 }
 

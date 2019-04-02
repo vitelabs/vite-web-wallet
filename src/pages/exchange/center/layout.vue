@@ -49,7 +49,7 @@
             overflow: auto;
         }
         .b {
-            flex-basis: 306px;
+            flex-basis: 335px;;
             overflow: auto;
         }
     }
@@ -69,7 +69,6 @@
             overflow: auto;
         }
         .b {
-            flex-basis: 306px;
             margin-top: 10px;
         }
     }
