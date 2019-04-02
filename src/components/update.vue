@@ -76,6 +76,16 @@ export default {
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
 
+.dex .version-wrapper {
+    padding: 20px 30px;
+    .version {
+        font-size: 14px;
+    }
+    .describe {
+        font-size: 12px;
+    }
+}
+
 .update-wrapper {
     position: absolute;
     bottom: 0;

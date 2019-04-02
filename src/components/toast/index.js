@@ -2,8 +2,7 @@ import Vue from 'vue';
 import toastComponent from './toast.vue';
 
 const Toast = Vue.extend(toastComponent);
-const instance = new Toast({ el: document.createElement('div') });
-document.body.appendChild(instance.$el);
+let instance;
 
 const toastDuration = 2000;
 
@@ -11,8 +10,15 @@ export default function (message, duration = toastDuration, type = 'info', posit
     if (!message) {
         return;
     }
-    if (instance.show) {
+
+    if (instance && instance.show) {
         return instance;
+    }
+
+    if (!instance) {
+        instance = new Toast({ el: document.createElement('div') });
+        const appEl = document.getElementById('vite-wallet-app');
+        appEl.appendChild(instance.$el);
     }
 
     // Info / warning / error

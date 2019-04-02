@@ -1,5 +1,5 @@
 <template>
-    <confirm v-show="isShow" class="exchange" :btnUnuse="btnUnuse"
+    <confirm v-show="isShow" class="dex-token" :btnUnuse="btnUnuse"
              :showMask="true" :singleBtn="true"
              :title="$t('exchange.dexToken.title')" :closeIcon="true"
              :close="close" :leftBtnTxt="$t('exchange.dexToken.btn')"
@@ -338,6 +338,13 @@ export default {
         left: 0;
         top: 39px;
     }
+}
+</style>
+
+<style lang="scss">
+.dex-token.confirm-container .confirm-wrapper {
+    width: 515px;
+    max-width: 515px;
 }
 </style>
 
