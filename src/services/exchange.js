@@ -6,7 +6,6 @@ const path = `${ process.env.dexApiServer }v1`;
 const ViteId = constant.Vite_TokenId;
 
 export const klineHistory = function ({ from, to, ftoken, ttoken, resolution }) {
-    console.log(resolution);
     return request({
         path: `${ path }/kline/history`,
         method: 'GET',

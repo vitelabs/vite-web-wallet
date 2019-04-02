@@ -3,25 +3,6 @@ import { subTask } from 'utils/proto/subTask';
 
 const timers = {};
 const maxReqBarNum = 1440;
-const timeList = {
-    '1': 60,
-    '30': 30 * 60,
-    '60': 60 * 60,
-    '360': 360 * 60,
-    '720': 720 * 60,
-    '1D': 24 * 60 * 60,
-    'D': 7 * 24 * 60 * 60,
-    '1W': 7 * 24 * 60 * 60
-};
-const timeListShow = {
-    '1': 'minute',
-    '30': 'minute30',
-    '60': 'hour',
-    '360': 'hour6',
-    '720': 'hour12',
-    '1D': 'day',
-    'D': 'week'
-};
 
 // 接口一次请求 1440 个柱（则请求时间间隔 = 时间间隔 * 1440）
 // tradingView 每次传递 1441 个柱
@@ -95,9 +76,6 @@ export default class dataFeeds {
         console.log('[getBars start]', resolution, from, to);
 
         const _resolution = formatResolution(resolution, from, to);
-        // if (this.lastResolution !== _resolution) {
-        //     this.subscribeBars(symbolInfo, resolution)
-        // }
         this.lastResolution = _resolution;
 
         let result;
@@ -128,8 +106,7 @@ export default class dataFeeds {
 
         const _list = fillKlineData(list, _resolution);
 
-        console.log('[getBars end]', new Date(_list[_list.length - 1].time), _list[_list.length - 1]);
-        console.log('[getBars end]', list[list.length - 1], list[0]);
+        console.log('[getBars end]', new Date(_list[_list.length - 1].time), _list[_list.length - 1], list[list.length - 1], list[0]);
 
         this.lastBar = _list[_list.length - 1];
         onHistoryCallback(_list, { noData: false });
@@ -157,22 +134,21 @@ export default class dataFeeds {
         }
         (i - reqTimeDiff < to) && pushReq(i - reqTimeDiff, to);
 
-        console.log(historyReq.length);
+        console.log('[kline req num]', historyReq.length);
 
         return Promise.all(historyReq).then(res => formatReqKlineData(res));
     }
 
     subscribeBars(symbolInfo, resolution, onRealtimeCallback, subscriberUID) {
         this.unsubscribeBars(subscriberUID);
-
-        const reqResolution = timeListShow[resolution];
+        const reqResolution = this.lastResolution;
 
         timers[subscriberUID] = new subTask('kline', ({ args, data }) => {
             console.log('subscribeBars', args, new Date(data.t * 1000), data);
 
             if (args.ttoken !== this.activeTxPair.ttoken
                 || args.ftoken !== this.activeTxPair.ftoken
-                || args.resolution !== reqResolution) {
+                || args.resolution !== this.lastResolution) {
                 this.unsubscribeBars(subscriberUID);
                 return;
             }
@@ -191,7 +167,7 @@ export default class dataFeeds {
             }
 
             // 传递的是当前数据，不需要补齐
-            const startTime = lastTime ? lastTime + timeList[resolution] : data.t;
+            const startTime = lastTime ? lastTime + _timeList[args.resolution] : data.t;
             if (startTime === data.t) {
                 this.lastBar = {
                     time: data.t * 1000,
@@ -206,7 +182,7 @@ export default class dataFeeds {
             }
 
             // 补齐数据
-            const list = fillKlineData[{
+            const list = fillKlineData([ {
                 time: startTime,
                 close: this.lastBar.close,
                 open: this.lastBar.close,
@@ -220,7 +196,7 @@ export default class dataFeeds {
                 high: data.h,
                 low: data.l,
                 volume: data.v
-            }];
+            } ], args.resolution);
 
             this.lastBar = list[list.length - 1];
             for (let i = 0 ; i < list.length; i++) {
