@@ -1,24 +1,21 @@
 @import "~assets/scss/vars.scss";
 
-.exchange {
+.dex {
     font-size: 12px;
     font-family: $font-normal, arial, sans-serif;
     font-weight: 400;
-    color:rgba(94,104,117,1);
+    color: rgba(94,104,117,1);
     .__row {
         .down-icon {
-           width: 14px;
-           height: 14px;
-           padding: 13px 15px;
-           background: url('~assets/imgs/down_icon.svg') no-repeat center;
-           background-size: 14px 14px;
+            width: 14px;
+            height: 14px;
+            padding: 13px 15px;
+            background: url('~assets/imgs/down_icon.svg') no-repeat center;
+            background-size: 14px 14px;
         }
         .__row-t {
-            line-height:16px;
+            font-size: 12px;
             padding-bottom: 10px;   
-            font-family: $font-bold, arial, sans-serif;
-            font-weight: 600;
-            color: rgba(29,32,36,1);
         }
     }
     .hint {

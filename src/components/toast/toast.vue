@@ -48,13 +48,22 @@ export default {
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
 
+.dex .mint-toast {
+    padding: 20px 30px;
+    font-size: 14px;
+    line-height: 18px;
+}
+
+.wallet .mint-toast {
+    min-width: 300px;
+}
+
 .mint-toast {
     box-sizing: border-box;
     position: fixed;
     background: #fff;
     box-shadow: 0 2px 48px 1px rgba(176, 192, 237, 0.42);
     border-radius: 2px;
-    min-width: 300px;
     max-width: 100%;
     text-align: center;
     padding: 30px;

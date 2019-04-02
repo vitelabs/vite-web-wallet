@@ -1,8 +1,5 @@
 <template>
-    <div class="head" :class="{
-        'dex': active.indexOf('exchange') === 0,
-        'no-dex': active.indexOf('exchange') !== 0
-    }">
+    <div class="head">
         <ul class="tab-list-wrapper">
             <li v-for="(tab, index) in tabList" :key="index"
                 class="tab __pointer" :class="{ 'active': active === tab }"
@@ -11,8 +8,7 @@
         </ul>
 
         <go-net-btn class="go-net-wrapper"></go-net-btn>
-        <change-lang class="menu change-lang-wrapper"
-                     :class="{'dex': active.indexOf('exchange') === 0}"></change-lang>
+        <change-lang class="menu change-lang-wrapper"></change-lang>
 
         <ul class="right-lab-list">
             <div v-show="!isLogin" @click="dexStart" class="tab __pointer">
@@ -98,7 +94,7 @@ export default {
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
 
-.head.dex .tab {
+.dex .head .tab {
     color: rgba(189, 193, 209, 1);
     font-size: 13px;
 }
@@ -162,16 +158,16 @@ export default {
 }
 
 @media only screen and (max-width: 940px) {
-    .head.no-dex .tab-list-wrapper {
+    .wallet .head .tab-list-wrapper {
         width: 100%;
     }
 
-    .head.no-dex .change-lang-wrapper {
+    .wallet .head .change-lang-wrapper {
         float: left;
         margin-left: 20px;
     }
 
-    .head.no-dex {
+    .wallet .head {
         .go-net-wrapper {
             float: left;
         }
@@ -183,7 +179,7 @@ export default {
 }
 
 @media only screen and (max-width: 900px) {
-    .head.no-dex .tab-list-wrapper .tab {
+    .wallet .head .tab-list-wrapper .tab {
         box-sizing: border-box;
         padding: 0 10px;
     }
