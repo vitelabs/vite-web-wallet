@@ -27,7 +27,6 @@ const actions = {
 const getters = {
     currentMarketName(state) {
         const token = state.marketMap.filter(n => n.token === state.currentMarket)[0] || {};
-
         return token.name || '';
     }
 };
