@@ -142,6 +142,8 @@ export default {
 
                 this.changeList = Object.assign({}, this.changeList);
                 this.list = data || [];
+
+                this.$store.commit('exSetCurrentOpenOrders', this.list);
             }, 2000);
 
             task.start(() => {

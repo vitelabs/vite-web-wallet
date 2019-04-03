@@ -100,14 +100,13 @@ $up-font-color: $green;
     &.depth {
         flex: none;
         &.price {
-            width: 30%;
+            flex: 1;
         }
         &.quantity {
-            width: 26%;
+            width: 85px;
         }
         &.amount {
-            width: 44%;
-            padding-right: 6px;
+            flex: 1;
             box-sizing: border-box;
         }
     }
