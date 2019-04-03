@@ -8,11 +8,11 @@
                 name: 'startCreate'
             }">{{ $t('start') }}</router-link>
             <router-link class="__btn __btn_border _top" :to="{
+                name: 'startRestore'
+            }">{{ $t('mnemonic.restore') }}</router-link>
+            <router-link class="__btn_link _top" :to="{
                 name: 'startImport'
             }">{{ $t('btn.imported') }}</router-link>
-            <router-link class="__btn_link _top" :to="{
-                name: 'startRestore'
-            }">{{$t('mnemonic.restore')}}</router-link>
         </div>
     </div>
 </template>

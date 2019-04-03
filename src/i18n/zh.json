@@ -453,13 +453,13 @@
         },
         "buy": {
             "title": "买入{token}",
-            "price": "买入价",
-            "quantity": "买入量"
+            "price": "买入价({token})",
+            "quantity": "买入量({token})"
         },
         "sell": {
             "title": "卖出{token}",
-            "price": "卖出价",
-            "quantity": "卖出量"
+            "price": "卖出价({token})",
+            "quantity": "卖出量({token})"
         },
         "head": {
             "latestPrice": "最新价",
