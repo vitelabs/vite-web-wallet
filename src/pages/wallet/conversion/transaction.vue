@@ -49,7 +49,12 @@
                         {{ $t('walletConversion.aboutPrice', { amount: gasTotalPrice }) }}
                     </span>
                 </div>
-                <process :min="minGwei" :max="maxGwei" :default="size" :setSize="setSize"></process>
+                <process :min="minGwei" :max="maxGwei" :default="size" v-on:drag="setSize">
+                    <div class="speed">
+                        <span class="left">slow</span>
+                        <span class="right">fast</span>
+                    </div>
+                </process>
             </div>
         </confirm>
     </div>
@@ -60,7 +65,7 @@ import icon from 'assets/imgs/eth_logo.svg';
 import BigNumber from 'utils/bigNumber';
 import confirm from 'components/confirm';
 import viteInput from 'components/viteInput';
-import process from './process';
+import process from 'components/slider';
 
 const minGwei = 3;
 const maxGwei = 99;
@@ -286,6 +291,22 @@ export default {
 
 <style lang="scss" scoped>
 @import "~assets/scss/confirmInput.scss";
+
+.speed {
+    width: 100%;
+    font-size: 12px;
+    font-family: $font-normal, arial, sans-serif;
+    font-weight: 400;
+    color: rgba(94, 104, 117, 1);
+    line-height: 16px;
+    padding-top: 16px;
+    .left {
+        float: left;
+    }
+    .right {
+        float: right;
+    }
+}
 </style>
 
 <style lang="scss">
@@ -296,7 +317,6 @@ export default {
 
 .confirm-container.trans-confirm .confirm-wrapper .bottom {
     min-height: 70px;
-
     .__btn {
         height: 40px;
         line-height: 40px;
