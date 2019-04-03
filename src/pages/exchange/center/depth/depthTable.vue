@@ -4,7 +4,10 @@
 
         <div class="__center-tb-row __pointer" @click="clickRow(item, i)"
              v-for="(item, i) in depthData" :key="i">
-            <span class="__center-tb-item depth price" :class="dataType">{{ formatNum(item.price, 'ttoken') }}</span>
+            <span class="__center-tb-item depth price" :class="dataType">
+                {{ formatNum(item.price, 'ttoken') }}
+                <span class="owner" v-show="isInOpenOrders(item.price)"></span>
+            </span>
             <span class="__center-tb-item left depth quantity">{{ formatNum(item.quantity, 'ftoken', 6) }}</span>
             <span class="__center-tb-item depth amount">{{ formatNum(item.amount, 'ttoken', 6) }}</span>
             <span class="percent-wrapper" :class="dataType" :style="{ 'width': getWidth(item) + '%' }"></span>
@@ -48,9 +51,31 @@ export default {
         },
         activeTxPair() {
             return this.$store.state.exchangeActiveTxPair.activeTxPair;
+        },
+        currentOpenOrders() {
+            console.log(this.$store.state.exchangeCurrentOpenOrders.list);
+            return this.$store.state.exchangeCurrentOpenOrders.list;
         }
     },
     methods: {
+        isInOpenOrders(price) {
+            if (!this.currentOpenOrders) {
+                return false;
+            }
+
+            for (let i = 0; i < this.currentOpenOrders.length; i++) {
+                const openOrder = this.currentOpenOrders[i];
+                if (!BigNumber.isEqual(openOrder.price, price)) {
+                    continue;
+                }
+                if ((this.dataType === 'sell' && openOrder.side === 1)
+                    || (this.dataType === 'buy' && openOrder.side === 0)) {
+                    return true;
+                }
+            }
+
+            return false;
+        },
         formatNum(num, type, fix) {
             fix = this.activeTxPair
                 ? this.activeTxPair.decimals < fix
@@ -92,6 +117,14 @@ export default {
 
 .depth-table-wrapper {
     position: relative;
+}
+
+.__center-tb-item .owner {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background: url('~assets/imgs/owner.svg');
+    background-size: 100% 100%;
 }
 
 .percent-wrapper {
