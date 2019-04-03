@@ -20,6 +20,10 @@
     "submitStaking": "Submit Staking",
     "withdrawHeight": "Expected Snapshot Height",
     "balance": "Balance",
+    "dealReminder": {
+        "title": "成交提醒",
+        "describe": "Your order {amount} {ttoken} ({ftoken}/{ttoken}) at {time} is a complete deal, visit Order History to find out more."
+    },
     "pow": {
         "ing": "Running PoW to acquire quota",
         "no": "如果您不想运行PoW，您可抵押VITE跳过此步骤==>? You can stake VITE for quota in case you would not like to run PoW"
@@ -434,7 +438,6 @@
         "newOrderFail": "Order Failed",
         "depthView": "Depth",
         "klineView": "TradingView",
-        "dealReminder": "Your order {amount} {ttoken} ({ftoken}/{ttoken}) at {time} is a complete deal, visit Order History to find out more.",
         "dexToken": {
             "title": "Open Trading Pair",
             "fee": "Token listing Fees",
