@@ -19,6 +19,10 @@
     "stakingAmount": "抵押金额",
     "withdrawHeight": "到期快照高度",
     "balance": "账户余额",
+    "dealReminder": {
+        "title": "成交提醒",
+        "describe": "你于{time} 委托的 {amount} {ttoken} ({ftoken}/{ttoken})已完全成交，详细记录可在委托历史中查看。"
+    },
     "pow": {
         "ing": "正在运行PoW获取配额",
         "no": "如果您不想运行PoW，您可抵押VITE跳过此步骤"
@@ -434,7 +438,6 @@
         "newOrderFail": "提单失败",
         "depthView": "深度图",
         "klineView": "k线图",
-        "dealReminder": "你于{time} 委托的 {amount} {ttoken} ({ftoken}/{ttoken})已完全成交，详细记录可在委托历史中查看。",
         "dexToken": {
             "title": "开通交易对",
             "fee": "上币费",
