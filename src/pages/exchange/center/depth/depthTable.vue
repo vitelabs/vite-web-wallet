@@ -53,7 +53,6 @@ export default {
             return this.$store.state.exchangeActiveTxPair.activeTxPair;
         },
         currentOpenOrders() {
-            console.log(this.$store.state.exchangeCurrentOpenOrders.list);
             return this.$store.state.exchangeCurrentOpenOrders.list;
         }
     },

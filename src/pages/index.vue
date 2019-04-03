@@ -9,26 +9,21 @@
 
         <router-view v-else />
 
-        <update></update>
+        <notice-list></notice-list>
         <first-notice v-if="active === 'start'"></first-notice>
     </div>
 </template>
 
 <script>
-import update from 'components/update.vue';
 import pageLayout from 'components/pageLayout';
 import firstNotice from 'components/firstNotice.vue';
-import date from 'utils/date';
-import { subTask } from 'utils/proto/subTask';
-
-let task = null;
-let addrTimeout = null;
+import noticeList from 'components/noticeList.vue';
 
 export default {
     components: {
-        update,
         firstNotice,
-        pageLayout
+        pageLayout,
+        noticeList
     },
     mounted() {
         this.changeLayout(this.$route.name);
@@ -38,13 +33,6 @@ export default {
 
         this.$store.commit('setLang', this.$i18n.locale);
         this.$store.dispatch('startLoopBalance');
-        this.startGetAddress();
-    },
-    destroyed() {
-        task && task.stop();
-        task = null;
-        addrTimeout && clearTimeout(addrTimeout);
-        addrTimeout = null;
     },
     data() {
         return {
@@ -57,49 +45,12 @@ export default {
         active: function () {
             this.changeLayout();
             this.$offKeyDown();
-        },
-        address: function () {
-            this.address && this.startLatestOrder();
         }
     },
     methods: {
         changeLayout() {
             const toHome = this.active.indexOf('start') !== -1;
             this.layoutType = toHome ? 'home' : 'start';
-        },
-
-        startGetAddress() {
-            const account = this.$wallet.getActiveAccount();
-            this.address = account ? account.getDefaultAddr() : '';
-
-            addrTimeout = setTimeout(() => {
-                this.startGetAddress();
-            }, 1000);
-        },
-        startLatestOrder() {
-            task && task.stop();
-            task = null;
-
-            task = new subTask('latestOrder', ({ args, data }) => {
-                const account = this.$wallet.getActiveAccount();
-                const address = account ? account.getDefaultAddr() : '';
-
-                if (address !== args.address) {
-                    return;
-                }
-
-                data && this.$toast(this.$t('exchange.dealReminder', {
-                    time: date(data.date * 1000, 'zh', true),
-                    ftoken: data.ftokenShow,
-                    ttoken: data.ttokenShow
-                }));
-            }, 2000);
-
-            task.start(() => {
-                const account = this.$wallet.getActiveAccount();
-                const address = account ? account.getDefaultAddr() : '';
-                return { address };
-            });
         }
     }
 };
