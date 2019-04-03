@@ -5,9 +5,9 @@
             <span class="fee">{{ $t('exchange.limitPrice.fee') }} Taker（0.25 ‰）/ Maker（0.0XX ‰）</span>
         </div>
 
-        <logout-view v-if="!isLogin"></logout-view>
+        <!-- <logout-view v-if="!isLogin"></logout-view> -->
 
-        <div v-if="isLogin" class="ex-center-login">
+        <div class="ex-center-login">
             <order orderType="buy"></order>
             <div class="order-border"></div>
             <order orderType="sell" class="order-wrapper"></order>
@@ -69,7 +69,7 @@ export default {
     .order-border {
         height: 100%;
         opacity: 0.136;
-        border: 1px solid rgba(212, 222, 231, 1);
+        border: 1px dashed #D7E0E8;
         margin: 0 6px;
     }
 }

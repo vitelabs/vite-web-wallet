@@ -10,29 +10,30 @@
             </div>
         </div>
 
-        <div class="order-row-title">{{ $t(`exchange.${orderType}.price`) }}</div>
-        <vite-input class="order-input" :class="{'err': isPriceErr}"
+        <vite-input class="order-input b" :class="{'err': isPriceErr}"
                     v-model="price">
-            <span class="ex-order-token" slot="after">{{ ttokenShow }}</span>
+            <span class="ex-order-token" slot="before">
+                {{ $t(`exchange.${orderType}.price`, { token: ttokenShow }) }}
+            </span>
         </vite-input>
 
-        <div class="order-row-title">{{ $t(`exchange.${orderType}.quantity`) }}
-            <ul class="quantity-percent">
-                <li class="__pointer" @click="percentChanged(0.25)">25%</li>
-                <li class="__pointer" @click="percentChanged(0.5)">50%</li>
-                <li class="__pointer" @click="percentChanged(0.75)">75%</li>
-                <li class="__pointer" @click="percentChanged(1)">100%</li>
-            </ul>
-        </div>
         <vite-input class="order-input" :class="{'err': isQuantityErr}"
                     v-model="quantity" @input="quantityChanged">
-            <span class="ex-order-token" slot="after">{{ ftokenShow }}</span>
+            <span class="ex-order-token" slot="before">
+                {{ $t(`exchange.${orderType}.quantity`, { token: ftokenShow }) }}
+            </span>
         </vite-input>
 
-        <div class="order-row-title">{{ $t('exchange.amount') }}</div>
+        <div class="slider-wrapper">
+            <slider :class="orderType" :min="0" :max="100" :default="0"
+                    v-model="percent" v-on:drag="percentChanged"></slider>
+        </div>
+
         <vite-input class="order-input" :class="{'err': isAmountErr}"
                     v-model="amount" @input="amountChanged">
-            <span class="ex-order-token" slot="after">{{ ttokenShow }}</span>
+            <span class="ex-order-token" slot="before">
+                {{ $t('exchange.quantityTitle', { quantity: ttokenShow }) }}
+            </span>
         </vite-input>
 
         <div class="order-btn __pointer" :class="{
@@ -45,12 +46,13 @@
 
 <script>
 import viteInput from 'components/viteInput';
+import slider from 'components/slider';
 import sendTx from 'utils/sendTx';
 import BigNumber from 'utils/bigNumber';
 import { newOrder } from 'services/exchange';
 
 export default {
-    components: { viteInput },
+    components: { viteInput, slider },
     props: {
         orderType: {
             type: String,
@@ -72,7 +74,7 @@ export default {
             oldPrice: '',
             oldAmount: '',
             oldQuantity: '',
-            minAmount: ''
+            minAmount: '0'
         };
     },
     watch: {
@@ -114,6 +116,21 @@ export default {
         }
     },
     computed: {
+        percent() {
+            if (!this.availableBalance) {
+                return '0';
+            }
+
+            const balance = this.availableBalance;
+
+            if (this.orderType === 'buy') {
+                const basicAmount = BigNumber.toMin(this.amount || 0, this.ttokenDetail.tokenDigit);
+                return BigNumber.dividedToNumber(basicAmount || 0, balance, 3);
+            }
+
+            const basicQuantity = BigNumber.toMin(this.quantity || 0, this.ftokenDetail.tokenDigit);
+            return BigNumber.dividedToNumber(basicQuantity || 0, balance, 3);
+        },
         rawBalance() {
             if (!this.activeTxPair) {
                 return null;
@@ -133,6 +150,9 @@ export default {
             }
 
             return balanceList[tokenId];
+        },
+        availableBalance() {
+            return this.rawBalance && this.rawBalance.available ? this.rawBalance.available : '0';
         },
         balance() {
             if (!this.rawBalance) {
@@ -164,6 +184,8 @@ export default {
     },
     methods: {
         percentChanged(percent) {
+            percent = percent / 100;
+
             this.validAll();
 
             const price = this.price;
@@ -398,11 +420,10 @@ $font-black: rgba(36, 39, 43, 0.8);
         color: $font-black;
         text-indent: 6px;
         border-left: 2px solid $blue;
-
+        margin-bottom: 10px;
         .wallet {
             display: block;
             float: right;
-
             &::before {
                 content: '';
                 display: inline-block;
@@ -420,54 +441,30 @@ $font-black: rgba(36, 39, 43, 0.8);
         font-family: $font-normal, arial, sans-serif;
         font-weight: 400;
         color: rgba(94, 104, 117, 1);
+        width: 86px;
+        white-space: nowrap;
     }
 
-    .order-row-title {
-        height: 28px;
-        line-height: 28px;
-        font-size: 12px;
-        font-family: $font-normal, arial, sans-serif;
-        font-weight: 400;
-        color: $font-black;
-        margin-top: 5px;
-
-        .quantity-percent {
-            display: block;
-            float: right;
-            font-size: 12px;
-
-            li {
-                display: inline-block;
-                box-sizing: border-box;
-                border-bottom: 1px dashed $blue;
-                font-family: $font-normal, arial, sans-serif;
-                color: $blue;
-                line-height: 16px;
-                margin-left: 10px;
-
-                &:active {
-                    background: $blue;
-                    color: #fff;
-                }
-            }
-        }
+    .slider-wrapper {
+        margin: 16px 5px;
     }
 
     .order-input {
         height: 30px;
         line-height: 30px;
         box-sizing: border-box;
-
+        &.b {
+            margin-bottom: 10px;
+        }
         &.err {
             border: 1px solid $red;
         }
-
         input {
             text-indent: 6px;
         }
-
         .ex-order-token {
             padding: 0 6px;
+            color: rgba(94,104,117,0.58);
         }
     }
 
@@ -475,21 +472,18 @@ $font-black: rgba(36, 39, 43, 0.8);
         height: 30px;
         line-height: 30px;
         text-align: center;
-        margin-top: 16px;
+        margin-top: 12px;
         border-radius: 2px;
         font-size: 14px;
         font-family: $font-bold, arial, sans-serif;
         font-weight: 600;
         color: #fff;
-
         &.red {
             background: linear-gradient(270deg, rgba(226, 43, 116, 1) 0%, rgba(237, 81, 88, 1) 100%);
         }
-
         &.green {
             background: linear-gradient(270deg, rgba(0, 212, 208, 1) 0%, rgba(0, 215, 100, 1) 100%);
         }
-
         &.gray {
             color: rgba(29, 32, 36, 0.6);
             background: #f3f5f9;
