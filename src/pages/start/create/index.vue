@@ -4,7 +4,9 @@
 
         <create ref="createDom" :submit="createAccount"></create>
 
-        <div @click="toogleAgree" class="agreement __pointer">{{ $t('startCreate.agreementPre') }}
+        <div @click="toogleAgree" class="agreement __pointer" :class="{
+            'active': isAgree
+        }">{{ $t('startCreate.agreementPre') }}
             <span class="link">{{ $t('startCreate.agreement') }}</span>
         </div>
 
@@ -80,7 +82,8 @@ export default {
     }
     &.active {
         &::before {
-            backgrount: #0c8de6;
+            background: url('~assets/imgs/agree.svg');
+            background-size: 100% 100%;
         }
     }
     &:before {
@@ -88,9 +91,10 @@ export default {
         content: ' ';
         width: 18px;
         height: 18px;
-        border: 1px solid #fff;
         margin-bottom: -5px;
         margin-right: 6px;
+        background: url('~assets/imgs/unagree.svg');
+        background-size: 100% 100%;
     }
 }
 

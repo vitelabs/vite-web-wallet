@@ -52,7 +52,7 @@ const httpServicesMap = {
         ttoken,
         ftoken,
         pageNo: 1,
-        pageSize: 10,
+        pageSize: 30,
         status: 0,
         paging: 0
     }),
@@ -61,7 +61,7 @@ const httpServicesMap = {
         ttoken,
         ftoken,
         pageNo: 1,
-        pageSize: 10,
+        pageSize: 30,
         status: 1,
         paging: 0
     })
