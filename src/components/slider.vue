@@ -1,6 +1,8 @@
 <template>
     <div ref="wrapper" @click="_setSize" class="process-wrapper __pointer">
-        <div ref="line" class="line" :style="{ 'width': size + '%' }">
+        <div ref="line" class="line" :class="{
+            'smooth': !isShowPrecent
+        }" :style="{ 'width': size + '%' }">
             <div ref="drag" @mousedown="drag" class="drag"
                  @mouseenter="showPercent" @mouseleave="hidePercent">
                 <span ref="percent" class="percent" :class="{
@@ -259,6 +261,9 @@ $green: linear-gradient(270deg, rgba(0,212,208,1) 0%, rgba(0,215,100,1) 100%);
         background: #007aff;
         height: 100%;
         border-radius: 4px;
+        &.smooth {
+            transition: all 0.3s ease-out;
+        }
         .drag {
             display: inline-block;
             position: absolute;

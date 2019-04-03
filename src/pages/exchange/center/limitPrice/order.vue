@@ -10,36 +10,54 @@
             </div>
         </div>
 
-        <vite-input class="order-input b" :class="{'err': isPriceErr}"
-                    v-model="price">
-            <span class="ex-order-token" slot="before">
-                {{ $t(`exchange.${orderType}.price`, { token: ttokenShow }) }}
-            </span>
-        </vite-input>
+        <div class="input-wrapper">
+            <span class="tips" :class="{'active':
+                focusInput === 'price' && priceErr
+            }">{{  priceErr }}</span>
+            <vite-input class="order-input b" :class="{'err': priceErr}"
+                        v-model="price"
+                        @focus="showTips('price')" @blur="hideTips('price')">
+                <span class="ex-order-token" slot="before">
+                    {{ $t(`exchange.${orderType}.price`, { token: ttokenShow }) }}
+                </span>
+            </vite-input>
+        </div>
 
-        <vite-input class="order-input" :class="{'err': isQuantityErr}"
-                    v-model="quantity" @input="quantityChanged">
-            <span class="ex-order-token" slot="before">
-                {{ $t(`exchange.${orderType}.quantity`, { token: ftokenShow }) }}
-            </span>
-        </vite-input>
+        <div class="input-wrapper">
+            <span class="tips" :class="{'active':
+                focusInput === 'quantity' && quantityErr
+            }">{{  quantityErr }}</span>
+            <vite-input class="order-input" :class="{'err': quantityErr}"
+                        v-model="quantity" @input="quantityChanged"
+                        @focus="showTips('quantity')" @blur="hideTips('quantity')">
+                <span class="ex-order-token" slot="before">
+                    {{ $t(`exchange.${orderType}.quantity`, { token: ftokenShow }) }}
+                </span>
+            </vite-input>
+        </div>
 
         <div class="slider-wrapper">
             <slider :class="orderType" :min="0" :max="100" :default="0"
                     v-model="percent" v-on:drag="percentChanged"></slider>
         </div>
 
-        <vite-input class="order-input" :class="{'err': isAmountErr}"
-                    v-model="amount" @input="amountChanged">
-            <span class="ex-order-token" slot="before">
-                {{ $t('exchange.quantityTitle', { quantity: ttokenShow }) }}
-            </span>
-        </vite-input>
+        <div class="input-wrapper">
+            <span class="tips" :class="{'active':
+                focusInput === 'amount' && amountErr
+            }">{{  amountErr }}</span>
+            <vite-input class="order-input" :class="{'err': amountErr}"
+                        v-model="amount" @input="amountChanged"
+                        @focus="showTips('amount')" @blur="hideTips('amount')">
+                <span class="ex-order-token" slot="before">
+                    {{ $t('exchange.quantityTitle', { quantity: ttokenShow }) }}
+                </span>
+            </vite-input>
+        </div>
 
         <div class="order-btn __pointer" :class="{
             'red': orderType === 'sell',
             'green': orderType === 'buy',
-            'gray': isLoading || isAmountErr || isPriceErr || isQuantityErr
+            'gray': isLoading || amountErr || priceErr || quantityErr
         }" @click="_clickBtn">{{ $t(`exchange.${orderType}.title`, { token: ftokenShow }) }}</div>
     </div>
 </template>
@@ -67,14 +85,14 @@ export default {
             price: '',
             amount: '',
             quantity: '',
-            isPriceErr: false,
-            isAmountErr: false,
-            isQuantityErr: false,
+            priceErr: '',
+            amountErr: '',
+            quantityErr: '',
             isLoading: false,
             oldPrice: '',
             oldAmount: '',
             oldQuantity: '',
-            minAmount: '0'
+            focusInput: ''
         };
     },
     watch: {
@@ -82,7 +100,6 @@ export default {
             if (old && old.pairCode === this.activeTxPair.pairCode) {
                 return;
             }
-            this.minAmount = this.activeTxPair.minAmount;
             this.price = this.activeTxPair && this.activeTxPair.price ? this.activeTxPair.price : '';
             this.quantity = '';
             this.amount = '';
@@ -100,6 +117,9 @@ export default {
             this.validAll();
             this.priceChanged();
         },
+        minAmount: function () {
+            this.validAll();
+        },
         activeTx: function () {
             this.price = this.activeTx.price;
 
@@ -116,6 +136,22 @@ export default {
         }
     },
     computed: {
+        minAmount() {
+            const markets = this.$store.state.exchangeMarket.marketMap;
+            const ttoken = this.activeTxPair ? this.activeTxPair.ttoken : '';
+
+            if (!markets || !markets.length || !ttoken) {
+                return 0;
+            }
+
+            for (let i = 0; i < markets.length; i++) {
+                if (markets[i].token === ttoken) {
+                    return markets[i].minAmount;
+                }
+            }
+
+            return 0;
+        },
         percent() {
             if (!this.availableBalance) {
                 return '0';
@@ -183,6 +219,13 @@ export default {
         }
     },
     methods: {
+        hideTips(type) {
+            this.focusInput === type && (this.focusInput = '');
+        },
+        showTips(type) {
+            this.focusInput = type;
+        },
+
         percentChanged(percent) {
             percent = percent / 100;
 
@@ -206,7 +249,7 @@ export default {
         amountChanged() {
             this.validAll();
 
-            if (this.isAmountErr) {
+            if (this.amountErr) {
                 return;
             }
 
@@ -225,7 +268,7 @@ export default {
         priceChanged() {
             this.validAll();
 
-            if (this.isPriceErr) {
+            if (this.priceErr) {
                 return;
             }
 
@@ -239,7 +282,7 @@ export default {
         quantityChanged() {
             this.validAll();
 
-            if (this.isQuantityErr) {
+            if (this.quantityErr) {
                 return;
             }
 
@@ -327,17 +370,50 @@ export default {
                 return;
             }
             const tokenDigit = this.ttokenDetail.tokenDigit;
-            this.isPriceErr = this.price && !this.$validAmount(this.price, tokenDigit);
+            if (this.price && !this.$validAmount(this.price, tokenDigit)) {
+                this.priceErr = '格式不合法';
+                return;
+            }
+
+            this.priceErr = '';
         },
         validAmount() {
             const tokenDigit = this.ttokenDetail.tokenDigit;
-            this.isAmountErr = this.amount && !this.$validAmount(this.amount, tokenDigit)
-                || (this.orderType === 'buy' && BigNumber.compared(this.balance || 0, this.amount) < 0);
+
+            if (!this.amount) {
+                this.amountErr = '';
+                return;
+            }
+
+            if (!this.$validAmount(this.amount, tokenDigit)) {
+                this.amountErr = 'amount 格式错误';
+                return;
+            }
+
+            if (this.orderType === 'buy' && BigNumber.compared(this.balance || 0, this.amount) < 0) {
+                this.amountErr = '余额不足';
+                return;
+            }
+
+            this.amountErr = '';
+            return;
         },
         validQuantity() {
             const tokenDigit = this.ftokenDetail.tokenDigit;
-            this.isQuantityErr = this.quantity && !this.$validAmount(this.quantity, tokenDigit)
-                || (this.orderType === 'sell' && BigNumber.compared(this.balance || 0, this.quantity) < 0);
+            if (!this.quantity) {
+                this.quantityErr = '';
+                return;
+            }
+            if (!this.$validAmount(this.quantity, tokenDigit)) {
+                this.quantityErr = 'quantity 格式错误';
+                return;
+            }
+            if (this.orderType === 'sell' && BigNumber.compared(this.balance || 0, this.quantity) < 0) {
+                this.quantityErr = '余额不足';
+                return;
+            }
+            this.quantityErr = '';
+            return;
         },
         validAll() {
             this.validPrice();
@@ -357,11 +433,16 @@ export default {
             this.validPrice();
             this.validAmount();
             this.validQuantity();
-            this.isPriceErr = this.isPriceErr || !this.price;
-            this.isAmountErr = this.isAmountErr || !this.amount;
+
+            if (!this.price) {
+                this.priceErr = 'price 不能为空';
+            }
+            if (!this.amount) {
+                this.amountErr = 'amount 不能为空';
+            }
             this.isQuantityErr = this.isQuantityErr || !this.quantity;
 
-            if (this.isPriceErr || this.isAmountErr || this.isQuantityErr) {
+            if (this.priceErr || this.amountErr || this.isQuantityErr) {
                 return;
             }
 
@@ -406,6 +487,43 @@ export default {
 <style lang="scss" scoped>
 @import "../center.scss";
 $font-black: rgba(36, 39, 43, 0.8);
+
+.input-wrapper {
+    position: relative;
+}
+.tips {
+    position: absolute;
+    left: 50%;
+    bottom: 42px;
+    transform: translate(-50%, 0);
+    background: #fff;
+    box-shadow: 0px 5px 20px 0px rgba(0,0,0,0.1);
+    border-radius: 2px;
+    font-size: 12px;
+    color: #5E6875;
+    box-sizing: border-box;
+    font-family: $font-normal, arial, sans-serif;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+    width: auto;
+    height: auto;
+    &.active {
+        min-width: 0;
+        height: auto;
+        opacity: 1;
+        padding: 6px;
+    }
+    &::after {
+        content: ' ';
+        display: inline-block;
+        border: 6px solid transparent;
+        border-top: 6px solid #fff;
+        position: absolute;
+        bottom: -12px;
+        left: 50%;
+        margin-left: -6px;
+    }
+}
 
 .order-wrapper {
     flex: 1;
