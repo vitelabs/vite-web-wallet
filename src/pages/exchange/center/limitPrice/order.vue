@@ -375,6 +375,11 @@ export default {
                 return;
             }
 
+            if (BigNumber.compared(this.minAmount || 0, this.price) > 0) {
+                this.priceErr = '小于最小值';
+                return;
+            }
+
             this.priceErr = '';
         },
         validAmount() {
@@ -392,6 +397,11 @@ export default {
 
             if (this.orderType === 'buy' && BigNumber.compared(this.balance || 0, this.amount) < 0) {
                 this.amountErr = '余额不足';
+                return;
+            }
+
+            if (BigNumber.compared(this.minAmount || 0, this.amount) > 0) {
+                this.amountErr = '小于最小值';
                 return;
             }
 
