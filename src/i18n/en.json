@@ -453,13 +453,13 @@
         },
         "buy": {
             "title": "Buy {token}",
-            "price": "Price",
-            "quantity": "Amount"
+            "price": "Price({token})",
+            "quantity": "Amount({token})"
         },
         "sell": {
             "title": "Sell {token}",
-            "price": "Price",
-            "quantity": "Amount"
+            "price": "Price({token})",
+            "quantity": "Amount({token})"
         },
         "head": {
             "latestPrice": "Last Price",

@@ -10,47 +10,67 @@
             </div>
         </div>
 
-        <div class="order-row-title">{{ $t(`exchange.${orderType}.price`) }}</div>
-        <vite-input class="order-input" :class="{'err': isPriceErr}"
-                    v-model="price">
-            <span class="ex-order-token" slot="after">{{ ttokenShow }}</span>
-        </vite-input>
-
-        <div class="order-row-title">{{ $t(`exchange.${orderType}.quantity`) }}
-            <ul class="quantity-percent">
-                <li class="__pointer" @click="percentChanged(0.25)">25%</li>
-                <li class="__pointer" @click="percentChanged(0.5)">50%</li>
-                <li class="__pointer" @click="percentChanged(0.75)">75%</li>
-                <li class="__pointer" @click="percentChanged(1)">100%</li>
-            </ul>
+        <div class="input-wrapper">
+            <span class="tips" :class="{'active':
+                focusInput === 'price' && priceErr
+            }">{{  priceErr }}</span>
+            <vite-input class="order-input b" :class="{'err': priceErr}"
+                        v-model="price"
+                        @focus="showTips('price')" @blur="hideTips('price')">
+                <span class="ex-order-token" slot="before">
+                    {{ $t(`exchange.${orderType}.price`, { token: ttokenShow }) }}
+                </span>
+            </vite-input>
         </div>
-        <vite-input class="order-input" :class="{'err': isQuantityErr}"
-                    v-model="quantity" @input="quantityChanged">
-            <span class="ex-order-token" slot="after">{{ ftokenShow }}</span>
-        </vite-input>
 
-        <div class="order-row-title">{{ $t('exchange.amount') }}</div>
-        <vite-input class="order-input" :class="{'err': isAmountErr}"
-                    v-model="amount" @input="amountChanged">
-            <span class="ex-order-token" slot="after">{{ ttokenShow }}</span>
-        </vite-input>
+        <div class="input-wrapper">
+            <span class="tips" :class="{'active':
+                focusInput === 'quantity' && quantityErr
+            }">{{  quantityErr }}</span>
+            <vite-input class="order-input" :class="{'err': quantityErr}"
+                        v-model="quantity" @input="quantityChanged"
+                        @focus="showTips('quantity')" @blur="hideTips('quantity')">
+                <span class="ex-order-token" slot="before">
+                    {{ $t(`exchange.${orderType}.quantity`, { token: ftokenShow }) }}
+                </span>
+            </vite-input>
+        </div>
+
+        <div class="slider-wrapper">
+            <slider :class="orderType" :min="0" :max="100" :default="0"
+                    v-model="percent" v-on:drag="percentChanged"></slider>
+        </div>
+
+        <div class="input-wrapper">
+            <span class="tips" :class="{'active':
+                focusInput === 'amount' && amountErr
+            }">{{  amountErr }}</span>
+            <vite-input class="order-input" :class="{'err': amountErr}"
+                        v-model="amount" @input="amountChanged"
+                        @focus="showTips('amount')" @blur="hideTips('amount')">
+                <span class="ex-order-token" slot="before">
+                    {{ $t('exchange.quantityTitle', { quantity: ttokenShow }) }}
+                </span>
+            </vite-input>
+        </div>
 
         <div class="order-btn __pointer" :class="{
             'red': orderType === 'sell',
             'green': orderType === 'buy',
-            'gray': isLoading || isAmountErr || isPriceErr || isQuantityErr
+            'gray': isLoading || amountErr || priceErr || quantityErr
         }" @click="_clickBtn">{{ $t(`exchange.${orderType}.title`, { token: ftokenShow }) }}</div>
     </div>
 </template>
 
 <script>
 import viteInput from 'components/viteInput';
+import slider from 'components/slider';
 import sendTx from 'utils/sendTx';
 import BigNumber from 'utils/bigNumber';
 import { newOrder } from 'services/exchange';
 
 export default {
-    components: { viteInput },
+    components: { viteInput, slider },
     props: {
         orderType: {
             type: String,
@@ -65,14 +85,14 @@ export default {
             price: '',
             amount: '',
             quantity: '',
-            isPriceErr: false,
-            isAmountErr: false,
-            isQuantityErr: false,
+            priceErr: '',
+            amountErr: '',
+            quantityErr: '',
             isLoading: false,
             oldPrice: '',
             oldAmount: '',
             oldQuantity: '',
-            minAmount: ''
+            focusInput: ''
         };
     },
     watch: {
@@ -80,7 +100,6 @@ export default {
             if (old && old.pairCode === this.activeTxPair.pairCode) {
                 return;
             }
-            this.minAmount = this.activeTxPair.minAmount;
             this.price = this.activeTxPair && this.activeTxPair.price ? this.activeTxPair.price : '';
             this.quantity = '';
             this.amount = '';
@@ -98,6 +117,9 @@ export default {
             this.validAll();
             this.priceChanged();
         },
+        minAmount: function () {
+            this.validAll();
+        },
         activeTx: function () {
             this.price = this.activeTx.price;
 
@@ -114,6 +136,37 @@ export default {
         }
     },
     computed: {
+        minAmount() {
+            const markets = this.$store.state.exchangeMarket.marketMap;
+            const ttoken = this.activeTxPair ? this.activeTxPair.ttoken : '';
+
+            if (!markets || !markets.length || !ttoken) {
+                return 0;
+            }
+
+            for (let i = 0; i < markets.length; i++) {
+                if (markets[i].token === ttoken) {
+                    return markets[i].minAmount;
+                }
+            }
+
+            return 0;
+        },
+        percent() {
+            if (!this.availableBalance) {
+                return '0';
+            }
+
+            const balance = this.availableBalance;
+
+            if (this.orderType === 'buy') {
+                const basicAmount = BigNumber.toMin(this.amount || 0, this.ttokenDetail.tokenDigit);
+                return BigNumber.dividedToNumber(basicAmount || 0, balance, 3);
+            }
+
+            const basicQuantity = BigNumber.toMin(this.quantity || 0, this.ftokenDetail.tokenDigit);
+            return BigNumber.dividedToNumber(basicQuantity || 0, balance, 3);
+        },
         rawBalance() {
             if (!this.activeTxPair) {
                 return null;
@@ -133,6 +186,9 @@ export default {
             }
 
             return balanceList[tokenId];
+        },
+        availableBalance() {
+            return this.rawBalance && this.rawBalance.available ? this.rawBalance.available : '0';
         },
         balance() {
             if (!this.rawBalance) {
@@ -163,7 +219,16 @@ export default {
         }
     },
     methods: {
+        hideTips(type) {
+            this.focusInput === type && (this.focusInput = '');
+        },
+        showTips(type) {
+            this.focusInput = type;
+        },
+
         percentChanged(percent) {
+            percent = percent / 100;
+
             this.validAll();
 
             const price = this.price;
@@ -184,7 +249,7 @@ export default {
         amountChanged() {
             this.validAll();
 
-            if (this.isAmountErr) {
+            if (this.amountErr) {
                 return;
             }
 
@@ -203,7 +268,7 @@ export default {
         priceChanged() {
             this.validAll();
 
-            if (this.isPriceErr) {
+            if (this.priceErr) {
                 return;
             }
 
@@ -217,7 +282,7 @@ export default {
         quantityChanged() {
             this.validAll();
 
-            if (this.isQuantityErr) {
+            if (this.quantityErr) {
                 return;
             }
 
@@ -305,17 +370,60 @@ export default {
                 return;
             }
             const tokenDigit = this.ttokenDetail.tokenDigit;
-            this.isPriceErr = this.price && !this.$validAmount(this.price, tokenDigit);
+            if (this.price && !this.$validAmount(this.price, tokenDigit)) {
+                this.priceErr = '格式不合法';
+                return;
+            }
+
+            if (BigNumber.compared(this.minAmount || 0, this.price) > 0) {
+                this.priceErr = '小于最小值';
+                return;
+            }
+
+            this.priceErr = '';
         },
         validAmount() {
             const tokenDigit = this.ttokenDetail.tokenDigit;
-            this.isAmountErr = this.amount && !this.$validAmount(this.amount, tokenDigit)
-                || (this.orderType === 'buy' && BigNumber.compared(this.balance || 0, this.amount) < 0);
+
+            if (!this.amount) {
+                this.amountErr = '';
+                return;
+            }
+
+            if (!this.$validAmount(this.amount, tokenDigit)) {
+                this.amountErr = 'amount 格式错误';
+                return;
+            }
+
+            if (this.orderType === 'buy' && BigNumber.compared(this.balance || 0, this.amount) < 0) {
+                this.amountErr = '余额不足';
+                return;
+            }
+
+            if (BigNumber.compared(this.minAmount || 0, this.amount) > 0) {
+                this.amountErr = '小于最小值';
+                return;
+            }
+
+            this.amountErr = '';
+            return;
         },
         validQuantity() {
             const tokenDigit = this.ftokenDetail.tokenDigit;
-            this.isQuantityErr = this.quantity && !this.$validAmount(this.quantity, tokenDigit)
-                || (this.orderType === 'sell' && BigNumber.compared(this.balance || 0, this.quantity) < 0);
+            if (!this.quantity) {
+                this.quantityErr = '';
+                return;
+            }
+            if (!this.$validAmount(this.quantity, tokenDigit)) {
+                this.quantityErr = 'quantity 格式错误';
+                return;
+            }
+            if (this.orderType === 'sell' && BigNumber.compared(this.balance || 0, this.quantity) < 0) {
+                this.quantityErr = '余额不足';
+                return;
+            }
+            this.quantityErr = '';
+            return;
         },
         validAll() {
             this.validPrice();
@@ -335,11 +443,16 @@ export default {
             this.validPrice();
             this.validAmount();
             this.validQuantity();
-            this.isPriceErr = this.isPriceErr || !this.price;
-            this.isAmountErr = this.isAmountErr || !this.amount;
+
+            if (!this.price) {
+                this.priceErr = 'price 不能为空';
+            }
+            if (!this.amount) {
+                this.amountErr = 'amount 不能为空';
+            }
             this.isQuantityErr = this.isQuantityErr || !this.quantity;
 
-            if (this.isPriceErr || this.isAmountErr || this.isQuantityErr) {
+            if (this.priceErr || this.amountErr || this.isQuantityErr) {
                 return;
             }
 
@@ -385,6 +498,43 @@ export default {
 @import "../center.scss";
 $font-black: rgba(36, 39, 43, 0.8);
 
+.input-wrapper {
+    position: relative;
+}
+.tips {
+    position: absolute;
+    left: 50%;
+    bottom: 42px;
+    transform: translate(-50%, 0);
+    background: #fff;
+    box-shadow: 0px 5px 20px 0px rgba(0,0,0,0.1);
+    border-radius: 2px;
+    font-size: 12px;
+    color: #5E6875;
+    box-sizing: border-box;
+    font-family: $font-normal, arial, sans-serif;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+    width: auto;
+    height: auto;
+    &.active {
+        min-width: 0;
+        height: auto;
+        opacity: 1;
+        padding: 6px;
+    }
+    &::after {
+        content: ' ';
+        display: inline-block;
+        border: 6px solid transparent;
+        border-top: 6px solid #fff;
+        position: absolute;
+        bottom: -12px;
+        left: 50%;
+        margin-left: -6px;
+    }
+}
+
 .order-wrapper {
     flex: 1;
     padding: 0 6px;
@@ -398,11 +548,10 @@ $font-black: rgba(36, 39, 43, 0.8);
         color: $font-black;
         text-indent: 6px;
         border-left: 2px solid $blue;
-
+        margin-bottom: 10px;
         .wallet {
             display: block;
             float: right;
-
             &::before {
                 content: '';
                 display: inline-block;
@@ -420,54 +569,30 @@ $font-black: rgba(36, 39, 43, 0.8);
         font-family: $font-normal, arial, sans-serif;
         font-weight: 400;
         color: rgba(94, 104, 117, 1);
+        width: 86px;
+        white-space: nowrap;
     }
 
-    .order-row-title {
-        height: 28px;
-        line-height: 28px;
-        font-size: 12px;
-        font-family: $font-normal, arial, sans-serif;
-        font-weight: 400;
-        color: $font-black;
-        margin-top: 5px;
-
-        .quantity-percent {
-            display: block;
-            float: right;
-            font-size: 12px;
-
-            li {
-                display: inline-block;
-                box-sizing: border-box;
-                border-bottom: 1px dashed $blue;
-                font-family: $font-normal, arial, sans-serif;
-                color: $blue;
-                line-height: 16px;
-                margin-left: 10px;
-
-                &:active {
-                    background: $blue;
-                    color: #fff;
-                }
-            }
-        }
+    .slider-wrapper {
+        margin: 16px 5px;
     }
 
     .order-input {
         height: 30px;
         line-height: 30px;
         box-sizing: border-box;
-
+        &.b {
+            margin-bottom: 10px;
+        }
         &.err {
             border: 1px solid $red;
         }
-
         input {
             text-indent: 6px;
         }
-
         .ex-order-token {
             padding: 0 6px;
+            color: rgba(94,104,117,0.58);
         }
     }
 
@@ -475,21 +600,18 @@ $font-black: rgba(36, 39, 43, 0.8);
         height: 30px;
         line-height: 30px;
         text-align: center;
-        margin-top: 16px;
+        margin-top: 12px;
         border-radius: 2px;
         font-size: 14px;
         font-family: $font-bold, arial, sans-serif;
         font-weight: 600;
         color: #fff;
-
         &.red {
             background: linear-gradient(270deg, rgba(226, 43, 116, 1) 0%, rgba(237, 81, 88, 1) 100%);
         }
-
         &.green {
             background: linear-gradient(270deg, rgba(0, 212, 208, 1) 0%, rgba(0, 215, 100, 1) 100%);
         }
-
         &.gray {
             color: rgba(29, 32, 36, 0.6);
             background: #f3f5f9;
