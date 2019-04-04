@@ -125,7 +125,7 @@ export default {
         },
 
         testAmount() {
-            const result = this.$validAmount(this.amount, this.token.decimals);
+            const result = this.$validAmount(this.amount, this.token.decimals) === 0;
 
             if (!result) {
                 this.amountErr = this.$t('hint.amtFormat');

@@ -164,11 +164,11 @@ export default {
 
             if (this.orderType === 'buy') {
                 const basicAmount = BigNumber.toMin(this.amount || 0, this.ttokenDetail.tokenDigit);
-                return BigNumber.dividedToNumber(basicAmount || 0, balance, 3);
+                return BigNumber.dividedToNumber(basicAmount || 0, balance, 3, 'nofix');
             }
 
             const basicQuantity = BigNumber.toMin(this.quantity || 0, this.ftokenDetail.tokenDigit);
-            return BigNumber.dividedToNumber(basicQuantity || 0, balance, 3);
+            return BigNumber.dividedToNumber(basicQuantity || 0, balance, 3, 'nofix');
         },
         rawBalance() {
             if (!this.activeTxPair) {
@@ -272,9 +272,11 @@ export default {
             !BigNumber.isEqual(amount, this.amount) && (this.amount = amount);
         },
         amountChanged() {
+            console.log('????');
             this.validAll();
 
             if (this.amountErr) {
+                console.log('error???');
                 return;
             }
 
@@ -308,6 +310,7 @@ export default {
             this.validAll();
 
             if (this.quantityErr) {
+                console.log('???');
                 return;
             }
 
@@ -325,12 +328,16 @@ export default {
         },
 
         getPrice(quantity, amount) {
-            const isRightQuantity = quantity && this.$validAmount(quantity) && !BigNumber.isEqual(quantity, 0);
+            const isRightQuantity = quantity
+                                    && this.$validAmount(quantity) === 0
+                                    && !BigNumber.isEqual(quantity, 0);
             if (!isRightQuantity) {
                 return '';
             }
 
-            const isRightAmount = amount && this.$validAmount(amount) && !BigNumber.isEqual(amount, 0);
+            const isRightAmount = amount
+                                    && this.$validAmount(amount) === 0
+                                    && !BigNumber.isEqual(amount, 0);
             if (!isRightAmount) {
                 return '';
             }
@@ -348,30 +355,38 @@ export default {
             return BigNumber.isEqual(result, 0) ? '' : result;
         },
         getAmount(price, quantity) {
-            const isRightPrice = price && this.$validAmount(price) && !BigNumber.isEqual(price, 0);
+            const isRightPrice = price
+                                && this.$validAmount(price) === 0
+                                && !BigNumber.isEqual(price, 0);
             if (!isRightPrice) {
                 return '';
             }
 
-            const isRightQuantity = quantity && this.$validAmount(quantity) && !BigNumber.isEqual(quantity, 0);
+            const isRightQuantity = quantity
+                                    && this.$validAmount(quantity) === 0
+                                    && !BigNumber.isEqual(quantity, 0);
             if (!isRightQuantity) {
                 return '';
             }
 
-            const amount = BigNumber.multi(price, quantity);
-
             if (this.orderType !== 'buy') {
-                return BigNumber.formatNum(amount, this.ttokenDigit);
+                return BigNumber.multi(price, quantity, this.ttokenDigit);
             }
+
+            const amount = BigNumber.multi(price, quantity);
             return BigNumber.multi(amount, 1 + taker, this.ttokenDigit);
         },
         getQuantity(price, amount) {
-            const isRightPrice = price && this.$validAmount(price) && !BigNumber.isEqual(price, 0);
+            const isRightPrice = price
+                                && this.$validAmount(price) === 0
+                                && !BigNumber.isEqual(price, 0);
             if (!isRightPrice) {
                 return '';
             }
 
-            const isRightAmount = amount && this.$validAmount(amount) && !BigNumber.isEqual(amount, 0);
+            const isRightAmount = amount
+                                    && this.$validAmount(amount) === 0
+                                    && !BigNumber.isEqual(amount, 0);
             if (!isRightAmount) {
                 return '';
             }
@@ -383,11 +398,24 @@ export default {
         },
 
         validPrice() {
-            if (!this.ttokenDetail) {
+            if (!this.price) {
+                this.priceErr = '';
                 return;
             }
 
-            if (this.price && !this.$validAmount(this.price, this.ttokenDigit)) {
+            const result = this.$validAmount(this.price, this.ttokenDigit);
+
+            if (result === 1) {
+                this.priceErr = '格式不合法';
+                return;
+            }
+
+            if (result === 2) {
+                this.priceErr = '小数点位数不合法';
+                return;
+            }
+
+            if (result !== 0) {
                 this.priceErr = '格式不合法';
                 return;
             }
@@ -405,8 +433,20 @@ export default {
                 return;
             }
 
-            if (!this.$validAmount(this.amount, this.ttokenDigit)) {
-                this.amountErr = 'amount 格式错误';
+            const result = this.$validAmount(this.amount, this.ttokenDigit);
+
+            if (result === 1) {
+                this.amountErr = '格式不合法';
+                return;
+            }
+
+            if (result === 2) {
+                this.amountErr = '小数点位数不合法';
+                return;
+            }
+
+            if (result !== 0) {
+                this.amountErr = '格式不合法';
                 return;
             }
 
@@ -421,7 +461,6 @@ export default {
             }
 
             this.amountErr = '';
-            return;
         },
         validQuantity() {
             if (!this.quantity) {
@@ -429,8 +468,20 @@ export default {
                 return;
             }
 
-            if (!this.$validAmount(this.quantity, this.ftokenDigit)) {
-                this.quantityErr = 'quantity 格式错误';
+            const result = this.$validAmount(this.quantity, this.ftokenDigit);
+
+            if (result === 1) {
+                this.quantityErr = '格式不合法';
+                return;
+            }
+
+            if (result === 2) {
+                this.quantityErr = '小数点位数不合法';
+                return;
+            }
+
+            if (result !== 0) {
+                this.quantityErr = '格式不合法';
                 return;
             }
 
@@ -440,7 +491,6 @@ export default {
             }
 
             this.quantityErr = '';
-            return;
         },
         validAll() {
             this.validPrice();
