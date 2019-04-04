@@ -262,7 +262,7 @@ $green: linear-gradient(270deg, rgba(0,212,208,1) 0%, rgba(0,215,100,1) 100%);
         height: 100%;
         border-radius: 4px;
         &.smooth {
-            transition: all 0.3s ease-out;
+            transition: all 0.3s linear;
         }
         .drag {
             display: inline-block;
