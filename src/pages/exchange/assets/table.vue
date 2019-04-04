@@ -265,7 +265,7 @@ export default {
                 ? this.balance[this.c.tokenId].balance
                 : this.balance[this.c.tokenId].available;
             const decimals = this.balance[this.c.tokenId].decimals;
-            const result = this.$validAmount(this.opNumber, decimals);
+            const result = this.$validAmount(this.opNumber, decimals) === 0;
 
             if (!result) {
                 this.c.errTips = this.$t('hint.amtFormat');

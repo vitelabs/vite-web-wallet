@@ -165,7 +165,7 @@ export default {
             this.isValidAddress = this.toAddress && this.ethWallet.utils.isAddress(this.toAddress);
         },
         testAmount() {
-            const result = this.$validAmount(this.amount, this.token.decimals);
+            const result = this.$validAmount(this.amount, this.token.decimals) === 0;
 
             if (!result) {
                 this.amountErr = this.$t('hint.amtFormat');
