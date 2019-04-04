@@ -69,6 +69,9 @@ import sendTx from 'utils/sendTx';
 import BigNumber from 'utils/bigNumber';
 import { newOrder } from 'services/exchange';
 
+const taker = 0.001;
+const maxDigit = 8;
+
 export default {
     components: { viteInput, slider },
     props: {
@@ -216,6 +219,28 @@ export default {
         },
         activeTx() {
             return this.$store.state.exchangeActiveTx.activeTx;
+        },
+        ttokenDigit() {
+            if (!this.ttokenDetail || !this.activeTxPair) {
+                return 0;
+            }
+
+            const tDigit = this.ttokenDetail.tokenDigit;
+            const pariDigit = this.activeTxPair.decimals;
+
+            const digit = tDigit > pariDigit ? tDigit : pariDigit;
+            return digit > maxDigit ? maxDigit : digit;
+        },
+        ftokenDigit() {
+            if (!this.ftokenDetail || !this.activeTxPair) {
+                return 0;
+            }
+
+            const tDigit = this.ftokenDetail.tokenDigit;
+            const pariDigit = this.activeTxPair.decimals;
+
+            const digit = tDigit > pariDigit ? tDigit : pariDigit;
+            return digit > maxDigit ? maxDigit : digit;
         }
     },
     methods: {
@@ -236,10 +261,10 @@ export default {
             let amount = this.amount;
 
             if (this.orderType === 'buy') {
-                amount = this.getPercentBalance(percent, this.ttokenDetail.tokenDigit);
+                amount = this.getPercentBalance(percent, this.ttokenDigit);
                 quantity = this.getQuantity(price, amount);
             } else {
-                quantity = this.getPercentBalance(percent, this.ftokenDetail.tokenDigit);
+                quantity = this.getPercentBalance(percent, this.ftokenDigit);
                 amount = this.getAmount(price, quantity);
             }
 
@@ -310,18 +335,16 @@ export default {
                 return '';
             }
 
-            const tokenDigit = this.ttokenDetail.tokenDigit;
-            const limit = tokenDigit >= 8 ? 8 : tokenDigit;
-
-            return BigNumber.dividedToNumber(amount, quantity, limit, 'nofix');
+            if (this.orderType === 'buy') {
+                amount = BigNumber.multi(amount, 1 - taker);
+            }
+            return BigNumber.dividedToNumber(amount, quantity, this.ttokenDigit, 'nofix');
         },
-        getPercentBalance(percent, decimals) {
+        getPercentBalance(percent, digit) {
             if (!this.balance || BigNumber.isEqual(this.balance, 0)) {
                 return '';
             }
-            const limit = decimals >= 8 ? 8 : decimals;
-            const result = BigNumber.multi(percent, this.balance, limit, 'nofix');
-
+            const result = BigNumber.multi(percent, this.balance, digit, 'nofix');
             return BigNumber.isEqual(result, 0) ? '' : result;
         },
         getAmount(price, quantity) {
@@ -335,10 +358,12 @@ export default {
                 return '';
             }
 
-            const tokenDigit = this.ttokenDetail.tokenDigit;
-            const limit = tokenDigit >= 8 ? 8 : tokenDigit;
+            const amount = BigNumber.multi(price, quantity);
 
-            return BigNumber.multi(price, quantity, limit, 'nofix');
+            if (this.orderType !== 'buy') {
+                return BigNumber.formatNum(amount, this.ttokenDigit);
+            }
+            return BigNumber.multi(amount, 1 + taker, this.ttokenDigit);
         },
         getQuantity(price, amount) {
             const isRightPrice = price && this.$validAmount(price) && !BigNumber.isEqual(price, 0);
@@ -351,26 +376,18 @@ export default {
                 return '';
             }
 
-            const tokenDigit = this.ftokenDetail.tokenDigit;
-            const limit = tokenDigit >= 8 ? 8 : tokenDigit;
-
-            return BigNumber.dividedToNumber(amount, price, limit, 'nofix');
-        },
-        getPercent(val) {
-            if (!this.balance || BigNumber.isEqual(this.balance, 0)
-                || !val || !this.$validAmount(val) || BigNumber.isEqual(val, 0)) {
-                return 0;
+            if (this.orderType === 'buy') {
+                amount = BigNumber.multi(amount, 1 - taker);
             }
-
-            return BigNumber.dividedToNumber(val, this.balance, 2);
+            return BigNumber.dividedToNumber(amount, price, this.ftokenDigit, 'nofix');
         },
 
         validPrice() {
             if (!this.ttokenDetail) {
                 return;
             }
-            const tokenDigit = this.ttokenDetail.tokenDigit;
-            if (this.price && !this.$validAmount(this.price, tokenDigit)) {
+
+            if (this.price && !this.$validAmount(this.price, this.ttokenDigit)) {
                 this.priceErr = '格式不合法';
                 return;
             }
@@ -383,14 +400,12 @@ export default {
             this.priceErr = '';
         },
         validAmount() {
-            const tokenDigit = this.ttokenDetail.tokenDigit;
-
             if (!this.amount) {
                 this.amountErr = '';
                 return;
             }
 
-            if (!this.$validAmount(this.amount, tokenDigit)) {
+            if (!this.$validAmount(this.amount, this.ttokenDigit)) {
                 this.amountErr = 'amount 格式错误';
                 return;
             }
@@ -409,19 +424,21 @@ export default {
             return;
         },
         validQuantity() {
-            const tokenDigit = this.ftokenDetail.tokenDigit;
             if (!this.quantity) {
                 this.quantityErr = '';
                 return;
             }
-            if (!this.$validAmount(this.quantity, tokenDigit)) {
+
+            if (!this.$validAmount(this.quantity, this.ftokenDigit)) {
                 this.quantityErr = 'quantity 格式错误';
                 return;
             }
+
             if (this.orderType === 'sell' && BigNumber.compared(this.balance || 0, this.quantity) < 0) {
                 this.quantityErr = '余额不足';
                 return;
             }
+
             this.quantityErr = '';
             return;
         },
