@@ -34,9 +34,19 @@ export default {
         Vue.prototype.$validAmount = (amount = '', decimals = 8) => {
             const limit = decimals >= 8 ? 8 : decimals;
             const decimalNum = decimals ? new RegExp(`^\\d+[.]\\d{1,${ limit }}$`) : null;
-            const num = new RegExp('^(\\d+)$');
 
-            return num.test(amount) || (decimalNum && decimalNum.test(amount));
+            const isInt = new RegExp('^(\\d+)$').test(amount);
+            const isPoint = new RegExp('^\\d+[.]\\d+$').test(amount);
+
+            if (!isInt && !isPoint) {
+                return 1;
+            }
+
+            if (isPoint && !(decimalNum && decimalNum.test(amount))) {
+                return 2;
+            }
+
+            return 0;
         };
 
         Vue.prototype.$trim = (msg = '') => msg.replace(/(^\s*)|(\s*$)/g, '');
