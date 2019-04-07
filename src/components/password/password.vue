@@ -82,7 +82,7 @@ export default {
             holdTime: localStorage.getItem('noPass') || 5,
             isShowPWDHold: !window.isShowPWD,
             password: '',
-            isPwdHold: false,
+            isPwdHold: !!window.isPwdHold,
             isLoading: false
         };
     },
@@ -107,6 +107,7 @@ export default {
                 return;
             }
             this.isPwdHold = !this.isPwdHold;
+            window.isPwdHold = this.isPwdHold;
         },
 
         _cancle() {
