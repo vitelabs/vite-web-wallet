@@ -556,7 +556,7 @@
             "placeholder": "请输入提币金额",
             "btn": "提现至钱包"
         },
-        "zero": "隐藏0元代币"
+        "zero": "隐藏小额代币"
     },
     "exchangeOpenOrders": {
         "confirm":{
