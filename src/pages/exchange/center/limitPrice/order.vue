@@ -514,9 +514,11 @@ export default {
             if (!this.amount) {
                 this.amountErr = 'amount 不能为空';
             }
-            this.isQuantityErr = this.isQuantityErr || !this.quantity;
+            if (!this.quantity) {
+                this.quantityErr = 'quantity 不能为空';
+            }
 
-            if (this.priceErr || this.amountErr || this.isQuantityErr) {
+            if (this.priceErr || this.amountErr || this.quantityErr) {
                 return;
             }
 
