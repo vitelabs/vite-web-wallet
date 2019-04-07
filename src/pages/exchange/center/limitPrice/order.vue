@@ -272,11 +272,9 @@ export default {
             !BigNumber.isEqual(amount, this.amount) && (this.amount = amount);
         },
         amountChanged() {
-            console.log('????');
             this.validAll();
 
             if (this.amountErr) {
-                console.log('error???');
                 return;
             }
 
@@ -310,7 +308,6 @@ export default {
             this.validAll();
 
             if (this.quantityErr) {
-                console.log('???');
                 return;
             }
 
@@ -343,7 +340,7 @@ export default {
             }
 
             if (this.orderType === 'buy') {
-                amount = BigNumber.multi(amount, 1 - taker);
+                quantity = BigNumber.multi(quantity, 1 + taker);
             }
             return BigNumber.dividedToNumber(amount, quantity, this.ttokenDigit, 'nofix');
         },
@@ -392,7 +389,7 @@ export default {
             }
 
             if (this.orderType === 'buy') {
-                amount = BigNumber.multi(amount, 1 - taker);
+                price = BigNumber.multi(price, 1 + taker);
             }
             return BigNumber.dividedToNumber(amount, price, this.ftokenDigit, 'nofix');
         },

@@ -556,7 +556,7 @@
             "placeholder": "Please input withdrawal amount",
             "btn": "Withdraw"
         },
-        "zero": "Hide Zero Tokens"
+        "zero": "隐藏小额代币"
     },
     "exchangeOpenOrders": {
         "confirm":{
