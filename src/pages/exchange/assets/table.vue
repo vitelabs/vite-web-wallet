@@ -180,7 +180,8 @@ export default {
             setTimeout(() => {
                 this.isRotate = false;
             }, 2000);
-            this.addr && this.$store.dispatch('updateExBalance', this.addr);
+            // Restart
+            this.addr && this.$store.dispatch('startLoopExchangeBalance', this.addr);
         }, 0.1),
         withdraw(tokenId) {
             this.showConfirm({ tokenId, type: 'withdraw' });
