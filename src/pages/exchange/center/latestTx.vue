@@ -59,9 +59,11 @@ export default {
     },
     methods: {
         formatNum(num, type, fix) {
+            const decimals = type === 'ttoken' ? 'toDecimals' : 'fromDecimals';
+
             fix = this.activeTxPair
-                ? this.activeTxPair.decimals < fix
-                    ? this.activeTxPair.decimals : fix
+                ? this.activeTxPair[decimals] < fix
+                    ? this.activeTxPair[decimals] : fix
                 : fix;
 
             if (!this[type]) {
