@@ -3,6 +3,7 @@
         <update></update>
         <notice v-for="(order, index) in latestOrders" :key="index"
                 type="notice" :title="$t('dealReminder.title')"
+                :close="order.close" :rawData="order"
                 :describe="$t('dealReminder.describe', {
                     time: order.time,
                     ftoken: order.ftoken,
@@ -67,17 +68,22 @@ export default {
                     time: date(data.date * 1000, 'zh'),
                     ftoken: data.ftokenShow,
                     ttoken: data.ttokenShow,
-                    timeout: setTimeout(() => {
+                    close: data => {
                         let i;
                         for (i = 0; i < this.latestOrders.length; i++) {
-                            if (this.latestOrders[i] === orderNotice) {
+                            if (this.latestOrders[i] === data) {
                                 break;
                             }
                         }
                         if (i >= this.latestOrders.length) {
                             return;
                         }
+
+                        data.timeout && clearTimeout(data.timeout);
                         this.latestOrders.splice(i, 1);
+                    },
+                    timeout: setTimeout(() => {
+                        orderNotice.close(orderNotice);
                     }, 4000)
                 };
                 this.latestOrders.push(orderNotice);

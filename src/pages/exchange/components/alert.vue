@@ -52,9 +52,6 @@ export default {
 
 .ex_tb {
     flex: 1;
-    .head-row {
-        height: 34px;
-    }
 }
 
 @include rowWith {
@@ -100,8 +97,7 @@ export default {
     border-radius: 2px;
 
     .title {
-        line-height: 20px;
-        padding: 20px 6px;
+        padding: 12px 18px;
         display: flex;
         justify-content: space-between;
         font-family: $font-bold, arial, sans-serif;
@@ -118,13 +114,29 @@ export default {
         }
     }
 
-    .content-wrapper {
-        position: relative;
-        box-sizing: border-box;
-        overflow: auto;
-        font-size: 18px;
-        color: #1d2024;
-        line-height: 26px;
+    .ex_tb {
+        .head-row {
+            >div {
+                &:first-child {
+                    margin: 0 6px 0 18px;
+                }
+                &:last-child {
+                    justify-content: flex-start;
+                    margin: 0 18px 0 6px;
+                }
+            }
+        }
+        .row {
+            >div {
+                &:first-child {
+                    margin: 0 6px 0 18px;
+                }
+                &:last-child {
+                    justify-content: flex-start;
+                    margin: 0 18px 0 6px;
+                }
+            }
+        }
     }
 }
 </style>
