@@ -65,12 +65,13 @@ export default {
     },
     data() {
         return {
-            list: [],
             sortIndex: 0,
             sortType: 1,
             acc: null,
             addr: '',
             timer: null,
+            oldList: {},
+            list: [],
             changeList: {}
         };
     },
@@ -113,35 +114,80 @@ export default {
                     return;
                 }
 
-                const oldList = {};
-                this.list && this.list.forEach(_item => {
-                    oldList[_item.orderId] = {};
-                    oldList[_item.orderId].rate = _item.rate;
-                });
+                const list = [];
+                const newList = {};
 
                 data && data.forEach(_item => {
-                    const orderId = _item.orderId;
-                    if (!oldList[orderId] || oldList[orderId].rate === _item.rate) {
-                        return;
+                    newList[_item.orderId] = _item;
+                });
+
+                for (const orderId in this.oldList) {
+                    const _item = this.oldList[orderId];
+                    if (newList[orderId]) {
+                        continue;
+                    }
+
+                    list.push(_item);
+                    this.changeList[orderId] = this.changeList[orderId] || {};
+                    this.changeList[orderId].status = 2; // Delete
+                    this.changeList[orderId].time = new Date().getTime();
+                    this.changeList[orderId].rawData = _item;
+                }
+
+                for (const orderId in newList) {
+                    list.push(newList[orderId]);
+
+                    if (this.oldList[orderId] && +this.oldList[orderId].rate === +newList[orderId].rate) {
+                        continue;
                     }
 
                     this.changeList[orderId] = this.changeList[orderId] || {};
-                    this.changeList[orderId].rate = oldList[orderId].rate;
+
+                    if (this.oldList[orderId]) {
+                        this.changeList[orderId].status = 0; // Change
+                    } else {
+                        this.changeList[orderId].status = 1; // Add
+                    }
                     this.changeList[orderId].time = new Date().getTime();
-                });
+                    this.changeList[orderId].rawData = newList[orderId];
+                }
+
+                for (const orderId in this.changeList) {
+                    if (newList[orderId] || this.oldList[orderId]) {
+                        continue;
+                    }
+                    const rawData = this.changeList[orderId].rawData;
+                    rawData.rate = 1;
+                    list.push(rawData);
+                }
 
                 setTimeout(() => {
                     const currentTime = new Date().getTime();
-                    for (const key in this.changeList) {
-                        if (currentTime - this.changeList[key].time >= 2000) {
-                            delete this.changeList[key];
+                    for (const orderId in this.changeList) {
+                        if (currentTime - this.changeList[orderId].time < 2000) {
+                            continue;
                         }
+
+                        const item = this.changeList[orderId];
+                        if (item.status === 2) {
+                            let i;
+                            for (i = 0; i < this.list.length; i++) {
+                                if (this.list[i].orderId === orderId) {
+                                    break;
+                                }
+                            }
+                            (i < this.list.length) && this.list.splice(i, 1);
+                        }
+
+                        delete this.changeList[orderId];
                     }
+
                     this.changeList = Object.assign({}, this.changeList);
                 }, 2000);
 
                 this.changeList = Object.assign({}, this.changeList);
-                this.list = data || [];
+                this.oldList = newList;
+                this.list = list || [];
 
                 this.$store.commit('exSetCurrentOpenOrders', this.list);
             }, 2000);
