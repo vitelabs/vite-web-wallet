@@ -89,16 +89,18 @@ export default {
         }
     },
     watch: {
-        filterObj() {
+        filterObj(val, oldVal) {
+            if (oldVal.ttoken !== val.ttoken
+                || oldVal.ftoken !== val.ftoken) {
+                this.list = [];
+                this.changeList = {};
+                this.oldList = {};
+            }
             this.init();
         }
     },
     methods: {
         init() {
-            this.list = [];
-            this.changeList = {};
-            this.oldList = {};
-
             if (!this.isEmbed) {
                 this.update();
                 return;
