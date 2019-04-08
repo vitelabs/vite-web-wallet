@@ -4,6 +4,7 @@ import $ViteJS from 'utils/viteClient';
 
 const loopTime = 2 * 1000;
 let balanceTimer = null;
+let address = null;
 
 const state = { balanceList: {} };
 
@@ -24,8 +25,14 @@ const updateExBalance = (commit, address) =>
     $ViteJS.request('dexfund_getAccountFundInfo', address).then(data => {
         commit('setExchangeBalance', data);
     });
+
 const actions = {
-    startLoopExchangeBalance({ commit, dispatch }, address) {
+    startLoopExchangeBalance({ commit, dispatch }, _address) {
+        if (address !== _address) {
+            commit('clearDexBalance');
+            address = _address;
+        }
+
         updateExBalance(commit, address);
 
         // First stop last
@@ -37,9 +44,6 @@ const actions = {
     stopLoopExchangeBalance() {
         balanceTimer && balanceTimer.stop();
         balanceTimer = null;
-    },
-    updateExBalance({ commit }, address) {
-        updateExBalance(commit, address);
     }
 };
 
