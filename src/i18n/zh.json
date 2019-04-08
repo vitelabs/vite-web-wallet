@@ -498,7 +498,9 @@
         "limitPrice": {
             "title": "限价",
             "fee": "手续费",
-            "text": "此页面为交易预览信息，请登录后进行交易"
+            "text": "此页面为交易预览信息，请登录后进行交易",
+            "validAmountDigit": "成交额需大于{amount}{token}",
+            "validMaxDigit": "最多{digit}位小数"
         }
     },
     "exchangeAssets": {

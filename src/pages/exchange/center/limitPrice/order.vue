@@ -13,7 +13,7 @@
         <div class="input-wrapper">
             <span class="tips" :class="{'active':
                 focusInput === 'price' && priceErr
-            }">{{  priceErr }}</span>
+            }">{{  $t(priceErr, { digit: ttokenDigit }) }}</span>
             <vite-input class="order-input b" :class="{'err': priceErr}"
                         v-model="price"
                         @focus="showTips('price')" @blur="hideTips('price')">
@@ -26,7 +26,7 @@
         <div class="input-wrapper">
             <span class="tips" :class="{'active':
                 focusInput === 'quantity' && quantityErr
-            }">{{  quantityErr }}</span>
+            }">{{  $t(quantityErr, { digit: ftokenDigit }) }}</span>
             <vite-input class="order-input" :class="{'err': quantityErr}"
                         v-model="quantity" @input="quantityChanged"
                         @focus="showTips('quantity')" @blur="hideTips('quantity')">
@@ -44,7 +44,11 @@
         <div class="input-wrapper">
             <span class="tips" :class="{'active':
                 focusInput === 'amount' && amountErr
-            }">{{  amountErr }}</span>
+            }">{{ $t(amountErr, {
+                digit: ttokenDigit,
+                amount: minAmount,
+                token: ttokenShow
+            }) }}</span>
             <vite-input class="order-input" :class="{'err': amountErr}"
                         v-model="amount" @input="amountChanged"
                         @focus="showTips('amount')" @blur="hideTips('amount')">
@@ -405,22 +409,17 @@ export default {
             const result = this.$validAmount(this.price, this.ttokenDigit);
 
             if (result === 1) {
-                this.priceErr = '格式不合法';
+                this.priceErr = 'hint.amtFormat';
                 return;
             }
 
             if (result === 2) {
-                this.priceErr = '小数点位数不合法';
+                this.priceErr = 'exchange.limitPrice.validMaxDigit';
                 return;
             }
 
             if (result !== 0) {
-                this.priceErr = '格式不合法';
-                return;
-            }
-
-            if (BigNumber.compared(this.minAmount || 0, this.price) > 0) {
-                this.priceErr = '小于最小值';
+                this.priceErr = 'hint.amtFormat';
                 return;
             }
 
@@ -435,27 +434,27 @@ export default {
             const result = this.$validAmount(this.amount, this.ttokenDigit);
 
             if (result === 1) {
-                this.amountErr = '格式不合法';
+                this.amountErr = 'hint.amtFormat';
                 return;
             }
 
             if (result === 2) {
-                this.amountErr = '小数点位数不合法';
+                this.amountErr = 'exchange.limitPrice.validMaxDigit';
                 return;
             }
 
             if (result !== 0) {
-                this.amountErr = '格式不合法';
+                this.amountErr = 'hint.amtFormat';
                 return;
             }
 
             if (this.orderType === 'buy' && BigNumber.compared(this.balance || 0, this.amount) < 0) {
-                this.amountErr = '余额不足';
+                this.amountErr = 'hint.insufficientBalance';
                 return;
             }
 
             if (BigNumber.compared(this.minAmount || 0, this.amount) > 0) {
-                this.amountErr = '小于最小值';
+                this.amountErr = 'exchange.limitPrice.validAmountDigit';
                 return;
             }
 
@@ -470,22 +469,22 @@ export default {
             const result = this.$validAmount(this.quantity, this.ftokenDigit);
 
             if (result === 1) {
-                this.quantityErr = '格式不合法';
+                this.quantityErr = 'hint.amtFormat';
                 return;
             }
 
             if (result === 2) {
-                this.quantityErr = '小数点位数不合法';
+                this.quantityErr = 'exchange.limitPrice.validMaxDigit';
                 return;
             }
 
             if (result !== 0) {
-                this.quantityErr = '格式不合法';
+                this.quantityErr = 'hint.amtFormat';
                 return;
             }
 
             if (this.orderType === 'sell' && BigNumber.compared(this.balance || 0, this.quantity) < 0) {
-                this.quantityErr = '余额不足';
+                this.quantityErr = 'hint.insufficientBalance';
                 return;
             }
 
