@@ -58,8 +58,6 @@ export default {
         this.versionList = lastList.concat(this.versionList);
         this.latestCode = this.versionList.length ? this.versionList[this.versionList.length - 1].code : null;
         this.latestCode && this.saveVersion();
-
-        console.log(this.versionList);
     },
     methods: {
         close(index) {

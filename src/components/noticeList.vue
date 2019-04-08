@@ -64,7 +64,7 @@ export default {
                 }
 
                 const orderNotice = {
-                    time: date(data.date * 1000, 'zh', true),
+                    time: date(data.date * 1000, 'zh'),
                     ftoken: data.ftokenShow,
                     ttoken: data.ttokenShow,
                     timeout: setTimeout(() => {
@@ -99,6 +99,8 @@ export default {
     bottom: 0;
     right: 0;
     z-index: 101;
+    max-height: 100%;
+    overflow: auto;
     transition: all 0.8s ease-in-out;
 }
 

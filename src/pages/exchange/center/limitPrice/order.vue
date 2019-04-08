@@ -156,7 +156,9 @@ export default {
             return 0;
         },
         percent() {
-            if (!this.availableBalance) {
+            if (!this.availableBalance
+                || (this.orderType === 'buy' && !this.ttokenDetail)
+                || (this.orderType !== 'buy' && !this.ftokenDetail)) {
                 return '0';
             }
 
