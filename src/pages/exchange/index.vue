@@ -166,13 +166,6 @@ export default {
 
     .ex_tb {
         box-shadow: none;
-        .head-row {
-            height: 34px;
-        }
-
-        .row {
-            height: 32px;
-        }
     }
 }
 </style>

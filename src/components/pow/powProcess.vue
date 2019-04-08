@@ -106,17 +106,14 @@ export default {
             accountBlock.difficulty = data.difficulty;
             accountBlock.nonce = data.nonce;
 
-            if (!this.isShow) {
-                return;
-            }
-
             if (isTimeUp) {
                 return this.sendRawTx(activeAccount, accountBlock);
             }
 
             return new Promise((res, rej) => {
                 timtUpCb = () => {
-                    this.sendRawTx(activeAccount, accountBlock).then((...args) => {
+                    const p = this.sendRawTx(activeAccount, accountBlock);
+                    p && p.then((...args) => {
                         res(...args);
                     }).catch((...args) => {
                         rej(...args);
@@ -126,6 +123,9 @@ export default {
         },
 
         sendRawTx(activeAccount, accountBlock) {
+            if (!this.isShow) {
+                return;
+            }
             return new Promise((res, rej) => {
                 this.gotoFinish();
                 setTimeout(() => {

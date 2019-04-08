@@ -17,7 +17,7 @@
     box-shadow: 0px 2px 10px 1px rgba(176,192,237,0.42);
 
     .head-row {
-        height: 40px;
+        height: 34px;
         width: 100%;
         box-sizing: border-box;
         flex: none;
@@ -29,13 +29,10 @@
         border-bottom: 1px solid rgba(212,222,231,1); 
 
         >div {
-            justify-content: center;
+            justify-content: flex-start;
             display: flex;
             margin: 0 6px;
             align-items: center;
-            &:first-child {
-                justify-content: flex-start;
-            }
             &:last-child {
                 justify-content: flex-end;
                 margin: 0 20px 0 6px;
@@ -60,11 +57,13 @@
     }
 
     .row {
+        overflow: hidden;
+        text-overflow: ellipsis;
         white-space: nowrap;
         box-sizing: border-box;
-        height: 28px;
+        height: 32px;
         color: #5E6875;
-        line-height: 28px;
+        line-height: 32px;
         border-bottom: 1px solid rgba(198,203,212,0.3);;
         display: flex;
         width: 100%;
@@ -80,10 +79,7 @@
             display: flex;
             margin: 0 6px;
             align-items: center;
-            justify-content: center;
-            &:first-child {
-                justify-content: flex-start;
-            }
+            justify-content: flex-start;
             &:last-child {
                 justify-content: flex-end;
                 margin: 0 20px 0 6px;
