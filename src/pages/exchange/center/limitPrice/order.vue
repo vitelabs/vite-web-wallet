@@ -228,7 +228,7 @@ export default {
             const tDigit = this.ttokenDetail.tokenDigit;
             const pariDigit = this.activeTxPair.decimals;
 
-            const digit = tDigit > pariDigit ? tDigit : pariDigit;
+            const digit = tDigit > pariDigit ? pariDigit : tDigit;
             return digit > maxDigit ? maxDigit : digit;
         },
         ftokenDigit() {
@@ -236,10 +236,10 @@ export default {
                 return 0;
             }
 
-            const tDigit = this.ftokenDetail.tokenDigit;
+            const fDigit = this.ftokenDetail.tokenDigit;
             const pariDigit = this.activeTxPair.decimals;
 
-            const digit = tDigit > pariDigit ? tDigit : pariDigit;
+            const digit = fDigit > pariDigit ? pariDigit : fDigit;
             return digit > maxDigit ? maxDigit : digit;
         }
     },
