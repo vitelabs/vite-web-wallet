@@ -499,7 +499,9 @@
         "limitPrice": {
             "title": "Limit",
             "fee": "Fees",
-            "text": "This page is a preview page of transaction data. Please login to trade."
+            "text": "This page is a preview page of transaction data. Please login to trade.",
+            "validAmountDigit": "成交额需大于{amount}{token}",
+            "validMaxDigit": "最多{digit}位小数"
         }
     },
     "exchangeAssets": {
