@@ -15,7 +15,7 @@ export default {
         },
         isShowClose: {
             type: Boolean,
-            default: false
+            default: true
         },
         close: {
             type: Function,
@@ -44,6 +44,7 @@ export default {
     }
     .describe {
         font-size: 12px;
+        font-family: $font-normal, arial, sans-serif;
     }
 }
 
