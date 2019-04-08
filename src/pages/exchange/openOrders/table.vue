@@ -70,8 +70,8 @@ export default {
             acc: null,
             addr: '',
             timer: null,
-            oldList: {},
             list: [],
+            oldList: {},
             changeList: {}
         };
     },
@@ -95,6 +95,10 @@ export default {
     },
     methods: {
         init() {
+            this.list = [];
+            this.changeList = {};
+            this.oldList = {};
+
             if (!this.isEmbed) {
                 this.update();
                 return;
