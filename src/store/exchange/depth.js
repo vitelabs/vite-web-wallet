@@ -2,6 +2,7 @@ import { subTask } from 'utils/proto/subTask';
 
 const time = 2000;
 let depthTask = null;
+let activeTxPair = null;
 
 const state = {
     buy: [],
@@ -22,15 +23,23 @@ const mutations = {
 };
 
 const actions = {
-    exFetchDepth({ rootState, commit, getters }) {
-        const activeTxPair = rootState.exchangeActiveTxPair.activeTxPair;
-        if (!activeTxPair) {
+    exFetchDepth({ rootState, commit, getters, dispatch }) {
+        const _activeTxPair = rootState.exchangeActiveTxPair.activeTxPair;
+        if (!_activeTxPair) {
             return;
         }
 
+        dispatch('exStopDepthTimer');
+
+        activeTxPair = _activeTxPair;
         commit('exSetDepthLoading', true);
 
-        depthTask = depthTask || new subTask('depth', ({ data }) => {
+        depthTask = depthTask || new subTask('depth', ({ args, data }) => {
+            if (args.ftoken !== activeTxPair.ftoken
+                || args.ttoken !== activeTxPair.ttoken) {
+                return;
+            }
+
             commit('exSetDepthLoading', false);
             commit('exSetDepthBuy', data && data.asks ? data.asks || [] : []);
             commit('exSetDepthSell', data && data.bids ? data.bids || [] : []);
@@ -38,9 +47,11 @@ const actions = {
 
         depthTask.start(() => getters.exActiveTxPair);
     },
-    exStopDepthTimer() {
+    exStopDepthTimer({ commit }) {
         depthTask && depthTask.stop();
         depthTask = null;
+        commit('exSetDepthSell', []);
+        commit('exSetDepthBuy', []);
     }
 };
 
