@@ -57,7 +57,7 @@ export default {
 @include rowWith {
     width: 15%;
     &:first-child {
-        min-width: 160px;
+        min-width: 110px;
     }
 }
 
@@ -86,8 +86,7 @@ export default {
 }
 
 .confirm-wrapper {
-    width: 90%;
-    max-width: 960px;
+    width: 70%;
     max-height: 85%;
     min-height: 300px;
     min-width: 500px;
@@ -118,22 +117,22 @@ export default {
         .head-row {
             >div {
                 &:first-child {
-                    margin: 0 6px 0 18px;
+                    margin: 0 3px 0 18px;
                 }
                 &:last-child {
                     justify-content: flex-start;
-                    margin: 0 18px 0 6px;
+                    margin: 0 18px 0 3px;
                 }
             }
         }
         .row {
             >div {
                 &:first-child {
-                    margin: 0 6px 0 18px;
+                    margin: 0 3px 0 18px;
                 }
                 &:last-child {
                     justify-content: flex-start;
-                    margin: 0 18px 0 6px;
+                    margin: 0 18px 0 3px;
                 }
             }
         }
