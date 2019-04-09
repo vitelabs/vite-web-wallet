@@ -58,6 +58,7 @@ import txRewardImg from 'assets/imgs/txReward.svg';
 import txTokenImg from 'assets/imgs/txToken.svg';
 import txTransImg from 'assets/imgs/txTrans.svg';
 import txVoteImg from 'assets/imgs/txVote.svg';
+import txVxImg from 'assets/imgs/txVx.svg';
 
 import pagination from 'components/pagination.vue';
 import tableList from 'components/tableList.vue';
@@ -82,12 +83,12 @@ const txImgs = [
     txTokenImg,
     txTokenImg,
     txTokenImg,
-    txTokenImg,
-    txTransImg,
-    txTransImg,
-    txTransImg,
-    txTransImg,
-    txTransImg,
+    txQuotaImg,
+    txVxImg,
+    txVxImg,
+    txVxImg,
+    txVxImg,
+    txVxImg,
     txTransImg,
     txTransImg,
     txTransImg,

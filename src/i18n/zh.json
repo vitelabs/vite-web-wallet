@@ -567,7 +567,9 @@
             "successToast":"撤销交易发送成功",
             "failToast":"撤销交易发送失败",
             "submitTxt":"确认撤销",
-            "cancelTxt":"取消"
+            "cancelTxt":"取消",
+            "title": "撤销委托",
+            "content": "请确认是否撤销当前委托"
         },
         "title": "当前委托",
         "side": {
