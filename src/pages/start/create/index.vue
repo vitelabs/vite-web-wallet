@@ -7,7 +7,7 @@
         <div @click="toogleAgree" class="agreement __pointer" :class="{
             'active': isAgree
         }">{{ $t('startCreate.agreementPre') }}
-            <span class="link">{{ $t('startCreate.agreement') }}</span>
+            <span @click.stop="openLink" class="link">{{ $t('startCreate.agreement') }}</span>
         </div>
 
         <div class="__btn_list">
@@ -61,6 +61,15 @@ export default {
         },
         toogleAgree() {
             this.isAgree = !this.isAgree;
+        },
+        openLink() {
+            this.$confirm({
+                title: 'yinsi',
+                singleBtn: true,
+                closeBtn: { show: false },
+                leftBtn: { text: this.$t('btn.understand') },
+                content: 'yinsi'
+            });
         }
     }
 };
