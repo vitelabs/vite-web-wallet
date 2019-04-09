@@ -112,10 +112,12 @@ export default {
     width: 8%;
 
     &:first-child {
-        min-width: 160px;
+        width: 160px;
+    }
+    &:nth-child(2) {
+        width: 180px;
     }
 
-    &:first-child,
     &:nth-child(4),
     &:nth-child(5),
     &:nth-child(6),

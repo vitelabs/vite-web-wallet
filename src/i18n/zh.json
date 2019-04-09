@@ -27,7 +27,7 @@
         "ing": "正在运行PoW获取配额",
         "no": "如果您不想运行PoW，您可抵押VITE跳过此步骤"
     },
-    "addAccount": "添加账户",
+    "addAccount": "新建账户",
     "saveQrcode": "保存二维码图片",
     "unlockSuccess": "解锁成功",
     "sendTrans": {
@@ -500,7 +500,10 @@
             "fee": "手续费",
             "text": "此页面为交易预览信息，请登录后进行交易",
             "validAmountDigit": "成交额需大于{amount}{token}",
-            "validMaxDigit": "最多{digit}位小数"
+            "validMaxDigit": "最多{digit}位小数",
+            "priceNotNull": "金额不能为空",
+            "amountNotNull": "成交额不能为空",
+            "quantityNotNull": "数量不能为空"
         }
     },
     "exchangeAssets": {
@@ -626,7 +629,8 @@
                 "statusMap": {
                     "1": "委托中",
                     "2": "已完成",
-                    "3": "已撤销"
+                    "3": "已撤销",
+                    "4": "提单失败"
                 },
                 "detail": "查看明细"
             }
