@@ -244,6 +244,8 @@ export default {
             };
 
             this.acc.initPwd({
+                title: this.$t('exchangeOpenOrders.confirm.title'),
+                content: this.$t('exchangeOpenOrders.confirm.content'),
                 submitTxt: this.$t('exchangeOpenOrders.confirm.submitTxt'),
                 cancelTxt: this.$t('exchangeOpenOrders.confirm.cancelTxt'),
                 submit: () => {
@@ -258,7 +260,7 @@ export default {
                             failSubmit(e);
                         });
                 }
-            });
+            }, true);
         }
     }
 };
