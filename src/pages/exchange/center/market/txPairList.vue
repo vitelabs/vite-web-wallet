@@ -15,7 +15,7 @@
                     <span class="describe">{{ txPair.showPair }}</span>
                 </span>
                 <span class="__center-tb-item left">
-                    {{ txPair.price ? formatNum(txPair.price, txPair.toDecimals) : '--' }}
+                    {{ txPair.price ? formatNum(txPair.price, txPair.rawData.toDecimals) : '--' }}
                 </span>
                 <span v-show="showCol === 'updown'" class="__center-tb-item percent" :class="{
                     'up': +txPair.price24hChange > 0,

@@ -510,13 +510,13 @@ export default {
             this.validQuantity();
 
             if (!this.price) {
-                this.priceErr = 'price 不能为空';
+                this.priceErr = 'limitPrice.priceNotNull';
             }
             if (!this.amount) {
-                this.amountErr = 'amount 不能为空';
+                this.amountErr = 'limitPrice.amountNotNull';
             }
             if (!this.quantity) {
-                this.quantityErr = 'quantity 不能为空';
+                this.quantityErr = 'limitPrice.quantityNotNull';
             }
 
             if (this.priceErr || this.amountErr || this.quantityErr) {

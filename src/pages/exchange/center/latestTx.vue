@@ -58,13 +58,12 @@ export default {
         }
     },
     methods: {
-        formatNum(num, type, fix) {
+        formatNum(num, type, fix = 8) {
             const decimals = type === 'ttoken' ? 'toDecimals' : 'fromDecimals';
 
-            fix = this.activeTxPair
-                ? this.activeTxPair[decimals] < fix
-                    ? this.activeTxPair[decimals] : fix
-                : fix;
+            if (this.activeTxPair && this.activeTxPair[decimals] < fix) {
+                fix = this.activeTxPair[decimals];
+            }
 
             if (!this[type]) {
                 return BigNumber.formatNum(num, fix);
