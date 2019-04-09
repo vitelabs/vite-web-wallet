@@ -3,7 +3,7 @@
     "start": "开始",
     "login": "登录账户",
     "regAcc": "注册账户",
-    "dexToken": "交易所上币",
+    "dexToken": "开通交易对",
     "unlockAcc": "解锁当前账户",
     "changeAcc": "切换其他账户",
     "existingAcc": "本地已有账户",
