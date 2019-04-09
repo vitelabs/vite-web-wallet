@@ -8,12 +8,12 @@
                  @mouseenter="showRealPrice(txPair, i)"
                  @mouseleave="hideRealPrice(txPair)"
                  @click="setActiveTxPair(txPair.rawData)">
-                <span class="__center-tb-item txPair">
+                <span class="__center-tb-item tx-pair">
                     <span class="favorite-icon" :class="{'active': !!favoritePairs[txPair.pairCode]}"
                           @click.stop="setFavorite(txPair.rawData)"></span>
                     <span class="describe">{{ txPair.showPair }}</span>
                 </span>
-                <span class="__center-tb-item left">
+                <span class="__center-tb-item">
                     {{ txPair.price ? formatNum(txPair.price, txPair.rawData.toDecimals) : '--' }}
                 </span>
                 <span v-show="showCol === 'updown'" class="__center-tb-item percent" :class="{
@@ -221,12 +221,11 @@ export default {
 .__center-tb-row {
     .__center-tb-item {
         position: relative;
-        overflow: visible;
     }
 
     .describe {
-        position: relative;
-        bottom: 6px;
+        display: inline-block;
+        width: 95px;
     }
 
     &.active {

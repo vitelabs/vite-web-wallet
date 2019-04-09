@@ -423,6 +423,11 @@ export default {
                 return;
             }
 
+            if (+this.price === 0) {
+                this.priceErr = 'exchange.limitPrice.bigger0';
+                return;
+            }
+
             this.priceErr = '';
         },
         validAmount() {
@@ -488,6 +493,11 @@ export default {
                 return;
             }
 
+            if (+this.quantity === 0) {
+                this.quantityErr = 'exchange.limitPrice.bigger0';
+                return;
+            }
+
             this.quantityErr = '';
         },
         validAll() {
@@ -509,13 +519,13 @@ export default {
             this.validAmount();
             this.validQuantity();
 
-            if (!this.price) {
+            if (!+this.price) {
                 this.priceErr = 'exchange.limitPrice.priceNotNull';
             }
-            if (!this.amount) {
+            if (!+this.amount) {
                 this.amountErr = 'exchange.limitPrice.amountNotNull';
             }
-            if (!this.quantity) {
+            if (!+this.quantity) {
                 this.quantityErr = 'exchange.limitPrice.quantityNotNull';
             }
 

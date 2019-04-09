@@ -172,11 +172,10 @@ export default {
 
 .token {
     position: relative;
-    flex-basis: 160px;
     white-space: nowrap;
 
     .t-item {
-        max-width: 70px;
+        max-width: 120px;
         overflow: hidden;
         display: inline-block;
         font-size: 14px;

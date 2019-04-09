@@ -503,7 +503,8 @@
             "validMaxDigit": "最多{digit}位小数",
             "priceNotNull": "金额不能为空",
             "amountNotNull": "成交额不能为空",
-            "quantityNotNull": "数量不能为空"
+            "quantityNotNull": "数量不能为空",
+            "bigger0": "数额必须大于0"
         }
     },
     "exchangeAssets": {
