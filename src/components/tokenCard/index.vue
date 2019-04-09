@@ -23,10 +23,6 @@
 </template>
 
 <script>
-import viteIcon from 'assets/imgs/vite.svg';
-import vcpIcon from 'assets/imgs/VCC.svg';
-import vttIcon from 'assets/imgs/vtt.svg';
-
 export default {
     props: {
         opt: {
@@ -44,15 +40,6 @@ export default {
             type: Function,
             default: () => {}
         }
-    },
-    data() {
-        return {
-            iconMap: {
-                VITE: viteIcon,
-                VCP: vcpIcon,
-                VTT: vttIcon
-            }
-        };
     },
     methods: {
         _sendTx() {
