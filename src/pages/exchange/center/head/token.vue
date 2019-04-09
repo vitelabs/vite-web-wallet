@@ -175,7 +175,7 @@ export default {
     white-space: nowrap;
 
     .t-item {
-        max-width: 120px;
+        max-width: 95px;
         overflow: hidden;
         display: inline-block;
         font-size: 14px;
