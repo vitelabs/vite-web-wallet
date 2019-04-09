@@ -62,7 +62,7 @@ export default {
 
             const msg = code === -1 || !this.$i18n.messages.zh.errCode[Math.abs(code)]
                 ? message || this.$t('hint.err') : this.$t(`errCode.${ Math.abs(code) }`);
-            toast(msg, type, position);
+            toast(`${ msg }(${ code })`, type, position);
         };
 
         Vue.prototype.$confirm = confirm;
