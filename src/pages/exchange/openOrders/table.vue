@@ -256,8 +256,14 @@ export default {
                         quoteToken: order.ttoken
                     }, config)
                         .then(successSubmit)
-                        .catch(e => {
-                            failSubmit(e);
+                        .catch(err => {
+                            const code = err && err.error ? err.error.code || -1
+                                : err ? err.code : -1;
+                            if (code === -37008) {
+                                this.$toast(`${ this.$t('exchangeOpenOrders.cancelErr') }(37008)`);
+                                return;
+                            }
+                            failSubmit(err);
                         });
                 }
             }, true);

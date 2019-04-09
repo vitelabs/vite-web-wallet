@@ -564,6 +564,7 @@
         "zero": "隐藏小额代币"
     },
     "exchangeOpenOrders": {
+        "cancelErr": "您操作太快了, 请稍候重试",
         "confirm":{
             "successToast":"撤销交易发送成功",
             "failToast":"撤销交易发送失败",
