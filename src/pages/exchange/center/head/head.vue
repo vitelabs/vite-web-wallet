@@ -64,7 +64,6 @@ export default {
             if (this.upDown && this.upDown > 0) {
                 return '+';
             }
-
             return '';
         },
         realPrice() {
