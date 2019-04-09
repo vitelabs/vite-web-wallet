@@ -565,10 +565,12 @@
     },
     "exchangeOpenOrders": {
         "confirm":{
-            "successToast":"Revoking Order Success",
-            "failToast":"Revoking Order Failed",
-            "submitTxt":"Confirm to Revoke",
-            "cancelTxt":"Cancel"
+            "successToast":"Revoking Transaction Successful",
+            "failToast":"Revoking Transaction Failed",
+            "submitTxt":"Confirm to revoke",
+            "cancelTxt":"Cancel",
+            "title": "撤销委托",
+            "content": "请确认是否撤销当前委托"
         },
         "title": "Open Orders",
         "hint": {

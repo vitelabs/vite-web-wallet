@@ -1,7 +1,6 @@
 <template>
     <div class="tx-pair-wrapper">
         <span v-show="pairCode && realPrice" class="real-price" :style="`top: ${top}px`">{{ realPrice }}</span>
-
         <div ref="txList" class="tx-list">
             <div :ref="`txPair${i}`" v-for="(txPair, i) in showList" :key="i"
                  class="__center-tb-row __pointer"
@@ -116,7 +115,6 @@ export default {
 
             if (top > listTop + height) {
                 this.hideRealPrice();
-
                 return;
             }
 
@@ -138,7 +136,7 @@ export default {
                 pre = '￥';
             }
 
-            return pre + txPair.price * this.rate;
+            return pre + BigNumber.multi(txPair.price || 0, this.rate || 0, 2);
         },
         orderList(list) {
             const compareStr = (aStr, bStr) => {
@@ -186,6 +184,7 @@ export default {
     position: relative;
     flex: 1;
     display: flex;
+    height: 1px;
 
     .real-price {
         position: absolute;
