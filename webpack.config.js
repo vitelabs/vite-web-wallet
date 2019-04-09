@@ -2,7 +2,6 @@ require('./buildRoutes.js');
 
 const path = require('path');
 const merge = require('webpack-merge');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 const plugins = require('./webpackConf/plugins.js');
 const devConfig = require('./webpackConf/dev.config.js');
@@ -39,20 +38,7 @@ let webpackConfig = {
                     reuseExistingChunk: true
                 }
             }
-        },
-        minimizer: [
-        // We specify a custom UglifyJsPlugin here to get source maps in production
-            new UglifyJsPlugin({
-                cache: true,
-                parallel: true,
-                uglifyOptions: {
-                    compress: false,
-                    ecma: 6,
-                    mangle: true
-                },
-                sourceMap: true
-            })
-        ]
+        }
     },
     module: {
         rules: [ {
