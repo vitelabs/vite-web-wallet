@@ -56,15 +56,18 @@ class _wallet {
     }
 
     newActiveAcc(acc) {
-        this.activeWalletAcc && this.activeWalletAcc.lock && this.activeWalletAcc.lock();
-        this.activeWalletAcc = new account(acc);
+        if (!this.activeWalletAcc) {
+            this.activeWalletAcc = new account(acc);
+            return;
+        }
+        this.activeWalletAcc.lock && this.activeWalletAcc.lock();
+        this.activeWalletAcc._init(acc);
     }
 
     create(name, pass, lang = LangList.english) {
         const err = _tools.checkParams({ name, pass }, [ 'name', 'pass' ]);
         if (err) {
             console.error(new Error(err));
-
             return;
         }
 
