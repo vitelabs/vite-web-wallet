@@ -304,7 +304,6 @@ export default {
         height: 20px;
         width: 20px;
         cursor: pointer;
-        top: 10px;
         right: 0;
         &.rotate {
             transform: rotate(360deg);
