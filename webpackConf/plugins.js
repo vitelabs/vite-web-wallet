@@ -50,7 +50,6 @@ const pushServer = {
 };
 
 const Node_Env = process.env.NODE_ENV || 'dev';
-const ENV = Node_Env === 'testout' ? 'test' : Node_Env;
 
 const plugins = [
     new HtmlWebpackPlugin({
@@ -62,14 +61,14 @@ const plugins = [
     new webpack.DefinePlugin({
         'process.env.version': `"${ packJson.version }"`,
         'process.env.NODE_ENV': `"${ Node_Env }"`,
-        'process.env.goViteServer': goViteServer[ENV],
-        'process.env.viteNet': viteNet[ENV],
-        'process.env.contractAddress': contractAddress[ENV],
-        'process.env.ethServer': ethServer[ENV],
-        'process.env.conversionHost': conversionHost[ENV],
-        'process.env.ethNet': ethNet[ENV],
-        'process.env.pushServer': pushServer[ENV],
-        'process.env.dexApiServer': dexApiServer[ENV]
+        'process.env.goViteServer': goViteServer[Node_Env],
+        'process.env.viteNet': viteNet[Node_Env],
+        'process.env.contractAddress': contractAddress[Node_Env],
+        'process.env.ethServer': ethServer[Node_Env],
+        'process.env.conversionHost': conversionHost[Node_Env],
+        'process.env.ethNet': ethNet[Node_Env],
+        'process.env.pushServer': pushServer[Node_Env],
+        'process.env.dexApiServer': dexApiServer[Node_Env]
     }),
     new webpack.NormalModuleReplacementPlugin(/\/buffer\//, function (resource) {
         resource.request = Buffer_Path;
