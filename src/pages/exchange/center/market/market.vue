@@ -21,7 +21,7 @@
         </div>
 
         <div class="__center-tb-title">
-            <div class="__center-tb-item txPair">
+            <div class="__center-tb-item tx-pair">
                 <span
                     @click="toggleShowFavorite"
                     class="favorite-icon __pointer"
@@ -32,22 +32,22 @@
                     class="describe __pointer"
                 >{{ $t('exchange.txPair') }}</span>
             </div>
-            <div class="__center-tb-item left">
-                <span class="describe">{{ $t('exchange.price') }}</span>
+            <div class="__center-tb-item">
+                <span class="describe-r">{{ $t('exchange.price') }}</span>
                 <order-arrow
                     orderItem="price"
                     :setOrderRule="setOrderRule"
                 ></order-arrow>
             </div>
             <div v-show="showCol === 'updown'" class="__center-tb-item percent">
-                <span class="describe">{{ $t('exchange.upDown') }}</span>
+                <span class="describe-r">{{ $t('exchange.upDown') }}</span>
                 <order-arrow
                     orderItem="upDown"
                     :setOrderRule="setOrderRule"
                 ></order-arrow>
             </div>
             <div v-show="showCol === 'txNum'" class="__center-tb-item">
-                <span class="describe">{{ $t('exchange.txNum') }}</span>
+                <span class="describe-r">{{ $t('exchange.txNum') }}</span>
                 <order-arrow
                     orderItem="txNum"
                     :setOrderRule="setOrderRule"
@@ -284,7 +284,7 @@ export default {
     display: flex;
     flex-direction: column;
 
-    .describe {
+    .describe-r {
         position: relative;
         bottom: 9px;
     }

@@ -93,7 +93,7 @@ export default {
 }
 
 .__center-tb-item.tx-time {
-    width: 65px;
+    width: 60px;
     flex: unset;
 }
 
