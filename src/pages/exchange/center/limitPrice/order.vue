@@ -510,13 +510,13 @@ export default {
             this.validQuantity();
 
             if (!this.price) {
-                this.priceErr = 'limitPrice.priceNotNull';
+                this.priceErr = 'exchange.limitPrice.priceNotNull';
             }
             if (!this.amount) {
-                this.amountErr = 'limitPrice.amountNotNull';
+                this.amountErr = 'exchange.limitPrice.amountNotNull';
             }
             if (!this.quantity) {
-                this.quantityErr = 'limitPrice.quantityNotNull';
+                this.quantityErr = 'exchange.limitPrice.quantityNotNull';
             }
 
             if (this.priceErr || this.amountErr || this.quantityErr) {
