@@ -9,7 +9,7 @@
                     'up': +upDownPre > 0,
                     'down': +upDownPre < 0
                 }">
-                    {{ activeTxPair && activeTxPair.price ? activeTxPair.price : '--' }}
+                    {{ activeTxPair && activeTxPair.price ? formatNum(activeTxPair.price, activeTxPair.toDecimals) : '--' }}
                 </span>
                 {{ realPrice }}
             </div>
@@ -58,7 +58,7 @@ export default {
             return this.activeTxPair && this.activeTxPair.upDownPre ? this.activeTxPair.upDownPre : '0';
         },
         upDown() {
-            return this.activeTxPair && this.activeTxPair.upDown ? this.activeTxPair.upDown : '0';
+            return this.activeTxPair && this.activeTxPair.upDown ? this.formatNum(this.activeTxPair.upDown, this.activeTxPair.toDecimals) : '0';
         },
         upDownIcon() {
             if (this.upDown && this.upDown > 0) {
