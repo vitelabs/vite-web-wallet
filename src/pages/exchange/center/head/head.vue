@@ -2,43 +2,45 @@
     <div class="txpair-head-wrapper">
         <token></token>
 
-        <div class="latest-price item-left">
-            <div class="token-title">{{ $t('exchange.head.latestPrice') }}</div>
-            <div class="token-content">
-                <span :class="{
-                    'up': +upDownPre > 0,
-                    'down': +upDownPre < 0
-                }">
-                    {{ activeTxPair && activeTxPair.price ? formatNum(activeTxPair.price, activeTxPair.toDecimals) : '--' }}
-                </span>
-                {{ realPrice }}
+        <div class="else-wrapper">
+            <div class="latest-price item-left">
+                <div class="token-title">{{ $t('exchange.head.latestPrice') }}</div>
+                <div class="token-content">
+                    <span :class="{
+                        'up': +upDownPre > 0,
+                        'down': +upDownPre < 0
+                    }">
+                        {{ activeTxPair && activeTxPair.price ? formatNum(activeTxPair.price, activeTxPair.toDecimals) : '--' }}
+                    </span>
+                    {{ realPrice }}
+                </div>
             </div>
-        </div>
-        <div class="updown item-left">
-            <div class="token-title">{{ $t('exchange.head.updown') }}</div>
-            <div class="token-content" :class="{
-                'up': +upDown > 0,
-                'down': +upDown < 0
-            }">{{ upDownIcon + upDown }}
-                {{ activeTxPair && activeTxPair.upDownPercent ?  upDownIcon + activeTxPair.upDownPercent : '--' }}
+            <div class="updown item-left">
+                <div class="token-title">{{ $t('exchange.head.updown') }}</div>
+                <div class="token-content" :class="{
+                    'up': +upDown > 0,
+                    'down': +upDown < 0
+                }">{{ upDownIcon + upDown }}
+                    {{ activeTxPair && activeTxPair.upDownPercent ?  upDownIcon + activeTxPair.upDownPercent : '--' }}
+                </div>
             </div>
-        </div>
-        <div class="high-price item-left">
-            <div class="token-title">{{ $t('exchange.head.highPrice') }}</div>
-            <div class="token-content">
-                {{ activeTxPair && activeTxPair.price24hHigh ? activeTxPair.price24hHigh : '--' }}
+            <div class="high-price item-left">
+                <div class="token-title">{{ $t('exchange.head.highPrice') }}</div>
+                <div class="token-content">
+                    {{ activeTxPair && activeTxPair.price24hHigh ? activeTxPair.price24hHigh : '--' }}
+                </div>
             </div>
-        </div>
-        <div class="low-price item-left">
-            <div class="token-title">{{ $t('exchange.head.lowPrice') }}</div>
-            <div class="token-content">
-                {{ activeTxPair && activeTxPair.price24hLow ? activeTxPair.price24hLow : '--' }}
+            <div class="low-price item-left">
+                <div class="token-title">{{ $t('exchange.head.lowPrice') }}</div>
+                <div class="token-content">
+                    {{ activeTxPair && activeTxPair.price24hLow ? activeTxPair.price24hLow : '--' }}
+                </div>
             </div>
-        </div>
-        <div class="quantity item-left">
-            <div class="token-title">{{ $t('exchange.head.quantity') }}</div>
-            <div class="token-content">
-                {{ activeTxPair && activeTxPair.quantity24h ? formatNum(activeTxPair.quantity24h, 1) + ' ' + activeTxPair.ttokenShow : '--' }}
+            <div class="quantity item-left">
+                <div class="token-title">{{ $t('exchange.head.quantity') }}</div>
+                <div class="token-content">
+                    {{ activeTxPair && activeTxPair.quantity24h ? formatNum(activeTxPair.quantity24h, 1) + ' ' + activeTxPair.ttokenShow : '--' }}
+                </div>
             </div>
         </div>
     </div>
@@ -112,6 +114,13 @@ export default {
     white-space: nowrap;
     background: rgba(247,249,251,1);
 
+    .else-wrapper {
+        display: flex;
+        flex-direction: row;
+        flex: 1;
+        overflow: auto;
+    }
+
     .token-title {
         font-family: $font-normal, arial, sans-serif;
         color: #5e6875;
@@ -122,15 +131,12 @@ export default {
         margin-top: 8px;
         font-weight: 600;
         color: rgba(36, 39, 43, 1);
-
         &.down {
             color: $down-font-color;
         }
-
         &.up {
             color: $up-font-color;
         }
-
         .price {
             color: $blue;
         }

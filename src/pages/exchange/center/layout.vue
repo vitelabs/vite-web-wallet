@@ -43,6 +43,7 @@
     .left {
         height: 100%;
         flex-basis: 260px;
+        min-width: 260px;
         margin-right: 10px;
         .t {
             flex: 1;
@@ -55,6 +56,7 @@
     }
 
     .center {
+        max-width: calc(100% - 580px);
         flex: 1;
         margin-right: 10px;
         .t {
@@ -75,6 +77,7 @@
 
     .right {
         width: 300px;
+        min-width: 300px;
     }
 }
 </style>
