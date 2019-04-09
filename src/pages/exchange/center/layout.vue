@@ -56,7 +56,7 @@
     }
 
     .center {
-        max-width: calc(100% - 580px);
+        max-width: calc(100% - 550px);
         flex: 1;
         margin-right: 10px;
         .t {
@@ -76,8 +76,8 @@
     }
 
     .right {
-        width: 300px;
-        min-width: 300px;
+        width: 270px;
+        min-width: 270px;
     }
 }
 </style>

@@ -104,7 +104,6 @@ export default {
 @import "./center/center.scss";
 
 .exchange-center-wrapper {
-    min-width: 1370px;
     display: flex;
     flex-direction: column;
     height: 100%;

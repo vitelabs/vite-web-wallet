@@ -130,7 +130,7 @@ export default {
     .page-scroll-wrapper {
         width: 100%;
         height: 100%;
-        min-width: 1370px;
+        min-width: 1200px;
         .page-wrapper {
             flex: none;
             overflow: unset;
