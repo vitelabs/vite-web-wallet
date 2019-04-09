@@ -41,12 +41,12 @@
     }
 
     .left {
-        width: 260px;
+        height: 100%;
+        flex-basis: 260px;
         margin-right: 10px;
         .t {
             flex: 1;
             margin-bottom: 10px;
-            overflow: auto;
         }
         .b {
             flex-basis: 335px;;
