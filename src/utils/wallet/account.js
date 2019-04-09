@@ -27,6 +27,33 @@ class account {
         // KeystoreAccount
         keystore, privateKey
     }) {
+        this._init({
+            address,
+            id,
+            entropy,
+            name,
+            pass,
+            type,
+            addrNum,
+            defaultInx,
+            mnemonic,
+            encryptObj,
+            lang,
+            keystore,
+            privateKey
+        });
+    }
+
+    _init({
+        // AddrAccount
+        address, id, entropy,
+        // Account
+        name, pass, type,
+        // WalletAccount
+        addrNum, defaultInx, mnemonic, encryptObj, lang,
+        // KeystoreAccount
+        keystore, privateKey
+    }) {
         this.isHoldPWD = false;
         this.type = type;
         this.pass = pass || '';
