@@ -5,7 +5,7 @@
             <FlatPickr
                 v-model="fromDate"
                 class="filter_content"
-                :config="{dateFormat:'Y-m-d H:i',enableTime:true,time_24hr:true}"
+                :config="{dateFormat:'Y/m/d H:i',enableTime:true,time_24hr:true}"
             ></FlatPickr>
         </div>
         <div class="separator">-</div>
@@ -14,7 +14,7 @@
             <FlatPickr
                 v-model="toDate"
                 class="filter_content"
-                :config="{dateFormat:'Y-m-d H:i',enableTime:true,time_24hr:true}"
+                :config="{dateFormat:'Y/m/d H:i',enableTime:true,time_24hr:true}"
             ></FlatPickr>
         </div>
         <div class="filter">

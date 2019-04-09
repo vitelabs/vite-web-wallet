@@ -630,7 +630,8 @@
                 "statusMap": {
                     "1": "In Order",
                     "2": "Completed",
-                    "3": "Canceled"
+                    "3": "Canceled",
+                    "4": "提单失败"
                 },
                 "detail": "Details"
             }
