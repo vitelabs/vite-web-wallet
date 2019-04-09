@@ -31,11 +31,11 @@
         >div {
             justify-content: flex-start;
             display: flex;
-            margin: 0 6px;
+            margin: 0 4px;
             align-items: center;
             &:last-child {
                 justify-content: flex-end;
-                margin: 0 20px 0 6px;
+                margin: 0 20px 0 4px;
             }
             .sort-btn {
                 background: url(~assets/imgs/exchange/ascend.png), url(~assets/imgs/exchange/decend.png) 0 8px;
@@ -77,12 +77,12 @@
         }
         >div {
             display: flex;
-            margin: 0 6px;
+            margin: 0 4px;
             align-items: center;
             justify-content: flex-start;
             &:last-child {
                 justify-content: flex-end;
-                margin: 0 20px 0 6px;
+                margin: 0 20px 0 4px;
             }
         }
     }

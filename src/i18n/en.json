@@ -28,7 +28,7 @@
         "ing": "Running PoW to acquire quota",
         "no": "如果您不想运行PoW，您可抵押VITE跳过此步骤==>? You can stake VITE for quota in case you would not like to run PoW"
     },
-    "addAccount": "Add a new account",
+    "addAccount": "新建账户",
     "saveQrcode": "Save QR code image",
     "unlockSuccess": "Unlock Success",
     "sendTrans": {
@@ -501,7 +501,10 @@
             "fee": "Fee",
             "text": "This page is a preview page of transaction data. Please login to trade.",
             "validAmountDigit": "成交额需大于{amount}{token}",
-            "validMaxDigit": "最多{digit}位小数"
+            "validMaxDigit": "最多{digit}位小数",
+            "priceNotNull": "金额不能为空",
+            "amountNotNull": "成交额不能为空",
+            "quantityNotNull": "数量不能为空"
         }
     },
     "exchangeAssets": {
