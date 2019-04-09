@@ -6,7 +6,6 @@
         "clean": "rm -rf ./dist",
         "build": "npm run clean && NODE_ENV=production webpack && node build.js",
         "build:test": "npm run clean && NODE_ENV=test webpack && NODE_ENV=test node build.js",
-        "build:testout": "npm run clean && NODE_ENV=testout webpack && NODE_ENV=test node build.js",
         "dev": "NODE_ENV=dev webpack-dev-server",
         "production": "NODE_ENV=production webpack-dev-server",
         "analyzer": "analyzer=true webpack-dev-server",
@@ -15,7 +14,8 @@
         "stylelint": "stylelint **/*.vue --custom-syntax postcss-html --fix"
     },
     "pre-commit": [
-        "lint", "stylelint"
+        "lint",
+        "stylelint"
     ],
     "author": "",
     "license": "ISC",
@@ -47,7 +47,6 @@
         "sass-loader": "^7.0.3",
         "style-loader": "^0.21.0",
         "stylelint": "^9.10.1",
-        "uglifyjs-webpack-plugin": "^2.0.1",
         "url-loader": "^1.1.2",
         "vue": "^2.5.16",
         "vue-i18n": "^8.0.0",
