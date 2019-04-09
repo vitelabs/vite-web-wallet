@@ -4,7 +4,7 @@
 
         <div class="__center-tb-row __pointer" @click="clickRow(item, i)"
              v-for="(item, i) in depthData" :key="i">
-            <span class="__center-tb-item depth price" :class="dataType">
+            <span class="__center-tb-item depth price __ellipsis" :class="dataType">
                 {{ formatNum(item.price, 'ttoken') }}
                 <span class="owner" v-show="isInOpenOrders(item.price)"></span>
             </span>
