@@ -6,8 +6,8 @@
             <div class="token-title">{{ $t('exchange.head.latestPrice') }}</div>
             <div class="token-content">
                 <span :class="{
-                    'up': +upDown > 0,
-                    'down': +upDown < 0
+                    'up': +upDownPre > 0,
+                    'down': +upDownPre < 0
                 }">
                     {{ activeTxPair && activeTxPair.price ? activeTxPair.price : '--' }}
                 </span>
@@ -38,13 +38,14 @@
         <div class="quantity item-left">
             <div class="token-title">{{ $t('exchange.head.quantity') }}</div>
             <div class="token-content">
-                {{ activeTxPair && activeTxPair.quantity24h ? activeTxPair.quantity24h + activeTxPair.ttokenShow : '--' }}
+                {{ activeTxPair && activeTxPair.quantity24h ? formatNum(activeTxPair.quantity24h, 1) + ' ' + activeTxPair.ttokenShow : '--' }}
             </div>
         </div>
     </div>
 </template>
 
 <script>
+import BigNumber from 'utils/bigNumber';
 import token from './token';
 
 export default {
@@ -52,6 +53,9 @@ export default {
     computed: {
         activeTxPair() {
             return this.$store.getters.exActiveTxPair;
+        },
+        upDownPre() {
+            return this.activeTxPair && this.activeTxPair.upDownPre ? this.activeTxPair.upDownPre : '0';
         },
         upDown() {
             return this.activeTxPair && this.activeTxPair.upDown ? this.activeTxPair.upDown : '0';
@@ -71,8 +75,7 @@ export default {
             if (!this.activeTxPair) {
                 return `${ pre }0`;
             }
-
-            return pre + this.activeTxPair.price * this.rate;
+            return pre + BigNumber.multi(this.activeTxPair.price || 0, this.rate || 0, 2);
         },
         rate() {
             const rateList = this.$store.state.exchangeRate.rateMap || {};
@@ -83,6 +86,11 @@ export default {
             }
 
             return rateList[tokenId][coin] || null;
+        }
+    },
+    methods: {
+        formatNum(num, fix) {
+            return BigNumber.formatNum(num, fix);
         }
     }
 };
