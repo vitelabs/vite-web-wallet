@@ -13,6 +13,8 @@
 </template>
 
 <script>
+import BigNumber from 'utils/bigNumber';
+
 export default {
     computed: {
         activeTxPair() {
@@ -30,7 +32,7 @@ export default {
                 return `${ pre }0`;
             }
 
-            return pre + this.activeTxPair.price * this.rate;
+            return pre + BigNumber.multi(this.activeTxPair.price || 0, this.rate || 0, 2);
         },
         rate() {
             const rateList = this.$store.state.exchangeRate.rateMap || {};
