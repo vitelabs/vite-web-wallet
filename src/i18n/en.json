@@ -568,7 +568,9 @@
             "successToast":"Revoking Transaction Successful",
             "failToast":"Revoking Transaction Failed",
             "submitTxt":"Confirm to revoke",
-            "cancelTxt":"Cancel"
+            "cancelTxt":"Cancel",
+            "title": "撤销委托",
+            "content": "请确认是否撤销当前委托"
         },
         "title": "Open Orders",
         "hint": {
