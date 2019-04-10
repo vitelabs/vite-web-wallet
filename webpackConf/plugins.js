@@ -14,7 +14,7 @@ const goViteServer = {
     production: '\'wss://testnet.vitewallet.com/ws\'',
     test: '\'wss://testnet.vitewallet.com/test/ws\'',
     dev: '\'wss://testnet.vitewallet.com/test/ws\'',
-    dexTestNet: '\'wss://212.64.0.60:48132\''
+    dexTestNet: '\'wss://vitex.vite.net/beta/websocket\''
 };
 const viteNet = {
     production: '\'https://testnet.vite.net/\'',
@@ -49,7 +49,7 @@ const ethNet = {
 const dexApiServer = {
     test: '"https://vitex.vite.net/test/api/"',
     dev: '"https://vitex.vite.net/test/api/"',
-    dexTestNet: '"https://vitex.vite.net/test/api/"'
+    dexTestNet: '"https://vitex.vite.net/beta/api/"'
 };
 const pushServer = {
     test: '"wss://vitex.vite.net/test/websocket"',
