@@ -7,7 +7,7 @@
                     price: activeTxPair && activeTxPair.ttokenShow ? activeTxPair.ttokenShow : ''
                 }) }}
             </span>
-            <span class="__center-tb-item left">
+            <span class="__center-tb-item left __ellipsis">
                 {{ $t('trade.amountTitle', {
                     amount: activeTxPair && activeTxPair.ftokenShow ? activeTxPair.ftokenShow : ''
                 })}}

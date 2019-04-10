@@ -63,13 +63,7 @@ export default {
             this.isAgree = !this.isAgree;
         },
         openLink() {
-            this.$confirm({
-                title: 'yinsi',
-                singleBtn: true,
-                closeBtn: { show: false },
-                leftBtn: { text: this.$t('btn.understand') },
-                content: 'yinsi'
-            });
+            window.open(`${ location.origin }/privacy`);
         }
     }
 };

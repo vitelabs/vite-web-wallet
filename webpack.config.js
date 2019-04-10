@@ -20,10 +20,7 @@ let webpackConfig = {
     mode: development.indexOf(process.env.NODE_ENV) > -1 ? 'development' : 'production',
     devtool: 'source-map',
 
-    entry: {
-        index: path.join(SRC_PATH, '/index.js')
-        // private: path.join(SRC_PATH, '/private.js')
-    },
+    entry: { index: path.join(SRC_PATH, '/index.js') },
     output: {
         path: STATIC_PATH,
         filename: '[name].[hash].js'
