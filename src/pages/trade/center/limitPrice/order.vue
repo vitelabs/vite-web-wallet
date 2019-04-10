@@ -73,7 +73,7 @@ import sendTx from 'utils/sendTx';
 import BigNumber from 'utils/bigNumber';
 import { newOrder } from 'services/trade';
 
-const taker = 0.001;
+const taker = process.env.NODE_ENV === 'dexTestNet' ? 0.0025 : 0.001;
 const maxDigit = 8;
 
 export default {
