@@ -1,7 +1,6 @@
 import { encoder, address } from 'utils/tools';
 import $ViteJS from 'utils/viteClient';
 
-// [TODO] http ??
 const DefaultDifficulty = '67108864';
 
 export async function getPowNonce(addr, prevHash, difficulty = DefaultDifficulty) {
