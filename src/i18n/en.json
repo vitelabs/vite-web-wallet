@@ -477,7 +477,7 @@
             "tokenId": "Token ID",
             "publisher": "Issuer",
             "total": "Total",
-            "tokenDigit": "decimals",
+            "tokenDigit": "Decimals",
             "publisherDate": "Issuance Date",
             "type": "Status",
             "tokenType0": "Issuance Available",
