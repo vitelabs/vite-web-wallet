@@ -1,4 +1,4 @@
-import { tokenDetail } from 'services/exchange';
+import { tokenDetail } from 'services/trade';
 
 const state = {
     ttoken: null,

@@ -1,16 +1,16 @@
 <template>
     <div class="exchange-center-wrapper">
-        <center v-if="active === 'exchange'"></center>
-        <div class="order" v-if="active === 'exchange'">
+        <center v-if="active === 'trade'"></center>
+        <div class="order" v-if="active === 'trade'">
             <div class="ex-tab-list">
                 <div @click="tap='openOrder'"
                      class="ex-tab active-side __pointer"
                      :class="{'active': tap === 'openOrder'}">
-                    {{$t('exchangeOpenOrders.title')}}</div>
+                    {{$t('tradeOpenOrders.title')}}</div>
                 <div @click="tap='historyOrder'"
                      class="ex-tab active-side __pointer"
                      :class="{'active': tap === 'historyOrder'}">
-                    {{$t('exchangeOrderHistory.title')}}</div>
+                    {{$t('tradeOrderHistory.title')}}</div>
             </div>
             <openOrder v-if="tap==='openOrder'" class="item"
                        :isEmbed="true"
@@ -69,10 +69,10 @@ export default {
             tap: 'openOrder',
             active: this.$route.name,
             tabList: [
-                'exchange',
-                'exchangeAssets',
-                'exchangeOpenOrders',
-                'exchangeOrderHistory'
+                'trade',
+                'tradeAssets',
+                'tradeOpenOrders',
+                'tradeOrderHistory'
             ],
             isLogin: !!this.$wallet.isLogin
         };

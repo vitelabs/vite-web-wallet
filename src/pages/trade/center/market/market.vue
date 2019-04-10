@@ -4,19 +4,19 @@
 
         <div class="search-wrapper">
             <vite-input class="search-input" v-model="searchText"
-                        :placeholder="$t('exchange.search')">
+                        :placeholder="$t('trade.search')">
                 <img slot="before" class="icon" src="~assets/imgs/search.svg"/>
             </vite-input>
 
             <div class="select-icon-wrapper __pointer" @click="toogleShowCol('updown')">
                 <span class="select-icon" :class="{
                     active: showCol === 'updown'
-                }"></span>{{ $t('exchange.upDown') }}
+                }"></span>{{ $t('trade.upDown') }}
             </div>
             <div class="select-icon-wrapper __pointer" @click="toogleShowCol('txNum')">
                 <span class="select-icon" :class="{
                     active: showCol === 'txNum'
-                }"></span>{{ $t('exchange.txNum') }}
+                }"></span>{{ $t('trade.txNum') }}
             </div>
         </div>
 
@@ -30,24 +30,24 @@
                 <span
                     @click="setOrderRule('transPairs')"
                     class="describe __pointer"
-                >{{ $t('exchange.txPair') }}</span>
+                >{{ $t('trade.txPair') }}</span>
             </div>
             <div class="__center-tb-item">
-                <span class="describe-r">{{ $t('exchange.price') }}</span>
+                <span class="describe-r">{{ $t('trade.price') }}</span>
                 <order-arrow
                     orderItem="price"
                     :setOrderRule="setOrderRule"
                 ></order-arrow>
             </div>
             <div v-show="showCol === 'updown'" class="__center-tb-item percent">
-                <span class="describe-r">{{ $t('exchange.upDown') }}</span>
+                <span class="describe-r">{{ $t('trade.upDown') }}</span>
                 <order-arrow
                     orderItem="upDown"
                     :setOrderRule="setOrderRule"
                 ></order-arrow>
             </div>
             <div v-show="showCol === 'txNum'" class="__center-tb-item">
-                <span class="describe-r">{{ $t('exchange.txNum') }}</span>
+                <span class="describe-r">{{ $t('trade.txNum') }}</span>
                 <order-arrow
                     orderItem="txNum"
                     :setOrderRule="setOrderRule"
@@ -93,7 +93,7 @@ export default {
     data() {
         return {
             isLoading: false,
-            currentOrderRule: 'txPair',
+            currentOrderRule: 'txNumDown',
             isOnlyFavorite: false,
             showCol: 'updown',
 
@@ -163,10 +163,10 @@ export default {
         },
         noData() {
             if (this.searchText) {
-                return this.$t('exchange.noData.search');
+                return this.$t('trade.noData.search');
             }
             if (this.isOnlyFavorite) {
-                return this.$t('exchange.noData.favorite');
+                return this.$t('trade.noData.favorite');
             }
 
             return this.$t('hint.noData');

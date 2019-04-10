@@ -1,7 +1,7 @@
 <template>
     <div id="vite-wallet-app" class="app-wrapper" :class="{
-        'dex': active.indexOf('exchange') !== -1,
-        'wallet': active.indexOf('exchange') === -1
+        'dex': active.indexOf('trade') !== -1,
+        'wallet': active.indexOf('trade') === -1
     }">
         <page-layout v-if="active.indexOf('start') !== 0" :active="active">
             <router-view />

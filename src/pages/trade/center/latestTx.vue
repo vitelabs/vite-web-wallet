@@ -1,18 +1,18 @@
 <template>
     <div class="ex-latest-tx-wrapper">
-        <div class="__center-title">{{ $t('exchange.latestTx.title') }}</div>
+        <div class="__center-title">{{ $t('trade.latestTx.title') }}</div>
         <div class="__center-tb-title">
             <span class="__center-tb-item">
-                {{ $t('exchange.priceTitle', {
+                {{ $t('trade.priceTitle', {
                     price: activeTxPair && activeTxPair.ttokenShow ? activeTxPair.ttokenShow : ''
                 }) }}
             </span>
             <span class="__center-tb-item left">
-                {{ $t('exchange.amountTitle', {
+                {{ $t('trade.amountTitle', {
                     amount: activeTxPair && activeTxPair.ftokenShow ? activeTxPair.ftokenShow : ''
                 })}}
             </span>
-            <span class="__center-tb-item tx-time">{{ $t('exchange.latestTx.time') }}</span>
+            <span class="__center-tb-item tx-time">{{ $t('trade.latestTx.time') }}</span>
         </div>
 
         <loading loadingType="dot" class="ex-center-loading" v-show="isLoading"></loading>

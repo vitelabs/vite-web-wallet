@@ -1,6 +1,6 @@
 <template>
     <div class="depth-wrapper">
-        <div @click="toogleDepth" class="btn __pointer">{{ $t('exchange.klineView') }}</div>
+        <div @click="toogleDepth" class="btn __pointer">{{ $t('trade.klineView') }}</div>
         <e-charts class="e-charts-wrapper" auto-resize :options="deptChartOption"></e-charts>
     </div>
 </template>
@@ -82,7 +82,7 @@ export default {
                 tooltip: {
                     confine: true,
                     formatter: params => {
-                        let res = `${ this.$t('exchange.priceTitle', { price: this.activeTxPair ? this.activeTxPair.ttokenShow : '' }) }: ${ params[0].name }`;
+                        let res = `${ this.$t('trade.priceTitle', { price: this.activeTxPair ? this.activeTxPair.ttokenShow : '' }) }: ${ params[0].name }`;
                         res += `<br/>${ params[0].seriesName } : ${ params[0].value }`;
 
                         return res;
@@ -106,14 +106,14 @@ export default {
                 },
                 yAxis: [{ type: 'value' }],
                 series: [ {
-                    name: this.$t('exchange.amountTable'),
+                    name: this.$t('trade.amountTable'),
                     type: 'line',
                     itemStyle: { normal: { color: '#4cc453' } },
                     lineStyle: { normal: { color: '#00D764' } },
                     areaStyle: { color: '#00D764' },
                     data: this.buyAmountList
                 }, {
-                    name: this.$t('exchange.amountTable'),
+                    name: this.$t('trade.amountTable'),
                     type: 'line',
                     itemStyle: { normal: { color: '#e94c4c' } },
                     lineStyle: { normal: { color: '#ED5158' } },
