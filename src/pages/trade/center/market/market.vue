@@ -315,6 +315,7 @@ export default {
             font-weight: 400;
             color: rgba(94, 104, 117, 1);
             margin-left: 10px;
+            line-height: 20px;
 
             .select-icon {
                 position: relative;
