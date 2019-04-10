@@ -113,12 +113,12 @@ export default {
     line-height: 16px;
     white-space: nowrap;
     background: rgba(247,249,251,1);
+    flex-wrap: wrap;
 
     .else-wrapper {
         display: flex;
         flex-direction: row;
         flex: 1;
-        overflow: auto;
     }
 
     .token-title {

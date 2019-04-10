@@ -64,7 +64,6 @@
         }
         .t-t {
             width: 100%;
-            height: 60px;
         }
         .c {
             flex: 1;
