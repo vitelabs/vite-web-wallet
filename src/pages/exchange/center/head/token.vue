@@ -225,9 +225,7 @@ export default {
         font-size: 11px;
 
         &.right {
-            &::after {
-                left: 130px;
-            }
+            left: 100px;
         }
 
         &::after {
@@ -253,6 +251,12 @@ export default {
                 display: inline-block;
             }
         }
+    }
+}
+
+@media only screen and (max-width: 1320px) {
+    .token .t-item {
+        max-width: 45%;
     }
 }
 </style>

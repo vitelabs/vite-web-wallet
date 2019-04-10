@@ -146,4 +146,13 @@ export default {
         margin-left: 20px;
     }
 }
+
+@media only screen and (max-width: 1320px) {
+    .txpair-head-wrapper {
+        flex-direction: column;
+        .else-wrapper {
+            margin-top: 10px;
+        }
+    }
+}
 </style>
