@@ -3,7 +3,7 @@
     "start": "Start",
     "login": "Log In",
     "regAcc": "Register",
-    "dexToken": "Open Trading Pair",
+    "dexToken": "Open Trading Pairs",
     "unlockAcc": "Unlock current account",
     "changeAcc": "Switch to other account",
     "existingAcc": "Existing Accounts",

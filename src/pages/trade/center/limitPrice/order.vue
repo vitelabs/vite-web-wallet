@@ -12,8 +12,8 @@
 
         <div class="input-wrapper">
             <span class="tips" :class="{'active':
-                focusInput === 'price' && priceErr
-            }">{{  $t(priceErr, { digit: ttokenDigit }) }}</span>
+                focusInput === 'price' && (priceErr || realPrice)
+            }">{{  priceErr ? $t(priceErr, { digit: ttokenDigit }) : realPrice }}</span>
             <vite-input class="order-input b" :class="{'err': priceErr}"
                         v-model="price"
                         @focus="showTips('price')" @blur="hideTips('price')">
@@ -134,15 +134,41 @@ export default {
                 return;
             }
 
-            if (this.orderType === 'buy' && this.activeTx.txSide === 1) {
-                this.quantity = this.activeTx.num;
-            } else if (this.orderType === 'sell' && this.activeTx.txSide === 0) {
-                this.quantity = this.activeTx.num;
+            if (!(this.orderType === 'buy' && this.activeTx.txSide === 1)
+                && !(this.orderType === 'sell' && this.activeTx.txSide === 0)) {
+                return;
             }
+
+            this.quantity = BigNumber.normalFormatNum(this.activeTx.num, this.ftokenDigit);
             this.quantityChanged();
         }
     },
     computed: {
+        realPrice() {
+            if (!this.rate || this.priceErr || !this.price) {
+                return '';
+            }
+
+            let pre = '$';
+            if (this.$i18n.locale === 'zh') {
+                pre = '￥';
+            }
+            if (!this.activeTxPair) {
+                return `${ pre }0`;
+            }
+
+            return pre + BigNumber.multi(this.price || 0, this.rate || 0, 2);
+        },
+        rate() {
+            const rateList = this.$store.state.exchangeRate.rateMap || {};
+            const tokenId = this.activeTxPair && this.activeTxPair.ttoken ? this.activeTxPair.ttoken : null;
+            const coin = this.$store.state.exchangeRate.coins[this.$i18n.locale || 'zh'];
+            if (!tokenId || !rateList[tokenId]) {
+                return null;
+            }
+
+            return rateList[tokenId][coin] || null;
+        },
         minAmount() {
             const markets = this.$store.state.exchangeMarket.marketMap;
             const ttoken = this.activeTxPair ? this.activeTxPair.ttoken : '';

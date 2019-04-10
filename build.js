@@ -9,7 +9,7 @@ if (process.env.NODE_ENV === 'test') {
 } else if (process.env.NODE_ENV === 'dexTestNet') {
     redirect = path.join(__dirname, 'netlifyConf/_redirects_dex_testnet');
 } else {
-    path.join(__dirname, 'netlifyConf/_redirects');
+    redirect = path.join(__dirname, 'netlifyConf/_redirects');
 }
 
 const staticPath = path.join(__dirname, 'dist');
@@ -24,6 +24,7 @@ if (!result) {
 }
 
 fs.writeFileSync(path.join(staticPath, '_redirects'), fs.readFileSync(redirect));
+fs.writeFileSync(path.join(staticPath, 'privacy.html'), fs.readFileSync(path.join(__dirname, './privacy.html')));
 copyFolder(chartPath, chartStaticPath);
 
 

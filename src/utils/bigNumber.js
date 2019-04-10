@@ -98,5 +98,11 @@ export default {
         decimal = decimal >= fix ? fix : decimal;
         const n = new BigNumber(num);
         return n.toFormat(decimal);
+    },
+    normalFormatNum(num, decimal = 8, fix = 8) {
+        BigNumber.config({ FORMAT: normalFormat });
+        decimal = decimal >= fix ? fix : decimal;
+        const n = new BigNumber(num);
+        return n.toFormat(decimal);
     }
 };
