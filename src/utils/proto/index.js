@@ -16,28 +16,32 @@ class WsProtoClient {
         }, HEARTBEAT);
         this._heartBeat.start();
 
-        const connect = new WebSocket(wsUrl);
-        this.connect = connect;
-        connect.binaryType = 'arraybuffer';
+        try {
+            const connect = new WebSocket(wsUrl);
+            this.connect = connect;
+            connect.binaryType = 'arraybuffer';
 
-        this._subKey && this.subscribe({ event_key: this._subKey });
-        connect.onopen = () => {
-            this.send('');
-        };
+            this._subKey && this.subscribe({ event_key: this._subKey });
+            connect.onopen = () => {
+                this.send('');
+            };
 
-        connect.onmessage = e => {
-            const message = proto.decode(new Uint8Array(e.data));
-            // See ConversionOptions
-            const data = proto.toObject(message, { /* Longs: String, enums: String, bytes: String*/ });
+            connect.onmessage = e => {
+                const message = proto.decode(new Uint8Array(e.data));
+                // See ConversionOptions
+                const data = proto.toObject(message, { /* Longs: String, enums: String, bytes: String*/ });
 
-            if (data.op_type !== this.MESSAGETYPE.PUSH) return;
+                if (data.op_type !== this.MESSAGETYPE.PUSH) return;
 
-            const realData = data.error_code ? null : JSON.parse(data.message);
-            const error = data.error_code || undefined;
-            this._subKeys[data.event_key] && this._subKeys[data.event_key].forEach(c => {
-                c(realData, error);
-            });
-        };
+                const realData = data.error_code ? null : JSON.parse(data.message);
+                const error = data.error_code || undefined;
+                this._subKeys[data.event_key] && this._subKeys[data.event_key].forEach(c => {
+                    c(realData, error);
+                });
+            };
+        } catch (err) {
+            console.warn(err);
+        }
     }
 
     get ready() {
@@ -45,7 +49,7 @@ class WsProtoClient {
     }
 
     get closed() {
-        return this.connect && this.connect.readyState === 3;
+        return !this.connect || (this.connect && this.connect.readyState === 3);
     }
 
     sub(event, callback) {
