@@ -147,12 +147,15 @@ export default {
     }
 }
 
-@media only screen and (max-width: 1320px) {
+@media only screen and (max-width: 1350px) {
     .txpair-head-wrapper {
         flex-direction: column;
         .else-wrapper {
             margin-top: 10px;
         }
+    }
+    .item-left:first-child {
+        margin-left: 0px;
     }
 }
 </style>

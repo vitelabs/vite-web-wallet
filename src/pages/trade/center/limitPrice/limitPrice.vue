@@ -2,7 +2,7 @@
     <div class="limit-price-wrapper">
         <div class="__center-title">
             {{ $t('trade.limitPrice.title') }}
-            <span class="fee">{{ $t('trade.limitPrice.fee') }} Taker（0.25 ‰）/ Maker（0.0XX ‰）</span>
+            <span class="fee">{{ $t('trade.limitPrice.fee') }} Taker（0.25 ‰）/ Maker（0.25 ‰）</span>
         </div>
 
         <logout-view v-if="!isLogin"></logout-view>
