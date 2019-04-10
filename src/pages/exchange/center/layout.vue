@@ -42,8 +42,8 @@
 
     .left {
         height: 100%;
-        flex-basis: 260px;
-        min-width: 260px;
+        flex-basis: 270px;
+        min-width: 270px;
         margin-right: 10px;
         .t {
             flex: 1;
