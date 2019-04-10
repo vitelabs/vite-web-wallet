@@ -23,51 +23,51 @@
         </div>
         <div v-show="showTokenType" class="detail" :class="{'right': showTokenType === 'ttoken'}">
             <div @click="goNetToken(tokenDetail.tokenId)" class="token-row __pointer">
-                <span class="token-title">{{ $t('exchange.head.tokenName') }} :</span>
+                <span class="token-title">{{ $t('trade.head.tokenName') }} :</span>
                 <span class="active">{{ tokenDetail.tokenName || '--' }}</span>
             </div>
             <div class="token-row __pointer">
-                <span class="token-title">{{ $t('exchange.head.originalSymbol') }} :</span>
+                <span class="token-title">{{ $t('trade.head.originalSymbol') }} :</span>
                 <span>{{ tokenDetail.originalSymbol || '--' }}</span>
             </div>
             <div class="token-row">
-                <span class="token-title">{{ $t('exchange.head.tokenId') }} :</span>
+                <span class="token-title">{{ $t('trade.head.tokenId') }} :</span>
                 {{ tokenDetail.tokenId || '--' }}
             </div>
             <div @click="goNetAddr(tokenDetail.publisher)" class="token-row __pointer">
-                <span class="token-title">{{ $t('exchange.head.publisher') }} :</span>
+                <span class="token-title">{{ $t('trade.head.publisher') }} :</span>
                 <span class="active">{{ tokenDetail.publisher || '--' }}</span>
             </div>
             <div class="token-row __pointer">
-                <span class="token-title">{{ $t('exchange.head.gateway') }} :</span>
+                <span class="token-title">{{ $t('trade.head.gateway') }} :</span>
                 <span>{{ tokenDetail.gateway || '--' }}</span>
             </div>
             <div class="token-row">
-                <span class="token-title">{{ $t('exchange.head.tokenDigit') }} :</span>
+                <span class="token-title">{{ $t('trade.head.tokenDigit') }} :</span>
                 {{ tokenDetail.tokenDigit || '--' }}
             </div>
             <div class="token-row">
-                <span class="token-title">{{ $t('exchange.head.publisherDate') }} :</span>
+                <span class="token-title">{{ $t('trade.head.publisherDate') }} :</span>
                 {{ tokenDetail.publisherDate || '--' }}
             </div>
             <div class="token-row">
-                <span class="token-title">{{ $t('exchange.head.total') }} :</span>
+                <span class="token-title">{{ $t('trade.head.total') }} :</span>
                 {{ tokenDetail.total || '--' }}
             </div>
             <div class="token-row">
-                <span class="token-title">{{ $t('exchange.head.website') }} :</span>
+                <span class="token-title">{{ $t('trade.head.website') }} :</span>
                 {{ tokenDetail.website || '--' }}
             </div>
             <div class="token-row">
-                <span class="token-title">{{ $t('exchange.head.explorer') }} :</span>
+                <span class="token-title">{{ $t('trade.head.explorer') }} :</span>
                 {{ tokenDetail.links && tokenDetail.links.explorer ? tokenDetail.links.explorer : '--' }}
             </div>
             <div class="token-row">
-                <span class="token-title">{{ $t('exchange.head.type') }} :</span>
+                <span class="token-title">{{ $t('trade.head.type') }} :</span>
                 {{ tokenDetail.tokenType || '--' }}
             </div>
             <div class="token-row">
-                <span class="token-title">{{ $t('exchange.head.overview') }} :</span>
+                <span class="token-title">{{ $t('trade.head.overview') }} :</span>
                 {{ tokenDetail.overview && tokenDetail.overview[$i18n.locale] ? tokenDetail.overview[$i18n.locale] : '--' }}
             </div>
         </div>
@@ -135,8 +135,8 @@ export default {
 
             detail = Object.assign({}, detail);
             detail.publisher = ellipsisAddr(detail.publisher);
-            detail.tokenType = detail.tokenType === 0 ? this.$t('exchange.head.tokenType0')
-                : detail.tokenType === 1 ? this.$t('exchange.head.tokenType1') : '';
+            detail.tokenType = detail.tokenType === 0 ? this.$t('trade.head.tokenType0')
+                : detail.tokenType === 1 ? this.$t('trade.head.tokenType1') : '';
             detail.publisherDate = detail.publisherDate ? date(detail.publisherDate, 'zh') : '';
 
             return detail;

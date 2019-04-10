@@ -115,11 +115,11 @@
         "text3": "Please take proper precautions in ensuring that you accurately record and safely store your seed phrase. Even the slightest error will result in you not being able to successfully restore your address."
     },
     "preview": {
-        "t": "Preview Version",
-        "txt1": "The preview version of wallet is a lightweight-node wallet officially issued by VITE.",
-        "txt2": "The current version supports functions of checking account balance, sending transactions, receiving transactions in default, acquiring test tokens, staking VITE tokens for TPS quota, SBP registration, vote and etc.",
-        "txt3": "Support acquiring test tokens and experiencing the product by using them, the test tokens issued by VITE official can be only used for testing and with no actual value, it will be cleared by VITE official sporadically",
-        "v": "Current version: {version}"
+        "t": "ViteX测试版",
+        "txt1": "当前为ViteX测试版本。",
+        "txt2": "当前测试环境的代币仅能用于测试，无任何实际价值。",
+        "txt3": "同时官方会不定期对测试代币进行清零。",
+        "v": "当前版本：{version}"
     },
     "pwdConfirm": {
         "conf": "Open password-free mode within {time}",
@@ -422,7 +422,7 @@
             "success": "Conversion Successful. It may take approx 20 minutes to get VITE into your account after the Ethereum transaction is confirmed."
         }
     },
-    "exchange": {
+    "trade": {
         "title": "Exchange",
         "search": "Search",
         "txPair": "Pair",
@@ -508,7 +508,7 @@
             "bigger0": "数额必须大于0"
         }
     },
-    "exchangeAssets": {
+    "tradeAssets": {
         "title": "Funds",
         "search": "Please input token name",
         "operate": "Action",
@@ -564,7 +564,7 @@
         },
         "zero": "隐藏小额代币"
     },
-    "exchangeOpenOrders": {
+    "tradeOpenOrders": {
         "cancelErr": "您操作太快了, 请稍候重试",
         "confirm":{
             "successToast":"Revoking Transaction Successful",
@@ -601,7 +601,7 @@
             }
         }
     },
-    "exchangeOrderHistory": {
+    "tradeOrderHistory": {
         "title": "Order History",
         "hint": {
             "fdate": "请选择起始日期",

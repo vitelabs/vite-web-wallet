@@ -37,4 +37,4 @@
 
 #### Examples
 
-`src/pages/exchange/openOrders/index.vue` => `/exchangeOpenOrders`
+`src/pages/trade/openOrders/index.vue` => `/tradeOpenOrders`
