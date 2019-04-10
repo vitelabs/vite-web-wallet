@@ -150,10 +150,12 @@ export default class dataFeeds {
                 || args.ftoken !== this.activeTxPair.ftoken
                 || args.resolution !== this.lastResolution) {
                 this.unsubscribeBars(subscriberUID);
+                console.log('subscribeBars: 不对', args, this.activeTxPair, this.lastResolution);
                 return;
             }
 
             if (!data) {
+                console.log('subscribeBars: !data');
                 return;
             }
 
@@ -162,13 +164,15 @@ export default class dataFeeds {
                 : null;
 
             // 不能覆盖历史数据
-            if (lastTime && lastTime > data.t) {
-                console.log('subscribeBars: 不能覆盖历史数据');
-                return;
-            }
+            // if (lastTime && lastTime > data.t) {
+            //     console.log('subscribeBars: 不能覆盖历史数据');
+            //     return;
+            // }
 
             // 传递的是当前数据，不需要补齐
             const startTime = lastTime ? lastTime + _timeList[args.resolution] : data.t;
+            console.log('subscribeBars 比较starttime', startTime, data.t, this.lastBar);
+
             if (startTime === data.t) {
                 this.lastBar = {
                     time: data.t * 1000,
@@ -178,9 +182,8 @@ export default class dataFeeds {
                     low: data.l,
                     volume: data.v
                 };
-                onRealtimeCallback(this.lastBar);
-
                 console.log('subscribeBars 传递的是当前数据，不需要补齐', startTime, data.t, this.lastBar);
+                onRealtimeCallback(this.lastBar);
                 return;
             }
 
@@ -201,9 +204,10 @@ export default class dataFeeds {
                 volume: data.v
             } ], args.resolution);
 
+            console.log('subscribeBars 补齐数据', list);
+
             this.lastBar = list[list.length - 1];
             for (let i = 0 ; i < list.length; i++) {
-                console.log('subscribeBars 补齐数据', list[i]);
                 onRealtimeCallback(list[i]);
             }
         }, 2000);
