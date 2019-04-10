@@ -1,8 +1,8 @@
 {
     "5": {
-        "version": "1.5.0",
-        "zh": "交易所二期",
-        "en": "DEX 2",
+        "version": "1.5.0-beta",
+        "zh": "欢迎参加ViteX公测，当前ViteX为测试版本，仅能用于测试",
+        "en": "Welcome to participate in ViteX Beta Test, the current version of ViteX is beta version, only available for testing",
         "time": "1552897193504"
     },
     "4": {

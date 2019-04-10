@@ -64,8 +64,8 @@ export default {
     },
     computed: {
         secondMenuList() {
-            if (this.active.indexOf('exchange') === 0) {
-                return [ 'exchange', 'exchangeAssets', 'exchangeOpenOrders', 'exchangeOrderHistory' ];
+            if (this.active.indexOf('trade') === 0) {
+                return [ 'trade', 'tradeAssets', 'tradeOpenOrders', 'tradeOrderHistory' ];
             }
             if (this.active.indexOf('wallet') !== 0) {
                 return [];
@@ -80,14 +80,14 @@ export default {
     },
     methods: {
         setMenuList() {
-            const menuList = [ 'wallet', 'exchange', 'setting' ];
+            const menuList = [ 'wallet', 'trade', 'setting' ];
             menuList.push(this.isLogin ? 'logout' : 'login');
             this.menuList = menuList;
         },
         go(name) {
             if (name === 'logout') {
                 this.$wallet.logout();
-                this.$router.push({ name: 'exchange' });
+                this.$router.push({ name: 'trade' });
                 return;
             }
 

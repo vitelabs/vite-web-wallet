@@ -1,6 +1,6 @@
 # vite-web-wallet (SPA)
 
-## PreRequires
+## Prerequisite
 
 * yarn
 
@@ -8,11 +8,11 @@
 
 `yarn run build`
 
-## Starting
+## Start
 
 1. `yarn install`
 2. `yarn run dev`
-3. 浏览器中访问: `http://localhost:8081`
+3. Visit in explorer: `http://localhost:8081`
 
 ### Branch naming rules
 
@@ -27,14 +27,14 @@
 
 `'dev/2.0.0/utf8' from 'dev/1.0.0' || 'master'`
 
-### 路由规则
+### Router Rules
 
-以`src/pages`下的文件路径为规则自动生成路由以及子路由，层级与文件夹路径保持一致
+Files under `src/pages` path will follow the rules and auto generate routes and sub-routes, the level of routes is consistence with the folder path.
 
-在`src/router/config.js`中定义路由别名
+Define router alias in `src/router/config.js`
 
-> Notice: 只有文件夹内有index.vue才会生成路由
+> Notice: The routes will generate only if `index.vue` exists in main folder.
 
 #### Examples
 
-`src/pages/exchange/openOrders/index.vue` => `/exchangeOpenOrders`
+`src/pages/trade/openOrders/index.vue` => `/tradeOpenOrders`
