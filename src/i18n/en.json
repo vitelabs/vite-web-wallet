@@ -21,14 +21,14 @@
     "withdrawHeight": "Expected Snapshot Height",
     "balance": "Balance",
     "dealReminder": {
-        "title": "成交提醒",
+        "title": "Deal Notice",
         "describe": "Your order {amount} {ttoken} ({ftoken}/{ttoken}) at {time} is a complete deal, visit Order History to find out more."
     },
     "pow": {
         "ing": "Running PoW to acquire quota",
-        "no": "如果您不想运行PoW，您可抵押VITE跳过此步骤==>? You can stake VITE for quota in case you would not like to run PoW"
+        "no": "You can stake VITE for quota in case you would not like to run PoW"
     },
-    "addAccount": "新建账户",
+    "addAccount": "Create an Account",
     "saveQrcode": "Save QR code image",
     "unlockSuccess": "Unlock Success",
     "sendTrans": {
@@ -115,11 +115,11 @@
         "text3": "Please take proper precautions in ensuring that you accurately record and safely store your seed phrase. Even the slightest error will result in you not being able to successfully restore your address."
     },
     "preview": {
-        "t": "Preview Version",
-        "txt1": "The preview version of wallet is a lightweight-node wallet officially issued by VITE.",
-        "txt2": "The current version supports functions of checking account balance, sending transactions, receiving transactions in default, acquiring test tokens, staking VITE tokens for TPS quota, SBP registration, vote and etc.",
-        "txt3": "Support acquiring test tokens and experiencing the product by using them, the test tokens issued by VITE official can be only used for testing and with no actual value, it will be cleared by VITE official sporadically",
-        "v": "Current version: {version}"
+        "t": "ViteX Beta Version",
+        "txt1": "This is ViteX Beta Version.",
+        "txt2": "All of the test tokens from test environment are with no actual value and can only be used for testing.",
+        "txt3": "Meanwhile, test tokens will be reset every now and then.",
+        "v": "Current Version: {version}"
     },
     "pwdConfirm": {
         "conf": "Open password-free mode within {time}",
@@ -172,8 +172,8 @@
         "again": "Please input password again",
         "choose": "Choose account",
         "finish": "Done",
-        "agreementPre": "同意Vite钱包和ViteX",
-        "agreement": "隐私政策与服务协议",
+        "agreementPre": "I agree to Vite Wallet and ViteX's",
+        "agreement": "Privacy Policy and Terms of Service",
         "hint": {
             "nameInput": "Please input account name",
             "nameLong": "Account name cannot exceed 32 characters!",
@@ -422,7 +422,7 @@
             "success": "Conversion Successful. It may take approx 20 minutes to get VITE into your account after the Ethereum transaction is confirmed."
         }
     },
-    "exchange": {
+    "trade": {
         "title": "Exchange",
         "search": "Search",
         "txPair": "Pair",
@@ -500,15 +500,15 @@
             "title": "Limit",
             "fee": "Fees",
             "text": "This page is a preview page of transaction data. Please login to trade.",
-            "validAmountDigit": "成交额需大于{amount}{token}",
-            "validMaxDigit": "最多{digit}位小数",
-            "priceNotNull": "金额不能为空",
-            "amountNotNull": "成交额不能为空",
-            "quantityNotNull": "数量不能为空",
-            "bigger0": "数额必须大于0"
+            "validAmountDigit": "Volume must be greater than {amount}{token}",
+            "validMaxDigit": "At most {digit} decimals",
+            "priceNotNull": "Amount cannot be empty",
+            "amountNotNull": "Volume cannot be empty",
+            "quantityNotNull": "Quantity cannot be empty",
+            "bigger0": "Value must be greater than 0"
         }
     },
-    "exchangeAssets": {
+    "tradeAssets": {
         "title": "Funds",
         "search": "Please input token name",
         "operate": "Action",
@@ -562,17 +562,17 @@
             "placeholder": "Please input withdrawal amount",
             "btn": "Withdraw"
         },
-        "zero": "隐藏小额代币"
+        "zero": "Hide small tokens"
     },
-    "exchangeOpenOrders": {
-        "cancelErr": "您操作太快了, 请稍候重试",
+    "tradeOpenOrders": {
+        "cancelErr": "You are trying too ofter, please try again later.",
         "confirm":{
             "successToast":"Revoking Transaction Successful",
             "failToast":"Revoking Transaction Failed",
             "submitTxt":"Confirm to revoke",
             "cancelTxt":"Cancel",
-            "title": "撤销委托",
-            "content": "请确认是否撤销当前委托"
+            "title": "Revoke Order",
+            "content": "Please make sure whether to revoke current order"
         },
         "title": "Open Orders",
         "hint": {
@@ -601,12 +601,12 @@
             }
         }
     },
-    "exchangeOrderHistory": {
+    "tradeOrderHistory": {
         "title": "Order History",
         "hint": {
-            "fdate": "请选择起始日期",
-            "tdate": "请选择终止日期",
-            "dateErr": "终止日期必须晚于起始日期"
+            "fdate": "Please choose start date",
+            "tdate": "Please choose end date",
+            "dateErr": "End date must be after start date"
         },
         "side": {
             "1": "Sell",
@@ -640,7 +640,7 @@
                     "1": "In Order",
                     "2": "Completed",
                     "3": "Canceled",
-                    "4": "提单失败"
+                    "4": "Failed"
                 },
                 "detail": "Details"
             }
