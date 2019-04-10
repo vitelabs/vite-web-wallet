@@ -18,12 +18,7 @@ import limitPrice from './limitPrice/limitPrice.vue';
 import centerHead from './head/head.vue';
 import centerView from './view/view.vue';
 
-export default {
-    components: { layout, depth, market, latestTx, limitPrice, centerHead, centerView },
-    mounted() {
-        this.$store.dispatch('exFetchActiveTxPair');
-    }
-};
+export default { components: { layout, depth, market, latestTx, limitPrice, centerHead, centerView } };
 </script>
 
 <style lang="scss">
