@@ -1,7 +1,7 @@
 <template>
     <div class="ex_tb">
         <div class="head-row">
-            <div v-for="h in $t('exchangeOrderHistory.table.heads')" :key="h">
+            <div v-for="h in $t('tradeOrderHistory.table.heads')" :key="h">
                 {{ h }}
             </div>
             <div></div>
@@ -13,16 +13,16 @@
                 <div :class="{
                     'buy': v.side===0,
                     'sell': v.side===1
-                }">{{ $t("exchangeOrderHistory.side")[v.side] }}</div>
+                }">{{ $t("tradeOrderHistory.side")[v.side] }}</div>
                 <div>{{ v.price }} {{ v.ttokenShow }}</div>
                 <div>{{ v.quantity }} {{ v.ftokenShow }}</div>
                 <div>{{ v.filledQ }} {{v.ftokenShow }}</div>
                 <div>{{ `${(v.rate*100).toFixed(2)}%` }}</div>
                 <div>{{ v.average }} {{ v.ttokenShow }}</div>
                 <div>{{ v.fee }} {{ v.ttokenShow }}</div>
-                <div>{{ $t('exchangeOrderHistory.table.rowMap.statusMap')[v.status] }}</div>
+                <div>{{ $t('tradeOrderHistory.table.rowMap.statusMap')[v.status] }}</div>
                 <div @click="showDetail(v)" class="click-able">
-                    {{ $t("exchangeOrderHistory.table.rowMap.detail") }}
+                    {{ $t("tradeOrderHistory.table.rowMap.detail") }}
                 </div>
             </div>
             <div class="no-data" v-show="!sortedList || !sortedList.length">
@@ -31,15 +31,15 @@
         </div>
         <slot></slot>
         <confirm v-show="detailConfirm" :list="detailList" :close="close"
-                 :title="$t('exchangeOrderHistory.confirmTable.title')"
-                 :heads="$t('exchangeOrderHistory.confirmTable.heads')">
+                 :title="$t('tradeOrderHistory.confirmTable.title')"
+                 :heads="$t('tradeOrderHistory.confirmTable.heads')">
         </confirm>
     </div>
 </template>
 
 <script>
 import d from 'dayjs';
-import { orderDetail } from 'services/exchange';
+import { orderDetail } from 'services/trade';
 import confirm from '../components/alert';
 
 export default {

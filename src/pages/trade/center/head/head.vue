@@ -4,7 +4,7 @@
 
         <div class="else-wrapper">
             <div class="latest-price item-left">
-                <div class="token-title">{{ $t('exchange.head.latestPrice') }}</div>
+                <div class="token-title">{{ $t('trade.head.latestPrice') }}</div>
                 <div class="token-content">
                     <span :class="{
                         'up': +upDownPre > 0,
@@ -16,7 +16,7 @@
                 </div>
             </div>
             <div class="updown item-left">
-                <div class="token-title">{{ $t('exchange.head.updown') }}</div>
+                <div class="token-title">{{ $t('trade.head.updown') }}</div>
                 <div class="token-content" :class="{
                     'up': +upDown > 0,
                     'down': +upDown < 0
@@ -25,19 +25,19 @@
                 </div>
             </div>
             <div class="high-price item-left">
-                <div class="token-title">{{ $t('exchange.head.highPrice') }}</div>
+                <div class="token-title">{{ $t('trade.head.highPrice') }}</div>
                 <div class="token-content">
                     {{ activeTxPair && activeTxPair.price24hHigh ? activeTxPair.price24hHigh : '--' }}
                 </div>
             </div>
             <div class="low-price item-left">
-                <div class="token-title">{{ $t('exchange.head.lowPrice') }}</div>
+                <div class="token-title">{{ $t('trade.head.lowPrice') }}</div>
                 <div class="token-content">
                     {{ activeTxPair && activeTxPair.price24hLow ? activeTxPair.price24hLow : '--' }}
                 </div>
             </div>
             <div class="quantity item-left">
-                <div class="token-title">{{ $t('exchange.head.quantity') }}</div>
+                <div class="token-title">{{ $t('trade.head.quantity') }}</div>
                 <div class="token-content">
                     {{ activeTxPair && activeTxPair.quantity24h ? formatNum(activeTxPair.quantity24h, 1) + ' ' + activeTxPair.ttokenShow : '--' }}
                 </div>

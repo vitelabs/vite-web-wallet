@@ -1,7 +1,7 @@
 <template>
     <div class="filter-root">
         <div class="filter">
-            <div class="filter_label"> {{ $t("exchangeOrderHistory.filter.start") }} </div>
+            <div class="filter_label"> {{ $t("tradeOrderHistory.filter.start") }} </div>
             <FlatPickr
                 v-model="fromDate"
                 class="filter_content"
@@ -10,7 +10,7 @@
         </div>
         <div class="separator">-</div>
         <div class="filter end">
-            <div class="filter_label">{{ $t("exchangeOrderHistory.filter.end") }}</div>
+            <div class="filter_label">{{ $t("tradeOrderHistory.filter.end") }}</div>
             <FlatPickr
                 v-model="toDate"
                 class="filter_content"
@@ -18,7 +18,7 @@
             ></FlatPickr>
         </div>
         <div class="filter">
-            <div class="filter_label">{{ $t("exchangeOrderHistory.filter.type") }}</div>
+            <div class="filter_label">{{ $t("tradeOrderHistory.filter.type") }}</div>
             <select class="filter_content" v-model="ftoken">
                 <option :value="token.token" v-for="token in ftokenMap" :key="token.token">{{token.name}}</option>
             </select>
@@ -30,24 +30,24 @@
             </select>
         </div>
         <div class="filter end">
-            <div class="filter_label">{{ $t("exchangeOrderHistory.filter.side") }}</div>
+            <div class="filter_label">{{ $t("tradeOrderHistory.filter.side") }}</div>
             <select v-model="tradeType" class="filter_content">
-                <option value="0">{{ $t("exchangeOrderHistory.filter.buy") }}</option>
-                <option value="1">{{ $t("exchangeOrderHistory.filter.sell") }}</option>
+                <option value="0">{{ $t("tradeOrderHistory.filter.buy") }}</option>
+                <option value="1">{{ $t("tradeOrderHistory.filter.sell") }}</option>
             </select>
         </div>
         <div @click="submit" class="search active">
-            {{ $t("exchangeOrderHistory.filter.search") }}
+            {{ $t("tradeOrderHistory.filter.search") }}
         </div>
         <div @click="reset" class="search">
-            {{ $t("exchangeOrderHistory.filter.reset") }}
+            {{ $t("tradeOrderHistory.filter.reset") }}
         </div>
     </div>
 </template>
 
 <script>
 import FlatPickr from 'vue-flatpickr-component';
-import { tokenMap } from 'services/exchange';
+import { tokenMap } from 'services/trade';
 import 'flatpickr/dist/flatpickr.css';
 
 export default {
@@ -90,7 +90,7 @@ export default {
             const tdate = this.toDate ? new Date(this.toDate).getTime() / 1000 : '';
 
             if (fdate && tdate && fdate >= tdate) {
-                this.$toast(this.$t('exchangeOrderHistory.hint.dateErr'));
+                this.$toast(this.$t('tradeOrderHistory.hint.dateErr'));
                 return;
             }
 

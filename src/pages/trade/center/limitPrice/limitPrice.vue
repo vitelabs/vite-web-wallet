@@ -1,8 +1,8 @@
 <template>
     <div class="limit-price-wrapper">
         <div class="__center-title">
-            {{ $t('exchange.limitPrice.title') }}
-            <span class="fee">{{ $t('exchange.limitPrice.fee') }} Taker（0.25 ‰）/ Maker（0.0XX ‰）</span>
+            {{ $t('trade.limitPrice.title') }}
+            <span class="fee">{{ $t('trade.limitPrice.fee') }} Taker（0.25 ‰）/ Maker（0.0XX ‰）</span>
         </div>
 
         <logout-view v-if="!isLogin"></logout-view>

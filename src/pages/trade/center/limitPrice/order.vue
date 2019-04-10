@@ -1,7 +1,7 @@
 <template>
     <div class="order-wrapper">
         <div class="order-title">
-            {{ $t(`exchange.${orderType}.title`, { token: ftokenShow }) }}
+            {{ $t(`trade.${orderType}.title`, { token: ftokenShow }) }}
             <div class="wallet">
                 {{ balance || '0' }}
                 <span class="ex-order-token">
@@ -18,7 +18,7 @@
                         v-model="price"
                         @focus="showTips('price')" @blur="hideTips('price')">
                 <span class="ex-order-token" slot="before">
-                    {{ $t(`exchange.${orderType}.price`, { token: ttokenShow }) }}
+                    {{ $t(`trade.${orderType}.price`, { token: ttokenShow }) }}
                 </span>
             </vite-input>
         </div>
@@ -31,7 +31,7 @@
                         v-model="quantity" @input="quantityChanged"
                         @focus="showTips('quantity')" @blur="hideTips('quantity')">
                 <span class="ex-order-token" slot="before">
-                    {{ $t(`exchange.${orderType}.quantity`, { token: ftokenShow }) }}
+                    {{ $t(`trade.${orderType}.quantity`, { token: ftokenShow }) }}
                 </span>
             </vite-input>
         </div>
@@ -53,7 +53,7 @@
                         v-model="amount" @input="amountChanged"
                         @focus="showTips('amount')" @blur="hideTips('amount')">
                 <span class="ex-order-token" slot="before">
-                    {{ $t('exchange.quantityTitle', { quantity: ttokenShow }) }}
+                    {{ $t('trade.quantityTitle', { quantity: ttokenShow }) }}
                 </span>
             </vite-input>
         </div>
@@ -62,7 +62,7 @@
             'red': orderType === 'sell',
             'green': orderType === 'buy',
             'gray': isLoading || amountErr || priceErr || quantityErr
-        }" @click="_clickBtn">{{ $t(`exchange.${orderType}.title`, { token: ftokenShow }) }}</div>
+        }" @click="_clickBtn">{{ $t(`trade.${orderType}.title`, { token: ftokenShow }) }}</div>
     </div>
 </template>
 
@@ -71,7 +71,7 @@ import viteInput from 'components/viteInput';
 import slider from 'components/slider';
 import sendTx from 'utils/sendTx';
 import BigNumber from 'utils/bigNumber';
-import { newOrder } from 'services/exchange';
+import { newOrder } from 'services/trade';
 
 const taker = 0.001;
 const maxDigit = 8;
@@ -414,7 +414,7 @@ export default {
             }
 
             if (result === 2) {
-                this.priceErr = 'exchange.limitPrice.validMaxDigit';
+                this.priceErr = 'trade.limitPrice.validMaxDigit';
                 return;
             }
 
@@ -424,7 +424,7 @@ export default {
             }
 
             if (+this.price === 0) {
-                this.priceErr = 'exchange.limitPrice.bigger0';
+                this.priceErr = 'trade.limitPrice.bigger0';
                 return;
             }
 
@@ -444,7 +444,7 @@ export default {
             }
 
             if (result === 2) {
-                this.amountErr = 'exchange.limitPrice.validMaxDigit';
+                this.amountErr = 'trade.limitPrice.validMaxDigit';
                 return;
             }
 
@@ -459,7 +459,7 @@ export default {
             }
 
             if (BigNumber.compared(this.minAmount || 0, this.amount) > 0) {
-                this.amountErr = 'exchange.limitPrice.validAmountDigit';
+                this.amountErr = 'trade.limitPrice.validAmountDigit';
                 return;
             }
 
@@ -479,7 +479,7 @@ export default {
             }
 
             if (result === 2) {
-                this.quantityErr = 'exchange.limitPrice.validMaxDigit';
+                this.quantityErr = 'trade.limitPrice.validMaxDigit';
                 return;
             }
 
@@ -494,7 +494,7 @@ export default {
             }
 
             if (+this.quantity === 0) {
-                this.quantityErr = 'exchange.limitPrice.bigger0';
+                this.quantityErr = 'trade.limitPrice.bigger0';
                 return;
             }
 
@@ -520,13 +520,13 @@ export default {
             this.validQuantity();
 
             if (!+this.price) {
-                this.priceErr = 'exchange.limitPrice.priceNotNull';
+                this.priceErr = 'trade.limitPrice.priceNotNull';
             }
             if (!+this.amount) {
-                this.amountErr = 'exchange.limitPrice.amountNotNull';
+                this.amountErr = 'trade.limitPrice.amountNotNull';
             }
             if (!+this.quantity) {
-                this.quantityErr = 'exchange.limitPrice.quantityNotNull';
+                this.quantityErr = 'trade.limitPrice.quantityNotNull';
             }
 
             if (this.priceErr || this.amountErr || this.quantityErr) {
@@ -560,11 +560,11 @@ export default {
             }).then(() => {
                 this.isLoading = false;
                 this.clearAll();
-                this.$toast(this.$t('exchange.newOrderSuccess'));
+                this.$toast(this.$t('trade.newOrderSuccess'));
             }).catch(err => {
                 console.warn(err);
                 this.isLoading = false;
-                this.$toast(this.$t('exchange.newOrderFail'), err);
+                this.$toast(this.$t('trade.newOrderFail'), err);
             });
         }
     }

@@ -1,4 +1,4 @@
-import { baseToken } from 'services/exchange';
+import { baseToken } from 'services/trade';
 
 const state = {
     currentMarket: '',

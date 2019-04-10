@@ -1,12 +1,12 @@
 <template>
     <confirm v-show="isShow" class="dex-token" :btnUnuse="btnUnuse"
              :showMask="true" :singleBtn="true"
-             :title="$t('exchange.dexToken.title')" :closeIcon="true"
-             :close="close" :leftBtnTxt="$t('exchange.dexToken.btn')"
+             :title="$t('trade.dexToken.title')" :closeIcon="true"
+             :close="close" :leftBtnTxt="$t('trade.dexToken.btn')"
              :leftBtnClick="trans">
 
         <div v-click-outside="hideMarketList" @click="toggleMarketList" class="__row _r_m __pointer">
-            <div class="__row-t">{{ $t('exchange.dexToken.market') }}</div>
+            <div class="__row-t">{{ $t('trade.dexToken.market') }}</div>
             <div class="market input-wrapper">{{ market ? market.name : '' }}
                 <span class="down-icon" slot="after"></span>
             </div>
@@ -19,22 +19,22 @@
 
         <div v-click-outside="hideTokenList" class="__row">
             <div class="__row-t">
-                {{ $t('exchange.dexToken.name') }}
-                <span class="link __pointer" @click="goNet">{{ $t('exchange.dexToken.link') }}</span>
+                {{ $t('trade.dexToken.name') }}
+                <span class="link __pointer" @click="goNet">{{ $t('trade.dexToken.link') }}</span>
             </div>
             <div @click="toggleTokenList" class="market input-wrapper __pointer">
                 {{ token ? token.name : '' }}<div class="down-icon"></div>
             </div>
             <div v-show="isShowTokenList" class="market-list">
                 <vite-input ref="searchInput" class="token-wrapper" v-model="tokenName"
-                            :placeholder="$t('exchange.dexToken.search')">
+                            :placeholder="$t('trade.dexToken.search')">
                     <img slot="before" class="icon" src="~assets/imgs/search.svg"/>
                 </vite-input>
                 <loading loadingType="dot" v-show="isLoading && !tokenName"
                          class="ex-center-loading token-loading"></loading>
                 <ul class="token-list __pointer">
                     <li v-show="!list || !list.length" class="market input-wrapper no-data border-bottom">
-                        {{ tokenName ? $t('exchange.noData.search') : $t('hint.noData') }}</li>
+                        {{ tokenName ? $t('trade.noData.search') : $t('hint.noData') }}</li>
                     <li @click="setToken(_token)" class="market input-wrapper border-bottom"
                         v-for="(_token, i) in list" :key="i">
                         {{ _token.name }} / {{ _token.token }}</li>
@@ -44,12 +44,12 @@
 
         <div class="__row">
             <div class="__row-t">
-                {{ $t('exchange.dexToken.fee') }}
+                {{ $t('trade.dexToken.fee') }}
                 <span v-show="!isHaveBalance" class="__err __hint">{{ $t('hint.insufficientBalance') }}</span>
             </div>
             <div class="no-input">{{ spend }} VITE</div>
         </div>
-        <div class="hint"><span>{{ $t('exchange.dexToken.hint') }}</span></div>
+        <div class="hint"><span>{{ $t('trade.dexToken.hint') }}</span></div>
     </confirm>
 </template>
 
@@ -60,7 +60,7 @@ import viteInput from 'components/viteInput';
 import getTokenIcon from 'utils/getTokenIcon';
 import BigNumber from 'utils/bigNumber';
 import sendTx from 'utils/sendTx';
-import { newMarket, marketsReserve } from 'services/exchange';
+import { newMarket, marketsReserve } from 'services/trade';
 
 const spend = 10000;
 const currentFetchMarket = null;
@@ -220,11 +220,11 @@ export default {
                 console.warn(err);
                 this.isMarketLoading = false;
                 this.isShow = true;
-                this.$toast(this.$t('exchange.dexToken.reqError'), err);
+                this.$toast(this.$t('trade.dexToken.reqError'), err);
             };
 
             const newMarketSuccess = () => {
-                this.$toast(this.$t('exchange.dexToken.reqSuccess'));
+                this.$toast(this.$t('trade.dexToken.reqSuccess'));
                 this.close();
             };
 
