@@ -237,10 +237,7 @@ export default {
 
             const config = {
                 pow: true,
-                powConfig: {
-                    isShowCancel: false,
-                    difficulty: VoteDifficulty
-                }
+                powConfig: { difficulty: VoteDifficulty }
             };
 
             this.acc.initPwd({

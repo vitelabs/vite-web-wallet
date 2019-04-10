@@ -9,7 +9,7 @@ export function powProcess({
     startTime,
     difficulty,
     cancel = () => {},
-    isShowCancel = false
+    isShowCancel = true
 }) {
     let powProcessInstance = new PowProcessComponent({
         el: document.createElement('div'),

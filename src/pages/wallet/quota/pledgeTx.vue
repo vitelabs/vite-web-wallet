@@ -309,7 +309,7 @@ export default {
                 border-bottom: 6px solid #fff;
                 position: absolute;
                 top: -12px;
-                left: 50%;
+                left: 65%;
             }
         }
     }
