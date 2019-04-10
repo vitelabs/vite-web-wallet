@@ -1,8 +1,9 @@
 <template>
     <confirm :title="pwdTitle"
-             :content="content" :showMask="showMask" :btnUnuse="isLoading"
+             :content="content" :showMask="showMask"
+             :btnUnuse="isLoading" :isShowLoading="true"
              :leftBtnTxt="cancelTxt || $t('btn.cancel')" :rightBtnTxt="submitTxt || $t('btn.submit')"
-             :leftBtnClick="exchange?_submit:_cancle"  :rightBtnClick="exchange?_cancle:_submit">
+             :leftBtnClick="exchange ? _submit : _cancle"  :rightBtnClick="exchange ? _cancle : _submit">
         <form autocomplete="off" v-show="isShowPWD" class="pass-input" :class="{
             'distance': !!content
         }">
@@ -111,10 +112,17 @@ export default {
         },
 
         _cancle() {
+            // if (this.isLoading) {
+            //     return;
+            // }
             this.clear();
             this.cancel && this.cancel();
         },
         _submit() {
+            if (this.isLoading) {
+                return;
+            }
+
             if (!this.isShowPWD) {
                 this.clear();
                 this.submit && this.submit();

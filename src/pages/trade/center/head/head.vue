@@ -1,6 +1,6 @@
 <template>
     <div class="txpair-head-wrapper">
-        <token></token>
+        <token class="token-wrapper"></token>
 
         <div class="else-wrapper">
             <div class="latest-price item-left">
@@ -102,9 +102,7 @@ export default {
 
 .txpair-head-wrapper {
     width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: row;
+    height: 60px;
     box-sizing: border-box;
     padding: 10px 14px;
     font-family: $font-bold, arial, sans-serif;
@@ -113,12 +111,15 @@ export default {
     line-height: 16px;
     white-space: nowrap;
     background: rgba(247,249,251,1);
-    flex-wrap: wrap;
 
+    .token-wrapper {
+        float: left;
+        margin-top: 2px;
+    }
     .else-wrapper {
         display: flex;
         flex-direction: row;
-        flex: 1;
+        float: left;
     }
 
     .token-title {
@@ -150,6 +151,7 @@ export default {
 @media only screen and (max-width: 1350px) {
     .txpair-head-wrapper {
         flex-direction: column;
+        height: 110px;
         .else-wrapper {
             margin-top: 10px;
         }
