@@ -79,7 +79,7 @@ export default {
                 overrides: {
                     'mainSeriesProperties.style': 0,
                     'symbolWatermarkProperties.color': '#944',
-                    'volumePaneSize': 'tiny'
+                    'volumePaneSize': 'medium'
                 },
                 studies_overrides: {
                     'bollinger bands.median.color': '#33FF88',

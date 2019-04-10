@@ -114,6 +114,7 @@ export default {
 
     .token-wrapper {
         float: left;
+        margin-top: 2px;
     }
     .else-wrapper {
         display: flex;

@@ -192,8 +192,9 @@ export default {
         },
 
         fetchTokenList() {
-            if (this.isLoading && currentFetchMarket
-                && currentFetchMarket.token === this.market.token) {
+            if (!this.market
+                || (this.isLoading && currentFetchMarket
+                && currentFetchMarket.token === this.market.token)) {
                 return;
             }
 
@@ -271,9 +272,8 @@ export default {
     position: absolute;
     width: 100%;
     z-index: 1;
-    display: flex;
-    flex-direction: column;
     max-height: 140px;
+    overflow: auto;
     border: 1px solid rgba(212, 222, 231, 1);
     border-top: none;
     box-sizing: border-box;
@@ -332,6 +332,9 @@ export default {
     .icon {
         margin-right: 0;
         margin-left: 15px;
+        width: 16px;
+        height: 16px;
+        margin-top: 12px;
     }
 
     .market-list {
