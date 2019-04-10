@@ -31,8 +31,8 @@
     height: 100%;
     padding: 10px;
     box-sizing: border-box;
-    min-height: 850px;
-    max-height: 1000px;
+    min-height: 750px;
+    max-height: 900px;
 
     .__border {
         border-radius: 2px;
@@ -50,7 +50,7 @@
             margin-bottom: 10px;
         }
         .b {
-            flex-basis: 335px;;
+            flex-basis: 250px;;
             overflow: auto;
         }
     }
@@ -71,6 +71,8 @@
         }
         .b {
             margin-top: 10px;
+            flex-basis: 250px;
+            max-height: 250px;
         }
     }
 
