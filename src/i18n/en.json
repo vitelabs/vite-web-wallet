@@ -428,8 +428,8 @@
         "txPair": "Pair",
         "price": "Price",
         "upDown": "Change%",
-        "txNum": "Amount",
-        "quantityTitle": "Amount({quantity})",
+        "txNum": "Volume",
+        "quantityTitle": "Total({quantity})",
         "priceTitle": "Price({price})",
         "amountTitle": "Amount({amount})",
         "amountTable": "Qty",
@@ -567,12 +567,12 @@
     "tradeOpenOrders": {
         "cancelErr": "You are trying too ofter, please try again later.",
         "confirm":{
-            "successToast":"Revoking Transaction Successful",
-            "failToast":"Revoking Transaction Failed",
+            "successToast":"Revoking Order Successful",
+            "failToast":"Revoking Order Failed",
             "submitTxt":"Confirm to revoke",
             "cancelTxt":"Cancel",
             "title": "Revoke Order",
-            "content": "Please make sure whether to revoke current order"
+            "content": "Are you sure you want to revoke current order?"
         },
         "title": "Open Orders",
         "hint": {
@@ -594,7 +594,7 @@
                 "Amount",
                 "Filled",
                 "Filled%",
-                "Avg Price"
+                "Average"
             ],
             "rowMap": {
                 "cancel": "Cancel"
@@ -617,9 +617,9 @@
             "heads": [
                 "Time",
                 "Price",
-                "Volume",
+                "Amount",
                 "Fees",
-                "Amount"
+                "Total"
             ]
         },
         "table": {
@@ -631,7 +631,7 @@
                 "Amount",
                 "Filled",
                 "Filled%",
-                "Avg Price",
+                "Average",
                 "Fees",
                 "Status"
             ],
