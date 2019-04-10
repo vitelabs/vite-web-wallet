@@ -14,7 +14,7 @@ const goViteServer = {
     production: '\'wss://testnet.vitewallet.com/ws\'',
     test: '\'wss://testnet.vitewallet.com/test/ws\'',
     dev: '\'wss://testnet.vitewallet.com/test/ws\'',
-    dexTestNet: '\'wss://vitex.vite.net/beta/websocket\''
+    dexTestNet: '\'wss://testnet.vitewallet.com/beta/ws\''
 };
 const viteNet = {
     production: '\'https://testnet.vite.net/\'',
@@ -54,7 +54,7 @@ const dexApiServer = {
 const pushServer = {
     test: '"wss://vitex.vite.net/test/websocket"',
     dev: '"wss://vitex.vite.net/test/websocket"',
-    dexTestNet: '"wss://vitex.vite.net/test/websocket"'
+    dexTestNet: '"wss://vitex.vite.net/beta/websocket"'
 };
 
 const Node_Env = process.env.NODE_ENV || 'dev';
