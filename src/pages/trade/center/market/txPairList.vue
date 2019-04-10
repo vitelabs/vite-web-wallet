@@ -171,6 +171,8 @@ export default {
             });
         },
         setActiveTxPair(txPair) {
+            // history.replaceState(null, null, `${ location.origin }/trade/${ txPair.pairCode }`);
+            // location.href = ;
             this.$store.dispatch('exFetchActiveTxPair', txPair);
         }
     }

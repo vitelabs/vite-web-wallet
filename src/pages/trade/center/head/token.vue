@@ -231,7 +231,7 @@ export default {
         &::after {
             position: absolute;
             top: -12px;
-            left: 40px;
+            left: 20px;
             content: ' ';
             display: inline-block;
             border: 6px solid transparent;
@@ -255,8 +255,13 @@ export default {
 }
 
 @media only screen and (max-width: 1320px) {
-    .token .t-item {
-        max-width: 45%;
+    .token {
+        .detail.right {
+            left: 200px;
+        }
+        .t-item {
+            max-width: 45%;
+        }
     }
 }
 </style>
