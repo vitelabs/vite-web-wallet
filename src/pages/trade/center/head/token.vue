@@ -260,7 +260,7 @@ export default {
             left: 200px;
         }
         .t-item {
-            max-width: 45%;
+            max-width: 100%;
         }
     }
 }
