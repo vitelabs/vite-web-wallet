@@ -163,6 +163,7 @@ export default class dataFeeds {
 
             // 不能覆盖历史数据
             if (lastTime && lastTime > data.t) {
+                console.log('subscribeBars: 不能覆盖历史数据');
                 return;
             }
 
@@ -178,6 +179,8 @@ export default class dataFeeds {
                     volume: data.v
                 };
                 onRealtimeCallback(this.lastBar);
+
+                console.log('subscribeBars 传递的是当前数据，不需要补齐', startTime, data.t, this.lastBar);
                 return;
             }
 
@@ -200,6 +203,7 @@ export default class dataFeeds {
 
             this.lastBar = list[list.length - 1];
             for (let i = 0 ; i < list.length; i++) {
+                console.log('subscribeBars 补齐数据', list[i]);
                 onRealtimeCallback(list[i]);
             }
         }, 2000);
