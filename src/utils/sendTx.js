@@ -54,7 +54,7 @@ const { isObject } = utils.encoder;
 const defaultConfig = {
     pow: true,
     powConfig: {
-        isShowCancel: false,
+        isShowCancel: true,
         cancel: () => {},
         difficulty: ''
     },
@@ -196,6 +196,12 @@ function formatConfig(config) {
 
     if (powConfig.cancel && typeof powConfig.cancel !== 'function') {
         throw new Error('[Error] utils/sendTx: config.pow[1].cancel should be a function.');
+    }
+    console.log(powConfig);
+    if (!(powConfig.hasOwnProperty('isShowCancel')
+        && typeof powConfig.isShowCancel !== 'undefined'
+        && powConfig.isShowCancel !== null)) {
+        powConfig.isShowCancel = true;
     }
 
     if (pow) {
