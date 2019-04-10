@@ -227,7 +227,7 @@ export default {
 
     .describe {
         display: inline-block;
-        width: 95px;
+        width: 80px;
     }
 
     &.active {

@@ -134,11 +134,12 @@ export default {
                 return;
             }
 
-            if (this.orderType === 'buy' && this.activeTx.txSide === 1) {
-                this.quantity = this.activeTx.num;
-            } else if (this.orderType === 'sell' && this.activeTx.txSide === 0) {
-                this.quantity = this.activeTx.num;
+            if (!(this.orderType === 'buy' && this.activeTx.txSide === 1)
+                && !(this.orderType === 'sell' && this.activeTx.txSide === 0)) {
+                return;
             }
+
+            this.quantity = BigNumber.normalFormatNum(this.activeTx.num, this.ftokenDigit);
             this.quantityChanged();
         }
     },
