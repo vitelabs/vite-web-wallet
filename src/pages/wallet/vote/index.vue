@@ -183,10 +183,7 @@ export default {
 
                 sendTx(activeAccount.revokeVoting, { tokenId: this.tokenInfo.tokenId }, {
                     pow: true,
-                    powConfig: {
-                        isShowCancel: false,
-                        difficulty: VoteDifficulty
-                    }
+                    powConfig: { difficulty: VoteDifficulty }
                 }).then(successCancel).catch(failCancel);
             };
 
