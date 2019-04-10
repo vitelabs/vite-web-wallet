@@ -37,4 +37,4 @@ Define router alias in `src/router/config.js`
 
 #### Examples
 
-`src/pages/exchange/openOrders/index.vue` => `/exchangeOpenOrders`
+`src/pages/trade/openOrders/index.vue` => `/tradeOpenOrders`

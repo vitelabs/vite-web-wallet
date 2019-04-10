@@ -15,12 +15,12 @@ export default function (VueRouter) {
         // Windows APP
         if (!to.name && to.path) {
             const arr = to.path.split('/');
-            router.replace({ name: arr[ arr.length - 1 ] || 'exchange' });
+            router.replace({ name: arr[ arr.length - 1 ] || 'trade' });
             return;
         }
 
-        if (!from.name && to.name !== 'exchange') {
-            router.replace({ name: 'exchange' });
+        if (!from.name && to.name !== 'trade') {
+            router.replace({ name: 'trade' });
             return;
         }
 

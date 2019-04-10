@@ -4,27 +4,27 @@
             <li :class="{
                     'active': isShowSell && isShowBuy
                 }" class="ex-tab __pointer"
-                @click="showTable(true, true)">{{ $t('exchange.depth.all') }}</li>
+                @click="showTable(true, true)">{{ $t('trade.depth.all') }}</li>
             <li :class="{
                     'active': isShowBuy && !isShowSell,
                     'active-side': isShowSell && isShowBuy
                 }" class="ex-tab __pointer"
-                @click="showTable(true, false)">{{ $t('exchange.depth.buy') }}</li>
+                @click="showTable(true, false)">{{ $t('trade.depth.buy') }}</li>
             <li :class="{
                     'active': isShowSell && !isShowBuy,
                     'active-side': isShowBuy && !isShowSell
                 }" class="ex-tab __pointer"
-                @click="showTable(false, true)">{{ $t('exchange.depth.sell') }}</li>
+                @click="showTable(false, true)">{{ $t('trade.depth.sell') }}</li>
         </ul>
 
         <div class="__center-tb-title">
-            <span class="__center-tb-item __ellipsis depth price">{{ $t('exchange.priceTitle', {
+            <span class="__center-tb-item __ellipsis depth price">{{ $t('trade.priceTitle', {
                 price: activeTxPair && activeTxPair.ttokenShow ? activeTxPair.ttokenShow : ''
             }) }}</span>
-            <span class="__center-tb-item __ellipsis depth quantity">{{ $t('exchange.amountTitle', {
+            <span class="__center-tb-item __ellipsis depth quantity">{{ $t('trade.amountTitle', {
                 amount: activeTxPair && activeTxPair.ftokenShow ? activeTxPair.ftokenShow : ''
             }) }}</span>
-            <span class="__center-tb-item __ellipsis depth amount">{{ $t('exchange.quantityTitle', {
+            <span class="__center-tb-item __ellipsis depth amount">{{ $t('trade.quantityTitle', {
                 quantity: activeTxPair && activeTxPair.ttokenShow ? activeTxPair.ttokenShow : ''
             }) }}</span>
         </div>

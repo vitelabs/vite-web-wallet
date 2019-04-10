@@ -1,4 +1,4 @@
-import { klineHistory } from 'services/exchange';
+import { klineHistory } from 'services/trade';
 import { subTask } from 'utils/proto/subTask';
 
 const timers = {};

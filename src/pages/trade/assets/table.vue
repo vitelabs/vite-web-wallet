@@ -1,12 +1,12 @@
 <template>
     <div class="ex_tb">
         <div class="head-row">
-            <div v-for="(h) in $t('exchangeAssets.table.heads')"
+            <div v-for="(h) in $t('tradeAssets.table.heads')"
                  :key="h">
                 {{h.replace("#tokenSymbol#","vite")}}
             </div>
-            <div>{{ $t('exchangeAssets.operate') }}
-                <img @click="update" class="refresh" :class="{rotate:isRotate}" src="~assets/imgs/exchange/refresh.svg" />
+            <div>{{ $t('tradeAssets.operate') }}
+                <img @click="update" class="refresh" :class="{rotate:isRotate}" src="~assets/imgs/trade/refresh.svg" />
             </div>
         </div>
         <div class="row-container">
@@ -19,12 +19,12 @@
                 <div>
                     <span v-unlock-account @unlocked="recharge(token.id)"
                           class="click-able">
-                        {{$t("exchangeAssets.table.rowMap.recharge")}}</span>
+                        {{$t("tradeAssets.table.rowMap.recharge")}}</span>
                     <span v-unlock-account @unlocked="withdraw(token.id)"
                           class="click-able">
-                        {{$t("exchangeAssets.table.rowMap.withdraw")}}</span>
+                        {{$t("tradeAssets.table.rowMap.withdraw")}}</span>
                     <span @click="detail(token.id)" class="click-able">
-                        {{$t("exchangeAssets.table.rowMap.detail")}}</span>
+                        {{$t("tradeAssets.table.rowMap.detail")}}</span>
                 </div>
             </div>
             <div class="no-data" v-show="!list || !list.length">
@@ -55,8 +55,8 @@
         </confirm>
 
         <alert v-show="detailConfirm" :list="detailList"
-               :heads="$t('exchangeAssets.confirmTable.heads')"
-               :title="$t('exchangeAssets.confirmTable.title')"
+               :heads="$t('tradeAssets.confirmTable.heads')"
+               :title="$t('tradeAssets.confirmTable.title')"
                :close="close"></alert>
     </div>
 </template>
@@ -72,7 +72,7 @@ import sendTx from 'utils/sendTx';
 import debounce from 'lodash/debounce';
 import d from 'dayjs';
 
-import { deposit, withdraw, chargeDetail } from 'services/exchange';
+import { deposit, withdraw, chargeDetail } from 'services/trade';
 
 const VoteDifficulty = '201564160';
 
@@ -107,7 +107,7 @@ export default {
                 return [
                     d.unix(o.optime).format('YYYY-MM-DD HH:mm'),
                     o.tokenName,
-                    this.$t('exchangeAssets.table.rowMap.sideMap')[o.optype],
+                    this.$t('tradeAssets.table.rowMap.sideMap')[o.optype],
                     o.amount
                 ];
             });
@@ -210,7 +210,7 @@ export default {
             this.opNumber = '';
 
             this.c = {};
-            const t = Object.assign({}, this.$t(`exchangeAssets.confirm${ type }`));
+            const t = Object.assign({}, this.$t(`tradeAssets.confirm${ type }`));
             t.tokenId = tokenId;
             t.type = type;
             t.icon = this.balance[tokenId].icon;
@@ -227,11 +227,11 @@ export default {
             const c = this.c;
 
             const failSubmit = e => {
-                this.$toast(this.$t(`exchangeAssets.confirm${ c.type }.failToast`), e);
+                this.$toast(this.$t(`tradeAssets.confirm${ c.type }.failToast`), e);
             };
 
             const successSubmit = () => {
-                this.$toast(this.$t(`exchangeAssets.confirm${ c.type }.successToast`));
+                this.$toast(this.$t(`tradeAssets.confirm${ c.type }.successToast`));
             };
 
             const config = {
@@ -244,8 +244,8 @@ export default {
 
             this.closeNumConfirm();
             this.acc.initPwd({
-                submitTxt: this.$t(`exchangeAssets.table.rowMap.${ c.type }`),
-                cancelTxt: this.$t('exchangeAssets.pwdConfirm.cancelTxt'),
+                submitTxt: this.$t(`tradeAssets.table.rowMap.${ c.type }`),
+                cancelTxt: this.$t('tradeAssets.pwdConfirm.cancelTxt'),
                 submit: () => {
                     c.type === 'recharge'
                         ? sendTx(deposit, { tokenId, amount }, config)

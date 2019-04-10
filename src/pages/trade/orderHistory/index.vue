@@ -10,7 +10,7 @@
 
 <script>
 import Pagination from 'components/pagination';
-import { order } from 'services/exchange';
+import { order } from 'services/trade';
 import { subTask } from 'utils/proto/subTask';
 import Table from './table';
 import Filters from './filters';

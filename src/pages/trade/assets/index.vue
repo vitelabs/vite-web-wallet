@@ -2,11 +2,11 @@
     <div class="assets-ct">
         <div class="filter-root">
             <Search class="filter" v-model="filterKey"
-                    :placeholder="$t('exchangeAssets.search')">
+                    :placeholder="$t('tradeAssets.search')">
             </Search>
             <div class="filter">
                 <input type="checkbox" v-model="hideZero">
-                {{ $t("exchangeAssets.zero") }}
+                {{ $t("tradeAssets.zero") }}
             </div>
         </div>
         <Table :filter="{ hideZero,filterKey: filterKey.trim() }"></Table>

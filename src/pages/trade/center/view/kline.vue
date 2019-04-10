@@ -120,7 +120,7 @@ export default {
         },
         createDepthBtn() {
             const button = this.tvWidget.createButton({ align: 'right' })[0];
-            button.textContent = this.$t('exchange.depthView');
+            button.textContent = this.$t('trade.depthView');
             button.addEventListener('click', () => {
                 this.toogleDepth();
             });
