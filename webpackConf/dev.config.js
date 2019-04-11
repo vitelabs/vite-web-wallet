@@ -8,6 +8,10 @@ module.exports = {
                 target: 'http://132.232.60.116:8000',
                 changeOrigin: true,
                 secure: false
+            },
+            '/trade': {
+                target: 'http://localhost:8081',
+                pathRewrite: { '^/trade\w*': '' }
             }
         }
     }

@@ -153,7 +153,7 @@ export default {
         flex-direction: column;
         height: 110px;
         .else-wrapper {
-            margin-top: 10px;
+            margin-top: 6px;
         }
     }
     .item-left:first-child {

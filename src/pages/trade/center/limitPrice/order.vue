@@ -10,30 +10,33 @@
             </div>
         </div>
 
-        <div class="input-wrapper">
-            <span class="tips" :class="{'active':
-                focusInput === 'price' && (priceErr || realPrice)
-            }">{{  priceErr ? $t(priceErr, { digit: ttokenDigit }) : realPrice }}</span>
-            <vite-input class="order-input b" :class="{'err': priceErr}"
-                        v-model="price"
-                        @focus="showTips('price')" @blur="hideTips('price')">
-                <span class="ex-order-token" slot="before">
-                    {{ $t(`trade.${orderType}.price`, { token: ttokenShow }) }}
-                </span>
-            </vite-input>
+        <div class="dex-input-wrapper b">
+            <span class="ex-order-token __ellipsis">
+                {{ $t(`trade.${orderType}.price`, { token: ttokenShow }) }}
+            </span>
+            <div class="else-input-wrapper" :class="{'err': priceErr}">
+                <span class="tips" :class="{'active':
+                    focusInput === 'price' && priceErr
+                }">{{  priceErr ? $t(priceErr, { digit: ttokenDigit }) : '' }}</span>
+                <vite-input v-model="price"
+                            @focus="showTips('price')" @blur="hideTips('price')">
+                    <span class="real-price __ellipsis" slot="after">{{ realPrice }}</span>
+                </vite-input>
+            </div>
         </div>
 
-        <div class="input-wrapper">
-            <span class="tips" :class="{'active':
-                focusInput === 'quantity' && quantityErr
-            }">{{  $t(quantityErr, { digit: ftokenDigit }) }}</span>
-            <vite-input class="order-input" :class="{'err': quantityErr}"
-                        v-model="quantity" @input="quantityChanged"
-                        @focus="showTips('quantity')" @blur="hideTips('quantity')">
-                <span class="ex-order-token" slot="before">
-                    {{ $t(`trade.${orderType}.quantity`, { token: ftokenShow }) }}
-                </span>
-            </vite-input>
+        <div class="dex-input-wrapper">
+            <span class="ex-order-token __ellipsis">
+                {{ $t(`trade.${orderType}.quantity`, { token: ftokenShow }) }}
+            </span>
+            <div class="else-input-wrapper" :class="{'err': quantityErr}">
+                <span class="tips" :class="{'active':
+                    focusInput === 'quantity' && quantityErr
+                }">{{  $t(quantityErr, { digit: ftokenDigit }) }}</span>
+                <vite-input v-model="quantity" @input="quantityChanged"
+                            @focus="showTips('quantity')" @blur="hideTips('quantity')">
+                </vite-input>
+            </div>
         </div>
 
         <div class="slider-wrapper">
@@ -41,21 +44,22 @@
                     v-model="percent" v-on:drag="percentChanged"></slider>
         </div>
 
-        <div class="input-wrapper">
-            <span class="tips" :class="{'active':
-                focusInput === 'amount' && amountErr
-            }">{{ $t(amountErr, {
-                digit: ttokenDigit,
-                amount: minAmount,
-                token: ttokenShow
-            }) }}</span>
-            <vite-input class="order-input" :class="{'err': amountErr}"
-                        v-model="amount" @input="amountChanged"
-                        @focus="showTips('amount')" @blur="hideTips('amount')">
-                <span class="ex-order-token" slot="before">
-                    {{ $t('trade.quantityTitle', { quantity: ttokenShow }) }}
-                </span>
-            </vite-input>
+        <div class="dex-input-wrapper">
+            <span class="ex-order-token __ellipsis">
+                {{ $t('trade.quantityTitle', { quantity: ttokenShow }) }}
+            </span>
+            <div class="else-input-wrapper" :class="{'err': amountErr}">
+                <span class="tips" :class="{'active':
+                    focusInput === 'amount' && amountErr
+                }">{{ $t(amountErr, {
+                    digit: ttokenDigit,
+                    amount: minAmount,
+                    token: ttokenShow
+                }) }}</span>
+                <vite-input v-model="amount" @input="amountChanged"
+                            @focus="showTips('amount')" @blur="hideTips('amount')">
+                </vite-input>
+            </div>
         </div>
 
         <div class="order-btn __pointer" :class="{
@@ -149,12 +153,12 @@ export default {
                 return '';
             }
 
-            let pre = '$';
+            let pre = '≈$';
             if (this.$i18n.locale === 'zh') {
-                pre = '￥';
+                pre = '≈￥';
             }
             if (!this.activeTxPair) {
-                return `${ pre }0`;
+                return `≈${ pre }0`;
             }
 
             return pre + BigNumber.multi(this.price || 0, this.rate || 0, 2);
@@ -583,6 +587,14 @@ export default {
                 side: this.orderType === 'buy' ? 0 : 1,
                 price,
                 quantity
+            }, {
+                pow: true,
+                powConfig: {
+                    isShowCancel: true,
+                    cancel: () => {
+                        this.isLoading = false;
+                    }
+                }
             }).then(() => {
                 this.isLoading = false;
                 this.clearAll();
@@ -601,9 +613,44 @@ export default {
 @import "../center.scss";
 $font-black: rgba(36, 39, 43, 0.8);
 
-.input-wrapper {
+.dex-input-wrapper {
     position: relative;
+    display: flex;
+    flex-direction: row;
+    height: 30px;
+    line-height: 30px;
+    font-family: $font-normal, arial, sans-serif;
+    &.b {
+        margin-bottom: 10px;
+    }
+    .real-price {
+        max-width: 75px;
+        box-sizing: border-box;
+        padding: 0 6px;
+        font-size: 12px;
+        color: rgba(94,104,117,0.58);
+    }
+    .ex-order-token {
+        font-size: 12px;
+        font-family: $font-normal, arial, sans-serif;
+        font-weight: 400;
+        color: rgba(94, 104, 117, 1);
+        width: 95px;
+        white-space: nowrap;
+        margin-right: 6px;
+    }
+    .else-input-wrapper {
+        position: relative;
+        border-radius: 2px;
+        border: 1px solid rgba(212,222,231,1);
+        box-sizing: border-box;
+        flex: 1;
+        &.err {
+            border: 1px solid $red;
+        }
+    }
 }
+
 .tips {
     position: absolute;
     left: 50%;
@@ -620,6 +667,7 @@ $font-black: rgba(36, 39, 43, 0.8);
     transition: opacity 0.2s ease-in-out;
     width: auto;
     height: auto;
+    white-space: nowrap;
     &.active {
         min-width: 0;
         height: auto;
@@ -667,36 +715,8 @@ $font-black: rgba(36, 39, 43, 0.8);
         }
     }
 
-    .ex-order-token {
-        font-size: 12px;
-        font-family: $font-normal, arial, sans-serif;
-        font-weight: 400;
-        color: rgba(94, 104, 117, 1);
-        width: 86px;
-        white-space: nowrap;
-    }
-
     .slider-wrapper {
         margin: 16px 5px;
-    }
-
-    .order-input {
-        height: 30px;
-        line-height: 30px;
-        box-sizing: border-box;
-        &.b {
-            margin-bottom: 10px;
-        }
-        &.err {
-            border: 1px solid $red;
-        }
-        input {
-            text-indent: 6px;
-        }
-        .ex-order-token {
-            padding: 0 6px;
-            color: rgba(94,104,117,0.58);
-        }
     }
 
     .order-btn {
@@ -719,6 +739,22 @@ $font-black: rgba(36, 39, 43, 0.8);
             color: rgba(29, 32, 36, 0.6);
             background: #f3f5f9;
         }
+    }
+}
+</style>
+
+<style lang="scss">
+@import "~assets/scss/vars.scss";
+
+.dex-input-wrapper .input-wrapper {
+    height: 100%;
+    line-height: 30px;
+    border: none;
+    input {
+        font-family: $font-normal, arial, sans-serif;
+        font-size: 12px;
+        color: #24272B;
+        text-indent: 6px;
     }
 }
 </style>
