@@ -73,7 +73,7 @@ export default class dataFeeds {
     }
 
     async getBars(symbolInfo, resolution, from, to, onHistoryCallback, onErrorCallback) {
-        console.log('[getBars start]', resolution, from, to);
+        // console.log('[getBars start]', resolution, from, to);
 
         const _resolution = formatResolution(resolution, from, to);
         this.lastResolution = _resolution;
@@ -90,13 +90,13 @@ export default class dataFeeds {
         const { isError, errMsg, isHaveData, nextTime, list } = result;
 
         if (isError) {
-            console.log('[getBars end] error');
+            // console.log('[getBars end] error');
             onErrorCallback(errMsg);
             return;
         }
 
         if (!isHaveData) {
-            console.log('[getBars end] noData');
+            // console.log('[getBars end] noData');
             onHistoryCallback([], {
                 noData: true,
                 nextTime
@@ -106,7 +106,7 @@ export default class dataFeeds {
 
         const _list = fillKlineData(list, _resolution);
 
-        console.log('[getBars end]', new Date(_list[_list.length - 1].time), _list[_list.length - 1], list[list.length - 1], list[0]);
+        // console.log('[getBars end]', new Date(_list[_list.length - 1].time), _list[_list.length - 1], list[list.length - 1], list[0]);
 
         this.lastBar = _list[_list.length - 1];
         onHistoryCallback(_list, { noData: false });
@@ -134,7 +134,7 @@ export default class dataFeeds {
         }
         (i - reqTimeDiff < to) && pushReq(i - reqTimeDiff, to);
 
-        console.log('[kline req num]', historyReq.length);
+        // console.log('[kline req num]', historyReq.length);
 
         return Promise.all(historyReq).then(res => formatReqKlineData(res));
     }
@@ -144,7 +144,7 @@ export default class dataFeeds {
         const reqResolution = this.lastResolution;
 
         timers[subscriberUID] = new subTask('kline', ({ args, data }) => {
-            console.log('subscribeBars', args, new Date(data.t * 1000), data);
+            // console.log('subscribeBars', args, new Date(data.t * 1000), data);
 
             if (args.ttoken !== this.activeTxPair.ttoken
                 || args.ftoken !== this.activeTxPair.ftoken

@@ -129,7 +129,6 @@ export default {
             const klineButton = this.tvWidget.createButton({ align: 'right' })[0];
             klineButton.textContent = this.$t('trade.klineView');
             klineButton.parentNode.setAttribute('style', 'background: rgba(75, 116, 255, 0.1); cursor: pointer;');
-            console.log(klineButton);
         }
     }
 };
