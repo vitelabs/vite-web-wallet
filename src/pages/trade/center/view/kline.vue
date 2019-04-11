@@ -66,7 +66,7 @@ export default {
                 allow_symbol_change: true,
                 container_id: 'tv_chart_container',
                 datafeed: datafeedObj,
-                library_path: 'charting_library/',
+                library_path: '/charting_library/',
                 locale: this.$i18n.locale,
                 drawings_access: {
                     type: 'black',
