@@ -52,6 +52,7 @@ export default {
     padding: 20px 30px;
     font-size: 14px;
     line-height: 18px;
+    min-width: 160px;
 }
 
 .wallet .mint-toast {
