@@ -41,7 +41,7 @@ export default {
     font-size: 14px;
     color: #FFFFFF;
     letter-spacing: 0;
-    margin-top: 5px;
+    margin-top: 7px;
     font-family: $font-bold, arial, sans-serif;
     z-index: 101;
     &:before {
@@ -59,7 +59,7 @@ export default {
     min-width: 50px;
     text-align: center;
     height: 100%;
-    padding: 10px 30px;
+    padding: 10px 20px;
 }
 .lang-list {
     position: absolute;

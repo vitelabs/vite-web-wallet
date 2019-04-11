@@ -2,6 +2,7 @@
   "lang": "EN",
   "start": "Start",
   "logout": "Logout",
+  "goViteX": "Participate in ViteX Beta Test",
   "errCode": {
     "35003": "{name} ID conflict occurs, please re-submit later",
     "35004": "Built-in contract error, please try again later（35004）",
