@@ -61,7 +61,7 @@ export default {
             const widgetOptions = {
                 fullscreen: false,
                 autosize: true,
-                interval: '1',
+                interval: '60',
                 toolbar_bg: '#f4f7f9',
                 allow_symbol_change: true,
                 container_id: 'tv_chart_container',
