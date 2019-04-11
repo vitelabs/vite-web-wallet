@@ -1,7 +1,7 @@
 import { timer } from 'utils/asyncFlow';
 import { rateFiat } from 'services/trade';
 
-const loopTime = 2 * 60 * 1000 * 1000;
+const loopTime = 2 * 60 * 60 * 1000;
 let rateTimer = null;
 
 const state = {
@@ -25,13 +25,9 @@ const actions = {
     startLoopExchangeRate({ commit }) {
         const f = () => rateFiat().then(data => {
             commit('setExchangeRate', data);
-        })
-            .catch(err => {
-                console.warn(err);
-            });
+        });
 
-        f();
-        rateTimer = new timer(() => f(), loopTime);
+        rateTimer = new timer(f, loopTime);
         rateTimer.start();
     },
     stopLoopExchangeRate() {

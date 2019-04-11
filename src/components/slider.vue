@@ -1,23 +1,26 @@
 <template>
     <div ref="wrapper" @click="_setSize" class="process-wrapper __pointer">
-        <div ref="line" class="line" :class="{
-            'smooth': !isShowPrecent
-        }" :style="{ 'width': size + '%' }">
-            <div ref="drag" @mousedown="drag" class="drag"
-                 @mouseenter="showPercent" @mouseleave="hidePercent">
-                <span ref="percent" class="percent" :class="{
-                    'show': isShowPrecent
-                }">{{ parseFloat(size).toFixed(2) }}%</span>
+        <div class="line-wrapper">
+            <div ref="line" class="line" :class="{
+                'smooth': !isShowPrecent
+            }" :style="{ 'width': size + '%' }">
+                <div ref="drag" @mousedown="drag" class="drag"
+                     @mouseenter="showPercent" @mouseleave="hidePercent">
+                    <span ref="percent" class="percent" :class="{
+                        'show': isShowPrecent
+                    }">{{ parseFloat(size).toFixed(2) }}%</span>
+                </div>
             </div>
+
+            <ul class="list">
+                <li ref="point0" :class="{ 'active': size >= 0 }"></li>
+                <li ref="point1" :class="{ 'active': size >= 25 }"></li>
+                <li ref="point2" :class="{ 'active': size >= 50 }"></li>
+                <li ref="point3" :class="{ 'active': size >= 75 }"></li>
+                <li ref="point4" :class="{ 'active': size >= 100 }"></li>
+            </ul>
+            <slot></slot>
         </div>
-        <ul class="list">
-            <li ref="point0" :class="{ 'active': size >= 0 }"></li>
-            <li ref="point1" :class="{ 'active': size >= 25 }"></li>
-            <li ref="point2" :class="{ 'active': size >= 50 }"></li>
-            <li ref="point3" :class="{ 'active': size >= 75 }"></li>
-            <li ref="point4" :class="{ 'active': size >= 100 }"></li>
-        </ul>
-        <slot></slot>
     </div>
 </template>
 
@@ -128,11 +131,13 @@ $red: linear-gradient(270deg, rgba(226,43,116,1) 0%, rgba(237,81,88,1) 100%);
 $green: linear-gradient(270deg, rgba(0,212,208,1) 0%, rgba(0,215,100,1) 100%);
 
 .dex .process-wrapper {
-    height: 2px;
-    background: rgba(229,235,241,1);
-    border-radius: 2px;
-    .line {
+    padding: 10px 0px;
+    .line-wrapper {
+        height: 2px;
         border-radius: 2px;
+        background: rgba(229,235,241,1);
+    }
+    .line {
         .drag {
             width: 10px;
             height: 10px;
@@ -248,12 +253,13 @@ $green: linear-gradient(270deg, rgba(0,212,208,1) 0%, rgba(0,215,100,1) 100%);
 }
 
 .process-wrapper {
-    position: relative;
     width: 100%;
-    height: 6px;
-    background: rgba(243, 246, 249, 1);
-    border-radius: 4px;
-
+    .line-wrapper {
+        position: relative;
+        height: 6px;
+        border-radius: 4px;
+        background: rgba(229,235,241,1);
+    }
     .line {
         position: absolute;
         top: 0;

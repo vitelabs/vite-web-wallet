@@ -21,16 +21,9 @@
         </div>
 
         <div class="__center-tb-title">
-            <div class="__center-tb-item tx-pair">
-                <span
-                    @click="toggleShowFavorite"
-                    class="favorite-icon __pointer"
-                    :class="{'active': isOnlyFavorite}"
-                ></span>
-                <span
-                    @click="setOrderRule('transPairs')"
-                    class="describe __pointer"
-                >{{ $t('trade.txPair') }}</span>
+            <div class="__center-tb-item tx-pair __pointer"
+                 @click="setOrderRule('transPairs')">
+                {{ $t('trade.txPair') }}
             </div>
             <div class="__center-tb-item">
                 <span class="describe-r">{{ $t('trade.price') }}</span>
@@ -68,6 +61,7 @@ import viteInput from 'components/viteInput';
 import loading from 'components/loading';
 import localStorage from 'utils/localStorage';
 import { subTask } from 'utils/proto/subTask';
+import { assignPair } from 'services/trade';
 
 import orderArrow from './orderArrow';
 import tabList from './tabList';
@@ -75,6 +69,7 @@ import txPairList from './txPairList';
 
 const FavoriteKey = 'favoriteTxPairs';
 let defaultPairTimer = null;
+let assignPairTimerList = [];
 
 export default {
     components: {
@@ -85,35 +80,103 @@ export default {
         txPairList
     },
     beforeMount() {
-        this.init();
+        this.isLoading = true;
+        if (this.isShowFavorite) {
+            this.initFavoriteList();
+        } else {
+            this.init();
+        }
     },
     destroyed() {
-        this.stopLoop();
+        this.stopDefaultPair();
+        this.stopAssignPair();
     },
     data() {
         return {
             isLoading: false,
             currentOrderRule: 'txNumDown',
-            isOnlyFavorite: false,
             showCol: 'updown',
 
-            favoritePairs: localStorage.getItem(FavoriteKey) || {},
             txPairList: [],
+
+            favoritePairs: localStorage.getItem(FavoriteKey) || {},
+            favoriteList: [],
 
             searchText: '',
             searchList: []
         };
     },
+    computed: {
+        toTokenId() {
+            return this.$store.state.exchangeMarket.currentMarket;
+        },
+        isShowFavorite() {
+            return this.$store.state.exchangeMarket.isShowFavorite;
+        },
+        isShowNoData() {
+            return !this.isLoading
+                && (
+                    !this.activeTxPairList
+                    || !this.activeTxPairList.length
+                    || (!this.searchList.length && this.searchText)
+                );
+        },
+        noData() {
+            if (this.searchText) {
+                return this.$t('trade.noData.search');
+            }
+            if (this.isShowFavorite) {
+                return this.$t('trade.noData.favorite');
+            }
+            return this.$t('hint.noData');
+        },
+        activeTxPairList() {
+            if (this.isLoading) {
+                return [];
+            }
+
+            let list = this.searchText
+                ? this.searchList
+                : this.isShowFavorite
+                    ? this.favoriteList
+                    : this.txPairList;
+            list = [].concat(list);
+
+            return list;
+        },
+        activePairCode() {
+            return this.activeTxPair
+                ? this.activeTxPair.pairCode || null
+                : null;
+        },
+        activeTxPair() {
+            return this.$store.state.exchangeActiveTxPair.activeTxPair;
+        }
+    },
     watch: {
         toTokenId: function () {
             this.searchText = '';
             this.searchList = [];
+            this.stopDefaultPair();
+
+            if (!this.toTokenId) {
+                return;
+            }
+
             this.isLoading = true;
-            this.stopLoop();
             this.init();
         },
-        txPairList: function () {
-            this.txPairList && this.txPairList.forEach(txPair => {
+        isShowFavorite: function () {
+            if (!this.isShowFavorite) {
+                this.stopAssignPair();
+                return;
+            }
+
+            this.isLoading = true;
+            this.initFavoriteList();
+        },
+        activeTxPairList: function () {
+            this.activeTxPairList && this.activeTxPairList.forEach(txPair => {
                 if (!this.activePairCode || txPair.pairCode !== this.activePairCode) {
                     return;
                 }
@@ -130,79 +193,6 @@ export default {
                 }
             });
             this.searchList = list;
-        }
-    },
-    computed: {
-        toTokenId() {
-            return this.$store.state.exchangeMarket.currentMarket;
-        },
-        isShowNoData() {
-            return !this.isLoading && (
-                !this.activeTxPairList
-                || !this.activeTxPairList.length
-                || (!this.searchList.length
-                    && this.searchText)
-            );
-        },
-
-        favoriteCodeList() {
-            const codeList = [];
-            for (const code in this.favoritePairs) {
-                const item = this.favoritePairs[code];
-                if (
-                    !item
-                    || !item.toTokenId
-                    || item.toTokenId !== this.toTokenId
-                ) {
-                    continue;
-                }
-                codeList.push(code);
-            }
-
-            return codeList;
-        },
-        noData() {
-            if (this.searchText) {
-                return this.$t('trade.noData.search');
-            }
-            if (this.isOnlyFavorite) {
-                return this.$t('trade.noData.favorite');
-            }
-
-            return this.$t('hint.noData');
-        },
-        activeTxPairList() {
-            if (this.isLoading) {
-                return [];
-            }
-            let list
-                = this.searchText
-                    ? this.searchList
-                    : this.isOnlyFavorite
-                        ? this.activeFavoriteList
-                        : this.txPairList;
-            list = [].concat(list);
-
-            return list;
-        },
-        activeFavoriteList() {
-            const list = [];
-            this.txPairList.forEach(txPair => {
-                if (this.favoriteCodeList.indexOf(txPair.pairCode) === -1) {
-                    return;
-                }
-                list.push(txPair);
-            });
-
-            return list;
-        },
-        activePairCode() {
-            return this.activeTxPair
-                ? this.activeTxPair.pairCode || null
-                : null;
-        },
-        activeTxPair() {
-            return this.$store.state.exchangeActiveTxPair.activeTxPair;
         }
     },
     methods: {
@@ -243,12 +233,66 @@ export default {
                 return { ttoken: this.toTokenId };
             });
         },
-        stopLoop() {
+        initFavoriteList() {
+            const pairs = [];
+            for (const pairCode in this.favoritePairs) {
+                pairs.push(pairCode);
+            }
+
+            assignPair({ pairs }).then(data => {
+                this.isLoading = false;
+                this.favoriteList = data;
+
+                this.stopAssignPair();
+                this.favoriteList && this.favoriteList.forEach(txPair => {
+                    const _t = new subTask('assignPair', ({ data }) => {
+                        if (!this.isShowFavorite) {
+                            this.stopAssignPair();
+                            return;
+                        }
+
+                        if (!data) {
+                            return;
+                        }
+
+                        let i;
+                        for (i = 0; i < this.favoriteList.length; i++) {
+                            if (this.favoriteList[i].pairCode === data.pairCode) {
+                                this.favoriteList[i] = data;
+                                break;
+                            }
+                        }
+
+                        if (i === this.favoriteList.length) {
+                            return;
+                        }
+
+                        this.favoriteList = [].concat(this.favoriteList);
+                    });
+                    _t.start(() => {
+                        return {
+                            ttoken: txPair.ttoken,
+                            ftoken: txPair.ftoken
+                        };
+                    }, false);
+                    assignPairTimerList.push(_t);
+                });
+            }).catch(err => {
+                this.isLoading = false;
+                this.favoriteList = [];
+                console.warn(err);
+            });
+        },
+        stopDefaultPair() {
             defaultPairTimer && defaultPairTimer.stop();
             defaultPairTimer = null;
         },
-        toggleShowFavorite() {
-            this.isOnlyFavorite = !this.isOnlyFavorite;
+        stopAssignPair() {
+            assignPairTimerList.forEach(assignTimer => {
+                assignTimer && assignTimer.stop();
+                assignTimer = null;
+            });
+            assignPairTimerList = [];
         },
         toogleShowCol(showCol) {
             this.showCol = showCol;

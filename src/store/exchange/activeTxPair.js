@@ -17,8 +17,14 @@ const mutations = {
 };
 
 const actions = {
-    exFetchActiveTxPair({ dispatch, commit }, txPair) {
+    exFetchActiveTxPair({ state, dispatch, commit }, txPair) {
+        const activeTxPair = state.activeTxPair;
         txPair && commit('exSetActiveTxPair', txPair);
+
+        if (txPair && activeTxPair && activeTxPair.pairCode === txPair.pairCode) {
+            return;
+        }
+
         dispatch('exFetchLatestTx');
         dispatch('exFetchDepth');
         dispatch('exFetchActiveTokens');
