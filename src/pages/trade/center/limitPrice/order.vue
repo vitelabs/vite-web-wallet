@@ -587,6 +587,14 @@ export default {
                 side: this.orderType === 'buy' ? 0 : 1,
                 price,
                 quantity
+            }, {
+                pow: true,
+                powConfig: {
+                    isShowCancel: true,
+                    cancel: () => {
+                        this.isLoading = false;
+                    }
+                }
             }).then(() => {
                 this.isLoading = false;
                 this.clearAll();
@@ -627,7 +635,7 @@ $font-black: rgba(36, 39, 43, 0.8);
         font-family: $font-normal, arial, sans-serif;
         font-weight: 400;
         color: rgba(94, 104, 117, 1);
-        width: 86px;
+        width: 95px;
         white-space: nowrap;
         margin-right: 6px;
     }
@@ -736,7 +744,8 @@ $font-black: rgba(36, 39, 43, 0.8);
 </style>
 
 <style lang="scss">
-@import "../center.scss";
+@import "~assets/scss/vars.scss";
+
 .dex-input-wrapper .input-wrapper {
     height: 100%;
     line-height: 30px;
