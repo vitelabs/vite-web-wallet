@@ -7,10 +7,10 @@
     color: #999;
 }
 ::-webkit-input-placeholder { /* WebKit browsers */
-    color:#999; 
+    color: #999; 
 }
 :-ms-input-placeholder { /* Internet Explorer 10+ */
-    color:#999; 
+    color: #999; 
 }
 
 body {
@@ -19,11 +19,6 @@ body {
     -webkit-overflow-scrolling: touch;
     font-family: $font-normal, arial, sans-serif;
     letter-spacing: 0;
-}
-
-::-webkit-scrollbar {
-    width: 0px;
-    height: 0;
 }
 
 ul {
@@ -141,6 +136,12 @@ textarea {
         }
     }
 }
+
+.clearfix {
+    overflow: auto;
+    zoom: 1;
+}
+
 @media only screen and (max-width: 500px) {
     .__btn_list .__btn {
         width: 48%;

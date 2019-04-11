@@ -15,7 +15,7 @@
                 {{ isHaveUsers ? $t('unlockAcc') : $t('login')  }}</div>
             <div v-show="!isLogin" @click="dexChange" class="tab __pointer">
                 {{ isHaveUsers ? $t('changeAcc') : $t('register') }}</div>
-            <div v-show="active === 'exchange'" class="tab __pointer"
+            <div v-show="active.indexOf('trade') !== -1 " class="tab __pointer"
                  v-unlock-account="showToken" @noactiveacc="dexStart">
                 {{ $t('dexToken') }}</div>
         </ul>

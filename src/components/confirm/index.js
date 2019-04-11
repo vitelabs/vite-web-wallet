@@ -2,7 +2,6 @@ import Vue from 'vue';
 import confirmComponent from '../confirm.vue';
 
 const Confirm = Vue.extend(confirmComponent);
-const instance = new Confirm({ el: document.createElement('div') });
 
 export default function ({
     showMask = true,
@@ -22,6 +21,8 @@ export default function ({
     },
     content = ''
 }) {
+    let instance = new Confirm({ el: document.createElement('div') });
+
     const appEl = document.getElementById('vite-wallet-app');
     const _close = cb => {
         try {
@@ -29,6 +30,7 @@ export default function ({
         } catch (err) {
             console.warn(err);
         }
+        instance = null;
         cb && cb();
     };
 

@@ -20,6 +20,7 @@ const mutations = {
 const actions = {
     exFetchLatestTx({ getters, commit }) {
         commit('exSetLatestTxLoading', true);
+        commit('exSetLatestTxList', []);
 
         latestTxTask = latestTxTask || new subTask('latestTx', ({ data }) => {
             commit('exSetLatestTxList', data);

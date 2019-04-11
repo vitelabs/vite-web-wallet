@@ -28,7 +28,7 @@ export default {
         },
         isShowCancel: {
             type: Boolean,
-            default: false
+            default: true
         }
     },
     data() {
@@ -72,7 +72,7 @@ export default {
         _cancel() {
             this.clearProcessTimeout();
             this.isShow = false;
-            this.cancel();
+            this.cancel && this.cancel();
         },
 
         async startPowTx(accountBlock, startTime, difficulty) {

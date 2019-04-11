@@ -16,16 +16,26 @@
                 <div v-show="!singleBtn" class="__btn btn-left __pointer"
                      @click="_leftBtnClick">{{ leftBtnTxt }}</div>
                 <div v-show="!singleBtn" class="__btn __btn_all_in __pointer"
-                     :class="{'unuse': btnUnuse }"
-                     @click="_rightBtnClick">{{ rightBtnTxt }}</div>
+                     :class="{'unuse': btnUnuse && !isShowLoading }"
+                     @click="_rightBtnClick">
+                    <span v-show="!isShowLoading || !btnUnuse">{{ rightBtnTxt }}</span>
+                    <loading v-show="btnUnuse && isShowLoading" loadingType="dot"></loading>
+                </div>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+import loading from 'components/loading.vue';
+
 export default {
+    components: { loading },
     props: {
+        isShowLoading: {
+            type: Boolean,
+            default: false
+        },
         showMask: {
             type: Boolean,
             default: false

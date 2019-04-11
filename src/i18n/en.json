@@ -3,7 +3,7 @@
     "start": "Start",
     "login": "Log In",
     "regAcc": "Register",
-    "dexToken": "Token Listing",
+    "dexToken": "Open Trading Pairs",
     "unlockAcc": "Unlock current account",
     "changeAcc": "Switch to other account",
     "existingAcc": "Existing Accounts",
@@ -21,14 +21,14 @@
     "withdrawHeight": "Expected Snapshot Height",
     "balance": "Balance",
     "dealReminder": {
-        "title": "成交提醒",
+        "title": "Deal Notice",
         "describe": "Your order {amount} {ttoken} ({ftoken}/{ttoken}) at {time} is a complete deal, visit Order History to find out more."
     },
     "pow": {
         "ing": "Running PoW to acquire quota",
-        "no": "如果您不想运行PoW，您可抵押VITE跳过此步骤==>? You can stake VITE for quota in case you would not like to run PoW"
+        "no": "You can stake VITE for quota in case you would not like to run PoW"
     },
-    "addAccount": "Add a new account",
+    "addAccount": "Create an Account",
     "saveQrcode": "Save QR code image",
     "unlockSuccess": "Unlock Success",
     "sendTrans": {
@@ -115,11 +115,11 @@
         "text3": "Please take proper precautions in ensuring that you accurately record and safely store your seed phrase. Even the slightest error will result in you not being able to successfully restore your address."
     },
     "preview": {
-        "t": "Preview Version",
-        "txt1": "The preview version of wallet is a lightweight-node wallet officially issued by VITE.",
-        "txt2": "The current version supports functions of checking account balance, sending transactions, receiving transactions in default, acquiring test tokens, staking VITE tokens for TPS quota, SBP registration, vote and etc.",
-        "txt3": "Support acquiring test tokens and experiencing the product by using them, the test tokens issued by VITE official can be only used for testing and with no actual value, it will be cleared by VITE official sporadically",
-        "v": "Current version: {version}"
+        "t": "ViteX Beta Version",
+        "txt1": "This is ViteX Beta Version.",
+        "txt2": "All of the test tokens from test environment are with no actual value and can only be used for testing.",
+        "txt3": "Meanwhile, test tokens will be reset every now and then.",
+        "v": "Current Version: {version}"
     },
     "pwdConfirm": {
         "conf": "Open password-free mode within {time}",
@@ -172,8 +172,8 @@
         "again": "Please input password again",
         "choose": "Choose account",
         "finish": "Done",
-        "agreementPre": "同意Vite钱包和ViteX",
-        "agreement": "隐私政策与服务协议",
+        "agreementPre": "I agree to Vite Wallet and ViteX's",
+        "agreement": "Privacy Policy and Terms of Service",
         "hint": {
             "nameInput": "Please input account name",
             "nameLong": "Account name cannot exceed 32 characters!",
@@ -254,8 +254,8 @@
             },
             "cancel": {
                 "describe": "Your current staked amount is {amount} VITE, please confirm to withdraw.",
-                "rightBtn": "Ready to go",
-                "leftBtn": "Cancel withdraw"
+                "rightBtn": "Ready to Go",
+                "leftBtn": "Cancel Withdraw"
             },
             "submit": {
                 "describe": "Make sure to stake {amount} VITE to obtain quota, you cannot withdraw until about 3 days after staking comes into effect.",
@@ -410,7 +410,7 @@
             "title": "Quick Understanding of VITE Conversion",
             "text": "You can migrate ERC20 tokens into VITE into our TestNet by VITE conversion function. In TestNet, casting your vote for official SBPs to collect rewards, the annualized rate can reach 20%. Your ERC20 VITE tokens will be transferred to Ethereum black hole address: {blackAddr}, you will receive the same amount of VITE at your Vite address when Ethereum black hole address has received the transaction and confirmed. Once you are in the conversion process, confirm that there are enough VITE and ETH (as gas) in your Ethereum address of Vite wallet."
         },
-        "gas": "Mining Fee",
+        "gas": "Mining Fees",
         "record": "Conversion History",
         "aboutPrice": "Approx {amount} ETH",
         "note": "Please wait in patient after submitting the conversion. You cannot receive the converted VITE until you have got 30 Ethereum transaction confirmations. Ehtereum transaction records can be viewed in Conversion History section.",
@@ -422,14 +422,14 @@
             "success": "Conversion Successful. It may take approx 20 minutes to get VITE into your account after the Ethereum transaction is confirmed."
         }
     },
-    "exchange": {
+    "trade": {
         "title": "Exchange",
         "search": "Search",
         "txPair": "Pair",
         "price": "Price",
         "upDown": "Change%",
-        "txNum": "Amount",
-        "quantityTitle": "Amount({quantity})",
+        "txNum": "Volume",
+        "quantityTitle": "Total({quantity})",
         "priceTitle": "Price({price})",
         "amountTitle": "Amount({amount})",
         "amountTable": "Qty",
@@ -477,7 +477,7 @@
             "tokenId": "Token ID",
             "publisher": "Issuer",
             "total": "Total",
-            "tokenDigit": "decimals",
+            "tokenDigit": "Decimals",
             "publisherDate": "Issuance Date",
             "type": "Status",
             "tokenType0": "Issuance Available",
@@ -498,13 +498,17 @@
         },
         "limitPrice": {
             "title": "Limit",
-            "fee": "Fee",
+            "fee": "Fees",
             "text": "This page is a preview page of transaction data. Please login to trade.",
-            "validAmountDigit": "成交额需大于{amount}{token}",
-            "validMaxDigit": "最多{digit}位小数"
+            "validAmountDigit": "Volume must be greater than {amount}{token}",
+            "validMaxDigit": "At most {digit} decimals",
+            "priceNotNull": "Amount cannot be empty",
+            "amountNotNull": "Volume cannot be empty",
+            "quantityNotNull": "Quantity cannot be empty",
+            "bigger0": "Value must be greater than 0"
         }
     },
-    "exchangeAssets": {
+    "tradeAssets": {
         "title": "Funds",
         "search": "Please input token name",
         "operate": "Action",
@@ -558,14 +562,17 @@
             "placeholder": "Please input withdrawal amount",
             "btn": "Withdraw"
         },
-        "zero": "隐藏小额代币"
+        "zero": "Hide small tokens"
     },
-    "exchangeOpenOrders": {
+    "tradeOpenOrders": {
+        "cancelErr": "You are trying too ofter, please try again later.",
         "confirm":{
-            "successToast":"Revoking Transaction Successful",
-            "failToast":"Revoking Transaction Failed",
+            "successToast":"Revoking Order Successful",
+            "failToast":"Revoking Order Failed",
             "submitTxt":"Confirm to revoke",
-            "cancelTxt":"Cancel"
+            "cancelTxt":"Cancel",
+            "title": "Revoke Order",
+            "content": "Are you sure you want to revoke current order?"
         },
         "title": "Open Orders",
         "hint": {
@@ -587,15 +594,20 @@
                 "Amount",
                 "Filled",
                 "Filled%",
-                "Avg Price"
+                "Average"
             ],
             "rowMap": {
                 "cancel": "Cancel"
             }
         }
     },
-    "exchangeOrderHistory": {
+    "tradeOrderHistory": {
         "title": "Order History",
+        "hint": {
+            "fdate": "Please choose start date",
+            "tdate": "Please choose end date",
+            "dateErr": "End date must be after start date"
+        },
         "side": {
             "1": "Sell",
             "0": "Buy"
@@ -605,9 +617,9 @@
             "heads": [
                 "Time",
                 "Price",
-                "Volume",
-                "Fee",
-                "Amount"
+                "Amount",
+                "Fees",
+                "Total"
             ]
         },
         "table": {
@@ -619,15 +631,16 @@
                 "Amount",
                 "Filled",
                 "Filled%",
-                "Avg Price",
-                "Fee",
+                "Average",
+                "Fees",
                 "Status"
             ],
             "rowMap": {
                 "statusMap": {
                     "1": "In Order",
                     "2": "Completed",
-                    "3": "Canceled"
+                    "3": "Canceled",
+                    "4": "Failed"
                 },
                 "detail": "Details"
             }

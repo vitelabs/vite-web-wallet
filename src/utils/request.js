@@ -6,7 +6,6 @@ export default function request({ method = 'GET', path, params = {}, timeout = r
     method = method.toUpperCase();
 
     const xhr = new XMLHttpRequest();
-    xhr.timeout = timeout;
     const qsStr = qs.stringify(params);
 
     method === 'GET' && (
@@ -16,6 +15,7 @@ export default function request({ method = 'GET', path, params = {}, timeout = r
     );
     xhr.open(method, path, true);
     xhr.setRequestHeader('content-type', 'application/json; charset=utf-8');
+    xhr.timeout = timeout;
 
     if (method === 'POST') {
         xhr.send(JSON.stringify(params));
@@ -29,7 +29,6 @@ export default function request({ method = 'GET', path, params = {}, timeout = r
                 if (+xhr.status === 200) {
                     if (path.indexOf('kline') !== -1) {
                         res(JSON.parse(xhr.responseText));
-
                         return;
                     }
 
