@@ -1,11 +1,15 @@
 import { baseToken } from 'services/trade';
 
 const state = {
+    isShowFavorite: false,
     currentMarket: '',
     marketMap: []
 };
 
 const mutations = {
+    setIsShowFavorite(state, isShow) {
+        state.isShowFavorite = isShow;
+    },
     setCurrentMarket(state, tokenId) {
         state.currentMarket = tokenId;
     },
