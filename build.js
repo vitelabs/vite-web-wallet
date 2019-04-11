@@ -3,9 +3,14 @@ const path = require('path');
 
 console.log(`Write netlifyConf ${ process.env.NODE_ENV }`);
 
-const redirect = process.env.NODE_ENV === 'test'
-    ? path.join(__dirname, 'netlifyConf/_redirects_test')
-    : path.join(__dirname, 'netlifyConf/_redirects');
+let redirect;
+if (process.env.NODE_ENV === 'test') {
+    redirect = path.join(__dirname, 'netlifyConf/_redirects_test');
+} else if (process.env.NODE_ENV === 'dexTestNet') {
+    redirect = path.join(__dirname, 'netlifyConf/_redirects_dex_testnet');
+} else {
+    redirect = path.join(__dirname, 'netlifyConf/_redirects');
+}
 
 const staticPath = path.join(__dirname, 'dist');
 const chartPath = path.join(__dirname, 'charting_library');
@@ -19,6 +24,7 @@ if (!result) {
 }
 
 fs.writeFileSync(path.join(staticPath, '_redirects'), fs.readFileSync(redirect));
+fs.writeFileSync(path.join(staticPath, 'privacy.html'), fs.readFileSync(path.join(__dirname, './privacy.html')));
 copyFolder(chartPath, chartStaticPath);
 
 

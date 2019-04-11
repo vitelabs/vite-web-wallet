@@ -2,17 +2,19 @@ require('./buildRoutes.js');
 
 const path = require('path');
 const merge = require('webpack-merge');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 const plugins = require('./webpackConf/plugins.js');
 const devConfig = require('./webpackConf/dev.config.js');
 const testConfig = require('./webpackConf/test.config.js');
+const dexTestNetConfig = require('./webpackConf/dexTestNet.config.js');
 
 const SRC_PATH = path.join(__dirname, './src');
 const CHARTING_PATH = path.join(__dirname, './charting_library');
 const STATIC_PATH = process.env.APP === 'true'
     ? path.join(__dirname, '../../app/walletPages')
     : path.join(__dirname, './dist');
-const development = [ 'dev', 'test' ];
+const development = [ 'dev', 'test', 'dexTestNet' ];
 
 let webpackConfig = {
     mode: development.indexOf(process.env.NODE_ENV) > -1 ? 'development' : 'production',
@@ -38,7 +40,20 @@ let webpackConfig = {
                     reuseExistingChunk: true
                 }
             }
-        }
+        },
+        minimizer: [
+        // We specify a custom UglifyJsPlugin here to get source maps in production
+            new UglifyJsPlugin({
+                cache: true,
+                parallel: true,
+                uglifyOptions: {
+                    compress: false,
+                    ecma: 6,
+                    mangle: true
+                },
+                sourceMap: true
+            })
+        ]
     },
     module: {
         rules: [ {
@@ -53,7 +68,7 @@ let webpackConfig = {
             }
         }, {
             test: /\.js$/,
-            exclude: /node_modules(?!\/base-x)/,
+            exclude: /node_modules(?!(\/base-x)|(\/resize-detector)|(\/vue-echarts))/,
             use: {
                 loader: 'babel-loader',
                 options: { presets: ['@babel/preset-env'] }
@@ -95,6 +110,9 @@ if (process.env.NODE_ENV === 'dev') {
 }
 if (process.env.NODE_ENV === 'test') {
     webpackConfig = merge(webpackConfig, testConfig);
+}
+if (process.env.NODE_ENV === 'dexTestNet') {
+    webpackConfig = merge(webpackConfig, dexTestNetConfig);
 }
 
 module.exports = webpackConfig;

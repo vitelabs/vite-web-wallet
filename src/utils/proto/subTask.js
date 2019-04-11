@@ -1,6 +1,6 @@
 import { client } from './index';
 import { timer } from 'utils/asyncFlow';
-import { depth, defaultPair, assignPair, latestTx, order } from 'services/exchange';
+import { depth, defaultPair, assignPair, latestTx, order } from 'services/trade';
 
 export function depthWs({ ftoken, ttoken }) {
     const key = `market.${ ftoken }-${ ttoken }.depth.latest`;
@@ -164,7 +164,7 @@ export class subTask extends timer {
             if (this.subKey !== key) {
                 return;
             }
-            console.log(this.subKey, data);
+            // console.log(this.subKey, data);
             this.callback && this.callback({ args, data });
         }, (data, err) => {
             if (err) {

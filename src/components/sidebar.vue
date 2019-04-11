@@ -39,8 +39,8 @@ import logout from 'assets/imgs/logout_default.svg';
 import logoutActive from 'assets/imgs/logout_pressed.svg';
 import login from 'assets/imgs/login_default.svg';
 import loginActive from 'assets/imgs/login_pressed.svg';
-import exchange from 'assets/imgs/exchange_default.svg';
-import exchangeActive from 'assets/imgs/exchange_pressed.svg';
+import trade from 'assets/imgs/trade_default.svg';
+import tradeActive from 'assets/imgs/trade_pressed.svg';
 
 export default {
     components: { testNotice },
@@ -66,16 +66,16 @@ export default {
             icon: {
                 wallet,
                 walletActive,
-                exchange,
-                exchangeActive,
+                trade,
+                tradeActive,
                 setting,
                 settingActive,
                 logout,
                 logoutActive,
                 login,
                 loginActive,
-                index: exchange,
-                indexActive: exchange
+                index: trade,
+                indexActive: trade
             }
         };
     },
