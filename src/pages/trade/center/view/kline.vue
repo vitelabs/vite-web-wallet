@@ -121,9 +121,15 @@ export default {
         createDepthBtn() {
             const button = this.tvWidget.createButton({ align: 'right' })[0];
             button.textContent = this.$t('trade.depthView');
+            button.setAttribute('style', 'cursor: pointer;');
             button.addEventListener('click', () => {
                 this.toogleDepth();
             });
+
+            const klineButton = this.tvWidget.createButton({ align: 'right' })[0];
+            klineButton.textContent = this.$t('trade.klineView');
+            klineButton.parentNode.setAttribute('style', 'background: rgba(75, 116, 255, 0.1); cursor: pointer;');
+            console.log(klineButton);
         }
     }
 };

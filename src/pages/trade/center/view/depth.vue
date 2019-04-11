@@ -1,6 +1,9 @@
 <template>
     <div class="depth-wrapper">
-        <div @click="toogleDepth" class="btn __pointer">{{ $t('trade.klineView') }}</div>
+        <div class="bar">
+            <div class="btn active __pointer">{{ $t('trade.depthView') }}</div>
+            <div @click="toogleDepth" class="btn __pointer">{{ $t('trade.klineView') }}</div>
+        </div>
         <e-charts class="e-charts-wrapper" auto-resize :options="deptChartOption"></e-charts>
     </div>
 </template>
@@ -132,19 +135,45 @@ export default {
     flex-direction: column;
     width: 100%;
     height: 100%;
+    background: #f7f9fb;
+    padding: 0 6px 10px;
+    box-sizing: border-box;
 
-    .btn {
-        line-height: 40px;
-        flex-basis: 40px;
-        color: #4c525e;
-        padding: 0 10px;
-        text-align: right;
+    .bar {
+        display: flex;
+        height: 38px;
+        width: 100%;
+        background: #fff;
+        flex-direction: row;
+        margin-bottom: 6px;
+        align-items: center;
+        white-space: nowrap;
+        justify-content: flex-end;
+        .btn {
+            line-height: 40px;
+            color: #4c525e;
+            padding: 0 10px;
+            text-align: right;
+            user-select: none;
+            font-size: 14px;
+            font-family: Trebuchet MS,Tahoma,Arial,sans-serif;
+            transition: color 0.06s ease;
+            &:hover {
+                color: #131722;;
+            }
+            &.active {
+                background: rgba(75, 116, 255, 0.1);
+            }
+        }
     }
 
     .e-charts-wrapper {
         flex: 1;
         width: 100%;
         height: 100%;
+        box-sizing: border-box;
+        background: #fff;
+        border: 1px solid #dadde0;
     }
 }
 </style>
