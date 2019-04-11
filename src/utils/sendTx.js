@@ -3,7 +3,6 @@ import { wallet } from 'utils/wallet';
 import { powProcess } from 'components/pow/index';
 import { quotaConfirm } from 'components/quota/index';
 
-console.log(utils.tools);
 const { isObject } = utils.encoder;
 
 /**
@@ -197,7 +196,7 @@ function formatConfig(config) {
     if (powConfig.cancel && typeof powConfig.cancel !== 'function') {
         throw new Error('[Error] utils/sendTx: config.pow[1].cancel should be a function.');
     }
-    console.log(powConfig);
+
     if (!(powConfig.hasOwnProperty('isShowCancel')
         && typeof powConfig.isShowCancel !== 'undefined'
         && powConfig.isShowCancel !== null)) {
