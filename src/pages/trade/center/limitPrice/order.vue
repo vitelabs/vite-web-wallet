@@ -716,7 +716,7 @@ $font-black: rgba(36, 39, 43, 0.8);
     }
 
     .slider-wrapper {
-        margin: 16px 5px;
+        margin: 6px 5px;
     }
 
     .order-btn {
