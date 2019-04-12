@@ -68,7 +68,7 @@ import sendTx from 'utils/sendTx';
 import BigNumber from 'utils/bigNumber';
 import getTokenIcon from 'utils/getTokenIcon';
 import { timer } from 'utils/asyncFlow';
-import { deposit, withdraw, chargeDetail, rateToken } from 'services/trade';
+import { deposit, withdraw, chargeDetail, rateToken, tokenDetail } from 'services/trade';
 import viteInput from 'components/viteInput';
 import confirm from 'components/confirm.vue';
 import alert from '../components/alert.vue';
@@ -102,7 +102,9 @@ export default {
             acc: null,
             addr: '',
             isRotate: false,
-            assignRateMap: {}
+            assignRateMap: {},
+            tokenMap: {},
+            fetchTokenMapIds: []
         };
     },
     computed: {
@@ -191,14 +193,19 @@ export default {
     watch: {
         balance: function () {
             for (const tokenId in this.balance) {
-                if (this.fetchTokenIds.indexOf(tokenId) > -1) {
-                    return;
+                if (this.fetchTokenIds.indexOf(tokenId) === -1) {
+                    this.fetchTokenIds.push(tokenId);
                 }
-                this.fetchTokenIds.push(tokenId);
+                if (this.fetchTokenMapIds.indexOf(tokenId) === -1) {
+                    this.fetchTokenMapIds.push(tokenId);
+                }
             }
         },
         fetchTokenIds: function () {
             this.startLoophRate();
+        },
+        fetchTokenMapIds: function () {
+            this.fetchTokenDetails();
         }
     },
     methods: {
@@ -225,11 +232,38 @@ export default {
             }
             return this.rateMap[tokenId][coin] || null;
         },
+        fetchTokenDetails() {
+            if (!this.fetchTokenMapIds || !this.fetchTokenMapIds.length) {
+                return;
+            }
+
+            const repList = [];
+            this.fetchTokenMapIds.forEach(tokenId => {
+                repList.push(tokenDetail({ tokenId }));
+            });
+
+            Promise.all(repList).then(data => {
+                if (!data || !data.length) {
+                    return;
+                }
+
+                data.forEach(tokenDetail => {
+                    this.tokenMap[tokenDetail.tokenId] = tokenDetail;
+                });
+            }).catch(err => {
+                console.warn(err);
+            });
+        },
         getTokenIcon(tokenId) {
+            if (this.tokenMap && this.tokenMap[tokenId] && this.tokenMap[tokenId].urlIcon) {
+                return this.tokenMap[tokenId].urlIcon;
+            }
+
             const defaultToken = this.$store.state.ledger.tokenInfoMaps[tokenId];
             if (defaultToken && defaultToken.icon) {
                 return defaultToken.icon;
             }
+
             return getTokenIcon(tokenId);
         },
         update: debounce(function () {
