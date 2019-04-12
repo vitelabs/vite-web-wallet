@@ -6,6 +6,7 @@
         <div class="header">
             <img class="header-logo __pointer" :src="logo" />
             <change-lang class="change-lang __pointer"></change-lang>
+            <div class="go-vitex __pointer" @click="goViteX">{{ $t('goViteX') }}</div>
         </div>
         <div class="confirm-wrapper">
             <div class="confirm"> <slot></slot> </div>
@@ -27,11 +28,18 @@ export default {
             bg,
             logo
         };
+    },
+    methods: {
+        goViteX() {
+            window.open('https://wallet-beta.vite.net');
+        }
     }
 };
 </script>
 
 <style lang="scss" scoped>
+@import "~assets/scss/vars.scss";
+
 .index-layout-wrapper {
     position: relative;
     width: 100%;
@@ -52,6 +60,17 @@ export default {
         .header-logo {
             display: inline-block;
             width: 90px;
+        }
+        .go-vitex {
+            float: right;
+            margin-top: 12px;
+            border-radius: 2px;
+            border: 1px solid rgba(255,255,255,0.7);
+            padding: 5px 10px;
+            line-height: 18px;
+            font-size: 14px;
+            font-family: $font-bold, arial, sans-serif;
+            color: #fff;
         }
         .change-lang {
             float: right;
