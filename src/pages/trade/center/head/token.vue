@@ -98,6 +98,10 @@ export default {
                 return '';
             }
 
+            if (this.ftokenDetail.urlIcon) {
+                return this.ftokenDetail.urlIcon;
+            }
+
             const tokenId = this.ftokenDetail.tokenId;
             const defaultToken = this.defaultTokens[tokenId];
 
@@ -109,6 +113,10 @@ export default {
         ttokenIcon() {
             if (!this.ttokenDetail) {
                 return '';
+            }
+
+            if (this.ttokenDetail.urlIcon) {
+                return this.ttokenDetail.urlIcon;
             }
 
             const tokenId = this.ttokenDetail.tokenId;
