@@ -91,16 +91,6 @@ export default {
             });
 
             return _l;
-        },
-        rate() {
-            const rateList = this.$store.state.exchangeRate.rateMap || {};
-            const tokenId = this.activeTxPair && this.activeTxPair.ttoken ? this.activeTxPair.ttoken : null;
-            const coin = this.$store.state.exchangeRate.coins[this.$i18n.locale || 'zh'];
-            if (!tokenId || !rateList[tokenId]) {
-                return null;
-            }
-
-            return rateList[tokenId][coin] || null;
         }
     },
     methods: {
@@ -128,15 +118,30 @@ export default {
             }
         },
         getRealPrice(txPair) {
-            if (!txPair || !this.rate) {
+            if (!txPair) {
                 return '';
             }
+
+            const rate = this.getRate(txPair.rawData.ttoken);
+            if (!rate) {
+                return '';
+            }
+
             let pre = '$';
             if (this.$i18n.locale === 'zh') {
                 pre = '￥';
             }
 
-            return pre + BigNumber.multi(txPair.price || 0, this.rate || 0, 2);
+            return pre + BigNumber.multi(txPair.price || 0, rate || 0, 2);
+        },
+        getRate(tokenId) {
+            const rateList = this.$store.state.exchangeRate.rateMap || {};
+            const coin = this.$store.state.exchangeRate.coins[this.$i18n.locale || 'zh'];
+
+            if (!tokenId || !rateList[tokenId]) {
+                return null;
+            }
+            return rateList[tokenId][coin] || null;
         },
         orderList(list) {
             const compareStr = (aStr, bStr) => {
