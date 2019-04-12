@@ -10,12 +10,12 @@
                 <div class="head-row">
                     <div v-for="(h) in heads" :key="h">{{ h }}</div>
                 </div>
+                <div class="no-data" v-show="!list || !list.length">
+                    <div>{{ $t('hint.noData') }}</div>
+                </div>
                 <div class="row-container">
                     <div class="row" v-for="(v,i) in list" :key="i">
                         <div v-for="(item,j) in v " :key="j">{{item}}</div>
-                    </div>
-                    <div class="no-data" v-show="!list || !list.length">
-                        <div>{{ $t('hint.noData') }}</div>
                     </div>
                 </div>
             </div>
@@ -86,12 +86,12 @@ export default {
 }
 
 .confirm-wrapper {
+    display: flex;
+    flex-direction: column;
     width: 70%;
     max-height: 85%;
     min-height: 300px;
     min-width: 500px;
-    display: flex;
-    flex-direction: column;
     background: #fff;
     border-radius: 2px;
 
@@ -114,7 +114,14 @@ export default {
     }
 
     .ex_tb {
+        box-shadow: none;
+        .no-data {
+            position: relative;
+            top: 0;
+            margin-top: 55px;
+        }
         .head-row {
+            position: sticky;
             >div {
                 &:first-child {
                     margin: 0 3px 0 18px;
@@ -126,6 +133,9 @@ export default {
             }
         }
         .row {
+            &:last-child {
+                border-bottom: 1px solid rgba(198, 203, 212, 0.3);
+            }
             >div {
                 &:first-child {
                     margin: 0 3px 0 18px;
