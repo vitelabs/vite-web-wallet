@@ -86,6 +86,7 @@ export default {
 }
 
 .confirm-wrapper {
+    position: relative;
     display: flex;
     flex-direction: column;
     width: 70%;
@@ -114,6 +115,12 @@ export default {
     }
 
     .ex_tb {
+        position: absolute;
+        display: block;
+        top: 44px;
+        bottom: 0;
+        left: 0;
+        right: 0;
         box-shadow: none;
         .no-data {
             position: relative;
@@ -131,6 +138,13 @@ export default {
                     margin: 0 18px 0 3px;
                 }
             }
+        }
+        .row-container {
+            position: absolute;
+            top: 32px;
+            bottom: 0;
+            left: 0;
+            right: 0;
         }
         .row {
             &:last-child {
