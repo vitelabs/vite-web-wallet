@@ -19,7 +19,7 @@
                 <span v-show="showCol === 'updown'" class="__center-tb-item percent" :class="{
                     'up': +txPair.price24hChange > 0,
                     'down': +txPair.price24hChange < 0
-                }">{{ txPair.price24hChange ? formatNum(txPair.price24hChange, 2) + '%' : '--' }}</span>
+                }">{{ txPair.price24hChange ? getPercent(txPair.price24hChange) : '--' }}</span>
                 <span v-show="showCol === 'txNum'" class="__center-tb-item">
                     {{ txPair.quantity24h ? formatNum(txPair.quantity24h, 1) : '--' }}
                 </span>
@@ -94,6 +94,9 @@ export default {
         }
     },
     methods: {
+        getPercent(num) {
+            return `${ BigNumber.multi(num, 100, 2) }%`;
+        },
         formatNum(num, fix) {
             return BigNumber.formatNum(num, fix);
         },
