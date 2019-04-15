@@ -35,6 +35,12 @@
         "send": "Send Transaction",
         "symbol": "Send"
     },
+    "actionType":{
+        "SEND":"发送",
+        "RECEIVE":"接受",
+        "CHARGE":"充值",
+        "WITHDRAW":"提现"
+    },
     "errCode": {
         "35003": "{name} ID conflict occurs, please re-submit later",
         "35004": "Built-in contract error, please try again later（35004）",

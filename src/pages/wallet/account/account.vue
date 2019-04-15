@@ -6,7 +6,7 @@
         <account-head class="item"></account-head>
         <div class="token-list item">
             <tokenCard v-for="token in tokenList" :key="token.id"
-                       :opt="token" :sendTransaction="showTrans"></tokenCard>
+                       :opt="token" @action="action($event,token.id)"></tokenCard>
         </div>
         <transaction v-if="isShowTrans" :token="activeToken" :closeTrans="closeTrans"></transaction>
     </div>
@@ -14,7 +14,7 @@
 
 <script>
 import syncBlock from 'components/syncBlock';
-import tokenCard from 'components/tokenCard';
+import tokenCard from './tokenCard';
 import accountHead from './head';
 import transaction from './transaction';
 
@@ -27,15 +27,14 @@ export default {
         };
     },
     computed: {
+
+
         tokenList() {
             const tokenList = JSON.parse(JSON.stringify(this.$store.getters.tokenBalanceList));
 
-            for (const tokenId in this.$store.state.ledger.defaultTokenIds) {
-                if (!this.$store.state.ledger.tokenInfoMaps[tokenId] && !tokenList[tokenId]) {
-                    break;
-                }
-
+            for (const tokenId in this.$store.state.ledger.defaultTokenIds) {//
                 const token = this.$store.state.ledger.tokenInfoMaps[tokenId] || tokenList[tokenId];
+                if (!token) break;
                 const defaultToken = this.$store.state.ledger.defaultTokenIds[tokenId];
                 const symbol = token.tokenSymbol || defaultToken.tokenSymbol;
 
@@ -53,6 +52,7 @@ export default {
                 return tokenList;
             }
 
+
             // Force vite at first
             const list = [];
             const viteId = viteTokenInfo.tokenId;
@@ -63,11 +63,16 @@ export default {
             Object.keys(tokenList).forEach(k => {
                 list.push(tokenList[k]);
             });
+            // -------------
+
 
             return list;
         }
     },
     methods: {
+        action(actionType, tokenId) {
+            console.log(actionType, tokenId);
+        },
         showTrans(token) {
             if (!token.id) {
                 return;
@@ -78,6 +83,12 @@ export default {
         closeTrans() {
             this.isShowTrans = false;
             this.activeToken = null;
+        },
+        charge() {
+
+        },
+        withdraw() {
+
         }
     }
 };

@@ -43,7 +43,7 @@ const actions = {
             }
 
             commit('commitTransList', data);
-            dispatch('setTokenInfoList', data.list || []);
+            data.list && dispatch('setTokenInfoList', data.list);
 
             return data;
         });

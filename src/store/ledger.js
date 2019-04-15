@@ -6,6 +6,7 @@ import viteIcon from 'assets/imgs/vite.svg';
 import vcpIcon from 'assets/imgs/VCC.svg';
 import vttIcon from 'assets/imgs/vtt.svg';
 
+
 const ViteId = constant.Vite_TokenId;
 const defaultTokenList = process.env.NODE_ENV === 'production' ? {
     'tti_5649544520544f4b454e6e40': {
@@ -36,7 +37,6 @@ const defaultTokenList = process.env.NODE_ENV === 'production' ? {
 };
 
 let heightTimer = null;
-
 const state = {
     currentHeight: '',
     defaultTokenIds: defaultTokenList,
@@ -100,7 +100,7 @@ const getters = {
         if (!state.tokenInfoMaps[ViteId]) {
             return null;
         }
-        state.tokenInfoMaps[ViteId].tokenId = ViteId;
+        state.tokenInfoMaps[ViteId].tokenId = ViteId;// ？ change state outside of mutation
 
         return state.tokenInfoMaps[ViteId];
     }
