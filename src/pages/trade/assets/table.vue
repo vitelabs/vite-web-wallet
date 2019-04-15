@@ -133,8 +133,8 @@ export default {
             const res = {};
             Object.keys(exB).forEach(t => {
                 res[t] = {
-                    available: Number(exB[t].available),
-                    lock: Number(exB[t].lock),
+                    available: exB[t].available,
+                    lock: exB[t].lock,
                     balance: 0,
                     icon: '',
                     id: t,
@@ -146,13 +146,13 @@ export default {
             Object.keys(walletB).forEach(t => {
                 if (res[t]) {
                     res[t].icon = walletB[t].icon;
-                    res[t].balance = Number(walletB[t].balance);
+                    res[t].balance = walletB[t].balance;
                     return;
                 }
                 res[t] = {
                     available: 0,
                     lock: 0,
-                    balance: Number(walletB[t].balance),
+                    balance: walletB[t].balance,
                     icon: walletB[t].icon,
                     id: t,
                     symbol: walletB[t].symbol,
