@@ -209,7 +209,7 @@ export default {
         flex-grow: 1;
         .icon{
             height: 34px;
-            width:34px;
+            width: 34px;
             margin-right: 20px;
         }
     }
@@ -278,20 +278,20 @@ export default {
             font-size: 14px;
             flex-grow: 1;
             width: 100%;
-            color:rgba(94,104,117,1);
-            display:flex;
+            color: rgba(94,104,117,1);
+            display: flex;
             justify-content: flex-end;
             padding-right: 30px;
             align-items: center;
             &:first-child{
-                color:rgba(0,122,255,1);
+                color: rgba(0,122,255,1);
                 border-bottom: 1px solid rgba(227, 235, 245, 0.6);
             }
         }
         .more-icon {
             margin-left: 4px;
             height: 10px;
-            width:6px;
+            width: 6px;
         }
     }
 }
