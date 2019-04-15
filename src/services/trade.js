@@ -62,10 +62,12 @@ export const rateFiat = function () {
     return request({ path: `${ path }/rate/fiat` });
 };
 
-export const rateToken = function ({ tokenIdList }) {
+export const rateToken = function ({ tokenIdList = [] }) {
+    const tokensStr = tokenIdList.join(',');
+
     return request({
         path: `${ path }/rate/assign`,
-        params: { tokens: tokenIdList }
+        params: { tokens: tokensStr }
     });
 };
 

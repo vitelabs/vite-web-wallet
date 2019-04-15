@@ -114,7 +114,7 @@ export class subTask extends timer {
         this.subStatus = true;
     }
 
-    start(argsGetter) {
+    start(argsGetter, isNeedAllDataFirst = true) {
         this.argsGetter = argsGetter;
         super.start();
 
@@ -122,7 +122,7 @@ export class subTask extends timer {
         const args = this.args;
         const key = this.subKey;
 
-        httpServicesMap[this.key] && httpServicesMap[this.key](args).then(data => {
+        isNeedAllDataFirst && httpServicesMap[this.key] && httpServicesMap[this.key](args).then(data => {
             if (this.subKey !== key) {
                 return;
             }

@@ -3,7 +3,7 @@
         <div class="head-row">
             <div v-for="(h) in $t('tradeAssets.table.heads')"
                  :key="h">
-                {{h.replace("#tokenSymbol#","vite")}}
+                {{ h.replace("#tokenSymbol#","vite") }}
             </div>
             <div>{{ $t('tradeAssets.operate') }}
                 <img @click="update" class="refresh" :class="{rotate:isRotate}" src="~assets/imgs/trade/refresh.svg" />
@@ -11,20 +11,20 @@
         </div>
         <div class="row-container">
             <div class="row" v-for="token in list" :key="token.id">
-                <div>{{token.symbol}}</div>
-                <div>{{Number((token.available+token.lock).toFixed(8))}}</div>
-                <div>{{token.available}}</div>
-                <div>{{token.lock||0}}</div>
-                <div>{{token.worth}}</div>
+                <div>{{ token.symbol }}</div>
+                <div>{{ token.total }}</div>
+                <div>{{ token.available }}</div>
+                <div>{{ token.lock || 0 }}</div>
+                <div>{{ token.worth }}</div>
                 <div>
                     <span v-unlock-account @unlocked="recharge(token.id)"
                           class="click-able">
-                        {{$t("tradeAssets.table.rowMap.recharge")}}</span>
+                        {{ $t("tradeAssets.table.rowMap.recharge") }}</span>
                     <span v-unlock-account @unlocked="withdraw(token.id)"
                           class="click-able">
-                        {{$t("tradeAssets.table.rowMap.withdraw")}}</span>
+                        {{ $t("tradeAssets.table.rowMap.withdraw") }}</span>
                     <span @click="detail(token.id)" class="click-able">
-                        {{$t("tradeAssets.table.rowMap.detail")}}</span>
+                        {{ $t("tradeAssets.table.rowMap.detail") }}</span>
                 </div>
             </div>
             <div class="no-data" v-show="!list || !list.length">
@@ -40,7 +40,7 @@
                 <div class="__row-t">{{ c.lable1 }}</div>
                 <div class="input un-click-able">
                     <img :src="c.icon" />
-                    {{balance[c.tokenId].symbol}}
+                    {{ balance[c.tokenId].symbol }}
                     <div class="num">
                         {{ c.type.toLowerCase()==="recharge" ? balance[c.tokenId].balance : balance[c.tokenId].available }}
                     </div>
@@ -62,19 +62,20 @@
 </template>
 
 <script>
-import alert from '../components/alert.vue';
+import d from 'dayjs';
+import debounce from 'lodash/debounce';
+import sendTx from 'utils/sendTx';
 import BigNumber from 'utils/bigNumber';
 import getTokenIcon from 'utils/getTokenIcon';
+import { timer } from 'utils/asyncFlow';
+import { deposit, withdraw, chargeDetail, rateToken } from 'services/trade';
 import viteInput from 'components/viteInput';
 import confirm from 'components/confirm.vue';
-import sendTx from 'utils/sendTx';
-
-import debounce from 'lodash/debounce';
-import d from 'dayjs';
-
-import { deposit, withdraw, chargeDetail } from 'services/trade';
+import alert from '../components/alert.vue';
 
 const VoteDifficulty = '201564160';
+const loopTime = 2 * 60 * 60 * 1000;
+let rateTimer = null;
 
 export default {
     components: { confirm, alert, viteInput },
@@ -86,8 +87,12 @@ export default {
         }
         this.acc && (this.addr = this.acc.getDefaultAddr());
     },
+    destroyed() {
+        this.stopLoopRate();
+    },
     data() {
         return {
+            fetchTokenIds: [],
             detailConifrm: false,
             c: {},
             opNumber: '',
@@ -96,7 +101,8 @@ export default {
             detailConfirm: false,
             acc: null,
             addr: '',
-            isRotate: false
+            isRotate: false,
+            assignRateMap: {}
         };
     },
     computed: {
@@ -111,6 +117,12 @@ export default {
                     o.amount
                 ];
             });
+        },
+        baseRateMap() {
+            return this.$store.state.exchangeRate.rateMap || {};
+        },
+        rateMap() {
+            return Object.assign({}, this.baseRateMap, this.assignRateMap);
         },
         balance() {
             const exB = this.$store.getters.exBalanceList;
@@ -128,13 +140,13 @@ export default {
                     decimals: exB[t].tokenInfo.decimals
                 };
             });
+
             Object.keys(walletB).forEach(t => {
                 if (res[t]) {
                     res[t].icon = walletB[t].icon;
                     res[t].balance = Number(walletB[t].balance);
                     return;
                 }
-
                 res[t] = {
                     available: 0,
                     lock: 0,
@@ -145,19 +157,21 @@ export default {
                     decimals: walletB[t].decimals
                 };
             });
+
             Object.keys(res).forEach(t => {
-                res[t].icon = res[t].icon || getTokenIcon(res[t].id);
-                if (!this.$store.state.exchangeRate.rateMap[t]) {
+                res[t].icon = this.getTokenIcon(res[t].id);
+                res[t].total = BigNumber.plus(res[t].available, res[t].lock, 8, 'nofix');
+
+                const rate = this.getRate(t);
+
+                if (!rate) {
                     res[t].worth = '-';
                     return;
                 }
 
-                res[t].worth = `${ this.$i18n.locale === 'zh' ? '¥' : '$' }${ (
-                    this.$store.state.exchangeRate.rateMap[t][
-                        this.$i18n.locale === 'zh' ? 'cny' : 'usd'
-                    ]
-                    * (res[t].available + res[t].lock)
-                ).toFixed(2) }`;
+                const pre = this.$i18n.locale === 'zh' ? '¥' : '$';
+                const realPrice = BigNumber.multi(rate, res[t].total, 2);
+                res[t].worth = `${ pre }${ realPrice }`;
             });
 
             return res;
@@ -174,7 +188,50 @@ export default {
                 });
         }
     },
+    watch: {
+        balance: function () {
+            for (const tokenId in this.balance) {
+                if (this.fetchTokenIds.indexOf(tokenId) > -1) {
+                    return;
+                }
+                this.fetchTokenIds.push(tokenId);
+            }
+        },
+        fetchTokenIds: function () {
+            this.startLoophRate();
+        }
+    },
     methods: {
+        startLoophRate() {
+            this.stopLoopRate();
+
+            rateTimer = new timer(() => rateToken({ tokenIdList: this.fetchTokenIds }).then(data => {
+                if (!data) {
+                    return;
+                }
+                this.assignRateMap = data;
+            }), loopTime);
+
+            rateTimer.start();
+        },
+        stopLoopRate() {
+            rateTimer && rateTimer.stop();
+            rateTimer = null;
+        },
+        getRate(tokenId) {
+            const coin = this.$store.state.exchangeRate.coins[this.$i18n.locale || 'zh'];
+            if (!tokenId || !this.rateMap[tokenId]) {
+                return null;
+            }
+            return this.rateMap[tokenId][coin] || null;
+        },
+        getTokenIcon(tokenId) {
+            const defaultToken = this.$store.state.ledger.tokenInfoMaps[tokenId];
+            if (defaultToken && defaultToken.icon) {
+                return defaultToken.icon;
+            }
+            return getTokenIcon(tokenId);
+        },
         update: debounce(function () {
             this.isRotate = true;
             setTimeout(() => {

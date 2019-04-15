@@ -148,12 +148,12 @@ export default {
     }
 }
 
-@media only screen and (max-width: 1350px) {
+@media only screen and (max-width: 1400px) {
     .txpair-head-wrapper {
         flex-direction: column;
         height: 110px;
         .else-wrapper {
-            margin-top: 10px;
+            margin-top: 6px;
         }
     }
     .item-left:first-child {
