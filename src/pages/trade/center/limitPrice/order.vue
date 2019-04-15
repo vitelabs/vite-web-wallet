@@ -143,25 +143,31 @@ export default {
                 return;
             }
 
-            // const quantity = this.activeTx.num;
+            const quantity = BigNumber.normalFormatNum(this.activeTx.num, this.ftokenDigit);
 
-            // if (this.orderType === 'sell'
-            //     && BigNumber.compared(this.balance || 0, quantity) < 0) {
-            //     this.quantity = BigNumber.normalFormatNum(this.balance || '', this.ftokenDigit);
-            //     this.quantityChanged();
-            //     return;
-            // }
+            if (this.orderType === 'sell'
+                && BigNumber.compared(this.balance || 0, quantity) < 0) {
+                if (+this.balance === 0) {
+                    return;
+                }
+                this.quantity = BigNumber.normalFormatNum(this.balance, this.ftokenDigit);
+                this.quantityChanged();
+                return;
+            }
 
-            // if (this.orderType === 'buy') {
-            //     const amount = this.getAmount(this.price, quantity);
-            //     if (BigNumber.compared(this.balance || 0, amount) < 0) {
-            //         this.amount = BigNumber.normalFormatNum(this.balance || '', this.ttokenDigit);
-            //         this.amountChanged();
-            //         return;
-            //     }
-            // }
+            if (this.orderType === 'buy') {
+                const amount = this.getAmount(this.price, quantity);
+                if (BigNumber.compared(this.balance || 0, amount) < 0) {
+                    if (+this.balance === 0) {
+                        return;
+                    }
+                    this.amount = BigNumber.normalFormatNum(this.balance || '', this.ttokenDigit);
+                    this.quantity = this.getQuantity(this.price, this.amount);
+                    return;
+                }
+            }
 
-            this.quantity = BigNumber.normalFormatNum(this.activeTx.num, this.ftokenDigit);
+            this.quantity = quantity;
             this.quantityChanged();
         }
     },
@@ -257,7 +263,6 @@ export default {
             return BigNumber.toBasic(balance, tokenInfo.decimals);
         },
         ttokenDetail() {
-            console.log(this.$store.state.exchangeTokens);
             return this.$store.state.exchangeTokens.ttoken;
         },
         ftokenDetail() {
