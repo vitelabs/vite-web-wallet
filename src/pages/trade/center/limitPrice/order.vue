@@ -143,6 +143,24 @@ export default {
                 return;
             }
 
+            // const quantity = this.activeTx.num;
+
+            // if (this.orderType === 'sell'
+            //     && BigNumber.compared(this.balance || 0, quantity) < 0) {
+            //     this.quantity = BigNumber.normalFormatNum(this.balance || '', this.ftokenDigit);
+            //     this.quantityChanged();
+            //     return;
+            // }
+
+            // if (this.orderType === 'buy') {
+            //     const amount = this.getAmount(this.price, quantity);
+            //     if (BigNumber.compared(this.balance || 0, amount) < 0) {
+            //         this.amount = BigNumber.normalFormatNum(this.balance || '', this.ttokenDigit);
+            //         this.amountChanged();
+            //         return;
+            //     }
+            // }
+
             this.quantity = BigNumber.normalFormatNum(this.activeTx.num, this.ftokenDigit);
             this.quantityChanged();
         }
@@ -239,6 +257,7 @@ export default {
             return BigNumber.toBasic(balance, tokenInfo.decimals);
         },
         ttokenDetail() {
+            console.log(this.$store.state.exchangeTokens);
             return this.$store.state.exchangeTokens.ttoken;
         },
         ftokenDetail() {
@@ -426,11 +445,15 @@ export default {
                 return '';
             }
 
+            console.log(amount, this.ttokenDetail);
+
             let minAmount = BigNumber.toMin(amount, this.ttokenDetail.tokenDigit);
-            console.log(minAmount);
+            console.log(minAmount, this.ttokenDetail.tokenDigit);
+
+            console.log(price);
 
             const minPrice = BigNumber.toMin(price, this.ttokenDetail.tokenDigit);
-            console.log(minPrice);
+            console.log(minPrice, this.ttokenDetail.tokenDigit);
 
             if (this.orderType === 'buy') {
                 minAmount = BigNumber.dividedToNumber(minAmount, 1 + taker, 0);
