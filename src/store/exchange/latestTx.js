@@ -22,7 +22,8 @@ const actions = {
         commit('exSetLatestTxLoading', true);
         commit('exSetLatestTxList', []);
 
-        latestTxTask = latestTxTask || new subTask('latestTx', ({ data }) => {
+        stopLatestTimer();
+        latestTxTask = new subTask('latestTx', ({ data }) => {
             commit('exSetLatestTxList', data);
             commit('exSetLatestTxLoading', false);
         }, latestTxTime);
@@ -36,6 +37,7 @@ const actions = {
 
 function stopLatestTimer() {
     latestTxTask && latestTxTask.stop();
+    latestTxTask = null;
 }
 
 export default {

@@ -286,7 +286,6 @@ export default {
         showTips(type) {
             this.focusInput = type;
         },
-
         percentChanged(percent) {
             percent = percent / 100;
 
