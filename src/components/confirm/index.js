@@ -23,7 +23,7 @@ export default function ({
 }) {
     let instance = new Confirm({ el: document.createElement('div') });
 
-    const appEl = document.getElementById('vite-wallet-app');
+    const appEl = document.body;
     const _close = cb => {
         try {
             appEl.removeChild(instance.$el);

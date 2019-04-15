@@ -42,7 +42,7 @@ let webpackConfig = {
             }
         },
         minimizer: [
-        // We specify a custom UglifyJsPlugin here to get source maps in production
+            // We specify a custom UglifyJsPlugin here to get source maps in production
             new UglifyJsPlugin({
                 cache: true,
                 parallel: true,
@@ -56,32 +56,45 @@ let webpackConfig = {
         ]
     },
     module: {
-        rules: [ {
-            test: /\.vue$/,
-            use: [{ loader: 'vue-loader' }]
-        }, {
-            test: /\.(svg|png|jpg|gif)$/,
-            loader: 'url-loader',
-            query: {
-                // 10KB
-                limit: 10 * 1024
-            }
-        }, {
-            test: /\.js$/,
-            exclude: /node_modules(?!(\/base-x)|(\/resize-detector)|(\/vue-echarts))/,
-            use: {
-                loader: 'babel-loader',
-                options: { presets: ['@babel/preset-env'] }
-            }
-        }, {
-            test: /(\.scss$|\.css$|\.sass$)/,
-            use: [
-                { loader: 'style-loader' },
-                { loader: 'css-loader' },
-                { loader: 'sass-loader' },
-                { loader: 'postcss-loader' }
-            ]
-        } ]
+        rules: [
+            {
+                test: /\.pug$/,
+                oneOf: [
+                    // 这条规则应用到 Vue 组件内的 `<template lang="pug">`
+                    {
+                        resourceQuery: /^\?vue/,
+                        use: ['pug-plain-loader']
+                    },
+                    // 这条规则应用到 JavaScript 内的 pug 导入
+                    { use: [ 'raw-loader', 'pug-plain-loader' ] }
+                ]
+            },
+            {
+                test: /\.vue$/,
+                use: [{ loader: 'vue-loader' }]
+            }, {
+                test: /\.(svg|png|jpg|gif)$/,
+                loader: 'url-loader',
+                query: {
+                    // 10KB
+                    limit: 10 * 1024
+                }
+            }, {
+                test: /\.js$/,
+                exclude: /node_modules(?!(\/base-x)|(\/resize-detector)|(\/vue-echarts))/,
+                use: {
+                    loader: 'babel-loader',
+                    options: { presets: ['@babel/preset-env'] }
+                }
+            }, {
+                test: /(\.scss$|\.css$|\.sass$)/,
+                use: [
+                    { loader: 'style-loader' },
+                    { loader: 'css-loader' },
+                    { loader: 'sass-loader' },
+                    { loader: 'postcss-loader' }
+                ]
+            } ]
         // Postcss: function() {
         // return [px2rem({remUnit: 75})];
         // }
