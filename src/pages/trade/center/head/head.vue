@@ -39,7 +39,7 @@
             <div class="quantity item-left">
                 <div class="token-title">{{ $t('trade.head.quantity') }}</div>
                 <div class="token-content">
-                    {{ activeTxPair && activeTxPair.quantity24h ? formatNum(activeTxPair.quantity24h, 1) + ' ' + activeTxPair.ttokenShow : '--' }}
+                    {{ activeTxPair && activeTxPair.amount24h ? formatNum(activeTxPair.amount24h, 1) + ' ' + activeTxPair.ttokenShow : '--' }}
                 </div>
             </div>
         </div>
@@ -114,7 +114,7 @@ export default {
 
     .token-wrapper {
         float: left;
-        margin-top: 2px;
+        margin-top: -5px;
     }
     .else-wrapper {
         display: flex;
@@ -151,7 +151,7 @@ export default {
 @media only screen and (max-width: 1400px) {
     .txpair-head-wrapper {
         flex-direction: column;
-        height: 110px;
+        height: 120px;
         .else-wrapper {
             margin-top: 6px;
         }

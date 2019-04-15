@@ -286,7 +286,6 @@ export default {
         showTips(type) {
             this.focusInput = type;
         },
-
         percentChanged(percent) {
             percent = percent / 100;
 
@@ -360,6 +359,7 @@ export default {
             !BigNumber.isEqual(amount, this.amount) && (this.amount = amount);
         },
 
+        // price = amount / quantity / (1+taker)
         getPrice(quantity, amount) {
             const isRightQuantity = quantity
                                     && this.$validAmount(quantity) === 0
@@ -387,6 +387,7 @@ export default {
             const result = BigNumber.multi(percent, this.balance, digit, 'nofix');
             return BigNumber.isEqual(result, 0) ? '' : result;
         },
+        // amount = quantity * price * (1+taker)
         getAmount(price, quantity) {
             const isRightPrice = price
                                 && this.$validAmount(price) === 0
@@ -409,6 +410,7 @@ export default {
             const amount = BigNumber.multi(price, quantity);
             return BigNumber.multi(amount, 1 + taker, this.ttokenDigit);
         },
+        // quantity = amount/price/（1+taker)
         getQuantity(price, amount) {
             const isRightPrice = price
                                 && this.$validAmount(price) === 0
@@ -424,10 +426,13 @@ export default {
                 return '';
             }
 
+            let minAmount = BigNumber.toMin(amount, this.ttokenDetail.tokenDigit);
+            const minPrice = BigNumber.toMin(price, this.ttokenDetail.tokenDigit);
+
             if (this.orderType === 'buy') {
-                price = BigNumber.multi(price, 1 + taker);
+                minAmount = BigNumber.dividedToNumber(minAmount, 1 + taker, 0);
             }
-            return BigNumber.dividedToNumber(amount, price, this.ftokenDigit, 'nofix');
+            return BigNumber.dividedToNumber(minAmount, minPrice, this.ftokenDigit, 'nofix');
         },
 
         validPrice() {
@@ -624,7 +629,7 @@ $font-black: rgba(36, 39, 43, 0.8);
         margin-bottom: 10px;
     }
     .real-price {
-        max-width: 75px;
+        max-width: 85px;
         box-sizing: border-box;
         padding: 0 6px;
         font-size: 12px;
@@ -655,6 +660,7 @@ $font-black: rgba(36, 39, 43, 0.8);
     position: absolute;
     left: 50%;
     bottom: 42px;
+    z-index: 10;
     transform: translate(-50%, 0);
     background: #fff;
     box-shadow: 0px 5px 20px 0px rgba(0,0,0,0.1);
@@ -665,11 +671,13 @@ $font-black: rgba(36, 39, 43, 0.8);
     font-family: $font-normal, arial, sans-serif;
     opacity: 0;
     transition: opacity 0.2s ease-in-out;
-    width: auto;
+    width: 0;
     height: auto;
     white-space: nowrap;
     &.active {
+        display: block;
         min-width: 0;
+        width: auto;
         height: auto;
         opacity: 1;
         padding: 6px;

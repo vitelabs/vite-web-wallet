@@ -5,8 +5,10 @@
 <script>
 import { widget } from 'charting/charting_library.min';
 import datafeed from './datafeeds.js';
+import { clearTimeout, setTimeout } from 'timers';
 
 let datafeedObj;
+let initTimeout = null;
 
 export default {
     props: {
@@ -20,7 +22,10 @@ export default {
         }
     },
     mounted() {
-        this.symbol && this.init();
+        this.timeoutInit();
+    },
+    destroyed() {
+        this.clearInitTimeout();
     },
     computed: {
         symbol() {
@@ -39,16 +44,29 @@ export default {
     },
     watch: {
         symbol: function () {
-            this.symbol && this.init();
+            this.timeoutInit();
         },
         lang: function () {
-            this.symbol && this.init();
+            this.timeoutInit();
         }
     },
     data() {
         return { tvWidget: null };
     },
     methods: {
+        timeoutInit() {
+            if (!this.symbol) {
+                return;
+            }
+            this.clearInitTimeout();
+            initTimeout = setTimeout(() => {
+                this.init();
+            }, 700);
+        },
+        clearInitTimeout() {
+            initTimeout && clearTimeout(initTimeout);
+            initTimeout = null;
+        },
         init() {
             this.tvWidget && this.tvWidget.remove();
             datafeedObj && datafeedObj.unsubscribeBars();
