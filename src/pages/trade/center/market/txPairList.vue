@@ -19,9 +19,9 @@
                 <span v-show="showCol === 'updown'" class="__center-tb-item percent" :class="{
                     'up': +txPair.price24hChange > 0,
                     'down': +txPair.price24hChange < 0
-                }">{{ txPair.price24hChange ? formatNum(txPair.price24hChange, 2) + '%' : '--' }}</span>
+                }">{{ txPair.price24hChange ? getPercent(txPair.price24hChange) : '--' }}</span>
                 <span v-show="showCol === 'txNum'" class="__center-tb-item">
-                    {{ txPair.quantity24h ? formatNum(txPair.quantity24h, 1) : '--' }}
+                    {{ txPair.amount24h ? formatNum(txPair.amount24h, 1) : '--' }}
                 </span>
             </div>
         </div>
@@ -82,7 +82,7 @@ export default {
                 const item = {};
                 item.pairCode = _t.pairCode;
                 item.price = _t.price;
-                item.quantity24h = _t.quantity24h;
+                item.amount24h = _t.amount24h;
                 item.showPair = `${ _t.ftokenShow }/${ _t.ttokenShow }`;
                 item.price24hChange = _t.price24hChange;
                 item.rawData = _t;
@@ -91,19 +91,12 @@ export default {
             });
 
             return _l;
-        },
-        rate() {
-            const rateList = this.$store.state.exchangeRate.rateMap || {};
-            const tokenId = this.activeTxPair && this.activeTxPair.ttoken ? this.activeTxPair.ttoken : null;
-            const coin = this.$store.state.exchangeRate.coins[this.$i18n.locale || 'zh'];
-            if (!tokenId || !rateList[tokenId]) {
-                return null;
-            }
-
-            return rateList[tokenId][coin] || null;
         }
     },
     methods: {
+        getPercent(num) {
+            return `${ BigNumber.multi(num, 100, 2) }%`;
+        },
         formatNum(num, fix) {
             return BigNumber.formatNum(num, fix);
         },
@@ -128,15 +121,30 @@ export default {
             }
         },
         getRealPrice(txPair) {
-            if (!txPair || !this.rate) {
+            if (!txPair) {
                 return '';
             }
+
+            const rate = this.getRate(txPair.rawData.ttoken);
+            if (!rate) {
+                return '';
+            }
+
             let pre = '$';
             if (this.$i18n.locale === 'zh') {
                 pre = '￥';
             }
 
-            return pre + BigNumber.multi(txPair.price || 0, this.rate || 0, 2);
+            return pre + BigNumber.multi(txPair.price || 0, rate || 0, 2);
+        },
+        getRate(tokenId) {
+            const rateList = this.$store.state.exchangeRate.rateMap || {};
+            const coin = this.$store.state.exchangeRate.coins[this.$i18n.locale || 'zh'];
+
+            if (!tokenId || !rateList[tokenId]) {
+                return null;
+            }
+            return rateList[tokenId][coin] || null;
         },
         orderList(list) {
             const compareStr = (aStr, bStr) => {
@@ -162,9 +170,9 @@ export default {
                 case 'upDownDown':
                     return (b.price - b.priceBefore24h) - (a.price - a.priceBefore24h);
                 case 'txNumUp':
-                    return a.quantity24h - b.quantity24h;
+                    return a.amount24h - b.amount24h;
                 case 'txNumDown':
-                    return b.quantity24h - a.quantity24h;
+                    return b.amount24h - a.amount24h;
                 default:
                     return compareStr(a.ftokenShow, b.ftokenShow);
                 }

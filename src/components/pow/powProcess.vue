@@ -86,7 +86,7 @@ export default {
             limitTimeout = setTimeout(() => {
                 isTimeUp = true;
                 timtUpCb && timtUpCb();
-            }, 3000);
+            }, 1500);
 
             const activeAccount = this.$wallet.getActiveAccount();
             let data;
