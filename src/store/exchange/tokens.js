@@ -7,9 +7,11 @@ const state = {
 
 const mutations = {
     exSetActiveTtoken(state, ttoken) {
+        console.log(ttoken);
         state.ttoken = ttoken;
     },
     exSetActiveFtoken(state, ftoken) {
+        console.log(ftoken);
         state.ftoken = ftoken;
     }
 };
