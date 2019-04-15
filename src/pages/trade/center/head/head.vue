@@ -39,7 +39,7 @@
             <div class="quantity item-left">
                 <div class="token-title">{{ $t('trade.head.quantity') }}</div>
                 <div class="token-content">
-                    {{ activeTxPair && activeTxPair.quantity24h ? formatNum(activeTxPair.quantity24h, 1) + ' ' + activeTxPair.ftokenShow : '--' }}
+                    {{ activeTxPair && activeTxPair.amount24h ? formatNum(activeTxPair.amount24h, 1) + ' ' + activeTxPair.ttokenShow : '--' }}
                 </div>
             </div>
         </div>
