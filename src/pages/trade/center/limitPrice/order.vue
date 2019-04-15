@@ -427,11 +427,17 @@ export default {
             }
 
             let minAmount = BigNumber.toMin(amount, this.ttokenDetail.tokenDigit);
+            console.log(minAmount);
+
             const minPrice = BigNumber.toMin(price, this.ttokenDetail.tokenDigit);
+            console.log(minPrice);
 
             if (this.orderType === 'buy') {
                 minAmount = BigNumber.dividedToNumber(minAmount, 1 + taker, 0);
+                console.log(minAmount);
             }
+
+            console.log(BigNumber.dividedToNumber(minAmount, minPrice, this.ftokenDigit, 'nofix'));
             return BigNumber.dividedToNumber(minAmount, minPrice, this.ftokenDigit, 'nofix');
         },
 
