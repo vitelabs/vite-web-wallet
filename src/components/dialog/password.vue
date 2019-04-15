@@ -1,7 +1,7 @@
-<template>
-    <div>
-        fdsaffaf
-    </div>
+<template lang="pug">
+extends ./base.pug
+block content
+    div sample
 </template>
 
 <script>
