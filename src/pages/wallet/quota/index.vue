@@ -171,6 +171,7 @@ export default {
             }).then(() => {
                 cb && cb(true);
             }).catch(err => {
+                console.warn(err);
                 cb && cb(false, err);
             })
                 .powSuccessed(() => {
@@ -178,6 +179,7 @@ export default {
                     cb && cb(true);
                 })
                 .powFailed(err => {
+                    console.warn(err);
                     this.closeConfirm();
                     cb && cb(false, err);
                 });
