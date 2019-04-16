@@ -1148,15 +1148,15 @@
     "@types/unist" "*"
     "@types/vfile-message" "*"
 
-"@vite/vitejs-ws@2.0.0-alpha.11":
-  version "2.0.0-alpha.11"
-  resolved "https://registry.yarnpkg.com/@vite/vitejs-ws/-/vitejs-ws-2.0.0-alpha.11.tgz#2ddefad1a791f4dda6151085f3a3d3e9940ab0ca"
-  integrity sha512-OfR6nPuH/MJbPCsuPIaqatVxCiWFak7YUklMBZCewYuQmyWo2hmXxRCwX+Q9Xfh1V+dnuoOnQPAVQLdIGKUk1w==
+"@vite/vitejs-ws@2.0.0-alpha.12":
+  version "2.0.0-alpha.12"
+  resolved "https://registry.yarnpkg.com/@vite/vitejs-ws/-/vitejs-ws-2.0.0-alpha.12.tgz#5340ca0c418eebf2d6465c344f2a3f5b0b7eac2e"
+  integrity sha512-4ZlbesKCkCY+06sQRBMOlS+MtRah+zsdVUwuKJVPiKKkAuqVZaFUlgWyo4n8yCwvYAC8O10xP/yR3dh282B31g==
 
-"@vite/vitejs@2.0.0-alpha.11":
-  version "2.0.0-alpha.11"
-  resolved "https://registry.yarnpkg.com/@vite/vitejs/-/vitejs-2.0.0-alpha.11.tgz#9d7fecca433807d441821f3602cff00856e21ade"
-  integrity sha512-BzrQuuxoxePSgjlfMfBYdUaOsE28qVEYpkB4FAIH7LzFOwKRMDDtPPCcoTwXOAlOIK1KYHR+BObBg066Db1W7w==
+"@vite/vitejs@2.0.0-alpha.12":
+  version "2.0.0-alpha.12"
+  resolved "https://registry.yarnpkg.com/@vite/vitejs/-/vitejs-2.0.0-alpha.12.tgz#a38dbc92a44a47da805d550092958107534bf024"
+  integrity sha512-oJEdipaTLhCYROnFLoNIerK8MXZk+LUVtmlE2xhUmZhoDagxQERRhUgMP+sP88Z4ss2FwklXQzjsNXz74EX5Ig==
 
 "@vue/component-compiler-utils@^2.5.1":
   version "2.6.0"
