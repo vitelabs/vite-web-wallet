@@ -1,0 +1,84 @@
+package viteDexPackage
+syntax = "proto3";
+
+message DexProto {
+    string client_id = 1;
+    string event_key = 2;
+    string op_type = 3;
+    bytes message = 4;
+    int32 error_code = 5;
+}
+
+message TradePairProto {
+    string pairCode = 1;
+    string ftoken = 2;
+    string ftokenShow = 3;
+    string ttoken = 4;
+    string ttokenShow = 5;
+    string priceBefore24 = 6;
+    string pricePrev = 7;
+    string price = 8;
+    string price24hChange = 9;
+    string price24hHigh = 10;
+    string price24hLow = 11;
+    string quantity24h = 12;
+    string amount24h = 13;
+    int32 fromDecimals = 14;
+    int32 toDecimals = 15;
+}
+
+message TxLatestListProto {
+    repeated TxLatestProto txList = 1;
+}
+
+message TxLatestProto {
+    int32 txSide = 1;
+    string price = 2;
+    string quantity = 3;
+    int64 txTime = 4;
+}
+
+message KlineProto {
+    int64 t = 1;
+    double c = 2;
+    double o = 3;
+    double h = 4;
+    double l = 5;
+    double v = 6;
+}
+
+message OrderListProto {
+    repeated OrderProto orderList = 1;
+}
+
+message OrderProto {
+    string address = 1;
+    int64 date = 2;
+    string ftokenShow = 3;
+    string ttokenShow = 4;
+    string ftoken = 5;
+    string ttoken = 6;
+    int32 side = 7;
+    string price = 8;
+    string quantity = 9;
+    string amount = 10;
+    string filledQ = 11;
+    string filledA = 12;
+    double rate = 13;
+    string average = 14;
+    string fee = 15;
+    string orderId = 16;
+    int32 status = 17;
+    int32 type = 18;
+}
+
+message DepthListProto {
+    repeated DepthProto asks = 1;
+    repeated DepthProto bids = 2;
+}
+
+message DepthProto {
+    string price = 1;
+    string quantity = 2;
+    string amount = 3;
+}

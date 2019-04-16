@@ -27,13 +27,13 @@ class WsProtoClient {
             };
 
             connect.onmessage = e => {
-                const message = proto.decode(new Uint8Array(e.data));
-                // See ConversionOptions
-                const data = proto.toObject(message, { /* Longs: String, enums: String, bytes: String*/ });
+                const rootMessage = proto.lookupType('vite.DexProto');
+                const data = rootMessage.decode(new Uint8Array(e.data));
 
                 if (data.op_type !== this.MESSAGETYPE.PUSH) return;
 
-                const realData = data.error_code ? null : JSON.parse(data.message);
+                const realData = getRealData(data);
+                console.log(realData);
                 const error = data.error_code || undefined;
                 this._subKeys[data.event_key] && this._subKeys[data.event_key].forEach(c => {
                     c(realData, error);
@@ -91,3 +91,44 @@ class WsProtoClient {
 }
 
 export const client = new WsProtoClient(process.env.pushServer);
+
+
+function getRealData(data) {
+    if (data.error_code) {
+        return null;
+    }
+
+    const event_key = data.event_key;
+    let key = null;
+    if (/^order.vite_[a-zA-Z0-9]{50}.latest$/.test(event_key)) {
+        key = 'OrderProto';
+    } else if (/^market.tti_[a-zA-Z0-9]{24}-tti_[a-zA-Z0-9]{24}.kline.(minute|hour|day|week|month|year|minute15|minute30|hour2|hour4|hour6|hour12|month3|month6)$/.test(event_key)) {
+        key = 'KlineProto';
+    } else if (/^market.tti_[a-zA-Z0-9]{24}-tti_[a-zA-Z0-9]{24}.depth.latest$/.test(event_key)) {
+        key = 'DepthListProto';
+    } else if (/^market.tti_[a-zA-Z0-9]{24}-tti_[a-zA-Z0-9]{24}.detail.latest$/.test(event_key)) {
+        key = 'TradePairProto';
+    } else if (/^market.tti_[a-zA-Z0-9]{24}.details.latest$/.test(event_key)) {
+        key = 'TradePairListProto';
+    } else if (/^market.tti_[a-zA-Z0-9]{24}-tti_[a-zA-Z0-9]{24}.trade.latest$/.test(event_key)) {
+        key = 'TxLatestProto';
+    } else if (/market.tti_[a-zA-Z0-9]{24}-tti_[a-zA-Z0-9]{24}.order.vite_[a-zA-Z0-9]{50}.(history|current)$/.test(event_key)) {
+        key = 'OrderListProto';
+    }
+    console.log(event_key, key, data);
+    if (!key) {
+        return null;
+    }
+
+    const listKey = [ 'TradePairListProto', 'TxLatestListProto', 'OrderListProto' ];
+
+    const messageProto = proto.lookupType(`vite.${ key }`);
+    const result = messageProto.decode(data.message);
+
+    console.log(key, result);
+
+    if (listKey.indexOf(key) !== -1) {
+        return result && result.list ? result.list : null;
+    }
+    return result;
+}
