@@ -33,7 +33,6 @@ class WsProtoClient {
                 if (data.op_type !== this.MESSAGETYPE.PUSH) return;
 
                 const realData = getRealData(data);
-                console.log(realData);
                 const error = data.error_code || undefined;
                 this._subKeys[data.event_key] && this._subKeys[data.event_key].forEach(c => {
                     c(realData, error);
@@ -115,7 +114,7 @@ function getRealData(data) {
     } else if (/market.tti_[a-zA-Z0-9]{24}-tti_[a-zA-Z0-9]{24}.order.vite_[a-zA-Z0-9]{50}.(history|current)$/.test(event_key)) {
         key = 'OrderListProto';
     }
-    console.log(event_key, key, data);
+
     if (!key) {
         return null;
     }
@@ -124,8 +123,6 @@ function getRealData(data) {
 
     const messageProto = proto.lookupType(`vite.${ key }`);
     const result = messageProto.decode(data.message);
-
-    console.log(key, result);
 
     if (listKey.indexOf(key) !== -1) {
         return result && result.list ? result.list : null;
