@@ -41,9 +41,6 @@ const TradePairProto = new Type('TradePairProto')
     .add(new Field('fromDecimals', 14, 'int32'))
     .add(new Field('toDecimals', 15, 'int32'));
 
-const TradePairListProto = new Type('TradePairListProto')
-    .add(new Field('list', 1, 'TradePairProto', 'repeated'));
-
 const TxLatestListProto = new Type('TxLatestListProto')
     .add(new Field('list', 1, 'TxLatestProto', 'repeated'));
 
@@ -102,5 +99,4 @@ export const root = new Root().define('vite')
     .add(OrderListProto)
     .add(OrderProto)
     .add(DepthListProto)
-    .add(DepthProto)
-    .add(TradePairListProto);
+    .add(DepthProto);
