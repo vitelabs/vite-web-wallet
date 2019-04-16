@@ -9,7 +9,7 @@
                 {{ $t("tradeAssets.zero") }}
             </div>
         </div>
-        <Table :filter="{ hideZero,filterKey: filterKey.trim() }"></Table>
+        <Table :filter="{ hideZero, filterKey: filterKey.trim() }"></Table>
     </div>
 </template>
 
