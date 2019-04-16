@@ -31,7 +31,7 @@ export default {
     },
     methods: {
         goViteX() {
-            window.open('https://wallet-beta.vite.net');
+            window.open('https://x-test.vite.net/');
         }
     }
 };
