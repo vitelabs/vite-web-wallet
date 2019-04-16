@@ -18,7 +18,7 @@
                 <span class="tips" :class="{'active':
                     focusInput === 'price' && priceErr
                 }">{{  priceErr ? $t(priceErr, { digit: ttokenDigit }) : '' }}</span>
-                <vite-input v-model="price"
+                <vite-input v-model="price" @input="priceChanged"
                             @focus="showTips('price')" @blur="hideTips('price')">
                     <span class="real-price __ellipsis" slot="after">{{ realPrice }}</span>
                 </vite-input>
@@ -126,7 +126,6 @@ export default {
         },
         price: function () {
             this.validAll();
-            this.priceChanged();
         },
         minAmount: function () {
             this.validAll();
@@ -135,15 +134,42 @@ export default {
             this.price = this.activeTx.price;
 
             if (!this.activeTx.num) {
+                this.priceChanged();
                 return;
             }
 
             if (!(this.orderType === 'buy' && this.activeTx.txSide === 1)
                 && !(this.orderType === 'sell' && this.activeTx.txSide === 0)) {
+                this.priceChanged();
                 return;
             }
 
-            this.quantity = BigNumber.normalFormatNum(this.activeTx.num, this.ftokenDigit);
+            const quantity = BigNumber.normalFormatNum(this.activeTx.num, this.ftokenDigit);
+
+            if (this.orderType === 'sell'
+                && BigNumber.compared(this.balance || 0, quantity) < 0) {
+                if (+this.balance === 0) {
+                    this.priceChanged();
+                    return;
+                }
+                this.quantity = BigNumber.normalFormatNum(this.balance, this.ftokenDigit);
+                this.quantityChanged();
+                return;
+            }
+
+            if (this.orderType === 'buy') {
+                const amount = this.getAmount(this.price, quantity);
+                if (BigNumber.compared(this.balance || 0, amount) < 0) {
+                    if (+this.balance === 0) {
+                        return;
+                    }
+                    this.amount = BigNumber.normalFormatNum(this.balance || '', this.ttokenDigit);
+                    this.quantity = this.getQuantity(this.price, this.amount);
+                    return;
+                }
+            }
+
+            this.quantity = quantity;
             this.quantityChanged();
         }
     },
@@ -432,6 +458,7 @@ export default {
             if (this.orderType === 'buy') {
                 minAmount = BigNumber.dividedToNumber(minAmount, 1 + taker, 0);
             }
+
             return BigNumber.dividedToNumber(minAmount, minPrice, this.ftokenDigit, 'nofix');
         },
 

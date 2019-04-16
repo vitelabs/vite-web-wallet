@@ -28,7 +28,7 @@
                 cell: 'tokenSymbol'
             }]" :contentList="transList" :clickRow="goDetail">
                 <pagination class="__tb_pagination" :currentPage="currentPage + 1"
-                            :totalPage="totalPage" :toPage="toPage"></pagination>
+                            :totalPage="+totalPage" :toPage="toPage"></pagination>
             </table-list>
 
             <table-list class="small-trans" :headList="[{

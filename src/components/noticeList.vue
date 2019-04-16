@@ -57,6 +57,8 @@ export default {
             task = null;
 
             task = new subTask('latestOrder', ({ args, data }) => {
+                console.log('成交提醒', data);
+
                 const account = this.$wallet.getActiveAccount();
                 const address = account ? account.getDefaultAddr() : '';
 

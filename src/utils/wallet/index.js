@@ -104,7 +104,7 @@ class _wallet {
 
         const requests = [];
         for (let i = 0; i < num; i++) {
-            requests.push($ViteJS.buildinLedger.getBalance(addrs[i].hexAddr));
+            requests.push($ViteJS.getBalance(addrs[i].hexAddr));
         }
 
         const data = await Promise.all(requests);

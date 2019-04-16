@@ -3,7 +3,7 @@ import { wallet } from 'utils/wallet';
 import { powProcess } from 'components/pow/index';
 import { quotaConfirm } from 'components/quota/index';
 
-const { isObject } = utils.encoder;
+const { isObject } = utils;
 
 /**
  * config: {
