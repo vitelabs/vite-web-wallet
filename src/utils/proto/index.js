@@ -34,6 +34,9 @@ class WsProtoClient {
                 if (data.op_type !== this.MESSAGETYPE.PUSH) return;
 
                 const realData = data.error_code ? null : JSON.parse(data.message);
+
+                console.log('onmessage', data.event_key, realData);
+
                 const error = data.error_code || undefined;
                 this._subKeys[data.event_key] && this._subKeys[data.event_key].forEach(c => {
                     c(realData, error);
