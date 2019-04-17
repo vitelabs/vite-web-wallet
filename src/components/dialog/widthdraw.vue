@@ -94,10 +94,10 @@ export default {
     box-sizing: border-box;
     margin-top: 16px;
     text-align: center;
-    padding:15px;
+    padding: 15px;
     &.edit{
         text-align: left;
-        background:rgba(255,255,255,1);
+        background: rgba(255,255,255,1);
     }
     &.space{
         display: flex;

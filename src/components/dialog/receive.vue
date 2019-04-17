@@ -67,9 +67,9 @@ export default {
     font-weight: 600;
     color: rgba(29, 32, 36, 1);
     line-height: 16px;
-    margin-top:20px;
+    margin-top: 20px;
     &:first-child{
-        margin-top:0;
+        margin-top: 0;
     }
     .title_icon {
         float: right;
@@ -88,23 +88,23 @@ export default {
     width: 100%;
     line-height: 40px;
     box-sizing: border-box;
-    margin-top:16px;
+    margin-top: 16px;
     text-align: center;
     &.edit{
         text-align: left;
-        background:rgba(255,255,255,1);
+        background: rgba(255,255,255,1);
     }
 }
 .qrcode-container {
     width: 455px;
     background: rgba(243, 246, 249, 1);
     border: 1px solid rgba(212, 222, 231, 1);
-    margin-top:20px;
-    padding:20px;
+    margin-top: 20px;
+    padding: 20px;
     box-sizing: border-box;
     text-align: center;
     &__content{
-        margin-top:22px;
+        margin-top: 22px;
 
     }
 }

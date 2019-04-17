@@ -112,7 +112,7 @@ export default {
     color: rgba(94, 104, 117, 1);
     line-height: 18px;
     padding-left: 13px;
-    margin-top:20px;
+    margin-top: 20px;
     .dot {
         width: 6px;
         height: 6px;
@@ -120,7 +120,7 @@ export default {
         border-radius: 10%;
         position: absolute;
         left: 0;
-        top:6px;
+        top: 6px;
     }
 }
 </style>
