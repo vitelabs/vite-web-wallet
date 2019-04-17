@@ -23,7 +23,11 @@ const actions = {
         commit('exSetLatestTxList', []);
 
         stopLatestTimer();
-        latestTxTask = new subTask('latestTx', ({ data }) => {
+        latestTxTask = new subTask('latestTx', ({ args, data }) => {
+            if (getters.exActiveTxPair.ftoken !== args.ftoken
+                || getters.exActiveTxPair.ttoken !== args.ttoken) {
+                return;
+            }
             commit('exSetLatestTxList', data);
             commit('exSetLatestTxLoading', false);
         }, latestTxTime);
