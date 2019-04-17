@@ -5,7 +5,7 @@ div(:style="s.container")
         div(:style="s.body")
             block content
                 div(v-if="content" v-html="content")
-        div(:style="s.btnGroup")
-            div(:style="[s.btn,btnUnuse?s.unUse:undefined]" v-if="signleBtn" @click="rClick") {{rTxt}}
-            div(:style="[s.btn,s.left,btnUnuse?s.unUse:undefined]" v-if="!signleBtn"  @click="lClick") {{lTxt}}
-            div(:style="[s.btn,btnUnuse?s.unUse:undefined]" v-if="!signleBtn"  @click="rClick") {{rTxt}}
+        div(:style="s.btnGroup" v-if="showBottom")
+            div(:style="[s.btn,btnUnuse?s.unUse:undefined]" v-if="!!sTxt" @click="rClick") {{sTxt}}
+            div(:style="[s.btn,s.left,btnUnuse?s.unUse:undefined]" v-if="!sTxt"  @click="lClick") {{lTxt}}
+            div(:style="[s.btn,btnUnuse?s.unUse:undefined]" v-if="!sTxt"  @click="rClick") {{rTxt}}

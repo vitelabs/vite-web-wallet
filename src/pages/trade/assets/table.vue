@@ -126,7 +126,7 @@ export default {
         },
         balance() {
             const exB = this.$store.getters.exBalanceList;
-            const walletB = this.$store.getters.tokenBalanceList;
+            const walletB = this.$store.getters.balanceInfo;
 
             const res = {};
             Object.keys(exB).forEach(t => {

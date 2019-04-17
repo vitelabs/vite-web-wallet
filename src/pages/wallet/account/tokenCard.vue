@@ -31,21 +31,21 @@
         </div>
         <div class="bottom">
             <div
-                v-unlock-account="$emit('action','SEND')"
+                v-unlock-account="()=>$emit('action','SEND')"
                 class="btn __pointer"
             >{{ $t('actionType.SEND') }}</div>
             <div
-                @click="$emit('action','RECEIVE')"
+                @click="receive"
                 class="btn __pointer"
             >{{ $t('actionType.RECEIVE') }}</div>
             <div
                 v-if="opt.type==='GATE'"
-                v-unlock-account="$emit('action','WITHDRAW')"
+                v-unlock-account="()=>$emit('action','WITHDRAW')"
                 class="btn __pointer"
             >{{ $t('actionType.WITHDRAW') }}</div>
             <div
                 v-if="opt.type==='GATE'"
-                v-unlock-account="$emit('action','CHARGE')"
+                @click="$emit('action','CHARGE')"
                 class="btn __pointer"
             >{{ $t('actionType.CHARGE') }}</div>
         </div>
@@ -53,6 +53,8 @@
 </template>
 
 <script>
+import { receiveDialog, chargeDialog } from 'components/dialog';
+import { wallet } from 'utils/wallet';
 export default {
     props: {
         opt: {
@@ -61,11 +63,16 @@ export default {
                 return {
                     symbol: '--',
                     balance: '--',
-                    fundFloat: '--',
-                    unConfirmes: '--',
-                    type: 'NATIVE'
+                    asset: '--',
+                    onroadNum: '--',
+                    type: 'OFFICAL'// OFFICAL OFFICALGATE SELFGATE
                 };
             }
+        }
+    },
+    computed: {
+        address() {
+            return wallet.activeWalletAcc && wallet.activeWalletAcc.getDefaultAddr();
         }
     },
     methods: {
@@ -74,6 +81,12 @@ export default {
                 return;
             }
             this.sendTransaction && this.sendTransaction(this.opt);
+        },
+        receive() {
+            receiveDialog({ title: '接收VITE', address: this.address });
+        },
+        charge() {
+            chargeDialog({ title: '充值', address: this.address });
         }
     }
 };

@@ -9,10 +9,6 @@ const STATUS = {
 
 const mixin = {
     props: {
-        destoryInstance: {
-            type: Function,
-            default: () => { }
-        },
         showMask: {
             type: Boolean,
             default: false
@@ -41,6 +37,10 @@ const mixin = {
             type: Boolean,
             default: false
         },
+        showBottom: {
+            type: Boolean,
+            default: true
+        },
         content: {
             type: String,
             default: ''
@@ -51,13 +51,10 @@ const mixin = {
         }
     },
     computed: {
-        singleBtn() {
-            return !!this.sTxt;
-        },
         s() {
             return {
                 container: { 'background': this.showMask ? 'rgba(0, 0, 0, 0.6)' : '--', position: 'fixed', top: 0, bottom: 0, right: 0, left: 0, overflow: 'auto', display: 'flex', 'justify-content': 'center', 'align-items': 'center', 'z-index': 100 },
-                wrapper: { width: '90%', 'max-width': '460px', 'max-height': '85%', display: 'flex', 'flex-direction': 'column', background: '#ffffff', 'box-shadow': '0 2px 48px 1px rgba(176, 192, 237, 0.42)', 'border-radius': '2px', 'padding-bottom': '30px' },
+                wrapper: { width: '90%', 'max-width': '515px', 'max-height': '85%', display: 'flex', 'flex-direction': 'column', background: '#ffffff', 'box-shadow': '0 2px 48px 1px rgba(176, 192, 237, 0.42)', 'border-radius': '2px', 'padding-bottom': '30px' },
                 title: { background: '#268eff', height: '60px', 'line-height': '60px', 'padding-left': '30px', 'font-size': '16px', color: '#ffffff' },
                 close: { 'box-sizing': 'border-box', display: 'block', float: 'right', padding: '30px', width: '20px', height: '20px', background: `url(${ closeIcon })`, 'background-repeat': 'no-repeat', 'background-position': 'center', 'background-size': '20px 20px' },
                 body: { position: 'relative', 'box-sizing': 'border-box', padding: '30px', overflow: 'auto', 'font-size': '18px', color: '#1d2024', 'line-height': '26px' },
@@ -76,39 +73,44 @@ const mixin = {
                         status: STATUS.CONFIRMED,
                         data
                     });
-                    this.destoryInstance();
                 });
             } else {
                 this.promise.resolve({
                     status: STATUS.CONFIRMED,
                     data: null
                 });
-                this.destoryInstance();
             }
+            document.body.removeChild(this.$el);
+
+            this.$destroy();
         },
         rClick() {
-            this.destoryInstance();
             this.promise.reject({
                 status: STATUS.CANCEL,
                 data: null
             });
+            document.body.removeChild(this.$el);
+            this.$destroy();
         },
         close() {
-            this.destoryInstance();
             this.promise.reject({
                 status: STATUS.CLOSE,
                 data: null
             });
+            document.body.removeChild(this.$el);
+
+            this.$destroy();
         }
     }
 };
 
-export default function (component) {
-    return function dialog({ content, showMask, title, sTxt, showClose, lTxt, rTxt } = {}) {
+export default function (component, propsDefault = {}) {
+    return function dialog(props = {}) {
         const insert = function (props) {
             component.mixins = component.mixins || [];
             component.mixins.push(mixin);
             const ConfirmComponent = Vue.extend(component);
+            console.log(88888, props);
             const componentInstance = new ConfirmComponent({
                 el: document.createElement('div'),
                 propsData: props
@@ -117,10 +119,7 @@ export default function (component) {
             return componentInstance.$el;
         };
         return new Promise(function (resolve, reject) {
-            const destoryInstance = () => {
-                document.body.removeChild(instance);
-            };
-            const instance = insert({ content, showMask, title, sTxt, showClose, lTxt, rTxt, promise: { reject, resolve }, destoryInstance });
+            insert({ ...propsDefault, ...props, promise: { resolve, reject } });
         });
     };
 }

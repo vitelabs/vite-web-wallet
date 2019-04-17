@@ -93,8 +93,6 @@ export default {
                 });
         }
 
-        this.updateVoteData();
-        this.updateNodeData();
         this.nodeDataTimer = new timer(this.updateNodeData, 3 * 1000);
         this.nodeDataTimer.start();
         this.voteDataTimer = new timer(this.updateVoteData, 3 * 1000);
@@ -251,7 +249,7 @@ export default {
     },
     computed: {
         balance() {
-            const tokenList = [].concat(this.$store.getters.tokenBalanceList);
+            const tokenList = [].concat(this.$store.getters.balanceInfo);
             for (const tokenId in this.$store.state.ledger.defaultTokenIds) {
                 if (!this.$store.state.ledger.tokenInfoMaps[tokenId] && !tokenList[tokenId]) {
                     break;
