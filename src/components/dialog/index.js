@@ -1,6 +1,8 @@
 import baseComp from './base.vue';
-import getDialog from './base.js';
-import passwordComp from './password.vue';
+import getDialog from './utils.js';
+import receiveComp from './receive.vue';
+import chargeComp from './charge.vue';
 
-export const password = getDialog(passwordComp);
-export const base = getDialog(baseComp);
+export const receiveDialog = getDialog(receiveComp, { showBottom: false });
+export const chargeDialog = getDialog(chargeComp, { showBottom: false });
+export const baseDialog = getDialog(baseComp);

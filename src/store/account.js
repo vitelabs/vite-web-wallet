@@ -55,9 +55,9 @@ const actions = {
 };
 
 const getters = {
-    tokenBalanceList(state) {
+    balanceInfo(state) {
+        // -------- merge balance&onroad
         const balanceInfo = Object.create(null);
-
         for (const tokenId in state.balance.balanceInfos) {
             const item = state.balance.balanceInfos[tokenId];
 
@@ -87,7 +87,6 @@ const getters = {
             balanceInfo[tokenId].symbol = balanceInfo[tokenId].symbol || tokenInfo.tokenSymbol;
             balanceInfo[tokenId].onroadNum = item.number;
         }
-
         return balanceInfo;
     }
 };

@@ -32,6 +32,10 @@ class _wallet {
         return this.activeWalletAcc;
     }
 
+    get activeAccount() {
+        return this.activeWalletAcc;
+    }
+
     clearActiveAccount() {
         if (!this.activeWalletAcc) {
             return;

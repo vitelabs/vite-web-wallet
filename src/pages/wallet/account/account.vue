@@ -5,10 +5,17 @@
         </div>
         <account-head class="item"></account-head>
         <div class="token-list item">
-            <tokenCard v-for="token in tokenList" :key="token.id"
-                       :opt="token" @action="action($event,token.id)"></tokenCard>
+            <tokenCard
+                v-for="token in tokenList"
+                :key="token.id"
+                :opt="token"
+            ></tokenCard>
         </div>
-        <transaction v-if="isShowTrans" :token="activeToken" :closeTrans="closeTrans"></transaction>
+        <transaction
+            v-if="isShowTrans"
+            :token="activeToken"
+            :closeTrans="closeTrans"
+        ></transaction>
     </div>
 </template>
 
@@ -27,52 +34,44 @@ export default {
         };
     },
     computed: {
-
-
         tokenList() {
-            const tokenList = JSON.parse(JSON.stringify(this.$store.getters.tokenBalanceList));
-
-            for (const tokenId in this.$store.state.ledger.defaultTokenIds) {//
-                const token = this.$store.state.ledger.tokenInfoMaps[tokenId] || tokenList[tokenId];
+            const balanceInfo = JSON.parse(JSON.stringify(this.$store.getters.balanceInfo));
+            // ------------------- update tokenInfo from total token map,force default token show
+            for (const tokenId in this.$store.state.ledger.defaultTokenIds) {
+                //
+                const token
+                    = this.$store.state.ledger.tokenInfoMaps[tokenId]
+                    || balanceInfo[tokenId];
                 if (!token) break;
                 const defaultToken = this.$store.state.ledger.defaultTokenIds[tokenId];
                 const symbol = token.tokenSymbol || defaultToken.tokenSymbol;
 
-                tokenList[tokenId] = tokenList[tokenId] || {
+                balanceInfo[tokenId] = balanceInfo[tokenId] || {
                     balance: '0',
                     fundFloat: '0',
                     symbol,
                     decimals: '0'
                 };
-                tokenList[tokenId].icon = defaultToken.icon;
+                balanceInfo[tokenId].icon = defaultToken.icon;
             }
-
-            const viteTokenInfo = this.$store.getters.viteTokenInfo;
-            if (!viteTokenInfo) {
-                return tokenList;
-            }
-
-
-            // Force vite at first
+            const viteTokenInfo = this.$store.state.viteTokenInfo;
             const list = [];
             const viteId = viteTokenInfo.tokenId;
-            if (tokenList[viteId]) {
-                list.push(tokenList[viteId]);
-                delete tokenList[viteId];
+            if (balanceInfo[viteId]) {
+                list.push(balanceInfo[viteId]);
+                delete balanceInfo[viteId];
             }
-            Object.keys(tokenList).forEach(k => {
-                list.push(tokenList[k]);
+            Object.keys(balanceInfo).forEach(k => {
+                list.push(balanceInfo[k]);
             });
-            // -------------
-
-
             return list;
+            // -------------
         }
     },
     methods: {
-        action(actionType, tokenId) {
-            console.log(actionType, tokenId);
-        },
+        // action(actionType, tokenId) {
+        //     console.log(actionType, tokenId);
+        // },
         showTrans(token) {
             if (!token.id) {
                 return;
@@ -84,12 +83,8 @@ export default {
             this.isShowTrans = false;
             this.activeToken = null;
         },
-        charge() {
-
-        },
-        withdraw() {
-
-        }
+        charge() {},
+        withdraw() {}
     }
 };
 </script>
