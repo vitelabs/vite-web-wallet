@@ -39,7 +39,7 @@ export default {
             showPassWrapper,
             pass: '',
             lock: true,
-            isTestEnv: process.env.NODE_ENV === 'dev' || process.env.NODE_ENV === 'test' || process.env.NODE_ENV === 'dexTestNet'
+            isTestEnv: process.env.NODE_ENV === 'dev' || process.env.NODE_ENV === 'test'
         };
     },
     methods: {

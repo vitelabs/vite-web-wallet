@@ -2,7 +2,7 @@
     <div ref="tContainer" v-click-outside="hideToken" class="token">
         <div class="t-item __pointer" @click="showToken('ftoken')">
             <div class="t-icon">
-                <img :src="ftokenIcon"/>
+                <img v-show="ftokenIcon" :src="ftokenIcon"/>
                 {{ ftokenDetail ? ftokenDetail.tokenShow : '' }}
             </div>
             <div class="id __ellipsis">
@@ -14,7 +14,8 @@
             <div class="id line">/</div>
         </div>
         <div class="t-item __pointer" @click="showToken('ttoken')">
-            <div class="t-icon"><img :src="ttokenIcon"/>
+            <div class="t-icon">
+                <img v-show="ttokenIcon" :src="ttokenIcon"/>
                 {{ ttokenDetail ? ttokenDetail.tokenShow : '' }}
             </div>
             <div class="id __ellipsis">
@@ -98,6 +99,10 @@ export default {
                 return '';
             }
 
+            if (this.ftokenDetail.urlIcon) {
+                return this.ftokenDetail.urlIcon;
+            }
+
             const tokenId = this.ftokenDetail.tokenId;
             const defaultToken = this.defaultTokens[tokenId];
 
@@ -109,6 +114,10 @@ export default {
         ttokenIcon() {
             if (!this.ttokenDetail) {
                 return '';
+            }
+
+            if (this.ttokenDetail.urlIcon) {
+                return this.ttokenDetail.urlIcon;
             }
 
             const tokenId = this.ttokenDetail.tokenId;
@@ -187,10 +196,10 @@ export default {
             white-space: nowrap;
             font-size: 18px;
             img {
-                width: 18px;
-                height: 18px;
+                width: 28px;
+                height: 28px;
                 border-radius: 18px;
-                margin-bottom: -2px;
+                margin-bottom: -7px;
             }
         }
 
@@ -204,7 +213,7 @@ export default {
             font-weight: 400;
             color: $blue;
             line-height: 14px;
-            margin-top: 5px;
+            margin-top: 10px;
             &.line {
                 color: rgba(189,193,209,1);
                 margin-bottom: 0;

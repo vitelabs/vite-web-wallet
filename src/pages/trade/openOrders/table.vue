@@ -111,8 +111,6 @@ export default {
         },
         subscribe() {
             task = task || new subTask('orderQueryCurrent', ({ args, data }) => {
-                console.log('当前委托:', data);
-
                 const currentAcc = this.$wallet.getActiveAccount();
                 const currentAddr = currentAcc ? currentAcc.getDefaultAddr() : '';
 
