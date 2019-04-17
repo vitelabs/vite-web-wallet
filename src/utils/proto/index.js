@@ -110,7 +110,7 @@ function getRealData(data) {
     } else if (/^market.tti_[a-zA-Z0-9]{24}.details.latest$/.test(event_key)) {
         key = 'TradePairProto';
     } else if (/^market.tti_[a-zA-Z0-9]{24}-tti_[a-zA-Z0-9]{24}.trade.latest$/.test(event_key)) {
-        key = 'TxLatestProto';
+        key = 'TxLatestListProto';
     } else if (/market.tti_[a-zA-Z0-9]{24}-tti_[a-zA-Z0-9]{24}.order.vite_[a-zA-Z0-9]{50}.(history|current)$/.test(event_key)) {
         key = 'OrderListProto';
     }
