@@ -68,9 +68,9 @@ export default {
         BigNumber.config(normalConfig);
         num1 = new BigNumber(num1);
         num2 = new BigNumber(num2);
+        // decimalPlaces(fix, 0).toFormat();
         if (fix === 0) {
-            return num1.dividedBy(num2).integerValue(BigNumber.ROUND_CEIL)
-                .toNumber();
+            return num1.dividedBy(num2).integerValue().toString();
         }
 
         const result = num1.dividedBy(num2);
