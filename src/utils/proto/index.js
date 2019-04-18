@@ -143,6 +143,8 @@ function getRealData(data) {
     const messageProto = proto.lookupType(`vite.${ key }`);
     const result = messageProto.decode(data.message);
 
+    console.log('proto', key, result);
+
     if (listKey.indexOf(key) !== -1) {
         return result && result.list ? result.list : null;
     }
