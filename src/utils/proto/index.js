@@ -58,7 +58,10 @@ class WsProtoClient {
     }
 
     unSub(event, callback) {
-        if (!this._subKeys[event]) return;
+        if (!event || !this._subKeys[event]) {
+            // console.log('[UNSUB] fail, !this._subKeys[event]', event);
+            return;
+        }
 
         if (callback) {
             this._subKeys[event].delete(callback);
@@ -66,7 +69,13 @@ class WsProtoClient {
             this._subKeys[event].clear();
         }
 
-        this._subKeys[event].length === 0 && this.send(event, this.MESSAGETYPE.UNSUB);
+        if (this._subKeys[event].size !== 0) {
+            // console.log('[UNSUB] fail, this._subKeys[event].size', event);
+            return;
+        }
+
+        // console.log('[UNSUB] success', event);
+        this.send(event, this.MESSAGETYPE.UNSUB);
     }
 
     send(event_key = '', type = this.MESSAGETYPE.PING) {
