@@ -12,6 +12,10 @@ module.exports = {
             '/trade': {
                 target: 'http://localhost:8081',
                 pathRewrite: { '^/trade\w*': '' }
+            },
+            '/gateWay': {
+                target: 'http://192.168.31.141:8080',
+                pathRewrite: { '^/gateWay': '' }
             }
         }
     }

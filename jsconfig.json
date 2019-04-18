@@ -3,16 +3,9 @@
     "./src/**/*"
   ],
   "compilerOptions": {
-    "baseUrl": ".",
+    "baseUrl": "src",
     "paths": {
-        "components/*": ["src/components/*"],
-        "pages/*": ["src/pages/*"],
-        "assets/*": ["src/assets/*"],
-        "i18n/*": ["src/i18n/*"],
-        "plugins/*": ["src/plugins/*"],
-        "utils/*": ["src/utils/*"],
-        "services":["src/services/*"],
-        "router":["src/router/*"]
+        "**/*": ["**/*"]
     }
   }
 }

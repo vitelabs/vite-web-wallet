@@ -24,6 +24,8 @@ import syncBlock from 'components/syncBlock';
 import tokenCard from './tokenCard';
 import accountHead from './head';
 import transaction from './transaction';
+import { constant } from '@vite/vitejs';
+import { defaultTokenMap } from 'utils/defaultToken';
 
 export default {
     components: { accountHead, syncBlock, tokenCard, transaction },
@@ -36,14 +38,14 @@ export default {
     computed: {
         tokenList() {
             const balanceInfo = JSON.parse(JSON.stringify(this.$store.getters.balanceInfo));
-            // ------------------- update tokenInfo from total token map,force default token show
-            for (const tokenId in this.$store.state.ledger.defaultTokenIds) {
+            // ------------------- show default token
+            for (const tokenId in defaultTokenMap) {
                 //
                 const token
                     = this.$store.state.ledger.tokenInfoMaps[tokenId]
                     || balanceInfo[tokenId];
                 if (!token) break;
-                const defaultToken = this.$store.state.ledger.defaultTokenIds[tokenId];
+                const defaultToken = defaultTokenMap[tokenId];
                 const symbol = token.tokenSymbol || defaultToken.tokenSymbol;
 
                 balanceInfo[tokenId] = balanceInfo[tokenId] || {
@@ -54,9 +56,19 @@ export default {
                 };
                 balanceInfo[tokenId].icon = defaultToken.icon;
             }
-            const viteTokenInfo = this.$store.state.viteTokenInfo;
+            //------ show offical gate
+
+
+            //------- show user defined gate
+
+
+            
+
+
+
+            //force vite first
+            const viteId = constant.Vite_TokenId;
             const list = [];
-            const viteId = viteTokenInfo.tokenId;
             if (balanceInfo[viteId]) {
                 list.push(balanceInfo[viteId]);
                 delete balanceInfo[viteId];
