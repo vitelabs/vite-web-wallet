@@ -39,11 +39,12 @@ class WsProtoClient {
                 const rootMessage = proto.lookupType('vite.DexProto');
                 const data = rootMessage.decode(new Uint8Array(e.data));
 
+                if (data.op_type !== this.MESSAGETYPE.PUSH) return;
+
                 if (data.client_id !== this._clientId) {
                     console.log('clientId不一致', data.client_id, this._clientId);
                     return;
                 }
-                if (data.op_type !== this.MESSAGETYPE.PUSH) return;
 
                 const realData = getRealData(data);
                 console.log('onmessage', data, realData);
