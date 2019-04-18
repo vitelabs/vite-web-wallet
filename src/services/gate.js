@@ -2,8 +2,8 @@ import { getClient } from 'utils/request';
 import { accountBlock } from '@vite/vitejs';
 import { wallet } from 'utils/wallet';
 import rpcClient from 'utils/viteClient';
-import { powProcess } from 'components/pow/index';
-const VoteDifficulty = '201564160';
+// import { powProcess } from 'components/pow/index';
+// const VoteDifficulty = '201564160';
 
 const client = getClient('/gateWay', x => {
     const { code } = JSON.parse(x.responseText);

@@ -15,17 +15,17 @@ block content
 </template>
 
 <script>
-import qrcode from "components/qrcode";
-import copyOK from "components/copyOK";
-import copy from "utils/copy";
-import { utils } from "@vite/vitejs";
-import { modes } from "qrcode.es";
+import qrcode from 'components/qrcode';
+import copyOK from 'components/copyOK';
+import copy from 'utils/copy';
+import { utils } from '@vite/vitejs';
+import { modes } from 'qrcode.es';
 export default {
     components: { qrcode, copyOK },
     props: {
         address: {
             type: String,
-            default: ""
+            default: ''
         },
         tokenSymbol: {
             type: String,
