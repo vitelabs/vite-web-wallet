@@ -2,7 +2,13 @@ import qs from 'qs';
 
 const reqTimeout = 30000;
 
-export default function request({ method = 'GET', path, params = {}, timeout = reqTimeout }) {
+
+export default function request({ method = 'GET', path, params = {}, timeout = reqTimeout, assertSuccess }) {
+    assertSuccess = assertSuccess || (x => {
+        const { code } = JSON.parse(x.responseText);
+        const rightCode = x.path.indexOf('api') === -1 ? 200 : 0;
+        return code === rightCode;
+    });
     method = method.toUpperCase();
 
     const xhr = new XMLHttpRequest();
@@ -31,10 +37,8 @@ export default function request({ method = 'GET', path, params = {}, timeout = r
                         res(JSON.parse(xhr.responseText));
                         return;
                     }
-
                     const { code, msg, data, error } = JSON.parse(xhr.responseText);
-                    const rightCode = path.indexOf('api') === -1 ? 200 : 0;
-                    if (code !== rightCode) {
+                    if (!assertSuccess(xhr)) {
                         return rej({
                             code,
                             message: msg || error
@@ -63,3 +67,12 @@ export default function request({ method = 'GET', path, params = {}, timeout = r
         };
     });
 }
+
+export const getClient = function (baseUrl = '', assertSuccess) {
+    return function ({ method = 'GET', path, params = {}, timeout = reqTimeout }) {
+        baseUrl.slice(-1) === '/' && (baseUrl = baseUrl.slice(0, -1));
+        path.indexOf('/') === 0 && (path = path.splice(1));
+        path = `${ baseUrl }/${ path }`;
+        return request({ method, path, params, timeout, assertSuccess });
+    };
+};

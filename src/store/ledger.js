@@ -1,45 +1,16 @@
 import { constant } from '@vite/vitejs';
 import { timer } from 'utils/asyncFlow';
 import $ViteJS from 'utils/viteClient';
-
-import viteIcon from 'assets/imgs/vite.svg';
-import vcpIcon from 'assets/imgs/VCC.svg';
-import vttIcon from 'assets/imgs/vtt.svg';
+import { defaultTokenMap } from 'utils/defaultToken';
 
 
 const ViteId = constant.Vite_TokenId;
-const defaultTokenList = process.env.NODE_ENV === 'production' ? {
-    'tti_5649544520544f4b454e6e40': {
-        'tokenSymbol': 'VITE',
-        icon: viteIcon
-    },
-    'tti_251a3e67a41b5ea2373936c8': {
-        'tokenSymbol': 'VCP',
-        icon: vcpIcon
-    },
-    'tti_c55ec37a916b7f447575ae59': {
-        'tokenSymbol': 'VTT',
-        icon: vttIcon
-    }
-} : {
-    'tti_5649544520544f4b454e6e40': {
-        'tokenSymbol': 'VITE',
-        icon: viteIcon
-    },
-    'tti_c2695839043cf966f370ac84': {
-        'tokenSymbol': 'VCP',
-        icon: vcpIcon
-    },
-    'tti_6ac4abf1b4e855ba31620f0a': {
-        'tokenSymbol': 'VTT',
-        icon: vttIcon
-    }
-};
+
 
 let heightTimer = null;
 const state = {
     currentHeight: '',
-    defaultTokenIds: defaultTokenList,
+    defaultTokenIds: defaultTokenMap,
     tokenInfoMaps: {}
 };
 
