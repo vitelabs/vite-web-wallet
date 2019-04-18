@@ -2,8 +2,9 @@ import { root } from './protoClass';
 import { random } from 'utils/random';
 import { timer } from 'utils/asyncFlow';
 
-const proto = root.lookupType('vite.DexProto');
+const DexProto = root.lookupType('vite.DexProto');
 const HEARTBEAT = 10000;
+
 class WsProtoClient {
     constructor(wsUrl) {
         this.MESSAGETYPE = { SUB: 'sub', UNSUB: 'un_sub', PING: 'ping', PONG: 'pong', PUSH: 'push' };
@@ -27,8 +28,7 @@ class WsProtoClient {
             };
 
             connect.onmessage = e => {
-                const rootMessage = proto.lookupType('vite.DexProto');
-                const data = rootMessage.decode(new Uint8Array(e.data));
+                const data = DexProto.decode(new Uint8Array(e.data));
 
                 if (data.op_type !== this.MESSAGETYPE.PUSH) return;
 
@@ -89,11 +89,11 @@ class WsProtoClient {
             error_code: 0
         };
 
-        const err = proto.verify(payload);
+        const err = DexProto.verify(payload);
         if (err) throw Error(err);
 
-        const message = proto.create(payload);
-        const buffer = proto.encode(message).finish();
+        const message = DexProto.create(payload);
+        const buffer = DexProto.encode(message).finish();
         this.connect.send(buffer);
     }
 }
@@ -130,7 +130,7 @@ function getRealData(data) {
 
     const listKey = [ 'TxLatestListProto', 'OrderListProto' ];
 
-    const messageProto = proto.lookupType(`vite.${ key }`);
+    const messageProto = root.lookupType(`vite.${ key }`);
     const result = messageProto.decode(data.message);
 
     // console.log('proto', key, result);
