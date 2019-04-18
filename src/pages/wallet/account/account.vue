@@ -56,17 +56,13 @@ export default {
                 };
                 balanceInfo[tokenId].icon = defaultToken.icon;
             }
-            //------ show offical gate
+            // ------ show offical gate
 
 
-            //------- show user defined gate
+            // ------- show user defined gate
 
 
-            
-
-
-
-            //force vite first
+            // force vite first
             const viteId = constant.Vite_TokenId;
             const list = [];
             if (balanceInfo[viteId]) {
