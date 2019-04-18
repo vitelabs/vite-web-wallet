@@ -1,184 +1,129 @@
 import { client } from './index';
 import { timer } from 'utils/asyncFlow';
-import { depth, defaultPair, assignPair, latestTx, order } from 'services/trade';
+import { httpServicesMap, wsServicesMap } from './subService';
 
-export function depthWs({ ftoken, ttoken }) {
-    const key = `market.${ ftoken }-${ ttoken }.depth.latest`;
-    return key;
-}
-
-export const defaultPairWs = function ({ ttoken }) {
-    const key = `market.${ ttoken }.details.latest`;
-    return key;
-};
-
-export const assignPairWs = function ({ ftoken, ttoken }) {
-    const key = `market.${ ftoken }-${ ttoken }.detail.latest`;
-    return key;
-};
-
-export const latestTxWs = function ({ ftoken, ttoken }) {
-    const key = `market.${ ftoken }-${ ttoken }.trade.latest`;
-    return key;
-};
-
-export const latestOrderWs = function ({ address }) {
-    const key = `order.${ address }.latest`;
-    return key;
-};
-
-export const orderQueryHistoryWs = function ({ ftoken, ttoken, address }) {
-    const key = `market.${ ftoken }-${ ttoken }.order.${ address }.history`;
-    return key;
-};
-
-export const orderQueryCurrentWs = function ({ ftoken, ttoken, address }) {
-    const key = `market.${ ftoken }-${ ttoken }.order.${ address }.current`;
-    return key;
-};
-
-export const klineWs = function ({ ftoken, ttoken, resolution }) {
-    const key = `market.${ ftoken }-${ ttoken }.kline.${ resolution }`;
-    return key;
-};
-
-const httpServicesMap = {
-    depth,
-    defaultPair,
-    assignPair,
-    latestTx,
-    orderQueryHistory: ({ ftoken, ttoken, address }) => order({
-        address,
-        ttoken,
-        ftoken,
-        pageNo: 1,
-        pageSize: 30,
-        status: 0,
-        paging: 0
-    }),
-    orderQueryCurrent: ({ ftoken, ttoken, address }) => order({
-        address,
-        ttoken,
-        ftoken,
-        pageNo: 1,
-        pageSize: 30,
-        status: 1,
-        paging: 0
-    })
-};
-const wsServicesMap = {
-    depth: depthWs,
-    defaultPair: defaultPairWs,
-    assignPair: assignPairWs,
-    latestTx: latestTxWs,
-    latestOrder: latestOrderWs,
-    orderQueryHistory: orderQueryHistoryWs,
-    orderQueryCurrent: orderQueryCurrentWs,
-    kline: klineWs
-};
-
-// Http+ws 订阅任务；
+// Http + ws 订阅任务；
 
 // 1，第一次启动以http方式拉全量数据；
 // 2，ws订阅失败时以轮询代替
 // 3，支持参数更新时自动切换订阅key
 // 4，todo ws自动恢复
-export class subTask extends timer {
-    constructor(key, callback, interval) {
-        super();
-        this.interval = interval;
-        this.loopFunc = () => {
-            // Use http if sub unavalible or the func is not exist.
-            if ((!client.closed && this.subStatus)
-                || !httpServicesMap[this.key]) {
-                return;
-            }
 
-            const args = this.args;
-            const key = this.subKey;
-            httpServicesMap[this.key] && httpServicesMap[this.key](args).then(data => {
-                if (this.subKey !== key) {
-                    return;
-                }
-                if (this.key.indexOf('orderQuery') !== -1) {
-                    data = data.orders || [];
-                }
-                this.callback && this.callback({ args, data });
-            });
-        };
+export class subTask extends timer {
+    constructor(key, callback, interval = 2000) {
+        if (!httpServicesMap[key] && !wsServicesMap[key]) {
+            throw new Error('[subTask] constructor key error, check please.');
+        }
+
+        super();
 
         this.key = key;
-        this.subKey = '';
-        this.args = [];
-        this.callback = callback;
-        this.subStatus = true;
-    }
+        this.interval = interval;
+        this.callback = (...args) => {
+            callback && callback(...args);
+        };
 
-    start(argsGetter, isNeedAllDataFirst = true) {
-        this.argsGetter = argsGetter;
-        super.start();
+        this.argsGetter = null;
+        this._subKey = null;
+        this.subCallback = null;
 
-        // Get all data from http at first
-        const args = this.args;
-        const key = this.subKey;
+        this.loopFunc = () => {
+            // Every loop will update subKey
+            // console.log('[subTask] Every loop will update subKey');
+            this.subKey = wsServicesMap[this.key](this.args);
 
-        isNeedAllDataFirst && httpServicesMap[this.key] && httpServicesMap[this.key](args).then(data => {
-            if (this.subKey !== key) {
+            // Use http if sub unavalible
+            if (!client.closed || !httpServicesMap[this.key]) {
                 return;
             }
-            // The data should be same as the orderQueryWs return.
-            if (this.key.indexOf('orderQuery') !== -1) {
-                data = data.orders || [];
-            }
-            this.callback && this.callback({ args, data });
-        });
+
+            this.httpRequest();
+        };
     }
 
     get args() {
-        const args = this.argsGetter();
-        this.subKey = wsServicesMap[this.key](args);
-        return args;
-    }
-
-    set args(value) {
-        this._args = value;
+        return this.argsGetter ? this.argsGetter() : null;
     }
 
     get subKey() {
         return this._subKey;
     }
 
-    set subKey(v) {
-        if (this._subKey === v) return;
+    set subKey(currentKey) {
+        // Already stopped
+        if (!this.timeHandler) {
+            // console.log('[subTask] Already stopped');
+            return;
+        }
 
-        const oldkey = this.subKey;
-        this._subKey = v;
+        // SubKey is not change, now.
+        const oldkey = this._subKey;
+        if (oldkey === currentKey) {
+            // console.log('[subTask] SubKey is not change, now.');
+            return;
+        }
 
-        if (!this.timeHandler) return;
+        // Unsub oldKey
+        // console.log('[subTask] Unsub oldKey');
+        client.unSub(oldkey, this.subCallback);
 
-        client.unSub(oldkey, this.callback);
+        // Update subKey and subCallback.
+        // console.log('[subTask] Update subKey and subCallback.');
         const args = this.args;
-        const key = this.subKey;
-
-        client.sub(this.subKey, data => {
-            if (this.subKey !== key) {
+        this._subKey = currentKey;
+        this.subCallback = data => {
+            // May be last sub return, but subKey already changed
+            if (this.subKey !== currentKey) {
+                // console.log('[subTask] May be last sub return, but subKey already changed');
                 return;
             }
 
-            // console.log('subkey', this.subKey, data);
-            this.callback && this.callback({ args, data });
-        }, (data, err) => {
-            if (err) {
-                this.subStatus = false;
-                this.subKey = '';
-            } else {
-                this.callback(data);
-            }
-        });
+            // console.log('[subTask]', this.subKey, data);
+            this.callback({ args, data });
+        };
+
+        // Sub currentKey
+        client.sub(currentKey, this.subCallback);
+    }
+
+    start(argsGetter, isNeedAllDataFirst = true) {
+        if (!argsGetter) {
+            throw new Error('[subTask] check argsGetter please. Required and must be a function.');
+        }
+
+        // Init
+        this.argsGetter = argsGetter;
+        this.subKey = wsServicesMap[this.key](this.args);
+        super.start();
+
+        // Get all data from http at first if need
+        isNeedAllDataFirst && this.httpRequest();
     }
 
     stop() {
         super.stop();
-        this.args = [];
+
+        client.unSub(this.subKey, this.subCallback);
+        this.argsGetter = null;
+        this._subKey = null;
+    }
+
+
+    httpRequest() {
+        const args = this.args;
+        const currentKey = this.subKey;
+
+        httpServicesMap[this.key] && httpServicesMap[this.key](args).then(data => {
+            // Async request, maybe subkey already changed.
+            if (this.subKey !== currentKey) {
+                return;
+            }
+
+            // OrderQuery: http-requtn-data should be same as ws-return-data
+            if (this.key.indexOf('orderQuery') !== -1) {
+                data = data.orders || [];
+            }
+            this.callback({ args, data });
+        });
     }
 }
