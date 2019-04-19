@@ -19,8 +19,6 @@ const mutations = {
 
 const actions = {
     exFetchLatestTx({ getters, commit }) {
-        console.log('change latest tx');
-
         commit('exSetLatestTxLoading', true);
         commit('exSetLatestTxList', []);
 
@@ -34,7 +32,6 @@ const actions = {
             commit('exSetLatestTxLoading', false);
         }, latestTxTime);
 
-        console.log(getters.exActiveTxPair);
         getters.exActiveTxPair && latestTxTask.start(() => getters.exActiveTxPair);
     },
     exStopLatestTimer() {
