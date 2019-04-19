@@ -46,10 +46,9 @@
 </template>
 
 <script>
+import { hdAddr, constant } from '@vite/vitejs';
 import viteInput from 'components/viteInput';
 import BigNumber from 'utils/bigNumber';
-import { address } from 'utils/tools';
-import { constant } from '@vite/vitejs';
 
 const amountTimeout = null;
 const minNum = 1000;
@@ -147,7 +146,7 @@ export default {
             }
 
             try {
-                this.isValidAddress = address.isValidHexAddr(this.toAddr);
+                this.isValidAddress = hdAddr.isValidHexAddr(this.toAddr);
             } catch (err) {
                 console.warn(err);
                 this.isValidAddress = false;

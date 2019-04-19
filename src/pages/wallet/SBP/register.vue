@@ -56,9 +56,9 @@
 </template>
 
 <script>
+import { hdAddr } from '@vite/vitejs';
 import viteInput from 'components/viteInput';
 import BigNumber from 'utils/bigNumber';
-import { address } from 'utils/tools';
 import sendTx from 'utils/sendTx';
 
 const amount = 500000;
@@ -166,7 +166,7 @@ export default {
                 return;
             }
 
-            if (!address.isValidHexAddr(this.producerAddr)) {
+            if (!hdAddr.isValidHexAddr(this.producerAddr)) {
                 this.producerAddrErr = this.$t('walletSBP.section1.addrErr');
 
                 return;
