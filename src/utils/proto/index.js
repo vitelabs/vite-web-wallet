@@ -90,7 +90,7 @@ class WsProtoClient {
             return;
         }
 
-        // console.log('[UNSUB] success', event);
+        console.log('[UNSUB] success', event);
         this.send(event, this.MESSAGETYPE.UNSUB);
     }
 
