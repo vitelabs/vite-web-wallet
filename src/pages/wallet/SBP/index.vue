@@ -32,12 +32,12 @@
 </template>
 
 <script>
+import { hdAddr } from '@vite/vitejs';
 import secTitle from 'components/secTitle';
 import loading from 'components/loading';
 import confirm from 'components/confirm';
 import viteInput from 'components/viteInput';
 import BigNumber from 'utils/bigNumber';
-import { address } from 'utils/tools';
 import sendTx from 'utils/sendTx';
 import register from './register';
 import list from './list';
@@ -109,7 +109,7 @@ export default {
             }
 
             if (!this.addr
-                || !address.isValidHexAddr(this.addr)) {
+                || !hdAddr.isValidHexAddr(this.addr)) {
                 this.addrErr = this.$t('walletSBP.section1.addrErr');
 
                 return;

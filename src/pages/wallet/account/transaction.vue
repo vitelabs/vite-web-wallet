@@ -47,12 +47,14 @@
 
 <script>
 import Vue from 'vue';
+import { utils, hdAddr } from '@vite/vitejs';
+
 import confirm from 'components/confirm';
 import viteInput from 'components/viteInput';
 import BigNumber from 'utils/bigNumber';
-import { encoder, address } from 'utils/tools';
 import sendTx from 'utils/sendTx';
 
+const { getBytesSize } = utils;
 const SendDifficulty = '157108864';
 
 export default {
@@ -109,7 +111,7 @@ export default {
         },
         msgBalance() {
             const message = this.$trim(this.message);
-            const length = encoder.getBytesSize(message);
+            const length = getBytesSize(message);
             return 120 - length;
         },
         messageErr() {
@@ -121,7 +123,7 @@ export default {
     },
     methods: {
         validAddr() {
-            this.isValidAddress = this.inAddress && address.isValidHexAddr(this.inAddress);
+            this.isValidAddress = this.inAddress && hdAddr.isValidHexAddr(this.inAddress);
         },
 
         testAmount() {

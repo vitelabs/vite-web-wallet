@@ -1,11 +1,11 @@
-import { keystore as _keystore, hdAccount as _walletAccount } from '@vite/vitejs';
+import { keystore as _keystore, hdAccount as _hdAccount } from '@vite/vitejs';
 import vitecrypto from 'testwebworker';
 import acc from 'utils/storeAcc.js';
 import $ViteJS from 'utils/viteClient';
 
-class walletAccount extends _walletAccount {
+class walletAccount extends _hdAccount {
     constructor({ addrNum, defaultInx, mnemonic, bits, encryptObj, receiveFail, lang }) {
-        super({ client: $ViteJS, mnemonic, bits, addrNum, lang }, {});
+        super({ client: $ViteJS, mnemonic, bits, addrNum, lang });
 
         this.defaultInx = defaultInx || 0;
         this.encryptObj = encryptObj || null;

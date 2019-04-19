@@ -9,6 +9,8 @@ class WsProtoClient {
     constructor(wsUrl) {
         this.MESSAGETYPE = { SUB: 'sub', UNSUB: 'un_sub', PING: 'ping', PONG: 'pong', PUSH: 'push' };
         this._clientId = random(10);
+        console.log('new Wesocket', this._clientId, new Date());
+
         this._subKeys = {};
 
         this._heartBeat = new timer(() => {
@@ -20,6 +22,13 @@ class WsProtoClient {
         try {
             const connect = new WebSocket(wsUrl);
             this.connect = connect;
+
+            window.onbeforeunload = function () {
+                console.log('关闭WebSocket连接！');
+                this.connect.onclose = function () {};
+                this.connect.close();
+            };
+
             connect.binaryType = 'arraybuffer';
 
             this._subKey && this.subscribe({ event_key: this._subKey });
@@ -32,7 +41,14 @@ class WsProtoClient {
 
                 if (data.op_type !== this.MESSAGETYPE.PUSH) return;
 
+                if (data.client_id !== this._clientId) {
+                    console.log('clientId不一致', data.client_id, this._clientId);
+                    return;
+                }
+
                 const realData = getRealData(data);
+                console.log('onmessage', data, realData);
+
                 const error = data.error_code || undefined;
                 this._subKeys[data.event_key] && this._subKeys[data.event_key].forEach(c => {
                     c(realData, error);
@@ -81,6 +97,10 @@ class WsProtoClient {
     send(event_key = '', type = this.MESSAGETYPE.PING) {
         if (!this.ready) return;
 
+        if (type === this.MESSAGETYPE.PING) {
+            console.log('ping', this._clientId, new Date());
+        }
+
         const payload = {
             event_key: event_key,
             op_type: type,
@@ -99,7 +119,6 @@ class WsProtoClient {
 }
 
 export const client = new WsProtoClient(process.env.pushServer);
-
 
 function getRealData(data) {
     if (data.error_code) {
@@ -140,3 +159,6 @@ function getRealData(data) {
     }
     return result;
 }
+
+// const _client = new WsProtoClient(process.env.pushServer);
+// console.log(_client);
