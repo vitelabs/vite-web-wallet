@@ -19,15 +19,22 @@ const mutations = {
 
 const actions = {
     exFetchLatestTx({ getters, commit }) {
+        console.log('change latest tx');
+
         commit('exSetLatestTxLoading', true);
         commit('exSetLatestTxList', []);
 
         stopLatestTimer();
-        latestTxTask = new subTask('latestTx', ({ data }) => {
+        latestTxTask = new subTask('latestTx', ({ args, data }) => {
+            if (getters.exActiveTxPair.ftoken !== args.ftoken
+                || getters.exActiveTxPair.ttoken !== args.ttoken) {
+                return;
+            }
             commit('exSetLatestTxList', data);
             commit('exSetLatestTxLoading', false);
         }, latestTxTime);
 
+        console.log(getters.exActiveTxPair);
         getters.exActiveTxPair && latestTxTask.start(() => getters.exActiveTxPair);
     },
     exStopLatestTimer() {
