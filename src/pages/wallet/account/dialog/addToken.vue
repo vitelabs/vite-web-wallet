@@ -43,36 +43,36 @@ export default {
 <style lang="scss" scoped>
 .tips{
     .item{
-        display:flex;
-        height:52px;
-        padding:7px 15px;
+        display: flex;
+        height: 52px;
+        padding: 7px 15px;
         &.active,&:hover{
-            background:rgba(0,122,255,0.03);
+            background: rgba(0,122,255,0.03);
         }
         input{
-            height:16px;
-            width:16px;
+            height: 16px;
+            width: 16px;
         }
         img{
-            margin:0 12px;
-            height:20px;
-            width:20px;
+            margin: 0 12px;
+            height: 20px;
+            width: 20px;
         }
         .info{
-            display:flex;
-            flex-direction:column;
+            display: flex;
+            flex-direction: column;
             .title{
-                display:flex;
+                display: flex;
                 .name{
-                    color:#1D2024;
-                    font-size:14px;
+                    color: #1D2024;
+                    font-size: 14px;
                 }
                 .tag{
-                    height:16px;
-                    font-size:12px;
-                    background-color:rgba(0,122,255,0.06);
-                    color:#007AFF;
-                    line-height:16px;
+                    height: 16px;
+                    font-size: 12px;
+                    background-color: rgba(0,122,255,0.06);
+                    color: #007AFF;
+                    line-height: 16px;
                 }
             }
         }

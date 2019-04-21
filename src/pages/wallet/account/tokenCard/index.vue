@@ -89,7 +89,7 @@ export default {
             withdrawDialog({ token: this.token });
         },
         showDetail() {
-            tokenInfoDialog({ token:this.token });
+            tokenInfoDialog({ token: this.token });
         }
     }
 };
