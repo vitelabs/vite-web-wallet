@@ -69,7 +69,7 @@ const getters = {
             balanceInfo[tokenId].id = tokenId;
             balanceInfo[tokenId].balance = balance;
             balanceInfo[tokenId].decimals = decimals;
-            balanceInfo[tokenId].symbol = tokenInfo.tokenSymbol;
+            balanceInfo[tokenId].tokenSymbol = tokenInfo.tokenSymbol;
             balanceInfo[tokenId].transNum = item.number;
         }
 
@@ -84,7 +84,7 @@ const getters = {
             balanceInfo[tokenId].id = balanceInfo[tokenId].id || tokenInfo.id;
             balanceInfo[tokenId].fundFloat = balance;
             balanceInfo[tokenId].decimals = balanceInfo[tokenId].decimals || tokenInfo.decimals;
-            balanceInfo[tokenId].symbol = balanceInfo[tokenId].symbol || tokenInfo.tokenSymbol;
+            balanceInfo[tokenId].tokenSymbol = balanceInfo[tokenId].tokenSymbol || tokenInfo.tokenSymbol;
             balanceInfo[tokenId].onroadNum = item.number;
         }
         return balanceInfo;

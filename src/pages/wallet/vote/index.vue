@@ -257,12 +257,12 @@ export default {
 
                 const token = this.$store.state.ledger.tokenInfoMaps[tokenId] || tokenList[tokenId];
                 const defaultToken = this.$store.state.ledger.defaultTokenIds[tokenId];
-                const symbol = token.tokenSymbol || defaultToken.tokenSymbol;
+                const tokenSymbol = token.tokenSymbol || defaultToken.tokenSymbol;
 
                 tokenList[tokenId] = tokenList[tokenId] || {
                     balance: '0',
                     fundFloat: '0',
-                    symbol,
+                    tokenSymbol,
                     decimals: '0'
                 };
                 tokenList[tokenId].icon = defaultToken.icon;

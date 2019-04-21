@@ -26,6 +26,7 @@ import accountHead from './head';
 import transaction from './transaction';
 import { constant } from '@vite/vitejs';
 import { defaultTokenMap } from 'utils/defaultToken';
+import { gateStorage } from 'services/gate';
 
 export default {
     components: { accountHead, syncBlock, tokenCard, transaction },
@@ -36,50 +37,39 @@ export default {
         };
     },
     computed: {
-        tokenList() {
-            const balanceInfo = JSON.parse(JSON.stringify(this.$store.getters.balanceInfo));
+        default2ndOfficaltokenList() {
+            const balanceInfo = this.$store.getters.balanceInfo;
+            const allToken = this.$store.state.ledger.tokenInfoMaps;
+            const officalGateTokenMap = this.$store.getters.officalGateTokenMap;
             // ------------------- show default token
-            for (const tokenId in defaultTokenMap) {
-                //
-                const token
-                    = this.$store.state.ledger.tokenInfoMaps[tokenId]
-                    || balanceInfo[tokenId];
-                if (!token) break;
-                const defaultToken = defaultTokenMap[tokenId];
-                const symbol = token.tokenSymbol || defaultToken.tokenSymbol;
-
-                balanceInfo[tokenId] = balanceInfo[tokenId] || {
-                    balance: '0',
-                    fundFloat: '0',
-                    symbol,
-                    decimals: '0'
-                };
-                balanceInfo[tokenId].icon = defaultToken.icon;
-            }
-            // ------ show offical gate
-
-
-            // ------- show user defined gate
-
-
+            const defaultTokenList = Object.keys(defaultTokenMap).map(i => {
+                const { tokenName = '', totalSupply = '', isReIssuable = '', tokenSymbol, balance = '', fundFloat = '', decimals = '', owner = '', tokenId = i, icon, type = 'NATIVE' } = Object.assign({}, defaultTokenMap[i], balanceInfo[i] || {}, allToken[i] || {});
+                return { tokenName, totalSupply, isReIssuable, tokenSymbol, balance, fundFloat, decimals, owner, tokenId, icon, type };
+            });
+            // ------ show offical gate token
+            const officalTokenList = Object.keys(officalGateTokenMap).map(i => {
+                const { tokenName = '', totalSupply = '', isReIssuable = '', tokenSymbol, balance = '', fundFloat = '', decimals = '', owner = '', tokenId = i, icon, type = 'NATIVE' } = Object.assign({}, officalGateTokenMap[i], balanceInfo[i] || {}, allToken[i] || {});
+                return { tokenName, totalSupply, isReIssuable, tokenSymbol, balance, fundFloat, decimals, owner, tokenId, icon, type };
+            });
+            const list = [ ...defaultTokenList, ...officalTokenList ];
             // force vite first
             const viteId = constant.Vite_TokenId;
-            const list = [];
-            if (balanceInfo[viteId]) {
-                list.push(balanceInfo[viteId]);
-                delete balanceInfo[viteId];
-            }
-            Object.keys(balanceInfo).forEach(k => {
-                list.push(balanceInfo[k]);
-            });
-            return list;
+            return list.splice(list.findIndex(v => v.tokenId === viteId), 1).concat(list);
             // -------------
+        },
+        userStorageTokenList() {
+            const balanceInfo = this.$store.getters.balanceInfo;
+            const allToken = this.$store.state.ledger.tokenInfoMaps;
+            const userStorageTokenMap = gateStorage.data;
+            // ------- show user defined gate
+            const userStorageTokenList = Object.keys(userStorageTokenMap).map(i => {
+                const { tokenName = '', totalSupply = '', isReIssuable = '', tokenSymbol, balance = '', fundFloat = '', decimals = '', owner = '', tokenId = i, icon, type = 'NATIVE' } = Object.assign({}, userStorageTokenMap[i], balanceInfo[i] || {}, allToken[i] || {});
+                return { tokenName, totalSupply, isReIssuable, tokenSymbol, balance, fundFloat, decimals, owner, tokenId, icon, type };
+            });
+            return userStorageTokenList;
         }
     },
     methods: {
-        // action(actionType, tokenId) {
-        //     console.log(actionType, tokenId);
-        // },
         showTrans(token) {
             if (!token.id) {
                 return;
