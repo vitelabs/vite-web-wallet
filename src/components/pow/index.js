@@ -23,6 +23,7 @@ export function powProcess({
         } catch (err) {
             console.warn(err);
         }
+        powProcessInstance.$destroy();
         powProcessInstance = null;
         cb && cb();
     };
