@@ -27,6 +27,7 @@ export function pwdConfirm({
         } catch (err) {
             console.warn(err);
         }
+        instance.$destroy();
         instance = null;
         cb && cb();
     };
