@@ -1,5 +1,5 @@
 <template lang="pug">
-extends ./base.pug
+extends /components/dialog/base.pug
 block content
     .block__title 账户余额
     .block__content.edit.space {{address}}
@@ -18,47 +18,22 @@ block content
 </template>
 
 <script>
-import qrcode from 'components/qrcode';
-import copyOK from 'components/copyOK';
-import copy from 'utils/copy';
-import { utils } from '@vite/vitejs';
-import { modes } from 'qrcode.es';
 export default {
-    components: { qrcode, copyOK },
     props: {
         address: {
             type: String,
             default: ''
         },
-        tokenSymbol: {
-            type: String,
+        token: {
+            type: Object,
             required: true
         }
     },
     data() {
-        return {
-            copySuccess: false,
-            amount: 0,
-            qrOptions: { size: 124, mode: modes.NORMAL }
-        };
+        return { Title: '提现' };
     },
-    methods: {
-        copy() {
-            copy(this.address);
-            this.copySuccess = true;
-            setTimeout(() => {
-                this.copySuccess = false;
-            }, 1000);
-        }
-    },
-    computed: {
-        addressQrcode() {
-            return utils.tools.uriStringify({
-                target_address: this.address,
-                params: { amount: this.amount }
-            });
-        }
-    }
+    methods: {},
+    computed: {}
 };
 </script>
 

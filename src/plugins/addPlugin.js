@@ -2,6 +2,7 @@ import toast from 'components/toast/index.js';
 import confirm from 'components/confirm/index.js';
 import statistics from 'utils/statistics';
 import { wallet } from 'utils/wallet';
+import getTokenIcon from 'utils/getTokenIcon';
 
 document.addEventListener('drop', e => {
     e.preventDefault();
@@ -73,5 +74,12 @@ export default {
         Vue.prototype.$statistics = statistics;
 
         Vue.prototype.$wallet = wallet;
+
+
+        // ----------filters
+
+        Vue.filter('id2icon', function (value) {
+            return getTokenIcon(value);
+        });
     }
 };

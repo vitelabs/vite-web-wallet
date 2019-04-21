@@ -3,16 +3,16 @@
         <div class="title">
             <div>
                 <img
-                    v-if="opt.icon"
-                    :src="opt.icon"
+                    v-if="token.icon"
+                    :src="token.icon"
                     class="icon"
                 />
-            <span class="tokenName">{{ opt.symbol }}</span></div>
+            <span class="tokenName">{{ token.tokenSymbol }}</span></div>
 
             <div>
                 <span
                     class="gate"
-                    v-if="opt.type==='GATE'"
+                    v-if="token.type==='OFFICAL_GATE'"
                 ></span>
                 <span class="bind"></span>
             </div>
@@ -20,18 +20,18 @@
         </div>
         <div class="body">
             <div class="item">
-                <span class="balance">{{ opt.balance || 0 }}</span>
+                <span class="balance">{{ token.balance || 0 }}</span>
             </div>
             <div class="item">
-                <span class="asset">{{ opt.asset || 0 }}</span>
+                <span class="asset">{{ token.asset || 0 }}</span>
             </div>
             <div class="token-tips">
-                {{ opt.onroadNum || 0 }} {{ $t('wallet.pend') }}
+                {{ token.onroadNum || 0 }} {{ $t('wallet.pend') }}
             </div>
         </div>
         <div class="bottom">
             <div
-                v-unlock-account="()=>$emit('action','SEND')"
+                v-unlock-account="_sendTx"
                 class="btn __pointer"
             >{{ $t('actionType.SEND') }}</div>
             <div
@@ -39,13 +39,13 @@
                 class="btn __pointer"
             >{{ $t('actionType.RECEIVE') }}</div>
             <div
-                v-if="opt.type==='GATE'"
-                v-unlock-account="()=>$emit('action','WITHDRAW')"
+                v-if="token.type==='GATE'"
+                v-unlock-account="widthdraw"
                 class="btn __pointer"
             >{{ $t('actionType.WITHDRAW') }}</div>
             <div
-                v-if="opt.type==='GATE'"
-                @click="$emit('action','CHARGE')"
+                v-if="token.type==='GATE'"
+                @click="charge"
                 class="btn __pointer"
             >{{ $t('actionType.CHARGE') }}</div>
         </div>
@@ -53,11 +53,11 @@
 </template>
 
 <script>
-import { receiveDialog, chargeDialog } from 'components/dialog';
+import { receiveDialog, chargeDialog, withdrawDialog, tokenInfoDialog } from '../dialog';
 import { wallet } from 'utils/wallet';
 export default {
     props: {
-        opt: {
+        token: {
             type: Object,
             default: () => {
                 return {
@@ -65,7 +65,7 @@ export default {
                     balance: '--',
                     asset: '--',
                     onroadNum: '--',
-                    type: 'OFFICAL'// OFFICAL OFFICALGATE SELFGATE
+                    type: 'OFFICAL_GATE'// OFFICAL OFFICALGATE SELFGATE
                 };
             }
         }
@@ -77,16 +77,19 @@ export default {
     },
     methods: {
         _sendTx() {
-            if (!this.opt.id || !this.opt.balance) {
-                return;
-            }
-            this.sendTransaction && this.sendTransaction(this.opt);
+            this.sendTransaction && this.sendTransaction(this.token);
         },
         receive() {
-            receiveDialog({ title: '接收VITE', address: this.address });
+            receiveDialog({ token: this.token });
         },
         charge() {
-            chargeDialog({ title: '充值', address: this.address });
+            chargeDialog({ token: this.token });
+        },
+        widthdraw() {
+            withdrawDialog({ token: this.token });
+        },
+        showDetail() {
+            tokenInfoDialog({ token:this.token });
         }
     }
 };

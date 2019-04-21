@@ -1,12 +1,12 @@
 <template lang="pug">
-extends ./base.pug
+extends /components/dialog/base.pug
 block content
     .block__title
         span 接收地址
         img.title_icon.copy.__pointer(src="~assets/imgs/copy_default.svg" @click="copy")
     .block__content {{address}}
     .qrcode-container
-        .qrcode-container__title 请扫码向我转入{{tokenSymbol}}
+        .qrcode-container__title 请扫码向我转入{{token.tokenSymbol}}
         qrcode(:text="addressQrcode" :options="qrOptions" class="qrcode-container__content")
     .tips 充值操作是将ETH跨链映射至VITE网络，充值后您可通过提现转走
         .dot
@@ -26,8 +26,8 @@ export default {
             type: String,
             default: ''
         },
-        tokenSymbol: {
-            type: String,
+        token: {
+            type: Object,
             required: true
         }
     },
@@ -49,7 +49,7 @@ export default {
     },
     computed: {
         addressQrcode() {
-            return utils.tools.uriStringify({
+            return utils.uriStringify({
                 target_address: this.address,
                 params: { amount: this.amount }
             });

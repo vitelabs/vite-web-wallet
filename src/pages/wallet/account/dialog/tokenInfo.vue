@@ -1,5 +1,5 @@
 <template lang="pug">
-extends ./base.pug
+extends /components/dialog/base.pug
 block content
     .body
         .head
@@ -13,32 +13,25 @@ block content
             .tab-content(v-if="tapName==='tokenInfo'")
                 .content__item.click-able-color
                     .lable Token_Id
-                    .
-                    {{token.tokenId}}
+                    div {{token.tokenId}}
                 .content__item
                     .lable 铸币地址
-                    .
-                    {{token.owner}}
+                    div {{token.owner}}
                 .content__item
                     .lable 代币名称
-                    .
-                    {{token.tokenName}}
+                    div {{token.tokenName}}
                 .content__item
                     .lable 发行总量
-                    .
-                    {{token.totalSupply}}
+                    div {{token.totalSupply}}
                 .content__item
                     .lable 小数点
-                    .
-                    {{token.decimals}}
+                    div {{token.decimals}}
                 .content__item
                     .lable 可增发
-                    .
-                    {{token.isReIssuable}}
+                    div {{token.isReIssuable}}
                 .content__item
                     .lable 发行日期
-                    .
-                    {{token.tokenId}}
+                    div {{token.tokenId}}
             .tab-content(v-if="tapName==='gate'&&token.type==='OFFICAL_GATE'")
                 .content__item
                     .lable
@@ -54,7 +47,6 @@ block content
 </template>
 
 <script>
-import { utils } from '@vite/vitejs';
 
 const tokenEnum = {
     GATE: 'gate',
@@ -76,14 +68,7 @@ export default {
             this.tapName = name;
         }
     },
-    computed: {
-        addressQrcode() {
-            return utils.tools.uriStringify({
-                target_address: this.address,
-                params: { amount: this.amount }
-            });
-        }
-    }
+    computed: {}
 };
 </script>
 
