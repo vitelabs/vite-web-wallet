@@ -5,6 +5,7 @@ import { defaultTokenMap } from 'utils/defaultToken';
 
 
 const ViteId = constant.Vite_TokenId;
+const MAX_TOKEN_NUM = 100;
 
 
 let heightTimer = null;
@@ -29,6 +30,10 @@ const mutations = {
         if (state.defaultTokenIds[tokenId]) {
             state.tokenInfoMaps[tokenId].icon = state.defaultTokenIds[tokenId].icon;
         }
+    },
+    // eslint-disable-next-line no-unused-vars
+    setAllTokens(state, payload = []) {
+
     }
 };
 
@@ -51,6 +56,9 @@ const actions = {
             commit('setCurrentHeight', result);
         }), 2000);
         heightTimer.start();
+    },
+    getAllTokens({ commit }) {// 暂时为前端提供代币搜索功能，获取全部token信息；
+        $ViteJS.mintage.getTokenInfoList(0, MAX_TOKEN_NUM).then(item => commit('setTokenInfo', { tokenInfo: item, tokenId: item.id }));
     },
     getDefaultTokenList({ dispatch, state }) {
         for (const tokenId in state.defaultTokenIds) {

@@ -2,6 +2,9 @@ import { getClient } from 'utils/request';
 import { accountBlock } from '@vite/vitejs';
 import { wallet } from 'utils/wallet';
 import rpcClient from 'utils/viteClient';
+import s from 'utils/localStorage';
+
+const STORAGEKEY = 'INDEX_COLLECT_TOKEN';
 // import { powProcess } from 'components/pow/index';
 // const VoteDifficulty = '201564160';
 
@@ -38,7 +41,38 @@ export const withdraw = async ({ amount, withdrawAddress, gateAddr, tokenId }) =
 };
 
 
-window.testgate = { test: {} };
+// data{tokenId:{symbol,gateHost,gateUrl}}
+class GateWays {
+    constructor() {
+        this.updateFromStorage();
+        this.data = {};
+    }
+
+    bindToken(tokenId, tokenInfo) {
+        this.data[tokenId] = tokenInfo;
+        this.saveToStorage();
+    }
+
+    unBindToken(tokenId) {
+        delete this.data[tokenId];
+        this.saveToStorage();
+    }
+
+    saveToStorage() {
+        s.setItem(STORAGEKEY, this.data);
+    }
+
+    updateFromStorage() {
+        this.data = s.getItem(STORAGEKEY);
+        if (!this.data) {
+            s.setItem(STORAGEKEY, {});
+            this.data = {};
+        }
+    }
+}
+
+export const gateStorage = new GateWays();
+
 
 class testStruct {
     constructor({ tokenId, withdrawAddress }) {

@@ -3,9 +3,17 @@
     "./src/**/*"
   ],
   "compilerOptions": {
-    "baseUrl": "src",
+    "baseUrl": "./src",
     "paths": {
-        "**/*": ["**/*"]
+            "services/**/*": ["services/**/*"],
+            "components/**/*": ["components/**/*"],
+            "pages/**/*": ["pages/**/*"],
+            "assets/**/*": ["assets/**/*"],
+            "router/**/*": ["router/**/*"],
+            "utils/**/*": ["utils/**/*"],
+            "plugins/**/*": ["plugins/**/*"],
+            "i18n/**/*": ["i18n/**/*"],
+            "version/**/*": ["version/**/*"],
     }
   }
 }
