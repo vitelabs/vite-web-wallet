@@ -1160,15 +1160,15 @@
     "@types/unist" "*"
     "@types/vfile-message" "*"
 
-"@vite/vitejs-ws@2.0.0-alpha.11":
-  version "2.0.0-alpha.11"
-  resolved "http://registry.npm.taobao.org/@vite/vitejs-ws/download/@vite/vitejs-ws-2.0.0-alpha.11.tgz#2ddefad1a791f4dda6151085f3a3d3e9940ab0ca"
-  integrity sha1-Ld760aeR9N2mFRCF86PT6ZQKsMo=
+"@vite/vitejs-ws@~2.0.0":
+  version "2.0.0"
+  resolved "http://registry.npm.taobao.org/@vite/vitejs-ws/download/@vite/vitejs-ws-2.0.0.tgz#3d12cde763977a940ab3a351983b08ba7c596af9"
+  integrity sha1-PRLN52OXepQKs6NRmDsIunxZavk=
 
-"@vite/vitejs@2.0.0-alpha.11":
-  version "2.0.0-alpha.11"
-  resolved "http://registry.npm.taobao.org/@vite/vitejs/download/@vite/vitejs-2.0.0-alpha.11.tgz#9d7fecca433807d441821f3602cff00856e21ade"
-  integrity sha1-nX/sykM4B9RBgh82As/wCFbiGt4=
+"@vite/vitejs@~2.0.0":
+  version "2.0.0"
+  resolved "http://registry.npm.taobao.org/@vite/vitejs/download/@vite/vitejs-2.0.0.tgz#e3a476f72203d601846176f580071663e6f5b588"
+  integrity sha1-46R29yID1gGEYXb1gAcWY+b1tYg=
 
 "@vue/component-compiler-utils@^2.5.1":
   version "2.6.0"

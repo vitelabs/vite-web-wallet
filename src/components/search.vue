@@ -8,6 +8,7 @@
                autocomplete="off" ref="i" type="text"
                v-model="v" @input.prevent="updateKey">
         <input fake_pass type="password" style="display:none;"/>
+        <slot name="searchTips"></slot>
     </div>
 </template>
 <script>

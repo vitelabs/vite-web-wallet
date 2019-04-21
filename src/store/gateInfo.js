@@ -21,7 +21,7 @@ const getters = {
     officalGateInfos(state) {
         return state.gateInfos.filter(g => g.name === OFFICAL_GATE_NAME);
     },
-    officalGateTokenMap(getters) {
+    officalGateTokenMap(state, getters) {
         const map = {};
         getters.officalGateInfos.map(g => g.tokens).reduce(function (pre, cur) {
             return [ ...pre, ...(cur || []) ];

@@ -36,6 +36,11 @@ class _wallet {
         return this.activeWalletAcc;
     }
 
+    get defaultAddr() {
+        if (!this.activeAccount) return '';
+        return this.activeAccount.getDefaultAddr();
+    }
+
     clearActiveAccount() {
         if (!this.activeWalletAcc) {
             return;

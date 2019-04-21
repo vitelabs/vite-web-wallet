@@ -1,16 +1,16 @@
 <template lang="pug">
-extends ./base.pug
+extends /components/dialog/base.pug
 block content
     .block__title
         span 接收地址
         img.title_icon.copy.__pointer(src="~assets/imgs/copy_default.svg" @click="copy")
     .block__content {{address}}
     .block__title 请输入金额
-    input.block__content.edit(placeholder="请输入金额")
+    input.block__content.edit(v-model="amount" placeholder="请输入金额")
     .qrcode-container
-        .qrcode-container__title 请扫码向我转入{{tokenSymbol}}
+        .qrcode-container__title 请扫码向我转入{{token.tokenSymbol}}
         qrcode(:text="addressQrcode" :options="qrOptions" class="qrcode-container__content")
-    copyOK(:copySuccess="copySuccess")
+    copyOK(ref="copyTpis")
 </template>
 
 <script>
@@ -19,37 +19,35 @@ import copyOK from 'components/copyOK';
 import copy from 'utils/copy';
 import { utils } from '@vite/vitejs';
 import { modes } from 'qrcode.es';
+import { wallet } from 'utils/wallet';
 export default {
     components: { qrcode, copyOK },
     props: {
-        address: {
-            type: String,
-            default: ''
-        },
-        tokenSymbol: {
-            type: String,
+        token: {
+            type: Object,
             required: true
         }
     },
     data() {
         return {
             copySuccess: false,
-            amount: 0,
-            qrOptions: { size: 124, mode: modes.NORMAL }
+            amount: '0',
+            qrOptions: { size: 124, mode: modes.NORMAL },
+            Title: '接收'
         };
     },
     methods: {
         copy() {
             copy(this.address);
-            this.copySuccess = true;
-            setTimeout(() => {
-                this.copySuccess = false;
-            }, 1000);
+            this.$refs.copyTpis.copyOk();
         }
     },
     computed: {
+        address() {
+            return wallet.defaultAddr;
+        },
         addressQrcode() {
-            return utils.tools.uriStringify({
+            return utils.uriStringify({
                 target_address: this.address,
                 params: { amount: this.amount }
             });

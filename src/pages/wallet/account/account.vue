@@ -6,9 +6,14 @@
         <account-head class="item"></account-head>
         <div class="token-list item">
             <tokenCard
-                v-for="token in tokenList"
-                :key="token.id"
-                :opt="token"
+                v-for="token in default2ndOfficaltokenList"
+                :key="token.tokenId"
+                :token="token"
+            ></tokenCard>
+            <tokenCard
+                v-for="token in userStorageTokenList"
+                :key="token.tokenId"
+                :token="token"
             ></tokenCard>
         </div>
         <transaction
@@ -43,13 +48,13 @@ export default {
             const officalGateTokenMap = this.$store.getters.officalGateTokenMap;
             // ------------------- show default token
             const defaultTokenList = Object.keys(defaultTokenMap).map(i => {
-                const { tokenName = '', totalSupply = '', isReIssuable = '', tokenSymbol, balance = '', fundFloat = '', decimals = '', owner = '', tokenId = i, icon, type = 'NATIVE' } = Object.assign({}, defaultTokenMap[i], balanceInfo[i] || {}, allToken[i] || {});
-                return { tokenName, totalSupply, isReIssuable, tokenSymbol, balance, fundFloat, decimals, owner, tokenId, icon, type };
+                const { tokenName = '', totalSupply = '', isReIssuable = '', tokenSymbol, balance = '', fundFloat = '', decimals = '', owner = '', tokenId = i, icon, type = 'NATIVE', gateInfo = {} } = Object.assign({}, defaultTokenMap[i], balanceInfo[i] || {}, allToken[i] || {});
+                return { tokenName, totalSupply, isReIssuable, tokenSymbol, balance, fundFloat, decimals, owner, tokenId, icon, type, gateInfo };
             });
             // ------ show offical gate token
             const officalTokenList = Object.keys(officalGateTokenMap).map(i => {
-                const { tokenName = '', totalSupply = '', isReIssuable = '', tokenSymbol, balance = '', fundFloat = '', decimals = '', owner = '', tokenId = i, icon, type = 'NATIVE' } = Object.assign({}, officalGateTokenMap[i], balanceInfo[i] || {}, allToken[i] || {});
-                return { tokenName, totalSupply, isReIssuable, tokenSymbol, balance, fundFloat, decimals, owner, tokenId, icon, type };
+                const { tokenName = '', totalSupply = '', isReIssuable = '', tokenSymbol, balance = '', fundFloat = '', decimals = '', owner = '', tokenId = i, icon, type = 'OFFICAL_GATE', gateInfo = {} } = Object.assign({}, officalGateTokenMap[i], balanceInfo[i] || {}, allToken[i] || {});
+                return { tokenName, totalSupply, isReIssuable, tokenSymbol, balance, fundFloat, decimals, owner, tokenId, icon, type, gateInfo };
             });
             const list = [ ...defaultTokenList, ...officalTokenList ];
             // force vite first
@@ -63,8 +68,8 @@ export default {
             const userStorageTokenMap = gateStorage.data;
             // ------- show user defined gate
             const userStorageTokenList = Object.keys(userStorageTokenMap).map(i => {
-                const { tokenName = '', totalSupply = '', isReIssuable = '', tokenSymbol, balance = '', fundFloat = '', decimals = '', owner = '', tokenId = i, icon, type = 'NATIVE' } = Object.assign({}, userStorageTokenMap[i], balanceInfo[i] || {}, allToken[i] || {});
-                return { tokenName, totalSupply, isReIssuable, tokenSymbol, balance, fundFloat, decimals, owner, tokenId, icon, type };
+                const { tokenName = '', totalSupply = '', isReIssuable = '', tokenSymbol, balance = '', fundFloat = '', decimals = '', owner = '', tokenId = i, icon, type = 'THRID_GATE', gateInfo = {} } = Object.assign({}, userStorageTokenMap[i], balanceInfo[i] || {}, allToken[i] || {});
+                return { tokenName, totalSupply, isReIssuable, tokenSymbol, balance, fundFloat, decimals, owner, tokenId, icon, type, gateInfo };
             });
             return userStorageTokenList;
         }
