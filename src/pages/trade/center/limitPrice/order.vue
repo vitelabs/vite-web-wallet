@@ -656,7 +656,7 @@ $font-black: rgba(36, 39, 43, 0.8);
         margin-bottom: 10px;
     }
     .real-price {
-        max-width: 85px;
+        max-width: 100px;
         box-sizing: border-box;
         padding: 0 6px;
         font-size: 12px;
