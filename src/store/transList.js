@@ -31,7 +31,7 @@ const actions = {
         lastFetchTime = fetchTime;
         commit('commitSetCurrent', pageIndex);
 
-        return $ViteJS.buildinLedger.getTxList({
+        return $ViteJS.getTxList({
             addr: address,
             index: pageIndex,
             pageCount

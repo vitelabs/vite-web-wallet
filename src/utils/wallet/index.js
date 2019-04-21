@@ -7,7 +7,7 @@ import $ViteJS from 'utils/viteClient';
 import account from './account.js';
 
 const { LangList } = constant;
-const _tools = utils.tools;
+const { checkParams } = utils;
 
 class _wallet {
     constructor() {
@@ -69,7 +69,7 @@ class _wallet {
     }
 
     create(name, pass, lang = LangList.english) {
-        const err = _tools.checkParams({ name, pass }, [ 'name', 'pass' ]);
+        const err = checkParams({ name, pass }, [ 'name', 'pass' ]);
         if (err) {
             console.error(new Error(err));
             return;
@@ -108,7 +108,7 @@ class _wallet {
 
         const requests = [];
         for (let i = 0; i < num; i++) {
-            requests.push($ViteJS.buildinLedger.getBalance(addrs[i].hexAddr));
+            requests.push($ViteJS.getBalance(addrs[i].hexAddr));
         }
 
         const data = await Promise.all(requests);

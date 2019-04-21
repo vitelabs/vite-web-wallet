@@ -182,7 +182,7 @@ export default {
             return Object.keys(this.balance)
                 .map(k => this.balance[k])
                 .filter(v => {
-                    const NOTnoZero = this.filter.hideZero && (v.available + v.lock) === 0;
+                    const NOTnoZero = this.filter.hideZero && +v.total === 0;
                     const NOTmatchKey = this.filter.filterKey
                         && !v.tokenSymbol.match(new RegExp(this.filter.filterKey, 'i'));
 
