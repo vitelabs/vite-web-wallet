@@ -47,9 +47,12 @@
                 <div class="input-item all unuse __ellipsis">500,000 VITE</div>
             </div>
             <div class="item">
-                <div class="btn all __pointer" :class="{
+                <div v-show="!btnUnuse" class="btn all __pointer" :class="{
                     'unuse': btnUnuse
                 }" v-unlock-account="validTx">{{ $t('walletSBP.section1.confirmBtn') }}</div>
+                <div v-show="btnUnuse" class="btn all __pointer"  :class="{
+                    'unuse': btnUnuse
+                }">{{ $t('walletSBP.section1.confirmBtn') }}</div>
             </div>
         </div>
     </div>
