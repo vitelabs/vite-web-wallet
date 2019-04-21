@@ -63,7 +63,7 @@ const mutations = {
 
 const apis = {
     fetchTokenInfo(tokenId = ViteId) {
-        return $ViteJS.ledger.getTokenMintage(tokenId);
+        return $ViteJS.request('mintage_getTokenInfoById', tokenId);
     }
 };
 
