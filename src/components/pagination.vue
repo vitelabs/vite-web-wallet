@@ -29,10 +29,7 @@ export default {
             type: Number,
             default: 1
         },
-        totalPage: {
-            type: Number,
-            default: 0
-        },
+        totalPage: { default: 0 },
         toPage: {
             type: Function,
             default: () => {}
