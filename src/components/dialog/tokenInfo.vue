@@ -95,8 +95,8 @@ export default {
         padding: 30px;
         display: flex;
         flex-direction: column;
-        justify-content:space-between;
-        background:rgba(0,122,255,0.05);
+        justify-content: space-between;
+        background: rgba(0,122,255,0.05);
         .icon {
             width: 40px;
             height: 40px;
@@ -104,16 +104,16 @@ export default {
         &__name {
             font-family: $font-bold;
             color: rgba(29, 32, 36, 1);
-            font-size:14px;
+            font-size: 14px;
             &__gate{
-                color:#007AFF;
-                background-color:rgba(0,122,255,1);
+                color: #007AFF;
+                background-color: rgba(0,122,255,1);
                 font-family: $font-normal;
-                font-size:12px;
-                height:20px;
-                padding:0 4px;
-                margin-left:6px;
-                line-height:20px;
+                font-size: 12px;
+                height: 20px;
+                padding: 0 4px;
+                margin-left: 6px;
+                line-height: 20px;
             }
         }
         &__symbol {
@@ -124,32 +124,32 @@ export default {
     }
     .content{
         .tap{
-            padding-left:30px;
-            height:50px;
-            display:flex;
-            border:1px solid #D4DEE7;
+            padding-left: 30px;
+            height: 50px;
+            display: flex;
+            border: 1px solid #D4DEE7;
             &__item{
-                height:100%;
-                box-sizing:border-box;
-                margin-right:40px;
-                color:#5E6875;
+                height: 100%;
+                box-sizing: border-box;
+                margin-right: 40px;
+                color: #5E6875;
                 &.active{
-                border-bottom:2px solid #007AFF;
+                    border-bottom: 2px solid #007AFF;
                 }
             }
         }
         .tap__content{
-            padding:20px 30px 30px;
+            padding: 20px 30px 30px;
             .content__item{
-                height:40px;
-                line-height:40px;
-                border-bottom:1px solid rgba(198,203,212,0.3);
+                height: 40px;
+                line-height: 40px;
+                border-bottom: 1px solid rgba(198,203,212,0.3);
                 .label{
-                    color:#5E6875;
-                    margin-right:6px;
+                    color: #5E6875;
+                    margin-right: 6px;
                 }
                 .click-able-color{
-                    color:#007AFF;
+                    color: #007AFF;
                 }
             }
         }
