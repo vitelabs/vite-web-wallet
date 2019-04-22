@@ -64,7 +64,7 @@ import viteInput from 'components/viteInput';
 import BigNumber from 'utils/bigNumber';
 import sendTx from 'utils/sendTx';
 
-const amount = 500000;
+const amount = 100000;
 
 export default {
     components: { viteInput },

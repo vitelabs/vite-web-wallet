@@ -296,6 +296,13 @@
         "register": "SBP Registration",
         "cancel": "SBP Cancellation",
         "cancelBtn": "Cancel",
+        "rewardBtn": "提取奖励",
+        "rewardConfirm": {
+            "title": "提取奖励",
+            "describe": "每天 13:00:00 (UTC+8)更新",
+            "leftBtn": "暂不提取",
+            "rightBtn": "全部提取"
+        },
         "confirm": {
             "title": "Registration of SBP candidates",
             "describe": "The {amount} VITE of current address will be locked about 90 days when you submit the registration,  the amount will be returned to staking address after being unlocked",

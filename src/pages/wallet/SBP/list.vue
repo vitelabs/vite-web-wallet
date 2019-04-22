@@ -25,12 +25,14 @@
                 <div class="__tb_cell operate">
                     <span v-if="!item.isCancel" class="btn __pointer"
                           v-unlock-account @unlocked="edit(item)">{{ $t('btn.edit') }}</span>
+                    <span v-if="item.isCancel" class="btn __pointer"
+                          v-unlock-account @unlocked="reg(item)">{{ $t('btn.reReg') }}</span>
                     <span v-if="!item.isCancel" class="btn" :class="{
                         '__pointer': item.isMaturity,
                         'unuse': !item.isMaturity
                     }" v-unlock-account @unlocked="cancel(item)">{{ $t('walletSBP.cancelBtn') }}</span>
-                    <span v-if="item.isCancel" class="btn __pointer"
-                          v-unlock-account @unlocked="reg(item)">{{ $t('btn.reReg') }}</span>
+                    <span class="btn __pointer"
+                          v-unlock-account @unlocked="reward(item)">{{ $t('walletSBP.rewardBtn') }}</span>
                 </div>
             </div>
         </div>
@@ -219,6 +221,18 @@ export default {
                 return;
             }
             this.showConfirm('edit', item.rawData);
+        },
+        reward(item) {
+            console.log(item);
+            // this.activeAccount.initPwd({
+            //     title: this.$t('walletSBP.confirm.title'),
+            //     submitTxt: this.$t('walletSBP.confirm.rightBtn'),
+            //     cancelTxt: this.$t('walletSBP.confirm.leftBtn'),
+            //     content: this.$t('walletSBP.confirm.describe', { amount }),
+            //     submit: () => {
+            //         this.sendRegisterTx(item);
+            //     }
+            // }, true);
         }
     }
 };
