@@ -22,7 +22,7 @@ import copy from 'utils/copy';
 import { utils } from '@vite/vitejs';
 import { modes } from 'qrcode.es';
 import { wallet } from 'utils/wallet';
-import {getValidBalance} from 'utils/validations'
+import { getValidBalance } from 'utils/validations';
 
 export default {
     components: { qrcode, copyOK },
@@ -47,8 +47,8 @@ export default {
         }
     },
     computed: {
-        amountErr(){
-            return getValidBalance({decimals:this.token.decimals})(this.amount)
+        amountErr() {
+            return getValidBalance({ decimals: this.token.decimals })(this.amount);
         },
         address() {
             return wallet.defaultAddr;
@@ -73,10 +73,10 @@ export default {
     color: rgba(29, 32, 36, 1);
     line-height: 16px;
     margin-top: 20px;
-    display:flex;
-    justify-content:space-between;
+    display: flex;
+    justify-content: space-between;
     .amount-err{
-         color:red;
+        color: red;
     }
     &:first-child{
         margin-top: 0;
