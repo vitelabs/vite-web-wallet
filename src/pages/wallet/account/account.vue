@@ -11,7 +11,7 @@
                 :key="token.tokenId"
                 :token="token"
             ></tokenCard>
-             <div class="token-class">跨链代币</div>
+            <div class="token-class">跨链代币</div>
             <tokenCard
                 v-for="token in userStorageTokenList"
                 :key="token.tokenId"
@@ -37,7 +37,7 @@ import transaction from './transaction';
 import { constant } from '@vite/vitejs';
 import { defaultTokenMap } from 'utils/defaultToken';
 import { gateStorage } from 'services/gate';
-import {addTokenDialog} from './dialog'
+import { addTokenDialog } from './dialog';
 
 export default {
     components: { accountHead, syncBlock, tokenCard, transaction },
@@ -81,8 +81,8 @@ export default {
         }
     },
     methods: {
-        addToken(){
-            addTokenDialog()
+        addToken() {
+            addTokenDialog();
         },
         showTrans(token) {
             if (!token.id) {
@@ -138,12 +138,12 @@ export default {
     display: flex;
     flex-wrap: wrap;
     .token-class{
-        border-left:1px solid #007AFF;
-        padding-left:9px;
-        width:100%;
-        box-sizing:border-box;
-        font-family:$font-bold;
-        margin:20px 0 24px;
+        border-left: 1px solid #007AFF;
+        padding-left: 9px;
+        width: 100%;
+        box-sizing: border-box;
+        font-family: $font-bold;
+        margin: 20px 0 24px;
     }
     .add-card{
         box-sizing: border-box;
@@ -152,14 +152,14 @@ export default {
         background: #fff;
         box-shadow: 0 2px 48px 1px rgba(176, 192, 237, 0.42);
         margin: 0 40px 20px 0;
-        display:flex;
-        align-items:center;
-        justify-content:center;
-        cursor:pointer;
-        height:190px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        height: 190px;
         img{
-            height:50px;
-            width:50px;
+            height: 50px;
+            width: 50px;
         }
     }
 }
