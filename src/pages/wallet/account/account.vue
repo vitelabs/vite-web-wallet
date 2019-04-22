@@ -5,16 +5,21 @@
         </div>
         <account-head class="item"></account-head>
         <div class="token-list item">
+            <div class="token-class">原生代币</div>
             <tokenCard
                 v-for="token in default2ndOfficaltokenList"
                 :key="token.tokenId"
                 :token="token"
             ></tokenCard>
+             <div class="token-class">跨链代币</div>
             <tokenCard
                 v-for="token in userStorageTokenList"
                 :key="token.tokenId"
                 :token="token"
             ></tokenCard>
+            <div class="add-card" @click="addToken">
+                <img src="~/assets/imgs/add_token.png"/>
+            </div>
         </div>
         <transaction
             v-if="isShowTrans"
@@ -32,6 +37,7 @@ import transaction from './transaction';
 import { constant } from '@vite/vitejs';
 import { defaultTokenMap } from 'utils/defaultToken';
 import { gateStorage } from 'services/gate';
+import {addTokenDialog} from './dialog'
 
 export default {
     components: { accountHead, syncBlock, tokenCard, transaction },
@@ -75,6 +81,9 @@ export default {
         }
     },
     methods: {
+        addToken(){
+            addTokenDialog()
+        },
         showTrans(token) {
             if (!token.id) {
                 return;
@@ -93,6 +102,7 @@ export default {
 </script>
 
 <style lang="scss" rel="stylesheet/scss">
+@import "assets/scss/vars.scss";
 .page-content .account-wrapper.__wrapper {
     padding-top: 0;
 }
@@ -127,6 +137,31 @@ export default {
 .token-list {
     display: flex;
     flex-wrap: wrap;
+    .token-class{
+        border-left:1px solid #007AFF;
+        padding-left:9px;
+        width:100%;
+        box-sizing:border-box;
+        font-family:$font-bold;
+        margin:20px 0 24px;
+    }
+    .add-card{
+        box-sizing: border-box;
+        position: relative;
+        min-width: 300px;
+        background: #fff;
+        box-shadow: 0 2px 48px 1px rgba(176, 192, 237, 0.42);
+        margin: 0 40px 20px 0;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        cursor:pointer;
+        height:190px;
+        img{
+            height:50px;
+            width:50px;
+        }
+    }
 }
 
 @media only screen and (max-width: 550px) {

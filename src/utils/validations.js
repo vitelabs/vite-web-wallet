@@ -19,11 +19,14 @@ export function getValidBalance({ decimals, balance, minNum }) {
         if (!amount) {
             return null;
         }
+
         if (validFormat(amount, decimals)) {
             return i18n.t('hint.amtFormat');
         }
-        if (BigNumber.compared(amount, minNum) < 0) {
-            return i18n.t('walletQuota.limitAmt', { num: minNum });
+        if (minNum !== undefined) {
+            if (BigNumber.compared(amount, minNum) < 0) {
+                return i18n.t('walletQuota.limitAmt', { num: minNum });
+            }
         }
         if (balance !== undefined) {
             const amount = BigNumber.toMin(amount, decimals);

@@ -101,7 +101,7 @@ export default {
 .token-card {
     box-sizing: border-box;
     position: relative;
-    min-width: 245px;
+    min-width: 300px;
     background: #fff;
     box-shadow: 0 2px 48px 1px rgba(176, 192, 237, 0.42);
     margin: 0 40px 20px 0;
@@ -139,7 +139,6 @@ export default {
 .body {
     padding-top: 8px;
     .item {
-        height: 22px;
         line-height: 22px;
         display: flex;
         justify-content: space-between;
@@ -149,8 +148,10 @@ export default {
             font-size: 20px;
             color: #1d2024;
             font-family: $font-bold;
+            height: 20px;
         }
         .asset {
+            height: 16px;
             font-size: 12px;
             color: #5b638d;
         }
