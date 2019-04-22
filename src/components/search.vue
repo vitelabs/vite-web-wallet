@@ -2,7 +2,7 @@
     <div class="search" @click="$refs.i.focus()">
         <slot name="before">
 
-        <i class="icon"></i>
+            <i class="icon"></i>
         </slot>
         <!-- Safari autocomplete -->
         <input fake_pass type="password" style="display:none;"/>
