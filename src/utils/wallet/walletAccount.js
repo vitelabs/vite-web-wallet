@@ -62,7 +62,7 @@ class walletAccount extends _hdAccount {
         this.lock();
         this.unlockAcc = this.activateAccount({ index: this.defaultInx }, {
             intervals,
-            receiveFailAction: this.receiveFail,
+            autoPow: true,
             duration: -1
         });
         return !!this.unlockAcc;
