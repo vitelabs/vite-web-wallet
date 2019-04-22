@@ -2,7 +2,7 @@ import { klineHistory } from 'services/trade';
 import { subTask } from 'utils/proto/subTask';
 
 const timers = {};
-const maxReqBarNum = 1440;
+const maxReqBarNum = 1500;
 
 // 接口一次请求 1440 个柱（则请求时间间隔 = 时间间隔 * 1440）
 // tradingView 每次传递 1441 个柱

@@ -263,7 +263,7 @@ export default {
     }
 }
 
-@media only screen and (max-width: 1320px) {
+@media only screen and (max-width: 1400px) {
     .token {
         .detail.right {
             left: 200px;
