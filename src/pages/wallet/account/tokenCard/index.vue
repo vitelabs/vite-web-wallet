@@ -3,11 +3,11 @@
         <div class="title">
             <div>
                 <img
-                    v-if="token.icon"
-                    :src="token.icon"
-                    class="icon"
+                    @click="showDetail"
+                    :src="token.icon||getIcon(token.tokenId)"
+                    class="icon click-able"
                 />
-            <span class="tokenName">{{ token.tokenSymbol }}</span></div>
+            <span class="token-name click-able" @click="showDetail">{{ token.tokenSymbol }}</span></div>
 
             <div>
                 <span
@@ -19,11 +19,11 @@
 
         </div>
         <div class="body">
-            <div class="item">
+            <div class="item click-able" @click="showDetail">
                 <span class="balance">{{ token.balance || 0 }}</span>
             </div>
             <div class="item">
-                <span class="asset">{{ token.asset || 0 }}</span>
+                <span class="asset">{{asset}}</span>
             </div>
             <div class="token-tips">
                 {{ token.onroadNum || 0 }} {{ $t('wallet.pend') }}
@@ -55,6 +55,9 @@
 <script>
 import { receiveDialog, chargeDialog, withdrawDialog, tokenInfoDialog } from '../dialog';
 import { wallet } from 'utils/wallet';
+import getTokenIcon from 'utils/getTokenIcon';
+import bigNumber from 'utils/bigNumber';
+
 export default {
     props: {
         token: {
@@ -73,9 +76,20 @@ export default {
     computed: {
         address() {
             return wallet.activeWalletAcc && wallet.activeWalletAcc.getDefaultAddr();
+        },
+        asset(){
+            const currency=this.$store.state.exchangeRate.coins[this.$i18n.locale]
+            const rate=this.$store.state.exchangeRate.rateMap[this.token.tokenId]
+            if(rate&&this.token.balance){
+                return `${this.$i18n.locale==='en'?'$':'¥'} ${bigNumber.multi(this.token.balance,rate[currency])}`
+            }
+            return "--"
         }
     },
     methods: {
+        getIcon(id){
+            return getTokenIcon(id)
+        },
         _sendTx() {
             this.sendTransaction && this.sendTransaction(this.token);
         },
@@ -97,7 +111,9 @@ export default {
 
 <style lang='scss' scoped>
 @import "~assets/scss/vars.scss";
-
+.click-able{
+    cursor:pointer;
+}
 .token-card {
     box-sizing: border-box;
     position: relative;
@@ -115,7 +131,11 @@ export default {
     align-items: center;
     box-sizing: border-box;
     padding: 12px 30px;
-    .tokenName {
+    .icon{
+        height:20px;
+        width:20px;
+    }
+    .token-name {
         font-size: 18px;
         font-family: $font-bold;
     }

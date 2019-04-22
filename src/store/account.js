@@ -1,6 +1,9 @@
 import BigNumber from 'utils/bigNumber';
 import { timer } from 'utils/asyncFlow';
 import { wallet } from 'utils/wallet';
+import { defaultTokenMap, OFFICAL_GATE_NAME } from 'utils/constant';
+import { gateStorage } from 'services/gate';
+import { constant } from '@vite/vitejs';
 
 let balanceInfoInst = null;
 const state = {
@@ -88,6 +91,43 @@ const getters = {
             balanceInfo[tokenId].onroadNum = item.number;
         }
         return balanceInfo;
+    },
+    defaultTokenList(state, getters, rootState, rootGetters) {
+        const balanceInfo = getters.balanceInfo;
+        const allToken = rootGetters.allTokensMap;
+        // ------------------- show default token
+        const list = Object.keys(defaultTokenMap).map(i => {
+            const { tokenName = '', totalSupply = '', isReIssuable = '', tokenSymbol, balance = '', fundFloat = '', decimals = '', owner = '', tokenId = i, icon, type = 'NATIVE', gateInfo = {} } = Object.assign({}, defaultTokenMap[i], balanceInfo[i] || {}, allToken[i] || {});
+            return { tokenName, totalSupply, isReIssuable, tokenSymbol, balance, fundFloat, decimals, owner, tokenId, icon, type, gateInfo };
+        });
+        // force vite first
+        const viteId = constant.Vite_TokenId;
+        return list.splice(list.findIndex(v => v.tokenId === viteId), 1).concat(list);
+    },
+    officalGateTokenList(state, getters, rootState, rootGetters) {
+        const balanceInfo = getters.balanceInfo;
+        const allToken = rootGetters.allTokensMap;
+        const officalGateTokens = rootGetters.mapGate2Token[OFFICAL_GATE_NAME] ? rootGetters.mapGate2Token[OFFICAL_GATE_NAME].tokens : [];
+        return officalGateTokens.map(token => {
+            const i = token['tokenId'];
+            const { tokenName = '', totalSupply = '', isReIssuable = '', tokenSymbol, balance = '', fundFloat = '', decimals = '', owner = '', tokenId = i, icon, type = 'OFFICAL_GATE', gateInfo = {} } = Object.assign({}, token[i], balanceInfo[i] || {}, allToken[i] || {});
+            return { tokenName, totalSupply, isReIssuable, tokenSymbol, balance, fundFloat, decimals, owner, tokenId, icon, type, gateInfo };
+        });
+    },
+    userStorageTokenList(state, getters, rootState, rootGetters) {
+        const balanceInfo = getters.balanceInfo;
+        const allToken = rootGetters.allTokensMap;
+        const userStorageTokenMap = gateStorage.data;
+        // ------- show user defined gate
+        const userStorageTokenList = Object.keys(userStorageTokenMap).map(i => {
+            const { tokenName = '', totalSupply = '', isReIssuable = '', tokenSymbol, balance = '', fundFloat = '', decimals = '', owner = '', tokenId = i, icon, type = 'THRID_GATE', gateInfo = {} } = Object.assign({}, userStorageTokenMap[i], balanceInfo[i] || {}, allToken[i] || {});
+            return { tokenName, totalSupply, isReIssuable, tokenSymbol, balance, fundFloat, decimals, owner, tokenId, icon, type, gateInfo };
+        });
+        return userStorageTokenList;
+    },
+    otherWhithBalance(state, getters) {
+        const contains = [ ...getters.userStorageTokenList, ...getters.defaultTokenList, ...getters.officalGateTokenList ].map(t => t.tokenId);
+        return Object.keys(getters.balanceInfo).filter(i => contains.indexOf(i) === -1);
     }
 };
 

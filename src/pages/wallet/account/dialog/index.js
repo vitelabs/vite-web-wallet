@@ -5,8 +5,8 @@ import addTokenComp from './addToken.vue';
 import tokenInfoComp from './tokenInfo.vue';
 import withdrawComp from './withdraw.vue';
 
-export const receiveDialog = getDialog(receiveComp, { showBottom: false });
-export const chargeDialog = getDialog(chargeComp, { showBottom: false });
+export const receiveDialog = getDialog(receiveComp);
+export const chargeDialog = getDialog(chargeComp);
 export const addTokenDialog = getDialog(addTokenComp);
 export const tokenInfoDialog = getDialog(tokenInfoComp);
 export const withdrawDialog = getDialog(withdrawComp);

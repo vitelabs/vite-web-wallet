@@ -1,7 +1,7 @@
 import { constant } from '@vite/vitejs';
 import { timer } from 'utils/asyncFlow';
 import $ViteJS from 'utils/viteClient';
-import { defaultTokenMap } from 'utils/defaultToken';
+import { defaultTokenMap } from 'utils/constant';
 
 
 const ViteId = constant.Vite_TokenId;
@@ -12,7 +12,8 @@ let heightTimer = null;
 const state = {
     currentHeight: '',
     defaultTokenIds: defaultTokenMap,
-    tokenInfoMaps: {}
+    tokenInfoMaps: {},
+    allTokens: []
 };
 
 const mutations = {
@@ -33,7 +34,7 @@ const mutations = {
     },
     // eslint-disable-next-line no-unused-vars
     setAllTokens(state, payload = []) {
-
+        state.allTokens = payload;
     }
 };
 
@@ -58,7 +59,9 @@ const actions = {
         heightTimer.start();
     },
     getAllTokens({ commit }) {// 暂时为前端提供代币搜索功能，获取全部token信息；
-        $ViteJS.mintage.getTokenInfoList(0, MAX_TOKEN_NUM).then(item => commit('setTokenInfo', { tokenInfo: item, tokenId: item.id }));
+        $ViteJS.mintage.getTokenInfoList(0, MAX_TOKEN_NUM).then(data => {
+            commit('setAllTokens', data.tokenInfoList);
+        });
     },
     getDefaultTokenList({ dispatch, state }) {
         for (const tokenId in state.defaultTokenIds) {
@@ -75,6 +78,13 @@ const actions = {
 };
 
 const getters = {
+    allTokensMap(state) {
+        const map = {};
+        state.allTokens.forEach(t => {
+            map[t.tokenId] = t;
+        });
+        return map;
+    },
     viteTokenInfo(state) {
         if (!state.tokenInfoMaps[ViteId]) {
             return null;

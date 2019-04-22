@@ -30,5 +30,6 @@ store.dispatch('onNetStatus');
 store.dispatch('updateMarketMap');
 store.dispatch('startLoopHeight');
 store.dispatch('getDefaultTokenList');
+store.dispatch('getAllTokens');
 
 export default store;

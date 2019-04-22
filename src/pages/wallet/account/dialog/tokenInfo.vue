@@ -3,9 +3,9 @@ extends /components/dialog/base.pug
 block content
     .body
         .head
-            .head__name
-                .head__name__gate
-            .head__symbol
+            .head__name {{token.tokenName}}
+                .head__name__gate(v-if="token.gateInfo.name")
+            .head__symbol {{token.tokenSymbol}}
         .content
             .tab
                 .tab__item(@click="tapClick('tokenInfo')") 详情
@@ -92,13 +92,14 @@ export default {
             font-size: 14px;
             &__gate{
                 color: #007AFF;
-                background-color: rgba(0,122,255,1);
+                background-color: rgba(0,122,255,0.06);;
                 font-family: $font-normal;
                 font-size: 12px;
                 height: 20px;
                 padding: 0 4px;
                 margin-left: 6px;
                 line-height: 20px;
+                display: flex;
             }
         }
         &__symbol {
