@@ -27,30 +27,32 @@ export default {
             userInput: '',
             dLTxt: '取消',
             dRTxt: '添加',
-            dTitle:'添加代币'
+            dTitle: '添加代币'
         };
     },
-    methods:{
-        inspector(){
-            const map={};
-            this.selectedTokenIds.map(i=>(map[i]={}))
+    methods: {
+        inspector() {
+            const map = {};
+            this.selectedTokenIds.map(i => (map[i] = {}));
             gateStorage.bindTokens(map);
-            return Promise.resolve(this.selectedTokenIds)
+            return Promise.resolve(this.selectedTokenIds);
         }
     },
     computed: {
-        token2Gate(){return this.$store.getters.mapToken2Gate},
+        token2Gate() {
+            return this.$store.getters.mapToken2Gate;
+        },
         searchRes() {
-            if(this.userInput===''){return[]}
-            const shownTokens=[...this.$store.getters.defaultTokenList,...this.$store.getters.officalGateTokenList,...this.$store.getters.userStorageTokenList]
-            const shownTokenIds=shownTokens.map(t=>t.tokenId).concat(this.$store.getters.otherWhithBalance)
-            const allTokens=this.$store.state.ledger.allTokens;
-            return allTokens.filter(t=>shownTokenIds.indexOf(t.tokenId)===-1).filter(t=>{
-                return t.tokenId.indexOf(this.userInput)>=0||t.tokenName.indexOf(this.userInput)>=0||t.tokenSymbol.indexOf(this.userInput)>=0
-            }).slice(0,MAX_RES_NUMS);
+            if (this.userInput === '') {
+                return [];
+            }
+            const shownTokens = [ ...this.$store.getters.defaultTokenList, ...this.$store.getters.officalGateTokenList, ...this.$store.getters.userStorageTokenList ];
+            const shownTokenIds = shownTokens.map(t => t.tokenId).concat(this.$store.getters.otherWhithBalance);
+            const allTokens = this.$store.state.ledger.allTokens;
+            return allTokens.filter(t => shownTokenIds.indexOf(t.tokenId) === -1).filter(t => t.tokenId.indexOf(this.userInput) >= 0 || t.tokenName.indexOf(this.userInput) >= 0 || t.tokenSymbol.indexOf(this.userInput) >= 0).slice(0, MAX_RES_NUMS);
         },
         BtnUnuse() {
-            return this.selectedTokenIds.length===0;;
+            return this.selectedTokenIds.length === 0;
         }
     }
 };
@@ -58,18 +60,18 @@ export default {
 
 <style lang="scss" scoped>
 .search-input{
-    width:100%;
-    height:50px;
+    width: 100%;
+    height: 50px;
 }
 .search-tips{
-    max-height:260px;
-    overflow-y:scroll;
+    max-height: 260px;
+    overflow-y: scroll;
     &__item{
         display: flex;
         height: 52px;
         padding: 7px 15px;
-        align-items:center;
-        cursor:pointer;
+        align-items: center;
+        cursor: pointer;
         &.active,&:hover{
             background: rgba(0,122,255,0.03);
         }
@@ -101,7 +103,7 @@ export default {
                 }
             }
             .desc{
-                color:#5E6875;
+                color: #5E6875;
             }
         }
     }

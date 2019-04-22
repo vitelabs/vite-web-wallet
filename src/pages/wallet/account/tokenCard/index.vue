@@ -77,18 +77,18 @@ export default {
         address() {
             return wallet.activeWalletAcc && wallet.activeWalletAcc.getDefaultAddr();
         },
-        asset(){
-            const currency=this.$store.state.exchangeRate.coins[this.$i18n.locale]
-            const rate=this.$store.state.exchangeRate.rateMap[this.token.tokenId]
-            if(rate&&this.token.balance){
-                return `${this.$i18n.locale==='en'?'$':'¥'} ${bigNumber.multi(this.token.balance,rate[currency])}`
+        asset() {
+            const currency = this.$store.state.exchangeRate.coins[this.$i18n.locale];
+            const rate = this.$store.state.exchangeRate.rateMap[this.token.tokenId];
+            if (rate && this.token.balance) {
+                return `${ this.$i18n.locale === 'en' ? '$' : '¥' } ${ bigNumber.multi(this.token.balance, rate[currency]) }`;
             }
-            return "--"
+            return '--';
         }
     },
     methods: {
-        getIcon(id){
-            return getTokenIcon(id)
+        getIcon(id) {
+            return getTokenIcon(id);
         },
         _sendTx() {
             this.sendTransaction && this.sendTransaction(this.token);
@@ -112,7 +112,7 @@ export default {
 <style lang='scss' scoped>
 @import "~assets/scss/vars.scss";
 .click-able{
-    cursor:pointer;
+    cursor: pointer;
 }
 .token-card {
     box-sizing: border-box;
@@ -132,8 +132,8 @@ export default {
     box-sizing: border-box;
     padding: 12px 30px;
     .icon{
-        height:20px;
-        width:20px;
+        height: 20px;
+        width: 20px;
     }
     .token-name {
         font-size: 18px;

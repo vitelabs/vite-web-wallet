@@ -45,32 +45,32 @@ export default {
             activeToken: null
         };
     },
-    watch:{
-        otherWhithBalance(val){
-            if(!val||val.length===0)return;
-            const map={};
-            val.forEach(i=>(map[i]={}))
-            gateStorage.bindTokens(map)
+    watch: {
+        otherWhithBalance(val) {
+            if (!val || val.length === 0) return;
+            const map = {};
+            val.forEach(i => (map[i] = {}));
+            gateStorage.bindTokens(map);
         }
     },
     computed: {
-        nativeTokenList(){
-            return [...this.defaultTokenList, ...this.officalGateTokenList  ,...this.userStorageTokenList.filter(t=>!t.gateInfo.url) ,...this.otherWhithBalance]
+        nativeTokenList() {
+            return [ ...this.defaultTokenList, ...this.officalGateTokenList, ...this.userStorageTokenList.filter(t => !t.gateInfo.url), ...this.otherWhithBalance ];
         },
-        crossChainTokenList(){
-            return this.userStorageTokenList.filter(t=>t.gateInfo.url)
+        crossChainTokenList() {
+            return this.userStorageTokenList.filter(t => t.gateInfo.url);
         },
         defaultTokenList() {
-            return this.$store.getters.defaultTokenList
+            return this.$store.getters.defaultTokenList;
         },
         officalGateTokenList() {
-            return this.$store.getters.officalGateTokenList
+            return this.$store.getters.officalGateTokenList;
         },
         userStorageTokenList() {
-            return this.$store.getters.userStorageTokenList
+            return this.$store.getters.userStorageTokenList;
         },
         otherWhithBalance() {
-            return this.$store.getters.otherWhithBalance
+            return this.$store.getters.otherWhithBalance;
         }
     },
     methods: {
