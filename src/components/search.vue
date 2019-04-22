@@ -1,6 +1,9 @@
 <template>
     <div class="search" @click="$refs.i.focus()">
+        <slot name="before">
+
         <i class="icon"></i>
+        </slot>
         <!-- Safari autocomplete -->
         <input fake_pass type="password" style="display:none;"/>
         <input readonly onfocus="this.removeAttribute('readonly');"
@@ -8,7 +11,6 @@
                autocomplete="off" ref="i" type="text"
                v-model="v" @input.prevent="updateKey">
         <input fake_pass type="password" style="display:none;"/>
-        <slot name="searchTips"></slot>
     </div>
 </template>
 <script>

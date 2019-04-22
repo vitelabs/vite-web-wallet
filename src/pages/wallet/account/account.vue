@@ -7,14 +7,14 @@
         <div class="token-list item">
             <div class="token-class">原生代币</div>
             <tokenCard
-                v-for="token in default2ndOfficaltokenList"
+                v-for="token in nativeTokenList"
                 :key="token.tokenId"
                 :token="token"
             ></tokenCard>
             <div class="token-class">跨链代币</div>
             <tokenCard
-                v-for="token in userStorageTokenList"
-                :key="token.tokenId"
+                v-for="token in crossChainTokenList"
+                :key="`_${token.tokenId}`"
                 :token="token"
             ></tokenCard>
             <div class="add-card" @click="addToken">
@@ -34,10 +34,8 @@ import syncBlock from 'components/syncBlock';
 import tokenCard from './tokenCard';
 import accountHead from './head';
 import transaction from './transaction';
-import { constant } from '@vite/vitejs';
-import { defaultTokenMap } from 'utils/defaultToken';
-import { gateStorage } from 'services/gate';
 import { addTokenDialog } from './dialog';
+import { gateStorage } from 'services/gate';
 
 export default {
     components: { accountHead, syncBlock, tokenCard, transaction },
@@ -47,37 +45,32 @@ export default {
             activeToken: null
         };
     },
+    watch:{
+        otherWhithBalance(val){
+            if(!val||val.length===0)return;
+            const map={};
+            val.forEach(i=>(map[i]={}))
+            gateStorage.bindTokens(map)
+        }
+    },
     computed: {
-        default2ndOfficaltokenList() {
-            const balanceInfo = this.$store.getters.balanceInfo;
-            const allToken = this.$store.state.ledger.tokenInfoMaps;
-            const officalGateTokenMap = this.$store.getters.officalGateTokenMap;
-            // ------------------- show default token
-            const defaultTokenList = Object.keys(defaultTokenMap).map(i => {
-                const { tokenName = '', totalSupply = '', isReIssuable = '', tokenSymbol, balance = '', fundFloat = '', decimals = '', owner = '', tokenId = i, icon, type = 'NATIVE', gateInfo = {} } = Object.assign({}, defaultTokenMap[i], balanceInfo[i] || {}, allToken[i] || {});
-                return { tokenName, totalSupply, isReIssuable, tokenSymbol, balance, fundFloat, decimals, owner, tokenId, icon, type, gateInfo };
-            });
-            // ------ show offical gate token
-            const officalTokenList = Object.keys(officalGateTokenMap).map(i => {
-                const { tokenName = '', totalSupply = '', isReIssuable = '', tokenSymbol, balance = '', fundFloat = '', decimals = '', owner = '', tokenId = i, icon, type = 'OFFICAL_GATE', gateInfo = {} } = Object.assign({}, officalGateTokenMap[i], balanceInfo[i] || {}, allToken[i] || {});
-                return { tokenName, totalSupply, isReIssuable, tokenSymbol, balance, fundFloat, decimals, owner, tokenId, icon, type, gateInfo };
-            });
-            const list = [ ...defaultTokenList, ...officalTokenList ];
-            // force vite first
-            const viteId = constant.Vite_TokenId;
-            return list.splice(list.findIndex(v => v.tokenId === viteId), 1).concat(list);
-            // -------------
+        nativeTokenList(){
+            return [...this.defaultTokenList, ...this.officalGateTokenList  ,...this.userStorageTokenList.filter(t=>!t.gateInfo.url) ,...this.otherWhithBalance]
+        },
+        crossChainTokenList(){
+            return this.userStorageTokenList.filter(t=>t.gateInfo.url)
+        },
+        defaultTokenList() {
+            return this.$store.getters.defaultTokenList
+        },
+        officalGateTokenList() {
+            return this.$store.getters.officalGateTokenList
         },
         userStorageTokenList() {
-            const balanceInfo = this.$store.getters.balanceInfo;
-            const allToken = this.$store.state.ledger.tokenInfoMaps;
-            const userStorageTokenMap = gateStorage.data;
-            // ------- show user defined gate
-            const userStorageTokenList = Object.keys(userStorageTokenMap).map(i => {
-                const { tokenName = '', totalSupply = '', isReIssuable = '', tokenSymbol, balance = '', fundFloat = '', decimals = '', owner = '', tokenId = i, icon, type = 'THRID_GATE', gateInfo = {} } = Object.assign({}, userStorageTokenMap[i], balanceInfo[i] || {}, allToken[i] || {});
-                return { tokenName, totalSupply, isReIssuable, tokenSymbol, balance, fundFloat, decimals, owner, tokenId, icon, type, gateInfo };
-            });
-            return userStorageTokenList;
+            return this.$store.getters.userStorageTokenList
+        },
+        otherWhithBalance() {
+            return this.$store.getters.otherWhithBalance
         }
     },
     methods: {

@@ -1,56 +1,63 @@
 
 import Vue from 'vue';
 import closeIcon from 'assets/imgs/confirm_close.svg';
+import store from 'src/store';
 const STATUS = {
     'CLOSE': 'CLOSE',
     'CANCEL': 'CANCEL',
     'CONFIRMED': 'CONFRIMED'
 };
-
+const getValue = function (key, defaultValue) {
+    const dkey = `d${ key.slice(0, 1).toUpperCase() }${ key.slice(1) }`;
+    if (this[key] !== undefined) return this[key];
+    if (this[dkey] !== undefined) return this[dkey];
+    return defaultValue;
+};
 const mixin = {
+    store,
     props: {
-        showMask: {
-            type: Boolean,
-            default: false
-        },
-        title: {
-            type: String,
-            default: ''
-        },
-        showClose: {
-            type: Boolean,
-            default: true
-        },
-        lTxt: {
-            type: String,
-            default: ''
-        },
-        rTxt: {
-            type: String,
-            default: ''
-        },
-        sTxt: {
-            type: String,
-            default: ''
-        },
-        btnUnuse: {
-            type: Boolean,
-            default: false
-        },
-        showBottom: {
-            type: Boolean,
-            default: true
-        },
-        content: {
-            type: String,
-            default: ''
-        },
+        showMask: { },
+        title: { },
+        showClose: { },
+        lTxt: { },
+        rTxt: { },
+        sTxt: { },
+        btnUnuse: { },
+        content: { },
         promise: {
             type: Object,
             default: () => null
         }
     },
     computed: {
+        Title() {
+            console.log(this);
+            return getValue.call(this, 'title', '');
+        },
+        ShowClose() {
+            return getValue.call(this, 'showClose', true);
+        },
+        BtnUnuse() {
+            return getValue.call(this, 'btnUnuse', false);
+        },
+        STxt() {
+            return getValue.call(this, 'sTxt', '');
+        },
+        RTxt() {
+            return getValue.call(this, 'rTxt', '');
+        },
+        LTxt() {
+            return getValue.call(this, 'lTxt', '');
+        },
+        Content() {
+            return getValue.call(this, 'content', '');
+        },
+        ShowMask() {
+            return getValue.call(this, 'showMask', false);
+        },
+        ShowBottom() {
+            return this.RTxt || this.LTxt || this.STxt;
+        },
         s() {
             return {
                 container: { 'background': this.showMask ? 'rgba(0, 0, 0, 0.6)' : '--', position: 'fixed', top: 0, bottom: 0, right: 0, left: 0, overflow: 'auto', display: 'flex', 'justify-content': 'center', 'align-items': 'center', 'z-index': 100 },
@@ -60,32 +67,33 @@ const mixin = {
                 body: { position: 'relative', 'box-sizing': 'border-box', padding: '30px', overflow: 'auto', 'font-size': '18px', color: '#1d2024', 'line-height': '26px' },
                 btnGroup: { padding: '0 30px', display: 'flex', 'height': '40px', 'box-sizing': 'border-box', 'justify-content': 'space-between' },
                 lBtn: { 'margin-right': '20px' },
-                btn: { 'flex-grow': 1, 'white-space': 'nowrap', color: '#ffffff', background: '#007AFF', 'vertical-align': 'middle', 'text-align': 'center' },
+                btn: { cursor: 'pointer', 'flex-grow': 1, 'white-space': 'nowrap', color: '#ffffff', background: '#007AFF', 'display': 'flex', 'align-items': 'center', 'justify-content': 'center' },
                 left: { border: '1px solid #007aff', 'border-radius': '2px', color: '#007aff', 'margin-right': '20px' },
                 unUse: { background: '#efefef', color: '#666' }
             };
         }
     },
     methods: {
-        lClick() {
+        rClick() {
             if (this.inspector) {
-                this.inspector.then(data => {
+                this.inspector().then(data => {
                     this.promise.resolve({
                         status: STATUS.CONFIRMED,
                         data
                     });
+                    document.body.removeChild(this.$el);
+                    this.$destroy();
                 });
             } else {
                 this.promise.resolve({
                     status: STATUS.CONFIRMED,
                     data: null
                 });
+                document.body.removeChild(this.$el);
+                this.$destroy();
             }
-            document.body.removeChild(this.$el);
-
-            this.$destroy();
         },
-        rClick() {
+        lClick() {
             this.promise.reject({
                 status: STATUS.CANCEL,
                 data: null
@@ -111,11 +119,11 @@ export default function (component, propsDefault = {}) {
             component.mixins = component.mixins || [];
             component.mixins.push(mixin);
             const ConfirmComponent = Vue.extend(component);
-            console.log(88888, props);
             const componentInstance = new ConfirmComponent({
                 el: document.createElement('div'),
                 propsData: props
             });
+            componentInstance.$mount();
             document.body.appendChild(componentInstance.$el);
             return componentInstance.$el;
         };

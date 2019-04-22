@@ -30,7 +30,7 @@ export default {
         }
     },
     data() {
-        return { Title: '提现' };
+        return { dTitle: '提现' };
     },
     methods: {},
     computed: {}

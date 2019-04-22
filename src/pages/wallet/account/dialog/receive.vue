@@ -37,7 +37,7 @@ export default {
             copySuccess: false,
             amount: '',
             qrOptions: { size: 124, mode: modes.NORMAL },
-            Title: '接收'
+            dTitle: '接收'
         };
     },
     methods: {

@@ -28,3 +28,7 @@ export const defaultTokenMap = process.env.NODE_ENV === 'production' ? {
         icon: vttIcon
     }
 };
+
+
+export const OFFICAL_GATE_NAME = 'Vite Official Gateway';
+

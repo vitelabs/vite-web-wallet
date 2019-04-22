@@ -1,8 +1,7 @@
 import { getGateInfos } from 'services/gate';
 
-const OFFICAL_GATE_NAME = 'Vite Official Gateway';
-
 const state = { gateInfos: [] };
+
 
 const mutations = {
     setGateInfos(state, payload) {
@@ -18,14 +17,16 @@ const actions = {
 };
 
 const getters = {
-    officalGateInfos(state) {
-        return state.gateInfos.filter(g => g.name === OFFICAL_GATE_NAME);
-    },
-    officalGateTokenMap(state, getters) {
+    mapToken2Gate(state) {
         const map = {};
-        getters.officalGateInfos.map(g => g.tokens).reduce(function (pre, cur) {
+        state.gateInfos.map(g => g.tokens).reduce(function (pre, cur) {
             return [ ...pre, ...(cur || []) ];
-        }, []).forEach(n => (map[n.viteTokenId] = n));
+        }, []).forEach(n => (map[n.tokenId] = n));
+        return map;
+    },
+    mapGate2Token() {
+        const map = {};
+        state.gateInfos.forEach(g => (map[g.name] = g));
         return map;
     }
 };

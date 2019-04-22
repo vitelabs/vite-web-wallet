@@ -1,24 +1,40 @@
 import qs from 'qs';
 
 const reqTimeout = 30000;
+const afterResponseDefault = async function (xhr, path) {
+    if (+xhr.status === 200) {
+        if (path.indexOf('kline') !== -1) {
+            return Promise.resolve(JSON.parse(xhr.responseText));
+        }
+        const { code, msg, data, error } = JSON.parse(xhr.responseText);
+        const rightCode = path.indexOf('api') === -1 ? 200 : 0;
+        if (code !== rightCode) {
+            return Promise.reject({
+                code,
+                message: msg || error
+            });
+        }
+        return Promise.resolve(data || null);
+    }
+    return Promise.reject(JSON.parse(xhr.responseText));
+};
 
-
-export default function request({ method = 'GET', path, params = {}, timeout = reqTimeout, assertSuccess }) {
-    assertSuccess = assertSuccess || (x => {
-        const { code } = JSON.parse(x.responseText);
-        const rightCode = x.path.indexOf('api') === -1 ? 200 : 0;
-        return code === rightCode;
-    });
+export default function request({
+    method = 'GET',
+    path,
+    params = {},
+    timeout = reqTimeout,
+    afterResponse = afterResponseDefault
+}) {
     method = method.toUpperCase();
 
     const xhr = new XMLHttpRequest();
     const qsStr = qs.stringify(params);
 
-    method === 'GET' && (
-        path.indexOf('?') < 0
-            ? (path = `${ path }?${ qsStr }`)
-            : (path = `${ path }${ qsStr }`)
-    );
+    method === 'GET'
+    && (path.indexOf('?') < 0
+        ? (path = `${ path }?${ qsStr }`)
+        : (path = `${ path }${ qsStr }`));
     xhr.open(method, path, true);
     xhr.setRequestHeader('content-type', 'application/json; charset=utf-8');
     xhr.timeout = timeout;
@@ -31,30 +47,12 @@ export default function request({ method = 'GET', path, params = {}, timeout = r
 
     return new Promise((res, rej) => {
         xhr.onload = function () {
-            try {
-                if (+xhr.status === 200) {
-                    if (path.indexOf('kline') !== -1) {
-                        res(JSON.parse(xhr.responseText));
-                        return;
-                    }
-                    const { code, msg, data, error } = JSON.parse(xhr.responseText);
-                    if (!assertSuccess(xhr)) {
-                        return rej({
-                            code,
-                            message: msg || error
-                        });
-                    }
-
-                    res(data || null);
-                } else {
-                    rej(JSON.parse(xhr.responseText));
-                }
-            } catch (e) {
+            afterResponse(xhr, path).then(d => res(d), d => rej(d)).catch(e => {
                 rej({
                     status: xhr.status,
                     message: xhr.responseText || e
                 });
-            }
+            });
         };
         xhr.onerror = function (err) {
             rej(err);
@@ -68,11 +66,11 @@ export default function request({ method = 'GET', path, params = {}, timeout = r
     });
 }
 
-export const getClient = function (baseUrl = '', assertSuccess) {
+export const getClient = function (baseUrl = '', afterResponse) {
     return function ({ method = 'GET', path, params = {}, timeout = reqTimeout }) {
         baseUrl.slice(-1) === '/' && (baseUrl = baseUrl.slice(0, -1));
         path.indexOf('/') === 0 && (path = path.splice(1));
         path = `${ baseUrl }/${ path }`;
-        return request({ method, path, params, timeout, assertSuccess });
+        return request({ method, path, params, timeout, afterResponse });
     };
 };

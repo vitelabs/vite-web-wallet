@@ -2,15 +2,25 @@ import { getClient } from 'utils/request';
 import { accountBlock } from '@vite/vitejs';
 import { wallet } from 'utils/wallet';
 import rpcClient from 'utils/viteClient';
-import s from 'utils/localStorage';
+import { addrSpace } from 'utils/storageSpace';
 
 const STORAGEKEY = 'INDEX_COLLECT_TOKEN';
 // import { powProcess } from 'components/pow/index';
 // const VoteDifficulty = '201564160';
 
-const client = getClient('/gateWay', x => {
-    const { code } = JSON.parse(x.responseText);
-    return code === 0;
+const client = getClient('/gateWay', xhr => {
+    if (xhr.status === 200) {
+        const { code, msg, data, error, subCode } = JSON.parse(xhr.responseText);
+        if (code !== 0) {
+            return Promise.reject({
+                code,
+                subCode,
+                message: msg || error
+            });
+        }
+        return Promise.resolve(data || null);
+    }
+    return Promise.reject(JSON.parse(xhr.responseText));
 });
 export const getGateInfos = () => client({ path: 'certified_gateways' });
 
@@ -41,7 +51,7 @@ export const withdraw = async ({ amount, withdrawAddress, gateAddr, tokenId }) =
 };
 
 
-// data{tokenId:{symbol,gateHost,gateUrl}}
+// data{tokenId:{symbol,url}}
 class GateWays {
     constructor() {
         this.updateFromStorage();
@@ -49,23 +59,31 @@ class GateWays {
     }
 
     bindToken(tokenId, tokenInfo) {
+        this.updateFromStorage();
         this.data[tokenId] = tokenInfo;
         this.saveToStorage();
     }
 
+    bindTokens(tokenMap) {
+        this.updateFromStorage();
+        this.data = { ...tokenMap, ...this.data };
+        this.saveToStorage();
+    }
+
     unBindToken(tokenId) {
+        this.updateFromStorage();
         delete this.data[tokenId];
         this.saveToStorage();
     }
 
     saveToStorage() {
-        s.setItem(STORAGEKEY, this.data);
+        addrSpace.setItem(STORAGEKEY, this.data);
     }
 
     updateFromStorage() {
-        this.data = s.getItem(STORAGEKEY);
+        this.data = addrSpace.getItem(STORAGEKEY);
         if (!this.data) {
-            s.setItem(STORAGEKEY, {});
+            addrSpace.setItem(STORAGEKEY, {});
             this.data = {};
         }
     }

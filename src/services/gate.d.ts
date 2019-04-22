@@ -4,7 +4,7 @@ type responseWrapper = {
     code: number, msg: string, data: object, error?: string, subCode?: number
 }
 type GateTokenInfo = {
-    "viteTokenId": TokenId
+    "tokenId": TokenId
     "gataway": string
     "mappedNet": string
     "mappedTokenId": string
