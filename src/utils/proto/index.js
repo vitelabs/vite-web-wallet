@@ -2,12 +2,15 @@ import { root } from './protoClass';
 import { random } from 'utils/random';
 import { timer } from 'utils/asyncFlow';
 
-const proto = root.lookupType('vite.DexProto');
+const DexProto = root.lookupType('vite.DexProto');
 const HEARTBEAT = 10000;
+
 class WsProtoClient {
     constructor(wsUrl) {
         this.MESSAGETYPE = { SUB: 'sub', UNSUB: 'un_sub', PING: 'ping', PONG: 'pong', PUSH: 'push' };
         this._clientId = random(10);
+        console.log('new Wesocket', this._clientId, new Date());
+
         this._subKeys = {};
 
         this._heartBeat = new timer(() => {
@@ -19,6 +22,13 @@ class WsProtoClient {
         try {
             const connect = new WebSocket(wsUrl);
             this.connect = connect;
+
+            window.onbeforeunload = function () {
+                console.log('关闭WebSocket连接！');
+                this.connect.onclose = function () {};
+                this.connect.close();
+            };
+
             connect.binaryType = 'arraybuffer';
 
             this._subKey && this.subscribe({ event_key: this._subKey });
@@ -27,12 +37,18 @@ class WsProtoClient {
             };
 
             connect.onmessage = e => {
-                const rootMessage = proto.lookupType('vite.DexProto');
-                const data = rootMessage.decode(new Uint8Array(e.data));
+                const data = DexProto.decode(new Uint8Array(e.data));
 
                 if (data.op_type !== this.MESSAGETYPE.PUSH) return;
 
+                if (data.client_id !== this._clientId) {
+                    console.log('clientId不一致', data.client_id, this._clientId);
+                    return;
+                }
+
                 const realData = getRealData(data);
+                console.log('onmessage', data, realData);
+
                 const error = data.error_code || undefined;
                 this._subKeys[data.event_key] && this._subKeys[data.event_key].forEach(c => {
                     c(realData, error);
@@ -58,7 +74,10 @@ class WsProtoClient {
     }
 
     unSub(event, callback) {
-        if (!this._subKeys[event]) return;
+        if (!event || !this._subKeys[event]) {
+            // console.log('[UNSUB] fail, !this._subKeys[event]', event);
+            return;
+        }
 
         if (callback) {
             this._subKeys[event].delete(callback);
@@ -66,11 +85,21 @@ class WsProtoClient {
             this._subKeys[event].clear();
         }
 
-        this._subKeys[event].length === 0 && this.send(event, this.MESSAGETYPE.UNSUB);
+        if (this._subKeys[event].size !== 0) {
+            // console.log('[UNSUB] fail, this._subKeys[event].size', event);
+            return;
+        }
+
+        console.log('[UNSUB] success', event);
+        this.send(event, this.MESSAGETYPE.UNSUB);
     }
 
     send(event_key = '', type = this.MESSAGETYPE.PING) {
         if (!this.ready) return;
+
+        if (type === this.MESSAGETYPE.PING) {
+            console.log('ping', this._clientId, new Date());
+        }
 
         const payload = {
             event_key: event_key,
@@ -80,17 +109,16 @@ class WsProtoClient {
             error_code: 0
         };
 
-        const err = proto.verify(payload);
+        const err = DexProto.verify(payload);
         if (err) throw Error(err);
 
-        const message = proto.create(payload);
-        const buffer = proto.encode(message).finish();
+        const message = DexProto.create(payload);
+        const buffer = DexProto.encode(message).finish();
         this.connect.send(buffer);
     }
 }
 
 export const client = new WsProtoClient(process.env.pushServer);
-
 
 function getRealData(data) {
     if (data.error_code) {
@@ -121,11 +149,16 @@ function getRealData(data) {
 
     const listKey = [ 'TxLatestListProto', 'OrderListProto' ];
 
-    const messageProto = proto.lookupType(`vite.${ key }`);
+    const messageProto = root.lookupType(`vite.${ key }`);
     const result = messageProto.decode(data.message);
+
+    // console.log('proto', key, result);
 
     if (listKey.indexOf(key) !== -1) {
         return result && result.list ? result.list : null;
     }
     return result;
 }
+
+// const _client = new WsProtoClient(process.env.pushServer);
+// console.log(_client);

@@ -37,19 +37,21 @@
             <div class="item">
                 <div class="title">{{ $t('walletQuota.time') }}</div>
                 <span class="input-item unuse about">{{ $t('walletQuota.aboutDays', { day: '3' }) }}</span>
-                <span class="btn __pointer" :class="{
+                <span v-show="!btnUnuse" class="btn __pointer" :class="{
                     'unuse': btnUnuse
                 }" v-unlock-account="validTx">{{ $t('submitStaking') }}</span>
+                <span v-show="btnUnuse"  class="btn __pointer" :class="{
+                    'unuse': btnUnuse
+                }">{{ $t('submitStaking') }}</span>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+import { hdAddr, constant } from '@vite/vitejs';
 import viteInput from 'components/viteInput';
 import BigNumber from 'utils/bigNumber';
-import { address } from 'utils/tools';
-import { constant } from '@vite/vitejs';
 
 const amountTimeout = null;
 const minNum = 1000;
@@ -147,7 +149,7 @@ export default {
             }
 
             try {
-                this.isValidAddress = address.isValidHexAddr(this.toAddr);
+                this.isValidAddress = hdAddr.isValidHexAddr(this.toAddr);
             } catch (err) {
                 console.warn(err);
                 this.isValidAddress = false;
