@@ -59,7 +59,8 @@ const mixin = {
                 close: { cursor: 'pointer', 'box-sizing': 'border-box', display: 'block', float: 'right', padding: '30px', width: '20px', height: '20px', background: `url(${ closeIcon })`, 'background-repeat': 'no-repeat', 'background-position': 'center', 'background-size': '20px 20px' },
                 body: { position: 'relative', 'box-sizing': 'border-box', padding: '30px', overflow: 'auto', 'font-size': '18px', color: '#1d2024', 'line-height': '26px' },
                 btnGroup: { padding: '0 30px', display: 'flex', 'height': '40px', 'box-sizing': 'border-box', 'justify-content': 'space-between' },
-                btn: { 'white-space': 'nowrap', color: '#ffffff', background: '#007AFF', 'flex-grow': 1 },
+                lBtn: { 'margin-right': '20px' },
+                btn: { 'flex-grow': 1, 'white-space': 'nowrap', color: '#ffffff', background: '#007AFF', 'vertical-align': 'middle', 'text-align': 'center' },
                 left: { border: '1px solid #007aff', 'border-radius': '2px', color: '#007aff', 'margin-right': '20px' },
                 unUse: { background: '#efefef', color: '#666' }
             };

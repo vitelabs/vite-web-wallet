@@ -5,12 +5,14 @@ block content
         span 接收地址
         img.title_icon.copy.__pointer(src="~assets/imgs/copy_default.svg" @click="copy")
     .block__content {{address}}
+    copyOK(ref="copyTpis")
     .block__title 请输入金额
+        .amount-err {{amountErr}}
     input.block__content.edit(v-model="amount" placeholder="请输入金额")
     .qrcode-container
         .qrcode-container__title 请扫码向我转入{{token.tokenSymbol}}
         qrcode(:text="addressQrcode" :options="qrOptions" class="qrcode-container__content")
-    copyOK(ref="copyTpis")
+
 </template>
 
 <script>
@@ -20,6 +22,8 @@ import copy from 'utils/copy';
 import { utils } from '@vite/vitejs';
 import { modes } from 'qrcode.es';
 import { wallet } from 'utils/wallet';
+import {getValidBalance} from 'utils/validations'
+
 export default {
     components: { qrcode, copyOK },
     props: {
@@ -31,7 +35,7 @@ export default {
     data() {
         return {
             copySuccess: false,
-            amount: '0',
+            amount: '',
             qrOptions: { size: 124, mode: modes.NORMAL },
             Title: '接收'
         };
@@ -43,6 +47,9 @@ export default {
         }
     },
     computed: {
+        amountErr(){
+            return getValidBalance({decimals:this.token.decimals})(this.amount)
+        },
         address() {
             return wallet.defaultAddr;
         },
@@ -66,11 +73,15 @@ export default {
     color: rgba(29, 32, 36, 1);
     line-height: 16px;
     margin-top: 20px;
+    display:flex;
+    justify-content:space-between;
+    .amount-err{
+         color:red;
+    }
     &:first-child{
         margin-top: 0;
     }
     .title_icon {
-        float: right;
         &.copy {
             margin-right: 10px;
         }

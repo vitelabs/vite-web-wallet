@@ -6,6 +6,6 @@ div(:style="s.container")
             block content
                 div(v-if="content" v-html="content")
         div(:style="s.btnGroup" v-if="showBottom")
-            div(:style="[s.btn,BtnUnuse||btnUnuse?s.unUse:undefined]" v-if="!!(STxt&&sTxt)" @click="RClick||rClick") {{STxt||sTxt}}
-            div(:style="[s.btn]" v-if="!(_sTxt&&sTxt)"  @click="LClick||lClick") {{LTxt||lTxt}}
-            div(:style="[s.btn,BtnUnuse||btnUnuse?s.unUse:undefined]" v-if="!(STxt&&sTxt)"  @click="RClick||rClick") {{RTxt||rTxt}}
+            div(:style="[s.btn,BtnUnuse||btnUnuse?s.unUse:undefined]" v-if="!!(STxt&&sTxt)" @click="rClick") {{STxt||sTxt}}
+            div(:style="[s.lBtn,s.btn]" v-if="!(_sTxt&&sTxt)"  @click="lClick") {{LTxt||lTxt}}
+            div(:style="[s.btn,BtnUnuse||btnUnuse?s.unUse:undefined]" v-if="!(STxt&&sTxt)"  @click="rClick") {{RTxt||rTxt}}
