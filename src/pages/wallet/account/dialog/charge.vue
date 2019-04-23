@@ -114,8 +114,8 @@ export default {
     line-height: 18px;
     padding-left: 13px;
     margin-top: 20px;
-    position:relative;
-    width:100%;
+    position: relative;
+    width: 100%;
     .dot {
         width: 6px;
         height: 6px;

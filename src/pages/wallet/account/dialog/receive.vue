@@ -102,7 +102,7 @@ export default {
     &.edit{
         text-align: left;
         background: rgba(255,255,255,1);
-        padding-left:15px;
+        padding-left: 15px;
     }
 }
 .qrcode-container {

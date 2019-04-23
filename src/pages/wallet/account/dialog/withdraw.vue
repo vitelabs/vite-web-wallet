@@ -120,8 +120,8 @@ export default {
     text-align: center;
     padding: 10px 15px;
     .token__title{
-        display:flex;
-        justify-content:center;
+        display: flex;
+        justify-content: center;
     }
     &.edit{
         text-align: left;
