@@ -24,7 +24,7 @@ export function getValidBalance({ decimals, balance, minNum, maxNum }) {
             return i18n.t('hint.amtFormat');
         }
 
-        if (minNum !== undefined) {
+        if (maxNum !== undefined) {
             if (BigNumber.compared(amount, maxNum) > 0) {
                 return i18n.t('walletQuota.limitAmt', { num: maxNum });
             }
