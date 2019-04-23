@@ -47,12 +47,14 @@ export default {
     },
     watch: {
         otherWhithBalance(val) {
+            console.log(9999, val);
             if (!val || val.length === 0) return;
             const map = {};
-            val.forEach(i => (map[i] = {}));
+            val.forEach(i => (map[i.tokenId] = { gateInfo: {} }));
             gateStorage.bindTokens(map);
         }
     },
+
     computed: {
         nativeTokenList() {
             return [ ...this.defaultTokenList, ...this.officalGateTokenList, ...this.userStorageTokenList.filter(t => !t.gateInfo.url), ...this.otherWhithBalance ];
@@ -87,9 +89,7 @@ export default {
         closeTrans() {
             this.isShowTrans = false;
             this.activeToken = null;
-        },
-        charge() {},
-        withdraw() {}
+        }
     }
 };
 </script>

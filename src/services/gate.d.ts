@@ -10,6 +10,11 @@ type GateTokenInfo = {
     "mappedTokenId": string
 
 }
+type withdrawInfo={
+"minimumWithdrawAmount": String,
+"maximumWithdrawAmount": String
+"gatewayAddress": String
+}
 type GateInfos = {
     "name": string, //网关名称
     "url": string,//网关host，后面的请求为该网关host与url拼接而成

@@ -95,9 +95,10 @@ const getters = {
     defaultTokenList(state, getters, rootState, rootGetters) {
         const balanceInfo = getters.balanceInfo;
         const allToken = rootGetters.allTokensMap;
+        const mapToken2Gate = rootGetters.mapToken2Gate;
         // ------------------- show default token
         const list = Object.keys(defaultTokenMap).map(i => {
-            const { tokenName = '', totalSupply = '', isReIssuable = '', tokenSymbol, balance = '', fundFloat = '', decimals = '', owner = '', tokenId = i, icon, type = 'NATIVE', gateInfo = {} } = Object.assign({}, defaultTokenMap[i], balanceInfo[i] || {}, allToken[i] || {});
+            const { tokenName = '', totalSupply = '', isReIssuable = '', tokenSymbol, balance = '', fundFloat = '', decimals = '', owner = '', tokenId = i, icon, type = 'NATIVE', gateInfo = {} } = Object.assign({}, defaultTokenMap[i], balanceInfo[i] || {}, allToken[i] || {}, { gateInfo: { url: mapToken2Gate[i] && mapToken2Gate[i].url } });
             return { tokenName, totalSupply, isReIssuable, tokenSymbol, balance, fundFloat, decimals, owner, tokenId, icon, type, gateInfo };
         });
         // force vite first
@@ -108,9 +109,10 @@ const getters = {
         const balanceInfo = getters.balanceInfo;
         const allToken = rootGetters.allTokensMap;
         const officalGateTokens = rootGetters.mapGate2Token[OFFICAL_GATE_NAME] ? rootGetters.mapGate2Token[OFFICAL_GATE_NAME].tokens : [];
+        const mapToken2Gate = rootGetters.mapToken2Gate;
         return officalGateTokens.map(token => {
             const i = token['tokenId'];
-            const { tokenName = '', totalSupply = '', isReIssuable = '', tokenSymbol, balance = '', fundFloat = '', decimals = '', owner = '', tokenId = i, icon, type = 'OFFICAL_GATE', gateInfo = {} } = Object.assign({}, token[i], balanceInfo[i] || {}, allToken[i] || {});
+            const { tokenName = '', totalSupply = '', isReIssuable = '', tokenSymbol, balance = '', fundFloat = '', decimals = '', owner = '', tokenId = i, icon, type = 'OFFICAL_GATE', gateInfo = {} } = Object.assign({}, token[i], balanceInfo[i] || {}, allToken[i] || {}, { gateInfo: { url: mapToken2Gate[i] && mapToken2Gate[i].url } });
             return { tokenName, totalSupply, isReIssuable, tokenSymbol, balance, fundFloat, decimals, owner, tokenId, icon, type, gateInfo };
         });
     },
@@ -118,16 +120,23 @@ const getters = {
         const balanceInfo = getters.balanceInfo;
         const allToken = rootGetters.allTokensMap;
         const userStorageTokenMap = gateStorage.data;
+        const mapToken2Gate = rootGetters.mapToken2Gate;
         // ------- show user defined gate
         const userStorageTokenList = Object.keys(userStorageTokenMap).map(i => {
-            const { tokenName = '', totalSupply = '', isReIssuable = '', tokenSymbol, balance = '', fundFloat = '', decimals = '', owner = '', tokenId = i, icon, type = 'THRID_GATE', gateInfo = {} } = Object.assign({}, userStorageTokenMap[i], balanceInfo[i] || {}, allToken[i] || {});
+            const { tokenName = '', totalSupply = '', isReIssuable = '', tokenSymbol, balance = '', fundFloat = '', decimals = '', owner = '', tokenId = i, icon, type = 'THIRD_GATE', gateInfo = {} } = Object.assign({}, userStorageTokenMap[i], balanceInfo[i] || {}, allToken[i] || {}, { gateInfo: { url: mapToken2Gate[i] && mapToken2Gate[i].url } });
             return { tokenName, totalSupply, isReIssuable, tokenSymbol, balance, fundFloat, decimals, owner, tokenId, icon, type, gateInfo };
         });
         return userStorageTokenList;
     },
-    otherWhithBalance(state, getters) {
+    otherWhithBalance(state, getters, rootState, rootGetters) {
+        const balanceInfo = getters.balanceInfo;
+        const allToken = rootGetters.allTokensMap;
+        const mapToken2Gate = rootGetters.mapToken2Gate;
         const contains = [ ...getters.userStorageTokenList, ...getters.defaultTokenList, ...getters.officalGateTokenList ].map(t => t.tokenId);
-        return Object.keys(getters.balanceInfo).filter(i => contains.indexOf(i) === -1);
+        return Object.keys(getters.balanceInfo).filter(i => contains.indexOf(i) === -1).map(i => {
+            const { tokenName = '', totalSupply = '', isReIssuable = '', tokenSymbol, balance = '', fundFloat = '', decimals = '', owner = '', tokenId = i, icon, type = 'THIRD_GATE', gateInfo = {} } = Object.assign({}, balanceInfo[i] || {}, allToken[i] || {}, { gateInfo: { url: mapToken2Gate[i] && mapToken2Gate[i].url } });
+            return { tokenName, totalSupply, isReIssuable, tokenSymbol, balance, fundFloat, decimals, owner, tokenId, icon, type, gateInfo };
+        });
     }
 };
 

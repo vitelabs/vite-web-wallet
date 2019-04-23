@@ -67,10 +67,11 @@ export default function request({
 }
 
 export const getClient = function (baseUrl = '', afterResponse) {
-    return function ({ method = 'GET', path, params = {}, timeout = reqTimeout }) {
-        baseUrl.slice(-1) === '/' && (baseUrl = baseUrl.slice(0, -1));
+    return function ({ method = 'GET', path, params = {}, timeout = reqTimeout, host }) {
+        host = host || baseUrl;
+        host.slice(-1) === '/' && (host = host.slice(0, -1));
         path.indexOf('/') === 0 && (path = path.splice(1));
-        path = `${ baseUrl }/${ path }`;
+        path = `${ host }/${ path }`;
         return request({ method, path, params, timeout, afterResponse });
     };
 };

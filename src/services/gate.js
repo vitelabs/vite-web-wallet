@@ -24,15 +24,15 @@ const client = getClient('/gateWay', xhr => {
 });
 export const getGateInfos = () => client({ path: 'certified_gateways' });
 
-export const getChargeAddr = ({ tokenId, addr: walletAddress }) => client({ path: 'deposit_address', params: { tokenId, walletAddress } });
+export const getChargeAddr = ({ tokenId, addr: walletAddress }, url) => client({ path: 'deposit_address', params: { tokenId, walletAddress }, host: url });
 
-export const verifyAddr = ({ tokenId, withdrawAddress }) => client({ path: 'verify_withdraw_address', params: { tokenId, withdrawAddress } });
+export const verifyAddr = ({ tokenId, withdrawAddress }, url) => client({ path: 'verify_withdraw_address', params: { tokenId, withdrawAddress }, host: url });
 
-export const getWithdrawInfo = ({ tokenId, withdrawAddress }) => client({ path: 'withdraw_info', params: { tokenId, withdrawAddress } });
+export const getWithdrawInfo = ({ tokenId, walletAddress }, url) => client({ path: 'withdraw_info', params: { tokenId, walletAddress }, host: url });
 
-export const getWithdrawFee = ({ tokenId, withdrawAddress, amount }) => client({ path: 'withdraw_fee', params: { tokenId, withdrawAddress, amount } });
+export const getWithdrawFee = ({ tokenId, walletAddress, amount }, url) => client({ path: 'withdraw_fee', params: { tokenId, walletAddress, amount }, host: url });
 
-export const withdraw = async ({ amount, withdrawAddress, gateAddr, tokenId }) => {
+export const withdraw = async ({ amount, withdrawAddress, gateAddr, tokenId }, url) => {
     const account = wallet.activeAccount;
     const address = account.getDefaultAddr();
     const unlockAcc = account.account.unlockAcc;
@@ -47,7 +47,7 @@ export const withdraw = async ({ amount, withdrawAddress, gateAddr, tokenId }) =
     const rawTx = JSON.stringify(signedBlock);
     const signInfo = { rawTx, withdrawAddress };
     const signature = unlockAcc.sign(Buffer(JSON.stringify(signInfo)).toString('hex'));
-    return await client({ method: 'post', path: 'withdraw', params: { rawTx, withdrawAddress, signature } });
+    return await client({ method: 'post', path: 'withdraw', params: { rawTx, withdrawAddress, signature }, host: url });
 };
 
 
@@ -70,7 +70,7 @@ class GateWays {
         this.saveToStorage();
     }
 
-    unBindToken(tokenId) {
+    unbindToken(tokenId) {
         this.updateFromStorage();
         delete this.data[tokenId];
         this.saveToStorage();
