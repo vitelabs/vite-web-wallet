@@ -7,7 +7,7 @@ block content
     .block__content {{address}}
     copyOK(ref="copyTpis")
     .block__title 请输入金额
-        .amount-err {{amountErr}}
+        .err {{amountErr}}
     input.block__content.edit(v-model="amount" placeholder="请输入金额")
     .qrcode-container
         .qrcode-container__title 请扫码向我转入{{token.tokenSymbol}}
@@ -75,7 +75,7 @@ export default {
     margin-top: 20px;
     display: flex;
     justify-content: space-between;
-    .amount-err{
+    .err{
         color: red;
     }
     &:first-child{
@@ -102,6 +102,7 @@ export default {
     &.edit{
         text-align: left;
         background: rgba(255,255,255,1);
+        padding-left:15px;
     }
 }
 .qrcode-container {

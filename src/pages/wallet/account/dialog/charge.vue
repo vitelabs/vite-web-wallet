@@ -8,9 +8,8 @@ block content
     .qrcode-container
         .qrcode-container__title 请扫码向我转入{{token.tokenSymbol}}
         qrcode(:text="addressQrcode" :options="qrOptions" class="qrcode-container__content")
-    .tips 充值操作是将ETH跨链映射至VITE网络，充值后您可通过提现转走
+    .charge-tips 充值操作是将ETH跨链映射至VITE网络，充值后您可通过提现转走
         .dot
-    copyOK(:copySuccess="copySuccess")
 </template>
 
 <script>
@@ -19,13 +18,11 @@ import copyOK from 'components/copyOK';
 import copy from 'utils/copy';
 import { utils } from '@vite/vitejs';
 import { modes } from 'qrcode.es';
+import { getChargeAddr } from 'services/gate';
+import { wallet } from 'utils/wallet';
 export default {
     components: { qrcode, copyOK },
     props: {
-        address: {
-            type: String,
-            default: ''
-        },
         token: {
             type: Object,
             required: true
@@ -33,10 +30,14 @@ export default {
     },
     data() {
         return {
+            address: '',
             copySuccess: false,
             amount: 0,
             qrOptions: { size: 124, mode: modes.NORMAL }
         };
+    },
+    beforeMount() {
+        getChargeAddr({ addr: wallet.defaultAddr, tokenId: this.token.tokenId }).then(addr => (this.address = addr));
     },
     methods: {
         copy() {
@@ -106,18 +107,20 @@ export default {
         margin-top: 22px;
     }
 }
-.tips {
+.charge-tips {
     height: 18px;
     font-size: 14px;
     color: rgba(94, 104, 117, 1);
     line-height: 18px;
     padding-left: 13px;
     margin-top: 20px;
+    position:relative;
+    width:100%;
     .dot {
         width: 6px;
         height: 6px;
         background: rgba(0, 122, 255, 1);
-        border-radius: 10%;
+        border-radius: 100%;
         position: absolute;
         left: 0;
         top: 6px;

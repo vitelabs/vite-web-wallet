@@ -14,7 +14,7 @@
                     class="gate"
                     v-if="token.type==='OFFICAL_GATE'"
                 ></span>
-                <span class="bind"></span>
+                <span class="unbind click-able" v-if="showUnbind" @click="unbind"></span>
             </div>
 
         </div>
@@ -35,16 +35,16 @@
                 class="btn __pointer"
             >{{ $t('actionType.SEND') }}</div>
             <div
-                @click="receive"
+                @click="withdraw"
                 class="btn __pointer"
             >{{ $t('actionType.RECEIVE') }}</div>
             <div
-                v-if="token.type==='GATE'"
-                v-unlock-account="widthdraw"
+                v-if="token.gateInfo.url"
+                v-unlock-account="withdraw"
                 class="btn __pointer"
             >{{ $t('actionType.WITHDRAW') }}</div>
             <div
-                v-if="token.type==='GATE'"
+                v-if="token.gateInfo.url"
                 @click="charge"
                 class="btn __pointer"
             >{{ $t('actionType.CHARGE') }}</div>
@@ -57,6 +57,7 @@ import { receiveDialog, chargeDialog, withdrawDialog, tokenInfoDialog } from '..
 import { wallet } from 'utils/wallet';
 import getTokenIcon from 'utils/getTokenIcon';
 import bigNumber from 'utils/bigNumber';
+import { gateStorage } from 'services/gate';
 
 export default {
     props: {
@@ -74,6 +75,9 @@ export default {
         }
     },
     computed: {
+        showUnbind() {
+            return this.token.type === 'THIRD_GATE' && (!this.token.balance || bigNumber.isEqual(this.token.balance, '0'));
+        },
         address() {
             return wallet.activeWalletAcc && wallet.activeWalletAcc.getDefaultAddr();
         },
@@ -87,6 +91,9 @@ export default {
         }
     },
     methods: {
+        unbind() {
+            gateStorage.unbindToken(this.token.tokenId);
+        },
         getIcon(id) {
             return getTokenIcon(id);
         },
@@ -99,7 +106,7 @@ export default {
         charge() {
             chargeDialog({ token: this.token });
         },
-        widthdraw() {
+        withdraw() {
             withdrawDialog({ token: this.token });
         },
         showDetail() {
@@ -146,7 +153,7 @@ export default {
         height: 20px;
         line-height: 20px;
     }
-    .bind {
+    .unbind {
         display: inline-block;
         height: 12px;
         width: 12px;

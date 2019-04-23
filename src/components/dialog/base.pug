@@ -2,6 +2,7 @@ div(:style="s.container")
     div(:style="s.wrapper")
         div(:style="s.title") {{Title}}
             span(v-show="ShowClose" @click="close" :style="s.close")
+        block head
         div(:style="s.body")
             block content
                 div(v-if="Content" v-html="Content")
