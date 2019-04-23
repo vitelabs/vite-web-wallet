@@ -151,9 +151,9 @@ export default {
         box-sizing: border-box;
         margin-right: 40px;
         color: #5E6875;
-        display:flex;
-        align-items:center;
-        border-bottom:2px solid #007AFF;
+        display: flex;
+        align-items: center;
+        border-bottom: 2px solid #007AFF;
         &.active{
             border-bottom: 2px solid #007AFF;
         }
@@ -164,12 +164,12 @@ export default {
         height: 40px;
         line-height: 40px;
         border-bottom: 1px solid rgba(198,203,212,0.3);
-        display:flex;
-        font-size:14px;
+        display: flex;
+        font-size: 14px;
         .label{
             color: #5E6875;
             margin-right: 6px;
-            word-break:keep-all;
+            word-break: keep-all;
         }
         .click-able-color{
             color: #007AFF;
