@@ -110,7 +110,7 @@ export default {
     border: 1px solid rgba(212, 222, 231, 1);
     margin-top: 20px;
     padding: 20px;
-    font-size:16px;
+    font-size: 16px;
     box-sizing: border-box;
     text-align: center;
     &__content {

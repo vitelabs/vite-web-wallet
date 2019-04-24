@@ -114,7 +114,7 @@ export default {
     padding: 20px;
     box-sizing: border-box;
     text-align: center;
-    font-size:16px;
+    font-size: 16px;
     &__content{
         margin-top: 22px;
 

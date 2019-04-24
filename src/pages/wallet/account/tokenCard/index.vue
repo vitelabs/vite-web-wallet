@@ -175,8 +175,8 @@ export default {
         color: #007aff;
         height: 20px;
         line-height: 20px;
-        font-size:12px;
-        cursor:pointer;
+        font-size: 12px;
+        cursor: pointer;
     }
     .unbind {
         display: inline-block;
