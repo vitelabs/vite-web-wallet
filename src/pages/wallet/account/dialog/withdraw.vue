@@ -1,23 +1,26 @@
 <template lang="pug">
 extends /components/dialog/base.pug
 block content
-    .block__title 账户余额
+    .block__title {{$t("tokenCard.withdraw.labels.balance")}}
     .block__content.edit.space
         .token__title
             img
             .symbol {{token.balance||'0'}}
         .right.blue {{token.tokenSymbol}}
-    .block__title 提现地址
-        .err {{isAddrCorrect?'':'地址格式错误'}}
-    input.block__content(v-model="withdrawAddr")
-    .block__title 提现金额
+    .block__title {{$t("tokenCard.withdraw.labels.address")}}
+        .err {{isAddrCorrect?'':$t("tokenCard.withdraw.addressErr")}}
+    input.block__content(v-model="withdrawAddr" :placehodler="$t('tokenCard.withdraw.addressPlaceholder')")
+    .block__title {{$t("tokenCard.withdraw.labels.amount")}}
         .err {{ammountErr}}
     .block__content
-        input(v-model="withdrawAmount")
-        .withdraw-all(@click="withdrawAll") 全部
-    .block__title 手续费
+        input(v-model="withdrawAmount" :placehodler="$t('tokenCard.withdraw.amountPlaceholder',{min})")
+        .withdraw-all(@click="withdrawAll") {{$t("tokenCard.withdraw.labels.all")}}
+    .block__title
+        .tips-container {{$t("tokenCard.withdraw.labels.fee")}}
+            i(class="tipsicon hoveraction" @click.self.stop="toggleTips")
+                tooltips(v-show="isFeeTipsShow" v-click-outside="hideTips" :content="'cghjvhhgvhgvghghgv'")
     .block__content.edit.space
-        div   提现手续费
+        div   {{$t("tokenCard.withdraw.labels.fee")}}
         div {{(fee||'--')+token.tokenSymbol}}
 </template>
 
@@ -27,7 +30,10 @@ import { wallet } from 'utils/wallet';
 import { debounce } from 'lodash';
 import { getValidBalance } from 'utils/validations';
 import bigNumber from 'utils/bigNumber';
+import tooltips from 'components/tooltips';
+
 export default {
+    components: { tooltips },
     props: {
         token: {
             type: Object,
@@ -45,12 +51,14 @@ export default {
             withdrawAmountMin: '',
             feeMin: '',
             isAddrCorrect: true,
-            dTitle: '提现',
-            dSTxt: '提现'
+            dTitle: this.$t('tokenCard.withdraw.title'),
+            dSTxt: this.$t('tokenCard.withdraw.title'),
+            isFeeTipsShow: false
         };
     },
     beforeMount() {
-        getWithdrawInfo({ walletAddress: wallet.defaultAddr, tokenId: this.token.tokenId }).then(data => (this.info = data));
+        debugger;
+        getWithdrawInfo({ walletAddress: wallet.defaultAddr, tokenId: this.token.tokenId }, this.token.gateInfo.url).then(data => (this.info = data));
     },
     computed: {
         withdrawAmount: {
@@ -69,6 +77,9 @@ export default {
         },
         dBtnUnuse() {
             return this.ammountErr || !this.isAddrCorrect || !this.withdrawAmount || !this.withdrawAddr;
+        },
+        min() {
+            return this.info.minimumWithdrawAmount ? `${ bigNumber.toBasic(this.info.minimumWithdrawAmount, this.token.decimals) } ${ this.token.tokenSymbol }` : '--';
         }
     },
     watch: {
@@ -77,23 +88,29 @@ export default {
                 this.isAddrCorrect = true;
                 return;
             }
-            verifyAddr({ tokenId: this.token.tokenId, withdrawAddress: val }).then(d => {
+            verifyAddr({ tokenId: this.token.tokenId, withdrawAddress: val }, this.token.gateInfo.url).then(d => {
                 this.isAddrCorrect = d;
             });
         }, 500),
-        withdrawAmount: debounce(function (val) {
-            getWithdrawFee({ tokenId: this.token.tokenId, walletAddress: wallet.defaultAddr, amount: bigNumber.toMin(val, this.token.decimals) }).then(d => {
+        withdrawAmountMin: debounce(function (val) {
+            getWithdrawFee({ tokenId: this.token.tokenId, walletAddress: wallet.defaultAddr, amount: val }, this.token.gateInfo.url).then(d => {
                 this.feeMin = d;
             });
         }, 500)
     },
     methods: {
+        toggleTips() {
+            this.isFeeTipsShow = !this.isFeeTipsShow;
+        },
+        hideTips() {
+            this.isFeeTipsShow = false;
+        },
         validateAmount(val) {
             return getValidBalance({ balance: this.token.totalAmount, decimals: this.token.decimals, minNum: this.info.minimumWithdrawAmount, maxNum: this.info.maximumWithdrawAmount })(val);
         },
         withdrawAll() {
             if (this.token.totalAmount && bigNumber.compared(this.token.totalAmount, '0') > 0) {
-                getWithdrawFee({ tokenId: this.token.tokenId, walletAddress: wallet.defaultAddr, amount: this.token.totalAmount, containsFee: true }).then(fee => {
+                getWithdrawFee({ tokenId: this.token.tokenId, walletAddress: wallet.defaultAddr, amount: this.token.totalAmount, containsFee: true }, this.token.gateInfo.url).then(fee => {
                     this.feeMin = fee;
                     this.withdrawAmountMin = bigNumber.minus(this.token.totalAmount, this.feeMin);
                 });
@@ -101,7 +118,12 @@ export default {
         },
         inspector() {
             return new Promise((res, rej) => {
-                withdraw({ amount: bigNumber.plus(this.withdrawAmountMin, this.feeMin, 0), withdrawAddress: this.withdrawAddr, gateAddr: this.info.gatewayAddress, tokenId: this.token.tokenId }).then(d => res(d)).catch(e => rej(e));
+                withdraw({ amount: bigNumber.plus(this.withdrawAmountMin, this.feeMin, 0), withdrawAddress: this.withdrawAddr, gateAddr: this.info.gatewayAddress, tokenId: this.token.tokenId }, this.token.gateInfo.url)
+                    .then(d => {
+                        this.$toast(this.$t('tokenCard.withdraw.successTips'));
+                        res(d);
+                    })
+                    .catch(e => rej(e));
             });
         }
     }
@@ -130,6 +152,21 @@ export default {
         float: right;
         &.copy {
             margin-right: 10px;
+        }
+    }
+    .tips-container{
+        overflow:visible;
+    }
+    .hoveraction {
+        &.tipsicon {
+            position: relative;
+            display: inline-block;
+            background: url(~assets/imgs/hover_help.svg);
+            overflow: visible;
+            width: 16px;
+            height: 16px;
+            vertical-align: sub;
+            cursor: pointer;
         }
     }
 }

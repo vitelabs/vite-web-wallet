@@ -2,14 +2,16 @@
 extends /components/dialog/base.pug
 block content
     .block__title
-        span 接收地址
+        span {{$t('tokenCard.charge.addressTitle')}}
         img.title_icon.copy.__pointer(src="~assets/imgs/copy_default.svg" @click="copy")
     .block__content {{address}}
         // copyOK(ref="copyOk")
     .qrcode-container
-        .qrcode-container__title 请扫码向我转入{{token.tokenSymbol}}
+        .qrcode-container__title {{$t('tokenCard.charge.codeTips',{tokenSymbol:token.tokenSymbol})}}
         qrcode(:text="addressQrcode" :options="qrOptions" class="qrcode-container__content")
-    .charge-tips 充值操作是将ETH跨链映射至VITE网络，充值后您可通过提现转走,最小充值金额：{{minimumDepositAmount}}
+    .charge-tips {{$t('tokenCard.charge.tips.0',{tokenSymbol:token.tokenSymbol,min:minimumDepositAmount})}}
+        .dot
+    .charge-tips {{$t('tokenCard.charge.tips.1')}}
         .dot
 </template>
 
@@ -36,12 +38,13 @@ export default {
             address: '',
             copySuccess: false,
             amount: 0,
-            qrOptions: { size: 124, mode: modes.NORMAL }
+            qrOptions: { size: 124, mode: modes.NORMAL },
+            dTitle: this.$t('tokenCard.charge.title')
         };
     },
     beforeMount() {
-        getChargeAddr({ addr: wallet.defaultAddr, tokenId: this.token.tokenId }).then(addr => (this.address = addr));
-        getChargeInfo({ addr: wallet.defaultAddr, tokenId: this.token.tokenId }).then(d => {
+        getChargeAddr({ addr: wallet.defaultAddr, tokenId: this.token.tokenId }, this.token.gateInfo.url).then(addr => (this.address = addr));
+        getChargeInfo({ addr: wallet.defaultAddr, tokenId: this.token.tokenId }, this.token.gateInfo.url).then(d => {
             this.minimumDepositAmountMin = d.minimumDepositAmount;
         });
     },
@@ -107,6 +110,7 @@ export default {
     border: 1px solid rgba(212, 222, 231, 1);
     margin-top: 20px;
     padding: 20px;
+    font-size:16px;
     box-sizing: border-box;
     text-align: center;
     &__content {

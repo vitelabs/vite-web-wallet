@@ -12,8 +12,9 @@
             <div>
                 <span
                     class="gate"
-                    v-if="token.type==='OFFICAL_GATE'"
-                ></span>
+                    v-if="token.type==='OFFICAL_GATE'||token.type==='THIRD_GATE'"
+                    @click="showDetail('gate')"
+                >{{gateName}}</span>
                 <span class="unbind click-able" v-if="showUnbind" @click="unbind"></span>
             </div>
 
@@ -33,21 +34,21 @@
             <div
                 v-unlock-account="send"
                 class="btn __pointer"
-            >{{ $t('actionType.SEND') }}</div>
+            >{{ $t('tokenCard.actionType.SEND') }}</div>
             <div
                 @click="receive"
                 class="btn __pointer"
-            >{{ $t('actionType.RECEIVE') }}</div>
+            >{{ $t('tokenCard.actionType.RECEIVE') }}</div>
             <div
                 v-if="token.gateInfo.url"
                 v-unlock-account="withdraw"
                 class="btn __pointer"
-            >{{ $t('actionType.WITHDRAW') }}</div>
+            >{{ $t('tokenCard.actionType.WITHDRAW') }}</div>
             <div
                 v-if="token.gateInfo.url"
                 @click="charge"
                 class="btn __pointer"
-            >{{ $t('actionType.CHARGE') }}</div>
+            >{{ $t('tokenCard.actionType.CHARGE') }}</div>
         </div>
         <transaction
             v-if="isShowTrans"
@@ -91,6 +92,12 @@ export default {
         address() {
             return wallet.activeWalletAcc && wallet.activeWalletAcc.getDefaultAddr();
         },
+        gateName() {
+            if (this.$store.getters.mapToken2Gate[this.token.tokenId]) {
+                return this.$store.getters.mapToken2Gate[this.token.tokenId].gateway;
+            }
+            return this.$t('tokenCard.gateInfo.selfdefined');
+        },
         asset() {
             const currency = this.$store.state.exchangeRate.coins[this.$i18n.locale];
             const rate = this.$store.state.exchangeRate.rateMap[this.token.tokenId];
@@ -116,8 +123,8 @@ export default {
         withdraw() {
             withdrawDialog({ token: this.token });
         },
-        showDetail() {
-            tokenInfoDialog({ token: this.token });
+        showDetail(initTabName) {
+            tokenInfoDialog({ token: this.token, initTabName });
         },
         send() {
             if (!this.token.tokenId) {
@@ -168,6 +175,8 @@ export default {
         color: #007aff;
         height: 20px;
         line-height: 20px;
+        font-size:12px;
+        cursor:pointer;
     }
     .unbind {
         display: inline-block;
