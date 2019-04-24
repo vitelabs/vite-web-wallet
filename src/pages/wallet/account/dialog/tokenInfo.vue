@@ -3,9 +3,10 @@ extends /components/dialog/base.pug
 block head
     .head
         img.icon(:src="token.icon||getIcon(token.tokenId)")
-        .head__name {{token.tokenName}}
-            .head__name__gate(v-if="token.gateInfo.name")
-        .head__symbol {{token.tokenSymbol}}
+        .head_info
+            .head__name {{token.tokenName}}
+                .head__name__gate(v-if="token.gateInfo.name")
+            .head__symbol {{token.tokenSymbol}}
     .tab
         .tab__item(@click="tabClick('tokenInfo')" :class="{active:tabName==='tokenInfo'}") {{$t("tokenCard.tokenInfo.tabName")}}
         .tab__item(v-if="token.type!=='NATIVE'" @click="tabClick('gate')" :class="{active:tabName==='gate'}") {{$t("tokenCard.gateInfo.tabName")}}
@@ -118,9 +119,12 @@ export default {
     box-sizing: border-box;
     padding: 30px;
     display: flex;
-    flex-direction: column;
     justify-content: space-between;
     background: rgba(0,122,255,0.05);
+    .head__info{
+        display:flex;
+        flex-direction: column;
+    }
     .icon {
         width: 40px;
         height: 40px;
