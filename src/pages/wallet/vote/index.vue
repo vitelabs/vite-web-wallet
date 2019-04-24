@@ -93,8 +93,6 @@ export default {
                 });
         }
 
-        this.updateVoteData();
-        this.updateNodeData();
         this.nodeDataTimer = new timer(this.updateNodeData, 3 * 1000);
         this.nodeDataTimer.start();
         this.voteDataTimer = new timer(this.updateVoteData, 3 * 1000);
@@ -251,7 +249,7 @@ export default {
     },
     computed: {
         balance() {
-            const tokenList = [].concat(this.$store.getters.tokenBalanceList);
+            const tokenList = [].concat(this.$store.getters.balanceInfo);
             for (const tokenId in this.$store.state.ledger.defaultTokenIds) {
                 if (!this.$store.state.ledger.tokenInfoMaps[tokenId] && !tokenList[tokenId]) {
                     break;
@@ -259,12 +257,12 @@ export default {
 
                 const token = this.$store.state.ledger.tokenInfoMaps[tokenId] || tokenList[tokenId];
                 const defaultToken = this.$store.state.ledger.defaultTokenIds[tokenId];
-                const symbol = token.tokenSymbol || defaultToken.tokenSymbol;
+                const tokenSymbol = token.tokenSymbol || defaultToken.tokenSymbol;
 
                 tokenList[tokenId] = tokenList[tokenId] || {
                     balance: '0',
                     fundFloat: '0',
-                    symbol,
+                    tokenSymbol,
                     decimals: '0'
                 };
                 tokenList[tokenId].icon = defaultToken.icon;

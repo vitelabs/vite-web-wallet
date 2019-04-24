@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" viewBox="0 0 24 24">
-  <defs>
-    <polygon id="more_icon-a" points="10.172 7 15.172 12 10.172 17 9 15.828 12.828 12 9 8.172"/>
-  </defs>
-  <g fill="none" fill-rule="evenodd">
-    <use fill="#FFF" xlink:href="#more_icon-a"/>
-  </g>
-</svg>

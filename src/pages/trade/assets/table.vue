@@ -11,7 +11,7 @@
         </div>
         <div class="row-container">
             <div class="row" v-for="token in list" :key="token.id">
-                <div>{{ token.symbol }}</div>
+                <div>{{ token.tokenSymbol }}</div>
                 <div>{{ token.total }}</div>
                 <div>{{ token.available }}</div>
                 <div>{{ token.lock || 0 }}</div>
@@ -40,7 +40,7 @@
                 <div class="__row-t">{{ c.lable1 }}</div>
                 <div class="input un-click-able">
                     <img :src="c.icon" />
-                    {{ balance[c.tokenId].symbol }}
+                    {{ balance[c.tokenId].tokenSymbol }}
                     <div class="num">
                         {{ c.type.toLowerCase()==="recharge" ? balance[c.tokenId].balance : balance[c.tokenId].available }}
                     </div>
@@ -128,7 +128,7 @@ export default {
         },
         balance() {
             const exB = this.$store.getters.exBalanceList;
-            const walletB = this.$store.getters.tokenBalanceList;
+            const walletB = this.$store.getters.balanceInfo;
 
             const res = {};
             Object.keys(exB).forEach(t => {
@@ -138,7 +138,7 @@ export default {
                     balance: 0,
                     icon: '',
                     id: t,
-                    symbol: exB[t].tokenInfo.tokenSymbol,
+                    tokenSymbol: exB[t].tokenInfo.tokenSymbol,
                     decimals: exB[t].tokenInfo.decimals
                 };
             });
@@ -155,7 +155,7 @@ export default {
                     balance: walletB[t].balance,
                     icon: walletB[t].icon,
                     id: t,
-                    symbol: walletB[t].symbol,
+                    tokenSymbol: walletB[t].tokenSymbol,
                     decimals: walletB[t].decimals
                 };
             });
@@ -184,7 +184,7 @@ export default {
                 .filter(v => {
                     const NOTnoZero = this.filter.hideZero && +v.total === 0;
                     const NOTmatchKey = this.filter.filterKey
-                        && !v.symbol.match(new RegExp(this.filter.filterKey, 'i'));
+                        && !v.tokenSymbol.match(new RegExp(this.filter.filterKey, 'i'));
 
                     return !(NOTnoZero || NOTmatchKey);
                 });
