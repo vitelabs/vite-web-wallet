@@ -1,5 +1,5 @@
 <template>
-    <span class="copy-success" :class="{'show': copySuccess||CopySuccess}">{{ copySuccess ? $t('hint.copy') : ''}}</span>
+    <span class="copy-success" :class="{'show': copySuccess||CopySuccess}">{{$t('hint.copy')}}</span>
 </template>
 
 <script>

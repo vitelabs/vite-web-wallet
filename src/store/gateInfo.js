@@ -23,7 +23,7 @@ const getters = {
         state.gateInfos.map(g => g.tokens).reduce(function (pre, cur) {
             return [ ...pre, ...(cur || []) ];
         }, []).forEach(n => {
-            map[n.tokenId] = Object.assign({}, n, { url: mapGate2Token[n.tokenId].url });
+            map[n.tokenId] = Object.assign({}, n, { url: mapGate2Token[n.gateway].url });
         });
         return map;
     },

@@ -47,7 +47,6 @@ export default {
     },
     watch: {
         otherWhithBalance(val) {
-            console.log(9999, val);
             if (!val || val.length === 0) return;
             const map = {};
             val.forEach(i => (map[i.tokenId] = { gateInfo: {} }));

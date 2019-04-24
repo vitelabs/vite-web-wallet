@@ -3,6 +3,8 @@ import { accountBlock } from '@vite/vitejs';
 import { wallet } from 'utils/wallet';
 import rpcClient from 'utils/viteClient';
 import { addrSpace } from 'utils/storageSpace';
+import { getPowNonce } from 'services/pow';
+
 
 const STORAGEKEY = 'INDEX_COLLECT_TOKEN';
 // import { powProcess } from 'components/pow/index';
@@ -20,7 +22,7 @@ const client = getClient('/gateWay', xhr => {
         }
         return Promise.resolve(data || null);
     }
-    return Promise.reject(JSON.parse(xhr.responseText));
+    return Promise.reject(xhr.responseText);
 });
 export const getGateInfos = () => client({ path: 'certified_gateways' });
 
@@ -30,13 +32,21 @@ export const verifyAddr = ({ tokenId, withdrawAddress }, url) => client({ path: 
 
 export const getWithdrawInfo = ({ tokenId, walletAddress }, url) => client({ path: 'withdraw_info', params: { tokenId, walletAddress }, host: url });
 
-export const getWithdrawFee = ({ tokenId, walletAddress, amount }, url) => client({ path: 'withdraw_fee', params: { tokenId, walletAddress, amount }, host: url });
+export const getWithdrawFee = ({ tokenId, walletAddress, amount, containsFee = false }, url) => client({ path: 'withdraw_fee', params: { tokenId, walletAddress, amount, containsFee }, host: url });
 
+export const getChargeInfo = ({ tokenId, addr: walletAddress }, url) => client({ path: 'deposit_info', params: { tokenId, walletAddress }, host: url });
 export const withdraw = async ({ amount, withdrawAddress, gateAddr, tokenId }, url) => {
     const account = wallet.activeAccount;
     const address = account.getDefaultAddr();
     const unlockAcc = account.account.unlockAcc;
     const accountBlockContent = await rpcClient.buildinTxBlock.sendTx.async({ toAddress: gateAddr, amount, accountAddress: address, tokenId });
+    const quota = await rpcClient.pledge.getPledgeQuota(address);
+    if (quota.txNum < 1) {
+        const powData = await getPowNonce(accountBlockContent.accountAddress, accountBlockContent.prevHash);
+        accountBlockContent.difficulty = powData.difficulty;
+        accountBlockContent.nonce = powData.nonce;
+    }
+
     const signedBlock = accountBlock.signAccountBlock(accountBlockContent, unlockAcc.privateKey);
 
     // const res = await powProcess({

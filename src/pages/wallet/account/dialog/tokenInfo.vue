@@ -6,8 +6,8 @@ block head
             .head__name__gate(v-if="token.gateInfo.name")
         .head__symbol {{token.tokenSymbol}}
     .tab
-        .tab__item(@click="tabClick('tokenInfo')") 详情
-        .tab__item(v-if="token.type!=='NATIVE'" @click="tabClick('gate')") gate_way详情
+        .tab__item(@click="tabClick('tokenInfo')" :class="{active:tabName==='tokenInfo'}") 详情
+        .tab__item(v-if="token.type!=='NATIVE'" @click="tabClick('gate')" :class="{active:tabName==='gate'}") gate_way详情
 block content
     .tab-content(v-if="tabName==='tokenInfo'")
         .content__item.click-able-color
@@ -27,7 +27,7 @@ block content
             div {{token.decimals}}
         .content__item
             .label 可增发
-            div {{token.isReIssuable}}
+            div {{token.isReIssuable?'是':'否'}}
     .tab-content(v-if="tabName==='gate'")
         .content__item(v-if="token.type==='THIRD_GATE'")
             .label 网关官网：
@@ -37,7 +37,7 @@ block content
             .label 网关发行代币
         .content__item(v-if="token.type==='OFFICAL_GATE'||token.type==='THIRD_GATE'")
             .label 网关设置
-            input.gate-url(:placeholder="'请输入网关链接地址'" :disable="token.type==='OFFICAL_GATE'" v-model="token.gateInfo.url||url")
+            input.gate-url(:placeholder="'请输入网关链接地址'" :disable="token.type==='OFFICAL_GATE'" v-model="url")
 </template>
 
 <script>
@@ -67,25 +67,28 @@ export default {
     },
     computed: {
         url: {
-            get() {
+            get:function() {
                 if (this.token.type === 'OFFICAL_GATE') {
                     return this.token.gateInfo.url;
                 }
                 return this.urlCache;
             },
-            set(val) {
-                this.urlCache = val;
+            set:function(val) {
+                this.urlCache = val.trim();
             }
         },
         dSTxt() {
-            if (this.token.type === 'THIRD_GATE') {
+            if (this.token.type === 'THIRD_GATE'&&this.tabName==='gate') {
                 return '保存修改';
             }
             return '';
         },
         dBtnUnuse() {
-            return !this.url;
+            return !this.urlCache;
         }
+    },
+    beforeMount(){
+        window.sssss=this;
     },
     methods: {
         inspector() {
@@ -93,9 +96,10 @@ export default {
                 getChargeAddr({ addr: wallet.defaultAddr, tokenId: this.token.tokenId }, this.url).then(() => {
                     gateStorage.bindToken(this.token.tokenId, { gateInfo: { url: this.url } });
                     res({ url: this.url });
-                }).catch(() => {
+                }).catch((e) => {
+                    debugger
                     this.$toast('节点无效');
-                    rej();
+                    rej(e);
                 });
             });
         },
@@ -153,7 +157,7 @@ export default {
         color: #5E6875;
         display: flex;
         align-items: center;
-        border-bottom: 2px solid #007AFF;
+        cursor:pointer;
         &.active{
             border-bottom: 2px solid #007AFF;
         }
