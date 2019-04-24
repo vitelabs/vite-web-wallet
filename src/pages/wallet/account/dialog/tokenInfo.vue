@@ -67,18 +67,18 @@ export default {
     },
     computed: {
         url: {
-            get:function() {
+            get: function () {
                 if (this.token.type === 'OFFICAL_GATE') {
                     return this.token.gateInfo.url;
                 }
                 return this.urlCache;
             },
-            set:function(val) {
+            set: function (val) {
                 this.urlCache = val.trim();
             }
         },
         dSTxt() {
-            if (this.token.type === 'THIRD_GATE'&&this.tabName==='gate') {
+            if (this.token.type === 'THIRD_GATE' && this.tabName === 'gate') {
                 return '保存修改';
             }
             return '';
@@ -87,8 +87,8 @@ export default {
             return !this.urlCache;
         }
     },
-    beforeMount(){
-        window.sssss=this;
+    beforeMount() {
+        window.sssss = this;
     },
     methods: {
         inspector() {
@@ -96,8 +96,8 @@ export default {
                 getChargeAddr({ addr: wallet.defaultAddr, tokenId: this.token.tokenId }, this.url).then(() => {
                     gateStorage.bindToken(this.token.tokenId, { gateInfo: { url: this.url } });
                     res({ url: this.url });
-                }).catch((e) => {
-                    debugger
+                }).catch(e => {
+                    debugger;
                     this.$toast('节点无效');
                     rej(e);
                 });
@@ -157,7 +157,7 @@ export default {
         color: #5E6875;
         display: flex;
         align-items: center;
-        cursor:pointer;
+        cursor: pointer;
         &.active{
             border-bottom: 2px solid #007AFF;
         }
