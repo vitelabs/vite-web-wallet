@@ -19,7 +19,7 @@ import copyOK from 'components/copyOK';
 import copy from 'utils/copy';
 import { utils } from '@vite/vitejs';
 import { modes } from 'qrcode.es';
-import { getChargeAddr,getChargeInfo } from 'services/gate';
+import { getChargeAddr, getChargeInfo } from 'services/gate';
 import bigNumber from 'utils/bigNumber';
 import { wallet } from 'utils/wallet';
 export default {
@@ -32,7 +32,7 @@ export default {
     },
     data() {
         return {
-            minimumDepositAmountMin:'',
+            minimumDepositAmountMin: '',
             address: '',
             copySuccess: false,
             amount: 0,
@@ -41,9 +41,9 @@ export default {
     },
     beforeMount() {
         getChargeAddr({ addr: wallet.defaultAddr, tokenId: this.token.tokenId }).then(addr => (this.address = addr));
-        getChargeInfo({ addr: wallet.defaultAddr, tokenId: this.token.tokenId }).then(d=>{
-            this.minimumDepositAmountMin=d.minimumDepositAmount
-        })
+        getChargeInfo({ addr: wallet.defaultAddr, tokenId: this.token.tokenId }).then(d => {
+            this.minimumDepositAmountMin = d.minimumDepositAmount;
+        });
     },
     methods: {
         copy() {
@@ -52,8 +52,8 @@ export default {
         }
     },
     computed: {
-        minimumDepositAmount(){
-            return bigNumber.toBasic(this.minimumDepositAmountMin,this.token.decimals)
+        minimumDepositAmount() {
+            return bigNumber.toBasic(this.minimumDepositAmountMin, this.token.decimals);
         },
         addressQrcode() {
             return utils.uriStringify({
