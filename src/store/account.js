@@ -127,7 +127,7 @@ const getters = {
         const userStorageTokenList = Object.keys(userStorageTokenMap).map(i => {
             const { tokenName = '', totalAmount = '', totalSupply = '', isReIssuable = '', tokenSymbol, balance = '', fundFloat = '', decimals = '', owner = '', tokenId = i, icon, type = 'THIRD_GATE', gateInfo = {} } = Object.assign({}, userStorageTokenMap[i], balanceInfo[i] || {}, allToken[i] || {}, { gateInfo: { url: mapToken2Gate[i] && mapToken2Gate[i].url } });
             return { tokenName, totalAmount, totalSupply, isReIssuable, tokenSymbol, balance, fundFloat, decimals, owner, tokenId, icon, type, gateInfo };
-        });
+        }).filter(t => Object.keys(getters.officalGateTokenList).indexOf(t.tokenId) === -1);
         return userStorageTokenList;
     },
     otherWhithBalance(state, getters, rootState, rootGetters) {

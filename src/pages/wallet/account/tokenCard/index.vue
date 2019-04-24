@@ -31,11 +31,11 @@
         </div>
         <div class="bottom">
             <div
-                v-unlock-account="_sendTx"
+                v-unlock-account="send"
                 class="btn __pointer"
             >{{ $t('actionType.SEND') }}</div>
             <div
-                @click="withdraw"
+                @click="receive"
                 class="btn __pointer"
             >{{ $t('actionType.RECEIVE') }}</div>
             <div
@@ -49,6 +49,11 @@
                 class="btn __pointer"
             >{{ $t('actionType.CHARGE') }}</div>
         </div>
+        <transaction
+            v-if="isShowTrans"
+            :token="token"
+            :closeTrans="closeTrans"
+        ></transaction>
     </div>
 </template>
 
@@ -58,8 +63,10 @@ import { wallet } from 'utils/wallet';
 import getTokenIcon from 'utils/getTokenIcon';
 import bigNumber from 'utils/bigNumber';
 import { gateStorage } from 'services/gate';
+import transaction from '../transaction';
 
 export default {
+    components:{transaction},
     props: {
         token: {
             type: Object,
@@ -72,6 +79,11 @@ export default {
                     type: 'OFFICAL_GATE'// OFFICAL OFFICALGATE SELFGATE
                 };
             }
+        }
+    },
+    data(){
+        return {
+            isShowTrans:false
         }
     },
     computed: {
@@ -97,9 +109,6 @@ export default {
         getIcon(id) {
             return getTokenIcon(id);
         },
-        _sendTx() {
-            this.sendTransaction && this.sendTransaction(this.token);
-        },
         receive() {
             receiveDialog({ token: this.token });
         },
@@ -111,6 +120,15 @@ export default {
         },
         showDetail() {
             tokenInfoDialog({ token: this.token });
+        },
+        send() {
+            if (!this.token.tokenId) {
+                return;
+            }
+            this.isShowTrans = true;
+        },
+        closeTrans() {
+            this.isShowTrans = false;
         }
     }
 };

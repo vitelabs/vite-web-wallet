@@ -75,6 +75,7 @@ const mixin = {
     },
     methods: {
         rClick() {
+            if (this.BtnUnuse) return;
             if (this.inspector) {
                 this.inspector().then(data => {
                     this.promise.resolve({

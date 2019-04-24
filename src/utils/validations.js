@@ -26,16 +26,15 @@ export function getValidBalance({ decimals, balance, minNum, maxNum }) {
 
         if (maxNum !== undefined) {
             if (BigNumber.compared(amount, maxNum) > 0) {
-                return i18n.t('walletQuota.limitAmt', { num: maxNum });
+                return i18n.t('walletQuota.limitMaxAmt', { num: BigNumber.toBasic(maxNum, decimals) });
             }
         }
         if (minNum !== undefined) {
             if (BigNumber.compared(amount, minNum) < 0) {
-                return i18n.t('walletQuota.limitAmt', { num: minNum });
+                return i18n.t('walletQuota.limitAmt', { num: BigNumber.toBasic(minNum, decimals) });
             }
         }
         if (balance !== undefined) {
-            const amount = BigNumber.toMin(amount, decimals);
             if (BigNumber.compared(balance, amount) < 0) {
                 return i18n.t('hint.insufficientBalance');
             }

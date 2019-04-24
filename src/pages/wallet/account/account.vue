@@ -21,11 +21,7 @@
                 <img src="~/assets/imgs/add_token.png"/>
             </div>
         </div>
-        <transaction
-            v-if="isShowTrans"
-            :token="activeToken"
-            :closeTrans="closeTrans"
-        ></transaction>
+
     </div>
 </template>
 
@@ -33,12 +29,11 @@
 import syncBlock from 'components/syncBlock';
 import tokenCard from './tokenCard';
 import accountHead from './head';
-import transaction from './transaction';
 import { addTokenDialog } from './dialog';
 import { gateStorage } from 'services/gate';
 
 export default {
-    components: { accountHead, syncBlock, tokenCard, transaction },
+    components: { accountHead, syncBlock, tokenCard },
     data() {
         return {
             isShowTrans: false,
@@ -78,17 +73,7 @@ export default {
         addToken() {
             addTokenDialog();
         },
-        showTrans(token) {
-            if (!token.id) {
-                return;
-            }
-            this.isShowTrans = true;
-            this.activeToken = token;
-        },
-        closeTrans() {
-            this.isShowTrans = false;
-            this.activeToken = null;
-        }
+
     }
 };
 </script>

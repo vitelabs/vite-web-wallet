@@ -239,6 +239,7 @@
         "aboutDays": "Approx {day} days",
         "amountPlaceholder": "Please input staking amount, minimum {num} VITE",
         "limitAmt": "Staking amount should not be less than {num}.",
+        "limitMaxAmt":"Staking amount should not be more than {num}.",
         "addrPlaceholder": "Please input quota recipient address",
         "inputWithdrawAmount": "Please input withdraw amount",
         "pledgeFail": "Failed to Submit",
