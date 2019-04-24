@@ -1,0 +1,140 @@
+<template lang="pug">
+extends /components/dialog/base.pug
+block content
+    .block__title
+        span {{$t('tokenCard.charge.addressTitle')}}
+        img.title_icon.copy.__pointer(src="~assets/imgs/copy_default.svg" @click="copy")
+    .block__content {{address}}
+        // copyOK(ref="copyOk")
+    .qrcode-container
+        .qrcode-container__title {{$t('tokenCard.charge.codeTips',{tokenSymbol:token.tokenSymbol})}}
+        qrcode(:text="addressQrcode" :options="qrOptions" class="qrcode-container__content")
+    .charge-tips {{$t('tokenCard.charge.tips.0',{tokenSymbol:token.tokenSymbol,min:minimumDepositAmount})}}
+        .dot
+    .charge-tips {{$t('tokenCard.charge.tips.1')}}
+        .dot
+</template>
+
+<script>
+import qrcode from 'components/qrcode';
+import copyOK from 'components/copyOK';
+import copy from 'utils/copy';
+import { utils } from '@vite/vitejs';
+import { modes } from 'qrcode.es';
+import { getChargeAddr, getChargeInfo } from 'services/gate';
+import bigNumber from 'utils/bigNumber';
+import { wallet } from 'utils/wallet';
+export default {
+    components: { qrcode, copyOK },
+    props: {
+        token: {
+            type: Object,
+            required: true
+        }
+    },
+    data() {
+        return {
+            minimumDepositAmountMin: '',
+            address: '',
+            copySuccess: false,
+            amount: 0,
+            qrOptions: { size: 124, mode: modes.NORMAL },
+            dTitle: this.$t('tokenCard.charge.title')
+        };
+    },
+    beforeMount() {
+        getChargeAddr({ addr: wallet.defaultAddr, tokenId: this.token.tokenId }, this.token.gateInfo.url).then(addr => (this.address = addr));
+        getChargeInfo({ addr: wallet.defaultAddr, tokenId: this.token.tokenId }, this.token.gateInfo.url).then(d => {
+            this.minimumDepositAmountMin = d.minimumDepositAmount;
+        });
+    },
+    methods: {
+        copy() {
+            copy(this.address);
+            // this.$refs.copyOk.copyOk();
+        }
+    },
+    computed: {
+        minimumDepositAmount() {
+            return bigNumber.toBasic(this.minimumDepositAmountMin, this.token.decimals);
+        },
+        addressQrcode() {
+            return utils.uriStringify({
+                target_address: this.address,
+                params: { amount: this.amount }
+            });
+        }
+    }
+};
+</script>
+
+<style lang="scss" scoped>
+@import "~assets/scss/vars.scss";
+.block__title {
+    height: 16px;
+    font-size: 14px;
+    font-family: PingFangSC-Semibold;
+    font-weight: 600;
+    color: rgba(29, 32, 36, 1);
+    line-height: 16px;
+    margin-top: 20px;
+    &:first-child {
+        margin-top: 0;
+    }
+    .title_icon {
+        float: right;
+        &.copy {
+            margin-right: 10px;
+        }
+    }
+}
+.block__content {
+    height: 40px;
+    background: rgba(243, 246, 249, 1);
+    border-radius: 2px;
+    border: 1px solid rgba(212, 222, 231, 1);
+    font-size: 14px;
+    word-break: break-all;
+    width: 100%;
+    line-height: 40px;
+    box-sizing: border-box;
+    margin-top: 16px;
+    text-align: center;
+    &input {
+        text-align: left;
+    }
+}
+.qrcode-container {
+    width: 455px;
+    background: rgba(243, 246, 249, 1);
+    border: 1px solid rgba(212, 222, 231, 1);
+    margin-top: 20px;
+    padding: 20px;
+    font-size: 16px;
+    box-sizing: border-box;
+    text-align: center;
+    &__content {
+        margin-top: 22px;
+    }
+}
+.charge-tips {
+    height: 18px;
+    font-size: 14px;
+    color: rgba(94, 104, 117, 1);
+    line-height: 18px;
+    padding-left: 13px;
+    margin-top: 20px;
+    position: relative;
+    width: 100%;
+    .dot {
+        width: 6px;
+        height: 6px;
+        background: rgba(0, 122, 255, 1);
+        border-radius: 100%;
+        position: absolute;
+        left: 0;
+        top: 6px;
+    }
+}
+</style>
+

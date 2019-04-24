@@ -35,6 +35,7 @@
         "send": "Send Transaction",
         "symbol": "Send"
     },
+
     "errCode": {
         "35003": "{name} ID conflict occurs, please re-submit later",
         "35004": "Built-in contract error, please try again later（35004）",
@@ -193,6 +194,80 @@
             "hint": "Noted that login by importing keystore file cannot support creating multi addresses, using mnemonic seed phrase is recommended in cross-platform situations."
         }
     },
+                "tokenCard":{
+        "actionType":{
+        "SEND":"发送",
+        "RECEIVE":"接收",
+        "CHARGE":"充值",
+        "WITHDRAW":"提现"
+        },
+        "addToken":{
+            "title":"添加代币",
+            "placeholder":"请输入代币名称或TokenID",
+            "lTxt":"取消",
+            "sTxt":"添加"
+        },
+        "tokenInfo":{
+            "tabName":"详情",
+            "labels":{
+                "tokenId":"TokenID",
+                "title":"{tokenSymbol}代币地址",
+                "address":"铸币地址",
+                "tokenName":"代币名称",
+                "totalSupply":"发行总量",
+                "decimals":"小数位",
+                "isReIssuable":"类型",
+                "time":"发行日期"
+            },
+            "reIssuable":{
+            "true":"可增发",
+            "false":"不可增发"
+        }
+        },
+        "gateInfo":{
+        "tabName":"网关详情",
+        "selfdefined":"自定义网关",
+        "officalNet":"网关官网",
+        "introduction":"网关介绍",
+        "token":"网关发行代币",
+        "setting":"网关设置",
+        "settingPlaceholder":"请输入网关链接地址"
+        },
+        "receive":{
+            "title":"接收",
+            "codeTips":"请扫码向我转入{tokenSymbol}",
+            "addressTitle":"接收地址",
+            "amountTitle":"请输入接收金额",
+            "amountPlaceholder":"请输入接收金额"
+
+        },
+        "charge":{
+            "title":"充值",
+            "addressTitle":"充值地址",
+            "codeTips":"请扫描二维码充值,请使用支持{tokenSymbol}的钱包转账",
+            "tips":["充值操作是将XPR跨链映射至VITE网络，充值后您可通过提现转走通过该存款地址只能发送{tokenSymbol},且金额不能低于{min}","交易确认之后，预计5分钟后到账，请耐心等待"]
+        },
+        "withdraw":{
+            "title":"提现",
+            "balanceErrMap":{
+                "notEnough":"余额不足",
+                "overMax":"提现金额需小于 {max}",
+                "lessMin":"提现金额需大于 {min}"
+            },
+            "addressErr":"地址格式错误",
+            "labels":{
+                "balance":"账户余额",
+                "address":"提现地址",
+                "amount":"提现金额",
+                "fee":"提现手续费",
+                "all":"全部"
+            },
+            "amountPlaceholder":"请输入提现金额，最小不少于{min}",
+            "addressPlaceholder":"请输入提现地址",
+            "successTips":"提现请求已发送"
+        },
+        "nodeErr":"提示网关节点无效，请检查网关设置"
+        },
     "wallet": {
         "title": "Assets",
         "transfer": "Transfer",
@@ -233,6 +308,7 @@
         "aboutDays": "Approx {day} days",
         "amountPlaceholder": "Please input staking amount, minimum {num} VITE",
         "limitAmt": "Staking amount should not be less than {num}.",
+        "limitMaxAmt":"Staking amount should not be more than {num}.",
         "addrPlaceholder": "Please input quota recipient address",
         "inputWithdrawAmount": "Please input withdraw amount",
         "pledgeFail": "Failed to Submit",

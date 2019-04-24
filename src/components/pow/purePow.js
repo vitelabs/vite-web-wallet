@@ -37,36 +37,3 @@ export function powProcess({
 
     return powProcessInstance.startPowTx(accountBlock, startTime, difficulty);
 }
-
-export function purePow({
-    accountBlock,
-    difficulty,
-    cancel = () => {},
-    isShowCancel = true
-}) {
-    let powProcessInstance = new PowProcessComponent({
-        el: document.createElement('div'),
-        i18n
-    });
-    const appEl = document.getElementById('vite-wallet-app');
-
-    const _close = cb => {
-        try {
-            appEl.removeChild(powProcessInstance.$el);
-        } catch (err) {
-            console.warn(err);
-        }
-        powProcessInstance.$destroy();
-        powProcessInstance = null;
-        cb && cb();
-    };
-
-    powProcessInstance.cancel = () => {
-        cancel && cancel();
-        _close();
-    };
-    powProcessInstance.isShowCancel = isShowCancel;
-    appEl.appendChild(powProcessInstance.$el);
-
-    return powProcessInstance.startPowTx(accountBlock, difficulty);
-}

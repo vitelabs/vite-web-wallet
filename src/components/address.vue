@@ -39,12 +39,12 @@ export default {
     font-size: 14px;
     word-break: break-all;
     width: 100%;
-    line-height: 20px;
+    line-height: 24px;
     box-sizing: border-box;
     background: #f3f6f9;
     border: 1px solid #d4dee7;
     border-radius: 2px;
-    padding: 10px;
+    height: 24px;
     color: #283d4a;
 }
 </style>

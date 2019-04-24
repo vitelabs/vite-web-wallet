@@ -1,46 +1,19 @@
 import { constant } from '@vite/vitejs';
 import { timer } from 'utils/asyncFlow';
 import $ViteJS from 'utils/viteClient';
+import { defaultTokenMap } from 'utils/constant';
 
-import viteIcon from 'assets/imgs/vite.svg';
-import vcpIcon from 'assets/imgs/VCC.svg';
-import vttIcon from 'assets/imgs/vtt.svg';
 
 const ViteId = constant.Vite_TokenId;
-const defaultTokenList = process.env.NODE_ENV === 'production' ? {
-    'tti_5649544520544f4b454e6e40': {
-        'tokenSymbol': 'VITE',
-        icon: viteIcon
-    },
-    'tti_251a3e67a41b5ea2373936c8': {
-        'tokenSymbol': 'VCP',
-        icon: vcpIcon
-    },
-    'tti_c55ec37a916b7f447575ae59': {
-        'tokenSymbol': 'VTT',
-        icon: vttIcon
-    }
-} : {
-    'tti_5649544520544f4b454e6e40': {
-        'tokenSymbol': 'VITE',
-        icon: viteIcon
-    },
-    'tti_c2695839043cf966f370ac84': {
-        'tokenSymbol': 'VCP',
-        icon: vcpIcon
-    },
-    'tti_6ac4abf1b4e855ba31620f0a': {
-        'tokenSymbol': 'VTT',
-        icon: vttIcon
-    }
-};
+const MAX_TOKEN_NUM = 100;
+
 
 let heightTimer = null;
-
 const state = {
     currentHeight: '',
-    defaultTokenIds: defaultTokenList,
-    tokenInfoMaps: {}
+    defaultTokenIds: defaultTokenMap,
+    tokenInfoMaps: {},
+    allTokens: []
 };
 
 const mutations = {
@@ -58,6 +31,10 @@ const mutations = {
         if (state.defaultTokenIds[tokenId]) {
             state.tokenInfoMaps[tokenId].icon = state.defaultTokenIds[tokenId].icon;
         }
+    },
+    // eslint-disable-next-line no-unused-vars
+    setAllTokens(state, payload = []) {
+        state.allTokens = payload;
     }
 };
 
@@ -81,6 +58,11 @@ const actions = {
         }), 2000);
         heightTimer.start();
     },
+    getAllTokens({ commit }) {// 暂时为前端提供代币搜索功能，获取全部token信息；
+        $ViteJS.mintage.getTokenInfoList(0, MAX_TOKEN_NUM).then(data => {
+            commit('setAllTokens', data.tokenInfoList);
+        });
+    },
     getDefaultTokenList({ dispatch, state }) {
         for (const tokenId in state.defaultTokenIds) {
             dispatch('fetchTokenInfo', tokenId);
@@ -96,11 +78,18 @@ const actions = {
 };
 
 const getters = {
+    allTokensMap(state) {
+        const map = {};
+        state.allTokens.forEach(t => {
+            map[t.tokenId] = t;
+        });
+        return map;
+    },
     viteTokenInfo(state) {
         if (!state.tokenInfoMaps[ViteId]) {
             return null;
         }
-        state.tokenInfoMaps[ViteId].tokenId = ViteId;
+        state.tokenInfoMaps[ViteId].tokenId = ViteId;// ？ change state outside of mutation
 
         return state.tokenInfoMaps[ViteId];
     }

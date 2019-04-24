@@ -5,85 +5,81 @@
         </div>
         <account-head class="item"></account-head>
         <div class="token-list item">
-            <tokenCard v-for="token in tokenList" :key="token.id"
-                       :opt="token" :sendTransaction="showTrans"></tokenCard>
+            <div class="token-class">原生代币</div>
+            <tokenCard
+                v-for="token in nativeTokenList"
+                :key="token.tokenId"
+                :token="token"
+            ></tokenCard>
+            <div class="token-class">跨链代币</div>
+            <tokenCard
+                v-for="token in crossChainTokenList"
+                :key="`_${token.tokenId}`"
+                :token="token"
+            ></tokenCard>
+            <div class="add-card" @click="addToken">
+                <img src="~/assets/imgs/add_token.png"/>
+            </div>
         </div>
-        <transaction v-if="isShowTrans" :token="activeToken" :closeTrans="closeTrans"></transaction>
+
     </div>
 </template>
 
 <script>
 import syncBlock from 'components/syncBlock';
-import tokenCard from 'components/tokenCard';
+import tokenCard from './tokenCard';
 import accountHead from './head';
-import transaction from './transaction';
+import { addTokenDialog } from './dialog';
+import { gateStorage } from 'services/gate';
 
 export default {
-    components: { accountHead, syncBlock, tokenCard, transaction },
+    components: { accountHead, syncBlock, tokenCard },
     data() {
         return {
             isShowTrans: false,
             activeToken: null
         };
     },
+    watch: {
+        otherWhithBalance(val) {
+            if (!val || val.length === 0) return;
+            const map = {};
+            val.forEach(i => (map[i.tokenId] = { gateInfo: {} }));
+            gateStorage.bindTokens(map);
+        }
+    },
+
     computed: {
-        tokenList() {
-            const tokenList = JSON.parse(JSON.stringify(this.$store.getters.tokenBalanceList));
-
-            for (const tokenId in this.$store.state.ledger.defaultTokenIds) {
-                if (!this.$store.state.ledger.tokenInfoMaps[tokenId] && !tokenList[tokenId]) {
-                    break;
-                }
-
-                const token = this.$store.state.ledger.tokenInfoMaps[tokenId] || tokenList[tokenId];
-                const defaultToken = this.$store.state.ledger.defaultTokenIds[tokenId];
-                const symbol = token.tokenSymbol || defaultToken.tokenSymbol;
-
-                tokenList[tokenId] = tokenList[tokenId] || {
-                    balance: '0',
-                    fundFloat: '0',
-                    symbol,
-                    decimals: '0'
-                };
-                tokenList[tokenId].icon = defaultToken.icon;
-            }
-
-            const viteTokenInfo = this.$store.getters.viteTokenInfo;
-            if (!viteTokenInfo) {
-                return tokenList;
-            }
-
-            // Force vite at first
-            const list = [];
-            const viteId = viteTokenInfo.tokenId;
-            if (tokenList[viteId]) {
-                list.push(tokenList[viteId]);
-                delete tokenList[viteId];
-            }
-            Object.keys(tokenList).forEach(k => {
-                list.push(tokenList[k]);
-            });
-
-            return list;
+        nativeTokenList() {
+            return [ ...this.defaultTokenList, ...this.officalGateTokenList, ...this.userStorageTokenList.filter(t => !t.gateInfo.url), ...this.otherWhithBalance ];
+        },
+        crossChainTokenList() {
+            return this.userStorageTokenList.filter(t => t.gateInfo.url);
+        },
+        defaultTokenList() {
+            return this.$store.getters.defaultTokenList;
+        },
+        officalGateTokenList() {
+            return this.$store.getters.officalGateTokenList;
+        },
+        userStorageTokenList() {
+            return this.$store.getters.userStorageTokenList;
+        },
+        otherWhithBalance() {
+            return this.$store.getters.otherWhithBalance;
         }
     },
     methods: {
-        showTrans(token) {
-            if (!token.id) {
-                return;
-            }
-            this.isShowTrans = true;
-            this.activeToken = token;
-        },
-        closeTrans() {
-            this.isShowTrans = false;
-            this.activeToken = null;
+        addToken() {
+            addTokenDialog();
         }
+
     }
 };
 </script>
 
 <style lang="scss" rel="stylesheet/scss">
+@import "assets/scss/vars.scss";
 .page-content .account-wrapper.__wrapper {
     padding-top: 0;
 }
@@ -118,6 +114,31 @@ export default {
 .token-list {
     display: flex;
     flex-wrap: wrap;
+    .token-class{
+        border-left: 1px solid #007AFF;
+        padding-left: 9px;
+        width: 100%;
+        box-sizing: border-box;
+        font-family: $font-bold;
+        margin: 20px 0 24px;
+    }
+    .add-card{
+        box-sizing: border-box;
+        position: relative;
+        min-width: 300px;
+        background: #fff;
+        box-shadow: 0 2px 48px 1px rgba(176, 192, 237, 0.42);
+        margin: 0 40px 20px 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        height: 190px;
+        img{
+            height: 50px;
+            width: 50px;
+        }
+    }
 }
 
 @media only screen and (max-width: 550px) {
