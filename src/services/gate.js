@@ -24,7 +24,7 @@ const client = getClient('', xhr => {
     }
     return Promise.reject(xhr.responseText);
 });
-export const getGateInfos = () => client({ path: 'certified_gateways' });
+export const getGateInfos = url => client({ path: 'certified_gateways', host: url });
 
 export const getChargeAddr = ({ tokenId, addr: walletAddress }, url) => client({ path: 'deposit_address', params: { tokenId, walletAddress }, host: url });
 
