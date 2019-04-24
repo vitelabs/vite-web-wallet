@@ -5,7 +5,7 @@ block content
     .block__content.edit.space
         .token__title
             img
-            .symbol {{token.balance}}
+            .symbol {{token.balance||'0'}}
         .right.blue {{token.tokenSymbol}}
     .block__title 提现地址
         .err {{isAddrCorrect?'':'地址格式错误'}}
@@ -18,7 +18,7 @@ block content
     .block__title 手续费
     .block__content.edit.space
         div   提现手续费
-        div {{fee+token.tokenSymbol}}
+        div {{(fee||'--')+token.tokenSymbol}}
 </template>
 
 <script>
@@ -58,9 +58,6 @@ export default {
                 return bigNumber.toBasic(this.withdrawAmountMin, this.token.decimals);
             },
             set: function (val) {
-                if (this.ammountErr) {
-                    return;
-                }
                 this.withdrawAmountMin = bigNumber.toMin(val, this.token.decimals);
             }
         },
@@ -68,14 +65,18 @@ export default {
             return bigNumber.toBasic(this.feeMin, this.token.decimals);
         },
         ammountErr() {
-            return getValidBalance({ balance: this.token.balance, decimals: this.token.decimals, minNum: this.minimumWithdrawAmount, maxNum: this.maximumWithdrawAmount })(this.withdrawAmount);
+            return this.validateAmount(this.withdrawAmountMin)
         },
         dBtnUnuse() {
-            return this.ammountErr || !this.isAddrCorrect;
+            return this.ammountErr || !this.isAddrCorrect||!this.withdrawAmount||!this.withdrawAddr;
         }
     },
     watch: {
         withdrawAddr: debounce(function (val) {
+            if(!val){
+                this.isAddrCorrect = true;
+                return;
+            }
             verifyAddr({ tokenId: this.token.tokenId, withdrawAddress: val }).then(d => {
                 this.isAddrCorrect = d;
             });
@@ -87,6 +88,9 @@ export default {
         }, 500)
     },
     methods: {
+        validateAmount(val){
+            return getValidBalance({ balance: this.token.totalAmount, decimals: this.token.decimals, minNum: this.info.minimumWithdrawAmount, maxNum: this.info.maximumWithdrawAmount })(val)
+        },
         withdrawAll() {
             if (this.token.totalAmount && bigNumber.compared(this.token.totalAmount, '0') > 0) {
                 getWithdrawFee({ tokenId: this.token.tokenId, walletAddress: wallet.defaultAddr, amount: this.token.totalAmount, containsFee: true }).then(fee => {
@@ -97,7 +101,7 @@ export default {
         },
         inspector() {
             return new Promise((res, rej) => {
-                withdraw({ amount: bigNumber.plus(bigNumber.toMin(this.withdrawAmount, this.token.decimals), this.fee, 0), withdrawAddress: this.withdrawAddr, gateAddr: this.info.gatewayAddress, tokenId: this.token.tokenId }).then(d => res(d)).catch(e => rej(e));
+                withdraw({ amount: bigNumber.plus(this.withdrawAmountMin, this.feeMin, 0), withdrawAddress: this.withdrawAddr, gateAddr: this.info.gatewayAddress, tokenId: this.token.tokenId }).then(d => res(d)).catch(e => rej(e));
             });
         }
     }

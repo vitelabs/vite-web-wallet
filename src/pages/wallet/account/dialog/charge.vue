@@ -5,7 +5,7 @@ block content
         span 接收地址
         img.title_icon.copy.__pointer(src="~assets/imgs/copy_default.svg" @click="copy")
     .block__content {{address}}
-        copyOK(ref="copyOk")
+        // copyOK(ref="copyOk")
     .qrcode-container
         .qrcode-container__title 请扫码向我转入{{token.tokenSymbol}}
         qrcode(:text="addressQrcode" :options="qrOptions" class="qrcode-container__content")
@@ -48,7 +48,7 @@ export default {
     methods: {
         copy() {
             copy(this.address);
-            this.$refs.copyOk.copyOk();
+            // this.$refs.copyOk.copyOk();
         }
     },
     computed: {
