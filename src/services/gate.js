@@ -10,7 +10,7 @@ const STORAGEKEY = 'INDEX_COLLECT_TOKEN';
 // import { powProcess } from 'components/pow/index';
 // const VoteDifficulty = '201564160';
 
-const client = getClient('/gateWay', xhr => {
+const client = getClient('', xhr => {
     if (xhr.status === 200) {
         const { code, msg, data, error, subCode } = JSON.parse(xhr.responseText);
         if (code !== 0) {
