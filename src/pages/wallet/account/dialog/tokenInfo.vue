@@ -174,7 +174,7 @@ export default {
         text-align: left;
         input{
             width: 100%;
-            font-size:14px;
+            font-size: 14px;
         }
         .label{
             color: #5E6875;

@@ -155,7 +155,7 @@ export default {
         }
     }
     .tips-container{
-        overflow:visible;
+        overflow: visible;
     }
     .hoveraction {
         &.tipsicon {
