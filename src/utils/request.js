@@ -72,6 +72,10 @@ export const getClient = function (baseUrl = '', afterResponse) {
         host.slice(-1) === '/' && (host = host.slice(0, -1));
         path.indexOf('/') === 0 && (path = path.splice(1));
         path = `${ host }/${ path }`;
+        if ((path.indexOf('.') !== -1 || path.indexOf(':') !== -1) && path.indexOf('http') !== 0) {
+            path = `${ location.protocol }//${ path }`;
+        }
+
         return request({ method, path, params, timeout, afterResponse });
     };
 };

@@ -1,7 +1,7 @@
 <template lang="pug">
 extends /components/dialog/base.pug
 block content
-    search(v-model="userInput" class="search-input")
+    search(v-model="userInput" class="search-input" :placeholder="$t('tokenCard.addToken.placeholder')")
     .search-tips
         .search-tips__item(v-for="token in searchRes" :class="{active:selectedTokenIds.indexOf(token.tokenId)>=0}")
             input(type="checkbox" name="addTokenSelected" v-model="selectedTokenIds" :value="token.tokenId" )
@@ -25,9 +25,9 @@ export default {
         return {
             selectedTokenIds: [],
             userInput: '',
-            dLTxt: '取消',
-            dRTxt: '添加',
-            dTitle: '添加代币'
+            dLTxt: this.$t('tokenCard.addToken.lTxt'),
+            dRTxt: this.$t('tokenCard.addToken.rTxt'),
+            dTitle: this.$t('tokenCard.addToken.title')
         };
     },
     methods: {

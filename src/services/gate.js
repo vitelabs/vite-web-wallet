@@ -3,7 +3,7 @@ import { accountBlock } from '@vite/vitejs';
 import { wallet } from 'utils/wallet';
 import rpcClient from 'utils/viteClient';
 import { addrSpace } from 'utils/storageSpace';
-import { getPowNonce } from 'services/pow';
+import { purePow } from 'components/pow';
 
 
 const STORAGEKEY = 'INDEX_COLLECT_TOKEN';
@@ -42,9 +42,8 @@ export const withdraw = async ({ amount, withdrawAddress, gateAddr, tokenId }, u
     const accountBlockContent = await rpcClient.buildinTxBlock.sendTx.async({ toAddress: gateAddr, amount, accountAddress: address, tokenId });
     const quota = await rpcClient.pledge.getPledgeQuota(address);
     if (quota.txNum < 1) {
-        const powData = await getPowNonce(accountBlockContent.accountAddress, accountBlockContent.prevHash);
-        accountBlockContent.difficulty = powData.difficulty;
-        accountBlockContent.nonce = powData.nonce;
+        // eslint-disable-next-line no-unused-vars
+        await purePow(accountBlockContent);
     }
 
     const signedBlock = accountBlock.signAccountBlock(accountBlockContent, unlockAcc.privateKey);

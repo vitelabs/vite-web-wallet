@@ -2,48 +2,49 @@
 extends /components/dialog/base.pug
 block head
     .head
+        img.icon(:src="token.icon||getIcon(token.tokenId)")
         .head__name {{token.tokenName}}
             .head__name__gate(v-if="token.gateInfo.name")
         .head__symbol {{token.tokenSymbol}}
     .tab
-        .tab__item(@click="tabClick('tokenInfo')" :class="{active:tabName==='tokenInfo'}") 详情
-        .tab__item(v-if="token.type!=='NATIVE'" @click="tabClick('gate')" :class="{active:tabName==='gate'}") gate_way详情
+        .tab__item(@click="tabClick('tokenInfo')" :class="{active:tabName==='tokenInfo'}") {{$t("tokenCard.tokenInfo.tabName")}}
+        .tab__item(v-if="token.type!=='NATIVE'" @click="tabClick('gate')" :class="{active:tabName==='gate'}") {{$t("tokenCard.gateInfo.tabName")}}
 block content
     .tab-content(v-if="tabName==='tokenInfo'")
         .content__item.click-able-color
-            .label Token_Id
+            .label {{$t("tokenCard.tokenInfo.labels.tokenId")}}
             div {{token.tokenId}}
         .content__item
-            .label 铸币地址
+            .label {{$t("tokenCard.tokenInfo.labels.address")}}
             div {{token.owner}}
         .content__item
-            .label 代币名称
+            .label {{$t("tokenCard.tokenInfo.labels.tokenName")}}
             div {{token.tokenName}}
         .content__item
-            .label 发行总量
+            .label {{$t("tokenCard.tokenInfo.labels.totalSupply")}}
             div {{token.totalSupply}}
         .content__item
-            .label 小数点
+            .label {{$t("tokenCard.tokenInfo.labels.decimals")}}
             div {{token.decimals}}
         .content__item
-            .label 可增发
-            div {{token.isReIssuable?'是':'否'}}
+            .label {{$t("tokenCard.tokenInfo.labels.isReIssuable")}}
+            div {{$t("tokenCard.tokenInfo.reIssuable")[token.isReIssuable]}}
     .tab-content(v-if="tabName==='gate'")
         .content__item(v-if="token.type==='THIRD_GATE'")
-            .label 网关官网：
+            .label {{$t("tokenCard.gateInfo.officalNet")}}
         .content__item(v-if="token.type==='THIRD_GATE'")
-            .label 网关介绍：
+            .label {{$t("tokenCard.gateInfo.introduction")}}
         .content__item(v-if="token.type==='THIRD_GATE'")
-            .label 网关发行代币
+            .label {{$t("tokenCard.gateInfo.token")}}
         .content__item(v-if="token.type==='OFFICAL_GATE'||token.type==='THIRD_GATE'")
-            .label 网关设置
-            input.gate-url(:placeholder="'请输入网关链接地址'" :disable="token.type==='OFFICAL_GATE'" v-model="url")
+            .label {{$t("tokenCard.gateInfo.setting")}}
+            input.gate-url(:placeholder="$t('tokenCard.gateInfo.settingPlaceholder')" :disabled="token.type==='OFFICAL_GATE'" v-model="url")
 </template>
 
 <script>
 import { wallet } from 'utils/wallet';
 import { gateStorage, getChargeAddr } from 'services/gate';
-
+import getTokenIcon from 'utils/getTokenIcon';
 
 const tokenEnum = {
     GATE: 'gate',
@@ -56,11 +57,12 @@ export default {
         token: {
             type: Object,
             required: true
-        }
+        },
+        initTabName: { type: String }
     },
     data() {
         return {
-            tabName: tokenEnum.TOKEN_INFO,
+            tabName: this.initTabName || tokenEnum.TOKEN_INFO,
             urlCache: this.token.gateInfo.url,
             dTitle: `${ this.token.tokenSymbol }代币信息`
         };
@@ -87,18 +89,17 @@ export default {
             return !this.urlCache;
         }
     },
-    beforeMount() {
-        window.sssss = this;
-    },
     methods: {
+        getIcon(id) {
+            return getTokenIcon(id);
+        },
         inspector() {
             return new Promise((res, rej) => {
                 getChargeAddr({ addr: wallet.defaultAddr, tokenId: this.token.tokenId }, this.url).then(() => {
                     gateStorage.bindToken(this.token.tokenId, { gateInfo: { url: this.url } });
                     res({ url: this.url });
                 }).catch(e => {
-                    debugger;
-                    this.$toast('节点无效');
+                    this.$toast(this.$t('tokenCard.nodeErr'));
                     rej(e);
                 });
             });
@@ -173,6 +174,7 @@ export default {
         text-align: left;
         input{
             width: 100%;
+            font-size:14px;
         }
         .label{
             color: #5E6875;

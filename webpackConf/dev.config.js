@@ -14,7 +14,7 @@ module.exports = {
                 pathRewrite: { '^/trade\w*': '' }
             },
             '/gateWay': {
-                target: 'http://192.168.31.141:8080',
+                target: 'http://132.232.60.116:8081',
                 pathRewrite: { '^/gateWay': '' }
             }
         }

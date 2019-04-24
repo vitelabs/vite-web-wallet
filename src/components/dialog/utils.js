@@ -2,6 +2,7 @@
 import Vue from 'vue';
 import closeIcon from 'assets/imgs/confirm_close.svg';
 import store from 'src/store';
+import i18n from 'i18n';
 const STATUS = {
     'CLOSE': 'CLOSE',
     'CANCEL': 'CANCEL',
@@ -15,6 +16,7 @@ const getValue = function (key, defaultValue) {
 };
 const mixin = {
     store,
+    i18n,
     props: {
         showMask: { },
         title: { },
@@ -124,7 +126,6 @@ export default function (component, propsDefault = {}) {
                 el: document.createElement('div'),
                 propsData: props
             });
-            componentInstance.$mount();
             document.body.appendChild(componentInstance.$el);
             return componentInstance.$el;
         };

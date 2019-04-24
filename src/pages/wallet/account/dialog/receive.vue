@@ -2,15 +2,15 @@
 extends /components/dialog/base.pug
 block content
     .block__title
-        span 接收地址
+        span {{$t('tokenCard.receive.addressTitle')}}
         img.title_icon.copy.__pointer(src="~assets/imgs/copy_default.svg" @click="copy")
     .block__content {{address}}
         // copyOK(ref="copyTpis")
-    .block__title 请输入金额
+    .block__title {{$t('tokenCard.receive.amountTitle')}}
         .err {{amountErr}}
-    input.block__content.edit(v-model="amount" placeholder="请输入金额")
+    input.block__content.edit(v-model="amount" :placeholder="$t('tokenCard.receive.amountPlaceholder')")
     .qrcode-container
-        .qrcode-container__title 请扫码向我转入{{token.tokenSymbol}}
+        .qrcode-container__title {{$t('tokenCard.receive.codeTips',{tokenSymbol:token.tokenSymbol})}}
         qrcode(:text="addressQrcode" :options="qrOptions" class="qrcode-container__content")
 
 </template>
@@ -37,7 +37,8 @@ export default {
             copySuccess: false,
             amount: '',
             qrOptions: { size: 124, mode: modes.NORMAL },
-            dTitle: '接收'
+            dTitle: this.$t('tokenCard.receive.title')
+
         };
     },
     methods: {
@@ -113,6 +114,7 @@ export default {
     padding: 20px;
     box-sizing: border-box;
     text-align: center;
+    font-size:16px;
     &__content{
         margin-top: 22px;
 
