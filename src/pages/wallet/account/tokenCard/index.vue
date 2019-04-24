@@ -66,7 +66,7 @@ import { gateStorage } from 'services/gate';
 import transaction from '../transaction';
 
 export default {
-    components:{transaction},
+    components: { transaction },
     props: {
         token: {
             type: Object,
@@ -81,10 +81,8 @@ export default {
             }
         }
     },
-    data(){
-        return {
-            isShowTrans:false
-        }
+    data() {
+        return { isShowTrans: false };
     },
     computed: {
         showUnbind() {

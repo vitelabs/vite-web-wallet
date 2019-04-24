@@ -170,9 +170,9 @@ export default {
         border-bottom: 1px solid rgba(198,203,212,0.3);
         display: flex;
         font-size: 14px;
-        text-align:left;
+        text-align: left;
         input{
-            width:100%;
+            width: 100%;
         }
         .label{
             color: #5E6875;
