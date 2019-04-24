@@ -5,7 +5,7 @@ block content
         span 接收地址
         img.title_icon.copy.__pointer(src="~assets/imgs/copy_default.svg" @click="copy")
     .block__content {{address}}
-    copyOK(ref="copyTpis")
+        copyOK(ref="copyTpis")
     .block__title 请输入金额
         .err {{amountErr}}
     input.block__content.edit(v-model="amount" placeholder="请输入金额")

@@ -31,5 +31,6 @@ store.dispatch('updateMarketMap');
 store.dispatch('startLoopHeight');
 store.dispatch('getDefaultTokenList');
 store.dispatch('getAllTokens');
+store.dispatch('updateGateInfos');
 
 export default store;

@@ -5,10 +5,11 @@ block content
         span 接收地址
         img.title_icon.copy.__pointer(src="~assets/imgs/copy_default.svg" @click="copy")
     .block__content {{address}}
+        copyOK(ref="copyOk")
     .qrcode-container
         .qrcode-container__title 请扫码向我转入{{token.tokenSymbol}}
         qrcode(:text="addressQrcode" :options="qrOptions" class="qrcode-container__content")
-    .charge-tips 充值操作是将ETH跨链映射至VITE网络，充值后您可通过提现转走
+    .charge-tips 充值操作是将ETH跨链映射至VITE网络，充值后您可通过提现转走,最小充值金额：{{minimumDepositAmount}}
         .dot
 </template>
 
@@ -18,7 +19,8 @@ import copyOK from 'components/copyOK';
 import copy from 'utils/copy';
 import { utils } from '@vite/vitejs';
 import { modes } from 'qrcode.es';
-import { getChargeAddr } from 'services/gate';
+import { getChargeAddr,getChargeInfo } from 'services/gate';
+import bigNumber from 'utils/bigNumber';
 import { wallet } from 'utils/wallet';
 export default {
     components: { qrcode, copyOK },
@@ -30,6 +32,7 @@ export default {
     },
     data() {
         return {
+            minimumDepositAmountMin:'',
             address: '',
             copySuccess: false,
             amount: 0,
@@ -38,17 +41,20 @@ export default {
     },
     beforeMount() {
         getChargeAddr({ addr: wallet.defaultAddr, tokenId: this.token.tokenId }).then(addr => (this.address = addr));
+        getChargeInfo({ addr: wallet.defaultAddr, tokenId: this.token.tokenId }).then(d=>{
+            this.minimumDepositAmountMin=d.minimumDepositAmount
+        })
     },
     methods: {
         copy() {
             copy(this.address);
-            this.copySuccess = true;
-            setTimeout(() => {
-                this.copySuccess = false;
-            }, 1000);
+            this.$refs.copyOk.copyOk();
         }
     },
     computed: {
+        minimumDepositAmount(){
+            return bigNumber.toBasic(this.minimumDepositAmountMin,this.token.decimals)
+        },
         addressQrcode() {
             return utils.uriStringify({
                 target_address: this.address,
