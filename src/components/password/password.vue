@@ -9,7 +9,7 @@
         }">
             <!-- Safari autocomplete -->
             <!-- <input fake_pass type="password" style="display:none"/> -->
-            <input v-model="password" :placeholder="$t('pwdConfirm.placeholder')" type="password"/>
+            <input ref="passInput" v-model="password" :placeholder="$t('pwdConfirm.placeholder')" type="password"/>
         </form>
         <div v-show="isShowPWD && isShowPWDHold" class="hold-pwd __pointer" @click="toggleHold">
             <span :class="{ 'active': isPwdHold }"></span>
@@ -72,10 +72,11 @@ export default {
     },
     mounted() {
         lastE = this.$onKeyDown(13, () => {
+            this.$refs.passInput.blur();
             this._submit();
         });
     },
-    beforeDestroyed() {
+    destroyed() {
         this.$onKeyDown(13, lastE);
     },
     data() {

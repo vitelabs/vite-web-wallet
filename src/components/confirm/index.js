@@ -30,6 +30,7 @@ export default function ({
         } catch (err) {
             console.warn(err);
         }
+        instance.$destroy();
         instance = null;
         cb && cb();
     };
