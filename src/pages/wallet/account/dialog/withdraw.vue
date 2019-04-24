@@ -65,15 +65,15 @@ export default {
             return bigNumber.toBasic(this.feeMin, this.token.decimals);
         },
         ammountErr() {
-            return this.validateAmount(this.withdrawAmountMin)
+            return this.validateAmount(this.withdrawAmountMin);
         },
         dBtnUnuse() {
-            return this.ammountErr || !this.isAddrCorrect||!this.withdrawAmount||!this.withdrawAddr;
+            return this.ammountErr || !this.isAddrCorrect || !this.withdrawAmount || !this.withdrawAddr;
         }
     },
     watch: {
         withdrawAddr: debounce(function (val) {
-            if(!val){
+            if (!val) {
                 this.isAddrCorrect = true;
                 return;
             }
@@ -88,8 +88,8 @@ export default {
         }, 500)
     },
     methods: {
-        validateAmount(val){
-            return getValidBalance({ balance: this.token.totalAmount, decimals: this.token.decimals, minNum: this.info.minimumWithdrawAmount, maxNum: this.info.maximumWithdrawAmount })(val)
+        validateAmount(val) {
+            return getValidBalance({ balance: this.token.totalAmount, decimals: this.token.decimals, minNum: this.info.minimumWithdrawAmount, maxNum: this.info.maximumWithdrawAmount })(val);
         },
         withdrawAll() {
             if (this.token.totalAmount && bigNumber.compared(this.token.totalAmount, '0') > 0) {
