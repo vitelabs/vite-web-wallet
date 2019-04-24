@@ -76,8 +76,8 @@ export const getClient = function (baseUrl = '', afterResponse) {
             path = `${ location.protocol }//${ path }`;
         }
         // todo 暂时解决自定义网关跨域问题
-        path.replace('https://132.232.60.116:8082', '/tmpCross');
-        path.replace('http://132.232.60.116:8082', '/tmpCross');
+        path = path.replace('https://132.232.60.116:8082', '/tmpCross');
+        path = path.replace('http://132.232.60.116:8082', '/tmpCross');
         return request({ method, path, params, timeout, afterResponse });
     };
 };
