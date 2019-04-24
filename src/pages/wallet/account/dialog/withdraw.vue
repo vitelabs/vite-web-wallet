@@ -57,7 +57,6 @@ export default {
         };
     },
     beforeMount() {
-        debugger;
         getWithdrawInfo({ walletAddress: wallet.defaultAddr, tokenId: this.token.tokenId }, this.token.gateInfo.url).then(data => (this.info = data));
     },
     computed: {

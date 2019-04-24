@@ -16,7 +16,12 @@ module.exports = {
             '/gateWay': {
                 target: 'http://132.232.60.116:8081',
                 pathRewrite: { '^/gateWay': '' }
+            },
+            '/tmpCross': {
+                target: 'http://132.232.60.116:8082',
+                pathRewrite: { '^/tmpCross': '' }
             }
+
         }
     }
 };

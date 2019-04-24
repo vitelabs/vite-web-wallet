@@ -11,7 +11,7 @@ const mutations = {
 
 const actions = {
     updateGateInfos({ commit }) {
-        getGateInfos({}, '/gateWay').then(infos =>
+        getGateInfos('/gateWay').then(infos =>
             commit('setGateInfos', infos));
     }
 };

@@ -3,7 +3,7 @@
         <div class="title">
             <div>
                 <img
-                    @click="showDetail"
+                    @click="showDetail()"
                     :src="token.icon||getIcon(token.tokenId)"
                     class="icon click-able"
                 />
