@@ -35,7 +35,11 @@
         </div>
         <div class="worth head__item">
             <img class="icon" src="~assets/imgs/head_asset.png" />
-            <div>{{totalAsset}}</div>
+            <div class="total-asset">
+                <div class="label">总资产</div>
+                <div>{{totalAsset}}
+                </div>
+                </div>
         </div>
         <div class="head__item">
             <img class="icon" src="~assets/imgs/head_addr.png" />
@@ -107,12 +111,12 @@ export default {
         totalAsset() {
             const currency = this.$store.state.exchangeRate.coins[this.$i18n.locale];
             const rateMap = this.$store.state.exchangeRate.rateMap;
-            const balanceInfo = this.$store.state.account.balanceInfo;
+            const balanceInfo = this.$store.getters.balanceInfo;
             const total = Object.keys(balanceInfo).reduce((pre, cur) => {
-                if (rateMap[cur]) return pre;
-                return bigNumber.plus(bigNumber.multi(this.token.balance, rateMap[cur][currency]), pre);
+                if (!rateMap[cur]) return pre;
+                return bigNumber.plus(bigNumber.multi(balanceInfo[cur].balance, rateMap[cur][currency]), pre);
             }, 0);
-            return total;
+            return `${ this.$i18n.locale === 'en' ? '$' : '¥' }${total}`;
         }
     },
     methods: {
@@ -223,6 +227,20 @@ export default {
             height: 34px;
             width: 34px;
             margin-right: 20px;
+        }
+        &.worth{
+            justify-content:flex-start;
+            .total-asset{
+                display:flex;
+                flex-direction:column;
+                justify-content:space-between;
+                align-items:flex-start;
+                color:#1D2024;
+                .label{
+                    color:#5E6875;
+                    font-family:$font-bold;
+                }
+            }
         }
     }
     .head-title {

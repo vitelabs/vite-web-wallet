@@ -51,10 +51,10 @@ export default {
 
     computed: {
         nativeTokenList() {
-            return [ ...this.defaultTokenList, ...this.officalGateTokenList, ...this.userStorageTokenList.filter(t => !t.gateInfo.url), ...this.otherWhithBalance ];
+            return [ ...this.defaultTokenList, ...this.userStorageTokenList.filter(t => !t.gateInfo.url), ...this.otherWhithBalance ];
         },
         crossChainTokenList() {
-            return this.userStorageTokenList.filter(t => t.gateInfo.url);
+            return [...this.officalGateTokenList,...this.userStorageTokenList.filter(t => t.gateInfo.url)];
         },
         defaultTokenList() {
             return this.$store.getters.defaultTokenList;
