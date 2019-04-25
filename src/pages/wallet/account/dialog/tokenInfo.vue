@@ -119,7 +119,6 @@ export default {
     box-sizing: border-box;
     padding: 30px;
     display: flex;
-    justify-content: space-between;
     background: rgba(0,122,255,0.05);
     .head__info{
         display: flex;
