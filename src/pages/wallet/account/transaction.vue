@@ -9,7 +9,7 @@
             <div class="__row">
                 <div class="__row-t">{{ $t('balance') }}</div>
                 <div class="__unuse-row">
-                    <img v-if="token.icon" :src="token.icon" class="__icon" />
+                    <img  :src="token.icon||getIcon(token.tokenId)" class="__icon" />
                     {{ token.symbol }} <span class="__right">{{ showAccBalance }}</span>
                 </div>
             </div>
@@ -49,10 +49,12 @@
 import Vue from 'vue';
 import { utils, hdAddr } from '@vite/vitejs';
 
+
 import confirm from 'components/confirm';
 import viteInput from 'components/viteInput';
 import bigNumber from 'utils/bigNumber';
 import sendTx from 'utils/sendTx';
+import getTokenIcon from "utils/getTokenIcon"
 
 const { getBytesSize } = utils;
 const SendDifficulty = '157108864';
@@ -119,6 +121,9 @@ export default {
         }
     },
     methods: {
+        getIcon(id) {
+            return getTokenIcon(id);
+        },
         validAddr() {
             this.isValidAddress = this.inAddress && hdAddr.isValidHexAddr(this.inAddress);
         },
@@ -256,6 +261,15 @@ export default {
 </style>
 
 <style lang="scss">
+.__trans-wrapper{
+.__row{
+    .__icon{
+        height:20px;
+        width:20px;
+    }
+}
+}
+
 .confirm-container.trans-confirm .confirm-wrapper {
     width: 515px;
     max-width: 90%;
