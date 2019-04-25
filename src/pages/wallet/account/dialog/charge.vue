@@ -58,6 +58,7 @@ export default {
             return bigNumber.toBasic(this.minimumDepositAmountMin, this.token.decimals);
         },
         addressQrcode() {
+            if(this.token.type==='OFFICAL_GATE'&&this.token.tokenSymbol==='BTC')return `bitcoin:${this.address}`
             return this.address;
         }
     }
