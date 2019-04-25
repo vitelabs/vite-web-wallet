@@ -200,7 +200,7 @@
             "title":"添加代币",
             "placeholder":"请输入代币名称或TokenID",
             "lTxt":"取消",
-            "sTxt":"添加"
+            "rTxt":"添加"
         },
         "tokenInfo":{
             "tabName":"详情",
