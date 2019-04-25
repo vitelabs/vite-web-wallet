@@ -19,7 +19,6 @@ block content
 import qrcode from 'components/qrcode';
 import copyOK from 'components/copyOK';
 import copy from 'utils/copy';
-import { utils } from '@vite/vitejs';
 import { modes } from 'qrcode.es';
 import { getChargeAddr, getChargeInfo } from 'services/gate';
 import bigNumber from 'utils/bigNumber';
@@ -59,10 +58,7 @@ export default {
             return bigNumber.toBasic(this.minimumDepositAmountMin, this.token.decimals);
         },
         addressQrcode() {
-            return utils.uriStringify({
-                target_address: this.address,
-                params: { amount: this.amount }
-            });
+            return this.address;
         }
     }
 };
