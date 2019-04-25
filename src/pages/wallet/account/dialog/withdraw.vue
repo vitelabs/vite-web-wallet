@@ -72,7 +72,7 @@ export default {
             return bigNumber.toBasic(this.feeMin, this.token.decimals);
         },
         ammountErr() {
-            return this.validateAmount(bigNumber.plus(this.withdrawAmountMin,this.feeMin));
+            return this.validateAmount(bigNumber.plus(this.withdrawAmountMin, this.feeMin));
         },
         dBtnUnuse() {
             return this.ammountErr || !this.isAddrCorrect || !this.withdrawAmount || !this.withdrawAddr;
