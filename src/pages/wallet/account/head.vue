@@ -39,7 +39,7 @@
                 <div class="label">总资产</div>
                 <div>{{totalAsset}}
                 </div>
-                </div>
+            </div>
         </div>
         <div class="head__item">
             <img class="icon" src="~assets/imgs/head_addr.png" />
@@ -116,7 +116,7 @@ export default {
                 if (!rateMap[cur]) return pre;
                 return bigNumber.plus(bigNumber.multi(balanceInfo[cur].balance, rateMap[cur][currency]), pre);
             }, 0);
-            return `${ this.$i18n.locale === 'en' ? '$' : '¥' }${total}`;
+            return `${ this.$i18n.locale === 'en' ? '$' : '¥' }${ total }`;
         }
     },
     methods: {
@@ -229,16 +229,16 @@ export default {
             margin-right: 20px;
         }
         &.worth{
-            justify-content:flex-start;
+            justify-content: flex-start;
             .total-asset{
-                display:flex;
-                flex-direction:column;
-                justify-content:space-between;
-                align-items:flex-start;
-                color:#1D2024;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                align-items: flex-start;
+                color: #1D2024;
                 .label{
-                    color:#5E6875;
-                    font-family:$font-bold;
+                    color: #5E6875;
+                    font-family: $font-bold;
                 }
             }
         }
