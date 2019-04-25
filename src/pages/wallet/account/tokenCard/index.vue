@@ -20,7 +20,7 @@
 
         </div>
         <div class="body">
-            <div class="item click-able" @click="showDetail">
+            <div class="item click-able" @click="showDetail()">
                 <span class="balance">{{ token.balance || 0 }}</span>
             </div>
             <div class="item">
