@@ -25,7 +25,7 @@ const { isObject } = utils;
  *
  * sendTx(activeAccount.sendTx, {
         toAddress: this.inAddress,
-        tokenId: this.token.id,
+        tokenId: this.token.tokenId,
         amount,
         message: this.message
     }, {
