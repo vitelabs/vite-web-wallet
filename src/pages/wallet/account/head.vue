@@ -35,6 +35,7 @@
         </div>
         <div class="worth head__item">
             <img class="icon" src="~assets/imgs/head_asset.png" />
+            <div>{{totalAsset}}</div>
         </div>
         <div class="head__item">
             <img class="icon" src="~assets/imgs/head_addr.png" />
@@ -76,6 +77,7 @@ import Vue from 'vue';
 import viteAddress from 'components/address';
 import { stringify } from 'utils/viteSchema';
 import { getTestToken } from 'services/testToken';
+import bigNumber from 'utils/bigNumber';
 
 let activeAccount = null;
 
@@ -101,6 +103,16 @@ export default {
     computed: {
         netStatus() {
             return this.$store.state.env.clientStatus;
+        },
+        totalAsset() {
+            const currency = this.$store.state.exchangeRate.coins[this.$i18n.locale];
+            const rateMap = this.$store.state.exchangeRate.rateMap;
+            const balanceInfo = this.$store.state.account.balanceInfo;
+            const total = Object.keys(balanceInfo).reduce((pre, cur) => {
+                if (rateMap[cur]) return pre;
+                return bigNumber.plus(bigNumber.multi(this.token.balance, rateMap[cur][currency]), pre);
+            }, 0);
+            return total;
         }
     },
     methods: {

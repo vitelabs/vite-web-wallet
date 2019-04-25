@@ -51,7 +51,7 @@ import { utils, hdAddr } from '@vite/vitejs';
 
 import confirm from 'components/confirm';
 import viteInput from 'components/viteInput';
-import BigNumber from 'utils/bigNumber';
+import bigNumber from 'utils/bigNumber';
 import sendTx from 'utils/sendTx';
 
 const { getBytesSize } = utils;
@@ -98,13 +98,10 @@ export default {
             return !!(!this.amount || !this.inAddress || this.loading || this.amountErr || !this.isValidAddress || this.messageErr);
         },
         accBalance() {
-            if (!this.tokenBalList || !this.tokenBalList[this.token.id]) {
-                return 0;
-            }
-            return this.tokenBalList[this.token.id].totalAmount;
+            return this.token.totalAmount;
         },
         showAccBalance() {
-            return BigNumber.toBasic(this.accBalance, this.token.decimals);
+            return bigNumber.toBasic(this.accBalance, this.token.decimals);
         },
         tokenBalList() {
             return this.$store.state.account.balance.balanceInfos;
@@ -134,13 +131,13 @@ export default {
                 return false;
             }
 
-            if (BigNumber.isEqual(this.amount, 0)) {
+            if (bigNumber.isEqual(this.amount, 0)) {
                 this.amountErr = this.$t('wallet.hint.amount');
                 return false;
             }
 
-            const amount = BigNumber.toMin(this.amount, this.token.decimals);
-            if (BigNumber.compared(this.accBalance, amount) < 0) {
+            const amount = bigNumber.toMin(this.amount, this.token.decimals);
+            if (bigNumber.compared(this.accBalance, amount) < 0) {
                 this.amountErr = this.$t('hint.insufficientBalance');
                 return false;
             }
@@ -185,7 +182,7 @@ export default {
             this.loading = true;
 
             const activeAccount = this.$wallet.getActiveAccount();
-            const amount = BigNumber.toMin(this.amount, this.token.decimals);
+            const amount = bigNumber.toMin(this.amount, this.token.decimals);
 
             if (!activeAccount) {
                 this.$toast(this.$t('hint.err'));
