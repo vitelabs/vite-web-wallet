@@ -84,7 +84,8 @@ const mixin = {
                         status: STATUS.CONFIRMED,
                         data
                     });
-                    document.body.removeChild(this.$el);
+                    const appEl = document.getElementById('vite-wallet-app');
+                    appEl.removeChild(this.$el);
                     this.$destroy();
                 });
             } else {
@@ -92,7 +93,8 @@ const mixin = {
                     status: STATUS.CONFIRMED,
                     data: null
                 });
-                document.body.removeChild(this.$el);
+                const appEl = document.getElementById('vite-wallet-app');
+                appEl.removeChild(this.$el);
                 this.$destroy();
             }
         },
@@ -101,7 +103,8 @@ const mixin = {
                 status: STATUS.CANCEL,
                 data: null
             });
-            document.body.removeChild(this.$el);
+            const appEl = document.getElementById('vite-wallet-app');
+            appEl.removeChild(this.$el);
             this.$destroy();
         },
         close() {
@@ -109,7 +112,8 @@ const mixin = {
                 status: STATUS.CLOSE,
                 data: null
             });
-            document.body.removeChild(this.$el);
+            const appEl = document.getElementById('vite-wallet-app');
+            appEl.removeChild(this.$el);
 
             this.$destroy();
         }
@@ -126,7 +130,8 @@ export default function (component, propsDefault = {}) {
                 el: document.createElement('div'),
                 propsData: props
             });
-            document.body.appendChild(componentInstance.$el);
+            const appEl = document.getElementById('vite-wallet-app');
+            appEl.appendChild(componentInstance.$el);
             return componentInstance.$el;
         };
         return new Promise(function (resolve, reject) {

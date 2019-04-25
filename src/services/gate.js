@@ -42,16 +42,11 @@ export const withdraw = async ({ amount, withdrawAddress, gateAddr, tokenId }, u
     const accountBlockContent = await rpcClient.buildinTxBlock.sendTx.async({ toAddress: gateAddr, amount, accountAddress: address, tokenId });
     const quota = await rpcClient.pledge.getPledgeQuota(address);
     if (quota.txNum < 1) {
-        // eslint-disable-next-line no-unused-vars
-        await purePow(accountBlockContent);
+    // eslint-disable-next-line no-unused-vars
+        await purePow({ accountBlock: accountBlockContent });
     }
 
     const signedBlock = accountBlock.signAccountBlock(accountBlockContent, unlockAcc.privateKey);
-
-    // const res = await powProcess({
-    //     signedBlock,
-    //     difficulty: VoteDifficulty
-    // });
 
     const rawTx = JSON.stringify(signedBlock);
     const signInfo = { rawTx, withdrawAddress };
@@ -99,7 +94,7 @@ class GateWays {
 }
 
 export const gateStorage = new GateWays();
-
+window.storageeeeee = gateStorage;
 
 class testStruct {
     constructor({ tokenId, withdrawAddress }) {

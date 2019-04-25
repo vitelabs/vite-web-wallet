@@ -7,7 +7,7 @@
                     :src="token.icon||getIcon(token.tokenId)"
                     class="icon click-able"
                 />
-            <span class="token-name click-able" @click="showDetail">{{ token.tokenSymbol }}</span></div>
+            <span class="token-name click-able" @click="showDetail()">{{ token.tokenSymbol }}</span></div>
 
             <div>
                 <span
