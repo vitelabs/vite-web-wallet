@@ -12,7 +12,7 @@
             <div>
                 <span
                     class="gate"
-                    v-if="token.type==='OFFICAL_GATE'||token.type==='THIRD_GATE'"
+                    v-if="token.gateInfo.url"
                     @click="showDetail('gate')"
                 >{{gateName}}</span>
                 <span class="unbind click-able" v-if="showUnbind" @click="unbind"></span>
