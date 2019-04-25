@@ -90,7 +90,6 @@ const getters = {
             balanceInfo[tokenId].decimals = balanceInfo[tokenId].decimals || tokenInfo.decimals;
             balanceInfo[tokenId].tokenSymbol = balanceInfo[tokenId].tokenSymbol || tokenInfo.tokenSymbol;
             balanceInfo[tokenId].onroadNum = item.number;
-            balanceInfo[tokenId].totalAmount = item.totalAmount;
         }
         return balanceInfo;
     },
