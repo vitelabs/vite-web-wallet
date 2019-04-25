@@ -47,6 +47,6 @@ export default {
     height: 24px;
     color: #283d4a;
     padding: auto 8px;
-    line-height:24px;
+    line-height: 24px;
 }
 </style>

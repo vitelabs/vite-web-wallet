@@ -54,7 +54,7 @@ import confirm from 'components/confirm';
 import viteInput from 'components/viteInput';
 import bigNumber from 'utils/bigNumber';
 import sendTx from 'utils/sendTx';
-import getTokenIcon from "utils/getTokenIcon"
+import getTokenIcon from 'utils/getTokenIcon';
 
 const { getBytesSize } = utils;
 const SendDifficulty = '157108864';
@@ -262,12 +262,12 @@ export default {
 
 <style lang="scss">
 .__trans-wrapper{
-.__row{
-    .__icon{
-        height:20px;
-        width:20px;
+    .__row{
+        .__icon{
+            height: 20px;
+            width: 20px;
+        }
     }
-}
 }
 
 .confirm-container.trans-confirm .confirm-wrapper {
