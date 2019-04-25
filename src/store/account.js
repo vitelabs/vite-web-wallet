@@ -69,7 +69,7 @@ const getters = {
             const balance = BigNumber.toBasic(item.totalAmount, decimals);
 
             balanceInfo[tokenId] = tokenInfo[tokenId] || {};
-            balanceInfo[tokenId].id = tokenId;
+            balanceInfo[tokenId].tokenId = tokenId;
             balanceInfo[tokenId].balance = balance;
             balanceInfo[tokenId].decimals = decimals;
             balanceInfo[tokenId].tokenSymbol = tokenInfo.tokenSymbol;
@@ -85,7 +85,7 @@ const getters = {
             const balance = BigNumber.toBasic(item.totalAmount, decimals);
 
             balanceInfo[tokenId] = balanceInfo[tokenId] || {};
-            balanceInfo[tokenId].id = balanceInfo[tokenId].id || tokenInfo.id;
+            balanceInfo[tokenId].tokenId = balanceInfo[tokenId].tokenId || tokenInfo.tokenId;
             balanceInfo[tokenId].fundFloat = balance;
             balanceInfo[tokenId].decimals = balanceInfo[tokenId].decimals || tokenInfo.decimals;
             balanceInfo[tokenId].tokenSymbol = balanceInfo[tokenId].tokenSymbol || tokenInfo.tokenSymbol;
@@ -100,8 +100,8 @@ const getters = {
         const mapToken2Gate = rootGetters.mapToken2Gate;
         // ------------------- show default token
         const list = Object.keys(defaultTokenMap).map(i => {
-            const { tokenName = '', totalSupply = '', isReIssuable = '', tokenSymbol, balance = '', fundFloat = '', decimals = '', owner = '', tokenId = i, icon, type = 'NATIVE', gateInfo = {} } = Object.assign({}, defaultTokenMap[i], balanceInfo[i] || {}, allToken[i] || {}, { gateInfo: { url: mapToken2Gate[i] && mapToken2Gate[i].url } });
-            return { tokenName, totalSupply, isReIssuable, tokenSymbol, balance, fundFloat, decimals, owner, tokenId, icon, type, gateInfo };
+            const { totalAmount = '', tokenName = '', totalSupply = '', isReIssuable = '', tokenSymbol, balance = '', fundFloat = '', decimals = '', owner = '', tokenId = i, icon, type = 'NATIVE', gateInfo = {} } = Object.assign({}, defaultTokenMap[i], balanceInfo[i] || {}, allToken[i] || {}, { gateInfo: { url: mapToken2Gate[i] && mapToken2Gate[i].url } });
+            return { totalAmount, tokenName, totalSupply, isReIssuable, tokenSymbol, balance, fundFloat, decimals, owner, tokenId, icon, type, gateInfo };
         });
         // force vite first
         const viteId = constant.Vite_TokenId;

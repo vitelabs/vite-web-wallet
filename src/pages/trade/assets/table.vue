@@ -10,20 +10,20 @@
             </div>
         </div>
         <div class="row-container">
-            <div class="row" v-for="token in list" :key="token.id">
+            <div class="row" v-for="token in list" :key="token.tokenId">
                 <div>{{ token.tokenSymbol }}</div>
                 <div>{{ token.total }}</div>
                 <div>{{ token.available }}</div>
                 <div>{{ token.lock || 0 }}</div>
                 <div>{{ token.worth }}</div>
                 <div>
-                    <span v-unlock-account @unlocked="recharge(token.id)"
+                    <span v-unlock-account @unlocked="recharge(token.tokenId)"
                           class="click-able">
                         {{ $t("tradeAssets.table.rowMap.recharge") }}</span>
-                    <span v-unlock-account @unlocked="withdraw(token.id)"
+                    <span v-unlock-account @unlocked="withdraw(token.tokenId)"
                           class="click-able">
                         {{ $t("tradeAssets.table.rowMap.withdraw") }}</span>
-                    <span @click="detail(token.id)" class="click-able">
+                    <span @click="detail(token.tokenId)" class="click-able">
                         {{ $t("tradeAssets.table.rowMap.detail") }}</span>
                 </div>
             </div>
@@ -137,7 +137,7 @@ export default {
                     lock: exB[t].lock,
                     balance: 0,
                     icon: '',
-                    id: t,
+                    tokenId: t,
                     tokenSymbol: exB[t].tokenInfo.tokenSymbol,
                     decimals: exB[t].tokenInfo.decimals
                 };
@@ -154,14 +154,14 @@ export default {
                     lock: 0,
                     balance: walletB[t].balance,
                     icon: walletB[t].icon,
-                    id: t,
+                    tokenId: t,
                     tokenSymbol: walletB[t].tokenSymbol,
                     decimals: walletB[t].decimals
                 };
             });
 
             Object.keys(res).forEach(t => {
-                res[t].icon = this.getTokenIcon(res[t].id);
+                res[t].icon = this.getTokenIcon(res[t].tokenId);
                 res[t].total = BigNumber.plus(res[t].available, res[t].lock, 8, 'nofix');
 
                 const rate = this.getRate(t);
