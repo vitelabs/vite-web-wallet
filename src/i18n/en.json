@@ -198,8 +198,8 @@
     "actionType": {
       "SEND": "发送",
       "RECEIVE": "接收",
-      "CHARGE": "充值",
-      "WITHDRAW": "提现"
+      "CHARGE": "跨链充值",
+      "WITHDRAW": "跨链提现"
     },
     "addToken": {
       "title": "添加代币",
@@ -241,7 +241,7 @@
       "amountPlaceholder": "请输入接收金额"
     },
     "charge": {
-      "title": "充值",
+      "title": "跨链充值",
       "addressTitle": "充值地址",
       "codeTips": "请扫描二维码充值,请使用支持{tokenSymbol}的钱包转账",
       "tips": [
@@ -251,7 +251,7 @@
       ]
     },
     "withdraw": {
-      "title": "提现",
+      "title": "跨链提现",
       "balanceErrMap": {
         "notEnough": "余额不足",
         "overMax": "提现金额需小于 {max}",
