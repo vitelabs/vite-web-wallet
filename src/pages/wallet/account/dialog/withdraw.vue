@@ -89,7 +89,7 @@ export default {
             });
         }, 500),
         withdrawAmount: debounce(function (val) {
-            this.withdrawAmountMin='';//重置从全部提现过来的数据。
+            this.withdrawAmountMin = '';// 重置从全部提现过来的数据。
             getWithdrawFee({ tokenId: this.token.tokenId, walletAddress: wallet.defaultAddr, amount: bigNumber.toMin(val, this.token.decimals) }, this.token.gateInfo.url).then(d => {
                 this.feeMin = d;
             });
