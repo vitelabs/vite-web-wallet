@@ -27,9 +27,9 @@
                 <span class="asset">{{asset}}</span>
             </div>
             <div class="token-tips-container">
-            <div class="token-tips" v-show="token.onroadNum">
-                {{ token.onroadNum }} {{ $t('wallet.pend') }}
-            </div>
+                <div class="token-tips" v-show="token.onroadNum">
+                    {{ token.onroadNum }} {{ $t('wallet.pend') }}
+                </div>
             </div>
         </div>
         <div class="bottom">
@@ -212,18 +212,18 @@ export default {
     }
 
     .token-tips-container{
-                height: 24px;
-
-    .token-tips {
-        background: rgba(0, 122, 255, 0.06);
-        margin-top: 16px;
-        font-size: 13px;
-        color: #5b638d;
-        padding-left: 30px;
         height: 24px;
-        line-height: 24px;
-    }
+
+        .token-tips {
+            background: rgba(0, 122, 255, 0.06);
+            margin-top: 16px;
+            font-size: 13px;
+            color: #5b638d;
+            padding-left: 30px;
+            height: 24px;
+            line-height: 24px;
         }
+    }
 }
 .bottom {
     background: linear-gradient(
