@@ -14,7 +14,7 @@ block content
     .tab-content(v-if="tabName==='tokenInfo'")
         .content__item.click-able-color
             .label {{$t("tokenCard.tokenInfo.labels.tokenId")}}
-            div {{token.tokenId}}
+            div(@click="goToTokenDetail") {{token.tokenId}}
         .content__item
             .label {{$t("tokenCard.tokenInfo.labels.address")}}
             div {{token.owner}}
@@ -30,6 +30,9 @@ block content
         .content__item
             .label {{$t("tokenCard.tokenInfo.labels.isReIssuable")}}
             div {{$t("tokenCard.tokenInfo.reIssuable")[token.isReIssuable]}}
+        .content__item
+            .label {{$t("tokenCard.tokenInfo.labels.time")}}
+            div
     .tab-content(v-if="tabName==='gate'")
         .content__item(v-if="token.type==='THIRD_GATE'")
             .label {{$t("tokenCard.gateInfo.officalNet")}}
@@ -37,7 +40,9 @@ block content
             .label {{$t("tokenCard.gateInfo.introduction")}}
         .content__item(v-if="token.type==='THIRD_GATE'")
             .label {{$t("tokenCard.gateInfo.token")}}
-        .content__item(v-if="token.type==='OFFICAL_GATE'||token.type==='THIRD_GATE'")
+        .content__item(v-if="token.type==='OFFICAL_GATE'")
+            .label {{$t("tokenCard.gateInfo.nodeDesc")}}
+        .content__item
             .label {{$t("tokenCard.gateInfo.setting")}}
             input.gate-url(:placeholder="$t('tokenCard.gateInfo.settingPlaceholder')" :disabled="token.type==='OFFICAL_GATE'" v-model="url")
 </template>
@@ -46,6 +51,7 @@ block content
 import { wallet } from 'utils/wallet';
 import { gateStorage, getChargeAddr } from 'services/gate';
 import getTokenIcon from 'utils/getTokenIcon';
+import {getExplorerLink} from 'utils/getLink';
 
 const tokenEnum = {
     GATE: 'gate',
@@ -91,6 +97,10 @@ export default {
         }
     },
     methods: {
+        goToTokenDetail(){
+            const l=`${getExplorerLink()}/token/${this.token.tokenId}`;
+            window.open(l)
+        },
         getIcon(id) {
             return getTokenIcon(id);
         },
