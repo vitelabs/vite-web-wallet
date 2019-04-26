@@ -2,7 +2,7 @@
     <div class="account-head-wrapper">
         <div class="head__item">
             <img class="icon" src="~assets/imgs/head_acc.png"/>
-            <div class="custom-name ">
+            <div class="head-right ">
                 <div class="head-title">
                     <span>{{ $t('accountName') }}</span>
                     <img
@@ -35,8 +35,8 @@
         </div>
         <div class="worth head__item">
             <img class="icon" src="~assets/imgs/head_asset.png" />
-            <div class="total-asset">
-                <div class="label">总资产</div>
+            <div class="head-right ">
+                <div class="head-title">总资产</div>
                 <div>{{totalAsset}}
                 </div>
             </div>
@@ -47,6 +47,7 @@
                 :title="$t('wallet.address')"
                 :address="account.addr"
                 :addressQrcode="addressStr"
+                style="color: #5E6875;"
             ></vite-address>
         </div>
 
@@ -219,7 +220,6 @@ export default {
     .head__item {
         border-right: 1px solid rgba(227, 235, 245, 0.6);
         display: flex;
-        justify-content: space-between;
         align-items: center;
         padding: 0 20px;
         flex-grow: 1;
@@ -228,68 +228,51 @@ export default {
             width: 34px;
             margin-right: 20px;
         }
-        &.worth{
-            justify-content: flex-start;
-            .total-asset{
+        .head-right{
+            font-size: 20px;
+            color: #1d2024;
+            text-align: left;
+            font-family: $font-bold, arial, sans-serif;
+            word-break: break-all;
+            .head-title {
                 display: flex;
-                flex-direction: column;
-                justify-content: space-between;
-                align-items: flex-start;
-                color: #1D2024;
-                .label{
-                    color: #5E6875;
-                    font-family: $font-bold;
+                align-items: center;
+                position: relative;
+                height: 20px;
+                line-height: 20px;
+                font-size: 14px;
+                letter-spacing: 0.35px;
+                padding-bottom: 10px;
+                font-family: $font-bold, arial, sans-serif;
+                color: #5E6875;
+                font-family: $font-bold;
+
+                .edit {
+                    display: inline-block;
+                    width: 20px;
+                    height: 20px;
+                    margin-left: 20px;
                 }
+            }
+            .name {
+                &.small-font {
+                    font-size: 20px;
+                    line-height: 26px;
+                }
+            }
+
+            input {
+                height: 32px;
+                line-height: 32px;
+                font-size: 20px;
+                width: 100%;
             }
         }
     }
-    .head-title {
-        position: relative;
-        display: block;
-        height: 20px;
-        line-height: 20px;
-        font-size: 14px;
-        letter-spacing: 0.35px;
-        padding-bottom: 24px;
-        font-family: $font-bold, arial, sans-serif;
-
-        .edit {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            margin-left: 20px;
-        }
-    }
-
     .addr-wrapper {
         display: inline-block;
         max-width: 510px;
         text-align: left;
-    }
-
-    .custom-name {
-        font-size: 24px;
-        color: #1d2024;
-        text-align: left;
-        font-family: $font-bold, arial, sans-serif;
-        word-break: break-all;
-
-        .name {
-            display: inline-block;
-            line-height: 32px;
-
-            &.small-font {
-                font-size: 20px;
-                line-height: 26px;
-            }
-        }
-
-        input {
-            height: 32px;
-            line-height: 32px;
-            font-size: 20px;
-            width: 100%;
-        }
     }
 
     .btn-group {

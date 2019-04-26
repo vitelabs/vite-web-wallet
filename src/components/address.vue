@@ -46,7 +46,10 @@ export default {
     border-radius: 2px;
     height: 24px;
     color: #283d4a;
-    padding: auto 8px;
+    padding: 4px 8px;
     line-height: 24px;
+    display: flex;
+    align-items: center;
+    margin: 5px auto;
 }
 </style>
