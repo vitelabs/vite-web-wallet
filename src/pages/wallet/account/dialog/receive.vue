@@ -5,7 +5,6 @@ block content
         span {{$t('tokenCard.receive.addressTitle')}}
         img.title_icon.copy.__pointer(src="~assets/imgs/copy_default.svg" @click="copy")
     .block__content {{address}}
-        // copyOK(ref="copyTpis")
     .block__title {{$t('tokenCard.receive.amountTitle')}}
         .err {{amountErr}}
     input.block__content.edit(v-model="amount" :placeholder="$t('tokenCard.receive.amountPlaceholder')")
