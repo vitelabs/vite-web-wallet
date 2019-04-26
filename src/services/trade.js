@@ -1,7 +1,4 @@
-// import { privToAddr, constant } from '@vite/vitejs';
-
 import request from 'utils/request';
-// import { wallet } from 'utils/wallet';
 
 const path = `${ process.env.dexApiServer }v1`;
 
