@@ -89,6 +89,7 @@ export default {
             });
         }, 500),
         withdrawAmount: debounce(function (val) {
+            this.withdrawAmountMin='';//重置从全部提现过来的数据。
             getWithdrawFee({ tokenId: this.token.tokenId, walletAddress: wallet.defaultAddr, amount: bigNumber.toMin(val, this.token.decimals) }, this.token.gateInfo.url).then(d => {
                 this.feeMin = d;
             });
@@ -113,7 +114,6 @@ export default {
             return getValidBalance({ balance: bigNumber.minus(this.token.totalAmount, this.feeMin), decimals: this.token.decimals, minNum: this.info.minimumWithdrawAmount, maxNum: this.info.maximumWithdrawAmount, errorMap })(val);
         },
         withdrawAll() {
-            debugger;
             if (this.token.totalAmount && bigNumber.compared(this.token.totalAmount, '0') > 0) {
                 getWithdrawFee({ tokenId: this.token.tokenId, walletAddress: wallet.defaultAddr, amount: this.token.totalAmount, containsFee: true }, this.token.gateInfo.url).then(fee => {
                     this.feeMin = fee;
