@@ -9,9 +9,11 @@ block content
     .qrcode-container
         .qrcode-container__title {{$t('tokenCard.charge.codeTips',{tokenSymbol:token.tokenSymbol})}}
         qrcode(:text="addressQrcode" :options="qrOptions" class="qrcode-container__content")
-    .charge-tips {{$t('tokenCard.charge.tips.0',{tokenSymbol:token.tokenSymbol,min:minimumDepositAmount})}}
+    .charge-tips {{$t('tokenCard.charge.tips.0',{tokenSymbol:token.tokenSymbol})}}
         .dot
-    .charge-tips {{$t('tokenCard.charge.tips.1')}}
+    .charge-tips {{$t('tokenCard.charge.tips.1',{tokenSymbol:token.tokenSymbol,min:minimumDepositAmount})}}
+        .dot
+    .charge-tips {{$t('tokenCard.charge.tips.2')}}
         .dot
 </template>
 

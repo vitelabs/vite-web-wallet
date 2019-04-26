@@ -51,7 +51,7 @@
             ></vite-address>
         </div>
 
-        <div class="btn-group">
+        <div class="btn-group head__item">
             <div
                 class="btn__small __pointer __btn-test"
                 @click="getTestToken"
@@ -213,7 +213,7 @@ export default {
     box-shadow: 0 2px 48px 1px rgba(176, 192, 237, 0.42);
     border-radius: 2px;
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: no-wrap;
     flex-direction: row;
     justify-content: space-between;
     height: 100px;
@@ -222,7 +222,6 @@ export default {
         display: flex;
         align-items: center;
         padding: 0 20px;
-        flex-grow: 1;
         .icon{
             height: 34px;
             width: 34px;
@@ -268,52 +267,59 @@ export default {
                 width: 100%;
             }
         }
+        &.worth{
+            flex-grow: 1;
+        }
+        &.btn-group {
+            padding: 0 ;
+            font-family: $font-normal, arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            .un_clickable {
+                background-color: #bfbfbf !important;
+                cursor: default !important;
+            }
+
+            .btn__small {
+                box-sizing: border-box;
+                text-align: center;
+                font-size: 14px;
+                flex-grow: 1;
+                width: 100%;
+                color: rgba(94,104,117,1);
+                display: flex;
+                justify-content: center;
+                padding-right: 30px;
+                align-items: center;
+                &:first-child{
+                    color: rgba(0,122,255,1);
+                    border-bottom: 1px solid rgba(227, 235, 245, 0.6);
+                }
+            }
+            .more-icon {
+                margin-left: 4px;
+                height: 10px;
+                width: 6px;
+            }
+        }
     }
     .addr-wrapper {
         display: inline-block;
         max-width: 510px;
         text-align: left;
     }
-
-    .btn-group {
-        width: 177px;
-        font-family: $font-normal-b, arial, sans-serif;
-        display: flex;
-        flex-direction: column;
-        .un_clickable {
-            background-color: #bfbfbf !important;
-            cursor: default !important;
-        }
-
-        .btn__small {
-            box-sizing: border-box;
-            text-align: center;
-            font-size: 14px;
-            flex-grow: 1;
-            width: 100%;
-            color: rgba(94,104,117,1);
-            display: flex;
-            justify-content: flex-end;
-            padding-right: 30px;
-            align-items: center;
-            &:first-child{
-                color: rgba(0,122,255,1);
-                border-bottom: 1px solid rgba(227, 235, 245, 0.6);
-            }
-        }
-        .more-icon {
-            margin-left: 4px;
-            height: 10px;
-            width: 6px;
-        }
-    }
 }
 
 @media only screen and (max-width: 640px) {
     .account-head-wrapper {
-        display: block;
+        display: flex;
+        flex-direction: column;
         padding: 15px;
-
+        height: unset;
+        .head__item{
+            border-right: none;
+            border-bottom: 1px solid rgba(227, 235, 245, 0.6);
+        }
         .head-title {
             padding-bottom: 15px;
 
@@ -321,38 +327,38 @@ export default {
                 float: right;
             }
         }
-    }
-
-    .account-head-wrapper .custom-name {
-        padding: 0;
-        width: 100%;
-        max-width: 100%;
-
-        input {
+        .custom-name {
+            padding: 0;
             width: 100%;
+            max-width: 100%;
+
+            input {
+                width: 100%;
+            }
         }
-    }
 
-    .account-head-wrapper .addr-wrapper {
-        padding: 0;
-        margin-top: 20px;
-        display: block;
-        width: 100%;
-        min-width: 0;
-
-        .addr-content {
-            padding: 10px;
-            line-height: 20px;
-        }
-    }
-
-    .account-head-wrapper .btn-group {
-        padding: 0;
-        margin-top: 20px;
-        width: 100%;
-
-        .btn__small {
+        .addr-wrapper {
+            padding: 0;
+            margin-top: 20px;
+            display: block;
             width: 100%;
+            min-width: 0;
+
+            .addr-content {
+                padding: 10px;
+                line-height: 20px;
+                height: unset;
+                min-height: 24px;
+            }
+        }
+
+        .btn-group {
+            padding: 0;
+            width: 100%;
+            .btn__small {
+                width: 100%;
+                margin-top: 10px;
+            }
         }
     }
 }

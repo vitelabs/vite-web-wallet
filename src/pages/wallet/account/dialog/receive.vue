@@ -56,7 +56,7 @@ export default {
         addressQrcode() {
             return utils.uriStringify({
                 target_address: this.address,
-                params: { amount: this.amount }
+                params: { amount: this.amount, tti: this.token.tokenId }
             });
         }
     }

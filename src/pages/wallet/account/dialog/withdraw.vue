@@ -4,9 +4,9 @@ block content
     .block__title {{$t("tokenCard.withdraw.labels.balance")}}
     .block__content.edit.space
         .token__title
-            img
-            .symbol {{token.balance||'0'}}
-        .right.blue {{token.tokenSymbol}}
+            img(:src="token.icon||getIcon(token.tokenId)")
+            .symbol {{token.tokenSymbol}}
+        .right.blue {{token.balance||'0'}}
     .block__title {{$t("tokenCard.withdraw.labels.address")}}
         .err {{isAddrCorrect?'':$t("tokenCard.withdraw.addressErr")}}
     input.block__content(v-model="withdrawAddr" :placehodler="$t('tokenCard.withdraw.addressPlaceholder')")
@@ -18,10 +18,10 @@ block content
     .block__title
         .tips-container {{$t("tokenCard.withdraw.labels.fee")}}
             i(class="tipsicon hoveraction" @click.self.stop="toggleTips")
-                tooltips(v-show="isFeeTipsShow" v-click-outside="hideTips" :content="'cghjvhhgvhgvghghgv'")
+                tooltips(v-show="isFeeTipsShow" v-click-outside="hideTips" :content="$t('tokenCard.withdraw.feeTips')" class="fee-tips")
     .block__content.edit.space
         div   {{$t("tokenCard.withdraw.labels.fee")}}
-        div {{(fee||'--')+token.tokenSymbol}}
+        div {{(fee||'--') }} <span class="light">{{token.tokenSymbol}}</span>
 </template>
 
 <script>
@@ -31,6 +31,7 @@ import { debounce } from 'lodash';
 import { getValidBalance } from 'utils/validations';
 import bigNumber from 'utils/bigNumber';
 import tooltips from 'components/tooltips';
+import getTokenIcon from 'utils/getTokenIcon';
 
 export default {
     components: { tooltips },
@@ -49,6 +50,7 @@ export default {
             },
             withdrawAddr: '',
             withdrawAmountMin: '',
+            withdrawAmount: '',
             feeMin: '',
             isAddrCorrect: true,
             dTitle: this.$t('tokenCard.withdraw.title'),
@@ -60,19 +62,14 @@ export default {
         getWithdrawInfo({ walletAddress: wallet.defaultAddr, tokenId: this.token.tokenId }, this.token.gateInfo.url).then(data => (this.info = data));
     },
     computed: {
-        withdrawAmount: {
-            get: function () {
-                return bigNumber.toBasic(this.withdrawAmountMin, this.token.decimals);
-            },
-            set: function (val) {
-                this.withdrawAmountMin = bigNumber.toMin(val, this.token.decimals);
-            }
-        },
         fee() {
             return bigNumber.toBasic(this.feeMin, this.token.decimals);
         },
         ammountErr() {
-            return this.validateAmount(bigNumber.plus(this.withdrawAmountMin, this.feeMin));
+            if (!this.withdrawAmount) {
+                return;
+            }
+            return this.validateAmount(this.withdrawAmount);
         },
         dBtnUnuse() {
             return this.ammountErr || !this.isAddrCorrect || !this.withdrawAmount || !this.withdrawAddr;
@@ -91,13 +88,16 @@ export default {
                 this.isAddrCorrect = d;
             });
         }, 500),
-        withdrawAmountMin: debounce(function (val) {
-            getWithdrawFee({ tokenId: this.token.tokenId, walletAddress: wallet.defaultAddr, amount: val }, this.token.gateInfo.url).then(d => {
+        withdrawAmount: debounce(function (val) {
+            getWithdrawFee({ tokenId: this.token.tokenId, walletAddress: wallet.defaultAddr, amount: bigNumber.toMin(val, this.token.decimals) }, this.token.gateInfo.url).then(d => {
                 this.feeMin = d;
             });
         }, 500)
     },
     methods: {
+        getIcon(id) {
+            return getTokenIcon(id);
+        },
         toggleTips() {
             this.isFeeTipsShow = !this.isFeeTipsShow;
         },
@@ -105,19 +105,26 @@ export default {
             this.isFeeTipsShow = false;
         },
         validateAmount(val) {
-            return getValidBalance({ balance: this.token.totalAmount, decimals: this.token.decimals, minNum: this.info.minimumWithdrawAmount, maxNum: this.info.maximumWithdrawAmount })(val);
+            const errorMap = {
+                notEnough: this.$t('tokenCard.withdraw.balanceErrMap.notEnough'),
+                overMax: this.$t('tokenCard.withdraw.balanceErrMap.overMax', { max: `${ bigNumber.toBasic(this.info.maximumWithdrawAmount, this.token.decimals) } ${ this.token.tokenSymbol }` }),
+                lessMin: this.$t('tokenCard.withdraw.balanceErrMap.lessMin', { min: `${ bigNumber.toBasic(this.info.minimumWithdrawAmount, this.token.decimals) } ${ this.token.tokenSymbol }` })
+            };
+            return getValidBalance({ balance: this.token.totalAmount, decimals: this.token.decimals, minNum: this.info.minimumWithdrawAmount, maxNum: this.info.maximumWithdrawAmount, errorMap })(val);
         },
         withdrawAll() {
+            debugger;
             if (this.token.totalAmount && bigNumber.compared(this.token.totalAmount, '0') > 0) {
                 getWithdrawFee({ tokenId: this.token.tokenId, walletAddress: wallet.defaultAddr, amount: this.token.totalAmount, containsFee: true }, this.token.gateInfo.url).then(fee => {
                     this.feeMin = fee;
                     this.withdrawAmountMin = bigNumber.minus(this.token.totalAmount, this.feeMin);
+                    this.withdrawAmount = bigNumber.toBasic(this.withdrawAmountMin, this.token.decimals);
                 });
             }
         },
         inspector() {
             return new Promise((res, rej) => {
-                withdraw({ amount: bigNumber.plus(this.withdrawAmountMin, this.feeMin, 0), withdrawAddress: this.withdrawAddr, gateAddr: this.info.gatewayAddress, tokenId: this.token.tokenId }, this.token.gateInfo.url)
+                withdraw({ amount: bigNumber.plus(this.withdrawAmountMin || bigNumber.toMin(this.withdrawAmount, this.token.decimals), this.feeMin, 0), withdrawAddress: this.withdrawAddr, gateAddr: this.info.gatewayAddress, tokenId: this.token.tokenId }, this.token.gateInfo.url)
                     .then(d => {
                         this.$toast(this.$t('tokenCard.withdraw.successTips'));
                         res(d);
@@ -142,7 +149,8 @@ export default {
     display: flex;
     justify-content: space-between;
     .err{
-        color: red;
+        color: #FF2929;
+        font-size: 12px;
     }
     &:first-child {
         margin-top: 0;
@@ -158,6 +166,8 @@ export default {
     }
     .hoveraction {
         &.tipsicon {
+            margin-left: 4px;
+            background-repeat: no-repeat;
             position: relative;
             display: inline-block;
             background: url(~assets/imgs/hover_help.svg);
@@ -166,6 +176,11 @@ export default {
             height: 16px;
             vertical-align: sub;
             cursor: pointer;
+            .fee-tips{
+                color: #5E6875;
+                min-width: 150px;
+                font-family: $font-normal;
+            }
         }
     }
 }
@@ -187,7 +202,11 @@ export default {
     input{
         width: 100%;
     }
+    .light{
+        color: #5E6875;
+    }
     .withdraw-all{
+        border-radius: 2px;
         background: #007AFF;
         color: #fff;
         cursor: pointer;
@@ -202,6 +221,12 @@ export default {
     .token__title{
         display: flex;
         justify-content: center;
+        align-items: center;
+        img{
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+        }
     }
     &.edit{
         text-align: left;
