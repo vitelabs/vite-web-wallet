@@ -1,7 +1,9 @@
 <template lang="pug">
 extends /components/dialog/base.pug
 block content
-    search(v-model="userInput" class="search-input" :placeholder="$t('tokenCard.addToken.placeholder')")
+    .search-container
+        img.search-icon(src="~assets/imgs/search_gray.png")
+        input(v-model="userInput" class="search-input" :placeholder="$t('tokenCard.addToken.placeholder')")
     .search-tips
         .search-tips__item(v-for="token in searchRes" :class="{active:selectedTokenIds.indexOf(token.tokenId)>=0}")
             input(type="checkbox" name="addTokenSelected" v-model="selectedTokenIds" :value="token.tokenId" )
@@ -59,10 +61,27 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.search-input{
-    width: 100%;
-    height: 50px;
+.search-container{
+    position:relative;
+    .search-input{
+        box-sizing:border-box;
+        width: 100%;
+        height: 50px;
+        padding-left:33px;
+        border-radius:2px 2px 0px 0px;
+        border:1px solid rgba(212,222,231,1);
+        font-size:14px;
+    }
+    .search-icon{
+        width:12px;
+        height:12px;
+        position:absolute;
+        left:15px;
+        top:50%;
+        transform:translateY(-50%);
+    }
 }
+
 .search-tips{
     max-height: 260px;
     overflow-y: scroll;

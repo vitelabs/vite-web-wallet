@@ -196,7 +196,7 @@ export default {
         }
         .click-able{
             color: #007AFF;
-            cursor:pointer;
+            cursor: pointer;
         }
     }
 }
