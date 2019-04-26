@@ -1,4 +1,4 @@
-import BigNumber from 'utils/bigNumber';
+import bigNumber from 'utils/bigNumber';
 import { timer } from 'utils/asyncFlow';
 import { wallet } from 'utils/wallet';
 import { defaultTokenMap, OFFICAL_GATE_NAME } from 'utils/constant';
@@ -66,7 +66,7 @@ const getters = {
 
             const tokenInfo = item.tokenInfo;
             const decimals = tokenInfo.decimals;
-            const balance = BigNumber.toBasic(item.totalAmount, decimals);
+            const balance = bigNumber.toBasic(item.totalAmount, decimals);
 
             balanceInfo[tokenId] = tokenInfo[tokenId] || {};
             balanceInfo[tokenId].tokenId = tokenId;
@@ -82,7 +82,7 @@ const getters = {
 
             const tokenInfo = item.tokenInfo;
             const decimals = tokenInfo.decimals;
-            const balance = BigNumber.toBasic(item.totalAmount, decimals);
+            const balance = bigNumber.toBasic(item.totalAmount, decimals);
 
             balanceInfo[tokenId] = balanceInfo[tokenId] || {};
             balanceInfo[tokenId].tokenId = balanceInfo[tokenId].tokenId || tokenInfo.tokenId;
@@ -135,7 +135,7 @@ const getters = {
         const allToken = rootGetters.allTokensMap;
         const mapToken2Gate = rootGetters.mapToken2Gate;
         const contains = [ ...getters.userStorageTokenList, ...getters.defaultTokenList, ...getters.officalGateTokenList ].map(t => t.tokenId);
-        return Object.keys(getters.balanceInfo).filter(i => contains.indexOf(i) === -1).map(i => {
+        return Object.keys(getters.balanceInfo).filter(i => !bigNumber.isEqual(getters.balanceInfo[i].totalAmount, 0) && contains.indexOf(i) === -1).map(i => {
             const { tokenName = '', totalAmount = '', totalSupply = '', isReIssuable = '', tokenSymbol, balance = '', fundFloat = '', decimals = '', owner = '', tokenId = i, icon, type = 'THIRD_GATE', gateInfo = {} } = Object.assign({}, balanceInfo[i] || {}, allToken[i] || {}, { gateInfo: { url: mapToken2Gate[i] && mapToken2Gate[i].url } });
             return { tokenName, totalAmount, totalSupply, isReIssuable, tokenSymbol, balance, fundFloat, decimals, owner, tokenId, icon, type, gateInfo };
         });
