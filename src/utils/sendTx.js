@@ -1,5 +1,6 @@
 import { utils } from '@vite/vitejs';
 import { wallet } from 'utils/wallet';
+import $ViteJS from 'utils/viteClient';
 import { powProcess } from 'components/pow/index';
 import { quotaConfirm } from 'components/quota/index';
 
@@ -10,8 +11,7 @@ const { isObject } = utils;
  *   pow: Boolean,
  *   powConfig? : { // 当 PoW 开启时生效
  *      isShowCancel: Boolean<true | false>,
- *      cancel: Function,
- *      difficulty: String
+ *      cancel: Function
  *   },
  *   confirm? : { // 当 PoW 关闭时生效
  *      showMask ?: Boolean<true | false>,
@@ -34,8 +34,7 @@ const { isObject } = utils;
             isShowCancel: true,
             cancel: () => {
                 this.closeTrans();
-            },
-            difficulty: SendDifficulty
+            }
         }
     }).then(() => {
         // normal tx successed
@@ -54,8 +53,7 @@ const defaultConfig = {
     pow: true,
     powConfig: {
         isShowCancel: true,
-        cancel: () => {},
-        difficulty: ''
+        cancel: () => {}
     },
     confirm: {
         showMask: true,
@@ -63,32 +61,63 @@ const defaultConfig = {
     }
 };
 
-export default function sendTx(method, data, config = defaultConfig) {
+export default async function sendTx(method, data, config = defaultConfig) {
     config = formatConfig(config);
     const event = new EventEmitter();
 
-    method(data).then(result => {
-        event.thenCb && event.thenCb(result);
-    }).catch(err => {
-        if (!err || !err.error || !err.error.code || err.error.code !== -35002) {
+    method(data).then(accountBlock => {
+        const checkParams = Object.assign({}, accountBlock, { usePledgeQuota: true });
+
+        $ViteJS.tx.calcPoWDifficulty(checkParams).then(checkResult => {
+            if (!checkResult.difficulty) {
+                const activeAccount = wallet.getActiveAccount();
+                try {
+                    const result = activeAccount.sendRawTx(accountBlock);
+                    event.thenCb && event.thenCb(result);
+                } catch (err) {
+                    event.catchCb && event.catchCb(err);
+                }
+                return;
+            }
+
+            if (config.pow) {
+                runPoW(accountBlock, config.powConfig, checkResult.difficulty, event);
+                return;
+            }
+
+            quotaConfirm(config.confirmConfig);
+            event.confirmAppearedCb && event.confirmAppearedCb(checkResult);
+        }).catch(err => {
             event.catchCb && event.catchCb(err);
             return;
-        }
-
-        if (config.pow) {
-            runPoW(err.accountBlock, config.powConfig, event);
-            return;
-        }
-
-        quotaConfirm(config.confirmConfig);
-        event.confirmAppearedCb && event.confirmAppearedCb(err);
+        });
+    }).catch(err => {
+        event.catchCb && event.catchCb(err);
+        return;
     });
+
+    // method(data).then(result => {
+    //     event.thenCb && event.thenCb(result);
+    // }).catch(err => {
+    //     if (!err || !err.error || !err.error.code || err.error.code !== -35002) {
+    //         event.catchCb && event.catchCb(err);
+    //         return;
+    //     }
+
+    //     if (config.pow) {
+    //         runPoW(err.accountBlock, config.powConfig, event);
+    //         return;
+    //     }
+
+    //     quotaConfirm(config.confirmConfig);
+    //     event.confirmAppearedCb && event.confirmAppearedCb(err);
+    // });
 
     return event;
 }
 
 
-async function runPoW(accountBlock, powConfig, event) {
+async function runPoW(accountBlock, powConfig, difficulty, event) {
     const activeAccount = wallet.getActiveAccount();
 
     if (!activeAccount
@@ -104,6 +133,7 @@ async function runPoW(accountBlock, powConfig, event) {
 
     powProcess({
         accountBlock,
+        difficulty,
         ...powConfig
     }).then(result => {
         if (event.powSuccessedCb) {

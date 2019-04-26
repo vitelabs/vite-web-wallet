@@ -1,5 +1,4 @@
 import { pwdConfirm } from 'components/password/index.js';
-import { getPowNonce } from 'services/pow';
 import { constant } from '@vite/vitejs';
 import acc from 'utils/storeAcc.js';
 
@@ -59,28 +58,15 @@ class account {
         this.pass = pass || '';
         this.name = checkName(name);
 
-        const receiveFail = async err => {
-            if (!err || !err.error || !err.error.code || err.error.code !== -35002 || !err.accountBlock) {
-                return Promise.reject(err);
-            }
-
-            const accountBlock = err.accountBlock;
-            const data = await getPowNonce(accountBlock.accountAddress, accountBlock.prevHash);
-            accountBlock.difficulty = data.difficulty;
-            accountBlock.nonce = data.nonce;
-
-            return this.sendRawTx(accountBlock);
-        };
-
         this.keystore = null;
         if (this.type === AccountType.keystore) {
             if (privateKey) {
-                this.account = new keystoreAcc({ keystore, privateKey, receiveFail });
+                this.account = new keystoreAcc({ keystore, privateKey });
             } else {
                 this.keystore = keystore;
             }
         } else if (this.type === AccountType.wallet) {
-            this.account = new walletAcc({ addrNum, defaultInx, mnemonic, encryptObj, receiveFail, lang });
+            this.account = new walletAcc({ addrNum, defaultInx, mnemonic, encryptObj, lang });
         } else if (this.type === AccountType.addr) {
             this.account = new addrAcc({ address, id, entropy });
         } else {
@@ -291,6 +277,13 @@ class account {
         }
 
         return this.account.balance;
+    }
+
+    get privateKey() {
+        if (this.account) {
+            return this.account.privateKey;
+        }
+        return null;
     }
 }
 

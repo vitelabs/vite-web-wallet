@@ -52,6 +52,8 @@
 </template>
 
 <script>
+import { constant } from '@vite/vitejs';
+
 import txQuotaImg from 'assets/imgs/txQuota.svg';
 import txRegImg from 'assets/imgs/txReg.svg';
 import txRewardImg from 'assets/imgs/txReward.svg';
@@ -68,33 +70,37 @@ import { timer } from 'utils/asyncFlow';
 import BigNumber from 'utils/bigNumber';
 import ellipsisAddr from 'utils/ellipsisAddr.js';
 
+const { BuiltinTxType } = constant;
+const txImgs = {
+    SBPreg: txRegImg,
+    UpdateReg: txRegImg,
+    RevokeReg: txRegImg,
+    RetrieveReward: txRewardImg,
+    Voting: txVoteImg,
+    RevokeVoting: txVoteImg,
+    GetQuota: txQuotaImg,
+    WithdrawalOfQuota: txQuotaImg,
+    Mintage: txTokenImg,
+    MintageIssue: txTokenImg,
+    MintageBurn: txTokenImg,
+    MintageTransferOwner: txTokenImg,
+    MintageChangeTokenType: txTokenImg,
+    MintageCancelPledge: txTokenImg,
+    DexFundUserDeposit: txVxImg,
+    DexFundUserWithdraw: txVxImg,
+    DexFundNewOrder: txVxImg,
+    DexTradeCancelOrder: txVxImg,
+    DexFundNewMarket: txVxImg,
+    CreateContractReq: txTransImg,
+    TxReq: txTransImg,
+    RewardReq: txTransImg,
+    TxRes: txTransImg,
+    TxResFail: txTransImg,
+    SendRefund: txTransImg,
+    GenesisReceive: txTransImg
+};
+
 let transListInst = null;
-const txImgs = [
-    txRegImg,
-    txRegImg,
-    txRegImg,
-    txRewardImg,
-    txVoteImg,
-    txVoteImg,
-    txQuotaImg,
-    txQuotaImg,
-    txTokenImg,
-    txTokenImg,
-    txTokenImg,
-    txTokenImg,
-    txTokenImg,
-    txQuotaImg,
-    txVxImg,
-    txVxImg,
-    txVxImg,
-    txVxImg,
-    txVxImg,
-    txTransImg,
-    txTransImg,
-    txTransImg,
-    txTransImg,
-    txTransImg
-];
 
 export default {
     components: { pagination, tableList, secTitle },
@@ -125,7 +131,9 @@ export default {
 
             transList.forEach(trans => {
                 const txType = !trans.rawData.txType && trans.rawData.txType !== 0 ? txImgs.length - 1 : trans.rawData.txType;
-                const typeImg = `<img class="icon" src='${ txImgs[txType] ? txImgs[txType] : txImgs[15] }'/>`;
+                const type = BuiltinTxType[txType];
+
+                const typeImg = `<img class="icon" src='${ txImgs[type] ? txImgs[type] : txTransImg }'/>`;
 
                 const status = [ 'unconfirmed', 'confirms', 'confirmed' ][trans.status];
                 const statusClass = status === 'confirmed' ? 'green'

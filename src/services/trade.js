@@ -1,9 +1,9 @@
+// import { privToAddr, constant } from '@vite/vitejs';
+
 import request from 'utils/request';
-import { wallet } from 'utils/wallet';
-import { privToAddr, constant } from '@vite/vitejs';
+// import { wallet } from 'utils/wallet';
 
 const path = `${ process.env.dexApiServer }v1`;
-const ViteId = constant.Vite_TokenId;
 
 export const klineHistory = function ({ from, to, ftoken, ttoken, resolution }) {
     return request({
@@ -146,59 +146,4 @@ export async function chargeDetail({ tokenId, address }) {
             address
         }
     });
-}
-
-export const deposit = async function ({ tokenId, amount }) {
-    return await wallet.getActiveAccount().callContract({
-        toAddress: constant.DexFund_Addr,
-        abi: constant.DexFundUserDeposit_Abi,
-        tokenId,
-        amount,
-        params: []
-    });
-};
-
-export const withdraw = async function ({ tokenId, amount }) {
-    return await wallet.getActiveAccount().callContract({
-        toAddress: constant.DexFund_Addr,
-        abi: constant.DexFundUserWithdraw_Abi,
-        params: [ tokenId, amount ],
-        tokenId,
-        amount: '0'
-    });
-};
-
-export const cancelOrder = async function ({ orderId, tradeToken, side, quoteToken }) {
-    return await wallet.getActiveAccount().callContract({
-        tokenId: tradeToken,
-        toAddress: constant.DexTrade_Addr,
-        abi: constant.DexTradeCancelOrder_Abi,
-        params: [ `0x${ Buffer.from(orderId, 'base64').toString('hex') }`, tradeToken, quoteToken, side ]
-    });
-};
-
-export const newOrder = function ({ tradeToken, quoteToken, side, price, quantity }) {
-    const orderId = getOrderId();
-
-    return wallet.getActiveAccount().callContract({
-        toAddress: constant.DexFund_Addr,
-        abi: constant.DexFundNewOrder_Abi,
-        params: [ `0x${ orderId }`, tradeToken, quoteToken, side, 0, price, quantity ],
-        tokenId: tradeToken
-    });
-};
-
-export const newMarket = function ({ tokenId = ViteId, amount, tradeToken, quoteToken }) {
-    return wallet.getActiveAccount().callContract({
-        toAddress: constant.DexFund_Addr,
-        abi: constant.DexFundNewMarket_Abi,
-        params: [ tradeToken, quoteToken ],
-        tokenId,
-        amount
-    });
-};
-
-
-function getOrderId() {
-    return privToAddr.newHexAddr().addr;
 }

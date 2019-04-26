@@ -4,11 +4,10 @@ import acc from 'utils/storeAcc.js';
 import $ViteJS from 'utils/viteClient';
 
 class keystoreAccount extends _account {
-    constructor({ keystore, privateKey, receiveFail }) {
+    constructor({ keystore, privateKey }) {
         super({ privateKey, client: $ViteJS });
 
         this.keystore = keystore;
-        this.receiveFail = receiveFail;
         this.unlockAcc = null;
     }
 
@@ -32,7 +31,7 @@ class keystoreAccount extends _account {
     }
 
     unlock(intervals) {
-        this.activate(intervals, this.receiveFail);
+        this.activate(intervals, true, true);
         this.unlockAcc = this;
 
         return true;

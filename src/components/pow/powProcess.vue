@@ -14,7 +14,7 @@
 
 <script>
 import loading from 'components/loading';
-import { getPowNonce } from 'services/pow';
+import $ViteJS from 'utils/viteClient';
 
 let processTimeout;
 let limitTimeout;
@@ -88,11 +88,8 @@ export default {
                 timtUpCb && timtUpCb();
             }, 1500);
 
-            const activeAccount = this.$wallet.getActiveAccount();
-            let data;
-
             try {
-                data = await getPowNonce(activeAccount.getDefaultAddr(), accountBlock.prevHash, difficulty);
+                accountBlock = await $ViteJS.getPowRawTx(accountBlock, difficulty);
             } catch (e) {
                 if (!isTimeUp) {
                     return new Promise((res, rej) => {
@@ -103,8 +100,7 @@ export default {
                 return Promise.reject(e, 0);
             }
 
-            accountBlock.difficulty = data.difficulty;
-            accountBlock.nonce = data.nonce;
+            const activeAccount = this.$wallet.getActiveAccount();
 
             if (isTimeUp) {
                 return this.sendRawTx(activeAccount, accountBlock);

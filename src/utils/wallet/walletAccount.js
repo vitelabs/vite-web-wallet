@@ -4,12 +4,11 @@ import acc from 'utils/storeAcc.js';
 import $ViteJS from 'utils/viteClient';
 
 class walletAccount extends _hdAccount {
-    constructor({ addrNum, defaultInx, mnemonic, bits, encryptObj, receiveFail, lang }) {
+    constructor({ addrNum, defaultInx, mnemonic, bits, encryptObj, lang }) {
         super({ client: $ViteJS, mnemonic, bits, addrNum, lang });
 
         this.defaultInx = defaultInx || 0;
         this.encryptObj = encryptObj || null;
-        this.receiveFail = receiveFail;
         this.unlockAcc = null;
     }
 
@@ -62,14 +61,22 @@ class walletAccount extends _hdAccount {
         this.lock();
         this.unlockAcc = this.activateAccount({ index: this.defaultInx }, {
             intervals,
+            duration: -1,
             autoPow: true,
-            duration: -1
+            usePledgeQuota: true
         });
         return !!this.unlockAcc;
     }
 
     lock() {
         this.unlockAcc && this.freezeAccount(this.unlockAcc);
+    }
+
+    get privateKey() {
+        if (this.unlockAcc) {
+            return this.unlockAcc.privateKey;
+        }
+        return null;
     }
 
     get balance() {

@@ -164,7 +164,7 @@ export default {
 
             amount = BigNumber.toMin(amount || 0, this.tokenInfo.decimals);
 
-            sendTx(this.activeAccount[type], {
+            sendTx(this.activeAccount.getBlock[type], {
                 tokenId: this.tokenInfo.tokenId,
                 toAddress,
                 amount
