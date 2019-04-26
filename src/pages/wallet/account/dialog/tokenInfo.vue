@@ -51,7 +51,7 @@ block content
 import { wallet } from 'utils/wallet';
 import { gateStorage, getChargeAddr } from 'services/gate';
 import getTokenIcon from 'utils/getTokenIcon';
-import {getExplorerLink} from 'utils/getLink';
+import { getExplorerLink } from 'utils/getLink';
 
 const tokenEnum = {
     GATE: 'gate',
@@ -97,9 +97,9 @@ export default {
         }
     },
     methods: {
-        goToTokenDetail(){
-            const l=`${getExplorerLink()}/token/${this.token.tokenId}`;
-            window.open(l)
+        goToTokenDetail() {
+            const l = `${ getExplorerLink() }/token/${ this.token.tokenId }`;
+            window.open(l);
         },
         getIcon(id) {
             return getTokenIcon(id);
