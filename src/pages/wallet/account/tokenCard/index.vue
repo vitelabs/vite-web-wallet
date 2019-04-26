@@ -87,7 +87,7 @@ export default {
     },
     computed: {
         showUnbind() {
-            return this.token.type === 'THIRD_GATE' && (!this.token.balance || bigNumber.isEqual(this.token.balance, '0'));
+            return this.token.type === 'THIRD_GATE' && (!this.token.totalAmount || bigNumber.isEqual(this.token.totalAmount, '0'));
         },
         address() {
             return wallet.activeWalletAcc && wallet.activeWalletAcc.getDefaultAddr();
