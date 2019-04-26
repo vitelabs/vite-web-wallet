@@ -36,7 +36,7 @@
 import Vue from 'vue';
 import viteAddress from 'components/address';
 import { stringify } from 'utils/viteSchema';
-import { getTestToken } from 'services/testToken';
+import $ViteJS from 'utils/viteClient';
 
 let activeAccount = null;
 
@@ -84,7 +84,7 @@ export default {
             }
 
             this.getTestTokenAble = false;
-            getTestToken(this.account.addr).then(() => {
+            $ViteJS.testapi.getTestToken(this.account.addr).then(() => {
                 this.$toast(this.$t('wallet.hint.token'));
                 setTimeout(() => {
                     this.getTestTokenAble = true;

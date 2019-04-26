@@ -60,7 +60,8 @@ import viteInput from 'components/viteInput';
 import getTokenIcon from 'utils/getTokenIcon';
 import BigNumber from 'utils/bigNumber';
 import sendTx from 'utils/sendTx';
-import { newMarket, marketsReserve } from 'services/trade';
+import { marketsReserve } from 'services/trade';
+import { newMarket } from 'services/block';
 
 const spend = 10000;
 const currentFetchMarket = null;

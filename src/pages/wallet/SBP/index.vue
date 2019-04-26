@@ -210,7 +210,7 @@ export default {
             this.activeAccount = this.$wallet.getActiveAccount();
             const toAmount = BigNumber.toMin(amount || 0, this.tokenInfo.decimals);
 
-            return this.activeAccount[type]({
+            return this.activeAccount.getBlock[type]({
                 tokenId: this.tokenInfo.tokenId,
                 nodeName: nodeName || this.activeItem.name,
                 amount: toAmount,

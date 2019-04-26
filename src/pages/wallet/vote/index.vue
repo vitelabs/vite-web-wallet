@@ -75,8 +75,6 @@ import BigNumber from 'utils/bigNumber';
 import $ViteJS from 'utils/viteClient';
 import sendTx from 'utils/sendTx';
 
-const VoteDifficulty = '201564160';
-
 export default {
     components: { secTitle, tooltips, search, loading, confirm },
     beforeMount() {
@@ -181,10 +179,7 @@ export default {
             const sendCancel = () => {
                 activeAccount = this.$wallet.getActiveAccount();
 
-                sendTx(activeAccount.revokeVoting, { tokenId: this.tokenInfo.tokenId }, {
-                    pow: true,
-                    powConfig: { difficulty: VoteDifficulty }
-                }).then(successCancel).catch(failCancel);
+                sendTx(activeAccount.getBlock.revokeVoting, { tokenId: this.tokenInfo.tokenId }, { pow: true }).then(successCancel).catch(failCancel);
             };
 
             activeAccount.initPwd({
@@ -222,15 +217,12 @@ export default {
             const sendVote = () => {
                 activeAccount = this.$wallet.getActiveAccount();
 
-                sendTx(activeAccount.voting, {
+                sendTx(activeAccount.getBlock.voting, {
                     nodeName: v.name,
                     tokenId: this.tokenInfo.tokenId
                 }, {
                     pow: true,
-                    powConfig: {
-                        isShowCancel: false,
-                        difficulty: VoteDifficulty
-                    }
+                    powConfig: { isShowCancel: false }
                 }).then(successVote).catch(failVote);
             };
 

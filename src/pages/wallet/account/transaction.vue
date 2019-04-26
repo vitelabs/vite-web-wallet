@@ -55,7 +55,6 @@ import BigNumber from 'utils/bigNumber';
 import sendTx from 'utils/sendTx';
 
 const { getBytesSize } = utils;
-const SendDifficulty = '157108864';
 
 export default {
     components: { confirm, viteInput },
@@ -207,7 +206,7 @@ export default {
                 this.$toast(msg, err);
             };
 
-            sendTx(activeAccount.sendTx, {
+            sendTx(activeAccount.getBlock.asyncSendTx, {
                 toAddress: this.inAddress,
                 tokenId: this.token.id,
                 amount,
@@ -218,8 +217,7 @@ export default {
                     isShowCancel: true,
                     cancel: () => {
                         this.closeTrans();
-                    },
-                    difficulty: SendDifficulty
+                    }
                 }
             }).then(() => {
                 this.loading = false;

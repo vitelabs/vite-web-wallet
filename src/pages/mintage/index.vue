@@ -87,7 +87,7 @@
 import viteInput from 'components/viteInput';
 import tableList from 'components/tableList.vue';
 import sendTx from 'utils/sendTx';
-import $ViteJS from 'utils/viteClient';
+import { mintage } from 'services/block';
 
 export default {
     components: { viteInput, tableList },
@@ -119,8 +119,7 @@ export default {
             this.ownerBurnOnly = ownerBurnOnly;
         },
         mintage() {
-            const activeAccount = this.$wallet.getActiveAccount();
-            sendTx(activeAccount.mintage, {
+            sendTx(mintage, {
                 decimals: this.decimals,
                 isReIssuable: this.isReIssuable,
                 maxSupply: this.maxSupply,
@@ -137,13 +136,12 @@ export default {
         getOwnerToken() {
             const activeAccount = this.$wallet.getActiveAccount();
 
-            $ViteJS.mintage.getTokenInfoListByOwner(activeAccount.getDefaultAddr())
-                .then(data => {
-                    this.tokenList = data;
-                }).catch(err => {
-                    console.warn(err);
-                    this.$toast('Get list failed');
-                });
+            activeAccount.getTokenInfoListByOwner().then(data => {
+                this.tokenList = data;
+            }).catch(err => {
+                console.warn(err);
+                this.$toast('Get list failed');
+            });
         }
     }
 };

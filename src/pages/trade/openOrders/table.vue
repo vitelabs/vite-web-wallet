@@ -36,7 +36,8 @@
 import d from 'dayjs';
 import sendTx from 'utils/sendTx';
 import { subTask } from 'utils/proto/subTask';
-import { order, cancelOrder } from 'services/trade';
+import { order } from 'services/trade';
+import { cancelOrder } from 'services/block';
 
 const VoteDifficulty = '201564160';
 let task = null;
