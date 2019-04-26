@@ -19,10 +19,10 @@ export default function (VueRouter) {
             return;
         }
 
-        if (!from.name && to.name !== 'trade') {
-            router.replace({ name: 'trade' });
-            return;
-        }
+        // if (!from.name && to.name !== 'trade') {
+        //     router.replace({ name: 'trade' });
+        //     return;
+        // }
 
         if (loginRoutes.indexOf(to.name) >= 0 && !wallet.isLogin) {
             (to.name !== 'start') && wallet.setLastPage(to.name);
