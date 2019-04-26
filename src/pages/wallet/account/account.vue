@@ -133,7 +133,6 @@ export default {
         align-items: center;
         justify-content: center;
         cursor: pointer;
-        height: 190px;
         img{
             height: 50px;
             width: 50px;

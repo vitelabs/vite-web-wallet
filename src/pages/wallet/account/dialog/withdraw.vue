@@ -110,7 +110,7 @@ export default {
                 overMax: this.$t('tokenCard.withdraw.balanceErrMap.overMax', { max: `${ bigNumber.toBasic(this.info.maximumWithdrawAmount, this.token.decimals) } ${ this.token.tokenSymbol }` }),
                 lessMin: this.$t('tokenCard.withdraw.balanceErrMap.lessMin', { min: `${ bigNumber.toBasic(this.info.minimumWithdrawAmount, this.token.decimals) } ${ this.token.tokenSymbol }` })
             };
-            return getValidBalance({ balance: this.token.totalAmount, decimals: this.token.decimals, minNum: this.info.minimumWithdrawAmount, maxNum: this.info.maximumWithdrawAmount, errorMap })(val);
+            return getValidBalance({ balance: bigNumber.minus(this.token.totalAmount,this.feeMin), decimals: this.token.decimals, minNum: this.info.minimumWithdrawAmount, maxNum: this.info.maximumWithdrawAmount, errorMap })(val);
         },
         withdrawAll() {
             debugger;
