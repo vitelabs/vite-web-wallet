@@ -12,9 +12,9 @@ block head
         .tab__item(v-if="token.type!=='NATIVE'" @click="tabClick('gate')" :class="{active:tabName==='gate'}") {{$t("tokenCard.gateInfo.tabName")}}
 block content
     .tab-content(v-if="tabName==='tokenInfo'")
-        .content__item.click-able-color
+        .content__item
             .label {{$t("tokenCard.tokenInfo.labels.tokenId")}}
-            div(@click="goToTokenDetail") {{token.tokenId}}
+            div.click-able(@click="goToTokenDetail") {{token.tokenId}}
         .content__item
             .label {{$t("tokenCard.tokenInfo.labels.address")}}
             div {{token.owner}}
@@ -194,8 +194,9 @@ export default {
             margin-right: 6px;
             word-break: keep-all;
         }
-        .click-able-color{
+        .click-able{
             color: #007AFF;
+            cursor:pointer;
         }
     }
 }
