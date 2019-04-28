@@ -317,7 +317,7 @@ export default {
         flex-direction: column;
         padding: 15px;
         height: unset;
-        min-width:unset;
+        min-width: unset;
         .head__item{
             border-right: none;
             border-bottom: 1px solid rgba(227, 235, 245, 0.6);
