@@ -87,7 +87,6 @@
 import viteInput from 'components/viteInput';
 import tableList from 'components/tableList.vue';
 import sendTx from 'utils/sendTx';
-import { mintage } from 'services/block';
 
 export default {
     components: { viteInput, tableList },
@@ -119,7 +118,7 @@ export default {
             this.ownerBurnOnly = ownerBurnOnly;
         },
         mintage() {
-            sendTx(mintage, {
+            sendTx('mintage', {
                 decimals: this.decimals,
                 isReIssuable: this.isReIssuable,
                 maxSupply: this.maxSupply,

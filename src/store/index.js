@@ -7,7 +7,10 @@ import pledgeStore from './pledge';
 import SBPStore from './SBP';
 import ledgerStore from './ledger';
 import envVariableStore from './envVariable';
-import exchange from './exchange/index';
+
+// [TODO] Recover trade==============
+// import exchange from './exchange/index';
+// ================================
 
 Vue.use(vuex);
 
@@ -20,12 +23,15 @@ store.registerModule('SBP', SBPStore);
 store.registerModule('ledger', ledgerStore);
 store.registerModule('env', envVariableStore);
 
-for (const moduleName in exchange) {
-    store.registerModule(moduleName, exchange[moduleName]);
-}
+// [TODO] Recover trade ==============
+// for (const moduleName in exchange) {
+//     store.registerModule(moduleName, exchange[moduleName]);
+// }
+// ===============================
 
 store.dispatch('onNetStatus');
-store.dispatch('updateMarketMap');
+// [TODO] Recover trade ==============
+// store.dispatch('updateMarketMap');
 store.dispatch('startLoopHeight');
 store.dispatch('getDefaultTokenList');
 

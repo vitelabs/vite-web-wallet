@@ -180,7 +180,6 @@ export default {
             if (!this.password) {
                 this.$toast(this.$t('startCreate.input'), 'error');
                 this.focusPass();
-
                 return;
             }
 
@@ -193,6 +192,7 @@ export default {
                 const activeAccount = this.$wallet.getActiveAccount();
                 activeAccount.unlock();
 
+                // [TODO] Recover trade: jump to trade ?
                 this.$router.push({ name: this.$wallet.lastPage || 'wallet' });
                 this.$wallet.clearLastPage();
             };

@@ -54,7 +54,7 @@ const actions = {
                 }
 
                 const operate = nodeNameList[nodeName].operate;
-                const isCancel = item.cancelHeight && !BigNumber.isEqual(item.cancelHeight, 0);
+                const isCancel = item.cancelTime && !BigNumber.isEqual(item.cancelTime, 0);
                 switch (operate) {
                 // Cancel
                 case 0:
@@ -97,7 +97,7 @@ const getters = {
     regNameList(state) {
         const list = [];
         state.registrationList.forEach(item => {
-            const isCancel = item.cancelHeight && !BigNumber.isEqual(item.cancelHeight, 0);
+            const isCancel = item.cancelTime && !BigNumber.isEqual(item.cancelTime, 0);
             !isCancel && list.push(item.name);
         });
 
@@ -106,7 +106,7 @@ const getters = {
     regAddrList(state) {
         const list = {};
         state.registrationList.forEach(item => {
-            const isCancel = item.cancelHeight && !BigNumber.isEqual(item.cancelHeight, 0);
+            const isCancel = item.cancelTime && !BigNumber.isEqual(item.cancelTime, 0);
             list[item.name] = list[item.name] || [];
             list[item.name].push({
                 nodeAddr: item.nodeAddr,

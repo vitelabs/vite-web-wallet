@@ -103,7 +103,7 @@ export default {
                 return false;
             }
 
-            const limitAmt = 1000;
+            const limitAmt = 134;
             const cancelBalance = BigNumber.minus(this.activeAmountLimit, this.cancelAmount);
             if (BigNumber.compared(cancelBalance, limitAmt) < 0
                  && !BigNumber.isEqual(cancelBalance, 0)) {
@@ -160,11 +160,9 @@ export default {
                 return;
             }
 
-            this.activeAccount = this.$wallet.getActiveAccount();
-
             amount = BigNumber.toMin(amount || 0, this.tokenInfo.decimals);
 
-            sendTx(this.activeAccount.getBlock[type], {
+            sendTx(type, {
                 tokenId: this.tokenInfo.tokenId,
                 toAddress,
                 amount
@@ -179,7 +177,6 @@ export default {
                     cb && cb(true);
                 })
                 .powFailed(err => {
-                    console.warn(err);
                     this.closeConfirm();
                     cb && cb(false, err);
                 });

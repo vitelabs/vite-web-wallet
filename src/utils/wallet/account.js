@@ -81,11 +81,9 @@ class account {
     }
 
     checkFunc() {
-        const funcName = [ 'sendRawTx', 'sendTx', 'receiveTx',
-            'SBPreg', 'updateReg', 'revokeReg', 'retrieveReward',
-            'voting', 'revokeVoting', 'getQuota', 'withdrawalOfQuota',
-            'createContract', 'callContract', 'mintage',
-            'mintageIssue', 'mintageBurn', 'changeTokenType', 'changeTransferOwner', 'mintageCancelPledge' ];
+        const funcName = [
+            'sendRawTx', 'sendTx', 'receiveTx', 'sendPowTx'
+        ];
 
         funcName.forEach(name => {
             this[name] = (...args) => {

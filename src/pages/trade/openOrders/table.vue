@@ -37,7 +37,6 @@ import d from 'dayjs';
 import sendTx from 'utils/sendTx';
 import { subTask } from 'utils/proto/subTask';
 import { order } from 'services/trade';
-import { cancelOrder } from 'services/block';
 
 const VoteDifficulty = '201564160';
 let task = null;
@@ -247,7 +246,7 @@ export default {
                 submitTxt: this.$t('tradeOpenOrders.confirm.submitTxt'),
                 cancelTxt: this.$t('tradeOpenOrders.confirm.cancelTxt'),
                 submit: () => {
-                    sendTx(cancelOrder, {
+                    sendTx('dexTradeCancelOrder', {
                         orderId: order.orderId,
                         tradeToken: order.ftoken,
                         side: order.side,

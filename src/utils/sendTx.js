@@ -1,6 +1,6 @@
 import { utils } from '@vite/vitejs';
 import { wallet } from 'utils/wallet';
-import $ViteJS from 'utils/viteClient';
+// import $ViteJS from 'utils/viteClient';
 import { powProcess } from 'components/pow/index';
 import { quotaConfirm } from 'components/quota/index';
 
@@ -23,7 +23,7 @@ const { isObject } = utils;
 /**
  * For example
  *
- * sendTx(activeAccount.sendTx, {
+ * sendTx('asyncSendTx', {
         toAddress: this.inAddress,
         tokenId: this.token.id,
         amount,
@@ -41,7 +41,7 @@ const { isObject } = utils;
     }).powStarted(() => {
         // pow start
     }).powSuccessed(() => {
-        // pow td successed
+        // pow tx successed
     }).powFailed((err, type) => {
         // pow failed
     }).catch(err => {
@@ -61,95 +61,92 @@ const defaultConfig = {
     }
 };
 
-export default async function sendTx(method, data, config = defaultConfig) {
+export default function sendTx(methodName, data, config = defaultConfig) {
     config = formatConfig(config);
+
     const event = new EventEmitter();
+    const activeAccount = wallet.getActiveAccount();
 
-    method(data).then(accountBlock => {
-        const checkParams = Object.assign({}, accountBlock, { usePledgeQuota: true });
+    let powInstance = null;
 
-        $ViteJS.tx.calcPoWDifficulty(checkParams).then(checkResult => {
-            if (!checkResult.difficulty) {
-                const activeAccount = wallet.getActiveAccount();
-                try {
-                    const result = activeAccount.sendRawTx(accountBlock);
-                    event.thenCb && event.thenCb(result);
-                } catch (err) {
-                    event.catchCb && event.catchCb(err);
-                }
-                return;
+    activeAccount.sendPowTx({
+        methodName,
+        params: [data],
+        beforePow: (accountBlock, checkPowResult, next) => {
+            const activeAccount = wallet.getActiveAccount();
+            if (!activeAccount
+                || activeAccount.getDefaultAddr() !== accountBlock.accountAddress) {
+                return Promise.reject({
+                    code: '1000000',
+                    message: `${ accountBlock.accountAddress } is expired.`
+                });
             }
 
             if (config.pow) {
-                runPoW(accountBlock, config.powConfig, checkResult.difficulty, event);
-                return;
+                powInstance = powProcess({ ...config.powConfig });
+                event.powStartedCb && event.powStartedCb();
+                return next();
             }
 
             quotaConfirm(config.confirmConfig);
-            event.confirmAppearedCb && event.confirmAppearedCb(checkResult);
-        }).catch(err => {
-            event.catchCb && event.catchCb(err);
+            event.confirmAppearedCb && event.confirmAppearedCb(checkPowResult);
+            return Promise.reject({
+                code: '1000001',
+                message: 'Don\'t need pow, already show confirm.'
+            });
+        },
+        beforeSendTx: (accountBlock, checkPowResult, next) => {
+            if (!checkPowResult || !checkPowResult.difficulty) {
+                return next();
+            }
+
+            if (!powInstance || !powInstance.isShow) {
+                return Promise.reject();
+            }
+
+            return new Promise((res, rej) => {
+                powInstance.stopCount(() => {
+                    next().then(result => {
+                        res(result);
+                    }).catch(err => {
+                        rej(err);
+                    });
+                });
+            });
+        }
+    }).then(result => {
+        if (!powInstance) {
+            event.thenCb && event.thenCb(result);
             return;
+        }
+
+        powInstance.gotoFinish(() => {
+            event.powFinishedCb && event.powFinishedCb(result);
+
+            if (event.powSuccessedCb) {
+                event.powSuccessedCb(result);
+                return;
+            }
+            event.thenCb && event.thenCb(result);
         });
     }).catch(err => {
-        event.catchCb && event.catchCb(err);
-        return;
+        if (!powInstance) {
+            event.catchCb && event.catchCb(err);
+            return;
+        }
+
+        powInstance.gotoFinish(() => {
+            event.powFinishedCb && event.powFinishedCb(err);
+
+            if (event.powFailedCb) {
+                event.powFailedCb(err);
+                return;
+            }
+            event.catchCb && event.catchCb(err);
+        });
     });
-
-    // method(data).then(result => {
-    //     event.thenCb && event.thenCb(result);
-    // }).catch(err => {
-    //     if (!err || !err.error || !err.error.code || err.error.code !== -35002) {
-    //         event.catchCb && event.catchCb(err);
-    //         return;
-    //     }
-
-    //     if (config.pow) {
-    //         runPoW(err.accountBlock, config.powConfig, event);
-    //         return;
-    //     }
-
-    //     quotaConfirm(config.confirmConfig);
-    //     event.confirmAppearedCb && event.confirmAppearedCb(err);
-    // });
 
     return event;
-}
-
-
-async function runPoW(accountBlock, powConfig, difficulty, event) {
-    const activeAccount = wallet.getActiveAccount();
-
-    if (!activeAccount
-        || activeAccount.getDefaultAddr() !== accountBlock.accountAddress) {
-        event.catchCb && event.catchCb({
-            code: '1000000',
-            message: `${ accountBlock.accountAddress } is expired.`
-        });
-        return;
-    }
-
-    event.powStartedCb && event.powStartedCb();
-
-    powProcess({
-        accountBlock,
-        difficulty,
-        ...powConfig
-    }).then(result => {
-        if (event.powSuccessedCb) {
-            event.powSuccessedCb(result);
-        } else {
-            event.thenCb && event.thenCb(result);
-        }
-        event.powFinishedCb && event.powFinishedCb(result);
-    }).catch((...args) => {
-        if (event.powFailedCb) {
-            event.powFailedCb(...args);
-        } else {
-            event.catchCb && event.catchCb(...args);
-        }
-        event.powFinishedCb && event.powFinishedCb(...args);
-    });
 }
 
 

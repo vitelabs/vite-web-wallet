@@ -69,7 +69,6 @@ import BigNumber from 'utils/bigNumber';
 import getTokenIcon from 'utils/getTokenIcon';
 import { timer } from 'utils/asyncFlow';
 import { chargeDetail, rateToken, tokenDetail } from 'services/trade';
-import { deposit, withdraw } from 'services/block';
 import viteInput from 'components/viteInput';
 import confirm from 'components/confirm.vue';
 import alert from '../components/alert.vue';
@@ -337,12 +336,12 @@ export default {
                 cancelTxt: this.$t('tradeAssets.pwdConfirm.cancelTxt'),
                 submit: () => {
                     c.type === 'recharge'
-                        ? sendTx(deposit, { tokenId, amount }, config)
+                        ? sendTx('dexFundUserDeposit', { tokenId, amount }, config)
                             .then(successSubmit)
                             .catch(e => {
                                 failSubmit(e);
                             })
-                        : sendTx(withdraw, { tokenId, amount }, config)
+                        : sendTx('dexFundUserWithdraw', { tokenId, amount }, config)
                             .then(successSubmit)
                             .catch(e => {
                                 failSubmit(e);

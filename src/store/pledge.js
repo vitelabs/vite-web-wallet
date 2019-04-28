@@ -28,8 +28,8 @@ const mutations = {
         state.totalNum = payload.totalCount || 0;
     },
     commitQuota(state, payload) {
-        state.quotaAmount = payload.quota;
-        state.pledgeTransNum = payload.txNum;
+        state.quotaAmount = payload.current;
+        state.pledgeTransNum = payload.utps;
     },
     commitClearPledge(state) {
         // Amount data

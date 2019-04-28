@@ -54,7 +54,7 @@ import viteInput from 'components/viteInput';
 import BigNumber from 'utils/bigNumber';
 
 const amountTimeout = null;
-const minNum = 1000;
+const minNum = 134;
 
 export default {
     components: { viteInput },
@@ -206,7 +206,6 @@ export default {
                 this.loading = false;
                 if (!result) {
                     err && this.$toast(this.$t('walletQuota.pledgeFail'), err);
-
                     return;
                 }
 

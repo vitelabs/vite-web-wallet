@@ -14,7 +14,7 @@
 
 <script>
 import loading from 'components/loading';
-import $ViteJS from 'utils/viteClient';
+import { setTimeout } from 'timers';
 
 let processTimeout;
 let limitTimeout;
@@ -34,7 +34,9 @@ export default {
     data() {
         return {
             processNum: 0,
-            isShow: false
+            isShow: false,
+            isTimeUp: false,
+            timtUpCb: null
         };
     },
     destroyed() {
@@ -51,7 +53,7 @@ export default {
             limitTimeout = null;
         },
 
-        startCount() {
+        going() {
             const addProcessNum = () => {
                 this.clearProcessTimeout();
                 if (this.processNum >= 99) {
@@ -65,9 +67,14 @@ export default {
             };
             addProcessNum();
         },
-        gotoFinish() {
+        gotoFinish(cb) {
             this.clearProcessTimeout();
             this.processNum = 100;
+
+            setTimeout(() => {
+                this.isShow = false;
+                cb && cb();
+            }, 1000);
         },
         _cancel() {
             this.clearProcessTimeout();
@@ -75,66 +82,26 @@ export default {
             this.cancel && this.cancel();
         },
 
-        async startPowTx(accountBlock, startTime, difficulty) {
+        startCount() {
             this.isShow = true;
-            this.startCount();
-
-            let isTimeUp = false;
-            let timtUpCb = null;
+            this.isTimeUp = false;
+            this.going();
 
             this.clearLimitTimeout();
             limitTimeout = setTimeout(() => {
-                isTimeUp = true;
-                timtUpCb && timtUpCb();
-            }, 1500);
-
-            try {
-                accountBlock = await $ViteJS.getPowRawTx(accountBlock, difficulty);
-            } catch (e) {
-                if (!isTimeUp) {
-                    return new Promise((res, rej) => {
-                        timtUpCb = () => rej(e, 0);
-                    });
-                }
-                this.isShow = false;
-                return Promise.reject(e, 0);
-            }
-
-            const activeAccount = this.$wallet.getActiveAccount();
-
-            if (isTimeUp) {
-                return this.sendRawTx(activeAccount, accountBlock);
-            }
-
-            return new Promise((res, rej) => {
-                timtUpCb = () => {
-                    const p = this.sendRawTx(activeAccount, accountBlock);
-                    p && p.then((...args) => {
-                        res(...args);
-                    }).catch((...args) => {
-                        rej(...args);
-                    });
-                };
-            });
+                this.isTimeUp = true;
+                this.timtUpCb && this.timtUpCb();
+            }, 10000);
         },
 
-        sendRawTx(activeAccount, accountBlock) {
-            if (!this.isShow) {
-                return;
+        stopCount(next) {
+            if (this.isTimeUp) {
+                return next();
             }
-            return new Promise((res, rej) => {
-                this.gotoFinish();
-                setTimeout(() => {
-                    this.isShow = false;
-                    activeAccount.sendRawTx(accountBlock).then(data => {
-                        this.isShow = false;
-                        res(data);
-                    }).catch(e => {
-                        this.isShow = false;
-                        rej(e, 1);
-                    });
-                }, 1000);
-            });
+
+            const _next = () => next(!this.isShow);
+            this.timtUpCb = _next;
+            return _next;
         }
     }
 };
