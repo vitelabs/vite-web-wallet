@@ -73,6 +73,8 @@ export default function sendTx(methodName, data, config = defaultConfig) {
         methodName,
         params: [data],
         beforePow: (accountBlock, checkPowResult, next) => {
+            console.log('[beforePow]');
+
             const activeAccount = wallet.getActiveAccount();
             if (!activeAccount
                 || activeAccount.getDefaultAddr() !== accountBlock.accountAddress) {
@@ -96,9 +98,13 @@ export default function sendTx(methodName, data, config = defaultConfig) {
             });
         },
         beforeSendTx: (accountBlock, checkPowResult, next) => {
+            console.log('[beforeSendTx]');
+
             if (!checkPowResult || !checkPowResult.difficulty) {
                 return next();
             }
+
+            console.log('[beforeSendTx] powInstance.isShow', powInstance.isShow);
 
             if (!powInstance || !powInstance.isShow) {
                 return Promise.reject();
@@ -106,6 +112,10 @@ export default function sendTx(methodName, data, config = defaultConfig) {
 
             return new Promise((res, rej) => {
                 powInstance.stopCount(() => {
+                    if (!powInstance || !powInstance.isShow) {
+                        return rej();
+                    }
+
                     next().then(result => {
                         res(result);
                     }).catch(err => {
