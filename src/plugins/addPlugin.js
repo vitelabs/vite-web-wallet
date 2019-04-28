@@ -23,7 +23,11 @@ export default {
                 if (!code || code !== _code) {
                     return;
                 }
-                cb && cb();
+                e.preventDefault();
+                if (cb) {
+                    return cb();
+                }
+                return false;
             };
             return lastEvent;
         };
