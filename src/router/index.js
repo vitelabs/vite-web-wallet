@@ -15,7 +15,7 @@ export default function (VueRouter) {
         // Windows APP
         if (!to.name && to.path) {
             const arr = to.path.split('/');
-            router.replace({ name: arr[ arr.length - 1 ] || 'trade' });
+            router.replace({ name: arr[ arr.length - 1 ] || 'wallet' });
             return;
         }
 

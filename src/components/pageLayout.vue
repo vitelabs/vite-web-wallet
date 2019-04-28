@@ -64,9 +64,9 @@ export default {
     },
     computed: {
         secondMenuList() {
-            if (this.active.indexOf('trade') === 0) {
-                return [ 'trade', 'tradeAssets', 'tradeOpenOrders', 'tradeOrderHistory' ];
-            }
+            // if (this.active.indexOf('trade') === 0) {
+            //     return [ 'trade', 'tradeAssets', 'tradeOpenOrders', 'tradeOrderHistory' ];
+            // }
             if (this.active.indexOf('wallet') !== 0) {
                 return [];
             }
@@ -87,7 +87,7 @@ export default {
         go(name) {
             if (name === 'logout') {
                 this.$wallet.logout();
-                this.$router.push({ name: 'trade' });
+                this.$router.push({ name: 'wallet' });
                 return;
             }
 

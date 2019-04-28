@@ -1,6 +1,7 @@
 <template>
     <div class="exchange-center-wrapper">
-        <center v-if="active === 'trade'"></center>
+        敬请期待
+        <!-- <center v-if="active === 'trade'"></center>
         <div class="order" v-if="active === 'trade'">
             <div class="ex-tab-list">
                 <div @click="tap='openOrder'"
@@ -28,7 +29,7 @@
                               pageSize: 10,
                               paging: 0 }">
             </historyOrder>
-        </div>
+        </div> -->
         <router-view></router-view>
     </div>
 </template>
