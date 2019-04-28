@@ -5,7 +5,6 @@ block content
         span {{$t('tokenCard.charge.addressTitle')}}
         img.title_icon.copy.__pointer(src="~assets/imgs/copy_default.svg" @click="copy")
     .block__content {{address}}
-        // copyOK(ref="copyOk")
     .qrcode-container
         .qrcode-container__title {{$t('tokenCard.charge.codeTips',{tokenSymbol:token.tokenSymbol})}}
         qrcode(:text="addressQrcode" :options="qrOptions" class="qrcode-container__content")
@@ -19,14 +18,13 @@ block content
 
 <script>
 import qrcode from 'components/qrcode';
-import copyOK from 'components/copyOK';
 import copy from 'utils/copy';
 import { modes } from 'qrcode.es';
 import { getChargeAddr, getChargeInfo } from 'services/gate';
 import bigNumber from 'utils/bigNumber';
 import { wallet } from 'utils/wallet';
 export default {
-    components: { qrcode, copyOK },
+    components: { qrcode },
     props: {
         token: {
             type: Object,
@@ -52,7 +50,7 @@ export default {
     methods: {
         copy() {
             copy(this.address);
-            // this.$refs.copyOk.copyOk();
+            this.$toast(this.$t('hint.copy'))
         }
     },
     computed: {
