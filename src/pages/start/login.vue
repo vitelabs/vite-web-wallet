@@ -193,7 +193,7 @@ export default {
                 const activeAccount = this.$wallet.getActiveAccount();
                 activeAccount.unlock();
 
-                this.$router.push({ name: this.$wallet.lastPage || 'trade' });
+                this.$router.push({ name: this.$wallet.lastPage || 'wallet' });
                 this.$wallet.clearLastPage();
             };
 

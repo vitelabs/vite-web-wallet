@@ -6,4 +6,4 @@
  * }
  */
 
-module.exports = { trade: { alias: '/index' } };
+module.exports = { wallet: { alias: '/index' } };
