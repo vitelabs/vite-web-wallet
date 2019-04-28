@@ -5,9 +5,6 @@ import powProcessComponent from './powProcess.vue';
 const PowProcessComponent = Vue.extend(powProcessComponent);
 
 export function powProcess({
-    accountBlock,
-    startTime,
-    difficulty,
     cancel = () => {},
     isShowCancel = true
 }) {
@@ -35,5 +32,6 @@ export function powProcess({
     powProcessInstance.isShowCancel = isShowCancel;
     appEl.appendChild(powProcessInstance.$el);
 
-    return powProcessInstance.startPowTx(accountBlock, startTime, difficulty);
+    powProcessInstance.startCount();
+    return powProcessInstance;
 }

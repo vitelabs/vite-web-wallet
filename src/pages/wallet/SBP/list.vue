@@ -25,8 +25,10 @@
                 <div class="__tb_cell operate">
                     <span v-if="!item.isCancel" class="btn __pointer"
                           v-unlock-account @unlocked="edit(item)">{{ $t('btn.edit') }}</span>
-                    <span v-if="item.isCancel" class="btn __pointer"
-                          v-unlock-account @unlocked="reg(item)">{{ $t('btn.reReg') }}</span>
+                    <span v-if="item.isCancel" class="btn" :class="{
+                        '__pointer': item.isReReg,
+                        'unuse': !item.isReReg
+                    }" v-unlock-account @unlocked="reg(item, true)">{{ $t('btn.reReg') }}</span>
                     <span v-if="!item.isCancel" class="btn" :class="{
                         '__pointer': item.isMaturity,
                         'unuse': !item.isMaturity
@@ -50,7 +52,7 @@ import ellipsisAddr from 'utils/ellipsisAddr.js';
 import BigNumber from 'utils/bigNumber';
 import sendTx from 'utils/sendTx';
 
-const amount = 500000;
+const amount = 100000;
 
 export default {
     components: { tooltips },
@@ -65,7 +67,7 @@ export default {
                 return {};
             }
         },
-        sendTx: {
+        getParams: {
             type: Function,
             default: () => {}
         }
@@ -102,6 +104,9 @@ export default {
         currentHeight() {
             return this.$store.state.ledger.currentHeight || 0;
         },
+        netStatus() {
+            return this.$store.state.env.clientStatus;
+        },
         list() {
             if (!this.tokenInfo || !this.tokenInfo.tokenId) {
                 return [];
@@ -114,13 +119,17 @@ export default {
 
             registrationList.forEach(item => {
                 const isMaturity = BigNumber.compared(item.withdrawHeight, this.currentHeight) <= 0;
-                const isCancel = item.cancelHeight && !BigNumber.isEqual(item.cancelHeight, 0);
+                const isCancel = item.cancelTime && !BigNumber.isEqual(item.cancelTime, 0);
+                const isReReg = isCancel
+                    ? (new Date().getTime() - item.cancelTime * 1000) > 75000
+                    : false;
                 const addr = ellipsisAddr(item.nodeAddr, 6);
 
                 const day = date(item.withdrawTime * 1000, this.$i18n.locale);
                 list.push({
                     isMaturity,
                     isCancel,
+                    isReReg,
                     name: item.name,
                     nodeAddr: addr,
                     pledgeAmount: `${ BigNumber.toBasic(item.pledgeAmount, decimals) } ${ this.tokenInfo.tokenSymbol }`,
@@ -149,7 +158,12 @@ export default {
             const nodeName = rawData.name;
             const producerAddr = rawData.nodeAddr;
 
-            sendTx(this.sendTx, { producerAddr, amount, nodeName, type: 'SBPreg' }, {
+            if (!this.netStatus) {
+                this.$toast(this.$t('hint.noNet'));
+                return;
+            }
+
+            sendTx('SBPreg', this.getParams({ producerAddr, amount, nodeName }), {
                 pow: false,
                 confirm: {
                     showMask: true,
@@ -168,7 +182,11 @@ export default {
                 this.$toast(this.$t('walletSBP.section1.registerFail'), err);
             });
         },
-        reg(item) {
+        reg(item, isReReg) {
+            if (isReReg && !item.isReReg) {
+                return;
+            }
+
             if (this.amountErr) {
                 this.$toast(this.amountErr);
                 return;
@@ -196,7 +214,7 @@ export default {
                     const nodeName = item.rawData.name;
                     const producer = item.rawData.nodeAddr;
 
-                    sendTx(this.sendTx, { nodeName, type: 'revokeReg' }, {
+                    sendTx('revokeReg', this.getParams({ nodeName }), {
                         pow: false,
                         confirm: {
                             showMask: true,
@@ -223,16 +241,28 @@ export default {
             this.showConfirm('edit', item.rawData);
         },
         reward(item) {
-            console.log(item);
-            // this.activeAccount.initPwd({
-            //     title: this.$t('walletSBP.confirm.title'),
-            //     submitTxt: this.$t('walletSBP.confirm.rightBtn'),
-            //     cancelTxt: this.$t('walletSBP.confirm.leftBtn'),
-            //     content: this.$t('walletSBP.confirm.describe', { amount }),
-            //     submit: () => {
-            //         this.sendRegisterTx(item);
-            //     }
-            // }, true);
+            this.activeAccount.initPwd({
+                title: this.$t('walletSBP.rewardConfirm.title'),
+                submitTxt: this.$t('walletSBP.rewardConfirm.rightBtn'),
+                cancelTxt: this.$t('walletSBP.rewardConfirm.leftBtn'),
+                content: this.$t('walletSBP.rewardConfirm.describe', { amount }),
+                submit: () => {
+                    sendTx('retrieveReward', {
+                        nodeName: item.rawData.name,
+                        toAddress: this.address
+                    }, {
+                        pow: false,
+                        confirm: {
+                            showMask: true,
+                            operate: this.$t('walletSBP.cancel')
+                        }
+                    }).then(() => {
+                        this.$toast(this.$t('hint.request', { name: '奖励' }));
+                    }).catch(err => {
+                        this.$toast('奖励失败', err);
+                    });
+                }
+            }, true);
         }
     }
 };

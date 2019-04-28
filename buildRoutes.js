@@ -61,6 +61,12 @@ traversing('./src/pages/', (fPath, next, val) => {
         return;
     }
 
+    // [TODO] Recover trade: delete====================
+    if (name.indexOf('trade') !== -1 && name !== 'trade') {
+        return;
+    }
+    // ================================================
+
     pushRoute(fPath, tmpPath, name, nList[0]);
 });
 

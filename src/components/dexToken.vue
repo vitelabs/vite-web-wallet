@@ -61,7 +61,6 @@ import getTokenIcon from 'utils/getTokenIcon';
 import BigNumber from 'utils/bigNumber';
 import sendTx from 'utils/sendTx';
 import { marketsReserve } from 'services/trade';
-import { newMarket } from 'services/block';
 
 const spend = 10000;
 const currentFetchMarket = null;
@@ -230,7 +229,7 @@ export default {
                 this.close();
             };
 
-            sendTx(newMarket, {
+            sendTx('dexFundNewMarket', {
                 amount: BigNumber.toMin(spend, this.viteTokenInfo.decimals),
                 tradeToken: this.token.token,
                 quoteToken: this.market.token

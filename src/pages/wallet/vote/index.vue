@@ -179,7 +179,7 @@ export default {
             const sendCancel = () => {
                 activeAccount = this.$wallet.getActiveAccount();
 
-                sendTx(activeAccount.getBlock.revokeVoting, { tokenId: this.tokenInfo.tokenId }, { pow: true }).then(successCancel).catch(failCancel);
+                sendTx('revokeVoting', { tokenId: this.tokenInfo.tokenId }, { pow: true }).then(successCancel).catch(failCancel);
             };
 
             activeAccount.initPwd({
@@ -217,12 +217,9 @@ export default {
             const sendVote = () => {
                 activeAccount = this.$wallet.getActiveAccount();
 
-                sendTx(activeAccount.getBlock.voting, {
+                sendTx('voting', {
                     nodeName: v.name,
                     tokenId: this.tokenInfo.tokenId
-                }, {
-                    pow: true,
-                    powConfig: { isShowCancel: false }
                 }).then(successVote).catch(failVote);
             };
 

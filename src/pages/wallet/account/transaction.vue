@@ -206,7 +206,9 @@ export default {
                 this.$toast(msg, err);
             };
 
-            sendTx(activeAccount.getBlock.asyncSendTx, {
+            console.log('???');
+
+            sendTx('asyncSendTx', {
                 toAddress: this.inAddress,
                 tokenId: this.token.id,
                 amount,

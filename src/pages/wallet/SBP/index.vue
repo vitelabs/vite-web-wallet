@@ -6,13 +6,13 @@
 
         <div v-if="!loadingToken" class="section">
             <div class="title">{{ $t('walletSBP.section1.title') }}</div>
-            <register :tokenInfo="tokenInfo" :canUseAddr="canUseAddr" :sendTx="sendTx" class="content"></register>
+            <register :tokenInfo="tokenInfo" :canUseAddr="canUseAddr" :getParams="getParams" class="content"></register>
         </div>
 
         <div v-if="!loadingToken" class="section">
             <div class="title">{{ $t('walletSBP.section2.title') }}</div>
             <div class="list-content content">
-                <list :showConfirm="showConfirm" :tokenInfo="tokenInfo" :sendTx="sendTx"></list>
+                <list :showConfirm="showConfirm" :tokenInfo="tokenInfo" :getParams="getParams"></list>
             </div>
         </div>
 
@@ -175,10 +175,12 @@ export default {
             const nodeName = this.activeItem.name;
             const producer = this.addr;
 
-            sendTx(this.sendTx, {
-                producerAddr: producer,
-                type: 'updateReg'
-            }, {
+            if (!this.netStatus) {
+                this.$toast(this.$t('hint.noNet'));
+                return;
+            }
+
+            sendTx('updateReg', this.getParams({ producerAddr: producer }), {
                 pow: false,
                 confirm: {
                     showMask: true,
@@ -201,21 +203,16 @@ export default {
             });
         },
 
-        sendTx({ producerAddr, nodeName, amount, type }) {
-            if (!this.netStatus) {
-                this.$toast(this.$t('hint.noNet'));
-                return Promise.reject(false);
-            }
-
+        getParams({ producerAddr, nodeName, amount }) {
             this.activeAccount = this.$wallet.getActiveAccount();
             const toAmount = BigNumber.toMin(amount || 0, this.tokenInfo.decimals);
 
-            return this.activeAccount.getBlock[type]({
+            return {
                 tokenId: this.tokenInfo.tokenId,
                 nodeName: nodeName || this.activeItem.name,
                 amount: toAmount,
                 toAddress: producerAddr || ''
-            });
+            };
         }
     }
 };

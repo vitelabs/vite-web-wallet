@@ -1,6 +1,7 @@
 <template>
     <div class="exchange-center-wrapper">
         敬请期待
+        <!-- [TODO] Recover trade -->
         <!-- <center v-if="active === 'trade'"></center>
         <div class="order" v-if="active === 'trade'">
             <div class="ex-tab-list">
@@ -30,75 +31,77 @@
                               paging: 0 }">
             </historyOrder>
         </div> -->
-        <router-view></router-view>
+        <!-- <router-view></router-view> -->
     </div>
 </template>
 
 <script>
-import center from './center/center.vue';
-import historyOrder from './orderHistory';
-import openOrder from './openOrders';
+// [TODO] Recover trade
 
-export default {
-    components: {
-        center,
-        openOrder,
-        historyOrder
-    },
-    mounted() {
-        this.$store.dispatch('startLoopExchangeRate');
+// import center from './center/center.vue';
+// import historyOrder from './orderHistory';
+// import openOrder from './openOrders';
 
-        this.$router.afterEach(to => {
-            this.active = to.name;
-        });
+// export default {
+//     components: {
+//         center,
+//         openOrder,
+//         historyOrder
+//     },
+//     mounted() {
+//         this.$store.dispatch('startLoopExchangeRate');
 
-        this.isLogin = !!this.$wallet.isLogin;
-        this.getBalance();
-        this.$wallet.onLogin(() => {
-            this.isLogin = true;
-        });
-        this.$wallet.onLogout(() => {
-            this.isLogin = false;
-        });
-    },
-    destroyed() {
-        this.$store.dispatch('stopLoopExchangeBalance');
-        this.$store.dispatch('stopLoopExchangeRate');
-    },
-    data() {
-        return {
-            tap: 'openOrder',
-            active: this.$route.name,
-            tabList: [
-                'trade',
-                'tradeAssets',
-                'tradeOpenOrders',
-                'tradeOrderHistory'
-            ],
-            isLogin: !!this.$wallet.isLogin
-        };
-    },
-    computed: {
-        activeTxPair() {
-            return this.$store.state.exchangeActiveTxPair.activeTxPair || {};
-        }
-    },
-    watch: {
-        isLogin: function () {
-            this.getBalance();
-        }
-    },
-    methods: {
-        getBalance() {
-            const activeAccount = this.$wallet.getActiveAccount();
-            if (!activeAccount) {
-                return;
-            }
-            const addr = activeAccount.getDefaultAddr();
-            this.$store.dispatch('startLoopExchangeBalance', addr);
-        }
-    }
-};
+//         this.$router.afterEach(to => {
+//             this.active = to.name;
+//         });
+
+//         this.isLogin = !!this.$wallet.isLogin;
+//         this.getBalance();
+//         this.$wallet.onLogin(() => {
+//             this.isLogin = true;
+//         });
+//         this.$wallet.onLogout(() => {
+//             this.isLogin = false;
+//         });
+//     },
+//     destroyed() {
+//         this.$store.dispatch('stopLoopExchangeBalance');
+//         this.$store.dispatch('stopLoopExchangeRate');
+//     },
+//     data() {
+//         return {
+//             tap: 'openOrder',
+//             active: this.$route.name,
+//             tabList: [
+//                 'trade',
+//                 'tradeAssets',
+//                 'tradeOpenOrders',
+//                 'tradeOrderHistory'
+//             ],
+//             isLogin: !!this.$wallet.isLogin
+//         };
+//     },
+//     computed: {
+//         activeTxPair() {
+//             return this.$store.state.exchangeActiveTxPair.activeTxPair || {};
+//         }
+//     },
+//     watch: {
+//         isLogin: function () {
+//             this.getBalance();
+//         }
+//     },
+//     methods: {
+//         getBalance() {
+//             const activeAccount = this.$wallet.getActiveAccount();
+//             if (!activeAccount) {
+//                 return;
+//             }
+//             const addr = activeAccount.getDefaultAddr();
+//             this.$store.dispatch('startLoopExchangeBalance', addr);
+//         }
+//     }
+// };
 </script>
 
 <style lang="scss" scoped>

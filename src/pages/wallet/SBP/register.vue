@@ -75,7 +75,7 @@ export default {
                 return {};
             }
         },
-        sendTx: {
+        getParams: {
             type: Function,
             default: () => {}
         },
@@ -225,7 +225,7 @@ export default {
             const nodeName = this.nodeName;
             const producerAddr = this.producerAddr;
 
-            sendTx(this.sendTx, { producerAddr, amount, nodeName, type: 'SBPreg' }, {
+            sendTx('SBPreg', this.getParams({ producerAddr, amount, nodeName }), {
                 pow: false,
                 confirm: {
                     showMask: true,
@@ -245,6 +245,10 @@ export default {
             }).catch(err => {
                 console.warn(err);
                 this.loading = false;
+
+                if (err && err.code && err.code === '1000001') {
+                    return;
+                }
                 this.$toast(this.$t('walletSBP.section1.registerFail'), err);
             });
         }
