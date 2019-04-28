@@ -12,9 +12,10 @@ const Buffer_Path = path.join(__dirname, '../node_modules/buffer/index.js');
 
 const goViteServer = {
     production: '\'wss://testnet.vitewallet.com/ws\'',
-    test: '\'wss://testnet.vitewallet.com/test/ws\'',
-    dev: '\'ws://148.70.30.139:41423\'',
+    // test: '\'wss://testnet.vitewallet.com/test/ws\'',
     // dev: '\'wss://testnet.vitewallet.com/test/ws\'',
+    test: '\'ws://148.70.30.139:41423\'',
+    dev: '\'ws://148.70.30.139:41423\'',
     dexTestNet: '\'wss://testnet.vitewallet.com/beta/ws\''
 };
 const viteNet = {
