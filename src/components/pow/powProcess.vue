@@ -77,6 +77,7 @@ export default {
             }, 1000);
         },
         _cancel() {
+            console.log('cancel');
             this.clearProcessTimeout();
             this.isShow = false;
             this.cancel && this.cancel();

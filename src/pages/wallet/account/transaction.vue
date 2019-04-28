@@ -206,8 +206,6 @@ export default {
                 this.$toast(msg, err);
             };
 
-            console.log('???');
-
             sendTx('asyncSendTx', {
                 toAddress: this.inAddress,
                 tokenId: this.token.id,
@@ -229,6 +227,9 @@ export default {
                 this.isShowTrans = false;
             })
                 .powFailed((err, type) => {
+                    if (!err && !type) {
+                        return;
+                    }
                     console.warn(type, err);
 
                     if (type === 0) {

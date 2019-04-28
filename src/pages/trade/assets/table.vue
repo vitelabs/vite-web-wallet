@@ -73,7 +73,6 @@ import viteInput from 'components/viteInput';
 import confirm from 'components/confirm.vue';
 import alert from '../components/alert.vue';
 
-const VoteDifficulty = '201564160';
 const loopTime = 2 * 60 * 60 * 1000;
 let rateTimer = null;
 
@@ -325,23 +324,18 @@ export default {
                 this.$toast(this.$t(`tradeAssets.confirm${ c.type }.successToast`));
             };
 
-            const config = {
-                pow: true,
-                powConfig: { difficulty: VoteDifficulty }
-            };
-
             this.closeNumConfirm();
             this.acc.initPwd({
                 submitTxt: this.$t(`tradeAssets.table.rowMap.${ c.type }`),
                 cancelTxt: this.$t('tradeAssets.pwdConfirm.cancelTxt'),
                 submit: () => {
                     c.type === 'recharge'
-                        ? sendTx('dexFundUserDeposit', { tokenId, amount }, config)
+                        ? sendTx('dexFundUserDeposit', { tokenId, amount })
                             .then(successSubmit)
                             .catch(e => {
                                 failSubmit(e);
                             })
-                        : sendTx('dexFundUserWithdraw', { tokenId, amount }, config)
+                        : sendTx('dexFundUserWithdraw', { tokenId, amount })
                             .then(successSubmit)
                             .catch(e => {
                                 failSubmit(e);

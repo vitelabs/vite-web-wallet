@@ -1172,11 +1172,15 @@
     "@types/unist" "*"
     "@types/vfile-message" "*"
 
-"@vite/vitejs-ws@/Users/sisi/workspace/vite.js/packages/WS":
-  version "2.1.0-alpha.1"
+"@vite/vitejs-ws@2.1.0-alpha.2":
+  version "2.1.0-alpha.2"
+  resolved "https://registry.yarnpkg.com/@vite/vitejs-ws/-/vitejs-ws-2.1.0-alpha.2.tgz#9c5bac19d9c332813eaf5e4bb64e636b54998fa2"
+  integrity sha512-DB096H+UY6CfQQrgDEjNrScdPhCOGStlxSV2D2uwJg4CdZwTe5hoQ9Jq0KF22TAf2Y/bwZGf2OWqz/SGsqS6Ow==
 
-"@vite/vitejs@file:../vite.js/packages/vitejs":
-  version "2.1.0-alpha.1"
+"@vite/vitejs@2.1.0-alpha.2":
+  version "2.1.0-alpha.2"
+  resolved "https://registry.yarnpkg.com/@vite/vitejs/-/vitejs-2.1.0-alpha.2.tgz#a481132d19f4230c75be5c9a07306b24cb63f0ab"
+  integrity sha512-e3U/GcsGIeqlEY3SwsW3gu/bCh8KPZLhIVl59uutTXWn2eyG5leoz9chfx4iIx6KhL+8M7AZWGUkwb7aLcuQFw==
 
 "@vue/component-compiler-utils@^2.5.1":
   version "2.6.0"

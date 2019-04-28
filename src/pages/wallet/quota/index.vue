@@ -166,6 +166,13 @@ export default {
                 tokenId: this.tokenInfo.tokenId,
                 toAddress,
                 amount
+            }, {
+                pow: true,
+                powConfig: {
+                    cancel: () => {
+                        cb && cb(false);
+                    }
+                }
             }).then(() => {
                 cb && cb(true);
             }).catch(err => {

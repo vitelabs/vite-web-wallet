@@ -38,7 +38,6 @@ import sendTx from 'utils/sendTx';
 import { subTask } from 'utils/proto/subTask';
 import { order } from 'services/trade';
 
-const VoteDifficulty = '201564160';
 let task = null;
 
 export default {
@@ -235,11 +234,6 @@ export default {
                 this.$toast(this.$t('tradeOpenOrders.confirm.successToast'));
             };
 
-            const config = {
-                pow: true,
-                powConfig: { difficulty: VoteDifficulty }
-            };
-
             this.acc.initPwd({
                 title: this.$t('tradeOpenOrders.confirm.title'),
                 content: this.$t('tradeOpenOrders.confirm.content'),
@@ -251,7 +245,7 @@ export default {
                         tradeToken: order.ftoken,
                         side: order.side,
                         quoteToken: order.ttoken
-                    }, config)
+                    })
                         .then(successSubmit)
                         .catch(err => {
                             const code = err && err.error ? err.error.code || -1
