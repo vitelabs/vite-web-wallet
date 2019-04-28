@@ -42,7 +42,7 @@ export default {
     methods: {
         copy() {
             copy(this.address);
-            this.$toast(this.$t('hint.copy'))
+            this.$toast(this.$t('hint.copy'));
         }
     },
     computed: {
