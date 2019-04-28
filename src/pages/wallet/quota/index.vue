@@ -96,14 +96,16 @@ export default {
             }
 
             const isEqualBalance = BigNumber.compared(this.cancelAmount, this.activeAmountLimit);
+            const limitAmt = 134;
 
-            if (BigNumber.isEqual(this.cancelAmount, 0) || isEqualBalance > 0) {
-                this.amountErr = this.$t('walletQuota.maxAmt', { amount: this.activeAmountLimit });
-
+            if (BigNumber.isEqual(this.cancelAmount, limitAmt) || isEqualBalance > 0) {
+                this.amountErr = this.$t('walletQuota.maxAmt', {
+                    minAmount: limitAmt,
+                    maxAmount: this.activeAmountLimit
+                });
                 return false;
             }
 
-            const limitAmt = 134;
             const cancelBalance = BigNumber.minus(this.activeAmountLimit, this.cancelAmount);
             if (BigNumber.compared(cancelBalance, limitAmt) < 0
                  && !BigNumber.isEqual(cancelBalance, 0)) {
