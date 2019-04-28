@@ -24,7 +24,8 @@ export default function request({
     path,
     params = {},
     timeout = reqTimeout,
-    afterResponse = afterResponseDefault
+    afterResponse = afterResponseDefault,
+    headers = {}
 }) {
     method = method.toUpperCase();
 
@@ -37,6 +38,9 @@ export default function request({
         : (path = `${ path }${ qsStr }`));
     xhr.open(method, path, true);
     xhr.setRequestHeader('content-type', 'application/json; charset=utf-8');
+    Object.keys(headers).forEach(k => {
+        xhr.setRequestHeader(k, headers[k]);
+    });
     xhr.timeout = timeout;
 
     if (method === 'POST') {
@@ -66,18 +70,17 @@ export default function request({
     });
 }
 
-export const getClient = function (baseUrl = '', afterResponse) {
-    return function ({ method = 'GET', path, params = {}, timeout = reqTimeout, host }) {
+export const getClient = function (baseUrl = '', afterResponse, headersBase = {}) {
+    return function ({ method = 'GET', path, params = {}, timeout = reqTimeout, host, headers = {} }) {
         host = host || baseUrl;
         host.slice(-1) === '/' && (host = host.slice(0, -1));
         path.indexOf('/') === 0 && (path = path.splice(1));
         path = `${ host }/${ path }`;
+        headers = { ...headersBase, ...headers };
         if ((path.indexOf('.') !== -1 || path.indexOf(':') !== -1) && path.indexOf('http') !== 0) {
             path = `${ location.protocol }//${ path }`;
         }
         // todo 暂时解决自定义网关跨域问题
-        path = path.replace('https://132.232.60.116:8082', '/tmpCross');
-        path = path.replace('http://132.232.60.116:8082', '/tmpCross');
-        return request({ method, path, params, timeout, afterResponse });
+        return request({ method, path, params, timeout, afterResponse, headers });
     };
 };

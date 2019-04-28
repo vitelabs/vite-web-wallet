@@ -23,8 +23,8 @@ const client = getClient('', xhr => {
         return Promise.resolve(data || null);
     }
     return Promise.reject(xhr.responseText);
-});
-export const getGateInfos = url => client({ path: 'certified_gateways', host: url });
+}, { 'content-type': 'application/x-www-form-urlencoded; charset=utf-8' });
+export const getGateInfos = () => client({ path: 'certified_gateways', host: process.env.gatewayInfosServer });
 
 export const getChargeAddr = ({ tokenId, addr: walletAddress }, url) => client({ path: 'deposit_address', params: { tokenId, walletAddress }, host: url });
 
