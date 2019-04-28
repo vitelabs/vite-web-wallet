@@ -123,12 +123,13 @@ const getters = {
         // const mapToken2Gate = rootGetters.mapToken2Gate;
         // ------- show user defined gate
         gateStorage.updateFromStorage();
-        const userStorageTokenMap = gateStorage.data;
-        const userStorageTokenList = Object.keys(userStorageTokenMap).map(i => {
-            const { tokenName = '', totalAmount = '', totalSupply = '', isReIssuable = '', tokenSymbol, balance = '', fundFloat = '', decimals = '', owner = '', tokenId = i, icon, type = 'THIRD_GATE', gateInfo = {} } = Object.assign({}, userStorageTokenMap[i], balanceInfo[i] || {}, allToken[i] || {});
+        const userStorageTokenList = gateStorage.data;
+        const res = userStorageTokenList.map(token => {
+            const i = token.tokenId;
+            const { tokenName = '', totalAmount = '', totalSupply = '', isReIssuable = '', tokenSymbol, balance = '', fundFloat = '', decimals = '', owner = '', tokenId = i, icon, type = 'THIRD_GATE', gateInfo = {} } = Object.assign({}, token, balanceInfo[i] || {}, allToken[i] || {});
             return { tokenName, totalAmount, totalSupply, isReIssuable, tokenSymbol, balance, fundFloat, decimals, owner, tokenId, icon, type, gateInfo };
         }).filter(t => getters.officalGateTokenList.map(t => t.tokenId).indexOf(t.tokenId) === -1);
-        return userStorageTokenList;
+        return res;
     },
     otherWhithBalance(state, getters, rootState, rootGetters) {
         const balanceInfo = getters.balanceInfo;

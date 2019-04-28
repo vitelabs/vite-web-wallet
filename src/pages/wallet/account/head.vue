@@ -217,6 +217,7 @@ export default {
     flex-direction: row;
     justify-content: space-between;
     height: 100px;
+    min-width: 1300px;
     .head__item {
         border-right: 1px solid rgba(227, 235, 245, 0.6);
         display: flex;
@@ -316,6 +317,7 @@ export default {
         flex-direction: column;
         padding: 15px;
         height: unset;
+        min-width:unset;
         .head__item{
             border-right: none;
             border-bottom: 1px solid rgba(227, 235, 245, 0.6);
