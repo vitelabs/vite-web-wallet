@@ -16,7 +16,6 @@ block content
 
 <script>
 import qrcode from 'components/qrcode';
-import copyOK from 'components/copyOK';
 import copy from 'utils/copy';
 import { utils } from '@vite/vitejs';
 import { modes } from 'qrcode.es';
@@ -24,7 +23,7 @@ import { wallet } from 'utils/wallet';
 import { getValidBalance } from 'utils/validations';
 
 export default {
-    components: { qrcode, copyOK },
+    components: { qrcode },
     props: {
         token: {
             type: Object,
@@ -43,7 +42,7 @@ export default {
     methods: {
         copy() {
             copy(this.address);
-            // this.$refs.copyTpis.copyOk();
+            this.$toast(this.$t('hint.copy'))
         }
     },
     computed: {
