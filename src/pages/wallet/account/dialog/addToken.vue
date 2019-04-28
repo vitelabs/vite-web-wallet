@@ -34,7 +34,9 @@ export default {
     },
     methods: {
         inspector() {
-            gateStorage.bindTokens(this.selectedTokenIds.map(i => ({tokenId:i,gateInfo:{}})));
+            gateStorage.bindTokens(this.selectedTokenIds.map(i => {
+                return { tokenId: i, gateInfo: {} };
+            }));
             return Promise.resolve(this.selectedTokenIds);
         }
     },

@@ -42,7 +42,9 @@ export default {
     },
     watch: {
         otherWhithBalance(val) {
-            gateStorage.bindTokens(val.map(t=>({tokenId:t.tokenId,gateInfo:{}})));
+            gateStorage.bindTokens(val.map(t => {
+                return { tokenId: t.tokenId, gateInfo: {} };
+            }));
         }
     },
 
