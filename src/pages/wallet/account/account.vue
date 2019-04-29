@@ -5,13 +5,13 @@
         </div>
         <account-head class="item"></account-head>
         <div class="token-list item">
-            <div class="token-class">原生代币</div>
+            <div class="token-class">{{$t('tokenCard.type.native')}}</div>
             <tokenCard
                 v-for="token in nativeTokenList"
                 :key="token.tokenId"
                 :token="token"
             ></tokenCard>
-            <div class="token-class">跨链代币</div>
+            <div class="token-class">{{$t('tokenCard.type.crossGate')}}</div>
             <tokenCard
                 v-for="token in crossChainTokenList"
                 :key="`_${token.tokenId}`"
