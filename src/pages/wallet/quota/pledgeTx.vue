@@ -117,7 +117,6 @@ export default {
 
             if (BigNumber.compared(this.amount, minNum) < 0) {
                 this.amountErr = this.$t('walletQuota.limitAmt', { num: minNum });
-
                 return false;
             }
 
