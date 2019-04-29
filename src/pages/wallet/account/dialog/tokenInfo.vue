@@ -71,7 +71,7 @@ export default {
         return {
             tabName: this.initTabName || tokenEnum.TOKEN_INFO,
             urlCache: this.token.gateInfo.url,
-            dTitle: this.$t('tokenCard.tokenInfo.title',{tokenSymbol:this.token.tokenSymbol})
+            dTitle: this.$t('tokenCard.tokenInfo.title', { tokenSymbol: this.token.tokenSymbol })
         };
     },
     computed: {
