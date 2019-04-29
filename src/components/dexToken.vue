@@ -117,9 +117,9 @@ export default {
                 return false;
             }
 
-            const viteBalance = this.$store.getters.tokenBalanceList
-                && this.$store.getters.tokenBalanceList[this.viteTokenInfo.tokenId]
-                ? this.$store.getters.tokenBalanceList[this.viteTokenInfo.tokenId].balance || 0
+            const viteBalance = this.$store.getters.balanceInfo
+                && this.$store.getters.balanceInfo[this.viteTokenInfo.tokenId]
+                ? this.$store.getters.balanceInfo[this.viteTokenInfo.tokenId].balance || 0
                 : 0;
             const viteAmount = BigNumber.toMin(viteBalance, this.viteTokenInfo.decimals);
             const amount = BigNumber.toMin(this.spend, this.viteTokenInfo.decimals);

@@ -58,7 +58,11 @@ const pushServer = {
     dev: '"wss://vitex.vite.net/test/websocket"',
     dexTestNet: '"wss://vitex.vite.net/beta/websocket"'
 };
-
+const gatewayInfosServer = {
+    production: '"//132.232.60.116:8081"',
+    test: '"//132.232.60.116:8081"',
+    dev: '"//192.168.31.141:8081"'
+};
 const Node_Env = process.env.NODE_ENV || 'dev';
 
 const plugins = [
@@ -78,7 +82,8 @@ const plugins = [
         'process.env.conversionHost': conversionHost[Node_Env],
         'process.env.ethNet': ethNet[Node_Env],
         'process.env.pushServer': pushServer[Node_Env],
-        'process.env.dexApiServer': dexApiServer[Node_Env]
+        'process.env.dexApiServer': dexApiServer[Node_Env],
+        'process.env.gatewayInfosServer': gatewayInfosServer[Node_Env]
     }),
     new webpack.NormalModuleReplacementPlugin(/\/buffer\//, function (resource) {
         resource.request = Buffer_Path;

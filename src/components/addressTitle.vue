@@ -109,8 +109,8 @@ export default {
     line-height: 20px;
     font-size: 14px;
     letter-spacing: 0.35px;
-    padding-bottom: 24px;
-    font-family: $font-bold, arial, sans-serif;
+    padding-bottom: 11px;
+    font-family: $font-bold;
 }
 
 .title_icon {

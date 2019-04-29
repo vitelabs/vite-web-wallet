@@ -15,8 +15,7 @@ export default function (VueRouter) {
         // Windows APP
         if (!to.name && to.path) {
             const arr = to.path.split('/');
-            // [TODO] Recover trade: jump to trade ?
-            router.replace({ name: arr[ arr.length - 1 ] || 'wallet' });
+            router.replace({ name: arr[ arr.length - 1 ] || 'trade' });
             return;
         }
 

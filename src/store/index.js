@@ -7,10 +7,8 @@ import pledgeStore from './pledge';
 import SBPStore from './SBP';
 import ledgerStore from './ledger';
 import envVariableStore from './envVariable';
-
-// [TODO] Recover trade==============
-// import exchange from './exchange/index';
-// ================================
+import exchange from './exchange/index';
+import gateInfo from './gateInfo';
 
 Vue.use(vuex);
 
@@ -22,17 +20,17 @@ store.registerModule('pledge', pledgeStore);
 store.registerModule('SBP', SBPStore);
 store.registerModule('ledger', ledgerStore);
 store.registerModule('env', envVariableStore);
+store.registerModule('gateInfo', gateInfo);
 
-// [TODO] Recover trade ==============
-// for (const moduleName in exchange) {
-//     store.registerModule(moduleName, exchange[moduleName]);
-// }
-// ===============================
+for (const moduleName in exchange) {
+    store.registerModule(moduleName, exchange[moduleName]);
+}
 
 store.dispatch('onNetStatus');
-// [TODO] Recover trade ==============
-// store.dispatch('updateMarketMap');
+store.dispatch('updateMarketMap');
 store.dispatch('startLoopHeight');
 store.dispatch('getDefaultTokenList');
+store.dispatch('getAllTokens');
+store.dispatch('updateGateInfos');
 
 export default store;

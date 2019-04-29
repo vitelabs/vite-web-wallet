@@ -15,10 +15,8 @@
 <script>
 import notice from 'components/notice';
 import update from 'components/update.vue';
-
-// [TODO] Recover trade
-// import date from 'utils/date';
-// import { subTask } from 'utils/proto/subTask';
+import date from 'utils/date';
+import { subTask } from 'utils/proto/subTask';
 
 let task = null;
 let addrTimeout = null;
@@ -42,8 +40,7 @@ export default {
     },
     watch: {
         address: function () {
-            // [TODO] Recover trade
-            // this.address && this.startLatestOrder();
+            this.address && this.startLatestOrder();
         }
     },
     methods: {
@@ -54,54 +51,52 @@ export default {
             addrTimeout = setTimeout(() => {
                 this.startGetAddress();
             }, 1000);
+        },
+        startLatestOrder() {
+            task && task.stop();
+            task = null;
+
+            task = new subTask('latestOrder', ({ args, data }) => {
+                // console.log('成交提醒', data);
+
+                const account = this.$wallet.getActiveAccount();
+                const address = account ? account.getDefaultAddr() : '';
+
+                if (address !== args.address || !data) {
+                    return;
+                }
+
+                const orderNotice = {
+                    time: date(data.date * 1000, 'zh'),
+                    ftoken: data.ftokenShow,
+                    ttoken: data.ttokenShow,
+                    close: data => {
+                        let i;
+                        for (i = 0; i < this.latestOrders.length; i++) {
+                            if (this.latestOrders[i] === data) {
+                                break;
+                            }
+                        }
+                        if (i >= this.latestOrders.length) {
+                            return;
+                        }
+
+                        data.timeout && clearTimeout(data.timeout);
+                        this.latestOrders.splice(i, 1);
+                    },
+                    timeout: setTimeout(() => {
+                        orderNotice.close(orderNotice);
+                    }, 4000)
+                };
+                this.latestOrders.push(orderNotice);
+            }, 2000);
+
+            task.start(() => {
+                const account = this.$wallet.getActiveAccount();
+                const address = account ? account.getDefaultAddr() : '';
+                return { address };
+            });
         }
-
-        // [TODO] Recover trade
-        // startLatestOrder() {
-        //     task && task.stop();
-        //     task = null;
-
-        //     task = new subTask('latestOrder', ({ args, data }) => {
-        //         // console.log('成交提醒', data);
-
-        //         const account = this.$wallet.getActiveAccount();
-        //         const address = account ? account.getDefaultAddr() : '';
-
-        //         if (address !== args.address || !data) {
-        //             return;
-        //         }
-
-        //         const orderNotice = {
-        //             time: date(data.date * 1000, 'zh'),
-        //             ftoken: data.ftokenShow,
-        //             ttoken: data.ttokenShow,
-        //             close: data => {
-        //                 let i;
-        //                 for (i = 0; i < this.latestOrders.length; i++) {
-        //                     if (this.latestOrders[i] === data) {
-        //                         break;
-        //                     }
-        //                 }
-        //                 if (i >= this.latestOrders.length) {
-        //                     return;
-        //                 }
-
-        //                 data.timeout && clearTimeout(data.timeout);
-        //                 this.latestOrders.splice(i, 1);
-        //             },
-        //             timeout: setTimeout(() => {
-        //                 orderNotice.close(orderNotice);
-        //             }, 4000)
-        //         };
-        //         this.latestOrders.push(orderNotice);
-        //     }, 2000);
-
-        //     task.start(() => {
-        //         const account = this.$wallet.getActiveAccount();
-        //         const address = account ? account.getDefaultAddr() : '';
-        //         return { address };
-        //     });
-        // }
     }
 };
 </script>

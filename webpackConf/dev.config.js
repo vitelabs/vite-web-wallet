@@ -13,6 +13,7 @@ module.exports = {
                 target: 'http://localhost:8081',
                 pathRewrite: { '^/trade\w*': '' }
             }
+
         }
     }
 };

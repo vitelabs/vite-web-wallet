@@ -1,6 +1,9 @@
 <template>
     <div class="search" @click="$refs.i.focus()">
-        <i class="icon"></i>
+        <slot name="before">
+
+            <i class="icon"></i>
+        </slot>
         <!-- Safari autocomplete -->
         <input fake_pass type="password" style="display:none;"/>
         <input readonly onfocus="this.removeAttribute('readonly');"
