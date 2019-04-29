@@ -196,6 +196,10 @@
       "CHARGE": "跨链充值",
       "WITHDRAW": "跨链提现"
     },
+    "type": {
+      "native": "原生代币",
+      "crossGate": "跨链代币"
+    },
     "addToken": {
       "title": "添加代币",
       "placeholder": "请输入代币名称或TokenID",
@@ -204,6 +208,8 @@
     },
     "tokenInfo": {
       "tabName": "详情",
+      "title": "{tokenSymbol}代币信息",
+      "saveGate": "保存修改",
       "labels": {
         "tokenId": "TokenID",
         "title": "{tokenSymbol}代币地址",
@@ -252,7 +258,7 @@
         "overMax": "提现金额需小于 {max}",
         "lessMin": "提现金额需大于 {min}"
       },
-      "feeTips":"手续费收取金额由网关设置",
+      "feeTips": "手续费收取金额由网关设置",
       "addressErr": "地址格式错误",
       "labels": {
         "balance": "账户余额",

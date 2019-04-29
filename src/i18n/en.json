@@ -207,8 +207,14 @@
       "lTxt": "取消",
       "rTxt": "添加"
     },
+    "type":{
+        "native":"原生代币",
+        "crossGate":"跨链代币"
+      },
     "tokenInfo": {
       "tabName": "详情",
+      "title":"{tokenSymbol}代币信息",
+      "saveGate":"保存修改",
       "labels": {
         "tokenId": "TokenID",
         "title": "{tokenSymbol}代币地址",
