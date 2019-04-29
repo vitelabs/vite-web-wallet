@@ -192,8 +192,7 @@ export default {
                 const activeAccount = this.$wallet.getActiveAccount();
                 activeAccount.unlock();
 
-                // [TODO] Recover trade: jump to trade ?
-                this.$router.push({ name: this.$wallet.lastPage || 'wallet' });
+                this.$router.push({ name: this.$wallet.lastPage || 'trade' });
                 this.$wallet.clearLastPage();
             };
 

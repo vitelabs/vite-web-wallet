@@ -1,32 +1,77 @@
 <template>
     <div class="account-head-wrapper">
-        <div class="custom-name">
-            <div class="head-title">
-                <span>{{ $t('accountName') }}</span>
-                <img @click="startRename" class="edit __pointer" src="~assets/imgs/edit_default.svg"/>
+        <div class="head__item">
+            <img class="icon" src="~assets/imgs/head_acc.png"/>
+            <div class="head-right ">
+                <div class="head-title">
+                    <span>{{ $t('accountName') }}</span>
+                    <img
+                        @click="startRename"
+                        class="edit __pointer"
+                        src="~assets/imgs/edit_default.svg"
+                    />
+                </div>
+                <div
+                    v-show="!isShowNameInput"
+                    class="name"
+                    :class="{
+                        'small-font': account.name && account.name.length > 16
+                    }"
+                    @click="startRename"
+                >{{ account.name }}</div>
+                <!-- <input fake_pass type="password" style="display:none"/> -->
+                <form autocomplete="off">
+                    <input
+                        ref="nameInput"
+                        v-show="isShowNameInput"
+                        type="text"
+                        v-model="editName"
+                        :placeholder="account.name"
+                        @blur="rename"
+                        autocomplete="off"
+                    />
+                </form>
             </div>
-            <div v-show="!isShowNameInput" class="name" :class="{
-                'small-font': account.name && account.name.length > 16
-            }" @click="startRename">{{ account.name }}</div>
-            <!-- <input fake_pass type="password" style="display:none"/> -->
-            <form autocomplete="off">
-                <input ref="nameInput" v-show="isShowNameInput" type="text"
-                       v-model="editName" :placeholder="account.name"
-                       @blur="rename" autocomplete="off"/>
-            </form>
+        </div>
+        <div class="worth head__item">
+            <img class="icon" src="~assets/imgs/head_asset.png" />
+            <div class="head-right ">
+                <div class="head-title">总资产</div>
+                <div>{{totalAsset}}
+                </div>
+            </div>
+        </div>
+        <div class="head__item">
+            <img class="icon" src="~assets/imgs/head_addr.png" />
+            <vite-address
+                :title="$t('wallet.address')"
+                :address="account.addr"
+                :addressQrcode="addressStr"
+                style="color: #5E6875;"
+            ></vite-address>
         </div>
 
-        <vite-address :title="$t('wallet.address')" :address="account.addr"
-                      :addressQrcode="addressStr"></vite-address>
-
-        <div class="btn-group">
-            <div class="btn__small __pointer __btn-test" @click="getTestToken" :class="{'un_clickable':!getTestTokenAble}">
+        <div class="btn-group head__item">
+            <div
+                class="btn__small __pointer __btn-test"
+                @click="getTestToken"
+                :class="{'un_clickable':!getTestTokenAble}"
+            >
                 <span>{{ $t('wallet.getTestToken') }}</span>
-                <img src="~assets/imgs/Vite_icon.svg" class="icon" />
+                <img
+                    src="~assets/imgs/more_blue.png"
+                    class="more-icon"
+                />
             </div>
-            <div @click="goDetail" class="btn__small __pointer __btn-detail">
+            <div
+                @click="goDetail"
+                class="btn__small __pointer __btn-detail"
+            >
                 {{ $t('wallet.transDetail') }}
-                <img src="~assets/imgs/more.svg" class="more-icon" />
+                <img
+                    src="~assets/imgs/more_gray.png"
+                    class="more-icon"
+                />
             </div>
         </div>
     </div>
@@ -37,6 +82,7 @@ import Vue from 'vue';
 import viteAddress from 'components/address';
 import { stringify } from 'utils/viteSchema';
 import $ViteJS from 'utils/viteClient';
+import bigNumber from 'utils/bigNumber';
 
 let activeAccount = null;
 
@@ -62,6 +108,16 @@ export default {
     computed: {
         netStatus() {
             return this.$store.state.env.clientStatus;
+        },
+        totalAsset() {
+            const currency = this.$store.state.exchangeRate.coins[this.$i18n.locale];
+            const rateMap = this.$store.state.exchangeRate.rateMap;
+            const balanceInfo = this.$store.getters.balanceInfo;
+            const total = Object.keys(balanceInfo).reduce((pre, cur) => {
+                if (!rateMap[cur]) return pre;
+                return bigNumber.plus(bigNumber.multi(balanceInfo[cur].balance, rateMap[cur][currency]), pre);
+            }, 0);
+            return `${ this.$i18n.locale === 'en' ? '$' : '¥' }${ total }`;
         }
     },
     methods: {
@@ -90,7 +146,6 @@ export default {
                     this.getTestTokenAble = true;
                 }, 3000);
             }).catch(err => {
-                this.getTestTokenAble = true;
                 console.warn(err);
                 this.$toast(this.$t('wallet.hint.tErr'), err);
             });
@@ -150,124 +205,120 @@ export default {
 
 .account-head-wrapper {
     position: relative;
-    padding: 30px 0 0 20px;
     text-align: center;
     background: #fff;
     box-shadow: 0 2px 48px 1px rgba(176, 192, 237, 0.42);
     border-radius: 2px;
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: no-wrap;
     flex-direction: row;
     justify-content: space-between;
+    height: 100px;
+    min-width: 1300px;
+    .head__item {
+        border-right: 1px solid rgba(227, 235, 245, 0.6);
+        display: flex;
+        align-items: center;
+        padding: 0 20px;
+        .icon{
+            height: 34px;
+            width: 34px;
+            margin-right: 20px;
+        }
+        .head-right{
+            font-size: 20px;
+            color: #1d2024;
+            text-align: left;
+            font-family: $font-bold, arial, sans-serif;
+            word-break: break-all;
+            .head-title {
+                display: flex;
+                align-items: center;
+                position: relative;
+                height: 20px;
+                line-height: 20px;
+                font-size: 14px;
+                letter-spacing: 0.35px;
+                padding-bottom: 10px;
+                font-family: $font-bold, arial, sans-serif;
+                color: #5E6875;
+                font-family: $font-bold;
 
-    .head-title {
-        position: relative;
-        display: block;
-        height: 20px;
-        line-height: 20px;
-        font-size: 14px;
-        letter-spacing: 0.35px;
-        padding-bottom: 24px;
-        font-family: $font-bold, arial, sans-serif;
+                .edit {
+                    display: inline-block;
+                    width: 20px;
+                    height: 20px;
+                    margin-left: 20px;
+                }
+            }
+            .name {
+                &.small-font {
+                    font-size: 20px;
+                    line-height: 26px;
+                }
+            }
 
-        .edit {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            margin-left: 20px;
+            input {
+                height: 32px;
+                line-height: 32px;
+                font-size: 20px;
+                width: 100%;
+            }
+        }
+        &.worth{
+            flex-grow: 1;
+        }
+        &.btn-group {
+            padding: 0 ;
+            font-family: $font-normal, arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            .un_clickable {
+                background-color: #bfbfbf !important;
+                cursor: default !important;
+            }
+
+            .btn__small {
+                box-sizing: border-box;
+                text-align: center;
+                font-size: 14px;
+                flex-grow: 1;
+                width: 100%;
+                color: rgba(94,104,117,1);
+                display: flex;
+                justify-content: center;
+                padding-right: 30px;
+                align-items: center;
+                &:first-child{
+                    color: rgba(0,122,255,1);
+                    border-bottom: 1px solid rgba(227, 235, 245, 0.6);
+                }
+            }
+            .more-icon {
+                margin-left: 4px;
+                height: 10px;
+                width: 6px;
+            }
         }
     }
-
     .addr-wrapper {
-        padding-right: 20px;
-        padding-bottom: 30px;
         display: inline-block;
         max-width: 510px;
         text-align: left;
-    }
-
-    .custom-name {
-        padding-right: 20px;
-        padding-bottom: 30px;
-        font-size: 24px;
-        color: #1d2024;
-        text-align: left;
-        font-family: $font-bold, arial, sans-serif;
-        max-width: 26%;
-        word-break: break-all;
-
-        .name {
-            display: inline-block;
-            line-height: 32px;
-
-            &.small-font {
-                font-size: 20px;
-                line-height: 26px;
-            }
-        }
-
-        input {
-            height: 32px;
-            line-height: 32px;
-            font-size: 20px;
-            width: 100%;
-        }
-    }
-
-    .btn-group {
-        width: 212px;
-        font-family: $font-normal-b, arial, sans-serif;
-        padding-right: 20px;
-        padding-bottom: 30px;
-
-        .un_clickable {
-            background-color: #bfbfbf !important;
-            cursor: default !important;
-        }
-
-        .btn__small {
-            box-sizing: border-box;
-            width: 210px;
-            height: 33px;
-            line-height: 33px;
-            text-align: center;
-            font-size: 14px;
-            border-radius: 2px;
-        }
-
-        .__btn-test {
-            background: #007aff;
-            color: #fff;
-            height: 35px;
-            line-height: 35px;
-
-            &.unuse {
-                background: #efefef;
-                color: #666;
-            }
-        }
-
-        .__btn-detail {
-            border: 1px solid #007aff;
-            color: #007aff;
-            margin-top: 12px;
-        }
-
-        .icon {
-            margin-bottom: -7px;
-        }
-
-        .more-icon {
-            margin-left: 4px;
-        }
     }
 }
 
 @media only screen and (max-width: 640px) {
     .account-head-wrapper {
-        display: block;
+        display: flex;
+        flex-direction: column;
         padding: 15px;
-
+        height: unset;
+        min-width: unset;
+        .head__item{
+            border-right: none;
+            border-bottom: 1px solid rgba(227, 235, 245, 0.6);
+        }
         .head-title {
             padding-bottom: 15px;
 
@@ -275,38 +326,38 @@ export default {
                 float: right;
             }
         }
-    }
-
-    .account-head-wrapper .custom-name {
-        padding: 0;
-        width: 100%;
-        max-width: 100%;
-
-        input {
+        .custom-name {
+            padding: 0;
             width: 100%;
+            max-width: 100%;
+
+            input {
+                width: 100%;
+            }
         }
-    }
 
-    .account-head-wrapper .addr-wrapper {
-        padding: 0;
-        margin-top: 20px;
-        display: block;
-        width: 100%;
-        min-width: 0;
-
-        .addr-content {
-            padding: 10px;
-            line-height: 20px;
-        }
-    }
-
-    .account-head-wrapper .btn-group {
-        padding: 0;
-        margin-top: 20px;
-        width: 100%;
-
-        .btn__small {
+        .addr-wrapper {
+            padding: 0;
+            margin-top: 20px;
+            display: block;
             width: 100%;
+            min-width: 0;
+
+            .addr-content {
+                padding: 10px;
+                line-height: 20px;
+                height: unset;
+                min-height: 24px;
+            }
+        }
+
+        .btn-group {
+            padding: 0;
+            width: 100%;
+            .btn__small {
+                width: 100%;
+                margin-top: 10px;
+            }
         }
     }
 }

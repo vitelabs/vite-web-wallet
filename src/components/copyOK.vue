@@ -1,5 +1,5 @@
 <template>
-    <span class="copy-success" :class="{'show': copySuccess}">{{ copySuccess ? $t('hint.copy') : ''}}</span>
+    <span class="copy-success" :class="{'show': copySuccess||CopySuccess}">{{$t('hint.copy')}}</span>
 </template>
 
 <script>
@@ -9,6 +9,18 @@ export default {
             type: Boolean,
             default: false
         }
+    },
+    data() {
+        return { CopySuccess: false };
+    },
+    methods: {
+        copyOk() {
+            this.CopySuccess = true;
+            setTimeout(() => {
+                this.CopySuccess = false;
+            }, 1000);
+        }
+
     }
 };
 </script>

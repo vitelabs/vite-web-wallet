@@ -64,11 +64,9 @@ export default {
     },
     computed: {
         secondMenuList() {
-            // [TODO] Recover trade ====================
-            // if (this.active.indexOf('trade') === 0) {
-            //     return [ 'trade', 'tradeAssets', 'tradeOpenOrders', 'tradeOrderHistory' ];
-            // }
-            // =========================================
+            if (this.active.indexOf('trade') === 0) {
+                return [ 'trade', 'tradeAssets', 'tradeOpenOrders', 'tradeOrderHistory' ];
+            }
 
             if (this.active.indexOf('wallet') !== 0) {
                 return [];
@@ -90,8 +88,7 @@ export default {
         go(name) {
             if (name === 'logout') {
                 this.$wallet.logout();
-                // [TODO] Recover trade: jump to trade?
-                this.$router.push({ name: 'wallet' });
+                this.$router.push({ name: 'trade' });
                 return;
             }
 

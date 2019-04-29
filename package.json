@@ -46,6 +46,8 @@
         "postcss-loader": "^3.0.0",
         "postcss-px2rem": "^0.3.0",
         "pre-commit": "^1.2.2",
+        "pug": "^2.0.3",
+        "pug-plain-loader": "^1.0.0",
         "sass-loader": "^7.0.3",
         "style-loader": "^0.21.0",
         "stylelint": "^9.10.1",
