@@ -1,4 +1,3 @@
-import BigNumber from 'utils/bigNumber';
 import $ViteJS from 'utils/viteClient';
 
 const pageCount = 50;
@@ -82,7 +81,8 @@ const actions = {
 
 const getters = {
     totalPledgePage(state) {
-        return BigNumber.dividedToNumber(state.totalNum || 0, pageCount);
+        const totalNum = state.totalNum || 0;
+        return Math.ceil(totalNum / pageCount);
     },
     pledgeList(state) {
         const list = state.pledgeList || [];
