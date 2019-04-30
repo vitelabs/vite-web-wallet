@@ -22,8 +22,8 @@ block content
     .block__content.edit.space
         div   {{$t("tokenCard.withdraw.labels.fee")}}
         div {{(fee||'--') }} <span class="light">{{token.tokenSymbol}}</span>
-    //- .err dfjlasfksafjdsfasfljasdflas
-    //-     .dot
+    .err(v-if="failTips") {{failTips}}
+        .dot
 
 </template>
 
@@ -58,6 +58,7 @@ export default {
             isAddrCorrect: true,
             dTitle: this.$t('tokenCard.withdraw.title'),
             dSTxt: this.$t('tokenCard.withdraw.title'),
+            failTips:'',
             isFeeTipsShow: false,
             fetchingFee: true
         };
@@ -138,7 +139,7 @@ export default {
                         res(d);
                     })
                     .catch(e => {
-                        this.$toast(this.$t('tokenCard.withdraw.failTips'));
+                        this.failTips=this.$t('tokenCard.withdraw.failTips');
                         rej(e);
                     });
             });
@@ -200,10 +201,12 @@ export default {
     position: relative;
     width: 100%;
     color: #FF2929;
+    font-size:14px;
+    font-family:$font-normal;
     .dot {
         width: 6px;
         height: 6px;
-        background: rgba(0, 122, 255, 1);
+        background: #FF2929;
         border-radius: 100%;
         position: absolute;
         left: 0;
