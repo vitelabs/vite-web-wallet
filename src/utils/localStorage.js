@@ -1,44 +1,17 @@
-import toast from 'components/toast/index.js';
+import storage from 'utils/storage';
 
 const walletSpace = 'VITE_WEB_WALLET';
-const storage = window.localStorage;
 
 export default {
     setItem(name, data) {
-        const key = `${ walletSpace }:${ name }`;
-
-        try {
-            storage.setItem(key, JSON.stringify(data));
-            window.viteWalletStorage && window.viteWalletStorage.setItem(key, JSON.stringify(data));
-        } catch (err) {
-            toast('Store fail!');
-            console.error(err);
-        }
+        storage.setItem(getKey(name), data);
     },
-    getItem
+    getItem(name, data) {
+        return storage.getItem(getKey(name), data);
+    }
 };
 
-function getItem(name) {
-    const key = `${ walletSpace }:${ name }`;
 
-    try {
-        let data;
-
-        if (window.viteWalletStorage) {
-            data = window.viteWalletStorage.getItem(key);
-        } else {
-            data = storage.getItem(key);
-        }
-
-        if (!data) {
-            return null;
-        }
-
-        return JSON.parse(data);
-    } catch (err) {
-        toast('Get from storage fail!');
-        console.error(err);
-
-        return null;
-    }
+function getKey(name) {
+    return `${ walletSpace }:${ name }`;
 }

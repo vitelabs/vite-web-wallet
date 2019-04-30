@@ -1,5 +1,6 @@
 const spaceKey = 'viteStorageSpace';
 import { wallet } from 'utils/wallet';
+import storage from 'utils/storage';
 
 export const addrSpace = {
     get key() {
@@ -7,22 +8,19 @@ export const addrSpace = {
     },
 
     getItem(key) {
-        if (!wallet.defaultAddr) return null;
-        const content = localStorage.getItem(`${ this.key }_${ key }`);
-        if (!content) return null;
-        let parseRes = '';
-        try {
-            parseRes = JSON.parse(content);
-        } catch (e) {
-            return content;
+        if (!wallet.defaultAddr) {
+            return null;
         }
-        return parseRes;
+
+        return storage.getItem(`${ this.key }_${ key }`);
     },
 
     setItem(key, content) {
-        if (!wallet.defaultAddr) return;
-        content = typeof content === 'string' ? content : JSON.stringify(content);
-        localStorage.setItem(`${ this.key }_${ key }`, content);
+        if (!wallet.defaultAddr) {
+            return;
+        }
+
+        storage.setItem(`${ this.key }_${ key }`, content);
     }
 };
 
