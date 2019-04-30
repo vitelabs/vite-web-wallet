@@ -2,11 +2,11 @@
     <div class="tx-pair-wrapper">
         <div class="center">
             <div @click="close">close</div>
-            <div>{{ activeTxPair.priceBefore24h }}</div>
+            <div>{{ activeTxPair ? activeTxPair.priceBefore24h : '' }}</div>
             <div>{{ upDownIcon + percent }}</div>
-            <div>{{ activeTxPair.quantity24h }}</div>
-            <div>{{ activeTxPair.amount24h }}</div>
-            <div>{{ activeTxPair.price }}</div>
+            <div>{{ activeTxPair ? activeTxPair.quantity24h : '' }}</div>
+            <div>{{ activeTxPair ? activeTxPair.amount24h : ''  }}</div>
+            <div>{{ activeTxPair ? activeTxPair.price : ''  }}</div>
             <div>{{ buyOne }}</div>
             <div>{{ sellOne }}</div>
             <div>{{ sellOne }}</div>
@@ -22,9 +22,6 @@ export default {
             type: Function,
             default: () => {}
         }
-    },
-    mounted() {
-        console.log(this.activeTxPair);
     },
     computed: {
         activeTxPair() {
