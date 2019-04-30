@@ -4,7 +4,7 @@ block content
     .block__title
         span {{$t('tokenCard.charge.addressTitle')}}
         img.title_icon.copy.__pointer(src="~assets/imgs/copy_default.svg" @click="copy")
-    .block__content {{address}}
+    .block__content(:class="{err:addrErr}") {{addrErr||address}}
     .qrcode-container
         .qrcode-container__title {{$t('tokenCard.charge.codeTips',{tokenSymbol:token.tokenSymbol})}}
         qrcode(:text="addressQrcode" :options="qrOptions" class="qrcode-container__content")
@@ -38,11 +38,15 @@ export default {
             copySuccess: false,
             amount: 0,
             qrOptions: { size: 124, mode: modes.NORMAL },
-            dTitle: this.$t('tokenCard.charge.title')
+            dTitle: this.$t('tokenCard.charge.title'),
+            addrErr: ''
         };
     },
     beforeMount() {
-        getChargeAddr({ addr: wallet.defaultAddr, tokenId: this.token.tokenId }, this.token.gateInfo.url).then(addr => (this.address = addr));
+        getChargeAddr({ addr: wallet.defaultAddr, tokenId: this.token.tokenId }, this.token.gateInfo.url).then(addr => (this.address = addr)).catch(e => {
+            console.error(e);
+            this.addrErr = this.$t('tokenCard.charge.addrErr');
+        });
         getChargeInfo({ addr: wallet.defaultAddr, tokenId: this.token.tokenId }, this.token.gateInfo.url).then(d => {
             this.minimumDepositAmountMin = d.minimumDepositAmount;
         });
@@ -97,6 +101,9 @@ export default {
     box-sizing: border-box;
     margin-top: 16px;
     text-align: center;
+    &.err{
+        color: #FF2929;
+    }
     &input {
         text-align: left;
     }

@@ -71,7 +71,7 @@ export default {
         return {
             tabName: this.initTabName || tokenEnum.TOKEN_INFO,
             urlCache: this.token.gateInfo.url,
-            dTitle: `${ this.token.tokenSymbol }代币信息`
+            dTitle: this.$t('tokenCard.tokenInfo.title', { tokenSymbol: this.token.tokenSymbol })
         };
     },
     computed: {
@@ -88,7 +88,7 @@ export default {
         },
         dSTxt() {
             if (this.token.type === 'THIRD_GATE' && this.tabName === 'gate') {
-                return '保存修改';
+                return this.$t('tokenCard.tokenInfo.saveGate');
             }
             return '';
         },

@@ -22,6 +22,9 @@ block content
     .block__content.edit.space
         div   {{$t("tokenCard.withdraw.labels.fee")}}
         div {{(fee||'--') }} <span class="light">{{token.tokenSymbol}}</span>
+    .err(v-if="failTips") {{failTips}}
+        .dot
+
 </template>
 
 <script>
@@ -55,7 +58,9 @@ export default {
             isAddrCorrect: true,
             dTitle: this.$t('tokenCard.withdraw.title'),
             dSTxt: this.$t('tokenCard.withdraw.title'),
-            isFeeTipsShow: false
+            failTips: '',
+            isFeeTipsShow: false,
+            fetchingFee: true
         };
     },
     beforeMount() {
@@ -90,8 +95,10 @@ export default {
         }, 500),
         withdrawAmount: debounce(function (val) {
             this.withdrawAmountMin = '';// 重置从全部提现过来的数据。
+            this.fetchingFee = true;
             getWithdrawFee({ tokenId: this.token.tokenId, walletAddress: wallet.defaultAddr, amount: bigNumber.toMin(val, this.token.decimals) }, this.token.gateInfo.url).then(d => {
                 this.feeMin = d;
+                this.fetchingFee = false;
             });
         }, 500)
     },
@@ -115,8 +122,10 @@ export default {
         },
         withdrawAll() {
             if (this.token.totalAmount && bigNumber.compared(this.token.totalAmount, '0') > 0) {
+                this.fetchingFee = true;
                 getWithdrawFee({ tokenId: this.token.tokenId, walletAddress: wallet.defaultAddr, amount: this.token.totalAmount, containsFee: true }, this.token.gateInfo.url).then(fee => {
                     this.feeMin = fee;
+                    this.fetchingFee = false;
                     this.withdrawAmountMin = bigNumber.minus(this.token.totalAmount, this.feeMin);
                     this.withdrawAmount = bigNumber.toBasic(this.withdrawAmountMin, this.token.decimals);
                 });
@@ -129,7 +138,10 @@ export default {
                         this.$toast(this.$t('tokenCard.withdraw.successTips'));
                         res(d);
                     })
-                    .catch(e => rej(e));
+                    .catch(e => {
+                        this.failTips = this.$t('tokenCard.withdraw.failTips');
+                        rej(e);
+                    });
             });
         }
     }
@@ -182,6 +194,23 @@ export default {
                 font-family: $font-normal;
             }
         }
+    }
+}
+.err{
+    padding-left: 13px;
+    position: relative;
+    width: 100%;
+    color: #FF2929;
+    font-size: 14px;
+    font-family: $font-normal;
+    .dot {
+        width: 6px;
+        height: 6px;
+        background: #FF2929;
+        border-radius: 100%;
+        position: absolute;
+        left: 0;
+        top: 6px;
     }
 }
 .block__content {
