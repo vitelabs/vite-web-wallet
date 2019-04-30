@@ -31,10 +31,6 @@ const mixin = {
             default: () => null
         }
     },
-    beforeMount() {
-        debugger;
-        window.ttttt = this;
-    },
     computed: {
         Title() {
             console.log(this);
