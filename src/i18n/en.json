@@ -207,8 +207,14 @@
       "lTxt": "取消",
       "rTxt": "添加"
     },
+    "type":{
+        "native":"原生代币",
+        "crossGate":"跨链代币"
+      },
     "tokenInfo": {
       "tabName": "详情",
+      "title":"{tokenSymbol}代币信息",
+      "saveGate":"保存修改",
       "labels": {
         "tokenId": "TokenID",
         "title": "{tokenSymbol}代币地址",
@@ -243,6 +249,7 @@
     },
     "charge": {
       "title": "跨链充值",
+      "addrErr":"网关节点出错，请检查网关设置",
       "addressTitle": "充值地址",
       "codeTips": "请扫描二维码充值,请使用支持{tokenSymbol}的钱包转账",
       "tips": [
@@ -269,7 +276,8 @@
       },
       "amountPlaceholder": "请输入提现金额，最小不少于{min}",
       "addressPlaceholder": "请输入提现地址",
-      "successTips": "提现请求已发送"
+      "successTips": "提现请求已发送",
+      "failTips":"网关节点出错，请检查网关设置"
     },
     "nodeErr": "提示网关节点无效，请检查网关设置"
   },

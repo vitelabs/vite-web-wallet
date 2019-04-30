@@ -37,7 +37,7 @@ export default function request({
         ? (path = `${ path }?${ qsStr }`)
         : (path = `${ path }${ qsStr }`));
     xhr.open(method, path, true);
-    xhr.setRequestHeader('content-type', 'application/json; charset=utf-8');
+    headers = Object.assign({ 'content-type': 'application/json; charset=utf-8' }, headers);
     Object.keys(headers).forEach(k => {
         xhr.setRequestHeader(k, headers[k]);
     });
