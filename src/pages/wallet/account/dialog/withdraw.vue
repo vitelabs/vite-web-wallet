@@ -58,7 +58,7 @@ export default {
             isAddrCorrect: true,
             dTitle: this.$t('tokenCard.withdraw.title'),
             dSTxt: this.$t('tokenCard.withdraw.title'),
-            failTips:'',
+            failTips: '',
             isFeeTipsShow: false,
             fetchingFee: true
         };
@@ -139,7 +139,7 @@ export default {
                         res(d);
                     })
                     .catch(e => {
-                        this.failTips=this.$t('tokenCard.withdraw.failTips');
+                        this.failTips = this.$t('tokenCard.withdraw.failTips');
                         rej(e);
                     });
             });
@@ -201,8 +201,8 @@ export default {
     position: relative;
     width: 100%;
     color: #FF2929;
-    font-size:14px;
-    font-family:$font-normal;
+    font-size: 14px;
+    font-family: $font-normal;
     .dot {
         width: 6px;
         height: 6px;
