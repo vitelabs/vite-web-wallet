@@ -249,6 +249,7 @@
     },
     "charge": {
       "title": "跨链充值",
+      "addrErr":"网关节点出错，请检查网关设置",
       "addressTitle": "充值地址",
       "codeTips": "请扫描二维码充值,请使用支持{tokenSymbol}的钱包转账",
       "tips": [
@@ -275,7 +276,8 @@
       },
       "amountPlaceholder": "请输入提现金额，最小不少于{min}",
       "addressPlaceholder": "请输入提现地址",
-      "successTips": "提现请求已发送"
+      "successTips": "提现请求已发送",
+      "failTips":"网关节点出错，请检查网关设置"
     },
     "nodeErr": "提示网关节点无效，请检查网关设置"
   },
