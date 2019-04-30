@@ -2,6 +2,7 @@
     <div v-show="mnemonic" class="mnemonic">
         <div class="row">
             <span class="title">{{ $t('mnemonic.title') }}</span>
+            <span @click="unlock">lock {{ lock }}</span>
             <span class="copy icon __pointer" @click="copy" :class="{ 'lock':  lock }"></span>
             <span class="eyes icon __pointer" @click="toggleVisible" :class="{
                 'lock':  lock,
@@ -16,15 +17,10 @@
 <script>
 import copy from 'utils/copy';
 import copyOK from 'components/copyOK';
+import { pwdConfirm } from 'components/password';
 
 export default {
     components: { copyOK },
-    props: {
-        lock: {
-            type: Boolean,
-            default: true
-        }
-    },
     data() {
         const activeAccount = this.$wallet.getActiveAccount();
         const mnemonic = activeAccount.getMnemonic();
@@ -34,7 +30,8 @@ export default {
             visible: false,
             mnemonic,
             copySuccess: false,
-            mnemonicStr
+            mnemonicStr,
+            lock: true
         };
     },
     computed: {
@@ -48,6 +45,18 @@ export default {
         }
     },
     methods: {
+        unlock() {
+            if (!this.lock) {
+                this.lock = true;
+                return;
+            }
+
+            pwdConfirm({
+                submit: () => {
+                    this.lock = false;
+                }
+            });
+        },
         copy() {
             if (this.lock) {
                 return;

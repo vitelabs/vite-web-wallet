@@ -25,7 +25,7 @@ export default function (VueRouter) {
         }
 
         const activeAcc = wallet.getActiveAccount();
-        if (!from.name && !activeAcc && to.name && to.name !== 'start') {
+        if (!from.name && !activeAcc && to.name && [ 'start', 'trade' ].indexOf(to.name) === -1) {
             router.replace({ name: 'start' });
             return;
         }

@@ -1,14 +1,6 @@
 <template>
     <layout>
-        <div v-show="showPassWrapper" class="item" :class="{ 'unlock': !lock }">
-            <div class="title __pointer">{{ $t('setting.unlock') }}</div>
-            <div class="input-wrapper">
-                <input :disabled="!lock" class="pass" v-model="pass" type="password" :placeholder="$t('startCreate.input')" />
-            </div>
-            <span class="btn __pointer" @click="validPass">{{ $t('btn.submit') }}</span>
-        </div>
-
-        <mnemonic v-if="!!isLogin" :lock="lock" class="item"></mnemonic>
+        <mnemonic v-if="!!isLogin" class="item"></mnemonic>
         <accList v-if="!!activeAccount" class="item"></accList>
         <lang class="item"></lang>
         <auto-logout v-if="!!isLogin" class="item"></auto-logout>
