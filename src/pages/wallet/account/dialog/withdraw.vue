@@ -203,8 +203,8 @@ export default {
     color: #FF2929;
     font-size: 14px;
     font-family: $font-normal;
-    margin-top:6px;
-    top:14px;
+    margin-top: 6px;
+    top: 14px;
     .dot {
         width: 6px;
         height: 6px;
