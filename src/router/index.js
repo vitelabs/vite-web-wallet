@@ -20,13 +20,13 @@ export default function (VueRouter) {
             return;
         }
 
-        if (to.name && to.name.indexOf('start') !== -1 && to.name !== 'start') {
+        if (!from.name && to.name && to.name.indexOf('start') !== -1 && to.name !== 'start') {
             router.replace({ name: 'start' });
             return;
         }
 
         const activeAcc = wallet.getActiveAccount();
-        if (!activeAcc && to.name && to.name !== 'start') {
+        if (!from.name && !activeAcc && to.name && to.name !== 'start') {
             router.replace({ name: 'start' });
             return;
         }
