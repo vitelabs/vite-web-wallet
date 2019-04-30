@@ -199,7 +199,7 @@ export default {
     padding-left: 13px;
     position: relative;
     width: 100%;
-    color:#FF2929;
+    color: #FF2929;
     .dot {
         width: 6px;
         height: 6px;
