@@ -113,7 +113,7 @@ export default {
 .token-list {
     display: flex;
     flex-wrap: wrap;
-    align-items:center;
+    align-items: center;
     .token-class{
         border-left: 1px solid #007AFF;
         padding-left: 9px;

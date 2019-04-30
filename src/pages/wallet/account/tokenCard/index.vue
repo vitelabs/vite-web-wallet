@@ -117,24 +117,24 @@ export default {
             return getTokenIcon(id);
         },
         receive() {
-            receiveDialog({ token: this.token }).catch(e=>{
-                console.error(e)
-            })
+            receiveDialog({ token: this.token }).catch(e => {
+                console.error(e);
+            });
         },
         charge() {
-            chargeDialog({ token: this.token }).catch(e=>{
-                console.error(e)
-            })
+            chargeDialog({ token: this.token }).catch(e => {
+                console.error(e);
+            });
         },
         withdraw() {
-            withdrawDialog({ token: this.token }).catch(e=>{
-                console.error(e)
-            })
+            withdrawDialog({ token: this.token }).catch(e => {
+                console.error(e);
+            });
         },
         showDetail(initTabName) {
-            tokenInfoDialog({ token: this.token, initTabName }).catch(e=>{
-                console.error(e)
-            })
+            tokenInfoDialog({ token: this.token, initTabName }).catch(e => {
+                console.error(e);
+            });
         },
         send() {
             if (!this.token.tokenId) {
