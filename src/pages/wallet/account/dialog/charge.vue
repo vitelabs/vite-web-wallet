@@ -44,7 +44,7 @@ export default {
     },
     beforeMount() {
         getChargeAddr({ addr: wallet.defaultAddr, tokenId: this.token.tokenId }, this.token.gateInfo.url).then(addr => (this.address = addr)).catch(e => {
-            console.error(e)
+            console.error(e);
             this.addrErr = this.$t('tokenCard.charge.addrErr');
         });
         getChargeInfo({ addr: wallet.defaultAddr, tokenId: this.token.tokenId }, this.token.gateInfo.url).then(d => {
