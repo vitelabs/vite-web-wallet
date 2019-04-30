@@ -1,5 +1,5 @@
 <template>
-    <div class="sync-block-wrapper">
+    <div @click="goNet" class="sync-block-wrapper __pointer">
         <span class="status-text" v-show="!netStatus">
             {{ $t(`hint.noNet`) }}
         </span>
@@ -17,6 +17,12 @@ export default {
         },
         netStatus() {
             return this.$store.state.env.clientStatus;
+        }
+    },
+    methods: {
+        goNet() {
+            const locale = this.$i18n.locale === 'zh' ? 'zh/' : '';
+            window.open(`${ process.env.viteNet }${ locale }`);
         }
     }
 };

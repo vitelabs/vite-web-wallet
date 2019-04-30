@@ -7,8 +7,8 @@
                 <div class="token-title">{{ $t('trade.head.latestPrice') }}</div>
                 <div class="token-content">
                     <span :class="{
-                        'up': +upDownPre > 0,
-                        'down': +upDownPre < 0
+                        'up': +upDownPrev > 0,
+                        'down': +upDownPrev < 0
                     }">
                         {{ activeTxPair && activeTxPair.price ? formatNum(activeTxPair.price, activeTxPair.toDecimals) : '--' }}
                     </span>
@@ -43,24 +43,31 @@
                 </div>
             </div>
         </div>
+
+        <div @click="showTxPair">else!!!!!</div>
+        <tx-pair v-show="isShowTxPair" :close="hideTxPair"></tx-pair>
     </div>
 </template>
 
 <script>
 import BigNumber from 'utils/bigNumber';
 import token from './token';
+import txPair from './txPair';
 
 export default {
-    components: { token },
+    components: { token, txPair },
+    data() {
+        return { isShowTxPair: false };
+    },
     computed: {
         activeTxPair() {
             return this.$store.getters.exActiveTxPair;
         },
-        upDownPre() {
-            return this.activeTxPair && this.activeTxPair.upDownPre ? this.activeTxPair.upDownPre : '0';
+        upDownPrev() {
+            return this.activeTxPair ? this.activeTxPair.upDownPrev : '0';
         },
         upDown() {
-            return this.activeTxPair && this.activeTxPair.upDown ? this.formatNum(this.activeTxPair.upDown, this.activeTxPair.toDecimals) : '0';
+            return this.activeTxPair ? this.activeTxPair.upDown : '0';
         },
         upDownIcon() {
             if (this.upDown && this.upDown > 0) {
@@ -92,6 +99,12 @@ export default {
     methods: {
         formatNum(num, fix) {
             return BigNumber.formatNum(num, fix);
+        },
+        showTxPair() {
+            this.isShowTxPair = true;
+        },
+        hideTxPair() {
+            this.isShowTxPair = false;
         }
     }
 };

@@ -17,9 +17,24 @@
             </span>
         </div>
 
+        <div @click="toogleAgree('1')" class="agreement __pointer" :class="{
+            'active': !!agreeList['1']
+        }">我理解如果我丢失了助记词，我将永远无法找回我的资产
+        </div>
+        <div @click="toogleAgree('2')" class="agreement __pointer" :class="{
+            'active': !!agreeList['2']
+        }">我理解如果我忘记或丢失了助记词，将没有任何人能够帮助我恢复
+        </div>
+        <div @click="toogleAgree('3')" class="agreement __pointer" :class="{
+            'active': !!agreeList['3']
+        }">我已经写下了或者用其它方式保存了我的助记词
+        </div>
+
         <div class="__btn_list">
             <span class="__btn __btn_border __pointer" @click="back">{{ $t('btn.back') }}</span>
-            <span class="__btn __btn_all_in __pointer" @click="login">
+            <span class="__btn __btn_all_in __pointer" :class="{
+                'unuse': !isAgree
+            }" @click="login">
                 <span v-show="!isLoading">{{ $t('btn.submit') }}</span>
                 <loading v-show="isLoading" loadingType="dot"></loading>
             </span>
@@ -49,6 +64,7 @@ export default {
         const mnemonic = activeAccount.getMnemonic() || '';
 
         return {
+            agreeList: {},
             activeAccount,
             mnemonic,
             len: 12,
@@ -59,9 +75,21 @@ export default {
     computed: {
         mnemonicList() {
             return this.mnemonic.split(/\s/);
+        },
+        isAgree() {
+            for (let i = 1; i < 4; i++) {
+                if (!this.agreeList[i]) {
+                    return false;
+                }
+            }
+            return true;
         }
     },
     methods: {
+        toogleAgree(key) {
+            this.agreeList[key] = !this.agreeList[key];
+            this.agreeList = Object.assign({}, this.agreeList);
+        },
         back() {
             this.$wallet.clearActiveAccount();
             this.$router.go(-1);
@@ -79,7 +107,7 @@ export default {
             this.mnemonic = this.activeAccount.getMnemonic() || '';
         },
         login() {
-            if (this.isLoading) {
+            if (this.isLoading || !this.isAgree) {
                 return;
             }
 
@@ -104,6 +132,40 @@ export default {
 
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
+
+.agreement {
+    text-align: left;
+    margin-top: 20px;
+    font-size: 14px;
+    font-family: $font-normal, arial, sans-serif;
+    font-weight: 400;
+    color: rgba(255,255,255,1);
+    line-height: 18px;
+    .link {
+        text-decoration: underline;
+    }
+    &.active {
+        &::before {
+            background: url('~assets/imgs/agree.svg');
+            background-size: 100% 100%;
+        }
+    }
+    &:before {
+        display: inline-block;
+        content: ' ';
+        width: 18px;
+        height: 18px;
+        margin-bottom: -5px;
+        margin-right: 6px;
+        background: url('~assets/imgs/unagree.svg');
+        background-size: 100% 100%;
+    }
+}
+
+.__btn.__btn_all_in.unuse {
+    background: rgba(191,191,191,1);
+    color: #fff;
+}
 
 .wrapper {
     position: relative;

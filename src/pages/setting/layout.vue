@@ -12,6 +12,9 @@
                 <div class="row">
                     <span class="title">{{ $t('setting.version') }}</span>{{ version }}
                 </div>
+                <div class="row __pointer" @click="goNet">
+                    <span class="title">区块浏览器</span><span class="link">{{ netService }}</span>
+                </div>
                 <div class="row">
                     <a href="mailto:info@vite.org"  target="_blank">
                         <span class="title">{{ $t('setting.service') }}</span><span class="link">info@vite.org</span>
@@ -39,11 +42,20 @@ import secTitle from 'components/secTitle';
 export default {
     components: { secTitle },
     data() {
-        return { version: process.env.version };
+        return {
+            version: process.env.version,
+            netService: process.env.viteNet
+        };
     },
     computed: {
         height() {
             return this.$store.state.ledger.currentHeight;
+        }
+    },
+    methods: {
+        goNet() {
+            const locale = this.$i18n.locale === 'zh' ? 'zh/' : '';
+            window.open(`${ process.env.viteNet }${ locale }`);
         }
     }
 };

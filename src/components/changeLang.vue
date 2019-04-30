@@ -39,5 +39,4 @@ export default {
 <style lang="scss" scoped>
 @import "~assets/scss/list/start.scss";
 @import "~assets/scss/list/setting.scss";
-@import "~assets/scss/list/menu.scss";
 </style>

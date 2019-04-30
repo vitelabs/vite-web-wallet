@@ -135,7 +135,7 @@ export default {
                 pre = '￥';
             }
 
-            return pre + BigNumber.multi(txPair.price || 0, rate || 0, 2);
+            return txPair.rawData.ftokenShow + pre + BigNumber.multi(txPair.price || 0, rate || 0, 2);
         },
         getRate(tokenId) {
             const rateList = this.$store.state.exchangeRate.rateMap || {};
