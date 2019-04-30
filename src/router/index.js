@@ -20,6 +20,17 @@ export default function (VueRouter) {
             return;
         }
 
+        if (to.name && to.name.indexOf('start') !== -1 && to.name !== 'start') {
+            router.replace({ name: 'start' });
+            return;
+        }
+
+        const activeAcc = wallet.getActiveAccount();
+        if (!activeAcc && to.name && to.name !== 'start') {
+            router.replace({ name: 'start' });
+            return;
+        }
+
         // if (!from.name && to.name !== 'trade') {
         //     router.replace({ name: 'trade' });
         //     return;
