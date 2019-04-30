@@ -97,7 +97,7 @@ export default {
         },
         getSimpleAcc() {
             return {
-                name: activeAccount.getName(),
+                name: activeAccount ? activeAccount.getName() : '',
                 addr: activeAccount.getDefaultAddr()
             };
         },
