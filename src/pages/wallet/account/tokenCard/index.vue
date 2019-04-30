@@ -117,16 +117,24 @@ export default {
             return getTokenIcon(id);
         },
         receive() {
-            receiveDialog({ token: this.token });
+            receiveDialog({ token: this.token }).catch(e=>{
+                console.error(e)
+            })
         },
         charge() {
-            chargeDialog({ token: this.token });
+            chargeDialog({ token: this.token }).catch(e=>{
+                console.error(e)
+            })
         },
         withdraw() {
-            withdrawDialog({ token: this.token });
+            withdrawDialog({ token: this.token }).catch(e=>{
+                console.error(e)
+            })
         },
         showDetail(initTabName) {
-            tokenInfoDialog({ token: this.token, initTabName });
+            tokenInfoDialog({ token: this.token, initTabName }).catch(e=>{
+                console.error(e)
+            })
         },
         send() {
             if (!this.token.tokenId) {
