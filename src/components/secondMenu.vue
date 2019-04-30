@@ -7,10 +7,8 @@
             </li>
         </ul>
 
-        <go-net-btn class="go-net-wrapper"></go-net-btn>
-        <change-lang class="menu change-lang-wrapper"></change-lang>
-
         <ul class="right-lab-list">
+            <div class="tab __pointer">帮助</div>
             <div v-show="!isLogin" @click="dexStart" class="tab __pointer">
                 {{ isHaveUsers ? $t('unlockAcc') : $t('login')  }}</div>
             <div v-show="!isLogin" @click="dexChange" class="tab __pointer">
@@ -25,12 +23,10 @@
 </template>
 
 <script>
-import changeLang from 'components/changeLang';
 import dexToken from 'components/dexToken';
-import goNetBtn from './goNetBtn.vue';
 
 export default {
-    components: { goNetBtn, changeLang, dexToken },
+    components: { dexToken },
     props: {
         tabList: {
             type: Array,
@@ -111,10 +107,16 @@ export default {
         display: flex;
         flex-wrap: wrap;
         float: left;
+        .tab {
+            margin-right: 28px;
+        }
     }
 
     .right-lab-list {
         float: right;
+        .tab {
+            margin-left: 28px;
+        }
     }
 
     .tab {
@@ -126,7 +128,6 @@ export default {
         box-sizing: border-box;
         height: 100%;
         white-space: nowrap;
-        margin-right: 28px;
         text-align: center;
 
         &.active {

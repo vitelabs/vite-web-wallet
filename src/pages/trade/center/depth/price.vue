@@ -1,12 +1,12 @@
 <template>
     <div class="price-wrapper">
         <span class="price" :class="{
-            'up': +upDown > 0,
-            'down': +upDown < 0
+            'up': +upDownPrev > 0,
+            'down': +upDownPrev < 0
         }">{{ activeTxPair && activeTxPair.price ? activeTxPair.price : '' }}</span>
-        <span v-show="+upDown !== 0" class="p-icon" :class="{
-            'up-icon': +upDown > 0,
-            'down-icon': +upDown < 0
+        <span v-show="+upDownPrev !== 0" class="p-icon" :class="{
+            'up-icon': +upDownPrev > 0,
+            'down-icon': +upDownPrev < 0
         }"></span>
         <span class="real-price">{{ realPrice }}</span>
     </div>
@@ -20,8 +20,8 @@ export default {
         activeTxPair() {
             return this.$store.getters.exActiveTxPair;
         },
-        upDown() {
-            return this.activeTxPair && this.activeTxPair.upDownPre ? this.activeTxPair.upDownPre : '0';
+        upDownPrev() {
+            return this.activeTxPair ? this.activeTxPair.upDownPrev : '0';
         },
         realPrice() {
             let pre = '$';

@@ -14,7 +14,7 @@ let appLocale = window.viteWalletI18n ? window.viteWalletI18n.locale : '';
 if (appLocale) {
     appLocale = appLocale.indexOf('zh') === 0 ? 'zh' : 'en';
 }
-const locale = localStorage.getItem('lang') || appLocale || 'en';
+const locale = localStorage.getItem('lang') || appLocale || getDefaultLang() || 'en';
 
 // De,
 // fr,
@@ -28,3 +28,19 @@ const i18nConf = {
 
 Vue.use(VueI18n);
 export default new VueI18n(i18nConf);
+
+
+function getDefaultLang() {
+    try {
+        const type = navigator.appName;
+
+        // type == 'Netscape' ? !IE : IE5+ == navigator.systemLanguage
+        let lang = type === 'Netscape' ? navigator.language : navigator.userLanguage;
+        lang = lang.substr(0, 2);
+
+        return lang === 'zh' ? 'zh' : 'en';
+    } catch (err) {
+        console.warn(err);
+        return 'en';
+    }
+}

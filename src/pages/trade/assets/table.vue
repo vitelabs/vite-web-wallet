@@ -37,7 +37,9 @@
                  :closeIcon="true" :close="closeNumConfirm"
                  v-if="confirmShow">
             <div class="__row">
-                <div class="__row-t">{{ c.lable1 }}</div>
+                <div class="__row-t">{{ c.lable1 }}
+                    <span @click="setOpNumberAll(c)">all</span>
+                </div>
                 <div class="input un-click-able">
                     <img :src="c.icon" />
                     {{ balance[c.tokenId].tokenSymbol }}
@@ -208,6 +210,13 @@ export default {
         }
     },
     methods: {
+        setOpNumberAll(c) {
+            const balance = c.type.toLowerCase() === 'recharge' ? this.balance[c.tokenId].balance : this.balance[c.tokenId].available;
+            if (!+balance) {
+                return;
+            }
+            this.opNumber = balance;
+        },
         startLoophRate() {
             this.stopLoopRate();
 

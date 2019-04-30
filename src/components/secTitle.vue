@@ -9,11 +9,9 @@
 </template>
 
 <script>
-import goNetBtn from './goNetBtn.vue';
 import { blackHole } from 'utils/ethWallet/viteContract';
 
 export default {
-    components: { goNetBtn },
     props: {
         title: {
             default: function () {

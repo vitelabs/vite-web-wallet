@@ -36,13 +36,15 @@ const getters = {
         if (!state.activeTxPair) {
             return null;
         }
-        const activeTxPair = Object.assign({}, state.activeTxPair);
-        const upDown = BigNumber.minus(activeTxPair.price || 0, activeTxPair.priceBefore24h || 0);
-        const upDownPre = BigNumber.minus(activeTxPair.price || 0, activeTxPair.pricePrev || 0);
 
-        activeTxPair.upDown = upDown;
+        const activeTxPair = Object.assign({}, state.activeTxPair);
+
+        const upDown = BigNumber.minus(activeTxPair.price || 0, activeTxPair.priceBefore24h || 0);
+        const upDownPrev = BigNumber.minus(activeTxPair.price || 0, activeTxPair.pricePrev || 0);
+
+        activeTxPair.upDown = BigNumber.formatNum(upDown, activeTxPair.toDecimals);
+        activeTxPair.upDownPrev = +upDownPrev ? upDownPrev : '0';
         activeTxPair.upDownPercent = activeTxPair.price24hChange ? `${ BigNumber.multi(activeTxPair.price24hChange, 100, 2) }%` : '';
-        activeTxPair.upDownPre = upDownPre;
 
         return activeTxPair;
     }
