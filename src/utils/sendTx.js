@@ -55,6 +55,7 @@ const defaultConfig = {
         isShowCancel: true,
         cancel: () => {}
     },
+    sendTx: true,
     confirm: {
         showMask: true,
         operate: ''
@@ -101,7 +102,7 @@ export default function sendTx(methodName, data, config = defaultConfig) {
             console.log('[beforeSendTx]');
 
             if (!checkPowResult || !checkPowResult.difficulty) {
-                return next();
+                return next(!config.sendTx);
             }
 
             console.log('[beforeSendTx] powInstance.isShow', powInstance.isShow);
@@ -116,7 +117,7 @@ export default function sendTx(methodName, data, config = defaultConfig) {
                         return rej();
                     }
 
-                    next().then(result => {
+                    next(!config.sendTx).then(result => {
                         res(result);
                     }).catch(err => {
                         rej(err);
@@ -223,6 +224,7 @@ class EventEmitter {
 function formatConfig(config) {
     config = config || defaultConfig;
 
+    const sendTx = !!(!config.sendTx && config.sendTx !== false);
     const pow = !!config.pow;
     const powConfig = config.powConfig ? config.powConfig : defaultConfig.powConfig;
 
@@ -241,7 +243,7 @@ function formatConfig(config) {
     }
 
     if (pow) {
-        return { pow, powConfig, confirmConfig: null };
+        return { pow, sendTx, powConfig, confirmConfig: null };
     }
 
     const confirmConfig = config.confirm ? config.confirm : defaultConfig.confirm;
@@ -253,5 +255,5 @@ function formatConfig(config) {
         throw new Error('[Error] utils/sendTx: config.confirm.operate is required and should be a string, while pow is off.');
     }
 
-    return { pow, powConfig, confirmConfig };
+    return { pow, sendTx, powConfig, confirmConfig };
 }

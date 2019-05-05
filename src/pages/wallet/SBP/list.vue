@@ -51,6 +51,7 @@ import date from 'utils/date.js';
 import ellipsisAddr from 'utils/ellipsisAddr.js';
 import BigNumber from 'utils/bigNumber';
 import sendTx from 'utils/sendTx';
+import $Vite from 'utils/viteClient';
 
 const amount = 100000;
 
@@ -82,7 +83,8 @@ export default {
         return {
             activeAccount,
             address,
-            showTimeTips: -1
+            showTimeTips: -1,
+            totalReward: null
         };
     },
     computed: {
@@ -241,11 +243,52 @@ export default {
             this.showConfirm('edit', item.rawData);
         },
         reward(item) {
+            this.totalReward = null;
+            $Vite.request('register_getAvailableReward', '00000000000000000001', item.rawData.name).then(data => {
+                if (!data || !data.totalReward) {
+                    this.totalReward = null;
+                }
+                this.totalReward = data.totalReward;
+            }).catch(err => {
+                console.warn(err);
+            });
+
             this.activeAccount.initPwd({
                 title: this.$t('walletSBP.rewardConfirm.title'),
                 submitTxt: this.$t('walletSBP.rewardConfirm.rightBtn'),
                 cancelTxt: this.$t('walletSBP.rewardConfirm.leftBtn'),
-                content: this.$t('walletSBP.rewardConfirm.describe', { amount }),
+                content: `<div style="font-size: 14px;">
+                    ${ this.$t('walletSBP.rewardConfirm.describe1', { time: date(new Date().getTime(), 'zh') }) }
+                    <div style="
+                        padding: 10px 15px;
+                        box-sizing: border-box;
+                        height: 40px; 
+                        line-height: 20px;
+                        background:rgba(243,246,249,1);
+                        border-radius:2px;
+                        border:1px solid rgba(212,222,231,1);
+                        margin: 15px 0;
+                    ">VITE
+                        <span style="color:rgba(0,122,255,1); float: right;">${ this.totalReward || '--' }</span>
+                    </div>
+                    <div style="
+                        font-family: PingFang-SC-Regular;
+                        font-weight: 400;
+                        color: rgba(94,104,117,1);
+                        line-height: 18px;
+                    "><span style="
+                            width: 6px;
+                            height: 6px;
+                            background: rgba(0,122,255,1);
+                            display: inline-block;
+                            margin-right: 4px;
+                            border-radius: 6px;
+                    "></span>     
+                    ${ this.$t('walletSBP.rewardConfirm.describe2') }
+                    <a style="color: #007AFF" href="${ process.env.viteNet }${ this.$i18n.locale === 'zh' ? 'zh/' : '' }SBPDetail/${ item.rawData.name }"  target="_blank">${ this.$t('walletSBP.rewardConfirm.describe3') }</a>
+                    ${ this.$t('walletSBP.rewardConfirm.describe4') }
+                    </div>
+                </div>`,
                 submit: () => {
                     sendTx('retrieveReward', {
                         nodeName: item.rawData.name,
