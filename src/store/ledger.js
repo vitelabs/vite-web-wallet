@@ -48,7 +48,7 @@ const mutations = {
         state.currentHeight = height || 0;
     },
     setTokenInfo(state, { tokenInfo, tokenId }) {
-        if (!tokenInfo || (!tokenInfo.tokenId && tokenId)) {
+        if (!tokenInfo || (!tokenInfo.tokenId && !tokenId)) {
             return;
         }
 
@@ -58,6 +58,8 @@ const mutations = {
         if (state.defaultTokenIds[tokenId]) {
             state.tokenInfoMaps[tokenId].icon = state.defaultTokenIds[tokenId].icon;
         }
+
+        state.tokenInfoMaps = Object.assign({}, state.tokenInfoMaps);
     }
 };
 
@@ -86,11 +88,10 @@ const actions = {
             dispatch('fetchTokenInfo', tokenId);
         }
     },
-    fetchTokenInfo({ commit, state }, tokenId) {
+    fetchTokenInfo({ commit }, tokenId) {
         return apis.fetchTokenInfo(tokenId).then(result => {
             commit('setTokenInfo', { tokenInfo: result, tokenId });
-
-            return state.tokenInfoMaps[tokenId];
+            return result;
         });
     }
 };
