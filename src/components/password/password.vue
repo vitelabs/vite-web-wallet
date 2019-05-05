@@ -9,7 +9,7 @@
             <input ref="passInput" v-model="password" :placeholder="$t('pwdConfirm.placeholder')" type="password"/>
         </form>
 
-        <div v-show="isShowPWD" class="hold-pwd __pointer" @click="toggleHold">
+        <div v-show="isShowPWD && isShowHold" class="hold-pwd __pointer" @click="toggleHold">
             <span :class="{ 'active': isPwdHold }"></span>
             {{ $t('pwdConfirm.conf') }}
         </div>
@@ -23,6 +23,7 @@ import localStorage from 'utils/localStorage';
 
 let lastE = null;
 const HoldPwdKey = 'isHoldPWD';
+const ShowHoldNumKey = 'showHoldPWDNum';
 
 export default {
     components: { confirm },
@@ -77,10 +78,17 @@ export default {
         this.$onKeyDown(13, lastE);
     },
     data() {
+        const isPwdHold = !!localStorage.getItem(HoldPwdKey);
+        const showHoldNum = +localStorage.getItem(ShowHoldNumKey) || 0;
+        const isShowHold = showHoldNum < 3 && !isPwdHold;
+
+        localStorage.setItem(ShowHoldNumKey, isShowHold ? showHoldNum + 1 : 4);
+
         return {
             password: '',
-            isPwdHold: !!localStorage.getItem(HoldPwdKey),
-            isLoading: false
+            isLoading: false,
+            isPwdHold,
+            isShowHold
         };
     },
     computed: {

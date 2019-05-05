@@ -34,6 +34,13 @@ export default {
             this.isHoldPWD = !this.isHoldPWD;
             localStorage.setItem(HoldPwdKey, this.isHoldPWD);
             this.toggleShow();
+
+            const activeAccount = this.$wallet.activeAccount;
+            if (this.isHoldPWD) {
+                activeAccount.holdPWD();
+            } else {
+                activeAccount.releasePWD();
+            }
         }
     }
 };
