@@ -268,6 +268,10 @@ export default {
             );
         },
         voteList() {
+            if (!this.tokenInfo) {
+                return [];
+            }
+
             const c = voteRecord => {
                 const data = Object.assign({}, voteRecord);
 
@@ -283,9 +287,9 @@ export default {
                 data.nodeStatus === 2 && (data.voteStatus = 'voteNotWork');
                 data.nodeStatusText = this.$t('walletVote.section1.nodeStatusMap')[data.nodeStatus];
                 data.voteStatusText = this.$t('walletVote.section1.voteStatusMap')[data.voteStatus];
-                const token = this.$store.getters.viteTokenInfo;
+
                 // Tans
-                data.voteNum = BigNumber.toBasic(data.balance, token.decimals) || this.balance || 0;
+                data.voteNum = BigNumber.toBasic(data.balance, this.tokenInfo.decimals) || this.balance || 0;
                 data.operate = this.$t('walletVote.section1.operateBtn');
 
                 return data;
@@ -316,11 +320,13 @@ export default {
             return [];
         },
         nodeList() {
-            const token = this.$store.getters.viteTokenInfo;
+            if (!this.tokenInfo) {
+                return [];
+            }
 
             return this.nodeData.map(v => {
                 // Tans
-                v.voteNum = BigNumber.toBasic(v.voteNum, token.decimals) || 0;
+                v.voteNum = BigNumber.toBasic(v.voteNum, this.tokenInfo.decimals) || 0;
                 v.operate = this.$t('walletVote.section2.operateBtn');
                 return v;
             }).filter(v => {

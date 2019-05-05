@@ -95,7 +95,7 @@ class account {
             };
         });
 
-        [ 'getBalance', 'lock' ].forEach(name => {
+        [ 'getBalance', 'lock', 'sign' ].forEach(name => {
             this[name] = (...args) => this.account[name] && this.account[name](...args);
         });
     }

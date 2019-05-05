@@ -222,7 +222,7 @@ export default {
         },
         sendRegisterTx() {
             this.loading = true;
-            const nodeName = this.nodeName;
+            const nodeName = this.nodeName.trim();
             const producerAddr = this.producerAddr;
 
             sendTx('SBPreg', this.getParams({ producerAddr, amount, nodeName }), {
