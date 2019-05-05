@@ -4,27 +4,25 @@
              :btnUnuse="isLoading" :isShowLoading="true"
              :leftBtnTxt="cancelTxt || $t('btn.cancel')" :rightBtnTxt="submitTxt || $t('btn.submit')"
              :leftBtnClick="exchange ? _submit : _cancle"  :rightBtnClick="exchange ? _cancle : _submit">
-        <form autocomplete="off" v-show="isShowPWD" class="pass-input" :class="{
-            'distance': !!content
-        }">
-            <!-- Safari autocomplete -->
-            <!-- <input fake_pass type="password" style="display:none"/> -->
+
+        <form autocomplete="off" v-show="isShowPWD" class="pass-input" :class="{ 'distance': !!content }">
             <input ref="passInput" v-model="password" :placeholder="$t('pwdConfirm.placeholder')" type="password"/>
         </form>
-        <div v-show="isShowPWD && isShowPWDHold" class="hold-pwd __pointer" @click="toggleHold">
+
+        <div v-show="isShowPWD" class="hold-pwd __pointer" @click="toggleHold">
             <span :class="{ 'active': isPwdHold }"></span>
-            {{ $t('pwdConfirm.conf', {
-                time: $t(`setting.timeList.${holdTime}`)
-            }) }}
+            {{ $t('pwdConfirm.conf') }}
         </div>
+
     </confirm>
 </template>
 
 <script>
-import localStorage from 'utils/localStorage';
 import confirm from 'components/confirm.vue';
+import localStorage from 'utils/localStorage';
 
 let lastE = null;
+const HoldPwdKey = 'isHoldPWD';
 
 export default {
     components: { confirm },
@@ -72,7 +70,6 @@ export default {
     },
     mounted() {
         lastE = this.$onKeyDown(13, () => {
-            this.$refs.passInput.blur();
             this._submit();
         });
     },
@@ -81,10 +78,8 @@ export default {
     },
     data() {
         return {
-            holdTime: localStorage.getItem('noPass') || 5,
-            isShowPWDHold: !window.isShowPWD,
             password: '',
-            isPwdHold: !!window.isPwdHold,
+            isPwdHold: !!localStorage.getItem(HoldPwdKey),
             isLoading: false
         };
     },
@@ -113,9 +108,6 @@ export default {
         },
 
         _cancle() {
-            // if (this.isLoading) {
-            //     return;
-            // }
             this.clear();
             this.cancel && this.cancel();
         },
@@ -151,7 +143,8 @@ export default {
                 if (this.type !== 'normal') {
                     this.$toast(this.$t('unlockSuccess'));
                 }
-                this.isPwdHold && activeAccount.holdPWD(password, this.holdTime * 60 * 1000);
+
+                this.isPwdHold && activeAccount.holdPWD(password);
                 this.clear();
                 this.submit && this.submit();
             };
@@ -172,11 +165,17 @@ export default {
                 addr: activeAccount.getDefaultAddr()
             }, password).then(() => {
                 this.isLoading = false;
+                if (!this.password) {
+                    return;
+                }
                 activeAccount = this.$wallet.getActiveAccount();
                 activeAccount.unlock();
                 deal(true);
             }).catch(err => {
                 this.isLoading = false;
+                if (!this.password) {
+                    return;
+                }
                 console.warn(err);
                 deal(false);
             });

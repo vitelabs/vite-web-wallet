@@ -123,7 +123,7 @@
     "v": "Current Version: {version}"
   },
   "pwdConfirm": {
-    "conf": "Open password-free mode within {time}",
+    "conf": "开启免密设置，您只需要登录时输入密码，交易过程无需再输入密码",
     "title": "Password",
     "placeholder": "Please input password of wallet",
     "unlockAcc": "Please input password to unlock {name} account"
@@ -158,8 +158,8 @@
     "addAddr": "Add Address",
     "addrList": "Addresses of Accounts",
     "setDefault": "Select Default Address",
-    "autoLogout": "Auto Logout Time",
-    "noPass": "Login Without Password",
+    "autoLogout": "Auto Logout Time",    
+    "noPass": "是否开启免密",
     "timeList": {
       "5": "5 Minutes",
       "10": "10 Minutes",
