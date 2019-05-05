@@ -1,9 +1,10 @@
 import { getClient } from 'utils/request';
-import { accountBlock } from '@vite/vitejs';
+import sendTx from 'utils/sendTx';
 import { wallet } from 'utils/wallet';
-import rpcClient from 'utils/viteClient';
 import { addrSpace } from 'utils/storageSpace';
-import { purePow } from 'components/pow';
+// import { accountBlock } from '@vite/vitejs';
+// import rpcClient from 'utils/viteClient';
+// import { purePow } from 'components/pow';
 
 
 const STORAGEKEY = 'INDEX_COLLECT_TOKEN';
@@ -37,20 +38,29 @@ export const getWithdrawFee = ({ tokenId, walletAddress, amount, containsFee = f
 export const getChargeInfo = ({ tokenId, addr: walletAddress }, url) => client({ path: 'deposit_info', params: { tokenId, walletAddress }, host: url });
 export const withdraw = async ({ amount, withdrawAddress, gateAddr, tokenId }, url) => {
     const account = wallet.activeAccount;
-    const address = account.getDefaultAddr();
-    const unlockAcc = account.account.unlockAcc;
-    const accountBlockContent = await rpcClient.buildinTxBlock.sendTx.async({ toAddress: gateAddr, amount, accountAddress: address, tokenId });
-    const quota = await rpcClient.pledge.getPledgeQuota(address);
-    if (quota.txNum < 1) {
-    // eslint-disable-next-line no-unused-vars
-        await purePow({ accountBlock: accountBlockContent });
-    }
+    // const address = account.getDefaultAddr();
+    // const unlockAcc = account.account.unlockAcc;
+    // const accountBlockContent = await rpcClient.buildinTxBlock.sendTx.async({ toAddress: gateAddr, amount, accountAddress: address, tokenId });
+    // const quota = await rpcClient.pledge.getPledgeQuota(address);
+    // if (quota.txNum < 1) {
+    //     await purePow({ accountBlock: accountBlockContent });
+    // }
 
-    const signedBlock = accountBlock.signAccountBlock(accountBlockContent, unlockAcc.privateKey);
+    const signedBlock = await sendTx('asyncSendTx', {
+        toAddress: gateAddr,
+        amount,
+        tokenId
+    }, {
+        sendTx: false,
+        pow: true,
+        powConfig: { isShowCancel: true }
+    });
+
+    // const signedBlock = accountBlock.signAccountBlock(accountBlockContent, unlockAcc.privateKey);
 
     const rawTx = JSON.stringify(signedBlock);
     const signInfo = { rawTx, withdrawAddress };
-    const signature = unlockAcc.sign(Buffer(JSON.stringify(signInfo)).toString('hex'));
+    const signature = account.sign(Buffer(JSON.stringify(signInfo)).toString('hex'));
     return await client({ method: 'post', path: 'withdraw', params: { rawTx, withdrawAddress, signature }, host: url });
 };
 

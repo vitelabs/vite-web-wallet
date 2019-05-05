@@ -19,10 +19,10 @@ const goViteServer = {
     dexTestNet: '\'wss://testnet.vitewallet.com/beta/ws\''
 };
 const viteNet = {
-    production: '\'https://testnet.vite.net/\'',
+    production: '\'https://explorer.vite.net/\'',
     test: '\'http://132.232.134.168:8080/\'',
     dev: '\'http://132.232.134.168:8080/\'',
-    dexTestNet: '\'https://testnet.vite.net/\''
+    dexTestNet: '\'https://explorer.vite.net/\''
 };
 const ethServer = {
     production: '\'https:\/\/mainnet.infura.io\/http\'',

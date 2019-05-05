@@ -2,11 +2,7 @@
     <div class="my-quota-wrapper">
         <div class="row">
             <div class="title">{{ $t('walletQuota.myQuota') }}</div>
-            <div class="text">{{ quota || 0 }}</div>
-        </div>
-        <div class="row">
-            <div class="title">{{ $t('walletQuota.maxTxNum') }}</div>
-            <div class="text">{{ txNum || 0 }}</div>
+            <div class="text">{{ txNum || 0 }} UTPS</div>
         </div>
     </div>
 </template>
@@ -24,9 +20,6 @@ export default {
         return { address };
     },
     computed: {
-        quota() {
-            return this.$store.state.pledge.quotaAmount || 0;
-        },
         txNum() {
             return this.$store.state.pledge.pledgeTransNum;
         }
@@ -64,10 +57,6 @@ export default {
 
 .row {
     font-family: $font-bold, arial, sans-serif;
-
-    &:first-child {
-        margin-bottom: 40px;
-    }
 
     .title {
         font-size: 14px;
