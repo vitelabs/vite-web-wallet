@@ -88,7 +88,7 @@ export default {
         go(name) {
             if (name === 'logout') {
                 this.$wallet.logout();
-                this.$router.push({ name: 'trade' });
+                // this.$router.push({ name: 'trade' });
                 return;
             }
 

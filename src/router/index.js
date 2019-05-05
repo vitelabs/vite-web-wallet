@@ -19,24 +19,29 @@ export default function (VueRouter) {
             return;
         }
 
-        if (!from.name && to.name && to.name.indexOf('start') !== -1 && to.name !== 'start') {
-            router.replace({ name: 'start' });
-            return;
+        // Init
+        if (!from.name) {
+            // To start***, but not start
+            if (to.name && to.name.indexOf('start') !== -1 && to.name !== 'start') {
+                router.replace({ name: 'start' });
+                return;
+            }
+
+            const activeAcc = wallet.getActiveAccount();
+            // Don't have activeAccount and want to go start*** or trade***
+            if (!activeAcc && to.name && [ 'start', 'trade' ].indexOf(to.name) === -1) {
+                router.replace({ name: 'start' });
+                return;
+            }
         }
 
-        const activeAcc = wallet.getActiveAccount();
-        if (!from.name && !activeAcc && to.name && [ 'start', 'trade' ].indexOf(to.name) === -1) {
-            router.replace({ name: 'start' });
-            return;
+        // If want to go start, and from isn't start***, record from.
+        if (to.name && to.name === 'start' && from.name && from.name.indexOf('start') === -1) {
+            wallet.setLastPage(from.name);
         }
 
-        // if (!from.name && to.name !== 'trade') {
-        //     router.replace({ name: 'trade' });
-        //     return;
-        // }
-
+        // If must login, but not login, to start.
         if (loginRoutes.indexOf(to.name) >= 0 && !wallet.isLogin) {
-            (to.name !== 'start') && wallet.setLastPage(to.name);
             router.replace({ name: 'start' });
             return;
         }
