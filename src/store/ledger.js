@@ -21,7 +21,7 @@ const mutations = {
         state.currentHeight = height || 0;
     },
     setTokenInfo(state, { tokenInfo, tokenId }) {
-        if (!tokenInfo || (!tokenInfo.tokenId && tokenId)) {
+        if (!tokenInfo || (!tokenInfo.tokenId && !tokenId)) {
             return;
         }
 
@@ -32,7 +32,6 @@ const mutations = {
             state.tokenInfoMaps[tokenId].icon = state.defaultTokenIds[tokenId].icon;
         }
     },
-    // eslint-disable-next-line no-unused-vars
     setAllTokens(state, payload = []) {
         state.allTokens = payload;
     }
@@ -68,11 +67,10 @@ const actions = {
             dispatch('fetchTokenInfo', tokenId);
         }
     },
-    fetchTokenInfo({ commit, state }, tokenId) {
+    fetchTokenInfo({ commit }, tokenId) {
         return apis.fetchTokenInfo(tokenId).then(result => {
             commit('setTokenInfo', { tokenInfo: result, tokenId });
-
-            return state.tokenInfoMaps[tokenId];
+            return result;
         });
     }
 };
@@ -89,8 +87,6 @@ const getters = {
         if (!state.tokenInfoMaps[ViteId]) {
             return null;
         }
-        state.tokenInfoMaps[ViteId].tokenId = ViteId;// ？ change state outside of mutation
-
         return state.tokenInfoMaps[ViteId];
     }
 };

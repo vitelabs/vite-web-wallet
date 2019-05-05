@@ -77,7 +77,6 @@ export default {
             }, 1000);
         },
         _cancel() {
-            console.log('cancel');
             this.clearProcessTimeout();
             this.isShow = false;
             this.cancel && this.cancel();
@@ -92,7 +91,7 @@ export default {
             limitTimeout = setTimeout(() => {
                 this.isTimeUp = true;
                 this.timtUpCb && this.timtUpCb();
-            }, 10000);
+            }, 1500);
         },
 
         stopCount(next) {
