@@ -4,12 +4,11 @@
 
         <div class="setting common-list-wrapper __pointer">
             <span class="list-title" :class="{
-                'down': !showTime,
-                'up': showTime
-            }" @click="toggletimeList">{{ $t(`setting.timeList.${noPassTime}`) }}</span>
-            <ul class="list" v-show="showTime">
-                <li v-for="(time, index) in timeList" :key="index" v-show="time !== noPassTime"
-                    @click="setTime(time)">{{ $t(`setting.timeList.${time}`) }}</li>
+                'down': !isShow,
+                'up': isShow
+            }" @click="toggleShow">{{ isHoldPWD }}</span>
+            <ul class="list" v-show="isShow">
+                <li @click="toggleHold">{{ !isHoldPWD }}</li>
             </ul>
         </div>
     </div>
@@ -18,23 +17,23 @@
 <script>
 import localStorage from 'utils/localStorage';
 
+const HoldPwdKey = 'isHoldPWD';
+
 export default {
     data() {
         return {
-            noPassTime: localStorage.getItem('noPass') || 5,
-            showTime: false,
-            // Minutes
-            timeList: [ 5, 10, 30, 60, 12 * 60 ]
+            isHoldPWD: !!localStorage.getItem(HoldPwdKey),
+            isShow: false
         };
     },
     methods: {
-        setTime(time) {
-            localStorage.setItem('noPass', time);
-            this.noPassTime = time;
-            this.toggletimeList();
+        toggleShow() {
+            this.isShow = !this.isShow;
         },
-        toggletimeList() {
-            this.showTime = !this.showTime;
+        toggleHold() {
+            this.isHoldPWD = !this.isHoldPWD;
+            localStorage.setItem(HoldPwdKey, this.isHoldPWD);
+            this.toggleShow();
         }
     }
 };

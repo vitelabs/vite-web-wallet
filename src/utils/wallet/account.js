@@ -1,6 +1,7 @@
 import { pwdConfirm } from 'components/password/index.js';
 import { constant } from '@vite/vitejs';
 import acc from 'utils/storeAcc.js';
+import localStorage from 'utils/localStorage';
 
 import keystoreAcc from './keystoreAccount';
 import walletAcc from './walletAccount';
@@ -13,7 +14,7 @@ const AccountType = {
     wallet: 'wallet',
     addr: 'address'
 };
-let passTimeout;
+const HoldPwdKey = 'isHoldPWD';
 
 class account {
     constructor({
@@ -53,7 +54,7 @@ class account {
         // KeystoreAccount
         keystore, privateKey
     }) {
-        this.isHoldPWD = false;
+        this.isHoldPWD = !!localStorage.getItem(HoldPwdKey);
         this.type = type;
         this.pass = pass || '';
         this.name = checkName(name);
@@ -99,19 +100,15 @@ class account {
         });
     }
 
-    holdPWD(pwd, time) {
+    holdPWD(pwd) {
         this.pass = pwd;
         this.isHoldPWD = true;
-        passTimeout = setTimeout(() => {
-            this.releasePWD();
-        }, time);
+        localStorage.setItem(HoldPwdKey, true);
     }
 
     releasePWD() {
-        passTimeout && clearTimeout(passTimeout);
-        passTimeout = null;
         this.isHoldPWD = false;
-        window.isShowPWD = false;
+        localStorage.setItem(HoldPwdKey, false);
     }
 
     unlockAccount() {
