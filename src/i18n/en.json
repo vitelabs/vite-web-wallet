@@ -37,9 +37,9 @@
     },
     "errCode": {
         "35003": "{name} ID conflict occurs, please re-submit later",
-        "35004": "Built-in contract error, please try again later（35004）",
+        "35004": "Invalid parameters（35004）",
         "35005": "Transactions are sent too frequent, please try again later",
-        "35006": "Built-in contract method not exist, please try again later（35006）",
+        "35006": "合约方法不存在（35006）",
         "36001": "You cannot make any transfer until you receive a transaction",
         "36002": "System verify failed, please try again later（36002）",
         "36003": "System verify failed, please try again later（36003）",
