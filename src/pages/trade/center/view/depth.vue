@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import ECharts from 'vue-echarts/components/ECharts';
+import ECharts from 'vue-echarts';
 import BigNumber from 'utils/bigNumber.js';
 
 require('echarts/lib/chart/line');

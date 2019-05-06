@@ -29,6 +29,12 @@ const _timeList = {
 
 export default class dataFeeds {
     constructor(activeTxPair) {
+        this.init(activeTxPair);
+    }
+
+    init(activeTxPair) {
+        this.unsubscribeBars();
+
         this.activeTxPair = activeTxPair;
         this.symbolName = `${ activeTxPair.ftokenShow }/${ activeTxPair.ttokenShow }`;
         this.lastResolution = null;
@@ -73,8 +79,9 @@ export default class dataFeeds {
     }
 
     async getBars(symbolInfo, resolution, from, to, onHistoryCallback, onErrorCallback) {
-        // console.log('[getBars start]', resolution, from, to);
+        // console.log('[getBars start]', this.symbolName, resolution, from, to);
 
+        const historySymbol = this.symbolName;
         const _resolution = formatResolution(resolution, from, to);
         this.lastResolution = _resolution;
 
@@ -82,8 +89,15 @@ export default class dataFeeds {
         try {
             result = await this.fetchKlineData(_resolution, from, to);
         } catch (err) {
+            if (this.symbolName !== historySymbol) {
+                return;
+            }
             console.warn(err);
             onErrorCallback(err);
+            return;
+        }
+
+        if (this.symbolName !== historySymbol) {
             return;
         }
 

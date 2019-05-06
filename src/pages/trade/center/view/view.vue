@@ -1,6 +1,6 @@
 <template>
     <div class="ex-view-container">
-        <kline :toogleDepth="toogleDepth" :showView="showView" v-show="showView === 'kline'"></kline>
+        <kline :toogleDepth="toogleDepth" v-show="showView === 'kline'"></kline>
         <depth :toogleDepth="toogleDepth" v-if="showView === 'depth'"></depth>
     </div>
 </template>
