@@ -57,13 +57,14 @@ export default {
                 return ;
             }
 
-            const code = err && err.error ? err.error.code || -1
-                : err ? err.code : -1;
+            const error = err && err.error ? err.error : err || null;
+            const code = error ? error.code || -1 : -1;
+            const errMsg = error ? error.message || error.msg || '' : '';
 
             let msg = code === -1 || !this.$i18n.messages.zh.errCode[Math.abs(code)]
                 ? message || this.$t('hint.err') : this.$t(`errCode.${ Math.abs(code) }`);
             if (code) {
-                msg = `${ msg }(${ code })`;
+                msg = `${ Math.abs(code) === 32002 ? errMsg : msg } (${ code })`;
             }
             toast(msg, type, position);
         };
