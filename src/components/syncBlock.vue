@@ -21,8 +21,8 @@ export default {
     },
     methods: {
         goNet() {
-            const locale = this.$i18n.locale === 'zh' ? 'zh/' : '';
-            window.open(`${ process.env.viteNet }${ locale }`);
+            // const locale = this.$i18n.locale === 'zh' ? 'zh/' : '';
+            // window.open(`${ process.env.viteNet }${ locale }`);
         }
     }
 };

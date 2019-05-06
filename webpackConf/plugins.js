@@ -38,9 +38,9 @@ const contractAddress = {
 };
 const conversionHost = {
     production: '\'gateway.vite.net\'',
-    test: '\'132.232.60.116:8000\'',
-    dev: '\'132.232.60.116:8000\'',
-    dexTestNet: '\'132.232.60.116:8000\''
+    test: '\'http://132.232.60.116:8001\'',
+    dev: '\'http://132.232.60.116:8001\'',
+    dexTestNet: '\'http://132.232.60.116:8001\''
 };
 const ethNet = {
     production: '\'https://etherscan.io\'',
