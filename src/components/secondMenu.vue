@@ -8,7 +8,7 @@
         </ul>
 
         <ul class="right-lab-list">
-            <div class="tab __pointer">帮助</div>
+            <div class="tab __pointer" @click="goHelp">{{ $t('help') }}</div>
             <div v-show="!isLogin" @click="dexStart" class="tab __pointer">
                 {{ isHaveUsers ? $t('unlockAcc') : $t('login')  }}</div>
             <div v-show="!isLogin" @click="dexChange" class="tab __pointer">
@@ -67,6 +67,9 @@ export default {
             this.isShowDexToken = false;
         },
 
+        goHelp() {
+            window.open('/help');
+        },
         dexStart() {
             if (!this.isHaveUsers) {
                 this.go('start');
@@ -78,7 +81,6 @@ export default {
         dexChange() {
             if (!this.isHaveUsers) {
                 this.$router.push({ name: 'startCreate' });
-
                 return;
             }
             this.go('start');
@@ -89,11 +91,6 @@ export default {
 
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
-
-.dex .head .tab {
-    color: rgba(189, 193, 209, 1);
-    font-size: 13px;
-}
 
 .head {
     box-sizing: border-box;
@@ -120,10 +117,10 @@ export default {
     }
 
     .tab {
-        font-size: 14px;
+        color: #BDC1D1;
+        font-size: 13px;
         font-family: $font-bold, arial, sans-serif;
         font-weight: 600;
-        color: rgba(29, 32, 36, 0.6);
         display: inline-block;
         box-sizing: border-box;
         height: 100%;

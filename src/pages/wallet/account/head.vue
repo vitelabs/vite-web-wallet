@@ -41,7 +41,7 @@
                 </div>
             </div>
         </div>
-        <div class="head__item">
+        <div class="address head__item">
             <img class="icon" src="~assets/imgs/head_addr.png" />
             <vite-address
                 :title="$t('wallet.address')"
@@ -204,6 +204,8 @@ export default {
 @import "~assets/scss/vars.scss";
 
 .account-head-wrapper {
+    width: 100%;
+    overflow: auto;
     position: relative;
     text-align: center;
     background: #fff;
@@ -213,13 +215,16 @@ export default {
     flex-wrap: no-wrap;
     flex-direction: row;
     justify-content: space-between;
-    height: 100px;
-    min-width: 1300px;
+    min-height: 100px;
     .head__item {
         border-right: 1px solid rgba(227, 235, 245, 0.6);
         display: flex;
         align-items: center;
         padding: 0 20px;
+        min-height: 100px;
+        &.address {
+            min-width: 600px;
+        }
         .icon{
             height: 34px;
             width: 34px;
@@ -279,6 +284,7 @@ export default {
             }
 
             .btn__small {
+                padding: 0 20px;
                 box-sizing: border-box;
                 text-align: center;
                 font-size: 14px;
@@ -287,7 +293,6 @@ export default {
                 color: rgba(94,104,117,1);
                 display: flex;
                 justify-content: center;
-                padding-right: 30px;
                 align-items: center;
                 &:first-child{
                     color: rgba(0,122,255,1);
