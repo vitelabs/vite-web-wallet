@@ -22,7 +22,7 @@ block content
     .block__content.edit.space
         div   {{$t("tokenCard.withdraw.labels.fee")}}
         div {{(fee||'--') }} <span class="light">{{token.tokenSymbol}}</span>
-    .err(v-if="failTips") {{failTips}}
+    .err_submit(v-if="failTips") {{failTips}}
         .dot
 
 </template>
@@ -196,13 +196,15 @@ export default {
         }
     }
 }
-.err{
+.err_submit{
     padding-left: 13px;
     position: relative;
     width: 100%;
     color: #FF2929;
     font-size: 14px;
     font-family: $font-normal;
+    margin-top: 6px;
+    top: 14px;
     .dot {
         width: 6px;
         height: 6px;
@@ -210,7 +212,7 @@ export default {
         border-radius: 100%;
         position: absolute;
         left: 0;
-        top: 6px;
+        top: 10px;
     }
 }
 .block__content {
