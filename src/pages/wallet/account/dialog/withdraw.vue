@@ -30,7 +30,7 @@ block content
 <script>
 import { verifyAddr, getWithdrawInfo, getWithdrawFee, withdraw } from 'services/gate';
 import { wallet } from 'utils/wallet';
-import { debounce } from 'lodash';
+import debounce from 'lodash/debounce';
 import { getValidBalance } from 'utils/validations';
 import bigNumber from 'utils/bigNumber';
 import tooltips from 'components/tooltips';
