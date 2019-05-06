@@ -1,6 +1,7 @@
 <template>
     <div class="auto-logout-wrapper">
-        <div class="title">{{ $t('setting.autoLogout') }}</div>
+        <div class="small-title bold">{{ $t('setting.autoLogout') }}</div>
+        <div class="describe">{{ $t('setting.logoutDescribe') }}</div>
 
         <div class="setting common-list-wrapper __pointer">
             <span class="list-title" :class="{
@@ -16,21 +17,23 @@
 </template>
 
 <script>
-import localStorage from 'utils/localStorage';
 
 export default {
     data() {
         return {
-            autoLogoutTime: localStorage.getItem('autoLogoutTime') || 5,
             showTime: false,
             // Minutes
             timeList: [ 5, 10, 30, 60, 12 * 60 ]
         };
     },
+    computed: {
+        autoLogoutTime() {
+            return this.$store.state.env.autoLogoutTime;
+        }
+    },
     methods: {
         setTime(time) {
-            localStorage.setItem('autoLogoutTime', time);
-            this.autoLogoutTime = time;
+            this.$store.commit('setAutoLogoutTime', time);
             this.toggletimeList();
         },
         toggletimeList() {
@@ -42,13 +45,13 @@ export default {
 
 <style lang="scss" scoped>
 @import "~assets/scss/list/setting.scss";
+@import "./setting.scss";
 
-.title {
-    font-size: 14px;
-    color: #1d2024;
-    font-family: $font-bold, arial, sans-serif;
-    letter-spacing: 0.35px;
+.describe {
     line-height: 16px;
-    margin-bottom: 16px;
+    font-size: 12px;
+    font-weight: 400;
+    margin-bottom: 10px;
+    color: #5E6875;
 }
 </style>

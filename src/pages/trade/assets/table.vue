@@ -234,7 +234,7 @@ export default {
             rateTimer = null;
         },
         getRate(tokenId) {
-            const coin = this.$store.state.exchangeRate.coins[this.$i18n.locale || 'zh'];
+            const coin = this.$store.state.env.currency;
             if (!tokenId || !this.rateMap[tokenId]) {
                 return null;
             }

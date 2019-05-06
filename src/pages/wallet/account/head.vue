@@ -41,7 +41,7 @@
                 </div>
             </div>
         </div>
-        <div class="address head__item">
+        <div class="head__item">
             <img class="icon" src="~assets/imgs/head_addr.png" />
             <vite-address
                 :title="$t('wallet.address')"
@@ -110,7 +110,7 @@ export default {
             return this.$store.state.env.clientStatus;
         },
         totalAsset() {
-            const currency = this.$store.state.exchangeRate.coins[this.$i18n.locale];
+            const currency = this.$store.state.env.currency;
             const rateMap = this.$store.state.exchangeRate.rateMap;
             const balanceInfo = this.$store.getters.balanceInfo;
             const total = Object.keys(balanceInfo).reduce((pre, cur) => {
@@ -204,27 +204,21 @@ export default {
 @import "~assets/scss/vars.scss";
 
 .account-head-wrapper {
-    width: 100%;
-    overflow: auto;
     position: relative;
     text-align: center;
     background: #fff;
-    box-shadow: 0 2px 48px 1px rgba(176, 192, 237, 0.42);
     border-radius: 2px;
     display: flex;
     flex-wrap: no-wrap;
     flex-direction: row;
     justify-content: space-between;
-    min-height: 100px;
+    height: 100px;
+    min-width: 1300px;
     .head__item {
         border-right: 1px solid rgba(227, 235, 245, 0.6);
         display: flex;
         align-items: center;
         padding: 0 20px;
-        min-height: 100px;
-        &.address {
-            min-width: 600px;
-        }
         .icon{
             height: 34px;
             width: 34px;

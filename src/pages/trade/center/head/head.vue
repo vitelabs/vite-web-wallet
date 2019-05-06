@@ -88,7 +88,7 @@ export default {
         rate() {
             const rateList = this.$store.state.exchangeRate.rateMap || {};
             const tokenId = this.activeTxPair && this.activeTxPair.ttoken ? this.activeTxPair.ttoken : null;
-            const coin = this.$store.state.exchangeRate.coins[this.$i18n.locale || 'zh'];
+            const coin = this.$store.state.env.currency;
             if (!tokenId || !rateList[tokenId]) {
                 return null;
             }

@@ -101,7 +101,7 @@ export default {
             return this.$t('tokenCard.gateInfo.selfdefined');
         },
         asset() {
-            const currency = this.$store.state.exchangeRate.coins[this.$i18n.locale];
+            const currency = this.$store.state.env.currency;
             const rate = this.$store.state.exchangeRate.rateMap[this.token.tokenId];
             if (rate && this.token.balance) {
                 return `${ this.$i18n.locale === 'en' ? '$' : '¥' } ${ bigNumber.multi(this.token.balance, rate[currency]) }`;

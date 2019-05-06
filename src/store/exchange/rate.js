@@ -4,13 +4,7 @@ import { rateFiat } from 'services/trade';
 const loopTime = 2 * 60 * 60 * 1000;
 let rateTimer = null;
 
-const state = {
-    rateMap: {},
-    coins: {
-        en: 'usd',
-        zh: 'cny'
-    }
-};
+const state = { rateMap: {} };
 
 const mutations = {
     setExchangeRate(state, rateList) {
