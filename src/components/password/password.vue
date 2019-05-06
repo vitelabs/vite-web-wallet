@@ -9,24 +9,21 @@
             <input ref="passInput" v-model="password" :placeholder="$t('pwdConfirm.placeholder')" type="password"/>
         </form>
 
-        <div v-show="isShowPWD && isShowHold" class="hold-pwd __pointer" @click="toggleHold">
-            <span :class="{ 'active': isPwdHold }"></span>
-            {{ $t('pwdConfirm.conf') }}
-        </div>
-
+        <hold-pwd-view v-show="isShowPWD && isShowHold"></hold-pwd-view>
     </confirm>
 </template>
 
 <script>
-import confirm from 'components/confirm.vue';
 import localStorage from 'utils/localStorage';
+import confirm from 'components/confirm.vue';
+import holdPwdView from './holdPwd.vue';
 
 let lastE = null;
 const HoldPwdKey = 'isHoldPWD';
 const ShowHoldNumKey = 'showHoldPWDNum';
 
 export default {
-    components: { confirm },
+    components: { confirm, holdPwdView },
     props: {
         type: {
             type: String,
@@ -78,16 +75,15 @@ export default {
         this.$onKeyDown(13, lastE);
     },
     data() {
-        const isPwdHold = !!localStorage.getItem(HoldPwdKey);
+        const isHoldPWD = !!localStorage.getItem(HoldPwdKey);
         const showHoldNum = +localStorage.getItem(ShowHoldNumKey) || 0;
-        const isShowHold = showHoldNum < 3 && !isPwdHold;
+        const isShowHold = showHoldNum < 3 && !isHoldPWD;
 
         localStorage.setItem(ShowHoldNumKey, isShowHold ? showHoldNum + 1 : 4);
 
         return {
             password: '',
             isLoading: false,
-            isPwdHold,
             isShowHold
         };
     },
@@ -106,13 +102,6 @@ export default {
     methods: {
         clear() {
             this.password = '';
-        },
-        toggleHold() {
-            if (!this.isShowPWD) {
-                return;
-            }
-            this.isPwdHold = !this.isPwdHold;
-            window.isPwdHold = this.isPwdHold;
         },
 
         _cancle() {
@@ -152,7 +141,6 @@ export default {
                     this.$toast(this.$t('unlockSuccess'));
                 }
 
-                this.isPwdHold && activeAccount.holdPWD(password);
                 this.clear();
                 this.submit && this.submit();
             };
@@ -195,15 +183,6 @@ export default {
 <style lang="scss" scoped>
 @import '~assets/scss/vars.scss';
 
-.dex .hold-pwd {
-    font-size: 12px;
-    span {
-        margin-bottom: -3px;
-        width: 14px;
-        height: 14px;
-    }
-}
-
 .pass-input {
     width: 100%;
     background: #fff;
@@ -221,29 +200,6 @@ export default {
     input {
         width: 100%;
         font-size: 14px;
-    }
-}
-
-.hold-pwd {
-    font-family: $font-normal, arial, sans-serif;
-    font-size: 14px;
-    color: #1d2024;
-    margin-top: 12px;
-
-    span {
-        display: inline-block;
-        margin-bottom: -3px;
-        width: 16px;
-        height: 16px;
-        box-sizing: border-box;
-        background: #fff;
-        border: 1px solid #d4dee7;
-        border-radius: 16px;
-
-        &.active {
-            background: url('../../assets/imgs/presnet.svg') no-repeat center;
-            background-size: 16px 16px;
-        }
     }
 }
 </style>

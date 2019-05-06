@@ -34,7 +34,7 @@ export default {
 .sync-block-wrapper {
     font-family: $font-bold, arial, sans-serif;
     font-size: 16px;
-    color: #1d2024;
+    color: #007AFF;
     line-height: 20px;
 
     .status-text {

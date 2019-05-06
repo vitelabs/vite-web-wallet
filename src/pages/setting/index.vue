@@ -1,141 +1,125 @@
 <template>
-    <layout>
-        <mnemonic v-if="!!isLogin" class="item"></mnemonic>
-        <accList v-if="!!activeAccount" class="item"></accList>
-        <lang class="item"></lang>
-        <auto-logout v-if="!!isLogin" class="item"></auto-logout>
-        <no-pass v-if="!!isLogin" class="item"></no-pass>
+    <div class="setting-wrapper">
+        <sec-title :isShowHelp="false"></sec-title>
+        <div class="content-wrapper">
+            <div class="content">
+                <div v-if="!!activeAccount" class="big-title">{{ $t('setting.addrList') }}</div>
+                <accList v-if="!!activeAccount"></accList>
 
-        <router-link v-if="!!isLogin && isTestEnv" :to="{ name: 'mintage' }">mintage</router-link>
-    </layout>
+                <div v-if="!!isLogin" class="big-title">{{ $t('setting.secure') }}</div>
+                <mnemonic v-if="!!isLogin"></mnemonic>
+                <hold-pwd v-if="!!isLogin" class="item"></hold-pwd>
+            </div>
+
+            <div class="area">
+                <div class="big-title">{{ $t('setting.config') }}</div>
+                <auto-logout v-if="!!isLogin"></auto-logout>
+                <lang></lang>
+                <currency></currency>
+            </div>
+
+            <div class="area">
+                <div class="big-title">{{ $t('setting.netInfo') }}</div>
+                <net-info></net-info>
+            </div>
+        </div>
+    </div>
 </template>
 
 <script>
-import layout from './layout.vue';
-import accList from './accList.vue';
+import secTitle from 'components/secTitle';
+import holdPwd from 'components/password/holdPwd.vue';
+import netInfo from './netInfo';
 import lang from './lang.vue';
-import mnemonic from './mnemonic.vue';
 import autoLogout from './autoLogout.vue';
-import noPass from './noPass.vue';
+import accList from './accList.vue';
+import mnemonic from './mnemonic.vue';
+import currency from './currency.vue';
 
 export default {
-    components: { layout, accList, lang, mnemonic, autoLogout, noPass },
+    components: {
+        secTitle,
+        netInfo,
+        lang,
+        autoLogout,
+        holdPwd,
+        accList,
+        mnemonic,
+        currency
+    },
     data() {
         const activeAccount = this.$wallet.getActiveAccount();
-        const showPassWrapper = activeAccount ? activeAccount.type === 'wallet' : false;
 
         return {
             isLogin: !!this.$wallet.isLogin,
-            isSubmiting: false,
             activeAccount,
-            showPassWrapper,
-            pass: '',
-            lock: true,
             isTestEnv: process.env.NODE_ENV === 'dev' || process.env.NODE_ENV === 'test'
         };
-    },
-    methods: {
-        validPass() {
-            if (this.isSubmiting || !this.lock) {
-                return;
-            }
-
-            if (!this.pass) {
-                this.$toast(this.$t('hint.pwErr'));
-                return;
-            }
-
-            this.isSubmiting = true;
-            this.activeAccount.verify(this.pass).then(result => {
-                this.isSubmiting = false;
-                this.lock = !result;
-                this.lock && this.$toast(this.$t('hint.pwErr'));
-            }).catch(() => {
-                this.isSubmiting = false;
-                this.lock = true;
-                this.$toast(this.$t('hint.pwErr'));
-            });
-        }
     }
 };
 </script>
 
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
+@import "./setting.scss";
 
-.item {
-    margin-bottom: 20px;
-    margin-top: 0;
+.setting-wrapper {
+    position: relative;
+    box-sizing: border-box;
+    height: 100%;
+    padding: 40px;
 
-    &.unlock {
-        .pass {
-            border: 1px solid #efefef;
-        }
+    .content-wrapper {
+        position: absolute;
+        top: 102px;
+        bottom: 30px;
+        left: 40px;
+        right: 40px;
+        overflow: auto;
+        background: #fff;
+        box-shadow: 0 2px 48px 1px rgba(176, 192, 237, 0.17);
+        border-radius: 8px;
 
-        .btn {
-            background: #efefef;
-            color: #666;
-        }
-    }
-
-    .title {
-        font-size: 14px;
-        color: #1d2024;
-        font-family: $font-bold, arial, sans-serif;
-        letter-spacing: 0.35px;
-        line-height: 16px;
-        margin-bottom: 16px;
-    }
-
-    .input-wrapper {
-        display: inline-block;
-        width: 83%;
-        height: 40px;
-        margin-right: 10px;
-
-        .pass {
-            display: inline-block;
-            box-sizing: border-box;
-            width: 100%;
-            height: 100%;
-            padding: 0 15px;
-            line-height: 40px;
-            background: #fff;
-            border: 1px solid #d4dee7;
-            border-radius: 2px;
-            font-size: 14px;
+        .content {
+            max-width: 480px;
+            padding: 0 20px 20px;
         }
     }
+    .area {
+        padding: 0 20px 20px;
+        border-top: 1px solid rgba(198, 203, 212, .3);
+    }
+}
 
-    .btn {
-        position: relative;
-        top: -1px;
-        float: right;
-        width: 12%;
-        max-width: 60px;
-        height: 40px;
-        text-align: center;
-        line-height: 40px;
-        background: #007aff;
-        border-radius: 2px;
-        font-family: $font-normal-b, arial, sans-serif;
-        font-size: 14px;
-        color: #fff;
+@media only screen and (max-width: 850px) {
+    .setting-wrapper {
+        padding: 15px;
+    }
 
-        &.unuse {
-            background: #efefef;
-            color: #666;
-        }
+    .setting-wrapper .content-wrapper {
+        top: 70px;
+        bottom: 15px;
+        left: 15px;
+        right: 15px;
     }
 }
 
 @media only screen and (max-width: 500px) {
-    .item .input-wrapper {
-        width: 75%;
+    .setting-wrapper {
+        background: #fff;
     }
 
-    .item .btn {
-        width: 60px;
+    .setting-wrapper .content-wrapper {
+        top: 122px;
+        left: 15px;
+        right: 15px;
+        bottom: 15px;
+        box-shadow: none;
+        border-radius: 0;
+
+        .content {
+            padding: 0;
+        }
     }
 }
 </style>

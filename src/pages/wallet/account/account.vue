@@ -3,7 +3,9 @@
         <div class="head">
             <sync-block class="sync-block"></sync-block>
         </div>
-        <account-head class="item"></account-head>
+        <div class="account-head-move item">
+            <account-head></account-head>
+        </div>
         <div class="token-list item">
             <div class="token-class">{{$t('tokenCard.type.native')}}</div>
             <tokenCard
@@ -83,6 +85,12 @@ export default {
     padding-top: 0;
 }
 
+.account-head-move {
+    width: 100%;
+    overflow: auto;
+    box-shadow: 0 2px 48px 1px rgba(176, 192, 237, 0.42);
+}
+
 .account-wrapper {
     position: relative;
     box-sizing: border-box;
@@ -133,6 +141,7 @@ export default {
         align-items: center;
         justify-content: center;
         cursor: pointer;
+        min-height: 120px;
         img{
             height: 50px;
             width: 50px;

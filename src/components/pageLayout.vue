@@ -20,12 +20,8 @@
 import sidebar from 'components/sidebar';
 import viteMenu from 'components/menu';
 import secondMenu from 'components/secondMenu';
-import localStorage from 'utils/localStorage';
 
 let autoLogout = null;
-// Minutes
-const _t = localStorage.getItem('autoLogoutTime') || 5;
-const autoLogoutTime = _t * 60 * 1000;
 
 export default {
     components: { sidebar, viteMenu, secondMenu },
@@ -77,6 +73,9 @@ export default {
             this.isLogin && activeAccount.type === 'wallet' && list.push('walletConversion');
 
             return list;
+        },
+        autoLogoutTime() {
+            return this.$store.state.env.autoLogoutTime * 60 * 1000;
         }
     },
     methods: {
@@ -124,7 +123,7 @@ export default {
             autoLogout = setTimeout(() => {
                 autoLogout = null;
                 location.reload();
-            }, autoLogoutTime);
+            }, this.autoLogoutTime);
         }
     }
 };

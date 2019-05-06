@@ -1,9 +1,6 @@
 <template>
     <div class="acc-list-wrapper">
-        <div class="row">
-            <span class="title">{{ $t('setting.addrList') }}</span>
-            <div class="describe">{{ $t('setting.setDefault') }}</div>
-        </div>
+        <div class="small-title">{{ $t('setting.setDefault') }}</div>
         <div class="acc-list __pointer">
             <div ref="listWrapper" class="list-wrapper">
                 <div ref="list">
@@ -84,27 +81,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
-
-.row {
-    width: 100%;
-    margin-bottom: 10px;
-    line-height: 20px;
-
-    .title {
-        font-size: 14px;
-        color: #1d2024;
-        letter-spacing: 0.35px;
-        font-family: $font-bold, arial, sans-serif;
-    }
-
-    .describe {
-        font-size: 12px;
-        color: #5e6875;
-        letter-spacing: 0.3px;
-        line-height: 16px;
-        margin-top: 8px;
-    }
-}
+@import "./setting.scss";
 
 .acc-list {
     background: #fff;

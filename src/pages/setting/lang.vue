@@ -1,6 +1,6 @@
 <template>
     <div class="change-lang-wrapper">
-        <div class="title">{{ $t('setting.lang') }}</div>
+        <div class="small-title bold">{{ $t('setting.lang') }}</div>
         <change-lang class="setting"></change-lang>
     </div>
 </template>
@@ -13,12 +13,5 @@ export default { components: { changeLang } };
 
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
-
-.title {
-    font-size: 14px;
-    color: #1d2024;
-    letter-spacing: 0.35px;
-    font-family: $font-bold, arial, sans-serif;
-    margin-bottom: 16px;
-}
+@import "./setting.scss";
 </style>
