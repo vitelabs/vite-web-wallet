@@ -13,6 +13,7 @@
 </template>
 
 <script>
+// [TODO] Pure need delete
 import loading from 'components/loading';
 import { getPowNonce } from 'services/pow';
 

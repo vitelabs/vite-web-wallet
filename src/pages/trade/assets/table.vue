@@ -82,13 +82,6 @@ let rateTimer = null;
 export default {
     components: { confirm, alert, viteInput },
     props: { filter: { type: Object } },
-    beforeMount() {
-        this.acc = this.$wallet.getActiveAccount();
-        if (!this.acc) {
-            return;
-        }
-        this.acc && (this.addr = this.acc.getDefaultAddr());
-    },
     destroyed() {
         this.stopLoopRate();
     },
@@ -102,7 +95,6 @@ export default {
             detailData: [],
             detailConfirm: false,
             acc: null,
-            addr: '',
             isRotate: false,
             assignRateMap: {},
             tokenMap: {},
@@ -110,6 +102,9 @@ export default {
         };
     },
     computed: {
+        addr() {
+            return this.$store.state.activeAccount.address;
+        },
         detailList() {
             return Object.keys(this.detailData).map(k => {
                 const o = this.detailData[k];
@@ -281,7 +276,7 @@ export default {
                 this.isRotate = false;
             }, 2000);
             // Restart
-            this.addr && this.$store.dispatch('startLoopExchangeBalance', this.addr);
+            this.addr && this.$store.dispatch('startLoopExchangeBalance');
         }, 0.1),
         withdraw(tokenId) {
             this.showConfirm({ tokenId, type: 'withdraw' });

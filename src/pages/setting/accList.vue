@@ -4,12 +4,12 @@
         <div class="acc-list __pointer">
             <div ref="listWrapper" class="list-wrapper">
                 <div ref="list">
-                    <div class="acc-item" v-for="(addr, index) in addrList" :key="index">
-                        <span @click="setDefault(addr, index)" class="select" :class="{
+                    <div class="acc-item" @click="setDefault(addr, index)" v-for="(addr, index) in addrList" :key="index">
+                        <span class="select" :class="{
                             'active': defaultAddr === addr
                         }"></span>
-                        <span @click="setDefault(addr, index)" class="describe __ellipsis">{{(index + 1) + '. ' + addr}}</span>
-                        <img @click="copy(addr)" class="copy __pointer" src="../../assets/imgs/copy_default.svg"/>
+                        <span class="describe __ellipsis">{{(index + 1) + '. ' + addr}}</span>
+                        <img @click.stop="copy(addr)" class="copy __pointer" src="../../assets/imgs/copy_default.svg"/>
                     </div>
                 </div>
             </div>
@@ -33,9 +33,13 @@ export default {
             activeAccount,
             isWalletAcc: activeAccount.type === 'wallet',
             addrList: activeAccount.getAddrList(),
-            defaultAddr: activeAccount.getDefaultAddr(),
             copyAddr: ''
         };
+    },
+    computed: {
+        defaultAddr() {
+            return this.$store.state.activeAccount.address;
+        }
     },
     methods: {
         copy(addr) {
@@ -61,19 +65,8 @@ export default {
                 this.$refs.listWrapper.scrollTop = height - wrapperHeight;
             });
         },
-        setDefault(addr, index) {
-            const res = this.activeAccount.setDefaultAddr(addr, index);
-            if (!res) {
-                this.$toast(this.$t('hint.err'));
-                return;
-            }
-            this.defaultAddr = this.activeAccount.getDefaultAddr();
-
-            // Clear all
-            this.$store.commit('commitClearBalance');
-            this.$store.commit('commitClearTransList');
-            this.$store.commit('commitClearPledge');
-            this.$store.commit('clearDexBalance');
+        setDefault(address, index) {
+            this.$store.dispatch('changeDefaultAddress', { address, index });
         }
     }
 };

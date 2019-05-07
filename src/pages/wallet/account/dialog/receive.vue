@@ -19,7 +19,6 @@ import qrcode from 'components/qrcode';
 import copy from 'utils/copy';
 import { utils } from '@vite/vitejs';
 import { modes } from 'qrcode.es';
-import { wallet } from 'utils/wallet';
 import { getValidBalance } from 'utils/validations';
 
 export default {
@@ -50,7 +49,7 @@ export default {
             return getValidBalance({ decimals: this.token.decimals })(this.amount);
         },
         address() {
-            return wallet.defaultAddr;
+            return this.$store.state.activeAccount.address;
         },
         addressQrcode() {
             return utils.uriStringify({

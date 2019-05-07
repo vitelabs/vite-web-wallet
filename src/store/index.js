@@ -1,5 +1,5 @@
-import vuex from 'vuex';
 import Vue from 'vue';
+import vuex from 'vuex';
 
 import accountStore from './account';
 import transListStore from './transList';
@@ -9,11 +9,13 @@ import ledgerStore from './ledger';
 import envVariableStore from './envVariable';
 import exchange from './exchange/index';
 import gateInfo from './gateInfo';
+import activeAccountStore from './activeAccount';
 
 Vue.use(vuex);
 
 const store = new vuex.Store();
 
+store.registerModule('activeAccount', activeAccountStore);
 store.registerModule('account', accountStore);
 store.registerModule('transList', transListStore);
 store.registerModule('pledge', pledgeStore);

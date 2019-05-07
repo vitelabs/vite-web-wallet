@@ -22,7 +22,7 @@ import copy from 'utils/copy';
 import { modes } from 'qrcode.es';
 import { getChargeAddr, getChargeInfo } from 'services/gate';
 import bigNumber from 'utils/bigNumber';
-import { wallet } from 'utils/wallet';
+
 export default {
     components: { qrcode },
     props: {
@@ -30,6 +30,15 @@ export default {
             type: Object,
             required: true
         }
+    },
+    beforeMount() {
+        getChargeAddr({ addr: this.defaultAddr, tokenId: this.token.tokenId }, this.token.gateInfo.url).then(addr => (this.address = addr)).catch(e => {
+            console.error(e);
+            this.addrErr = this.$t('tokenCard.charge.addrErr');
+        });
+        getChargeInfo({ addr: this.defaultAddr, tokenId: this.token.tokenId }, this.token.gateInfo.url).then(d => {
+            this.minimumDepositAmountMin = d.minimumDepositAmount;
+        });
     },
     data() {
         return {
@@ -42,21 +51,6 @@ export default {
             addrErr: ''
         };
     },
-    beforeMount() {
-        getChargeAddr({ addr: wallet.defaultAddr, tokenId: this.token.tokenId }, this.token.gateInfo.url).then(addr => (this.address = addr)).catch(e => {
-            console.error(e);
-            this.addrErr = this.$t('tokenCard.charge.addrErr');
-        });
-        getChargeInfo({ addr: wallet.defaultAddr, tokenId: this.token.tokenId }, this.token.gateInfo.url).then(d => {
-            this.minimumDepositAmountMin = d.minimumDepositAmount;
-        });
-    },
-    methods: {
-        copy() {
-            copy(this.address);
-            this.$toast(this.$t('hint.copy'));
-        }
-    },
     computed: {
         minimumDepositAmount() {
             return bigNumber.toBasic(this.minimumDepositAmountMin, this.token.decimals);
@@ -64,6 +58,15 @@ export default {
         addressQrcode() {
             if (this.token.type === 'OFFICAL_GATE' && this.token.tokenSymbol === 'BTC') return `bitcoin:${ this.address }`;
             return this.address;
+        },
+        defaultAddr() {
+            return this.$store.state.activeAccount.address;
+        }
+    },
+    methods: {
+        copy() {
+            copy(this.address);
+            this.$toast(this.$t('hint.copy'));
         }
     }
 };

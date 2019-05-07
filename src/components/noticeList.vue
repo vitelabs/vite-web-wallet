@@ -19,24 +19,20 @@ import date from 'utils/date';
 import { subTask } from 'utils/proto/subTask';
 
 let task = null;
-let addrTimeout = null;
 
 export default {
     components: { notice, update },
-    mounted() {
-        this.startGetAddress();
-    },
     destroyed() {
         task && task.stop();
         task = null;
-        addrTimeout && clearTimeout(addrTimeout);
-        addrTimeout = null;
     },
     data() {
-        return {
-            address: '',
-            latestOrders: []
-        };
+        return { latestOrders: [] };
+    },
+    computed: {
+        address() {
+            return this.$store.state.activeAccount.address;
+        }
     },
     watch: {
         address: function () {
@@ -44,14 +40,6 @@ export default {
         }
     },
     methods: {
-        startGetAddress() {
-            const account = this.$wallet.getActiveAccount();
-            this.address = account ? account.getDefaultAddr() : '';
-
-            addrTimeout = setTimeout(() => {
-                this.startGetAddress();
-            }, 1000);
-        },
         startLatestOrder() {
             task && task.stop();
             task = null;
@@ -59,10 +47,7 @@ export default {
             task = new subTask('latestOrder', ({ args, data }) => {
                 // console.log('成交提醒', data);
 
-                const account = this.$wallet.getActiveAccount();
-                const address = account ? account.getDefaultAddr() : '';
-
-                if (address !== args.address || !data) {
+                if (this.address !== args.address || !data) {
                     return;
                 }
 
@@ -92,9 +77,7 @@ export default {
             }, 2000);
 
             task.start(() => {
-                const account = this.$wallet.getActiveAccount();
-                const address = account ? account.getDefaultAddr() : '';
-                return { address };
+                return { address: this.address };
             });
         }
     }

@@ -50,6 +50,11 @@ export default {
     deactivated() {
         this.unsubscribe();
     },
+    computed: {
+        defaultAddr() {
+            return this.$store.state.activeAccount.address;
+        }
+    },
     watch: {
         filterObj() {
             this.init();
@@ -67,10 +72,7 @@ export default {
         },
         subscribe() {
             task = task || new subTask('orderQueryHistory', ({ args, data }) => {
-                const currentAcc = this.$wallet.getActiveAccount();
-                const currentAddr = currentAcc.getDefaultAddr();
-
-                if (args.address !== currentAddr
+                if (args.address !== this.defaultAddr
                     || this.filterObj.ttoken !== args.ttoken
                     || this.filterObj.ftoken !== args.ftoken) {
                     return;
@@ -79,11 +81,9 @@ export default {
                 this.data = data || [];
             }, 2000);
 
-            const account = this.$wallet.getActiveAccount();
-            const address = account.getDefaultAddr();
             task.start(() => {
                 return {
-                    address,
+                    address: this.defaultAddr,
                     ...this.filterObj
                 };
             });
@@ -104,10 +104,8 @@ export default {
             return this.$store.state.exchangeMarket.currentMarket;
         },
         update(filters = {}) {
-            const account = this.$wallet.getActiveAccount();
-            if (!account) return;
+            if (!this.defaultAddr) return;
 
-            const address = account.getDefaultAddr();
             if (this.isEmbed) {
                 filters = { totoken: this.currentMarket };
             }
@@ -115,7 +113,7 @@ export default {
             filters = Object.assign({ pageNo: this.currentPage }, filters);
 
             order({
-                address,
+                address: this.defaultAddr,
                 ...filters,
                 pageSize,
                 ...this.filterObj

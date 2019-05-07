@@ -80,7 +80,6 @@ export default {
 
         Vue.prototype.$wallet = wallet;
 
-
         // ----------filters
 
         Vue.filter('id2icon', function (value) {

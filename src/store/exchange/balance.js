@@ -27,17 +27,21 @@ const updateExBalance = (commit, address) =>
     });
 
 const actions = {
-    startLoopExchangeBalance({ commit, dispatch }, _address) {
+    startLoopExchangeBalance({ commit, dispatch, rootState }) {
+        const _address = rootState.activeAccount.address;
+
         if (address !== _address) {
             commit('clearDexBalance');
             address = _address;
         }
 
+        // 1. Stop last loop
+        dispatch('stopLoopExchangeBalance');
+
+        // 2. FetchAll
         updateExBalance(commit, address);
 
-        // First stop last
-        dispatch('stopLoopExchangeBalance');
-        // Second start next
+        // 3. Restart
         balanceTimer = new timer(() => updateExBalance(commit, address), loopTime);
         balanceTimer.start();
     },

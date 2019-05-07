@@ -100,12 +100,8 @@ export default {
         });
     },
     data() {
-        const activeAccount = this.$wallet.getActiveAccount();
-        const viteAddr = activeAccount.getDefaultAddr();
-
         return {
             icon,
-            viteAddr,
             loading: false,
             minGwei,
             maxGwei,
@@ -120,6 +116,9 @@ export default {
         };
     },
     computed: {
+        viteAddr() {
+            return this.$store.state.activeAccount.address;
+        },
         netStatus() {
             return this.$store.state.env.clientStatus;
         },

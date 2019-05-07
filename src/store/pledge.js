@@ -43,7 +43,9 @@ const mutations = {
 };
 
 const actions = {
-    fetchQuota({ commit }, address) {
+    fetchQuota({ commit, rootState }) {
+        const address = rootState.activeAccount.address;
+
         const fetchTime = new Date().getTime();
         lastFetchQuotaTime = fetchTime;
         lastAddress = address;

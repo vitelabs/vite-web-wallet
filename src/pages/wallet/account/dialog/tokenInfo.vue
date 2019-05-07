@@ -48,7 +48,6 @@ block content
 </template>
 
 <script>
-import { wallet } from 'utils/wallet';
 import { gateStorage, getChargeAddr } from 'services/gate';
 import getTokenIcon from 'utils/getTokenIcon';
 import { getExplorerLink } from 'utils/getLink';
@@ -94,6 +93,9 @@ export default {
         },
         dBtnUnuse() {
             return !this.urlCache;
+        },
+        defaultAddr() {
+            return this.$store.state.activeAccount.address;
         }
     },
     methods: {
@@ -106,7 +108,7 @@ export default {
         },
         inspector() {
             return new Promise((res, rej) => {
-                getChargeAddr({ addr: wallet.defaultAddr, tokenId: this.token.tokenId }, this.url).then(() => {
+                getChargeAddr({ addr: this.defaultAddr, tokenId: this.token.tokenId }, this.url).then(() => {
                     gateStorage.bindToken(this.token.tokenId, { gateInfo: { url: this.url } });
                     res({ url: this.url });
                 }).catch(e => {

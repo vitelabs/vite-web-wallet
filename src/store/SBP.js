@@ -30,7 +30,9 @@ const actions = {
             commit('commitRegistrationList', result);
         });
     },
-    loopRegList({ state, dispatch }, { address, nodeName, operate, producer }) {
+    loopRegList({ state, dispatch, rootState }, { nodeName, operate, producer }) {
+        const address = rootState.activeAccount.address;
+
         // Operate ==> 0: cancel / 1: reg / 2: update
         let isInList = false;
         state.registrationList.forEach(regItem => {

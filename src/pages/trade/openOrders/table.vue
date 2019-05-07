@@ -85,6 +85,9 @@ export default {
         },
         currentMarketNmae() {
             return this.$store.getters.currentMarketName;
+        },
+        defaultAddr() {
+            return this.$store.state.activeAccount.address;
         }
     },
     watch: {
@@ -110,10 +113,7 @@ export default {
         },
         subscribe() {
             task = task || new subTask('orderQueryCurrent', ({ args, data }) => {
-                const currentAcc = this.$wallet.getActiveAccount();
-                const currentAddr = currentAcc ? currentAcc.getDefaultAddr() : '';
-
-                if (args.address !== currentAddr
+                if (args.address !== this.defaultAddr
                     || this.filterObj.ttoken !== args.ttoken
                     || this.filterObj.ftoken !== args.ftoken) {
                     return;
@@ -198,10 +198,8 @@ export default {
             }, 2000);
 
             task.start(() => {
-                this.acc = this.$wallet.getActiveAccount();
-                this.addr = this.acc ? this.acc.getDefaultAddr() : '';
                 return {
-                    address: this.addr,
+                    address: this.defaultAddr,
                     ...this.filterObj
                 };
             });
@@ -211,12 +209,8 @@ export default {
             task = null;
         },
         update() {
-            this.acc = this.$wallet.getActiveAccount();
-            if (!this.acc) return;
-            this.acc && (this.addr = this.acc.getDefaultAddr());
-
             order({
-                address: this.addr,
+                address: this.defaultAddr,
                 status: 1,
                 pageNo: 1,
                 pageSize: 100,
