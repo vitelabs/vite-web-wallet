@@ -104,7 +104,7 @@ export default {
             const elTop = this.$refs[`txPair${ i }`][0].getBoundingClientRect().top;
             const listTop = this.$refs.txList.getBoundingClientRect().top;
             const height = this.$refs.txList.clientHeight;
-            const top = elTop - listTop - 10;
+            const top = elTop - listTop - 8;
 
             if (top > listTop + height) {
                 this.hideRealPrice();
@@ -135,7 +135,7 @@ export default {
                 pre = '￥';
             }
 
-            return txPair.rawData.ftokenShow + pre + BigNumber.multi(txPair.price || 0, rate || 0, 2);
+            return `${ txPair.rawData.ftokenShow }  ${ pre }${ BigNumber.multi(txPair.price || 0, rate || 0, 2) }`;
         },
         getRate(tokenId) {
             const rateList = this.$store.state.exchangeRate.rateMap || {};
@@ -197,15 +197,14 @@ export default {
 
     .real-price {
         position: absolute;
-        padding: 10px;
-        line-height: 20px;
+        padding: 8px;
         right: -10px;
         z-index: 1;
         transform: translateX(100%);
         background: rgba(255, 255, 255, 1);
         box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.1);
-        font-size: 14px;
-        color: rgba(36, 39, 43, 1);
+        font-size: 12px;
+        color: #5E6875;
         font-family: $font-normal, arial, sans-serif;
         font-weight: 400;
 
