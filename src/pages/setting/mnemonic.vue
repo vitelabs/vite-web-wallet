@@ -3,8 +3,8 @@
         <div class="row">
             <span class="small-title">{{ $t('mnemonic.title') }}</span>
             <span class="copy icon __pointer" @click="copy" :class="{ 'lock':  lock }"></span>
-            <span class="eyes icon __pointer" @click="unlock" :class="{
-                'lock':  lock
+            <span class="lock-icon icon __pointer" @click="unlock" :class="{
+                'lock': lock
             }"></span>
         </div>
         <copyOK class="copy-wrapper" :copySuccess="copySuccess"></copyOK>
@@ -97,20 +97,18 @@ export default {
         float: right;
     }
 
-    .eyes {
+    .lock-icon {
         margin-right: 16px;
         background-size: 20px 20px;
-        background: url('../../assets/imgs/eyeclose_default.svg');
-
+        background: url('../../assets/imgs/unlock.svg') center no-repeat;
         &.lock {
-            background: url('../../assets/imgs/eyeopen_disabled.svg');
+            background: url('../../assets/imgs/lock.svg') center no-repeat;
         }
     }
 
     .copy {
         background-size: 20px 20px;
         background: url('../../assets/imgs/copy_default.svg');
-
         &.lock {
             background: url('../../assets/imgs/copy_disabled.svg');
             cursor: not-allowed;
