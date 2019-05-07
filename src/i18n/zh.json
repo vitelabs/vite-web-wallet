@@ -531,6 +531,18 @@
     "newOrderFail": "提单失败",
     "depthView": "深度图",
     "klineView": "k线图",
+    "txPairDetail": {
+        "title": "交易对详情",
+        "24h": "24小时数据",
+        "openPrice": "开盘价",
+        "quantity": "市场币交易量",
+        "amount": "基准币交易量",
+        "status": "当前状态",
+        "latest": "最新价",
+        "buy": "买一价",
+        "sell": "卖一价",
+        "diff": "价差"
+    },
     "dexToken": {
       "title": "开通交易对",
       "fee": "上币费",

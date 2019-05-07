@@ -1,22 +1,57 @@
 <template>
-    <div class="tx-pair-wrapper">
-        <div class="center">
-            <div @click="close">close</div>
-            <div>{{ activeTxPair ? activeTxPair.priceBefore24h : '' }}</div>
-            <div>{{ upDownIcon + percent }}</div>
-            <div>{{ activeTxPair ? activeTxPair.quantity24h : '' }}</div>
-            <div>{{ activeTxPair ? activeTxPair.amount24h : ''  }}</div>
-            <div>{{ activeTxPair ? activeTxPair.price : ''  }}</div>
-            <div>{{ buyOne }}</div>
-            <div>{{ sellOne }}</div>
-            <div>{{ sellOne }}</div>
+    <confirm class="dex-token" :title="$t('trade.txPairDetail.title')"
+             :showMask="true" :closeIcon="true" :close="close">
+        <div class="tx-pair-wrapper">
+            <div class="tx-pair-item">
+                <div class="item-title">{{ $t('trade.txPairDetail.24h') }}</div>
+                <div class="item-row">
+                    <span>{{ $t('trade.txPairDetail.openPrice') }}:</span>
+                    {{ activeTxPair ? activeTxPair.priceBefore24h : '--' }}
+                </div>
+                <div class="item-row" :class="{
+                    'up': +upDown > 0,
+                    'down': +upDown < 0
+                }">
+                    <span>{{ $t('trade.upDown') }}:</span>
+                    {{ upDownIcon + percent }}
+                </div>
+                <div class="item-row">
+                    <span>{{ $t('trade.txPairDetail.quantity') }}:</span>
+                    {{ activeTxPair ? activeTxPair.quantity24h : '--' }}
+                </div>
+                <div class="item-row">
+                    <span>{{ $t('trade.txPairDetail.amount') }}:</span>
+                    {{ activeTxPair ? activeTxPair.amount24h : '--'  }}
+                </div>
+            </div>
+            <div class="tx-pair-item">
+                <div class="item-title">{{ $t('trade.txPairDetail.status')  }}</div>
+                <div class="item-row">
+                    <span>{{ $t('trade.txPairDetail.latest') }}:</span>
+                    {{ activeTxPair ? activeTxPair.price : '--'  }}
+                </div>
+                <div class="item-row">
+                    <span>{{ $t('trade.txPairDetail.buy') }}:</span>
+                    {{ buyOne || '--' }}
+                </div>
+                <div class="item-row">
+                    <span>{{ $t('trade.txPairDetail.sell') }}:</span>
+                    {{ sellOne || '--' }}
+                </div>
+                <div class="item-row">
+                    <span>{{ $t('trade.txPairDetail.diff') }}:</span>
+                    {{ diff || '--' }}
+                </div>
+            </div>
         </div>
-    </div>
+    </confirm>
 </template>
 
 <script>
+import confirm from 'components/confirm';
 
 export default {
+    components: { confirm },
     props: {
         close: {
             type: Function,
@@ -29,6 +64,9 @@ export default {
         },
         percent() {
             return this.activeTxPair && this.activeTxPair.upDownPercent ? this.activeTxPair.upDownPercent : '--';
+        },
+        upDown() {
+            return this.activeTxPair ? this.activeTxPair.upDown : 0;
         },
         upDownIcon() {
             if (!this.upDown || +this.upDown === 0) {
@@ -62,19 +100,47 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "~assets/scss/vars.scss";
+@import '../center.scss';
+
 .tx-pair-wrapper {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    .center {
-        width: 50%;
-        border: 1px solid #000;
-        background: #fff;
+    flex-direction: row;
+    .tx-pair-item {
+        flex: 1;
+        font-size: 12px;
+        font-family: $font-bold, arial, sans-serif;
+        font-weight: 600;
+        line-height: 16px;
+        .item-title {
+            color: rgba(29,32,36,1);
+            &:before {
+                display: inline-block;
+                content: ' ';
+                width: 5px;
+                height: 5px;
+                background: rgba(0,122,255,1);
+                margin-right: 6px;
+                margin-bottom: 2px;
+                border-radius: 5px;
+            }
+        }
+        .item-row {
+            color: rgba(36,39,43,1);
+            margin-top: 15px;
+            margin-left: 12px;
+            &.down {
+                color: $down-font-color;
+            }
+            &.up {
+                color: $up-font-color;
+            }
+            span {
+                font-family: $font-normal, arial, sans-serif;
+                font-weight: 400;
+                color: rgba(94,104,117,1);
+            }
+        }
     }
 }
 </style>

@@ -92,13 +92,10 @@ let webpackConfig = {
                 use: [
                     { loader: 'style-loader' },
                     { loader: 'css-loader' },
-                    { loader: 'sass-loader' },
-                    { loader: 'postcss-loader' }
+                    { loader: 'sass-loader' }
+                    // { loader: 'postcss-loader' }
                 ]
             } ]
-        // Postcss: function() {
-        // return [px2rem({remUnit: 75})];
-        // }
     },
     resolve: {
         alias: {

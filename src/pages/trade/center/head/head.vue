@@ -1,50 +1,56 @@
 <template>
     <div class="txpair-head-wrapper">
-        <token class="token-wrapper"></token>
+        <div class="content">
+            <token class="token-wrapper"></token>
 
-        <div class="else-wrapper">
-            <div class="latest-price item-left">
-                <div class="token-title">{{ $t('trade.head.latestPrice') }}</div>
-                <div class="token-content">
-                    <span :class="{
-                        'up': +upDownPrev > 0,
-                        'down': +upDownPrev < 0
-                    }">
-                        {{ activeTxPair && activeTxPair.price ? formatNum(activeTxPair.price, activeTxPair.toDecimals) : '--' }}
-                    </span>
-                    {{ realPrice }}
+            <div class="else-wrapper">
+                <div class="latest-price">
+                    <div class="token-title">{{ $t('trade.head.latestPrice') }}</div>
+                    <div class="token-content">
+                        <span :class="{
+                            'up': +upDownPrev > 0,
+                            'down': +upDownPrev < 0
+                        }">
+                            {{ activeTxPair && activeTxPair.price ? formatNum(activeTxPair.price, activeTxPair.toDecimals) : '--' }}
+                        </span>
+                        {{ realPrice }}
+                    </div>
                 </div>
-            </div>
-            <div class="updown item-left">
-                <div class="token-title">{{ $t('trade.head.updown') }}</div>
-                <div class="token-content" :class="{
-                    'up': +upDown > 0,
-                    'down': +upDown < 0
-                }">{{ upDownIcon + upDown }}
-                    {{ activeTxPair && activeTxPair.upDownPercent ?  upDownIcon + activeTxPair.upDownPercent : '--' }}
+                <div class="updown item-left">
+                    <div class="token-title">{{ $t('trade.head.updown') }}</div>
+                    <div class="token-content" :class="{
+                        'up': +upDown > 0,
+                        'down': +upDown < 0
+                    }">{{ upDownIcon + (!!activeTxPair ? formatNum(upDown, activeTxPair.toDecimals) : upDown) }}
+                        {{ activeTxPair && activeTxPair.upDownPercent ?  upDownIcon + activeTxPair.upDownPercent : '--' }}
+                    </div>
                 </div>
-            </div>
-            <div class="high-price item-left">
-                <div class="token-title">{{ $t('trade.head.highPrice') }}</div>
-                <div class="token-content">
-                    {{ activeTxPair && activeTxPair.price24hHigh ? activeTxPair.price24hHigh : '--' }}
+                <div class="high-price item-left">
+                    <div class="token-title">{{ $t('trade.head.highPrice') }}</div>
+                    <div class="token-content">
+                        {{ activeTxPair && activeTxPair.price24hHigh ? activeTxPair.price24hHigh : '--' }}
+                    </div>
                 </div>
-            </div>
-            <div class="low-price item-left">
-                <div class="token-title">{{ $t('trade.head.lowPrice') }}</div>
-                <div class="token-content">
-                    {{ activeTxPair && activeTxPair.price24hLow ? activeTxPair.price24hLow : '--' }}
+                <div class="low-price item-left">
+                    <div class="token-title">{{ $t('trade.head.lowPrice') }}</div>
+                    <div class="token-content">
+                        {{ activeTxPair && activeTxPair.price24hLow ? activeTxPair.price24hLow : '--' }}
+                    </div>
                 </div>
-            </div>
-            <div class="quantity item-left">
-                <div class="token-title">{{ $t('trade.head.quantity') }}</div>
-                <div class="token-content">
-                    {{ activeTxPair && activeTxPair.amount24h ? formatNum(activeTxPair.amount24h, 1) + ' ' + activeTxPair.ttokenShow : '--' }}
+                <div class="quantity item-left">
+                    <div class="token-title">{{ $t('trade.head.quantity') }}</div>
+                    <div class="token-content">
+                        {{ activeTxPair && activeTxPair.amount24h ? formatNum(activeTxPair.amount24h, 1) + ' ' + activeTxPair.ttokenShow : '--' }}
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div @click="showTxPair">else!!!!!</div>
+        <div class="else-point __pointer" @click="showTxPair">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
         <tx-pair v-show="isShowTxPair" :close="hideTxPair"></tx-pair>
     </div>
 </template>
@@ -67,10 +73,10 @@ export default {
             return this.activeTxPair ? this.activeTxPair.upDownPrev : '0';
         },
         upDown() {
-            return this.activeTxPair ? this.activeTxPair.upDown : '0';
+            return this.activeTxPair ? this.activeTxPair.upDown : 0;
         },
         upDownIcon() {
-            if (this.upDown && this.upDown > 0) {
+            if (this.upDown && +this.upDown > 0) {
                 return '+';
             }
             return '';
@@ -115,62 +121,72 @@ export default {
 
 .txpair-head-wrapper {
     width: 100%;
-    height: 60px;
+    display: flex;
+    flex-wrap: wrap;
     box-sizing: border-box;
-    padding: 10px 14px;
+    padding: 0px 14px 10px;
     font-family: $font-bold, arial, sans-serif;
     font-size: 12px;
     font-weight: 600;
     line-height: 16px;
-    white-space: nowrap;
     background: rgba(247,249,251,1);
+    align-items: center;
 
-    .token-wrapper {
-        float: left;
-        margin-top: -5px;
-    }
-    .else-wrapper {
+    .content {
         display: flex;
-        flex-direction: row;
-        float: left;
-    }
-
-    .token-title {
-        font-family: $font-normal, arial, sans-serif;
-        color: #5e6875;
-        font-weight: 400;
-    }
-
-    .token-content {
-        margin-top: 8px;
-        font-weight: 600;
-        color: rgba(36, 39, 43, 1);
-        &.down {
-            color: $down-font-color;
+        flex: 1;
+        flex-wrap: wrap;
+        .token-wrapper {
+            padding-top: 10px;
+            min-width: 250px;
+            margin-top: -5px;
+            margin-right: 20px;
         }
-        &.up {
-            color: $up-font-color;
-        }
-        .price {
-            color: $blue;
-        }
-    }
-
-    .item-left {
-        margin-left: 20px;
-    }
-}
-
-@media only screen and (max-width: 1400px) {
-    .txpair-head-wrapper {
-        flex-direction: column;
-        height: 120px;
         .else-wrapper {
-            margin-top: 6px;
+            padding-top: 10px;
+            display: flex;
+            flex-direction: row;
+            flex: 1;
+        }
+        .token-title {
+            font-family: $font-normal, arial, sans-serif;
+            color: #5e6875;
+            font-weight: 400;
+        }
+        .token-content {
+            margin-top: 8px;
+            font-weight: 600;
+            color: rgba(36, 39, 43, 1);
+            &.down {
+                color: $down-font-color;
+            }
+            &.up {
+                color: $up-font-color;
+            }
+            .price {
+                color: $blue;
+            }
+        }
+        .item-left {
+            margin-left: 20px;
         }
     }
-    .item-left:first-child {
-        margin-left: 0px;
+
+    .else-point {
+        display: inline-block;
+        height: 100%;
+        box-sizing: border-box;
+        padding: 10px 10px;
+        div {
+            width: 5px;
+            height: 5px;
+            background: rgba(0,122,255,0.7);
+            border-radius: 5px;
+            margin-bottom: 5px;
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
     }
 }
 </style>

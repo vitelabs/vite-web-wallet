@@ -9,7 +9,7 @@
                 <div v-if="content" v-html="content"></div>
                 <slot></slot>
             </div>
-            <div class="bottom">
+            <div v-show="singleBtn || leftBtnTxt || rightBtnTxt" class="bottom">
                 <div v-show="singleBtn" class="__btn btn-single __btn_all_in __pointer"
                      :class="{'unuse': btnUnuse }"
                      @click="_leftBtnClick">{{ leftBtnTxt }}</div>
