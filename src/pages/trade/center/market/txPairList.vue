@@ -29,6 +29,7 @@
 </template>
 
 <script>
+import getQuery from 'utils/query';
 import BigNumber from 'utils/bigNumber';
 
 export default {
@@ -72,11 +73,10 @@ export default {
         },
         showList() {
             const list = this.orderList(this.list);
-            if (!this.activeTxPair && list && list.length) {
-                this.setActiveTxPair(list[0]);
-            }
+            const query = getQuery();
 
             const _l = [];
+            let activeTxPair = list && list.length ? list[0] : null;
 
             list.forEach(_t => {
                 const item = {};
@@ -87,8 +87,16 @@ export default {
                 item.price24hChange = _t.price24hChange;
                 item.rawData = _t;
 
+                if (_t.ftoken === query.ftoken && _t.ttoken === query.ttoken) {
+                    activeTxPair = _t;
+                }
+
                 _l.push(item);
             });
+
+            if (!this.activeTxPair && activeTxPair) {
+                this.setActiveTxPair(activeTxPair);
+            }
 
             return _l;
         }
@@ -179,7 +187,6 @@ export default {
             });
         },
         setActiveTxPair(txPair) {
-            history.replaceState(null, null, `${ location.origin }/trade?${ txPair.pairCode }`);
             this.$store.dispatch('exFetchActiveTxPair', txPair);
         }
     }

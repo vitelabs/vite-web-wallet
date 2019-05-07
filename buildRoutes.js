@@ -68,6 +68,7 @@ let _routes = '';
 for (const key in routes) {
     const _k = routes[key];
 
+    // _routes += `{name: '${ _k.name }', path: '${ _k.path }', component: ()=>import(\'${ _k.pagePath }\')`;
     _routes += `{name: '${ _k.name }', path: '${ _k.path }', component: ${ _k.component }`;
 
     const alias = routeConfig[key] && routeConfig[key].alias ? routeConfig[key].alias : _k.alias;
@@ -80,6 +81,7 @@ for (const key in routes) {
 
     _routes += ', children: [';
     _k.children.forEach(_kr => {
+        // _routes += `{name: '${ _kr.name }', path: '${ _kr.path }', component: ()=>import(\'${ _kr.pagePath }\')`;
         _routes += `{name: '${ _kr.name }', path: '${ _kr.path }', component: ${ _kr.component }`;
         const alias = routeConfig[_kr.name] && routeConfig[_kr.name].alias ? routeConfig[_kr.name].alias : _kr.alias;
         alias && (_routes += `, alias: '${ alias }'`);
@@ -100,6 +102,7 @@ function pushRoute(fPath, tmpPath, name, parent) {
     const _route = {};
 
     routesStr += `import ${ name } from \'pages/${ tmpPath }\';`;
+    _route.pagePath = `pages/${ tmpPath }`;
     _route.name = name;
     _route.path = `/${ name }`;
     _route.component = name;

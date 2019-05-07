@@ -1,4 +1,5 @@
 import { baseToken } from 'services/trade';
+import getQuery from 'utils/query';
 
 const state = {
     isShowFavorite: false,
@@ -22,8 +23,28 @@ const actions = {
     updateMarketMap({ commit, state }) {
         baseToken().then(data => {
             commit('setMarketMap', data || []);
-            const currentMarket = state.marketMap;
-            commit('setCurrentMarket', currentMarket[0] ? currentMarket[0].token : '');
+            const marketMap = state.marketMap;
+            const firstMarket = marketMap[0] ? marketMap[0].token : '';
+            const query = getQuery();
+
+            if (!query.ttoken) {
+                commit('setCurrentMarket', firstMarket);
+                return;
+            }
+
+            let i;
+            for (i = 0; i < marketMap.length; i++) {
+                if (marketMap[i].token === query.ttoken) {
+                    break;
+                }
+            }
+
+            if (i >= marketMap.length) {
+                commit('setCurrentMarket', firstMarket);
+                return;
+            }
+
+            commit('setCurrentMarket', marketMap[i].token);
         });
     }
 };

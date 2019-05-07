@@ -15,16 +15,6 @@
 
 <script>
 export default {
-    methods: {
-        showFavorite() {
-            this.$store.commit('setIsShowFavorite', true);
-            this.$store.commit('setCurrentMarket', null);
-        },
-        changeToken(_t) {
-            this.$store.commit('setIsShowFavorite', false);
-            this.$store.commit('setCurrentMarket', _t.token);
-        }
-    },
     computed: {
         isShowFavorite() {
             return this.$store.state.exchangeMarket.isShowFavorite;
@@ -34,6 +24,21 @@ export default {
         },
         toTokenList() {
             return this.$store.state.exchangeMarket.marketMap;
+        }
+    },
+    watch: {
+        toTokenList: function (val) {
+            console.log(val);
+        }
+    },
+    methods: {
+        showFavorite() {
+            this.$store.commit('setIsShowFavorite', true);
+            this.$store.commit('setCurrentMarket', null);
+        },
+        changeToken(_t) {
+            this.$store.commit('setIsShowFavorite', false);
+            this.$store.commit('setCurrentMarket', _t.token);
         }
     }
 };

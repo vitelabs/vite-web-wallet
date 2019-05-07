@@ -85,7 +85,10 @@ let webpackConfig = {
                 exclude: /node_modules(?!(\/base-x)|(\/resize-detector)|(\/vue-echarts))/,
                 use: {
                     loader: 'babel-loader',
-                    options: { presets: ['@babel/preset-env'] }
+                    options: {
+                        presets: ['@babel/preset-env']
+                        // plugins: ['syntax-dynamic-import']
+                    }
                 }
             }, {
                 test: /(\.scss$|\.css$|\.sass$)/,
