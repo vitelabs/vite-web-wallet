@@ -23,7 +23,7 @@ class WsProtoClient {
             const connect = new WebSocket(wsUrl);
             this.connect = connect;
 
-            window.onbeforeunload = function () {
+            window.onbeforeunload = () => {
                 console.log('关闭WebSocket连接！');
                 this.connect.onclose = function () {};
                 this.connect.close();

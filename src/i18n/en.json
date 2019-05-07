@@ -190,6 +190,13 @@
       "pwFormat": "Wrong password format. The password only supports English, half-width symbols, numbers."
     }
   },
+  "startRecord": {
+    "agreeList": [
+        "我理解如果我丢失了助记词，我将永远无法找回我的资产",
+        "我理解如果我忘记或丢失了助记词，将没有任何人能够帮助我恢复",
+        "我已经写下了或者用其它方式保存了我的助记词"
+    ]
+  },
   "startImport": {
     "title": "Import",
     "dragDrop": {
@@ -605,6 +612,7 @@
     "title": "Funds",
     "search": "Please input token name",
     "operate": "Action",
+    "all": "全部",
     "confirmTable": {
       "title": "Records",
       "heads": ["Date", "Token", "Type", "Amount"]
