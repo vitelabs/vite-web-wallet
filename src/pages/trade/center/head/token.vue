@@ -1,24 +1,20 @@
 <template>
     <div ref="tContainer" v-click-outside="hideToken" class="token">
-        <div class="t-item __pointer" @click="showToken('ftoken')">
-            <div class="t-icon">
+        <div class="t-item __pointer">
+            <div class="t-icon" @click="showToken('ftoken')">
                 <img v-show="ftokenIcon" :src="ftokenIcon"/>
                 {{ ftokenDetail ? ftokenDetail.tokenShow : '' }}
-            </div>
-            <div class="id __ellipsis">
-                {{ ftokenDetail ? ftokenDetail.tokenId : '' }}
-            </div>
-        </div>
-        <div class="t-item">
-            <div class="line">/</div>
-            <div class="id line">/</div>
-        </div>
-        <div class="t-item __pointer" @click="showToken('ttoken')">
-            <div class="t-icon">
-                <img v-show="ttokenIcon" :src="ttokenIcon"/>
+            </div> /
+            <div class="t-icon" @click="showToken('ttoken')">
                 {{ ttokenDetail ? ttokenDetail.tokenShow : '' }}
             </div>
-            <div class="id __ellipsis">
+        </div>
+        <div class="t-item id __pointer">
+            <div class="token-id __ellipsis" @click="showToken('ftoken')">
+                {{ ftokenDetail ? ftokenDetail.tokenId : '' }}
+            </div>
+            <span class="line">/</span>
+            <div class="token-id __ellipsis" @click="showToken('ttoken')">
                 {{ ttokenDetail ? ttokenDetail.tokenId : '' }}
             </div>
         </div>
@@ -111,23 +107,6 @@ export default {
             }
             return getTokenIcon(tokenId);
         },
-        ttokenIcon() {
-            if (!this.ttokenDetail) {
-                return '';
-            }
-
-            if (this.ttokenDetail.urlIcon) {
-                return this.ttokenDetail.urlIcon;
-            }
-
-            const tokenId = this.ttokenDetail.tokenId;
-            const defaultToken = this.defaultTokens[tokenId];
-
-            if (defaultToken && defaultToken.icon) {
-                return defaultToken.icon;
-            }
-            return getTokenIcon(tokenId);
-        },
         tokenDetail() {
             if (!this.showTokenType) {
                 return {};
@@ -182,41 +161,48 @@ export default {
 .token {
     position: relative;
     white-space: nowrap;
+    max-width: 250px;
 
     .t-item {
-        max-width: 95px;
         overflow: hidden;
-        display: inline-block;
-        font-size: 14px;
+        font-size: 12px;
         font-family: $font-bold, arial, sans-serif;
         font-weight: 600;
         color: rgba(29, 32, 36, 1);
+        line-height: 14px;
 
         .t-icon {
+            display: inline-block;
             white-space: nowrap;
-            font-size: 18px;
+            line-height: 20px;
             img {
                 width: 28px;
                 height: 28px;
                 border-radius: 18px;
                 margin-bottom: -7px;
             }
+            &:last-child {
+                color: #5E6875;
+            }
+            &:first-child {
+                font-size: 16px;
+            }
         }
 
-        .line {
-            margin-bottom: 4px;
-        }
-
-        .id {
+        &.id {
+            display: flex;
             font-family: $font-normal, arial, sans-serif;
             font-size: 12px;
             font-weight: 400;
             color: $blue;
-            line-height: 14px;
-            margin-top: 10px;
-            &.line {
-                color: rgba(189,193,209,1);
-                margin-bottom: 0;
+            margin-top: 3px;
+            .token-id {
+                flex: 1;
+            }
+            .line {
+                position: relative;
+                top: -3px;
+                color: #BDC1D1;
             }
         }
     }
@@ -234,7 +220,7 @@ export default {
         font-size: 11px;
 
         &.right {
-            left: 100px;
+            left: 125px;
         }
 
         &::after {

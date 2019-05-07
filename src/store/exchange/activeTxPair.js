@@ -42,7 +42,7 @@ const getters = {
         const upDown = BigNumber.minus(activeTxPair.price || 0, activeTxPair.priceBefore24h || 0);
         const upDownPrev = BigNumber.minus(activeTxPair.price || 0, activeTxPair.pricePrev || 0);
 
-        activeTxPair.upDown = BigNumber.formatNum(upDown, activeTxPair.toDecimals);
+        activeTxPair.upDown = upDown;
         activeTxPair.upDownPrev = +upDownPrev ? upDownPrev : '0';
         activeTxPair.upDownPercent = activeTxPair.price24hChange ? `${ BigNumber.multi(activeTxPair.price24hChange, 100, 2) }%` : '';
 
