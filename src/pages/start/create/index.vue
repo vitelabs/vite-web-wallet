@@ -4,7 +4,7 @@
 
         <create ref="createDom" :submit="createAccount"></create>
 
-        <div @click="toogleAgree" class="agreement __pointer" :class="{
+        <div @click="toogleAgree" class="agreement agree-list __pointer" :class="{
             'active': isAgree
         }">{{ $t('startCreate.agreementPre') }}
             <span @click.stop="openLink" class="link">{{ $t('startCreate.agreement') }}</span>
@@ -71,35 +71,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
-
-.agreement {
-    text-align: left;
-    margin-top: 20px;
-    font-size: 14px;
-    font-family: $font-normal, arial, sans-serif;
-    font-weight: 400;
-    color: rgba(255,255,255,1);
-    line-height: 18px;
-    .link {
-        text-decoration: underline;
-    }
-    &.active {
-        &::before {
-            background: url('~assets/imgs/agree.svg');
-            background-size: 100% 100%;
-        }
-    }
-    &:before {
-        display: inline-block;
-        content: ' ';
-        width: 18px;
-        height: 18px;
-        margin-bottom: -5px;
-        margin-right: 6px;
-        background: url('~assets/imgs/unagree.svg');
-        background-size: 100% 100%;
-    }
-}
+@import "../agree.scss";
 
 .__btn.__btn_all_in.unuse {
     background: rgba(191,191,191,1);

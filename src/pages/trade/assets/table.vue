@@ -38,7 +38,6 @@
                  v-if="confirmShow">
             <div class="__row">
                 <div class="__row-t">{{ c.lable1 }}
-                    <span @click="setOpNumberAll(c)">all</span>
                 </div>
                 <div class="input un-click-able">
                     <img :src="c.icon" />
@@ -52,7 +51,9 @@
                 <div class="__row-t">{{ c.lable2 }}
                     <span class="__err __hint">{{ c.errTips }}</span>
                 </div>
-                <vite-input v-model="opNumber" :placeholder="c.placeholder"></vite-input>
+                <vite-input v-model="opNumber" :placeholder="c.placeholder">
+                    <span slot="after" class="all-amount __pointer" @click="setOpNumberAll(c)">{{ $t('tradeAssets.all') }}</span>
+                </vite-input>
             </div>
         </confirm>
 
@@ -424,6 +425,12 @@ export default {
     &:first-child {
         width: 6%;
     }
+}
+
+.all-amount {
+    padding: 0 20px;
+    color: #5e6875;
+    font-size: 12px;
 }
 
 .input {
