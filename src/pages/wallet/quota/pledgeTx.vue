@@ -79,7 +79,6 @@ export default {
         return {
             minNum,
             activeAccount,
-            addr: activeAccount.getDefaultAddr(),
             amount: '',
             toAddr: '',
             isValidAddress: true,
@@ -89,6 +88,9 @@ export default {
         };
     },
     computed: {
+        addr() {
+            return this.$store.state.activeAccount.address;
+        },
         btnUnuse() {
             return this.loading || !this.isValidAddress || this.amountErr || !this.amount || !this.toAddr;
         },
@@ -169,7 +171,7 @@ export default {
             this.isShowAddrList = !this.isShowAddrList;
         },
         addToAddr(type) {
-            this.toAddr = type === 'mine' ? this.activeAccount.getDefaultAddr() : constant.DexFund_Addr;
+            this.toAddr = type === 'mine' ? this.addr : constant.DexFund_Addr;
         },
         validTx() {
             if (this.btnUnuse) {

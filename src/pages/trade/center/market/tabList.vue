@@ -26,11 +26,6 @@ export default {
             return this.$store.state.exchangeMarket.marketMap;
         }
     },
-    watch: {
-        toTokenList: function (val) {
-            console.log(val);
-        }
-    },
     methods: {
         showFavorite() {
             this.$store.commit('setIsShowFavorite', true);

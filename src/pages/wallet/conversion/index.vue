@@ -60,7 +60,6 @@ export default {
     components: { secTitle, viteAddress, token, transaction, loading },
     created() {
         const activeAccount = this.$wallet.getActiveAccount();
-        this.viteAddress = activeAccount.getDefaultAddr();
         const mnemonic = activeAccount.getMnemonic();
         this.ethWallet = new _ethWallet({ mnemonic });
         this.ethWallet.init(() => {
@@ -81,11 +80,15 @@ export default {
             tokenList: {},
             ethWallet: null,
             address: '',
-            viteAddress: '',
 
             addrList: [],
             isShowAddrList: false
         };
+    },
+    computed: {
+        viteAddress() {
+            return this.$store.state.activeAccount.address;
+        }
     },
     watch: {
         loading: function () {

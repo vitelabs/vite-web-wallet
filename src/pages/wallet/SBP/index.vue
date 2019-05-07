@@ -191,7 +191,6 @@ export default {
                 this.$toast(this.$t('hint.request', { name: this.$t('walletSBP.section2.update') }));
                 this.closeConfirm();
                 this.$store.dispatch('loopRegList', {
-                    address: this.activeAccount.getDefaultAddr(),
                     nodeName,
                     operate: 2,
                     producer

@@ -13,12 +13,6 @@ import { timer } from 'utils/asyncFlow';
 let quotaInst;
 
 export default {
-    data() {
-        const activeAccount = this.$wallet.getActiveAccount();
-        const address = activeAccount.getDefaultAddr();
-
-        return { address };
-    },
     computed: {
         txNum() {
             return this.$store.state.pledge.pledgeTransNum;
@@ -33,15 +27,12 @@ export default {
     methods: {
         startLoopQuota() {
             this.stopLoopQuota();
-            quotaInst = new timer(() => this.fetchQuota(), 1000);
+            quotaInst = new timer(() => this.$store.dispatch('fetchQuota'), 1000);
             quotaInst.start();
         },
         stopLoopQuota() {
             quotaInst && quotaInst.stop();
             quotaInst = null;
-        },
-        fetchQuota() {
-            return this.$store.dispatch('fetchQuota', this.address);
         }
     }
 };

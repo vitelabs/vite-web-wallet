@@ -118,6 +118,9 @@ export default {
                 return bigNumber.plus(bigNumber.multi(balanceInfo[cur].balance, rateMap[cur][currency]), pre);
             }, 0);
             return `${ this.$i18n.locale === 'en' ? '$' : '¥' }${ total }`;
+        },
+        defaultAddr() {
+            return this.$store.state.activeAccount.address;
         }
     },
     methods: {
@@ -153,7 +156,7 @@ export default {
         getSimpleAcc() {
             return {
                 name: activeAccount ? activeAccount.getName() : '',
-                addr: activeAccount.getDefaultAddr()
+                addr: this.defaultAddr
             };
         },
 

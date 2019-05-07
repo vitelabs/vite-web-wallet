@@ -1,5 +1,7 @@
 import localStorage from 'utils/localStorage';
 
+// [TODO] utils/localStorage 统一
+
 const currencyKey = 'currency';
 const autoLogoutKey = 'autoLogoutTime';
 
@@ -20,6 +22,7 @@ const mutations = {
         state.clientStatus = clientStatus;
     },
     setLang(state, lang) {
+        localStorage.setItem('lang', lang);
         state.lang = lang;
         if (!state.currency) {
             state.currency = lang === 'zh' ? 'cny' : 'usd';

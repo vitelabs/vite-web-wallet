@@ -1,6 +1,6 @@
 <template>
     <div>
-        <guide></guide>
+        <!-- <guide></guide> -->
         <layout>
             <center-head slot="lt"></center-head>
             <depth slot="r"></depth>
@@ -20,10 +20,10 @@ import latestTx from './latestTx';
 import limitPrice from './limitPrice/limitPrice.vue';
 import centerHead from './head/head.vue';
 import centerView from './view/view.vue';
-import guide from './guide.vue';
+// import guide from './guide.vue';
 
 export default {
-    components: { layout, depth, market, latestTx, limitPrice, centerHead, centerView, guide },
+    components: { layout, depth, market, latestTx, limitPrice, centerHead, centerView },
     mounted() {
         this.$store.dispatch('exFetchActiveTxPair');
     }

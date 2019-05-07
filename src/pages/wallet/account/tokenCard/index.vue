@@ -62,7 +62,6 @@
 
 <script>
 import { receiveDialog, chargeDialog, withdrawDialog, tokenInfoDialog } from '../dialog';
-import { wallet } from 'utils/wallet';
 import getTokenIcon from 'utils/getTokenIcon';
 import bigNumber from 'utils/bigNumber';
 import { gateStorage } from 'services/gate';
@@ -92,7 +91,7 @@ export default {
             return this.token.type === 'THIRD_GATE' && (!this.token.totalAmount || bigNumber.isEqual(this.token.totalAmount, '0'));
         },
         address() {
-            return wallet.activeWalletAcc && wallet.activeWalletAcc.getDefaultAddr();
+            return this.$store.state.activeAccount.address;
         },
         gateName() {
             if (this.$store.getters.mapToken2Gate[this.token.tokenId]) {

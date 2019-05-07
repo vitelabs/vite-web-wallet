@@ -4,6 +4,7 @@ require('es6-promise').polyfill();
 import 'utils/performance';
 import 'assets/scss/mixins.scss';
 import 'utils/viteClient.js';
+import 'utils/wallet';
 
 import Vue from 'vue';
 

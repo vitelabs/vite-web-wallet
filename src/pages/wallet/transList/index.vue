@@ -110,15 +110,16 @@ export default {
     },
     data() {
         const activeAccount = this.$wallet.getActiveAccount();
-        const address = activeAccount.getDefaultAddr();
 
         return {
             acc: activeAccount,
-            address,
             currentPage: this.$store.state.transList.currentPage
         };
     },
     computed: {
+        address() {
+            return this.$store.state.activeAccount.address;
+        },
         totalPage() {
             return this.$store.getters.totalPage;
         },

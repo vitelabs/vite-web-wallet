@@ -78,16 +78,17 @@ export default {
     },
     data() {
         const activeAccount = this.$wallet.getActiveAccount();
-        const address = activeAccount.getDefaultAddr();
 
         return {
             activeAccount,
-            address,
             showTimeTips: -1,
             totalReward: null
         };
     },
     computed: {
+        address() {
+            return this.$store.state.activeAccount.address;
+        },
         amountErr() {
             if (!this.tokenInfo || !this.tokenInfo.tokenId) {
                 return '';
@@ -174,7 +175,6 @@ export default {
             }).then(() => {
                 this.$toast(this.$t('walletSBP.section1.registerSuccess'));
                 this.$store.dispatch('loopRegList', {
-                    address: this.address,
                     nodeName,
                     operate: 1,
                     producer: producerAddr
@@ -225,7 +225,6 @@ export default {
                     }).then(() => {
                         this.$toast(this.$t('hint.request', { name: this.$t('walletSBP.section2.cancel') }));
                         this.$store.dispatch('loopRegList', {
-                            address: this.address,
                             nodeName,
                             operate: 0,
                             producer

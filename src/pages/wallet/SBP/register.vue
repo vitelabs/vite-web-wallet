@@ -95,7 +95,6 @@ export default {
             tipsType: '',
 
             activeAccount,
-            quotaAddr: activeAccount.getDefaultAddr(),
             loading: false
         };
     },
@@ -103,6 +102,9 @@ export default {
         this.$store.dispatch('stopLoopRegList');
     },
     computed: {
+        quotaAddr() {
+            return this.$store.state.activeAccount.address;
+        },
         regNameList() {
             return this.$store.getters.regNameList;
         },
@@ -237,7 +239,6 @@ export default {
                 this.clearAll();
 
                 this.$store.dispatch('loopRegList', {
-                    address: this.quotaAddr,
                     nodeName,
                     operate: 1,
                     producer: producerAddr

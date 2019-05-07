@@ -29,7 +29,6 @@ block content
 
 <script>
 import { verifyAddr, getWithdrawInfo, getWithdrawFee, withdraw } from 'services/gate';
-import { wallet } from 'utils/wallet';
 import debounce from 'lodash/debounce';
 import { getValidBalance } from 'utils/validations';
 import bigNumber from 'utils/bigNumber';
@@ -64,7 +63,7 @@ export default {
         };
     },
     beforeMount() {
-        getWithdrawInfo({ walletAddress: wallet.defaultAddr, tokenId: this.token.tokenId }, this.token.gateInfo.url).then(data => (this.info = data));
+        getWithdrawInfo({ walletAddress: this.defaultAddr, tokenId: this.token.tokenId }, this.token.gateInfo.url).then(data => (this.info = data));
     },
     computed: {
         fee() {
@@ -81,6 +80,9 @@ export default {
         },
         min() {
             return this.info.minimumWithdrawAmount ? `${ bigNumber.toBasic(this.info.minimumWithdrawAmount, this.token.decimals) } ${ this.token.tokenSymbol }` : '--';
+        },
+        defaultAddr() {
+            return this.$store.state.activeAccount.address;
         }
     },
     watch: {
@@ -96,7 +98,7 @@ export default {
         withdrawAmount: debounce(function (val) {
             this.withdrawAmountMin = '';// 重置从全部提现过来的数据。
             this.fetchingFee = true;
-            getWithdrawFee({ tokenId: this.token.tokenId, walletAddress: wallet.defaultAddr, amount: bigNumber.toMin(val, this.token.decimals) }, this.token.gateInfo.url).then(d => {
+            getWithdrawFee({ tokenId: this.token.tokenId, walletAddress: this.defaultAddr, amount: bigNumber.toMin(val, this.token.decimals) }, this.token.gateInfo.url).then(d => {
                 this.feeMin = d;
                 this.fetchingFee = false;
             });
@@ -123,7 +125,7 @@ export default {
         withdrawAll() {
             if (this.token.totalAmount && bigNumber.compared(this.token.totalAmount, '0') > 0) {
                 this.fetchingFee = true;
-                getWithdrawFee({ tokenId: this.token.tokenId, walletAddress: wallet.defaultAddr, amount: this.token.totalAmount, containsFee: true }, this.token.gateInfo.url).then(fee => {
+                getWithdrawFee({ tokenId: this.token.tokenId, walletAddress: this.defaultAddr, amount: this.token.totalAmount, containsFee: true }, this.token.gateInfo.url).then(fee => {
                     this.feeMin = fee;
                     this.fetchingFee = false;
                     this.withdrawAmountMin = bigNumber.minus(this.token.totalAmount, this.feeMin);

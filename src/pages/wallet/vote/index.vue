@@ -119,7 +119,7 @@ export default {
             this.isResisterTipsShow = !this.isResisterTipsShow;
         },
         updateVoteData() {
-            return $ViteJS.vote.getVoteInfo(constant.Snapshot_Gid, this.$wallet.getActiveAccount().getDefaultAddr()).then(result => {
+            return $ViteJS.vote.getVoteInfo(constant.Snapshot_Gid, this.$store.state.activeAccount.address).then(result => {
                 this.voteData = result ? [result] : [];
                 this.voteData[0] && (this.voteData[0].voteStatus = 'voted');
 
@@ -150,9 +150,8 @@ export default {
             if (this.cache) {
                 return;
             }
-            const activeAccount = this.$wallet.getActiveAccount();
             const locale = this.$i18n.locale === 'zh' ? 'zh' : 'en';
-            window.open(`https://reward.vite.net?language=${ locale }&address=${ activeAccount.getDefaultAddr() }`);
+            window.open(`https://reward.vite.net?language=${ locale }&address=${ this.$store.state.activeAccount.address }`);
         },
         cancelVote(v) {
             if (this.cache) {

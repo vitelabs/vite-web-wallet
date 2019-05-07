@@ -68,17 +68,18 @@ export default {
     },
     data() {
         const activeAccount = this.$wallet.getActiveAccount();
-        const address = activeAccount.getDefaultAddr();
 
         return {
             activeAccount,
             currentPage: 0,
-            address,
             activeItem: null,
             loading: false
         };
     },
     computed: {
+        address() {
+            return this.$store.state.activeAccount.address;
+        },
         totalAmount() {
             if (!this.tokenInfo) {
                 return 0;
