@@ -1,17 +1,15 @@
 import Vue from 'vue';
 import i18n from 'i18n';
+
+import router from 'router/index.js';
 import quotaCancelComponent from './cancel.vue';
 
 const QuotaCancelComponent = Vue.extend(quotaCancelComponent);
-let cancelInstance;
-
-export function initQuotaConfirm(router) {
-    cancelInstance = new QuotaCancelComponent({
-        el: document.createElement('div'),
-        i18n,
-        router
-    });
-}
+const cancelInstance = new QuotaCancelComponent({
+    el: document.createElement('div'),
+    i18n,
+    router
+});
 
 export function quotaConfirm({
     showMask = true,

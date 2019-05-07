@@ -175,14 +175,6 @@ export default {
             this.isLoading = true;
             this.initFavoriteList();
         },
-        activeTxPairList: function () {
-            this.activeTxPairList && this.activeTxPairList.forEach(txPair => {
-                if (!this.activePairCode || txPair.pairCode !== this.activePairCode) {
-                    return;
-                }
-                this.$store.commit('exSetActiveTxPair', txPair);
-            });
-        },
         searchText: function () {
             const list = [];
             const searchText = this.$trim(this.searchText).toLowerCase();

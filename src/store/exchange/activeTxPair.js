@@ -19,7 +19,11 @@ const mutations = {
 const actions = {
     exFetchActiveTxPair({ state, dispatch, commit }, txPair) {
         const activeTxPair = state.activeTxPair;
-        txPair && commit('exSetActiveTxPair', txPair);
+
+        if (txPair) {
+            history.replaceState(null, null, `${ location.origin }/trade?pairCode=${ txPair.pairCode }&ftoken=${ txPair.ftoken }&ttoken=${ txPair.ttoken }`);
+            commit('exSetActiveTxPair', txPair);
+        }
 
         if (txPair && activeTxPair && activeTxPair.pairCode === txPair.pairCode) {
             return;
