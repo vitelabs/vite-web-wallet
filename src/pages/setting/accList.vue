@@ -76,7 +76,8 @@ export default {
             this.$store.commit('commitClearBalance');
             this.$store.commit('commitClearTransList');
             this.$store.commit('commitClearPledge');
-            this.$store.commit('clearDexBalance');
+            // [TODO] Recover trade ==============
+            // this.$store.commit('clearDexBalance');
         }
     }
 };
