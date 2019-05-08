@@ -24,10 +24,8 @@ export default {
             return this.activeTxPair ? this.activeTxPair.upDownPrev : '0';
         },
         realPrice() {
-            let pre = '$';
-            if (this.$i18n.locale === 'zh') {
-                pre = '￥';
-            }
+            const pre = this.$store.state.env.currency === 'cny' ? '¥' : '$';
+
             if (!this.activeTxPair) {
                 return `${ pre }0`;
             }

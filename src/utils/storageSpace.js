@@ -1,10 +1,9 @@
-const spaceKey = 'viteStorageSpace';
 import { wallet } from 'utils/wallet';
-import storage from 'utils/storage';
+import storage from 'utils/localStorage';
 
 export const addrSpace = {
     get key() {
-        return `${ spaceKey }_${ wallet.defaultAddr }`;
+        return `${ wallet.defaultAddr }`;
     },
 
     getItem(key) {
@@ -23,5 +22,3 @@ export const addrSpace = {
         storage.setItem(`${ this.key }_${ key }`, content);
     }
 };
-
-

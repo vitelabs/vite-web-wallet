@@ -138,11 +138,7 @@ export default {
                 return '';
             }
 
-            let pre = '$';
-            if (this.$i18n.locale === 'zh') {
-                pre = '￥';
-            }
-
+            const pre = this.$store.state.env.currency === 'cny' ? '≈¥' : '≈$';
             return `${ txPair.rawData.ftokenShow }  ${ pre }${ BigNumber.multi(txPair.price || 0, rate || 0, 2) }`;
         },
         getRate(tokenId) {

@@ -8,6 +8,7 @@ const { isObject } = utils;
 
 /**
  * config: {
+ *   sendTx: Boolean, Default true
  *   pow: Boolean,
  *   powConfig? : { // 当 PoW 开启时生效
  *      isShowCancel: Boolean<true | false>,
@@ -50,12 +51,12 @@ const { isObject } = utils;
  */
 
 const defaultConfig = {
+    sendTx: true,
     pow: true,
     powConfig: {
         isShowCancel: true,
         cancel: () => {}
     },
-    sendTx: true,
     confirm: {
         showMask: true,
         operate: ''
@@ -100,7 +101,7 @@ export default function sendTx(methodName, data, config = defaultConfig) {
         },
         beforeSendTx: (accountBlock, checkPowResult, next) => {
             console.log('[beforeSendTx]');
-
+            console.log(config.sendTx);
             if (!checkPowResult || !checkPowResult.difficulty) {
                 return next(!config.sendTx);
             }
@@ -126,6 +127,7 @@ export default function sendTx(methodName, data, config = defaultConfig) {
             });
         }
     }).then(result => {
+        console.log(result);
         if (!powInstance) {
             event.thenCb && event.thenCb(result);
             return;
@@ -223,8 +225,10 @@ class EventEmitter {
 
 function formatConfig(config) {
     config = config || defaultConfig;
+    console.log(config);
 
-    const sendTx = !!(!config.sendTx && config.sendTx !== false);
+    const sendTx = !!config.sendTx;
+    console.log(sendTx);
     const pow = !!config.pow;
     const powConfig = config.powConfig ? config.powConfig : defaultConfig.powConfig;
 
