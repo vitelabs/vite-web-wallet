@@ -4,18 +4,35 @@
         <div class="acc-list __pointer">
             <div ref="listWrapper" class="list-wrapper">
                 <div ref="list">
-                    <div class="acc-item" @click="setDefault(addr, index)" v-for="(addr, index) in addrList" :key="index">
+                    <div class="acc-item"
+                         v-for="(addrObj, index) in addrList" :key="index"
+                         @click="setDefault(addrObj.addr, index)" >
                         <span class="select" :class="{
-                            'active': defaultAddr === addr
+                            'active': defaultAddr === addrObj.addr
                         }"></span>
-                        <span class="describe __ellipsis">{{(index + 1) + '. ' + addr}}</span>
-                        <img @click.stop="copy(addr)" class="copy __pointer" src="../../assets/imgs/copy_default.svg"/>
+                        <div class="describe __ellipsis">
+                            <div v-show="showNameInput !== index" class="bold">
+                                {{ addrObj.name || `${$t('addrName', { index:index + 1 })}`  }}
+                            </div>
+                            <form class="name-input" autocomplete="off">
+                                <input ref="nameInput" type="text" autocomplete="off"
+                                       v-show="showNameInput === index"
+                                       v-model="editName"
+                                       :placeholder="index"
+                                       @blur="rename"/>
+                            </form>
+                            <div class="__ellipsis">{{ addrObj.addr }}</div>
+                        </div>
+                        <img @click.stop="startRename(addrObj.addr, index)" class="icon __pointer" :class="{
+                            'not-allowed': !isWalletAcc
+                        }" src="../../assets/imgs/edit_default.svg"/>
+                        <img @click.stop="copy(addrObj.addr)" class="icon __pointer" src="../../assets/imgs/copy_default.svg"/>
                     </div>
                 </div>
             </div>
 
             <div v-show="isWalletAcc && addrList.length < 10" class="add" @click="addAddr">
-                <span class="acc-add"></span><span class="describe">{{ $t('setting.addAddr') }}</span>
+                <span class="acc-add"></span><span class="describe bold">{{ $t('setting.addAddr') }}</span>
             </div>
         </div>
     </div>
@@ -30,30 +47,24 @@ export default {
         const activeAccount = this.$wallet.getActiveAccount();
 
         return {
-            activeAccount,
             isWalletAcc: activeAccount.type === 'wallet',
-            addrList: activeAccount.getAddrList(),
-            copyAddr: ''
+            showNameInput: '',
+            editName: ''
         };
     },
     computed: {
         defaultAddr() {
             return this.$store.state.activeAccount.address;
+        },
+        addrList() {
+            return this.$store.state.activeAccount.addrList;
         }
     },
-    methods: {
-        copy(addr) {
-            copy(addr);
-            this.$toast(this.$t('hint.copy'));
-        },
-        addAddr() {
-            const addrList = this.activeAccount.getAddrList();
-            if (addrList && addrList.length >= 10) {
+    watch: {
+        addrList: function (val, oldVal) {
+            if (val.length <= oldVal.length || val.length - oldVal.length > 1) {
                 return;
             }
-
-            this.activeAccount.addAddr();
-            this.addrList = this.activeAccount.getAddrList();
 
             Vue.nextTick(() => {
                 if (!this.$refs.list || !this.$refs.listWrapper) {
@@ -64,9 +75,65 @@ export default {
                 const wrapperHeight = this.$refs.listWrapper.offsetHeight;
                 this.$refs.listWrapper.scrollTop = height - wrapperHeight;
             });
+        }
+    },
+    methods: {
+        copy(addr) {
+            copy(addr);
+            this.$toast(this.$t('hint.copy'));
+        },
+        addAddr() {
+            this.$store.commit('activeAccAddAddr');
         },
         setDefault(address, index) {
             this.$store.dispatch('changeDefaultAddress', { address, index });
+        },
+
+        startRename(addr, index) {
+            if (!this.isWalletAcc || this.showNameInput === index) {
+                return;
+            }
+
+            this.showNameInput = index;
+            Vue.nextTick(() => {
+                this.$onKeyDown(13, () => {
+                    this.rename(addr, index);
+                });
+                console.log(this.$refs.nameInput[index]);
+                this.$refs.nameInput[index].focus();
+            });
+        },
+        rename(addr, index) {
+            if (!this.editName) {
+                this.clearEditName();
+                return;
+            }
+
+            const editName = this.editName.trim();
+
+            if (!/^[a-zA-Z0-9_\u4e00-\u9fa5]+$/g.test(editName)) {
+                this.$toast(this.$t('startCreate.hint.name'), 'error');
+                this.clearEditName();
+                return;
+            }
+
+            if (editName.length > 26) {
+                this.$toast(this.$t('startCreate.hint.nameLong'), 'error');
+                this.clearEditName();
+                return;
+            }
+
+            this.$store.commit('activeAccSetAddrName', {
+                addr,
+                index,
+                name: this.editName
+            });
+            this.clearEditName();
+        },
+        clearEditName() {
+            this.showNameInput = '';
+            this.editName = '';
+            this.$offKeyDown();
         }
     }
 };
@@ -80,10 +147,19 @@ export default {
     background: #fff;
     border: 1px solid #d4dee7;
     border-radius: 2px;
+    font-size: 12px;
 
     .list-wrapper {
         max-height: 190px;
         overflow: auto;
+    }
+
+    .bold {
+        font-family: $font-bold, arial, sans-serif;
+        font-weight: 600;
+    }
+    .normal {
+        font-weight: 400;
     }
 
     .acc-item {
@@ -92,9 +168,15 @@ export default {
         padding: 10px 15px;
         border-bottom: 1px solid #d4dee7;
         display: flex;
-
+        align-items: center;
         &:last-child {
             border: none;
+        }
+        .icon {
+            margin-left: 12px;
+            &.not-allowed {
+                cursor: not-allowed;
+            }
         }
     }
 
@@ -119,7 +201,6 @@ export default {
             display: inline;
             position: relative;
             bottom: 3px;
-            font-size: 12px;
             color: #007aff;
         }
     }
@@ -127,8 +208,15 @@ export default {
     .describe {
         display: block;
         width: 93%;
-        font-size: 12px;
-        color: #5e6875;
+        color: rgba(94,104,117,1);
+        .name-input {
+            display: block;
+            width: 100%;
+            input {
+                display: block;
+                width: 100%;
+            }
+        }
     }
 
     .select {

@@ -1,26 +1,29 @@
 <template>
     <div class="addr-wrapper">
-        <address-title :address="defaultAddr" :addressQrcode="addressQrcode">
-            <switch-addr></switch-addr>
+        <address-title :address="address" :addressQrcode="addressQrcode">
+            <span>{{ title }}</span>
         </address-title>
-        <div class="addr-content">{{ defaultAddr }}</div>
         <slot></slot>
     </div>
 </template>
 
 <script>
 import addressTitle from 'components/addressTitle';
-import switchAddr from 'components/switchAddress';
-import { stringify } from 'utils/viteSchema';
 
 export default {
-    components: { addressTitle, switchAddr },
-    computed: {
-        defaultAddr() {
-            return this.$store.state.activeAccount.address;
+    components: { addressTitle },
+    props: {
+        title: {
+            type: String,
+            default: ''
         },
-        addressQrcode() {
-            return stringify({ targetAddress: this.defaultAddr });
+        address: {
+            type: String,
+            default: ''
+        },
+        addressQrcode: {
+            type: String,
+            default: ''
         }
     }
 };
@@ -39,7 +42,7 @@ export default {
     border: 1px solid #d4dee7;
     border-radius: 2px;
     height: 24px;
-    color: #5E6875;
+    color: #283d4a;
     padding: 4px 8px;
     line-height: 24px;
     display: flex;

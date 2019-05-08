@@ -215,6 +215,13 @@ class account {
         this.save();
     }
 
+    setAddrName(addr, idx, name) {
+        if (this.type !== AccountType.wallet) {
+            return;
+        }
+        localStorage.setItem(addr, { name, idx });
+    }
+
     addAddr() {
         if (this.type === AccountType.keystore) {
             return false;
@@ -226,14 +233,32 @@ class account {
     }
 
     getAddrList() {
-        if (this.type !== AccountType.wallet) {
-            return [this.account.address];
+        if (this.type === AccountType.keystore) {
+            return [{
+                addr: this.account.address,
+                name: this.name
+            }];
+        }
+
+        const getAddrName = hexAddr => {
+            const obj = localStorage.getItem(hexAddr) || {};
+            return obj.name || '';
+        };
+
+        if (this.type === AccountType.addr) {
+            return [{
+                addr: this.account.address,
+                name: getAddrName(this.account.address)
+            }];
         }
 
         const addrs = [];
         const list = this.account.addrList;
         list.forEach(({ hexAddr }) => {
-            addrs.push(hexAddr);
+            addrs.push({
+                addr: hexAddr,
+                name: getAddrName(hexAddr)
+            });
         });
 
         return addrs;
@@ -243,6 +268,10 @@ class account {
         if (this.type === AccountType.keystore) {
             return true;
         }
+        if (!this.account || !this.account.setDefaultAddr) {
+            return false;
+        }
+
         const result = this.account.setDefaultAddr(addr, index);
         result && this.save();
 

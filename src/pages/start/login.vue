@@ -191,7 +191,7 @@ export default {
                 this.isLoading = false;
                 const activeAccount = this.$wallet.getActiveAccount();
                 activeAccount.unlock();
-                this.$store.commit('setDefaultAddress', activeAccount.getDefaultAddr());
+                this.$store.commit('setDefaultAddress');
 
                 this.$router.push({ name: this.$wallet.lastPage || 'trade' });
                 this.$wallet.clearLastPage();

@@ -13,9 +13,10 @@
                 {{ isHaveUsers ? $t('unlockAcc') : $t('login')  }}</div>
             <div v-show="!isLogin" @click="dexChange" class="tab __pointer">
                 {{ isHaveUsers ? $t('changeAcc') : $t('register') }}</div>
-            <div v-show="active.indexOf('trade') !== -1 " class="tab __pointer"
+            <div v-show="active.indexOf('trade') !== -1" class="tab __pointer"
                  v-unlock-account="showToken" @noactiveacc="dexStart">
                 {{ $t('dexToken') }}</div>
+            <switch-addr class="switch-tab menu" v-show="active.indexOf('trade') !== -1" ></switch-addr>
         </ul>
 
         <dex-token v-if="isShowDexToken" :close="closeToken"></dex-token>
@@ -24,9 +25,10 @@
 
 <script>
 import dexToken from 'components/dexToken';
+import switchAddr from 'components/switchAddress';
 
 export default {
-    components: { dexToken },
+    components: { dexToken, switchAddr },
     props: {
         tabList: {
             type: Array,
@@ -114,6 +116,12 @@ export default {
         .tab {
             margin-left: 28px;
         }
+    }
+
+    .switch-tab {
+        display: inline-block;
+        width: auto;
+        margin-left: 20px;
     }
 
     .tab {

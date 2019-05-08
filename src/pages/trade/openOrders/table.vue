@@ -66,7 +66,6 @@ export default {
         return {
             sortIndex: 0,
             sortType: 1,
-            acc: null,
             addr: '',
             timer: null,
             list: [],
@@ -98,6 +97,9 @@ export default {
                 this.changeList = {};
                 this.oldList = {};
             }
+            this.init();
+        },
+        defaultAddr() {
             this.init();
         }
     },
@@ -228,7 +230,8 @@ export default {
                 this.$toast(this.$t('tradeOpenOrders.confirm.successToast'));
             };
 
-            this.acc.initPwd({
+            const activeAccount = this.$wallet.getActiveAccount();
+            activeAccount.initPwd({
                 title: this.$t('tradeOpenOrders.confirm.title'),
                 content: this.$t('tradeOpenOrders.confirm.content'),
                 submitTxt: this.$t('tradeOpenOrders.confirm.submitTxt'),

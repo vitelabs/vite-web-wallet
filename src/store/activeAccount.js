@@ -2,11 +2,19 @@ import { wallet } from 'utils/wallet/index';
 
 const activeAccount = wallet.getActiveAccount();
 
-const state = { address: activeAccount ? activeAccount.getDefaultAddr() : '' };
+const state = {
+    address: activeAccount ? activeAccount.getDefaultAddr() : '',
+    addrList: activeAccount ? activeAccount.getAddrList() : []
+};
 
 const mutations = {
-    setDefaultAddress(state, address) {
-        state.address = address;
+    setActiveAccAddrList(state) {
+        const activeAccount = wallet.getActiveAccount();
+        state.addrList = activeAccount ? activeAccount.getAddrList() || [] : [];
+    },
+    setDefaultAddress(state) {
+        const activeAccount = wallet.getActiveAccount();
+        state.address = activeAccount.getDefaultAddr() || '';
     },
     changeDefaultAddress(state, { address, index }) {
         const activeAccount = wallet.getActiveAccount();
@@ -16,6 +24,21 @@ const mutations = {
         }
 
         state.address = address;
+    },
+    activeAccAddAddr(state) {
+        const activeAccount = wallet.getActiveAccount();
+        const addrList = activeAccount.getAddrList() || [];
+        if (addrList.length >= 10) {
+            return;
+        }
+
+        activeAccount.addAddr();
+        state.addrList = activeAccount.getAddrList();
+    },
+    activeAccSetAddrName(state, { addr, name, index }) {
+        const activeAccount = wallet.getActiveAccount();
+        activeAccount.setAddrName(addr, index, name);
+        state.addrList = activeAccount.getAddrList();
     }
 };
 

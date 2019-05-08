@@ -9,7 +9,7 @@
             </div>
 
             <vite-address :title="$t('wallet.address')" :address="address"
-                          :showAddrContent="false" :addressQrcode="'ethereum:' + address">
+                          :addressQrcode="'ethereum:' + address">
                 <div class="address-wrapper" v-click-outside="hideAddrList">
                     <div class="active-addr __pointer" @click="showAddrList">
                         {{ address }}
@@ -48,8 +48,8 @@
 import { timer } from 'utils/asyncFlow';
 import _ethWallet from 'utils/ethWallet/index.js';
 import secTitle from 'components/secTitle';
-import viteAddress from 'components/address';
 import loading from 'components/loading';
+import viteAddress from './address';
 import token from './token';
 import transaction from './transaction';
 

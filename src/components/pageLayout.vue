@@ -40,6 +40,8 @@ export default {
     mounted() {
         this.isLogin = !!this.$wallet.isLogin;
         this.setMenuList();
+        this.$store.commit('setActiveAccAddrList');
+
         this.$wallet.onLogin(() => {
             this.isLogin = true;
         });
@@ -49,7 +51,9 @@ export default {
     },
     watch: {
         isLogin: function () {
+            this.$store.commit('setActiveAccAddrList');
             this.setMenuList();
+
             if (this.isLogin) {
                 this.operate();
                 return;

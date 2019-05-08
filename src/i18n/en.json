@@ -21,6 +21,7 @@
   "submitStaking": "Submit Staking",
   "withdrawHeight": "Expected Snapshot Height",
   "balance": "Balance",
+  "addrName": "Address{index}",
   "dealReminder": {
     "title": "Deal Notice",
     "describe": "Your order {amount} {ttoken} ({ftoken}/{ttoken}) at {time} is a complete deal, visit Order History to find out more."
@@ -306,6 +307,7 @@
     "sum": "Amount",
     "remarks": "Comment",
     "remarksLong": "{len} bytes left",
+    "totalAsset": "总资产",
     "placeholder": {
       "amount": "Please input amount",
       "remarks": "Please input comments",
