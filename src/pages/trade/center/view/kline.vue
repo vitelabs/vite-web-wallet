@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import kline from './tradingView/kline.ts';
+import kline from './tradingView/kline';
 
 export default {
     props: {

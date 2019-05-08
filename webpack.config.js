@@ -16,6 +16,8 @@ const STATIC_PATH = process.env.APP === 'true'
     : path.join(__dirname, './dist');
 const development = [ 'dev', 'test', 'dexTestNet' ];
 
+console.log(development.indexOf(process.env.NODE_ENV) > -1 ? 'development' : 'production',);
+
 let webpackConfig = {
     mode: development.indexOf(process.env.NODE_ENV) > -1 ? 'development' : 'production',
     devtool: 'source-map',

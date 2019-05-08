@@ -7,7 +7,7 @@ import { httpServicesMap, wsServicesMap } from './subService';
 // 1，第一次启动以http方式拉全量数据；
 // 2，ws订阅失败时以轮询代替
 // 3，支持参数更新时自动切换订阅key
-// 4，todo ws自动恢复
+// 4，[TODO] ws自动恢复
 
 export class subTask extends timer {
     constructor(key, callback, interval = 2000) {
@@ -107,7 +107,6 @@ export class subTask extends timer {
         this.argsGetter = null;
         this._subKey = null;
     }
-
 
     httpRequest() {
         const args = this.args;
