@@ -1,6 +1,6 @@
 <template>
     <div class="exchange-center-wrapper">
-        敬请期待
+        {{ $t('tradePreMainnet.text') }}
         <!-- [TODO] Recover trade -->
         <!-- <center v-if="active === 'trade'"></center>
         <div class="order" v-if="active === 'trade'">

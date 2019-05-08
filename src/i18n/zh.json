@@ -658,5 +658,8 @@
             "search": "搜索",
             "reset": "重置"
         }
+    },
+    "tradePreMainnet": {
+        "text": "交易所即将上线，敬请期待"
     }
 }

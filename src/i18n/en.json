@@ -296,15 +296,15 @@
         "register": "SBP Registration",
         "cancel": "SBP Cancellation",
         "cancelBtn": "Cancel",
-        "rewardBtn": "提取奖励",
+        "rewardBtn": "Claim Rewards",
         "rewardConfirm": {
-            "title": "提取奖励",
-            "describe1": "每天 13:00:00 (UTC+8)更新可提取奖励金额，截止到{time} 您可提取奖励金额为",
-            "describe2": "挖矿奖励明细查询可",
-            "describe3": "点击此处",
-            "describe4": "提交提取奖励后，奖励金额将发送至您当前Vite Web钱包地址，请在钱包首页查看，请勿重复提取.",
-            "leftBtn": "暂不提取",
-            "rightBtn": "全部提取"
+            "title": "Claim Rewards",
+            "describe1": "Rewards that are available for claiming update at 13:00:00 (UTC+8) every day, till {time} you can claim",
+            "describe2": "Query mining rewards details, you can",
+            "describe3": "click here",
+            "describe4": "Rewards will send to your Vite Web Wallet address after submitting claim request, please check it in Wallet Home Page. Note: Don't repeat claim actions.",
+            "leftBtn": "Not Now",
+            "rightBtn": "Claim All"
         },
         "confirm": {
             "title": "Registration of SBP candidates",
@@ -665,5 +665,8 @@
             "search": "Search",
             "reset": "Reset"
         }
+    },
+    "tradePreMainnet": {
+        "text": "We are working in progress, stay tuned :)"
     }
 }
