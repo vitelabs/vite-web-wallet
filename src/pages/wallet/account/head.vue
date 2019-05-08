@@ -5,20 +5,11 @@
             <div class="head-right ">
                 <div class="head-title">
                     <span>{{ $t('accountName') }}</span>
-                    <img
-                        @click="startRename"
-                        class="edit __pointer"
-                        src="~assets/imgs/edit_default.svg"
-                    />
+                    <img @click="startRename" class="edit __pointer" src="~assets/imgs/edit_default.svg"/>
                 </div>
-                <div
-                    v-show="!isShowNameInput"
-                    class="name"
-                    :class="{
-                        'small-font': account.name && account.name.length > 16
-                    }"
-                    @click="startRename"
-                >{{ account.name }}</div>
+                <div v-show="!isShowNameInput" class="name" :class="{
+                    'small-font': account.name && account.name.length > 16
+                }" @click="startRename">{{ account.name }}</div>
                 <!-- <input fake_pass type="password" style="display:none"/> -->
                 <form autocomplete="off">
                     <input
@@ -36,19 +27,13 @@
         <div class="worth head__item">
             <img class="icon" src="~assets/imgs/head_asset.png" />
             <div class="head-right ">
-                <div class="head-title">总资产</div>
-                <div>{{totalAsset}}
-                </div>
+                <div class="head-title">{{ $t('wallet.totalAsset') }}</div>
+                <div>{{ totalAsset }}</div>
             </div>
         </div>
         <div class="head__item">
             <img class="icon" src="~assets/imgs/head_addr.png" />
-            <vite-address
-                :title="$t('wallet.address')"
-                :address="account.addr"
-                :addressQrcode="addressStr"
-                style="color: #5E6875;"
-            ></vite-address>
+            <vite-address></vite-address>
         </div>
 
         <div class="btn-group head__item">
@@ -80,7 +65,6 @@
 <script>
 import Vue from 'vue';
 import viteAddress from 'components/address';
-import { stringify } from 'utils/viteSchema';
 import $ViteJS from 'utils/viteClient';
 import bigNumber from 'utils/bigNumber';
 
@@ -91,7 +75,6 @@ export default {
     data() {
         return {
             account: {},
-            addressStr: '',
             isShowNameInput: false,
             editName: '',
             copySuccess: false,
@@ -103,7 +86,6 @@ export default {
     mounted() {
         activeAccount = this.$wallet.getActiveAccount();
         this.account = this.getSimpleAcc();
-        this.addressStr = stringify({ targetAddress: this.account.addr });
     },
     computed: {
         netStatus() {
@@ -203,7 +185,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
 
 .account-head-wrapper {

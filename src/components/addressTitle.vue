@@ -1,6 +1,9 @@
 <template>
     <div class="address-title">
-        <span>{{ title }}</span>
+        <div class="pre-title">
+            <slot></slot>
+        </div>
+        <img src="../assets/imgs/copy_default.svg" @click="copy" class="title_icon copy __pointer"/>
         <span v-click-outside="closeQrCode" ref="codeContainer" class="title_icon __pointer qrcode">
             <img src="../assets/imgs/qrcode_default.svg" @click="toggleQrCode" />
             <div class="code-container" v-show="qrcodeShow">
@@ -12,7 +15,6 @@
                 <div class="btn" @click="downLoadQrCode">{{ $t('saveQrcode') }}</div>
             </div>
         </span>
-        <img src="../assets/imgs/copy_default.svg" @click="copy" class="title_icon copy __pointer"/>
         <copyOK :copySuccess="copySuccess"></copyOK>
     </div>
 </template>
@@ -104,18 +106,19 @@ export default {
 
 .address-title {
     position: relative;
-    display: block;
+    display: flex;
     height: 20px;
     line-height: 20px;
     font-size: 14px;
     letter-spacing: 0.35px;
     padding-bottom: 11px;
     font-family: $font-bold;
+    .pre-title {
+        flex: 1;
+    }
 }
 
 .title_icon {
-    float: right;
-
     &.qrcode {
         position: relative;
     }

@@ -58,6 +58,9 @@ export default {
     watch: {
         filterObj() {
             this.init();
+        },
+        defaultAddr() {
+            this.init();
         }
     },
     methods: {

@@ -79,7 +79,7 @@ export default {
 };
 </script>
 
-<style lang="scss" rel="stylesheet/scss">
+<style lang="scss" rel="stylesheet/scss" scoped>
 @import "assets/scss/vars.scss";
 .page-content .account-wrapper.__wrapper {
     padding-top: 0;
@@ -87,7 +87,6 @@ export default {
 
 .account-head-move {
     width: 100%;
-    overflow: auto;
     box-shadow: 0 2px 48px 1px rgba(176, 192, 237, 0.42);
 }
 

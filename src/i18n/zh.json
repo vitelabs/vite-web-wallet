@@ -20,6 +20,7 @@
   "stakingAmount": "抵押金额",
   "withdrawHeight": "到期快照高度",
   "balance": "账户余额",
+  "addrName": "地址{index}",
   "dealReminder": {
     "title": "成交提醒",
     "describe": "你于{time} 委托的 {amount} {ttoken} ({ftoken}/{ttoken})已完全成交，详细记录可在委托历史中查看。"
@@ -299,6 +300,7 @@
     "inAddress": "接收账户地址",
     "sum": "金额",
     "remarks": "备注",
+    "totalAsset": "总资产",
     "remarksLong": "剩余字节：{len}",
     "placeholder": {
       "amount": "请输入金额",
