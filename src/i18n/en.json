@@ -237,7 +237,7 @@
       "introduction": "网关介绍",
       "token": "网关发行代币",
       "setting": "网关设置",
-      "nodeDesc":"",
+      "nodeDesc":"网关节点使用说明：",
       "settingPlaceholder": "请输入网关链接地址"
     },
     "receive": {
