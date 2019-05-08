@@ -1,4 +1,4 @@
-const storage = window.localStorage;
+const storage = window.viteWalletStorage || window.localStorage;
 const walletSpace = 'VITE_WEB_WALLET';
 
 export default {
@@ -6,11 +6,7 @@ export default {
         const saveData = typeof data === 'string' ? data : JSON.stringify(data);
 
         try {
-            if (window.viteWalletStorage) {
-                window.viteWalletStorage.setItem(key, saveData);
-            } else {
-                storage.setItem(getKey(key), saveData);
-            }
+            storage.setItem(getKey(key), saveData);
         } catch (err) {
             console.error(err);
         }
@@ -27,11 +23,7 @@ function getItem(key) {
     let data;
 
     try {
-        if (window.viteWalletStorage) {
-            data = window.viteWalletStorage.getItem(key);
-        } else {
-            data = storage.getItem(key);
-        }
+        data = storage.getItem(key);
     } catch (err) {
         console.error(err);
         return null;
