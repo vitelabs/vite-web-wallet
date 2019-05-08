@@ -82,6 +82,11 @@ export default {
                 }
 
                 this.data = data || [];
+                this.data.forEach(ele => {
+                    if (ele.status === 4) {
+                        this.$toast(this.$t('tradeOrderHistory.table.rowMap.statusMap')[4]);
+                    }
+                });
             }, 2000);
 
             task.start(() => {
