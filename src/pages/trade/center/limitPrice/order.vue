@@ -178,12 +178,10 @@ export default {
                 return '';
             }
 
-            let pre = '≈$';
-            if (this.$i18n.locale === 'zh') {
-                pre = '≈￥';
-            }
+            const pre = this.$store.state.env.currency === 'cny' ? '≈¥' : '≈$';
+
             if (!this.activeTxPair) {
-                return `≈${ pre }0`;
+                return `${ pre }0`;
             }
 
             return pre + BigNumber.multi(this.price || 0, this.rate || 0, 2);

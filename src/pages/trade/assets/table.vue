@@ -168,7 +168,7 @@ export default {
                     return;
                 }
 
-                const pre = this.$i18n.locale === 'zh' ? '¥' : '$';
+                const pre = this.$store.state.env.currency === 'cny' ? '¥' : '$';
                 const realPrice = BigNumber.multi(rate, res[t].total, 2);
                 res[t].worth = `${ pre }${ realPrice }`;
             });

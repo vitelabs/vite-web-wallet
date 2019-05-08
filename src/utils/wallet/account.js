@@ -1,5 +1,5 @@
-import { pwdConfirm } from 'components/password/index.js';
 import { constant } from '@vite/vitejs';
+import { pwdConfirm } from 'components/password/index.js';
 import acc from 'utils/storeAcc.js';
 import localStorage from 'utils/localStorage';
 
@@ -219,9 +219,9 @@ class account {
         if (this.type === AccountType.keystore) {
             return false;
         }
+
         this.account.addAddr();
         this.account.save(this.name);
-
         return true;
     }
 

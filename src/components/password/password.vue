@@ -166,8 +166,6 @@ export default {
                 }
                 activeAccount = this.$wallet.getActiveAccount();
                 activeAccount.unlock();
-                this.$store.commit('setDefaultAddress', activeAccount.getDefaultAddr());
-
                 deal(true);
             }).catch(err => {
                 this.isLoading = false;

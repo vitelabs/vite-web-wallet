@@ -60,7 +60,8 @@ class _wallet {
             address: lastAccount.addr,
             name: lastAccount.name,
             id: lastAccount.id,
-            entropy: lastAccount.entropy
+            entropy: lastAccount.entropy,
+            addrName: lastAccount.addrName || ''
         });
     }
 
@@ -85,7 +86,8 @@ class _wallet {
             name,
             pass,
             lang,
-            type: 'wallet'
+            type: 'wallet',
+            addrNameList: {}
         });
     }
 

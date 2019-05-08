@@ -82,13 +82,12 @@ export default {
             return '';
         },
         realPrice() {
-            let pre = '$';
-            if (this.$i18n.locale === 'zh') {
-                pre = '￥';
-            }
+            const pre = this.$store.state.env.currency === 'cny' ? '¥' : '$';
+
             if (!this.activeTxPair) {
                 return `${ pre }0`;
             }
+
             return pre + BigNumber.multi(this.activeTxPair.price || 0, this.rate || 0, 2);
         },
         rate() {

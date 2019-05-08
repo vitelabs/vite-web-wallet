@@ -2,14 +2,8 @@ import { getClient } from 'utils/request';
 import sendTx from 'utils/sendTx';
 import { wallet } from 'utils/wallet';
 import { addrSpace } from 'utils/storageSpace';
-// import { accountBlock } from '@vite/vitejs';
-// import rpcClient from 'utils/viteClient';
-// import { purePow } from 'components/pow';
-
 
 const STORAGEKEY = 'INDEX_COLLECT_TOKEN';
-// import { powProcess } from 'components/pow/index';
-// const VoteDifficulty = '201564160';
 
 const client = getClient('', xhr => {
     if (xhr.status === 200) {
@@ -25,6 +19,7 @@ const client = getClient('', xhr => {
     }
     return Promise.reject(xhr.responseText);
 });
+
 export const getGateInfos = () => client({ path: 'certified_gateways', host: process.env.gatewayInfosServer });
 
 export const getChargeAddr = ({ tokenId, addr: walletAddress }, url) => client({ path: 'deposit_address', params: { tokenId, walletAddress }, host: url });
@@ -36,16 +31,11 @@ export const getWithdrawInfo = ({ tokenId, walletAddress }, url) => client({ pat
 export const getWithdrawFee = ({ tokenId, walletAddress, amount, containsFee = false }, url) => client({ path: 'withdraw_fee', params: { tokenId, walletAddress, amount, containsFee }, host: url });
 
 export const getChargeInfo = ({ tokenId, addr: walletAddress }, url) => client({ path: 'deposit_info', params: { tokenId, walletAddress }, host: url });
+
 export const withdraw = async ({ amount, withdrawAddress, gateAddr, tokenId }, url) => {
     const account = wallet.activeAccount;
-    // const address = account.getDefaultAddr();
-    // const unlockAcc = account.account.unlockAcc;
-    // const accountBlockContent = await rpcClient.buildinTxBlock.sendTx.async({ toAddress: gateAddr, amount, accountAddress: address, tokenId });
-    // const quota = await rpcClient.pledge.getPledgeQuota(address);
-    // if (quota.txNum < 1) {
-    //     await purePow({ accountBlock: accountBlockContent });
-    // }
 
+    // [TODO] Need update viteJS
     const signedBlock = await sendTx('asyncSendTx', {
         toAddress: gateAddr,
         amount,
@@ -56,8 +46,6 @@ export const withdraw = async ({ amount, withdrawAddress, gateAddr, tokenId }, u
         powConfig: { isShowCancel: true }
     });
 
-    // const signedBlock = accountBlock.signAccountBlock(accountBlockContent, unlockAcc.privateKey);
-
     const rawTx = JSON.stringify(signedBlock);
     const signInfo = { rawTx, withdrawAddress };
     const signature = account.sign(Buffer(JSON.stringify(signInfo)).toString('hex'));
@@ -65,7 +53,7 @@ export const withdraw = async ({ amount, withdrawAddress, gateAddr, tokenId }, u
 };
 
 
-// data{tokenId:{symbol,url}}
+// data { tokenId: { symbol, url } }
 class GateWays {
     constructor() {
         if (!Array.isArray(addrSpace.getItem(STORAGEKEY))) {
