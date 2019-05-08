@@ -2,6 +2,7 @@
   "include": [
     "./src/**/*"
   ],
+  "checkJs":true,
   "compilerOptions": {
     "baseUrl": "./src",
     "paths": {

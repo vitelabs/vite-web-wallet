@@ -123,6 +123,7 @@ export default {
         margin: 20px 0 24px;
     }
     .add-card{
+        height:174px;
         box-sizing: border-box;
         position: relative;
         min-width: 300px;

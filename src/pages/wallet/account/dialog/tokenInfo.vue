@@ -45,6 +45,30 @@ block content
         .content__item
             .label {{$t("tokenCard.gateInfo.setting")}}
             input.gate-url(:placeholder="$t('tokenCard.gateInfo.settingPlaceholder')" :disabled="token.type==='OFFICAL_GATE'" v-model="url")
+    .tab-content(v-if="tabName==='gate'")
+        .content__item(v-if="token.type==='THIRD_GATE'")
+            .label {{$t("tokenCard.gateInfo.officalNet")}}
+        .content__item(v-if="token.type==='THIRD_GATE'")
+            .label {{$t("tokenCard.gateInfo.introduction")}}
+        .content__item(v-if="token.type==='THIRD_GATE'")
+            .label {{$t("tokenCard.gateInfo.token")}}
+        .content__item(v-if="token.type==='OFFICAL_GATE'")
+            .label {{$t("tokenCard.gateInfo.nodeDesc")}}
+        .content__item
+            .label {{$t("tokenCard.gateInfo.setting")}}
+            input.gate-url(:placeholder="$t('tokenCard.gateInfo.settingPlaceholder')" :disabled="token.type==='OFFICAL_GATE'" v-model="url")
+    .tab-content(v-if="tabName==='gate'")
+        .content__item(v-if="token.type==='THIRD_GATE'")
+            .label {{$t("tokenCard.gateInfo.officalNet")}}
+        .content__item(v-if="token.type==='THIRD_GATE'")
+            .label {{$t("tokenCard.gateInfo.introduction")}}
+        .content__item(v-if="token.type==='THIRD_GATE'")
+            .label {{$t("tokenCard.gateInfo.token")}}
+        .content__item(v-if="token.type==='OFFICAL_GATE'")
+            .label {{$t("tokenCard.gateInfo.nodeDesc")}}
+        .content__item
+            .label {{$t("tokenCard.gateInfo.setting")}}
+            input.gate-url(:placeholder="$t('tokenCard.gateInfo.settingPlaceholder')" :disabled="token.type==='OFFICAL_GATE'" v-model="url")
 </template>
 
 <script>
@@ -164,6 +188,7 @@ export default {
     height: 50px;
     display: flex;
     border-bottom: 1px solid #D4DEE7;
+    flex-shrink:0;
     &__item{
         height: 100%;
         box-sizing: border-box;
@@ -178,6 +203,7 @@ export default {
     }
 }
 .tab-content{
+    height:300px;
     .content__item{
         height: 40px;
         line-height: 40px;
