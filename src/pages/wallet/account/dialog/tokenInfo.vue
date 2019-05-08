@@ -188,7 +188,7 @@ export default {
     height: 50px;
     display: flex;
     border-bottom: 1px solid #D4DEE7;
-    flex-shrink:0;
+    flex-shrink: 0;
     &__item{
         height: 100%;
         box-sizing: border-box;
@@ -203,7 +203,7 @@ export default {
     }
 }
 .tab-content{
-    height:300px;
+    height: 300px;
     .content__item{
         height: 40px;
         line-height: 40px;
