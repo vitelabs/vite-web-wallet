@@ -17,11 +17,11 @@
                 </div>
                 <div class="item-row">
                     <span>{{ $t('trade.txPairDetail.quantity') }}:</span>
-                    {{ activeTxPair ? activeTxPair.quantity24h : '--' }}
+                    {{ quantity24h }}
                 </div>
                 <div class="item-row">
                     <span>{{ $t('trade.txPairDetail.amount') }}:</span>
-                    {{ activeTxPair ? activeTxPair.amount24h : '--'  }}
+                    {{ amount24h  }}
                 </div>
             </div>
             <div class="tx-pair-item">
@@ -49,6 +49,7 @@
 
 <script>
 import confirm from 'components/confirm';
+import BigNumber from 'utils/bigNumber';
 
 export default {
     components: { confirm },
@@ -76,6 +77,20 @@ export default {
                 return '+';
             }
             return '-';
+        },
+        quantity24h() {
+            if (!this.activeTxPair || !this.activeTxPair.quantity24h) {
+                return '--';
+            }
+
+            return `${ BigNumber.formatNum(this.activeTxPair.quantity24h, 1) } ${ this.activeTxPair.ftokenShow }`;
+        },
+        amount24h() {
+            if (!this.activeTxPair || !this.activeTxPair.amount24h) {
+                return '--';
+            }
+
+            return `${ BigNumber.formatNum(this.activeTxPair.amount24h, 1) } ${ this.activeTxPair.ttokenShow }`;
         },
         depthBuy() {
             return this.$store.state.exchangeDepth.buy;
