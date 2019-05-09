@@ -227,8 +227,14 @@ function formatConfig(config) {
     config = config || defaultConfig;
     console.log(config);
 
-    const sendTx = !!config.sendTx;
-    console.log(sendTx);
+
+    let sendTx = !!config.sendTx;
+    if (!(config.hasOwnProperty('sendTx')
+        && typeof config.sendTx !== 'undefined'
+        && config.sendTx !== null)) {
+        sendTx = true;
+    }
+
     const pow = !!config.pow;
     const powConfig = config.powConfig ? config.powConfig : defaultConfig.powConfig;
 
