@@ -157,7 +157,6 @@ class _wallet {
 
     logout() {
         this.activeWalletAcc && this.activeWalletAcc.lock();
-        this.activeWalletAcc && this.activeWalletAcc.releasePWD();
         this.clearActiveAccount();
         this.isLogin = false;
         this.onLogoutList && this.onLogoutList.forEach(cb => {
