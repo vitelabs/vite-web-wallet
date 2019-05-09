@@ -1,7 +1,7 @@
 <template>
     <div class="addr-wrapper">
         <address-title :address="defaultAddr" :addressQrcode="addressQrcode">
-            <switch-addr></switch-addr>
+            <switch-addr :isShowAddr="false"></switch-addr>
         </address-title>
         <div class="addr-content">{{ defaultAddr }}</div>
         <slot></slot>
