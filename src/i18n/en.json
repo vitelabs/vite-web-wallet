@@ -160,7 +160,7 @@
     "sys": "System Portal",
     "open": "Vite Github",
     "addAddr": "Add Address",
-    "addrList": "addrList",
+    "addrList": "地址管理",
     "setDefault": "Select Default Address",
     "autoLogout": "Auto Logout Time",    
     "noPass": "是否开启免密",

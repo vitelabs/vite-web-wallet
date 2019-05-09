@@ -81,7 +81,7 @@ export default {
         border-radius: 8px;
 
         .content {
-            max-width: 480px;
+            max-width: 510px;
             padding: 0 20px 20px;
         }
     }
@@ -104,7 +104,7 @@ export default {
     }
 }
 
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 510px) {
     .setting-wrapper {
         background: #fff;
     }
