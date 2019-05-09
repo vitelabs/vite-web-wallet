@@ -4,7 +4,7 @@
             'down': !isShowList,
             'up': isShowList,
             'not-allowed': notAllowed
-        }">{{ showName }}</span>
+        }">{{ showStr }}</span>
 
         <ul class="list" v-show="isShowList">
             <li v-for="(addrObj, index) in addrList" :key="index"
@@ -19,13 +19,31 @@
 </template>
 
 <script>
+import ellipsisAddr from 'utils/ellipsisAddr.js';
+
 export default {
+    props: {
+        isShowAddr: {
+            type: Boolean,
+            default: true
+        }
+    },
     data() {
         return { isShowList: false };
     },
     computed: {
         address() {
             return this.$store.state.activeAccount.address;
+        },
+        showStr() {
+            if (!this.isShowAddr) {
+                return this.showName;
+            }
+
+            return `${ this.showName }: ${ this.showAddr }`;
+        },
+        showAddr() {
+            return ellipsisAddr(this.address, 5);
         },
         showName() {
             let i;
