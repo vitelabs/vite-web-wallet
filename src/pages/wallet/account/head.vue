@@ -166,13 +166,14 @@ export default {
             }
 
             if (!/^[a-zA-Z0-9_\u4e00-\u9fa5]+$/g.test(this.editName)) {
-                this.$toast(this.$t('startCreate.hint.name'), 'error');
+                this.$toast(this.$t('startCreate.hint.name'));
                 this.clearEditName();
                 return;
             }
 
-            if (this.editName.length > 32) {
-                this.$toast(this.$t('startCreate.hint.nameLong'), 'error');
+            const long = 32;
+            if (this.editName.length > long) {
+                this.$toast(this.$t('startCreate.hint.nameLong', { long }));
                 this.clearEditName();
                 return;
             }

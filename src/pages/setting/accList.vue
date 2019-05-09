@@ -19,7 +19,7 @@
                                        v-show="showNameInput === index"
                                        v-model="editName"
                                        :placeholder="index"
-                                       @blur="rename"/>
+                                       @blur="rename(addrObj.addr, index)"/>
                             </form>
                             <div class="__ellipsis">{{ addrObj.addr }}</div>
                         </div>
@@ -112,13 +112,14 @@ export default {
             const editName = this.editName.trim();
 
             if (!/^[a-zA-Z0-9_\u4e00-\u9fa5]+$/g.test(editName)) {
-                this.$toast(this.$t('startCreate.hint.name'), 'error');
+                this.$toast(this.$t('startCreate.hint.name'));
                 this.clearEditName();
                 return;
             }
 
+            const long = 26;
             if (editName.length > 26) {
-                this.$toast(this.$t('startCreate.hint.nameLong'), 'error');
+                this.$toast(this.$t('startCreate.hint.nameLong', { long }));
                 this.clearEditName();
                 return;
             }

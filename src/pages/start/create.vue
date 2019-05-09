@@ -90,7 +90,7 @@ export default {
             }
 
             if (this.name.length > 32) {
-                this.$toast(this.$t('startCreate.hint.nameLong'));
+                this.$toast(this.$t('startCreate.hint.nameLong'), { long: 32 });
                 this.focusName();
 
                 return;
