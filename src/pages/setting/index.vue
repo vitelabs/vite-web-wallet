@@ -47,6 +47,16 @@ export default {
         mnemonic,
         currency
     },
+    mounted() {
+        this.isLogin = !!this.$wallet.isLogin;
+
+        this.$wallet.onLogin(() => {
+            this.isLogin = true;
+        });
+        this.$wallet.onLogout(() => {
+            this.isLogin = false;
+        });
+    },
     data() {
         const activeAccount = this.$wallet.getActiveAccount();
 
