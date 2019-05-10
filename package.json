@@ -44,7 +44,6 @@
         "node-sass": "^4.9.2",
         "postcss": "^7.0.14",
         "postcss-loader": "^3.0.0",
-        "postcss-px2rem": "^0.3.0",
         "pre-commit": "^1.2.2",
         "pug": "^2.0.3",
         "pug-plain-loader": "^1.0.0",

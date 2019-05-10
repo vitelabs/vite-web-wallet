@@ -494,12 +494,4 @@ export default {
 .unclickable {
     color: #ced1d5;
 }
-
-@media only screen and (max-width: 550px) {
-    .vote {
-        overflow: auto;
-        padding: 15px;
-        display: block;
-    }
-}
 </style>

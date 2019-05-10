@@ -336,25 +336,4 @@ export default {
         }
     }
 }
-
-@media only screen and (max-width: 1450px) {
-    .pledge-tx-wrapper .row .item {
-        margin-top: 20px;
-    }
-}
-
-@media only screen and (max-width: 750px) {
-    .pledge-tx-wrapper {
-        margin-top: 20px;
-    }
-
-    .pledge-tx-wrapper .row .item {
-        width: 100%;
-        min-width: 0;
-
-        &:first-child {
-            margin-right: 0;
-        }
-    }
-}
 </style>

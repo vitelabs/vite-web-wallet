@@ -145,15 +145,4 @@ export default {
         }
     }
 }
-
-@media only screen and (max-width: 620px) {
-    .token-wrapper {
-        width: 100%;
-        margin-top: 15px;
-
-        .content .btn-list .btn {
-            flex: 1;
-        }
-    }
-}
 </style>

@@ -62,10 +62,4 @@ export default {
         line-height: 32px;
     }
 }
-
-@media only screen and (max-width: 550px) {
-    .my-quota-wrapper {
-        margin-top: 20px;
-    }
-}
 </style>

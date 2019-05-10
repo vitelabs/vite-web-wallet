@@ -61,17 +61,4 @@
             padding-right: 22.5px;
         }
     }
-    @media only screen and (max-width: 500px) {
-        .__tb_cell {
-            white-space: nowrap;
-            &:first-child {
-                float: left;
-                padding-left: 10px;
-            }
-            &:last-child {
-                float: right;
-                padding-right: 10px;
-            }
-        }
-    }
 }

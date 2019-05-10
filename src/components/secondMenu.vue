@@ -100,19 +100,20 @@ export default {
     line-height: 43px;
     margin: 0 10px;
     border-bottom: 1px solid rgba(198, 203, 212, 0.3);
+    justify-content: space-between;
+    display: flex;
+    flex-wrap: nowrap;
 
     .tab-list-wrapper {
-        display: block;
         display: flex;
-        flex-wrap: wrap;
-        float: left;
         .tab {
             margin-right: 28px;
         }
     }
 
     .right-lab-list {
-        float: right;
+        display: flex;
+        flex-wrap: nowrap;
         .tab {
             margin-left: 28px;
         }
@@ -151,43 +152,6 @@ export default {
                 margin-left: -6px;
             }
         }
-    }
-
-    .go-net-wrapper {
-        float: right;
-        margin-top: 8px;
-    }
-
-    .change-lang-wrapper {
-        float: right;
-    }
-}
-
-@media only screen and (max-width: 940px) {
-    .wallet .head .tab-list-wrapper {
-        width: 100%;
-    }
-
-    .wallet .head .change-lang-wrapper {
-        float: left;
-        margin-left: 20px;
-    }
-
-    .wallet .head {
-        .go-net-wrapper {
-            float: left;
-        }
-
-        .right-lab-list {
-            float: left;
-        }
-    }
-}
-
-@media only screen and (max-width: 900px) {
-    .wallet .head .tab-list-wrapper .tab {
-        box-sizing: border-box;
-        padding: 0 10px;
     }
 }
 </style>

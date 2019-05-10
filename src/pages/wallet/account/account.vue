@@ -1,5 +1,5 @@
 <template>
-    <div class="account-wrapper __wrapper">
+    <div class="__wrapper">
         <div class="head">
             <sync-block class="sync-block"></sync-block>
         </div>
@@ -90,27 +90,20 @@ export default {
     box-shadow: 0 2px 48px 1px rgba(176, 192, 237, 0.42);
 }
 
-.account-wrapper {
+.head {
     position: relative;
-    box-sizing: border-box;
-    overflow: auto;
-    height: 100%;
+    text-align: center;
+    margin-top: 20px;
+    line-height: 40px;
+}
 
-    .head {
-        position: relative;
-        text-align: center;
-        margin-top: 20px;
-        line-height: 40px;
-    }
+.sync-block {
+    display: inline-block;
+}
 
-    .sync-block {
-        display: inline-block;
-    }
-
-    .net-btn {
-        position: absolute;
-        right: 0;
-    }
+.net-btn {
+    position: absolute;
+    right: 0;
 }
 
 .item {
@@ -145,16 +138,6 @@ export default {
             height: 50px;
             width: 50px;
         }
-    }
-}
-
-@media only screen and (max-width: 550px) {
-    .account-wrapper .head {
-        margin-bottom: 0;
-    }
-
-    .token-list {
-        display: block;
     }
 }
 </style>

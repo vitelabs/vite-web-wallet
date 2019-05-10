@@ -234,26 +234,6 @@ export default {
 .small-trans {
     display: none;
 }
-
-@media only screen and (max-width: 550px) {
-    .trans-list-wrapper {
-        padding: 15px;
-    }
-}
-
-@media only screen and (max-width: 500px) {
-    .trans-list-wrapper .title {
-        margin-bottom: 15px;
-    }
-
-    .big-trans {
-        display: none;
-    }
-
-    .small-trans {
-        display: flex;
-    }
-}
 </style>
 
 <style lang="scss">
@@ -311,22 +291,5 @@ export default {
 .icon {
     margin-right: 6px;
     margin-bottom: -2px;
-}
-
-@media only screen and (max-width: 500px) {
-    .small-trans.__tb {
-        min-width: 0;
-    }
-
-    .tType {
-        min-width: 50px;
-        width: 10%;
-    }
-
-    .address {
-        overflow: hidden;
-        min-width: 180px;
-        width: 25%;
-    }
 }
 </style>

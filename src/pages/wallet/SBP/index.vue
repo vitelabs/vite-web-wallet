@@ -332,16 +332,6 @@ export default {
         text-align: right;
     }
 }
-
-@media only screen and (max-width: 550px) {
-    .SBP-wrapper {
-        padding: 15px;
-    }
-
-    .section {
-        padding-top: 20px;
-    }
-}
 </style>
 
 <style lang="scss">

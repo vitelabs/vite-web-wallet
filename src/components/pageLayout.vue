@@ -1,7 +1,6 @@
 <template>
     <div class="page-layout-wrapper" @click="operate">
         <sidebar class="sidebar" :active="active" :go="go" :menuList="menuList" ></sidebar>
-        <vite-menu class="menu" :active="active" :go="go" :menuList="menuList"></vite-menu>
 
         <div class="page-content">
             <div class="page-scroll-wrapper">
@@ -18,13 +17,12 @@
 
 <script>
 import sidebar from 'components/sidebar';
-import viteMenu from 'components/menu';
 import secondMenu from 'components/secondMenu';
 
 let autoLogout = null;
 
 export default {
-    components: { sidebar, viteMenu, secondMenu },
+    components: { sidebar, secondMenu },
     props: {
         active: {
             type: String,
@@ -135,16 +133,9 @@ export default {
 
 <style lang="scss" scoped>
 .dex .page-layout-wrapper .page-content {
-    overflow: auto;
-    .page-scroll-wrapper {
-        width: 100%;
-        height: 100%;
-        min-width: 1200px;
-        .page-wrapper {
-            flex: none;
-            overflow: unset;
-            height: calc(100% - 60px);
-        }
+    .page-scroll-wrapper .page-wrapper {
+        flex: none;
+        height: calc(100% - 60px);
     }
 }
 .wallet .page-layout-wrapper .page-content .second-menu {
@@ -159,10 +150,7 @@ export default {
     padding: 0;
     margin: 0;
     background: #fafcff;
-
-    .menu {
-        display: none;
-    }
+    overflow: auto;
 
     .sidebar {
         width: 70px;
@@ -171,38 +159,19 @@ export default {
     .page-content {
         flex: 1;
         height: 100%;
-        overflow: hidden;
+        overflow: auto;
 
         .page-scroll-wrapper {
             display: flex;
             flex-direction: column;
+            width: 100%;
             height: 100%;
+            min-width: 1200px;
         }
 
         .page-wrapper {
             flex: 1;
-            overflow: auto;
         }
-    }
-}
-
-@media only screen and (max-width: 500px) {
-    .page-layout-wrapper {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .page-layout-wrapper .menu {
-        display: block;
-    }
-
-    .page-layout-wrapper .sidebar {
-        display: none;
-    }
-
-    .page-layout-wrapper .page-content {
-        flex: 1;
-        margin-left: 0;
     }
 }
 </style>

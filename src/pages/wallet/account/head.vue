@@ -7,9 +7,7 @@
                     <span>{{ $t('accountName') }}</span>
                     <img @click="startRename" class="edit __pointer" src="~assets/imgs/edit_default.svg"/>
                 </div>
-                <div v-show="!isShowNameInput" class="name" :class="{
-                    'small-font': account.name && account.name.length > 16
-                }" @click="startRename">{{ account.name }}</div>
+                <div v-show="!isShowNameInput" class="name" @click="startRename">{{ account.name }}</div>
                 <!-- <input fake_pass type="password" style="display:none"/> -->
                 <form autocomplete="off">
                     <input
@@ -237,10 +235,8 @@ export default {
                 }
             }
             .name {
-                &.small-font {
-                    font-size: 20px;
-                    line-height: 26px;
-                }
+                font-size: 18px;
+                line-height: 26px;
             }
 
             input {
@@ -290,60 +286,6 @@ export default {
         display: inline-block;
         max-width: 510px;
         text-align: left;
-    }
-}
-
-@media only screen and (max-width: 640px) {
-    .account-head-wrapper {
-        display: flex;
-        flex-direction: column;
-        padding: 15px;
-        height: unset;
-        min-width: unset;
-        .head__item{
-            border-right: none;
-            border-bottom: 1px solid rgba(227, 235, 245, 0.6);
-        }
-        .head-title {
-            padding-bottom: 15px;
-
-            .edit {
-                float: right;
-            }
-        }
-        .custom-name {
-            padding: 0;
-            width: 100%;
-            max-width: 100%;
-
-            input {
-                width: 100%;
-            }
-        }
-
-        .addr-wrapper {
-            padding: 0;
-            margin-top: 20px;
-            display: block;
-            width: 100%;
-            min-width: 0;
-
-            .addr-content {
-                padding: 10px;
-                line-height: 20px;
-                height: unset;
-                min-height: 24px;
-            }
-        }
-
-        .btn-group {
-            padding: 0;
-            width: 100%;
-            .btn__small {
-                width: 100%;
-                margin-top: 10px;
-            }
-        }
     }
 }
 </style>

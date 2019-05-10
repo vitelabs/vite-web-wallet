@@ -38,12 +38,6 @@ export default {
     margin-top: 60px;
 }
 
-@media only screen and (max-width: 500px) {
-    .process-wrapper {
-        margin-top: 20px;
-    }
-}
-
 .process-line {
     .icon {
         display: inline-block;

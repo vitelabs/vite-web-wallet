@@ -267,25 +267,4 @@ export default {
     background: rgba(0, 0, 0, 0.6);
     z-index: 100;
 }
-
-@media only screen and (max-width: 550px) {
-    .content ._content_border {
-        padding: 15px;
-    }
-
-    .content {
-        margin-bottom: 20px;
-    }
-
-    .quota-wrapper {
-        padding: 15px;
-    }
-}
-
-@media only screen and (max-width: 950px) {
-    .content .my-quota {
-        margin-right: 0;
-        width: 100%;
-    }
-}
 </style>

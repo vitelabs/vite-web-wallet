@@ -91,15 +91,4 @@ export default {
         float: right;
     }
 }
-
-@media only screen and (max-width: 900px) {
-    .sec-title-container {
-        .help {
-            margin-left: 0;
-            margin-top: 8px;
-            text-align: left;
-            display: block;
-        }
-    }
-}
 </style>
