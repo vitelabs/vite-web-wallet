@@ -236,18 +236,4 @@ export default {
         }
     }
 }
-
-@media only screen and (max-width: 500px) {
-    .acc-list .list-wrapper {
-        max-height: unset;
-    }
-
-    .acc-list .acc-item {
-        padding: 10px;
-    }
-
-    .acc-list .add {
-        padding: 0 10px;
-    }
-}
 </style>

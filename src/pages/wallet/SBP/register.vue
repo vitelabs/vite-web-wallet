@@ -346,38 +346,5 @@ export default {
         }
     }
 }
-
-@media only screen and (max-width: 1419px) {
-    .register-wrapper .row .item {
-        margin-top: 20px;
-    }
-}
-
-@media only screen and (max-width: 1209px) {
-    .register-wrapper .row .btn {
-        bottom: -11px;
-    }
-}
-
-@media only screen and (max-width: 750px) {
-    .register-wrapper {
-        margin-top: 20px;
-    }
-
-    .register-wrapper .row .item {
-        width: 100%;
-        min-width: 0;
-
-        &:first-child {
-            margin-right: 0;
-        }
-    }
-}
-
-@media only screen and (max-width: 550px) {
-    .register-wrapper {
-        padding: 0 20px 30px 20px;
-    }
-}
 </style>
 

@@ -81,17 +81,4 @@ export default {
         color: #118bff;
     }
 }
-
-@media only screen and (max-width: 1100px) {
-    .net-info-wrapper a {
-        display: block;
-        margin-left: 0;
-    }
-}
-
-@media only screen and (max-width: 500px) {
-    .net-info-wrapper {
-        padding: 0;
-    }
-}
 </style>

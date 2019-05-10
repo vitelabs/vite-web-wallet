@@ -106,7 +106,6 @@ export default {
 
 .switch-address-wrapper {
     width: 100%;
-    line-height: 20px;
     color: #73767A;
     font-family: $font-bold, arial, sans-serif;
     font-weight: 600;

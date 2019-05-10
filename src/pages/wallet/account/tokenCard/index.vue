@@ -254,24 +254,4 @@ export default {
         }
     }
 }
-
-@media only screen and (max-width: 550px) {
-    .token-card {
-        width: 100%;
-        margin-bottom: 15px;
-        margin-left: 0;
-    }
-
-    .body {
-        padding: 0 15px 20px;
-
-        .item .balance {
-            margin-left: 0;
-        }
-    }
-
-    .title .icon {
-        margin-left: 15px;
-    }
-}
 </style>

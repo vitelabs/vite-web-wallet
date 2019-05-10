@@ -29,11 +29,5 @@ export default {
 .__wrapper {
     padding: 30px;
 }
-
-@media only screen and (max-width: 850px) {
-    .__wrapper {
-        padding: 15px;
-    }
-}
 </style>
 

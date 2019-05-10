@@ -100,39 +100,4 @@ export default {
         border-top: 1px solid rgba(198, 203, 212, .3);
     }
 }
-
-@media only screen and (max-width: 850px) {
-    .setting-wrapper {
-        padding: 15px;
-    }
-
-    .setting-wrapper .content-wrapper {
-        top: 70px;
-        bottom: 15px;
-        left: 15px;
-        right: 15px;
-    }
-}
-
-@media only screen and (max-width: 500px) {
-    .setting-wrapper {
-        background: #fff;
-    }
-
-    .setting-wrapper .content-wrapper {
-        left: 15px;
-        right: 15px;
-        bottom: 15px;
-        box-shadow: none;
-        border-radius: 0;
-
-        .content {
-            padding: 0;
-        }
-        .area {
-            padding: 0;
-            border: none;
-        }
-    }
-}
 </style>
