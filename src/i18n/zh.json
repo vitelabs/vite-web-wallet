@@ -179,7 +179,7 @@
     "agreement": "隐私政策与服务协议",
     "hint": {
       "nameInput": "请输入账户名称",
-      "nameLong": "账户不得超出{long}个字符",
+      "nameLong": "名称不得超出{long}个字符",
       "long": "密码不能大于32个字符",
       "name": "账户名称仅支持中英文、数字和下划线",
       "consistency": "请输入相同的密码",

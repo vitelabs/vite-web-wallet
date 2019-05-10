@@ -27,18 +27,28 @@ export class subTask extends timer {
         this._subKey = null;
         this.subCallback = null;
 
-        this.loopFunc = () => {
+        this.loopFunc = isForce => {
             // Every loop will update subKey
-            // console.log('[subTask] Every loop will update subKey');
+            console.log('[subTask] Every loop will update subKey');
             this.subKey = wsServicesMap[this.key](this.args);
 
-            // Use http if sub unavalible
-            if (!client.closed || !httpServicesMap[this.key]) {
+            if (isForce) {
+                this.httpRequest();
                 return;
             }
 
+            // Use http if sub unavalible
+            if (!client.closed) {
+                return;
+            }
             this.httpRequest();
         };
+
+        // If websocket retry success, maybe no all data in it
+        window.addEventListener('online', () => {
+            // Update subkey and reload all data.
+            this.loopFunc && this.loopFunc(true);
+        });
     }
 
     get args() {

@@ -27,10 +27,21 @@ export default {
         },
         activeTxPair() {
             return this.$store.state.exchangeActiveTxPair.activeTxPair;
+        },
+        netStatus() {
+            return this.$store.state.env.clientStatus;
         }
     },
     watch: {
         symbol: function () {
+            this.init();
+        },
+        netStatus() {
+            if (!this.netStatus) {
+                return;
+            }
+            this.tvKline && this.tvKline.remove();
+            this.tvKline = null;
             this.init();
         }
     },

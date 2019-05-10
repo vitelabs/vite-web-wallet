@@ -4,59 +4,30 @@ import { timer } from 'utils/asyncFlow';
 
 const DexProto = root.lookupType('vite.DexProto');
 const HEARTBEAT = 10000;
+const RetryInterval = 3000;
+const MaxRetryTimes = 5;
 
 class WsProtoClient {
-    constructor(wsUrl) {
+    constructor(wsUrl, isRetry = true) {
         this.MESSAGETYPE = { SUB: 'sub', UNSUB: 'un_sub', PING: 'ping', PONG: 'pong', PUSH: 'push' };
+        this.wsUrl = wsUrl;
+        this.isRetry = isRetry;
         this._clientId = random(10);
-        console.log('new Wesocket', this._clientId, new Date());
 
+        this.connect = null;
         this._subKeys = {};
+        this.retryTimes = 0;
 
         this._heartBeat = new timer(() => {
-            if (!this.ready) return;
             this.send('');
         }, HEARTBEAT);
         this._heartBeat.start();
 
-        try {
-            const connect = new WebSocket(wsUrl);
-            this.connect = connect;
+        window.onbeforeunload = () => {
+            this.close();
+        };
 
-            window.onbeforeunload = () => {
-                console.log('关闭WebSocket连接！');
-                this.connect.onclose = function () {};
-                this.connect.close();
-            };
-
-            connect.binaryType = 'arraybuffer';
-
-            this._subKey && this.subscribe({ event_key: this._subKey });
-            connect.onopen = () => {
-                this.send('');
-            };
-
-            connect.onmessage = e => {
-                const data = DexProto.decode(new Uint8Array(e.data));
-
-                if (data.op_type !== this.MESSAGETYPE.PUSH) return;
-
-                if (data.client_id !== this._clientId) {
-                    console.log('clientId不一致', data.client_id, this._clientId);
-                    return;
-                }
-
-                const realData = getRealData(data);
-                console.log('onmessage', data, realData);
-
-                const error = data.error_code || undefined;
-                this._subKeys[data.event_key] && this._subKeys[data.event_key].forEach(c => {
-                    c(realData, error);
-                });
-            };
-        } catch (err) {
-            console.warn(err);
-        }
+        this.startConnect();
     }
 
     get ready() {
@@ -67,6 +38,85 @@ class WsProtoClient {
         return !this.connect || (this.connect && this.connect.readyState === 3);
     }
 
+    startConnect() {
+        console.log('[New Wesocket]', this._clientId, new Date());
+
+        try {
+            const connect = new WebSocket(this.wsUrl);
+            connect.binaryType = 'arraybuffer';
+
+            this.connect = connect;
+
+            connect.onopen = () => {
+                this.send('');
+                this._checkSubs();
+            };
+
+            connect.onclose = () => {
+                console.log('[WebSocket closed]');
+                this.retryConnect();
+            };
+
+            connect.onmessage = e => {
+                const data = DexProto.decode(new Uint8Array(e.data));
+
+                if (data.op_type !== this.MESSAGETYPE.PUSH) return;
+
+                if (data.client_id !== this._clientId) {
+                    console.log('[ClientId 不一致]', data.client_id, this._clientId);
+                    return;
+                }
+
+                const realData = getRealData(data);
+                console.log('Onmessage', data, realData);
+
+                const error = data.error_code || undefined;
+                this._subKeys[data.event_key] && this._subKeys[data.event_key].forEach(c => {
+                    c && c(realData, error);
+                });
+            };
+        } catch (err) {
+            console.warn(err);
+        }
+    }
+
+    close() {
+        if (!this.connect) {
+            return;
+        }
+        this.connect.onclose = function () {};
+        this.connect.close();
+    }
+
+    retryConnect() {
+        if (!this.isRetry || this.ready) {
+            console.log('[Retry but ready]', this.isRetry, this.ready);
+            return;
+        }
+
+        // Offline: waiting for online
+        if (navigator && !navigator.onLine) {
+            console.log('[Retry offLine]');
+            window.addEventListener('online', () => {
+                console.log('[Retry onLine]');
+                this.retryConnect();
+            });
+            return;
+        }
+
+        if (this.retryTimes > MaxRetryTimes) {
+            console.log('Over retryTimes && retryTimes = 0');
+            this.retryTimes = 0;
+            return;
+        }
+
+        setTimeout(() => {
+            console.log('Retry', this.retryTimes);
+            this.startConnect();
+            this.retryTimes++;
+        }, RetryInterval);
+    }
+
     sub(event, callback) {
         this._subKeys[event] = this._subKeys[event] || new Set();
         this._subKeys[event].add(callback);
@@ -75,7 +125,7 @@ class WsProtoClient {
 
     unSub(event, callback) {
         if (!event || !this._subKeys[event]) {
-            // console.log('[UNSUB] fail, !this._subKeys[event]', event);
+            console.log('[UNSUB] fail, !this._subKeys[event]', event);
             return;
         }
 
@@ -86,7 +136,7 @@ class WsProtoClient {
         }
 
         if (this._subKeys[event].size !== 0) {
-            // console.log('[UNSUB] fail, this._subKeys[event].size', event);
+            console.log('[UNSUB] fail, this._subKeys[event].size', event);
             return;
         }
 
@@ -95,7 +145,7 @@ class WsProtoClient {
     }
 
     send(event_key = '', type = this.MESSAGETYPE.PING) {
-        if (!this.ready) return;
+        if (!this.ready || this.closed) return;
 
         if (type === this.MESSAGETYPE.PING) {
             console.log('ping', this._clientId, new Date());
@@ -115,6 +165,19 @@ class WsProtoClient {
         const message = DexProto.create(payload);
         const buffer = DexProto.encode(message).finish();
         this.connect.send(buffer);
+    }
+
+    _checkSubs() {
+        console.log('_checkSubs');
+        for (const event in this._subKeys) {
+            if (!this._subKeys[event] || !this._subKeys[event].size) {
+                console.log('_checkSubs send UNSUB', event);
+                this.send(event, this.MESSAGETYPE.UNSUB);
+            } else {
+                console.log('_checkSubs send SUB', event);
+                this.send(event, this.MESSAGETYPE.SUB);
+            }
+        }
     }
 }
 
@@ -159,6 +222,3 @@ function getRealData(data) {
     }
     return result;
 }
-
-// const _client = new WsProtoClient(process.env.pushServer);
-// console.log(_client);
