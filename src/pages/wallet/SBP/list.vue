@@ -299,9 +299,9 @@ export default {
                             operate: this.$t('walletSBP.cancel')
                         }
                     }).then(() => {
-                        this.$toast(this.$t('hint.request', { name: '奖励' }));
+                        this.$toast(this.$t('hint.request', { name: 'Rewards' }));
                     }).catch(err => {
-                        this.$toast('奖励失败', err);
+                        this.$toast('Claim Failed', err);
                     });
                 }
             }, true);
