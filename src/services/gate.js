@@ -35,7 +35,6 @@ export const getChargeInfo = ({ tokenId, addr: walletAddress }, url) => client({
 export const withdraw = async ({ amount, withdrawAddress, gateAddr, tokenId }, url) => {
     const account = wallet.activeAccount;
 
-    // [TODO] Need update viteJS
     const signedBlock = await sendTx('asyncSendTx', {
         toAddress: gateAddr,
         amount,

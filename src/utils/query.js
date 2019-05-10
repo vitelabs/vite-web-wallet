@@ -1,9 +1,9 @@
-import querystring from 'querystring';
+import qs from 'qs';
 
 export default function () {
     try {
         const search = location.search ? location.search.slice(1) : '';
-        const query = querystring.parse(search);
+        const query = qs.parse(search);
         return query || {};
     } catch (err) {
         console.warn(err);

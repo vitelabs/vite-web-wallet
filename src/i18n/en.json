@@ -184,7 +184,7 @@
     "agreement": "Privacy Policy and Terms of Service",
     "hint": {
       "nameInput": "Please input account name",
-      "nameLong": "Account name cannot exceed {long} characters!",
+      "nameLong": "Name cannot exceed {long} characters!",
       "long": "Your input cannot exceed 32 characters!",
       "name": "Account name only supports Chinese, English, numbers and underscores",
       "consistency": "Please enter the same password!",
