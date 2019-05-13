@@ -1,317 +1,100 @@
 {
-  "lang": "EN",
-  "help": "Help",
-  "start": "Start",
-  "login": "Log In",
-  "regAcc": "Register",
-  "dexToken": "Open Trading Pairs",
-  "unlockAcc": "Unlock current account",
-  "changeAcc": "Switch to other account",
-  "existingAcc": "Existing Accounts",
-  "restore": "Import Mnemonic Words",
-  "register": "Sign Up",
-  "createAcc": "Create",
-  "settingAcc": "Setting Account",
-  "resetAcc": "Reset Your Account",
-  "logout": "Logout",
-  "blockHeight": "Snapshot Block Height",
-  "accountName": "Account name",
-  "action": "Action",
-  "stakingAmount": "Staking Amount",
-  "submitStaking": "Submit Staking",
-  "withdrawHeight": "Expected Snapshot Height",
-  "balance": "Balance",
-  "addrName": "Address{index}",
-  "dealReminder": {
-    "title": "Deal Notice",
-    "describe": "Your order {amount} {ttoken} ({ftoken}/{ttoken}) at {time} is a complete deal, visit Order History to find out more."
-  },
-  "pow": {
-    "ing": "Running PoW to acquire quota",
-    "no": "You can stake VITE for quota in case you would not like to run PoW"
-  },
-  "addAccount": "Create an Account",
-  "saveQrcode": "Save QR code image",
-  "unlockSuccess": "Unlock Success",
-  "sendTrans": {
-    "send": "Send Transaction",
-    "symbol": "Send"
-  },
-
-  "errCode": {
-    "35003": "{name} ID conflict occurs, please re-submit later",
-    "35004": "Invalid parameters",
-    "35005": "Transactions are sent too frequent, please try again later",
-    "35006": "合约方法不存在",
-    "36001": "You cannot make any transfer until you receive a transaction",
-    "36002": "System verify failed, please try again later",
-    "36003": "System verify failed, please try again later",
-    "36004": "System verify failed, please try again later",
-    "36005": "Snapshot block height is illegal, please try again later",
-    "37001": "Wrong order number format",
-    "37002": "Wrong order type",
-    "37003": "Wrong order price format",
-    "37004": "Exception occurs in order transaction volume",
-    "37005": "Order transaction amount too small",
-    "37006": "Existed trading market",
-    "37007": "Order trading market not exist",
-    "37008": "Exception occurs in searching order information",
-    "37009": "Revoked order doesn't belong to current address",
-    "37010": "This order status cannot be revoked"
-  },
-  "txType": {
-    "0": "SBP Registration",
-    "1": "Update Registration",
-    "2": "Revoke Registration",
-    "3": "Retrieve Reward",
-    "4": "Voting",
-    "5": "Revoke Voting",
-    "6": "Get TPS Quota",
-    "7": "Withdrawal of Staking Quota",
-    "8": "Token Issuance",
-    "9": "Additional Token Issuance",
-    "10": "Destroy Tokens",
-    "11": "Transfer of ownership",
-    "12": "Edit token type",
-    "13": "Retrieve Staked Tokens",
-    "14": "ViteX Deposit",
-    "15": "ViteX Withdrawal",
-    "16": "ViteX Creating Orders",
-    "17": "ViteX Revoking Orders",
-    "18": "ViteX Token Listing",
-    "19": "Create Contract",
-    "20": "Transfer",
-    "21": "Transfer",
-    "22": "Transfer",
-    "23": "Transfer"
-  },
-  "btn": {
-    "cancel": "Cancel",
-    "login": "Login",
-    "imported": "Import Account",
-    "back": "Back",
-    "submit": "Submit",
-    "next": "Next Step",
-    "understand": "I understand",
-    "edit": "Edit",
-    "reReg": "Re-register",
-    "otherProd": "Use Other Products of Vite"
-  },
-  "hint": {
-    "noNet": "No network detected",
-    "pwErr": "Incorrect password!",
-    "pwEmpty": "Password cannot be empty!",
-    "noData": "No Data",
-    "err": "Oops, error occurs",
-    "request": "{name} request has sent, please wait",
-    "copy": "Successfully copied",
-    "addrFormat": "Address format error",
-    "amtFormat": "Amount format error",
-    "transSucc": "Transaction successful!",
-    "insufficientBalance": "Insufficient balance",
-    "nodeErr": "The full node is abnormal, please try again later."
-  },
-  "beforeUse": {
-    "title": "Read Before Use",
-    "text1": "Please be sure to backup your seed phrase when creating account. We cannot guarantee the restoration of your assets in the instance that you visit a scam site or lose your private keys or seed phrase.",
-    "text2": "Please note that our websites do not store your private keys or seed phrase. Therefore, you will need to restore your account via seed phrase if you decide to change browsers, clear local cookies, or change PCs.",
-    "text3": "Please take proper precautions in ensuring that you accurately record and safely store your seed phrase. Even the slightest error will result in you not being able to successfully restore your address."
-  },
-  "preview": {
-    "t": "ViteX Beta Version",
-    "txt1": "This is ViteX Beta Version.",
-    "txt2": "All of the test tokens from test environment are with no actual value and can only be used for testing.",
-    "txt3": "Meanwhile, test tokens will be reset every now and then.",
-    "v": "Current Version: {version}"
-  },
-  "pwdConfirm": {
-    "conf": "开启免密设置，您只需要登录时输入密码，交易过程无需再输入密码",
-    "title": "Password",
-    "placeholder": "Please input password of wallet",
-    "unlockAcc": "Please input password to unlock {name} account"
-  },
-  "quotaConfirm": {
-    "title": "Insufficient Quota",
-    "cancelContent": "You cannot {operate} due to insufficient TPS quota. You need to stake VITE for quota to {operate}",
-    "goQuota": "Stake VITE",
-    "noOperate": "Not {operate} yet"
-  },
-  "mnemonic": {
-    "title": "Mnemonic",
-    "restore": "Restore Account by Seed Phrase",
-    "record": "Generate Seed Phrase",
-    "prompt": "Mnemonic seed phrase is the only way to restore your wallet. You are strongly advised to write down the phrase and keep it in a safe place where only you can access.",
-    "placeholder": "Please input your mnemonic seed phrase",
-    "empty": "The input of seed phrase cannot be empty",
-    "error": "Incorrect seed phrase. Try again",
-    "hint": "Example: apple banana peach mango pear ...",
-    "change": "Switch to {len} Mnemonic Words"
-  },
-  "setting": {
-    "title": "Setting Account",
-    "config": "常规设置",
-    "currency": "计价币种",
-    "secure": "安全设置",
-    "lang": "Language",
-    "block": "Current Height",
-    "version": "Version",
-    "service": "Customer Service",
-    "site": "Official Website of Vite",
-    "sys": "System Portal",
-    "open": "Vite Github",
-    "addAddr": "Add Address",
-    "addrList": "地址管理",
-    "setDefault": "Select Default Address",
-    "autoLogout": "Auto Logout Time",    
-    "noPass": "是否开启免密",
-    "explorer": "区块浏览器",
-    "netInfo": "网络信息",
-    "logoutDescribe": "当您离开交易所页面，账户会自动退出",
-    "timeList": {
-      "5": "5 Minutes",
-      "10": "10 Minutes",
-      "30": "30 Minutes",
-      "60": "1 Hour",
-      "720": "12 Hours"
-    }
-  },
-  "startCreate": {
-    "input": "Please input password",
-    "again": "Please input password again",
-    "choose": "Choose account",
-    "finish": "Done",
-    "agreementPre": "I agree to Vite Wallet and ViteX's",
-    "agreement": "Privacy Policy and Terms of Service",
-    "hint": {
-      "nameInput": "Please input account name",
-      "nameLong": "Name cannot exceed {long} characters!",
-      "long": "Your input cannot exceed 32 characters!",
-      "name": "Account name only supports Chinese, English, numbers and underscores",
-      "consistency": "Please enter the same password!",
-      "pwFormat": "Wrong password format. The password only supports English, half-width symbols, numbers."
-    }
-  },
-  "startRecord": {
-    "agreeList": [
-        "我理解如果我丢失了助记词，我将永远无法找回我的资产",
-        "我理解如果我忘记或丢失了助记词，将没有任何人能够帮助我恢复",
-        "我已经写下了或者用其它方式保存了我的助记词"
-    ]
-  },
-  "startImport": {
-    "title": "Import",
-    "dragDrop": {
-      "text": "Drag and drop files there",
-      "err1": "Imported illegal file!",
-      "err2": "Only one file can be imported!",
-      "guide": "Open folder to import",
-      "hint": "Noted that login by importing keystore file cannot support creating multi addresses, using mnemonic seed phrase is recommended in cross-platform situations."
-    }
-  },
-  "tokenCard": {
-    "actionType": {
-      "SEND": "发送",
-      "RECEIVE": "接收",
-      "CHARGE": "跨链充值",
-      "WITHDRAW": "跨链提现"
+    "lang": "EN",
+    "help": "Help",
+    "start": "Start",
+    "login": "Log In",
+    "regAcc": "Register",
+    "dexToken": "Open Trading Pairs",
+    "unlockAcc": "Unlock current account",
+    "changeAcc": "Switch to other account",
+    "existingAcc": "Existing Accounts",
+    "restore": "Import Mnemonic Words",
+    "register": "Sign Up",
+    "createAcc": "Create",
+    "settingAcc": "Setting Account",
+    "resetAcc": "Reset Your Account",
+    "logout": "Logout",
+    "blockHeight": "Snapshot Block Height",
+    "accountName": "Account name",
+    "action": "Action",
+    "stakingAmount": "Staking Amount",
+    "submitStaking": "Submit Staking",
+    "withdrawHeight": "Expected Snapshot Height",
+    "balance": "Balance",
+    "addrName": "Address{index}",
+    "dealReminder": {
+        "title": "Deal Notice",
+        "describe": "Your order {amount} {ttoken} ({ftoken}/{ttoken}) at {time} is a complete deal, visit Order History to find out more."
     },
-    "addToken": {
-      "title": "添加代币",
-      "placeholder": "请输入代币名称或TokenID",
-      "lTxt": "取消",
-      "rTxt": "添加"
+    "pow": {
+        "ing": "Running PoW to acquire quota",
+        "no": "You can stake VITE for quota in case you would not like to run PoW"
     },
-    "type":{
-        "native":"原生代币",
-        "crossGate":"跨链代币"
-      },
-    "tokenInfo": {
-      "tabName": "详情",
-      "title":"{tokenSymbol}代币信息",
-      "saveGate":"保存修改",
-      "labels": {
-        "tokenId": "TokenID",
-        "title": "{tokenSymbol}代币地址",
-        "address": "铸币地址",
-        "tokenName": "代币名称",
-        "totalSupply": "发行总量",
-        "decimals": "小数位",
-        "isReIssuable": "类型",
-        "time": "发行日期"
-      },
-      "reIssuable": {
-        "true": "可增发",
-        "false": "不可增发"
-      }
+    "addAccount": "Create an Account",
+    "saveQrcode": "Save QR code image",
+    "unlockSuccess": "Unlock Success",
+    "sendTrans": {
+        "send": "Send Transaction",
+        "symbol": "Send"
     },
-    "gateInfo": {
-      "tabName": "网关详情",
-      "selfdefined": "自定义网关",
-      "officalNet": "网关官网",
-      "introduction": "网关介绍",
-      "token": "网关发行代币",
-      "setting": "网关设置",
-      "nodeDesc":"",
-      "settingPlaceholder": "请输入网关链接地址"
+    "errCode": {
+        "35003": "{name} ID conflict occurs, please re-submit later",
+        "35004": "Invalid parameters",
+        "35005": "Transactions are sent too frequent, please try again later",
+        "35006": "合约方法不存在",
+        "36001": "You cannot make any transfer until you receive a transaction",
+        "36002": "System verify failed, please try again later",
+        "36003": "System verify failed, please try again later",
+        "36004": "System verify failed, please try again later",
+        "36005": "Snapshot block height is illegal, please try again later",
+        "37001": "Wrong order number format",
+        "37002": "Wrong order type",
+        "37003": "Wrong order price format",
+        "37004": "Exception occurs in order transaction volume",
+        "37005": "Order transaction amount too small",
+        "37006": "Existed trading market",
+        "37007": "Order trading market not exist",
+        "37008": "Exception occurs in searching order information",
+        "37009": "Revoked order doesn't belong to current address",
+        "37010": "This order status cannot be revoked"
     },
-    "receive": {
-      "title": "接收",
-      "codeTips": "请扫码向我转入{tokenSymbol}",
-      "addressTitle": "接收地址",
-      "amountTitle": "请输入接收金额",
-      "amountPlaceholder": "请输入接收金额"
+    "txType": {
+        "0": "SBP Registration",
+        "1": "Update Registration",
+        "2": "Revoke Registration",
+        "3": "Retrieve Reward",
+        "4": "Voting",
+        "5": "Revoke Voting",
+        "6": "Get TPS Quota",
+        "7": "Withdrawal of Staking Quota",
+        "8": "Token Issuance",
+        "9": "Additional Token Issuance",
+        "10": "Destroy Tokens",
+        "11": "Transfer of ownership",
+        "12": "Edit token type",
+        "13": "Retrieve Staked Tokens",
+        "14": "ViteX Deposit",
+        "15": "ViteX Withdrawal",
+        "16": "ViteX Creating Orders",
+        "17": "ViteX Revoking Orders",
+        "18": "ViteX Token Listing",
+        "19": "Create Contract",
+        "20": "Transfer",
+        "21": "Transfer",
+        "22": "Transfer",
+        "23": "Transfer"
     },
-    "charge": {
-      "title": "跨链充值",
-      "addrErr":"网关节点出错，请检查网关设置",
-      "addressTitle": "充值地址",
-      "codeTips": "请扫描二维码充值,请使用支持{tokenSymbol}的钱包转账",
-      "tips": [
-        "充值操作是将{tokenSymbol}跨链映射至VITE网络，充值后您可通过提现转走",
-        "通过该存款地址只能发送{tokenSymbol},且金额不能低于{min}",
-        "交易确认之后，预计5分钟后到账，请耐心等待"
-      ]
-    },
-    "withdraw": {
-      "title": "跨链提现",
-      "balanceErrMap": {
-        "notEnough": "余额不足",
-        "overMax": "提现金额需小于 {max}",
-        "lessMin": "提现金额需大于 {min}"
-      },
-      "feeTips": "手续费收取金额由网关设置",
-      "addressErr": "地址格式错误",
-      "labels": {
-        "balance": "账户余额",
-        "address": "提现地址",
-        "amount": "提现金额",
-        "fee": "提现手续费",
-        "all": "全部"
-      },
-      "amountPlaceholder": "请输入提现金额，最小不少于{min}",
-      "addressPlaceholder": "请输入提现地址",
-      "successTips": "提现请求已发送",
-      "failTips":"网关节点出错，请检查网关设置"
-    },
-    "nodeErr": "提示网关节点无效，请检查网关设置"
-  },
-  "wallet": {
-    "title": "Assets",
-    "transfer": "Transfer",
-    "getTestToken": "Get Test Tokens",
-    "transDetail": "More Transaction Details",
-    "address": "My Address",
-    "fundFloat": "Unreceived",
-    "pend": "Pending",
-    "inAddress": "Receive Address",
-    "sum": "Amount",
-    "remarks": "Comment",
-    "remarksLong": "{len} bytes left",
-    "totalAsset": "总资产",
-    "placeholder": {
-      "amount": "Please input amount",
-      "remarks": "Please input comments",
-      "addr": "Please input address"
+    "btn": {
+        "cancel": "Cancel",
+        "login": "Login",
+        "imported": "Import Account",
+        "back": "Back",
+        "submit": "Submit",
+        "next": "Next Step",
+        "understand": "I understand",
+        "edit": "Edit",
+        "reReg": "Re-register",
+        "otherProd": "Use Other Products of Vite"
     },
     "hint": {
         "noNet": "No network detected",
@@ -341,7 +124,7 @@
         "v": "Current Version: {version}"
     },
     "pwdConfirm": {
-        "conf": "Open password-free mode within {time}",
+        "conf": "开启免密设置，您只需要登录时输入密码，交易过程无需再输入密码",
         "title": "Password",
         "placeholder": "Please input password of wallet",
         "unlockAcc": "Please input password to unlock {name} account"
@@ -365,7 +148,9 @@
     },
     "setting": {
         "title": "Setting Account",
-        "unlock": "Unlock Secure Information",
+        "config": "常规设置",
+        "currency": "计价币种",
+        "secure": "安全设置",
         "lang": "Language",
         "block": "Current Height",
         "version": "Version",
@@ -374,10 +159,13 @@
         "sys": "System Portal",
         "open": "Vite Github",
         "addAddr": "Add Address",
-        "addrList": "Addresses of Accounts",
+        "addrList": "地址管理",
         "setDefault": "Select Default Address",
-        "autoLogout": "Auto Logout Time",
-        "noPass": "Login Without Password",
+        "autoLogout": "Auto Logout Time",    
+        "noPass": "是否开启免密",
+        "explorer": "区块浏览器",
+        "netInfo": "网络信息",
+        "logoutDescribe": "当您离开交易所页面，账户会自动退出",
         "timeList": {
             "5": "5 Minutes",
             "10": "10 Minutes",
@@ -395,12 +183,19 @@
         "agreement": "Privacy Policy and Terms of Service",
         "hint": {
             "nameInput": "Please input account name",
-            "nameLong": "Account name cannot exceed 32 characters!",
+            "nameLong": "Name cannot exceed {long} characters!",
             "long": "Your input cannot exceed 32 characters!",
             "name": "Account name only supports Chinese, English, numbers and underscores",
             "consistency": "Please enter the same password!",
             "pwFormat": "Wrong password format. The password only supports English, half-width symbols, numbers."
         }
+    },
+    "startRecord": {
+        "agreeList": [
+            "我理解如果我丢失了助记词，我将永远无法找回我的资产",
+            "我理解如果我忘记或丢失了助记词，将没有任何人能够帮助我恢复",
+            "我已经写下了或者用其它方式保存了我的助记词"
+        ]
     },
     "startImport": {
         "title": "Import",
@@ -412,32 +207,92 @@
             "hint": "Noted that login by importing keystore file cannot support creating multi addresses, using mnemonic seed phrase is recommended in cross-platform situations."
         }
     },
-    "wallet": {
-        "title": "Assets",
-        "transfer": "Transfer",
-        "getTestToken": "Get Test Tokens",
-        "transDetail": "More Transaction Details",
-        "address": "My Address",
-        "fundFloat": "Unreceived",
-        "pend": "Pending",
-        "inAddress": "Receive Address",
-        "sum": "Amount",
-        "remarks": "Comment",
-        "remarksLong": "{len} bytes left",
-        "placeholder": {
-            "amount": "Please input amount",
-            "remarks": "Please input comments",
-            "addr": "Please input address"
+    "tokenCard": {
+        "actionType": {
+            "SEND": "发送",
+            "RECEIVE": "接收",
+            "CHARGE": "跨链充值",
+            "WITHDRAW": "跨链提现"
         },
-        "hint": {
-            "token": "VITE test tokens have be sent to your account, please check your account!",
-            "tErr": "Get test token failed!",
-            "amount": "Amount must be greater than 0"
+        "addToken": {
+            "title": "添加代币",
+            "placeholder": "请输入代币名称或TokenID",
+            "lTxt": "取消",
+            "rTxt": "添加"
         },
-        "trans": {
-            "powErr": "Error occurs when running PoW, please try again",
-            "powTransErr": "Insufficient quota of PoW, we'd recommend that you stake VITE to obtain quota."
-        }
+        "type": {
+            "native":"原生代币",
+            "crossGate":"跨链代币"
+        },
+        "tokenInfo": {
+            "tabName": "详情",
+            "title":"{tokenSymbol}代币信息",
+            "saveGate":"保存修改",
+            "labels": {
+                "tokenId": "TokenID",
+                "title": "{tokenSymbol}代币地址",
+                "address": "铸币地址",
+                "tokenName": "代币名称",
+                "totalSupply": "发行总量",
+                "decimals": "小数位",
+                "isReIssuable": "类型",
+                "time": "发行日期"
+            },
+            "reIssuable": {
+                "true": "可增发",
+                "false": "不可增发"
+            }
+        },
+        "gateInfo": {
+            "tabName": "网关详情",
+            "selfdefined": "自定义网关",
+            "officalNet": "网关官网",
+            "introduction": "网关介绍",
+            "token": "网关发行代币",
+            "setting": "网关设置",
+            "nodeDesc":"",
+            "settingPlaceholder": "请输入网关链接地址"
+        },
+        "receive": {
+            "title": "接收",
+            "codeTips": "请扫码向我转入{tokenSymbol}",
+            "addressTitle": "接收地址",
+            "amountTitle": "请输入接收金额",
+            "amountPlaceholder": "请输入接收金额"
+        },
+        "charge": {
+            "title": "跨链充值",
+            "addrErr":"网关节点出错，请检查网关设置",
+            "addressTitle": "充值地址",
+            "codeTips": "请扫描二维码充值,请使用支持{tokenSymbol}的钱包转账",
+            "tips": [
+            "充值操作是将{tokenSymbol}跨链映射至VITE网络，充值后您可通过提现转走",
+            "通过该存款地址只能发送{tokenSymbol},且金额不能低于{min}",
+            "交易确认之后，预计5分钟后到账，请耐心等待"
+            ]
+        },
+        "withdraw": {
+            "title": "跨链提现",
+            "balanceErrMap": {
+                "notEnough": "余额不足",
+                "overMax": "提现金额需小于 {max}",
+                "lessMin": "提现金额需大于 {min}"
+            },
+            "feeTips": "手续费收取金额由网关设置",
+            "addressErr": "地址格式错误",
+            "labels": {
+                "balance": "账户余额",
+                "address": "提现地址",
+                "amount": "提现金额",
+                "fee": "提现手续费",
+                "all": "全部"
+            },
+            "amountPlaceholder": "请输入提现金额，最小不少于{min}",
+            "addressPlaceholder": "请输入提现地址",
+            "successTips": "提现请求已发送",
+            "failTips":"网关节点出错，请检查网关设置"
+        },
+        "nodeErr": "提示网关节点无效，请检查网关设置"
     },
     "walletQuota": {
         "title": "Quota Management",
@@ -632,45 +487,51 @@
             "operateBtn": "Vote",
             "voteErr": "Failed to vote, please try again"
         }
-      },
-      "noSearchData": "No content found, please try another input",
-      "operateBtn": "Vote",
-      "voteErr": "Failed to vote, please try again"
     },
-  "walletConversion": {
-    "title": "VITE Conversion",
-    "help": {
-      "title": "Quick Understanding of VITE Conversion",
-      "text": "You can migrate ERC20 tokens into VITE into our TestNet by VITE conversion function. In TestNet, casting your vote for official SBPs to collect rewards, the annualized rate can reach 20%. Your ERC20 VITE tokens will be transferred to Ethereum black hole address: {blackAddr}, you will receive the same amount of VITE at your Vite address when Ethereum black hole address has received the transaction and confirmed. Once you are in the conversion process, confirm that there are enough VITE and ETH (as gas) in your Ethereum address of Vite wallet."
-    },
-    "gas": "Mining Fees",
-    "record": "Conversion History",
-    "aboutPrice": "Approx {amount} ETH",
-    "note": "Please wait in patient after submitting the conversion. You cannot receive the converted VITE until you have got 30 Ethereum transaction confirmations. Ehtereum transaction records can be viewed in Conversion History section.",
-    "exchange": {
-      "vite": "Convert",
-      "viteAddr": "Receiving Address",
-      "viteAmount": "Conversion Amount",
-      "btn": "Ready to Convert",
-      "success": "Conversion Successful. It may take approx 20 minutes to get VITE into your account after the Ethereum transaction is confirmed."
-    }
-  },
-    "table": {
-      "heads": [
-        "Token",
-        "Total Balance",
-        "Exchange Balance",
-        "In Order",
-        "Value"
-      ],
-      "rowMap": {
-        "recharge": "Deposit to Exchange",
-        "withdraw": "Withdraw to Wallet",
-        "detail": "Trade",
-        "sideMap": {
-          "1": "Deposit",
-          "2": "Withdraw"
+    "wallet": {
+        "title": "Assets",
+        "transfer": "Transfer",
+        "getTestToken": "Get Test Tokens",
+        "transDetail": "More Transaction Details",
+        "address": "My Address",
+        "fundFloat": "Unreceived",
+        "pend": "Pending",
+        "inAddress": "Receive Address",
+        "sum": "Amount",
+        "remarks": "Comment",
+        "remarksLong": "{len} bytes left",
+        "totalAsset": "总资产",
+        "placeholder": {
+            "amount": "Please input amount",
+            "remarks": "Please input comments",
+            "addr": "Please input address"
+        },
+        "hint": {
+            "token": "VITE test tokens have be sent to your account, please check your account!",
+            "tErr": "Get test token failed!",
+            "amount": "Amount must be greater than 0"
+        },
+        "trans": {
+            "powErr": "Error occurs when running PoW, please try again",
+            "powTransErr": "Insufficient quota of PoW, we'd recommend that you stake VITE to obtain quota."
         }
+    },
+    "walletConversion": {
+        "title": "VITE Conversion",
+        "help": {
+            "title": "Quick Understanding of VITE Conversion",
+            "text": "You can migrate ERC20 tokens into VITE into our TestNet by VITE conversion function. In TestNet, casting your vote for official SBPs to collect rewards, the annualized rate can reach 20%. Your ERC20 VITE tokens will be transferred to Ethereum black hole address: {blackAddr}, you will receive the same amount of VITE at your Vite address when Ethereum black hole address has received the transaction and confirmed. Once you are in the conversion process, confirm that there are enough VITE and ETH (as gas) in your Ethereum address of Vite wallet."
+        },
+        "gas": "Mining Fees",
+        "record": "Conversion History",
+        "aboutPrice": "Approx {amount} ETH",
+        "note": "Please wait in patient after submitting the conversion. You cannot receive the converted VITE until you have got 30 Ethereum transaction confirmations. Ehtereum transaction records can be viewed in Conversion History section.",
+        "exchange": {
+            "vite": "Convert",
+            "viteAddr": "Receiving Address",
+            "viteAmount": "Conversion Amount",
+            "btn": "Ready to Convert",
+            "success": "Conversion Successful. It may take approx 20 minutes to get VITE into your account after the Ethereum transaction is confirmed."
         }
     },
     "trade": {

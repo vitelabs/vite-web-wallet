@@ -1,5 +1,5 @@
 <template>
-    <div class="__wrapper">
+    <div class="wallet-account-wrapper __wrapper">
         <div class="head">
             <sync-block class="sync-block"></sync-block>
         </div>
@@ -23,7 +23,6 @@
                 <img src="~/assets/imgs/add_token.png"/>
             </div>
         </div>
-
     </div>
 </template>
 
@@ -81,7 +80,8 @@ export default {
 
 <style lang="scss" rel="stylesheet/scss" scoped>
 @import "assets/scss/vars.scss";
-.page-content .account-wrapper.__wrapper {
+
+.wallet-account-wrapper.__wrapper {
     padding-top: 0;
 }
 
