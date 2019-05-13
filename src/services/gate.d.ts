@@ -1,8 +1,5 @@
 import { TokenId, Address } from "@vite/vitejs";
 
-/**
- * @internal
- */
 type responseWrapper<T> = {
   code: number;
   msg: string;
@@ -28,9 +25,8 @@ type GateInfo = {
   url: string; //网关host，后面的请求为该网关host与url拼接而成
   tokens: Array<GateTokenInfo>;
 };
-type client = () => Promise<any, responseWrapper>;
-type getGateInfos = () => Promise<GateInfo[]>;
-
+type client = (params:any) => Promise<any>;
+declare function getGateInfos ():Promise<GateInfo[]>;
 
 //---------deposit records
 type getDepositRecordsParams = {
@@ -43,7 +39,7 @@ type getDepositRecordsParams = {
   pageSize: number;
 };
 
-const enum depositStatus {
+declare enum depositStatus {
   OPPOSITE_PROCESSING, //外链交易进行中，等待足够确认数
   OPPOSITE_CONFIRMED, //网关已确认外链交易
   BELOW_MINIMUM, //外链交易金额小于最小充值金额，充值流程结束
@@ -65,7 +61,10 @@ type depositRecordRep = {
   inTxExplorerFormat: string; // "https://ropsten.etherscan.io/tx/{$tx}",//外链浏览器，用inTxHash替换{$tx}为该交易区块浏览器地址
   outTxExplorerFormat: string; // "http://132.232.134.168:8080/zh/transaction/{$tx}"//vite链浏览器，用outTxHash替换{$tx}为该交易区块浏览器地址
 };
-type getDepositRecords=(params:getDepositRecordsParams,url:string)=>Promise<depositRecordRep>
+export declare function getDepositRecords  (
+  params: getDepositRecordsParams,
+  url: string
+):Promise<depositRecordRep>;
 
 //withdraw records
 type getWithdrawRecordsParams = {
@@ -77,7 +76,8 @@ type getWithdrawRecordsParams = {
 
   pageSize: number;
 };
-const enum withdrawStatus {
+
+ declare enum withdrawStatus {
   TODO, //：vite tot交易待处理
   TOT_PROCESSING, //：vite tot交易已发送，等待足够确认数
   TOT_NOT_RECEIVED, //：vite tot交易失败，提现流程结束
@@ -101,5 +101,7 @@ type withdrawRecordRep = {
   outTxExplorerFormat: string; // "http://132.232.134.168:8080/zh/transaction/{$tx}"//vite链浏览器，用outTxHash替换{$tx}为该交易区块浏览器地址
 };
 
-type getWithdrawRecords=(params:getWithdrawRecordsParams,url:string)=>Promise<withdrawRecordRep>
-
+export declare function getWithdrawRecords(
+  params: getWithdrawRecordsParams,
+  url: string
+):Promise<withdrawRecordRep>;

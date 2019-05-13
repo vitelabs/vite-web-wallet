@@ -207,14 +207,14 @@
       "lTxt": "取消",
       "rTxt": "添加"
     },
-    "type":{
-        "native":"原生代币",
-        "crossGate":"跨链代币"
-      },
+    "type": {
+      "native": "原生代币",
+      "crossGate": "跨链代币"
+    },
     "tokenInfo": {
       "tabName": "详情",
-      "title":"{tokenSymbol}代币信息",
-      "saveGate":"保存修改",
+      "title": "{tokenSymbol}代币信息",
+      "saveGate": "保存修改",
       "labels": {
         "tokenId": "TokenID",
         "title": "{tokenSymbol}代币地址",
@@ -237,9 +237,33 @@
       "introduction": "网关介绍",
       "token": "网关发行代币",
       "setting": "网关设置",
-      "nodeDesc":"网关节点使用说明：",
+      "nodeDesc": "网关节点使用说明：",
       "settingPlaceholder": "请输入网关链接地址"
     },
+    "depositRecord": {
+      "tabName": "充值记录",
+      "heads": ["时间", "金额", "状态", "VITE链Hash", "{outChain}链Hash"],
+      "statusMap": {
+        "OPPOSITE_PROCESSING": "{outChain}链待确认",
+        "OPPOSITE_CONFIRMED": "网关已接收",
+        "TOT_CONFIRMED": "已完成",
+        "BELOW_MINIMUM": "VITE链待确认",
+        "TOT_PROCESSING": "已完成"
+      }
+    },
+    "withdrawRecord": {
+      "tabName": "提现记录",
+      "heads": ["时间", "金额", "状态", "VITE链Hash", "{outChain}链Hash"],
+      "statusMap": {
+        "TODO": "VITE链待确认",
+        "TOT_PROCESSING": "VITE链确认",
+        "TOT_NOT_RECEIVED": "提现失败",
+        "TOT_CONFIRMED": "网关已接收",
+        "OPPOSITE_PROCESSING": "{outChain}链待确认",
+        "OPPOSITE_CONFIRMED": "已完成"
+      }
+    },
+
     "receive": {
       "title": "接收",
       "codeTips": "请扫码向我转入{tokenSymbol}",
@@ -249,7 +273,7 @@
     },
     "charge": {
       "title": "跨链充值",
-      "addrErr":"网关节点出错，请检查网关设置",
+      "addrErr": "网关节点出错，请检查网关设置",
       "addressTitle": "充值地址",
       "codeTips": "请扫描二维码充值,请使用支持{tokenSymbol}的钱包转账",
       "tips": [
@@ -277,7 +301,7 @@
       "amountPlaceholder": "请输入提现金额，最小不少于{min}",
       "addressPlaceholder": "请输入提现地址",
       "successTips": "提现请求已发送",
-      "failTips":"网关节点出错，请检查网关设置"
+      "failTips": "网关节点出错，请检查网关设置"
     },
     "nodeErr": "提示网关节点无效，请检查网关设置"
   },
