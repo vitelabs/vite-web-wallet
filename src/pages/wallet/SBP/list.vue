@@ -367,5 +367,6 @@ export default {
 
 .operate {
     min-width: 205px;
+    white-space: nowrap;
 }
 </style>
