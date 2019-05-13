@@ -13,7 +13,6 @@ block content
                     .name {{token.tokenName}}
                     .tag {{token2Gate[token.tokenId]?token2Gate[token.tokenId].gateway:''}}
                 .desc {{token.tokenId}}
-
 </template>
 
 <script>

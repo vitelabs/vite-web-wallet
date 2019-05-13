@@ -235,6 +235,29 @@
       "settingPlaceholder": "请输入网关链接地址",
       "nodeDesc":"网关节点使用说明："
     },
+        "depositRecord": {
+      "tabName": "充值记录",
+      "heads": ["时间", "金额", "状态", "{inChain}链Hash", "{outChain}链Hash"],
+      "statusMap": {
+        "OPPOSITE_PROCESSING": "{outChain}链待确认",
+        "OPPOSITE_CONFIRMED": "网关已接收",
+        "TOT_CONFIRMED": "已完成",
+        "BELOW_MINIMUM": "VITE链待确认",
+        "TOT_PROCESSING": "已完成"
+      }
+    },
+    "withdrawRecord": {
+      "tabName": "提现记录",
+      "heads": ["时间", "金额", "状态", "{inChain}链Hash", "{outChain}链Hash"],
+      "statusMap": {
+        "TODO": "VITE链待确认",
+        "TOT_PROCESSING": "VITE链确认",
+        "TOT_NOT_RECEIVED": "提现失败",
+        "TOT_CONFIRMED": "网关已接收",
+        "OPPOSITE_PROCESSING": "{outChain}链待确认",
+        "OPPOSITE_CONFIRMED": "已完成"
+      }
+    },
     "receive": {
       "title": "接收",
       "codeTips": "请扫码向我转入{tokenSymbol}",

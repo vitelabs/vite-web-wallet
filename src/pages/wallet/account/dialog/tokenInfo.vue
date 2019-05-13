@@ -10,7 +10,10 @@ block head
     .tab
         .tab__item(@click="tabClick('tokenInfo')" :class="{active:tabName==='tokenInfo'}") {{$t("tokenCard.tokenInfo.tabName")}}
         .tab__item(v-if="token.type!=='NATIVE'" @click="tabClick('gate')" :class="{active:tabName==='gate'}") {{$t("tokenCard.gateInfo.tabName")}}
-block content
+        .tab__item(v-if="token.type!=='NATIVE'" @click="tabClick('deposit')" :class="{active:tabName==='deposit'}") {{$t("tokenCard.depositRecord.tabName")}}
+        .tab__item(v-if="token.type!=='NATIVE'" @click="tabClick('withdraw')" :class="{active:tabName==='withdraw'}") {{$t("tokenCard.withdrawRecord.tabName")}}
+
+block originContent
     .tab-content(v-if="tabName==='tokenInfo'")
         .content__item
             .label {{$t("tokenCard.tokenInfo.labels.tokenId")}}
@@ -45,30 +48,10 @@ block content
         .content__item
             .label {{$t("tokenCard.gateInfo.setting")}}
             input.gate-url(:placeholder="$t('tokenCard.gateInfo.settingPlaceholder')" :disabled="token.type==='OFFICAL_GATE'" v-model="url")
-    .tab-content(v-if="tabName==='gate'")
-        .content__item(v-if="token.type==='THIRD_GATE'")
-            .label {{$t("tokenCard.gateInfo.officalNet")}}
-        .content__item(v-if="token.type==='THIRD_GATE'")
-            .label {{$t("tokenCard.gateInfo.introduction")}}
-        .content__item(v-if="token.type==='THIRD_GATE'")
-            .label {{$t("tokenCard.gateInfo.token")}}
-        .content__item(v-if="token.type==='OFFICAL_GATE'")
-            .label {{$t("tokenCard.gateInfo.nodeDesc")}}
-        .content__item
-            .label {{$t("tokenCard.gateInfo.setting")}}
-            input.gate-url(:placeholder="$t('tokenCard.gateInfo.settingPlaceholder')" :disabled="token.type==='OFFICAL_GATE'" v-model="url")
-    .tab-content(v-if="tabName==='gate'")
-        .content__item(v-if="token.type==='THIRD_GATE'")
-            .label {{$t("tokenCard.gateInfo.officalNet")}}
-        .content__item(v-if="token.type==='THIRD_GATE'")
-            .label {{$t("tokenCard.gateInfo.introduction")}}
-        .content__item(v-if="token.type==='THIRD_GATE'")
-            .label {{$t("tokenCard.gateInfo.token")}}
-        .content__item(v-if="token.type==='OFFICAL_GATE'")
-            .label {{$t("tokenCard.gateInfo.nodeDesc")}}
-        .content__item
-            .label {{$t("tokenCard.gateInfo.setting")}}
-            input.gate-url(:placeholder="$t('tokenCard.gateInfo.settingPlaceholder')" :disabled="token.type==='OFFICAL_GATE'" v-model="url")
+    .tab-content.no-padding(v-if="tabName==='deposit'")
+        Tb(:type="'deposit'" :token="token")
+    .tab-content.no-padding(v-if="tabName==='withdraw'")
+        Tb(:type="'withdraw'" :token="token")
 </template>
 
 <script>
@@ -76,6 +59,7 @@ import { wallet } from 'utils/wallet';
 import { gateStorage, getChargeAddr } from 'services/gate';
 import getTokenIcon from 'utils/getTokenIcon';
 import { getExplorerLink } from 'utils/getLink';
+import Tb from './tb';
 
 const tokenEnum = {
     GATE: 'gate',
@@ -84,6 +68,7 @@ const tokenEnum = {
 };
 
 export default {
+    components: { Tb },
     props: {
         token: {
             type: Object,
@@ -204,6 +189,12 @@ export default {
 }
 .tab-content{
     height: 300px;
+    padding:30px;
+    position: relative;
+    overflow: scroll;
+    &.no-padding{
+        padding:0;
+    }
     .content__item{
         height: 40px;
         line-height: 40px;

@@ -47,13 +47,13 @@ export const getWithdrawInfo = ({ tokenId, walletAddress }, url) =>
         host: url
     });
 
-export const getWithdrawFee = ({ tokenId, walletAddress, amount, containsFee = false },
-    url) =>
-    client({
+export function getWithdrawFee({ tokenId, walletAddress, amount, containsFee = false }, url) {
+    return client({
         path: 'withdraw_fee',
         params: { tokenId, walletAddress, amount, containsFee },
         host: url
     });
+}
 
 export const getChargeInfo = ({ tokenId, addr: walletAddress }, url) =>
     client({
@@ -94,22 +94,24 @@ export const withdraw = async (
     });
 };
 
-export const getWithdrawRecords = ({ tokenId, walletAddress, geNum, pageSize },
-    url) =>
-    client({
+export function getWithdrawRecords({ tokenId, walletAddress, pageNum, pageSize }, url) {
+    return client({
         path: 'withdraw_records',
-        params: { tokenId, walletAddress, geNum, pageSize },
+        params: { tokenId, walletAddress, pageNum, pageSize },
         host: url
     });
+}
 
-export const getDepositRecords = ({ tokenId, walletAddress, geNum, pageSize },
-    url) =>
-    client({
+
+export function getDepositRecords({ tokenId, walletAddress, pageNum, pageSize }, url) {
+    return client({
         path: 'deposit_records',
-        params: { tokenId, walletAddress, geNum, pageSize },
+        params: { tokenId, walletAddress, pageNum, pageSize },
         host: url
     });
-// data{tokenId:{symbol,url}}
+}
+
+
 class GateWays {
     constructor() {
         if (!Array.isArray(addrSpace.getItem(STORAGEKEY))) {
