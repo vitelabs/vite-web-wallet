@@ -2,7 +2,7 @@
     <div class="input-wrapper">
         <slot name="before"></slot>
         <!-- Safari autocomplete -->
-        <input fake_pass type="password" style="display:none;"/>
+        <input fake_pass type="password" style="display:none"/>
         <input v-model="value" @input.prevent="update" type="text"
                :placeholder="placeholder" autocomplete="false"
                @blur="_blur" @focus="_focus"/>

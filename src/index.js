@@ -1,8 +1,8 @@
 // Import '@babel/polyfill';
 require('es6-promise').polyfill();
 
-import 'utils/performance';
 import 'assets/scss/mixins.scss';
+import 'utils/performance';
 import 'utils/viteClient.js';
 import 'utils/wallet';
 
