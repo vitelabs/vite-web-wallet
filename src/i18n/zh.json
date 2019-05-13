@@ -436,8 +436,7 @@
       "noSearchData": "无结果，换个输入试试",
       "operateBtn": "投票",
       "voteErr": "投票失败，请重试"
-    }
-  },
+    },
   "walletConversion": {
     "title": "置换VITE",
     "help": {
@@ -1004,4 +1003,5 @@
             "reset": "重置"
         }
     }
+  }
 }

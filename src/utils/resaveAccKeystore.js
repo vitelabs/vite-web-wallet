@@ -23,7 +23,6 @@ export default function () {
 
         if (!item.entropy || !item.encryptObj || +item.encryptObj.version !== 1 || !item.encryptObj.scryptParams) {
             reList.push(item);
-
             return;
         }
 

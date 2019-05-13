@@ -636,8 +636,7 @@
       "noSearchData": "No content found, please try another input",
       "operateBtn": "Vote",
       "voteErr": "Failed to vote, please try again"
-    }
-  },
+    },
   "walletConversion": {
     "title": "VITE Conversion",
     "help": {
@@ -765,7 +764,8 @@
     },
     "pwdConfirm": {
       "cancelTxt": "Cancel"
-    },
+    }
+},
     "table": {
       "heads": [
         "Token",
@@ -781,6 +781,7 @@
         "sideMap": {
           "1": "Deposit",
           "2": "Withdraw"
+        }
         }
     },
     "trade": {
