@@ -79,7 +79,9 @@ export default {
         },
         token: {
             type: Object,
-            default: ()=>({})
+            default: () => {
+                return {};
+            }
         }
     },
     data() {
@@ -166,7 +168,7 @@ export default {
     .pagination {
         display: flex;
         justify-content: center;
-        padding:20px 0;
+        padding: 20px 0;
     }
 }
 .tb__body {
