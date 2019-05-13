@@ -655,117 +655,6 @@
       "success": "Conversion Successful. It may take approx 20 minutes to get VITE into your account after the Ethereum transaction is confirmed."
     }
   },
-  "trade": {
-    "title": "Exchange",
-    "search": "Search",
-    "txPair": "Pair",
-    "price": "Price",
-    "upDown": "Change%",
-    "txNum": "Volume",
-    "quantityTitle": "Total({quantity})",
-    "priceTitle": "Price({price})",
-    "amountTitle": "Amount({amount})",
-    "amountTable": "Qty",
-    "amount": "Total",
-    "newOrderSuccess": "Order Success",
-    "newOrderFail": "Order Failed",
-    "depthView": "Depth",
-    "klineView": "TradingView",
-    "txPairDetail": {
-        "title": "交易对详情",
-        "24h": "24小时数据",
-        "openPrice": "开盘价",
-        "quantity": "市场币交易量",
-        "amount": "基准币交易量",
-        "status": "当前状态",
-        "latest": "最新价",
-        "buy": "买一价",
-        "sell": "卖一价",
-        "diff": "价差"
-    },
-    "dexToken": {
-      "title": "Open Trading Pair",
-      "fee": "Token listing Fees",
-      "market": "Open Market",
-      "link": "Check on Explorer",
-      "name": "Token Name",
-      "id": "Token ID",
-      "hint": "If you'd like to add gateway symbol (such as BTC.V) after open the trading pair, please contact us: info@vite.org",
-      "btn": "Submit Application",
-      "search": "Please input token name",
-      "reqSuccess": "Application submission successful! Please view in the market later",
-      "reqError": "Token listing failed, please try again later."
-    },
-    "buy": {
-      "title": "Buy {token}",
-      "price": "Price({token})",
-      "quantity": "Amount({token})"
-    },
-    "sell": {
-      "title": "Sell {token}",
-      "price": "Price({token})",
-      "quantity": "Amount({token})"
-    },
-    "head": {
-      "latestPrice": "Last Price",
-      "updown": "24h Change",
-      "highPrice": "24h High",
-      "lowPrice": "24h Low",
-      "quantity": "24h Volume",
-      "tokenName": "Token",
-      "originalSymbol": "Symbol",
-      "gateway": "Gateway",
-      "website": "Official Website",
-      "explorer": "Block Explorer",
-      "overview": "Description",
-      "tokenShow": "Abbr",
-      "tokenId": "Token ID",
-      "publisher": "Issuer",
-      "total": "Total",
-      "tokenDigit": "Decimals",
-      "publisherDate": "Issuance Date",
-      "type": "Status",
-      "tokenType0": "Issuance Available",
-      "tokenType1": "Never Issued"
-    },
-    "latestTx": {
-      "title": "Last Orders",
-      "time": "Time"
-    },
-    "depth": {
-      "buy": "Buy",
-      "sell": "Sell",
-      "all": "All"
-    },
-    "noData": {
-      "favorite": "You have no favorite yet",
-      "search": "No result found"
-    },
-    "limitPrice": {
-      "title": "Limit",
-      "fee": "Fees",
-      "text": "This page is a preview page of transaction data. Please login to trade.",
-      "validAmountDigit": "Volume must be greater than {amount}{token}",
-      "validMaxDigit": "At most {digit} decimals",
-      "priceNotNull": "Amount cannot be empty",
-      "amountNotNull": "Volume cannot be empty",
-      "quantityNotNull": "Quantity cannot be empty",
-      "bigger0": "Value must be greater than 0"
-    }
-  },
-  "tradeAssets": {
-    "title": "Funds",
-    "search": "Please input token name",
-    "operate": "Action",
-    "all": "全部",
-    "confirmTable": {
-      "title": "Records",
-      "heads": ["Date", "Token", "Type", "Amount"]
-    },
-    "pwdConfirm": {
-      "cancelTxt": "Cancel"
-    }
-},
     "table": {
       "heads": [
         "Token",
@@ -800,6 +689,18 @@
         "newOrderFail": "Order Failed",
         "depthView": "Depth",
         "klineView": "TradingView",
+        "txPairDetail": {
+            "title": "交易对详情",
+            "24h": "24小时数据",
+            "openPrice": "开盘价",
+            "quantity": "市场币交易量",
+            "amount": "基准币交易量",
+            "status": "当前状态",
+            "latest": "最新价",
+            "buy": "买一价",
+            "sell": "卖一价",
+            "diff": "价差"
+        },
         "dexToken": {
             "title": "Open Trading Pair",
             "fee": "Token listing Fees",
