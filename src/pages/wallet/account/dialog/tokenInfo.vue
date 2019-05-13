@@ -189,11 +189,11 @@ export default {
 }
 .tab-content{
     height: 300px;
-    padding:30px;
+    padding: 30px;
     position: relative;
     overflow: scroll;
     &.no-padding{
-        padding:0;
+        padding: 0;
     }
     .content__item{
         height: 40px;
