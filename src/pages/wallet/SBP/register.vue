@@ -44,7 +44,7 @@
                     {{ $t('stakingAmount') }}
                     <span v-show="amountErr" class="err">{{ amountErr }}</span>
                 </div>
-                <div class="input-item all unuse __ellipsis">100,000 VITE</div>
+                <div class="input-item all unuse __ellipsis">500,000 VITE</div>
             </div>
             <div class="item">
                 <div v-show="!btnUnuse" class="btn all __pointer" :class="{
@@ -64,7 +64,7 @@ import viteInput from 'components/viteInput';
 import BigNumber from 'utils/bigNumber';
 import sendTx from 'utils/sendTx';
 
-const amount = 100000;
+const amount = 500000;
 
 export default {
     components: { viteInput },
