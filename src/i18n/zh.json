@@ -229,18 +229,18 @@
             "title": "{tokenSymbol}代币信息",
             "saveGate": "保存修改",
             "labels": {
-            "tokenId": "TokenID",
-            "title": "{tokenSymbol}代币地址",
-            "address": "铸币地址",
-            "tokenName": "代币名称",
-            "totalSupply": "发行总量",
-            "decimals": "小数位",
-            "isReIssuable": "类型",
-            "time": "发行日期"
+                "tokenId": "TokenID",
+                "title": "{tokenSymbol}代币地址",
+                "address": "铸币地址",
+                "tokenName": "代币名称",
+                "totalSupply": "发行总量",
+                "decimals": "小数位",
+                "isReIssuable": "类型",
+                "time": "发行日期"
             },
             "reIssuable": {
-            "true": "可增发",
-            "false": "不可增发"
+                "true": "可增发",
+                "false": "不可增发"
             }
         },
         "gateInfo": {
@@ -250,7 +250,31 @@
             "introduction": "网关介绍",
             "token": "网关发行代币",
             "setting": "网关设置",
-            "settingPlaceholder": "请输入网关链接地址"
+            "settingPlaceholder": "请输入网关链接地址",
+            "nodeDesc":"网关节点使用说明："
+        },
+        "depositRecord": {
+            "tabName": "充值记录",
+            "heads": ["时间", "金额", "状态", "{inChain}链Hash", "{outChain}链Hash"],
+            "statusMap": {
+                "OPPOSITE_PROCESSING": "{outChain}链待确认",
+                "OPPOSITE_CONFIRMED": "网关已接收",
+                "TOT_CONFIRMED": "已完成",
+                "BELOW_MINIMUM": "VITE链待确认",
+                "TOT_PROCESSING": "已完成"
+            }
+        },
+        "withdrawRecord": {
+            "tabName": "提现记录",
+            "heads": ["时间", "金额", "状态", "{inChain}链Hash", "{outChain}链Hash"],
+            "statusMap": {
+                "TODO": "VITE链待确认",
+                "TOT_PROCESSING": "VITE链确认",
+                "TOT_NOT_RECEIVED": "提现失败",
+                "TOT_CONFIRMED": "网关已接收",
+                "OPPOSITE_PROCESSING": "{outChain}链待确认",
+                "OPPOSITE_CONFIRMED": "已完成"
+            }
         },
         "receive": {
             "title": "接收",
@@ -265,26 +289,26 @@
             "addressTitle": "充值地址",
             "codeTips": "请扫描二维码充值,请使用支持{tokenSymbol}的钱包转账",
             "tips": [
-            "充值操作是将{tokenSymbol}跨链映射至VITE网络，充值后您可通过提现转走",
-            "通过该存款地址只能发送{tokenSymbol},且金额不能低于{min}",
-            "交易确认之后，预计5分钟后到账，请耐心等待"
+                "充值操作是将{tokenSymbol}跨链映射至VITE网络，充值后您可通过提现转走",
+                "通过该存款地址只能发送{tokenSymbol},且金额不能低于{min}",
+                "交易确认之后，预计5分钟后到账，请耐心等待"
             ]
         },
         "withdraw": {
             "title": "跨链提现",
             "balanceErrMap": {
-            "notEnough": "余额不足",
-            "overMax": "提现金额需小于 {max}",
-            "lessMin": "提现金额需大于 {min}"
+                "notEnough": "余额不足",
+                "overMax": "提现金额需小于 {max}",
+                "lessMin": "提现金额需大于 {min}"
             },
             "feeTips": "手续费收取金额由网关设置",
             "addressErr": "地址格式错误",
             "labels": {
-            "balance": "账户余额",
-            "address": "提现地址",
-            "amount": "提现金额",
-            "fee": "提现手续费",
-            "all": "全部"
+                "balance": "账户余额",
+                "address": "提现地址",
+                "amount": "提现金额",
+                "fee": "提现手续费",
+                "all": "全部"
             },
             "amountPlaceholder": "请输入提现金额，最小不少于{min}",
             "addressPlaceholder": "请输入提现地址",

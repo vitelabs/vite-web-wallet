@@ -56,9 +56,9 @@ const pushServer = {
     dexTestNet: '"wss://vitex.vite.net/beta/websocket"'
 };
 const gatewayInfosServer = {
-    production: '"//132.232.60.116:8081"',
+    // production: '"//132.232.60.116:8081"',
     test: '"//gateway.vitewallet.com/test/crosschain/"',
-    dev: '"//gateway.vitewallet.com/test/crosschain/"'
+    dev: '"gateway"'
 };
 const Node_Env = process.env.NODE_ENV || 'dev';
 
