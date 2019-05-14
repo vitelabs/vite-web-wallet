@@ -33,6 +33,10 @@
     "saveQrcode": "保存二维码图片",
     "unlockSuccess": "解锁成功",
     "submitStaking": "提交抵押",
+    "sendTrans": {
+        "send": "发送交易",
+        "symbol": "发送交易"
+    },
     "errCode": {
         "35003": "{name}ID发生冲突，请您稍后重新提交",
         "35004": "参数错误",
