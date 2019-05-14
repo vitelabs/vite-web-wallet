@@ -1,8 +1,8 @@
-export default function (addr, len = 10) {
+export default function (addr, len = 10, fontLen = 5) {
     if (!addr) {
         return '';
     }
-    const beforeLen = 5 + len;
+    const beforeLen = fontLen + len;
     const afterLen = len;
 
     return addr.length > (beforeLen + afterLen)

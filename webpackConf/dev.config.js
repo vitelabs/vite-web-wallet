@@ -12,6 +12,13 @@ module.exports = {
             '/trade': {
                 target: 'http://localhost:8081',
                 pathRewrite: { '^/trade\w*': '' }
+            },
+            '/gateway': {
+                target: 'https://gateway.vitewallet.com/test/crosschain/',
+                changeOrigin: true,
+                secure: false,
+                pathRewrite: { '^/gateway': '' }
+
             }
         }
     }
