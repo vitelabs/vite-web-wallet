@@ -305,6 +305,9 @@ export default {
                 this.totalReward = data.totalReward;
                 this.showReward(item);
             }).catch(err => {
+                if (err && err.code && err.code === '1000001') {
+                    return;
+                }
                 console.warn(err);
                 this.$toast('Get Reward Failed', err);
             });
