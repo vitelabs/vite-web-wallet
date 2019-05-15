@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <link rel="shortcut icon" type="image/x-icon" href="favicon.ico"/>
+        <title>Vite PreMainnet</title>
+
+        <script>
+            function getViteNumber(num) {
+                if (num.length > 18) {
+                    var afterNum = num.slice(num.length - 18);
+                    var preNum = num.slice(0, num.length - 18);
+                    return preNum + '.' + afterNum;
+                }
+
+                let newNum = '';
+                newNum = '0.';
+                for (let i=0; i<18 - num.length; i++) {
+                    newNum += '0';
+                }
+                return newNum + num;
+            }
+
+            function fetch(path) {
+                const xhr = new XMLHttpRequest();
+                xhr.open('GET', 'http://localhost:8080' + path, true);
+                xhr.setRequestHeader('content-type', 'application/json; charset=utf-8');
+
+                xhr.send();
+                return new Promise((res, rej) => {
+                    xhr.onload = function () {
+                        if (+xhr.status === 200) {
+                            res(xhr.responseText);
+                        } else {
+                            rej(JSON.parse(xhr.responseText));
+                        }
+                    }
+                    xhr.onerror = function (err) {
+                        rej(err);
+                    };
+                    xhr.onabort = function (err) {
+                        rej(err);
+                    };
+                    xhr.ontimeout = function () {
+                        rej();
+                    };
+                })
+            }
+
+            function fetchAllBalance() {
+                fetch('/balance').then((data) => {
+                    console.log(data);
+                }).catch((err) => {
+                    console.error(err)
+                })
+            }
+
+            function fetchBalance(address) {
+                fetch('/balance?' + address).then((data) => {
+                    console.log(data);
+                }).catch((err) => {
+                    console.error(err)
+                })
+            }
+
+            let address = location.search;
+            address = address.slice('?address='.length);
+
+            if (!address || address.length !== 55) {
+                fetchAllBalance()
+            } else {
+                fetchBalance(address);
+            }
+
+            console.log(getViteNumber('23028409381018013801'));
+        </script>
+    </head>
+
+    <body>
+        <div id="app">
+            <table>
+                <tr>
+                    <th>Address</th>
+                    <th>Balance (VITE)</th>
+                </tr>
+                <tr>
+                    <td>vite_1ed467b679748f51203de0cd8f70e547d23ce14d4ee60cc961</td>
+                    <td>0.000000000000010092</td>
+                </tr>
+                <tr>
+                    <td>vite_ab24ef68b84e642c0ddca06beec81c9acb1977bbd7da27a87a</td>
+                    <td>100920328402382935739453.748979340832402384</td>
+                </tr>
+            </table>
+        </div>
+
+        <style>
+            body {
+                overflow: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+            table {
+                box-sizing: border-box;
+                border: 1px solid #0094ff;
+                border-bottom: none;
+            }
+            table tr th, table tr td {
+                box-sizing: border-box;
+                padding: 5px;
+                border-bottom: 1px solid #0094ff;
+                border-right: 1px solid #0094ff;
+            }
+            table tr th:last-child, table tr td:last-child {
+                border-right: none;
+            }
+        </style>
+    </body>
+</html>
