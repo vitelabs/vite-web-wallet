@@ -241,17 +241,7 @@ export default {
             }
             this.showConfirm('edit', item.rawData);
         },
-        reward(item) {
-            this.totalReward = null;
-            $Vite.request('register_getAvailableReward', '00000000000000000001', item.rawData.name).then(data => {
-                if (!data || !data.totalReward) {
-                    this.totalReward = null;
-                }
-                this.totalReward = data.totalReward;
-            }).catch(err => {
-                console.warn(err);
-            });
-
+        showReward(item) {
             this.activeAccount.initPwd({
                 title: this.$t('walletSBP.rewardConfirm.title'),
                 submitTxt: this.$t('walletSBP.rewardConfirm.rightBtn'),
@@ -296,7 +286,7 @@ export default {
                         pow: false,
                         confirm: {
                             showMask: true,
-                            operate: this.$t('walletSBP.cancel')
+                            operate: this.$t('walletSBP.rewardBtn')
                         }
                     }).then(() => {
                         this.$toast(this.$t('hint.request', { name: 'Rewards' }));
@@ -305,6 +295,19 @@ export default {
                     });
                 }
             }, true);
+        },
+        reward(item) {
+            this.totalReward = null;
+            $Vite.request('register_getAvailableReward', '00000000000000000001', item.rawData.name).then(data => {
+                if (!data || !data.totalReward) {
+                    this.totalReward = null;
+                }
+                this.totalReward = data.totalReward;
+                this.showReward(item);
+            }).catch(err => {
+                console.warn(err);
+                this.$toast('Get Reward Failed', err);
+            });
         }
     }
 };
