@@ -287,7 +287,7 @@ export default {
                         pow: false,
                         confirm: {
                             showMask: true,
-                            operate: this.$t('walletSBP.cancel')
+                            operate: this.$t('walletSBP.rewardBtn')
                         }
                     }).then(() => {
                         this.$toast(this.$t('hint.request', { name: 'Rewards' }));
