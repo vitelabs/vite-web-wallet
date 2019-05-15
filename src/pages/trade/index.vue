@@ -1,6 +1,8 @@
 <template>
     <div class="exchange-center-wrapper">
+        <img src="~assets/imgs/VX.png" />
         {{ $t('tradePreMainnet.text') }}
+        <a class="vx-button" href="https://x-test.vite.net" target="_blank">{{ $t('tradePreMainnet.button') }}</a>
         <!-- [TODO] Recover trade -->
         <!-- <center v-if="active === 'trade'"></center>
         <div class="order" v-if="active === 'trade'">
@@ -112,6 +114,28 @@
     flex-direction: column;
     height: 100%;
     width: 100%;
+
+    color: #24272B;
+    font-size: 16px;
+    line-height: 20px;
+    align-items: center;
+    justify-content: center;
+    img {
+        width: 340px;
+        height: 340px;
+    }
+    .vx-button {
+        background: #007AFF;
+        color: #fff;
+        border-radius: 2px;
+        display: inline-block;
+        min-width: 200px;
+        text-align: center;
+        padding: 10px;
+        margin-top: 30px;
+        line-height: 20px;
+        font-family: $font-bold, arial, sans-serif;
+    }
 
     .order {
         background: #fff;
