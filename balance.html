@@ -5,6 +5,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
         <link rel="shortcut icon" type="image/x-icon" href="favicon.ico"/>
         <title>Vite PreMainnet</title>
+    </head>
+
+    <body>
+        <div id="app">
+            <table id="table"></table>
+        </div>
 
         <script>
             function getViteNumber(num) {
@@ -24,10 +30,11 @@
 
             function fetch(params) {
                 const xhr = new XMLHttpRequest();
+
                 xhr.open('POST', 'http://132.232.138.139:8080/test/api/transferdetail/list', true);
                 xhr.setRequestHeader('content-type', 'application/json; charset=utf-8');
-
                 xhr.send(JSON.stringify(params));
+
                 return new Promise((res, rej) => {
                     xhr.onload = function () {
                         if (+xhr.status !== 200) {
@@ -61,39 +68,23 @@
 
             if (address && address.length === 55) {
                 fetch({
-                    "accountAddress": "vite_da2aca42123996492fdc908f7b9659bcb9f48d08e0b3138f69",
+                    "accountAddress": address,
                     "paging" : {
                         "index" : 0,
                         "count" :50
                     }
                 }).then((data) => {
-                    console.log(data.blockList[0]);
+                    let balanceMap = data.blockList[0] || {};
+                    let vite = balanceMap && +balanceMap.vitefinalbalance ? getViteNumber(balanceMap.vitefinalbalance) : '0';
+                    let vcp = balanceMap && +balanceMap.vcpfinalbalance ? balanceMap.vcpfinalbalance : '0';
+
+                    let tableDom = document.getElementById('table');
+                    tableDom.innerHTML = `<tr><th>Address</th><th>Balance (VITE)</th><th>Balance (VCP)</th></tr><tr><td>${address}</td><td>${vite}</td><td>${vcp}</td></tr>`;
                 }).catch((err) => {
                     console.error(err)
                 })
             }
-
-            console.log(getViteNumber('23028409381018013801'));
         </script>
-    </head>
-
-    <body>
-        <div id="app">
-            <table>
-                <tr>
-                    <th>Address</th>
-                    <th>Balance (VITE)</th>
-                </tr>
-                <tr>
-                    <td>vite_1ed467b679748f51203de0cd8f70e547d23ce14d4ee60cc961</td>
-                    <td>0.000000000000010092</td>
-                </tr>
-                <tr>
-                    <td>vite_ab24ef68b84e642c0ddca06beec81c9acb1977bbd7da27a87a</td>
-                    <td>100920328402382935739453.748979340832402384</td>
-                </tr>
-            </table>
-        </div>
 
         <style>
             body {
