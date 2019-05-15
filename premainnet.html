@@ -61,7 +61,22 @@
             <div>The upgrade will occur on 13:00 on May 21, 2019 in PST and the process is expected to last 24 hours</div>
             </br>
             <div>Vite Web Wallet will be closed during this time. All of the services will be restored until the upgrade is completed. Stay tuned :)</div>
+
+            </br>
+            <div class="input-wrapper">
+                <input id="v_input" type="text" placeholder="Address" />
+                <span id="button" class="button">Search</span>
+            </div>
         </div>
+
+        <script>
+            let input = document.getElementById('v_input');
+            let button = document.getElementById('button');
+            button.onclick = () => {
+                // location.href = location.origin + '/balance?address=' + input.value;
+                location.href = location.origin + '/Users/sisi/workspace/vite-web-wallet/balance.html?address=' + input.value;
+            }
+        </script>
 
         <style>
             body {
@@ -79,6 +94,27 @@
                 justify-content: center;
                 align-items: center;
                 flex-direction: column;
+            }
+
+            .input-wrapper {
+                display: flex;
+                width: 100%;
+                border: 1px solid #d4dee7;
+                border-radius: 2px;
+                font-size: 14px;
+                height: 40px;
+                line-height: 40px;
+            }
+            input {
+                flex: 1;
+                width: 100%;
+                font-size: 14px;
+                text-indent: 15px;
+            }
+            .button {
+                box-sizing: border-box;
+                padding: 0 20px;
+                cursor: pointer;
             }
         </style>
     </body>
