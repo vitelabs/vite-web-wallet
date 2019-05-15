@@ -100,6 +100,12 @@ export default {
             const compareMin = BigNumber.compared(this.cancelAmount, limitAmt);
 
             if (compareMin < 0 || compareBalance > 0) {
+                const compareLimit = BigNumber.compared(limitAmt, this.activeAmountLimit);
+                if (compareLimit >= 0) {
+                    this.amountErr = this.$t('walletQuota.maxAmt', { maxAmount: this.activeAmountLimit });
+                    return false;
+                }
+
                 this.amountErr = this.$t('walletQuota.maxAmt', {
                     minAmount: limitAmt,
                     maxAmount: this.activeAmountLimit
