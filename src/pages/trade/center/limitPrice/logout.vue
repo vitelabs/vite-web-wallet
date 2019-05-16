@@ -7,6 +7,8 @@
 </template>
 
 <script>
+import { pwdConfirm } from 'components/password/index.js';
+
 export default {
     computed: {
         isHaveUsers() {
@@ -19,10 +21,7 @@ export default {
                 this.$router.push({ name: 'start' });
                 return;
             }
-
-            // [TODO] pwdConfirm
-            // const activeAccount = this.$wallet.getActiveAccount();
-            // activeAccount && activeAccount.unlockAccount();
+            pwdConfirm({ type: 'unlockAccount' });
         },
         rightClick() {
             if (!this.isHaveUsers) {

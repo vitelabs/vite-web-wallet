@@ -27,6 +27,7 @@
 import { StatusMap } from 'wallet';
 import dexToken from 'components/dexToken';
 import switchAddr from 'components/switchAddress';
+import { pwdConfirm } from 'components/password/index.js';
 
 export default {
     components: { dexToken, switchAddr },
@@ -75,9 +76,7 @@ export default {
                 this.go('start');
                 return;
             }
-            // [TODO] pwdConfirm
-            // const activeAccount = this.$wallet.getActiveAccount();
-            // activeAccount && activeAccount.unlockAccount();
+            pwdConfirm({ type: 'unlockAccount' });
         },
         dexChange() {
             if (!this.isHaveUsers) {
