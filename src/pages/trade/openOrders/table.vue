@@ -34,9 +34,10 @@
 
 <script>
 import d from 'dayjs';
-// import sendTx from 'utils/sendTx';
+import sendTx from 'utils/sendTx';
 import { subTask } from 'utils/proto/subTask';
 import { order } from 'services/trade';
+import { initPwd } from 'components/password/index.js';
 
 let task = null;
 
@@ -223,43 +224,38 @@ export default {
             });
         },
         cancel(order) {
-            console.log(order);
+            const failSubmit = e => {
+                this.$toast(this.$t('tradeOpenOrders.confirm.failToast'), e);
+            };
 
-            // [TODO]
-            // const failSubmit = e => {
-            //     this.$toast(this.$t('tradeOpenOrders.confirm.failToast'), e);
-            // };
+            const successSubmit = () => {
+                this.$toast(this.$t('tradeOpenOrders.confirm.successToast'));
+            };
 
-            // const successSubmit = () => {
-            //     this.$toast(this.$t('tradeOpenOrders.confirm.successToast'));
-            // };
-
-            // [TODO] initPwd
-            // const activeAccount = this.$wallet.getActiveAccount();
-            // activeAccount.initPwd({
-            //     title: this.$t('tradeOpenOrders.confirm.title'),
-            //     content: this.$t('tradeOpenOrders.confirm.content'),
-            //     submitTxt: this.$t('tradeOpenOrders.confirm.submitTxt'),
-            //     cancelTxt: this.$t('tradeOpenOrders.confirm.cancelTxt'),
-            //     submit: () => {
-            //         sendTx('dexTradeCancelOrder', {
-            //             orderId: order.orderId,
-            //             tradeToken: order.ftoken,
-            //             side: order.side,
-            //             quoteToken: order.ttoken
-            //         })
-            //             .then(successSubmit)
-            //             .catch(err => {
-            //                 const code = err && err.error ? err.error.code || -1
-            //                     : err ? err.code : -1;
-            //                 if (code === -37008) {
-            //                     this.$toast(`${ this.$t('tradeOpenOrders.cancelErr') }(37008)`);
-            //                     return;
-            //                 }
-            //                 failSubmit(err);
-            //             });
-            //     }
-            // }, true);
+            initPwd({
+                title: this.$t('tradeOpenOrders.confirm.title'),
+                content: this.$t('tradeOpenOrders.confirm.content'),
+                submitTxt: this.$t('tradeOpenOrders.confirm.submitTxt'),
+                cancelTxt: this.$t('tradeOpenOrders.confirm.cancelTxt'),
+                submit: () => {
+                    sendTx('dexTradeCancelOrder', {
+                        orderId: order.orderId,
+                        tradeToken: order.ftoken,
+                        side: order.side,
+                        quoteToken: order.ttoken
+                    })
+                        .then(successSubmit)
+                        .catch(err => {
+                            const code = err && err.error ? err.error.code || -1
+                                : err ? err.code : -1;
+                            if (code === -37008) {
+                                this.$toast(`${ this.$t('tradeOpenOrders.cancelErr') }(37008)`);
+                                return;
+                            }
+                            failSubmit(err);
+                        });
+                }
+            }, true);
         }
     }
 };

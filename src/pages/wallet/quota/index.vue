@@ -40,6 +40,7 @@ import list from './list';
 import confirm from 'components/confirm';
 import loading from 'components/loading';
 import viteInput from 'components/viteInput';
+import { initPwd } from 'components/password/index.js';
 import sendTx from 'utils/sendTx';
 import BigNumber from 'utils/bigNumber';
 
@@ -144,20 +145,18 @@ export default {
                 return;
             }
 
-            // [TODO]
-            // const amount = this.cancelAmount;
-            // this.closeConfirm();
+            const amount = this.cancelAmount;
+            this.closeConfirm();
 
-            // [TODO] initPwd
-            // this.activeAccount.initPwd({
-            //     submit: () => {
-            //         const txListEle = this.$refs.txList;
-            //         if (!txListEle) {
-            //             return;
-            //         }
-            //         txListEle._sendCancelPledgeTx(amount);
-            //     }
-            // });
+            initPwd({
+                submit: () => {
+                    const txListEle = this.$refs.txList;
+                    if (!txListEle) {
+                        return;
+                    }
+                    txListEle._sendCancelPledgeTx(amount);
+                }
+            });
         },
 
         sendPledgeTx({ toAddress, amount }, type, cb) {

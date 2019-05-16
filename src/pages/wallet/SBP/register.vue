@@ -61,6 +61,7 @@
 <script>
 import { hdAddr } from '@vite/vitejs';
 import viteInput from 'components/viteInput';
+import { initPwd } from 'components/password/index.js';
 import BigNumber from 'utils/bigNumber';
 import sendTx from 'utils/sendTx';
 
@@ -209,16 +210,15 @@ export default {
                 return;
             }
 
-            // [TODO] initPwd
-            // this.activeAccount.initPwd({
-            //     title: this.$t('walletSBP.confirm.title'),
-            //     submitTxt: this.$t('walletSBP.confirm.rightBtn'),
-            //     cancelTxt: this.$t('walletSBP.confirm.leftBtn'),
-            //     content: this.$t('walletSBP.confirm.describe', { amount }),
-            //     submit: () => {
-            //         this.sendRegisterTx();
-            //     }
-            // }, true);
+            initPwd({
+                title: this.$t('walletSBP.confirm.title'),
+                submitTxt: this.$t('walletSBP.confirm.rightBtn'),
+                cancelTxt: this.$t('walletSBP.confirm.leftBtn'),
+                content: this.$t('walletSBP.confirm.describe', { amount }),
+                submit: () => {
+                    this.sendRegisterTx();
+                }
+            }, true);
         },
         sendRegisterTx() {
             this.loading = true;

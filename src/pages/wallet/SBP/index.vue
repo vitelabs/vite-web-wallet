@@ -37,6 +37,7 @@ import secTitle from 'components/secTitle';
 import loading from 'components/loading';
 import confirm from 'components/confirm';
 import viteInput from 'components/viteInput';
+import { initPwd } from 'components/password/index.js';
 import BigNumber from 'utils/bigNumber';
 import sendTx from 'utils/sendTx';
 import register from './register';
@@ -153,20 +154,18 @@ export default {
                 return;
             }
 
-            // [TODO]
-            // const showConfirmType = this.showConfirmType;
-            // this.showConfirmType = '';
+            const showConfirmType = this.showConfirmType;
+            this.showConfirmType = '';
 
-            // [TODO] initPwd
-            // this.activeAccount.initPwd({
-            //     cancel: () => {
-            //         this.closeConfirm();
-            //     },
-            //     submit: () => {
-            //         this.showConfirm(showConfirmType);
-            //         (showConfirmType === 'edit') && this.sendUpdateTx();
-            //     }
-            // });
+            initPwd({
+                cancel: () => {
+                    this.closeConfirm();
+                },
+                submit: () => {
+                    this.showConfirm(showConfirmType);
+                    (showConfirmType === 'edit') && this.sendUpdateTx();
+                }
+            });
         },
         sendUpdateTx() {
             this.loading = true;

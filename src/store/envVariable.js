@@ -4,6 +4,7 @@ import localStorage from 'utils/store';
 
 const currencyKey = 'currency';
 const autoLogoutKey = 'autoLogoutTime';
+const HoldPwdKey = 'isHoldPWD';
 
 // coins: {
 //     en: 'usd',
@@ -14,6 +15,7 @@ const state = {
     clientStatus: -1,
     lang: '',
     currency: localStorage.getItem(currencyKey) || '',
+    isHoldPWD: !!localStorage.getItem(HoldPwdKey),
     autoLogoutTime: localStorage.getItem(autoLogoutKey) || 5,
     lastPage: ''
 };
@@ -43,6 +45,10 @@ const mutations = {
     },
     setLastPage(state, lastPage) {
         state.lastPage = lastPage;
+    },
+    setHoldPwd(state, isHoldPWD) {
+        state.isHoldPWD = !!isHoldPWD;
+        localStorage.setItem(HoldPwdKey, state.isHoldPWD);
     }
 };
 

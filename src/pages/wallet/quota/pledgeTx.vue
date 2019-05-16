@@ -51,6 +51,7 @@
 <script>
 import { hdAddr, constant } from '@vite/vitejs';
 import viteInput from 'components/viteInput';
+import { initPwd } from 'components/password/index.js';
 import BigNumber from 'utils/bigNumber';
 
 const amountTimeout = null;
@@ -184,16 +185,15 @@ export default {
                 return;
             }
 
-            // [TODO] initPwd
-            // this.activeAccount.initPwd({
-            //     title: this.$t('submitStaking'),
-            //     submitTxt: this.$t('walletQuota.confirm.submit.rightBtn'),
-            //     cancelTxt: this.$t('walletQuota.confirm.submit.leftBtn'),
-            //     content: this.$t('walletQuota.confirm.submit.describe', { amount: this.amount }),
-            //     submit: () => {
-            //         this._sendPledgeTx();
-            //     }
-            // }, true);
+            initPwd({
+                title: this.$t('submitStaking'),
+                submitTxt: this.$t('walletQuota.confirm.submit.rightBtn'),
+                cancelTxt: this.$t('walletQuota.confirm.submit.leftBtn'),
+                content: this.$t('walletQuota.confirm.submit.describe', { amount: this.amount }),
+                submit: () => {
+                    this._sendPledgeTx();
+                }
+            }, true);
         },
         _sendPledgeTx() {
             this.$statistics.event('Vite_web_wallet', 'quota', 'ConfirmQuota');

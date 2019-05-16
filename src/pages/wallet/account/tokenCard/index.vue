@@ -137,6 +137,7 @@ export default {
             });
         },
         send() {
+            console.log(this.token);
             if (!this.token.tokenId) {
                 return;
             }

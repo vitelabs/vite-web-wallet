@@ -1,4 +1,5 @@
 import { StatusMap, getCurrHDAcc, getActiveAcc } from 'wallet';
+import { pwdConfirm } from 'components/password/index.js';
 
 const vnodes = new Set();
 
@@ -44,8 +45,7 @@ export default {
 
                     const activeAccount = getActiveAcc();
                     if (activeAccount) {
-                        // Show confirm
-                        // activeAccount.unlockAccount();
+                        pwdConfirm({ type: 'unlockAccount' });
                         return;
                     }
 

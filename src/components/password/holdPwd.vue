@@ -6,26 +6,15 @@
 </template>
 
 <script>
-import localStorage from 'utils/store';
-
-const HoldPwdKey = 'isHoldPWD';
-
 export default {
-    data() {
-        return { isHoldPWD: !!localStorage.getItem(HoldPwdKey) };
+    computed: {
+        isHoldPWD() {
+            return !!this.$store.state.env.isHoldPWD;
+        }
     },
     methods: {
         toggleHold() {
-            this.isHoldPWD = !this.isHoldPWD;
-            localStorage.setItem(HoldPwdKey, this.isHoldPWD);
-
-            // [TODO]  holdPWD
-            // const activeAccount = this.$wallet.activeAccount;
-            // if (this.isHoldPWD) {
-            //     activeAccount.holdPWD();
-            // } else {
-            //     activeAccount.releasePWD();
-            // }
+            this.$store.commit('setHoldPwd', !this.isHoldPWD);
         }
     }
 };

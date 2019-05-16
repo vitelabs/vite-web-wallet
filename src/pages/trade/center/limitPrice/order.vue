@@ -75,6 +75,7 @@ import viteInput from 'components/viteInput';
 import slider from 'components/slider';
 import sendTx from 'utils/sendTx';
 import BigNumber from 'utils/bigNumber';
+import { initPwd } from 'components/password/index.js';
 
 const taker = process.env.NODE_ENV === 'dexTestNet' ? 0.0025 : 0.001;
 const maxDigit = 8;
@@ -592,16 +593,14 @@ export default {
                 return;
             }
 
-            // [TODO] initPwd
-            // const activeAccount = this.$wallet.getActiveAccount();
-            // activeAccount.initPwd({
-            //     submit: () => {
-            //         this.newOrder({
-            //             price: this.price,
-            //             quantity: this.quantity
-            //         });
-            //     }
-            // });
+            initPwd({
+                submit: () => {
+                    this.newOrder({
+                        price: this.price,
+                        quantity: this.quantity
+                    });
+                }
+            });
         },
         newOrder({ price, quantity }) {
             const tradeToken = this.activeTxPair ? this.activeTxPair.ftoken : '';
