@@ -57,3 +57,23 @@ export function pwdConfirm({
 
     return true;
 }
+
+export function initPwd({
+    showMask = true,
+    title,
+    submit = () => {},
+    cancel = () => {},
+    content = '',
+    submitTxt = '',
+    cancelTxt = '',
+    exchange = false
+}, isConfirm = false) {
+    const isHide = !isConfirm && !!store.state.env.isHoldPWD;
+    if (isHide) {
+        submit && submit();
+        return true;
+    }
+
+    pwdConfirm({ showMask, title, submit, content, cancel, cancelTxt, submitTxt, exchange }, !this.isHoldPWD);
+    return false;
+}

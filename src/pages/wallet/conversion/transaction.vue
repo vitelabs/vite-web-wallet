@@ -66,6 +66,7 @@ import BigNumber from 'utils/bigNumber';
 import confirm from 'components/confirm';
 import viteInput from 'components/viteInput';
 import process from 'components/slider';
+import { initPwd } from 'components/password/index.js';
 
 const minGwei = 3;
 const maxGwei = 99;
@@ -233,23 +234,21 @@ export default {
 
             this.isShowTrans = false;
 
-            // [TODO] initPwd
-            // const activeAccount = this.$wallet.getActiveAccount();
-            // activeAccount.initPwd({
-            //     submit: () => {
-            //         this.isShowTrans = true;
+            initPwd({
+                submit: () => {
+                    this.isShowTrans = true;
 
-            //         if (this.transType === 'exchange') {
-            //             this.conversion();
-            //             return;
-            //         }
+                    if (this.transType === 'exchange') {
+                        this.conversion();
+                        return;
+                    }
 
-            //         this.sendTx();
-            //     },
-            //     cancel: () => {
-            //         this.closeTrans();
-            //     }
-            // });
+                    this.sendTx();
+                },
+                cancel: () => {
+                    this.closeTrans();
+                }
+            });
         },
         conversion() {
             this.loading = true;

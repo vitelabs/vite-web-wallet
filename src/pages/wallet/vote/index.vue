@@ -70,10 +70,11 @@ import search from 'components/search';
 import secTitle from 'components/secTitle';
 import loading from 'components/loading';
 import confirm from 'components/confirm';
+import { initPwd } from 'components/password/index.js';
 import { timer } from 'utils/asyncFlow';
 import BigNumber from 'utils/bigNumber';
 import $ViteJS from 'utils/viteClient';
-// import sendTx from 'utils/sendTx';
+import sendTx from 'utils/sendTx';
 
 export default {
     components: { secTitle, tooltips, search, loading, confirm },
@@ -159,81 +160,73 @@ export default {
                 return;
             }
 
-            console.log(v);
+            const successCancel = () => {
+                const t = Object.assign({}, v);
+                t.isCache = true;
+                // 撤销投票中
+                t.voteStatus = 'canceling';
+                this.cache = t;
+                this.$toast(this.$t('hint.request', { name: this.$t('walletVote.section1.revoke') }));
+            };
 
-            // [TODO]
-            // const successCancel = () => {
-            //     const t = Object.assign({}, v);
-            //     t.isCache = true;
-            //     // 撤销投票中
-            //     t.voteStatus = 'canceling';
-            //     this.cache = t;
-            //     this.$toast(this.$t('hint.request', { name: this.$t('walletVote.section1.revoke') }));
-            // };
+            const failCancel = e => {
+                this.$toast(this.$t('walletVote.section1.cancelVoteErr'), e);
+            };
 
-            // const failCancel = e => {
-            //     this.$toast(this.$t('walletVote.section1.cancelVoteErr'), e);
-            // };
+            const sendCancel = () => {
+                sendTx('revokeVoting', { tokenId: this.tokenInfo.tokenId }, { pow: true }).then(successCancel).catch(failCancel);
+            };
 
-            // const sendCancel = () => {
-            //     sendTx('revokeVoting', { tokenId: this.tokenInfo.tokenId }, { pow: true }).then(successCancel).catch(failCancel);
-            // };
-
-            // [TODO] initPwd
-            // activeAccount.initPwd({
-            //     title: this.$t('walletVote.revokeVoting'),
-            //     submitTxt: this.$t('walletVote.section1.confirm.submitText'),
-            //     cancelTxt: this.$t('walletVote.section1.confirm.cancelText'),
-            //     submit: sendCancel
-            // }, true);
+            initPwd({
+                title: this.$t('walletVote.revokeVoting'),
+                submitTxt: this.$t('walletVote.section1.confirm.submitText'),
+                cancelTxt: this.$t('walletVote.section1.confirm.cancelText'),
+                submit: sendCancel
+            }, true);
         },
         vote(v) {
-            console.log(v);
+            const successVote = () => {
+                const t = Object.assign({}, v);
+                t.isCache = true;
+                // 投票中
+                t.voteStatus = 'voting';
+                t.nodeStatus = 1;
+                this.cache = t;
+                this.$toast(this.$t('hint.request', { name: this.$t('walletVote.voting') }));
+            };
 
-            // [TODO]
-            // const successVote = () => {
-            //     const t = Object.assign({}, v);
-            //     t.isCache = true;
-            //     // 投票中
-            //     t.voteStatus = 'voting';
-            //     t.nodeStatus = 1;
-            //     this.cache = t;
-            //     this.$toast(this.$t('hint.request', { name: this.$t('walletVote.voting') }));
-            // };
+            const failVote = e => {
+                console.warn(e);
+                const code = e && e.error ? e.error.code || -1 : e ? e.code : -1;
 
-            // const failVote = e => {
-            //     console.warn(e);
-            //     const code = e && e.error ? e.error.code || -1 : e ? e.code : -1;
+                if (code === -36001) {
+                    this.$toast(this.$t('walletVote.addrNoExistErr'));
+                    return;
+                }
 
-            //     if (code === -36001) {
-            //         this.$toast(this.$t('walletVote.addrNoExistErr'));
-            //         return;
-            //     }
+                this.$toast(this.$t('walletVote.section2.voteErr'), e);
+            };
 
-            //     this.$toast(this.$t('walletVote.section2.voteErr'), e);
-            // };
+            const sendVote = () => {
+                sendTx('voting', {
+                    nodeName: v.name,
+                    tokenId: this.tokenInfo.tokenId
+                }).then(successVote).catch(failVote);
+            };
 
-            // const sendVote = () => {
-            //     sendTx('voting', {
-            //         nodeName: v.name,
-            //         tokenId: this.tokenInfo.tokenId
-            //     }).then(successVote).catch(failVote);
-            // };
+            const t = this.haveVote ? 'cover' : 'normal';
 
-            // const t = this.haveVote ? 'cover' : 'normal';
-
-            // [TODO] initPwd
-            // activeAccount.initPwd({
-            //     title: this.$t('walletVote.voting'),
-            //     submitTxt: this.$t(`walletVote.section2.confirm.${ t }.submitText`),
-            //     cancelTxt: this.$t(`walletVote.section2.confirm.${ t }.cancelText`),
-            //     content: this.$t(`walletVote.section2.confirm.${ t }.content`, {
-            //         nodeName: this.voteList[0] && this.voteList[0].nodeName,
-            //         name: v.name
-            //     }),
-            //     submit: sendVote,
-            //     exchange: this.haveVote
-            // }, true);
+            initPwd({
+                title: this.$t('walletVote.voting'),
+                submitTxt: this.$t(`walletVote.section2.confirm.${ t }.submitText`),
+                cancelTxt: this.$t(`walletVote.section2.confirm.${ t }.cancelText`),
+                content: this.$t(`walletVote.section2.confirm.${ t }.content`, {
+                    nodeName: this.voteList[0] && this.voteList[0].nodeName,
+                    name: v.name
+                }),
+                submit: sendVote,
+                exchange: this.haveVote
+            }, true);
         }
     },
     computed: {
