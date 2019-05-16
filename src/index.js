@@ -4,7 +4,7 @@ require('es6-promise').polyfill();
 import 'assets/scss/mixins.scss';
 import 'utils/performance';
 import 'utils/viteClient.js';
-import 'utils/wallet';
+import 'wallet';
 
 import Vue from 'vue';
 
@@ -16,7 +16,10 @@ import store from './store';
 
 import plugin from 'plugins/addPlugin';
 import directives from 'plugins/directives';
-import resaveAccKeystore from 'utils/resaveAccKeystore.js';
+import { resaveAccList, resaveLastAcc } from 'utils/store/resave';
+
+resaveAccList();
+resaveLastAcc();
 
 // $onKeyDown $offKeyDown $validAmount $trim $toast $confirm $statistics $wallet
 Vue.use(plugin);
@@ -35,8 +38,6 @@ setTimeout(() => {
 
 // Loading finish and App init finish also.
 setTimeout(() => {
-    resaveAccKeystore();
-
     new Vue({
         el: '#app',
         components: { App },

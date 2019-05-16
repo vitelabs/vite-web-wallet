@@ -117,7 +117,8 @@ export default {
     },
     computed: {
         viteAddr() {
-            return this.$store.state.activeAccount.address;
+            const activeAccount = this.$store.state.wallet.activeAcc;
+            return activeAccount ? activeAccount.address : '';
         },
         netStatus() {
             return this.$store.state.env.clientStatus;
@@ -232,22 +233,23 @@ export default {
 
             this.isShowTrans = false;
 
-            const activeAccount = this.$wallet.getActiveAccount();
-            activeAccount.initPwd({
-                submit: () => {
-                    this.isShowTrans = true;
+            // [TODO] initPwd
+            // const activeAccount = this.$wallet.getActiveAccount();
+            // activeAccount.initPwd({
+            //     submit: () => {
+            //         this.isShowTrans = true;
 
-                    if (this.transType === 'exchange') {
-                        this.conversion();
-                        return;
-                    }
+            //         if (this.transType === 'exchange') {
+            //             this.conversion();
+            //             return;
+            //         }
 
-                    this.sendTx();
-                },
-                cancel: () => {
-                    this.closeTrans();
-                }
-            });
+            //         this.sendTx();
+            //     },
+            //     cancel: () => {
+            //         this.closeTrans();
+            //     }
+            // });
         },
         conversion() {
             this.loading = true;

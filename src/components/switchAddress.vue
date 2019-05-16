@@ -20,6 +20,7 @@
 
 <script>
 import ellipsisAddr from 'utils/ellipsisAddr.js';
+import { StatusMap } from 'wallet';
 
 export default {
     props: {
@@ -32,15 +33,18 @@ export default {
         return { isShowList: false };
     },
     computed: {
+        isLogin() {
+            return this.$store.state.wallet.status === StatusMap.UNLOCK;
+        },
         address() {
-            return this.$store.state.activeAccount.address;
+            const activeAcc = this.$store.state.wallet.activeAcc;
+            return activeAcc ? activeAcc.address : '';
         },
         showStr() {
             if (!this.isShowAddr) {
                 return this.showName;
             }
-
-            return `${ this.showName }: ${ this.showAddr }`;
+            return this.showName ? `${ this.showName }: ${ this.showAddr }` : this.showAddr;
         },
         showAddr() {
             return ellipsisAddr(this.address, 5);
@@ -48,31 +52,28 @@ export default {
         showName() {
             let i;
             for (i = 0; i < this.addrList.length;i++) {
-                if (this.addrList[i].addr === this.address) {
+                if (this.addrList[i].address === this.address) {
                     break;
                 }
             }
             if (i >= this.addrList.length) {
                 return '';
             }
-
-            return this.addrList[i].name || `${ this.$t('addrName', { index: i + 1 }) }`;
+            return this.addrList[i].name || `${ this.$t('addrName', { index: this.addrList[i].idx + 1 }) }`;
         },
         addrList() {
-            return this.$store.state.activeAccount.addrList;
+            return this.$store.state.wallet.addrList;
         },
         notAllowed() {
             return this.addrList.length <= 1;
         }
     },
-    watch: {
-        isLogin: function () {
-            this.setAddrList();
-        }
-    },
     methods: {
         setDefaultAddr(address, index) {
-            this.$store.dispatch('changeDefaultAddress', { address, index });
+            if (!this.isLogin) {
+                return;
+            }
+            this.$store.commit('switchActiveAcc', { address, index });
             this.toggleList();
         },
         toggleList() {

@@ -85,16 +85,12 @@ export default {
         }
     },
     data() {
-        const activeAccount = this.$wallet.getActiveAccount();
-
         return {
             nodeName: '',
             nodeNameErr: '',
             producerAddr: '',
             producerAddrErr: '',
             tipsType: '',
-
-            activeAccount,
             loading: false
         };
     },
@@ -103,7 +99,8 @@ export default {
     },
     computed: {
         quotaAddr() {
-            return this.$store.state.activeAccount.address;
+            const activeAccount = this.$store.state.wallet.activeAcc;
+            return activeAccount ? activeAccount.address : '';
         },
         regNameList() {
             return this.$store.getters.regNameList;
@@ -212,15 +209,16 @@ export default {
                 return;
             }
 
-            this.activeAccount.initPwd({
-                title: this.$t('walletSBP.confirm.title'),
-                submitTxt: this.$t('walletSBP.confirm.rightBtn'),
-                cancelTxt: this.$t('walletSBP.confirm.leftBtn'),
-                content: this.$t('walletSBP.confirm.describe', { amount }),
-                submit: () => {
-                    this.sendRegisterTx();
-                }
-            }, true);
+            // [TODO] initPwd
+            // this.activeAccount.initPwd({
+            //     title: this.$t('walletSBP.confirm.title'),
+            //     submitTxt: this.$t('walletSBP.confirm.rightBtn'),
+            //     cancelTxt: this.$t('walletSBP.confirm.leftBtn'),
+            //     content: this.$t('walletSBP.confirm.describe', { amount }),
+            //     submit: () => {
+            //         this.sendRegisterTx();
+            //     }
+            // }, true);
         },
         sendRegisterTx() {
             this.loading = true;

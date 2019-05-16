@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import VueI18n from 'vue-i18n';
-import localStorage from 'utils/localStorage';
+import localStorage from 'utils/store';
 
 import en from './en';
 import zh from './zh';

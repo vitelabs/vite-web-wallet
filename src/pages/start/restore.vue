@@ -24,8 +24,11 @@
 </template>
 
 <script>
-import create from './create.vue';
+import { hdAddr } from '@vite/vitejs';
+import $ViteJS from 'utils/viteClient';
 import loading from 'components/loading.vue';
+import { saveHDAccount } from 'wallet';
+import create from './create.vue';
 
 export default {
     components: { create, loading },
@@ -73,31 +76,85 @@ export default {
 
             this.restoreAccount(mnemonic, name, pass);
         },
-        restoreAccount(mnemonic, name, pass) {
+
+        async restoreAccount(mnemonic, name, pass) {
             this.isLoading = true;
-            this.$wallet.restoreAccount(mnemonic, name, pass).then(() => {
+
+            let addrNum;
+            let addrObj;
+            try {
+                const res = await this.fetchAddrNum(mnemonic);
+                addrNum = res.addrNum;
+                addrObj = res.addrObj;
+            } catch (err) {
+                console.warn(err);
+                if (err && err.code === 500005) {
+                    this.errMsg = 'mnemonic.error';
+                } else {
+                    this.errMsg = 'hint.nodeErr';
+                }
+                this.isLoading = false;
+            }
+
+            saveHDAccount({
+                name,
+                pass,
+                hdAddrObj: {
+                    addr: addrObj,
+                    id: hdAddr.getId(mnemonic),
+                    entropy: hdAddr.getEntropyFromMnemonic(mnemonic)
+                },
+                addrNum
+            }).then(id => {
                 if (!this.isLoading) {
                     return;
                 }
 
                 this.isLoading = false;
-
-                const activeAccount = this.$wallet.getActiveAccount();
-                activeAccount.rename(name);
-                activeAccount.save();
-
-                this.finishCb && this.finishCb();
-                this.$router.push({ name: 'start' });
-            })
-                .catch(err => {
-                    console.warn(err);
-                    if (err && err.code === 500005) {
-                        this.errMsg = 'mnemonic.error';
-                    } else {
-                        this.errMsg = 'hint.nodeErr';
-                    }
-                    this.isLoading = false;
+                this.finishCb && this.finishCb(id);
+                this.$router.push({
+                    name: 'start',
+                    params: { id }
                 });
+            }).catch(err => {
+                console.warn(err);
+                this.isLoading = false;
+                this.$toast(this.$t('hint.err'));
+            });
+        },
+        async fetchAddrNum(mnemonic) {
+            const num = 10;
+            let addrs;
+
+            try {
+                addrs = hdAddr.getAddrsFromMnemonic(mnemonic, 0, num);
+            } catch (err) {
+                throw { code: 500005 };
+            }
+
+            const requests = [];
+            for (let i = 0; i < num; i++) {
+                requests.push($ViteJS.getBalance(addrs[i].hexAddr));
+            }
+
+            const data = await Promise.all(requests);
+            let index = 0;
+
+            data.forEach((item, i) => {
+                if (!item) {
+                    return;
+                }
+                const account = item.balance;
+                const onroad = item.onroad;
+                if ((account && +account.totalNumber) || (onroad && +onroad.totalNumber)) {
+                    index = i;
+                }
+            });
+
+            return {
+                addrNum: index + 1,
+                addrObj: addrs[0]
+            };
         }
     }
 };

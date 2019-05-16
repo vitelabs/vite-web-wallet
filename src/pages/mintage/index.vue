@@ -133,7 +133,10 @@ export default {
             });
         },
         getOwnerToken() {
-            const activeAccount = this.$wallet.getActiveAccount();
+            const activeAccount = this.$store.state.wallet.activeAcc;
+            if (!activeAccount) {
+                return;
+            }
 
             activeAccount.getTokenInfoListByOwner().then(data => {
                 this.tokenList = data;

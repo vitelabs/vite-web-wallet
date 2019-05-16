@@ -10,7 +10,7 @@
         </div>
         <div class="hint">{{ $t('startImport.dragDrop.hint') }}</div>
         <div @click="openFile" class="__btn __btn_all_in __pointer">
-            <input ref="file" type="file" name="file" style="display:none;"/>
+            <input ref="file" type="file" name="file"/>
             {{ $t('startImport.dragDrop.guide') }}
         </div>
         <span class="__btn __btn_border __pointer" @click="back" >{{ $t('btn.back') }}</span>
@@ -58,7 +58,6 @@ export default {
 
                 if (!result) {
                     this.errMsg = 'startImport.dragDrop.err1';
-
                     return;
                 }
 

@@ -8,10 +8,10 @@
 
 <script>
 export default {
-    data() {
-        const activeAccount = this.$wallet.getActiveAccount();
-
-        return { isHaveUsers: !!activeAccount };
+    computed: {
+        isHaveUsers() {
+            return !!this.$store.state.wallet.currHDAcc;
+        }
     },
     methods: {
         leftClick() {
@@ -20,15 +20,15 @@ export default {
                 return;
             }
 
-            const activeAccount = this.$wallet.getActiveAccount();
-            activeAccount && activeAccount.unlockAccount();
+            // [TODO] pwdConfirm
+            // const activeAccount = this.$wallet.getActiveAccount();
+            // activeAccount && activeAccount.unlockAccount();
         },
         rightClick() {
             if (!this.isHaveUsers) {
                 this.$router.push({ name: 'startCreate' });
                 return;
             }
-
             this.$router.push({ name: 'start' });
         }
     }

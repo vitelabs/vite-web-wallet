@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import localStorage from 'utils/localStorage';
+import localStorage from 'utils/store';
 
 const HoldPwdKey = 'isHoldPWD';
 
@@ -19,12 +19,13 @@ export default {
             this.isHoldPWD = !this.isHoldPWD;
             localStorage.setItem(HoldPwdKey, this.isHoldPWD);
 
-            const activeAccount = this.$wallet.activeAccount;
-            if (this.isHoldPWD) {
-                activeAccount.holdPWD();
-            } else {
-                activeAccount.releasePWD();
-            }
+            // [TODO]  holdPWD
+            // const activeAccount = this.$wallet.activeAccount;
+            // if (this.isHoldPWD) {
+            //     activeAccount.holdPWD();
+            // } else {
+            //     activeAccount.releasePWD();
+            // }
         }
     }
 };

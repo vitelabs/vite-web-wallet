@@ -66,13 +66,10 @@ import viteAddress from 'components/address';
 import $ViteJS from 'utils/viteClient';
 import bigNumber from 'utils/bigNumber';
 
-let activeAccount = null;
-
 export default {
     components: { viteAddress },
     data() {
         return {
-            account: {},
             isShowNameInput: false,
             editName: '',
             copySuccess: false,
@@ -81,11 +78,14 @@ export default {
             getTestTokenAble: true
         };
     },
-    mounted() {
-        activeAccount = this.$wallet.getActiveAccount();
-        this.account = this.getSimpleAcc();
-    },
     computed: {
+        account() {
+            const activeAccount = this.$store.state.wallet.activeAcc;
+            return {
+                name: this.$store.state.wallet.name,
+                addr: activeAccount ? activeAccount.address || '' : ''
+            };
+        },
         netStatus() {
             return this.$store.state.env.clientStatus;
         },
@@ -98,9 +98,6 @@ export default {
                 return bigNumber.plus(bigNumber.multi(balanceInfo[cur].balance, rateMap[cur][currency]), pre);
             }, 0);
             return `${ this.$i18n.locale === 'en' ? '$' : '¥' }${ total }`;
-        },
-        defaultAddr() {
-            return this.$store.state.activeAccount.address;
         }
     },
     methods: {
@@ -132,12 +129,6 @@ export default {
                 console.warn(err);
                 this.$toast(this.$t('wallet.hint.tErr'), err);
             });
-        },
-        getSimpleAcc() {
-            return {
-                name: activeAccount ? activeAccount.getName() : '',
-                addr: this.defaultAddr
-            };
         },
 
         clearEditName() {
@@ -176,9 +167,8 @@ export default {
                 return;
             }
 
-            activeAccount.rename(this.editName);
+            this.$store.commit('renameCurrHDAcc', this.editName);
             this.clearEditName();
-            this.account = this.getSimpleAcc();
         }
     }
 };

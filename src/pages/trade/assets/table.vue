@@ -103,7 +103,8 @@ export default {
     },
     computed: {
         addr() {
-            return this.$store.state.activeAccount.address;
+            const activeAccount = this.$store.state.wallet.activeAcc;
+            return activeAccount ? activeAccount.address : '';
         },
         detailList() {
             return Object.keys(this.detailData).map(k => {

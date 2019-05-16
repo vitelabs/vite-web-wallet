@@ -1,7 +1,6 @@
 import toast from 'components/toast/index.js';
 import confirm from 'components/confirm/index.js';
 import statistics from 'utils/statistics';
-import { wallet } from 'utils/wallet';
 import getTokenIcon from 'utils/getTokenIcon';
 
 document.addEventListener('drop', e => {
@@ -77,8 +76,6 @@ export default {
         Vue.prototype.$confirm = confirm;
 
         Vue.prototype.$statistics = statistics;
-
-        Vue.prototype.$wallet = wallet;
 
         // ----------filters
 

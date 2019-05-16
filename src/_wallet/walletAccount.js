@@ -4,17 +4,17 @@ import acc from 'utils/storeAcc.js';
 import $ViteJS from 'utils/viteClient';
 
 class walletAccount extends _hdAccount {
-    constructor({ addrNum, defaultInx, mnemonic, bits, encryptObj, lang }) {
+    constructor({ addrNum, defaultInx, mnemonic, bits, keystore, lang }) {
         super({ client: $ViteJS, mnemonic, bits, addrNum, lang });
 
         this.defaultInx = defaultInx || 0;
-        this.encryptObj = encryptObj || null;
+        this.keystore = keystore || null;
         this.unlockAcc = null;
     }
 
     verify(pass) {
-        return this.encryptObj
-            ? _keystore.decrypt(JSON.stringify(this.encryptObj), pass, vitecrypto)
+        return this.keystore
+            ? _keystore.decrypt(JSON.stringify(this.keystore), pass, vitecrypto)
             : Promise.resolve(false);
     }
 
@@ -23,10 +23,10 @@ class walletAccount extends _hdAccount {
             return Promise.reject(false);
         }
 
-        return _keystore.encrypt(this.entropy, pass, null, vitecrypto).then(encryptObj => {
-            const obj = JSON.parse(encryptObj);
-            this.encryptObj = obj;
-            return encryptObj;
+        return _keystore.encrypt(this.entropy, pass, null, vitecrypto).then(keystore => {
+            const obj = JSON.parse(keystore);
+            this.keystore = obj;
+            return keystore;
         });
     }
 
@@ -38,7 +38,7 @@ class walletAccount extends _hdAccount {
             defaultInx: this.defaultInx,
             addr: this.getDefaultAddr(),
             addrNum: this.addrList.length,
-            encryptObj: this.encryptObj
+            keystore: this.keystore
         }, index);
     }
 

@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import storage from 'utils/localStorage';
+import storage from 'utils/store';
 
 const GuideKey = 'beginnerGuide';
 

@@ -1,6 +1,6 @@
 import { hdAddr as _hdAddr, keystore as _keystore, utils, constant } from '@vite/vitejs';
 import vitecrypto from 'testwebworker';
-import storeAcc from 'utils/storeAcc.js';
+import { getAccList, getLastAcc, setLastAcc } from 'utils/store';
 import statistics from 'utils/statistics';
 import $ViteJS from 'utils/viteClient';
 
@@ -15,17 +15,8 @@ class _wallet {
         this.isLogin = false;
         this.onLoginList = [];
         this.onLogoutList = [];
-        this.lastPage = '';
 
         this.setLastActiveAcc();
-    }
-
-    setLastPage(name) {
-        this.lastPage = name;
-    }
-
-    clearLastPage() {
-        this.lastPage = '';
     }
 
     getActiveAccount() {
@@ -91,21 +82,6 @@ class _wallet {
         });
     }
 
-    importKeystore(data) {
-        const keystore = _keystore.isValid(data);
-        if (!keystore) {
-            return false;
-        }
-
-        this.newActiveAcc({
-            keystore,
-            type: 'keystore'
-        });
-        this.activeWalletAcc.save();
-
-        return keystore.hexaddress;
-    }
-
     async restoreAccount(mnemonic, name, pass, lang = LangList.english) {
         const num = 10;
         const addrs = _hdAddr.getAddrsFromMnemonic(mnemonic, 0, num, lang);
@@ -165,13 +141,10 @@ class _wallet {
     }
 
     login({ id, entropy, addr }, pass) {
+        console.log(id, entropy, addr);
+
         if ((!entropy && !addr && !id) || !pass) {
             return Promise.reject(false);
-        }
-
-        if (addr && !entropy && !id) {
-            this.isLogin = this._loginKeystoreAcc(addr, pass);
-            return this.isLogin;
         }
 
         return this._loginWalletAcc({ id, entropy, pass }).then(data => {
@@ -182,54 +155,6 @@ class _wallet {
 
             return data;
         });
-    }
-
-    async _loginKeystoreAcc(addr, pass) {
-        const acc = getAccFromAddr(addr);
-        const keystore = acc.keystore;
-
-        const before = new Date().getTime();
-
-        const privKey = await _keystore.decrypt(JSON.stringify(keystore), pass, vitecrypto);
-
-        const after = new Date().getTime();
-        const n = (keystore.crypto && keystore.crypto.scryptparams && keystore.crypto.scryptparams.n)
-            ? keystore.crypto.scryptparams.n : 0;
-        statistics.event('keystore-decrypt', n, 'time', after - before);
-
-        if (n !== 262144) {
-            this.newActiveAcc({
-                name: acc.name,
-                pass,
-                keystore,
-                privateKey: privKey,
-                type: 'keystore'
-            });
-            storeAcc.setLast({
-                addr,
-                name: acc.name
-            });
-
-            return true;
-        }
-
-        // Reduce the difficuly. 262144 to 4096
-        const keystoreStr = await _keystore.encryptOldKeystore(privKey, pass, vitecrypto);
-        this.newActiveAcc({
-            name: acc.name,
-            pass,
-            keystore: JSON.parse(keystoreStr),
-            privateKey: privKey,
-            type: 'keystore'
-        });
-        this.activeWalletAcc.save();
-
-        storeAcc.setLast({
-            addr,
-            name: acc.name
-        });
-
-        return true;
     }
 
     async _loginWalletAcc({ id, entropy, pass }) {
@@ -247,15 +172,15 @@ class _wallet {
             }
         }
 
-        const encryptObj = acc.encryptObj;
-        entropy = entropy || encryptObj.encryptentropy;
+        const keystore = acc.keystore;
+        entropy = entropy || keystore.encryptentropy;
         // Very very impotant!!!!!
-        encryptObj.encryptentropy = encryptObj.encryptentropy || entropy;
+        keystore.encryptentropy = keystore.encryptentropy || entropy;
 
         const before = new Date().getTime();
-        const decryptEntropy = await _keystore.decrypt(JSON.stringify(encryptObj), pass, vitecrypto);
+        const decryptEntropy = await _keystore.decrypt(JSON.stringify(keystore), pass, vitecrypto);
         const after = new Date().getTime();
-        statistics.event('mnemonic-decrypt', encryptObj.version || '1', 'time', after - before);
+        statistics.event('mnemonic-decrypt', keystore.version || '1', 'time', after - before);
 
         if (!decryptEntropy) {
             return false;
@@ -263,12 +188,12 @@ class _wallet {
 
         const lang = acc.lang || LangList.english;
         const mnemonic = _hdAddr.getMnemonicFromEntropy(decryptEntropy, lang);
-        const defaultInx = +acc.defaultInx > 10 || +acc.defaultInx < 0 ? 0 : +acc.defaultInx;
+        const defaultInx = +acc.Idx > 10 || +acc.Idx < 0 ? 0 : +acc.Idx;
 
         this.newActiveAcc({
             pass,
             defaultInx,
-            encryptObj: acc.encryptObj,
+            keystore: acc.keystore,
             addrNum: acc.addrNum,
             name: acc.name,
             mnemonic,
@@ -281,7 +206,7 @@ class _wallet {
             this.activeWalletAcc.save(i);
         }
 
-        storeAcc.setLast({
+        setLastAcc({
             id,
             entropy,
             name: acc.name
@@ -292,20 +217,19 @@ class _wallet {
     }
 
     getList() {
-        return storeAcc.getList();
+        return getAccList();
     }
 
     getLast() {
         if (this.activeWalletAcc) {
             return {
                 id: this.activeWalletAcc.getId(),
-                entropy: this.activeWalletAcc.getEntropy(),
                 addr: this.activeWalletAcc.getDefaultAddr(),
                 name: this.activeWalletAcc.name
             };
         }
 
-        const last = storeAcc.getLast();
+        const last = getLastAcc();
         if (!last) {
             return null;
         }
@@ -315,11 +239,6 @@ class _wallet {
             acc = getAccFromAddr(last.addr);
         } else if (last.id) {
             acc = getAccFromId(last.id);
-        } else {
-            const result = getAccFromEntropy(last.entropy);
-            if (result) {
-                acc = result.account;
-            }
         }
 
         if (!acc) {
@@ -335,7 +254,7 @@ export const wallet = new _wallet();
 
 
 function getAccFromId(id) {
-    const list = storeAcc.getList();
+    const list = getAccList();
     if (!list) {
         return null;
     }
@@ -350,7 +269,7 @@ function getAccFromId(id) {
 
 function getAccFromEntropy(entropy) {
     let result = null;
-    const list = storeAcc.getList();
+    const list = getAccList();
     for (let i = 0; i < list.length; i++) {
         if (list[i].entropy === entropy) {
             if (!list[i].id) {
@@ -371,7 +290,7 @@ function getAccFromEntropy(entropy) {
 }
 
 function getAccFromAddr(address) {
-    const list = storeAcc.getList();
+    const list = getAccList();
     for (let i = 0; i < list.length; i++) {
         if (list[i].addr === address) {
             return list[i];

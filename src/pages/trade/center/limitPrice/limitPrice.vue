@@ -18,20 +18,14 @@
 <script>
 import logoutView from './logout';
 import order from './order.vue';
+import { StatusMap } from 'wallet';
 
 export default {
     components: { logoutView, order },
-    mounted() {
-        this.isLogin = !!this.$wallet.isLogin;
-        this.$wallet.onLogin(() => {
-            this.isLogin = true;
-        });
-        this.$wallet.onLogout(() => {
-            this.isLogin = false;
-        });
-    },
-    data() {
-        return { isLogin: !!this.$wallet.isLogin };
+    computed: {
+        isLogin() {
+            return this.$store.state.wallet.status === StatusMap.UNLOCK;
+        }
     }
 };
 </script>

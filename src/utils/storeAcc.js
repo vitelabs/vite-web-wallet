@@ -1,17 +1,12 @@
-import storage from 'utils/localStorage.js';
-
-const ACC_KEY = 'ACC_LIST';
-const LAST_KEY = 'ACC_LAST';
-const NAME_KEY = 'NAME_COUNT';
+import { getAccList, setAccList } from 'utils/store';
 
 export default {
-    getList,
     add(account, index = -1) {
         if (!account.addr && !account.entropy && !account.id) {
             return;
         }
 
-        const data = getList() || [];
+        const data = getAccList() || [];
         if (index > -1 && index < data.length) {
             data.splice(index, 1);
         }
@@ -24,7 +19,6 @@ export default {
             if (saveIndex === -1) {
                 saveIndex = saveList.length;
                 saveList.push(acc);
-
                 return;
             }
 
@@ -54,25 +48,6 @@ export default {
         }
 
         (saveIndex === -1) && saveList.push(account);
-        storage.setItem(ACC_KEY, saveList);
-    },
-    setAccList(accounts) {
-        storage.setItem(ACC_KEY, accounts);
-    },
-    setNameCount(count) {
-        storage.setItem(NAME_KEY, count);
-    },
-    getNameCount() {
-    },
-    getLast() {
-        return storage.getItem(LAST_KEY);
-    },
-    setLast(acc) {
-        storage.setItem(LAST_KEY, acc);
+        setAccList(saveList);
     }
 };
-
-
-function getList() {
-    return storage.getItem(ACC_KEY);
-}

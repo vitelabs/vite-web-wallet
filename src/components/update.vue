@@ -10,9 +10,8 @@
 <script>
 import version from 'version';
 import notice from 'components/notice';
-import localStorage from 'utils/localStorage';
+import { getVersion, setVersion } from 'utils/store';
 
-const version_key = 'version';
 const showNum = 1;
 
 export default {
@@ -30,7 +29,7 @@ export default {
         // "en": "0.0.1 english version",
         // "time": "22329382932"
         // }
-        const lastVersion = localStorage.getItem(version_key) || null;
+        const lastVersion = getVersion() || null;
 
         const currentCode = lastVersion ? lastVersion.currentCode || 0 : 0;
         let lastList = lastVersion ? lastVersion.showList || [] : [];
@@ -49,7 +48,6 @@ export default {
             this.versionList = this.versionList.slice(this.versionList.length - showNum);
             this.latestCode = this.versionList[this.versionList.length - 1].code;
             this.saveVersion();
-
             return;
         }
 
@@ -65,7 +63,7 @@ export default {
             this.saveVersion();
         },
         saveVersion() {
-            localStorage.setItem(version_key, {
+            setVersion({
                 currentCode: this.latestCode,
                 showList: this.versionList
             });

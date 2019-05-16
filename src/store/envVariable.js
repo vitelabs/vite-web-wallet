@@ -1,6 +1,6 @@
-import localStorage from 'utils/localStorage';
+import localStorage from 'utils/store';
 
-// [TODO] utils/localStorage 统一
+// [TODO] utils/store 统一
 
 const currencyKey = 'currency';
 const autoLogoutKey = 'autoLogoutTime';
@@ -14,7 +14,8 @@ const state = {
     clientStatus: -1,
     lang: '',
     currency: localStorage.getItem(currencyKey) || '',
-    autoLogoutTime: localStorage.getItem(autoLogoutKey) || 5
+    autoLogoutTime: localStorage.getItem(autoLogoutKey) || 5,
+    lastPage: ''
 };
 
 const mutations = {
@@ -39,6 +40,9 @@ const mutations = {
     setAutoLogoutTime(state, time) {
         localStorage.setItem(autoLogoutKey, time);
         state.autoLogoutTime = time;
+    },
+    setLastPage(state, lastPage) {
+        state.lastPage = lastPage;
     }
 };
 

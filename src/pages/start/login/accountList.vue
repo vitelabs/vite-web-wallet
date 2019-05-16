@@ -13,6 +13,7 @@
 
 <script>
 import ellipsisAddr from 'utils/ellipsisAddr.js';
+import { getList } from 'wallet';
 
 export default {
     props: {
@@ -29,9 +30,9 @@ export default {
     },
     methods: {
         initAccountList() {
-            const list = this.$wallet.getList() || [];
+            const list = getList() || [];
             list.forEach(acc => {
-                acc.showAddr = ellipsisAddr(acc.addr);
+                acc.showAddr = ellipsisAddr(acc.activeAddr);
             });
             this.accountList = list;
         }

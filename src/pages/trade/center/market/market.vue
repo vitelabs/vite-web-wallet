@@ -59,7 +59,7 @@
 <script>
 import viteInput from 'components/viteInput';
 import loading from 'components/loading';
-import localStorage from 'utils/localStorage';
+import localStorage from 'utils/store';
 import { subTask } from 'utils/proto/subTask';
 import { assignPair } from 'services/trade';
 
@@ -67,7 +67,7 @@ import orderArrow from './orderArrow';
 import tabList from './tabList';
 import txPairList from './txPairList';
 
-const FavoriteKey = 'favoriteTxPairs';
+const FavoriteKey = 'favoriteTickers';
 let defaultPairTimer = null;
 let assignPairTimerList = [];
 
