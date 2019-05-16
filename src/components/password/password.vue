@@ -159,7 +159,7 @@ export default {
             }
 
             this.isLoading = true;
-            this.$store.commit('login', password).then(() => {
+            this.$store.dispatch('login', password).then(() => {
                 this.isLoading = false;
                 if (!this.password) {
                     return;

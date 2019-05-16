@@ -35,6 +35,7 @@
 import userImg from 'assets/imgs/mine.svg';
 import pagination from 'components/pagination.vue';
 import tableList from 'components/tableList.vue';
+import { pwdConfirm } from 'components/password/index.js';
 import date from 'utils/date.js';
 import { timer } from 'utils/asyncFlow';
 import BigNumber from 'utils/bigNumber';
@@ -153,9 +154,7 @@ export default {
                 return;
             }
 
-            // [TODO] pwdConfirm
-            // const activeAccount = this.$wallet.getActiveAccount();
-            // activeAccount && activeAccount.unlockAccount();
+            pwdConfirm({ type: 'unlockAccount' });
         },
         gotoDetail(addr) {
             const locale = this.$i18n.locale === 'zh' ? 'zh/' : '';
