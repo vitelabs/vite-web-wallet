@@ -74,11 +74,8 @@ export default {
         this.clearAll();
     },
     data() {
-        const activeAccount = this.$wallet.getActiveAccount();
-
         return {
             minNum,
-            activeAccount,
             amount: '',
             toAddr: '',
             isValidAddress: true,
@@ -89,7 +86,8 @@ export default {
     },
     computed: {
         addr() {
-            return this.$store.state.activeAccount.address;
+            const activeAccount = this.$store.state.wallet.activeAcc;
+            return activeAccount ? activeAccount.address : '';
         },
         btnUnuse() {
             return this.loading || !this.isValidAddress || this.amountErr || !this.amount || !this.toAddr;
@@ -186,15 +184,16 @@ export default {
                 return;
             }
 
-            this.activeAccount.initPwd({
-                title: this.$t('submitStaking'),
-                submitTxt: this.$t('walletQuota.confirm.submit.rightBtn'),
-                cancelTxt: this.$t('walletQuota.confirm.submit.leftBtn'),
-                content: this.$t('walletQuota.confirm.submit.describe', { amount: this.amount }),
-                submit: () => {
-                    this._sendPledgeTx();
-                }
-            }, true);
+            // [TODO] initPwd
+            // this.activeAccount.initPwd({
+            //     title: this.$t('submitStaking'),
+            //     submitTxt: this.$t('walletQuota.confirm.submit.rightBtn'),
+            //     cancelTxt: this.$t('walletQuota.confirm.submit.leftBtn'),
+            //     content: this.$t('walletQuota.confirm.submit.describe', { amount: this.amount }),
+            //     submit: () => {
+            //         this._sendPledgeTx();
+            //     }
+            // }, true);
         },
         _sendPledgeTx() {
             this.$statistics.event('Vite_web_wallet', 'quota', 'ConfirmQuota');

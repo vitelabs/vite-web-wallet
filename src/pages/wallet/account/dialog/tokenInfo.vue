@@ -104,7 +104,8 @@ export default {
             return !this.urlCache;
         },
         defaultAddr() {
-            return this.$store.state.activeAccount.address;
+            const activeAccount = this.$store.state.wallet.activeAcc;
+            return activeAccount ? activeAccount.address : '';
         }
     },
     methods: {

@@ -60,7 +60,8 @@ export default {
             return this.address;
         },
         defaultAddr() {
-            return this.$store.state.activeAccount.address;
+            const activeAccount = this.$store.state.wallet.activeAcc;
+            return activeAccount ? activeAccount.address : '';
         }
     },
     methods: {

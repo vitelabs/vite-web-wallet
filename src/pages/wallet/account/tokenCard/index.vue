@@ -91,7 +91,8 @@ export default {
             return this.token.type === 'THIRD_GATE' && (!this.token.totalAmount || bigNumber.isEqual(this.token.totalAmount, '0'));
         },
         address() {
-            return this.$store.state.activeAccount.address;
+            const activeAccount = this.$store.state.wallet.activeAcc;
+            return activeAccount ? activeAccount.address : '';
         },
         gateName() {
             if (this.$store.getters.mapToken2Gate[this.token.tokenId]) {

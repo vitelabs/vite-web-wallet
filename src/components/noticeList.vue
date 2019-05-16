@@ -31,7 +31,7 @@ export default {
     },
     computed: {
         address() {
-            return this.$store.state.activeAccount.address;
+            return this.$store.state.wallet.activeAcc ? this.$store.state.wallet.activeAcc.address : '';
         }
     },
     watch: {

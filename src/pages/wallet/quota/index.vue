@@ -60,10 +60,7 @@ export default {
         }
     },
     data() {
-        const activeAccount = this.$wallet.getActiveAccount();
-
         return {
-            activeAccount,
             tokenInfo: {},
             loadingToken: false,
             showConfirmType: '',
@@ -147,18 +144,20 @@ export default {
                 return;
             }
 
-            const amount = this.cancelAmount;
-            this.closeConfirm();
+            // [TODO]
+            // const amount = this.cancelAmount;
+            // this.closeConfirm();
 
-            this.activeAccount.initPwd({
-                submit: () => {
-                    const txListEle = this.$refs.txList;
-                    if (!txListEle) {
-                        return;
-                    }
-                    txListEle._sendCancelPledgeTx(amount);
-                }
-            });
+            // [TODO] initPwd
+            // this.activeAccount.initPwd({
+            //     submit: () => {
+            //         const txListEle = this.$refs.txList;
+            //         if (!txListEle) {
+            //             return;
+            //         }
+            //         txListEle._sendCancelPledgeTx(amount);
+            //     }
+            // });
         },
 
         sendPledgeTx({ toAddress, amount }, type, cb) {

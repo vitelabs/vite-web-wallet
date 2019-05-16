@@ -163,18 +163,19 @@ export default {
                 return;
             }
 
-            const activeAccount = this.$wallet.getActiveAccount();
-            const isHold = activeAccount.initPwd({
-                showMask: false,
-                submit: () => {
-                    this.isShowTrans = true;
-                    this.transfer();
-                },
-                cancel: () => {
-                    this.isShowTrans = true;
-                }
-            });
-            !isHold && (this.isShowTrans = false);
+            // [TODO] initPwd
+            // const activeAccount = this.$wallet.getActiveAccount();
+            // const isHold = activeAccount.initPwd({
+            //     showMask: false,
+            //     submit: () => {
+            //         this.isShowTrans = true;
+            //         this.transfer();
+            //     },
+            //     cancel: () => {
+            //         this.isShowTrans = true;
+            //     }
+            // });
+            // !isHold && (this.isShowTrans = false);
         },
 
         transfer() {
@@ -184,14 +185,7 @@ export default {
             }
 
             this.loading = true;
-
-            const activeAccount = this.$wallet.getActiveAccount();
             const amount = bigNumber.toMin(this.amount, this.token.decimals);
-
-            if (!activeAccount) {
-                this.$toast(this.$t('hint.err'));
-                return;
-            }
 
             const transError = (msg, err) => {
                 this.loading = false;

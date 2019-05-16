@@ -107,6 +107,7 @@ let webpackConfig = {
             vue: 'vue/dist/vue.js',
             charting: CHARTING_PATH,
             src: SRC_PATH,
+            wallet: path.join(SRC_PATH, '/wallet'),
             services: path.join(SRC_PATH, '/services'),
             components: path.join(SRC_PATH, '/components'),
             pages: path.join(SRC_PATH, '/pages'),
@@ -115,6 +116,7 @@ let webpackConfig = {
             utils: path.join(SRC_PATH, '/utils'),
             plugins: path.join(SRC_PATH, '/plugins'),
             i18n: path.join(SRC_PATH, '/i18n'),
+            store: path.join(SRC_PATH, '/store'),
             version: path.join(SRC_PATH, '../version.json')
         },
         extensions: [ '.js', '.scss', '.vue', '.json' ]

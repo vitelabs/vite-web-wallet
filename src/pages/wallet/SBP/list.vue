@@ -77,17 +77,15 @@ export default {
         this.fetchList();
     },
     data() {
-        const activeAccount = this.$wallet.getActiveAccount();
-
         return {
-            activeAccount,
             showTimeTips: -1,
             totalReward: null
         };
     },
     computed: {
         address() {
-            return this.$store.state.activeAccount.address;
+            const activeAccount = this.$store.state.wallet.activeAcc;
+            return activeAccount ? activeAccount.address : '';
         },
         amountErr() {
             if (!this.tokenInfo || !this.tokenInfo.tokenId) {
@@ -194,46 +192,48 @@ export default {
                 return;
             }
 
-            this.activeAccount.initPwd({
-                title: this.$t('walletSBP.confirm.title'),
-                submitTxt: this.$t('walletSBP.confirm.rightBtn'),
-                cancelTxt: this.$t('walletSBP.confirm.leftBtn'),
-                content: this.$t('walletSBP.confirm.describe', { amount }),
-                submit: () => {
-                    this.sendRegisterTx(item);
-                }
-            }, true);
+            // [TODO] initPwd
+            // this.activeAccount.initPwd({
+            //     title: this.$t('walletSBP.confirm.title'),
+            //     submitTxt: this.$t('walletSBP.confirm.rightBtn'),
+            //     cancelTxt: this.$t('walletSBP.confirm.leftBtn'),
+            //     content: this.$t('walletSBP.confirm.describe', { amount }),
+            //     submit: () => {
+            //         this.sendRegisterTx(item);
+            //     }
+            // }, true);
         },
         cancel(item) {
             if (!item.isMaturity || item.isCancel) {
                 return;
             }
 
-            this.activeAccount.initPwd({
-                title: this.$t('walletSBP.section2.cancelConfirm.title'),
-                content: this.$t('walletSBP.section2.cancelConfirm.describe', { amount: item.pledgeAmount }),
-                submit: () => {
-                    const nodeName = item.rawData.name;
-                    const producer = item.rawData.nodeAddr;
+            // [TODO] initPwd
+            // this.activeAccount.initPwd({
+            //     title: this.$t('walletSBP.section2.cancelConfirm.title'),
+            //     content: this.$t('walletSBP.section2.cancelConfirm.describe', { amount: item.pledgeAmount }),
+            //     submit: () => {
+            //         const nodeName = item.rawData.name;
+            //         const producer = item.rawData.nodeAddr;
 
-                    sendTx('revokeReg', this.getParams({ nodeName }), {
-                        pow: false,
-                        confirm: {
-                            showMask: true,
-                            operate: this.$t('walletSBP.cancel')
-                        }
-                    }).then(() => {
-                        this.$toast(this.$t('hint.request', { name: this.$t('walletSBP.section2.cancel') }));
-                        this.$store.dispatch('loopRegList', {
-                            nodeName,
-                            operate: 0,
-                            producer
-                        });
-                    }).catch(err => {
-                        this.$toast(this.$t('walletSBP.section2.cancelFail'), err);
-                    });
-                }
-            }, true);
+            //         sendTx('revokeReg', this.getParams({ nodeName }), {
+            //             pow: false,
+            //             confirm: {
+            //                 showMask: true,
+            //                 operate: this.$t('walletSBP.cancel')
+            //             }
+            //         }).then(() => {
+            //             this.$toast(this.$t('hint.request', { name: this.$t('walletSBP.section2.cancel') }));
+            //             this.$store.dispatch('loopRegList', {
+            //                 nodeName,
+            //                 operate: 0,
+            //                 producer
+            //             });
+            //         }).catch(err => {
+            //             this.$toast(this.$t('walletSBP.section2.cancelFail'), err);
+            //         });
+            //     }
+            // }, true);
         },
         edit(item) {
             if (item.isCancel) {
@@ -242,59 +242,62 @@ export default {
             this.showConfirm('edit', item.rawData);
         },
         showReward(item) {
-            this.activeAccount.initPwd({
-                title: this.$t('walletSBP.rewardConfirm.title'),
-                submitTxt: this.$t('walletSBP.rewardConfirm.rightBtn'),
-                cancelTxt: this.$t('walletSBP.rewardConfirm.leftBtn'),
-                content: `<div style="font-size: 14px;">
-                    ${ this.$t('walletSBP.rewardConfirm.describe1', { time: date(new Date().getTime(), 'zh') }) }
-                    <div style="
-                        padding: 10px 15px;
-                        box-sizing: border-box;
-                        height: 40px; 
-                        line-height: 20px;
-                        background:rgba(243,246,249,1);
-                        border-radius:2px;
-                        border:1px solid rgba(212,222,231,1);
-                        margin: 15px 0;
-                    ">VITE
-                        <span style="color:rgba(0,122,255,1); float: right;">${ this.totalReward || '--' }</span>
-                    </div>
-                    <div style="
-                        font-family: PingFang-SC-Regular;
-                        font-weight: 400;
-                        color: rgba(94,104,117,1);
-                        line-height: 18px;
-                    "><span style="
-                            width: 6px;
-                            height: 6px;
-                            background: rgba(0,122,255,1);
-                            display: inline-block;
-                            margin-right: 4px;
-                            border-radius: 6px;
-                    "></span>     
-                    ${ this.$t('walletSBP.rewardConfirm.describe2') }
-                    <a style="color: #007AFF" href="${ process.env.viteNet }${ this.$i18n.locale === 'zh' ? 'zh/' : '' }SBPDetail/${ item.rawData.name }"  target="_blank">${ this.$t('walletSBP.rewardConfirm.describe3') }</a>
-                    ${ this.$t('walletSBP.rewardConfirm.describe4') }
-                    </div>
-                </div>`,
-                submit: () => {
-                    sendTx('retrieveReward', {
-                        nodeName: item.rawData.name,
-                        toAddress: this.address
-                    }, {
-                        pow: false,
-                        confirm: {
-                            showMask: true,
-                            operate: this.$t('walletSBP.rewardBtn')
-                        }
-                    }).then(() => {
-                        this.$toast(this.$t('hint.request', { name: 'Rewards' }));
-                    }).catch(err => {
-                        this.$toast('Claim Failed', err);
-                    });
-                }
-            }, true);
+            console.log(item);
+            // [TODO] initPwd
+
+            // this.activeAccount.initPwd({
+            //     title: this.$t('walletSBP.rewardConfirm.title'),
+            //     submitTxt: this.$t('walletSBP.rewardConfirm.rightBtn'),
+            //     cancelTxt: this.$t('walletSBP.rewardConfirm.leftBtn'),
+            //     content: `<div style="font-size: 14px;">
+            //         ${ this.$t('walletSBP.rewardConfirm.describe1', { time: date(new Date().getTime(), 'zh') }) }
+            //         <div style="
+            //             padding: 10px 15px;
+            //             box-sizing: border-box;
+            //             height: 40px;
+            //             line-height: 20px;
+            //             background:rgba(243,246,249,1);
+            //             border-radius:2px;
+            //             border:1px solid rgba(212,222,231,1);
+            //             margin: 15px 0;
+            //         ">VITE
+            //             <span style="color:rgba(0,122,255,1); float: right;">${ this.totalReward || '--' }</span>
+            //         </div>
+            //         <div style="
+            //             font-family: PingFang-SC-Regular;
+            //             font-weight: 400;
+            //             color: rgba(94,104,117,1);
+            //             line-height: 18px;
+            //         "><span style="
+            //                 width: 6px;
+            //                 height: 6px;
+            //                 background: rgba(0,122,255,1);
+            //                 display: inline-block;
+            //                 margin-right: 4px;
+            //                 border-radius: 6px;
+            //         "></span>
+            //         ${ this.$t('walletSBP.rewardConfirm.describe2') }
+            //         <a style="color: #007AFF" href="${ process.env.viteNet }${ this.$i18n.locale === 'zh' ? 'zh/' : '' }SBPDetail/${ item.rawData.name }"  target="_blank">${ this.$t('walletSBP.rewardConfirm.describe3') }</a>
+            //         ${ this.$t('walletSBP.rewardConfirm.describe4') }
+            //         </div>
+            //     </div>`,
+            //     submit: () => {
+            //         sendTx('retrieveReward', {
+            //             nodeName: item.rawData.name,
+            //             toAddress: this.address
+            //         }, {
+            //             pow: false,
+            //             confirm: {
+            //                 showMask: true,
+            //                 operate: this.$t('walletSBP.rewardBtn')
+            //             }
+            //         }).then(() => {
+            //             this.$toast(this.$t('hint.request', { name: 'Rewards' }));
+            //         }).catch(err => {
+            //             this.$toast('Claim Failed', err);
+            //         });
+            //     }
+            // }, true);
         },
         reward(item) {
             this.totalReward = null;

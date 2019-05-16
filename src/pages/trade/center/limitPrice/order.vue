@@ -592,15 +592,16 @@ export default {
                 return;
             }
 
-            const activeAccount = this.$wallet.getActiveAccount();
-            activeAccount.initPwd({
-                submit: () => {
-                    this.newOrder({
-                        price: this.price,
-                        quantity: this.quantity
-                    });
-                }
-            });
+            // [TODO] initPwd
+            // const activeAccount = this.$wallet.getActiveAccount();
+            // activeAccount.initPwd({
+            //     submit: () => {
+            //         this.newOrder({
+            //             price: this.price,
+            //             quantity: this.quantity
+            //         });
+            //     }
+            // });
         },
         newOrder({ price, quantity }) {
             const tradeToken = this.activeTxPair ? this.activeTxPair.ftoken : '';

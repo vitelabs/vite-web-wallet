@@ -62,10 +62,7 @@ export default {
         this.clearAll();
     },
     data() {
-        const activeAccount = this.$wallet.getActiveAccount();
-
         return {
-            activeAccount,
             tokenInfo: {},
             loadingToken: false,
             showConfirmType: '',
@@ -156,18 +153,20 @@ export default {
                 return;
             }
 
-            const showConfirmType = this.showConfirmType;
-            this.showConfirmType = '';
+            // [TODO]
+            // const showConfirmType = this.showConfirmType;
+            // this.showConfirmType = '';
 
-            this.activeAccount.initPwd({
-                cancel: () => {
-                    this.closeConfirm();
-                },
-                submit: () => {
-                    this.showConfirm(showConfirmType);
-                    (showConfirmType === 'edit') && this.sendUpdateTx();
-                }
-            });
+            // [TODO] initPwd
+            // this.activeAccount.initPwd({
+            //     cancel: () => {
+            //         this.closeConfirm();
+            //     },
+            //     submit: () => {
+            //         this.showConfirm(showConfirmType);
+            //         (showConfirmType === 'edit') && this.sendUpdateTx();
+            //     }
+            // });
         },
         sendUpdateTx() {
             this.loading = true;
@@ -203,7 +202,6 @@ export default {
         },
 
         getParams({ producerAddr, nodeName, amount }) {
-            this.activeAccount = this.$wallet.getActiveAccount();
             const toAmount = BigNumber.toMin(amount || 0, this.tokenInfo.decimals);
 
             return {

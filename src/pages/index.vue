@@ -32,7 +32,6 @@ export default {
         });
 
         this.$store.commit('setLang', this.$i18n.locale);
-        this.$store.dispatch('startLoopBalance');
     },
     data() {
         return {
@@ -41,10 +40,18 @@ export default {
             address: ''
         };
     },
+    computed: {
+        currHDAcc() {
+            return this.$store.state.wallet.currHDAcc;
+        }
+    },
     watch: {
         active: function () {
             this.changeLayout();
             this.$offKeyDown();
+        },
+        currHDAcc: function () {
+            this.$store.dispatch('startLoopBalance');
         }
     },
     methods: {

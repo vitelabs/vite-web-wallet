@@ -1,6 +1,6 @@
 import bigNumber from 'utils/bigNumber';
 import { timer } from 'utils/asyncFlow';
-import { wallet } from 'utils/wallet';
+import { StatusMap } from 'wallet';
 import { defaultTokenMap, OFFICAL_GATE_NAME } from 'utils/constant';
 import { gateStorage } from 'services/gate';
 import { constant } from '@vite/vitejs';
@@ -31,18 +31,19 @@ const mutations = {
     }
 };
 const actions = {
-    startLoopBalance({ commit, dispatch }) {
+    startLoopBalance({ commit, dispatch, rootState }) {
         dispatch('stopLoopBalance');
         balanceInfoInst = new timer(() => {
-            const account = wallet.getActiveAccount();
-            if (!account) {
+            const activeAcc = rootState.wallet.activeAcc;
+            if (!activeAcc) {
                 return;
             }
-            if (account.type !== 'address') {
-                return commit('commitBalanceInfo', account.syncGetBalance());
+
+            if (rootState.wallet.status === StatusMap.UNLOCK) {
+                return commit('commitBalanceInfo', activeAcc.balance);
             }
 
-            return account.getBalance().then(data => {
+            return activeAcc.getBalance().then(data => {
                 commit('commitBalanceInfo', data);
             });
         }, 1000);

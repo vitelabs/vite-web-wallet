@@ -17,7 +17,8 @@ export default {
     components: { addressTitle, switchAddr },
     computed: {
         defaultAddr() {
-            return this.$store.state.activeAccount.address;
+            const activeAccount = this.$store.state.wallet.activeAcc;
+            return activeAccount ? activeAccount.address : '';
         },
         addressQrcode() {
             return stringify({ targetAddress: this.defaultAddr });

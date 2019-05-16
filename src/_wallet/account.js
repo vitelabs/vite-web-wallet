@@ -1,16 +1,12 @@
 import { constant } from '@vite/vitejs';
 import { pwdConfirm } from 'components/password/index.js';
-import acc from 'utils/storeAcc.js';
-import localStorage from 'utils/localStorage';
+import localStorage from 'utils/store';
 
-import keystoreAcc from './keystoreAccount';
 import walletAcc from './walletAccount';
 import addrAcc from './addrAccount';
 
 const { LangList } = constant;
-const NamePre = 'account';
 const AccountType = {
-    keystore: 'keystore',
     wallet: 'wallet',
     addr: 'address'
 };
@@ -23,9 +19,7 @@ class account {
         // Account
         name, pass, type,
         // WalletAccount
-        addrNum, defaultInx, mnemonic, encryptObj, lang,
-        // KeystoreAccount
-        keystore, privateKey
+        addrNum, defaultInx, mnemonic, keystore, lang
     }) {
         this._init({
             address,
@@ -37,10 +31,8 @@ class account {
             addrNum,
             defaultInx,
             mnemonic,
-            encryptObj,
             lang,
-            keystore,
-            privateKey
+            keystore
         });
     }
 
@@ -50,24 +42,15 @@ class account {
         // Account
         name, pass, type,
         // WalletAccount
-        addrNum, defaultInx, mnemonic, encryptObj, lang,
-        // KeystoreAccount
-        keystore, privateKey
+        addrNum, defaultInx, mnemonic, keystore, lang
     }) {
         this.isHoldPWD = !!localStorage.getItem(HoldPwdKey);
         this.type = type;
         this.pass = pass || '';
-        this.name = checkName(name);
+        this.name = name || '';
 
-        this.keystore = null;
-        if (this.type === AccountType.keystore) {
-            if (privateKey) {
-                this.account = new keystoreAcc({ keystore, privateKey });
-            } else {
-                this.keystore = keystore;
-            }
-        } else if (this.type === AccountType.wallet) {
-            this.account = new walletAcc({ addrNum, defaultInx, mnemonic, encryptObj, lang });
+        if (this.type === AccountType.wallet) {
+            this.account = new walletAcc({ addrNum, defaultInx, mnemonic, keystore, lang });
         } else if (this.type === AccountType.addr) {
             this.account = new addrAcc({ address, id, entropy });
         } else {
@@ -140,18 +123,10 @@ class account {
     }
 
     getId() {
-        if (this.type === AccountType.keystore) {
-            return null;
-        }
-
         return this.account.id;
     }
 
     getEntropy() {
-        if (this.type === AccountType.keystore) {
-            return null;
-        }
-
         return this.account.entropy;
     }
 
@@ -172,15 +147,6 @@ class account {
     }
 
     save(index = -1) {
-        this.name = checkName(this.name);
-        if (!this.account && this.type === AccountType.keystore) {
-            acc.add({
-                name: this.name,
-                addr: this.keystore.hexaddress,
-                keystore: this.keystore
-            });
-            return;
-        }
         this.account.save(this.name, index);
     }
 
@@ -196,10 +162,6 @@ class account {
     }
 
     getMnemonic() {
-        if (this.type === AccountType.keystore) {
-            return null;
-        }
-
         return this.account.mnemonic;
     }
 
@@ -223,23 +185,12 @@ class account {
     }
 
     addAddr() {
-        if (this.type === AccountType.keystore) {
-            return false;
-        }
-
         this.account.addAddr();
         this.account.save(this.name);
         return true;
     }
 
     getAddrList() {
-        if (this.type === AccountType.keystore) {
-            return [{
-                addr: this.account.address,
-                name: this.name
-            }];
-        }
-
         const getAddrName = hexAddr => {
             const obj = localStorage.getItem(hexAddr) || {};
             return obj.name || '';
@@ -265,9 +216,6 @@ class account {
     }
 
     setDefaultAddr(addr, index) {
-        if (this.type === AccountType.keystore) {
-            return true;
-        }
         if (!this.account || !this.account.setDefaultAddr) {
             return false;
         }
@@ -279,10 +227,6 @@ class account {
     }
 
     getDefaultAddr() {
-        if (!this.account && this.type === AccountType.keystore) {
-            return this.keystore.hexaddress;
-        }
-
         return this.account.getDefaultAddr();
     }
 
@@ -312,15 +256,3 @@ class account {
 }
 
 export default account;
-
-
-function checkName(name) {
-    if (name) {
-        return name;
-    }
-    const count = acc.getNameCount();
-    name = `${ NamePre }${ count }`;
-    acc.setNameCount(count + 1);
-
-    return name;
-}
