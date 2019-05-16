@@ -305,7 +305,9 @@ export default {
                 if (!data || !data.totalReward) {
                     this.totalReward = null;
                 }
-                this.totalReward = data.totalReward;
+
+                const decimals = this.tokenInfo.decimals;
+                this.totalReward = BigNumber.toBasic(data.totalReward, decimals);
                 this.showReward(item);
             }).catch(err => {
                 if (err && err.code && err.code === '1000001') {
