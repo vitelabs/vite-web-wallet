@@ -660,7 +660,7 @@
         "search": "Please input token name",
         "operate": "Action",
         "confirmTable": {
-            "title":"Records",
+            "title":"Detail Records",
             "heads": [
                 "Date",
                 "Token",
@@ -682,7 +682,7 @@
             "rowMap": {
                 "recharge": "Deposit to Exchange",
                 "withdraw": "Withdraw to Wallet",
-                "detail": "Trade",
+                "detail": "Details",
                 "sideMap":{
                     "1":"Deposit",
                     "2":"Withdraw"
