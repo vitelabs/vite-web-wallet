@@ -61,9 +61,14 @@ export default {
             const code = error ? error.code || -1 : -1;
             const errMsg = error ? error.message || error.msg || '' : '';
 
+            // Show quota confirm, don't neet toast
+            if (code === '1000001') {
+                return;
+            }
+
             let msg = code === -1 || !this.$i18n.messages.zh.errCode[Math.abs(code)]
                 ? message || this.$t('hint.err') : this.$t(`errCode.${ Math.abs(code) }`);
-            if (code) {
+            if (code > 0) {
                 msg = `${ Math.abs(code) === 32002 ? errMsg : msg } (${ code })`;
             }
             toast(msg, type, position);
