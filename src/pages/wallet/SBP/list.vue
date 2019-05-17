@@ -288,7 +288,7 @@ export default {
                             operate: this.$t('walletSBP.rewardBtn')
                         }
                     }).then(() => {
-                        this.$toast(this.$t('hint.request', { name: 'Rewards' }));
+                        this.$toast(this.$t('hint.request', { name: this.$t('walletSBP.rewardBtn') }));
                     }).catch(err => {
                         this.$toast('Claim Failed', err);
                     });
@@ -306,9 +306,6 @@ export default {
                 this.totalReward = BigNumber.toBasic(data.totalReward, decimals);
                 this.showReward(item);
             }).catch(err => {
-                if (err && err.code && err.code === '1000001') {
-                    return;
-                }
                 console.warn(err);
                 this.$toast('Get Reward Failed', err);
             });

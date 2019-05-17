@@ -244,10 +244,6 @@ export default {
             }).catch(err => {
                 console.warn(err);
                 this.loading = false;
-
-                if (err && err.code && err.code === '1000001') {
-                    return;
-                }
                 this.$toast(this.$t('walletSBP.section1.registerFail'), err);
             });
         }
