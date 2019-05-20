@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="10px" height="10px" viewBox="0 0 10 10" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
+    <title>小菜单</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="309" height="377" rx="2"></rect>
+        <filter x="-5.7%" y="-4.1%" width="111.3%" height="109.3%" filterUnits="objectBoundingBox" id="filter-2">
+            <feMorphology radius="0.5" operator="dilate" in="SourceAlpha" result="shadowSpreadOuter1"></feMorphology>
+            <feOffset dx="0" dy="2" in="shadowSpreadOuter1" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0.690196078   0 0 0 0 0.752941176   0 0 0 0 0.929411765  0 0 0 0.422186368 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="交易所-0114" transform="translate(-86.000000, -220.000000)">
+            <g id="K线图" fill-rule="nonzero">
+                <rect id="矩形" x="0" y="0" width="1440" height="820"></rect>
+            </g>
+            <g id="交易中心" transform="translate(80.000000, 124.000000)">
+                <g id="Rectangle-2">
+                    <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                    <use fill-rule="evenodd" xlink:href="#path-1"></use>
+                </g>
+                <g id="交易对-0111" transform="translate(0.000000, 91.000000)">
+                    <rect id="矩形" fill-rule="nonzero" x="0" y="0" width="309" height="20"></rect>
+                    <text id="0.00753" font-family="PingFang-SC-Regular, PingFang SC" font-size="12" font-weight="normal" fill="#5E6875">
+                        <tspan x="106" y="15">0.00753</tspan>
+                    </text>
+                    <text id="-5.87" font-family="PingFang-SC-Regular, PingFang SC" font-size="12" font-weight="normal" fill="#E5494D">
+                        <tspan x="196" y="15">-5.87</tspan>
+                    </text>
+                    <text id="5078" font-family="PingFang-SC-Regular, PingFang SC" font-size="12" font-weight="normal" fill="#5E6875">
+                        <tspan x="274" y="14.5">5078</tspan>
+                    </text>
+                    <text id="ADA/BNB" font-family="PingFang-SC-Regular, PingFang SC" font-size="12" font-weight="normal" fill="#5E6875">
+                        <tspan x="26" y="14.5">ADA/BNB</tspan>
+                    </text>
+                    <g id="分组" stroke-width="1" fill-rule="evenodd" transform="translate(6.000000, 5.000000)" fill="#007AFF">
+                        <polygon id="星形" fill-rule="nonzero" points="5 7.5 2.06107374 9.04508497 2.62235871 5.77254249 0.244717419 3.45491503 3.53053687 2.97745751 5 0 6.46946313 2.97745751 9.75528258 3.45491503 7.37764129 5.77254249 7.93892626 9.04508497"></polygon>
+                    </g>
+                </g>
+                <g id="交易对-0111" transform="translate(0.000000, 91.000000)" fill-rule="nonzero">
+                    <rect id="矩形" x="0" y="0" width="309" height="20"></rect>
+                    <g id="分组" transform="translate(6.000000, 5.000000)" fill="#007AFF">
+                        <polygon id="星形" points="5 7.5 2.06107374 9.04508497 2.62235871 5.77254249 0.244717419 3.45491503 3.53053687 2.97745751 5 0 6.46946313 2.97745751 9.75528258 3.45491503 7.37764129 5.77254249 7.93892626 9.04508497"></polygon>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

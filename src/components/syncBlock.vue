@@ -1,43 +1,22 @@
 <template>
     <div class="sync-block-wrapper">
-        <span class="status-text" v-show="statusText && statusText !== 'sync'">
-            {{ statusText ? $t(`nav.${statusText}`) : '' }}
+        <span class="status-text" v-show="!netStatus">
+            {{ $t(`hint.noNet`) }}
         </span>
-        <span v-show="statusText === 'sync'">
-            {{ $t(`nav.blockHeight`) + ': ' + (blockHeight || '----') }}
+        <span v-show="netStatus">
+            {{ $t(`blockHeight`) + ': ' + (blockHeight || '----') }}
         </span>
     </div>
 </template>
 
 <script>
-let netEvent = null;
-let heightEvent = null;
-
 export default {
-    data() {
-        return {
-            netStatus: false,
-            blockHeight: ''
-        };
-    },
-    mounted() {
-        heightEvent = webViteEventEmitter.on('currentHeight', (height) => {
-            this.blockHeight = height;
-        });
-        netEvent = webViteEventEmitter.on('netStatus', (status) => {
-            this.netStatus = status;
-        });
-
-        this.netStatus = viteWallet.Net.getNetStatus();
-        this.blockHeight = viteWallet.Ledger.getHeight();
-    },
-    destroyed() {
-        webViteEventEmitter.off(netEvent);
-        webViteEventEmitter.off(heightEvent);
-    },
     computed: {
-        statusText() {
-            return !this.netStatus ? 'noNet' : 'sync';
+        blockHeight() {
+            return this.$store.state.ledger.currentHeight;
+        },
+        netStatus() {
+            return this.$store.state.env.clientStatus;
         }
     }
 };
@@ -49,8 +28,9 @@ export default {
 .sync-block-wrapper {
     font-family: $font-bold, arial, sans-serif;
     font-size: 16px;
-    color: #1D2024;
+    color: #1d2024;
     line-height: 20px;
+
     .status-text {
         margin-right: 10px;
     }

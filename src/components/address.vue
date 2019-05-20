@@ -10,9 +10,7 @@
 import addressTitle from 'components/addressTitle';
 
 export default {
-    components: { 
-        addressTitle
-    },
+    components: { addressTitle },
     props: {
         title: {
             type: String,

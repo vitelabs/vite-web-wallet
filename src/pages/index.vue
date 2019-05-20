@@ -1,89 +1,56 @@
-/**  vite-wallet index-layout */
-
 <template>
-    <div class="app-wrapper">
-        <index-layout v-if="layoutType === 'index'">
-            <start v-if="active === 'index'"></start>
-            <router-view/>
-        </index-layout>
-
-        <page-layout :active="active" v-else>
-            <router-view/>
+    <div id="vite-wallet-app" class="app-wrapper" :class="{
+        'dex': active.indexOf('trade') !== -1,
+        'wallet': active.indexOf('trade') === -1
+    }">
+        <page-layout v-if="active.indexOf('start') !== 0" :active="active">
+            <router-view />
         </page-layout>
 
-        <update></update>
-        <first-notice></first-notice>
+        <router-view v-else />
+
+        <notice-list></notice-list>
+        <first-notice v-if="active === 'start'"></first-notice>
     </div>
 </template>
 
 <script>
-import indexLayout from 'components/indexLayout.vue';
-import pageLayout from 'components/pageLayout.vue';
-import update from 'components/update.vue';
+import pageLayout from 'components/pageLayout';
 import firstNotice from 'components/firstNotice.vue';
-import start from 'components/start/index.vue';
-import { timer } from 'utils/asyncFlow';
-import loopTime from 'config/loopTime';
-
-import routeConfig from 'routes';
-let balanceInfoInst = null;
+import noticeList from 'components/noticeList.vue';
 
 export default {
     components: {
-        indexLayout, pageLayout, update, firstNotice, start
+        firstNotice,
+        pageLayout,
+        noticeList
     },
     mounted() {
         this.changeLayout(this.$route.name);
-        this.$router.afterEach((to, from)=>{
-            this.changeLayout(to.name, from.name);
+        this.$router.afterEach(to => {
             this.active = to.name;
         });
+
+        this.$store.commit('setLang', this.$i18n.locale);
+        this.$store.dispatch('startLoopBalance');
     },
     data() {
         return {
-            layoutType: 'index',
-            active: this.$route.name
+            layoutType: 'start',
+            active: this.$route.name,
+            address: ''
         };
     },
+    watch: {
+        active: function () {
+            this.changeLayout();
+            this.$offKeyDown();
+        }
+    },
     methods: {
-        changeLayout(to, from) {
-            let toHome = routeConfig.indexLayoutRoutes.indexOf(to) === -1;
-            let fromHome = routeConfig.indexLayoutRoutes.indexOf(from) === -1;
-
-            if (toHome) {
-                this.layoutType = 'home';
-                this.startLoopBalance();
-                return;
-            }
-        
-            this.stopLoopBalance();
-            this.layoutType = 'index';
-            if (!fromHome) {
-                return;
-            }
-
-            // clear all
-            let activeAccount = this.$wallet.getActiveAccount();
-            activeAccount && activeAccount.lock();
-            activeAccount && activeAccount.releasePWD();
-            this.$wallet.clearActiveAccount();
-                        
-            this.$store.commit('commitClearBalance');
-            this.$store.commit('commitClearTransList');
-            this.$store.commit('commitClearPledge');
-        },
-
-        startLoopBalance() {
-            this.stopLoopBalance();
-            let activeAccount = this.$wallet.getActiveAccount();
-            balanceInfoInst = new timer(()=>{
-                return this.$store.commit('commitBalanceInfo', activeAccount);
-            }, loopTime.ledger_getBalance);
-            balanceInfoInst.start();
-        },
-        stopLoopBalance() {
-            balanceInfoInst && balanceInfoInst.stop();
-            balanceInfoInst = null;
+        changeLayout() {
+            const toHome = this.active.indexOf('start') !== -1;
+            this.layoutType = toHome ? 'home' : 'start';
         }
     }
 };
@@ -97,11 +64,5 @@ export default {
     right: 0;
     bottom: 0;
     overflow: auto;
-    min-height: 720px;
-}
-@media only screen and (max-width: 1000px) {
-    .app-wrapper {
-        min-height: auto;
-    }
 }
 </style>

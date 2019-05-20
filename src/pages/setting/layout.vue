@@ -1,5 +1,5 @@
 <template>
-    <div class="setting-wrapper __wrapper">
+    <div class="setting-wrapper">
         <sec-title :isShowHelp="false"></sec-title>
         <div class="content-wrapper">
             <div class="content">
@@ -36,26 +36,15 @@
 <script>
 import secTitle from 'components/secTitle';
 
-let heightEvent = null;
-
 export default {
-    components: {
-        secTitle
-    },
+    components: { secTitle },
     data() {
-        return {
-            height: '',
-            version: process.env.version
-        };
+        return { version: process.env.version };
     },
-    mounted() {
-        this.height = viteWallet.Ledger.getHeight();
-        heightEvent = webViteEventEmitter.on('currentHeight', (height) => {
-            this.height = height;
-        });
-    },
-    destroyed() {
-        webViteEventEmitter.off(heightEvent);
+    computed: {
+        height() {
+            return this.$store.state.ledger.currentHeight;
+        }
     }
 };
 </script>
@@ -67,55 +56,67 @@ export default {
     position: relative;
     box-sizing: border-box;
     height: 100%;
+    padding: 40px;
+
     .content-wrapper {
         position: absolute;
         top: 102px;
         bottom: 30px;
-        left: 30px;
-        right: 30px;
+        left: 40px;
+        right: 40px;
         overflow: auto;
-        background: #FFFFFF;
-        box-shadow: 0 2px 48px 1px rgba(176,192,237,0.17);
+        background: #fff;
+        box-shadow: 0 2px 48px 1px rgba(176, 192, 237, 0.17);
         border-radius: 8px;
+
         .content {
             max-width: 480px;
             padding: 20px;
         }
+
         .description {
             padding: 20px;
-            border-top: 1px solid #C6CBD4;
+            border-top: 1px solid #c6cbd4;
             opacity: 0.8;
             line-height: 28px;
             letter-spacing: 0.35px;
             font-size: 14px;
-            color: #5E6875;
+            color: #5e6875;
+
             a {
-                color: #5E6875;
+                color: #5e6875;
+
                 &:last-child {
                     margin-left: 20px;
                 }
+
                 &:first-child {
                     margin-left: 0;
                 }
             }
+
             .title {
                 margin-right: 15px;
                 opacity: 0.8;
                 font-size: 14px;
                 font-family: $font-bold, arial, sans-serif;
             }
+
             .link {
-                color:  #118bFF;
+                color: #118bff;
             }
         }
     }
 }
 
-@media only screen and (max-width: 750px) {
+@media only screen and (max-width: 850px) {
     .setting-wrapper {
         padding: 15px;
     }
+
     .setting-wrapper .content-wrapper {
+        top: 70px;
+        bottom: 15px;
         left: 15px;
         right: 15px;
     }
@@ -125,16 +126,19 @@ export default {
     .setting-wrapper {
         background: #fff;
     }
+
     .setting-wrapper .content-wrapper {
-        top: 77px;
+        top: 122px;
         left: 15px;
         right: 15px;
         bottom: 15px;
         box-shadow: none;
-        border-radius: 0px; 
+        border-radius: 0;
+
         .content {
             padding: 0;
         }
+
         .description {
             padding: 0;
         }
@@ -145,6 +149,7 @@ export default {
     .setting-wrapper .content-wrapper .description {
         a {
             display: block;
+
             &:last-child {
                 margin-left: 0;
             }

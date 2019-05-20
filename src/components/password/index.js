@@ -1,17 +1,11 @@
 import Vue from 'vue';
+import i18n from 'i18n';
 import pwdComponent from './password.vue';
 
 const PwdComponent = Vue.extend(pwdComponent);
-let instance;
-
-export function initPwdConfirm(i18n) {
-    instance = new PwdComponent({
-        el: document.createElement('div'),
-        i18n
-    });
-}
 
 export function pwdConfirm({
+    type = 'normal',
     showMask = true,
     title,
     cancel = () => { },
@@ -21,12 +15,20 @@ export function pwdConfirm({
     submitTxt,
     exchange = false
 }, isShowPWD = true) {
-    let _close = (cb) => {
+    let instance = new PwdComponent({
+        el: document.createElement('div'),
+        i18n
+    });
+
+    const appEl = document.getElementById('vite-wallet-app');
+    const _close = cb => {
         try {
-            document.body.removeChild(instance.$el);
+            appEl.removeChild(instance.$el);
         } catch (err) {
             console.warn(err);
         }
+        instance.$destroy();
+        instance = null;
         cb && cb();
     };
 
@@ -34,6 +36,7 @@ export function pwdConfirm({
     instance.isShowPWD = isShowPWD;
     instance.title = title;
     instance.exchange = exchange;
+    instance.type = type;
 
     instance.cancel = () => {
         _close();
@@ -48,6 +51,7 @@ export function pwdConfirm({
     instance.cancelTxt = cancelTxt || '';
     instance.submitTxt = submitTxt || '';
 
-    document.body.appendChild(instance.$el);
+    appEl.appendChild(instance.$el);
+
     return true;
 }

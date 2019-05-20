@@ -5,12 +5,12 @@ const storage = window.localStorage;
 
 export default {
     setItem(name, data) {
-        let key = `${walletSpace}:${name}`;
+        const key = `${ walletSpace }:${ name }`;
 
         try {
             storage.setItem(key, JSON.stringify(data));
             window.viteWalletStorage && window.viteWalletStorage.setItem(key, JSON.stringify(data));
-        } catch(err) {
+        } catch (err) {
             toast('Store fail!');
             console.error(err);
         }
@@ -19,7 +19,7 @@ export default {
 };
 
 function getItem(name) {
-    let key = `${walletSpace}:${name}`;
+    const key = `${ walletSpace }:${ name }`;
 
     try {
         let data;
@@ -35,9 +35,10 @@ function getItem(name) {
         }
 
         return JSON.parse(data);
-    } catch(err) {
+    } catch (err) {
         toast('Get from storage fail!');
         console.error(err);
+
         return null;
     }
 }

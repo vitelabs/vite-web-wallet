@@ -1,0 +1,80 @@
+.dex .menu.common-list-wrapper .list-title {
+    color: rgba(189,193,209,1);
+    &:after {
+        width: 20px;
+        height: 12px;
+        margin-left: 0;
+        margin-top: -6px;
+    }
+    &.down {
+        &:after {
+            background: url('~assets/imgs/grayLangArrow.svg');
+            background-size: 20px 12px;
+        }
+    }
+    &.up {
+        &:after {
+            background: url('~assets/imgs/grayLangArrow.svg');
+            transform: rotate(180deg);
+            background-size: 20px 12px;
+        }
+    }
+}
+
+.menu.common-list-wrapper {
+    position: relative;
+    font-size: 14px;
+    font-family: $font-bold, arial, sans-serif;
+    font-weight: 600;
+    color: rgba(29,32,36,0.6);
+    margin-right: 39px;
+    line-height: 45px;
+    .list {
+        position: absolute;
+        z-index: 100;
+        top: 45px;
+        right: -30px;
+        width: 90px;
+        padding: 0 20px;
+        text-align: right;
+        background: #fff;
+        box-shadow: 0 2px 15px 1px rgba(176, 192, 237, 0.17);
+        &::after {
+            content: ' ';
+            display: inline-block;
+            border: 6px solid transparent;
+            border-bottom: 6px solid #fff;
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            margin-left: 20px;
+        }
+    }
+    .list-title {
+        position: relative;
+        &:after {
+            content: '';
+            display: inline-block;
+            position: absolute;
+            top: 50%;
+            margin-left: 9px;
+            width: 10px;
+            height: 6px;
+            margin-top: -3px;
+        }
+        &.down {
+            &:after {
+                background: url('~assets/imgs/langArrow.svg');
+                background-size: 10px 6px;
+            }
+        }
+        &.up {
+            &:after {
+                background: url('~assets/imgs/langArrow.svg');
+                background-size: 10px 6px;
+                transform: rotate(180deg);
+            }
+        }
+    }
+}
+       

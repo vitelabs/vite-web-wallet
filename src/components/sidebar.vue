@@ -1,30 +1,27 @@
 <template>
     <div class="sidebar-wrapper">
-        <div @mouseenter="overLogo"  @mouseleave="leaveLogo" class="logo __pointer">
-            <img :src="viteLogo" />
-            <test-notice class="notice" :class="{'hide': !isShowNotice}"></test-notice>
-        </div>
+        <div class="content">
+            <div @mouseenter="overLogo"  @mouseleave="leaveLogo" class="logo __pointer">
+                <img :src="viteLogo" />
+                <test-notice class="notice" :class="{'hide': !isShowNotice}"></test-notice>
+            </div>
 
-        <router-link v-for="(name, index) in pageList" :key="index"
-                     class="__pointer icon" :class="{
-                         'active': active === name
-        }" :to="{ 'name': name }">
-            <img v-show="active !== name" :src="icon[name]" />
-            <img v-show="active === name" :src="icon[`${name}Active`]"  />
-        </router-link>
+            <div class="_top">
+                <div v-for="(name, index) in menuTops" :key="index"
+                     class="__pointer icon" :class="{ 'active': active.indexOf(name) >= 0 }"
+                     @click="go(name)">
+                    <img v-show="active.indexOf(name) < 0" :src="icon[name]" />
+                    <img v-show="active.indexOf(name) >= 0" :src="icon[`${name}Active`]"  />
+                </div>
+            </div>
 
-        <div class="_bottom">
-            <router-link class="icon setting __pointer" :class="{
-                'active': active === 'setting'
-            }" :to="{ name: 'setting' }">
-                <img v-show="active !== 'setting'" :src="setting" />
-                <img v-show="active === 'setting'" :src="settingActive"  />
-            </router-link>
-
-            <div class="icon logout __pointer" @click="logout" 
-                 @mouseenter="enterLogout" @mouseleave="leaveLogout">
-                <img v-show="!logoutHover" :src="logoutDefault" />
-                <img v-show="logoutHover" :src="logoutActive" />
+            <div class="_bottom">
+                <div v-for="(name, index) in menuBottoms" :key="index"
+                     class="icon __pointer" :class="{ 'active': active === name }"
+                     @click="go(name)" @mouseenter="enterLogout(name)" @mouseleave="leaveLogout(name)">
+                    <img v-show="active !== name && (name !== iconHover)" :src="icon[name]" />
+                    <img v-show="active === name || (name === iconHover) " :src="icon[`${name}Active`]"  />
+                </div>
             </div>
         </div>
     </div>
@@ -34,64 +31,64 @@
 import testNotice from 'components/testNotice';
 
 import viteLogo from 'assets/imgs/sidebar_logo.svg';
-import account from 'assets/imgs/index_icon_default.svg';
-import accountActive from 'assets/imgs/index_icon_pressed.svg';
-import transList from 'assets/imgs/transfer_default.svg';
-import transListActive from 'assets/imgs/transfer_pressed.svg';
+import wallet from 'assets/imgs/wallet_default.svg';
+import walletActive from 'assets/imgs/wallet_pressed.svg';
 import setting from 'assets/imgs/settings_default.svg';
 import settingActive from 'assets/imgs/settings_pressed.svg';
-import logoutDefault from 'assets/imgs/logout_default.svg';
+import logout from 'assets/imgs/logout_default.svg';
 import logoutActive from 'assets/imgs/logout_pressed.svg';
-import quota from 'assets/imgs/quota_default.svg';
-import quotaActive from 'assets/imgs/quota_pressed.svg';
-import SBP from 'assets/imgs/SBP_default.svg';
-import SBPActive from 'assets/imgs/SBP_active.svg';
-import vote from 'assets/imgs/vote_default.svg';
-import voteActive from 'assets/imgs/vote_active.svg';
-import exchangeVite from 'assets/imgs/exchangeVite_default.svg';
-import exchangeViteActive from 'assets/imgs/exchangeVite_pressed.svg';
+import login from 'assets/imgs/login_default.svg';
+import loginActive from 'assets/imgs/login_pressed.svg';
+import trade from 'assets/imgs/trade_default.svg';
+import tradeActive from 'assets/imgs/trade_pressed.svg';
 
 export default {
-    components: {
-        testNotice
-    },
+    components: { testNotice },
     props: {
         active: {
             type: String,
             default: ''
+        },
+        menuList: {
+            type: Array,
+            default: () => []
+        },
+        go: {
+            type: Function,
+            default: () => {}
         }
     },
     data() {
-        let activeAccount = this.$wallet.getActiveAccount();
-        let pageList = ['account', 'quota', 'SBP', 'vote', 'transList'];
-        if (activeAccount.type === 'wallet') {
-            pageList.push('exchangeVite');
-        }
-
         return {
             isShowNotice: false,
-            logoutHover: false,
+            iconHover: false,
             viteLogo,
-            pageList,
             icon: {
-                account,
-                accountActive,
-                transList,
-                transListActive,
-                quota,
-                quotaActive,
-                SBP,
-                SBPActive,
-                vote,
-                voteActive,
-                exchangeVite,
-                exchangeViteActive
-            },
-            setting,
-            settingActive,
-            logoutDefault,
-            logoutActive
+                wallet,
+                walletActive,
+                trade,
+                tradeActive,
+                setting,
+                settingActive,
+                logout,
+                logoutActive,
+                login,
+                loginActive,
+                index: trade,
+                indexActive: trade
+            }
         };
+    },
+    computed: {
+        settingIndex() {
+            return this.menuList.indexOf('setting');
+        },
+        menuTops() {
+            return this.menuList.slice(0, this.settingIndex);
+        },
+        menuBottoms() {
+            return this.menuList.slice(this.settingIndex);
+        }
     },
     methods: {
         overLogo() {
@@ -101,16 +98,17 @@ export default {
             this.isShowNotice = false;
         },
 
-        enterLogout() {
-            this.logoutHover = true;
+        enterLogout(name) {
+            if (name !== 'logout' && name !== 'login') {
+                return;
+            }
+            this.iconHover = name;
         },
-        leaveLogout() {
-            this.logoutHover = false;
-        },
-        logout() {
-            this.$router.push({
-                name: 'index'
-            });
+        leaveLogout(name) {
+            if (name !== 'logout' && name !== 'login') {
+                return;
+            }
+            this.iconHover = '';
         }
     }
 };
@@ -118,24 +116,33 @@ export default {
 
 <style lang="scss" scoped>
 .sidebar-wrapper {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 100%;
+    height: 100%;
+    overflow: auto;
     background: #fff;
-    box-shadow: 0 2px 40px 1px rgba(221,229,252,0.50);
+    box-shadow: 0 2px 40px 1px rgba(221, 229, 252, 0.5);
+
+    .content {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 100%;
+    }
+
     .logo {
         display: inline-block;
         margin-top: 24px;
         width: 100%;
-        height: 50px;
+        height: 46px;
+
         img {
             width: 100%;
             height: 100%;
         }
+
         .notice {
             transition: opacity 0.5s ease-in-out;
             opacity: 1;
+
             &.hide {
                 width: 0;
                 height: 0;
@@ -144,6 +151,7 @@ export default {
             }
         }
     }
+
     .icon {
         position: relative;
         display: flex;
@@ -152,11 +160,13 @@ export default {
         width: 100%;
         height: 40px;
         margin-top: 30px;
+
         img {
-            width: 24px;
-            height: 24px;
+            width: 22px;
+            height: 22px;
         }
-        &.active:before {
+
+        &.active::before {
             content: '';
             position: absolute;
             top: 0;
@@ -166,21 +176,26 @@ export default {
             display: inline-block;
             width: 4px;
             height: 40px;
-            background-image: linear-gradient(-90deg, #1B3BD8 100%, #176CE0 100%, #0B92E7 100%, #0BB6EB 100%, #00E0F2 100%);
+            background-image: linear-gradient(-90deg, #1b3bd8 100%, #176ce0 100%, #0b92e7 100%, #0bb6eb 100%, #00e0f2 100%);
         }
     }
+
+    ._top {
+        flex: 1;
+    }
+
     ._bottom {
-        position: absolute;
-        bottom: 50px;
         width: 100%;
+        padding: 30px 0;
+
         .icon {
             margin-top: 0;
-        }
-        .setting {
             margin-bottom: 30px;
-        }
-        .logout {
-            height: 30px;
+
+            &:last-child {
+                margin-bottom: 0;
+                height: 30px;
+            }
         }
     }
 }

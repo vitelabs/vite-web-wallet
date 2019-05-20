@@ -2,5 +2,7 @@
 
 # Ignore built files except build/index.js
 static/*
-viteJS/*
+dist/*
 routes.js
+charting_library.min.js
+charting_library/*

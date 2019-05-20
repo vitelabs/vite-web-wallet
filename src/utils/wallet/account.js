@@ -1,54 +1,74 @@
 import { pwdConfirm } from 'components/password/index.js';
-import { getPowNonce } from 'services/pow';
+import { constant } from '@vite/vitejs';
+import acc from 'utils/storeAcc.js';
 
 import keystoreAcc from './keystoreAccount';
 import walletAcc from './walletAccount';
-import acc from './storeAcc.js';
+import addrAcc from './addrAccount';
 
+const { LangList } = constant;
 const NamePre = 'account';
 const AccountType = {
     keystore: 'keystore',
-    wallet: 'wallet'
+    wallet: 'wallet',
+    addr: 'address'
 };
 let passTimeout;
 
 class account {
     constructor({
-        name, pass, type,                               // account
-        addrNum, defaultInx, mnemonic, encryptObj,      // walletAccount
-        keystore, privateKey                            // keystoreAccount
+        // AddrAccount
+        address, id, entropy,
+        // Account
+        name, pass, type,
+        // WalletAccount
+        addrNum, defaultInx, mnemonic, encryptObj, lang,
+        // KeystoreAccount
+        keystore, privateKey
+    }) {
+        this._init({
+            address,
+            id,
+            entropy,
+            name,
+            pass,
+            type,
+            addrNum,
+            defaultInx,
+            mnemonic,
+            encryptObj,
+            lang,
+            keystore,
+            privateKey
+        });
+    }
+
+    _init({
+        // AddrAccount
+        address, id, entropy,
+        // Account
+        name, pass, type,
+        // WalletAccount
+        addrNum, defaultInx, mnemonic, encryptObj, lang,
+        // KeystoreAccount
+        keystore, privateKey
     }) {
         this.isHoldPWD = false;
         this.type = type;
         this.pass = pass || '';
         this.name = checkName(name);
 
-        let receiveFail = async (err) => {
-            if (!err || !err.error || !err.error.code || err.error.code !== -35002 || !err.accountBlock) {
-                return Promise.reject(err);
-            }
-
-            let accountBlock = err.accountBlock;
-            let data = await getPowNonce(accountBlock.accountAddress, accountBlock.prevHash);
-            accountBlock.difficulty = data.difficulty;
-            accountBlock.nonce = data.nonce;
-
-            return this.account.sendRawTx(accountBlock);
-        };
-
         this.keystore = null;
         if (this.type === AccountType.keystore) {
             if (privateKey) {
-                this.account = new keystoreAcc({
-                    keystore, privateKey, receiveFail
-                });
+                this.account = new keystoreAcc({ keystore, privateKey });
             } else {
                 this.keystore = keystore;
             }
         } else if (this.type === AccountType.wallet) {
-            this.account = new walletAcc({
-                addrNum, defaultInx, mnemonic, encryptObj, receiveFail
-            });
+            this.account = new walletAcc({ addrNum, defaultInx, mnemonic, encryptObj, lang });
+        } else if (this.type === AccountType.addr) {
+            this.account = new addrAcc({ address, id, entropy });
         } else {
             this.account = null;
         }
@@ -56,12 +76,26 @@ class account {
         this.account && this.checkFunc();
     }
 
+    get isLogin() {
+        return !this.type === AccountType.addr;
+    }
+
     checkFunc() {
-        let funcName = ['lock', 'getBalance', 'sendRawTx', 'sendTx', 'receiveTx', 'SBPreg', 'updateReg', 'revokeReg', 'retrieveReward', 'voting', 'revokeVoting', 'getQuota', 'withdrawalOfQuota'];
-        funcName.forEach((name) => {
+        const funcName = [
+            'sendRawTx', 'sendTx', 'receiveTx', 'sendPowTx'
+        ];
+
+        funcName.forEach(name => {
             this[name] = (...args) => {
-                return this.account[name](...args);
+                if (!this.account || !this.account.unlockAcc) {
+                    return Promise.reject('No unlockAcc');
+                }
+                return this.account.unlockAcc[name](...args);
             };
+        });
+
+        [ 'getBalance', 'lock' ].forEach(name => {
+            this[name] = (...args) => this.account[name] && this.account[name](...args);
         });
     }
 
@@ -80,6 +114,13 @@ class account {
         window.isShowPWD = false;
     }
 
+    unlockAccount() {
+        if (this.isLogin) {
+            return;
+        }
+        pwdConfirm({ type: 'unlockAccount' });
+    }
+
     initPwd({
         showMask = true,
         title,
@@ -88,18 +129,16 @@ class account {
         content = '',
         submitTxt = '',
         cancelTxt = '',
-        exchange=false
+        exchange = false
     }, isConfirm = false) {
-        let isHide = !isConfirm && this.isHoldPWD;
+        const isHide = !isConfirm && this.isHoldPWD;
 
         if (isHide) {
             submit && submit();
             return true;
         }
 
-        pwdConfirm({
-            showMask, title, submit, content, cancel, cancelTxt, submitTxt,exchange
-        }, !this.isHoldPWD);
+        pwdConfirm({ showMask, title, submit, content, cancel, cancelTxt, submitTxt, exchange }, !this.isHoldPWD);
         return false;
     }
 
@@ -107,6 +146,7 @@ class account {
         if (this.type === AccountType.keystore) {
             return null;
         }
+
         return this.account.id;
     }
 
@@ -114,6 +154,7 @@ class account {
         if (this.type === AccountType.keystore) {
             return null;
         }
+
         return this.account.entropy;
     }
 
@@ -129,6 +170,7 @@ class account {
             return Promise.reject(false);
         }
         pass && (this.pass = pass);
+
         return this.account.encrypt(this.pass);
     }
 
@@ -145,13 +187,14 @@ class account {
         this.account.save(this.name, index);
     }
 
-    changeMnemonic(len) {
-        let bits = len === 12 ? 128 : 256;
+    changeMnemonic(len, lang = LangList.english) {
+        const bits = len === 12 ? 128 : 256;
 
         this.type = AccountType.wallet;
         this.account = new walletAcc({
             addrNum: 1,
-            bits
+            bits,
+            lang
         });
     }
 
@@ -159,6 +202,7 @@ class account {
         if (this.type === AccountType.keystore) {
             return null;
         }
+
         return this.account.mnemonic;
     }
 
@@ -180,19 +224,21 @@ class account {
         }
         this.account.addAddr();
         this.account.save(this.name);
+
         return true;
     }
 
     getAddrList() {
-        if (this.type === AccountType.keystore) {
+        if (this.type !== AccountType.wallet) {
             return [this.account.address];
         }
 
-        let addrs = [];
-        let list = this.account.addrList;
+        const addrs = [];
+        const list = this.account.addrList;
         list.forEach(({ hexAddr }) => {
             addrs.push(hexAddr);
         });
+
         return addrs;
     }
 
@@ -200,8 +246,9 @@ class account {
         if (this.type === AccountType.keystore) {
             return true;
         }
-        let result = this.account.setDefaultAddr(addr, index);
+        const result = this.account.setDefaultAddr(addr, index);
         result && this.save();
+
         return result;
     }
 
@@ -209,6 +256,7 @@ class account {
         if (!this.account && this.type === AccountType.keystore) {
             return this.keystore.hexaddress;
         }
+
         return this.account.getDefaultAddr();
     }
 
@@ -217,7 +265,7 @@ class account {
             return false;
         }
 
-        let result = this.account.unlock(2000);
+        const result = this.account.unlock(2000);
         return result;
     }
 
@@ -225,20 +273,28 @@ class account {
         if (!this.account) {
             return null;
         }
+
         return this.account.balance;
+    }
+
+    get privateKey() {
+        if (this.account) {
+            return this.account.privateKey;
+        }
+        return null;
     }
 }
 
 export default account;
 
 
-
 function checkName(name) {
     if (name) {
         return name;
     }
-    let count = acc.getNameCount();
-    name = `${NamePre}${count}`;
+    const count = acc.getNameCount();
+    name = `${ NamePre }${ count }`;
     acc.setNameCount(count + 1);
+
     return name;
 }

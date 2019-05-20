@@ -10,22 +10,32 @@
                 <slot></slot>
             </div>
             <div class="bottom">
-                <div v-show="singleBtn" class="__btn btn-single __btn_all_in __pointer" 
+                <div v-show="singleBtn" class="__btn btn-single __btn_all_in __pointer"
                      :class="{'unuse': btnUnuse }"
                      @click="_leftBtnClick">{{ leftBtnTxt }}</div>
-                <div v-show="!singleBtn" class="__btn btn-left __pointer" 
+                <div v-show="!singleBtn" class="__btn btn-left __pointer"
                      @click="_leftBtnClick">{{ leftBtnTxt }}</div>
-                <div v-show="!singleBtn" class="__btn __btn_all_in __pointer" 
-                     :class="{'unuse': btnUnuse }"
-                     @click="_rightBtnClick">{{ rightBtnTxt }}</div>
+                <div v-show="!singleBtn" class="__btn __btn_all_in __pointer"
+                     :class="{'unuse': btnUnuse && !isShowLoading }"
+                     @click="_rightBtnClick">
+                    <span v-show="!isShowLoading || !btnUnuse">{{ rightBtnTxt }}</span>
+                    <loading v-show="btnUnuse && isShowLoading" loadingType="dot"></loading>
+                </div>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+import loading from 'components/loading.vue';
+
 export default {
+    components: { loading },
     props: {
+        isShowLoading: {
+            type: Boolean,
+            default: false
+        },
         showMask: {
             type: Boolean,
             default: false
@@ -40,7 +50,7 @@ export default {
         },
         close: {
             type: Function,
-            default: ()=>{}
+            default: () => {}
         },
         singleBtn: {
             type: Boolean,
@@ -56,11 +66,11 @@ export default {
         },
         leftBtnClick: {
             type: Function,
-            default: ()=>{}
+            default: () => {}
         },
         rightBtnClick: {
             type: Function,
-            default: ()=>{}
+            default: () => {}
         },
         btnUnuse: {
             type: Boolean,
@@ -90,6 +100,40 @@ export default {
 
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
+
+.dex {
+    .confirm-container.gray {
+        background: rgba(0, 0, 0, 0.4);
+    }
+}
+
+.dex .confirm-wrapper {
+    .title {
+        height: 58px;
+        line-height: 58px;
+        font-size: 14px;
+        font-weight: 600;
+        .close-icon {
+            padding: 29px;
+        }
+    }
+
+    .content-wrapper {
+        padding: 20px 30px;
+    }
+
+    .bottom {
+        min-height: 74px;
+
+        .__btn {
+            height: 44px;
+            line-height: 44px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+    }
+}
+
 .confirm-container {
     position: fixed;
     top: 0;
@@ -101,6 +145,7 @@ export default {
     justify-content: center;
     align-items: center;
     z-index: 100;
+
     &.gray {
         background: rgba(0, 0, 0, 0.6);
     }
@@ -112,17 +157,19 @@ export default {
     max-height: 85%;
     display: flex;
     flex-direction: column;
-    background: #FFFFFF;
-    box-shadow: 0 2px 48px 1px rgba(176,192,237,0.42);
+    background: #fff;
+    box-shadow: 0 2px 48px 1px rgba(176, 192, 237, 0.42);
     border-radius: 2px;
+
     .title {
-        background: #268EFF;
+        background: #268eff;
         height: 60px;
         line-height: 60px;
         padding-left: 30px;
         font-family: $font-bold, arial, sans-serif;
         font-size: 16px;
-        color: #FFFFFF;
+        color: #fff;
+
         .close-icon {
             box-sizing: border-box;
             display: block;
@@ -134,6 +181,7 @@ export default {
             background-size: 20px 20px;
         }
     }
+
     .content-wrapper {
         position: relative;
         box-sizing: border-box;
@@ -141,33 +189,38 @@ export default {
         overflow: auto;
         font-family: $font-bold, arial, sans-serif;
         font-size: 18px;
-        color: #1D2024;
+        color: #1d2024;
         line-height: 26px;
     }
+
     .bottom {
         padding: 0 30px;
         display: flex;
         min-height: 80px;
         box-sizing: border-box;
         justify-content: space-between;
+
         .__btn {
             white-space: nowrap;
             display: inline-block;
             width: 48%;
             max-width: 190px;
             font-family: $font-bold, arial, sans-serif;
-            color: #FFFFFF;
+            color: #fff;
+
             &.btn-left {
                 box-sizing: border-box;
-                border: 1px solid #007AFF;
+                border: 1px solid #007aff;
                 border-radius: 2px;
-                color: #007AFF;
+                color: #007aff;
             }
+
             &.unuse {
                 background: #efefef;
                 color: #666;
             }
         }
+
         .btn-single {
             width: 100%;
             max-width: 100%;

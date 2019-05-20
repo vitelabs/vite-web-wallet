@@ -1,5 +1,5 @@
-export default function(text) {
-    let textArea = document.createElement('textarea');
+export default function (text) {
+    const textArea = document.createElement('textarea');
     textArea.style.position = 'fixed';
     textArea.style.top = 0;
     textArea.style.left = 0;
@@ -22,4 +22,3 @@ export default function(text) {
 
     document.body.removeChild(textArea);
 }
-           

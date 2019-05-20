@@ -6,19 +6,19 @@
         </div>
         <div class="body">
             <div class="item">
-                <span>{{ $t('account.balance') }}</span>
+                <span>{{ $t('balance') }}</span>
                 <span class="balance">{{ opt.balance || 0 }}</span>
             </div>
             <div class="item">
-                <span>{{ $t('account.fundFloat') }}</span>
+                <span>{{ $t('wallet.fundFloat') }}</span>
                 <span class="balance">{{ opt.fundFloat || 0 }}</span>
             </div>
             <div class="token-tips">
-                <span>{{ opt.onroadNum || 0 }} {{ $t('account.pend') }}</span>
+                <span>{{ opt.onroadNum || 0 }} {{ $t('wallet.pend') }}</span>
             </div>
         </div>
-        <div class="btn __pointer" :class="{ 'unuse': !opt.id || !opt.balance }" 
-             @click="_sendTx">{{ $t('account.sendTrans') }}</div>
+        <div v-unlock-account="_sendTx" class="btn __pointer"
+             :class="{ 'unuse': !opt.id || !+opt.balance }">{{ $t('sendTrans.send') }}</div>
     </div>
 </template>
 
@@ -31,19 +31,21 @@ export default {
     props: {
         opt: {
             type: Object,
-            default: () => ({
-                symbol: '--',
-                balance: '--',
-                fundFloat: '--',
-                unConfirmes: '--'
-            })
+            default: () => {
+                return {
+                    symbol: '--',
+                    balance: '--',
+                    fundFloat: '--',
+                    unConfirmes: '--'
+                };
+            }
         },
         sendTransaction: {
             type: Function,
             default: () => {}
         }
     },
-    data () {
+    data() {
         return {
             iconMap: {
                 VITE: viteIcon,
@@ -72,25 +74,30 @@ export default {
     min-width: 245px;
     background: #fff;
     box-shadow: 0 2px 48px 1px rgba(176, 192, 237, 0.42);
-    margin: 0px 40px 20px 0px;
+    margin: 0 40px 20px 0;
 }
+
 .title {
     border-bottom: 1px solid #e5edf3;
     height: 56px;
     display: flex;
     align-items: center;
     box-sizing: border-box;
+
     .icon {
         margin-left: 25px;
     }
+
     .tokenName {
         margin-left: 10px;
         font-size: 18px;
         font-family: $font-bold, arial, sans-serif;
     }
 }
+
 .body {
     padding: 0 30px 20px;
+
     .item {
         font-family: $font-bold, arial, sans-serif;
         height: 22px;
@@ -98,12 +105,14 @@ export default {
         display: flex;
         justify-content: space-between;
         margin-top: 20px;
+
         .balance {
             font-size: 20px;
             color: #007aff;
             margin-left: 20px;
         }
     }
+
     .token-tips {
         margin-top: 8px;
         font-size: 12px;
@@ -112,12 +121,14 @@ export default {
         justify-content: flex-end;
     }
 }
+
 .btn {
     background: #007aff;
     height: 44px;
     line-height: 44px;
     text-align: center;
     color: #fff;
+
     &.unuse {
         background: #bfbfbf;
     }
@@ -127,14 +138,17 @@ export default {
     .token-card {
         width: 100%;
         margin-bottom: 15px;
-        margin-left: 0px;
+        margin-left: 0;
     }
+
     .body {
         padding: 0 15px 20px;
+
         .item .balance {
             margin-left: 0;
         }
     }
+
     .title .icon {
         margin-left: 15px;
     }
