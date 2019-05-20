@@ -4,7 +4,7 @@ import { subTask } from 'utils/proto/subTask';
 const timers = {};
 const maxReqBarNum = 1500;
 
-// 接口一次请求 1440 个柱（则请求时间间隔 = 时间间隔 * 1440）
+// 接口一次请求 1500 个柱（则请求时间间隔 = 时间间隔 * 1440）
 // tradingView 每次传递 1441 个柱
 // 当前支持的时间
 
@@ -36,7 +36,7 @@ export default class dataFeeds {
         this.unsubscribeBars();
 
         this.activeTxPair = activeTxPair;
-        this.symbolName = `${ activeTxPair.ftokenShow }/${ activeTxPair.ttokenShow }`;
+        this.symbolName = `${ activeTxPair.tradeTokenSymbol }/${ activeTxPair.quoteTokenSymbol }`;
         this.lastResolution = null;
         this.list = {};
         this.lastBar = null;
@@ -126,27 +126,26 @@ export default class dataFeeds {
         onHistoryCallback(_list, { noData: false });
     }
 
-    async fetchKlineData(resolution, from, to) {
+    async fetchKlineData(interval, startTime, endTime) {
         const historyReq = [];
-        const reqTimeDiff = _timeList[resolution] * maxReqBarNum;
-        const pushReq = (from, to) => {
+        const reqTimeDiff = _timeList[interval] * maxReqBarNum;
+        const pushReq = (startTime, endTime) => {
             historyReq.push(klineHistory({
-                from,
-                to,
-                resolution,
-                ftoken: this.activeTxPair.ftoken,
-                ttoken: this.activeTxPair.ttoken
+                startTime,
+                endTime,
+                interval,
+                symbol: this.activeTxPair.symbol
             }));
         };
 
         let i;
-        for (i = from; i < to; i += reqTimeDiff) {
-            if (i === from) {
+        for (i = startTime; i < endTime; i += reqTimeDiff) {
+            if (i === startTime) {
                 continue;
             }
             pushReq(i - reqTimeDiff, i);
         }
-        (i - reqTimeDiff < to) && pushReq(i - reqTimeDiff, to);
+        (i - reqTimeDiff < endTime) && pushReq(i - reqTimeDiff, endTime);
 
         // console.log('[kline req num]', historyReq.length);
 
@@ -160,8 +159,7 @@ export default class dataFeeds {
         timers[subscriberUID] = new subTask('kline', ({ args, data }) => {
             // console.log('subscribeBars', args, new Date(data.t * 1000), data);
 
-            if (args.ttoken !== this.activeTxPair.ttoken
-                || args.ftoken !== this.activeTxPair.ftoken
+            if (args.symbol !== this.activeTxPair.symbol
                 || args.resolution !== this.lastResolution) {
                 this.unsubscribeBars(subscriberUID);
                 return;
@@ -221,8 +219,7 @@ export default class dataFeeds {
 
         timers[subscriberUID].start(() => {
             return {
-                ttoken: this.activeTxPair.ttoken,
-                ftoken: this.activeTxPair.ftoken,
+                symbol: this.activeTxPair.symbol,
                 resolution: reqResolution
             };
         });

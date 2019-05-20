@@ -34,7 +34,7 @@ export default {
         },
         rate() {
             const rateList = this.$store.state.exchangeRate.rateMap || {};
-            const tokenId = this.activeTxPair && this.activeTxPair.ttoken ? this.activeTxPair.ttoken : null;
+            const tokenId = this.activeTxPair && this.activeTxPair.tradeToken ? this.activeTxPair.tradeToken : null;
             const coin = this.$store.state.env.currency;
             if (!tokenId || !rateList[tokenId]) {
                 return null;

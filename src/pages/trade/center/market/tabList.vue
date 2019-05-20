@@ -5,11 +5,11 @@
         </li>
         <li v-for="(_t, i) in toTokenList" :key="i"
             :class="{
-                'active': !isShowFavorite && _t.token === activeTokenId,
-                'active-side': (isShowFavorite && i === 0) || (toTokenList[i-1] && toTokenList[i-1].token === activeTokenId)
+                'active': !isShowFavorite && _t.symbol === currentMarket,
+                'active-side': (isShowFavorite && i === 0) || (toTokenList[i-1] && toTokenList[i-1].symbol === currentMarket)
             }" class="ex-tab __pointer"
             @click="changeToken(_t)"
-        >{{ _t.name }}</li>
+        >{{ _t.symbol }}</li>
     </ul>
 </template>
 
@@ -19,7 +19,7 @@ export default {
         isShowFavorite() {
             return this.$store.state.exchangeMarket.isShowFavorite;
         },
-        activeTokenId() {
+        currentMarket() {
             return this.$store.state.exchangeMarket.currentMarket;
         },
         toTokenList() {

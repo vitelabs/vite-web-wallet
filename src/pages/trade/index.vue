@@ -15,18 +15,16 @@
             <openOrder v-if="tap==='openOrder'" class="item"
                        :isEmbed="true"
                        :filterObj="{
-                           ftoken: activeTxPair.ftoken,
-                           ttoken: activeTxPair.ttoken,
-                           pageSize: 10,
-                           paging: 0 }">
+                           symbol: activeTxPair.symbol,
+                           limit: 10,
+                           offset: 0 }">
             </openOrder>
             <historyOrder v-if="tap==='historyOrder'" class="item"
                           :isEmbed="true"
                           :filterObj="{
-                              ftoken: activeTxPair.ftoken,
-                              ttoken: activeTxPair.ttoken,
-                              pageSize: 10,
-                              paging: 0 }">
+                              symbol: activeTxPair.symbol,
+                              limit: 10,
+                              offset: 0 }">
             </historyOrder>
         </div>
         <router-view></router-view>

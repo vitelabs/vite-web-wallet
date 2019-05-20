@@ -11,7 +11,7 @@
                             'up': +upDownPrev > 0,
                             'down': +upDownPrev < 0
                         }">
-                            {{ activeTxPair && activeTxPair.price ? formatNum(activeTxPair.price, activeTxPair.toDecimals) : '--' }}
+                            {{ activeTxPair && activeTxPair.price ? formatNum(activeTxPair.price, activeTxPair.pricePrecision) : '--' }}
                         </span>
                         {{ realPrice }}
                     </div>
@@ -21,26 +21,26 @@
                     <div class="token-content" :class="{
                         'up': +upDown > 0,
                         'down': +upDown < 0
-                    }">{{ upDownIcon + (!!activeTxPair ? formatNum(upDown, activeTxPair.toDecimals) : upDown) }}
+                    }">{{ upDownIcon + (!!activeTxPair ? formatNum(upDown, activeTxPair.pricePrecision) : upDown) }}
                         {{ activeTxPair && activeTxPair.upDownPercent ?  upDownIcon + activeTxPair.upDownPercent : '--' }}
                     </div>
                 </div>
                 <div class="high-price item-left">
                     <div class="token-title">{{ $t('trade.head.highPrice') }}</div>
                     <div class="token-content">
-                        {{ activeTxPair && activeTxPair.price24hHigh ? activeTxPair.price24hHigh : '--' }}
+                        {{ activeTxPair && activeTxPair.highPrice ? activeTxPair.highPrice : '--' }}
                     </div>
                 </div>
                 <div class="low-price item-left">
                     <div class="token-title">{{ $t('trade.head.lowPrice') }}</div>
                     <div class="token-content">
-                        {{ activeTxPair && activeTxPair.price24hLow ? activeTxPair.price24hLow : '--' }}
+                        {{ activeTxPair && activeTxPair.lowPrice ? activeTxPair.lowPrice : '--' }}
                     </div>
                 </div>
                 <div class="quantity item-left">
                     <div class="token-title">{{ $t('trade.head.quantity') }}</div>
                     <div class="token-content">
-                        {{ activeTxPair && activeTxPair.amount24h ? formatNum(activeTxPair.amount24h, 1) + ' ' + activeTxPair.ttokenShow : '--' }}
+                        {{ activeTxPair && activeTxPair.amount ? formatNum(activeTxPair.amount, 1) + ' ' + activeTxPair.quoteTokenSymbol : '--' }}
                     </div>
                 </div>
             </div>
@@ -92,7 +92,7 @@ export default {
         },
         rate() {
             const rateList = this.$store.state.exchangeRate.rateMap || {};
-            const tokenId = this.activeTxPair && this.activeTxPair.ttoken ? this.activeTxPair.ttoken : null;
+            const tokenId = this.activeTxPair && this.activeTxPair.tradeToken ? this.activeTxPair.tradeToken : null;
             const coin = this.$store.state.env.currency;
             if (!tokenId || !rateList[tokenId]) {
                 return null;
