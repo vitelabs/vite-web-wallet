@@ -24,8 +24,7 @@ const actions = {
 
         stopLatestTimer();
         latestTxTask = new subTask('latestTx', ({ args, data }) => {
-            if (getters.exActiveTxPair.ftoken !== args.ftoken
-                || getters.exActiveTxPair.ttoken !== args.ttoken) {
+            if (getters.exActiveTxPair.symbol !== args.symbol) {
                 return;
             }
             commit('exSetLatestTxList', data);

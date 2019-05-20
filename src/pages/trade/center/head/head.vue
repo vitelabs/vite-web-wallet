@@ -11,7 +11,7 @@
                             'up': +upDownPrev > 0,
                             'down': +upDownPrev < 0
                         }">
-                            {{ activeTxPair && activeTxPair.price ? formatNum(activeTxPair.price, activeTxPair.pricePrecision) : '--' }}
+                            {{ activeTxPair && activeTxPair.closePrice ? formatNum(activeTxPair.closePrice, activeTxPair.pricePrecision) : '--' }}
                         </span>
                         {{ realPrice }}
                     </div>

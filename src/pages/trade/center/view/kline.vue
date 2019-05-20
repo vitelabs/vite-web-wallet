@@ -23,7 +23,7 @@ export default {
             if (!this.activeTxPair) {
                 return '';
             }
-            return `${ this.activeTxPair.ftokenShow }/${ this.activeTxPair.ttokenShow }`;
+            return `${ this.activeTxPair.tradeTokenSymbol }/${ this.activeTxPair.quoteTokenSymbol }`;
         },
         activeTxPair() {
             return this.$store.state.exchangeActiveTxPair.activeTxPair;

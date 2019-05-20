@@ -18,7 +18,7 @@ class kline {
         if (!this.activeTxPair) {
             return null;
         }
-        return `${ this.activeTxPair.ftokenShow }/${ this.activeTxPair.ttokenShow }`;
+        return `${ this.activeTxPair.tradeTokenSymbol }/${ this.activeTxPair.quoteTokenSymbol }`;
     }
 
     reset(activeTxPair) {
