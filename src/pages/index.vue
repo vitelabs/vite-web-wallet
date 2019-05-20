@@ -32,6 +32,7 @@ export default {
         });
 
         this.$store.commit('setLang', this.$i18n.locale);
+        this.$store.dispatch('startLoopBalance');
     },
     data() {
         return {

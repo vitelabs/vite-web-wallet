@@ -1869,7 +1869,7 @@
 "@vite/vitejs-ws@file:../vite.js/packages/WS":
   version "2.1.0-alpha.3"
 
-"@vite/vitejs@/Users/sisi/workspace/vite.js/packages/vitejs":
+"@vite/vitejs@file:../vite.js/packages/vitejs":
   version "2.1.0-alpha.3"
   dependencies:
     "@sisi/ed25519-blake2b-hd-key" "^1.0.2"
