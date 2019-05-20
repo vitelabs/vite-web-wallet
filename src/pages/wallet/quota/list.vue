@@ -80,8 +80,7 @@ export default {
             return this.$store.state.wallet.status === StatusMap.UNLOCK;
         },
         address() {
-            const activeAccount = this.$store.state.wallet.activeAcc;
-            return activeAccount ? activeAccount.address : '';
+            return this.$store.getters.activeAddr;
         },
         totalAmount() {
             if (!this.tokenInfo) {
