@@ -77,8 +77,6 @@ export default {
         this.market = this.marketList && this.marketList.length ? this.marketList[0] : null;
         this.token = this.tokenList && this.tokenList.length ? this.tokenList[0] : null;
         this.tokenName = this.token ? this.token.symbol : '';
-
-        this.fetchTokenList();
     },
     data() {
         return {
@@ -193,6 +191,7 @@ export default {
 
         fetchTokenList() {
             if (!this.market
+                || !this.market.symbol
                 || (this.isLoading && currentFetchMarket
                 && currentFetchMarket.token === this.market.token)) {
                 return;
@@ -200,6 +199,7 @@ export default {
 
             this.isLoading = true;
             const quoteTokenSymbol = this.market.symbol;
+
             marketsReserve({ quoteTokenSymbol }).then(data => {
                 if (this.market.symbol !== quoteTokenSymbol) {
                     return;
