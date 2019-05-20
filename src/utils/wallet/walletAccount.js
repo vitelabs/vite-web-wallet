@@ -1,36 +1,30 @@
-import { utils, wallet } from '@vite/vitejs';
+import { keystore as _keystore, hdAccount as _hdAccount } from '@vite/vitejs';
 import vitecrypto from 'testwebworker';
-import acc from './storeAcc.js';
+import acc from 'utils/storeAcc.js';
+import $ViteJS from 'utils/viteClient';
 
-const _keystore = utils.keystore;
-const _walletAccount = wallet.walletAccount;
-
-
-class walletAccount extends _walletAccount {
-    constructor({
-        addrNum, defaultInx, mnemonic, bits, encryptObj, receiveFail
-    }) {
-        super({
-            client: $ViteJS, mnemonic, bits, addrNum
-        }, {});
+class walletAccount extends _hdAccount {
+    constructor({ addrNum, defaultInx, mnemonic, bits, encryptObj, lang }) {
+        super({ client: $ViteJS, mnemonic, bits, addrNum, lang });
 
         this.defaultInx = defaultInx || 0;
         this.encryptObj = encryptObj || null;
-        this.receiveFail = receiveFail;
+        this.unlockAcc = null;
     }
 
     verify(pass) {
-        return !this.encryptObj ? 
-            Promise.resolve(false) : 
-            _keystore.decrypt(JSON.stringify(this.encryptObj), pass, vitecrypto);
+        return this.encryptObj
+            ? _keystore.decrypt(JSON.stringify(this.encryptObj), pass, vitecrypto)
+            : Promise.resolve(false);
     }
 
     encrypt(pass) {
         if (!pass) {
             return Promise.reject(false);
         }
-        return _keystore.encrypt(this.entropy, pass, null, vitecrypto).then((encryptObj) => {
-            let obj = JSON.parse(encryptObj);
+
+        return _keystore.encrypt(this.entropy, pass, null, vitecrypto).then(encryptObj => {
+            const obj = JSON.parse(encryptObj);
             this.encryptObj = obj;
             return encryptObj;
         });
@@ -38,22 +32,24 @@ class walletAccount extends _walletAccount {
 
     save(name, index) {
         acc.add({
-            name, 
+            name,
             id: this.id,
-            defaultInx: this.defaultInx, 
-            addrNum: this.addrList.length, 
+            lang: this.lang,
+            defaultInx: this.defaultInx,
+            addr: this.getDefaultAddr(),
+            addrNum: this.addrList.length,
             encryptObj: this.encryptObj
         }, index);
     }
 
     setDefaultAddr(address, index) {
-        let addrObj = this.addrList[index];
+        const addrObj = this.addrList[index];
         if (!addrObj || addrObj.hexAddr !== address) {
             return false;
         }
 
         this.defaultInx = index;
-        this.unlock({ address });
+        this.unlock();
         return true;
     }
 
@@ -61,19 +57,33 @@ class walletAccount extends _walletAccount {
         return this.addrList[this.defaultInx].hexAddr;
     }
 
-    unlock(intervals) {
-        let result = this.activateAccount({
-            index: this.defaultInx
-        }, {
+    unlock(intervals = 2000) {
+        this.lock();
+        this.unlockAcc = this.activateAccount({ index: this.defaultInx }, {
             intervals,
-            receiveFailAction: this.receiveFail, 
-            duration: -1
+            duration: -1,
+            autoPow: true,
+            usePledgeQuota: true
         });
-        return !!result;
+        return !!this.unlockAcc;
     }
 
     lock() {
-        this.freezeAccount();
+        this.unlockAcc && this.freezeAccount(this.unlockAcc);
+    }
+
+    get privateKey() {
+        if (this.unlockAcc) {
+            return this.unlockAcc.privateKey;
+        }
+        return null;
+    }
+
+    get balance() {
+        if (!this.unlockAcc) {
+            return null;
+        }
+        return this.unlockAcc.balance;
     }
 }
 

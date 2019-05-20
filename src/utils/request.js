@@ -9,13 +9,13 @@ export default function request({ method = 'GET', path, params = {}, timeout = r
     const qsStr = qs.stringify(params);
 
     method === 'GET' && (
-        path.indexOf('?') < 0 ? 
-            (path = `${path}?${qsStr}`) : 
-            (path = `${path}${qsStr}`)
+        path.indexOf('?') < 0
+            ? (path = `${ path }?${ qsStr }`)
+            : (path = `${ path }${ qsStr }`)
     );
-
     xhr.open(method, path, true);
     xhr.setRequestHeader('content-type', 'application/json; charset=utf-8');
+    xhr.timeout = timeout;
 
     if (method === 'POST') {
         xhr.send(JSON.stringify(params));
@@ -24,61 +24,42 @@ export default function request({ method = 'GET', path, params = {}, timeout = r
     }
 
     return new Promise((res, rej) => {
-        let _t = setTimeout(() => {
-            _t = null;
-            xhr.abort && xhr.abort();
-            rej('timeout');
-        }, timeout);
-        
-        let _rej = (err) => {
-            if (!_t) {
-                return;
-            }
-            _t && clearTimeout(_t);
-            _t = null;
-            return rej(err);
-        };
-
-        let _res = (data) => {
-            if (!_t) {
-                return;
-            }
-            _t && clearTimeout(_t);
-            _t = null;
-            return res(data);
-        };
-
         xhr.onload = function () {
-            if (xhr.status == 200) {
-                try {
-                    let { code, msg, data, error } = JSON.parse(xhr.responseText);
-                    if (code !== 200) {
-                        return _rej({
+            try {
+                if (+xhr.status === 200) {
+                    if (path.indexOf('kline') !== -1) {
+                        res(JSON.parse(xhr.responseText));
+                        return;
+                    }
+
+                    const { code, msg, data, error } = JSON.parse(xhr.responseText);
+                    const rightCode = path.indexOf('api') === -1 ? 200 : 0;
+                    if (code !== rightCode) {
+                        return rej({
                             code,
                             message: msg || error
                         });
                     }
 
-                    data = data || null;
-                    _res(data);
-                } catch (e) {
-                    rej(e);
+                    res(data || null);
+                } else {
+                    rej(JSON.parse(xhr.responseText));
                 }
-            } else {
-                _rej( JSON.parse(xhr.responseText) );
+            } catch (e) {
+                rej({
+                    status: xhr.status,
+                    message: xhr.responseText || e
+                });
             }
         };
         xhr.onerror = function (err) {
-            console.error(err);
-            _rej(err);
+            rej(err);
         };
         xhr.onabort = function (x) {
-            console.warn(x);
-            _rej(x);
+            rej(x);
         };
-        xhr.ontimeout = function (time) {
-            console.warn(time);
-            _rej('timeout');
+        xhr.ontimeout = function () {
+            rej('timeout');
         };
     });
 }

@@ -1,18 +1,18 @@
-# vite-web-wallet
+# vite-web-wallet (SPA)
 
-## Prerequisites
+## Prerequisite
 
-* npm
+* yarn
 
 ## Building (webpack)
 
-`npm run build`
+`yarn run build`
 
-## Starting
+## Start
 
-1. `npm install`
-2. Configure eslint in your editor, rules like '.eslintrc'.
-3. `npm run dev`
+1. `yarn install`
+2. `yarn run dev`
+3. Visit in explorer: `http://localhost:8081`
 
 ### Branch naming rules
 
@@ -27,9 +27,14 @@
 
 `'dev/2.0.0/utf8' from 'dev/1.0.0' || 'master'`
 
+### Router Rules
 
-### rpc specification
-- error code :
-   - -35001 hash valid fail
-   - -35002 out of quota
-   - -36001 addr not exist
+Files under `src/pages` path will follow the rules and auto generate routes and sub-routes, the level of routes is consistence with the folder path.
+
+Define router alias in `src/router/config.js`
+
+> Notice: The routes will generate only if `index.vue` exists in main folder.
+
+#### Examples
+
+`src/pages/trade/openOrders/index.vue` => `/tradeOpenOrders`

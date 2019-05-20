@@ -1,19 +1,23 @@
-export  class timer {
-    constructor( loopFunc, interval = 1000 ) {
+export class timer {
+    constructor(loopFunc, interval = 1000) {
         this.interval = interval;
         this.timeHandler = null;
         this.loopFunc = loopFunc;
     }
+
     stop() {
         window.clearTimeout(this.timeHandler);
         this.timeHandler = null;
         this.loopFunc = null;
     }
+
     start() {
-        if (this.timeHandler) {
+        if (this.timeHandler || !this.loopFunc) {
             return;
         }
 
+        // Exec immediately for once
+        this.loopFunc();
         const _task = () => {
             if (!this.loopFunc) {
                 return;
@@ -35,7 +39,7 @@ export  class timer {
                 });
             }, this.interval);
         };
-        
+
         _task();
     }
 }
@@ -51,39 +55,35 @@ export  class timer {
 
 export function doUntill({
     createPromise,
-    test = ({
-        resolve
-    }) => resolve,
+    test = ({ resolve }) => resolve,
     interval = 3000,
     times = 100,
     timeout = 5 * 60 * 1000
 }, ...args) {
     const that = this;
-    const timesControl=times>0;
-    const timeoutControl=timeout>0;
+    const timesControl = times > 0;
+    const timeoutControl = timeout > 0;
+
     return new Promise((res, rej) => {
         const initTime = Date.now();
         let t = 0;
 
         const tryAndTry = function () {
             t += 1;
-            createPromise.call(that, ...args).then((result) => {
-                if (test({
-                    resolve: result
-                })) {
+            createPromise.call(that, ...args).then(result => {
+                if (test({ resolve: result })) {
                     return res(result);
                 }
                 setTimeout(tryAndTry, interval);
             }).catch(e => {
-                if (test({
-                    reject: e
-                })) {
+                if (test({ reject: e })) {
                     return rej(e);
                 }
-                
-                if (timeoutControl&&(Date.now() - initTime) >= timeout || timesControl&&t >= times) {
+
+                if (timeoutControl && (Date.now() - initTime) >= timeout || timesControl && t >= times) {
                     return rej('重试超限');
                 }
+
                 setTimeout(tryAndTry, interval);
             });
         };

@@ -1,5 +1,6 @@
 .DS_Store
 node_modules
+dist
 static
 .eslintcache
 .idea
@@ -7,3 +8,4 @@ static
 viteJS
 routes.js
 .netlify
+package-lock.json

@@ -1,34 +1,35 @@
-// import '@babel/polyfill';
+// Import '@babel/polyfill';
 require('es6-promise').polyfill();
 
 import 'utils/performance';
-import './assets/scss/mixins.scss';
+import 'assets/scss/mixins.scss';
+import 'utils/viteClient.js';
 
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 
 import App from 'pages/index.vue';
-import routeConfig from 'routes';
+import initRouter from 'router/index.js';
 
-import 'utils/eventEmitter.js';
-import 'utils/viteWallet/index.js';
-
-import { i18n } from 'i18n';
+import i18n from 'i18n';
 import store from './store';
-import statistics from 'utils/statistics';
-import { initPwdConfirm } from 'components/password/index.js';
+
+import plugin from 'plugins/addPlugin';
+import directives from 'plugins/directives';
+import resaveAccKeystore from 'utils/resaveAccKeystore.js';
+
 import { initQuotaConfirm } from 'components/quota/index.js';
 
-import plugin from 'utils/plugins/addPlugin';
-import clickOutside from 'utils/plugins/clickOutside';
-import { reSave } from 'utils/wallet/index.js';
-
+// $onKeyDown $offKeyDown $validAmount $trim $toast $confirm $statistics $wallet
 Vue.use(plugin);
+// V-click-outside v-unlock-account
+Vue.use(directives);
 Vue.use(VueRouter);
-Vue.use(clickOutside);
+
+Vue.config.devtools = process.env.NODE_ENV !== 'production';
 
 // Start loading animate
-let element  = document.getElementById('loading');
+const element = document.getElementById('loading');
 element.className += 'spinner big-spinner';
 
 setTimeout(() => {
@@ -37,36 +38,11 @@ setTimeout(() => {
 
 // Loading finish and App init finish also.
 setTimeout(() => {
-    reSave();
+    resaveAccKeystore();
 
-    // Init router
-    const router = new VueRouter({
-        mode: process.env.NODE_ENV === 'dev' ? 'hash' : 'history',
-        routes: routeConfig.routes
-    });
-    router.beforeEach((to, from, next) => {
-        // Windows APP
-        if (!to.name && to.path) {
-            let arr = to.path.split('/');
-            router.replace({
-                name: arr[ arr.length - 1 ] || 'index'
-            });
-            return;
-        }
+    const router = initRouter(VueRouter);
+    initQuotaConfirm(router);
 
-        if (!from.name && to.name !== 'index') {
-            router.replace({
-                name: 'index'
-            });
-            return;
-        }
-
-        statistics.pageView(to.path);
-        next();
-    });
-
-    initPwdConfirm(i18n);
-    initQuotaConfirm(i18n, router);
     new Vue({
         el: '#app',
         components: { App },

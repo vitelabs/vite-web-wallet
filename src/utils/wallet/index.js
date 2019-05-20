@@ -1,20 +1,31 @@
-import { utils } from '@vite/vitejs';
+import { hdAddr as _hdAddr, keystore as _keystore, utils, constant } from '@vite/vitejs';
 import vitecrypto from 'testwebworker';
+import storeAcc from 'utils/storeAcc.js';
 import statistics from 'utils/statistics';
-import storage from 'utils/localStorage.js';
+import $ViteJS from 'utils/viteClient';
 
 import account from './account.js';
-import acc from './storeAcc.js';
 
-const _keystore = utils.keystore;
-const _hdAddr = utils.address.hdAddr;
-const _tools = utils.tools;
-
-const LAST_KEY = 'ACC_LAST';
+const { LangList } = constant;
+const { checkParams } = utils;
 
 class _wallet {
     constructor() {
-        this.activeWalletAcc = null;        
+        this.activeWalletAcc = null;
+        this.isLogin = false;
+        this.onLoginList = [];
+        this.onLogoutList = [];
+        this.lastPage = '';
+
+        this.setLastActiveAcc();
+    }
+
+    setLastPage(name) {
+        this.lastPage = name;
+    }
+
+    clearLastPage() {
+        this.lastPage = '';
     }
 
     getActiveAccount() {
@@ -26,31 +37,51 @@ class _wallet {
             return;
         }
         this.activeWalletAcc.lock && this.activeWalletAcc.lock();
-        this.activeWalletAcc = null;
+        this.setLastActiveAcc();
+    }
+
+    setLastActiveAcc() {
+        const lastAccount = this.getLast();
+        if (!lastAccount || !lastAccount.addr) {
+            return;
+        }
+
+        this.newActiveAcc({
+            type: 'address',
+            address: lastAccount.addr,
+            name: lastAccount.name,
+            id: lastAccount.id,
+            entropy: lastAccount.entropy
+        });
     }
 
     newActiveAcc(acc) {
-        this.clearActiveAccount();
-        this.activeWalletAcc = new account(acc);
+        if (!this.activeWalletAcc) {
+            this.activeWalletAcc = new account(acc);
+            return;
+        }
+        this.activeWalletAcc.lock && this.activeWalletAcc.lock();
+        this.activeWalletAcc._init(acc);
     }
 
-    create(name, pass) {
-        let err = _tools.checkParams({ name, pass }, ['name', 'pass']);
+    create(name, pass, lang = LangList.english) {
+        const err = checkParams({ name, pass }, [ 'name', 'pass' ]);
         if (err) {
             console.error(new Error(err));
             return;
         }
 
         this.newActiveAcc({
-            addrNum: 1, 
+            addrNum: 1,
             name,
             pass,
+            lang,
             type: 'wallet'
         });
-    }    
+    }
 
     importKeystore(data) {
-        let keystore = _keystore.isValid(data);
+        const keystore = _keystore.isValid(data);
         if (!keystore) {
             return false;
         }
@@ -60,49 +91,42 @@ class _wallet {
             type: 'keystore'
         });
         this.activeWalletAcc.save();
+
         return keystore.hexaddress;
     }
 
-    restoreAddrs(mnemonic) {
-        let num = 10;
-        let addrs = _hdAddr.getAddrsFromMnemonic(mnemonic, 0, num);
+    async restoreAccount(mnemonic, name, pass, lang = LangList.english) {
+        const num = 10;
+        const addrs = _hdAddr.getAddrsFromMnemonic(mnemonic, 0, num, lang);
         if (!addrs) {
-            return Promise.reject({
-                code: 500005
-            });
+            return Promise.reject({ code: 500005 });
         }
 
-        let requests = [];
-        for (let i=0; i<num; i++) {
-            requests.push( $ViteJS.buildinLedger.getBalance(addrs[i].hexAddr) );
+        const requests = [];
+        for (let i = 0; i < num; i++) {
+            requests.push($ViteJS.getBalance(addrs[i].hexAddr));
         }
 
-        return Promise.all(requests).then((data)=>{
-            let index = 0;
-            data.forEach((item, i) => {
-                if (!item) {
-                    return;
-                }
-                let account = item.balance;
-                let onroad = item.onroad;
-                if ( (account && +account.totalNumber) || (onroad && +onroad.totalNumber) ) {
-                    index = i;
-                }
-            });
+        const data = await Promise.all(requests);
+        let index = 0;
 
-            this.newActiveAcc({
-                addrNum: index + 1,
-                mnemonic,
-                type: 'wallet'
-            });
-            return data;
+        data.forEach((item, i) => {
+            if (!item) {
+                return;
+            }
+            const account = item.balance;
+            const onroad = item.onroad;
+            if ((account && +account.totalNumber) || (onroad && +onroad.totalNumber)) {
+                index = i;
+            }
         });
-    }
 
-    restoreAccount(name, pass) {
-        if (!this.activeWalletAcc) {
-            return Promise.reject();
-        }
+        this.newActiveAcc({
+            addrNum: index + 1,
+            mnemonic,
+            lang,
+            type: 'wallet'
+        });
 
         return this.activeWalletAcc.encrypt(pass).then(() => {
             this.activeWalletAcc.pass = pass;
@@ -110,31 +134,57 @@ class _wallet {
         });
     }
 
-    login({
-        id, entropy, addr
-    }, pass) {
-        if ( (!entropy && !addr && !id) || !pass ) {
+    onLogin(cb) {
+        this.onLoginList = this.onLoginList || [];
+        this.onLoginList.push(cb);
+    }
+
+    onLogout(cb) {
+        this.onLogoutList = this.onLogoutList || [];
+        this.onLogoutList.push(cb);
+    }
+
+    logout() {
+        this.activeWalletAcc && this.activeWalletAcc.lock();
+        this.activeWalletAcc && this.activeWalletAcc.releasePWD();
+        this.clearActiveAccount();
+        this.isLogin = false;
+        this.onLogoutList && this.onLogoutList.forEach(cb => {
+            cb && cb();
+        });
+    }
+
+    login({ id, entropy, addr }, pass) {
+        if ((!entropy && !addr && !id) || !pass) {
             return Promise.reject(false);
         }
-        if (addr) {
-            return this._loginKeystoreAcc(addr, pass);
+
+        if (addr && !entropy && !id) {
+            this.isLogin = this._loginKeystoreAcc(addr, pass);
+            return this.isLogin;
         }
-        return this._loginWalletAcc({
-            id, entropy, pass
+
+        return this._loginWalletAcc({ id, entropy, pass }).then(data => {
+            this.isLogin = true;
+            this.onLoginList && this.onLoginList.forEach(cb => {
+                cb && cb();
+            });
+
+            return data;
         });
     }
 
     async _loginKeystoreAcc(addr, pass) {
-        let acc = getAccFromAddr(addr);
-        let keystore = acc.keystore;
+        const acc = getAccFromAddr(addr);
+        const keystore = acc.keystore;
 
-        let before = new Date().getTime();
+        const before = new Date().getTime();
 
         const privKey = await _keystore.decrypt(JSON.stringify(keystore), pass, vitecrypto);
 
-        let after = new Date().getTime();
-        let n = ( keystore.crypto && keystore.crypto.scryptparams && keystore.crypto.scryptparams.n) ? 
-            keystore.crypto.scryptparams.n : 0;
+        const after = new Date().getTime();
+        const n = (keystore.crypto && keystore.crypto.scryptparams && keystore.crypto.scryptparams.n)
+            ? keystore.crypto.scryptparams.n : 0;
         statistics.event('keystore-decrypt', n, 'time', after - before);
 
         if (n !== 262144) {
@@ -145,11 +195,16 @@ class _wallet {
                 privateKey: privKey,
                 type: 'keystore'
             });
+            storeAcc.setLast({
+                addr,
+                name: acc.name
+            });
+
             return true;
         }
 
         // Reduce the difficuly. 262144 to 4096
-        let keystoreStr = await _keystore.encryptOldKeystore(privKey, pass, vitecrypto);
+        const keystoreStr = await _keystore.encryptOldKeystore(privKey, pass, vitecrypto);
         this.newActiveAcc({
             name: acc.name,
             pass,
@@ -159,23 +214,22 @@ class _wallet {
         });
         this.activeWalletAcc.save();
 
-        setLast({
+        storeAcc.setLast({
             addr,
             name: acc.name
         });
+
         return true;
     }
 
-    async _loginWalletAcc({
-        id, entropy, pass
-    }) {
+    async _loginWalletAcc({ id, entropy, pass }) {
         let acc;
         let i;
 
         if (id) {
             acc = getAccFromId(id);
         } else {
-            let result = getAccFromEntropy(entropy);
+            const result = getAccFromEntropy(entropy);
             if (result) {
                 acc = result.account;
                 i = result.index;
@@ -183,29 +237,32 @@ class _wallet {
             }
         }
 
-        let encryptObj = acc.encryptObj;
+        const encryptObj = acc.encryptObj;
         entropy = entropy || encryptObj.encryptentropy;
-        encryptObj.encryptentropy = encryptObj.encryptentropy || entropy;   // Very very impotant!!!!!
-    
-        let before = new Date().getTime();
-        let decryptEntropy = await _keystore.decrypt(JSON.stringify(encryptObj), pass, vitecrypto);
-        let after = new Date().getTime();
+        // Very very impotant!!!!!
+        encryptObj.encryptentropy = encryptObj.encryptentropy || entropy;
+
+        const before = new Date().getTime();
+        const decryptEntropy = await _keystore.decrypt(JSON.stringify(encryptObj), pass, vitecrypto);
+        const after = new Date().getTime();
         statistics.event('mnemonic-decrypt', encryptObj.version || '1', 'time', after - before);
 
         if (!decryptEntropy) {
             return false;
         }
 
-        let mnemonic = _hdAddr.getMnemonicFromEntropy(decryptEntropy);
-        let defaultInx = +acc.defaultInx > 10 || +acc.defaultInx < 0 ? 0 : +acc.defaultInx;
+        const lang = acc.lang || LangList.english;
+        const mnemonic = _hdAddr.getMnemonicFromEntropy(decryptEntropy, lang);
+        const defaultInx = +acc.defaultInx > 10 || +acc.defaultInx < 0 ? 0 : +acc.defaultInx;
 
         this.newActiveAcc({
             pass,
             defaultInx,
-            encryptObj: acc.encryptObj, 
-            addrNum: acc.addrNum, 
+            encryptObj: acc.encryptObj,
+            addrNum: acc.addrNum,
             name: acc.name,
             mnemonic,
+            lang,
             type: 'wallet'
         });
 
@@ -214,16 +271,18 @@ class _wallet {
             this.activeWalletAcc.save(i);
         }
 
-        setLast({
+        storeAcc.setLast({
             id,
             entropy,
             name: acc.name
         });
+        this.activeWalletAcc.save();
+
         return true;
     }
 
     getList() {
-        return acc.getList();
+        return storeAcc.getList();
     }
 
     getLast() {
@@ -231,12 +290,12 @@ class _wallet {
             return {
                 id: this.activeWalletAcc.getId(),
                 entropy: this.activeWalletAcc.getEntropy(),
-                addr: this.activeWalletAcc.type === 'wallet' ? null : this.activeWalletAcc.getDefaultAddr(),
-                name: this.activeWalletAcc.name,
+                addr: this.activeWalletAcc.getDefaultAddr(),
+                name: this.activeWalletAcc.name
             };
         }
 
-        let last = getLast();
+        const last = storeAcc.getLast();
         if (!last) {
             return null;
         }
@@ -247,7 +306,7 @@ class _wallet {
         } else if (last.id) {
             acc = getAccFromId(last.id);
         } else {
-            let result = getAccFromEntropy(last.entropy);
+            const result = getAccFromEntropy(last.entropy);
             if (result) {
                 acc = result.account;
             }
@@ -256,79 +315,33 @@ class _wallet {
         if (!acc) {
             return null;
         }
-        
+
         return acc;
     }
 }
 
 
-export const wallet = _wallet;
+export const wallet = new _wallet();
 
-export const reSave = _reSave;
-
-
-
-// VCP VV ===>  later
-function  _reSave() {
-    let list = acc.getList();
-    if (!list || !list.length) {
-        return;
-    }
-
-    let last = getLast();
-    let reList = [];
-    let isChange = false;
-
-    list.forEach((item) => {
-        if (!item) {
-            return;
-        }
-
-        if (!item.entropy || !item.encryptObj || +item.encryptObj.version !== 1 || !item.encryptObj.scryptParams) {
-            reList.push(item);
-            return;
-        }
-
-        isChange = true;
-
-        let entropy = item.entropy;
-        let keystore = _keystore.encryptV1ToV3(entropy, JSON.stringify(item.encryptObj));
-        
-        keystore = JSON.parse(keystore);
-
-        let mnemonic = _hdAddr.getMnemonicFromEntropy(entropy);
-        item.id = _hdAddr.getId(mnemonic);
-        item.encryptObj = keystore;
-
-        if (last && last.entropy && last.entropy === entropy) {
-            last.entropy = item.entropy;
-        }
-        reList.push(item);
-    });
-
-    if (!isChange) {
-        return;
-    }
-    
-    statistics.event('keystore', 'resave');
-    setLast(last);
-    acc.setAccList(reList);
-}
 
 function getAccFromId(id) {
-    let list = acc.getList();
-    for(let i=0; i<list.length; i++) {
+    const list = storeAcc.getList();
+    if (!list) {
+        return null;
+    }
+    for (let i = 0; i < list.length; i++) {
         if (list[i].id && list[i].id === id) {
             return list[i];
         }
     }
+
     return null;
 }
 
 function getAccFromEntropy(entropy) {
     let result = null;
-    let list = acc.getList();
-    for(let i=0; i<list.length; i++) {
+    const list = storeAcc.getList();
+    for (let i = 0; i < list.length; i++) {
         if (list[i].entropy === entropy) {
             if (!list[i].id) {
                 return {
@@ -343,23 +356,17 @@ function getAccFromEntropy(entropy) {
             };
         }
     }
+
     return result;
 }
 
 function getAccFromAddr(address) {
-    let list = acc.getList();
-    for(let i=0; i<list.length; i++) {
+    const list = storeAcc.getList();
+    for (let i = 0; i < list.length; i++) {
         if (list[i].addr === address) {
             return list[i];
         }
     }
+
     return null;
-}
-
-function getLast() {
-    return storage.getItem(LAST_KEY);
-}
-
-function setLast(acc) {  
-    storage.setItem(LAST_KEY, acc);
 }

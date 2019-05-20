@@ -1,10 +1,11 @@
 const web3Eth = require('web3-eth');
 const utils = require('web3-utils');
 const Tx = require('ethereumjs-tx');
-const ethProvider = require('web3-providers-http'); // Web3-providers-ws cannot work in IE.
+// Web3-providers-ws cannot work in IE.
+const ethProvider = require('web3-providers-http');
 
 import localStorage from 'utils/localStorage';
-import { bind as gwBind, balance as gwBalance } from 'services/exchangeVite';
+import { bind as gwBind, balance as gwBalance } from 'services/conversion';
 import { timer } from 'utils/asyncFlow';
 import { getWalletAddr, getWrongWalletAddr } from './address';
 import { viteContractAbi, viteContractAddr, blackHole, signBinding } from './viteContract';
@@ -14,13 +15,12 @@ const balanceTime = 2000;
 let provider = null;
 
 class ethWallet {
-    constructor({
-        mnemonic
-    }) {
+    constructor({ mnemonic }) {
         this.utils = utils;
         this.mnemonic = mnemonic;
 
-        this.addrNum = 0;   // initing --- 0, only true --- 1, only wrong --- 2
+        // Initing --- 0, only true --- 1, only wrong --- 2
+        this.addrNum = 0;
         this.addrObj = getWalletAddr(this.mnemonic, 0);
         this.wrongAddrObj = getWrongWalletAddr(this.mnemonic, 0);
         this.activeAddr = this.addrObj;
@@ -39,8 +39,9 @@ class ethWallet {
             eth: {
                 name: 'eth',
                 symbol: 'ETH',
-                decimals: utils.unitMap.ether.length - 1, // 18
-                balance: 0,
+                // 18
+                decimals: utils.unitMap.ether.length - 1,
+                balance: 0
             }
         };
         this._initVite();
@@ -51,12 +52,10 @@ class ethWallet {
     }
 
     init(cb) {
-        this._getWrongBalance().then(({
-            viteBalance, ethBalance
-        }) => {
+        this._getWrongBalance().then(({ viteBalance, ethBalance }) => {
             this._stopWrongLoop();
-            let haveBalance = +viteBalance || +ethBalance;
-            let lastActiveAddr = localStorage.getItem(DefaultAddr);
+            const haveBalance = +viteBalance || +ethBalance;
+            const lastActiveAddr = localStorage.getItem(DefaultAddr);
 
             this.addrNum = haveBalance ? 2 : 1;
             if (haveBalance && lastActiveAddr === this.wrongAddrObj.hexAddr) {
@@ -66,14 +65,15 @@ class ethWallet {
             }
             this._loopBalance();
             cb && cb();
-        }).catch((err) => {
-            console.warn(err);
+        })
+            .catch(err => {
+                console.warn(err);
 
-            this._stopWrongLoop();
-            this.wrongLoop = setTimeout(() => {
-                this.init();
-            }, balanceTime);
-        });
+                this._stopWrongLoop();
+                this.wrongLoop = setTimeout(() => {
+                    this.init();
+                }, balanceTime);
+            });
     }
 
     _stopWrongLoop() {
@@ -82,18 +82,13 @@ class ethWallet {
     }
 
     async _getWrongBalance() {
-        let wrongAddr = this.wrongAddrObj.hexAddr;
+        const wrongAddr = this.wrongAddrObj.hexAddr;
 
-        let viteBalance = await gwBalance({
-            address: wrongAddr
-        }).then((data) => {
-            return data && data.VITE ? data.VITE.Balance || 0 : 0;
-        });
+        const viteBalance = await gwBalance({ address: wrongAddr }).then(data => data && data.VITE ? data.VITE.Balance || 0 : 0);
 
-        let ethBalance = await this.web3.getBalance(wrongAddr);
-        return {
-            viteBalance, ethBalance
-        };
+        const ethBalance = await this.web3.getBalance(wrongAddr);
+
+        return { viteBalance, ethBalance };
     }
 
     changeActiveAddr(addr) {
@@ -112,33 +107,27 @@ class ethWallet {
     }
 
     _initVite() {
-        let _this = this;
-        this.contract.methods.decimals().call({
-            from: this.getDefaultAddr()
-        }, function(error, result) {
+        const _this = this;
+        this.contract.methods.decimals().call({ from: this.getDefaultAddr() }, function (error, result) {
             !error && (_this.viteDecimals = result);
         });
-        this.contract.methods.symbol().call({
-            from: this.getDefaultAddr()
-        }, function(error, result){
+        this.contract.methods.symbol().call({ from: this.getDefaultAddr() }, function (error, result) {
             !error && (_this.tokenList.vite.symbol = result);
         });
     }
+
     _loopBalance() {
         this._stopLoopBalance();
 
         this.getEthBalance();
-        this.balanceInfoInst = new timer(()=>{
-            return this.getEthBalance();
-        }, balanceTime);
+        this.balanceInfoInst = new timer(() => this.getEthBalance(), balanceTime);
         this.balanceInfoInst.start();
 
         this.getViteBalance();
-        this.viteBalanceInfoInst = new timer(()=>{
-            return this.getViteBalance();
-        }, balanceTime);
+        this.viteBalanceInfoInst = new timer(() => this.getViteBalance(), balanceTime);
         this.viteBalanceInfoInst.start();
     }
+
     _stopLoopBalance() {
         this.balanceInfoInst && this.balanceInfoInst.stop();
         this.balanceInfoInst = null;
@@ -147,21 +136,25 @@ class ethWallet {
     }
 
     getViteBalance() {
-        let address = this.getDefaultAddr();
-        return gwBalance({ address }).then((data) => {
+        const address = this.getDefaultAddr();
+
+        return gwBalance({ address }).then(data => {
             if (address !== this.getDefaultAddr()) {
                 return;
             }
             this.tokenList.vite.balance = data && data.VITE ? data.VITE.Balance || 0 : 0;
         });
     }
+
     getEthBalance() {
-        let address = this.getDefaultAddr();
-        return this.web3.getBalance(address).then((balance) => {
+        const address = this.getDefaultAddr();
+
+        return this.web3.getBalance(address).then(balance => {
             if (address !== this.getDefaultAddr()) {
                 return;
             }
             this.tokenList.eth.balance = balance;
+
             return balance;
         });
     }
@@ -174,37 +167,38 @@ class ethWallet {
         if (type === 'sendTx') {
             return '';
         }
-        return '0xa9059cbb' + addPreZero( toAddr.slice(2) ) + addPreZero( utils.toHex(value).substr(2) );
+
+        return `0xa9059cbb${ addPreZero(toAddr.slice(2)) }${ addPreZero(utils.toHex(value).substr(2)) }`;
     }
+
     estimateGas(toAddr, value, type) {
-        let to = type === 'exchange' ? blackHole : toAddr;
-        let v = type === 'sendContractTx' ? '0' : value;
+        const to = type === 'exchange' ? blackHole : toAddr;
+        const v = type === 'sendContractTx' ? '0' : value;
+
         return this.web3.estimateGas({
             to,
             data: this.getTxData(v, to, type)
         });
     }
-    
+
     // ETH
-    async sendTx({
-        toAddress, value, gwei
-    }) {
+    async sendTx({ toAddress, value, gwei }) {
         const { ethTxHash } = await getTxHash.call(this, {
-            toAddress, value, gwei,
+            toAddress,
+            value,
+            gwei,
             data: ''
         });
 
         return sendEthTx.call(this, ethTxHash);
     }
 
-    async sendContractTx({
-        toAddress, value, gwei
-    }) {
+    async sendContractTx({ toAddress, value, gwei }) {
         const { ethTxHash } = await getTxHash.call(this, {
-            toAddress: viteContractAddr, 
+            toAddress: viteContractAddr,
             value: '0x00',
             gwei,
-            // contranctMethod(transfer), signature hash
+            // ContranctMethod(transfer), signature hash
             // toEthAddress (Remove 0x and filled up to 64 bits)
             // value (Remove 0x and filled up to 64 bits)
             data: this.getTxData(value, toAddress, 'sendContractTx')
@@ -213,33 +207,30 @@ class ethWallet {
         return sendEthTx.call(this, ethTxHash);
     }
 
-    async exchangeVite({
-        viteAddr, value, gwei
-    }) {
-        let acount = this.activeAddr;
-        let ethAddr = acount.hexAddr;
-        let privateKey = acount.wallet.privKey;
+    async conversion({ viteAddr, value, gwei }) {
+        const acount = this.activeAddr;
+        const ethAddr = acount.hexAddr;
+        const privateKey = acount.wallet.privKey;
 
         const { ethTxHash, hash } = await getTxHash.call(this, {
-            toAddress: viteContractAddr, 
+            toAddress: viteContractAddr,
             value: '0x00',
             gwei,
-            // contranctMethod(transfer), signature hash
+            // ContranctMethod(transfer), signature hash
             // toEthAddress (Remove 0x and filled up to 64 bits)
             // value (Remove 0x and filled up to 64 bits)
             data: this.getTxData(value, blackHole, 'sendContractTx')
         });
 
-        let signResult = signBinding({
-            hash, viteAddr, value, privateKey, ethAddr
-        });
+        const signResult = signBinding({ hash, viteAddr, value, privateKey, ethAddr });
 
         try {
             await gwBind(signResult);
-        } catch(err) {
+        } catch (err) {
             if (+err.code === 201) {
                 return sendEthTx.call(this, ethTxHash);
             }
+
             return Promise.reject(err);
         }
 
@@ -250,28 +241,26 @@ class ethWallet {
 export default ethWallet;
 
 
-
-function addPreZero(num){
-    let t = (num + '').length;
+function addPreZero(num) {
+    const t = (`${ num }`).length;
     let s = '';
-    for (let i=0; i<64-t; i++) {
+    for (let i = 0; i < 64 - t; i++) {
         s += '0';
     }
+
     return s + num;
 }
 
-async function getTxHash({
-    toAddress, value, data, gwei
-}) {
-    let acount = this.activeAddr;
-    let ethAddr = acount.hexAddr;
-    let privateKey = acount.wallet.privKey;
+async function getTxHash({ toAddress, value, data, gwei }) {
+    const acount = this.activeAddr;
+    const ethAddr = acount.hexAddr;
+    const privateKey = acount.wallet.privKey;
 
     let nonce = await this.web3.getTransactionCount(ethAddr, this.web3.defaultBlock.pending);
-    let gasPrice = utils.toWei(gwei + '', 'gwei').toString();
-    let gasLimit = process.env.NODE_ENV === 'production' ? 60000 : 99000;
+    const gasPrice = utils.toWei(`${ gwei }`, 'gwei').toString();
+    const gasLimit = process.env.NODE_ENV === 'production' ? 60000 : 99000;
 
-    let txData = {
+    const txData = {
         nonce: utils.toHex(nonce++),
         gasLimit: utils.toHex(gasLimit),
         gasPrice: utils.toHex(gasPrice),
@@ -282,15 +271,15 @@ async function getTxHash({
         chainId: process.env.NODE_ENV === 'production' ? 1 : 3
     };
 
-    let tx = new Tx(txData);
+    const tx = new Tx(txData);
     tx.sign(privateKey);
 
-    let hash = tx.hash().toString('hex');
-    let serializedTx = tx.serialize().toString('hex');
-    let ethTxHash = '0x' + serializedTx.toString('hex');
+    const hash = tx.hash().toString('hex');
+    const serializedTx = tx.serialize().toString('hex');
+    const ethTxHash = `0x${ serializedTx.toString('hex') }`;
 
     return {
-        hash: '0x' + hash,
+        hash: `0x${ hash }`,
         ethTxHash
     };
 }
@@ -301,6 +290,7 @@ function sendEthTx(ethTxHash) {
             if (!err) {
                 return res(hash);
             }
+
             return rej(err);
         });
     });

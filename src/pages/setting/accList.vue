@@ -1,8 +1,8 @@
 <template>
     <div class="acc-list-wrapper">
         <div class="row">
-            <span class="title">{{ $t('accList.addr') }}</span>
-            <div class="describe">{{ $t('accList.default') }}</div>
+            <span class="title">{{ $t('setting.addrList') }}</span>
+            <div class="describe">{{ $t('setting.setDefault') }}</div>
         </div>
         <div class="acc-list __pointer">
             <div ref="listWrapper" class="list-wrapper">
@@ -18,7 +18,7 @@
             </div>
 
             <div v-show="isWalletAcc && addrList.length < 10" class="add" @click="addAddr">
-                <span class="acc-add"></span><span class="describe">{{ $t('accList.addAcc') }}</span>
+                <span class="acc-add"></span><span class="describe">{{ $t('setting.addAddr') }}</span>
             </div>
         </div>
     </div>
@@ -30,7 +30,7 @@ import copy from 'utils/copy';
 
 export default {
     data() {
-        let activeAccount = this.$wallet.getActiveAccount();
+        const activeAccount = this.$wallet.getActiveAccount();
 
         return {
             activeAccount,
@@ -43,10 +43,10 @@ export default {
     methods: {
         copy(addr) {
             copy(addr);
-            this.$toast(this.$t('account.hint.copy'));
+            this.$toast(this.$t('hint.copy'));
         },
         addAddr() {
-            let addrList = this.activeAccount.getAddrList();
+            const addrList = this.activeAccount.getAddrList();
             if (addrList && addrList.length >= 10) {
                 return;
             }
@@ -54,28 +54,30 @@ export default {
             this.activeAccount.addAddr();
             this.addrList = this.activeAccount.getAddrList();
 
-            Vue.nextTick(()=>{
+            Vue.nextTick(() => {
                 if (!this.$refs.list || !this.$refs.listWrapper) {
                     return;
                 }
 
-                let height = this.$refs.list.offsetHeight;
-                let wrapperHeight = this.$refs.listWrapper.offsetHeight;
+                const height = this.$refs.list.offsetHeight;
+                const wrapperHeight = this.$refs.listWrapper.offsetHeight;
                 this.$refs.listWrapper.scrollTop = height - wrapperHeight;
             });
         },
         setDefault(addr, index) {
-            let res = this.activeAccount.setDefaultAddr(addr, index);
+            const res = this.activeAccount.setDefaultAddr(addr, index);
             if (!res) {
                 this.$toast(this.$t('hint.err'));
                 return;
             }
             this.defaultAddr = this.activeAccount.getDefaultAddr();
 
-            // clear all
+            // Clear all
             this.$store.commit('commitClearBalance');
             this.$store.commit('commitClearTransList');
             this.$store.commit('commitClearPledge');
+            // [TODO] Recover trade ==============
+            // this.$store.commit('clearDexBalance');
         }
     }
 };
@@ -91,43 +93,50 @@ export default {
 
     .title {
         font-size: 14px;
-        color: #1D2024;
+        color: #1d2024;
         letter-spacing: 0.35px;
         font-family: $font-bold, arial, sans-serif;
     }
+
     .describe {
         font-size: 12px;
-        color: #5E6875;
+        color: #5e6875;
         letter-spacing: 0.3px;
         line-height: 16px;
         margin-top: 8px;
     }
 }
+
 .acc-list {
-    background: #FFFFFF;
-    border: 1px solid #D4DEE7;
+    background: #fff;
+    border: 1px solid #d4dee7;
     border-radius: 2px;
+
     .list-wrapper {
         max-height: 190px;
         overflow: auto;
     }
+
     .acc-item {
         line-height: 20px;
         position: relative;
         padding: 10px 15px;
-        border-bottom: 1px solid #D4DEE7;
+        border-bottom: 1px solid #d4dee7;
         display: flex;
+
         &:last-child {
             border: none;
         }
     }
+
     .add {
         padding: 0 15px;
         height: 36px;
         line-height: 36px;
         font-size: 12px;
-        color: #007AFF;
-        border-top: 1px solid #D4DEE7;
+        color: #007aff;
+        border-top: 1px solid #d4dee7;
+
         .acc-add {
             display: inline-block;
             margin: 10px 10px 0 0;
@@ -136,12 +145,13 @@ export default {
             background: url('../../assets/imgs/add_icon.svg') no-repeat center;
             background-size: 16px 16px;
         }
+
         .describe {
             display: inline;
             position: relative;
             bottom: 3px;
             font-size: 12px;
-            color: #007AFF;
+            color: #007aff;
         }
     }
 
@@ -149,17 +159,19 @@ export default {
         display: block;
         width: 93%;
         font-size: 12px;
-        color: #5E6875;
+        color: #5e6875;
     }
+
     .select {
         margin: 2px 10px 0 0;
         display: block;
         box-sizing: border-box;
         width: 16px;
         height: 16px;
-        background: #FFFFFF;
-        border: 1px solid #D4DEE7;
+        background: #fff;
+        border: 1px solid #d4dee7;
         border-radius: 16px;
+
         &.active {
             background: url('../../assets/imgs/presnet.svg') no-repeat center;
             background-size: 16px 16px;
@@ -171,9 +183,11 @@ export default {
     .acc-list .list-wrapper {
         max-height: unset;
     }
+
     .acc-list .acc-item {
         padding: 10px;
     }
+
     .acc-list .add {
         padding: 0 10px;
     }

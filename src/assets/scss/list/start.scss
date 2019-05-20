@@ -1,0 +1,45 @@
+@import "~assets/scss/vars.scss";
+
+.start.common-list-wrapper{
+    position: relative;
+    height: 100%;
+    font-size: 14px;
+    color: #FFFFFF;
+    letter-spacing: 0;
+    margin-top: 5px;
+    font-family: $font-bold, arial, sans-serif;
+    z-index: 101;
+    .list-title {
+        display: inline-block;
+        min-width: 50px;
+        text-align: center;
+        height: 100%;
+        padding: 10px 30px;
+    }
+    .list {
+        position: absolute;
+        right: 20px;
+        min-width: 80px;
+        margin-top: 4px;
+        background: #FFFFFF;
+        border: 1px solid #E5EDF3;
+        box-shadow: 0 6px 36px 0 rgba(139, 159, 214, 0.04);
+        border-radius: 4px;
+        font-family: $font-normal, arial, sans-serif;
+        font-size: 14px;
+        color: #5E6875;
+        letter-spacing: 0;
+        line-height: 16px;
+        li {
+            box-sizing: border-box;
+            width: 100%;
+            padding: 0 16px;
+            text-align: center;
+            height: 36px;
+            line-height: 36px;
+            &:hover {
+                background: rgba(75,116,255,0.10);
+            }
+        }
+    }
+}

@@ -18,9 +18,7 @@ import copy from 'utils/copy';
 import copyOK from 'components/copyOK';
 
 export default {
-    components: {
-        copyOK
-    },
+    components: { copyOK },
     props: {
         lock: {
             type: Boolean,
@@ -28,9 +26,9 @@ export default {
         }
     },
     data() {
-        let activeAccount = this.$wallet.getActiveAccount();
-        let mnemonic = activeAccount.getMnemonic();
-        let mnemonicStr = mnemonic ? this.getShowMnemonic(mnemonic) : '';
+        const activeAccount = this.$wallet.getActiveAccount();
+        const mnemonic = activeAccount.getMnemonic();
+        const mnemonicStr = mnemonic ? this.getShowMnemonic(mnemonic) : '';
 
         return {
             visible: false,
@@ -45,7 +43,7 @@ export default {
         }
     },
     watch: {
-        showMnemonic: function() {
+        showMnemonic: function () {
             this.mnemonicStr = this.mnemonic ? this.getShowMnemonic(this.mnemonic) : '';
         }
     },
@@ -56,7 +54,7 @@ export default {
             }
             copy(this.mnemonic);
             this.copySuccess = true;
-            setTimeout(()=>{
+            setTimeout(() => {
                 this.copySuccess = false;
             }, 1000);
         },
@@ -72,9 +70,10 @@ export default {
             }
 
             let showStr = '';
-            for (let i=0; i<mnemonic.length; i++) {
+            for (let i = 0; i < mnemonic.length; i++) {
                 showStr += '*';
             }
+
             return showStr;
         }
     }
@@ -88,54 +87,64 @@ export default {
 .mnemonic {
     width: 100%;
     position: relative;
+
     .copy-wrapper {
         bottom: 90px;
     }
 }
+
 .row {
     width: 100%;
     margin-bottom: 16px;
+
     .title {
         font-size: 14px;
-        color: #1D2024;
+        color: #1d2024;
         letter-spacing: 0.35px;
         line-height: 16px;
         font-family: $font-bold, arial, sans-serif;
     }
+
     .icon {
         display: block;
         width: 20px;
         height: 20px;
         float: right;
     }
+
     .eyes {
         margin-right: 16px;
         background-size: 20px 20px;
         background: url('../../assets/imgs/eyeclose_default.svg');
+
         &.visible {
             background: url('../../assets/imgs/eyeopen_default.svg');
         }
+
         &.lock {
             background: url('../../assets/imgs/eyeopen_disabled.svg');
             cursor: not-allowed;
         }
     }
+
     .copy {
         background-size: 20px 20px;
         background: url('../../assets/imgs/copy_default.svg');
+
         &.lock {
             background: url('../../assets/imgs/copy_disabled.svg');
             cursor: not-allowed;
         }
     }
 }
+
 .content {
-    background: #F3F6F9;
-    border: 1px solid #D4DEE7;
+    background: #f3f6f9;
+    border: 1px solid #d4dee7;
     border-radius: 2px;
     padding: 10px 15px;
     font-size: 14px;
-    color: #5E6875;
+    color: #5e6875;
     word-wrap: break-word;
 }
 </style>

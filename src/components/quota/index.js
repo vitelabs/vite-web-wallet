@@ -1,40 +1,41 @@
 import Vue from 'vue';
-import quotaComponent from './quota.vue';
+import i18n from 'i18n';
+import quotaCancelComponent from './cancel.vue';
 
-const QuotaComponent = Vue.extend(quotaComponent);
-let instance;
+const QuotaCancelComponent = Vue.extend(quotaCancelComponent);
+let cancelInstance;
 
-export function initQuotaConfirm (i18n, router) {
-    instance = new QuotaComponent({
+export function initQuotaConfirm(router) {
+    cancelInstance = new QuotaCancelComponent({
         el: document.createElement('div'),
-        i18n, router
+        i18n,
+        router
     });
 }
 
-export function quotaConfirm ({
+export function quotaConfirm({
     showMask = true,
-    operate, 
-    cancel = () => {}
+    operate
 }) {
-    let _close = (cb) => {
-        try {
-            document.body.removeChild(instance.$el);
-        } catch(err) {
-            console.warn(err);
-        }
-        cb && cb();
+    cancelInstance.showMask = showMask;
+    cancelInstance.operate = operate;
+    cancelInstance.cancel = () => {
+        _close(null, cancelInstance.$el);
     };
-    
-    instance.showMask = showMask;
-    instance.operate = operate;
-    instance.cancel = ()=>{
-        _close();
-        cancel && cancel();
+    cancelInstance.submit = () => {
+        _close(null, cancelInstance.$el);
     };
-    instance.submit = () => {
-        _close();
-    };
-    
-    document.body.appendChild(instance.$el);
-    return true;
+
+    const appEl = document.getElementById('vite-wallet-app');
+    appEl.appendChild(cancelInstance.$el);
 }
+
+const _close = (cb, el) => {
+    try {
+        const appEl = document.getElementById('vite-wallet-app');
+        appEl.removeChild(el);
+    } catch (err) {
+        console.warn(err);
+    }
+    cb && cb();
+};
