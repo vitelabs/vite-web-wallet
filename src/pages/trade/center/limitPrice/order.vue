@@ -89,7 +89,7 @@ export default {
         }
     },
     mounted() {
-        this.price = this.activeTxPair && this.activeTxPair.price ? this.activeTxPair.price : '';
+        this.price = this.activeTxPair && this.activeTxPair.closePrice ? this.activeTxPair.closePrice : '';
     },
     data() {
         return {
@@ -108,10 +108,10 @@ export default {
     },
     watch: {
         activeTxPair: function (val, old) {
-            if (old && old.pairCode === this.activeTxPair.pairCode) {
+            if (old && old.symbol === this.activeTxPair.symbol) {
                 return;
             }
-            this.price = this.activeTxPair && this.activeTxPair.price ? this.activeTxPair.price : '';
+            this.price = this.activeTxPair && this.activeTxPair.closePrice ? this.activeTxPair.closePrice : '';
             this.quantity = '';
             this.amount = '';
         },
@@ -138,8 +138,8 @@ export default {
                 return;
             }
 
-            if (!(this.orderType === 'buy' && this.activeTx.txSide === 1)
-                && !(this.orderType === 'sell' && this.activeTx.txSide === 0)) {
+            if (!(this.orderType === 'buy' && this.activeTx.side === 1)
+                && !(this.orderType === 'sell' && this.activeTx.side === 0)) {
                 this.priceChanged();
                 return;
             }
@@ -189,7 +189,7 @@ export default {
         },
         rate() {
             const rateList = this.$store.state.exchangeRate.rateMap || {};
-            const tokenId = this.activeTxPair && this.activeTxPair.ttoken ? this.activeTxPair.ttoken : null;
+            const tokenId = this.activeTxPair && this.activeTxPair.quoteToken ? this.activeTxPair.quoteToken : null;
             const coin = this.$store.state.env.currency;
             if (!tokenId || !rateList[tokenId]) {
                 return null;
@@ -199,7 +199,7 @@ export default {
         },
         minAmount() {
             const markets = this.$store.state.exchangeMarket.marketMap;
-            const ttoken = this.activeTxPair ? this.activeTxPair.ttoken : '';
+            const ttoken = this.activeTxPair ? this.activeTxPair.quoteToken : '';
 
             if (!markets || !markets.length || !ttoken) {
                 return 0;
@@ -235,9 +235,9 @@ export default {
                 return null;
             }
 
-            let tokenId = this.activeTxPair.ftoken;
+            let tokenId = this.activeTxPair.tradeToken;
             if (this.orderType === 'buy') {
-                tokenId = this.activeTxPair.ttoken;
+                tokenId = this.activeTxPair.quoteToken;
             }
             if (!tokenId) {
                 return null;
@@ -269,10 +269,10 @@ export default {
             return this.$store.state.exchangeTokens.ftoken;
         },
         ftokenShow() {
-            return this.activeTxPair ? this.activeTxPair.ftokenShow : '';
+            return this.activeTxPair ? this.activeTxPair.tradeTokenSymbol : '';
         },
         ttokenShow() {
-            return this.activeTxPair ? this.activeTxPair.ttokenShow : '';
+            return this.activeTxPair ? this.activeTxPair.quoteTokenSymbol : '';
         },
         activeTxPair() {
             return this.$store.state.exchangeActiveTxPair.activeTxPair;
@@ -286,7 +286,7 @@ export default {
             }
 
             const tDigit = this.ttokenDetail.tokenDigit;
-            const pariDigit = this.activeTxPair.toDecimals;
+            const pariDigit = this.activeTxPair.pricePrecision;
 
             const digit = tDigit > pariDigit ? pariDigit : tDigit;
             return digit > maxDigit ? maxDigit : digit;
@@ -297,7 +297,7 @@ export default {
             }
 
             const fDigit = this.ftokenDetail.tokenDigit;
-            const pariDigit = this.activeTxPair.fromDecimals;
+            const pariDigit = this.activeTxPair.quantityPrecision;
 
             const digit = fDigit > pariDigit ? pariDigit : fDigit;
             return digit > maxDigit ? maxDigit : digit;
@@ -603,8 +603,8 @@ export default {
             });
         },
         newOrder({ price, quantity }) {
-            const tradeToken = this.activeTxPair ? this.activeTxPair.ftoken : '';
-            const quoteToken = this.activeTxPair ? this.activeTxPair.ttoken : '';
+            const tradeToken = this.activeTxPair ? this.activeTxPair.tradeToken : '';
+            const quoteToken = this.activeTxPair ? this.activeTxPair.quoteToken : '';
 
             this.isLoading = true;
             const tokenDigit = this.ftokenDetail.tokenDigit;

@@ -6,7 +6,7 @@
                 <div class="item-title">{{ $t('trade.txPairDetail.24h') }}</div>
                 <div class="item-row">
                     <span>{{ $t('trade.txPairDetail.openPrice') }}:</span>
-                    {{ activeTxPair ? activeTxPair.priceBefore24h : '--' }}
+                    {{ activeTxPair ? activeTxPair.openPrice : '--' }}
                 </div>
                 <div class="item-row" :class="{
                     'up': +upDown > 0,
@@ -28,7 +28,7 @@
                 <div class="item-title">{{ $t('trade.txPairDetail.status')  }}</div>
                 <div class="item-row">
                     <span>{{ $t('trade.txPairDetail.latest') }}:</span>
-                    {{ activeTxPair ? activeTxPair.price : '--'  }}
+                    {{ activeTxPair ? activeTxPair.closePrice : '--'  }}
                 </div>
                 <div class="item-row">
                     <span>{{ $t('trade.txPairDetail.buy') }}:</span>

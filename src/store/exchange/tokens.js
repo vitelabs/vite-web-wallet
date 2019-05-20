@@ -24,8 +24,8 @@ const actions = {
             return;
         }
 
-        dispatch('exFetchActiveTtoken', activeTxPair.ttoken);
-        dispatch('exFetchActiveFtoken', activeTxPair.ftoken);
+        dispatch('exFetchActiveFtoken', activeTxPair.tradeToken);
+        dispatch('exFetchActiveTtoken', activeTxPair.quoteToken);
     },
     exFetchActiveTtoken({ rootState, commit }, tokenId) {
         tokenDetail({ tokenId }).then(data => {

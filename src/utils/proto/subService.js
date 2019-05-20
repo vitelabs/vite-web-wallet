@@ -21,7 +21,7 @@ export const latestTxWs = function ({ symbol }) {
 };
 
 export const latestOrderWs = function ({ address }) {
-    const key = `order.${ address }.latest`;
+    const key = `order.${ address }`;
     return key;
 };
 
