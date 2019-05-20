@@ -85,8 +85,16 @@ const actions = {
     }
 };
 
+const getters = {
+    activeAddr(state) {
+        const activeAccount = state.activeAcc;
+        return activeAccount ? activeAccount.address : '';
+    }
+};
+
 export default {
     state,
     mutations,
-    actions
+    actions,
+    getters
 };

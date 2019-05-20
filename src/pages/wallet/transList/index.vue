@@ -113,8 +113,7 @@ export default {
     },
     computed: {
         address() {
-            const activeAccount = this.$store.state.wallet.activeAcc;
-            return activeAccount ? activeAccount.address : '';
+            return this.$store.getters.activeAddr;
         },
         totalPage() {
             return this.$store.getters.totalPage;

@@ -118,8 +118,7 @@ export default {
     },
     computed: {
         viteAddr() {
-            const activeAccount = this.$store.state.wallet.activeAcc;
-            return activeAccount ? activeAccount.address : '';
+            return this.$store.getters.activeAddr;
         },
         netStatus() {
             return this.$store.state.env.clientStatus;
