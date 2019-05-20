@@ -83,9 +83,6 @@ export default {
         sortedList() {
             return this.list.slice(0).sort((a, b) => (b.date - a.date));
         },
-        currentMarketNmae() {
-            return this.$store.getters.currentMarketName;
-        },
         defaultAddr() {
             const activeAccount = this.$store.state.wallet.activeAcc;
             return activeAccount ? activeAccount.address : '';
@@ -117,9 +114,7 @@ export default {
         },
         subscribe() {
             task = task || new subTask('orderQueryCurrent', ({ args, data }) => {
-                if (args.address !== this.defaultAddr
-                    || this.filterObj.ttoken !== args.ttoken
-                    || this.filterObj.ftoken !== args.ftoken) {
+                if (args.address !== this.defaultAddr || this.filterObj.symbol !== args.symbol) {
                     return;
                 }
 
@@ -216,11 +211,11 @@ export default {
             order({
                 address: this.defaultAddr,
                 status: 1,
-                pageNo: 1,
-                pageSize: 100,
+                offset: 1,
+                limit: 100,
                 ...this.filterObj
             }).then(data => {
-                this.list = data.orders || [];
+                this.list = data.order || [];
             });
         },
         cancel(order) {

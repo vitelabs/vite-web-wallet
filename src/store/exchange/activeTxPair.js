@@ -21,11 +21,11 @@ const actions = {
         const activeTxPair = state.activeTxPair;
 
         if (txPair) {
-            history.replaceState(null, null, `${ location.origin }/trade?pairCode=${ txPair.pairCode }&ftoken=${ txPair.ftoken }&ttoken=${ txPair.ttoken }`);
+            history.replaceState(null, null, `${ location.origin }/trade?symbol=${ txPair.symbol }&tradeTokenSymbol=${ txPair.tradeTokenSymbol }&quoteTokenSymbol=${ txPair.quoteTokenSymbol }`);
             commit('exSetActiveTxPair', txPair);
         }
 
-        if (txPair && activeTxPair && activeTxPair.pairCode === txPair.pairCode) {
+        if (txPair && activeTxPair && activeTxPair.symbol === txPair.symbol) {
             return;
         }
 

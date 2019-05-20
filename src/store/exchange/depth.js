@@ -35,8 +35,7 @@ const actions = {
         commit('exSetDepthLoading', true);
 
         depthTask = depthTask || new subTask('depth', ({ args, data }) => {
-            if (args.ftoken !== activeTxPair.ftoken
-                || args.ttoken !== activeTxPair.ttoken) {
+            if (args.symbol !== activeTxPair.symbol) {
                 return;
             }
 

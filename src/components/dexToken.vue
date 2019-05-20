@@ -13,7 +13,7 @@
             <ul v-show="isShowMarketList" class="market-list">
                 <li @click="setMarket(_market)" class="market input-wrapper border-bottom"
                     v-for="(_market, i) in marketList" :key="i"
-                    v-show="market && _market.token !== market.token">{{ _market.name }} / {{ _market.token }}</li>
+                    v-show="market && _market.tokenId !== market.tokenId">{{ _market.symbol }} / {{ _market.tokenId }}</li>
             </ul>
         </div>
 
@@ -37,7 +37,7 @@
                         {{ tokenName ? $t('trade.noData.search') : $t('hint.noData') }}</li>
                     <li @click="setToken(_token)" class="market input-wrapper border-bottom"
                         v-for="(_token, i) in list" :key="i">
-                        {{ _token.name }} / {{ _token.token }}</li>
+                        {{ _token.symbol }} / {{ _token.tokenId }}</li>
                 </ul>
             </div>
         </div>
@@ -76,7 +76,7 @@ export default {
     mounted() {
         this.market = this.marketList && this.marketList.length ? this.marketList[0] : null;
         this.token = this.tokenList && this.tokenList.length ? this.tokenList[0] : null;
-        this.tokenName = this.token ? this.token.name : '';
+        this.tokenName = this.token ? this.token.symbol : '';
 
         this.fetchTokenList();
     },
@@ -143,7 +143,7 @@ export default {
             const list = [];
             const tokenName = this.$trim(this.tokenName).toLowerCase();
             this.tokenList.forEach(token => {
-                const name = token.name.toLowerCase();
+                const name = token.symbol.toLowerCase();
                 if (name.indexOf(tokenName) !== -1) {
                     list.push(token);
                 }
@@ -199,16 +199,16 @@ export default {
             }
 
             this.isLoading = true;
-            const token = this.market.token;
-            marketsReserve({ token }).then(data => {
-                if (this.market.token !== token) {
+            const quoteTokenSymbol = this.market.symbol;
+            marketsReserve({ quoteTokenSymbol }).then(data => {
+                if (this.market.symbol !== quoteTokenSymbol) {
                     return;
                 }
                 this.isLoading = false;
                 this.tokenList = data || [];
             }).catch(err => {
                 console.warn(err);
-                if (this.market.token !== token) {
+                if (this.market.symbol !== quoteTokenSymbol) {
                     return;
                 }
                 this.isLoading = false;

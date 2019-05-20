@@ -1,22 +1,22 @@
 import { depth, defaultPair, assignPair, latestTx, order } from 'services/trade';
 
-export function depthWs({ ftoken, ttoken }) {
-    const key = `market.${ ftoken }-${ ttoken }.depth.latest`;
+export function depthWs({ symbol }) {
+    const key = `market.${ symbol }.depth`;
     return key;
 }
 
-export const defaultPairWs = function ({ ttoken }) {
-    const key = `market.${ ttoken }.details.latest`;
+export const defaultPairWs = function ({ quoteTokenSymbol }) {
+    const key = `market.quoteToken.${ quoteTokenSymbol }.tickers`;
     return key;
 };
 
-export const assignPairWs = function ({ ftoken, ttoken }) {
-    const key = `market.${ ftoken }-${ ttoken }.detail.latest`;
+export const assignPairWs = function ({ symbol }) {
+    const key = `market.${ symbol }.tickers`;
     return key;
 };
 
-export const latestTxWs = function ({ ftoken, ttoken }) {
-    const key = `market.${ ftoken }-${ ttoken }.trade.latest`;
+export const latestTxWs = function ({ symbol }) {
+    const key = `market.${ symbol }.trade`;
     return key;
 };
 
@@ -25,18 +25,18 @@ export const latestOrderWs = function ({ address }) {
     return key;
 };
 
-export const orderQueryHistoryWs = function ({ ftoken, ttoken, address }) {
-    const key = `market.${ ftoken }-${ ttoken }.order.${ address }.history`;
+export const orderQueryHistoryWs = function ({ symbol, address }) {
+    const key = `market.${ symbol }.order.${ address }.history`;
     return key;
 };
 
-export const orderQueryCurrentWs = function ({ ftoken, ttoken, address }) {
-    const key = `market.${ ftoken }-${ ttoken }.order.${ address }.current`;
+export const orderQueryCurrentWs = function ({ symbol, address }) {
+    const key = `market.${ symbol }.order.${ address }.open`;
     return key;
 };
 
-export const klineWs = function ({ ftoken, ttoken, resolution }) {
-    const key = `market.${ ftoken }-${ ttoken }.kline.${ resolution }`;
+export const klineWs = function ({ symbol, resolution }) {
+    const key = `market.${ symbol }.kline.${ resolution }`;
     return key;
 };
 
@@ -46,23 +46,19 @@ export const httpServicesMap = {
     defaultPair,
     assignPair,
     latestTx,
-    orderQueryHistory: ({ ftoken, ttoken, address }) => order({
+    orderQueryHistory: ({ symbol, address }) => order({
         address,
-        ttoken,
-        ftoken,
-        pageNo: 1,
-        pageSize: 30,
-        status: 0,
-        paging: 0
+        symbol,
+        offset: 1,
+        limit: 30,
+        status: 0
     }),
-    orderQueryCurrent: ({ ftoken, ttoken, address }) => order({
+    orderQueryCurrent: ({ symbol, address }) => order({
         address,
-        ttoken,
-        ftoken,
-        pageNo: 1,
-        pageSize: 30,
-        status: 1,
-        paging: 0
+        symbol,
+        offset: 1,
+        limit: 30,
+        status: 1
     })
 };
 export const wsServicesMap = {

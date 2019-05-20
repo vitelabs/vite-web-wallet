@@ -79,18 +79,18 @@ export default {
             return '-';
         },
         quantity24h() {
-            if (!this.activeTxPair || !this.activeTxPair.quantity24h) {
+            if (!this.activeTxPair || !this.activeTxPair.quantity) {
                 return '--';
             }
 
-            return `${ BigNumber.formatNum(this.activeTxPair.quantity24h, 1) } ${ this.activeTxPair.ftokenShow }`;
+            return `${ BigNumber.formatNum(this.activeTxPair.quantity, 1) } ${ this.activeTxPair.tradeTokenSymbol }`;
         },
         amount24h() {
-            if (!this.activeTxPair || !this.activeTxPair.amount24h) {
+            if (!this.activeTxPair || !this.activeTxPair.amount) {
                 return '--';
             }
 
-            return `${ BigNumber.formatNum(this.activeTxPair.amount24h, 1) } ${ this.activeTxPair.ttokenShow }`;
+            return `${ BigNumber.formatNum(this.activeTxPair.amount, 1) } ${ this.activeTxPair.quoteTokenSymbol }`;
         },
         depthBuy() {
             return this.$store.state.exchangeDepth.buy;
