@@ -1,13 +1,23 @@
 <template>
     <div class="account-head-wrapper">
         <div class="head__item">
-            <img class="icon" src="~assets/imgs/head_acc.png"/>
-            <div class="head-right ">
+            <img class="icon" src="~assets/imgs/head_acc.png" />
+            <div class="head-right">
                 <div class="head-title">
-                    <span>{{ $t('accountName') }}</span>
-                    <img @click="startRename" class="edit __pointer" src="~assets/imgs/edit_default.svg"/>
+                    <span>{{ $t("accountName") }}</span>
+                    <img
+                        @click="startRename"
+                        class="edit __pointer"
+                        src="~assets/imgs/edit_default.svg"
+                    />
                 </div>
-                <div v-show="!isShowNameInput" class="name" @click="startRename">{{ account.name }}</div>
+                <div
+                    v-show="!isShowNameInput"
+                    class="name"
+                    @click="startRename"
+                >
+                    {{ account.name }}
+                </div>
                 <!-- <input fake_pass type="password" style="display:none"/> -->
                 <form autocomplete="off">
                     <input
@@ -22,39 +32,32 @@
                 </form>
             </div>
         </div>
-        <div class="worth head__item">
-            <img class="icon" src="~assets/imgs/head_asset.png" />
-            <div class="head-right ">
-                <div class="head-title">{{ $t('wallet.totalAsset') }}</div>
-                <div>{{ totalAsset }}</div>
-            </div>
-        </div>
         <div class="head__item">
             <img class="icon" src="~assets/imgs/head_addr.png" />
-            <vite-address></vite-address>
-        </div>
-
-        <div class="btn-group head__item">
-            <div
-                class="btn__small __pointer __btn-test"
-                @click="getTestToken"
-                :class="{'un_clickable':!getTestTokenAble}"
-            >
-                <span>{{ $t('wallet.getTestToken') }}</span>
-                <img
-                    src="~assets/imgs/more_blue.png"
-                    class="more-icon"
-                />
+            <div class="head-right">
+                <SwitchAddr></SwitchAddr>
+                <span class="address-content"
+                ><Tips ref="tips"></Tips>{{ defaultAddr }}
+                    <QrcodePopup :qrcodeString="addressQrcode"
+                    ><img
+                        class="address-content__operate click-able"
+                        src="~assets/imgs/qrcode_default.svg"
+                    /></QrcodePopup>
+                    <img
+                        class="address-content__operate click-able"
+                        src="~assets/imgs/copy_default.svg"
+                        @click="copy"
+                /></span>
             </div>
-            <div
-                @click="goDetail"
-                class="btn__small __pointer __btn-detail"
-            >
-                {{ $t('wallet.transDetail') }}
-                <img
-                    src="~assets/imgs/more_gray.png"
-                    class="more-icon"
-                />
+        </div>
+        <div class="worth head__item">
+            <img class="icon" src="~assets/imgs/head_asset.png" />
+            <div class="assets">
+                <div class="head-title">{{ $t("wallet.totalAsset") }}</div>
+                <div>{{ totalAsset }}</div>
+            </div>
+            <div class="head-right">
+                <Pie class="pie-chart"></Pie>
             </div>
         </div>
     </div>
@@ -62,14 +65,23 @@
 
 <script>
 import Vue from 'vue';
-import viteAddress from 'components/address';
+import QrcodePopup from 'components/qrcodePopup';
+import SwitchAddr from 'components/switchAddress';
+import Pie from 'components/pie';
 import $ViteJS from 'utils/viteClient';
 import bigNumber from 'utils/bigNumber';
+import { utils } from '@vite/vitejs';
+import copy from 'utils/copy';
+import Tips from 'uiKit/tips';
 
 let activeAccount = null;
-
+const assetsType = {
+    TOTAL: 'TOTAL',
+    TRADE: 'TRADE',
+    WALLET: 'WALLET'
+};
 export default {
-    components: { viteAddress },
+    components: { QrcodePopup, Tips, SwitchAddr, Pie },
     data() {
         return {
             account: {},
@@ -78,7 +90,8 @@ export default {
             copySuccess: false,
             qrcode: null,
             qrcodeShow: false,
-            getTestTokenAble: true
+            getTestTokenAble: true,
+            assetsView: assetsType.TOTAL
         };
     },
     mounted() {
@@ -89,24 +102,33 @@ export default {
         netStatus() {
             return this.$store.state.env.clientStatus;
         },
+        addressQrcode() {
+            return utils.uriStringify({ target_address: this.defaultAddr });
+        },
         totalAsset() {
             const currency = this.$store.state.env.currency;
             const rateMap = this.$store.state.exchangeRate.rateMap;
             const balanceInfo = this.$store.getters.balanceInfo;
             const total = Object.keys(balanceInfo).reduce((pre, cur) => {
                 if (!rateMap[cur]) return pre;
-                return bigNumber.plus(bigNumber.multi(balanceInfo[cur].balance, rateMap[cur][currency]), pre);
+                return bigNumber.plus(bigNumber.multi(balanceInfo[cur].balance,
+                    rateMap[cur][currency]),
+                pre);
             }, 0);
-            return `${ this.$i18n.locale === 'en' ? '$' : '¥' }${ total }`;
+            return `${ currency === 'en' ? '$' : '¥' }${ total }`;
+        },
+        assetMap() {
+            // todo
+            return null;
         },
         defaultAddr() {
             return this.$store.state.activeAccount.address;
         }
     },
     methods: {
-        goDetail() {
-            const locale = this.$i18n.locale === 'zh' ? 'zh/' : '';
-            window.open(`${ process.env.viteNet }${ locale }account/${ this.account.addr }`);
+        copy() {
+            copy(this.defaultAddr);
+            this.$refs.tips.tip(this.$t('hint.copy'));
         },
 
         getTestToken() {
@@ -123,15 +145,18 @@ export default {
             }
 
             this.getTestTokenAble = false;
-            $ViteJS.testapi.getTestToken(this.account.addr).then(() => {
-                this.$toast(this.$t('wallet.hint.token'));
-                setTimeout(() => {
-                    this.getTestTokenAble = true;
-                }, 3000);
-            }).catch(err => {
-                console.warn(err);
-                this.$toast(this.$t('wallet.hint.tErr'), err);
-            });
+            $ViteJS.testapi
+                .getTestToken(this.account.addr)
+                .then(() => {
+                    this.$toast(this.$t('wallet.hint.token'));
+                    setTimeout(() => {
+                        this.getTestTokenAble = true;
+                    }, 3000);
+                })
+                .catch(err => {
+                    console.warn(err);
+                    this.$toast(this.$t('wallet.hint.tErr'), err);
+                });
         },
         getSimpleAcc() {
             return {
@@ -186,29 +211,51 @@ export default {
 
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
-
+.click-able {
+    cursor: pointer;
+}
 .account-head-wrapper {
     position: relative;
     text-align: center;
     background: #fff;
     border-radius: 2px;
     display: flex;
-    flex-wrap: no-wrap;
-    flex-direction: row;
+    flex-wrap: nowrap;
     justify-content: space-between;
-    height: 100px;
+    height: 124px;
     min-width: 1300px;
+    align-items: center;
     .head__item {
         border-right: 1px solid rgba(227, 235, 245, 0.6);
         display: flex;
         align-items: center;
-        padding: 0 20px;
-        .icon{
+        padding: 0 30px;
+        min-height: 84px;
+        .icon {
             height: 34px;
             width: 34px;
             margin-right: 20px;
         }
-        .head-right{
+        .address-content {
+            max-width: 300px;
+            font-size: 14px;
+            word-break: break-all;
+            box-sizing: border-box;
+            background: #f3f6f9;
+            color: #5e6875;
+            padding: 9px;
+            display: flex;
+            align-items: center;
+            margin: 5px auto;
+            display: flex;
+            position: relative;
+            &__operate {
+                width: 16px;
+                height: 16px;
+                margin-left: 10px;
+            }
+        }
+        .head-right {
             font-size: 20px;
             color: #1d2024;
             text-align: left;
@@ -224,7 +271,7 @@ export default {
                 letter-spacing: 0.35px;
                 padding-bottom: 10px;
                 font-family: $font-bold, arial, sans-serif;
-                color: #5E6875;
+                color: #5e6875;
                 font-family: $font-bold;
 
                 .edit {
@@ -246,46 +293,21 @@ export default {
                 width: 100%;
             }
         }
-        &.worth{
+        .pie-chart {
+            margin-left: 30px;
+            padding: 5px 0;
+        }
+        &.worth {
             flex-grow: 1;
-        }
-        &.btn-group {
-            padding: 0 ;
-            font-family: $font-normal, arial, sans-serif;
             display: flex;
-            flex-direction: column;
-            .un_clickable {
-                background-color: #bfbfbf !important;
-                cursor: default !important;
-            }
-
-            .btn__small {
-                padding: 0 20px;
-                box-sizing: border-box;
-                text-align: center;
-                font-size: 14px;
+            justify-content: space-between;
+            .assets {
                 flex-grow: 1;
-                width: 100%;
-                color: rgba(94,104,117,1);
                 display: flex;
-                justify-content: center;
-                align-items: center;
-                &:first-child{
-                    color: rgba(0,122,255,1);
-                    border-bottom: 1px solid rgba(227, 235, 245, 0.6);
-                }
-            }
-            .more-icon {
-                margin-left: 4px;
-                height: 10px;
-                width: 6px;
+                flex-direction: column;
+                align-items: flex-start;
             }
         }
-    }
-    .addr-wrapper {
-        display: inline-block;
-        max-width: 510px;
-        text-align: left;
     }
 }
 </style>

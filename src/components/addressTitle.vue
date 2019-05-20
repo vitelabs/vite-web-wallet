@@ -3,16 +3,31 @@
         <div class="pre-title">
             <slot></slot>
         </div>
-        <img src="../assets/imgs/copy_default.svg" @click="copy" class="title_icon copy __pointer"/>
-        <span v-click-outside="closeQrCode" ref="codeContainer" class="title_icon __pointer qrcode">
-            <img src="../assets/imgs/qrcode_default.svg" @click="toggleQrCode" />
+        <img
+            src="../assets/imgs/copy_default.svg"
+            @click="copy"
+            class="title_icon copy __pointer"
+        />
+        <span
+            v-click-outside="closeQrCode"
+            ref="codeContainer"
+            class="title_icon __pointer qrcode"
+        >
+            <img
+                src="../assets/imgs/qrcode_default.svg"
+                @click="toggleQrCode"
+            />
             <div class="code-container" v-show="qrcodeShow">
                 <div class="code">
-                    <qrcode :text="addressQrcode"
-                            :options="{ size:146 }"
-                            @genImage="getImage"></qrcode>
+                    <qrcode
+                        :text="addressQrcode"
+                        :options="{ size: 146 }"
+                        @genImage="getImage"
+                    ></qrcode>
                 </div>
-                <div class="btn" @click="downLoadQrCode">{{ $t('saveQrcode') }}</div>
+                <div class="btn" @click="downLoadQrCode">
+                    {{ $t("saveQrcode") }}
+                </div>
             </div>
         </span>
         <copyOK :copySuccess="copySuccess"></copyOK>
@@ -23,6 +38,7 @@
 import qrcode from 'components/qrcode';
 import copyOK from 'components/copyOK';
 import copy from 'utils/copy';
+import { fromBase64 } from 'utils/downloadImg';
 
 export default {
     components: { qrcode, copyOK },
@@ -68,9 +84,11 @@ export default {
             }
 
             const codeContainer = this.$refs.codeContainer;
-            if (!codeContainer
+            if (
+                !codeContainer
                 || e.target === codeContainer
-                || codeContainer.contains(e.target)) {
+                || codeContainer.contains(e.target)
+            ) {
                 return;
             }
 
@@ -80,21 +98,7 @@ export default {
             if (!this.qrcode) {
                 return;
             }
-
-            // IE
-            if (!!window.ActiveXObject || 'ActiveXObject' in window) {
-                const arr = this.qrcode.split(',');
-                const mime = arr[0].match(/:(.*?);/)[1];
-                const bstr = atob(arr[1]);
-                let n = bstr.length;
-                const u8arr = new Uint8Array(n);
-                while (n--) {
-                    u8arr[n] = bstr.charCodeAt(n);
-                }
-                window.navigator.msSaveBlob(new Blob([u8arr], { type: mime }), 'download.png');
-            } else {
-                location.href = this.qrcode.replace('image/png', 'image/octet-stream');
-            }
+            fromBase64(this.qrcode);
             this.qrcodeShow = false;
         }
     }

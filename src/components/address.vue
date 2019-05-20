@@ -11,7 +11,7 @@
 <script>
 import addressTitle from 'components/addressTitle';
 import switchAddr from 'components/switchAddress';
-import { stringify } from 'utils/viteSchema';
+import { utils } from '@vite/vitejs';
 
 export default {
     components: { addressTitle, switchAddr },
@@ -20,7 +20,7 @@ export default {
             return this.$store.state.activeAccount.address;
         },
         addressQrcode() {
-            return stringify({ targetAddress: this.defaultAddr });
+            return utils.uriStringify({ target_address: this.defaultAddr });
         }
     }
 };
