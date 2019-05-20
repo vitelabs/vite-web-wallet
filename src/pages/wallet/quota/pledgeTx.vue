@@ -87,8 +87,7 @@ export default {
     },
     computed: {
         addr() {
-            const activeAccount = this.$store.state.wallet.activeAcc;
-            return activeAccount ? activeAccount.address : '';
+            return this.$store.getters.activeAddr;
         },
         btnUnuse() {
             return this.loading || !this.isValidAddress || this.amountErr || !this.amount || !this.toAddr;

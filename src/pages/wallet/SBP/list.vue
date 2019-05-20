@@ -85,8 +85,7 @@ export default {
     },
     computed: {
         address() {
-            const activeAccount = this.$store.state.wallet.activeAcc;
-            return activeAccount ? activeAccount.address : '';
+            return this.$store.getters.activeAddr;
         },
         amountErr() {
             if (!this.tokenInfo || !this.tokenInfo.tokenId) {

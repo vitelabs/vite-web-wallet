@@ -49,8 +49,7 @@ export default {
             return getValidBalance({ decimals: this.token.decimals })(this.amount);
         },
         address() {
-            const activeAccount = this.$store.state.wallet.activeAcc;
-            return activeAccount ? activeAccount.address : '';
+            return this.$store.getters.activeAddr;
         },
         addressQrcode() {
             return utils.uriStringify({

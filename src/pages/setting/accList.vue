@@ -55,8 +55,7 @@ export default {
             return this.$store.state.wallet.status === StatusMap.UNLOCK;
         },
         defaultAddr() {
-            const activeAcc = this.$store.state.wallet.activeAcc;
-            return activeAcc ? activeAcc.address : '';
+            return this.$store.getters.activeAddr;
         },
         addrList() {
             return this.$store.state.wallet.addrList;

@@ -100,8 +100,7 @@ export default {
     },
     computed: {
         quotaAddr() {
-            const activeAccount = this.$store.state.wallet.activeAcc;
-            return activeAccount ? activeAccount.address : '';
+            return this.$store.getters.activeAddr;
         },
         regNameList() {
             return this.$store.getters.regNameList;

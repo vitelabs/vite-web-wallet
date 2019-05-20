@@ -87,8 +87,7 @@ export default {
             return this.$store.getters.currentMarketName;
         },
         defaultAddr() {
-            const activeAccount = this.$store.state.wallet.activeAcc;
-            return activeAccount ? activeAccount.address : '';
+            return this.$store.getters.activeAddr;
         }
     },
     watch: {
