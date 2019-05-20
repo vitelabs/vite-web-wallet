@@ -115,10 +115,10 @@
         "text3": "Please take proper precautions in ensuring that you accurately record and safely store your seed phrase. Even the slightest error will result in you not being able to successfully restore your address."
     },
     "preview": {
-        "t": "ViteX Beta Version",
-        "txt1": "This is ViteX Beta Version.",
-        "txt2": "All of the test tokens from test environment are with no actual value and can only be used for testing.",
-        "txt3": "Meanwhile, test tokens will be reset every now and then.",
+        "t": "Version 1.6.0",
+        "txt1": "Vite Web Wallet is a light node wallet launched by Vite Labs",
+        "txt2": "The wallet in the current version supports functions of query account balances, send and default receive transactions,  staking VITE for quota, SBP registration, voting ,etc.",
+        "txt3": "We are now working on the Vite DEX, stay tuned.",
         "v": "Current Version: {version}"
     },
     "pwdConfirm": {
