@@ -84,8 +84,7 @@ export default {
             return this.list.slice(0).sort((a, b) => (b.date - a.date));
         },
         defaultAddr() {
-            const activeAccount = this.$store.state.wallet.activeAcc;
-            return activeAccount ? activeAccount.address : '';
+            return this.$store.getters.activeAddr;
         }
     },
     watch: {

@@ -70,8 +70,7 @@ export default {
             return this.$store.state.exchangeActiveTxPair.activeTxPair || {};
         },
         defaultAddr() {
-            const activeAccount = this.$store.state.wallet.activeAcc;
-            return activeAccount ? activeAccount.address : '';
+            return this.$store.getters.activeAddr;
         }
     },
     watch: {
