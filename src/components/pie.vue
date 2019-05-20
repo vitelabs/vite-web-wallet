@@ -111,7 +111,7 @@ export default {
         },
         labelGen: {
             type: Function,
-            default: (v) => `${ (100 * v).toFixed(1) }%`
+            default: v => `${ (100 * v).toFixed(1) }%`
         },
         pieData: {
             type: Array,
