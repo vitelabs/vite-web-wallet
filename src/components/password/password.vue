@@ -20,7 +20,6 @@ import confirm from 'components/confirm.vue';
 import holdPwdView from './holdPwd.vue';
 
 let lastE = null;
-const HoldPwdKey = 'isHoldPWD';
 const ShowHoldNumKey = 'showHoldPWDNum';
 
 export default {
@@ -76,9 +75,8 @@ export default {
         this.$onKeyDown(13, lastE);
     },
     data() {
-        const isHoldPWD = !!localStorage.getItem(HoldPwdKey);
         const showHoldNum = +localStorage.getItem(ShowHoldNumKey) || 0;
-        const isShowHold = showHoldNum < 3 && !isHoldPWD;
+        const isShowHold = showHoldNum < 3 && !this.isHoldPWD;
 
         localStorage.setItem(ShowHoldNumKey, isShowHold ? showHoldNum + 1 : 4);
 
@@ -102,6 +100,9 @@ export default {
         },
         isLogin() {
             return this.$store.state.wallet.status === StatusMap.UNLOCK;
+        },
+        isHoldPWD() {
+            return !!this.$store.state.env.isHoldPWD;
         }
     },
     methods: {
