@@ -1,8 +1,14 @@
 {
-    "6": {
+    "7": {
         "version": "1.7.0",
-        "zh": "1.7.0-zh",
-        "en": "1.7.0-en",
+        "zh": "1.7.0 zh",
+        "en": "1.7.0 en",
+        "time": "1552897193504"
+    },
+    "6": {
+        "version": "1.6.0",
+        "zh": "1. 新增超级节点提取奖励功能<br/>2. 新版本将测试网络切换至Pre-Mainnet，快来体验吧",
+        "en": "1. Added claiming rewards function for SBP runners.<br/>2. The upcoming version will switch from Testnet to Pre-Mainnet, looking forward your experience.",
         "time": "1552897193504"
     },
     "5": {
