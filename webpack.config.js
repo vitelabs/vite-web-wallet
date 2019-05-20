@@ -107,6 +107,7 @@ let webpackConfig = {
             vue: 'vue/dist/vue.js',
             charting: CHARTING_PATH,
             src: SRC_PATH,
+            uiKit: path.join(SRC_PATH, '/uiKit'),
             services: path.join(SRC_PATH, '/services'),
             components: path.join(SRC_PATH, '/components'),
             pages: path.join(SRC_PATH, '/pages'),

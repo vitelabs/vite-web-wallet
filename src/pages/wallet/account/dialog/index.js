@@ -2,7 +2,7 @@ import getDialog from 'components/dialog/utils.js';
 import receiveComp from './receive.vue';
 import chargeComp from './charge.vue';
 import addTokenComp from './addToken.vue';
-import tokenInfoComp from './tokenInfo.vue';
+import tokenInfoComp from './tokenInfo';
 import withdrawComp from './withdraw.vue';
 
 export const receiveDialog = getDialog(receiveComp);

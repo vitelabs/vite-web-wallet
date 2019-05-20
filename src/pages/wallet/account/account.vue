@@ -1,27 +1,19 @@
 <template>
     <div class="wallet-account-wrapper __wrapper">
-        <div class="head">
-            <sync-block class="sync-block"></sync-block>
-        </div>
         <div class="account-head-move item">
             <account-head></account-head>
         </div>
         <div class="token-list item">
-            <div class="token-class">{{$t('tokenCard.type.native')}}</div>
             <tokenCard
                 v-for="token in nativeTokenList"
                 :key="token.tokenId"
                 :token="token"
             ></tokenCard>
-            <div class="token-class">{{$t('tokenCard.type.crossGate')}}</div>
             <tokenCard
                 v-for="token in crossChainTokenList"
                 :key="`_${token.tokenId}`"
                 :token="token"
             ></tokenCard>
-            <div class="add-card" @click="addToken">
-                <img src="~/assets/imgs/add_token.png"/>
-            </div>
         </div>
     </div>
 </template>
@@ -51,10 +43,17 @@ export default {
 
     computed: {
         nativeTokenList() {
-            return [ ...this.defaultTokenList, ...this.userStorageTokenList.filter(t => !t.gateInfo.url), ...this.otherWhithBalance ];
+            return [
+                ...this.defaultTokenList,
+                ...this.userStorageTokenList.filter(t => !t.gateInfo.url),
+                ...this.otherWhithBalance
+            ];
         },
         crossChainTokenList() {
-            return [ ...this.officalGateTokenList, ...this.userStorageTokenList.filter(t => t.gateInfo.url) ];
+            return [
+                ...this.officalGateTokenList,
+                ...this.userStorageTokenList.filter(t => t.gateInfo.url)
+            ];
         },
         defaultTokenList() {
             return this.$store.getters.defaultTokenList;
@@ -72,8 +71,11 @@ export default {
     methods: {
         addToken() {
             addTokenDialog();
+        },
+        goDetail() {
+            const locale = this.$i18n.locale === 'zh' ? 'zh/' : '';
+            window.open(`${ process.env.viteNet }${ locale }account/${ this.account.addr }`);
         }
-
     }
 };
 </script>
@@ -112,33 +114,15 @@ export default {
 
 .token-list {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     align-items: center;
-    .token-class{
-        border-left: 1px solid #007AFF;
+    .token-class {
+        border-left: 1px solid #007aff;
         padding-left: 9px;
         width: 100%;
         box-sizing: border-box;
         font-family: $font-bold;
         margin: 20px 0 24px;
-    }
-    .add-card{
-        height: 174px;
-        box-sizing: border-box;
-        position: relative;
-        min-width: 300px;
-        background: #fff;
-        box-shadow: 0 2px 48px 1px rgba(176, 192, 237, 0.42);
-        margin: 0 40px 20px 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        min-height: 120px;
-        img{
-            height: 50px;
-            width: 50px;
-        }
     }
 }
 </style>

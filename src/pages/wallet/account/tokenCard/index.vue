@@ -1,67 +1,84 @@
 <template>
     <div class="token-card">
-        <div class="title">
-            <div>
-                <img
-                    @click="showDetail()"
-                    :src="token.icon||getIcon(token.tokenId)"
-                    class="icon click-able"
-                />
-            <span class="token-name click-able" @click="showDetail()">{{ token.tokenSymbol }}</span></div>
+        <div class="title click-able" @click="showDetail()">
+            <img :src="token.icon" class="icon " />
+            <span class="token-name" @click="showDetail()">{{
+                token.tokenSymbol
+            }}</span>
+        </div>
+        <div class="item click-able" @click="showDetail()">
+            <span class="balance">{{ token.balance || 0 }}</span>
+        </div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <!-- <div class="title">
 
             <div>
                 <span
                     class="gate"
                     v-if="token.gateInfo.url"
                     @click="showDetail('gate')"
-                >{{gateName}}</span>
-                <span class="unbind click-able" v-if="showUnbind" @click="unbind"></span>
+                    >{{ gateName }}</span
+                >
+                <span
+                    class="unbind click-able"
+                    v-if="showUnbind"
+                    @click="unbind"
+                ></span>
             </div>
-
         </div>
         <div class="body">
             <div class="item click-able" @click="showDetail()">
                 <span class="balance">{{ token.balance || 0 }}</span>
             </div>
             <div class="item">
-                <span class="asset">{{asset}}</span>
+                <span class="asset">{{ asset }}</span>
             </div>
             <div class="token-tips-container">
                 <div class="token-tips" v-show="token.onroadNum">
-                    {{ token.onroadNum }} {{ $t('wallet.pend') }}
+                    {{ token.onroadNum }} {{ $t("wallet.pend") }}
                 </div>
             </div>
         </div>
         <div class="bottom">
-            <div
-                v-unlock-account="send"
-                class="btn __pointer"
-            >{{ $t('tokenCard.actionType.SEND') }}</div>
-            <div
-                @click="receive"
-                class="btn __pointer"
-            >{{ $t('tokenCard.actionType.RECEIVE') }}</div>
+            <div v-unlock-account="send" class="btn __pointer">
+                {{ $t("tokenCard.actionType.SEND") }}
+            </div>
+            <div @click="receive" class="btn __pointer">
+                {{ $t("tokenCard.actionType.RECEIVE") }}
+            </div>
             <div
                 v-if="token.gateInfo.url"
                 v-unlock-account="withdraw"
                 class="btn __pointer"
-            >{{ $t('tokenCard.actionType.WITHDRAW') }}</div>
+            >
+                {{ $t("tokenCard.actionType.WITHDRAW") }}
+            </div>
             <div
                 v-if="token.gateInfo.url"
                 @click="charge"
                 class="btn __pointer"
-            >{{ $t('tokenCard.actionType.CHARGE') }}</div>
+            >
+                {{ $t("tokenCard.actionType.CHARGE") }}
+            </div>
         </div>
         <transaction
             v-if="isShowTrans"
             :token="token"
             :closeTrans="closeTrans"
-        ></transaction>
+        ></transaction> -->
     </div>
 </template>
 
 <script>
-import { receiveDialog, chargeDialog, withdrawDialog, tokenInfoDialog } from '../dialog';
+import {
+    receiveDialog,
+    chargeDialog,
+    withdrawDialog,
+    tokenInfoDialog
+} from '../dialog';
 import getTokenIcon from 'utils/getTokenIcon';
 import bigNumber from 'utils/bigNumber';
 import { gateStorage } from 'services/gate';
@@ -78,7 +95,7 @@ export default {
                     balance: '--',
                     asset: '--',
                     onroadNum: '--',
-                    type: 'OFFICAL_GATE'// OFFICAL OFFICALGATE SELFGATE
+                    type: 'OFFICAL_GATE' // OFFICAL OFFICALGATE SELFGATE
                 };
             }
         }
@@ -88,22 +105,31 @@ export default {
     },
     computed: {
         showUnbind() {
-            return this.token.type === 'THIRD_GATE' && (!this.token.totalAmount || bigNumber.isEqual(this.token.totalAmount, '0'));
+            return (
+                this.token.type === 'THIRD_GATE'
+                && (!this.token.totalAmount
+                    || bigNumber.isEqual(this.token.totalAmount, '0'))
+            );
         },
         address() {
             return this.$store.state.activeAccount.address;
         },
         gateName() {
             if (this.$store.getters.mapToken2Gate[this.token.tokenId]) {
-                return this.$store.getters.mapToken2Gate[this.token.tokenId].gateway;
+                return this.$store.getters.mapToken2Gate[this.token.tokenId]
+                    .gateway;
             }
             return this.$t('tokenCard.gateInfo.selfdefined');
         },
         asset() {
             const currency = this.$store.state.env.currency;
-            const rate = this.$store.state.exchangeRate.rateMap[this.token.tokenId];
+            const rate = this.$store.state.exchangeRate.rateMap[
+                this.token.tokenId
+            ];
             if (rate && this.token.balance) {
-                return `${ this.$i18n.locale === 'en' ? '$' : '¥' } ${ bigNumber.multi(this.token.balance, rate[currency]) }`;
+                return `${
+                    this.$i18n.locale === 'en' ? '$' : '¥'
+                } ${ bigNumber.multi(this.token.balance, rate[currency]) }`;
             }
             return '--';
         }
@@ -150,50 +176,20 @@ export default {
 
 <style lang='scss' scoped>
 @import "~assets/scss/vars.scss";
-.click-able{
+.click-able {
     cursor: pointer;
 }
 .token-card {
     box-sizing: border-box;
     position: relative;
-    min-width: 300px;
     background: #fff;
-    box-shadow: 0 2px 48px 1px rgba(176, 192, 237, 0.42);
-    margin: 0 40px 20px 0;
-}
-
-.title {
-    border-bottom: 1px solid #e5edf3;
-    height: 46px;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-sizing: border-box;
-    padding: 12px 30px;
-    .icon{
-        height: 20px;
-        width: 20px;
-    }
-    .token-name {
-        font-size: 18px;
-        font-family: $font-bold;
-    }
-    .gate {
-        background: rgba(0, 122, 255, 0.06);
-        border-radius: 2px;
-        color: #007aff;
-        height: 20px;
-        line-height: 20px;
-        font-size: 12px;
-        cursor: pointer;
-    }
-    .unbind {
-        display: inline-block;
-        height: 12px;
-        width: 12px;
-        background: url(~assets/imgs/bind.png);
-        background-size: 100% 100%;
-        background-repeat: no-repeat;
+    width: 100%;
+    .title {
+        .icon {
+            height: 20px;
+            width: 20px;
+        }
     }
 }
 
@@ -218,7 +214,7 @@ export default {
         }
     }
 
-    .token-tips-container{
+    .token-tips-container {
         height: 24px;
 
         .token-tips {

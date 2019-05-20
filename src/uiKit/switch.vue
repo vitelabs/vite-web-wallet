@@ -1,0 +1,179 @@
+<template>
+    <div v-click-outside="hideList" @click="toggleList" class="switch-address-wrapper __pointer">
+        <span class="list-title" :class="{
+            'down': !isShowList,
+            'up': isShowList,
+            'not-allowed': notAllowed
+        }">{{ showStr }}</span>
+
+        <ul class="list" v-show="isShowList">
+            <li v-for="(addrObj, index) in addrList" :key="index"
+                v-show="address !== addrObj.addr"
+                @click.stop="setDefaultAddr(addrObj.addr, index)"
+                class="item">
+                <div class="name">{{ addrObj.name || `${$t('addrName', { index:index + 1 })}` }}</div>
+                <div class="switch-address">{{ addrObj.addr }}</div>
+            </li>
+        </ul>
+    </div>
+</template>
+
+<script>
+import ellipsisAddr from 'utils/ellipsisAddr.js';
+
+export default {
+    props: {
+        isShowAddr: {
+            type: Boolean,
+            default: true
+        }
+    },
+    data() {
+        return { isShowList: false };
+    },
+    computed: {
+        address() {
+            return this.$store.state.activeAccount.address;
+        },
+        showStr() {
+            if (!this.isShowAddr) {
+                return this.showName;
+            }
+
+            return `${ this.showName }: ${ this.showAddr }`;
+        },
+        showAddr() {
+            return ellipsisAddr(this.address, 5);
+        },
+        showName() {
+            let i;
+            for (i = 0; i < this.addrList.length;i++) {
+                if (this.addrList[i].addr === this.address) {
+                    break;
+                }
+            }
+            if (i >= this.addrList.length) {
+                return '';
+            }
+
+            return this.addrList[i].name || `${ this.$t('addrName', { index: i + 1 }) }`;
+        },
+        addrList() {
+            return this.$store.state.activeAccount.addrList;
+        },
+        notAllowed() {
+            return this.addrList.length <= 1;
+        }
+    },
+    watch: {
+        isLogin: function () {
+            this.setAddrList();
+        }
+    },
+    methods: {
+        setDefaultAddr(address, index) {
+            this.$store.dispatch('changeDefaultAddress', { address, index });
+            this.toggleList();
+        },
+        toggleList() {
+            if (this.notAllowed) {
+                return;
+            }
+            this.isShowList = !this.isShowList;
+        },
+        hideList() {
+            this.isShowList = false;
+        }
+    }
+};
+</script>
+
+<style lang="scss" scoped>
+@import "~assets/scss/vars.scss";
+
+.dex .switch-address-wrapper {
+    font-size: 13px;
+}
+
+.menu.switch-address-wrapper {
+    .list-title {
+        border: none;
+    }
+    .list {
+        right: 12px;
+    }
+}
+
+.switch-address-wrapper {
+    width: 100%;
+    color: #73767A;
+    font-family: $font-bold, arial, sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+
+    .list-title {
+        position: relative;
+        box-sizing: border-box;
+        border-radius: 2px;
+        border: 1px solid rgba(212,222,231,1);
+        padding: 0 8px;
+
+        &:after {
+            content: '';
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            margin-bottom: -2px;
+            background: url('~assets/imgs/addr_switch.svg');
+            background-size: 16px 16px;
+        }
+        &.not-allowed {
+            &:after {
+                display: none;
+            }
+        }
+        &.down {
+            &:after {
+                transform: rotateX(0deg);
+            }
+        }
+        &.up {
+            &:after {
+                transform: rotateX(180deg);
+            }
+        }
+
+    }
+    .list {
+        position: absolute;
+        z-index: 100;
+        width: 250px;
+        max-height: 220px;
+        overflow: auto;
+        background: rgba(255,255,255,1);
+        box-shadow: 0px 5px 10px 0px rgba(176,192,237,0.69);
+        margin-top: 10px;
+        word-break: break-all;
+        .item {
+            box-sizing: border-box;
+            padding: 8px 12px;
+            line-height: 16px;
+            &:hover {
+                background: rgba(75,116,255,0.1);
+            }
+            .name {
+                font-size: 12px;
+                font-family: $font-bold, arial, sans-serif;
+                font-weight: 600;
+                color: rgba(115,118,122,1);
+            }
+            .switch-address {
+                font-size: 11px;
+                font-family: $font-normal, arial, sans-serif;
+                font-weight: 400;
+                color: rgba(162,167,175,1);
+            }
+        }
+    }
+}
+</style>

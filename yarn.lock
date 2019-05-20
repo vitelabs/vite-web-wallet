@@ -1118,15 +1118,27 @@
 
 "@types/babel-types@*", "@types/babel-types@^7.0.0":
   version "7.0.7"
-  resolved "https://registry.yarnpkg.com/@types/babel-types/-/babel-types-7.0.7.tgz#667eb1640e8039436028055737d2b9986ee336e3"
-  integrity sha512-dBtBbrc+qTHy1WdfHYjBwRln4+LWqASWakLHsWHR2NWHIFkv4W3O070IGoGLEBrJBvct3r0L1BUPuvURi7kYUQ==
+  resolved "https://registry.npm.taobao.org/@types/babel-types/download/@types/babel-types-7.0.7.tgz#667eb1640e8039436028055737d2b9986ee336e3"
+  integrity sha1-Zn6xZA6AOUNgKAVXN9K5mG7jNuM=
 
 "@types/babylon@^6.16.2":
   version "6.16.5"
-  resolved "https://registry.yarnpkg.com/@types/babylon/-/babylon-6.16.5.tgz#1c5641db69eb8cdf378edd25b4be7754beeb48b4"
-  integrity sha512-xH2e58elpj1X4ynnKp9qSnWlsRTIs6n3tgLGNfwAGHwePw0mulHQllV34n0T25uYSu1k0hRKkWXF890B1yS47w==
+  resolved "https://registry.npm.taobao.org/@types/babylon/download/@types/babylon-6.16.5.tgz#1c5641db69eb8cdf378edd25b4be7754beeb48b4"
+  integrity sha1-HFZB22nrjN83jt0ltL53VL7rSLQ=
   dependencies:
     "@types/babel-types" "*"
+
+"@types/d3-path@*":
+  version "1.0.8"
+  resolved "https://registry.npm.taobao.org/@types/d3-path/download/@types/d3-path-1.0.8.tgz#48e6945a8ff43ee0a1ce85c8cfa2337de85c7c79"
+  integrity sha1-SOaUWo/0PuChzoXIz6IzfehcfHk=
+
+"@types/d3-shape@^1.3.1":
+  version "1.3.1"
+  resolved "https://registry.npm.taobao.org/@types/d3-shape/download/@types/d3-shape-1.3.1.tgz#1b4f92b7efd7306fe2474dc6ee94c0f0ed2e6ab6"
+  integrity sha1-G0+St+/XMG/iR03G7pTA8O0uarY=
+  dependencies:
+    "@types/d3-path" "*"
 
 "@types/events@*":
   version "3.0.0"
@@ -1184,15 +1196,15 @@
     "@types/unist" "*"
     "@types/vfile-message" "*"
 
-"@vite/vitejs-ws@2.1.0-alpha.3":
-  version "2.1.0-alpha.3"
-  resolved "https://registry.yarnpkg.com/@vite/vitejs-ws/-/vitejs-ws-2.1.0-alpha.3.tgz#817d864a2c65c740c6480802c4aa00f70f174670"
-  integrity sha512-F3zG6Wx4fgihvBhY3TOsDWQ5ISh0OAMbanGt1DmNB9bebKdD3o23XNYVwDnBYnJRYHeq2FS8NWj6uHyshSs7wQ==
+"@vite/vitejs-ws@2.1.0-alpha.2":
+  version "2.1.0-alpha.2"
+  resolved "https://registry.npm.taobao.org/@vite/vitejs-ws/download/@vite/vitejs-ws-2.1.0-alpha.2.tgz#9c5bac19d9c332813eaf5e4bb64e636b54998fa2"
+  integrity sha1-nFusGdnDMoE+r15Ltk5ja1SZj6I=
 
-"@vite/vitejs@2.1.0-alpha.3":
-  version "2.1.0-alpha.3"
-  resolved "https://registry.yarnpkg.com/@vite/vitejs/-/vitejs-2.1.0-alpha.3.tgz#a0a077e5078648aa202e489b9657684f14b47d8a"
-  integrity sha512-EWVVvJxhKIgL/PnDj1pPWwme19oqbIRPsOtduYnHdJEWaEn7dx/L8rhlsbauD2gSKJIrIG873fmNJUhVlfzBBA==
+"@vite/vitejs@2.1.0-alpha.2":
+  version "2.1.0-alpha.2"
+  resolved "https://registry.npm.taobao.org/@vite/vitejs/download/@vite/vitejs-2.1.0-alpha.2.tgz#a481132d19f4230c75be5c9a07306b24cb63f0ab"
+  integrity sha1-pIETLRn0Iwx1vlyaBzBrJMtj8Ks=
 
 "@vue/component-compiler-utils@^2.5.1":
   version "2.6.0"
@@ -2863,6 +2875,18 @@ cyclist@~0.2.2:
   version "0.2.2"
   resolved "https://registry.yarnpkg.com/cyclist/-/cyclist-0.2.2.tgz#1b33792e11e914a2fd6d6ed6447464444e5fa640"
   integrity sha1-GzN5LhHpFKL9bW7WRHRkRE5fpkA=
+
+d3-path@1:
+  version "1.0.7"
+  resolved "https://registry.npm.taobao.org/d3-path/download/d3-path-1.0.7.tgz#8de7cd693a75ac0b5480d3abaccd94793e58aae8"
+  integrity sha1-jefNaTp1rAtUgNOrrM2UeT5Yqug=
+
+d3-shape@^1.3.5:
+  version "1.3.5"
+  resolved "https://registry.npm.taobao.org/d3-shape/download/d3-shape-1.3.5.tgz#e81aea5940f59f0a79cfccac012232a8987c6033"
+  integrity sha1-6BrqWUD1nwp5z8ysASIyqJh8YDM=
+  dependencies:
+    d3-path "1"
 
 dashdash@^1.12.0:
   version "1.14.1"
