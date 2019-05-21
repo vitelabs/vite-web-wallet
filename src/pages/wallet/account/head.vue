@@ -37,7 +37,7 @@
             <div class="head-right">
                 <SwitchAddr></SwitchAddr>
                 <span class="address-content"
-                ><Tips ref="tips"></Tips>{{ defaultAddr }}
+                ><Tips ref="tips"></Tips>{{ activeAddr }}
                     <QrcodePopup :qrcodeString="addressQrcode"
                     ><img
                         class="address-content__operate click-able"
@@ -94,17 +94,16 @@ export default {
     },
     computed: {
         account() {
-            const activeAccount = this.$store.state.wallet.activeAcc;
             return {
                 name: this.$store.state.wallet.name,
-                addr: activeAccount ? activeAccount.address || '' : ''
+                addr: this.activeAddr
             };
         },
         netStatus() {
             return this.$store.state.env.clientStatus;
         },
         addressQrcode() {
-            return utils.uriStringify({ target_address: this.defaultAddr });
+            return utils.uriStringify({ target_address: this.activeAddr });
         },
         totalAsset() {
             const currency = this.$store.state.env.currency;
@@ -122,13 +121,13 @@ export default {
             // todo
             return null;
         },
-        defaultAddr() {
-            return this.$store.state.activeAccount.address;
+        activeAddr() {
+            return this.$store.getters.activeAddr;
         }
     },
     methods: {
         copy() {
-            copy(this.defaultAddr);
+            copy(this.activeAddr);
             this.$refs.tips.tip(this.$t('hint.copy'));
         },
 
@@ -141,13 +140,13 @@ export default {
                 return;
             }
 
-            if (!this.account || !this.account.addr) {
+            if (!this.activeAddr) {
                 this.$toast(this.$t('wallet.hint.tErr'));
             }
 
             this.getTestTokenAble = false;
             $ViteJS.testapi
-                .getTestToken(this.account.addr)
+                .getTestToken(this.activeAddr)
                 .then(() => {
                     this.$toast(this.$t('wallet.hint.token'));
                     setTimeout(() => {
