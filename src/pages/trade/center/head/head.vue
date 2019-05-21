@@ -155,7 +155,7 @@ export default {
         .token-content {
             margin-top: 8px;
             font-weight: 600;
-            color: rgba(36, 39, 43, 1);
+            color: #1d2024;
             &.down {
                 color: $down-font-color;
             }

@@ -728,9 +728,7 @@ $font-black: rgba(36, 39, 43, 0.8);
         font-size: 12px;
         font-family: $font-bold, arial, sans-serif;
         font-weight: 600;
-        color: $font-black;
-        text-indent: 6px;
-        border-left: 2px solid $blue;
+        color: #1d2024;
         margin-bottom: 10px;
         .wallet {
             display: block;
@@ -785,7 +783,7 @@ $font-black: rgba(36, 39, 43, 0.8);
     input {
         font-family: $font-normal, arial, sans-serif;
         font-size: 12px;
-        color: #24272B;
+        color: #1d2024;
         text-indent: 6px;
     }
 }
