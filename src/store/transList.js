@@ -59,7 +59,7 @@ const getters = {
         const nowList = [];
 
         list.forEach(item => {
-        // ( confirms )
+            // ( confirms )
             const confirms = item.confirmedTimes || 0;
 
             // Unconfirmed

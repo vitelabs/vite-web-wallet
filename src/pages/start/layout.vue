@@ -25,11 +25,18 @@ export default {
             bg,
             logo
         };
+    },
+    methods: {
+        goViteX() {
+            window.open('https://x-test.vite.net/');
+        }
     }
 };
 </script>
 
 <style lang="scss" scoped>
+@import "~assets/scss/vars.scss";
+
 .index-layout-wrapper {
     position: relative;
     width: 100%;
@@ -54,7 +61,6 @@ export default {
             display: inline-block;
             width: 90px;
         }
-
         .change-lang {
             float: right;
         }
