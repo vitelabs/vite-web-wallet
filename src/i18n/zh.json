@@ -198,8 +198,8 @@
             "我已经写下了或者用其它方式保存了我的助记词"
         ]
     },
-    "startImport": {
-        "title": "导入账户",
+    "keystore": {
+        "title": "Keystore",
         "dragDrop": {
             "text": "拖拽账户文件进入文本区域",
             "err1": "导入的文件错误",
