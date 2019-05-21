@@ -1128,17 +1128,10 @@
   dependencies:
     "@types/babel-types" "*"
 
-"@types/d3-path@*":
+"@types/d3-path@^1.0.8":
   version "1.0.8"
   resolved "https://registry.npm.taobao.org/@types/d3-path/download/@types/d3-path-1.0.8.tgz#48e6945a8ff43ee0a1ce85c8cfa2337de85c7c79"
   integrity sha1-SOaUWo/0PuChzoXIz6IzfehcfHk=
-
-"@types/d3-shape@^1.3.1":
-  version "1.3.1"
-  resolved "https://registry.npm.taobao.org/@types/d3-shape/download/@types/d3-shape-1.3.1.tgz#1b4f92b7efd7306fe2474dc6ee94c0f0ed2e6ab6"
-  integrity sha1-G0+St+/XMG/iR03G7pTA8O0uarY=
-  dependencies:
-    "@types/d3-path" "*"
 
 "@types/events@*":
   version "3.0.0"
@@ -2876,17 +2869,10 @@ cyclist@~0.2.2:
   resolved "https://registry.yarnpkg.com/cyclist/-/cyclist-0.2.2.tgz#1b33792e11e914a2fd6d6ed6447464444e5fa640"
   integrity sha1-GzN5LhHpFKL9bW7WRHRkRE5fpkA=
 
-d3-path@1:
+d3-path@^1.0.7:
   version "1.0.7"
   resolved "https://registry.npm.taobao.org/d3-path/download/d3-path-1.0.7.tgz#8de7cd693a75ac0b5480d3abaccd94793e58aae8"
   integrity sha1-jefNaTp1rAtUgNOrrM2UeT5Yqug=
-
-d3-shape@^1.3.5:
-  version "1.3.5"
-  resolved "https://registry.npm.taobao.org/d3-shape/download/d3-shape-1.3.5.tgz#e81aea5940f59f0a79cfccac012232a8987c6033"
-  integrity sha1-6BrqWUD1nwp5z8ysASIyqJh8YDM=
-  dependencies:
-    d3-path "1"
 
 dashdash@^1.12.0:
   version "1.14.1"
