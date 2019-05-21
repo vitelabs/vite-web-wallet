@@ -20,6 +20,7 @@ export default {
             return this.$store.state.exchangeMarket.isShowFavorite;
         },
         currentMarket() {
+            console.log(this.$store.state.exchangeMarket.currentMarket);
             return this.$store.state.exchangeMarket.currentMarket;
         },
         toTokenList() {

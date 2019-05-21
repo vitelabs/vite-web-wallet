@@ -126,7 +126,11 @@ export default {
             const nowList = [];
 
             transList.forEach(trans => {
-                const txType = !trans.rawData.txType && trans.rawData.txType !== 0 ? txImgs.length - 1 : trans.rawData.txType;
+                let txType = !trans.rawData.txType && trans.rawData.txType !== 0 ? txImgs.length - 1 : trans.rawData.txType;
+                if (+trans.rawData.blockType === 7) {
+                    txType = BuiltinTxType.GenesisReceive;
+                }
+
                 const type = BuiltinTxType[txType];
 
                 const typeImg = `<img class="icon" src='${ txImgs[type] ? txImgs[type] : txTransImg }'/>`;
@@ -138,9 +142,10 @@ export default {
 
                 const isZero = BigNumber.isEqual(trans.amount, 0);
                 let amount = trans.amount;
-                if (!isZero) {
+                if (amount && !isZero) {
                     amount = trans.isSend ? (`-${ trans.amount }`) : (`+${ trans.amount }`);
                 }
+                amount = amount || '--';
 
                 nowList.push({
                     type: typeImg + this.$t(`txType.${ txType }`),
