@@ -18,6 +18,7 @@
 <script>
 import sidebar from 'components/sidebar';
 import secondMenu from 'components/secondMenu';
+import { StatusMap } from 'wallet';
 
 let autoLogout = null;
 
@@ -29,27 +30,35 @@ export default {
             default: ''
         }
     },
-    data() {
-        return {
-            isLogin: false,
-            menuList: []
-        };
-    },
     mounted() {
-        this.isLogin = !!this.$wallet.isLogin;
         this.setMenuList();
-        this.$store.commit('setActiveAccAddrList');
+    },
+    data() {
+        return { menuList: [] };
+    },
+    computed: {
+        isLogin() {
+            return this.$store.state.wallet.status === StatusMap.UNLOCK;
+        },
+        secondMenuList() {
+            if (this.active.indexOf('trade') === 0) {
+                return [ 'trade', 'tradeAssets', 'tradeOpenOrders', 'tradeOrderHistory' ];
+            }
 
-        this.$wallet.onLogin(() => {
-            this.isLogin = true;
-        });
-        this.$wallet.onLogout(() => {
-            this.isLogin = false;
-        });
+            if (this.active.indexOf('wallet') !== 0) {
+                return [];
+            }
+
+            const list = [ 'wallet', 'walletQuota', 'walletSBP', 'walletVote', 'walletTransList' ];
+            this.isLogin && list.push('walletConversion');
+            return list;
+        },
+        autoLogoutTime() {
+            return this.$store.state.env.autoLogoutTime * 60 * 1000;
+        }
     },
     watch: {
         isLogin: function () {
-            this.$store.commit('setActiveAccAddrList');
             this.setMenuList();
 
             if (this.isLogin) {
@@ -60,26 +69,6 @@ export default {
             this.clearAutoLogout();
         }
     },
-    computed: {
-        secondMenuList() {
-            if (this.active.indexOf('trade') === 0) {
-                return [ 'trade', 'tradeAssets', 'tradeOpenOrders', 'tradeOrderHistory' ];
-            }
-
-            if (this.active.indexOf('wallet') !== 0) {
-                return [];
-            }
-            const list = [ 'wallet', 'walletQuota', 'walletSBP', 'walletVote', 'walletTransList' ];
-
-            const activeAccount = this.$wallet.getActiveAccount();
-            this.isLogin && activeAccount.type === 'wallet' && list.push('walletConversion');
-
-            return list;
-        },
-        autoLogoutTime() {
-            return this.$store.state.env.autoLogoutTime * 60 * 1000;
-        }
-    },
     methods: {
         setMenuList() {
             const menuList = [ 'wallet', 'trade', 'setting' ];
@@ -88,8 +77,7 @@ export default {
         },
         go(name) {
             if (name === 'logout') {
-                this.$wallet.logout();
-                // this.$router.push({ name: 'trade' });
+                this.$store.commit('logout');
                 return;
             }
 
@@ -102,7 +90,7 @@ export default {
                 return;
             }
 
-            const account = this.$wallet.getActiveAccount();
+            const account = this.$store.state.wallet.currHDAcc;
             if (!account && name !== 'setting') {
                 this.$router.push({ name: 'start' });
                 return;

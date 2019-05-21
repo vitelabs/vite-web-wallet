@@ -14,12 +14,12 @@
 </template>
 
 <script>
-import localStorage from 'utils/localStorage';
+import { StatusMap } from 'wallet';
+import localStorage from 'utils/store';
 import confirm from 'components/confirm.vue';
 import holdPwdView from './holdPwd.vue';
 
 let lastE = null;
-const HoldPwdKey = 'isHoldPWD';
 const ShowHoldNumKey = 'showHoldPWDNum';
 
 export default {
@@ -75,9 +75,8 @@ export default {
         this.$onKeyDown(13, lastE);
     },
     data() {
-        const isHoldPWD = !!localStorage.getItem(HoldPwdKey);
         const showHoldNum = +localStorage.getItem(ShowHoldNumKey) || 0;
-        const isShowHold = showHoldNum < 3 && !isHoldPWD;
+        const isShowHold = showHoldNum < 3 && !this.isHoldPWD;
 
         localStorage.setItem(ShowHoldNumKey, isShowHold ? showHoldNum + 1 : 4);
 
@@ -93,10 +92,17 @@ export default {
                 return this.title || this.$t('pwdConfirm.title');
             }
 
-            const activeAccount = this.$wallet.getActiveAccount();
-            const name = activeAccount ? activeAccount.getName() : '';
-
+            const name = this.$store.state.wallet.name;
             return this.$t('pwdConfirm.unlockAcc', { name });
+        },
+        currHDAcc() {
+            return this.$store.state.wallet.currHDAcc;
+        },
+        isLogin() {
+            return this.$store.state.wallet.status === StatusMap.UNLOCK;
+        },
+        isHoldPWD() {
+            return !!this.$store.state.env.isHoldPWD;
         }
     },
     methods: {
@@ -125,8 +131,7 @@ export default {
                 return false;
             }
 
-            let activeAccount = this.$wallet.getActiveAccount();
-            if (!activeAccount) {
+            if (!this.currHDAcc) {
                 this.$toast(this.$t('hint.err'));
                 return false;
             }
@@ -145,9 +150,9 @@ export default {
                 this.submit && this.submit();
             };
 
-            if (this.$wallet.isLogin) {
-                activeAccount.verify(password).then(result => {
-                    deal(result);
+            if (this.isLogin) {
+                this.currHDAcc.verify(password).then(() => {
+                    deal(true);
                 }).catch(() => {
                     deal(false);
                 });
@@ -155,19 +160,15 @@ export default {
             }
 
             this.isLoading = true;
-            this.$wallet.login({
-                id: activeAccount.getId(),
-                entropy: activeAccount.getEntropy(),
-                addr: activeAccount.getDefaultAddr()
-            }, password).then(() => {
+            this.$store.dispatch('login', password).then(() => {
                 this.isLoading = false;
                 if (!this.password) {
                     return;
                 }
-                activeAccount = this.$wallet.getActiveAccount();
-                activeAccount.unlock();
+                this.currHDAcc.activate();
                 deal(true);
             }).catch(err => {
+                console.warn(err);
                 this.isLoading = false;
                 if (!this.password) {
                     return;

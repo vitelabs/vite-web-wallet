@@ -46,12 +46,13 @@
 </template>
 
 <script>
-import tooltips from 'components/tooltips';
 import date from 'utils/date.js';
 import ellipsisAddr from 'utils/ellipsisAddr.js';
 import BigNumber from 'utils/bigNumber';
 import sendTx from 'utils/sendTx';
 import $Vite from 'utils/viteClient';
+import tooltips from 'components/tooltips';
+import { initPwd } from 'components/password/index.js';
 
 const amount = 100000;
 
@@ -77,17 +78,14 @@ export default {
         this.fetchList();
     },
     data() {
-        const activeAccount = this.$wallet.getActiveAccount();
-
         return {
-            activeAccount,
             showTimeTips: -1,
             totalReward: null
         };
     },
     computed: {
         address() {
-            return this.$store.state.activeAccount.address;
+            return this.$store.getters.activeAddr;
         },
         amountErr() {
             if (!this.tokenInfo || !this.tokenInfo.tokenId) {
@@ -194,7 +192,7 @@ export default {
                 return;
             }
 
-            this.activeAccount.initPwd({
+            initPwd({
                 title: this.$t('walletSBP.confirm.title'),
                 submitTxt: this.$t('walletSBP.confirm.rightBtn'),
                 cancelTxt: this.$t('walletSBP.confirm.leftBtn'),
@@ -209,7 +207,7 @@ export default {
                 return;
             }
 
-            this.activeAccount.initPwd({
+            initPwd({
                 title: this.$t('walletSBP.section2.cancelConfirm.title'),
                 content: this.$t('walletSBP.section2.cancelConfirm.describe', { amount: item.pledgeAmount }),
                 submit: () => {
@@ -241,18 +239,8 @@ export default {
             }
             this.showConfirm('edit', item.rawData);
         },
-        reward(item) {
-            this.totalReward = null;
-            $Vite.request('register_getAvailableReward', '00000000000000000001', item.rawData.name).then(data => {
-                if (!data || !data.totalReward) {
-                    this.totalReward = null;
-                }
-                this.totalReward = data.totalReward;
-            }).catch(err => {
-                console.warn(err);
-            });
-
-            this.activeAccount.initPwd({
+        showReward(item) {
+            initPwd({
                 title: this.$t('walletSBP.rewardConfirm.title'),
                 submitTxt: this.$t('walletSBP.rewardConfirm.rightBtn'),
                 cancelTxt: this.$t('walletSBP.rewardConfirm.leftBtn'),
@@ -261,7 +249,7 @@ export default {
                     <div style="
                         padding: 10px 15px;
                         box-sizing: border-box;
-                        height: 40px; 
+                        height: 40px;
                         line-height: 20px;
                         background:rgba(243,246,249,1);
                         border-radius:2px;
@@ -282,7 +270,7 @@ export default {
                             display: inline-block;
                             margin-right: 4px;
                             border-radius: 6px;
-                    "></span>     
+                    "></span>
                     ${ this.$t('walletSBP.rewardConfirm.describe2') }
                     <a style="color: #007AFF" href="${ process.env.viteNet }${ this.$i18n.locale === 'zh' ? 'zh/' : '' }SBPDetail/${ item.rawData.name }"  target="_blank">${ this.$t('walletSBP.rewardConfirm.describe3') }</a>
                     ${ this.$t('walletSBP.rewardConfirm.describe4') }
@@ -296,15 +284,30 @@ export default {
                         pow: false,
                         confirm: {
                             showMask: true,
-                            operate: this.$t('walletSBP.cancel')
+                            operate: this.$t('walletSBP.rewardBtn')
                         }
                     }).then(() => {
-                        this.$toast(this.$t('hint.request', { name: 'Rewards' }));
+                        this.$toast(this.$t('hint.request', { name: this.$t('walletSBP.rewardBtn') }));
                     }).catch(err => {
                         this.$toast('Claim Failed', err);
                     });
                 }
             }, true);
+        },
+        reward(item) {
+            this.totalReward = null;
+            $Vite.request('register_getAvailableReward', '00000000000000000001', item.rawData.name).then(data => {
+                if (!data || !data.totalReward) {
+                    this.totalReward = null;
+                }
+
+                const decimals = this.tokenInfo.decimals;
+                this.totalReward = BigNumber.toBasic(data.totalReward, decimals);
+                this.showReward(item);
+            }).catch(err => {
+                console.warn(err);
+                this.$toast('Get Reward Failed', err);
+            });
         }
     }
 };

@@ -1,7 +1,6 @@
 import toast from 'components/toast/index.js';
 import confirm from 'components/confirm/index.js';
 import statistics from 'utils/statistics';
-import { wallet } from 'utils/wallet';
 import getTokenIcon from 'utils/getTokenIcon';
 
 document.addEventListener('drop', e => {
@@ -66,9 +65,14 @@ export default {
             const code = error ? error.code || -1 : -1;
             const errMsg = error ? error.message || error.msg || '' : '';
 
+            // Show quota confirm, don't neet toast
+            if (code === '1000001') {
+                return;
+            }
+
             let msg = code === -1 || !this.$i18n.messages.zh.errCode[Math.abs(code)]
-                ? message || this.$t('hint.err') : this.$t(`errCode.${ Math.abs(code) }`);
-            if (code) {
+                ? message || this.$i18n('hint.err') : this.$i18n(`errCode.${ Math.abs(code) }`);
+            if (code > 0) {
                 msg = `${ Math.abs(code) === 32002 ? errMsg : msg } (${ code })`;
             }
             toast(msg, type, position);
@@ -77,8 +81,6 @@ export default {
         Vue.prototype.$confirm = confirm;
 
         Vue.prototype.$statistics = statistics;
-
-        Vue.prototype.$wallet = wallet;
 
         // ----------filters
 

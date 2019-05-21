@@ -12,13 +12,13 @@
         <div v-show="isShowExisting" class="existing-acc">
             <div class="bottom __btn __pointer">
                 <div v-click-outside="hideAccountList" @click="toggleAccountList">
-                    <div v-show="activeAccount && !activeAccount.addr" class="__btn __btn_input">
-                        <div class="name __ellipsis">{{ activeAccount.name }}</div>
+                    <div v-show="currAcc && !currAcc.activeAddr" class="__btn __btn_input">
+                        <div class="name __ellipsis">{{ currAcc.name }}</div>
                     </div>
 
-                    <div v-show="activeAccount && activeAccount.addr" class="__btn __btn_input_active">
-                        <div class="name __ellipsis">{{ activeAccount.name }}</div>
-                        <div class="address __ellipsis">{{ activeAccount.showAddr }}</div>
+                    <div v-show="currAcc && currAcc.activeAddr" class="__btn __btn_input_active">
+                        <div class="name __ellipsis">{{ currAcc.name }}</div>
+                        <div class="address __ellipsis">{{ currAcc.showAddr }}</div>
                     </div>
 
                     <span :class="{
@@ -40,7 +40,7 @@
             </div>
 
             <div class="__btn_list">
-                <span class="__btn __btn_border __pointer" @click="addAcc" >
+                <span class="__btn __btn_border __pointer" @click="createAcc" >
                     {{ $t('addAccount') }}
                 </span>
                 <div class="__btn __btn_all_in __pointer" @click="login">
@@ -53,17 +53,19 @@
         </div>
 
         <restore ref="restoreDom" v-if="!isShowExisting"
-                 :leftClick="addAcc" leftTxt="createAcc"
+                 :leftClick="createAcc" leftTxt="createAcc"
                  :finishCb="showExisting"></restore>
     </div>
 </template>
 
 <script>
 import Vue from 'vue';
-import restore from './restore.vue';
-import accountList from './accountList.vue';
 import loading from 'components/loading.vue';
 import ellipsisAddr from 'utils/ellipsisAddr.js';
+import { getList, deleteOldAcc } from 'wallet';
+
+import restore from '../restore.vue';
+import accountList from './accountList.vue';
 
 export default {
     components: { accountList, loading, restore },
@@ -75,13 +77,19 @@ export default {
     },
     data() {
         return {
-            activeAccount: {},
+            id: this.$route.params.id,
+            currAcc: {},
             password: '',
+            inputItem: '',
             isLoading: false,
             isShowAccountList: false,
-            inputItem: '',
             isShowExisting: true
         };
+    },
+    computed: {
+        currHDAcc() {
+            return this.$store.state.wallet.currHDAcc;
+        }
     },
     watch: {
         isShowExisting: function () {
@@ -89,6 +97,7 @@ export default {
                 this.clearAll();
                 return;
             }
+
             this.init();
             this.$refs.accList && this.$refs.accList.initAccountList();
         }
@@ -98,43 +107,47 @@ export default {
             this.$onKeyDown(13, () => {
                 this.login();
             });
-            this.activeAccount = this.getLoginAcc();
+            this.currAcc = this.getCurrAcc();
         },
         clearAll() {
             this.password = '';
             this.isLoading = false;
             this.$offKeyDown();
         },
-        showExisting() {
+        showExisting(id) {
+            this.id = id;
             this.isShowExisting = true;
         },
         toggleShowExisting() {
             this.isShowExisting = !this.isShowExisting;
         },
-        getLoginAcc() {
-            let account = this.$wallet.getLast();
-            if (account) {
-                const addr = account.addr || '';
-                const showAddr = account.addr ? ellipsisAddr(account.addr) : '';
+        getCurrAcc() {
+            const list = getList();
 
+            // First: from router
+            if (this.id) {
+                for (let i = 0; i < list.length; i++) {
+                    if (list[i].id === this.id) {
+                        const account = list[i];
+                        account.showAddr = account.activeAddr ? ellipsisAddr(account.activeAddr) : '';
+                        return account;
+                    }
+                }
+            }
+
+            // Second: from current
+            if (this.currHDAcc) {
                 return {
-                    name: account.name || '',
-                    addr,
-                    showAddr,
-                    id: account.id || ''
+                    id: this.currHDAcc.id,
+                    showAddr: this.currHDAcc.activeAddr ? ellipsisAddr(this.currHDAcc.activeAddr) : '',
+                    name: this.currHDAcc.name || '',
+                    ...this.currHDAcc
                 };
             }
 
-            const list = this.$wallet.getList();
-            if (!list || !list.length) {
-                this.$router.push({ name: 'start' });
-
-                return;
-            }
-
-            account = list[0];
-            account.showAddr = account.addr ? ellipsisAddr(account.addr) : '';
-
+            // Finally: from list[0]
+            const account = list[0];
+            account.showAddr = account.activeAddr ? ellipsisAddr(account.activeAddr) : '';
             return account;
         },
 
@@ -151,7 +164,7 @@ export default {
         },
 
         chooseAccount(account) {
-            this.activeAccount = account;
+            this.currAcc = account;
             this.isShowAccountList = false;
             this.password = '';
         },
@@ -162,18 +175,16 @@ export default {
             this.isShowAccountList = false;
         },
 
-        addAcc() {
-            this.$wallet.clearActiveAccount();
+        createAcc() {
             this.$router.push({ name: 'startCreate' });
         },
         login() {
             if (!this.isShowExisting) {
                 this.$refs.restoreDom && this.$refs.restoreDom.valid();
-
                 return;
             }
 
-            if (!this.activeAccount || this.isLoading) {
+            if (!this.currAcc || this.isLoading) {
                 return;
             }
 
@@ -183,33 +194,30 @@ export default {
                 return;
             }
 
-            const loginSuccess = () => {
+            this.isLoading = true;
+
+            this.$store.commit('switchHDAcc', this.currAcc);
+            this.$store.dispatch('login', this.password).then(() => {
                 if (!this.isLoading) {
                     return;
                 }
-
                 this.isLoading = false;
-                const activeAccount = this.$wallet.getActiveAccount();
-                activeAccount.unlock();
-                this.$store.commit('setDefaultAddress');
 
-                this.$router.push({ name: this.$wallet.lastPage || 'trade' });
-                this.$wallet.clearLastPage();
-            };
+                if (!this.currAcc.id && this.currAcc.entropy) {
+                    deleteOldAcc(this.currAcc);
+                }
 
-            this.isLoading = true;
-            this.$wallet.login(this.activeAccount, this.password).then(result => {
-                result && loginSuccess();
-                !result && this.$toast(this.$t('hint.pwErr'));
-            })
-                .catch(err => {
-                    console.warn(err);
-                    if (!this.isLoading) {
-                        return;
-                    }
-                    this.isLoading = false;
-                    this.$toast(this.$t('hint.pwErr'));
-                });
+                this.currHDAcc.activate();
+                const name = this.$store.state.env.lastPage || 'trade';
+                this.$router.push({ name });
+            }).catch(err => {
+                console.warn(err);
+                if (!this.isLoading) {
+                    return;
+                }
+                this.isLoading = false;
+                this.$toast(this.$t('hint.pwErr'));
+            });
         }
     }
 };

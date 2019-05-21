@@ -1,6 +1,5 @@
 import { utils } from '@vite/vitejs';
-import { wallet } from 'utils/wallet';
-// import $ViteJS from 'utils/viteClient';
+import { getActiveAcc } from 'wallet';
 import { powProcess } from 'components/pow/index';
 import { quotaConfirm } from 'components/quota/index';
 
@@ -67,7 +66,7 @@ export default function sendTx(methodName, data, config = defaultConfig) {
     config = formatConfig(config);
 
     const event = new EventEmitter();
-    const activeAccount = wallet.getActiveAccount();
+    const activeAccount = getActiveAcc();
 
     let powInstance = null;
 
@@ -77,9 +76,8 @@ export default function sendTx(methodName, data, config = defaultConfig) {
         beforePow: (accountBlock, checkPowResult, next) => {
             console.log('[beforePow]');
 
-            const activeAccount = wallet.getActiveAccount();
-            if (!activeAccount
-                || activeAccount.getDefaultAddr() !== accountBlock.accountAddress) {
+            const activeAccount = getActiveAcc();
+            if (!activeAccount || activeAccount.address !== accountBlock.accountAddress) {
                 return Promise.reject({
                     code: '1000000',
                     message: `${ accountBlock.accountAddress } is expired.`

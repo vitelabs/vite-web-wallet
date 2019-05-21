@@ -1,4 +1,5 @@
-import { wallet } from 'utils/wallet';
+import { StatusMap, getCurrHDAcc, getActiveAcc } from 'wallet';
+import { pwdConfirm } from 'components/password/index.js';
 
 const vnodes = new Map();
 
@@ -54,15 +55,17 @@ export default {
                 el.addEventListener('click', e => {
                     const funcName = binding.expression || '';
 
-                    if (wallet.isLogin) {
+                    const currHDACC = getCurrHDAcc();
+
+                    if (currHDACC.status === StatusMap.UNLOCK) {
                         funcName && vnode.context && vnode.context[funcName](e);
                         vnode.data.on && vnode.data.on.unlocked && vnode.data.on.unlocked();
                         return;
                     }
 
-                    const activeAccount = wallet.getActiveAccount();
+                    const activeAccount = getActiveAcc();
                     if (activeAccount) {
-                        activeAccount.unlockAccount();
+                        pwdConfirm({ type: 'unlockAccount' });
                         return;
                     }
 

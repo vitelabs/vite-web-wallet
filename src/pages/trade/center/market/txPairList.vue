@@ -1,27 +1,27 @@
 <template>
     <div class="tx-pair-wrapper">
-        <span v-show="pairCode && realPrice" class="real-price" :style="`top: ${top}px`">{{ realPrice }}</span>
+        <span v-show="symbol && realPrice" class="real-price" :style="`top: ${top}px`">{{ realPrice }}</span>
         <div ref="txList" class="tx-list">
             <div :ref="`txPair${i}`" v-for="(txPair, i) in showList" :key="i"
                  class="__center-tb-row __pointer"
-                 :class="{'active': txPair && txPair.pairCode === activePairCode}"
+                 :class="{'active': txPair && txPair.symbol === activeSymbol}"
                  @mouseenter="showRealPrice(txPair, i)"
                  @mouseleave="hideRealPrice(txPair)"
-                 @click="setActiveTxPair(txPair.rawData)">
+                 @click="setActiveTxPair(txPair)">
                 <span class="__center-tb-item tx-pair">
-                    <span class="favorite-icon" :class="{'active': !!favoritePairs[txPair.pairCode]}"
-                          @click.stop="setFavorite(txPair.rawData)"></span>
-                    <span class="describe">{{ txPair.showPair }}</span>
+                    <span class="favorite-icon" :class="{'active': !!favoritePairs[txPair.symbol]}"
+                          @click.stop="setFavorite(txPair)"></span>
+                    <span class="describe">{{ `${txPair.tradeTokenSymbol }/${ txPair.quoteTokenSymbol}` }}</span>
                 </span>
                 <span class="__center-tb-item">
-                    {{ txPair.price ? formatNum(txPair.price, txPair.rawData.toDecimals) : '--' }}
+                    {{ txPair.price ? formatNum(txPair.price, txPair.pricePrecision) : '--' }}
                 </span>
                 <span v-show="showCol === 'updown'" class="__center-tb-item percent" :class="{
-                    'up': +txPair.price24hChange > 0,
-                    'down': +txPair.price24hChange < 0
-                }">{{ txPair.price24hChange ? getPercent(txPair.price24hChange) : '--' }}</span>
+                    'up': +txPair.priceChange > 0,
+                    'down': +txPair.priceChange < 0
+                }">{{ txPair.priceChange ? getPercent(txPair.priceChange) : '--' }}</span>
                 <span v-show="showCol === 'txNum'" class="__center-tb-item">
-                    {{ txPair.amount24h ? formatNum(txPair.amount24h, 1) : '--' }}
+                    {{ txPair.amount ? formatNum(txPair.amount, 1) : '--' }}
                 </span>
             </div>
         </div>
@@ -59,14 +59,14 @@ export default {
     },
     data() {
         return {
-            pairCode: null,
+            symbol: null,
             realPrice: '',
             top: 0
         };
     },
     computed: {
-        activePairCode() {
-            return this.activeTxPair ? this.activeTxPair.pairCode || null : null;
+        activeSymbol() {
+            return this.activeTxPair ? this.activeTxPair.symbol || null : null;
         },
         activeTxPair() {
             return this.$store.state.exchangeActiveTxPair.activeTxPair;
@@ -79,19 +79,10 @@ export default {
             let activeTxPair = list && list.length ? list[0] : null;
 
             list.forEach(_t => {
-                const item = {};
-                item.pairCode = _t.pairCode;
-                item.price = _t.price;
-                item.amount24h = _t.amount24h;
-                item.showPair = `${ _t.ftokenShow }/${ _t.ttokenShow }`;
-                item.price24hChange = _t.price24hChange;
-                item.rawData = _t;
-
-                if (_t.ftoken === query.ftoken && _t.ttoken === query.ttoken) {
+                if (_t.tradeTokenSymbol === query.tradeTokenSymbol && _t.quoteTokenSymbol === query.quoteTokenSymbol) {
                     activeTxPair = _t;
                 }
-
-                _l.push(item);
+                _l.push(_t);
             });
 
             if (!this.activeTxPair && activeTxPair) {
@@ -120,12 +111,12 @@ export default {
             }
 
             this.top = top;
-            this.pairCode = txPair.pairCode;
+            this.symbol = txPair.symbol;
             this.realPrice = this.getRealPrice(txPair);
         },
         hideRealPrice(txPair) {
-            if (this.pairCode && txPair.pairCode === this.pairCode) {
-                this.pairCode = null;
+            if (this.symbol && txPair.symbol === this.symbol) {
+                this.symbol = null;
             }
         },
         getRealPrice(txPair) {
@@ -133,13 +124,13 @@ export default {
                 return '';
             }
 
-            const rate = this.getRate(txPair.rawData.ttoken);
+            const rate = this.getRate(txPair.quoteToken);
             if (!rate) {
                 return '';
             }
 
             const pre = this.$store.state.env.currency === 'cny' ? '≈¥' : '≈$';
-            return `${ txPair.rawData.ftokenShow }  ${ pre }${ BigNumber.multi(txPair.price || 0, rate || 0, 2) }`;
+            return `${ txPair.tradeTokenSymbol }  ${ pre }${ BigNumber.multi(txPair.price || 0, rate || 0, 2) }`;
         },
         getRate(tokenId) {
             const rateList = this.$store.state.exchangeRate.rateMap || {};
@@ -170,15 +161,15 @@ export default {
                 case 'priceDown':
                     return b.price - a.price;
                 case 'upDownUp':
-                    return (a.price - a.priceBefore24h) - (b.price - b.priceBefore24h);
+                    return a.priceChange - b.priceChange;
                 case 'upDownDown':
-                    return (b.price - b.priceBefore24h) - (a.price - a.priceBefore24h);
+                    return b.priceChange - a.priceChange;
                 case 'txNumUp':
-                    return a.amount24h - b.amount24h;
+                    return a.amount - b.amount;
                 case 'txNumDown':
-                    return b.amount24h - a.amount24h;
+                    return b.amount - a.amount;
                 default:
-                    return compareStr(a.ftokenShow, b.ftokenShow);
+                    return compareStr(a.tradeTokenSymbol, b.tradeTokenSymbol);
                 }
             });
         },

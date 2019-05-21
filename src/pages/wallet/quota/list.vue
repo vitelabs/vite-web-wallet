@@ -35,10 +35,12 @@
 import userImg from 'assets/imgs/mine.svg';
 import pagination from 'components/pagination.vue';
 import tableList from 'components/tableList.vue';
+import { pwdConfirm } from 'components/password/index.js';
 import date from 'utils/date.js';
 import { timer } from 'utils/asyncFlow';
 import BigNumber from 'utils/bigNumber';
 import ellipsisAddr from 'utils/ellipsisAddr.js';
+import { StatusMap } from 'wallet';
 
 let pledgeListInst;
 
@@ -67,18 +69,18 @@ export default {
         this.stopLoopPledgeList();
     },
     data() {
-        const activeAccount = this.$wallet.getActiveAccount();
-
         return {
-            activeAccount,
             currentPage: 0,
             activeItem: null,
             loading: false
         };
     },
     computed: {
+        isLogin() {
+            return this.$store.state.wallet.status === StatusMap.UNLOCK;
+        },
         address() {
-            return this.$store.state.activeAccount.address;
+            return this.$store.getters.activeAddr;
         },
         totalAmount() {
             if (!this.tokenInfo) {
@@ -146,13 +148,12 @@ export default {
                 return;
             }
 
-            if (this.$wallet.isLogin) {
+            if (this.isLogin) {
                 this.showCancel(item, index);
                 return;
             }
 
-            const activeAccount = this.$wallet.getActiveAccount();
-            activeAccount && activeAccount.unlockAccount();
+            pwdConfirm({ type: 'unlockAccount' });
         },
         gotoDetail(addr) {
             const locale = this.$i18n.locale === 'zh' ? 'zh/' : '';

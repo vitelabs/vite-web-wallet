@@ -11,16 +11,16 @@
                 'active': !!changeList[v.orderId]
             }" v-for="v in sortedList" :key="v.orderId">
                 <div>{{ v.date|d }}</div>
-                <div>{{ `${v.ftokenShow}/${v.ttokenShow}` }}</div>
+                <div>{{ `${v.tradeTokenSymbol}/${v.quoteTokenSymbol}` }}</div>
                 <div :class="{
                     'buy': v.side===0,
                     'sell': v.side===1
                 }">{{ $t("tradeOrderHistory.side")[v.side] }}</div>
-                <div>{{ v.price + ' ' + v.ttokenShow }}</div>
-                <div>{{ v.quantity + ' ' + v.ftokenShow }}</div>
-                <div>{{ v.filledQ + ' ' + v.ftokenShow }}</div>
+                <div>{{ v.price + ' ' + v.quoteTokenSymbol }}</div>
+                <div>{{ v.quantity + ' ' + v.tradeTokenSymbol }}</div>
+                <div>{{ v.executedQuantity + ' ' + v.tradeTokenSymbol }}</div>
                 <div>{{ `${(v.rate*100).toFixed(2)}%` }}</div>
-                <div>{{ v.average + ' ' + v.ttokenShow }}</div>
+                <div>{{ v.average + ' ' + v.quoteTokenSymbol }}</div>
                 <div v-unlock-account v-on:unlocked="cancel(v)" class="click-able">
                     {{ $t("tradeOpenOrders.table.rowMap.cancel") }}
                 </div>
@@ -37,6 +37,7 @@ import d from 'dayjs';
 import sendTx from 'utils/sendTx';
 import { subTask } from 'utils/proto/subTask';
 import { order } from 'services/trade';
+import { initPwd } from 'components/password/index.js';
 
 let task = null;
 
@@ -82,11 +83,8 @@ export default {
         sortedList() {
             return this.list.slice(0).sort((a, b) => (b.date - a.date));
         },
-        currentMarketNmae() {
-            return this.$store.getters.currentMarketName;
-        },
         defaultAddr() {
-            return this.$store.state.activeAccount.address;
+            return this.$store.getters.activeAddr;
         }
     },
     watch: {
@@ -115,9 +113,7 @@ export default {
         },
         subscribe() {
             task = task || new subTask('orderQueryCurrent', ({ args, data }) => {
-                if (args.address !== this.defaultAddr
-                    || this.filterObj.ttoken !== args.ttoken
-                    || this.filterObj.ftoken !== args.ftoken) {
+                if (args.address !== this.defaultAddr || this.filterObj.symbol !== args.symbol) {
                     return;
                 }
 
@@ -214,11 +210,11 @@ export default {
             order({
                 address: this.defaultAddr,
                 status: 1,
-                pageNo: 1,
-                pageSize: 100,
+                offset: 1,
+                limit: 100,
                 ...this.filterObj
             }).then(data => {
-                this.list = data.orders || [];
+                this.list = data.order || [];
             });
         },
         cancel(order) {
@@ -230,8 +226,7 @@ export default {
                 this.$toast(this.$t('tradeOpenOrders.confirm.successToast'));
             };
 
-            const activeAccount = this.$wallet.getActiveAccount();
-            activeAccount.initPwd({
+            initPwd({
                 title: this.$t('tradeOpenOrders.confirm.title'),
                 content: this.$t('tradeOpenOrders.confirm.content'),
                 submitTxt: this.$t('tradeOpenOrders.confirm.submitTxt'),

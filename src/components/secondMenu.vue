@@ -24,8 +24,10 @@
 </template>
 
 <script>
+import { StatusMap } from 'wallet';
 import dexToken from 'components/dexToken';
 import switchAddr from 'components/switchAddress';
+import { pwdConfirm } from 'components/password/index.js';
 
 export default {
     components: { dexToken, switchAddr },
@@ -43,23 +45,20 @@ export default {
         this.$router.afterEach(to => {
             this.active = to.name;
         });
-        this.isLogin = !!this.$wallet.isLogin;
-        this.$wallet.onLogin(() => {
-            this.isLogin = true;
-        });
-        this.$wallet.onLogout(() => {
-            this.isLogin = false;
-        });
     },
     data() {
-        const activeAccount = this.$wallet.getActiveAccount();
-
         return {
             active: this.$route.name,
-            isLogin: false,
-            isShowDexToken: false,
-            isHaveUsers: !!activeAccount
+            isShowDexToken: false
         };
+    },
+    computed: {
+        isLogin() {
+            return this.$store.state.wallet.status === StatusMap.UNLOCK;
+        },
+        isHaveUsers() {
+            return !!this.$store.state.wallet.currHDAcc;
+        }
     },
     methods: {
         showToken() {
@@ -77,8 +76,7 @@ export default {
                 this.go('start');
                 return;
             }
-            const activeAccount = this.$wallet.getActiveAccount();
-            activeAccount && activeAccount.unlockAccount();
+            pwdConfirm({ type: 'unlockAccount' });
         },
         dexChange() {
             if (!this.isHaveUsers) {

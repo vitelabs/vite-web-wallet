@@ -190,19 +190,19 @@ function getRealData(data) {
 
     const event_key = data.event_key;
     let key = null;
-    if (/^order.vite_[a-zA-Z0-9]{50}.latest$/.test(event_key)) {
+    if (/^order.vite_[a-zA-Z0-9]{50}$/.test(event_key)) {
         key = 'OrderProto';
-    } else if (/^market.tti_[a-zA-Z0-9]{24}-tti_[a-zA-Z0-9]{24}.kline.(minute|hour|day|week|month|year|minute15|minute30|hour2|hour4|hour6|hour12|month3|month6)$/.test(event_key)) {
+    } else if (/^market.w+.kline.(minute|hour|day|week|minute30|hour6|hour12)$/.test(event_key)) {
         key = 'KlineProto';
-    } else if (/^market.tti_[a-zA-Z0-9]{24}-tti_[a-zA-Z0-9]{24}.depth.latest$/.test(event_key)) {
+    } else if (/^market.w+.depth$/.test(event_key)) {
         key = 'DepthListProto';
-    } else if (/^market.tti_[a-zA-Z0-9]{24}-tti_[a-zA-Z0-9]{24}.detail.latest$/.test(event_key)) {
-        key = 'TradePairProto';
-    } else if (/^market.tti_[a-zA-Z0-9]{24}.details.latest$/.test(event_key)) {
-        key = 'TradePairProto';
-    } else if (/^market.tti_[a-zA-Z0-9]{24}-tti_[a-zA-Z0-9]{24}.trade.latest$/.test(event_key)) {
-        key = 'TxLatestListProto';
-    } else if (/market.tti_[a-zA-Z0-9]{24}-tti_[a-zA-Z0-9]{24}.order.vite_[a-zA-Z0-9]{50}.(history|current)$/.test(event_key)) {
+    } else if (/^market.quoteToken.w+.tickers$/.test(event_key)) {
+        key = 'TickerStatisticsProto';
+    } else if (/^market.w+.tickers$/.test(event_key)) {
+        key = 'TickerStatisticsProto';
+    } else if (/^market.w+.trade$/.test(event_key)) {
+        key = 'TradeListProto';
+    } else if (/market.w+.order.vite_[a-zA-Z0-9]{50}.(history|oprn)$/.test(event_key)) {
         key = 'OrderListProto';
     }
 
@@ -210,7 +210,7 @@ function getRealData(data) {
         return null;
     }
 
-    const listKey = [ 'TxLatestListProto', 'OrderListProto' ];
+    const listKey = [ 'TradeListProto', 'OrderListProto' ];
 
     const messageProto = root.lookupType(`vite.${ key }`);
     const result = messageProto.decode(data.message);

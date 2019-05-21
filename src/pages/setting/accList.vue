@@ -8,7 +8,7 @@
                          v-for="(addrObj, index) in addrList" :key="index"
                          @click="setDefault(addrObj.addr, index)" >
                         <span class="select" :class="{
-                            'active': defaultAddr === addrObj.addr
+                            'active': defaultAddr === addrObj.address
                         }"></span>
                         <div class="describe __ellipsis">
                             <div v-show="showNameInput !== index" class="bold">
@@ -19,19 +19,19 @@
                                        v-show="showNameInput === index"
                                        v-model="editName"
                                        :placeholder="index"
-                                       @blur="rename(addrObj.addr, index)"/>
+                                       @blur="rename(addrObj.address, index)"/>
                             </form>
-                            <div class="__ellipsis">{{ addrObj.addr }}</div>
+                            <div class="__ellipsis">{{ addrObj.address }}</div>
                         </div>
-                        <img @click.stop="startRename(addrObj.addr, index)" class="icon __pointer" :class="{
-                            'not-allowed': !isWalletAcc
+                        <img @click.stop="startRename(addrObj.address, index)" class="icon __pointer" :class="{
+                            'not-allowed': !isLogin
                         }" src="../../assets/imgs/edit_default.svg"/>
-                        <img @click.stop="copy(addrObj.addr)" class="icon __pointer" src="../../assets/imgs/copy_default.svg"/>
+                        <img @click.stop="copy(addrObj.address)" class="icon __pointer" src="../../assets/imgs/copy_default.svg"/>
                     </div>
                 </div>
             </div>
 
-            <div v-show="isWalletAcc && addrList.length < 10" class="add" @click="addAddr">
+            <div v-show="isLogin && addrList.length < 10" class="add" @click="addAddr">
                 <span class="acc-add"></span><span class="describe bold">{{ $t('setting.addAddr') }}</span>
             </div>
         </div>
@@ -41,23 +41,24 @@
 <script>
 import Vue from 'vue';
 import copy from 'utils/copy';
+import { StatusMap } from 'wallet';
 
 export default {
     data() {
-        const activeAccount = this.$wallet.getActiveAccount();
-
         return {
-            isWalletAcc: activeAccount.type === 'wallet',
             showNameInput: '',
             editName: ''
         };
     },
     computed: {
+        isLogin() {
+            return this.$store.state.wallet.status === StatusMap.UNLOCK;
+        },
         defaultAddr() {
-            return this.$store.state.activeAccount.address;
+            return this.$store.getters.activeAddr;
         },
         addrList() {
-            return this.$store.state.activeAccount.addrList;
+            return this.$store.state.wallet.addrList;
         }
     },
     watch: {
@@ -83,14 +84,20 @@ export default {
             this.$toast(this.$t('hint.copy'));
         },
         addAddr() {
-            this.$store.commit('activeAccAddAddr');
+            this.$store.commit('currHDAccAddAddr');
         },
         setDefault(address, index) {
-            this.$store.dispatch('changeDefaultAddress', { address, index });
+            if (!this.isLogin) {
+                return;
+            }
+            this.$store.commit('switchActiveAcc', { address, index });
         },
 
         startRename(addr, index) {
-            if (!this.isWalletAcc || this.showNameInput === index) {
+            if (!this.isLogin) {
+                return;
+            }
+            if (this.showNameInput === index) {
                 return;
             }
 
@@ -99,7 +106,6 @@ export default {
                 this.$onKeyDown(13, () => {
                     this.rename(addr, index);
                 });
-                console.log(this.$refs.nameInput[index]);
                 this.$refs.nameInput[index].focus();
             });
         },
@@ -124,8 +130,8 @@ export default {
                 return;
             }
 
-            this.$store.commit('activeAccSetAddrName', {
-                addr,
+            this.$store.commit('changeAddrName', {
+                address: addr,
                 index,
                 name: this.editName
             });

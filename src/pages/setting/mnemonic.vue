@@ -20,16 +20,16 @@ import { pwdConfirm } from 'components/password';
 export default {
     components: { copyOK },
     data() {
-        const activeAccount = this.$wallet.getActiveAccount();
-        const mnemonic = activeAccount.getMnemonic();
-
         return {
-            mnemonic,
             copySuccess: false,
             lock: true
         };
     },
     computed: {
+        mnemonic() {
+            const acc = this.$store.state.wallet.currHDAcc;
+            return acc ? acc.mnemonic : '';
+        },
         mnemonicStr() {
             if (!this.mnemonic) {
                 return '';

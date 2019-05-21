@@ -49,7 +49,7 @@ export default {
             return getValidBalance({ decimals: this.token.decimals })(this.amount);
         },
         address() {
-            return this.$store.state.activeAccount.address;
+            return this.$store.getters.activeAddr;
         },
         addressQrcode() {
             return utils.uriStringify({

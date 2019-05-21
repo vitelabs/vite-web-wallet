@@ -3,7 +3,7 @@
         <span class="price" :class="{
             'up': +upDownPrev > 0,
             'down': +upDownPrev < 0
-        }">{{ activeTxPair && activeTxPair.price ? activeTxPair.price : '' }}</span>
+        }">{{ activeTxPair && activeTxPair.closePrice ? activeTxPair.closePrice : '' }}</span>
         <span v-show="+upDownPrev !== 0" class="p-icon" :class="{
             'up-icon': +upDownPrev > 0,
             'down-icon': +upDownPrev < 0
@@ -30,11 +30,11 @@ export default {
                 return `${ pre }0`;
             }
 
-            return pre + BigNumber.multi(this.activeTxPair.price || 0, this.rate || 0, 2);
+            return pre + BigNumber.multi(this.activeTxPair.closePrice || 0, this.rate || 0, 2);
         },
         rate() {
             const rateList = this.$store.state.exchangeRate.rateMap || {};
-            const tokenId = this.activeTxPair && this.activeTxPair.ttoken ? this.activeTxPair.ttoken : null;
+            const tokenId = this.activeTxPair && this.activeTxPair.tradeToken ? this.activeTxPair.tradeToken : null;
             const coin = this.$store.state.env.currency;
             if (!tokenId || !rateList[tokenId]) {
                 return null;

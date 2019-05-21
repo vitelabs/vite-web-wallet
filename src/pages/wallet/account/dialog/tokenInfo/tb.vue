@@ -64,7 +64,6 @@
 <script>
 import Pagination from 'components/pagination.vue';
 import { getDepositRecords, getWithdrawRecords } from 'services/gate.js';
-import { wallet } from 'utils/wallet';
 import shortify from 'utils/ellipsisAddr';
 import b from 'utils/bigNumber';
 import d from 'dayjs';
@@ -102,6 +101,11 @@ export default {
             return shortify(value, 6, 0);
         }
     },
+    computed: {
+        defaultAddr() {
+            return this.$store.getters.activeAddr;
+        }
+    },
     watch: {
         type() {
             this.currentPage = 1;
@@ -128,7 +132,7 @@ export default {
             } else if (this.type === 'deposit') {
                 getDepositRecords({
                     tokenId: this.token.tokenId,
-                    walletAddress: wallet.defaultAddr,
+                    walletAddress: this.defaultAddr,
                     pageNum,
                     pageSize
                 },
@@ -142,7 +146,7 @@ export default {
             } else if (this.type === 'withdraw') {
                 getWithdrawRecords({
                     tokenId: this.token.tokenId,
-                    walletAddress: wallet.defaultAddr,
+                    walletAddress: this.defaultAddr,
                     pageNum,
                     pageSize
                 },

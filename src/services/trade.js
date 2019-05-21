@@ -2,103 +2,95 @@ import request from 'utils/request';
 
 const path = `${ process.env.dexApiServer }v1`;
 
-export const klineHistory = function ({ from, to, ftoken, ttoken, resolution }) {
+// [TODO] symbol e.g. CSTT-47E_VITE.
+export const klineHistory = function ({ startTime, endTime, symbol, interval }) {
     return request({
-        path: `${ path }/kline/history`,
+        path: `${ path }/market/kline`,
         method: 'GET',
         params: {
-            from,
-            to,
-            resolution,
-            symbol: `${ ftoken },${ ttoken }`
+            startTime,
+            endTime,
+            limit: 1500,
+            interval,
+            symbol
         }
     });
 };
 
-export const depth = function ({ ftoken, ttoken }) {
+export const depth = function ({ symbol }) {
     return request({
-        path: `${ path }/depth`,
+        path: `${ path }/market/depth`,
         method: 'GET',
-        params: { ftoken, ttoken }
+        params: { symbol }
     });
 };
 
-export const order = function ({ address, fdate, tdate, ftoken, ttoken, orderSide, pageNo, pageSize, status, paging = 1 }) {
+export const order = function ({ address, startTime, endTime, tradeTokenSymbol, quoteTokenSymbol, side, offset, limit, status }) {
     return request({
-        path: `${ path }/order/query`,
+        path: `${ path }/orders`,
         method: 'GET',
-        params: { address, fdate, tdate, ftoken, ttoken, orderSide, pageNo, pageSize, status, paging }
+        params: { address, startTime, endTime, tradeTokenSymbol, quoteTokenSymbol, side, offset, limit, status }
     });
 };
 
-export const orderDetail = function ({ orderId, ftoken, ttoken, pageNo, pageSize, type = 0 }) {
+export const orderDetail = function ({ orderId, symbol, offset, limit, side = 0 }) {
     return request({
-        path: `${ path }/tx/details`,
+        path: `${ path }/market/trade`,
         method: 'GET',
-        params: { orderId, ftoken, ttoken, pageNo, pageSize, type }
+        params: { orderId, symbol, offset, limit, side }
     });
 };
 
-export const latestTx = function ({ ftoken, ttoken }) {
+export const latestTx = function ({ symbol }) {
     return request({
-        path: `${ path }/tx/latest`,
+        path: `${ path }/market/trade`,
         method: 'GET',
-        params: { ftoken, ttoken }
+        params: {
+            symbol,
+            limit: 100
+        }
     });
 };
 
 export const rate = function () {
-    return request({ path: `${ path }/rate/usd2cny` });
+    return request({ path: `${ path }/rate/usd-cny` });
 };
 
-export const rateUstd = function () {
-    return request({ path: `${ path }/rate/ustd` });
-};
-
+// [TODO]
 export const rateFiat = function () {
     return request({ path: `${ path }/rate/fiat` });
 };
 
 export const rateToken = function ({ tokenIdList = [] }) {
-    const tokensStr = tokenIdList.join(',');
+    const tokenIds = tokenIdList.join(',');
 
     return request({
-        path: `${ path }/rate/assign`,
-        params: { tokens: tokensStr }
+        path: `${ path }/exchange-rate`,
+        params: { tokenIds }
     });
 };
 
-export const defaultPair = function ({ ttoken }) {
+export const defaultPair = function ({ quoteTokenSymbol }) {
     return request({
-        path: `${ path }/pair/default`,
+        path: `${ path }/market/tickers`,
         method: 'GET',
-        params: { token: ttoken }
+        params: { quoteTokenSymbol }
     });
 };
 
-export const assignPair = function ({ pairs = [] }) {
-    const pairsStr = pairs.join(',');
-
+export const assignPair = function ({ symbols = [] }) {
     return request({
-        path: `${ path }/pair/assign`,
+        path: `${ path }/market/tickers`,
         method: 'GET',
-        params: { pairs: pairsStr }
+        params: { symbols: symbols.join(',') }
     });
 };
 
-export const pairSearch = function ({ key, ttoken }) {
+export const marketsReserve = function ({ quoteTokenSymbol }) {
     return request({
-        path: `${ path }/pair/search`,
+        path: `${ path }/tokens/unmapped`,
         method: 'GET',
-        params: { key, ttoken }
-    });
-};
-
-export const marketsReserve = function ({ token }) {
-    return request({
-        path: `${ path }/markets/reserve`,
-        method: 'GET',
-        params: { token }
+        params: { quoteTokenSymbol }
     });
 };
 
@@ -106,29 +98,23 @@ export const tokenDetail = function ({ tokenId }) {
     return request({
         path: `${ path }/token/detail`,
         method: 'GET',
-        params: { token: tokenId }
-    });
-};
-
-export const tokenList = function () {
-    return request({
-        path: `${ path }/token/list`,
-        method: 'GET'
+        params: { tokenId }
     });
 };
 
 export const baseToken = function () {
     return request({
-        path: `${ path }/token/base`,
-        method: 'GET'
+        path: `${ path }/tokens`,
+        method: 'GET',
+        params: { category: 'quote' }
     });
 };
 
-export const tokenMap = function ({ tokenId }) {
+export const tokenMap = function ({ symbol }) {
     return request({
-        path: `${ path }/token/mapping`,
+        path: `${ path }/token/mapped`,
         method: 'GET',
-        params: { token: tokenId }
+        params: { quoteTokenSymbol: symbol }
     });
 };
 

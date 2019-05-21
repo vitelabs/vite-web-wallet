@@ -7,11 +7,13 @@
 </template>
 
 <script>
-export default {
-    data() {
-        const activeAccount = this.$wallet.getActiveAccount();
+import { pwdConfirm } from 'components/password/index.js';
 
-        return { isHaveUsers: !!activeAccount };
+export default {
+    computed: {
+        isHaveUsers() {
+            return !!this.$store.state.wallet.currHDAcc;
+        }
     },
     methods: {
         leftClick() {
@@ -19,16 +21,13 @@ export default {
                 this.$router.push({ name: 'start' });
                 return;
             }
-
-            const activeAccount = this.$wallet.getActiveAccount();
-            activeAccount && activeAccount.unlockAccount();
+            pwdConfirm({ type: 'unlockAccount' });
         },
         rightClick() {
             if (!this.isHaveUsers) {
                 this.$router.push({ name: 'startCreate' });
                 return;
             }
-
             this.$router.push({ name: 'start' });
         }
     }

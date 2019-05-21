@@ -59,7 +59,7 @@
 <script>
 import viteInput from 'components/viteInput';
 import loading from 'components/loading';
-import localStorage from 'utils/localStorage';
+import localStorage from 'utils/store';
 import { subTask } from 'utils/proto/subTask';
 import { assignPair } from 'services/trade';
 
@@ -67,7 +67,7 @@ import orderArrow from './orderArrow';
 import tabList from './tabList';
 import txPairList from './txPairList';
 
-const FavoriteKey = 'favoriteTxPairs';
+const FavoriteKey = 'favoriteTickers';
 let defaultPairTimer = null;
 let assignPairTimerList = [];
 
@@ -107,7 +107,7 @@ export default {
         };
     },
     computed: {
-        toTokenId() {
+        quoteTokenSymbol() {
             return this.$store.state.exchangeMarket.currentMarket;
         },
         isShowFavorite() {
@@ -146,7 +146,7 @@ export default {
         },
         activePairCode() {
             return this.activeTxPair
-                ? this.activeTxPair.pairCode || null
+                ? this.activeTxPair.symbol || null
                 : null;
         },
         activeTxPair() {
@@ -154,12 +154,12 @@ export default {
         }
     },
     watch: {
-        toTokenId: function () {
+        quoteTokenSymbol: function () {
             this.searchText = '';
             this.searchList = [];
             this.stopDefaultPair();
 
-            if (!this.toTokenId) {
+            if (!this.quoteTokenSymbol) {
                 return;
             }
 
@@ -179,7 +179,7 @@ export default {
             const list = [];
             const searchText = this.$trim(this.searchText).toLowerCase();
             this.txPairList.forEach(tx => {
-                const ftokenShow = tx.ftokenShow.toLowerCase();
+                const ftokenShow = tx.tradeTokenSymbol.toLowerCase();
                 if (ftokenShow.indexOf(searchText) !== -1) {
                     list.push(tx);
                 }
@@ -190,7 +190,7 @@ export default {
     methods: {
         init() {
             defaultPairTimer = defaultPairTimer || new subTask('defaultPair', ({ args, data }) => {
-                if (args.ttoken !== this.toTokenId) {
+                if (args.quoteTokenSymbol !== this.quoteTokenSymbol) {
                     return;
                 }
 
@@ -207,7 +207,7 @@ export default {
 
                 let i;
                 for (i = 0; i < this.txPairList.length; i++) {
-                    if (this.txPairList[i].pairCode === data.pairCode) {
+                    if (this.txPairList[i].symbol === data.symbol) {
                         this.txPairList[i] = data;
                         break;
                     }
@@ -222,16 +222,16 @@ export default {
             }, 2000);
 
             defaultPairTimer.start(() => {
-                return { ttoken: this.toTokenId };
+                return { quoteTokenSymbol: this.quoteTokenSymbol };
             });
         },
         initFavoriteList() {
-            const pairs = [];
-            for (const pairCode in this.favoritePairs) {
-                pairs.push(pairCode);
+            const symbols = [];
+            for (const symbol in this.favoritePairs) {
+                symbols.push(symbol);
             }
 
-            assignPair({ pairs }).then(data => {
+            assignPair({ symbols }).then(data => {
                 this.isLoading = false;
                 this.favoriteList = data;
 
@@ -249,7 +249,7 @@ export default {
 
                         let i;
                         for (i = 0; i < this.favoriteList.length; i++) {
-                            if (this.favoriteList[i].pairCode === data.pairCode) {
+                            if (this.favoriteList[i].symbol === data.symbol) {
                                 this.favoriteList[i] = data;
                                 break;
                             }
@@ -262,10 +262,7 @@ export default {
                         this.favoriteList = [].concat(this.favoriteList);
                     });
                     _t.start(() => {
-                        return {
-                            ttoken: txPair.ttoken,
-                            ftoken: txPair.ftoken
-                        };
+                        return { symbol: txPair.symbol };
                     }, false);
                     assignPairTimerList.push(_t);
                 });
@@ -293,14 +290,14 @@ export default {
             this.currentOrderRule = rule;
         },
         setFavorite(txPair) {
-            const pairCode = txPair.pairCode;
-            const toTokenId = txPair.ttoken;
+            const symbol = txPair.symbol;
+            const toTokenId = txPair.quoteToken;
 
             this.favoritePairs = this.favoritePairs || {};
-            if (this.favoritePairs[pairCode]) {
-                delete this.favoritePairs[pairCode];
+            if (this.favoritePairs[symbol]) {
+                delete this.favoritePairs[symbol];
             } else {
-                this.favoritePairs[pairCode] = { toTokenId };
+                this.favoritePairs[symbol] = { toTokenId };
             }
             this.favoritePairs = Object.assign({}, this.favoritePairs);
 

@@ -4,12 +4,12 @@
         <div class="__center-tb-title">
             <span class="__center-tb-item">
                 {{ $t('trade.priceTitle', {
-                    price: activeTxPair && activeTxPair.ttokenShow ? activeTxPair.ttokenShow : ''
+                    price: activeTxPair && activeTxPair.quoteTokenSymbol ? activeTxPair.quoteTokenSymbol : ''
                 }) }}
             </span>
             <span class="__center-tb-item left __ellipsis">
                 {{ $t('trade.amountTitle', {
-                    amount: activeTxPair && activeTxPair.ftokenShow ? activeTxPair.ftokenShow : ''
+                    amount: activeTxPair && activeTxPair.tradeTokenSymbol ? activeTxPair.tradeTokenSymbol : ''
                 })}}
             </span>
             <span class="__center-tb-item tx-time">{{ $t('trade.latestTx.time') }}</span>
@@ -20,11 +20,11 @@
             <div class="__center-tb-row __pointer" @click="clickRow(tx)"
                  v-for="(tx, i) in latestTxList" :key="i">
                 <span class="__center-tb-item"  :class="{
-                    'buy': tx.txSide === 0,
-                    'sell': tx.txSide === 1
+                    'buy': tx.side === 0,
+                    'sell': tx.side === 1
                 }">{{ formatNum(tx.price, 'ttoken') }}</span>
                 <span class="__center-tb-item left">{{ formatNum(tx.quantity, 'ftoken', 6) }}</span>
-                <span class="__center-tb-item tx-time">{{ getDate(tx.txTime * 1000) }}</span>
+                <span class="__center-tb-item tx-time">{{ getDate(tx.time * 1000) }}</span>
             </div>
         </div>
     </div>

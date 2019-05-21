@@ -1,5 +1,7 @@
-import { wallet } from 'utils/wallet';
-import storage from 'utils/localStorage';
+// import { wallet } from 'wallet';
+import storage from 'utils/store';
+
+const wallet = {};
 
 export const addrSpace = {
     get key() {
