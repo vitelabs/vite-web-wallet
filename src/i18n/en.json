@@ -80,7 +80,8 @@
         "20": "Transfer",
         "21": "Transfer",
         "22": "Transfer",
-        "23": "Transfer"
+        "23": "Transfer",
+        "25": "Genesis"
     },
     "btn": {
         "cancel": "Cancel",
