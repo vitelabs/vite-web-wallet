@@ -40,6 +40,7 @@ import list from './list';
 import confirm from 'components/confirm';
 import loading from 'components/loading';
 import viteInput from 'components/viteInput';
+import { initPwd } from 'components/password/index.js';
 import sendTx from 'utils/sendTx';
 import BigNumber from 'utils/bigNumber';
 
@@ -60,10 +61,7 @@ export default {
         }
     },
     data() {
-        const activeAccount = this.$wallet.getActiveAccount();
-
         return {
-            activeAccount,
             tokenInfo: {},
             loadingToken: false,
             showConfirmType: '',
@@ -100,6 +98,12 @@ export default {
             const compareMin = BigNumber.compared(this.cancelAmount, limitAmt);
 
             if (compareMin < 0 || compareBalance > 0) {
+                const compareLimit = BigNumber.compared(limitAmt, this.activeAmountLimit);
+                if (compareLimit >= 0) {
+                    this.amountErr = this.$t('walletQuota.maxAmt', { maxAmount: this.activeAmountLimit });
+                    return false;
+                }
+
                 this.amountErr = this.$t('walletQuota.maxAmt', {
                     minAmount: limitAmt,
                     maxAmount: this.activeAmountLimit
@@ -144,7 +148,7 @@ export default {
             const amount = this.cancelAmount;
             this.closeConfirm();
 
-            this.activeAccount.initPwd({
+            initPwd({
                 submit: () => {
                     const txListEle = this.$refs.txList;
                     if (!txListEle) {

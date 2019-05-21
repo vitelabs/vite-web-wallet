@@ -1,8 +1,9 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 
+import store from 'store';
 import statistics from 'utils/statistics';
-import { wallet } from 'utils/wallet';
+import { getCurrHDAcc, StatusMap } from 'wallet';
 import routeConfig from './routes';
 
 const loginRoutes = ['walletConversion'];
@@ -20,6 +21,8 @@ router.beforeEach((to, from, next) => {
         return;
     }
 
+    const currHDAcc = getCurrHDAcc();
+
     // Init
     if (!from.name) {
         // To start***, but not start
@@ -28,9 +31,8 @@ router.beforeEach((to, from, next) => {
             return;
         }
 
-        const activeAcc = wallet.getActiveAccount();
-        // Don't have activeAccount and want to go start*** or trade***
-        if (!activeAcc && to.name && [ 'start', 'trade' ].indexOf(to.name) === -1) {
+        // Don't have currHDAcc and want to go start*** or trade***
+        if (!currHDAcc && to.name && [ 'start', 'trade' ].indexOf(to.name) === -1) {
             router.replace({ name: 'start' });
             return;
         }
@@ -38,11 +40,11 @@ router.beforeEach((to, from, next) => {
 
     // If want to go start, and from isn't start***, record from.
     if (to.name && to.name === 'start' && from.name && from.name.indexOf('start') === -1) {
-        wallet.setLastPage(from.name);
+        store.commit('setLastPage', from.name);
     }
 
     // If must login, but not login, to start.
-    if (loginRoutes.indexOf(to.name) >= 0 && !wallet.isLogin) {
+    if (loginRoutes.indexOf(to.name) >= 0 && currHDAcc.status === StatusMap.LOCK) {
         router.replace({ name: 'start' });
         return;
     }

@@ -1,6 +1,6 @@
 import { getClient } from 'utils/request';
 import sendTx from 'utils/sendTx';
-import { wallet } from 'utils/wallet';
+import { getActiveAcc } from 'wallet';
 import { addrSpace } from 'utils/storageSpace';
 
 const STORAGEKEY = 'INDEX_COLLECT_TOKEN';
@@ -62,7 +62,7 @@ export const withdraw = async (
     { amount, withdrawAddress, gateAddr, tokenId },
     url
 ) => {
-    const account = wallet.activeAccount;
+    const account = getActiveAcc();
 
     const signedBlock = await sendTx('asyncSendTx', {
         toAddress: gateAddr,

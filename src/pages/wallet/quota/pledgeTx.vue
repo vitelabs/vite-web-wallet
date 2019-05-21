@@ -51,6 +51,7 @@
 <script>
 import { hdAddr, constant } from '@vite/vitejs';
 import viteInput from 'components/viteInput';
+import { initPwd } from 'components/password/index.js';
 import BigNumber from 'utils/bigNumber';
 
 const amountTimeout = null;
@@ -74,11 +75,8 @@ export default {
         this.clearAll();
     },
     data() {
-        const activeAccount = this.$wallet.getActiveAccount();
-
         return {
             minNum,
-            activeAccount,
             amount: '',
             toAddr: '',
             isValidAddress: true,
@@ -89,7 +87,7 @@ export default {
     },
     computed: {
         addr() {
-            return this.$store.state.activeAccount.address;
+            return this.$store.getters.activeAddr;
         },
         btnUnuse() {
             return this.loading || !this.isValidAddress || this.amountErr || !this.amount || !this.toAddr;
@@ -186,7 +184,7 @@ export default {
                 return;
             }
 
-            this.activeAccount.initPwd({
+            initPwd({
                 title: this.$t('submitStaking'),
                 submitTxt: this.$t('walletQuota.confirm.submit.rightBtn'),
                 cancelTxt: this.$t('walletQuota.confirm.submit.leftBtn'),

@@ -17,7 +17,7 @@ export default {
     components: { addressTitle, switchAddr },
     computed: {
         defaultAddr() {
-            return this.$store.state.activeAccount.address;
+            return this.$store.getters.activeAddr;
         },
         addressQrcode() {
             return utils.uriStringify({ target_address: this.defaultAddr });

@@ -19,13 +19,13 @@
 
         <div class="__center-tb-title">
             <span class="__center-tb-item __ellipsis depth price">{{ $t('trade.priceTitle', {
-                price: activeTxPair && activeTxPair.ttokenShow ? activeTxPair.ttokenShow : ''
+                price: activeTxPair && activeTxPair.quoteTokenSymbol ? activeTxPair.quoteTokenSymbol : ''
             }) }}</span>
             <span class="__center-tb-item __ellipsis depth quantity">{{ $t('trade.amountTitle', {
-                amount: activeTxPair && activeTxPair.ftokenShow ? activeTxPair.ftokenShow : ''
+                amount: activeTxPair && activeTxPair.tradeTokenSymbol ? activeTxPair.tradeTokenSymbol : ''
             }) }}</span>
             <span class="__center-tb-item __ellipsis depth amount">{{ $t('trade.quantityTitle', {
-                quantity: activeTxPair && activeTxPair.ttokenShow ? activeTxPair.ttokenShow : ''
+                quantity: activeTxPair && activeTxPair.quoteTokenSymbol ? activeTxPair.quoteTokenSymbol : ''
             }) }}</span>
         </div>
 

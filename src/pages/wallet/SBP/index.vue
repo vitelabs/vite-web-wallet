@@ -37,6 +37,7 @@ import secTitle from 'components/secTitle';
 import loading from 'components/loading';
 import confirm from 'components/confirm';
 import viteInput from 'components/viteInput';
+import { initPwd } from 'components/password/index.js';
 import BigNumber from 'utils/bigNumber';
 import sendTx from 'utils/sendTx';
 import register from './register';
@@ -62,10 +63,7 @@ export default {
         this.clearAll();
     },
     data() {
-        const activeAccount = this.$wallet.getActiveAccount();
-
         return {
-            activeAccount,
             tokenInfo: {},
             loadingToken: false,
             showConfirmType: '',
@@ -159,7 +157,7 @@ export default {
             const showConfirmType = this.showConfirmType;
             this.showConfirmType = '';
 
-            this.activeAccount.initPwd({
+            initPwd({
                 cancel: () => {
                     this.closeConfirm();
                 },
@@ -203,7 +201,6 @@ export default {
         },
 
         getParams({ producerAddr, nodeName, amount }) {
-            this.activeAccount = this.$wallet.getActiveAccount();
             const toAmount = BigNumber.toMin(amount || 0, this.tokenInfo.decimals);
 
             return {

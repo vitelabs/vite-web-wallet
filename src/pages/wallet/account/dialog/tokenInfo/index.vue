@@ -104,7 +104,7 @@ export default {
             return !this.urlCache;
         },
         defaultAddr() {
-            return this.$store.state.activeAccount.address;
+            return this.$store.getters.activeAddr;
         }
     },
     methods: {

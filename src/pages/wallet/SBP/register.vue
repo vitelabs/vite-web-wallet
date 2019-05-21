@@ -61,6 +61,7 @@
 <script>
 import { hdAddr } from '@vite/vitejs';
 import viteInput from 'components/viteInput';
+import { initPwd } from 'components/password/index.js';
 import BigNumber from 'utils/bigNumber';
 import sendTx from 'utils/sendTx';
 
@@ -85,16 +86,12 @@ export default {
         }
     },
     data() {
-        const activeAccount = this.$wallet.getActiveAccount();
-
         return {
             nodeName: '',
             nodeNameErr: '',
             producerAddr: '',
             producerAddrErr: '',
             tipsType: '',
-
-            activeAccount,
             loading: false
         };
     },
@@ -103,7 +100,7 @@ export default {
     },
     computed: {
         quotaAddr() {
-            return this.$store.state.activeAccount.address;
+            return this.$store.getters.activeAddr;
         },
         regNameList() {
             return this.$store.getters.regNameList;
@@ -212,7 +209,7 @@ export default {
                 return;
             }
 
-            this.activeAccount.initPwd({
+            initPwd({
                 title: this.$t('walletSBP.confirm.title'),
                 submitTxt: this.$t('walletSBP.confirm.rightBtn'),
                 cancelTxt: this.$t('walletSBP.confirm.leftBtn'),
@@ -246,10 +243,6 @@ export default {
             }).catch(err => {
                 console.warn(err);
                 this.loading = false;
-
-                if (err && err.code && err.code === '1000001') {
-                    return;
-                }
                 this.$toast(this.$t('walletSBP.section1.registerFail'), err);
             });
         }

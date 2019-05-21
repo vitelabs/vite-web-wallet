@@ -66,6 +66,7 @@ import BigNumber from 'utils/bigNumber';
 import confirm from 'components/confirm';
 import viteInput from 'components/viteInput';
 import process from 'components/slider';
+import { initPwd } from 'components/password/index.js';
 
 const minGwei = 3;
 const maxGwei = 99;
@@ -117,7 +118,7 @@ export default {
     },
     computed: {
         viteAddr() {
-            return this.$store.state.activeAccount.address;
+            return this.$store.getters.activeAddr;
         },
         netStatus() {
             return this.$store.state.env.clientStatus;
@@ -232,8 +233,7 @@ export default {
 
             this.isShowTrans = false;
 
-            const activeAccount = this.$wallet.getActiveAccount();
-            activeAccount.initPwd({
+            initPwd({
                 submit: () => {
                     this.isShowTrans = true;
 

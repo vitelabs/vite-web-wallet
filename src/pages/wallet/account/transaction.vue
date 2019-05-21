@@ -49,7 +49,7 @@
 import Vue from 'vue';
 import { utils, hdAddr } from '@vite/vitejs';
 
-
+import { initPwd } from 'components/password/index.js';
 import confirm from 'components/confirm';
 import viteInput from 'components/viteInput';
 import bigNumber from 'utils/bigNumber';
@@ -163,8 +163,7 @@ export default {
                 return;
             }
 
-            const activeAccount = this.$wallet.getActiveAccount();
-            const isHold = activeAccount.initPwd({
+            const isHold = initPwd({
                 showMask: false,
                 submit: () => {
                     this.isShowTrans = true;
@@ -184,14 +183,7 @@ export default {
             }
 
             this.loading = true;
-
-            const activeAccount = this.$wallet.getActiveAccount();
             const amount = bigNumber.toMin(this.amount, this.token.decimals);
-
-            if (!activeAccount) {
-                this.$toast(this.$t('hint.err'));
-                return;
-            }
 
             const transError = (msg, err) => {
                 this.loading = false;

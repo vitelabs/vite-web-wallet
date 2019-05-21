@@ -20,15 +20,16 @@
         <div class="filter">
             <div class="filter_label">{{ $t("tradeOrderHistory.filter.type") }}</div>
             <select class="filter_content" v-model="ftoken">
-                <option :value="token.token" v-for="token in ftokenMap" :key="token.token">{{token.name}}</option>
+                <option :value="token.symbol" v-for="token in ftokenMap" :key="token.symbol">{{ token.symbol }}</option>
             </select>
         </div>
         <div class="separator">-</div>
         <div class="filter end">
             <select class="filter_content" v-model="ttoken">
-                <option v-for="t in marketMap" :value="t.token" :key="t.token">{{t.name}}</option>
+                <option v-for="t in marketMap" :value="t.symbol" :key="t.symbol">{{ t.symbol }}</option>
             </select>
         </div>
+
         <div class="filter end">
             <div class="filter_label">{{ $t("tradeOrderHistory.filter.side") }}</div>
             <select v-model="tradeType" class="filter_content">
@@ -59,21 +60,17 @@ export default {
             tradeType: '',
             ftoken: '',
             ttoken: '',
-            tokenMap: [],
             ftokenMap: []
         };
     },
     computed: {
         marketMap() {
             return this.$store.state.exchangeMarket.marketMap;
-        },
-        currentToken() {
-            return this.$store.state.exchangeMarket.currentMarket;
         }
     },
     watch: {
         ttoken() {
-            tokenMap({ tokenId: this.ttoken }).then(data => (this.ftokenMap = data));
+            tokenMap({ symbol: this.ttoken }).then(data => (this.ftokenMap = data));
         }
     },
     methods: {

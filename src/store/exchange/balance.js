@@ -28,7 +28,8 @@ const updateExBalance = (commit, address) =>
 
 const actions = {
     startLoopExchangeBalance({ commit, dispatch, rootState }) {
-        const _address = rootState.activeAccount.address;
+        const activeAccount = rootState.wallet.activeAcc;
+        const _address = activeAccount ? activeAccount.address : '';
 
         if (address !== _address) {
             commit('clearDexBalance');

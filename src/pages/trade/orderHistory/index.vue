@@ -52,7 +52,7 @@ export default {
     },
     computed: {
         defaultAddr() {
-            return this.$store.state.activeAccount.address;
+            return this.$store.getters.activeAddr;
         }
     },
     watch: {
@@ -75,9 +75,7 @@ export default {
         },
         subscribe() {
             task = task || new subTask('orderQueryHistory', ({ args, data }) => {
-                if (args.address !== this.defaultAddr
-                    || this.filterObj.ttoken !== args.ttoken
-                    || this.filterObj.ftoken !== args.ftoken) {
+                if (args.address !== this.defaultAddr || this.filterObj.symbol !== args.symbol) {
                     return;
                 }
 
@@ -102,7 +100,7 @@ export default {
         },
 
         toPage(pageNo) {
-            this.update(Object.assign(this.filters, { pageNo }));
+            this.update(Object.assign(this.filters, { offset: pageNo }));
         },
         submit(v) {
             this.filters = v;
@@ -115,20 +113,21 @@ export default {
             if (!this.defaultAddr) return;
 
             if (this.isEmbed) {
-                filters = { totoken: this.currentMarket };
+                filters = { symbol: this.currentMarket };
             }
 
-            filters = Object.assign({ pageNo: this.currentPage }, filters);
+            filters = Object.assign({ offset: this.currentPage }, filters);
 
             order({
                 address: this.defaultAddr,
                 ...filters,
-                pageSize,
+                limit: pageSize,
+                total: 1,
                 ...this.filterObj
             }).then(data => {
-                this.totalPage = Math.ceil(data.totalSize / pageSize);
-                this.data = data.orders || [];
-                this.currentPage = filters.pageNo;
+                this.totalPage = Math.ceil(data.total / pageSize);
+                this.data = data.order || [];
+                this.currentPage = filters.offset;
             });
         }
     }

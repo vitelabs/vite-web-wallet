@@ -103,7 +103,7 @@ export default {
     },
     computed: {
         addr() {
-            return this.$store.state.activeAccount.address;
+            return this.$store.getters.activeAddr;
         },
         detailList() {
             return Object.keys(this.detailData).map(k => {

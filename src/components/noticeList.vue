@@ -31,7 +31,7 @@ export default {
     },
     computed: {
         address() {
-            return this.$store.state.activeAccount.address;
+            return this.$store.getters.activeAddr;
         }
     },
     watch: {
@@ -53,8 +53,8 @@ export default {
 
                 const orderNotice = {
                     time: date(data.date * 1000, 'zh'),
-                    ftoken: data.ftokenShow,
-                    ttoken: data.ttokenShow,
+                    ftoken: data.tradeTokenSymbol,
+                    ttoken: data.quoteTokenSymbol,
                     close: data => {
                         let i;
                         for (i = 0; i < this.latestOrders.length; i++) {

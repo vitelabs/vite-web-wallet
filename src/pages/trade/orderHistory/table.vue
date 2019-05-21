@@ -9,17 +9,17 @@
         <div class="row-container">
             <div class="row" v-for="v in sortedList" :key="v.orderId">
                 <div>{{ v.date|d }}</div>
-                <div>{{ `${v.ftokenShow}/${v.ttokenShow}` }}</div>
+                <div>{{ `${v.tradeTokenSymbol}/${v.quoteTokenSymbol}` }}</div>
                 <div :class="{
                     'buy': v.side===0,
                     'sell': v.side===1
                 }">{{ $t("tradeOrderHistory.side")[v.side] }}</div>
-                <div>{{ v.price }} {{ v.ttokenShow }}</div>
-                <div>{{ v.quantity }} {{ v.ftokenShow }}</div>
-                <div>{{ v.filledQ }} {{v.ftokenShow }}</div>
+                <div>{{ v.price }} {{ v.quoteTokenSymbol }}</div>
+                <div>{{ v.quantity }} {{ v.tradeTokenSymbol }}</div>
+                <div>{{ v.filledQ }} {{v.tradeTokenSymbol }}</div>
                 <div>{{ `${(v.rate*100).toFixed(2)}%` }}</div>
-                <div>{{ v.average }} {{ v.ttokenShow }}</div>
-                <div>{{ v.fee }} {{ v.ttokenShow }}</div>
+                <div>{{ v.average }} {{ v.quoteTokenSymbol }}</div>
+                <div>{{ v.fee }} {{ v.quoteTokenSymbol }}</div>
                 <div>{{ $t('tradeOrderHistory.table.rowMap.statusMap')[v.status] }}</div>
                 <div @click="showDetail(v)" class="click-able">
                     {{ $t("tradeOrderHistory.table.rowMap.detail") }}
@@ -69,11 +69,11 @@ export default {
             return Object.keys(this.detailData).map(k => {
                 const o = this.detailData[k];
                 return [
-                    d.unix(o.txTime).format('YYYY-MM-DD HH:mm'),
-                    `${ o.price } ${ o.token }`,
-                    `${ o.quantity } ${ o.ftokenShow }`,
-                    `${ o.fee } ${ o.token }`,
-                    `${ o.amount } ${ o.token }`
+                    d.unix(o.time).format('YYYY-MM-DD HH:mm'),
+                    `${ o.price } ${ o.quoteTokenSymbol }`,
+                    `${ o.quantity } ${ o.tradeTokenSymbol }`,
+                    `${ o.fee } ${ o.quoteTokenSymbol }`,
+                    `${ o.amount } ${ o.quoteTokenSymbol }`
                 ];
             });
         }
@@ -86,15 +86,13 @@ export default {
         showDetail(order) {
             orderDetail({
                 orderId: order.orderId,
-                ftoken: order.ftoken,
-                ttoken: order.ttoken,
-                pageNo: 1,
-                pageSize: 100,
-                type: order.side
+                symbol: order.symbol,
+                offset: 1,
+                limit: 100,
+                side: order.side
             }).then(data => {
-                this.detailData = data.details.map(v => {
-                    v.token = order.ttokenShow;
-                    v.ftokenShow = order.ftokenShow;
+                this.detailData = (data.trade || []).map(v => {
+                    v.fee = order.orderId === v.buyerOrderId ? v.buyFee : v.sellFee;
                     return v;
                 });
             });

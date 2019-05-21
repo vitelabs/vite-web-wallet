@@ -29,9 +29,8 @@
             }">{{ $t('startRecord.agreeList.2') }}</div>
         </div>
 
-
         <div class="__btn_list">
-            <span class="__btn __btn_border __pointer" @click="back">{{ $t('btn.back') }}</span>
+            <span class="__btn __btn_border __pointer" @click="goBack">{{ $t('btn.back') }}</span>
             <span class="__btn __btn_all_in __pointer" :class="{
                 'unuse': !isAgree
             }" @click="login">
@@ -39,12 +38,12 @@
                 <loading v-show="isLoading" loadingType="dot"></loading>
             </span>
         </div>
-
-        <process class="process" active="record"></process>
     </div>
 </template>
 
 <script>
+import { hdAddr } from '@vite/vitejs';
+import { saveHDAccount } from 'wallet';
 import process from 'components/process';
 import copyOK from 'components/copyOK';
 import loading from 'components/loading.vue';
@@ -52,29 +51,37 @@ import copy from 'utils/copy';
 
 export default {
     components: { process, copyOK, loading },
-    mounted() {
-        this.activeAccount = this.$wallet.getActiveAccount();
-        this.mnemonic = this.activeAccount.getMnemonic() || '';
+    props: {
+        name: {
+            type: String,
+            default: ''
+        },
+        pass: {
+            type: String,
+            default: ''
+        },
+        goBack: {
+            type: Function,
+            default: () => {}
+        }
     },
     destroyed() {
         this.isLoading = false;
     },
     data() {
-        const activeAccount = this.$wallet.getActiveAccount();
-        const mnemonic = activeAccount.getMnemonic() || '';
+        const hdAddrObj = hdAddr.newAddr();
 
         return {
-            agreeList: {},
-            activeAccount,
-            mnemonic,
+            hdAddrObj,
             len: 12,
+            agreeList: {},
             copySuccess: false,
             isLoading: false
         };
     },
     computed: {
         mnemonicList() {
-            return this.mnemonic.split(/\s/);
+            return this.hdAddrObj.mnemonic.split(/\s/);
         },
         isAgree() {
             for (let i = 1; i < 4; i++) {
@@ -90,41 +97,45 @@ export default {
             this.agreeList[key] = !this.agreeList[key];
             this.agreeList = Object.assign({}, this.agreeList);
         },
-        back() {
-            this.$wallet.clearActiveAccount();
-            this.$router.go(-1);
-        },
         copy() {
-            copy(this.mnemonic);
+            copy(this.hdAddrObj.mnemonic);
             this.copySuccess = true;
             setTimeout(() => {
                 this.copySuccess = false;
             }, 2000);
         },
         change() {
-            this.activeAccount.changeMnemonic(this.len);
+            const bits = this.len === 12 ? 128 : 256;
+            this.hdAddrObj = hdAddr.newAddr(bits);
             this.len = this.len === 24 ? 12 : 24;
-            this.mnemonic = this.activeAccount.getMnemonic() || '';
         },
+
         login() {
             if (this.isLoading || !this.isAgree) {
                 return;
             }
 
             this.isLoading = true;
-            this.activeAccount.encrypt().then(() => {
+
+            saveHDAccount({
+                name: this.name,
+                pass: this.pass,
+                hdAddrObj: this.hdAddrObj
+            }).then(id => {
                 if (!this.isLoading) {
                     return;
                 }
+
                 this.isLoading = false;
-                this.activeAccount.save();
-                this.$router.push({ name: 'start' });
-            })
-                .catch(err => {
-                    console.warn(err);
-                    this.isLoading = false;
-                    this.$toast(this.$t('hint.err'));
+                this.$router.push({
+                    name: 'start',
+                    params: { id }
                 });
+            }).catch(err => {
+                console.warn(err);
+                this.isLoading = false;
+                this.$toast(this.$t('hint.err'));
+            });
         }
     }
 };

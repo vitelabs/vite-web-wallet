@@ -112,7 +112,7 @@ export default {
             );
         },
         address() {
-            return this.$store.state.activeAccount.address;
+            return this.$store.getters.activeAddr;
         },
         gateName() {
             if (this.$store.getters.mapToken2Gate[this.token.tokenId]) {
@@ -162,6 +162,7 @@ export default {
             });
         },
         send() {
+            console.log(this.token);
             if (!this.token.tokenId) {
                 return;
             }

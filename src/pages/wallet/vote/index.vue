@@ -70,6 +70,7 @@ import search from 'components/search';
 import secTitle from 'components/secTitle';
 import loading from 'components/loading';
 import confirm from 'components/confirm';
+import { initPwd } from 'components/password/index.js';
 import { timer } from 'utils/asyncFlow';
 import BigNumber from 'utils/bigNumber';
 import $ViteJS from 'utils/viteClient';
@@ -119,10 +120,10 @@ export default {
             this.isResisterTipsShow = !this.isResisterTipsShow;
         },
         updateVoteData() {
-            return $ViteJS.vote.getVoteInfo(constant.Snapshot_Gid, this.$store.state.activeAccount.address).then(result => {
+            const activeAccount = this.$store.state.wallet.activeAcc;
+            return activeAccount.getVoteInfo().then(result => {
                 this.voteData = result ? [result] : [];
                 this.voteData[0] && (this.voteData[0].voteStatus = 'voted');
-
                 return this.voteData;
             });
         },
@@ -151,14 +152,13 @@ export default {
                 return;
             }
             const locale = this.$i18n.locale === 'zh' ? 'zh' : 'en';
-            window.open(`https://reward.vite.net?language=${ locale }&address=${ this.$store.state.activeAccount.address }`);
+            const activeAccount = this.$store.state.wallet.activeAcc;
+            window.open(`https://reward.vite.net?language=${ locale }&address=${ activeAccount ? activeAccount.address : '' }`);
         },
         cancelVote(v) {
             if (this.cache) {
                 return;
             }
-
-            let activeAccount = this.$wallet.getActiveAccount();
 
             const successCancel = () => {
                 const t = Object.assign({}, v);
@@ -174,12 +174,10 @@ export default {
             };
 
             const sendCancel = () => {
-                activeAccount = this.$wallet.getActiveAccount();
-
                 sendTx('revokeVoting', { tokenId: this.tokenInfo.tokenId }, { pow: true }).then(successCancel).catch(failCancel);
             };
 
-            activeAccount.initPwd({
+            initPwd({
                 title: this.$t('walletVote.revokeVoting'),
                 submitTxt: this.$t('walletVote.section1.confirm.submitText'),
                 cancelTxt: this.$t('walletVote.section1.confirm.cancelText'),
@@ -187,8 +185,6 @@ export default {
             }, true);
         },
         vote(v) {
-            let activeAccount = this.$wallet.getActiveAccount();
-
             const successVote = () => {
                 const t = Object.assign({}, v);
                 t.isCache = true;
@@ -212,8 +208,6 @@ export default {
             };
 
             const sendVote = () => {
-                activeAccount = this.$wallet.getActiveAccount();
-
                 sendTx('voting', {
                     nodeName: v.name,
                     tokenId: this.tokenInfo.tokenId
@@ -222,7 +216,7 @@ export default {
 
             const t = this.haveVote ? 'cover' : 'normal';
 
-            activeAccount.initPwd({
+            initPwd({
                 title: this.$t('walletVote.voting'),
                 submitTxt: this.$t(`walletVote.section2.confirm.${ t }.submitText`),
                 cancelTxt: this.$t(`walletVote.section2.confirm.${ t }.cancelText`),

@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import i18n from 'i18n';
+import store from 'store';
 import pwdComponent from './password.vue';
 
 const PwdComponent = Vue.extend(pwdComponent);
@@ -17,7 +18,8 @@ export function pwdConfirm({
 }, isShowPWD = true) {
     let instance = new PwdComponent({
         el: document.createElement('div'),
-        i18n
+        i18n,
+        store
     });
 
     const appEl = document.getElementById('vite-wallet-app');
@@ -54,4 +56,26 @@ export function pwdConfirm({
     appEl.appendChild(instance.$el);
 
     return true;
+}
+
+export function initPwd({
+    showMask = true,
+    title,
+    submit = () => {},
+    cancel = () => {},
+    content = '',
+    submitTxt = '',
+    cancelTxt = '',
+    exchange = false
+}, isConfirm = false) {
+    const isHoldPWD = !!store.state.env.isHoldPWD;
+    const isHide = !isConfirm && isHoldPWD;
+
+    if (isHide) {
+        submit && submit();
+        return true;
+    }
+
+    pwdConfirm({ showMask, title, submit, content, cancel, cancelTxt, submitTxt, exchange }, !isHoldPWD);
+    return false;
 }

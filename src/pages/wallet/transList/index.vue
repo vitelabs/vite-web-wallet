@@ -109,16 +109,11 @@ export default {
         this.startLoopTransList();
     },
     data() {
-        const activeAccount = this.$wallet.getActiveAccount();
-
-        return {
-            acc: activeAccount,
-            currentPage: this.$store.state.transList.currentPage
-        };
+        return { currentPage: this.$store.state.transList.currentPage };
     },
     computed: {
         address() {
-            return this.$store.state.activeAccount.address;
+            return this.$store.getters.activeAddr;
         },
         totalPage() {
             return this.$store.getters.totalPage;

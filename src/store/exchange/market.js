@@ -26,17 +26,17 @@ const actions = {
         baseToken().then(data => {
             commit('setMarketMap', data || []);
             const marketMap = state.marketMap;
-            const firstMarket = marketMap[0] ? marketMap[0].token : '';
+            const firstMarket = marketMap[0] ? marketMap[0].symbol : '';
             const query = getQuery();
 
-            if (!query.ttoken) {
+            if (!query.symbol) {
                 commit('setCurrentMarket', firstMarket);
                 return;
             }
 
             let i;
             for (i = 0; i < marketMap.length; i++) {
-                if (marketMap[i].token === query.ttoken) {
+                if (marketMap[i].symbol === query.symbol) {
                     break;
                 }
             }
@@ -46,16 +46,9 @@ const actions = {
                 return;
             }
 
-            commit('setCurrentMarket', marketMap[i].token);
+            commit('setCurrentMarket', marketMap[i].symbol);
         });
     }
 };
 
-const getters = {
-    currentMarketName(state) {
-        const token = state.marketMap.filter(n => n.token === state.currentMarket)[0] || {};
-        return token.name || '';
-    }
-};
-
-export default { state, mutations, actions, getters };
+export default { state, mutations, actions };

@@ -3,8 +3,8 @@
         <sec-title :isShowHelp="false"></sec-title>
         <div class="content-wrapper">
             <div class="content">
-                <div v-if="!!activeAccount" class="big-title">{{ $t('setting.addrList') }}</div>
-                <accList v-if="!!activeAccount"></accList>
+                <div v-if="!!currHDAcc" class="big-title">{{ $t('setting.addrList') }}</div>
+                <accList v-if="!!currHDAcc"></accList>
 
                 <div v-if="!!isLogin" class="big-title">{{ $t('setting.secure') }}</div>
                 <mnemonic v-if="!!isLogin"></mnemonic>
@@ -35,6 +35,7 @@ import autoLogout from './autoLogout.vue';
 import accList from './accList.vue';
 import mnemonic from './mnemonic.vue';
 import currency from './currency.vue';
+import { StatusMap } from 'wallet';
 
 export default {
     components: {
@@ -47,24 +48,16 @@ export default {
         mnemonic,
         currency
     },
-    mounted() {
-        this.isLogin = !!this.$wallet.isLogin;
-
-        this.$wallet.onLogin(() => {
-            this.isLogin = true;
-        });
-        this.$wallet.onLogout(() => {
-            this.isLogin = false;
-        });
-    },
     data() {
-        const activeAccount = this.$wallet.getActiveAccount();
-
-        return {
-            isLogin: !!this.$wallet.isLogin,
-            activeAccount,
-            isTestEnv: process.env.NODE_ENV === 'dev' || process.env.NODE_ENV === 'test'
-        };
+        return { isTestEnv: process.env.NODE_ENV === 'dev' || process.env.NODE_ENV === 'test' };
+    },
+    computed: {
+        isLogin() {
+            return this.$store.state.wallet.status === StatusMap.UNLOCK;
+        },
+        currHDAcc() {
+            return this.$store.state.wallet.currHDAcc;
+        }
     }
 };
 </script>

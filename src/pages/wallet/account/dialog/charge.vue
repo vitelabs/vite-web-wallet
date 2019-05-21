@@ -60,7 +60,7 @@ export default {
             return this.address;
         },
         defaultAddr() {
-            return this.$store.state.activeAccount.address;
+            return this.$store.getters.activeAddr;
         }
     },
     methods: {

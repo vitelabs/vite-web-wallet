@@ -59,8 +59,8 @@ let balanceInfoInst = null;
 export default {
     components: { secTitle, viteAddress, token, transaction, loading },
     created() {
-        const activeAccount = this.$wallet.getActiveAccount();
-        const mnemonic = activeAccount.getMnemonic();
+        const currHDAcc = this.$store.state.wallet.currHDAcc;
+        const mnemonic = currHDAcc.mnemonic;
         this.ethWallet = new _ethWallet({ mnemonic });
         this.ethWallet.init(() => {
             this.loading = false;
@@ -87,7 +87,7 @@ export default {
     },
     computed: {
         viteAddress() {
-            return this.$store.state.activeAccount.address;
+            return this.$store.getters.activeAddr;
         }
     },
     watch: {

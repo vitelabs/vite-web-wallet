@@ -74,7 +74,6 @@ import { utils } from '@vite/vitejs';
 import copy from 'utils/copy';
 import Tips from 'uiKit/tips';
 
-let activeAccount = null;
 const assetsType = {
     TOTAL: 'TOTAL',
     TRADE: 'TRADE',
@@ -84,7 +83,6 @@ export default {
     components: { QrcodePopup, Tips, SwitchAddr, Pie },
     data() {
         return {
-            account: {},
             isShowNameInput: false,
             editName: '',
             copySuccess: false,
@@ -94,11 +92,14 @@ export default {
             assetsView: assetsType.TOTAL
         };
     },
-    mounted() {
-        activeAccount = this.$wallet.getActiveAccount();
-        this.account = this.getSimpleAcc();
-    },
     computed: {
+        account() {
+            const activeAccount = this.$store.state.wallet.activeAcc;
+            return {
+                name: this.$store.state.wallet.name,
+                addr: activeAccount ? activeAccount.address || '' : ''
+            };
+        },
         netStatus() {
             return this.$store.state.env.clientStatus;
         },
@@ -158,12 +159,6 @@ export default {
                     this.$toast(this.$t('wallet.hint.tErr'), err);
                 });
         },
-        getSimpleAcc() {
-            return {
-                name: activeAccount ? activeAccount.getName() : '',
-                addr: this.defaultAddr
-            };
-        },
 
         clearEditName() {
             this.isShowNameInput = false;
@@ -201,9 +196,8 @@ export default {
                 return;
             }
 
-            activeAccount.rename(this.editName);
+            this.$store.commit('renameCurrHDAcc', this.editName);
             this.clearEditName();
-            this.account = this.getSimpleAcc();
         }
     }
 };
