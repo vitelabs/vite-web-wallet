@@ -231,8 +231,8 @@ export default {
 
             sendTx('dexFundNewMarket', {
                 amount: BigNumber.toMin(spend, this.viteTokenInfo.decimals),
-                tradeToken: this.token.token,
-                quoteToken: this.market.token
+                tradeToken: this.token.tokenId,
+                quoteToken: this.market.tokenId
             }).then(() => {
                 newMarketSuccess();
             }).powStarted(() => {

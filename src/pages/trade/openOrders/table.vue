@@ -234,9 +234,9 @@ export default {
                 submit: () => {
                     sendTx('dexTradeCancelOrder', {
                         orderId: order.orderId,
-                        tradeToken: order.ftoken,
+                        tradeToken: order.tradeToken,
                         side: order.side,
-                        quoteToken: order.ttoken
+                        quoteToken: order.quoteToken
                     })
                         .then(successSubmit)
                         .catch(err => {
