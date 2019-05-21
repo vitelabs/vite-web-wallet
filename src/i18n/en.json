@@ -198,8 +198,8 @@
             "我已经写下了或者用其它方式保存了我的助记词"
         ]
     },
-    "startImport": {
-        "title": "Import",
+    "keystore": {
+        "title": "Keystore",
         "dragDrop": {
             "text": "Drag and drop files there",
             "err1": "Imported illegal file!",
