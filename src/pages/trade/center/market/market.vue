@@ -22,7 +22,7 @@
 
         <div class="__center-tb-title">
             <div class="__center-tb-item tx-pair __pointer"
-                 @click="setOrderRule('transPairs')">
+                 @click="setOrderRule('symbol')">
                 {{ $t('trade.txPair') }}
             </div>
             <div class="__center-tb-item">
