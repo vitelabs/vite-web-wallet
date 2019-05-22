@@ -119,9 +119,6 @@ export default {
         quoteTokenSymbol() {
             return this.$store.state.exchangeMarket.currentMarket;
         },
-        isShowFavorite() {
-            return this.$store.state.exchangeMarket.isShowFavorite;
-        },
         isShowNoData() {
             return !this.isLoading
                 && (
