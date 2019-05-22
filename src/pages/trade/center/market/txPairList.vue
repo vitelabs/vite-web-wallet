@@ -14,7 +14,7 @@
                     <span class="describe">{{ `${txPair.tradeTokenSymbol }/${ txPair.quoteTokenSymbol}` }}</span>
                 </span>
                 <span class="__center-tb-item">
-                    {{ txPair.price ? formatNum(txPair.price, txPair.pricePrecision) : '--' }}
+                    {{ txPair.closePrice ? formatNum(txPair.closePrice, txPair.pricePrecision) : '--' }}
                 </span>
                 <span v-show="showCol === 'updown'" class="__center-tb-item percent" :class="{
                     'up': +txPair.priceChange > 0,

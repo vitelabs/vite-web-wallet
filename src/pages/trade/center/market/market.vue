@@ -231,6 +231,11 @@ export default {
                 symbols.push(symbol);
             }
 
+            if (!symbols.length) {
+                this.isLoading = false;
+                return;
+            }
+
             assignPair({ symbols }).then(data => {
                 this.isLoading = false;
                 this.favoriteList = data;

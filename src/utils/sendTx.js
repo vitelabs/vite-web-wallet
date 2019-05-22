@@ -99,7 +99,6 @@ export default function sendTx(methodName, data, config = defaultConfig) {
         },
         beforeSendTx: (accountBlock, checkPowResult, next) => {
             // console.log('[beforeSendTx]');
-            // console.log(config.sendTx);
             if (!checkPowResult || !checkPowResult.difficulty) {
                 return next(!config.sendTx);
             }

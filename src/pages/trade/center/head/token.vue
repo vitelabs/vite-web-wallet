@@ -88,7 +88,6 @@ export default {
             return this.$store.state.exchangeTokens.ttoken;
         },
         ftokenDetail() {
-            console.log(this.$store.state.exchangeTokens);
             return this.$store.state.exchangeTokens.ftoken;
         },
         ftokenIcon() {

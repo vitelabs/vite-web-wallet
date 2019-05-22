@@ -50,8 +50,7 @@ export const httpServicesMap = {
         address,
         symbol,
         offset: 1,
-        limit: 30,
-        status: 0
+        limit: 30
     }),
     orderQueryCurrent: ({ symbol, address }) => order({
         address,
