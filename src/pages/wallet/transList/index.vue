@@ -126,6 +126,7 @@ export default {
             const nowList = [];
 
             transList.forEach(trans => {
+                // [TODO] vitejs 2.1.2
                 let txType = !trans.rawData.txType && trans.rawData.txType !== 0 ? txImgs.length - 1 : trans.rawData.txType;
                 if (+trans.rawData.blockType === 7) {
                     txType = BuiltinTxType.GenesisReceive;
