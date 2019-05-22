@@ -65,6 +65,9 @@ export default {
         };
     },
     computed: {
+        isShowFavorite() {
+            return this.$store.state.exchangeMarket.isShowFavorite;
+        },
         activeSymbol() {
             return this.activeTxPair ? this.activeTxPair.symbol || null : null;
         },
@@ -153,6 +156,10 @@ export default {
 
                 return -1;
             };
+
+            if (this.isShowFavorite && this.currentRule !== 'symbol') {
+                return list;
+            }
 
             return list.sort((a, b) => {
                 switch (this.currentRule) {
