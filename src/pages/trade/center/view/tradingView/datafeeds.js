@@ -101,29 +101,21 @@ export default class dataFeeds {
             return;
         }
 
-        const { isError, errMsg, isHaveData, nextTime, list } = result;
-
-        if (isError) {
-            // console.log('[getBars end] error');
-            onErrorCallback(errMsg);
-            return;
-        }
-
-        if (!isHaveData) {
+        if (!result || !result.length) {
             // console.log('[getBars end] noData');
             onHistoryCallback([], {
                 noData: true,
-                nextTime
+                nextTime: to
             });
             return;
         }
 
-        const _list = fillKlineData(list, _resolution);
+        const list = fillKlineData(result, _resolution);
 
         // console.log('[getBars end]', new Date(_list[_list.length - 1].time), _list[_list.length - 1], list[list.length - 1], list[0]);
 
-        this.lastBar = _list[_list.length - 1];
-        onHistoryCallback(_list, { noData: false });
+        this.lastBar = list[list.length - 1];
+        onHistoryCallback(list, { noData: false });
     }
 
     async fetchKlineData(interval, startTime, endTime) {
@@ -296,27 +288,14 @@ function formatResolution(resolution, from, to) {
 }
 
 function formatReqKlineData(res) {
-    let isHaveData = false;
-    let isError = false;
-    let errMsg = '';
-    let nextTime;
     const list = [];
 
     res.forEach(res_item => {
-        isHaveData = isHaveData || res_item.s !== 'no_data';
-        isError = isError || res_item.s === 'error';
-
-        if (res_item.s === 'no_data' || isError) {
-            nextTime = nextTime || res_item.nextTime;
-            errMsg = res_item.errmsg;
-            return;
-        }
-
         res_item.t.forEach((_t, i) => {
             list.push({
                 time: _t,
                 close: res_item.c[i],
-                open: res_item.o[i],
+                open: res_item.p[i],
                 high: res_item.h[i],
                 low: res_item.l[i],
                 volume: res_item.v[i]
@@ -324,7 +303,7 @@ function formatReqKlineData(res) {
         });
     });
 
-    return { isError, errMsg, isHaveData, nextTime, list };
+    return list;
 }
 
 function fillKlineData(list, resolution) {
