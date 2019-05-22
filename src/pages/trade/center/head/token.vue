@@ -3,10 +3,10 @@
         <div class="t-item __pointer">
             <div class="t-icon" @click="showToken('ftoken')">
                 <img v-show="ftokenIcon" :src="ftokenIcon"/>
-                {{ ftokenDetail ? ftokenDetail.tokenShow : '' }}
+                {{ ftokenDetail ? ftokenDetail.symbol : '' }}
             </div> /
             <div class="t-icon" @click="showToken('ttoken')">
-                {{ ttokenDetail ? ttokenDetail.tokenShow : '' }}
+                {{ ttokenDetail ? ttokenDetail.symbol : '' }}
             </div>
         </div>
         <div class="t-item id __pointer">
@@ -21,7 +21,7 @@
         <div v-show="showTokenType" class="detail" :class="{'right': showTokenType === 'ttoken'}">
             <div @click="goNetToken(tokenDetail.tokenId)" class="token-row __pointer">
                 <span class="token-title">{{ $t('trade.head.tokenName') }} :</span>
-                <span class="active">{{ tokenDetail.tokenName || '--' }}</span>
+                <span class="active">{{ tokenDetail.name || '--' }}</span>
             </div>
             <div class="token-row __pointer">
                 <span class="token-title">{{ $t('trade.head.originalSymbol') }} :</span>
@@ -41,7 +41,7 @@
             </div>
             <div class="token-row">
                 <span class="token-title">{{ $t('trade.head.tokenDigit') }} :</span>
-                {{ tokenDetail.tokenDigit || '--' }}
+                {{ tokenDetail.tokenDecimals || '--' }}
             </div>
             <div class="token-row">
                 <span class="token-title">{{ $t('trade.head.publisherDate') }} :</span>
@@ -49,7 +49,7 @@
             </div>
             <div class="token-row">
                 <span class="token-title">{{ $t('trade.head.total') }} :</span>
-                {{ tokenDetail.total || '--' }}
+                {{ tokenDetail.totalSupply || '--' }}
             </div>
             <div class="token-row">
                 <span class="token-title">{{ $t('trade.head.website') }} :</span>
@@ -88,6 +88,7 @@ export default {
             return this.$store.state.exchangeTokens.ttoken;
         },
         ftokenDetail() {
+            console.log(this.$store.state.exchangeTokens);
             return this.$store.state.exchangeTokens.ftoken;
         },
         ftokenIcon() {

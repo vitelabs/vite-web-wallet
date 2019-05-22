@@ -39,7 +39,7 @@ class WsProtoClient {
     }
 
     startConnect() {
-        console.log('[New Wesocket]', this._clientId, new Date());
+        // console.log('[New Wesocket]', this._clientId, new Date());
 
         try {
             const connect = new WebSocket(this.wsUrl);
@@ -53,7 +53,7 @@ class WsProtoClient {
             };
 
             connect.onclose = () => {
-                console.log('[WebSocket closed]');
+                // console.log('[WebSocket closed]');
                 this.retryConnect();
             };
 
@@ -63,12 +63,12 @@ class WsProtoClient {
                 if (data.op_type !== this.MESSAGETYPE.PUSH) return;
 
                 if (data.client_id !== this._clientId) {
-                    console.log('[ClientId 不一致]', data.client_id, this._clientId);
+                    // console.log('[ClientId 不一致]', data.client_id, this._clientId);
                     return;
                 }
 
                 const realData = getRealData(data);
-                console.log('Onmessage', data, realData);
+                // console.log('Onmessage', data, realData);
 
                 const error = data.error_code || undefined;
                 this._subKeys[data.event_key] && this._subKeys[data.event_key].forEach(c => {
@@ -90,28 +90,28 @@ class WsProtoClient {
 
     retryConnect() {
         if (!this.isRetry || this.ready) {
-            console.log('[Retry but ready]', this.isRetry, this.ready);
+            // console.log('[Retry but ready]', this.isRetry, this.ready);
             return;
         }
 
         // Offline: waiting for online
         if (navigator && !navigator.onLine) {
-            console.log('[Retry offLine]');
+            // console.log('[Retry offLine]');
             window.addEventListener('online', () => {
-                console.log('[Retry onLine]');
+                // console.log('[Retry onLine]');
                 this.retryConnect();
             });
             return;
         }
 
         if (this.retryTimes > MaxRetryTimes) {
-            console.log('Over retryTimes && retryTimes = 0');
+            // console.log('Over retryTimes && retryTimes = 0');
             this.retryTimes = 0;
             return;
         }
 
         setTimeout(() => {
-            console.log('Retry', this.retryTimes);
+            // console.log('Retry', this.retryTimes);
             this.startConnect();
             this.retryTimes++;
         }, RetryInterval);
@@ -125,7 +125,7 @@ class WsProtoClient {
 
     unSub(event, callback) {
         if (!event || !this._subKeys[event]) {
-            console.log('[UNSUB] fail, !this._subKeys[event]', event);
+            // console.log('[UNSUB] fail, !this._subKeys[event]', event);
             return;
         }
 
@@ -136,11 +136,11 @@ class WsProtoClient {
         }
 
         if (this._subKeys[event].size !== 0) {
-            console.log('[UNSUB] fail, this._subKeys[event].size', event);
+            // console.log('[UNSUB] fail, this._subKeys[event].size', event);
             return;
         }
 
-        console.log('[UNSUB] success', event);
+        // console.log('[UNSUB] success', event);
         this.send(event, this.MESSAGETYPE.UNSUB);
     }
 
@@ -148,7 +148,7 @@ class WsProtoClient {
         if (!this.ready || this.closed) return;
 
         if (type === this.MESSAGETYPE.PING) {
-            console.log('ping', this._clientId, new Date());
+            // console.log('ping', this._clientId, new Date());
         }
 
         const payload = {
@@ -168,13 +168,13 @@ class WsProtoClient {
     }
 
     _checkSubs() {
-        console.log('_checkSubs');
+        // console.log('_checkSubs');
         for (const event in this._subKeys) {
             if (!this._subKeys[event] || !this._subKeys[event].size) {
-                console.log('_checkSubs send UNSUB', event);
+                // console.log('_checkSubs send UNSUB', event);
                 this.send(event, this.MESSAGETYPE.UNSUB);
             } else {
-                console.log('_checkSubs send SUB', event);
+                // console.log('_checkSubs send SUB', event);
                 this.send(event, this.MESSAGETYPE.SUB);
             }
         }

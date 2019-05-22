@@ -57,11 +57,10 @@ export default {
         };
     },
     methods: {
-        getKeystore(obj, type) {
+        getKeystore(obj) {
             this.address = obj.addr;
             this.keystore = obj.keystore;
             this.name = obj.name || '';
-            console.log(obj, type);
         },
         activate() {
             this.account.activate(2000, true, true);

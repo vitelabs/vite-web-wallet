@@ -74,7 +74,7 @@ export default function sendTx(methodName, data, config = defaultConfig) {
         methodName,
         params: [data],
         beforePow: (accountBlock, checkPowResult, next) => {
-            console.log('[beforePow]');
+            // console.log('[beforePow]');
 
             const activeAccount = getActiveAcc();
             if (!activeAccount || activeAccount.address !== accountBlock.accountAddress) {
@@ -98,13 +98,13 @@ export default function sendTx(methodName, data, config = defaultConfig) {
             });
         },
         beforeSendTx: (accountBlock, checkPowResult, next) => {
-            console.log('[beforeSendTx]');
-            console.log(config.sendTx);
+            // console.log('[beforeSendTx]');
+            // console.log(config.sendTx);
             if (!checkPowResult || !checkPowResult.difficulty) {
                 return next(!config.sendTx);
             }
 
-            console.log('[beforeSendTx] powInstance.isShow', powInstance.isShow);
+            // console.log('[beforeSendTx] powInstance.isShow', powInstance.isShow);
 
             if (!powInstance || !powInstance.isShow) {
                 return Promise.reject();
@@ -125,7 +125,7 @@ export default function sendTx(methodName, data, config = defaultConfig) {
             });
         }
     }).then(result => {
-        console.log(result);
+        // console.log(result);
         if (!powInstance) {
             event.thenCb && event.thenCb(result);
             return;
@@ -223,7 +223,7 @@ class EventEmitter {
 
 function formatConfig(config) {
     config = config || defaultConfig;
-    console.log(config);
+    // console.log(config);
 
 
     let sendTx = !!config.sendTx;
