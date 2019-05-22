@@ -42,7 +42,6 @@ export default {
     },
     computed: {
         latestTxList() {
-            console.log(this.$store.state.exchangeLatestTx.txList);
             return this.$store.state.exchangeLatestTx.txList;
         },
         activeTxPair() {

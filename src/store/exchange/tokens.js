@@ -30,7 +30,7 @@ const actions = {
     exFetchActiveTtoken({ rootState, commit }, tokenId) {
         tokenDetail({ tokenId }).then(data => {
             const activeTxPair = rootState.exchangeActiveTxPair.activeTxPair;
-            if (tokenId !== activeTxPair.ttoken) {
+            if (tokenId !== activeTxPair.quoteToken) {
                 return;
             }
 
@@ -42,7 +42,7 @@ const actions = {
     exFetchActiveFtoken({ rootState, commit }, tokenId) {
         tokenDetail({ tokenId }).then(data => {
             const activeTxPair = rootState.exchangeActiveTxPair.activeTxPair;
-            if (tokenId !== activeTxPair.ftoken) {
+            if (tokenId !== activeTxPair.tradeToken) {
                 return;
             }
 
