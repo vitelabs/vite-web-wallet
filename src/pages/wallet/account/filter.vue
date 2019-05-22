@@ -14,20 +14,20 @@
     </div>
 </template>
 <script>
-import {debounce} from "lodash";
-import Search from "components/search";
+import { debounce } from 'lodash';
+import Search from 'components/search';
 export default {
-    data(){
+    data() {
         return {
-            hideZero:false,
-            filterKey:''
-        }
+            hideZero: false,
+            filterKey: ''
+        };
     },
-    components:{Search},
-    methods:{
-        updateFilter:debounce(function(){
+    components: { Search },
+    methods: {
+        updateFilter: debounce(function () {
 
-        },0.5)
+        }, 0.5)
     }
 };
 </script>

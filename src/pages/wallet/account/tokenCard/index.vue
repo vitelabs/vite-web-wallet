@@ -58,11 +58,11 @@ import {
     chargeDialog,
     withdrawDialog,
     tokenInfoDialog
-} from "../dialog";
-import getTokenIcon from "utils/getTokenIcon";
-import bigNumber from "utils/bigNumber";
-import { gateStorage } from "services/gate";
-import transaction from "../transaction";
+} from '../dialog';
+import getTokenIcon from 'utils/getTokenIcon';
+import bigNumber from 'utils/bigNumber';
+import { gateStorage } from 'services/gate';
+import transaction from '../transaction';
 
 export default {
     components: { transaction },
@@ -71,11 +71,11 @@ export default {
             type: Object,
             default: () => {
                 return {
-                    symbol: "--",
-                    balance: "--",
-                    asset: "--",
-                    onroadNum: "--",
-                    type: "OFFICAL_GATE" // OFFICAL OFFICALGATE SELFGATE
+                    symbol: '--',
+                    balance: '--',
+                    asset: '--',
+                    onroadNum: '--',
+                    type: 'OFFICAL_GATE' // OFFICAL OFFICALGATE SELFGATE
                 };
             }
         }
@@ -86,9 +86,9 @@ export default {
     computed: {
         showUnbind() {
             return (
-                this.token.type === "THIRD_GATE" &&
-                (!this.token.totalAmount ||
-                    bigNumber.isEqual(this.token.totalAmount, "0"))
+                this.token.type === 'THIRD_GATE'
+                && (!this.token.totalAmount
+                    || bigNumber.isEqual(this.token.totalAmount, '0'))
             );
         },
         address() {
@@ -99,7 +99,7 @@ export default {
                 return this.$store.getters.mapToken2Gate[this.token.tokenId]
                     .gateway;
             }
-            return this.$t("tokenCard.gateInfo.selfdefined");
+            return this.$t('tokenCard.gateInfo.selfdefined');
         },
         asset() {
             const currency = this.$store.state.env.currency;
@@ -108,10 +108,10 @@ export default {
             ];
             if (rate && this.token.balance) {
                 return `${
-                    this.$i18n.locale === "en" ? "$" : "¥"
-                } ${bigNumber.multi(this.token.balance, rate[currency])}`;
+                    this.$i18n.locale === 'en' ? '$' : '¥'
+                } ${ bigNumber.multi(this.token.balance, rate[currency]) }`;
             }
-            return "--";
+            return '--';
         }
     },
     methods: {
@@ -168,7 +168,7 @@ export default {
     border-bottom: 1px solid #c6cbd4;
     height: 71px;
     &:last-child{
-        border:none;
+        border: none;
     }
     .click-able {
         cursor: pointer;
@@ -208,8 +208,8 @@ export default {
             display: flex;
             flex-direction: column;
             .est_cash{
-                color:#5e687594;
-                margin-top:4px;
+                color: #5e687594;
+                margin-top: 4px;
             }
         }
         &.title {

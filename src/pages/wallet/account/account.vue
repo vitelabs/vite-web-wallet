@@ -26,10 +26,10 @@ import tokenCard from './tokenCard';
 import accountHead from './head';
 import { addTokenDialog } from './dialog';
 import { gateStorage } from 'services/gate';
-import TokenFilter from './filter'
+import TokenFilter from './filter';
 
 export default {
-    components: { accountHead, syncBlock, tokenCard,TokenFilter },
+    components: { accountHead, syncBlock, tokenCard, TokenFilter },
     data() {
         return {
             isShowTrans: false,
