@@ -3,7 +3,9 @@
         <div class="account-head-move item">
             <account-head></account-head>
         </div>
+        <TokenFilter></TokenFilter>
         <div class="token-list item">
+            <div class="f"></div>
             <tokenCard
                 v-for="token in nativeTokenList"
                 :key="token.tokenId"
@@ -24,9 +26,10 @@ import tokenCard from './tokenCard';
 import accountHead from './head';
 import { addTokenDialog } from './dialog';
 import { gateStorage } from 'services/gate';
+import TokenFilter from './filter'
 
 export default {
-    components: { accountHead, syncBlock, tokenCard },
+    components: { accountHead, syncBlock, tokenCard,TokenFilter },
     data() {
         return {
             isShowTrans: false,
