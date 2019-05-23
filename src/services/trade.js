@@ -33,7 +33,7 @@ export const order = function ({ address, startTime, endTime, tradeTokenSymbol, 
     });
 };
 
-export const orderDetail = function ({ orderId, symbol, offset, limit, side = 0 }) {
+export const orderDetail = function ({ orderId, symbol, offset, limit, side }) {
     return request({
         path: `${ path }/market/trade`,
         method: 'GET',
@@ -112,7 +112,7 @@ export const baseToken = function () {
 
 export const tokenMap = function ({ symbol }) {
     return request({
-        path: `${ path }/token/mapped`,
+        path: `${ path }/tokens/mapped`,
         method: 'GET',
         params: { quoteTokenSymbol: symbol }
     });

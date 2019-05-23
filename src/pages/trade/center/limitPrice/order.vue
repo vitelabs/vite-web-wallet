@@ -225,11 +225,11 @@ export default {
             const balance = this.availableBalance;
 
             if (this.orderType === 'buy') {
-                const basicAmount = BigNumber.toMin(this.amount || 0, this.ttokenDetail.tokenDigit);
+                const basicAmount = BigNumber.toMin(this.amount || 0, this.ttokenDetail.tokenDecimals);
                 return BigNumber.dividedToNumber(basicAmount || 0, balance, 3, 'nofix');
             }
 
-            const basicQuantity = BigNumber.toMin(this.quantity || 0, this.ftokenDetail.tokenDigit);
+            const basicQuantity = BigNumber.toMin(this.quantity || 0, this.ftokenDetail.tokenDecimals);
             return BigNumber.dividedToNumber(basicQuantity || 0, balance, 3, 'nofix');
         },
         rawBalance() {
@@ -286,8 +286,8 @@ export default {
             if (!this.ttokenDetail || !this.activeTxPair) {
                 return 0;
             }
-
-            const tDigit = this.ttokenDetail.tokenDigit;
+            console.log(this.ttokenDetail);
+            const tDigit = this.ttokenDetail.tokenDecimals;
             const pariDigit = this.activeTxPair.pricePrecision;
 
             const digit = tDigit > pariDigit ? pariDigit : tDigit;
@@ -298,7 +298,7 @@ export default {
                 return 0;
             }
 
-            const fDigit = this.ftokenDetail.tokenDigit;
+            const fDigit = this.ftokenDetail.tokenDecimals;
             const pariDigit = this.activeTxPair.quantityPrecision;
 
             const digit = fDigit > pariDigit ? pariDigit : fDigit;
@@ -452,8 +452,8 @@ export default {
                 return '';
             }
 
-            let minAmount = BigNumber.toMin(amount, this.ttokenDetail.tokenDigit);
-            const minPrice = BigNumber.toMin(price, this.ttokenDetail.tokenDigit);
+            let minAmount = BigNumber.toMin(amount, this.ttokenDetail.tokenDecimals);
+            const minPrice = BigNumber.toMin(price, this.ttokenDetail.tokenDecimals);
 
             if (this.orderType === 'buy') {
                 minAmount = BigNumber.dividedToNumber(minAmount, 1 + taker, 0);
@@ -609,8 +609,8 @@ export default {
             const quoteToken = this.activeTxPair ? this.activeTxPair.quoteToken : '';
 
             this.isLoading = true;
-            const tokenDigit = this.ftokenDetail.tokenDigit;
-            quantity = BigNumber.toMin(quantity, tokenDigit);
+            const tokenDecimals = this.ftokenDetail.tokenDecimals;
+            quantity = BigNumber.toMin(quantity, tokenDecimals);
             const side = this.orderType === 'buy' ? 0 : 1;
 
             // [TODO] vitejs 2.1.2
@@ -621,6 +621,7 @@ export default {
             //     price,
             //     quantity
             // }
+            console.log([ tradeToken, quoteToken, side, 0, price, quantity ]);
             sendTx('callContract', {
                 toAddress: DexFund_Addr,
                 abi: { 'type': 'function', 'name': 'DexFundNewOrder', 'inputs': [ { 'name': 'tradeToken', 'type': 'tokenId' }, { 'name': 'quoteToken', 'type': 'tokenId' }, { 'name': 'side', 'type': 'bool' }, { 'name': 'orderType', 'type': 'int8' }, { 'name': 'price', 'type': 'string' }, { 'name': 'quantity', 'type': 'uint256' } ] },
