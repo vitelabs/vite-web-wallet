@@ -10,7 +10,7 @@
             <div class="row" :class="{
                 'active': !!changeList[v.orderId]
             }" v-for="v in sortedList" :key="v.orderId">
-                <div>{{ v.date|d }}</div>
+                <div>{{ v.createTime|d }}</div>
                 <div>{{ `${v.tradeTokenSymbol}/${v.quoteTokenSymbol}` }}</div>
                 <div :class="{
                     'buy': v.side===0,
@@ -19,8 +19,8 @@
                 <div>{{ v.price + ' ' + v.quoteTokenSymbol }}</div>
                 <div>{{ v.quantity + ' ' + v.tradeTokenSymbol }}</div>
                 <div>{{ v.executedQuantity + ' ' + v.tradeTokenSymbol }}</div>
-                <div>{{ `${(v.rate*100).toFixed(2)}%` }}</div>
-                <div>{{ v.average + ' ' + v.quoteTokenSymbol }}</div>
+                <div>{{ `${(v.executedPercent*100).toFixed(2)}%` }}</div>
+                <div>{{ v.executedAvgPrice + ' ' + v.quoteTokenSymbol }}</div>
                 <div v-unlock-account v-on:unlocked="cancel(v)" class="click-able">
                     {{ $t("tradeOpenOrders.table.rowMap.cancel") }}
                 </div>
@@ -116,6 +116,8 @@ export default {
                 if (args.address !== this.defaultAddr || this.filterObj.symbol !== args.symbol) {
                     return;
                 }
+
+                data = data.order || [];
 
                 const list = [];
                 const newList = {};

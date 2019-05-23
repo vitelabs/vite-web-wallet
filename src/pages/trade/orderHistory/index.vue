@@ -79,6 +79,8 @@ export default {
                     return;
                 }
 
+                data = data.order || data;
+
                 this.data = data || [];
                 this.data.forEach(ele => {
                     if (ele.status === 4) {
