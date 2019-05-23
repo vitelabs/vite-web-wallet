@@ -87,9 +87,8 @@ export default {
             orderDetail({
                 orderId: order.orderId,
                 symbol: order.symbol,
-                offset: 1,
-                limit: 100,
-                side: order.side
+                offset: 0,
+                limit: 100
             }).then(data => {
                 this.detailData = (data.trade || []).map(v => {
                     v.fee = order.orderId === v.buyerOrderId ? v.buyFee : v.sellFee;

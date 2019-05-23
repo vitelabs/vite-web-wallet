@@ -118,7 +118,7 @@ export default {
                 filters = { symbol: this.currentMarket };
             }
 
-            filters = Object.assign({ offset: this.currentPage }, filters);
+            filters = Object.assign({ offset: this.currentPage - 1 }, filters);
 
             order({
                 address: this.defaultAddr,
@@ -129,7 +129,7 @@ export default {
             }).then(data => {
                 this.totalPage = Math.ceil(data.total / pageSize);
                 this.data = data.order || [];
-                this.currentPage = filters.offset;
+                this.currentPage = filters.offset + 1;
             });
         }
     }

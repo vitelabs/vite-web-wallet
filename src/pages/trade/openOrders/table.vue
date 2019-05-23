@@ -212,7 +212,7 @@ export default {
             order({
                 address: this.defaultAddr,
                 status: 1,
-                offset: 1,
+                offset: 0,
                 limit: 100,
                 ...this.filterObj
             }).then(data => {

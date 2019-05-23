@@ -103,16 +103,13 @@ export default class dataFeeds {
 
         if (!result || !result.length) {
             // console.log('[getBars end] noData');
-            onHistoryCallback([], {
-                noData: true,
-                nextTime: to
-            });
+            onHistoryCallback([], { noData: true });
             return;
         }
 
         const list = fillKlineData(result, _resolution);
 
-        // console.log('[getBars end]', new Date(_list[_list.length - 1].time), _list[_list.length - 1], list[list.length - 1], list[0]);
+        // console.log('[getBars end]', new Date(result[result.length - 1].time), result[result.length - 1], list[list.length - 1], list[0]);
 
         this.lastBar = list[list.length - 1];
         onHistoryCallback(list, { noData: false });
