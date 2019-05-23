@@ -93,6 +93,7 @@ for (const key in routes) {
     });
     _routes += ']},';
 }
+_routes += '{ path: \'/\', redirect: \'/index\' },{ path: \'*\', redirect: \'/notFound\' }';
 routesStr += `export default { routes: [${ _routes }] }`;
 
 fs.writeFileSync(routesPath, routesStr);
