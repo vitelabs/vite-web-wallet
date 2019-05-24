@@ -67,6 +67,9 @@ export default {
             }
 
             this.clearAutoLogout();
+        },
+        autoLogoutTime: function () {
+            this.operate();
         }
     },
     methods: {
