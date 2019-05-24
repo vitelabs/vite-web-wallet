@@ -286,7 +286,7 @@ export default {
             if (!this.ttokenDetail || !this.activeTxPair) {
                 return 0;
             }
-            console.log(this.ttokenDetail);
+
             const tDigit = this.ttokenDetail.tokenDecimals;
             const pariDigit = this.activeTxPair.pricePrecision;
 
@@ -621,7 +621,7 @@ export default {
             //     price,
             //     quantity
             // }
-            console.log([ tradeToken, quoteToken, side, 0, price, quantity ]);
+            // console.log([ tradeToken, quoteToken, side, 0, price, quantity ]);
             sendTx('callContract', {
                 toAddress: DexFund_Addr,
                 abi: { 'type': 'function', 'name': 'DexFundNewOrder', 'inputs': [ { 'name': 'tradeToken', 'type': 'tokenId' }, { 'name': 'quoteToken', 'type': 'tokenId' }, { 'name': 'side', 'type': 'bool' }, { 'name': 'orderType', 'type': 'int8' }, { 'name': 'price', 'type': 'string' }, { 'name': 'quantity', 'type': 'uint256' } ] },
