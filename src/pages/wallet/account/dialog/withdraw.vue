@@ -152,23 +152,9 @@ export default {
 
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
+@import "./dialog.scss";
+@include block;
 .block__title {
-    height: 16px;
-    font-size: 14px;
-    font-family: PingFangSC-Semibold;
-    font-weight: 600;
-    color: rgba(29, 32, 36, 1);
-    line-height: 16px;
-    margin-top: 20px;
-    display: flex;
-    justify-content: space-between;
-    .err{
-        color: #FF2929;
-        font-size: 12px;
-    }
-    &:first-child {
-        margin-top: 0;
-    }
     .title_icon {
         float: right;
         &.copy {
@@ -215,59 +201,6 @@ export default {
         position: absolute;
         left: 0;
         top: 10px;
-    }
-}
-.block__content {
-    position: relative;
-    height: 40px;
-    border-radius: 2px;
-    border: 1px solid rgba(212, 222, 231, 1);
-    font-size: 14px;
-    word-break: break-all;
-    width: 100%;
-    line-height: 40px;
-    box-sizing: border-box;
-    margin-top: 16px;
-    padding: 10px 15px;
-    align-items: center;
-    display: flex;
-    width: 100%;
-    input{
-        width: 100%;
-    }
-    .light{
-        color: #5E6875;
-    }
-    .withdraw-all{
-        border-radius: 2px;
-        background: #007AFF;
-        color: #fff;
-        cursor: pointer;
-        font-size: 12px;
-        padding: 0 6px;
-        height: 18px;
-        line-height: 18px;
-        float: right;
-        display: flex;
-        word-break: keep-all;
-    }
-    .token__title{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        img{
-            width: 20px;
-            height: 20px;
-            margin-right: 10px;
-        }
-    }
-    &.edit{
-        text-align: left;
-        background: rgba(243, 246, 249, 1);
-    }
-    &.space{
-        display: flex;
-        justify-content: space-between;
     }
 }
 </style>

@@ -1,17 +1,17 @@
 <template>
     <div class="token-card">
-        <div class="col title click-able " @click="showDetail()">
+        <div class="col title click-able" @click="showDetail()">
             <div>
                 <img :src="token.icon" class="icon " />
-                <span class="token-name" @click="showDetail()">{{
+                <span class="token-name underline" @click="showDetail()">{{
                     token.tokenSymbol
                 }}</span>
             </div>
+            <div class="separate"></div>
         </div>
-        <div class="separate"></div>
-        <div class="col click-able" @click="showDetail()">
+        <div class="col click-able">
             <div>
-                {{ `${token.balance || 0}${token.tokenSymbol}` }}
+                {{ `${token.balance || 0} ${token.tokenSymbol}` }}
             </div>
             <div class="op_group">
                 <div class="op">转账</div>
@@ -19,34 +19,36 @@
             </div>
         </div>
         <div class="col">
-            {{ `1000  Vite` }}
+            {{ `${token.fundFloat || "--"} ${token.tokenSymbol}` }}
         </div>
         <div class="col">
-            <div>
-                vGate
+            <div class="underline">
+                {{ token.gateInfo.gateway || "添加网关" }}
             </div>
             <div class="op_group">
                 <div class="op">跨链充值</div>
                 <div class="op">跨链提现</div>
                 <div class="op readonly">跨链充提记录</div>
             </div>
+            <div class="separate"></div>
         </div>
-        <div class="separate"></div>
-        <div class="col">32412341 VITE</div>
+        <div class="col">
+            {{ `${exBanlance || "--"} ${token.tokenSymbol}` }}
+        </div>
         <div class="col">
             <div>
-                32412341 VITE
+                {{ `${avaliableExBalance || "--"} ${token.tokenSymbol}` }}
             </div>
             <div class="op_group">
                 <div class="op">提现至钱包</div>
                 <div class="op readonly">交易所充提记录</div>
             </div>
+            <div class="separate"></div>
         </div>
-        <div class="separate"></div>
         <div class="col">
             <div class="assets">
-                <div class="est_btc">32412341 VITE</div>
-                <div class="est_cash">≈32412341 CNY</div>
+                <div class="est_btc">{{ assetView.btc }}</div>
+                <div class="est_cash">≈{{ assetView.cash }}</div>
             </div>
         </div>
     </div>
@@ -71,17 +73,17 @@ export default {
             type: Object,
             default: () => {
                 return {
-                    symbol: '--',
+                    tokenSymbol: '--',
                     balance: '--',
                     asset: '--',
                     onroadNum: '--',
-                    type: 'OFFICAL_GATE' // OFFICAL OFFICALGATE SELFGATE
+                    type: 'OFFICAL_GATE'
                 };
             }
         }
     },
     data() {
-        return { isShowTrans: false };
+        return { isShowTrans: false, assetType: 'TOTAL' };
     },
     computed: {
         showUnbind() {
@@ -101,17 +103,47 @@ export default {
             }
             return this.$t('tokenCard.gateInfo.selfdefined');
         },
+        exBanlance() {
+            return bigNumber.toBasic(this.token.totalExAmount,
+                this.token.decimals);
+        },
+        avaliableExBalance() {
+            return bigNumber.toBasic(this.token.avaliableExAmount,
+                this.token.decimals);
+        },
         asset() {
             const currency = this.$store.state.env.currency;
             const rate = this.$store.state.exchangeRate.rateMap[
                 this.token.tokenId
             ];
             if (rate && this.token.balance) {
-                return `${
-                    this.$i18n.locale === 'en' ? '$' : '¥'
-                } ${ bigNumber.multi(this.token.balance, rate[currency]) }`;
+                return `${ currency === 'en' ? '$' : '¥' } ${ bigNumber.multi(this.token.balance,
+                    rate[currency]) }`;
             }
             return '--';
+        },
+        exAsset() {
+            const currency = this.$store.state.env.currency;
+            const rate = this.$store.state.exchangeRate.rateMap[
+                this.token.tokenId
+            ];
+            if (rate && this.token.totalExAmount) {
+                return `${ currency === 'en' ? '$' : '¥' } ${ bigNumber.multi(bigNumber.toBasic(this.token.totalExAmount,
+                    this.token.decimals),
+                rate[currency]) }`;
+            }
+            return '--';
+        },
+        assetView() {
+            if (this.assetType === 'TOTAL') {
+                return { btc: this.asset, cash: this.asset };
+            }
+            if (this.assetType === 'EX') {
+                return { btc: this.exAsset, cash: this.exAsset };
+            }
+            if (this.assetType === 'WALLET') {
+                return { btc: this.asset, cash: this.asset };
+            }
         }
     },
     methods: {
@@ -157,6 +189,7 @@ export default {
 
 <style lang='scss' scoped>
 @import "~assets/scss/vars.scss";
+@import "./colWidth.scss";
 
 .token-card {
     box-sizing: border-box;
@@ -167,15 +200,11 @@ export default {
     align-items: center;
     border-bottom: 1px solid #c6cbd4;
     height: 71px;
-    &:last-child{
+    &:last-child {
         border: none;
     }
     .click-able {
         cursor: pointer;
-    }
-    .separate {
-        height: 54px;
-        border-right: 1px solid #d3dfef;
     }
     .col {
         display: flex;
@@ -186,6 +215,17 @@ export default {
         color: #5e6875;
         font-size: 12px;
         align-self: stretch;
+        position: relative;
+        @include colWidth;
+        .underline {
+            border-bottom: 1px dotted #5e6875;
+        }
+        .separate {
+            border-right: 1px solid #d3dfef;
+            height: 52px;
+            position: absolute;
+            right: 0;
+        }
         .op_group {
             display: flex;
             .op {
@@ -204,10 +244,10 @@ export default {
                 }
             }
         }
-        .assets{
+        .assets {
             display: flex;
             flex-direction: column;
-            .est_cash{
+            .est_cash {
                 color: #5e687594;
                 margin-top: 4px;
             }

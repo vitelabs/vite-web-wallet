@@ -1,11 +1,19 @@
 <template>
     <div class="wallet-account-wrapper __wrapper">
-        <div class="account-head-move item">
-            <account-head></account-head>
+        <div class="account-head-move">
+            <account-head class="account_head"></account-head>
         </div>
         <TokenFilter></TokenFilter>
-        <div class="token-list item">
-            <div class="f"></div>
+        <div class="token-list">
+            <div class="token__head">
+                <div class="col">代币名称</div>
+                <div class="col">钱包余额</div>
+                <div class="col">钱包待接收金额</div>
+                <div class="col">钱包跨链网关</div>
+                <div class="col">交易所总余额度</div>
+                <div class="col">交易所可用余额</div>
+                <div class="col">资产估值</div>
+            </div>
             <tokenCard
                 v-for="token in nativeTokenList"
                 :key="token.tokenId"
@@ -85,6 +93,7 @@ export default {
 
 <style lang="scss" rel="stylesheet/scss" scoped>
 @import "assets/scss/vars.scss";
+@import "./tokenCard/colWidth.scss";
 
 .wallet-account-wrapper.__wrapper {
     padding-top: 0;
@@ -95,23 +104,9 @@ export default {
     box-shadow: 0 2px 48px 1px rgba(176, 192, 237, 0.42);
 }
 
-.head {
+.account_head {
     position: relative;
     text-align: center;
-    margin-top: 20px;
-    line-height: 40px;
-}
-
-.sync-block {
-    display: inline-block;
-}
-
-.net-btn {
-    position: absolute;
-    right: 0;
-}
-
-.item {
     margin-top: 20px;
 }
 
@@ -119,13 +114,18 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
-    .token-class {
-        border-left: 1px solid #007aff;
-        padding-left: 9px;
+    .token__head{
+        display: flex;
         width: 100%;
-        box-sizing: border-box;
-        font-family: $font-bold;
-        margin: 20px 0 24px;
+        justify-content: flex-start;
+        color:#5E6875;
+        border-bottom: 1px solid #C6CBD4;
+        background-color:#fff;
+        font-size: 12px;
+        .col{
+        @include colWidth;
+        padding:9px 40px 9px 36px;
+        }
     }
 }
 </style>

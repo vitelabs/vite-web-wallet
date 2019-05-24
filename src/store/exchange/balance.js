@@ -57,8 +57,10 @@ const getters = {
         const balance = {};
         Object.keys(state.balanceList).forEach(k => {
             balance[k] = {};
+            balance[k].availableExAmount = state.balanceList[k].available;
             balance[k].available = BigNumber.toBasic(state.balanceList[k].available, state.balanceList[k].tokenInfo.decimals);
             balance[k].lock = BigNumber.toBasic(state.balanceList[k].locked, state.balanceList[k].tokenInfo.decimals);
+            balance[k].totalExAmount = BigNumber.toBasic(BigNumber.plus(state.balanceList[k].available, state.balanceList[k].locked), state.balanceList[k].tokenInfo.decimals);
             balance[k].tokenInfo = state.balanceList[k].tokenInfo;
         });
 
