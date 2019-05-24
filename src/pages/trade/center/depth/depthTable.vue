@@ -94,10 +94,10 @@ export default {
         clickRow(data, index) {
             const price = data.price;
             const quantity = data.quantity;
-            const txSide = this.dataType === 'buy' ? 0 : 1;
+            const side = this.dataType === 'buy' ? 0 : 1;
 
             let num = 0;
-            if (txSide) {
+            if (side) {
                 for (let i = index; i < this.depthData.length; i++) {
                     num = BigNumber.plus(num, this.depthData[i].quantity, this.ftoken.tokenDecimals);
                 }
@@ -107,7 +107,7 @@ export default {
                 }
             }
 
-            this.$store.commit('exSetActiveTx', { price, quantity, txSide, num });
+            this.$store.commit('exSetActiveTx', { price, quantity, side, num });
         }
     }
 };
