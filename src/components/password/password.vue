@@ -73,6 +73,7 @@ export default {
         const accInfo = this.currHDAcc.getAccInfo();
         const showHoldNum = accInfo.showHoldPWDNum || 0;
 
+        this.isHoldPWD = !!accInfo[constant.HoldPwdKey];
         this.isShowHold = showHoldNum < 3 && !this.isHoldPWD;
         this.currHDAcc.saveOnAcc(constant.ShowHoldPWDNumKey, this.isShowHold ? showHoldNum + 1 : 4);
     },
@@ -83,6 +84,7 @@ export default {
         return {
             password: '',
             isLoading: false,
+            isHoldPWD: false,
             isShowHold: false
         };
     },
@@ -100,9 +102,6 @@ export default {
         },
         isLogin() {
             return this.$store.state.wallet.status === StatusMap.UNLOCK;
-        },
-        isHoldPWD() {
-            return !!this.$store.state.env.isHoldPWD;
         }
     },
     methods: {
