@@ -2,7 +2,6 @@ import { storage as localStorage, constant } from 'utils/store';
 
 const currencyKey = constant.CurrencyKey;
 const autoLogoutKey = constant.AutoLogoutKey;
-const HoldPwdKey = constant.HoldPwdKey;
 const LangKey = constant.LangKey;
 
 // coins: {
@@ -14,7 +13,6 @@ const state = {
     clientStatus: -1,
     lang: '',
     currency: localStorage.getItem(currencyKey) || '',
-    isHoldPWD: !!localStorage.getItem(HoldPwdKey),
     autoLogoutTime: localStorage.getItem(autoLogoutKey) || 5,
     lastPage: ''
 };
@@ -44,11 +42,6 @@ const mutations = {
     },
     setLastPage(state, lastPage) {
         state.lastPage = lastPage;
-    },
-    // [TODO]  HoldPWD 与 showHoldPwdNum same
-    setHoldPwd(state, isHoldPWD) {
-        state.isHoldPWD = !!isHoldPWD;
-        localStorage.setItem(HoldPwdKey, state.isHoldPWD);
     }
 };
 
