@@ -7,3 +7,7 @@
         一键置换
     </div>
 </template>
+
+<script>
+export default {};
+</script>

@@ -92,11 +92,11 @@ export default {
             }
 
             this.$emit('submit', {
-                fdate,
-                tdate,
-                orderSide: this.tradeType,
-                ftoken: this.ftoken,
-                ttoken: this.ttoken
+                startTime: fdate,
+                endTime: tdate,
+                side: this.tradeType,
+                tradeTokenSymbol: this.ftoken,
+                quoteTokenSymbol: this.ttoken
             });
         }
     }

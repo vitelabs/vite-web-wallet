@@ -22,6 +22,9 @@ let task = null;
 
 export default {
     components: { notice, update },
+    mounted() {
+        this.address && this.startLatestOrder();
+    },
     destroyed() {
         task && task.stop();
         task = null;
@@ -52,7 +55,7 @@ export default {
                 }
 
                 const orderNotice = {
-                    time: date(data.date * 1000, 'zh'),
+                    time: date(data.createTime * 1000, 'zh'),
                     ftoken: data.tradeTokenSymbol,
                     ttoken: data.quoteTokenSymbol,
                     close: data => {

@@ -128,14 +128,6 @@ export class subTask extends timer {
                 return;
             }
             // console.log(this.key, data);
-
-            // if (this.key === 'latestTx') {
-            //     data = data.trade || [];
-            // }
-            // OrderQuery: http-requtn-data should be same as ws-return-data
-            if (this.key.indexOf('orderQuery') !== -1) {
-                data = data.orders || [];
-            }
             this.callback({ args, data });
         });
     }

@@ -70,6 +70,7 @@
         "bignumber.js": "^7.2.1",
         "bip39": "^2.5.0",
         "buffer": "^5.2.1",
+        "circular-dependency-plugin": "^5.0.2",
         "dayjs": "^1.8.8",
         "echarts": "^4.2.0-rc.2",
         "es6-promise": "^4.2.5",
