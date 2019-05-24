@@ -118,13 +118,13 @@ export default {
         display: flex;
         width: 100%;
         justify-content: flex-start;
-        color:#5E6875;
+        color: #5E6875;
         border-bottom: 1px solid #C6CBD4;
-        background-color:#fff;
+        background-color: #fff;
         font-size: 12px;
         .col{
-        @include colWidth;
-        padding:9px 40px 9px 36px;
+            @include colWidth;
+            padding: 9px 40px 9px 36px;
         }
     }
 }
