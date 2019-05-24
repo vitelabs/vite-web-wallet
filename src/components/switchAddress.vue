@@ -8,11 +8,11 @@
 
         <ul class="list" v-show="isShowList">
             <li v-for="(addrObj, index) in addrList" :key="index"
-                v-show="address !== addrObj.addr"
-                @click.stop="setDefaultAddr(addrObj.addr, index)"
+                v-show="address !== addrObj.address"
+                @click.stop="setDefaultAddr(addrObj.address, index)"
                 class="item">
                 <div class="name">{{ addrObj.name || `${$t('addrName', { index:index + 1 })}` }}</div>
-                <div class="switch-address">{{ addrObj.addr }}</div>
+                <div class="switch-address">{{ addrObj.address }}</div>
             </li>
         </ul>
     </div>
