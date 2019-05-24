@@ -69,7 +69,7 @@ export default {
                 return BigNumber.formatNum(num, fix);
             }
 
-            return BigNumber.formatNum(num, this[type].tokenDigit, fix);
+            return BigNumber.formatNum(num, this[type].tokenDecimals, fix);
         },
         getDate(timestamp) {
             return date(timestamp, 'zh', true);

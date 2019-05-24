@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+// const CircularDependencyPlugin = require('circular-dependency-plugin');
 
 const packJson = require('../package.json');
 const SRC_PATH = path.join(__dirname, '../src');
@@ -85,6 +86,14 @@ const plugins = [
     new webpack.NormalModuleReplacementPlugin(/\/buffer\//, function (resource) {
         resource.request = Buffer_Path;
     })
+    // new CircularDependencyPlugin({
+    //     // exclude detection of files based on a RegExp
+    //     exclude: /node_modules/,
+    //     // add errors to webpack instead of warnings
+    //     failOnError: true,
+    //     // set the current working directory for displaying module paths
+    //     cwd: process.cwd()
+    // })
 ];
 
 (process.env.analyzer === 'true') && plugins.push(new BundleAnalyzerPlugin());

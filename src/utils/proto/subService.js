@@ -46,16 +46,20 @@ export const httpServicesMap = {
     defaultPair,
     assignPair,
     latestTx,
-    orderQueryHistory: ({ symbol, address }) => order({
+    orderQueryHistory: ({ symbol, quoteTokenSymbol, tradeTokenSymbol, address }) => order({
         address,
         symbol,
-        offset: 1,
+        quoteTokenSymbol,
+        tradeTokenSymbol,
+        offset: 0,
         limit: 30
     }),
-    orderQueryCurrent: ({ symbol, address }) => order({
+    orderQueryCurrent: ({ symbol, quoteTokenSymbol, tradeTokenSymbol, address }) => order({
         address,
         symbol,
-        offset: 1,
+        quoteTokenSymbol,
+        tradeTokenSymbol,
+        offset: 0,
         limit: 30,
         status: 1
     })

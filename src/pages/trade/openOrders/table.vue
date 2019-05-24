@@ -10,7 +10,7 @@
             <div class="row" :class="{
                 'active': !!changeList[v.orderId]
             }" v-for="v in sortedList" :key="v.orderId">
-                <div>{{ v.date|d }}</div>
+                <div>{{ v.createTime|d }}</div>
                 <div>{{ `${v.tradeTokenSymbol}/${v.quoteTokenSymbol}` }}</div>
                 <div :class="{
                     'buy': v.side===0,
@@ -19,8 +19,8 @@
                 <div>{{ v.price + ' ' + v.quoteTokenSymbol }}</div>
                 <div>{{ v.quantity + ' ' + v.tradeTokenSymbol }}</div>
                 <div>{{ v.executedQuantity + ' ' + v.tradeTokenSymbol }}</div>
-                <div>{{ `${(v.rate*100).toFixed(2)}%` }}</div>
-                <div>{{ v.average + ' ' + v.quoteTokenSymbol }}</div>
+                <div>{{ `${(v.executedPercent*100).toFixed(2)}%` }}</div>
+                <div>{{ v.executedAvgPrice + ' ' + v.quoteTokenSymbol }}</div>
                 <div v-unlock-account v-on:unlocked="cancel(v)" class="click-able">
                     {{ $t("tradeOpenOrders.table.rowMap.cancel") }}
                 </div>
@@ -33,11 +33,14 @@
 </template>
 
 <script>
+import { constant, utils } from '@vite/vitejs';
 import d from 'dayjs';
 import sendTx from 'utils/sendTx';
 import { subTask } from 'utils/proto/subTask';
 import { order } from 'services/trade';
 import { initPwd } from 'components/password/index.js';
+
+const { DexTrade_Addr } = constant;
 
 let task = null;
 
@@ -113,9 +116,11 @@ export default {
         },
         subscribe() {
             task = task || new subTask('orderQueryCurrent', ({ args, data }) => {
-                if (args.address !== this.defaultAddr || this.filterObj.symbol !== args.symbol) {
+                if (args.address !== this.defaultAddr || this.filterObj.symbol !== args.symbol || !data) {
                     return;
                 }
+
+                data = data.order || data || [];
 
                 const list = [];
                 const newList = {};
@@ -140,7 +145,7 @@ export default {
                 for (const orderId in newList) {
                     list.push(newList[orderId]);
 
-                    if (this.oldList[orderId] && +this.oldList[orderId].rate === +newList[orderId].rate) {
+                    if (this.oldList[orderId] && +this.oldList[orderId].executedPercent === +newList[orderId].executedPercent) {
                         continue;
                     }
 
@@ -160,7 +165,7 @@ export default {
                         continue;
                     }
                     const rawData = this.changeList[orderId].rawData;
-                    rawData.rate = 1;
+                    rawData.executedPercent = 1;
                     list.push(rawData);
                 }
 
@@ -210,7 +215,7 @@ export default {
             order({
                 address: this.defaultAddr,
                 status: 1,
-                offset: 1,
+                offset: 0,
                 limit: 100,
                 ...this.filterObj
             }).then(data => {
@@ -226,20 +231,27 @@ export default {
                 this.$toast(this.$t('tradeOpenOrders.confirm.successToast'));
             };
 
+            // [TODO] vitejs 2.1.2
+            // 'dexTradeCancelOrder', {
+            //             orderId: order.orderId,
+            //             tradeToken: order.tradeToken
+            //         }
+
             initPwd({
                 title: this.$t('tradeOpenOrders.confirm.title'),
                 content: this.$t('tradeOpenOrders.confirm.content'),
                 submitTxt: this.$t('tradeOpenOrders.confirm.submitTxt'),
                 cancelTxt: this.$t('tradeOpenOrders.confirm.cancelTxt'),
                 submit: () => {
-                    sendTx('dexTradeCancelOrder', {
-                        orderId: order.orderId,
-                        tradeToken: order.tradeToken,
-                        side: order.side,
-                        quoteToken: order.quoteToken
+                    sendTx('callContract', {
+                        tokenId: order.tradeToken,
+                        toAddress: DexTrade_Addr,
+                        abi: { 'type': 'function', 'name': 'DexTradeCancelOrder', 'inputs': [{ 'name': 'orderId', 'type': 'bytes' }] },
+                        params: [`0x${ utils._Buffer.from(order.orderId, 'base64').toString('hex') }`]
                     })
                         .then(successSubmit)
                         .catch(err => {
+                            console.log(err);
                             const code = err && err.error ? err.error.code || -1
                                 : err ? err.code : -1;
                             if (code === -37008) {
