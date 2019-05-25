@@ -6,15 +6,27 @@
 </template>
 
 <script>
+import { constant } from 'utils/store';
+
+const HoldPwdKey = constant.HoldPwdKey;
+
 export default {
+    mounted() {
+        const accInfo = this.currHDAcc.getAccInfo();
+        this.isHoldPWD = !!accInfo[HoldPwdKey];
+    },
+    data() {
+        return { isHoldPWD: false };
+    },
     computed: {
-        isHoldPWD() {
-            return !!this.$store.state.env.isHoldPWD;
+        currHDAcc() {
+            return this.$store.state.wallet.currHDAcc;
         }
     },
     methods: {
         toggleHold() {
-            this.$store.commit('setHoldPwd', !this.isHoldPWD);
+            this.isHoldPWD = !this.isHoldPWD;
+            this.currHDAcc.saveOnAcc(HoldPwdKey, this.isHoldPWD);
         }
     }
 };

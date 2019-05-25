@@ -71,12 +71,14 @@
 </template>
 
 <script>
+import { constant } from '@vite/vitejs';
 import viteInput from 'components/viteInput';
 import slider from 'components/slider';
 import sendTx from 'utils/sendTx';
 import BigNumber from 'utils/bigNumber';
 import { initPwd } from 'components/password/index.js';
 
+const { DexFund_Addr } = constant;
 const taker = process.env.NODE_ENV === 'dexTestNet' ? 0.0025 : 0.001;
 const maxDigit = 8;
 
@@ -223,11 +225,11 @@ export default {
             const balance = this.availableBalance;
 
             if (this.orderType === 'buy') {
-                const basicAmount = BigNumber.toMin(this.amount || 0, this.ttokenDetail.tokenDigit);
+                const basicAmount = BigNumber.toMin(this.amount || 0, this.ttokenDetail.tokenDecimals);
                 return BigNumber.dividedToNumber(basicAmount || 0, balance, 3, 'nofix');
             }
 
-            const basicQuantity = BigNumber.toMin(this.quantity || 0, this.ftokenDetail.tokenDigit);
+            const basicQuantity = BigNumber.toMin(this.quantity || 0, this.ftokenDetail.tokenDecimals);
             return BigNumber.dividedToNumber(basicQuantity || 0, balance, 3, 'nofix');
         },
         rawBalance() {
@@ -285,7 +287,7 @@ export default {
                 return 0;
             }
 
-            const tDigit = this.ttokenDetail.tokenDigit;
+            const tDigit = this.ttokenDetail.tokenDecimals;
             const pariDigit = this.activeTxPair.pricePrecision;
 
             const digit = tDigit > pariDigit ? pariDigit : tDigit;
@@ -296,7 +298,7 @@ export default {
                 return 0;
             }
 
-            const fDigit = this.ftokenDetail.tokenDigit;
+            const fDigit = this.ftokenDetail.tokenDecimals;
             const pariDigit = this.activeTxPair.quantityPrecision;
 
             const digit = fDigit > pariDigit ? pariDigit : fDigit;
@@ -450,8 +452,8 @@ export default {
                 return '';
             }
 
-            let minAmount = BigNumber.toMin(amount, this.ttokenDetail.tokenDigit);
-            const minPrice = BigNumber.toMin(price, this.ttokenDetail.tokenDigit);
+            let minAmount = BigNumber.toMin(amount, this.ttokenDetail.tokenDecimals);
+            const minPrice = BigNumber.toMin(price, this.ttokenDetail.tokenDecimals);
 
             if (this.orderType === 'buy') {
                 minAmount = BigNumber.dividedToNumber(minAmount, 1 + taker, 0);
@@ -607,15 +609,24 @@ export default {
             const quoteToken = this.activeTxPair ? this.activeTxPair.quoteToken : '';
 
             this.isLoading = true;
-            const tokenDigit = this.ftokenDetail.tokenDigit;
-            quantity = BigNumber.toMin(quantity, tokenDigit);
+            const tokenDecimals = this.ftokenDetail.tokenDecimals;
+            quantity = BigNumber.toMin(quantity, tokenDecimals);
+            const side = this.orderType === 'buy' ? 0 : 1;
 
-            sendTx('dexFundNewOrder', {
-                tradeToken,
-                quoteToken,
-                side: this.orderType === 'buy' ? 0 : 1,
-                price,
-                quantity
+            // [TODO] vitejs 2.1.2
+            // 'dexFundNewOrder', {
+            //     tradeToken,
+            //     quoteToken,
+            //     side: this.orderType === 'buy' ? 0 : 1,
+            //     price,
+            //     quantity
+            // }
+            // console.log([ tradeToken, quoteToken, side, 0, price, quantity ]);
+            sendTx('callContract', {
+                toAddress: DexFund_Addr,
+                abi: { 'type': 'function', 'name': 'DexFundNewOrder', 'inputs': [ { 'name': 'tradeToken', 'type': 'tokenId' }, { 'name': 'quoteToken', 'type': 'tokenId' }, { 'name': 'side', 'type': 'bool' }, { 'name': 'orderType', 'type': 'int8' }, { 'name': 'price', 'type': 'string' }, { 'name': 'quantity', 'type': 'uint256' } ] },
+                params: [ tradeToken, quoteToken, side, 0, price, quantity ],
+                tokenId: tradeToken
             }, {
                 pow: true,
                 powConfig: {
@@ -728,9 +739,7 @@ $font-black: rgba(36, 39, 43, 0.8);
         font-size: 12px;
         font-family: $font-bold, arial, sans-serif;
         font-weight: 600;
-        color: $font-black;
-        text-indent: 6px;
-        border-left: 2px solid $blue;
+        color: #1d2024;
         margin-bottom: 10px;
         .wallet {
             display: block;
@@ -785,7 +794,7 @@ $font-black: rgba(36, 39, 43, 0.8);
     input {
         font-family: $font-normal, arial, sans-serif;
         font-size: 12px;
-        color: #24272B;
+        color: #1d2024;
         text-indent: 6px;
     }
 }

@@ -59,8 +59,10 @@ class WsProtoClient {
 
             connect.onmessage = e => {
                 const data = DexProto.decode(new Uint8Array(e.data));
-
-                if (data.op_type !== this.MESSAGETYPE.PUSH) return;
+                if (data.op_type !== this.MESSAGETYPE.PUSH) {
+                    console.log(data);
+                    return;
+                }
 
                 if (data.client_id !== this._clientId) {
                     console.log('[ClientId 不一致]', data.client_id, this._clientId);
@@ -90,34 +92,35 @@ class WsProtoClient {
 
     retryConnect() {
         if (!this.isRetry || this.ready) {
-            console.log('[Retry but ready]', this.isRetry, this.ready);
+            // console.log('[Retry but ready]', this.isRetry, this.ready);
             return;
         }
 
         // Offline: waiting for online
         if (navigator && !navigator.onLine) {
-            console.log('[Retry offLine]');
+            // console.log('[Retry offLine]');
             window.addEventListener('online', () => {
-                console.log('[Retry onLine]');
+                // console.log('[Retry onLine]');
                 this.retryConnect();
             });
             return;
         }
 
         if (this.retryTimes > MaxRetryTimes) {
-            console.log('Over retryTimes && retryTimes = 0');
+            // console.log('Over retryTimes && retryTimes = 0');
             this.retryTimes = 0;
             return;
         }
 
         setTimeout(() => {
-            console.log('Retry', this.retryTimes);
+            // console.log('Retry', this.retryTimes);
             this.startConnect();
             this.retryTimes++;
         }, RetryInterval);
     }
 
     sub(event, callback) {
+        console.log('[SUB]', event);
         this._subKeys[event] = this._subKeys[event] || new Set();
         this._subKeys[event].add(callback);
         this.send(event, this.MESSAGETYPE.SUB);
@@ -125,7 +128,7 @@ class WsProtoClient {
 
     unSub(event, callback) {
         if (!event || !this._subKeys[event]) {
-            console.log('[UNSUB] fail, !this._subKeys[event]', event);
+            // console.log('[UNSUB] fail, !this._subKeys[event]', event);
             return;
         }
 
@@ -188,21 +191,22 @@ function getRealData(data) {
         return null;
     }
 
+    // 'market.CSTT-000_VITE-000.order.vite_553462bca137bac29f440e9af4ab2e2c1bb82493e41d2bc8b2.history';
     const event_key = data.event_key;
     let key = null;
     if (/^order.vite_[a-zA-Z0-9]{50}$/.test(event_key)) {
         key = 'OrderProto';
-    } else if (/^market.w+.kline.(minute|hour|day|week|minute30|hour6|hour12)$/.test(event_key)) {
+    } else if (/^market.(\w|\-)+.kline.(minute|hour|day|week|minute30|hour6|hour12)$/.test(event_key)) {
         key = 'KlineProto';
-    } else if (/^market.w+.depth$/.test(event_key)) {
+    } else if (/^market.(\w|\-)+.depth$/.test(event_key)) {
         key = 'DepthListProto';
-    } else if (/^market.quoteToken.w+.tickers$/.test(event_key)) {
+    } else if (/^market.quoteToken.(\w|\-)+.tickers$/.test(event_key)) {
         key = 'TickerStatisticsProto';
-    } else if (/^market.w+.tickers$/.test(event_key)) {
+    } else if (/^market.(\w|\-)+.tickers$/.test(event_key)) {
         key = 'TickerStatisticsProto';
-    } else if (/^market.w+.trade$/.test(event_key)) {
+    } else if (/^market.(\w|\-)+.trade$/.test(event_key)) {
         key = 'TradeListProto';
-    } else if (/market.w+.order.vite_[a-zA-Z0-9]{50}.(history|oprn)$/.test(event_key)) {
+    } else if (/market.(\w|\-)+.order.vite_[a-zA-Z0-9]{50}.(history|open)$/.test(event_key)) {
         key = 'OrderListProto';
     }
 
@@ -215,7 +219,7 @@ function getRealData(data) {
     const messageProto = root.lookupType(`vite.${ key }`);
     const result = messageProto.decode(data.message);
 
-    // console.log('proto', key, result);
+    console.log('proto', key, result);
 
     if (listKey.indexOf(key) !== -1) {
         return result && result.list ? result.list : null;

@@ -22,28 +22,34 @@
 
         <div class="__center-tb-title">
             <div class="__center-tb-item tx-pair __pointer"
-                 @click="setOrderRule('transPairs')">
+                 @click="setOrderRule('symbol')">
                 {{ $t('trade.txPair') }}
             </div>
             <div class="__center-tb-item">
-                <span class="describe-r">{{ $t('trade.price') }}</span>
-                <order-arrow
-                    orderItem="price"
-                    :setOrderRule="setOrderRule"
+                <span :class="{
+                    'describe-r': !isShowFavorite
+                }">{{ $t('trade.price') }}</span>
+                <order-arrow v-show="!isShowFavorite"
+                             orderItem="price"
+                             :setOrderRule="setOrderRule"
                 ></order-arrow>
             </div>
             <div v-show="showCol === 'updown'" class="__center-tb-item percent">
-                <span class="describe-r">{{ $t('trade.upDown') }}</span>
-                <order-arrow
-                    orderItem="upDown"
-                    :setOrderRule="setOrderRule"
+                <span :class="{
+                    'describe-r': !isShowFavorite
+                }">{{ $t('trade.upDown') }}</span>
+                <order-arrow v-show="!isShowFavorite"
+                             orderItem="upDown"
+                             :setOrderRule="setOrderRule"
                 ></order-arrow>
             </div>
             <div v-show="showCol === 'txNum'" class="__center-tb-item">
-                <span class="describe-r">{{ $t('trade.txNum') }}</span>
-                <order-arrow
-                    orderItem="txNum"
-                    :setOrderRule="setOrderRule"
+                <span  :class="{
+                    'describe-r': !isShowFavorite
+                }">{{ $t('trade.txNum') }}</span>
+                <order-arrow v-show="!isShowFavorite"
+                             orderItem="txNum"
+                             :setOrderRule="setOrderRule"
                 ></order-arrow>
             </div>
         </div>
@@ -107,11 +113,11 @@ export default {
         };
     },
     computed: {
-        quoteTokenSymbol() {
-            return this.$store.state.exchangeMarket.currentMarket;
-        },
         isShowFavorite() {
             return this.$store.state.exchangeMarket.isShowFavorite;
+        },
+        quoteTokenSymbol() {
+            return this.$store.state.exchangeMarket.currentMarket;
         },
         isShowNoData() {
             return !this.isLoading
@@ -229,6 +235,11 @@ export default {
             const symbols = [];
             for (const symbol in this.favoritePairs) {
                 symbols.push(symbol);
+            }
+
+            if (!symbols.length) {
+                this.isLoading = false;
+                return;
             }
 
             assignPair({ symbols }).then(data => {
