@@ -15,12 +15,11 @@
 
 <script>
 import { StatusMap } from 'wallet';
-import localStorage from 'utils/store';
+import { constant } from 'utils/store';
 import confirm from 'components/confirm.vue';
 import holdPwdView from './holdPwd.vue';
 
 let lastE = null;
-const ShowHoldNumKey = 'showHoldPWDNum';
 
 export default {
     components: { confirm, holdPwdView },
@@ -70,20 +69,23 @@ export default {
         lastE = this.$onKeyDown(13, () => {
             this._submit();
         });
+
+        const accInfo = this.currHDAcc.getAccInfo();
+        const showHoldNum = accInfo.showHoldPWDNum || 0;
+
+        this.isHoldPWD = !!accInfo[constant.HoldPwdKey];
+        this.isShowHold = showHoldNum < 3 && !this.isHoldPWD;
+        this.currHDAcc.saveOnAcc(constant.ShowHoldPWDNumKey, this.isShowHold ? showHoldNum + 1 : 4);
     },
     destroyed() {
         this.$onKeyDown(13, lastE);
     },
     data() {
-        const showHoldNum = +localStorage.getItem(ShowHoldNumKey) || 0;
-        const isShowHold = showHoldNum < 3 && !this.isHoldPWD;
-
-        localStorage.setItem(ShowHoldNumKey, isShowHold ? showHoldNum + 1 : 4);
-
         return {
             password: '',
             isLoading: false,
-            isShowHold
+            isHoldPWD: false,
+            isShowHold: false
         };
     },
     computed: {
@@ -100,9 +102,6 @@ export default {
         },
         isLogin() {
             return this.$store.state.wallet.status === StatusMap.UNLOCK;
-        },
-        isHoldPWD() {
-            return !!this.$store.state.env.isHoldPWD;
         }
     },
     methods: {

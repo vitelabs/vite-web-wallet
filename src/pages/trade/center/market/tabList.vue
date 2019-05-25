@@ -33,7 +33,7 @@ export default {
         },
         changeToken(_t) {
             this.$store.commit('setIsShowFavorite', false);
-            this.$store.commit('setCurrentMarket', _t.token);
+            this.$store.commit('setCurrentMarket', _t.symbol);
         }
     }
 };

@@ -3,9 +3,6 @@ import qs from 'qs';
 const reqTimeout = 30000;
 const afterResponseDefault = async function (xhr, path) {
     if (+xhr.status === 200) {
-        if (path.indexOf('kline') !== -1) {
-            return Promise.resolve(JSON.parse(xhr.responseText));
-        }
         const { code, msg, data, error } = JSON.parse(xhr.responseText);
         const rightCode = path.indexOf('api') === -1 ? 200 : 0;
         if (code !== rightCode) {

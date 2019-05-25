@@ -70,8 +70,12 @@ export default {
                 return;
             }
 
+            if (!this || !this.$t) {
+                return;
+            }
+
             let msg = code === -1 || !this.$i18n.messages.zh.errCode[Math.abs(code)]
-                ? message || this.$i18n('hint.err') : this.$i18n(`errCode.${ Math.abs(code) }`);
+                ? message || this.$t('hint.err') : this.$t(`errCode.${ Math.abs(code) }`);
             if (code > 0) {
                 msg = `${ Math.abs(code) === 32002 ? errMsg : msg } (${ code })`;
             }

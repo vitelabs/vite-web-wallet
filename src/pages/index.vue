@@ -3,7 +3,7 @@
         'dex': active.indexOf('trade') !== -1,
         'wallet': active.indexOf('trade') === -1
     }">
-        <page-layout v-if="active.indexOf('start') !== 0" :active="active">
+        <page-layout v-if="active.indexOf('start') !== 0 && active.indexOf('keystore') !== 0" :active="active">
             <router-view />
         </page-layout>
 

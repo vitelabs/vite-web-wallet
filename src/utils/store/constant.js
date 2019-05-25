@@ -7,14 +7,21 @@ export const LastKey = 'ACC_LAST';
 export const AccListKey = 'ACC_LIST';
 
 export const VersionKey = 'version';
-export const SettingKeys = [ 'firstVisit', 'lang', 'autoLogoutTime', 'currency', 'isHoldPWD', 'showHoldPWDNum' ];
+export const FirstKey = 'firstVisit';
+export const AutoLogoutKey = 'autoLogoutTime';
+export const HoldPwdKey = 'isHoldPWD';
+export const CurrencyKey = 'currency';
+export const LangKey = 'lang';
+export const ShowHoldPWDNumKey = 'showHoldPWDNum';
+
+export const SettingKeys = [ FirstKey, LangKey, AutoLogoutKey, CurrencyKey, HoldPwdKey, ShowHoldPWDNumKey ];
 export const TradeKeys = [ 'favoriteTickers', 'beginnerGuide' ];
 
 export const AccBaseKeys = [ 'name', 'addrNum', 'idx', 'addr' ];
 export const AddrBaseKeys = [ 'name', 'id', 'idx' ];
 
 // setting, trade
-export const AccInfoKeys = [];
+export const AccInfoKeys = [ ShowHoldPWDNumKey, HoldPwdKey ];
 export const AddrInfoKeys = ['INDEX_COLLECT_TOKEN'];
 
 // 1.7.0: XVite

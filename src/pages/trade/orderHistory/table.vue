@@ -8,7 +8,7 @@
         </div>
         <div class="row-container">
             <div class="row" v-for="v in sortedList" :key="v.orderId">
-                <div>{{ v.date|d }}</div>
+                <div>{{ v.createTime|d }}</div>
                 <div>{{ `${v.tradeTokenSymbol}/${v.quoteTokenSymbol}` }}</div>
                 <div :class="{
                     'buy': v.side===0,
@@ -16,9 +16,9 @@
                 }">{{ $t("tradeOrderHistory.side")[v.side] }}</div>
                 <div>{{ v.price }} {{ v.quoteTokenSymbol }}</div>
                 <div>{{ v.quantity }} {{ v.tradeTokenSymbol }}</div>
-                <div>{{ v.filledQ }} {{v.tradeTokenSymbol }}</div>
-                <div>{{ `${(v.rate*100).toFixed(2)}%` }}</div>
-                <div>{{ v.average }} {{ v.quoteTokenSymbol }}</div>
+                <div>{{ v.executedQuantity }} {{v.tradeTokenSymbol }}</div>
+                <div>{{ `${(v.executedPercent*100).toFixed(2)}%` }}</div>
+                <div>{{ v.executedAvgPrice }} {{ v.quoteTokenSymbol }}</div>
                 <div>{{ v.fee }} {{ v.quoteTokenSymbol }}</div>
                 <div>{{ $t('tradeOrderHistory.table.rowMap.statusMap')[v.status] }}</div>
                 <div @click="showDetail(v)" class="click-able">
@@ -87,9 +87,8 @@ export default {
             orderDetail({
                 orderId: order.orderId,
                 symbol: order.symbol,
-                offset: 1,
-                limit: 100,
-                side: order.side
+                offset: 0,
+                limit: 100
             }).then(data => {
                 this.detailData = (data.trade || []).map(v => {
                     v.fee = order.orderId === v.buyerOrderId ? v.buyFee : v.sellFee;

@@ -89,6 +89,7 @@ let webpackConfig = {
                     loader: 'babel-loader',
                     options: {
                         presets: ['@babel/preset-env']
+                        // [TODO] Async Route
                         // plugins: ['syntax-dynamic-import']
                     }
                 }
