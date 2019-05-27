@@ -2,17 +2,17 @@
 <template lang="pug">
 extends /components/dialog/base.pug
 block content
-    .block__title {{ $t(`tradeAssets.confirmrecharge.lable1`) }}
+    .block__title {{ $t(`tradeAssets.confirmwithdraw.lable1`) }}
     .block__content.edit.space
         .token__title
             img(:src="token.icon")
             .symbol {{token.tokenSymbol}}
-        .right.blue {{token.balance||'0'}}
-    .block__title {{$t(`tradeAssets.confirmrecharge.lable2`) }}
+        .right.blue {{availableExBalance}}
+    .block__title {{$t(`tradeAssets.confirmwithdraw.lable2`) }}
         .err {{ errTips }}
     .block__content
-        input(v-model="withdrawAmount" :placeholder="$t(`tradeAssets.confirmrecharge.placeholder`)")
-        .all(@click="withdrawAll") {{$t('tradeAssets.all')}}
+        input(v-model="withdrawAmount" :placeholder="$t(`tradeAssets.confirmwithdraw.placeholder`)" @input="handleUserInputAmount")
+        .all(@click="all") {{$t('tradeAssets.all')}}
 </template>
 <script>
 import { getValidBalance } from 'utils/validations';
@@ -28,10 +28,10 @@ export default {
     },
     data() {
         return {
-            isWithdrawAll: false,
+            isAll: false,
             withdrawAmount: '',
-            dTitle: this.$t('tradeAssets.confirmrecharge.title'),
-            dSTxt: this.$t('tradeAssets.confirmrecharge.btn'),
+            dTitle: this.$t('tradeAssets.confirmwithdraw.title'),
+            dSTxt: this.$t('tradeAssets.confirmwithdraw.btn'),
             errTips: '',
             fetchingFee: true
         };
@@ -39,42 +39,45 @@ export default {
     computed: {
         dBtnUnuse() {
             return (
-                this.ammountErr
+                this.errTips
         || !this.withdrawAmount
             );
         },
         defaultAddr() {
             return this.$store.getters.activeAddr;
+        },
+        availableExBalance() {
+            return bigNumber.toBasic(this.token.availableExAmount, this.token.decimals);
         }
     },
     methods: {
         handleUserInputAmount: debounce(function (v) {
-            this.isWithdrawAll = false;
-            this.errTips = this.testAmount(v);
+            this.isAll = false;
+            this.errTips = this.testAmount(v.target.value);
         }, 500),
         testAmount(val) {
             const errorMap = { notEnough: this.$t('tokenCard.withdraw.balanceErrMap.notEnough') };
-            return getValidBalance({ balance: this.token.totalAmount, decimals: this.token.decimals, errorMap })(val);
+            return getValidBalance({ balance: this.token.availableExAmount, decimals: this.token.decimals, errorMap })(val);
         },
-        withdrawAll() {
+        all() {
             if (
-                this.token.totalAmount
-        && bigNumber.compared(this.token.totalAmount, '0') > 0
+                this.token.availableExAmount
+        && bigNumber.compared(this.token.availableExAmount, '0') > 0
             ) {
                 this.isWithdrawAll = true;
-                this.withdrawAmount = bigNumber.toBasic(this.token.totalAmount, this.token.decimals);
+                this.withdrawAmount = bigNumber.toBasic(this.token.availableExAmount, this.token.decimals);
             }
         },
         inspector() {
             return new Promise((res, rej) => {
                 if (this.testAmount(this.withdrawAmount)) return;
-                const amount = this.isWithdrawAll ? this.token.totalAmount : bigNumber.toMin(this.withdrawAmount, this.token.decimals);
+                const amount = this.isWithdrawAll ? this.token.availableExAmount : bigNumber.toMin(this.withdrawAmount, this.token.decimals);
                 try {
                     sendTx('dexFundUserWithdraw', { tokenId: this.token.tokenId, amount });
-                    this.$toast(this.$t('tradeAssets.confirmrecharge.successToast'));
+                    this.$toast(this.$t('tradeAssets.confirmwithdraw.successToast'));
                     res();
                 } catch (e) {
-                    this.$toast(this.$t('tradeAssets.confirmrecharge.failToast'), e);
+                    this.$toast(this.$t('tradeAssets.confirmwithdraw.failToast'), e);
                     rej(e);
                 }
             });

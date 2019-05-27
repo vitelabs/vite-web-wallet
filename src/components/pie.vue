@@ -115,7 +115,7 @@ export default {
         },
         pieData: {
             type: Array,
-            default: () => [ 3, 6, 8, 9, 3 ]
+            default: () => [ ]
         },
         title: {
             type: String,
@@ -130,8 +130,11 @@ export default {
             if (!this.pieData.length) {
                 return [];
             }
-            const sum = this.pieData.reduce((pre, cur) => pre + cur, 0);
-            return this.pieData.map(v => v / sum);
+            const sum = this.pieData.map(v => Number(v)).reduce((pre, cur) => pre + cur, 0);
+            if (!sum) {
+                return this.pieData.map(v => Number(v));
+            }
+            return this.pieData.map(v => Number(v)).map(v => v / sum);
         }
     }
 };

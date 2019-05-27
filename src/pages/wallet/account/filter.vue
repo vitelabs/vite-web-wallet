@@ -6,12 +6,12 @@
             :placeholder="$t('tradeAssets.search')"
         >
         </Search>
-        <div class="addToken"></div>
-        <div class="filter">
-            <input
-                type="checkbox"
-                v-model="hideZero"
-            />
+        <div class="filter op" @click="addToken">
+            <img src="~assets/imgs/add_token.png" />
+            <div>添加代币</div>
+        </div>
+        <div class="filter op">
+            <input type="checkbox" v-model="hideZero" />
             {{ $t("tradeAssets.zero") }}
         </div>
     </div>
@@ -19,6 +19,7 @@
 <script>
 import { debounce } from 'lodash';
 import Search from 'components/search';
+import { addTokenDialog } from './dialog';
 export default {
     data() {
         return {
@@ -26,11 +27,25 @@ export default {
             filterKey: ''
         };
     },
+    watch: {
+        hideZero() {
+            this.updateFilter();
+        },
+        filterKey() {
+            this.updateFilter();
+        }
+    },
     components: { Search },
     methods: {
         updateFilter: debounce(function () {
-
-        }, 0.5)
+            this.$emit('newFilter', {
+                hideZero: this.hideZero,
+                filterKey: this.filterKey
+            });
+        }, 0.5),
+        addToken() {
+            addTokenDialog().catch(e => console.error(e));
+        }
     }
 };
 </script>
@@ -61,16 +76,19 @@ export default {
                 height: 100%;
             }
         }
-
-        &:last-child {
+        &.op {
             margin-left: 20px;
             color: #5e6875;
-            width: 140px;
             display: flex;
             align-items: center;
+            img,
             input {
+                height: 16px;
+                width: 16px;
+                cursor: pointer;
                 margin-right: 10px;
             }
+            display: flex;
         }
     }
 

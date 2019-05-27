@@ -12,7 +12,7 @@ block content
         .err {{ errTips }}
     .block__content
         input(v-model="withdrawAmount" :placeholder="$t(`tradeAssets.confirmrecharge.placeholder`)" @input='handleUserInputAmount')
-        .all(@click="withdrawAll") {{$t('tradeAssets.all')}}
+        .all(@click="all") {{$t('tradeAssets.all')}}
 </template>
 <script>
 import { getValidBalance } from 'utils/validations';
@@ -28,7 +28,7 @@ export default {
     },
     data() {
         return {
-            isWithdrawAll: false,
+            isAll: false,
             withdrawAmount: '',
             dTitle: this.$t('tradeAssets.confirmrecharge.title'),
             dSTxt: this.$t('tradeAssets.confirmrecharge.btn'),
@@ -39,7 +39,7 @@ export default {
     computed: {
         dBtnUnuse() {
             return (
-                this.ammountErr
+                this.errTips
         || !this.withdrawAmount
             );
         },
@@ -49,26 +49,26 @@ export default {
     },
     methods: {
         handleUserInputAmount: debounce(function (e) {
-            this.isWithdrawAll = false;
+            this.isAll = false;
             this.errTips = this.testAmount(e.target.value);
         }, 500),
         testAmount(val) {
             const errorMap = { notEnough: this.$t('tokenCard.withdraw.balanceErrMap.notEnough') };
             return getValidBalance({ balance: this.token.totalAmount, decimals: this.token.decimals, errorMap })(val);
         },
-        withdrawAll() {
+        all() {
             if (
                 this.token.totalAmount
         && bigNumber.compared(this.token.totalAmount, '0') > 0
             ) {
-                this.isWithdrawAll = true;
+                this.isAll = true;
                 this.withdrawAmount = bigNumber.toBasic(this.token.totalAmount, this.token.decimals);
             }
         },
         inspector() {
             return new Promise((res, rej) => {
                 if (this.testAmount(this.withdrawAmount)) return;
-                const amount = this.isWithdrawAll ? this.token.totalAmount : bigNumber.toMin(this.withdrawAmount, this.token.decimals);
+                const amount = this.isAll ? this.token.totalAmount : bigNumber.toMin(this.withdrawAmount, this.token.decimals);
                 try {
                     sendTx('dexFundUserDeposit', { tokenId: this.token.tokenId, amount });
                     this.$toast(this.$t('tradeAssets.confirmrecharge.successToast'));

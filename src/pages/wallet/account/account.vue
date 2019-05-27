@@ -1,9 +1,13 @@
 <template>
     <div class="wallet-account-wrapper __wrapper">
-        <div class="account-head-move">
-            <account-head class="account_head"></account-head>
-        </div>
-        <TokenFilter></TokenFilter>
+        <account-head class="account_head"></account-head>
+        <TokenFilter
+            @newFilter="
+                val => {
+                    filterObj = val;
+                }
+            "
+        ></TokenFilter>
         <div class="token-list">
             <div class="token__head">
                 <div class="col">代币名称</div>
@@ -13,21 +17,20 @@
                 <div class="col">交易所总余额度</div>
                 <div class="col">交易所可用余额</div>
                 <div class="col">
-                    <AssetSwitch
-                        v-model="assetType"
-                        class="asset-switch"
-                    />
+                    <AssetSwitch v-model="assetType" class="asset-switch" />
                 </div>
             </div>
             <tokenCard
                 v-for="token in nativeTokenList"
                 :key="token.tokenId"
                 :token="token"
+                :assetType="assetType"
             ></tokenCard>
             <tokenCard
                 v-for="token in crossChainTokenList"
                 :key="`_${token.tokenId}`"
                 :token="token"
+                :assetType="assetType"
             ></tokenCard>
         </div>
     </div>
@@ -42,14 +45,26 @@ import { gateStorage } from 'services/gate';
 import TokenFilter from './filter';
 import { debounce } from 'lodash';
 import AssetSwitch from './assetSwitch';
+const filterFunc = filterObj => t => {
+    if (!filterObj) {
+        return true;
+    }
+    const NOTMatchNoZero
+        = filterObj.hideZero && +t.totalAmount === 0 && +t.totalExAmount === 0;
+    const NOTMatchFilterKey
+        = filterObj.filterKey
+        && !t.tokenSymbol.match(new RegExp(filterObj.filterKey, 'i'));
 
+    return !(NOTMatchNoZero || NOTMatchFilterKey);
+};
 export default {
     components: { accountHead, syncBlock, tokenCard, TokenFilter, AssetSwitch },
     data() {
         return {
             isShowTrans: false,
             activeToken: null,
-            assetType: 'TOTAL'
+            assetType: 'TOTAL',
+            filterObj: null
         };
     },
     watch: {
@@ -69,13 +84,13 @@ export default {
                 ...this.defaultTokenList,
                 ...this.userStorageTokenList.filter(t => !t.gateInfo.url),
                 ...this.otherWhithBalance
-            ];
+            ].filter(filterFunc(this.filterObj));
         },
         crossChainTokenList() {
             return [
                 ...this.officalGateTokenList,
                 ...this.userStorageTokenList.filter(t => t.gateInfo.url)
-            ];
+            ].filter(filterFunc(this.filterObj));
         },
         defaultTokenList() {
             return this.$store.getters.defaultTokenList;
@@ -113,14 +128,10 @@ export default {
     padding-top: 0;
 }
 
-.account-head-move {
-    width: 100%;
-    box-shadow: 0 2px 48px 1px rgba(176, 192, 237, 0.42);
-}
-
 .account_head {
     position: relative;
     text-align: center;
+    width: 100%;
     margin-top: 20px;
 }
 
@@ -142,7 +153,7 @@ export default {
                 color: #5e6875;
                 font-size: 12px;
                 font-family: $font-normal;
-                /deep/.list-title{
+                /deep/.list-title {
                     border: none;
                 }
             }
