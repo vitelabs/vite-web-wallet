@@ -49,11 +49,13 @@ export default {
                 list = secondMenuList.trade;
             } else if (this.active.indexOf('assets') === 0) {
                 list = secondMenuList.assets;
-            } else if (this.active.indexOf('wallet') === 0) {
-                list = secondMenuList.wallet;
             }
 
-            list = [].concat(list);
+            if (this.active.indexOf('wallet') !== 0) {
+                return [].concat(list);
+            }
+
+            list = [].concat(secondMenuList.wallet);
             this.isLogin && list.push('walletConversion');
             return list;
         },
