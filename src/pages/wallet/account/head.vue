@@ -1,10 +1,7 @@
 <template>
     <div class="account-head-wrapper">
         <div class="head__item">
-            <img
-                class="icon"
-                src="~assets/imgs/head_acc.png"
-            />
+            <img class="icon" src="~assets/imgs/head_acc.png" />
             <div class="head-right">
                 <div class="head-title">
                     <span>{{ $t("accountName") }}</span>
@@ -36,15 +33,13 @@
             </div>
         </div>
         <div class="head__item">
-            <img
-                class="icon"
-                src="~assets/imgs/head_addr.png"
-            />
+            <img class="icon" src="~assets/imgs/head_addr.png" />
             <div class="head-right">
                 <SwitchAddr></SwitchAddr>
                 <span class="address-content">
                     <Tips ref="tips"></Tips>{{ activeAddr }}
-                    <QrcodePopup :qrcodeString="addressQrcode"><img
+                    <QrcodePopup :qrcodeString="addressQrcode"
+                    ><img
                         class="address-content__operate click-able"
                         src="~assets/imgs/qrcode_default.svg"
                     /></QrcodePopup>
@@ -57,20 +52,18 @@
             </div>
         </div>
         <div class="worth head__item">
-            <img
-                class="icon"
-                src="~assets/imgs/head_asset.png"
-            />
+            <img class="icon" src="~assets/imgs/head_asset.png" />
             <div class="assets">
-                <AssetSwitch
-                    v-model="assetsType"
-                    class="asset-switch"
-                />
-                <div class="asset__btc">{{ totalAsset }}</div>
-                <div class="asset__cash">{{ totalAsset }}</div>
+                <AssetSwitch v-model="assetsType" class="asset-switch" />
+                <div class="asset__btc">{{ asset }}</div>
+                <div class="asset__cash">{{ currencySymbol }} {{ asset }}</div>
             </div>
             <div class="head-right">
-                <Pie class="pie-chart"></Pie>
+                <Pie
+                    class="pie-chart"
+                    :pieData="pieData.data"
+                    :labelGen="labelGen"
+                ></Pie>
             </div>
         </div>
     </div>
@@ -81,7 +74,6 @@ import Vue from 'vue';
 import QrcodePopup from 'components/qrcodePopup';
 import SwitchAddr from 'components/switchAddress';
 import Pie from 'components/pie';
-import $ViteJS from 'utils/viteClient';
 import bigNumber from 'utils/bigNumber';
 import { utils } from '@vite/vitejs';
 import copy from 'utils/copy';
@@ -102,11 +94,28 @@ export default {
             copySuccess: false,
             qrcode: null,
             qrcodeShow: false,
-            getTestTokenAble: true,
             assetsType: assetsType.TOTAL
         };
     },
     computed: {
+        pieData() {
+            const data = JSON.parse(JSON.stringify(this.assetMap));
+            let polyData = data;
+            if (data.length > 5) {
+                polyData = data.slice(0, 4);
+                polyData.push({
+                    asset: data
+                        .slice(4)
+                        .reduce((pre, cur) => bigNumber.plus(pre, cur.asset),
+                            0),
+                    tokenSymbol: '其它'
+                });
+            }
+            return {
+                data: polyData.map(t => t.asset),
+                lable: polyData.map(t => t.tokenSymbol)
+            };
+        },
         account() {
             return {
                 name: this.$store.state.wallet.name,
@@ -119,59 +128,66 @@ export default {
         addressQrcode() {
             return utils.uriStringify({ target_address: this.activeAddr });
         },
-        totalAsset() {
-            const currency = this.$store.state.env.currency;
-            const rateMap = this.$store.state.exchangeRate.rateMap;
-            const balanceInfo = this.$store.getters.balanceInfo;
-            const total = Object.keys(balanceInfo).reduce((pre, cur) => {
-                if (!rateMap[cur]) return pre;
-                return bigNumber.plus(bigNumber.multi(balanceInfo[cur].balance,
-                    rateMap[cur][currency]),
-                pre);
-            }, 0);
-            return `${ currency === 'en' ? '$' : '¥' }${ total }`;
+        asset() {
+            return this.assetMap
+                .map(t => t.asset)
+                .reduce((pre, cur) => bigNumber.plus(pre || 0, cur || 0), 0);
+        },
+        allTokens() {
+            return [
+                ...this.$store.getters.defaultTokenList,
+                ...this.$store.getters.userStorageTokenList,
+                ...this.$store.getters.otherWhithBalance,
+                ...this.$store.getters.officalGateTokenList
+            ];
+        },
+        currencySymbol() {
+            return this.$store.getters.currencySymbol;
         },
         assetMap() {
-            return JSON.parse(JSON.stringify([ ...this.defaultTokenList, ...this.userStorageTokenList, ...this.otherWhithBalance, ...this.officalGateTokenList ])).forEach(t => {
-                t.asset = bigNumber.plus(t.totalAsset, t.totalExAsset);
-            });
+            if (this.assetsType === assetsType.TOTAL) {
+                return this.allTokens
+                    .map(t => {
+                        return {
+                            asset: t.totalAsset,
+                            tokenSymbol: t.tokenSymbol
+                        };
+                    })
+                    .sort((a, b) => bigNumber.compared(b.asset, a.asset));
+            }
+            if (this.assetsType === assetsType.EX) {
+                return this.allTokens
+                    .map(t => {
+                        return {
+                            asset: t.totalExAsset,
+                            tokenSymbol: t.tokenSymbol
+                        };
+                    })
+                    .sort((a, b) => bigNumber.compared(b.asset, a.asset));
+            }
+            if (this.assetsType === assetsType.WALLET) {
+                return this.allTokens
+                    .map(t => {
+                        return {
+                            asset: t.walletAsset,
+                            tokenSymbol: t.tokenSymbol
+                        };
+                    })
+                    .sort((a, b) => bigNumber.compared(b.asset, a.asset));
+            }
         },
         activeAddr() {
             return this.$store.getters.activeAddr;
         }
     },
     methods: {
+        labelGen(v, i) {
+            const symbol = this.pieData.lable[i];
+            return `${ symbol } ${ (100 * v).toFixed(2) }%`;
+        },
         copy() {
             copy(this.activeAddr);
             this.$refs.tips.tip(this.$t('hint.copy'));
-        },
-
-        getTestToken() {
-            if (!this.getTestTokenAble) {
-                return;
-            }
-            if (!this.netStatus) {
-                this.$toast(this.$t('hint.noNet'));
-                return;
-            }
-
-            if (!this.activeAddr) {
-                this.$toast(this.$t('wallet.hint.tErr'));
-            }
-
-            this.getTestTokenAble = false;
-            $ViteJS.testapi
-                .getTestToken(this.activeAddr)
-                .then(() => {
-                    this.$toast(this.$t('wallet.hint.token'));
-                    setTimeout(() => {
-                        this.getTestTokenAble = true;
-                    }, 3000);
-                })
-                .catch(err => {
-                    console.warn(err);
-                    this.$toast(this.$t('wallet.hint.tErr'), err);
-                });
         },
 
         clearEditName() {

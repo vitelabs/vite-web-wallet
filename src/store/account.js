@@ -110,10 +110,10 @@ const getters = {
         // ------------------- show default token
         const list = Object.keys(defaultTokenMap).map(i => {
             const {
-                availableExAmount = '',
-                totalExAmount = '',
+                availableExAmount = 0,
+                totalExAmount = 0,
                 onroadNum = '',
-                totalAmount = '',
+                totalAmount = 0,
                 tokenName = '',
                 totalSupply = '',
                 isReIssuable = '',

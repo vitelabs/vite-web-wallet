@@ -21,7 +21,7 @@
                 v-for="item in optList"
                 :key="item.value"
                 v-show="selected !== value"
-                @click.stop="select(item)"
+                @click="select(item)"
                 class="item"
             >
                 <div class="name">

@@ -1,21 +1,26 @@
 <template>
-    <div class="confirm-container gray" >
+    <div class="confirm-container gray" v-if="isShow">
         <div class="confirm-wrapper">
             <div class="title">
-                <span>{{title}}</span>
+                <span>{{ $t("tradeAssets.confirmTable.title") }}</span>
                 <span @click="close" class="close-icon __pointer"></span>
             </div>
 
             <div class="ex_tb">
                 <div class="head-row">
-                    <div v-for="(h) in heads" :key="h">{{ h }}</div>
+                    <div
+                        v-for="h in $t('tradeAssets.confirmTable.heads')"
+                        :key="h"
+                    >
+                        {{ h }}
+                    </div>
                 </div>
-                <div class="no-data" v-show="!list || !list.length">
-                    <div>{{ $t('hint.noData') }}</div>
+                <div class="no-data" v-show="!detailList || !detailList.length">
+                    <div>{{ $t("hint.noData") }}</div>
                 </div>
                 <div class="row-container">
-                    <div class="row" v-for="(v,i) in list" :key="i">
-                        <div v-for="(item,j) in v " :key="j">{{item}}</div>
+                    <div class="row" v-for="(v, i) in detailList" :key="i">
+                        <div v-for="(item, j) in v" :key="j">{{ item }}</div>
                     </div>
                 </div>
             </div>
@@ -24,23 +29,55 @@
 </template>
 
 <script>
+import { chargeDetail } from 'services/trade';
+import d from "dayjs";
+
 export default {
     props: {
-        close: {
-            type: Function,
-            default: () => {}
+        token: {
+            type: Object,
+            default: ()=>({})
+        }
+    },
+    data() {
+        return { detailData: [], isShow: false };
+    },
+    beforeMount() {
+        this.detail(this.token.tokenId);
+    },
+    computed: {
+        address() {
+            return this.$store.getters.activeAddr;
         },
-        heads: {
-            type: Array,
-            default: () => []
+        detailList() {
+            return Object.keys(this.detailData).map(k => {
+                const o = this.detailData[k];
+
+                return [
+                    d.unix(o.optime).format('YYYY-MM-DD HH:mm'),
+                    o.tokenName,
+                    this.$t('tradeAssets.table.rowMap.sideMap')[o.optype],
+                    o.amount
+                ];
+            });
+        }
+    },
+    methods: {
+        close() {
+            this.isShow = false;
+            this.detailData = [];
         },
-        list: {
-            type: Array,
-            default: () => []
+        show() {
+            this.isShow = true;
         },
-        title: {
-            type: String,
-            default: ''
+        detail(tokenId) {
+            this.detailConfirm = true;
+            chargeDetail({
+                address: this.address,
+                tokenId
+            }).then(data => {
+                this.detailData = data.records;
+            });
         }
     }
 };
@@ -109,7 +146,7 @@ export default {
             box-sizing: border-box;
             width: 20px;
             height: 20px;
-            background: url('~assets/imgs/confirm_close.svg') no-repeat center;
+            background: url("~assets/imgs/confirm_close.svg") no-repeat center;
             background-size: 20px 20px;
         }
     }
@@ -129,7 +166,7 @@ export default {
         }
         .head-row {
             position: sticky;
-            >div {
+            > div {
                 &:first-child {
                     margin: 0 3px 0 18px;
                 }
@@ -150,7 +187,7 @@ export default {
             &:last-child {
                 border-bottom: 1px solid rgba(198, 203, 212, 0.3);
             }
-            >div {
+            > div {
                 &:first-child {
                     margin: 0 3px 0 18px;
                 }

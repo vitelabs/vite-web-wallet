@@ -1,18 +1,9 @@
 <template>
     <div class="token-card">
-        <div
-            class="col title click-able"
-            @click="showDetail"
-        >
+        <div class="col title click-able" @click="showDetail">
             <div>
-                <img
-                    :src="token.icon"
-                    class="icon"
-                />
-                <span
-                    class="token-name underline"
-                    @click="showDetail"
-                >{{
+                <img :src="token.icon" class="icon" />
+                <span class="token-name underline" @click="showDetail">{{
                     token.tokenSymbol
                 }}</span>
             </div>
@@ -23,14 +14,8 @@
                 {{ `${token.balance || 0} ${token.tokenSymbol}` }}
             </div>
             <div class="op_group">
-                <div
-                    class="op"
-                    @click="send"
-                >转账</div>
-                <div
-                    class="op"
-                    @click="exCharge"
-                >充币到交易所</div>
+                <div class="op" @click="send">转账</div>
+                <div class="op" @click="exCharge">充币到交易所</div>
             </div>
         </div>
         <div class="col">
@@ -41,15 +26,9 @@
                 {{ token.gateInfo.gateway || "添加网关" }}
             </div>
             <div class="op_group">
-                <div
-                    class="op"
-                    @click="charge"
-                >跨链充值</div>
-                <div
-                    class="op"
-                    @click="withdraw"
-                >跨链提现</div>
-                <div class="op readonly">跨链充提记录</div>
+                <div class="op" @click="charge">跨链充值</div>
+                <div class="op" @click="withdraw">跨链提现</div>
+                <div class="op readonly"  @click="showDetail('withdraw')">跨链充提记录</div>
             </div>
             <div class="separate"></div>
         </div>
@@ -61,20 +40,21 @@
                 {{ `${avaliableExBalance || "--"} ${token.tokenSymbol}` }}
             </div>
             <div class="op_group">
-                <div
-                    class="op"
-                    @click="exWithdraw"
-                >提现至钱包</div>
-                <div class="op readonly">交易所充提记录</div>
+                <div class="op" @click="exWithdraw">提现至钱包</div>
+                <div class="op readonly" @click="exRecord">交易所充提记录</div>
             </div>
             <div class="separate"></div>
         </div>
         <div class="col">
             <div class="assets">
                 <div class="est_btc">{{ assetView.btc }}</div>
-                <div class="est_cash">≈{{currencySymbol}} {{ assetView.cash }}</div>
+                <div class="est_cash">
+                    ≈{{ currencySymbol }} {{ assetView.cash }}
+                </div>
             </div>
         </div>
+        <Alert ref="alert" :token="token" />
+        <transition :closeTrans="closeTrans" :token="token" />
     </div>
 </template>
 
@@ -92,9 +72,10 @@ import bigNumber from 'utils/bigNumber';
 import { gateStorage } from 'services/gate';
 import transaction from '../transaction';
 import { execWithValid } from 'utils/execWithValid';
+import Alert from '../alert';
 
 export default {
-    components: { transaction },
+    components: { transaction, Alert },
     props: {
         token: {
             type: Object,
@@ -107,10 +88,14 @@ export default {
                     type: 'OFFICAL_GATE'
                 };
             }
+        },
+        assetType: {
+            type: String,
+            default: 'TOTAL'
         }
     },
     data() {
-        return { isShowTrans: false, assetType: 'TOTAL' };
+        return { isShowTrans: false };
     },
     computed: {
         currencySymbol() {
@@ -119,12 +104,9 @@ export default {
         showUnbind() {
             return (
                 this.token.type === 'THIRD_GATE'
-        && (!this.token.totalAmount
-          || bigNumber.isEqual(this.token.totalAmount, '0'))
+                && (!this.token.totalAmount
+                    || bigNumber.isEqual(this.token.totalAmount, '0'))
             );
-        },
-        address() {
-            return this.$store.getters.activeAddr;
         },
         gateName() {
             if (this.$store.getters.mapToken2Gate[this.token.tokenId]) {
@@ -134,26 +116,41 @@ export default {
             return this.$t('tokenCard.gateInfo.selfdefined');
         },
         exBanlance() {
-            return bigNumber.toBasic(this.token.totalExAmount,
+            return this.token.totalExAmount && bigNumber.toBasic(this.token.totalExAmount,
                 this.token.decimals);
         },
         avaliableExBalance() {
-            return bigNumber.toBasic(this.token.availableExAmount,
-                this.token.decimals);
+            return (
+                this.token.availableExAmount
+                && bigNumber.toBasic(this.token.availableExAmount,
+                    this.token.decimals)
+            );
         },
         assetView() {
             if (this.assetType === 'TOTAL') {
-                return { btc: this.token.totalAsset, cash: this.token.totalAsset };
+                return {
+                    btc: this.token.totalAsset,
+                    cash: this.token.totalAsset
+                };
             }
             if (this.assetType === 'EX') {
-                return { btc: this.token.totalExAsset, cash: this.token.totalExAsset };
+                return {
+                    btc: this.token.totalExAsset,
+                    cash: this.token.totalExAsset
+                };
             }
             if (this.assetType === 'WALLET') {
-                return { btc: this.token.walletAsset, cash: this.token.walletAsset };
+                return {
+                    btc: this.token.walletAsset,
+                    cash: this.token.walletAsset
+                };
             }
         }
     },
     methods: {
+        exRecord() {
+            this.$refs.alert.show();
+        },
         unbind() {
             gateStorage.unbindToken(this.token.tokenId);
         },
