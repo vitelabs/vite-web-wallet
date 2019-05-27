@@ -1,42 +1,45 @@
 <template>
-    <div class="wallet-account-wrapper __wrapper">
-        <account-head class="account_head"></account-head>
-        <TokenFilter
-            @newFilter="
-                val => {
-                    filterObj = val;
-                }
-            "
-        ></TokenFilter>
-        <div class="token-list">
-            <div class="token__head">
-                <div class="col">代币名称</div>
-                <div class="col">钱包余额</div>
-                <div class="col">钱包待接收金额</div>
-                <div class="col">钱包跨链网关</div>
-                <div class="col">交易所总余额度</div>
-                <div class="col">交易所可用余额</div>
-                <div class="col">
-                    <AssetSwitch v-model="assetType" class="asset-switch" />
+    <page-layout>
+        <div class="wallet-account-wrapper">
+            <account-head class="account_head"></account-head>
+            <TokenFilter
+                @newFilter="
+                    val => {
+                        filterObj = val;
+                    }
+                "
+            ></TokenFilter>
+            <div class="token-list">
+                <div class="token__head">
+                    <div class="col">代币名称</div>
+                    <div class="col">钱包余额</div>
+                    <div class="col">钱包待接收金额</div>
+                    <div class="col">钱包跨链网关</div>
+                    <div class="col">交易所总余额度</div>
+                    <div class="col">交易所可用余额</div>
+                    <div class="col">
+                        <AssetSwitch v-model="assetType" class="asset-switch" />
+                    </div>
                 </div>
+                <tokenCard
+                    v-for="token in nativeTokenList"
+                    :key="token.tokenId"
+                    :token="token"
+                    :assetType="assetType"
+                ></tokenCard>
+                <tokenCard
+                    v-for="token in crossChainTokenList"
+                    :key="`_${token.tokenId}`"
+                    :token="token"
+                    :assetType="assetType"
+                ></tokenCard>
             </div>
-            <tokenCard
-                v-for="token in nativeTokenList"
-                :key="token.tokenId"
-                :token="token"
-                :assetType="assetType"
-            ></tokenCard>
-            <tokenCard
-                v-for="token in crossChainTokenList"
-                :key="`_${token.tokenId}`"
-                :token="token"
-                :assetType="assetType"
-            ></tokenCard>
         </div>
-    </div>
+    </page-layout>
 </template>
 
 <script>
+import pageLayout from 'components/pageLayout/index';
 import syncBlock from 'components/syncBlock';
 import tokenCard from './tokenCard';
 import accountHead from './head';
@@ -45,6 +48,7 @@ import { gateStorage } from 'services/gate';
 import TokenFilter from './filter';
 import { debounce } from 'lodash';
 import AssetSwitch from './assetSwitch';
+
 const filterFunc = filterObj => t => {
     if (!filterObj) {
         return true;
@@ -58,7 +62,7 @@ const filterFunc = filterObj => t => {
     return !(NOTMatchNoZero || NOTMatchFilterKey);
 };
 export default {
-    components: { accountHead, syncBlock, tokenCard, TokenFilter, AssetSwitch },
+    components: { pageLayout, accountHead, syncBlock, tokenCard, TokenFilter, AssetSwitch },
     data() {
         return {
             isShowTrans: false,
@@ -124,21 +128,23 @@ export default {
 @import "assets/scss/vars.scss";
 @import "./tokenCard/colWidth.scss";
 
-.wallet-account-wrapper.__wrapper {
-    padding-top: 0;
-}
-
 .account_head {
     position: relative;
     text-align: center;
     width: 100%;
-    margin-top: 20px;
+    margin: 10px;
+    box-shadow: 0px 2px 10px 1px rgba(176,192,237,0.32);
+    border-radius: 2px;
 }
 
 .token-list {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin: 10px;
+    box-shadow: 0px 2px 10px 1px rgba(176,192,237,0.32);
+    border-radius: 2px;
+
     .token__head {
         display: flex;
         width: 100%;

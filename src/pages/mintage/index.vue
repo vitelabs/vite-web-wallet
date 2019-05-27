@@ -1,95 +1,98 @@
 <template>
-    <div class="mintage-wrapper">
-        <div class="order-row-title">decimals</div>
-        <vite-input v-model="decimals"></vite-input>
+    <page-layout>
+        <div class="mintage-wrapper">
+            <div class="order-row-title">decimals</div>
+            <vite-input v-model="decimals"></vite-input>
 
-        <div class="order-row-title">isReIssuable</div>
-        <div class="select-icon-wrapper __pointer" @click="toogleIsReIssuable(true)">
-            <span class="select-icon" :class="{
-                active: isReIssuable
-            }"></span>true
+            <div class="order-row-title">isReIssuable</div>
+            <div class="select-icon-wrapper __pointer" @click="toogleIsReIssuable(true)">
+                <span class="select-icon" :class="{
+                    active: isReIssuable
+                }"></span>true
+            </div>
+            <div class="select-icon-wrapper __pointer" @click="toogleIsReIssuable(false)">
+                <span class="select-icon" :class="{
+                    active: !isReIssuable
+                }"></span>false
+            </div>
+
+            <div class="order-row-title">maxSupply</div>
+            <vite-input v-model="maxSupply"></vite-input>
+
+            <div class="order-row-title">ownerBurnOnly</div>
+            <div class="select-icon-wrapper __pointer" @click="toogleOwnerBurnOnly(true)">
+                <span class="select-icon" :class="{
+                    active: ownerBurnOnly
+                }"></span>true
+            </div>
+            <div class="select-icon-wrapper __pointer" @click="toogleOwnerBurnOnly(false)">
+                <span class="select-icon" :class="{
+                    active: !ownerBurnOnly
+                }"></span>false
+            </div>
+
+            <div class="order-row-title">totalSupply</div>
+            <vite-input v-model="totalSupply"></vite-input>
+
+            <div class="order-row-title">tokenName</div>
+            <vite-input v-model="tokenName"></vite-input>
+
+            <div class="order-row-title">tokenSymbol</div>
+            <vite-input v-model="tokenSymbol"></vite-input>
+
+            <div class="__btn_all_in btn" :class="{
+                'unuse': !canMintage
+            }" @click="mintage">mintage</div>
+
+            <div class="__btn_all_in btn" @click="getOwnerToken">Get owner token list</div>
+
+            <div class="list-wrapper">
+                <table-list :headList="[{
+                    class: 'mintage-table-big-item',
+                    text: 'tokenId',
+                    cell: 'tokenId'
+                },{
+                    class: 'mintage-table-small-item',
+                    text: 'decimals',
+                    cell: 'decimals'
+                },{
+                    class: 'mintage-table-small-item',
+                    text: 'isReIssuable',
+                    cell: 'isReIssuable'
+                },{
+                    class: 'mintage-table-big-item',
+                    text: 'maxSupply',
+                    cell: 'maxSupply'
+                },{
+                    class: 'mintage-table-small-item',
+                    text: 'ownerBurnOnly',
+                    cell: 'ownerBurnOnly'
+                },{
+                    class: 'mintage-table-big-item',
+                    text: 'totalSupply',
+                    cell: 'totalSupply'
+                },{
+                    class: 'mintage-table-big-item',
+                    text: 'tokenName',
+                    cell: 'tokenName'
+                },{
+                    class: 'mintage-table-big-item',
+                    text: 'tokenSymbol',
+                    cell: 'tokenSymbol'
+                }]" :contentList="tokenList"></table-list>
+            </div>
         </div>
-        <div class="select-icon-wrapper __pointer" @click="toogleIsReIssuable(false)">
-            <span class="select-icon" :class="{
-                active: !isReIssuable
-            }"></span>false
-        </div>
-
-        <div class="order-row-title">maxSupply</div>
-        <vite-input v-model="maxSupply"></vite-input>
-
-        <div class="order-row-title">ownerBurnOnly</div>
-        <div class="select-icon-wrapper __pointer" @click="toogleOwnerBurnOnly(true)">
-            <span class="select-icon" :class="{
-                active: ownerBurnOnly
-            }"></span>true
-        </div>
-        <div class="select-icon-wrapper __pointer" @click="toogleOwnerBurnOnly(false)">
-            <span class="select-icon" :class="{
-                active: !ownerBurnOnly
-            }"></span>false
-        </div>
-
-        <div class="order-row-title">totalSupply</div>
-        <vite-input v-model="totalSupply"></vite-input>
-
-        <div class="order-row-title">tokenName</div>
-        <vite-input v-model="tokenName"></vite-input>
-
-        <div class="order-row-title">tokenSymbol</div>
-        <vite-input v-model="tokenSymbol"></vite-input>
-
-        <div class="__btn_all_in btn" :class="{
-            'unuse': !canMintage
-        }" @click="mintage">mintage</div>
-
-        <div class="__btn_all_in btn" @click="getOwnerToken">Get owner token list</div>
-
-        <div class="list-wrapper">
-            <table-list :headList="[{
-                class: 'mintage-table-big-item',
-                text: 'tokenId',
-                cell: 'tokenId'
-            },{
-                class: 'mintage-table-small-item',
-                text: 'decimals',
-                cell: 'decimals'
-            },{
-                class: 'mintage-table-small-item',
-                text: 'isReIssuable',
-                cell: 'isReIssuable'
-            },{
-                class: 'mintage-table-big-item',
-                text: 'maxSupply',
-                cell: 'maxSupply'
-            },{
-                class: 'mintage-table-small-item',
-                text: 'ownerBurnOnly',
-                cell: 'ownerBurnOnly'
-            },{
-                class: 'mintage-table-big-item',
-                text: 'totalSupply',
-                cell: 'totalSupply'
-            },{
-                class: 'mintage-table-big-item',
-                text: 'tokenName',
-                cell: 'tokenName'
-            },{
-                class: 'mintage-table-big-item',
-                text: 'tokenSymbol',
-                cell: 'tokenSymbol'
-            }]" :contentList="tokenList"></table-list>
-        </div>
-    </div>
+    </page-layout>
 </template>
 
 <script>
+import pageLayout from 'components/pageLayout/index';
 import viteInput from 'components/viteInput';
 import tableList from 'components/tableList.vue';
 import sendTx from 'utils/sendTx';
 
 export default {
-    components: { viteInput, tableList },
+    components: { viteInput, tableList, pageLayout },
     created() {
         this.getOwnerToken();
     },
