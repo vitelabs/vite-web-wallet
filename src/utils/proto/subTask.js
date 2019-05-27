@@ -29,7 +29,7 @@ export class subTask extends timer {
 
         this.loopFunc = isForce => {
             // Every loop will update subKey
-            console.log('[subTask] Every loop will update subKey');
+            // console.log('[subTask] Every loop will update subKey');
             this.subKey = wsServicesMap[this.key](this.args);
 
             if (isForce) {
@@ -127,11 +127,7 @@ export class subTask extends timer {
             if (this.subKey !== currentKey) {
                 return;
             }
-
-            // OrderQuery: http-requtn-data should be same as ws-return-data
-            if (this.key.indexOf('orderQuery') !== -1) {
-                data = data.orders || [];
-            }
+            // console.log(this.key, data);
             this.callback({ args, data });
         });
     }

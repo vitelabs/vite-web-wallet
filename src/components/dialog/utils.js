@@ -33,7 +33,6 @@ const mixin = {
     },
     computed: {
         Title() {
-            console.log(this);
             return getValue.call(this, 'title', '');
         },
         ShowClose() {

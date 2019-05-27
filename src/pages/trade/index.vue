@@ -16,6 +16,8 @@
                        :isEmbed="true"
                        :filterObj="{
                            symbol: activeTxPair.symbol,
+                           quoteTokenSymbol: activeTxPair.quoteTokenSymbol,
+                           tradeTokenSymbol: activeTxPair.tradeTokenSymbol,
                            limit: 10,
                            offset: 0 }">
             </openOrder>
@@ -23,6 +25,8 @@
                           :isEmbed="true"
                           :filterObj="{
                               symbol: activeTxPair.symbol,
+                              quoteTokenSymbol: activeTxPair.quoteTokenSymbol,
+                              tradeTokenSymbol: activeTxPair.tradeTokenSymbol,
                               limit: 10,
                               offset: 0 }">
             </historyOrder>

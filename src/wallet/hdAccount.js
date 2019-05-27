@@ -2,7 +2,7 @@ import { keystore, constant, hdAddr, account } from '@vite/vitejs';
 import viteCrypto from 'testwebworker';
 import statistics from 'utils/statistics';
 import $ViteJS from 'utils/viteClient';
-import { getAddr, addHdAccount, setAcc, setAddr, setLastAcc } from './store';
+import { getAddr, addHdAccount, setAcc, getAcc, setAccInfo, setAddr, setLastAcc } from './store';
 
 const { LangList } = constant;
 const maxAddrNum = 10;
@@ -57,13 +57,23 @@ export class HDAccount {
         });
     }
 
-    saveOnAcc() {
-
+    saveOnAcc(key, info) {
+        if (!this.id) {
+            return;
+        }
+        setAccInfo(this.id, key, info);
     }
 
-    saveOnActiveAddr() {
-
+    getAccInfo() {
+        if (!this.id) {
+            return;
+        }
+        return getAcc(this.id);
     }
+
+    // saveOnActiveAddr() {
+    //     setAddrInfo()
+    // }
 
     verify(pass) {
         if (!this.pass) {

@@ -13,13 +13,11 @@
 </template>
 
 <script>
-import localStorage from 'utils/store';
-
-const FirstKey = 'firstVisit';
+import { constant, storage } from 'utils/store';
 
 export default {
     mounted() {
-        this.isFirst = !localStorage.getItem(FirstKey);
+        this.isFirst = !storage.getItem(constant.FirstKey);
     },
     data() {
         return { isFirst: false };
@@ -27,7 +25,7 @@ export default {
     methods: {
         close() {
             this.isFirst = false;
-            localStorage.setItem(FirstKey, true);
+            storage.setItem(constant.FirstKey, true);
         }
     }
 };
