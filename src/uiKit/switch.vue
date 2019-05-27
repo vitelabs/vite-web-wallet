@@ -77,59 +77,59 @@ export default {
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
 .switch-wrapper {
-  color: #73767a;
-  font-family: $font-bold;
-  font-size: 14px;
-  .list-title {
-    position: relative;
-    box-sizing: border-box;
-    border-radius: 2px;
-    padding: 0 8px;
-    display:flex;
-    border-radius: 2px;
-    border: 1px solid rgba(212, 222, 231, 1);
-    &:after {
-      content: "";
-      display: inline-block;
-      width: 16px;
-      height: 16px;
-      margin-bottom: -2px;
-      background: url("~assets/imgs/addr_switch.svg");
-      background-size: 16px 16px;
+    color: #73767a;
+    font-family: $font-bold;
+    font-size: 14px;
+    .list-title {
+        position: relative;
+        box-sizing: border-box;
+        border-radius: 2px;
+        padding: 0 8px;
+        display: flex;
+        border-radius: 2px;
+        border: 1px solid rgba(212, 222, 231, 1);
+        &:after {
+            content: "";
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            margin-bottom: -2px;
+            background: url("~assets/imgs/addr_switch.svg");
+            background-size: 16px 16px;
+        }
+        &.not-allowed {
+            &:after {
+                display: none;
+            }
+        }
+        &.down {
+            &:after {
+                transform: rotateX(0deg);
+            }
+        }
+        &.up {
+            &:after {
+                transform: rotateX(180deg);
+            }
+        }
     }
-    &.not-allowed {
-      &:after {
-        display: none;
-      }
+    .list {
+        position: absolute;
+        z-index: 100;
+        max-height: 220px;
+        overflow: auto;
+        background: rgba(255, 255, 255, 1);
+        box-shadow: 0px 5px 10px 0px rgba(176, 192, 237, 0.69);
+        margin-top: 10px;
+        word-break: break-all;
+        .item {
+            box-sizing: border-box;
+            padding: 8px 12px;
+            line-height: 16px;
+            &:hover {
+                background: rgba(75, 116, 255, 0.1);
+            }
+        }
     }
-    &.down {
-      &:after {
-        transform: rotateX(0deg);
-      }
-    }
-    &.up {
-      &:after {
-        transform: rotateX(180deg);
-      }
-    }
-  }
-  .list {
-    position: absolute;
-    z-index: 100;
-    max-height: 220px;
-    overflow: auto;
-    background: rgba(255, 255, 255, 1);
-    box-shadow: 0px 5px 10px 0px rgba(176, 192, 237, 0.69);
-    margin-top: 10px;
-    word-break: break-all;
-    .item {
-      box-sizing: border-box;
-      padding: 8px 12px;
-      line-height: 16px;
-      &:hover {
-        background: rgba(75, 116, 255, 0.1);
-      }
-    }
-  }
 }
 </style>
