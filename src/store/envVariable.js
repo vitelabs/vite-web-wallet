@@ -1,10 +1,8 @@
-import localStorage from 'utils/store';
+import { storage as localStorage, constant } from 'utils/store';
 
-// [TODO] utils/store 统一
-
-const currencyKey = 'currency';
-const autoLogoutKey = 'autoLogoutTime';
-const HoldPwdKey = 'isHoldPWD';
+const currencyKey = constant.CurrencyKey;
+const autoLogoutKey = constant.AutoLogoutKey;
+const LangKey = constant.LangKey;
 
 // coins: {
 //     en: 'usd',
@@ -15,7 +13,6 @@ const state = {
     clientStatus: -1,
     lang: '',
     currency: localStorage.getItem(currencyKey) || '',
-    isHoldPWD: !!localStorage.getItem(HoldPwdKey),
     autoLogoutTime: localStorage.getItem(autoLogoutKey) || 5,
     lastPage: ''
 };
@@ -25,7 +22,7 @@ const mutations = {
         state.clientStatus = clientStatus;
     },
     setLang(state, lang) {
-        localStorage.setItem('lang', lang);
+        localStorage.setItem(LangKey, lang);
         state.lang = lang;
         if (!state.currency) {
             state.currency = lang === 'zh' ? 'cny' : 'usd';
@@ -45,10 +42,6 @@ const mutations = {
     },
     setLastPage(state, lastPage) {
         state.lastPage = lastPage;
-    },
-    setHoldPwd(state, isHoldPWD) {
-        state.isHoldPWD = !!isHoldPWD;
-        localStorage.setItem(HoldPwdKey, state.isHoldPWD);
     }
 };
 

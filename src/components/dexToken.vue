@@ -23,7 +23,7 @@
                 <!-- <span class="link __pointer" @click="goNet">{{ $t('trade.dexToken.link') }}</span> -->
             </div>
             <div @click="toggleTokenList" class="market input-wrapper __pointer">
-                {{ token ? token.name : '' }}<div class="down-icon"></div>
+                {{ token ? token.symbol : '' }}<div class="down-icon"></div>
             </div>
             <div v-show="isShowTokenList" class="market-list">
                 <vite-input ref="searchInput" class="token-wrapper" v-model="tokenName"
@@ -231,8 +231,8 @@ export default {
 
             sendTx('dexFundNewMarket', {
                 amount: BigNumber.toMin(spend, this.viteTokenInfo.decimals),
-                tradeToken: this.token.token,
-                quoteToken: this.market.token
+                tradeToken: this.token.tokenId,
+                quoteToken: this.market.tokenId
             }).then(() => {
                 newMarketSuccess();
             }).powStarted(() => {

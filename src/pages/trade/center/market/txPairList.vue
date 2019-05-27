@@ -14,7 +14,7 @@
                     <span class="describe">{{ `${txPair.tradeTokenSymbol }/${ txPair.quoteTokenSymbol}` }}</span>
                 </span>
                 <span class="__center-tb-item">
-                    {{ txPair.price ? formatNum(txPair.price, txPair.pricePrecision) : '--' }}
+                    {{ txPair.closePrice ? formatNum(txPair.closePrice, txPair.pricePrecision) : '--' }}
                 </span>
                 <span v-show="showCol === 'updown'" class="__center-tb-item percent" :class="{
                     'up': +txPair.priceChange > 0,
@@ -65,6 +65,9 @@ export default {
         };
     },
     computed: {
+        isShowFavorite() {
+            return this.$store.state.exchangeMarket.isShowFavorite;
+        },
         activeSymbol() {
             return this.activeTxPair ? this.activeTxPair.symbol || null : null;
         },
@@ -153,6 +156,10 @@ export default {
 
                 return -1;
             };
+
+            if (this.isShowFavorite && this.currentRule !== 'symbol') {
+                return list;
+            }
 
             return list.sort((a, b) => {
                 switch (this.currentRule) {

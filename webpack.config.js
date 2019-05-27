@@ -20,8 +20,6 @@ console.log(development.indexOf(process.env.NODE_ENV) > -1 ? 'development' : 'pr
 
 let webpackConfig = {
     mode: development.indexOf(process.env.NODE_ENV) > -1 ? 'development' : 'production',
-    devtool: 'source-map',
-
     entry: { index: path.join(SRC_PATH, '/index.js') },
     output: {
         path: STATIC_PATH,
@@ -89,6 +87,7 @@ let webpackConfig = {
                     loader: 'babel-loader',
                     options: {
                         presets: ['@babel/preset-env']
+                        // [TODO] Async Route
                         // plugins: ['syntax-dynamic-import']
                     }
                 }
@@ -132,6 +131,9 @@ if (process.env.NODE_ENV === 'test') {
 }
 if (process.env.NODE_ENV === 'dexTestNet') {
     webpackConfig = merge(webpackConfig, dexTestNetConfig);
+}
+if (process.env.NODE_ENV !== 'production') {
+    webpackConfig.devtool = 'source-map';
 }
 
 module.exports = webpackConfig;

@@ -27,6 +27,11 @@ const actions = {
             if (getters.exActiveTxPair.symbol !== args.symbol) {
                 return;
             }
+
+            if (data && data.trade) {
+                data = data.trade || [];
+            }
+
             commit('exSetLatestTxList', data);
             commit('exSetLatestTxLoading', false);
         }, latestTxTime);

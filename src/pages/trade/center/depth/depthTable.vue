@@ -85,7 +85,7 @@ export default {
             if (!this[type]) {
                 return BigNumber.formatNum(num, fix);
             }
-            return BigNumber.formatNum(num, this[type].tokenDigit, fix);
+            return BigNumber.formatNum(num, this[type].tokenDecimals, fix);
         },
         getWidth(item) {
             const width = BigNumber.dividedToNumber(item.quantity, this.maxQuantity, 2).toString() * 100;
@@ -94,20 +94,20 @@ export default {
         clickRow(data, index) {
             const price = data.price;
             const quantity = data.quantity;
-            const txSide = this.dataType === 'buy' ? 0 : 1;
+            const side = this.dataType === 'buy' ? 0 : 1;
 
             let num = 0;
-            if (txSide) {
+            if (side) {
                 for (let i = index; i < this.depthData.length; i++) {
-                    num = BigNumber.plus(num, this.depthData[i].quantity, this.ftoken.tokenDigit);
+                    num = BigNumber.plus(num, this.depthData[i].quantity, this.ftoken.tokenDecimals);
                 }
             } else {
                 for (let i = 0; i <= index; i++) {
-                    num = BigNumber.plus(num, this.depthData[i].quantity, this.ftoken.tokenDigit);
+                    num = BigNumber.plus(num, this.depthData[i].quantity, this.ftoken.tokenDecimals);
                 }
             }
 
-            this.$store.commit('exSetActiveTx', { price, quantity, txSide, num });
+            this.$store.commit('exSetActiveTx', { price, quantity, side, num });
         }
     }
 };

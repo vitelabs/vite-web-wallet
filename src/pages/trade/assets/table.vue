@@ -75,6 +75,7 @@ import { chargeDetail, rateToken, tokenDetail } from 'services/trade';
 import viteInput from 'components/viteInput';
 import confirm from 'components/confirm.vue';
 import alert from '../components/alert.vue';
+import { initPwd } from 'components/password/index.js';
 
 const loopTime = 2 * 60 * 60 * 1000;
 let rateTimer = null;
@@ -330,7 +331,7 @@ export default {
             };
 
             this.closeNumConfirm();
-            this.acc.initPwd({
+            initPwd({
                 submitTxt: this.$t(`tradeAssets.table.rowMap.${ c.type }`),
                 cancelTxt: this.$t('tradeAssets.pwdConfirm.cancelTxt'),
                 submit: () => {

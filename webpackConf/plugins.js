@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+// const CircularDependencyPlugin = require('circular-dependency-plugin');
 
 const packJson = require('../package.json');
 const SRC_PATH = path.join(__dirname, '../src');
@@ -11,8 +12,8 @@ const Buffer_Path = path.join(__dirname, '../node_modules/buffer/index.js');
 
 const goViteServer = {
     production: '\'wss://api.vitewallet.com/ws\'',
-    test: '\'wss://premainnet.vitewallet.com/test/ws\'',
-    dev: '\'wss://premainnet.vitewallet.com/test/ws\'',
+    test: '\'ws://140.143.8.170:41423\'',
+    dev: '\'ws://140.143.8.170:41423\'',
     dexTestNet: '\'wss://testnet.vitewallet.com/beta/ws\''
 };
 const viteNet = {
@@ -85,6 +86,14 @@ const plugins = [
     new webpack.NormalModuleReplacementPlugin(/\/buffer\//, function (resource) {
         resource.request = Buffer_Path;
     })
+    // new CircularDependencyPlugin({
+    //     // exclude detection of files based on a RegExp
+    //     exclude: /node_modules/,
+    //     // add errors to webpack instead of warnings
+    //     failOnError: true,
+    //     // set the current working directory for displaying module paths
+    //     cwd: process.cwd()
+    // })
 ];
 
 (process.env.analyzer === 'true') && plugins.push(new BundleAnalyzerPlugin());

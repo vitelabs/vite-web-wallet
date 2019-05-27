@@ -33,7 +33,7 @@
             function fetch(params) {
                 const xhr = new XMLHttpRequest();
 
-                xhr.open('POST', location.origin + '/test/api/transferdetail/list', true);
+                xhr.open('POST', location.origin + '/api/transferdetail/list', true);
                 xhr.setRequestHeader('content-type', 'application/json; charset=utf-8');
                 xhr.send(JSON.stringify(params));
 
