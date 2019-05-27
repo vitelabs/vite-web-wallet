@@ -1,32 +1,35 @@
 <template>
-    <div class="setting-wrapper">
-        <sec-title :isShowHelp="false"></sec-title>
-        <div class="content-wrapper">
-            <div class="content">
-                <div v-if="!!currHDAcc" class="big-title">{{ $t('setting.addrList') }}</div>
-                <accList v-if="!!currHDAcc"></accList>
+    <page-layout>
+        <div class="setting-wrapper">
+            <sec-title :isShowHelp="false"></sec-title>
+            <div class="content-wrapper">
+                <div class="content">
+                    <div v-if="!!currHDAcc" class="big-title">{{ $t('setting.addrList') }}</div>
+                    <accList v-if="!!currHDAcc"></accList>
 
-                <div v-if="!!isLogin" class="big-title">{{ $t('setting.secure') }}</div>
-                <mnemonic v-if="!!isLogin"></mnemonic>
-                <hold-pwd v-if="!!isLogin" class="item"></hold-pwd>
-            </div>
+                    <div v-if="!!isLogin" class="big-title">{{ $t('setting.secure') }}</div>
+                    <mnemonic v-if="!!isLogin"></mnemonic>
+                    <hold-pwd v-if="!!isLogin" class="item"></hold-pwd>
+                </div>
 
-            <div class="area">
-                <div class="big-title">{{ $t('setting.config') }}</div>
-                <auto-logout v-if="!!isLogin"></auto-logout>
-                <lang></lang>
-                <currency></currency>
-            </div>
+                <div class="area">
+                    <div class="big-title">{{ $t('setting.config') }}</div>
+                    <auto-logout v-if="!!isLogin"></auto-logout>
+                    <lang></lang>
+                    <currency></currency>
+                </div>
 
-            <div class="area">
-                <div class="big-title">{{ $t('setting.netInfo') }}</div>
-                <net-info></net-info>
+                <div class="area">
+                    <div class="big-title">{{ $t('setting.netInfo') }}</div>
+                    <net-info></net-info>
+                </div>
             </div>
         </div>
-    </div>
+    </page-layout>
 </template>
 
 <script>
+import pageLayout from 'components/pageLayout/index';
 import secTitle from 'components/secTitle';
 import holdPwd from 'components/password/holdPwd.vue';
 import netInfo from './netInfo';
@@ -39,6 +42,7 @@ import { StatusMap } from 'wallet';
 
 export default {
     components: {
+        pageLayout,
         secTitle,
         netInfo,
         lang,

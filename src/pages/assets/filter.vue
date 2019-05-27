@@ -55,7 +55,7 @@ export default {
 .filter-root {
     display: flex;
     align-items: flex-end;
-    margin: 10px 0;
+    margin: 10px 10px;
     height: 34px;
 
     .filter {

@@ -4,8 +4,10 @@
 
         <div class="page-content">
             <div class="page-scroll-wrapper">
-                <second-menu v-show="secondMenuList && secondMenuList.length"
-                             :go="go" class="second-menu" :tabList="secondMenuList">
+                <second-menu v-show="active.indexOf('setting') === -1"
+                             :go="go" class="second-menu"
+                             :tabList="secondMenuList"
+                             :class="{ 'assets': active.indexOf('assets') === 0 }" >
                 </second-menu>
                 <div class="page-wrapper">
                     <slot></slot>
@@ -16,40 +18,42 @@
 </template>
 
 <script>
-import sidebar from 'components/sidebar';
-import secondMenu from 'components/secondMenu';
 import { StatusMap } from 'wallet';
+import sidebar from './sidebar';
+import secondMenu from './secondMenu';
+import { sidebarMenuList, secondMenuList } from './config';
 
 let autoLogout = null;
 
 export default {
     components: { sidebar, secondMenu },
-    props: {
-        active: {
-            type: String,
-            default: ''
-        }
-    },
     mounted() {
+        this.$router.afterEach(to => {
+            this.active = to.name;
+        });
         this.setMenuList();
     },
     data() {
-        return { menuList: [] };
+        return {
+            active: this.$route.name,
+            menuList: [].concat(sidebarMenuList)
+        };
     },
     computed: {
         isLogin() {
             return this.$store.state.wallet.status === StatusMap.UNLOCK;
         },
         secondMenuList() {
+            let list = [];
             if (this.active.indexOf('trade') === 0) {
-                return [ 'trade', 'tradeAssets', 'tradeOpenOrders', 'tradeOrderHistory' ];
+                list = secondMenuList.trade;
+            } else if (this.active.indexOf('assets') === 0) {
+                list = secondMenuList.assets;
+            } else if (this.active.indexOf('wallet') === 0) {
+                list = secondMenuList.wallet;
             }
 
-            if (this.active.indexOf('wallet') !== 0) {
-                return [];
-            }
-
-            const list = [ 'wallet', 'walletQuota', 'walletSBP', 'walletVote', 'walletTransList' ];
+            list = [].concat(list);
             this.isLogin && list.push('walletConversion');
             return list;
         },
@@ -74,7 +78,7 @@ export default {
     },
     methods: {
         setMenuList() {
-            const menuList = [ 'wallet', 'trade', 'setting' ];
+            const menuList = [].concat(sidebarMenuList);
             menuList.push(this.isLogin ? 'logout' : 'login');
             this.menuList = menuList;
         },
@@ -131,6 +135,9 @@ export default {
 }
 .wallet .page-layout-wrapper .page-content .second-menu {
     margin: 0 30px;
+    &.assets {
+        margin: 0 10px;
+    }
 }
 
 .page-layout-wrapper {

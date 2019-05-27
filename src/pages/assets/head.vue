@@ -247,7 +247,6 @@ export default {
     flex-wrap: nowrap;
     justify-content: space-between;
     height: 124px;
-    min-width: 1300px;
     align-items: center;
     .head__item {
         border-right: 1px solid rgba(227, 235, 245, 0.6);
