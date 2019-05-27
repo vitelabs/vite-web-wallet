@@ -60,7 +60,7 @@ const getters = {
             balance[k].availableExAmount = state.balanceList[k].available;
             balance[k].available = BigNumber.toBasic(state.balanceList[k].available, state.balanceList[k].tokenInfo.decimals);
             balance[k].lock = BigNumber.toBasic(state.balanceList[k].locked, state.balanceList[k].tokenInfo.decimals);
-            balance[k].totalExAmount = BigNumber.toBasic(BigNumber.plus(state.balanceList[k].available, state.balanceList[k].locked), state.balanceList[k].tokenInfo.decimals);
+            balance[k].totalExAmount = BigNumber.plus(state.balanceList[k].available, state.balanceList[k].locked, 0);
             balance[k].tokenInfo = state.balanceList[k].tokenInfo;
         });
 

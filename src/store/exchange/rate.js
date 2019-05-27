@@ -16,7 +16,8 @@ const mutations = {
 };
 
 const actions = {
-    startLoopExchangeRate({ commit }) {
+    startLoopExchangeRate({ commit, dispatch }) {
+        dispatch('stopLoopExchangeRate');
         const f = () => rateFiat().then(data => {
             commit('setExchangeRate', data);
         });

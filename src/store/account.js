@@ -20,16 +20,14 @@ const mutations = {
         }
 
         state.balance = payload.balance || {};
-        state.balance.balanceInfos
-      = state.balance && state.balance.tokenBalanceInfoMap
-                ? state.balance.tokenBalanceInfoMap
-                : {};
+        state.balance.balanceInfos = state.balance && state.balance.tokenBalanceInfoMap
+            ? state.balance.tokenBalanceInfoMap
+            : {};
 
         state.onroad = payload.onroad || {};
-        state.onroad.balanceInfos
-      = state.onroad && state.onroad.tokenBalanceInfoMap
-                ? state.onroad.tokenBalanceInfoMap
-                : {};
+        state.onroad.balanceInfos = state.onroad && state.onroad.tokenBalanceInfoMap
+            ? state.onroad.tokenBalanceInfoMap
+            : {};
     },
     commitClearBalance(state) {
         state.balance = { balanceInfos: {} };
@@ -37,7 +35,11 @@ const mutations = {
     }
 };
 const actions = {
-    startLoopBalance({ commit, dispatch, rootState }) {
+    startLoopBalance({
+        commit,
+        dispatch,
+        rootState
+    }) {
         dispatch('stopLoopBalance');
         balanceInfoInst = new timer(() => {
             const activeAcc = rootState.wallet.activeAcc;
@@ -66,7 +68,7 @@ const actions = {
 
 const getters = {
     balanceInfo(state) {
-    // -------- merge balance&onroad
+        // -------- merge balance&onroad
         const balanceInfo = Object.create(null);
         for (const tokenId in state.balance.balanceInfos) {
             const item = state.balance.balanceInfos[tokenId];
@@ -92,13 +94,10 @@ const getters = {
             const balance = bigNumber.toBasic(item.totalAmount, decimals);
 
             balanceInfo[tokenId] = balanceInfo[tokenId] || {};
-            balanceInfo[tokenId].tokenId
-        = balanceInfo[tokenId].tokenId || tokenInfo.tokenId;
+            balanceInfo[tokenId].tokenId = balanceInfo[tokenId].tokenId || tokenInfo.tokenId;
             balanceInfo[tokenId].fundFloat = balance;
-            balanceInfo[tokenId].decimals
-        = balanceInfo[tokenId].decimals || tokenInfo.decimals;
-            balanceInfo[tokenId].tokenSymbol
-        = balanceInfo[tokenId].tokenSymbol || tokenInfo.tokenSymbol;
+            balanceInfo[tokenId].decimals = balanceInfo[tokenId].decimals || tokenInfo.decimals;
+            balanceInfo[tokenId].tokenSymbol = balanceInfo[tokenId].tokenSymbol || tokenInfo.tokenSymbol;
             balanceInfo[tokenId].onroadNum = item.number;
         }
         return balanceInfo;
@@ -107,11 +106,11 @@ const getters = {
         const balanceInfo = getters.balanceInfo;
         const allToken = rootGetters.allTokensMap;
         const mapToken2Gate = rootGetters.mapToken2Gate;
-        const exBalance = rootGetters.exBalance;
+        const exBalance = rootGetters.exBalanceList;
         // ------------------- show default token
         const list = Object.keys(defaultTokenMap).map(i => {
             const {
-                avaliableExAmount = '',
+                availableExAmount = '',
                 totalExAmount = '',
                 onroadNum = '',
                 totalAmount = '',
@@ -130,11 +129,17 @@ const getters = {
             } = Object.assign({},
                 defaultTokenMap[i],
                 balanceInfo[i] || {},
-                allToken[i] || {},
-                { gateInfo: { url: mapToken2Gate[i] && mapToken2Gate[i].url } },
-                exBalance);
+                allToken[i] || {}, { gateInfo: { url: mapToken2Gate[i] && mapToken2Gate[i].url } },
+                exBalance[i]);
+            const rate = rootState.exchangeRate.rateMap[i] && rootState.exchangeRate.rateMap[i][rootState.env.currency];
+            const totalExAsset = rate ? bigNumber.multi(bigNumber.toBasic(totalExAmount, decimals), rate) : 0;
+            const walletAsset = rate ? bigNumber.multi(bigNumber.toBasic(totalAmount, decimals), rate) : 0;
+            const totalAsset = bigNumber.plus(totalExAsset, walletAsset);
             return {
-                avaliableExAmount,
+                totalAsset,
+                totalExAsset,
+                walletAsset,
+                availableExAmount,
                 totalExAmount,
                 onroadNum,
                 totalAmount,
@@ -162,11 +167,11 @@ const getters = {
         const balanceInfo = getters.balanceInfo;
         const allToken = rootGetters.allTokensMap;
         const mapToken2Gate = rootGetters.mapToken2Gate;
-        const exBalance = rootGetters.exBalance;
+        const exBalance = rootGetters.exBalanceList;
 
         return Object.keys(mapToken2Gate).map(i => {
             const {
-                avaliableExAmount = '',
+                availableExAmount = '',
                 totalExAmount = '',
                 onroadNum = '',
                 tokenName = '',
@@ -182,9 +187,22 @@ const getters = {
                 icon,
                 type = 'OFFICAL_GATE',
                 gateInfo = {}
-            } = Object.assign({}, balanceInfo[i] || {}, allToken[i] || {}, { gateInfo: { url: mapToken2Gate[i].url, gataway: mapToken2Gate[i].gataway, exBalance } });
+            } = Object.assign({}, balanceInfo[i] || {}, allToken[i] || {}, {
+                gateInfo: {
+                    url: mapToken2Gate[i].url,
+                    gataway: mapToken2Gate[i].gataway
+                }
+            }, exBalance[i]);
+            const rate = rootState.exchangeRate.rateMap[i] && rootState.exchangeRate.rateMap[i][rootState.env.currency];
+            const totalExAsset = rate ? bigNumber.multi(bigNumber.toBasic(totalExAmount, decimals), rate) : 0;
+            const walletAsset = rate ? bigNumber.multi(bigNumber.toBasic(totalAmount, decimals), rate) : 0;
+            const totalAsset = bigNumber.plus(totalExAsset, walletAsset);
+
             return {
-                avaliableExAmount,
+                totalAsset,
+                totalExAsset,
+                walletAsset,
+                availableExAmount,
                 totalExAmount,
                 onroadNum,
                 tokenName,
@@ -206,7 +224,7 @@ const getters = {
     userStorageTokenList(state, getters, rootState, rootGetters) {
         const balanceInfo = getters.balanceInfo;
         const allToken = rootGetters.allTokensMap;
-        const exBalance = rootGetters.exBalance;
+        const exBalance = rootGetters.exBalanceList;
 
         // const mapToken2Gate = rootGetters.mapToken2Gate;
         // ------- show user defined gate
@@ -216,7 +234,7 @@ const getters = {
             .map(token => {
                 const i = token.tokenId;
                 const {
-                    avaliableExAmount = '',
+                    availableExAmount = '',
                     totalExAmount = '',
                     onroadNum = '',
                     tokenName = '',
@@ -232,9 +250,17 @@ const getters = {
                     icon,
                     type = 'THIRD_GATE',
                     gateInfo = {}
-                } = Object.assign({}, token, balanceInfo[i] || {}, allToken[i] || {}, exBalance);
+                } = Object.assign({}, token, balanceInfo[i] || {}, allToken[i] || {}, exBalance[i]);
+                const rate = rootState.exchangeRate.rateMap[i] && rootState.exchangeRate.rateMap[i][rootState.env.currency];
+                const totalExAsset = rate ? bigNumber.multi(bigNumber.toBasic(totalExAmount, decimals), rate) : 0;
+                const walletAsset = rate ? bigNumber.multi(bigNumber.toBasic(totalAmount, decimals), rate) : 0;
+                const totalAsset = bigNumber.plus(totalExAsset, walletAsset);
+
                 return {
-                    avaliableExAmount,
+                    totalAsset,
+                    totalExAsset,
+                    walletAsset,
+                    availableExAmount,
                     totalExAmount,
                     onroadNum,
                     tokenName,
@@ -262,17 +288,17 @@ const getters = {
         const balanceInfo = getters.balanceInfo;
         const allToken = rootGetters.allTokensMap;
         const mapToken2Gate = rootGetters.mapToken2Gate;
-        const exBalance = rootGetters.exBalance;
+        const exBalance = rootGetters.exBalanceList;
         const contains = [
             ...getters.userStorageTokenList,
             ...getters.defaultTokenList,
             ...getters.officalGateTokenList
         ].map(t => t.tokenId);
         return Object.keys(getters.balanceInfo)
-            .filter(i => !(!bigNumber.isEqual(getters.balanceInfo[i].totalAmount, 0) || (!bigNumber.isEqual(exBalance[i].totalExAmount, 0)) && contains.indexOf(i) === -1))
+            .filter(i => (!bigNumber.isEqual(getters.balanceInfo[i].totalAmount, 0) || !bigNumber.isEqual(exBalance[i].totalExAmount, 0)) && contains.indexOf(i) === -1)
             .map(i => {
                 const {
-                    avaliableExAmount = '',
+                    availableExAmount = '',
                     totalExAmount = '',
                     onroadNum = '',
                     tokenName = '',
@@ -289,9 +315,17 @@ const getters = {
                     type = 'THIRD_GATE',
                     gateInfo = {}
                 } = Object.assign({}, balanceInfo[i] || {}, allToken[i] || {}, { gateInfo: { url: mapToken2Gate[i] && mapToken2Gate[i].url } });
+                const rate = rootState.exchangeRate.rateMap[i] && rootState.exchangeRate.rateMap[i][rootState.env.currency];
+                const totalExAsset = rate ? bigNumber.multi(bigNumber.toBasic(totalExAmount, decimals), rate) : 0;
+                const walletAsset = rate ? bigNumber.multi(bigNumber.toBasic(totalAmount, decimals), rate) : 0;
+                const totalAsset = bigNumber.plus(totalExAsset, walletAsset);
+
                 return {
-                    avaliableExAmount,
+                    totalAsset,
+                    walletAsset,
                     totalExAmount,
+                    availableExAmount,
+                    totalExAsset,
                     onroadNum,
                     tokenName,
                     totalAmount,

@@ -660,6 +660,7 @@
         "title": "Funds",
         "search": "Please input token name",
         "operate": "Action",
+        "all":"All",
         "confirmTable": {
             "title":"Detail Records",
             "heads": [

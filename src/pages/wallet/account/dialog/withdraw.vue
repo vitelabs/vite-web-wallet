@@ -13,8 +13,8 @@ block content
     .block__title {{$t("tokenCard.withdraw.labels.amount")}}
         .err {{ammountErr}}
     .block__content
-        input(v-model="withdrawAmount" :placehodler="$t('tokenCard.withdraw.amountPlaceholder',{min})")
-        .withdraw-all(@click="withdrawAll") {{$t("tokenCard.withdraw.labels.all")}}
+        input(v-model="withdrawAmount" :placeholder="$t('tokenCard.withdraw.amountPlaceholder',{min})")
+        .all(@click="withdrawAll") {{$t("tokenCard.withdraw.labels.all")}}
     .block__title
         .tips-container {{$t("tokenCard.withdraw.labels.fee")}}
             i(class="tipsicon hoveraction" @click.self.stop="toggleTips")

@@ -12,7 +12,12 @@
                 <div class="col">钱包跨链网关</div>
                 <div class="col">交易所总余额度</div>
                 <div class="col">交易所可用余额</div>
-                <div class="col">资产估值</div>
+                <div class="col">
+                    <AssetSwitch
+                        v-model="assetType"
+                        class="asset-switch"
+                    />
+                </div>
             </div>
             <tokenCard
                 v-for="token in nativeTokenList"
@@ -35,13 +40,16 @@ import accountHead from './head';
 import { addTokenDialog } from './dialog';
 import { gateStorage } from 'services/gate';
 import TokenFilter from './filter';
+import { debounce } from 'lodash';
+import AssetSwitch from './assetSwitch';
 
 export default {
-    components: { accountHead, syncBlock, tokenCard, TokenFilter },
+    components: { accountHead, syncBlock, tokenCard, TokenFilter, AssetSwitch },
     data() {
         return {
             isShowTrans: false,
-            activeToken: null
+            activeToken: null,
+            assetType: 'TOTAL'
         };
     },
     watch: {
@@ -51,7 +59,10 @@ export default {
             }));
         }
     },
-
+    beforeMount() {
+        this.updateExBalance();
+        this.$store.dispatch('startLoopExchangeRate');
+    },
     computed: {
         nativeTokenList() {
             return [
@@ -80,6 +91,9 @@ export default {
         }
     },
     methods: {
+        updateExBalance: debounce(function () {
+            this.$store.dispatch('startLoopExchangeBalance');
+        }, 0.1),
         addToken() {
             addTokenDialog();
         },
@@ -96,36 +110,43 @@ export default {
 @import "./tokenCard/colWidth.scss";
 
 .wallet-account-wrapper.__wrapper {
-    padding-top: 0;
+  padding-top: 0;
 }
 
 .account-head-move {
-    width: 100%;
-    box-shadow: 0 2px 48px 1px rgba(176, 192, 237, 0.42);
+  width: 100%;
+  box-shadow: 0 2px 48px 1px rgba(176, 192, 237, 0.42);
 }
 
 .account_head {
-    position: relative;
-    text-align: center;
-    margin-top: 20px;
+  position: relative;
+  text-align: center;
+  margin-top: 20px;
 }
 
 .token-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .token__head {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    .token__head{
-        display: flex;
-        width: 100%;
-        justify-content: flex-start;
-        color: #5E6875;
-        border-bottom: 1px solid #C6CBD4;
-        background-color: #fff;
+    width: 100%;
+    justify-content: flex-start;
+    color: #5e6875;
+    border-bottom: 1px solid #c6cbd4;
+    background-color: #fff;
+    font-size: 12px;
+    .col {
+      @include colWidth;
+      .asset-switch {
+        color: #5e6875;
         font-size: 12px;
-        .col{
-            @include colWidth;
-            padding: 9px 40px 9px 36px;
+        font-family: $font-normal;
+        /deep/.list-title{
+            border:none;
         }
+      }
     }
+  }
 }
 </style>

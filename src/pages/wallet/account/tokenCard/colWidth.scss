@@ -1,4 +1,5 @@
 @mixin colWidth {
+    padding:7px;
   &:first-child {
     min-width: 70px;
     width: 10%;
