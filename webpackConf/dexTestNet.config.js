@@ -10,7 +10,7 @@ module.exports = {
                 secure: false
             },
             '/trade': {
-                target: 'http://localhost:8081',
+                target: 'https://vitex.vite.net',
                 pathRewrite: { '^/trade\w*': '' }
             }
         }

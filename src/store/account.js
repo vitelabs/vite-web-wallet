@@ -1,7 +1,7 @@
 import bigNumber from 'utils/bigNumber';
 import { timer } from 'utils/asyncFlow';
 import { StatusMap } from 'wallet';
-import { defaultTokenMap, OFFICAL_GATE_NAME } from 'utils/constant';
+import { defaultTokenMap } from 'utils/constant';
 import { gateStorage } from 'services/gate';
 import { constant } from '@vite/vitejs';
 
@@ -20,10 +20,14 @@ const mutations = {
         }
 
         state.balance = payload.balance || {};
-        state.balance.balanceInfos = state.balance && state.balance.tokenBalanceInfoMap ? state.balance.tokenBalanceInfoMap : {};
+        state.balance.balanceInfos = state.balance && state.balance.tokenBalanceInfoMap
+            ? state.balance.tokenBalanceInfoMap
+            : {};
 
         state.onroad = payload.onroad || {};
-        state.onroad.balanceInfos = state.onroad && state.onroad.tokenBalanceInfoMap ? state.onroad.tokenBalanceInfoMap : {};
+        state.onroad.balanceInfos = state.onroad && state.onroad.tokenBalanceInfoMap
+            ? state.onroad.tokenBalanceInfoMap
+            : {};
     },
     commitClearBalance(state) {
         state.balance = { balanceInfos: {} };
@@ -31,7 +35,11 @@ const mutations = {
     }
 };
 const actions = {
-    startLoopBalance({ commit, dispatch, rootState }) {
+    startLoopBalance({
+        commit,
+        dispatch,
+        rootState
+    }) {
         dispatch('stopLoopBalance');
         balanceInfoInst = new timer(() => {
             const activeAcc = rootState.wallet.activeAcc;
@@ -98,49 +106,242 @@ const getters = {
         const balanceInfo = getters.balanceInfo;
         const allToken = rootGetters.allTokensMap;
         const mapToken2Gate = rootGetters.mapToken2Gate;
+        const exBalance = rootGetters.exBalanceList;
         // ------------------- show default token
         const list = Object.keys(defaultTokenMap).map(i => {
-            const { onroadNum = '', totalAmount = '', tokenName = '', totalSupply = '', isReIssuable = '', tokenSymbol, balance = '', fundFloat = '', decimals = '', owner = '', tokenId = i, icon, type = 'NATIVE', gateInfo = {} } = Object.assign({}, defaultTokenMap[i], balanceInfo[i] || {}, allToken[i] || {}, { gateInfo: { url: mapToken2Gate[i] && mapToken2Gate[i].url } });
-            return { onroadNum, totalAmount, tokenName, totalSupply, isReIssuable, tokenSymbol, balance, fundFloat, decimals, owner, tokenId, icon, type, gateInfo };
+            const {
+                availableExAmount = 0,
+                totalExAmount = 0,
+                onroadNum = '',
+                totalAmount = 0,
+                tokenName = '',
+                totalSupply = '',
+                isReIssuable = '',
+                tokenSymbol,
+                balance = '',
+                fundFloat = '',
+                decimals = '',
+                owner = '',
+                tokenId = i,
+                icon,
+                type = 'NATIVE',
+                gateInfo = {}
+            } = Object.assign({},
+                defaultTokenMap[i],
+                balanceInfo[i] || {},
+                allToken[i] || {}, { gateInfo: { url: mapToken2Gate[i] && mapToken2Gate[i].url } },
+                exBalance[i]);
+            const rate = rootState.exchangeRate.rateMap[i] && rootState.exchangeRate.rateMap[i][rootState.env.currency];
+            const totalExAsset = rate ? bigNumber.multi(bigNumber.toBasic(totalExAmount, decimals), rate) : 0;
+            const walletAsset = rate ? bigNumber.multi(bigNumber.toBasic(totalAmount, decimals), rate) : 0;
+            const totalAsset = bigNumber.plus(totalExAsset, walletAsset);
+            return {
+                totalAsset,
+                totalExAsset,
+                walletAsset,
+                availableExAmount,
+                totalExAmount,
+                onroadNum,
+                totalAmount,
+                tokenName,
+                totalSupply,
+                isReIssuable,
+                tokenSymbol,
+                balance,
+                fundFloat,
+                decimals,
+                owner,
+                tokenId,
+                icon,
+                type,
+                gateInfo
+            };
         });
         // force vite first
         const viteId = constant.Vite_TokenId;
-        return list.splice(list.findIndex(v => v.tokenId === viteId), 1).concat(list);
+        return list
+            .splice(list.findIndex(v => v.tokenId === viteId), 1)
+            .concat(list);
     },
     officalGateTokenList(state, getters, rootState, rootGetters) {
         const balanceInfo = getters.balanceInfo;
         const allToken = rootGetters.allTokensMap;
-        const officalGateTokens = rootGetters.mapGate2Token[OFFICAL_GATE_NAME] ? rootGetters.mapGate2Token[OFFICAL_GATE_NAME].tokens : [];
         const mapToken2Gate = rootGetters.mapToken2Gate;
-        return officalGateTokens.map(token => {
-            const i = token['tokenId'];
-            const { onroadNum = '', tokenName = '', totalAmount = '', totalSupply = '', isReIssuable = '', tokenSymbol, balance = '', fundFloat = '', decimals = '', owner = '', tokenId = i, icon, type = 'OFFICAL_GATE', gateInfo = {} } = Object.assign({}, token[i], balanceInfo[i] || {}, allToken[i] || {}, { gateInfo: { url: mapToken2Gate[i] && mapToken2Gate[i].url } });
-            return { onroadNum, tokenName, totalAmount, totalSupply, isReIssuable, tokenSymbol, balance, fundFloat, decimals, owner, tokenId, icon, type, gateInfo };
+        const exBalance = rootGetters.exBalanceList;
+
+        return Object.keys(mapToken2Gate).map(i => {
+            const {
+                availableExAmount = '',
+                totalExAmount = '',
+                onroadNum = '',
+                tokenName = '',
+                totalAmount = '',
+                totalSupply = '',
+                isReIssuable = '',
+                tokenSymbol,
+                balance = '',
+                fundFloat = '',
+                decimals = '',
+                owner = '',
+                tokenId = i,
+                icon,
+                type = 'OFFICAL_GATE',
+                gateInfo = {}
+            } = Object.assign({}, balanceInfo[i] || {}, allToken[i] || {}, {
+                gateInfo: {
+                    url: mapToken2Gate[i].url,
+                    gataway: mapToken2Gate[i].gataway
+                }
+            }, exBalance[i]);
+            const rate = rootState.exchangeRate.rateMap[i] && rootState.exchangeRate.rateMap[i][rootState.env.currency];
+            const totalExAsset = rate ? bigNumber.multi(bigNumber.toBasic(totalExAmount, decimals), rate) : 0;
+            const walletAsset = rate ? bigNumber.multi(bigNumber.toBasic(totalAmount, decimals), rate) : 0;
+            const totalAsset = bigNumber.plus(totalExAsset, walletAsset);
+
+            return {
+                totalAsset,
+                totalExAsset,
+                walletAsset,
+                availableExAmount,
+                totalExAmount,
+                onroadNum,
+                tokenName,
+                totalAmount,
+                totalSupply,
+                isReIssuable,
+                tokenSymbol,
+                balance,
+                fundFloat,
+                decimals,
+                owner,
+                tokenId,
+                icon,
+                type,
+                gateInfo
+            };
         });
     },
     userStorageTokenList(state, getters, rootState, rootGetters) {
         const balanceInfo = getters.balanceInfo;
         const allToken = rootGetters.allTokensMap;
+        const exBalance = rootGetters.exBalanceList;
+
         // const mapToken2Gate = rootGetters.mapToken2Gate;
         // ------- show user defined gate
         gateStorage.updateFromStorage();
         const userStorageTokenList = gateStorage.data;
-        const res = userStorageTokenList.map(token => {
-            const i = token.tokenId;
-            const { onroadNum = '', tokenName = '', totalAmount = '', totalSupply = '', isReIssuable = '', tokenSymbol, balance = '', fundFloat = '', decimals = '', owner = '', tokenId = i, icon, type = 'THIRD_GATE', gateInfo = {} } = Object.assign({}, token, balanceInfo[i] || {}, allToken[i] || {});
-            return { onroadNum, tokenName, totalAmount, totalSupply, isReIssuable, tokenSymbol, balance, fundFloat, decimals, owner, tokenId, icon, type, gateInfo };
-        }).filter(t => getters.officalGateTokenList.map(t => t.tokenId).indexOf(t.tokenId) === -1);
+        const res = userStorageTokenList
+            .map(token => {
+                const i = token.tokenId;
+                const {
+                    availableExAmount = '',
+                    totalExAmount = '',
+                    onroadNum = '',
+                    tokenName = '',
+                    totalAmount = '',
+                    totalSupply = '',
+                    isReIssuable = '',
+                    tokenSymbol,
+                    balance = '',
+                    fundFloat = '',
+                    decimals = '',
+                    owner = '',
+                    tokenId = i,
+                    icon,
+                    type = 'THIRD_GATE',
+                    gateInfo = {}
+                } = Object.assign({}, token, balanceInfo[i] || {}, allToken[i] || {}, exBalance[i]);
+                const rate = rootState.exchangeRate.rateMap[i] && rootState.exchangeRate.rateMap[i][rootState.env.currency];
+                const totalExAsset = rate ? bigNumber.multi(bigNumber.toBasic(totalExAmount, decimals), rate) : 0;
+                const walletAsset = rate ? bigNumber.multi(bigNumber.toBasic(totalAmount, decimals), rate) : 0;
+                const totalAsset = bigNumber.plus(totalExAsset, walletAsset);
+
+                return {
+                    totalAsset,
+                    totalExAsset,
+                    walletAsset,
+                    availableExAmount,
+                    totalExAmount,
+                    onroadNum,
+                    tokenName,
+                    totalAmount,
+                    totalSupply,
+                    isReIssuable,
+                    tokenSymbol,
+                    balance,
+                    fundFloat,
+                    decimals,
+                    owner,
+                    tokenId,
+                    icon,
+                    type,
+                    gateInfo
+                };
+            })
+            .filter(t =>
+                getters.officalGateTokenList
+                    .map(t => t.tokenId)
+                    .indexOf(t.tokenId) === -1);
         return res;
     },
     otherWhithBalance(state, getters, rootState, rootGetters) {
         const balanceInfo = getters.balanceInfo;
         const allToken = rootGetters.allTokensMap;
         const mapToken2Gate = rootGetters.mapToken2Gate;
-        const contains = [ ...getters.userStorageTokenList, ...getters.defaultTokenList, ...getters.officalGateTokenList ].map(t => t.tokenId);
-        return Object.keys(getters.balanceInfo).filter(i => !bigNumber.isEqual(getters.balanceInfo[i].totalAmount, 0) && contains.indexOf(i) === -1).map(i => {
-            const { onroadNum = '', tokenName = '', totalAmount = '', totalSupply = '', isReIssuable = '', tokenSymbol, balance = '', fundFloat = '', decimals = '', owner = '', tokenId = i, icon, type = 'THIRD_GATE', gateInfo = {} } = Object.assign({}, balanceInfo[i] || {}, allToken[i] || {}, { gateInfo: { url: mapToken2Gate[i] && mapToken2Gate[i].url } });
-            return { onroadNum, tokenName, totalAmount, totalSupply, isReIssuable, tokenSymbol, balance, fundFloat, decimals, owner, tokenId, icon, type, gateInfo };
-        });
+        const exBalance = rootGetters.exBalanceList;
+        const contains = [
+            ...getters.userStorageTokenList,
+            ...getters.defaultTokenList,
+            ...getters.officalGateTokenList
+        ].map(t => t.tokenId);
+        return Object.keys(getters.balanceInfo)
+            .filter(i => (!bigNumber.isEqual(getters.balanceInfo[i].totalAmount, 0) || !bigNumber.isEqual(exBalance[i].totalExAmount, 0)) && contains.indexOf(i) === -1)
+            .map(i => {
+                const {
+                    availableExAmount = '',
+                    totalExAmount = '',
+                    onroadNum = '',
+                    tokenName = '',
+                    totalAmount = '',
+                    totalSupply = '',
+                    isReIssuable = '',
+                    tokenSymbol,
+                    balance = '',
+                    fundFloat = '',
+                    decimals = '',
+                    owner = '',
+                    tokenId = i,
+                    icon,
+                    type = 'THIRD_GATE',
+                    gateInfo = {}
+                } = Object.assign({}, balanceInfo[i] || {}, allToken[i] || {}, { gateInfo: { url: mapToken2Gate[i] && mapToken2Gate[i].url } });
+                const rate = rootState.exchangeRate.rateMap[i] && rootState.exchangeRate.rateMap[i][rootState.env.currency];
+                const totalExAsset = rate ? bigNumber.multi(bigNumber.toBasic(totalExAmount, decimals), rate) : 0;
+                const walletAsset = rate ? bigNumber.multi(bigNumber.toBasic(totalAmount, decimals), rate) : 0;
+                const totalAsset = bigNumber.plus(totalExAsset, walletAsset);
+
+                return {
+                    totalAsset,
+                    walletAsset,
+                    totalExAmount,
+                    availableExAmount,
+                    totalExAsset,
+                    onroadNum,
+                    tokenName,
+                    totalAmount,
+                    totalSupply,
+                    isReIssuable,
+                    tokenSymbol,
+                    balance,
+                    fundFloat,
+                    decimals,
+                    owner,
+                    tokenId,
+                    icon,
+                    type,
+                    gateInfo
+                };
+            });
     }
 };
 

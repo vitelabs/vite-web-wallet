@@ -1,13 +1,23 @@
 <template>
     <div class="account-head-wrapper">
         <div class="head__item">
-            <img class="icon" src="~assets/imgs/head_acc.png"/>
-            <div class="head-right ">
+            <img class="icon" src="~assets/imgs/head_acc.png" />
+            <div class="head-right">
                 <div class="head-title">
-                    <span>{{ $t('accountName') }}</span>
-                    <img @click="startRename" class="edit __pointer" src="~assets/imgs/edit_default.svg"/>
+                    <span>{{ $t("accountName") }}</span>
+                    <img
+                        @click="startRename"
+                        class="edit __pointer"
+                        src="~assets/imgs/edit_default.svg"
+                    />
                 </div>
-                <div v-show="!isShowNameInput" class="name" @click="startRename">{{ account.name }}</div>
+                <div
+                    v-show="!isShowNameInput"
+                    class="name"
+                    @click="startRename"
+                >
+                    {{ account.name }}
+                </div>
                 <!-- <input fake_pass type="password" style="display:none"/> -->
                 <form autocomplete="off">
                     <input
@@ -22,39 +32,38 @@
                 </form>
             </div>
         </div>
-        <div class="worth head__item">
-            <img class="icon" src="~assets/imgs/head_asset.png" />
-            <div class="head-right ">
-                <div class="head-title">{{ $t('wallet.totalAsset') }}</div>
-                <div>{{ totalAsset }}</div>
-            </div>
-        </div>
         <div class="head__item">
             <img class="icon" src="~assets/imgs/head_addr.png" />
-            <vite-address></vite-address>
-        </div>
-
-        <div class="btn-group head__item">
-            <div
-                class="btn__small __pointer __btn-test"
-                @click="getTestToken"
-                :class="{'un_clickable':!getTestTokenAble}"
-            >
-                <span>{{ $t('wallet.getTestToken') }}</span>
-                <img
-                    src="~assets/imgs/more_blue.png"
-                    class="more-icon"
-                />
+            <div class="head-right">
+                <SwitchAddr></SwitchAddr>
+                <span class="address-content">
+                    <Tips ref="tips"></Tips>{{ activeAddr }}
+                    <QrcodePopup :qrcodeString="addressQrcode"
+                    ><img
+                        class="address-content__operate click-able"
+                        src="~assets/imgs/qrcode_default.svg"
+                    /></QrcodePopup>
+                    <img
+                        class="address-content__operate click-able"
+                        src="~assets/imgs/copy_default.svg"
+                        @click="copy"
+                    />
+                </span>
             </div>
-            <div
-                @click="goDetail"
-                class="btn__small __pointer __btn-detail"
-            >
-                {{ $t('wallet.transDetail') }}
-                <img
-                    src="~assets/imgs/more_gray.png"
-                    class="more-icon"
-                />
+        </div>
+        <div class="worth head__item">
+            <img class="icon" src="~assets/imgs/head_asset.png" />
+            <div class="assets">
+                <AssetSwitch v-model="assetsType" class="asset-switch" />
+                <div class="asset__btc">{{ asset }}</div>
+                <div class="asset__cash">{{ currencySymbol }} {{ asset }}</div>
+            </div>
+            <div class="head-right">
+                <Pie
+                    class="pie-chart"
+                    :pieData="pieData.data"
+                    :labelGen="labelGen"
+                ></Pie>
             </div>
         </div>
     </div>
@@ -62,12 +71,22 @@
 
 <script>
 import Vue from 'vue';
-import viteAddress from 'components/address';
-import $ViteJS from 'utils/viteClient';
+import QrcodePopup from 'components/qrcodePopup';
+import SwitchAddr from 'components/switchAddress';
+import Pie from 'components/pie';
 import bigNumber from 'utils/bigNumber';
+import { utils } from '@vite/vitejs';
+import copy from 'utils/copy';
+import Tips from 'uiKit/tips';
+import AssetSwitch from './assetSwitch';
 
+const assetsType = {
+    TOTAL: 'TOTAL',
+    EX: 'EX',
+    WALLET: 'WALLET'
+};
 export default {
-    components: { viteAddress },
+    components: { QrcodePopup, Tips, SwitchAddr, Pie, AssetSwitch },
     data() {
         return {
             isShowNameInput: false,
@@ -75,60 +94,100 @@ export default {
             copySuccess: false,
             qrcode: null,
             qrcodeShow: false,
-            getTestTokenAble: true
+            assetsType: assetsType.TOTAL
         };
     },
     computed: {
+        pieData() {
+            const data = JSON.parse(JSON.stringify(this.assetMap));
+            let polyData = data;
+            if (data.length > 5) {
+                polyData = data.slice(0, 4);
+                polyData.push({
+                    asset: data
+                        .slice(4)
+                        .reduce((pre, cur) => bigNumber.plus(pre, cur.asset),
+                            0),
+                    tokenSymbol: '其它'
+                });
+            }
+            return {
+                data: polyData.map(t => t.asset),
+                lable: polyData.map(t => t.tokenSymbol)
+            };
+        },
         account() {
-            const activeAccount = this.$store.state.wallet.activeAcc;
             return {
                 name: this.$store.state.wallet.name,
-                addr: activeAccount ? activeAccount.address || '' : ''
+                addr: this.activeAddr
             };
         },
         netStatus() {
             return this.$store.state.env.clientStatus;
         },
-        totalAsset() {
-            const currency = this.$store.state.env.currency;
-            const rateMap = this.$store.state.exchangeRate.rateMap;
-            const balanceInfo = this.$store.getters.balanceInfo;
-            const total = Object.keys(balanceInfo).reduce((pre, cur) => {
-                if (!rateMap[cur]) return pre;
-                return bigNumber.plus(bigNumber.multi(balanceInfo[cur].balance, rateMap[cur][currency]), pre);
-            }, 0);
-            return `${ this.$i18n.locale === 'en' ? '$' : '¥' }${ total }`;
+        addressQrcode() {
+            return utils.uriStringify({ target_address: this.activeAddr });
+        },
+        asset() {
+            return this.assetMap
+                .map(t => t.asset)
+                .reduce((pre, cur) => bigNumber.plus(pre || 0, cur || 0), 0);
+        },
+        allTokens() {
+            return [
+                ...this.$store.getters.defaultTokenList,
+                ...this.$store.getters.userStorageTokenList,
+                ...this.$store.getters.otherWhithBalance,
+                ...this.$store.getters.officalGateTokenList
+            ];
+        },
+        currencySymbol() {
+            return this.$store.getters.currencySymbol;
+        },
+        assetMap() {
+            if (this.assetsType === assetsType.TOTAL) {
+                return this.allTokens
+                    .map(t => {
+                        return {
+                            asset: t.totalAsset,
+                            tokenSymbol: t.tokenSymbol
+                        };
+                    })
+                    .sort((a, b) => bigNumber.compared(b.asset, a.asset));
+            }
+            if (this.assetsType === assetsType.EX) {
+                return this.allTokens
+                    .map(t => {
+                        return {
+                            asset: t.totalExAsset,
+                            tokenSymbol: t.tokenSymbol
+                        };
+                    })
+                    .sort((a, b) => bigNumber.compared(b.asset, a.asset));
+            }
+            if (this.assetsType === assetsType.WALLET) {
+                return this.allTokens
+                    .map(t => {
+                        return {
+                            asset: t.walletAsset,
+                            tokenSymbol: t.tokenSymbol
+                        };
+                    })
+                    .sort((a, b) => bigNumber.compared(b.asset, a.asset));
+            }
+        },
+        activeAddr() {
+            return this.$store.getters.activeAddr;
         }
     },
     methods: {
-        goDetail() {
-            const locale = this.$i18n.locale === 'zh' ? 'zh/' : '';
-            window.open(`${ process.env.viteNet }${ locale }account/${ this.account.addr }`);
+        labelGen(v, i) {
+            const symbol = this.pieData.lable[i];
+            return `${ symbol } ${ (100 * v).toFixed(2) }%`;
         },
-
-        getTestToken() {
-            if (!this.getTestTokenAble) {
-                return;
-            }
-            if (!this.netStatus) {
-                this.$toast(this.$t('hint.noNet'));
-                return;
-            }
-
-            if (!this.account || !this.account.addr) {
-                this.$toast(this.$t('wallet.hint.tErr'));
-            }
-
-            this.getTestTokenAble = false;
-            $ViteJS.testapi.getTestToken(this.account.addr).then(() => {
-                this.$toast(this.$t('wallet.hint.token'));
-                setTimeout(() => {
-                    this.getTestTokenAble = true;
-                }, 3000);
-            }).catch(err => {
-                console.warn(err);
-                this.$toast(this.$t('wallet.hint.tErr'), err);
-            });
+        copy() {
+            copy(this.activeAddr);
+            this.$refs.tips.tip(this.$t('hint.copy'));
         },
 
         clearEditName() {
@@ -176,29 +235,51 @@ export default {
 
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
-
+.click-able {
+    cursor: pointer;
+}
 .account-head-wrapper {
     position: relative;
     text-align: center;
     background: #fff;
     border-radius: 2px;
     display: flex;
-    flex-wrap: no-wrap;
-    flex-direction: row;
+    flex-wrap: nowrap;
     justify-content: space-between;
-    height: 100px;
+    height: 124px;
     min-width: 1300px;
+    align-items: center;
     .head__item {
         border-right: 1px solid rgba(227, 235, 245, 0.6);
         display: flex;
         align-items: center;
-        padding: 0 20px;
-        .icon{
+        padding: 0 30px;
+        min-height: 84px;
+        .icon {
             height: 34px;
             width: 34px;
             margin-right: 20px;
         }
-        .head-right{
+        .address-content {
+            max-width: 300px;
+            font-size: 14px;
+            word-break: break-all;
+            box-sizing: border-box;
+            background: #f3f6f9;
+            color: #5e6875;
+            padding: 9px;
+            display: flex;
+            align-items: center;
+            margin: 5px auto;
+            display: flex;
+            position: relative;
+            &__operate {
+                width: 16px;
+                height: 16px;
+                margin-left: 10px;
+            }
+        }
+        .head-right {
             font-size: 20px;
             color: #1d2024;
             text-align: left;
@@ -214,7 +295,7 @@ export default {
                 letter-spacing: 0.35px;
                 padding-bottom: 10px;
                 font-family: $font-bold, arial, sans-serif;
-                color: #5E6875;
+                color: #5e6875;
                 font-family: $font-bold;
 
                 .edit {
@@ -236,46 +317,30 @@ export default {
                 width: 100%;
             }
         }
-        &.worth{
-            flex-grow: 1;
+        .pie-chart {
+            margin-left: 30px;
+            padding: 5px 0;
         }
-        &.btn-group {
-            padding: 0 ;
-            font-family: $font-normal, arial, sans-serif;
+        &.worth {
+            flex-grow: 1;
             display: flex;
-            flex-direction: column;
-            .un_clickable {
-                background-color: #bfbfbf !important;
-                cursor: default !important;
-            }
-
-            .btn__small {
-                padding: 0 20px;
-                box-sizing: border-box;
-                text-align: center;
-                font-size: 14px;
+            justify-content: space-between;
+            .assets {
                 flex-grow: 1;
-                width: 100%;
-                color: rgba(94,104,117,1);
                 display: flex;
-                justify-content: center;
-                align-items: center;
-                &:first-child{
-                    color: rgba(0,122,255,1);
-                    border-bottom: 1px solid rgba(227, 235, 245, 0.6);
+                flex-direction: column;
+                align-items: flex-start;
+                height: 88px;
+                justify-content: space-between;
+                .asset__btc {
+                }
+                .asset__cash {
+                    color: #5e687594;
+                    margin-top: 4px;
+                    font-size: 12px;
                 }
             }
-            .more-icon {
-                margin-left: 4px;
-                height: 10px;
-                width: 6px;
-            }
         }
-    }
-    .addr-wrapper {
-        display: inline-block;
-        max-width: 510px;
-        text-align: left;
     }
 }
 </style>

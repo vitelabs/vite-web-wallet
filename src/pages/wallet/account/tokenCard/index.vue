@@ -1,114 +1,156 @@
 <template>
     <div class="token-card">
-        <div class="title">
+        <div class="col title click-able" @click="showDetail">
             <div>
-                <img
-                    @click="showDetail()"
-                    :src="token.icon||getIcon(token.tokenId)"
-                    class="icon click-able"
-                />
-            <span class="token-name click-able" @click="showDetail()">{{ token.tokenSymbol }}</span></div>
-
-            <div>
-                <span
-                    class="gate"
-                    v-if="token.gateInfo.url"
-                    @click="showDetail('gate')"
-                >{{gateName}}</span>
-                <span class="unbind click-able" v-if="showUnbind" @click="unbind"></span>
+                <img :src="token.icon" class="icon" />
+                <span class="token-name underline" @click="showDetail">{{
+                    token.tokenSymbol
+                }}</span>
             </div>
-
+            <div class="separate"></div>
         </div>
-        <div class="body">
-            <div class="item click-able" @click="showDetail()">
-                <span class="balance">{{ token.balance || 0 }}</span>
+        <div class="col click-able">
+            <div>
+                {{ `${token.balance || 0} ${token.tokenSymbol}` }}
             </div>
-            <div class="item">
-                <span class="asset">{{asset}}</span>
+            <div class="op_group">
+                <div class="op" @click="send">转账</div>
+                <div class="op" @click="exCharge">充币到交易所</div>
             </div>
-            <div class="token-tips-container">
-                <div class="token-tips" v-show="token.onroadNum">
-                    {{ token.onroadNum }} {{ $t('wallet.pend') }}
+        </div>
+        <div class="col">
+            {{ `${token.fundFloat || "--"} ${token.tokenSymbol}` }}
+        </div>
+        <div class="col">
+            <div class="underline">
+                {{ token.gateInfo.gateway || "添加网关" }}
+            </div>
+            <div class="op_group">
+                <div class="op" @click="charge">跨链充值</div>
+                <div class="op" @click="withdraw">跨链提现</div>
+                <div class="op readonly"  @click="showDetail('withdraw')">跨链充提记录</div>
+            </div>
+            <div class="separate"></div>
+        </div>
+        <div class="col">
+            {{ `${exBanlance || "--"} ${token.tokenSymbol}` }}
+        </div>
+        <div class="col">
+            <div>
+                {{ `${avaliableExBalance || "--"} ${token.tokenSymbol}` }}
+            </div>
+            <div class="op_group">
+                <div class="op" @click="exWithdraw">提现至钱包</div>
+                <div class="op readonly" @click="exRecord">交易所充提记录</div>
+            </div>
+            <div class="separate"></div>
+        </div>
+        <div class="col">
+            <div class="assets">
+                <div class="est_btc">{{ assetView.btc }}</div>
+                <div class="est_cash">
+                    ≈{{ currencySymbol }} {{ assetView.cash }}
                 </div>
             </div>
         </div>
-        <div class="bottom">
-            <div
-                v-unlock-account="send"
-                class="btn __pointer"
-            >{{ $t('tokenCard.actionType.SEND') }}</div>
-            <div
-                @click="receive"
-                class="btn __pointer"
-            >{{ $t('tokenCard.actionType.RECEIVE') }}</div>
-            <div
-                v-if="token.gateInfo.url"
-                v-unlock-account="withdraw"
-                class="btn __pointer"
-            >{{ $t('tokenCard.actionType.WITHDRAW') }}</div>
-            <div
-                v-if="token.gateInfo.url"
-                @click="charge"
-                class="btn __pointer"
-            >{{ $t('tokenCard.actionType.CHARGE') }}</div>
-        </div>
-        <transaction
-            v-if="isShowTrans"
-            :token="token"
-            :closeTrans="closeTrans"
-        ></transaction>
+        <Alert ref="alert" :token="token" />
+        <transition :closeTrans="closeTrans" :token="token" />
     </div>
 </template>
 
 <script>
-import { receiveDialog, chargeDialog, withdrawDialog, tokenInfoDialog } from '../dialog';
+import {
+    receiveDialog,
+    chargeDialog,
+    withdrawDialog,
+    tokenInfoDialog,
+    exWithdrawDialog,
+    exChargeDialog
+} from '../dialog';
 import getTokenIcon from 'utils/getTokenIcon';
 import bigNumber from 'utils/bigNumber';
 import { gateStorage } from 'services/gate';
 import transaction from '../transaction';
+import { execWithValid } from 'utils/execWithValid';
+import Alert from '../alert';
 
 export default {
-    components: { transaction },
+    components: { transaction, Alert },
     props: {
         token: {
             type: Object,
             default: () => {
                 return {
-                    symbol: '--',
+                    tokenSymbol: '--',
                     balance: '--',
                     asset: '--',
                     onroadNum: '--',
-                    type: 'OFFICAL_GATE'// OFFICAL OFFICALGATE SELFGATE
+                    type: 'OFFICAL_GATE'
                 };
             }
+        },
+        assetType: {
+            type: String,
+            default: 'TOTAL'
         }
     },
     data() {
         return { isShowTrans: false };
     },
     computed: {
-        showUnbind() {
-            return this.token.type === 'THIRD_GATE' && (!this.token.totalAmount || bigNumber.isEqual(this.token.totalAmount, '0'));
+        currencySymbol() {
+            return this.$store.getters.currencySymbol;
         },
-        address() {
-            return this.$store.getters.activeAddr;
+        showUnbind() {
+            return (
+                this.token.type === 'THIRD_GATE'
+                && (!this.token.totalAmount
+                    || bigNumber.isEqual(this.token.totalAmount, '0'))
+            );
         },
         gateName() {
             if (this.$store.getters.mapToken2Gate[this.token.tokenId]) {
-                return this.$store.getters.mapToken2Gate[this.token.tokenId].gateway;
+                return this.$store.getters.mapToken2Gate[this.token.tokenId]
+                    .gateway;
             }
             return this.$t('tokenCard.gateInfo.selfdefined');
         },
-        asset() {
-            const currency = this.$store.state.env.currency;
-            const rate = this.$store.state.exchangeRate.rateMap[this.token.tokenId];
-            if (rate && this.token.balance) {
-                return `${ this.$i18n.locale === 'en' ? '$' : '¥' } ${ bigNumber.multi(this.token.balance, rate[currency]) }`;
+        exBanlance() {
+            return this.token.totalExAmount && bigNumber.toBasic(this.token.totalExAmount,
+                this.token.decimals);
+        },
+        avaliableExBalance() {
+            return (
+                this.token.availableExAmount
+                && bigNumber.toBasic(this.token.availableExAmount,
+                    this.token.decimals)
+            );
+        },
+        assetView() {
+            if (this.assetType === 'TOTAL') {
+                return {
+                    btc: this.token.totalAsset,
+                    cash: this.token.totalAsset
+                };
             }
-            return '--';
+            if (this.assetType === 'EX') {
+                return {
+                    btc: this.token.totalExAsset,
+                    cash: this.token.totalExAsset
+                };
+            }
+            if (this.assetType === 'WALLET') {
+                return {
+                    btc: this.token.walletAsset,
+                    cash: this.token.walletAsset
+                };
+            }
         }
     },
     methods: {
+        exRecord() {
+            this.$refs.alert.show();
+        },
         unbind() {
             gateStorage.unbindToken(this.token.tokenId);
         },
@@ -125,23 +167,32 @@ export default {
                 console.error(e);
             });
         },
-        withdraw() {
+        withdraw: execWithValid(function () {
             withdrawDialog({ token: this.token }).catch(e => {
                 console.error(e);
             });
-        },
+        }),
         showDetail(initTabName) {
             tokenInfoDialog({ token: this.token, initTabName }).catch(e => {
                 console.error(e);
             });
         },
-        send() {
-            console.log(this.token);
+        exCharge: execWithValid(function () {
+            exChargeDialog({ token: this.token }).catch(e => {
+                console.error(e);
+            });
+        }),
+        exWithdraw: execWithValid(function () {
+            exWithdrawDialog({ token: this.token }).catch(e => {
+                console.error(e);
+            });
+        }),
+        send: execWithValid(function () {
             if (!this.token.tokenId) {
                 return;
             }
             this.isShowTrans = true;
-        },
+        }),
         closeTrans() {
             this.isShowTrans = false;
         }
@@ -151,107 +202,77 @@ export default {
 
 <style lang='scss' scoped>
 @import "~assets/scss/vars.scss";
-.click-able{
-    cursor: pointer;
-}
+@import "./colWidth.scss";
+
 .token-card {
     box-sizing: border-box;
     position: relative;
-    min-width: 300px;
     background: #fff;
-    box-shadow: 0 2px 48px 1px rgba(176, 192, 237, 0.42);
-    margin: 0 40px 20px 0;
-}
-
-.title {
-    border-bottom: 1px solid #e5edf3;
-    height: 46px;
     display: flex;
-    justify-content: space-between;
+    width: 100%;
     align-items: center;
-    box-sizing: border-box;
-    padding: 12px 30px;
-    .icon{
-        height: 20px;
-        width: 20px;
+    border-bottom: 1px solid #c6cbd4;
+    height: 71px;
+    &:last-child {
+        border: none;
     }
-    .token-name {
-        font-size: 18px;
-        font-family: $font-bold;
-    }
-    .gate {
-        background: rgba(0, 122, 255, 0.06);
-        border-radius: 2px;
-        color: #007aff;
-        height: 20px;
-        line-height: 20px;
-        font-size: 12px;
+    .click-able {
         cursor: pointer;
     }
-    .unbind {
-        display: inline-block;
-        height: 12px;
-        width: 12px;
-        background: url(~assets/imgs/bind.png);
-        background-size: 100% 100%;
-        background-repeat: no-repeat;
-    }
-}
-
-.body {
-    padding-top: 8px;
-    .item {
-        line-height: 22px;
+    .col {
         display: flex;
+        flex-direction: column;
+        align-items: flex-start;
         justify-content: space-between;
-        margin-top: 8px;
-        padding-left: 30px;
-        .balance {
-            font-size: 20px;
-            color: #1d2024;
+        padding: 7px 0;
+        color: #5e6875;
+        font-size: 12px;
+        align-self: stretch;
+        position: relative;
+        @include colWidth;
+        .underline {
+            border-bottom: 1px dotted #5e6875;
+        }
+        .separate {
+            border-right: 1px solid #d3dfef;
+            height: 52px;
+            position: absolute;
+            right: 0;
+        }
+        .op_group {
+            display: flex;
+            .op {
+                word-break: keep-all;
+                background: rgba(0, 122, 255, 0.05);
+                border-radius: 2px;
+                border: 1px solid rgba(0, 122, 255, 0.3);
+                line-height: 16px;
+                cursor: pointer;
+                color: #007aff;
+                margin-right: 6px;
+                padding: 2px;
+                &.readonly {
+                    color: #5e6875;
+                    background: rgba(94, 104, 117, 0.05);
+                    border: 1px solid rgba(94, 104, 117, 0.3);
+                }
+            }
+        }
+        .assets {
+            display: flex;
+            flex-direction: column;
+            .est_cash {
+                color: #5e687594;
+                margin-top: 4px;
+            }
+        }
+        &.title {
             font-family: $font-bold;
-            height: 20px;
-        }
-        .asset {
-            height: 16px;
-            font-size: 12px;
-            color: #5b638d;
-        }
-    }
-
-    .token-tips-container{
-        height: 24px;
-
-        .token-tips {
-            background: rgba(0, 122, 255, 0.06);
-            margin-top: 16px;
-            font-size: 13px;
-            color: #5b638d;
-            padding-left: 30px;
-            height: 24px;
-            line-height: 24px;
-        }
-    }
-}
-.bottom {
-    background: linear-gradient(
-        281deg,
-        rgba(84, 182, 255, 1) 0%,
-        rgba(42, 127, 255, 1) 100%
-    );
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 44px;
-    .btn {
-        height: 28px;
-        line-height: 28px;
-        text-align: center;
-        color: #fff;
-        flex-grow: 1;
-        border-right: 1px solid rgba(255, 255, 255, 0.15);
-        &.unuse {
-            background: #bfbfbf;
+            color: #5e6875;
+            .icon {
+                height: 16px;
+                width: 16px;
+            }
         }
     }
 }

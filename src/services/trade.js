@@ -130,3 +130,11 @@ export async function chargeDetail({ tokenId, address }) {
         }
     });
 }
+
+export async function tokenInfoFromGithub({ tokenSymbol, platformSymbol = 'VITE', tokenAddress } = { tokenSymbol, platformSymbol: 'VITE', tokenAddress }) {
+    return await request({
+        path: `${ path }/cryptocurrency/info/query`,
+        method: 'GET',
+        params: { tokenSymbol, platformSymbol, tokenAddress }
+    });
+}
