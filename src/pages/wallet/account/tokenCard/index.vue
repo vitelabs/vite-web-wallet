@@ -15,15 +15,15 @@
             </div>
             <div class="op_group">
                 <div class="op" @click="send">转账</div>
-                <div class="op" @click="exCharge">充币到交易所</div>
+                <div class="op" @click="exCharge">{{$t("tradeAssets.table.rowMap.recharge")}}</div>
             </div>
         </div>
         <div class="col">
             {{ `${token.fundFloat || "--"} ${token.tokenSymbol}` }}
         </div>
         <div class="col">
-            <div class="underline click-able" @click="showDetail('gate')" >
-                {{ token.gateInfo.gateway || token.type==='NATIVE'?"--":"自定义网关" }}
+            <div class="underline click-able" @click="token.type!=='NATIVE'&&showDetail('gate')" >
+                {{ token.gateInfo.gateway || token.type==='NATIVE'?"--":$t('tokenCard.gateInfo.selfdefined') }}
             </div>
             <div class="op_group" v-if="token.gateInfo.url">
                 <div class="op" @click="charge">跨链充值</div>
@@ -40,8 +40,8 @@
                 {{ `${avaliableExBalance || "--"} ${token.tokenSymbol}` }}
             </div>
             <div class="op_group">
-                <div class="op" @click="exWithdraw">提现至钱包</div>
-                <div class="op readonly" @click="exRecord">交易所充提记录</div>
+                <div class="op" @click="exWithdraw">{{$t("tradeAssets.table.rowMap.withdraw")}}</div>
+                <div class="op readonly" @click="exRecord">{{$t("tradeAssets.table.rowMap.detail")}}</div>
             </div>
             <div class="separate"></div>
         </div>
