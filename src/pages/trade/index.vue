@@ -1,41 +1,44 @@
 <template>
-    <div class="exchange-center-wrapper">
-        <center v-if="active === 'trade'"></center>
-        <div class="order" v-if="active === 'trade'">
-            <div class="ex-tab-list">
-                <div @click="tap='openOrder'"
-                     class="ex-tab active-side __pointer"
-                     :class="{'active': tap === 'openOrder'}">
-                    {{$t('tradeOpenOrders.title')}}</div>
-                <div @click="tap='historyOrder'"
-                     class="ex-tab active-side __pointer"
-                     :class="{'active': tap === 'historyOrder'}">
-                    {{$t('tradeOrderHistory.title')}}</div>
+    <page-layout>
+        <div class="exchange-center-wrapper">
+            <center v-if="active === 'trade'"></center>
+            <div class="order" v-if="active === 'trade'">
+                <div class="ex-tab-list">
+                    <div @click="tap='openOrder'"
+                         class="ex-tab active-side __pointer"
+                         :class="{'active': tap === 'openOrder'}">
+                        {{$t('tradeOpenOrders.title')}}</div>
+                    <div @click="tap='historyOrder'"
+                         class="ex-tab active-side __pointer"
+                         :class="{'active': tap === 'historyOrder'}">
+                        {{$t('tradeOrderHistory.title')}}</div>
+                </div>
+                <openOrder v-if="tap==='openOrder'" class="item"
+                           :isEmbed="true"
+                           :filterObj="{
+                               symbol: activeTxPair.symbol,
+                               quoteTokenSymbol: activeTxPair.quoteTokenSymbol,
+                               tradeTokenSymbol: activeTxPair.tradeTokenSymbol,
+                               limit: 10,
+                               offset: 0 }">
+                </openOrder>
+                <historyOrder v-if="tap==='historyOrder'" class="item"
+                              :isEmbed="true"
+                              :filterObj="{
+                                  symbol: activeTxPair.symbol,
+                                  quoteTokenSymbol: activeTxPair.quoteTokenSymbol,
+                                  tradeTokenSymbol: activeTxPair.tradeTokenSymbol,
+                                  limit: 10,
+                                  offset: 0 }">
+                </historyOrder>
             </div>
-            <openOrder v-if="tap==='openOrder'" class="item"
-                       :isEmbed="true"
-                       :filterObj="{
-                           symbol: activeTxPair.symbol,
-                           quoteTokenSymbol: activeTxPair.quoteTokenSymbol,
-                           tradeTokenSymbol: activeTxPair.tradeTokenSymbol,
-                           limit: 10,
-                           offset: 0 }">
-            </openOrder>
-            <historyOrder v-if="tap==='historyOrder'" class="item"
-                          :isEmbed="true"
-                          :filterObj="{
-                              symbol: activeTxPair.symbol,
-                              quoteTokenSymbol: activeTxPair.quoteTokenSymbol,
-                              tradeTokenSymbol: activeTxPair.tradeTokenSymbol,
-                              limit: 10,
-                              offset: 0 }">
-            </historyOrder>
+            <router-view></router-view>
         </div>
-        <router-view></router-view>
-    </div>
+    </page-layout>
 </template>
 
 <script>
+import pageLayout from 'components/pageLayout/index';
 import center from './center/center.vue';
 import historyOrder from './orderHistory';
 import openOrder from './openOrders';
@@ -44,7 +47,8 @@ export default {
     components: {
         center,
         openOrder,
-        historyOrder
+        historyOrder,
+        pageLayout
     },
     mounted() {
         this.$router.afterEach(to => {

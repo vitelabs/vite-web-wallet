@@ -3,30 +3,17 @@
         'dex': active.indexOf('trade') !== -1,
         'wallet': active.indexOf('trade') === -1
     }">
-        <page-layout v-if="active.indexOf('start') !== 0 && active.indexOf('keystore') !== 0" :active="active">
-            <router-view />
-        </page-layout>
-
-        <router-view v-else />
-
+        <router-view/>
         <notice-list></notice-list>
-        <first-notice v-if="active === 'start'"></first-notice>
     </div>
 </template>
 
 <script>
-import pageLayout from 'components/pageLayout';
-import firstNotice from 'components/firstNotice.vue';
 import noticeList from 'components/noticeList.vue';
 
 export default {
-    components: {
-        firstNotice,
-        pageLayout,
-        noticeList
-    },
+    components: { noticeList },
     mounted() {
-        this.changeLayout(this.$route.name);
         this.$router.afterEach(to => {
             this.active = to.name;
         });
@@ -35,11 +22,7 @@ export default {
         this.$store.dispatch('startLoopBalance');
     },
     data() {
-        return {
-            layoutType: 'start',
-            active: this.$route.name,
-            address: ''
-        };
+        return { active: this.$route.name };
     },
     computed: {
         currHDAcc() {
@@ -47,18 +30,8 @@ export default {
         }
     },
     watch: {
-        active: function () {
-            this.changeLayout();
-            this.$offKeyDown();
-        },
         currHDAcc: function () {
             this.$store.dispatch('startLoopBalance');
-        }
-    },
-    methods: {
-        changeLayout() {
-            const toHome = this.active.indexOf('start') !== -1;
-            this.layoutType = toHome ? 'home' : 'start';
         }
     }
 };

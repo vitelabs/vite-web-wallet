@@ -318,6 +318,37 @@
         },
         "nodeErr": "提示网关节点无效，请检查网关设置"
     },
+    "wallet": {
+        "title": "Quota Management",
+        "help": {
+            "title": "Quick Understanding of Quota"
+        },
+        "transfer": "Transfer",
+        "getTestToken": "Get Test Tokens",
+        "transDetail": "More Transaction Details",
+        "address": "My Address",
+        "fundFloat": "Unreceived",
+        "pend": "Pending",
+        "inAddress": "Receive Address",
+        "sum": "Amount",
+        "remarks": "Comment",
+        "remarksLong": "{len} bytes left",
+        "totalAsset": "总资产",
+        "placeholder": {
+            "amount": "Please input amount",
+            "remarks": "Please input comments",
+            "addr": "Please input address"
+        },
+        "hint": {
+            "token": "VITE test tokens have be sent to your account, please check your account!",
+            "tErr": "Get test token failed!",
+            "amount": "Amount must be greater than 0"
+        },
+        "trans": {
+            "powErr": "Error occurs when running PoW, please try again",
+            "powTransErr": "Insufficient quota of PoW, we'd recommend that you stake VITE to obtain quota."
+        }
+    },
     "walletQuota": {
         "title": "Quota Management",
         "help": {
@@ -512,33 +543,8 @@
             "voteErr": "Failed to vote, please try again"
         }
     },
-    "wallet": {
-        "title": "Assets",
-        "transfer": "Transfer",
-        "getTestToken": "Get Test Tokens",
-        "transDetail": "More Transaction Details",
-        "address": "My Address",
-        "fundFloat": "Unreceived",
-        "pend": "Pending",
-        "inAddress": "Receive Address",
-        "sum": "Amount",
-        "remarks": "Comment",
-        "remarksLong": "{len} bytes left",
-        "totalAsset": "总资产",
-        "placeholder": {
-            "amount": "Please input amount",
-            "remarks": "Please input comments",
-            "addr": "Please input address"
-        },
-        "hint": {
-            "token": "VITE test tokens have be sent to your account, please check your account!",
-            "tErr": "Get test token failed!",
-            "amount": "Amount must be greater than 0"
-        },
-        "trans": {
-            "powErr": "Error occurs when running PoW, please try again",
-            "powTransErr": "Insufficient quota of PoW, we'd recommend that you stake VITE to obtain quota."
-        }
+    "assets": {
+        "title": "Assets"
     },
     "walletConversion": {
         "title": "VITE Conversion",
@@ -660,6 +666,7 @@
         "title": "Funds",
         "search": "Please input token name",
         "operate": "Action",
+        "all":"All",
         "confirmTable": {
             "title":"Detail Records",
             "heads": [

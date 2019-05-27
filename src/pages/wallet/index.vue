@@ -1,15 +1,18 @@
 <template>
-    <div class="wallet-wrapper">
-        <account v-if="active === 'wallet'"></account>
-        <router-view></router-view>
-    </div>
+    <page-layout>
+        <div class="wallet-wrapper">
+            <quota v-if="active === 'walletQuota' || active === 'wallet'"></quota>
+            <router-view></router-view>
+        </div>
+    </page-layout>
 </template>
 
 <script>
-import account from './account/account.vue';
+import pageLayout from 'components/pageLayout/index';
+import quota from './quota/index';
 
 export default {
-    components: { account },
+    components: { quota, pageLayout },
     mounted() {
         this.$router.afterEach(to => {
             this.active = to.name;

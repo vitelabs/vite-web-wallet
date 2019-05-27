@@ -142,7 +142,7 @@ export default {
                     this.outTxExplorerFormat = data.outTxExplorerFormat;
                     this.tbData = data.depositRecords;
                     this.currentPage = pageNum;
-                });
+                }).catch(e => console.error(e));
             } else if (this.type === 'withdraw') {
                 getWithdrawRecords({
                     tokenId: this.token.tokenId,
@@ -156,7 +156,7 @@ export default {
                     this.outTxExplorerFormat = data.outTxExplorerFormat;
                     this.tbData = data.withdrawRecords;
                     this.currentPage = pageNum;
-                });
+                }).catch(e => console.error(e));
             }
         }
     }
