@@ -1,7 +1,10 @@
 <template>
     <div class="account-head-wrapper">
         <div class="head__item">
-            <img class="icon" src="~assets/imgs/head_acc.png" />
+            <img
+                class="icon"
+                src="~assets/imgs/head_acc.png"
+            />
             <div class="head-right">
                 <div class="head-title">
                     <span>{{ $t("accountName") }}</span>
@@ -33,13 +36,15 @@
             </div>
         </div>
         <div class="head__item">
-            <img class="icon" src="~assets/imgs/head_addr.png" />
+            <img
+                class="icon"
+                src="~assets/imgs/head_addr.png"
+            />
             <div class="head-right">
                 <SwitchAddr></SwitchAddr>
-                <span class="address-content"
-                ><Tips ref="tips"></Tips>{{ activeAddr }}
-                    <QrcodePopup :qrcodeString="addressQrcode"
-                    ><img
+                <span class="address-content">
+                    <Tips ref="tips"></Tips>{{ activeAddr }}
+                    <QrcodePopup :qrcodeString="addressQrcode"><img
                         class="address-content__operate click-able"
                         src="~assets/imgs/qrcode_default.svg"
                     /></QrcodePopup>
@@ -47,14 +52,22 @@
                         class="address-content__operate click-able"
                         src="~assets/imgs/copy_default.svg"
                         @click="copy"
-                /></span>
+                    />
+                </span>
             </div>
         </div>
         <div class="worth head__item">
-            <img class="icon" src="~assets/imgs/head_asset.png" />
+            <img
+                class="icon"
+                src="~assets/imgs/head_asset.png"
+            />
             <div class="assets">
-                <div class="head-title">{{ $t("wallet.totalAsset") }}</div>
-                <div>{{ totalAsset }}</div>
+                <AssetSwitch
+                    v-model="assetsType"
+                    class="asset-switch"
+                />
+                <div class="asset__btc">{{ totalAsset }}</div>
+                <div class="asset__cash">{{ totalAsset }}</div>
             </div>
             <div class="head-right">
                 <Pie class="pie-chart"></Pie>
@@ -73,14 +86,15 @@ import bigNumber from 'utils/bigNumber';
 import { utils } from '@vite/vitejs';
 import copy from 'utils/copy';
 import Tips from 'uiKit/tips';
+import AssetSwitch from './assetSwitch';
 
 const assetsType = {
     TOTAL: 'TOTAL',
-    TRADE: 'TRADE',
+    EX: 'EX',
     WALLET: 'WALLET'
 };
 export default {
-    components: { QrcodePopup, Tips, SwitchAddr, Pie },
+    components: { QrcodePopup, Tips, SwitchAddr, Pie, AssetSwitch },
     data() {
         return {
             isShowNameInput: false,
@@ -89,7 +103,7 @@ export default {
             qrcode: null,
             qrcodeShow: false,
             getTestTokenAble: true,
-            assetsView: assetsType.TOTAL
+            assetsType: assetsType.TOTAL
         };
     },
     computed: {
@@ -118,8 +132,9 @@ export default {
             return `${ currency === 'en' ? '$' : '¥' }${ total }`;
         },
         assetMap() {
-            // todo
-            return null;
+            return  JSON.parse(JSON.stringify([ ...this.defaultTokenList, ...this.userStorageTokenList, ...this.otherWhithBalance, ...this.officalGateTokenList ])).forEach(t => {
+                t.asset = bigNumber.plus(t.totalAsset, t.totalExAsset);
+            });
         },
         activeAddr() {
             return this.$store.getters.activeAddr;
@@ -205,102 +220,111 @@ export default {
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
 .click-able {
-    cursor: pointer;
+  cursor: pointer;
 }
 .account-head-wrapper {
-    position: relative;
-    text-align: center;
-    background: #fff;
-    border-radius: 2px;
+  position: relative;
+  text-align: center;
+  background: #fff;
+  border-radius: 2px;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  height: 124px;
+  min-width: 1300px;
+  align-items: center;
+  .head__item {
+    border-right: 1px solid rgba(227, 235, 245, 0.6);
     display: flex;
-    flex-wrap: nowrap;
-    justify-content: space-between;
-    height: 124px;
-    min-width: 1300px;
     align-items: center;
-    .head__item {
-        border-right: 1px solid rgba(227, 235, 245, 0.6);
+    padding: 0 30px;
+    min-height: 84px;
+    .icon {
+      height: 34px;
+      width: 34px;
+      margin-right: 20px;
+    }
+    .address-content {
+      max-width: 300px;
+      font-size: 14px;
+      word-break: break-all;
+      box-sizing: border-box;
+      background: #f3f6f9;
+      color: #5e6875;
+      padding: 9px;
+      display: flex;
+      align-items: center;
+      margin: 5px auto;
+      display: flex;
+      position: relative;
+      &__operate {
+        width: 16px;
+        height: 16px;
+        margin-left: 10px;
+      }
+    }
+    .head-right {
+      font-size: 20px;
+      color: #1d2024;
+      text-align: left;
+      font-family: $font-bold, arial, sans-serif;
+      word-break: break-all;
+      .head-title {
         display: flex;
         align-items: center;
-        padding: 0 30px;
-        min-height: 84px;
-        .icon {
-            height: 34px;
-            width: 34px;
-            margin-right: 20px;
-        }
-        .address-content {
-            max-width: 300px;
-            font-size: 14px;
-            word-break: break-all;
-            box-sizing: border-box;
-            background: #f3f6f9;
-            color: #5e6875;
-            padding: 9px;
-            display: flex;
-            align-items: center;
-            margin: 5px auto;
-            display: flex;
-            position: relative;
-            &__operate {
-                width: 16px;
-                height: 16px;
-                margin-left: 10px;
-            }
-        }
-        .head-right {
-            font-size: 20px;
-            color: #1d2024;
-            text-align: left;
-            font-family: $font-bold, arial, sans-serif;
-            word-break: break-all;
-            .head-title {
-                display: flex;
-                align-items: center;
-                position: relative;
-                height: 20px;
-                line-height: 20px;
-                font-size: 14px;
-                letter-spacing: 0.35px;
-                padding-bottom: 10px;
-                font-family: $font-bold, arial, sans-serif;
-                color: #5e6875;
-                font-family: $font-bold;
+        position: relative;
+        height: 20px;
+        line-height: 20px;
+        font-size: 14px;
+        letter-spacing: 0.35px;
+        padding-bottom: 10px;
+        font-family: $font-bold, arial, sans-serif;
+        color: #5e6875;
+        font-family: $font-bold;
 
-                .edit {
-                    display: inline-block;
-                    width: 20px;
-                    height: 20px;
-                    margin-left: 20px;
-                }
-            }
-            .name {
-                font-size: 18px;
-                line-height: 26px;
-            }
+        .edit {
+          display: inline-block;
+          width: 20px;
+          height: 20px;
+          margin-left: 20px;
+        }
+      }
+      .name {
+        font-size: 18px;
+        line-height: 26px;
+      }
 
-            input {
-                height: 32px;
-                line-height: 32px;
-                font-size: 20px;
-                width: 100%;
-            }
-        }
-        .pie-chart {
-            margin-left: 30px;
-            padding: 5px 0;
-        }
-        &.worth {
-            flex-grow: 1;
-            display: flex;
-            justify-content: space-between;
-            .assets {
-                flex-grow: 1;
-                display: flex;
-                flex-direction: column;
-                align-items: flex-start;
-            }
-        }
+      input {
+        height: 32px;
+        line-height: 32px;
+        font-size: 20px;
+        width: 100%;
+      }
     }
+    .pie-chart {
+      margin-left: 30px;
+      padding: 5px 0;
+    }
+    &.worth {
+      flex-grow: 1;
+      display: flex;
+      justify-content: space-between;
+      .assets {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        height: 88px;
+        justify-content: space-between;
+        .asset__btc {
+        }
+        .asset__cash {
+          color: #5e687594;
+          margin-top: 4px;
+          font-size: 12px;
+        }
+      }
+    }
+  }
 }
 </style>

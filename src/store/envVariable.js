@@ -1,4 +1,7 @@
-import { storage as localStorage, constant } from 'utils/store';
+import {
+    storage as localStorage,
+    constant
+} from 'utils/store';
 
 const currencyKey = constant.CurrencyKey;
 const autoLogoutKey = constant.AutoLogoutKey;
@@ -56,4 +59,19 @@ const actions = {
     }
 };
 
-export default { state, mutations, actions };
+const getters = {
+    currencySymbol(state) {
+        const symbolMap = {
+            cny: '¥',
+            usd: '$'
+        };
+        return symbolMap[state.currency];
+    }
+};
+
+export default {
+    state,
+    mutations,
+    actions,
+    getters
+};
