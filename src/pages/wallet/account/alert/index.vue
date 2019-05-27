@@ -30,13 +30,15 @@
 
 <script>
 import { chargeDetail } from 'services/trade';
-import d from "dayjs";
+import d from 'dayjs';
 
 export default {
     props: {
         token: {
             type: Object,
-            default: ()=>({})
+            default: () => {
+                return {};
+            }
         }
     },
     data() {
