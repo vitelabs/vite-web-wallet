@@ -294,8 +294,12 @@ const getters = {
             ...getters.defaultTokenList,
             ...getters.officalGateTokenList
         ].map(t => t.tokenId);
-        return Object.keys(getters.balanceInfo)
-            .filter(i => (!bigNumber.isEqual(getters.balanceInfo[i].totalAmount, 0) || !bigNumber.isEqual(exBalance[i].totalExAmount, 0)) && contains.indexOf(i) === -1)
+        return Object.keys(allToken)
+            .filter(i => {
+                const walletAmount = getters.balanceInfo[i] ? getters.balanceInfo[i].totalAmount : 0;
+                const exAmount = exBalance[i] ? exBalance[i].totalExAmount : 0;
+                return (!bigNumber.isEqual(walletAmount, 0) || !bigNumber.isEqual(exAmount, 0)) && contains.indexOf(i) === -1;
+            })
             .map(i => {
                 const {
                     availableExAmount = '',
