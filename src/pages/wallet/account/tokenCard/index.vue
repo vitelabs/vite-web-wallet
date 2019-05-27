@@ -22,7 +22,7 @@
             {{ `${token.fundFloat || "--"} ${token.tokenSymbol}` }}
         </div>
         <div class="col">
-            <div class="underline" @click="showDetail('gate')">
+            <div class="underline click-able" @click="showDetail('gate')" >
                 {{ token.gateInfo.gateway || token.type==='NATIVE'?"--":"自定义网关" }}
             </div>
             <div class="op_group" v-if="token.gateInfo.url">
