@@ -14,7 +14,8 @@ export function validFormat(amount = '', decimals = 8) {
     return 0;
 }
 
-export function getValidBalance({ decimals, balance, minNum, maxNum, errorMap }) {
+export function getValidBalance({ decimals, balance = 0, minNum, maxNum, errorMap }) {
+    balance = balance || 0;
     return function (amount) {
         if (!amount) {
             return null;

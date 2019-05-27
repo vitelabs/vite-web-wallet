@@ -31,6 +31,8 @@
 import testNotice from 'components/testNotice';
 
 import viteLogo from 'assets/imgs/sidebar_logo.svg';
+import assets from 'assets/imgs/assets_default.svg';
+import assetsActive from 'assets/imgs/assets_pressed.svg';
 import wallet from 'assets/imgs/wallet_default.svg';
 import walletActive from 'assets/imgs/wallet_pressed.svg';
 import setting from 'assets/imgs/settings_default.svg';
@@ -64,6 +66,8 @@ export default {
             iconHover: false,
             viteLogo,
             icon: {
+                assets,
+                assetsActive,
                 wallet,
                 walletActive,
                 trade,
