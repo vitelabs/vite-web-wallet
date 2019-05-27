@@ -22,10 +22,10 @@
             {{ `${token.fundFloat || "--"} ${token.tokenSymbol}` }}
         </div>
         <div class="col">
-            <div class="underline">
-                {{ token.gateInfo.gateway || "添加网关" }}
+            <div class="underline" @click="showDetail('gate')">
+                {{ token.gateInfo.gateway || token.type==='NATIVE'?"--":"自定义网关" }}
             </div>
-            <div class="op_group">
+            <div class="op_group" v-if="token.gateInfo.url">
                 <div class="op" @click="charge">跨链充值</div>
                 <div class="op" @click="withdraw">跨链提现</div>
                 <div class="op readonly"  @click="showDetail('withdraw')">跨链充提记录</div>

@@ -60,12 +60,6 @@ import getTokenIcon from 'utils/getTokenIcon';
 import { getExplorerLink } from 'utils/getLink';
 import Tb from './tb';
 
-const tokenEnum = {
-    GATE: 'gate',
-    TOKEN_INFO: 'tokenInfo',
-    RECORD: 'record'
-};
-
 export default {
     components: { Tb },
     props: {
@@ -77,7 +71,7 @@ export default {
     },
     data() {
         return {
-            tabName: this.initTabName || tokenEnum.TOKEN_INFO,
+            tabName: this.initTabName || 'tokenInfo',
             urlCache: this.token.gateInfo.url,
             dTitle: this.$t('tokenCard.tokenInfo.title', { tokenSymbol: this.token.tokenSymbol })
         };
