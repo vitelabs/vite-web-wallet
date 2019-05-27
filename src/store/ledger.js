@@ -2,18 +2,19 @@ import { constant } from '@vite/vitejs';
 import { timer } from 'utils/asyncFlow';
 import $ViteJS from 'utils/viteClient';
 import { defaultTokenMap } from 'utils/constant';
-
+import { tokenInfoFromGithub } from 'services/trade';
+import getTokenIcon from 'utils/getTokenIcon';
 
 const ViteId = constant.Vite_TokenId;
 const MAX_TOKEN_NUM = 100;
-
 
 let heightTimer = null;
 const state = {
     currentHeight: '',
     defaultTokenIds: defaultTokenMap,
     tokenInfoMaps: {},
-    allTokens: []
+    allTokens: [],
+    tokenMapFromGithub: {}
 };
 
 const mutations = {
@@ -34,6 +35,13 @@ const mutations = {
     },
     setAllTokens(state, payload = []) {
         state.allTokens = payload;
+    },
+    setTokenInfoFromGithub(state, payload = []) {
+        payload.forEach(t => {
+            state.tokenMapFromGithub[t.tokenAddress]
+        = state.tokenMapFromGithub[t.tokenAddress] || {};
+            state.tokenMapFromGithub[t.tokenAddress].icon = t.icon;
+        });
     }
 };
 
@@ -52,12 +60,17 @@ const actions = {
         }
     },
     startLoopHeight({ commit }) {
-        heightTimer = heightTimer || new timer(() => $ViteJS.ledger.getSnapshotChainHeight().then(result => {
-            commit('setCurrentHeight', result);
-        }), 2000);
+        heightTimer
+      = heightTimer
+      || new timer(() =>
+          $ViteJS.ledger.getSnapshotChainHeight().then(result => {
+              commit('setCurrentHeight', result);
+          }),
+      2000);
         heightTimer.start();
     },
-    getAllTokens({ commit }) {// 暂时为前端提供代币搜索功能，获取全部token信息；
+    getAllTokens({ commit }) {
+    // 暂时为前端提供代币搜索功能，获取全部token信息；
         $ViteJS.mintage.getTokenInfoList(0, MAX_TOKEN_NUM).then(data => {
             commit('setAllTokens', data.tokenInfoList);
         });
@@ -72,6 +85,9 @@ const actions = {
             commit('setTokenInfo', { tokenInfo: result, tokenId });
             return result;
         });
+    },
+    async fetchTokenInfoFromGithub({ commit }) {
+        tokenInfoFromGithub().then(data => commit(data));
     }
 };
 
@@ -79,7 +95,10 @@ const getters = {
     allTokensMap(state) {
         const map = {};
         state.allTokens.forEach(t => {
-            map[t.tokenId] = t;
+            map[t.tokenId] = Object.assign({},
+                t,
+                state.tokenMapFromGithub[t.tokenId] || {});
+            map[t.tokenId].icon = map[t.tokenId].icon || getTokenIcon(t.tokenId);
         });
         return map;
     },
