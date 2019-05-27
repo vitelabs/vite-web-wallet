@@ -48,9 +48,9 @@ export default {
             task = null;
 
             task = new subTask('latestOrder', ({ args, data }) => {
-                // console.log('成交提醒', data);
+                console.log('成交提醒', data);
 
-                if (this.address !== args.address || !data) {
+                if (this.address !== args.address || !data || data.status !== 2) {
                     return;
                 }
 

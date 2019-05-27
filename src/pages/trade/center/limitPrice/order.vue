@@ -71,14 +71,12 @@
 </template>
 
 <script>
-import { constant } from '@vite/vitejs';
 import viteInput from 'components/viteInput';
 import slider from 'components/slider';
 import sendTx from 'utils/sendTx';
 import BigNumber from 'utils/bigNumber';
 import { initPwd } from 'components/password/index.js';
 
-const { DexFund_Addr } = constant;
 const taker = process.env.NODE_ENV === 'dexTestNet' ? 0.0025 : 0.001;
 const maxDigit = 8;
 
@@ -611,22 +609,13 @@ export default {
             this.isLoading = true;
             const tokenDecimals = this.ftokenDetail.tokenDecimals;
             quantity = BigNumber.toMin(quantity, tokenDecimals);
-            const side = this.orderType === 'buy' ? 0 : 1;
 
-            // [TODO] vitejs 2.1.2
-            // 'dexFundNewOrder', {
-            //     tradeToken,
-            //     quoteToken,
-            //     side: this.orderType === 'buy' ? 0 : 1,
-            //     price,
-            //     quantity
-            // }
-            // console.log([ tradeToken, quoteToken, side, 0, price, quantity ]);
-            sendTx('callContract', {
-                toAddress: DexFund_Addr,
-                abi: { 'type': 'function', 'name': 'DexFundNewOrder', 'inputs': [ { 'name': 'tradeToken', 'type': 'tokenId' }, { 'name': 'quoteToken', 'type': 'tokenId' }, { 'name': 'side', 'type': 'bool' }, { 'name': 'orderType', 'type': 'int8' }, { 'name': 'price', 'type': 'string' }, { 'name': 'quantity', 'type': 'uint256' } ] },
-                params: [ tradeToken, quoteToken, side, 0, price, quantity ],
-                tokenId: tradeToken
+            sendTx('dexFundNewOrder', {
+                tradeToken,
+                quoteToken,
+                side: this.orderType === 'buy' ? 0 : 1,
+                price,
+                quantity
             }, {
                 pow: true,
                 powConfig: {
