@@ -33,16 +33,10 @@
 </template>
 
 <script>
-import { constant, utils } from '@vite/vitejs';
 import d from 'dayjs';
 import sendTx from 'utils/sendTx';
-import { subTask } from 'utils/proto/subTask';
 import { order } from 'services/trade';
 import { initPwd } from 'components/password/index.js';
-
-const { DexTrade_Addr } = constant;
-
-let task = null;
 
 export default {
     props: {
@@ -68,6 +62,7 @@ export default {
     },
     data() {
         return {
+            isSubscribe: false,
             sortIndex: 0,
             sortType: 1,
             addr: '',
@@ -83,6 +78,9 @@ export default {
         }
     },
     computed: {
+        currentOpenOrders() {
+            return this.$store.state.exchangeCurrentOpenOrders.list;
+        },
         sortedList() {
             return this.list.slice(0).sort((a, b) => (b.date - a.date));
         },
@@ -102,6 +100,86 @@ export default {
         },
         defaultAddr() {
             this.init();
+        },
+        currentOpenOrders(data) {
+            if (!this.isSubscribe) {
+                return;
+            }
+
+            const list = [];
+            const newList = {};
+
+            data && data.forEach(_item => {
+                newList[_item.orderId] = _item;
+            });
+
+            for (const orderId in this.oldList) {
+                const _item = this.oldList[orderId];
+                if (newList[orderId]) {
+                    continue;
+                }
+
+                list.push(_item);
+                this.changeList[orderId] = this.changeList[orderId] || {};
+                this.changeList[orderId].status = 2; // Delete
+                this.changeList[orderId].time = new Date().getTime();
+                this.changeList[orderId].rawData = _item;
+            }
+
+            for (const orderId in newList) {
+                list.push(newList[orderId]);
+
+                if (this.oldList[orderId] && +this.oldList[orderId].executedPercent === +newList[orderId].executedPercent) {
+                    continue;
+                }
+
+                this.changeList[orderId] = this.changeList[orderId] || {};
+
+                if (this.oldList[orderId]) {
+                    this.changeList[orderId].status = 0; // Change
+                } else {
+                    this.changeList[orderId].status = 1; // Add
+                }
+                this.changeList[orderId].time = new Date().getTime();
+                this.changeList[orderId].rawData = newList[orderId];
+            }
+
+            for (const orderId in this.changeList) {
+                if (newList[orderId] || this.oldList[orderId]) {
+                    continue;
+                }
+                const rawData = this.changeList[orderId].rawData;
+                rawData.executedPercent = 1;
+                list.push(rawData);
+            }
+
+            setTimeout(() => {
+                const currentTime = new Date().getTime();
+                for (const orderId in this.changeList) {
+                    if (currentTime - this.changeList[orderId].time < 2000) {
+                        continue;
+                    }
+
+                    const item = this.changeList[orderId];
+                    if (item.status === 2) {
+                        let i;
+                        for (i = 0; i < this.list.length; i++) {
+                            if (this.list[i].orderId === orderId) {
+                                break;
+                            }
+                        }
+                        (i < this.list.length) && this.list.splice(i, 1);
+                    }
+
+                    delete this.changeList[orderId];
+                }
+
+                this.changeList = Object.assign({}, this.changeList);
+            }, 2000);
+
+            this.changeList = Object.assign({}, this.changeList);
+            this.oldList = newList;
+            this.list = list || [];
         }
     },
     methods: {
@@ -115,101 +193,12 @@ export default {
             this.subscribe();
         },
         subscribe() {
-            task = task || new subTask('orderQueryCurrent', ({ args, data }) => {
-                if (args.address !== this.defaultAddr || this.filterObj.symbol !== args.symbol || !data) {
-                    return;
-                }
-
-                data = data.order || data || [];
-
-                const list = [];
-                const newList = {};
-
-                data && data.forEach(_item => {
-                    newList[_item.orderId] = _item;
-                });
-
-                for (const orderId in this.oldList) {
-                    const _item = this.oldList[orderId];
-                    if (newList[orderId]) {
-                        continue;
-                    }
-
-                    list.push(_item);
-                    this.changeList[orderId] = this.changeList[orderId] || {};
-                    this.changeList[orderId].status = 2; // Delete
-                    this.changeList[orderId].time = new Date().getTime();
-                    this.changeList[orderId].rawData = _item;
-                }
-
-                for (const orderId in newList) {
-                    list.push(newList[orderId]);
-
-                    if (this.oldList[orderId] && +this.oldList[orderId].executedPercent === +newList[orderId].executedPercent) {
-                        continue;
-                    }
-
-                    this.changeList[orderId] = this.changeList[orderId] || {};
-
-                    if (this.oldList[orderId]) {
-                        this.changeList[orderId].status = 0; // Change
-                    } else {
-                        this.changeList[orderId].status = 1; // Add
-                    }
-                    this.changeList[orderId].time = new Date().getTime();
-                    this.changeList[orderId].rawData = newList[orderId];
-                }
-
-                for (const orderId in this.changeList) {
-                    if (newList[orderId] || this.oldList[orderId]) {
-                        continue;
-                    }
-                    const rawData = this.changeList[orderId].rawData;
-                    rawData.executedPercent = 1;
-                    list.push(rawData);
-                }
-
-                setTimeout(() => {
-                    const currentTime = new Date().getTime();
-                    for (const orderId in this.changeList) {
-                        if (currentTime - this.changeList[orderId].time < 2000) {
-                            continue;
-                        }
-
-                        const item = this.changeList[orderId];
-                        if (item.status === 2) {
-                            let i;
-                            for (i = 0; i < this.list.length; i++) {
-                                if (this.list[i].orderId === orderId) {
-                                    break;
-                                }
-                            }
-                            (i < this.list.length) && this.list.splice(i, 1);
-                        }
-
-                        delete this.changeList[orderId];
-                    }
-
-                    this.changeList = Object.assign({}, this.changeList);
-                }, 2000);
-
-                this.changeList = Object.assign({}, this.changeList);
-                this.oldList = newList;
-                this.list = list || [];
-
-                this.$store.commit('exSetCurrentOpenOrders', this.list);
-            }, 2000);
-
-            task.start(() => {
-                return {
-                    address: this.defaultAddr,
-                    ...this.filterObj
-                };
-            });
+            this.$store.dispatch('startOrderCurrent', this.filterObj);
+            this.isSubscribe = true;
         },
         unsubscribe() {
-            task && task.stop();
-            task = null;
+            this.$store.dispatch('stopOrderCurrent', this.filterObj);
+            this.isSubscribe = false;
         },
         update() {
             order({
@@ -231,23 +220,15 @@ export default {
                 this.$toast(this.$t('tradeOpenOrders.confirm.successToast'));
             };
 
-            // [TODO] vitejs 2.1.2
-            // 'dexTradeCancelOrder', {
-            //             orderId: order.orderId,
-            //             tradeToken: order.tradeToken
-            //         }
-
             initPwd({
                 title: this.$t('tradeOpenOrders.confirm.title'),
                 content: this.$t('tradeOpenOrders.confirm.content'),
                 submitTxt: this.$t('tradeOpenOrders.confirm.submitTxt'),
                 cancelTxt: this.$t('tradeOpenOrders.confirm.cancelTxt'),
                 submit: () => {
-                    sendTx('callContract', {
-                        tokenId: order.tradeToken,
-                        toAddress: DexTrade_Addr,
-                        abi: { 'type': 'function', 'name': 'DexTradeCancelOrder', 'inputs': [{ 'name': 'orderId', 'type': 'bytes' }] },
-                        params: [`0x${ utils._Buffer.from(order.orderId, 'base64').toString('hex') }`]
+                    sendTx('dexTradeCancelOrder', {
+                        orderId: order.orderId,
+                        tradeToken: order.tradeToken
                     })
                         .then(successSubmit)
                         .catch(err => {
