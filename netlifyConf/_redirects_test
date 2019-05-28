@@ -23,3 +23,7 @@
 /walletQuota /index.html 200
 /walletTransList /index.html 200
 /walletVote /index.html 200
+/help /index.html 200
+/assets /index.html 200
+/mintage /index.html 200
+/keystore /index.html 200
