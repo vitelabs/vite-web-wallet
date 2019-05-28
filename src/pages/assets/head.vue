@@ -35,7 +35,7 @@
         <div class="head__item">
             <img class="icon" src="~assets/imgs/head_addr.png" />
             <div class="head-right">
-                <SwitchAddr></SwitchAddr>
+                <SwitchAddr :isShowAddr="false"></SwitchAddr>
                 <span class="address-content">
                     <Tips ref="tips"></Tips>{{ activeAddr }}
                     <QrcodePopup :qrcodeString="addressQrcode"

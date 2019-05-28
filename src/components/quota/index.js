@@ -7,8 +7,7 @@ import quotaCancelComponent from './cancel.vue';
 const QuotaCancelComponent = Vue.extend(quotaCancelComponent);
 const cancelInstance = new QuotaCancelComponent({
     el: document.createElement('div'),
-    i18n,
-    router
+    i18n
 });
 
 export function quotaConfirm({
@@ -21,6 +20,7 @@ export function quotaConfirm({
         _close(null, cancelInstance.$el);
     };
     cancelInstance.submit = () => {
+        router.push({ name: 'wallet' });
         _close(null, cancelInstance.$el);
     };
 
