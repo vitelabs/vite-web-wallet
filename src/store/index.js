@@ -10,6 +10,7 @@ import envVariableStore from './envVariable';
 import exchange from './exchange/index';
 import gateInfo from './gateInfo';
 import walletStore from './wallet';
+import worldRate from './worldRate';
 
 Vue.use(vuex);
 
@@ -23,6 +24,7 @@ store.registerModule('SBP', SBPStore);
 store.registerModule('ledger', ledgerStore);
 store.registerModule('env', envVariableStore);
 store.registerModule('gateInfo', gateInfo);
+store.registerModule('worldRate', worldRate);
 
 for (const moduleName in exchange) {
     store.registerModule(moduleName, exchange[moduleName]);
@@ -34,5 +36,6 @@ store.dispatch('startLoopHeight');
 store.dispatch('getDefaultTokenList');
 store.dispatch('getAllTokens');
 store.dispatch('updateGateInfos');
+store.dispatch('fetchTokenInfoFromGithub');
 
 export default store;
