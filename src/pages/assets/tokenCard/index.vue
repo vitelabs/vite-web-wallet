@@ -168,7 +168,7 @@ export default {
                 console.error(e);
             });
         }),
-        showDetail(initTabName='tokenInfo') {
+        showDetail(initTabName = 'tokenInfo') {
             tokenInfoDialog({ token: this.token, initTabName }).catch(e => {
                 console.error(e);
             });

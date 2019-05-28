@@ -67,7 +67,7 @@ export default {
             type: Object,
             required: true
         },
-        initTabName: { type: String,default:'tokenInfo' }
+        initTabName: { type: String, default: 'tokenInfo' }
     },
     data() {
         return {
@@ -76,8 +76,8 @@ export default {
             dTitle: this.$t('tokenCard.tokenInfo.title', { tokenSymbol: this.token.tokenSymbol })
         };
     },
-    beforeMount(){
-        window.dddddd=this;
+    beforeMount() {
+        window.dddddd = this;
     },
     computed: {
         url: {
