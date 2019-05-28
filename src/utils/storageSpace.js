@@ -1,15 +1,13 @@
-// import { wallet } from 'wallet';
+import { getActiveAcc } from 'wallet';
 import storage from 'utils/store';
-
-const wallet = {};
 
 export const addrSpace = {
     get key() {
-        return `${ wallet.defaultAddr }`;
+        return `${ getActiveAcc().address }`;
     },
 
     getItem(key) {
-        if (!wallet.defaultAddr) {
+        if (!getActiveAcc().address) {
             return null;
         }
 
@@ -17,7 +15,7 @@ export const addrSpace = {
     },
 
     setItem(key, content) {
-        if (!wallet.defaultAddr) {
+        if (!getActiveAcc().address) {
             return;
         }
 

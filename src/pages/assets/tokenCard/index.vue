@@ -1,10 +1,10 @@
 <template>
     <div class="token-card">
-        <div class="col title click-able" @click="showDetail">
+        <div class="col title click-able" >
             <div>
-                <img :src="token.icon" class="icon" />
-                <span class="token-name underline" @click="showDetail">{{
-                    token.tokenSymbol
+                <img :src="token.icon" class="icon" @click="()=>showDetail()" />
+                <span class="token-name underline" @click="()=>showDetail()">{{
+                    token.tokenSymbol==='VITE'?token.tokenSymbol:`${token.tokenSymbol}-${token.index}`
                 }}</span>
             </div>
             <div class="separate"></div>
@@ -22,13 +22,13 @@
             {{ `${token.fundFloat || "--"} ${token.tokenSymbol}` }}
         </div>
         <div class="col">
-            <div class="underline click-able" @click="token.type!=='NATIVE'&&showDetail('gate')" >
+            <div class="underline click-able" @click="()=>(token.type!=='NATIVE'&&showDetail('gate'))" >
                 {{ token.gateInfo.gateway || token.type==='NATIVE'?"--":$t('tokenCard.gateInfo.selfdefined') }}
             </div>
             <div class="op_group" v-if="token.gateInfo.url">
                 <div class="op" @click="charge">跨链充值</div>
                 <div class="op" @click="withdraw">跨链提现</div>
-                <div class="op readonly"  @click="showDetail('withdraw')">跨链充提记录</div>
+                <div class="op readonly"  @click="()=>showDetail('withdraw')">跨链充提记录</div>
             </div>
             <div class="separate"></div>
         </div>
@@ -52,9 +52,10 @@
                     ≈{{ currencySymbol }} {{ assetView.cash }}
                 </div>
             </div>
+            <div class="unbind click-able" @click="unbind" v-if="showUnbind"></div>
         </div>
         <Alert ref="alert" :token="token" />
-        <transition :closeTrans="closeTrans" :token="token" />
+        <transaction :closeTrans="closeTrans" :token="token" v-if="isShowTrans" />
     </div>
 </template>
 
@@ -67,7 +68,6 @@ import {
     exWithdrawDialog,
     exChargeDialog
 } from '../dialog';
-import getTokenIcon from 'utils/getTokenIcon';
 import bigNumber from 'utils/bigNumber';
 import { gateStorage } from 'services/gate';
 import transaction from '../transaction';
@@ -154,9 +154,6 @@ export default {
         unbind() {
             gateStorage.unbindToken(this.token.tokenId);
         },
-        getIcon(id) {
-            return getTokenIcon(id);
-        },
         receive() {
             receiveDialog({ token: this.token }).catch(e => {
                 console.error(e);
@@ -172,7 +169,7 @@ export default {
                 console.error(e);
             });
         }),
-        showDetail(initTabName) {
+        showDetail(initTabName = 'tokenInfo') {
             tokenInfoDialog({ token: this.token, initTabName }).catch(e => {
                 console.error(e);
             });
@@ -230,6 +227,15 @@ export default {
         align-self: stretch;
         position: relative;
         @include colWidth;
+        .unbind{
+            height: 10px;
+            width: 12px;
+            position: absolute;
+            bottom: 6px;
+            right: 6px;
+            background-image: url(~assets/imgs/add_token.png);
+            background-size: cover;
+        }
         .underline {
             border-bottom: 1px dotted #5e6875;
         }

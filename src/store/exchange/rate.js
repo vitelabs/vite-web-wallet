@@ -1,10 +1,10 @@
 import { timer } from 'utils/asyncFlow';
-import { rateFiat } from 'services/trade';
+import { rateToken } from 'services/trade';
 
-const loopTime = 2 * 60 * 60 * 1000;
+const loopTime = 5000;
 let rateTimer = null;
 
-const state = { rateMap: {} };
+const state = { rateMap: {}, rateTokenIds: [] };
 
 const mutations = {
     setExchangeRate(state, rateList) {
@@ -12,13 +12,16 @@ const mutations = {
         rateList && rateList.forEach(rate => {
             state.rateMap[rate.tokenId] = rate;
         });
+    },
+    setRateTokenIds(state, payload) {
+        state.rateTokenIds = Array.from(new Set([ ...state.rateTokenIds, ...payload ]));
     }
 };
 
 const actions = {
-    startLoopExchangeRate({ commit, dispatch }) {
+    startLoopExchangeRate({ commit, dispatch, state }) {
         dispatch('stopLoopExchangeRate');
-        const f = () => rateFiat().then(data => {
+        const f = () => rateToken({ tokenIdList: state.rateTokenIds }).then(data => {
             commit('setExchangeRate', data);
         });
 
@@ -28,6 +31,9 @@ const actions = {
     stopLoopExchangeRate() {
         rateTimer && rateTimer.stop();
         rateTimer = null;
+    },
+    addRateTokens({ commit }, payload = []) {
+        commit('setRateTokenIds', payload);
     }
 };
 

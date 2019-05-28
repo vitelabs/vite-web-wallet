@@ -67,7 +67,7 @@ export default {
             type: Object,
             required: true
         },
-        initTabName: { type: String }
+        initTabName: { type: String, default: 'tokenInfo' }
     },
     data() {
         return {
@@ -75,6 +75,9 @@ export default {
             urlCache: this.token.gateInfo.url,
             dTitle: this.$t('tokenCard.tokenInfo.title', { tokenSymbol: this.token.tokenSymbol })
         };
+    },
+    beforeMount() {
+        window.dddddd = this;
     },
     computed: {
         url: {
