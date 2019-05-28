@@ -22,14 +22,8 @@
                     </div>
                 </div>
                 <tokenCard
-                    v-for="token in nativeTokenList"
+                    v-for="token in tokenList"
                     :key="token.tokenId"
-                    :token="token"
-                    :assetType="assetType"
-                ></tokenCard>
-                <tokenCard
-                    v-for="token in crossChainTokenList"
-                    :key="`_${token.tokenId}`"
                     :token="token"
                     :assetType="assetType"
                 ></tokenCard>
@@ -76,6 +70,9 @@ export default {
             gateStorage.bindTokens(val.map(t => {
                 return { tokenId: t.tokenId, gateInfo: {} };
             }));
+        },
+        showTokenIds(val) {
+            this.$store.dispatch('addRateTokens', val);
         }
     },
     beforeMount() {
@@ -83,17 +80,12 @@ export default {
         this.$store.dispatch('startLoopExchangeRate');
     },
     computed: {
-        nativeTokenList() {
+        tokenList() {
             return [
                 ...this.defaultTokenList,
-                ...this.userStorageTokenList.filter(t => !t.gateInfo.url),
-                ...this.otherWhithBalance
-            ].filter(filterFunc(this.filterObj));
-        },
-        crossChainTokenList() {
-            return [
                 ...this.officalGateTokenList,
-                ...this.userStorageTokenList.filter(t => t.gateInfo.url)
+                ...this.userStorageTokenList,
+                ...this.otherWhithBalance
             ].filter(filterFunc(this.filterObj));
         },
         defaultTokenList() {
@@ -107,6 +99,14 @@ export default {
         },
         otherWhithBalance() {
             return this.$store.getters.otherWhithBalance;
+        },
+        showTokenIds() {
+            return [
+                ...this.defaultTokenList,
+                ...this.officalGateTokenList,
+                ...this.userStorageTokenList,
+                ...this.otherWhithBalance
+            ].map(t => t.tokenId);
         }
     },
     methods: {
