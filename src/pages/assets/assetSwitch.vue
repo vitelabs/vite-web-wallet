@@ -21,7 +21,7 @@ export default {
     },
     data() {
         return {
-            optList: [ { name: '全部资产估值', value: 'TOTAL' }, { name: '钱包资产估值', value: 'WALLET' }, { name: '交易所资产估值', value: 'EX' } ],
+            optList: [ { name: this.$t('tokenCard.assetType')['TOTAL'], value: 'TOTAL' }, { name: this.$t('tokenCard.assetType')['WALLET'], value: 'WALLET' }, { name: this.$t('tokenCard.assetType')['EX'], value: 'EX' } ],
             innerValue: this.value
         };
     }
