@@ -10,7 +10,7 @@
                 <div class="__row-t">{{ $t('balance') }}</div>
                 <div class="__unuse-row">
                     <img  :src="token.icon||getIcon(token.tokenId)" class="__icon" />
-                    {{ token.symbol }} <span class="__right">{{ showAccBalance }}</span>
+                    {{ token.tokenSymbol }} <span class="__right">{{ showAccBalance }}</span>
                 </div>
             </div>
 
