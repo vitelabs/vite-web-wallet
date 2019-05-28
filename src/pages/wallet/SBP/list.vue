@@ -42,6 +42,48 @@
         <div class="__tb_content __tb_no_data" v-show="!list || !list.length">
             {{ $t('hint.noData') }}
         </div>
+
+        <password v-show="isShowReward"
+                  :title="$t('walletSBP.rewardConfirm.title')"
+                  :submitTxt="$t('walletSBP.rewardConfirm.rightBtn')"
+                  :cancelTxt="$t('walletSBP.rewardConfirm.leftBtn')"
+                  :isShowPWD="isShowPWD" :cancel="hideReward">
+            <div style="font-size: 14px; margin-bottom: 10px">
+                {{ $t('walletSBP.rewardConfirm.describe1', { time: this.getTime(new Date().getTime()) }) }}
+                <div style="
+                        padding: 10px 15px;
+                        box-sizing: border-box;
+                        height: 40px;
+                        line-height: 20px;
+                        background: rgba(243,246,249,1);
+                        border-radius: 2px;
+                        border: 1px solid rgba(212,222,231,1);
+                        margin: 15px 0;
+                    ">VITE
+                    <span style="color: rgba(0,122,255,1); float: right;">{{ totalReward || '--' }}</span>
+                </div>
+                <div style="
+                        font-family: PingFang-SC-Regular;
+                        font-weight: 400;
+                        color: rgba(94,104,117,1);
+                        line-height: 18px;
+                    "><span style="
+                            width: 6px;
+                            height: 6px;
+                            background: rgba(0,122,255,1);
+                            display: inline-block;
+                            margin-right: 4px;
+                            border-radius: 6px;
+                    "></span>
+                    {{ $t('walletSBP.rewardConfirm.describe2') }}
+                    <a style="color: #007AFF" target="_blank"
+                       :href="getUrl(rewardItem && rewardItem.rawData.name)">
+                        {{ $t('walletSBP.rewardConfirm.describe3') }}
+                    </a>
+                    {{ $t('walletSBP.rewardConfirm.describe4') }}
+                </div>
+            </div>
+        </password>
     </div>
 </template>
 
@@ -51,13 +93,15 @@ import ellipsisAddr from 'utils/ellipsisAddr.js';
 import BigNumber from 'utils/bigNumber';
 import sendTx from 'utils/sendTx';
 import $Vite from 'utils/viteClient';
+import { constant } from 'utils/store';
 import tooltips from 'components/tooltips';
 import { initPwd } from 'components/password/index.js';
+import password from 'components/password/password.vue';
 
-const amount = 100000;
+const amount = 500000;
 
 export default {
-    components: { tooltips },
+    components: { tooltips, password },
     props: {
         showConfirm: {
             type: Function,
@@ -80,10 +124,18 @@ export default {
     data() {
         return {
             showTimeTips: -1,
-            totalReward: null
+            totalReward: null,
+            isShowReward: false,
+            rewardItem: null
         };
     },
     computed: {
+        isShowPWD() {
+            const currHDAcc = this.$store.state.wallet.currHDAcc;
+            const accInfo = currHDAcc ? currHDAcc.getAccInfo() : null;
+            const isHoldPWD = accInfo ? !!accInfo[constant.HoldPwdKey] : false;
+            return !isHoldPWD;
+        },
         address() {
             return this.$store.getters.activeAddr;
         },
@@ -152,6 +204,12 @@ export default {
         },
         hideTime() {
             this.showTimeTips = -1;
+        },
+        getTime(time) {
+            return date(time, 'zh');
+        },
+        getUrl(name) {
+            return `${ process.env.viteNet }${ this.$i18n.locale === 'zh' ? 'zh/' : '' }SBPDetail/${ name }`;
         },
 
         sendRegisterTx(item) {
@@ -239,60 +297,29 @@ export default {
             }
             this.showConfirm('edit', item.rawData);
         },
-        showReward(item) {
-            initPwd({
-                title: this.$t('walletSBP.rewardConfirm.title'),
-                submitTxt: this.$t('walletSBP.rewardConfirm.rightBtn'),
-                cancelTxt: this.$t('walletSBP.rewardConfirm.leftBtn'),
-                content: `<div style="font-size: 14px;">
-                    ${ this.$t('walletSBP.rewardConfirm.describe1', { time: date(new Date().getTime(), 'zh') }) }
-                    <div style="
-                        padding: 10px 15px;
-                        box-sizing: border-box;
-                        height: 40px;
-                        line-height: 20px;
-                        background:rgba(243,246,249,1);
-                        border-radius:2px;
-                        border:1px solid rgba(212,222,231,1);
-                        margin: 15px 0;
-                    ">VITE
-                        <span style="color:rgba(0,122,255,1); float: right;">${ this.totalReward || '--' }</span>
-                    </div>
-                    <div style="
-                        font-family: PingFang-SC-Regular;
-                        font-weight: 400;
-                        color: rgba(94,104,117,1);
-                        line-height: 18px;
-                    "><span style="
-                            width: 6px;
-                            height: 6px;
-                            background: rgba(0,122,255,1);
-                            display: inline-block;
-                            margin-right: 4px;
-                            border-radius: 6px;
-                    "></span>
-                    ${ this.$t('walletSBP.rewardConfirm.describe2') }
-                    <a style="color: #007AFF" href="${ process.env.viteNet }${ this.$i18n.locale === 'zh' ? 'zh/' : '' }SBPDetail/${ item.rawData.name }"  target="_blank">${ this.$t('walletSBP.rewardConfirm.describe3') }</a>
-                    ${ this.$t('walletSBP.rewardConfirm.describe4') }
-                    </div>
-                </div>`,
-                submit: () => {
-                    sendTx('retrieveReward', {
-                        nodeName: item.rawData.name,
-                        toAddress: this.address
-                    }, {
-                        pow: false,
-                        confirm: {
-                            showMask: true,
-                            operate: this.$t('walletSBP.rewardBtn')
-                        }
-                    }).then(() => {
-                        this.$toast(this.$t('hint.request', { name: this.$t('walletSBP.rewardBtn') }));
-                    }).catch(err => {
-                        this.$toast('Claim Failed', err);
-                    });
+        sendReward() {
+            sendTx('retrieveReward', {
+                nodeName: this.rewardItem.rawData.name,
+                toAddress: this.address
+            }, {
+                pow: false,
+                confirm: {
+                    showMask: true,
+                    operate: this.$t('walletSBP.rewardBtn')
                 }
-            }, true);
+            }).then(() => {
+                this.$toast(this.$t('hint.request', { name: this.$t('walletSBP.rewardBtn') }));
+            }).catch(err => {
+                this.$toast('Claim Failed', err);
+            });
+        },
+        showReward(item) {
+            this.isShowReward = true;
+            this.rewardItem = item;
+        },
+        hideReward() {
+            this.isShowReward = false;
+            this.rewardItem = null;
         },
         reward(item) {
             this.totalReward = null;

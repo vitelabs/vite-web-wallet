@@ -69,7 +69,6 @@ import tooltips from 'components/tooltips';
 import search from 'components/search';
 import secTitle from 'components/secTitle';
 import loading from 'components/loading';
-import confirm from 'components/confirm';
 import { initPwd } from 'components/password/index.js';
 import { timer } from 'utils/asyncFlow';
 import BigNumber from 'utils/bigNumber';
@@ -77,7 +76,7 @@ import $ViteJS from 'utils/viteClient';
 import sendTx from 'utils/sendTx';
 
 export default {
-    components: { secTitle, tooltips, search, loading, confirm },
+    components: { secTitle, tooltips, search, loading },
     beforeMount() {
         this.tokenInfo = this.$store.getters.viteTokenInfo;
 
