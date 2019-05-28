@@ -52,9 +52,10 @@
                     ≈{{ currencySymbol }} {{ assetView.cash }}
                 </div>
             </div>
+            <div class="unbind click-able" @click="unbind" v-if="showUnbind"></div>
         </div>
         <Alert ref="alert" :token="token" />
-        <transition :closeTrans="closeTrans" :token="token" />
+        <transition :closeTrans="closeTrans" :token="token" v-if="isShowTrans" />
     </div>
 </template>
 
@@ -226,6 +227,15 @@ export default {
         align-self: stretch;
         position: relative;
         @include colWidth;
+        .unbind{
+            height: 10px;
+            width: 12px;
+            position: absolute;
+            bottom:6px;
+            right:6px;
+            background-image: url(~assets/imgs/add_token.png);
+            background-size: cover;
+        }
         .underline {
             border-bottom: 1px dotted #5e6875;
         }
