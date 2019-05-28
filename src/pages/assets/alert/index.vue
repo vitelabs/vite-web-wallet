@@ -76,7 +76,7 @@ export default {
                 address: this.address,
                 tokenId
             }).then(data => {
-                this.detailData = data.records;
+                this.detailData = data.record;
             });
         }
     }

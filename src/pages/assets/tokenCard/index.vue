@@ -55,7 +55,7 @@
             <div class="unbind click-able" @click="unbind" v-if="showUnbind"></div>
         </div>
         <Alert ref="alert" :token="token" />
-        <transition :closeTrans="closeTrans" :token="token" v-if="isShowTrans" />
+        <transaction :closeTrans="closeTrans" :token="token" v-if="isShowTrans" />
     </div>
 </template>
 
