@@ -8,23 +8,27 @@
         </Search>
         <div class="filter op" @click="addToken">
             <img src="~assets/imgs/add_token.png" />
-            <div>{{$t('tokenCard.addToken.title')}}</div>
+            <div>{{ $t("tokenCard.addToken.title") }}</div>
         </div>
         <div class="filter op">
             <input type="checkbox" v-model="hideZero" />
             {{ $t("tradeAssets.zero") }}
         </div>
+        <div class="filter op click-able more" @click="more">
+            {{ $t("tokenCard.moreRecrods") }}
+            <img src="~assets/imgs/moreRecrods.png" />
+        </div>
     </div>
 </template>
 <script>
-import { debounce } from 'lodash';
-import Search from 'components/search';
-import { addTokenDialog } from './dialog';
+import { debounce } from "lodash";
+import Search from "components/search";
+import { addTokenDialog } from "./dialog";
 export default {
     data() {
         return {
             hideZero: false,
-            filterKey: ''
+            filterKey: ""
         };
     },
     watch: {
@@ -37,14 +41,19 @@ export default {
     },
     components: { Search },
     methods: {
-        updateFilter: debounce(function () {
-            this.$emit('newFilter', {
+        updateFilter: debounce(function() {
+            this.$emit("newFilter", {
                 hideZero: this.hideZero,
                 filterKey: this.filterKey
             });
         }, 0.5),
         addToken() {
             addTokenDialog().catch(e => console.error(e));
+        },
+        more() {
+            this.$router.push({
+                name: "walletTransList"
+            });
         }
     }
 };
@@ -67,6 +76,11 @@ export default {
         color: rgba(206, 209, 213, 1);
         line-height: 17px;
         border: none;
+        &.more {
+            position: absolute;
+            right: 0;
+            cursor: pointer;
+        }
         &:first-child {
             width: 260px;
             height: 100%;
