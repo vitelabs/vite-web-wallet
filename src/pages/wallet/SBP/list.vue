@@ -300,7 +300,7 @@ export default {
         reward(item) {
             this.totalReward = null;
             $Vite.request('register_getAvailableReward', '00000000000000000001', item.rawData.name).then(data => {
-                if (!data || data.drained || !data.totalReward) {
+                if (!data || data.drained || !+data.totalReward) {
                     this.$toast(this.$t('walletSBP.noReward'));
                     return;
                 }
