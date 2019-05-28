@@ -466,6 +466,7 @@
         "cancel": "撤销注册SBP",
         "cancelBtn": "撤销",
         "rewardBtn": "提取奖励",
+        "noReward": "暂无奖励",
         "rewardConfirm": {
             "title": "提取奖励",
             "describe1": "每天 13:00:00 (UTC+8)更新可提取奖励金额，截止到{time} 您可提取奖励金额为",
