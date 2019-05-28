@@ -4,7 +4,7 @@
             <div>
                 <img :src="token.icon" class="icon" @click="()=>showDetail()" />
                 <span class="token-name underline" @click="()=>showDetail()">{{
-                    `${token.tokenSymbol}-${token.index}`
+                    token.tokenSymbol==='VITE'?token.tokenSymbol:`${token.tokenSymbol}-${token.index}`
                 }}</span>
             </div>
             <div class="separate"></div>
