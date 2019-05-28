@@ -4,6 +4,7 @@ import { StatusMap } from 'wallet';
 import { defaultTokenMap } from 'utils/constant';
 import { gateStorage } from 'services/gate';
 import { constant } from '@vite/vitejs';
+import getTokenIcon from 'utils/getTokenIcon';
 
 let balanceInfoInst = null;
 const state = {
@@ -110,6 +111,7 @@ const getters = {
         // ------------------- show default token
         const list = Object.keys(defaultTokenMap).map(i => {
             const {
+                index,
                 availableExAmount = 0,
                 totalExAmount = 0,
                 onroadNum = '',
@@ -123,7 +125,7 @@ const getters = {
                 decimals = '',
                 owner = '',
                 tokenId = i,
-                icon,
+                icon = getTokenIcon(i),
                 type = 'NATIVE',
                 gateInfo = {}
             } = Object.assign({},
@@ -136,6 +138,7 @@ const getters = {
             const walletAsset = rate ? bigNumber.multi(bigNumber.toBasic(totalAmount, decimals), rate) : 0;
             const totalAsset = bigNumber.plus(totalExAsset, walletAsset);
             return {
+                index,
                 totalAsset,
                 totalExAsset,
                 walletAsset,
@@ -171,6 +174,7 @@ const getters = {
 
         return Object.keys(mapToken2Gate).map(i => {
             const {
+                index,
                 availableExAmount = '',
                 totalExAmount = '',
                 onroadNum = '',
@@ -184,7 +188,7 @@ const getters = {
                 decimals = '',
                 owner = '',
                 tokenId = i,
-                icon,
+                icon = getTokenIcon(i),
                 type = 'OFFICAL_GATE',
                 gateInfo = {}
             } = Object.assign({}, balanceInfo[i] || {}, allToken[i] || {}, {
@@ -199,6 +203,7 @@ const getters = {
             const totalAsset = bigNumber.plus(totalExAsset, walletAsset);
 
             return {
+                index,
                 totalAsset,
                 totalExAsset,
                 walletAsset,
@@ -234,6 +239,7 @@ const getters = {
             .map(token => {
                 const i = token.tokenId;
                 const {
+                    index,
                     availableExAmount = '',
                     totalExAmount = '',
                     onroadNum = '',
@@ -247,7 +253,7 @@ const getters = {
                     decimals = '',
                     owner = '',
                     tokenId = i,
-                    icon,
+                    icon = getTokenIcon(i),
                     type = 'THIRD_GATE',
                     gateInfo = {}
                 } = Object.assign({}, token, balanceInfo[i] || {}, allToken[i] || {}, exBalance[i]);
@@ -257,6 +263,7 @@ const getters = {
                 const totalAsset = bigNumber.plus(totalExAsset, walletAsset);
 
                 return {
+                    index,
                     totalAsset,
                     totalExAsset,
                     walletAsset,
@@ -302,6 +309,7 @@ const getters = {
             })
             .map(i => {
                 const {
+                    index,
                     availableExAmount = '',
                     totalExAmount = '',
                     onroadNum = '',
@@ -315,7 +323,7 @@ const getters = {
                     decimals = '',
                     owner = '',
                     tokenId = i,
-                    icon,
+                    icon = getTokenIcon(i),
                     type = 'THIRD_GATE',
                     gateInfo = {}
                 } = Object.assign({}, balanceInfo[i] || {}, allToken[i] || {}, { gateInfo: { url: mapToken2Gate[i] && mapToken2Gate[i].url } });
@@ -325,6 +333,7 @@ const getters = {
                 const totalAsset = bigNumber.plus(totalExAsset, walletAsset);
 
                 return {
+                    index,
                     totalAsset,
                     walletAsset,
                     totalExAmount,

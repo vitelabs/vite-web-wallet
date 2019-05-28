@@ -85,8 +85,8 @@ const actions = {
             return result;
         });
     },
-    async fetchTokenInfoFromGithub({ commit }) {
-        tokenInfoFromGithub().then(data => commit(data));
+    fetchTokenInfoFromGithub({ commit }) {
+        tokenInfoFromGithub().then(data => commit('setTokenInfoFromGithub', data));
     }
 };
 
@@ -97,7 +97,7 @@ const getters = {
             map[t.tokenId] = Object.assign({},
                 t,
                 state.tokenMapFromGithub[t.tokenId] || {});
-            map[t.tokenId].icon = map[t.tokenId].icon;
+            map[t.tokenId].icon = map[t.tokenId].icon || undefined;
         });
         return map;
     },
