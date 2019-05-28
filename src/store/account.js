@@ -137,7 +137,14 @@ const getters = {
             const totalExAsset = rate ? bigNumber.multi(bigNumber.toBasic(totalExAmount, decimals), rate) : 0;
             const walletAsset = rate ? bigNumber.multi(bigNumber.toBasic(totalAmount, decimals), rate) : 0;
             const totalAsset = bigNumber.plus(totalExAsset, walletAsset);
+            const rateBtc = rootState.exchangeRate.rateMap[i] && rootState.exchangeRate.rateMap[i]['btcRate'];
+            const totalExAssetBtc = rateBtc ? bigNumber.multi(bigNumber.toBasic(totalExAmount, decimals), rateBtc) : 0;
+            const walletAssetBtc = rateBtc ? bigNumber.multi(bigNumber.toBasic(totalAmount, decimals), rateBtc) : 0;
+            const totalAssetBtc = bigNumber.plus(totalExAssetBtc, walletAssetBtc);
             return {
+                totalExAssetBtc,
+                walletAssetBtc,
+                totalAssetBtc,
                 index,
                 totalAsset,
                 totalExAsset,
@@ -201,8 +208,14 @@ const getters = {
             const totalExAsset = rate ? bigNumber.multi(bigNumber.toBasic(totalExAmount, decimals), rate) : 0;
             const walletAsset = rate ? bigNumber.multi(bigNumber.toBasic(totalAmount, decimals), rate) : 0;
             const totalAsset = bigNumber.plus(totalExAsset, walletAsset);
-
+            const rateBtc = rootState.exchangeRate.rateMap[i] && rootState.exchangeRate.rateMap[i]['btcRate'];
+            const totalExAssetBtc = rateBtc ? bigNumber.multi(bigNumber.toBasic(totalExAmount, decimals), rateBtc) : 0;
+            const walletAssetBtc = rateBtc ? bigNumber.multi(bigNumber.toBasic(totalAmount, decimals), rateBtc) : 0;
+            const totalAssetBtc = bigNumber.plus(totalExAssetBtc, walletAssetBtc);
             return {
+                totalExAssetBtc,
+                walletAssetBtc,
+                totalAssetBtc,
                 index,
                 totalAsset,
                 totalExAsset,
@@ -261,8 +274,14 @@ const getters = {
                 const totalExAsset = rate ? bigNumber.multi(bigNumber.toBasic(totalExAmount, decimals), rate) : 0;
                 const walletAsset = rate ? bigNumber.multi(bigNumber.toBasic(totalAmount, decimals), rate) : 0;
                 const totalAsset = bigNumber.plus(totalExAsset, walletAsset);
-
+                const rateBtc = rootState.exchangeRate.rateMap[i] && rootState.exchangeRate.rateMap[i]['btcRate'];
+                const totalExAssetBtc = rateBtc ? bigNumber.multi(bigNumber.toBasic(totalExAmount, decimals), rateBtc) : 0;
+                const walletAssetBtc = rateBtc ? bigNumber.multi(bigNumber.toBasic(totalAmount, decimals), rateBtc) : 0;
+                const totalAssetBtc = bigNumber.plus(totalExAssetBtc, walletAssetBtc);
                 return {
+                    totalExAssetBtc,
+                    walletAssetBtc,
+                    totalAssetBtc,
                     index,
                     totalAsset,
                     totalExAsset,
@@ -331,8 +350,14 @@ const getters = {
                 const totalExAsset = rate ? bigNumber.multi(bigNumber.toBasic(totalExAmount, decimals), rate) : 0;
                 const walletAsset = rate ? bigNumber.multi(bigNumber.toBasic(totalAmount, decimals), rate) : 0;
                 const totalAsset = bigNumber.plus(totalExAsset, walletAsset);
-
+                const rateBtc = rootState.exchangeRate.rateMap[i] && rootState.exchangeRate.rateMap[i]['btcRate'];
+                const totalExAssetBtc = rateBtc ? bigNumber.multi(bigNumber.toBasic(totalExAmount, decimals), rateBtc) : 0;
+                const walletAssetBtc = rateBtc ? bigNumber.multi(bigNumber.toBasic(totalAmount, decimals), rateBtc) : 0;
+                const totalAssetBtc = bigNumber.plus(totalExAssetBtc, walletAssetBtc);
                 return {
+                    totalExAssetBtc,
+                    walletAssetBtc,
+                    totalAssetBtc,
                     index,
                     totalAsset,
                     walletAsset,
