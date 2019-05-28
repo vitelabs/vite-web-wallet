@@ -15,10 +15,10 @@ block content
         .all(@click="all") {{$t('tradeAssets.all')}}
 </template>
 <script>
-import { getValidBalance } from "utils/validations";
-import sendTx from "utils/sendTx";
-import debounce from "lodash/debounce";
-import bigNumber from "utils/bigNumber";
+import { getValidBalance } from 'utils/validations';
+import sendTx from 'utils/sendTx';
+import debounce from 'lodash/debounce';
+import bigNumber from 'utils/bigNumber';
 export default {
     props: {
         token: {
@@ -29,10 +29,10 @@ export default {
     data() {
         return {
             isAll: false,
-            withdrawAmount: "",
-            dTitle: this.$t("tradeAssets.confirmwithdraw.title"),
-            dSTxt: this.$t("tradeAssets.confirmwithdraw.btn"),
-            errTips: "",
+            withdrawAmount: '',
+            dTitle: this.$t('tradeAssets.confirmwithdraw.title'),
+            dSTxt: this.$t('tradeAssets.confirmwithdraw.btn'),
+            errTips: '',
             fetchingFee: true
         };
     },
@@ -44,21 +44,17 @@ export default {
             return this.$store.getters.activeAddr;
         },
         availableExBalance() {
-            return bigNumber.toBasic(
-                this.token.availableExAmount,
-                this.token.decimals
-            );
+            return bigNumber.toBasic(this.token.availableExAmount,
+                this.token.decimals);
         }
     },
     methods: {
-        handleUserInputAmount: debounce(function(v) {
+        handleUserInputAmount: debounce(function (v) {
             this.isAll = false;
             this.errTips = this.testAmount(v.target.value);
         }, 500),
         testAmount(val) {
-            const errorMap = {
-                notEnough: this.$t("tokenCard.withdraw.balanceErrMap.notEnough")
-            };
+            const errorMap = { notEnough: this.$t('tokenCard.withdraw.balanceErrMap.notEnough') };
             return getValidBalance({
                 balance: this.token.availableExAmount,
                 decimals: this.token.decimals,
@@ -67,14 +63,12 @@ export default {
         },
         all() {
             if (
-                this.token.availableExAmount &&
-                bigNumber.compared(this.token.availableExAmount, "0") > 0
+                this.token.availableExAmount
+                && bigNumber.compared(this.token.availableExAmount, '0') > 0
             ) {
                 this.isWithdrawAll = true;
-                this.withdrawAmount = bigNumber.toBasic(
-                    this.token.availableExAmount,
-                    this.token.decimals
-                );
+                this.withdrawAmount = bigNumber.toBasic(this.token.availableExAmount,
+                    this.token.decimals);
             }
         },
         inspector() {
@@ -83,21 +77,17 @@ export default {
                 const amount = this.isWithdrawAll
                     ? this.token.availableExAmount
                     : bigNumber.toMin(this.withdrawAmount, this.token.decimals);
-                sendTx("dexFundUserWithdraw", {
+                sendTx('dexFundUserWithdraw', {
                     tokenId: this.token.tokenId,
                     amount
                 })
                     .then(() => {
-                        this.$toast(
-                            this.$t("tradeAssets.confirmwithdraw.successToast")
-                        );
+                        this.$toast(this.$t('tradeAssets.confirmwithdraw.successToast'));
                         res();
                     })
                     .catch(e => {
-                        this.$toast(
-                            this.$t("tradeAssets.confirmwithdraw.failToast"),
-                            e
-                        );
+                        this.$toast(this.$t('tradeAssets.confirmwithdraw.failToast'),
+                            e);
                         rej(e);
                     });
             });
