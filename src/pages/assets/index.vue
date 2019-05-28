@@ -72,7 +72,6 @@ export default {
             }));
         },
         showTokenIds(val) {
-            console.log('88888', val);
             this.$store.dispatch('addRateTokens', val);
         }
     },
