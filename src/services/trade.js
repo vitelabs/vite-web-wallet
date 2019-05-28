@@ -120,7 +120,7 @@ export const tokenMap = function ({ symbol }) {
 
 export async function chargeDetail({ tokenId, address }) {
     return await request({
-        path: `${ path }/fund/record`,
+        path: `${ path }/deposit-withdraw`,
         method: 'GET',
         params: {
             pageSize: 100,
@@ -134,7 +134,15 @@ export async function chargeDetail({ tokenId, address }) {
 export async function tokenInfoFromGithub({ tokenSymbol, platformSymbol = 'VITE', tokenAddress } = { tokenSymbol, platformSymbol: 'VITE', tokenAddress }) {
     return await request({
         path: `${ path }/cryptocurrency/info/query`,
-        method: 'GET',
+        method: 'POST',
+        params: { tokenSymbol, platformSymbol, tokenAddress }
+    });
+}
+
+export async function tokenRateFromCMC({ tokenSymbol, platformSymbol = 'VITE', tokenAddress } = { tokenSymbol, platformSymbol: 'VITE', tokenAddress }) {
+    return await request({
+        path: `${ path }/cryptocurrency/rate/query`,
+        method: 'POST',
         params: { tokenSymbol, platformSymbol, tokenAddress }
     });
 }
