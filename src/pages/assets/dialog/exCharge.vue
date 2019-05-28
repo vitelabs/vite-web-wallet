@@ -69,14 +69,15 @@ export default {
             return new Promise((res, rej) => {
                 if (this.testAmount(this.withdrawAmount)) return;
                 const amount = this.isAll ? this.token.totalAmount : bigNumber.toMin(this.withdrawAmount, this.token.decimals);
-                try {
-                    sendTx('dexFundUserDeposit', { tokenId: this.token.tokenId, amount });
+                sendTx('dexFundUserDeposit', { tokenId: this.token.tokenId, amount }).then(() => {
                     this.$toast(this.$t('tradeAssets.confirmrecharge.successToast'));
                     res();
-                } catch (e) {
-                    this.$toast(this.$t('tradeAssets.confirmrecharge.failToast'), e);
-                    rej(e);
-                }
+                })
+                    .catch(e => {
+                        this.$toast(this.$t('tradeAssets.confirmrecharge.failToast'),
+                            e);
+                        rej(e);
+                    });
             });
         }
     }

@@ -115,7 +115,7 @@ export default {
         },
         pieData: {
             type: Array,
-            default: () => [ ]
+            default: () => []
         },
         title: {
             type: String,
@@ -130,7 +130,9 @@ export default {
             if (!this.pieData.length) {
                 return [];
             }
-            const sum = this.pieData.map(v => Number(v)).reduce((pre, cur) => pre + cur, 0);
+            const sum = this.pieData
+                .map(v => Number(v))
+                .reduce((pre, cur) => pre + cur, 0);
             if (!sum) {
                 return this.pieData.map(v => Number(v));
             }
@@ -142,6 +144,7 @@ export default {
 <style lang="scss" scoped>
 .pie {
     display: flex;
+    align-items: center;
     &__graph {
         height: 94px;
         width: 94px;
@@ -157,11 +160,15 @@ export default {
     .text__group {
         text-anchor: middle;
         dominant-baseline: middle;
+        fill: #5e6875;
+        font-size: 12px;
     }
     .legend__group {
-        width: 186px;
         flex-wrap: wrap;
         display: flex;
+        height: 60px;
+        flex-direction: column;
+        width: 250px;
         .legend {
             display: flex;
             align-items: center;

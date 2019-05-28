@@ -47,7 +47,7 @@
         </div>
         <div class="col">
             <div class="assets">
-                <div class="est_btc">{{ assetView.btc }}</div>
+                <div class="est_btc">{{ assetView.btc }} BTC</div>
                 <div class="est_cash">
                     ≈{{ currencySymbol }} {{ assetView.cash }}
                 </div>
@@ -129,19 +129,19 @@ export default {
         assetView() {
             if (this.assetType === 'TOTAL') {
                 return {
-                    btc: this.token.totalAsset,
+                    btc: this.token.totalAssetBtc,
                     cash: this.token.totalAsset
                 };
             }
             if (this.assetType === 'EX') {
                 return {
-                    btc: this.token.totalExAsset,
+                    btc: this.token.totalExAssetBtc,
                     cash: this.token.totalExAsset
                 };
             }
             if (this.assetType === 'WALLET') {
                 return {
-                    btc: this.token.walletAsset,
+                    btc: this.token.walletAssetBtc,
                     cash: this.token.walletAsset
                 };
             }
