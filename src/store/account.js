@@ -133,7 +133,7 @@ const getters = {
                 balanceInfo[i] || {},
                 allToken[i] || {}, { gateInfo: { url: mapToken2Gate[i] && mapToken2Gate[i].url } },
                 exBalance[i]);
-            const rate = rootState.exchangeRate.rateMap[i] && rootState.exchangeRate.rateMap[i][rootState.env.currency];
+            const rate = rootState.exchangeRate.rateMap[i] && rootState.exchangeRate.rateMap[i][`${ rootState.env.currency }Rate`];
             const totalExAsset = rate ? bigNumber.multi(bigNumber.toBasic(totalExAmount, decimals), rate) : 0;
             const walletAsset = rate ? bigNumber.multi(bigNumber.toBasic(totalAmount, decimals), rate) : 0;
             const totalAsset = bigNumber.plus(totalExAsset, walletAsset);
@@ -197,7 +197,7 @@ const getters = {
                     gataway: mapToken2Gate[i].gateway
                 }
             }, exBalance[i]);
-            const rate = rootState.exchangeRate.rateMap[i] && rootState.exchangeRate.rateMap[i][rootState.env.currency];
+            const rate = rootState.exchangeRate.rateMap[i] && rootState.exchangeRate.rateMap[i][`${ rootState.env.currency }Rate`];
             const totalExAsset = rate ? bigNumber.multi(bigNumber.toBasic(totalExAmount, decimals), rate) : 0;
             const walletAsset = rate ? bigNumber.multi(bigNumber.toBasic(totalAmount, decimals), rate) : 0;
             const totalAsset = bigNumber.plus(totalExAsset, walletAsset);
@@ -257,7 +257,7 @@ const getters = {
                     type = 'THIRD_GATE',
                     gateInfo = {}
                 } = Object.assign({}, token, balanceInfo[i] || {}, allToken[i] || {}, exBalance[i]);
-                const rate = rootState.exchangeRate.rateMap[i] && rootState.exchangeRate.rateMap[i][rootState.env.currency];
+                const rate = rootState.exchangeRate.rateMap[i] && rootState.exchangeRate.rateMap[i][`${ rootState.env.currency }Rate`];
                 const totalExAsset = rate ? bigNumber.multi(bigNumber.toBasic(totalExAmount, decimals), rate) : 0;
                 const walletAsset = rate ? bigNumber.multi(bigNumber.toBasic(totalAmount, decimals), rate) : 0;
                 const totalAsset = bigNumber.plus(totalExAsset, walletAsset);
@@ -327,7 +327,7 @@ const getters = {
                     type = 'THIRD_GATE',
                     gateInfo = {}
                 } = Object.assign({}, balanceInfo[i] || {}, allToken[i] || {}, { gateInfo: { url: mapToken2Gate[i] && mapToken2Gate[i].url } });
-                const rate = rootState.exchangeRate.rateMap[i] && rootState.exchangeRate.rateMap[i][rootState.env.currency];
+                const rate = rootState.exchangeRate.rateMap[i] && rootState.exchangeRate.rateMap[i][`${ rootState.env.currency }Rate`];
                 const totalExAsset = rate ? bigNumber.multi(bigNumber.toBasic(totalExAmount, decimals), rate) : 0;
                 const walletAsset = rate ? bigNumber.multi(bigNumber.toBasic(totalAmount, decimals), rate) : 0;
                 const totalAsset = bigNumber.plus(totalExAsset, walletAsset);
