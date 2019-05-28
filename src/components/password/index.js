@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import i18n from 'i18n';
 import store from 'store';
+import { constant } from 'utils/store';
 import pwdComponent from './password.vue';
 
 const PwdComponent = Vue.extend(pwdComponent);
@@ -68,7 +69,10 @@ export function initPwd({
     cancelTxt = '',
     exchange = false
 }, isConfirm = false) {
-    const isHoldPWD = !!store.state.env.isHoldPWD;
+    const currHDAcc = store.state.wallet.currHDAcc;
+    const accInfo = currHDAcc ? currHDAcc.getAccInfo() : null;
+
+    const isHoldPWD = accInfo ? !!accInfo[constant.HoldPwdKey] : false;
     const isHide = !isConfirm && isHoldPWD;
 
     if (isHide) {

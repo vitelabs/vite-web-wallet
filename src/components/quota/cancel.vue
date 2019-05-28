@@ -35,7 +35,6 @@ export default {
             this.cancel && this.cancel();
         },
         _submit() {
-            this.$router.push({ name: 'walletQuota' });
             this.submit && this.submit();
         }
     }
