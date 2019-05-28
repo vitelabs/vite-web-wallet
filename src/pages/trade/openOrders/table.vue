@@ -40,12 +40,6 @@ import { initPwd } from 'components/password/index.js';
 
 export default {
     props: {
-        filterObj: {
-            type: Object,
-            default: () => {
-                return {};
-            }
-        },
         isEmbed: {
             type: Boolean,
             default: false
@@ -86,17 +80,18 @@ export default {
         },
         defaultAddr() {
             return this.$store.getters.activeAddr;
+        },
+        activeTxPair() {
+            return this.$store.state.exchangeActiveTxPair.activeTxPair;
         }
     },
     watch: {
-        filterObj(val, oldVal) {
-            if (oldVal.ttoken !== val.ttoken
-                || oldVal.ftoken !== val.ftoken) {
-                this.list = [];
-                this.changeList = {};
-                this.oldList = {};
+        activeTxPair() {
+            if (!this.isEmbed) {
+                return;
             }
-            this.init();
+            this.unsubscribe();
+            this.subscribe();
         },
         defaultAddr() {
             this.init();
@@ -193,11 +188,11 @@ export default {
             this.subscribe();
         },
         subscribe() {
-            this.$store.dispatch('startOrderCurrent', this.filterObj);
+            this.$store.dispatch('startOrderCurrent');
             this.isSubscribe = true;
         },
         unsubscribe() {
-            this.$store.dispatch('stopOrderCurrent', this.filterObj);
+            this.$store.dispatch('stopOrderCurrent');
             this.isSubscribe = false;
         },
         update() {
@@ -205,8 +200,7 @@ export default {
                 address: this.defaultAddr,
                 status: 1,
                 offset: 0,
-                limit: 100,
-                ...this.filterObj
+                limit: 100
             }).then(data => {
                 this.list = data.order || [];
             });

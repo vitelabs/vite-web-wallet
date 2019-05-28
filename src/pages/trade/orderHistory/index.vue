@@ -24,12 +24,6 @@ export default {
         isEmbed: {
             type: Boolean,
             default: false
-        },
-        filterObj: {
-            type: Object,
-            default: () => {
-                return {};
-            }
         }
     },
     data() {
@@ -53,11 +47,18 @@ export default {
     computed: {
         defaultAddr() {
             return this.$store.getters.activeAddr;
+        },
+        activeTxPair() {
+            return this.$store.state.exchangeActiveTxPair.activeTxPair;
         }
     },
     watch: {
-        filterObj() {
-            this.init();
+        activeTxPair() {
+            if (!this.isEmbed) {
+                return;
+            }
+            this.unsubscribe();
+            this.subscribe();
         },
         defaultAddr() {
             this.init();
@@ -75,7 +76,7 @@ export default {
         },
         subscribe() {
             task = task || new subTask('orderQueryHistory', ({ args, data }) => {
-                if (args.address !== this.defaultAddr || this.filterObj.symbol !== args.symbol) {
+                if (args.address !== this.defaultAddr || this.activeTxPair.symbol !== args.symbol) {
                     return;
                 }
 
@@ -92,7 +93,7 @@ export default {
             task.start(() => {
                 return {
                     address: this.defaultAddr,
-                    ...this.filterObj
+                    symbol: this.activeTxPair.symbol
                 };
             });
         },
@@ -124,8 +125,7 @@ export default {
                 address: this.defaultAddr,
                 ...filters,
                 limit: pageSize,
-                total: 1,
-                ...this.filterObj
+                total: 1
             }).then(data => {
                 this.totalPage = Math.ceil(data.total / pageSize);
                 this.data = data.order || [];
