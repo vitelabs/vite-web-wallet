@@ -2,10 +2,9 @@ import request from 'utils/request';
 
 const path = `${ process.env.dexApiServer }v1`;
 
-// [TODO] symbol e.g. CSTT-47E_VITE.
 export const klineHistory = function ({ startTime, endTime, symbol, interval }) {
     return request({
-        path: `${ path }/market/kline`,
+        path: `${ path }/klines`,
         method: 'GET',
         params: {
             startTime,
@@ -19,7 +18,7 @@ export const klineHistory = function ({ startTime, endTime, symbol, interval }) 
 
 export const depth = function ({ symbol }) {
     return request({
-        path: `${ path }/market/depth`,
+        path: `${ path }/depth`,
         method: 'GET',
         params: { symbol }
     });
@@ -35,7 +34,7 @@ export const order = function ({ address, startTime, endTime, tradeTokenSymbol, 
 
 export const orderDetail = function ({ orderId, symbol, offset, limit, side }) {
     return request({
-        path: `${ path }/market/trade`,
+        path: `${ path }/trades`,
         method: 'GET',
         params: { orderId, symbol, offset, limit, side }
     });
@@ -72,7 +71,7 @@ export const rateToken = function ({ tokenIdList = [] }) {
 
 export const defaultPair = function ({ quoteTokenSymbol }) {
     return request({
-        path: `${ path }/market/tickers`,
+        path: `${ path }/ticker/24hr`,
         method: 'GET',
         params: { quoteTokenSymbol }
     });
@@ -80,7 +79,7 @@ export const defaultPair = function ({ quoteTokenSymbol }) {
 
 export const assignPair = function ({ symbols = [] }) {
     return request({
-        path: `${ path }/market/tickers`,
+        path: `${ path }/ticker/24hr`,
         method: 'GET',
         params: { symbols: symbols.join(',') }
     });
@@ -88,7 +87,7 @@ export const assignPair = function ({ symbols = [] }) {
 
 export const marketsReserve = function ({ quoteTokenSymbol }) {
     return request({
-        path: `${ path }/tokens/unmapped`,
+        path: `${ path }/token/unmapped`,
         method: 'GET',
         params: { quoteTokenSymbol }
     });
@@ -112,7 +111,7 @@ export const baseToken = function () {
 
 export const tokenMap = function ({ symbol }) {
     return request({
-        path: `${ path }/tokens/mapped`,
+        path: `${ path }/token/mapped`,
         method: 'GET',
         params: { quoteTokenSymbol: symbol }
     });
