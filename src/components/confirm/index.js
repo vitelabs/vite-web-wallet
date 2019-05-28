@@ -18,8 +18,7 @@ export default function ({
     rightBtn = {
         text: '',
         click: () => {}
-    },
-    content = ''
+    }
 }) {
     let instance = new Confirm({ el: document.createElement('div') });
 
@@ -50,7 +49,6 @@ export default function ({
     instance.rightBtnClick = () => {
         _close(rightBtn ? rightBtn.click : null);
     };
-    instance.content = content || '';
 
     appEl.appendChild(instance.$el);
 
