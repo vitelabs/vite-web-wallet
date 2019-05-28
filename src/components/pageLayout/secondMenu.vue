@@ -16,8 +16,7 @@
             <div v-show="active.indexOf('trade') !== -1" class="tab __pointer"
                  v-unlock-account="showToken" @noactiveacc="dexStart">
                 {{ $t('dexToken') }}</div>
-            <switch-addr class="switch-tab menu"
-                         v-show="active.indexOf('trade') !== -1 || active.indexOf('assets') !== -1" ></switch-addr>
+            <switch-addr class="switch-tab menu" v-show="active.indexOf('trade') !== -1" ></switch-addr>
         </ul>
 
         <dex-token v-if="isShowDexToken" :close="closeToken"></dex-token>
