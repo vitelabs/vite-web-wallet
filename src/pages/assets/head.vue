@@ -55,7 +55,7 @@
             <img class="icon" src="~assets/imgs/head_asset.png" />
             <div class="assets">
                 <AssetSwitch v-model="assetsType" class="asset-switch" />
-                <div class="asset__btc">{{ asset }}</div>
+                <div class="asset__btc">{{ assetBtc }} BTC</div>
                 <div class="asset__cash">{{ currencySymbol }} {{ asset }}</div>
             </div>
             <div class="head-right">
@@ -134,6 +134,11 @@ export default {
                 .map(t => t.asset)
                 .reduce((pre, cur) => bigNumber.plus(pre || 0, cur || 0), 0);
         },
+        assetBtc() {
+            return this.assetMap
+                .map(t => t.assetBtc)
+                .reduce((pre, cur) => bigNumber.plus(pre || 0, cur || 0), 0);
+        },
         allTokens() {
             return [
                 ...this.$store.getters.defaultTokenList,
@@ -150,6 +155,7 @@ export default {
                 return this.allTokens
                     .map(t => {
                         return {
+                            assetBtc: t.totalAssetBtc,
                             asset: t.totalAsset,
                             tokenSymbol: t.tokenSymbol
                         };
@@ -160,6 +166,7 @@ export default {
                 return this.allTokens
                     .map(t => {
                         return {
+                            assetBtc: t.totalExAssetBtc,
                             asset: t.totalExAsset,
                             tokenSymbol: t.tokenSymbol
                         };
@@ -170,6 +177,7 @@ export default {
                 return this.allTokens
                     .map(t => {
                         return {
+                            assetBtc: t.walletAssetBtc,
                             asset: t.walletAsset,
                             tokenSymbol: t.tokenSymbol
                         };

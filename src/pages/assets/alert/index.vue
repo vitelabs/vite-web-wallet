@@ -53,9 +53,9 @@ export default {
                 const o = this.detailData[k];
 
                 return [
-                    d.unix(o.optime).format('YYYY-MM-DD HH:mm'),
-                    o.tokenName,
-                    this.$t('tradeAssets.table.rowMap.sideMap')[o.optype],
+                    d.unix(o.time).format('YYYY-MM-DD HH:mm'),
+                    o.tokenSymbol,
+                    this.$t('tradeAssets.table.rowMap.sideMap')[o.type],
                     o.amount
                 ];
             });
