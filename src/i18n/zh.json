@@ -209,15 +209,34 @@
         }
     },
     "tokenCard": {
+        "others":"其它",
+        "assetSpread":"资产分布",
+        "heads":{
+            "name":"代币名称",
+            "balance":"钱包余额",
+            "onroad":"钱包待接收金额",
+            "gate":"钱包跨链网关",
+            "totalExAmount":"交易所总余额度",
+            "availableExAmount":"交易所可用余额"
+        },
         "actionType": {
             "SEND": "发送",
             "RECEIVE": "接收",
             "CHARGE": "跨链充值",
-            "WITHDRAW": "跨链提现"
+            "WITHDRAW": "跨链提现",
+            "EXCHARGE": "充值至交易所",
+            "EXWITHDRAW": "提币至钱包",
+            "EXRECRODS": "交易所充提记录",
+            "RECRODS":"跨链充提记录"
         },
         "type": {
             "native": "原生代币",
             "crossGate": "跨链代币"
+        },
+        "assetType":{
+            "TOTAL":"全部资产估值",
+            "EX":"交易所资产估值",
+            "WALLET":"钱包资产估值"
         },
         "addToken": {
             "title": "添加代币",
