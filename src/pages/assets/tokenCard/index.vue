@@ -23,7 +23,7 @@
         </div>
         <div class="col">
             <div class="underline click-able" @click="()=>(token.type!=='NATIVE'&&showDetail('gate'))" >
-                {{ token.gateInfo.gateway || token.type==='NATIVE'?"--":$t('tokenCard.gateInfo.selfdefined') }}
+                {{ token.gateInfo.gateway || (token.type==='NATIVE'?"--":$t('tokenCard.gateInfo.selfdefined') )}}
             </div>
             <div class="op_group" v-if="token.gateInfo.url">
                 <div class="op" @click="charge">{{$t('tokenCard.actionType.CHARGE')}}</div>
