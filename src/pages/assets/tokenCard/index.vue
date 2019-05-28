@@ -231,8 +231,8 @@ export default {
             height: 10px;
             width: 12px;
             position: absolute;
-            bottom:6px;
-            right:6px;
+            bottom: 6px;
+            right: 6px;
             background-image: url(~assets/imgs/add_token.png);
             background-size: cover;
         }
