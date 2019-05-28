@@ -233,7 +233,7 @@ export default {
             position: absolute;
             bottom: 6px;
             right: 6px;
-            background-image: url(~assets/imgs/add_token.png);
+            background-image: url(~assets/imgs/bind.png);
             background-size: cover;
         }
         .underline {
