@@ -81,7 +81,7 @@
                     let vcp = balanceMap && +balanceMap.vcpfinalbalance ? balanceMap.vcpfinalbalance : '0';
 
                     let tableDom = document.getElementById('table');
-                    tableDom.innerHTML = `<tr><th>Address</th><th>Balance (VITE)</th><th>Balance (VCP)</th></tr><tr><td>${address}</td><td>${vite}</td><td>${vcp}</td></tr>`;
+                    tableDom.innerHTML = `<tr><th>Address</th><th>Balance (VITE)</th><th>Balance (VCP)</th></tr><tr><td>${encodeURIComponent(address)}</td><td>${encodeURIComponent(vite)}</td><td>${encodeURIComponent(vcp)}</td></tr>`;
                 }).catch((err) => {
                     console.error(err)
                 })
