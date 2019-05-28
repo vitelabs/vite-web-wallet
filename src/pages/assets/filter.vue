@@ -8,7 +8,7 @@
         </Search>
         <div class="filter op" @click="addToken">
             <img src="~assets/imgs/add_token.png" />
-            <div>添加代币</div>
+            <div>{{$t('tokenCard.addToken.title')}}</div>
         </div>
         <div class="filter op">
             <input type="checkbox" v-model="hideZero" />

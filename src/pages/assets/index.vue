@@ -11,12 +11,12 @@
             ></TokenFilter>
             <div class="token-list">
                 <div class="token__head">
-                    <div class="col">代币名称</div>
-                    <div class="col">钱包余额</div>
-                    <div class="col">钱包待接收金额</div>
-                    <div class="col">钱包跨链网关</div>
-                    <div class="col">交易所总余额度</div>
-                    <div class="col">交易所可用余额</div>
+                    <div class="col">{{$t('tokenCard.heads.name')}}</div>
+                    <div class="col">{{$t('tokenCard.heads.balance')}}</div>
+                    <div class="col">{{$t('tokenCard.heads.onroad')}}</div>
+                    <div class="col">{{$t('tokenCard.heads.gate')}}</div>
+                    <div class="col">{{$t('tokenCard.heads.totalExAmount')}}</div>
+                    <div class="col">{{$t('tokenCard.heads.availableExAmount')}}</div>
                     <div class="col">
                         <AssetSwitch v-model="assetType" class="asset-switch" />
                     </div>

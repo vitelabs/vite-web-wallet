@@ -63,6 +63,7 @@
                     class="pie-chart"
                     :pieData="pieData.data"
                     :labelGen="labelGen"
+                    :title="$t('tokenCard.assetSpread')"
                 ></Pie>
             </div>
         </div>
@@ -108,7 +109,7 @@ export default {
                         .slice(4)
                         .reduce((pre, cur) => bigNumber.plus(pre, cur.asset),
                             0),
-                    tokenSymbol: '其它'
+                    tokenSymbol: this.$t('tokenCard.others')
                 });
             }
             return {
@@ -183,7 +184,7 @@ export default {
     methods: {
         labelGen(v, i) {
             const symbol = this.pieData.lable[i];
-            return `${ symbol } ${ (100 * v).toFixed(2) }%`;
+            return `${ symbol } ${ (100 * v).toFixed(1) }%`;
         },
         copy() {
             copy(this.activeAddr);
