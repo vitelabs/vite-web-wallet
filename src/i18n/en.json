@@ -209,8 +209,9 @@
         }
     },
     "tokenCard": {
+        "moreRecrods":"More Records",
         "others":"Others",
-        "assetSpread":"Assets Distribution",
+        "assetSpread":"Asset Distribution",
         "heads":{
             "name":"Name",
             "balance":"Balance",
@@ -445,6 +446,7 @@
         "cancel": "SBP Cancellation",
         "cancelBtn": "Cancel",
         "rewardBtn": "Claim Rewards",
+        "noReward": "No Rewards",
         "rewardConfirm": {
             "title": "Claim Rewards",
             "describe1": "Rewards that are available for claiming update at 13:00:00 (UTC+8) every day, till {time} you can claim",
