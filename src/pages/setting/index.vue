@@ -19,6 +19,8 @@
                     <currency></currency>
                 </div>
 
+                <router-link v-if="!!isLogin" :to="{ name: 'mintage' }">mintage</router-link>
+
                 <div class="area">
                     <div class="big-title">{{ $t('setting.netInfo') }}</div>
                     <net-info></net-info>
