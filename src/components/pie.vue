@@ -79,15 +79,15 @@
     </div>
 </template>
 <script>
-import { path } from "d3-path";
+import { path } from 'd3-path';
 
 const sR = 33;
 const lR = 47;
 
 function genPiePath(data, sR, lR) {
     const startAngle = 0;
-    const polar2cartesian = function(angle, r) {
-        return [r * Math.cos(angle), r * Math.sin(angle)];
+    const polar2cartesian = function (angle, r) {
+        return [ r * Math.cos(angle), r * Math.sin(angle) ];
     };
     let arcStartAngle = startAngle;
     const paths = data.map(v => {
@@ -107,11 +107,11 @@ export default {
     props: {
         colorGen: {
             type: Function,
-            default: (v, i) => `url(#pie_linear${i})`
+            default: (v, i) => `url(#pie_linear${ i })`
         },
         labelGen: {
             type: Function,
-            default: v => `${(100 * v).toFixed(1)}%`
+            default: v => `${ (100 * v).toFixed(1) }%`
         },
         pieData: {
             type: Array,
@@ -119,7 +119,7 @@ export default {
         },
         title: {
             type: String,
-            default: ""
+            default: ''
         }
     },
     computed: {
@@ -168,7 +168,7 @@ export default {
         display: flex;
         height: 60px;
         flex-direction: column;
-        width:250px;
+        width: 250px;
         .legend {
             display: flex;
             align-items: center;
