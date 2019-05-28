@@ -194,7 +194,7 @@ const getters = {
             } = Object.assign({}, balanceInfo[i] || {}, allToken[i] || {}, {
                 gateInfo: {
                     url: mapToken2Gate[i].url,
-                    gataway: mapToken2Gate[i].gateway
+                    gateway: mapToken2Gate[i].gateway
                 }
             }, exBalance[i]);
             const rate = rootState.exchangeRate.rateMap[i] && rootState.exchangeRate.rateMap[i][`${ rootState.env.currency }Rate`];

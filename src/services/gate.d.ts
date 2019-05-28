@@ -11,7 +11,7 @@ type responseWrapper<T> = {
 //----------gateinfo
 type GateTokenInfo = {
   tokenId: TokenId;
-  gataway: string;
+  gateway: string;
   mappedNet: string;
   mappedTokenId: string;
 };
