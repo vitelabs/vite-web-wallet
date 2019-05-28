@@ -13,23 +13,9 @@
                          :class="{'active': tap === 'historyOrder'}">
                         {{$t('tradeOrderHistory.title')}}</div>
                 </div>
-                <openOrder v-if="tap==='openOrder'" class="item"
-                           :isEmbed="true"
-                           :filterObj="{
-                               symbol: activeTxPair.symbol,
-                               quoteTokenSymbol: activeTxPair.quoteTokenSymbol,
-                               tradeTokenSymbol: activeTxPair.tradeTokenSymbol,
-                               limit: 10,
-                               offset: 0 }">
+                <openOrder v-if="tap==='openOrder'" :isEmbed="true" class="item">
                 </openOrder>
-                <historyOrder v-if="tap==='historyOrder'" class="item"
-                              :isEmbed="true"
-                              :filterObj="{
-                                  symbol: activeTxPair.symbol,
-                                  quoteTokenSymbol: activeTxPair.quoteTokenSymbol,
-                                  tradeTokenSymbol: activeTxPair.tradeTokenSymbol,
-                                  limit: 10,
-                                  offset: 0 }">
+                <historyOrder v-if="tap==='historyOrder'" :isEmbed="true" class="item">
                 </historyOrder>
             </div>
             <router-view></router-view>
