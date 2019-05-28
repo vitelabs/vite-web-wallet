@@ -42,7 +42,7 @@ export const orderDetail = function ({ orderId, symbol, offset, limit, side }) {
 
 export const latestTx = function ({ symbol }) {
     return request({
-        path: `${ path }/market/trade`,
+        path: `${ path }/trades`,
         method: 'GET',
         params: {
             symbol,

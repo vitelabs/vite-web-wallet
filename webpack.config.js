@@ -42,16 +42,23 @@ let webpackConfig = {
             }
         },
         minimizer: [
-            // We specify a custom UglifyJsPlugin here to get source maps in production
             new UglifyJsPlugin({
                 cache: true,
                 parallel: true,
+                // uglifyOptions: {
+                //     compress: {
+                //         unused: true,
+                //         drop_debugger: true
+                //     },
+                //     output: { comments: false }
+                // },
                 uglifyOptions: {
                     compress: false,
                     ecma: 6,
                     mangle: true
                 },
-                sourceMap: true
+                extractComments: true,
+                sourceMap: false
             })
         ]
     },
