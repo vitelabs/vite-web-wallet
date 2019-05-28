@@ -1,6 +1,6 @@
 <template>
     <div class="open-order-ct">
-        <Table :list="data" :filterObj="filterObj" :isEmbed="isEmbed"></Table>
+        <Table :list="data" :isEmbed="isEmbed"></Table>
     </div>
 </template>
 
@@ -13,12 +13,6 @@ export default {
         return { data: [] };
     },
     props: {
-        filterObj: {
-            type: Object,
-            default: () => {
-                return {};
-            }
-        },
         isEmbed: {
             type: Boolean,
             default: false

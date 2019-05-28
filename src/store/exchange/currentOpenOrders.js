@@ -10,9 +10,14 @@ const mutations = {
 };
 
 const actions = {
-    startOrderCurrent({ rootGetters, commit }, params) {
+    startOrderCurrent({ rootGetters, rootState, commit }) {
+        const activeTxPair = rootState.exchangeActiveTxPair.activeTxPair;
+        if (!activeTxPair || !activeTxPair.symbol) {
+            return;
+        }
+
         task = task || new subTask('orderQueryCurrent', ({ args, data }) => {
-            if (args.address !== rootGetters.activeAddr || params.symbol !== args.symbol || !data) {
+            if (!activeTxPair || args.address !== rootGetters.activeAddr || activeTxPair.symbol !== args.symbol || !data) {
                 return;
             }
             commit('exSetCurrentOpenOrders', data.order || data || []);
@@ -21,7 +26,7 @@ const actions = {
         task.start(() => {
             return {
                 address: rootGetters.activeAddr,
-                ...params
+                symbol: activeTxPair.symbol
             };
         });
     },
