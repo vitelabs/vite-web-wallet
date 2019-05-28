@@ -6,7 +6,7 @@
                 <span v-show="closeIcon" @click="close" class="close-icon __pointer"></span>
             </div>
             <div class="content-wrapper" >
-                <div v-if="content" v-html="content"></div>
+                <div v-if="content">{{ content }}</div>
                 <slot></slot>
             </div>
             <div v-show="singleBtn || leftBtnTxt || rightBtnTxt" class="bottom">

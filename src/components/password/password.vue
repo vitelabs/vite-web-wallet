@@ -5,6 +5,8 @@
              :leftBtnTxt="cancelTxt || $t('btn.cancel')" :rightBtnTxt="submitTxt || $t('btn.submit')"
              :leftBtnClick="exchange ? _submit : _cancle"  :rightBtnClick="exchange ? _cancle : _submit">
 
+        <slot></slot>
+
         <form autocomplete="off" v-show="isShowPWD" class="pass-input" :class="{ 'distance': !!content }">
             <input ref="passInput" v-model="password" :placeholder="$t('pwdConfirm.placeholder')" type="password"/>
         </form>
