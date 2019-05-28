@@ -11,25 +11,19 @@
             ></TokenFilter>
             <div class="token-list">
                 <div class="token__head">
-                    <div class="col">代币名称</div>
-                    <div class="col">钱包余额</div>
-                    <div class="col">钱包待接收金额</div>
-                    <div class="col">钱包跨链网关</div>
-                    <div class="col">交易所总余额度</div>
-                    <div class="col">交易所可用余额</div>
+                    <div class="col">{{$t('tokenCard.heads.name')}}</div>
+                    <div class="col">{{$t('tokenCard.heads.balance')}}</div>
+                    <div class="col">{{$t('tokenCard.heads.onroad')}}</div>
+                    <div class="col">{{$t('tokenCard.heads.gate')}}</div>
+                    <div class="col">{{$t('tokenCard.heads.totalExAmount')}}</div>
+                    <div class="col">{{$t('tokenCard.heads.availableExAmount')}}</div>
                     <div class="col">
                         <AssetSwitch v-model="assetType" class="asset-switch" />
                     </div>
                 </div>
                 <tokenCard
-                    v-for="token in nativeTokenList"
+                    v-for="token in tokenList"
                     :key="token.tokenId"
-                    :token="token"
-                    :assetType="assetType"
-                ></tokenCard>
-                <tokenCard
-                    v-for="token in crossChainTokenList"
-                    :key="`_${token.tokenId}`"
                     :token="token"
                     :assetType="assetType"
                 ></tokenCard>
@@ -76,6 +70,9 @@ export default {
             gateStorage.bindTokens(val.map(t => {
                 return { tokenId: t.tokenId, gateInfo: {} };
             }));
+        },
+        showTokenIds(val) {
+            this.$store.dispatch('addRateTokens', val);
         }
     },
     beforeMount() {
@@ -83,17 +80,12 @@ export default {
         this.$store.dispatch('startLoopExchangeRate');
     },
     computed: {
-        nativeTokenList() {
+        tokenList() {
             return [
                 ...this.defaultTokenList,
-                ...this.userStorageTokenList.filter(t => !t.gateInfo.url),
-                ...this.otherWhithBalance
-            ].filter(filterFunc(this.filterObj));
-        },
-        crossChainTokenList() {
-            return [
                 ...this.officalGateTokenList,
-                ...this.userStorageTokenList.filter(t => t.gateInfo.url)
+                ...this.userStorageTokenList,
+                ...this.otherWhithBalance
             ].filter(filterFunc(this.filterObj));
         },
         defaultTokenList() {
@@ -107,6 +99,14 @@ export default {
         },
         otherWhithBalance() {
             return this.$store.getters.otherWhithBalance;
+        },
+        showTokenIds() {
+            return [
+                ...this.defaultTokenList,
+                ...this.officalGateTokenList,
+                ...this.userStorageTokenList,
+                ...this.otherWhithBalance
+            ].map(t => t.tokenId);
         }
     },
     methods: {

@@ -44,9 +44,6 @@ export default {
     data() {
         return { detailData: [], isShow: false };
     },
-    beforeMount() {
-        this.detail(this.token.tokenId);
-    },
     computed: {
         address() {
             return this.$store.getters.activeAddr;
@@ -71,6 +68,7 @@ export default {
         },
         show() {
             this.isShow = true;
+            this.detail(this.token.tokenId);
         },
         detail(tokenId) {
             this.detailConfirm = true;
@@ -78,7 +76,7 @@ export default {
                 address: this.address,
                 tokenId
             }).then(data => {
-                this.detailData = data.records;
+                this.detailData = data.record;
             });
         }
     }
