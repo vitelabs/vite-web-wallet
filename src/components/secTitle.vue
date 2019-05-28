@@ -3,7 +3,7 @@
         <span>{{ $t(title) }}</span>
         <span v-if="isShowHelp" @click="_showHelp" class="help __pointer">
             <i class="icon"></i>
-            <span class="help-text" v-html="$t(helpTitle)"></span>
+            <span class="help-text">{{ $t(helpTitle) }}</span>
         </span>
     </div>
 </template>

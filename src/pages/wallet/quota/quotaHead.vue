@@ -1,26 +1,35 @@
 <template>
-    <sec-title :showHelp="showHelp"></sec-title>
+    <div>
+        <sec-title :showHelp="showHelp"></sec-title>
+        <confirm v-show="isShowHelp" :showMask="true" :singleBtn="true"
+                 :title="$t('walletQuota.help.title')" :closeIcon="true"
+                 :close="close" :leftBtnTxt="$t('btn.understand')"
+                 :leftBtnClick="close">
+            <div class="help-t">{{ $t('walletQuota.confirm.help.t1') }}</div>
+            <div class="help-txt">{{ $t('walletQuota.confirm.help.txt1') }}</div>
+            <div class="help-t">{{ $t('walletQuota.confirm.help.t2') }}</div>
+            <div class="help-txt">{{ $t('walletQuota.confirm.help.txt2') }}</div>
+            <div class="help-t">{{ $t('walletQuota.confirm.help.t3') }}</div>
+            <div class="help-txt">{{ $t('walletQuota.confirm.help.txt3') }}</div>
+        </confirm>
+    </div>
 </template>
 
 <script>
 import secTitle from 'components/secTitle';
+import confirm from 'components/confirm';
 
 export default {
-    components: { secTitle },
+    components: { secTitle, confirm },
+    data() {
+        return { isShowHelp: false };
+    },
     methods: {
+        close() {
+            this.isShowHelp = false;
+        },
         showHelp() {
-            this.$confirm({
-                title: this.$t('walletQuota.help.title'),
-                singleBtn: true,
-                closeBtn: { show: false },
-                leftBtn: { text: this.$t('btn.understand') },
-                content: `<div class="help-t">${ this.$t('walletQuota.confirm.help.t1') }</div>
-                        <div class="help-txt">${ this.$t('walletQuota.confirm.help.txt1') }</div>
-                        <div class="help-t">${ this.$t('walletQuota.confirm.help.t2') }</div>
-                        <div class="help-txt">${ this.$t('walletQuota.confirm.help.txt2') }</div>
-                        <div class="help-t">${ this.$t('walletQuota.confirm.help.t3') }</div>
-                        <div class="help-txt">${ this.$t('walletQuota.confirm.help.txt3') }</div>`
-            });
+            this.isShowHelp = true;
         }
     }
 };
