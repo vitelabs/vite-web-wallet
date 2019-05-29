@@ -19,13 +19,13 @@
 
         <div class="__center-tb-title">
             <span class="__center-tb-item __ellipsis depth price">{{ $t('trade.priceTitle', {
-                price: activeTxPair && activeTxPair.quoteTokenSymbol ? activeTxPair.quoteTokenSymbol : ''
+                price: quoteTokenDetail ? quoteTokenDetail.originalSymbol : ''
             }) }}</span>
             <span class="__center-tb-item __ellipsis depth quantity">{{ $t('trade.amountTitle', {
-                amount: activeTxPair && activeTxPair.tradeTokenSymbol ? activeTxPair.tradeTokenSymbol : ''
+                amount: tradeTokenDetail ? tradeTokenDetail.originalSymbol : ''
             }) }}</span>
             <span class="__center-tb-item __ellipsis depth amount">{{ $t('trade.quantityTitle', {
-                quantity: activeTxPair && activeTxPair.quoteTokenSymbol ? activeTxPair.quoteTokenSymbol : ''
+                quantity: quoteTokenDetail ? quoteTokenDetail.originalSymbol : ''
             }) }}</span>
         </div>
 
@@ -60,8 +60,11 @@ export default {
         depthSell() {
             return this.$store.state.exchangeDepth.sell;
         },
-        activeTxPair() {
-            return this.$store.state.exchangeActiveTxPair.activeTxPair;
+        quoteTokenDetail() {
+            return this.$store.state.exchangeTokens.ttoken;
+        },
+        tradeTokenDetail() {
+            return this.$store.state.exchangeTokens.ftoken;
         }
     },
     methods: {

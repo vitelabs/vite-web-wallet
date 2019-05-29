@@ -4,12 +4,12 @@
         <div class="__center-tb-title">
             <span class="__center-tb-item">
                 {{ $t('trade.priceTitle', {
-                    price: activeTxPair && activeTxPair.quoteTokenSymbol ? activeTxPair.quoteTokenSymbol : ''
+                    price: quoteTokenDetail ? quoteTokenDetail.originalSymbol : ''
                 }) }}
             </span>
             <span class="__center-tb-item left __ellipsis">
                 {{ $t('trade.amountTitle', {
-                    amount: activeTxPair && activeTxPair.tradeTokenSymbol ? activeTxPair.tradeTokenSymbol : ''
+                    amount: tradeTokenDetail ? tradeTokenDetail.originalSymbol : ''
                 })}}
             </span>
             <span class="__center-tb-item tx-time">{{ $t('trade.latestTx.time') }}</span>
@@ -22,8 +22,8 @@
                 <span class="__center-tb-item"  :class="{
                     'buy': tx.side === 0,
                     'sell': tx.side === 1
-                }">{{ formatNum(tx.price, 'ttoken') }}</span>
-                <span class="__center-tb-item left">{{ formatNum(tx.quantity, 'ftoken', 6) }}</span>
+                }">{{ formatNum(tx.price, 'price') }}</span>
+                <span class="__center-tb-item left">{{ formatNum(tx.quantity, 'quantity', 6) }}</span>
                 <span class="__center-tb-item tx-time">{{ getDate(tx.time * 1000) }}</span>
             </div>
         </div>
@@ -41,6 +41,12 @@ export default {
         this.$store.dispatch('exStopLatestTimer');
     },
     computed: {
+        quoteTokenDetail() {
+            return this.$store.state.exchangeTokens.ttoken;
+        },
+        tradeTokenDetail() {
+            return this.$store.state.exchangeTokens.ftoken;
+        },
         latestTxList() {
             return this.$store.state.exchangeLatestTx.txList;
         },
@@ -49,27 +55,23 @@ export default {
         },
         isLoading() {
             return this.$store.state.exchangeLatestTx.isLoading;
-        },
-        ttoken() {
-            return this.$store.state.exchangeTokens.ttoken;
-        },
-        ftoken() {
-            return this.$store.state.exchangeTokens.ftoken;
         }
     },
     methods: {
         formatNum(num, type, fix = 8) {
-            const decimals = type === 'ttoken' ? 'toDecimals' : 'fromDecimals';
+            const decimals = `${ type }Precision`;
 
             if (this.activeTxPair && this.activeTxPair[decimals] < fix) {
                 fix = this.activeTxPair[decimals];
             }
 
-            if (!this[type]) {
+            const tokenDetail = type === 'price' ? 'quoteTokenDetail' : 'tradeTokenDetail';
+
+            if (!this[tokenDetail]) {
                 return BigNumber.formatNum(num, fix);
             }
 
-            return BigNumber.formatNum(num, this[type].tokenDecimals, fix);
+            return BigNumber.formatNum(num, this[tokenDetail].tokenDecimals, fix);
         },
         getDate(timestamp) {
             return date(timestamp, 'zh', true);
