@@ -223,8 +223,8 @@
         "actionType": {
             "SEND": "发送",
             "RECEIVE": "接收",
-            "CHARGE": "跨链充值",
-            "WITHDRAW": "跨链提现",
+            "CHARGE": "跨链转入",
+            "WITHDRAW": "跨链转出",
             "EXCHARGE": "充值至交易所",
             "EXWITHDRAW": "提币至钱包",
             "EXRECRODS": "交易所充提记录",
@@ -291,7 +291,7 @@
             "statusMap": {
                 "TODO": "VITE链待确认",
                 "TOT_PROCESSING": "VITE链确认",
-                "TOT_NOT_RECEIVED": "提现失败",
+                "TOT_NOT_RECEIVED": "转出失败",
                 "TOT_CONFIRMED": "网关已接收",
                 "OPPOSITE_PROCESSING": "{outChain}链待确认",
                 "OPPOSITE_CONFIRMED": "已完成"
@@ -305,35 +305,35 @@
             "amountPlaceholder": "请输入接收金额"
         },
         "charge": {
-            "title": "跨链充值",
+            "title": "跨链转入",
             "addrErr":"网关节点出错，请检查网关设置",
-            "addressTitle": "充值地址",
+            "addressTitle": "转入地址",
             "codeTips": "请扫描二维码充值,请使用支持{tokenSymbol}的钱包转账",
             "tips": [
-                "充值操作是将{tokenSymbol}跨链映射至VITE网络，充值后您可通过提现转走",
+                "跨链转入操作是将{tokenSymbol}跨链映射至VITE网络，转入后您依然可以转出",
                 "通过该存款地址只能发送{tokenSymbol},且金额不能低于{min}",
                 "交易确认之后，预计5分钟后到账，请耐心等待"
             ]
         },
         "withdraw": {
-            "title": "跨链提现",
+            "title": "跨链转出",
             "balanceErrMap": {
                 "notEnough": "余额不足",
-                "overMax": "提现金额需小于 {max}",
-                "lessMin": "提现金额需大于 {min}"
+                "overMax": "转出金额需小于 {max}",
+                "lessMin": "转出金额需大于 {min}"
             },
             "feeTips": "手续费收取金额由网关设置",
             "addressErr": "地址格式错误",
             "labels": {
                 "balance": "账户余额",
-                "address": "提现地址",
-                "amount": "提现金额",
-                "fee": "提现手续费",
+                "address": "转出地址",
+                "amount": "转出金额",
+                "fee": "转出手续费",
                 "all": "全部"
             },
-            "amountPlaceholder": "请输入提现金额，最小不少于{min}",
-            "addressPlaceholder": "请输入提现地址",
-            "successTips": "提现请求已发送",
+            "amountPlaceholder": "请输入转出金额，最小不少于{min}",
+            "addressPlaceholder": "请输入转出地址",
+            "successTips": "转出请求已发送",
             "failTips":"网关节点出错，请检查网关设置"
         },
         "nodeErr": "网关节点无效，请检查网关设置"
