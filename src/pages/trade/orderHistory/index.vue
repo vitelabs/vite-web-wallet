@@ -93,7 +93,7 @@ export default {
             task.start(() => {
                 return {
                     address: this.defaultAddr,
-                    symbol: this.activeTxPair.symbol
+                    ...this.activeTxPair
                 };
             });
         },

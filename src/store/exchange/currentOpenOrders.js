@@ -26,13 +26,14 @@ const actions = {
         task.start(() => {
             return {
                 address: rootGetters.activeAddr,
-                symbol: activeTxPair.symbol
+                ...activeTxPair
             };
         });
     },
-    stopOrderCurrent() {
+    stopOrderCurrent({ commit }) {
         task && task.stop();
         task = null;
+        commit('exSetCurrentOpenOrders', []);
     }
 };
 
