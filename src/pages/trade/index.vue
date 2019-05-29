@@ -38,6 +38,7 @@ export default {
     },
     mounted() {
         this.$store.dispatch('startLoopExchangeRate');
+        this.$store.dispatch('startLoopExchangeBalance');
 
         this.$router.afterEach(to => {
             this.active = to.name;
