@@ -116,9 +116,6 @@ export default {
             this.updateData();
         }
     },
-    beforeMount() {
-        this.updateData();
-    },
     methods: {
         gotoInHash(hash) {
             window.open(this.inTxExplorerFormat.replace('{$tx}', hash));

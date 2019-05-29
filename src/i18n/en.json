@@ -41,7 +41,7 @@
         "35003": "{name} ID conflict occurs, please re-submit later",
         "35004": "Invalid parameters",
         "35005": "Transactions are sent too frequent, please try again later",
-        "35006": "合约方法不存在",
+        "35006": "Contract method not exist",
         "36001": "You cannot make any transfer until you receive a transaction",
         "36002": "System verify failed, please try again later",
         "36003": "System verify failed, please try again later",
@@ -125,9 +125,9 @@
         "v": "Current Version: {version}"
     },
     "pwdConfirm": {
-        "conf": "开启免密设置，您只需要登录时输入密码，交易过程无需再输入密码",
+        "conf": "Open password-free mode to free you from entering password during every transaction process. ",
         "title": "Password",
-        "placeholder": "Please input password of wallet",
+        "placeholder": "Please input wallet password",
         "unlockAcc": "Please input password to unlock {name} account"
     },
     "quotaConfirm": {
@@ -148,10 +148,10 @@
         "change": "Switch to {len} Mnemonic Words"
     },
     "setting": {
-        "title": "Setting Account",
-        "config": "常规设置",
-        "currency": "计价币种",
-        "secure": "安全设置",
+        "title": "Account Settings",
+        "config": "General",
+        "currency": "Default Currency",
+        "secure": "Security",
         "lang": "Language",
         "block": "Current Height",
         "version": "Version",
@@ -160,13 +160,13 @@
         "sys": "System Portal",
         "open": "Vite Github",
         "addAddr": "Add Address",
-        "addrList": "地址管理",
+        "addrList": "Address Management",
         "setDefault": "Select Default Address",
         "autoLogout": "Auto Logout Time",    
-        "noPass": "是否开启免密",
-        "explorer": "区块浏览器",
-        "netInfo": "网络信息",
-        "logoutDescribe": "当您离开交易所页面，账户会自动退出",
+        "noPass": "Turn on password-free mode",
+        "explorer": "Block Explorer",
+        "netInfo": "Network Information",
+        "logoutDescribe": "Your account will logout automatically when you leave this page",
         "timeList": {
             "5": "5 Minutes",
             "10": "10 Minutes",
@@ -193,9 +193,9 @@
     },
     "startRecord": {
         "agreeList": [
-            "我理解如果我丢失了助记词，我将永远无法找回我的资产",
-            "我理解如果我忘记或丢失了助记词，将没有任何人能够帮助我恢复",
-            "我已经写下了或者用其它方式保存了我的助记词"
+            "I understand that if I lose my mnemonic words, I will not be able to access my account.",
+            "I understand that if I forget or lose my mnemonic words, no one can guarantee the restoration of my assets.",
+            "I have already written down or securely stored my mnemonic words."
         ]
     },
     "keystore": {
@@ -209,134 +209,134 @@
         }
     },
     "tokenCard": {
-        "moreRecrods":"更多记录",
-        "others":"其它",
-        "assetSpread":"资产分布",
+        "moreRecrods":"More Records",
+        "others":"Others",
+        "assetSpread":"Asset Distribution",
         "heads":{
-            "name":"代币名称",
-            "balance":"钱包余额",
-            "onroad":"钱包待接收金额",
-            "gate":"钱包跨链网关",
-            "totalExAmount":"交易所总余额度",
-            "availableExAmount":"交易所可用余额"
+            "name":"Name",
+            "balance":"Balance",
+            "onroad":"Wallet unreceived amount",
+            "gate":"Wallet cross-chain gateway",
+            "totalExAmount":"Exchange total balance",
+            "availableExAmount":"Exchange available balance"
         },
         "actionType": {
-            "SEND": "发送",
-            "RECEIVE": "接收",
-            "CHARGE": "跨链充值",
-            "WITHDRAW": "跨链提现",
-            "EXCHARGE": "充值至交易所",
-            "EXWITHDRAW": "提币至钱包",
-            "EXRECRODS": "交易所充提记录",
-            "RECRODS":"跨链充提记录"
+            "SEND": "Transfer",
+            "RECEIVE": "Receive",
+            "CHARGE": "Cross-chain receive",
+            "WITHDRAW": "Cross-chain transfer",
+            "EXCHARGE": "Deposit to exchange",
+            "EXWITHDRAW": "Withdraw to wallet",
+            "EXRECRODS": "Exchange transaction history",
+            "RECRODS":"Cross-chain transaction history"
         },
         "addToken": {
-            "title": "添加代币",
-            "placeholder": "请输入代币名称或TokenID",
-            "lTxt": "取消",
-            "rTxt": "添加"
+            "title": "Add Token",
+            "placeholder": "Please input token name or TokenID",
+            "lTxt": "Cancel",
+            "rTxt": "Add"
         },
         "type": {
-            "native": "原生代币",
-            "crossGate": "跨链代币"
+            "native": "Native tokens",
+            "crossGate": "Cross-chain tokens"
         },
         "assetType":{
-            "TOTAL":"全部资产估值",
-            "EX":"交易所资产估值",
-            "WALLET":"钱包资产估值"
+            "TOTAL":"All assets estimated value",
+            "EX":"Exchange assets estimated value",
+            "WALLET":"Wallet assets estimated value"
         },
         "tokenInfo": {
-            "tabName": "详情",
-            "title": "{tokenSymbol}代币信息",
-            "saveGate": "保存修改",
+            "tabName": "Details",
+            "title": "{tokenSymbol} Information",
+            "saveGate": "Save",
             "labels": {
                 "tokenId": "TokenID",
-                "title": "{tokenSymbol}代币地址",
-                "address": "铸币地址",
-                "tokenName": "代币名称",
-                "totalSupply": "发行总量",
-                "decimals": "小数位",
-                "isReIssuable": "类型",
-                "time": "发行日期"
+                "title": "{tokenSymbol} Address",
+                "address": "Mintage Address",
+                "tokenName": "Name",
+                "totalSupply": "Total Supply",
+                "decimals": "Decimals",
+                "isReIssuable": "Type",
+                "time": "Issuance Date"
             },
             "reIssuable": {
-                "true": "可增发",
-                "false": "不可增发"
+                "true": "Re-issuable",
+                "false": "Not re-issuable"
             }
         },
         "gateInfo": {
-            "tabName": "网关详情",
-            "selfdefined": "自定义网关",
-            "officalNet": "网关官网",
-            "introduction": "网关介绍",
-            "token": "网关发行代币",
-            "setting": "网关设置",
-            "nodeDesc": "网关节点使用说明：",
-            "settingPlaceholder": "请输入网关链接地址"
+            "tabName": "Gateway Details",
+            "selfdefined": "Customize Gateway",
+            "officalNet": "Website",
+            "introduction": "Description",
+            "token": "Issued Token",
+            "setting": "Settings",
+            "nodeDesc": "User Guide:",
+            "settingPlaceholder": "Please input gateway link address"
         },
         "depositRecord": {
-            "tabName": "充值记录",
-            "heads": ["时间", "金额", "状态", "VITE链Hash", "{outChain}链Hash"],
+            "tabName": "Deposit History",
+            "heads": ["Time", "Amount", "Status", "VITE Chain Hash", "{outChain} Chain Hash"],
             "statusMap": {
-                "OPPOSITE_PROCESSING": "{outChain}链待确认",
-                "OPPOSITE_CONFIRMED": "网关已接收",
-                "TOT_CONFIRMED": "已完成",
-                "BELOW_MINIMUM": "VITE链待确认",
-                "TOT_PROCESSING": "已完成"
+                "OPPOSITE_PROCESSING": "{outChain} Chain Unconfirmed",
+                "OPPOSITE_CONFIRMED": "Gateway has received",
+                "TOT_CONFIRMED": "Completed",
+                "BELOW_MINIMUM": "VITE Chain Unconfirmed",
+                "TOT_PROCESSING": "Completed"
             }
         },
         "withdrawRecord": {
-            "tabName": "提现记录",
-            "heads": ["时间", "金额", "状态", "VITE链Hash", "{outChain}链Hash"],
+            "tabName": "Transfer History",
+            "heads": ["Time", "Amount", "Status", "VITE Chain Hash", "{outChain} Chain Hash"],
             "statusMap": {
-                "TODO": "VITE链待确认",
-                "TOT_PROCESSING": "VITE链确认",
-                "TOT_NOT_RECEIVED": "提现失败",
-                "TOT_CONFIRMED": "网关已接收",
-                "OPPOSITE_PROCESSING": "{outChain}链待确认",
-                "OPPOSITE_CONFIRMED": "已完成"
+                "TODO": "VITE Chain Unconfirmed",
+                "TOT_PROCESSING": "VITE Confirmed",
+                "TOT_NOT_RECEIVED": "Transfer Failed",
+                "TOT_CONFIRMED": "Gateway has received",
+                "OPPOSITE_PROCESSING": "{outChain} chain unconfirmed",
+                "OPPOSITE_CONFIRMED": "Completed"
             }
         },
         "receive": {
-            "title": "接收",
-            "codeTips": "请扫码向我转入{tokenSymbol}",
-            "addressTitle": "接收地址",
-            "amountTitle": "请输入接收金额",
-            "amountPlaceholder": "请输入接收金额"
+            "title": "Receive",
+            "codeTips": "Scan the QR code and transfer {tokenSymbol} to me",
+            "addressTitle": "Recipient Address",
+            "amountTitle": "Receive Amount",
+            "amountPlaceholder": "Please input receive amount"
         },
         "charge": {
-            "title": "跨链充值",
-            "addrErr": "网关节点出错，请检查网关设置",
-            "addressTitle": "充值地址",
-            "codeTips": "请扫描二维码充值,请使用支持{tokenSymbol}的钱包转账",
+            "title": "Cross-Chain Receive",
+            "addrErr": "Something went wrong with gateway node, please check your network settings",
+            "addressTitle": "Recipient Address",
+            "codeTips": "Scan QR code to deposit. Please transfer with the wallet that supports {tokenSymbol}",
             "tips": [
-                "充值操作是将{tokenSymbol}跨链映射至VITE网络，充值后您可通过提现转走",
-                "通过该存款地址只能发送{tokenSymbol},且金额不能低于{min}",
-                "交易确认之后，预计5分钟后到账，请耐心等待"
+                "Cross-Chain Receive operation will do {tokenSymbol} cross-chain mapping to VITE network, you can still transfer the assets after receiving them",
+                "You can only send {tokenSymbol} through this address and the amount cannot be less than {min}",
+                "When the transaction is confirmed, you will receive the asset after 5 minutes, kindly wait in patient"
             ]
         },
         "withdraw": {
-            "title": "跨链提现",
+            "title": "Cross-Chain Transfer",
             "balanceErrMap": {
-                "notEnough": "余额不足",
-                "overMax": "提现金额需小于 {max}",
-                "lessMin": "提现金额需大于 {min}"
+                "notEnough": "Insufficient Balance",
+                "overMax": "Transfer amount must be less than {max}",
+                "lessMin": "Transfer amount must be greater than {min}"
             },
-            "feeTips": "手续费收取金额由网关设置",
-            "addressErr": "地址格式错误",
+            "feeTips": "Transaction fee amount is set by gateway operator",
+            "addressErr": "Address format is incorrect",
             "labels": {
-                "balance": "账户余额",
-                "address": "提现地址",
-                "amount": "提现金额",
-                "fee": "提现手续费",
-                "all": "全部"
+                "balance": "Balance",
+                "address": "Address",
+                "amount": "Amount",
+                "fee": "Fee",
+                "all": "All"
             },
-            "amountPlaceholder": "请输入提现金额，最小不少于{min}",
-            "addressPlaceholder": "请输入提现地址",
-            "successTips": "提现请求已发送",
-            "failTips": "网关节点出错，请检查网关设置"
+            "amountPlaceholder": "Please input transfer amount which should not be less than {min}",
+            "addressPlaceholder": "Please input transfer address",
+            "successTips": "Transfer request has been sent",
+            "failTips": "An error occurred in gateway node, please check the network settings"
         },
-        "nodeErr": "提示网关节点无效，请检查网关设置"
+        "nodeErr": "Gateway node is invalid, please check the gateway settings"
     },
     "wallet": {
         "title": "Quota Management",
@@ -353,7 +353,7 @@
         "sum": "Amount",
         "remarks": "Comment",
         "remarksLong": "{len} bytes left",
-        "totalAsset": "总资产",
+        "totalAsset": "Total Assets",
         "placeholder": {
             "amount": "Please input amount",
             "remarks": "Please input comments",
@@ -602,16 +602,16 @@
         "depthView": "Depth",
         "klineView": "TradingView",
         "txPairDetail": {
-            "title": "交易对详情",
-            "24h": "24小时数据",
-            "openPrice": "开盘价",
-            "quantity": "市场币交易量",
-            "amount": "基准币交易量",
-            "status": "当前状态",
-            "latest": "最新价",
-            "buy": "买一价",
-            "sell": "卖一价",
-            "diff": "价差"
+            "title": "Trading pair details",
+            "24h": "24h",
+            "openPrice": "Open",
+            "quantity": "Market Volume",
+            "amount": "Base volume",
+            "status": "Status",
+            "latest": "Latest",
+            "buy": "Buy price",
+            "sell": "Sell price",
+            "diff": "diff"
         },
         "dexToken": {
             "title": "Open Trading Pair",
@@ -689,7 +689,7 @@
         "operate": "Action",
         "all":"All",
         "confirmTable": {
-            "title":"Detail Records",
+            "title":"Detailed Record",
             "heads": [
                 "Date",
                 "Token",

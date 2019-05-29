@@ -49,9 +49,9 @@ block originContent
             .label {{$t("tokenCard.gateInfo.setting")}}
             input.gate-url(:placeholder="$t('tokenCard.gateInfo.settingPlaceholder')" :disabled="token.type==='OFFICAL_GATE'" v-model="url")
     .tab-content.no-padding(v-if="tabName==='deposit'")
-        Tb(:type="'deposit'" :token="token")
+        Tb(:type="'deposit'" :token="token" :key="`deposit_${token.tokenId}`")
     .tab-content.no-padding(v-if="tabName==='withdraw'")
-        Tb(:type="'withdraw'" :token="token")
+        Tb(:type="'withdraw'" :token="token" :key="`withdraw_${token.tokenId}`")
 </template>
 
 <script>
@@ -75,6 +75,12 @@ export default {
             urlCache: this.token.gateInfo.url,
             dTitle: this.$t('tokenCard.tokenInfo.title', { tokenSymbol: this.token.tokenSymbol })
         };
+    },
+    beforeCreate() {
+        console.log('beforeCreateeeee');
+    },
+    beforeUpdate() {
+        console.log('beforeUpdateeeee');
     },
     beforeMount() {
         window.dddddd = this;
