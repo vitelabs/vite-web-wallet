@@ -22,11 +22,19 @@ const mutations = {
 };
 
 const actions = {
-    updateMarketMap({ commit, state }) {
+    updateMarketMap({ commit, dispatch, state }) {
         baseToken().then(data => {
             commit('setMarketMap', data || []);
+
             const marketMap = state.marketMap;
             const firstMarket = marketMap[0] ? marketMap[0].symbol : '';
+
+            const tokenIds = [];
+            marketMap.forEach(({ tokenId }) => {
+                tokenIds.push(tokenId);
+            });
+            dispatch('addRateTokens', tokenIds);
+
             const query = getQuery();
 
             if (!query.symbol) {

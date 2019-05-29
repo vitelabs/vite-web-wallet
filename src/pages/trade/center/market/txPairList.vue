@@ -11,7 +11,7 @@
                 <span class="__center-tb-item tx-pair">
                     <span class="favorite-icon" :class="{'active': !!favoritePairs[txPair.symbol]}"
                           @click.stop="setFavorite(txPair)"></span>
-                    <span class="describe">{{ `${txPair.tradeTokenSymbol }/${ txPair.quoteTokenSymbol}` }}</span>
+                    <span class="describe">{{ getTxPairShowSymbol(txPair) }}</span>
                 </span>
                 <span class="__center-tb-item">
                     {{ txPair.closePrice ? formatNum(txPair.closePrice, txPair.pricePrecision) : '--' }}
@@ -96,6 +96,10 @@ export default {
         }
     },
     methods: {
+        getTxPairShowSymbol(txPair) {
+            const tradeTokenSymbol = txPair.tradeTokenSymbol.split('-')[0];
+            return `${ tradeTokenSymbol }/${ txPair.quoteTokenSymbol }`;
+        },
         getPercent(num) {
             return `${ BigNumber.multi(num, 100, 2) }%`;
         },
@@ -133,7 +137,7 @@ export default {
             }
 
             const pre = this.$store.state.env.currency === 'cny' ? '≈¥' : '≈$';
-            return `${ txPair.tradeTokenSymbol }  ${ pre }${ BigNumber.multi(txPair.price || 0, rate || 0, 2) }`;
+            return `${ txPair.tradeTokenSymbol }  ${ pre }${ BigNumber.multi(txPair.closePrice || 0, rate || 0, 2) }`;
         },
         getRate(tokenId) {
             const rateList = this.$store.state.exchangeRate.rateMap || {};
@@ -142,7 +146,8 @@ export default {
             if (!tokenId || !rateList[tokenId]) {
                 return null;
             }
-            return rateList[tokenId][coin] || null;
+
+            return rateList[tokenId][`${ coin }Rate`] || null;
         },
         orderList(list) {
             const compareStr = (aStr, bStr) => {
