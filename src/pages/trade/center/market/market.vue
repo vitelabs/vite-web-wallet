@@ -196,6 +196,8 @@ export default {
     methods: {
         init() {
             defaultPairTimer = defaultPairTimer || new subTask('defaultPair', ({ args, data }) => {
+                console.log(args.quoteTokenSymbol);
+                console.log(this.quoteTokenSymbol);
                 if (args.quoteTokenSymbol !== this.quoteTokenSymbol) {
                     return;
                 }
@@ -225,6 +227,7 @@ export default {
                 }
 
                 this.txPairList = [].concat(this.txPairList);
+                console.log('????');
             }, 2000);
 
             defaultPairTimer.start(() => {

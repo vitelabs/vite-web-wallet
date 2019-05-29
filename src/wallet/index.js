@@ -1,4 +1,4 @@
-import { keystore, constant, utils } from '@vite/vitejs/dist/es5/vitejs';
+import { keystore, constant, utils } from '@vite/vitejs';
 import viteCrypto from 'testwebworker';
 import { getOldAccList, setOldAccList } from 'utils/store';
 import { HDAccount, StatusMap as _StatusMap } from './hdAccount';
