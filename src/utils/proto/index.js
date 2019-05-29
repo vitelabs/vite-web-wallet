@@ -73,7 +73,14 @@ class WsProtoClient {
                 console.log('Onmessage', data, realData);
 
                 const error = data.error_code || undefined;
+                console.log(data.event_key);
+                try {
+                    console.log(!!this._subKeys[data.event_key]);
+                } catch (err) {
+                    console.warn(err);
+                }
                 this._subKeys[data.event_key] && this._subKeys[data.event_key].forEach(c => {
+                    console.log(c);
                     c && c(realData, error);
                 });
             };

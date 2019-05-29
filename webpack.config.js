@@ -111,7 +111,7 @@ let webpackConfig = {
     },
     resolve: {
         alias: {
-            '@vite/vitejs': '@vite/vitejs/dist/es5/vitejs',
+            // '@vite/vitejs': '@vite/vitejs/dist/es5/vitejs',
             vue: 'vue/dist/vue.js',
             charting: CHARTING_PATH,
             src: SRC_PATH,
