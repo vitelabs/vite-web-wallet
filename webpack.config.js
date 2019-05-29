@@ -57,7 +57,7 @@ let webpackConfig = {
                     ecma: 6,
                     mangle: true
                 },
-                extractComments: true,
+                // extractComments: true,
                 sourceMap: false
             })
         ]
