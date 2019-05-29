@@ -276,7 +276,7 @@
         },
         "depositRecord": {
             "tabName": "充值记录",
-            "heads": ["时间", "金额", "状态", "{inChain}链Hash", "{outChain}链Hash"],
+            "heads": ["时间", "金额", "状态", "VITE链Hash", "{outChain}链Hash"],
             "statusMap": {
                 "OPPOSITE_PROCESSING": "{outChain}链待确认",
                 "OPPOSITE_CONFIRMED": "网关已接收",
@@ -287,7 +287,7 @@
         },
         "withdrawRecord": {
             "tabName": "提现记录",
-            "heads": ["时间", "金额", "状态", "{inChain}链Hash", "{outChain}链Hash"],
+            "heads": ["时间", "金额", "状态", "VITE链Hash", "{outChain}链Hash"],
             "statusMap": {
                 "TODO": "VITE链待确认",
                 "TOT_PROCESSING": "VITE链确认",
