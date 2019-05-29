@@ -265,6 +265,10 @@ export default {
                             return;
                         }
 
+                        if (this.activeTxPair && data.symbol === this.activeTxPair.symbol) {
+                            this.$store.commit('exSetActiveTxPair', data);
+                        }
+
                         let i;
                         for (i = 0; i < this.favoriteList.length; i++) {
                             if (this.favoriteList[i].symbol === data.symbol) {
