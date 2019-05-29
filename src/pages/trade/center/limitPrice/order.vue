@@ -191,11 +191,11 @@ export default {
             const rateList = this.$store.state.exchangeRate.rateMap || {};
             const tokenId = this.activeTxPair && this.activeTxPair.quoteToken ? this.activeTxPair.quoteToken : null;
             const coin = this.$store.state.env.currency;
+
             if (!tokenId || !rateList[tokenId]) {
                 return null;
             }
-
-            return rateList[tokenId][coin] || null;
+            return rateList[tokenId][`${ coin }Rate`] || null;
         },
         minAmount() {
             const markets = this.$store.state.exchangeMarket.marketMap;
