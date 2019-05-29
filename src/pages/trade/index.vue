@@ -37,45 +37,17 @@ export default {
         pageLayout
     },
     mounted() {
+        this.$store.dispatch('startLoopExchangeRate');
+
         this.$router.afterEach(to => {
             this.active = to.name;
         });
-
-        this.getBalance();
-    },
-    destroyed() {
-        this.$store.dispatch('stopLoopExchangeBalance');
-        this.$store.dispatch('stopLoopExchangeRate');
     },
     data() {
         return {
             tap: 'openOrder',
-            active: this.$route.name,
-            tabList: [
-                'trade',
-                'tradeAssets',
-                'tradeOpenOrders',
-                'tradeOrderHistory'
-            ]
+            active: this.$route.name
         };
-    },
-    computed: {
-        activeTxPair() {
-            return this.$store.state.exchangeActiveTxPair.activeTxPair || {};
-        },
-        defaultAddr() {
-            return this.$store.getters.activeAddr;
-        }
-    },
-    watch: {
-        defaultAddr: function () {
-            this.getBalance();
-        }
-    },
-    methods: {
-        getBalance() {
-            this.$store.dispatch('startLoopExchangeBalance');
-        }
     }
 };
 </script>

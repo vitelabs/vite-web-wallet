@@ -21,9 +21,15 @@ const mutations = {
 const actions = {
     startLoopExchangeRate({ commit, dispatch, state }) {
         dispatch('stopLoopExchangeRate');
-        const f = () => rateToken({ tokenIdList: state.rateTokenIds }).then(data => {
-            commit('setExchangeRate', data);
-        });
+
+        const f = () => {
+            if (!state.rateTokenIds || !state.rateTokenIds.length) {
+                return;
+            }
+            return rateToken({ tokenIdList: state.rateTokenIds }).then(data => {
+                commit('setExchangeRate', data);
+            });
+        };
 
         rateTimer = new timer(f, loopTime);
         rateTimer.start();

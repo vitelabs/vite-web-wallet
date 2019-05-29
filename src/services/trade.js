@@ -55,11 +55,6 @@ export const rate = function () {
     return request({ path: `${ path }/rate/usd-cny` });
 };
 
-// [TODO]
-export const rateFiat = function () {
-    return request({ path: `${ path }/rate/fiat` });
-};
-
 export const rateToken = function ({ tokenIdList = [] }) {
     const tokenIds = tokenIdList.join(',');
 
