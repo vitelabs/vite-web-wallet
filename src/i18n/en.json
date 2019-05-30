@@ -265,6 +265,7 @@
             }
         },
         "gateInfo": {
+            "gateSetting":"点击设置网关",
             "tabName": "Gateway Details",
             "selfdefined": "Customize Gateway",
             "officalNet": "Website",

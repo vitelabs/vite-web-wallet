@@ -40,15 +40,15 @@
                 </div>
                 <div
                     class="column click-able"
-                    @click="() => gotoInHash(item.inTxHash)"
+                    @click="() => type==='deposit'?gotoOutHash(item.outTxHash):gotoInHash(item.inTxHash)"
                 >
-                    {{ item.inTxHash | hashShortify }}
+                    {{ type==='deposit'?item.outTxHash:item.inTxHash | hashShortify }}
                 </div>
                 <div
                     class="column click-able"
-                    @click="() => gotoOutHash(item.outTxHash)"
+                    @click="() => type==='withdraw'?gotoOutHash(item.outTxHash):gotoInHash(item.inTxHash)"
                 >
-                    {{ item.outTxHash | hashShortify }}
+                    {{ type==='withdraw'?item.outTxHash:item.inTxHash | hashShortify }}
                 </div>
             </div>
         </div>
@@ -62,11 +62,11 @@
     </div>
 </template>
 <script>
-import Pagination from 'components/pagination.vue';
-import { getDepositRecords, getWithdrawRecords } from 'services/gate.js';
-import shortify from 'utils/ellipsisAddr';
-import b from 'utils/bigNumber';
-import d from 'dayjs';
+import Pagination from "components/pagination.vue";
+import { getDepositRecords, getWithdrawRecords } from "services/gate.js";
+import shortify from "utils/ellipsisAddr";
+import b from "utils/bigNumber";
+import d from "dayjs";
 const pageSize = 10;
 
 export default {
@@ -74,7 +74,7 @@ export default {
     props: {
         type: {
             type: String,
-            default: ''
+            default: ""
         },
         token: {
             type: Object,
@@ -87,14 +87,18 @@ export default {
         return {
             currentPage: 1,
             totalPage: 0,
-            inTxExplorerFormat: '',
-            outTxExplorerFormat: '',
+            inTxExplorerFormat: "",
+            outTxExplorerFormat: "",
             tbData: []
         };
     },
+    beforeMount() {
+        window.sssss=this;
+        this.updateData();
+    },
     filters: {
         dateShow(value) {
-            return d(Number(value)).format('YYYY.MM.DD HH:mm');
+            return d(Number(value)).format("YYYY.MM.DD HH:mm");
         },
         toBasic: (value, decimals) => b.toBasic(value, decimals),
         hashShortify(value) {
@@ -106,54 +110,52 @@ export default {
             return this.$store.getters.activeAddr;
         }
     },
-    watch: {
-        type() {
-            this.currentPage = 1;
-            this.totalPage = 0;
-            this.inTxExplorerFormat = '';
-            this.outTxExplorerFormat = '';
-            this.tbData = [];
-            this.updateData();
-        }
-    },
     methods: {
         gotoInHash(hash) {
-            window.open(this.inTxExplorerFormat.replace('{$tx}', hash));
+            window.open(this.inTxExplorerFormat.replace("{$tx}", hash));
         },
         gotoOutHash(hash) {
-            window.open(this.outTxExplorerFormat.replace('{$tx}', hash));
+            window.open(this.outTxExplorerFormat.replace("{$tx}", hash));
         },
         updateData(pageNum = this.currentPage) {
             if (!this.type) {
                 return;
-            } else if (this.type === 'deposit') {
-                getDepositRecords({
-                    tokenId: this.token.tokenId,
-                    walletAddress: this.defaultAddr,
-                    pageNum,
-                    pageSize
-                },
-                this.token.gateInfo.url).then(data => {
-                    this.totalPage = Math.ceil(data.totalCount / pageSize);
-                    this.inTxExplorerFormat = data.inTxExplorerFormat;
-                    this.outTxExplorerFormat = data.outTxExplorerFormat;
-                    this.tbData = data.depositRecords;
-                    this.currentPage = pageNum;
-                }).catch(e => console.error(e));
-            } else if (this.type === 'withdraw') {
-                getWithdrawRecords({
-                    tokenId: this.token.tokenId,
-                    walletAddress: this.defaultAddr,
-                    pageNum,
-                    pageSize
-                },
-                this.token.gateInfo.url).then(data => {
-                    this.totalPage = Math.ceil(data.totalCount / pageSize);
-                    this.inTxExplorerFormat = data.inTxExplorerFormat;
-                    this.outTxExplorerFormat = data.outTxExplorerFormat;
-                    this.tbData = data.withdrawRecords;
-                    this.currentPage = pageNum;
-                }).catch(e => console.error(e));
+            } else if (this.type === "deposit") {
+                getDepositRecords(
+                    {
+                        tokenId: this.token.tokenId,
+                        walletAddress: this.defaultAddr,
+                        pageNum,
+                        pageSize
+                    },
+                    this.token.gateInfo.url
+                )
+                    .then(data => {
+                        this.totalPage = Math.ceil(data.totalCount / pageSize);
+                        this.inTxExplorerFormat = data.inTxExplorerFormat;
+                        this.outTxExplorerFormat = data.outTxExplorerFormat;
+                        this.tbData = data.depositRecords;
+                        this.currentPage = pageNum;
+                    })
+                    .catch(e => console.error(e));
+            } else if (this.type === "withdraw") {
+                getWithdrawRecords(
+                    {
+                        tokenId: this.token.tokenId,
+                        walletAddress: this.defaultAddr,
+                        pageNum,
+                        pageSize
+                    },
+                    this.token.gateInfo.url
+                )
+                    .then(data => {
+                        this.totalPage = Math.ceil(data.totalCount / pageSize);
+                        this.inTxExplorerFormat = data.inTxExplorerFormat;
+                        this.outTxExplorerFormat = data.outTxExplorerFormat;
+                        this.tbData = data.withdrawRecords;
+                        this.currentPage = pageNum;
+                    })
+                    .catch(e => console.error(e));
             }
         }
     }
