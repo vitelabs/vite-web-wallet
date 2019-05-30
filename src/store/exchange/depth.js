@@ -1,3 +1,4 @@
+import bigNumber from 'utils/bigNumber';
 import { subTask } from 'utils/proto/subTask';
 
 const time = 2000;
@@ -15,7 +16,9 @@ const mutations = {
         state.buy = depthData || [];
     },
     exSetDepthSell(state, depthData) {
-        state.sell = depthData || [];
+        const list = depthData || [];
+        list.sort((a, b) => bigNumber.compared(b.price, a.price));
+        state.sell = list;
     },
     exSetDepthLoading(state, isLoading) {
         state.isLoading = isLoading;
