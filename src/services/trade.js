@@ -1,6 +1,14 @@
 import request from 'utils/request';
 
-const path = `${ process.env.dexApiServer }v1`;
+const version = 'v1';
+const path = `${ process.env.dexApiServer }${ version }`;
+
+export const limit = function () {
+    return request({
+        path: `${ path }/limit`,
+        method: 'GET'
+    });
+};
 
 export const klineHistory = function ({ startTime, endTime, symbol, interval }) {
     return request({

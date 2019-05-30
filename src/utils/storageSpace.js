@@ -7,7 +7,8 @@ export const addrSpace = {
     },
 
     getItem(key) {
-        if (!getActiveAcc().address) {
+        const activeAcc = getActiveAcc();
+        if (!activeAcc || !activeAcc.address) {
             return null;
         }
 
@@ -15,8 +16,9 @@ export const addrSpace = {
     },
 
     setItem(key, content) {
-        if (!getActiveAcc().address) {
-            return;
+        const activeAcc = getActiveAcc();
+        if (!activeAcc || !activeAcc.address) {
+            return null;
         }
 
         storage.setItem(`${ this.key }_${ key }`, content);
