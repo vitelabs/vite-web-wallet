@@ -198,20 +198,13 @@ export default {
             return rateList[tokenId][`${ coin }Rate`] || null;
         },
         minAmount() {
-            const markets = this.$store.state.exchangeMarket.marketMap;
-            const ttoken = this.activeTxPair ? this.activeTxPair.quoteToken : '';
+            const minAmount = this.$store.state.exchangeLimit.minAmount;
+            const quoteTokenSymbol = this.activeTxPair ? this.activeTxPair.quoteTokenSymbol : '';
 
-            if (!markets || !markets.length || !ttoken) {
+            if (!minAmount || !quoteTokenSymbol || !minAmount[quoteTokenSymbol]) {
                 return 0;
             }
-
-            for (let i = 0; i < markets.length; i++) {
-                if (markets[i].token === ttoken) {
-                    return markets[i].minAmount;
-                }
-            }
-
-            return 0;
+            return minAmount[quoteTokenSymbol];
         },
         percent() {
             if (!this.availableBalance
