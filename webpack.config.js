@@ -89,8 +89,8 @@ let webpackConfig = {
                 }
             }, {
                 test: /\.js$/,
-                // exclude: /node_modules(?!(\/base-x)|(\/resize-detector)|(\/vue-echarts))|(\/@vite\/vitejs)/,
-                exclude: /node_modules(?!(\/base-x)|(\/resize-detector)|(\/vue-echarts))/,
+                exclude: /node_modules(?!(\/base-x)|(\/resize-detector)|(\/vue-echarts))|(\/@vite\/vitejs)/,
+                // exclude: /node_modules(?!(\/base-x)|(\/resize-detector)|(\/vue-echarts))/,
                 use: {
                     loader: 'babel-loader',
                     options: {
@@ -111,7 +111,7 @@ let webpackConfig = {
     },
     resolve: {
         alias: {
-            // '@vite/vitejs': '@vite/vitejs/dist/es5/vitejs/index.js',
+            '@vite/vitejs': '@vite/vitejs/es5/index.js',
             vue: 'vue/dist/vue.js',
             charting: CHARTING_PATH,
             src: SRC_PATH,
