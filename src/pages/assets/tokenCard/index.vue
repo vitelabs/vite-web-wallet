@@ -231,8 +231,8 @@ export default {
         position: relative;
         @include colWidth;
         .unbind{
-            height: 10px;
-            width: 12px;
+            height: 16px;
+            width: 16px;
             position: absolute;
             bottom: 6px;
             right: 6px;
