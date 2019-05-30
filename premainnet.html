@@ -54,19 +54,10 @@
 
             <div id="notice"></div>
 
-            <div class="input-wrapper">
-                <input id="v_input" type="text" placeholder="Address" />
-                <span id="button" class="button">Search</span>
-            </div>
+
         </div>
 
         <script>
-            let input = document.getElementById('v_input');
-            let button = document.getElementById('button');
-            button.onclick = () => {
-                location.href = location.origin + '/balance?address=' + input.value;
-            }
-
             function getDefaultLang() {
                 try {
                     const type = navigator.appName;
@@ -81,9 +72,9 @@
 
             let lang = getDefaultLang();
             if (lang === 'zh') {
-                document.getElementById('notice').innerHTML = '<h2>切换公告</h2><div>Vite测试网络将于2019年5月21日15:00(UTC+8)开始切换至Pre-Mainnet，预计持续24小时</div></br><div>切换期间，钱包无法正常使用，所有功能将在切换后恢复，请您耐心等待</div>';
+                document.getElementById('notice').innerHTML = '<h2>维护通知</h2><div>因5月30日14:09开始的节点故障，导致Vite网络异常，请所有节点和用户待服务恢复后再使用网络服务</div></br><div>目前已经在紧急维护中，恢复时间会另行通知</div>';
             } else {
-                document.getElementById('notice').innerHTML = '<h2>Vite TestNet will be switched to Pre-Mainnet</h2><div>The switch will occur on 15:00 on May 21, 2019 in PST and the process is expected to last 24 hours</div></br><div>Vite Web Wallet will be closed during this time. All of the services will be restored until the switch is completed. Stay tuned :)</div>';
+                document.getElementById('notice').innerHTML = '<h2>Pre-Mainnet Urgent Maintenance Notice</h2><div>Vite Pre-Mainnet has been temporarily stopped at 14:09 on May 30 (Beijing Time) due to urgent network maintenance. All Vite serivces and products will be unavailable until the maintenance is done.</div></br><div>The estimated time of recovery will be announced in a further notice. Vite Labs thanks for your understanding and apologizes for any inconvenience.</div>';
             }
         </script>
 
@@ -106,29 +97,6 @@
                 justify-content: center;
                 align-items: center;
                 flex-direction: column;
-            }
-
-            .input-wrapper {
-                margin-top: 50px;
-                display: flex;
-                width: 100%;
-                max-width: 800px;
-                border: 1px solid #d4dee7;
-                border-radius: 2px;
-                font-size: 14px;
-                height: 40px;
-                line-height: 40px;
-            }
-            input {
-                flex: 1;
-                width: 100%;
-                font-size: 14px;
-                text-indent: 15px;
-            }
-            .button {
-                box-sizing: border-box;
-                padding: 0 20px;
-                cursor: pointer;
             }
         </style>
     </body>
