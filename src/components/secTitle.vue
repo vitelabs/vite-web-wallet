@@ -10,6 +10,7 @@
 
 <script>
 import { blackHole } from 'utils/ethWallet/viteContract';
+import confirm from 'components/confirm/index.js';
 
 export default {
     props: {
@@ -38,10 +39,10 @@ export default {
         _showHelp() {
             if (this.showHelp) {
                 this.showHelp();
-
                 return;
             }
-            this.$confirm({
+
+            confirm({
                 title: this.$t(this.helpTitle),
                 singleBtn: true,
                 closeBtn: { show: false },
