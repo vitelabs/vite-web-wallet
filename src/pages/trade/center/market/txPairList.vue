@@ -19,7 +19,7 @@
                 <span v-show="showCol === 'updown'" class="__center-tb-item percent" :class="{
                     'up': +txPair.priceChange > 0,
                     'down': +txPair.priceChange < 0
-                }">{{ txPair.priceChange ? getPercent(txPair.priceChange) : '--' }}</span>
+                }">{{ txPair.priceChangePercent ? getPercent(txPair.priceChangePercent) : '--' }}</span>
                 <span v-show="showCol === 'txNum'" class="__center-tb-item">
                     {{ txPair.amount ? formatNum(txPair.amount, 1) : '--' }}
                 </span>
