@@ -13,7 +13,7 @@
                     'down': +upDown < 0
                 }">
                     <span>{{ $t('trade.upDown') }}:</span>
-                    {{ upDownIcon + percent }}
+                    {{ percent }}
                 </div>
                 <div class="item-row">
                     <span>{{ $t('trade.txPairDetail.quantity') }}:</span>
@@ -68,15 +68,6 @@ export default {
         },
         upDown() {
             return this.activeTxPair ? this.activeTxPair.upDown : 0;
-        },
-        upDownIcon() {
-            if (!this.upDown || +this.upDown === 0) {
-                return '';
-            }
-            if (this.upDown > 0) {
-                return '+';
-            }
-            return '-';
         },
         quantity24h() {
             if (!this.activeTxPair || !this.activeTxPair.quantity) {
