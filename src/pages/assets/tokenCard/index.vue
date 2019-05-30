@@ -1,11 +1,21 @@
 <template>
     <div class="token-card">
-        <div class="col title click-able" >
+        <div class="col title click-able">
             <div>
-                <img :src="token.icon" class="icon" @click="()=>showDetail()" />
-                <span class="token-name underline" @click="()=>showDetail()">{{
-                    token.tokenSymbol==='VITE'?token.tokenSymbol:`${token.tokenSymbol}-${token.index}`
-                }}</span>
+                <img
+                    :src="token.icon"
+                    class="icon"
+                    @click="() => showDetail()"
+                />
+                <span
+                    class="token-name underline"
+                    @click="() => showDetail()"
+                    >{{
+                        token.tokenSymbol === "VITE"
+                            ? token.tokenSymbol
+                            : `${token.tokenSymbol}-${token.index}`
+                    }}</span
+                >
             </div>
             <div class="separate"></div>
         </div>
@@ -14,21 +24,34 @@
                 {{ `${token.balance || 0} ${token.tokenSymbol}` }}
             </div>
             <div class="op_group">
-                <div class="op" @click="send">{{$t('tokenCard.actionType.SEND')}}</div>
-                <div class="op" @click="exCharge">{{$t('tokenCard.actionType.EXCHARGE')}}</div>
+                <div class="op" @click="send">
+                    {{ $t("tokenCard.actionType.SEND") }}
+                </div>
+                <div class="op" @click="exCharge">
+                    {{ $t("tokenCard.actionType.EXCHARGE") }}
+                </div>
             </div>
         </div>
         <div class="col">
             {{ `${token.fundFloat || "--"} ${token.tokenSymbol}` }}
         </div>
         <div class="col">
-            <div class="underline click-able" @click="()=>(token.type!=='NATIVE'&&showDetail('gate'))" >
-                {{ token.gateInfo.gateway || (token.type==='NATIVE'?"--":$t('tokenCard.gateInfo.selfdefined') )}}
+            <div
+                class="underline click-able"
+                @click="() => token.type !== 'NATIVE' && showDetail('gate')"
+            >
+                {{ gateName }}
             </div>
             <div class="op_group" v-if="token.gateInfo.url">
-                <div class="op" @click="charge">{{$t('tokenCard.actionType.CHARGE')}}</div>
-                <div class="op" @click="withdraw">{{$t('tokenCard.actionType.WITHDRAW')}}</div>
-                <div class="op readonly"  @click="()=>showDetail('withdraw')">{{$t('tokenCard.actionType.RECRODS')}}</div>
+                <div class="op" @click="charge">
+                    {{ $t("tokenCard.actionType.CHARGE") }}
+                </div>
+                <div class="op" @click="withdraw">
+                    {{ $t("tokenCard.actionType.WITHDRAW") }}
+                </div>
+                <div class="op readonly" @click="() => showDetail('withdraw')">
+                    {{ $t("tokenCard.actionType.RECRODS") }}
+                </div>
             </div>
             <div class="separate"></div>
         </div>
@@ -40,8 +63,12 @@
                 {{ `${avaliableExBalance || "--"} ${token.tokenSymbol}` }}
             </div>
             <div class="op_group">
-                <div class="op" @click="exWithdraw">{{$t('tokenCard.actionType.EXWITHDRAW')}}</div>
-                <div class="op readonly" @click="exRecord">{{$t('tokenCard.actionType.EXRECRODS')}}</div>
+                <div class="op" @click="exWithdraw">
+                    {{ $t("tokenCard.actionType.EXWITHDRAW") }}
+                </div>
+                <div class="op readonly" @click="exRecord">
+                    {{ $t("tokenCard.actionType.EXRECRODS") }}
+                </div>
             </div>
             <div class="separate"></div>
         </div>
@@ -52,10 +79,18 @@
                     ≈{{ currencySymbol }} {{ assetView.cash }}
                 </div>
             </div>
-            <div class="unbind click-able" @click="unbind" v-if="showUnbind"></div>
+            <div
+                class="unbind click-able"
+                @click="unbind"
+                v-if="showUnbind"
+            ></div>
         </div>
         <Alert ref="alert" :token="token" />
-        <transaction :closeTrans="closeTrans" :token="token" v-if="isShowTrans" />
+        <transaction
+            :closeTrans="closeTrans"
+            :token="token"
+            v-if="isShowTrans"
+        />
     </div>
 </template>
 
@@ -67,12 +102,12 @@ import {
     tokenInfoDialog,
     exWithdrawDialog,
     exChargeDialog
-} from '../dialog';
-import bigNumber from 'utils/bigNumber';
-import { gateStorage } from 'services/gate';
-import transaction from '../transaction';
-import { execWithValid } from 'utils/execWithValid';
-import Alert from '../alert';
+} from "../dialog";
+import bigNumber from "utils/bigNumber";
+import { gateStorage } from "services/gate";
+import transaction from "../transaction";
+import { execWithValid } from "utils/execWithValid";
+import Alert from "../alert";
 
 export default {
     components: { transaction, Alert },
@@ -81,17 +116,17 @@ export default {
             type: Object,
             default: () => {
                 return {
-                    tokenSymbol: '--',
-                    balance: '--',
-                    asset: '--',
-                    onroadNum: '--',
-                    type: 'OFFICAL_GATE'
+                    tokenSymbol: "--",
+                    balance: "--",
+                    asset: "--",
+                    onroadNum: "--",
+                    type: "OFFICAL_GATE"
                 };
             }
         },
         assetType: {
             type: String,
-            default: 'TOTAL'
+            default: "TOTAL"
         }
     },
     data() {
@@ -103,46 +138,46 @@ export default {
         },
         showUnbind() {
             return (
-                this.token.type === 'THIRD_GATE'
-                && (!this.token.totalAmount
-                    || bigNumber.isEqual(this.token.totalAmount, '0'))
+                this.token.type === "THIRD_GATE" &&
+                (!this.token.totalAmount ||
+                    bigNumber.isEqual(this.token.totalAmount, "0"))
             );
         },
         gateName() {
-            if (this.$store.getters.mapToken2Gate[this.token.tokenId]) {
-                return this.$store.getters.mapToken2Gate[this.token.tokenId]
-                    .gateway;
-            }
-            if (this.token.gateInfo.url) {
-                return this.$t('tokenCard.gateInfo.selfdefined');
-            }
-            return this.$t('tokenCard.gateInfo.gateSetting');
+            if (this.token.type === "NATIVE") return "--";
+            if (this.token.gateInfo.gateway) return this.token.gateInfo.gateway;
+            if (this.token.gateInfo.url)return this.$t("tokenCard.gateInfo.selfdefined");
+            return this.$t("tokenCard.gateInfo.gateSetting");
         },
         exBanlance() {
-            return this.token.totalExAmount && bigNumber.toBasic(this.token.totalExAmount,
-                this.token.decimals);
+            return (
+                this.token.totalExAmount &&
+                bigNumber.toBasic(this.token.totalExAmount, this.token.decimals)
+            );
         },
         avaliableExBalance() {
             return (
-                this.token.availableExAmount
-                && bigNumber.toBasic(this.token.availableExAmount,
-                    this.token.decimals)
+                this.token.availableExAmount &&
+                bigNumber.toBasic(
+                    this.token.availableExAmount,
+                    this.token.decimals
+                )
             );
         },
         assetView() {
-            if (this.assetType === 'TOTAL') {
+            if (this.assetType === "TOTAL") {
                 return {
                     btc: this.token.totalAssetBtc,
                     cash: this.token.totalAsset
                 };
             }
-            if (this.assetType === 'EX') {
+            if (this.assetType === "EX") {
                 return {
                     btc: this.token.totalExAssetBtc,
                     cash: this.token.totalExAsset
                 };
             }
-            if (this.assetType === 'WALLET') {
+            if (this.assetType === "WALLET") {
                 return {
                     btc: this.token.walletAssetBtc,
                     cash: this.token.walletAsset
@@ -167,27 +202,27 @@ export default {
                 console.error(e);
             });
         },
-        withdraw: execWithValid(function () {
+        withdraw: execWithValid(function() {
             withdrawDialog({ token: this.token }).catch(e => {
                 console.error(e);
             });
         }),
-        showDetail(initTabName = 'tokenInfo') {
+        showDetail(initTabName = "tokenInfo") {
             tokenInfoDialog({ token: this.token, initTabName }).catch(e => {
                 console.error(e);
             });
         },
-        exCharge: execWithValid(function () {
+        exCharge: execWithValid(function() {
             exChargeDialog({ token: this.token }).catch(e => {
                 console.error(e);
             });
         }),
-        exWithdraw: execWithValid(function () {
+        exWithdraw: execWithValid(function() {
             exWithdrawDialog({ token: this.token }).catch(e => {
                 console.error(e);
             });
         }),
-        send: execWithValid(function () {
+        send: execWithValid(function() {
             if (!this.token.tokenId) {
                 return;
             }
@@ -230,7 +265,7 @@ export default {
         align-self: stretch;
         position: relative;
         @include colWidth;
-        .unbind{
+        .unbind {
             height: 16px;
             width: 16px;
             position: absolute;
