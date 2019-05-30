@@ -113,11 +113,10 @@ export default {
                 return this.$store.getters.mapToken2Gate[this.token.tokenId]
                     .gateway;
             }
-            if(this.token.gateInfo.url){
-            return this.$t('tokenCard.gateInfo.selfdefined');
+            if (this.token.gateInfo.url) {
+                return this.$t('tokenCard.gateInfo.selfdefined');
             }
-            return this.$t('tokenCard.gateInfo.gateSetting')
-
+            return this.$t('tokenCard.gateInfo.gateSetting');
         },
         exBanlance() {
             return this.token.totalExAmount && bigNumber.toBasic(this.token.totalExAmount,
