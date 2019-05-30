@@ -9,7 +9,7 @@
                 'active-side': (isShowFavorite && i === 0) || (toTokenList[i-1] && toTokenList[i-1].symbol === currentMarket)
             }" class="ex-tab __pointer"
             @click="changeToken(_t)"
-        >{{ _t.symbol }}</li>
+        >{{ _t.originalSymbol }}</li>
     </ul>
 </template>
 
