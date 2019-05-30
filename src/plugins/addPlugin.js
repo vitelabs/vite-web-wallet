@@ -1,6 +1,4 @@
 import toast from 'components/toast/index.js';
-import confirm from 'components/confirm/index.js';
-import statistics from 'utils/statistics';
 import getTokenIcon from 'utils/getTokenIcon';
 
 document.addEventListener('drop', e => {
@@ -81,10 +79,6 @@ export default {
             }
             toast(msg, type, position);
         };
-
-        Vue.prototype.$confirm = confirm;
-
-        Vue.prototype.$statistics = statistics;
 
         // ----------filters
 

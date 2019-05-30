@@ -53,6 +53,7 @@ import { hdAddr, constant } from '@vite/vitejs';
 import viteInput from 'components/viteInput';
 import { initPwd } from 'components/password/index.js';
 import BigNumber from 'utils/bigNumber';
+import statistics from 'utils/statistics';
 
 const amountTimeout = null;
 const minNum = 134;
@@ -176,7 +177,7 @@ export default {
                 return;
             }
 
-            this.$statistics.event('Vite_web_wallet', 'quota', 'SubmitQuota');
+            statistics.event('Vite_web_wallet', 'quota', 'SubmitQuota');
 
             this.testAmount();
             this.testAddr();
@@ -195,7 +196,7 @@ export default {
             }, true);
         },
         _sendPledgeTx() {
-            this.$statistics.event('Vite_web_wallet', 'quota', 'ConfirmQuota');
+            statistics.event('Vite_web_wallet', 'quota', 'ConfirmQuota');
             this.loading = true;
 
             this.sendPledgeTx({
