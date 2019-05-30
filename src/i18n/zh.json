@@ -265,6 +265,7 @@
             }
         },
         "gateInfo": {
+            "gateSetting":"点击设置网关",
             "tabName": "网关详情",
             "selfdefined": "自定义网关",
             "officalNet": "网关官网",

@@ -76,15 +76,6 @@ export default {
             dTitle: this.$t('tokenCard.tokenInfo.title', { tokenSymbol: this.token.tokenSymbol })
         };
     },
-    beforeCreate() {
-        console.log('beforeCreateeeee');
-    },
-    beforeUpdate() {
-        console.log('beforeUpdateeeee');
-    },
-    beforeMount() {
-        window.dddddd = this;
-    },
     computed: {
         url: {
             get: function () {
