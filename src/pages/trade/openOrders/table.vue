@@ -37,6 +37,9 @@ import d from 'dayjs';
 import sendTx from 'utils/sendTx';
 import { order } from 'services/trade';
 import { initPwd } from 'components/password/index.js';
+import { utils } from '@vite/vitejs';
+
+const { _Buffer } = utils;
 
 export default {
     props: {
@@ -221,7 +224,7 @@ export default {
                 cancelTxt: this.$t('tradeOpenOrders.confirm.cancelTxt'),
                 submit: () => {
                     sendTx('dexTradeCancelOrder', {
-                        orderId: order.orderId,
+                        orderId: _Buffer.from(order.orderId, 'hex').toString('base64'),
                         tradeToken: order.tradeToken
                     })
                         .then(successSubmit)
