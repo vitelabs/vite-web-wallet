@@ -40,15 +40,15 @@
                 </div>
                 <div
                     class="column click-able"
-                    @click="() => gotoInHash(item.inTxHash)"
+                    @click="() => type==='deposit'?gotoOutHash(item.outTxHash):gotoInHash(item.inTxHash)"
                 >
-                    {{ item.inTxHash | hashShortify }}
+                    {{ type==='deposit'?item.outTxHash:item.inTxHash | hashShortify }}
                 </div>
                 <div
                     class="column click-able"
-                    @click="() => gotoOutHash(item.outTxHash)"
+                    @click="() => type==='withdraw'?gotoOutHash(item.outTxHash):gotoInHash(item.inTxHash)"
                 >
-                    {{ item.outTxHash | hashShortify }}
+                    {{ type==='withdraw'?item.outTxHash:item.inTxHash | hashShortify }}
                 </div>
             </div>
         </div>
@@ -92,6 +92,10 @@ export default {
             tbData: []
         };
     },
+    beforeMount() {
+        window.sssss = this;
+        this.updateData();
+    },
     filters: {
         dateShow(value) {
             return d(Number(value)).format('YYYY.MM.DD HH:mm');
@@ -104,16 +108,6 @@ export default {
     computed: {
         defaultAddr() {
             return this.$store.getters.activeAddr;
-        }
-    },
-    watch: {
-        type() {
-            this.currentPage = 1;
-            this.totalPage = 0;
-            this.inTxExplorerFormat = '';
-            this.outTxExplorerFormat = '';
-            this.tbData = [];
-            this.updateData();
         }
     },
     methods: {
@@ -133,13 +127,15 @@ export default {
                     pageNum,
                     pageSize
                 },
-                this.token.gateInfo.url).then(data => {
-                    this.totalPage = Math.ceil(data.totalCount / pageSize);
-                    this.inTxExplorerFormat = data.inTxExplorerFormat;
-                    this.outTxExplorerFormat = data.outTxExplorerFormat;
-                    this.tbData = data.depositRecords;
-                    this.currentPage = pageNum;
-                }).catch(e => console.error(e));
+                this.token.gateInfo.url)
+                    .then(data => {
+                        this.totalPage = Math.ceil(data.totalCount / pageSize);
+                        this.inTxExplorerFormat = data.inTxExplorerFormat;
+                        this.outTxExplorerFormat = data.outTxExplorerFormat;
+                        this.tbData = data.depositRecords;
+                        this.currentPage = pageNum;
+                    })
+                    .catch(e => console.error(e));
             } else if (this.type === 'withdraw') {
                 getWithdrawRecords({
                     tokenId: this.token.tokenId,
@@ -147,13 +143,15 @@ export default {
                     pageNum,
                     pageSize
                 },
-                this.token.gateInfo.url).then(data => {
-                    this.totalPage = Math.ceil(data.totalCount / pageSize);
-                    this.inTxExplorerFormat = data.inTxExplorerFormat;
-                    this.outTxExplorerFormat = data.outTxExplorerFormat;
-                    this.tbData = data.withdrawRecords;
-                    this.currentPage = pageNum;
-                }).catch(e => console.error(e));
+                this.token.gateInfo.url)
+                    .then(data => {
+                        this.totalPage = Math.ceil(data.totalCount / pageSize);
+                        this.inTxExplorerFormat = data.inTxExplorerFormat;
+                        this.outTxExplorerFormat = data.outTxExplorerFormat;
+                        this.tbData = data.withdrawRecords;
+                        this.currentPage = pageNum;
+                    })
+                    .catch(e => console.error(e));
             }
         }
     }
