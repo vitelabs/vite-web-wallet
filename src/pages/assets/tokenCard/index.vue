@@ -10,11 +10,11 @@
                 <span
                     class="token-name underline"
                     @click="() => showDetail()"
-                    >{{
-                        token.tokenSymbol === "VITE"
-                            ? token.tokenSymbol
-                            : `${token.tokenSymbol}-${token.index}`
-                    }}</span
+                >{{
+                    token.tokenSymbol === "VITE"
+                        ? token.tokenSymbol
+                        : `${token.tokenSymbol}-${token.index}`
+                }}</span
                 >
             </div>
             <div class="separate"></div>
@@ -102,12 +102,12 @@ import {
     tokenInfoDialog,
     exWithdrawDialog,
     exChargeDialog
-} from "../dialog";
-import bigNumber from "utils/bigNumber";
-import { gateStorage } from "services/gate";
-import transaction from "../transaction";
-import { execWithValid } from "utils/execWithValid";
-import Alert from "../alert";
+} from '../dialog';
+import bigNumber from 'utils/bigNumber';
+import { gateStorage } from 'services/gate';
+import transaction from '../transaction';
+import { execWithValid } from 'utils/execWithValid';
+import Alert from '../alert';
 
 export default {
     components: { transaction, Alert },
@@ -116,17 +116,17 @@ export default {
             type: Object,
             default: () => {
                 return {
-                    tokenSymbol: "--",
-                    balance: "--",
-                    asset: "--",
-                    onroadNum: "--",
-                    type: "OFFICAL_GATE"
+                    tokenSymbol: '--',
+                    balance: '--',
+                    asset: '--',
+                    onroadNum: '--',
+                    type: 'OFFICAL_GATE'
                 };
             }
         },
         assetType: {
             type: String,
-            default: "TOTAL"
+            default: 'TOTAL'
         }
     },
     data() {
@@ -138,46 +138,44 @@ export default {
         },
         showUnbind() {
             return (
-                this.token.type === "THIRD_GATE" &&
-                (!this.token.totalAmount ||
-                    bigNumber.isEqual(this.token.totalAmount, "0"))
+                this.token.type === 'THIRD_GATE'
+                && (!this.token.totalAmount
+                    || bigNumber.isEqual(this.token.totalAmount, '0'))
             );
         },
         gateName() {
-            if (this.token.type === "NATIVE") return "--";
+            if (this.token.type === 'NATIVE') return '--';
             if (this.token.gateInfo.gateway) return this.token.gateInfo.gateway;
-            if (this.token.gateInfo.url)return this.$t("tokenCard.gateInfo.selfdefined");
-            return this.$t("tokenCard.gateInfo.gateSetting");
+            if (this.token.gateInfo.url) return this.$t('tokenCard.gateInfo.selfdefined');
+            return this.$t('tokenCard.gateInfo.gateSetting');
         },
         exBanlance() {
             return (
-                this.token.totalExAmount &&
-                bigNumber.toBasic(this.token.totalExAmount, this.token.decimals)
+                this.token.totalExAmount
+                && bigNumber.toBasic(this.token.totalExAmount, this.token.decimals)
             );
         },
         avaliableExBalance() {
             return (
-                this.token.availableExAmount &&
-                bigNumber.toBasic(
-                    this.token.availableExAmount,
-                    this.token.decimals
-                )
+                this.token.availableExAmount
+                && bigNumber.toBasic(this.token.availableExAmount,
+                    this.token.decimals)
             );
         },
         assetView() {
-            if (this.assetType === "TOTAL") {
+            if (this.assetType === 'TOTAL') {
                 return {
                     btc: this.token.totalAssetBtc,
                     cash: this.token.totalAsset
                 };
             }
-            if (this.assetType === "EX") {
+            if (this.assetType === 'EX') {
                 return {
                     btc: this.token.totalExAssetBtc,
                     cash: this.token.totalExAsset
                 };
             }
-            if (this.assetType === "WALLET") {
+            if (this.assetType === 'WALLET') {
                 return {
                     btc: this.token.walletAssetBtc,
                     cash: this.token.walletAsset
@@ -202,27 +200,27 @@ export default {
                 console.error(e);
             });
         },
-        withdraw: execWithValid(function() {
+        withdraw: execWithValid(function () {
             withdrawDialog({ token: this.token }).catch(e => {
                 console.error(e);
             });
         }),
-        showDetail(initTabName = "tokenInfo") {
+        showDetail(initTabName = 'tokenInfo') {
             tokenInfoDialog({ token: this.token, initTabName }).catch(e => {
                 console.error(e);
             });
         },
-        exCharge: execWithValid(function() {
+        exCharge: execWithValid(function () {
             exChargeDialog({ token: this.token }).catch(e => {
                 console.error(e);
             });
         }),
-        exWithdraw: execWithValid(function() {
+        exWithdraw: execWithValid(function () {
             exWithdrawDialog({ token: this.token }).catch(e => {
                 console.error(e);
             });
         }),
-        send: execWithValid(function() {
+        send: execWithValid(function () {
             if (!this.token.tokenId) {
                 return;
             }
