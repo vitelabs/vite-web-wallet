@@ -178,6 +178,7 @@ export default {
         isShowFavorite: function () {
             if (!this.isShowFavorite) {
                 this.stopAssignPair();
+                this.favoriteList = [];
                 return;
             }
 
