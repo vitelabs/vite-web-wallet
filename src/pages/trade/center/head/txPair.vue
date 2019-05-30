@@ -93,7 +93,10 @@ export default {
             return this.depthBuy && this.depthBuy.length ? this.depthBuy[0].price : '';
         },
         sellOne() {
-            return this.depthSell && this.depthSell.length ? this.depthSell[0].price : '';
+            if (!this.depthSell || !this.depthSell.length) {
+                return '';
+            }
+            return this.depthSell[this.depthSell.length - 1].price;
         },
         diff() {
             if (!this.sellOne) {
