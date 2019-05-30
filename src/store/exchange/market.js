@@ -37,14 +37,14 @@ const actions = {
 
             const query = getQuery();
 
-            if (!query.symbol) {
+            if (!query.symbol || !query.tradeTokenSymbol || !query.quoteTokenSymbol) {
                 commit('setCurrentMarket', firstMarket);
                 return;
             }
 
             let i;
             for (i = 0; i < marketMap.length; i++) {
-                if (marketMap[i].symbol === query.symbol) {
+                if (marketMap[i].symbol === query.quoteTokenSymbol) {
                     break;
                 }
             }
