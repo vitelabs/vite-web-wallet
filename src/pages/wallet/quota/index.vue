@@ -95,9 +95,9 @@ export default {
             }
 
             const minAmount = 134;
-            const balance = this.activeAmountLimit;
+            const stakingAmount = this.activeAmountLimit;
 
-            const compareBalanceAndMin = BigNumber.compared(balance, minAmount);
+            const compareBalanceAndMin = BigNumber.compared(stakingAmount, minAmount);
             if (compareBalanceAndMin < 0) {
                 this.amountErr = `${ this.$t('walletQuota.minAmt', { num: minAmount }) }, ${ this.$t('walletQuota.gotoStake') }`;
                 return false;
@@ -109,17 +109,17 @@ export default {
                 return false;
             }
 
-            const compareBalance = BigNumber.compared(balance, this.cancelAmount);
+            const compareBalance = BigNumber.compared(stakingAmount, this.cancelAmount);
             if (compareBalance < 0) {
                 this.amountErr = this.$t('walletQuota.maxAmt', {
                     minAmount,
-                    maxAmount: balance
+                    maxAmount: stakingAmount
                 });
                 return false;
             }
 
-            const maxAmount = BigNumber.minus(balance, minAmount, 8, 'nofix');
-            const cancelBalance = BigNumber.minus(balance, this.cancelAmount);
+            const maxAmount = BigNumber.minus(stakingAmount, minAmount, 8, 'nofix');
+            const cancelBalance = BigNumber.minus(stakingAmount, this.cancelAmount);
             if (BigNumber.compared(this.cancelAmount, maxAmount) > 0 && !BigNumber.isEqual(cancelBalance, 0)) {
                 this.amountErr = this.$t('walletQuota.cancelLimitAmt', { num: minAmount });
                 return false;
