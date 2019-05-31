@@ -1,8 +1,6 @@
 import { baseToken } from 'services/trade';
 import getQuery from 'utils/query';
 
-// [TODO] txPairList
-
 const state = {
     isShowFavorite: false,
     currentMarket: '',
