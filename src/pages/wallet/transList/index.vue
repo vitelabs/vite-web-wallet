@@ -2,50 +2,55 @@
     <div class="trans-list-wrapper __wrapper">
         <sec-title class="title" :isShowHelp="false"></sec-title>
         <div class="trans-list-content">
-            <table-list class="big-trans" :headList="[{
-                class: 'tType',
-                text: $t('walletTransList.tType.title'),
-                cell: 'type'
-            },{
-                class: 'status',
-                text: $t('walletTransList.status.title'),
-                cell: 'status'
-            },{
-                class: 'time',
-                text: $t('walletTransList.timestamp'),
-                cell: 'date'
-            },{
-                class: 'address',
-                text: $t('walletTransList.tAddress'),
-                cell: 'transAddr'
-            },{
-                class: 'sum',
-                text: $t('walletTransList.sum'),
-                cell: 'amount'
-            },{
-                class: 'token',
-                text: 'Token',
-                cell: 'tokenSymbol'
-            }]" :contentList="transList" :clickRow="goDetail">
-                <pagination class="__tb_pagination" :currentPage="currentPage + 1"
-                            :totalPage="+totalPage" :toPage="toPage"></pagination>
-            </table-list>
+            <table-list class="big-trans"
+                        :headList="[ {
+                            class: 'tType',
+                            text: this.$t('walletTransList.tType.title'),
+                            cell: 'type'
+                        }, {
+                            class: 'status',
+                            text: this.$t('walletTransList.status.title'),
+                            cell: 'status'
+                        }, {
+                            class: 'time',
+                            text: this.$t('walletTransList.timestamp'),
+                            cell: 'date'
+                        }, {
+                            class: 'address',
+                            text: this.$t('walletTransList.tAddress'),
+                            cell: 'transAddr'
+                        }, {
+                            class: 'sum',
+                            text: this.$t('walletTransList.sum'),
+                            cell: 'amount'
+                        }, {
+                            class: 'token',
+                            text: 'Token',
+                            cell: 'tokenSymbol'
+                        } ]"
+                        :contentList="transList" :clickRow="goDetail">
 
-            <table-list class="small-trans" :headList="[{
-                class: 'tType',
-                text: $t('walletTransList.tType.symbol'),
-                cell: 'smallType'
-            },{
-                class: 'address',
-                text: $t('walletTransList.tAddress'),
-                cell: 'smallTransAddr'
-            },{
-                class: 'sum',
-                text: $t('walletTransList.sum'),
-                cell: 'smallAmount'
-            }]" :contentList="transList" :clickRow="goDetail">
-                <pagination class="__tb_pagination" :currentPage="currentPage + 1"
-                            :totalPage="totalPage" :toPage="toPage"></pagination>
+                <img v-for="(item, i) in transList" :key="i"
+                     :slot="`${i}typeBefore`" class="icon"
+                     :src="`${ txImgs[item.builtinTxType] ? txImgs[item.builtinTxType] : txTransImg }`"/>
+
+                <span v-for="(item, i) in transList" :key="i"
+                      :slot="`${i}statusBefore`"
+                      :class="{
+                          'pink': item.statusNum === 0,
+                          'blue': item.statusNum === 1,
+                          'green': item.statusNum === 2
+                }">{{ item.statusText }}</span>
+
+                <span v-for="(item, i) in transList" :key="i"
+                      :slot="`${i}amountBefore`"
+                      :class="{
+                          'red': item.isSend,
+                          'green': !item.isSend
+                }">{{ item.showAmount }}</span>
+
+                <pagination slot="tableBottom" class="__tb_pagination" :currentPage="currentPage + 1"
+                            :totalPage="+totalPage" :toPage="toPage"></pagination>
             </table-list>
         </div>
     </div>
@@ -109,7 +114,11 @@ export default {
         this.startLoopTransList();
     },
     data() {
-        return { currentPage: this.$store.state.transList.currentPage };
+        return {
+            txTransImg,
+            txImgs,
+            currentPage: this.$store.state.transList.currentPage
+        };
     },
     computed: {
         address() {
@@ -127,13 +136,8 @@ export default {
 
             transList.forEach(trans => {
                 const txType = !trans.rawData.txType && trans.rawData.txType !== 0 ? txImgs.length - 1 : trans.rawData.txType;
-                const type = BuiltinTxType[txType];
-
-                const typeImg = `<img class="icon" src='${ txImgs[type] ? txImgs[type] : txTransImg }'/>`;
 
                 const status = [ 'unconfirmed', 'confirms', 'confirmed' ][trans.status];
-                const statusClass = status === 'confirmed' ? 'green'
-                    : status === 'unconfirmed' ? 'pink' : 'blue';
                 const statusText = this.$t(`walletTransList.status.${ status }`) + (status === 'confirms' ? `(${ trans.confirms })` : '');
 
                 const isZero = BigNumber.isEqual(trans.amount, 0);
@@ -144,15 +148,18 @@ export default {
                 amount = amount || '--';
 
                 nowList.push({
-                    type: typeImg + this.$t(`txType.${ txType }`),
-                    smallType: typeImg,
+                    builtinTxType: BuiltinTxType[txType],
+                    type: this.$t(`txType.${ txType }`),
                     date: date(trans.timestamp, this.$i18n.locale),
-                    status: `<span class="${ statusClass }">${ statusText }</span>`,
+                    status: '',
+                    statusNum: trans.status,
+                    statusText,
                     hash: trans.rawData.hash,
                     transAddr: ellipsisAddr(trans.transAddr),
                     smallTransAddr: ellipsisAddr(trans.transAddr, 6),
-                    amount: `<span class="${ trans.isSend ? 'red' : 'green' }">${ amount }</span>`,
-                    smallAmount: `<span class="${ trans.isSend ? 'red' : 'green' }">${ amount }</span> ${ trans.tokenSymbol }`,
+                    amount: '',
+                    showAmount: amount,
+                    isSend: trans.isSend,
                     tokenSymbol: trans.tokenSymbol,
                     rawData: trans.rawData
                 });
@@ -227,9 +234,6 @@ export default {
     }
 }
 
-.small-trans {
-    display: none;
-}
 </style>
 
 <style lang="scss">
