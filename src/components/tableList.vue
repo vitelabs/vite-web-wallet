@@ -15,8 +15,10 @@
             }" @click="_clickRow(rowItem)">
                 <span v-for="(headItem, i) in headList" :key="i"
                       @click="clickCell(headList[i].cell, rowItem, index)"
-                      v-html="rowItem[ headList[i].cell ]"
-                      :class="headItem.class || ''" class="__tb_cell">{{ i }}
+                      :class="headItem.class || ''" class="__tb_cell">
+                    <slot :name="`${index}${headList[i].cell}Before`"></slot>
+                    {{ rowItem[ headList[i].cell ] }}
+                    <slot :name="`${index}${headList[i].cell}After`"></slot>
                 </span>
             </div>
         </div>
@@ -25,7 +27,7 @@
             {{ $t('hint.noData') }}
         </div>
 
-        <slot></slot>
+        <slot name="tableBottom"></slot>
     </div>
 </template>
 

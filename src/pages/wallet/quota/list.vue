@@ -24,7 +24,21 @@
                 text: $t('action'),
                 cell: 'cancel'
             }]" :contentList="pledgeList" :clickCell="clickCell">
-                <pagination class="__tb_pagination" :currentPage="currentPage + 1"
+
+                <div v-for="(item, i) in pledgeList" :key="i"
+                     :slot="`${i}addrBefore`">
+                    <span class="beneficial-addr">{{ item.showAddr }}</span>
+                    <img v-if="item.beneficialAddr === address" class="beneficial-img" src='~assets/imgs/mine.svg'/>
+                </div>
+
+                <span v-for="(item, i) in pledgeList" :key="i"
+                      :slot="`${i}cancelBefore`"
+                      :class="{
+                          'cancel': true,
+                          'active': item.isMaturity
+                }">{{ $t('walletQuota.withdrawalStaking') }}</span>
+
+                <pagination slot="tableBottom" class="__tb_pagination" :currentPage="currentPage + 1"
                             :totalPage="totalPage" :toPage="toPage"></pagination>
             </table-list>
         </div>
@@ -32,7 +46,6 @@
 </template>
 
 <script>
-import userImg from 'assets/imgs/mine.svg';
 import pagination from 'components/pagination.vue';
 import tableList from 'components/tableList.vue';
 import { pwdConfirm } from 'components/password/index.js';
@@ -104,12 +117,7 @@ export default {
 
             const nowList = [];
             pledgeList.forEach(pledge => {
-                const addrIcon = pledge.beneficialAddr === this.address ? `<img class="beneficial-img" src="${ userImg }"/>` : '';
-                const addr = `<span class="beneficial-addr">${ ellipsisAddr(pledge.beneficialAddr) }</span>`;
-
                 const isMaturity = BigNumber.compared(pledge.withdrawHeight, this.currentHeight) <= 0;
-                const cancelClass = isMaturity ? 'cancel active' : 'cancel';
-                const cancel = `<span class="${ cancelClass }">${ this.$t('walletQuota.withdrawalStaking') }</span>`;
 
                 const pledgeDate = isMaturity
                     ? this.$t('walletQuota.maturity')
@@ -121,11 +129,12 @@ export default {
                     beneficialAddr: pledge.beneficialAddr,
                     withdrawHeight: pledge.withdrawHeight,
                     amount: pledge.amount,
-                    isMaturity,
                     pledgeDate,
-                    addr: addr + addrIcon,
+                    addr: '',
+                    showAddr: ellipsisAddr(pledge.beneficialAddr),
                     showAmount,
-                    cancel
+                    cancel: '',
+                    isMaturity
                 });
             });
 
