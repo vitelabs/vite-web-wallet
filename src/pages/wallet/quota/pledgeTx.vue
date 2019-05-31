@@ -111,7 +111,6 @@ export default {
             const result = this.$validAmount(this.amount, this.tokenInfo.decimals) === 0;
             if (!result) {
                 this.amountErr = this.$t('hint.amtFormat');
-
                 return false;
             }
 
@@ -127,13 +126,11 @@ export default {
                 const amount = BigNumber.toMin(this.amount, this.tokenInfo.decimals);
                 if (BigNumber.compared(balance, amount) < 0) {
                     this.amountErr = this.$t('hint.insufficientBalance');
-
                     return false;
                 }
             }
 
             this.amountErr = '';
-
             return true;
         },
         testAddr() {
