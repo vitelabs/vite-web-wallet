@@ -1,10 +1,9 @@
 <template>
     <div class="order-history-ct">
         <Filters v-if="!isEmbed" @submit="submit($event)"></Filters>
-        <Table :list="data" class="tb"></Table>
-        <Pagination :currentPage="currentPage" :toPage="toPage"
-                    :totalPage="totalPage" class="page-filter"
-                    v-if="!isEmbed"></Pagination>
+        <Table class="tb" :isShowPage="!isEmbed"
+               :list="data" :currentPage="currentPage" :toPage="toPage"
+               :totalPage="totalPage"></Table>
     </div>
 </template>
 
@@ -12,7 +11,7 @@
 import Pagination from 'components/pagination';
 import { order } from 'services/trade';
 import { subTask } from 'utils/proto/subTask';
-import Table from './table';
+import Table from '../historyTable.vue';
 import Filters from './filters';
 
 const pageSize = 35;
@@ -144,7 +143,9 @@ export default {
     flex-direction: column;
 
     .tb {
-        height: 100%;
+        width: 100%;
+        flex: 1;
+        display: flex;
     }
 
     .page-filter {

@@ -24,7 +24,7 @@
         </div>
 
         <div class="__tb_content __tb_no_data" v-show="!contentList || !contentList.length">
-            {{ noDataText || $t('hint.noData') }}
+            <div>{{ noDataText || $t('hint.noData') }}</div>
         </div>
 
         <slot name="tableBottom"></slot>
@@ -67,4 +67,5 @@ export default {
 @import './walletTransList.scss';
 @import './walletVote.scss';
 @import './mintage.scss';
+@import './tradeOrderHistory.scss';
 </style>

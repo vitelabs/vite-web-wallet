@@ -1,33 +1,33 @@
 <template>
-    <div class="ex_tb">
-        <div class="head-row">
-            <div v-for="(h) in $t('tradeOpenOrders.table.heads')" :key="h">
+    <div class="__tb">
+        <div class="__tb_row __tb_head __pointer">
+            <div class="__tb_cell" v-for="(h) in $t('tradeOpenOrders.table.heads')" :key="h">
                 {{ h }}
             </div>
-            <div>{{ $t('tradeAssets.operate') }}</div>
+            <div class="__tb_cell">{{ $t('tradeAssets.operate') }}</div>
         </div>
-        <div class="row-container">
-            <div class="row" :class="{
+        <div class="__tb_content">
+            <div class="__tb_row __pointer __tb_content_row" :class="{
                 'active': !!changeList[v.orderId]
             }" v-for="v in sortedList" :key="v.orderId">
-                <div>{{ v.createTime|d }}</div>
-                <div>{{ `${v.tradeTokenSymbol}/${v.quoteTokenSymbol}` }}</div>
-                <div :class="{
+                <div class="__tb_cell">{{ v.createTime|d }}</div>
+                <div class="__tb_cell">{{ `${v.tradeTokenSymbol}/${v.quoteTokenSymbol}` }}</div>
+                <div class="__tb_cell" :class="{
                     'buy': v.side===0,
                     'sell': v.side===1
                 }">{{ $t("tradeOrderHistory.side")[v.side] }}</div>
-                <div>{{ v.price + ' ' + v.quoteTokenSymbol }}</div>
-                <div>{{ v.quantity + ' ' + v.tradeTokenSymbol }}</div>
-                <div>{{ v.executedQuantity + ' ' + v.tradeTokenSymbol }}</div>
-                <div>{{ `${(v.executedPercent*100).toFixed(2)}%` }}</div>
-                <div>{{ v.executedAvgPrice + ' ' + v.quoteTokenSymbol }}</div>
-                <div v-unlock-account v-on:unlocked="cancel(v)" class="click-able">
+                <div class="__tb_cell">{{ v.price + ' ' + v.quoteTokenSymbol }}</div>
+                <div class="__tb_cell">{{ v.quantity + ' ' + v.tradeTokenSymbol }}</div>
+                <div class="__tb_cell">{{ v.executedQuantity + ' ' + v.tradeTokenSymbol }}</div>
+                <div class="__tb_cell">{{ `${(v.executedPercent*100).toFixed(2)}%` }}</div>
+                <div class="__tb_cell">{{ v.executedAvgPrice + ' ' + v.quoteTokenSymbol }}</div>
+                <div v-unlock-account v-on:unlocked="cancel(v)" class="__tb_cell click-able">
                     {{ $t("tradeOpenOrders.table.rowMap.cancel") }}
                 </div>
             </div>
-            <div class="no-data" v-show="!sortedList || !sortedList.length">
-                <div>{{ $t('hint.noData') }}</div>
-            </div>
+        </div>
+        <div class="__tb_content __tb_no_data" v-show="!sortedList || !sortedList.length">
+            <div>{{ $t('hint.noData') }}</div>
         </div>
     </div>
 </template>
@@ -246,13 +246,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../components/table.scss";
+@import '~assets/scss/table.scss';
 
-.ex_tb {
+.__tb {
     height: 100%;
 }
-.row {
+
+.dex .__tb .__tb_content_row {
     transition: all 0.4s ease-in-out;
+    &:hover {
+        background: #fff;
+    }
     &.active {
         background: rgba(0,122,255,0.07);;
     }
@@ -278,7 +282,6 @@ export default {
 .buy {
     color: #5bc500;
 }
-
 .sell {
     color: #ff0008;
 }
