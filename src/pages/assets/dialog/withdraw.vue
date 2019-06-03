@@ -33,7 +33,7 @@ import debounce from 'lodash/debounce';
 import { getValidBalance } from 'utils/validations';
 import bigNumber from 'utils/bigNumber';
 import tooltips from 'components/tooltips';
-import getTokenIcon from 'utils/getTokenIcon';
+import {getTokenIcon} from 'utils/tokenParser';
 
 export default {
     components: { tooltips },

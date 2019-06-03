@@ -56,7 +56,7 @@ block originContent
 
 <script>
 import { gateStorage, getChargeAddr } from 'services/gate';
-import getTokenIcon from 'utils/getTokenIcon';
+import {getTokenIcon} from 'utils/tokenParser';
 import { getExplorerLink } from 'utils/getLink';
 import Tb from './tb';
 
