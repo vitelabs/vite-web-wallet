@@ -44,7 +44,6 @@ export default {
         return {
             minimumDepositAmountMin: '',
             address: '',
-            copySuccess: false,
             amount: 0,
             qrOptions: { size: 124, mode: modes.NORMAL },
             dTitle: this.$t('tokenCard.charge.title'),

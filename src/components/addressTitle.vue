@@ -47,7 +47,6 @@ export default {
     },
     data() {
         return {
-            copySuccess: false,
             qrcode: null,
             qrcodeShow: false
         };

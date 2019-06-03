@@ -6,7 +6,7 @@
             @click="copy"
             class="title_icon copy __pointer"
         />
-        <copy ref="copyDom" :copySuccess="copySuccess"></copy>
+        <copy ref="copyDom"></copy>
     </div>
 </template>
 
