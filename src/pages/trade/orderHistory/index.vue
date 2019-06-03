@@ -1,47 +1,31 @@
 <template>
     <div class="order-history-ct">
-        <Filters v-if="!isEmbed" @submit="submit($event)"></Filters>
-        <Table class="tb" :isShowPage="!isEmbed"
-               :list="data" :currentPage="currentPage" :toPage="toPage"
-               :totalPage="totalPage"></Table>
+        <Filters @submit="submit($event)"></Filters>
+        <history-table class="tb" :isShowPage="true"
+                       :list="data" :currentPage="currentPage" :toPage="toPage"
+                       :totalPage="totalPage"></history-table>
     </div>
 </template>
 
 <script>
-import Pagination from 'components/pagination';
 import { order } from 'services/trade';
-import { subTask } from 'utils/proto/subTask';
-import Table from '../historyTable.vue';
+import historyTable from '../components/historyTable.vue';
 import Filters from './filters';
 
 const pageSize = 35;
-let task = null;
 
 export default {
-    components: { Filters, Table, Pagination },
-    props: {
-        isEmbed: {
-            type: Boolean,
-            default: false
-        }
-    },
+    components: { Filters, historyTable },
     data() {
         return {
             data: [],
             currentPage: 1,
             totalPage: 0,
-            filters: {},
-            timer: null
+            filters: {}
         };
     },
     mounted() {
-        this.init();
-    },
-    activated() {
-        this.isEmbed && this.subscribe();
-    },
-    deactivated() {
-        this.unsubscribe();
+        this.update();
     },
     computed: {
         defaultAddr() {
@@ -52,55 +36,11 @@ export default {
         }
     },
     watch: {
-        activeTxPair() {
-            if (!this.isEmbed) {
-                return;
-            }
-            this.unsubscribe();
-            this.subscribe();
-        },
         defaultAddr() {
-            this.init();
+            this.update();
         }
     },
     methods: {
-        init() {
-            if (!this.isEmbed) {
-                this.update();
-                return;
-            }
-
-            this.unsubscribe();
-            this.subscribe();
-        },
-        subscribe() {
-            task = task || new subTask('orderQueryHistory', ({ args, data }) => {
-                if (args.address !== this.defaultAddr || this.activeTxPair.symbol !== args.symbol) {
-                    return;
-                }
-
-                data = data.order || data;
-
-                this.data = data || [];
-                this.data.forEach(ele => {
-                    if (ele.status === 4) {
-                        this.$toast(this.$t('tradeOrderHistory.table.rowMap.statusMap')[4]);
-                    }
-                });
-            }, 2000);
-
-            task.start(() => {
-                return {
-                    address: this.defaultAddr,
-                    ...this.activeTxPair
-                };
-            });
-        },
-        unsubscribe() {
-            task && task.stop();
-            task = null;
-        },
-
         toPage(pageNo) {
             this.update(Object.assign(this.filters, { offset: pageNo }));
         },
@@ -108,23 +48,18 @@ export default {
             this.filters = v;
             this.update(this.filters);
         },
-        currentMarket() {
-            return this.$store.state.exchangeMarket.currentMarket;
-        },
         update(filters = {}) {
-            if (!this.defaultAddr) return;
-
-            if (this.isEmbed) {
-                filters = { symbol: this.currentMarket };
+            if (!this.defaultAddr) {
+                return;
             }
 
             filters = Object.assign({ offset: this.currentPage - 1 }, filters);
 
             order({
                 address: this.defaultAddr,
-                ...filters,
                 limit: pageSize,
-                total: 1
+                total: 1,
+                ...filters
             }).then(data => {
                 this.totalPage = Math.ceil(data.total / pageSize);
                 this.data = data.order || [];
@@ -146,14 +81,6 @@ export default {
         width: 100%;
         flex: 1;
         display: flex;
-    }
-
-    .page-filter {
-        display: flex;
-        justify-content: center;
-        background: #fff;
-        padding: 10px 0;
-        border-top: 1px solid rgba(198,203,212,0.3);
     }
 }
 </style>
