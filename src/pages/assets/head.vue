@@ -102,10 +102,10 @@ export default {
     computed: {
         pieData() {
             const data = JSON.parse(JSON.stringify(this.assetMap));
+            data.forEach(t => (t.symbol = getTokenNameString(t.tokenSymbol, t.index)));
             let polyData = data;
             if (data.length > 5) {
                 polyData = data.slice(0, 4);
-                polyData.forEach(t => (t.symbol = getTokenNameString(t.tokenSymbol, t.index)));
                 polyData.push({
                     asset: data
                         .slice(4)
