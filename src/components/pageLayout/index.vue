@@ -135,10 +135,9 @@ export default {
         height: calc(100% - 60px);
     }
 }
-.wallet .page-layout-wrapper .page-content .second-menu {
-    margin: 0 30px;
-    &.assets {
-        margin: 0 10px;
+.wallet .page-layout-wrapper .page-content {
+    .page-scroll-wrapper .page-wrapper {
+        display: flex;
     }
 }
 
@@ -157,6 +156,8 @@ export default {
     }
 
     .page-content {
+        display: flex;
+        flex-direction: column;
         flex: 1;
         height: 100%;
         overflow: auto;

@@ -75,6 +75,7 @@ export default {
 .setting-wrapper {
     position: relative;
     box-sizing: border-box;
+    width: 100%;
     height: 100%;
     padding: 40px;
 
