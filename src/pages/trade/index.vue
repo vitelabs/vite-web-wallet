@@ -98,10 +98,5 @@ export default {
             overflow: hidden;
         }
     }
-
-    .router-wrapper {
-        flex: 1;
-        overflow: auto;
-    }
 }
 </style>

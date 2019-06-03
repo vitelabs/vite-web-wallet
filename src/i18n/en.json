@@ -834,5 +834,24 @@
             "search": "Search",
             "reset": "Reset"
         }
+    },
+    "tradeMining": {
+        "title": "挖矿",
+        "addQuota": "新增抵押挖矿",
+        "tbHead": {
+            "date": "日期",
+            "fee": "交易所手续费",
+            "mining": "挖矿金额",
+            "status": "状态"
+        },
+        "tx": {
+            "title": "交易挖矿总收益"
+        },
+        "quota": {
+            "title": "抵押挖矿总收益"
+        }
+    },
+    "tradeDividend": {
+        "title": "分红"
     }
 }
