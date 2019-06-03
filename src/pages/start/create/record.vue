@@ -74,7 +74,6 @@ export default {
             hdAddrObj,
             len: 12,
             agreeList: {},
-            copySuccess: false,
             isLoading: false
         };
     },

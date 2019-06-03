@@ -91,7 +91,6 @@ export default {
         return {
             isShowNameInput: false,
             editName: '',
-            copySuccess: false,
             qrcode: null,
             qrcodeShow: false,
             assetsType: assetsType.TOTAL
