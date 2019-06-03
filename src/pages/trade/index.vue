@@ -13,10 +13,8 @@
                          :class="{'active': tap === 'historyOrder'}">
                         {{$t('tradeOrderHistory.title')}}</div>
                 </div>
-                <openOrder v-if="tap==='openOrder'" :isEmbed="true" class="item">
-                </openOrder>
-                <historyOrder v-if="tap==='historyOrder'" :isEmbed="true" class="item">
-                </historyOrder>
+                <openOrder v-if="tap==='openOrder'" class="item"></openOrder>
+                <historyOrder v-if="tap==='historyOrder'" class="item"></historyOrder>
             </div>
             <router-view></router-view>
         </div>
@@ -26,8 +24,8 @@
 <script>
 import pageLayout from 'components/pageLayout/index';
 import center from './center/center.vue';
-import historyOrder from './orderHistory';
-import openOrder from './openOrders';
+import openOrder from './components/orderOpen.vue';
+import historyOrder from './components/orderHistory.vue';
 
 export default {
     components: {
@@ -63,6 +61,9 @@ export default {
     width: 100%;
 
     .order {
+        display: flex;
+        flex-direction: column;
+        min-height: 300px;
         background: #fff;
         box-shadow: 0 2px 48px 1px rgba(176, 192, 237, 0.42);
         margin: 10px;
@@ -101,23 +102,6 @@ export default {
     .router-wrapper {
         flex: 1;
         overflow: auto;
-    }
-}
-</style>
-
-<style lang="scss">
-.exchange-center-wrapper .order {
-    display: flex;
-    flex-direction: column;
-    min-height: 300px;
-
-    .combine {
-        box-shadow: none;
-        flex: 1;
-    }
-
-    .ex_tb {
-        box-shadow: none;
     }
 }
 </style>
