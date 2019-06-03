@@ -39,9 +39,9 @@
                 <span class="address-content">
                     <Tips ref="tips"></Tips>{{ activeAddr }}
                     <QrcodePopup :qrcodeString="addressQrcode"
-                        ><img
-                            class="address-content__operate click-able"
-                            src="~assets/imgs/qrcode_default.svg"
+                    ><img
+                        class="address-content__operate click-able"
+                        src="~assets/imgs/qrcode_default.svg"
                     /></QrcodePopup>
                     <img
                         class="address-content__operate click-able"
@@ -71,28 +71,28 @@
 </template>
 
 <script>
-import Vue from "vue";
-import QrcodePopup from "components/qrcodePopup";
-import SwitchAddr from "components/switchAddress";
-import Pie from "components/pie";
-import bigNumber from "utils/bigNumber";
-import { utils } from "@vite/vitejs";
-import copy from "utils/copy";
-import Tips from "uiKit/tips";
-import AssetSwitch from "./assetSwitch";
-import { getTokenNameString } from "utils/tokenParser";
+import Vue from 'vue';
+import QrcodePopup from 'components/qrcodePopup';
+import SwitchAddr from 'components/switchAddress';
+import Pie from 'components/pie';
+import bigNumber from 'utils/bigNumber';
+import { utils } from '@vite/vitejs';
+import copy from 'utils/copy';
+import Tips from 'uiKit/tips';
+import AssetSwitch from './assetSwitch';
+import { getTokenNameString } from 'utils/tokenParser';
 
 const assetsType = {
-    TOTAL: "TOTAL",
-    EX: "EX",
-    WALLET: "WALLET"
+    TOTAL: 'TOTAL',
+    EX: 'EX',
+    WALLET: 'WALLET'
 };
 export default {
     components: { QrcodePopup, Tips, SwitchAddr, Pie, AssetSwitch },
     data() {
         return {
             isShowNameInput: false,
-            editName: "",
+            editName: '',
             copySuccess: false,
             qrcode: null,
             qrcodeShow: false,
@@ -105,17 +105,13 @@ export default {
             let polyData = data;
             if (data.length > 5) {
                 polyData = data.slice(0, 4);
-                polyData.forEach(
-                    t => (t.symbol = getTokenNameString(t.tokenSymbol, t.index))
-                );
+                polyData.forEach(t => (t.symbol = getTokenNameString(t.tokenSymbol, t.index)));
                 polyData.push({
                     asset: data
                         .slice(4)
-                        .reduce(
-                            (pre, cur) => bigNumber.plus(pre, cur.asset),
-                            0
-                        ),
-                    symbol: this.$t("tokenCard.others")
+                        .reduce((pre, cur) => bigNumber.plus(pre, cur.asset),
+                            0),
+                    symbol: this.$t('tokenCard.others')
                 });
             }
             return {
@@ -199,16 +195,16 @@ export default {
     methods: {
         labelGen(v, i) {
             const symbol = this.pieData.lable[i];
-            return `${symbol} ${(100 * v).toFixed(1)}%`;
+            return `${ symbol } ${ (100 * v).toFixed(1) }%`;
         },
         copy() {
             copy(this.activeAddr);
-            this.$refs.tips.tip(this.$t("hint.copy"));
+            this.$refs.tips.tip(this.$t('hint.copy'));
         },
 
         clearEditName() {
             this.isShowNameInput = false;
-            this.editName = "";
+            this.editName = '';
             this.$offKeyDown();
         },
         startRename() {
@@ -230,19 +226,19 @@ export default {
             }
 
             if (!/^[a-zA-Z0-9_\u4e00-\u9fa5]+$/g.test(this.editName)) {
-                this.$toast(this.$t("startCreate.hint.name"));
+                this.$toast(this.$t('startCreate.hint.name'));
                 this.clearEditName();
                 return;
             }
 
             const long = 32;
             if (this.editName.length > long) {
-                this.$toast(this.$t("startCreate.hint.nameLong", { long }));
+                this.$toast(this.$t('startCreate.hint.nameLong', { long }));
                 this.clearEditName();
                 return;
             }
 
-            this.$store.commit("renameCurrHDAcc", this.editName);
+            this.$store.commit('renameCurrHDAcc', this.editName);
             this.clearEditName();
         }
     }
