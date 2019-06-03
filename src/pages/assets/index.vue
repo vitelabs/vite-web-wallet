@@ -127,7 +127,8 @@ export default {
 <style lang="scss" rel="stylesheet/scss" scoped>
 @import "assets/scss/vars.scss";
 @import "./tokenCard/colWidth.scss";
-
+.wallet-account-wrapper{
+    width: 100%;
 .account_head {
     position: relative;
     text-align: center;
@@ -165,4 +166,6 @@ export default {
         }
     }
 }
+}
+
 </style>
