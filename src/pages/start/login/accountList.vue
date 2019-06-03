@@ -1,12 +1,9 @@
 <template>
     <div class="account-list-wrapper">
         <div class="list-wrapper">
-            <div class="__btn_input_active"
-                 v-for="(account, i) in accountList" :key="i"
-                 @click="clickAccount(account)">
-                <div class="name">{{ account.name }}</div>
-                <div class="address __ellipsis">{{ account.showAddr }}</div>
-            </div>
+            <account-item v-for="(account, i) in accountList" :key="i"
+                          :clickAccount="clickAccount" :account="account">
+            </account-item>
         </div>
     </div>
 </template>
@@ -14,8 +11,10 @@
 <script>
 import ellipsisAddr from 'utils/ellipsisAddr.js';
 import { getList } from 'wallet';
+import accountItem from './accountItem.vue';
 
 export default {
+    components: { accountItem },
     props: {
         clickAccount: {
             type: Function,
@@ -52,39 +51,12 @@ export default {
         max-height: 180px;
         overflow: auto;
     }
-
-    .add-acc {
-        display: block;
-        box-sizing: border-box;
-        padding: 0 20px;
-        width: 100%;
-        height: 60px;
-        line-height: 60px;
-        text-align: left;
-        background: #fff;
-        border: 1px solid #d4dee7;
-        font-size: 16px;
-        color: #007aff;
-
-        .icon {
-            width: 20px;
-            height: 20px;
-            margin-bottom: -4px;
-            margin-right: 12px;
-        }
-    }
 }
 
 .__btn_input_active {
     padding: 7px 15px;
-    border-top: none;
-
-    &:last-child {
-        border-bottom: none;
+    &:hover {
+        background: rgba(88, 145, 255, 0.13);
     }
-}
-
-.__btn_input_active:hover {
-    background: rgba(88, 145, 255, 0.13);
 }
 </style>

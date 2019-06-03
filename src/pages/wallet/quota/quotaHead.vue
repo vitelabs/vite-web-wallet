@@ -61,10 +61,6 @@ export default {
         margin-bottom: -4px;
     }
 }
-</style>
-
-<style lang="scss">
-@import "~assets/scss/vars.scss";
 
 .help-t {
     font-family: $font-bold, arial, sans-serif;
