@@ -1,0 +1,36 @@
+.wallet-quota-table {    
+    .addr {
+        min-width: 240px;
+        width: 25%;
+    }
+    
+    .amount {
+        width: 17%;
+        min-width: 150px;
+    }
+    
+    .height {
+        min-width: 185px;
+        width: 20%;
+    }
+    
+    .time {
+        min-width: 200px;
+        width: 20%;
+    }
+    
+    .operate {
+        min-width: 205px;
+    }
+    
+    .cancel {
+        color: #ced1d5;
+        &.active {
+            color: #007aff;
+        }
+    }
+    
+    .operate {
+        min-width: 210px;
+    }
+}
