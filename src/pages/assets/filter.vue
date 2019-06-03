@@ -64,7 +64,7 @@ export default {
     align-items: flex-end;
     margin: 10px 10px;
     height: 34px;
-
+    position: relative;
     .filter {
         box-sizing: border-box;
         padding: 6px;
