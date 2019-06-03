@@ -15,7 +15,7 @@
             }" @click="_clickRow(rowItem)">
                 <span v-for="(headItem, i) in headList" :key="i"
                       @click="clickCell(headList[i].cell, rowItem, index)"
-                      :class="headItem.class || ''" class="__tb_cell">
+                      :class="`${headItem.class || ''} ${headItem.cellClass || ''}`" class="__tb_cell">
                     <slot :name="`${index}${headList[i].cell}Before`"></slot>
                     {{ rowItem[ headList[i].cell ] }}
                     <slot :name="`${index}${headList[i].cell}After`"></slot>
@@ -24,7 +24,7 @@
         </div>
 
         <div class="__tb_content __tb_no_data" v-show="!contentList || !contentList.length">
-            {{ $t('hint.noData') }}
+            {{ noDataText || $t('hint.noData') }}
         </div>
 
         <slot name="tableBottom"></slot>
@@ -46,6 +46,10 @@ export default {
         clickCell: {
             type: Function,
             default: () => {}
+        },
+        noDataText: {
+            type: String,
+            default: ''
         }
     },
     methods: {
@@ -61,5 +65,6 @@ export default {
 @import './walletSBP.scss';
 @import './walletQuota.scss';
 @import './walletTransList.scss';
+@import './walletVote.scss';
 @import './mintage.scss';
 </style>
