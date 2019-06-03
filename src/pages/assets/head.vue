@@ -37,7 +37,7 @@
             <div class="head-right">
                 <SwitchAddr :isShowAddr="false"></SwitchAddr>
                 <span class="address-content">
-                    <Tips ref="tips"></Tips>{{ activeAddr }}
+                    <copy class="copy-wrapper" ref="copyDom"></copy>{{ activeAddr }}
                     <QrcodePopup :qrcodeString="addressQrcode"
                     ><img
                         class="address-content__operate click-able"
@@ -77,8 +77,7 @@ import SwitchAddr from 'components/switchAddress';
 import Pie from 'components/pie';
 import bigNumber from 'utils/bigNumber';
 import { utils } from '@vite/vitejs';
-import copy from 'utils/copy';
-import Tips from 'uiKit/tips';
+import copy from 'components/copy';
 import AssetSwitch from './assetSwitch';
 
 const assetsType = {
@@ -87,7 +86,7 @@ const assetsType = {
     WALLET: 'WALLET'
 };
 export default {
-    components: { QrcodePopup, Tips, SwitchAddr, Pie, AssetSwitch },
+    components: { QrcodePopup, copy, SwitchAddr, Pie, AssetSwitch },
     data() {
         return {
             isShowNameInput: false,
@@ -195,8 +194,7 @@ export default {
             return `${ symbol } ${ (100 * v).toFixed(1) }%`;
         },
         copy() {
-            copy(this.activeAddr);
-            this.$refs.tips.tip(this.$t('hint.copy'));
+            this.$refs.copyDom.copy(this.activeAddr);
         },
 
         clearEditName() {
@@ -285,6 +283,9 @@ export default {
                 width: 16px;
                 height: 16px;
                 margin-left: 10px;
+            }
+            .copy-wrapper {
+                top: -30px;
             }
         }
         .head-right {

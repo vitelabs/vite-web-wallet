@@ -7,23 +7,19 @@
                 'lock': lock
             }"></span>
         </div>
-        <copyOK class="copy-wrapper" :copySuccess="copySuccess"></copyOK>
+        <copy ref="copyDome" class="copy-wrapper"></copy>
         <div class="content">{{ mnemonicStr }}</div>
     </div>
 </template>
 
 <script>
-import copy from 'utils/copy';
-import copyOK from 'components/copyOK';
+import copy from 'components/copy';
 import { pwdConfirm } from 'components/password';
 
 export default {
-    components: { copyOK },
+    components: { copy },
     data() {
-        return {
-            copySuccess: false,
-            lock: true
-        };
+        return { lock: true };
     },
     computed: {
         mnemonic() {
@@ -63,11 +59,7 @@ export default {
             if (this.lock) {
                 return;
             }
-            copy(this.mnemonic);
-            this.copySuccess = true;
-            setTimeout(() => {
-                this.copySuccess = false;
-            }, 1000);
+            this.$refs.copyDome.copy(this.mnemonic);
         }
     }
 };
