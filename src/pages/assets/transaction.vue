@@ -54,7 +54,7 @@ import confirm from 'components/confirm';
 import viteInput from 'components/viteInput';
 import bigNumber from 'utils/bigNumber';
 import sendTx from 'utils/sendTx';
-import getTokenIcon from 'utils/getTokenIcon';
+import {getTokenIcon} from 'utils/tokenParser';
 
 const { getBytesSize } = utils;
 
