@@ -58,4 +58,8 @@ export default {
 
 <style lang="scss" scoped>
 @import '~assets/scss/table.scss';
+@import './walletSBP.scss';
+@import './walletQuota.scss';
+@import './walletTransList.scss';
+@import './mintage.scss';
 </style>

@@ -3,7 +3,7 @@
         <div class="title">{{ $t('walletQuota.list.title') }}</div>
         <div class="total">{{ $t('walletQuota.list.total', { amount: totalAmount }) }}</div>
         <div class="list">
-            <table-list :headList="[{
+            <wallet-table class="wallet-quota-table" :headList="[{
                 class: 'addr __pointer',
                 text: $t('walletQuota.beneficialAddr'),
                 cell: 'addr'
@@ -40,14 +40,14 @@
 
                 <pagination slot="tableBottom" class="__tb_pagination" :currentPage="currentPage + 1"
                             :totalPage="totalPage" :toPage="toPage"></pagination>
-            </table-list>
+            </wallet-table>
         </div>
     </div>
 </template>
 
 <script>
 import pagination from 'components/pagination.vue';
-import tableList from 'components/tableList.vue';
+import walletTable from 'components/table/index.vue';
 import { pwdConfirm } from 'components/password/index.js';
 import date from 'utils/date.js';
 import { timer } from 'utils/asyncFlow';
@@ -58,7 +58,7 @@ import { StatusMap } from 'wallet';
 let pledgeListInst;
 
 export default {
-    components: { pagination, tableList },
+    components: { pagination, walletTable },
     props: {
         tokenInfo: {
             type: Object,
@@ -238,6 +238,16 @@ export default {
     border-radius: 2px;
 }
 
+.beneficial-addr {
+    font-size: 14px;
+    color: #007aff;
+}
+
+.beneficial-img {
+    margin-left: 8px;
+    margin-bottom: -1px;
+}
+
 .title {
     font-family: $font-bold, arial, sans-serif;
     font-size: 18px;
@@ -252,57 +262,5 @@ export default {
     letter-spacing: 0.35px;
     line-height: 16px;
     margin-bottom: 14px;
-}
-</style>
-
-<style lang="scss">
-.list-wrapper .list .table-list {
-    min-width: 1260px;
-}
-
-.beneficial-addr {
-    font-size: 14px;
-    color: #007aff;
-}
-
-.beneficial-img {
-    margin-left: 8px;
-    margin-bottom: -1px;
-}
-
-.addr {
-    min-width: 240px;
-    width: 25%;
-}
-
-.list-wrapper .amount {
-    width: 17%;
-    min-width: 150px;
-}
-
-.height {
-    min-width: 185px;
-    width: 20%;
-}
-
-.time {
-    min-width: 200px;
-    width: 20%;
-}
-
-.operate {
-    min-width: 205px;
-}
-
-.cancel {
-    color: #ced1d5;
-
-    &.active {
-        color: #007aff;
-    }
-}
-
-.operate {
-    min-width: 210px;
 }
 </style>

@@ -47,39 +47,39 @@
             <div class="__btn_all_in btn" @click="getOwnerToken">Get owner token list</div>
 
             <div class="list-wrapper">
-                <table-list :headList="[{
-                    class: 'mintage-table-big-item',
+                <wallet-table class="mintage-table" :headList="[{
+                    class: 'big-item __ellipsis',
                     text: 'tokenId',
                     cell: 'tokenId'
                 },{
-                    class: 'mintage-table-small-item',
+                    class: 'small-item __ellipsis',
                     text: 'decimals',
                     cell: 'decimals'
                 },{
-                    class: 'mintage-table-small-item',
+                    class: 'small-item __ellipsis',
                     text: 'isReIssuable',
                     cell: 'isReIssuable'
                 },{
-                    class: 'mintage-table-big-item',
+                    class: 'big-item __ellipsis',
                     text: 'maxSupply',
                     cell: 'maxSupply'
                 },{
-                    class: 'mintage-table-small-item',
+                    class: 'small-item __ellipsis',
                     text: 'ownerBurnOnly',
                     cell: 'ownerBurnOnly'
                 },{
-                    class: 'mintage-table-big-item',
+                    class: 'big-item __ellipsis',
                     text: 'totalSupply',
                     cell: 'totalSupply'
                 },{
-                    class: 'mintage-table-big-item',
+                    class: 'big-item __ellipsis',
                     text: 'tokenName',
                     cell: 'tokenName'
                 },{
-                    class: 'mintage-table-big-item',
+                    class: 'big-item __ellipsis',
                     text: 'tokenSymbol',
                     cell: 'tokenSymbol'
-                }]" :contentList="tokenList"></table-list>
+                }]" :contentList="tokenList"></wallet-table>
             </div>
         </div>
     </page-layout>
@@ -88,11 +88,11 @@
 <script>
 import pageLayout from 'components/pageLayout/index';
 import viteInput from 'components/viteInput';
-import tableList from 'components/tableList.vue';
+import walletTable from 'components/table/index.vue';
 import sendTx from 'utils/sendTx';
 
 export default {
-    components: { viteInput, tableList, pageLayout },
+    components: { viteInput, walletTable, pageLayout },
     created() {
         this.getOwnerToken();
     },
@@ -225,16 +225,3 @@ export default {
     }
 }
 </style>
-
-<style lang="scss">
-@import "~assets/scss/vars.scss";
-
-.mintage-table-big-item {
-    min-width: 250px;
-}
-
-.mintage-table-small-item {
-    min-width: 110px;
-}
-</style>
-

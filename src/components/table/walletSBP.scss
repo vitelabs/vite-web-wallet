@@ -1,0 +1,30 @@
+.wallet-sbp-table {
+    .__tb_row.__tb_content_row.unuse {
+        color: #ced1d5;
+    }
+    
+    .name {
+        width: 20%;
+        min-width: 330px;
+    }
+    
+    .addr {
+        min-width: 200px;
+        width: 20%;
+    }
+    
+    .amount {
+        width: 17%;
+        min-width: 180px;
+    }
+    
+    .height {
+        min-width: 190px;
+        width: 20%;
+    }
+    
+    .operate {
+        min-width: 205px;
+        white-space: nowrap;
+    }
+}
