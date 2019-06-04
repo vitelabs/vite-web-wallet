@@ -7,7 +7,7 @@
     color: #FFFFFF;
     letter-spacing: 0;
     margin-top: 5px;
-    font-family: $font-bold, arial, sans-serif;
+    @include font-family-bold();
     z-index: 101;
     .list-title {
         display: inline-block;
@@ -25,7 +25,7 @@
         border: 1px solid #E5EDF3;
         box-shadow: 0 6px 36px 0 rgba(139, 159, 214, 0.04);
         border-radius: 4px;
-        font-family: $font-normal, arial, sans-serif;
+        @include font-family-normal();
         font-size: 14px;
         color: #5E6875;
         letter-spacing: 0;
