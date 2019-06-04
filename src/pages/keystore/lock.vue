@@ -1,11 +1,11 @@
 <template>
-    <div class="unlock">
-        <div class="bottom __btn __btn_input">
+    <div>
+        <div class="__btn __btn_input">
             <input autofocus :placeholder="$t('startCreate.input')"
                    v-model="password" :type="'password'" />
         </div>
 
-        <div class="unlock-btn __btn __btn_all_in __pointer" @click="unlock">
+        <div class="__btn __btn_all_in __pointer" @click="unlock">
             <span v-show="!isLoading">UNLOCK</span>
             <loading v-show="isLoading" loadingType="dot"></loading>
         </div>
@@ -56,9 +56,6 @@ export default {
 };
 </script>
 
-
 <style lang="scss" scoped>
-.unlock-btn {
-    margin-top: 20px;
-}
+@import "./common.scss";
 </style>
