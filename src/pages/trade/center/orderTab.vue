@@ -12,8 +12,8 @@
                 {{ $t('tradeOrderHistory.title') }}
             </div>
         </div>
-        <openOrder v-if="tap==='openOrder'" class="item"></openOrder>
-        <historyOrder v-if="tap==='historyOrder'" class="item"></historyOrder>
+        <openOrder v-show="tap==='openOrder'" class="item"></openOrder>
+        <historyOrder v-show="tap==='historyOrder'" class="item"></historyOrder>
     </div>
 </template>
 

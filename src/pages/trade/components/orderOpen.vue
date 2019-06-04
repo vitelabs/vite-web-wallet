@@ -7,13 +7,10 @@ import openTable from './openTable.vue';
 
 export default {
     components: { openTable },
-    mounted() {
+    beforeMounted() {
         this.init();
     },
-    activated() {
-        this.init();
-    },
-    deactivated() {
+    destroyed() {
         this.$store.dispatch('stopOrderCurrent');
     },
     data() {
