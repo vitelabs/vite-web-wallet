@@ -1,5 +1,7 @@
 <template>
-    <div class="keystore-import-wrapper">
+    <div>
+        <div class="__title">File</div>
+
         <div ref="fileArea" class="file-drag" @drop="dragFile">
             {{ $t('keystore.dragDrop.text') }}
             <span class="msg __err_msg" v-show="errMsg" >
@@ -15,7 +17,7 @@
         </div>
 
         <div class="account-list-wrapper">
-            <div>已有列表</div>
+            <div class="__title">Exited Account</div>
             <div class="__btn_input_active __pointer"
                  v-for="(account, i) in accountList" :key="i"
                  @click="getKeystoreCB(account, 'localStorage')">
@@ -100,7 +102,7 @@ export default {
 
 .hint {
     font-size: 14px;
-    color: #fff;
+    color: #000;
     text-align: center;
     line-height: 20px;
     margin-bottom: 30px;
@@ -141,13 +143,6 @@ export default {
         font-size: 12px;
         line-height: 20px;
         color: #333;
-    }
-}
-
-.__btn_input_active {
-    padding: 7px 15px;
-    &:hover {
-        background: rgba(88, 145, 255, 0.13);
     }
 }
 </style>
