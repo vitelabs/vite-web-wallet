@@ -36,7 +36,7 @@ export default {
     data() {
         return {
             active: this.$route.name,
-            menuList: [].concat(sidebarMenuList)
+            menuList: []
         };
     },
     computed: {
@@ -80,7 +80,10 @@ export default {
     },
     methods: {
         setMenuList() {
-            const menuList = [].concat(sidebarMenuList);
+            const menuList = [];
+            for (const key in sidebarMenuList) {
+                menuList.push(key);
+            }
             menuList.push(this.isLogin ? 'logout' : 'login');
             this.menuList = menuList;
         },
@@ -105,7 +108,7 @@ export default {
                 return;
             }
 
-            this.$router.push({ name });
+            this.$router.push({ name: sidebarMenuList[name] || name });
         },
 
         clearAutoLogout() {
