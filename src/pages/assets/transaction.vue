@@ -251,18 +251,14 @@ export default {
 
 <style lang="scss" scoped>
 @import "~assets/scss/confirmInput.scss";
+
+.__icon{
+    height: 20px;
+    width: 20px;
+}
 </style>
 
 <style lang="scss">
-.__trans-wrapper{
-    .__row{
-        .__icon{
-            height: 20px;
-            width: 20px;
-        }
-    }
-}
-
 .confirm-container.trans-confirm .confirm-wrapper {
     width: 515px;
     max-width: 90%;

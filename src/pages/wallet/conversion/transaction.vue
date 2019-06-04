@@ -291,6 +291,10 @@ export default {
 <style lang="scss" scoped>
 @import "~assets/scss/confirmInput.scss";
 
+.__icon{
+    height: 20px;
+    width: 20px;
+}
 .speed {
     width: 100%;
     font-size: 12px;
