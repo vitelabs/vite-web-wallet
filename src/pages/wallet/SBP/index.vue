@@ -215,7 +215,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~assets/scss/table.scss';
+@import "~assets/scss/vars.scss";
 
 .SBP-wrapper {
     position: relative;

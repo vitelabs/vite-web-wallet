@@ -20,7 +20,7 @@
         <div v-click-outside="hideTokenList" class="__row">
             <div class="__row-t">
                 {{ $t('trade.dexToken.name') }}
-                <!-- <span class="link __pointer" @click="goNet">{{ $t('trade.dexToken.link') }}</span> -->
+                <span class="link __pointer" @click="goNet">{{ $t('trade.dexToken.link') }}</span>
             </div>
             <div @click="toggleTokenList" class="market input-wrapper __pointer">
                 {{ token ? token.symbol : '' }}<div class="down-icon"></div>

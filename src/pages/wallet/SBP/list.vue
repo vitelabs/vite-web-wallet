@@ -328,7 +328,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~assets/scss/table.scss';
+@import "~assets/scss/vars.scss";
 
 .reward-confirm-wrapper {
     font-size: 14px;

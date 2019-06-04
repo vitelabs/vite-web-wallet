@@ -69,6 +69,7 @@ export default {
 @import './mintage.scss';
 @import './tradeOrderHistory.scss';
 
+// [TODO] Delete keystore
 .keystore-table-item {
     width: 25%;
 }
