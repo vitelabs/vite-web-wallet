@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import walletTable from 'components/tableList.vue';
+import walletTable from 'components/table/index.vue';
 
 export default {
     components: { walletTable },
@@ -88,9 +88,3 @@ export default {
     }
 };
 </script>
-
-<style lang="scss">
-.keystore-table-item {
-    width: 25%;
-}
-</style>
