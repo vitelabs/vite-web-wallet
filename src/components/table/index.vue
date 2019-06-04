@@ -68,4 +68,8 @@ export default {
 @import './walletVote.scss';
 @import './mintage.scss';
 @import './tradeOrderHistory.scss';
+
+.keystore-table-item {
+    width: 25%;
+}
 </style>
