@@ -208,7 +208,7 @@ export default {
                 }
 
                 this.currHDAcc.activate();
-                const name = this.$store.state.env.lastPage || 'trade';
+                const name = this.$store.state.env.lastPage || 'tradeCenter';
                 this.$router.push({ name });
             }).catch(err => {
                 console.warn(err);

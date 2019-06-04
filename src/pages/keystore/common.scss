@@ -1,5 +1,22 @@
 @import "~assets/scss/vars.scss";
-
+.__btn {
+    margin-top: 20px;
+}
+.__btn_input_active:hover {
+    background: rgba(88, 145, 255, 0.13);
+}
+.__btn_input {
+    border: 1px solid #d4dee7;
+}
+.__title {
+    color: #000;
+}
+.__wrapper {
+    position: absolute;
+    width: 500px;
+    left: 50%;
+    margin-left: -227px;
+}
 .name {
     font-family: $font-bold, arial, sans-serif;
     font-size: 14px;
