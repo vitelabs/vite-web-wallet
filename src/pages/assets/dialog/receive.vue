@@ -31,7 +31,6 @@ export default {
     },
     data() {
         return {
-            copySuccess: false,
             amount: '',
             qrOptions: { size: 124, mode: modes.NORMAL },
             dTitle: this.$t('tokenCard.receive.title')

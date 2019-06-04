@@ -1,6 +1,18 @@
+
 $btn-color: #195BDD;
 $font-bold: PingFangSC-Semibold,arial,sans-serif;
 $font-normal: PingFangSC-Regular;
 $font-H: HelveticaNeue;
 $font-H-bolder: HelveticaNeue-Bold;
 $font-normal-b: Avenir-Book;
+
+@mixin font-family($font) {
+    font-family: $font, arial, sans-serif;
+}
+
+@mixin font-family-normal() {
+    font-family: $font-normal, arial, sans-serif;
+}
+@mixin font-family-bold() {
+    font-family: $font-bold, arial, sans-serif;
+}
