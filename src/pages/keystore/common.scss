@@ -1,4 +1,5 @@
 @import "~assets/scss/vars.scss";
+
 .__btn {
     margin-top: 20px;
 }
@@ -24,14 +25,14 @@
     margin-left: -227px;
 }
 .name {
-    font-family: $font-bold, arial, sans-serif;
+    @include font-family-bold();
     font-size: 14px;
     color: #333;
     line-height: 20px;
 }
 .address {
     width: 100%;
-    font-family: $font-normal-b, arial, sans-serif;
+    @include font-family($font-normal-b);
     font-size: 12px;
     line-height: 20px;
     color: #333;

@@ -156,7 +156,7 @@ export default {
             text-align: right;
             user-select: none;
             font-size: 14px;
-            font-family: Trebuchet MS,Tahoma,Arial,sans-serif;
+            font-family: Trebuchet MS, Tahoma, Arial, sans-serif;
             transition: color 0.06s ease;
             &:hover {
                 color: #131722;;

@@ -61,7 +61,7 @@ export default {
 
     .title {
         font-size: 16px;
-        font-family: $font-bold, arial, sans-serif;
+        @include font-family-bold();
         text-align: center;
     }
 

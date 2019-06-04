@@ -21,8 +21,8 @@ export default {
     },
     methods: {
         goNet() {
-            // const locale = this.$i18n.locale === 'zh' ? 'zh/' : '';
-            // window.open(`${ process.env.viteNet }${ locale }`);
+            const locale = this.$i18n.locale === 'zh' ? 'zh/' : '';
+            window.open(`${ process.env.viteNet }${ locale }`);
         }
     }
 };
@@ -32,7 +32,7 @@ export default {
 @import "~assets/scss/vars.scss";
 
 .sync-block-wrapper {
-    font-family: $font-bold, arial, sans-serif;
+    @include font-family-bold();
     font-size: 16px;
     color: #007AFF;
     line-height: 20px;

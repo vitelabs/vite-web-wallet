@@ -278,7 +278,7 @@ export default {
             display: inline-block;
             color: #fff;
             font-size: 14px;
-            font-family: $font-bold, arial, sans-serif;
+            @include font-family-bold();
             font-weight: 600;
             color: rgba(255, 255, 255, 1);
             line-height: 18px;

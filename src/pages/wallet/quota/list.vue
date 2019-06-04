@@ -249,7 +249,7 @@ export default {
 }
 
 .title {
-    font-family: $font-bold, arial, sans-serif;
+    @include font-family-bold();
     font-size: 18px;
     color: #1d2024;
     line-height: 32px;

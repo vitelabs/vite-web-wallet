@@ -78,7 +78,7 @@ export default {
 @import "~assets/scss/vars.scss";
 .switch-wrapper {
     color: #73767a;
-    font-family: $font-bold;
+    @include font-family-bold();
     font-size: 14px;
     .list-title {
         position: relative;

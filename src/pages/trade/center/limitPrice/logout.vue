@@ -54,7 +54,7 @@ export default {
         height: 30px;
         line-height: 30px;
         border-radius: 2px;
-        font-family: $font-bold, arial, sans-serif;
+        @include font-family-bold();
         font-weight: 600;
     }
 

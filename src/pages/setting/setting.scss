@@ -2,7 +2,7 @@
 
 .big-title {
     font-size: 14px;
-    font-family: $font-bold, arial, sans-serif;
+    @include font-family-bold();
     font-weight: 600;
     color: #1D2024;
     margin-bottom: 12px;
@@ -17,6 +17,6 @@
     line-height: 16px;
     margin: 10px 0;
     &.bold {
-        font-family: $font-bold, arial, sans-serif;
+        @include font-family-bold();
     }
 }

@@ -114,7 +114,7 @@ export default {
 
     .filter {
         color: #5e6875;
-        font-family: $font-normal;
+        @include font-family-normal();
         width: 132px;
 
         > * {
@@ -153,7 +153,7 @@ export default {
         color: #007aff;
         border-radius: 2px;
         border: 1px solid #007aff;
-        font-family: Avenir-Book;
+        @include font-family($font-normal-b);
         font-weight: normal;
         text-align: center;
         line-height: 28px;

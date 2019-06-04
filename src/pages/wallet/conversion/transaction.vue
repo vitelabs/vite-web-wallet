@@ -294,7 +294,7 @@ export default {
 .speed {
     width: 100%;
     font-size: 12px;
-    font-family: $font-normal, arial, sans-serif;
+    @include font-family-normal();
     font-weight: 400;
     color: rgba(94, 104, 117, 1);
     line-height: 16px;

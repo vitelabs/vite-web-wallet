@@ -166,7 +166,7 @@ export default {
         height: 60px;
         line-height: 60px;
         padding-left: 30px;
-        font-family: $font-bold, arial, sans-serif;
+        @include font-family-bold();
         font-size: 16px;
         color: #fff;
 
@@ -187,7 +187,7 @@ export default {
         box-sizing: border-box;
         padding: 30px;
         overflow: auto;
-        font-family: $font-bold, arial, sans-serif;
+        @include font-family-bold();
         font-size: 18px;
         color: #1d2024;
         line-height: 26px;
@@ -205,7 +205,7 @@ export default {
             display: inline-block;
             width: 48%;
             max-width: 190px;
-            font-family: $font-bold, arial, sans-serif;
+            @include font-family-bold();
             color: #fff;
 
             &.btn-left {

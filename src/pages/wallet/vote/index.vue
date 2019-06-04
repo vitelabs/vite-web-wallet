@@ -385,7 +385,7 @@ export default {
         padding-left: 10px;
         height: 18px;
         line-height: 18px;
-        font-family: $font-bold, arial, sans-serif;
+        @include font-family-bold();
         font-size: 18px;
         color: #1d2024;
     }

@@ -73,10 +73,11 @@ export default {
 
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
+
 .block__title {
     height: 16px;
     font-size: 14px;
-    font-family: PingFangSC-Semibold;
+    @include font-family-bold();
     font-weight: 600;
     color: rgba(29, 32, 36, 1);
     line-height: 16px;

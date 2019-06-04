@@ -251,7 +251,7 @@ export default {
 
 .link {
     float: right;
-    font-family: $font-normal, arial, sans-serif;
+    @include font-family-normal();
     font-weight: 400;
     color: rgba(0, 122, 255, 1);
 }
@@ -299,7 +299,7 @@ export default {
     border-radius: 2px;
     border: 1px solid rgba(212, 222, 231, 1);
     font-size: 12px;
-    font-family: $font-normal, arial, sans-serif;
+    @include font-family-normal();
     font-weight: 400;
     color: rgba(206, 209, 213, 1);
 

@@ -57,7 +57,7 @@ export default {
         height: 50px;
         line-height: 50px;
         font-size: 13px;
-        font-family: $font-bold, arial, sans-serif;
+        @include font-family-bold();
         font-weight: 600;
         color: rgba(94,104,117,0.8);
         .amount {
@@ -91,7 +91,7 @@ export default {
                 text-align: center;
                 line-height: 80px;
                 font-size: 16px;
-                font-family: $font-bold, arial, sans-serif;
+                @include font-family-bold();
                 color: rgba(0,122,255,1);
                 font-weight: 600;
                 &:before {

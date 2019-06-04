@@ -144,13 +144,13 @@ export default {
         height: 40px;
     }
     &__name {
-        font-family: $font-bold;
+        @include font-family-bold();
         color: rgba(29, 32, 36, 1);
         font-size: 14px;
         &__gate{
             color: #007AFF;
-            background-color: rgba(0,122,255,0.06);;
-            font-family: $font-normal;
+            background-color: rgba(0,122,255,0.06);
+            @include font-family-normal();
             font-size: 12px;
             height: 20px;
             padding: 0 4px;
