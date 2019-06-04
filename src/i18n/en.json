@@ -588,8 +588,10 @@
             "success": "Conversion Successful. It may take approx 20 minutes to get VITE into your account after the Ethereum transaction is confirmed."
         }
     },
+    "tradeCenter": {
+        "title": "Exchange"
+    },
     "trade": {
-        "title": "Exchange",
         "search": "Search",
         "txPair": "Pair",
         "price": "Price",

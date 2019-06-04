@@ -1,21 +1,6 @@
 <template>
     <page-layout>
-        <div class="exchange-center-wrapper">
-            <center v-if="active === 'trade'"></center>
-            <div class="order" v-if="active === 'trade'">
-                <div class="ex-tab-list">
-                    <div @click="tap='openOrder'"
-                         class="ex-tab active-side __pointer"
-                         :class="{'active': tap === 'openOrder'}">
-                        {{$t('tradeOpenOrders.title')}}</div>
-                    <div @click="tap='historyOrder'"
-                         class="ex-tab active-side __pointer"
-                         :class="{'active': tap === 'historyOrder'}">
-                        {{$t('tradeOrderHistory.title')}}</div>
-                </div>
-                <openOrder v-if="tap==='openOrder'" class="item"></openOrder>
-                <historyOrder v-if="tap==='historyOrder'" class="item"></historyOrder>
-            </div>
+        <div class="trade-wrapper">
             <router-view></router-view>
         </div>
     </page-layout>
@@ -23,80 +8,21 @@
 
 <script>
 import pageLayout from 'components/pageLayout/index';
-import center from './center/center.vue';
-import openOrder from './components/orderOpen.vue';
-import historyOrder from './components/orderHistory.vue';
 
 export default {
-    components: {
-        center,
-        openOrder,
-        historyOrder,
-        pageLayout
-    },
+    components: { pageLayout },
     mounted() {
         this.$store.dispatch('startLoopExchangeRate');
         this.$store.dispatch('startLoopExchangeBalance');
-
-        this.$router.afterEach(to => {
-            this.active = to.name;
-        });
-    },
-    data() {
-        return {
-            tap: 'openOrder',
-            active: this.$route.name
-        };
     }
 };
 </script>
 
 <style lang="scss" scoped>
-@import "./center/center.scss";
-
-.exchange-center-wrapper {
+.trade-wrapper {
     display: flex;
     flex-direction: column;
     height: 100%;
     width: 100%;
-
-    .order {
-        display: flex;
-        flex-direction: column;
-        min-height: 300px;
-        background: #fff;
-        box-shadow: 0 2px 48px 1px rgba(176, 192, 237, 0.42);
-        margin: 10px;
-        margin-top: 0;
-        border-radius: 2px;
-
-        .tap {
-            height: 34px;
-            display: flex;
-            border-bottom: 1px solid rgb(0, 122, 255);
-            align-items: flex-end;
-
-            > div {
-                font-size: 14px;
-                color: #24272b;
-                cursor: pointer;
-                margin: 0 10px;
-                border-radius: 4px 4px 0 0;
-                padding: 4px 13px;
-
-                &.active {
-                    background: rgba(0, 122, 255, 1);
-                    color: #fff;
-                }
-            }
-        }
-
-        .item {
-            flex: 1;
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-        }
-    }
 }
 </style>

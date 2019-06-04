@@ -73,7 +73,7 @@ for (const key in routes) {
     _routes += `{name: '${ _k.name }', path: '${ _k.path }', component: ${ _k.component }`;
 
     const alias = routeConfig[key] && routeConfig[key].alias ? routeConfig[key].alias : _k.alias;
-    alias && (_routes += `, alias: '${ alias }'`);
+    alias && (_routes += `, alias: ${ JSON.stringify(alias) }`);
 
     if (!_k.children || !_k.children.length) {
         _routes += '},';
@@ -86,7 +86,7 @@ for (const key in routes) {
         // _routes += `{name: '${ _kr.name }', path: '${ _kr.path }', component: ()=>import(/* webpackChunkName: "group-foo" */\\'${ _kr.pagePath }\')`;
         _routes += `{name: '${ _kr.name }', path: '${ _kr.path }', component: ${ _kr.component }`;
         const alias = routeConfig[_kr.name] && routeConfig[_kr.name].alias ? routeConfig[_kr.name].alias : _kr.alias;
-        alias && (_routes += `, alias: '${ alias }'`);
+        alias && (_routes += `, alias: ${ JSON.stringify(alias) }`);
         _routes += '},';
     });
     _routes += ']},';
