@@ -11,9 +11,7 @@
                     class="token-name underline"
                     @click="() => showDetail()"
                 >{{
-                    token.tokenSymbol === "VITE"
-                        ? token.tokenSymbol
-                        : `${token.tokenSymbol}-${token.index}`
+                    getTokenNameString(token.tokenSymbol, token.index)
                 }}</span
                 >
             </div>
@@ -33,7 +31,7 @@
             </div>
         </div>
         <div class="col">
-            {{ `${token.fundFloat || "--"} ${token.tokenSymbol}` }}
+            {{ `${token.fundFloat || 0} ${token.tokenSymbol}` }}
         </div>
         <div class="col">
             <div
@@ -56,11 +54,11 @@
             <div class="separate"></div>
         </div>
         <div class="col">
-            {{ `${exBanlance || "--"} ${token.tokenSymbol}` }}
+            {{ `${exBanlance || 0} ${token.tokenSymbol}` }}
         </div>
         <div class="col">
             <div>
-                {{ `${avaliableExBalance || "--"} ${token.tokenSymbol}` }}
+                {{ `${avaliableExBalance || 0} ${token.tokenSymbol}` }}
             </div>
             <div class="op_group">
                 <div class="op" @click="exWithdraw">
@@ -108,6 +106,7 @@ import { gateStorage } from 'services/gate';
 import transaction from '../transaction';
 import { execWithValid } from 'utils/execWithValid';
 import Alert from '../alert';
+import { getTokenNameString } from 'utils/tokenParser';
 
 export default {
     components: { transaction, Alert },
@@ -117,9 +116,9 @@ export default {
             default: () => {
                 return {
                     tokenSymbol: '--',
-                    balance: '--',
-                    asset: '--',
-                    onroadNum: '--',
+                    balance: 0,
+                    asset: 0,
+                    onroadNum: 0,
                     type: 'OFFICAL_GATE'
                 };
             }
@@ -141,6 +140,8 @@ export default {
                 this.token.type === 'THIRD_GATE'
                 && (!this.token.totalAmount
                     || bigNumber.isEqual(this.token.totalAmount, '0'))
+                && (!this.token.totalExAmount
+                    || bigNumber.isEqual(this.token.totalExAmount, '0'))
             );
         },
         gateName() {
@@ -184,6 +185,9 @@ export default {
         }
     },
     methods: {
+        getTokenNameString(...args) {
+            return getTokenNameString(...args);
+        },
         exRecord() {
             this.$refs.alert.show();
         },

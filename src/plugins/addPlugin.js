@@ -1,5 +1,5 @@
 import toast from 'components/toast/index.js';
-import getTokenIcon from 'utils/getTokenIcon';
+import { getTokenIcon } from 'utils/tokenParser';
 
 document.addEventListener('drop', e => {
     e.preventDefault();

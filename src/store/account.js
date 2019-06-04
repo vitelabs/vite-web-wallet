@@ -4,7 +4,7 @@ import { StatusMap } from 'wallet';
 import { defaultTokenMap } from 'utils/constant';
 import { gateStorage } from 'services/gate';
 import { constant } from '@vite/vitejs';
-import getTokenIcon from 'utils/getTokenIcon';
+import { getTokenIcon } from 'utils/tokenParser';
 
 let balanceInfoInst = null;
 const state = {
@@ -278,9 +278,6 @@ const getters = {
                 const totalExAssetBtc = rateBtc ? bigNumber.multi(bigNumber.toBasic(totalExAmount || 0, decimals), rateBtc) : 0;
                 const walletAssetBtc = rateBtc ? bigNumber.multi(bigNumber.toBasic(totalAmount || 0, decimals), rateBtc) : 0;
                 const totalAssetBtc = bigNumber.plus(totalExAssetBtc, walletAssetBtc);
-                if (totalAssetBtc === 'NaN') {
-                    debugger;
-                }
                 return {
                     totalExAssetBtc,
                     walletAssetBtc,
