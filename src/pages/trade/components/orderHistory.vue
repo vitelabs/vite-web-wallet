@@ -16,13 +16,10 @@ export default {
             timer: null
         };
     },
-    mounted() {
+    beforeMounted() {
         this.init();
     },
-    activated() {
-        this.init();
-    },
-    deactivated() {
+    destroyed() {
         this.unsubscribe();
     },
     computed: {
