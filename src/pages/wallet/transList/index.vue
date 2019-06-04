@@ -233,22 +233,22 @@ export default {
         flex: 1;
     }
     .pink {
-        font-family: $font-bold, arial, sans-serif;
+        @include font-family-bold();
         color: #ea60ac;
     }
 
     .blue {
-        font-family: $font-bold, arial, sans-serif;
+        @include font-family-bold();
         color: #007aff;
     }
 
     .green {
-        font-family: $font-bold, arial, sans-serif;
+        @include font-family-bold();
         color: #5bc500;
     }
 
     .red {
-        font-family: $font-bold, arial, sans-serif;
+        @include font-family-bold();
         color: #ff0008;
     }
 

@@ -244,6 +244,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
+
 .click-able {
     cursor: pointer;
 }
@@ -294,7 +295,7 @@ export default {
             font-size: 20px;
             color: #1d2024;
             text-align: left;
-            font-family: $font-bold, arial, sans-serif;
+            @include font-family-bold();
             word-break: break-all;
             .head-title {
                 display: flex;
@@ -305,9 +306,8 @@ export default {
                 font-size: 14px;
                 letter-spacing: 0.35px;
                 padding-bottom: 10px;
-                font-family: $font-bold, arial, sans-serif;
+                @include font-family-bold();
                 color: #5e6875;
-                font-family: $font-bold;
 
                 .edit {
                     display: inline-block;

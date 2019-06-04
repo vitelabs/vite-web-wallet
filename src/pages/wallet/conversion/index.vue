@@ -215,7 +215,7 @@ export default {
     max-width: 548px;
     margin: 30px 0;
     font-size: 18px;
-    font-family: $font-bold, arial, sans-serif;
+    @include font-family-bold();
     font-weight: 600;
     color: rgba(29, 32, 36, 1);
 

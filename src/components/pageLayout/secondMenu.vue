@@ -126,7 +126,7 @@ export default {
     .tab {
         color: #BDC1D1;
         font-size: 13px;
-        font-family: $font-bold, arial, sans-serif;
+        @include font-family-bold();
         font-weight: 600;
         display: inline-block;
         box-sizing: border-box;

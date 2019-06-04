@@ -641,7 +641,7 @@ $font-black: rgba(36, 39, 43, 0.8);
     flex-direction: row;
     height: 30px;
     line-height: 30px;
-    font-family: $font-normal, arial, sans-serif;
+    @include font-family-normal();
     &.b {
         margin-bottom: 10px;
     }
@@ -654,7 +654,7 @@ $font-black: rgba(36, 39, 43, 0.8);
     }
     .ex-order-token {
         font-size: 12px;
-        font-family: $font-normal, arial, sans-serif;
+        @include font-family-normal();
         font-weight: 400;
         color: rgba(94, 104, 117, 1);
         width: 95px;
@@ -685,7 +685,7 @@ $font-black: rgba(36, 39, 43, 0.8);
     font-size: 12px;
     color: #5E6875;
     box-sizing: border-box;
-    font-family: $font-normal, arial, sans-serif;
+    @include font-family-normal();
     opacity: 0;
     transition: opacity 0.2s ease-in-out;
     width: 0;
@@ -719,7 +719,7 @@ $font-black: rgba(36, 39, 43, 0.8);
         height: 17px;
         line-height: 17px;
         font-size: 12px;
-        font-family: $font-bold, arial, sans-serif;
+        @include font-family-bold();
         font-weight: 600;
         color: #1d2024;
         margin-bottom: 10px;
@@ -749,7 +749,7 @@ $font-black: rgba(36, 39, 43, 0.8);
         margin-top: 12px;
         border-radius: 2px;
         font-size: 14px;
-        font-family: $font-bold, arial, sans-serif;
+        @include font-family-bold();
         font-weight: 600;
         color: #fff;
         &.red {
@@ -774,7 +774,7 @@ $font-black: rgba(36, 39, 43, 0.8);
     line-height: 30px;
     border: none;
     input {
-        font-family: $font-normal, arial, sans-serif;
+        @include font-family-normal();
         font-size: 12px;
         color: #1d2024;
         text-indent: 6px;

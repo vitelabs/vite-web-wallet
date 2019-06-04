@@ -127,6 +127,7 @@ export default {
 <style lang="scss" rel="stylesheet/scss" scoped>
 @import "assets/scss/vars.scss";
 @import "./tokenCard/colWidth.scss";
+
 .wallet-account-wrapper{
     width: 100%;
     .account_head {
@@ -158,7 +159,7 @@ export default {
                 .asset-switch {
                     color: #5e6875;
                     font-size: 12px;
-                    font-family: $font-normal;
+                    @include font-family-normal();
                     /deep/.list-title {
                         border: none;
                     }

@@ -43,7 +43,7 @@ export default {
     color: #1d2024;
 
     .title {
-        font-family: $font-bold, arial, sans-serif;
+        @include font-family-bold();
     }
 }
 
@@ -63,7 +63,7 @@ export default {
 }
 
 .help-t {
-    font-family: $font-bold, arial, sans-serif;
+    @include font-family-bold();
     font-size: 16px;
     line-height: 16px;
     margin-bottom: 16px;

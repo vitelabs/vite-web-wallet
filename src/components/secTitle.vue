@@ -58,7 +58,7 @@ export default {
 @import "~assets/scss/vars.scss";
 
 .sec-title-container {
-    font-family: $font-bold, arial, sans-serif;
+    @include font-family-bold();
     font-size: 24px;
     color: #1d2024;
     line-height: 40px;

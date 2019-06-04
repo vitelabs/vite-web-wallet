@@ -69,7 +69,7 @@ export default {
         box-sizing: border-box;
         padding: 6px;
         font-size: 12px;
-        font-family: $font-normal;
+        @include font-family-normal();
         font-weight: 400;
         color: rgba(206, 209, 213, 1);
         line-height: 17px;

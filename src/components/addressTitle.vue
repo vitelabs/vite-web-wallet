@@ -99,7 +99,7 @@ export default {
     font-size: 14px;
     letter-spacing: 0.35px;
     padding-bottom: 11px;
-    font-family: $font-bold;
+    @include font-family-bold();
     .pre-title {
         flex: 1;
     }

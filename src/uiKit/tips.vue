@@ -49,7 +49,7 @@ export default {
     opacity: 0;
     height: 0;
     width: 0;
-    font-family: $font-normal, arial, sans-serif;
+    @include font-family-normal();
     &.show {
         opacity: 1;
         padding: 0 6px;

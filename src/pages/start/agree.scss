@@ -7,7 +7,7 @@
     margin-bottom: 12px;
     font-size: 14px;
     line-height: 18px;
-    font-family: $font-normal, arial, sans-serif;
+    @include font-family-normal();
     font-weight: 400;
     color: rgba(255,255,255,1);
     .link {

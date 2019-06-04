@@ -259,7 +259,7 @@ export default {
 
     .title {
         border-left: 2px solid rgba(0, 122, 255, 0.7);
-        font-family: $font-bold, arial, sans-serif;
+        @include font-family-bold();
         font-size: 18px;
         color: #1d2024;
         line-height: 18px;
@@ -292,7 +292,7 @@ export default {
 
     .row-t {
         position: relative;
-        font-family: $font-bold, arial, sans-serif;
+        @include font-family-bold();
         font-size: 14px;
         color: #1d2024;
         letter-spacing: 0.35px;
@@ -311,7 +311,7 @@ export default {
             background: #f3f6f9;
             font-size: 14px;
             color: #5e6875;
-            font-family: $font-normal, arial, sans-serif;
+            @include font-family-normal();
         }
 
         input {

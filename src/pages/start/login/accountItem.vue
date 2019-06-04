@@ -37,14 +37,14 @@ export default {
     }
 
     .name {
-        font-family: $font-bold, arial, sans-serif;
+        @include font-family-bold();
         font-size: 14px;
         color: #333;
         line-height: 20px;
     }
 
     .address {
-        font-family: $font-normal-b, arial, sans-serif;
+        @include font-family($font-normal-b);
         font-size: 12px;
         line-height: 20px;
         color: #333;

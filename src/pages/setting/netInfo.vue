@@ -74,7 +74,7 @@ export default {
         margin-right: 15px;
         opacity: 0.8;
         font-size: 14px;
-        font-family: $font-bold, arial, sans-serif;
+        @include font-family-bold();
     }
 
     .link {

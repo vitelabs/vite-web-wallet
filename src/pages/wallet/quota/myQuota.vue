@@ -47,7 +47,7 @@ export default {
 }
 
 .row {
-    font-family: $font-bold, arial, sans-serif;
+    @include font-family-bold();
 
     .title {
         font-size: 14px;

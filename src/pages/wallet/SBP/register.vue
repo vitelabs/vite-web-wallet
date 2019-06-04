@@ -276,7 +276,7 @@ export default {
         }
 
         .title {
-            font-family: $font-bold, arial, sans-serif;
+            @include font-family-bold();
             font-size: 14px;
             color: #1d2024;
             letter-spacing: 0.35px;
@@ -300,7 +300,7 @@ export default {
             height: 40px;
             line-height: 40px;
             text-align: center;
-            font-family: $font-bold, arial, sans-serif;
+            @include font-family-bold();
             font-size: 14px;
             color: #fbfbfb;
 
@@ -351,7 +351,7 @@ export default {
     font-size: 14px;
     color: #3e4a59;
     box-sizing: border-box;
-    font-family: $font-normal, arial, sans-serif;
+    @include font-family-normal();
     opacity: 0;
     transition: opacity 0.5s ease-in-out;
     width: 0;

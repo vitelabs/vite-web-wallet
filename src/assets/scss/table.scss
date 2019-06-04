@@ -35,7 +35,7 @@
 
     .__tb_head {
         flex: none;
-        font-family: $font-bold, arial, sans-serif;
+        @include font-family-bold();
         color: #1D2024;
     }
     .__tb_row {
@@ -78,7 +78,7 @@
         top: 50%;
         margin-top: -75px;
         font-size: 12px;
-        font-family: $font-normal, arial, sans-serif;
+        @include font-family-normal();
         font-weight: 400;
         color: rgba(94,104,117,0.58);
         line-height: 16px;
@@ -93,7 +93,7 @@
         }
     }
     .__tb_head {
-        font-family: $font-normal, arial, sans-serif;
+        @include font-family-normal();
         color: rgba(94,104,117,0.58);
     }
     .__tb_row {

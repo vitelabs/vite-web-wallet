@@ -195,7 +195,7 @@ export default {
         background: #00a3ff;
         border-radius: 2px;
         padding: 4px 10px;
-        font-family: $font-bold, arial, sans-serif;
+        @include font-family-bold();
         font-size: 12px;
         color: #fff;
         letter-spacing: 0;

@@ -70,7 +70,7 @@ export default {
     padding: 30px;
     z-index: 1000;
     word-break: keep-all;
-    font-family: $font-bold, arial, sans-serif;
+    @include font-family-bold();
     font-size: 16px;
     line-height: 24px;
     color: #1d2024;

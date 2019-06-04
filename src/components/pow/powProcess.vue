@@ -125,7 +125,7 @@ export default {
 }
 
 .pow-process-wrapper {
-    font-family: $font-bold, arial, sans-serif;
+    @include font-family-bold();
     width: 90%;
     max-width: 460px;
     padding: 50px 0 40px;

@@ -39,14 +39,14 @@ export default {
     width: 100%;
     height: 100%;
     font-size: 14px;
-    font-family: $font-normal, arial, sans-serif;
+    @include font-family-normal();
     font-weight: 400;
 
     .fee {
         float: right;
         font-size: 12px;
         color: rgba(94, 104, 117, 1);
-        font-family: $font-normal, arial, sans-serif;
+        @include font-family-normal();
         font-weight: 400;
     }
 }
@@ -76,7 +76,7 @@ export default {
     text-indent: 6px;
     color: rgba(36, 39, 43, 0.8);
     font-size: 12px;
-    font-family: $font-normal, arial, sans-serif;
+    @include font-family-normal();
     font-weight: 400;
 }
 </style>

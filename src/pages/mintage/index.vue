@@ -169,7 +169,7 @@ export default {
         height: 28px;
         line-height: 28px;
         font-size: 12px;
-        font-family: $font-normal, arial, sans-serif;
+        @include font-family-normal();
         font-weight: 400;
         color: #333;
         margin-top: 5px;
@@ -190,7 +190,7 @@ export default {
 
     .select-icon-wrapper {
         font-size: 11px;
-        font-family: $font-normal, arial, sans-serif;
+        @include font-family-normal();
         font-weight: 400;
         color: rgba(94, 104, 117, 1);
         margin-left: 12px;

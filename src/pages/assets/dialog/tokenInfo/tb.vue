@@ -253,7 +253,7 @@ export default {
             color: #5e6875;
             box-sizing: border-box;
             flex: none;
-            font-family: $font-normal, arial, sans-serif;
+            @include font-family-normal();
             color: rgba(94, 104, 117, 0.58);
             font-weight: 400;
             display: flex;
@@ -275,7 +275,7 @@ export default {
         top: 50%;
         margin-top: -48px;
         font-size: 12px;
-        font-family: $font-normal, arial, sans-serif;
+        @include font-family-normal();
         font-weight: 400;
         color: rgba(94, 104, 117, 0.58);
         line-height: 16px;
