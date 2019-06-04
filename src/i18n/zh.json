@@ -588,8 +588,10 @@
             "voteErr": "投票失败，请重试"
         }
     },
+    "tradeCenter": {
+        "title": "交易中心"
+    },
     "trade": {
-        "title": "交易中心",
         "search": "查询",
         "txPair": "交易对",
         "price": "价格",

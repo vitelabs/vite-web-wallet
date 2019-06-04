@@ -48,8 +48,7 @@ const ethNet = {
 };
 const dexApiServer = {
     test: '"https://vitex.vite.net/test/api/"',
-    // dev: '"https://vitex.vite.net/test/api/"',
-    dev: '"http://132.232.65.121:8080/test/api/"',
+    dev: '"https://vitex.vite.net/test/api/"',
     dexTestNet: '"https://vitex.vite.net/beta/api/"'
 };
 const pushServer = {

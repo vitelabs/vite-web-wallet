@@ -20,7 +20,7 @@ export function quotaConfirm({
         _close(null, cancelInstance.$el);
     };
     cancelInstance.submit = () => {
-        router.push({ name: 'wallet' });
+        router.push({ name: 'walletQuota' });
         _close(null, cancelInstance.$el);
     };
 
