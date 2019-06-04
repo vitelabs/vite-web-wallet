@@ -26,6 +26,7 @@ export default {
 
 <style lang="scss" scoped>
 .wallet-wrapper {
+    width: 100%;
     height: 100%;
 }
 
