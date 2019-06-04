@@ -15,11 +15,13 @@ const STATIC_PATH = process.env.APP === 'true'
     ? path.join(__dirname, '../../app/walletPages')
     : path.join(__dirname, './dist');
 const development = [ 'dev', 'test', 'dexTestNet' ];
+const mode = development.indexOf(process.env.NODE_ENV) > -1 ? 'development' : 'production';
 
-console.log(development.indexOf(process.env.NODE_ENV) > -1 ? 'development' : 'production',);
+console.log(`\n ======== process.env.NODE_ENV: ${ process.env.NODE_ENV } ======== \n`);
+console.log(`\n ======== webpackConfig.mode: ${ mode } ======== \n`);
 
 let webpackConfig = {
-    mode: development.indexOf(process.env.NODE_ENV) > -1 ? 'development' : 'production',
+    mode,
     entry: { index: path.join(SRC_PATH, '/index.js') },
     output: {
         path: STATIC_PATH,
@@ -29,6 +31,7 @@ let webpackConfig = {
     optimization: {
         splitChunks: {
             cacheGroups: {
+                // [TODO] Async Router
                 vendors: {
                     test: /[\\/]node_modules[\\/]/,
                     name: 'vendor',
@@ -45,19 +48,14 @@ let webpackConfig = {
             new UglifyJsPlugin({
                 cache: true,
                 parallel: true,
-                // uglifyOptions: {
-                //     compress: {
-                //         unused: true,
-                //         drop_debugger: true
-                //     },
-                //     output: { comments: false }
-                // },
                 uglifyOptions: {
-                    compress: false,
-                    ecma: 6,
-                    mangle: true
+                    compress: {
+                        unused: true,
+                        drop_debugger: true
+                    },
+                    output: { comments: false }
                 },
-                // extractComments: true,
+                extractComments: true,
                 sourceMap: false
             })
         ]
@@ -85,7 +83,7 @@ let webpackConfig = {
                 loader: 'url-loader',
                 query: {
                     // 10KB
-                    limit: 10 * 1024
+                    limit: 5 * 1024
                 }
             }, {
                 test: /\.js$/,

@@ -68,6 +68,8 @@ const plugins = [
         title: 'Vite Wallet',
         favicon: path.join(SRC_PATH, 'assets/imgs/logo.png'),
         template: TEMPLATE_PATH
+        // [TODO] Async Router
+        // chunksSortMode: 'none'
     }),
     new VueLoaderPlugin(),
     new webpack.DefinePlugin({
