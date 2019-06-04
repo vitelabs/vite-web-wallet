@@ -127,42 +127,45 @@ export default {
 <style lang="scss" rel="stylesheet/scss" scoped>
 @import "assets/scss/vars.scss";
 @import "./tokenCard/colWidth.scss";
+.wallet-account-wrapper{
+    width: 100%;
+    .account_head {
+        position: relative;
+        text-align: center;
+        margin: 10px;
+        box-shadow: 0px 2px 10px 1px rgba(176,192,237,0.32);
+        border-radius: 2px;
+    }
 
-.account_head {
-    position: relative;
-    text-align: center;
-    margin: 10px;
-    box-shadow: 0px 2px 10px 1px rgba(176,192,237,0.32);
-    border-radius: 2px;
-}
-
-.token-list {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 10px;
-    box-shadow: 0px 2px 10px 1px rgba(176,192,237,0.32);
-    border-radius: 2px;
-
-    .token__head {
+    .token-list {
         display: flex;
-        width: 100%;
-        justify-content: flex-start;
-        color: #5e6875;
-        border-bottom: 1px solid #c6cbd4;
-        background-color: #fff;
-        font-size: 12px;
-        .col {
-            @include colWidth;
-            .asset-switch {
-                color: #5e6875;
-                font-size: 12px;
-                font-family: $font-normal;
-                /deep/.list-title {
-                    border: none;
+        flex-direction: column;
+        align-items: center;
+        margin: 10px;
+        box-shadow: 0px 2px 10px 1px rgba(176,192,237,0.32);
+        border-radius: 2px;
+
+        .token__head {
+            display: flex;
+            width: 100%;
+            justify-content: flex-start;
+            color: #5e6875;
+            border-bottom: 1px solid #c6cbd4;
+            background-color: #fff;
+            font-size: 12px;
+            .col {
+                @include colWidth;
+                .asset-switch {
+                    color: #5e6875;
+                    font-size: 12px;
+                    font-family: $font-normal;
+                    /deep/.list-title {
+                        border: none;
+                    }
                 }
             }
         }
     }
 }
+
 </style>

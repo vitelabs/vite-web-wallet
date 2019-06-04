@@ -79,6 +79,7 @@ import bigNumber from 'utils/bigNumber';
 import { utils } from '@vite/vitejs';
 import copy from 'components/copy';
 import AssetSwitch from './assetSwitch';
+import { getTokenNameString } from 'utils/tokenParser';
 
 const assetsType = {
     TOTAL: 'TOTAL',
@@ -99,6 +100,7 @@ export default {
     computed: {
         pieData() {
             const data = JSON.parse(JSON.stringify(this.assetMap));
+            data.forEach(t => (t.symbol = getTokenNameString(t.tokenSymbol, t.index)));
             let polyData = data;
             if (data.length > 5) {
                 polyData = data.slice(0, 4);
@@ -107,12 +109,12 @@ export default {
                         .slice(4)
                         .reduce((pre, cur) => bigNumber.plus(pre, cur.asset),
                             0),
-                    tokenSymbol: this.$t('tokenCard.others')
+                    symbol: this.$t('tokenCard.others')
                 });
             }
             return {
                 data: polyData.map(t => t.asset),
-                lable: polyData.map(t => t.tokenSymbol)
+                lable: polyData.map(t => t.symbol)
             };
         },
         account() {
@@ -155,7 +157,8 @@ export default {
                         return {
                             assetBtc: t.totalAssetBtc,
                             asset: t.totalAsset,
-                            tokenSymbol: t.tokenSymbol
+                            tokenSymbol: t.tokenSymbol,
+                            index: t.index
                         };
                     })
                     .sort((a, b) => bigNumber.compared(b.asset, a.asset));

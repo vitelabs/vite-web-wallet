@@ -74,7 +74,7 @@
 <script>
 import date from 'utils/date';
 import ellipsisAddr from 'utils/ellipsisAddr';
-import getTokenIcon from 'utils/getTokenIcon';
+import { getTokenIcon } from 'utils/tokenParser';
 
 export default {
     data() {

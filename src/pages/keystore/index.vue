@@ -13,19 +13,15 @@
                   :keystore="keystore"
                   :unlockSuccess="unlockSuccess"></lock>
 
-            <div v-show="keystore && account" class="unlock-wrapper">
-                <br/>
-                <div v-if="balance">
-                    <div>{{ JSON.stringify(balance.balance) }}</div>
-                    <div>{{ JSON.stringify(balance.onroad) }}</div>
-                </div>
-                <div v-show="!isActive && balance" class="unlock-btn __btn __btn_all_in __pointer" @click="activate">
+            <div v-show="keystore && account">
+                <div class="totop">Balance: <br/>{{ balance ? JSON.stringify(balance.balance) : '--' }}</div>
+                <div class="totop">Onroad: <br/>{{ balance ? JSON.stringify(balance.onroad) : '--' }}</div>
+
+                <div v-show="!isActive && balance" class="totop __btn __btn_all_in __pointer" @click="activate">
                     Auto Receive Tx
                 </div>
-                <div class="bottom __btn __btn_input">
-                    <input v-model="toAddress" />
-                </div>
-                <div @click="sendAllBalance" class="unlock-btn __btn __btn_all_in __pointer">Send Tx</div>
+
+                <send-tx :balance="balance" :account="account"></send-tx>
             </div>
         </div>
     </layout>
@@ -35,12 +31,13 @@
 import lock from './lock';
 import importKeystore from './import';
 import layout from '../start/layout';
+import sendTx from './sendTx';
 import { timer } from 'utils/asyncFlow';
 
 let balanceTimer = null;
 
 export default {
-    components: { layout, importKeystore, lock },
+    components: { layout, importKeystore, lock, sendTx },
     destroyed() {
         this.stopLoopBalance();
         this.account.freeze();
@@ -50,10 +47,10 @@ export default {
             address: '',
             name: '',
             keystore: null,
+
             account: null,
             balance: null,
-            isActive: false,
-            toAddress: ''
+            isActive: false
         };
     },
     methods: {
@@ -89,34 +86,6 @@ export default {
         stopLoopBalance() {
             balanceTimer && balanceTimer.stop();
             balanceTimer = null;
-        },
-        sendAllBalance() {
-            if (!this.balance || !this.balance.balance) {
-                this.$toast('No Balance!');
-                return;
-            }
-
-            const reqList = [];
-            const balanceInfos = this.balance.balance.tokenBalanceInfoMap ? this.balance.balance.tokenBalanceInfoMap : {};
-            for (const tokenId in balanceInfos) {
-                const item = balanceInfos[tokenId];
-
-                const amount = item.totalAmount;
-                if (+amount === 0) {
-                    continue;
-                }
-                reqList.push(this.account.sendTx({
-                    toAddress: this.toAddress,
-                    amount,
-                    tokenId
-                }, true, true));
-            }
-
-            Promise.all(reqList).then(data => {
-                console.log(data);
-            }).catch(err => {
-                console.warn(err);
-            });
         }
     }
 };
@@ -125,7 +94,7 @@ export default {
 <style lang="scss" scoped>
 @import "./common.scss";
 
-.unlock-btn {
+.totop{
     margin-top: 20px;
 }
 </style>

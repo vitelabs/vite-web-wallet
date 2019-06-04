@@ -64,7 +64,7 @@ export const withdraw = async (
 ) => {
     const account = getActiveAcc();
 
-    const signedBlock = await sendTx('asyncSendTx', {
+    const { accountBlock: signedBlock } = await sendTx('asyncSendTx', {
         toAddress: gateAddr,
         amount,
         tokenId

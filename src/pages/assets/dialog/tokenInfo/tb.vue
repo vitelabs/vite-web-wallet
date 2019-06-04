@@ -40,15 +40,33 @@
                 </div>
                 <div
                     class="column click-able"
-                    @click="() => type==='deposit'?gotoOutHash(item.outTxHash):gotoInHash(item.inTxHash)"
+                    @click="
+                        () =>
+                            type === 'deposit'
+                                ? gotoOutHash(item.outTxHash)
+                                : gotoInHash(item.inTxHash)
+                    "
                 >
-                    {{ type==='deposit'?item.outTxHash:item.inTxHash | hashShortify }}
+                    {{
+                        type === "deposit"
+                            ? item.outTxHash
+                            : item.inTxHash | hashShortify
+                    }}
                 </div>
                 <div
                     class="column click-able"
-                    @click="() => type==='withdraw'?gotoOutHash(item.outTxHash):gotoInHash(item.inTxHash)"
+                    @click="
+                        () =>
+                            type === 'withdraw'
+                                ? gotoOutHash(item.outTxHash)
+                                : gotoInHash(item.inTxHash)
+                    "
                 >
-                    {{ type==='withdraw'?item.outTxHash:item.inTxHash | hashShortify }}
+                    {{
+                        type === "withdraw"
+                            ? item.outTxHash
+                            : item.inTxHash | hashShortify
+                    }}
                 </div>
             </div>
         </div>
@@ -112,9 +130,15 @@ export default {
     },
     methods: {
         gotoInHash(hash) {
+            if (!hash) {
+                return;
+            }
             window.open(this.inTxExplorerFormat.replace('{$tx}', hash));
         },
         gotoOutHash(hash) {
+            if (!hash) {
+                return;
+            }
             window.open(this.outTxExplorerFormat.replace('{$tx}', hash));
         },
         updateData(pageNum = this.currentPage) {
