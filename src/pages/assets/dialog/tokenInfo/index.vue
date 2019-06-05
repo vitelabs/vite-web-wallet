@@ -192,12 +192,20 @@ export default {
         padding: 0;
     }
     .content__item{
-        height: 40px;
-        line-height: 40px;
+        min-height: 40px;
         border-bottom: 1px solid rgba(198,203,212,0.3);
         display: flex;
         font-size: 14px;
         text-align: left;
+        align-items: center;
+        div{
+            display: flex;
+            align-items: center;
+        }
+        :last-child{
+            word-break: break-all;
+
+        }
         input{
             width: 100%;
             font-size: 14px;
