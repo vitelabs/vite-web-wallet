@@ -22,6 +22,22 @@
     "withdrawHeight": "Expected Snapshot Height",
     "balance": "Balance",
     "addrName": "Address{index}",
+    "guide": {
+        "close": "关闭",
+        "next": "下一步",
+        "closeTips": "点击关闭新手引导",
+        "trade": [
+            "在这里管理您的钱包资产和交易所资产",
+            "查看当前委托和历史委托记录，掌握交易细节",
+            "参与挖矿，获取VX和交易所手续费分红（挖矿分红）",
+            "体验钱包更多功能：抵押配额、超级节点、投票、一键置换、交易详情"
+        ],
+        "assets": [
+            "充币至交易所",
+            "提现至钱包",
+            "跨链充值提现"
+        ]
+    },
     "dealReminder": {
         "title": "Deal Notice",
         "describe": "Your order {amount} {ttoken} ({ftoken}/{ttoken}) at {time} is a complete deal, visit Order History to find out more."
