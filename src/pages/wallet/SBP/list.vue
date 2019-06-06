@@ -52,7 +52,7 @@
                   :title="$t('walletSBP.rewardConfirm.title')"
                   :submitTxt="$t('walletSBP.rewardConfirm.rightBtn')"
                   :cancelTxt="$t('walletSBP.rewardConfirm.leftBtn')"
-                  :isShowPWD="isShowPWD" :cancel="hideReward">
+                  :isShowPWD="isShowPWD" :cancel="hideReward" :submit="sendReward">
             <div class="reward-confirm-wrapper">
                 {{ $t('walletSBP.rewardConfirm.describe1', { time: this.getTime(new Date().getTime()) }) }}
                 <div class="reward-amount">VITE
