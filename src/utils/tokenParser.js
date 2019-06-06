@@ -16,7 +16,7 @@ export function getTokenIcon(tokenId) {
 }
 
 export function getTokenNameString(symbol, index, length = 3) {
-    if (symbol === 'VITE') {
+    if (symbol === 'VITE' || index === undefined) {
         return symbol;
     }
     const s = String(index);
