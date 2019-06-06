@@ -1,7 +1,5 @@
 <template>
     <div class="trade-center-wrapper">
-        <!-- <guide></guide> -->
-
         <layout>
             <center-head slot="lt"></center-head>
             <depth slot="r"></depth>
