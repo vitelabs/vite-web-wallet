@@ -295,6 +295,7 @@ export default {
                 }
             }).then(() => {
                 this.$toast(this.$t('hint.request', { name: this.$t('walletSBP.rewardBtn') }));
+                this.hideReward();
             }).catch(err => {
                 this.$toast('Claim Failed', err);
             });
