@@ -37,13 +37,13 @@ block originContent
             .label {{$t("tokenCard.tokenInfo.labels.time")}}
             div
     .tab-content(v-if="tabName==='gate'")
-        .content__item(v-if="token.type==='THIRD_GATE'")
+        .content__item(v-if="token.gateInfo.url")
             .label {{$t("tokenCard.gateInfo.officalNet")}}
-        .content__item(v-if="token.type==='THIRD_GATE'")
+        .content__item(v-if="token.gateInfo.url")
             .label {{$t("tokenCard.gateInfo.introduction")}}
-        .content__item(v-if="token.type==='THIRD_GATE'")
+        .content__item(v-if="token.gateInfo.url")
             .label {{$t("tokenCard.gateInfo.token")}}
-        .content__item(v-if="token.type==='OFFICAL_GATE'")
+        .content__item(v-if="!token.gateInfo.url")
             .label {{$t("tokenCard.gateInfo.nodeDesc")}}
         .content__item
             .label {{$t("tokenCard.gateInfo.setting")}}
