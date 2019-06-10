@@ -98,7 +98,7 @@ export default {
     border-radius: 2px;
     border: 1px solid rgba(212, 222, 231, 1);
     font-size: 14px;
-    word-break: break-all;
+    word-break: break-word;
     width: 100%;
     line-height: 40px;
     box-sizing: border-box;

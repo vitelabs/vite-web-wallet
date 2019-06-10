@@ -200,7 +200,6 @@ export default {
     max-height: 100%;
     background: #fff;
     font-size: 12px;
-    box-shadow: 0px 2px 10px 1px rgba(176, 192, 237, 0.42);
     .row {
         overflow: hidden;
         text-overflow: ellipsis;
@@ -224,7 +223,7 @@ export default {
             }
             &:first-child {
                 min-width: 93px;
-                width: 23%;
+                width: 17%;
                 justify-content: flex-start;
             }
             &:nth-child(2) {
@@ -233,14 +232,14 @@ export default {
             }
             &:nth-child(3) {
                 min-width: 70px;
-                width: 15%;
+                width: 25%;
             }
             &:last-child,
             &:nth-child(4) {
                 min-width: 100px;
                 width: 20%;
             }
-            word-break: break-all;
+            word-break: break-word;
             line-height: 14px;
             white-space: normal;
             display: flex;

@@ -35,7 +35,7 @@
         </div>
         <div class="col">
             <div
-                class="underline click-able"
+                :class="{underline:gateName!=='--','click-able':gateName!=='--'}"
                 @click="() => token.type !== 'NATIVE' && showDetail('gate')"
             >
                 {{ gateName }}
@@ -248,7 +248,7 @@ export default {
     display: flex;
     width: 100%;
     align-items: center;
-    border-bottom: 1px solid #c6cbd4;
+    border-bottom: 1px solid rgba(227, 235, 245, 0.6);
     height: 71px;
     &:last-child {
         border: none;
@@ -280,7 +280,7 @@ export default {
             border-bottom: 1px dotted #5e6875;
         }
         .separate {
-            border-right: 1px solid #d3dfef;
+            border-right: 1px solid rgba(227, 235, 245, 0.6);
             height: 52px;
             position: absolute;
             right: 0;
@@ -296,7 +296,8 @@ export default {
                 cursor: pointer;
                 color: #007aff;
                 margin-right: 6px;
-                padding: 2px;
+                padding-right: 2px;
+                padding-left: 2px;
                 &.readonly {
                     color: #5e6875;
                     background: rgba(94, 104, 117, 0.05);
@@ -318,6 +319,7 @@ export default {
             .icon {
                 height: 16px;
                 width: 16px;
+                margin-left: 23px;
             }
         }
     }
