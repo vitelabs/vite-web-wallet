@@ -47,7 +47,7 @@
                   :title="$t('walletSBP.rewardConfirm.title')"
                   :submitTxt="$t('walletSBP.rewardConfirm.rightBtn')"
                   :cancelTxt="$t('walletSBP.rewardConfirm.leftBtn')"
-                  :isShowPWD="isShowPWD" :cancel="hideReward">
+                  :isShowPWD="isShowPWD" :cancel="hideReward" :submit="sendReward">
             <div style="font-size: 14px; margin-bottom: 10px">
                 {{ $t('walletSBP.rewardConfirm.describe1', { time: this.getTime(new Date().getTime()) }) }}
                 <div style="
@@ -309,6 +309,7 @@ export default {
                 }
             }).then(() => {
                 this.$toast(this.$t('hint.request', { name: this.$t('walletSBP.rewardBtn') }));
+                this.hideReward();
             }).catch(err => {
                 this.$toast('Claim Failed', err);
             });
