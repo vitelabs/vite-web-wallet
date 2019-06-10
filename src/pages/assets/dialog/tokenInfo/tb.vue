@@ -223,7 +223,7 @@ export default {
             }
             &:first-child {
                 min-width: 93px;
-                width: 17%;
+                width: 20%;
                 justify-content: flex-start;
             }
             &:nth-child(2) {
