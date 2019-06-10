@@ -236,8 +236,8 @@ export default {
             }
             &:last-child,
             &:nth-child(4) {
-                min-width: 100px;
-                width: 20%;
+                min-width: 105px;
+                width: 22%;
             }
             word-break: break-word;
             line-height: 14px;
