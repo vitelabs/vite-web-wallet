@@ -155,8 +155,8 @@ export default {
             font-size: 12px;
             .col {
                 @include colWidth;
-                padding:9px;
-                color:rgba(94, 104, 117, 0.58);
+                padding: 9px;
+                color: rgba(94, 104, 117, 0.58);
                 .asset-switch {
                     color: rgba(94, 104, 117, 0.58);;
                     font-size: 12px;
