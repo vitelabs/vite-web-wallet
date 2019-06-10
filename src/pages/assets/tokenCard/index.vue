@@ -319,7 +319,6 @@ export default {
             .icon {
                 height: 16px;
                 width: 16px;
-                margin-left: 23px;
             }
         }
     }

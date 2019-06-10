@@ -1,7 +1,9 @@
 <template>
     <page-layout>
         <div class="wallet-account-wrapper">
-            <account-head class="account_head"></account-head>
+            <div class="account_head">
+            <account-head ></account-head>
+            </div>
             <TokenFilter
                 @newFilter="
                     val => {
@@ -135,6 +137,7 @@ export default {
         margin: 10px;
         box-shadow: 0px 2px 10px 1px rgba(176,192,237,0.32);
         border-radius: 2px;
+        overflow-x:scroll;
     }
 
     .token-list {

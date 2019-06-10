@@ -11,11 +11,7 @@
                         src="~assets/imgs/edit_default.svg"
                     />
                 </div>
-                <div
-                    v-if="!isShowNameInput"
-                    class="name"
-                    @click="startRename"
-                >
+                <div v-if="!isShowNameInput" class="name" @click="startRename">
                     {{ account.name }}
                 </div>
                 <!-- <input fake_pass type="password" style="display:none"/> -->
@@ -38,9 +34,9 @@
                 <span class="address-content">
                     <Tips ref="tips"></Tips>{{ activeAddr }}
                     <QrcodePopup :qrcodeString="addressQrcode"
-                    ><img
-                        class="address-content__operate click-able"
-                        src="~assets/imgs/qrcode_default.svg"
+                        ><img
+                            class="address-content__operate click-able"
+                            src="~assets/imgs/qrcode_default.svg"
                     /></QrcodePopup>
                     <img
                         class="address-content__operate click-able"
@@ -58,7 +54,7 @@
                 <div class="asset__cash">{{ currencySymbol }} {{ asset }}</div>
             </div>
         </div>
-        <div class="head__item">
+        <div class="head__item chart">
             <Pie
                 class="pie-chart"
                 :pieData="pieData.data"
@@ -70,28 +66,28 @@
 </template>
 
 <script>
-import Vue from 'vue';
-import QrcodePopup from 'components/qrcodePopup';
-import SwitchAddr from 'components/switchAddress';
-import Pie from 'components/pie';
-import bigNumber from 'utils/bigNumber';
-import { utils } from '@vite/vitejs';
-import copy from 'utils/copy';
-import Tips from 'uiKit/tips';
-import AssetSwitch from './assetSwitch';
-import { getTokenNameString } from 'utils/tokenParser';
+import Vue from "vue";
+import QrcodePopup from "components/qrcodePopup";
+import SwitchAddr from "components/switchAddress";
+import Pie from "components/pie";
+import bigNumber from "utils/bigNumber";
+import { utils } from "@vite/vitejs";
+import copy from "utils/copy";
+import Tips from "uiKit/tips";
+import AssetSwitch from "./assetSwitch";
+import { getTokenNameString } from "utils/tokenParser";
 
 const assetsType = {
-    TOTAL: 'TOTAL',
-    EX: 'EX',
-    WALLET: 'WALLET'
+    TOTAL: "TOTAL",
+    EX: "EX",
+    WALLET: "WALLET"
 };
 export default {
     components: { QrcodePopup, Tips, SwitchAddr, Pie, AssetSwitch },
     data() {
         return {
             isShowNameInput: false,
-            editName: '',
+            editName: "",
             copySuccess: false,
             qrcode: null,
             qrcodeShow: false,
@@ -101,16 +97,20 @@ export default {
     computed: {
         pieData() {
             const data = JSON.parse(JSON.stringify(this.assetMap));
-            data.forEach(t => (t.symbol = getTokenNameString(t.tokenSymbol, t.index)));
+            data.forEach(
+                t => (t.symbol = getTokenNameString(t.tokenSymbol, t.index))
+            );
             let polyData = data;
             if (data.length > 5) {
                 polyData = data.slice(0, 4);
                 polyData.push({
                     asset: data
                         .slice(4)
-                        .reduce((pre, cur) => bigNumber.plus(pre, cur.asset),
-                            0),
-                    symbol: this.$t('tokenCard.others')
+                        .reduce(
+                            (pre, cur) => bigNumber.plus(pre, cur.asset),
+                            0
+                        ),
+                    symbol: this.$t("tokenCard.others")
                 });
             }
             return {
@@ -194,16 +194,16 @@ export default {
     methods: {
         labelGen(v, i) {
             const symbol = this.pieData.lable[i];
-            return `${ symbol } ${ (100 * v).toFixed(1) }%`;
+            return `${symbol} ${(100 * v).toFixed(1)}%`;
         },
         copy() {
             copy(this.activeAddr);
-            this.$refs.tips.tip(this.$t('hint.copy'));
+            this.$refs.tips.tip(this.$t("hint.copy"));
         },
 
         clearEditName() {
             this.isShowNameInput = false;
-            this.editName = '';
+            this.editName = "";
             this.$offKeyDown();
         },
         startRename() {
@@ -225,19 +225,19 @@ export default {
             }
 
             if (!/^[a-zA-Z0-9_\u4e00-\u9fa5]+$/g.test(this.editName)) {
-                this.$toast(this.$t('startCreate.hint.name'));
+                this.$toast(this.$t("startCreate.hint.name"));
                 this.clearEditName();
                 return;
             }
 
             const long = 32;
             if (this.editName.length > long) {
-                this.$toast(this.$t('startCreate.hint.nameLong', { long }));
+                this.$toast(this.$t("startCreate.hint.nameLong", { long }));
                 this.clearEditName();
                 return;
             }
 
-            this.$store.commit('renameCurrHDAcc', this.editName);
+            this.$store.commit("renameCurrHDAcc", this.editName);
             this.clearEditName();
         }
     }
@@ -256,9 +256,12 @@ export default {
     border-radius: 2px;
     display: flex;
     flex-wrap: nowrap;
-    justify-content: space-between;
-    height: 124px;
+    min-height: 124px;
+    flex-wrap: wrap;
     align-items: center;
+    padding: 20px 0;
+    box-sizing: border-box;
+    min-width: 1550px;
     .head__item {
         border-right: 1px solid rgba(227, 235, 245, 0.6);
         display: flex;
@@ -276,7 +279,7 @@ export default {
             word-break: break-word;
             box-sizing: border-box;
             background: #f3f6f9;
-            color: #BDC1D1;
+            color: #bdc1d1;
             padding: 9px;
             display: flex;
             align-items: center;
@@ -294,11 +297,10 @@ export default {
             font-size: 20px;
             color: #1d2024;
             text-align: left;
-            font-family: $font-bold, arial, sans-serif;
+            font-family: $font-bold;
             word-break: break-word;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
             align-self: stretch;
             .head-title {
                 display: flex;
@@ -308,11 +310,9 @@ export default {
                 line-height: 20px;
                 font-size: 14px;
                 letter-spacing: 0.35px;
-                padding-bottom: 10px;
-                font-family: $font-bold, arial, sans-serif;
-                color: #5e6875;
+                margin-bottom: 10px;
                 font-family: $font-bold;
-
+                color: #5e6875;
                 .edit {
                     display: inline-block;
                     width: 20px;
@@ -332,9 +332,13 @@ export default {
                 width: 100%;
             }
         }
-        .pie-chart {
-            margin-left: 30px;
-            padding: 5px 0;
+
+        &.chart {
+            border-right: none;
+            .pie-chart {
+                margin-left: 30px;
+                padding: 5px 0;
+            }
         }
         &.worth {
             display: flex;
@@ -345,12 +349,17 @@ export default {
                 flex-direction: column;
                 align-items: flex-start;
                 height: 88px;
-                justify-content: space-between;
+                .asset-switch {
+                    margin-bottom: 10px;
+                }
                 .asset__btc {
+                    margin-bottom: 10px;
+                    font-size: 18px;
+                    line-height: 26px;
+                    font-family: $font-bold;
                 }
                 .asset__cash {
                     color: #5e687594;
-                    margin-top: 4px;
                     font-size: 12px;
                 }
             }
