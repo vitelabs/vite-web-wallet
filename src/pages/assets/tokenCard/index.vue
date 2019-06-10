@@ -33,7 +33,7 @@
         <div class="col">
             {{ `${token.fundFloat || 0} ${token.tokenSymbol}` }}
         </div>
-        <div class="col">
+        <!-- <div class="col">
             <div
                 :class="{underline:gateName!=='--','click-able':gateName!=='--'}"
                 @click="() => token.type !== 'NATIVE' && showDetail('gate')"
@@ -52,7 +52,7 @@
                 </div>
             </div>
             <div class="separate"></div>
-        </div>
+        </div> -->
         <div class="col">
             {{ `${exBanlance || 0} ${token.tokenSymbol}` }}
         </div>
@@ -261,7 +261,6 @@ export default {
         flex-direction: column;
         align-items: flex-start;
         justify-content: space-between;
-        padding: 7px 0;
         color: #5e6875;
         font-size: 12px;
         align-self: stretch;

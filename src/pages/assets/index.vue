@@ -16,7 +16,7 @@
                     <div class="col">{{$t('tokenCard.heads.name')}}</div>
                     <div class="col">{{$t('tokenCard.heads.balance')}}</div>
                     <div class="col">{{$t('tokenCard.heads.onroad')}}</div>
-                    <div class="col">{{$t('tokenCard.heads.gate')}}</div>
+                    <!-- <div class="col">{{$t('tokenCard.heads.gate')}}</div> -->
                     <div class="col">{{$t('tokenCard.heads.totalExAmount')}}</div>
                     <div class="col">{{$t('tokenCard.heads.availableExAmount')}}</div>
                     <div class="col">
@@ -158,7 +158,8 @@ export default {
             font-size: 12px;
             .col {
                 @include colWidth;
-                padding: 9px;
+                padding-top: 9px;
+                padding-bottom: 9px;
                 color: rgba(94, 104, 117, 0.58);
                 .asset-switch {
                     color: rgba(94, 104, 117, 0.58);;

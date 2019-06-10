@@ -37,22 +37,22 @@ block originContent
         .content__item
             .label {{$t("tokenCard.tokenInfo.labels.time")}}
             div
-    .tab-content(v-if="tabName==='gate'")
-        .content__item(v-if="token.gateInfo.url")
-            .label {{$t("tokenCard.gateInfo.officalNet")}}
-        .content__item(v-if="token.gateInfo.url")
-            .label {{$t("tokenCard.gateInfo.introduction")}}
-        .content__item(v-if="token.gateInfo.url")
-            .label {{$t("tokenCard.gateInfo.token")}}
-        .content__item(v-if="!token.gateInfo.url")
-            .label {{$t("tokenCard.gateInfo.nodeDesc")}}
-        .content__item
-            .label {{$t("tokenCard.gateInfo.setting")}}
-            input.gate-url(:placeholder="$t('tokenCard.gateInfo.settingPlaceholder')" :disabled="token.type==='OFFICAL_GATE'" v-model="url")
-    .tab-content.no-padding(v-if="tabName==='deposit'")
-        Tb(:type="'deposit'" :token="token" :key="`deposit_${token.tokenId}`")
-    .tab-content.no-padding(v-if="tabName==='withdraw'")
-        Tb(:type="'withdraw'" :token="token" :key="`withdraw_${token.tokenId}`")
+    //- .tab-content(v-if="tabName==='gate'")
+    //-     .content__item(v-if="token.gateInfo.url")
+    //-         .label {{$t("tokenCard.gateInfo.officalNet")}}
+    //-     .content__item(v-if="token.gateInfo.url")
+    //-         .label {{$t("tokenCard.gateInfo.introduction")}}
+    //-     .content__item(v-if="token.gateInfo.url")
+    //-         .label {{$t("tokenCard.gateInfo.token")}}
+    //-     .content__item(v-if="!token.gateInfo.url")
+    //-         .label {{$t("tokenCard.gateInfo.nodeDesc")}}
+    //-     .content__item
+    //-         .label {{$t("tokenCard.gateInfo.setting")}}
+    //-         input.gate-url(:placeholder="$t('tokenCard.gateInfo.settingPlaceholder')" :disabled="token.type==='OFFICAL_GATE'" v-model="url")
+    //- .tab-content.no-padding(v-if="tabName==='deposit'")
+    //-     Tb(:type="'deposit'" :token="token" :key="`deposit_${token.tokenId}`")
+    //- .tab-content.no-padding(v-if="tabName==='withdraw'")
+    //-     Tb(:type="'withdraw'" :token="token" :key="`withdraw_${token.tokenId}`")
 </template>
 
 <script>
