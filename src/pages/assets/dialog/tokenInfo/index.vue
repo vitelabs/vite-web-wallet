@@ -7,6 +7,7 @@ block head
             .head__name {{token.tokenName}}
                 .head__name__gate(v-if="token.gateInfo.name")
             .head__symbol {{token.tokenSymbol}}
+        .gate_info(v-if="gateName") {{gateName}}
     .tab
         .tab__item(@click="tabClick('tokenInfo')" :class="{active:tabName==='tokenInfo'}") {{$t("tokenCard.tokenInfo.tabName")}}
         .tab__item(v-if="token.type!=='NATIVE'" @click="tabClick('gate')" :class="{active:tabName==='gate'}") {{$t("tokenCard.gateInfo.tabName")}}
@@ -77,6 +78,12 @@ export default {
         };
     },
     computed: {
+        gateName() {
+            if (this.token.type === 'NATIVE') return ''
+            if (this.token.gateInfo.gateway) return this.token.gateInfo.gateway;
+            if (this.token.gateInfo.url) return this.$t('tokenCard.gateInfo.selfdefined');
+            return ``;
+        },
         url: {
             get: function () {
                 if (this.token.type === 'OFFICAL_GATE') {
@@ -135,9 +142,18 @@ export default {
     padding: 30px;
     display: flex;
     background: rgba(0,122,255,0.05);
-    .head__info{
+    .head_info{
         display: flex;
         flex-direction: column;
+    }
+    .gate_info{
+        font-size: 12px;
+        color:#007AFF;
+        background:rgba(0,122,255,0.06);
+        padding:0 4px;
+        align-self: flex-start;
+        border-radius:2px;
+        margin-left: 6px;
     }
     .icon {
         width: 40px;
@@ -193,17 +209,17 @@ export default {
     }
     .content__item{
         min-height: 40px;
-        border-bottom: 1px solid rgba(198,203,212,0.3);
         display: flex;
         font-size: 14px;
         text-align: left;
         align-items: center;
+        color:#1D2024;
         div{
             display: flex;
             align-items: center;
         }
         :last-child{
-            word-break: break-all;
+            word-break: break-word;
 
         }
         input{
@@ -211,7 +227,7 @@ export default {
             font-size: 14px;
         }
         .label{
-            color: #5E6875;
+            color: rgba(94, 104, 117, 0.58);
             margin-right: 6px;
             word-break: keep-all;
         }

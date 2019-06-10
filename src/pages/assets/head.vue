@@ -12,17 +12,16 @@
                     />
                 </div>
                 <div
-                    v-show="!isShowNameInput"
+                    v-if="!isShowNameInput"
                     class="name"
                     @click="startRename"
                 >
                     {{ account.name }}
                 </div>
                 <!-- <input fake_pass type="password" style="display:none"/> -->
-                <form autocomplete="off">
+                <form autocomplete="off" v-else>
                     <input
                         ref="nameInput"
-                        v-show="isShowNameInput"
                         type="text"
                         v-model="editName"
                         :placeholder="account.name"
@@ -33,7 +32,7 @@
             </div>
         </div>
         <div class="head__item">
-            <img class="icon" src="~assets/imgs/head_addr.png" />
+            <img class="icon" src="~assets/imgs/head_addr.svg" />
             <div class="head-right">
                 <SwitchAddr :isShowAddr="false"></SwitchAddr>
                 <span class="address-content">
@@ -58,7 +57,8 @@
                 <div class="asset__btc">{{ assetBtc }} BTC</div>
                 <div class="asset__cash">{{ currencySymbol }} {{ asset }}</div>
             </div>
-            <div class="head-right">
+        </div>
+            <div class="head__item">
                 <Pie
                     class="pie-chart"
                     :pieData="pieData.data"
@@ -66,7 +66,6 @@
                     :title="$t('tokenCard.assetSpread')"
                 ></Pie>
             </div>
-        </div>
     </div>
 </template>
 
@@ -274,16 +273,17 @@ export default {
         .address-content {
             max-width: 300px;
             font-size: 14px;
-            word-break: break-all;
+            word-break: break-word;
             box-sizing: border-box;
             background: #f3f6f9;
-            color: #5e6875;
+            color: #BDC1D1;
             padding: 9px;
             display: flex;
             align-items: center;
             margin: 5px auto;
             display: flex;
             position: relative;
+            font-family: $font-normal;
             &__operate {
                 width: 16px;
                 height: 16px;
@@ -295,7 +295,11 @@ export default {
             color: #1d2024;
             text-align: left;
             font-family: $font-bold, arial, sans-serif;
-            word-break: break-all;
+            word-break: break-word;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+             align-self: stretch;
             .head-title {
                 display: flex;
                 align-items: center;
@@ -333,11 +337,10 @@ export default {
             padding: 5px 0;
         }
         &.worth {
-            flex-grow: 1;
             display: flex;
             justify-content: space-between;
+            border-right:none;
             .assets {
-                flex-grow: 1;
                 display: flex;
                 flex-direction: column;
                 align-items: flex-start;

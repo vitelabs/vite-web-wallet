@@ -7,28 +7,30 @@
         >
         </Search>
         <div class="filter op" @click="addToken">
-            <img src="~assets/imgs/add_token.png" />
+            <img src="~assets/imgs/add_token.svg" class="op__input" />
             <div>{{ $t("tokenCard.addToken.title") }}</div>
         </div>
         <div class="filter op">
-            <input type="checkbox" v-model="hideZero" />
+            <Checkbox v-model="hideZero" class="op__input" />
             {{ $t("tradeAssets.zero") }}
         </div>
         <div class="filter op click-able more" @click="more">
-            {{ $t("tokenCard.moreRecrods") }}
-            <img src="~assets/imgs/moreRecrods.png" />
+            {{ $t("tokenCard.moreRecords") }}
+            <img src="~assets/imgs/moreRecords.svg" />
         </div>
     </div>
 </template>
 <script>
-import { debounce } from 'lodash';
-import Search from 'components/search';
-import { addTokenDialog } from './dialog';
+import { debounce } from "lodash";
+import Search from "components/search";
+import { addTokenDialog } from "./dialog";
+import Checkbox from "uiKit/checkbox";
+
 export default {
     data() {
         return {
             hideZero: false,
-            filterKey: ''
+            filterKey: ""
         };
     },
     watch: {
@@ -39,10 +41,10 @@ export default {
             this.updateFilter();
         }
     },
-    components: { Search },
+    components: { Search, Checkbox },
     methods: {
-        updateFilter: debounce(function () {
-            this.$emit('newFilter', {
+        updateFilter: debounce(function() {
+            this.$emit("newFilter", {
                 hideZero: this.hideZero,
                 filterKey: this.filterKey
             });
@@ -51,7 +53,7 @@ export default {
             addTokenDialog().catch(e => console.error(e));
         },
         more() {
-            this.$router.push({ name: 'walletTransList' });
+            this.$router.push({ name: "walletTransList" });
         }
     }
 };
@@ -74,10 +76,15 @@ export default {
         color: rgba(206, 209, 213, 1);
         line-height: 17px;
         border: none;
+        display: flex;
+        align-items: center;
         &.more {
             position: absolute;
             right: 0;
             cursor: pointer;
+            img{
+                margin-left: 8px;
+            }
         }
         &:first-child {
             width: 260px;
@@ -93,8 +100,7 @@ export default {
             color: #5e6875;
             display: flex;
             align-items: center;
-            img,
-            input {
+            .op__input {
                 height: 16px;
                 width: 16px;
                 cursor: pointer;

@@ -94,7 +94,7 @@ export default {
             width: 16px;
             height: 16px;
             margin-bottom: -2px;
-            background: url("~assets/imgs/addr_switch.svg");
+            background: url("~assets/imgs/uiKit/select/down.svg");
             background-size: 16px 16px;
         }
         &.not-allowed {
