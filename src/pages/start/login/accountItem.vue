@@ -44,7 +44,7 @@ export default {
     }
 
     .address {
-        @include font-family($font-normal-b);
+        font-family: $font-normal-b;
         font-size: 12px;
         line-height: 20px;
         color: #333;

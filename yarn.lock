@@ -1927,15 +1927,15 @@
     "@types/unist" "*"
     "@types/vfile-message" "*"
 
-"@vite/vitejs-ws@2.1.2-alpha.2":
-  version "2.1.2-alpha.2"
-  resolved "https://registry.yarnpkg.com/@vite/vitejs-ws/-/vitejs-ws-2.1.2-alpha.2.tgz#4c7f93f6aef8cca112622ea03ffec58b252caf14"
-  integrity sha512-kwyg3RNf4ZrmBL3oOfncT3iRfSgWrTrAzOYOa4sRT1y6246VQpz/rGh9I7ctaVbx+MFhmEwE2ffZ50QNxaqJFA==
+"@vite/vitejs-ws@2.1.2":
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/@vite/vitejs-ws/-/vitejs-ws-2.1.2.tgz#d58b46b8e1869e10260297e68ad0c1558ed35cc5"
+  integrity sha512-1YOQpog+hQ51bugzS/+hdwP/SR4baDZHAWImxLFGNVVdrLB6d5JNzYu0z0siV5wO6ulysdRhR7ezIhbdp6HA5w==
 
-"@vite/vitejs@2.1.2-alpha.2":
-  version "2.1.2-alpha.2"
-  resolved "https://registry.yarnpkg.com/@vite/vitejs/-/vitejs-2.1.2-alpha.2.tgz#eb8542a2e80d660bb8a0dc456610895db3ea8242"
-  integrity sha512-pa3IpfBpnYWei/OKnfm10BYZeya5VztbJ18ZL8yOZURxx6uPbxmW/BUw02pUEH2JemmVSPZs+c9zXBftofgiKQ==
+"@vite/vitejs@2.1.2":
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/@vite/vitejs/-/vitejs-2.1.2.tgz#96406913e1cc135cabe4d3dbbec283259ee4bd33"
+  integrity sha512-RYn9yHgu21LjsvJlBwrZ8Xukd101diA93ma5XjAX0et9bqOp0QGbbukDhM29y1QEL60WmA7Z7iwKoVBYXo8dCg==
   dependencies:
     "@sisi/ed25519-blake2b-hd-key" "^1.0.2"
     "@sisi/tweetnacl-blake2b" "^1.0.0"
@@ -10450,7 +10450,7 @@ token-stream@0.0.1:
   resolved "https://registry.yarnpkg.com/token-stream/-/token-stream-0.0.1.tgz#ceeefc717a76c4316f126d0b9dbaa55d7e7df01a"
   integrity sha1-zu78cXp2xDFvEm0LnbqlXX598Bo=
 
-toposort@1.0.4, toposort@^1.0.0:
+toposort@^1.0.0:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/toposort/-/toposort-1.0.4.tgz#a86107690cbee8cae43b349d2f60162500924dfc"
   integrity sha1-qGEHaQy+6MrkOzSdL2AWJQCSTfw=
