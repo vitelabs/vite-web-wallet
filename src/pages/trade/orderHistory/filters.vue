@@ -153,7 +153,7 @@ export default {
         color: #007aff;
         border-radius: 2px;
         border: 1px solid #007aff;
-        @include font-family($font-normal-b);
+        font-family: $font-normal-b;
         font-weight: normal;
         text-align: center;
         line-height: 28px;
