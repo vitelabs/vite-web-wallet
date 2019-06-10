@@ -58,14 +58,14 @@
                 <div class="asset__cash">{{ currencySymbol }} {{ asset }}</div>
             </div>
         </div>
-            <div class="head__item">
-                <Pie
-                    class="pie-chart"
-                    :pieData="pieData.data"
-                    :labelGen="labelGen"
-                    :title="$t('tokenCard.assetSpread')"
-                ></Pie>
-            </div>
+        <div class="head__item">
+            <Pie
+                class="pie-chart"
+                :pieData="pieData.data"
+                :labelGen="labelGen"
+                :title="$t('tokenCard.assetSpread')"
+            ></Pie>
+        </div>
     </div>
 </template>
 
@@ -299,7 +299,7 @@ export default {
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-             align-self: stretch;
+            align-self: stretch;
             .head-title {
                 display: flex;
                 align-items: center;
@@ -339,7 +339,7 @@ export default {
         &.worth {
             display: flex;
             justify-content: space-between;
-            border-right:none;
+            border-right: none;
             .assets {
                 display: flex;
                 flex-direction: column;

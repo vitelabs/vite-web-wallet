@@ -21,16 +21,16 @@
     </div>
 </template>
 <script>
-import { debounce } from "lodash";
-import Search from "components/search";
-import { addTokenDialog } from "./dialog";
-import Checkbox from "uiKit/checkbox";
+import { debounce } from 'lodash';
+import Search from 'components/search';
+import { addTokenDialog } from './dialog';
+import Checkbox from 'uiKit/checkbox';
 
 export default {
     data() {
         return {
             hideZero: false,
-            filterKey: ""
+            filterKey: ''
         };
     },
     watch: {
@@ -43,8 +43,8 @@ export default {
     },
     components: { Search, Checkbox },
     methods: {
-        updateFilter: debounce(function() {
-            this.$emit("newFilter", {
+        updateFilter: debounce(function () {
+            this.$emit('newFilter', {
                 hideZero: this.hideZero,
                 filterKey: this.filterKey
             });
@@ -53,7 +53,7 @@ export default {
             addTokenDialog().catch(e => console.error(e));
         },
         more() {
-            this.$router.push({ name: "walletTransList" });
+            this.$router.push({ name: 'walletTransList' });
         }
     }
 };

@@ -79,10 +79,10 @@ export default {
     },
     computed: {
         gateName() {
-            if (this.token.type === 'NATIVE') return ''
+            if (this.token.type === 'NATIVE') return '';
             if (this.token.gateInfo.gateway) return this.token.gateInfo.gateway;
             if (this.token.gateInfo.url) return this.$t('tokenCard.gateInfo.selfdefined');
-            return ``;
+            return '';
         },
         url: {
             get: function () {
@@ -148,11 +148,11 @@ export default {
     }
     .gate_info{
         font-size: 12px;
-        color:#007AFF;
-        background:rgba(0,122,255,0.06);
-        padding:0 4px;
+        color: #007AFF;
+        background: rgba(0,122,255,0.06);
+        padding: 0 4px;
         align-self: flex-start;
-        border-radius:2px;
+        border-radius: 2px;
         margin-left: 6px;
     }
     .icon {
@@ -213,7 +213,7 @@ export default {
         font-size: 14px;
         text-align: left;
         align-items: center;
-        color:#1D2024;
+        color: #1D2024;
         div{
             display: flex;
             align-items: center;
