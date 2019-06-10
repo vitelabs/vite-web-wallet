@@ -1,7 +1,7 @@
 import { timer } from 'utils/asyncFlow';
 import { rateToken } from 'services/trade';
 
-const loopTime = 5000;
+const loopTime = 10000;
 let rateTimer = null;
 
 const state = { rateMap: {}, rateTokenIds: [] };
@@ -38,8 +38,11 @@ const actions = {
         rateTimer && rateTimer.stop();
         rateTimer = null;
     },
-    addRateTokens({ commit }, payload = []) {
+    addRateTokens({ commit, state }, payload = []) {
         commit('setRateTokenIds', payload);
+        rateToken({ tokenIdList: state.rateTokenIds }).then(data => {
+            commit('setExchangeRate', data);
+        });
     }
 };
 

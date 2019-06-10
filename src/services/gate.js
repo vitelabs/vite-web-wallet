@@ -136,8 +136,12 @@ class GateWays {
 
     bindToken(tokenId, tokenInfo) {
         this.updateFromStorage();
-        this.data = this.data.filter(t => t.tokenId !== tokenId);
-        this.data.push({ tokenId, ...tokenInfo });
+        const index = this.data.findIndex(t => t.tokenId !== tokenId);
+        if (index < 0) {
+            this.data.push({ tokenId, ...tokenInfo });
+        } else {
+            this.data[index] = { tokenId, ...tokenInfo };
+        }
         this.saveToStorage();
     }
 
