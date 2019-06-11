@@ -40,8 +40,10 @@ const actions = {
         rateTimer = null;
     },
     addRateTokens({ commit, state }, payload = []) {
+        const contains = payload.every(t => state.rateTokenIds.findIndex(n => n.tokenId === t.tokenId) >= 0);
+        if (contains) return;
+
         commit('setRateTokenIds', payload);
-        console.log(7777);
         rateToken({ tokenIdList: state.rateTokenIds }).then(data => {
             commit('setExchangeRate', data);
         });
