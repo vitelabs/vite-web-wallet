@@ -21,8 +21,9 @@ const mutations = {
 const actions = {
     startLoopExchangeRate({ commit, dispatch, state }) {
         dispatch('stopLoopExchangeRate');
-
+        console.log(99999);
         const f = () => {
+            console.log(8888);
             if (!state.rateTokenIds || !state.rateTokenIds.length) {
                 return;
             }
@@ -40,6 +41,7 @@ const actions = {
     },
     addRateTokens({ commit, state }, payload = []) {
         commit('setRateTokenIds', payload);
+        console.log(7777);
         rateToken({ tokenIdList: state.rateTokenIds }).then(data => {
             commit('setExchangeRate', data);
         });
