@@ -19,10 +19,7 @@ const client = getClient('', xhr => {
     }
     return Promise.reject(xhr.responseText);
 });
-export const getGateInfos = () => {
-    debugger;
-    return client({ path: 'certified_gateways', host: process.env.gatewayInfosServer });
-};
+export const getGateInfos = () => client({ path: 'certified_gateways', host: process.env.gatewayInfosServer });
 
 export const getChargeAddr = ({ tokenId, addr: walletAddress }, url) =>
     client({

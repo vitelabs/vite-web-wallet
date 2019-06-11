@@ -21,9 +21,7 @@ const mutations = {
 const actions = {
     startLoopExchangeRate({ commit, dispatch, state }) {
         dispatch('stopLoopExchangeRate');
-        console.log(99999);
         const f = () => {
-            console.log(8888);
             if (!state.rateTokenIds || !state.rateTokenIds.length) {
                 return;
             }
