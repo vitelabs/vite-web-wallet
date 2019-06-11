@@ -9,6 +9,8 @@
 
         <ul class="right-lab-list">
             <div class="tab __pointer" @click="goHelp">{{ $t('help') }}</div>
+            <div v-show="isHaveUsers && active.indexOf('assets') !== -1"
+                 @click="getTestToken" class="tab __pointer">{{ $t('wallet.getTestToken') }}</div>
             <div v-show="!isLogin" @click="dexStart" class="tab __pointer">
                 {{ isHaveUsers ? $t('unlockAcc') : $t('login')  }}</div>
             <div v-show="!isLogin" @click="dexChange" class="tab __pointer">
@@ -28,6 +30,7 @@ import { StatusMap } from 'wallet';
 import dexToken from 'components/dexToken';
 import switchAddr from 'components/switchAddress';
 import { pwdConfirm } from 'components/password/index.js';
+import $ViteJS from 'utils/viteClient';
 
 export default {
     components: { dexToken, switchAddr },
@@ -49,7 +52,8 @@ export default {
     data() {
         return {
             active: this.$route.name,
-            isShowDexToken: false
+            isShowDexToken: false,
+            getTestTokenAble: true
         };
     },
     computed: {
@@ -58,9 +62,42 @@ export default {
         },
         isHaveUsers() {
             return !!this.$store.state.wallet.currHDAcc;
+        },
+        address() {
+            return this.$store.getters.activeAddr;
+        },
+        netStatus() {
+            return this.$store.state.env.clientStatus;
         }
     },
     methods: {
+        getTestToken() {
+            if (!this.getTestTokenAble) {
+                return;
+            }
+
+            if (!this.netStatus) {
+                this.$toast(this.$t('hint.noNet'));
+                return;
+            }
+
+            if (!this.address) {
+                this.$toast(this.$t('wallet.hint.tErr'));
+            }
+
+            this.getTestTokenAble = false;
+            $ViteJS.request('testapi_getTestToken', this.address).then(() => {
+                this.$toast(this.$t('wallet.hint.token'));
+                setTimeout(() => {
+                    this.getTestTokenAble = true;
+                }, 3000);
+            }).catch(err => {
+                console.warn(err);
+                this.getTestTokenAble = true;
+                this.$toast(this.$t('wallet.hint.tErr'), err);
+            });
+        },
+
         showToken() {
             this.isShowDexToken = true;
         },
