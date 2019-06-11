@@ -21,7 +21,6 @@ const mutations = {
 const actions = {
     startLoopExchangeRate({ commit, dispatch, state }) {
         dispatch('stopLoopExchangeRate');
-
         const f = () => {
             if (!state.rateTokenIds || !state.rateTokenIds.length) {
                 return;
@@ -39,6 +38,9 @@ const actions = {
         rateTimer = null;
     },
     addRateTokens({ commit, state }, payload = []) {
+        const contains = payload.every(t => state.rateTokenIds.findIndex(n => n.tokenId === t.tokenId) >= 0);
+        if (contains) return;
+
         commit('setRateTokenIds', payload);
         rateToken({ tokenIdList: state.rateTokenIds }).then(data => {
             commit('setExchangeRate', data);
