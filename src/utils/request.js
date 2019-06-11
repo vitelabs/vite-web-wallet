@@ -33,6 +33,7 @@ export default function request({
     && (path.indexOf('?') < 0
         ? (path = `${ path }?${ qsStr }`)
         : (path = `${ path }${ qsStr }`));
+    console.log('xxxxxx', path);
     xhr.open(method, path, true);
     headers = Object.assign({ 'content-type': 'application/json; charset=utf-8' }, headers);
     Object.keys(headers).forEach(k => {
