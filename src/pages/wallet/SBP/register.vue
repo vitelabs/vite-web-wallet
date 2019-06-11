@@ -156,7 +156,6 @@ export default {
 
             if (this.regNameList.indexOf(nodeName) !== -1) {
                 this.nodeNameErr = this.$t('walletSBP.section1.nameUsed');
-
                 return;
             }
 
