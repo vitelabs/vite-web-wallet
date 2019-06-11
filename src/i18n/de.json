@@ -1,5 +1,6 @@
 {
     "lang": "DE",
+    "help": "Help",
     "start": "Start",
     "login": "Log In",
     "regAcc": "Register",
@@ -20,6 +21,7 @@
     "submitStaking": "Submit Staking",
     "withdrawHeight": "Expected Snapshot Height",
     "balance": "Balance",
+    "addrName": "Address{index}",
     "dealReminder": {
         "title": "Deal Notice",
         "describe": "Your order {amount} {ttoken} ({ftoken}/{ttoken}) at {time} is a complete deal, visit Order History to find out more."
@@ -37,13 +39,13 @@
     },
     "errCode": {
         "35003": "{name} ID-Konflikt aufgetreten, bitte später erneut versuchen",
-        "35004": "Fehler bei integriertem Contract, bitte später erneut versuchen (35004)",
+        "35004": "Invalid parameters",
         "35005": "Transaktionen werden zu häufig gesendet, bitte später erneut versuchen",
-        "35006": "Methode des Contracts existiert nicht, bitte später erneut versuchen（35006）",
+        "35006": "Contract method not exist",
         "36001": "Sie können keine Überweisung vornehmen, bis Sie eine Transaktion erhalten",
-        "36002": "System-Verifikationsfehler, bitte später erneut versuchen（36002）",
-        "36003": "System-Verifikationsfehler, bitte später erneut versuchen（36003）",
-        "36004": "System-Verifikationsfehler, bitte später erneut versuchen（36004）",
+        "36002": "System verify failed, please try again later",
+        "36003": "System verify failed, please try again later",
+        "36004": "System verify failed, please try again later",
         "36005": "Snapshot block height is illegal, please try again later",
         "37001": "Wrong order number format",
         "37002": "Wrong order type",
@@ -80,7 +82,8 @@
         "20": "Transfer",
         "21": "Transfer",
         "22": "Transfer",
-        "23": "Transfer"
+        "23": "Transfer",
+        "25": "Genesis"
     },
     "btn": {
         "cancel": "Cancel",
@@ -115,16 +118,16 @@
         "text3": "Please take proper precautions in ensuring that you accurately record and safely store your seed phrase. Even the slightest error will result in you not being able to successfully restore your address."
     },
     "preview": {
-        "t": "ViteX Beta Version",
-        "txt1": "This is ViteX Beta Version.",
-        "txt2": "All of the test tokens from test environment are with no actual value and can only be used for testing.",
-        "txt3": "Meanwhile, test tokens will be reset every now and then.",
+        "t": "Version 1.6.0",
+        "txt1": "Vite Web Wallet is a light node wallet launched by Vite Labs",
+        "txt2": "The wallet in the current version supports functions of query account balances, send and default receive transactions,  staking VITE for quota, SBP registration, voting ,etc.",
+        "txt3": "We are now working on the Vite DEX, stay tuned.",
         "v": "Current Version: {version}"
     },
     "pwdConfirm": {
-        "conf": "Open password-free mode within {time}",
+        "conf": "Open password-free mode to free you from entering password during every transaction process. ",
         "title": "Password",
-        "placeholder": "Please input password of wallet",
+        "placeholder": "Please input wallet password",
         "unlockAcc": "Please input password to unlock {name} account"
     },
     "quotaConfirm": {
@@ -145,8 +148,10 @@
         "change": "Switch to {len} Mnemonic Words"
     },
     "setting": {
-        "title": "Setting Account",
-        "unlock": "Unlock Secure Information",
+        "title": "Account Settings",
+        "config": "General",
+        "currency": "Default Currency",
+        "secure": "Security",
         "lang": "Sprache",
         "block": "Aktuelle Block-Höhe",
         "version": "Version",
@@ -155,10 +160,13 @@
         "sys": "System Portal",
         "open": "Vite Github",
         "addAddr": "Add Address",
-        "addrList": "Addresses of Accounts",
+        "addrList": "Address Management",
         "setDefault": "Select Default Address",
         "autoLogout": "Auto Logout Time",
-        "noPass": "Login Without Password",
+        "noPass": "Turn on password-free mode",
+        "explorer": "Block Explorer",
+        "netInfo": "Network Information",
+        "logoutDescribe": "Your account will logout automatically when you leave this page",
         "timeList": {
             "5": "5 Minutes",
             "10": "10 Minutes",
@@ -176,15 +184,22 @@
         "agreement": "Privacy Policy and Terms of Service",
         "hint": {
             "nameInput": "Please input account name",
-            "nameLong": "Account name cannot exceed 32 characters!",
+            "nameLong": "Name cannot exceed {long} characters!",
             "long": "Your input cannot exceed 32 characters!",
             "name": "Account name only supports Chinese, English, numbers and underscores",
             "consistency": "Please enter the same password!",
             "pwFormat": "Wrong password format. The password only supports English, half-width symbols, numbers."
         }
     },
-    "startImport": {
-        "title": "Import",
+    "startRecord": {
+        "agreeList": [
+            "I understand that if I lose my mnemonic words, I will not be able to access my account.",
+            "I understand that if I forget or lose my mnemonic words, no one can guarantee the restoration of my assets.",
+            "I have already written down or securely stored my mnemonic words."
+        ]
+    },
+    "keystore": {
+        "title": "Keystore",
         "dragDrop": {
             "text": "Drag and drop files there",
             "err1": "Imported illegal file!",
@@ -193,8 +208,154 @@
             "hint": "Noted that login by importing keystore file cannot support creating multi addresses, using mnemonic seed phrase is recommended in cross-platform situations."
         }
     },
+    "tokenCard": {
+        "moreRecords": "More Records",
+        "others": "Others",
+        "assetSpread": "Asset Distribution",
+        "heads": {
+            "name": "Name",
+            "balance": "Balance",
+            "onroad": "Wallet unreceived amount",
+            "gate": "Wallet cross-chain gateway",
+            "totalExAmount": "Exchange total balance",
+            "availableExAmount": "Exchange available balance"
+        },
+        "actionType": {
+            "SEND": "Transfer",
+            "RECEIVE": "Receive",
+            "CHARGE": "Cross-chain receive",
+            "WITHDRAW": "Cross-chain transfer",
+            "EXCHARGE": "Deposit to exchange",
+            "EXWITHDRAW": "Withdraw to wallet",
+            "EXRECRODS": "Exchange transaction history",
+            "RECRODS": "Cross-chain transaction history"
+        },
+        "addToken": {
+            "title": "Add Token",
+            "placeholder": "Please input token name or TokenID",
+            "lTxt": "Cancel",
+            "rTxt": "Add"
+        },
+        "type": {
+            "native": "Native tokens",
+            "crossGate": "Cross-chain tokens"
+        },
+        "assetType": {
+            "TOTAL": "All assets estimated value",
+            "EX": "Exchange assets estimated value",
+            "WALLET": "Wallet assets estimated value"
+        },
+        "tokenInfo": {
+            "tabName": "Details",
+            "title": "{tokenSymbol} Information",
+            "saveGate": "Save",
+            "labels": {
+                "tokenId": "TokenID",
+                "title": "{tokenSymbol} Address",
+                "address": "Mintage Address",
+                "tokenName": "Name",
+                "totalSupply": "Total Supply",
+                "decimals": "Decimals",
+                "isReIssuable": "Type",
+                "time": "Issuance Date"
+            },
+            "reIssuable": {
+                "true": "Re-issuable",
+                "false": "Not re-issuable"
+            }
+        },
+        "gateInfo": {
+            "gateSetting": "点击设置网关",
+            "tabName": "Gateway Details",
+            "selfdefined": "Customize Gateway",
+            "officalNet": "Website",
+            "introduction": "Description",
+            "token": "Issued Token",
+            "setting": "Settings",
+            "nodeDesc": "User Guide:",
+            "settingPlaceholder": "Please input gateway link address"
+        },
+        "depositRecord": {
+            "tabName": "Deposit History",
+            "heads": [
+                "Time",
+                "Amount",
+                "Status",
+                "VITE Chain Hash",
+                "{outChain} Chain Hash"
+            ],
+            "statusMap": {
+                "OPPOSITE_PROCESSING": "{outChain} Chain Unconfirmed",
+                "OPPOSITE_CONFIRMED": "Gateway has received",
+                "TOT_CONFIRMED": "Completed",
+                "BELOW_MINIMUM": "VITE Chain Unconfirmed",
+                "TOT_PROCESSING": "Completed"
+            }
+        },
+        "withdrawRecord": {
+            "tabName": "Transfer History",
+            "heads": [
+                "Time",
+                "Amount",
+                "Status",
+                "VITE Chain Hash",
+                "{outChain} Chain Hash"
+            ],
+            "statusMap": {
+                "TODO": "VITE Chain Unconfirmed",
+                "TOT_PROCESSING": "VITE Confirmed",
+                "TOT_NOT_RECEIVED": "Transfer Failed",
+                "TOT_CONFIRMED": "Gateway has received",
+                "OPPOSITE_PROCESSING": "{outChain} chain unconfirmed",
+                "OPPOSITE_CONFIRMED": "Completed"
+            }
+        },
+        "receive": {
+            "title": "Receive",
+            "codeTips": "Scan the QR code and transfer {tokenSymbol} to me",
+            "addressTitle": "Recipient Address",
+            "amountTitle": "Receive Amount",
+            "amountPlaceholder": "Please input receive amount"
+        },
+        "charge": {
+            "title": "Cross-Chain Receive",
+            "addrErr": "Something went wrong with gateway node, please check your network settings",
+            "addressTitle": "Recipient Address",
+            "codeTips": "Scan QR code to deposit. Please transfer with the wallet that supports {tokenSymbol}",
+            "tips": [
+                "Cross-Chain Receive operation will do {tokenSymbol} cross-chain mapping to VITE network, you can still transfer the assets after receiving them",
+                "You can only send {tokenSymbol} through this address and the amount cannot be less than {min}",
+                "When the transaction is confirmed, you will receive the asset after 5 minutes, kindly wait in patient"
+            ]
+        },
+        "withdraw": {
+            "title": "Cross-Chain Transfer",
+            "balanceErrMap": {
+                "notEnough": "Insufficient Balance",
+                "overMax": "Transfer amount must be less than {max}",
+                "lessMin": "Transfer amount must be greater than {min}"
+            },
+            "feeTips": "Transaction fee amount is set by gateway operator",
+            "addressErr": "Address format is incorrect",
+            "labels": {
+                "balance": "Balance",
+                "address": "Address",
+                "amount": "Amount",
+                "fee": "Fee",
+                "all": "All"
+            },
+            "amountPlaceholder": "Please input transfer amount which should not be less than {min}",
+            "addressPlaceholder": "Please input transfer address",
+            "successTips": "Transfer request has been sent",
+            "failTips": "An error occurred in gateway node, please check the network settings"
+        },
+        "nodeErr": "Gateway node is invalid, please check the gateway settings"
+    },
     "wallet": {
-        "title": "Assets",
+        "title": "Quota Management",
+        "help": {
+            "title": "Quick Understanding of Quota"
+        },
         "transfer": "Transfer",
         "getTestToken": "Get Test Tokens",
         "transDetail": "More Transaction Details",
@@ -205,6 +366,7 @@
         "sum": "Amount",
         "remarks": "Comment",
         "remarksLong": "{len} bytes left",
+        "totalAsset": "Total Assets",
         "placeholder": {
             "amount": "Please input amount",
             "remarks": "Please input comments",
@@ -238,7 +400,9 @@
         "pledgeFail": "Failed to Submit",
         "canclePledgeFail": "Failed",
         "maturity": "Staking has expired!",
-        "maxAmt": "Withdraw amount should be in (0, {amount}]",
+        "minAmt": "Withdraw amount cannot be less than {num} VITE",
+        "gotoStake": "Please Staking enough VITE first",
+        "maxAmt": "Withdraw amount should be in [{minAmount}, {maxAmount}]",
         "cancelLimitAmt": "Staking amount cannot be less than {num}",
         "withdrawalStaking": "Withdrawal of Staked Token",
         "VX": "Mining VX",
@@ -248,7 +412,7 @@
                 "t1": "What is Quota?",
                 "txt1": "In the Vite system, users do not purchase the gas required for a transaction by paying a fee, but acquire the computing resource through a quota-based model. Required quota for sending a transaction = the basic quota (request) + quota (the attached text data), quota required to accept a transaction = the basic quota (response). This quota-based resource configuration protocol allows users to obtain higher resource quotas in two ways: Staking VITE to obtain quota and running PoW.",
                 "t2": "What is Staking?",
-                "txt2": "In the Vite system, the user can stake VITE to obtain a certain amount of quota. The minimum value for staking is 10 VITE, and there is no maximum limit; meanwhile, Vite system also supports that the A-address stakes a part of the VITE and allocates the obtained quota to the B address. When users apply to stake, VITE will be sent to the smart contract address instead of another user, and only the user who applies for staking has access to manage the staking amount.",
+                "txt2": "In the Vite system, the user can stake VITE to obtain a certain amount of quota. The minimum value for staking is 134 VITE, and there is no maximum limit; meanwhile, Vite system also supports that the A-address stakes a part of the VITE and allocates the obtained quota to the B address. When users apply to stake, VITE will be sent to the smart contract address instead of another user, and only the user who applies for staking has access to manage the staking amount.",
                 "t3": "What is PoW?",
                 "txt3": "Proof of Work (PoW), is a protocol to confirm that you have done a certain amount of work, and is also an economic measure to deter DDoS attacks and other service abuse. It requires the initiator to conduct a certain amount of computing, which means that it may take some time for the computer. In the Vite system, users can obtain a free quota by running the PoW, and also can send a transaction without any annotated information through obtained quota."
             },
@@ -296,6 +460,17 @@
         "register": "SBP Registration",
         "cancel": "SBP Cancellation",
         "cancelBtn": "Cancel",
+        "rewardBtn": "Claim Rewards",
+        "noReward": "No Rewards",
+        "rewardConfirm": {
+            "title": "Claim Rewards",
+            "describe1": "Rewards that are available for claiming update at 13:00:00 (UTC+8) every day, till {time} you can claim",
+            "describe2": "Query mining rewards details, you can",
+            "describe3": "click here",
+            "describe4": "Rewards will send to your Vite Web Wallet address after submitting claim request, please check it in Wallet Home Page. Note: Don't repeat claim actions.",
+            "leftBtn": "Not Now",
+            "rightBtn": "Claim All"
+        },
         "confirm": {
             "title": "Registration of SBP candidates",
             "describe": "The {amount} VITE of current address will be locked about 90 days when you submit the registration,  the amount will be returned to staking address after being unlocked",
@@ -404,6 +579,9 @@
             "voteErr": "Failed to vote, please try again"
         }
     },
+    "assets": {
+        "title": "Assets"
+    },
     "walletConversion": {
         "title": "VITE Conversion",
         "help": {
@@ -422,8 +600,10 @@
             "success": "Conversion Successful. It may take approx 20 minutes to get VITE into your account after the Ethereum transaction is confirmed."
         }
     },
+    "tradeCenter": {
+        "title": "Exchange"
+    },
     "trade": {
-        "title": "Exchange",
         "search": "Search",
         "txPair": "Pair",
         "price": "Price",
@@ -438,6 +618,18 @@
         "newOrderFail": "Order Failed",
         "depthView": "Depth",
         "klineView": "TradingView",
+        "txPairDetail": {
+            "title": "Trading pair details",
+            "24h": "24h",
+            "openPrice": "Open",
+            "quantity": "Market Volume",
+            "amount": "Base volume",
+            "status": "Status",
+            "latest": "Latest",
+            "buy": "Buy price",
+            "sell": "Sell price",
+            "diff": "diff"
+        },
         "dexToken": {
             "title": "Open Trading Pair",
             "fee": "Token listing Fees",
@@ -512,8 +704,9 @@
         "title": "Funds",
         "search": "Please input token name",
         "operate": "Action",
+        "all": "All",
         "confirmTable": {
-            "title": "Records",
+            "title": "Detailed Record",
             "heads": [
                 "Date",
                 "Token",
@@ -535,7 +728,7 @@
             "rowMap": {
                 "recharge": "Deposit to Exchange",
                 "withdraw": "Withdraw to Wallet",
-                "detail": "Trade",
+                "detail": "Details",
                 "sideMap": {
                     "1": "Deposit",
                     "2": "Withdraw"
