@@ -1,5 +1,6 @@
 <template>
     <div class="account-head-wrapper">
+        <div class="head__group">
         <div class="head__item">
             <img class="icon" src="~assets/imgs/head_acc.png" />
             <div class="head-right">
@@ -46,6 +47,8 @@
                 </span>
             </div>
         </div>
+        </div>
+        <div class="head__group">
         <div class="worth head__item">
             <img class="icon" src="~assets/imgs/head_asset.png" />
             <div class="assets">
@@ -61,6 +64,7 @@
                 :labelGen="labelGen"
                 :title="$t('tokenCard.assetSpread')"
             ></Pie>
+        </div>
         </div>
     </div>
 </template>
@@ -251,19 +255,24 @@ export default {
     background: #fff;
     border-radius: 2px;
     display: flex;
-    flex-wrap: nowrap;
     min-height: 124px;
     flex-wrap: wrap;
     align-items: center;
     box-sizing: border-box;
-    min-width: 1550px;
     justify-content: space-between;
+    padding:10px 0;
+    box-sizing: border-box;
+    .head__group{
+        display:flex;
+        flex-grow: 1;
+    }
     .head__item {
         border-left: 1px solid rgba(227, 235, 245, 0.6);
         display: flex;
         align-items: center;
         padding: 0 30px;
-        min-height: 84px;
+        min-height: 85px;
+        flex-grow: 1;
         &:first-child{
             border-left: none;
         }
@@ -341,7 +350,6 @@ export default {
         }
         &.worth {
             display: flex;
-            justify-content: space-between;
             .assets {
                 display: flex;
                 flex-direction: column;
