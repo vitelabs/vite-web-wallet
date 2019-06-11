@@ -743,7 +743,7 @@
             "placeholder": "Please input withdrawal amount",
             "btn": "Withdraw"
         },
-        "zero": "Hide small tokens"
+        "zero": "Hide Low Balances"
     },
     "tradeOpenOrders": {
         "cancelErr": "You are trying too ofter, please try again later.",
