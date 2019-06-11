@@ -206,6 +206,7 @@ export default {
     overflow: scroll;
     &.no-padding{
         padding: 0;
+        height: 360px;
     }
     .content__item{
         min-height: 40px;
