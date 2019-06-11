@@ -5,8 +5,8 @@
     "login": "Log In",
     "regAcc": "Register",
     "dexToken": "Open Trading Pairs",
-    "unlockAcc": "Unlock current account",
-    "changeAcc": "Switch to other account",
+    "unlockAcc": "Unlock Current Account",
+    "changeAcc": "Switch to Other Account",
     "existingAcc": "Existing Accounts",
     "restore": "Import Mnemonic Words",
     "register": "Sign Up",
@@ -15,7 +15,7 @@
     "resetAcc": "Reset Your Account",
     "logout": "Logout",
     "blockHeight": "Snapshot Block Height",
-    "accountName": "Account name",
+    "accountName": "Account Name",
     "action": "Action",
     "stakingAmount": "Staking Amount",
     "submitStaking": "Submit Staking",
@@ -178,7 +178,7 @@
     "startCreate": {
         "input": "Please input password",
         "again": "Please input password again",
-        "choose": "Choose account",
+        "choose": "Choose Account",
         "finish": "Done",
         "agreementPre": "I agree to Vite Wallet and ViteX's",
         "agreement": "Privacy Policy and Terms of Service",
@@ -211,24 +211,24 @@
     "tokenCard": {
         "moreRecords":"More Records",
         "others":"Others",
-        "assetSpread":"Asset Distribution",
+        "assetSpread":"Portfolio",
         "heads":{
             "name":"Name",
             "balance":"Balance",
-            "onroad":"Wallet unreceived amount",
-            "gate":"Wallet cross-chain gateway",
-            "totalExAmount":"Exchange total balance",
-            "availableExAmount":"Exchange available balance"
+            "onroad":"Wallet Unreceived Amount",
+            "gate":"Wallet Cross-Chain Gateway",
+            "totalExAmount":"Exchange Total Balance",
+            "availableExAmount":"Exchange Available Balance"
         },
         "actionType": {
             "SEND": "Transfer",
             "RECEIVE": "Receive",
-            "CHARGE": "Cross-chain receive",
-            "WITHDRAW": "Cross-chain transfer",
-            "EXCHARGE": "Deposit to exchange",
-            "EXWITHDRAW": "Withdraw to wallet",
-            "EXRECRODS": "Exchange transaction history",
-            "RECRODS":"Cross-chain transaction history"
+            "CHARGE": "Receive",
+            "WITHDRAW": "Transfer",
+            "EXCHARGE": "Deposit",
+            "EXWITHDRAW": "Withdraw",
+            "EXRECRODS": "History",
+            "RECRODS":"History"
         },
         "addToken": {
             "title": "Add Token",
@@ -237,13 +237,13 @@
             "rTxt": "Add"
         },
         "type": {
-            "native": "Native tokens",
-            "crossGate": "Cross-chain tokens"
+            "native": "Native Tokens",
+            "crossGate": "Cross-Chain Tokens"
         },
         "assetType":{
-            "TOTAL":"All assets estimated value",
-            "EX":"Exchange assets estimated value",
-            "WALLET":"Wallet assets estimated value"
+            "TOTAL":"All Assets Estimated Value",
+            "EX":"Exchange Assets Estimated Value",
+            "WALLET":"Wallet Assets Estimated Value"
         },
         "tokenInfo": {
             "tabName": "Details",
@@ -265,7 +265,7 @@
             }
         },
         "gateInfo": {
-            "gateSetting":"点击设置网关",
+            "gateSetting":"Configure Gateway",
             "tabName": "Gateway Details",
             "selfdefined": "Customize Gateway",
             "officalNet": "Website",
@@ -311,7 +311,7 @@
             "addressTitle": "Recipient Address",
             "codeTips": "Scan QR code to deposit. Please transfer with the wallet that supports {tokenSymbol}",
             "tips": [
-                "Cross-Chain Receive operation will do {tokenSymbol} cross-chain mapping to VITE network, you can still transfer the assets after receiving them",
+                "Cross-Chain Receive operation will do {tokenSymbol} Cross-Chain mapping to VITE network, you can still transfer the assets after receiving them",
                 "You can only send {tokenSymbol} through this address and the amount cannot be less than {min}",
                 "When the transaction is confirmed, you will receive the asset after 5 minutes, kindly wait in patient"
             ]
@@ -376,9 +376,9 @@
             "title": "Quick Understanding of Quota"
         },
         "myQuota": "My Quota",
-        "maxTxNum": "Maximum number of Txs",
+        "maxTxNum": "Maximum Number of Txs",
         "beneficialAddr": "Quota Recipient Address",
-        "fromAddr": "Deduction address",
+        "fromAddr": "Deduction Address",
         "time": "Staking Freeze Duration",
         "aboutDays": "Approx {day} days",
         "amountPlaceholder": "Please input staking amount, minimum {num} VITE",
@@ -463,11 +463,11 @@
             "title": "Registration of SBP candidates",
             "describe": "The {amount} VITE of current address will be locked about 90 days when you submit the registration,  the amount will be returned to staking address after being unlocked",
             "leftBtn": "Not register yet",
-            "rightBtn": "Ready to register",
+            "rightBtn": "Ready to Register",
             "edit": {
                 "title": "Change block creation address",
                 "placeholder": "please input new block creation address",
-                "btn": "Confirm to change"
+                "btn": "Confirm to Change"
             }
         },
         "section1": {
@@ -529,8 +529,8 @@
             "voteStatusMap": {
                 "voted": "Voting Successful",
                 "voting": "Voting",
-                "canceling": "Under revoking",
-                "voteNotWork": "Revoked voting"
+                "canceling": "Revoking in Process",
+                "voteNotWork": "Revoked Voting"
             },
             "hoverHelp": "The node {nodeName} you are voted for has been revoked, you may vote again directly or revoke your voting, If you do not do so, your original voting result will be recovered after the {nodeName} re-registering",
             "confirm": {
