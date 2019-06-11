@@ -172,7 +172,7 @@ export default {
             height: 100%;
             min-width: 1200px;
             .assets{
-                padding:0 10px;
+                padding: 0 10px;
             }
         }
 
