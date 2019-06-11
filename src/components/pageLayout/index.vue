@@ -171,6 +171,9 @@ export default {
             width: 100%;
             height: 100%;
             min-width: 1200px;
+            .assets{
+                padding:0 10px;
+            }
         }
 
         .page-wrapper {

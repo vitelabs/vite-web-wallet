@@ -255,15 +255,18 @@ export default {
     min-height: 124px;
     flex-wrap: wrap;
     align-items: center;
-    padding: 20px 0;
     box-sizing: border-box;
     min-width: 1550px;
+    justify-content: space-between;
     .head__item {
-        border-right: 1px solid rgba(227, 235, 245, 0.6);
+        border-left: 1px solid rgba(227, 235, 245, 0.6);
         display: flex;
         align-items: center;
         padding: 0 30px;
         min-height: 84px;
+        &:first-child{
+            border-left: none;
+        }
         .icon {
             height: 34px;
             width: 34px;
@@ -276,10 +279,10 @@ export default {
             box-sizing: border-box;
             background: #f3f6f9;
             color: #bdc1d1;
-            padding: 9px;
+            padding: 5px 9px;
             display: flex;
             align-items: center;
-            margin: 5px auto;
+            margin: 10px auto 5px;
             display: flex;
             position: relative;
             font-family: $font-normal;
@@ -330,7 +333,7 @@ export default {
         }
 
         &.chart {
-            border-right: none;
+            border-left: none;
             .pie-chart {
                 margin-left: 30px;
                 padding: 5px 0;
@@ -339,7 +342,6 @@ export default {
         &.worth {
             display: flex;
             justify-content: space-between;
-            border-right: none;
             .assets {
                 display: flex;
                 flex-direction: column;
