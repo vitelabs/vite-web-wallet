@@ -48,6 +48,9 @@ import { debounce } from 'lodash';
 import AssetSwitch from './assetSwitch';
 
 const filterFunc = filterObj => t => {
+    if (!t.tokenName) {
+        return false;
+    }
     if (!filterObj) {
         return true;
     }
@@ -70,11 +73,11 @@ export default {
         };
     },
     watch: {
-        otherWhithBalance(val) {
+        otherWhithBalance: debounce(function (val) {
             gateStorage.bindTokens(val.map(t => {
                 return { tokenId: t.tokenId, gateInfo: {} };
             }));
-        },
+        }, 2000),
         showTokenIds(val) {
             this.$store.dispatch('addRateTokens', val);
         }

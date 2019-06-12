@@ -140,7 +140,7 @@ export default {
                 ...this.$store.getters.userStorageTokenList,
                 ...this.$store.getters.otherWhithBalance,
                 ...this.$store.getters.officalGateTokenList
-            ];
+            ].filter(t => t.tokenName);
         },
         currencySymbol() {
             return this.$store.getters.currencySymbol;
@@ -164,7 +164,8 @@ export default {
                         return {
                             assetBtc: t.totalExAssetBtc,
                             asset: t.totalExAsset,
-                            tokenSymbol: t.tokenSymbol
+                            tokenSymbol: t.tokenSymbol,
+                            index: t.index
                         };
                     })
                     .sort((a, b) => bigNumber.compared(b.asset, a.asset));
@@ -175,7 +176,8 @@ export default {
                         return {
                             assetBtc: t.walletAssetBtc,
                             asset: t.walletAsset,
-                            tokenSymbol: t.tokenSymbol
+                            tokenSymbol: t.tokenSymbol,
+                            index: t.index
                         };
                     })
                     .sort((a, b) => bigNumber.compared(b.asset, a.asset));

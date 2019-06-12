@@ -233,7 +233,7 @@
             "balance":"钱包余额",
             "onroad":"钱包待接收金额",
             "gate":"钱包跨链网关",
-            "totalExAmount":"交易所总余额度",
+            "totalExAmount":"交易所总余额",
             "availableExAmount":"交易所可用余额"
         },
         "actionType": {
@@ -257,7 +257,7 @@
         },
         "addToken": {
             "title": "添加代币",
-            "placeholder": "请输入代币名称或TokenID",
+            "placeholder": "请输入代币名称",
             "lTxt": "取消",
             "rTxt": "添加"
         },
@@ -632,7 +632,7 @@
             "latest": "最新价",
             "buy": "买一价",
             "sell": "卖一价",
-            "diff": "价差"
+            "diff": "买卖价差"
         },
         "dexToken": {
             "title": "开通交易对",
