@@ -152,6 +152,7 @@ export default {
         display: flex;
         align-items: center;
         justify-content: center;
+        margin-right: 30px;
     }
     &__graph {
         height: 94px;

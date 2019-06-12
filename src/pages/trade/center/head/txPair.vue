@@ -99,10 +99,22 @@ export default {
             return this.depthSell[this.depthSell.length - 1].price;
         },
         diff() {
+            if (!this.sellOne && !this.buyOne) {
+                return '--';
+            }
             if (!this.sellOne) {
                 return `-${ this.buyOne }`;
             }
-            return this.sellOne - (this.buyOne || 0);
+            return this.formatNum(this.sellOne - (this.buyOne || 0));
+        }
+    },
+    methods: {
+        formatNum(num, fix = 8) {
+            if (this.activeTxPair && this.activeTxPair.toDecimals < fix) {
+                fix = this.activeTxPair.toDecimals;
+            }
+
+            return BigNumber.formatNum(num, fix);
         }
     }
 };

@@ -19,8 +19,7 @@ const client = getClient('', xhr => {
     }
     return Promise.reject(xhr.responseText);
 });
-export const getGateInfos = () =>
-    client({ path: 'certified_gateways', host: process.env.gatewayInfosServer });
+export const getGateInfos = () => client({ path: 'certified_gateways', host: process.env.gatewayInfosServer });
 
 export const getChargeAddr = ({ tokenId, addr: walletAddress }, url) =>
     client({
@@ -136,8 +135,12 @@ class GateWays {
 
     bindToken(tokenId, tokenInfo) {
         this.updateFromStorage();
-        this.data = this.data.filter(t => t.tokenId !== tokenId);
-        this.data.push({ tokenId, ...tokenInfo });
+        const index = this.data.findIndex(t => t.tokenId !== tokenId);
+        if (index < 0) {
+            this.data.push({ tokenId, ...tokenInfo });
+        } else {
+            this.data[index] = { tokenId, ...tokenInfo };
+        }
         this.saveToStorage();
     }
 
