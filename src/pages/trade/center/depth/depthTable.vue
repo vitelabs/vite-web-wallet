@@ -76,7 +76,7 @@ export default {
             return false;
         },
         formatNum(num, type, fix = 8) {
-            const decimals = type === 'ttoken' ? 'toDecimals' : 'fromDecimals';
+            const decimals = type === 'ttoken' ? 'pricePrecision' : 'quantityPrecision';
 
             if (this.activeTxPair && this.activeTxPair[decimals] < fix) {
                 fix = this.activeTxPair[decimals];
