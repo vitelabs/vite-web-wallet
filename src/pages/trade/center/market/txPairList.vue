@@ -175,13 +175,13 @@ export default {
             return list.sort((a, b) => {
                 switch (this.currentRule) {
                 case 'priceUp':
-                    return a.price - b.price;
+                    return a.closePrice - b.closePrice;
                 case 'priceDown':
-                    return b.price - a.price;
+                    return b.closePrice - a.closePrice;
                 case 'upDownUp':
-                    return a.priceChange - b.priceChange;
+                    return +a.priceChange - +b.priceChange;
                 case 'upDownDown':
-                    return b.priceChange - a.priceChange;
+                    return +b.priceChange - +a.priceChange;
                 case 'txNumUp':
                     return a.amount - b.amount;
                 case 'txNumDown':
