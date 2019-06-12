@@ -50,7 +50,7 @@ export default {
             const shownTokens = [ ...this.$store.getters.defaultTokenList, ...this.$store.getters.officalGateTokenList, ...this.$store.getters.userStorageTokenList ];
             const shownTokenIds = shownTokens.map(t => t.tokenId).concat(this.$store.getters.otherWhithBalance);
             const allTokens = this.$store.state.ledger.allTokens;
-            return allTokens.filter(t => shownTokenIds.indexOf(t.tokenId) === -1).filter(t => t.tokenId.indexOf(this.userInput) >= 0 || t.tokenName.indexOf(this.userInput) >= 0 || t.tokenSymbol.indexOf(this.userInput) >= 0).slice(0, MAX_RES_NUMS);
+            return allTokens.filter(t => shownTokenIds.indexOf(t.tokenId) === -1).filter(t => t.tokenName.indexOf(this.userInput.trim()) >= 0 || t.tokenSymbol.indexOf(this.userInput.trim()) >= 0).slice(0, MAX_RES_NUMS);
         },
         BtnUnuse() {
             return this.selectedTokenIds.length === 0;
