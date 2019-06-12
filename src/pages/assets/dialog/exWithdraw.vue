@@ -50,7 +50,7 @@ export default {
     },
     methods: {
         handleUserInputAmount: debounce(function (v) {
-            this.isAll = false;
+            this.isWithdrawAll = false;
             this.errTips = this.testAmount(v.target.value);
         }, 500),
         testAmount(val) {
