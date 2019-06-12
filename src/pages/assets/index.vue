@@ -37,7 +37,6 @@
 
 <script>
 import pageLayout from 'components/pageLayout/index';
-import syncBlock from 'components/syncBlock';
 import guide from 'components/guide';
 import tokenCard from './tokenCard';
 import accountHead from './head';
@@ -63,7 +62,7 @@ const filterFunc = filterObj => t => {
     return !(NOTMatchNoZero || NOTMatchFilterKey);
 };
 export default {
-    components: { pageLayout, accountHead, guide, syncBlock, tokenCard, TokenFilter, AssetSwitch },
+    components: { pageLayout, accountHead, guide, tokenCard, TokenFilter, AssetSwitch },
     data() {
         return {
             isShowTrans: false,

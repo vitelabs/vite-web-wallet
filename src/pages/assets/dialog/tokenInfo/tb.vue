@@ -84,6 +84,7 @@ import Pagination from 'components/pagination.vue';
 import { getDepositRecords, getWithdrawRecords } from 'services/gate.js';
 import shortify from 'utils/ellipsisAddr';
 import b from 'utils/bigNumber';
+import openUrl from 'utils/openUrl';
 import d from 'dayjs';
 const pageSize = 10;
 
@@ -133,13 +134,13 @@ export default {
             if (!hash) {
                 return;
             }
-            window.open(this.inTxExplorerFormat.replace('{$tx}', hash));
+            openUrl(this.inTxExplorerFormat.replace('{$tx}', hash));
         },
         gotoOutHash(hash) {
             if (!hash) {
                 return;
             }
-            window.open(this.outTxExplorerFormat.replace('{$tx}', hash));
+            openUrl(this.outTxExplorerFormat.replace('{$tx}', hash));
         },
         updateData(pageNum = this.currentPage) {
             if (!this.type) {

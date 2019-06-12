@@ -59,6 +59,7 @@ block originContent
 import { gateStorage, getChargeAddr } from 'services/gate';
 import { getTokenIcon } from 'utils/tokenParser';
 import { getExplorerLink } from 'utils/getLink';
+import openUrl from 'utils/openUrl';
 import Tb from './tb';
 
 export default {
@@ -111,7 +112,7 @@ export default {
     methods: {
         goToTokenDetail() {
             const l = `${ getExplorerLink() }/token/${ this.token.tokenId }`;
-            window.open(l);
+            openUrl(l);
         },
         getIcon(id) {
             return getTokenIcon(id);
