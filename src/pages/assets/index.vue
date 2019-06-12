@@ -69,11 +69,11 @@ export default {
         };
     },
     watch: {
-        otherWhithBalance:debounce(function(val) {
+        otherWhithBalance: debounce(function (val) {
             gateStorage.bindTokens(val.map(t => {
                 return { tokenId: t.tokenId, gateInfo: {} };
             }));
-        },2000),
+        }, 2000),
         showTokenIds(val) {
             this.$store.dispatch('addRateTokens', val);
         }
