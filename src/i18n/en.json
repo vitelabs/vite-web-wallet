@@ -616,7 +616,7 @@
             "latest": "Latest",
             "buy": "Buy price",
             "sell": "Sell price",
-            "diff": "diff"
+            "diff": "Spread"
         },
         "dexToken": {
             "title": "Open Trading Pair",
