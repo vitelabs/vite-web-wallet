@@ -44,7 +44,9 @@ import { debounce } from 'lodash';
 import AssetSwitch from './assetSwitch';
 
 const filterFunc = filterObj => t => {
-    if(!t.tokenName){return false;}
+    if (!t.tokenName) {
+        return false;
+    }
     if (!filterObj) {
         return true;
     }
