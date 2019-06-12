@@ -40,7 +40,7 @@
                 <div class="quantity item-left">
                     <div class="token-title">{{ $t('trade.head.quantity') }}</div>
                     <div class="token-content">
-                        {{ activeTxPair && activeTxPair.amount ? formatNum(activeTxPair.amount, 1) + ' ' + activeTxPair.quoteTokenSymbol : '--' }}
+                        {{ activeTxPair && activeTxPair.amount ? formatNum(activeTxPair.amount, 1) + ' ' + activeTxPair.originQuoteTokenSymbol : '--' }}
                     </div>
                 </div>
             </div>
