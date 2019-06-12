@@ -8,7 +8,7 @@
         </ul>
 
         <ul class="right-lab-list">
-            <div class="tab __pointer" @click="goHelp">{{ $t('help') }}</div>
+            <!-- <div class="tab __pointer" @click="goHelp">{{ $t('help') }}</div> -->
             <div v-show="isHaveUsers && active.indexOf('assets') !== -1"
                  @click="getTestToken" class="tab __pointer">{{ $t('wallet.getTestToken') }}</div>
             <div v-show="!isLogin" @click="dexStart" class="tab __pointer">
