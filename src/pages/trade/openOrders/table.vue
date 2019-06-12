@@ -16,11 +16,11 @@
                     'buy': v.side===0,
                     'sell': v.side===1
                 }">{{ $t("tradeOrderHistory.side")[v.side] }}</div>
-                <div>{{ v.price + ' ' + v.quoteTokenSymbol }}</div>
-                <div>{{ v.quantity + ' ' + v.tradeTokenSymbol }}</div>
-                <div>{{ v.executedQuantity + ' ' + v.tradeTokenSymbol }}</div>
+                <div>{{ v.price + ' ' + getOriginSymbol(v.quoteTokenSymbol) }}</div>
+                <div>{{ v.quantity + ' ' + getOriginSymbol(v.tradeTokenSymbol) }}</div>
+                <div>{{ v.executedQuantity + ' ' + getOriginSymbol(v.tradeTokenSymbol) }}</div>
                 <div>{{ `${(v.executedPercent*100).toFixed(2)}%` }}</div>
-                <div>{{ v.executedAvgPrice + ' ' + v.quoteTokenSymbol }}</div>
+                <div>{{ v.executedAvgPrice + ' ' + getOriginSymbol(v.quoteTokenSymbol) }}</div>
                 <div v-unlock-account v-on:unlocked="cancel(v)" class="click-able">
                     {{ $t("tradeOpenOrders.table.rowMap.cancel") }}
                 </div>
@@ -189,6 +189,9 @@ export default {
 
             this.unsubscribe();
             this.subscribe();
+        },
+        getOriginSymbol(symbol) {
+            return symbol.split('-')[0];
         },
         subscribe() {
             this.$store.dispatch('startOrderCurrent');

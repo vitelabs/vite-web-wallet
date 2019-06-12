@@ -14,12 +14,12 @@
                     'buy': v.side===0,
                     'sell': v.side===1
                 }">{{ $t("tradeOrderHistory.side")[v.side] }}</div>
-                <div>{{ v.price }} {{ v.quoteTokenSymbol }}</div>
-                <div>{{ v.quantity }} {{ v.tradeTokenSymbol }}</div>
-                <div>{{ v.executedQuantity }} {{v.tradeTokenSymbol }}</div>
+                <div>{{ v.price }} {{ getOriginSymbol(v.quoteTokenSymbol) }}</div>
+                <div>{{ v.quantity }} {{ getOriginSymbol(v.tradeTokenSymbol) }}</div>
+                <div>{{ v.executedQuantity }} {{getOriginSymbol(v.tradeTokenSymbol) }}</div>
                 <div>{{ `${(v.executedPercent*100).toFixed(2)}%` }}</div>
-                <div>{{ v.executedAvgPrice }} {{ v.quoteTokenSymbol }}</div>
-                <div>{{ v.fee }} {{ v.quoteTokenSymbol }}</div>
+                <div>{{ v.executedAvgPrice }} {{ getOriginSymbol(v.quoteTokenSymbol) }}</div>
+                <div>{{ v.fee }} {{ getOriginSymbol(v.quoteTokenSymbol) }}</div>
                 <div>{{ $t('tradeOrderHistory.table.rowMap.statusMap')[v.status] }}</div>
                 <div @click="showDetail(v)" class="click-able">
                     {{ $t("tradeOrderHistory.table.rowMap.detail") }}
@@ -70,15 +70,18 @@ export default {
                 const o = this.detailData[k];
                 return [
                     d.unix(o.time).format('YYYY-MM-DD HH:mm'),
-                    `${ o.price } ${ o.quoteTokenSymbol }`,
-                    `${ o.quantity } ${ o.tradeTokenSymbol }`,
-                    `${ o.fee } ${ o.quoteTokenSymbol }`,
-                    `${ o.amount } ${ o.quoteTokenSymbol }`
+                    `${ o.price } ${ this.getOriginSymbol(o.quoteTokenSymbol) }`,
+                    `${ o.quantity } ${ this.getOriginSymbol(o.tradeTokenSymbol) }`,
+                    `${ o.fee } ${ this.getOriginSymbol(o.quoteTokenSymbol) }`,
+                    `${ o.amount } ${ this.getOriginSymbol(o.quoteTokenSymbol) }`
                 ];
             });
         }
     },
     methods: {
+        getOriginSymbol(symbol) {
+            return symbol.split('-')[0];
+        },
         close() {
             this.detailData = [];
             this.detailConfirm = false;

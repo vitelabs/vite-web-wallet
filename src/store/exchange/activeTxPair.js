@@ -49,6 +49,8 @@ const getters = {
         activeTxPair.upDown = upDown;
         activeTxPair.upDownPrev = +upDownPrev ? upDownPrev : '0';
         activeTxPair.upDownPercent = activeTxPair.priceChangePercent ? `${ BigNumber.multi(activeTxPair.priceChangePercent, 100, 2) }%` : '';
+        activeTxPair.originQuoteTokenSymbol = activeTxPair.quoteTokenSymbol.split('-')[0] || '';
+        activeTxPair.originTradeTokenSymbol = activeTxPair.tradeTokenSymbol.split('-')[0] || '';
 
         return activeTxPair;
     }
