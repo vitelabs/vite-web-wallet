@@ -12,7 +12,7 @@
 
         <div class="dex-input-wrapper b">
             <span class="ex-order-token __ellipsis">
-                {{ $t(`trade.${orderType}.price`, { token: originTradeTokenSymbol }) }}
+                {{ $t(`trade.${orderType}.price`, { token: originQuoteTokenSymbol }) }}
             </span>
             <div class="else-input-wrapper" :class="{'err': priceErr}">
                 <span class="tips" :class="{'active':
@@ -27,7 +27,7 @@
 
         <div class="dex-input-wrapper">
             <span class="ex-order-token __ellipsis">
-                {{ $t(`trade.${orderType}.quantity`, { token: originQuoteTokenSymbol }) }}
+                {{ $t(`trade.${orderType}.quantity`, { token: originTradeTokenSymbol }) }}
             </span>
             <div class="else-input-wrapper" :class="{'err': quantityErr}">
                 <span class="tips" :class="{'active':
@@ -46,7 +46,7 @@
 
         <div class="dex-input-wrapper">
             <span class="ex-order-token __ellipsis">
-                {{ $t('trade.quantityTitle', { quantity: originTradeTokenSymbol }) }}
+                {{ $t('trade.quantityTitle', { quantity: originQuoteTokenSymbol }) }}
             </span>
             <div class="else-input-wrapper" :class="{'err': amountErr}">
                 <span class="tips" :class="{'active':
