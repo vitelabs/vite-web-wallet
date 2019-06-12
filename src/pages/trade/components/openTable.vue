@@ -16,11 +16,11 @@
                     'buy': v.side===0,
                     'sell': v.side===1
                 }">{{ $t("tradeOrderHistory.side")[v.side] }}</div>
-                <div class="__tb_cell">{{ v.price + ' ' + v.quoteTokenSymbol }}</div>
-                <div class="__tb_cell">{{ v.quantity + ' ' + v.tradeTokenSymbol }}</div>
-                <div class="__tb_cell">{{ v.executedQuantity + ' ' + v.tradeTokenSymbol }}</div>
+                <div class="__tb_cell">{{ v.price + ' ' + getOriginSymbol(v.quoteTokenSymbol) }}</div>
+                <div class="__tb_cell">{{ v.quantity + ' ' + getOriginSymbol(v.tradeTokenSymbol) }}</div>
+                <div class="__tb_cell">{{ v.executedQuantity + ' ' + getOriginSymbol(v.tradeTokenSymbol) }}</div>
                 <div class="__tb_cell">{{ `${(v.executedPercent*100).toFixed(2)}%` }}</div>
-                <div class="__tb_cell">{{ v.executedAvgPrice + ' ' + v.quoteTokenSymbol }}</div>
+                <div class="__tb_cell">{{ v.executedAvgPrice + ' ' + getOriginSymbol(v.quoteTokenSymbol) }}</div>
                 <div v-unlock-account v-on:unlocked="cancel(v)" class="__tb_cell click-able">
                     {{ $t("tradeOpenOrders.table.rowMap.cancel") }}
                 </div>
@@ -64,6 +64,9 @@ export default {
         }
     },
     methods: {
+        getOriginSymbol(symbol) {
+            return symbol.split('-')[0];
+        },
         cancel(order) {
             const failSubmit = e => {
                 this.$toast(this.$t('tradeOpenOrders.confirm.failToast'), e);
