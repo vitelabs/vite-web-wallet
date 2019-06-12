@@ -12,7 +12,7 @@
 
         <div class="dex-input-wrapper b">
             <span class="ex-order-token __ellipsis">
-                {{ $t(`trade.${orderType}.price`, { token: ttokenShow }) }}
+                {{ $t(`trade.${orderType}.price`, { token: originTradeTokenSymbol }) }}
             </span>
             <div class="else-input-wrapper" :class="{'err': priceErr}">
                 <span class="tips" :class="{'active':
@@ -27,7 +27,7 @@
 
         <div class="dex-input-wrapper">
             <span class="ex-order-token __ellipsis">
-                {{ $t(`trade.${orderType}.quantity`, { token: ftokenShow }) }}
+                {{ $t(`trade.${orderType}.quantity`, { token: originQuoteTokenSymbol }) }}
             </span>
             <div class="else-input-wrapper" :class="{'err': quantityErr}">
                 <span class="tips" :class="{'active':
@@ -46,7 +46,7 @@
 
         <div class="dex-input-wrapper">
             <span class="ex-order-token __ellipsis">
-                {{ $t('trade.quantityTitle', { quantity: ttokenShow }) }}
+                {{ $t('trade.quantityTitle', { quantity: originTradeTokenSymbol }) }}
             </span>
             <div class="else-input-wrapper" :class="{'err': amountErr}">
                 <span class="tips" :class="{'active':
@@ -260,6 +260,12 @@ export default {
         },
         ftokenDetail() {
             return this.$store.state.exchangeTokens.ftoken;
+        },
+        originTradeTokenSymbol() {
+            return this.activeTxPair ? this.activeTxPair.tradeTokenSymbol.split('-')[0] : '';
+        },
+        originQuoteTokenSymbol() {
+            return this.activeTxPair ? this.activeTxPair.quoteTokenSymbol.split('-')[0] : '';
         },
         ftokenShow() {
             return this.activeTxPair ? this.activeTxPair.tradeTokenSymbol : '';
