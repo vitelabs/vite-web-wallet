@@ -170,7 +170,7 @@ export default {
             flex-direction: column;
             width: 100%;
             height: 100%;
-            min-width: 1200px;
+            min-width: 1350px;
             .assets{
                 padding: 0 10px;
             }

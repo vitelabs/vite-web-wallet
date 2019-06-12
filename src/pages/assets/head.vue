@@ -1,70 +1,66 @@
 <template>
     <div class="account-head-wrapper">
-        <div class="head__group">
-            <div class="head__item">
-                <img class="icon" src="~assets/imgs/head_acc.png" />
-                <div class="head-right">
-                    <div class="head-title">
-                        <span>{{ $t("accountName") }}</span>
-                        <img
-                            @click="startRename"
-                            class="edit __pointer"
-                            src="~assets/imgs/edit_default.svg"
-                        />
-                    </div>
-                    <div v-if="!isShowNameInput" class="name" @click="startRename">
-                        {{ account.name }}
-                    </div>
-                    <!-- <input fake_pass type="password" style="display:none"/> -->
-                    <form autocomplete="off" v-else>
-                        <input
-                            ref="nameInput"
-                            type="text"
-                            v-model="editName"
-                            :placeholder="account.name"
-                            @blur="rename"
-                            autocomplete="off"
-                        />
-                    </form>
+        <div class="head__item">
+            <img class="icon" src="~assets/imgs/head_acc.png" />
+            <div class="head-right">
+                <div class="head-title">
+                    <span>{{ $t("accountName") }}</span>
+                    <img
+                        @click="startRename"
+                        class="edit __pointer"
+                        src="~assets/imgs/edit_default.svg"
+                    />
                 </div>
-            </div>
-            <div class="head__item">
-                <img class="icon" src="~assets/imgs/head_addr.svg" />
-                <div class="head-right">
-                    <SwitchAddr :isShowAddr="false"></SwitchAddr>
-                    <span class="address-content">
-                        <Tips ref="tips"></Tips>{{ activeAddr }}
-                        <QrcodePopup :qrcodeString="addressQrcode"
-                        ><img
-                            class="address-content__operate click-able"
-                            src="~assets/imgs/qrcode_default.svg"
-                        /></QrcodePopup>
-                        <img
-                            class="address-content__operate click-able"
-                            src="~assets/imgs/copy_default.svg"
-                            @click="copy"
-                        />
-                    </span>
+                <div v-if="!isShowNameInput" class="name" @click="startRename">
+                    {{ account.name }}
                 </div>
+                <!-- <input fake_pass type="password" style="display:none"/> -->
+                <form autocomplete="off" v-else>
+                    <input
+                        ref="nameInput"
+                        type="text"
+                        v-model="editName"
+                        :placeholder="account.name"
+                        @blur="rename"
+                        autocomplete="off"
+                    />
+                </form>
             </div>
         </div>
-        <div class="head__group">
-            <div class="worth head__item">
-                <img class="icon" src="~assets/imgs/head_asset.png" />
-                <div class="assets">
-                    <AssetSwitch v-model="assetsType" class="asset-switch" />
-                    <div class="asset__btc">{{ assetBtc }} BTC</div>
-                    <div class="asset__cash">{{ currencySymbol }} {{ asset }}</div>
-                </div>
+        <div class="head__item">
+            <img class="icon" src="~assets/imgs/head_addr.svg" />
+            <div class="head-right">
+                <SwitchAddr :isShowAddr="false"></SwitchAddr>
+                <span class="address-content">
+                    <Tips ref="tips"></Tips>{{ activeAddr }}
+                    <QrcodePopup :qrcodeString="addressQrcode"
+                    ><img
+                        class="address-content__operate click-able"
+                        src="~assets/imgs/qrcode_default.svg"
+                    /></QrcodePopup>
+                    <img
+                        class="address-content__operate click-able"
+                        src="~assets/imgs/copy_default.svg"
+                        @click="copy"
+                    />
+                </span>
             </div>
-            <div class="head__item chart">
-                <Pie
-                    class="pie-chart"
-                    :pieData="pieData.data"
-                    :labelGen="labelGen"
-                    :title="$t('tokenCard.assetSpread')"
-                ></Pie>
+        </div>
+        <div class="worth head__item">
+            <img class="icon" src="~assets/imgs/head_asset.png" />
+            <div class="assets">
+                <AssetSwitch v-model="assetsType" class="asset-switch" />
+                <div class="asset__btc">{{ assetBtc }} BTC</div>
+                <div class="asset__cash">{{ currencySymbol }} {{ asset }}</div>
             </div>
+        </div>
+        <div class="head__item chart">
+            <Pie
+                class="pie-chart"
+                :pieData="pieData.data"
+                :labelGen="labelGen"
+                :title="$t('tokenCard.assetSpread')"
+            ></Pie>
         </div>
     </div>
 </template>
@@ -256,7 +252,6 @@ export default {
     border-radius: 2px;
     display: flex;
     min-height: 124px;
-    flex-wrap: wrap;
     align-items: center;
     box-sizing: border-box;
     justify-content: space-between;
@@ -273,8 +268,19 @@ export default {
         padding: 0 30px;
         min-height: 85px;
         flex-grow: 1;
+        box-sizing: border-box;
         &:first-child{
             border-left: none;
+            min-width: 220px;
+        }
+        &:nth-child(2){
+            min-width: 330px;
+        }
+        &:nth-child(3){
+            min-width: 350px;
+        }
+        &:nth-child(4){
+            min-width: 450px;
         }
         .icon {
             height: 34px;
@@ -344,7 +350,6 @@ export default {
         &.chart {
             border-left: none;
             .pie-chart {
-                margin-left: 30px;
                 padding: 5px 0;
             }
         }
