@@ -51,6 +51,7 @@
         "sass-loader": "^7.0.3",
         "style-loader": "^0.21.0",
         "stylelint": "^9.10.1",
+        "svg-inline-loader": "^0.8.0",
         "url-loader": "^1.1.2",
         "vue": "^2.5.16",
         "vue-i18n": "^8.0.0",

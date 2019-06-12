@@ -142,6 +142,8 @@ export default {
 
 .wallet-account-wrapper{
     width: 100%;
+    display: flex;
+    flex-direction: column;
     .account_head {
         position: relative;
         text-align: center;
@@ -157,19 +159,22 @@ export default {
         margin: 10px;
         box-shadow: 0px 2px 10px 1px rgba(176,192,237,0.32);
         border-radius: 2px;
-
+        flex-grow: 1;
+        background-color: #fff;
         .token__head {
             display: flex;
             width: 100%;
             justify-content: flex-start;
             color: #5e6875;
-            border-bottom: 1px solid #c6cbd4;
+            border-bottom: 1px solid rgba(198,203,212,1);
             background-color: #fff;
             font-size: 12px;
             .col {
                 @include colWidth;
+                padding: 9px;
+                color: rgba(94, 104, 117, 0.58);
                 .asset-switch {
-                    color: #5e6875;
+                    color: rgba(94, 104, 117, 0.58);;
                     font-size: 12px;
                     @include font-family-normal();
                     /deep/.list-title {

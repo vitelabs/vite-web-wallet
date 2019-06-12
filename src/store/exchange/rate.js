@@ -1,7 +1,7 @@
 import { timer } from 'utils/asyncFlow';
 import { rateToken } from 'services/trade';
 
-const loopTime = 5000;
+const loopTime = 10000;
 let rateTimer = null;
 
 const state = { rateMap: {}, rateTokenIds: [] };
@@ -21,7 +21,6 @@ const mutations = {
 const actions = {
     startLoopExchangeRate({ commit, dispatch, state }) {
         dispatch('stopLoopExchangeRate');
-
         const f = () => {
             if (!state.rateTokenIds || !state.rateTokenIds.length) {
                 return;
@@ -38,8 +37,14 @@ const actions = {
         rateTimer && rateTimer.stop();
         rateTimer = null;
     },
-    addRateTokens({ commit }, payload = []) {
+    addRateTokens({ commit, state }, payload = []) {
+        const contains = payload.every(t => state.rateTokenIds.findIndex(n => n.tokenId === t.tokenId) >= 0);
+        if (contains) return;
+
         commit('setRateTokenIds', payload);
+        rateToken({ tokenIdList: state.rateTokenIds }).then(data => {
+            commit('setExchangeRate', data);
+        });
     }
 };
 
