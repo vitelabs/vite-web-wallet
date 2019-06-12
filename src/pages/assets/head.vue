@@ -1,6 +1,5 @@
 <template>
     <div class="account-head-wrapper">
-        <div class="head__group">
             <div class="head__item">
                 <img class="icon" src="~assets/imgs/head_acc.png" />
                 <div class="head-right">
@@ -47,8 +46,6 @@
                     </span>
                 </div>
             </div>
-        </div>
-        <div class="head__group">
             <div class="worth head__item">
                 <img class="icon" src="~assets/imgs/head_asset.png" />
                 <div class="assets">
@@ -65,7 +62,6 @@
                     :title="$t('tokenCard.assetSpread')"
                 ></Pie>
             </div>
-        </div>
     </div>
 </template>
 
@@ -256,7 +252,6 @@ export default {
     border-radius: 2px;
     display: flex;
     min-height: 124px;
-    flex-wrap: wrap;
     align-items: center;
     box-sizing: border-box;
     justify-content: space-between;
@@ -273,8 +268,19 @@ export default {
         padding: 0 30px;
         min-height: 85px;
         flex-grow: 1;
+        box-sizing: border-box;
         &:first-child{
             border-left: none;
+            min-width: 220px;
+        }
+        &:nth-child(2){
+            min-width: 330px;
+        }
+        &:nth-child(3){
+            min-width: 350px;
+        }
+        &:nth-child(4){
+            min-width:450px;
         }
         .icon {
             height: 34px;
@@ -344,7 +350,6 @@ export default {
         &.chart {
             border-left: none;
             .pie-chart {
-                margin-left: 30px;
                 padding: 5px 0;
             }
         }
