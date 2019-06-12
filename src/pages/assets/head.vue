@@ -142,7 +142,7 @@ export default {
                 ...this.$store.getters.userStorageTokenList,
                 ...this.$store.getters.otherWhithBalance,
                 ...this.$store.getters.officalGateTokenList
-            ];
+            ].filter(t => t.tokenName);
         },
         currencySymbol() {
             return this.$store.getters.currencySymbol;
