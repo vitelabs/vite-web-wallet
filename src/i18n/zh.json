@@ -616,7 +616,7 @@
             "latest": "最新价",
             "buy": "买一价",
             "sell": "卖一价",
-            "diff": "价差"
+            "diff": "买卖价差"
         },
         "dexToken": {
             "title": "开通交易对",
