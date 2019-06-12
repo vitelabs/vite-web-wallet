@@ -1,9 +1,7 @@
 <template>
     <page-layout>
         <div class="wallet-account-wrapper">
-            <div class="account_head">
-                <account-head ></account-head>
-            </div>
+            <account-head class="account_head"></account-head>
             <TokenFilter
                 @newFilter="
                     val => {
@@ -131,6 +129,8 @@ export default {
 @import "./tokenCard/colWidth.scss";
 .wallet-account-wrapper{
     width: 100%;
+    display: flex;
+    flex-direction: column;
     .account_head {
         position: relative;
         text-align: center;
@@ -146,7 +146,8 @@ export default {
         margin: 10px;
         box-shadow: 0px 2px 10px 1px rgba(176,192,237,0.32);
         border-radius: 2px;
-
+        flex-grow: 1;
+        background-color: #fff;
         .token__head {
             display: flex;
             width: 100%;

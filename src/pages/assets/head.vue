@@ -1,66 +1,70 @@
 <template>
     <div class="account-head-wrapper">
-        <div class="head__item">
-            <img class="icon" src="~assets/imgs/head_acc.png" />
-            <div class="head-right">
-                <div class="head-title">
-                    <span>{{ $t("accountName") }}</span>
-                    <img
-                        @click="startRename"
-                        class="edit __pointer"
-                        src="~assets/imgs/edit_default.svg"
-                    />
+        <div class="head__group">
+            <div class="head__item">
+                <img class="icon" src="~assets/imgs/head_acc.png" />
+                <div class="head-right">
+                    <div class="head-title">
+                        <span>{{ $t("accountName") }}</span>
+                        <img
+                            @click="startRename"
+                            class="edit __pointer"
+                            src="~assets/imgs/edit_default.svg"
+                        />
+                    </div>
+                    <div v-if="!isShowNameInput" class="name" @click="startRename">
+                        {{ account.name }}
+                    </div>
+                    <!-- <input fake_pass type="password" style="display:none"/> -->
+                    <form autocomplete="off" v-else>
+                        <input
+                            ref="nameInput"
+                            type="text"
+                            v-model="editName"
+                            :placeholder="account.name"
+                            @blur="rename"
+                            autocomplete="off"
+                        />
+                    </form>
                 </div>
-                <div v-if="!isShowNameInput" class="name" @click="startRename">
-                    {{ account.name }}
+            </div>
+            <div class="head__item">
+                <img class="icon" src="~assets/imgs/head_addr.svg" />
+                <div class="head-right">
+                    <SwitchAddr :isShowAddr="false"></SwitchAddr>
+                    <span class="address-content">
+                        <Tips ref="tips"></Tips>{{ activeAddr }}
+                        <QrcodePopup :qrcodeString="addressQrcode"
+                        ><img
+                            class="address-content__operate click-able"
+                            src="~assets/imgs/qrcode_default.svg"
+                        /></QrcodePopup>
+                        <img
+                            class="address-content__operate click-able"
+                            src="~assets/imgs/copy_default.svg"
+                            @click="copy"
+                        />
+                    </span>
                 </div>
-                <!-- <input fake_pass type="password" style="display:none"/> -->
-                <form autocomplete="off" v-else>
-                    <input
-                        ref="nameInput"
-                        type="text"
-                        v-model="editName"
-                        :placeholder="account.name"
-                        @blur="rename"
-                        autocomplete="off"
-                    />
-                </form>
             </div>
         </div>
-        <div class="head__item">
-            <img class="icon" src="~assets/imgs/head_addr.svg" />
-            <div class="head-right">
-                <SwitchAddr :isShowAddr="false"></SwitchAddr>
-                <span class="address-content">
-                    <Tips ref="tips"></Tips>{{ activeAddr }}
-                    <QrcodePopup :qrcodeString="addressQrcode"
-                    ><img
-                        class="address-content__operate click-able"
-                        src="~assets/imgs/qrcode_default.svg"
-                    /></QrcodePopup>
-                    <img
-                        class="address-content__operate click-able"
-                        src="~assets/imgs/copy_default.svg"
-                        @click="copy"
-                    />
-                </span>
+        <div class="head__group">
+            <div class="worth head__item">
+                <img class="icon" src="~assets/imgs/head_asset.png" />
+                <div class="assets">
+                    <AssetSwitch v-model="assetsType" class="asset-switch" />
+                    <div class="asset__btc">{{ assetBtc }} BTC</div>
+                    <div class="asset__cash">{{ currencySymbol }} {{ asset }}</div>
+                </div>
             </div>
-        </div>
-        <div class="worth head__item">
-            <img class="icon" src="~assets/imgs/head_asset.png" />
-            <div class="assets">
-                <AssetSwitch v-model="assetsType" class="asset-switch" />
-                <div class="asset__btc">{{ assetBtc }} BTC</div>
-                <div class="asset__cash">{{ currencySymbol }} {{ asset }}</div>
+            <div class="head__item chart">
+                <Pie
+                    class="pie-chart"
+                    :pieData="pieData.data"
+                    :labelGen="labelGen"
+                    :title="$t('tokenCard.assetSpread')"
+                ></Pie>
             </div>
-        </div>
-        <div class="head__item chart">
-            <Pie
-                class="pie-chart"
-                :pieData="pieData.data"
-                :labelGen="labelGen"
-                :title="$t('tokenCard.assetSpread')"
-            ></Pie>
         </div>
     </div>
 </template>
@@ -251,19 +255,24 @@ export default {
     background: #fff;
     border-radius: 2px;
     display: flex;
-    flex-wrap: nowrap;
     min-height: 124px;
     flex-wrap: wrap;
     align-items: center;
     box-sizing: border-box;
-    min-width: 1550px;
     justify-content: space-between;
+    padding: 10px 0;
+    box-sizing: border-box;
+    .head__group{
+        display: flex;
+        flex-grow: 1;
+    }
     .head__item {
         border-left: 1px solid rgba(227, 235, 245, 0.6);
         display: flex;
         align-items: center;
         padding: 0 30px;
-        min-height: 84px;
+        min-height: 85px;
+        flex-grow: 1;
         &:first-child{
             border-left: none;
         }
@@ -341,7 +350,6 @@ export default {
         }
         &.worth {
             display: flex;
-            justify-content: space-between;
             .assets {
                 display: flex;
                 flex-direction: column;
