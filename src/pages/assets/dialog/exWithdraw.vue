@@ -28,7 +28,7 @@ export default {
     },
     data() {
         return {
-            isAll: false,
+            isWithdrawAll: false,
             withdrawAmount: '',
             dTitle: this.$t('tradeAssets.confirmwithdraw.title'),
             dSTxt: this.$t('tradeAssets.confirmwithdraw.btn'),
