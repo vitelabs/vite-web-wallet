@@ -175,17 +175,17 @@ export default {
             return list.sort((a, b) => {
                 switch (this.currentRule) {
                 case 'priceUp':
-                    return a.closePrice - b.closePrice;
+                    return BigNumber.compared(a.closePrice, b.closePrice);
                 case 'priceDown':
-                    return b.closePrice - a.closePrice;
+                    return BigNumber.compared(b.closePrice, a.closePrice);
                 case 'upDownUp':
-                    return +a.priceChange - +b.priceChange;
+                    return BigNumber.compared(a.priceChangePercent, b.priceChangePercent);
                 case 'upDownDown':
-                    return +b.priceChange - +a.priceChange;
+                    return BigNumber.compared(b.priceChangePercent, a.priceChangePercent);
                 case 'txNumUp':
-                    return a.amount - b.amount;
+                    return BigNumber.compared(a.amount, b.amount);
                 case 'txNumDown':
-                    return b.amount - a.amount;
+                    return BigNumber.compared(b.amount, a.amount);
                 default:
                     return compareStr(a.tradeTokenSymbol, b.tradeTokenSymbol);
                 }
