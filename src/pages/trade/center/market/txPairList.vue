@@ -98,7 +98,8 @@ export default {
     methods: {
         getTxPairShowSymbol(txPair) {
             const tradeTokenSymbol = txPair.tradeTokenSymbol.split('-')[0];
-            return `${ tradeTokenSymbol }/${ txPair.quoteTokenSymbol }`;
+            const quoteTokenSymbol = txPair.quoteTokenSymbol.split('-')[0];
+            return `${ tradeTokenSymbol }/${ quoteTokenSymbol }`;
         },
         getPercent(num) {
             return `${ BigNumber.multi(num, 100, 2) }%`;
@@ -128,16 +129,21 @@ export default {
         },
         getRealPrice(txPair) {
             if (!txPair) {
-                return '';
+                return txPair.tradeTokenSymbol;
             }
 
             const rate = this.getRate(txPair.quoteToken);
             if (!rate) {
-                return '';
+                return txPair.tradeTokenSymbol;
+            }
+
+            const price = BigNumber.multi(txPair.closePrice || 0, rate || 0, 2);
+            if (!+price) {
+                return txPair.tradeTokenSymbol;
             }
 
             const pre = this.$store.state.env.currency === 'cny' ? '≈¥' : '≈$';
-            return `${ txPair.tradeTokenSymbol }  ${ pre }${ BigNumber.multi(txPair.closePrice || 0, rate || 0, 2) }`;
+            return `${ txPair.tradeTokenSymbol }  ${ pre }${ price }`;
         },
         getRate(tokenId) {
             const rateList = this.$store.state.exchangeRate.rateMap || {};

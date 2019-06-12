@@ -86,10 +86,6 @@ let webpackConfig = {
                     // 10KB
                     limit: 10 * 1024
                 }
-            },
-            {
-                test: /\.svg$/,
-                use: ['svg-inline-loader']
             }, {
                 test: /\.js$/,
                 // exclude: /node_modules(?!(\/base-x)|(\/resize-detector)|(\/vue-echarts))|(\/@vite\/vitejs)/,

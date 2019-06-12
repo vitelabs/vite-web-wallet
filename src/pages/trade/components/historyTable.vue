@@ -59,12 +59,12 @@ export default {
                 list.push({
                     createTime: this.filterDate(v.createTime),
                     symbol: `${ v.tradeTokenSymbol }/${ v.quoteTokenSymbol }`,
-                    price: `${ v.price } ${ v.quoteTokenSymbol }`,
-                    quantity: `${ v.quantity } ${ v.tradeTokenSymbol }`,
-                    executedQuantity: `${ v.executedQuantity } ${ v.tradeTokenSymbol }`,
+                    price: `${ v.price } ${ this.getOriginSymbol(v.quoteTokenSymbol) }`,
+                    quantity: `${ v.quantity } ${ this.getOriginSymbol(v.tradeTokenSymbol) }`,
+                    executedQuantity: `${ v.executedQuantity } ${ this.getOriginSymbol(v.tradeTokenSymbol) }`,
                     executedPercent: `${ (v.executedPercent * 100).toFixed(2) }%`,
-                    executedAvgPrice: `${ v.executedAvgPrice } ${ v.quoteTokenSymbol }`,
-                    fee: `${ v.fee } ${ v.quoteTokenSymbol }`,
+                    executedAvgPrice: `${ v.executedAvgPrice } ${ this.getOriginSymbol(v.quoteTokenSymbol) }`,
+                    fee: `${ v.fee } ${ this.getOriginSymbol(v.quoteTokenSymbol) }`,
                     status: this.$t('tradeOrderHistory.table.rowMap.statusMap')[v.status],
                     operate: this.$t('tradeOrderHistory.table.rowMap.detail'),
                     rawData: v
@@ -77,10 +77,10 @@ export default {
                 const o = this.detailData[k];
                 return [
                     d.unix(o.time).format('YYYY-MM-DD HH:mm'),
-                    `${ o.price } ${ o.quoteTokenSymbol }`,
-                    `${ o.quantity } ${ o.tradeTokenSymbol }`,
-                    `${ o.fee } ${ o.quoteTokenSymbol }`,
-                    `${ o.amount } ${ o.quoteTokenSymbol }`
+                    `${ o.price } ${ this.getOriginSymbol(o.quoteTokenSymbol) }`,
+                    `${ o.quantity } ${ this.getOriginSymbol(o.tradeTokenSymbol) }`,
+                    `${ o.fee } ${ this.getOriginSymbol(o.quoteTokenSymbol) }`,
+                    `${ o.amount } ${ this.getOriginSymbol(o.quoteTokenSymbol) }`
                 ];
             });
         },
@@ -101,6 +101,9 @@ export default {
         }
     },
     methods: {
+        getOriginSymbol(symbol) {
+            return symbol.split('-')[0];
+        },
         clickCell(cell, item) {
             if (cell === 'operate') {
                 return this.showDetail(item.rawData);
