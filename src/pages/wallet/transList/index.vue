@@ -74,6 +74,7 @@ import date from 'utils/date.js';
 import { timer } from 'utils/asyncFlow';
 import BigNumber from 'utils/bigNumber';
 import ellipsisAddr from 'utils/ellipsisAddr.js';
+import openUrl from 'utils/openUrl.js';
 
 const { BuiltinTxType } = constant;
 const txImgs = {
@@ -174,7 +175,7 @@ export default {
     methods: {
         goDetail(trans) {
             const locale = this.$i18n.locale === 'zh' ? 'zh/' : '';
-            window.open(`${ process.env.viteNet }${ locale }transaction/${ trans.rawData.hash }`);
+            openUrl(`${ process.env.viteNet }${ locale }transaction/${ trans.rawData.hash }`);
         },
 
         toPage(pageNumber) {

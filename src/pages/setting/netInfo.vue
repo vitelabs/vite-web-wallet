@@ -29,6 +29,8 @@
 </template>
 
 <script>
+import openUrl from 'utils/openUrl';
+
 export default {
     data() {
         return {
@@ -44,7 +46,7 @@ export default {
     methods: {
         goNet() {
             const locale = this.$i18n.locale === 'zh' ? 'zh/' : '';
-            window.open(`${ process.env.viteNet }${ locale }`);
+            openUrl(`${ process.env.viteNet }${ locale }`);
         }
     }
 };

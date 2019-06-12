@@ -25,11 +25,6 @@ export default {
             bg,
             logo
         };
-    },
-    methods: {
-        goViteX() {
-            window.open('https://x-test.vite.net/');
-        }
     }
 };
 </script>
