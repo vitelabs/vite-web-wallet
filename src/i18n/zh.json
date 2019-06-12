@@ -241,7 +241,7 @@
         },
         "addToken": {
             "title": "添加代币",
-            "placeholder": "请输入代币名称或TokenID",
+            "placeholder": "请输入代币名称",
             "lTxt": "取消",
             "rTxt": "添加"
         },
