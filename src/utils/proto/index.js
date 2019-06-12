@@ -1,7 +1,9 @@
+import { utils } from '@vite/vitejs';
 import { root } from './protoClass';
 import { random } from 'utils/random';
 import { timer } from 'utils/asyncFlow';
 
+const { _Buffer } = utils;
 const DexProto = root.lookupType('vite.DexProto');
 const HEARTBEAT = 10000;
 const RetryInterval = 3000;
@@ -58,7 +60,7 @@ class WsProtoClient {
             };
 
             connect.onmessage = e => {
-                const data = DexProto.decode(new Uint8Array(e.data));
+                const data = DexProto.decode(_Buffer.from(e.data));
                 if (data.op_type !== this.MESSAGETYPE.PUSH) {
                     console.log(data);
                     return;
