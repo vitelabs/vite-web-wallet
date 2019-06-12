@@ -158,7 +158,8 @@ export default {
             font-size: 12px;
             .col {
                 @include colWidth;
-                padding: 9px;
+                padding-top: 9px;
+                padding-bottom: 9px;
                 color: rgba(94, 104, 117, 0.58);
                 .asset-switch {
                     color: rgba(94, 104, 117, 0.58);;
@@ -166,6 +167,7 @@ export default {
                     font-family: $font-normal;
                     /deep/.list-title {
                         border: none;
+                        padding-left: 0;
                     }
                 }
             }
