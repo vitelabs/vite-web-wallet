@@ -232,7 +232,7 @@
         },
         "addToken": {
             "title": "Add Token",
-            "placeholder": "Please input token name or TokenID",
+            "placeholder": "Please input token name",
             "lTxt": "Cancel",
             "rTxt": "Add"
         },
