@@ -151,6 +151,7 @@ export default {
             @include font-family-normal();
             color: #5e6875;
             font-weight: 400;
+            white-space: nowrap;
         }
         .token-content {
             margin-top: 8px;
@@ -176,6 +177,7 @@ export default {
         height: 100%;
         box-sizing: border-box;
         padding: 10px 10px;
+        width: 25px;
         div {
             width: 5px;
             height: 5px;
