@@ -217,7 +217,7 @@
             "balance":"钱包余额",
             "onroad":"钱包待接收金额",
             "gate":"钱包跨链网关",
-            "totalExAmount":"交易所总余额度",
+            "totalExAmount":"交易所总余额",
             "availableExAmount":"交易所可用余额"
         },
         "actionType": {

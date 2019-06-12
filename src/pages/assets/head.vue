@@ -142,7 +142,7 @@ export default {
                 ...this.$store.getters.userStorageTokenList,
                 ...this.$store.getters.otherWhithBalance,
                 ...this.$store.getters.officalGateTokenList
-            ];
+            ].filter(t => t.tokenName);
         },
         currencySymbol() {
             return this.$store.getters.currencySymbol;
@@ -166,7 +166,8 @@ export default {
                         return {
                             assetBtc: t.totalExAssetBtc,
                             asset: t.totalExAsset,
-                            tokenSymbol: t.tokenSymbol
+                            tokenSymbol: t.tokenSymbol,
+                            index: t.index
                         };
                     })
                     .sort((a, b) => bigNumber.compared(b.asset, a.asset));
@@ -177,7 +178,8 @@ export default {
                         return {
                             assetBtc: t.walletAssetBtc,
                             asset: t.walletAsset,
-                            tokenSymbol: t.tokenSymbol
+                            tokenSymbol: t.tokenSymbol,
+                            index: t.index
                         };
                     })
                     .sort((a, b) => bigNumber.compared(b.asset, a.asset));
@@ -290,7 +292,7 @@ export default {
         .address-content {
             max-width: 300px;
             font-size: 14px;
-            word-break: break-word;
+            word-break: break-all;
             box-sizing: border-box;
             background: #f3f6f9;
             color: #bdc1d1;
