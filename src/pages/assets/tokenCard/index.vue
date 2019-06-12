@@ -249,7 +249,7 @@ export default {
     width: 100%;
     align-items: center;
     border-bottom: 1px solid rgba(227, 235, 245, 0.6);
-    height: 71px;
+    height: 59px;
     &:last-child {
         border: none;
     }

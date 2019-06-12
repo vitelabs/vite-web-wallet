@@ -167,6 +167,7 @@ export default {
                     font-family: $font-normal;
                     /deep/.list-title {
                         border: none;
+                        padding-left: 0;
                     }
                 }
             }
