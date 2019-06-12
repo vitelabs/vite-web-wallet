@@ -241,9 +241,9 @@
             "crossGate": "Cross-Chain Tokens"
         },
         "assetType":{
-            "TOTAL":"All Assets Estimated Value",
-            "EX":"Exchange Assets Estimated Value",
-            "WALLET":"Wallet Assets Estimated Value"
+            "TOTAL":"All Assets",
+            "EX":"Exchange Assets",
+            "WALLET":"Wallet Assets"
         },
         "tokenInfo": {
             "tabName": "Details",
