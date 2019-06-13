@@ -171,7 +171,7 @@ export default {
         color: #5e6875;
         font-size: 12px;
         position: absolute;
-        right: 40px;
+        top: 40px;
         left: 15px;
         span {
             word-break: break-all;
