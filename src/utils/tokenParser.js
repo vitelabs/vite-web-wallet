@@ -3,7 +3,7 @@ import { utils } from '@vite/vitejs';
 import { defaultTokenMap } from 'utils/constant';
 
 const { blake2b, _Buffer } = utils;
-const iconConfig = { format: 'svg' };
+const iconConfig = { format: 'png' };
 
 export function getTokenIcon(tokenId) {
     if (defaultTokenMap[tokenId]) {
@@ -12,7 +12,7 @@ export function getTokenIcon(tokenId) {
     const tokenHash = blake2b(tokenId);
     const hexStr = _Buffer(tokenHash).toString('hex');
 
-    return `data:image/svg+xml;base64,${ new Identicon(hexStr,
+    return `data:image/png+xml;base64,${ new Identicon(hexStr,
         iconConfig).toString() }`;
 }
 

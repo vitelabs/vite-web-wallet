@@ -82,6 +82,7 @@ export default {
         &.more {
             position: absolute;
             right: 0;
+            bottom:0px;
             cursor: pointer;
             img{
                 margin-left: 8px;
