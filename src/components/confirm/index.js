@@ -6,6 +6,7 @@ const Confirm = Vue.extend(confirmComponent);
 export default function ({
     showMask = true,
     title,
+    content = '',
     singleBtn = false,
     closeBtn = {
         show: false,
@@ -36,6 +37,7 @@ export default function ({
 
     instance.showMask = showMask;
     instance.title = title;
+    instance.content = content;
     instance.singleBtn = singleBtn;
     instance.closeIcon = closeBtn.show;
     instance.close = () => {
