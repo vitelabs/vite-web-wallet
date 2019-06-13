@@ -283,6 +283,7 @@ export default {
             height: 52px;
             position: absolute;
             right: 0;
+            top: 7px;
         }
         .op_group {
             display: flex;
