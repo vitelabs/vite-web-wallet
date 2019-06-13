@@ -56,7 +56,7 @@
                         </linearGradient>
                     </defs>
                 </slot>
-                <g class="arc__group">
+                <g class="arc__group" transform="translate(47px,47px)">
                     <path
                         v-for="(path, i) in paths"
                         :d="path"
