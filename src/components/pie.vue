@@ -74,7 +74,7 @@
         <div class="legend__group">
             <div class="legend" v-for="(v, i) in per" :key="i">
                 <svg class="tag">
-                    <rect :fill="colorGen(v, i)"></rect>
+                    <rect :fill="colorGen(v, i)" width="9px" height="9px"></rect>
                 </svg>
                 <div class="text">{{ labelGen(v, i) }}</div>
             </div>
@@ -154,6 +154,7 @@ export default {
         align-items: center;
         justify-content: center;
         margin-right: 30px;
+        position: relative;
     }
     &__graph {
         height: 94px;
@@ -166,9 +167,12 @@ export default {
         }
     }
     .text__group {
-        max-width: 65px;
+        width: 65px;
         color: #5e6875;
         font-size: 12px;
+        position: absolute;
+        right: 40px;
+        left: 15px;
         span {
             word-break: break-all;
         }

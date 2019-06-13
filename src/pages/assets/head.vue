@@ -32,7 +32,8 @@
             <div class="head-right">
                 <SwitchAddr :isShowAddr="false"></SwitchAddr>
                 <span class="address-content">
-                    <Tips ref="tips"></Tips>{{ activeAddr }}
+                    <Tips ref="tips"></Tips>
+                    <span>{{ activeAddr }}</span>
                     <QrcodePopup :qrcodeString="addressQrcode"
                     ><img
                         class="address-content__operate click-able"
@@ -259,7 +260,7 @@ export default {
     justify-content: space-between;
     padding: 10px 0;
     box-sizing: border-box;
-    .head__group{
+    .head__group {
         display: flex;
         flex-grow: 1;
     }
@@ -271,17 +272,17 @@ export default {
         min-height: 85px;
         flex-grow: 1;
         box-sizing: border-box;
-        &:first-child{
+        &:first-child {
             border-left: none;
             min-width: 220px;
         }
-        &:nth-child(2){
+        &:nth-child(2) {
             min-width: 330px;
         }
-        &:nth-child(3){
+        &:nth-child(3) {
             min-width: 350px;
         }
-        &:nth-child(4){
+        &:nth-child(4) {
             min-width: 450px;
         }
         .icon {
