@@ -56,7 +56,7 @@
                         </linearGradient>
                     </defs>
                 </slot>
-                <g class="arc__group">
+                <g class="arc__group" transform="translate(47,47)">
                     <path
                         v-for="(path, i) in paths"
                         :d="path"
@@ -148,6 +148,7 @@ export default {
 .pie {
     display: flex;
     align-items: center;
+    justify-content: center;
     .graph-container{
         display: flex;
         align-items: center;
@@ -168,7 +169,6 @@ export default {
         max-width: 65px;
         color: #5e6875;
         font-size: 12px;
-        position: absolute;
         span {
             word-break: break-all;
         }

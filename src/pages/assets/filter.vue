@@ -67,6 +67,7 @@ export default {
     margin: 10px 10px;
     height: 34px;
     position: relative;
+    min-height: 34px;
     .filter {
         box-sizing: border-box;
         padding: 6px;
