@@ -123,7 +123,7 @@ export default {
         box-shadow: 0px 5px 10px 0px rgba(176, 192, 237, 0.69);
         margin-top: 10px;
         word-break: break-all;
-        right:0;
+        right: 0;
         .item {
             box-sizing: border-box;
             padding: 8px 12px;
