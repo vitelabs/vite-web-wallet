@@ -305,7 +305,7 @@ export default {
             position: relative;
             font-family: $font-normal;
             .addr_item{
-                max-width:220px;
+                max-width: 220px;
             }
             &__operate {
                 width: 16px;
