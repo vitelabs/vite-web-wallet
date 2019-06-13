@@ -300,7 +300,7 @@ export default {
             padding: 5px 9px;
             display: flex;
             align-items: center;
-            margin: 10px auto 5px;
+            margin: 10px 0 5px;
             display: flex;
             position: relative;
             font-family: $font-normal;
