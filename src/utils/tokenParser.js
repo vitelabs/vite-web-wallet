@@ -3,10 +3,7 @@ import { utils } from '@vite/vitejs';
 import { defaultTokenMap } from 'utils/constant';
 
 const { blake2b, _Buffer } = utils;
-const iconConfig = {
-    size: 100,
-    format: 'svg'
-};
+const iconConfig = { format: 'svg' };
 
 export function getTokenIcon(tokenId) {
     if (defaultTokenMap[tokenId]) {
