@@ -319,7 +319,7 @@ export default {
             display: flex;
             flex-direction: column;
             align-self: stretch;
-            flex-grow:1;
+            flex-grow: 1;
             .head-title {
                 display: flex;
                 align-items: center;
