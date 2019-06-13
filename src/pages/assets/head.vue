@@ -32,11 +32,12 @@
             <div class="head-right">
                 <SwitchAddr :isShowAddr="false"></SwitchAddr>
                 <span class="address-content">
-                    <Tips ref="tips"></Tips>{{ activeAddr }}
+                    <Tips ref="tips"></Tips>
+                    <span>{{ activeAddr }}</span>
                     <QrcodePopup :qrcodeString="addressQrcode"
-                    ><img
-                        class="address-content__operate click-able"
-                        src="~assets/imgs/qrcode_default.svg"
+                        ><img
+                            class="address-content__operate click-able"
+                            src="~assets/imgs/qrcode_default.svg"
                     /></QrcodePopup>
                     <img
                         class="address-content__operate click-able"
@@ -66,28 +67,28 @@
 </template>
 
 <script>
-import Vue from 'vue';
-import QrcodePopup from 'components/qrcodePopup';
-import SwitchAddr from 'components/switchAddress';
-import Pie from 'components/pie';
-import bigNumber from 'utils/bigNumber';
-import { utils } from '@vite/vitejs';
-import copy from 'utils/copy';
-import Tips from 'uiKit/tips';
-import AssetSwitch from './assetSwitch';
-import { getTokenNameString } from 'utils/tokenParser';
+import Vue from "vue";
+import QrcodePopup from "components/qrcodePopup";
+import SwitchAddr from "components/switchAddress";
+import Pie from "components/pie";
+import bigNumber from "utils/bigNumber";
+import { utils } from "@vite/vitejs";
+import copy from "utils/copy";
+import Tips from "uiKit/tips";
+import AssetSwitch from "./assetSwitch";
+import { getTokenNameString } from "utils/tokenParser";
 
 const assetsType = {
-    TOTAL: 'TOTAL',
-    EX: 'EX',
-    WALLET: 'WALLET'
+    TOTAL: "TOTAL",
+    EX: "EX",
+    WALLET: "WALLET"
 };
 export default {
     components: { QrcodePopup, Tips, SwitchAddr, Pie, AssetSwitch },
     data() {
         return {
             isShowNameInput: false,
-            editName: '',
+            editName: "",
             copySuccess: false,
             qrcode: null,
             qrcodeShow: false,
@@ -97,16 +98,20 @@ export default {
     computed: {
         pieData() {
             const data = JSON.parse(JSON.stringify(this.assetMap));
-            data.forEach(t => (t.symbol = getTokenNameString(t.tokenSymbol, t.index)));
+            data.forEach(
+                t => (t.symbol = getTokenNameString(t.tokenSymbol, t.index))
+            );
             let polyData = data;
             if (data.length > 5) {
                 polyData = data.slice(0, 4);
                 polyData.push({
                     asset: data
                         .slice(4)
-                        .reduce((pre, cur) => bigNumber.plus(pre, cur.asset),
-                            0),
-                    symbol: this.$t('tokenCard.others')
+                        .reduce(
+                            (pre, cur) => bigNumber.plus(pre, cur.asset),
+                            0
+                        ),
+                    symbol: this.$t("tokenCard.others")
                 });
             }
             return {
@@ -192,16 +197,16 @@ export default {
     methods: {
         labelGen(v, i) {
             const symbol = this.pieData.lable[i];
-            return `${ symbol } ${ (100 * v).toFixed(1) }%`;
+            return `${symbol} ${(100 * v).toFixed(1)}%`;
         },
         copy() {
             copy(this.activeAddr);
-            this.$refs.tips.tip(this.$t('hint.copy'));
+            this.$refs.tips.tip(this.$t("hint.copy"));
         },
 
         clearEditName() {
             this.isShowNameInput = false;
-            this.editName = '';
+            this.editName = "";
             this.$offKeyDown();
         },
         startRename() {
@@ -223,19 +228,19 @@ export default {
             }
 
             if (!/^[a-zA-Z0-9_\u4e00-\u9fa5]+$/g.test(this.editName)) {
-                this.$toast(this.$t('startCreate.hint.name'));
+                this.$toast(this.$t("startCreate.hint.name"));
                 this.clearEditName();
                 return;
             }
 
             const long = 32;
             if (this.editName.length > long) {
-                this.$toast(this.$t('startCreate.hint.nameLong', { long }));
+                this.$toast(this.$t("startCreate.hint.nameLong", { long }));
                 this.clearEditName();
                 return;
             }
 
-            this.$store.commit('renameCurrHDAcc', this.editName);
+            this.$store.commit("renameCurrHDAcc", this.editName);
             this.clearEditName();
         }
     }
@@ -259,7 +264,7 @@ export default {
     justify-content: space-between;
     padding: 10px 0;
     box-sizing: border-box;
-    .head__group{
+    .head__group {
         display: flex;
         flex-grow: 1;
     }
@@ -271,17 +276,17 @@ export default {
         min-height: 85px;
         flex-grow: 1;
         box-sizing: border-box;
-        &:first-child{
+        &:first-child {
             border-left: none;
             min-width: 220px;
         }
-        &:nth-child(2){
+        &:nth-child(2) {
             min-width: 330px;
         }
-        &:nth-child(3){
+        &:nth-child(3) {
             min-width: 350px;
         }
-        &:nth-child(4){
+        &:nth-child(4) {
             min-width: 450px;
         }
         .icon {
