@@ -33,7 +33,7 @@
                 <SwitchAddr :isShowAddr="false"></SwitchAddr>
                 <span class="address-content">
                     <Tips ref="tips"></Tips>
-                    <span>{{ activeAddr }}</span>
+                    <span class="addr_item">{{ activeAddr }}</span>
                     <QrcodePopup :qrcodeString="addressQrcode"
                     ><img
                         class="address-content__operate click-able"
@@ -304,6 +304,9 @@ export default {
             display: flex;
             position: relative;
             font-family: $font-normal;
+            .addr_item{
+                max-width:220px;
+            }
             &__operate {
                 width: 16px;
                 height: 16px;
