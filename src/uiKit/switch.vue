@@ -80,6 +80,7 @@ export default {
     color: #73767a;
     @include font-family-bold();
     font-size: 14px;
+    position: relative;
     .list-title {
         position: relative;
         box-sizing: border-box;
