@@ -40,11 +40,10 @@ export default {
             // Initializing the QrCode
             this.$refs.qrcode.innerHTML = '';
             const q = new qrcode(this.$refs.qrcode);
-            debugger;
+
             // Function that generates the QrCode
             q.generate(this.text, Object.assign({}, defaultOpt, this.options)).then(() => {
                 this.image = q.getImage();
-                console.log(q.getImage());
                 this.$emit('genImage', this.image);
             });
         }
