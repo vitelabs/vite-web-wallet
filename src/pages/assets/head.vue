@@ -32,7 +32,8 @@
             <div class="head-right">
                 <SwitchAddr :isShowAddr="false"></SwitchAddr>
                 <span class="address-content">
-                    <copy ref="copyDom"></copy>{{ activeAddr }}
+                    <copy ref="copyDom"></copy>
+                    <span class="addr_item">{{ activeAddr }}</span>
                     <QrcodePopup :qrcodeString="addressQrcode"
                     ><img
                         class="address-content__operate click-able"
@@ -257,7 +258,7 @@ export default {
     justify-content: space-between;
     padding: 10px 0;
     box-sizing: border-box;
-    .head__group{
+    .head__group {
         display: flex;
         flex-grow: 1;
     }
@@ -269,17 +270,17 @@ export default {
         min-height: 85px;
         flex-grow: 1;
         box-sizing: border-box;
-        &:first-child{
+        &:first-child {
             border-left: none;
             min-width: 220px;
         }
-        &:nth-child(2){
+        &:nth-child(2) {
             min-width: 330px;
         }
-        &:nth-child(3){
+        &:nth-child(3) {
             min-width: 350px;
         }
-        &:nth-child(4){
+        &:nth-child(4) {
             min-width: 450px;
         }
         .icon {
@@ -297,10 +298,13 @@ export default {
             padding: 5px 9px;
             display: flex;
             align-items: center;
-            margin: 10px auto 5px;
+            margin: 10px 0 5px;
             display: flex;
             position: relative;
             font-family: $font-normal;
+            .addr_item{
+                max-width: 220px;
+            }
             &__operate {
                 width: 16px;
                 height: 16px;
@@ -319,6 +323,7 @@ export default {
             display: flex;
             flex-direction: column;
             align-self: stretch;
+            flex-grow: 1;
             .head-title {
                 display: flex;
                 align-items: center;

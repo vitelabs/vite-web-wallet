@@ -13,7 +13,7 @@
             <a href="https://vite.org/" target="_blank">
                 <span class="title">{{ $t('setting.site') }}</span><span class="link">vite.org</span>
             </a>
-            <a @click="goNet">
+            <a class="__pointer" @click="goNet">
                 <span class="title">{{ $t('setting.explorer') }}</span><span class="link">{{ netService }}</span>
             </a>
         </div>
