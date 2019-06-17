@@ -227,7 +227,7 @@ export default {
                 this.$toast(this.$t('walletSBP.section1.registerFail'), err);
             });
         },
-        reg:execWithValid(function(item, isReReg) {
+        reg: execWithValid(function (item, isReReg) {
             if (isReReg && !item.isReReg) {
                 return;
             }
@@ -247,7 +247,7 @@ export default {
                 }
             }, true);
         }),
-        cancel:execWithValid(function(item) {
+        cancel: execWithValid(function (item) {
             if (!item.isMaturity || item.isCancel) {
                 return;
             }
@@ -278,7 +278,7 @@ export default {
                 }
             }, true);
         }),
-        edit:execWithValid(function(item) {
+        edit: execWithValid(function (item) {
             if (item.isCancel) {
                 return;
             }
@@ -309,7 +309,7 @@ export default {
             this.isShowReward = false;
             this.rewardItem = null;
         },
-        reward:execWithValid(function(item) {
+        reward: execWithValid(function (item) {
             this.totalReward = null;
             $Vite.request('register_getAvailableReward', '00000000000000000001', item.rawData.name).then(data => {
                 if (!data || data.drained || !+data.totalReward) {

@@ -37,7 +37,7 @@ import d from 'dayjs';
 import { utils } from '@vite/vitejs';
 import sendTx from 'utils/sendTx';
 import { initPwd } from 'components/password/index.js';
-import {execWithValid} from 'utils/execWithValid'
+import { execWithValid } from 'utils/execWithValid';
 
 const { _Buffer } = utils;
 
@@ -68,7 +68,7 @@ export default {
         getOriginSymbol(symbol) {
             return symbol.split('-')[0];
         },
-        cancel:execWithValid(function(order) {
+        cancel: execWithValid(function (order) {
             const failSubmit = e => {
                 this.$toast(this.$t('tradeOpenOrders.confirm.failToast'), e);
             };
