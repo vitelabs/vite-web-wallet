@@ -152,7 +152,7 @@ export default {
             const activeAccount = this.$store.state.wallet.activeAcc;
             window.open(`https://reward.vite.net?language=${ locale }&address=${ activeAccount ? activeAccount.address : '' }`);
         },
-        cancelVote:execWithValid(function(v) {
+        cancelVote: execWithValid(function (v) {
             if (this.cache) {
                 return;
             }
@@ -181,7 +181,7 @@ export default {
                 submit: sendCancel
             }, true);
         }),
-        vote:execWithValid(function(v) {
+        vote: execWithValid(function (v) {
             const successVote = () => {
                 const t = Object.assign({}, v);
                 t.isCache = true;

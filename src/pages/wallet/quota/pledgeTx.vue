@@ -54,7 +54,7 @@ import viteInput from 'components/viteInput';
 import { initPwd } from 'components/password/index.js';
 import BigNumber from 'utils/bigNumber';
 import statistics from 'utils/statistics';
-import {execWithValid} from "utils/execWithValid"
+import { execWithValid } from 'utils/execWithValid';
 
 const amountTimeout = null;
 const minNum = 134;
@@ -170,7 +170,7 @@ export default {
         addToAddr(type) {
             this.toAddr = type === 'mine' ? this.addr : constant.DexFund_Addr;
         },
-        validTx:execWithValid(function() {
+        validTx: execWithValid(function () {
             if (this.btnUnuse) {
                 return;
             }

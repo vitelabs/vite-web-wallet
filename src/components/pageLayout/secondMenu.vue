@@ -38,11 +38,11 @@
 </template>
 
 <script>
-import { StatusMap } from "wallet";
-import dexToken from "components/dexToken";
-import switchAddr from "components/switchAddress";
-import { pwdConfirm } from "components/password/index.js";
-import { execWithValid } from "utils/execWithValid";
+import { StatusMap } from 'wallet';
+import dexToken from 'components/dexToken';
+import switchAddr from 'components/switchAddress';
+import { pwdConfirm } from 'components/password/index.js';
+import { execWithValid } from 'utils/execWithValid';
 
 export default {
     components: { dexToken, switchAddr },
@@ -76,29 +76,29 @@ export default {
         }
     },
     methods: {
-        showToken: execWithValid(function() {
+        showToken: execWithValid(function () {
             this.isShowDexToken = true;
-        },this.dexStart),
+        }, this.dexStart),
         closeToken() {
             this.isShowDexToken = false;
         },
 
         goHelp() {
-            window.open("/help");
+            window.open('/help');
         },
         dexStart() {
             if (!this.isHaveUsers) {
-                this.go("start");
+                this.go('start');
                 return;
             }
-            pwdConfirm({ type: "unlockAccount" });
+            pwdConfirm({ type: 'unlockAccount' });
         },
         dexChange() {
             if (!this.isHaveUsers) {
-                this.$router.push({ name: "startCreate" });
+                this.$router.push({ name: 'startCreate' });
                 return;
             }
-            this.go("start");
+            this.go('start');
         }
     }
 };

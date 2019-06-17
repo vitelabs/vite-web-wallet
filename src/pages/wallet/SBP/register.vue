@@ -64,7 +64,7 @@ import viteInput from 'components/viteInput';
 import { initPwd } from 'components/password/index.js';
 import BigNumber from 'utils/bigNumber';
 import sendTx from 'utils/sendTx';
-import {execWithValid} from 'utils/execWithValid';
+import { execWithValid } from 'utils/execWithValid';
 
 const amount = 500000;
 
@@ -198,7 +198,7 @@ export default {
             this.producerAddrErr = '';
         },
 
-        validTx:execWithValid(function() {
+        validTx: execWithValid(function () {
             if (this.loading) {
                 return;
             }
