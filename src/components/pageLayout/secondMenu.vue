@@ -1,22 +1,36 @@
 <template>
     <div class="head">
         <ul class="tab-list-wrapper">
-            <li v-for="(tab, index) in tabList" :key="index"
-                class="tab __pointer" :class="{ 'active': active === tab }"
-                @click="go(tab)" > {{ $t(`${tab}.title`) }}
+            <li
+                v-for="(tab, index) in tabList"
+                :key="index"
+                class="tab __pointer"
+                :class="{ active: active === tab }"
+                @click="go(tab)"
+            >
+                {{ $t(`${tab}.title`) }}
             </li>
         </ul>
 
         <ul class="right-lab-list">
-            <div class="tab __pointer" @click="goHelp">{{ $t('help') }}</div>
+            <div class="tab __pointer" @click="goHelp">{{ $t("help") }}</div>
             <div v-show="!isLogin" @click="dexStart" class="tab __pointer">
-                {{ isHaveUsers ? $t('unlockAcc') : $t('login')  }}</div>
+                {{ isHaveUsers ? $t("unlockAcc") : $t("login") }}
+            </div>
             <div v-show="!isLogin" @click="dexChange" class="tab __pointer">
-                {{ isHaveUsers ? $t('changeAcc') : $t('register') }}</div>
-            <div v-show="active.indexOf('trade') !== -1" class="tab __pointer"
-                 v-unlock-account="showToken" @noactiveacc="dexStart">
-                {{ $t('dexToken') }}</div>
-            <switch-addr class="switch-tab menu" v-show="active.indexOf('trade') !== -1" ></switch-addr>
+                {{ isHaveUsers ? $t("changeAcc") : $t("register") }}
+            </div>
+            <div
+                v-show="active.indexOf('trade') !== -1"
+                class="tab __pointer"
+                @click="showToken"
+            >
+                {{ $t("dexToken") }}
+            </div>
+            <switch-addr
+                class="switch-tab menu"
+                v-show="active.indexOf('trade') !== -1"
+            ></switch-addr>
         </ul>
 
         <dex-token v-if="isShowDexToken" :close="closeToken"></dex-token>
@@ -24,10 +38,11 @@
 </template>
 
 <script>
-import { StatusMap } from 'wallet';
-import dexToken from 'components/dexToken';
-import switchAddr from 'components/switchAddress';
-import { pwdConfirm } from 'components/password/index.js';
+import { StatusMap } from "wallet";
+import dexToken from "components/dexToken";
+import switchAddr from "components/switchAddress";
+import { pwdConfirm } from "components/password/index.js";
+import { execWithValid } from "utils/execWithValid";
 
 export default {
     components: { dexToken, switchAddr },
@@ -61,29 +76,29 @@ export default {
         }
     },
     methods: {
-        showToken() {
+        showToken: execWithValid(function() {
             this.isShowDexToken = true;
-        },
+        },this.dexStart),
         closeToken() {
             this.isShowDexToken = false;
         },
 
         goHelp() {
-            window.open('/help');
+            window.open("/help");
         },
         dexStart() {
             if (!this.isHaveUsers) {
-                this.go('start');
+                this.go("start");
                 return;
             }
-            pwdConfirm({ type: 'unlockAccount' });
+            pwdConfirm({ type: "unlockAccount" });
         },
         dexChange() {
             if (!this.isHaveUsers) {
-                this.$router.push({ name: 'startCreate' });
+                this.$router.push({ name: "startCreate" });
                 return;
             }
-            this.go('start');
+            this.go("start");
         }
     }
 };
@@ -124,7 +139,7 @@ export default {
     }
 
     .tab {
-        color: #BDC1D1;
+        color: #bdc1d1;
         font-size: 13px;
         @include font-family-bold();
         font-weight: 600;
@@ -140,7 +155,7 @@ export default {
             border-bottom: 2px solid rgba(0, 122, 255, 1);
 
             &::after {
-                content: '';
+                content: "";
                 display: inline-block;
                 border: 6px solid transparent;
                 border-bottom: 6px solid rgba(0, 122, 255, 1);

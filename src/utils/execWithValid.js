@@ -1,11 +1,7 @@
-import {
-    StatusMap,
-    getCurrHDAcc,
-    getActiveAcc
-} from 'wallet';
+import { StatusMap, getCurrHDAcc, getActiveAcc } from 'wallet';
 import { pwdConfirm } from 'components/password/index.js';
 
-export function execWithValid(funcName) {
+export function execWithValid(funcName, noActive) {
     return function (...args) {
         const currHDACC = getCurrHDAcc();
         if (currHDACC.status === StatusMap.UNLOCK) {
@@ -15,6 +11,9 @@ export function execWithValid(funcName) {
         if (activeAccount) {
             pwdConfirm({ type: 'unlockAccount' });
             return;
+        }
+        if (noActive) {
+            noActive.apply(this);
         }
     };
 }
