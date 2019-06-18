@@ -303,7 +303,7 @@ export default {
             position: relative;
             font-family: $font-normal;
             .copy-tips{
-                top:-50%;
+                top: -50%;
             }
             .addr_item{
                 max-width: 220px;
