@@ -17,9 +17,6 @@ const mutations = {
     }
 };
 
-// .catch(() => {
-//     commit('setExchangeBalance', []);
-// });
 const updateExBalance = (commit, address) =>
     $ViteJS.request('dexfund_getAccountFundInfo', address).then(data => {
         commit('setExchangeBalance', data);
@@ -27,9 +24,10 @@ const updateExBalance = (commit, address) =>
 
 const actions = {
     startLoopExchangeBalance({ commit, dispatch, getters }) {
-    // 1. Stop last loop
+        // 1. Stop last loop
         dispatch('stopLoopExchangeBalance');
-        // 3. Restart
+
+        // 2. Restart
         balanceTimer = new timer(() => {
             const _address = getters.activeAddr;
             if (address !== _address) {

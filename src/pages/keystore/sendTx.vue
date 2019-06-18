@@ -57,16 +57,8 @@ export default {
                 }, true, true));
             }
 
-            // this.account.sendTx().then(() => {
-
-            // }).catch((err) => {
-            //     this.$toast('Error. Retry please.', err);
-            //     console.warn(err);
-            // })
-
-            Promise.all(reqList).then(data => {
+            Promise.all(reqList).then(() => {
                 this.$toast('Success. Check please.');
-                console.log(data);
             }).catch(err => {
                 this.$toast('Error. Retry please.', err);
                 console.warn(err);

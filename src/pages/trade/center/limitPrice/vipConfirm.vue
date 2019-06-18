@@ -1,0 +1,142 @@
+<template>
+    <confirm :showMask="true" :title="confirmTitle"
+             :closeIcon="true" :close="close"
+             :leftBtnClick="changeVip" :leftBtnTxt="confirmTitle"
+             :singleBtn="true" :btnUnuse="!canOrder">
+        <div v-show="!isVip" class="__row">
+            <div class="__row-t">{{ $t('tokenCard.heads.availableExAmount') }}</div>
+            <div class="__unuse-row">
+                <img  :src="viteTokenInfo ? viteTokenInfo.icon : ''" class="__icon" />VITE
+                <span class="__right">{{ exViteBalance }}</span>
+            </div>
+        </div>
+
+        <div class="__row">
+            <div class="__row-t">{{ stakingText }}
+                <span v-show="!canOrder" class="__err __hint">{{ $t('trade.vipConfirm.noBalance') }}</span>
+            </div>
+            <div class="no-input">
+                10,000 VITE
+            </div>
+        </div>
+
+        <div class="hint"><span>{{ hint }}</span></div>
+    </confirm>
+</template>
+
+<script>
+import { constant } from '@vite/vitejs';
+import confirm from 'components/confirm.vue';
+import BigNumber from 'utils/bigNumber';
+import sendTx from 'utils/sendTx';
+import $ViteJS from 'utils/viteClient';
+import date from 'utils/date';
+
+const vipStakingAmount = 10000;
+
+export default {
+    components: { confirm },
+    props: {
+        close: {
+            type: Function,
+            default: () => {}
+        }
+    },
+    mounted() {
+        this.fetchStakingObj();
+    },
+    data() {
+        return { stakingObj: {} };
+    },
+    computed: {
+        canOrder() {
+            if (this.isVip) {
+                return true;
+            }
+
+            if (!this.rawBalance || !+this.rawBalance.availableExAmount || !this.viteTokenInfo) {
+                return false;
+            }
+
+            const minAmount = BigNumber.toMin(vipStakingAmount, this.viteTokenInfo.decimals);
+            return BigNumber.compared(minAmount, this.rawBalance.availableExAmount) < 0;
+        },
+        viteTokenInfo() {
+            return this.$store.getters.viteTokenInfo;
+        },
+        rawBalance() {
+            if (!this.viteTokenInfo) {
+                return null;
+            }
+            const list = this.$store.getters.exBalanceList;
+            return list[this.viteTokenInfo.tokenId];
+        },
+        exViteBalance() {
+            return this.rawBalance ? this.rawBalance.available : 0;
+        },
+        accountAddr() {
+            return this.$store.getters.activeAddr;
+        },
+
+        isVip() {
+            return this.$store.state.exchangeFee.isVip;
+        },
+        confirmTitle() {
+            return this.isVip ? this.$t('trade.vipConfirm.cancelVip') : this.$t('trade.vipConfirm.openVip');
+        },
+        stakingText() {
+            return this.isVip ? this.$t('trade.vipConfirm.cancelStakingAmount') : this.$t('trade.vipConfirm.openStakingAmount');
+        },
+        hint() {
+            return this.isVip ? this.$t('trade.vipConfirm.cancelHint', { time: this.stakingObj.withdrawTime ? date(this.stakingObj.withdrawTime * 1000, 'zh') : '' }) : this.$t('trade.vipConfirm.openHint');
+        }
+    },
+    watch: {
+        isVip() {
+            this.fetchStakingObj();
+        }
+    },
+    methods: {
+        changeVip() {
+            const amount = this.isVip ? '' : BigNumber.toMin(vipStakingAmount, this.viteTokenInfo.decimals);
+            const actionType = this.isVip ? 2 : 1;
+
+            sendTx('dexFundPledgeForVip', {
+                amount,
+                actionType
+            }).then(() => {
+                this.$toast(this.isVip ? this.$t('trade.vipConfirm.cancleSuccess') : this.$t('trade.vipConfirm.openSuccess'));
+                this.close();
+            }).catch(err => {
+                console.warn(err);
+                this.$toast(this.isVip ? this.$t('trade.vipConfirm.cancleSuccess') : this.$t('trade.vipConfirm.openSuccess'));
+            });
+        },
+
+        fetchStakingObj() {
+            if (!this.isVip) {
+                return;
+            }
+
+            $ViteJS.request('pledge_getAgentPledgeInfo', {
+                pledgeAddr: this.accountAddr,
+                agentAddress: this.accountAddr,
+                beneficialAddr: constant.DexFund_Addr,
+                bid: 2
+            }).then(data => {
+                this.stakingObj = data;
+            }).catch(err => {
+                console.warn(err);
+            });
+        }
+    }
+};
+</script>
+
+<style lang="scss" scoped>
+@import "~assets/scss/confirmInput.scss";
+
+.__icon{
+    margin-right: 10px;
+}
+</style>
