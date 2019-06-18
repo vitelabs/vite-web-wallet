@@ -148,3 +148,19 @@ export async function tokenRateFromCMC({ tokenSymbol, platformSymbol = 'VITE', t
         params: { tokenSymbol, platformSymbol, tokenAddress }
     });
 }
+
+export function miningTrade({ address, offset, limit = 30 }) {
+    return request({
+        path: `${ path }/mining/trade`,
+        method: 'POST',
+        params: { address, offset, limit }
+    });
+}
+
+export function miningPledge({ address, offset, limit = 30 }) {
+    return request({
+        path: `${ path }/mining/pledge`,
+        method: 'POST',
+        params: { address, offset, limit }
+    });
+}
