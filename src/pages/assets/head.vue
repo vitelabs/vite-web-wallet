@@ -32,7 +32,7 @@
             <div class="head-right">
                 <SwitchAddr :isShowAddr="false"></SwitchAddr>
                 <span class="address-content">
-                    <copy ref="copyDom"></copy>
+                    <copy ref="copyDom" class="copy-tips"></copy>
                     <span class="addr_item">{{ activeAddr }}</span>
                     <QrcodePopup :qrcodeString="addressQrcode"
                     ><img
@@ -302,6 +302,9 @@ export default {
             display: flex;
             position: relative;
             font-family: $font-normal;
+            .copy-tips{
+                top:-50%;
+            }
             .addr_item{
                 max-width: 220px;
             }

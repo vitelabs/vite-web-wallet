@@ -78,7 +78,7 @@ export default {
     methods: {
         showToken: execWithValid(function () {
             this.isShowDexToken = true;
-        }, this.dexStart),
+        }, function(){return this.dexStart()}),
         closeToken() {
             this.isShowDexToken = false;
         },

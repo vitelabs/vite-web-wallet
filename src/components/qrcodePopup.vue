@@ -1,6 +1,6 @@
 <template>
     <div v-click-outside.includeChildrens="closeQrCode" class="qrcode-popup">
-        <div @click="toggleQrCode">
+        <div @click="toggleQrCode" class="btn-wrapper">
             <slot></slot>
         </div>
         <div class="code-container" v-show="qrcodeShow">
@@ -11,7 +11,7 @@
                     @genImage="getImage"
                 ></qrcode>
             </div>
-            <div class="btn" @click="downLoadQrCode">
+            <div class="btn __pointer" @click="downLoadQrCode">
                 {{ $t("saveQrcode") }}
             </div>
         </div>
@@ -62,6 +62,9 @@ export default {
 .qrcode-popup {
     display: flex;
     position: relative;
+    .btn-wrapper{
+        display: flex;
+    }
     .code-container {
         box-shadow: 0 2px 48px 1px rgba(176, 192, 237, 0.42);
         width: 166px;
