@@ -3,6 +3,7 @@ import viteCrypto from 'testwebworker';
 import statistics from 'utils/statistics';
 import $ViteJS from 'utils/viteClient';
 import { getAddr, addHdAccount, setAcc, getAcc, setAccInfo, setAddr, setLastAcc } from './store';
+import { MODE } from './vb';
 
 const { LangList } = constant;
 const maxAddrNum = 10;
@@ -13,30 +14,34 @@ export const StatusMap = {
 };
 
 export class HDAccount {
-    constructor({ id, lang, keystore, name, addrNum, activeAddr, activeIdx }) {
-        if (!keystore) {
-            throw new Error('[HDAccount] don\'t have keystore');
+    constructor({ id, lang, keystore, name, addrNum, activeAddr, activeIdx, mode = MODE.VITEJS }) {
+        if (mode === MODE.VITEJS) {
+            if (!keystore) {
+                throw new Error('[HDAccount] don\'t have keystore');
+            }
+
+            this.status = StatusMap.LOCK;
+
+            this.id = id;
+            this.keystore = keystore;
+            this.lang = lang || LangList.english;
+            this.name = name || '';
+
+            // Set Active (Addr Idx Account)
+            this.setActiveAcc(activeIdx, activeAddr);
+
+            // Set Addr Num
+            addrNum = addrNum || 1;
+            this.addrNum = (this.activeIdx + 1) > addrNum ? this.activeIdx + 1 : addrNum;
+
+            // Set Addr List
+            this.setAddrList();
+
+            this.mnemonic = '';
+            this.pass = '';
+        } else if (mode === MODE.VITEBIRFORST) {
+            this.id = '';// todo
         }
-
-        this.status = StatusMap.LOCK;
-
-        this.id = id;
-        this.keystore = keystore;
-        this.lang = lang || LangList.english;
-        this.name = name || '';
-
-        // Set Active (Addr Idx Account)
-        this.setActiveAcc(activeIdx, activeAddr);
-
-        // Set Addr Num
-        addrNum = addrNum || 1;
-        this.addrNum = (this.activeIdx + 1) > addrNum ? this.activeIdx + 1 : addrNum;
-
-        // Set Addr List
-        this.setAddrList();
-
-        this.mnemonic = '';
-        this.pass = '';
     }
 
     save() {
