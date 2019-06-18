@@ -860,18 +860,26 @@
     "tradeMining": {
         "title": "挖矿",
         "addQuota": "新增抵押挖矿",
+        "add": "增加",
+        "withdraw": "取回",
         "tbHead": {
             "date": "日期",
-            "fee": "交易所手续费",
+            "fee": "交易手续费金额",
             "mining": "挖矿金额",
             "status": "状态"
         },
-        "tx": {
-            "title": "交易挖矿总收益"
-        },
-        "quota": {
-            "title": "抵押挖矿总收益"
-        }
+        "already": "已发放",
+        "txTitle": "交易挖矿总收益",
+        "quotaTitle": "抵押挖矿总收益",
+        "addHint": "每日约13:00(UTC+8)计算抵押挖矿收益；抵押生效后，您可3天后可手动取回",
+        "withdrawHint": "取回后，您将无法再挖矿VX",
+        "addTitle": "抵押VITE挖矿",
+        "withdrawTitle": "取回抵押VITE",
+        "addPlaceHolder": "请输入抵押金额，最少134vite",
+        "withdrawPlaceHolder": "请输入取回金额，最少134vite",
+        "addBtn": "提交抵押",
+        "withdrawBtn": "确认取回",
+        "stakingBalance": "可取回抵押余额"
     },
     "tradeDividend": {
         "title": "分红"

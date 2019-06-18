@@ -92,6 +92,9 @@ export default {
         }
     },
     watch: {
+        address() {
+            this.fetchStakingObj();
+        },
         isVip() {
             this.fetchStakingObj();
         }

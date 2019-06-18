@@ -1,40 +1,194 @@
 <template>
     <div class="trade-mining-wrapper">
         <div class="trade-mining-section">
-            <div class="title">
-                {{ $t('tradeMining.tx.title') }}
-                <span class="amount">20000 VX</span>
-            </div>
-            <wallet-table :headList="headList" class="content tb">
-                <pagination></pagination>
+            <section-title :title="$t('tradeMining.txTitle')" :amount="`${tradeTotal} VX`"></section-title>
+            <wallet-table class="content tb"
+                          :headList="headList" :contentList="tradeContent">
+                <pagination slot="tableBottom" class="__tb_pagination"
+                            :currentPage="tradeCurrentPage + 1" :toPage="fetchMiningTrade"
+                            :totalPage="tradeTotalPage"></pagination>
             </wallet-table>
         </div>
+
         <div class="trade-mining-section">
-            <div class="title">
-                {{ $t('tradeMining.quota.title') }}
-                <span class="amount">20000 VX</span>
-            </div>
+            <section-title :title="$t('tradeMining.quotaTitle')" :amount="`${stakeTotal} VX`"></section-title>
             <div class="content">
                 <div class="quota-detail">
-                    <div class="no-detail __pointer">{{ $t('tradeMining.addQuota') }}</div>
+                    <div v-if="!stakingObj" @click="showVxConfirm(1)"
+                         class="no-detail __pointer">{{ $t('tradeMining.addQuota') }}</div>
+                    <staking-detail v-if="stakingObj"
+                                    :stakingObj="stakingObj" :showVxConfirm="showVxConfirm"></staking-detail>
                 </div>
-                <wallet-table :headList="headList" class="tb">
-                    <pagination></pagination>
+                <wallet-table :headList="headList" :contentList="stakeContent" class="tb">
+                    <pagination slot="tableBottom" class="__tb_pagination"
+                                :currentPage="stakeCurrentPage + 1" :toPage="fetchMiningStake"
+                                :totalPage="stakeTotalPage"></pagination>
                 </wallet-table>
             </div>
         </div>
+
+        <vx-confirm v-show="isShowVxConfirm" :close="hideVxConfirm"
+                    :actionType="actionType" :stakingObj="stakingObj"></vx-confirm>
     </div>
 </template>
 
 <script>
+import { constant } from '@vite/vitejs';
+import date from 'utils/date';
+import $ViteJS from 'utils/viteClient';
+import { execWithValid } from 'utils/execWithValid';
 import pagination from 'components/pagination.vue';
 import walletTable from 'components/table/index.vue';
+import { miningTrade, miningPledge } from 'services/trade';
+import sectionTitle from '../components/sectionTitle.vue';
+import vxConfirm from './vxConfirm.vue';
+import stakingDetail from './stakingDetail.vue';
 
 export default {
-    components: { walletTable, pagination },
+    components: { walletTable, pagination, sectionTitle, vxConfirm, stakingDetail },
+    mounted() {
+        this.init();
+    },
+    data() {
+        return {
+            tradeCurrentPage: 0,
+            tradeTotal: 0,
+            tradeListTotal: 0,
+            tradeList: [],
+
+            stakeCurrentPage: 0,
+            stakeTotal: 0,
+            stakeListTotal: 0,
+            stakeList: [],
+
+            stakingObj: null,
+            actionType: null,
+            isShowVxConfirm: false
+        };
+    },
     computed: {
         headList() {
-            return [ { text: this.$t('tradeMining.tbHead.date') }, { text: this.$t('tradeMining.tbHead.fee') }, { text: this.$t('tradeMining.tbHead.mining') }, { text: this.$t('tradeMining.tbHead.status') } ];
+            return [ {
+                text: this.$t('tradeMining.tbHead.date'),
+                cell: 'date'
+            }, {
+                text: this.$t('tradeMining.tbHead.fee'),
+                cell: 'fee'
+            }, {
+                text: this.$t('tradeMining.tbHead.mining'),
+                cell: 'mining'
+            }, {
+                text: this.$t('tradeMining.tbHead.status'),
+                cell: 'status'
+            } ];
+        },
+
+        tradeContent() {
+            return this.dealList(this.tradeList);
+        },
+        tradeTotalPage() {
+            return parseInt(this.tradeListTotal / 30);
+        },
+
+        stakeContent() {
+            return this.dealList(this.stakeList);
+        },
+        stakeTotalPage() {
+            return parseInt(this.stakeListTotal / 30);
+        },
+
+        address() {
+            return this.$store.getters.activeAddr;
+        }
+    },
+    watch: {
+        address() {
+            this.init();
+        }
+    },
+    methods: {
+        init() {
+            this.fetchStakingInfo();
+            this.fetchMiningTrade();
+            this.fetchMiningStake();
+        },
+        getDate(time) {
+            return date(time * 1000, 'zh');
+        },
+        dealList(rawlist) {
+            const list = [];
+            rawlist.forEach(item => {
+                list.push({
+                    date: this.getDate(item.date),
+                    fee: `${ item.feeAmount } VITE`,
+                    mining: `${ item.miningAmount } VX`,
+                    status: this.$t('tradeMining.already')
+                });
+            });
+            return list;
+        },
+
+        hideVxConfirm() {
+            this.isShowVxConfirm = false;
+            this.actionType = null;
+        },
+        showVxConfirm(actionType) {
+            const x = execWithValid(() => {
+                this.isShowVxConfirm = true;
+                this.actionType = actionType;
+            });
+            x();
+        },
+
+        fetchStakingInfo() {
+            $ViteJS.request('pledge_getAgentPledgeInfo', {
+                pledgeAddr: this.address,
+                agentAddress: this.address,
+                beneficialAddr: constant.DexFund_Addr,
+                bid: 1
+            }).then(data => {
+                this.stakingObj = data;
+            }).catch(err => {
+                console.warn(err);
+            });
+        },
+        fetchMiningTrade(pageNumber) {
+            const offset = pageNumber ? pageNumber - 1 : 0;
+
+            miningTrade({
+                address: this.address,
+                offset
+            }).then(data => {
+                if (!data) {
+                    return;
+                }
+
+                this.tradeCurrentPage = offset;
+                this.tradeTotal = data.miningTotal || 0;
+                this.tradeListTotal = data.total || 0;
+                this.tradeList = data.miningList || [];
+            }).catch(err => {
+                console.warn(err);
+            });
+        },
+        fetchMiningStake(pageNumber) {
+            const offset = pageNumber ? pageNumber - 1 : 0;
+
+            miningPledge({
+                address: this.address,
+                offset
+            }).then(data => {
+                if (!data) {
+                    return;
+                }
+
+                this.stakeCurrentPage = offset;
+                this.stakeTotal = data.miningTotal || 0;
+                this.stakeListTotal = data.total || 0;
+                this.stakeList = data.miningList || [];
+            }).catch(err => {
+                console.warn(err);
+            });
         }
     }
 };
@@ -53,27 +207,7 @@ export default {
     height: 50%;
     display: flex;
     flex-direction: column;
-    .title {
-        height: 50px;
-        line-height: 50px;
-        font-size: 13px;
-        @include font-family-bold();
-        font-weight: 600;
-        color: rgba(94,104,117,0.8);
-        .amount {
-            font-size: 20px;
-            color: rgba(29,32,36,1);
-            &:before {
-                content: ' ';
-                margin: 0 10px 3px;
-                display: inline-block;
-                width: 8px;
-                height: 8px;
-                border-radius: 8px;
-                background: rgba(0,122,255,1);
-            }
-        }
-    }
+
     .content {
         flex: 1;
         display: flex;
@@ -82,14 +216,14 @@ export default {
         border-radius: 2px;
         box-shadow: 0px 2px 10px 1px rgba(176,192,237,0.42);
         .quota-detail {
-            height: 80px;
+            padding: 16px 30px;
             border-bottom: 1px solid #d4dee7;
             box-sizing: border-box;
             .no-detail {
                 width: 100%;
-                height: 100%;
+                height: 48px;
+                line-height: 48px;
                 text-align: center;
-                line-height: 80px;
                 font-size: 16px;
                 @include font-family-bold();
                 color: rgba(0,122,255,1);
@@ -97,10 +231,12 @@ export default {
                 &:before {
                     content: ' ';
                     display: inline-block;
-                    width: 10px;
-                    height: 10px;
-                    border: 1px solid rgba(0,122,255,0.3);
+                    width: 13px;
+                    height: 13px;
+                    background: url('~assets/imgs/addStaking.svg');
+                    background-size: 100% 100%;
                     margin-right: 6px;
+                    margin-bottom: -1px;
                 }
             }
         }
