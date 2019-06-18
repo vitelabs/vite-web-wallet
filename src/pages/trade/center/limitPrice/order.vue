@@ -77,7 +77,6 @@ import sendTx from 'utils/sendTx';
 import BigNumber from 'utils/bigNumber';
 import { initPwd } from 'components/password/index.js';
 
-const taker = 0.0025;
 const maxDigit = 8;
 
 export default {
@@ -174,6 +173,9 @@ export default {
         }
     },
     computed: {
+        fee() {
+            return this.$store.getters.exFee;
+        },
         realPrice() {
             if (!this.rate || this.priceErr || !this.price) {
                 return '';
@@ -382,7 +384,7 @@ export default {
             !BigNumber.isEqual(amount, this.amount) && (this.amount = amount);
         },
 
-        // price = amount / quantity / (1+taker)
+        // price = amount / quantity / (1+fee)
         getPrice(quantity, amount) {
             const isRightQuantity = quantity
                                     && this.$validAmount(quantity) === 0
@@ -399,7 +401,7 @@ export default {
             }
 
             if (this.orderType === 'buy') {
-                quantity = BigNumber.multi(quantity, 1 + taker);
+                quantity = BigNumber.multi(quantity, 1 + this.fee);
             }
             return BigNumber.dividedToNumber(amount, quantity, this.ttokenDigit, 'nofix');
         },
@@ -410,7 +412,7 @@ export default {
             const result = BigNumber.multi(percent, this.balance, digit, 'nofix');
             return BigNumber.isEqual(result, 0) ? '' : result;
         },
-        // amount = quantity * price * (1+taker)
+        // amount = quantity * price * (1+fee)
         getAmount(price, quantity) {
             const isRightPrice = price
                                 && this.$validAmount(price) === 0
@@ -431,9 +433,9 @@ export default {
             }
 
             const amount = BigNumber.multi(price, quantity);
-            return BigNumber.multi(amount, 1 + taker, this.ttokenDigit);
+            return BigNumber.multi(amount, 1 + this.fee, this.ttokenDigit);
         },
-        // quantity = amount/price/（1+taker)
+        // quantity = amount/price/（1+fee)
         getQuantity(price, amount) {
             const isRightPrice = price
                                 && this.$validAmount(price) === 0
@@ -453,7 +455,7 @@ export default {
             const minPrice = BigNumber.toMin(price, this.ttokenDetail.tokenDecimals);
 
             if (this.orderType === 'buy') {
-                minAmount = BigNumber.dividedToNumber(minAmount, 1 + taker, 0);
+                minAmount = BigNumber.dividedToNumber(minAmount, 1 + this.fee, 0);
             }
 
             return BigNumber.dividedToNumber(minAmount, minPrice, this.ftokenDigit, 'nofix');

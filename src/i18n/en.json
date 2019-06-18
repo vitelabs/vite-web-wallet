@@ -701,7 +701,22 @@
             "priceNotNull": "Amount cannot be empty",
             "amountNotNull": "Volume cannot be empty",
             "quantityNotNull": "Quantity cannot be empty",
-            "bigger0": "Value must be greater than 0"
+            "bigger0": "Value must be greater than 0",
+            "cancelVip": "取消",
+            "openVip": "开通",
+            "dexFee": "交易所基础费率：{fee}",
+            "operatorFee": "运营商收取费率：{fee}",
+            "vipFee": "VIP特权抵扣：{fee}"
+        },
+        "vipConfirm": {
+            "cancelVip": "取消VIP",
+            "openVip": "开通VIP",
+            "openStakingAmount": "开通VIP抵押金额",
+            "cancelStakingAmount": "可取回抵押金额",
+            "noBalance": "交易所可用余额不足",
+            "hint": "VIP开通后，可享有降低0.1%手续费特权，开通VIP需抵押10000VITE，30天后可手动取回",
+            "openSuccess": "申请开通VIP成功，稍后生效",
+            "cancleSuccess": "申请取消VIP成功"
         }
     },
     "tradeAssets": {

@@ -32,6 +32,7 @@ const actions = {
         dispatch('exFetchLatestTx');
         dispatch('exFetchDepth');
         dispatch('exFetchActiveTokens');
+        dispatch('exFetchMarketInfo');
     }
 };
 
