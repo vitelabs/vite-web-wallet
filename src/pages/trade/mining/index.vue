@@ -63,12 +63,9 @@ export default {
 
             stakingObj: null,
             actionType: null,
-            isShowVxConfirm: false
-        };
-    },
-    computed: {
-        headList() {
-            return [ {
+            isShowVxConfirm: false,
+
+            headList: [ {
                 text: this.$t('tradeMining.tbHead.date'),
                 cell: 'date'
             }, {
@@ -80,9 +77,10 @@ export default {
             }, {
                 text: this.$t('tradeMining.tbHead.status'),
                 cell: 'status'
-            } ];
-        },
-
+            } ]
+        };
+    },
+    computed: {
         tradeContent() {
             return this.dealList(this.tradeList);
         },

@@ -165,10 +165,10 @@ export function miningPledge({ address, offset, limit = 30 }) {
     });
 }
 
-export function dividend({ address }) {
+export function dividend({ address, offset, limit = 30 }) {
     return request({
         path: `${ path }/dividend`,
         method: 'GET',
-        params: { address }
+        params: { address, offset, limit }
     });
 }

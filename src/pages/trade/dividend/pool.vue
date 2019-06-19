@@ -1,0 +1,171 @@
+<template>
+    <div class="pool-detail">
+        <div class="pool-item" v-for="tokenType in typeList" :key="tokenType.name">
+            <div class="item-title">
+                <img :src="tokenType.icon" />{{ tokenType.name }}
+            </div>
+            <div class="token-wrapper">
+                <div class="token" v-for="(token, i) in pool[tokenType.name]" :key="i">
+                    <div class="title">{{ token.tokenInfo.tokenSymbol }}</div>
+                    <div class="amount">{{ token.amount }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+import $ViteJS from 'utils/viteClient';
+import viteIcon from 'assets/imgs/vite-dividend.svg';
+import ethIcon from 'assets/imgs/eth.svg';
+import usdIcon from 'assets/imgs/usd.svg';
+import btcIcon from 'assets/imgs/btc.svg';
+
+const typeList = [ {
+    name: 'VITE',
+    icon: viteIcon
+}, {
+    name: 'ETH',
+    icon: ethIcon
+}, {
+    name: 'BTC',
+    icon: btcIcon
+}, {
+    name: 'USD',
+    icon: usdIcon
+} ];
+
+export default {
+    beforeMount() {
+        this.fetchPool();
+    },
+    data() {
+        return {
+            typeList,
+            pool: {
+                'VITE': [ {
+                    amount: 232323,
+                    tokenInfo: { tokenSymbol: 'VITE-0000' }
+                }, {
+                    amount: 232323,
+                    tokenInfo: { tokenSymbol: 'VITE-0000' }
+                }, {
+                    amount: 232323,
+                    tokenInfo: { tokenSymbol: 'VITE-0000' }
+                }, {
+                    amount: 232323,
+                    tokenInfo: { tokenSymbol: 'VITE-0000' }
+                } ],
+                'ETH': [ {
+                    amount: 232323,
+                    tokenInfo: { tokenSymbol: 'VITE-0000' }
+                }, {
+                    amount: 232323,
+                    tokenInfo: { tokenSymbol: 'VITE-0000' }
+                }, {
+                    amount: 232323,
+                    tokenInfo: { tokenSymbol: 'VITE-0000' }
+                }, {
+                    amount: 232323,
+                    tokenInfo: { tokenSymbol: 'VITE-0000' }
+                } ],
+                'USD': [ {
+                    amount: 232323,
+                    tokenInfo: { tokenSymbol: 'VITE-0000' }
+                }, {
+                    amount: 232323,
+                    tokenInfo: { tokenSymbol: 'VITE-0000' }
+                } ],
+                'BTC': [{
+                    amount: 232323,
+                    tokenInfo: { tokenSymbol: 'VITE-0000' }
+                }]
+            }
+        };
+    },
+    methods: {
+        fetchPool() {
+            $ViteJS.request('dexfund_getCurrentDividendPools').then(data => {
+                if (!data) {
+                    return;
+                }
+
+                for (const tokenId in data) {
+                    const token = data[tokenId];
+                    const tokenType = typeList[token.quoteTokenType - 1];
+                    this.pool[tokenType] = this.pool[tokenType] || [];
+                    token.tokenType = tokenType;
+                    this.pool[tokenType].push(token);
+                }
+            }).catch(err => {
+                console.warn(err);
+            });
+        }
+    }
+};
+</script>
+
+<style lang="scss" scoped>
+@import "~assets/scss/vars.scss";
+
+.pool-detail {
+    background: #fff;
+    box-shadow: 0px 2px 10px 1px rgba(176,192,237,0.42);
+    border-radius: 2px;
+    display: flex;
+    flex-direction: row;
+}
+.pool-item {
+    max-width: 449px;
+    min-width: 225px;
+    padding: 14px 30px;
+    box-sizing: border-box;
+    border-right: 1px solid rgba(227,235,245,0.6);
+    font-size: 12px;
+
+    &:last-child {
+        border-right: none;
+    }
+
+    .token-wrapper {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .item-title {
+        width: 100%;
+        box-sizing: border-box;
+        line-height: 24px;
+        font-family: $font-bold;
+        font-weight: 600;
+        color: rgba(29,32,36,1);
+        img {
+            width: 24px;
+            height: 24px;
+            margin-bottom: -7px;
+            margin-right: 6px;
+        }
+    }
+
+    .token {
+        flex: 1;
+        padding-top: 14px;
+        min-width: 120px;
+        max-width: 178px;
+        .title {
+            line-height: 18px;
+            font-family: $font-normal;
+            font-weight: 400;
+            color: rgba(94,104,117,1);
+        }
+        .amount {
+            font-family: $font-bold;
+            font-weight: 600;
+            color: rgba(29,32,36,1);
+            line-height: 16px;
+        }
+    }
+}
+</style>
+

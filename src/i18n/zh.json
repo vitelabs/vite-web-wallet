@@ -884,6 +884,11 @@
     "tradeDividend": {
         "title": "分红",
         "poolTitle": "手续费分红池",
-        "listTitle": "我的分红"
+        "listTitle": "我的分红",
+        "date": "日期",
+        "VX": "持有VX",
+        "coin": "分红币种",
+        "amount": "分红金额",
+        "price": "分红总估值"
     }
 }

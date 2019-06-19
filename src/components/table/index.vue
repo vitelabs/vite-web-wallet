@@ -12,7 +12,7 @@
                  class="__tb_row __tb_content_row" :class="{
                      'active': !!clickRow,
                      '__pointer': !!clickRow
-            }" @click="_clickRow(rowItem)">
+            }" @click="_clickRow(rowItem, index)">
                 <span v-for="(headItem, i) in headList" :key="i"
                       @click="clickCell(headList[i].cell, rowItem, index)"
                       :class="`${headItem.class || ''} ${headItem.cellClass || ''}`" class="__tb_cell">
@@ -21,6 +21,7 @@
                     <slot :name="`${index}${headList[i].cell}After`"></slot>
                 </span>
             </div>
+            <slot v-for="(rowItem, index) in contentList" :name="`${index}Row`"></slot>
         </div>
 
         <div class="__tb_content __tb_no_data" v-show="!contentList || !contentList.length">
@@ -53,8 +54,8 @@ export default {
         }
     },
     methods: {
-        _clickRow(item) {
-            this.clickRow && this.clickRow(item);
+        _clickRow(item, index) {
+            this.clickRow && this.clickRow(item, index);
         }
     }
 };
