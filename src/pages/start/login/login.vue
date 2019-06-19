@@ -3,9 +3,11 @@
         <div class="__title">{{ $t('login') }}</div>
 
         <div @click="toggleShowExisting" class="switch-btn" :class="{'radius': isShowExisting}">
-            <div class="btn-item __pointer" :class="{'active': isShowExisting}">
+            <div class="btn-item __pointer" :class="{'active': tabName==='vb'}">
                 {{ $t('existingAcc') }}</div>
-            <div class="btn-item __pointer" :class="{'active': !isShowExisting}">
+            <div class="btn-item __pointer" :class="{'active': tabName==='existingAcc'}">
+                {{ $t('existingAcc') }}</div>
+            <div class="btn-item __pointer" :class="{'active': tabName==='resotre'}">
                 {{ $t('restore') }}</div>
         </div>
 

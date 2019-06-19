@@ -96,3 +96,8 @@ function initCurrHDAccount() {
 
     currentHDAccount = new HDAccount(lastAcc);
 }
+
+// const mockActiveAcc = {
+//     sendTx() {},
+//     activeAddr
+// };

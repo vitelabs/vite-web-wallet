@@ -29,8 +29,6 @@
 </template>
 
 <script>
-import Vue from 'vue';
-
 export default {
     props: {
         submit: {
@@ -58,19 +56,13 @@ export default {
         },
 
         focusName() {
-            Vue.nextTick(() => {
-                this.$refs.name && this.$refs.name.focus();
-            });
+            this.$refs.name && this.$refs.name.focus();
         },
         focusPass1() {
-            Vue.nextTick(() => {
-                this.$refs.pass1 && this.$refs.pass1.focus();
-            });
+            this.$refs.pass1 && this.$refs.pass1.focus();
         },
         focusPass2() {
-            Vue.nextTick(() => {
-                this.$refs.pass2 && this.$refs.pass2.focus();
-            });
+            this.$refs.pass2 && this.$refs.pass2.focus();
         },
 
         valid() {

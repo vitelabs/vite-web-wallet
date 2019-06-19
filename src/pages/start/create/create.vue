@@ -65,7 +65,7 @@ export default {
             this.isAgree = !this.isAgree;
         },
         openLink() {
-            window.open(`${ location.origin }/privacy.html`);
+            window.open('/privacy.html');
         }
     }
 };
