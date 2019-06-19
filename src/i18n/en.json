@@ -893,6 +893,8 @@
         "stakingBalance": "可取回抵押余额"
     },
     "tradeDividend": {
-        "title": "分红"
+        "title": "分红",
+        "poolTitle": "手续费分红池",
+        "listTitle": "我的分红"
     }
 }

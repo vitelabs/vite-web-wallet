@@ -1,7 +1,7 @@
 <template>
     <div class="title">
         {{ title }}
-        <span class="amount">{{ amount }}</span>
+        <span v-show="amount" class="amount">{{ amount }}</span>
     </div>
 </template>
 

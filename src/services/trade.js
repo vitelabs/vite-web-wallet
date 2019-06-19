@@ -152,7 +152,7 @@ export async function tokenRateFromCMC({ tokenSymbol, platformSymbol = 'VITE', t
 export function miningTrade({ address, offset, limit = 30 }) {
     return request({
         path: `${ path }/mining/trade`,
-        method: 'POST',
+        method: 'GET',
         params: { address, offset, limit }
     });
 }
@@ -160,7 +160,15 @@ export function miningTrade({ address, offset, limit = 30 }) {
 export function miningPledge({ address, offset, limit = 30 }) {
     return request({
         path: `${ path }/mining/pledge`,
-        method: 'POST',
+        method: 'GET',
         params: { address, offset, limit }
+    });
+}
+
+export function dividend({ address }) {
+    return request({
+        path: `${ path }/dividend`,
+        method: 'GET',
+        params: { address }
     });
 }
