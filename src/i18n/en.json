@@ -707,14 +707,15 @@
             "dexFee": "交易所基础费率：{fee}",
             "operatorFee": "运营商收取费率：{fee}",
             "vipFee": "VIP特权抵扣：{fee}"
-        },
+        },        
         "vipConfirm": {
             "cancelVip": "取消VIP",
             "openVip": "开通VIP",
             "openStakingAmount": "开通VIP抵押金额",
             "cancelStakingAmount": "可取回抵押金额",
             "noBalance": "交易所可用余额不足",
-            "hint": "VIP开通后，可享有降低0.1%手续费特权，开通VIP需抵押10000VITE，30天后可手动取回",
+            "openHint": "VIP开通后，可享有降低0.1%手续费特权，开通VIP需抵押10000VITE，30天后可手动取回",
+            "cancelHint": "预计 {time} 可取回抵押，取回抵押后，您将无法再使用VIP特权",
             "openSuccess": "申请开通VIP成功，稍后生效",
             "cancleSuccess": "申请取消VIP成功"
         }
@@ -895,6 +896,11 @@
     "tradeDividend": {
         "title": "分红",
         "poolTitle": "手续费分红池",
-        "listTitle": "我的分红"
+        "listTitle": "我的分红",
+        "date": "日期",
+        "VX": "持有VX",
+        "coin": "分红币种",
+        "amount": "分红金额",
+        "price": "分红总估值"
     }
 }
