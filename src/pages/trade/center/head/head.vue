@@ -154,6 +154,7 @@ export default {
             white-space: nowrap;
         }
         .token-content {
+            font-family: $font-H;
             margin-top: 8px;
             font-weight: 600;
             color: #1d2024;

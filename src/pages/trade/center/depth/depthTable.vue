@@ -118,6 +118,7 @@ export default {
 
 .depth-table-wrapper {
     position: relative;
+    font-family: $font-H;
 }
 
 .__center-tb-item .owner {
