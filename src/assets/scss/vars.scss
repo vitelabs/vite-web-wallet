@@ -4,3 +4,17 @@ $font-normal: PingFangSC-Regular;
 $font-H: HelveticaNeue;
 $font-H-bolder: HelveticaNeue-Bold;
 $font-normal-b: Avenir-Book;
+
+@font-face {
+  font-family: "Avenir Next";
+  src: url("../font/AvenirNext.ttc");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Avenir Next Condensed";
+  src: url("../font/AvenirNextCondensed.ttc");
+  font-weight: normal;
+  font-style: normal;
+}
