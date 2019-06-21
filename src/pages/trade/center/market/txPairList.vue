@@ -239,6 +239,7 @@ export default {
 }
 
 .__center-tb-row {
+    font-family: $font-H;
     .__center-tb-item {
         position: relative;
     }
