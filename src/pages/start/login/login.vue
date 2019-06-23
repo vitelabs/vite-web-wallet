@@ -3,30 +3,30 @@
         <div class="__title">{{ $t("login") }}</div>
 
         <div class="switch-btn" :class="{ radius: tabName === 'vb' }">
-                <div
-                    class="btn-item __pointer"
-                    :class="{ active: tabName === 'vb' }"
-                    @click="toggleTab('vb')"
-                    :key="'tb'"
-                >
-                    {{ $t("existingAcc") }}
-                </div>
-                <div
-                    class="btn-item __pointer"
-                    :class="{ active: tabName === 'existingAcc' }"
-                    @click="toggleTab('existingAcc')"
-                    :key="'existingAcc'"
-                >
-                    {{ $t("existingAcc") }}
-                </div>
-                <div
-                    class="btn-item __pointer"
-                    :class="{ active: tabName === 'resotre' }"
-                    @click="toggleTab('resotre')"
-                    :key="'resotre'"
-                >
-                    {{ $t("restore") }}
-                </div> 
+            <div
+                class="btn-item __pointer"
+                :class="{ active: tabName === 'vb' }"
+                @click="toggleTab('vb')"
+                :key="'tb'"
+            >
+                {{ $t("existingAcc") }}
+            </div>
+            <div
+                class="btn-item __pointer"
+                :class="{ active: tabName === 'existingAcc' }"
+                @click="toggleTab('existingAcc')"
+                :key="'existingAcc'"
+            >
+                {{ $t("existingAcc") }}
+            </div>
+            <div
+                class="btn-item __pointer"
+                :class="{ active: tabName === 'resotre' }"
+                @click="toggleTab('resotre')"
+                :key="'resotre'"
+            >
+                {{ $t("restore") }}
+            </div>
         </div>
 
         <div v-show="isShowExisting" class="existing-acc">
@@ -107,19 +107,19 @@
 </template>
 
 <script>
-import Vue from "vue";
-import loading from "components/loading.vue";
-import ellipsisAddr from "utils/ellipsisAddr.js";
-import { getList, deleteOldAcc } from "wallet";
+import Vue from 'vue';
+import loading from 'components/loading.vue';
+import ellipsisAddr from 'utils/ellipsisAddr.js';
+import { getList, deleteOldAcc } from 'wallet';
 
-import accountItem from "./accountItem.vue";
-import restore from "../restore.vue";
-import accountList from "./accountList.vue";
+import accountItem from './accountItem.vue';
+import restore from '../restore.vue';
+import accountList from './accountList.vue';
 
 const TABNAME = {
-    vb: "vb",
-    existingAcc: "existingAcc",
-    restore: "restore"
+    vb: 'vb',
+    existingAcc: 'existingAcc',
+    restore: 'restore'
 };
 
 export default {
@@ -131,8 +131,8 @@ export default {
         return {
             id: this.$route.params.id,
             currAcc: {},
-            password: "",
-            inputItem: "",
+            password: '',
+            inputItem: '',
             isLoading: false,
             isShowAccountList: false,
             isShowExisting: true,
@@ -145,7 +145,7 @@ export default {
         }
     },
     watch: {
-        isShowExisting: function() {
+        isShowExisting: function () {
             if (!this.isShowExisting) {
                 this.clearAll();
                 return;
@@ -163,7 +163,7 @@ export default {
             this.currAcc = this.getCurrAcc();
         },
         clearAll() {
-            this.password = "";
+            this.password = '';
             this.isLoading = false;
             this.$offKeyDown();
         },
@@ -184,7 +184,7 @@ export default {
                         const account = list[i];
                         account.showAddr = account.activeAddr
                             ? ellipsisAddr(account.activeAddr)
-                            : "";
+                            : '';
                         return account;
                     }
                 }
@@ -196,8 +196,8 @@ export default {
                     id: this.currHDAcc.id,
                     showAddr: this.currHDAcc.activeAddr
                         ? ellipsisAddr(this.currHDAcc.activeAddr)
-                        : "",
-                    name: this.currHDAcc.name || "",
+                        : '',
+                    name: this.currHDAcc.name || '',
                     ...this.currHDAcc
                 };
             }
@@ -206,7 +206,7 @@ export default {
             const account = list[0];
             account.showAddr = account.activeAddr
                 ? ellipsisAddr(account.activeAddr)
-                : "";
+                : '';
             return account;
         },
 
@@ -214,7 +214,7 @@ export default {
             this.inputItem = text;
         },
         inputBlur(text) {
-            text === this.inputItem && (this.inputItem = "");
+            text === this.inputItem && (this.inputItem = '');
         },
         focusPass() {
             Vue.nextTick(() => {
@@ -225,7 +225,7 @@ export default {
         chooseAccount(account) {
             this.currAcc = account;
             this.isShowAccountList = false;
-            this.password = "";
+            this.password = '';
         },
         toggleAccountList() {
             this.isShowAccountList = !this.isShowAccountList;
@@ -235,7 +235,7 @@ export default {
         },
 
         createAcc() {
-            this.$router.push({ name: "startCreate" });
+            this.$router.push({ name: 'startCreate' });
         },
         login() {
             if (!this.isShowExisting) {
@@ -248,16 +248,16 @@ export default {
             }
 
             if (!this.password) {
-                this.$toast(this.$t("startCreate.input"), "error");
+                this.$toast(this.$t('startCreate.input'), 'error');
                 this.focusPass();
                 return;
             }
 
             this.isLoading = true;
 
-            this.$store.commit("switchHDAcc", this.currAcc);
+            this.$store.commit('switchHDAcc', this.currAcc);
             this.$store
-                .dispatch("login", this.password)
+                .dispatch('login', this.password)
                 .then(() => {
                     if (!this.isLoading) {
                         return;
@@ -269,8 +269,8 @@ export default {
                     }
 
                     this.currHDAcc.activate();
-                    const name =
-                        this.$store.state.env.lastPage || "tradeCenter";
+                    const name
+                        = this.$store.state.env.lastPage || 'tradeCenter';
                     this.$router.push({ name });
                 })
                 .catch(err => {
@@ -279,7 +279,7 @@ export default {
                         return;
                     }
                     this.isLoading = false;
-                    this.$toast(this.$t("hint.pwErr"));
+                    this.$toast(this.$t('hint.pwErr'));
                 });
         }
     }
