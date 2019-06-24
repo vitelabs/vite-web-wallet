@@ -2,7 +2,7 @@
     <div class="head">
         <ul class="tab-list-wrapper">
             <li v-for="(tab, index) in tabList" :key="index"
-                class="tab __pointer" :class="{ 'active': active === tab }"
+                class="tab __pointer" :class="{ 'active': $route.name === tab }"
                 @click="go(tab)" > {{ $t(`${tab}.title`) }}
             </li>
         </ul>
@@ -13,10 +13,10 @@
                 {{ isHaveUsers ? $t('unlockAcc') : $t('login')  }}</div>
             <div v-show="!isLogin" @click="dexChange" class="tab __pointer">
                 {{ isHaveUsers ? $t('changeAcc') : $t('register') }}</div>
-            <div v-show="active.indexOf('trade') !== -1" class="tab __pointer"
+            <div v-show="$route.name.indexOf('trade') !== -1" class="tab __pointer"
                  v-unlock-account="showToken" @noactiveacc="dexStart">
                 {{ $t('dexToken') }}</div>
-            <switch-addr class="switch-tab menu" v-show="active.indexOf('trade') !== -1" ></switch-addr>
+            <switch-addr class="switch-tab menu" v-show="$route.name !== 'assets'" ></switch-addr>
         </ul>
 
         <dex-token v-if="isShowDexToken" :close="closeToken"></dex-token>
@@ -41,16 +41,8 @@ export default {
             default: () => {}
         }
     },
-    mounted() {
-        this.$router.afterEach(to => {
-            this.active = to.name;
-        });
-    },
     data() {
-        return {
-            active: this.$route.name,
-            isShowDexToken: false
-        };
+        return { isShowDexToken: false };
     },
     computed: {
         isLogin() {

@@ -32,7 +32,7 @@
 
                 <img v-for="(item, i) in transList" :key="i"
                      :slot="`${i}typeBefore`" class="icon"
-                     :src="`${ txImgs[item.builtinTxType] ? txImgs[item.builtinTxType] : txTransImg }`"/>
+                     :src="`${ txImgs[item.txType] ? txImgs[item.txType] : txTransImg }`"/>
 
                 <span v-for="(item, i) in transList" :key="i"
                       :slot="`${i}statusBefore`"
@@ -57,8 +57,6 @@
 </template>
 
 <script>
-import { constant } from '@vite/vitejs';
-
 import txQuotaImg from 'assets/imgs/txQuota.svg';
 import txRegImg from 'assets/imgs/txReg.svg';
 import txRewardImg from 'assets/imgs/txReward.svg';
@@ -76,7 +74,6 @@ import BigNumber from 'utils/bigNumber';
 import ellipsisAddr from 'utils/ellipsisAddr.js';
 import openUrl from 'utils/openUrl.js';
 
-const { BuiltinTxType } = constant;
 const txImgs = {
     SBPreg: txRegImg,
     UpdateReg: txRegImg,
@@ -114,6 +111,9 @@ export default {
         this.currentPage = this.$store.state.transList.currentPage;
         this.startLoopTransList();
     },
+    beforeDestroy() {
+        this.stopLoopTransList();
+    },
     data() {
         return {
             txTransImg,
@@ -136,7 +136,7 @@ export default {
             const nowList = [];
 
             transList.forEach(trans => {
-                const txType = !trans.rawData.txType && trans.rawData.txType !== 0 ? txImgs.length - 1 : trans.rawData.txType;
+                const txType = trans.rawData.txType || 'TxReq';
 
                 const status = [ 'unconfirmed', 'confirms', 'confirmed' ][trans.status];
                 const statusText = this.$t(`walletTransList.status.${ status }`) + (status === 'confirms' ? `(${ trans.confirms })` : '');
@@ -149,7 +149,7 @@ export default {
                 amount = amount || '--';
 
                 nowList.push({
-                    builtinTxType: BuiltinTxType[txType],
+                    txType,
                     type: this.$t(`txType.${ txType }`),
                     date: date(trans.timestamp, this.$i18n.locale),
                     status: '',
@@ -169,8 +169,10 @@ export default {
             return nowList;
         }
     },
-    beforeDestroy() {
-        this.stopLoopTransList();
+    watch: {
+        address() {
+            this.startLoopTransList();
+        }
     },
     methods: {
         goDetail(trans) {

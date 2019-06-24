@@ -18,29 +18,29 @@
                          v-for="tokenType in ['BTC', 'ETH', 'USD', 'VITE']" :key="tokenType">
                         <div class="item-title">{{ tokenType }}</div>
                         <div class="item-amount">
-                            {{ myDividend[tokenType] ? myDividend[tokenType].dividendAmount : 0 }}
+                            {{ myDividend[tokenType] ? formatNum(myDividend[tokenType].dividendAmount, tokenType) : 0 }}
                             <span v-show="myDividend[tokenType] && myDividend[tokenType].tokenDividends && myDividend[tokenType].tokenDividends.length" class="down-icon"></span>
                             <div class="item-content" v-show="isShowMyList === tokenType">
                                 <div class="row" v-for="(dividentItem, i) in getMyList(tokenType)" :key="i">
                                     <span class="symbol">{{ dividentItem.tokenSymbol }}: </span>
-                                    <span class="amount">{{ dividentItem.amount }}</span>
+                                    <span class="amount">{{ formatNum(dividentItem.amount, tokenType) }}</span>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <wallet-table class="tb" :clickRow="clickRow"
+                <wallet-table class="dividend-table tb" :clickRow="clickRow"
                               :headList="headList" :contentList="contentList">
-                    <div class="slot-row" v-if="activeRow" :slot="`${activeIndex}Row`">
-                        <div class="item"></div>
-                        <div class="item"></div>
-                        <div class="item" v-for="tokenType in ['BTC', 'ETH', 'USD', 'VITE']" :key="tokenType">
+                    <div class="slot-row __tb_row __tb_content_row" v-if="activeRow" :slot="`${activeIndex}Row`">
+                        <div class="__tb_cell"></div>
+                        <div class="__tb_cell"></div>
+                        <div class="__tb_cell" v-for="tokenType in ['BTC', 'ETH', 'USD', 'VITE']" :key="tokenType">
                             <div v-for="(item, i) in activeRow[tokenType].tokenDividends" :key="i" >
                                 {{ item.tokenSymbol + ' ' + item.amount }}
                             </div>
                         </div>
-                        <div class="item"></div>
+                        <div class="__tb_cell"></div>
                     </div>
                     <pagination slot="tableBottom" class="__tb_pagination"
                                 :currentPage="currentPage + 1" :toPage="fetchList"
@@ -58,6 +58,7 @@ import walletTable from 'components/table/index.vue';
 import pagination from 'components/pagination.vue';
 import { dividend } from 'services/trade';
 import date from 'utils/date';
+import bigNumber from '../../../utils/bigNumber';
 
 export default {
     components: { sectionTitle, walletTable, pagination, pool },
@@ -91,17 +92,17 @@ export default {
                 text: this.$t('tradeDividend.VX'),
                 cell: 'vxQuantity'
             }, {
-                text: `ETH ${ this.$t('tradeDividend.amount') }`,
-                cell: 'ETH'
-            }, {
-                text: `VITE ${ this.$t('tradeDividend.amount') }`,
-                cell: 'VITE'
-            }, {
                 text: `BTC ${ this.$t('tradeDividend.amount') }`,
                 cell: 'BTC'
             }, {
+                text: `ETH ${ this.$t('tradeDividend.amount') }`,
+                cell: 'ETH'
+            }, {
                 text: `USD ${ this.$t('tradeDividend.amount') }`,
                 cell: 'USD'
+            }, {
+                text: `VITE ${ this.$t('tradeDividend.amount') }`,
+                cell: 'VITE'
             }, {
                 text: this.$t('tradeDividend.price'),
                 cell: 'price'
@@ -109,15 +110,17 @@ export default {
         },
         contentList() {
             const list = [];
+            const pre = this.$store.state.env.currency === 'cny' ? '¥' : '$';
+
             this.list.forEach(item => {
                 list.push({
-                    date: date(item.date * 1000, 'zh'),
-                    vxQuantity: item.vxQuantity,
-                    ETH: item.ETH ? item.ETH.dividendAmount || 0 : 0,
-                    VITE: item.VITE ? item.VITE.dividendAmount || 0 : 0,
-                    BTC: item.BTC ? item.BTC.dividendAmount || 0 : 0,
-                    USD: item.USD ? item.USD.dividendAmount || 0 : 0,
-                    price: 0
+                    date: date(item.date * 1000, this.$i18n.locale),
+                    vxQuantity: bigNumber.formatNum(item.vxQuantity, 4),
+                    ETH: item.ETH ? this.formatNum(item.ETH.dividendAmount || 0, 'ETH') : 0,
+                    VITE: item.VITE ? this.formatNum(item.VITE.dividendAmount || 0, 'VITE') : 0,
+                    BTC: item.BTC ? this.formatNum(item.BTC.dividendAmount || 0, 'BTC') : 0,
+                    USD: item.USD ? this.formatNum(item.USD.dividendAmount || 0, 'USD') : 0,
+                    price: pre + 0
                 });
             });
             return list;
@@ -142,6 +145,15 @@ export default {
             }
             this.activeIndex = index;
         },
+        formatNum(amount, tokenSymbol) {
+            const map = {
+                BTC: 8,
+                ETH: 8,
+                VITE: 4,
+                USD: 2
+            };
+            return bigNumber.formatNum(amount, map[tokenSymbol]);
+        },
 
         showMyList(tokenType) {
             this.isShowMyList = tokenType;
@@ -160,89 +172,6 @@ export default {
                 address: this.address,
                 offset
             }).then(data => {
-            // const data = {
-            //     'dividendStat': {
-            //         'BTC': {
-            //             'dividendAmount': '10',
-            //             'tokenDividends': [
-            //                 {
-            //                     'tokenSymbol': 'BTC-000',
-            //                     'amount': '2.222'
-            //                 }
-            //             ]
-            //         },
-            //         'ETH': {
-            //             'dividendAmount': '10',
-            //             'tokenDividends': [
-            //                 {
-            //                     'tokenSymbol': 'ETH-000',
-            //                     'amount': '2.222'
-            //                 }
-            //             ]
-            //         },
-            //         'VITE': {
-            //             'dividendAmount': '10',
-            //             'tokenDividends': [
-            //                 {
-            //                     'tokenSymbol': 'VITE',
-            //                     'amount': '2.222'
-            //                 }
-            //             ]
-            //         },
-            //         'USD': {
-            //             'dividendAmount': '10',
-            //             'tokenDividends': [
-            //                 {
-            //                     'tokenSymbol': 'USDT-000',
-            //                     'amount': '2.222'
-            //                 }
-            //             ]
-            //         }
-            //     },
-            //     'dividendList': [
-            //         {
-            //             'date': 1560428037,
-            //             'vxQuantity': '2.222',
-            //             'BTC': {
-            //                 'dividendAmount': '10',
-            //                 'tokenDividends': [
-            //                     {
-            //                         'tokenSymbol': 'BTC-000',
-            //                         'amount': '2.222'
-            //                     }
-            //                 ]
-            //             },
-            //             'ETH': {
-            //                 'dividendAmount': '10',
-            //                 'tokenDividends': [
-            //                     {
-            //                         'tokenSymbol': 'ETH-000',
-            //                         'amount': '2.222'
-            //                     }
-            //                 ]
-            //             },
-            //             'VITE': {
-            //                 'dividendAmount': '10',
-            //                 'tokenDividends': [
-            //                     {
-            //                         'tokenSymbol': 'VITE',
-            //                         'amount': '2.222'
-            //                     }
-            //                 ]
-            //             },
-            //             'USD': {
-            //                 'dividendAmount': '10',
-            //                 'tokenDividends': [
-            //                     {
-            //                         'tokenSymbol': 'USDT-000',
-            //                         'amount': '2.222'
-            //                     }
-            //                 ]
-            //             }
-            //         }
-            //     ]
-            // };
-
                 this.myDividend = data ? data.dividendStat || {} : {};
                 this.list = data ? data.dividendList || [] : [];
             }).catch(err => {
@@ -257,6 +186,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
+@import "~assets/scss/table.scss";
 
 .trade-dividend-wrapper {
     width: 100%;
@@ -355,6 +285,12 @@ export default {
     line-height: 16px;
     .item {
         display: inline-block;
+    }
+    &.__tb_row.__tb_content_row {
+        height: unset;
+        &:hover {
+            background: rgba(247,249,251,1);
+        }
     }
 }
 </style>

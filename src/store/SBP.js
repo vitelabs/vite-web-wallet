@@ -25,14 +25,14 @@ const mutations = {
 };
 
 const actions = {
-    fetchRegistrationList({ commit }, address) {
+    fetchRegistrationList({ commit, rootGetters }) {
+        const address = rootGetters.activeAddr;
         return apis.fetchRegistrationList(address).then(result => {
             commit('commitRegistrationList', result);
         });
     },
-    loopRegList({ state, dispatch, rootState }, { nodeName, operate, producer }) {
-        const activeAccount = rootState.wallet.activeAcc;
-        const address = activeAccount ? activeAccount.address : '';
+    loopRegList({ state, dispatch, rootGetters }, { nodeName, operate, producer }) {
+        const address = rootGetters.activeAddr;
 
         // Operate ==> 0: cancel / 1: reg / 2: update
         let isInList = false;
