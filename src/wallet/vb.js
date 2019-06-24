@@ -1,3 +1,5 @@
+
+
 // export const MODE = {
 //     VITEJS: 'VITEJS',
 //     'VITEBIRFORST': 'VITEBIRFORSAT'
@@ -14,3 +16,15 @@
 
 //     }
 // }
+
+export const VB = {
+    createSession() {
+        return 'mock an uri iiiiiii';
+    }
+    // on(event, cb) {
+
+    // },
+    // emit(event) {
+
+    // }
+};

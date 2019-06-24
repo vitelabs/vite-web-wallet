@@ -268,3 +268,23 @@ export class HDAccount {
         return null;
     }
 }
+
+export class VBAccount {
+    constructor({ id = 'vbaccount', lang, name, activeAddr, activeIdx }) {
+        this.status = StatusMap.LOCK;
+        this.id = id;
+        this.lang = lang || LangList.english;
+        this.name = name || '';
+
+        // Set Active (Addr Idx Account)
+        this.setActiveAcc(activeIdx, activeAddr);
+
+        // Set Addr Num
+        this.addrNum = 1;
+        // Set Addr Lis
+    }
+
+    // get activeAccount() {
+    //     // return { address };
+    // }
+}
