@@ -28,8 +28,26 @@
                 {{ $t("restore") }}
             </div>
         </div>
-
-        <div v-show="isShowExisting" class="existing-acc">
+        <div class="vb" v-if="tabName === 'vb'">
+            <div class="code_container">
+                <div class="code_tips">
+                    dsfasdfasdflsjalsjlksdjfsdlfjsdlkfjsalkdfjlkdsfjsdlakfjsdalkfjasdlfsd
+                </div>
+                <qrcode
+                    :options="qrcodeOpt"
+                    :text="vbUri"
+                    class="vb_qrcode"
+                ></qrcode>
+                <div class="code_tips">
+                    dsfasdfasdflsjalsjlksdjfsdlfjsdlkfjsalkdfjlkdsfjsdlakfjsdalkfjasdlfsd<span
+                        class="action_get_app"
+                    >Get Vite App</span
+                    >
+                </div>
+            </div>
+            <div class="__btn __btn_all_in __pointer"> 创建新账户</div>
+        </div>
+        <div v-if="tabName === 'existingAcc'" class="existing-acc">
             <div class="bottom __btn __pointer">
                 <div
                     v-click-outside="hideAccountList"
@@ -98,7 +116,7 @@
 
         <restore
             ref="restoreDom"
-            v-if="!isShowExisting"
+            v-if="tabName === 'resotre'"
             :leftClick="createAcc"
             leftTxt="createAcc"
             :finishCb="showExisting"
@@ -116,6 +134,10 @@ import accountItem from './accountItem.vue';
 import restore from '../restore.vue';
 import accountList from './accountList.vue';
 
+import qrcode from 'components/qrcode';
+import { VB } from 'wallet/vb';
+import icon from 'assets/imgs/start_qrcode_icon.svg';
+
 const TABNAME = {
     vb: 'vb',
     existingAcc: 'existingAcc',
@@ -123,7 +145,7 @@ const TABNAME = {
 };
 
 export default {
-    components: { accountList, loading, restore, accountItem },
+    components: { accountList, loading, restore, accountItem, qrcode },
     destroyed() {
         this.clearAll();
     },
@@ -136,12 +158,20 @@ export default {
             isLoading: false,
             isShowAccountList: false,
             isShowExisting: true,
-            tabName: TABNAME.vb
+            tabName: TABNAME.vb,
+            qrcodeOpt: {
+                size: 140,
+                image: icon,
+                mSize: 0.3
+            }
         };
     },
     computed: {
         currHDAcc() {
             return this.$store.state.wallet.currHDAcc;
+        },
+        vbUri() {
+            return VB.createSession();
         }
     },
     watch: {
@@ -369,6 +399,32 @@ export default {
                 border-radius: 16px;
                 padding: 6px 12px;
                 box-shadow: 0 0 4px 0 rgba(0, 105, 219, 1);
+            }
+        }
+    }
+    .vb {
+        width: 100%;
+        .code_container {
+            width: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+            background: #fff;
+            margin-bottom: 20px;
+            .code_tips {
+                word-break: break-all;
+                text-align: left;
+                color: #333333;
+                line-height: 18px;
+                .action_get_app {
+                    color: #007aff;
+                    font-size: 14px;
+                    font-family: $font-bold;
+                    cursor: pointer;
+                    margin-left: 2px;
+                }
+            }
+            .vb_qrcode {
+                margin: 30px auto;
             }
         }
     }
