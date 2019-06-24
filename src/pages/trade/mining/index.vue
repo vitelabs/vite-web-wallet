@@ -2,8 +2,8 @@
     <div class="trade-mining-wrapper">
         <div class="trade-mining-section">
             <section-title :title="$t('tradeMining.txTitle')" :amount="`${tradeTotal} VX`"></section-title>
-            <wallet-table class="content tb"
-                          :headList="headList" :contentList="tradeContent">
+            <wallet-table class="mint-trade-table content tb"
+                          :headList="tradeHeadList" :contentList="tradeContent">
                 <pagination slot="tableBottom" class="__tb_pagination"
                             :currentPage="tradeCurrentPage + 1" :toPage="fetchMiningTrade"
                             :totalPage="tradeTotalPage"></pagination>
@@ -19,7 +19,8 @@
                     <staking-detail v-if="stakingObj"
                                     :stakingObj="stakingObj" :showVxConfirm="showVxConfirm"></staking-detail>
                 </div>
-                <wallet-table :headList="headList" :contentList="stakeContent" class="tb">
+                <wallet-table class="mint-trade-table tb"
+                              :headList="pledgeHeadList" :contentList="stakeContent" >
                     <pagination slot="tableBottom" class="__tb_pagination"
                                 :currentPage="stakeCurrentPage + 1" :toPage="fetchMiningStake"
                                 :totalPage="stakeTotalPage"></pagination>
@@ -43,6 +44,7 @@ import { miningTrade, miningPledge } from 'services/trade';
 import sectionTitle from '../components/sectionTitle.vue';
 import vxConfirm from './vxConfirm.vue';
 import stakingDetail from './stakingDetail.vue';
+import bigNumber from '../../../utils/bigNumber';
 
 export default {
     components: { walletTable, pagination, sectionTitle, vxConfirm, stakingDetail },
@@ -65,12 +67,25 @@ export default {
             actionType: null,
             isShowVxConfirm: false,
 
-            headList: [ {
+            tradeHeadList: [ {
                 text: this.$t('tradeMining.tbHead.date'),
                 cell: 'date'
             }, {
                 text: this.$t('tradeMining.tbHead.fee'),
                 cell: 'fee'
+            }, {
+                text: this.$t('tradeMining.tbHead.mining'),
+                cell: 'mining'
+            }, {
+                text: this.$t('tradeMining.tbHead.status'),
+                cell: 'status'
+            } ],
+            pledgeHeadList: [ {
+                text: this.$t('tradeMining.tbHead.date'),
+                cell: 'date'
+            }, {
+                text: this.$t('tradeMining.tbHead.pledge'),
+                cell: 'pledge'
             }, {
                 text: this.$t('tradeMining.tbHead.mining'),
                 cell: 'mining'
@@ -119,6 +134,7 @@ export default {
                 list.push({
                     date: this.getDate(item.date),
                     fee: `${ item.feeAmount } VITE`,
+                    pledge: `${ item.pledgeAmount } VITE`,
                     mining: `${ item.miningAmount } VX`,
                     status: this.$t('tradeMining.already')
                 });
@@ -141,7 +157,7 @@ export default {
         fetchStakingInfo() {
             $ViteJS.request('pledge_getAgentPledgeInfo', {
                 pledgeAddr: this.address,
-                agentAddress: this.address,
+                agentAddr: constant.DexFund_Addr,
                 beneficialAddr: constant.DexFund_Addr,
                 bid: 1
             }).then(data => {
@@ -162,7 +178,7 @@ export default {
                 }
 
                 this.tradeCurrentPage = offset;
-                this.tradeTotal = data.miningTotal || 0;
+                this.tradeTotal = data.miningTotal ? bigNumber.formatNum(data.miningTotal, 4) : 0;
                 this.tradeListTotal = data.total || 0;
                 this.tradeList = data.miningList || [];
             }).catch(err => {
@@ -181,7 +197,7 @@ export default {
                 }
 
                 this.stakeCurrentPage = offset;
-                this.stakeTotal = data.miningTotal || 0;
+                this.stakeTotal = data.miningTotal ? bigNumber.formatNum(data.miningTotal, 4) : 0;
                 this.stakeListTotal = data.total || 0;
                 this.stakeList = data.miningList || [];
             }).catch(err => {

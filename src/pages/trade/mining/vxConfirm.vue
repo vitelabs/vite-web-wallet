@@ -156,6 +156,7 @@ export default {
         testStakingAmount() {
             const minAmount = minLimit;
             const stakingAmount = this.stakingObj.amount;
+            const amount = bigNumber.toMin(this.amount, this.viteTokenInfo.decimals);
 
             const compareStakingAndMin = bigNumber.compared(stakingAmount, minAmount);
             if (compareStakingAndMin < 0) {
@@ -163,24 +164,25 @@ export default {
                 return false;
             }
 
-            const compareMin = bigNumber.compared(this.amount, minAmount);
+            const compareMin = bigNumber.compared(amount, minAmount);
             if (compareMin < 0) {
                 this.amountErr = this.$t('walletQuota.minAmt', { num: minAmount });
                 return false;
             }
 
-            const compareStaking = bigNumber.compared(stakingAmount, this.amount);
+            const compareStaking = bigNumber.compared(stakingAmount, amount);
             if (compareStaking < 0) {
                 this.amountErr = this.$t('walletQuota.maxAmt', {
                     minAmount,
-                    maxAmount: stakingAmount
+                    maxAmount: bigNumber.toBasic(stakingAmount, this.viteTokenInfo.decimals)
                 });
                 return false;
             }
 
             const maxAmount = bigNumber.minus(stakingAmount, minAmount, 8, 'nofix');
-            const cancelBalance = bigNumber.minus(stakingAmount, this.cancelAmount);
-            if (bigNumber.compared(this.cancelAmount, maxAmount) > 0 && !bigNumber.isEqual(cancelBalance, 0)) {
+            const cancelBalance = bigNumber.minus(stakingAmount, amount);
+
+            if (bigNumber.compared(amount, maxAmount) > 0 && !bigNumber.isEqual(cancelBalance, 0)) {
                 this.amountErr = this.$t('walletQuota.cancelLimitAmt', { num: minAmount });
                 return false;
             }
@@ -194,9 +196,12 @@ export default {
             this.amountErr = '';
             this.close && this.close();
         },
+        // [TODO]  staking amount test
         staking() {
+            const amount = bigNumber.toMin(this.amount, this.viteTokenInfo.decimals);
+
             sendTx('dexFundPledgeForVx', {
-                amount: this.amount,
+                amount,
                 actionType: this.actionType
             }).then(() => {
                 this.$toast('success');

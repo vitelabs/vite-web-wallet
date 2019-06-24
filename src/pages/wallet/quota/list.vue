@@ -141,6 +141,11 @@ export default {
             return nowList;
         }
     },
+    watch: {
+        address() {
+            this.startLoopPledgeList();
+        }
+    },
     methods: {
         clickCell(cell, item, index) {
             if (cell === 'addr') {

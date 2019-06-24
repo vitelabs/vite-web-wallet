@@ -4,21 +4,21 @@
             <img src="~assets/imgs/smallAssets.svg" />
             <div class="item-detail">
                 <div>{{ $t('stakingAmount') }}</div>
-                <div class="bold">{{ stakingObj ? stakingObj.amount : '' }}</div>
+                <div class="bold">{{ stakingDetail.amount }}</div>
             </div>
         </div>
         <div class="item">
             <img src="~assets/imgs/snapshot.svg" />
             <div class="item-detail">
                 <div>{{ $t('withdrawHeight') }}</div>
-                <div class="bold">{{ stakingObj ? stakingObj.withdrawHeight : '' }}</div>
+                <div class="bold">{{ stakingDetail.withdrawHeight }}</div>
             </div>
         </div>
         <div class="item">
             <img src="~assets/imgs/time.svg" />
             <div class="item-detail">
                 <div>{{ $t('walletQuota.list.withdrawTime') }}</div>
-                <div class="bold">{{ stakingObj ? getDate(stakingObj.withdrawTime) : '' }}</div>
+                <div class="bold">{{ stakingDetail.withdrawTime }}</div>
             </div>
         </div>
         <div class="btn cancel __pointer" @click="showVxConfirm(2)">{{ $t('tradeMining.withdraw') }}</div>
@@ -28,6 +28,7 @@
 
 <script>
 import date from 'utils/date';
+import bigNumber from 'utils/bigNumber';
 
 export default {
     props: {
@@ -40,9 +41,23 @@ export default {
             default: () => {}
         }
     },
-    methods: {
-        getDate(time) {
-            return date(time * 1000, 'zh');
+    computed: {
+        viteTokenInfo() {
+            return this.$store.getters.viteTokenInfo;
+        },
+        stakingDetail() {
+            if (!this.stakingObj) {
+                return {
+                    amount: '',
+                    withdrawTime: '',
+                    withdrawHeight: ''
+                };
+            }
+            return {
+                withdrawTime: date(this.stakingObj.withdrawTime * 1000, this.$i18n.locale),
+                amount: bigNumber.toBasic(this.stakingObj.amount || 0, this.viteTokenInfo.decimals),
+                withdrawHeight: this.stakingObj.withdrawHeight
+            };
         }
     }
 };

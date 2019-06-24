@@ -41,7 +41,7 @@ const actions = {
                 || !data) {
                 return null;
             }
-
+            console.log(data);
             commit('commitTransList', data);
             data.list && dispatch('setTokenInfoList', data.list);
 

@@ -3,7 +3,7 @@
              :closeIcon="true" :close="close"
              :leftBtnClick="changeVip" :leftBtnTxt="confirmTitle"
              :singleBtn="true" :btnUnuse="!canOrder">
-        <div v-show="!isVip" class="__row">
+        <div v-if="!isVip" class="__row">
             <div class="__row-t">{{ $t('tokenCard.heads.availableExAmount') }}</div>
             <div class="__unuse-row">
                 <img  :src="viteTokenInfo ? viteTokenInfo.icon : ''" class="__icon" />VITE
@@ -105,11 +105,11 @@ export default {
             const actionType = this.isVip ? 2 : 1;
 
             sendTx('dexFundPledgeForVip', {
-                amount,
+                amount: amount || '0',
                 actionType
             }).then(() => {
                 this.$toast(this.isVip ? this.$t('trade.vipConfirm.cancleSuccess') : this.$t('trade.vipConfirm.openSuccess'));
-                this.close();
+                this.close && this.close();
             }).catch(err => {
                 console.warn(err);
                 this.$toast(this.isVip ? this.$t('trade.vipConfirm.cancleSuccess') : this.$t('trade.vipConfirm.openSuccess'));
@@ -123,7 +123,7 @@ export default {
 
             $ViteJS.request('pledge_getAgentPledgeInfo', {
                 pledgeAddr: this.accountAddr,
-                agentAddress: this.accountAddr,
+                agentAddr: constant.DexFund_Addr,
                 beneficialAddr: constant.DexFund_Addr,
                 bid: 2
             }).then(data => {

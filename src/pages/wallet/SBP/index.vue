@@ -86,6 +86,11 @@ export default {
             return this.$store.state.env.clientStatus;
         }
     },
+    watch: {
+        address() {
+            this.$store.dispatch('stopLoopRegList');
+        }
+    },
     methods: {
         canUseAddr(nodeName, addr) {
             const usedAddrList = [];

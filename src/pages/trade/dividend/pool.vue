@@ -7,7 +7,7 @@
             <div class="token-wrapper">
                 <div class="token" v-for="(token, i) in pool[tokenType.name]" :key="i">
                     <div class="title">{{ token.tokenInfo.tokenSymbol }}</div>
-                    <div class="amount">{{ token.amount }}</div>
+                    <div class="amount">{{ formatNum(token.amount, tokenType.name) }}</div>
                 </div>
             </div>
         </div>
@@ -20,6 +20,7 @@ import viteIcon from 'assets/imgs/vite-dividend.svg';
 import ethIcon from 'assets/imgs/eth.svg';
 import usdIcon from 'assets/imgs/usd.svg';
 import btcIcon from 'assets/imgs/btc.svg';
+import bigNumber from 'utils/bigNumber';
 
 const typeList = [ {
     name: 'VITE',
@@ -42,46 +43,13 @@ export default {
     data() {
         return {
             typeList,
-            pool: {
-                'VITE': [ {
-                    amount: 232323,
-                    tokenInfo: { tokenSymbol: 'VITE-0000' }
-                }, {
-                    amount: 232323,
-                    tokenInfo: { tokenSymbol: 'VITE-0000' }
-                }, {
-                    amount: 232323,
-                    tokenInfo: { tokenSymbol: 'VITE-0000' }
-                }, {
-                    amount: 232323,
-                    tokenInfo: { tokenSymbol: 'VITE-0000' }
-                } ],
-                'ETH': [ {
-                    amount: 232323,
-                    tokenInfo: { tokenSymbol: 'VITE-0000' }
-                }, {
-                    amount: 232323,
-                    tokenInfo: { tokenSymbol: 'VITE-0000' }
-                }, {
-                    amount: 232323,
-                    tokenInfo: { tokenSymbol: 'VITE-0000' }
-                }, {
-                    amount: 232323,
-                    tokenInfo: { tokenSymbol: 'VITE-0000' }
-                } ],
-                'USD': [ {
-                    amount: 232323,
-                    tokenInfo: { tokenSymbol: 'VITE-0000' }
-                }, {
-                    amount: 232323,
-                    tokenInfo: { tokenSymbol: 'VITE-0000' }
-                } ],
-                'BTC': [{
-                    amount: 232323,
-                    tokenInfo: { tokenSymbol: 'VITE-0000' }
-                }]
-            }
+            pool: {}
         };
+    },
+    computed: {
+        viteTokenInfo() {
+            return this.$store.getters.viteTokenInfo;
+        }
     },
     methods: {
         fetchPool() {
@@ -90,16 +58,27 @@ export default {
                     return;
                 }
 
+                this.pool = {};
                 for (const tokenId in data) {
                     const token = data[tokenId];
                     const tokenType = typeList[token.quoteTokenType - 1];
-                    this.pool[tokenType] = this.pool[tokenType] || [];
-                    token.tokenType = tokenType;
-                    this.pool[tokenType].push(token);
+                    this.pool[tokenType.name] = this.pool[tokenType.name] || [];
+                    token.tokenType = tokenType.name;
+                    token.amount = bigNumber.toBasic(token.amount, token.tokenInfo.decimals);
+                    this.pool[tokenType.name].push(token);
                 }
             }).catch(err => {
                 console.warn(err);
             });
+        },
+        formatNum(amount, tokenSymbol) {
+            const map = {
+                BTC: 8,
+                ETH: 8,
+                VITE: 4,
+                USD: 2
+            };
+            return bigNumber.formatNum(amount, map[tokenSymbol]);
         }
     }
 };
