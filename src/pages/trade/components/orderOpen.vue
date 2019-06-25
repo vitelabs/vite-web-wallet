@@ -7,7 +7,7 @@ import openTable from './openTable.vue';
 
 export default {
     components: { openTable },
-    beforeMounted() {
+    mounted() {
         this.init();
     },
     destroyed() {

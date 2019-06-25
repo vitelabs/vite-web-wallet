@@ -59,6 +59,7 @@ export default {
                 }
 
                 this.pool = {};
+                const tokenIds = [];
                 for (const tokenId in data) {
                     const token = data[tokenId];
                     const tokenType = typeList[token.quoteTokenType - 1];
@@ -66,7 +67,10 @@ export default {
                     token.tokenType = tokenType.name;
                     token.amount = bigNumber.toBasic(token.amount, token.tokenInfo.decimals);
                     this.pool[tokenType.name].push(token);
+                    tokenIds.push(token.tokenInfo.tokenId);
                 }
+                // console.log(tokenIds);
+                this.$store.dispatch('addRateTokens', tokenIds);
             }).catch(err => {
                 console.warn(err);
             });

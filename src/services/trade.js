@@ -32,11 +32,11 @@ export const depth = function ({ symbol }) {
     });
 };
 
-export const order = function ({ address, startTime, endTime, tradeTokenSymbol, quoteTokenSymbol, side, offset, limit, status }) {
+export const order = function ({ address, total, startTime, endTime, tradeTokenSymbol, quoteTokenSymbol, side, offset, limit, status }) {
     return request({
         path: `${ path }/orders`,
         method: 'GET',
-        params: { address, startTime, endTime, tradeTokenSymbol, quoteTokenSymbol, side, offset, limit, status }
+        params: { address, startTime, endTime, total, tradeTokenSymbol, quoteTokenSymbol, side, offset, limit, status }
     });
 };
 
