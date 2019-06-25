@@ -19,7 +19,7 @@ import $ViteJS from 'utils/viteClient';
 import viteIcon from 'assets/imgs/vite-dividend.svg';
 import ethIcon from 'assets/imgs/eth.svg';
 import usdIcon from 'assets/imgs/usd.svg';
-import btcIcon from 'assets/imgs/btc.svg';
+import btcIcon from 'assets/imgs/BTC.svg';
 import bigNumber from 'utils/bigNumber';
 
 const typeList = [ {
