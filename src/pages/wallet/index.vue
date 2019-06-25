@@ -17,9 +17,5 @@ export default { components: { pageLayout } };
     width: 100%;
     height: 100%;
 }
-
-.__wrapper {
-    padding: 30px;
-}
 </style>
 

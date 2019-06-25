@@ -1,5 +1,5 @@
 <template>
-    <div class="vote __wrapper">
+    <div class="vote">
         <secTitle></secTitle>
 
         <loading v-if="loadingToken" class="loading"></loading>
@@ -392,12 +392,11 @@ export default {
     }
 
     .ct {
-        border-left: 2px solid rgba(0, 122, 255, 0.7);
-        padding-left: 10px;
+        font-weight: 600;
         height: 18px;
         line-height: 18px;
         @include font-family-bold();
-        font-size: 18px;
+        font-size: 14px;
         color: #1d2024;
     }
 
@@ -406,8 +405,7 @@ export default {
         flex: none;
         justify-content: space-between;
         flex-wrap: wrap;
-        margin-bottom: 24px;
-
+        margin: 14px 0;
         .ct {
             margin-top: 20px;
         }
@@ -416,9 +414,6 @@ export default {
     .vote_list {
         overflow-x: auto;
         overflow-y: hidden;
-        margin: 40px 0;
-        margin-bottom: 20px;
-        min-height: 213px;
     }
 
     .node_list {

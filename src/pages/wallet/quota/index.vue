@@ -1,5 +1,5 @@
 <template>
-    <div class="quota-wrapper __wrapper">
+    <div class="quota-wrapper">
         <quota-head></quota-head>
 
         <loading v-if="loadingToken" class="loading"></loading>

@@ -29,7 +29,7 @@
 .exchange-layout {
     width: 100%;
     height: 100%;
-    padding: 10px;
+    padding-bottom: 10px;
     box-sizing: border-box;
     min-height: 750px;
     max-height: 900px;

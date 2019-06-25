@@ -59,9 +59,10 @@ export default {
 
 .sec-title-container {
     @include font-family-bold();
-    font-size: 24px;
-    color: #1d2024;
-    line-height: 40px;
+    font-weight: 600;
+    color: rgba(29,32,36,1);
+    font-size: 18px;
+    line-height: 22px;
 
     .help {
         margin-top: 6px;

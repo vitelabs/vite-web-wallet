@@ -43,6 +43,9 @@ import walletTable from 'components/table/index.vue';
 
 export default {
     components: { walletTable },
+    created() {
+        this.getOwnerToken();
+    },
     data() {
         return { tokenList: [] };
     },

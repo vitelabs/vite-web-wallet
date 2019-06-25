@@ -1,5 +1,5 @@
 <template>
-    <div class="trans-list-wrapper __wrapper">
+    <div class="trans-list-wrapper">
         <sec-title class="title" :isShowHelp="false"></sec-title>
         <div class="trans-list-content">
             <wallet-table class="wallet-trans-list-table"
