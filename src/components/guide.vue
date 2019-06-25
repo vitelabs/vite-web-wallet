@@ -7,9 +7,9 @@
                     <span>{{ $t('tradeOpenOrders.title') }}</span>
                     <span>{{ $t('tradeOrderHistory.title') }}</span>
                 </div>
-                <div v-if="i === 2 && guideType === 'trade'" class="__center-title">
-                    {{ $t('trade.limitPrice.title') }}
-                    <span class="fee">{{ $t('trade.limitPrice.fee') }} Taker（0.25 %）/ Maker（0.25 %）</span>
+                <div v-if="i === 2 && guideType === 'trade'">
+                    <span>{{ $t('tradeMining.title') }}</span>
+                    <span>{{ $t('tradeDividend.title') }}</span>
                 </div>
 
                 <span v-if="guideType === 'assets'" class="tab">
@@ -171,7 +171,7 @@ export default {
             background-size: 100% 100%;
         }
     }
-    &:nth-child(2) {
+    &:nth-child(2), &:nth-child(3) {
         top: 55px;
         left: 200px;
         &:after {
@@ -201,39 +201,7 @@ export default {
         }
     }
     &:nth-child(3) {
-        top: 510px;
-        left: 50%;
-        transform: translateY(-100%);
-        &:after {
-            border-top: 6px solid #fff;
-            bottom: -12px;
-            left: 50%;
-            margin-left: -6px;
-        }
-        .icon {
-            bottom: -20px;
-            white-space: nowrap;
-            width: 700px;
-            left: 0;
-            transform: translateY(100%) translateX(-30%);
-
-            .__center-title {
-                padding: 6px;
-                line-height: 17px;
-                font-size: 13px;
-                @include font-family-bold();
-                font-weight: 600;
-                color: rgba(29,32,36,0.6);
-                background: #f7f9fb;
-            }
-            .fee {
-                float: right;
-                font-size: 12px;
-                color: rgba(94, 104, 117, 1);
-                @include font-family-normal();
-                font-weight: 400;
-            }
-        }
+        left: 360px;
     }
     &:nth-child(4) {
         top: 250px;
@@ -244,7 +212,7 @@ export default {
 }
 
 .assets.item {
-    top: 170px;
+    top: 195px;
     .icon {
         word-break: keep-all;
         white-space: nowrap;
@@ -262,15 +230,15 @@ export default {
     }
 
     &:first-child {
-        left: 200px;
+        left: 250px;
     }
 
     &:nth-child(2) {
-        left: 900px;
+        right: 300px;
     }
 
     &:nth-child(3) {
-        left: 550px;
+        left: 690px;
     }
 }
 
