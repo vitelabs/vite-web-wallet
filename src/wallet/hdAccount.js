@@ -271,26 +271,28 @@ export class HDAccount {
 
 export class VBAccount {
     constructor({ id, lang, name, activeAddr }) {
-        this.id = id||`VITEBIRFORST_${activeAddr}`;
+        this.id = id || `VITEBIRFORST_${ activeAddr }`;
         this.lang = lang || LangList.english;
         this.name = name || '';
-        this.activeAddr=activeAddr;
+        this.activeAddr = activeAddr;
         // Set Addr Num
         this.addrNum = 1;
-        setLastAcc({
-            id
-        })
+        setLastAcc({ id });
         this.save();
     }
-    get status(){
-       return StatusMap.UNLOCK
+
+    get status() {
+        return StatusMap.UNLOCK;
     }
-    get isBirforst(){
-        return this.id.startsWith('VITEBIRFORST_')
+
+    get isBirforst() {
+        return this.id.startsWith('VITEBIRFORST_');
     }
+
     get activeAccount() {
-        return { address:this.activeAddr,sendTx(){} };
+        return { address: this.activeAddr, sendTx() {} };
     }
+
     save() {
         addHdAccount({
             id: this.id,
