@@ -1,9 +1,15 @@
 import { keystore, constant, utils } from '@vite/vitejs';
 import viteCrypto from 'testwebworker';
 import { getOldAccList, setOldAccList } from 'utils/store';
-import { HDAccount, StatusMap as _StatusMap } from './hdAccount';
+import { HDAccount, StatusMap as _StatusMap ,VBAccount} from './hdAccount';
 import { getLastAcc, addHdAccount, setAcc, getAccList } from './store';
-
+function constructAccount(acc){
+    if(acc.id.startsWith('VITEBIRFORST_')){
+        currentHDAccount=new VBAccount(acc);
+    }else{
+        currentHDAccount = new HDAccount(acc);
+    }
+}
 const { LangList } = constant;
 const { checkParams } = utils;
 
@@ -22,7 +28,7 @@ export function setCurrHDAcc(acc) {
         return;
     }
     if (!acc.id || !currentHDAccount || currentHDAccount.id !== acc.id) {
-        currentHDAccount = new HDAccount(acc);
+        return constructAccount(acc)
     }
     return currentHDAccount;
 }
@@ -93,11 +99,6 @@ function initCurrHDAccount() {
     if (!lastAcc) {
         return;
     }
+    return constructAccount(lastAcc)
 
-    currentHDAccount = new HDAccount(lastAcc);
 }
-
-// const mockActiveAcc = {
-//     sendTx() {},
-//     activeAddr
-// };
