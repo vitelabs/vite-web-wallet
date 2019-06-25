@@ -44,7 +44,7 @@ import { miningTrade, miningPledge } from 'services/trade';
 import sectionTitle from '../components/sectionTitle.vue';
 import vxConfirm from './vxConfirm.vue';
 import stakingDetail from './stakingDetail.vue';
-import bigNumber from '../../../utils/bigNumber';
+import bigNumber from 'utils/bigNumber';
 
 export default {
     components: { walletTable, pagination, sectionTitle, vxConfirm, stakingDetail },
@@ -127,9 +127,9 @@ export default {
             rawlist.forEach(item => {
                 list.push({
                     date: this.getDate(item.date),
-                    fee: `${ item.feeAmount } VITE`,
-                    pledge: `${ item.pledgeAmount } VITE`,
-                    mining: `${ item.miningAmount } VX`
+                    fee: `${ bigNumber.formatNum(item.feeAmount || 0, 8) } VITE`,
+                    pledge: `${ bigNumber.formatNum(item.pledgeAmount || 0, 8) } VITE`,
+                    mining: `${ bigNumber.formatNum(item.miningAmount || 0, 8) } VX`
                 });
             });
             return list;
