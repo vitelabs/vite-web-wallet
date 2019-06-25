@@ -52,7 +52,7 @@ let stakingInfoTimer = null;
 export default {
     components: { walletTable, pagination, sectionTitle, vxConfirm, stakingDetail },
     mounted() {
-        this.loopStakingInfo();
+        this.init();
     },
     destroyed() {
         this.stopStakingInfo();
@@ -121,7 +121,7 @@ export default {
     },
     methods: {
         init() {
-            this.fetchStakingInfo();
+            this.loopStakingInfo();
             this.fetchMiningTrade();
             this.fetchMiningStake();
         },

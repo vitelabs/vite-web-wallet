@@ -141,7 +141,16 @@ export default {
             this.fetchList();
         },
         myDividend() {
-
+            const tokenIds = [];
+            for (const symbol in this.myDividend) {
+                const list = this.myDividend[symbol] && this.myDividend[symbol].tokenDividends
+                    ? this.myDividend[symbol].tokenDividends : [];
+                list.forEach(({ tokenId }) => {
+                    tokenIds.push(tokenId);
+                });
+            }
+            this.$store.dispatch('addRateTokens', tokenIds);
+            console.log(this.$store.state.exchangeRate.rateMap);
         }
     },
     methods: {
