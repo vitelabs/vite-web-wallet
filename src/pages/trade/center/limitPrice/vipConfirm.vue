@@ -101,18 +101,18 @@ export default {
     },
     methods: {
         changeVip() {
-            const amount = this.isVip ? '' : BigNumber.toMin(vipStakingAmount, this.viteTokenInfo.decimals);
             const actionType = this.isVip ? 2 : 1;
 
             sendTx('dexFundPledgeForVip', {
-                amount: amount || '0',
+                amount: '0',
                 actionType
             }).then(() => {
-                this.$toast(this.isVip ? this.$t('trade.vipConfirm.cancleSuccess') : this.$t('trade.vipConfirm.openSuccess'));
+                this.$toast(this.isVip ? this.$t('trade.vipConfirm.cancelSuccess') : this.$t('trade.vipConfirm.openSuccess'));
                 this.close && this.close();
+                this.$store.dispatch('startLoopVip', !this.isVip);
             }).catch(err => {
                 console.warn(err);
-                this.$toast(this.isVip ? this.$t('trade.vipConfirm.cancleSuccess') : this.$t('trade.vipConfirm.openSuccess'));
+                this.$toast(this.isVip ? this.$t('trade.vipConfirm.cancelFail') : this.$t('trade.vipConfirm.openFail'));
             });
         },
 
