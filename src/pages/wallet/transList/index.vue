@@ -92,6 +92,7 @@ const txImgs = {
     DexFundUserDeposit: txVxImg,
     DexFundUserWithdraw: txVxImg,
     DexFundNewOrder: txVxImg,
+    currDexFundNewOrder: txVxImg,
     DexTradeCancelOrder: txVxImg,
     DexFundNewMarket: txVxImg,
     CreateContractReq: txTransImg,
