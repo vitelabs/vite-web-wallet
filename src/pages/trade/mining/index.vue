@@ -76,9 +76,6 @@ export default {
             }, {
                 text: this.$t('tradeMining.tbHead.mining'),
                 cell: 'mining'
-            }, {
-                text: this.$t('tradeMining.tbHead.status'),
-                cell: 'status'
             } ],
             pledgeHeadList: [ {
                 text: this.$t('tradeMining.tbHead.date'),
@@ -89,9 +86,6 @@ export default {
             }, {
                 text: this.$t('tradeMining.tbHead.mining'),
                 cell: 'mining'
-            }, {
-                text: this.$t('tradeMining.tbHead.status'),
-                cell: 'status'
             } ]
         };
     },
@@ -135,8 +129,7 @@ export default {
                     date: this.getDate(item.date),
                     fee: `${ item.feeAmount } VITE`,
                     pledge: `${ item.pledgeAmount } VITE`,
-                    mining: `${ item.miningAmount } VX`,
-                    status: this.$t('tradeMining.already')
+                    mining: `${ item.miningAmount } VX`
                 });
             });
             return list;
