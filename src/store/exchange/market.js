@@ -34,15 +34,17 @@ const actions = {
             dispatch('addRateTokens', tokenIds);
 
             const query = getQuery();
+            const queryArr = query.symbol ? query.symbol.split('_') : [];
+            const queryQuoteTokenSymbol = queryArr[1] || '';
 
-            if (!query.symbol || !query.tradeTokenSymbol || !query.quoteTokenSymbol) {
+            if (!queryQuoteTokenSymbol) {
                 commit('setCurrentMarket', firstMarket);
                 return;
             }
 
             let i;
             for (i = 0; i < marketMap.length; i++) {
-                if (marketMap[i].symbol === query.quoteTokenSymbol) {
+                if (marketMap[i].symbol === queryQuoteTokenSymbol) {
                     break;
                 }
             }
