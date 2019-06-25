@@ -11,7 +11,7 @@
                 <div class="my-divident">
                     <div class="item">
                         <div class="item-title">{{ $t('tradeDividend.price') }}</div>
-                        <div class="item-amount">0</div>
+                        <div class="item-amount">{{ myFullIncome }}</div>
                     </div>
 
                     <div class="item __pointer" v-click-outside="hideMyList"  @click.stop="showMyList(tokenType)"
@@ -58,7 +58,7 @@ import walletTable from 'components/table/index.vue';
 import pagination from 'components/pagination.vue';
 import { dividend } from 'services/trade';
 import date from 'utils/date';
-import bigNumber from '../../../utils/bigNumber';
+import bigNumber from 'utils/bigNumber';
 
 export default {
     components: { sectionTitle, walletTable, pagination, pool },
@@ -110,7 +110,6 @@ export default {
         },
         contentList() {
             const list = [];
-            const pre = this.$store.state.env.currency === 'cny' ? '¥' : '$';
 
             this.list.forEach(item => {
                 const dividendStat = item.dividendStat || {};
@@ -122,7 +121,7 @@ export default {
                     VITE: dividendStat.VITE ? this.formatNum(dividendStat.VITE.dividendAmount || 0, 'VITE') : 0,
                     BTC: dividendStat.BTC ? this.formatNum(dividendStat.BTC.dividendAmount || 0, 'BTC') : 0,
                     USD: dividendStat.USD ? this.formatNum(dividendStat.USD.dividendAmount || 0, 'USD') : 0,
-                    price: pre + 0
+                    price: this.getPrice(dividendStat)
                 });
             });
             return list;
@@ -134,6 +133,9 @@ export default {
 
             return this.list[this.activeIndex] && this.list[this.activeIndex].dividendStat
                 ? this.list[this.activeIndex].dividendStat : {};
+        },
+        myFullIncome() {
+            return this.getPrice(this.myDividend);
         }
     },
     watch: {
@@ -150,10 +152,28 @@ export default {
                 });
             }
             this.$store.dispatch('addRateTokens', tokenIds);
-            console.log(this.$store.state.exchangeRate.rateMap);
         }
     },
     methods: {
+        getPrice(dividendStat) {
+            const pre = this.$store.state.env.currency === 'cny' ? '¥' : '$';
+            const rateList = this.$store.state.exchangeRate.rateMap || {};
+            const coin = this.$store.state.env.currency;
+
+            let income = 0;
+
+            for (const symbol in dividendStat) {
+                const list = dividendStat[symbol] && dividendStat[symbol].tokenDividends
+                    ? dividendStat[symbol].tokenDividends : [];
+                list.forEach(({ tokenId, amount }) => {
+                    const rate = rateList[tokenId] ? rateList[tokenId][`${ coin }Rate`] || 0 : 0;
+                    amount = bigNumber.multi(amount || 0, rate || 0);
+                    income = bigNumber.plus(income, amount);
+                });
+            }
+
+            return `${ pre }${ bigNumber.formatNum(income, 2) }`;
+        },
         isShowMyDividendList(tokenType) {
             return this.myDividend[tokenType]
                 && this.myDividend[tokenType].tokenDividends
