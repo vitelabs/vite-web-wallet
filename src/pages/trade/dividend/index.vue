@@ -111,15 +111,17 @@ export default {
         contentList() {
             const list = [];
             const pre = this.$store.state.env.currency === 'cny' ? '¥' : '$';
-
+            console.log(this.list);
             this.list.forEach(item => {
+                const dividendStat = item.dividendStat || {};
+
                 list.push({
                     date: date(item.date * 1000, this.$i18n.locale),
                     vxQuantity: bigNumber.formatNum(item.vxQuantity, 4),
-                    ETH: item.ETH ? this.formatNum(item.ETH.dividendAmount || 0, 'ETH') : 0,
-                    VITE: item.VITE ? this.formatNum(item.VITE.dividendAmount || 0, 'VITE') : 0,
-                    BTC: item.BTC ? this.formatNum(item.BTC.dividendAmount || 0, 'BTC') : 0,
-                    USD: item.USD ? this.formatNum(item.USD.dividendAmount || 0, 'USD') : 0,
+                    ETH: dividendStat.ETH ? this.formatNum(dividendStat.ETH.dividendAmount || 0, 'ETH') : 0,
+                    VITE: dividendStat.VITE ? this.formatNum(dividendStat.VITE.dividendAmount || 0, 'VITE') : 0,
+                    BTC: dividendStat.BTC ? this.formatNum(dividendStat.BTC.dividendAmount || 0, 'BTC') : 0,
+                    USD: dividendStat.USD ? this.formatNum(dividendStat.USD.dividendAmount || 0, 'USD') : 0,
                     price: pre + 0
                 });
             });
@@ -167,6 +169,8 @@ export default {
 
         fetchList(pageNum) {
             const offset = pageNum ? pageNum + 1 : 0;
+
+            // const data = { 'dividendStat': { 'ETH': { 'dividendAmount': '0.00000067', 'tokenDividends': [{ 'tokenId': 'tti_06822f8d096ecdf9356b666c', 'tokenSymbol': 'ETH-000', 'amount': '0.000000670000000000' }] }, 'VITE': { 'dividendAmount': '0.10401381', 'tokenDividends': [{ 'tokenId': 'tti_5649544520544f4b454e6e40', 'tokenSymbol': 'VITE', 'amount': '0.104013810000000000' }] } }, 'total': 1, 'dividendList': [{ 'date': 1561461378, 'vxQuantity': '34.271549550000000000', 'dividendStat': { 'ETH': { 'dividendAmount': '0.00000067', 'tokenDividends': [{ 'tokenId': 'tti_06822f8d096ecdf9356b666c', 'tokenSymbol': 'ETH-000', 'amount': '0.000000670000000000' }] }, 'VITE': { 'dividendAmount': '0.10401381', 'tokenDividends': [{ 'tokenId': 'tti_5649544520544f4b454e6e40', 'tokenSymbol': 'VITE', 'amount': '0.104013810000000000' }] } } }] };
 
             dividend({
                 address: this.address,
