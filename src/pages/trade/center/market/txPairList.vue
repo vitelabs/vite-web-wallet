@@ -82,7 +82,7 @@ export default {
             let activeTxPair = list && list.length ? list[0] : null;
 
             list.forEach(_t => {
-                if (_t.tradeTokenSymbol === query.tradeTokenSymbol && _t.quoteTokenSymbol === query.quoteTokenSymbol) {
+                if (query.symbol && _t.symbol === query.symbol) {
                     activeTxPair = _t;
                 }
                 _l.push(_t);
