@@ -19,8 +19,8 @@
                         <div class="item-title">{{ tokenType }}</div>
                         <div class="item-amount">
                             {{ myDividend[tokenType] ? formatNum(myDividend[tokenType].dividendAmount, tokenType) : 0 }}
-                            <span v-show="myDividend[tokenType] && myDividend[tokenType].tokenDividends && myDividend[tokenType].tokenDividends.length" class="down-icon"></span>
-                            <div class="item-content" v-show="isShowMyList === tokenType">
+                            <span v-show="isShowMyDividendList(tokenType)" class="down-icon"></span>
+                            <div class="item-content" v-show="isShowMyDividendList(tokenType) && isShowMyList === tokenType">
                                 <div class="row" v-for="(dividentItem, i) in getMyList(tokenType)" :key="i">
                                     <span class="symbol">{{ dividentItem.tokenSymbol }}: </span>
                                     <span class="amount">{{ formatNum(dividentItem.amount, tokenType) }}</span>
@@ -36,7 +36,7 @@
                         <div class="__tb_cell"></div>
                         <div class="__tb_cell"></div>
                         <div class="__tb_cell" v-for="tokenType in ['BTC', 'ETH', 'USD', 'VITE']" :key="tokenType">
-                            <div v-for="(item, i) in activeRow[tokenType].tokenDividends" :key="i" >
+                            <div v-for="(item, i) in activeRow[tokenType] ? activeRow[tokenType].tokenDividends : []" :key="i" >
                                 {{ item.tokenSymbol + ' ' + item.amount }}
                             </div>
                         </div>
@@ -111,7 +111,7 @@ export default {
         contentList() {
             const list = [];
             const pre = this.$store.state.env.currency === 'cny' ? '¥' : '$';
-            console.log(this.list);
+
             this.list.forEach(item => {
                 const dividendStat = item.dividendStat || {};
 
@@ -131,15 +131,25 @@ export default {
             if (this.activeIndex === null) {
                 return null;
             }
-            return this.list[this.activeIndex];
+
+            return this.list[this.activeIndex] && this.list[this.activeIndex].dividendStat
+                ? this.list[this.activeIndex].dividendStat : {};
         }
     },
     watch: {
         address() {
             this.fetchList();
+        },
+        myDividend() {
+
         }
     },
     methods: {
+        isShowMyDividendList(tokenType) {
+            return this.myDividend[tokenType]
+                && this.myDividend[tokenType].tokenDividends
+                && this.myDividend[tokenType].tokenDividends.length;
+        },
         clickRow(item, index) {
             if (this.activeIndex === index) {
                 this.activeIndex = null;
@@ -239,6 +249,14 @@ export default {
                     font-family: $font-bold;
                     font-weight: 600;
                     color: rgba(29,32,36,1);
+                    .down-icon {
+                        display: inline-block;
+                        background: url('~assets/imgs/dividendInfo.svg');
+                        background-size: 100% 100%;
+                        width: 16px;
+                        height: 16px;
+                        margin-bottom: -4px;
+                    }
                 }
             }
         }
