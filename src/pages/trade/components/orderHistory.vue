@@ -16,7 +16,7 @@ export default {
             timer: null
         };
     },
-    beforeMounted() {
+    mounted() {
         this.init();
     },
     destroyed() {
