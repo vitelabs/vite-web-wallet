@@ -451,8 +451,9 @@ export default {
                 return '';
             }
 
-            let minAmount = BigNumber.toMin(amount, this.ttokenDetail.tokenDecimals);
-            const minPrice = BigNumber.toMin(price, this.ttokenDetail.tokenDecimals);
+            const decimals = this.ttokenDetail ? this.ttokenDetail.tokenDecimals : 0;
+            let minAmount = BigNumber.toMin(amount, decimals);
+            const minPrice = BigNumber.toMin(price, decimals);
 
             if (this.orderType === 'buy') {
                 minAmount = BigNumber.dividedToNumber(minAmount, 1 + this.fee, 0);
