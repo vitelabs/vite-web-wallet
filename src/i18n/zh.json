@@ -411,6 +411,9 @@
             "powTransErr": "PoW获取的配额不足，建议您进行抵押VITE获取配额"
         }
     },
+    "walletMintage": {
+        "title": "铸币"
+    },
     "walletQuota": {
         "title": "配额管理",
         "help": {

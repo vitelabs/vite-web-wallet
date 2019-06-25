@@ -390,6 +390,9 @@
             "powTransErr": "Insufficient quota of PoW, we'd recommend that you stake VITE to obtain quota."
         }
     },
+    "walletMintage": {
+        "title": "铸币"
+    },
     "walletQuota": {
         "title": "Quota Management",
         "help": {
