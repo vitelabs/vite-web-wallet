@@ -270,21 +270,56 @@ export class HDAccount {
 }
 
 export class VBAccount {
-    constructor({ id = 'vbaccount', lang, name, activeAddr, activeIdx }) {
-        this.status = StatusMap.LOCK;
-        this.id = id;
+    constructor({ id, lang, name, activeAddr }) {
+        this.id = id||`VITEBIRFORST_${activeAddr}`;
         this.lang = lang || LangList.english;
         this.name = name || '';
-
-        // Set Active (Addr Idx Account)
-        this.setActiveAcc(activeIdx, activeAddr);
-
+        this.activeAddr=activeAddr;
         // Set Addr Num
         this.addrNum = 1;
-        // Set Addr Lis
+        setLastAcc({
+            id
+        })
+        this.save();
+    }
+    get status(){
+       return StatusMap.UNLOCK
+    }
+    get isBirforst(){
+        return this.id.startsWith('VITEBIRFORST_')
+    }
+    get activeAccount() {
+        return { address:this.activeAddr,sendTx(){} };
+    }
+    save() {
+        addHdAccount({
+            id: this.id,
+            lang: this.lang,
+            keystore: this.keystore
+        });
+        this.saveAcc();
     }
 
-    // get activeAccount() {
-    //     // return { address };
-    // }
+    saveAcc() {
+        setAcc(this.id, {
+            name: this.name,
+            addrNum: this.addrNum,
+            activeAddr: this.activeAddr,
+            activeIdx: this.activeIdx
+        });
+    }
+
+    saveOnAcc(key, info) {
+        if (!this.id) {
+            return;
+        }
+        setAccInfo(this.id, key, info);
+    }
+
+    getAccInfo() {
+        if (!this.id) {
+            return;
+        }
+        return getAcc(this.id);
+    }
 }
