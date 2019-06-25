@@ -413,7 +413,6 @@
         "maxAmt": "Withdraw amount should be in [{minAmount}, {maxAmount}]",
         "cancelLimitAmt": "Staking amount cannot be less than {num}",
         "withdrawalStaking": "Withdrawal of Staked Token",
-        "VX": "Mining VX",
         "myAddr": "Me",
         "confirm": {
             "help": {
@@ -721,7 +720,9 @@
             "openHint": "VIP开通后，可享有降低0.1%手续费特权，开通VIP需抵押10000VITE，30天后可手动取回",
             "cancelHint": "预计 {time} 可取回抵押，取回抵押后，您将无法再使用VIP特权",
             "openSuccess": "申请开通VIP成功，稍后生效",
-            "cancleSuccess": "申请取消VIP成功"
+            "openFail": "开通失败",
+            "cancelSuccess": "申请取消VIP成功",
+            "cancelFail": "取消失败"
         }
     },
     "tradeAssets": {
