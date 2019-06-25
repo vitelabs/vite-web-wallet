@@ -11,7 +11,7 @@
                 <div class="my-divident">
                     <div class="item">
                         <div class="item-title">{{ $t('tradeDividend.price') }}</div>
-                        <div class="item-amount">0</div>
+                        <div class="item-amount">{{ myFullIncome }}</div>
                     </div>
 
                     <div class="item __pointer" v-click-outside="hideMyList"  @click.stop="showMyList(tokenType)"
@@ -19,8 +19,8 @@
                         <div class="item-title">{{ tokenType }}</div>
                         <div class="item-amount">
                             {{ myDividend[tokenType] ? formatNum(myDividend[tokenType].dividendAmount, tokenType) : 0 }}
-                            <span v-show="myDividend[tokenType] && myDividend[tokenType].tokenDividends && myDividend[tokenType].tokenDividends.length" class="down-icon"></span>
-                            <div class="item-content" v-show="isShowMyList === tokenType">
+                            <span v-show="isShowMyDividendList(tokenType)" class="down-icon"></span>
+                            <div class="item-content" v-show="isShowMyDividendList(tokenType) && isShowMyList === tokenType">
                                 <div class="row" v-for="(dividentItem, i) in getMyList(tokenType)" :key="i">
                                     <span class="symbol">{{ dividentItem.tokenSymbol }}: </span>
                                     <span class="amount">{{ formatNum(dividentItem.amount, tokenType) }}</span>
@@ -36,7 +36,7 @@
                         <div class="__tb_cell"></div>
                         <div class="__tb_cell"></div>
                         <div class="__tb_cell" v-for="tokenType in ['BTC', 'ETH', 'USD', 'VITE']" :key="tokenType">
-                            <div v-for="(item, i) in activeRow[tokenType].tokenDividends" :key="i" >
+                            <div v-for="(item, i) in activeRow[tokenType] ? activeRow[tokenType].tokenDividends : []" :key="i" >
                                 {{ item.tokenSymbol + ' ' + item.amount }}
                             </div>
                         </div>
@@ -58,7 +58,7 @@ import walletTable from 'components/table/index.vue';
 import pagination from 'components/pagination.vue';
 import { dividend } from 'services/trade';
 import date from 'utils/date';
-import bigNumber from '../../../utils/bigNumber';
+import bigNumber from 'utils/bigNumber';
 
 export default {
     components: { sectionTitle, walletTable, pagination, pool },
@@ -110,17 +110,18 @@ export default {
         },
         contentList() {
             const list = [];
-            const pre = this.$store.state.env.currency === 'cny' ? '¥' : '$';
 
             this.list.forEach(item => {
+                const dividendStat = item.dividendStat || {};
+
                 list.push({
                     date: date(item.date * 1000, this.$i18n.locale),
                     vxQuantity: bigNumber.formatNum(item.vxQuantity, 4),
-                    ETH: item.ETH ? this.formatNum(item.ETH.dividendAmount || 0, 'ETH') : 0,
-                    VITE: item.VITE ? this.formatNum(item.VITE.dividendAmount || 0, 'VITE') : 0,
-                    BTC: item.BTC ? this.formatNum(item.BTC.dividendAmount || 0, 'BTC') : 0,
-                    USD: item.USD ? this.formatNum(item.USD.dividendAmount || 0, 'USD') : 0,
-                    price: pre + 0
+                    ETH: dividendStat.ETH ? this.formatNum(dividendStat.ETH.dividendAmount || 0, 'ETH') : 0,
+                    VITE: dividendStat.VITE ? this.formatNum(dividendStat.VITE.dividendAmount || 0, 'VITE') : 0,
+                    BTC: dividendStat.BTC ? this.formatNum(dividendStat.BTC.dividendAmount || 0, 'BTC') : 0,
+                    USD: dividendStat.USD ? this.formatNum(dividendStat.USD.dividendAmount || 0, 'USD') : 0,
+                    price: this.getPrice(dividendStat)
                 });
             });
             return list;
@@ -129,15 +130,55 @@ export default {
             if (this.activeIndex === null) {
                 return null;
             }
-            return this.list[this.activeIndex];
+
+            return this.list[this.activeIndex] && this.list[this.activeIndex].dividendStat
+                ? this.list[this.activeIndex].dividendStat : {};
+        },
+        myFullIncome() {
+            return this.getPrice(this.myDividend);
         }
     },
     watch: {
         address() {
             this.fetchList();
+        },
+        myDividend() {
+            const tokenIds = [];
+            for (const symbol in this.myDividend) {
+                const list = this.myDividend[symbol] && this.myDividend[symbol].tokenDividends
+                    ? this.myDividend[symbol].tokenDividends : [];
+                list.forEach(({ tokenId }) => {
+                    tokenIds.push(tokenId);
+                });
+            }
+            this.$store.dispatch('addRateTokens', tokenIds);
         }
     },
     methods: {
+        getPrice(dividendStat) {
+            const pre = this.$store.state.env.currency === 'cny' ? '¥' : '$';
+            const rateList = this.$store.state.exchangeRate.rateMap || {};
+            const coin = this.$store.state.env.currency;
+
+            let income = 0;
+
+            for (const symbol in dividendStat) {
+                const list = dividendStat[symbol] && dividendStat[symbol].tokenDividends
+                    ? dividendStat[symbol].tokenDividends : [];
+                list.forEach(({ tokenId, amount }) => {
+                    const rate = rateList[tokenId] ? rateList[tokenId][`${ coin }Rate`] || 0 : 0;
+                    amount = bigNumber.multi(amount || 0, rate || 0);
+                    income = bigNumber.plus(income, amount);
+                });
+            }
+
+            return `${ pre }${ bigNumber.formatNum(income, 2) }`;
+        },
+        isShowMyDividendList(tokenType) {
+            return this.myDividend[tokenType]
+                && this.myDividend[tokenType].tokenDividends
+                && this.myDividend[tokenType].tokenDividends.length;
+        },
         clickRow(item, index) {
             if (this.activeIndex === index) {
                 this.activeIndex = null;
@@ -167,6 +208,8 @@ export default {
 
         fetchList(pageNum) {
             const offset = pageNum ? pageNum + 1 : 0;
+
+            // const data = { 'dividendStat': { 'ETH': { 'dividendAmount': '0.00000067', 'tokenDividends': [{ 'tokenId': 'tti_06822f8d096ecdf9356b666c', 'tokenSymbol': 'ETH-000', 'amount': '0.000000670000000000' }] }, 'VITE': { 'dividendAmount': '0.10401381', 'tokenDividends': [{ 'tokenId': 'tti_5649544520544f4b454e6e40', 'tokenSymbol': 'VITE', 'amount': '0.104013810000000000' }] } }, 'total': 1, 'dividendList': [{ 'date': 1561461378, 'vxQuantity': '34.271549550000000000', 'dividendStat': { 'ETH': { 'dividendAmount': '0.00000067', 'tokenDividends': [{ 'tokenId': 'tti_06822f8d096ecdf9356b666c', 'tokenSymbol': 'ETH-000', 'amount': '0.000000670000000000' }] }, 'VITE': { 'dividendAmount': '0.10401381', 'tokenDividends': [{ 'tokenId': 'tti_5649544520544f4b454e6e40', 'tokenSymbol': 'VITE', 'amount': '0.104013810000000000' }] } } }] };
 
             dividend({
                 address: this.address,
@@ -234,6 +277,14 @@ export default {
                     font-family: $font-bold;
                     font-weight: 600;
                     color: rgba(29,32,36,1);
+                    .down-icon {
+                        display: inline-block;
+                        background: url('~assets/imgs/dividendInfo.svg');
+                        background-size: 100% 100%;
+                        width: 16px;
+                        height: 16px;
+                        margin-bottom: -4px;
+                    }
                 }
             }
         }

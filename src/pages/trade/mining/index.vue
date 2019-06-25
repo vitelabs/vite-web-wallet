@@ -45,11 +45,17 @@ import sectionTitle from '../components/sectionTitle.vue';
 import vxConfirm from './vxConfirm.vue';
 import stakingDetail from './stakingDetail.vue';
 import bigNumber from 'utils/bigNumber';
+import { timer } from 'utils/asyncFlow';
+
+let stakingInfoTimer = null;
 
 export default {
     components: { walletTable, pagination, sectionTitle, vxConfirm, stakingDetail },
     mounted() {
         this.init();
+    },
+    destroyed() {
+        this.stopStakingInfo();
     },
     data() {
         return {
@@ -115,7 +121,7 @@ export default {
     },
     methods: {
         init() {
-            this.fetchStakingInfo();
+            this.loopStakingInfo();
             this.fetchMiningTrade();
             this.fetchMiningStake();
         },
@@ -147,6 +153,15 @@ export default {
             x();
         },
 
+        stopStakingInfo() {
+            stakingInfoTimer && stakingInfoTimer.stop();
+            stakingInfoTimer = null;
+        },
+        loopStakingInfo() {
+            this.stopStakingInfo();
+            stakingInfoTimer = new timer(() => this.fetchStakingInfo(), 2000);
+            stakingInfoTimer.start();
+        },
         fetchStakingInfo() {
             $ViteJS.request('pledge_getAgentPledgeInfo', {
                 pledgeAddr: this.address,
