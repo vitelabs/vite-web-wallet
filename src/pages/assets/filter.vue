@@ -64,7 +64,7 @@ export default {
 .filter-root {
     display: flex;
     align-items: flex-end;
-    margin: 10px 10px;
+    margin: 10px 0;
     height: 34px;
     position: relative;
     min-height: 34px;

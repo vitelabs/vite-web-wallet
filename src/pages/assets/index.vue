@@ -149,7 +149,6 @@ export default {
     .account_head {
         position: relative;
         text-align: center;
-        margin: 10px;
         box-shadow: 0px 2px 10px 1px rgba(176,192,237,0.32);
         border-radius: 2px;
     }
@@ -158,7 +157,6 @@ export default {
         display: flex;
         flex-direction: column;
         align-items: center;
-        margin: 10px;
         box-shadow: 0px 2px 10px 1px rgba(176,192,237,0.32);
         border-radius: 2px;
         flex-grow: 1;

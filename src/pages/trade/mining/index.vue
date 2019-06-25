@@ -214,7 +214,6 @@ export default {
 .trade-mining-wrapper {
     width: 100%;
     height: 100%;
-    padding: 0 10px;
     box-sizing: border-box;
 }
 .trade-mining-section {

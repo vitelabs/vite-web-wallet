@@ -1,5 +1,7 @@
 <template>
     <div class="mintage-wrapper">
+        <sec-title :isShowHelp="false"></sec-title>
+
         <div class="mintage">
             <div class="order-row-title">activeAddr</div>
             <div>{{ activeAddr }}</div>
@@ -56,13 +58,11 @@
 <script>
 import tokenList from './tokenList';
 import viteInput from 'components/viteInput';
+import secTitle from 'components/secTitle';
 import sendTx from 'utils/sendTx';
 
 export default {
-    components: { viteInput, tokenList },
-    created() {
-        this.getOwnerToken();
-    },
+    components: { viteInput, tokenList, secTitle },
     data() {
         return {
             decimals: '0',
@@ -119,7 +119,6 @@ export default {
 .mintage-wrapper {
     width: 100%;
     box-sizing: border-box;
-    padding: 20px;
     overflow: auto;
     .mintage {
         width: 600px;

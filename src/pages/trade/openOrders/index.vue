@@ -44,7 +44,7 @@ export default {
 .open-order-ct {
     height: 100%;
     box-sizing: border-box;
-    padding: 20px 10px 0px;
+    padding-top: 10px;
     .open-order-table {
         box-shadow: 0px 2px 10px 1px rgba(176,192,237,0.42);
     }

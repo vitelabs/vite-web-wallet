@@ -191,7 +191,6 @@ export default {
 .trade-dividend-wrapper {
     width: 100%;
     height: 100%;
-    padding: 0 10px;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
