@@ -88,8 +88,8 @@ let webpackConfig = {
                 }
             }, {
                 test: /\.js$/,
-                exclude: /node_modules(?!(\/base-x)|(\/resize-detector)|(\/vue-echarts))|(\/@vite\/vitejs)/,
-                // exclude: /node_modules(?!(\/base-x)|(\/resize-detector)|(\/vue-echarts))/,
+                // exclude: /node_modules(?!(\/base-x)|(\/resize-detector)|(\/vue-echarts))|(\/@vite\/vitejs)/,
+                exclude: /node_modules(?!(\/base-x)|(\/resize-detector)|(\/vue-echarts))/,
                 use: {
                     loader: 'babel-loader',
                     options: {
