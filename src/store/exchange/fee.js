@@ -1,6 +1,9 @@
 import $ViteJS from 'utils/viteClient';
+import { timer } from 'utils/asyncFlow';
 
 const baseFee = 0.0025;
+let vipTimer = null;
+let nextVip = null;
 
 const state = {
     isVip: false,
@@ -27,6 +30,10 @@ const actions = {
                 return;
             }
             commit('setExchangeVip', data);
+            if (vipTimer && data === nextVip) {
+                nextVip = null;
+                stopLoopVip();
+            }
         });
     },
     exFetchMarketInfo({ commit, getters }) {
@@ -38,6 +45,17 @@ const actions = {
             }
             commit('setExchangeMarketInfo', data);
         });
+    },
+    startLoopVip({ dispatch }, nextVipStatus) {
+        if (!nextVipStatus) {
+            return;
+        }
+        stopLoopVip();
+        vipTimer = new timer(() => {
+            dispatch('exFetchVip');
+        }, 2000);
+        vipTimer.start();
+        nextVip = nextVipStatus;
     }
 };
 
@@ -63,4 +81,9 @@ export default {
 
 function getVipFee(isVip) {
     return isVip ? 0.001 : 0;
+}
+
+function stopLoopVip() {
+    vipTimer && vipTimer.stop();
+    vipTimer = null;
 }
