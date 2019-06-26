@@ -52,8 +52,7 @@ const actions = {
 
 const getters = {
     totalPage(state) {
-        const num = BigNumber.dividedToNumber(state.totalNum, pageCount, 2);
-        return num;
+        return BigNumber.dividedCeil(state.totalNum, pageCount);
     },
     transList(state) {
         const list = state.transList || [];
