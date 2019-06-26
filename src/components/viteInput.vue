@@ -81,13 +81,14 @@ export default {
     border: 1px solid #d4dee7;
     border-radius: 2px;
     font-size: 14px;
-    height: 40px;
-    line-height: 40px;
+    height: 34px;
+    line-height: 34px;
+    box-sizing: border-box;
 
     input {
         flex: 1;
         width: 100%;
-        font-size: 14px;
+        font-size: 12px;
         text-indent: 15px;
     }
 }

@@ -6,7 +6,8 @@
 
         <section v-if="!loadingToken" class="vote_list">
             <div class="title ct">{{ $t('walletVote.section1.title')}}</div>
-            <wallet-table class="wallet-vote-table" :headList="voteHeadList" :contentList="voteList">
+            <wallet-table class="wallet-vote-table"
+                          :headList="voteHeadList" :contentList="voteList">
                 <span v-for="(v, i) in voteList" :key="i"
                       :slot="`${i}nodeStatusTextAfter`">
                     <i v-if="v.nodeStatus === 2" class="tipsicon hoveraction" @click.self.stop="toggleTips">
@@ -19,31 +20,27 @@
                     <span v-unlock-account @unlocked="cancelVote(v)">{{ v.operate }}</span>
                     <span class="reward" @click="openReward(v)">{{ $t('walletVote.toReward') }}</span>
                 </span>
-
-                <div v-if="voteList.length" slot="tableBottom" class="__tb_no_data"></div>
             </wallet-table>
         </section>
 
         <section v-if="!loadingToken" class="node_list">
             <div class="title">
                 <div class="ct">{{ $t('walletVote.section2.title') }}</div>
-                <search v-model="filterKey" :placeholder="$t('walletVote.search')" class="filter"></search>
+                <search v-model="filterKey" :placeholder="$t('walletVote.search')"></search>
             </div>
-            <div class="tb_container">
-                <wallet-table class="wallet-vote-table node-list"
-                              :clickCell="clickCell" :noDataText="nodeNoDataText"
-                              :headList="nodeHeadList" :contentList="nodeList">
+            <wallet-table class="wallet-vote-table node-list"
+                          :clickCell="clickCell" :noDataText="nodeNoDataText"
+                          :headList="nodeHeadList" :contentList="nodeList">
 
-                    <span v-for="(item, i) in nodeList" :key="i"
-                          :slot="`${i}rankBefore`" class="rank">{{ i+1 }}</span>
+                <span v-for="(item, i) in nodeList" :key="i"
+                      :slot="`${i}rankBefore`" class="rank">{{ i+1 }}</span>
 
-                    <span v-for="(v, i) in nodeList" :key="i"
-                          :slot="`${i}operateKeyBefore`"
-                          v-unlock-account @unlocked="vote(v)">
-                        {{ v.operate }}
-                    </span>
-                </wallet-table>
-            </div>
+                <span v-for="(v, i) in nodeList" :key="i"
+                      :slot="`${i}operateKeyBefore`"
+                      v-unlock-account @unlocked="vote(v)">
+                    {{ v.operate }}
+                </span>
+            </wallet-table>
         </section>
     </div>
 </template>
@@ -378,18 +375,9 @@ export default {
 
 .vote {
     height: 100%;
-    overflow: auto;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-
-    .__tb_no_data {
-        border-top: 1px solid #f3f6f9;
-    }
-
-    .filter {
-        margin-top: 10px;
-    }
 
     .ct {
         font-weight: 600;
@@ -407,27 +395,15 @@ export default {
         flex-wrap: wrap;
         margin: 14px 0;
         .ct {
-            margin-top: 20px;
+            margin-top: 10px;
         }
-    }
-
-    .vote_list {
-        overflow-x: auto;
-        overflow-y: hidden;
     }
 
     .node_list {
         min-height: 300px;
         flex: 1;
-        overflow-x: auto;
-        overflow-y: hidden;
         display: flex;
         flex-direction: column;
-
-        .tb_container {
-            height: calc(100% - 64px);
-            overflow: auto;
-        }
     }
 }
 

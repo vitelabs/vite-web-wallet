@@ -134,13 +134,7 @@ export default {
 <style lang="scss" scoped>
 .dex .page-layout-wrapper .page-content {
     .page-scroll-wrapper .page-wrapper {
-        flex: none;
         height: calc(100% - 60px);
-    }
-}
-.wallet .page-layout-wrapper .page-content {
-    .page-scroll-wrapper .page-wrapper {
-        display: flex;
     }
 }
 

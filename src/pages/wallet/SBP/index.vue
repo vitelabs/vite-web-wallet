@@ -225,7 +225,6 @@ export default {
 .SBP-wrapper {
     position: relative;
     box-sizing: border-box;
-    overflow: auto;
     height: 100%;
 
     .loading {
@@ -274,8 +273,7 @@ export default {
 
     .content {
         background: #fff;
-        border: 1px solid #f6f5f5;
-        box-shadow: 0 2px 48px 1px rgba(176, 192, 237, 0.42);
+        box-shadow: 0px 2px 10px 1px rgba(176,192,237,0.42);
         border-radius: 2px;
     }
 

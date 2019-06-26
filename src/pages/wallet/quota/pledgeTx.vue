@@ -260,6 +260,7 @@ export default {
             line-height: 34px;
             text-align: center;
             float: right;
+            font-size: 12px;
 
             &.unuse {
                 background: #efefef;
@@ -279,7 +280,7 @@ export default {
 
         .add-icon {
             display: inline-block;
-            margin-top: 11px;
+            margin-top: 7px;
             width: 18px;
             height: 18px;
             background: url('~assets/imgs/add-quota-icon.svg');
@@ -290,11 +291,11 @@ export default {
             position: absolute;
             right: -4px;
             padding: 10px;
-            font-size: 14px;
+            font-size: 12px;
             @include font-family-normal();
             font-weight: 400;
             color: rgba(94, 104, 117, 1);
-            line-height: 24px;
+            line-height: 18px;
             white-space: nowrap;
             background: rgba(255, 255, 255, 1);
             box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.1);
@@ -306,7 +307,7 @@ export default {
                 border-bottom: 6px solid #fff;
                 position: absolute;
                 top: -12px;
-                left: 65%;
+                left: 15px;
             }
         }
     }
@@ -329,16 +330,6 @@ export default {
         &.unuse {
             background: #f3f6f9;
         }
-    }
-}
-</style>
-
-<style lang="scss">
-.pledge-input-wrapper.input-wrapper {
-    height: 32px;
-    line-height: 32px;
-    input {
-        font-size: 12px;
     }
 }
 </style>
