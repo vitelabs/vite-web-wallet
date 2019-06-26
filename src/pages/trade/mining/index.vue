@@ -125,14 +125,11 @@ export default {
             this.fetchMiningTrade();
             this.fetchMiningStake();
         },
-        getDate(time) {
-            return date(time * 1000, 'zh');
-        },
         dealList(rawlist) {
             const list = [];
             rawlist.forEach(item => {
                 list.push({
-                    date: this.getDate(item.date),
+                    date: date(item.date * 1000, this.$i18n.locale),
                     fee: `${ bigNumber.formatNum(item.feeAmount || 0, 8) } VITE`,
                     pledge: `${ bigNumber.formatNum(item.pledgeAmount || 0, 8) } VITE`,
                     mining: `${ bigNumber.formatNum(item.miningAmount || 0, 8) } VX`
