@@ -13,7 +13,8 @@
 
         <div class="__row">
             <div class="__row-t">{{ stakingText }}
-                <span v-show="!canOrder" class="__err __hint">{{ $t('trade.vipConfirm.noBalance') }}</span>
+                <span v-show="!canOrder && !isVip" class="__err __hint">{{ $t('trade.vipConfirm.noBalance') }}</span>
+                <span v-show="!canOrder && isVip" class="__err __hint">{{ $t('walletQuota.list.unexpired') }}</span>
             </div>
             <div class="no-input">
                 10,000 VITE
@@ -49,9 +50,12 @@ export default {
         return { stakingObj: {} };
     },
     computed: {
+        height() {
+            return this.$store.state.ledger.currentHeight;
+        },
         canOrder() {
             if (this.isVip) {
-                return true;
+                return this.stakingObj && BigNumber.compared(this.height, this.stakingObj.height) > 0;
             }
 
             if (!this.rawBalance || !+this.rawBalance.availableExAmount || !this.viteTokenInfo) {
