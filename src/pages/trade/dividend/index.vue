@@ -81,7 +81,7 @@ export default {
             return this.$store.getters.activeAddr;
         },
         totalPage() {
-            return parseInt(this.totalNum / 30);
+            return Math.ceil(this.totalNum / 30);
         },
 
         headList() {

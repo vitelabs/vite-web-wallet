@@ -1,7 +1,7 @@
 <template>
     <page-layout>
         <div class="setting-wrapper">
-            <sec-title :isShowHelp="false"></sec-title>
+            <sec-title class="setting-sec-title" :isShowHelp="false"></sec-title>
             <div class="content-wrapper">
                 <div class="content">
                     <div v-if="!!currHDAcc" class="big-title">{{ $t('setting.addrList') }}</div>
@@ -75,18 +75,21 @@ export default {
     box-sizing: border-box;
     width: 100%;
     height: 100%;
-    padding: 40px;
+
+    .setting-sec-title {
+        margin-top: 10px;
+    }
 
     .content-wrapper {
         position: absolute;
-        top: 102px;
-        bottom: 30px;
-        left: 40px;
-        right: 40px;
+        top: 40px;
+        bottom: 10px;
+        left: 0px;
+        right: 0px;
         overflow: auto;
         background: #fff;
-        box-shadow: 0 2px 48px 1px rgba(176, 192, 237, 0.17);
-        border-radius: 8px;
+        box-shadow: 0px 2px 10px 1px rgba(176, 192, 237, 0.42);
+        border-radius: 2px;
 
         .content {
             max-width: 510px;

@@ -10,10 +10,14 @@
                 <div class="__tb_row __tb_head __pointer">
                     <div class="__tb_cell" v-for="(h) in heads" :key="h">{{ h }}</div>
                 </div>
-                <div class="__tb_content __tb_no_data" v-show="!list || !list.length">
-                    <div>{{ $t('hint.noData') }}</div>
+
+                <div class="__tb_content __tb_content_no_data"  v-show="!list || !list.length">
+                    <div class="__tb_no_data">
+                        <div>{{ $t('hint.noData') }}</div>
+                    </div>
                 </div>
-                <div class="__tb_content">
+
+                <div v-show="list && list.length" class="__tb_content">
                     <div class="__tb_row __pointer __tb_content_row" v-for="(v,i) in list" :key="i">
                         <div class="__tb_cell" v-for="(item,j) in v " :key="j">{{item}}</div>
                     </div>
