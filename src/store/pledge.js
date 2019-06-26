@@ -86,21 +86,6 @@ const getters = {
     totalPledgePage(state) {
         const totalNum = state.totalNum || 0;
         return Math.ceil(totalNum / pageCount);
-    },
-    pledgeList(state) {
-        const list = state.pledgeList || [];
-        const nowList = [];
-
-        list.forEach(item => {
-            nowList.push({
-                beneficialAddr: item.beneficialAddr,
-                withdrawHeight: item.withdrawHeight,
-                withdrawTime: item.withdrawTime,
-                amount: item.amount
-            });
-        });
-
-        return nowList;
     }
 };
 
