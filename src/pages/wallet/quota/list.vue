@@ -117,6 +117,7 @@ export default {
 
             const nowList = [];
             pledgeList.forEach(pledge => {
+                // [TODO] agent text
                 const isMaturity = !pledge.agent && BigNumber.compared(pledge.withdrawHeight, this.currentHeight) <= 0;
 
                 const pledgeDate = isMaturity
