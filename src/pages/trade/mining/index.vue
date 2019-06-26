@@ -100,14 +100,14 @@ export default {
             return this.dealList(this.tradeList);
         },
         tradeTotalPage() {
-            return parseInt(this.tradeListTotal / 30);
+            return Math.ceil(this.tradeListTotal / 30);
         },
 
         stakeContent() {
             return this.dealList(this.stakeList);
         },
         stakeTotalPage() {
-            return parseInt(this.stakeListTotal / 30);
+            return Math.ceil(this.stakeListTotal / 30);
         },
 
         address() {

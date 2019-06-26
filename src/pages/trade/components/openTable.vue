@@ -6,7 +6,7 @@
             </div>
             <div class="__tb_cell">{{ $t('tradeAssets.operate') }}</div>
         </div>
-        <div class="__tb_content">
+        <div v-show="sortedList && sortedList.length" class="__tb_content">
             <div class="__tb_row __pointer __tb_content_row" :class="{
                 'active': !!changeList[v.orderId]
             }" v-for="v in sortedList" :key="v.orderId">
@@ -26,8 +26,10 @@
                 </div>
             </div>
         </div>
-        <div class="__tb_content __tb_no_data" v-show="!sortedList || !sortedList.length">
-            <div>{{ $t('hint.noData') }}</div>
+        <div class="__tb_content __tb_content_no_data"  v-show="!sortedList || !sortedList.length">
+            <div class="__tb_no_data">
+                <div>{{ $t('hint.noData') }}</div>
+            </div>
         </div>
     </div>
 </template>
