@@ -106,6 +106,12 @@ let webpackConfig = {
                     { loader: 'sass-loader' }
                     // { loader: 'postcss-loader' }
                 ]
+            }, {
+                test: /(\.ttf$|\.ttc$)/,
+                use: {
+                    loader: 'url-loader',
+                    options: { limit: 10000 }
+                }
             } ]
     },
     resolve: {

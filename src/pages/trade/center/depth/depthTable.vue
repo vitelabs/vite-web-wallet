@@ -8,8 +8,8 @@
                 {{ formatNum(item.price, 'ttoken') }}
                 <span class="owner" v-show="isInOpenOrders(item.price)"></span>
             </span>
-            <span class="__center-tb-item left depth quantity">{{ formatNum(item.quantity, 'ftoken', 6) }}</span>
-            <span class="__center-tb-item depth amount">{{ formatNum(item.amount, 'ttoken', 6) }}</span>
+            <span class="__center-tb-item left depth quantity">{{ formatNum(item.quantity, 'ftoken') }}</span>
+            <span class="__center-tb-item depth amount">{{ formatNum(item.amount, 'ttoken') }}</span>
             <span class="percent-wrapper" :class="dataType" :style="{ 'width': getWidth(item) + '%' }"></span>
         </div>
     </div>
@@ -118,6 +118,7 @@ export default {
 
 .depth-table-wrapper {
     position: relative;
+    font-family: $font-H;
 }
 
 .__center-tb-item .owner {
