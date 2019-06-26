@@ -55,7 +55,8 @@ export default {
     border-top: 1px solid rgba(229, 237, 243, 1);
     border-bottom: 1px solid rgba(229, 237, 243, 1);
     text-align: center;
-    @include font-family-bold();
+    // @include font-family-bold();
+    font-family: $font-H;
     font-weight: 600;
 
     .price {

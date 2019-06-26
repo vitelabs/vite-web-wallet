@@ -23,7 +23,7 @@
                     'buy': tx.side === 0,
                     'sell': tx.side === 1
                 }">{{ formatNum(tx.price, 'price') }}</span>
-                <span class="__center-tb-item left">{{ formatNum(tx.quantity, 'quantity', 6) }}</span>
+                <span class="__center-tb-item left">{{ formatNum(tx.quantity, 'quantity') }}</span>
                 <span class="__center-tb-item tx-time">{{ getDate(tx.time * 1000) }}</span>
             </div>
         </div>

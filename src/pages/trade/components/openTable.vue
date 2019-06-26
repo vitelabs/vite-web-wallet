@@ -109,7 +109,7 @@ export default {
 <style lang="scss" scoped>
 @import '~assets/scss/table.scss';
 
-.dex .__tb {
+.__tb {
     height: 100%;
     box-shadow: none;
     .__tb_content_row {
@@ -131,12 +131,17 @@ export default {
     }
     &:first-child {
         width: 130px;
+        padding-left: 0px;
+
     }
     &:nth-child(4),
     &:nth-child(5),
     &:nth-child(6),
     &:nth-child(8) {
         width: 15%;
+    }
+    &:last-child {
+        padding-right: 10px;
     }
 }
 
