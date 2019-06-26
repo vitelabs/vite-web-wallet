@@ -8,19 +8,18 @@
         </div>
 
         <div ref="tableContent" class="__tb_content" v-show="contentList && contentList.length">
-            <div v-for="(rowItem, index) in contentList" :key="index">
-                <div class="__tb_row __tb_content_row" :class="{
-                    'active': !!clickRow,
-                    '__pointer': !!clickRow
-                }" @click="_clickRow(rowItem, index)">
-                    <span v-for="(headItem, i) in headList" :key="i"
-                          @click="clickCell(headList[i].cell, rowItem, index)"
-                          :class="`${headItem.class || ''} ${headItem.cellClass || ''}`" class="__tb_cell">
-                        <slot :name="`${index}${headList[i].cell}Before`"></slot>
-                        {{ rowItem[ headList[i].cell ] }}
-                        <slot :name="`${index}${headList[i].cell}After`"></slot>
-                    </span>
-                </div>
+            <div class="__tb_row __tb_content_row" :class="{
+                     'active': !!clickRow,
+                     '__pointer': !!clickRow
+                 }" @click="_clickRow(rowItem, index)"
+                 v-for="(rowItem, index) in contentList" :key="index">
+                <span v-for="(headItem, i) in headList" :key="i"
+                      @click="clickCell(headList[i].cell, rowItem, index)"
+                      :class="`${headItem.class || ''} ${headItem.cellClass || ''}`" class="__tb_cell">
+                    <slot :name="`${index}${headList[i].cell}Before`"></slot>
+                    {{ rowItem[ headList[i].cell ] }}
+                    <slot :name="`${index}${headList[i].cell}After`"></slot>
+                </span>
                 <slot :name="`${index}Row`"></slot>
             </div>
         </div>
