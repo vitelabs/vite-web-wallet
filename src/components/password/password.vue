@@ -1,7 +1,6 @@
 <template>
     <confirm :title="pwdTitle"
-             :content="content" :showMask="showMask"
-             :btnUnuse="isLoading" :isShowLoading="true"
+             :content="content" :showMask="showMask" :isLoading="isLoading"
              :leftBtnTxt="cancelTxt || $t('btn.cancel')" :rightBtnTxt="submitTxt || $t('btn.submit')"
              :leftBtnClick="exchange ? _submit : _cancle"  :rightBtnClick="exchange ? _cancle : _submit">
 
