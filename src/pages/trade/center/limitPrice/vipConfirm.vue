@@ -2,7 +2,7 @@
     <confirm :showMask="true" :title="confirmTitle"
              :closeIcon="true" :close="close"
              :leftBtnClick="changeVip" :leftBtnTxt="confirmTitle"
-             :singleBtn="true" :btnUnuse="!canOrder">
+             :singleBtn="true" :btnUnuse="!canOrder" :isLoading="isLoading">
         <div v-if="!isVip" class="__row">
             <div class="__row-t">{{ $t('tokenCard.heads.availableExAmount') }}</div>
             <div class="__unuse-row">
@@ -47,7 +47,10 @@ export default {
         this.fetchStakingObj();
     },
     data() {
-        return { stakingObj: {} };
+        return {
+            stakingObj: {},
+            isLoading: false
+        };
     },
     computed: {
         height() {
@@ -63,7 +66,7 @@ export default {
             }
 
             const minAmount = BigNumber.toMin(vipStakingAmount, this.viteTokenInfo.decimals);
-            return BigNumber.compared(minAmount, this.rawBalance.availableExAmount) < 0;
+            return BigNumber.compared(minAmount, this.rawBalance.availableExAmount) <= 0;
         },
         viteTokenInfo() {
             return this.$store.getters.viteTokenInfo;
@@ -106,16 +109,19 @@ export default {
     methods: {
         changeVip() {
             const actionType = this.isVip ? 2 : 1;
+            this.isLoading = true;
 
             sendTx('dexFundPledgeForVip', {
                 amount: '0',
                 actionType
             }).then(() => {
+                this.isLoading = false;
                 this.$toast(this.isVip ? this.$t('trade.vipConfirm.cancelSuccess') : this.$t('trade.vipConfirm.openSuccess'));
                 this.close && this.close();
                 this.$store.dispatch('startLoopVip', !this.isVip);
             }).catch(err => {
                 console.warn(err);
+                this.isLoading = false;
                 this.$toast(this.isVip ? this.$t('trade.vipConfirm.cancelFail') : this.$t('trade.vipConfirm.openFail'));
             });
         },
