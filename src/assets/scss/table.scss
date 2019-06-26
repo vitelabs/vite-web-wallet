@@ -14,18 +14,22 @@
     overflow: hidden;
     background: #FFF;
     border-radius: 2px;
-    box-shadow: 0px 2px 10px 1px rgba(176,192,237,0.42);
+    box-shadow: 0px 2px 10px 1px rgba(176, 192, 237, 0.42);
 
     .__tb_content {
+        flex: 1;
         position: relative;
         overflow-x: hidden;
         overflow-y: auto;
     }
+    .__tb_content_no_data {
+        min-height: 200px;
+    }
     .__tb_no_data {
-        height: auto;
-        line-height: unset;
+        position: absolute;
         top: 50%;
-        margin-top: -75px;
+        left: 50%;
+        transform: translateY(-50%) translateX(-50%);
         font-size: 12px;
         @include font-family-normal();
         font-weight: 400;

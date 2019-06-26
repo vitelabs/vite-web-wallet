@@ -255,7 +255,7 @@ export default {
 
 .register-wrapper {
     position: relative;
-    padding: 0 30px 30px 30px;
+    padding: 6px 30px 30px 20px;
 
     .row {
         display: flex;
@@ -267,7 +267,7 @@ export default {
             display: inline-block;
             width: 49%;
             min-width: 470px;
-            margin-top: 30px;
+            margin-top: 14px;
 
             &:first-child {
                 margin-right: 10px;
@@ -276,11 +276,11 @@ export default {
 
         .title {
             @include font-family-bold();
-            font-size: 14px;
+            font-size: 12px;
             color: #1d2024;
             letter-spacing: 0.35px;
             line-height: 16px;
-            margin-bottom: 16px;
+            margin-bottom: 12px;
 
             .err {
                 float: right;
@@ -292,15 +292,15 @@ export default {
 
         .btn {
             position: relative;
-            bottom: -31px;
+            bottom: -28px;
             border-radius: 2px;
             background: #007aff;
             color: #fff;
-            height: 40px;
-            line-height: 40px;
+            height: 34px;
+            line-height: 34px;
             text-align: center;
             @include font-family-bold();
-            font-size: 14px;
+            font-size: 12px;
             color: #fbfbfb;
 
             &.unuse {
@@ -314,12 +314,12 @@ export default {
     .input-item {
         position: relative;
         box-sizing: border-box;
-        height: 40px;
-        line-height: 40px;
+        height: 34px;
+        line-height: 34px;
         background: #fff;
         border: 1px solid #d4dee7;
         border-radius: 2px;
-        font-size: 14px;
+        font-size: 12px;
         color: #5e6875;
         padding: 0 15px;
 

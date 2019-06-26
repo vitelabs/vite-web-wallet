@@ -208,7 +208,6 @@ export default {
 .quota-wrapper {
     position: relative;
     box-sizing: border-box;
-    overflow: auto;
     height: 100%;
 
     .loading {
@@ -238,12 +237,11 @@ export default {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    margin-bottom: 40px;
+    margin-bottom: 14px;
 
     ._content_border {
         background: #fff;
-        border: 1px solid #f6f5f5;
-        box-shadow: 0 2px 48px 1px rgba(176, 192, 237, 0.42);
+        box-shadow: 0px 2px 10px 1px rgba(176,192,237,0.42);
         border-radius: 2px;
     }
 

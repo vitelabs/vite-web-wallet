@@ -20,6 +20,7 @@
         </div>
     </div>
 </template>
+
 <script>
 import { debounce } from 'lodash';
 import Search from 'components/search';

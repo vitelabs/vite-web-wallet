@@ -24,8 +24,10 @@
             </div>
         </div>
 
-        <div class="__tb_content __tb_no_data" v-show="!contentList || !contentList.length">
-            <div>{{ noDataText || $t('hint.noData') }}</div>
+        <div class="__tb_content __tb_content_no_data" v-show="!contentList || !contentList.length">
+            <div class="__tb_no_data">
+                <div>{{ noDataText || $t('hint.noData') }}</div>
+            </div>
         </div>
 
         <slot name="tableBottom"></slot>
