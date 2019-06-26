@@ -186,7 +186,7 @@ export default {
                 }
 
                 this.tradeCurrentPage = offset;
-                this.tradeTotal = data.miningTotal ? bigNumber.formatNum(data.miningTotal, 4) : 0;
+                this.tradeTotal = data.miningTotal ? bigNumber.formatNum(data.miningTotal, 8) : 0;
                 this.tradeListTotal = data.total || 0;
                 this.tradeList = data.miningList || [];
             }).catch(err => {
@@ -205,7 +205,7 @@ export default {
                 }
 
                 this.stakeCurrentPage = offset;
-                this.stakeTotal = data.miningTotal ? bigNumber.formatNum(data.miningTotal, 4) : 0;
+                this.stakeTotal = data.miningTotal ? bigNumber.formatNum(data.miningTotal, 8) : 0;
                 this.stakeListTotal = data.total || 0;
                 this.stakeList = data.miningList || [];
             }).catch(err => {
