@@ -62,7 +62,7 @@ export default {
                 });
             }, 2000);
 
-            task.start(() => {
+            this.activeTxPair && task.start(() => {
                 return {
                     symbol: this.currentMarket,
                     address: this.defaultAddr,

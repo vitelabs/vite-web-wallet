@@ -10,7 +10,7 @@
                     {{ $t('stakingAmount') }}
                     <span v-show="amountErr" class="err">{{ amountErr }}</span>
                 </div>
-                <vite-input v-model="amount" :valid="testAmount"
+                <vite-input class="pledge-input-wrapper" v-model="amount" :valid="testAmount"
                             :placeholder="$t('walletQuota.amountPlaceholder', { num: minNum })">
                     <span slot="after" class="unit">VITE</span>
                 </vite-input>
@@ -23,7 +23,7 @@
                     {{ $t('walletQuota.beneficialAddr') }}
                     <span v-show="!isValidAddress" class="err">{{ $t('hint.addrFormat') }}</span>
                 </div>
-                <vite-input v-model="toAddr" :valid="testAddr"
+                <vite-input class="pledge-input-wrapper" v-model="toAddr" :valid="testAddr"
                             :placeholder="$t('walletQuota.addrPlaceholder')">
                     <div slot="after" @click="toggleAddrList" v-click-outside="closeAddrList" class="add-unit __pointer">
                         <span class="add-icon"></span>
@@ -218,7 +218,7 @@ export default {
 
 .pledge-tx-wrapper {
     position: relative;
-    margin-top: 40px;
+    margin-top: 14px;
 
     .row {
         display: flex;
@@ -229,16 +229,16 @@ export default {
             display: inline-block;
             width: 49%;
             min-width: 510px;
-            margin-top: 30px;
+            margin-top: 14px;
         }
 
         .title {
             @include font-family-bold();
-            font-size: 14px;
+            font-size: 12px;
             color: #1d2024;
             letter-spacing: 0.35px;
             line-height: 16px;
-            margin-bottom: 16px;
+            margin-bottom: 12px;
 
             .err {
                 float: right;
@@ -257,7 +257,7 @@ export default {
             border-radius: 2px;
             background: #007aff;
             color: #fff;
-            line-height: 40px;
+            line-height: 34px;
             text-align: center;
             float: right;
 
@@ -313,12 +313,12 @@ export default {
 
     .input-item {
         box-sizing: border-box;
-        height: 40px;
-        line-height: 40px;
+        height: 34px;
+        line-height: 34px;
         background: #fff;
         border: 1px solid #d4dee7;
         border-radius: 2px;
-        font-size: 14px;
+        font-size: 12px;
         color: #5e6875;
         padding: 0 15px;
 
@@ -329,6 +329,16 @@ export default {
         &.unuse {
             background: #f3f6f9;
         }
+    }
+}
+</style>
+
+<style lang="scss">
+.pledge-input-wrapper.input-wrapper {
+    height: 32px;
+    line-height: 32px;
+    input {
+        font-size: 12px;
     }
 }
 </style>

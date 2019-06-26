@@ -250,15 +250,15 @@ export default {
     .my-quota {
         box-sizing: border-box;
         min-width: 170px;
-        margin-right: 40px;
-        padding: 30px;
+        margin-right: 10px;
+        padding: 22px 30px;
     }
 
     .pledge-tx {
         flex: 1;
         max-width: 100%;
         box-sizing: border-box;
-        padding: 0 30px 30px 30px;
+        padding: 6px 30px 20px 30px;
     }
 }
 
