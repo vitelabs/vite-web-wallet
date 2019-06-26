@@ -113,11 +113,11 @@ export default {
                 return [];
             }
 
-            const pledgeList = this.$store.getters.pledgeList;
+            const pledgeList = this.$store.state.pledge.pledgeList;
 
             const nowList = [];
             pledgeList.forEach(pledge => {
-                const isMaturity = BigNumber.compared(pledge.withdrawHeight, this.currentHeight) <= 0;
+                const isMaturity = !pledge.agent && BigNumber.compared(pledge.withdrawHeight, this.currentHeight) <= 0;
 
                 const pledgeDate = isMaturity
                     ? this.$t('walletQuota.maturity')
@@ -130,10 +130,8 @@ export default {
                     withdrawHeight: pledge.withdrawHeight,
                     amount: pledge.amount,
                     pledgeDate,
-                    addr: '',
                     showAddr: ellipsisAddr(pledge.beneficialAddr),
                     showAmount,
-                    cancel: '',
                     isMaturity
                 });
             });

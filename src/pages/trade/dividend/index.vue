@@ -37,7 +37,7 @@
                         <div class="__tb_cell"></div>
                         <div class="__tb_cell" v-for="tokenType in ['BTC', 'ETH', 'USD', 'VITE']" :key="tokenType">
                             <div v-for="(item, i) in activeRow[tokenType] ? activeRow[tokenType].tokenDividends : []" :key="i" >
-                                {{ item.tokenSymbol + ' ' + item.amount }}
+                                {{ item.tokenSymbol + ' ' + formatNum(item.amount, tokenType) }}
                             </div>
                         </div>
                         <div class="__tb_cell"></div>
@@ -193,7 +193,7 @@ export default {
                 VITE: 4,
                 USD: 2
             };
-            return bigNumber.formatNum(amount, map[tokenSymbol]);
+            return bigNumber.formatNum(amount, tokenSymbol ? map[tokenSymbol] : 8);
         },
 
         showMyList(tokenType) {

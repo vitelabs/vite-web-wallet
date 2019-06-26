@@ -21,7 +21,8 @@
                 <div class="bold">{{ stakingDetail.withdrawTime }}</div>
             </div>
         </div>
-        <div class="btn cancel __pointer" @click="showVxConfirm(2)">{{ $t('tradeMining.withdraw') }}</div>
+        <div v-show="!canCancel" class="btn unuse">{{ $t('tradeMining.withdraw') }}</div>
+        <div v-show="canCancel" class="btn cancel __pointer" @click="showVxConfirm(2)">{{ $t('tradeMining.withdraw') }}</div>
         <div class="btn add __pointer" @click="showVxConfirm(1)">{{ $t('tradeMining.add') }}</div>
     </div>
 </template>
@@ -42,8 +43,14 @@ export default {
         }
     },
     computed: {
+        height() {
+            return this.$store.state.ledger.currentHeight;
+        },
         viteTokenInfo() {
             return this.$store.getters.viteTokenInfo;
+        },
+        canCancel() {
+            return this.stakingDetail && bigNumber.compared(this.heghit, this.stakingDetail.withdrawHeight) > 0;
         },
         stakingDetail() {
             if (!this.stakingObj) {
@@ -109,6 +116,12 @@ export default {
         &.cancel {
             color: rgba(94,104,117,1);
             border: 1px solid rgba(198,203,212,1);
+        }
+        &.unuse {
+            background: #efefef;
+            color: #666;
+            border: none;
+            cursor: not-allowed;
         }
     }
 }
