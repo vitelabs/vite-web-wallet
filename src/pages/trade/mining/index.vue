@@ -130,7 +130,7 @@ export default {
             rawlist.forEach(item => {
                 list.push({
                     date: date(item.date * 1000, this.$i18n.locale),
-                    fee: `${ bigNumber.formatNum(item.feeAmount || 0, 8) } VITE`,
+                    fee: `${ bigNumber.formatNum(item.feeAmount || 0, 8) } ${ item.miningToken }`,
                     pledge: `${ bigNumber.formatNum(item.pledgeAmount || 0, 8) } VITE`,
                     mining: `${ bigNumber.formatNum(item.miningAmount || 0, 8) } VX`
                 });
