@@ -182,9 +182,14 @@ export default {
             return list;
         }
     },
+    watch: {
+        address() {
+            this.fetchList();
+        }
+    },
     methods: {
         fetchList() {
-            return this.$store.dispatch('fetchRegistrationList', this.address);
+            return this.$store.dispatch('fetchRegistrationList');
         },
         showTime(index) {
             this.showTimeTips = index;

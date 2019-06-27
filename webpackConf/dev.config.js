@@ -18,8 +18,12 @@ module.exports = {
                 changeOrigin: true,
                 secure: false,
                 pathRewrite: { '^/gateway': '' }
-
             }
+            // '/api/v1': {
+            //     target: 'http://192.168.31.189:8082/dev/',
+            //     changeOrigin: true,
+            //     secure: false
+            // }
         }
     }
 };

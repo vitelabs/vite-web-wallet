@@ -2,8 +2,8 @@
     <div class="input-wrapper">
         <slot name="before"></slot>
         <!-- Safari autocomplete -->
-        <input fake_pass type="password" style="display:none"/>
-        <input v-model="value" @input.prevent="update" type="text"
+        <input fake_pass type="password" style="display: none"/>
+        <input v-model="value" @input.prevent="update" :type="type"
                :placeholder="placeholder" autocomplete="false"
                @blur="_blur" @focus="_focus"/>
         <slot name="after"></slot>
@@ -20,6 +20,10 @@ export default {
         placeholder: {
             type: String,
             default: ''
+        },
+        type: {
+            type: String,
+            default: 'text'
         },
         _value: {
             type: String,

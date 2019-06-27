@@ -21,7 +21,7 @@ const actions = {
         const activeTxPair = state.activeTxPair;
 
         if (txPair) {
-            history.replaceState(null, null, `${ location.origin }/trade?symbol=${ txPair.symbol }&tradeTokenSymbol=${ txPair.tradeTokenSymbol }&quoteTokenSymbol=${ txPair.quoteTokenSymbol }`);
+            history.replaceState(null, null, `${ location.origin }/trade?symbol=${ txPair.symbol }`);
             commit('exSetActiveTxPair', txPair);
         }
 
@@ -32,6 +32,7 @@ const actions = {
         dispatch('exFetchLatestTx');
         dispatch('exFetchDepth');
         dispatch('exFetchActiveTokens');
+        dispatch('exFetchMarketInfo');
     }
 };
 

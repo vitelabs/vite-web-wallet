@@ -1,4 +1,4 @@
-// Import '@babel/polyfill';
+import '@babel/polyfill';
 require('es6-promise').polyfill();
 
 import 'assets/scss/mixins.scss';

@@ -89,7 +89,7 @@ export default {
                     })
                         .then(successSubmit)
                         .catch(err => {
-                            console.log(err);
+                            console.warn(err);
                             const code = err && err.error ? err.error.code || -1
                                 : err ? err.code : -1;
                             if (code === -37008) {
