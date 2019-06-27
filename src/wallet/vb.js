@@ -8,7 +8,7 @@ export class VB extends Connector {
         super(opts);
         setCurrHDAcc({ activeAddr: 'vite_ab24ef68b84e642c0ddca06beec81c9acb1977bbd7da27a87a' }, true);
         getCurrHDAcc().unlock();
-// eslint-disable-next-line 
+        // eslint-disable-next-line
         this.on('connect', (error, _payload) => {
             if (error) {
                 throw error;
@@ -23,7 +23,7 @@ export class VB extends Connector {
             });
             // const { accounts, chainId } = payload.params[0];
         });
-// eslint-disable-next-line 
+        // eslint-disable-next-line
         this.on('disconnect', (error, _payload) => {
             if (error) {
                 throw error;
