@@ -60,7 +60,7 @@ import { timer } from 'utils/asyncFlow';
 import BigNumber from 'utils/bigNumber';
 import $ViteJS from 'utils/viteClient';
 import sendTx from 'utils/sendTx';
-import { execWithValid } from '../../../utils/execWithValid';
+import { execWithValid } from 'utils/execWithValid';
 
 export default {
     components: { secTitle, tooltips, search, loading, walletTable },
