@@ -37,7 +37,7 @@
             </div>
             <div class="token-row __pointer">
                 <span class="token-title">{{ $t('trade.head.gateway') }} :</span>
-                <span>{{ tokenDetail.gateway || '--' }}</span>
+                <span>{{ tokenDetail.gateway ? tokenDetail.gateway.name || '--' : '--' }}</span>
             </div>
             <div class="token-row">
                 <span class="token-title">{{ $t('trade.head.tokenDigit') }} :</span>
