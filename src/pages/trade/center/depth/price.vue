@@ -15,7 +15,15 @@
 <script>
 import BigNumber from 'utils/bigNumber';
 
+const Default_Title = 'Vite Wallet';
+
 export default {
+    mounted() {
+        document.title = this.documentTitle;
+    },
+    destroyed() {
+        document.title = Default_Title;
+    },
     computed: {
         activeTxPair() {
             return this.$store.getters.exActiveTxPair;
@@ -32,6 +40,16 @@ export default {
 
             return pre + BigNumber.multi(this.activeTxPair.closePrice || 0, this.rate || 0, 2);
         },
+        closePrice() {
+            return this.activeTxPair && this.activeTxPair.closePrice ? this.activeTxPair.closePrice : '';
+        },
+        documentTitle() {
+            if (!this.activeTxPair) {
+                return Default_Title;
+            }
+
+            return `${ BigNumber.formatNum(this.closePrice, 2) } | ${ this.activeTxPair.symbol }`;
+        },
         rate() {
             const rateList = this.$store.state.exchangeRate.rateMap || {};
             const tokenId = this.activeTxPair && this.activeTxPair.quoteToken ? this.activeTxPair.quoteToken : null;
@@ -41,6 +59,11 @@ export default {
                 return null;
             }
             return rateList[tokenId][`${ coin }Rate`] || null;
+        }
+    },
+    watch: {
+        documentTitle() {
+            document.title = this.documentTitle;
         }
     }
 };

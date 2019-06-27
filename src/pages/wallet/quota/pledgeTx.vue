@@ -104,7 +104,6 @@ export default {
 
             if (!this.amount) {
                 this.amountErr = '';
-
                 return true;
             }
 
