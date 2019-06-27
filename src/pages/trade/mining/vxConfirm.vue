@@ -24,7 +24,6 @@
                 {{ $t('wallet.sum') }}
                 <span v-show="amountErr" class="__err __hint">{{ amountErr }}</span>
             </div>
-            <!-- [TODO] TestNumber -->
             <vite-input v-model="amount" :valid="testAmount" type="number"
                         :placeholder="placeholder"></vite-input>
         </div>
