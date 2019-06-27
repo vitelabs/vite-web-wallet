@@ -3,12 +3,13 @@ import viteCrypto from 'testwebworker';
 import { getOldAccList, setOldAccList } from 'utils/store';
 import { HDAccount, StatusMap as _StatusMap, VBAccount } from './hdAccount';
 import { getLastAcc, addHdAccount, setAcc, getAccList } from './store';
-function constructAccount(acc) {
-    if (acc.id.startsWith('VITEBIRFORST_')) {
+function constructAccount(acc, isBirforst = false) {
+    if (isBirforst || acc.id.startsWith('VITEBIRFORST_')) {
         currentHDAccount = new VBAccount(acc);
     } else {
         currentHDAccount = new HDAccount(acc);
     }
+    return currentHDAccount;
 }
 const { LangList } = constant;
 const { checkParams } = utils;
@@ -23,9 +24,12 @@ export function getCurrHDAcc() {
     return currentHDAccount;
 }
 
-export function setCurrHDAcc(acc) {
+export function setCurrHDAcc(acc, isBirforst = false) {
     if (!acc) {
         return;
+    }
+    if (isBirforst) {
+        return constructAccount(acc, true);
     }
     if (!acc.id || !currentHDAccount || currentHDAccount.id !== acc.id) {
         return constructAccount(acc);
@@ -92,7 +96,19 @@ export function saveHDAccount({ name, pass, hdAddrObj, lang = LangList.english, 
         return id;
     });
 }
-
+// export function saveVBAccount({id,addr,lang,name=""}){
+//     setAcc(id, {
+//         name,
+//         addrNum=1,
+//         activeAddr: addr,
+//         activeIdx: 0
+//     });
+//     addHdAccount({
+//         id,
+//         lang,
+//         keystore: {}
+//     })
+// }
 
 function initCurrHDAccount() {
     const lastAcc = getLastAcc();
