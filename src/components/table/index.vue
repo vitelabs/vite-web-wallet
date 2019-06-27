@@ -8,18 +8,20 @@
         </div>
 
         <div ref="tableContent" class="__tb_content" v-show="contentList && contentList.length">
-            <div v-for="(rowItem, index) in contentList" :key="index"
-                 class="__tb_row __tb_content_row" :class="{
-                     'active': !!clickRow,
-                     '__pointer': !!clickRow
-            }" @click="_clickRow(rowItem)">
-                <span v-for="(headItem, i) in headList" :key="i"
-                      @click="clickCell(headList[i].cell, rowItem, index)"
-                      :class="`${headItem.class || ''} ${headItem.cellClass || ''}`" class="__tb_cell">
-                    <slot :name="`${index}${headList[i].cell}Before`"></slot>
-                    {{ rowItem[ headList[i].cell ] }}
-                    <slot :name="`${index}${headList[i].cell}After`"></slot>
-                </span>
+            <div v-for="(rowItem, index) in contentList" :key="index">
+                <div class="__tb_row __tb_content_row" :class="{
+                    'active': !!clickRow,
+                    '__pointer': !!clickRow
+                }" @click="_clickRow(rowItem, index)">
+                    <span v-for="(headItem, i) in headList" :key="i"
+                          @click="clickCell(headList[i].cell, rowItem, index)"
+                          :class="`${headItem.class || ''} ${headItem.cellClass || ''}`" class="__tb_cell">
+                        <slot :name="`${index}${headList[i].cell}Before`"></slot>
+                        {{ rowItem[ headList[i].cell ] }}
+                        <slot :name="`${index}${headList[i].cell}After`"></slot>
+                    </span>
+                </div>
+                <slot :name="`${index}Row`"></slot>
             </div>
         </div>
 
@@ -53,8 +55,8 @@ export default {
         }
     },
     methods: {
-        _clickRow(item) {
-            this.clickRow && this.clickRow(item);
+        _clickRow(item, index) {
+            this.clickRow && this.clickRow(item, index);
         }
     }
 };
@@ -68,6 +70,8 @@ export default {
 @import './walletVote.scss';
 @import './mintage.scss';
 @import './tradeOrderHistory.scss';
+@import "./mintTrade.scss";
+@import "./dividend.scss";
 
 // [TODO] Delete keystore
 .keystore-table-item {

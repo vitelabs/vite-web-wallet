@@ -75,31 +75,35 @@
         "37010": "该订单状态不可以撤销"
     },
     "txType": {
-        "0": "注册SBP",
-        "1": "更新注册",
-        "2": "撤销注册",
-        "3": "提取奖励",
-        "4": "投票",
-        "5": "撤销投票",
-        "6": "获取配额",
-        "7": "取回配额抵押",
-        "8": "铸币",
-        "9": "代币增发",
-        "10": "代币销毁",
-        "11": "转移所有权",
-        "12": "修改代币类型",
-        "13": "取回抵押",
-        "14": "ViteX充值",
-        "15": "ViteX提现",
-        "16": "ViteX挂单",
-        "17": "ViteX撤单",
-        "18": "ViteX上币",
-        "19": "创建合约",
-        "20": "转账",
-        "21": "转账",
-        "22": "转账",
-        "23": "转账",
-        "25": "Genesis"
+        "SBPreg": "注册SBP",
+        "UpdateReg": "更新注册",
+        "RevokeReg": "撤销注册",
+        "RetrieveReward": "提取奖励",
+        "Voting": "投票",
+        "RevokeVoting": "撤销投票",
+        "GetQuota": "获取配额",
+        "WithdrawalOfQuota": "取回配额抵押",
+        "Mintage": "铸币",
+        "MintageIssue": "代币增发",
+        "MintageBurn": "代币销毁",
+        "MintageTransferOwner": "转移所有权",
+        "MintageChangeTokenType": "修改代币类型",
+        "MintageCancelPledge": "取回抵押",
+        "DexFundUserDeposit": "ViteX充值",
+        "DexFundUserWithdraw": "ViteX提现",
+        "DexFundNewOrder": "ViteX挂单",
+        "currDexFundNewOrder": "ViteX挂单",
+        "DexTradeCancelOrder": "ViteX撤单",
+        "DexFundNewMarket": "ViteX上币",
+        "CreateContractReq": "创建合约",
+        "DexFundPledgeForVx": "抵押挖矿什么的",
+        "DexFundPledgeForVip": "抵押获取VIP什么的",
+        "TxReq": "转账",
+        "RewardReq": "转账",
+        "TxRes": "转账",
+        "TxResFail": "转账",
+        "SendRefund": "转账",
+        "GenesisReceive": "Genesis"
     },
     "btn": {
         "cancel": "取消",
@@ -430,7 +434,6 @@
         "maxAmt": "取回金额应在 [{minAmount}, {maxAmount}] 之内",
         "cancelLimitAmt": "抵押金额不能小于{num}",
         "withdrawalStaking": "取回抵押",
-        "VX": "挖矿VX",
         "myAddr": "我的",
         "confirm": {
             "help": {
@@ -700,7 +703,25 @@
             "priceNotNull": "金额不能为空",
             "amountNotNull": "成交额不能为空",
             "quantityNotNull": "数量不能为空",
-            "bigger0": "数额必须大于0"
+            "bigger0": "数额必须大于0",
+            "cancelVip": "取消",
+            "openVip": "开通",
+            "dexFee": "交易所基础费率：{fee}",
+            "operatorFee": "运营商收取费率：{fee}",
+            "vipFee": "VIP特权抵扣：{fee}"
+        },
+        "vipConfirm": {
+            "cancelVip": "取消VIP",
+            "openVip": "开通VIP",
+            "openStakingAmount": "开通VIP抵押金额",
+            "cancelStakingAmount": "可取回抵押金额",
+            "noBalance": "交易所可用余额不足",
+            "openHint": "VIP开通后，可享有降低0.1%手续费特权，开通VIP需抵押10000VITE，30天后可手动取回",
+            "cancelHint": "预计 {time} 可取回抵押，取回抵押后，您将无法再使用VIP特权",
+            "openSuccess": "申请开通VIP成功，稍后生效",
+            "openFail": "开通失败",
+            "cancelSuccess": "申请取消VIP成功",
+            "cancelFail": "取消失败"
         }
     },
     "tradeAssets": {
@@ -844,20 +865,34 @@
     "tradeMining": {
         "title": "挖矿",
         "addQuota": "新增抵押挖矿",
+        "add": "增加",
+        "withdraw": "取回",
         "tbHead": {
             "date": "日期",
-            "fee": "交易所手续费",
+            "fee": "交易手续费金额",
             "mining": "挖矿金额",
-            "status": "状态"
+            "pledge": "抵押金额"
         },
-        "tx": {
-            "title": "交易挖矿总收益"
-        },
-        "quota": {
-            "title": "抵押挖矿总收益"
-        }
+        "txTitle": "交易挖矿总收益",
+        "quotaTitle": "抵押挖矿总收益",
+        "addHint": "每日约13:00(UTC+8)计算抵押挖矿收益；抵押生效后，您可3天后可手动取回",
+        "withdrawHint": "取回后，您将无法再挖矿VX",
+        "addTitle": "抵押VITE挖矿",
+        "withdrawTitle": "取回抵押VITE",
+        "addPlaceHolder": "请输入抵押金额，最少134vite",
+        "withdrawPlaceHolder": "请输入取回金额，最少134vite",
+        "addBtn": "提交抵押",
+        "withdrawBtn": "确认取回",
+        "stakingBalance": "可取回抵押余额"
     },
     "tradeDividend": {
-        "title": "分红"
+        "title": "分红",
+        "poolTitle": "手续费分红池",
+        "listTitle": "我的分红",
+        "date": "日期",
+        "VX": "持有VX",
+        "coin": "分红币种",
+        "amount": "分红金额",
+        "price": "分红总估值"
     }
 }

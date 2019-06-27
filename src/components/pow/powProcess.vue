@@ -14,7 +14,6 @@
 
 <script>
 import loading from 'components/loading';
-import { setTimeout } from 'timers';
 
 let processTimeout;
 let limitTimeout;

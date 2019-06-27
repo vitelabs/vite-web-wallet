@@ -1,0 +1,13 @@
+.dividend-table {
+    @include rowWith {
+        width: 150px;
+    
+        &:first-child {
+            margin-left: 30px;
+        }
+        &:last-child {
+            margin-right: 30px;
+            text-align: right;
+        }
+    }
+}

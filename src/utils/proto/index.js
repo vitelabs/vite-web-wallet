@@ -41,7 +41,7 @@ class WsProtoClient {
     }
 
     startConnect() {
-        console.log('[New Wesocket]', this._clientId, new Date());
+        // console.log('[New Wesocket]', this._clientId, new Date());
 
         try {
             const connect = new WebSocket(this.wsUrl);
@@ -55,24 +55,24 @@ class WsProtoClient {
             };
 
             connect.onclose = () => {
-                console.log('[WebSocket closed]');
+                // console.log('[WebSocket closed]');
                 this.retryConnect();
             };
 
             connect.onmessage = e => {
                 const data = DexProto.decode(_Buffer.from(e.data));
                 if (data.op_type !== this.MESSAGETYPE.PUSH) {
-                    console.log(data);
+                    // console.log(data);
                     return;
                 }
 
                 if (data.client_id !== this._clientId) {
-                    console.log('[ClientId 不一致]', data.client_id, this._clientId);
+                    // console.log('[ClientId 不一致]', data.client_id, this._clientId);
                     return;
                 }
 
                 const realData = getRealData(data);
-                console.log('Onmessage', data, realData);
+                // console.log('Onmessage', data, realData);
 
                 const error = data.error_code || undefined;
                 this._subKeys[data.event_key] && this._subKeys[data.event_key].forEach(c => {
@@ -122,7 +122,7 @@ class WsProtoClient {
     }
 
     sub(event, callback) {
-        console.log('[SUB]', event);
+        // console.log('[SUB]', event);
         this._subKeys[event] = this._subKeys[event] || new Set();
         this._subKeys[event].add(callback);
         this.send(event, this.MESSAGETYPE.SUB);
@@ -141,11 +141,11 @@ class WsProtoClient {
         }
 
         if (this._subKeys[event].size !== 0) {
-            console.log('[UNSUB] fail, this._subKeys[event].size', event);
+            // console.log('[UNSUB] fail, this._subKeys[event].size', event);
             return;
         }
 
-        console.log('[UNSUB] success', event);
+        // console.log('[UNSUB] success', event);
         this.send(event, this.MESSAGETYPE.UNSUB);
     }
 
@@ -153,7 +153,7 @@ class WsProtoClient {
         if (!this.ready || this.closed) return;
 
         if (type === this.MESSAGETYPE.PING) {
-            console.log('ping', this._clientId, new Date());
+            // console.log('ping', this._clientId, new Date());
         }
 
         const payload = {
@@ -173,13 +173,13 @@ class WsProtoClient {
     }
 
     _checkSubs() {
-        console.log('_checkSubs');
+        // console.log('_checkSubs');
         for (const event in this._subKeys) {
             if (!this._subKeys[event] || !this._subKeys[event].size) {
-                console.log('_checkSubs send UNSUB', event);
+                // console.log('_checkSubs send UNSUB', event);
                 this.send(event, this.MESSAGETYPE.UNSUB);
             } else {
-                console.log('_checkSubs send SUB', event);
+                // console.log('_checkSubs send SUB', event);
                 this.send(event, this.MESSAGETYPE.SUB);
             }
         }
@@ -221,7 +221,7 @@ function getRealData(data) {
     const messageProto = root.lookupType(`vite.${ key }`);
     const result = messageProto.decode(data.message);
 
-    console.log('proto', key, result);
+    // console.log('proto', key, result);
 
     if (listKey.indexOf(key) !== -1) {
         return result && result.list ? result.list : null;

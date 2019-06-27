@@ -74,8 +74,11 @@ export default {
 
             let msg = code === -1 || !this.$i18n.messages.zh.errCode[Math.abs(code)]
                 ? message || this.$t('hint.err') : this.$t(`errCode.${ Math.abs(code) }`);
+            if (Math.abs(code) === 32002) {
+                msg = `${ errMsg } (${ code })`;
+            }
             if (code > 0) {
-                msg = `${ Math.abs(code) === 32002 ? errMsg : msg } (${ code })`;
+                msg = `${ msg } (${ code })`;
             }
             toast(msg, type, position);
         };
