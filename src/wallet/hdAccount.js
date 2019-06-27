@@ -275,14 +275,10 @@ export class VBAccount {
         this.lang = lang || LangList.english;
         this.name = name || '';
         this.activeAddr = activeAddr;
+        this.status = StatusMap.LOCK;
         // Set Addr Num
         this.addrNum = 1;
-        setLastAcc({ id });
         this.save();
-    }
-
-    get status() {
-        return StatusMap.UNLOCK;
     }
 
     get isBirforst() {
@@ -297,7 +293,7 @@ export class VBAccount {
         addHdAccount({
             id: this.id,
             lang: this.lang,
-            keystore: this.keystore
+            keystore: 'birforst'
         });
         this.saveAcc();
     }
@@ -323,5 +319,14 @@ export class VBAccount {
             return;
         }
         return getAcc(this.id);
+    }
+
+    lock() {
+        this.status = StatusMap.LOCK;
+    }
+
+    unlock() {
+        this.status = StatusMap.UNLOCK;
+        setLastAcc({ id: this.id });
     }
 }

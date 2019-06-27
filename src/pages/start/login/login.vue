@@ -35,7 +35,7 @@
                 </div>
                 <qrcode
                     :options="qrcodeOpt"
-                    :text="vbUri"
+                    :text="uri"
                     class="vb_qrcode"
                 ></qrcode>
                 <div class="code_tips">
@@ -135,7 +135,7 @@ import restore from '../restore.vue';
 import accountList from './accountList.vue';
 
 import qrcode from 'components/qrcode';
-import { VB } from 'wallet/vb';
+import { initVB } from 'wallet/vb';
 import icon from 'assets/imgs/start_qrcode_icon.svg';
 
 const TABNAME = {
@@ -163,15 +163,16 @@ export default {
                 size: 140,
                 image: icon,
                 mSize: 0.3
-            }
+            },
+            uri: ''
         };
+    },
+    async  beforeMount() {
+        this.uri = await initVB();
     },
     computed: {
         currHDAcc() {
             return this.$store.state.wallet.currHDAcc;
-        },
-        vbUri() {
-            return VB.createSession();
         }
     },
     watch: {
@@ -202,6 +203,12 @@ export default {
             this.isShowExisting = true;
         },
         toggleTab(tabName) {
+            if (this.tabName !== 'vb' && tabName === 'vb') {
+                initVB().then(uri => (this.uri = uri));
+            } else {
+                this.uri = '';
+                // destory vbinstance
+            }
             this.tabName = tabName;
         },
         getCurrAcc() {
