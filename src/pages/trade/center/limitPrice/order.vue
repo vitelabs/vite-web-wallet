@@ -17,8 +17,8 @@
             <div class="else-input-wrapper" :class="{'err': priceErr}">
                 <span class="tips" :class="{'active':
                     focusInput === 'price' && priceErr
-                }">{{  priceErr ? $t(priceErr, { digit: ttokenDigit }) : '' }}</span>
-                <vite-input v-model="price" @input="priceChanged"
+                }">{{  priceErr || '' }}</span>
+                <vite-input v-model="price" @input="priceChanged" type="number"
                             @focus="showTips('price')" @blur="hideTips('price')">
                     <span class="real-price __ellipsis" slot="after">{{ realPrice }}</span>
                 </vite-input>
@@ -32,8 +32,8 @@
             <div class="else-input-wrapper" :class="{'err': quantityErr}">
                 <span class="tips" :class="{'active':
                     focusInput === 'quantity' && quantityErr
-                }">{{  $t(quantityErr, { digit: ftokenDigit }) }}</span>
-                <vite-input v-model="quantity" @input="quantityChanged"
+                }">{{ quantityErr }}</span>
+                <vite-input v-model="quantity" @input="quantityChanged" type="number"
                             @focus="showTips('quantity')" @blur="hideTips('quantity')">
                 </vite-input>
             </div>
@@ -51,12 +51,8 @@
             <div class="else-input-wrapper" :class="{'err': amountErr}">
                 <span class="tips" :class="{'active':
                     focusInput === 'amount' && amountErr
-                }">{{ $t(amountErr, {
-                    digit: ttokenDigit,
-                    amount: minAmount,
-                    token: ttokenShow
-                }) }}</span>
-                <vite-input v-model="amount" @input="amountChanged"
+                }">{{ amountErr }}</span>
+                <vite-input v-model="amount" @input="amountChanged" type="number"
                             @focus="showTips('amount')" @blur="hideTips('amount')">
                 </vite-input>
             </div>
@@ -72,11 +68,12 @@
 
 <script>
 import { constant } from '@vite/vitejs';
-import viteInput from 'components/viteInput';
 import slider from 'components/slider';
+import viteInput from 'components/viteInput';
+import { initPwd } from 'components/password/index.js';
 import sendTx from 'utils/sendTx';
 import BigNumber from 'utils/bigNumber';
-import { initPwd } from 'components/password/index.js';
+import { verifyAmount, checkAmountFormat } from 'utils/validations';
 
 const maxDigit = 8;
 
@@ -388,14 +385,14 @@ export default {
         // price = amount / quantity / (1+fee)
         getPrice(quantity, amount) {
             const isRightQuantity = quantity
-                                    && this.$validAmount(quantity) === 0
+                                    && checkAmountFormat(quantity) === 0
                                     && !BigNumber.isEqual(quantity, 0);
             if (!isRightQuantity) {
                 return '';
             }
 
             const isRightAmount = amount
-                                    && this.$validAmount(amount) === 0
+                                    && checkAmountFormat(amount) === 0
                                     && !BigNumber.isEqual(amount, 0);
             if (!isRightAmount) {
                 return '';
@@ -416,14 +413,14 @@ export default {
         // amount = quantity * price * (1+fee)
         getAmount(price, quantity) {
             const isRightPrice = price
-                                && this.$validAmount(price) === 0
+                                && checkAmountFormat(price) === 0
                                 && !BigNumber.isEqual(price, 0);
             if (!isRightPrice) {
                 return '';
             }
 
             const isRightQuantity = quantity
-                                    && this.$validAmount(quantity) === 0
+                                    && checkAmountFormat(quantity) === 0
                                     && !BigNumber.isEqual(quantity, 0);
             if (!isRightQuantity) {
                 return '';
@@ -439,14 +436,14 @@ export default {
         // quantity = amount/price/（1+fee)
         getQuantity(price, amount) {
             const isRightPrice = price
-                                && this.$validAmount(price) === 0
+                                && checkAmountFormat(price) === 0
                                 && !BigNumber.isEqual(price, 0);
             if (!isRightPrice) {
                 return '';
             }
 
             const isRightAmount = amount
-                                    && this.$validAmount(amount) === 0
+                                    && checkAmountFormat(amount) === 0
                                     && !BigNumber.isEqual(amount, 0);
             if (!isRightAmount) {
                 return '';
@@ -464,104 +461,31 @@ export default {
         },
 
         validPrice() {
-            if (!this.price) {
-                this.priceErr = '';
+            if (this.price && +this.price === 0) {
+                this.priceErr = this.$t('trade.limitPrice.bigger0');
                 return;
             }
 
-            const result = this.$validAmount(this.price, this.ttokenDigit);
-
-            if (result === 1) {
-                this.priceErr = 'hint.amtFormat';
-                return;
-            }
-
-            if (result === 2) {
-                this.priceErr = 'trade.limitPrice.validMaxDigit';
-                return;
-            }
-
-            if (result !== 0) {
-                this.priceErr = 'hint.amtFormat';
-                return;
-            }
-
-            if (+this.price === 0) {
-                this.priceErr = 'trade.limitPrice.bigger0';
-                return;
-            }
-
-            this.priceErr = '';
+            this.priceErr = verifyAmount({ formatDecimals: this.ttokenDigit })(this.price);
         },
         validAmount() {
-            if (!this.amount) {
-                this.amountErr = '';
-                return;
-            }
-
-            const result = this.$validAmount(this.amount, this.ttokenDigit);
-
-            if (result === 1) {
-                this.amountErr = 'hint.amtFormat';
-                return;
-            }
-
-            if (result === 2) {
-                this.amountErr = 'trade.limitPrice.validMaxDigit';
-                return;
-            }
-
-            if (result !== 0) {
-                this.amountErr = 'hint.amtFormat';
-                return;
-            }
-
-            if (this.orderType === 'buy' && BigNumber.compared(this.balance || 0, this.amount) < 0) {
-                this.amountErr = 'hint.insufficientBalance';
-                return;
-            }
-
-            if (BigNumber.compared(this.minAmount || 0, this.amount) > 0) {
-                this.amountErr = 'trade.limitPrice.validAmountDigit';
-                return;
-            }
-
-            this.amountErr = '';
+            this.amountErr = verifyAmount({
+                formatDecimals: this.ttokenDigit,
+                balance: this.orderType === 'buy' ? this.balance || 0 : undefined,
+                minAmount: this.minAmount,
+                errorMap: {
+                    lessMin: this.$t('trade.limitPrice.validAmount', {
+                        amount: this.minAmount,
+                        token: this.ttokenShow
+                    })
+                }
+            })(this.amount);
         },
         validQuantity() {
-            if (!this.quantity) {
-                this.quantityErr = '';
-                return;
-            }
-
-            const result = this.$validAmount(this.quantity, this.ftokenDigit);
-
-            if (result === 1) {
-                this.quantityErr = 'hint.amtFormat';
-                return;
-            }
-
-            if (result === 2) {
-                this.quantityErr = 'trade.limitPrice.validMaxDigit';
-                return;
-            }
-
-            if (result !== 0) {
-                this.quantityErr = 'hint.amtFormat';
-                return;
-            }
-
-            if (this.orderType === 'sell' && BigNumber.compared(this.balance || 0, this.quantity) < 0) {
-                this.quantityErr = 'hint.insufficientBalance';
-                return;
-            }
-
-            if (+this.quantity === 0) {
-                this.quantityErr = 'trade.limitPrice.bigger0';
-                return;
-            }
-
-            this.quantityErr = '';
+            this.quantityErr = verifyAmount({
+                formatDecimals: this.ftokenDigit,
+                balance: this.orderType === 'sell' ? this.balance || 0 : undefined
+            })(this.quantity);
         },
         validAll() {
             this.validPrice();
@@ -582,13 +506,13 @@ export default {
             this.validAmount();
             this.validQuantity();
 
-            if (!+this.price) {
+            if (!this.price) {
                 this.priceErr = 'trade.limitPrice.priceNotNull';
             }
-            if (!+this.amount) {
+            if (!this.amount) {
                 this.amountErr = 'trade.limitPrice.amountNotNull';
             }
-            if (!+this.quantity) {
+            if (!this.quantity) {
                 this.quantityErr = 'trade.limitPrice.quantityNotNull';
             }
 

@@ -177,8 +177,7 @@ export default {
                 return;
             }
             this.activeItem = item;
-            const amount = BigNumber.toBasic(item.amount || 0, this.tokenInfo.decimals);
-            this.showConfirm('cancel', amount);
+            this.showConfirm('cancel', item.amount);
         },
 
         _sendCancelPledgeTx(amount) {

@@ -4,7 +4,7 @@
         <!-- Safari autocomplete -->
         <input fake_pass type="password" style="display: none"/>
         <input v-model="value" @input.prevent="update" :type="type"
-               :placeholder="placeholder" autocomplete="false"
+               :placeholder="placeholder" autocomplete="false" step="0.00000001"
                @blur="_blur" @focus="_focus"/>
         <slot name="after"></slot>
     </div>
