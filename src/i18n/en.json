@@ -129,7 +129,9 @@
         "amtFormat": "Amount format error",
         "transSucc": "Transaction successful!",
         "insufficientBalance": "Insufficient balance",
-        "nodeErr": "The full node is abnormal, please try again later."
+        "validMaxDigit": "At most {digit} decimals",
+        "nodeErr": "The full node is abnormal, please try again later.",
+        "bigger0": "Value must be greater than 0"
     },
     "beforeUse": {
         "title": "Read Before Use",
@@ -702,12 +704,10 @@
             "title": "Limit",
             "fee": "Fees",
             "text": "This page is a preview page of transaction data. Please login to trade.",
-            "validAmountDigit": "Volume must be greater than {amount}{token}",
-            "validMaxDigit": "At most {digit} decimals",
+            "validAmount": "Volume must be greater than {amount}{token}",
             "priceNotNull": "Amount cannot be empty",
             "amountNotNull": "Volume cannot be empty",
             "quantityNotNull": "Quantity cannot be empty",
-            "bigger0": "Value must be greater than 0",
             "cancelVip": "取消",
             "openVip": "开通",
             "dexFee": "交易所基础费率：{fee}",

@@ -24,7 +24,7 @@
                 {{ $t('wallet.sum') }}
                 <span v-show="amountErr" class="__err __hint">{{ amountErr }}</span>
             </div>
-            <vite-input v-model="amount" :valid="testAmount" type="number"
+            <vite-input v-model="amount" :valid="testAmount"
                         :placeholder="placeholder"></vite-input>
         </div>
 
@@ -37,6 +37,7 @@ import confirm from 'components/confirm.vue';
 import viteInput from 'components/viteInput';
 import bigNumber from 'utils/bigNumber';
 import sendTx from 'utils/sendTx';
+import { verifyAmount, verifyWithdrawAmount } from 'utils/validations';
 
 const minLimit = 134;
 
@@ -107,95 +108,38 @@ export default {
     },
     methods: {
         testAmount() {
-            if (!this.amount) {
-                this.amountErr = '';
-                return true;
-            }
-
             if (!this.viteTokenInfo) {
                 this.amountErr = this.$t('hint.amtFormat');
                 return false;
             }
 
-            const result = this.$validAmount(this.amount, this.viteTokenInfo.decimals) === 0;
-
-            if (!result) {
-                this.amountErr = this.$t('hint.amtFormat');
-                return false;
+            if (this.isAdd) {
+                this.amountErr = verifyAmount({
+                    decimals: this.viteTokenInfo.decimals,
+                    formatDecimals: 8,
+                    minAmount: bigNumber.toMin(minLimit, this.viteTokenInfo.decimals),
+                    balance: this.rawBalance ? this.rawBalance.availableExAmount || 0 : 0,
+                    errorMap: {
+                        less0: this.$t('wallet.hint.amount'),
+                        lessMin: this.$t('walletQuota.cancelLimitAmt', { num: minLimit })
+                    }
+                })(this.amount);
+            } else {
+                this.amountErr = verifyWithdrawAmount({
+                    stakingAmount: this.stakingObj ? this.stakingObj.amount || 0 : 0,
+                    decimals: this.viteTokenInfo.decimals
+                }, this.amount);
             }
 
-            if (bigNumber.isEqual(this.amount, 0)) {
-                this.amountErr = this.$t('wallet.hint.amount');
-                return false;
-            }
-
-            if (bigNumber.compared(minLimit, this.amount) > 0) {
-                this.amountErr = this.isAdd ? this.$t('walletQuota.cancelLimitAmt', { num: minLimit }) : this.$t('walletQuota.minAmt', { num: minLimit });
-                return false;
-            }
-
-            if (this.isAdd && !this.rawBalance) {
-                this.amountErr = this.$t('hint.insufficientBalance');
-                return false;
-            }
-
-            if (!this.isAdd) {
-                return this.testStakingAmount();
-            }
-
-            const amount = bigNumber.toMin(this.amount, this.viteTokenInfo.decimals);
-            if (bigNumber.compared(this.rawBalance.availableExAmount, amount) < 0) {
-                this.amountErr = this.$t('hint.insufficientBalance');
-                return false;
-            }
-
-            this.amountErr = '';
-            return true;
+            return !this.amountErr;
         },
-        testStakingAmount() {
-            const minAmount = minLimit;
-            const stakingAmount = this.stakingObj.amount;
-            const amount = bigNumber.toMin(this.amount, this.viteTokenInfo.decimals);
 
-            const compareStakingAndMin = bigNumber.compared(stakingAmount, minAmount);
-            if (compareStakingAndMin < 0) {
-                this.amountErr = `${ this.$t('walletQuota.minAmt', { num: minAmount }) }, ${ this.$t('walletQuota.gotoStake') }`;
-                return false;
-            }
-
-            const compareMin = bigNumber.compared(amount, minAmount);
-            if (compareMin < 0) {
-                this.amountErr = this.$t('walletQuota.minAmt', { num: minAmount });
-                return false;
-            }
-
-            const compareStaking = bigNumber.compared(stakingAmount, amount);
-            if (compareStaking < 0) {
-                this.amountErr = this.$t('walletQuota.maxAmt', {
-                    minAmount,
-                    maxAmount: bigNumber.toBasic(stakingAmount, this.viteTokenInfo.decimals)
-                });
-                return false;
-            }
-
-            const maxAmount = bigNumber.minus(stakingAmount, minAmount, 8, 'nofix');
-            const cancelBalance = bigNumber.minus(stakingAmount, amount);
-
-            if (bigNumber.compared(amount, maxAmount) > 0 && !bigNumber.isEqual(cancelBalance, 0)) {
-                this.amountErr = this.$t('walletQuota.cancelLimitAmt', { num: minAmount });
-                return false;
-            }
-
-            this.amountErr = '';
-            return true;
-        },
 
         _close() {
             this.amount = '';
             this.amountErr = '';
             this.close && this.close();
         },
-        // [TODO]  staking amount test
         staking() {
             const amount = bigNumber.toMin(this.amount, this.viteTokenInfo.decimals);
 

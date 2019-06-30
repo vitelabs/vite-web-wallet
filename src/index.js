@@ -21,7 +21,7 @@ import { resaveAccList, resaveLastAcc } from 'utils/store/resave';
 resaveAccList();
 resaveLastAcc();
 
-// $onKeyDown $offKeyDown $validAmount $trim $toast
+// $onKeyDown $offKeyDown $trim $toast
 Vue.use(plugin);
 // V-click-outside v-unlock-account
 Vue.use(directives);

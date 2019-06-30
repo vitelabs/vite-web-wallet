@@ -10,7 +10,8 @@
                     {{ $t('stakingAmount') }}
                     <span v-show="amountErr" class="err">{{ amountErr }}</span>
                 </div>
-                <vite-input class="pledge-input-wrapper" v-model="amount" :valid="testAmount"
+                <vite-input class="pledge-input-wrapper" type="number"
+                            v-model="amount" :valid="testAmount"
                             :placeholder="$t('walletQuota.amountPlaceholder', { num: minNum })">
                     <span slot="after" class="unit">VITE</span>
                 </vite-input>
@@ -53,6 +54,7 @@ import viteInput from 'components/viteInput';
 import { initPwd } from 'components/password/index.js';
 import BigNumber from 'utils/bigNumber';
 import statistics from 'utils/statistics';
+import { verifyAmount } from 'utils/validations';
 
 const amountTimeout = null;
 const minNum = 134;
@@ -98,39 +100,23 @@ export default {
     },
     methods: {
         testAmount() {
-            if (!this.amount) {
-                return true;
-            }
-
-            if (!this.amount) {
+            if (!this.tokenInfo || !this.tokenInfo.tokenId) {
                 this.amountErr = '';
                 return true;
-            }
-
-            const result = this.$validAmount(this.amount, this.tokenInfo.decimals) === 0;
-            if (!result) {
-                this.amountErr = this.$t('hint.amtFormat');
-                return false;
-            }
-
-            if (BigNumber.compared(this.amount, minNum) < 0) {
-                this.amountErr = this.$t('walletQuota.limitAmt', { num: minNum });
-                return false;
             }
 
             const balance = this.tokenBalList && this.tokenBalList[this.tokenInfo.tokenId]
                 ? this.tokenBalList[this.tokenInfo.tokenId].totalAmount : 0;
 
-            if (this.tokenInfo && this.tokenInfo.tokenId) {
-                const amount = BigNumber.toMin(this.amount, this.tokenInfo.decimals);
-                if (BigNumber.compared(balance, amount) < 0) {
-                    this.amountErr = this.$t('hint.insufficientBalance');
-                    return false;
-                }
-            }
+            this.amountErr = verifyAmount({
+                formatDecimals: 8,
+                decimals: this.tokenInfo.decimals,
+                balance,
+                minAmount: BigNumber.toMin(minNum, this.tokenInfo.decimals),
+                errorMap: { lessMin: this.$t('walletQuota.limitAmt', { num: minNum }) }
+            })(this.amount);
 
-            this.amountErr = '';
-            return true;
+            return !this.amountErr;
         },
         testAddr() {
             if (!this.toAddr) {

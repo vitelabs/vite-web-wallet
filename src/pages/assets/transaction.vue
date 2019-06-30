@@ -28,7 +28,7 @@
                     {{ $t('wallet.sum') }}
                     <span v-show="amountErr" class="__err __hint">{{ amountErr }}</span>
                 </div>
-                <vite-input v-model="amount" :valid="testAmount"
+                <vite-input v-model="amount" :valid="testAmount" type="number"
                             :placeholder="$t('wallet.placeholder.amount')"></vite-input>
             </div>
 
@@ -55,6 +55,7 @@ import viteInput from 'components/viteInput';
 import bigNumber from 'utils/bigNumber';
 import sendTx from 'utils/sendTx';
 import { getTokenIcon } from 'utils/tokenParser';
+import { verifyAmount } from 'utils/validations';
 
 const { getBytesSize } = utils;
 
@@ -128,26 +129,12 @@ export default {
         },
 
         testAmount() {
-            const result = this.$validAmount(this.amount, this.token.decimals) === 0;
-
-            if (!result) {
-                this.amountErr = this.$t('hint.amtFormat');
-                return false;
-            }
-
-            if (bigNumber.isEqual(this.amount, 0)) {
-                this.amountErr = this.$t('wallet.hint.amount');
-                return false;
-            }
-
-            const amount = bigNumber.toMin(this.amount, this.token.decimals);
-            if (bigNumber.compared(this.accBalance, amount) < 0) {
-                this.amountErr = this.$t('hint.insufficientBalance');
-                return false;
-            }
-
-            this.amountErr = '';
-            return true;
+            this.amountErr = verifyAmount({
+                formatDecimals: 8,
+                decimals: this.token.decimals,
+                balance: this.accBalance || 0
+            })(this.amount);
+            return !this.amountErr;
         },
 
         validTrans() {
