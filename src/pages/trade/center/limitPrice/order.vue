@@ -461,11 +461,6 @@ export default {
         },
 
         validPrice() {
-            if (this.price && +this.price === 0) {
-                this.priceErr = this.$t('hint.bigger0');
-                return;
-            }
-
             this.priceErr = verifyAmount({ formatDecimals: this.ttokenDigit })(this.price);
         },
         validAmount() {
