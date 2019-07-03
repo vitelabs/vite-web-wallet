@@ -35,7 +35,7 @@
                       :slot="`${i}cancelBefore`"
                       :class="{
                           'cancel': true,
-                          'active': item.isMaturity
+                          'active': item.isMaturity && !item.agent
                 }">{{ $t('walletQuota.withdrawalStaking') }}</span>
 
                 <pagination slot="tableBottom" class="__tb_pagination" :currentPage="currentPage + 1"
@@ -46,6 +46,7 @@
 </template>
 
 <script>
+import { constant } from '@vite/vitejs';
 import pagination from 'components/pagination.vue';
 import walletTable from 'components/table/index.vue';
 import { pwdConfirm } from 'components/password/index.js';
@@ -117,8 +118,7 @@ export default {
 
             const nowList = [];
             pledgeList.forEach(pledge => {
-                // [TODO] agent text
-                const isMaturity = !pledge.agent && BigNumber.compared(pledge.withdrawHeight, this.currentHeight) <= 0;
+                const isMaturity = BigNumber.compared(pledge.withdrawHeight, this.currentHeight) <= 0;
 
                 const pledgeDate = isMaturity
                     ? this.$t('walletQuota.maturity')
@@ -127,6 +127,9 @@ export default {
                 const showAmount = BigNumber.toBasic(pledge.amount || 0, this.tokenInfo.decimals);
 
                 nowList.push({
+                    agent: pledge.agent,
+                    agentAddress: pledge.agentAddress,
+                    bid: pledge.bid,
                     beneficialAddr: pledge.beneficialAddr,
                     withdrawHeight: pledge.withdrawHeight,
                     amount: pledge.amount,
@@ -158,6 +161,17 @@ export default {
 
             if (!item.isMaturity) {
                 this.$toast(this.$t('walletQuota.list.unexpired'));
+                return;
+            }
+
+            if (item.agent) {
+                if (constant.DexFund_Addr === item.agentAddress && +item.bid === 1) {
+                    this.$toast(this.$t('walletQuota.list.mining'));
+                } else if (constant.DexFund_Addr === item.agentAddress && +item.bid === 2) {
+                    this.$toast(this.$t('walletQuota.list.vip'));
+                } else {
+                    this.$toast(this.$t('walletQuota.list.other'));
+                }
                 return;
             }
 
