@@ -47,9 +47,6 @@ const actions = {
         });
     },
     startLoopVip({ dispatch }, nextVipStatus) {
-        if (!nextVipStatus) {
-            return;
-        }
         stopLoopVip();
         vipTimer = new timer(() => {
             dispatch('exFetchVip');
