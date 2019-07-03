@@ -1,8 +1,16 @@
-import { keystore, constant, hdAddr, account } from '@vite/vitejs';
+import { keystore, constant, hdAddr, account, addrAccount } from '@vite/vitejs';
 import viteCrypto from 'testwebworker';
 import statistics from 'utils/statistics';
 import $ViteJS from 'utils/viteClient';
-import { getAddr, addHdAccount, setAcc, getAcc, setAccInfo, setAddr, setLastAcc } from './store';
+import {
+    getAddr,
+    addHdAccount,
+    setAcc,
+    getAcc,
+    setAccInfo,
+    setAddr,
+    setLastAcc
+} from './store';
 
 const { LangList } = constant;
 const maxAddrNum = 10;
@@ -26,7 +34,7 @@ export class HDAccount {
 
         // Set Addr Num
         addrNum = addrNum || 1;
-        this.addrNum = (this.activeIdx + 1) > addrNum ? this.activeIdx + 1 : addrNum;
+        this.addrNum = this.activeIdx + 1 > addrNum ? this.activeIdx + 1 : addrNum;
 
         // Set Addr List
         this.setAddrList();
@@ -83,9 +91,14 @@ export class HDAccount {
 
     async unlock(pass) {
         const before = new Date().getTime();
-        const entropy = await keystore.decrypt(JSON.stringify(this.keystore), pass, viteCrypto);
+        const entropy = await keystore.decrypt(JSON.stringify(this.keystore),
+            pass,
+            viteCrypto);
         const after = new Date().getTime();
-        statistics.event('mnemonic-decrypt', this.keystore.version, 'time', after - before);
+        statistics.event('mnemonic-decrypt',
+            this.keystore.version,
+            'time',
+            after - before);
 
         // Set Base Info
         this.status = StatusMap.UNLOCK;
@@ -118,6 +131,7 @@ export class HDAccount {
     }
 
     activate() {
+        // auto receive tx
         if (this.status === StatusMap.LOCK || !this.activeAccount) {
             return;
         }
@@ -126,6 +140,7 @@ export class HDAccount {
     }
 
     freeze() {
+        // kill auto receive
         if (!this.activeAccount) {
             return;
         }
@@ -205,7 +220,8 @@ export class HDAccount {
         const privateKey = addrObj.privKey;
 
         if (this.activeAccount && this.activeAccount.address === this.activeAddr) {
-            !this.activeAccount.privateKey && this.activeAccount.setPrivateKey(privateKey);
+            !this.activeAccount.privateKey
+        && this.activeAccount.setPrivateKey(privateKey);
             return;
         }
 
@@ -231,7 +247,10 @@ export class HDAccount {
             return this.addrList;
         }
 
-        const list = hdAddr.getAddrsFromMnemonic(this.mnemonic, 0, this.addrNum, this.lang);
+        const list = hdAddr.getAddrsFromMnemonic(this.mnemonic,
+            0,
+            this.addrNum,
+            this.lang);
         const addrList = [];
         list.forEach((addrObj, i) => {
             const item = {
@@ -276,6 +295,7 @@ export class VBAccount {
         this.name = name || '';
         this.activeAddr = activeAddr;
         this.status = StatusMap.LOCK;
+        this._activeAccount = null;
         // Set Addr Num
         this.addrNum = 1;
         this.save();
@@ -283,10 +303,6 @@ export class VBAccount {
 
     get isBirforst() {
         return this.id.startsWith('VITEBIRFORST_');
-    }
-
-    get activeAccount() {
-        return { address: this.activeAddr, sendTx() {} };
     }
 
     save() {
@@ -322,11 +338,23 @@ export class VBAccount {
     }
 
     lock() {
+        this._activeAccount = null;
         this.status = StatusMap.LOCK;
     }
 
-    unlock() {
+    unlock(sendVbTx) {
+        if (!sendVbTx) {
+            return;
+        }
+
+        const account = new addrAccount({ client: $ViteJS, address: this.activeAddr });
+        const sendPowTx = async ({ methodName, params = [] }) => {
+            params[0] && (params[0].prevHash = 'hack for birforst');
+            const block = await account.getBlock[methodName](params[0], 'sync');
+            return sendVbTx({ block });
+        };
         this.status = StatusMap.UNLOCK;
+        this._activeAccount = { activeAddr: this.activeAddr, sendPowTx, sendVbTx, isBirforst: true };
         setLastAcc({ id: this.id });
     }
 }
