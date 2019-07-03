@@ -172,7 +172,7 @@ export default {
             });
         },
         fetchMiningTrade(pageNumber) {
-            const offset = pageNumber ? pageNumber - 1 : 0;
+            const offset = pageNumber ? (pageNumber - 1) * 30 : 0;
 
             miningTrade({
                 address: this.address,
@@ -182,16 +182,16 @@ export default {
                     return;
                 }
 
-                this.tradeCurrentPage = offset;
-                this.tradeTotal = data.miningTotal ? bigNumber.formatNum(data.miningTotal, 8) : 0;
                 this.tradeListTotal = data.total || 0;
+                this.stakeCurrentPage = pageNumber ? pageNumber - 1 : 0;
+                this.tradeTotal = data.miningTotal ? bigNumber.formatNum(data.miningTotal, 8) : 0;
                 this.tradeList = data.miningList || [];
             }).catch(err => {
                 console.warn(err);
             });
         },
         fetchMiningStake(pageNumber) {
-            const offset = pageNumber ? pageNumber - 1 : 0;
+            const offset = pageNumber ? (pageNumber - 1) * 30 : 0;
 
             miningPledge({
                 address: this.address,
@@ -201,9 +201,9 @@ export default {
                     return;
                 }
 
-                this.stakeCurrentPage = offset;
-                this.stakeTotal = data.miningTotal ? bigNumber.formatNum(data.miningTotal, 8) : 0;
                 this.stakeListTotal = data.total || 0;
+                this.stakeCurrentPage = pageNumber ? pageNumber - 1 : 0;
+                this.stakeTotal = data.miningTotal ? bigNumber.formatNum(data.miningTotal, 8) : 0;
                 this.stakeList = data.miningList || [];
             }).catch(err => {
                 console.warn(err);
