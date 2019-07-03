@@ -1,13 +1,5 @@
 .mint-trade-table {
     @include rowWith {
         min-width: 25%;
-    
-        &:first-child {
-            margin-left: 30px;
-        }
-        &:last-child {
-            margin-right: 30px;
-            text-align: right;
-        }
     }
 }
