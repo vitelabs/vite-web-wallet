@@ -1,5 +1,5 @@
 <template>
-    <div class="SBP-wrapper __wrapper">
+    <div class="SBP-wrapper">
         <sec-title></sec-title>
 
         <loading v-if="loadingToken" class="loading"></loading>
@@ -225,7 +225,6 @@ export default {
 .SBP-wrapper {
     position: relative;
     box-sizing: border-box;
-    overflow: auto;
     height: 100%;
 
     .loading {
@@ -260,24 +259,21 @@ export default {
 }
 
 .section {
-    padding-top: 40px;
+    padding-top: 14px;
 
     .title {
-        border-left: 2px solid rgba(0, 122, 255, 0.7);
-        @include font-family-bold();
-        font-size: 18px;
-        color: #1d2024;
-        line-height: 18px;
+        font-weight: 600;
         height: 18px;
-        margin-bottom: 28px;
-        padding-left: 10px;
-        margin-bottom: 25px;
+        line-height: 18px;
+        @include font-family-bold();
+        font-size: 14px;
+        color: #1d2024;
+        margin-bottom: 14px;
     }
 
     .content {
         background: #fff;
-        border: 1px solid #f6f5f5;
-        box-shadow: 0 2px 48px 1px rgba(176, 192, 237, 0.42);
+        box-shadow: 0px 2px 10px 1px rgba(176,192,237,0.42);
         border-radius: 2px;
     }
 

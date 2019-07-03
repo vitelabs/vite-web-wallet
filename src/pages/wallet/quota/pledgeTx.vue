@@ -10,7 +10,8 @@
                     {{ $t('stakingAmount') }}
                     <span v-show="amountErr" class="err">{{ amountErr }}</span>
                 </div>
-                <vite-input v-model="amount" :valid="testAmount"
+                <vite-input class="pledge-input-wrapper" type="number"
+                            v-model="amount" :valid="testAmount"
                             :placeholder="$t('walletQuota.amountPlaceholder', { num: minNum })">
                     <span slot="after" class="unit">VITE</span>
                 </vite-input>
@@ -23,7 +24,7 @@
                     {{ $t('walletQuota.beneficialAddr') }}
                     <span v-show="!isValidAddress" class="err">{{ $t('hint.addrFormat') }}</span>
                 </div>
-                <vite-input v-model="toAddr" :valid="testAddr"
+                <vite-input class="pledge-input-wrapper" v-model="toAddr" :valid="testAddr"
                             :placeholder="$t('walletQuota.addrPlaceholder')">
                     <div slot="after" @click="toggleAddrList" v-click-outside="closeAddrList" class="add-unit __pointer">
                         <span class="add-icon"></span>
@@ -53,6 +54,7 @@ import viteInput from 'components/viteInput';
 import { initPwd } from 'components/password/index.js';
 import BigNumber from 'utils/bigNumber';
 import statistics from 'utils/statistics';
+import { verifyAmount } from 'utils/validations';
 
 const amountTimeout = null;
 const minNum = 134;
@@ -98,40 +100,23 @@ export default {
     },
     methods: {
         testAmount() {
-            if (!this.amount) {
-                return true;
-            }
-
-            if (!this.amount) {
+            if (!this.tokenInfo || !this.tokenInfo.tokenId) {
                 this.amountErr = '';
-
                 return true;
-            }
-
-            const result = this.$validAmount(this.amount, this.tokenInfo.decimals) === 0;
-            if (!result) {
-                this.amountErr = this.$t('hint.amtFormat');
-                return false;
-            }
-
-            if (BigNumber.compared(this.amount, minNum) < 0) {
-                this.amountErr = this.$t('walletQuota.limitAmt', { num: minNum });
-                return false;
             }
 
             const balance = this.tokenBalList && this.tokenBalList[this.tokenInfo.tokenId]
                 ? this.tokenBalList[this.tokenInfo.tokenId].totalAmount : 0;
 
-            if (this.tokenInfo && this.tokenInfo.tokenId) {
-                const amount = BigNumber.toMin(this.amount, this.tokenInfo.decimals);
-                if (BigNumber.compared(balance, amount) < 0) {
-                    this.amountErr = this.$t('hint.insufficientBalance');
-                    return false;
-                }
-            }
+            this.amountErr = verifyAmount({
+                formatDecimals: 8,
+                decimals: this.tokenInfo.decimals,
+                balance,
+                minAmount: BigNumber.toMin(minNum, this.tokenInfo.decimals),
+                errorMap: { lessMin: this.$t('walletQuota.limitAmt', { num: minNum }) }
+            })(this.amount);
 
-            this.amountErr = '';
-            return true;
+            return !this.amountErr;
         },
         testAddr() {
             if (!this.toAddr) {
@@ -218,7 +203,7 @@ export default {
 
 .pledge-tx-wrapper {
     position: relative;
-    margin-top: 40px;
+    margin-top: 14px;
 
     .row {
         display: flex;
@@ -229,16 +214,16 @@ export default {
             display: inline-block;
             width: 49%;
             min-width: 510px;
-            margin-top: 30px;
+            margin-top: 14px;
         }
 
         .title {
             @include font-family-bold();
-            font-size: 14px;
+            font-size: 12px;
             color: #1d2024;
             letter-spacing: 0.35px;
             line-height: 16px;
-            margin-bottom: 16px;
+            margin-bottom: 12px;
 
             .err {
                 float: right;
@@ -257,9 +242,10 @@ export default {
             border-radius: 2px;
             background: #007aff;
             color: #fff;
-            line-height: 40px;
+            line-height: 34px;
             text-align: center;
             float: right;
+            font-size: 12px;
 
             &.unuse {
                 background: #efefef;
@@ -279,7 +265,7 @@ export default {
 
         .add-icon {
             display: inline-block;
-            margin-top: 11px;
+            margin-top: 7px;
             width: 18px;
             height: 18px;
             background: url('~assets/imgs/add-quota-icon.svg');
@@ -290,11 +276,11 @@ export default {
             position: absolute;
             right: -4px;
             padding: 10px;
-            font-size: 14px;
+            font-size: 12px;
             @include font-family-normal();
             font-weight: 400;
             color: rgba(94, 104, 117, 1);
-            line-height: 24px;
+            line-height: 18px;
             white-space: nowrap;
             background: rgba(255, 255, 255, 1);
             box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.1);
@@ -306,19 +292,19 @@ export default {
                 border-bottom: 6px solid #fff;
                 position: absolute;
                 top: -12px;
-                left: 65%;
+                left: 15px;
             }
         }
     }
 
     .input-item {
         box-sizing: border-box;
-        height: 40px;
-        line-height: 40px;
+        height: 34px;
+        line-height: 34px;
         background: #fff;
         border: 1px solid #d4dee7;
         border-radius: 2px;
-        font-size: 14px;
+        font-size: 12px;
         color: #5e6875;
         padding: 0 15px;
 

@@ -1,5 +1,5 @@
 <template>
-    <div class="__wrapper">
+    <div>
         <sec-title></sec-title>
 
         <div v-if="!loading">

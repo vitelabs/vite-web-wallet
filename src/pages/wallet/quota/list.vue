@@ -191,8 +191,7 @@ export default {
                 return;
             }
             this.activeItem = item;
-            const amount = BigNumber.toBasic(item.amount || 0, this.tokenInfo.decimals);
-            this.showConfirm('cancel', amount);
+            this.showConfirm('cancel', item.amount);
         },
 
         _sendCancelPledgeTx(amount) {
@@ -257,21 +256,23 @@ export default {
 }
 
 .beneficial-addr {
-    font-size: 14px;
     color: #007aff;
 }
 
 .beneficial-img {
     margin-left: 8px;
-    margin-bottom: -1px;
+    margin-bottom: -2px;
+    width: 12px;
+    height: 12px;
 }
 
 .title {
     @include font-family-bold();
-    font-size: 18px;
+    font-size: 14px;
     color: #1d2024;
-    line-height: 32px;
-    margin-bottom: 7px;
+    margin-bottom: 8px;
+    font-weight: 600;
+    line-height: 18px;
 }
 
 .total {
@@ -280,5 +281,6 @@ export default {
     letter-spacing: 0.35px;
     line-height: 16px;
     margin-bottom: 14px;
+    font-weight: 400;
 }
 </style>

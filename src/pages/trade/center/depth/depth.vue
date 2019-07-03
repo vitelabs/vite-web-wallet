@@ -21,7 +21,7 @@
             <span class="__center-tb-item __ellipsis depth price">{{ $t('trade.priceTitle', {
                 price: quoteTokenDetail ? quoteTokenDetail.originalSymbol : ''
             }) }}</span>
-            <span class="__center-tb-item __ellipsis depth quantity">{{ $t('trade.amountTitle', {
+            <span class="__center-tb-item left __ellipsis depth quantity">{{ $t('trade.amountTitle', {
                 amount: tradeTokenDetail ? tradeTokenDetail.originalSymbol : ''
             }) }}</span>
             <span class="__center-tb-item __ellipsis depth amount">{{ $t('trade.quantityTitle', {

@@ -50,6 +50,7 @@ export default {
     width: 100%;
 }
 .order-tab {
+    margin-bottom: 10px;
     min-height: 300px;
 }
 </style>

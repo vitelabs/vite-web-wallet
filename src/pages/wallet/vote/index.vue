@@ -1,12 +1,13 @@
 <template>
-    <div class="vote __wrapper">
+    <div class="vote">
         <secTitle></secTitle>
 
         <loading v-if="loadingToken" class="loading"></loading>
 
         <section v-if="!loadingToken" class="vote_list">
             <div class="title ct">{{ $t('walletVote.section1.title')}}</div>
-            <wallet-table class="wallet-vote-table" :headList="voteHeadList" :contentList="voteList">
+            <wallet-table class="wallet-vote-table"
+                          :headList="voteHeadList" :contentList="voteList">
                 <span v-for="(v, i) in voteList" :key="i"
                       :slot="`${i}nodeStatusTextAfter`">
                     <i v-if="v.nodeStatus === 2" class="tipsicon hoveraction" @click.self.stop="toggleTips">
@@ -19,31 +20,27 @@
                     <span v-unlock-account @unlocked="cancelVote(v)">{{ v.operate }}</span>
                     <span class="reward" @click="openReward(v)">{{ $t('walletVote.toReward') }}</span>
                 </span>
-
-                <div v-if="voteList.length" slot="tableBottom" class="__tb_no_data"></div>
             </wallet-table>
         </section>
 
         <section v-if="!loadingToken" class="node_list">
             <div class="title">
                 <div class="ct">{{ $t('walletVote.section2.title') }}</div>
-                <search v-model="filterKey" :placeholder="$t('walletVote.search')" class="filter"></search>
+                <search v-model="filterKey" :placeholder="$t('walletVote.search')"></search>
             </div>
-            <div class="tb_container">
-                <wallet-table class="wallet-vote-table node-list"
-                              :clickCell="clickCell" :noDataText="nodeNoDataText"
-                              :headList="nodeHeadList" :contentList="nodeList">
+            <wallet-table class="wallet-vote-table node-list"
+                          :clickCell="clickCell" :noDataText="nodeNoDataText"
+                          :headList="nodeHeadList" :contentList="nodeList">
 
-                    <span v-for="(item, i) in nodeList" :key="i"
-                          :slot="`${i}rankBefore`" class="rank">{{ i+1 }}</span>
+                <span v-for="(item, i) in nodeList" :key="i"
+                      :slot="`${i}rankBefore`" class="rank">{{ i+1 }}</span>
 
-                    <span v-for="(v, i) in nodeList" :key="i"
-                          :slot="`${i}operateKeyBefore`"
-                          v-unlock-account @unlocked="vote(v)">
-                        {{ v.operate }}
-                    </span>
-                </wallet-table>
-            </div>
+                <span v-for="(v, i) in nodeList" :key="i"
+                      :slot="`${i}operateKeyBefore`"
+                      v-unlock-account @unlocked="vote(v)">
+                    {{ v.operate }}
+                </span>
+            </wallet-table>
         </section>
     </div>
 </template>
@@ -378,26 +375,16 @@ export default {
 
 .vote {
     height: 100%;
-    overflow: auto;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
 
-    .__tb_no_data {
-        border-top: 1px solid #f3f6f9;
-    }
-
-    .filter {
-        margin-top: 10px;
-    }
-
     .ct {
-        border-left: 2px solid rgba(0, 122, 255, 0.7);
-        padding-left: 10px;
+        font-weight: 600;
         height: 18px;
         line-height: 18px;
         @include font-family-bold();
-        font-size: 18px;
+        font-size: 14px;
         color: #1d2024;
     }
 
@@ -406,33 +393,17 @@ export default {
         flex: none;
         justify-content: space-between;
         flex-wrap: wrap;
-        margin-bottom: 24px;
-
+        margin: 14px 0;
         .ct {
-            margin-top: 20px;
+            margin-top: 10px;
         }
-    }
-
-    .vote_list {
-        overflow-x: auto;
-        overflow-y: hidden;
-        margin: 40px 0;
-        margin-bottom: 20px;
-        min-height: 213px;
     }
 
     .node_list {
         min-height: 300px;
         flex: 1;
-        overflow-x: auto;
-        overflow-y: hidden;
         display: flex;
         flex-direction: column;
-
-        .tb_container {
-            height: calc(100% - 64px);
-            overflow: auto;
-        }
     }
 }
 

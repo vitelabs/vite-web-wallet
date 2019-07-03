@@ -28,7 +28,7 @@
                     {{ $t('wallet.sum') }}
                     <span v-show="amountErr" class="__err __hint">{{ amountErr }}</span>
                 </div>
-                <vite-input v-model="amount" :valid="testAmount"
+                <vite-input v-model="amount" :valid="testAmount" type="number"
                             :placeholder="$t('wallet.placeholder.amount')"></vite-input>
             </div>
 
@@ -63,6 +63,7 @@
 <script>
 import icon from 'assets/imgs/eth_logo.svg';
 import BigNumber from 'utils/bigNumber';
+import { verifyAmount } from 'utils/validations';
 import confirm from 'components/confirm';
 import viteInput from 'components/viteInput';
 import process from 'components/slider';
@@ -165,26 +166,12 @@ export default {
             this.isValidAddress = this.toAddress && this.ethWallet.utils.isAddress(this.toAddress);
         },
         testAmount() {
-            const result = this.$validAmount(this.amount, this.token.decimals) === 0;
-
-            if (!result) {
-                this.amountErr = this.$t('hint.amtFormat');
-                return false;
-            }
-
-            if (BigNumber.isEqual(this.amount, 0)) {
-                this.amountErr = this.$t('wallet.hint.amount');
-                return false;
-            }
-
-            const amount = BigNumber.toMin(this.amount, this.token.decimals);
-            if (BigNumber.compared(this.token.balance, amount) < 0) {
-                this.amountErr = this.$t('hint.insufficientBalance');
-                return false;
-            }
-
-            this.amountErr = '';
-            return true;
+            this.amountErr = verifyAmount({
+                formatDecimals: this.token.decimals,
+                decimals: this.token.decimals,
+                balance: this.token.balance || 0
+            })(this.amount);
+            return !this.amountErr;
         },
 
         setSize(size) {

@@ -59,25 +59,27 @@ export default {
 
 .sec-title-container {
     @include font-family-bold();
-    font-size: 24px;
-    color: #1d2024;
-    line-height: 40px;
+    font-weight: 600;
+    color: rgba(29,32,36,1);
+    font-size: 18px;
+    line-height: 22px;
 
     .help {
-        margin-top: 6px;
+        margin-top: 8px;
         align-items: center;
-        font-size: 14px;
+        font-size: 12px;
         color: #007aff;
         text-align: right;
-        line-height: 20px;
-        margin-left: 16px;
+        line-height: 16px;
+        margin-left: 12px;
         display: inline-block;
         white-space: nowrap;
 
         .icon {
             background: url(~assets/imgs/detail.svg);
-            width: 20px;
-            height: 20px;
+            width: 16px;
+            height: 16px;
+            background-size: 100% 100%;
             display: inline-block;
             margin-right: 0;
         }
