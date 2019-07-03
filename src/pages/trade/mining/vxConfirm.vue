@@ -146,11 +146,19 @@ export default {
                 amount,
                 actionType: this.actionType
             }).then(() => {
-                this.$toast('success');
+                if (this.isAdd) {
+                    this.$toast(this.$t('hint.request', { name: this.$t('submitStaking') }));
+                } else {
+                    this.$toast(this.$t('hint.request', { name: this.$t('walletQuota.withdrawalStaking') }));
+                }
                 this._close();
             }).catch(err => {
                 console.warn(err);
-                this.$toast('fail');
+                if (this.isAdd) {
+                    this.$toast(this.$t('walletQuota.pledgeFail'), err);
+                } else {
+                    this.$toast(this.$t('walletQuota.canclePledgeFail'), err);
+                }
             });
         }
     }

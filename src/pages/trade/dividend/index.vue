@@ -207,7 +207,7 @@ export default {
         },
 
         fetchList(pageNum) {
-            const offset = pageNum ? pageNum + 1 : 0;
+            const offset = pageNum ? (pageNum - 1) * 30 : 0;
 
             // const data = { 'dividendStat': { 'ETH': { 'dividendAmount': '0.00000067', 'tokenDividends': [{ 'tokenId': 'tti_06822f8d096ecdf9356b666c', 'tokenSymbol': 'ETH-000', 'amount': '0.000000670000000000' }] }, 'VITE': { 'dividendAmount': '0.10401381', 'tokenDividends': [{ 'tokenId': 'tti_5649544520544f4b454e6e40', 'tokenSymbol': 'VITE', 'amount': '0.104013810000000000' }] } }, 'total': 1, 'dividendList': [{ 'date': 1561461378, 'vxQuantity': '34.271549550000000000', 'dividendStat': { 'ETH': { 'dividendAmount': '0.00000067', 'tokenDividends': [{ 'tokenId': 'tti_06822f8d096ecdf9356b666c', 'tokenSymbol': 'ETH-000', 'amount': '0.000000670000000000' }] }, 'VITE': { 'dividendAmount': '0.10401381', 'tokenDividends': [{ 'tokenId': 'tti_5649544520544f4b454e6e40', 'tokenSymbol': 'VITE', 'amount': '0.104013810000000000' }] } } }] };
 
@@ -215,6 +215,8 @@ export default {
                 address: this.address,
                 offset
             }).then(data => {
+                this.totalNum = data ? data.total || 0 : 0;
+                this.currentPage = pageNum ? pageNum - 1 : 0;
                 this.myDividend = data ? data.dividendStat || {} : {};
                 this.list = data ? data.dividendList || [] : [];
             }).catch(err => {
