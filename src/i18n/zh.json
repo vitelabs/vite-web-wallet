@@ -129,6 +129,8 @@
         "amtFormat": "金额格式错误",
         "transSucc": "转账成功",
         "insufficientBalance": "余额不足",
+        "validMaxDigit": "最多{digit}位小数",
+        "bigger0": "金额必须大于0",
         "nodeErr": "节点异常，请您稍后重试"
     },
     "beforeUse": {
@@ -410,6 +412,9 @@
             "powErr": "运行PoW错误，请重新发起转账",
             "powTransErr": "PoW获取的配额不足，建议您进行抵押VITE获取配额"
         }
+    },
+    "walletMintage": {
+        "title": "铸币"
     },
     "walletQuota": {
         "title": "配额管理",
@@ -701,12 +706,10 @@
             "title": "限价",
             "fee": "手续费",
             "text": "此页面为交易预览信息，请登录后进行交易",
-            "validAmountDigit": "成交额需大于{amount}{token}",
-            "validMaxDigit": "最多{digit}位小数",
+            "validAmount": "成交额需大于{amount}{token}",
             "priceNotNull": "金额不能为空",
             "amountNotNull": "成交额不能为空",
             "quantityNotNull": "数量不能为空",
-            "bigger0": "数额必须大于0",
             "cancelVip": "取消",
             "openVip": "开通",
             "dexFee": "交易所基础费率：{fee}",

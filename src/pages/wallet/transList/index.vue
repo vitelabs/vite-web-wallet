@@ -1,58 +1,57 @@
 <template>
-    <div class="trans-list-wrapper __wrapper">
+    <div class="trans-list-wrapper">
         <sec-title class="title" :isShowHelp="false"></sec-title>
-        <div class="trans-list-content">
-            <wallet-table class="wallet-trans-list-table"
-                          :headList="[ {
-                              class: 'tType',
-                              text: this.$t('walletTransList.tType.title'),
-                              cell: 'type'
-                          }, {
-                              class: 'status',
-                              text: this.$t('walletTransList.status.title'),
-                              cell: 'status'
-                          }, {
-                              class: 'time',
-                              text: this.$t('walletTransList.timestamp'),
-                              cell: 'date'
-                          }, {
-                              class: 'address',
-                              text: this.$t('walletTransList.tAddress'),
-                              cell: 'transAddr'
-                          }, {
-                              class: 'sum',
-                              text: this.$t('walletTransList.sum'),
-                              cell: 'amount'
-                          }, {
-                              class: 'token',
-                              text: 'Token',
-                              cell: 'tokenSymbol'
-                          } ]"
-                          :contentList="transList" :clickRow="goDetail">
 
-                <img v-for="(item, i) in transList" :key="i"
-                     :slot="`${i}typeBefore`" class="icon"
-                     :src="`${ txImgs[item.txType] ? txImgs[item.txType] : txTransImg }`"/>
+        <wallet-table class="wallet-trans-list-table"
+                      :headList="[ {
+                          class: 'tType',
+                          text: this.$t('walletTransList.tType.title'),
+                          cell: 'type'
+                      }, {
+                          class: 'status',
+                          text: this.$t('walletTransList.status.title'),
+                          cell: 'status'
+                      }, {
+                          class: 'time',
+                          text: this.$t('walletTransList.timestamp'),
+                          cell: 'date'
+                      }, {
+                          class: 'address',
+                          text: this.$t('walletTransList.tAddress'),
+                          cell: 'transAddr'
+                      }, {
+                          class: 'sum',
+                          text: this.$t('walletTransList.sum'),
+                          cell: 'amount'
+                      }, {
+                          class: 'token',
+                          text: 'Token',
+                          cell: 'tokenSymbol'
+                      } ]"
+                      :contentList="transList" :clickRow="goDetail">
 
-                <span v-for="(item, i) in transList" :key="i"
-                      :slot="`${i}statusBefore`"
-                      :class="{
-                          'pink': item.statusNum === 0,
-                          'blue': item.statusNum === 1,
-                          'green': item.statusNum === 2
-                }">{{ item.statusText }}</span>
+            <img v-for="(item, i) in transList" :key="i"
+                 :slot="`${i}typeBefore`" class="icon"
+                 :src="`${ txImgs[item.txType] ? txImgs[item.txType] : txTransImg }`"/>
 
-                <span v-for="(item, i) in transList" :key="i"
-                      :slot="`${i}amountBefore`"
-                      :class="{
-                          'red': item.isSend,
-                          'green': !item.isSend
-                }">{{ item.showAmount }}</span>
+            <span v-for="(item, i) in transList" :key="i"
+                  :slot="`${i}statusBefore`"
+                  :class="{
+                      'pink': item.statusNum === 0,
+                      'blue': item.statusNum === 1,
+                      'green': item.statusNum === 2
+            }">{{ item.statusText }}</span>
 
-                <pagination slot="tableBottom" class="__tb_pagination" :currentPage="currentPage + 1"
-                            :totalPage="+totalPage" :toPage="toPage"></pagination>
-            </wallet-table>
-        </div>
+            <span v-for="(item, i) in transList" :key="i"
+                  :slot="`${i}amountBefore`"
+                  :class="{
+                      'red': item.isSend,
+                      'green': !item.isSend
+            }">{{ item.showAmount }}</span>
+
+            <pagination slot="tableBottom" class="__tb_pagination" :currentPage="currentPage + 1"
+                        :totalPage="+totalPage" :toPage="toPage"></pagination>
+        </wallet-table>
     </div>
 </template>
 
@@ -229,13 +228,9 @@ export default {
     height: 100%;
 
     .title {
-        margin-bottom: 40px;
+        margin-bottom: 14px;
     }
 
-    .trans-list-content {
-        overflow: auto;
-        flex: 1;
-    }
     .pink {
         @include font-family-bold();
         color: #ea60ac;

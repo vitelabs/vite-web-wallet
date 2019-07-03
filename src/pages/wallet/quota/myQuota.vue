@@ -50,7 +50,7 @@ export default {
 @import "~assets/scss/vars.scss";
 
 .my-quota-wrapper {
-    margin-top: 40px;
+    margin-top: 14px;
     padding: 35px 24px;
 }
 
@@ -61,13 +61,13 @@ export default {
         font-size: 14px;
         color: #1d2024;
         letter-spacing: 0.35px;
-        margin-bottom: 12px;
+        margin-bottom: 14px;
     }
 
     .text {
-        font-size: 24px;
+        font-size: 18px;
         color: #1d2024;
-        line-height: 32px;
+        line-height: 22px;
     }
 }
 </style>

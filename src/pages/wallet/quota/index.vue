@@ -1,21 +1,19 @@
 <template>
-    <div class="quota-wrapper __wrapper">
+    <div class="quota-wrapper">
         <quota-head></quota-head>
 
         <loading v-if="loadingToken" class="loading"></loading>
 
-        <div v-if="showConfirmType" class="gray-wrapper">
-            <confirm v-if="showConfirmType === 'cancel'"
-                     :title="$t(`walletQuota.withdrawalStaking`)" :closeIcon="false"
-                     :leftBtnTxt="$t(`walletQuota.confirm.cancel.leftBtn`)" :leftBtnClick="closeConfirm"
-                     :rightBtnTxt="$t(`walletQuota.confirm.cancel.rightBtn`)"
-                     :rightBtnClick="submit" :btnUnuse="!!cancelUnuse">
-                {{ $t(`walletQuota.confirm.cancel.describe`, { amount: activeAmountLimit }) }}
-                <div class="cancel-amount" v-show="amountErr">{{ amountErr }}</div>
-                <vite-input class="cancel-input" v-model="cancelAmount" :valid="testAmount"
-                            :placeholder="$t('walletQuota.inputWithdrawAmount')"></vite-input>
-            </confirm>
-        </div>
+        <confirm v-if="showConfirmType && showConfirmType === 'cancel'"
+                 :title="$t(`walletQuota.withdrawalStaking`)" :closeIcon="false" :showMask="true"
+                 :leftBtnTxt="$t(`walletQuota.confirm.cancel.leftBtn`)" :leftBtnClick="closeConfirm"
+                 :rightBtnTxt="$t(`walletQuota.confirm.cancel.rightBtn`)"
+                 :rightBtnClick="submit" :btnUnuse="!!cancelUnuse">
+            {{ $t(`walletQuota.confirm.cancel.describe`, { amount: showStakingAmount }) }}
+            <div class="cancel-amount" v-show="amountErr">{{ amountErr }}</div>
+            <vite-input class="cancel-input" v-model="cancelAmount" :valid="testAmount"
+                        :placeholder="$t('walletQuota.inputWithdrawAmount')"></vite-input>
+        </confirm>
 
         <div v-show="!loadingToken">
             <div class="content">
@@ -43,6 +41,7 @@ import viteInput from 'components/viteInput';
 import { initPwd } from 'components/password/index.js';
 import sendTx from 'utils/sendTx';
 import BigNumber from 'utils/bigNumber';
+import { verifyWithdrawAmount } from 'utils/validations';
 
 export default {
     components: { quotaHead, myQuota, pledgeTx, confirm, list, loading, viteInput },
@@ -66,7 +65,7 @@ export default {
             loadingToken: false,
             showConfirmType: '',
 
-            activeAmountLimit: '',
+            stakingAmount: '',
             cancelAmount: '',
             amountErr: '',
             stopWatch: false
@@ -78,6 +77,12 @@ export default {
         },
         netStatus() {
             return this.$store.state.env.clientStatus;
+        },
+        showStakingAmount() {
+            if (!this.stakingAmount) {
+                return '';
+            }
+            return BigNumber.toBasic(this.stakingAmount || 0, this.tokenInfo.decimals);
         }
     },
     methods: {
@@ -86,53 +91,20 @@ export default {
                 return;
             }
 
-            const result = this.$validAmount(this.cancelAmount, this.tokenInfo.decimals) === 0;
-            if (!result) {
-                this.amountErr = this.$t('hint.amtFormat');
-                return false;
-            }
+            this.amountErr = verifyWithdrawAmount({
+                stakingAmount: this.stakingAmount,
+                decimals: this.tokenInfo.decimals
+            }, this.cancelAmount);
 
-            const minAmount = 134;
-            const stakingAmount = this.activeAmountLimit;
-
-            const compareBalanceAndMin = BigNumber.compared(stakingAmount, minAmount);
-            if (compareBalanceAndMin < 0) {
-                this.amountErr = `${ this.$t('walletQuota.minAmt', { num: minAmount }) }, ${ this.$t('walletQuota.gotoStake') }`;
-                return false;
-            }
-
-            const compareMin = BigNumber.compared(this.cancelAmount, minAmount);
-            if (compareMin < 0) {
-                this.amountErr = this.$t('walletQuota.minAmt', { num: minAmount });
-                return false;
-            }
-
-            const compareBalance = BigNumber.compared(stakingAmount, this.cancelAmount);
-            if (compareBalance < 0) {
-                this.amountErr = this.$t('walletQuota.maxAmt', {
-                    minAmount,
-                    maxAmount: stakingAmount
-                });
-                return false;
-            }
-
-            const maxAmount = BigNumber.minus(stakingAmount, minAmount, 8, 'nofix');
-            const cancelBalance = BigNumber.minus(stakingAmount, this.cancelAmount);
-            if (BigNumber.compared(this.cancelAmount, maxAmount) > 0 && !BigNumber.isEqual(cancelBalance, 0)) {
-                this.amountErr = this.$t('walletQuota.cancelLimitAmt', { num: minAmount });
-                return false;
-            }
-
-            this.amountErr = '';
-            return true;
+            return !this.amountErr;
         },
 
-        showConfirm(type, activeAmountLimit) {
+        showConfirm(type, amount) {
             this.showConfirmType = type;
-            if (!activeAmountLimit) {
+            if (!amount) {
                 return;
             }
-            this.activeAmountLimit = activeAmountLimit;
+            this.stakingAmount = amount;
         },
         closeConfirm() {
             this.stopWatch = true;
@@ -208,7 +180,6 @@ export default {
 .quota-wrapper {
     position: relative;
     box-sizing: border-box;
-    overflow: auto;
     height: 100%;
 
     .loading {
@@ -238,41 +209,26 @@ export default {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    margin-bottom: 40px;
+    margin-bottom: 14px;
 
     ._content_border {
         background: #fff;
-        border: 1px solid #f6f5f5;
-        box-shadow: 0 2px 48px 1px rgba(176, 192, 237, 0.42);
+        box-shadow: 0px 2px 10px 1px rgba(176,192,237,0.42);
         border-radius: 2px;
     }
 
     .my-quota {
         box-sizing: border-box;
         min-width: 170px;
-        margin-right: 40px;
-        padding: 30px;
+        margin-right: 10px;
+        padding: 22px 30px;
     }
 
     .pledge-tx {
         flex: 1;
         max-width: 100%;
         box-sizing: border-box;
-        padding: 0 30px 30px 30px;
+        padding: 6px 30px 20px 30px;
     }
-}
-
-.gray-wrapper {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    overflow: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: rgba(0, 0, 0, 0.6);
-    z-index: 100;
 }
 </style>

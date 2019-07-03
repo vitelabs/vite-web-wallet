@@ -217,7 +217,7 @@ export default {
         box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.1);
         font-size: 12px;
         color: #5E6875;
-        @include font-family-normal();
+        font-family: $font-H;
         font-weight: 400;
 
         &::after {
@@ -239,6 +239,7 @@ export default {
 }
 
 .__center-tb-row {
+    font-family: $font-H;
     .__center-tb-item {
         position: relative;
     }
