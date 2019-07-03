@@ -100,14 +100,14 @@ export default {
             return this.dealList(this.tradeList);
         },
         tradeTotalPage() {
-            return parseInt(this.tradeListTotal / 30);
+            return Math.ceil(this.tradeListTotal / 30);
         },
 
         stakeContent() {
             return this.dealList(this.stakeList);
         },
         stakeTotalPage() {
-            return parseInt(this.stakeListTotal / 30);
+            return Math.ceil(this.stakeListTotal / 30);
         },
 
         address() {
@@ -172,7 +172,7 @@ export default {
             });
         },
         fetchMiningTrade(pageNumber) {
-            const offset = pageNumber ? pageNumber - 1 : 0;
+            const offset = pageNumber ? (pageNumber - 1) * 30 : 0;
 
             miningTrade({
                 address: this.address,
@@ -182,7 +182,7 @@ export default {
                     return;
                 }
 
-                this.tradeCurrentPage = offset;
+                this.stakeCurrentPage = pageNumber ? pageNumber - 1 : 0;
                 this.tradeTotal = data.miningTotal ? bigNumber.formatNum(data.miningTotal, 8) : 0;
                 this.tradeListTotal = data.total || 0;
                 this.tradeList = data.miningList || [];
@@ -191,7 +191,7 @@ export default {
             });
         },
         fetchMiningStake(pageNumber) {
-            const offset = pageNumber ? pageNumber - 1 : 0;
+            const offset = pageNumber ? (pageNumber - 1) * 30 : 0;
 
             miningPledge({
                 address: this.address,
@@ -201,7 +201,7 @@ export default {
                     return;
                 }
 
-                this.stakeCurrentPage = offset;
+                this.stakeCurrentPage = pageNumber ? pageNumber - 1 : 0;
                 this.stakeTotal = data.miningTotal ? bigNumber.formatNum(data.miningTotal, 8) : 0;
                 this.stakeListTotal = data.total || 0;
                 this.stakeList = data.miningList || [];
