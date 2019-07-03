@@ -49,8 +49,14 @@ export default {
         viteTokenInfo() {
             return this.$store.getters.viteTokenInfo;
         },
+        withdrawTime() {
+            if (!this.stakingObj) {
+                return 0;
+            }
+            return this.stakingObj.withdrawTime + 10 * 60;
+        },
         canCancel() {
-            return this.stakingObj.withdrawTime <= new Date().getTime() / 1000;
+            return this.withdrawTime <= new Date().getTime() / 1000;
         },
         stakingDetail() {
             if (!this.stakingObj) {
@@ -61,7 +67,7 @@ export default {
                 };
             }
             return {
-                withdrawTime: date(this.stakingObj.withdrawTime * 1000, this.$i18n.locale),
+                withdrawTime: date(this.withdrawTime * 1000, this.$i18n.locale),
                 amount: bigNumber.toBasic(this.stakingObj.amount || 0, this.viteTokenInfo.decimals),
                 withdrawHeight: this.stakingObj.withdrawHeight
             };
