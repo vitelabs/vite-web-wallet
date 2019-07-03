@@ -42,7 +42,7 @@ export function getLastAcc() {
         return null;
     }
     const lastAcc = getAccList().find(v => v.id === lastId);
-    return lastAcc && lastAcc.activeAddr ? lastAcc : null;
+    return lastAcc && lastAcc.activeAddr ? Object.assign({}, lastAcc, getItem(lastId) || {}) : null;
 }
 
 export function setLastAcc(acc) {
