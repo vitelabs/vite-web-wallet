@@ -6,7 +6,7 @@
             </div>
             <div class="token-wrapper">
                 <div class="token" v-for="(token, i) in pool[tokenType.name]" :key="i">
-                    <div class="title">{{ token.tokenInfo.tokenSymbol }}</div>
+                    <div class="title">{{ getSymbol(token.tokenInfo)  }}</div>
                     <div class="amount">{{ formatNum(token.amount, tokenType.name) }}</div>
                 </div>
             </div>
@@ -52,6 +52,17 @@ export default {
         }
     },
     methods: {
+        getSymbol(tokenInfo) {
+            if (!tokenInfo) {
+                return '';
+            }
+            const index = tokenInfo.index;
+            const symbol = tokenInfo.tokenSymbol;
+            const pre = +index >= 100 ? ''
+                : +index >= 10 ? '0'
+                    : '00';
+            return `${ symbol }-${ pre }${ index }`;
+        },
         fetchPool() {
             $ViteJS.request('dexfund_getCurrentDividendPools').then(data => {
                 if (!data) {
