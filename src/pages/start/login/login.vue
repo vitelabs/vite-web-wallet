@@ -35,17 +35,19 @@
                 </div>
                 <qrcode
                     :options="qrcodeOpt"
-                    :text="uri"
+                    :text="vb && vb.uri"
                     class="vb_qrcode"
                 ></qrcode>
                 <div class="code_tips">
                     dsfasdfasdflsjalsjlksdjfsdlfjsdlkfjsalkdfjlkdsfjsdlakfjsdalkfjasdlfsd<span
                         class="action_get_app"
-                    >Get Vite App</span
+                        >Get Vite App</span
                     >
                 </div>
             </div>
-            <div class="__btn __btn_all_in __pointer"> 创建新账户</div>
+            <div class="__btn __btn_all_in __pointer" @click="createAcc">
+                {{ $t("addAccount") }}
+            </div>
         </div>
         <div v-if="tabName === 'existingAcc'" class="existing-acc">
             <div class="bottom __btn __pointer">
@@ -125,23 +127,23 @@
 </template>
 
 <script>
-import Vue from 'vue';
-import loading from 'components/loading.vue';
-import ellipsisAddr from 'utils/ellipsisAddr.js';
-import { getList, deleteOldAcc } from 'wallet';
+import Vue from "vue";
+import loading from "components/loading.vue";
+import ellipsisAddr from "utils/ellipsisAddr.js";
+import { getList, deleteOldAcc, getCurrHDAcc } from "wallet";
 
-import accountItem from './accountItem.vue';
-import restore from '../restore.vue';
-import accountList from './accountList.vue';
+import accountItem from "./accountItem.vue";
+import restore from "../restore.vue";
+import accountList from "./accountList.vue";
 
-import qrcode from 'components/qrcode';
-import { initVB } from 'wallet/vb';
-import icon from 'assets/imgs/start_qrcode_icon.svg';
+import qrcode from "components/qrcode";
+import { initVB } from "wallet/vb";
+import icon from "assets/imgs/start_qrcode_icon.svg";
 
 const TABNAME = {
-    vb: 'vb',
-    existingAcc: 'existingAcc',
-    restore: 'restore'
+    vb: "vb",
+    existingAcc: "existingAcc",
+    restore: "restore"
 };
 
 export default {
@@ -153,8 +155,8 @@ export default {
         return {
             id: this.$route.params.id,
             currAcc: {},
-            password: '',
-            inputItem: '',
+            password: "",
+            inputItem: "",
             isLoading: false,
             isShowAccountList: false,
             isShowExisting: true,
@@ -164,11 +166,14 @@ export default {
                 image: icon,
                 mSize: 0.3
             },
-            uri: ''
+            vb: null
         };
     },
-    async  beforeMount() {
-        this.uri = await initVB();
+    beforeMount() {
+        this.initVB();
+    },
+    beforeDestroy() {
+        this.destoryVB();
     },
     computed: {
         currHDAcc() {
@@ -176,7 +181,7 @@ export default {
         }
     },
     watch: {
-        isShowExisting: function () {
+        isShowExisting: function() {
             if (!this.isShowExisting) {
                 this.clearAll();
                 return;
@@ -194,7 +199,7 @@ export default {
             this.currAcc = this.getCurrAcc();
         },
         clearAll() {
-            this.password = '';
+            this.password = "";
             this.isLoading = false;
             this.$offKeyDown();
         },
@@ -203,13 +208,38 @@ export default {
             this.isShowExisting = true;
         },
         toggleTab(tabName) {
-            if (this.tabName !== 'vb' && tabName === 'vb') {
-                initVB().then(uri => (this.uri = uri));
-            } else {
-                this.uri = '';
-                // destory vbinstance
+            if (this.tabName === tabName) return;
+            if (this.tabName !== "vb" && tabName === "vb") {
+                this.initVB();
+            } else if (this.tabName === "vb" && tabName !== "vb") {
+                this.destoryVB();
             }
             this.tabName = tabName;
+        },
+        initVB() {
+            const vb = initVB();
+            vb.on("connect", (payload) => {
+                const {address=`mock an address`}=payload;
+                this.$store.commit("switchHDAcc", {
+                    activeAddr: address,
+                    isBirforst: true
+                });
+                getCurrHDAcc().unlock(vb.sendTx);
+                this.$store.commit("setCurrHDAccStatus");
+                const name = this.$store.state.env.lastPage || "tradeCenter";
+                this.$router.push({ name });
+            });
+            vb.on("disconnect", () => {
+                if (getCurrHDAcc() && getCurrHDAcc().isBirforst) {
+                    getCurrHDAcc().lock();
+                    this.$store.commit("setCurrHDAccStatus");
+                }
+            });
+            this.vb = vb;
+        },
+        destoryVB() {
+            this.vb && this.vb.destroy();
+            this.vb = null;
         },
         getCurrAcc() {
             const list = getList();
@@ -221,7 +251,7 @@ export default {
                         const account = list[i];
                         account.showAddr = account.activeAddr
                             ? ellipsisAddr(account.activeAddr)
-                            : '';
+                            : "";
                         return account;
                     }
                 }
@@ -233,8 +263,8 @@ export default {
                     id: this.currHDAcc.id,
                     showAddr: this.currHDAcc.activeAddr
                         ? ellipsisAddr(this.currHDAcc.activeAddr)
-                        : '',
-                    name: this.currHDAcc.name || '',
+                        : "",
+                    name: this.currHDAcc.name || "",
                     ...this.currHDAcc
                 };
             }
@@ -243,7 +273,7 @@ export default {
             const account = list[0];
             account.showAddr = account.activeAddr
                 ? ellipsisAddr(account.activeAddr)
-                : '';
+                : "";
             return account;
         },
 
@@ -251,7 +281,7 @@ export default {
             this.inputItem = text;
         },
         inputBlur(text) {
-            text === this.inputItem && (this.inputItem = '');
+            text === this.inputItem && (this.inputItem = "");
         },
         focusPass() {
             Vue.nextTick(() => {
@@ -262,7 +292,7 @@ export default {
         chooseAccount(account) {
             this.currAcc = account;
             this.isShowAccountList = false;
-            this.password = '';
+            this.password = "";
         },
         toggleAccountList() {
             this.isShowAccountList = !this.isShowAccountList;
@@ -272,7 +302,7 @@ export default {
         },
 
         createAcc() {
-            this.$router.push({ name: 'startCreate' });
+            this.$router.push({ name: "startCreate" });
         },
         login() {
             if (!this.isShowExisting) {
@@ -285,16 +315,16 @@ export default {
             }
 
             if (!this.password) {
-                this.$toast(this.$t('startCreate.input'), 'error');
+                this.$toast(this.$t("startCreate.input"), "error");
                 this.focusPass();
                 return;
             }
 
             this.isLoading = true;
 
-            this.$store.commit('switchHDAcc', this.currAcc);
+            this.$store.commit("switchHDAcc", this.currAcc);
             this.$store
-                .dispatch('login', this.password)
+                .dispatch("login", this.password)
                 .then(() => {
                     if (!this.isLoading) {
                         return;
@@ -306,8 +336,8 @@ export default {
                     }
 
                     this.currHDAcc.activate();
-                    const name
-                        = this.$store.state.env.lastPage || 'tradeCenter';
+                    const name =
+                        this.$store.state.env.lastPage || "tradeCenter";
                     this.$router.push({ name });
                 })
                 .catch(err => {
@@ -316,7 +346,7 @@ export default {
                         return;
                     }
                     this.isLoading = false;
-                    this.$toast(this.$t('hint.pwErr'));
+                    this.$toast(this.$t("hint.pwErr"));
                 });
         }
     }

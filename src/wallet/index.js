@@ -3,8 +3,8 @@ import viteCrypto from 'testwebworker';
 import { getOldAccList, setOldAccList } from 'utils/store';
 import { HDAccount, StatusMap as _StatusMap, VBAccount } from './hdAccount';
 import { getLastAcc, addHdAccount, setAcc, getAccList } from './store';
-function constructAccount(acc, isBirforst = false) {
-    if (isBirforst || acc.id.startsWith('VITEBIRFORST_')) {
+function constructAccount(acc) {
+    if (acc.isBirforst || acc.id.startsWith('VITEBIRFORST_')) {
         currentHDAccount = new VBAccount(acc);
     } else {
         currentHDAccount = new HDAccount(acc);
@@ -24,14 +24,11 @@ export function getCurrHDAcc() {
     return currentHDAccount;
 }
 
-export function setCurrHDAcc(acc, isBirforst = false) {
+export function setCurrHDAcc(acc) {
     if (!acc) {
         return;
     }
-    if (isBirforst) {
-        return constructAccount(acc, true);
-    }
-    if (!acc.id || !currentHDAccount || currentHDAccount.id !== acc.id) {
+    if (acc.isBirforst || !acc.id || !currentHDAccount || currentHDAccount.id !== acc.id) {
         return constructAccount(acc);
     }
     return currentHDAccount;
