@@ -462,7 +462,7 @@ export default {
 
         validPrice() {
             if (this.price && +this.price === 0) {
-                this.priceErr = this.$t('trade.limitPrice.bigger0');
+                this.priceErr = this.$t('hint.bigger0');
                 return;
             }
 
