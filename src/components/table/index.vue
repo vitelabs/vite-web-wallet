@@ -13,13 +13,15 @@
                      '__pointer': !!clickRow
                  }" @click="_clickRow(rowItem, index)"
                  v-for="(rowItem, index) in contentList" :key="index">
-                <span v-for="(headItem, i) in headList" :key="i"
-                      @click="clickCell(headList[i].cell, rowItem, index)"
-                      :class="`${headItem.class || ''} ${headItem.cellClass || ''}`" class="__tb_cell">
-                    <slot :name="`${index}${headList[i].cell}Before`"></slot>
-                    {{ rowItem[ headList[i].cell ] }}
-                    <slot :name="`${index}${headList[i].cell}After`"></slot>
-                </span>
+                <div>
+                    <span v-for="(headItem, i) in headList" :key="i"
+                          @click="clickCell(headList[i].cell, rowItem, index)"
+                          :class="`${headItem.class || ''} ${headItem.cellClass || ''}`" class="__tb_cell">
+                        <slot :name="`${index}${headList[i].cell}Before`"></slot>
+                        {{ rowItem[ headList[i].cell ] }}
+                        <slot :name="`${index}${headList[i].cell}After`"></slot>
+                    </span>
+                </div>
                 <slot :name="`${index}Row`"></slot>
             </div>
         </div>
