@@ -444,7 +444,10 @@
             "total": "Staking {amount} VITE in total",
             "amount": "Amount",
             "withdrawTime": "Expected Due Date",
-            "unexpired": "Temporarily cannot make withdrawal of staked token until due date"
+            "unexpired": "Temporarily cannot make withdrawal of staked token until due date",
+            "openVip": "此抵押为您开通交易所VIP金额，请前往交易所撤销VIP",
+            "mining": "此抵押为您交易所抵押挖矿金额，请前往交易所挖矿页面取回",
+            "other": "此抵押为您通过其他方式抵押，不支持在此处取回"
         }
     },
     "walletTransList": {

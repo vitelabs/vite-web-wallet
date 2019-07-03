@@ -1,8 +1,7 @@
 import $ViteJS from 'utils/viteClient';
 import { timer } from 'utils/asyncFlow';
 
-// [TODO] dexTestNet => 0.0025  else 0.002
-const baseFee = 0.002;
+const baseFee = process.env.NODE_ENV === 'dexTestNet' ? 0.0025 : 0.002;
 let vipTimer = null;
 let nextVip = null;
 
