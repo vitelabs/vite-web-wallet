@@ -32,7 +32,7 @@ router.beforeEach((to, from, next) => {
         }
 
         // Don't have currHDAcc and want to go start*** or trade***
-        if (!currHDAcc && to.name && [ 'start', 'trade' ].indexOf(to.name) === -1) {
+        if (!currHDAcc && to.name && [ 'start', 'tradeCenter' ].indexOf(to.name) === -1) {
             router.replace({ name: 'start' });
             return;
         }
