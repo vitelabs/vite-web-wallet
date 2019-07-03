@@ -3,6 +3,7 @@
         <slot name="before"></slot>
         <!-- Safari autocomplete -->
         <input fake_pass type="password" style="display: none"/>
+        <!-- type = number :  can not test 1.....  not a good idea-->
         <input v-model="value" @input.prevent="update" :type="type"
                :placeholder="placeholder" autocomplete="false"
                @blur="_blur" @focus="_focus"/>
