@@ -24,9 +24,7 @@
                 {{ $t('wallet.sum') }}
                 <span v-show="amountErr" class="__err __hint">{{ amountErr }}</span>
             </div>
-            <!-- [TODO] TestNumber -->
-            <vite-input v-model="amount" :valid="testAmount" type="number"
-                        :placeholder="placeholder"></vite-input>
+            <vite-input v-model="amount" :valid="testAmount" :placeholder="placeholder"></vite-input>
         </div>
 
         <div class="hint"><span>{{ hint }}</span></div>
@@ -196,7 +194,6 @@ export default {
             this.amountErr = '';
             this.close && this.close();
         },
-        // [TODO]  staking amount test
         staking() {
             const amount = bigNumber.toMin(this.amount, this.viteTokenInfo.decimals);
 
