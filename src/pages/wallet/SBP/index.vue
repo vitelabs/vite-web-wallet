@@ -259,7 +259,9 @@ export default {
 }
 
 .section {
-    padding-top: 14px;
+    &:last-child {
+        padding-top: 14px;
+    }
 
     .__second-title {
         margin-bottom: 14px;

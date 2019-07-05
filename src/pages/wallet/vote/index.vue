@@ -4,8 +4,8 @@
 
         <loading v-if="loadingToken" class="loading"></loading>
 
-        <section v-if="!loadingToken" class="vote_list">
-            <div class="__second-title">{{ $t('walletVote.section1.title')}}</div>
+        <section v-if="!loadingToken">
+            <div class="__second-title no-top">{{ $t('walletVote.section1.title')}}</div>
             <wallet-table class="wallet-vote-table"
                           :headList="voteHeadList" :contentList="voteList">
                 <span v-for="(v, i) in voteList" :key="i"
@@ -385,6 +385,9 @@ export default {
         justify-content: space-between;
         flex-wrap: wrap;
         margin: 14px 0;
+        &.no-top {
+            margin-top: 0;
+        }
         .title {
             line-height: 34px;
         }

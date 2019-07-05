@@ -95,6 +95,12 @@ export default {
             return '';
         }
     },
+    exponentiated(num, unit, offset = 0) {
+        const number = new BigNumber(num).exponentiatedBy(unit);
+        const offsetNum = new BigNumber(offset);
+        const result = number.plus(offsetNum);
+        return result.toFormat();
+    },
     toMin(num, minUnit) {
         const min = new BigNumber(10).exponentiatedBy(minUnit);
         num = new BigNumber(num);
