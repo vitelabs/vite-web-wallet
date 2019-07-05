@@ -22,6 +22,8 @@
     "withdrawHeight": "Expected Snapshot Height",
     "balance": "Balance",
     "addrName": "Address{index}",
+    "true": "true",
+    "false": "false",
     "guide": {
         "close": "关闭",
         "next": "下一步",
@@ -393,7 +395,33 @@
         }
     },
     "walletMintage": {
-        "title": "铸币"
+        "title": "铸币",
+        "address": "铸币地址",
+        "tokenName": "代币全称",
+        "tokenSymbol": "代币简称",
+        "totalSupply": "总发行量",
+        "decimals": "价格精度",
+        "isReIssuable": "是否可增发",
+        "maxSupply": "最大发行量",
+        "isOwnerBurnOnly": "是否仅支持所有者销毁",
+        "mint": "确认铸币",
+        "tokenList": "已铸代币",
+        "hint": {
+            "tokenName": "代币全称长度为1-40 个字符，包含大小写字母、空格和下划线，不能有连续空格，不能以空格开头或结尾。",
+            "tokenSymbol": "简称长度为1-10 个字符，只可包含大写字母、数字。",
+            "decimals": "10**decimals 不能超过 totalSupply"
+        },
+        "err": {
+            "tokenNameFormat": "名称不合法",
+            "tokenNameNull": "名称不可为空",
+            "tokenSymbolFormat": "简称不合法",
+            "tokenSymbolNull": "简称不可为空",
+            "supplyMax": "发行量过大",
+            "totalSupplyFormat": "总发行量不合法",
+            "totalSupplyNull": "总发行量不可为空",
+            "maxSupplyNull": "最大发行量不可为空",
+            "maxSupplyMin": "最大发行量不能小于总发行量"
+        }
     },
     "walletQuota": {
         "title": "Quota Management",
