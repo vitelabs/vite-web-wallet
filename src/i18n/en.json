@@ -890,12 +890,12 @@
         },
         "txTitle": "Trading Mining Total Profit",
         "quotaTitle": "Staking Mining Total Profit",
-        "addHint": "每日约13:00(UTC+8)计算抵押挖矿收益；抵押生效后，您可3天后可手动取回",
-        "withdrawHint": "取回后，您将无法再挖矿VX",
-        "addTitle": "抵押VITE挖矿",
-        "withdrawTitle": "取回抵押VITE",
-        "addPlaceHolder": "请输入抵押金额，最少134vite",
-        "withdrawPlaceHolder": "请输入取回金额，最少134vite",
+        "addHint": "Staking mining profit will be calculated at 13:00(UTC+8) everyday. You can manually retrieve your staking amount after the staking comes into effective",
+        "withdrawHint": "You will no longer be able to mining VX after retrieving",
+        "addTitle": "Staking VITE for Mining",
+        "withdrawTitle": "Retrieving Staked VITE",
+        "addPlaceHolder": "Please input staking amount, at least 134 VITE",
+        "withdrawPlaceHolder": "Please input retrieving amount, at least 134 VITE",
         "addBtn": "Submit Staking",
         "withdrawBtn": "Confirm to retrieve",
         "stakingBalance": "Retrievable Staking Amount"
@@ -906,8 +906,8 @@
         "listTitle": "My Dividends",
         "date": "Date",
         "VX": "Holding VX",
-        "coin": "分红币种",
-        "amount": "分红金额",
-        "price": "分红总估值"
+        "coin": "Type",
+        "amount": "Amount",
+        "price": "Total Estimated Value"
     }
 }
