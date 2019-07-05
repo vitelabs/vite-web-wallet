@@ -23,19 +23,19 @@
     "balance": "Balance",
     "addrName": "Address{index}",
     "guide": {
-        "close": "关闭",
-        "next": "下一步",
-        "closeTips": "点击关闭新手引导",
+        "close": "Close",
+        "next": "Next",
+        "closeTips": "Skip user guide (Not recommended)",
         "trade": [
-            "在这里管理您的钱包资产和交易所资产",
-            "查看当前委托和历史委托记录，掌握交易细节",
-            "参与挖矿，获取VX和交易所手续费分红（挖矿分红）",
-            "体验钱包更多功能：抵押配额、超级节点、投票、一键置换、交易详情"
+            "Manage your assets (both Web Wallet and ViteX exchange) here",
+            "Check out Open Orders and Order History, know trading details",
+            "Participate in mining, acquire VX and trading fee dividends (Mining Dividends)",
+            "Experience more features: Staking for Quota, becoming a SBP (Snapshot Block Producer) runner, Voting for SBPs, ERC20 conversion, Transaction Details, etc."
         ],
         "assets": [
-            "充币至交易所",
-            "提现至钱包",
-            "跨链充值提现"
+            "Deposit to Exchange",
+            "Withdraw to Wallet",
+            "Cross-Chain Receive & Transfer"
         ]
     },
     "dealReminder": {
@@ -440,9 +440,9 @@
             "amount": "Amount",
             "withdrawTime": "Expected Due Date",
             "unexpired": "Temporarily cannot make withdrawal of staked token until due date",
-            "vip": "此抵押为您开通交易所VIP金额，请前往交易所撤销VIP",
-            "mining": "此抵押为您交易所抵押挖矿金额，请前往交易所挖矿页面取回",
-            "other": "此抵押为您通过其他方式抵押，不支持在此处取回"
+            "vip": "This staking action is for default opening VIP in ViteX exchange, please go to ViteX exchange page to cancel VIP",
+            "mining": "This staking is your staking mining amount in ViteX, please go to ViteX mining page to retrieve",
+            "other": "This staking is staked via other ways and it is not supported retrieving here"
         }
     },
     "walletTransList": {
@@ -878,34 +878,34 @@
         }
     },
     "tradeMining": {
-        "title": "挖矿",
-        "addQuota": "新增抵押挖矿",
-        "add": "增加",
-        "withdraw": "取回",
+        "title": "Mining",
+        "addQuota": "Add new staking mining",
+        "add": "Add",
+        "withdraw": "Retrieve",
         "tbHead": {
-            "date": "日期",
-            "fee": "交易手续费金额",
-            "mining": "挖矿金额",
-            "pledge": "抵押金额"
+            "date": "Date",
+            "fee": "Trading Fees",
+            "mining": "Mining Amount",
+            "pledge": "Staking Amount"
         },
-        "txTitle": "交易挖矿总收益",
-        "quotaTitle": "抵押挖矿总收益",
+        "txTitle": "Trading Mining Total Profit",
+        "quotaTitle": "Staking Mining Total Profit",
         "addHint": "每日约13:00(UTC+8)计算抵押挖矿收益；抵押生效后，您可3天后可手动取回",
         "withdrawHint": "取回后，您将无法再挖矿VX",
         "addTitle": "抵押VITE挖矿",
         "withdrawTitle": "取回抵押VITE",
         "addPlaceHolder": "请输入抵押金额，最少134vite",
         "withdrawPlaceHolder": "请输入取回金额，最少134vite",
-        "addBtn": "提交抵押",
-        "withdrawBtn": "确认取回",
-        "stakingBalance": "可取回抵押余额"
+        "addBtn": "Submit Staking",
+        "withdrawBtn": "Confirm to retrieve",
+        "stakingBalance": "Retrievable Staking Amount"
     },
     "tradeDividend": {
-        "title": "分红",
-        "poolTitle": "手续费分红池",
-        "listTitle": "我的分红",
-        "date": "日期",
-        "VX": "持有VX",
+        "title": "Dividends",
+        "poolTitle": "Trading Fee Dividend Pool",
+        "listTitle": "My Dividends",
+        "date": "Date",
+        "VX": "Holding VX",
         "coin": "分红币种",
         "amount": "分红金额",
         "price": "分红总估值"
