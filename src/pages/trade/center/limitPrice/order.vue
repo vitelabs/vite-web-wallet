@@ -404,7 +404,7 @@ export default {
             if (this.orderType === 'buy') {
                 quantity = BigNumber.multi(quantity, 1 + this.fee);
             }
-            return BigNumber.dividedToNumber(amount, quantity, this.ttokenDigit, 'nofix');
+            return BigNumber.dividedCeil(amount, quantity, this.ttokenDigit, 'nofix');
         },
         getPercentBalance(percent, digit) {
             if (!this.balance || BigNumber.isEqual(this.balance, 0)) {
@@ -457,10 +457,10 @@ export default {
             const minPrice = BigNumber.toMin(price, decimals);
 
             if (this.orderType === 'buy') {
-                minAmount = BigNumber.dividedToNumber(minAmount, 1 + this.fee, 0);
+                minAmount = BigNumber.dividedCeil(minAmount, 1 + this.fee, 0);
             }
 
-            return BigNumber.dividedToNumber(minAmount, minPrice, this.ftokenDigit, 'nofix');
+            return BigNumber.dividedCeil(minAmount, minPrice, this.ftokenDigit);
         },
 
         validPrice() {
