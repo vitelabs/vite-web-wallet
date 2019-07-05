@@ -179,6 +179,9 @@ export default {
         padding: 2px 8px;
         background: rgba(189,193,209,1);
         border-radius: 4px;
+        background: url('~assets/imgs/not_vip.svg');
+        background-size: 100% 100%;
+
         &.active {
             background: url('~assets/imgs/vip.svg');
             background-size: 100% 100%;
