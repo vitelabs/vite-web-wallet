@@ -1,29 +1,13 @@
 <template>
     <div>
-        <login v-if="isShowLogin"></login>
-        <div class="start-wrapper" v-if="!isShowLogin">
-            <div class="__title">{{$t('createAcc')}}</div>
-            <router-link class="__btn __btn_all_in" :to="{
-                name: 'startCreate'
-            }">{{ $t('start') }}</router-link>
-            <router-link class="__btn __btn_border _top" :to="{
-                name: 'startRestore'
-            }">{{ $t('mnemonic.restore') }}</router-link>
-        </div>
+        <login></login>
     </div>
 </template>
 
 <script>
 import login from './login/login.vue';
-import { getList } from 'wallet';
 
-export default {
-    components: { login },
-    data() {
-        const list = getList();
-        return { isShowLogin: list && list.length };
-    }
-};
+export default { components: { login } };
 </script>
 
 <style lang="scss" scoped>
