@@ -123,6 +123,17 @@ export default {
     }
 }
 
+.order-tab {
+    @include rowWith {
+        &:first-child {
+            padding-left: 0;
+        }
+        &:last-child {
+            padding-right: 10px;
+        }
+    }
+}
+
 @include rowWith {
     width: 8%;
 
@@ -131,17 +142,12 @@ export default {
     }
     &:first-child {
         width: 130px;
-        padding-left: 0px;
-
     }
     &:nth-child(4),
     &:nth-child(5),
     &:nth-child(6),
     &:nth-child(8) {
         width: 15%;
-    }
-    &:last-child {
-        padding-right: 10px;
     }
 }
 
