@@ -7,10 +7,8 @@ block content
 <script>
 
 export default {
-    data(){
-        return {
-            dShowClose:false
-        }
+    data() {
+        return { dShowClose: false };
     }
 };
 </script>
