@@ -48,7 +48,7 @@ const actions = {
                 return;
             }
 
-            if (rootState.wallet.status === StatusMap.UNLOCK) {
+            if (rootState.wallet.status === StatusMap.UNLOCK && !activeAcc.isBirforst) {
                 return commit('commitBalanceInfo', activeAcc.balance);
             }
 

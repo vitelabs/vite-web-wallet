@@ -15,7 +15,7 @@
             <div v-show="!isLogin" @click="dexChange" class="tab __pointer">
                 {{ isHaveUsers ? $t('changeAcc') : $t('register') }}</div>
             <div v-show="$route.name.indexOf('trade') !== -1" class="tab __pointer"
-                 @click="showToken" @noactiveacc="dexStart">
+                 @click="showToken">
                 {{ $t('dexToken') }}</div>
             <switch-addr class="switch-tab menu" v-show="$route.name !== 'assets'" ></switch-addr>
         </ul>

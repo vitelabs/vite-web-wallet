@@ -32,6 +32,7 @@ export class VB extends Connector {
 
     async sendVbTx(...args) {
         console.log('sendvbtxxxxxx', args);
+        return this.sendCustomRequest({ method: 'vite_sendTx', params: args });
     }
 }
 export let vbInstance = null;

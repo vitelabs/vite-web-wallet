@@ -2,6 +2,8 @@ import { keystore, constant, hdAddr, account, addrAccount } from '@vite/vitejs';
 import viteCrypto from 'testwebworker';
 import statistics from 'utils/statistics';
 import $ViteJS from 'utils/viteClient';
+import { constant as u_constant } from 'utils/store';
+
 import {
     getAddr,
     addHdAccount,
@@ -131,7 +133,7 @@ export class HDAccount {
     }
 
     activate() {
-        // auto receive tx
+    // auto receive tx
         if (this.status === StatusMap.LOCK || !this.activeAccount) {
             return;
         }
@@ -140,7 +142,7 @@ export class HDAccount {
     }
 
     freeze() {
-        // kill auto receive
+    // kill auto receive
         if (!this.activeAccount) {
             return;
         }
@@ -296,9 +298,18 @@ export class VBAccount {
         this.activeAddr = activeAddr;
         this.status = StatusMap.LOCK;
         this._activeAccount = null;
+        this.addrList = [activeAddr];
         // Set Addr Num
         this.addrNum = 1;
         this.save();
+    }
+
+    set activeAccount(v) {
+        this._activeAccount = v;
+    }
+
+    get activeAccount() {
+        return this._activeAccount;
     }
 
     get isBirforst() {
@@ -323,6 +334,11 @@ export class VBAccount {
         });
     }
 
+    activate() {
+        return this.activeAccount;
+    }
+
+    freeze() {}
     saveOnAcc(key, info) {
         if (!this.id) {
             return;
@@ -334,7 +350,7 @@ export class VBAccount {
         if (!this.id) {
             return;
         }
-        return getAcc(this.id);
+        return Object.assign({}, getAcc(this.id), { [u_constant.HoldPwdKey]: true });
     }
 
     lock() {
@@ -342,19 +358,37 @@ export class VBAccount {
         this.status = StatusMap.LOCK;
     }
 
-    unlock(sendVbTx) {
-        if (!sendVbTx) {
+    unlock(vb) {
+        if (!vb) {
             return;
         }
 
-        const account = new addrAccount({ client: $ViteJS, address: this.activeAddr });
+        const account = new addrAccount({
+            client: $ViteJS,
+            address: this.activeAddr
+        });
         const sendPowTx = async ({ methodName, params = [] }) => {
-            params[0] && (params[0].prevHash = 'hack for birforst');
+            if (params[0]) {
+                params[0].prevHash = 'hack for birforst';
+                params[0].height = 34;
+            }
             const block = await account.getBlock[methodName](params[0], 'sync');
-            return sendVbTx({ block });
+
+            return vb.sendVbTx({ block });
         };
         this.status = StatusMap.UNLOCK;
-        this._activeAccount = { activeAddr: this.activeAddr, sendPowTx, sendVbTx, isBirforst: true };
+        const proxyActiveAcc = Object.create(null);
+        proxyActiveAcc.address = this.activeAddr;
+        proxyActiveAcc.sendPowTx = sendPowTx;
+        proxyActiveAcc.isBirforst = true;
+        this._activeAccount = new Proxy(account, {
+            get(target, name) {
+                if (proxyActiveAcc[name]) {
+                    return proxyActiveAcc[name];
+                }
+                return target[name];
+            }
+        });
         setLastAcc({ id: this.id });
     }
 }
