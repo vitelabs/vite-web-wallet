@@ -169,4 +169,7 @@ export default {
 .mintage-table {
     margin-top: 14px;
 }
+.btn {
+    color: #007AFF;
+}
 </style>
