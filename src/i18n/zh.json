@@ -885,8 +885,8 @@
         "withdrawHint": "取回后，您将无法再挖矿VX",
         "addTitle": "抵押VITE挖矿",
         "withdrawTitle": "取回抵押VITE",
-        "addPlaceHolder": "请输入抵押金额，最少134vite",
-        "withdrawPlaceHolder": "请输入取回金额，最少134vite",
+        "addPlaceHolder": "请输入抵押金额，最少134VITE",
+        "withdrawPlaceHolder": "请输入取回金额，最少134VITE",
         "addBtn": "提交抵押",
         "withdrawBtn": "确认取回",
         "stakingBalance": "可取回抵押余额"
