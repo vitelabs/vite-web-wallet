@@ -62,7 +62,7 @@ export default {
             }
             return {
                 withdrawTime: date(this.stakingObj.withdrawTime * 1000, this.$i18n.locale),
-                amount: bigNumber.toBasic(this.stakingObj.amount || 0, 18), // [TODO] viteinfo test
+                amount: bigNumber.toBasic(this.stakingObj.amount || 0, 18), // [TODO] viteTokenInfo fix
                 withdrawHeight: this.stakingObj.withdrawHeight
             };
         }
