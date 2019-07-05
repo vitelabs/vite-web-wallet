@@ -63,9 +63,9 @@ export default {
     color: rgba(29,32,36,1);
     font-size: 18px;
     line-height: 22px;
+    padding: 10px 0 14px 0;
 
     .help {
-        margin-top: 8px;
         align-items: center;
         font-size: 12px;
         color: #007aff;

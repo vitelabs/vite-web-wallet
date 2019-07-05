@@ -1,6 +1,6 @@
 <template>
     <div class="trans-list-wrapper">
-        <sec-title class="title" :isShowHelp="false"></sec-title>
+        <sec-title :isShowHelp="false"></sec-title>
 
         <wallet-table class="wallet-trans-list-table"
                       :headList="[ {
@@ -226,10 +226,6 @@ export default {
     flex-direction: column;
     box-sizing: border-box;
     height: 100%;
-
-    .title {
-        margin-bottom: 14px;
-    }
 
     .pink {
         @include font-family-bold();
