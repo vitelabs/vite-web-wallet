@@ -2,7 +2,7 @@ import { utils } from '@vite/vitejs';
 import { getActiveAcc } from 'wallet';
 import { powProcess } from 'components/pow/index';
 import { quotaConfirm } from 'components/quota/index';
-import { vbDialog } from 'components/dialog';
+import { vbConfirmDialog } from 'components/dialog';
 // import {}
 
 const { isObject } = utils;
@@ -29,7 +29,7 @@ export default function sendTx(methodName, data, config = defaultConfig) {
     let powInstance = null;
     let vbInstance = null;
     if (activeAccount.isBirforst) {
-        const { compInstance } = vbDialog();
+        const { compInstance } = vbConfirmDialog();
         vbInstance = compInstance;
     }
     activeAccount

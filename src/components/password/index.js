@@ -71,7 +71,6 @@ export function initPwd({
 }, isConfirm = false) {
     const currHDAcc = store.state.wallet.currHDAcc;
     const accInfo = currHDAcc ? currHDAcc.getAccInfo() : null;
-    debugger;
     const isHoldPWD = accInfo ? !!accInfo[constant.HoldPwdKey] : false;
     const isHide = !isConfirm && isHoldPWD;
 

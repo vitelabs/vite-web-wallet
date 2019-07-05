@@ -35,7 +35,7 @@
                 </div>
                 <qrcode
                     :options="qrcodeOpt"
-                    :text="vb && vb.uri"
+                    :text="uri"
                     class="vb_qrcode"
                 ></qrcode>
                 <div class="code_tips">
@@ -130,14 +130,14 @@
 import Vue from 'vue';
 import loading from 'components/loading.vue';
 import ellipsisAddr from 'utils/ellipsisAddr.js';
-import { getList, deleteOldAcc, getCurrHDAcc, setCurrHDAcc } from 'wallet';
+import { getList, deleteOldAcc} from 'wallet';
 
 import accountItem from './accountItem.vue';
 import restore from '../restore.vue';
 import accountList from './accountList.vue';
 
 import qrcode from 'components/qrcode';
-import { initVB } from 'wallet/vb';
+import { initVB, vbInstance } from 'wallet/vb';
 import icon from 'assets/imgs/start_qrcode_icon.svg';
 
 const TABNAME = {
@@ -170,7 +170,7 @@ export default {
         };
     },
     beforeMount() {
-        this.initVB();
+        initVB();
     },
     beforeDestroy() {
         this.destoryVB();
@@ -210,42 +210,14 @@ export default {
         toggleTab(tabName) {
             if (this.tabName === tabName) return;
             if (this.tabName !== 'vb' && tabName === 'vb') {
-                this.initVB();
+                initVB();
             } else if (this.tabName === 'vb' && tabName !== 'vb') {
                 this.destoryVB();
             }
             this.tabName = tabName;
         },
-        initVB() {
-            const vb = initVB();
-            vb.on('connect', (err, payload) => {
-                const { accounts } = payload.params[0];
-                if (!accounts || !accounts[0]) throw new Error('address is null');
-                console.log(`approved :${ accounts[0] }`);
-                setCurrHDAcc({
-                    activeAddr: accounts[0],
-                    isBirforst: true
-                });
-                getCurrHDAcc().unlock(vb);
-                this.$store.commit('switchHDAcc', {
-                    activeAddr: accounts[0],
-                    isBirforst: true
-                });
-                this.$store.commit('setCurrHDAccStatus');
-                const name = this.$store.state.env.lastPage || 'tradeCenter';
-                this.$router.push({ name });
-            });
-            vb.on('disconnect', () => {
-                if (getCurrHDAcc() && getCurrHDAcc().isBirforst) {
-                    getCurrHDAcc().lock();
-                    this.$store.commit('setCurrHDAccStatus');
-                }
-            });
-            this.vb = vb;
-        },
-        destoryVB() {
-            // this.vb && this.vb.destroy();
-            // this.vb = null;
+        uri() {
+            return vbInstance && vbInstance.uri;
         },
         getCurrAcc() {
             const list = getList();
@@ -404,25 +376,6 @@ export default {
         background: #007aff;
         box-shadow: 0 0 4px 0 rgba(0, 105, 219, 1);
         padding-left: 12px;
-        // .tab-toggle {
-        //     &-enter-active {
-        //         animation: slide-in 0.5s;
-        //     }
-        //     &-leave-active {
-        //         animation: bounce-in 0.5s reverse;
-        //     }
-        //     @keyframes slide-in {
-        //         0% {
-        //             transform: translateX(0);
-        //         }
-        //         50% {
-        //             transform: translateX(70%);
-        //         }
-        //         100% {
-        //             transform: translateX(100%);
-        //         }
-        //     }
-        // }
         &.radius {
             padding-left: 0;
             padding-right: 12px;
