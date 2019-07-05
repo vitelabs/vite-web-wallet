@@ -708,24 +708,24 @@
             "amountNotNull": "Volume cannot be empty",
             "quantityNotNull": "Quantity cannot be empty",
             "bigger0": "Value must be greater than 0",
-            "cancelVip": "取消",
-            "openVip": "开通",
-            "dexFee": "交易所基础费率：{fee}",
-            "operatorFee": "运营商收取费率：{fee}",
-            "vipFee": "VIP特权抵扣：{fee}"
+            "cancelVip": "Cancel",
+            "openVip": "Become a VIP",
+            "dexFee": "Exchange Default Fees: {fee}",
+            "operatorFee": "Operator Fees: {fee}",
+            "vipFee": "VIP Discount: {fee}"
         },        
         "vipConfirm": {
-            "cancelVip": "取消VIP",
-            "openVip": "开通VIP",
-            "openStakingAmount": "开通VIP抵押金额",
-            "cancelStakingAmount": "可取回抵押金额",
-            "noBalance": "交易所可用余额不足",
-            "openHint": "VIP开通后，可享有降低0.1%手续费特权，开通VIP需抵押10000VITE，30天后可手动取回",
-            "cancelHint": "预计 {time} 可取回抵押，取回抵押后，您将无法再使用VIP特权",
-            "openSuccess": "申请开通VIP成功，稍后生效",
-            "openFail": "开通失败",
-            "cancelSuccess": "申请取消VIP成功",
-            "cancelFail": "取消失败"
+            "cancelVip": "Cancel VIP",
+            "openVip": "Become a VIP",
+            "openStakingAmount": "Staking Amount for Becoming a VIP",
+            "cancelStakingAmount": "Retrievable Staking Amount",
+            "noBalance": "Insufficient Exchange Balance",
+            "openHint": "You will enjoy the privilege of 0.1% trading fee discount after becoming a VIP. The staking amount of 10,000 VITE can be manually retrieved after 30 days.",
+            "cancelHint": "You can retrieve your staking amount at approximately {time}. You will lose your VIP privilege after retrieving.",
+            "openSuccess": "Application Successful! VIP status will come into effect later.",
+            "openFail": "Failed to apply VIP",
+            "cancelSuccess": "Cancel VIP Successful",
+            "cancelFail": "Cancel Failed"
         }
     },
     "tradeAssets": {
