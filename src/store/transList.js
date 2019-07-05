@@ -41,7 +41,7 @@ const actions = {
                 || !data) {
                 return null;
             }
-            console.log(data);
+
             commit('commitTransList', data);
             data.list && dispatch('setTokenInfoList', data.list);
 
@@ -52,7 +52,7 @@ const actions = {
 
 const getters = {
     totalPage(state) {
-        return BigNumber.dividedToNumber(state.totalNum, pageCount);
+        return BigNumber.dividedCeil(state.totalNum, pageCount);
     },
     transList(state) {
         const list = state.transList || [];
