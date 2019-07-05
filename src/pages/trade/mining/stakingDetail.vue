@@ -49,14 +49,8 @@ export default {
         viteTokenInfo() {
             return this.$store.getters.viteTokenInfo;
         },
-        withdrawTime() {
-            if (!this.stakingObj) {
-                return 0;
-            }
-            return this.stakingObj.withdrawTime + 10 * 60;
-        },
         canCancel() {
-            return this.withdrawTime <= new Date().getTime() / 1000;
+            return this.stakingObj.withdrawHeight <= this.height;
         },
         stakingDetail() {
             if (!this.stakingObj) {
@@ -67,8 +61,8 @@ export default {
                 };
             }
             return {
-                withdrawTime: date(this.withdrawTime * 1000, this.$i18n.locale),
-                amount: bigNumber.toBasic(this.stakingObj.amount || 0, 18), // [TODO] viteTokenInfo fix
+                withdrawTime: date(this.stakingObj.withdrawTime * 1000, this.$i18n.locale),
+                amount: bigNumber.toBasic(this.stakingObj.amount || 0, 18), // [TODO] viteinfo test
                 withdrawHeight: this.stakingObj.withdrawHeight
             };
         }
@@ -132,4 +126,3 @@ export default {
     }
 }
 </style>
-
