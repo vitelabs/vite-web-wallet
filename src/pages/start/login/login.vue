@@ -130,7 +130,7 @@
 import Vue from 'vue';
 import loading from 'components/loading.vue';
 import ellipsisAddr from 'utils/ellipsisAddr.js';
-import { getList, deleteOldAcc, getCurrHDAcc,setCurrHDAcc } from 'wallet';
+import { getList, deleteOldAcc, getCurrHDAcc, setCurrHDAcc } from 'wallet';
 
 import accountItem from './accountItem.vue';
 import restore from '../restore.vue';
@@ -218,14 +218,14 @@ export default {
         },
         initVB() {
             const vb = initVB();
-            vb.on('connect', (err,payload) => {
+            vb.on('connect', (err, payload) => {
                 const { accounts } = payload.params[0];
-                if(!accounts||!accounts[0])throw new Error('address is null');
-                console.log(`approved :${accounts[0]}`)
+                if (!accounts || !accounts[0]) throw new Error('address is null');
+                console.log(`approved :${ accounts[0] }`);
                 setCurrHDAcc({
                     activeAddr: accounts[0],
                     isBirforst: true
-                })
+                });
                 getCurrHDAcc().unlock(vb);
                 this.$store.commit('switchHDAcc', {
                     activeAddr: accounts[0],
