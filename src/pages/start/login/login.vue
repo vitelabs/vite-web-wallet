@@ -11,11 +11,11 @@
             >
                 {{ $t("existingAcc") }}
             </div>
-            <div
-                class="btn-item __pointer"
-                :class="{ active: tabName === 'existingAcc' }"
-                @click="toggleTab('existingAcc')"
-                :key="'existingAcc'"
+            <div v-show="isHaveList"
+                 class="btn-item __pointer"
+                 :class="{ active: tabName === 'existingAcc' }"
+                 @click="toggleTab('existingAcc')"
+                 :key="'existingAcc'"
             >
                 {{ $t("existingAcc") }}
             </div>
@@ -152,6 +152,8 @@ export default {
         this.clearAll();
     },
     data() {
+        const list = getList();
+
         return {
             id: this.$route.params.id,
             currAcc: {},
@@ -166,7 +168,8 @@ export default {
                 image: icon,
                 mSize: 0.3
             },
-            vb: null
+            vb: null,
+            isHaveList: list && list.length
         };
     },
     beforeMount() {
