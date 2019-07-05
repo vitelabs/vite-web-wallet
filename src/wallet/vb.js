@@ -1,22 +1,35 @@
 import Connector from '/Users/yuanzhang/vitecodes/walletconnect-monorepo/packages/browser';
+import { setCurrHDAcc, getCurrHDAcc } from './index';
+import store from 'store';
 
 export const BRIDGE = 'ws://hurrytospring.com:5001';
 export class VB extends Connector {
     constructor(opts) {
         super(opts);
         // eslint-disable-next-line
-        this.on('connect', (error, _payload) => {
-            if (error) {
-                throw error;
-            }
-            // const { accounts, chainId } = payload.params[0];
+        this.on("connect", (err, payload) => {
+            const { accounts } = payload.params[0];
+            if (!accounts || !accounts[0]) throw new Error('address is null');
+            console.log(`approved :${ accounts[0] }`);
+            setCurrHDAcc({
+                activeAddr: accounts[0],
+                isBirforst: true
+            });
+            getCurrHDAcc().unlock(this);
+            store.commit('switchHDAcc', {
+                activeAddr: accounts[0],
+                isBirforst: true
+            });
+            store.commit('setCurrHDAccStatus');
+            const name = store.state.env.lastPage || 'tradeCenter';
+            this.$router.push({ name });
         });
-        // eslint-disable-next-line
-        this.on('disconnect', (error, _payload) => {
-            if (error) {
-                throw error;
+        this.on('disconnect', () => {
+            console.log('disconnect');
+            if (getCurrHDAcc() && getCurrHDAcc().isBirforst) {
+                getCurrHDAcc().lock();
+                store.commit('setCurrHDAccStatus');
             }
-            // Delete walletConnector
         });
     }
 
@@ -27,11 +40,10 @@ export class VB extends Connector {
 
     destroy() {
         console.log('distory vb');
-        // this.offAllListener()
+    // this.offAllListener()
     }
 
     async sendVbTx(...args) {
-        console.log('sendvbtxxxxxx', args);
         return this.sendCustomRequest({ method: 'vite_sendTx', params: args });
     }
 }

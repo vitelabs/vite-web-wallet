@@ -1,5 +1,6 @@
 import { StatusMap, getCurrHDAcc, getActiveAcc } from 'wallet';
 import { pwdConfirm } from 'components/password/index.js';
+import { vbConnectDialog } from 'components/dialog';
 
 export function execWithValid(funcName, noActive) {
     return function (...args) {
@@ -9,6 +10,10 @@ export function execWithValid(funcName, noActive) {
         }
         const activeAccount = getActiveAcc();
         if (activeAccount) {
+            if (activeAccount.isBirforst) {
+                vbConnectDialog();
+                return;
+            }
             pwdConfirm({ type: 'unlockAccount' });
             return;
         }
