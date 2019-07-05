@@ -110,19 +110,23 @@ export default {
             }
             return this.tokenList;
         },
+        rawBalance() {
+            if (!this.viteTokenInfo) {
+                return null;
+            }
+            const list = this.$store.getters.exBalanceList;
+            return list[this.viteTokenInfo.tokenId];
+        },
+        exViteBalance() {
+            return this.rawBalance ? this.rawBalance.availableExAmount : 0;
+        },
         isHaveBalance() {
             if (!this.viteTokenInfo) {
                 return false;
             }
 
-            const viteBalance = this.$store.getters.balanceInfo
-                && this.$store.getters.balanceInfo[this.viteTokenInfo.tokenId]
-                ? this.$store.getters.balanceInfo[this.viteTokenInfo.tokenId].balance || 0
-                : 0;
-            const viteAmount = BigNumber.toMin(viteBalance, this.viteTokenInfo.decimals);
             const amount = BigNumber.toMin(this.spend, this.viteTokenInfo.decimals);
-
-            return BigNumber.compared(viteAmount, amount) >= 0;
+            return BigNumber.compared(this.exViteBalance, amount) >= 0;
         }
     },
     watch: {
@@ -230,7 +234,6 @@ export default {
             };
 
             sendTx('dexFundNewMarket', {
-                amount: BigNumber.toMin(spend, this.viteTokenInfo.decimals),
                 tradeToken: this.token.tokenId,
                 quoteToken: this.market.tokenId
             }).then(() => {
