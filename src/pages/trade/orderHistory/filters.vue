@@ -109,7 +109,7 @@ export default {
 .filter-root {
     display: flex;
     align-items: flex-end;
-    margin: 0 10px 20px;
+    margin-bottom: 20px;
     font-size: 12px;
 
     .filter {
