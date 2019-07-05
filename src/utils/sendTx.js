@@ -2,6 +2,7 @@ import { utils } from '@vite/vitejs';
 import { getActiveAcc } from 'wallet';
 import { powProcess } from 'components/pow/index';
 import { quotaConfirm } from 'components/quota/index';
+import { vbDialog } from 'components/dialog';
 // import {}
 
 const { isObject } = utils;
@@ -26,9 +27,10 @@ export default function sendTx(methodName, data, config = defaultConfig) {
     const activeAccount = getActiveAcc();
 
     let powInstance = null;
+    let vbInstance = null;
     if (activeAccount.isBirforst) {
-        console.log('start pending birforst');
-    // alert birforst pending
+        const { compInstance } = vbDialog();
+        vbInstance = compInstance;
     }
     activeAccount
         .sendPowTx({
@@ -125,8 +127,7 @@ export default function sendTx(methodName, data, config = defaultConfig) {
         })
         .finally(() => {
             if (activeAccount.isBirforst) {
-                console.log('destory pending birforst');
-                // destory birforst pending
+                vbInstance && vbInstance.close();
             }
         });
 

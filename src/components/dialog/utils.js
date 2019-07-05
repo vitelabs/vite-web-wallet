@@ -17,6 +17,7 @@ const mixin = {
     store,
     i18n,
     props: {
+        isWide: {},
         showMask: {},
         title: {},
         showClose: {},
@@ -31,6 +32,9 @@ const mixin = {
         }
     },
     computed: {
+        IsWide() {
+            getValue.call(this, 'isWide', false);
+        },
         Title() {
             return getValue.call(this, 'title', '');
         },
@@ -75,7 +79,7 @@ const mixin = {
                 },
                 wrapper: {
                     width: '90%',
-                    'max-width': '618px',
+                    'max-width': this.IsWide ? '618px' : '515px',
                     'max-height': '85%',
                     display: 'flex',
                     'flex-direction': 'column',
@@ -193,6 +197,7 @@ const mixin = {
 
 export default function (component, propsDefault = {}) {
     return function dialog(props = {}) {
+        let instance = null;
         const insert = function (props) {
             component.mixins = component.mixins || [];
             component.mixins.push(mixin);
@@ -201,11 +206,12 @@ export default function (component, propsDefault = {}) {
                 el: document.createElement('div'),
                 propsData: props
             });
+            instance = componentInstance;
             const appEl = document.getElementById('vite-wallet-app');
             appEl.appendChild(componentInstance.$el);
             return componentInstance.$el;
         };
-        return new Promise(function (resolve, reject) {
+        const p = new Promise(function (resolve, reject) {
             insert({
                 ...propsDefault,
                 ...props,
@@ -215,5 +221,7 @@ export default function (component, propsDefault = {}) {
                 }
             });
         });
+        p.compInstance = instance;
+        return p;
     };
 }

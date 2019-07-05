@@ -28,6 +28,9 @@ export function setCurrHDAcc(acc) {
     if (!acc) {
         return;
     }
+    if (acc.isBirforst && currentHDAccount.activeAddr === acc.activeAddr) {
+        return currentHDAccount;
+    }
     if (acc.isBirforst || !acc.id || !currentHDAccount || currentHDAccount.id !== acc.id) {
         return constructAccount(acc);
     }
