@@ -18,7 +18,7 @@
         <div v-show="!loadingToken">
             <div class="content">
                 <my-quota class="my-quota _content_border"></my-quota>
-                <pledge-tx class="pledge-tx _content_border"
+                <pledge-tx class="pledge-tx"
                            :sendPledgeTx="sendPledgeTx" :tokenInfo="tokenInfo"></pledge-tx>
             </div>
 

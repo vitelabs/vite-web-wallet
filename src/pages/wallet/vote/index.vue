@@ -4,8 +4,8 @@
 
         <loading v-if="loadingToken" class="loading"></loading>
 
-        <section v-if="!loadingToken" class="vote_list">
-            <div class="title ct">{{ $t('walletVote.section1.title')}}</div>
+        <section v-if="!loadingToken">
+            <div class="__second-title no-top">{{ $t('walletVote.section1.title')}}</div>
             <wallet-table class="wallet-vote-table"
                           :headList="voteHeadList" :contentList="voteList">
                 <span v-for="(v, i) in voteList" :key="i"
@@ -24,8 +24,8 @@
         </section>
 
         <section v-if="!loadingToken" class="node_list">
-            <div class="title">
-                <div class="ct">{{ $t('walletVote.section2.title') }}</div>
+            <div class="__second-title">
+                <div class="title">{{ $t('walletVote.section2.title') }}</div>
                 <search v-model="filterKey" :placeholder="$t('walletVote.search')"></search>
             </div>
             <wallet-table class="wallet-vote-table node-list"
@@ -379,21 +379,18 @@ export default {
     display: flex;
     flex-direction: column;
 
-    .ct {
-        font-weight: 600;
-        height: 18px;
-        line-height: 18px;
-        @include font-family-bold();
-        font-size: 14px;
-        color: #1d2024;
-    }
-
-    .title {
+    .__second-title {
         display: flex;
         flex: none;
         justify-content: space-between;
         flex-wrap: wrap;
         margin: 14px 0;
+        &.no-top {
+            margin-top: 0;
+        }
+        .title {
+            line-height: 34px;
+        }
         .ct {
             margin-top: 10px;
         }
