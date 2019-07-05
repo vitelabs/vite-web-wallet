@@ -24,7 +24,7 @@
     "guide": {
         "close": "关闭",
         "next": "下一步",
-        "closeTips": "点击关闭新手引导",
+        "closeTips": "点击关闭新手引导 (不推荐)",
         "trade": [
             "在这里管理您的钱包资产和交易所资产",
             "查看当前委托和历史委托记录，掌握交易细节",
@@ -96,8 +96,8 @@
         "DexTradeCancelOrder": "ViteX撤单",
         "DexFundNewMarket": "ViteX上币",
         "CreateContractReq": "创建合约",
-        "DexFundPledgeForVx": "抵押挖矿什么的",
-        "DexFundPledgeForVip": "抵押获取VIP什么的",
+        "DexFundPledgeForVx": "ViteX抵押",
+        "DexFundPledgeForVip": "ViteX VIP",
         "TxReq": "转账",
         "RewardReq": "转账",
         "TxRes": "转账",
@@ -460,7 +460,10 @@
             "total": "总计抵押 {amount} VITE",
             "amount": "抵押金额",
             "withdrawTime": "预计到期时间",
-            "unexpired": "还未到达取回时间，暂时无法取回抵押"
+            "unexpired": "还未到达取回时间，暂时无法取回抵押",
+            "vip": "此抵押为您开通交易所VIP金额，请前往交易所撤销VIP",
+            "mining": "此抵押为您交易所抵押挖矿金额，请前往交易所挖矿页面取回",
+            "other": "此抵押为您通过其他方式抵押，不支持在此处取回"
         }
     },
     "walletTransList": {
@@ -879,8 +882,8 @@
         "withdrawHint": "取回后，您将无法再挖矿VX",
         "addTitle": "抵押VITE挖矿",
         "withdrawTitle": "取回抵押VITE",
-        "addPlaceHolder": "请输入抵押金额，最少134vite",
-        "withdrawPlaceHolder": "请输入取回金额，最少134vite",
+        "addPlaceHolder": "请输入抵押金额，最少134VITE",
+        "withdrawPlaceHolder": "请输入取回金额，最少134VITE",
         "addBtn": "提交抵押",
         "withdrawBtn": "确认取回",
         "stakingBalance": "可取回抵押余额"

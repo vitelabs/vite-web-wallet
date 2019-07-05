@@ -58,9 +58,7 @@ export default {
         },
         canOrder() {
             if (this.isVip) {
-                return true;
-                // [TODO] compare time
-                // return this.stakingObj && BigNumber.compared(this.height, this.stakingObj.height) > 0;
+                return this.stakingObj.withdrawHeight <= this.height;
             }
 
             if (!this.rawBalance || !+this.rawBalance.availableExAmount || !this.viteTokenInfo) {

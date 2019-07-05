@@ -50,9 +50,7 @@ export default {
             return this.$store.getters.viteTokenInfo;
         },
         canCancel() {
-            return true;
-            // [TODO] compare time
-            // return this.stakingDetail && bigNumber.compared(this.heghit, this.stakingDetail.withdrawHeight) > 0;
+            return this.stakingObj.withdrawHeight <= this.height;
         },
         stakingDetail() {
             if (!this.stakingObj) {
