@@ -130,7 +130,7 @@
 import Vue from 'vue';
 import loading from 'components/loading.vue';
 import ellipsisAddr from 'utils/ellipsisAddr.js';
-import { getList, deleteOldAcc} from 'wallet';
+import { getList, deleteOldAcc } from 'wallet';
 
 import accountItem from './accountItem.vue';
 import restore from '../restore.vue';
