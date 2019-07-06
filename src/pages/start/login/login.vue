@@ -27,102 +27,104 @@
             >
                 {{ $t("restore") }}
             </div>
-        </div>
-        <div class="vb" v-if="tabName === 'vb'">
-            <div class="code_container">
-                <div class="code_tips">
-                    dsfasdfasdflsjalsjlksdjfsdlfjsdlkfjsalkdfjlkdsfjsdlakfjsdalkfjasdlfsd
+        </div >
+        <div class="tab-content">
+            <div class="vb" v-if="tabName === 'vb'">
+                <div class="code_container">
+                    <div class="code_tips">
+                        dsfasdfasdflsjalsjlksdjfsdlfjsdlkfjsalkdfjlkdsfjsdlakfjsdalkfjasdlfsd
+                    </div>
+                    <qrcode
+                        :options="qrcodeOpt"
+                        :text="uri"
+                        class="vb_qrcode"
+                    ></qrcode>
+                    <div class="code_tips">
+                        dsfasdfasdflsjalsjlksdjfsdlfjsdlkfjsalkdfjlkdsfjsdlakfjsdalkfjasdlfsd<span
+                            class="action_get_app"
+                        >Get Vite App</span
+                        >
+                    </div>
                 </div>
-                <qrcode
-                    :options="qrcodeOpt"
-                    :text="uri"
-                    class="vb_qrcode"
-                ></qrcode>
-                <div class="code_tips">
-                    dsfasdfasdflsjalsjlksdjfsdlfjsdlkfjsalkdfjlkdsfjsdlakfjsdalkfjasdlfsd<span
-                        class="action_get_app"
-                    >Get Vite App</span
-                    >
+                <div class="__btn __btn_all_in __pointer" @click="createAcc">
+                    {{ $t("addAccount") }}
                 </div>
             </div>
-            <div class="__btn __btn_all_in __pointer" @click="createAcc">
-                {{ $t("addAccount") }}
-            </div>
-        </div>
-        <div v-if="tabName === 'existingAcc'" class="existing-acc">
-            <div class="bottom __btn __pointer">
-                <div
-                    v-click-outside="hideAccountList"
-                    @click="toggleAccountList"
-                >
+            <div v-if="tabName === 'existingAcc'" class="existing-acc">
+                <div class="bottom __btn __pointer">
                     <div
-                        v-show="currAcc && !currAcc.activeAddr"
-                        class="__btn __btn_input"
+                        v-click-outside="hideAccountList"
+                        @click="toggleAccountList"
                     >
-                        <div class="name __ellipsis">{{ currAcc.name }}</div>
+                        <div
+                            v-show="currAcc && !currAcc.activeAddr"
+                            class="__btn __btn_input"
+                        >
+                            <div class="name __ellipsis">{{ currAcc.name }}</div>
+                        </div>
+
+                        <account-item
+                            v-show="currAcc && currAcc.activeAddr"
+                            class="__btn"
+                            :account="currAcc"
+                        ></account-item>
+
+                        <span
+                            :class="{
+                                slide: true,
+                                down: !isShowAccountList,
+                                up: isShowAccountList
+                            }"
+                        ></span>
                     </div>
 
-                    <account-item
-                        v-show="currAcc && currAcc.activeAddr"
-                        class="__btn"
-                        :account="currAcc"
-                    ></account-item>
-
-                    <span
-                        :class="{
-                            slide: true,
-                            down: !isShowAccountList,
-                            up: isShowAccountList
-                        }"
-                    ></span>
+                    <account-list
+                        ref="accList"
+                        v-show="isShowAccountList"
+                        :clickAccount="chooseAccount"
+                    ></account-list>
                 </div>
 
-                <account-list
-                    ref="accList"
-                    v-show="isShowAccountList"
-                    :clickAccount="chooseAccount"
-                ></account-list>
-            </div>
+                <div
+                    class="bottom __btn __btn_input"
+                    :class="{ active: !!password || inputItem === 'pass' }"
+                >
+                    <input
+                        ref="passInput"
+                        autofocus
+                        :placeholder="$t('startCreate.input')"
+                        v-model="password"
+                        :type="'password'"
+                        @focus="inputFocus('pass')"
+                        @blur="inputBlur('pass')"
+                    />
+                </div>
 
-            <div
-                class="bottom __btn __btn_input"
-                :class="{ active: !!password || inputItem === 'pass' }"
-            >
-                <input
-                    ref="passInput"
-                    autofocus
-                    :placeholder="$t('startCreate.input')"
-                    v-model="password"
-                    :type="'password'"
-                    @focus="inputFocus('pass')"
-                    @blur="inputBlur('pass')"
-                />
-            </div>
-
-            <div class="__btn_list">
-                <span class="__btn __btn_border __pointer" @click="createAcc">
-                    {{ $t("addAccount") }}
-                </span>
-                <div class="__btn __btn_all_in __pointer" @click="login">
-                    <span v-show="!isLoading">
-                        {{
-                            isShowExisting
-                                ? $t("btn.login")
-                                : $t("startCreate.finish")
-                        }}
+                <div class="__btn_list">
+                    <span class="__btn __btn_border __pointer" @click="createAcc">
+                        {{ $t("addAccount") }}
                     </span>
-                    <loading v-show="isLoading" loadingType="dot"></loading>
+                    <div class="__btn __btn_all_in __pointer" @click="login">
+                        <span v-show="!isLoading">
+                            {{
+                                isShowExisting
+                                    ? $t("btn.login")
+                                    : $t("startCreate.finish")
+                            }}
+                        </span>
+                        <loading v-show="isLoading" loadingType="dot"></loading>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <restore
-            ref="restoreDom"
-            v-if="tabName === 'resotre'"
-            :leftClick="createAcc"
-            leftTxt="createAcc"
-            :finishCb="showExisting"
-        ></restore>
+            <restore
+                ref="restoreDom"
+                v-if="tabName === 'resotre'"
+                :leftClick="createAcc"
+                leftTxt="createAcc"
+                :finishCb="showExisting"
+            ></restore>
+        </div>
     </div>
 </template>
 
@@ -161,14 +163,13 @@ export default {
             inputItem: '',
             isLoading: false,
             isShowAccountList: false,
-            isShowExisting: true,
+            isShowExisting: false,
             tabName: TABNAME.vb,
             qrcodeOpt: {
                 size: 140,
                 image: icon,
                 mSize: 0.3
             },
-            vb: null,
             isHaveList: list && list.length
         };
     },
@@ -181,20 +182,20 @@ export default {
     computed: {
         currHDAcc() {
             return this.$store.state.wallet.currHDAcc;
+        },
+        uri() {
+            return vbInstance && vbInstance.uri;
         }
     },
     watch: {
         isShowExisting: function () {
-            if (!this.isShowExisting) {
-                this.clearAll();
-                return;
-            }
-
-            this.init();
-            this.$refs.accList && this.$refs.accList.initAccountList();
+            debugger;
         }
     },
     methods: {
+        destoryVB() {
+            console.log('destory vb');
+        },
         init() {
             this.$onKeyDown(13, () => {
                 this.login();
@@ -208,7 +209,7 @@ export default {
         },
         showExisting(id) {
             this.id = id;
-            this.isShowExisting = true;
+            this.toggleTab('existingAcc');
         },
         toggleTab(tabName) {
             if (this.tabName === tabName) return;
@@ -217,12 +218,18 @@ export default {
             } else if (this.tabName === 'vb' && tabName !== 'vb') {
                 this.destoryVB();
             }
+            if (!this.isShowExisting) {
+                this.clearAll();
+                return;
+            }
+
+            this.init();
+            this.$refs.accList && this.$refs.accList.initAccountList();
             this.tabName = tabName;
         },
-        uri() {
-            return vbInstance && vbInstance.uri;
-        },
+
         getCurrAcc() {
+            debugger;
             const list = getList();
 
             // First: from router
@@ -338,6 +345,9 @@ export default {
 @import "~assets/scss/vars.scss";
 
 .login-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     .__btn {
         position: relative;
 
@@ -400,6 +410,9 @@ export default {
                 box-shadow: 0 0 4px 0 rgba(0, 105, 219, 1);
             }
         }
+    }
+    .tab-content{
+        max-width: 360px;;
     }
     .vb {
         width: 100%;

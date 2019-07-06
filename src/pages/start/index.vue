@@ -9,7 +9,7 @@
         </div>
         <div class="confirm-wrapper">
             <div class="confirm">
-                <start v-if="$route.name === 'start'"></start>
+                <login v-if="$route.name === 'start'"></login>
                 <router-view></router-view>
                 <first-notice v-if="$route.name === 'start'"></first-notice>
             </div>
@@ -20,9 +20,9 @@
 <script>
 import firstNotice from 'components/firstNotice.vue';
 import changeLang from 'components/changeLang';
-import start from './start';
+import login from './login/login';
 
-export default { components: { changeLang, start, firstNotice } };
+export default { components: { changeLang, login, firstNotice } };
 </script>
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
@@ -36,9 +36,13 @@ export default { components: { changeLang, start, firstNotice } };
     background: url(~assets/imgs/bg.svg) rgba(255, 255, 255, 0.1) no-repeat;
     background-size: cover;
     @keyframes key-opacity {
-        0% { opacity: 0.1; }
+        0% {
+            opacity: 0.1;
+        }
 
-        100% { opacity: 1; }
+        100% {
+            opacity: 1;
+        }
     }
 
     .header {
@@ -68,9 +72,11 @@ export default { components: { changeLang, start, firstNotice } };
         .confirm {
             position: relative;
             width: 100%;
-            max-width: 360px;
             text-align: center;
             padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
     }
 }
