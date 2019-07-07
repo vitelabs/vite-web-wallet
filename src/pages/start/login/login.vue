@@ -163,7 +163,6 @@ export default {
             inputItem: '',
             isLoading: false,
             isShowAccountList: false,
-            isShowExisting: false,
             tabName: TABNAME.vb,
             qrcodeOpt: {
                 size: 140,
@@ -185,11 +184,9 @@ export default {
         },
         uri() {
             return vbInstance && vbInstance.uri;
-        }
-    },
-    watch: {
-        isShowExisting: function () {
-            debugger;
+        },
+        isShowExisting() {
+            return this.tabName === 'existingAcc';
         }
     },
     methods: {
@@ -213,18 +210,20 @@ export default {
         },
         toggleTab(tabName) {
             if (this.tabName === tabName) return;
+
             if (this.tabName !== 'vb' && tabName === 'vb') {
                 initVB();
             } else if (this.tabName === 'vb' && tabName !== 'vb') {
                 this.destoryVB();
             }
-            if (!this.isShowExisting) {
+
+            if (this.tabName !== 'existingAcc' && tabName === 'existingAcc') {
+                this.init();
+                this.$refs.accList && this.$refs.accList.initAccountList();
+            } else if (this.tabName === 'existingAcc' && tabName !== 'existingAcc') {
                 this.clearAll();
-                return;
             }
 
-            this.init();
-            this.$refs.accList && this.$refs.accList.initAccountList();
             this.tabName = tabName;
         },
 

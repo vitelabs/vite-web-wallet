@@ -76,6 +76,7 @@ import { utils } from '@vite/vitejs';
 import copy from 'components/copy';
 import AssetSwitch from './assetSwitch';
 import { getTokenNameString } from 'utils/tokenParser';
+import { getCurrHDAcc } from 'wallet';
 
 const assetsType = {
     TOTAL: 'TOTAL',
@@ -203,7 +204,7 @@ export default {
             this.$offKeyDown();
         },
         startRename() {
-            if (this.isShowNameInput) {
+            if (this.isShowNameInput || getCurrHDAcc().isBirfrost) {
                 return;
             }
             this.isShowNameInput = true;

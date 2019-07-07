@@ -1,5 +1,7 @@
 <template lang="pug">
 extends /components/dialog/base.pug
+block head
+    div {{$t('assets.vb.connect.tips')}}
 block content
     qrcode(:options="qrcodeOpt" :text="uri" class="code_container" )
 </template>

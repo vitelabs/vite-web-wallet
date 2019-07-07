@@ -7,14 +7,14 @@
                     <div v-if="!!currHDAcc" class="big-title">{{ $t('setting.addrList') }}</div>
                     <accList v-if="!!currHDAcc"></accList>
 
-                    <div v-if="!!isLogin" class="big-title">{{ $t('setting.secure') }}</div>
-                    <mnemonic v-if="!!isLogin"></mnemonic>
-                    <hold-pwd v-if="!!isLogin" class="item"></hold-pwd>
+                    <div v-if="!!isLogin&&!currHDAcc.isBirfrost" class="big-title">{{ $t('setting.secure') }}</div>
+                    <mnemonic v-if="!!isLogin&&!currHDAcc.isBirfrost"></mnemonic>
+                    <hold-pwd v-if="!!isLogin&&!currHDAcc.isBirfrost" class="item"></hold-pwd>
                 </div>
 
                 <div class="area">
                     <div class="big-title">{{ $t('setting.config') }}</div>
-                    <auto-logout v-if="!!isLogin"></auto-logout>
+                    <auto-logout v-if="!!isLogin&&!currHDAcc.isBirfrost"></auto-logout>
                     <lang></lang>
                     <currency></currency>
                 </div>
