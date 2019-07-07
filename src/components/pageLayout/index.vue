@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import { StatusMap } from 'wallet';
+import { StatusMap, getCurrHDAcc } from 'wallet';
 import sidebar from './sidebar';
 import secondMenu from './secondMenu';
 import { sidebarMenuList, secondMenuList } from './config';
@@ -56,7 +56,7 @@ export default {
             }
 
             list = [].concat(secondMenuList.wallet);
-            this.isLogin && list.push('walletConversion');
+            (this.isLogin && !getCurrHDAcc().isBirfrost) && list.push('walletConversion');
             return list;
         },
         autoLogoutTime() {
