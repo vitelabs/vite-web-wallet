@@ -107,7 +107,7 @@ export default {
     border-radius: 2px;
     display: flex;
     flex-direction: row;
-    background: rgba(234,248,255,0.2);
+    background: url('~assets/imgs/mint_pledge_bg.png') rgba(234,248,255,0.2);
     background-size: 100% 100%;
 }
 .pool-item {
