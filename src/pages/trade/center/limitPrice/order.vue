@@ -460,7 +460,9 @@ export default {
                 minAmount = BigNumber.dividedCeil(minAmount, 1 + this.fee, 0);
             }
 
-            return BigNumber.dividedCeil(minAmount, minPrice, this.ftokenDigit);
+            // const _qSmall = BigNumber.dividedToNumber(minAmount, minPrice, this.ftokenDigit);
+            // const _qBig = BigNumber.dividedCeil(minAmount, minPrice, this.ftokenDigit);
+            return BigNumber.dividedToNumber(minAmount, minPrice, this.ftokenDigit);
         },
 
         validPrice() {
