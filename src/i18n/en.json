@@ -34,8 +34,7 @@
         ],
         "assets": [
             "Deposit to Exchange",
-            "Withdraw to Wallet",
-            "Cross-Chain Receive & Transfer"
+            "Withdraw to Wallet"
         ]
     },
     "dealReminder": {

@@ -212,13 +212,15 @@ export default {
 }
 
 .assets.item {
-    top: 195px;
+    top: 185px;
     .icon {
         word-break: keep-all;
         white-space: nowrap;
         line-height: 16px;
         color: #007aff;
         bottom: -20px;
+        min-width: 180px;
+        text-align: center;
         transform: translateY(100%);
     }
 
@@ -233,12 +235,12 @@ export default {
         left: 250px;
     }
 
-    &:nth-child(2) {
-        right: 300px;
-    }
+    // &:nth-child(2) {
+    //     right: 300px;
+    // }
 
-    &:nth-child(3) {
-        left: 690px;
+    &:nth-child(2) {
+        left: 60%;
     }
 }
 
