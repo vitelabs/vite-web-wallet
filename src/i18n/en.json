@@ -395,21 +395,39 @@
         }
     },
     "walletMintage": {
-        "title": "铸币",
-        "address": "铸币地址",
-        "tokenName": "代币全称",
-        "tokenSymbol": "代币简称",
-        "totalSupply": "总发行量",
-        "decimals": "价格精度",
-        "isReIssuable": "是否可增发",
-        "maxSupply": "最大发行量",
-        "isOwnerBurnOnly": "是否仅支持所有者销毁",
-        "mint": "确认铸币",
-        "tokenList": "已铸代币",
+        "title": "Token Issuance",
+        "address": "Issuance Address",
+        "tokenName": "Name",
+        "tokenSymbol": "Symbol",
+        "totalSupply": "Total Supply",
+        "decimals": "Decimals",
+        "isReIssuable": "ReIssuable",
+        "maxSupply": "Max Supply",
+        "isOwnerBurnOnly": "Burn out by Owner Only",
+        "mint": "Confirm",
+        "tokenList": "Issued Token",
+        "submit": "确认",
+        "cancel": "取消",
+        "mintageConfirm": {
+            "title": "确认铸币信息",
+            "balance": "当前地址余额",
+            "fee": "铸币费",
+            "btn": "确认铸币"
+        },
+        "reIssuableConfirm": {
+            "title": "改为不可增发",
+            "text": "确认将 {tokenName} 改为不可增发状态吗?"
+        },
+        "changeOwnerConfirm": {
+            "title": "转让所有权",
+            "address": "接受权限地址"
+        },
         "hint": {
             "tokenName": "代币全称长度为1-40 个字符，包含大小写字母、空格和下划线，不能有连续空格，不能以空格开头或结尾。",
             "tokenSymbol": "简称长度为1-10 个字符，只可包含大写字母、数字。",
-            "decimals": "10**decimals 不能超过 totalSupply"
+            "decimals": "10**decimals 不能超过 totalSupply",
+            "success": "Token Issuance Successful",
+            "fail": "Token Issuance failed"
         },
         "err": {
             "tokenNameFormat": "名称不合法",
@@ -419,7 +437,11 @@
             "supplyMax": "发行量过大",
             "totalSupplyFormat": "总发行量不合法",
             "totalSupplyNull": "总发行量不可为空",
+            "decimalsNull": "价格精度不可为空",
+            "decimalsFormat": "价格精度不合法",
+            "decimalsMax": "价格精度过大",
             "maxSupplyNull": "最大发行量不可为空",
+            "maxSupplyFormat": "最大发行量不合法",
             "maxSupplyMin": "最大发行量不能小于总发行量"
         }
     },

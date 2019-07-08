@@ -103,12 +103,12 @@ export default {
                 tokenName: this.tokenInfo.tokenName,
                 tokenSymbol: this.tokenInfo.tokenSymbol
             }).then(() => {
-                this.$toast('Mintage success');
+                this.$toast(this.$t('walletMintage.hint.success'));
                 this.close && this.close();
                 this.clear && this.clear();
             }).catch(err => {
                 console.warn(err);
-                this.$toast('Mintage fail.', err);
+                this.$toast(this.$t('walletMintage.hint.fail'), err);
             });
         }
     }
