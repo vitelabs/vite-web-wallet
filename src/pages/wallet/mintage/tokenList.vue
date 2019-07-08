@@ -32,7 +32,7 @@
             cell: 'maxSupply'
         },{
             class: 'small-item __ellipsis',
-            text: $t('walletMintage.ownerBurnOnly'),
+            text: $t('walletMintage.isOwnerBurnOnly'),
             cell: 'ownerBurnOnly'
         },{
             class: 'small-item __ellipsis',
@@ -42,6 +42,7 @@
 
             <span v-for="(item, i) in tokenList" :key="i"
                   :slot="`${i}operateBefore`">
+
                 <span v-show="!item.isReIssuable" class="unuse btn">
                     {{ $t('walletMintage.changeOwnerConfirm.title') }}</span>
                 <span v-show="!item.isReIssuable" class="unuse btn">
