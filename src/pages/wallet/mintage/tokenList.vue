@@ -3,44 +3,44 @@
         <div class="__second-title">{{ $t('walletMintage.tokenList') }}</div>
 
         <wallet-table class="mintage-table" :headList="[{
-            class: 'big-item __ellipsis',
+            class: '__ellipsis',
             text: 'Token ID',
             cell: 'tokenId'
         },{
-            class: 'small-item __ellipsis',
+            class: '__ellipsis',
             text: $t('walletMintage.tokenName'),
             cell: 'tokenName'
         },{
-            class: 'small-item __ellipsis',
+            class: '__ellipsis',
             text: $t('walletMintage.tokenSymbol'),
             cell: 'tokenSymbol'
         },{
-            class: 'big-item __ellipsis',
+            class: '__ellipsis',
             text: $t('walletMintage.totalSupply'),
             cell: 'totalSupply'
         },{
-            class: 'small-item __ellipsis',
+            class: '__ellipsis',
             text: $t('walletMintage.decimals'),
             cell: 'decimals'
         },{
-            class: 'small-item __ellipsis',
+            class: '__ellipsis',
             text: $t('walletMintage.isReIssuable'),
             cell: 'isReIssuable'
         },{
-            class: 'big-item __ellipsis',
+            class: '__ellipsis',
             text: $t('walletMintage.maxSupply'),
             cell: 'maxSupply'
         },{
-            class: 'small-item __ellipsis',
+            class: '__ellipsis',
             text: $t('walletMintage.isOwnerBurnOnly'),
             cell: 'ownerBurnOnly'
         },{
-            class: 'small-item __ellipsis',
+            class: '__ellipsis',
             text: $t('tradeAssets.operate'),
             cell: 'operate'
-        }]" :contentList="tokenList">
+        }]" :contentList="showTokenList">
 
-            <span v-for="(item, i) in tokenList" :key="i"
+            <span v-for="(item, i) in showTokenList" :key="i"
                   :slot="`${i}operateBefore`">
 
                 <span v-show="!item.isReIssuable" class="unuse btn">
@@ -92,6 +92,7 @@ import walletTable from 'components/table/index.vue';
 import { initPwd } from 'components/password/index.js';
 import viteInput from 'components/viteInput';
 import sendTx from 'utils/sendTx';
+import BigNumber from 'utils/bigNumber';
 
 export default {
     components: { walletTable, showConfirm, viteInput },
@@ -109,6 +110,16 @@ export default {
     computed: {
         address() {
             return this.$store.getters.activeAddr;
+        },
+        showTokenList() {
+            const list = [];
+            this.tokenList.forEach(item => {
+                item.totalSupply = BigNumber.toBasic(item.totalSupply, item.decimals);
+                item.maxSupply = item.isReIssuable ? BigNumber.toBasic(item.maxSupply, item.decimals) : '--';
+                item.ownerBurnOnly = item.isReIssuable ? item.ownerBurnOnly : '--';
+                list.push(item);
+            });
+            return list;
         }
     },
     watch: {
