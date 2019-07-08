@@ -32,7 +32,7 @@
             cell: 'maxSupply'
         },{
             class: 'small-item __ellipsis',
-            text: $t('walletMintage.ownerBurnOnly'),
+            text: $t('walletMintage.isOwnerBurnOnly'),
             cell: 'ownerBurnOnly'
         },{
             class: 'small-item __ellipsis',
@@ -43,9 +43,9 @@
             <span v-for="(item, i) in tokenList" :key="i"
                   :slot="`${i}operateBefore`">
                 <span :class="{ 'unuse': !item.isReIssuable }" class="btn __pointer"
-                      v-unlock-account @unlocked="changeOwner(item)">转让所有权</span>
+                      v-unlock-account @unlocked="changeOwner(item)"> $t('walletMintage.transfer')</span>
                 <span :class="{ 'unuse': !item.isReIssuable }" class="btn __pointer"
-                      v-unlock-account @unlocked="changeReIssuable(item)">改为不可增发</span>
+                      v-unlock-account @unlocked="changeReIssuable(item)">$t('walletMintage.change')</span>
             </span>
 
         </wallet-table>
