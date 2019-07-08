@@ -43,9 +43,11 @@
             <span v-for="(item, i) in tokenList" :key="i"
                   :slot="`${i}operateBefore`">
                 <span :class="{ 'unuse': !item.isReIssuable }" class="btn __pointer"
-                      v-unlock-account @unlocked="changeOwner(item)">转让所有权</span>
+                      v-unlock-account @unlocked="changeOwner(item)">
+                    {{ $t('walletMintage.changeOwnerConfirm.title') }}</span>
                 <span :class="{ 'unuse': !item.isReIssuable }" class="btn __pointer"
-                      v-unlock-account @unlocked="changeReIssuable(item)">改为不可增发</span>
+                      v-unlock-account @unlocked="changeReIssuable(item)">
+                    {{ $t('walletMintage.reIssuableConfirm.title') }}</span>
             </span>
 
         </wallet-table>
@@ -162,23 +164,23 @@ export default {
                         tokenId: this.changeOwnerToken.tokenId,
                         newOwner: this.newOwner
                     }).then(() => {
-                        this.$toast('changeOwner success');
+                        this.$toast(this.$t('walletMintage.success'));
                         this.cancelChangeOwner();
                         this.getOwnerToken();
                     }).catch(err => {
                         console.warn(err);
-                        this.$toast('changeOwner fail.', err);
+                        this.$toast(this.$t('walletMintage.fail'), err);
                     });
                 }
             });
         },
         toChangeReIssuale(item) {
             sendTx('changeTokenType', { tokenId: item.tokenId }).then(() => {
-                this.$toast('ChangeTokenType success');
+                this.$toast(this.$t('walletMintage.success'));
                 this.getOwnerToken();
             }).catch(err => {
                 console.warn(err);
-                this.$toast('ChangeTokenType fail.', err);
+                this.$toast(this.$t('walletMintage.fail'), err);
             });
         }
     }
