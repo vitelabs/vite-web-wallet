@@ -40,17 +40,17 @@
 
             <span v-for="(item, i) in showTokenList" :key="i"
                   :slot="`${i}showTotalSupplyAfter`">
-                <i v-if="item.isTotalOver" @click.self.stop="showTotal(i)" class="tipsicon __pointer">
-                    <tooltips v-show="showTotalTips === i" v-click-outside="hideTotal"
-                              :content="item.totalSupply"></tooltips>
+                <i v-if="item.isTotalOver" @mouseenter.self.stop="showTotal(i)" @mouseleave="hideTotal"
+                   class="tipsicon __pointer">
+                    <tooltips v-show="showTotalTips === i" :content="item.totalSupply"></tooltips>
                 </i>
             </span>
 
             <span v-for="(item, i) in showTokenList" :key="i"
                   :slot="`${i}showMaxSupplyAfter`">
-                <i v-if="item.isMaxOver" @click.self.stop="showMax(i)" class="tipsicon __pointer">
-                    <tooltips v-show="showMaxTips === i" v-click-outside="hideMax"
-                              :content="item.maxSupply"></tooltips>
+                <i v-if="item.isMaxOver"  @mouseenter.self.stop="showMax(i)" @mouseleave="hideMax"
+                   class="tipsicon __pointer">
+                    <tooltips v-show="showMaxTips === i" :content="item.maxSupply"></tooltips>
                 </i>
             </span>
 
