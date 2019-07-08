@@ -42,10 +42,14 @@
 
             <span v-for="(item, i) in tokenList" :key="i"
                   :slot="`${i}operateBefore`">
-                <span :class="{ 'unuse': !item.isReIssuable }" class="btn __pointer"
+                <span v-show="!item.isReIssuable" class="unuse btn">
+                    {{ $t('walletMintage.changeOwnerConfirm.title') }}</span>
+                <span v-show="!item.isReIssuable" class="unuse btn">
+                    {{ $t('walletMintage.reIssuableConfirm.title') }}</span>
+                <span v-show="item.isReIssuable" class="btn __pointer"
                       v-unlock-account @unlocked="changeOwner(item)">
                     {{ $t('walletMintage.changeOwnerConfirm.title') }}</span>
-                <span :class="{ 'unuse': !item.isReIssuable }" class="btn __pointer"
+                <span v-show="item.isReIssuable" class="btn __pointer"
                       v-unlock-account @unlocked="changeReIssuable(item)">
                     {{ $t('walletMintage.reIssuableConfirm.title') }}</span>
             </span>
