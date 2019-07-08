@@ -104,6 +104,7 @@ export default {
                 tokenSymbol: this.tokenInfo.tokenSymbol
             }).then(() => {
                 this.$toast(this.$t('walletMintage.hint.success'));
+                this.$store.dispatch('getAllTokens');
                 this.close && this.close();
                 this.clear && this.clear();
             }).catch(err => {
