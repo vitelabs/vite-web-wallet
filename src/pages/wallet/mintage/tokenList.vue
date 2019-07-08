@@ -15,9 +15,8 @@
             text: $t('walletMintage.tokenSymbol'),
             cell: 'tokenSymbol'
         },{
-            class: '__ellipsis',
             text: $t('walletMintage.totalSupply'),
-            cell: 'totalSupply'
+            cell: 'showTotalSupply'
         },{
             class: '__ellipsis',
             text: $t('walletMintage.decimals'),
@@ -27,9 +26,8 @@
             text: $t('walletMintage.isReIssuable'),
             cell: 'isReIssuable'
         },{
-            class: '__ellipsis',
             text: $t('walletMintage.maxSupply'),
-            cell: 'maxSupply'
+            cell: 'showMaxSupply'
         },{
             class: '__ellipsis',
             text: $t('walletMintage.isOwnerBurnOnly'),
@@ -41,12 +39,24 @@
         }]" :contentList="showTokenList">
 
             <span v-for="(item, i) in showTokenList" :key="i"
-                  :slot="`${i}operateBefore`">
+                  :slot="`${i}showTotalSupplyAfter`">
+                <i v-if="item.isTotalOver" @click.self.stop="showTotal(i)" class="tipsicon __pointer">
+                    <tooltips v-show="showTotalTips === i" v-click-outside="hideTotal"
+                              :content="item.totalSupply"></tooltips>
+                </i>
+            </span>
 
-                <span v-show="!item.isReIssuable" class="unuse btn">
-                    {{ $t('walletMintage.changeOwnerConfirm.title') }}</span>
-                <span v-show="!item.isReIssuable" class="unuse btn">
-                    {{ $t('walletMintage.reIssuableConfirm.title') }}</span>
+            <span v-for="(item, i) in showTokenList" :key="i"
+                  :slot="`${i}showMaxSupplyAfter`">
+                <i v-if="item.isMaxOver" @click.self.stop="showMax(i)" class="tipsicon __pointer">
+                    <tooltips v-show="showMaxTips === i" v-click-outside="hideMax"
+                              :content="item.maxSupply"></tooltips>
+                </i>
+            </span>
+
+            <span v-for="(item, i) in showTokenList" :key="i"
+                  :slot="`${i}operateBefore`">
+                <span v-show="!item.isReIssuable">--</span>
                 <span v-show="item.isReIssuable" class="btn __pointer"
                       v-unlock-account @unlocked="changeOwner(item)">
                     {{ $t('walletMintage.changeOwnerConfirm.title') }}</span>
@@ -91,11 +101,12 @@ import showConfirm from 'components/confirm';
 import walletTable from 'components/table/index.vue';
 import { initPwd } from 'components/password/index.js';
 import viteInput from 'components/viteInput';
+import tooltips from 'components/tooltips';
 import sendTx from 'utils/sendTx';
 import BigNumber from 'utils/bigNumber';
 
 export default {
-    components: { walletTable, showConfirm, viteInput },
+    components: { walletTable, showConfirm, viteInput, tooltips },
     created() {
         this.getOwnerToken();
     },
@@ -104,7 +115,9 @@ export default {
             tokenList: [],
             changeOwnerToken: null,
             newOwner: '',
-            isValidAddress: true
+            isValidAddress: true,
+            showMaxTips: null,
+            showTotalTips: null
         };
     },
     computed: {
@@ -115,8 +128,15 @@ export default {
             const list = [];
             this.tokenList.forEach(item => {
                 item.totalSupply = BigNumber.toBasic(item.totalSupply, item.decimals);
+                item.isTotalOver = item.totalSupply.length > 10;
+                item.showTotalSupply = item.isTotalOver ? `${ item.totalSupply.slice(0, 10) }...` : item.totalSupply;
+
                 item.maxSupply = item.isReIssuable ? BigNumber.toBasic(item.maxSupply, item.decimals) : '--';
+                item.isMaxOver = item.maxSupply.length > 10;
+                item.showMaxSupply = item.isMaxOver ? `${ item.maxSupply.slice(0, 10) }...` : item.maxSupply;
+
                 item.ownerBurnOnly = item.isReIssuable ? item.ownerBurnOnly : '--';
+
                 list.push(item);
             });
             return list;
@@ -128,6 +148,18 @@ export default {
         }
     },
     methods: {
+        showMax(i) {
+            this.showMaxTips = i;
+        },
+        hideMax() {
+            this.showMaxTips = null;
+        },
+        showTotal(i) {
+            this.showTotalTips = i;
+        },
+        hideTotal() {
+            this.showTotalTips = null;
+        },
         validAddr() {
             this.isValidAddress = this.newOwner && hdAddr.isValidHexAddr(this.newOwner);
         },
@@ -214,5 +246,16 @@ export default {
     &.unuse {
         color: #ced1d5;
     }
+}
+
+.tipsicon {
+    position: relative;
+    display: inline-block;
+    background: url(~assets/imgs/hover_help.svg);
+    overflow: visible;
+    width: 16px;
+    height: 16px;
+    vertical-align: sub;
+    margin-left: 4px;
 }
 </style>
