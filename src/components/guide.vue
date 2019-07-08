@@ -1,5 +1,5 @@
 <template>
-    <div v-if="isShowGuide" class="beginner-guide">
+    <div v-if="isShowGuide" class="beginner-guide" :class="$i18n.locale">
         <div class="item" :class="guideType" v-for="(item, i) in $t(`guide.${guideType}`)" :key="i"
              v-show="guideStep === i">
             <div class="icon">
@@ -149,6 +149,15 @@ export default {
         display: inline-block;
         content: ' ';
         border: 6px solid transparent;
+    }
+}
+
+.en .trade.item {
+    &:nth-child(2) {
+        left: 210px;
+    }
+    &:nth-child(3) {
+        left: 425px;
     }
 }
 
