@@ -8,19 +8,19 @@
 
             <div class="_top">
                 <div v-for="(name, index) in menuTops" :key="index"
-                     class="__pointer icon" :class="{ 'active': active.indexOf(name) >= 0 }"
+                     class="__pointer icon" :class="{ 'active': $route.name.indexOf(name) >= 0 }"
                      @click="go(name)">
-                    <img v-show="active.indexOf(name) < 0" :src="icon[name]" />
-                    <img v-show="active.indexOf(name) >= 0" :src="icon[`${name}Active`]"  />
+                    <img v-show="$route.name.indexOf(name) < 0" :src="icon[name]" />
+                    <img v-show="$route.name.indexOf(name) >= 0" :src="icon[`${name}Active`]"  />
                 </div>
             </div>
 
             <div class="_bottom">
                 <div v-for="(name, index) in menuBottoms" :key="index"
-                     class="icon __pointer" :class="{ 'active': active === name }"
+                     class="icon __pointer" :class="{ 'active': $route.name === name }"
                      @click="go(name)" @mouseenter="enterLogout(name)" @mouseleave="leaveLogout(name)">
-                    <img v-show="active !== name && (name !== iconHover)" :src="icon[name]" />
-                    <img v-show="active === name || (name === iconHover) " :src="icon[`${name}Active`]"  />
+                    <img v-show="$route.name !== name && (name !== iconHover)" :src="icon[name]" />
+                    <img v-show="$route.name === name || (name === iconHover) " :src="icon[`${name}Active`]"  />
                 </div>
             </div>
         </div>
@@ -47,10 +47,6 @@ import tradeActive from 'assets/imgs/trade_pressed.svg';
 export default {
     components: { testNotice },
     props: {
-        active: {
-            type: String,
-            default: ''
-        },
         menuList: {
             type: Array,
             default: () => []
