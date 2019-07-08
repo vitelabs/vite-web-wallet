@@ -2,7 +2,7 @@
     "lang": "中文",
     "help": "帮助",
     "start": "开始",
-    "login": "登录账户",
+    "login": "登录",
     "regAcc": "注册账户",
     "dexToken": "开通交易对",
     "unlockAcc": "解锁当前账户",
@@ -245,7 +245,7 @@
             "availableExAmount":"交易所可用余额"
         },
         "actionType": {
-            "SEND": "发送",
+            "SEND": "转账",
             "RECEIVE": "接收",
             "CHARGE": "跨链转入",
             "WITHDRAW": "跨链转出",
