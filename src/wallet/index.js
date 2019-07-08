@@ -4,7 +4,7 @@ import { getOldAccList, setOldAccList } from 'utils/store';
 import { HDAccount, StatusMap as _StatusMap, VBAccount } from './hdAccount';
 import { getLastAcc, addHdAccount, setAcc, getAccList } from './store';
 function constructAccount(acc) {
-    if (acc.isBirforst || acc.id.startsWith('VITEBIRFORST_')) {
+    if (acc.isBifrost || acc.id.startsWith('VITEBIRFORST_')) {
         currentHDAccount = new VBAccount(acc);
     } else {
         currentHDAccount = new HDAccount(acc);
@@ -28,10 +28,10 @@ export function setCurrHDAcc(acc) {
     if (!acc) {
         return;
     }
-    if (acc.isBirforst && currentHDAccount.activeAddr === acc.activeAddr) {
+    if (acc.isBifrost && currentHDAccount && currentHDAccount.activeAddr === acc.activeAddr) {
         return currentHDAccount;
     }
-    if (acc.isBirforst || !acc.id || !currentHDAccount || currentHDAccount.id !== acc.id) {
+    if (acc.isBifrost || !acc.id || !currentHDAccount || currentHDAccount.id !== acc.id) {
         return constructAccount(acc);
     }
     return currentHDAccount;

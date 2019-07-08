@@ -64,7 +64,7 @@ export default {
             return this.$store.state.wallet.addrList;
         },
         notAllowed() {
-            return this.addrList.length <= 1 || getCurrHDAcc().isBirfrost;
+            return this.addrList.length <= 1 || getCurrHDAcc().isBifrost;
         }
     },
     methods: {

@@ -297,8 +297,8 @@ export class VBAccount {
         this.name = name || '';
         this.activeAddr = activeAddr;
         this.status = StatusMap.LOCK;
-        this._activeAccount = null;
-        this.addrList = [activeAddr];
+        this.setActiveAcc();
+        this.addrList = [{ address: activeAddr, id: this.id, idx: 0 }];
         // Set Addr Num
         this.addrNum = 1;
         this.save();
@@ -312,7 +312,7 @@ export class VBAccount {
         return this._activeAccount;
     }
 
-    get isBirforst() {
+    get isBifrost() {
         return this.id.startsWith('VITEBIRFORST_');
     }
 
@@ -358,29 +358,14 @@ export class VBAccount {
         this.status = StatusMap.LOCK;
     }
 
-    unlock(vb) {
-        if (!vb) {
-            return;
-        }
-
+    setActiveAcc() {
         const account = new addrAccount({
             client: $ViteJS,
             address: this.activeAddr
         });
-        const sendPowTx = async ({ methodName, params = [] }) => {
-            if (params[0]) {
-                params[0].prevHash = 'hack for birforst';
-                params[0].height = 34;
-            }
-            const block = await account.getBlock[methodName](params[0], 'sync');
-
-            return vb.sendVbTx({ block });
-        };
-        this.status = StatusMap.UNLOCK;
         const proxyActiveAcc = Object.create(null);
         proxyActiveAcc.address = this.activeAddr;
-        proxyActiveAcc.sendPowTx = sendPowTx;
-        proxyActiveAcc.isBirforst = true;
+        proxyActiveAcc.isBifrost = true;
         this._activeAccount = new Proxy(account, {
             get(target, name) {
                 if (proxyActiveAcc[name]) {
@@ -389,6 +374,24 @@ export class VBAccount {
                 return target[name];
             }
         });
+        this.proxyActiveAcc = proxyActiveAcc;
+    }
+
+    unlock(vb) {
+        if (!vb) {
+            return;
+        }
+        const sendPowTx = async ({ methodName, params = [] }) => {
+            if (params[0]) {
+                params[0].prevHash = 'hack for birforst';
+                params[0].height = 34;
+            }
+            const block = await this.activeAccount.getBlock[methodName](params[0], 'sync');
+
+            return vb.sendVbTx({ block });
+        };
+        this.status = StatusMap.UNLOCK;
+        this.proxyActiveAcc.sendPowTx = sendPowTx;
         setLastAcc({ id: this.id });
     }
 }

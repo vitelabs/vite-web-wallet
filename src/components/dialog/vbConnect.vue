@@ -1,13 +1,13 @@
 <template lang="pug">
 extends /components/dialog/base.pug
 block head
-    div {{$t('assets.vb.connect.tips')}}
+    .head {{$t('assets.vb.connect.tips')}}
 block content
-    qrcode(:options="qrcodeOpt" :text="uri" class="code_container" )
+    qrcode.code_container(:options="qrcodeOpt" :text="vb&&vb.uri")
 </template>
 
 <script>
-import { initVB, vbInstance } from 'wallet/vb';
+import { initVB } from 'wallet/vb';
 import qrcode from 'components/qrcode';
 import icon from 'assets/imgs/start_qrcode_icon.svg';
 
@@ -19,23 +19,36 @@ export default {
                 size: 140,
                 image: icon,
                 mSize: 0.3
-            }
+            },
+            dTitle: this.$t('assets.vb.title'),
+            dWidth: 'narrow',
+            vb: null
         };
     },
     beforeMount() {
-        initVB().on('connect', () => {
+        this.vb = initVB();
+        this.vb.on('connect', () => {
             this.close();
         });
-    },
-    computed: {
-        uri() {
-            return vbInstance && vbInstance.uri;
-        }
     }
 };
 </script>
 
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
+.head {
+    box-sizing: border-box;
+    padding: 20px;
+    display: flex;
+    font-size: 14px;
+    color:#333;
+    font-family: $font-bold;
+}
+.code_container{
+    width: 163px;
+    height: 163px;
+    margin: 0 auto;
+    justify-content: center;
+}
 </style>
 

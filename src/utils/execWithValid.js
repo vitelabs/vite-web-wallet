@@ -10,7 +10,7 @@ export function execWithValid(funcName, noActive) {
         }
         const activeAccount = getActiveAcc();
         if (activeAccount) {
-            if (activeAccount.isBirforst) {
+            if (activeAccount.isBifrost) {
                 vbConnectDialog();
                 return;
             }

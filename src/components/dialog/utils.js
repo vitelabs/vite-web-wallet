@@ -7,6 +7,11 @@ const STATUS = {
     'CANCEL': 'CANCEL',
     'CONFIRMED': 'CONFRIMED'
 };
+const widthMap = {
+    narrow: '400px',
+    normal: '515px',
+    wide: '618px'
+};
 const getValue = function (key, defaultValue) {
     const dkey = `d${ key.slice(0, 1).toUpperCase() }${ key.slice(1) }`;
     if (this[key] !== undefined) return this[key];
@@ -17,7 +22,7 @@ const mixin = {
     store,
     i18n,
     props: {
-        isWide: {},
+        width: {}, // wide narrow normal
         showMask: {},
         title: {},
         showClose: {},
@@ -32,8 +37,8 @@ const mixin = {
         }
     },
     computed: {
-        IsWide() {
-            getValue.call(this, 'isWide', false);
+        Width() {
+            return getValue.call(this, 'width', 'normal');
         },
         Title() {
             return getValue.call(this, 'title', '');
@@ -79,7 +84,7 @@ const mixin = {
                 },
                 wrapper: {
                     width: '90%',
-                    'max-width': this.IsWide ? '618px' : '515px',
+                    'max-width': widthMap[this.Width],
                     'max-height': '85%',
                     display: 'flex',
                     'flex-direction': 'column',

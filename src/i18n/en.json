@@ -603,7 +603,8 @@
                 "scan":"Scan a QR code to link your mobile wallet using WalletConnect.",
                 "downloadTips":"Don’t have an app that supports WalletConnect yet? ",
                 "download":"Get Vite Wallet"
-            }
+            },
+            "defaultName":"我的账户"
         }
     },
     "walletConversion": {

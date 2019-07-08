@@ -56,7 +56,7 @@ export default {
             }
 
             list = [].concat(secondMenuList.wallet);
-            (this.isLogin && !getCurrHDAcc().isBirfrost) && list.push('walletConversion');
+            (this.isLogin && !getCurrHDAcc().isBifrost) && list.push('walletConversion');
             return list;
         },
         autoLogoutTime() {
