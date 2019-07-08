@@ -68,9 +68,8 @@
                 </div>
             </div>
 
-            <div class="__form_btn __pointer" :class="{
-                'unuse': !canMintage
-            }" v-unlock-account @unlocked="toMintage">{{ $t('walletMintage.mint') }}</div>
+            <div v-show="canMintage" class="__form_btn __pointer" v-unlock-account="toMintage">{{ $t('walletMintage.mint') }}</div>
+            <div v-show="!canMintage" class="__form_btn __pointer unuse">{{ $t('walletMintage.mint') }}</div>
         </div>
 
         <mintage-confirm v-if="tokenInfo" :tokenInfo="tokenInfo" :close="closeConfirm"></mintage-confirm>

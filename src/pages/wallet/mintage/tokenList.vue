@@ -7,11 +7,11 @@
             text: 'Token ID',
             cell: 'tokenId'
         },{
-            class: 'big-item __ellipsis',
+            class: 'small-item __ellipsis',
             text: $t('walletMintage.tokenName'),
             cell: 'tokenName'
         },{
-            class: 'big-item __ellipsis',
+            class: 'small-item __ellipsis',
             text: $t('walletMintage.tokenSymbol'),
             cell: 'tokenSymbol'
         },{
@@ -42,8 +42,9 @@
 
             <span v-for="(item, i) in tokenList" :key="i"
                   :slot="`${i}operateBefore`">
-                <span class="btn __pointer" v-unlock-account @unlocked="changeOwner(item)">转让所有权</span>
-                <span v-if="item.isReIssuable" class="btn __pointer"
+                <span :class="{ 'unuse': !item.isReIssuable }" class="btn __pointer"
+                      v-unlock-account @unlocked="changeOwner(item)">转让所有权</span>
+                <span :class="{ 'unuse': !item.isReIssuable }" class="btn __pointer"
                       v-unlock-account @unlocked="changeReIssuable(item)">改为不可增发</span>
             </span>
 
@@ -56,6 +57,10 @@
             <div class="__row">
                 <div class="__row-t">{{ $t('walletMintage.tokenName') }}</div>
                 <div class="__unuse-row __light">{{ changeOwnerToken.tokenName }}</div>
+            </div>
+            <div class="__row">
+                <div class="__row-t">{{ $t('walletMintage.tokenSymbol') }}</div>
+                <div class="__unuse-row __light">{{ changeOwnerToken.tokenSymbol }}</div>
             </div>
             <div class="__row">
                 <div class="__row-t">{{ $t('walletMintage.address') }}</div>
@@ -171,5 +176,8 @@ export default {
 }
 .btn {
     color: #007AFF;
+    &.unuse {
+        color: #ced1d5;
+    }
 }
 </style>
