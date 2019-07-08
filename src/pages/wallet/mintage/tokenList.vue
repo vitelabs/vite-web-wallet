@@ -140,7 +140,7 @@ export default {
                 submit: () => {
                     this.toChangeReIssuale(item);
                 }
-            });
+            }, true);
         },
         changeOwner(item) {
             if (!item.isReIssuable) {
