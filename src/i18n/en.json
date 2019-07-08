@@ -406,8 +406,24 @@
         "isOwnerBurnOnly": "Burn out by Owner Only",
         "mint": "Confirm",
         "tokenList": "Issued Token",
-        "transfer": "Transfer Ownership",
-        "change": "Change to Non-issuable",
+        "submit": "Submit",
+        "cancel": "Cancel",
+        "success": "Token Issuance Success",
+        "fail": "Token Issuance Failure",
+        "mintageConfirm": {
+            "title": "Check your Token Issuance Information",
+            "balance": "Balance",
+            "fee": "Issuance Fee",
+            "btn": "Confirm"
+        },
+        "reIssuableConfirm": {
+            "title": "Change to Non-issuable",
+            "text": "Make sure to change {tokenName} to Non-issuable status?"
+        },
+        "changeOwnerConfirm": {
+            "title": "Transfer Ownership",
+            "address": "Recipient Address"
+        },
         "hint": {
             "tokenName": "Token name should have 1-40 characters including capitals and lowercase letters, spaces and underlines. Continuous spaces and numbers are not supported.",
             "tokenSymbol": "Token symbol should have 1-10 characters, only capitals and numbers are supported.",
@@ -424,7 +440,11 @@
             "totalSupplyFormat": "Wrong format of Total Supply",
             "totalSupplyNull": "Total Supply is required",
             "maxSupplyNull": "Max Supply is required",
-            "maxSupplyMin": "Total Supply must be less than Max Supply"
+            "maxSupplyMin": "Total Supply must be less than Max Supply",
+            "decimalsNull": "Decimals field is required",
+            "decimalsFormat": "Wrong format of decimals",
+            "decimalsMax": "Decimals are out of range",
+            "maxSupplyFormat": "Wrong format of Max Supply"
         }
     },
     "walletQuota": {

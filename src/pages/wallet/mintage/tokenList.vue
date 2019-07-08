@@ -42,10 +42,17 @@
 
             <span v-for="(item, i) in tokenList" :key="i"
                   :slot="`${i}operateBefore`">
-                <span :class="{ 'unuse': !item.isReIssuable }" class="btn __pointer"
-                      v-unlock-account @unlocked="changeOwner(item)"> $t('walletMintage.transfer')</span>
-                <span :class="{ 'unuse': !item.isReIssuable }" class="btn __pointer"
-                      v-unlock-account @unlocked="changeReIssuable(item)">$t('walletMintage.change')</span>
+
+                <span v-show="!item.isReIssuable" class="unuse btn">
+                    {{ $t('walletMintage.changeOwnerConfirm.title') }}</span>
+                <span v-show="!item.isReIssuable" class="unuse btn">
+                    {{ $t('walletMintage.reIssuableConfirm.title') }}</span>
+                <span v-show="item.isReIssuable" class="btn __pointer"
+                      v-unlock-account @unlocked="changeOwner(item)">
+                    {{ $t('walletMintage.changeOwnerConfirm.title') }}</span>
+                <span v-show="item.isReIssuable" class="btn __pointer"
+                      v-unlock-account @unlocked="changeReIssuable(item)">
+                    {{ $t('walletMintage.reIssuableConfirm.title') }}</span>
             </span>
 
         </wallet-table>
@@ -74,7 +81,6 @@
                 <vite-input v-model="newOwner" :valid="validAddr"
                             :placeholder="$t('wallet.placeholder.addr')"></vite-input>
             </div>
-
         </show-confirm>
     </div>
 </template>
@@ -129,15 +135,22 @@ export default {
             });
         },
         changeReIssuable(item) {
+            if (!item.isReIssuable) {
+                return;
+            }
+
             initPwd({
                 title: this.$t('walletMintage.reIssuableConfirm.title'),
                 content: this.$t('walletMintage.reIssuableConfirm.text', { tokenName: item.tokenName }),
                 submit: () => {
                     this.toChangeReIssuale(item);
                 }
-            });
+            }, true);
         },
         changeOwner(item) {
+            if (!item.isReIssuable) {
+                return;
+            }
             this.changeOwnerToken = item;
         },
         cancelChangeOwner() {
@@ -156,23 +169,23 @@ export default {
                         tokenId: this.changeOwnerToken.tokenId,
                         newOwner: this.newOwner
                     }).then(() => {
-                        this.$toast('changeOwner success');
+                        this.$toast(this.$t('walletMintage.success'));
                         this.cancelChangeOwner();
                         this.getOwnerToken();
                     }).catch(err => {
                         console.warn(err);
-                        this.$toast('changeOwner fail.', err);
+                        this.$toast(this.$t('walletMintage.fail'), err);
                     });
                 }
             });
         },
         toChangeReIssuale(item) {
             sendTx('changeTokenType', { tokenId: item.tokenId }).then(() => {
-                this.$toast('ChangeTokenType success');
+                this.$toast(this.$t('walletMintage.success'));
                 this.getOwnerToken();
             }).catch(err => {
                 console.warn(err);
-                this.$toast('ChangeTokenType fail.', err);
+                this.$toast(this.$t('walletMintage.fail'), err);
             });
         }
     }
