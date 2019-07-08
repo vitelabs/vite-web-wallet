@@ -1,13 +1,13 @@
 <template>
     <div class="page-layout-wrapper" @click="operate">
-        <sidebar class="sidebar" :active="active" :go="go" :menuList="menuList" ></sidebar>
+        <sidebar class="sidebar" :go="go" :menuList="menuList" ></sidebar>
 
         <div class="page-content">
             <div class="page-scroll-wrapper">
-                <second-menu v-show="active.indexOf('setting') === -1"
+                <second-menu v-show="$route.name.indexOf('setting') === -1"
                              :go="go" class="second-menu"
                              :tabList="secondMenuList"
-                             :class="{ 'assets': active.indexOf('assets') === 0 }" >
+                             :class="{ 'assets': $route.name.indexOf('assets') === 0 }" >
                 </second-menu>
                 <div class="page-wrapper">
                     <slot></slot>
@@ -28,16 +28,10 @@ let autoLogout = null;
 export default {
     components: { sidebar, secondMenu },
     mounted() {
-        this.$router.afterEach(to => {
-            this.active = to.name;
-        });
         this.setMenuList();
     },
     data() {
-        return {
-            active: this.$route.name,
-            menuList: []
-        };
+        return { menuList: [] };
     },
     computed: {
         isLogin() {
@@ -45,13 +39,13 @@ export default {
         },
         secondMenuList() {
             let list = [];
-            if (this.active.indexOf('trade') === 0) {
+            if (this.$route.name.indexOf('trade') === 0) {
                 list = secondMenuList.trade;
-            } else if (this.active.indexOf('assets') === 0) {
+            } else if (this.$route.name.indexOf('assets') === 0) {
                 list = secondMenuList.assets;
             }
 
-            if (this.active.indexOf('wallet') !== 0) {
+            if (this.$route.name.indexOf('wallet') !== 0) {
                 return [].concat(list);
             }
 
@@ -98,7 +92,7 @@ export default {
                 return;
             }
 
-            if (this.active === name) {
+            if (this.$route.name === name) {
                 return;
             }
 

@@ -40,17 +40,15 @@
 
             <span v-for="(item, i) in showTokenList" :key="i"
                   :slot="`${i}showTotalSupplyAfter`">
-                <i v-if="item.isTotalOver" @mouseenter.self.stop="showTotal(i)" @mouseleave="hideTotal"
-                   class="tipsicon __pointer">
-                    <tooltips v-show="showTotalTips === i" :content="item.totalSupply"></tooltips>
+                <i v-if="item.isTotalOver" class="tipsicon __pointer">
+                    <tooltips class="icon-tooltips" :content="item.totalSupply"></tooltips>
                 </i>
             </span>
 
             <span v-for="(item, i) in showTokenList" :key="i"
                   :slot="`${i}showMaxSupplyAfter`">
-                <i v-if="item.isMaxOver"  @mouseenter.self.stop="showMax(i)" @mouseleave="hideMax"
-                   class="tipsicon __pointer">
-                    <tooltips v-show="showMaxTips === i" :content="item.maxSupply"></tooltips>
+                <i v-if="item.isMaxOver" class="tipsicon __pointer">
+                    <tooltips class="icon-tooltips" :content="item.maxSupply"></tooltips>
                 </i>
             </span>
 
@@ -115,9 +113,7 @@ export default {
             tokenList: [],
             changeOwnerToken: null,
             newOwner: '',
-            isValidAddress: true,
-            showMaxTips: null,
-            showTotalTips: null
+            isValidAddress: true
         };
     },
     computed: {
@@ -148,18 +144,6 @@ export default {
         }
     },
     methods: {
-        showMax(i) {
-            this.showMaxTips = i;
-        },
-        hideMax() {
-            this.showMaxTips = null;
-        },
-        showTotal(i) {
-            this.showTotalTips = i;
-        },
-        hideTotal() {
-            this.showTotalTips = null;
-        },
         validAddr() {
             this.isValidAddress = this.newOwner && hdAddr.isValidHexAddr(this.newOwner);
         },
@@ -257,5 +241,13 @@ export default {
     height: 16px;
     vertical-align: sub;
     margin-left: 4px;
+    .icon-tooltips {
+        display: none;
+    }
+    &:hover {
+        .icon-tooltips {
+            display: inline;
+        }
+    }
 }
 </style>
