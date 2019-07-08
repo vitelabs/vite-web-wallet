@@ -74,7 +74,6 @@
                 <vite-input v-model="newOwner" :valid="validAddr"
                             :placeholder="$t('wallet.placeholder.addr')"></vite-input>
             </div>
-
         </show-confirm>
     </div>
 </template>
@@ -129,6 +128,10 @@ export default {
             });
         },
         changeReIssuable(item) {
+            if (!item.isReIssuable) {
+                return;
+            }
+
             initPwd({
                 title: this.$t('walletMintage.reIssuableConfirm.title'),
                 content: this.$t('walletMintage.reIssuableConfirm.text', { tokenName: item.tokenName }),
@@ -138,6 +141,9 @@ export default {
             });
         },
         changeOwner(item) {
+            if (!item.isReIssuable) {
+                return;
+            }
             this.changeOwnerToken = item;
         },
         cancelChangeOwner() {
