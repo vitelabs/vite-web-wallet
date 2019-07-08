@@ -55,7 +55,7 @@ export default {
     margin-top: 12px;
     font-size: 14px;
     color: #1d2024;
-    font-family: $font-normal, arial, sans-serif;
+    @include font-family-normal();
 
     span {
         display: inline-block;

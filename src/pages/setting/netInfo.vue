@@ -13,7 +13,7 @@
             <a href="https://vite.org/" target="_blank">
                 <span class="title">{{ $t('setting.site') }}</span><span class="link">vite.org</span>
             </a>
-            <a @click="goNet">
+            <a class="__pointer" @click="goNet">
                 <span class="title">{{ $t('setting.explorer') }}</span><span class="link">{{ netService }}</span>
             </a>
         </div>
@@ -29,6 +29,8 @@
 </template>
 
 <script>
+import openUrl from 'utils/openUrl';
+
 export default {
     data() {
         return {
@@ -44,7 +46,7 @@ export default {
     methods: {
         goNet() {
             const locale = this.$i18n.locale === 'zh' ? 'zh/' : '';
-            window.open(`${ process.env.viteNet }${ locale }`);
+            openUrl(`${ process.env.viteNet }${ locale }`);
         }
     }
 };
@@ -74,7 +76,7 @@ export default {
         margin-right: 15px;
         opacity: 0.8;
         font-size: 14px;
-        font-family: $font-bold, arial, sans-serif;
+        @include font-family-bold();
     }
 
     .link {

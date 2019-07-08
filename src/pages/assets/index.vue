@@ -1,40 +1,43 @@
 <template>
-    <page-layout>
-        <div class="wallet-account-wrapper">
-            <account-head class="account_head"></account-head>
-            <TokenFilter
-                @newFilter="
-                    val => {
-                        filterObj = val;
-                    }
-                "
-            ></TokenFilter>
-            <div class="token-list">
-                <div class="token__head">
-                    <div class="col">{{$t('tokenCard.heads.name')}}</div>
-                    <div class="col">{{$t('tokenCard.heads.balance')}}</div>
-                    <div class="col">{{$t('tokenCard.heads.onroad')}}</div>
-                    <!-- <div class="col">{{$t('tokenCard.heads.gate')}}</div> -->
-                    <div class="col">{{$t('tokenCard.heads.totalExAmount')}}</div>
-                    <div class="col">{{$t('tokenCard.heads.availableExAmount')}}</div>
-                    <div class="col">
-                        <AssetSwitch v-model="assetType" class="asset-switch" />
+    <div class="assets-container">
+        <guide :guideType="'assets'"></guide>
+        <page-layout>
+            <div class="wallet-account-wrapper">
+                <account-head class="account_head"></account-head>
+                <TokenFilter
+                    @newFilter="
+                        val => {
+                            filterObj = val;
+                        }
+                    "
+                ></TokenFilter>
+                <div class="token-list">
+                    <div class="token__head">
+                        <div class="col">{{$t('tokenCard.heads.name')}}</div>
+                        <div class="col">{{$t('tokenCard.heads.balance')}}</div>
+                        <div class="col">{{$t('tokenCard.heads.onroad')}}</div>
+                        <!-- <div class="col">{{$t('tokenCard.heads.gate')}}</div> -->
+                        <div class="col">{{$t('tokenCard.heads.totalExAmount')}}</div>
+                        <div class="col">{{$t('tokenCard.heads.availableExAmount')}}</div>
+                        <div class="col">
+                            <AssetSwitch v-model="assetType" class="asset-switch" />
+                        </div>
                     </div>
+                    <tokenCard
+                        v-for="token in tokenList"
+                        :key="token.tokenId"
+                        :token="token"
+                        :assetType="assetType"
+                    ></tokenCard>
                 </div>
-                <tokenCard
-                    v-for="token in tokenList"
-                    :key="token.tokenId"
-                    :token="token"
-                    :assetType="assetType"
-                ></tokenCard>
             </div>
-        </div>
-    </page-layout>
+        </page-layout>
+    </div>
 </template>
 
 <script>
 import pageLayout from 'components/pageLayout/index';
-import syncBlock from 'components/syncBlock';
+import guide from 'components/guide';
 import tokenCard from './tokenCard';
 import accountHead from './head';
 import { addTokenDialog } from './dialog';
@@ -59,7 +62,7 @@ const filterFunc = filterObj => t => {
     return !(NOTMatchNoZero || NOTMatchFilterKey);
 };
 export default {
-    components: { pageLayout, accountHead, syncBlock, tokenCard, TokenFilter, AssetSwitch },
+    components: { pageLayout, accountHead, guide, tokenCard, TokenFilter, AssetSwitch },
     data() {
         return {
             isShowTrans: false,
@@ -130,6 +133,15 @@ export default {
 <style lang="scss" rel="stylesheet/scss" scoped>
 @import "assets/scss/vars.scss";
 @import "./tokenCard/colWidth.scss";
+
+.assets-container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
 .wallet-account-wrapper{
     width: 100%;
     display: flex;
@@ -167,7 +179,7 @@ export default {
                 .asset-switch {
                     color: rgba(94, 104, 117, 0.58);;
                     font-size: 12px;
-                    font-family: $font-normal;
+                    @include font-family-normal();
                     /deep/.list-title {
                         border: none;
                         padding-left: 0;

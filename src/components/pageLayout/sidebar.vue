@@ -1,7 +1,7 @@
 <template>
     <div class="sidebar-wrapper">
         <div class="content">
-            <div @mouseenter="overLogo"  @mouseleave="leaveLogo" class="logo __pointer">
+            <div @mouseenter="overLogo" @mouseleave="leaveLogo" class="logo __pointer">
                 <img :src="viteLogo" />
                 <test-notice class="notice" :class="{'hide': !isShowNotice}"></test-notice>
             </div>

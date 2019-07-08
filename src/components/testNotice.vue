@@ -40,7 +40,7 @@ export default {
     border-radius: 8px;
 
     .hover-title {
-        font-family: $font-bold, arial, sans-serif;
+        @include font-family-bold();
         text-align: left;
         font-size: 16px;
         line-height: 16px;

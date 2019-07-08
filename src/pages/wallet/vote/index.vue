@@ -6,29 +6,22 @@
 
         <section v-if="!loadingToken" class="vote_list">
             <div class="title ct">{{ $t('walletVote.section1.title')}}</div>
-            <div class="__tb">
-                <div class="__tb_row __tb_head">
-                    <div class="__tb_cell" v-for="v in $t('walletVote.section1.head')" :key="v"> {{v}}</div>
-                </div>
-                <div class="__tb_content">
-                    <div class="__tb_row" v-for="v in voteList" :key="v.nodeName">
-                        <div class="__tb_cell nodename">{{v.nodeName}}</div>
-                        <div class="__tb_cell">
-                            {{v.nodeStatusText}}
-                            <i v-if="v.nodeStatus===2" class="tipsicon hoveraction" @click.self.stop="toggleTips">
-                                <tooltips v-if="isResisterTipsShow" v-click-outside="hideTips" class="unregister-tips" :content="$t('walletVote.section1.hoverHelp',{nodeName:v.nodeName})"></tooltips>
-                            </i>
-                        </div>
-                        <div class="__tb_cell">{{v.voteNum}}</div>
-                        <div class="__tb_cell">{{v.voteStatusText}}</div>
-                        <div class="__tb_cell" :class="cache ? 'unclickable' : 'clickable'">
-                            <span v-unlock-account @unlocked="cancelVote(v)">{{ v.operate }}</span>
-                            <span class="reward" @click="openReward(v)">{{ $t('walletVote.toReward') }}</span>
-                        </div>
-                    </div>
-                    <div class="__tb_no_data">{{ voteList.length ? '' : $t('hint.noData') }}</div>
-                </div>
-            </div>
+            <wallet-table class="wallet-vote-table" :headList="voteHeadList" :contentList="voteList">
+                <span v-for="(v, i) in voteList" :key="i"
+                      :slot="`${i}nodeStatusTextAfter`">
+                    <i v-if="v.nodeStatus === 2" class="tipsicon hoveraction" @click.self.stop="toggleTips">
+                        <tooltips v-if="isResisterTipsShow" v-click-outside="hideTips" class="unregister-tips" :content="$t('walletVote.section1.hoverHelp',{nodeName:v.nodeName})"></tooltips>
+                    </i>
+                </span>
+
+                <span v-for="(v, i) in voteList" :key="i"
+                      :slot="`${i}operateKeyBefore`" :class="cache ? 'unclickable' : 'clickable'">
+                    <span v-unlock-account @unlocked="cancelVote(v)">{{ v.operate }}</span>
+                    <span class="reward" @click="openReward(v)">{{ $t('walletVote.toReward') }}</span>
+                </span>
+
+                <div v-if="voteList.length" slot="tableBottom" class="__tb_no_data"></div>
+            </wallet-table>
         </section>
 
         <section v-if="!loadingToken" class="node_list">
@@ -37,27 +30,19 @@
                 <search v-model="filterKey" :placeholder="$t('walletVote.search')" class="filter"></search>
             </div>
             <div class="tb_container">
-                <div class="__tb">
-                    <div class="__tb_row __tb_head">
-                        <div class="__tb_cell" v-for="v in $t('walletVote.section2.head')" :key="v">{{v}}</div>
-                    </div>
-                    <div class="__tb_content" v-if="!!nodeList.length">
-                        <div class="__tb_row __tb_content_row active"
-                             v-for="(v,i) in nodeList" :key="v.nodeName">
-                            <div class="__tb_cell rank">{{i+1}}</div>
-                            <div @click="goToNodeDetail(v.nodeName)" class="__tb_cell nodename clickable">{{v.nodeName}}</div>
-                            <div @click="goToDetail(v.nodeAddr)" class="__tb_cell clickable">{{v.nodeAddr}}</div>
-                            <div class="__tb_cell">{{v.voteNum}}</div>
-                            <div class="__tb_cell clickable" v-unlock-account @unlocked="vote(v)">{{v.operate}}</div>
-                        </div>
-                    </div>
-                    <div class="__tb_content" v-else-if="this.filterKey">
-                        <div class="__tb_no_data">{{$t("walletVote.section2.noSearchData")}}</div>
-                    </div>
-                    <div class="__tb_content" v-else>
-                        <div class="__tb_no_data">{{$t("hint.noData")}}</div>
-                    </div>
-                </div>
+                <wallet-table class="wallet-vote-table node-list"
+                              :clickCell="clickCell" :noDataText="nodeNoDataText"
+                              :headList="nodeHeadList" :contentList="nodeList">
+
+                    <span v-for="(item, i) in nodeList" :key="i"
+                          :slot="`${i}rankBefore`" class="rank">{{ i+1 }}</span>
+
+                    <span v-for="(v, i) in nodeList" :key="i"
+                          :slot="`${i}operateKeyBefore`"
+                          v-unlock-account @unlocked="vote(v)">
+                        {{ v.operate }}
+                    </span>
+                </wallet-table>
             </div>
         </section>
     </div>
@@ -69,6 +54,7 @@ import tooltips from 'components/tooltips';
 import search from 'components/search';
 import secTitle from 'components/secTitle';
 import loading from 'components/loading';
+import walletTable from 'components/table/index.vue';
 import { initPwd } from 'components/password/index.js';
 import { timer } from 'utils/asyncFlow';
 import BigNumber from 'utils/bigNumber';
@@ -76,7 +62,7 @@ import $ViteJS from 'utils/viteClient';
 import sendTx from 'utils/sendTx';
 
 export default {
-    components: { secTitle, tooltips, search, loading },
+    components: { secTitle, tooltips, search, loading, walletTable },
     beforeMount() {
         this.tokenInfo = this.$store.getters.viteTokenInfo;
 
@@ -90,11 +76,13 @@ export default {
                     console.warn(err);
                 });
         }
-
         this.nodeDataTimer = new timer(this.updateNodeData, 3 * 1000);
         this.nodeDataTimer.start();
-        this.voteDataTimer = new timer(this.updateVoteData, 3 * 1000);
-        this.voteDataTimer.start();
+        this.startVoteData();
+    },
+    beforeDestroy() {
+        this.nodeDataTimer && this.nodeDataTimer.stop();
+        this.voteDataTimer && this.voteDataTimer.stop();
     },
     data() {
         return {
@@ -108,7 +96,162 @@ export default {
             isResisterTipsShow: false
         };
     },
+    computed: {
+        balance() {
+            const tokenList = [].concat(this.$store.getters.balanceInfo);
+            for (const tokenId in this.$store.state.ledger.defaultTokenIds) {
+                if (!this.$store.state.ledger.tokenInfoMaps[tokenId] && !tokenList[tokenId]) {
+                    break;
+                }
+
+                const token = this.$store.state.ledger.tokenInfoMaps[tokenId] || tokenList[tokenId];
+                const defaultToken = this.$store.state.ledger.defaultTokenIds[tokenId];
+                const tokenSymbol = token.tokenSymbol || defaultToken.tokenSymbol;
+
+                tokenList[tokenId] = tokenList[tokenId] || {
+                    balance: '0',
+                    fundFloat: '0',
+                    tokenSymbol,
+                    decimals: '0'
+                };
+                tokenList[tokenId].icon = defaultToken.icon;
+            }
+
+            const token = tokenList[this.tokenInfo.tokenId] || {};
+            return token.balance || 0;
+        },
+        haveVote() {
+            return (
+                this.voteList[0]
+                && (this.voteList[0].voteStatus === 'voting'
+                    || this.voteList[0].voteStatus === 'voted')
+            );
+        },
+        voteHeadList() {
+            const headList = [];
+            const keyList = [ 'nodeName', 'nodeStatusText', 'voteNum', 'voteStatusText', 'operateKey' ];
+            for (let i = 0; i < this.$t('walletVote.section1.head').length; i++) {
+                headList.push({
+                    text: this.$t('walletVote.section1.head')[i],
+                    cell: keyList[i]
+                });
+            }
+            return headList;
+        },
+        voteList() {
+            if (!this.tokenInfo) {
+                return [];
+            }
+
+            const c = voteRecord => {
+                const data = Object.assign({}, voteRecord);
+
+                // Update nodestatus from nodelist or voteNum from balance
+                this.nodeList.some(v => v.nodeName === data.nodeName)
+                    ? (data.nodeStatus = 1)
+                    : (data.nodeStatus = 2);
+
+                // VoteNotWork first
+                if (this.voteData[0] && this.voteData[0].nodeName === data.nodeName) {
+                    data.nodeStatus = this.voteData[0].nodeStatus;
+                }
+                data.nodeStatus === 2 && (data.voteStatus = 'voteNotWork');
+                data.nodeStatusText = this.$t('walletVote.section1.nodeStatusMap')[data.nodeStatus];
+                data.voteStatusText = this.$t('walletVote.section1.voteStatusMap')[data.voteStatus];
+
+                // Tans
+                data.voteNum = BigNumber.toBasic(data.balance, this.tokenInfo.decimals) || this.balance || 0;
+                data.operate = this.$t('walletVote.section1.operateBtn');
+
+                return data;
+            };
+
+            if (this.cache) {
+                // Update cache
+                if (this.cache.voteStatus === 'voting'
+                    && this.voteData[0]
+                    && this.voteData[0].nodeName === this.cache.nodeName
+                ) {
+                    // Voting and voting success
+                    this.cleanCache();
+                } else if (this.cache.voteStatus === 'canceling'
+                    && this.voteData.length === 0
+                ) {
+                    // Cancel and cancel success
+                    this.cleanCache();
+                }
+            }
+
+            if (this.cache) {
+                return [c(this.cache)];
+            } else if (this.voteData[0]) {
+                return [c(this.voteData[0])];
+            }
+
+            return [];
+        },
+        nodeHeadList() {
+            const headList = [];
+            const keyList = [ 'rank', 'nodeName', 'nodeAddr', 'voteNum', 'operateKey' ];
+            const classList = [ '', 'clickable', 'clickable', '', 'clickable' ];
+            for (let i = 0; i < this.$t('walletVote.section2.head').length; i++) {
+                headList.push({
+                    text: this.$t('walletVote.section2.head')[i],
+                    cell: keyList[i],
+                    cellClass: classList[i]
+                });
+            }
+            return headList;
+        },
+        nodeList() {
+            if (!this.tokenInfo) {
+                return [];
+            }
+
+            return this.nodeData.map(v => {
+                // Tans
+                v.voteNum = BigNumber.toBasic(v.voteNum, this.tokenInfo.decimals) || 0;
+                v.operate = this.$t('walletVote.section2.operateBtn');
+                return v;
+            }).filter(v => {
+                if (this.filterKey.trim() === '') {
+                    return true;
+                }
+
+                return new RegExp(this.filterKey.trim(), 'i').test(v.nodeName)
+                        || new RegExp(this.filterKey.trim(), 'i').test(v.nodeAddr);
+            });
+        },
+        nodeNoDataText() {
+            return this.filterKey ? this.$t('walletVote.section2.noSearchData') : this.$t('hint.noData');
+        },
+        activeAcc() {
+            return this.$store.state.wallet.activeAcc;
+        }
+    },
+    watch: {
+        activeAcc() {
+            this.startVoteData();
+        }
+    },
     methods: {
+        startVoteData() {
+            this.voteDataTimer && this.voteDataTimer.stop();
+            this.voteDataTimer = null;
+            this.voteDataTimer = new timer(this.updateVoteData, 3 * 1000);
+            this.voteDataTimer.start();
+        },
+        clickCell(cell, item) {
+            if (cell === 'nodeName') {
+                this.goToNodeDetail(item.nodeName);
+                return;
+            }
+
+            if (cell === 'nodeAddr') {
+                this.goToDetail(item.nodeAddr);
+                return;
+            }
+        },
         cleanCache() {
             this.cache = null;
         },
@@ -119,8 +262,7 @@ export default {
             this.isResisterTipsShow = !this.isResisterTipsShow;
         },
         updateVoteData() {
-            const activeAccount = this.$store.state.wallet.activeAcc;
-            return activeAccount.getVoteInfo().then(result => {
+            return this.activeAcc.getVoteInfo().then(result => {
                 this.voteData = result ? [result] : [];
                 this.voteData[0] && (this.voteData[0].voteStatus = 'voted');
                 return this.voteData;
@@ -227,119 +369,12 @@ export default {
                 exchange: this.haveVote
             }, true);
         }
-    },
-    computed: {
-        balance() {
-            const tokenList = [].concat(this.$store.getters.balanceInfo);
-            for (const tokenId in this.$store.state.ledger.defaultTokenIds) {
-                if (!this.$store.state.ledger.tokenInfoMaps[tokenId] && !tokenList[tokenId]) {
-                    break;
-                }
-
-                const token = this.$store.state.ledger.tokenInfoMaps[tokenId] || tokenList[tokenId];
-                const defaultToken = this.$store.state.ledger.defaultTokenIds[tokenId];
-                const tokenSymbol = token.tokenSymbol || defaultToken.tokenSymbol;
-
-                tokenList[tokenId] = tokenList[tokenId] || {
-                    balance: '0',
-                    fundFloat: '0',
-                    tokenSymbol,
-                    decimals: '0'
-                };
-                tokenList[tokenId].icon = defaultToken.icon;
-            }
-
-            const token = tokenList[this.tokenInfo.tokenId] || {};
-            return token.balance || 0;
-        },
-        haveVote() {
-            return (
-                this.voteList[0]
-                && (this.voteList[0].voteStatus === 'voting'
-                    || this.voteList[0].voteStatus === 'voted')
-            );
-        },
-        voteList() {
-            if (!this.tokenInfo) {
-                return [];
-            }
-
-            const c = voteRecord => {
-                const data = Object.assign({}, voteRecord);
-
-                // Update nodestatus from nodelist or voteNum from balance
-                this.nodeList.some(v => v.nodeName === data.nodeName)
-                    ? (data.nodeStatus = 1)
-                    : (data.nodeStatus = 2);
-
-                // VoteNotWork first
-                if (this.voteData[0] && this.voteData[0].nodeName === data.nodeName) {
-                    data.nodeStatus = this.voteData[0].nodeStatus;
-                }
-                data.nodeStatus === 2 && (data.voteStatus = 'voteNotWork');
-                data.nodeStatusText = this.$t('walletVote.section1.nodeStatusMap')[data.nodeStatus];
-                data.voteStatusText = this.$t('walletVote.section1.voteStatusMap')[data.voteStatus];
-
-                // Tans
-                data.voteNum = BigNumber.toBasic(data.balance, this.tokenInfo.decimals) || this.balance || 0;
-                data.operate = this.$t('walletVote.section1.operateBtn');
-
-                return data;
-            };
-
-            if (this.cache) {
-                // Update cache
-                if (this.cache.voteStatus === 'voting'
-                    && this.voteData[0]
-                    && this.voteData[0].nodeName === this.cache.nodeName
-                ) {
-                    // Voting and voting success
-                    this.cleanCache();
-                } else if (this.cache.voteStatus === 'canceling'
-                    && this.voteData.length === 0
-                ) {
-                    // Cancel and cancel success
-                    this.cleanCache();
-                }
-            }
-
-            if (this.cache) {
-                return [c(this.cache)];
-            } else if (this.voteData[0]) {
-                return [c(this.voteData[0])];
-            }
-
-            return [];
-        },
-        nodeList() {
-            if (!this.tokenInfo) {
-                return [];
-            }
-
-            return this.nodeData.map(v => {
-                // Tans
-                v.voteNum = BigNumber.toBasic(v.voteNum, this.tokenInfo.decimals) || 0;
-                v.operate = this.$t('walletVote.section2.operateBtn');
-                return v;
-            }).filter(v => {
-                if (this.filterKey.trim() === '') {
-                    return true;
-                }
-
-                return new RegExp(this.filterKey.trim(), 'i').test(v.nodeName)
-                        || new RegExp(this.filterKey.trim(), 'i').test(v.nodeAddr);
-            });
-        }
-    },
-    beforeDestroy() {
-        this.nodeDataTimer && this.nodeDataTimer.stop();
-        this.voteDataTimer && this.voteDataTimer.stop();
     }
 };
 </script>
 
 <style lang="scss" scoped>
-@import "~assets/scss/table.scss";
+@import "~assets/scss/vars.scss";
 
 .vote {
     height: 100%;
@@ -347,6 +382,10 @@ export default {
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
+
+    .__tb_no_data {
+        border-top: 1px solid #f3f6f9;
+    }
 
     .filter {
         margin-top: 10px;
@@ -357,7 +396,7 @@ export default {
         padding-left: 10px;
         height: 18px;
         line-height: 18px;
-        font-family: $font-bold, arial, sans-serif;
+        @include font-family-bold();
         font-size: 18px;
         color: #1d2024;
     }
@@ -374,25 +413,12 @@ export default {
         }
     }
 
-    .__tb {
-        width: 100%;
-    }
-
     .vote_list {
         overflow-x: auto;
         overflow-y: hidden;
         margin: 40px 0;
         margin-bottom: 20px;
         min-height: 213px;
-
-        .seat {
-            height: 78px;
-            text-align: center;
-        }
-
-        .__tb_content {
-            overflow: visible;
-        }
     }
 
     .node_list {
@@ -406,75 +432,6 @@ export default {
         .tb_container {
             height: calc(100% - 64px);
             overflow: auto;
-        }
-
-        .__tb_cell {
-            min-width: 100px;
-            text-overflow: hidden;
-            margin: 0 5px;
-            text-overflow: ellipsis;
-
-            &:first-child {
-                width: 5%;
-                min-width: 30px;
-            }
-
-            &:nth-child(2) {
-                width: 30%;
-            }
-
-            &:nth-child(3) {
-                width: 40%;
-                min-width: 450px;
-            }
-
-            &:nth-child(4) {
-                width: 15%;
-                min-width: 150px;
-            }
-
-            &:last-child {
-                width: 5%;
-                min-width: 50px;
-            }
-        }
-    }
-
-    .__tb_cell {
-        min-width: 180px;
-
-        .reward {
-            margin-left: 10px;
-        }
-
-        &.nodename {
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            width: 150px;
-        }
-
-        .hoveraction {
-            &.tipsicon {
-                position: relative;
-                display: inline-block;
-                background: url(~assets/imgs/hover_help.svg);
-                overflow: visible;
-                width: 16px;
-                height: 16px;
-                vertical-align: sub;
-                cursor: pointer;
-
-                .unregister-tips {
-                    word-break: break-all;
-                    min-width: 314px;
-                    min-height: 100px;
-                    padding: 10px;
-                    font-size: 14px;
-                    color: #3e4a59;
-                    line-height: 20px;
-                }
-            }
         }
     }
 }

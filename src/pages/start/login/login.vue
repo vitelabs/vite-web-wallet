@@ -16,10 +16,9 @@
                         <div class="name __ellipsis">{{ currAcc.name }}</div>
                     </div>
 
-                    <div v-show="currAcc && currAcc.activeAddr" class="__btn __btn_input_active">
-                        <div class="name __ellipsis">{{ currAcc.name }}</div>
-                        <div class="address __ellipsis">{{ currAcc.showAddr }}</div>
-                    </div>
+                    <account-item v-show="currAcc && currAcc.activeAddr"
+                                  class="__btn"
+                                  :account="currAcc"></account-item>
 
                     <span :class="{
                         'slide': true,
@@ -64,11 +63,12 @@ import loading from 'components/loading.vue';
 import ellipsisAddr from 'utils/ellipsisAddr.js';
 import { getList, deleteOldAcc } from 'wallet';
 
+import accountItem from './accountItem.vue';
 import restore from '../restore.vue';
 import accountList from './accountList.vue';
 
 export default {
-    components: { accountList, loading, restore },
+    components: { accountList, loading, restore, accountItem },
     mounted() {
         this.init();
     },
@@ -261,31 +261,6 @@ export default {
         }
     }
 
-    .btn-list {
-        width: 100%;
-        text-align: center;
-
-        &.zh {
-            height: 20px;
-            line-height: 20px;
-        }
-
-        .line {
-            margin: 0 33px;
-            display: inline-block;
-            width: 1px;
-            height: 100%;
-            background: #e5edf3;
-            opacity: 0.3;
-            margin-bottom: -4px;
-        }
-
-        .__btn_link.en:first-child {
-            display: block;
-            margin-bottom: 10px;
-        }
-    }
-
     .switch-btn {
         display: inline-block;
         margin-bottom: 20px;
@@ -303,7 +278,7 @@ export default {
             display: inline-block;
             color: #fff;
             font-size: 14px;
-            font-family: $font-bold, arial, sans-serif;
+            @include font-family-bold();
             font-weight: 600;
             color: rgba(255, 255, 255, 1);
             line-height: 18px;
@@ -319,28 +294,3 @@ export default {
 }
 </style>
 
-<style lang="scss">
-@import "~assets/scss/vars.scss";
-
-.__btn_input_active {
-    border: 1px solid #d4dee7;
-    padding: 8px 40px 8px 20px;
-    text-align: left;
-
-    .name {
-        font-family: $font-bold, arial, sans-serif;
-        font-size: 14px;
-        color: #333;
-        line-height: 20px;
-    }
-
-    .address {
-        font-family: $font-normal-b, arial, sans-serif;
-        font-size: 12px;
-        line-height: 20px;
-        color: #333;
-    }
-
-    background: #fff;
-}
-</style>

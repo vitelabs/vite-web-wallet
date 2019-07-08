@@ -28,8 +28,7 @@
                     <div slot="after" @click="toggleAddrList" v-click-outside="closeAddrList" class="add-unit __pointer">
                         <span class="add-icon"></span>
                         <ul v-show="isShowAddrList" class="list">
-                            <li @click="addToAddr('mine')" class="toaddr __pointer">{{ $t('walletQuota.myAddr') }}</li>
-                            <li @click="addToAddr('dex')" class="toaddr __pointer">{{ $t('walletQuota.VX') }}</li>
+                            <li @click="addToAddrWithMine" class="toaddr __pointer">{{ $t('walletQuota.myAddr') }}</li>
                         </ul>
                     </div>
                 </vite-input>
@@ -49,7 +48,7 @@
 </template>
 
 <script>
-import { hdAddr, constant } from '@vite/vitejs';
+import { hdAddr } from '@vite/vitejs';
 import viteInput from 'components/viteInput';
 import { initPwd } from 'components/password/index.js';
 import BigNumber from 'utils/bigNumber';
@@ -166,8 +165,8 @@ export default {
         toggleAddrList() {
             this.isShowAddrList = !this.isShowAddrList;
         },
-        addToAddr(type) {
-            this.toAddr = type === 'mine' ? this.addr : constant.DexFund_Addr;
+        addToAddrWithMine() {
+            this.toAddr = this.addr;
         },
         validTx() {
             if (this.btnUnuse) {
@@ -234,7 +233,7 @@ export default {
         }
 
         .title {
-            font-family: $font-bold, arial, sans-serif;
+            @include font-family-bold();
             font-size: 14px;
             color: #1d2024;
             letter-spacing: 0.35px;
@@ -292,7 +291,7 @@ export default {
             right: -4px;
             padding: 10px;
             font-size: 14px;
-            font-family: $font-normal, arial, sans-serif;
+            @include font-family-normal();
             font-weight: 400;
             color: rgba(94, 104, 117, 1);
             line-height: 24px;

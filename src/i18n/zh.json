@@ -2,7 +2,7 @@
     "lang": "中文",
     "help": "帮助",
     "start": "开始",
-    "login": "登录账户",
+    "login": "登录",
     "regAcc": "注册账户",
     "dexToken": "开通交易对",
     "unlockAcc": "解锁当前账户",
@@ -21,6 +21,22 @@
     "withdrawHeight": "到期快照高度",
     "balance": "账户余额",
     "addrName": "地址{index}",
+    "guide": {
+        "close": "关闭",
+        "next": "下一步",
+        "closeTips": "点击关闭新手引导 (不推荐)",
+        "trade": [
+            "在这里管理您的钱包资产和交易所资产",
+            "查看当前委托和历史委托记录，掌握交易细节",
+            "参与挖矿，获取VX和交易所手续费分红 （挖矿分红）",
+            "体验钱包更多功能：抵押配额、超级节点、投票、一键置换、交易详情"
+        ],
+        "assets": [
+            "充币至交易所",
+            "提现至钱包",
+            "跨链充值提现"
+        ]
+    },
     "dealReminder": {
         "title": "成交提醒",
         "describe": "你于{time} 委托的 {amount} {ttoken} ({ftoken}/{ttoken})已完全成交，详细记录可在委托历史中查看。"
@@ -59,31 +75,35 @@
         "37010": "该订单状态不可以撤销"
     },
     "txType": {
-        "0": "注册SBP",
-        "1": "更新注册",
-        "2": "撤销注册",
-        "3": "提取奖励",
-        "4": "投票",
-        "5": "撤销投票",
-        "6": "获取配额",
-        "7": "取回配额抵押",
-        "8": "铸币",
-        "9": "代币增发",
-        "10": "代币销毁",
-        "11": "转移所有权",
-        "12": "修改代币类型",
-        "13": "取回抵押",
-        "14": "ViteX充值",
-        "15": "ViteX提现",
-        "16": "ViteX挂单",
-        "17": "ViteX撤单",
-        "18": "ViteX上币",
-        "19": "创建合约",
-        "20": "转账",
-        "21": "转账",
-        "22": "转账",
-        "23": "转账",
-        "25": "Genesis"
+        "SBPreg": "注册SBP",
+        "UpdateReg": "更新注册",
+        "RevokeReg": "撤销注册",
+        "RetrieveReward": "提取奖励",
+        "Voting": "投票",
+        "RevokeVoting": "撤销投票",
+        "GetQuota": "获取配额",
+        "WithdrawalOfQuota": "取回配额抵押",
+        "Mintage": "铸币",
+        "MintageIssue": "代币增发",
+        "MintageBurn": "代币销毁",
+        "MintageTransferOwner": "转移所有权",
+        "MintageChangeTokenType": "修改代币类型",
+        "MintageCancelPledge": "取回抵押",
+        "DexFundUserDeposit": "ViteX充值",
+        "DexFundUserWithdraw": "ViteX提现",
+        "DexFundNewOrder": "ViteX挂单",
+        "currDexFundNewOrder": "ViteX挂单",
+        "DexTradeCancelOrder": "ViteX撤单",
+        "DexFundNewMarket": "ViteX上币",
+        "CreateContractReq": "创建合约",
+        "DexFundPledgeForVx": "ViteX抵押",
+        "DexFundPledgeForVip": "ViteX VIP",
+        "TxReq": "转账",
+        "RewardReq": "转账",
+        "TxRes": "转账",
+        "TxResFail": "转账",
+        "SendRefund": "转账",
+        "GenesisReceive": "Genesis"
     },
     "btn": {
         "cancel": "取消",
@@ -221,7 +241,7 @@
             "availableExAmount":"交易所可用余额"
         },
         "actionType": {
-            "SEND": "发送",
+            "SEND": "转账",
             "RECEIVE": "接收",
             "CHARGE": "跨链转入",
             "WITHDRAW": "跨链转出",
@@ -414,7 +434,6 @@
         "maxAmt": "取回金额应在 [{minAmount}, {maxAmount}] 之内",
         "cancelLimitAmt": "抵押金额不能小于{num}",
         "withdrawalStaking": "取回抵押",
-        "VX": "挖矿VX",
         "myAddr": "我的",
         "confirm": {
             "help": {
@@ -441,7 +460,10 @@
             "total": "总计抵押 {amount} VITE",
             "amount": "抵押金额",
             "withdrawTime": "预计到期时间",
-            "unexpired": "还未到达取回时间，暂时无法取回抵押"
+            "unexpired": "还未到达取回时间，暂时无法取回抵押",
+            "vip": "此抵押为您开通交易所VIP金额，请前往交易所撤销VIP",
+            "mining": "此抵押为您交易所抵押挖矿金额，请前往交易所挖矿页面取回",
+            "other": "此抵押为您通过其他方式抵押，不支持在此处取回"
         }
     },
     "walletTransList": {
@@ -684,7 +706,25 @@
             "priceNotNull": "金额不能为空",
             "amountNotNull": "成交额不能为空",
             "quantityNotNull": "数量不能为空",
-            "bigger0": "数额必须大于0"
+            "bigger0": "数额必须大于0",
+            "cancelVip": "取消",
+            "openVip": "开通",
+            "dexFee": "交易所基础费率：{fee}",
+            "operatorFee": "运营商收取费率：{fee}",
+            "vipFee": "VIP特权抵扣：{fee}"
+        },
+        "vipConfirm": {
+            "cancelVip": "取消VIP",
+            "openVip": "开通VIP",
+            "openStakingAmount": "开通VIP抵押金额",
+            "cancelStakingAmount": "可取回抵押金额",
+            "noBalance": "交易所可用余额不足",
+            "openHint": "VIP开通后，可享有降低0.1%手续费特权，开通VIP需抵押10000VITE，30天后可手动取回",
+            "cancelHint": "预计 {time} 可取回抵押，取回抵押后，您将无法再使用VIP特权",
+            "openSuccess": "申请开通VIP成功，稍后生效",
+            "openFail": "开通失败",
+            "cancelSuccess": "申请取消VIP成功",
+            "cancelFail": "取消失败"
         }
     },
     "tradeAssets": {
@@ -824,5 +864,38 @@
             "search": "搜索",
             "reset": "重置"
         }
+    },
+    "tradeMining": {
+        "title": "挖矿",
+        "addQuota": "新增抵押挖矿",
+        "add": "增加",
+        "withdraw": "取回",
+        "tbHead": {
+            "date": "日期",
+            "fee": "交易手续费金额",
+            "mining": "挖矿金额",
+            "pledge": "抵押金额"
+        },
+        "txTitle": "交易挖矿总收益",
+        "quotaTitle": "抵押挖矿总收益",
+        "addHint": "每日约13:00(UTC+8)计算抵押挖矿收益；抵押生效后，您可3天后可手动取回",
+        "withdrawHint": "取回后，您将无法再挖矿VX",
+        "addTitle": "抵押VITE挖矿",
+        "withdrawTitle": "取回抵押VITE",
+        "addPlaceHolder": "请输入抵押金额，最少134VITE",
+        "withdrawPlaceHolder": "请输入取回金额，最少134VITE",
+        "addBtn": "提交抵押",
+        "withdrawBtn": "确认取回",
+        "stakingBalance": "可取回抵押余额"
+    },
+    "tradeDividend": {
+        "title": "分红",
+        "poolTitle": "手续费分红池",
+        "listTitle": "我的分红",
+        "date": "日期",
+        "VX": "持有VX",
+        "coin": "分红币种",
+        "amount": "分红金额",
+        "price": "分红总估值"
     }
 }

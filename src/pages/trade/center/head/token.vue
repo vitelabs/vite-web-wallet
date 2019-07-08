@@ -37,7 +37,7 @@
             </div>
             <div class="token-row __pointer">
                 <span class="token-title">{{ $t('trade.head.gateway') }} :</span>
-                <span>{{ tokenDetail.gateway || '--' }}</span>
+                <span>{{ tokenDetail.gateway ? tokenDetail.gateway.name || '--' : '--' }}</span>
             </div>
             <div class="token-row">
                 <span class="token-title">{{ $t('trade.head.tokenDigit') }} :</span>
@@ -166,7 +166,7 @@ export default {
     .t-item {
         overflow: hidden;
         font-size: 12px;
-        font-family: $font-bold, arial, sans-serif;
+        @include font-family-bold();
         font-weight: 600;
         color: rgba(29, 32, 36, 1);
         line-height: 14px;
@@ -191,7 +191,7 @@ export default {
 
         &.id {
             display: flex;
-            font-family: $font-normal, arial, sans-serif;
+            @include font-family-normal();
             font-size: 12px;
             font-weight: 400;
             color: $blue;
@@ -215,7 +215,7 @@ export default {
         background: rgba(255, 255, 255, 1);
         box-shadow: 0 5px 20px 0 rgba(176, 192, 237, 0.69);
         padding: 10px;
-        font-family: $font-normal, arial, sans-serif;
+        @include font-family-normal();
         font-weight: 400;
         font-size: 11px;
 

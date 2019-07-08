@@ -130,7 +130,7 @@ export default {
     .tx-pair-item {
         flex: 1;
         font-size: 12px;
-        font-family: $font-bold, arial, sans-serif;
+        @include font-family-bold();
         font-weight: 600;
         line-height: 16px;
         .item-title {
@@ -157,7 +157,7 @@ export default {
                 color: $up-font-color;
             }
             span {
-                font-family: $font-normal, arial, sans-serif;
+                @include font-family-normal();
                 font-weight: 400;
                 color: rgba(94,104,117,1);
             }

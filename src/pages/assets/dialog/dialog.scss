@@ -1,23 +1,27 @@
+@import "~assets/scss/vars.scss";
+
 @mixin block {
-  .block__title {
-    height: 16px;
-    font-size: 14px;
-    font-family: PingFangSC-Semibold;
-    font-weight: 600;
-    color: rgba(29, 32, 36, 1);
-    line-height: 16px;
-    margin-top: 20px;
-    display: flex;
-    justify-content: space-between;
-    .err {
-      color: #ff2929;
-      font-size: 12px;
+    .block__title {
+        height: 16px;
+        font-size: 14px;
+        @include font-family-bold();
+        font-weight: 600;
+        color: rgba(29, 32, 36, 1);
+        line-height: 16px;
+        margin-top: 20px;
+        display: flex;
+        justify-content: space-between;
+        .err {
+            color: #ff2929;
+            font-size: 12px;
+        }
+        &:first-child {
+            margin-top: 0;
+        }
     }
-    &:first-child {
-      margin-top: 0;
-    }
-  }
-  .block__content {
+}
+
+.block__content {
     position: relative;
     height: 40px;
     border-radius: 2px;
@@ -35,37 +39,36 @@
     justify-content: space-between;
 
     .all {
-      border-radius: 2px;
-      background: #007aff;
-      color: #fff;
-      cursor: pointer;
-      font-size: 12px;
-      padding: 0 6px;
-      height: 18px;
-      line-height: 18px;
-      float: right;
-      display: flex;
-      word-break: keep-all;
+        border-radius: 2px;
+        background: #007aff;
+        color: #fff;
+        cursor: pointer;
+        font-size: 12px;
+        padding: 0 6px;
+        height: 18px;
+        line-height: 18px;
+        float: right;
+        display: flex;
+        word-break: keep-all;
     }
     .token__title {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      img {
-        width: 20px;
-        height: 20px;
-        margin-right: 10px;
-      }
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        img {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+        }
     }
     input {
-      width: 100%;
+        width: 100%;
     }
     .light {
-      color: #5e6875;
+        color: #5e6875;
     }
     &.edit {
-      text-align: left;
-      background: rgba(243, 246, 249, 1);
+        text-align: left;
+        background: rgba(243, 246, 249, 1);
     }
-  }
 }

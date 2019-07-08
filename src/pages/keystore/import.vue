@@ -139,7 +139,7 @@ export default {
     background: #fff;
     .address {
         width: 100%;
-        font-family: $font-normal-b, arial, sans-serif;
+        font-family: $font-normal-b;
         font-size: 12px;
         line-height: 20px;
         color: #333;

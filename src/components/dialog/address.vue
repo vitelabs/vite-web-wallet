@@ -6,17 +6,16 @@
             @click="copy"
             class="title_icon copy __pointer"
         />
-        <copyOK :copySuccess="copySuccess"></copyOK>
+        <copy ref="copyDom"></copy>
     </div>
 </template>
 
 <script>
 import qrcode from 'components/qrcode';
-import copyOK from 'components/copyOK';
-import copy from 'utils/copy';
+import copy from 'components/copy';
 
 export default {
-    components: { qrcode, copyOK },
+    components: { qrcode, copy },
     props: {
         title: {
             type: String,
@@ -27,16 +26,9 @@ export default {
             default: ''
         }
     },
-    data() {
-        return { copySuccess: false };
-    },
     methods: {
         copy() {
-            copy(this.address);
-            this.copySuccess = true;
-            setTimeout(() => {
-                this.copySuccess = false;
-            }, 1000);
+            this.$refs.copyDom.copy(this.address);
         }
     }
 };
@@ -53,7 +45,7 @@ export default {
     font-size: 14px;
     letter-spacing: 0.35px;
     padding-bottom: 11px;
-    font-family: $font-bold, arial, sans-serif;
+    @include font-family-bold();
 }
 
 .title_icon {

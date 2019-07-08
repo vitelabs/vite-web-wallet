@@ -2,7 +2,7 @@
 
 .dex {
     font-size: 12px;
-    font-family: $font-normal, arial, sans-serif;
+    @include font-family-normal();
     font-weight: 400;
     color: rgba(94,104,117,1);
     .__row {
@@ -22,7 +22,7 @@
         margin-top: 20px;
         line-height: 16px;
         font-size: 12px;
-        font-family: $font-normal, arial, sans-serif;
+        @include font-family-normal();
         font-weight: 400;
         color: rgba(94,104,117,1);
         span {
@@ -41,7 +41,7 @@
     }
     .no-input {
         font-size: 12px;
-        font-family: $font-normal, arial, sans-serif;
+        @include font-family-normal();
         font-weight: 400;
         color: rgba(94,104,117,1);
         box-sizing: border-box;
@@ -77,7 +77,7 @@
 
     .__row-t {
         position: relative;
-        font-family: $font-bold, arial, sans-serif;
+        @include font-family-bold();
         font-size: 14px;
         color: #1D2024;
         letter-spacing: 0.35px;
@@ -98,7 +98,7 @@
         line-height: normal;
         background: rgba(243,246,249,1);
         &.__light {
-            font-family: $font-normal, arial, sans-serif;
+            @include font-family-normal();
             font-weight: 400;
             color: rgba(94,104,117,1);
         }

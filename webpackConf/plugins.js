@@ -13,6 +13,7 @@ const Buffer_Path = path.join(__dirname, '../node_modules/buffer/index.js');
 const goViteServer = {
     production: '\'wss://api.vitewallet.com/ws\'',
     test: '\'wss://premainnet.vitewallet.com/test/ws\'',
+    // dev: '\'ws:192.168.31.8:41420\'',
     dev: '\'wss://premainnet.vitewallet.com/test/ws\'',
     dexTestNet: '\'wss://testnet.vitewallet.com/beta/ws\''
 };
@@ -69,6 +70,8 @@ const plugins = [
         title: 'Vite Wallet',
         favicon: path.join(SRC_PATH, 'assets/imgs/logo.png'),
         template: TEMPLATE_PATH
+        // [TODO] Async Router
+        // chunksSortMode: 'none'
     }),
     new VueLoaderPlugin(),
     new webpack.DefinePlugin({

@@ -20,7 +20,7 @@
         <div v-click-outside="hideTokenList" class="__row">
             <div class="__row-t">
                 {{ $t('trade.dexToken.name') }}
-                <!-- <span class="link __pointer" @click="goNet">{{ $t('trade.dexToken.link') }}</span> -->
+                <span class="link __pointer" @click="goNet">{{ $t('trade.dexToken.link') }}</span>
             </div>
             <div @click="toggleTokenList" class="market input-wrapper __pointer">
                 {{ token ? token.symbol : '' }}<div class="down-icon"></div>
@@ -110,19 +110,23 @@ export default {
             }
             return this.tokenList;
         },
+        rawBalance() {
+            if (!this.viteTokenInfo) {
+                return null;
+            }
+            const list = this.$store.getters.exBalanceList;
+            return list[this.viteTokenInfo.tokenId];
+        },
+        exViteBalance() {
+            return this.rawBalance ? this.rawBalance.availableExAmount : 0;
+        },
         isHaveBalance() {
             if (!this.viteTokenInfo) {
                 return false;
             }
 
-            const viteBalance = this.$store.getters.balanceInfo
-                && this.$store.getters.balanceInfo[this.viteTokenInfo.tokenId]
-                ? this.$store.getters.balanceInfo[this.viteTokenInfo.tokenId].balance || 0
-                : 0;
-            const viteAmount = BigNumber.toMin(viteBalance, this.viteTokenInfo.decimals);
             const amount = BigNumber.toMin(this.spend, this.viteTokenInfo.decimals);
-
-            return BigNumber.compared(viteAmount, amount) >= 0;
+            return BigNumber.compared(this.exViteBalance, amount) >= 0;
         }
     },
     watch: {
@@ -230,7 +234,6 @@ export default {
             };
 
             sendTx('dexFundNewMarket', {
-                amount: BigNumber.toMin(spend, this.viteTokenInfo.decimals),
                 tradeToken: this.token.tokenId,
                 quoteToken: this.market.tokenId
             }).then(() => {
@@ -251,7 +254,7 @@ export default {
 
 .link {
     float: right;
-    font-family: $font-normal, arial, sans-serif;
+    @include font-family-normal();
     font-weight: 400;
     color: rgba(0, 122, 255, 1);
 }
@@ -299,7 +302,7 @@ export default {
     border-radius: 2px;
     border: 1px solid rgba(212, 222, 231, 1);
     font-size: 12px;
-    font-family: $font-normal, arial, sans-serif;
+    @include font-family-normal();
     font-weight: 400;
     color: rgba(206, 209, 213, 1);
 
@@ -350,4 +353,3 @@ export default {
     max-width: 515px;
 }
 </style>
-

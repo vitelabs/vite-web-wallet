@@ -137,7 +137,7 @@ export default {
         padding: 12px 18px;
         display: flex;
         justify-content: space-between;
-        font-family: $font-bold, arial, sans-serif;
+        @include font-family-bold();
         font-size: 14px;
         color: #fff;
         background: rgba(38, 142, 255, 1);

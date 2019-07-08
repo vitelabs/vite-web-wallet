@@ -2,37 +2,37 @@
     <div class="trans-list-wrapper __wrapper">
         <sec-title class="title" :isShowHelp="false"></sec-title>
         <div class="trans-list-content">
-            <table-list class="big-trans"
-                        :headList="[ {
-                            class: 'tType',
-                            text: this.$t('walletTransList.tType.title'),
-                            cell: 'type'
-                        }, {
-                            class: 'status',
-                            text: this.$t('walletTransList.status.title'),
-                            cell: 'status'
-                        }, {
-                            class: 'time',
-                            text: this.$t('walletTransList.timestamp'),
-                            cell: 'date'
-                        }, {
-                            class: 'address',
-                            text: this.$t('walletTransList.tAddress'),
-                            cell: 'transAddr'
-                        }, {
-                            class: 'sum',
-                            text: this.$t('walletTransList.sum'),
-                            cell: 'amount'
-                        }, {
-                            class: 'token',
-                            text: 'Token',
-                            cell: 'tokenSymbol'
-                        } ]"
-                        :contentList="transList" :clickRow="goDetail">
+            <wallet-table class="wallet-trans-list-table"
+                          :headList="[ {
+                              class: 'tType',
+                              text: this.$t('walletTransList.tType.title'),
+                              cell: 'type'
+                          }, {
+                              class: 'status',
+                              text: this.$t('walletTransList.status.title'),
+                              cell: 'status'
+                          }, {
+                              class: 'time',
+                              text: this.$t('walletTransList.timestamp'),
+                              cell: 'date'
+                          }, {
+                              class: 'address',
+                              text: this.$t('walletTransList.tAddress'),
+                              cell: 'transAddr'
+                          }, {
+                              class: 'sum',
+                              text: this.$t('walletTransList.sum'),
+                              cell: 'amount'
+                          }, {
+                              class: 'token',
+                              text: 'Token',
+                              cell: 'tokenSymbol'
+                          } ]"
+                          :contentList="transList" :clickRow="goDetail">
 
                 <img v-for="(item, i) in transList" :key="i"
                      :slot="`${i}typeBefore`" class="icon"
-                     :src="`${ txImgs[item.builtinTxType] ? txImgs[item.builtinTxType] : txTransImg }`"/>
+                     :src="`${ txImgs[item.txType] ? txImgs[item.txType] : txTransImg }`"/>
 
                 <span v-for="(item, i) in transList" :key="i"
                       :slot="`${i}statusBefore`"
@@ -51,14 +51,12 @@
 
                 <pagination slot="tableBottom" class="__tb_pagination" :currentPage="currentPage + 1"
                             :totalPage="+totalPage" :toPage="toPage"></pagination>
-            </table-list>
+            </wallet-table>
         </div>
     </div>
 </template>
 
 <script>
-import { constant } from '@vite/vitejs';
-
 import txQuotaImg from 'assets/imgs/txQuota.svg';
 import txRegImg from 'assets/imgs/txReg.svg';
 import txRewardImg from 'assets/imgs/txReward.svg';
@@ -68,14 +66,14 @@ import txVoteImg from 'assets/imgs/txVote.svg';
 import txVxImg from 'assets/imgs/txVx.svg';
 
 import pagination from 'components/pagination.vue';
-import tableList from 'components/tableList.vue';
+import walletTable from 'components/table/index.vue';
 import secTitle from 'components/secTitle';
 import date from 'utils/date.js';
 import { timer } from 'utils/asyncFlow';
 import BigNumber from 'utils/bigNumber';
 import ellipsisAddr from 'utils/ellipsisAddr.js';
+import openUrl from 'utils/openUrl.js';
 
-const { BuiltinTxType } = constant;
 const txImgs = {
     SBPreg: txRegImg,
     UpdateReg: txRegImg,
@@ -94,6 +92,7 @@ const txImgs = {
     DexFundUserDeposit: txVxImg,
     DexFundUserWithdraw: txVxImg,
     DexFundNewOrder: txVxImg,
+    currDexFundNewOrder: txVxImg,
     DexTradeCancelOrder: txVxImg,
     DexFundNewMarket: txVxImg,
     CreateContractReq: txTransImg,
@@ -108,10 +107,13 @@ const txImgs = {
 let transListInst = null;
 
 export default {
-    components: { pagination, tableList, secTitle },
+    components: { pagination, walletTable, secTitle },
     mounted() {
         this.currentPage = this.$store.state.transList.currentPage;
         this.startLoopTransList();
+    },
+    beforeDestroy() {
+        this.stopLoopTransList();
     },
     data() {
         return {
@@ -135,7 +137,7 @@ export default {
             const nowList = [];
 
             transList.forEach(trans => {
-                const txType = !trans.rawData.txType && trans.rawData.txType !== 0 ? txImgs.length - 1 : trans.rawData.txType;
+                const txType = trans.rawData.txType || 'TxReq';
 
                 const status = [ 'unconfirmed', 'confirms', 'confirmed' ][trans.status];
                 const statusText = this.$t(`walletTransList.status.${ status }`) + (status === 'confirms' ? `(${ trans.confirms })` : '');
@@ -148,7 +150,7 @@ export default {
                 amount = amount || '--';
 
                 nowList.push({
-                    builtinTxType: BuiltinTxType[txType],
+                    txType,
                     type: this.$t(`txType.${ txType }`),
                     date: date(trans.timestamp, this.$i18n.locale),
                     status: '',
@@ -168,13 +170,15 @@ export default {
             return nowList;
         }
     },
-    beforeDestroy() {
-        this.stopLoopTransList();
+    watch: {
+        address() {
+            this.startLoopTransList();
+        }
     },
     methods: {
         goDetail(trans) {
             const locale = this.$i18n.locale === 'zh' ? 'zh/' : '';
-            window.open(`${ process.env.viteNet }${ locale }transaction/${ trans.rawData.hash }`);
+            openUrl(`${ process.env.viteNet }${ locale }transaction/${ trans.rawData.hash }`);
         },
 
         toPage(pageNumber) {
@@ -232,64 +236,29 @@ export default {
         overflow: auto;
         flex: 1;
     }
-}
+    .pink {
+        @include font-family-bold();
+        color: #ea60ac;
+    }
 
-</style>
+    .blue {
+        @include font-family-bold();
+        color: #007aff;
+    }
 
-<style lang="scss">
-@import "~assets/scss/vars.scss";
+    .green {
+        @include font-family-bold();
+        color: #5bc500;
+    }
 
-.tType {
-    min-width: 230px;
-    width: 15%;
-}
+    .red {
+        @include font-family-bold();
+        color: #ff0008;
+    }
 
-.status {
-    min-width: 120px;
-    width: 10%;
-}
-
-.time {
-    min-width: 200px;
-    width: 20%;
-}
-
-.address {
-    min-width: 240px;
-    width: 25%;
-}
-
-.sum {
-    width: 14%;
-    min-width: 150px;
-}
-
-.token {
-    min-width: 70px;
-}
-
-.pink {
-    font-family: $font-bold, arial, sans-serif;
-    color: #ea60ac;
-}
-
-.blue {
-    font-family: $font-bold, arial, sans-serif;
-    color: #007aff;
-}
-
-.green {
-    font-family: $font-bold, arial, sans-serif;
-    color: #5bc500;
-}
-
-.red {
-    font-family: $font-bold, arial, sans-serif;
-    color: #ff0008;
-}
-
-.icon {
-    margin-right: 6px;
-    margin-bottom: -2px;
+    .icon {
+        margin-right: 6px;
+        margin-bottom: -2px;
+    }
 }
 </style>

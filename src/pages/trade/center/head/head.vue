@@ -124,7 +124,7 @@ export default {
     flex-wrap: wrap;
     box-sizing: border-box;
     padding: 0px 14px 10px;
-    font-family: $font-bold, arial, sans-serif;
+    @include font-family-bold();
     font-size: 12px;
     font-weight: 600;
     line-height: 16px;
@@ -148,7 +148,7 @@ export default {
             flex: 1;
         }
         .token-title {
-            font-family: $font-normal, arial, sans-serif;
+            @include font-family-normal();
             color: #5e6875;
             font-weight: 400;
             white-space: nowrap;

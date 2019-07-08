@@ -11,15 +11,18 @@
             </div>
             <div v-show="singleBtn || leftBtnTxt || rightBtnTxt" class="bottom">
                 <div v-show="singleBtn" class="__btn btn-single __btn_all_in __pointer"
-                     :class="{'unuse': btnUnuse }"
-                     @click="_leftBtnClick">{{ leftBtnTxt }}</div>
+                     :class="{'unuse': btnUnuse && !isLoading }"
+                     @click="_leftBtnClick">
+                    <span v-show="!isLoading">{{ leftBtnTxt }}</span>
+                    <loading v-show="isLoading" loadingType="dot"></loading>
+                </div>
                 <div v-show="!singleBtn" class="__btn btn-left __pointer"
                      @click="_leftBtnClick">{{ leftBtnTxt }}</div>
                 <div v-show="!singleBtn" class="__btn __btn_all_in __pointer"
-                     :class="{'unuse': btnUnuse && !isShowLoading }"
+                     :class="{'unuse': btnUnuse && !isLoading }"
                      @click="_rightBtnClick">
-                    <span v-show="!isShowLoading || !btnUnuse">{{ rightBtnTxt }}</span>
-                    <loading v-show="btnUnuse && isShowLoading" loadingType="dot"></loading>
+                    <span v-show="!isLoading">{{ rightBtnTxt }}</span>
+                    <loading v-show="isLoading" loadingType="dot"></loading>
                 </div>
             </div>
         </div>
@@ -32,7 +35,7 @@ import loading from 'components/loading.vue';
 export default {
     components: { loading },
     props: {
-        isShowLoading: {
+        isLoading: {
             type: Boolean,
             default: false
         },
@@ -83,13 +86,13 @@ export default {
     },
     methods: {
         _rightBtnClick() {
-            if (this.btnUnuse) {
+            if (this.btnUnuse || this.isLoading) {
                 return;
             }
             this.rightBtnClick && this.rightBtnClick();
         },
         _leftBtnClick() {
-            if (this.singleBtn && this.btnUnuse) {
+            if (this.singleBtn && (this.btnUnuse || this.isLoading)) {
                 return;
             }
             this.leftBtnClick && this.leftBtnClick();
@@ -166,7 +169,7 @@ export default {
         height: 60px;
         line-height: 60px;
         padding-left: 30px;
-        font-family: $font-bold, arial, sans-serif;
+        @include font-family-bold();
         font-size: 16px;
         color: #fff;
 
@@ -187,7 +190,7 @@ export default {
         box-sizing: border-box;
         padding: 30px;
         overflow: auto;
-        font-family: $font-bold, arial, sans-serif;
+        @include font-family-bold();
         font-size: 18px;
         color: #1d2024;
         line-height: 26px;
@@ -205,7 +208,7 @@ export default {
             display: inline-block;
             width: 48%;
             max-width: 190px;
-            font-family: $font-bold, arial, sans-serif;
+            @include font-family-bold();
             color: #fff;
 
             &.btn-left {

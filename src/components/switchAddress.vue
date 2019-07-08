@@ -107,7 +107,7 @@ export default {
 .switch-address-wrapper {
     width: 100%;
     color: #73767A;
-    font-family: $font-bold, arial, sans-serif;
+    @include font-family-bold();
     font-weight: 600;
     font-size: 14px;
 
@@ -163,13 +163,13 @@ export default {
             }
             .name {
                 font-size: 12px;
-                font-family: $font-bold, arial, sans-serif;
+                @include font-family-bold();
                 font-weight: 600;
                 color: rgba(115,118,122,1);
             }
             .switch-address {
                 font-size: 11px;
-                font-family: $font-normal, arial, sans-serif;
+                @include font-family-normal();
                 font-weight: 400;
                 color: rgba(162,167,175,1);
             }

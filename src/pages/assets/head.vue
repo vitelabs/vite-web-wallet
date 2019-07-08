@@ -32,7 +32,7 @@
             <div class="head-right">
                 <SwitchAddr :isShowAddr="false"></SwitchAddr>
                 <span class="address-content">
-                    <Tips ref="tips"></Tips>
+                    <copy ref="copyDom"></copy>
                     <span class="addr_item">{{ activeAddr }}</span>
                     <QrcodePopup :qrcodeString="addressQrcode"
                     ><img
@@ -73,8 +73,7 @@ import SwitchAddr from 'components/switchAddress';
 import Pie from 'components/pie';
 import bigNumber from 'utils/bigNumber';
 import { utils } from '@vite/vitejs';
-import copy from 'utils/copy';
-import Tips from 'uiKit/tips';
+import copy from 'components/copy';
 import AssetSwitch from './assetSwitch';
 import { getTokenNameString } from 'utils/tokenParser';
 
@@ -84,12 +83,11 @@ const assetsType = {
     WALLET: 'WALLET'
 };
 export default {
-    components: { QrcodePopup, Tips, SwitchAddr, Pie, AssetSwitch },
+    components: { QrcodePopup, copy, SwitchAddr, Pie, AssetSwitch },
     data() {
         return {
             isShowNameInput: false,
             editName: '',
-            copySuccess: false,
             qrcode: null,
             qrcodeShow: false,
             assetsType: assetsType.TOTAL
@@ -196,8 +194,7 @@ export default {
             return `${ symbol } ${ (100 * v).toFixed(1) }%`;
         },
         copy() {
-            copy(this.activeAddr);
-            this.$refs.tips.tip(this.$t('hint.copy'));
+            this.$refs.copyDom.copy(this.activeAddr);
         },
 
         clearEditName() {
@@ -245,6 +242,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
+
 .click-able {
     cursor: pointer;
 }
@@ -311,6 +309,9 @@ export default {
                 width: 16px;
                 height: 16px;
                 margin-left: 10px;
+            }
+            .copy-wrapper {
+                top: -30px;
             }
         }
         .head-right {

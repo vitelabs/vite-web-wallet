@@ -12,14 +12,14 @@
                 {{ $t('tradeOrderHistory.title') }}
             </div>
         </div>
-        <openOrder v-if="tap==='openOrder'" :isEmbed="true" class="item"></openOrder>
-        <historyOrder v-if="tap==='historyOrder'" :isEmbed="true" class="item"></historyOrder>
+        <openOrder v-show="tap==='openOrder'" class="item"></openOrder>
+        <historyOrder v-show="tap==='historyOrder'" class="item"></historyOrder>
     </div>
 </template>
 
 <script>
-import historyOrder from '../orderHistory';
-import openOrder from '../openOrders';
+import openOrder from '../components/orderOpen.vue';
+import historyOrder from '../components/orderHistory.vue';
 
 export default {
     components: { historyOrder, openOrder },
@@ -70,10 +70,3 @@ export default {
     }
 }
 </style>
-
-<style lang="scss">
-.order .ex_tb {
-    box-shadow: none;
-}
-</style>
-

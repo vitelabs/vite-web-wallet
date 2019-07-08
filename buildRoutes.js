@@ -69,7 +69,7 @@ for (const key in routes) {
     const _k = routes[key];
 
     // [TODO] Async Route
-    // _routes += `{name: '${ _k.name }', path: '${ _k.path }', component: ()=>import(/* webpackChunkName: "group-foo" */\'${ _k.pagePath }\')`;
+    // _routes += `{name: '${ _k.name }', path: '${ _k.path }', component: ()=>import(\'${ _k.pagePath }\')`;
     _routes += `{name: '${ _k.name }', path: '${ _k.path }', component: ${ _k.component }`;
 
     const alias = routeConfig[key] && routeConfig[key].alias ? routeConfig[key].alias : _k.alias;
@@ -83,7 +83,7 @@ for (const key in routes) {
     _routes += ', children: [';
     _k.children.forEach(_kr => {
         // [TODO] Async Route
-        // _routes += `{name: '${ _kr.name }', path: '${ _kr.path }', component: ()=>import(/* webpackChunkName: "group-foo" */\\'${ _kr.pagePath }\')`;
+        // _routes += `{name: '${ _kr.name }', path: '${ _kr.path }', component: ()=>import(\'${ _kr.pagePath }\')`;
         _routes += `{name: '${ _kr.name }', path: '${ _kr.path }', component: ${ _kr.component }`;
         const alias = routeConfig[_kr.name] && routeConfig[_kr.name].alias ? routeConfig[_kr.name].alias : _kr.alias;
         alias && (_routes += `, alias: ${ JSON.stringify(alias) }`);

@@ -47,39 +47,39 @@
             <div class="__btn_all_in btn" @click="getOwnerToken">Get owner token list</div>
 
             <div class="list-wrapper">
-                <table-list :headList="[{
-                    class: 'mintage-table-big-item',
+                <wallet-table class="mintage-table" :headList="[{
+                    class: 'big-item __ellipsis',
                     text: 'tokenId',
                     cell: 'tokenId'
                 },{
-                    class: 'mintage-table-small-item',
+                    class: 'small-item __ellipsis',
                     text: 'decimals',
                     cell: 'decimals'
                 },{
-                    class: 'mintage-table-small-item',
+                    class: 'small-item __ellipsis',
                     text: 'isReIssuable',
                     cell: 'isReIssuable'
                 },{
-                    class: 'mintage-table-big-item',
+                    class: 'big-item __ellipsis',
                     text: 'maxSupply',
                     cell: 'maxSupply'
                 },{
-                    class: 'mintage-table-small-item',
+                    class: 'small-item __ellipsis',
                     text: 'ownerBurnOnly',
                     cell: 'ownerBurnOnly'
                 },{
-                    class: 'mintage-table-big-item',
+                    class: 'big-item __ellipsis',
                     text: 'totalSupply',
                     cell: 'totalSupply'
                 },{
-                    class: 'mintage-table-big-item',
+                    class: 'big-item __ellipsis',
                     text: 'tokenName',
                     cell: 'tokenName'
                 },{
-                    class: 'mintage-table-big-item',
+                    class: 'big-item __ellipsis',
                     text: 'tokenSymbol',
                     cell: 'tokenSymbol'
-                }]" :contentList="tokenList"></table-list>
+                }]" :contentList="tokenList"></wallet-table>
             </div>
         </div>
     </page-layout>
@@ -88,11 +88,15 @@
 <script>
 import pageLayout from 'components/pageLayout/index';
 import viteInput from 'components/viteInput';
-import tableList from 'components/tableList.vue';
+import walletTable from 'components/table/index.vue';
 import sendTx from 'utils/sendTx';
+// import { abi, utils } from '@vite/vitejs';
+
+// abi.decodeParameters({ 'type': 'function', 'name': 'Mint', 'inputs': [ { 'name': 'isReIssuable', 'type': 'bool' }, { 'name': 'tokenName', 'type': 'string' }, { 'name': 'tokenSymbol', 'type': 'string' }, { 'name': 'totalSupply', 'type': 'uint256' }, { 'name': 'decimals', 'type': 'uint8' }, { 'name': 'maxSupply', 'type': 'uint256' }, { 'name': 'ownerBurnOnly', 'type': 'bool' } ] },
+//     utils._Buffer.from('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAjhvJvwQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAI4byb8EAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAtjc3Rlc3R0b2tlbgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEQ1NUVAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=', 'base64').toString('hex'));
 
 export default {
-    components: { viteInput, tableList, pageLayout },
+    components: { viteInput, walletTable, pageLayout },
     created() {
         this.getOwnerToken();
     },
@@ -169,7 +173,7 @@ export default {
         height: 28px;
         line-height: 28px;
         font-size: 12px;
-        font-family: $font-normal, arial, sans-serif;
+        @include font-family-normal();
         font-weight: 400;
         color: #333;
         margin-top: 5px;
@@ -190,7 +194,7 @@ export default {
 
     .select-icon-wrapper {
         font-size: 11px;
-        font-family: $font-normal, arial, sans-serif;
+        @include font-family-normal();
         font-weight: 400;
         color: rgba(94, 104, 117, 1);
         margin-left: 12px;
@@ -225,16 +229,3 @@ export default {
     }
 }
 </style>
-
-<style lang="scss">
-@import "~assets/scss/vars.scss";
-
-.mintage-table-big-item {
-    min-width: 250px;
-}
-
-.mintage-table-small-item {
-    min-width: 110px;
-}
-</style>
-

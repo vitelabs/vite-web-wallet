@@ -88,7 +88,7 @@ export class subTask extends timer {
                 return;
             }
 
-            // console.log('[subTask]', this.subKey, data);
+            console.log('[subTask]', this.subKey, data);
             this.callback({ args, data });
         };
 
@@ -127,7 +127,7 @@ export class subTask extends timer {
             if (this.subKey !== currentKey) {
                 return;
             }
-            // console.log(this.key, data);
+            console.log(this.key, data);
             this.callback({ args, data });
         });
     }

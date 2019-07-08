@@ -9,7 +9,7 @@
         </div>
 
         <div class="wrapper">
-            <copyOK class="copy-wrapper" :copySuccess="copySuccess"></copyOK>
+            <copy ref="copyDome" class="copy-wrapper"></copy>
             <span class="item" :class="{
                 'long-item': mnemonicList.length === 12
             }" v-for="(item, index) in mnemonicList" :key="index">
@@ -45,12 +45,11 @@
 import { hdAddr } from '@vite/vitejs';
 import { saveHDAccount } from 'wallet';
 import process from 'components/process';
-import copyOK from 'components/copyOK';
+import copy from 'components/copy';
 import loading from 'components/loading.vue';
-import copy from 'utils/copy';
 
 export default {
-    components: { process, copyOK, loading },
+    components: { process, copy, loading },
     props: {
         name: {
             type: String,
@@ -75,7 +74,6 @@ export default {
             hdAddrObj,
             len: 12,
             agreeList: {},
-            copySuccess: false,
             isLoading: false
         };
     },
@@ -98,11 +96,7 @@ export default {
             this.agreeList = Object.assign({}, this.agreeList);
         },
         copy() {
-            copy(this.hdAddrObj.mnemonic);
-            this.copySuccess = true;
-            setTimeout(() => {
-                this.copySuccess = false;
-            }, 2000);
+            this.$refs.copyDome.copy(this.hdAddrObj.mnemonic);
         },
         change() {
             const bits = this.len === 12 ? 128 : 256;
@@ -201,7 +195,7 @@ export default {
         background: #00a3ff;
         border-radius: 2px;
         padding: 4px 10px;
-        font-family: $font-bold, arial, sans-serif;
+        @include font-family-bold();
         font-size: 12px;
         color: #fff;
         letter-spacing: 0;

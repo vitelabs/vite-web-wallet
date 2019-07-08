@@ -82,7 +82,7 @@ export default {
             let activeTxPair = list && list.length ? list[0] : null;
 
             list.forEach(_t => {
-                if (_t.tradeTokenSymbol === query.tradeTokenSymbol && _t.quoteTokenSymbol === query.quoteTokenSymbol) {
+                if (query.symbol && _t.symbol === query.symbol) {
                     activeTxPair = _t;
                 }
                 _l.push(_t);
@@ -217,7 +217,7 @@ export default {
         box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.1);
         font-size: 12px;
         color: #5E6875;
-        font-family: $font-normal, arial, sans-serif;
+        @include font-family-normal();
         font-weight: 400;
 
         &::after {

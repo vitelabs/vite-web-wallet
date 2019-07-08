@@ -3,45 +3,34 @@
         <div class="pre-title">
             <slot></slot>
         </div>
-        <img
-            src="../assets/imgs/copy_default.svg"
-            @click="copy"
-            class="title_icon copy __pointer"
-        />
-        <span
-            v-click-outside="closeQrCode"
-            ref="codeContainer"
-            class="title_icon __pointer qrcode"
-        >
-            <img
-                src="../assets/imgs/qrcode_default.svg"
-                @click="toggleQrCode"
-            />
+        <img src="../assets/imgs/copy_default.svg"
+             @click="copy" class="title_icon copy __pointer"/>
+        <span v-click-outside="closeQrCode"
+              ref="codeContainer"
+              class="title_icon __pointer qrcode">
+            <img src="../assets/imgs/qrcode_default.svg" @click="toggleQrCode"/>
             <div class="code-container" v-show="qrcodeShow">
                 <div class="code">
-                    <qrcode
-                        :text="addressQrcode"
-                        :options="{ size: 146 }"
-                        @genImage="getImage"
-                    ></qrcode>
+                    <qrcode :text="addressQrcode"
+                            :options="{ size: 146 }"
+                            @genImage="getImage"></qrcode>
                 </div>
                 <div class="btn" @click="downLoadQrCode">
                     {{ $t("saveQrcode") }}
                 </div>
             </div>
         </span>
-        <copyOK :copySuccess="copySuccess"></copyOK>
+        <copy ref="copyDom" class="copy-wrapper"></copy>
     </div>
 </template>
 
 <script>
 import qrcode from 'components/qrcode';
-import copyOK from 'components/copyOK';
-import copy from 'utils/copy';
+import copy from 'components/copy';
 import { fromBase64 } from 'utils/downloadImg';
 
 export default {
-    components: { qrcode, copyOK },
+    components: { qrcode, copy },
     props: {
         title: {
             type: String,
@@ -58,19 +47,13 @@ export default {
     },
     data() {
         return {
-            copySuccess: false,
             qrcode: null,
             qrcodeShow: false
         };
     },
     methods: {
         copy() {
-            copy(this.address);
-
-            this.copySuccess = true;
-            setTimeout(() => {
-                this.copySuccess = false;
-            }, 1000);
+            this.$refs.copyDom.copy(this.address);
         },
         getImage(i) {
             this.qrcode = i;
@@ -116,7 +99,7 @@ export default {
     font-size: 14px;
     letter-spacing: 0.35px;
     padding-bottom: 11px;
-    font-family: $font-bold;
+    @include font-family-bold();
     .pre-title {
         flex: 1;
     }

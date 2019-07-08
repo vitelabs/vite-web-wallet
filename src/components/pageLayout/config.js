@@ -6,6 +6,6 @@ export const sidebarMenuList = {
 };
 export const secondMenuList = {
     assets: [],
-    trade: [ 'tradeCenter', 'tradeOpenOrders', 'tradeOrderHistory' ],
+    trade: [ 'tradeCenter', 'tradeOpenOrders', 'tradeOrderHistory', 'tradeMining', 'tradeDividend' ],
     wallet: [ 'walletQuota', 'walletSBP', 'walletVote', 'walletTransList' ]
 };

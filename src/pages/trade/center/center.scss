@@ -31,7 +31,7 @@ $up-font-color: $green;
         line-height: 16px;
         padding: 0px 6px 3px;
         color: rgba(29,32,36,0.6);
-        font-family: $font-bold, arial, sans-serif;
+        @include font-family-bold();
         border-left: 1px solid rgba(205,204,204,1);
         &:first-child {
             border: none;
@@ -62,7 +62,7 @@ $up-font-color: $green;
     padding: 6px;
     line-height: 17px;
     font-size: 13px;
-    font-family: $font-bold, arial, sans-serif;
+    @include font-family-bold();
     font-weight: 600;
     color: rgba(29,32,36,0.6);
     background: #f7f9fb;

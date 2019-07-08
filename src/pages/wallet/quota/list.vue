@@ -3,7 +3,7 @@
         <div class="title">{{ $t('walletQuota.list.title') }}</div>
         <div class="total">{{ $t('walletQuota.list.total', { amount: totalAmount }) }}</div>
         <div class="list">
-            <table-list :headList="[{
+            <wallet-table class="wallet-quota-table" :headList="[{
                 class: 'addr __pointer',
                 text: $t('walletQuota.beneficialAddr'),
                 cell: 'addr'
@@ -35,19 +35,20 @@
                       :slot="`${i}cancelBefore`"
                       :class="{
                           'cancel': true,
-                          'active': item.isMaturity
+                          'active': item.isMaturity && !item.agent
                 }">{{ $t('walletQuota.withdrawalStaking') }}</span>
 
                 <pagination slot="tableBottom" class="__tb_pagination" :currentPage="currentPage + 1"
                             :totalPage="totalPage" :toPage="toPage"></pagination>
-            </table-list>
+            </wallet-table>
         </div>
     </div>
 </template>
 
 <script>
+import { constant } from '@vite/vitejs';
 import pagination from 'components/pagination.vue';
-import tableList from 'components/tableList.vue';
+import walletTable from 'components/table/index.vue';
 import { pwdConfirm } from 'components/password/index.js';
 import date from 'utils/date.js';
 import { timer } from 'utils/asyncFlow';
@@ -58,7 +59,7 @@ import { StatusMap } from 'wallet';
 let pledgeListInst;
 
 export default {
-    components: { pagination, tableList },
+    components: { pagination, walletTable },
     props: {
         tokenInfo: {
             type: Object,
@@ -113,7 +114,7 @@ export default {
                 return [];
             }
 
-            const pledgeList = this.$store.getters.pledgeList;
+            const pledgeList = this.$store.state.pledge.pledgeList;
 
             const nowList = [];
             pledgeList.forEach(pledge => {
@@ -126,19 +127,25 @@ export default {
                 const showAmount = BigNumber.toBasic(pledge.amount || 0, this.tokenInfo.decimals);
 
                 nowList.push({
+                    agent: pledge.agent,
+                    agentAddress: pledge.agentAddress,
+                    bid: pledge.bid,
                     beneficialAddr: pledge.beneficialAddr,
                     withdrawHeight: pledge.withdrawHeight,
                     amount: pledge.amount,
                     pledgeDate,
-                    addr: '',
                     showAddr: ellipsisAddr(pledge.beneficialAddr),
                     showAmount,
-                    cancel: '',
                     isMaturity
                 });
             });
 
             return nowList;
+        }
+    },
+    watch: {
+        address() {
+            this.startLoopPledgeList();
         }
     },
     methods: {
@@ -154,6 +161,17 @@ export default {
 
             if (!item.isMaturity) {
                 this.$toast(this.$t('walletQuota.list.unexpired'));
+                return;
+            }
+
+            if (item.agent) {
+                if (constant.DexFund_Addr === item.agentAddress && +item.bid === 1) {
+                    this.$toast(this.$t('walletQuota.list.mining'));
+                } else if (constant.DexFund_Addr === item.agentAddress && +item.bid === 2) {
+                    this.$toast(this.$t('walletQuota.list.vip'));
+                } else {
+                    this.$toast(this.$t('walletQuota.list.other'));
+                }
                 return;
             }
 
@@ -238,8 +256,18 @@ export default {
     border-radius: 2px;
 }
 
+.beneficial-addr {
+    font-size: 14px;
+    color: #007aff;
+}
+
+.beneficial-img {
+    margin-left: 8px;
+    margin-bottom: -1px;
+}
+
 .title {
-    font-family: $font-bold, arial, sans-serif;
+    @include font-family-bold();
     font-size: 18px;
     color: #1d2024;
     line-height: 32px;
@@ -252,57 +280,5 @@ export default {
     letter-spacing: 0.35px;
     line-height: 16px;
     margin-bottom: 14px;
-}
-</style>
-
-<style lang="scss">
-.list-wrapper .list .table-list {
-    min-width: 1260px;
-}
-
-.beneficial-addr {
-    font-size: 14px;
-    color: #007aff;
-}
-
-.beneficial-img {
-    margin-left: 8px;
-    margin-bottom: -1px;
-}
-
-.addr {
-    min-width: 240px;
-    width: 25%;
-}
-
-.list-wrapper .amount {
-    width: 17%;
-    min-width: 150px;
-}
-
-.height {
-    min-width: 185px;
-    width: 20%;
-}
-
-.time {
-    min-width: 200px;
-    width: 20%;
-}
-
-.operate {
-    min-width: 205px;
-}
-
-.cancel {
-    color: #ced1d5;
-
-    &.active {
-        color: #007aff;
-    }
-}
-
-.operate {
-    min-width: 210px;
 }
 </style>

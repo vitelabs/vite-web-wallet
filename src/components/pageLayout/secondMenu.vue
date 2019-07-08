@@ -2,23 +2,23 @@
     <div class="head">
         <ul class="tab-list-wrapper">
             <li v-for="(tab, index) in tabList" :key="index"
-                class="tab __pointer" :class="{ 'active': active === tab }"
+                class="tab __pointer" :class="{ 'active': $route.name === tab }"
                 @click="go(tab)" > {{ $t(`${tab}.title`) }}
             </li>
         </ul>
 
         <ul class="right-lab-list">
             <!-- <div class="tab __pointer" @click="goHelp">{{ $t('help') }}</div> -->
-            <div v-show="isHaveUsers && active.indexOf('assets') !== -1"
+            <div v-show="isHaveUsers && $route.name.indexOf('assets') !== -1"
                  @click="getTestToken" class="tab __pointer">{{ $t('wallet.getTestToken') }}</div>
             <div v-show="!isLogin" @click="dexStart" class="tab __pointer">
                 {{ isHaveUsers ? $t('unlockAcc') : $t('login')  }}</div>
             <div v-show="!isLogin" @click="dexChange" class="tab __pointer">
                 {{ isHaveUsers ? $t('changeAcc') : $t('register') }}</div>
-            <div v-show="active.indexOf('trade') !== -1" class="tab __pointer"
+            <div v-show="isHaveUsers && $route.name.indexOf('trade') !== -1" class="tab __pointer"
                  v-unlock-account="showToken" @noactiveacc="dexStart">
                 {{ $t('dexToken') }}</div>
-            <switch-addr class="switch-tab menu" v-show="active.indexOf('trade') !== -1" ></switch-addr>
+            <switch-addr class="switch-tab menu" v-show="$route.name !== 'assets'" ></switch-addr>
         </ul>
 
         <dex-token v-if="isShowDexToken" :close="closeToken"></dex-token>
@@ -44,14 +44,8 @@ export default {
             default: () => {}
         }
     },
-    mounted() {
-        this.$router.afterEach(to => {
-            this.active = to.name;
-        });
-    },
     data() {
         return {
-            active: this.$route.name,
             isShowDexToken: false,
             getTestTokenAble: true
         };
@@ -163,7 +157,7 @@ export default {
     .tab {
         color: #BDC1D1;
         font-size: 13px;
-        font-family: $font-bold, arial, sans-serif;
+        @include font-family-bold();
         font-weight: 600;
         display: inline-block;
         box-sizing: border-box;

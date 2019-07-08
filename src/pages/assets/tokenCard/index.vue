@@ -314,7 +314,7 @@ export default {
             }
         }
         &.title {
-            font-family: $font-bold;
+            @include font-family-bold();
             color: #5e6875;
             .icon {
                 height: 16px;

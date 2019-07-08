@@ -13,16 +13,24 @@ import { timer } from 'utils/asyncFlow';
 let quotaInst;
 
 export default {
-    computed: {
-        txNum() {
-            return this.$store.state.pledge.pledgeTransNum;
-        }
-    },
     mounted() {
         this.startLoopQuota();
     },
     beforeDestroy() {
         this.stopLoopQuota();
+    },
+    computed: {
+        txNum() {
+            return this.$store.state.pledge.pledgeTransNum;
+        },
+        addr() {
+            return this.$store.getters.activeAddr;
+        }
+    },
+    watch: {
+        addr() {
+            this.startLoopQuota();
+        }
     },
     methods: {
         startLoopQuota() {
@@ -47,7 +55,7 @@ export default {
 }
 
 .row {
-    font-family: $font-bold, arial, sans-serif;
+    @include font-family-bold();
 
     .title {
         font-size: 14px;

@@ -179,7 +179,7 @@ export default {
             .fee-tips{
                 color: #5E6875;
                 min-width: 150px;
-                font-family: $font-normal;
+                @include font-family-normal();
             }
         }
     }
@@ -190,7 +190,7 @@ export default {
     width: 100%;
     color: #FF2929;
     font-size: 14px;
-    font-family: $font-normal;
+    @include font-family-normal();
     margin-top: 6px;
     top: 14px;
     .dot {

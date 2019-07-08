@@ -71,13 +71,13 @@
 </template>
 
 <script>
+import { constant } from '@vite/vitejs';
 import viteInput from 'components/viteInput';
 import slider from 'components/slider';
 import sendTx from 'utils/sendTx';
 import BigNumber from 'utils/bigNumber';
 import { initPwd } from 'components/password/index.js';
 
-const taker = 0.0025;
 const maxDigit = 8;
 
 export default {
@@ -174,6 +174,9 @@ export default {
         }
     },
     computed: {
+        fee() {
+            return this.$store.getters.exFee;
+        },
         realPrice() {
             if (!this.rate || this.priceErr || !this.price) {
                 return '';
@@ -382,7 +385,7 @@ export default {
             !BigNumber.isEqual(amount, this.amount) && (this.amount = amount);
         },
 
-        // price = amount / quantity / (1+taker)
+        // price = amount / quantity / (1+fee)
         getPrice(quantity, amount) {
             const isRightQuantity = quantity
                                     && this.$validAmount(quantity) === 0
@@ -399,9 +402,9 @@ export default {
             }
 
             if (this.orderType === 'buy') {
-                quantity = BigNumber.multi(quantity, 1 + taker);
+                quantity = BigNumber.multi(quantity, 1 + this.fee);
             }
-            return BigNumber.dividedToNumber(amount, quantity, this.ttokenDigit, 'nofix');
+            return BigNumber.dividedCeil(amount, quantity, this.ttokenDigit, 'nofix');
         },
         getPercentBalance(percent, digit) {
             if (!this.balance || BigNumber.isEqual(this.balance, 0)) {
@@ -410,7 +413,7 @@ export default {
             const result = BigNumber.multi(percent, this.balance, digit, 'nofix');
             return BigNumber.isEqual(result, 0) ? '' : result;
         },
-        // amount = quantity * price * (1+taker)
+        // amount = quantity * price * (1+fee)
         getAmount(price, quantity) {
             const isRightPrice = price
                                 && this.$validAmount(price) === 0
@@ -431,9 +434,9 @@ export default {
             }
 
             const amount = BigNumber.multi(price, quantity);
-            return BigNumber.multi(amount, 1 + taker, this.ttokenDigit);
+            return BigNumber.multi(amount, 1 + this.fee, this.ttokenDigit);
         },
-        // quantity = amount/price/（1+taker)
+        // quantity = amount/price/（1+fee)
         getQuantity(price, amount) {
             const isRightPrice = price
                                 && this.$validAmount(price) === 0
@@ -449,14 +452,17 @@ export default {
                 return '';
             }
 
-            let minAmount = BigNumber.toMin(amount, this.ttokenDetail.tokenDecimals);
-            const minPrice = BigNumber.toMin(price, this.ttokenDetail.tokenDecimals);
+            const decimals = this.ttokenDetail ? this.ttokenDetail.tokenDecimals : 0;
+            let minAmount = BigNumber.toMin(amount, decimals);
+            const minPrice = BigNumber.toMin(price, decimals);
 
             if (this.orderType === 'buy') {
-                minAmount = BigNumber.dividedToNumber(minAmount, 1 + taker, 0);
+                minAmount = BigNumber.dividedCeil(minAmount, 1 + this.fee, 0);
             }
 
-            return BigNumber.dividedToNumber(minAmount, minPrice, this.ftokenDigit, 'nofix');
+            // const _qSmall = BigNumber.dividedToNumber(minAmount, minPrice, this.ftokenDigit);
+            // const _qBig = BigNumber.dividedCeil(minAmount, minPrice, this.ftokenDigit);
+            return BigNumber.dividedToNumber(minAmount, minPrice, this.ftokenDigit);
         },
 
         validPrice() {
@@ -604,17 +610,25 @@ export default {
         newOrder({ price, quantity }) {
             const tradeToken = this.activeTxPair ? this.activeTxPair.tradeToken : '';
             const quoteToken = this.activeTxPair ? this.activeTxPair.quoteToken : '';
+            const side = this.orderType === 'buy' ? 0 : 1;
 
             this.isLoading = true;
             const tokenDecimals = this.ftokenDetail.tokenDecimals;
             quantity = BigNumber.toMin(quantity, tokenDecimals);
 
-            sendTx('dexFundNewOrder', {
-                tradeToken,
-                quoteToken,
-                side: this.orderType === 'buy' ? 0 : 1,
-                price,
-                quantity
+            // sendTx('dexFundNewOrder', {
+            //     tradeToken,
+            //     quoteToken,
+            //     side: this.orderType === 'buy' ? 0 : 1,
+            //     price,
+            //     quantity
+            // },
+
+            sendTx('callContract', {
+                toAddress: constant.DexFund_Addr,
+                abi: { 'type': 'function', 'name': 'DexFundNewOrder', 'inputs': [ { 'name': 'tradeToken', 'type': 'tokenId' }, { 'name': 'quoteToken', 'type': 'tokenId' }, { 'name': 'side', 'type': 'bool' }, { 'name': 'orderType', 'type': 'uint8' }, { 'name': 'price', 'type': 'string' }, { 'name': 'quantity', 'type': 'uint256' } ] },
+                params: [ tradeToken, quoteToken, side, 0, price, quantity ],
+                tokenId: tradeToken
             }, {
                 pow: true,
                 powConfig: {
@@ -647,7 +661,7 @@ $font-black: rgba(36, 39, 43, 0.8);
     flex-direction: row;
     height: 30px;
     line-height: 30px;
-    font-family: $font-normal, arial, sans-serif;
+    @include font-family-normal();
     &.b {
         margin-bottom: 10px;
     }
@@ -660,7 +674,7 @@ $font-black: rgba(36, 39, 43, 0.8);
     }
     .ex-order-token {
         font-size: 12px;
-        font-family: $font-normal, arial, sans-serif;
+        @include font-family-normal();
         font-weight: 400;
         color: rgba(94, 104, 117, 1);
         width: 95px;
@@ -691,7 +705,7 @@ $font-black: rgba(36, 39, 43, 0.8);
     font-size: 12px;
     color: #5E6875;
     box-sizing: border-box;
-    font-family: $font-normal, arial, sans-serif;
+    @include font-family-normal();
     opacity: 0;
     transition: opacity 0.2s ease-in-out;
     width: 0;
@@ -725,7 +739,7 @@ $font-black: rgba(36, 39, 43, 0.8);
         height: 17px;
         line-height: 17px;
         font-size: 12px;
-        font-family: $font-bold, arial, sans-serif;
+        @include font-family-bold();
         font-weight: 600;
         color: #1d2024;
         margin-bottom: 10px;
@@ -755,7 +769,7 @@ $font-black: rgba(36, 39, 43, 0.8);
         margin-top: 12px;
         border-radius: 2px;
         font-size: 14px;
-        font-family: $font-bold, arial, sans-serif;
+        @include font-family-bold();
         font-weight: 600;
         color: #fff;
         &.red {
@@ -780,7 +794,7 @@ $font-black: rgba(36, 39, 43, 0.8);
     line-height: 30px;
     border: none;
     input {
-        font-family: $font-normal, arial, sans-serif;
+        @include font-family-normal();
         font-size: 12px;
         color: #1d2024;
         text-indent: 6px;

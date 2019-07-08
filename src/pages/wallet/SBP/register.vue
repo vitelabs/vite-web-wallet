@@ -156,7 +156,6 @@ export default {
 
             if (this.regNameList.indexOf(nodeName) !== -1) {
                 this.nodeNameErr = this.$t('walletSBP.section1.nameUsed');
-
                 return;
             }
 
@@ -276,7 +275,7 @@ export default {
         }
 
         .title {
-            font-family: $font-bold, arial, sans-serif;
+            @include font-family-bold();
             font-size: 14px;
             color: #1d2024;
             letter-spacing: 0.35px;
@@ -300,7 +299,7 @@ export default {
             height: 40px;
             line-height: 40px;
             text-align: center;
-            font-family: $font-bold, arial, sans-serif;
+            @include font-family-bold();
             font-size: 14px;
             color: #fbfbfb;
 
@@ -337,6 +336,42 @@ export default {
             background: transparent;
             font-size: 14px;
         }
+    }
+}
+
+.tips {
+    position: absolute;
+    left: 50%;
+    bottom: 52px;
+    transform: translate(-50%, 0);
+    background: #fff;
+    box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    font-size: 14px;
+    color: #3e4a59;
+    box-sizing: border-box;
+    @include font-family-normal();
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    width: 0;
+    height: 0;
+
+    &.active {
+        min-width: 300px;
+        height: auto;
+        opacity: 1;
+        padding: 13px 10px;
+    }
+
+    &::after {
+        content: ' ';
+        display: inline-block;
+        border: 6px solid transparent;
+        border-top: 6px solid #fff;
+        position: absolute;
+        bottom: -12px;
+        left: 50%;
+        margin-left: -6px;
     }
 }
 </style>

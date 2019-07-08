@@ -162,7 +162,7 @@ export default {
     }
 
     .bold {
-        font-family: $font-bold, arial, sans-serif;
+        @include font-family-bold();
         font-weight: 600;
     }
     .normal {

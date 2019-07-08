@@ -44,7 +44,7 @@ export default {
     }
     .describe {
         font-size: 12px;
-        font-family: $font-normal, arial, sans-serif;
+        @include font-family-normal();
     }
 }
 
@@ -57,7 +57,7 @@ export default {
     margin-bottom: 20px;
     box-sizing: border-box;
     padding: 30px;
-    font-family: $font-bold, arial, sans-serif;
+    @include font-family-bold();
     word-wrap: break-word;
     &.normal {
         &::before {

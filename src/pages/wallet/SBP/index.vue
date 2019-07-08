@@ -86,6 +86,11 @@ export default {
             return this.$store.state.env.clientStatus;
         }
     },
+    watch: {
+        address() {
+            this.$store.dispatch('stopLoopRegList');
+        }
+    },
     methods: {
         canUseAddr(nodeName, addr) {
             const usedAddrList = [];
@@ -215,7 +220,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~assets/scss/table.scss';
+@import "~assets/scss/vars.scss";
 
 .SBP-wrapper {
     position: relative;
@@ -259,7 +264,7 @@ export default {
 
     .title {
         border-left: 2px solid rgba(0, 122, 255, 0.7);
-        font-family: $font-bold, arial, sans-serif;
+        @include font-family-bold();
         font-size: 18px;
         color: #1d2024;
         line-height: 18px;
@@ -292,7 +297,7 @@ export default {
 
     .row-t {
         position: relative;
-        font-family: $font-bold, arial, sans-serif;
+        @include font-family-bold();
         font-size: 14px;
         color: #1d2024;
         letter-spacing: 0.35px;
@@ -311,7 +316,7 @@ export default {
             background: #f3f6f9;
             font-size: 14px;
             color: #5e6875;
-            font-family: $font-normal, arial, sans-serif;
+            @include font-family-normal();
         }
 
         input {
@@ -327,46 +332,6 @@ export default {
         color: #ff2929;
         line-height: 16px;
         text-align: right;
-    }
-}
-</style>
-
-<style lang="scss">
-@import "~assets/scss/vars.scss";
-
-.tips {
-    position: absolute;
-    left: 50%;
-    bottom: 52px;
-    transform: translate(-50%, 0);
-    background: #fff;
-    box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    font-size: 14px;
-    color: #3e4a59;
-    box-sizing: border-box;
-    font-family: $font-normal, arial, sans-serif;
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out;
-    width: 0;
-    height: 0;
-
-    &.active {
-        min-width: 300px;
-        height: auto;
-        opacity: 1;
-        padding: 13px 10px;
-    }
-
-    &::after {
-        content: ' ';
-        display: inline-block;
-        border: 6px solid transparent;
-        border-top: 6px solid #fff;
-        position: absolute;
-        bottom: -12px;
-        left: 50%;
-        margin-left: -6px;
     }
 }
 </style>
