@@ -430,6 +430,8 @@
         "tokenList": "已铸代币",
         "submit": "确认",
         "cancel": "取消",
+        "success": "操作成功",
+        "fail": "操作失败",
         "mintageConfirm": {
             "title": "确认铸币信息",
             "balance": "当前地址余额",
