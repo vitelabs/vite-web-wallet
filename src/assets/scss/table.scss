@@ -77,12 +77,14 @@
         display: inline-block;
         text-align: left;
         font-size: 12px;
-        margin: 0 4px;    
+        margin: 0 3px;    
         &:first-child {
             padding-left: 30px;
+            margin-left: 0;
         }
         &:last-child {
             padding-right: 30px;
+            margin-right: 0;
         }
     }
     .click-able {
