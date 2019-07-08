@@ -28,7 +28,7 @@ export default function sendTx(methodName, data, config = defaultConfig) {
 
     let powInstance = null;
     let vbInstance = null;
-    if (activeAccount.isBirforst) {
+    if (activeAccount.isBifrost) {
         const { compInstance } = vbConfirmDialog();
         vbInstance = compInstance;
     }
@@ -126,7 +126,7 @@ export default function sendTx(methodName, data, config = defaultConfig) {
             });
         })
         .finally(() => {
-            if (activeAccount.isBirforst) {
+            if (activeAccount.isBifrost) {
                 vbInstance && vbInstance.close();
             }
         });

@@ -12,7 +12,7 @@
                     />
                 </div>
                 <div v-if="!isShowNameInput" class="name" @click="startRename">
-                    {{ account.name }}
+                    {{ account.isBifrost?$t('assets.vb.defaultName'):account.name }}
                 </div>
                 <!-- <input fake_pass type="password" style="display:none"/> -->
                 <form autocomplete="off" v-else>
@@ -117,7 +117,8 @@ export default {
         account() {
             return {
                 name: this.$store.state.wallet.name,
-                addr: this.activeAddr
+                addr: this.activeAddr,
+                isBifrost: getCurrHDAcc() && getCurrHDAcc().isBifrost
             };
         },
         netStatus() {
@@ -204,7 +205,7 @@ export default {
             this.$offKeyDown();
         },
         startRename() {
-            if (this.isShowNameInput || getCurrHDAcc().isBirfrost) {
+            if (this.isShowNameInput || getCurrHDAcc().isBifrost) {
                 return;
             }
             this.isShowNameInput = true;

@@ -32,17 +32,17 @@
             <div class="vb" v-if="tabName === 'vb'">
                 <div class="code_container">
                     <div class="code_tips">
-                        dsfasdfasdflsjalsjlksdjfsdlfjsdlkfjsalkdfjlkdsfjsdlakfjsdalkfjasdlfsd
+                        {{$t('assets.vb.start.scan')}}
                     </div>
                     <qrcode
                         :options="qrcodeOpt"
-                        :text="uri"
+                        :text="vb&&vb.uri"
                         class="vb_qrcode"
                     ></qrcode>
                     <div class="code_tips">
-                        dsfasdfasdflsjalsjlksdjfsdlfjsdlkfjsalkdfjlkdsfjsdlakfjsdalkfjasdlfsd<span
-                            class="action_get_app"
-                        >Get Vite App</span
+                        {{$t('assets.vb.start.downloadTips')}}<span
+                            class="action_get_app" @click="getWallet"
+                        >{{$t('assets.vb.start.download')}}&rarr;</span
                         >
                     </div>
                 </div>
@@ -132,6 +132,8 @@
 import Vue from 'vue';
 import loading from 'components/loading.vue';
 import ellipsisAddr from 'utils/ellipsisAddr.js';
+import { getAppLink } from 'utils/getLink';
+import openUrl from 'utils/openUrl';
 import { getList, deleteOldAcc } from 'wallet';
 
 import accountItem from './accountItem.vue';
@@ -139,7 +141,7 @@ import restore from '../restore.vue';
 import accountList from './accountList.vue';
 
 import qrcode from 'components/qrcode';
-import { initVB, vbInstance } from 'wallet/vb';
+import { initVB } from 'wallet/vb';
 import icon from 'assets/imgs/start_qrcode_icon.svg';
 
 const TABNAME = {
@@ -169,11 +171,12 @@ export default {
                 image: icon,
                 mSize: 0.3
             },
-            isHaveList: list && list.length
+            isHaveList: list && list.length,
+            vb: null
         };
     },
     beforeMount() {
-        initVB();
+        this.vb = initVB();
     },
     beforeDestroy() {
         this.destoryVB();
@@ -182,14 +185,14 @@ export default {
         currHDAcc() {
             return this.$store.state.wallet.currHDAcc;
         },
-        uri() {
-            return vbInstance && vbInstance.uri;
-        },
         isShowExisting() {
             return this.tabName === 'existingAcc';
         }
     },
     methods: {
+        getWallet() {
+            openUrl(getAppLink());
+        },
         destoryVB() {
             console.log('destory vb');
         },
@@ -212,7 +215,7 @@ export default {
             if (this.tabName === tabName) return;
 
             if (this.tabName !== 'vb' && tabName === 'vb') {
-                initVB();
+                this.vb = initVB();
             } else if (this.tabName === 'vb' && tabName !== 'vb') {
                 this.destoryVB();
             }
@@ -228,7 +231,6 @@ export default {
         },
 
         getCurrAcc() {
-            debugger;
             const list = getList();
 
             // First: from router
