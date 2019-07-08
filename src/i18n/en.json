@@ -397,8 +397,8 @@
     "walletMintage": {
         "title": "Token Issuance",
         "address": "Issuance Address",
-        "tokenName": "Name",
-        "tokenSymbol": "Symbol",
+        "tokenName": "Token Name",
+        "tokenSymbol": "Token Symbol",
         "totalSupply": "Total Supply",
         "decimals": "Decimals",
         "isReIssuable": "ReIssuable",
@@ -406,23 +406,25 @@
         "isOwnerBurnOnly": "Burn out by Owner Only",
         "mint": "Confirm",
         "tokenList": "Issued Token",
+        "transfer": "Transfer Ownership",
+        "change": "Change to Non-issuable",
         "hint": {
-            "tokenName": "代币全称长度为1-40 个字符，包含大小写字母、空格和下划线，不能有连续空格，不能以空格开头或结尾。",
-            "tokenSymbol": "简称长度为1-10 个字符，只可包含大写字母、数字。",
+            "tokenName": "Token name should have 1-40 characters including capitals and lowercase letters, spaces and underlines. Continuous spaces and numbers are not supported.",
+            "tokenSymbol": "Token symbol should have 1-10 characters, only capitals and numbers are supported.",
             "decimals": "10**decimals 不能超过 totalSupply",
             "success": "Token Issuance Successful",
             "fail": "Token Issuance failed"
         },
         "err": {
-            "tokenNameFormat": "名称不合法",
-            "tokenNameNull": "名称不可为空",
-            "tokenSymbolFormat": "简称不合法",
-            "tokenSymbolNull": "简称不可为空",
-            "supplyMax": "发行量过大",
-            "totalSupplyFormat": "总发行量不合法",
-            "totalSupplyNull": "总发行量不可为空",
-            "maxSupplyNull": "最大发行量不可为空",
-            "maxSupplyMin": "最大发行量不能小于总发行量"
+            "tokenNameFormat": "Token Name's format is incorrect",
+            "tokenNameNull": "Token Name is required",
+            "tokenSymbolFormat": "Token Symbol's format is incorrect",
+            "tokenSymbolNull": "Token Symbol is required",
+            "supplyMax": "Excessive amount of token issuance",
+            "totalSupplyFormat": "Wrong format of Total Supply",
+            "totalSupplyNull": "Total Supply is required",
+            "maxSupplyNull": "Max Supply is required",
+            "maxSupplyMin": "Total Supply must be less than Max Supply"
         }
     },
     "walletQuota": {
