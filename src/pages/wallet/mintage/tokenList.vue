@@ -7,11 +7,11 @@
             text: 'Token ID',
             cell: 'tokenId'
         },{
-            class: 'big-item __ellipsis',
+            class: 'small-item __ellipsis',
             text: $t('walletMintage.tokenName'),
             cell: 'tokenName'
         },{
-            class: 'big-item __ellipsis',
+            class: 'small-item __ellipsis',
             text: $t('walletMintage.tokenSymbol'),
             cell: 'tokenSymbol'
         },{
@@ -42,8 +42,9 @@
 
             <span v-for="(item, i) in tokenList" :key="i"
                   :slot="`${i}operateBefore`">
-                <span class="btn __pointer" v-unlock-account @unlocked="changeOwner(item)">转让所有权</span>
-                <span v-if="item.isReIssuable" class="btn __pointer"
+                <span :class="{ 'unuse': !item.isReIssuable }" class="btn __pointer"
+                      v-unlock-account @unlocked="changeOwner(item)">转让所有权</span>
+                <span :class="{ 'unuse': !item.isReIssuable }" class="btn __pointer"
                       v-unlock-account @unlocked="changeReIssuable(item)">改为不可增发</span>
             </span>
 
@@ -56,6 +57,10 @@
             <div class="__row">
                 <div class="__row-t">{{ $t('walletMintage.tokenName') }}</div>
                 <div class="__unuse-row __light">{{ changeOwnerToken.tokenName }}</div>
+            </div>
+            <div class="__row">
+                <div class="__row-t">{{ $t('walletMintage.tokenSymbol') }}</div>
+                <div class="__unuse-row __light">{{ changeOwnerToken.tokenSymbol }}</div>
             </div>
             <div class="__row">
                 <div class="__row-t">{{ $t('walletMintage.address') }}</div>
@@ -76,9 +81,9 @@
 
 <script>
 import { hdAddr } from '@vite/vitejs';
-import confirm from 'components/confirm/index.js';
 import showConfirm from 'components/confirm';
 import walletTable from 'components/table/index.vue';
+import { initPwd } from 'components/password/index.js';
 import viteInput from 'components/viteInput';
 import sendTx from 'utils/sendTx';
 
@@ -94,6 +99,16 @@ export default {
             newOwner: '',
             isValidAddress: true
         };
+    },
+    computed: {
+        address() {
+            return this.$store.getters.activeAddr;
+        }
+    },
+    watch: {
+        address() {
+            this.getOwnerToken();
+        }
     },
     methods: {
         validAddr() {
@@ -114,17 +129,12 @@ export default {
             });
         },
         changeReIssuable(item) {
-            confirm({
+            initPwd({
                 title: this.$t('walletMintage.reIssuableConfirm.title'),
-                closeBtn: { show: true },
-                leftBtn: { text: this.$t('walletMintage.cancel') },
-                rightBtn: {
-                    text: this.$t('walletMintage.submit'),
-                    click: () => {
-                        this.toChangeReIssuale(item);
-                    }
-                },
-                content: this.$t('walletMintage.reIssuableConfirm.text', { tokenName: item.tokenName })
+                content: this.$t('walletMintage.reIssuableConfirm.text', { tokenName: item.tokenName }),
+                submit: () => {
+                    this.toChangeReIssuale(item);
+                }
             });
         },
         changeOwner(item) {
@@ -140,20 +150,26 @@ export default {
                 return;
             }
 
-            sendTx('changeTransferOwner', {
-                tokenId: this.changeOwnerToken.tokenId,
-                newOwner: this.newOwner
-            }).then(() => {
-                this.$toast('changeOwner success');
-                this.cancelChangeOwner();
-            }).catch(err => {
-                console.warn(err);
-                this.$toast('changeOwner fail.', err);
+            initPwd({
+                submit: () => {
+                    sendTx('changeTransferOwner', {
+                        tokenId: this.changeOwnerToken.tokenId,
+                        newOwner: this.newOwner
+                    }).then(() => {
+                        this.$toast('changeOwner success');
+                        this.cancelChangeOwner();
+                        this.getOwnerToken();
+                    }).catch(err => {
+                        console.warn(err);
+                        this.$toast('changeOwner fail.', err);
+                    });
+                }
             });
         },
         toChangeReIssuale(item) {
             sendTx('changeTokenType', { tokenId: item.tokenId }).then(() => {
                 this.$toast('ChangeTokenType success');
+                this.getOwnerToken();
             }).catch(err => {
                 console.warn(err);
                 this.$toast('ChangeTokenType fail.', err);
@@ -171,5 +187,8 @@ export default {
 }
 .btn {
     color: #007AFF;
+    &.unuse {
+        color: #ced1d5;
+    }
 }
 </style>

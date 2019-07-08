@@ -3,7 +3,7 @@
              :showMask="true" :singleBtn="true"
              :title="$t('walletMintage.mintageConfirm.title')" :closeIcon="true"
              :close="close" :leftBtnTxt="$t('walletMintage.mintageConfirm.btn')"
-             :leftBtnClick="mintage">
+             :leftBtnClick="toMintage">
         <div class="_row">
             <span class="_row_title">{{ $t('walletMintage.tokenName') }} : </span>{{ tokenInfo.tokenName }}
         </div>
@@ -31,6 +31,7 @@
 
 <script>
 import confirm from 'components/confirm';
+import { initPwd } from 'components/password/index.js';
 import sendTx from 'utils/sendTx';
 import BigNumber from 'utils/bigNumber';
 
@@ -40,6 +41,10 @@ export default {
     components: { confirm },
     props: {
         close: {
+            type: Function,
+            default: () => {}
+        },
+        clear: {
             type: Function,
             default: () => {}
         },
@@ -76,6 +81,13 @@ export default {
         }
     },
     methods: {
+        toMintage() {
+            initPwd({
+                submit: () => {
+                    this.mintage();
+                }
+            });
+        },
         mintage() {
             const decimals = this.tokenInfo.decimals || 0;
             const totalSupply = BigNumber.toMin(this.tokenInfo.totalSupply || 0, decimals);
@@ -93,6 +105,7 @@ export default {
             }).then(() => {
                 this.$toast(this.$t('walletMintage.hint.success'));
                 this.close && this.close();
+                this.clear && this.clear();
             }).catch(err => {
                 console.warn(err);
                 this.$toast(this.$t('walletMintage.hint.fail'), err);
