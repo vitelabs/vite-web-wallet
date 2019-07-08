@@ -41,7 +41,7 @@ export default {
     padding: 20px;
     display: flex;
     font-size: 14px;
-    color:#333;
+    color: #333;
     font-family: $font-bold;
 }
 .code_container{
