@@ -107,7 +107,7 @@ let webpackConfig = {
                     // { loader: 'postcss-loader' }
                 ]
             }, {
-                test: /(\.ttf$|\.ttc$)/,
+                test: /(\.ttf$|\.ttc$|\.otf$)/,
                 use: {
                     loader: 'url-loader',
                     options: { limit: 10000 }
