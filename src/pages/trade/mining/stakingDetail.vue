@@ -74,7 +74,7 @@ export default {
 @import "~assets/scss/vars.scss";
 
 .staking-detail {
-    background: rgba(234,248,255,0.2);
+    background: url('~assets/imgs/mint_pledge_bg.png') rgba(234,248,255,0.2);
     background-size: 100% 100%;
     >div {
         display: inline-block;

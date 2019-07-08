@@ -1,8 +1,8 @@
 <template>
     <div class="mintage-wrapper">
         <sec-title :isShowHelp="false"></sec-title>
-        <mintage></mintage>
-        <tokenList></tokenList>
+        <mintage @fetchTokenList="fetchTokenList"></mintage>
+        <tokenList ref="tokenListDom"></tokenList>
     </div>
 </template>
 
@@ -11,7 +11,15 @@ import tokenList from './tokenList';
 import mintage from './mintage';
 import secTitle from 'components/secTitle';
 
-export default { components: { tokenList, secTitle, mintage } };
+export default {
+    components: { tokenList, secTitle, mintage },
+    methods: {
+        fetchTokenList() {
+            const dom = this.$refs.tokenListDom;
+            dom && dom.getOwnerToken();
+        }
+    }
+};
 </script>
 
 <style lang="scss" scoped>
