@@ -403,6 +403,7 @@
         "decimals": "Decimals",
         "isReIssuable": "ReIssuable",
         "maxSupply": "Max Supply",
+        "ownerBurnOnly": "Burn out by Owner Only",
         "isOwnerBurnOnly": "Burn out by Owner Only",
         "mint": "Confirm",
         "tokenList": "Issued Token",
