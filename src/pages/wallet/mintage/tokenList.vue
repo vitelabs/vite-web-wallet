@@ -81,9 +81,9 @@
 
 <script>
 import { hdAddr } from '@vite/vitejs';
-import confirm from 'components/confirm/index.js';
 import showConfirm from 'components/confirm';
 import walletTable from 'components/table/index.vue';
+import { initPwd } from 'components/password/index.js';
 import viteInput from 'components/viteInput';
 import sendTx from 'utils/sendTx';
 
@@ -99,6 +99,16 @@ export default {
             newOwner: '',
             isValidAddress: true
         };
+    },
+    computed: {
+        address() {
+            return this.$store.getters.activeAddr;
+        }
+    },
+    watch: {
+        address() {
+            this.getOwnerToken();
+        }
     },
     methods: {
         validAddr() {
@@ -119,17 +129,12 @@ export default {
             });
         },
         changeReIssuable(item) {
-            confirm({
+            initPwd({
                 title: this.$t('walletMintage.reIssuableConfirm.title'),
-                closeBtn: { show: true },
-                leftBtn: { text: this.$t('walletMintage.cancel') },
-                rightBtn: {
-                    text: this.$t('walletMintage.submit'),
-                    click: () => {
-                        this.toChangeReIssuale(item);
-                    }
-                },
-                content: this.$t('walletMintage.reIssuableConfirm.text', { tokenName: item.tokenName })
+                content: this.$t('walletMintage.reIssuableConfirm.text', { tokenName: item.tokenName }),
+                submit: () => {
+                    this.toChangeReIssuale(item);
+                }
             });
         },
         changeOwner(item) {
@@ -145,20 +150,26 @@ export default {
                 return;
             }
 
-            sendTx('changeTransferOwner', {
-                tokenId: this.changeOwnerToken.tokenId,
-                newOwner: this.newOwner
-            }).then(() => {
-                this.$toast('changeOwner success');
-                this.cancelChangeOwner();
-            }).catch(err => {
-                console.warn(err);
-                this.$toast('changeOwner fail.', err);
+            initPwd({
+                submit: () => {
+                    sendTx('changeTransferOwner', {
+                        tokenId: this.changeOwnerToken.tokenId,
+                        newOwner: this.newOwner
+                    }).then(() => {
+                        this.$toast('changeOwner success');
+                        this.cancelChangeOwner();
+                        this.getOwnerToken();
+                    }).catch(err => {
+                        console.warn(err);
+                        this.$toast('changeOwner fail.', err);
+                    });
+                }
             });
         },
         toChangeReIssuale(item) {
             sendTx('changeTokenType', { tokenId: item.tokenId }).then(() => {
                 this.$toast('ChangeTokenType success');
+                this.getOwnerToken();
             }).catch(err => {
                 console.warn(err);
                 this.$toast('ChangeTokenType fail.', err);
