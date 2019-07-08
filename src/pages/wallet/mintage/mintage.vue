@@ -72,7 +72,8 @@
             <div v-show="!canMintage" class="__form_btn __pointer unuse">{{ $t('walletMintage.mint') }}</div>
         </div>
 
-        <mintage-confirm v-if="tokenInfo" :tokenInfo="tokenInfo" :close="closeConfirm"></mintage-confirm>
+        <mintage-confirm v-if="tokenInfo" :tokenInfo="tokenInfo"
+                         :close="closeConfirm" :clear="clearAll"></mintage-confirm>
     </div>
 </template>
 
@@ -286,6 +287,17 @@ export default {
             this.isDecimals();
             this.isMaxSupply();
         },
+        clearAll() {
+            this.decimals = '0';
+            this.isReIssuable = false;
+            this.maxSupply = '0';
+            this.ownerBurnOnly = true;
+            this.totalSupply = '';
+            this.tokenName = '';
+            this.tokenSymbol = '';
+            this.$emit('fetchTokenList');
+        },
+
         hideTips() {
             this.tipsType = '';
         },
