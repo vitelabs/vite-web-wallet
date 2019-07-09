@@ -1,0 +1,17 @@
+@import "~assets/scss/vars.scss";
+
+.__input {
+    box-sizing: border-box;
+    padding: 0 15px;
+    height: 34px;
+    background: rgba(255,255,255,1);
+    border-radius: 2px;
+    border: 1px solid rgba(212,222,231,1);
+    line-height: 34px;
+    font-size: 12px;
+    @include font-family-normal();
+    color: rgba(94,104,117,0.3);
+    input {
+        width: 100%;
+    }
+}

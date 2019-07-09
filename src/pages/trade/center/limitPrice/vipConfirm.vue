@@ -27,7 +27,7 @@
 
 <script>
 import { constant } from '@vite/vitejs';
-import confirm from 'components/confirm.vue';
+import confirm from 'components/confirm/confirm.vue';
 import BigNumber from 'utils/bigNumber';
 import sendTx from 'utils/sendTx';
 import $ViteJS from 'utils/viteClient';

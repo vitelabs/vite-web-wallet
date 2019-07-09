@@ -95,7 +95,7 @@
 
 <script>
 import { hdAddr } from '@vite/vitejs';
-import showConfirm from 'components/confirm';
+import showConfirm from 'components/confirm/confirm.vue';
 import walletTable from 'components/table/index.vue';
 import { initPwd } from 'components/password/index.js';
 import viteInput from 'components/viteInput';

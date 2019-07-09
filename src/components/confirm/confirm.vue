@@ -1,0 +1,111 @@
+<template>
+    <div class="confirm-container" :class="{ 'gray': showMask }">
+        <div class="confirm-wrapper">
+            <div class="title">
+                {{ title }}
+                <span v-show="closeIcon" @click="close" class="close-icon __pointer"></span>
+            </div>
+
+            <div class="content-wrapper" >
+                <div v-if="content">{{ content }}</div>
+                <slot></slot>
+            </div>
+
+            <div v-show="singleBtn || leftBtnTxt || rightBtnTxt"
+                 class="bottom" :class="{'single': singleBtn}">
+                <div v-show="singleBtn" class="btn btn-single btn-blue __pointer"
+                     :class="{'btn-gray': btnUnuse && !isLoading }"
+                     @click="_leftBtnClick">
+                    <span v-show="!isLoading">{{ leftBtnTxt }}</span>
+                    <loading v-show="isLoading" loadingType="dot"></loading>
+                </div>
+                <div v-show="!singleBtn" class="btn btn-border __pointer"
+                     @click="_leftBtnClick">{{ leftBtnTxt }}</div>
+                <div v-show="!singleBtn" class="btn btn-blue __pointer"
+                     :class="{'unuse': btnUnuse && !isLoading }"
+                     @click="_rightBtnClick">
+                    <span v-show="!isLoading">{{ rightBtnTxt }}</span>
+                    <loading v-show="isLoading" loadingType="dot"></loading>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+import loading from 'components/loading.vue';
+
+export default {
+    components: { loading },
+    props: {
+        isLoading: {
+            type: Boolean,
+            default: false
+        },
+        showMask: {
+            type: Boolean,
+            default: false
+        },
+        title: {
+            type: String,
+            default: ''
+        },
+        closeIcon: {
+            type: Boolean,
+            default: false
+        },
+        close: {
+            type: Function,
+            default: () => {}
+        },
+        singleBtn: {
+            type: Boolean,
+            default: false
+        },
+        leftBtnTxt: {
+            type: String,
+            default: ''
+        },
+        rightBtnTxt: {
+            type: String,
+            default: ''
+        },
+        leftBtnClick: {
+            type: Function,
+            default: () => {}
+        },
+        rightBtnClick: {
+            type: Function,
+            default: () => {}
+        },
+        btnUnuse: {
+            type: Boolean,
+            default: false
+        },
+        content: {
+            type: String,
+            default: ''
+        }
+    },
+    methods: {
+        _rightBtnClick() {
+            if (this.btnUnuse || this.isLoading) {
+                return;
+            }
+            this.rightBtnClick && this.rightBtnClick();
+        },
+        _leftBtnClick() {
+            if (this.singleBtn && (this.btnUnuse || this.isLoading)) {
+                return;
+            }
+            this.leftBtnClick && this.leftBtnClick();
+        }
+    }
+};
+</script>
+
+<style lang="scss" scoped>
+@import "~assets/scss/vars.scss";
+@import "./confirm.scss";
+@import "./confirmRow.scss";
+</style>
