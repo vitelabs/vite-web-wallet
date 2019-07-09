@@ -6,7 +6,7 @@
 
         <slot></slot>
 
-        <form autocomplete="off" v-show="isShowPWD" class="__input" :class="{ 'distance': !!content }">
+        <form autocomplete="off" v-show="isShowPWD" class="__input __input_row" :class="{ 'distance': !!content }">
             <input ref="passInput" v-model="password" :placeholder="$t('pwdConfirm.placeholder')" type="password"/>
         </form>
 

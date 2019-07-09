@@ -3,25 +3,24 @@
              :closeIcon="true" :close="close"
              :leftBtnClick="changeVip" :leftBtnTxt="confirmTitle"
              :singleBtn="true" :btnUnuse="!canOrder" :isLoading="isLoading">
+
         <div v-if="!isVip" class="__row">
-            <div class="__row-t">{{ $t('tokenCard.heads.availableExAmount') }}</div>
-            <div class="__unuse-row">
-                <img  :src="viteTokenInfo ? viteTokenInfo.icon : ''" class="__icon" />VITE
+            <div class="__row_t">{{ $t('tokenCard.heads.availableExAmount') }}</div>
+            <div class="__input_row __unuse_input __bold">
+                <img :src="viteTokenInfo ? viteTokenInfo.icon : ''" class="__icon" />VITE
                 <span class="__right">{{ exViteBalance }}</span>
             </div>
         </div>
 
         <div class="__row">
-            <div class="__row-t">{{ stakingText }}
-                <span v-show="!canOrder && !isVip" class="__err __hint">{{ $t('trade.vipConfirm.noBalance') }}</span>
-                <span v-show="!canOrder && isVip" class="__err __hint">{{ $t('walletQuota.list.unexpired') }}</span>
+            <div class="__row_t">{{ stakingText }}
+                <span v-show="!canOrder && !isVip" class="__err">{{ $t('trade.vipConfirm.noBalance') }}</span>
+                <span v-show="!canOrder && isVip" class="__err">{{ $t('walletQuota.list.unexpired') }}</span>
             </div>
-            <div class="no-input">
-                10,000 VITE
-            </div>
+            <div class="__input_row __unuse_input">10,000 VITE</div>
         </div>
 
-        <div class="hint"><span>{{ hint }}</span></div>
+        <div class="__hint"><span>{{ hint }}</span></div>
     </confirm>
 </template>
 
@@ -145,11 +144,3 @@ export default {
     }
 };
 </script>
-
-<style lang="scss" scoped>
-@import "~assets/scss/confirmInput.scss";
-
-.__icon{
-    margin-right: 10px;
-}
-</style>

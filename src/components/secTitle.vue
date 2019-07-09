@@ -43,6 +43,7 @@ export default {
             }
 
             confirm({
+                size: 'small',
                 title: this.$t(this.helpTitle),
                 singleBtn: true,
                 closeBtn: { show: false },
