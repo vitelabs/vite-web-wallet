@@ -1,10 +1,10 @@
 <template>
     <div>
         <sec-title :showHelp="showHelp"></sec-title>
-        <confirm v-show="isShowHelp" :showMask="true" :singleBtn="true"
-                 :title="$t('walletQuota.help.title')" :closeIcon="true"
-                 :close="close" :leftBtnTxt="$t('btn.understand')"
-                 :leftBtnClick="close">
+        <confirm  v-show="isShowHelp" :showMask="true" :singleBtn="true"
+                  :title="$t('walletQuota.help.title')" :closeIcon="true"
+                  :close="close" :leftBtnTxt="$t('btn.understand')"
+                  :leftBtnClick="close">
             <div class="help-t">{{ $t('walletQuota.confirm.help.t1') }}</div>
             <div class="help-txt">{{ $t('walletQuota.confirm.help.txt1') }}</div>
             <div class="help-t">{{ $t('walletQuota.confirm.help.t2') }}</div>

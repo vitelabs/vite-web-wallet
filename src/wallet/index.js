@@ -4,6 +4,7 @@ import { getOldAccList, setOldAccList } from 'utils/store';
 import { HDAccount, StatusMap as _StatusMap, VBAccount } from './hdAccount';
 import { getLastAcc, addHdAccount, setAcc, getAccList } from './store';
 function constructAccount(acc) {
+    console.log(acc);
     if (acc.isBifrost || acc.id.startsWith('VITEBIRFORST_')) {
         currentHDAccount = new VBAccount(acc);
     } else {
@@ -47,7 +48,7 @@ export function getActiveAcc() {
 export function getList() {
     const accList = getAccList() || [];
     const oldAccList = getOldAccList() || [];
-    return accList.concat(oldAccList).filter(acc => !acc.id.startsWith('VITEBIRFORST_'));// filter vb accounts
+    return accList.concat(oldAccList).filter(acc => acc.id && !acc.id.startsWith('VITEBIRFORST_'));// filter vb accounts
 }
 
 export function deleteOldAcc(acc) {
