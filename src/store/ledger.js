@@ -25,12 +25,15 @@ const mutations = {
             return;
         }
 
+        const _token = {};
         tokenId = tokenId || tokenInfo.tokenId;
-        state.tokenInfoMaps[tokenId] = tokenInfo;
-        state.tokenInfoMaps[tokenId].tokenId = tokenId;
+        _token[tokenId] = tokenInfo;
+        _token[tokenId].tokenId = tokenId;
         if (state.defaultTokenIds[tokenId]) {
-            state.tokenInfoMaps[tokenId].icon = state.defaultTokenIds[tokenId].icon;
+            _token[tokenId].icon = state.defaultTokenIds[tokenId].icon;
         }
+
+        state.tokenInfoMaps = Object.assign(_token, state.tokenInfoMaps);
     },
     setAllTokens(state, payload = []) {
         state.allTokens = payload;

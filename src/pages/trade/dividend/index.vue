@@ -255,7 +255,8 @@ export default {
         box-shadow: 0px 2px 10px 1px rgba(176,192,237,0.42);
         .my-divident {
             width: 100%;
-            background: #fff;
+            background: url('~assets/imgs/mint_pledge_bg.png') rgba(234,248,255,0.2);
+            background-size: 100% 100%;
             font-size: 12px;
             line-height: 16px;
             border-bottom: 1px solid rgba(212,222,231,1);

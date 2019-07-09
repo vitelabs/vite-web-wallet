@@ -234,12 +234,12 @@ export default {
         border-radius: 2px;
         box-shadow: 0px 2px 10px 1px rgba(176,192,237,0.42);
         .quota-detail {
-            padding: 16px 30px;
             border-bottom: 1px solid #d4dee7;
             box-sizing: border-box;
             .no-detail {
+                box-sizing: border-box;
+                padding: 16px 30px;
                 width: 100%;
-                height: 48px;
                 line-height: 48px;
                 text-align: center;
                 font-size: 16px;

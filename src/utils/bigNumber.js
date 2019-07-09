@@ -29,7 +29,7 @@ const groupConfig = {
 
 const ceilConfig = {
     FORMAT: normalFormat,
-    ROUNDING_MODE: BigNumber.ROUND_UP
+    ROUNDING_MODE: BigNumber.ROUND_CEIL
 };
 
 BigNumber.config(normalConfig);
@@ -76,11 +76,11 @@ export default {
         const result = num1.dividedBy(num2);
         return type === 'fix' ? result.toFormat(fix) : result.decimalPlaces(fix, 1).toFormat();
     },
-    dividedCeil(num1, num2) {
+    dividedCeil(num1, num2, fix = 0) {
         num1 = new CeilBigNumber(num1);
         num2 = new CeilBigNumber(num2);
         const result = num1.dividedBy(num2);
-        return result.toFormat(0);
+        return result.toFormat(fix);
     },
     toBasic(num, minUnit = 0, decimalPlaces = DP) {
         const min = new BigNumber(10).exponentiatedBy(minUnit);
@@ -94,6 +94,12 @@ export default {
         } catch (err) {
             return '';
         }
+    },
+    exponentiated(num, unit, offset = 0) {
+        const number = new BigNumber(num).exponentiatedBy(unit);
+        const offsetNum = new BigNumber(offset);
+        const result = number.plus(offsetNum);
+        return result.toFormat();
     },
     toMin(num, minUnit) {
         const min = new BigNumber(10).exponentiatedBy(minUnit);

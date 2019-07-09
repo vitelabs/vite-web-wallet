@@ -2,11 +2,11 @@
     <div class="register-wrapper">
         <div class="row">
             <div class="item">
-                <div class="title">
+                <div class="__form_input_title">
                     {{ $t('walletSBP.section1.nodeName') }}
                     <span v-show="nodeNameErr" class="err">{{ nodeNameErr }}</span>
                 </div>
-                <span class="tips" :class="{'active': tipsType === 'name'}">
+                <span class="__form_tips" :class="{'active': tipsType === 'name'}">
                     {{  tipsType === 'name' ? $t('walletSBP.section1.nameHint') : '' }}
                 </span>
                 <vite-input v-model="nodeName" :valid="testName"
@@ -14,11 +14,11 @@
                             @blur="hideTips" @focus="showTips('name')"></vite-input>
             </div>
             <div class="item">
-                <div class="title">
+                <div class="__form_input_title">
                     {{ $t('walletSBP.section1.producerAddr') }}
                     <span v-show="producerAddrErr" class="err">{{ producerAddrErr }}</span>
                 </div>
-                <span class="tips" :class="{'active': tipsType === 'addr'}">
+                <span class="__form_tips" :class="{'active': tipsType === 'addr'}">
                     {{ tipsType === 'addr' ? $t('walletSBP.section1.addrHint') : '' }}
                 </span>
                 <vite-input v-model="producerAddr" :valid="testAddr"
@@ -29,28 +29,28 @@
 
         <div class="row">
             <div class="item">
-                <div class="title">{{ $t('walletSBP.section1.quotaAddr') }}</div>
-                <div class="input-item all unuse __ellipsis">{{ quotaAddr }}</div>
+                <div class="__form_input_title">{{ $t('walletSBP.section1.quotaAddr') }}</div>
+                <div class="__form_input all unuse __ellipsis">{{ quotaAddr }}</div>
             </div>
             <div class="item">
-                <div class="title">{{ $t('walletSBP.section1.quotaTime') }}</div>
-                <div class="input-item all unuse __ellipsis">{{ $t('walletSBP.section1.time') }}</div>
+                <div class="__form_input_title">{{ $t('walletSBP.section1.quotaTime') }}</div>
+                <div class="__form_input all unuse __ellipsis">{{ $t('walletSBP.section1.time') }}</div>
             </div>
         </div>
 
         <div class="row">
             <div class="item">
-                <div class="title">
+                <div class="__form_input_title">
                     {{ $t('stakingAmount') }}
                     <span v-show="amountErr" class="err">{{ amountErr }}</span>
                 </div>
-                <div class="input-item all unuse __ellipsis">500,000 VITE</div>
+                <div class="__form_input all unuse __ellipsis">500,000 VITE</div>
             </div>
             <div class="item">
-                <div v-show="!btnUnuse" class="btn all __pointer" :class="{
+                <div v-show="!btnUnuse" class="__form_btn __pointer" :class="{
                     'unuse': btnUnuse
-                }" v-unlock-account="validTx">{{ $t('walletSBP.section1.confirmBtn') }}</div>
-                <div v-show="btnUnuse" class="btn all __pointer"  :class="{
+                }" @click="validTx">{{ $t('walletSBP.section1.confirmBtn') }}</div>
+                <div v-show="btnUnuse" class="__form_btn __pointer"  :class="{
                     'unuse': btnUnuse
                 }">{{ $t('walletSBP.section1.confirmBtn') }}</div>
             </div>
@@ -64,6 +64,7 @@ import viteInput from 'components/viteInput';
 import { initPwd } from 'components/password/index.js';
 import BigNumber from 'utils/bigNumber';
 import sendTx from 'utils/sendTx';
+import { execWithValid } from 'utils/execWithValid';
 
 const amount = 500000;
 
@@ -197,7 +198,7 @@ export default {
             this.producerAddrErr = '';
         },
 
-        validTx() {
+        validTx: execWithValid(function () {
             if (this.loading) {
                 return;
             }
@@ -217,7 +218,7 @@ export default {
                     this.sendRegisterTx();
                 }
             }, true);
-        },
+        }),
         sendRegisterTx() {
             this.loading = true;
             const nodeName = this.nodeName.trim();
@@ -252,6 +253,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
+@import "../form.scss";
 
 .register-wrapper {
     position: relative;
@@ -274,104 +276,15 @@ export default {
             }
         }
 
-        .title {
-            @include font-family-bold();
-            font-size: 12px;
-            color: #1d2024;
-            letter-spacing: 0.35px;
-            line-height: 16px;
-            margin-bottom: 12px;
-
-            .err {
-                float: right;
-                font-size: 12px;
-                color: #ff2929;
-                line-height: 16px;
-            }
-        }
-
-        .btn {
+        .__form_btn {
             position: relative;
             bottom: -28px;
-            border-radius: 2px;
-            background: #007aff;
-            color: #fff;
-            height: 34px;
-            line-height: 34px;
-            text-align: center;
-            @include font-family-bold();
-            font-size: 12px;
-            color: #fbfbfb;
-
-            &.unuse {
-                background: #efefef;
-                color: #666;
-                cursor: not-allowed;
-            }
-        }
-    }
-
-    .input-item {
-        position: relative;
-        box-sizing: border-box;
-        height: 34px;
-        line-height: 34px;
-        background: #fff;
-        border: 1px solid #d4dee7;
-        border-radius: 2px;
-        font-size: 12px;
-        color: #5e6875;
-        padding: 0 15px;
-
-        &.all {
             width: 100%;
         }
-
-        &.unuse {
-            background: #f3f6f9;
-        }
-
-        input {
-            width: 100%;
-            background: transparent;
-            font-size: 14px;
-        }
-    }
-}
-
-.tips {
-    position: absolute;
-    left: 50%;
-    bottom: 52px;
-    transform: translate(-50%, 0);
-    background: #fff;
-    box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    font-size: 14px;
-    color: #3e4a59;
-    box-sizing: border-box;
-    @include font-family-normal();
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out;
-    width: 0;
-    height: 0;
-
-    &.active {
-        min-width: 300px;
-        height: auto;
-        opacity: 1;
-        padding: 13px 10px;
     }
 
-    &::after {
-        content: ' ';
-        display: inline-block;
-        border: 6px solid transparent;
-        border-top: 6px solid #fff;
-        position: absolute;
-        bottom: -12px;
-        left: 50%;
-        margin-left: -6px;
+    .__form_input.all {
+        width: 100%;
     }
 }
 </style>

@@ -50,7 +50,6 @@ export default {
 @import "~assets/scss/vars.scss";
 
 .my-quota-wrapper {
-    margin-top: 14px;
     padding: 35px 24px;
 }
 

@@ -49,7 +49,6 @@
         height: 75px;
         line-height: 75px;
         text-align: center;
-        // border-top: 1px solid rgba(212,222,231,1);
     }
 
     .__tb_head {
@@ -69,27 +68,23 @@
         color: #5E6875;
         cursor: pointer;
         border-bottom: 1px solid rgba(212,222,231,1);
-        // &:last-child {
-        //     border: none;
-        // }
         &.active:hover {
             background: rgba(88,145,255,.13);
         }
-        // &:hover {
-        //     background: rgba(88,145,255,.13);
-        // }
     }
 
     .__tb_cell {
         display: inline-block;
         text-align: left;
         font-size: 12px;
-        margin: 0 4px;    
+        margin: 0 3px;    
         &:first-child {
             padding-left: 30px;
+            margin-left: 0;
         }
         &:last-child {
             padding-right: 30px;
+            margin-right: 0;
         }
     }
     .click-able {

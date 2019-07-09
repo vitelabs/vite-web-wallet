@@ -47,7 +47,7 @@
                 {{ $t('trade.dexToken.fee') }}
                 <span v-show="!isHaveBalance" class="__err __hint">{{ $t('hint.insufficientBalance') }}</span>
             </div>
-            <div class="no-input">{{ spend }} VITE</div>
+            <div class="__unuse-row __light">{{ spend }} VITE</div>
         </div>
         <div class="hint"><span>{{ $t('trade.dexToken.hint') }}</span></div>
     </confirm>
@@ -55,7 +55,7 @@
 
 <script>
 import loading from 'components/loading';
-import confirm from 'components/confirm';
+import confirm from 'components/confirm/confirm.vue';
 import viteInput from 'components/viteInput';
 import { getTokenIcon } from 'utils/tokenParser';
 import BigNumber from 'utils/bigNumber';
@@ -110,19 +110,23 @@ export default {
             }
             return this.tokenList;
         },
+        rawBalance() {
+            if (!this.viteTokenInfo) {
+                return null;
+            }
+            const list = this.$store.getters.exBalanceList;
+            return list[this.viteTokenInfo.tokenId];
+        },
+        exViteBalance() {
+            return this.rawBalance ? this.rawBalance.availableExAmount : 0;
+        },
         isHaveBalance() {
             if (!this.viteTokenInfo) {
                 return false;
             }
 
-            const viteBalance = this.$store.getters.balanceInfo
-                && this.$store.getters.balanceInfo[this.viteTokenInfo.tokenId]
-                ? this.$store.getters.balanceInfo[this.viteTokenInfo.tokenId].balance || 0
-                : 0;
-            const viteAmount = BigNumber.toMin(viteBalance, this.viteTokenInfo.decimals);
             const amount = BigNumber.toMin(this.spend, this.viteTokenInfo.decimals);
-
-            return BigNumber.compared(viteAmount, amount) >= 0;
+            return BigNumber.compared(this.exViteBalance, amount) >= 0;
         }
     },
     watch: {
@@ -230,7 +234,6 @@ export default {
             };
 
             sendTx('dexFundNewMarket', {
-                amount: BigNumber.toMin(spend, this.viteTokenInfo.decimals),
                 tradeToken: this.token.tokenId,
                 quoteToken: this.market.tokenId
             }).then(() => {

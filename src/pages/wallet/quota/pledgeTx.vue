@@ -1,12 +1,12 @@
 <template>
-    <div class="pledge-tx-wrapper">
+    <div class="pledge-tx-wrapper __form_border">
         <div class="row">
             <div class="item">
-                <div class="title">{{ $t('walletQuota.fromAddr') }}</div>
-                <div class="input-item all unuse __ellipsis">{{ addr }}</div>
+                <div class="__form_input_title">{{ $t('walletQuota.fromAddr') }}</div>
+                <div class="__form_input all unuse __ellipsis">{{ addr }}</div>
             </div>
             <div class="item">
-                <div class="title">
+                <div class="__form_input_title">
                     {{ $t('stakingAmount') }}
                     <span v-show="amountErr" class="err">{{ amountErr }}</span>
                 </div>
@@ -20,7 +20,7 @@
 
         <div class="row">
             <div class="item">
-                <div class="title">
+                <div class="__form_input_title">
                     {{ $t('walletQuota.beneficialAddr') }}
                     <span v-show="!isValidAddress" class="err">{{ $t('hint.addrFormat') }}</span>
                 </div>
@@ -35,12 +35,12 @@
                 </vite-input>
             </div>
             <div class="item">
-                <div class="title">{{ $t('walletQuota.time') }}</div>
-                <span class="input-item unuse about">{{ $t('walletQuota.aboutDays', { day: '3' }) }}</span>
-                <span v-show="!btnUnuse" class="btn __pointer" :class="{
+                <div class="__form_input_title">{{ $t('walletQuota.time') }}</div>
+                <span class="__form_input unuse about">{{ $t('walletQuota.aboutDays', { day: '3' }) }}</span>
+                <span v-show="!btnUnuse" class="__form_btn __pointer" :class="{
                     'unuse': btnUnuse
-                }" v-unlock-account="validTx">{{ $t('submitStaking') }}</span>
-                <span v-show="btnUnuse"  class="btn __pointer" :class="{
+                }" @click="validTx">{{ $t('submitStaking') }}</span>
+                <span v-show="btnUnuse"  class="__form_btn __pointer" :class="{
                     'unuse': btnUnuse
                 }">{{ $t('submitStaking') }}</span>
             </div>
@@ -55,6 +55,7 @@ import { initPwd } from 'components/password/index.js';
 import BigNumber from 'utils/bigNumber';
 import statistics from 'utils/statistics';
 import { verifyAmount } from 'utils/validations';
+import { execWithValid } from 'utils/execWithValid';
 
 const amountTimeout = null;
 const minNum = 134;
@@ -153,7 +154,7 @@ export default {
         addToAddrWithMine() {
             this.toAddr = this.addr;
         },
-        validTx() {
+        validTx: execWithValid(function () {
             if (this.btnUnuse) {
                 return;
             }
@@ -175,7 +176,7 @@ export default {
                     this._sendPledgeTx();
                 }
             }, true);
-        },
+        }),
         _sendPledgeTx() {
             statistics.event('Vite_web_wallet', 'quota', 'ConfirmQuota');
             this.loading = true;
@@ -200,10 +201,10 @@ export default {
 
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
+@import "../form.scss";
 
 .pledge-tx-wrapper {
     position: relative;
-    margin-top: 14px;
 
     .row {
         display: flex;
@@ -217,42 +218,14 @@ export default {
             margin-top: 14px;
         }
 
-        .title {
-            @include font-family-bold();
-            font-size: 12px;
-            color: #1d2024;
-            letter-spacing: 0.35px;
-            line-height: 16px;
-            margin-bottom: 12px;
-
-            .err {
-                float: right;
-                font-size: 12px;
-                color: #ff2929;
-                line-height: 16px;
-            }
-        }
-
-        .about, .btn {
+        .about, .__form_btn {
             display: inline-block;
             width: 48%;
         }
+    }
 
-        .btn {
-            border-radius: 2px;
-            background: #007aff;
-            color: #fff;
-            line-height: 34px;
-            text-align: center;
-            float: right;
-            font-size: 12px;
-
-            &.unuse {
-                background: #efefef;
-                color: #666;
-                cursor: not-allowed;
-            }
-        }
+    .__form_input.all {
+        width: 100%;
     }
 
     .unit {
@@ -294,26 +267,6 @@ export default {
                 top: -12px;
                 left: 15px;
             }
-        }
-    }
-
-    .input-item {
-        box-sizing: border-box;
-        height: 34px;
-        line-height: 34px;
-        background: #fff;
-        border: 1px solid #d4dee7;
-        border-radius: 2px;
-        font-size: 12px;
-        color: #5e6875;
-        padding: 0 15px;
-
-        &.all {
-            width: 100%;
-        }
-
-        &.unuse {
-            background: #f3f6f9;
         }
     }
 }

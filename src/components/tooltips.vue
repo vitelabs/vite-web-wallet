@@ -27,7 +27,8 @@ export default {
     border-radius: 2px;
     box-sizing: border-box;
     line-height: 20px;
-    padding: 10px;
+    padding: 4px 6px;
+    font-size: 12px;
 
     .trigle {
         border-top: 7px solid transparent;

@@ -1,6 +1,6 @@
 <template>
     <div class="list-wrapper">
-        <div class="title">{{ $t('walletQuota.list.title') }}</div>
+        <div class="__second-title">{{ $t('walletQuota.list.title') }}</div>
         <div class="total">{{ $t('walletQuota.list.total', { amount: totalAmount }) }}</div>
         <div class="list">
             <wallet-table class="wallet-quota-table" :headList="[{
@@ -266,13 +266,8 @@ export default {
     height: 12px;
 }
 
-.title {
-    @include font-family-bold();
-    font-size: 14px;
-    color: #1d2024;
+.__second-title {
     margin-bottom: 8px;
-    font-weight: 600;
-    line-height: 18px;
 }
 
 .total {

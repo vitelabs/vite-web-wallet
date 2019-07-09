@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import confirmComponent from '../confirm.vue';
+import confirmComponent from './confirm.vue';
 
 const Confirm = Vue.extend(confirmComponent);
 

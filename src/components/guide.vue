@@ -1,8 +1,9 @@
 <template>
-    <div v-if="isShowGuide" class="beginner-guide">
+    <div v-if="isShowGuide" class="beginner-guide" :class="$i18n.locale">
+        <div v-if="guideType ===  'assets'" class="assets-back"></div>
         <div class="item" :class="guideType" v-for="(item, i) in $t(`guide.${guideType}`)" :key="i"
              v-show="guideStep === i">
-            <div class="icon">
+            <div v-if="guideType" class="icon">
                 <div v-if="i === 1 && guideType === 'trade'">
                     <span>{{ $t('tradeOpenOrders.title') }}</span>
                     <span>{{ $t('tradeOrderHistory.title') }}</span>
@@ -39,24 +40,31 @@ import storage from 'utils/store';
 const GuideKey = 'beginnerGuide';
 
 export default {
-    props: {
-        guideType: {
-            type: String,
-            default: 'trade'
-        }
+    mounted() {
+        this.setGuide();
     },
     data() {
-        const storeData = storage.getItem(GuideKey);
-        const isShowGuide = !storeData || storeData.indexOf(this.guideType) === -1;
-
         return {
-            storeData,
-            isShowGuide,
+            storeData: '',
+            isShowGuide: false,
             isShowTips: false,
-            guideStep: 0
+            guideStep: 0,
+            guideType: ''
         };
     },
     methods: {
+        setGuide() {
+            let guideType = '';
+            if (this.$route.name === 'tradeCenter') {
+                guideType = 'trade';
+            } else if (this.$route.name === 'assets') {
+                guideType = 'assets';
+            }
+            this.guideType = guideType;
+
+            this.storeData = storage.getItem(GuideKey);
+            this.isShowGuide = !this.storeData || this.storeData.indexOf(this.guideType) === -1;
+        },
         next() {
             this.guideStep++;
             if (this.guideStep >= this.$t(`guide.${ this.guideType }`).length) {
@@ -89,6 +97,17 @@ export default {
     z-index: 1000;
     background: rgba(0,0,0,0.3);
 }
+
+.assets-back {
+    position: absolute;
+    top: 285px;
+    left: 10px;
+    width: calc(100% - 20px);
+    height: 75px;
+    background: url('~assets/imgs/assets_guide_zh.jpg');
+    background-size: 100% 100%;
+}
+
 .item {
     position: absolute;
     max-width: 250px;
@@ -152,6 +171,14 @@ export default {
     }
 }
 
+.en .trade.item {
+    &:nth-child(2) {
+        left: 210px;
+    }
+    &:nth-child(3) {
+        left: 425px;
+    }
+}
 .trade.item {
     &:first-child, &:nth-child(4) {
         top: 109px;
@@ -229,16 +256,16 @@ export default {
         margin-left: -6px;
     }
 
-    &:first-child {
-        left: 250px;
-    }
-
     &:nth-child(2) {
-        right: 300px;
+        left: 15%;
     }
 
     &:nth-child(3) {
-        left: 690px;
+        right: 30%;
+    }
+
+    &:nth-child(4) {
+        right: 50%;
     }
 }
 

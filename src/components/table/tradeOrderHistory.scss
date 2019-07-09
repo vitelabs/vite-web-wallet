@@ -1,3 +1,14 @@
+.order-tab .trade-history-table {
+    @include rowWith {
+        &:first-child {
+            padding-left: 0; 
+        }
+        &:last-child {
+            padding-right: 10px; 
+        }
+    }
+}
+
 .trade-history-table {
     width: 100%;
     height: 100%;
@@ -7,7 +18,6 @@
     
         &:first-child {
             width: 160px;
-            padding-left: 0;
         }
         &:nth-child(2) {
             width: 17%;
@@ -22,9 +32,6 @@
         &:nth-child(8),
         &:nth-child(9) {
             width: 13%;
-        }
-        &:last-child {
-            padding-right: 10px;
         }
     }
     

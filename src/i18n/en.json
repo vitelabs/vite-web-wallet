@@ -22,20 +22,22 @@
     "withdrawHeight": "Expected Snapshot Height",
     "balance": "Balance",
     "addrName": "Address{index}",
+    "true": "true",
+    "false": "false",
     "guide": {
-        "close": "关闭",
-        "next": "下一步",
-        "closeTips": "点击关闭新手引导",
+        "close": "Close",
+        "next": "Next",
+        "closeTips": "Skip user guide (Not recommended)",
         "trade": [
-            "在这里管理您的钱包资产和交易所资产",
-            "查看当前委托和历史委托记录，掌握交易细节",
-            "参与挖矿，获取VX和交易所手续费分红（挖矿分红）",
-            "体验钱包更多功能：抵押配额、超级节点、投票、一键置换、交易详情"
+            "Manage your assets (both Web Wallet and ViteX exchange) here",
+            "Check out Open Orders and Order History, know trading details",
+            "Participate in mining, acquire VX and trading fee dividends (Mining Dividends)",
+            "Experience more features: Staking for Quota, becoming a SBP (Snapshot Block Producer) runner, Voting for SBPs, ERC20 conversion, Transaction Details, etc."
         ],
         "assets": [
-            "充币至交易所",
-            "提现至钱包",
-            "跨链充值提现"
+            "Deposit to Exchange",
+            "Withdraw to Wallet",
+            "Cross-Chain Receive & Transfer"
         ]
     },
     "dealReminder": {
@@ -393,7 +395,64 @@
         }
     },
     "walletMintage": {
-        "title": "铸币"
+        "title": "Token Issuance",
+        "address": "Issuance Address",
+        "tokenName": "Token Name",
+        "tokenSymbol": "Token Symbol",
+        "totalSupply": "Total Supply",
+        "decimals": "Decimals",
+        "isReIssuable": "ReIssuable",
+        "maxSupply": "Max Supply",
+        "ownerBurnOnly": "Burn out by Owner Only",
+        "isOwnerBurnOnly": "Burn out by Owner Only",
+        "mint": "Confirm",
+        "tokenList": "Issued Token",
+        "submit": "Submit",
+        "cancel": "Cancel",
+        "success": "Token Issuance Success",
+        "fail": "Token Issuance Failure",
+        "getListFail": "获取列表失败",
+        "mintageConfirm": {
+            "title": "Check your Token Issuance Information",
+            "balance": "Balance",
+            "fee": "Issuance Fee",
+            "btn": "Confirm"
+        },
+        "reIssuableConfirm": {
+            "title": "Change to Non-issuable",
+            "text": "Make sure to change {tokenName} to Non-issuable status?"
+        },
+        "changeOwnerConfirm": {
+            "title": "Transfer Ownership",
+            "address": "Recipient Address"
+        },
+        "issueConfirm": {
+            "title": "增发代币",
+            "amount": "增发数量",
+            "overAmount": "增发数量超出上限"
+        },
+        "hint": {
+            "tokenName": "Token name should have 1-40 characters including capitals and lowercase letters, spaces and underlines. Continuous spaces and numbers are not supported.",
+            "tokenSymbol": "Token symbol should have 1-10 characters, only capitals and numbers are supported.",
+            "decimals": "10**decimals 不能超过 totalSupply",
+            "success": "Token Issuance Successful",
+            "fail": "Token Issuance failed"
+        },
+        "err": {
+            "tokenNameFormat": "Token Name's format is incorrect",
+            "tokenNameNull": "Token Name is required",
+            "tokenSymbolFormat": "Token Symbol's format is incorrect",
+            "tokenSymbolNull": "Token Symbol is required",
+            "supplyMax": "Excessive amount of token issuance",
+            "totalSupplyFormat": "Wrong format of Total Supply",
+            "totalSupplyNull": "Total Supply is required",
+            "maxSupplyNull": "Max Supply is required",
+            "maxSupplyMin": "Total Supply must be less than Max Supply",
+            "decimalsNull": "Decimals field is required",
+            "decimalsFormat": "Wrong format of decimals",
+            "decimalsMax": "Decimals are out of range",
+            "maxSupplyFormat": "Wrong format of Max Supply"
+        }
     },
     "walletQuota": {
         "title": "Quota Management",
@@ -445,9 +504,9 @@
             "amount": "Amount",
             "withdrawTime": "Expected Due Date",
             "unexpired": "Temporarily cannot make withdrawal of staked token until due date",
-            "vip": "此抵押为您开通交易所VIP金额，请前往交易所撤销VIP",
-            "mining": "此抵押为您交易所抵押挖矿金额，请前往交易所挖矿页面取回",
-            "other": "此抵押为您通过其他方式抵押，不支持在此处取回"
+            "vip": "This staking action is for default opening VIP in ViteX exchange, please go to ViteX exchange page to cancel VIP",
+            "mining": "This staking is your staking mining amount in ViteX, please go to ViteX mining page to retrieve",
+            "other": "This staking is staked via other ways and it is not supported retrieving here"
         }
     },
     "walletTransList": {
@@ -595,7 +654,22 @@
         }
     },
     "assets": {
-        "title": "Assets"
+        "title": "Assets",
+        "vb":{
+            "title":"WalletConnect",
+            "connect":{
+                "tips":"Scan a QR code to link your mobile wallet using WalletConnect."
+            },
+            "confirm":{
+                "tips":"请在VITE App上确认交易"
+            },
+            "start":{
+                "scan":"Scan a QR code to link your mobile wallet using WalletConnect.",
+                "downloadTips":"Don’t have an app that supports WalletConnect yet? ",
+                "download":"Get Vite Wallet"
+            },
+            "defaultName":"我的账户"
+        }
     },
     "walletConversion": {
         "title": "VITE Conversion",
@@ -711,24 +785,24 @@
             "priceNotNull": "Amount cannot be empty",
             "amountNotNull": "Volume cannot be empty",
             "quantityNotNull": "Quantity cannot be empty",
-            "cancelVip": "取消",
-            "openVip": "开通",
-            "dexFee": "交易所基础费率：{fee}",
-            "operatorFee": "运营商收取费率：{fee}",
-            "vipFee": "VIP特权抵扣：{fee}"
+            "cancelVip": "Cancel",
+            "openVip": "Become a VIP",
+            "dexFee": "Exchange Default Fees: {fee}",
+            "operatorFee": "Operator Fees: {fee}",
+            "vipFee": "VIP Discount: {fee}"
         },        
         "vipConfirm": {
-            "cancelVip": "取消VIP",
-            "openVip": "开通VIP",
-            "openStakingAmount": "开通VIP抵押金额",
-            "cancelStakingAmount": "可取回抵押金额",
-            "noBalance": "交易所可用余额不足",
-            "openHint": "VIP开通后，可享有降低0.1%手续费特权，开通VIP需抵押10000VITE，30天后可手动取回",
-            "cancelHint": "预计 {time} 可取回抵押，取回抵押后，您将无法再使用VIP特权",
-            "openSuccess": "申请开通VIP成功，稍后生效",
-            "openFail": "开通失败",
-            "cancelSuccess": "申请取消VIP成功",
-            "cancelFail": "取消失败"
+            "cancelVip": "Cancel VIP",
+            "openVip": "Become a VIP",
+            "openStakingAmount": "Staking Amount for Becoming a VIP",
+            "cancelStakingAmount": "Retrievable Staking Amount",
+            "noBalance": "Insufficient Balance",
+            "openHint": "You will enjoy the privilege of 0.1% trading fee discount after becoming a VIP. The staking amount of 10,000 VITE can be manually retrieved after 30 days.",
+            "cancelHint": "You can retrieve your staking amount at approximately {time}. You will lose your VIP privilege after retrieving.",
+            "openSuccess": "Application Successful! VIP status will come into effect later.",
+            "openFail": "Failed to apply VIP",
+            "cancelSuccess": "Cancel VIP Successful",
+            "cancelFail": "Cancel Failed"
         }
     },
     "tradeAssets": {
@@ -881,36 +955,36 @@
         }
     },
     "tradeMining": {
-        "title": "挖矿",
-        "addQuota": "新增抵押挖矿",
-        "add": "增加",
-        "withdraw": "取回",
+        "title": "Mining",
+        "addQuota": "Add new staking mining",
+        "add": "Add",
+        "withdraw": "Retrieve",
         "tbHead": {
-            "date": "日期",
-            "fee": "交易手续费金额",
-            "mining": "挖矿金额",
-            "pledge": "抵押金额"
+            "date": "Date",
+            "fee": "Trading Fees",
+            "mining": "Mining Amount",
+            "pledge": "Staking Amount"
         },
-        "txTitle": "交易挖矿总收益",
-        "quotaTitle": "抵押挖矿总收益",
-        "addHint": "每日约13:00(UTC+8)计算抵押挖矿收益；抵押生效后，您可3天后可手动取回",
-        "withdrawHint": "取回后，您将无法再挖矿VX",
-        "addTitle": "抵押VITE挖矿",
-        "withdrawTitle": "取回抵押VITE",
-        "addPlaceHolder": "请输入抵押金额，最少134vite",
-        "withdrawPlaceHolder": "请输入取回金额，最少134vite",
-        "addBtn": "提交抵押",
-        "withdrawBtn": "确认取回",
-        "stakingBalance": "可取回抵押余额"
+        "txTitle": "Trading Mining Total Profit",
+        "quotaTitle": "Staking Mining Total Profit",
+        "addHint": "Staking mining profit will be calculated at 13:00(UTC+8) everyday. You can manually retrieve your staking amount after the staking comes into effective",
+        "withdrawHint": "You will no longer be able to mining VX after retrieving",
+        "addTitle": "Staking VITE for Mining",
+        "withdrawTitle": "Retrieving Staked VITE",
+        "addPlaceHolder": "Please input staking amount, at least 134 VITE",
+        "withdrawPlaceHolder": "Please input retrieving amount, at least 134 VITE",
+        "addBtn": "Submit Staking",
+        "withdrawBtn": "Confirm to retrieve",
+        "stakingBalance": "Retrievable Staking Amount"
     },
     "tradeDividend": {
-        "title": "分红",
-        "poolTitle": "手续费分红池",
-        "listTitle": "我的分红",
-        "date": "日期",
-        "VX": "持有VX",
-        "coin": "分红币种",
-        "amount": "分红金额",
-        "price": "分红总估值"
+        "title": "Dividends",
+        "poolTitle": "Trading Fee Dividend Pool",
+        "listTitle": "My Dividends",
+        "date": "Date",
+        "VX": "Holding VX",
+        "coin": "Type",
+        "amount": "Amount",
+        "price": "Total Estimated Value"
     }
 }

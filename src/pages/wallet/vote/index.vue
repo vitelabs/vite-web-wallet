@@ -4,8 +4,8 @@
 
         <loading v-if="loadingToken" class="loading"></loading>
 
-        <section v-if="!loadingToken" class="vote_list">
-            <div class="title ct">{{ $t('walletVote.section1.title')}}</div>
+        <section v-if="!loadingToken">
+            <div class="__second-title no-top">{{ $t('walletVote.section1.title')}}</div>
             <wallet-table class="wallet-vote-table"
                           :headList="voteHeadList" :contentList="voteList">
                 <span v-for="(v, i) in voteList" :key="i"
@@ -17,15 +17,15 @@
 
                 <span v-for="(v, i) in voteList" :key="i"
                       :slot="`${i}operateKeyBefore`" :class="cache ? 'unclickable' : 'clickable'">
-                    <span v-unlock-account @unlocked="cancelVote(v)">{{ v.operate }}</span>
+                    <span @click="cancelVote(v)">{{ v.operate }}</span>
                     <span class="reward" @click="openReward(v)">{{ $t('walletVote.toReward') }}</span>
                 </span>
             </wallet-table>
         </section>
 
         <section v-if="!loadingToken" class="node_list">
-            <div class="title">
-                <div class="ct">{{ $t('walletVote.section2.title') }}</div>
+            <div class="__second-title">
+                <div class="title">{{ $t('walletVote.section2.title') }}</div>
                 <search v-model="filterKey" :placeholder="$t('walletVote.search')"></search>
             </div>
             <wallet-table class="wallet-vote-table node-list"
@@ -37,7 +37,7 @@
 
                 <span v-for="(v, i) in nodeList" :key="i"
                       :slot="`${i}operateKeyBefore`"
-                      v-unlock-account @unlocked="vote(v)">
+                      @click="vote(v)">
                     {{ v.operate }}
                 </span>
             </wallet-table>
@@ -57,6 +57,7 @@ import { timer } from 'utils/asyncFlow';
 import BigNumber from 'utils/bigNumber';
 import $ViteJS from 'utils/viteClient';
 import sendTx from 'utils/sendTx';
+import { execWithValid } from 'utils/execWithValid';
 
 export default {
     components: { secTitle, tooltips, search, loading, walletTable },
@@ -293,7 +294,7 @@ export default {
             const activeAccount = this.$store.state.wallet.activeAcc;
             window.open(`https://reward.vite.net?language=${ locale }&address=${ activeAccount ? activeAccount.address : '' }`);
         },
-        cancelVote(v) {
+        cancelVote: execWithValid(function (v) {
             if (this.cache) {
                 return;
             }
@@ -321,8 +322,8 @@ export default {
                 cancelTxt: this.$t('walletVote.section1.confirm.cancelText'),
                 submit: sendCancel
             }, true);
-        },
-        vote(v) {
+        }),
+        vote: execWithValid(function (v) {
             const successVote = () => {
                 const t = Object.assign({}, v);
                 t.isCache = true;
@@ -365,7 +366,7 @@ export default {
                 submit: sendVote,
                 exchange: this.haveVote
             }, true);
-        }
+        })
     }
 };
 </script>
@@ -379,21 +380,18 @@ export default {
     display: flex;
     flex-direction: column;
 
-    .ct {
-        font-weight: 600;
-        height: 18px;
-        line-height: 18px;
-        @include font-family-bold();
-        font-size: 14px;
-        color: #1d2024;
-    }
-
-    .title {
+    .__second-title {
         display: flex;
         flex: none;
         justify-content: space-between;
         flex-wrap: wrap;
         margin: 14px 0;
+        &.no-top {
+            margin-top: 0;
+        }
+        .title {
+            line-height: 34px;
+        }
         .ct {
             margin-top: 10px;
         }
