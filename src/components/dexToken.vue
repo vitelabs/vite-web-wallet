@@ -47,7 +47,7 @@
                 {{ $t('trade.dexToken.fee') }}
                 <span v-show="!isHaveBalance" class="__err __hint">{{ $t('hint.insufficientBalance') }}</span>
             </div>
-            <div class="no-input">{{ spend }} VITE</div>
+            <div class="__unuse-row __light">{{ spend }} VITE</div>
         </div>
         <div class="hint"><span>{{ $t('trade.dexToken.hint') }}</span></div>
     </confirm>
@@ -55,7 +55,7 @@
 
 <script>
 import loading from 'components/loading';
-import confirm from 'components/confirm';
+import confirm from 'components/confirm/confirm.vue';
 import viteInput from 'components/viteInput';
 import { getTokenIcon } from 'utils/tokenParser';
 import BigNumber from 'utils/bigNumber';
