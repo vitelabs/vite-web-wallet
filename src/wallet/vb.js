@@ -1,4 +1,4 @@
-import Connector from '/Users/yuanzhang/vitecodes/walletconnect-monorepo';
+import Connector from '@vite/bifrost';
 import { setCurrHDAcc, getCurrHDAcc } from './index';
 import store from 'store';
 import router from 'router';
@@ -27,6 +27,7 @@ export class VB extends Connector {
         });
         this.on('disconnect', () => {
             console.log('disconnect');
+            this.destroy();
             if (getCurrHDAcc() && getCurrHDAcc().isBifrost) {
                 getCurrHDAcc().lock();
                 store.commit('setCurrHDAccStatus');
@@ -40,7 +41,8 @@ export class VB extends Connector {
     }
 
     async sendVbTx(...args) {
-        return this.sendCustomRequest({ method: 'vite_sendTx', params: args });
+        console.log('sendvbtx', args);
+        return this.sendCustomRequest({ method: 'vite_signAndSendTx', params: args });
     }
 }
 export let vbInstance = null;
@@ -48,7 +50,6 @@ export function getVbInstance() {
     return vbInstance;
 }
 export function initVB() {
-    vbInstance && vbInstance.destroy();
     vbInstance = new VB({ bridge: BRIDGE });
     vbInstance.createSession().then(() => console.log('connect uri', vbInstance.uri));
     return vbInstance;

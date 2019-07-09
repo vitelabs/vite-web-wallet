@@ -1050,6 +1050,51 @@
     lodash "^4.17.11"
     to-fast-properties "^2.0.0"
 
+"@ethersproject/bignumber@>5.0.0-beta.0":
+  version "5.0.0-beta.127"
+  resolved "https://registry.npm.taobao.org/@ethersproject/bignumber/download/@ethersproject/bignumber-5.0.0-beta.127.tgz#9fb1df7979b81c77a22ce4a2ca7e049d1c7f52e9"
+  integrity sha1-n7HfeXm4HHeiLOSiyn4EnRx/Uuk=
+  dependencies:
+    "@ethersproject/bytes" ">5.0.0-beta.0"
+    "@ethersproject/errors" ">5.0.0-beta.0"
+    "@ethersproject/properties" ">5.0.0-beta.0"
+    bn.js "^4.4.0"
+
+"@ethersproject/bytes@>5.0.0-beta.0", "@ethersproject/bytes@^5.0.0-beta.126":
+  version "5.0.0-beta.126"
+  resolved "https://registry.npm.taobao.org/@ethersproject/bytes/download/@ethersproject/bytes-5.0.0-beta.126.tgz#17992dfbf4e1b8e972ad1caf04780d7d8ddc4ca6"
+  integrity sha1-F5kt+/ThuOlyrRyvBHgNfY3cTKY=
+  dependencies:
+    "@ethersproject/errors" ">5.0.0-beta.0"
+
+"@ethersproject/constants@>5.0.0-beta.0":
+  version "5.0.0-beta.126"
+  resolved "https://registry.npm.taobao.org/@ethersproject/constants/download/@ethersproject/constants-5.0.0-beta.126.tgz#cc3bab8269f085d0032730493433595ea0989bfd"
+  integrity sha1-zDurgmnwhdADJzBJNDNZXqCYm/0=
+  dependencies:
+    "@ethersproject/bignumber" ">5.0.0-beta.0"
+
+"@ethersproject/errors@>5.0.0-beta.0":
+  version "5.0.0-beta.126"
+  resolved "https://registry.npm.taobao.org/@ethersproject/errors/download/@ethersproject/errors-5.0.0-beta.126.tgz#bddabff53cb0a6fd544e1168ce3990a095f2b593"
+  integrity sha1-vdq/9Tywpv1UThFozjmQoJXytZM=
+
+"@ethersproject/properties@>5.0.0-beta.0":
+  version "5.0.0-beta.127"
+  resolved "https://registry.npm.taobao.org/@ethersproject/properties/download/@ethersproject/properties-5.0.0-beta.127.tgz#ec2032675e909fa1d2e6adae09502271b2a702c6"
+  integrity sha1-7CAyZ16Qn6HS5q2uCVAicbKnAsY=
+  dependencies:
+    "@ethersproject/errors" ">5.0.0-beta.0"
+
+"@ethersproject/strings@^5.0.0-beta.125":
+  version "5.0.0-beta.125"
+  resolved "https://registry.npm.taobao.org/@ethersproject/strings/download/@ethersproject/strings-5.0.0-beta.125.tgz#031066eeb8ffd166d25b0600e0a9c75682c1bbd0"
+  integrity sha1-AxBm7rj/0WbSWwYA4KnHVoLBu9A=
+  dependencies:
+    "@ethersproject/bytes" ">5.0.0-beta.0"
+    "@ethersproject/constants" ">5.0.0-beta.0"
+    "@ethersproject/errors" ">5.0.0-beta.0"
+
 "@lerna/add@3.14.0":
   version "3.14.0"
   resolved "https://registry.yarnpkg.com/@lerna/add/-/add-3.14.0.tgz#799d416e67d48c285967abf883be746557aefa48"
@@ -1905,6 +1950,11 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-10.14.8.tgz#fe444203ecef1162348cd6deb76c62477b2cc6e9"
   integrity sha512-I4+DbJEhLEg4/vIy/2gkWDvXBOOtPKV9EnLhYjMoqxcRW+TTZtUftkHktz/a8suoD5mUL7m6ReLrkPvSsCQQmw==
 
+"@types/node@^12.0.12":
+  version "12.6.1"
+  resolved "https://registry.npm.taobao.org/@types/node/download/@types/node-12.6.1.tgz#d5544f6de0aae03eefbb63d5120f6c8be0691946"
+  integrity sha1-1VRPbeCq4D7vu2PVEg9si+BpGUY=
+
 "@types/unist@*", "@types/unist@^2.0.0":
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/@types/unist/-/unist-2.0.3.tgz#9c088679876f374eb5983f150d4787aa6fb32d7e"
@@ -1926,6 +1976,15 @@
     "@types/node" "*"
     "@types/unist" "*"
     "@types/vfile-message" "*"
+
+"@vite/bifrost@0.0.1-0":
+  version "0.0.1-0"
+  resolved "https://registry.npm.taobao.org/@vite/bifrost/download/@vite/bifrost-0.0.1-0.tgz?cache=0&sync_timestamp=1562669743986&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40vite%2Fbifrost%2Fdownload%2F%40vite%2Fbifrost-0.0.1-0.tgz#beb852aef3d5bfea7dd8fc72ca82a6d712545247"
+  integrity sha1-vrhSrvPVv+p92PxyyoKm1xJUUkc=
+  dependencies:
+    "@ethersproject/bytes" "^5.0.0-beta.126"
+    "@ethersproject/strings" "^5.0.0-beta.125"
+    "@types/node" "^12.0.12"
 
 "@vite/vitejs-ws@2.2.0":
   version "2.2.0"
