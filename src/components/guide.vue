@@ -1,8 +1,21 @@
 <template>
     <div v-if="isShowGuide" class="beginner-guide" :class="$i18n.locale">
-        <div v-if="guideType ===  'assets'" class="assets-back"></div>
-        <div class="item" :class="guideType" v-for="(item, i) in $t(`guide.${guideType}`)" :key="i"
-             v-show="guideStep === i">
+        <div v-if="guideType ===  'assets'" class="assets-back">
+            <div class="item assets">
+                <div class="close __pointer" @mouseenter="overClose" @mouseleave="leaveClose" @click="close">
+                    <div class="tips" v-show="isShowTips">{{ $t('guide.closeTips') }}</div>
+                </div>
+                <div class="content">
+                    <span v-for="(item, i) in $t(`guide.${guideType}`)" :key="i">{{ item }}<br/></span>
+                </div>
+                <div class="next-wrapper">
+                    <div class="next __pointer" @click="close">{{ $t('guide.close') }}</div>
+                </div>
+            </div>
+        </div>
+
+        <div v-show="guideType === 'trade' && guideStep === i" class="item trade" :class="guideType"
+             v-for="(item, i) in $t(`guide.${guideType}`)" :key="i">
             <div v-if="guideType" class="icon">
                 <div v-if="i === 1 && guideType === 'trade'">
                     <span>{{ $t('tradeOpenOrders.title') }}</span>
@@ -12,14 +25,14 @@
                     <span>{{ $t('tradeMining.title') }}</span>
                     <span>{{ $t('tradeDividend.title') }}</span>
                 </div>
-
+                <!--
                 <span v-if="guideType === 'assets'" class="tab">
                     {{ [
                         $t('tokenCard.actionType.EXCHARGE'),
                         $t('tokenCard.actionType.EXWITHDRAW'),
                         `${$t('tokenCard.actionType.CHARGE')}    ${$t('tokenCard.actionType.WITHDRAW')}`
                     ][i] }}
-                </span>
+                </span> -->
             </div>
             <div class="close __pointer" @mouseenter="overClose" @mouseleave="leaveClose" @click="close">
                 <div class="tips" v-show="isShowTips">{{ $t('guide.closeTips') }}</div>
@@ -96,20 +109,25 @@ export default {
     right: 0;
     z-index: 1000;
     background: rgba(0,0,0,0.3);
+    overflow: hidden;
 }
 
 .assets-back {
     position: absolute;
-    top: 285px;
-    left: 10px;
-    width: calc(100% - 20px);
-    height: 75px;
+    top: 300px;
+    left: 80px;
+    width: 1130px;
+    height: 50px;
     background: url('~assets/imgs/assets_guide_zh.jpg');
     background-size: 100% 100%;
+}
+.en .assets-back {
+    background: url('~assets/imgs/assets_guide_en.jpg');
 }
 
 .item {
     position: absolute;
+    min-width: 200px;
     max-width: 250px;
     padding: 12px;
     box-sizing: border-box;
@@ -239,7 +257,9 @@ export default {
 }
 
 .assets.item {
-    top: 195px;
+    transform: translateY(-100%);
+    top: -10px;
+
     .icon {
         word-break: keep-all;
         white-space: nowrap;
@@ -268,5 +288,4 @@ export default {
         right: 50%;
     }
 }
-
 </style>
