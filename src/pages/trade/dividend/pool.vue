@@ -80,7 +80,7 @@ export default {
                     this.pool[tokenType.name].push(token);
                     tokenIds.push(token.tokenInfo.tokenId);
                 }
-                // console.log(tokenIds);
+
                 this.$store.dispatch('addRateTokens', tokenIds);
             }).catch(err => {
                 console.warn(err);

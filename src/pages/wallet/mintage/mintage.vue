@@ -68,7 +68,7 @@
                 </div>
             </div>
 
-            <div v-show="canMintage" class="__form_btn __pointer" v-unlock-account="toMintage">{{ $t('walletMintage.mint') }}</div>
+            <div v-show="canMintage" class="__form_btn __pointer" @click="toMintage">{{ $t('walletMintage.mint') }}</div>
             <div v-show="!canMintage" class="__form_btn __pointer unuse">{{ $t('walletMintage.mint') }}</div>
         </div>
 
@@ -83,6 +83,7 @@ import viteInput from 'components/viteInput';
 import boolRadio from 'components/boolRadio';
 import BigNumber from 'utils/bigNumber';
 import mintageConfirm from './confirm';
+import { execWithValid } from 'utils/execWithValid';
 
 const maxNum = BigNumber.exponentiated(2, 256, '-1');
 
@@ -306,20 +307,22 @@ export default {
         },
 
         toMintage() {
-            this.validAll();
-            if (!this.canMintage) {
-                return;
-            }
+            execWithValid(() => {
+                this.validAll();
+                if (!this.canMintage) {
+                    return;
+                }
 
-            this.tokenInfo = {
-                tokenName: this.tokenName.trim(),
-                tokenSymbol: this.tokenSymbol.trim(),
-                totalSupply: this.totalSupply,
-                decimals: this.decimals,
-                isReIssuable: this.isReIssuable,
-                maxSupply: this.maxSupply,
-                ownerBurnOnly: this.ownerBurnOnly
-            };
+                this.tokenInfo = {
+                    tokenName: this.tokenName.trim(),
+                    tokenSymbol: this.tokenSymbol.trim(),
+                    totalSupply: this.totalSupply,
+                    decimals: this.decimals,
+                    isReIssuable: this.isReIssuable,
+                    maxSupply: this.maxSupply,
+                    ownerBurnOnly: this.ownerBurnOnly
+                };
+            })();
         },
         closeConfirm() {
             this.tokenInfo = null;

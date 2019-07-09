@@ -56,13 +56,13 @@
                   :slot="`${i}operateBefore`">
                 <span v-show="!item.isReIssuable">--</span>
                 <span v-show="item.isReIssuable" class="btn __pointer"
-                      v-unlock-account @unlocked="changeOwner(item)">
+                      @click="changeOwner(item)">
                     {{ $t('walletMintage.changeOwnerConfirm.title') }}</span>
                 <span v-show="item.isReIssuable" class="btn __pointer"
-                      v-unlock-account @unlocked="changeReIssuable(item)">
+                      @click="changeReIssuable(item)">
                     {{ $t('walletMintage.reIssuableConfirm.title') }}</span>
                 <span v-show="item.isReIssuable" class="btn __pointer"
-                      v-unlock-account @unlocked="issue(item)">
+                      @click="issue(item)">
                     {{ $t('walletMintage.issueConfirm.title') }}</span>
             </span>
 
@@ -113,14 +113,14 @@
                 </div>
                 <vite-input v-model="amount" :valid="validAmount"></vite-input>
             </div>
-            <!-- <div class="__row">
+            <div class="__row">
                 <div class="__row-t">
-                    {{ $t('walletMintage.changeOwnerConfirm.address') }}
+                    {{ $t('walletMintage.issueConfirm.address') }}
                     <span v-show="!isValidAddress" class="__err __hint">{{ $t('hint.addrFormat') }}</span>
                 </div>
                 <vite-input v-model="address" :valid="validAddr"
                             :placeholder="$t('wallet.placeholder.addr')"></vite-input>
-            </div> -->
+            </div>
         </show-confirm>
     </div>
 </template>
@@ -135,6 +135,7 @@ import tooltips from 'components/tooltips';
 import sendTx from 'utils/sendTx';
 import BigNumber from 'utils/bigNumber';
 import { verifyAmount } from 'utils/validations';
+import { execWithValid } from 'utils/execWithValid';
 
 export default {
     components: { walletTable, showConfirm, viteInput, tooltips },
@@ -207,23 +208,30 @@ export default {
             });
         },
         changeReIssuable(item) {
-            initPwd({
-                title: this.$t('walletMintage.reIssuableConfirm.title'),
-                content: this.$t('walletMintage.reIssuableConfirm.text', { tokenName: item.tokenName }),
-                submit: () => {
-                    this.toChangeReIssuale(item);
-                }
-            }, true);
+            execWithValid(() => {
+                initPwd({
+                    title: this.$t('walletMintage.reIssuableConfirm.title'),
+                    content: this.$t('walletMintage.reIssuableConfirm.text', { tokenName: item.tokenName }),
+                    submit: () => {
+                        this.toChangeReIssuale(item);
+                    }
+                }, true);
+            })();
         },
         changeOwner(item) {
-            this.changeOwnerToken = item;
+            execWithValid(() => {
+                this.changeOwnerToken = item;
+            })();
         },
         cancelChangeOwner() {
             this.changeOwnerToken = null;
             this.address = '';
         },
         issue(item) {
-            this.issueToken = item;
+            execWithValid(() => {
+                this.issueToken = item;
+                this.address = this.issueToken.owner;
+            })();
         },
         cancelIssue() {
             this.issueToken = null;
@@ -270,8 +278,8 @@ export default {
                 submit: () => {
                     sendTx('mintageIssue', {
                         tokenId: this.issueToken.tokenId,
-                        amount: this.amount, // [TODO] toMin
-                        beneficial: this.activeAddress // [TODO] wait confirm
+                        amount: BigNumber.toMin(this.amount, this.issueToken.decimals),
+                        beneficial: this.issueToken.owner
                     }).then(() => {
                         this.$toast(this.$t('walletMintage.success'));
                         this.cancelIssue();
@@ -294,6 +302,7 @@ export default {
     margin-top: 14px;
 }
 .btn {
+    margin-right: 8px;
     color: #007AFF;
     &.unuse {
         color: #ced1d5;
