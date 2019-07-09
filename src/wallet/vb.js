@@ -1,4 +1,4 @@
-import Connector from '@vite/bifrost@0.0.1-0';
+import Connector from '@vite/bifrost';
 import { setCurrHDAcc, getCurrHDAcc } from './index';
 import store from 'store';
 import router from 'router';
