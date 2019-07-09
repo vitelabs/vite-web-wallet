@@ -4,6 +4,7 @@ import confirmComponent from './confirm.vue';
 const Confirm = Vue.extend(confirmComponent);
 
 export default function ({
+    size,
     showMask = true,
     title,
     content = '',
@@ -36,6 +37,7 @@ export default function ({
     };
 
     instance.showMask = showMask;
+    instance.size = size || '';
     instance.title = title;
     instance.content = content;
     instance.singleBtn = singleBtn;

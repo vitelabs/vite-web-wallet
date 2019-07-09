@@ -55,14 +55,11 @@
         flex: none;
         @include font-family-normal();
         color: rgba(94,104,117,0.58);
+        border-bottom: 1px solid #c6cbd4;
     }
     .__tb_row {
         display: flex;
         justify-content: space-between;
-        border-bottom: 1px solid rgba(212,222,231,1);
-        &.__tb_head {
-            border-bottom: 1px solid #c6cbd4;
-        }
         height: 32px;
         line-height: 32px;
         box-sizing: border-box;
@@ -70,7 +67,7 @@
     .__tb_content_row {
         color: #5E6875;
         cursor: pointer;
-        border-bottom: 1px solid rgba(212,222,231,1);
+        border-bottom: 1px solid rgba(227, 235, 245, 0.6);
         &.active:hover {
             background: rgba(88,145,255,.13);
         }
