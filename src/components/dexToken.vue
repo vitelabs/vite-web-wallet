@@ -1,5 +1,5 @@
 <template>
-    <confirm v-show="isShow" class="dex-token" :btnUnuse="btnUnuse"
+    <confirm v-show="isShow" class="middle" :btnUnuse="btnUnuse"
              :showMask="true" :singleBtn="true"
              :title="$t('trade.dexToken.title')" :closeIcon="true"
              :close="close" :leftBtnTxt="$t('trade.dexToken.btn')"
