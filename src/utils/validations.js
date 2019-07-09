@@ -31,7 +31,7 @@ export function verifyAmount({ decimals, formatDecimals = 8, balance, minAmount,
         if (!amount) {
             return null;
         }
-        console.log(amount);
+
         const checkMsg = checkAmountFormatMsg(amount, formatDecimals);
         if (checkMsg) {
             return checkMsg;
