@@ -654,7 +654,22 @@
         }
     },
     "assets": {
-        "title": "Assets"
+        "title": "Assets",
+        "vb":{
+            "title":"WalletConnect",
+            "connect":{
+                "tips":"Scan a QR code to link your mobile wallet using WalletConnect."
+            },
+            "confirm":{
+                "tips":"请在VITE App上确认交易"
+            },
+            "start":{
+                "scan":"Scan a QR code to link your mobile wallet using WalletConnect.",
+                "downloadTips":"Don’t have an app that supports WalletConnect yet? ",
+                "download":"Get Vite Wallet"
+            },
+            "defaultName":"我的账户"
+        }
     },
     "walletConversion": {
         "title": "VITE Conversion",

@@ -27,28 +27,13 @@ export function addHdAccount({ id, lang, keystore }) {
 
 export function getAccList() {
     const list = getItem(AccListKey) || [];
-    const accList = [];
-
-    list.forEach(item => {
-        const acc = getItem(item.id) || {};
-        accList.push(Object.assign(item, acc));
-    });
-    return accList;
+    return list.map(item => Object.assign(item, getItem(item.id) || {}));
 }
 
 export function setAccList(list) {
-    const accList = [];
-    list.forEach(item => {
-        if (!item.id || !item.lang || !item.keystore) {
-            return;
-        }
-        accList.push({
-            id: item.id,
-            lang: item.lang,
-            keystore: item.keystore
-        });
-    });
-    setItem(AccListKey, accList);
+    setItem(AccListKey, list.filter(item => item.id && item.lang && item.keystore).map(item => {
+        return { id: item.id, lang: item.lang, keystore: item.keystore };
+    }));
 }
 
 export function getLastAcc() {
@@ -56,28 +41,8 @@ export function getLastAcc() {
     if (!lastId) {
         return null;
     }
-
-    const list = getAccList();
-    let i;
-    for (i = 0; i < list.length; i++) {
-        if (list[i].id === lastId) {
-            break;
-        }
-    }
-
-    if (i >= list.length) {
-        return null;
-    }
-
-    const lastAcc = {
-        ...getItem(lastId),
-        ...list[i]
-    };
-
-    if (!lastAcc.activeAddr) {
-        return null;
-    }
-    return lastAcc;
+    const lastAcc = getAccList().find(v => v.id === lastId);
+    return lastAcc && lastAcc.activeAddr ? Object.assign({}, lastAcc, getItem(lastId) || {}) : null;
 }
 
 export function setLastAcc(acc) {

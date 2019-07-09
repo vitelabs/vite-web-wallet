@@ -8,13 +8,14 @@
         </ul>
 
         <ul class="right-lab-list">
-            <div class="tab __pointer" @click="goHelp">{{ $t('help') }}</div>
+            <div class="tab __pointer" @click="goHelp">{{ $t("help") }}</div>
             <div v-show="!isLogin" @click="dexStart" class="tab __pointer">
-                {{ isHaveUsers ? $t('unlockAcc') : $t('login')  }}</div>
+                {{ isHaveUsers ? $t("unlockAcc") : $t("login") }}
+            </div>
             <div v-show="!isLogin" @click="dexChange" class="tab __pointer">
                 {{ isHaveUsers ? $t('changeAcc') : $t('register') }}</div>
             <div v-show="isHaveUsers && $route.name.indexOf('trade') !== -1" class="tab __pointer"
-                 v-unlock-account="showToken" @noactiveacc="dexStart">
+                 @click="showToken">
                 {{ $t('dexToken') }}</div>
             <switch-addr class="switch-tab menu" v-show="$route.name !== 'assets'" ></switch-addr>
         </ul>
@@ -28,6 +29,7 @@ import { StatusMap } from 'wallet';
 import dexToken from 'components/dexToken';
 import switchAddr from 'components/switchAddress';
 import { pwdConfirm } from 'components/password/index.js';
+import { execWithValid } from 'utils/execWithValid';
 
 export default {
     components: { dexToken, switchAddr },
@@ -53,9 +55,11 @@ export default {
         }
     },
     methods: {
-        showToken() {
+        showToken: execWithValid(function () {
             this.isShowDexToken = true;
-        },
+        }, function () {
+            return this.dexStart();
+        }),
         closeToken() {
             this.isShowDexToken = false;
         },
@@ -115,7 +119,7 @@ export default {
     }
 
     .tab {
-        color: #BDC1D1;
+        color: #bdc1d1;
         font-size: 13px;
         @include font-family-bold();
         font-weight: 600;
@@ -131,7 +135,7 @@ export default {
             border-bottom: 2px solid rgba(0, 122, 255, 1);
 
             &::after {
-                content: '';
+                content: "";
                 display: inline-block;
                 border: 6px solid transparent;
                 border-bottom: 6px solid rgba(0, 122, 255, 1);

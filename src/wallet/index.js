@@ -1,9 +1,16 @@
 import { keystore, constant, utils } from '@vite/vitejs';
 import viteCrypto from 'testwebworker';
 import { getOldAccList, setOldAccList } from 'utils/store';
-import { HDAccount, StatusMap as _StatusMap } from './hdAccount';
+import { HDAccount, StatusMap as _StatusMap, VBAccount } from './hdAccount';
 import { getLastAcc, addHdAccount, setAcc, getAccList } from './store';
-
+function constructAccount(acc) {
+    if (acc.isBifrost || acc.id.startsWith('VITEBIRFORST_')) {
+        currentHDAccount = new VBAccount(acc);
+    } else {
+        currentHDAccount = new HDAccount(acc);
+    }
+    return currentHDAccount;
+}
 const { LangList } = constant;
 const { checkParams } = utils;
 
@@ -21,8 +28,11 @@ export function setCurrHDAcc(acc) {
     if (!acc) {
         return;
     }
-    if (!acc.id || !currentHDAccount || currentHDAccount.id !== acc.id) {
-        currentHDAccount = new HDAccount(acc);
+    if (acc.isBifrost && currentHDAccount && currentHDAccount.activeAddr === acc.activeAddr) {
+        return currentHDAccount;
+    }
+    if (acc.isBifrost || !acc.id || !currentHDAccount || currentHDAccount.id !== acc.id) {
+        return constructAccount(acc);
     }
     return currentHDAccount;
 }
@@ -37,7 +47,7 @@ export function getActiveAcc() {
 export function getList() {
     const accList = getAccList() || [];
     const oldAccList = getOldAccList() || [];
-    return accList.concat(oldAccList);
+    return accList.concat(oldAccList).filter(acc => !acc.id.startsWith('VITEBIRFORST_'));// filter vb accounts
 }
 
 export function deleteOldAcc(acc) {
@@ -86,13 +96,24 @@ export function saveHDAccount({ name, pass, hdAddrObj, lang = LangList.english, 
         return id;
     });
 }
-
+// export function saveVBAccount({id,addr,lang,name=""}){
+//     setAcc(id, {
+//         name,
+//         addrNum=1,
+//         activeAddr: addr,
+//         activeIdx: 0
+//     });
+//     addHdAccount({
+//         id,
+//         lang,
+//         keystore: {}
+//     })
+// }
 
 function initCurrHDAccount() {
     const lastAcc = getLastAcc();
     if (!lastAcc) {
         return;
     }
-
-    currentHDAccount = new HDAccount(lastAcc);
+    return constructAccount(lastAcc);
 }

@@ -21,7 +21,7 @@
                 <div class="__tb_cell">{{ v.executedQuantity + ' ' + getOriginSymbol(v.tradeTokenSymbol) }}</div>
                 <div class="__tb_cell">{{ `${(v.executedPercent*100).toFixed(2)}%` }}</div>
                 <div class="__tb_cell">{{ v.executedAvgPrice + ' ' + getOriginSymbol(v.quoteTokenSymbol) }}</div>
-                <div v-unlock-account v-on:unlocked="cancel(v)" class="__tb_cell click-able">
+                <div @click="cancel(v)" class="__tb_cell click-able">
                     {{ $t("tradeOpenOrders.table.rowMap.cancel") }}
                 </div>
             </div>
@@ -39,6 +39,7 @@ import d from 'dayjs';
 import { utils } from '@vite/vitejs';
 import sendTx from 'utils/sendTx';
 import { initPwd } from 'components/password/index.js';
+import { execWithValid } from 'utils/execWithValid';
 
 const { _Buffer } = utils;
 
@@ -69,7 +70,7 @@ export default {
         getOriginSymbol(symbol) {
             return symbol.split('-')[0];
         },
-        cancel(order) {
+        cancel: execWithValid(function (order) {
             const failSubmit = e => {
                 this.$toast(this.$t('tradeOpenOrders.confirm.failToast'), e);
             };
@@ -101,7 +102,7 @@ export default {
                         });
                 }
             }, true);
-        }
+        })
     }
 };
 </script>
