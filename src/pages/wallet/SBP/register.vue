@@ -49,7 +49,7 @@
             <div class="item">
                 <div v-show="!btnUnuse" class="__form_btn __pointer" :class="{
                     'unuse': btnUnuse
-                }" v-unlock-account="validTx">{{ $t('walletSBP.section1.confirmBtn') }}</div>
+                }" @click="validTx">{{ $t('walletSBP.section1.confirmBtn') }}</div>
                 <div v-show="btnUnuse" class="__form_btn __pointer"  :class="{
                     'unuse': btnUnuse
                 }">{{ $t('walletSBP.section1.confirmBtn') }}</div>
@@ -64,6 +64,7 @@ import viteInput from 'components/viteInput';
 import { initPwd } from 'components/password/index.js';
 import BigNumber from 'utils/bigNumber';
 import sendTx from 'utils/sendTx';
+import { execWithValid } from 'utils/execWithValid';
 
 const amount = 500000;
 
@@ -197,7 +198,7 @@ export default {
             this.producerAddrErr = '';
         },
 
-        validTx() {
+        validTx: execWithValid(function () {
             if (this.loading) {
                 return;
             }
@@ -217,7 +218,7 @@ export default {
                     this.sendRegisterTx();
                 }
             }, true);
-        },
+        }),
         sendRegisterTx() {
             this.loading = true;
             const nodeName = this.nodeName.trim();

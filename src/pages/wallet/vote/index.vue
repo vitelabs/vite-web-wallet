@@ -17,7 +17,7 @@
 
                 <span v-for="(v, i) in voteList" :key="i"
                       :slot="`${i}operateKeyBefore`" :class="cache ? 'unclickable' : 'clickable'">
-                    <span v-unlock-account @unlocked="cancelVote(v)">{{ v.operate }}</span>
+                    <span @click="cancelVote(v)">{{ v.operate }}</span>
                     <span class="reward" @click="openReward(v)">{{ $t('walletVote.toReward') }}</span>
                 </span>
             </wallet-table>
@@ -37,7 +37,7 @@
 
                 <span v-for="(v, i) in nodeList" :key="i"
                       :slot="`${i}operateKeyBefore`"
-                      v-unlock-account @unlocked="vote(v)">
+                      @click="vote(v)">
                     {{ v.operate }}
                 </span>
             </wallet-table>
@@ -57,6 +57,7 @@ import { timer } from 'utils/asyncFlow';
 import BigNumber from 'utils/bigNumber';
 import $ViteJS from 'utils/viteClient';
 import sendTx from 'utils/sendTx';
+import { execWithValid } from 'utils/execWithValid';
 
 export default {
     components: { secTitle, tooltips, search, loading, walletTable },
@@ -293,7 +294,7 @@ export default {
             const activeAccount = this.$store.state.wallet.activeAcc;
             window.open(`https://reward.vite.net?language=${ locale }&address=${ activeAccount ? activeAccount.address : '' }`);
         },
-        cancelVote(v) {
+        cancelVote: execWithValid(function (v) {
             if (this.cache) {
                 return;
             }
@@ -321,8 +322,8 @@ export default {
                 cancelTxt: this.$t('walletVote.section1.confirm.cancelText'),
                 submit: sendCancel
             }, true);
-        },
-        vote(v) {
+        }),
+        vote: execWithValid(function (v) {
             const successVote = () => {
                 const t = Object.assign({}, v);
                 t.isCache = true;
@@ -365,7 +366,7 @@ export default {
                 submit: sendVote,
                 exchange: this.haveVote
             }, true);
-        }
+        })
     }
 };
 </script>

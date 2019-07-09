@@ -1,59 +1,130 @@
 <template>
     <div class="login-wrapper">
-        <div class="__title">{{ $t('login') }}</div>
+        <div class="__title">{{ $t("login") }}</div>
 
-        <div @click="toggleShowExisting" class="switch-btn" :class="{'radius': isShowExisting}">
-            <div class="btn-item __pointer" :class="{'active': isShowExisting}">
-                {{ $t('existingAcc') }}</div>
-            <div class="btn-item __pointer" :class="{'active': !isShowExisting}">
-                {{ $t('restore') }}</div>
-        </div>
+        <div class="switch-btn" :class="{ radius: tabName === 'vb' }">
+            <div
+                class="btn-item __pointer"
+                :class="{ active: tabName === 'vb' }"
+                @click="toggleTab('vb')"
+                :key="'tb'"
+            >
+                {{ $t("existingAcc") }}
+            </div>
+            <div v-show="isHaveList"
+                 class="btn-item __pointer"
+                 :class="{ active: tabName === 'existingAcc' }"
+                 @click="toggleTab('existingAcc')"
+                 :key="'existingAcc'"
+            >
+                {{ $t("existingAcc") }}
+            </div>
+            <div
+                class="btn-item __pointer"
+                :class="{ active: tabName === 'resotre' }"
+                @click="toggleTab('resotre')"
+                :key="'resotre'"
+            >
+                {{ $t("restore") }}
+            </div>
+        </div >
+        <div class="tab-content">
+            <div class="vb" v-if="tabName === 'vb'">
+                <div class="code_container">
+                    <div class="code_tips">
+                        {{$t('assets.vb.start.scan')}}
+                    </div>
+                    <qrcode
+                        :options="qrcodeOpt"
+                        :text="vb&&vb.uri"
+                        class="vb_qrcode"
+                    ></qrcode>
+                    <div class="code_tips">
+                        {{$t('assets.vb.start.downloadTips')}}<span
+                            class="action_get_app" @click="getWallet"
+                        >{{$t('assets.vb.start.download')}}&rarr;</span
+                        >
+                    </div>
+                </div>
+                <div class="__btn __btn_all_in __pointer" @click="createAcc">
+                    {{ $t("addAccount") }}
+                </div>
+            </div>
+            <div v-if="tabName === 'existingAcc'" class="existing-acc">
+                <div class="bottom __btn __pointer">
+                    <div
+                        v-click-outside="hideAccountList"
+                        @click="toggleAccountList"
+                    >
+                        <div
+                            v-show="currAcc && !currAcc.activeAddr"
+                            class="__btn __btn_input"
+                        >
+                            <div class="name __ellipsis">{{ currAcc.name }}</div>
+                        </div>
 
-        <div v-show="isShowExisting" class="existing-acc">
-            <div class="bottom __btn __pointer">
-                <div v-click-outside="hideAccountList" @click="toggleAccountList">
-                    <div v-show="currAcc && !currAcc.activeAddr" class="__btn __btn_input">
-                        <div class="name __ellipsis">{{ currAcc.name }}</div>
+                        <account-item
+                            v-show="currAcc && currAcc.activeAddr"
+                            class="__btn"
+                            :account="currAcc"
+                        ></account-item>
+
+                        <span
+                            :class="{
+                                slide: true,
+                                down: !isShowAccountList,
+                                up: isShowAccountList
+                            }"
+                        ></span>
                     </div>
 
-                    <account-item v-show="currAcc && currAcc.activeAddr"
-                                  class="__btn"
-                                  :account="currAcc"></account-item>
-
-                    <span :class="{
-                        'slide': true,
-                        'down': !isShowAccountList,
-                        'up': isShowAccountList
-                    }"></span>
+                    <account-list
+                        ref="accList"
+                        v-show="isShowAccountList"
+                        :clickAccount="chooseAccount"
+                    ></account-list>
                 </div>
 
-                <account-list ref="accList" v-show="isShowAccountList"
-                              :clickAccount="chooseAccount"></account-list>
-            </div>
+                <div
+                    class="bottom __btn __btn_input"
+                    :class="{ active: !!password || inputItem === 'pass' }"
+                >
+                    <input
+                        ref="passInput"
+                        autofocus
+                        :placeholder="$t('startCreate.input')"
+                        v-model="password"
+                        :type="'password'"
+                        @focus="inputFocus('pass')"
+                        @blur="inputBlur('pass')"
+                    />
+                </div>
 
-            <div class="bottom __btn __btn_input"
-                 :class="{ 'active': !!password || inputItem === 'pass' }">
-                <input ref="passInput" autofocus :placeholder="$t('startCreate.input')"
-                       v-model="password" :type="'password'"
-                       @focus="inputFocus('pass')" @blur="inputBlur('pass')" />
-            </div>
-
-            <div class="__btn_list">
-                <span class="__btn __btn_border __pointer" @click="createAcc" >
-                    {{ $t('addAccount') }}
-                </span>
-                <div class="__btn __btn_all_in __pointer" @click="login">
-                    <span v-show="!isLoading">
-                        {{ isShowExisting ? $t('btn.login') : $t('startCreate.finish') }}
+                <div class="__btn_list">
+                    <span class="__btn __btn_border __pointer" @click="createAcc">
+                        {{ $t("addAccount") }}
                     </span>
-                    <loading v-show="isLoading" loadingType="dot"></loading>
+                    <div class="__btn __btn_all_in __pointer" @click="login">
+                        <span v-show="!isLoading">
+                            {{
+                                isShowExisting
+                                    ? $t("btn.login")
+                                    : $t("startCreate.finish")
+                            }}
+                        </span>
+                        <loading v-show="isLoading" loadingType="dot"></loading>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <restore ref="restoreDom" v-if="!isShowExisting"
-                 :leftClick="createAcc" leftTxt="createAcc"
-                 :finishCb="showExisting"></restore>
+            <restore
+                ref="restoreDom"
+                v-if="tabName === 'resotre'"
+                :leftClick="createAcc"
+                leftTxt="createAcc"
+                :finishCb="showExisting"
+            ></restore>
+        </div>
     </div>
 </template>
 
@@ -61,21 +132,32 @@
 import Vue from 'vue';
 import loading from 'components/loading.vue';
 import ellipsisAddr from 'utils/ellipsisAddr.js';
+import { getAppLink } from 'utils/getLink';
+import openUrl from 'utils/openUrl';
 import { getList, deleteOldAcc } from 'wallet';
 
 import accountItem from './accountItem.vue';
 import restore from '../restore.vue';
 import accountList from './accountList.vue';
 
+import qrcode from 'components/qrcode';
+import { initVB } from 'wallet/vb';
+import icon from 'assets/imgs/start_qrcode_icon.svg';
+
+const TABNAME = {
+    vb: 'vb',
+    existingAcc: 'existingAcc',
+    restore: 'restore'
+};
+
 export default {
-    components: { accountList, loading, restore, accountItem },
-    mounted() {
-        this.init();
-    },
+    components: { accountList, loading, restore, accountItem, qrcode },
     destroyed() {
         this.clearAll();
     },
     data() {
+        const list = getList();
+
         return {
             id: this.$route.params.id,
             currAcc: {},
@@ -83,26 +165,37 @@ export default {
             inputItem: '',
             isLoading: false,
             isShowAccountList: false,
-            isShowExisting: true
+            tabName: TABNAME.vb,
+            qrcodeOpt: {
+                size: 140,
+                image: icon,
+                mSize: 0.3
+            },
+            isHaveList: list && list.length,
+            vb: null
         };
+    },
+    beforeMount() {
+        this.vb = initVB();
+    },
+    beforeDestroy() {
+        this.destoryVB();
     },
     computed: {
         currHDAcc() {
             return this.$store.state.wallet.currHDAcc;
-        }
-    },
-    watch: {
-        isShowExisting: function () {
-            if (!this.isShowExisting) {
-                this.clearAll();
-                return;
-            }
-
-            this.init();
-            this.$refs.accList && this.$refs.accList.initAccountList();
+        },
+        isShowExisting() {
+            return this.tabName === 'existingAcc';
         }
     },
     methods: {
+        getWallet() {
+            openUrl(getAppLink());
+        },
+        destoryVB() {
+            console.log('destory vb');
+        },
         init() {
             this.$onKeyDown(13, () => {
                 this.login();
@@ -116,11 +209,27 @@ export default {
         },
         showExisting(id) {
             this.id = id;
-            this.isShowExisting = true;
+            this.toggleTab('existingAcc');
         },
-        toggleShowExisting() {
-            this.isShowExisting = !this.isShowExisting;
+        toggleTab(tabName) {
+            if (this.tabName === tabName) return;
+
+            if (this.tabName !== 'vb' && tabName === 'vb') {
+                this.vb = initVB();
+            } else if (this.tabName === 'vb' && tabName !== 'vb') {
+                this.destoryVB();
+            }
+
+            if (this.tabName !== 'existingAcc' && tabName === 'existingAcc') {
+                this.init();
+                this.$refs.accList && this.$refs.accList.initAccountList();
+            } else if (this.tabName === 'existingAcc' && tabName !== 'existingAcc') {
+                this.clearAll();
+            }
+
+            this.tabName = tabName;
         },
+
         getCurrAcc() {
             const list = getList();
 
@@ -129,7 +238,9 @@ export default {
                 for (let i = 0; i < list.length; i++) {
                     if (list[i].id === this.id) {
                         const account = list[i];
-                        account.showAddr = account.activeAddr ? ellipsisAddr(account.activeAddr) : '';
+                        account.showAddr = account.activeAddr
+                            ? ellipsisAddr(account.activeAddr)
+                            : '';
                         return account;
                     }
                 }
@@ -139,7 +250,9 @@ export default {
             if (this.currHDAcc) {
                 return {
                     id: this.currHDAcc.id,
-                    showAddr: this.currHDAcc.activeAddr ? ellipsisAddr(this.currHDAcc.activeAddr) : '',
+                    showAddr: this.currHDAcc.activeAddr
+                        ? ellipsisAddr(this.currHDAcc.activeAddr)
+                        : '',
                     name: this.currHDAcc.name || '',
                     ...this.currHDAcc
                 };
@@ -147,7 +260,9 @@ export default {
 
             // Finally: from list[0]
             const account = list[0];
-            account.showAddr = account.activeAddr ? ellipsisAddr(account.activeAddr) : '';
+            account.showAddr = account.activeAddr
+                ? ellipsisAddr(account.activeAddr)
+                : '';
             return account;
         },
 
@@ -197,27 +312,31 @@ export default {
             this.isLoading = true;
 
             this.$store.commit('switchHDAcc', this.currAcc);
-            this.$store.dispatch('login', this.password).then(() => {
-                if (!this.isLoading) {
-                    return;
-                }
-                this.isLoading = false;
+            this.$store
+                .dispatch('login', this.password)
+                .then(() => {
+                    if (!this.isLoading) {
+                        return;
+                    }
+                    this.isLoading = false;
 
-                if (!this.currAcc.id && this.currAcc.entropy) {
-                    deleteOldAcc(this.currAcc);
-                }
+                    if (!this.currAcc.id && this.currAcc.entropy) {
+                        deleteOldAcc(this.currAcc);
+                    }
 
-                this.currHDAcc.activate();
-                const name = this.$store.state.env.lastPage || 'tradeCenter';
-                this.$router.push({ name });
-            }).catch(err => {
-                console.warn(err);
-                if (!this.isLoading) {
-                    return;
-                }
-                this.isLoading = false;
-                this.$toast(this.$t('hint.pwErr'));
-            });
+                    this.currHDAcc.activate();
+                    const name
+                        = this.$store.state.env.lastPage || 'tradeCenter';
+                    this.$router.push({ name });
+                })
+                .catch(err => {
+                    console.warn(err);
+                    if (!this.isLoading) {
+                        return;
+                    }
+                    this.isLoading = false;
+                    this.$toast(this.$t('hint.pwErr'));
+                });
         }
     }
 };
@@ -227,6 +346,9 @@ export default {
 @import "~assets/scss/vars.scss";
 
 .login-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     .__btn {
         position: relative;
 
@@ -251,12 +373,12 @@ export default {
         margin-top: -6px;
 
         &.down {
-            background: url('~assets/imgs/down_icon.svg');
+            background: url("~assets/imgs/down_icon.svg");
             background-size: 16px 16px;
         }
 
         &.up {
-            background: url('~assets/imgs/up_icon.svg');
+            background: url("~assets/imgs/up_icon.svg");
             background-size: 16px 16px;
         }
     }
@@ -268,7 +390,6 @@ export default {
         background: #007aff;
         box-shadow: 0 0 4px 0 rgba(0, 105, 219, 1);
         padding-left: 12px;
-
         &.radius {
             padding-left: 0;
             padding-right: 12px;
@@ -288,6 +409,35 @@ export default {
                 border-radius: 16px;
                 padding: 6px 12px;
                 box-shadow: 0 0 4px 0 rgba(0, 105, 219, 1);
+            }
+        }
+    }
+    .tab-content{
+        max-width: 360px;;
+    }
+    .vb {
+        width: 100%;
+        .code_container {
+            width: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+            background: #fff;
+            margin-bottom: 20px;
+            .code_tips {
+                word-break: break-all;
+                text-align: left;
+                color: #333333;
+                line-height: 18px;
+                .action_get_app {
+                    color: #007aff;
+                    font-size: 14px;
+                    font-family: $font-bold;
+                    cursor: pointer;
+                    margin-left: 2px;
+                }
+            }
+            .vb_qrcode {
+                margin: 30px auto;
             }
         }
     }

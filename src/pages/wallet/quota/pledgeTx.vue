@@ -39,7 +39,7 @@
                 <span class="__form_input unuse about">{{ $t('walletQuota.aboutDays', { day: '3' }) }}</span>
                 <span v-show="!btnUnuse" class="__form_btn __pointer" :class="{
                     'unuse': btnUnuse
-                }" v-unlock-account="validTx">{{ $t('submitStaking') }}</span>
+                }" @click="validTx">{{ $t('submitStaking') }}</span>
                 <span v-show="btnUnuse"  class="__form_btn __pointer" :class="{
                     'unuse': btnUnuse
                 }">{{ $t('submitStaking') }}</span>
@@ -55,6 +55,7 @@ import { initPwd } from 'components/password/index.js';
 import BigNumber from 'utils/bigNumber';
 import statistics from 'utils/statistics';
 import { verifyAmount } from 'utils/validations';
+import { execWithValid } from 'utils/execWithValid';
 
 const amountTimeout = null;
 const minNum = 134;
@@ -153,7 +154,7 @@ export default {
         addToAddrWithMine() {
             this.toAddr = this.addr;
         },
-        validTx() {
+        validTx: execWithValid(function () {
             if (this.btnUnuse) {
                 return;
             }
@@ -175,7 +176,7 @@ export default {
                     this._sendPledgeTx();
                 }
             }, true);
-        },
+        }),
         _sendPledgeTx() {
             statistics.event('Vite_web_wallet', 'quota', 'ConfirmQuota');
             this.loading = true;

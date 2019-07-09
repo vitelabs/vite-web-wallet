@@ -20,7 +20,7 @@
 
 <script>
 import ellipsisAddr from 'utils/ellipsisAddr.js';
-import { StatusMap } from 'wallet';
+import { StatusMap, getCurrHDAcc } from 'wallet';
 
 export default {
     props: {
@@ -64,7 +64,7 @@ export default {
             return this.$store.state.wallet.addrList;
         },
         notAllowed() {
-            return this.addrList.length <= 1;
+            return this.addrList.length <= 1 || getCurrHDAcc().isBifrost;
         }
     },
     methods: {
