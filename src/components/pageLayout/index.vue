@@ -1,13 +1,11 @@
 <template>
     <div class="page-layout-wrapper" @click="operate">
-        <guide v-if="$route.name === 'tradeCenter'"></guide>
+        <guide></guide>
 
         <sidebar class="sidebar" :go="go" :menuList="menuList" ></sidebar>
 
         <div class="page-content">
             <div class="page-scroll-wrapper">
-                <guide v-if="$route.name === 'assets'"></guide>
-
                 <second-menu v-show="$route.name.indexOf('setting') === -1"
                              :go="go" class="second-menu"
                              :tabList="secondMenuList"
