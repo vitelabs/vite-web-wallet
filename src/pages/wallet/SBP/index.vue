@@ -35,7 +35,7 @@
 import { hdAddr } from '@vite/vitejs';
 import secTitle from 'components/secTitle';
 import loading from 'components/loading';
-import confirm from 'components/confirm';
+import confirm from 'components/confirm/confirm.vue';
 import viteInput from 'components/viteInput';
 import { initPwd } from 'components/password/index.js';
 import BigNumber from 'utils/bigNumber';
