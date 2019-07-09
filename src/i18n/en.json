@@ -411,6 +411,7 @@
         "cancel": "Cancel",
         "success": "Token Issuance Success",
         "fail": "Token Issuance Failure",
+        "getListFail": "获取列表失败",
         "mintageConfirm": {
             "title": "Check your Token Issuance Information",
             "balance": "Balance",
@@ -424,6 +425,11 @@
         "changeOwnerConfirm": {
             "title": "Transfer Ownership",
             "address": "Recipient Address"
+        },
+        "issueConfirm": {
+            "title": "增发代币",
+            "amount": "增发数量",
+            "overAmount": "增发数量超出上限"
         },
         "hint": {
             "tokenName": "Token name should have 1-40 characters including capitals and lowercase letters, spaces and underlines. Continuous spaces and numbers are not supported.",

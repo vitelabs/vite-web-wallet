@@ -61,6 +61,9 @@
                 <span v-show="item.isReIssuable" class="btn __pointer"
                       v-unlock-account @unlocked="changeReIssuable(item)">
                     {{ $t('walletMintage.reIssuableConfirm.title') }}</span>
+                <span v-show="item.isReIssuable" class="btn __pointer"
+                      v-unlock-account @unlocked="issue(item)">
+                    {{ $t('walletMintage.issueConfirm.title') }}</span>
             </span>
 
         </wallet-table>
@@ -86,9 +89,38 @@
                     {{ $t('walletMintage.changeOwnerConfirm.address') }}
                     <span v-show="!isValidAddress" class="__err __hint">{{ $t('hint.addrFormat') }}</span>
                 </div>
-                <vite-input v-model="newOwner" :valid="validAddr"
+                <vite-input v-model="address" :valid="validAddr"
                             :placeholder="$t('wallet.placeholder.addr')"></vite-input>
             </div>
+        </show-confirm>
+
+        <show-confirm v-if="issueToken"
+                      :title="$t('walletMintage.issueConfirm.title')" :showMask="true"
+                      :leftBtnTxt="$t('walletMintage.cancel')" :leftBtnClick="cancelIssue"
+                      :rightBtnTxt="$t('walletMintage.submit')" :rightBtnClick="toIssue">
+            <div class="__row">
+                <div class="__row-t">{{ $t('walletMintage.tokenName') }}</div>
+                <div class="__unuse-row __light">{{ issueToken.tokenName }}</div>
+            </div>
+            <div class="__row">
+                <div class="__row-t">{{ $t('walletMintage.tokenSymbol') }}</div>
+                <div class="__unuse-row __light">{{ issueToken.tokenSymbol }}</div>
+            </div>
+            <div class="__row">
+                <div class="__row-t">
+                    {{ $t('walletMintage.issueConfirm.amount') }}
+                    <span v-show="amountErr" class="__err __hint">{{ amountErr }}</span>
+                </div>
+                <vite-input v-model="amount" :valid="validAmount"></vite-input>
+            </div>
+            <!-- <div class="__row">
+                <div class="__row-t">
+                    {{ $t('walletMintage.changeOwnerConfirm.address') }}
+                    <span v-show="!isValidAddress" class="__err __hint">{{ $t('hint.addrFormat') }}</span>
+                </div>
+                <vite-input v-model="address" :valid="validAddr"
+                            :placeholder="$t('wallet.placeholder.addr')"></vite-input>
+            </div> -->
         </show-confirm>
     </div>
 </template>
@@ -102,6 +134,7 @@ import viteInput from 'components/viteInput';
 import tooltips from 'components/tooltips';
 import sendTx from 'utils/sendTx';
 import BigNumber from 'utils/bigNumber';
+import { verifyAmount } from 'utils/validations';
 
 export default {
     components: { walletTable, showConfirm, viteInput, tooltips },
@@ -112,12 +145,15 @@ export default {
         return {
             tokenList: [],
             changeOwnerToken: null,
-            newOwner: '',
-            isValidAddress: true
+            issueToken: null,
+            address: '',
+            isValidAddress: true,
+            amount: '',
+            amountErr: ''
         };
     },
     computed: {
-        address() {
+        activeAddress() {
             return this.$store.getters.activeAddr;
         },
         showTokenList() {
@@ -139,13 +175,22 @@ export default {
         }
     },
     watch: {
-        address() {
+        activeAddress() {
             this.getOwnerToken();
         }
     },
     methods: {
         validAddr() {
-            this.isValidAddress = this.newOwner && hdAddr.isValidHexAddr(this.newOwner);
+            this.isValidAddress = this.address && hdAddr.isValidHexAddr(this.address);
+        },
+        validAmount() {
+            this.amountErr = verifyAmount({
+                formatDecimals: 8,
+                decimals: this.issueToken.decimals,
+                maxAmount: BigNumber.minus(this.issueToken.maxSupply, this.issueToken.totalSupply),
+                errorMap: { overMax: this.$t('walletMintage.issueConfirm.overAmount') }
+            })(this.amount);
+            return !this.amountErr;
         },
 
         getOwnerToken() {
@@ -158,14 +203,10 @@ export default {
                 this.tokenList = data;
             }).catch(err => {
                 console.warn(err);
-                this.$toast('Get list failed');
+                this.$toast(this.$t('walletMintage.getListFail'));
             });
         },
         changeReIssuable(item) {
-            if (!item.isReIssuable) {
-                return;
-            }
-
             initPwd({
                 title: this.$t('walletMintage.reIssuableConfirm.title'),
                 content: this.$t('walletMintage.reIssuableConfirm.text', { tokenName: item.tokenName }),
@@ -175,14 +216,19 @@ export default {
             }, true);
         },
         changeOwner(item) {
-            if (!item.isReIssuable) {
-                return;
-            }
             this.changeOwnerToken = item;
         },
         cancelChangeOwner() {
             this.changeOwnerToken = null;
-            this.newOwner = '';
+            this.address = '';
+        },
+        issue(item) {
+            this.issueToken = item;
+        },
+        cancelIssue() {
+            this.issueToken = null;
+            this.address = '';
+            this.amount = '';
         },
 
         toChangeOwner() {
@@ -194,7 +240,7 @@ export default {
                 submit: () => {
                     sendTx('changeTransferOwner', {
                         tokenId: this.changeOwnerToken.tokenId,
-                        newOwner: this.newOwner
+                        newOwner: this.address
                     }).then(() => {
                         this.$toast(this.$t('walletMintage.success'));
                         this.cancelChangeOwner();
@@ -213,6 +259,28 @@ export default {
             }).catch(err => {
                 console.warn(err);
                 this.$toast(this.$t('walletMintage.fail'), err);
+            });
+        },
+        toIssue() {
+            if (!this.issueToken) {
+                return;
+            }
+
+            initPwd({
+                submit: () => {
+                    sendTx('mintageIssue', {
+                        tokenId: this.issueToken.tokenId,
+                        amount: this.amount, // [TODO] toMin
+                        beneficial: this.activeAddress // [TODO] wait confirm
+                    }).then(() => {
+                        this.$toast(this.$t('walletMintage.success'));
+                        this.cancelIssue();
+                        this.getOwnerToken();
+                    }).catch(err => {
+                        console.warn(err);
+                        this.$toast(this.$t('walletMintage.fail'), err);
+                    });
+                }
             });
         }
     }
