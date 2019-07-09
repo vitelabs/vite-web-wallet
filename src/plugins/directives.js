@@ -1,6 +1,3 @@
-import { StatusMap, getCurrHDAcc, getActiveAcc } from 'wallet';
-import { pwdConfirm } from 'components/password/index.js';
-
 const vnodes = new Map();
 
 const isEventInDom = function (e, d) {
@@ -47,36 +44,6 @@ export default {
             },
             unbind(el, binding, vnode) {
                 vnodes.delete(vnode);
-            }
-        });
-
-        Vue.directive('UnlockAccount', {
-            bind(el, binding, vnode) {
-                el.addEventListener('click', e => {
-                    const funcName = binding.expression || '';
-
-                    const currHDACC = getCurrHDAcc();
-
-                    if (currHDACC.status === StatusMap.UNLOCK) {
-                        funcName && vnode.context && vnode.context[funcName](e);
-                        vnode.data.on && vnode.data.on.unlocked && vnode.data.on.unlocked();
-                        return;
-                    }
-
-                    const activeAccount = getActiveAcc();
-                    if (activeAccount) {
-                        pwdConfirm({ type: 'unlockAccount' });
-                        return;
-                    }
-
-                    vnode.data.on
-            && vnode.data.on.noactiveacc
-            && vnode.data.on.noactiveacc();
-                });
-            },
-            unbind() {
-                // El, binding, vnode
-                // vnode.removeEventListener();
             }
         });
     }

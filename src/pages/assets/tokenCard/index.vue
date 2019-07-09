@@ -1,7 +1,7 @@
 <template>
     <div class="token-card">
         <div class="col title click-able">
-            <div>
+            <div class="token-meta">
                 <img
                     :src="token.icon"
                     class="icon"
@@ -321,6 +321,10 @@ export default {
                 height: 16px;
                 width: 16px;
                 margin-bottom: -4px;
+            }
+            .token-meta{
+                display: flex;
+                align-items: center;
             }
         }
     }

@@ -2,52 +2,10 @@ import { utils } from '@vite/vitejs';
 import { getActiveAcc } from 'wallet';
 import { powProcess } from 'components/pow/index';
 import { quotaConfirm } from 'components/quota/index';
+import { vbConfirmDialog } from 'components/dialog';
+// import {}
 
 const { isObject } = utils;
-
-/**
- * config: {
- *   sendTx: Boolean, Default true
- *   pow: Boolean,
- *   powConfig? : { // 当 PoW 开启时生效
- *      isShowCancel: Boolean<true | false>,
- *      cancel: Function
- *   },
- *   confirm? : { // 当 PoW 关闭时生效
- *      showMask ?: Boolean<true | false>,
- *      operate: String
- *   }
- * }
- */
-
-/**
- * For example
- *
- * sendTx('asyncSendTx', {
-        toAddress: this.inAddress,
-        tokenId: this.token.tokenId,
-        amount,
-        message: this.message
-    }, {
-        pow: true,
-        powConfig: {
-            isShowCancel: true,
-            cancel: () => {
-                this.closeTrans();
-            }
-        }
-    }).then(() => {
-        // normal tx successed
-    }).powStarted(() => {
-        // pow start
-    }).powSuccessed(() => {
-        // pow tx successed
-    }).powFailed((err, type) => {
-        // pow failed
-    }).catch(err => {
-        // normal tx failed
-    });
- */
 
 const defaultConfig = {
     sendTx: true,
@@ -69,96 +27,112 @@ export default function sendTx(methodName, data, config = defaultConfig) {
     const activeAccount = getActiveAcc();
 
     let powInstance = null;
+    let vbInstance = null;
+    if (activeAccount.isBifrost) {
+        const { compInstance } = vbConfirmDialog();
+        vbInstance = compInstance;
+    }
+    activeAccount
+        .sendPowTx({
+            methodName,
+            params: [data],
+            beforePow: (accountBlock, checkPowResult, next) => {
+                // console.log('[beforePow]');
 
-    activeAccount.sendPowTx({
-        methodName,
-        params: [data],
-        beforePow: (accountBlock, checkPowResult, next) => {
-            // console.log('[beforePow]');
+                const activeAccount = getActiveAcc();
+                if (
+                    !activeAccount
+          || activeAccount.address !== accountBlock.accountAddress
+                ) {
+                    return Promise.reject({
+                        code: '1000000',
+                        message: `${ accountBlock.accountAddress } is expired.`
+                    });
+                }
 
-            const activeAccount = getActiveAcc();
-            if (!activeAccount || activeAccount.address !== accountBlock.accountAddress) {
+                if (config.pow) {
+                    powInstance = powProcess({ ...config.powConfig });
+                    event.powStartedCb && event.powStartedCb();
+                    return next();
+                }
+
+                quotaConfirm(config.confirmConfig);
+                event.confirmAppearedCb && event.confirmAppearedCb(checkPowResult);
                 return Promise.reject({
-                    code: '1000000',
-                    message: `${ accountBlock.accountAddress } is expired.`
+                    code: '1000001',
+                    message: 'Don\'t need pow, already show confirm.'
                 });
-            }
+            },
+            beforeSendTx: (accountBlock, checkPowResult, next) => {
+                // console.log('[beforeSendTx]');
+                if (!checkPowResult || !checkPowResult.difficulty) {
+                    return next(!config.sendTx);
+                }
 
-            if (config.pow) {
-                powInstance = powProcess({ ...config.powConfig });
-                event.powStartedCb && event.powStartedCb();
-                return next();
-            }
+                // console.log('[beforeSendTx] powInstance.isShow', powInstance.isShow);
 
-            quotaConfirm(config.confirmConfig);
-            event.confirmAppearedCb && event.confirmAppearedCb(checkPowResult);
-            return Promise.reject({
-                code: '1000001',
-                message: 'Don\'t need pow, already show confirm.'
-            });
-        },
-        beforeSendTx: (accountBlock, checkPowResult, next) => {
-            // console.log('[beforeSendTx]');
-            if (!checkPowResult || !checkPowResult.difficulty) {
-                return next(!config.sendTx);
-            }
+                if (!powInstance || !powInstance.isShow) {
+                    return Promise.reject();
+                }
 
-            // console.log('[beforeSendTx] powInstance.isShow', powInstance.isShow);
+                return new Promise((res, rej) => {
+                    powInstance.stopCount(() => {
+                        if (!powInstance || !powInstance.isShow) {
+                            return rej();
+                        }
 
-            if (!powInstance || !powInstance.isShow) {
-                return Promise.reject();
-            }
-
-            return new Promise((res, rej) => {
-                powInstance.stopCount(() => {
-                    if (!powInstance || !powInstance.isShow) {
-                        return rej();
-                    }
-
-                    next(!config.sendTx).then(result => {
-                        res(result);
-                    }).catch(err => {
-                        rej(err);
+                        next(!config.sendTx)
+                            .then(result => {
+                                res(result);
+                            })
+                            .catch(err => {
+                                rej(err);
+                            });
                     });
                 });
+            }
+        })
+        .then(result => {
+            // console.log(result);
+            if (!powInstance) {
+                event.thenCb && event.thenCb(result);
+                return;
+            }
+
+            powInstance.gotoFinish(() => {
+                event.powFinishedCb && event.powFinishedCb(result);
+
+                if (event.powSuccessedCb) {
+                    event.powSuccessedCb(result);
+                    return;
+                }
+                event.thenCb && event.thenCb(result);
             });
-        }
-    }).then(result => {
-        // console.log(result);
-        if (!powInstance) {
-            event.thenCb && event.thenCb(result);
-            return;
-        }
-
-        powInstance.gotoFinish(() => {
-            event.powFinishedCb && event.powFinishedCb(result);
-
-            if (event.powSuccessedCb) {
-                event.powSuccessedCb(result);
+        })
+        .catch(err => {
+            if (!powInstance) {
+                event.catchCb && event.catchCb(err);
                 return;
             }
-            event.thenCb && event.thenCb(result);
-        });
-    }).catch(err => {
-        if (!powInstance) {
-            event.catchCb && event.catchCb(err);
-            return;
-        }
 
-        powInstance.gotoFinish(() => {
-            event.powFinishedCb && event.powFinishedCb(err);
+            powInstance.gotoFinish(() => {
+                event.powFinishedCb && event.powFinishedCb(err);
 
-            if (event.powFailedCb) {
-                event.powFailedCb(err);
-                return;
+                if (event.powFailedCb) {
+                    event.powFailedCb(err);
+                    return;
+                }
+                event.catchCb && event.catchCb(err);
+            });
+        })
+        .finally(() => {
+            if (activeAccount.isBifrost) {
+                vbInstance && vbInstance.close();
             }
-            event.catchCb && event.catchCb(err);
         });
-    });
 
     return event;
 }
-
 
 class EventEmitter {
     constructor() {
@@ -224,16 +198,21 @@ function formatConfig(config) {
     config = config || defaultConfig;
     // console.log(config);
 
-
     let sendTx = !!config.sendTx;
-    if (!(config.hasOwnProperty('sendTx')
-        && typeof config.sendTx !== 'undefined'
-        && config.sendTx !== null)) {
+    if (
+        !(
+            config.hasOwnProperty('sendTx')
+      && typeof config.sendTx !== 'undefined'
+      && config.sendTx !== null
+        )
+    ) {
         sendTx = true;
     }
 
     const pow = !!config.pow;
-    const powConfig = config.powConfig ? config.powConfig : defaultConfig.powConfig;
+    const powConfig = config.powConfig
+        ? config.powConfig
+        : defaultConfig.powConfig;
 
     if (!isObject(powConfig)) {
         throw new Error('[Error] utils/sendTx: config.powConfig should be an Object.');
@@ -243,9 +222,13 @@ function formatConfig(config) {
         throw new Error('[Error] utils/sendTx: config.pow[1].cancel should be a function.');
     }
 
-    if (!(powConfig.hasOwnProperty('isShowCancel')
-        && typeof powConfig.isShowCancel !== 'undefined'
-        && powConfig.isShowCancel !== null)) {
+    if (
+        !(
+            powConfig.hasOwnProperty('isShowCancel')
+      && typeof powConfig.isShowCancel !== 'undefined'
+      && powConfig.isShowCancel !== null
+        )
+    ) {
         powConfig.isShowCancel = true;
     }
 

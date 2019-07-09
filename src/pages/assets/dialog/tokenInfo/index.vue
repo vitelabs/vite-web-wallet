@@ -75,7 +75,8 @@ export default {
         return {
             tabName: this.initTabName || 'tokenInfo',
             urlCache: this.token.gateInfo.url,
-            dTitle: this.$t('tokenCard.tokenInfo.title', { tokenSymbol: this.token.tokenSymbol })
+            dTitle: this.$t('tokenCard.tokenInfo.title', { tokenSymbol: this.token.tokenSymbol }),
+            dWidth: 'wide'
         };
     },
     computed: {

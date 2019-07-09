@@ -112,7 +112,6 @@ export default {
         };
     },
     beforeMount() {
-        window.sssss = this;
         this.updateData();
     },
     filters: {
