@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import closeIcon from 'assets/imgs/confirm_close.svg';
-import store from 'src/store';
+import store from 'store';
 import i18n from 'i18n';
 const STATUS = {
     'CLOSE': 'CLOSE',
@@ -8,7 +8,7 @@ const STATUS = {
     'CONFIRMED': 'CONFRIMED'
 };
 const widthMap = {
-    narrow: '400px',
+    narrow: '380px',
     normal: '515px',
     wide: '618px'
 };
@@ -18,8 +18,8 @@ const getValue = function (key, defaultValue) {
     if (this[dkey] !== undefined) return this[dkey];
     return defaultValue;
 };
+
 const mixin = {
-    store,
     i18n,
     props: {
         width: {}, // wide narrow normal
@@ -209,7 +209,8 @@ export default function (component, propsDefault = {}) {
             const ConfirmComponent = Vue.extend(component);
             const componentInstance = new ConfirmComponent({
                 el: document.createElement('div'),
-                propsData: props
+                propsData: props,
+                store
             });
             instance = componentInstance;
             const appEl = document.getElementById('vite-wallet-app');

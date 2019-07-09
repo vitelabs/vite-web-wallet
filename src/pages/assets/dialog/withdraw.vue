@@ -48,7 +48,8 @@ export default {
             info: {
                 'minimumWithdrawAmount': '',
                 'maximumWithdrawAmount': '',
-                'gatewayAddress': ''
+                'gatewayAddress': '',
+                type: -1
             },
             withdrawAddr: '',
             withdrawAmountMin: '',
@@ -59,7 +60,8 @@ export default {
             dSTxt: this.$t('tokenCard.withdraw.title'),
             failTips: '',
             isFeeTipsShow: false,
-            fetchingFee: true
+            fetchingFee: true,
+            verifingAddr: false
         };
     },
     beforeMount() {
@@ -76,7 +78,7 @@ export default {
             return this.validateAmount(this.withdrawAmount);
         },
         dBtnUnuse() {
-            return this.ammountErr || !this.isAddrCorrect || !this.withdrawAmount || !this.withdrawAddr;
+            return this.ammountErr || !this.isAddrCorrect || !this.withdrawAmount || !this.withdrawAddr || this.verifingAddr || this.fetchingFee;
         },
         min() {
             return this.info.minimumWithdrawAmount ? `${ bigNumber.toBasic(this.info.minimumWithdrawAmount, this.token.decimals) } ${ this.token.tokenSymbol }` : '--';
@@ -91,15 +93,17 @@ export default {
                 this.isAddrCorrect = true;
                 return;
             }
+            this.verifingAddr = true;
             verifyAddr({ tokenId: this.token.tokenId, withdrawAddress: val }, this.token.gateInfo.url).then(d => {
-                this.isAddrCorrect = d;
+                this.isAddrCorrect = d.isValidAddress;
+                this.verifingAddr = false;
             });
         }, 500),
         withdrawAmount: debounce(function (val) {
             this.withdrawAmountMin = '';// 重置从全部提现过来的数据。
             this.fetchingFee = true;
             getWithdrawFee({ tokenId: this.token.tokenId, walletAddress: this.defaultAddr, amount: bigNumber.toMin(val, this.token.decimals) }, this.token.gateInfo.url).then(d => {
-                this.feeMin = d;
+                this.feeMin = d.fee;
                 this.fetchingFee = false;
             });
         }, 500)
@@ -135,7 +139,7 @@ export default {
         },
         inspector() {
             return new Promise((res, rej) => {
-                withdraw({ amount: bigNumber.plus(this.withdrawAmountMin || bigNumber.toMin(this.withdrawAmount, this.token.decimals), this.feeMin, 0), withdrawAddress: this.withdrawAddr, gateAddr: this.info.gatewayAddress, tokenId: this.token.tokenId }, this.token.gateInfo.url)
+                withdraw({ type: this.info.type, amount: bigNumber.plus(this.withdrawAmountMin || bigNumber.toMin(this.withdrawAmount, this.token.decimals), this.feeMin, 0), withdrawAddress: this.withdrawAddr, gateAddr: this.info.gatewayAddress, tokenId: this.token.tokenId }, this.token.gateInfo.url)
                     .then(d => {
                         this.$toast(this.$t('tokenCard.withdraw.successTips'));
                         res(d);

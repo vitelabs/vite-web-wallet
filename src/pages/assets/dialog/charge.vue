@@ -20,7 +20,7 @@ block content
 import qrcode from 'components/qrcode';
 import copy from 'utils/copy';
 import { modes } from 'qrcode.es';
-import { getChargeAddr, getChargeInfo } from 'services/gate';
+import { getDepositInfo } from 'services/gate';
 import bigNumber from 'utils/bigNumber';
 
 export default {
@@ -32,13 +32,10 @@ export default {
         }
     },
     beforeMount() {
-        getChargeAddr({ addr: this.defaultAddr, tokenId: this.token.tokenId }, this.token.gateInfo.url).then(addr => (this.address = addr)).catch(e => {
-            console.error(e);
-            this.addrErr = this.$t('tokenCard.charge.addrErr');
-        });
-        getChargeInfo({ addr: this.defaultAddr, tokenId: this.token.tokenId }, this.token.gateInfo.url).then(d => {
-            this.minimumDepositAmountMin = d.minimumDepositAmount;
-        });
+        getDepositInfo({ addr: this.defaultAddr, tokenId: this.token.tokenId }, this.token.gateInfo.url).then(res => {
+            this.address = res.depositAddress;
+            this.minimumDepositAmountMin = res.minimumDepositAmount;
+        }).catch(() => (this.addrErr = this.$t('tokenCard.charge.addrErr')));
     },
     data() {
         return {

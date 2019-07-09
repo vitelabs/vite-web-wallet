@@ -7,6 +7,7 @@ type responseWrapper<T> = {
   error?: string;
   subCode?: number;
 };
+type client = (params: any) => Promise<any>;
 
 //----------gateinfo
 type GateTokenInfo = {
@@ -15,18 +16,42 @@ type GateTokenInfo = {
   mappedNet: string;
   mappedTokenId: string;
 };
-type withdrawInfo = {
-  minimumWithdrawAmount: String;
-  maximumWithdrawAmount: String;
-  gatewayAddress: String;
+
+type depositInfo = {
+  depositAddress: string;
+  minimumDepositAmount: string;
+  confirmationCount: number;
+  noticeMsg: string;
 };
+export declare function getDepositInfo(
+  { tokenId, addr }: { tokenId: string; addr: string },
+  url: string
+): Promise<depositInfo>;
 type GateInfo = {
   name: string; //网关名称
   url: string; //网关host，后面的请求为该网关host与url拼接而成
   tokens: Array<GateTokenInfo>;
 };
-type client = (params:any) => Promise<any>;
-declare function getGateInfos ():Promise<GateInfo[]>;
+
+type withdrawInfo = {
+  minimumWithdrawAmount: String;
+  maximumWithdrawAmount: String;
+  gatewayAddress: String;
+  noticeMsg: string;
+};
+export declare function getWithdrawInfo({
+  tokenId,
+  addr
+}): Promise<withdrawInfo>;
+
+type metaInfo = {
+  type: 0 | 1;
+  depositState: "OPEN" | "MAINTAIN" | "CLOSED";
+  withdrawState: "OPEN" | "MAINTAIN" | "CLOSED";
+};
+export declare function getMetaInfo({ tokenId }): Promise<>;
+
+declare function getGateInfos(): Promise<GateInfo[]>;
 
 //---------deposit records
 type getDepositRecordsParams = {
@@ -61,10 +86,10 @@ type depositRecordRep = {
   inTxExplorerFormat: string; // "https://ropsten.etherscan.io/tx/{$tx}",//外链浏览器，用inTxHash替换{$tx}为该交易区块浏览器地址
   outTxExplorerFormat: string; // "http://132.232.134.168:8080/zh/transaction/{$tx}"//vite链浏览器，用outTxHash替换{$tx}为该交易区块浏览器地址
 };
-export declare function getDepositRecords  (
+export declare function getDepositRecords(
   params: getDepositRecordsParams,
   url: string
-):Promise<depositRecordRep>;
+): Promise<depositRecordRep>;
 
 //withdraw records
 type getWithdrawRecordsParams = {
@@ -77,7 +102,7 @@ type getWithdrawRecordsParams = {
   pageSize: number;
 };
 
- declare enum withdrawStatus {
+declare enum withdrawStatus {
   TODO, //：vite tot交易待处理
   TOT_PROCESSING, //：vite tot交易已发送，等待足够确认数
   TOT_NOT_RECEIVED, //：vite tot交易失败，提现流程结束
@@ -104,4 +129,4 @@ type withdrawRecordRep = {
 export declare function getWithdrawRecords(
   params: getWithdrawRecordsParams,
   url: string
-):Promise<withdrawRecordRep>;
+): Promise<withdrawRecordRep>;

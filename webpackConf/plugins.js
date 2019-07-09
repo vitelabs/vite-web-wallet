@@ -59,8 +59,8 @@ const pushServer = {
 };
 const gatewayInfosServer = {
     // production: '"//132.232.60.116:8081"',
-    test: '"gateway.vitewallet.com/test/crosschain/"',
-    dev: '"gateway"',
+    test: '"132.232.60.116:8081"',
+    dev: '"132.232.60.116:8081"',
     dexTestNet: '"gateway.vitewallet.com/test/crosschain/"'
 };
 const Node_Env = process.env.NODE_ENV || 'dev';
