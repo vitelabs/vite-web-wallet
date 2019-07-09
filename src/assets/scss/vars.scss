@@ -11,7 +11,9 @@ $font-H: DINPro, arial, sans-serif;
 
 @mixin font-family-normal() {
     font-family: $font-normal;
+    font-weight: 400;
 }
 @mixin font-family-bold() {
     font-family: $font-bold;
+    font-weight: 600;
 }

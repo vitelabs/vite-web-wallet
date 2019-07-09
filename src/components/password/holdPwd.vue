@@ -35,38 +35,23 @@ export default {
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
 
-// Page: /setting
-.setting-wrapper .hold-pwd {
+.hold-pwd {
+    line-height: 16px;
+    margin-top: 12px;
     font-size: 12px;
     color: #5E6875;
-}
-
-// Page: /trade...
-.dex .hold-pwd {
-    font-size: 12px;
-    span {
-        margin-bottom: -3px;
-        width: 14px;
-        height: 14px;
-    }
-}
-
-.hold-pwd {
-    margin-top: 12px;
-    font-size: 14px;
-    color: #1d2024;
     @include font-family-normal();
 
     span {
         display: inline-block;
         margin-bottom: -3px;
-        width: 16px;
-        height: 16px;
+        width: 15px;
+        height: 15px;
         box-sizing: border-box;
         background: #fff;
         border: 1px solid #d4dee7;
-        border-radius: 16px;
-
+        border-radius: 15px;
+        margin-right: 4px;
         &.active {
             background: url('~assets/imgs/presnet.svg') no-repeat center;
             background-size: 16px 16px;

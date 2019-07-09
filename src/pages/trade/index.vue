@@ -1,6 +1,5 @@
 <template>
     <div class="trade-container">
-        <guide></guide>
         <page-layout>
             <div class="trade-wrapper">
                 <router-view></router-view>
@@ -11,10 +10,9 @@
 
 <script>
 import pageLayout from 'components/pageLayout/index';
-import guide from 'components/guide.vue';
 
 export default {
-    components: { pageLayout, guide },
+    components: { pageLayout },
     mounted() {
         this.$store.dispatch('startLoopExchangeRate');
         this.$store.dispatch('startLoopExchangeBalance');

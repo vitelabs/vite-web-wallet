@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import confirm from 'components/confirm';
+import confirm from 'components/confirm/confirm.vue';
 import { initPwd } from 'components/password/index.js';
 import sendTx from 'utils/sendTx';
 import BigNumber from 'utils/bigNumber';

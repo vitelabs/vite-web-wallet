@@ -1,7 +1,7 @@
 <template>
     <div id="vite-wallet-app" class="app-wrapper" :class="{
-        'dex': active.indexOf('trade') !== -1,
-        'wallet': active.indexOf('trade') === -1
+        'dex': $route.name.indexOf('trade') !== -1,
+        'wallet': $route.name.indexOf('trade') === -1
     }">
         <router-view/>
         <notice-list></notice-list>
@@ -14,15 +14,8 @@ import noticeList from 'components/noticeList.vue';
 export default {
     components: { noticeList },
     mounted() {
-        this.$router.afterEach(to => {
-            this.active = to.name;
-        });
-
         this.$store.commit('setLang', this.$i18n.locale);
         this.$store.dispatch('startLoopBalance');
-    },
-    data() {
-        return { active: this.$route.name };
     },
     computed: {
         currHDAcc() {

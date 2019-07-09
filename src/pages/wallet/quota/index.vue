@@ -35,7 +35,7 @@ import quotaHead from './quotaHead';
 import myQuota from './myQuota';
 import pledgeTx from './pledgeTx';
 import list from './list';
-import confirm from 'components/confirm';
+import confirm from 'components/confirm/confirm.vue';
 import loading from 'components/loading';
 import viteInput from 'components/viteInput';
 import { initPwd } from 'components/password/index.js';

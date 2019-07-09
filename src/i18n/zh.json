@@ -432,6 +432,7 @@
         "cancel": "取消",
         "success": "操作成功",
         "fail": "操作失败",
+        "getListFail": "获取列表失败",
         "mintageConfirm": {
             "title": "确认铸币信息",
             "balance": "当前地址余额",
@@ -441,6 +442,11 @@
         "reIssuableConfirm": {
             "title": "改为不可增发",
             "text": "确认将 {tokenName} 改为不可增发状态吗?"
+        },
+        "issueConfirm": {
+            "title": "增发代币",
+            "amount": "增发数量",
+            "overAmount": "增发数量超出上限"
         },
         "changeOwnerConfirm": {
             "title": "转让所有权",

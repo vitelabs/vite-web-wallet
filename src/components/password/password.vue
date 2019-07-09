@@ -1,12 +1,12 @@
 <template>
-    <confirm :title="pwdTitle"
+    <confirm class="small" :title="pwdTitle"
              :content="content" :showMask="showMask" :isLoading="isLoading"
              :leftBtnTxt="cancelTxt || $t('btn.cancel')" :rightBtnTxt="submitTxt || $t('btn.submit')"
              :leftBtnClick="exchange ? _submit : _cancle"  :rightBtnClick="exchange ? _cancle : _submit">
 
         <slot></slot>
 
-        <form autocomplete="off" v-show="isShowPWD" class="pass-input" :class="{ 'distance': !!content }">
+        <form autocomplete="off" v-show="isShowPWD" class="__input" :class="{ 'distance': !!content }">
             <input ref="passInput" v-model="password" :placeholder="$t('pwdConfirm.placeholder')" type="password"/>
         </form>
 
@@ -17,7 +17,7 @@
 <script>
 import { StatusMap } from 'wallet';
 import { constant } from 'utils/store';
-import confirm from 'components/confirm.vue';
+import confirm from 'components/confirm/confirm.vue';
 import holdPwdView from './holdPwd.vue';
 
 let lastE = null;
@@ -184,23 +184,7 @@ export default {
 <style lang="scss" scoped>
 @import '~assets/scss/vars.scss';
 
-.pass-input {
-    width: 100%;
-    background: #fff;
-    border: 1px solid #d4dee7;
-    border-radius: 2px;
-    height: 40px;
-    line-height: 40px;
-    box-sizing: border-box;
-    padding: 0 15px;
-
-    &.distance {
-        margin-top: 30px;
-    }
-
-    input {
-        width: 100%;
-        font-size: 14px;
-    }
+.__input.distance {
+    margin-top: 30px;
 }
 </style>
