@@ -34,17 +34,17 @@
             <span v-for="(item, i) in list" :key="i"
                   :slot="`${i}operateBefore`">
                 <span v-if="!item.isCancel" class="btn __pointer"
-                      v-unlock-account @unlocked="edit(item)">{{ $t('btn.edit') }}</span>
+                      @click="edit(item)">{{ $t('btn.edit') }}</span>
                 <span v-if="item.isCancel" class="btn" :class="{
                     '__pointer': item.isReReg,
                     'unuse': !item.isReReg
-                }" v-unlock-account @unlocked="reg(item, true)">{{ $t('btn.reReg') }}</span>
+                }" @click="reg(item, true)">{{ $t('btn.reReg') }}</span>
                 <span v-if="!item.isCancel" class="btn" :class="{
                     '__pointer': item.isMaturity,
                     'unuse': !item.isMaturity
-                }" v-unlock-account @unlocked="cancel(item)">{{ $t('walletSBP.cancelBtn') }}</span>
+                }" @click="cancel(item)">{{ $t('walletSBP.cancelBtn') }}</span>
                 <span class="btn __pointer"
-                      v-unlock-account @unlocked="reward(item)">{{ $t('walletSBP.rewardBtn') }}</span>
+                      @click="reward(item)">{{ $t('walletSBP.rewardBtn') }}</span>
             </span>
         </wallet-table>
 
@@ -82,6 +82,7 @@ import tooltips from 'components/tooltips';
 import walletTable from 'components/table/index.vue';
 import { initPwd } from 'components/password/index.js';
 import password from 'components/password/password.vue';
+import { execWithValid } from '../../../utils/execWithValid';
 
 const amount = 500000;
 
@@ -231,7 +232,7 @@ export default {
                 this.$toast(this.$t('walletSBP.section1.registerFail'), err);
             });
         },
-        reg(item, isReReg) {
+        reg: execWithValid(function (item, isReReg) {
             if (isReReg && !item.isReReg) {
                 return;
             }
@@ -250,8 +251,8 @@ export default {
                     this.sendRegisterTx(item);
                 }
             }, true);
-        },
-        cancel(item) {
+        }),
+        cancel: execWithValid(function (item) {
             if (!item.isMaturity || item.isCancel) {
                 return;
             }
@@ -281,13 +282,13 @@ export default {
                     });
                 }
             }, true);
-        },
-        edit(item) {
+        }),
+        edit: execWithValid(function (item) {
             if (item.isCancel) {
                 return;
             }
             this.showConfirm('edit', item.rawData);
-        },
+        }),
         sendReward() {
             sendTx('retrieveReward', {
                 nodeName: this.rewardItem.rawData.name,
@@ -313,7 +314,7 @@ export default {
             this.isShowReward = false;
             this.rewardItem = null;
         },
-        reward(item) {
+        reward: execWithValid(function (item) {
             this.totalReward = null;
             $Vite.request('register_getAvailableReward', '00000000000000000001', item.rawData.name).then(data => {
                 if (!data || data.drained || !+data.totalReward) {
@@ -328,7 +329,7 @@ export default {
                 console.warn(err);
                 this.$toast('Get Reward Failed', err);
             });
-        }
+        })
     }
 };
 </script>
