@@ -446,6 +446,7 @@
         "issueConfirm": {
             "title": "增发代币",
             "amount": "增发数量",
+            "address": "受益地址",
             "overAmount": "增发数量超出上限"
         },
         "changeOwnerConfirm": {
