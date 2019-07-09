@@ -2,7 +2,7 @@
     "lang": "中文",
     "help": "帮助",
     "start": "开始",
-    "login": "登录账户",
+    "login": "登录",
     "regAcc": "注册账户",
     "dexToken": "开通交易对",
     "unlockAcc": "解锁当前账户",
@@ -21,10 +21,12 @@
     "withdrawHeight": "到期快照高度",
     "balance": "账户余额",
     "addrName": "地址{index}",
+    "true": "是",
+    "false": "否",
     "guide": {
         "close": "关闭",
         "next": "下一步",
-        "closeTips": "点击关闭新手引导",
+        "closeTips": "点击关闭新手引导 (不推荐)",
         "trade": [
             "在这里管理您的钱包资产和交易所资产",
             "查看当前委托和历史委托记录，掌握交易细节",
@@ -243,7 +245,7 @@
             "availableExAmount":"交易所可用余额"
         },
         "actionType": {
-            "SEND": "发送",
+            "SEND": "转账",
             "RECEIVE": "接收",
             "CHARGE": "跨链转入",
             "WITHDRAW": "跨链转出",
@@ -414,7 +416,64 @@
         }
     },
     "walletMintage": {
-        "title": "铸币"
+        "title": "铸币",
+        "address": "铸币地址",
+        "tokenName": "代币全称",
+        "tokenSymbol": "代币简称",
+        "totalSupply": "总发行量",
+        "decimals": "价格精度",
+        "isReIssuable": "是否可增发",
+        "maxSupply": "最大发行量",
+        "ownerBurnOnly": "仅支持所有者销毁",
+        "isOwnerBurnOnly": "是否仅支持所有者销毁",
+        "mint": "确认铸币",
+        "tokenList": "已铸代币",
+        "submit": "确认",
+        "cancel": "取消",
+        "success": "操作成功",
+        "fail": "操作失败",
+        "getListFail": "获取列表失败",
+        "mintageConfirm": {
+            "title": "确认铸币信息",
+            "balance": "当前地址余额",
+            "fee": "铸币费",
+            "btn": "确认铸币"
+        },
+        "reIssuableConfirm": {
+            "title": "改为不可增发",
+            "text": "确认将 {tokenName} 改为不可增发状态吗?"
+        },
+        "issueConfirm": {
+            "title": "增发代币",
+            "amount": "增发数量",
+            "overAmount": "增发数量超出上限"
+        },
+        "changeOwnerConfirm": {
+            "title": "转让所有权",
+            "address": "接受权限地址"
+        },
+        "hint": {
+            "tokenName": "代币全称长度为1-40 个字符，包含大小写字母、空格和下划线，不能有连续空格，不能包含数字。",
+            "tokenSymbol": "简称长度为1-10 个字符，只可包含大写字母、数字。",
+            "decimals": "10**decimals 不能超过 totalSupply",
+            "success": "铸币成功",
+            "fail": "铸币失败"
+        },
+        "err": {
+            "tokenNameFormat": "名称不合法",
+            "tokenNameNull": "名称不可为空",
+            "tokenSymbolFormat": "简称不合法",
+            "tokenSymbolNull": "简称不可为空",
+            "supplyMax": "发行量过大",
+            "totalSupplyFormat": "总发行量不合法",
+            "totalSupplyNull": "总发行量不可为空",
+            "decimalsNull": "价格精度不可为空",
+            "decimalsFormat": "价格精度不合法",
+            "decimalsMax": "价格精度过大",
+            "maxSupplyNull": "最大发行量不可为空",
+            "maxSupplyFormat": "最大发行量不合法",
+            "maxSupplyMin": "最大发行量不能小于总发行量"
+        }
     },
     "walletQuota": {
         "title": "配额管理",
@@ -885,8 +944,8 @@
         "withdrawHint": "取回后，您将无法再挖矿VX",
         "addTitle": "抵押VITE挖矿",
         "withdrawTitle": "取回抵押VITE",
-        "addPlaceHolder": "请输入抵押金额，最少134vite",
-        "withdrawPlaceHolder": "请输入取回金额，最少134vite",
+        "addPlaceHolder": "请输入抵押金额，最少134VITE",
+        "withdrawPlaceHolder": "请输入取回金额，最少134VITE",
         "addBtn": "提交抵押",
         "withdrawBtn": "确认取回",
         "stakingBalance": "可取回抵押余额"

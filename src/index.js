@@ -23,7 +23,7 @@ resaveLastAcc();
 
 // $onKeyDown $offKeyDown $trim $toast
 Vue.use(plugin);
-// V-click-outside v-unlock-account
+// V-click-outside
 Vue.use(directives);
 
 Vue.config.devtools = process.env.NODE_ENV !== 'production';

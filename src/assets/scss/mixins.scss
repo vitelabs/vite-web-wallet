@@ -1,16 +1,16 @@
 @import "~assets/scss/vars.scss";
 
 :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-    color: #BDC1D1; 
+    color: rgba(94,104,117,0.3);
 }
 ::-moz-placeholder { /* Mozilla Firefox 19+ */
-    color: #BDC1D1; 
+    color: rgba(94,104,117,0.3);
 }
 ::-webkit-input-placeholder { /* WebKit browsers */
-    color: #BDC1D1; 
+    color: rgba(94,104,117,0.3);
 }
 :-ms-input-placeholder { /* Internet Explorer 10+ */
-    color: #BDC1D1; 
+    color: rgba(94,104,117,0.3);
 }
 input[type=number]::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -60,6 +60,14 @@ textarea {
     letter-spacing: 0;
     text-align: center;
     padding: 0 0 30px;
+}
+
+.__second-title {
+    font-size: 14px;
+    @include font-family-bold();
+    font-weight: 600;
+    color: rgba(29,32,36,1);
+    line-height: 18px;
 }
 
 .__btn {
@@ -152,8 +160,8 @@ textarea {
 }
 
 @font-face {
-    font-family: "Oswald-light";
-    src: url("../font/Oswald-Light.ttf");
+    font-family: "DINPro";
+    src: url("../font/DINPro.otf");
     font-weight: normal;
     font-style: normal;
 }

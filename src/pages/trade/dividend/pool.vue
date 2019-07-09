@@ -103,11 +103,12 @@ export default {
 @import "~assets/scss/vars.scss";
 
 .pool-detail {
-    background: #fff;
     box-shadow: 0px 2px 10px 1px rgba(176,192,237,0.42);
     border-radius: 2px;
     display: flex;
     flex-direction: row;
+    background: url('~assets/imgs/mint_pledge_bg.png') rgba(234,248,255,0.2);
+    background-size: 100% 100%;
 }
 .pool-item {
     max-width: 449px;
@@ -116,6 +117,7 @@ export default {
     box-sizing: border-box;
     border-right: 1px solid rgba(227,235,245,0.6);
     font-size: 12px;
+    width: 25%;
 
     &:last-child {
         border-right: none;

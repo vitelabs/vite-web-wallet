@@ -12,7 +12,7 @@
                     />
                 </div>
                 <div v-if="!isShowNameInput" class="name" @click="startRename">
-                    {{ account.name }}
+                    {{ account.isBifrost?$t('assets.vb.defaultName'):account.name }}
                 </div>
                 <!-- <input fake_pass type="password" style="display:none"/> -->
                 <form autocomplete="off" v-else>
@@ -32,7 +32,7 @@
             <div class="head-right">
                 <SwitchAddr :isShowAddr="false"></SwitchAddr>
                 <span class="address-content">
-                    <copy ref="copyDom"></copy>
+                    <copy ref="copyDom" class="copy-tips"></copy>
                     <span class="addr_item">{{ activeAddr }}</span>
                     <QrcodePopup :qrcodeString="addressQrcode"
                     ><img
@@ -76,6 +76,7 @@ import { utils } from '@vite/vitejs';
 import copy from 'components/copy';
 import AssetSwitch from './assetSwitch';
 import { getTokenNameString } from 'utils/tokenParser';
+import { getCurrHDAcc } from 'wallet';
 
 const assetsType = {
     TOTAL: 'TOTAL',
@@ -116,7 +117,8 @@ export default {
         account() {
             return {
                 name: this.$store.state.wallet.name,
-                addr: this.activeAddr
+                addr: this.activeAddr,
+                isBifrost: getCurrHDAcc() && getCurrHDAcc().isBifrost
             };
         },
         netStatus() {
@@ -203,7 +205,7 @@ export default {
             this.$offKeyDown();
         },
         startRename() {
-            if (this.isShowNameInput) {
+            if (this.isShowNameInput || getCurrHDAcc().isBifrost) {
                 return;
             }
             this.isShowNameInput = true;
@@ -302,6 +304,9 @@ export default {
             display: flex;
             position: relative;
             font-family: $font-normal;
+            .copy-tips{
+                top: -50%;
+            }
             .addr_item{
                 max-width: 220px;
             }

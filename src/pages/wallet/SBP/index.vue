@@ -5,12 +5,12 @@
         <loading v-if="loadingToken" class="loading"></loading>
 
         <div v-if="!loadingToken" class="section">
-            <div class="title">{{ $t('walletSBP.section1.title') }}</div>
+            <div class="__second-title">{{ $t('walletSBP.section1.title') }}</div>
             <register :tokenInfo="tokenInfo" :canUseAddr="canUseAddr" :getParams="getParams" class="content"></register>
         </div>
 
         <div v-if="!loadingToken" class="section">
-            <div class="title">{{ $t('walletSBP.section2.title') }}</div>
+            <div class="__second-title">{{ $t('walletSBP.section2.title') }}</div>
             <div class="list-content content">
                 <list :showConfirm="showConfirm" :tokenInfo="tokenInfo" :getParams="getParams"></list>
             </div>
@@ -35,7 +35,7 @@
 import { hdAddr } from '@vite/vitejs';
 import secTitle from 'components/secTitle';
 import loading from 'components/loading';
-import confirm from 'components/confirm';
+import confirm from 'components/confirm/confirm.vue';
 import viteInput from 'components/viteInput';
 import { initPwd } from 'components/password/index.js';
 import BigNumber from 'utils/bigNumber';
@@ -259,15 +259,11 @@ export default {
 }
 
 .section {
-    padding-top: 14px;
+    &:last-child {
+        padding-top: 14px;
+    }
 
-    .title {
-        font-weight: 600;
-        height: 18px;
-        line-height: 18px;
-        @include font-family-bold();
-        font-size: 14px;
-        color: #1d2024;
+    .__second-title {
         margin-bottom: 14px;
     }
 

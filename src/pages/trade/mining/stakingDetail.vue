@@ -14,7 +14,7 @@
                 <div class="bold">{{ stakingDetail.withdrawHeight }}</div>
             </div>
         </div>
-        <div class="item">
+        <div class="item no-border">
             <img src="~assets/imgs/time.svg" />
             <div class="item-detail">
                 <div>{{ $t('walletQuota.list.withdrawTime') }}</div>
@@ -49,14 +49,8 @@ export default {
         viteTokenInfo() {
             return this.$store.getters.viteTokenInfo;
         },
-        withdrawTime() {
-            if (!this.stakingObj) {
-                return 0;
-            }
-            return this.stakingObj.withdrawTime + 10 * 60;
-        },
         canCancel() {
-            return this.withdrawTime <= new Date().getTime() / 1000;
+            return this.stakingObj.withdrawHeight <= this.height;
         },
         stakingDetail() {
             if (!this.stakingObj) {
@@ -67,7 +61,7 @@ export default {
                 };
             }
             return {
-                withdrawTime: date(this.withdrawTime * 1000, this.$i18n.locale),
+                withdrawTime: date(this.stakingObj.withdrawTime * 1000, this.$i18n.locale),
                 amount: bigNumber.toBasic(this.stakingObj.amount || 0, 18), // [TODO] viteTokenInfo fix
                 withdrawHeight: this.stakingObj.withdrawHeight
             };
@@ -80,11 +74,20 @@ export default {
 @import "~assets/scss/vars.scss";
 
 .staking-detail {
+    background: url('~assets/imgs/mint_pledge_bg.png') rgba(234,248,255,0.2);
+    background-size: 100% 100%;
     >div {
         display: inline-block;
     }
     .item {
+        box-sizing: border-box;
         width: 25%;
+        padding: 16px 30px;
+        border-right: 1px solid rgba(227,235,245,0.6);
+        &.no-border {
+            border-right: none;
+        }
+
         img {
             margin-right: 10px;
         }
@@ -103,6 +106,7 @@ export default {
         }
     }
     .btn {
+        margin-top: 19px;
         float: right;
         min-width: 100px;
         box-sizing: border-box;
@@ -117,13 +121,15 @@ export default {
             color: #fff;
             background: rgba(0,122,255,1);
             margin-right: 13px;
-            margin-top: 1px;
+            margin-bottom: -1px;
         }
         &.cancel {
             color: rgba(94,104,117,1);
             border: 1px solid rgba(198,203,212,1);
+            margin-right: 30px;
         }
         &.unuse {
+            margin-right: 30px;
             background: #efefef;
             color: #666;
             border: none;
@@ -132,4 +138,3 @@ export default {
     }
 }
 </style>
-

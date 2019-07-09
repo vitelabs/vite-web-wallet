@@ -1,13 +1,17 @@
 <template>
     <div class="page-layout-wrapper" @click="operate">
-        <sidebar class="sidebar" :active="active" :go="go" :menuList="menuList" ></sidebar>
+        <guide v-if="$route.name === 'tradeCenter'"></guide>
+
+        <sidebar class="sidebar" :go="go" :menuList="menuList" ></sidebar>
 
         <div class="page-content">
             <div class="page-scroll-wrapper">
-                <second-menu v-show="active.indexOf('setting') === -1"
+                <guide v-if="$route.name === 'assets'"></guide>
+
+                <second-menu v-show="$route.name.indexOf('setting') === -1"
                              :go="go" class="second-menu"
                              :tabList="secondMenuList"
-                             :class="{ 'assets': active.indexOf('assets') === 0 }" >
+                             :class="{ 'assets': $route.name.indexOf('assets') === 0 }" >
                 </second-menu>
                 <div class="page-wrapper">
                     <slot></slot>
@@ -18,26 +22,21 @@
 </template>
 
 <script>
-import { StatusMap } from 'wallet';
+import { StatusMap, getCurrHDAcc } from 'wallet';
 import sidebar from './sidebar';
 import secondMenu from './secondMenu';
 import { sidebarMenuList, secondMenuList } from './config';
+import guide from 'components/guide';
 
 let autoLogout = null;
 
 export default {
-    components: { sidebar, secondMenu },
+    components: { guide, sidebar, secondMenu },
     mounted() {
-        this.$router.afterEach(to => {
-            this.active = to.name;
-        });
         this.setMenuList();
     },
     data() {
-        return {
-            active: this.$route.name,
-            menuList: []
-        };
+        return { menuList: [] };
     },
     computed: {
         isLogin() {
@@ -45,18 +44,18 @@ export default {
         },
         secondMenuList() {
             let list = [];
-            if (this.active.indexOf('trade') === 0) {
+            if (this.$route.name.indexOf('trade') === 0) {
                 list = secondMenuList.trade;
-            } else if (this.active.indexOf('assets') === 0) {
+            } else if (this.$route.name.indexOf('assets') === 0) {
                 list = secondMenuList.assets;
             }
 
-            if (this.active.indexOf('wallet') !== 0) {
+            if (this.$route.name.indexOf('wallet') !== 0) {
                 return [].concat(list);
             }
 
             list = [].concat(secondMenuList.wallet);
-            this.isLogin && list.push('walletConversion');
+            (this.isLogin && !getCurrHDAcc().isBifrost) && list.push('walletConversion');
             return list;
         },
         autoLogoutTime() {
@@ -98,7 +97,7 @@ export default {
                 return;
             }
 
-            if (this.active === name) {
+            if (this.$route.name === name) {
                 return;
             }
 
@@ -160,6 +159,7 @@ export default {
         overflow: auto;
 
         .page-scroll-wrapper {
+            position: relative;
             display: flex;
             flex-direction: column;
             width: 100%;

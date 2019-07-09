@@ -78,11 +78,11 @@
     .__row-t {
         position: relative;
         @include font-family-bold();
-        font-size: 14px;
-        color: #1D2024;
-        letter-spacing: 0.35px;
         line-height: 16px;
-        padding-bottom: 15px;
+        padding-bottom: 12px;
+        font-size: 12px;
+        font-weight: 600;
+        color: rgba(29,32,36,1);
     }
 
     .__right {
@@ -92,15 +92,20 @@
 
     .__unuse-row {
         padding: 9px 15px;
-        border: 1px solid #D4DEE7;
-        border-radius: 2px;
-        font-size: 14px;
-        line-height: normal;
+        font-size: 12px;
+        line-height: 16px;
         background: rgba(243,246,249,1);
+        border-radius: 2px;
+        border: 1px solid rgba(212,222,231,1);
         &.__light {
             @include font-family-normal();
             font-weight: 400;
             color: rgba(94,104,117,1);
+        }
+        &.__bold {
+            @include font-family-bold();
+            font-weight: 600;
+            color: rgba(29,32,36,1);
         }
         .__icon {
             margin-bottom: -4px;

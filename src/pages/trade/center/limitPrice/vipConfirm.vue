@@ -27,7 +27,7 @@
 
 <script>
 import { constant } from '@vite/vitejs';
-import confirm from 'components/confirm.vue';
+import confirm from 'components/confirm/confirm.vue';
 import BigNumber from 'utils/bigNumber';
 import sendTx from 'utils/sendTx';
 import $ViteJS from 'utils/viteClient';
@@ -56,15 +56,9 @@ export default {
         height() {
             return this.$store.state.ledger.currentHeight;
         },
-        withdrawTime() {
-            if (!this.stakingObj) {
-                return 0;
-            }
-            return this.stakingObj.withdrawTime + 27 * 24 * 60 * 60;
-        },
         canOrder() {
             if (this.isVip) {
-                return this.withdrawTime <= new Date().getTime() / 1000;
+                return this.stakingObj.withdrawHeight <= this.height;
             }
 
             if (!this.rawBalance || !+this.rawBalance.availableExAmount || !this.viteTokenInfo) {
@@ -101,7 +95,7 @@ export default {
             return this.isVip ? this.$t('trade.vipConfirm.cancelStakingAmount') : this.$t('trade.vipConfirm.openStakingAmount');
         },
         hint() {
-            return this.isVip ? this.$t('trade.vipConfirm.cancelHint', { time: this.withdrawTime ? date(this.withdrawTime * 1000, 'zh') : '' }) : this.$t('trade.vipConfirm.openHint');
+            return this.isVip ? this.$t('trade.vipConfirm.cancelHint', { time: this.stakingObj.withdrawTime ? date(this.stakingObj.withdrawTime * 1000, 'zh') : '' }) : this.$t('trade.vipConfirm.openHint');
         }
     },
     watch: {

@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import confirm from 'components/confirm';
+import confirm from 'components/confirm/confirm.vue';
 
 export default {
     props: {
