@@ -1,7 +1,14 @@
 import { getClient } from 'utils/request';
+import { utils } from '@vite/vitejs';
 import sendTx from 'utils/sendTx';
-import { getActiveAcc } from 'wallet';
 import { addrSpace } from 'utils/storageSpace';
+import i18n from 'i18n';
+
+const langMap = {
+    'zh': 'zh-cn',
+    'zh-Hans': 'zh-cn',
+    'en': 'en'
+};
 
 const STORAGEKEY = 'INDEX_COLLECT_TOKEN';
 
@@ -18,98 +25,79 @@ const client = getClient('', xhr => {
         return Promise.resolve(data || null);
     }
     return Promise.reject(xhr.responseText);
-});
+}, { lang: langMap[i18n.locale], version: 'v1.0' });
 export const getGateInfos = () => client({ path: 'certified_gateways', host: process.env.gatewayInfosServer });
 
 export const getChargeAddr = ({ tokenId, addr: walletAddress }, url) =>
     client({
-        path: 'deposit_address',
+        path: 'deposit-info',
         params: { tokenId, walletAddress },
         host: url
     });
 
 export const verifyAddr = ({ tokenId, withdrawAddress }, url) =>
     client({
-        path: 'verify_withdraw_address',
+        path: 'withdraw-address/verification',
         params: { tokenId, withdrawAddress },
         host: url
     });
 
 export const getWithdrawInfo = ({ tokenId, walletAddress }, url) =>
     client({
-        path: 'withdraw_info',
+        path: 'withdraw-info',
         params: { tokenId, walletAddress },
         host: url
     });
 
 export function getWithdrawFee({ tokenId, walletAddress, amount, containsFee = false }, url) {
     return client({
-        path: 'withdraw_fee',
+        path: 'withdraw-fee',
         params: { tokenId, walletAddress, amount, containsFee },
         host: url
     });
 }
 
-export const getChargeInfo = ({ tokenId, addr: walletAddress }, url) =>
+export const getMetaInfo = ({ tokenId }, url) =>
     client({
-        path: 'deposit_info',
+        path: 'meta-info',
+        params: { tokenId },
+        host: url
+    });
+
+export const getDepositInfo = ({ tokenId, addr: walletAddress }, url) =>
+    client({
+        path: 'deposit-info',
         params: { tokenId, walletAddress },
         host: url
     });
 
 export const withdraw = async (
-    { amount, withdrawAddress, gateAddr, tokenId },
-    url
+    { amount, withdrawAddress, gateAddr, tokenId, type }
 ) => {
-    const account = getActiveAcc();
+    // if (type !== 0 || type !== 1) {
+    //     throw new Error('unexcepted address type');
+    // }
+    type = 0;// not used at this moment
+    if (!withdrawAddress) {
+        throw new Error('lack withdrawAddress');
+    }
+    const data = Buffer.concat([ Buffer.from(utils.hexToBytes('0bc3')), Buffer.from([type]), Buffer.from(withdrawAddress) ])
+        .toString('base64');
 
-    const { accountBlock: signedBlock } = await sendTx('asyncSendTx', {
+    return await sendTx('asyncSendTx', {
         toAddress: gateAddr,
         amount,
-        tokenId
+        tokenId,
+        data
     }, {
-        sendTx: false,
         pow: true,
         powConfig: { isShowCancel: true }
     });
-
-    const rawTx = JSON.stringify(signedBlock);
-    const signInfo = { rawTx, withdrawAddress };
-    const signature = account.sign(Buffer(JSON.stringify(signInfo)).toString('hex'));
-    return await client({ method: 'post', path: 'withdraw', params: { rawTx, withdrawAddress, signature }, host: url });
-
-    // const account = wallet.activeAccount;
-    // const address = account.getDefaultAddr();
-    // const unlockAcc = account.account.unlockAcc;
-    // const accountBlockContent = await rpcClient.buildinTxBlock.sendTx.async({
-    //     toAddress: gateAddr,
-    //     amount,
-    //     accountAddress: address,
-    //     tokenId
-    // });
-    // const quota = await rpcClient.pledge.getPledgeQuota(address);
-    // if (quota.txNum < 1) {
-    // // eslint-disable-next-line no-unused-vars
-    //     await purePow({ accountBlock: accountBlockContent });
-    // }
-
-    // const signedBlock = accountBlock.signAccountBlock(accountBlockContent,
-    //     unlockAcc.privateKey);
-
-    // const rawTx = JSON.stringify(signedBlock);
-    // const signInfo = { rawTx, withdrawAddress };
-    // const signature = unlockAcc.sign(Buffer(JSON.stringify(signInfo)).toString('hex'));
-    // return await client({
-    //     method: 'post',
-    //     path: 'withdraw',
-    //     params: { rawTx, withdrawAddress, signature },
-    //     host: url
-    // });
 };
 
 export function getWithdrawRecords({ tokenId, walletAddress, pageNum, pageSize }, url) {
     return client({
-        path: 'withdraw_records',
+        path: 'withdraw-records',
         params: { tokenId, walletAddress, pageNum, pageSize },
         host: url
     });
@@ -118,7 +106,7 @@ export function getWithdrawRecords({ tokenId, walletAddress, pageNum, pageSize }
 
 export function getDepositRecords({ tokenId, walletAddress, pageNum, pageSize }, url) {
     return client({
-        path: 'deposit_records',
+        path: 'deposit-records',
         params: { tokenId, walletAddress, pageNum, pageSize },
         host: url
     });
