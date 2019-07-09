@@ -69,7 +69,7 @@ const actions = {
 
 const getters = {
     balanceInfo(state) {
-        // -------- merge balance&onroad
+        // -------- merge balance & onroad
         const balanceInfo = Object.create(null);
         for (const tokenId in state.balance.balanceInfos) {
             const item = state.balance.balanceInfos[tokenId];

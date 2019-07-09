@@ -114,15 +114,15 @@ export default {
 
 .assets-back {
     position: absolute;
-    top: 300px;
+    top: 270px;
     left: 80px;
-    width: 1130px;
-    height: 50px;
-    background: url('~assets/imgs/assets_guide_zh.jpg');
+    width: 1350px;
+    height: 65px;
+    background: url('~assets/imgs/assets_guide_zh.svg');
     background-size: 100% 100%;
 }
 .en .assets-back {
-    background: url('~assets/imgs/assets_guide_en.jpg');
+    background: url('~assets/imgs/assets_guide_en.svg');
 }
 
 .item {
