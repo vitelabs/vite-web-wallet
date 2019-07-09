@@ -30,6 +30,7 @@ export default {
     width: 140px;
     display: flex;
     justify-content: center;
+    margin: 0 auto;
 }
 </style>
 
