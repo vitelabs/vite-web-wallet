@@ -1,6 +1,5 @@
 <template>
     <div class="trade-container">
-        <guide></guide>
         <page-layout>
             <div class="trade-wrapper">
                 <router-view></router-view>

@@ -1,6 +1,5 @@
 <template>
     <div class="assets-container">
-        <guide :guideType="'assets'"></guide>
         <page-layout>
             <div class="wallet-account-wrapper">
                 <account-head class="account_head"></account-head>
@@ -37,7 +36,6 @@
 
 <script>
 import pageLayout from 'components/pageLayout/index';
-import guide from 'components/guide';
 import tokenCard from './tokenCard';
 import accountHead from './head';
 import { addTokenDialog } from './dialog';
@@ -62,7 +60,7 @@ const filterFunc = filterObj => t => {
     return !(NOTMatchNoZero || NOTMatchFilterKey);
 };
 export default {
-    components: { pageLayout, accountHead, guide, tokenCard, TokenFilter, AssetSwitch },
+    components: { pageLayout, accountHead, tokenCard, TokenFilter, AssetSwitch },
     data() {
         return {
             isShowTrans: false,
