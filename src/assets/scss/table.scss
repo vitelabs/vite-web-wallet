@@ -60,6 +60,9 @@
         display: flex;
         justify-content: space-between;
         border-bottom: 1px solid rgba(212,222,231,1);
+        &.__tb_head {
+            border-bottom: 1px solid #c6cbd4;
+        }
         height: 32px;
         line-height: 32px;
         box-sizing: border-box;

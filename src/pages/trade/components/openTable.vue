@@ -127,7 +127,7 @@ export default {
 .order-tab {
     @include rowWith {
         &:first-child {
-            padding-left: 0;
+            padding-left: 6px;
         }
         &:last-child {
             padding-right: 10px;

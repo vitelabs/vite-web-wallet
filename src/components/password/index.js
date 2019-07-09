@@ -7,7 +7,7 @@ import { getCurrHDAcc } from 'wallet';
 import { vbConnectDialog } from 'components/dialog';
 
 const PwdComponent = Vue.extend(pwdComponent);
-console.log(4444, store);
+
 export function pwdConfirm({
     type = 'normal',
     showMask = true,
