@@ -1,5 +1,5 @@
 <template>
-    <div class="confirm-container" :class="{ 'gray': showMask }">
+    <div class="confirm-container" :class="classStr">
         <div class="confirm-wrapper">
             <div class="title" :class="{'__ellipsis': !closeIcon}">
                 {{ title }}
@@ -38,6 +38,10 @@ import loading from 'components/loading.vue';
 export default {
     components: { loading },
     props: {
+        size: {
+            type: String,
+            default: ''
+        },
         isLoading: {
             type: Boolean,
             default: false
@@ -85,6 +89,12 @@ export default {
         content: {
             type: String,
             default: ''
+        }
+    },
+    computed: {
+        classStr() {
+            console.log(this.size);
+            return `${ this.size } ${ this.showMask ? 'gray' : '' }`;
         }
     },
     methods: {

@@ -7,35 +7,35 @@
                  :leftBtnClick="validTrans" :leftBtnTxt="$t('wallet.transfer')" >
 
             <div class="__row">
-                <div class="__row-t">{{ $t('balance') }}</div>
-                <div class="__unuse-row">
+                <div class="__row_t">{{ $t('balance') }}</div>
+                <div class="__input_row __unuse_input __bold">
                     <img  :src="token.icon||getIcon(token.tokenId)" class="__icon" />
                     {{ token.tokenSymbol }} <span class="__right">{{ showAccBalance }}</span>
                 </div>
             </div>
 
             <div class="__row">
-                <div class="__row-t">
+                <div class="__row_t">
                     {{ $t('wallet.inAddress') }}
-                    <span v-show="!isValidAddress" class="__err __hint">{{ $t('hint.addrFormat') }}</span>
+                    <span v-show="!isValidAddress" class="__err">{{ $t('hint.addrFormat') }}</span>
                 </div>
                 <vite-input v-model="inAddress" :valid="validAddr"
                             :placeholder="$t('wallet.placeholder.addr')"></vite-input>
             </div>
 
             <div class="__row">
-                <div class="__row-t">
+                <div class="__row_t">
                     {{ $t('wallet.sum') }}
-                    <span v-show="amountErr" class="__err __hint">{{ amountErr }}</span>
+                    <span v-show="amountErr" class="__err">{{ amountErr }}</span>
                 </div>
                 <vite-input v-model="amount" :valid="testAmount" type="number"
                             :placeholder="$t('wallet.placeholder.amount')"></vite-input>
             </div>
 
             <div class="__row">
-                <div class="__row-t">
+                <div class="__row_t">
                     {{ $t('wallet.remarks')}}
-                    <span class="__hint" :class="{ err: messageErr }">
+                    <span class="__row_hint" :class="{ '__err': messageErr }">
                         {{ $t('wallet.remarksLong', { len: msgBalance}) }}
                     </span>
                 </div>
@@ -235,28 +235,3 @@ export default {
     }
 };
 </script>
-
-<style lang="scss" scoped>
-@import "~assets/scss/confirmInput.scss";
-
-.__icon{
-    height: 20px;
-    width: 20px;
-}
-</style>
-
-<style lang="scss">
-.confirm-container.trans-confirm .confirm-wrapper {
-    width: 515px;
-    max-width: 90%;
-}
-
-.confirm-container.trans-confirm .confirm-wrapper .bottom {
-    min-height: 70px;
-
-    .__btn {
-        height: 40px;
-        line-height: 40px;
-    }
-}
-</style>
