@@ -456,7 +456,6 @@
         "hint": {
             "tokenName": "代币全称长度为1-40 个字符，包含大小写字母、空格和下划线，不能有连续空格，不能包含数字。",
             "tokenSymbol": "简称长度为1-10 个字符，只可包含大写字母、数字。",
-            "decimals": "10**decimals 不能超过 totalSupply",
             "success": "铸币成功",
             "fail": "铸币失败"
         },
