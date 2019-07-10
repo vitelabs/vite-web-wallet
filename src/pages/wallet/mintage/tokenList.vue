@@ -73,21 +73,21 @@
                       :leftBtnTxt="$t('walletMintage.cancel')" :leftBtnClick="cancelChangeOwner"
                       :rightBtnTxt="$t('walletMintage.submit')" :rightBtnClick="toChangeOwner">
             <div class="__row">
-                <div class="__row-t">{{ $t('walletMintage.tokenName') }}</div>
-                <div class="__unuse-row __light">{{ changeOwnerToken.tokenName }}</div>
+                <div class="__row_t">{{ $t('walletMintage.tokenName') }}</div>
+                <div class="__input_row __unuse_input">{{ changeOwnerToken.tokenName }}</div>
             </div>
             <div class="__row">
-                <div class="__row-t">{{ $t('walletMintage.tokenSymbol') }}</div>
-                <div class="__unuse-row __light">{{ changeOwnerToken.tokenSymbol }}</div>
+                <div class="__row_t">{{ $t('walletMintage.tokenSymbol') }}</div>
+                <div class="__input_row __unuse_input">{{ changeOwnerToken.tokenSymbol }}</div>
             </div>
             <div class="__row">
-                <div class="__row-t">{{ $t('walletMintage.address') }}</div>
-                <div class="__unuse-row __light">{{ changeOwnerToken.owner }}</div>
+                <div class="__row_t">{{ $t('walletMintage.address') }}</div>
+                <div class="__input_row __unuse_input">{{ changeOwnerToken.owner }}</div>
             </div>
             <div class="__row">
-                <div class="__row-t">
+                <div class="__row_t">
                     {{ $t('walletMintage.changeOwnerConfirm.address') }}
-                    <span v-show="!isValidAddress" class="__err __hint">{{ $t('hint.addrFormat') }}</span>
+                    <span v-show="!isValidAddress" class="__err">{{ $t('hint.addrFormat') }}</span>
                 </div>
                 <vite-input v-model="address" :valid="validAddr"
                             :placeholder="$t('wallet.placeholder.addr')"></vite-input>
@@ -99,24 +99,24 @@
                       :leftBtnTxt="$t('walletMintage.cancel')" :leftBtnClick="cancelIssue"
                       :rightBtnTxt="$t('walletMintage.submit')" :rightBtnClick="toIssue">
             <div class="__row">
-                <div class="__row-t">{{ $t('walletMintage.tokenName') }}</div>
-                <div class="__unuse-row __light">{{ issueToken.tokenName }}</div>
+                <div class="__row_t">{{ $t('walletMintage.tokenName') }}</div>
+                <div class="__input_row __unuse_input">{{ issueToken.tokenName }}</div>
             </div>
             <div class="__row">
-                <div class="__row-t">{{ $t('walletMintage.tokenSymbol') }}</div>
-                <div class="__unuse-row __light">{{ issueToken.tokenSymbol }}</div>
+                <div class="__row_t">{{ $t('walletMintage.tokenSymbol') }}</div>
+                <div class="__input_row __unuse_input">{{ issueToken.tokenSymbol }}</div>
             </div>
             <div class="__row">
-                <div class="__row-t">
+                <div class="__row_t">
                     {{ $t('walletMintage.issueConfirm.amount') }}
-                    <span v-show="amountErr" class="__err __hint">{{ amountErr }}</span>
+                    <span v-show="amountErr" class="__err">{{ amountErr }}</span>
                 </div>
                 <vite-input v-model="amount" :valid="validAmount"></vite-input>
             </div>
             <div class="__row">
-                <div class="__row-t">
+                <div class="__row_t">
                     {{ $t('walletMintage.issueConfirm.address') }}
-                    <span v-show="!isValidAddress" class="__err __hint">{{ $t('hint.addrFormat') }}</span>
+                    <span v-show="!isValidAddress" class="__err">{{ $t('hint.addrFormat') }}</span>
                 </div>
                 <vite-input v-model="address" :valid="validAddr"
                             :placeholder="$t('wallet.placeholder.addr')"></vite-input>
@@ -226,6 +226,7 @@ export default {
         cancelChangeOwner() {
             this.changeOwnerToken = null;
             this.address = '';
+            this.isValidAddress = true;
         },
         issue(item) {
             execWithValid(() => {
@@ -237,6 +238,8 @@ export default {
             this.issueToken = null;
             this.address = '';
             this.amount = '';
+            this.amountErr = '';
+            this.isValidAddress = true;
         },
 
         toChangeOwner() {
@@ -279,7 +282,7 @@ export default {
                     sendTx('mintageIssue', {
                         tokenId: this.issueToken.tokenId,
                         amount: BigNumber.toMin(this.amount, this.issueToken.decimals),
-                        beneficial: this.issueToken.owner
+                        beneficial: this.address
                     }).then(() => {
                         this.$toast(this.$t('walletMintage.success'));
                         this.cancelIssue();
@@ -296,10 +299,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~assets/scss/confirmInput.scss";
+.list-wrapper {
+    margin-top: 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
 
 .mintage-table {
     margin-top: 14px;
+    flex: 1;
 }
 .btn {
     margin-right: 8px;

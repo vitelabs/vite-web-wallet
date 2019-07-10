@@ -15,17 +15,15 @@
                         :placeholder="$t('walletQuota.inputWithdrawAmount')"></vite-input>
         </confirm>
 
-        <div v-show="!loadingToken">
-            <div class="content">
-                <my-quota class="my-quota _content_border"></my-quota>
-                <pledge-tx class="pledge-tx"
-                           :sendPledgeTx="sendPledgeTx" :tokenInfo="tokenInfo"></pledge-tx>
-            </div>
-
-            <list ref="txList" :sendPledgeTx="sendPledgeTx"
-                  :tokenInfo="tokenInfo"
-                  :showConfirm="showConfirm"></list>
+        <div v-show="!loadingToken" class="content">
+            <my-quota class="my-quota _content_border"></my-quota>
+            <pledge-tx class="pledge-tx"
+                       :sendPledgeTx="sendPledgeTx" :tokenInfo="tokenInfo"></pledge-tx>
         </div>
+
+        <list v-show="!loadingToken" ref="txList" :sendPledgeTx="sendPledgeTx"
+              :tokenInfo="tokenInfo"
+              :showConfirm="showConfirm"></list>
     </div>
 </template>
 
@@ -181,6 +179,8 @@ export default {
     position: relative;
     box-sizing: border-box;
     height: 100%;
+    display: flex;
+    flex-direction: column;
 
     .loading {
         width: 60px;

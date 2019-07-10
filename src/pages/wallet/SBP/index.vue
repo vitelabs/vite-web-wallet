@@ -11,9 +11,7 @@
 
         <div v-if="!loadingToken" class="section">
             <div class="__second-title">{{ $t('walletSBP.section2.title') }}</div>
-            <div class="list-content content">
-                <list :showConfirm="showConfirm" :tokenInfo="tokenInfo" :getParams="getParams"></list>
-            </div>
+            <list :showConfirm="showConfirm" :tokenInfo="tokenInfo" :getParams="getParams"></list>
         </div>
 
         <div v-if="showConfirmType" class="gray-wrapper">
@@ -226,6 +224,8 @@ export default {
     position: relative;
     box-sizing: border-box;
     height: 100%;
+    display: flex;
+    flex-direction: column;
 
     .loading {
         width: 60px;
@@ -261,6 +261,9 @@ export default {
 .section {
     &:last-child {
         padding-top: 14px;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
     }
 
     .__second-title {
@@ -271,11 +274,6 @@ export default {
         background: #fff;
         box-shadow: 0px 2px 10px 1px rgba(176,192,237,0.42);
         border-radius: 2px;
-    }
-
-    .list-content {
-        width: 100%;
-        overflow: auto;
     }
 }
 

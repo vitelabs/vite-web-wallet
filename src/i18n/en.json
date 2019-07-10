@@ -435,7 +435,6 @@
         "hint": {
             "tokenName": "Token name should have 1-40 characters including capitals and lowercase letters, spaces and underlines. Continuous spaces and numbers are not supported.",
             "tokenSymbol": "Token symbol should have 1-10 characters, only capitals and numbers are supported.",
-            "decimals": "10**decimals 不能超过 totalSupply",
             "success": "Token Issuance Successful",
             "fail": "Token Issuance failed"
         },
