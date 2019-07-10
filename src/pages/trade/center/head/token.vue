@@ -4,6 +4,7 @@
             <div class="t-icon" @click="showToken('ftoken')">
                 <img v-show="ftokenIcon" :src="ftokenIcon"/>
                 {{ ftokenDetail ? ftokenDetail.symbol : '' }}
+                <div v-show="activeTxPairIsClose" class="close"></div>
             </div> /
             <div class="t-icon" @click="showToken('ttoken')">
                 {{ ttokenDetail ? ttokenDetail.symbol : '' }}
@@ -81,6 +82,18 @@ export default {
         return { showTokenType: '' };
     },
     computed: {
+        closeMarket() {
+            return this.$store.state.exchangeMarket.marketClosed;
+        },
+        activeTxPair() {
+            return this.$store.state.exchangeActiveTxPair.activeTxPair;
+        },
+        activeTxPairIsClose() {
+            if (!this.activeTxPair) {
+                return false;
+            }
+            return this.closeMarket.find(v => v.symbol === this.activeTxPair.symbol);
+        },
         defaultTokens() {
             return this.$store.state.ledger.tokenInfoMaps;
         },
@@ -172,6 +185,7 @@ export default {
         line-height: 14px;
 
         .t-icon {
+            position: relative;
             display: inline-block;
             white-space: nowrap;
             line-height: 20px;
@@ -186,6 +200,29 @@ export default {
             }
             &:first-child {
                 font-size: 16px;
+            }
+
+            .close {
+                position: absolute;
+                display: inline-block;
+                width: 28px;
+                height: 28px;
+                border-radius: 28px;
+                background: rgba(0,0,0,0.5);
+                z-index: 100;
+                left: 0;
+                &:after {
+                    position: absolute;
+                    top: 13px;
+                    right: -6px;
+                    content: ' ';
+                    display: inline-block;
+                    width: 14px;
+                    height: 14px;
+                    border-radius: 12px;
+                    background: url('~assets/imgs/tx-pair-close.svg');
+                    background-size: 100% 100%;
+                }
             }
         }
 

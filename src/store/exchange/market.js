@@ -1,10 +1,11 @@
-import { baseToken } from 'services/trade';
+import { baseToken, marketsClosed } from 'services/trade';
 import getQuery from 'utils/query';
 
 const state = {
     isShowFavorite: false,
     currentMarket: '',
-    marketMap: []
+    marketMap: [],
+    marketClosed: []
 };
 
 const mutations = {
@@ -16,6 +17,9 @@ const mutations = {
     },
     setMarketMap(state, marketMap) {
         state.marketMap = marketMap;
+    },
+    setMarketClosed(state, marketClosed) {
+        state.marketClosed = marketClosed;
     }
 };
 
@@ -55,6 +59,11 @@ const actions = {
             }
 
             commit('setCurrentMarket', marketMap[i].symbol);
+        });
+    },
+    getMarketsClosed({ commit }) {
+        marketsClosed().then(data => {
+            commit('setMarketClosed', data || []);
         });
     }
 };
