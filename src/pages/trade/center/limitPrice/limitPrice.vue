@@ -13,7 +13,7 @@
                 <span class="help __pointer" @mouseenter="showHelp" @mouseleave="hideHelp">
                     <span v-show="isShowHelp" class="help-tip">
                         <span>{{ $t('trade.limitPrice.dexFee', { fee: baseFee }) }}</span>
-                        <span>{{ $t('trade.limitPrice.operatorFee', { fee: operatorFee + '%' }) }}</span>
+                        <span>{{ $t('trade.limitPrice.operatorFee', { fee: operatorFee }) }}</span>
                         <span>{{ $t('trade.limitPrice.vipFee', { fee: vipFee }) }}</span>
                     </span>
                 </span>
@@ -49,7 +49,7 @@ export default {
     },
     computed: {
         operatorFee() {
-            return '0%';
+            return `${ this.taker } / ${ this.maker }`;
         },
         isLogin() {
             return this.$store.state.wallet.status === StatusMap.UNLOCK;

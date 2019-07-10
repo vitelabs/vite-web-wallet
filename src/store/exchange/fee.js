@@ -43,6 +43,8 @@ const actions = {
             if (_activeTxPair.symbol !== getters.exActiveTxPair.symbol) {
                 return;
             }
+            console.log(data);
+
             commit('setExchangeMarketInfo', data);
         });
     },

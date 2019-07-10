@@ -172,3 +172,10 @@ export function dividend({ address, offset, limit = 30 }) {
         params: { address, offset, limit }
     });
 }
+
+export function marketsClosed() {
+    return request({
+        path: `${ path }/markets/closed`,
+        method: 'GET'
+    });
+}

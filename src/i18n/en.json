@@ -690,7 +690,8 @@
         }
     },
     "tradeCenter": {
-        "title": "Exchange"
+        "title": "Exchange",
+        "marketClosed": "{symbol} 已暂停交易。"
     },
     "trade": {
         "search": "Search",
