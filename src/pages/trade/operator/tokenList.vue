@@ -27,16 +27,7 @@ export default {
     methods: {
         fetchOperatorTokens() {
             operatorTokens(this.address).then(data => {
-                console.log(data);
                 this.tokenList = data.tokenList || [];
-                // this.tokenList = [
-                //     {
-                //         'tokenId': 'XXXXXX',
-                //         'tokenSymbol': 'BTC-000',
-                //         'income': '2.222',
-                //         'status': 1
-                //     }
-                // ];
             }).catch(err => {
                 console.warn(err);
             });

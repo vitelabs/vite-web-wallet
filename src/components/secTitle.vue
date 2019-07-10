@@ -1,6 +1,7 @@
 <template>
     <div class="sec-title-container">
-        <span>{{ $t(title) }}</span>
+        <span v-show="isShowBack" class="back __pointer" @click="back"></span>
+        <span>{{ _title }}</span>
         <span v-if="isShowHelp" @click="_showHelp" class="help __pointer">
             <i class="icon"></i>
             <span class="help-text">{{ $t(helpTitle) }}</span>
@@ -15,9 +16,12 @@ import confirm from 'components/confirm/index.js';
 export default {
     props: {
         title: {
-            default: function () {
-                return `${ this.$route.name }.title`;
-            }
+            type: String,
+            default: ''
+        },
+        isShowBack: {
+            type: Boolean,
+            default: false
         },
         isShowHelp: {
             type: Boolean,
@@ -35,7 +39,15 @@ export default {
         },
         showHelp: { default: null }
     },
+    computed: {
+        _title() {
+            return this.title || this.$t(`${ this.$route.name }.title`);
+        }
+    },
     methods: {
+        back() {
+            this.$router.go(-1);
+        },
         _showHelp() {
             if (this.showHelp) {
                 this.showHelp();
@@ -65,6 +77,16 @@ export default {
     font-size: 18px;
     line-height: 22px;
     padding: 10px 0 14px 0;
+
+    .back {
+        display: inline-block;
+        padding: 4px;
+        width: 16px;
+        height: 16px;
+        background: url('~assets/imgs/back.svg') center no-repeat;
+        background-size: 16px 16px;
+        margin-bottom: -5px;
+    }
 
     .help {
         align-items: center;

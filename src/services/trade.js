@@ -203,3 +203,11 @@ export function operatorTokens(operatorId) {
         }
     });
 }
+
+export function operatorMarkets({ operatorId, tradeToken, offset, limit = 30 }) {
+    return request({
+        path: `${ path }/operator/markets`,
+        method: 'GET',
+        params: { operatorId, tradeToken, offset, limit }
+    });
+}
