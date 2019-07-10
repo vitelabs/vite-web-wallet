@@ -85,9 +85,19 @@ export default {
                 submitTxt: this.$t('tradeOpenOrders.confirm.submitTxt'),
                 cancelTxt: this.$t('tradeOpenOrders.confirm.cancelTxt'),
                 submit: () => {
-                    sendTx('dexTradeCancelOrder', {
-                        orderId: _Buffer.from(order.orderId, 'hex').toString('base64'),
-                        tradeToken: order.tradeToken
+                    sendTx({
+                        methodName: 'dexTradeCancelOrder',
+                        data: {
+                            orderId: _Buffer.from(order.orderId, 'hex').toString('base64'),
+                            tradeToken: order.tradeToken
+                        },
+                        vbExtends: {
+                            'type': 'dexCancel',
+                            'side': order.side,
+                            'tradeTokenSymbol': order.tradeTokenSymbol,
+                            'quoteTokenSymbol': order.quoteTokenSymbol,
+                            'price': order.price
+                        }
                     })
                         .then(successSubmit)
                         .catch(err => {
