@@ -15,24 +15,19 @@
             <div v-show="!isLogin" @click="dexChange" class="tab __pointer">
                 {{ isHaveUsers ? $t('changeAcc') : $t('register') }}</div>
             <div v-show="isHaveUsers && $route.name.indexOf('trade') !== -1" class="tab __pointer"
-                 @click="showToken">
-                {{ $t('dexToken') }}</div>
+                 @click="goOperator">{{ $t('tradeOperator.title') }}</div>
             <switch-addr class="switch-tab menu" v-show="$route.name !== 'assets'" ></switch-addr>
         </ul>
-
-        <dex-token v-if="isShowDexToken" :close="closeToken"></dex-token>
     </div>
 </template>
 
 <script>
 import { StatusMap } from 'wallet';
-import dexToken from 'components/dexToken';
 import switchAddr from 'components/switchAddress';
 import { pwdConfirm } from 'components/password/index.js';
-import { execWithValid } from 'utils/execWithValid';
 
 export default {
-    components: { dexToken, switchAddr },
+    components: { switchAddr },
     props: {
         tabList: {
             type: Array,
@@ -43,9 +38,6 @@ export default {
             default: () => {}
         }
     },
-    data() {
-        return { isShowDexToken: false };
-    },
     computed: {
         isLogin() {
             return this.$store.state.wallet.status === StatusMap.UNLOCK;
@@ -55,18 +47,13 @@ export default {
         }
     },
     methods: {
-        showToken: execWithValid(function () {
-            this.isShowDexToken = true;
-        }, function () {
-            return this.dexStart();
-        }),
-        closeToken() {
-            this.isShowDexToken = false;
+        goOperator() {
+            this.$router.push({ name: 'tradeOperator' });
         },
-
         goHelp() {
             window.open('/help');
         },
+
         dexStart() {
             if (!this.isHaveUsers) {
                 this.go('start');
