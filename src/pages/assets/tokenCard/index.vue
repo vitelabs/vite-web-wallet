@@ -250,9 +250,6 @@ export default {
     align-items: center;
     border-bottom: 1px solid rgba(227, 235, 245, 0.6);
     height: 71px;
-    &:last-child {
-        border: none;
-    }
     .click-able {
         cursor: pointer;
     }

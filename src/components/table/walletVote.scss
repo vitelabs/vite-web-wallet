@@ -13,19 +13,6 @@
     }
 
     .__tb_cell {
-        min-width: 180px;
-
-        .reward {
-            margin-left: 10px;
-        }
-
-        &.nodename {
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            width: 150px;
-        }
-
         .hoveraction {
             &.tipsicon {
                 position: relative;

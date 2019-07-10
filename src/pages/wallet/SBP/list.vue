@@ -337,6 +337,13 @@ export default {
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
 
+.tb-list {
+    flex: 1;
+    .wallet-sbp-table {
+        height: 100%;
+    }
+}
+
 .reward-confirm-wrapper {
     font-size: 14px;
     margin-bottom: 10px;
