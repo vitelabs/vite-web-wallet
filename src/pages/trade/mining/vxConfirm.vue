@@ -197,10 +197,13 @@ export default {
         staking() {
             const amount = bigNumber.toMin(this.amount, this.viteTokenInfo.decimals);
 
-            sendTx({methodName:'dexFundPledgeForVx', data:{
-                amount,
-                actionType: this.actionType
-            }}).then(() => {
+            sendTx({
+                methodName: 'dexFundPledgeForVx',
+                data: {
+                    amount,
+                    actionType: this.actionType
+                }
+            }).then(() => {
                 if (this.isAdd) {
                     this.$toast(this.$t('hint.request', { name: this.$t('submitStaking') }));
                 } else {

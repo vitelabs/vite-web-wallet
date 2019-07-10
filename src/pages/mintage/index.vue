@@ -125,15 +125,18 @@ export default {
             this.ownerBurnOnly = ownerBurnOnly;
         },
         mintage() {
-            sendTx({methodName:'mintage', data:{
-                decimals: this.decimals,
-                isReIssuable: this.isReIssuable,
-                maxSupply: this.maxSupply,
-                ownerBurnOnly: this.ownerBurnOnly,
-                totalSupply: this.totalSupply,
-                tokenName: this.tokenName,
-                tokenSymbol: this.tokenSymbol
-            }}).then(() => {
+            sendTx({
+                methodName: 'mintage',
+                data: {
+                    decimals: this.decimals,
+                    isReIssuable: this.isReIssuable,
+                    maxSupply: this.maxSupply,
+                    ownerBurnOnly: this.ownerBurnOnly,
+                    totalSupply: this.totalSupply,
+                    tokenName: this.tokenName,
+                    tokenSymbol: this.tokenSymbol
+                }
+            }).then(() => {
                 this.$toast('Mintage success');
             }).catch(err => {
                 this.$toast(`Mintage fail. ${ err.error.message || err.error.msg }`, err);
