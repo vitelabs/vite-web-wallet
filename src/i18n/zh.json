@@ -105,7 +105,8 @@
         "TxRes": "转账",
         "TxResFail": "转账",
         "SendRefund": "转账",
-        "GenesisReceive": "Genesis"
+        "GenesisReceive": "Genesis",
+        "DexFundTransferTokenOwner": "运营商中心权限转让"
     },
     "btn": {
         "cancel": "取消",
@@ -133,7 +134,9 @@
         "insufficientBalance": "余额不足",
         "validMaxDigit": "最多{digit}位小数",
         "bigger0": "金额必须大于0",
-        "nodeErr": "节点异常，请您稍后重试"
+        "nodeErr": "节点异常，请您稍后重试",
+        "operateSuccess": "操作成功",
+        "operateFail": "操作失败"
     },
     "beforeUse": {
         "title": "使用前必读",
@@ -964,6 +967,15 @@
     "tradeOperator": {
         "title": "运营商中心",
         "tokenList": "运营代币",
-        "totalIncome": "历史总收益"
+        "totalIncome": "历史总收益",
+        "permission": "权限转入",
+        "txPairManage": "交易对管理",
+        "permissionConfirm": {
+            "title": "转让所有权",
+            "submit": "确认转入",
+            "tokenName": "币种名称",
+            "address": "接受所有权地址",
+            "notice": "请知悉：币种所有权转入后尚未开通的交易对权限将归新的所有者拥有。已开通暂停交易的交易对所有权仍归您所有。"
+        }
     }
 }

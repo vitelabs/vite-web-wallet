@@ -1,8 +1,9 @@
 <template>
     <div class="token-list-wrapper">
         <div class="__second-title">{{ $t('tradeOperator.tokenList') }}</div>
-
-        <token-card v-for="(token, i) in tokenList" :key="i" :token="token"></token-card>
+        <div class="token-list">
+            <token-card v-for="(token, i) in tokenList" :key="i" :token="token"></token-card>
+        </div>
     </div>
 </template>
 
@@ -28,6 +29,14 @@ export default {
             operatorTokens(this.address).then(data => {
                 console.log(data);
                 this.tokenList = data.tokenList || [];
+                // this.tokenList = [
+                //     {
+                //         'tokenId': 'XXXXXX',
+                //         'tokenSymbol': 'BTC-000',
+                //         'income': '2.222',
+                //         'status': 1
+                //     }
+                // ];
             }).catch(err => {
                 console.warn(err);
             });
@@ -38,6 +47,11 @@ export default {
 
 <style lang="scss" scoped>
 .__second-title {
-    margin: 14px 0;
+    margin: 14px 0 0;
+}
+.token-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
 </style>
