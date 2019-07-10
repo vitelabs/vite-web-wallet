@@ -179,3 +179,27 @@ export function marketsClosed() {
         method: 'GET'
     });
 }
+
+export function operator(operatorId) {
+    return request({
+        path: `${ path }/operator`,
+        method: 'GET',
+        params: {
+            operatorId,
+            offset: 0,
+            limit: 100
+        }
+    });
+}
+
+export function operatorTokens(operatorId) {
+    return request({
+        path: `${ path }/operator/tokens`,
+        method: 'GET',
+        params: {
+            operatorId,
+            offset: 0,
+            limit: 100
+        }
+    });
+}
