@@ -282,7 +282,7 @@ export default {
                     sendTx('mintageIssue', {
                         tokenId: this.issueToken.tokenId,
                         amount: BigNumber.toMin(this.amount, this.issueToken.decimals),
-                        beneficial: this.issueToken.owner
+                        beneficial: this.address
                     }).then(() => {
                         this.$toast(this.$t('walletMintage.success'));
                         this.cancelIssue();

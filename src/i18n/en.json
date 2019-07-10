@@ -986,5 +986,8 @@
         "coin": "Type",
         "amount": "Amount",
         "price": "Total Estimated Value"
+    },
+    "tradeOperator": {
+        "title": "运营商中心"
     }
 }

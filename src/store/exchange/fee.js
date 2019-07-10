@@ -64,6 +64,7 @@ const getters = {
         const vipFee = getVipFee(state.isVip);
         // const takerBrokerFee = state.marketInfo.takerBrokerFee;
         // const makerBrokerFeeRate = state.marketInfo.makerBrokerFeeRate;
+        // console.log(state.marketInfo);
         return baseFee - vipFee;
     }
 };

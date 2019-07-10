@@ -959,5 +959,8 @@
         "coin": "分红币种",
         "amount": "分红金额",
         "price": "分红总估值"
+    },
+    "tradeOperator": {
+        "title": "运营商中心"
     }
 }

@@ -144,7 +144,7 @@ export default {
         position: absolute;
         top: -12px;
         right: -13px;
-        width: 150px;
+        width: 180px;
         padding: 10px 10px 0;
         background: #fff;
         transform: translateY(-100%);
