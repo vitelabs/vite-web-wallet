@@ -105,7 +105,8 @@
         "TxRes": "Transfer",
         "TxResFail": "Transfer",
         "SendRefund": "Transfer",
-        "GenesisReceive": "Genesis"
+        "GenesisReceive": "Genesis",
+        "DexFundTransferTokenOwner": "运营商中心权限转让"
     },
     "btn": {
         "cancel": "Cancel",
@@ -133,7 +134,9 @@
         "insufficientBalance": "Insufficient balance",
         "validMaxDigit": "At most {digit} decimals",
         "nodeErr": "The full node is abnormal, please try again later.",
-        "bigger0": "Value must be greater than 0"
+        "bigger0": "Value must be greater than 0",
+        "operateSuccess": "操作成功",
+        "operateFail": "操作失败"
     },
     "beforeUse": {
         "title": "Read Before Use",
@@ -409,8 +412,6 @@
         "tokenList": "Issued Token",
         "submit": "Submit",
         "cancel": "Cancel",
-        "success": "Token Issuance Success",
-        "fail": "Token Issuance Failure",
         "getListFail": "获取列表失败",
         "mintageConfirm": {
             "title": "Check your Token Issuance Information",
@@ -991,6 +992,15 @@
     "tradeOperator": {
         "title": "运营商中心",
         "tokenList": "运营代币",
-        "totalIncome": "历史总收益"
+        "totalIncome": "历史总收益",
+        "permission": "权限转入",
+        "txPairManage": "交易对管理",
+        "permissionConfirm": {
+            "title": "转让所有权",
+            "submit": "确认转入",
+            "tokenName": "币种名称",
+            "address": "接受所有权地址",
+            "notice": "请知悉：币种所有权转入后尚未开通的交易对权限将归新的所有者拥有。已开通暂停交易的交易对所有权仍归您所有。"
+        }
     }
 }

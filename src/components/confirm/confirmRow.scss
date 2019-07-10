@@ -92,3 +92,29 @@
         display: inline-block;
     }
 }
+
+.__notice {
+    padding: 10px 15px;
+    background: rgba(255,251,235,1);
+    border-radius: 2px;
+    font-size: 12px;
+    @include font-family-normal();
+    color: rgba(94,104,117,1);
+    line-height: 18px;
+    margin-top: 20px;
+    &:before {
+        display: inline-block;
+        content: ' ';
+        width: 14px;
+        height: 14px;
+        border-radius: 14px;
+        background: url('~assets/imgs/notice.svg');
+        background-size: 100% 100%;
+        margin-bottom: -2px;
+    }
+    span {
+        display: inline-block;
+        margin-left: 19px;
+        margin-top: -20px;
+    }
+}

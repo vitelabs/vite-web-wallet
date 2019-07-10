@@ -12,6 +12,10 @@ $ViteJS.addTxType({
     currDexFundNewOrder: {
         contractAddr: constant.DexFund_Addr,
         abi: { 'type': 'function', 'name': 'DexFundNewOrder', 'inputs': [ { 'name': 'tradeToken', 'type': 'tokenId' }, { 'name': 'quoteToken', 'type': 'tokenId' }, { 'name': 'side', 'type': 'bool' }, { 'name': 'orderType', 'type': 'uint8' }, { 'name': 'price', 'type': 'string' }, { 'name': 'quantity', 'type': 'uint256' } ] }
+    },
+    DexFundTransferTokenOwner: {
+        contractAddr: constant.DexFund_Addr,
+        abi: { 'type': 'function', 'name': 'DexFundTransferTokenOwner', 'inputs': [ { 'name': 'token', 'type': 'tokenId' }, { 'name': 'owner', 'type': 'address' } ] }
     }
 });
 
