@@ -176,7 +176,7 @@ export default {
         };
     },
     beforeMount() {
-        this.vb = initVB();
+        this.initVB();
     },
     beforeDestroy() {
         this.destoryVB();
@@ -211,11 +211,17 @@ export default {
             this.id = id;
             this.toggleTab('existingAcc');
         },
+        initVB() {
+            this.vb = initVB();
+            this.vb.on('disconnect', () => {
+                this.initVB();
+            });
+        },
         toggleTab(tabName) {
             if (this.tabName === tabName) return;
 
             if (this.tabName !== 'vb' && tabName === 'vb') {
-                this.vb = initVB();
+                this.initVB();
             } else if (this.tabName === 'vb' && tabName !== 'vb') {
                 this.destoryVB();
             }
@@ -413,7 +419,7 @@ export default {
         }
     }
     .tab-content{
-        max-width: 360px;;
+        width: 360px;;
     }
     .vb {
         width: 100%;
