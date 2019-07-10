@@ -221,6 +221,9 @@ export default {
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
 
+.wallet-trans-list-table {
+    flex: 1;
+}
 .trans-list-wrapper {
     display: flex;
     flex-direction: column;

@@ -298,8 +298,16 @@ export default {
 <style lang="scss" scoped>
 @import "~assets/scss/confirmInput.scss";
 
+.list-wrapper {
+    margin-top: 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
 .mintage-table {
     margin-top: 14px;
+    flex: 1;
 }
 .btn {
     margin-right: 8px;
