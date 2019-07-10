@@ -81,7 +81,10 @@ export default {
         },
 
         goTxPairManage() {
-            this.$router.push({ name: 'tradeTxPairManage' });
+            this.$router.push({
+                name: 'tradeTxPairManage',
+                params: this.token
+            });
         },
         changeTransferTokenOwner() {
             const tokenId = this.token.tokenId;

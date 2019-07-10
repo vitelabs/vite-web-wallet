@@ -1002,5 +1002,16 @@
             "address": "接受所有权地址",
             "notice": "请知悉：币种所有权转入后尚未开通的交易对权限将归新的所有者拥有。已开通暂停交易的交易对所有权仍归您所有。"
         }
+    },
+    "tradeTxPairManage": {
+        "title": "{tokenSymbol}交易对管理",
+        "tradeTxPairManage": {
+            "title": "{tokenSymbol}交易对管理",
+            "symbol": "交易对名称",
+            "income": "累计收益",
+            "fee": "当前费率",
+            "status": "状态",
+            "operate": "操作"
+        }
     }
 }
