@@ -8,6 +8,7 @@ block content
 
 <script>
 import { initVB } from 'wallet/vb';
+import { getCurrHDAcc } from 'wallet';
 import qrcode from 'components/qrcode';
 import icon from 'assets/imgs/start_qrcode_icon.svg';
 
@@ -26,9 +27,13 @@ export default {
         };
     },
     beforeMount() {
-        this.vb = initVB();
+        const lastAccount = getCurrHDAcc() && getCurrHDAcc().isBifrost ? getCurrHDAcc().activeAddr : undefined;
+        this.vb = initVB({ lastAccount });
         this.vb.on('connect', () => {
             this.close();
+        });
+        this.vb.on('disconnect', () => {
+            this.vb = initVB();
         });
     }
 };
