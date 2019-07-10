@@ -2,46 +2,44 @@
     <div class="list-wrapper">
         <div class="__second-title">{{ $t('walletQuota.list.title') }}</div>
         <div class="total">{{ $t('walletQuota.list.total', { amount: totalAmount }) }}</div>
-        <div class="list">
-            <wallet-table class="wallet-quota-table" :headList="[{
-                class: 'addr __pointer',
-                text: $t('walletQuota.beneficialAddr'),
-                cell: 'addr'
-            },{
-                class: 'amount',
-                text: $t('walletQuota.list.amount'),
-                cell: 'showAmount'
-            },{
-                class: 'height',
-                text: $t('withdrawHeight'),
-                cell: 'withdrawHeight'
-            },{
-                class: 'time',
-                text: $t('walletQuota.list.withdrawTime'),
-                cell: 'pledgeDate'
-            },{
-                class: 'operate __pointer',
-                text: $t('action'),
-                cell: 'cancel'
-            }]" :contentList="pledgeList" :clickCell="clickCell">
+        <wallet-table class="wallet-quota-table" :headList="[{
+            class: 'addr __pointer',
+            text: $t('walletQuota.beneficialAddr'),
+            cell: 'addr'
+        },{
+            class: 'amount',
+            text: $t('walletQuota.list.amount'),
+            cell: 'showAmount'
+        },{
+            class: 'height',
+            text: $t('withdrawHeight'),
+            cell: 'withdrawHeight'
+        },{
+            class: 'time',
+            text: $t('walletQuota.list.withdrawTime'),
+            cell: 'pledgeDate'
+        },{
+            class: 'operate __pointer',
+            text: $t('action'),
+            cell: 'cancel'
+        }]" :contentList="pledgeList" :clickCell="clickCell">
 
-                <div v-for="(item, i) in pledgeList" :key="i"
-                     :slot="`${i}addrBefore`">
-                    <span class="beneficial-addr">{{ item.showAddr }}</span>
-                    <img v-if="item.beneficialAddr === address" class="beneficial-img" src='~assets/imgs/mine.svg'/>
-                </div>
+            <div v-for="(item, i) in pledgeList" :key="i"
+                 :slot="`${i}addrBefore`">
+                <span class="beneficial-addr">{{ item.showAddr }}</span>
+                <img v-if="item.beneficialAddr === address" class="beneficial-img" src='~assets/imgs/mine.svg'/>
+            </div>
 
-                <span v-for="(item, i) in pledgeList" :key="i"
-                      :slot="`${i}cancelBefore`"
-                      :class="{
-                          'cancel': true,
-                          'active': item.isMaturity && !item.agent
-                }">{{ $t('walletQuota.withdrawalStaking') }}</span>
+            <span v-for="(item, i) in pledgeList" :key="i"
+                  :slot="`${i}cancelBefore`"
+                  :class="{
+                      'cancel': true,
+                      'active': item.isMaturity && !item.agent
+            }">{{ $t('walletQuota.withdrawalStaking') }}</span>
 
-                <pagination slot="tableBottom" class="__tb_pagination" :currentPage="currentPage + 1"
-                            :totalPage="totalPage" :toPage="toPage"></pagination>
-            </wallet-table>
-        </div>
+            <pagination slot="tableBottom" class="__tb_pagination" :currentPage="currentPage + 1"
+                        :totalPage="totalPage" :toPage="toPage"></pagination>
+        </wallet-table>
     </div>
 </template>
 
@@ -246,13 +244,15 @@ export default {
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
 
-.list {
-    width: 100%;
+.list-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.wallet-quota-table {
+    flex: 1;
     overflow: auto;
-    background: #fff;
-    border: 1px solid #f6f5f5;
-    box-shadow: 0 2px 48px 1px rgba(176, 192, 237, 0.42);
-    border-radius: 2px;
 }
 
 .beneficial-addr {

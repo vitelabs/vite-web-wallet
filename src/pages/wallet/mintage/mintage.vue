@@ -29,9 +29,6 @@
             </div>
 
             <div class="row">
-                <span class="__form_tips" :class="{'active': tipsType === 'decimals'}">
-                    {{  tipsType === 'decimals' ? $t('walletMintage.hint.decimals') : '' }}
-                </span>
                 <div class="__form_input_title">
                     {{ $t('walletMintage.decimals') }}
                     <span v-show="decimalsErr" class="err">{{ decimalsErr }}</span>

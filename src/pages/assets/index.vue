@@ -22,11 +22,12 @@
                             <AssetSwitch v-model="assetType" class="asset-switch" />
                         </div>
                     </div>
-                    <tokenCard
-                        v-for="token in tokenList"
-                        :key="token.tokenId"
-                        :token="token"
-                        :assetType="assetType"
+                    <div v-show="!tokenList || !tokenList.length" class="no-data">{{ $t('hint.noData') }}</div>
+                    <tokenCard v-show="tokenList && tokenList.length"
+                               v-for="token in tokenList"
+                               :key="token.tokenId"
+                               :token="token"
+                               :assetType="assetType"
                     ></tokenCard>
                 </div>
             </div>
@@ -142,6 +143,7 @@ export default {
 
 .wallet-account-wrapper{
     width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     .account_head {
@@ -159,6 +161,9 @@ export default {
         border-radius: 2px;
         flex-grow: 1;
         background-color: #fff;
+        .no-data {
+            margin-top: 60px;
+        }
         .token__head {
             display: flex;
             width: 100%;

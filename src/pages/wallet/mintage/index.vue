@@ -25,9 +25,8 @@ export default {
 <style lang="scss" scoped>
 .mintage-wrapper {
     width: 100%;
-}
-
-.list-wrapper {
-    margin-top: 20px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 </style>
