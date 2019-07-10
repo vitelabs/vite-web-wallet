@@ -1,5 +1,5 @@
 <template>
-    <div class="confirm-container gray" >
+    <div class="confirm-container big gray" >
         <div class="confirm-wrapper">
             <div class="title">
                 <span>{{title}}</span>
@@ -28,6 +28,7 @@
 </template>
 
 <script>
+// [TODO] Need components/confirm and components/table
 export default {
     props: {
         close: {
@@ -52,66 +53,21 @@ export default {
 
 <style lang="scss" scoped>
 @import "~assets/scss/table.scss";
+@import "~components/confirm/confirm.scss";
 
-.dex .__tb {
+.__tb {
     min-width: 0px;
     flex: 1;
-    .__tb_no_data {
-        margin-top: 60px;
-    }
 }
 
 @include rowWith {
-    width: 15%;
+    width: 25%;
     &:first-child {
         min-width: 110px;
     }
 }
 
-.confirm-container {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    overflow: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 100;
-    &.gray {
-        background: rgba(0, 0, 0, 0.3);
-    }
-}
-
 .confirm-wrapper {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    width: 70%;
-    max-height: 85%;
     min-height: 300px;
-    min-width: 500px;
-    background: #fff;
-    border-radius: 2px;
-
-    .title {
-        padding: 12px 18px;
-        display: flex;
-        justify-content: space-between;
-        @include font-family-bold();
-        font-size: 14px;
-        color: #fff;
-        background: rgba(38, 142, 255, 1);
-        border-radius: 2px 2px 0 0;
-        .close-icon {
-            box-sizing: border-box;
-            width: 20px;
-            height: 20px;
-            background: url('~assets/imgs/confirm_close.svg') no-repeat center;
-            background-size: 20px 20px;
-        }
-    }
 }
 </style>
-

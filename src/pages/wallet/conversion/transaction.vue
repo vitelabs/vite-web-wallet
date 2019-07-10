@@ -7,15 +7,15 @@
                  :singleBtn="true" :leftBtnClick="transfer">
 
             <div class="__row">
-                <div class="__row-t">{{ $t('balance') }}</div>
-                <div class="__unuse-row">
-                    <img :src="icon" class="__icon" />
-                    {{ token.symbol }} <span class="__right">{{ balance }}</span>
+                <div class="__row_t">{{ $t('balance') }}</div>
+                <div class="__input_row __unuse_input __bold">
+                    <img :src="icon" class="__icon" />{{ token.symbol }}
+                    <span class="__right">{{ balance }}</span>
                 </div>
             </div>
 
             <div v-show="transType === 'transfer'" class="__row">
-                <div class="__row-t">
+                <div class="__row_t">
                     {{ $t('wallet.inAddress') }}
                     <span v-show="!isValidAddress" class="__err __hint">{{ $t('hint.addrFormat') }}</span>
                 </div>
@@ -24,7 +24,7 @@
             </div>
 
             <div v-show="transType === 'transfer'" class="__row">
-                <div class="__row-t">
+                <div class="__row_t">
                     {{ $t('wallet.sum') }}
                     <span v-show="amountErr" class="__err __hint">{{ amountErr }}</span>
                 </div>
@@ -33,19 +33,19 @@
             </div>
 
             <div v-show="transType === 'exchange'" class="__row">
-                <div class="__row-t">{{ $t('walletConversion.exchange.viteAddr') }}</div>
-                <div class="__unuse-row __light">{{ viteAddr }}</div>
+                <div class="__row_t">{{ $t('walletConversion.exchange.viteAddr') }}</div>
+                <div class="__input_row __unuse_input">{{ viteAddr }}</div>
             </div>
 
             <div v-show="transType === 'exchange'" class="__row">
-                <div class="__row-t">{{ $t('walletConversion.exchange.viteAmount') }}</div>
-                <div class="__unuse-row __light">{{ balance }}</div>
+                <div class="__row_t">{{ $t('walletConversion.exchange.viteAmount') }}</div>
+                <div class="__input_row __unuse_input">{{ balance }}</div>
             </div>
 
             <div class="__row">
-                <div class="__row-t">
+                <div class="__row_t">
                     {{ $t('walletConversion.gas') }}
-                    <span class="__hint __right">
+                    <span class="__row_hint">
                         {{ $t('walletConversion.aboutPrice', { amount: gasTotalPrice }) }}
                     </span>
                 </div>
@@ -276,12 +276,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~assets/scss/confirmInput.scss";
+@import "~assets/scss/vars.scss";
 
-.__icon{
-    height: 20px;
-    width: 20px;
-}
 .speed {
     width: 100%;
     font-size: 12px;
@@ -295,21 +291,6 @@ export default {
     }
     .right {
         float: right;
-    }
-}
-</style>
-
-<style lang="scss">
-.confirm-container.trans-confirm .confirm-wrapper {
-    width: 515px;
-    max-width: 90%;
-}
-
-.confirm-container.trans-confirm .confirm-wrapper .bottom {
-    min-height: 70px;
-    .__btn {
-        height: 40px;
-        line-height: 40px;
     }
 }
 </style>

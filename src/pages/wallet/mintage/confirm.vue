@@ -1,5 +1,5 @@
 <template>
-    <confirm class="mintage-confirm" :btnUnuse="btnUnuse"
+    <confirm class="small" :btnUnuse="btnUnuse"
              :showMask="true" :singleBtn="true"
              :title="$t('walletMintage.mintageConfirm.title')" :closeIcon="true"
              :close="close" :leftBtnTxt="$t('walletMintage.mintageConfirm.btn')"

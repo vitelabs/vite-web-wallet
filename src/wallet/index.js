@@ -47,7 +47,7 @@ export function getActiveAcc() {
 export function getList() {
     const accList = getAccList() || [];
     const oldAccList = getOldAccList() || [];
-    return accList.concat(oldAccList).filter(acc => !acc.id.startsWith('VITEBIRFORST_'));// filter vb accounts
+    return accList.concat(oldAccList).filter(acc => acc.id && !acc.id.startsWith('VITEBIRFORST_'));// filter vb accounts
 }
 
 export function deleteOldAcc(acc) {

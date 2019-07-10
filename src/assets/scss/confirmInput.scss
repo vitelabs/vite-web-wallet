@@ -99,15 +99,15 @@
         border: 1px solid rgba(212,222,231,1);
         &.__light {
             @include font-family-normal();
-            font-weight: 400;
             color: rgba(94,104,117,1);
         }
         &.__bold {
             @include font-family-bold();
-            font-weight: 600;
             color: rgba(29,32,36,1);
         }
         .__icon {
+            height: 20px;
+            width: 20px;
             margin-bottom: -4px;
         }
     }
