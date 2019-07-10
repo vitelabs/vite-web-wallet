@@ -1,7 +1,7 @@
 <template>
     <div class="confirm-container" :class="{ 'gray': showMask }">
         <div class="confirm-wrapper">
-            <div class="title">
+            <div class="title" :class="{'__ellipsis': !closeIcon}">
                 {{ title }}
                 <span v-show="closeIcon" @click="close" class="close-icon __pointer"></span>
             </div>
