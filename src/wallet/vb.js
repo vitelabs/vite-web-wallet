@@ -41,7 +41,7 @@ export class VB extends Connector {
     }
 
     async sendVbTx(...args) {
-        console.log('sendvbtx', args);
+        console.log('sendvbtx', JSON.stringify(args));
         return this.sendCustomRequest({ method: 'vite_signAndSendTx', params: args });
     }
 }

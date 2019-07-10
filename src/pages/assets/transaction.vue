@@ -1,60 +1,82 @@
 <template>
     <div class="__trans-wrapper">
-        <confirm v-show="isShowTrans" class="trans-confirm"
-                 :title="$t('wallet.transfer')"
-                 :btnUnuse="unTrans"
-                 :closeIcon="true" :close="closeTrans" :singleBtn="true"
-                 :leftBtnClick="validTrans" :leftBtnTxt="$t('wallet.transfer')" >
-
+        <confirm
+            v-show="isShowTrans"
+            class="trans-confirm"
+            :title="$t('wallet.transfer')"
+            :btnUnuse="unTrans"
+            :closeIcon="true"
+            :close="closeTrans"
+            :singleBtn="true"
+            :leftBtnClick="validTrans"
+            :leftBtnTxt="$t('wallet.transfer')"
+        >
             <div class="__row">
-                <div class="__row-t">{{ $t('balance') }}</div>
+                <div class="__row-t">{{ $t("balance") }}</div>
                 <div class="__unuse-row">
-                    <img  :src="token.icon||getIcon(token.tokenId)" class="__icon" />
-                    {{ token.tokenSymbol }} <span class="__right">{{ showAccBalance }}</span>
+                    <img
+                        :src="token.icon || getIcon(token.tokenId)"
+                        class="__icon"
+                    />
+                    {{ token.tokenSymbol }}
+                    <span class="__right">{{ showAccBalance }}</span>
                 </div>
             </div>
 
             <div class="__row">
                 <div class="__row-t">
-                    {{ $t('wallet.inAddress') }}
-                    <span v-show="!isValidAddress" class="__err __hint">{{ $t('hint.addrFormat') }}</span>
+                    {{ $t("wallet.inAddress") }}
+                    <span v-show="!isValidAddress" class="__err __hint">{{
+                        $t("hint.addrFormat")
+                    }}</span>
                 </div>
-                <vite-input v-model="inAddress" :valid="validAddr"
-                            :placeholder="$t('wallet.placeholder.addr')"></vite-input>
+                <vite-input
+                    v-model="inAddress"
+                    :valid="validAddr"
+                    :placeholder="$t('wallet.placeholder.addr')"
+                ></vite-input>
             </div>
 
             <div class="__row">
                 <div class="__row-t">
-                    {{ $t('wallet.sum') }}
-                    <span v-show="amountErr" class="__err __hint">{{ amountErr }}</span>
+                    {{ $t("wallet.sum") }}
+                    <span v-show="amountErr" class="__err __hint">{{
+                        amountErr
+                    }}</span>
                 </div>
-                <vite-input v-model="amount" :valid="testAmount"
-                            :placeholder="$t('wallet.placeholder.amount')"></vite-input>
+                <vite-input
+                    v-model="amount"
+                    :valid="testAmount"
+                    :placeholder="$t('wallet.placeholder.amount')"
+                ></vite-input>
             </div>
 
             <div class="__row">
                 <div class="__row-t">
-                    {{ $t('wallet.remarks')}}
+                    {{ $t("wallet.remarks") }}
                     <span class="__hint" :class="{ err: messageErr }">
-                        {{ $t('wallet.remarksLong', { len: msgBalance}) }}
+                        {{ $t("wallet.remarksLong", { len: msgBalance }) }}
                     </span>
                 </div>
-                <vite-input v-model="message" :placeholder="$t('wallet.placeholder.remarks')"></vite-input>
+                <vite-input
+                    v-model="message"
+                    :placeholder="$t('wallet.placeholder.remarks')"
+                ></vite-input>
             </div>
         </confirm>
     </div>
 </template>
 
 <script>
-import Vue from 'vue';
-import { utils, hdAddr } from '@vite/vitejs';
+import Vue from "vue";
+import { utils, hdAddr } from "@vite/vitejs";
 
-import { initPwd } from 'components/password/index.js';
-import confirm from 'components/confirm';
-import viteInput from 'components/viteInput';
-import bigNumber from 'utils/bigNumber';
-import sendTx from 'utils/sendTx';
-import { getTokenIcon } from 'utils/tokenParser';
+import { initPwd } from "components/password/index.js";
+import confirm from "components/confirm";
+import viteInput from "components/viteInput";
+import bigNumber from "utils/bigNumber";
+import sendTx from "utils/sendTx";
+import { getTokenIcon } from "utils/tokenParser";
 
 const { getBytesSize } = utils;
 
@@ -83,12 +105,12 @@ export default {
     },
     data() {
         return {
-            inAddress: '',
-            amount: '',
-            message: '',
+            inAddress: "",
+            amount: "",
+            message: "",
 
             isValidAddress: true,
-            amountErr: '',
+            amountErr: "",
 
             isShowTrans: true,
             loading: false
@@ -96,7 +118,14 @@ export default {
     },
     computed: {
         unTrans() {
-            return !!(!this.amount || !this.inAddress || this.loading || this.amountErr || !this.isValidAddress || this.messageErr);
+            return !!(
+                !this.amount ||
+                !this.inAddress ||
+                this.loading ||
+                this.amountErr ||
+                !this.isValidAddress ||
+                this.messageErr
+            );
         },
         accBalance() {
             return this.token.totalAmount;
@@ -124,29 +153,31 @@ export default {
             return getTokenIcon(id);
         },
         validAddr() {
-            this.isValidAddress = this.inAddress && hdAddr.isValidHexAddr(this.inAddress);
+            this.isValidAddress =
+                this.inAddress && hdAddr.isValidHexAddr(this.inAddress);
         },
 
         testAmount() {
-            const result = this.$validAmount(this.amount, this.token.decimals) === 0;
+            const result =
+                this.$validAmount(this.amount, this.token.decimals) === 0;
 
             if (!result) {
-                this.amountErr = this.$t('hint.amtFormat');
+                this.amountErr = this.$t("hint.amtFormat");
                 return false;
             }
 
             if (bigNumber.isEqual(this.amount, 0)) {
-                this.amountErr = this.$t('wallet.hint.amount');
+                this.amountErr = this.$t("wallet.hint.amount");
                 return false;
             }
 
             const amount = bigNumber.toMin(this.amount, this.token.decimals);
             if (bigNumber.compared(this.accBalance, amount) < 0) {
-                this.amountErr = this.$t('hint.insufficientBalance');
+                this.amountErr = this.$t("hint.insufficientBalance");
                 return false;
             }
 
-            this.amountErr = '';
+            this.amountErr = "";
             return true;
         },
 
@@ -159,7 +190,12 @@ export default {
                 this.isValidAddress = false;
             }
 
-            if (this.amountErr || this.messageErr || !this.isValidAddress || !this.testAmount()) {
+            if (
+                this.amountErr ||
+                this.messageErr ||
+                !this.isValidAddress ||
+                !this.testAmount()
+            ) {
                 return;
             }
 
@@ -178,7 +214,7 @@ export default {
 
         transfer() {
             if (!this.netStatus) {
-                this.$toast(this.$t('hint.noNet'));
+                this.$toast(this.$t("hint.noNet"));
                 return;
             }
 
@@ -189,37 +225,47 @@ export default {
                 this.loading = false;
                 this.isShowTrans = true;
 
-                const code = err && err.error ? err.error.code || -1
-                    : err ? err.code : -1;
+                const code =
+                    err && err.error
+                        ? err.error.code || -1
+                        : err
+                        ? err.code
+                        : -1;
                 if (code === -35001) {
-                    this.$toast(this.$t('hint.insufficientBalance'));
-                    this.amountErr = this.$t('hint.insufficientBalance');
+                    this.$toast(this.$t("hint.insufficientBalance"));
+                    this.amountErr = this.$t("hint.insufficientBalance");
                     return;
                 }
 
                 this.$toast(msg, err);
             };
 
-            sendTx('asyncSendTx', {
-                toAddress: this.inAddress,
-                tokenId: this.token.tokenId,
-                amount,
-                message: this.message
-            }, {
-                pow: true,
-                powConfig: {
-                    isShowCancel: true,
-                    cancel: () => {
-                        this.closeTrans();
+            sendTx({
+                methodName: "asyncSendTx",
+                data: {
+                    toAddress: this.inAddress,
+                    tokenId: this.token.tokenId,
+                    amount,
+                    message: this.message
+                },
+                config: {
+                    pow: true,
+                    powConfig: {
+                        isShowCancel: true,
+                        cancel: () => {
+                            this.closeTrans();
+                        }
                     }
                 }
-            }).then(() => {
-                this.loading = false;
-                this.$toast(this.$t('hint.transSucc'));
-                this.closeTrans();
-            }).powStarted(() => {
-                this.isShowTrans = false;
             })
+                .then(() => {
+                    this.loading = false;
+                    this.$toast(this.$t("hint.transSucc"));
+                    this.closeTrans();
+                })
+                .powStarted(() => {
+                    this.isShowTrans = false;
+                })
                 .powFailed((err, type) => {
                     if (!err && !type) {
                         return;
@@ -227,14 +273,18 @@ export default {
                     console.warn(type, err);
 
                     if (type === 0) {
-                        transError(this.$t('wallet.trans.powErr'), err);
+                        transError(this.$t("wallet.trans.powErr"), err);
                         return;
                     }
 
-                    const code = err && err.error ? err.error.code || -1
-                        : err ? err.code : -1;
+                    const code =
+                        err && err.error
+                            ? err.error.code || -1
+                            : err
+                            ? err.code
+                            : -1;
                     if (code === -35002) {
-                        transError(this.$t('wallet.trans.powTransErr'));
+                        transError(this.$t("wallet.trans.powTransErr"));
                         return;
                     }
 
@@ -252,7 +302,7 @@ export default {
 <style lang="scss" scoped>
 @import "~assets/scss/confirmInput.scss";
 
-.__icon{
+.__icon {
     height: 20px;
     width: 20px;
 }

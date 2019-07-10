@@ -183,13 +183,13 @@ export default {
                 return;
             }
 
-            sendTx('updateReg', this.getParams({ producerAddr: producer }), {
+            sendTx({methodName:'updateReg', data:this.getParams({ producerAddr: producer }), config:{
                 pow: false,
                 confirm: {
                     showMask: true,
                     operate: this.$t('btn.edit')
                 }
-            }).then(() => {
+            }}).then(() => {
                 this.loading = false;
                 this.$toast(this.$t('hint.request', { name: this.$t('walletSBP.section2.update') }));
                 this.closeConfirm();

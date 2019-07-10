@@ -413,7 +413,7 @@ export default {
         }
     }
     .tab-content{
-        max-width: 360px;;
+        width: 360px;;
     }
     .vb {
         width: 100%;

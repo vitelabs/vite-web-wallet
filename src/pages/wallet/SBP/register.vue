@@ -224,13 +224,13 @@ export default {
             const nodeName = this.nodeName.trim();
             const producerAddr = this.producerAddr;
 
-            sendTx('SBPreg', this.getParams({ producerAddr, amount, nodeName }), {
+            sendTx({methodName:'SBPreg',data: this.getParams({ producerAddr, amount, nodeName }), config:{
                 pow: false,
                 confirm: {
                     showMask: true,
                     operate: this.$t('walletSBP.register')
                 }
-            }).then(() => {
+            }}).then(() => {
                 this.loading = false;
                 this.$toast(this.$t('walletSBP.section1.registerSuccess'));
                 this.clearAll();
