@@ -18,7 +18,7 @@
     </div>
 </template>
 
-<script>
+<script>//yz todo
 import BigNumber from 'utils/bigNumber';
 
 export default {

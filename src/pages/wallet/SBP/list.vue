@@ -82,7 +82,7 @@ import tooltips from 'components/tooltips';
 import walletTable from 'components/table/index.vue';
 import { initPwd } from 'components/password/index.js';
 import password from 'components/password/password.vue';
-import { execWithValid } from '../../../utils/execWithValid';
+import { execWithValid } from 'utils/execWithValid';
 
 const amount = 500000;
 
@@ -214,13 +214,13 @@ export default {
                 return;
             }
 
-            sendTx('SBPreg', this.getParams({ producerAddr, amount, nodeName }), {
+            sendTx({methodName:'SBPreg',data:this.getParams({ producerAddr, amount, nodeName }),config: {
                 pow: false,
                 confirm: {
                     showMask: true,
                     operate: this.$t('walletSBP.register')
                 }
-            }).then(() => {
+            }}).then(() => {
                 this.$toast(this.$t('walletSBP.section1.registerSuccess'));
                 this.$store.dispatch('loopRegList', {
                     nodeName,
@@ -264,13 +264,13 @@ export default {
                     const nodeName = item.rawData.name;
                     const producer = item.rawData.nodeAddr;
 
-                    sendTx('revokeReg', this.getParams({ nodeName }), {
+                    sendTx({methodName:'revokeReg', data:this.getParams({ nodeName }),config: {
                         pow: false,
                         confirm: {
                             showMask: true,
                             operate: this.$t('walletSBP.cancel')
                         }
-                    }).then(() => {
+                    }}).then(() => {
                         this.$toast(this.$t('hint.request', { name: this.$t('walletSBP.section2.cancel') }));
                         this.$store.dispatch('loopRegList', {
                             nodeName,
@@ -290,16 +290,16 @@ export default {
             this.showConfirm('edit', item.rawData);
         }),
         sendReward() {
-            sendTx('retrieveReward', {
+            sendTx({methodName:'retrieveReward',data: {
                 nodeName: this.rewardItem.rawData.name,
                 toAddress: this.address
-            }, {
+            },config: {
                 pow: false,
                 confirm: {
                     showMask: true,
                     operate: this.$t('walletSBP.rewardBtn')
                 }
-            }).then(() => {
+            }}).then(() => {
                 this.$toast(this.$t('hint.request', { name: this.$t('walletSBP.rewardBtn') }));
                 this.hideReward();
             }).catch(err => {

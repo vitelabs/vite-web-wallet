@@ -77,10 +77,10 @@ export default {
                 const amount = this.isWithdrawAll
                     ? this.token.availableExAmount
                     : bigNumber.toMin(this.withdrawAmount, this.token.decimals);
-                sendTx('dexFundUserWithdraw', {
+                sendTx({methodName:'dexFundUserWithdraw', data:{
                     tokenId: this.token.tokenId,
                     amount
-                })
+                }})
                     .then(() => {
                         this.$toast(this.$t('tradeAssets.confirmwithdraw.successToast'));
                         res();

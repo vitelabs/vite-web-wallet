@@ -316,7 +316,7 @@ export default {
             };
 
             const sendCancel = () => {
-                sendTx('revokeVoting', { tokenId: this.tokenInfo.tokenId }, { pow: true }).then(successCancel).catch(failCancel);
+                sendTx({methodName:'revokeVoting',data: { tokenId: this.tokenInfo.tokenId },config: { pow: true }}).then(successCancel).catch(failCancel);
             };
 
             initPwd({
@@ -350,10 +350,10 @@ export default {
             };
 
             const sendVote = () => {
-                sendTx('voting', {
+                sendTx({methodName:'voting',data: {
                     nodeName: v.name,
                     tokenId: this.tokenInfo.tokenId
-                }).then(successVote).catch(failVote);
+                }}).then(successVote).catch(failVote);
             };
 
             const t = this.haveVote ? 'cover' : 'normal';

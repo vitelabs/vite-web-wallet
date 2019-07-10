@@ -20,7 +20,7 @@ const defaultConfig = {
     }
 };
 
-export default function sendTx(methodName, data, config = defaultConfig) {
+export default function sendTx({ config = defaultConfig, methodName, data, vbExtends }) {
     config = formatConfig(config);
 
     const event = new EventEmitter();
@@ -36,6 +36,7 @@ export default function sendTx(methodName, data, config = defaultConfig) {
         .sendPowTx({
             methodName,
             params: [data],
+            vbExtends,
             beforePow: (accountBlock, checkPowResult, next) => {
                 // console.log('[beforePow]');
 
@@ -110,6 +111,7 @@ export default function sendTx(methodName, data, config = defaultConfig) {
             });
         })
         .catch(err => {
+            console.error('send err', err);
             if (!powInstance) {
                 event.catchCb && event.catchCb(err);
                 return;

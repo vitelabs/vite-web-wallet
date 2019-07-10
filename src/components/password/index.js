@@ -3,11 +3,9 @@ import i18n from 'i18n';
 import store from 'store';
 import { constant } from 'utils/store';
 import pwdComponent from './password.vue';
-import { getCurrHDAcc } from 'wallet';
-import { vbConnectDialog } from 'components/dialog';
 
 const PwdComponent = Vue.extend(pwdComponent);
-console.log(4444, store);
+
 export function pwdConfirm({
     type = 'normal',
     showMask = true,
@@ -19,9 +17,6 @@ export function pwdConfirm({
     submitTxt,
     exchange = false
 }, isShowPWD = true) {
-    if (getCurrHDAcc() && getCurrHDAcc().isBifrost) {
-        return vbConnectDialog();
-    }
     let instance = new PwdComponent({
         el: document.createElement('div'),
         i18n,
