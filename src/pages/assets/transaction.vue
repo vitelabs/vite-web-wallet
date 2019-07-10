@@ -68,15 +68,15 @@
 </template>
 
 <script>
-import Vue from "vue";
-import { utils, hdAddr } from "@vite/vitejs";
+import Vue from 'vue';
+import { utils, hdAddr } from '@vite/vitejs';
 
-import { initPwd } from "components/password/index.js";
-import confirm from "components/confirm";
-import viteInput from "components/viteInput";
-import bigNumber from "utils/bigNumber";
-import sendTx from "utils/sendTx";
-import { getTokenIcon } from "utils/tokenParser";
+import { initPwd } from 'components/password/index.js';
+import confirm from 'components/confirm';
+import viteInput from 'components/viteInput';
+import bigNumber from 'utils/bigNumber';
+import sendTx from 'utils/sendTx';
+import { getTokenIcon } from 'utils/tokenParser';
 
 const { getBytesSize } = utils;
 
@@ -105,12 +105,12 @@ export default {
     },
     data() {
         return {
-            inAddress: "",
-            amount: "",
-            message: "",
+            inAddress: '',
+            amount: '',
+            message: '',
 
             isValidAddress: true,
-            amountErr: "",
+            amountErr: '',
 
             isShowTrans: true,
             loading: false
@@ -119,12 +119,12 @@ export default {
     computed: {
         unTrans() {
             return !!(
-                !this.amount ||
-                !this.inAddress ||
-                this.loading ||
-                this.amountErr ||
-                !this.isValidAddress ||
-                this.messageErr
+                !this.amount
+                || !this.inAddress
+                || this.loading
+                || this.amountErr
+                || !this.isValidAddress
+                || this.messageErr
             );
         },
         accBalance() {
@@ -153,31 +153,31 @@ export default {
             return getTokenIcon(id);
         },
         validAddr() {
-            this.isValidAddress =
-                this.inAddress && hdAddr.isValidHexAddr(this.inAddress);
+            this.isValidAddress
+                = this.inAddress && hdAddr.isValidHexAddr(this.inAddress);
         },
 
         testAmount() {
-            const result =
-                this.$validAmount(this.amount, this.token.decimals) === 0;
+            const result
+                = this.$validAmount(this.amount, this.token.decimals) === 0;
 
             if (!result) {
-                this.amountErr = this.$t("hint.amtFormat");
+                this.amountErr = this.$t('hint.amtFormat');
                 return false;
             }
 
             if (bigNumber.isEqual(this.amount, 0)) {
-                this.amountErr = this.$t("wallet.hint.amount");
+                this.amountErr = this.$t('wallet.hint.amount');
                 return false;
             }
 
             const amount = bigNumber.toMin(this.amount, this.token.decimals);
             if (bigNumber.compared(this.accBalance, amount) < 0) {
-                this.amountErr = this.$t("hint.insufficientBalance");
+                this.amountErr = this.$t('hint.insufficientBalance');
                 return false;
             }
 
-            this.amountErr = "";
+            this.amountErr = '';
             return true;
         },
 
@@ -191,10 +191,10 @@ export default {
             }
 
             if (
-                this.amountErr ||
-                this.messageErr ||
-                !this.isValidAddress ||
-                !this.testAmount()
+                this.amountErr
+                || this.messageErr
+                || !this.isValidAddress
+                || !this.testAmount()
             ) {
                 return;
             }
@@ -214,7 +214,7 @@ export default {
 
         transfer() {
             if (!this.netStatus) {
-                this.$toast(this.$t("hint.noNet"));
+                this.$toast(this.$t('hint.noNet'));
                 return;
             }
 
@@ -225,15 +225,15 @@ export default {
                 this.loading = false;
                 this.isShowTrans = true;
 
-                const code =
-                    err && err.error
+                const code
+                    = err && err.error
                         ? err.error.code || -1
                         : err
-                        ? err.code
-                        : -1;
+                            ? err.code
+                            : -1;
                 if (code === -35001) {
-                    this.$toast(this.$t("hint.insufficientBalance"));
-                    this.amountErr = this.$t("hint.insufficientBalance");
+                    this.$toast(this.$t('hint.insufficientBalance'));
+                    this.amountErr = this.$t('hint.insufficientBalance');
                     return;
                 }
 
@@ -241,7 +241,7 @@ export default {
             };
 
             sendTx({
-                methodName: "asyncSendTx",
+                methodName: 'asyncSendTx',
                 data: {
                     toAddress: this.inAddress,
                     tokenId: this.token.tokenId,
@@ -260,7 +260,7 @@ export default {
             })
                 .then(() => {
                     this.loading = false;
-                    this.$toast(this.$t("hint.transSucc"));
+                    this.$toast(this.$t('hint.transSucc'));
                     this.closeTrans();
                 })
                 .powStarted(() => {
@@ -273,18 +273,18 @@ export default {
                     console.warn(type, err);
 
                     if (type === 0) {
-                        transError(this.$t("wallet.trans.powErr"), err);
+                        transError(this.$t('wallet.trans.powErr'), err);
                         return;
                     }
 
-                    const code =
-                        err && err.error
+                    const code
+                        = err && err.error
                             ? err.error.code || -1
                             : err
-                            ? err.code
-                            : -1;
+                                ? err.code
+                                : -1;
                     if (code === -35002) {
-                        transError(this.$t("wallet.trans.powTransErr"));
+                        transError(this.$t('wallet.trans.powTransErr'));
                         return;
                     }
 

@@ -214,13 +214,17 @@ export default {
                 return;
             }
 
-            sendTx({methodName:'SBPreg',data:this.getParams({ producerAddr, amount, nodeName }),config: {
-                pow: false,
-                confirm: {
-                    showMask: true,
-                    operate: this.$t('walletSBP.register')
+            sendTx({
+                methodName: 'SBPreg',
+                data: this.getParams({ producerAddr, amount, nodeName }),
+                config: {
+                    pow: false,
+                    confirm: {
+                        showMask: true,
+                        operate: this.$t('walletSBP.register')
+                    }
                 }
-            }}).then(() => {
+            }).then(() => {
                 this.$toast(this.$t('walletSBP.section1.registerSuccess'));
                 this.$store.dispatch('loopRegList', {
                     nodeName,
@@ -264,13 +268,17 @@ export default {
                     const nodeName = item.rawData.name;
                     const producer = item.rawData.nodeAddr;
 
-                    sendTx({methodName:'revokeReg', data:this.getParams({ nodeName }),config: {
-                        pow: false,
-                        confirm: {
-                            showMask: true,
-                            operate: this.$t('walletSBP.cancel')
+                    sendTx({
+                        methodName: 'revokeReg',
+                        data: this.getParams({ nodeName }),
+                        config: {
+                            pow: false,
+                            confirm: {
+                                showMask: true,
+                                operate: this.$t('walletSBP.cancel')
+                            }
                         }
-                    }}).then(() => {
+                    }).then(() => {
                         this.$toast(this.$t('hint.request', { name: this.$t('walletSBP.section2.cancel') }));
                         this.$store.dispatch('loopRegList', {
                             nodeName,
@@ -290,16 +298,20 @@ export default {
             this.showConfirm('edit', item.rawData);
         }),
         sendReward() {
-            sendTx({methodName:'retrieveReward',data: {
-                nodeName: this.rewardItem.rawData.name,
-                toAddress: this.address
-            },config: {
-                pow: false,
-                confirm: {
-                    showMask: true,
-                    operate: this.$t('walletSBP.rewardBtn')
+            sendTx({
+                methodName: 'retrieveReward',
+                data: {
+                    nodeName: this.rewardItem.rawData.name,
+                    toAddress: this.address
+                },
+                config: {
+                    pow: false,
+                    confirm: {
+                        showMask: true,
+                        operate: this.$t('walletSBP.rewardBtn')
+                    }
                 }
-            }}).then(() => {
+            }).then(() => {
                 this.$toast(this.$t('hint.request', { name: this.$t('walletSBP.rewardBtn') }));
                 this.hideReward();
             }).catch(err => {

@@ -596,7 +596,7 @@ export default {
                 return;
             }
 
-            initPwd({//yztood
+            initPwd({// yztood
                 submit: () => {
                     this.newOrder({
                         price: this.price,
@@ -622,20 +622,24 @@ export default {
             //     quantity
             // },
 
-            sendTx({methodName:'callContract', data:{
-                toAddress: constant.DexFund_Addr,
-                abi: { 'type': 'function', 'name': 'DexFundNewOrder', 'inputs': [ { 'name': 'tradeToken', 'type': 'tokenId' }, { 'name': 'quoteToken', 'type': 'tokenId' }, { 'name': 'side', 'type': 'bool' }, { 'name': 'orderType', 'type': 'uint8' }, { 'name': 'price', 'type': 'string' }, { 'name': 'quantity', 'type': 'uint256' } ] },
-                params: [ tradeToken, quoteToken, side, 0, price, quantity ],
-                tokenId: tradeToken
-            }, config:{
-                pow: true,
-                powConfig: {
-                    isShowCancel: true,
-                    cancel: () => {
-                        this.isLoading = false;
+            sendTx({
+                methodName: 'callContract',
+                data: {
+                    toAddress: constant.DexFund_Addr,
+                    abi: { 'type': 'function', 'name': 'DexFundNewOrder', 'inputs': [ { 'name': 'tradeToken', 'type': 'tokenId' }, { 'name': 'quoteToken', 'type': 'tokenId' }, { 'name': 'side', 'type': 'bool' }, { 'name': 'orderType', 'type': 'uint8' }, { 'name': 'price', 'type': 'string' }, { 'name': 'quantity', 'type': 'uint256' } ] },
+                    params: [ tradeToken, quoteToken, side, 0, price, quantity ],
+                    tokenId: tradeToken
+                },
+                config: {
+                    pow: true,
+                    powConfig: {
+                        isShowCancel: true,
+                        cancel: () => {
+                            this.isLoading = false;
+                        }
                     }
                 }
-            }}).then(() => {
+            }).then(() => {
                 this.isLoading = false;
                 this.clearAll();
                 this.$toast(this.$t('trade.newOrderSuccess'));
