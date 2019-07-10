@@ -60,6 +60,15 @@
         color: #FF2929;
         float: right;
     }
+
+    .__row_hint {
+        position: absolute;
+        left: 90px;
+        right: 0;
+        font-size: 12px;
+        line-height: 16px;
+        text-align: right;
+    }
 }
 
 .__hint {

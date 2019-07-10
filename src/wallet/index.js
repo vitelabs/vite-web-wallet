@@ -4,7 +4,6 @@ import { getOldAccList, setOldAccList } from 'utils/store';
 import { HDAccount, StatusMap as _StatusMap, VBAccount } from './hdAccount';
 import { getLastAcc, addHdAccount, setAcc, getAccList } from './store';
 function constructAccount(acc) {
-    console.log(acc);
     if (acc.isBifrost || acc.id.startsWith('VITEBIRFORST_')) {
         currentHDAccount = new VBAccount(acc);
     } else {
