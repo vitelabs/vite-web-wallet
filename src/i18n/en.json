@@ -989,6 +989,8 @@
         "price": "Total Estimated Value"
     },
     "tradeOperator": {
-        "title": "运营商中心"
+        "title": "运营商中心",
+        "tokenList": "运营代币",
+        "totalIncome": "历史总收益"
     }
 }
