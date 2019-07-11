@@ -1,6 +1,6 @@
 <template>
     <div class="account-head-wrapper">
-        <div class="head__item">
+        <div class="head__item" v-if="!account.isBifrost">
             <img class="icon" src="~assets/imgs/head_acc.png" />
             <div class="head-right">
                 <div class="head-title">
