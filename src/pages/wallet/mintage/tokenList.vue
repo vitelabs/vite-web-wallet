@@ -249,9 +249,12 @@ export default {
 
             initPwd({
                 submit: () => {
-                    sendTx('changeTransferOwner', {
-                        tokenId: this.changeOwnerToken.tokenId,
-                        newOwner: this.address
+                    sendTx({
+                        methodName: 'changeTransferOwner',
+                        data: {
+                            tokenId: this.changeOwnerToken.tokenId,
+                            newOwner: this.address
+                        }
                     }).then(() => {
                         this.$toast(this.$t('hint.operateSuccess'));
                         this.cancelChangeOwner();
@@ -264,7 +267,10 @@ export default {
             });
         },
         toChangeReIssuale(item) {
-            sendTx('changeTokenType', { tokenId: item.tokenId }).then(() => {
+            sendTx({
+                methodName: 'changeTokenType',
+                data: { tokenId: item.tokenId }
+            }).then(() => {
                 this.$toast(this.$t('hint.operateSuccess'));
                 this.getOwnerToken();
             }).catch(err => {
@@ -279,10 +285,13 @@ export default {
 
             initPwd({
                 submit: () => {
-                    sendTx('mintageIssue', {
-                        tokenId: this.issueToken.tokenId,
-                        amount: BigNumber.toMin(this.amount, this.issueToken.decimals),
-                        beneficial: this.address
+                    sendTx({
+                        methodName: 'mintageIssue',
+                        data: {
+                            tokenId: this.issueToken.tokenId,
+                            amount: BigNumber.toMin(this.amount, this.issueToken.decimals),
+                            beneficial: this.address
+                        }
                     }).then(() => {
                         this.$toast(this.$t('hint.operateSuccess'));
                         this.cancelIssue();

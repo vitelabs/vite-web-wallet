@@ -181,11 +181,15 @@ export default {
                 return;
             }
 
-            sendTx('updateReg', this.getParams({ producerAddr: producer }), {
-                pow: false,
-                confirm: {
-                    showMask: true,
-                    operate: this.$t('btn.edit')
+            sendTx({
+                methodName: 'updateReg',
+                data: this.getParams({ producerAddr: producer }),
+                config: {
+                    pow: false,
+                    confirm: {
+                        showMask: true,
+                        operate: this.$t('btn.edit')
+                    }
                 }
             }).then(() => {
                 this.loading = false;
