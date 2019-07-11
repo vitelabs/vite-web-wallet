@@ -16,72 +16,61 @@
 import notice from 'components/notice';
 import update from 'components/update.vue';
 import date from 'utils/date';
-import { subTask } from 'utils/proto/subTask';
-
-let task = null;
 
 export default {
     components: { notice, update },
-    mounted() {
-        this.address && this.startLatestOrder();
-    },
-    destroyed() {
-        task && task.stop();
-        task = null;
-    },
     data() {
         return { latestOrders: [] };
     },
     computed: {
         address() {
             return this.$store.getters.activeAddr;
+        },
+        latestOrder() {
+            return this.$store.state.exchangeLatestOrder.latestOrder;
         }
     },
     watch: {
         address: function () {
-            this.address && this.startLatestOrder();
+            this.address && this.$store.dispatch('exFetchLatestOrder');
+        },
+        latestOrder: function () {
+            // [TODO] notice type
+            if (this.latestOrders && this.latestOrder.status === 4) {
+                this.$toast(this.$t('tradeOrderHistory.table.rowMap.statusMap')[4]);
+            }
+            this.updateLatestOrder();
         }
     },
     methods: {
-        startLatestOrder() {
-            task && task.stop();
-            task = null;
+        updateLatestOrder() {
+            if (!this.latestOrder || this.latestOrder.status !== 2) {
+                return;
+            }
 
-            task = new subTask('latestOrder', ({ args, data }) => {
-                // console.log('成交提醒', data);
-
-                if (this.address !== args.address || !data || data.status !== 2) {
-                    return;
-                }
-
-                const orderNotice = {
-                    time: date(data.createTime * 1000, 'zh'),
-                    ftoken: data.tradeTokenSymbol,
-                    ttoken: data.quoteTokenSymbol,
-                    close: data => {
-                        let i;
-                        for (i = 0; i < this.latestOrders.length; i++) {
-                            if (this.latestOrders[i] === data) {
-                                break;
-                            }
+            const orderNotice = {
+                time: date(this.latestOrder.createTime * 1000, 'zh'),
+                ftoken: this.latestOrder.tradeTokenSymbol,
+                ttoken: this.latestOrder.quoteTokenSymbol,
+                close: data => {
+                    let i;
+                    for (i = 0; i < this.latestOrders.length; i++) {
+                        if (this.latestOrders[i] === data) {
+                            break;
                         }
-                        if (i >= this.latestOrders.length) {
-                            return;
-                        }
+                    }
+                    if (i >= this.latestOrders.length) {
+                        return;
+                    }
 
-                        data.timeout && clearTimeout(data.timeout);
-                        this.latestOrders.splice(i, 1);
-                    },
-                    timeout: setTimeout(() => {
-                        orderNotice.close(orderNotice);
-                    }, 4000)
-                };
-                this.latestOrders.push(orderNotice);
-            }, 2000);
-
-            task.start(() => {
-                return { address: this.address };
-            });
+                    data.timeout && clearTimeout(data.timeout);
+                    this.latestOrders.splice(i, 1);
+                },
+                timeout: setTimeout(() => {
+                    orderNotice.close(orderNotice);
+                }, 4000)
+            };
+            this.latestOrders.push(orderNotice);
         }
     }
 };
