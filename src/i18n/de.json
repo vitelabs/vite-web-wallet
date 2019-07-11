@@ -22,6 +22,21 @@
     "withdrawHeight": "Expected Snapshot Height",
     "balance": "Balance",
     "addrName": "Address{index}",
+    "guide": {
+        "close": "Close",
+        "next": "Next",
+        "closeTips": "Skip user guide (Not recommended)",
+        "trade": [
+            "Manage your assets (both Web Wallet and ViteX exchange) here",
+            "Check out Open Orders and Order History, know trading details",
+            "Participate in mining, acquire VX and trading fee dividends (Mining Dividends)",
+            "Experience more features: Staking for Quota, becoming a SBP (Snapshot Block Producer) runner, Voting for SBPs, ERC20 conversion, Transaction Details, etc."
+        ],
+        "assets": [
+            "Deposit to Exchange",
+            "Withdraw to Wallet"
+        ]
+    },
     "dealReminder": {
         "title": "Deal Notice",
         "describe": "Your order {amount} {ttoken} ({ftoken}/{ttoken}) at {time} is a complete deal, visit Order History to find out more."
@@ -59,31 +74,35 @@
         "37010": "This order status cannot be revoked"
     },
     "txType": {
-        "0": "SBP-Registrierung",
-        "1": "Registrierung aktualisieren",
-        "2": "Registration widerrufen",
-        "3": "Belohnung erhalten",
-        "4": "Voting",
-        "5": "Voting widerrufen",
-        "6": "TPS-Quote erhalten",
-        "7": "Rücknahme der Kontingentquote",
-        "8": "Tokenausgabe",
-        "9": "Additional Token Issuance",
-        "10": "Destroy Tokens",
-        "11": "Transfer of ownership",
-        "12": "Edit token type",
-        "13": "Retrieve Staked Tokens",
-        "14": "ViteX Deposit",
-        "15": "ViteX Withdrawal",
-        "16": "ViteX Creating Orders",
-        "17": "ViteX Revoking Orders",
-        "18": "ViteX Token Listing",
-        "19": "Create Contract",
-        "20": "Transfer",
-        "21": "Transfer",
-        "22": "Transfer",
-        "23": "Transfer",
-        "25": "Genesis"
+        "SBPreg": "SBP Registration",
+        "UpdateReg": "Update Registration",
+        "RevokeReg": "Revoke Registration",
+        "RetrieveReward": "Retrieve Reward",
+        "Voting": "Voting",
+        "RevokeVoting": "Revoke Voting",
+        "GetQuota": "Get TPS Quota",
+        "WithdrawalOfQuota": "Withdrawal of Staking Quota",
+        "Mintage": "Token Issuance",
+        "MintageIssue": "Additional Token Issuance",
+        "MintageBurn": "Destroy Tokens",
+        "MintageTransferOwner": "Transfer of ownership",
+        "MintageChangeTokenType": "Edit token type",
+        "MintageCancelPledge": "Retrieve Staked Tokens",
+        "DexFundUserDeposit": "ViteX Deposit",
+        "DexFundUserWithdraw": "ViteX Withdrawal",
+        "DexFundNewOrder": "ViteX Creating Orders",
+        "currDexFundNewOrder": "ViteX Creating Orders",
+        "DexTradeCancelOrder": "ViteX Revoking Orders",
+        "DexFundNewMarket": "ViteX Token Listing",
+        "CreateContractReq": "Create Contract",
+        "DexFundPledgeForVx": "ViteX抵押",
+        "DexFundPledgeForVip": "ViteX VIP",
+        "TxReq": "Transfer",
+        "RewardReq": "Transfer",
+        "TxRes": "Transfer",
+        "TxResFail": "Transfer",
+        "SendRefund": "Transfer",
+        "GenesisReceive": "Genesis"
     },
     "btn": {
         "cancel": "Cancel",
@@ -405,7 +424,6 @@
         "maxAmt": "Withdraw amount should be in [{minAmount}, {maxAmount}]",
         "cancelLimitAmt": "Staking amount cannot be less than {num}",
         "withdrawalStaking": "Withdrawal of Staked Token",
-        "VX": "Mining VX",
         "myAddr": "Me",
         "confirm": {
             "help": {
@@ -432,7 +450,10 @@
             "total": "Staking {amount} VITE in total",
             "amount": "Amount",
             "withdrawTime": "Expected Due Date",
-            "unexpired": "Temporarily cannot make withdrawal of staked token until due date"
+            "unexpired": "Temporarily cannot make withdrawal of staked token until due date",
+            "vip": "This staking action is for default opening VIP in ViteX exchange, please go to ViteX exchange page to cancel VIP",
+            "mining": "This staking is your staking mining amount in ViteX, please go to ViteX mining page to retrieve",
+            "other": "This staking is staked via other ways and it is not supported retrieving here"
         }
     },
     "walletTransList": {
@@ -697,7 +718,25 @@
             "priceNotNull": "Amount cannot be empty",
             "amountNotNull": "Volume cannot be empty",
             "quantityNotNull": "Quantity cannot be empty",
-            "bigger0": "Value must be greater than 0"
+            "bigger0": "Value must be greater than 0",
+            "cancelVip": "Cancel",
+            "openVip": "Become a VIP",
+            "dexFee": "Exchange Default Fees: {fee}",
+            "operatorFee": "Operator Fees: {fee}",
+            "vipFee": "VIP Discount: {fee}"
+        },
+        "vipConfirm": {
+            "cancelVip": "Cancel VIP",
+            "openVip": "Become a VIP",
+            "openStakingAmount": "Staking Amount for Becoming a VIP",
+            "cancelStakingAmount": "Retrievable Staking Amount",
+            "noBalance": "Insufficient Balance",
+            "openHint": "You will enjoy the privilege of 0.1% trading fee discount after becoming a VIP. The staking amount of 10,000 VITE can be manually retrieved after 30 days.",
+            "cancelHint": "You can retrieve your staking amount at approximately {time}. You will lose your VIP privilege after retrieving.",
+            "openSuccess": "Application Successful! VIP status will come into effect later.",
+            "openFail": "Failed to apply VIP",
+            "cancelSuccess": "Cancel VIP Successful",
+            "cancelFail": "Cancel Failed"
         }
     },
     "tradeAssets": {
@@ -848,5 +887,38 @@
             "search": "Search",
             "reset": "Reset"
         }
+    },
+    "tradeMining": {
+        "title": "Mining",
+        "addQuota": "Add new staking mining",
+        "add": "Add",
+        "withdraw": "Retrieve",
+        "tbHead": {
+            "date": "Date",
+            "fee": "Trading Fees",
+            "mining": "Mining Amount",
+            "pledge": "Staking Amount"
+        },
+        "txTitle": "Trading Mining Total Profit",
+        "quotaTitle": "Staking Mining Total Profit",
+        "addHint": "Staking mining profit will be calculated at 13:00(UTC+8) everyday. You can manually retrieve your staking amount after the staking comes into effective",
+        "withdrawHint": "You will no longer be able to mining VX after retrieving",
+        "addTitle": "Staking VITE for Mining",
+        "withdrawTitle": "Retrieving Staked VITE",
+        "addPlaceHolder": "Please input staking amount, at least 134 VITE",
+        "withdrawPlaceHolder": "Please input retrieving amount, at least 134 VITE",
+        "addBtn": "Submit Staking",
+        "withdrawBtn": "Confirm to retrieve",
+        "stakingBalance": "Retrievable Staking Amount"
+    },
+    "tradeDividend": {
+        "title": "Dividends",
+        "poolTitle": "Trading Fee Dividend Pool",
+        "listTitle": "My Dividends",
+        "date": "Date",
+        "VX": "Holding VX",
+        "coin": "Type",
+        "amount": "Amount",
+        "price": "Total Estimated Value"
     }
 }
