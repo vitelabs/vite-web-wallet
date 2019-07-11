@@ -8,9 +8,7 @@ import {
 import viteCrypto from 'testwebworker';
 import statistics from 'utils/statistics';
 import $ViteJS from 'utils/viteClient';
-import {
-    constant as u_constant
-} from 'utils/store';
+import { constant as u_constant } from 'utils/store';
 
 import {
     getAddr,
@@ -22,9 +20,7 @@ import {
     setLastAcc
 } from './store';
 
-const {
-    LangList
-} = constant;
+const { LangList } = constant;
 const maxAddrNum = 10;
 
 export const StatusMap = {
@@ -240,8 +236,8 @@ export class HDAccount {
         const privateKey = addrObj.privKey;
 
         if (this.activeAccount && this.activeAccount.address === this.activeAddr) {
-            !this.activeAccount.privateKey &&
-                this.activeAccount.setPrivateKey(privateKey);
+            !this.activeAccount.privateKey
+                && this.activeAccount.setPrivateKey(privateKey);
             return;
         }
 
@@ -377,9 +373,7 @@ export class VBAccount {
         if (!this.id) {
             return;
         }
-        return Object.assign({}, getAcc(this.id), {
-            [u_constant.HoldPwdKey]: true
-        });
+        return Object.assign({}, getAcc(this.id), { [u_constant.HoldPwdKey]: true });
     }
 
     lock() {
@@ -432,8 +426,6 @@ export class VBAccount {
         };
         this.status = StatusMap.UNLOCK;
         this.proxyActiveAcc.sendPowTx = sendPowTx;
-        setLastAcc({
-            id: this.id
-        });
+        setLastAcc({ id: this.id });
     }
 }
