@@ -9,8 +9,8 @@
 
         <ul class="right-lab-list">
             <!-- <div class="tab __pointer" @click="goHelp">{{ $t('help') }}</div> -->
-            <div v-show="isHaveUsers && $route.name.indexOf('assets') !== -1"
-                 @click="getTestToken" class="tab __pointer">{{ $t('wallet.getTestToken') }}</div>
+            <!-- <div v-show="isHaveUsers && $route.name.indexOf('assets') !== -1"
+                 @click="getTestToken" class="tab __pointer">{{ $t('wallet.getTestToken') }}</div> -->
             <div v-show="!isLogin" @click="dexStart" class="tab __pointer">
                 {{ isHaveUsers ? $t('unlockAcc') : $t('login')  }}</div>
             <div v-show="!isLogin" @click="dexChange" class="tab __pointer">
