@@ -110,9 +110,12 @@ export default {
             const actionType = this.isVip ? 2 : 1;
             this.isLoading = true;
 
-            sendTx('dexFundPledgeForVip', {
-                amount: '0',
-                actionType
+            sendTx({
+                methodName: 'dexFundPledgeForVip',
+                data: {
+                    amount: '0',
+                    actionType
+                }
             }).then(() => {
                 this.isLoading = false;
                 this.$toast(this.isVip ? this.$t('trade.vipConfirm.cancelSuccess') : this.$t('trade.vipConfirm.openSuccess'));
