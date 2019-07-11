@@ -5,28 +5,31 @@ import { addrSpace } from 'utils/storageSpace';
 import i18n from 'i18n';
 
 const langMap = {
-    'zh': 'zh-cn',
+    zh: 'zh-cn',
     'zh-Hans': 'zh-cn',
-    'en': 'en'
+    en: 'en'
 };
 
 const STORAGEKEY = 'INDEX_COLLECT_TOKEN';
 
-const client = getClient('', xhr => {
-    if (xhr.status === 200) {
-        const { code, msg, data, error, subCode } = JSON.parse(xhr.responseText);
-        if (code !== 0) {
-            return Promise.reject({
-                code,
-                subCode,
-                message: msg || error
-            });
+const client = getClient('',
+    xhr => {
+        if (xhr.status === 200) {
+            const { code, msg, data, error, subCode } = JSON.parse(xhr.responseText);
+            if (code !== 0) {
+                return Promise.reject({
+                    code,
+                    subCode,
+                    message: msg || error
+                });
+            }
+            return Promise.resolve(data || null);
         }
-        return Promise.resolve(data || null);
-    }
-    return Promise.reject(xhr.responseText);
-}, { lang: langMap[i18n.locale], version: 'v1.0' });
-export const getGateInfos = () => client({ path: 'certified_gateways', host: process.env.gatewayInfosServer });
+        return Promise.reject(xhr.responseText);
+    },
+    { lang: langMap[i18n.locale], version: 'v1.0' });
+export const getGateInfos = () =>
+    client({ path: 'certified_gateways', host: process.env.gatewayInfosServer });
 
 export const getChargeAddr = ({ tokenId, addr: walletAddress }, url) =>
     client({
@@ -49,7 +52,8 @@ export const getWithdrawInfo = ({ tokenId, walletAddress }, url) =>
         host: url
     });
 
-export function getWithdrawFee({ tokenId, walletAddress, amount, containsFee = false }, url) {
+export function getWithdrawFee({ tokenId, walletAddress, amount, containsFee = false },
+    url) {
     return client({
         path: 'withdraw-fee',
         params: { tokenId, walletAddress, amount, containsFee },
@@ -71,31 +75,44 @@ export const getDepositInfo = ({ tokenId, addr: walletAddress }, url) =>
         host: url
     });
 
-export const withdraw = async (
-    { amount, withdrawAddress, gateAddr, tokenId, type }
-) => {
+export const withdraw = async ({
+    amount,
+    withdrawAddress,
+    gateAddr,
+    tokenId,
+    type
+}) => {
     // if (type !== 0 || type !== 1) {
     //     throw new Error('unexcepted address type');
     // }
-    type = 0;// not used at this moment
+    type = 0; // not used at this moment
     if (!withdrawAddress) {
         throw new Error('lack withdrawAddress');
     }
-    const data = Buffer.concat([ Buffer.from(utils.hexToBytes('0bc3')), Buffer.from([type]), Buffer.from(withdrawAddress) ])
-        .toString('base64');
+    const data = Buffer.concat([
+        Buffer.from(utils.hexToBytes('0bc3')),
+        Buffer.from([type]),
+        Buffer.from(withdrawAddress)
+    ]).toString('base64');
 
-    return await sendTx('asyncSendTx', {
-        toAddress: gateAddr,
-        amount,
-        tokenId,
-        data
-    }, {
-        pow: true,
-        powConfig: { isShowCancel: true }
+    return await sendTx({
+        methodName: 'asyncSendTx',
+        data: {
+            toAddress: gateAddr,
+            amount,
+            tokenId,
+            data
+        },
+        config: {
+            pow: true,
+            powConfig: { isShowCancel: true }
+        },
+        vbExtends: { type: 'crossChainTransfer' }
     });
 };
 
-export function getWithdrawRecords({ tokenId, walletAddress, pageNum, pageSize }, url) {
+export function getWithdrawRecords({ tokenId, walletAddress, pageNum, pageSize },
+    url) {
     return client({
         path: 'withdraw-records',
         params: { tokenId, walletAddress, pageNum, pageSize },
@@ -103,15 +120,14 @@ export function getWithdrawRecords({ tokenId, walletAddress, pageNum, pageSize }
     });
 }
 
-
-export function getDepositRecords({ tokenId, walletAddress, pageNum, pageSize }, url) {
+export function getDepositRecords({ tokenId, walletAddress, pageNum, pageSize },
+    url) {
     return client({
         path: 'deposit-records',
         params: { tokenId, walletAddress, pageNum, pageSize },
         host: url
     });
 }
-
 
 class GateWays {
     constructor() {

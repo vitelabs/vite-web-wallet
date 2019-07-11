@@ -82,7 +82,7 @@ import tooltips from 'components/tooltips';
 import walletTable from 'components/table/index.vue';
 import { initPwd } from 'components/password/index.js';
 import password from 'components/password/password.vue';
-import { execWithValid } from '../../../utils/execWithValid';
+import { execWithValid } from 'utils/execWithValid';
 
 const amount = 500000;
 
@@ -214,11 +214,15 @@ export default {
                 return;
             }
 
-            sendTx('SBPreg', this.getParams({ producerAddr, amount, nodeName }), {
-                pow: false,
-                confirm: {
-                    showMask: true,
-                    operate: this.$t('walletSBP.register')
+            sendTx({
+                methodName: 'SBPreg',
+                data: this.getParams({ producerAddr, amount, nodeName }),
+                config: {
+                    pow: false,
+                    confirm: {
+                        showMask: true,
+                        operate: this.$t('walletSBP.register')
+                    }
                 }
             }).then(() => {
                 this.$toast(this.$t('walletSBP.section1.registerSuccess'));
@@ -264,11 +268,15 @@ export default {
                     const nodeName = item.rawData.name;
                     const producer = item.rawData.nodeAddr;
 
-                    sendTx('revokeReg', this.getParams({ nodeName }), {
-                        pow: false,
-                        confirm: {
-                            showMask: true,
-                            operate: this.$t('walletSBP.cancel')
+                    sendTx({
+                        methodName: 'revokeReg',
+                        data: this.getParams({ nodeName }),
+                        config: {
+                            pow: false,
+                            confirm: {
+                                showMask: true,
+                                operate: this.$t('walletSBP.cancel')
+                            }
                         }
                     }).then(() => {
                         this.$toast(this.$t('hint.request', { name: this.$t('walletSBP.section2.cancel') }));
@@ -290,14 +298,18 @@ export default {
             this.showConfirm('edit', item.rawData);
         }),
         sendReward() {
-            sendTx('retrieveReward', {
-                nodeName: this.rewardItem.rawData.name,
-                toAddress: this.address
-            }, {
-                pow: false,
-                confirm: {
-                    showMask: true,
-                    operate: this.$t('walletSBP.rewardBtn')
+            sendTx({
+                methodName: 'retrieveReward',
+                data: {
+                    nodeName: this.rewardItem.rawData.name,
+                    toAddress: this.address
+                },
+                config: {
+                    pow: false,
+                    confirm: {
+                        showMask: true,
+                        operate: this.$t('walletSBP.rewardBtn')
+                    }
                 }
             }).then(() => {
                 this.$toast(this.$t('hint.request', { name: this.$t('walletSBP.rewardBtn') }));

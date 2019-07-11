@@ -1,11 +1,16 @@
 <template>
     <div class="__trans-wrapper">
-        <confirm v-show="isShowTrans" class="trans-confirm"
-                 :title="$t('wallet.transfer')"
-                 :btnUnuse="unTrans"
-                 :closeIcon="true" :close="closeTrans" :singleBtn="true"
-                 :leftBtnClick="validTrans" :leftBtnTxt="$t('wallet.transfer')" >
-
+        <confirm
+            v-show="isShowTrans"
+            class="trans-confirm"
+            :title="$t('wallet.transfer')"
+            :btnUnuse="unTrans"
+            :closeIcon="true"
+            :close="closeTrans"
+            :singleBtn="true"
+            :leftBtnClick="validTrans"
+            :leftBtnTxt="$t('wallet.transfer')"
+        >
             <div class="__row">
                 <div class="__row_t">{{ $t('balance') }}</div>
                 <div class="__input_row __unuse_input __bold">
@@ -19,8 +24,11 @@
                     {{ $t('wallet.inAddress') }}
                     <span v-show="!isValidAddress" class="__err">{{ $t('hint.addrFormat') }}</span>
                 </div>
-                <vite-input v-model="inAddress" :valid="validAddr"
-                            :placeholder="$t('wallet.placeholder.addr')"></vite-input>
+                <vite-input
+                    v-model="inAddress"
+                    :valid="validAddr"
+                    :placeholder="$t('wallet.placeholder.addr')"
+                ></vite-input>
             </div>
 
             <div class="__row">
@@ -39,7 +47,10 @@
                         {{ $t('wallet.remarksLong', { len: msgBalance}) }}
                     </span>
                 </div>
-                <vite-input v-model="message" :placeholder="$t('wallet.placeholder.remarks')"></vite-input>
+                <vite-input
+                    v-model="message"
+                    :placeholder="$t('wallet.placeholder.remarks')"
+                ></vite-input>
             </div>
         </confirm>
     </div>
@@ -97,7 +108,14 @@ export default {
     },
     computed: {
         unTrans() {
-            return !!(!this.amount || !this.inAddress || this.loading || this.amountErr || !this.isValidAddress || this.messageErr);
+            return !!(
+                !this.amount
+                || !this.inAddress
+                || this.loading
+                || this.amountErr
+                || !this.isValidAddress
+                || this.messageErr
+            );
         },
         accBalance() {
             return this.token.totalAmount;
@@ -125,7 +143,8 @@ export default {
             return getTokenIcon(id);
         },
         validAddr() {
-            this.isValidAddress = this.inAddress && hdAddr.isValidHexAddr(this.inAddress);
+            this.isValidAddress
+                = this.inAddress && hdAddr.isValidHexAddr(this.inAddress);
         },
 
         testAmount() {
@@ -146,7 +165,12 @@ export default {
                 this.isValidAddress = false;
             }
 
-            if (this.amountErr || this.messageErr || !this.isValidAddress || !this.testAmount()) {
+            if (
+                this.amountErr
+                || this.messageErr
+                || !this.isValidAddress
+                || !this.testAmount()
+            ) {
                 return;
             }
 
@@ -176,8 +200,12 @@ export default {
                 this.loading = false;
                 this.isShowTrans = true;
 
-                const code = err && err.error ? err.error.code || -1
-                    : err ? err.code : -1;
+                const code
+                    = err && err.error
+                        ? err.error.code || -1
+                        : err
+                            ? err.code
+                            : -1;
                 if (code === -35001) {
                     this.$toast(this.$t('hint.insufficientBalance'));
                     this.amountErr = this.$t('hint.insufficientBalance');
@@ -187,26 +215,32 @@ export default {
                 this.$toast(msg, err);
             };
 
-            sendTx('asyncSendTx', {
-                toAddress: this.inAddress,
-                tokenId: this.token.tokenId,
-                amount,
-                message: this.message
-            }, {
-                pow: true,
-                powConfig: {
-                    isShowCancel: true,
-                    cancel: () => {
-                        this.closeTrans();
+            sendTx({
+                methodName: 'asyncSendTx',
+                data: {
+                    toAddress: this.inAddress,
+                    tokenId: this.token.tokenId,
+                    amount,
+                    message: this.message
+                },
+                config: {
+                    pow: true,
+                    powConfig: {
+                        isShowCancel: true,
+                        cancel: () => {
+                            this.closeTrans();
+                        }
                     }
                 }
-            }).then(() => {
-                this.loading = false;
-                this.$toast(this.$t('hint.transSucc'));
-                this.closeTrans();
-            }).powStarted(() => {
-                this.isShowTrans = false;
             })
+                .then(() => {
+                    this.loading = false;
+                    this.$toast(this.$t('hint.transSucc'));
+                    this.closeTrans();
+                })
+                .powStarted(() => {
+                    this.isShowTrans = false;
+                })
                 .powFailed((err, type) => {
                     if (!err && !type) {
                         return;
@@ -218,8 +252,12 @@ export default {
                         return;
                     }
 
-                    const code = err && err.error ? err.error.code || -1
-                        : err ? err.code : -1;
+                    const code
+                        = err && err.error
+                            ? err.error.code || -1
+                            : err
+                                ? err.code
+                                : -1;
                     if (code === -35002) {
                         transError(this.$t('wallet.trans.powTransErr'));
                         return;

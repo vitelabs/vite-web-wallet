@@ -354,7 +354,7 @@ export class VBAccount {
     }
 
     lock() {
-        this._activeAccount = null;
+        this.proxyActiveAcc.sendPowTx = undefined;
         this.status = StatusMap.LOCK;
     }
 
@@ -381,14 +381,14 @@ export class VBAccount {
         if (!vb) {
             return;
         }
-        const sendPowTx = async ({ methodName, params = [] }) => {
+        const sendPowTx = async ({ methodName, params = [], vbExtends }) => {
             if (params[0]) {
                 params[0].prevHash = 'hack for birforst';
                 params[0].height = 34;
             }
             const block = await this.activeAccount.getBlock[methodName](params[0], 'sync');
 
-            return vb.sendVbTx({ block });
+            return vb.sendVbTx({ block, extend: vbExtends });
         };
         this.status = StatusMap.UNLOCK;
         this.proxyActiveAcc.sendPowTx = sendPowTx;

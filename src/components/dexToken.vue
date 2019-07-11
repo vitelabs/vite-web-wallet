@@ -233,9 +233,12 @@ export default {
                 this.close();
             };
 
-            sendTx('dexFundNewMarket', {
-                tradeToken: this.token.tokenId,
-                quoteToken: this.market.tokenId
+            sendTx({
+                methodName: 'dexFundNewMarket',
+                data: {
+                    tradeToken: this.token.tokenId,
+                    quoteToken: this.market.tokenId
+                }
             }).then(() => {
                 newMarketSuccess();
             }).powStarted(() => {

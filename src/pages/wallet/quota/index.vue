@@ -142,15 +142,19 @@ export default {
 
             amount = BigNumber.toMin(amount || 0, this.tokenInfo.decimals);
 
-            sendTx(type, {
-                tokenId: this.tokenInfo.tokenId,
-                toAddress,
-                amount
-            }, {
-                pow: true,
-                powConfig: {
-                    cancel: () => {
-                        cb && cb(false);
+            sendTx({
+                methodName: type,
+                data: {
+                    tokenId: this.tokenInfo.tokenId,
+                    toAddress,
+                    amount
+                },
+                config: {
+                    pow: true,
+                    powConfig: {
+                        cancel: () => {
+                            cb && cb(false);
+                        }
                     }
                 }
             }).then(() => {

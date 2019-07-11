@@ -94,14 +94,17 @@ export default {
             const maxSupply = this.tokenInfo.isReIssuable ? BigNumber.toMin(this.tokenInfo.maxSupply || 0, decimals) : '0';
             const ownerBurnOnly = this.tokenInfo.isReIssuable ? !!this.tokenInfo.ownerBurnOnly : false;
 
-            sendTx('mintage', {
-                decimals,
-                maxSupply,
-                ownerBurnOnly,
-                totalSupply,
-                isReIssuable: !!this.tokenInfo.isReIssuable,
-                tokenName: this.tokenInfo.tokenName,
-                tokenSymbol: this.tokenInfo.tokenSymbol
+            sendTx({
+                methodName: 'mintage',
+                data: {
+                    decimals,
+                    maxSupply,
+                    ownerBurnOnly,
+                    totalSupply,
+                    isReIssuable: !!this.tokenInfo.isReIssuable,
+                    tokenName: this.tokenInfo.tokenName,
+                    tokenSymbol: this.tokenInfo.tokenSymbol
+                }
             }).then(() => {
                 this.$toast(this.$t('walletMintage.hint.success'));
                 this.$store.dispatch('getAllTokens');
