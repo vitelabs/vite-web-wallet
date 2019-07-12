@@ -1,13 +1,17 @@
 <template>
     <div class="logout">
-        <div class="text">{{ $t('trade.limitPrice.text') }}</div>
-        <div class="btn btn-login __pointer" @click="leftClick">{{ isHaveUsers ? $t('unlockAcc') : $t('login')  }}</div>
-        <div class="btn btn-register __pointer" @click="rightClick">{{ isHaveUsers ? $t('changeAcc') : $t('register') }}</div>
+        <div class="text">{{ $t("trade.limitPrice.text") }}</div>
+        <div class="btn btn-login __pointer" @click="leftClick">
+            {{ isHaveUsers ? $t("unlockAcc") : $t("login") }}
+        </div>
+        <div class="btn btn-register __pointer" @click="rightClick">
+            {{ isHaveUsers ? $t("changeAcc") : $t("register") }}
+        </div>
     </div>
 </template>
 
 <script>
-import { pwdConfirm } from 'components/password/index.js';
+import { execWithValid } from 'utils/execWithValid';
 
 export default {
     computed: {
@@ -16,20 +20,17 @@ export default {
         }
     },
     methods: {
-        leftClick() {
-            if (!this.isHaveUsers) {
-                this.$router.push({ name: 'start' });
-                return;
-            }
-            pwdConfirm({ type: 'unlockAccount' });
+        leftClick: execWithValid(function () {
         },
-        rightClick() {
-            if (!this.isHaveUsers) {
-                this.$router.push({ name: 'startCreate' });
-                return;
-            }
+        function () {
             this.$router.push({ name: 'start' });
-        }
+        }),
+        rightClick: execWithValid(function () {
+            this.$router.push({ name: 'start' });
+        },
+        function () {
+            this.$router.push({ name: 'startCreate' });
+        })
     }
 };
 </script>
