@@ -311,7 +311,7 @@ export class VBAccount {
         name,
         activeAddr
     }) {
-        this.id = id || `VITEBIRFORST_${ activeAddr }`;
+        this.id = id || `VITEBIFROST_${ activeAddr }`;
         this.lang = lang || LangList.english;
         this.name = name || '';
         this.activeAddr = activeAddr;
@@ -336,14 +336,14 @@ export class VBAccount {
     }
 
     get isBifrost() {
-        return this.id.startsWith('VITEBIRFORST_');
+        return this.id.startsWith('VITEBIFROST_');
     }
 
     save() {
         addHdAccount({
             id: this.id,
             lang: this.lang,
-            keystore: 'birforst'
+            keystore: 'bifrost'
         });
         this.saveAcc();
     }
@@ -415,7 +415,7 @@ export class VBAccount {
             vbExtends
         }) => {
             if (params[0]) {
-                params[0].prevHash = 'hack for birforst';
+                params[0].prevHash = 'hack for bifrost';
                 params[0].height = 34;
             }
             const block = await this.activeAccount.getBlock[methodName](params[0], 'sync');
