@@ -163,7 +163,7 @@ export default {
     },
     data() {
         const list = getList();
-        console.log(list)
+        console.log(list);
         return {
             id: this.$route.params.id,
             currAcc: {},
