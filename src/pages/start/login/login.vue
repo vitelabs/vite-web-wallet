@@ -43,7 +43,7 @@
                     <div class="code_tips">
                         {{ $t("assets.vb.start.downloadTips")
                         }}<span class="action_get_app" @click="getWallet"
-                            >{{ $t("assets.vb.start.download") }}&rarr;</span
+                        >{{ $t("assets.vb.start.download") }}&rarr;</span
                         >
                     </div>
                 </div>
@@ -185,7 +185,7 @@ export default {
         };
     },
     beforeMount() {
-        if(this.id){
+        if (this.id) {
             this.showExisting(this.id);
             return;
         }
@@ -273,7 +273,7 @@ export default {
             }
 
             // Second: from current
-            if (this.currHDAcc&&!this.currHDAcc.isBifrost) {
+            if (this.currHDAcc && !this.currHDAcc.isBifrost) {
                 return {
                     id: this.currHDAcc.id,
                     showAddr: this.currHDAcc.activeAddr
