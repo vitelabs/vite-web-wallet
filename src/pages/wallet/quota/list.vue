@@ -54,7 +54,7 @@ import { timer } from 'utils/asyncFlow';
 import BigNumber from 'utils/bigNumber';
 import ellipsisAddr from 'utils/ellipsisAddr.js';
 import { StatusMap } from 'wallet';
-import {execWithValid} from 'utils/execWithValid'
+import { execWithValid } from 'utils/execWithValid';
 
 let pledgeListInst;
 
@@ -174,14 +174,14 @@ export default {
                 }
                 return;
             }
-                this.showCancel(item, index);
-                return;
+            this.showCancel(item, index);
+            return;
         },
         gotoDetail(addr) {
             const locale = this.$i18n.locale === 'zh' ? 'zh/' : '';
             window.open(`${ process.env.viteNet }${ locale }account/${ addr }`);
         },
-        showCancel:execWithValid(function(item){
+        showCancel: execWithValid(function (item) {
             if (this.loading) {
                 return;
             }
