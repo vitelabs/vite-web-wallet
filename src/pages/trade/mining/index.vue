@@ -142,10 +142,10 @@ export default {
             this.isShowVxConfirm = false;
             this.actionType = null;
         },
-        showVxConfirm:execWithValid(function(actionType) {
-                this.isShowVxConfirm = true;
-                this.actionType = actionType;
-            }),
+        showVxConfirm: execWithValid(function (actionType) {
+            this.isShowVxConfirm = true;
+            this.actionType = actionType;
+        }),
 
         stopStakingInfo() {
             stakingInfoTimer && stakingInfoTimer.stop();
