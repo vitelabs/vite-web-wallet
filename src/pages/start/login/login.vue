@@ -43,7 +43,7 @@
                     <div class="code_tips">
                         {{ $t("assets.vb.start.downloadTips")
                         }}<span class="action_get_app" @click="getWallet"
-                        >{{ $t("assets.vb.start.download") }}&rarr;</span
+                            >{{ $t("assets.vb.start.download") }}&rarr;</span
                         >
                     </div>
                 </div>
@@ -58,7 +58,11 @@
                         @click="toggleAccountList"
                     >
                         <div
-                            v-show="currAcc && !currAcc.activeAddr&&!currAcc.isBifrost"
+                            v-show="
+                                currAcc &&
+                                    !currAcc.activeAddr &&
+                                    !currAcc.isBifrost
+                            "
                             class="__btn __btn_input"
                         >
                             <div class="name __ellipsis">
@@ -163,7 +167,6 @@ export default {
     },
     data() {
         const list = getList();
-        console.log(list);
         return {
             id: this.$route.params.id,
             currAcc: {},
@@ -182,6 +185,10 @@ export default {
         };
     },
     beforeMount() {
+        if(this.id){
+            this.showExisting(this.id);
+            return;
+        }
         if (this.tabName === 'vb') {
             this.initVB();
         } else if (this.tabName === 'existingAcc') {
@@ -266,7 +273,7 @@ export default {
             }
 
             // Second: from current
-            if (this.currHDAcc) {
+            if (this.currHDAcc&&!this.currHDAcc.isBifrost) {
                 return {
                     id: this.currHDAcc.id,
                     showAddr: this.currHDAcc.activeAddr
