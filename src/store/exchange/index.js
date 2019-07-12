@@ -9,6 +9,7 @@ import tokens from './tokens';
 import currentOpenOrders from './currentOpenOrders';
 import limit from './limit';
 import fee from './fee';
+import latestOrder from './latestOrder';
 
 export default {
     exchangeRate: rate,
@@ -21,5 +22,6 @@ export default {
     exchangeTokens: tokens,
     exchangeCurrentOpenOrders: currentOpenOrders,
     exchangeLimit: limit,
-    exchangeFee: fee
+    exchangeFee: fee,
+    exchangeLatestOrder: latestOrder
 };

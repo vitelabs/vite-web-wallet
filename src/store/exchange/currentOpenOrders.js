@@ -1,44 +1,31 @@
-import { subTask } from 'utils/proto/subTask';
-
 const state = { list: [] };
-let task = null;
 
 const mutations = {
     exSetCurrentOpenOrders(state, list) {
         state.list = list || [];
-    }
-};
-
-const actions = {
-    startOrderCurrent({ rootGetters, rootState, commit }) {
-        const activeTxPair = rootState.exchangeActiveTxPair.activeTxPair;
-        if (!activeTxPair || !activeTxPair.symbol) {
+    },
+    exAddOpenOrder(state, order) {
+        if (!order || order.status !== 1) {
             return;
         }
 
-        task = task || new subTask('orderQueryCurrent', ({ args, data }) => {
-            if (!activeTxPair || args.address !== rootGetters.activeAddr || activeTxPair.symbol !== args.symbol || !data) {
-                return;
-            }
-            commit('exSetCurrentOpenOrders', data.order || data || []);
-        }, 2000);
+        const index = state.list.findIndex(v => v.orderId === order.orderId);
+        if (index < 0) {
+            state.list.push(order);
+        } else {
+            state.list[index] = order;
+        }
 
-        task.start(() => {
-            return {
-                address: rootGetters.activeAddr,
-                ...activeTxPair
-            };
-        });
+        let list = state.list.sort((a, b) => b.createTime - a.createTime);
+        list = list.slice(0, 30);
+        state.list = [].concat(list);
     },
-    stopOrderCurrent({ commit }) {
-        task && task.stop();
-        task = null;
-        commit('exSetCurrentOpenOrders', []);
+    exClearCurrentOpenOrders(state) {
+        state.list = [];
     }
 };
 
 export default {
     state,
-    actions,
     mutations
 };
