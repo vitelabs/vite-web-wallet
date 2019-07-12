@@ -49,12 +49,12 @@
 import { constant } from '@vite/vitejs';
 import pagination from 'components/pagination.vue';
 import walletTable from 'components/table/index.vue';
-import { pwdConfirm } from 'components/password/index.js';
 import date from 'utils/date.js';
 import { timer } from 'utils/asyncFlow';
 import BigNumber from 'utils/bigNumber';
 import ellipsisAddr from 'utils/ellipsisAddr.js';
 import { StatusMap } from 'wallet';
+import {execWithValid} from 'utils/execWithValid'
 
 let pledgeListInst;
 
@@ -174,26 +174,21 @@ export default {
                 }
                 return;
             }
-
-            if (this.isLogin) {
                 this.showCancel(item, index);
                 return;
-            }
-
-            pwdConfirm({ type: 'unlockAccount' });
         },
         gotoDetail(addr) {
             const locale = this.$i18n.locale === 'zh' ? 'zh/' : '';
             window.open(`${ process.env.viteNet }${ locale }account/${ addr }`);
         },
-        showCancel(item) {
+        showCancel:execWithValid(function(item){
             if (this.loading) {
                 return;
             }
             this.activeItem = item;
             const amount = BigNumber.toBasic(item.amount || 0, this.tokenInfo.decimals);
             this.showConfirm('cancel', amount);
-        },
+        }),
 
         _sendCancelPledgeTx(amount) {
             this.sendPledgeTx({

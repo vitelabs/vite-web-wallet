@@ -3,80 +3,131 @@
         <div class="order-title">
             {{ $t(`trade.${orderType}.title`, { token: ftokenShow }) }}
             <div class="wallet">
-                {{ balance || '0' }}
+                {{ balance || "0" }}
                 <span class="ex-order-token">
-                    {{ orderType === 'buy' ? ttokenShow : ftokenShow }}
+                    {{ orderType === "buy" ? ttokenShow : ftokenShow }}
                 </span>
             </div>
         </div>
 
         <div class="dex-input-wrapper b">
             <span class="ex-order-token __ellipsis">
-                {{ $t(`trade.${orderType}.price`, { token: originQuoteTokenSymbol }) }}
+                {{
+                    $t(`trade.${orderType}.price`, {
+                        token: originQuoteTokenSymbol
+                    })
+                }}
             </span>
-            <div class="else-input-wrapper" :class="{'err': priceErr}">
-                <span class="tips" :class="{'active':
-                    focusInput === 'price' && priceErr
-                }">{{  priceErr ? $t(priceErr, { digit: ttokenDigit }) : '' }}</span>
-                <vite-input v-model="price" @input="priceChanged"
-                            @focus="showTips('price')" @blur="hideTips('price')">
-                    <span class="real-price __ellipsis" slot="after">{{ realPrice }}</span>
+            <div class="else-input-wrapper" :class="{ err: priceErr }">
+                <span
+                    class="tips"
+                    :class="{ active: focusInput === 'price' && priceErr }"
+                    >{{
+                        priceErr ? $t(priceErr, { digit: ttokenDigit }) : ""
+                    }}</span
+                >
+                <vite-input
+                    v-model="price"
+                    @input="priceChanged"
+                    @focus="showTips('price')"
+                    @blur="hideTips('price')"
+                >
+                    <span class="real-price __ellipsis" slot="after">{{
+                        realPrice
+                    }}</span>
                 </vite-input>
             </div>
         </div>
 
         <div class="dex-input-wrapper">
             <span class="ex-order-token __ellipsis">
-                {{ $t(`trade.${orderType}.quantity`, { token: originTradeTokenSymbol }) }}
+                {{
+                    $t(`trade.${orderType}.quantity`, {
+                        token: originTradeTokenSymbol
+                    })
+                }}
             </span>
-            <div class="else-input-wrapper" :class="{'err': quantityErr}">
-                <span class="tips" :class="{'active':
-                    focusInput === 'quantity' && quantityErr
-                }">{{  $t(quantityErr, { digit: ftokenDigit }) }}</span>
-                <vite-input v-model="quantity" @input="quantityChanged"
-                            @focus="showTips('quantity')" @blur="hideTips('quantity')">
+            <div class="else-input-wrapper" :class="{ err: quantityErr }">
+                <span
+                    class="tips"
+                    :class="{
+                        active: focusInput === 'quantity' && quantityErr
+                    }"
+                    >{{ $t(quantityErr, { digit: ftokenDigit }) }}</span
+                >
+                <vite-input
+                    v-model="quantity"
+                    @input="quantityChanged"
+                    @focus="showTips('quantity')"
+                    @blur="hideTips('quantity')"
+                >
                 </vite-input>
             </div>
         </div>
 
         <div class="slider-wrapper">
-            <slider :class="orderType" :min="0" :max="100" :default="0"
-                    v-model="percent" v-on:drag="percentChanged"></slider>
+            <slider
+                :class="orderType"
+                :min="0"
+                :max="100"
+                :default="0"
+                v-model="percent"
+                v-on:drag="percentChanged"
+            ></slider>
         </div>
 
         <div class="dex-input-wrapper">
             <span class="ex-order-token __ellipsis">
-                {{ $t('trade.quantityTitle', { quantity: originQuoteTokenSymbol }) }}
+                {{
+                    $t("trade.quantityTitle", {
+                        quantity: originQuoteTokenSymbol
+                    })
+                }}
             </span>
-            <div class="else-input-wrapper" :class="{'err': amountErr}">
-                <span class="tips" :class="{'active':
-                    focusInput === 'amount' && amountErr
-                }">{{ $t(amountErr, {
-                    digit: ttokenDigit,
-                    amount: minAmount,
-                    token: ttokenShow
-                }) }}</span>
-                <vite-input v-model="amount" @input="amountChanged"
-                            @focus="showTips('amount')" @blur="hideTips('amount')">
+            <div class="else-input-wrapper" :class="{ err: amountErr }">
+                <span
+                    class="tips"
+                    :class="{ active: focusInput === 'amount' && amountErr }"
+                    >{{
+                        $t(amountErr, {
+                            digit: ttokenDigit,
+                            amount: minAmount,
+                            token: ttokenShow
+                        })
+                    }}</span
+                >
+                <vite-input
+                    v-model="amount"
+                    @input="amountChanged"
+                    @focus="showTips('amount')"
+                    @blur="hideTips('amount')"
+                >
                 </vite-input>
             </div>
         </div>
 
-        <div class="order-btn __pointer" :class="{
-            'red': orderType === 'sell',
-            'green': orderType === 'buy',
-            'gray': isLoading || amountErr || priceErr || quantityErr
-        }" @click="_clickBtn">{{ $t(`trade.${orderType}.title`, { token: ftokenShow }) }}</div>
+        <div
+            class="order-btn __pointer"
+            :class="{
+                red: orderType === 'sell',
+                green: orderType === 'buy',
+                gray: isLoading || amountErr || priceErr || quantityErr
+            }"
+            @click="_clickBtn"
+        >
+            {{ $t(`trade.${orderType}.title`, { token: ftokenShow }) }}
+        </div>
     </div>
 </template>
 
 <script>
-import { constant } from '@vite/vitejs';
-import viteInput from 'components/viteInput';
-import slider from 'components/slider';
-import sendTx from 'utils/sendTx';
-import BigNumber from 'utils/bigNumber';
-import { initPwd } from 'components/password/index.js';
+import { constant } from "@vite/vitejs";
+import viteInput from "components/viteInput";
+import slider from "components/slider";
+import sendTx from "utils/sendTx";
+import BigNumber from "utils/bigNumber";
+import { initPwd } from "components/password/index.js";
+import { execWithValid } from "utils/execWithValid";
 
 const maxDigit = 8;
 
@@ -85,52 +136,58 @@ export default {
     props: {
         orderType: {
             type: String,
-            default: ''
+            default: ""
         }
     },
     mounted() {
-        this.price = this.activeTxPair && this.activeTxPair.closePrice ? this.activeTxPair.closePrice : '';
+        this.price =
+            this.activeTxPair && this.activeTxPair.closePrice
+                ? this.activeTxPair.closePrice
+                : "";
     },
     data() {
         return {
-            price: '',
-            amount: '',
-            quantity: '',
-            priceErr: '',
-            amountErr: '',
-            quantityErr: '',
+            price: "",
+            amount: "",
+            quantity: "",
+            priceErr: "",
+            amountErr: "",
+            quantityErr: "",
             isLoading: false,
-            oldPrice: '',
-            oldAmount: '',
-            oldQuantity: '',
-            focusInput: ''
+            oldPrice: "",
+            oldAmount: "",
+            oldQuantity: "",
+            focusInput: ""
         };
     },
     watch: {
-        activeTxPair: function (val, old) {
+        activeTxPair: function(val, old) {
             if (old && old.symbol === this.activeTxPair.symbol) {
                 return;
             }
-            this.price = this.activeTxPair && this.activeTxPair.closePrice ? this.activeTxPair.closePrice : '';
-            this.quantity = '';
-            this.amount = '';
+            this.price =
+                this.activeTxPair && this.activeTxPair.closePrice
+                    ? this.activeTxPair.closePrice
+                    : "";
+            this.quantity = "";
+            this.amount = "";
         },
-        balance: function () {
+        balance: function() {
             this.validAll();
         },
-        amount: function () {
+        amount: function() {
             this.validAll();
         },
-        quantity: function () {
+        quantity: function() {
             this.validAll();
         },
-        price: function () {
+        price: function() {
             this.validAll();
         },
-        minAmount: function () {
+        minAmount: function() {
             this.validAll();
         },
-        activeTx: function () {
+        activeTx: function() {
             this.price = this.activeTx.price;
 
             if (!this.activeTx.num) {
@@ -138,32 +195,45 @@ export default {
                 return;
             }
 
-            if (!(this.orderType === 'buy' && this.activeTx.side === 1)
-                && !(this.orderType === 'sell' && this.activeTx.side === 0)) {
+            if (
+                !(this.orderType === "buy" && this.activeTx.side === 1) &&
+                !(this.orderType === "sell" && this.activeTx.side === 0)
+            ) {
                 this.priceChanged();
                 return;
             }
 
-            const quantity = BigNumber.normalFormatNum(this.activeTx.num, this.ftokenDigit);
+            const quantity = BigNumber.normalFormatNum(
+                this.activeTx.num,
+                this.ftokenDigit
+            );
 
-            if (this.orderType === 'sell'
-                && BigNumber.compared(this.balance || 0, quantity) < 0) {
+            if (
+                this.orderType === "sell" &&
+                BigNumber.compared(this.balance || 0, quantity) < 0
+            ) {
                 if (+this.balance === 0) {
                     this.priceChanged();
                     return;
                 }
-                this.quantity = BigNumber.normalFormatNum(this.balance, this.ftokenDigit);
+                this.quantity = BigNumber.normalFormatNum(
+                    this.balance,
+                    this.ftokenDigit
+                );
                 this.quantityChanged();
                 return;
             }
 
-            if (this.orderType === 'buy') {
+            if (this.orderType === "buy") {
                 const amount = this.getAmount(this.price, quantity);
                 if (BigNumber.compared(this.balance || 0, amount) < 0) {
                     if (+this.balance === 0) {
                         return;
                     }
-                    this.amount = BigNumber.normalFormatNum(this.balance || '', this.ttokenDigit);
+                    this.amount = BigNumber.normalFormatNum(
+                        this.balance || "",
+                        this.ttokenDigit
+                    );
                     this.quantity = this.getQuantity(this.price, this.amount);
                     return;
                 }
@@ -179,52 +249,79 @@ export default {
         },
         realPrice() {
             if (!this.rate || this.priceErr || !this.price) {
-                return '';
+                return "";
             }
 
-            const pre = this.$store.state.env.currency === 'cny' ? '≈¥' : '≈$';
+            const pre = this.$store.state.env.currency === "cny" ? "≈¥" : "≈$";
 
             if (!this.activeTxPair) {
-                return `${ pre }0`;
+                return `${pre}0`;
             }
 
             return pre + BigNumber.multi(this.price || 0, this.rate || 0, 2);
         },
         rate() {
             const rateList = this.$store.state.exchangeRate.rateMap || {};
-            const tokenId = this.activeTxPair && this.activeTxPair.quoteToken ? this.activeTxPair.quoteToken : null;
+            const tokenId =
+                this.activeTxPair && this.activeTxPair.quoteToken
+                    ? this.activeTxPair.quoteToken
+                    : null;
             const coin = this.$store.state.env.currency;
 
             if (!tokenId || !rateList[tokenId]) {
                 return null;
             }
-            return rateList[tokenId][`${ coin }Rate`] || null;
+            return rateList[tokenId][`${coin}Rate`] || null;
         },
         minAmount() {
             const minAmount = this.$store.state.exchangeLimit.minAmount;
-            const quoteTokenSymbol = this.activeTxPair ? this.activeTxPair.quoteTokenSymbol : '';
+            const quoteTokenSymbol = this.activeTxPair
+                ? this.activeTxPair.quoteTokenSymbol
+                : "";
 
-            if (!minAmount || !quoteTokenSymbol || !minAmount[quoteTokenSymbol]) {
+            if (
+                !minAmount ||
+                !quoteTokenSymbol ||
+                !minAmount[quoteTokenSymbol]
+            ) {
                 return 0;
             }
             return minAmount[quoteTokenSymbol];
         },
         percent() {
-            if (!this.availableBalance
-                || (this.orderType === 'buy' && !this.ttokenDetail)
-                || (this.orderType !== 'buy' && !this.ftokenDetail)) {
-                return '0';
+            if (
+                !this.availableBalance ||
+                (this.orderType === "buy" && !this.ttokenDetail) ||
+                (this.orderType !== "buy" && !this.ftokenDetail)
+            ) {
+                return "0";
             }
 
             const balance = this.availableBalance;
 
-            if (this.orderType === 'buy') {
-                const basicAmount = BigNumber.toMin(this.amount || 0, this.ttokenDetail.tokenDecimals);
-                return BigNumber.dividedToNumber(basicAmount || 0, balance, 3, 'nofix');
+            if (this.orderType === "buy") {
+                const basicAmount = BigNumber.toMin(
+                    this.amount || 0,
+                    this.ttokenDetail.tokenDecimals
+                );
+                return BigNumber.dividedToNumber(
+                    basicAmount || 0,
+                    balance,
+                    3,
+                    "nofix"
+                );
             }
 
-            const basicQuantity = BigNumber.toMin(this.quantity || 0, this.ftokenDetail.tokenDecimals);
-            return BigNumber.dividedToNumber(basicQuantity || 0, balance, 3, 'nofix');
+            const basicQuantity = BigNumber.toMin(
+                this.quantity || 0,
+                this.ftokenDetail.tokenDecimals
+            );
+            return BigNumber.dividedToNumber(
+                basicQuantity || 0,
+                balance,
+                3,
+                "nofix"
+            );
         },
         rawBalance() {
             if (!this.activeTxPair) {
@@ -232,7 +329,7 @@ export default {
             }
 
             let tokenId = this.activeTxPair.tradeToken;
-            if (this.orderType === 'buy') {
+            if (this.orderType === "buy") {
                 tokenId = this.activeTxPair.quoteToken;
             }
             if (!tokenId) {
@@ -247,11 +344,13 @@ export default {
             return balanceList[tokenId];
         },
         availableBalance() {
-            return this.rawBalance && this.rawBalance.available ? this.rawBalance.available : '0';
+            return this.rawBalance && this.rawBalance.available
+                ? this.rawBalance.available
+                : "0";
         },
         balance() {
             if (!this.rawBalance) {
-                return '';
+                return "";
             }
             const tokenInfo = this.rawBalance.tokenInfo;
             const balance = this.rawBalance.available || 0;
@@ -265,16 +364,20 @@ export default {
             return this.$store.state.exchangeTokens.ftoken;
         },
         originTradeTokenSymbol() {
-            return this.activeTxPair ? this.activeTxPair.tradeTokenSymbol.split('-')[0] : '';
+            return this.activeTxPair
+                ? this.activeTxPair.tradeTokenSymbol.split("-")[0]
+                : "";
         },
         originQuoteTokenSymbol() {
-            return this.activeTxPair ? this.activeTxPair.quoteTokenSymbol.split('-')[0] : '';
+            return this.activeTxPair
+                ? this.activeTxPair.quoteTokenSymbol.split("-")[0]
+                : "";
         },
         ftokenShow() {
-            return this.activeTxPair ? this.activeTxPair.tradeTokenSymbol : '';
+            return this.activeTxPair ? this.activeTxPair.tradeTokenSymbol : "";
         },
         ttokenShow() {
-            return this.activeTxPair ? this.activeTxPair.quoteTokenSymbol : '';
+            return this.activeTxPair ? this.activeTxPair.quoteTokenSymbol : "";
         },
         activeTxPair() {
             return this.$store.state.exchangeActiveTxPair.activeTxPair;
@@ -307,7 +410,7 @@ export default {
     },
     methods: {
         hideTips(type) {
-            this.focusInput === type && (this.focusInput = '');
+            this.focusInput === type && (this.focusInput = "");
         },
         showTips(type) {
             this.focusInput = type;
@@ -321,7 +424,7 @@ export default {
             let quantity = this.quantity;
             let amount = this.amount;
 
-            if (this.orderType === 'buy') {
+            if (this.orderType === "buy") {
                 amount = this.getPercentBalance(percent, this.ttokenDigit);
                 quantity = this.getQuantity(price, amount);
             } else {
@@ -329,7 +432,8 @@ export default {
                 amount = this.getAmount(price, quantity);
             }
 
-            !BigNumber.isEqual(quantity, this.quantity) && (this.quantity = quantity);
+            !BigNumber.isEqual(quantity, this.quantity) &&
+                (this.quantity = quantity);
             !BigNumber.isEqual(amount, this.amount) && (this.amount = amount);
         },
         amountChanged() {
@@ -349,7 +453,8 @@ export default {
             }
 
             quantity = this.getQuantity(price, amount);
-            !BigNumber.isEqual(quantity, this.quantity) && (this.quantity = quantity);
+            !BigNumber.isEqual(quantity, this.quantity) &&
+                (this.quantity = quantity);
         },
         priceChanged() {
             this.validAll();
@@ -387,49 +492,63 @@ export default {
 
         // price = amount / quantity / (1+fee)
         getPrice(quantity, amount) {
-            const isRightQuantity = quantity
-                                    && this.$validAmount(quantity) === 0
-                                    && !BigNumber.isEqual(quantity, 0);
+            const isRightQuantity =
+                quantity &&
+                this.$validAmount(quantity) === 0 &&
+                !BigNumber.isEqual(quantity, 0);
             if (!isRightQuantity) {
-                return '';
+                return "";
             }
 
-            const isRightAmount = amount
-                                    && this.$validAmount(amount) === 0
-                                    && !BigNumber.isEqual(amount, 0);
+            const isRightAmount =
+                amount &&
+                this.$validAmount(amount) === 0 &&
+                !BigNumber.isEqual(amount, 0);
             if (!isRightAmount) {
-                return '';
+                return "";
             }
 
-            if (this.orderType === 'buy') {
+            if (this.orderType === "buy") {
                 quantity = BigNumber.multi(quantity, 1 + this.fee);
             }
-            return BigNumber.dividedCeil(amount, quantity, this.ttokenDigit, 'nofix');
+            return BigNumber.dividedCeil(
+                amount,
+                quantity,
+                this.ttokenDigit,
+                "nofix"
+            );
         },
         getPercentBalance(percent, digit) {
             if (!this.balance || BigNumber.isEqual(this.balance, 0)) {
-                return '';
+                return "";
             }
-            const result = BigNumber.multi(percent, this.balance, digit, 'nofix');
-            return BigNumber.isEqual(result, 0) ? '' : result;
+            const result = BigNumber.multi(
+                percent,
+                this.balance,
+                digit,
+                "nofix"
+            );
+            return BigNumber.isEqual(result, 0) ? "" : result;
         },
         // amount = quantity * price * (1+fee)
         getAmount(price, quantity) {
-            const isRightPrice = price
-                                && this.$validAmount(price) === 0
-                                && !BigNumber.isEqual(price, 0);
+            const isRightPrice =
+                price &&
+                this.$validAmount(price) === 0 &&
+                !BigNumber.isEqual(price, 0);
             if (!isRightPrice) {
-                return '';
+                return "";
             }
 
-            const isRightQuantity = quantity
-                                    && this.$validAmount(quantity) === 0
-                                    && !BigNumber.isEqual(quantity, 0);
+            const isRightQuantity =
+                quantity &&
+                this.$validAmount(quantity) === 0 &&
+                !BigNumber.isEqual(quantity, 0);
             if (!isRightQuantity) {
-                return '';
+                return "";
             }
 
-            if (this.orderType !== 'buy') {
+            if (this.orderType !== "buy") {
                 return BigNumber.multi(price, quantity, this.ttokenDigit);
             }
 
@@ -438,25 +557,29 @@ export default {
         },
         // quantity = amount/price/（1+fee)
         getQuantity(price, amount) {
-            const isRightPrice = price
-                                && this.$validAmount(price) === 0
-                                && !BigNumber.isEqual(price, 0);
+            const isRightPrice =
+                price &&
+                this.$validAmount(price) === 0 &&
+                !BigNumber.isEqual(price, 0);
             if (!isRightPrice) {
-                return '';
+                return "";
             }
 
-            const isRightAmount = amount
-                                    && this.$validAmount(amount) === 0
-                                    && !BigNumber.isEqual(amount, 0);
+            const isRightAmount =
+                amount &&
+                this.$validAmount(amount) === 0 &&
+                !BigNumber.isEqual(amount, 0);
             if (!isRightAmount) {
-                return '';
+                return "";
             }
 
-            const decimals = this.ttokenDetail ? this.ttokenDetail.tokenDecimals : 0;
+            const decimals = this.ttokenDetail
+                ? this.ttokenDetail.tokenDecimals
+                : 0;
             let minAmount = BigNumber.toMin(amount, decimals);
             const minPrice = BigNumber.toMin(price, decimals);
 
-            if (this.orderType === 'buy') {
+            if (this.orderType === "buy") {
                 minAmount = BigNumber.dividedCeil(minAmount, 1 + this.fee, 0);
             }
 
@@ -465,103 +588,109 @@ export default {
 
         validPrice() {
             if (!this.price) {
-                this.priceErr = '';
+                this.priceErr = "";
                 return;
             }
 
             const result = this.$validAmount(this.price, this.ttokenDigit);
 
             if (result === 1) {
-                this.priceErr = 'hint.amtFormat';
+                this.priceErr = "hint.amtFormat";
                 return;
             }
 
             if (result === 2) {
-                this.priceErr = 'trade.limitPrice.validMaxDigit';
+                this.priceErr = "trade.limitPrice.validMaxDigit";
                 return;
             }
 
             if (result !== 0) {
-                this.priceErr = 'hint.amtFormat';
+                this.priceErr = "hint.amtFormat";
                 return;
             }
 
             if (+this.price === 0) {
-                this.priceErr = 'trade.limitPrice.bigger0';
+                this.priceErr = "trade.limitPrice.bigger0";
                 return;
             }
 
-            this.priceErr = '';
+            this.priceErr = "";
         },
         validAmount() {
             if (!this.amount) {
-                this.amountErr = '';
+                this.amountErr = "";
                 return;
             }
 
             const result = this.$validAmount(this.amount, this.ttokenDigit);
 
             if (result === 1) {
-                this.amountErr = 'hint.amtFormat';
+                this.amountErr = "hint.amtFormat";
                 return;
             }
 
             if (result === 2) {
-                this.amountErr = 'trade.limitPrice.validMaxDigit';
+                this.amountErr = "trade.limitPrice.validMaxDigit";
                 return;
             }
 
             if (result !== 0) {
-                this.amountErr = 'hint.amtFormat';
+                this.amountErr = "hint.amtFormat";
                 return;
             }
 
-            if (this.orderType === 'buy' && BigNumber.compared(this.balance || 0, this.amount) < 0) {
-                this.amountErr = 'hint.insufficientBalance';
+            if (
+                this.orderType === "buy" &&
+                BigNumber.compared(this.balance || 0, this.amount) < 0
+            ) {
+                this.amountErr = "hint.insufficientBalance";
                 return;
             }
 
             if (BigNumber.compared(this.minAmount || 0, this.amount) > 0) {
-                this.amountErr = 'trade.limitPrice.validAmountDigit';
+                this.amountErr = "trade.limitPrice.validAmountDigit";
                 return;
             }
 
-            this.amountErr = '';
+            this.amountErr = "";
         },
         validQuantity() {
             if (!this.quantity) {
-                this.quantityErr = '';
+                this.quantityErr = "";
                 return;
             }
 
             const result = this.$validAmount(this.quantity, this.ftokenDigit);
 
             if (result === 1) {
-                this.quantityErr = 'hint.amtFormat';
+                this.quantityErr = "hint.amtFormat";
                 return;
             }
 
             if (result === 2) {
-                this.quantityErr = 'trade.limitPrice.validMaxDigit';
+                this.quantityErr = "trade.limitPrice.validMaxDigit";
                 return;
             }
 
             if (result !== 0) {
-                this.quantityErr = 'hint.amtFormat';
+                this.quantityErr = "hint.amtFormat";
                 return;
             }
 
-            if (this.orderType === 'sell' && BigNumber.compared(this.balance || 0, this.quantity) < 0) {
-                this.quantityErr = 'hint.insufficientBalance';
+            if (
+                this.orderType === "sell" &&
+                BigNumber.compared(this.balance || 0, this.quantity) < 0
+            ) {
+                this.quantityErr = "hint.insufficientBalance";
                 return;
             }
 
             if (+this.quantity === 0) {
-                this.quantityErr = 'trade.limitPrice.bigger0';
+                this.quantityErr = "trade.limitPrice.bigger0";
                 return;
             }
 
-            this.quantityErr = '';
+            this.quantityErr = "";
         },
         validAll() {
             this.validPrice();
@@ -569,11 +698,11 @@ export default {
             this.validQuantity();
         },
         clearAll() {
-            this.amount = '';
-            this.quantity = '';
+            this.amount = "";
+            this.quantity = "";
         },
 
-        _clickBtn() {
+        _clickBtn: execWithValid(() => {
             if (this.isLoading) {
                 return;
             }
@@ -583,20 +712,21 @@ export default {
             this.validQuantity();
 
             if (!+this.price) {
-                this.priceErr = 'trade.limitPrice.priceNotNull';
+                this.priceErr = "trade.limitPrice.priceNotNull";
             }
             if (!+this.amount) {
-                this.amountErr = 'trade.limitPrice.amountNotNull';
+                this.amountErr = "trade.limitPrice.amountNotNull";
             }
             if (!+this.quantity) {
-                this.quantityErr = 'trade.limitPrice.quantityNotNull';
+                this.quantityErr = "trade.limitPrice.quantityNotNull";
             }
 
             if (this.priceErr || this.amountErr || this.quantityErr) {
                 return;
             }
 
-            initPwd({// yztood
+            initPwd({
+                // yztood
                 submit: () => {
                     this.newOrder({
                         price: this.price,
@@ -604,11 +734,15 @@ export default {
                     });
                 }
             });
-        },
+        }),
         newOrder({ price, quantity }) {
-            const tradeToken = this.activeTxPair ? this.activeTxPair.tradeToken : '';
-            const quoteToken = this.activeTxPair ? this.activeTxPair.quoteToken : '';
-            const side = this.orderType === 'buy' ? 0 : 1;
+            const tradeToken = this.activeTxPair
+                ? this.activeTxPair.tradeToken
+                : "";
+            const quoteToken = this.activeTxPair
+                ? this.activeTxPair.quoteToken
+                : "";
+            const side = this.orderType === "buy" ? 0 : 1;
 
             this.isLoading = true;
             const tokenDecimals = this.ftokenDetail.tokenDecimals;
@@ -623,11 +757,22 @@ export default {
             // },
 
             sendTx({
-                methodName: 'callContract',
+                methodName: "callContract",
                 data: {
                     toAddress: constant.DexFund_Addr,
-                    abi: { 'type': 'function', 'name': 'DexFundNewOrder', 'inputs': [ { 'name': 'tradeToken', 'type': 'tokenId' }, { 'name': 'quoteToken', 'type': 'tokenId' }, { 'name': 'side', 'type': 'bool' }, { 'name': 'orderType', 'type': 'uint8' }, { 'name': 'price', 'type': 'string' }, { 'name': 'quantity', 'type': 'uint256' } ] },
-                    params: [ tradeToken, quoteToken, side, 0, price, quantity ],
+                    abi: {
+                        type: "function",
+                        name: "DexFundNewOrder",
+                        inputs: [
+                            { name: "tradeToken", type: "tokenId" },
+                            { name: "quoteToken", type: "tokenId" },
+                            { name: "side", type: "bool" },
+                            { name: "orderType", type: "uint8" },
+                            { name: "price", type: "string" },
+                            { name: "quantity", type: "uint256" }
+                        ]
+                    },
+                    params: [tradeToken, quoteToken, side, 0, price, quantity],
                     tokenId: tradeToken
                 },
                 config: {
@@ -639,15 +784,17 @@ export default {
                         }
                     }
                 }
-            }).then(() => {
-                this.isLoading = false;
-                this.clearAll();
-                this.$toast(this.$t('trade.newOrderSuccess'));
-            }).catch(err => {
-                console.warn(err);
-                this.isLoading = false;
-                this.$toast(this.$t('trade.newOrderFail'), err);
-            });
+            })
+                .then(() => {
+                    this.isLoading = false;
+                    this.clearAll();
+                    this.$toast(this.$t("trade.newOrderSuccess"));
+                })
+                .catch(err => {
+                    console.warn(err);
+                    this.isLoading = false;
+                    this.$toast(this.$t("trade.newOrderFail"), err);
+                });
         }
     }
 };
@@ -672,7 +819,7 @@ $font-black: rgba(36, 39, 43, 0.8);
         box-sizing: border-box;
         padding: 0 6px;
         font-size: 12px;
-        color: rgba(94,104,117,0.58);
+        color: rgba(94, 104, 117, 0.58);
     }
     .ex-order-token {
         font-size: 12px;
@@ -686,7 +833,7 @@ $font-black: rgba(36, 39, 43, 0.8);
     .else-input-wrapper {
         position: relative;
         border-radius: 2px;
-        border: 1px solid rgba(212,222,231,1);
+        border: 1px solid rgba(212, 222, 231, 1);
         box-sizing: border-box;
         flex: 1;
         &.err {
@@ -702,10 +849,10 @@ $font-black: rgba(36, 39, 43, 0.8);
     z-index: 10;
     transform: translate(-50%, 0);
     background: #fff;
-    box-shadow: 0px 5px 20px 0px rgba(0,0,0,0.1);
+    box-shadow: 0px 5px 20px 0px rgba(0, 0, 0, 0.1);
     border-radius: 2px;
     font-size: 12px;
-    color: #5E6875;
+    color: #5e6875;
     box-sizing: border-box;
     @include font-family-normal();
     opacity: 0;
@@ -722,7 +869,7 @@ $font-black: rgba(36, 39, 43, 0.8);
         padding: 6px;
     }
     &::after {
-        content: ' ';
+        content: " ";
         display: inline-block;
         border: 6px solid transparent;
         border-top: 6px solid #fff;
@@ -749,11 +896,11 @@ $font-black: rgba(36, 39, 43, 0.8);
             display: block;
             float: right;
             &::before {
-                content: '';
+                content: "";
                 display: inline-block;
                 width: 16px;
                 height: 16px;
-                background: url('~assets/imgs/ex-wallet-icon.svg');
+                background: url("~assets/imgs/ex-wallet-icon.svg");
                 background-size: 100% 100%;
                 margin-bottom: -4px;
             }
@@ -775,10 +922,18 @@ $font-black: rgba(36, 39, 43, 0.8);
         font-weight: 600;
         color: #fff;
         &.red {
-            background: linear-gradient(270deg, rgba(226, 43, 116, 1) 0%, rgba(237, 81, 88, 1) 100%);
+            background: linear-gradient(
+                270deg,
+                rgba(226, 43, 116, 1) 0%,
+                rgba(237, 81, 88, 1) 100%
+            );
         }
         &.green {
-            background: linear-gradient(270deg, rgba(0, 212, 208, 1) 0%, rgba(0, 215, 100, 1) 100%);
+            background: linear-gradient(
+                270deg,
+                rgba(0, 212, 208, 1) 0%,
+                rgba(0, 215, 100, 1) 100%
+            );
         }
         &.gray {
             color: rgba(29, 32, 36, 0.6);

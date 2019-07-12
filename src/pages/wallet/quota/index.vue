@@ -43,6 +43,7 @@ import viteInput from 'components/viteInput';
 import { initPwd } from 'components/password/index.js';
 import sendTx from 'utils/sendTx';
 import BigNumber from 'utils/bigNumber';
+import {execWithValid} from 'utils/execWithValid'
 
 export default {
     components: { quotaHead, myQuota, pledgeTx, confirm, list, loading, viteInput },
@@ -143,7 +144,7 @@ export default {
             });
             this.showConfirmType = '';
         },
-        submit() {
+        submit:execWithValid(()=>{
             this.testAmount();
             if (this.amountErr) {
                 return;
@@ -161,7 +162,7 @@ export default {
                     txListEle._sendCancelPledgeTx(amount);
                 }
             });
-        },
+        }),
 
         sendPledgeTx({ toAddress, amount }, type, cb) {
             if (!this.netStatus) {

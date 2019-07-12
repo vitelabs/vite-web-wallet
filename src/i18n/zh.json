@@ -1,901 +1,894 @@
 {
-    "lang": "中文",
-    "help": "帮助",
-    "start": "开始",
-    "login": "登录账户",
-    "regAcc": "注册账户",
-    "dexToken": "开通交易对",
-    "unlockAcc": "解锁当前账户",
-    "changeAcc": "切换其他账户",
-    "existingAcc": "本地已有账户",
-    "restore": "助记词导入",
-    "register": "注册",
-    "createAcc": "新建账户",
-    "settingAcc": "设置账户",
-    "resetAcc": "重新设置账号",
-    "logout": "退出登录",
-    "blockHeight": "快照块高度",
-    "accountName": "账户昵称",
-    "action": "操作",
-    "stakingAmount": "抵押金额",
-    "withdrawHeight": "到期快照高度",
-    "balance": "账户余额",
-    "addrName": "地址{index}",
-    "guide": {
-        "close": "关闭",
-        "next": "下一步",
-        "closeTips": "点击关闭新手引导 (不推荐)",
-        "trade": [
-            "在这里管理您的钱包资产和交易所资产",
-            "查看当前委托和历史委托记录，掌握交易细节",
-            "参与挖矿，获取VX和交易所手续费分红 （挖矿分红）",
-            "体验钱包更多功能：抵押配额、超级节点、投票、一键置换、交易详情"
-        ],
-        "assets": [
-            "充币至交易所",
-            "提现至钱包",
-            "跨链充值提现"
-        ]
+  "lang": "中文",
+  "help": "帮助",
+  "start": "开始",
+  "login": "登录账户",
+  "regAcc": "注册账户",
+  "dexToken": "开通交易对",
+  "unlockAcc": "解锁当前账户",
+  "changeAcc": "切换其他账户",
+  "existingAcc": "本地已有账户",
+  "restore": "助记词导入",
+  "register": "注册",
+  "createAcc": "新建账户",
+  "settingAcc": "设置账户",
+  "resetAcc": "重新设置账号",
+  "logout": "退出登录",
+  "blockHeight": "快照块高度",
+  "accountName": "账户昵称",
+  "action": "操作",
+  "stakingAmount": "抵押金额",
+  "withdrawHeight": "到期快照高度",
+  "balance": "账户余额",
+  "addrName": "地址{index}",
+  "guide": {
+    "close": "关闭",
+    "next": "下一步",
+    "closeTips": "点击关闭新手引导 (不推荐)",
+    "trade": [
+      "在这里管理您的钱包资产和交易所资产",
+      "查看当前委托和历史委托记录，掌握交易细节",
+      "参与挖矿，获取VX和交易所手续费分红 （挖矿分红）",
+      "体验钱包更多功能：抵押配额、超级节点、投票、一键置换、交易详情"
+    ],
+    "assets": ["充币至交易所", "提现至钱包", "跨链充值提现"]
+  },
+  "dealReminder": {
+    "title": "成交提醒",
+    "describe": "你于{time} 委托的 {amount} {ttoken} ({ftoken}/{ttoken})已完全成交，详细记录可在委托历史中查看。"
+  },
+  "pow": {
+    "ing": "正在运行PoW获取配额",
+    "no": "如果您不想运行PoW，您可抵押VITE跳过此步骤"
+  },
+  "addAccount": "新建账户",
+  "saveQrcode": "保存二维码图片",
+  "unlockSuccess": "解锁成功",
+  "submitStaking": "提交抵押",
+  "sendTrans": {
+    "send": "发送交易",
+    "symbol": "发送交易"
+  },
+  "errCode": {
+    "35003": "{name}ID发生冲突，请您稍后重新提交",
+    "35004": "参数错误",
+    "35005": "交易发送频繁，请您稍后再次尝试",
+    "35006": "合约方法不存在",
+    "36001": "您需要接收一笔交易之后才可发起转账",
+    "36002": "系统校验不通过，请稍后重试",
+    "36003": "系统校验不通过，请稍后重试",
+    "36004": "系统校验不通过，请稍后重试",
+    "36005": "快照块高度不合法，请您稍后再试",
+    "37001": "订单号格式错误",
+    "37002": "订单类型错误",
+    "37003": "订单价格格式错误",
+    "37004": "订单交易数量异常",
+    "37005": "订单交易金额过小",
+    "37006": "该交易市场已经存在",
+    "37007": "订单指定交易市场不存在",
+    "37008": "查询订单信息异常",
+    "37009": "撤销订单不属于当前地址",
+    "37010": "该订单状态不可以撤销"
+  },
+  "txType": {
+    "SBPreg": "注册SBP",
+    "UpdateReg": "更新注册",
+    "RevokeReg": "撤销注册",
+    "RetrieveReward": "提取奖励",
+    "Voting": "投票",
+    "RevokeVoting": "撤销投票",
+    "GetQuota": "获取配额",
+    "WithdrawalOfQuota": "取回配额抵押",
+    "Mintage": "铸币",
+    "MintageIssue": "代币增发",
+    "MintageBurn": "代币销毁",
+    "MintageTransferOwner": "转移所有权",
+    "MintageChangeTokenType": "修改代币类型",
+    "MintageCancelPledge": "取回抵押",
+    "DexFundUserDeposit": "ViteX充值",
+    "DexFundUserWithdraw": "ViteX提现",
+    "DexFundNewOrder": "ViteX挂单",
+    "currDexFundNewOrder": "ViteX挂单",
+    "DexTradeCancelOrder": "ViteX撤单",
+    "DexFundNewMarket": "ViteX上币",
+    "CreateContractReq": "创建合约",
+    "DexFundPledgeForVx": "ViteX抵押",
+    "DexFundPledgeForVip": "ViteX VIP",
+    "TxReq": "转账",
+    "RewardReq": "转账",
+    "TxRes": "转账",
+    "TxResFail": "转账",
+    "SendRefund": "转账",
+    "GenesisReceive": "Genesis"
+  },
+  "btn": {
+    "cancel": "取消",
+    "login": "登录",
+    "imported": "导入账户",
+    "back": "返回",
+    "submit": "确定",
+    "next": "下一步",
+    "understand": "我已了解",
+    "edit": "编辑",
+    "reReg": "重新注册",
+    "otherProd": "使用 Vite 其他产品"
+  },
+  "hint": {
+    "noNet": "网络无法连接",
+    "pwErr": "密码错误",
+    "pwEmpty": "密码不能为空",
+    "noData": "暂无数据",
+    "err": "发生错误",
+    "request": "{name}请求已发送，请耐心等待",
+    "copy": "复制成功",
+    "addrFormat": "账户地址格式错误",
+    "amtFormat": "金额格式错误",
+    "transSucc": "转账成功",
+    "insufficientBalance": "余额不足",
+    "nodeErr": "节点异常，请您稍后重试"
+  },
+  "beforeUse": {
+    "title": "使用前必读",
+    "text1": "创建账户时，请务必备份您的助记词，如果您访问了一个钓鱼网站或者丢失了您的备份，本站无法为您恢复资金。",
+    "text2": "由于本站不存储你的私钥或助记词，如果您更换浏览器、电脑或者清除浏览器缓存，需要通过备份助记词恢复账号。",
+    "text3": "如果使用了从助记词恢复地址的方式，请保证助记词绝对正确，如果有细微的不同都可能无法恢复您的地址。"
+  },
+  "preview": {
+    "t": "1.6.0版本",
+    "txt1": "Web钱包是VITE官方发布的轻节点钱包",
+    "txt2": "当前版本钱包支持查询账户余额、对外发送交易、默认签收交易、抵押VITE获取配额、注册SBP、投票等功能。",
+    "txt3": "交易所功能正在开发中，敬请期待。",
+    "v": "当前版本：{version}"
+  },
+  "pwdConfirm": {
+    "conf": "开启免密设置，您只需要登录时输入密码，交易过程无需再输入密码",
+    "title": "输入钱包密码",
+    "placeholder": "请输入钱包密码",
+    "unlockAcc": "请输入密码解锁 {name} 账户"
+  },
+  "quotaConfirm": {
+    "title": "配额不足",
+    "cancelContent": "当前配额不足，无法进行{operate}，您需要抵押VITE获取配额才可以{operate}",
+    "goQuota": "抵押VITE",
+    "noOperate": "暂不{operate}"
+  },
+  "mnemonic": {
+    "title": "助记词",
+    "restore": "助记词恢复账户",
+    "record": "记录助记词",
+    "prompt": "助记词是您恢复账户的重要手段，如给予他人，您的资产会被他人获取。请谨慎记录，以防丢失。",
+    "placeholder": "请输入您的助记词",
+    "empty": "助记词输入为空",
+    "error": "助记词错误",
+    "hint": "助记词格式：单词、空格、单词...空格、单词",
+    "change": "切换{len}个助记词"
+  },
+  "setting": {
+    "title": "设置",
+    "config": "常规设置",
+    "currency": "计价币种",
+    "secure": "安全设置",
+    "lang": "语言",
+    "block": "当前区块高度",
+    "version": "版本",
+    "service": "客户服务",
+    "site": "Vite官方网站",
+    "sys": "系统门户网站",
+    "open": "Vite项目开源代码",
+    "addAddr": "添加地址",
+    "addrList": "地址管理",
+    "setDefault": "选择默认地址",
+    "autoLogout": "自动退出登录时间",
+    "logoutDescribe": "当您离开交易所页面，账户会自动退出",
+    "noPass": "是否开启免密",
+    "explorer": "区块浏览器",
+    "netInfo": "网络信息",
+    "timeList": {
+      "5": "5分钟",
+      "10": "10分钟",
+      "30": "30分钟",
+      "60": "1小时",
+      "720": "12小时"
+    }
+  },
+  "startCreate": {
+    "input": "请输入密码",
+    "again": "请再次输入密码",
+    "choose": "选择账户",
+    "finish": "完成",
+    "agreementPre": "同意Vite钱包和ViteX",
+    "agreement": "隐私政策与服务协议",
+    "hint": {
+      "nameInput": "请输入账户名称",
+      "nameLong": "名称不得超出{long}个字符",
+      "long": "密码不能大于32个字符",
+      "name": "账户名称仅支持中英文、数字和下划线",
+      "consistency": "请输入相同的密码",
+      "pwFormat": "密码格式错误，密码仅支持英文、半角符号、数字"
+    }
+  },
+  "startRecord": {
+    "agreeList": [
+      "我理解如果我丢失了助记词，我将永远无法找回我的资产",
+      "我理解如果我忘记或丢失了助记词，将没有任何人能够帮助我恢复",
+      "我已经写下了或者用其它方式保存了我的助记词"
+    ]
+  },
+  "keystore": {
+    "title": "Keystore",
+    "dragDrop": {
+      "text": "拖拽账户文件进入文本区域",
+      "err1": "导入的文件错误",
+      "err2": "只能导入一个文件",
+      "guide": "打开文件夹导入",
+      "hint": "注：导入加密文件的方式仅支持单地址，不支持派生地址。推荐通过助记词进行跨平台操作。"
+    }
+  },
+  "tokenCard": {
+    "moreRecords": "更多记录",
+    "others": "其它",
+    "assetSpread": "资产分布",
+    "heads": {
+      "name": "代币名称",
+      "balance": "钱包余额",
+      "onroad": "钱包待接收金额",
+      "gate": "钱包跨链网关",
+      "totalExAmount": "交易所总余额",
+      "availableExAmount": "交易所可用余额"
     },
-    "dealReminder": {
-        "title": "成交提醒",
-        "describe": "你于{time} 委托的 {amount} {ttoken} ({ftoken}/{ttoken})已完全成交，详细记录可在委托历史中查看。"
+    "actionType": {
+      "SEND": "发送",
+      "RECEIVE": "接收",
+      "CHARGE": "跨链转入",
+      "WITHDRAW": "跨链转出",
+      "EXCHARGE": "充值至交易所",
+      "EXWITHDRAW": "提币至钱包",
+      "EXRECRODS": "交易所充提记录",
+      "RECRODS": "跨链充提记录"
     },
-    "pow": {
-        "ing": "正在运行PoW获取配额",
-        "no": "如果您不想运行PoW，您可抵押VITE跳过此步骤"
+    "type": {
+      "native": "原生代币",
+      "crossGate": "跨链代币"
     },
-    "addAccount": "新建账户",
-    "saveQrcode": "保存二维码图片",
-    "unlockSuccess": "解锁成功",
-    "submitStaking": "提交抵押",
-    "sendTrans": {
-        "send": "发送交易",
-        "symbol": "发送交易"
+    "assetType": {
+      "TOTAL": "全部资产估值",
+      "EX": "交易所资产估值",
+      "WALLET": "钱包资产估值"
     },
-    "errCode": {
-        "35003": "{name}ID发生冲突，请您稍后重新提交",
-        "35004": "参数错误",
-        "35005": "交易发送频繁，请您稍后再次尝试",
-        "35006": "合约方法不存在",
-        "36001": "您需要接收一笔交易之后才可发起转账",
-        "36002": "系统校验不通过，请稍后重试",
-        "36003": "系统校验不通过，请稍后重试",
-        "36004": "系统校验不通过，请稍后重试",
-        "36005": "快照块高度不合法，请您稍后再试",
-        "37001": "订单号格式错误",
-        "37002": "订单类型错误",
-        "37003": "订单价格格式错误",
-        "37004": "订单交易数量异常",
-        "37005": "订单交易金额过小",
-        "37006": "该交易市场已经存在",
-        "37007": "订单指定交易市场不存在",
-        "37008": "查询订单信息异常",
-        "37009": "撤销订单不属于当前地址",
-        "37010": "该订单状态不可以撤销"
+    "addToken": {
+      "title": "添加代币",
+      "placeholder": "请输入代币名称",
+      "lTxt": "取消",
+      "rTxt": "添加"
     },
-    "txType": {
-        "SBPreg": "注册SBP",
-        "UpdateReg": "更新注册",
-        "RevokeReg": "撤销注册",
-        "RetrieveReward": "提取奖励",
-        "Voting": "投票",
-        "RevokeVoting": "撤销投票",
-        "GetQuota": "获取配额",
-        "WithdrawalOfQuota": "取回配额抵押",
-        "Mintage": "铸币",
-        "MintageIssue": "代币增发",
-        "MintageBurn": "代币销毁",
-        "MintageTransferOwner": "转移所有权",
-        "MintageChangeTokenType": "修改代币类型",
-        "MintageCancelPledge": "取回抵押",
-        "DexFundUserDeposit": "ViteX充值",
-        "DexFundUserWithdraw": "ViteX提现",
-        "DexFundNewOrder": "ViteX挂单",
-        "currDexFundNewOrder": "ViteX挂单",
-        "DexTradeCancelOrder": "ViteX撤单",
-        "DexFundNewMarket": "ViteX上币",
-        "CreateContractReq": "创建合约",
-        "DexFundPledgeForVx": "ViteX抵押",
-        "DexFundPledgeForVip": "ViteX VIP",
-        "TxReq": "转账",
-        "RewardReq": "转账",
-        "TxRes": "转账",
-        "TxResFail": "转账",
-        "SendRefund": "转账",
-        "GenesisReceive": "Genesis"
+    "tokenInfo": {
+      "tabName": "详情",
+      "title": "{tokenSymbol}代币信息",
+      "saveGate": "保存修改",
+      "labels": {
+        "tokenId": "TokenID",
+        "title": "{tokenSymbol}代币地址",
+        "address": "铸币地址",
+        "tokenName": "代币名称",
+        "totalSupply": "发行总量",
+        "decimals": "小数位",
+        "isReIssuable": "类型",
+        "time": "发行日期"
+      },
+      "reIssuable": {
+        "true": "可增发",
+        "false": "不可增发"
+      }
     },
-    "btn": {
-        "cancel": "取消",
-        "login": "登录",
-        "imported": "导入账户",
-        "back": "返回",
-        "submit": "确定",
-        "next": "下一步",
-        "understand": "我已了解",
-        "edit": "编辑",
-        "reReg": "重新注册",
-        "otherProd": "使用 Vite 其他产品"
+    "gateInfo": {
+      "gateSetting": "点击设置网关",
+      "tabName": "网关详情",
+      "selfdefined": "自定义网关",
+      "officalNet": "网关官网",
+      "introduction": "网关介绍",
+      "token": "网关发行代币",
+      "setting": "网关设置",
+      "settingPlaceholder": "请输入网关链接地址",
+      "nodeDesc": "网关节点使用说明："
+    },
+    "depositRecord": {
+      "tabName": "充值记录",
+      "heads": ["时间", "金额", "状态", "VITE链Hash", "{outChain}链Hash"],
+      "statusMap": {
+        "OPPOSITE_PROCESSING": "{outChain}链待确认",
+        "OPPOSITE_CONFIRMED": "网关已接收",
+        "TOT_CONFIRMED": "已完成",
+        "BELOW_MINIMUM": "VITE链待确认",
+        "TOT_PROCESSING": "已完成"
+      }
+    },
+    "withdrawRecord": {
+      "tabName": "提现记录",
+      "heads": ["时间", "金额", "状态", "VITE链Hash", "{outChain}链Hash"],
+      "statusMap": {
+        "TODO": "VITE链待确认",
+        "TOT_PROCESSING": "VITE链确认",
+        "TOT_NOT_RECEIVED": "转出失败",
+        "TOT_CONFIRMED": "网关已接收",
+        "OPPOSITE_PROCESSING": "{outChain}链待确认",
+        "OPPOSITE_CONFIRMED": "已完成"
+      }
+    },
+    "receive": {
+      "title": "接收",
+      "codeTips": "请扫码向我转入{tokenSymbol}",
+      "addressTitle": "接收地址",
+      "amountTitle": "请输入接收金额",
+      "amountPlaceholder": "请输入接收金额"
+    },
+    "charge": {
+      "title": "跨链转入",
+      "addrErr": "网关节点出错，请检查网关设置",
+      "addressTitle": "转入地址",
+      "codeTips": "请扫描二维码充值,请使用支持{tokenSymbol}的钱包转账",
+      "tips": [
+        "跨链转入操作是将{tokenSymbol}跨链映射至VITE网络，转入后您依然可以转出",
+        "通过该存款地址只能发送{tokenSymbol},且金额不能低于{min}",
+        "交易确认之后，预计5分钟后到账，请耐心等待"
+      ]
+    },
+    "withdraw": {
+      "title": "跨链转出",
+      "balanceErrMap": {
+        "notEnough": "余额不足",
+        "overMax": "转出金额需小于 {max}",
+        "lessMin": "转出金额需大于 {min}"
+      },
+      "feeTips": "手续费收取金额由网关设置",
+      "addressErr": "地址格式错误",
+      "labels": {
+        "balance": "账户余额",
+        "address": "转出地址",
+        "amount": "转出金额",
+        "fee": "转出手续费",
+        "all": "全部"
+      },
+      "amountPlaceholder": "请输入转出金额，最小不少于{min}",
+      "addressPlaceholder": "请输入转出地址",
+      "successTips": "转出请求已发送",
+      "failTips": "网关节点出错，请检查网关设置"
+    },
+    "nodeErr": "网关节点无效，请检查网关设置"
+  },
+  "assets": {
+    "title": "资产",
+    "vb": {
+      "title": "WalletConnect",
+      "connect": {
+        "tips": "Scan a QR code to link your mobile wallet using WalletConnect."
+      },
+      "confirm": {
+        "tips": "请在VITE App上确认交易"
+      },
+      "start": {
+        "scan": "Scan a QR code to link your mobile wallet using WalletConnect.",
+        "downloadTips": "Don’t have an app that supports WalletConnect yet? ",
+        "download": "Get Vite Wallet"
+      },
+      "defaultName": "我的账户"
+    }
+  },
+  "walletConversion": {
+    "title": "置换VITE",
+    "help": {
+      "title": "快速理解置换VITE",
+      "text": "通过VITE置换功能，可以将以太网络上的ERC20 VITE代币置换到VITE网络中，在VITE网络中可以投票官方超级节点赚取奖励，年化收益达20%。在置换过程中，你的ERC20 VITE将被转入黑洞地址：{blackAddr}，当黑洞地址收到交易并被确认后，置换系统将为您发放等值的VITE至您的VITE地址中。在置换过程中，您需要将ERC20的VITE 与 少量ETH（用于置换消耗gas）转入至VITE钱包的ETH地址中。"
+    },
+    "gas": "矿工费用",
+    "record": "置换记录",
+    "aboutPrice": "约 {amount} ETH",
+    "note": "官方提示：提交置换后请您耐心等待，置换VITE到账需要等以太交易被确认30个块，以太交易可以在置换记录中查看",
+    "exchange": {
+      "vite": "置换VITE",
+      "viteAddr": "接收VITE地址",
+      "viteAmount": "置换VITE金额",
+      "btn": "确认置换",
+      "success": "置换请求成功，预计以太网交易被确认后20分钟到账"
+    }
+  },
+  "wallet": {
+    "title": "配额管理",
+    "help": {
+      "title": "快速理解配额"
+    },
+    "transfer": "转账",
+    "getTestToken": "获取测试代币",
+    "transDetail": "查看账户更多交易详情",
+    "address": "我的地址",
+    "fundFloat": "待接收",
+    "pend": "笔交易待接收",
+    "inAddress": "接收账户地址",
+    "sum": "金额",
+    "remarks": "备注",
+    "totalAsset": "总资产",
+    "remarksLong": "剩余字节：{len}",
+    "placeholder": {
+      "amount": "请输入金额",
+      "remarks": "请输入备注",
+      "addr": "请输入地址"
     },
     "hint": {
-        "noNet": "网络无法连接",
-        "pwErr": "密码错误",
-        "pwEmpty": "密码不能为空",
-        "noData": "暂无数据",
-        "err": "发生错误",
-        "request": "{name}请求已发送，请耐心等待",
-        "copy": "复制成功",
-        "addrFormat": "账户地址格式错误",
-        "amtFormat": "金额格式错误",
-        "transSucc": "转账成功",
-        "insufficientBalance": "余额不足",
-        "nodeErr": "节点异常，请您稍后重试"
+      "token": "系统已向您转入一笔VITE测试代币，请注意接收",
+      "tErr": "获取测试代币失败！",
+      "amount": "金额必须大于0"
     },
-    "beforeUse": {
-        "title": "使用前必读",
-        "text1": "创建账户时，请务必备份您的助记词，如果您访问了一个钓鱼网站或者丢失了您的备份，本站无法为您恢复资金。",
-        "text2": "由于本站不存储你的私钥或助记词，如果您更换浏览器、电脑或者清除浏览器缓存，需要通过备份助记词恢复账号。",
-        "text3": "如果使用了从助记词恢复地址的方式，请保证助记词绝对正确，如果有细微的不同都可能无法恢复您的地址。"
+    "trans": {
+      "powErr": "运行PoW错误，请重新发起转账",
+      "powTransErr": "PoW获取的配额不足，建议您进行抵押VITE获取配额"
+    }
+  },
+  "walletQuota": {
+    "title": "配额管理",
+    "help": {
+      "title": "快速理解配额"
     },
-    "preview": {
-        "t": "1.6.0版本",
-        "txt1": "Web钱包是VITE官方发布的轻节点钱包",
-        "txt2": "当前版本钱包支持查询账户余额、对外发送交易、默认签收交易、抵押VITE获取配额、注册SBP、投票等功能。",
-        "txt3": "交易所功能正在开发中，敬请期待。",
-        "v": "当前版本：{version}"
+    "myQuota": "我的当前配额",
+    "maxTxNum": "最大交易笔数",
+    "beneficialAddr": "配额受益地址",
+    "fromAddr": "抵押金额扣除地址",
+    "time": "抵押锁定时长",
+    "aboutDays": "约{day}天",
+    "amountPlaceholder": "请输入抵押金额，最小{num}vite",
+    "limitAmt": "抵押金额需填写大于等于{num}的数字",
+    "addrPlaceholder": "请输入获取配额地址",
+    "inputWithdrawAmount": "请输入取回金额",
+    "pledgeFail": "提交失败",
+    "canclePledgeFail": "操作失败",
+    "maturity": "抵押已到期",
+    "minAmt": "最小取回金额为 {num} VITE",
+    "gotoStake": "请先抵押足够VITE",
+    "maxAmt": "取回金额应在 [{minAmount}, {maxAmount}] 之内",
+    "cancelLimitAmt": "抵押金额不能小于{num}",
+    "withdrawalStaking": "取回抵押",
+    "myAddr": "我的",
+    "confirm": {
+      "help": {
+        "t1": "什么是配额",
+        "txt1": "在Vite系统中，用户不是通过支付手续费的方式来购买一次交易所需的燃料，而是通过一种基于配额的模型来获取计算资源，发送交易所需配额=基础配额(请求)+配额(附带的文本资料)，接受交易所需配额=基础配额(响应)。这个基于配额的资源配置协议允许用户通过两种方式来获取更高的资源配额：抵押Vite获取配额、运行PoW",
+        "t2": "什么是抵押",
+        "txt2": "在Vite系统中，用户可以抵押vite获取一定数量的配额，抵押最小值为134vite，没有最大抵押上限；同时支持A地址抵押一部分vite并将获得的配额分配给B地址；用户申请抵押后，会将这笔vite发送到智能合约地址而不是某一个用户，且只有申请抵押用户有权限支配抵押的金额",
+        "t3": "什么是PoW",
+        "txt3": "工作量证明(Proof of Work，简称PoW)，简单理解就是一份证明，用来确认你做过一定量的工作，同样也是应对拒绝服务攻击和其他服务滥用的经济对策。它要求发起者进行一定量的运算，也就意味着需要消耗计算机一定的时间；在VITE系统中，用户可以通过运行PoW获得免费的配额，用户可以通过获得的配额进行一次不带任何备注信息的交易"
+      },
+      "cancel": {
+        "describe": "目前抵押金额为 {amount} VITE，请确认取回金额",
+        "rightBtn": "确认取回",
+        "leftBtn": "暂不取回"
+      },
+      "submit": {
+        "describe": "确认是否抵押 {amount} VITE 获取配额，抵押生效约3天之后才可取回",
+        "rightBtn": "确认抵押",
+        "leftBtn": "再等会儿"
+      }
+    },
+    "list": {
+      "title": "我的抵押列表",
+      "total": "总计抵押 {amount} VITE",
+      "amount": "抵押金额",
+      "withdrawTime": "预计到期时间",
+      "unexpired": "还未到达取回时间，暂时无法取回抵押",
+      "vip": "此抵押为您开通交易所VIP金额，请前往交易所撤销VIP",
+      "mining": "此抵押为您交易所抵押挖矿金额，请前往交易所挖矿页面取回",
+      "other": "此抵押为您通过其他方式抵押，不支持在此处取回"
+    }
+  },
+  "walletTransList": {
+    "title": "交易记录",
+    "tType": {
+      "title": "交易类型",
+      "symbol": "类型"
+    },
+    "status": {
+      "title": "状态",
+      "unconfirmed": "待确认",
+      "confirms": "确认数",
+      "confirmed": "已确认"
+    },
+    "timestamp": "时间戳",
+    "tAddress": "交易方地址",
+    "sum": "金额"
+  },
+  "walletSBP": {
+    "title": "SBP",
+    "help": {
+      "title": "关于SBP",
+      "text": "SBP（Snapshot Block Producer）为具有出块权利的节点，您可以通过抵押一定数量的VITE注册成为SBP候选节点；每轮（时长75秒）会选举出25个SBP，每轮得票数前25名中随机选出23个作为SBP，得票数26-100名中随机选出2个作为SBP；出块奖励的50%将作为按块奖励分配给该块的出块节点，另外50%将作为按票奖励分配给该轮次得票数排名前100的节点。<br/><br/>一个注册地址（抵押地址）可以注册多个出块节点（节点名称），节点名称被一个注册地址使用后不能再被其他注册地址使用；节点名称可以更换出块地址，出块地址被一个节点名称使用后不能再被其他节点名称使用。"
+    },
+    "register": "注册SBP",
+    "cancel": "撤销注册SBP",
+    "cancelBtn": "撤销",
+    "rewardBtn": "提取奖励",
+    "noReward": "暂无奖励",
+    "rewardConfirm": {
+      "title": "提取奖励",
+      "describe1": "每天 13:00:00 (UTC+8)更新可提取奖励金额，截止到{time} 您可提取奖励金额为",
+      "describe2": "挖矿奖励明细查询可",
+      "describe3": "点击此处",
+      "describe4": "提交提取奖励后，奖励金额将发送至您当前Vite Web钱包地址，请在钱包首页查看，请勿重复提取.",
+      "leftBtn": "暂不提取",
+      "rightBtn": "全部提取"
+    },
+    "confirm": {
+      "title": "注册SBP候选节点",
+      "describe": "提交注册后，当前地址的{amount}VITE将被锁定约90天，解锁后可以撤销注册，抵押金额将退回抵押地址",
+      "leftBtn": "暂不注册",
+      "rightBtn": "确认注册",
+      "edit": {
+        "title": "更换出块地址",
+        "placeholder": "请输入新的出块地址",
+        "btn": "确认修改"
+      }
+    },
+    "section1": {
+      "title": "提交注册",
+      "nodeName": "节点名称",
+      "producerAddr": "出块地址",
+      "quotaAddr": "抵押地址",
+      "quotaTime": "抵押周期",
+      "time": "7776000个快照块（约90天）",
+      "confirmBtn": "提交注册",
+      "namePlaceholder": "请输入节点名称",
+      "nameHint": "40个字符以内, 支持大小写英文字母、数字、'_'、'.'",
+      "nameErr": "节点名称不合法",
+      "nameUsed": "此节点名称已被注册",
+      "addrPlaceholder": "请输入快照块出块地址",
+      "addrHint": "出块地址必须是全节点地址且保持运行状态",
+      "addrErr": "出块地址不合法",
+      "addrUsed": "此出块地址已被使用",
+      "registerSuccess": "注册请求已发出",
+      "registerFail": "注册请求失败"
+    },
+    "section2": {
+      "title": "注册信息",
+      "update": "修改",
+      "updateFail": "修改请求发送失败",
+      "cancel": "撤销",
+      "cancelFail": "撤销请求发送失败",
+      "expireDate": "预计到期时间: {time}",
+      "cancelConfirm": {
+        "title": "撤销注册SBP",
+        "describe": "撤销后您的抵押金额将退回抵押地址；若想成为SBP，您需重新提交注册申请"
+      }
+    }
+  },
+  "walletVote": {
+    "title": "投票",
+    "help": {
+      "title": "关于投票",
+      "text": "您可以参与投票选出共25个SBP（Snapshot Block Producer），每轮投票时间共75秒，您的投票数为投票地址所拥有的VITE数量，默认为您保持上一轮的投票意向；每轮得票量排名前25名的候选节点中随机23个及排名26-100名的候选节点中随机2个共25个节点将当选SBP。"
+    },
+    "toReward": "查看我的奖励",
+    "voting": "投票",
+    "search": "请输入候选节点名称或者出块地址",
+    "addrNoExistErr": "您的地址未发生过交易，暂不能投票",
+    "revokeVoting": "撤销投票",
+    "section1": {
+      "title": "我的投票",
+      "head": ["节点名称", "节点状态", "我的投票", "投票状态", "操作"],
+      "nodeStatusMap": {
+        "1": "正在候选",
+        "2": "停止候选"
+      },
+      "voteStatusMap": {
+        "voted": "投票成功",
+        "voting": "正在投票中",
+        "canceling": "正在撤销中",
+        "voteNotWork": "投票作废"
+      },
+      "hoverHelp": "您投票的{nodeName}已经取消注册，您可以直接重新投票、或者撤销投票；如果您不重新投票或撤销投票，{nodeName}重新注册后，您原来的投票将恢复生效。",
+      "confirm": {
+        "cancelText": "暂不撤销",
+        "submitText": "确认撤销"
+      },
+      "revoke": "撤销投票",
+      "operateBtn": "撤销",
+      "cancelVoteErr": "撤销投票失败，请重试"
+    },
+    "section2": {
+      "title": "候选节点列表",
+      "head": ["排名", "节点名称", "出块地址", "当前票数", "操作"],
+      "confirm": {
+        "normal": {
+          "cancelText": "暂不投票",
+          "submitText": "确认投票",
+          "content": "您只能给一个节点投票，确认投票给{name}吗？"
+        },
+        "cover": {
+          "content": "您已经投票给{nodeName}，请确认是否覆盖当前投票",
+          "cancelText": "确认",
+          "submitText": "取消"
+        }
+      },
+      "noSearchData": "无结果，换个输入试试",
+      "operateBtn": "投票",
+      "voteErr": "投票失败，请重试"
+    }
+  },
+  "tradeCenter": {
+    "title": "交易中心"
+  },
+  "trade": {
+    "search": "查询",
+    "txPair": "交易对",
+    "price": "价格",
+    "upDown": "涨跌幅",
+    "txNum": "交易量",
+    "quantityTitle": "成交额({quantity})",
+    "priceTitle": "价格({price})",
+    "amountTitle": "数量({amount})",
+    "amountTable": "数量",
+    "amount": "成交额",
+    "newOrderSuccess": "提单成功",
+    "newOrderFail": "提单失败",
+    "depthView": "深度图",
+    "klineView": "k线图",
+    "txPairDetail": {
+      "title": "交易对详情",
+      "24h": "24小时数据",
+      "openPrice": "开盘价",
+      "quantity": "市场币交易量",
+      "amount": "基准币交易量",
+      "status": "当前状态",
+      "latest": "最新价",
+      "buy": "买一价",
+      "sell": "卖一价",
+      "diff": "买卖价差"
+    },
+    "dexToken": {
+      "title": "开通交易对",
+      "fee": "上币费",
+      "link": "前往浏览器查询",
+      "market": "开通市场",
+      "name": "开通代币名称",
+      "id": "开通代币TokenID",
+      "hint": "交易对开通成功后，如果想要添加网关标识（如BTC.V），请发邮件联系我们：info@vite.org",
+      "btn": "提交申请",
+      "search": "请输入代币名称",
+      "reqSuccess": "提交申请成功，请稍后在市场中查看",
+      "reqError": "上币失败，请稍后重试"
+    },
+    "buy": {
+      "title": "买入{token}",
+      "price": "买入价({token})",
+      "quantity": "买入量({token})"
+    },
+    "sell": {
+      "title": "卖出{token}",
+      "price": "卖出价({token})",
+      "quantity": "卖出量({token})"
+    },
+    "head": {
+      "latestPrice": "最新价",
+      "updown": "24h涨跌",
+      "highPrice": "24h最高价",
+      "lowPrice": "24h最低价",
+      "quantity": "24h成交量",
+      "tokenName": "代币名称",
+      "originalSymbol": "代币简称",
+      "gateway": "发行网关",
+      "website": "官网",
+      "explorer": "区块浏览器",
+      "overview": "代币描述",
+      "tokenId": "TokenID",
+      "publisher": "发行者",
+      "total": "总金额",
+      "tokenDigit": "小数位数",
+      "publisherDate": "发行日期",
+      "type": "类型",
+      "tokenType0": "可增发",
+      "tokenType1": "永不增发"
+    },
+    "latestTx": {
+      "title": "最新交易",
+      "time": "时间"
+    },
+    "depth": {
+      "buy": "买入",
+      "sell": "卖出",
+      "all": "全部"
+    },
+    "noData": {
+      "favorite": "您还未添加任何自选",
+      "search": "暂无搜索结果"
+    },
+    "limitPrice": {
+      "title": "限价",
+      "fee": "手续费",
+      "text": "此页面为交易预览信息，请登录后进行交易",
+      "validAmountDigit": "成交额需大于{amount}{token}",
+      "validMaxDigit": "最多{digit}位小数",
+      "priceNotNull": "金额不能为空",
+      "amountNotNull": "成交额不能为空",
+      "quantityNotNull": "数量不能为空",
+      "bigger0": "数额必须大于0",
+      "cancelVip": "取消",
+      "openVip": "开通",
+      "dexFee": "交易所基础费率：{fee}",
+      "operatorFee": "运营商收取费率：{fee}",
+      "vipFee": "VIP特权抵扣：{fee}"
+    },
+    "vipConfirm": {
+      "cancelVip": "取消VIP",
+      "openVip": "开通VIP",
+      "openStakingAmount": "开通VIP抵押金额",
+      "cancelStakingAmount": "可取回抵押金额",
+      "noBalance": "交易所可用余额不足",
+      "openHint": "VIP开通后，可享有降低0.1%手续费特权，开通VIP需抵押10000VITE，30天后可手动取回",
+      "cancelHint": "预计 {time} 可取回抵押，取回抵押后，您将无法再使用VIP特权",
+      "openSuccess": "申请开通VIP成功，稍后生效",
+      "openFail": "开通失败",
+      "cancelSuccess": "申请取消VIP成功",
+      "cancelFail": "取消失败"
+    }
+  },
+  "tradeAssets": {
+    "title": "资产管理",
+    "search": "请输入代币名称",
+    "operate": "操作",
+    "all": "全部",
+    "confirmTable": {
+      "title": "充提记录",
+      "heads": ["日期", "代币名称", "交易类型", "交易金额"]
     },
     "pwdConfirm": {
-        "conf": "开启免密设置，您只需要登录时输入密码，交易过程无需再输入密码",
-        "title": "输入钱包密码",
-        "placeholder": "请输入钱包密码",
-        "unlockAcc": "请输入密码解锁 {name} 账户"
+      "cancelTxt": "取消"
     },
-    "quotaConfirm": {
-        "title": "配额不足",
-        "cancelContent": "当前配额不足，无法进行{operate}，您需要抵押VITE获取配额才可以{operate}",
-        "goQuota": "抵押VITE",
-        "noOperate": "暂不{operate}"
-    },
-    "mnemonic": {
-        "title": "助记词",
-        "restore": "助记词恢复账户",
-        "record": "记录助记词",
-        "prompt": "助记词是您恢复账户的重要手段，如给予他人，您的资产会被他人获取。请谨慎记录，以防丢失。",
-        "placeholder": "请输入您的助记词",
-        "empty": "助记词输入为空",
-        "error": "助记词错误",
-        "hint": "助记词格式：单词、空格、单词...空格、单词",
-        "change": "切换{len}个助记词"
-    },
-    "setting": {
-        "title": "设置",
-        "config": "常规设置",
-        "currency": "计价币种",
-        "secure": "安全设置",
-        "lang": "语言",
-        "block": "当前区块高度",
-        "version": "版本",
-        "service": "客户服务",
-        "site": "Vite官方网站",
-        "sys": "系统门户网站",
-        "open": "Vite项目开源代码",
-        "addAddr": "添加地址",
-        "addrList": "地址管理",
-        "setDefault": "选择默认地址",
-        "autoLogout": "自动退出登录时间",
-        "logoutDescribe": "当您离开交易所页面，账户会自动退出",
-        "noPass": "是否开启免密",
-        "explorer": "区块浏览器",
-        "netInfo": "网络信息",
-        "timeList": {
-            "5": "5分钟",
-            "10": "10分钟",
-            "30": "30分钟",
-            "60": "1小时",
-            "720": "12小时"
+    "table": {
+      "heads": [
+        "代币名称",
+        "交易所总余额",
+        "交易所可用余额",
+        "交易所冻结余额",
+        "价值"
+      ],
+      "rowMap": {
+        "recharge": "充值至交易所",
+        "withdraw": "提现至钱包",
+        "detail": "充提记录",
+        "sideMap": {
+          "1": "充值",
+          "2": "提现"
         }
+      }
     },
-    "startCreate": {
-        "input": "请输入密码",
-        "again": "请再次输入密码",
-        "choose": "选择账户",
-        "finish": "完成",
-        "agreementPre": "同意Vite钱包和ViteX",
-        "agreement": "隐私政策与服务协议",
-        "hint": {
-            "nameInput": "请输入账户名称",
-            "nameLong": "名称不得超出{long}个字符",
-            "long": "密码不能大于32个字符",
-            "name": "账户名称仅支持中英文、数字和下划线",
-            "consistency": "请输入相同的密码",
-            "pwFormat": "密码格式错误，密码仅支持英文、半角符号、数字"
-        }
+    "confirmrecharge": {
+      "successToast": "充值成功",
+      "failToast": "充值失败",
+      "title": "充值至交易所",
+      "lable1": "钱包余额",
+      "lable2": "充币金额",
+      "tips": "钱包账户余额不足",
+      "placeholder": "请输入充币金额",
+      "btn": "充值至交易所"
     },
-    "startRecord": {
-        "agreeList": [
-            "我理解如果我丢失了助记词，我将永远无法找回我的资产",
-            "我理解如果我忘记或丢失了助记词，将没有任何人能够帮助我恢复",
-            "我已经写下了或者用其它方式保存了我的助记词"
-        ]
+    "confirmwithdraw": {
+      "successToast": "提币成功",
+      "failToast": "提币失败",
+      "title": "提现至钱包",
+      "lable1": "可提币余额",
+      "lable2": "提币金额",
+      "tips": "钱包账户余额不足",
+      "placeholder": "请输入提币金额",
+      "btn": "提现至钱包"
     },
-    "keystore": {
-        "title": "Keystore",
-        "dragDrop": {
-            "text": "拖拽账户文件进入文本区域",
-            "err1": "导入的文件错误",
-            "err2": "只能导入一个文件",
-            "guide": "打开文件夹导入",
-            "hint": "注：导入加密文件的方式仅支持单地址，不支持派生地址。推荐通过助记词进行跨平台操作。"
-        }
+    "zero": "隐藏小额代币"
+  },
+  "tradeOpenOrders": {
+    "cancelErr": "您操作太快了, 请稍候重试",
+    "confirm": {
+      "successToast": "撤销交易发送成功",
+      "failToast": "撤销交易发送失败",
+      "submitTxt": "确认撤销",
+      "cancelTxt": "取消",
+      "title": "撤销委托",
+      "content": "请确认是否撤销当前委托"
     },
-    "tokenCard": {
-        "moreRecords":"更多记录",
-        "others":"其它",
-        "assetSpread":"资产分布",
-        "heads":{
-            "name":"代币名称",
-            "balance":"钱包余额",
-            "onroad":"钱包待接收金额",
-            "gate":"钱包跨链网关",
-            "totalExAmount":"交易所总余额",
-            "availableExAmount":"交易所可用余额"
-        },
-        "actionType": {
-            "SEND": "发送",
-            "RECEIVE": "接收",
-            "CHARGE": "跨链转入",
-            "WITHDRAW": "跨链转出",
-            "EXCHARGE": "充值至交易所",
-            "EXWITHDRAW": "提币至钱包",
-            "EXRECRODS": "交易所充提记录",
-            "RECRODS":"跨链充提记录"
-        },
-        "type": {
-            "native": "原生代币",
-            "crossGate": "跨链代币"
-        },
-        "assetType":{
-            "TOTAL":"全部资产估值",
-            "EX":"交易所资产估值",
-            "WALLET":"钱包资产估值"
-        },
-        "addToken": {
-            "title": "添加代币",
-            "placeholder": "请输入代币名称",
-            "lTxt": "取消",
-            "rTxt": "添加"
-        },
-        "tokenInfo": {
-            "tabName": "详情",
-            "title": "{tokenSymbol}代币信息",
-            "saveGate": "保存修改",
-            "labels": {
-                "tokenId": "TokenID",
-                "title": "{tokenSymbol}代币地址",
-                "address": "铸币地址",
-                "tokenName": "代币名称",
-                "totalSupply": "发行总量",
-                "decimals": "小数位",
-                "isReIssuable": "类型",
-                "time": "发行日期"
-            },
-            "reIssuable": {
-                "true": "可增发",
-                "false": "不可增发"
-            }
-        },
-        "gateInfo": {
-            "gateSetting":"点击设置网关",
-            "tabName": "网关详情",
-            "selfdefined": "自定义网关",
-            "officalNet": "网关官网",
-            "introduction": "网关介绍",
-            "token": "网关发行代币",
-            "setting": "网关设置",
-            "settingPlaceholder": "请输入网关链接地址",
-            "nodeDesc":"网关节点使用说明："
-        },
-        "depositRecord": {
-            "tabName": "充值记录",
-            "heads": ["时间", "金额", "状态", "VITE链Hash", "{outChain}链Hash"],
-            "statusMap": {
-                "OPPOSITE_PROCESSING": "{outChain}链待确认",
-                "OPPOSITE_CONFIRMED": "网关已接收",
-                "TOT_CONFIRMED": "已完成",
-                "BELOW_MINIMUM": "VITE链待确认",
-                "TOT_PROCESSING": "已完成"
-            }
-        },
-        "withdrawRecord": {
-            "tabName": "提现记录",
-            "heads": ["时间", "金额", "状态", "VITE链Hash", "{outChain}链Hash"],
-            "statusMap": {
-                "TODO": "VITE链待确认",
-                "TOT_PROCESSING": "VITE链确认",
-                "TOT_NOT_RECEIVED": "转出失败",
-                "TOT_CONFIRMED": "网关已接收",
-                "OPPOSITE_PROCESSING": "{outChain}链待确认",
-                "OPPOSITE_CONFIRMED": "已完成"
-            }
-        },
-        "receive": {
-            "title": "接收",
-            "codeTips": "请扫码向我转入{tokenSymbol}",
-            "addressTitle": "接收地址",
-            "amountTitle": "请输入接收金额",
-            "amountPlaceholder": "请输入接收金额"
-        },
-        "charge": {
-            "title": "跨链转入",
-            "addrErr":"网关节点出错，请检查网关设置",
-            "addressTitle": "转入地址",
-            "codeTips": "请扫描二维码充值,请使用支持{tokenSymbol}的钱包转账",
-            "tips": [
-                "跨链转入操作是将{tokenSymbol}跨链映射至VITE网络，转入后您依然可以转出",
-                "通过该存款地址只能发送{tokenSymbol},且金额不能低于{min}",
-                "交易确认之后，预计5分钟后到账，请耐心等待"
-            ]
-        },
-        "withdraw": {
-            "title": "跨链转出",
-            "balanceErrMap": {
-                "notEnough": "余额不足",
-                "overMax": "转出金额需小于 {max}",
-                "lessMin": "转出金额需大于 {min}"
-            },
-            "feeTips": "手续费收取金额由网关设置",
-            "addressErr": "地址格式错误",
-            "labels": {
-                "balance": "账户余额",
-                "address": "转出地址",
-                "amount": "转出金额",
-                "fee": "转出手续费",
-                "all": "全部"
-            },
-            "amountPlaceholder": "请输入转出金额，最小不少于{min}",
-            "addressPlaceholder": "请输入转出地址",
-            "successTips": "转出请求已发送",
-            "failTips":"网关节点出错，请检查网关设置"
-        },
-        "nodeErr": "网关节点无效，请检查网关设置"
+    "title": "当前委托",
+    "side": {
+      "1": "卖",
+      "0": "买"
     },
-    "assets": {
-        "title": "资产"
-    },
-    "walletConversion": {
-        "title": "置换VITE",
-        "help": {
-            "title": "快速理解置换VITE",
-            "text": "通过VITE置换功能，可以将以太网络上的ERC20 VITE代币置换到VITE网络中，在VITE网络中可以投票官方超级节点赚取奖励，年化收益达20%。在置换过程中，你的ERC20 VITE将被转入黑洞地址：{blackAddr}，当黑洞地址收到交易并被确认后，置换系统将为您发放等值的VITE至您的VITE地址中。在置换过程中，您需要将ERC20的VITE 与 少量ETH（用于置换消耗gas）转入至VITE钱包的ETH地址中。"
-        },
-        "gas": "矿工费用",
-        "record": "置换记录",
-        "aboutPrice": "约 {amount} ETH",
-        "note": "官方提示：提交置换后请您耐心等待，置换VITE到账需要等以太交易被确认30个块，以太交易可以在置换记录中查看",
-        "exchange": {
-            "vite": "置换VITE",
-            "viteAddr": "接收VITE地址",
-            "viteAmount": "置换VITE金额",
-            "btn": "确认置换",
-            "success": "置换请求成功，预计以太网交易被确认后20分钟到账"
-        }
-    },
-    "wallet": {
-        "title": "配额管理",
-        "help": {
-            "title": "快速理解配额"
-        },
-        "transfer": "转账",
-        "getTestToken": "获取测试代币",
-        "transDetail": "查看账户更多交易详情",
-        "address": "我的地址",
-        "fundFloat": "待接收",
-        "pend": "笔交易待接收",
-        "inAddress": "接收账户地址",
-        "sum": "金额",
-        "remarks": "备注",
-        "totalAsset": "总资产",
-        "remarksLong": "剩余字节：{len}",
-        "placeholder": {
-            "amount": "请输入金额",
-            "remarks": "请输入备注",
-            "addr": "请输入地址"
-        },
-        "hint": {
-            "token": "系统已向您转入一笔VITE测试代币，请注意接收",
-            "tErr": "获取测试代币失败！",
-            "amount": "金额必须大于0"
-        },
-        "trans": {
-            "powErr": "运行PoW错误，请重新发起转账",
-            "powTransErr": "PoW获取的配额不足，建议您进行抵押VITE获取配额"
-        }
-    },
-    "walletQuota": {
-        "title": "配额管理",
-        "help": {
-            "title": "快速理解配额"
-        },
-        "myQuota": "我的当前配额",
-        "maxTxNum": "最大交易笔数",
-        "beneficialAddr": "配额受益地址",
-        "fromAddr": "抵押金额扣除地址",
-        "time": "抵押锁定时长",
-        "aboutDays": "约{day}天",
-        "amountPlaceholder": "请输入抵押金额，最小{num}vite",
-        "limitAmt": "抵押金额需填写大于等于{num}的数字",
-        "addrPlaceholder": "请输入获取配额地址",
-        "inputWithdrawAmount": "请输入取回金额",
-        "pledgeFail": "提交失败",
-        "canclePledgeFail": "操作失败",
-        "maturity": "抵押已到期",
-        "minAmt": "最小取回金额为 {num} VITE",
-        "gotoStake": "请先抵押足够VITE",
-        "maxAmt": "取回金额应在 [{minAmount}, {maxAmount}] 之内",
-        "cancelLimitAmt": "抵押金额不能小于{num}",
-        "withdrawalStaking": "取回抵押",
-        "myAddr": "我的",
-        "confirm": {
-            "help": {
-                "t1": "什么是配额",
-                "txt1": "在Vite系统中，用户不是通过支付手续费的方式来购买一次交易所需的燃料，而是通过一种基于配额的模型来获取计算资源，发送交易所需配额=基础配额(请求)+配额(附带的文本资料)，接受交易所需配额=基础配额(响应)。这个基于配额的资源配置协议允许用户通过两种方式来获取更高的资源配额：抵押Vite获取配额、运行PoW",
-                "t2": "什么是抵押",
-                "txt2": "在Vite系统中，用户可以抵押vite获取一定数量的配额，抵押最小值为134vite，没有最大抵押上限；同时支持A地址抵押一部分vite并将获得的配额分配给B地址；用户申请抵押后，会将这笔vite发送到智能合约地址而不是某一个用户，且只有申请抵押用户有权限支配抵押的金额",
-                "t3": "什么是PoW",
-                "txt3": "工作量证明(Proof of Work，简称PoW)，简单理解就是一份证明，用来确认你做过一定量的工作，同样也是应对拒绝服务攻击和其他服务滥用的经济对策。它要求发起者进行一定量的运算，也就意味着需要消耗计算机一定的时间；在VITE系统中，用户可以通过运行PoW获得免费的配额，用户可以通过获得的配额进行一次不带任何备注信息的交易"
-            },
-            "cancel": {
-                "describe": "目前抵押金额为 {amount} VITE，请确认取回金额",
-                "rightBtn": "确认取回",
-                "leftBtn": "暂不取回"
-            },
-            "submit": {
-                "describe": "确认是否抵押 {amount} VITE 获取配额，抵押生效约3天之后才可取回",
-                "rightBtn": "确认抵押",
-                "leftBtn": "再等会儿"
-            }
-        },
-        "list": {
-            "title": "我的抵押列表",
-            "total": "总计抵押 {amount} VITE",
-            "amount": "抵押金额",
-            "withdrawTime": "预计到期时间",
-            "unexpired": "还未到达取回时间，暂时无法取回抵押",
-            "vip": "此抵押为您开通交易所VIP金额，请前往交易所撤销VIP",
-            "mining": "此抵押为您交易所抵押挖矿金额，请前往交易所挖矿页面取回",
-            "other": "此抵押为您通过其他方式抵押，不支持在此处取回"
-        }
-    },
-    "walletTransList": {
-        "title": "交易记录",
-        "tType": {
-            "title": "交易类型",
-            "symbol": "类型"
-        },
-        "status": {
-            "title": "状态",
-            "unconfirmed": "待确认",
-            "confirms": "确认数",
-            "confirmed": "已确认"
-        },
-        "timestamp": "时间戳",
-        "tAddress": "交易方地址",
-        "sum": "金额"
-    },
-    "walletSBP": {
-        "title": "SBP",
-        "help": {
-            "title": "关于SBP",
-            "text": "SBP（Snapshot Block Producer）为具有出块权利的节点，您可以通过抵押一定数量的VITE注册成为SBP候选节点；每轮（时长75秒）会选举出25个SBP，每轮得票数前25名中随机选出23个作为SBP，得票数26-100名中随机选出2个作为SBP；出块奖励的50%将作为按块奖励分配给该块的出块节点，另外50%将作为按票奖励分配给该轮次得票数排名前100的节点。<br/><br/>一个注册地址（抵押地址）可以注册多个出块节点（节点名称），节点名称被一个注册地址使用后不能再被其他注册地址使用；节点名称可以更换出块地址，出块地址被一个节点名称使用后不能再被其他节点名称使用。"
-        },
-        "register": "注册SBP",
-        "cancel": "撤销注册SBP",
-        "cancelBtn": "撤销",
-        "rewardBtn": "提取奖励",
-        "noReward": "暂无奖励",
-        "rewardConfirm": {
-            "title": "提取奖励",
-            "describe1": "每天 13:00:00 (UTC+8)更新可提取奖励金额，截止到{time} 您可提取奖励金额为",
-            "describe2": "挖矿奖励明细查询可",
-            "describe3": "点击此处",
-            "describe4": "提交提取奖励后，奖励金额将发送至您当前Vite Web钱包地址，请在钱包首页查看，请勿重复提取.",
-            "leftBtn": "暂不提取",
-            "rightBtn": "全部提取"
-        },
-        "confirm": {
-            "title": "注册SBP候选节点",
-            "describe": "提交注册后，当前地址的{amount}VITE将被锁定约90天，解锁后可以撤销注册，抵押金额将退回抵押地址",
-            "leftBtn": "暂不注册",
-            "rightBtn": "确认注册",
-            "edit": {
-                "title": "更换出块地址",
-                "placeholder": "请输入新的出块地址",
-                "btn": "确认修改"
-            }
-        },
-        "section1": {
-            "title": "提交注册",
-            "nodeName": "节点名称",
-            "producerAddr": "出块地址",
-            "quotaAddr": "抵押地址",
-            "quotaTime": "抵押周期",
-            "time": "7776000个快照块（约90天）",
-            "confirmBtn": "提交注册",
-            "namePlaceholder": "请输入节点名称",
-            "nameHint": "40个字符以内, 支持大小写英文字母、数字、'_'、'.'",
-            "nameErr": "节点名称不合法",
-            "nameUsed": "此节点名称已被注册",
-            "addrPlaceholder": "请输入快照块出块地址",
-            "addrHint": "出块地址必须是全节点地址且保持运行状态",
-            "addrErr": "出块地址不合法",
-            "addrUsed": "此出块地址已被使用",
-            "registerSuccess": "注册请求已发出",
-            "registerFail": "注册请求失败"
-        },
-        "section2": {
-            "title": "注册信息",
-            "update": "修改",
-            "updateFail": "修改请求发送失败",
-            "cancel": "撤销",
-            "cancelFail": "撤销请求发送失败",
-            "expireDate": "预计到期时间: {time}",
-            "cancelConfirm": {
-                "title": "撤销注册SBP",
-                "describe": "撤销后您的抵押金额将退回抵押地址；若想成为SBP，您需重新提交注册申请"
-            }
-        }
-    },
-    "walletVote": {
-        "title": "投票",
-        "help": {
-            "title": "关于投票",
-            "text": "您可以参与投票选出共25个SBP（Snapshot Block Producer），每轮投票时间共75秒，您的投票数为投票地址所拥有的VITE数量，默认为您保持上一轮的投票意向；每轮得票量排名前25名的候选节点中随机23个及排名26-100名的候选节点中随机2个共25个节点将当选SBP。"
-        },
-        "toReward": "查看我的奖励",
-        "voting": "投票",
-        "search": "请输入候选节点名称或者出块地址",
-        "addrNoExistErr": "您的地址未发生过交易，暂不能投票",
-        "revokeVoting": "撤销投票",
-        "section1": {
-            "title": "我的投票",
-            "head": [
-                "节点名称",
-                "节点状态",
-                "我的投票",
-                "投票状态",
-                "操作"
-            ],
-            "nodeStatusMap": {
-                "1": "正在候选",
-                "2": "停止候选"
-            },
-            "voteStatusMap": {
-                "voted": "投票成功",
-                "voting": "正在投票中",
-                "canceling": "正在撤销中",
-                "voteNotWork": "投票作废"
-            },
-            "hoverHelp": "您投票的{nodeName}已经取消注册，您可以直接重新投票、或者撤销投票；如果您不重新投票或撤销投票，{nodeName}重新注册后，您原来的投票将恢复生效。",
-            "confirm": {
-                "cancelText": "暂不撤销",
-                "submitText": "确认撤销"
-            },
-            "revoke": "撤销投票",
-            "operateBtn": "撤销",
-            "cancelVoteErr": "撤销投票失败，请重试"
-        },
-        "section2": {
-            "title": "候选节点列表",
-            "head": [
-                "排名",
-                "节点名称",
-                "出块地址",
-                "当前票数",
-                "操作"
-            ],
-            "confirm": {
-                "normal": {
-                    "cancelText": "暂不投票",
-                    "submitText": "确认投票",
-                    "content": "您只能给一个节点投票，确认投票给{name}吗？"
-                },
-                "cover": {
-                    "content": "您已经投票给{nodeName}，请确认是否覆盖当前投票",
-                    "cancelText": "确认",
-                    "submitText": "取消"
-                }
-            },
-            "noSearchData": "无结果，换个输入试试",
-            "operateBtn": "投票",
-            "voteErr": "投票失败，请重试"
-        }
-    },
-    "tradeCenter": {
-        "title": "交易中心"
-    },
-    "trade": {
-        "search": "查询",
-        "txPair": "交易对",
-        "price": "价格",
-        "upDown": "涨跌幅",
-        "txNum": "交易量",
-        "quantityTitle": "成交额({quantity})",
-        "priceTitle": "价格({price})",
-        "amountTitle": "数量({amount})",
-        "amountTable": "数量",
-        "amount": "成交额",
-        "newOrderSuccess": "提单成功",
-        "newOrderFail": "提单失败",
-        "depthView": "深度图",
-        "klineView": "k线图",
-        "txPairDetail": {
-            "title": "交易对详情",
-            "24h": "24小时数据",
-            "openPrice": "开盘价",
-            "quantity": "市场币交易量",
-            "amount": "基准币交易量",
-            "status": "当前状态",
-            "latest": "最新价",
-            "buy": "买一价",
-            "sell": "卖一价",
-            "diff": "买卖价差"
-        },
-        "dexToken": {
-            "title": "开通交易对",
-            "fee": "上币费",
-            "link": "前往浏览器查询",
-            "market": "开通市场",
-            "name": "开通代币名称",
-            "id": "开通代币TokenID",
-            "hint": "交易对开通成功后，如果想要添加网关标识（如BTC.V），请发邮件联系我们：info@vite.org",
-            "btn": "提交申请",
-            "search": "请输入代币名称",
-            "reqSuccess": "提交申请成功，请稍后在市场中查看",
-            "reqError": "上币失败，请稍后重试"
-        },
-        "buy": {
-            "title": "买入{token}",
-            "price": "买入价({token})",
-            "quantity": "买入量({token})"
-        },
-        "sell": {
-            "title": "卖出{token}",
-            "price": "卖出价({token})",
-            "quantity": "卖出量({token})"
-        },
-        "head": {
-            "latestPrice": "最新价",
-            "updown": "24h涨跌",
-            "highPrice": "24h最高价",
-            "lowPrice": "24h最低价",
-            "quantity": "24h成交量",
-            "tokenName": "代币名称",
-            "originalSymbol": "代币简称",
-            "gateway": "发行网关",
-            "website": "官网",
-            "explorer": "区块浏览器",
-            "overview": "代币描述",
-            "tokenId": "TokenID",
-            "publisher": "发行者",
-            "total": "总金额",
-            "tokenDigit": "小数位数",
-            "publisherDate": "发行日期",
-            "type": "类型",
-            "tokenType0": "可增发",
-            "tokenType1": "永不增发"
-        },
-        "latestTx": {
-            "title": "最新交易",
-            "time": "时间"
-        },
-        "depth": {
-            "buy": "买入",
-            "sell": "卖出",
-            "all": "全部"
-        },
-        "noData": {
-            "favorite": "您还未添加任何自选",
-            "search": "暂无搜索结果"
-        },
-        "limitPrice": {
-            "title": "限价",
-            "fee": "手续费",
-            "text": "此页面为交易预览信息，请登录后进行交易",
-            "validAmountDigit": "成交额需大于{amount}{token}",
-            "validMaxDigit": "最多{digit}位小数",
-            "priceNotNull": "金额不能为空",
-            "amountNotNull": "成交额不能为空",
-            "quantityNotNull": "数量不能为空",
-            "bigger0": "数额必须大于0",
-            "cancelVip": "取消",
-            "openVip": "开通",
-            "dexFee": "交易所基础费率：{fee}",
-            "operatorFee": "运营商收取费率：{fee}",
-            "vipFee": "VIP特权抵扣：{fee}"
-        },
-        "vipConfirm": {
-            "cancelVip": "取消VIP",
-            "openVip": "开通VIP",
-            "openStakingAmount": "开通VIP抵押金额",
-            "cancelStakingAmount": "可取回抵押金额",
-            "noBalance": "交易所可用余额不足",
-            "openHint": "VIP开通后，可享有降低0.1%手续费特权，开通VIP需抵押10000VITE，30天后可手动取回",
-            "cancelHint": "预计 {time} 可取回抵押，取回抵押后，您将无法再使用VIP特权",
-            "openSuccess": "申请开通VIP成功，稍后生效",
-            "openFail": "开通失败",
-            "cancelSuccess": "申请取消VIP成功",
-            "cancelFail": "取消失败"
-        }
-    },
-    "tradeAssets": {
-        "title": "资产管理",
-        "search": "请输入代币名称",
-        "operate": "操作",
-        "all": "全部",
-        "confirmTable": {
-            "title": "充提记录",
-            "heads": ["日期", "代币名称", "交易类型", "交易金额"]
-        },
-        "pwdConfirm": {
-            "cancelTxt": "取消"
-        },
-        "table": {
-            "heads": [
-                "代币名称",
-                "交易所总余额",
-                "交易所可用余额",
-                "交易所冻结余额",
-                "价值"
-            ],
-            "rowMap": {
-                "recharge": "充值至交易所",
-                "withdraw": "提现至钱包",
-                "detail": "充提记录",
-                "sideMap":{
-                    "1":"充值",
-                    "2":"提现"
-                }
-            }
-        },
-        "confirmrecharge": {
-            "successToast":"充值成功",
-            "failToast":"充值失败",
-            "title": "充值至交易所",
-            "lable1": "钱包余额",
-            "lable2": "充币金额",
-            "tips": "钱包账户余额不足",
-            "placeholder": "请输入充币金额",
-            "btn": "充值至交易所"
-        },
-        "confirmwithdraw": {
-            "successToast":"提币成功",
-            "failToast":"提币失败",
-            "title": "提现至钱包",
-            "lable1": "可提币余额",
-            "lable2": "提币金额",
-            "tips": "钱包账户余额不足",
-            "placeholder": "请输入提币金额",
-            "btn": "提现至钱包"
-        },
-        "zero": "隐藏小额代币"
-    },
-    "tradeOpenOrders": {
-        "cancelErr": "您操作太快了, 请稍候重试",
-        "confirm":{
-            "successToast":"撤销交易发送成功",
-            "failToast":"撤销交易发送失败",
-            "submitTxt":"确认撤销",
-            "cancelTxt":"取消",
-            "title": "撤销委托",
-            "content": "请确认是否撤销当前委托"
-        },
-        "title": "当前委托",
-        "side": {
-            "1": "卖",
-            "0": "买"
-        },
-        "table": {
-            "heads": [
-                "委托时间",
-                "市场",
-                "方向",
-                "委托价格",
-                "委托数量",
-                "已成交",
-                "成交率",
-                "成交均价"
-            ],
-            "rowMap": {
-                "cancel": "撤销"
-            }
-        }
-    },
-    "tradeOrderHistory": {
-        "title": "历史委托",
-        "hint": {
-            "fdate": "请选择起始日期",
-            "tdate": "请选择终止日期",
-            "dateErr": "终止日期必须晚于起始日期"
-        },
-        "side": {
-            "1": "卖",
-            "0": "买"
-        },
-        "confirmTable": {
-            "title":"成交记录",
-            "heads": [
-                "成交时间",
-                "成交价",
-                "成交量",
-                "手续费",
-                "成交额"
-            ]
-        },
-        "table": {
-            "heads": [
-                "委托时间",
-                "市场",
-                "方向",
-                "委托价格",
-                "委托数量",
-                "已成交",
-                "成交率",
-                "成交均价",
-                "手续费",
-                "状态"
-            ],
-            "rowMap": {
-                "statusMap": {
-                    "1": "委托中",
-                    "2": "已完成",
-                    "3": "已撤销",
-                    "4": "提单失败"
-                },
-                "detail": "查看明细"
-            }
-        },
-        "filter": {
-            "start": "起始日期",
-            "end": "终止日期",
-            "type": "币种",
-            "side": "方向",
-            "buy": "买",
-            "sell": "卖",
-            "search": "搜索",
-            "reset": "重置"
-        }
-    },
-    "tradeMining": {
-        "title": "挖矿",
-        "addQuota": "新增抵押挖矿",
-        "add": "增加",
-        "withdraw": "取回",
-        "tbHead": {
-            "date": "日期",
-            "fee": "交易手续费金额",
-            "mining": "挖矿金额",
-            "pledge": "抵押金额"
-        },
-        "txTitle": "交易挖矿总收益",
-        "quotaTitle": "抵押挖矿总收益",
-        "addHint": "每日约13:00(UTC+8)计算抵押挖矿收益；抵押生效后，您可3天后可手动取回",
-        "withdrawHint": "取回后，您将无法再挖矿VX",
-        "addTitle": "抵押VITE挖矿",
-        "withdrawTitle": "取回抵押VITE",
-        "addPlaceHolder": "请输入抵押金额，最少134VITE",
-        "withdrawPlaceHolder": "请输入取回金额，最少134VITE",
-        "addBtn": "提交抵押",
-        "withdrawBtn": "确认取回",
-        "stakingBalance": "可取回抵押余额"
-    },
-    "tradeDividend": {
-        "title": "分红",
-        "poolTitle": "手续费分红池",
-        "listTitle": "我的分红",
-        "date": "日期",
-        "VX": "持有VX",
-        "coin": "分红币种",
-        "amount": "分红金额",
-        "price": "分红总估值"
+    "table": {
+      "heads": [
+        "委托时间",
+        "市场",
+        "方向",
+        "委托价格",
+        "委托数量",
+        "已成交",
+        "成交率",
+        "成交均价"
+      ],
+      "rowMap": {
+        "cancel": "撤销"
+      }
     }
+  },
+  "tradeOrderHistory": {
+    "title": "历史委托",
+    "hint": {
+      "fdate": "请选择起始日期",
+      "tdate": "请选择终止日期",
+      "dateErr": "终止日期必须晚于起始日期"
+    },
+    "side": {
+      "1": "卖",
+      "0": "买"
+    },
+    "confirmTable": {
+      "title": "成交记录",
+      "heads": ["成交时间", "成交价", "成交量", "手续费", "成交额"]
+    },
+    "table": {
+      "heads": [
+        "委托时间",
+        "市场",
+        "方向",
+        "委托价格",
+        "委托数量",
+        "已成交",
+        "成交率",
+        "成交均价",
+        "手续费",
+        "状态"
+      ],
+      "rowMap": {
+        "statusMap": {
+          "1": "委托中",
+          "2": "已完成",
+          "3": "已撤销",
+          "4": "提单失败"
+        },
+        "detail": "查看明细"
+      }
+    },
+    "filter": {
+      "start": "起始日期",
+      "end": "终止日期",
+      "type": "币种",
+      "side": "方向",
+      "buy": "买",
+      "sell": "卖",
+      "search": "搜索",
+      "reset": "重置"
+    }
+  },
+  "tradeMining": {
+    "title": "挖矿",
+    "addQuota": "新增抵押挖矿",
+    "add": "增加",
+    "withdraw": "取回",
+    "tbHead": {
+      "date": "日期",
+      "fee": "交易手续费金额",
+      "mining": "挖矿金额",
+      "pledge": "抵押金额"
+    },
+    "txTitle": "交易挖矿总收益",
+    "quotaTitle": "抵押挖矿总收益",
+    "addHint": "每日约13:00(UTC+8)计算抵押挖矿收益；抵押生效后，您可3天后可手动取回",
+    "withdrawHint": "取回后，您将无法再挖矿VX",
+    "addTitle": "抵押VITE挖矿",
+    "withdrawTitle": "取回抵押VITE",
+    "addPlaceHolder": "请输入抵押金额，最少134VITE",
+    "withdrawPlaceHolder": "请输入取回金额，最少134VITE",
+    "addBtn": "提交抵押",
+    "withdrawBtn": "确认取回",
+    "stakingBalance": "可取回抵押余额"
+  },
+  "tradeDividend": {
+    "title": "分红",
+    "poolTitle": "手续费分红池",
+    "listTitle": "我的分红",
+    "date": "日期",
+    "VX": "持有VX",
+    "coin": "分红币种",
+    "amount": "分红金额",
+    "price": "分红总估值"
+  }
 }

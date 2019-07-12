@@ -9,7 +9,7 @@
                 @click="toggleTab('vb')"
                 :key="'tb'"
             >
-                {{ $t("existingAcc") }}
+                {{ $t("assets.vb.title") }}
             </div>
             <div v-show="isHaveList"
                  class="btn-item __pointer"

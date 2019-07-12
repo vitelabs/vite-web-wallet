@@ -3,7 +3,7 @@ import { setCurrHDAcc, getCurrHDAcc } from './index';
 import store from 'store';
 import router from 'router';
 
-export const BRIDGE = 'ws://hurrytospring.com:5001';
+export const BRIDGE = 'wss://biforst.vitewallet.com:9456';
 export class VB extends Connector {
     constructor(opts, meta) {
         super(opts, meta);
@@ -25,7 +25,6 @@ export class VB extends Connector {
             router.push({ name });
         });
         this.on('disconnect', () => {
-            this.destroy();
             if (getCurrHDAcc() && getCurrHDAcc().isBifrost) {
                 getCurrHDAcc().lock();
                 store.commit('setCurrHDAccStatus');
@@ -39,7 +38,15 @@ export class VB extends Connector {
     }
 
     async sendVbTx(...args) {
-        return this.sendCustomRequest({ method: 'vite_signAndSendTx', params: args });
+        return new Promise((res, rej) => {
+            this.on('disconnect', () => {
+                rej({ code: 11020, message: '链接断开' });
+            });
+
+            this.sendCustomRequest({ method: 'vite_signAndSendTx', params: args }).then(r => res(r)).catch(e => {
+                rej(e);
+            });
+        });
     }
 }
 export let vbInstance = null;
