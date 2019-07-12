@@ -457,7 +457,7 @@ export default {
             const minPrice = BigNumber.toMin(price, decimals);
 
             if (this.orderType === 'buy') {
-                minAmount = BigNumber.dividedCeil(minAmount, 1 + this.fee, 0);
+                minAmount = BigNumber.dividedToNumber(minAmount, 1 + this.fee, 0);
             }
 
             // const _qSmall = BigNumber.dividedToNumber(minAmount, minPrice, this.ftokenDigit);
