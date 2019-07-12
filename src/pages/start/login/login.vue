@@ -58,7 +58,7 @@
                         @click="toggleAccountList"
                     >
                         <div
-                            v-show="currAcc && !currAcc.activeAddr"
+                            v-show="currAcc && !currAcc.activeAddr&&!currAcc.isBifrost"
                             class="__btn __btn_input"
                         >
                             <div class="name __ellipsis">
@@ -163,7 +163,7 @@ export default {
     },
     data() {
         const list = getList();
-
+        console.log(list)
         return {
             id: this.$route.params.id,
             currAcc: {},
