@@ -1,26 +1,20 @@
 <template>
-    <history-table class="tb" :isShowPage="false" :list="data"></history-table>
+    <history-table class="tb" :isShowPage="false" :list="historyOrderList"></history-table>
 </template>
 
 <script>
-import { subTask } from 'utils/proto/subTask';
+import { order } from 'services/trade';
 import historyTable from './historyTable.vue';
 
-let task = null;
+const pageSize = 30;
 
 export default {
     components: { historyTable },
     data() {
-        return {
-            data: [],
-            timer: null
-        };
+        return { historyOrderList: [] };
     },
     mounted() {
-        this.init();
-    },
-    destroyed() {
-        this.unsubscribe();
+        this.fetchHistory();
     },
     computed: {
         defaultAddr() {
@@ -28,51 +22,59 @@ export default {
         },
         activeTxPair() {
             return this.$store.state.exchangeActiveTxPair.activeTxPair;
-        }
-    },
-    watch: {
-        activeTxPair() {
-            this.init();
         },
-        defaultAddr() {
-            this.init();
+        latestOrder() {
+            return this.$store.state.exchangeLatestOrder.latestOrder;
         },
         currentMarket() {
             return this.$store.state.exchangeMarket.currentMarket;
         }
     },
-    methods: {
-        init() {
-            this.unsubscribe();
-            this.subscribe();
+    watch: {
+        activeTxPair() {
+            this.fetchHistory();
         },
-        subscribe() {
-            task = task || new subTask('orderQueryHistory', ({ args, data }) => {
-                if (args.address !== this.defaultAddr || this.activeTxPair.symbol !== args.symbol) {
+        defaultAddr() {
+            this.fetchHistory();
+        },
+        latestOrder() {
+            if (!this.latestOrder
+                || this.latestOrder.symbol !== this.currentMarket
+                || this.latestOrder.address !== this.defaultAddr) {
+                return;
+            }
+
+            const index = this.historyOrderList.findIndex(v => v.orderId === this.latestOrder.orderId);
+            if (index < 0) {
+                this.historyOrderList.push(this.latestOrder);
+            } else {
+                this.historyOrderList[index] = this.latestOrder;
+            }
+
+            this.historyOrderList = this.historyOrderList.sort((a, b) => b.createTime - a.createTime);
+            this.historyOrderList.slice(0, pageSize);
+            this.historyOrderList = [].concat(this.historyOrderList);
+        }
+    },
+    methods: {
+        fetchHistory() {
+            this.historyOrderList = [];
+            const address = this.defaultAddr;
+            const currentMarket = this.currentMarket;
+
+            order({
+                address,
+                offset: 0,
+                limit: pageSize,
+                ...this.activeTxPair
+            }).then(data => {
+                if (this.defaultAddr !== address || currentMarket !== this.currentMarket) {
                     return;
                 }
-
-                data = data.order || data;
-
-                this.data = data || [];
-                // this.data.forEach(ele => {
-                //     if (ele.status === 4) {
-                //         this.$toast(this.$t('tradeOrderHistory.table.rowMap.statusMap')[4]);
-                //     }
-                // });
-            }, 2000);
-
-            this.activeTxPair && task.start(() => {
-                return {
-                    symbol: this.currentMarket,
-                    address: this.defaultAddr,
-                    ...this.activeTxPair
-                };
+                this.historyOrderList = data.order || [];
+            }).catch(err => {
+                console.warn(err);
             });
-        },
-        unsubscribe() {
-            task && task.stop();
-            task = null;
         }
     }
 };

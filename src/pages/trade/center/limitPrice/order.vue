@@ -61,7 +61,7 @@
         <div class="order-btn __pointer" :class="{
             'red': orderType === 'sell',
             'green': orderType === 'buy',
-            'gray': isLoading || amountErr || priceErr || quantityErr
+            'gray': isLoading || amountErr || priceErr || quantityErr || activeTxPairIsClose
         }" @click="_clickBtn">{{ $t(`trade.${orderType}.title`, { token: ftokenShow }) }}</div>
     </div>
 </template>
@@ -300,6 +300,15 @@ export default {
 
             const digit = fDigit > pariDigit ? pariDigit : fDigit;
             return digit > maxDigit ? maxDigit : digit;
+        },
+        closeMarket() {
+            return this.$store.state.exchangeMarket.marketClosed;
+        },
+        activeTxPairIsClose() {
+            if (!this.activeTxPair) {
+                return true;
+            }
+            return this.closeMarket.find(v => v.symbol === this.activeTxPair.symbol);
         }
     },
     methods: {
@@ -454,7 +463,7 @@ export default {
             const minPrice = BigNumber.toMin(price, decimals);
 
             if (this.orderType === 'buy') {
-                minAmount = BigNumber.dividedCeil(minAmount, 1 + this.fee, 0);
+                minAmount = BigNumber.dividedToNumber(minAmount, 1 + this.fee, 0);
             }
 
             // const _qSmall = BigNumber.dividedToNumber(minAmount, minPrice, this.ftokenDigit);
@@ -495,7 +504,7 @@ export default {
         },
 
         _clickBtn() {
-            if (this.isLoading) {
+            if (this.isLoading || this.activeTxPairIsClose) {
                 return;
             }
 

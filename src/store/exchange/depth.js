@@ -43,8 +43,8 @@ const actions = {
             }
 
             commit('exSetDepthLoading', false);
-            commit('exSetDepthBuy', data && data.asks ? data.asks || [] : []);
-            commit('exSetDepthSell', data && data.bids ? data.bids || [] : []);
+            commit('exSetDepthSell', data && data.asks ? data.asks || [] : []);
+            commit('exSetDepthBuy', data && data.bids ? data.bids || [] : []);
         }, time);
 
         depthTask.start(() => getters.exActiveTxPair);

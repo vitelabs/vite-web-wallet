@@ -225,6 +225,7 @@ export default {
     height: 50%;
     display: flex;
     flex-direction: column;
+    min-height: 350px;
 
     .content {
         flex: 1;

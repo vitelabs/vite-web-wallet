@@ -38,6 +38,12 @@ router.beforeEach((to, from, next) => {
         }
     }
 
+    if ((!from.name || from.name !== 'tradeOperator') && to.name === 'tradeTxPairManage') {
+        router.replace({ name: 'tradeOperator' });
+        return;
+    }
+
+
     // If want to go start, and from isn't start***, record from.
     if (to.name && to.name === 'start' && from.name && from.name.indexOf('start') === -1) {
         store.commit('setLastPage', from.name);

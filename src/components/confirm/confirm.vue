@@ -93,7 +93,6 @@ export default {
     },
     computed: {
         classStr() {
-            console.log(this.size);
             return `${ this.size } ${ this.showMask ? 'gray' : '' }`;
         }
     },
