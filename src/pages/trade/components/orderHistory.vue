@@ -25,6 +25,9 @@ export default {
         },
         latestOrder() {
             return this.$store.state.exchangeLatestOrder.latestOrder;
+        },
+        currentMarket() {
+            return this.$store.state.exchangeMarket.currentMarket;
         }
     },
     watch: {
@@ -33,9 +36,6 @@ export default {
         },
         defaultAddr() {
             this.fetchHistory();
-        },
-        currentMarket() {
-            return this.$store.state.exchangeMarket.currentMarket;
         },
         latestOrder() {
             if (!this.latestOrder
