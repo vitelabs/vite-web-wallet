@@ -152,7 +152,7 @@ export default {
             this.addrErr = '';
         },
 
-        validTx: execWithValid(() => {
+        validTx: execWithValid(function(){
             this.testAddr();
             if (this.btnUnuse) {
                 return;
