@@ -1,9 +1,14 @@
 <template>
     <div class="head">
         <ul class="tab-list-wrapper">
-            <li v-for="(tab, index) in tabList" :key="index"
-                class="tab __pointer" :class="{ 'active': $route.name === tab }"
-                @click="go(tab)" > {{ $t(`${tab}.title`) }}
+            <li
+                v-for="(tab, index) in tabList"
+                :key="index"
+                class="tab __pointer"
+                :class="{ active: $route.name === tab }"
+                @click="go(tab)"
+            >
+                {{ $t(`${tab}.title`) }}
             </li>
         </ul>
 
@@ -13,11 +18,19 @@
                 {{ isHaveUsers ? $t("unlockAcc") : $t("login") }}
             </div>
             <div v-show="!isLogin" @click="dexChange" class="tab __pointer">
-                {{ isHaveUsers ? $t('changeAcc') : $t('register') }}</div>
-            <div v-show="isHaveUsers && $route.name.indexOf('trade') !== -1" class="tab __pointer"
-                 @click="showToken">
-                {{ $t('dexToken') }}</div>
-            <switch-addr class="switch-tab menu" v-show="$route.name !== 'assets'" ></switch-addr>
+                {{ isHaveUsers ? $t("changeAcc") : $t("register") }}
+            </div>
+            <div
+                v-show="isHaveUsers && $route.name.indexOf('trade') !== -1"
+                class="tab __pointer"
+                @click="showToken"
+            >
+                {{ $t("dexToken") }}
+            </div>
+            <switch-addr
+                class="switch-tab menu"
+                v-show="$route.name !== 'assets'"
+            ></switch-addr>
         </ul>
 
         <dex-token v-if="isShowDexToken" :close="closeToken"></dex-token>
@@ -25,11 +38,10 @@
 </template>
 
 <script>
-import { StatusMap } from 'wallet';
-import dexToken from 'components/dexToken';
-import switchAddr from 'components/switchAddress';
-import { pwdConfirm } from 'components/password/index.js';
-import { execWithValid } from 'utils/execWithValid';
+import { StatusMap } from "wallet";
+import dexToken from "components/dexToken";
+import switchAddr from "components/switchAddress";
+import { execWithValid } from "utils/execWithValid";
 
 export default {
     components: { dexToken, switchAddr },
@@ -55,31 +67,33 @@ export default {
         }
     },
     methods: {
-        showToken: execWithValid(function () {
-            this.isShowDexToken = true;
-        }, function () {
-            return this.dexStart();
-        }),
+        showToken: execWithValid(
+            function() {
+                this.isShowDexToken = true;
+            },
+            function() {
+                return this.dexStart();
+            }
+        ),
         closeToken() {
             this.isShowDexToken = false;
         },
 
         goHelp() {
-            window.open('/help');
+            window.open("/help");
         },
-        dexStart() {
-            if (!this.isHaveUsers) {
-                this.go('start');
-                return;
+        dexStart: execWithValid(
+            function() {},
+            function() {
+                this.go("start");
             }
-            pwdConfirm({ type: 'unlockAccount' });
-        },
+        ),
         dexChange() {
             if (!this.isHaveUsers) {
-                this.$router.push({ name: 'startCreate' });
+                this.$router.push({ name: "startCreate" });
                 return;
             }
-            this.go('start');
+            this.go("start");
         }
     }
 };

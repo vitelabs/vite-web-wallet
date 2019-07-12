@@ -377,11 +377,12 @@ export class VBAccount {
     }
 
     lock() {
-        this.vb.destory();
         this.vb.killSession();
+        this.vb.destroy();
 
         this.proxyActiveAcc.sendPowTx = undefined;
         this.status = StatusMap.LOCK;
+        this.vb = null;
     }
 
     setActiveAcc() {
