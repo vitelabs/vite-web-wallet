@@ -36,7 +36,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .create-account-wrapper{
-    max-width:360px;
+    max-width: 360px;
 }
 </style>
 
