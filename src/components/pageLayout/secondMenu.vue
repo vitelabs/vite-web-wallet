@@ -1,9 +1,14 @@
 <template>
     <div class="head">
         <ul class="tab-list-wrapper">
-            <li v-for="(tab, index) in tabList" :key="index"
-                class="tab __pointer" :class="{ 'active': $route.name === tab }"
-                @click="go(tab)" > {{ $t(`${tab}.title`) }}
+            <li
+                v-for="(tab, index) in tabList"
+                :key="index"
+                class="tab __pointer"
+                :class="{ active: $route.name === tab }"
+                @click="go(tab)"
+            >
+                {{ $t(`${tab}.title`) }}
             </li>
         </ul>
 
@@ -24,7 +29,7 @@
 <script>
 import { StatusMap } from 'wallet';
 import switchAddr from 'components/switchAddress';
-import { pwdConfirm } from 'components/password/index.js';
+import { execWithValid } from 'utils/execWithValid';
 
 export default {
     components: { switchAddr },
@@ -53,14 +58,10 @@ export default {
         goHelp() {
             window.open('/help');
         },
-
-        dexStart() {
-            if (!this.isHaveUsers) {
+        dexStart: execWithValid(function () {},
+            function () {
                 this.go('start');
-                return;
-            }
-            pwdConfirm({ type: 'unlockAccount' });
-        },
+            }),
         dexChange() {
             if (!this.isHaveUsers) {
                 this.$router.push({ name: 'startCreate' });

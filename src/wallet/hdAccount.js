@@ -1,4 +1,10 @@
-import { keystore, constant, hdAddr, account, addrAccount } from '@vite/vitejs';
+import {
+    keystore,
+    constant,
+    hdAddr,
+    account,
+    addrAccount
+} from '@vite/vitejs';
 import viteCrypto from 'testwebworker';
 import statistics from 'utils/statistics';
 import $ViteJS from 'utils/viteClient';
@@ -23,7 +29,15 @@ export const StatusMap = {
 };
 
 export class HDAccount {
-    constructor({ id, lang, keystore, name, addrNum, activeAddr, activeIdx }) {
+    constructor({
+        id,
+        lang,
+        keystore,
+        name,
+        addrNum,
+        activeAddr,
+        activeIdx
+    }) {
         this.status = StatusMap.LOCK;
 
         this.id = id;
@@ -133,7 +147,7 @@ export class HDAccount {
     }
 
     activate() {
-    // auto receive tx
+        // auto receive tx
         if (this.status === StatusMap.LOCK || !this.activeAccount) {
             return;
         }
@@ -142,7 +156,7 @@ export class HDAccount {
     }
 
     freeze() {
-    // kill auto receive
+        // kill auto receive
         if (!this.activeAccount) {
             return;
         }
@@ -223,7 +237,7 @@ export class HDAccount {
 
         if (this.activeAccount && this.activeAccount.address === this.activeAddr) {
             !this.activeAccount.privateKey
-        && this.activeAccount.setPrivateKey(privateKey);
+                && this.activeAccount.setPrivateKey(privateKey);
             return;
         }
 
@@ -291,17 +305,28 @@ export class HDAccount {
 }
 
 export class VBAccount {
-    constructor({ id, lang, name, activeAddr }) {
-        this.id = id || `VITEBIRFORST_${ activeAddr }`;
+    constructor({
+        id,
+        lang,
+        name,
+        activeAddr
+    }) {
+        this.id = id || `VITEBIFROST_${ activeAddr }`;
         this.lang = lang || LangList.english;
         this.name = name || '';
         this.activeAddr = activeAddr;
         this.status = StatusMap.LOCK;
         this.setActiveAcc();
-        this.addrList = [{ address: activeAddr, id: this.id, idx: 0 }];
+        this.addrList = [{
+            address: activeAddr,
+            id: this.id,
+            idx: 0
+        }];
         // Set Addr Num
         this.addrNum = 1;
         this.save();
+
+        this.id.startsWith('VITEBIFROST_') && (this.isBifrost = true);
     }
 
     set activeAccount(v) {
@@ -312,15 +337,11 @@ export class VBAccount {
         return this._activeAccount;
     }
 
-    get isBifrost() {
-        return this.id.startsWith('VITEBIRFORST_');
-    }
-
     save() {
         addHdAccount({
             id: this.id,
             lang: this.lang,
-            keystore: 'birforst'
+            keystore: 'bifrost'
         });
         this.saveAcc();
     }
@@ -354,8 +375,12 @@ export class VBAccount {
     }
 
     lock() {
+        this.vb.killSession();
+        this.vb.destroy();
+
         this.proxyActiveAcc.sendPowTx = undefined;
         this.status = StatusMap.LOCK;
+        this.vb = null;
     }
 
     setActiveAcc() {
@@ -381,14 +406,22 @@ export class VBAccount {
         if (!vb) {
             return;
         }
-        const sendPowTx = async ({ methodName, params = [], vbExtends }) => {
+        this.vb = vb;
+        const sendPowTx = async ({
+            methodName,
+            params = [],
+            vbExtends
+        }) => {
             if (params[0]) {
-                params[0].prevHash = 'hack for birforst';
+                params[0].prevHash = 'hack for bifrost';
                 params[0].height = 34;
             }
             const block = await this.activeAccount.getBlock[methodName](params[0], 'sync');
 
-            return vb.sendVbTx({ block, extend: vbExtends });
+            return vb.sendVbTx({
+                block,
+                extend: vbExtends
+            });
         };
         this.status = StatusMap.UNLOCK;
         this.proxyActiveAcc.sendPowTx = sendPowTx;
