@@ -10,17 +10,37 @@ const state = {
 
 const mutations = {
     exSetLatestTxList(state, list) {
-        state.txList = list || [];
+        list = list || [];
+
+        let arr = [];
+        state.txList.forEach(tx => {
+            const index = list.findIndex(v => v.tradeId !== tx.tradeId);
+            if (index < 0) {
+                arr.push(tx);
+            } else {
+                arr.push(list[index]);
+            }
+            list = list.splice(index, 1);
+        });
+
+        arr = arr.concat(list);
+        arr.sort((a, b) => b.time - a.time);
+        arr = arr.slice(0, 100);
+
+        state.txList = arr || [];
     },
     exSetLatestTxLoading(state, isLoading) {
         state.isLoading = isLoading;
+    },
+    exClearLatestTxList(state) {
+        state.txList = [];
     }
 };
 
 const actions = {
     exFetchLatestTx({ getters, commit }) {
         commit('exSetLatestTxLoading', true);
-        commit('exSetLatestTxList', []);
+        commit('exClearLatestTxList', []);
 
         stopLatestTimer();
         latestTxTask = new subTask('latestTx', ({ args, data }) => {

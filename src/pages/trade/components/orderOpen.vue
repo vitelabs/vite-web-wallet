@@ -3,15 +3,15 @@
 </template>
 
 <script>
+import { order } from 'services/trade';
 import openTable from './openTable.vue';
+
+const pageSize = 30;
 
 export default {
     components: { openTable },
     mounted() {
-        this.init();
-    },
-    destroyed() {
-        this.$store.dispatch('stopOrderCurrent');
+        this.fetchOpenOrders();
     },
     data() {
         return {
@@ -29,15 +29,25 @@ export default {
         },
         activeTxPair() {
             return this.$store.state.exchangeActiveTxPair.activeTxPair;
+        },
+        currentMarket() {
+            return this.$store.state.exchangeMarket.currentMarket;
+        },
+        latestOrder() {
+            return this.$store.state.exchangeLatestOrder.latestOrder;
         }
     },
     watch: {
+        latestOrder() {
+            this.$store.commit('exAddOpenOrder', this.latestOrder);
+        },
         activeTxPair() {
-            this.init();
+            this.fetchOpenOrders();
         },
         defaultAddr() {
-            this.init();
+            this.fetchOpenOrders();
         },
+        // [TODO] I don't want to change it, now.
         currentOpenOrders(data) {
             const list = [];
             const newList = {};
@@ -116,9 +126,25 @@ export default {
         }
     },
     methods: {
-        init() {
-            this.$store.dispatch('stopOrderCurrent');
-            this.$store.dispatch('startOrderCurrent');
+        fetchOpenOrders() {
+            this.$store.commit('exClearLatestOrder', []);
+            const address = this.defaultAddr;
+            const currentMarket = this.currentMarket;
+
+            order({
+                address,
+                offset: 0,
+                limit: pageSize,
+                status: 1,
+                ...this.activeTxPair
+            }).then(data => {
+                if (this.defaultAddr !== address || currentMarket !== this.currentMarket) {
+                    return;
+                }
+                this.$store.commit('exSetCurrentOpenOrders', data.order || []);
+            }).catch(err => {
+                console.warn(err);
+            });
         }
     }
 };
