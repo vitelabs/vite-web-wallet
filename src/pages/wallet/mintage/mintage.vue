@@ -304,7 +304,7 @@ export default {
         },
 
         toMintage() {
-            execWithValid(() => {
+            execWithValid(function () {
                 this.validAll();
                 if (!this.canMintage) {
                     return;
