@@ -38,10 +38,10 @@
 </template>
 
 <script>
-import { StatusMap } from "wallet";
-import dexToken from "components/dexToken";
-import switchAddr from "components/switchAddress";
-import { execWithValid } from "utils/execWithValid";
+import { StatusMap } from 'wallet';
+import dexToken from 'components/dexToken';
+import switchAddr from 'components/switchAddress';
+import { execWithValid } from 'utils/execWithValid';
 
 export default {
     components: { dexToken, switchAddr },
@@ -67,33 +67,29 @@ export default {
         }
     },
     methods: {
-        showToken: execWithValid(
-            function() {
-                this.isShowDexToken = true;
-            },
-            function() {
-                return this.dexStart();
-            }
-        ),
+        showToken: execWithValid(function () {
+            this.isShowDexToken = true;
+        },
+        function () {
+            return this.dexStart();
+        }),
         closeToken() {
             this.isShowDexToken = false;
         },
 
         goHelp() {
-            window.open("/help");
+            window.open('/help');
         },
-        dexStart: execWithValid(
-            function() {},
-            function() {
-                this.go("start");
-            }
-        ),
+        dexStart: execWithValid(function () {},
+            function () {
+                this.go('start');
+            }),
         dexChange() {
             if (!this.isHaveUsers) {
-                this.$router.push({ name: "startCreate" });
+                this.$router.push({ name: 'startCreate' });
                 return;
             }
-            this.go("start");
+            this.go('start');
         }
     }
 };

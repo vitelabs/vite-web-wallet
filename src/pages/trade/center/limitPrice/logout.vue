@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import { execWithValid } from "utils/execWithValid";
+import { execWithValid } from 'utils/execWithValid';
 
 export default {
     computed: {
@@ -20,21 +20,17 @@ export default {
         }
     },
     methods: {
-        leftClick: execWithValid(
-            function() {
-            },
-            function() {
-                this.$router.push({ name: "start" });
-            }
-        ),
-        rightClick: execWithValid(
-            function() {
-                this.$router.push({ name: "start" });
-            },
-            function() {
-                this.$router.push({ name: "startCreate" });
-            }
-        )
+        leftClick: execWithValid(function () {
+        },
+        function () {
+            this.$router.push({ name: 'start' });
+        }),
+        rightClick: execWithValid(function () {
+            this.$router.push({ name: 'start' });
+        },
+        function () {
+            this.$router.push({ name: 'startCreate' });
+        })
     }
 };
 </script>

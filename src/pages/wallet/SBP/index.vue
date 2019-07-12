@@ -38,7 +38,7 @@ import loading from 'components/loading';
 import confirm from 'components/confirm';
 import viteInput from 'components/viteInput';
 import { initPwd } from 'components/password/index.js';
-import {execWithValid} from 'utils/execWithValid'
+import { execWithValid } from 'utils/execWithValid';
 import BigNumber from 'utils/bigNumber';
 import sendTx from 'utils/sendTx';
 import register from './register';
@@ -154,7 +154,7 @@ export default {
             this.addrErr = '';
         },
 
-        validTx:execWithValid(()=>{
+        validTx: execWithValid(() => {
             this.testAddr();
             if (this.btnUnuse) {
                 return;
