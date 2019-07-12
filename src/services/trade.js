@@ -172,3 +172,42 @@ export function dividend({ address, offset, limit = 30 }) {
         params: { address, offset, limit }
     });
 }
+
+export function marketsClosed() {
+    return request({
+        path: `${ path }/markets/closed`,
+        method: 'GET'
+    });
+}
+
+export function operator(operatorId) {
+    return request({
+        path: `${ path }/operator`,
+        method: 'GET',
+        params: {
+            operatorId,
+            offset: 0,
+            limit: 100
+        }
+    });
+}
+
+export function operatorTokens(operatorId) {
+    return request({
+        path: `${ path }/operator/tokens`,
+        method: 'GET',
+        params: {
+            operatorId,
+            offset: 0,
+            limit: 100
+        }
+    });
+}
+
+export function operatorMarkets({ operatorId, tradeToken, offset, limit = 30 }) {
+    return request({
+        path: `${ path }/operator/markets`,
+        method: 'GET',
+        params: { operatorId, tradeToken, offset, limit }
+    });
+}

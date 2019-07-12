@@ -16,15 +16,22 @@ export default {
     mounted() {
         this.$store.commit('setLang', this.$i18n.locale);
         this.$store.dispatch('startLoopBalance');
+        this.$store.dispatch('exFetchLatestOrder');
     },
     computed: {
         currHDAcc() {
             return this.$store.state.wallet.currHDAcc;
+        },
+        address() {
+            return this.$store.getters.activeAddr;
         }
     },
     watch: {
         currHDAcc: function () {
             this.$store.dispatch('startLoopBalance');
+        },
+        address: function () {
+            this.address && this.$store.dispatch('exFetchLatestOrder');
         }
     }
 };

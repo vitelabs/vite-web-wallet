@@ -43,6 +43,8 @@ const actions = {
             if (_activeTxPair.symbol !== getters.exActiveTxPair.symbol) {
                 return;
             }
+            console.log(data);
+
             commit('setExchangeMarketInfo', data);
         });
     },
@@ -64,6 +66,7 @@ const getters = {
         const vipFee = getVipFee(state.isVip);
         // const takerBrokerFee = state.marketInfo.takerBrokerFee;
         // const makerBrokerFeeRate = state.marketInfo.makerBrokerFeeRate;
+        // console.log(state.marketInfo);
         return baseFee - vipFee;
     }
 };

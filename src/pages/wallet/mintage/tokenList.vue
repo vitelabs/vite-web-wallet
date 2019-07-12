@@ -256,12 +256,12 @@ export default {
                             newOwner: this.address
                         }
                     }).then(() => {
-                        this.$toast(this.$t('walletMintage.success'));
+                        this.$toast(this.$t('hint.operateSuccess'));
                         this.cancelChangeOwner();
                         this.getOwnerToken();
                     }).catch(err => {
                         console.warn(err);
-                        this.$toast(this.$t('walletMintage.fail'), err);
+                        this.$toast(this.$t('hint.operateFail'), err);
                     });
                 }
             });
@@ -271,11 +271,11 @@ export default {
                 methodName: 'changeTokenType',
                 data: { tokenId: item.tokenId }
             }).then(() => {
-                this.$toast(this.$t('walletMintage.success'));
+                this.$toast(this.$t('hint.operateSuccess'));
                 this.getOwnerToken();
             }).catch(err => {
                 console.warn(err);
-                this.$toast(this.$t('walletMintage.fail'), err);
+                this.$toast(this.$t('hint.operateFail'), err);
             });
         },
         toIssue() {
@@ -293,12 +293,12 @@ export default {
                             beneficial: this.address
                         }
                     }).then(() => {
-                        this.$toast(this.$t('walletMintage.success'));
+                        this.$toast(this.$t('hint.operateSuccess'));
                         this.cancelIssue();
                         this.getOwnerToken();
                     }).catch(err => {
                         console.warn(err);
-                        this.$toast(this.$t('walletMintage.fail'), err);
+                        this.$toast(this.$t('hint.operateFail'), err);
                     });
                 }
             });

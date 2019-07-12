@@ -93,6 +93,9 @@ export default {
             }
 
             return _l;
+        },
+        closeMarket() {
+            return this.$store.state.exchangeMarket.marketClosed;
         }
     },
     methods: {
@@ -129,7 +132,11 @@ export default {
         },
         getRealPrice(txPair) {
             if (!txPair) {
-                return txPair.tradeTokenSymbol;
+                return;
+            }
+
+            if (this.closeMarket.find(v => v.symbol === txPair.symbol)) {
+                return this.$t('tradeCenter.marketClosed', { symbol: txPair.symbol });
             }
 
             const rate = this.getRate(txPair.quoteToken);
