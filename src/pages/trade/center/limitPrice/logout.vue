@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import { execWithValid } from 'utils/execWithValid';
+import { pwdConfirm } from 'components/password/index.js';
 
 export default {
     computed: {
@@ -20,17 +20,20 @@ export default {
         }
     },
     methods: {
-        leftClick: execWithValid(function () {
+        leftClick() {
+            if (!this.isHaveUsers) {
+                this.$router.push({ name: 'start' });
+                return;
+            }
+            pwdConfirm({ type: 'unlockAccount' });
         },
-        function () {
+        rightClick() {
+            if (!this.isHaveUsers) {
+                this.$router.push({ name: 'startCreate' });
+                return;
+            }
             this.$router.push({ name: 'start' });
-        }),
-        rightClick: execWithValid(function () {
-            this.$router.push({ name: 'start' });
-        },
-        function () {
-            this.$router.push({ name: 'startCreate' });
-        })
+        }
     }
 };
 </script>

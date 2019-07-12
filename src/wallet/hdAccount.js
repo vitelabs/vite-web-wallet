@@ -325,6 +325,8 @@ export class VBAccount {
         // Set Addr Num
         this.addrNum = 1;
         this.save();
+
+        this.id.startsWith('VITEBIFROST_') && (this.isBifrost = true);
     }
 
     set activeAccount(v) {
@@ -333,10 +335,6 @@ export class VBAccount {
 
     get activeAccount() {
         return this._activeAccount;
-    }
-
-    get isBifrost() {
-        return this.id.startsWith('VITEBIFROST_');
     }
 
     save() {
