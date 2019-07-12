@@ -567,7 +567,7 @@ export default {
             this.quantity = '';
         },
 
-        _clickBtn: execWithValid(function() {
+        _clickBtn: execWithValid(function () {
             if (this.isLoading) {
                 return;
             }
