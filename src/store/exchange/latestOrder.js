@@ -22,7 +22,7 @@ const actions = {
         commit('exClearLatestOrder');
 
         latestOrderTask = new subTask('latestOrder', ({ args, data }) => {
-            console.log(data);
+            console.log('latest', data);
 
             if (rootGetters.activeAddr !== args.address || !data) {
                 return;
