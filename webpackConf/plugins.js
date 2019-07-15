@@ -49,14 +49,14 @@ const ethNet = {
 };
 const dexApiServer = {
     test: '"https://vitex.vite.net/test/api/"',
-    // dev: '"https://vitex.vite.net/test/api/"',
-    dev: '"http://132.232.65.121:8080/test/api/"',
+    dev: '"https://vitex.vite.net/test/api/"',
+    // dev: '"http://132.232.65.121:8080/test/api/"',
     dexTestNet: '"https://vitex.vite.net/beta/api/"'
 };
 const pushServer = {
     test: '"wss://vitex.vite.net/test/websocket"',
-    // dev: '"wss://vitex.vite.net/test/websocket"',
-    dev: '"ws://132.232.65.121:11211/test/websocket"',
+    dev: '"wss://vitex.vite.net/test/websocket"',
+    // dev: '"ws://132.232.65.121:11211/test/websocket"',
     dexTestNet: '"wss://vitex.vite.net/beta/websocket"'
 };
 const gatewayInfosServer = {
