@@ -96,7 +96,7 @@ export default {
                             'side': order.side,
                             'tradeTokenSymbol': order.tradeTokenSymbol,
                             'quoteTokenSymbol': order.quoteTokenSymbol,
-                            'price': order.price
+                            'price': `${order.price} ${this.getOriginSymbol(order.quoteTokenSymbol)}`
                         }
                     })
                         .then(successSubmit)
