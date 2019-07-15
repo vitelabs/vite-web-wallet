@@ -60,6 +60,7 @@
         "35004": "Invalid parameters",
         "35005": "Transactions are sent too frequent, please try again later",
         "35006": "Contract method not exist",
+        "35011": "全网拥堵",
         "36001": "You cannot make any transfer until you receive a transaction",
         "36002": "System verify failed, please try again later",
         "36003": "System verify failed, please try again later",
@@ -98,7 +99,7 @@
         "DexTradeCancelOrder": "ViteX Revoking Orders",
         "DexFundNewMarket": "ViteX Token Listing",
         "CreateContractReq": "Create Contract",
-        "DexFundPledgeForVx": "ViteX抵押",
+        "DexFundPledgeForVx": "ViteX Staking",
         "DexFundPledgeForVip": "ViteX VIP",
         "TxReq": "Transfer",
         "RewardReq": "Transfer",
@@ -412,7 +413,7 @@
         "tokenList": "Issued Token",
         "submit": "Submit",
         "cancel": "Cancel",
-        "getListFail": "获取列表失败",
+        "getListFail": "You are unable to get token list, try again later",
         "mintageConfirm": {
             "title": "Check your Token Issuance Information",
             "balance": "Balance",
@@ -1005,13 +1006,16 @@
     },
     "tradeTxPairManage": {
         "title": "{tokenSymbol}交易对管理",
-        "tradeTxPairManage": {
-            "title": "{tokenSymbol}交易对管理",
-            "symbol": "交易对名称",
-            "income": "累计收益",
-            "fee": "当前费率",
-            "status": "状态",
-            "operate": "操作"
-        }
+        "symbol": "交易对名称",
+        "income": "累计收益",
+        "fee": "当前费率",
+        "status": "状态",
+        "operate": "操作",
+        "stopTrans": "暂停交易",
+        "resetTrans": "恢复交易",
+        "changeOwner": "转让所有权",
+        "changeFee": "调整费率",
+        "incomeList": "收益明细",
+        "openTxPair": "开通交易对"
     }
 }

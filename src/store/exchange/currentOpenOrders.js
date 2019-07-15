@@ -4,11 +4,19 @@ const mutations = {
     exSetCurrentOpenOrders(state, list) {
         state.list = list || [];
     },
-    exAddOpenOrder(state, order) {
-        if (!order || order.status !== 1) {
+    exUpdateOpenOrder(state, order) {
+        if (!order) {
             return;
         }
 
+        // Delete Open Order
+        if (order.status !== 1) {
+            const index = state.list.findIndex(v => v.orderId === order.orderId);
+            (index >= 0) && state.list.splice(index, 1);
+            return;
+        }
+
+        // Add Open Order
         const index = state.list.findIndex(v => v.orderId === order.orderId);
         if (index < 0) {
             state.list.push(order);
