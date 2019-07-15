@@ -1,0 +1,8 @@
+.tx-pair-manage-table {
+    @include rowWith {
+        width: 15%;
+        &:last-child {
+            width: 40%;
+        }
+    }
+}

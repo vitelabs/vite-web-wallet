@@ -74,6 +74,7 @@ export default {
 @import './tradeOrderHistory.scss';
 @import "./mintTrade.scss";
 @import "./dividend.scss";
+@import "./txPairManage.scss";
 
 // [TODO] Delete keystore
 .keystore-table-item {

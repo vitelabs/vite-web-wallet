@@ -39,7 +39,7 @@ export default {
     },
     watch: {
         latestOrder() {
-            this.$store.commit('exAddOpenOrder', this.latestOrder);
+            this.$store.commit('exUpdateOpenOrder', this.latestOrder);
         },
         activeTxPair() {
             this.fetchOpenOrders();
