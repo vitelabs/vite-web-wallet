@@ -28,10 +28,20 @@ export function setCurrHDAcc(acc) {
     if (!acc) {
         return;
     }
-    if (acc.isBifrost && currentHDAccount && currentHDAccount.activeAddr === acc.activeAddr) {
+    if (
+        acc.isBifrost
+    && currentHDAccount
+    && currentHDAccount.isBifrost
+    && currentHDAccount.activeAddr === acc.activeAddr
+    ) {
         return currentHDAccount;
     }
-    if (acc.isBifrost || !acc.id || !currentHDAccount || currentHDAccount.id !== acc.id) {
+    if (
+        acc.isBifrost
+    || !acc.id
+    || !currentHDAccount
+    || currentHDAccount.id !== acc.id
+    ) {
         return constructAccount(acc);
     }
     return currentHDAccount;
@@ -47,7 +57,9 @@ export function getActiveAcc() {
 export function getList() {
     const accList = getAccList() || [];
     const oldAccList = getOldAccList() || [];
-    return accList.concat(oldAccList).filter(acc => acc.id && !acc.id.startsWith('VITEBIFROST_'));// filter vb accounts
+    return accList
+        .concat(oldAccList)
+        .filter(acc => acc.id && !acc.id.startsWith('VITEBIFROST_')); // filter vb accounts
 }
 
 export function deleteOldAcc(acc) {
@@ -71,8 +83,19 @@ export function deleteOldAcc(acc) {
     setOldAccList(oldAccList);
 }
 
-export function saveHDAccount({ name, pass, hdAddrObj, lang = LangList.english, addrNum = 1 }) {
-    const err = checkParams({ name, pass, hdAddrObj, lang }, [ 'name', 'pass', 'hdAddrObj', 'lang' ]);
+export function saveHDAccount({
+    name,
+    pass,
+    hdAddrObj,
+    lang = LangList.english,
+    addrNum = 1
+}) {
+    const err = checkParams({ name, pass, hdAddrObj, lang }, [
+        'name',
+        'pass',
+        'hdAddrObj',
+        'lang'
+    ]);
     if (err) {
         throw err;
     }
