@@ -15,8 +15,15 @@ $ViteJS.addTxType({
     },
     DexFundTransferTokenOwner: {
         contractAddr: constant.DexFund_Addr,
-        abi: { 'type': 'function', 'name': 'DexFundTransferTokenOwner', 'inputs': [ { 'name': 'token', 'type': 'tokenId' }, { 'name': 'owner', 'type': 'address' } ] }
-    }``
+        abi: {
+            'type': 'function',
+            'name': 'DexFundTransferTokenOwner',
+            'inputs': [
+                { 'name': 'token', 'type': 'tokenId' },
+                { 'name': 'owner', 'type': 'address' }
+            ]
+        }
+    }
 });
 
 export default $ViteJS;
