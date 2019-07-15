@@ -2,13 +2,16 @@
     <div class="login-wrapper">
         <div class="__title">{{ $t("login") }}</div>
 
-        <div class="switch-btn" :class="{ radius: tabName === 'vb' }">
+        <div
+            class="switch-btn"
+        >
             <div
                 class="btn-item __pointer"
                 :class="{ active: tabName === 'vb' }"
                 @click="toggleTab('vb')"
                 :key="'tb'"
             >
+                <div class="star"></div>
                 {{ $t("assets.vb.title") }}
             </div>
             <div
@@ -43,7 +46,7 @@
                     <div class="code_tips">
                         {{ $t("assets.vb.start.downloadTips")
                         }}<span class="action_get_app" @click="getWallet"
-                        >{{ $t("assets.vb.start.download") }}&rarr;</span
+                            >{{ $t("assets.vb.start.download") }}&rarr;</span
                         >
                     </div>
                 </div>
@@ -139,25 +142,25 @@
 </template>
 
 <script>
-import Vue from 'vue';
-import loading from 'components/loading.vue';
-import ellipsisAddr from 'utils/ellipsisAddr.js';
-import { getAppLink } from 'utils/getLink';
-import openUrl from 'utils/openUrl';
-import { getList, deleteOldAcc } from 'wallet';
+import Vue from "vue";
+import loading from "components/loading.vue";
+import ellipsisAddr from "utils/ellipsisAddr.js";
+import { getAppLink } from "utils/getLink";
+import openUrl from "utils/openUrl";
+import { getList, deleteOldAcc } from "wallet";
 
-import accountItem from './accountItem.vue';
-import restore from '../restore.vue';
-import accountList from './accountList.vue';
+import accountItem from "./accountItem.vue";
+import restore from "../restore.vue";
+import accountList from "./accountList.vue";
 
-import qrcode from 'components/qrcode';
-import { initVB } from 'wallet/vb';
-import icon from 'assets/imgs/start_qrcode_icon.svg';
+import qrcode from "components/qrcode";
+import { initVB } from "wallet/vb";
+import icon from "assets/imgs/start_qrcode_icon.svg";
 
 const TABNAME = {
-    vb: 'vb',
-    existingAcc: 'existingAcc',
-    restore: 'restore'
+    vb: "vb",
+    existingAcc: "existingAcc",
+    restore: "restore"
 };
 
 export default {
@@ -170,8 +173,8 @@ export default {
         return {
             id: this.$route.params.id,
             currAcc: {},
-            password: '',
-            inputItem: '',
+            password: "",
+            inputItem: "",
             isLoading: false,
             isShowAccountList: false,
             tabName: TABNAME.vb,
@@ -189,9 +192,9 @@ export default {
             this.showExisting(this.id);
             return;
         }
-        if (this.tabName === 'vb') {
+        if (this.tabName === "vb") {
             this.initVB();
-        } else if (this.tabName === 'existingAcc') {
+        } else if (this.tabName === "existingAcc") {
             this.init();
         }
     },
@@ -203,7 +206,7 @@ export default {
             return this.$store.state.wallet.currHDAcc;
         },
         isShowExisting() {
-            return this.tabName === 'existingAcc';
+            return this.tabName === "existingAcc";
         }
     },
     methods: {
@@ -211,7 +214,7 @@ export default {
             openUrl(getAppLink());
         },
         destoryVB() {
-            console.log('destory vb');
+            console.log("destory vb");
         },
         init() {
             this.$onKeyDown(13, () => {
@@ -220,35 +223,35 @@ export default {
             this.currAcc = this.getCurrAcc();
         },
         clearAll() {
-            this.password = '';
+            this.password = "";
             this.isLoading = false;
             this.$offKeyDown();
         },
         showExisting(id) {
             this.id = id;
-            this.toggleTab('existingAcc');
+            this.toggleTab("existingAcc");
         },
         initVB() {
             this.vb = initVB();
-            this.vb.on('disconnect', () => {
+            this.vb.on("disconnect", () => {
                 this.initVB();
             });
         },
         toggleTab(tabName) {
             if (this.tabName === tabName) return;
 
-            if (this.tabName !== 'vb' && tabName === 'vb') {
+            if (this.tabName !== "vb" && tabName === "vb") {
                 this.initVB();
-            } else if (this.tabName === 'vb' && tabName !== 'vb') {
+            } else if (this.tabName === "vb" && tabName !== "vb") {
                 this.destoryVB();
             }
 
-            if (this.tabName !== 'existingAcc' && tabName === 'existingAcc') {
+            if (this.tabName !== "existingAcc" && tabName === "existingAcc") {
                 this.init();
                 this.$refs.accList && this.$refs.accList.initAccountList();
             } else if (
-                this.tabName === 'existingAcc'
-                && tabName !== 'existingAcc'
+                this.tabName === "existingAcc" &&
+                tabName !== "existingAcc"
             ) {
                 this.clearAll();
             }
@@ -266,7 +269,7 @@ export default {
                         const account = list[i];
                         account.showAddr = account.activeAddr
                             ? ellipsisAddr(account.activeAddr)
-                            : '';
+                            : "";
                         return account;
                     }
                 }
@@ -278,8 +281,8 @@ export default {
                     id: this.currHDAcc.id,
                     showAddr: this.currHDAcc.activeAddr
                         ? ellipsisAddr(this.currHDAcc.activeAddr)
-                        : '',
-                    name: this.currHDAcc.name || '',
+                        : "",
+                    name: this.currHDAcc.name || "",
                     ...this.currHDAcc
                 };
             }
@@ -288,7 +291,7 @@ export default {
             const account = list[0];
             account.showAddr = account.activeAddr
                 ? ellipsisAddr(account.activeAddr)
-                : '';
+                : "";
             return account;
         },
 
@@ -296,7 +299,7 @@ export default {
             this.inputItem = text;
         },
         inputBlur(text) {
-            text === this.inputItem && (this.inputItem = '');
+            text === this.inputItem && (this.inputItem = "");
         },
         focusPass() {
             Vue.nextTick(() => {
@@ -307,7 +310,7 @@ export default {
         chooseAccount(account) {
             this.currAcc = account;
             this.isShowAccountList = false;
-            this.password = '';
+            this.password = "";
         },
         toggleAccountList() {
             this.isShowAccountList = !this.isShowAccountList;
@@ -317,7 +320,7 @@ export default {
         },
 
         createAcc() {
-            this.$router.push({ name: 'startCreate' });
+            this.$router.push({ name: "startCreate" });
         },
         login() {
             if (!this.isShowExisting) {
@@ -330,16 +333,16 @@ export default {
             }
 
             if (!this.password) {
-                this.$toast(this.$t('startCreate.input'), 'error');
+                this.$toast(this.$t("startCreate.input"), "error");
                 this.focusPass();
                 return;
             }
 
             this.isLoading = true;
 
-            this.$store.commit('switchHDAcc', this.currAcc);
+            this.$store.commit("switchHDAcc", this.currAcc);
             this.$store
-                .dispatch('login', this.password)
+                .dispatch("login", this.password)
                 .then(() => {
                     if (!this.isLoading) {
                         return;
@@ -351,8 +354,8 @@ export default {
                     }
 
                     this.currHDAcc.activate();
-                    const name
-                        = this.$store.state.env.lastPage || 'tradeCenter';
+                    const name =
+                        this.$store.state.env.lastPage || "tradeCenter";
                     this.$router.push({ name });
                 })
                 .catch(err => {
@@ -361,7 +364,7 @@ export default {
                         return;
                     }
                     this.isLoading = false;
-                    this.$toast(this.$t('hint.pwErr'));
+                    this.$toast(this.$t("hint.pwErr"));
                 });
         }
     }
@@ -410,31 +413,48 @@ export default {
     }
 
     .switch-btn {
-        display: inline-block;
+        display: flex;
+        align-items: center;
         margin-bottom: 20px;
         border-radius: 16px;
         background: #007aff;
         box-shadow: 0 0 4px 0 rgba(0, 105, 219, 1);
-        padding-left: 12px;
-        &.radius {
+        &.no-padding-left {
             padding-left: 0;
-            padding-right: 12px;
+        }
+        &.no-padding-right {
+            padding-right: 0;
         }
 
         .btn-item {
-            display: inline-block;
+            align-items: center;
+            margin: 0 12px;
+            display: flex;
             color: #fff;
             font-size: 14px;
             @include font-family-bold();
             font-weight: 600;
             color: rgba(255, 255, 255, 1);
             line-height: 18px;
-
+            .star {
+                height: 10px;
+                width: 10px;
+                margin-right: 4px;
+                background-image: url(~assets/imgs/star.png);
+                background-size: contain;
+                background-repeat: no-repeat;
+            }
             &.active {
                 background: rgba(51, 187, 255, 1);
                 border-radius: 16px;
                 padding: 6px 12px;
                 box-shadow: 0 0 4px 0 rgba(0, 105, 219, 1);
+                &:first-child{
+                    margin-left: 0;
+                }
+                &:last-child{
+                    margin-right: 0;
+                }
             }
         }
     }
@@ -443,6 +463,7 @@ export default {
     }
     .vb {
         width: 100%;
+
         .code_container {
             width: 100%;
             padding: 20px;
