@@ -39,7 +39,7 @@ export default {
         },
         latestOrder() {
             if (!this.latestOrder
-                || this.latestOrder.symbol !== this.currentMarket
+                || this.latestOrder.symbol !== this.activeTxPair.symbol
                 || this.latestOrder.address !== this.defaultAddr) {
                 return;
             }
@@ -52,7 +52,7 @@ export default {
             }
 
             this.historyOrderList = this.historyOrderList.sort((a, b) => b.createTime - a.createTime);
-            this.historyOrderList.slice(0, pageSize);
+            this.historyOrderList = this.historyOrderList.slice(0, pageSize);
             this.historyOrderList = [].concat(this.historyOrderList);
         }
     },
