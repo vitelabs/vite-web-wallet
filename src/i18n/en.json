@@ -98,7 +98,7 @@
         "DexTradeCancelOrder": "ViteX Revoking Orders",
         "DexFundNewMarket": "ViteX Token Listing",
         "CreateContractReq": "Create Contract",
-        "DexFundPledgeForVx": "ViteX抵押",
+        "DexFundPledgeForVx": "ViteX Staking",
         "DexFundPledgeForVip": "ViteX VIP",
         "TxReq": "Transfer",
         "RewardReq": "Transfer",
@@ -412,7 +412,7 @@
         "tokenList": "Issued Token",
         "submit": "Submit",
         "cancel": "Cancel",
-        "getListFail": "获取列表失败",
+        "getListFail": "You are unable to get token list, try again later",
         "mintageConfirm": {
             "title": "Check your Token Issuance Information",
             "balance": "Balance",
