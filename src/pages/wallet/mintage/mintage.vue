@@ -223,18 +223,6 @@ export default {
                 return false;
             }
 
-            if (!this.totalSupply || this.totalSupplyErr) {
-                this.decimalsErr = '';
-                return false;
-            }
-
-            const min = BigNumber.exponentiated(10, this.decimals);
-
-            if (BigNumber.compared(this.totalSupply, min) < 0) {
-                this.decimalsErr = this.$t('walletMintage.err.decimalsMax');
-                return false;
-            }
-
             this.decimalsErr = '';
             return true;
         },
