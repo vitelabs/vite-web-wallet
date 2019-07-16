@@ -31,13 +31,15 @@ for (const moduleName in exchange) {
 }
 
 store.dispatch('onNetStatus');
-store.dispatch('updateMarketMap');
-store.dispatch('getMarketsClosed');
 store.dispatch('startLoopHeight');
 store.dispatch('getDefaultTokenList');
 store.dispatch('getAllTokens');
 store.dispatch('updateGateInfos');
 store.dispatch('fetchTokenInfoFromGithub');
-store.dispatch('exFetchLimitAmounts');
+
+// [TODO] Hide trade
+// store.dispatch('updateMarketMap');
+// store.dispatch('getMarketsClosed');
+// store.dispatch('exFetchLimitAmounts');
 
 export default store;
