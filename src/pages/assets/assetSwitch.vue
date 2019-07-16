@@ -22,7 +22,7 @@ export default {
     },
     data() {
         return {
-            optList:[{ name: this.$t('tokenCard.assetType')['WALLET'], value: 'WALLET' }],
+            optList: [{ name: this.$t('tokenCard.assetType')['WALLET'], value: 'WALLET' }],
             //  [ { name: this.$t('tokenCard.assetType')['TOTAL'], value: 'TOTAL' }, { name: this.$t('tokenCard.assetType')['WALLET'], value: 'WALLET' }, { name: this.$t('tokenCard.assetType')['EX'], value: 'EX' } ],
             innerValue: this.value
         };
