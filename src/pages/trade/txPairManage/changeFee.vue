@@ -25,7 +25,7 @@
                     v-on:drag="makerChanged">
                 <div class="speed">
                     <span class="__left">{{ minFee }}</span>
-                    <span class="__right">{{ maxFee }}</span>
+                    <span class="__right">{{ `${maxFee * 100}%` }}</span>
                 </div>
             </slider>
         </div>
@@ -51,7 +51,7 @@
                     v-on:drag="takerChanged">
                 <div class="speed">
                     <span class="__left">{{ minFee }}</span>
-                    <span class="__right">{{ maxFee }}</span>
+                    <span class="__right">{{ `${maxFee * 100}%` }}</span>
                 </div>
             </slider>
         </div>
@@ -65,7 +65,7 @@ import alertConfirm from 'components/confirm/index.js';
 import slider from 'components/slider';
 
 const minFee = 0;
-const maxFee = 0.2;
+const maxFee = 0.002;
 
 export default {
     components: { confirm, slider },
