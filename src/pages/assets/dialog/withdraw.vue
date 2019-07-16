@@ -139,7 +139,7 @@ export default {
                 });
             }
         },
-        inspector:execWithValid(function() {
+        inspector: execWithValid(function () {
             return new Promise((res, rej) => {
                 withdraw({ type: this.info.type, amount: bigNumber.plus(this.withdrawAmountMin || bigNumber.toMin(this.withdrawAmount, this.token.decimals), this.feeMin, 0), withdrawAddress: this.withdrawAddr, gateAddr: this.info.gatewayAddress, tokenId: this.token.tokenId }, this.token.gateInfo.url)
                     .then(d => {
