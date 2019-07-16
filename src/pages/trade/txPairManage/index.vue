@@ -6,17 +6,26 @@
         <wallet-table class="tx-pair-manage-table" :headList="headList" :contentList="showList">
 
             <span v-for="(v, i) in showList" :key="i" :slot="`${i}operateBefore`">
-                <span v-show="v.status === 3" class="__pointer click-able">
+                <span v-show="v.status === 3" @click="openTxPair(v)"
+                      class="__pointer click-able">
                     {{ $t('tradeTxPairManage.openTxPair') }}</span>
-                <span v-show="v.status === 0" class="__pointer click-able">
+                <span v-show="v.status === 0" @click="getIncomeList(v)"
+                      class="__pointer click-able">
                     {{ $t('tradeTxPairManage.historyIncome') }}</span>
-                <span v-show="v.status === 1">{{ $t('tradeTxPairManage.stopTrans') }}</span>
-                <span v-show="v.status === 2">{{ $t('tradeTxPairManage.resetTrans') }}</span>
-                <span v-show="v.status === 1 || v.status === 2" class="__pointer click-able">
+                <span v-show="v.status === 1" @click="stopTx(v)"
+                      class="__pointer click-able">
+                    {{ $t('tradeTxPairManage.stopTrans') }}</span>
+                <span v-show="v.status === 2" @click="openTx(v)"
+                      class="__pointer click-able">
+                    {{ $t('tradeTxPairManage.resetTrans') }}</span>
+                <span v-show="v.status === 1 || v.status === 2" @click="changeFee(v)"
+                      class="__pointer click-able">
                     {{ $t('tradeTxPairManage.changeFee') }}</span>
-                <span v-show="v.status === 1 || v.status === 2" class="__pointer click-able">
+                <span v-show="v.status === 1 || v.status === 2" @click="changeOwner(v)"
+                      class="__pointer click-able">
                     {{ $t('tradeTxPairManage.changeOwner') }}</span>
-                <span v-show="v.status === 1 || v.status === 2" class="__pointer click-able">
+                <span v-show="v.status === 1 || v.status === 2" @click="getIncomeList(v)"
+                      class="__pointer click-able">
                     {{ $t('tradeTxPairManage.incomeList') }}</span>
             </span>
 
@@ -25,18 +34,36 @@
                         :toPage="fetchOperatorMarkets"
                         :currentPage="currentPage"></pagination>
         </wallet-table>
+
+        <income-list></income-list>
+        <change-owner v-if="showConfirmType === 'changeOwner'"
+                      :close="closeConfirm" :txPair="activeTxPair"
+                      :fetchConfig="fetchConfigTxPair"></change-owner>
+        <change-fee v-if="showConfirmType === 'changeFee'"
+                    :close="closeConfirm" :txPair="activeTxPair"
+                    :fetchConfig="fetchConfigTxPair"></change-fee>
+        <open-tx-pair v-if="showConfirmType === 'openTxPair'"
+                      :close="closeConfirm" :txPair="activeTxPair"></open-tx-pair>
     </div>
 </template>
 
 <script>
+import { constant } from '@vite/vitejs';
 import { operatorMarkets } from 'services/trade';
 import pagination from 'components/pagination.vue';
 import walletTable from 'components/table/index.vue';
 import secTitle from 'components/secTitle.vue';
-// import BigNumber from 'utils/bigNumber';
+import confirm from 'components/confirm/index.js';
+import { initPwd } from 'components/password/index.js';
+import openTxPair from './openTxPair.vue';
+import incomeList from './incomeList.vue';
+import changeFee from './changeFee.vue';
+import changeOwner from './changeOwner.vue';
+import { execWithValid } from 'utils/execWithValid';
+import sendTx from 'utils/sendTx';
 
 export default {
-    components: { pagination, walletTable, secTitle },
+    components: { pagination, walletTable, secTitle, incomeList, openTxPair, changeOwner, changeFee },
     created() {
         this.fetchOperatorMarkets();
     },
@@ -46,7 +73,10 @@ export default {
             tokenSymbol: this.$route.params.tokenSymbol,
             txPairList: [],
             listTotal: 0,
-            currentPage: 0
+            currentPage: 0,
+
+            activeTxPair: null,
+            showConfirmType: ''
         };
     },
     computed: {
@@ -88,18 +118,24 @@ export default {
                     fee: item.takerFeeRate && item.makerFeeRate ? `Taker(${ item.takerFeeRate }%) / Maker(${ item.makerFeeRate }%)` : '--',
                     status,
                     statusTxt: this.$t('tradeTxPairManage.statusList')[status],
-                    rawData: item
+                    txPairDetail: item,
+                    tradeTokenDetail: this.$route.params
                 });
             });
 
             this.marketList.forEach(item => {
+                if (this.txPairList.find(v => v.quoteToken === item.tokenId)) {
+                    return;
+                }
+
                 list.push({
                     symbol: `${ this.tokenSymbol }/${ item.originalSymbol }`,
                     income: '--',
                     fee: '--',
                     status: 3,
                     statusTxt: this.$t('tradeTxPairManage.statusList')[3],
-                    rawData: item
+                    quoteTokenDetail: item,
+                    tradeTokenDetail: this.$route.params
                 });
             });
             return list;
@@ -112,12 +148,136 @@ export default {
             }
             return item.openStatus + 1;
         },
+        openTxPair: execWithValid(function (item) {
+            this.activeTxPair = item;
+            this.showConfirmType = 'openTxPair';
+        }),
+        stopTx: execWithValid(function (item) {
+            confirm({
+                size: 'small',
+                title: this.$t('tradeTxPairManage.stopTrans'),
+                leftBtn: { text: this.$t('btn.cancel') },
+                rightBtn: {
+                    text: this.$t('btn.submit'),
+                    click: () => {
+                        this.fetchStopTx(item);
+                    }
+                },
+                content: this.$t('tradeTxPairManage.stopTransHint', { symbol: item.symbol })
+            });
+        }),
+        openTx: execWithValid(function (item) {
+            confirm({
+                size: 'small',
+                title: this.$t('tradeTxPairManage.stopTrans'),
+                leftBtn: { text: this.$t('btn.cancel') },
+                rightBtn: {
+                    text: this.$t('btn.submit'),
+                    click: () => {
+                        this.fetchOpenTx(item);
+                    }
+                },
+                content: this.$t('tradeTxPairManage.stopTransHint', { symbol: item.symbol })
+            });
+        }),
+        changeFee: execWithValid(function (item) {
+            this.activeTxPair = item;
+            this.showConfirmType = 'changeFee';
+        }),
+        changeOwner: execWithValid(function (item) {
+            this.activeTxPair = item;
+            this.showConfirmType = 'changeOwner';
+        }),
+        getIncomeList() {
 
+        },
+        closeConfirm() {
+            this.activeTxPair = null;
+            this.showConfirmType = '';
+        },
+
+        fetchOpenTx(item) {
+            this.fetchConfigTxPair({
+                operationCode: 8,
+                tradeToken: item.txPairDetail.tradeToken,
+                quoteToken: item.txPairDetail.quoteToken,
+                stopMarket: false
+            }, {
+                success: this.$t('tradeTxPairManage.openTxPairConfirm.openSuccess'),
+                fail: this.$t('tradeTxPairManage.openTxPairConfirm.openFail')
+            });
+        },
+        fetchStopTx(item) {
+            this.fetchConfigTxPair({
+                operationCode: 8,
+                tradeToken: item.txPairDetail.tradeToken,
+                quoteToken: item.txPairDetail.quoteToken,
+                stopMarket: true
+            }, {
+                success: this.$t('tradeTxPairManage.openTxPairConfirm.stopSuccess'),
+                fail: this.$t('tradeTxPairManage.openTxPairConfirm.stopFail')
+            });
+        },
+
+        fetchConfigTxPair({ operationCode, tradeToken, quoteToken, owner = this.address, takerFeeRate = 0, makerFeeRate = 0, stopMarket }, { success = '', fail = '' }) {
+            initPwd({
+                submit: () => {
+                    sendTx({
+                        methodName: 'callContract',
+                        data: {
+                            toAddress: constant.DexFund_Addr,
+                            abi: {
+                                'type': 'function',
+                                'name': 'DexFundMarketOwnerConfig',
+                                'inputs': [
+                                    {
+                                        'name': 'operationCode',
+                                        'type': 'uint8'
+                                    },
+                                    {
+                                        'name': 'tradeToken',
+                                        'type': 'tokenId'
+                                    },
+                                    {
+                                        'name': 'quoteToken',
+                                        'type': 'tokenId'
+                                    },
+                                    {
+                                        'name': 'owner',
+                                        'type': 'address'
+                                    },
+                                    {
+                                        'name': 'takerFeeRate',
+                                        'type': 'int32'
+                                    },
+                                    {
+                                        'name': 'makerFeeRate',
+                                        'type': 'int32'
+                                    },
+                                    {
+                                        'name': 'stopMarket',
+                                        'type': 'bool'
+                                    }
+                                ]
+                            },
+                            params: [ operationCode, tradeToken, quoteToken, owner, takerFeeRate, makerFeeRate, !!stopMarket ],
+                            tokenId: quoteToken
+                        }
+                    }).then(() => {
+                        this.$toast(success);
+                        this.showConfirmType && this.closeConfirm();
+                    }).catch(err => {
+                        console.warn(err);
+                        this.$toast(fail, err);
+                    });
+                }
+            });
+        },
         fetchOperatorMarkets(pageNumber) {
             const offset = pageNumber ? (pageNumber - 1) * 30 : 0;
             operatorMarkets({
-                operatorId: this.address,
                 offset,
+                operatorId: this.address,
                 tradeToken: this.tokenId
             }).then(data => {
                 if (!data) {
