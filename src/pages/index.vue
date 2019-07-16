@@ -4,19 +4,23 @@
         'wallet': $route.name.indexOf('trade') === -1
     }">
         <router-view/>
-        <notice-list></notice-list>
+        <!-- [TODO] Hide trade -->
+        <!-- <notice-list></notice-list> -->
     </div>
 </template>
 
 <script>
-import noticeList from 'components/noticeList.vue';
+// [TODO] Hide trade
+// import noticeList from 'components/noticeList.vue';
 
 export default {
-    components: { noticeList },
+    // [TODO] Hide trade
+    // components: { noticeList },
     mounted() {
         this.$store.commit('setLang', this.$i18n.locale);
         this.$store.dispatch('startLoopBalance');
-        this.$store.dispatch('exFetchLatestOrder');
+        // [TODO] Hide trade
+        // this.$store.dispatch('exFetchLatestOrder');
     },
     computed: {
         currHDAcc() {
@@ -31,7 +35,8 @@ export default {
             this.$store.dispatch('startLoopBalance');
         },
         address: function () {
-            this.address && this.$store.dispatch('exFetchLatestOrder');
+            // [TODO] Hide trade
+            // this.address && this.$store.dispatch('exFetchLatestOrder');
         }
     }
 };

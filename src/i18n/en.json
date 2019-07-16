@@ -1017,5 +1017,9 @@
         "changeFee": "调整费率",
         "incomeList": "收益明细",
         "openTxPair": "开通交易对"
+    },
+    "tradePreMainnet": {
+        "text": "ViteX is under developing and will be launched in the near future. Click the link and have a test.",
+        "button": "Participate in ViteX Beta Test"
     }
 }

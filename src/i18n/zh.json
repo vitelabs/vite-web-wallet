@@ -1009,5 +1009,9 @@
         "historyIncome": "历史收益",
         "openTxPair": "开通交易对",
         "statusList": ["权限已转让", "交易中", "暂停交易", "交易未开通"]
+    },
+    "tradePreMainnet": {
+        "text": " ViteX正在开发中，将很快上线，点击下方入口可抢先体验",
+        "button": "参与ViteX公测"
     }
 }

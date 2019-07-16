@@ -43,7 +43,8 @@ export default {
         secondMenuList() {
             let list = [];
             if (this.$route.name.indexOf('trade') === 0) {
-                list = secondMenuList.trade;
+                // [TODO] Hide trade
+                // list = secondMenuList.trade;
             } else if (this.$route.name.indexOf('assets') === 0) {
                 list = secondMenuList.assets;
             }

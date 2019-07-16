@@ -21,7 +21,9 @@ export class VB extends Connector {
                 isBifrost: true
             });
             store.commit('setCurrHDAccStatus');
-            const name = store.state.env.lastPage || 'tradeCenter';
+            // [TODO] Hide trade
+            // const name = store.state.env.lastPage || 'tradeCenter';
+            const name = store.state.env.lastPage || 'assets';
             router.push({ name });
         });
         this.on('disconnect', () => {

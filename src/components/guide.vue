@@ -67,13 +67,16 @@ export default {
     },
     methods: {
         setGuide() {
-            let guideType = '';
-            if (this.$route.name === 'tradeCenter') {
-                guideType = 'trade';
-            } else if (this.$route.name === 'assets') {
-                guideType = 'assets';
-            }
-            this.guideType = guideType;
+            // [TODO] Hide trade
+            // let guideType = '';
+            // if (this.$route.name === 'tradeCenter') {
+            //     guideType = 'trade';
+            // } else if (this.$route.name === 'assets') {
+            //     guideType = 'assets';
+            // }
+            // this.guideType = guideType;
+
+            this.guideType = 'assets';
 
             this.storeData = storage.getItem(GuideKey);
             this.isShowGuide = !this.storeData || this.storeData.indexOf(this.guideType) === -1;

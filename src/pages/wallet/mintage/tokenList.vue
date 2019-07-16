@@ -207,33 +207,27 @@ export default {
                 this.$toast(this.$t('walletMintage.getListFail'));
             });
         },
-        changeReIssuable(item) {
-            execWithValid(() => {
-                initPwd({
-                    title: this.$t('walletMintage.reIssuableConfirm.title'),
-                    content: this.$t('walletMintage.reIssuableConfirm.text', { tokenName: item.tokenName }),
-                    submit: () => {
-                        this.toChangeReIssuale(item);
-                    }
-                }, true);
-            })();
-        },
-        changeOwner(item) {
-            execWithValid(() => {
-                this.changeOwnerToken = item;
-            })();
-        },
+        changeReIssuable: execWithValid(function (item) {
+            initPwd({
+                title: this.$t('walletMintage.reIssuableConfirm.title'),
+                content: this.$t('walletMintage.reIssuableConfirm.text', { tokenName: item.tokenName }),
+                submit: () => {
+                    this.toChangeReIssuale(item);
+                }
+            }, true);
+        }),
+        changeOwner: execWithValid(function (item) {
+            this.changeOwnerToken = item;
+        }),
         cancelChangeOwner() {
             this.changeOwnerToken = null;
             this.address = '';
             this.isValidAddress = true;
         },
-        issue(item) {
-            execWithValid(() => {
-                this.issueToken = item;
-                this.address = this.issueToken.owner;
-            })();
-        },
+        issue: execWithValid(function (item) {
+            this.issueToken = item;
+            this.address = this.issueToken.owner;
+        }),
         cancelIssue() {
             this.issueToken = null;
             this.address = '';

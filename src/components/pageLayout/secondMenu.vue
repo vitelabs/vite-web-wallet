@@ -13,14 +13,16 @@
         </ul>
 
         <ul class="right-lab-list">
-            <div class="tab __pointer" @click="goHelp">{{ $t("help") }}</div>
+            <!-- [TODO] Hide trade -->
+            <!-- <div class="tab __pointer" @click="goHelp">{{ $t("help") }}</div> -->
             <div v-show="!isLogin" @click="dexStart" class="tab __pointer">
                 {{ isHaveUsers ? $t("unlockAcc") : $t("login") }}
             </div>
             <div v-show="!isLogin" @click="dexChange" class="tab __pointer">
                 {{ isHaveUsers ? $t('changeAcc') : $t('register') }}</div>
-            <div v-show="isHaveUsers && $route.name.indexOf('trade') !== -1" class="tab __pointer"
-                 @click="goOperator">{{ $t('tradeOperator.title') }}</div>
+            <!-- [TODO] Hide trade -->
+            <!-- <div v-show="isHaveUsers && $route.name.indexOf('trade') !== -1" class="tab __pointer"
+                 @click="goOperator">{{ $t('tradeOperator.title') }}</div> -->
             <switch-addr class="switch-tab menu" v-show="$route.name !== 'assets'" ></switch-addr>
         </ul>
     </div>

@@ -94,12 +94,9 @@ export default {
         hideVipConfirm() {
             this.isShowVipConfirm = false;
         },
-        showVipConfirm() {
-            const x = execWithValid(() => {
-                this.isShowVipConfirm = true;
-            });
-            x();
-        }
+        showVipConfirm: execWithValid(function () {
+            this.isShowVipConfirm = true;
+        })
     }
 };
 </script>
