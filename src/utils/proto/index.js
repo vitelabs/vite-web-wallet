@@ -186,7 +186,9 @@ class WsProtoClient {
     }
 }
 
-export const client = new WsProtoClient(process.env.pushServer);
+WsProtoClient;
+// export const client = new WsProtoClient(process.env.pushServer);
+export const client = {};
 
 function getRealData(data) {
     if (data.error_code) {

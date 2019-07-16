@@ -7,6 +7,8 @@
  */
 
 module.exports = {
-    tradeCenter: { alias: [ '/index', '/trade' ] },
+    // [TODO] Hide trade
+    // tradeCenter: { alias: [ '/index', '/trade' ] },
+    assets: { alias: '/index' },
     walletQuota: { alias: '/wallet' }
 };
