@@ -15,9 +15,9 @@
                         <div class="col">{{$t('tokenCard.heads.name')}}</div>
                         <div class="col">{{$t('tokenCard.heads.balance')}}</div>
                         <div class="col">{{$t('tokenCard.heads.onroad')}}</div>
-                        <div class="col">{{$t('tokenCard.heads.gate')}}</div>
-                        <div class="col">{{$t('tokenCard.heads.totalExAmount')}}</div>
-                        <div class="col">{{$t('tokenCard.heads.availableExAmount')}}</div>
+                        <!-- <div class="col">{{$t('tokenCard.heads.gate')}}</div> -->
+                        <!-- <div class="col">{{$t('tokenCard.heads.totalExAmount')}}</div> -->
+                        <!-- <div class="col">{{$t('tokenCard.heads.availableExAmount')}}</div> -->
                         <div class="col">
                             <AssetSwitch v-model="assetType" class="asset-switch" />
                         </div>
@@ -66,7 +66,7 @@ export default {
         return {
             isShowTrans: false,
             activeToken: null,
-            assetType: 'TOTAL',
+            assetType: 'WALLET',
             filterObj: null
         };
     },

@@ -2,6 +2,7 @@
     <Vswitch
         :optList="optList"
         v-model="innerValue"
+        :notAllowed="true"
     />
 </template>
 <script>
@@ -11,7 +12,7 @@ export default {
     props: {
         value: {
             type: String,
-            default: 'TOTAL'
+            default: 'WALLET'
         }
     },
     watch: {
@@ -21,7 +22,8 @@ export default {
     },
     data() {
         return {
-            optList: [ { name: this.$t('tokenCard.assetType')['TOTAL'], value: 'TOTAL' }, { name: this.$t('tokenCard.assetType')['WALLET'], value: 'WALLET' }, { name: this.$t('tokenCard.assetType')['EX'], value: 'EX' } ],
+            optList:[{ name: this.$t('tokenCard.assetType')['WALLET'], value: 'WALLET' }],
+            //  [ { name: this.$t('tokenCard.assetType')['TOTAL'], value: 'TOTAL' }, { name: this.$t('tokenCard.assetType')['WALLET'], value: 'WALLET' }, { name: this.$t('tokenCard.assetType')['EX'], value: 'EX' } ],
             innerValue: this.value
         };
     }

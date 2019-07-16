@@ -25,15 +25,15 @@
                 <div class="op" @click="send">
                     {{ $t("tokenCard.actionType.SEND") }}
                 </div>
-                <div class="op" @click="exCharge">
+                <!-- <div class="op" @click="exCharge">
                     {{ $t("tokenCard.actionType.EXCHARGE") }}
-                </div>
+                </div> -->
             </div>
         </div>
         <div class="col">
             {{ `${token.fundFloat || 0} ${token.tokenSymbol}` }}
         </div>
-        <div class="col">
+        <!-- <div class="col">
             <div
                 :class="{underline:gateName!=='--','click-able':gateName!=='--'}"
                 @click="() => token.type !== 'NATIVE' && showDetail('gate')"
@@ -52,11 +52,11 @@
                 </div>
             </div>
             <div class="separate"></div>
-        </div>
-        <div class="col">
+        </div> -->
+        <!-- <div class="col">
             {{ `${exBanlance || 0} ${token.tokenSymbol}` }}
-        </div>
-        <div class="col">
+        </div> -->
+        <!-- <div class="col">
             <div>
                 {{ `${avaliableExBalance || 0} ${token.tokenSymbol}` }}
             </div>
@@ -69,7 +69,7 @@
                 </div>
             </div>
             <div class="separate"></div>
-        </div>
+        </div> -->
         <div class="col">
             <div class="assets">
                 <div class="est_btc">{{ assetView.btc }} BTC</div>

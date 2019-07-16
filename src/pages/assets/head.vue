@@ -91,7 +91,7 @@ export default {
             editName: '',
             qrcode: null,
             qrcodeShow: false,
-            assetsType: assetsType.TOTAL
+            assetsType: assetsType.WALLET
         };
     },
     computed: {
