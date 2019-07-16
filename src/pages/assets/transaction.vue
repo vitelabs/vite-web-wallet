@@ -101,10 +101,6 @@ export default {
         Vue.nextTick(() => {
             this.$refs.inAddr && this.$refs.inAddr.focus();
         });
-
-        this.$onKeyDown(13, () => {
-            this.validTrans();
-        });
     },
     data() {
         return {
