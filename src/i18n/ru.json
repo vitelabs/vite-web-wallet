@@ -39,7 +39,7 @@
     },
     "dealReminder": {
         "title": "Deal Notice",
-        "describe": "Your order {amount} {ttoken} ({ftoken}/{ttoken}) at {time} is a complete deal, visit Order History to find out more."
+        "describe": "Your order {amount} {ftoken} ({ftoken}/{ttoken}) at {time} is a complete deal, visit Order History to find out more."
     },
     "pow": {
         "ing": "Running PoW to acquire quota",
