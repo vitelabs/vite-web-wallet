@@ -106,7 +106,8 @@
         "TxResFail": "转账",
         "SendRefund": "转账",
         "GenesisReceive": "Genesis",
-        "DexFundTransferTokenOwner": "运营商中心权限转让"
+        "DexFundTransferTokenOwner": "运营商中心权限转让",
+        "DexFundMarketOwnerConfig": "运营商交易对配置"
     },
     "btn": {
         "cancel": "取消",
@@ -1000,6 +1001,8 @@
         "currentMaker": "当前Maker费率",
         "confirmFee": "手续费",
         "currentTaker": "当前Taker费率",
-        "txPairName": "交易对名称"
+        "txPairName": "交易对名称",
+        "changeFeeHint": "{symbol} 的 {type} 手续费调整为 {fee}",
+        "changeFeeSubmit": "确认将 {changeFeeHint}"
     }
 }

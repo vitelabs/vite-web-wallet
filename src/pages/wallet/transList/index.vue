@@ -133,6 +133,7 @@ export default {
         },
         transList() {
             const transList = this.$store.getters.transList;
+            // console.log(transList);
             const nowList = [];
 
             transList.forEach(trans => {

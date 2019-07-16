@@ -130,7 +130,7 @@ export default {
 $red: linear-gradient(270deg, rgba(226,43,116,1) 0%, rgba(237,81,88,1) 100%);
 $green: linear-gradient(270deg, rgba(0,212,208,1) 0%, rgba(0,215,100,1) 100%);
 
-.dex .process-wrapper {
+.dex-order.process-wrapper {
     padding: 10px 0px;
     .line-wrapper {
         height: 2px;
@@ -215,8 +215,8 @@ $green: linear-gradient(270deg, rgba(0,212,208,1) 0%, rgba(0,215,100,1) 100%);
         }
     }
 }
-.dex {
-    .buy {
+.dex-order {
+    &.buy {
         .line {
             background: $green;
             .drag {
@@ -233,7 +233,7 @@ $green: linear-gradient(270deg, rgba(0,212,208,1) 0%, rgba(0,215,100,1) 100%);
             background: $green;
         }
     }
-    .sell {
+    &.sell {
         .line {
             background: $red;
             .drag {

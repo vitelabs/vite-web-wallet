@@ -106,7 +106,8 @@
         "TxResFail": "Transfer",
         "SendRefund": "Transfer",
         "GenesisReceive": "Genesis",
-        "DexFundTransferTokenOwner": "运营商中心权限转让"
+        "DexFundTransferTokenOwner": "运营商中心权限转让",
+        "DexFundMarketOwnerConfig": "运营商交易对配置"
     },
     "btn": {
         "cancel": "Cancel",
@@ -1018,6 +1019,12 @@
         "stopFail": "暂停失败",
         "openSuccess": "恢复成功",
         "openFail": "恢复失败",
-        "changeOwnerHint": "请知悉：交易对权限转让后，您将不能享有赚取手续费、调整手续费等权限，权限一经转让不得撤回"
+        "changeOwnerHint": "请知悉：交易对权限转让后，您将不能享有赚取手续费、调整手续费等权限，权限一经转让不得撤回",
+        "currentMaker": "当前Maker费率",
+        "confirmFee": "手续费",
+        "currentTaker": "当前Taker费率",
+        "txPairName": "交易对名称",
+        "changeFeeHint": "{symbol} 的手续费调整为 {fee}",
+        "changeFeeSubmit": "确认将 {changeFeeHint}"
     }
 }

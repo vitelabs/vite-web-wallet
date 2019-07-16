@@ -57,7 +57,7 @@ export default {
         },
         canOrder() {
             if (this.isVip) {
-                return this.stakingObj.withdrawHeight <= this.height;
+                return this.stakingObj && this.stakingObj.withdrawHeight <= this.height;
             }
 
             if (!this.rawBalance || !+this.rawBalance.availableExAmount || !this.viteTokenInfo) {
