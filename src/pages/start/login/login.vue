@@ -354,8 +354,9 @@ export default {
                     }
 
                     this.currHDAcc.activate();
-                    const name
-                        = this.$store.state.env.lastPage || 'tradeCenter';
+                    // [TODO] Hide trade
+                    // const name = this.$store.state.env.lastPage || 'tradeCenter';
+                    const name = this.$store.state.env.lastPage || 'assets';
                     this.$router.push({ name });
                 })
                 .catch(err => {
