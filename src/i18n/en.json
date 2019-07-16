@@ -1025,6 +1025,13 @@
         "currentTaker": "当前Taker费率",
         "txPairName": "交易对名称",
         "changeFeeHint": "{symbol} 的手续费调整为 {fee}",
-        "changeFeeSubmit": "确认将 {changeFeeHint}"
+        "changeFeeSubmit": "确认将 {changeFeeHint}",        
+        "historyAllIncome": "历史总收益",
+        "incomeListHead": {
+            "date": "日期",
+            "txNum": "交易量",
+            "feeRate": "手续费率",
+            "feeIncome": "手续费收益"
+        }
     }
 }

@@ -117,4 +117,12 @@ export default {
 @import "~assets/scss/vars.scss";
 @import "./confirm.scss";
 @import "./confirmRow.scss";
+
+.income-list-confirm .content-wrapper {
+    padding: 0;
+    min-height: 422px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
 </style>
