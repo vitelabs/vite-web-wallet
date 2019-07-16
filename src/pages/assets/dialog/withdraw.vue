@@ -34,6 +34,8 @@ import { getValidBalance } from 'utils/validations';
 import bigNumber from 'utils/bigNumber';
 import tooltips from 'components/tooltips';
 import { getTokenIcon } from 'utils/tokenParser';
+import { execWithValid } from 'utils/execWithValid';
+
 
 export default {
     components: { tooltips },
@@ -137,7 +139,7 @@ export default {
                 });
             }
         },
-        inspector() {
+        inspector:execWithValid(function() {
             return new Promise((res, rej) => {
                 withdraw({ type: this.info.type, amount: bigNumber.plus(this.withdrawAmountMin || bigNumber.toMin(this.withdrawAmount, this.token.decimals), this.feeMin, 0), withdrawAddress: this.withdrawAddr, gateAddr: this.info.gatewayAddress, tokenId: this.token.tokenId }, this.token.gateInfo.url)
                     .then(d => {
@@ -149,7 +151,7 @@ export default {
                         rej(e);
                     });
             });
-        }
+        })
     }
 };
 </script>
