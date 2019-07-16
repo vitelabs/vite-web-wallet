@@ -72,7 +72,7 @@ export default {
                     this.token.decimals);
             }
         },
-        inspector :execWithValid(function() {
+        inspector: execWithValid(function () {
             return new Promise((res, rej) => {
                 if (this.testAmount(this.withdrawAmount)) return;
                 const amount = this.isWithdrawAll
