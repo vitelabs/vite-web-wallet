@@ -375,7 +375,6 @@ export class VBAccount {
     }
 
     lock() {
-        this.vb.killSession();
         this.vb.destroy();
 
         this.proxyActiveAcc.sendPowTx = undefined;

@@ -20,6 +20,9 @@ const mutations = {
 const updateExBalance = (commit, address) =>
     $ViteJS.request('dexfund_getAccountFundInfo', address).then(data => {
         commit('setExchangeBalance', data);
+    }).catch(e => {
+        const code = e && e.error && e.error.code;
+        code === -32002 && commit('clearDexBalance');
     });
 
 const actions = {
