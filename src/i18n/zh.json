@@ -4,7 +4,6 @@
     "start": "开始",
     "login": "登录",
     "regAcc": "注册账户",
-    "dexToken": "开通交易对",
     "unlockAcc": "解锁当前账户",
     "changeAcc": "切换其他账户",
     "existingAcc": "本地已有账户",
@@ -709,19 +708,6 @@
             "sell": "卖一价",
             "diff": "买卖价差"
         },
-        "dexToken": {
-            "title": "开通交易对",
-            "fee": "上币费",
-            "link": "前往浏览器查询",
-            "market": "开通市场",
-            "name": "开通代币名称",
-            "id": "开通代币TokenID",
-            "hint": "交易对开通成功后，如果想要添加网关标识（如BTC.V），请发邮件联系我们：info@vite.org",
-            "btn": "提交申请",
-            "search": "请输入代币名称",
-            "reqSuccess": "提交申请成功，请稍后在市场中查看",
-            "reqError": "上币失败，请稍后重试"
-        },
         "buy": {
             "title": "买入{token}",
             "price": "买入价({token})",
@@ -993,6 +979,27 @@
         "incomeList": "收益明细",
         "historyIncome": "历史收益",
         "openTxPair": "开通交易对",
-        "statusList": ["权限已转让", "交易中", "暂停交易", "交易未开通"]
+        "statusList": ["权限已转让", "交易中", "暂停交易", "交易未开通"],
+        "openTxPairConfirm": {
+            "title": "开通 {symbol} 交易对",
+            "fee": "上币费",
+            "hint": "交易对开通成功后，如果想要添加网关标识（如BTC.V），请发邮件联系我们：info@vite.org",
+            "btn": "提交申请",
+            "reqSuccess": "提交申请成功，请稍后在市场中查看",
+            "reqError": "上币失败，请稍后重试"
+        },
+        "stopTransHint": "确定要暂停 {symbol} 交易吗？",
+        "stopSuccess": "暂停成功",
+        "stopFail": "暂停失败",
+        "openSuccess": "恢复成功",
+        "openFail": "恢复失败",
+        "changeOwnerSuccess": "转让成功",
+        "changeOwnerFaill": "转让失败",
+        "submitChange": "确认转让",
+        "changeOwnerHint": "请知悉：交易对权限转让后，您将不能享有赚取手续费、调整手续费等权限，权限一经转让不得撤回",
+        "currentMaker": "当前Maker费率",
+        "confirmFee": "手续费",
+        "currentTaker": "当前Taker费率",
+        "txPairName": "交易对名称"
     }
 }

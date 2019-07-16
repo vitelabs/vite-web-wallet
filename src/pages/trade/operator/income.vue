@@ -60,14 +60,7 @@ export default {
     methods: {
         fetchOperator() {
             operator(this.address).then(data => {
-                console.log(data);
-                // this.income = data.incomeStat || {};
-                this.income = {
-                    'BTC': { 'dividendAmount': '10' },
-                    'ETH': { 'dividendAmount': '10' },
-                    'VITE': { 'dividendAmount': '10' },
-                    'USD': { 'dividendAmount': '10' }
-                };
+                this.income = data.incomeStat || {};
             }).catch(err => {
                 console.warn(err);
             });

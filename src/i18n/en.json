@@ -4,7 +4,6 @@
     "start": "Start",
     "login": "Log In",
     "regAcc": "Register",
-    "dexToken": "Open Trading Pairs",
     "unlockAcc": "Unlock Current Account",
     "changeAcc": "Switch to Other Account",
     "existingAcc": "Existing Accounts",
@@ -722,19 +721,6 @@
             "sell": "Sell price",
             "diff": "Spread"
         },
-        "dexToken": {
-            "title": "Open Trading Pair",
-            "fee": "Token listing Fees",
-            "market": "Open Market",
-            "link": "Check on Explorer",
-            "name": "Token Name",
-            "id": "Token ID",
-            "hint": "If you'd like to add gateway symbol (such as BTC.V) after open the trading pair, please contact us: info@vite.org",
-            "btn": "Submit Application",
-            "search": "Please input token name",
-            "reqSuccess": "Application submission successful! Please view in the market later",
-            "reqError": "Token listing failed, please try again later."
-        },
         "buy": {
             "title": "Buy {token}",
             "price": "Price({token})",
@@ -1016,6 +1002,22 @@
         "changeOwner": "转让所有权",
         "changeFee": "调整费率",
         "incomeList": "收益明细",
-        "openTxPair": "开通交易对"
+        "historyIncome": "历史收益",
+        "openTxPair": "开通交易对",
+        "statusList": ["权限已转让", "交易中", "暂停交易", "交易未开通"],
+        "openTxPairConfirm": {
+            "title": "开通 {symbol} 交易对",
+            "fee": "上币费",
+            "hint": "交易对开通成功后，如果想要添加网关标识（如BTC.V），请发邮件联系我们：info@vite.org",
+            "btn": "提交申请",
+            "reqSuccess": "提交申请成功，请稍后在市场中查看",
+            "reqError": "上币失败，请稍后重试"
+        },
+        "stopTransHint": "确定要暂停 {symbol} 交易吗？",
+        "stopSuccess": "暂停成功",
+        "stopFail": "暂停失败",
+        "openSuccess": "恢复成功",
+        "openFail": "恢复失败",
+        "changeOwnerHint": "请知悉：交易对权限转让后，您将不能享有赚取手续费、调整手续费等权限，权限一经转让不得撤回"
     }
 }
