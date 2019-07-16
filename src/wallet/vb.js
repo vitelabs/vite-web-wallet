@@ -3,7 +3,7 @@ import { setCurrHDAcc, getCurrHDAcc } from './index';
 import store from 'store';
 import router from 'router';
 
-export const BRIDGE = 'wss://biforst.vitewallet.com:9456';
+export const BRIDGE = 'wss://biforst.vitewallet.com';
 export class VB extends Connector {
     constructor(opts, meta) {
         super(opts, meta);
