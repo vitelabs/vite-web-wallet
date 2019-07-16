@@ -2,13 +2,16 @@
     <div class="login-wrapper">
         <div class="__title">{{ $t("login") }}</div>
 
-        <div class="switch-btn" :class="{ radius: tabName === 'vb' }">
+        <div
+            class="switch-btn"
+        >
             <div
                 class="btn-item __pointer"
                 :class="{ active: tabName === 'vb' }"
                 @click="toggleTab('vb')"
                 :key="'tb'"
             >
+                <div class="star"></div>
                 {{ $t("assets.vb.title") }}
             </div>
             <div
@@ -410,31 +413,48 @@ export default {
     }
 
     .switch-btn {
-        display: inline-block;
+        display: flex;
+        align-items: center;
         margin-bottom: 20px;
         border-radius: 16px;
         background: #007aff;
         box-shadow: 0 0 4px 0 rgba(0, 105, 219, 1);
-        padding-left: 12px;
-        &.radius {
+        &.no-padding-left {
             padding-left: 0;
-            padding-right: 12px;
+        }
+        &.no-padding-right {
+            padding-right: 0;
         }
 
         .btn-item {
-            display: inline-block;
+            align-items: center;
+            margin: 0 12px;
+            display: flex;
             color: #fff;
             font-size: 14px;
             @include font-family-bold();
             font-weight: 600;
             color: rgba(255, 255, 255, 1);
             line-height: 18px;
-
+            .star {
+                height: 10px;
+                width: 10px;
+                margin-right: 4px;
+                background-image: url(~assets/imgs/star.png);
+                background-size: contain;
+                background-repeat: no-repeat;
+            }
             &.active {
                 background: rgba(51, 187, 255, 1);
                 border-radius: 16px;
                 padding: 6px 12px;
                 box-shadow: 0 0 4px 0 rgba(0, 105, 219, 1);
+                &:first-child{
+                    margin-left: 0;
+                }
+                &:last-child{
+                    margin-right: 0;
+                }
             }
         }
     }
@@ -443,6 +463,7 @@ export default {
     }
     .vb {
         width: 100%;
+
         .code_container {
             width: 100%;
             padding: 20px;

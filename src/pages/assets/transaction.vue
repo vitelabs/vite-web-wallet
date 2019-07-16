@@ -12,17 +12,23 @@
             :leftBtnTxt="$t('wallet.transfer')"
         >
             <div class="__row">
-                <div class="__row_t">{{ $t('balance') }}</div>
+                <div class="__row_t">{{ $t("balance") }}</div>
                 <div class="__input_row __unuse_input __bold">
-                    <img  :src="token.icon||getIcon(token.tokenId)" class="__icon" />
-                    {{ token.tokenSymbol }} <span class="__right">{{ showAccBalance }}</span>
+                    <img
+                        :src="token.icon || getIcon(token.tokenId)"
+                        class="__icon"
+                    />
+                    {{ token.tokenSymbol }}
+                    <span class="__right">{{ showAccBalance }}</span>
                 </div>
             </div>
 
             <div class="__row">
                 <div class="__row_t">
-                    {{ $t('wallet.inAddress') }}
-                    <span v-show="!isValidAddress" class="__err">{{ $t('hint.addrFormat') }}</span>
+                    {{ $t("wallet.inAddress") }}
+                    <span v-show="!isValidAddress" class="__err">{{
+                        $t("hint.addrFormat")
+                    }}</span>
                 </div>
                 <vite-input
                     v-model="inAddress"
@@ -33,18 +39,24 @@
 
             <div class="__row">
                 <div class="__row_t">
-                    {{ $t('wallet.sum') }}
-                    <span v-show="amountErr" class="__err">{{ amountErr }}</span>
+                    {{ $t("wallet.sum") }}
+                    <span v-show="amountErr" class="__err">{{
+                        amountErr
+                    }}</span>
                 </div>
-                <vite-input v-model="amount" :valid="testAmount" type="number"
-                            :placeholder="$t('wallet.placeholder.amount')"></vite-input>
+                <vite-input
+                    v-model="amount"
+                    :valid="testAmount"
+                    type="number"
+                    :placeholder="$t('wallet.placeholder.amount')"
+                ></vite-input>
             </div>
 
             <div class="__row">
                 <div class="__row_t">
-                    {{ $t('wallet.remarks')}}
-                    <span class="__row_hint" :class="{ '__err': messageErr }">
-                        {{ $t('wallet.remarksLong', { len: msgBalance}) }}
+                    {{ $t("wallet.remarks") }}
+                    <span class="__row_hint" :class="{ __err: messageErr }">
+                        {{ $t("wallet.remarksLong", { len: msgBalance }) }}
                     </span>
                 </div>
                 <vite-input
@@ -67,6 +79,7 @@ import bigNumber from 'utils/bigNumber';
 import sendTx from 'utils/sendTx';
 import { getTokenIcon } from 'utils/tokenParser';
 import { verifyAmount } from 'utils/validations';
+import { execWithValid } from 'utils/execWithValid';
 
 const { getBytesSize } = utils;
 
@@ -87,10 +100,6 @@ export default {
     mounted() {
         Vue.nextTick(() => {
             this.$refs.inAddr && this.$refs.inAddr.focus();
-        });
-
-        this.$onKeyDown(13, () => {
-            this.validTrans();
         });
     },
     data() {
@@ -187,7 +196,7 @@ export default {
             !isHold && (this.isShowTrans = false);
         },
 
-        transfer() {
+        transfer: execWithValid(function () {
             if (!this.netStatus) {
                 this.$toast(this.$t('hint.noNet'));
                 return;
@@ -269,7 +278,7 @@ export default {
                     console.warn(err);
                     transError(null, err);
                 });
-        }
+        })
     }
 };
 </script>
