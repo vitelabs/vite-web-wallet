@@ -303,24 +303,22 @@ export default {
             this.tipsType = tipsType;
         },
 
-        toMintage() {
-            execWithValid(() => {
-                this.validAll();
-                if (!this.canMintage) {
-                    return;
-                }
+        toMintage: execWithValid(function () {
+            this.validAll();
+            if (!this.canMintage) {
+                return;
+            }
 
-                this.tokenInfo = {
-                    tokenName: this.tokenName.trim(),
-                    tokenSymbol: this.tokenSymbol.trim(),
-                    totalSupply: this.totalSupply,
-                    decimals: this.decimals,
-                    isReIssuable: this.isReIssuable,
-                    maxSupply: this.maxSupply,
-                    ownerBurnOnly: this.ownerBurnOnly
-                };
-            })();
-        },
+            this.tokenInfo = {
+                tokenName: this.tokenName.trim(),
+                tokenSymbol: this.tokenSymbol.trim(),
+                totalSupply: this.totalSupply,
+                decimals: this.decimals,
+                isReIssuable: this.isReIssuable,
+                maxSupply: this.maxSupply,
+                ownerBurnOnly: this.ownerBurnOnly
+            };
+        }),
         closeConfirm() {
             this.tokenInfo = null;
         }
