@@ -186,6 +186,7 @@ class WsProtoClient {
     }
 }
 
+// [TODO] Hide trade
 WsProtoClient;
 // export const client = new WsProtoClient(process.env.pushServer);
 export const client = {};
