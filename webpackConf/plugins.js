@@ -48,6 +48,7 @@ const ethNet = {
     dexTestNet: '\'https://ropsten.etherscan.io\''
 };
 const dexApiServer = {
+    production: '"https://vitex.vite.net/api/"',
     test: '"https://vitex.vite.net/test/api/"',
     dev: '"https://vitex.vite.net/test/api/"',
     // dev: '"http://132.232.65.121:8080/test/api/"',
