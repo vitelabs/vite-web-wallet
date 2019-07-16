@@ -9,7 +9,7 @@
                       :class="{ 'active': !isVip }">
                     {{ isVip ? $t('trade.limitPrice.cancelVip') : $t('trade.limitPrice.openVip') }}
                 </span>
-                <span class="fee">{{ $t('trade.limitPrice.fee') }} Taker({{ taker }}) / Maker({{ maker }})</span>
+                <span class="fee">{{ $t('trade.limitPrice.fee') }} Taker({{ exTakerFee }}) / Maker({{ exMakerFee }})</span>
                 <span class="help __pointer" @mouseenter="showHelp" @mouseleave="hideHelp">
                     <span v-show="isShowHelp" class="help-tip">
                         <span>{{ $t('trade.limitPrice.dexFee', { fee: baseFee }) }}</span>
@@ -38,6 +38,7 @@ import order from './order.vue';
 import vipConfirm from './vipConfirm.vue';
 import { StatusMap } from 'wallet';
 import { execWithValid } from 'utils/execWithValid';
+import BigNumber from 'utils/bigNumber';
 
 export default {
     components: { logoutView, order, vipConfirm },
@@ -48,39 +49,49 @@ export default {
         };
     },
     computed: {
+        baseFee() {
+            return `Taker(${ this.baseTakerFee }) / Maker(${ this.baseMakerFee })`;
+        },
+        baseMakerFee() {
+            const baseMakerFee = this.toPercentFee(this.$store.state.exchangeFee.baseMakerFee);
+            return `${ baseMakerFee }%`;
+        },
+        baseTakerFee() {
+            const baseTakerFee = this.toPercentFee(this.$store.state.exchangeFee.baseTakerFee);
+            return `${ baseTakerFee }%`;
+        },
         operatorFee() {
-            return `${ this.taker } / ${ this.maker }`;
+            return `Taker(${ this.operatorTakerFee }) / Maker(${ this.operatorMakerFee })`;
         },
-        isLogin() {
-            return this.$store.state.wallet.status === StatusMap.UNLOCK;
+        operatorTakerFee() {
+            const operatorTakerFee = this.toPercentFee(this.$store.getters.operatorTakerFee);
+            return `${ operatorTakerFee }%`;
         },
+        operatorMakerFee() {
+            const operatorMakerFee = this.toPercentFee(this.$store.getters.operatorMakerFee);
+            return `${ operatorMakerFee }%`;
+        },
+        vipFee() {
+            const vipFee = this.toPercentFee(this.$store.getters.vipFee);
+            return `${ vipFee }%`;
+        },
+        exMakerFee() {
+            const exMakerFee = this.toPercentFee(this.$store.getters.exMakerFee);
+            return `${ exMakerFee }%`;
+        },
+        exTakerFee() {
+            const exTakerFee = this.toPercentFee(this.$store.getters.exTakerFee);
+            return `${ exTakerFee }%`;
+        },
+
         isVip() {
             return this.$store.state.exchangeFee.isVip;
         },
         markerInfo() {
-            return this.$store.state.exchangeFee.markerInfo;
+            return this.$store.state.exchangeFee.marketInfo;
         },
-        baseFee() {
-            const baseFee = this.$store.state.exchangeFee.baseFee * 100;
-            return `${ baseFee }%`;
-        },
-        vipFee() {
-            const vipFee = this.$store.getters.vipFee * 100;
-            return `${ vipFee }%`;
-        },
-        taker() {
-            if (!this.markerInfo) {
-                return '0%';
-            }
-            const takerBrokerFee = this.markerInfo.takerBrokerFee * 100;
-            return `${ takerBrokerFee }%`;
-        },
-        maker() {
-            if (!this.markerInfo) {
-                return '0%';
-            }
-            const makerBrokerFeeRate = this.markerInfo.makerBrokerFeeRate * 100;
-            return `${ makerBrokerFeeRate }%`;
+        isLogin() {
+            return this.$store.state.wallet.status === StatusMap.UNLOCK;
         }
     },
     methods: {
@@ -89,6 +100,9 @@ export default {
         },
         hideHelp() {
             this.isShowHelp = false;
+        },
+        toPercentFee(fee) {
+            return BigNumber.multi(fee || 0, 100, 3);
         },
 
         hideVipConfirm() {
@@ -144,7 +158,7 @@ export default {
         position: absolute;
         top: -12px;
         right: -13px;
-        width: 180px;
+        min-width: 300px;
         padding: 10px 10px 0;
         background: #fff;
         transform: translateY(-100%);

@@ -35,7 +35,8 @@
                         :currentPage="currentPage"></pagination>
         </wallet-table>
 
-        <income-list></income-list>
+        <income-list v-if="showConfirmType === 'incomeList'"
+                     :close="closeConfirm" :txPair="activeTxPair"></income-list>
         <change-owner v-if="showConfirmType === 'changeOwner'"
                       :close="closeConfirm" :txPair="activeTxPair"
                       :fetchConfig="fetchConfigTxPair"></change-owner>
@@ -188,8 +189,9 @@ export default {
             this.activeTxPair = item;
             this.showConfirmType = 'changeOwner';
         }),
-        getIncomeList() {
-
+        getIncomeList(item) {
+            this.activeTxPair = item;
+            this.showConfirmType = 'incomeList';
         },
         closeConfirm() {
             this.activeTxPair = null;
@@ -203,8 +205,8 @@ export default {
                 quoteToken: item.txPairDetail.quoteToken,
                 stopMarket: false
             }, {
-                success: this.$t('tradeTxPairManage.openTxPairConfirm.openSuccess'),
-                fail: this.$t('tradeTxPairManage.openTxPairConfirm.openFail')
+                success: this.$t('tradeTxPairManage.openSuccess'),
+                fail: this.$t('tradeTxPairManage.openFail')
             });
         },
         fetchStopTx(item) {
@@ -214,62 +216,65 @@ export default {
                 quoteToken: item.txPairDetail.quoteToken,
                 stopMarket: true
             }, {
-                success: this.$t('tradeTxPairManage.openTxPairConfirm.stopSuccess'),
-                fail: this.$t('tradeTxPairManage.openTxPairConfirm.stopFail')
+                success: this.$t('tradeTxPairManage.stopSuccess'),
+                fail: this.$t('tradeTxPairManage.stopFail')
             });
         },
 
-        fetchConfigTxPair({ operationCode, tradeToken, quoteToken, owner = this.address, takerFeeRate = 0, makerFeeRate = 0, stopMarket }, { success = '', fail = '' }) {
+        fetchConfigTxPair(config, { success = '', fail = '' }) {
             initPwd({
                 submit: () => {
-                    sendTx({
-                        methodName: 'callContract',
-                        data: {
-                            toAddress: constant.DexFund_Addr,
-                            abi: {
-                                'type': 'function',
-                                'name': 'DexFundMarketOwnerConfig',
-                                'inputs': [
-                                    {
-                                        'name': 'operationCode',
-                                        'type': 'uint8'
-                                    },
-                                    {
-                                        'name': 'tradeToken',
-                                        'type': 'tokenId'
-                                    },
-                                    {
-                                        'name': 'quoteToken',
-                                        'type': 'tokenId'
-                                    },
-                                    {
-                                        'name': 'owner',
-                                        'type': 'address'
-                                    },
-                                    {
-                                        'name': 'takerFeeRate',
-                                        'type': 'int32'
-                                    },
-                                    {
-                                        'name': 'makerFeeRate',
-                                        'type': 'int32'
-                                    },
-                                    {
-                                        'name': 'stopMarket',
-                                        'type': 'bool'
-                                    }
-                                ]
-                            },
-                            params: [ operationCode, tradeToken, quoteToken, owner, takerFeeRate, makerFeeRate, !!stopMarket ],
-                            tokenId: quoteToken
-                        }
-                    }).then(() => {
+                    this.onlyFetchConfig(config).then(() => {
                         this.$toast(success);
                         this.showConfirmType && this.closeConfirm();
                     }).catch(err => {
                         console.warn(err);
                         this.$toast(fail, err);
                     });
+                }
+            });
+        },
+        onlyFetchConfig({ operationCode, tradeToken, quoteToken, owner = this.address, takerFeeRate = 0, makerFeeRate = 0, stopMarket = false }) {
+            return sendTx({
+                methodName: 'callContract',
+                data: {
+                    toAddress: constant.DexFund_Addr,
+                    abi: {
+                        'type': 'function',
+                        'name': 'DexFundMarketOwnerConfig',
+                        'inputs': [
+                            {
+                                'name': 'operationCode',
+                                'type': 'uint8'
+                            },
+                            {
+                                'name': 'tradeToken',
+                                'type': 'tokenId'
+                            },
+                            {
+                                'name': 'quoteToken',
+                                'type': 'tokenId'
+                            },
+                            {
+                                'name': 'owner',
+                                'type': 'address'
+                            },
+                            {
+                                'name': 'takerFeeRate',
+                                'type': 'int32'
+                            },
+                            {
+                                'name': 'makerFeeRate',
+                                'type': 'int32'
+                            },
+                            {
+                                'name': 'stopMarket',
+                                'type': 'bool'
+                            }
+                        ]
+                    },
+                    params: [ operationCode, tradeToken, quoteToken, owner, takerFeeRate, makerFeeRate, !!stopMarket ],
+                    tokenId: quoteToken
                 }
             });
         },
