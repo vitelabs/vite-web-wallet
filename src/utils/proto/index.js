@@ -186,7 +186,10 @@ class WsProtoClient {
     }
 }
 
-export const client = new WsProtoClient(process.env.pushServer);
+// [TODO] Hide trade
+WsProtoClient;
+// export const client = new WsProtoClient(process.env.pushServer);
+export const client = {};
 
 function getRealData(data) {
     if (data.error_code) {
