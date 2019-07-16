@@ -40,7 +40,7 @@
     },
     "dealReminder": {
         "title": "成交提醒",
-        "describe": "你于{time} 委托的 {amount} {ttoken} ({ftoken}/{ttoken})已完全成交，详细记录可在委托历史中查看。"
+        "describe": "你于{time} 委托的 {amount} {ftoken} ({ftoken}/{ttoken})已完全成交，详细记录可在委托历史中查看。"
     },
     "pow": {
         "ing": "正在运行PoW获取配额",
