@@ -3,7 +3,10 @@
         <div class="symbol">{{ token.tokenSymbol || ''}}</div>
         <div class="amount">{{ token.income || ''}}</div>
         <div class="btn-list">
-            <span class="__pointer" @click="unlock('changeTransferTokenOwner')">{{ $t('tradeOperator.permission') }}</span>
+            <span v-if="token.status === 1" class="unuse">{{ $t('tradeOperator.permission') }}</span>
+            <span v-if="token.status !== 1" class="__pointer"
+                  @click="unlock('changeTransferTokenOwner')">
+                {{ $t('tradeOperator.permission') }}</span>
             <span class="__pointer" @click="goTxPairManage">{{ $t('tradeOperator.txPairManage') }}</span>
         </div>
 
@@ -158,6 +161,11 @@ export default {
             border: 1px solid rgba(0,122,255,0.3);
             &:first-child {
                 margin-right: 12px;
+            }
+            &.unuse {
+                background: #efefef;
+                color: #666;
+                border: none;
             }
         }
     }
