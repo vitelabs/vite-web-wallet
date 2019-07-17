@@ -49,7 +49,7 @@ export default {
             if (code === '1000001') {
                 return;
             }
-            if (code === 11011 || code === 11012 || code === 11020) {// wc 拒绝，断开
+            if (code === 11012 || code === 11020) {// wc 取消授权，断开
                 return;
             }
 
