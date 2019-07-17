@@ -124,13 +124,19 @@ export default {
                 overMax: this.$t('tokenCard.withdraw.balanceErrMap.overMax', { max: `${ bigNumber.toBasic(this.info.maximumWithdrawAmount, this.token.decimals) } ${ this.token.tokenSymbol }` }),
                 lessMin: this.$t('tokenCard.withdraw.balanceErrMap.lessMin', { min: `${ bigNumber.toBasic(this.info.minimumWithdrawAmount, this.token.decimals) } ${ this.token.tokenSymbol }` })
             };
-            return getValidBalance({ balance: bigNumber.minus(this.token.totalAmount, this.feeMin), decimals: this.token.decimals, minNum: this.info.minimumWithdrawAmount, maxNum: this.info.maximumWithdrawAmount, errorMap })(val);
+            return getValidBalance({
+                balance: bigNumber.minus(this.token.totalAmount, this.feeMin),
+                decimals: this.token.decimals,
+                minNum: this.info.minimumWithdrawAmount,
+                maxNum: this.info.maximumWithdrawAmount,
+                errorMap
+            })(val);
         },
         withdrawAll() {
             if (this.token.totalAmount && bigNumber.compared(this.token.totalAmount, '0') > 0) {
                 this.fetchingFee = true;
-                getWithdrawFee({ tokenId: this.token.tokenId, walletAddress: this.defaultAddr, amount: this.token.totalAmount, containsFee: true }, this.token.gateInfo.url).then(fee => {
-                    this.feeMin = fee;
+                getWithdrawFee({ tokenId: this.token.tokenId, walletAddress: this.defaultAddr, amount: this.token.totalAmount, containsFee: true }, this.token.gateInfo.url).then(d => {
+                    this.feeMin = d.fee;
                     this.fetchingFee = false;
                     this.withdrawAmountMin = bigNumber.minus(this.token.totalAmount, this.feeMin);
                     this.withdrawAmount = bigNumber.toBasic(this.withdrawAmountMin, this.token.decimals);

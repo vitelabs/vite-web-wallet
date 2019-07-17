@@ -189,7 +189,7 @@ export default {
             .tag {
                 width: 9px;
                 height: 9px;
-                margin-right: 10px;
+                margin-right: 12px;
                 > rect {
                     width: 9px;
                     height: 9px;
@@ -198,7 +198,7 @@ export default {
             .text {
                 font-size: 12px;
                 color: #24272b;
-                margin-right: 20px;
+                margin-right: 22px;
             }
         }
     }
