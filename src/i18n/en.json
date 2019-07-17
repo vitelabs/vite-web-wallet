@@ -658,19 +658,19 @@
     "assets": {
         "title": "Assets",
         "vb":{
-            "title":"WalletConnect",
+            "title":"ViteBifrost",
             "connect":{
-                "tips":"Scan a QR code to link your mobile wallet using WalletConnect."
+                "tips":"Scan a QR code to link your mobile wallet using ViteBifrost."
             },
             "confirm":{
-                "tips":"请在VITE App上确认交易"
+                "tips":"Please confirm transaction on VITE App"
             },
             "start":{
-                "scan":"Scan a QR code to link your mobile wallet using WalletConnect.",
-                "downloadTips":"Don’t have an app that supports WalletConnect yet? ",
-                "download":"Get Vite Wallet"
+                "scan":"Scan a QR code to link your mobile wallet using ViteBifrost.",
+                "downloadTips":"Don’t have an app that supports ViteBifrost yet? ",
+                "download":"Download Vite Wallet"
             },
-            "defaultName":"我的账户"
+            "defaultName":"My Account"
         }
     },
     "walletConversion": {
