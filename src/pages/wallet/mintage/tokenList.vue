@@ -41,14 +41,14 @@
             <span v-for="(item, i) in showTokenList" :key="i"
                   :slot="`${i}showTotalSupplyAfter`">
                 <i v-if="item.isTotalOver" class="tipsicon __pointer">
-                    <tooltips class="icon-tooltips" :content="item.totalSupply"></tooltips>
+                    <tooltips class="icon-tooltips" :content="item.simpleTotalSupply"></tooltips>
                 </i>
             </span>
 
             <span v-for="(item, i) in showTokenList" :key="i"
                   :slot="`${i}showMaxSupplyAfter`">
                 <i v-if="item.isMaxOver" class="tipsicon __pointer">
-                    <tooltips class="icon-tooltips" :content="item.maxSupply"></tooltips>
+                    <tooltips class="icon-tooltips" :content="item.simpleMaxSupply"></tooltips>
                 </i>
             </span>
 
@@ -160,13 +160,13 @@ export default {
         showTokenList() {
             const list = [];
             this.tokenList.forEach(item => {
-                item.totalSupply = BigNumber.toBasic(item.totalSupply, item.decimals);
-                item.isTotalOver = item.totalSupply.length > 10;
-                item.showTotalSupply = item.isTotalOver ? `${ item.totalSupply.slice(0, 10) }...` : item.totalSupply;
+                item.simpleTotalSupply = BigNumber.toBasic(item.totalSupply, item.decimals);
+                item.isTotalOver = item.simpleTotalSupply.length > 10;
+                item.showTotalSupply = item.isTotalOver ? `${ item.simpleTotalSupply.slice(0, 10) }...` : item.simpleTotalSupply;
 
-                item.maxSupply = item.isReIssuable ? BigNumber.toBasic(item.maxSupply, item.decimals) : '--';
-                item.isMaxOver = item.maxSupply.length > 10;
-                item.showMaxSupply = item.isMaxOver ? `${ item.maxSupply.slice(0, 10) }...` : item.maxSupply;
+                item.simpleMaxSupply = item.isReIssuable ? BigNumber.toBasic(item.maxSupply, item.decimals) : '--';
+                item.isMaxOver = item.simpleMaxSupply.length > 10;
+                item.showMaxSupply = item.isMaxOver ? `${ item.simpleMaxSupply.slice(0, 10) }...` : item.simpleMaxSupply;
 
                 item.ownerBurnOnly = item.isReIssuable ? item.ownerBurnOnly : '--';
 
