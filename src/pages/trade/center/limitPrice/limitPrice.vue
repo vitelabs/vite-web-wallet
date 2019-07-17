@@ -9,7 +9,7 @@
                       :class="{ 'active': !isVip }">
                     {{ isVip ? $t('trade.limitPrice.cancelVip') : $t('trade.limitPrice.openVip') }}
                 </span>
-                <span>{{ $t('trade.limitPrice.fee') }} 
+                <span>{{ $t('trade.limitPrice.fee') }}
                     <span class="fee">Taker({{ exTakerFee }}) / Maker({{ exMakerFee }})</span>
                 </span>
                 <span class="help __pointer" @mouseenter="showHelp" @mouseleave="hideHelp">

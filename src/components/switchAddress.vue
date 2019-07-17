@@ -123,7 +123,7 @@ export default {
             display: inline-block;
             width: 16px;
             height: 16px;
-            margin-bottom: -2px;
+            margin-bottom: -3px;
             background: url('~assets/imgs/uiKit/select/down.svg');
             background-size: 16px 16px;
         }
