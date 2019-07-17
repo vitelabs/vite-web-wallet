@@ -81,6 +81,7 @@ import boolRadio from 'components/boolRadio';
 import BigNumber from 'utils/bigNumber';
 import mintageConfirm from './confirm';
 import { execWithValid } from 'utils/execWithValid';
+import { checkAmountFormat } from 'utils/validations';
 
 const maxNum = BigNumber.exponentiated(2, 256, '-1');
 
@@ -135,22 +136,21 @@ export default {
             this.maxSupplyErr = '';
         },
         totalSupply() {
-            this.isTotalSupply();
-            this.isDecimals();
-            this.isMaxSupply();
+            this.testNum();
         },
         decimals() {
-            this.isTotalSupply();
-            this.isDecimals();
-            this.isMaxSupply();
+            this.testNum();
         },
         maxSupply() {
-            this.isTotalSupply();
-            this.isDecimals();
-            this.isMaxSupply();
+            this.testNum();
         }
     },
     methods: {
+        testNum() {
+            this.isDecimals();
+            this.isTotalSupply();
+            this.isMaxSupply();
+        },
         isTokenName() {
             const Len = 40;
             const tokenName = this.tokenName.trim();
@@ -185,7 +185,7 @@ export default {
             return true;
         },
         isTotalSupply() {
-            if (this.decimals === '' || this.decimalsErr) {
+            if (this.decimalsErr) {
                 this.totalSupplyErr = '';
                 return false;
             }
@@ -195,15 +195,14 @@ export default {
                 return false;
             }
 
-            if (!utils.isNonNegativeInteger(this.totalSupply)) {
+            const decimals = this.decimals || 0;
+
+            if (checkAmountFormat(this.totalSupply, decimals) !== 0) {
                 this.totalSupplyErr = this.$t('walletMintage.err.totalSupplyFormat');
                 return false;
             }
 
-            const decimals = this.decimals || 0;
-            const unit = BigNumber.exponentiated(10, decimals);
-            const totalSupply = BigNumber.multi(this.totalSupply, unit);
-
+            const totalSupply = BigNumber.toMin(this.totalSupply, decimals);
             if (BigNumber.compared(totalSupply, maxNum) > 0) {
                 this.totalSupplyErr = this.$t('walletMintage.err.supplyMax');
                 return false;
@@ -223,18 +222,6 @@ export default {
                 return false;
             }
 
-            if (!this.totalSupply || this.totalSupplyErr) {
-                this.decimalsErr = '';
-                return false;
-            }
-
-            const min = BigNumber.exponentiated(10, this.decimals);
-
-            if (BigNumber.compared(this.totalSupply, min) < 0) {
-                this.decimalsErr = this.$t('walletMintage.err.decimalsMax');
-                return false;
-            }
-
             this.decimalsErr = '';
             return true;
         },
@@ -249,7 +236,9 @@ export default {
                 return false;
             }
 
-            if (!utils.isNonNegativeInteger(this.maxSupply)) {
+            const decimals = this.decimals || 0;
+
+            if (checkAmountFormat(this.maxSupply, decimals) !== 0) {
                 this.maxSupplyErr = this.$t('walletMintage.err.maxSupplyFormat');
                 return false;
             }
@@ -265,10 +254,7 @@ export default {
                 return false;
             }
 
-            const decimals = this.decimals || 0;
-            const unit = BigNumber.exponentiated(10, decimals);
-            const maxSupply = BigNumber.multi(this.maxSupply, unit);
-
+            const maxSupply = BigNumber.toMin(this.maxSupply, decimals);
             if (BigNumber.compared(maxSupply, maxNum) > 0) {
                 this.maxSupplyErr = this.$t('walletMintage.err.supplyMax');
                 return false;
@@ -281,9 +267,7 @@ export default {
         validAll() {
             this.isTokenName();
             this.isTokenSymbol();
-            this.isTotalSupply();
-            this.isDecimals();
-            this.isMaxSupply();
+            this.testNum();
         },
         clearAll() {
             this.decimals = '0';
