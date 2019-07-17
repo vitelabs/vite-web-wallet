@@ -114,7 +114,7 @@ export default {
         text-align: center;
         border-radius: 2px;
         font-size: 12px;
-        font-family: font-family-bold();
+        @include font-family-bold();
         font-weight: 600;
         line-height: 16px;
         &.add {

@@ -22,7 +22,7 @@
                 <div v-show="!singleBtn" class="btn btn-border __pointer"
                      @click="_leftBtnClick">{{ leftBtnTxt }}</div>
                 <div v-show="!singleBtn" class="btn btn-blue __pointer"
-                     :class="{'unuse': btnUnuse && !isLoading }"
+                     :class="{'btn-gray': btnUnuse && !isLoading }"
                      @click="_rightBtnClick">
                     <span v-show="!isLoading">{{ rightBtnTxt }}</span>
                     <loading v-show="isLoading" loadingType="dot"></loading>
@@ -117,4 +117,12 @@ export default {
 @import "~assets/scss/vars.scss";
 @import "./confirm.scss";
 @import "./confirmRow.scss";
+
+.income-list-confirm .content-wrapper {
+    padding: 0;
+    min-height: 422px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
 </style>

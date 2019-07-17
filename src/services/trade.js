@@ -211,3 +211,11 @@ export function operatorMarkets({ operatorId, tradeToken, offset, limit = 30 }) 
         params: { operatorId, tradeToken, offset, limit }
     });
 }
+
+export function operatorIncome({ operatorId, tradeToken, quoteToken, offset, limit = 30 }) {
+    return request({
+        path: `${ path }/operator/income`,
+        method: 'GET',
+        params: { operatorId, tradeToken, quoteToken, offset, limit }
+    });
+}

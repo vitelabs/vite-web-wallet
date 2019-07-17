@@ -3,9 +3,8 @@
 @mixin block {
     .block__title {
         height: 16px;
-        font-size: 14px;
+        font-size: 12px;
         @include font-family-bold();
-        font-weight: 600;
         color: rgba(29, 32, 36, 1);
         line-height: 16px;
         margin-top: 20px;
@@ -23,13 +22,13 @@
 
 .block__content {
     position: relative;
-    height: 40px;
+    height: 34px;
     border-radius: 2px;
     border: 1px solid rgba(212, 222, 231, 1);
-    font-size: 14px;
+    font-size: 12px;
     word-break: break-word;
     width: 100%;
-    line-height: 40px;
+    line-height: 34px;
     box-sizing: border-box;
     margin-top: 16px;
     padding: 10px 15px;
@@ -58,7 +57,7 @@
         img {
             width: 20px;
             height: 20px;
-            margin-right: 10px;
+            margin-right: 20px;
         }
     }
     input {
@@ -67,8 +66,12 @@
     .light {
         color: #5e6875;
     }
+    .blue {
+        color: #007aff;
+    }
     &.edit {
         text-align: left;
         background: rgba(243, 246, 249, 1);
+        @include font-family-bold();
     }
 }

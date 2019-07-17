@@ -3,6 +3,7 @@
         <confirm
             v-show="isShowTrans"
             class="trans-confirm"
+            :showMask="true"
             :title="$t('wallet.transfer')"
             :btnUnuse="unTrans"
             :closeIcon="true"

@@ -381,6 +381,7 @@ export default {
                     font-size: 18px;
                     line-height: 26px;
                     font-family: $font-bold;
+                    white-space: nowrap;
                 }
                 .asset__cash {
                     color: #5e687594;

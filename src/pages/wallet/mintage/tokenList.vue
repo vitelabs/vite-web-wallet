@@ -41,14 +41,14 @@
             <span v-for="(item, i) in showTokenList" :key="i"
                   :slot="`${i}showTotalSupplyAfter`">
                 <i v-if="item.isTotalOver" class="tipsicon __pointer">
-                    <tooltips class="icon-tooltips" :content="item.totalSupply"></tooltips>
+                    <tooltips class="icon-tooltips" :content="item.simpleTotalSupply"></tooltips>
                 </i>
             </span>
 
             <span v-for="(item, i) in showTokenList" :key="i"
                   :slot="`${i}showMaxSupplyAfter`">
                 <i v-if="item.isMaxOver" class="tipsicon __pointer">
-                    <tooltips class="icon-tooltips" :content="item.maxSupply"></tooltips>
+                    <tooltips class="icon-tooltips" :content="item.simpleMaxSupply"></tooltips>
                 </i>
             </span>
 
@@ -68,7 +68,7 @@
 
         </wallet-table>
 
-        <show-confirm v-if="changeOwnerToken" class="middle"
+        <show-confirm v-if="changeOwnerToken" class="middle" :btnUnuse="!!(!address || !isValidAddress)"
                       :title="$t('walletMintage.changeOwnerConfirm.title')" :showMask="true"
                       :leftBtnTxt="$t('walletMintage.cancel')" :leftBtnClick="cancelChangeOwner"
                       :rightBtnTxt="$t('walletMintage.submit')" :rightBtnClick="toChangeOwner">
@@ -94,7 +94,7 @@
             </div>
         </show-confirm>
 
-        <show-confirm v-if="issueToken" class="middle"
+        <show-confirm v-if="issueToken" class="middle" :btnUnuse="!!(!address || !isValidAddress || amountErr || !amount)"
                       :title="$t('walletMintage.issueConfirm.title')" :showMask="true"
                       :leftBtnTxt="$t('walletMintage.cancel')" :leftBtnClick="cancelIssue"
                       :rightBtnTxt="$t('walletMintage.submit')" :rightBtnClick="toIssue">
@@ -160,13 +160,13 @@ export default {
         showTokenList() {
             const list = [];
             this.tokenList.forEach(item => {
-                item.totalSupply = BigNumber.toBasic(item.totalSupply, item.decimals);
-                item.isTotalOver = item.totalSupply.length > 10;
-                item.showTotalSupply = item.isTotalOver ? `${ item.totalSupply.slice(0, 10) }...` : item.totalSupply;
+                item.simpleTotalSupply = BigNumber.toBasic(item.totalSupply, item.decimals);
+                item.isTotalOver = item.simpleTotalSupply.length > 10;
+                item.showTotalSupply = item.isTotalOver ? `${ item.simpleTotalSupply.slice(0, 10) }...` : item.simpleTotalSupply;
 
-                item.maxSupply = item.isReIssuable ? BigNumber.toBasic(item.maxSupply, item.decimals) : '--';
-                item.isMaxOver = item.maxSupply.length > 10;
-                item.showMaxSupply = item.isMaxOver ? `${ item.maxSupply.slice(0, 10) }...` : item.maxSupply;
+                item.simpleMaxSupply = item.isReIssuable ? BigNumber.toBasic(item.maxSupply, item.decimals) : '--';
+                item.isMaxOver = item.simpleMaxSupply.length > 10;
+                item.showMaxSupply = item.isMaxOver ? `${ item.simpleMaxSupply.slice(0, 10) }...` : item.simpleMaxSupply;
 
                 item.ownerBurnOnly = item.isReIssuable ? item.ownerBurnOnly : '--';
 
@@ -207,33 +207,27 @@ export default {
                 this.$toast(this.$t('walletMintage.getListFail'));
             });
         },
-        changeReIssuable(item) {
-            execWithValid(() => {
-                initPwd({
-                    title: this.$t('walletMintage.reIssuableConfirm.title'),
-                    content: this.$t('walletMintage.reIssuableConfirm.text', { tokenName: item.tokenName }),
-                    submit: () => {
-                        this.toChangeReIssuale(item);
-                    }
-                }, true);
-            })();
-        },
-        changeOwner(item) {
-            execWithValid(() => {
-                this.changeOwnerToken = item;
-            })();
-        },
+        changeReIssuable: execWithValid(function (item) {
+            initPwd({
+                title: this.$t('walletMintage.reIssuableConfirm.title'),
+                content: this.$t('walletMintage.reIssuableConfirm.text', { tokenName: item.tokenName }),
+                submit: () => {
+                    this.toChangeReIssuale(item);
+                }
+            }, true);
+        }),
+        changeOwner: execWithValid(function (item) {
+            this.changeOwnerToken = item;
+        }),
         cancelChangeOwner() {
             this.changeOwnerToken = null;
             this.address = '';
             this.isValidAddress = true;
         },
-        issue(item) {
-            execWithValid(() => {
-                this.issueToken = item;
-                this.address = this.issueToken.owner;
-            })();
-        },
+        issue: execWithValid(function (item) {
+            this.issueToken = item;
+            this.address = this.issueToken.owner;
+        }),
         cancelIssue() {
             this.issueToken = null;
             this.address = '';

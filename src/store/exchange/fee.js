@@ -1,13 +1,17 @@
 import $ViteJS from 'utils/viteClient';
 import { timer } from 'utils/asyncFlow';
+import BigNumber from 'utils/bigNumber';
 
-const baseFee = process.env.NODE_ENV === 'dexTestNet' ? 0.0025 : 0.002;
+const baseMakerFee = 0.002;
+const baseTakerFee = 0.002;
+
 let vipTimer = null;
 let nextVip = null;
 
 const state = {
     isVip: false,
-    baseFee,
+    baseMakerFee,
+    baseTakerFee,
     marketInfo: {}
 };
 
@@ -43,7 +47,6 @@ const actions = {
             if (_activeTxPair.symbol !== getters.exActiveTxPair.symbol) {
                 return;
             }
-            console.log(data);
 
             commit('setExchangeMarketInfo', data);
         });
@@ -62,12 +65,21 @@ const getters = {
     vipFee(state) {
         return getVipFee(state.isVip);
     },
-    exFee(state) {
+    operatorMakerFee(state) {
+        return getOperatorFee(state.marketInfo.makerBrokerFeeRate);
+    },
+    operatorTakerFee(state) {
+        return getOperatorFee(state.marketInfo.takerBrokerFeeRate);
+    },
+    exMakerFee(state) {
         const vipFee = getVipFee(state.isVip);
-        // const takerBrokerFee = state.marketInfo.takerBrokerFee;
-        // const makerBrokerFeeRate = state.marketInfo.makerBrokerFeeRate;
-        // console.log(state.marketInfo);
-        return baseFee - vipFee;
+        const operatorMakerFee = getOperatorFee(state.marketInfo.makerBrokerFeeRate);
+        return baseMakerFee + Number(operatorMakerFee) - vipFee;
+    },
+    exTakerFee(state) {
+        const vipFee = getVipFee(state.isVip);
+        const operatorTakerFee = getOperatorFee(state.marketInfo.takerBrokerFeeRate);
+        return baseTakerFee + Number(operatorTakerFee) - vipFee;
     }
 };
 
@@ -81,6 +93,10 @@ export default {
 
 function getVipFee(isVip) {
     return isVip ? 0.001 : 0;
+}
+
+function getOperatorFee(fee) {
+    return BigNumber.dividedToNumber(fee || 0, 100000, 5);
 }
 
 function stopLoopVip() {

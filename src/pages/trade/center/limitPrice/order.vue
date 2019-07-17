@@ -48,14 +48,8 @@
         </div>
 
         <div class="slider-wrapper">
-            <slider
-                :class="orderType"
-                :min="0"
-                :max="100"
-                :default="0"
-                v-model="percent"
-                v-on:drag="percentChanged"
-            ></slider>
+            <slider class="dex-order" :class="orderType" :min="0" :max="100" :default="0"
+                    v-model="percent" v-on:drag="percentChanged"></slider>
         </div>
 
         <div class="dex-input-wrapper">
@@ -204,7 +198,7 @@ export default {
     },
     computed: {
         fee() {
-            return this.$store.getters.exFee;
+            return this.$store.getters.exMakerFee;
         },
         realPrice() {
             if (!this.rate || this.priceErr || !this.price) {

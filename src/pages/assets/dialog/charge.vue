@@ -70,66 +70,43 @@ export default {
 
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
+@import "./dialog.scss";
+@include block;
 
-.block__title {
-    height: 16px;
-    font-size: 14px;
-    @include font-family-bold();
-    font-weight: 600;
-    color: rgba(29, 32, 36, 1);
-    line-height: 16px;
-    margin-top: 20px;
-    &:first-child {
-        margin-top: 0;
-    }
-    .title_icon {
-        float: right;
-        &.copy {
-            margin-right: 10px;
-        }
-    }
+.block__title .title_icon {
+    width: 18px;
+    height: 18px;
+    float: right;
 }
 .block__content {
-    height: 40px;
     background: rgba(243, 246, 249, 1);
-    border-radius: 2px;
-    border: 1px solid rgba(212, 222, 231, 1);
-    font-size: 14px;
-    word-break: break-word;
-    width: 100%;
-    line-height: 40px;
-    box-sizing: border-box;
-    margin-top: 16px;
-    text-align: center;
-    &.err{
-        color: #FF2929;
-    }
-    &input {
-        text-align: left;
-    }
+    color: #5E6875
 }
 .qrcode-container {
-    width: 455px;
     background: rgba(243, 246, 249, 1);
     border: 1px solid rgba(212, 222, 231, 1);
     margin-top: 20px;
     padding: 20px;
-    font-size: 16px;
+    font-size: 14px;
+    line-height: 18px;
+    @include font-family-normal();
+    color: rgba(29,32,36,1);
     box-sizing: border-box;
     text-align: center;
     &__content {
-        margin-top: 22px;
+        margin-top: 20px;
     }
 }
 .charge-tips {
-    height: 18px;
+    @include font-family-normal();
+    line-height: 18px;
     font-size: 14px;
     color: rgba(94, 104, 117, 1);
-    line-height: 18px;
     padding-left: 13px;
-    margin-top: 20px;
+    margin-top: 10px;
     position: relative;
     width: 100%;
+    margin-top: 20px;
     .dot {
         width: 6px;
         height: 6px;

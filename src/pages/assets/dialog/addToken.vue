@@ -16,6 +16,7 @@ block content
 </template>
 
 <script>
+// [TODO] Use components/confirm
 import search from 'components/search';
 import { gateStorage } from 'services/gate';
 
@@ -66,17 +67,17 @@ export default {
     .search-input{
         box-sizing: border-box;
         width: 100%;
-        height: 50px;
+        height: 40px;
         padding-left: 33px;
         border-radius: 2px 2px 0px 0px;
         border: 1px solid rgba(212,222,231,1);
-        font-size: 14px;
+        font-size: 12px;
     }
     .search-icon{
         width: 12px;
         height: 12px;
         position: absolute;
-        left: 15px;
+        left: 12px;
         top: 50%;
         transform: translateY(-50%);
     }

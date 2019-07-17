@@ -93,11 +93,14 @@ export default {
                 submit: () => {
                     this.isLoading = true;
 
-                    sendTx('callContract', {
-                        toAddress: constant.DexFund_Addr,
-                        abi: { 'type': 'function', 'name': 'DexFundTransferTokenOwner', 'inputs': [ { 'name': 'token', 'type': 'tokenId' }, { 'name': 'owner', 'type': 'address' } ] },
-                        params: [ tokenId, this.address ],
-                        tokenId
+                    sendTx({
+                        methodName: 'callContract',
+                        data: {
+                            toAddress: constant.DexFund_Addr,
+                            abi: { 'type': 'function', 'name': 'DexFundTransferTokenOwner', 'inputs': [ { 'name': 'token', 'type': 'tokenId' }, { 'name': 'owner', 'type': 'address' } ] },
+                            params: [ tokenId, this.address ],
+                            tokenId
+                        }
                     }).then(() => {
                         this.isLoading = false;
                         this.$toast(this.$t('hint.operateSuccess'));

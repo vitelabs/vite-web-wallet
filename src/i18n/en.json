@@ -4,7 +4,6 @@
     "start": "Start",
     "login": "Log In",
     "regAcc": "Register",
-    "dexToken": "Open Trading Pairs",
     "unlockAcc": "Unlock Current Account",
     "changeAcc": "Switch to Other Account",
     "existingAcc": "Existing Accounts",
@@ -42,7 +41,7 @@
     },
     "dealReminder": {
         "title": "Deal Notice",
-        "describe": "Your order {amount} {ttoken} ({ftoken}/{ttoken}) at {time} is a complete deal, visit Order History to find out more."
+        "describe": "Your order {amount} {ftoken} ({ftoken}/{ttoken}) at {time} is a complete deal, visit Order History to find out more."
     },
     "pow": {
         "ing": "Running PoW to acquire quota",
@@ -107,7 +106,8 @@
         "TxResFail": "Transfer",
         "SendRefund": "Transfer",
         "GenesisReceive": "Genesis",
-        "DexFundTransferTokenOwner": "运营商中心权限转让"
+        "DexFundTransferTokenOwner": "运营商中心权限转让",
+        "DexFundMarketOwnerConfig": "运营商交易对配置"
     },
     "btn": {
         "cancel": "Cancel",
@@ -146,7 +146,7 @@
         "text3": "Please take proper precautions in ensuring that you accurately record and safely store your seed phrase. Even the slightest error will result in you not being able to successfully restore your address."
     },
     "preview": {
-        "t": "Version 1.6.0",
+        "t": "Version {version}",
         "txt1": "Vite Web Wallet is a light node wallet launched by Vite Labs",
         "txt2": "The wallet in the current version supports functions of query account balances, send and default receive transactions,  staking VITE for quota, SBP registration, voting ,etc.",
         "txt3": "We are now working on the Vite DEX, stay tuned.",
@@ -531,7 +531,7 @@
         "title": "SBP",
         "help": {
             "title": "About SBP",
-            "text": "SBP（Snapshot Block Producer）is a node that has right to create blocks, you can register to become a SBP candidate by staking a certain amount of VITE, each round (about 75 seconds) will elect 25 SBPs, the SBPs will be elected from random 23 out of top 25 candidate nodes, plus random 2 out of the candidate nodes ranking 26th-100th on the list. The 50% of block creation rewards will be allocated to the block creation node, the other 50% will be allocated to nodes that are ranked on top 100 as voting rewards. <br/><br/> One registration address (staking address) can register multiple block creation nodes (node names), a node name cannot be used if the node name has been registered by a registration address. A node name can switch block creation address, however, block creation address cannot be reused by other node names."
+            "text": "SBP（Snapshot Block Producer）is a node that has right to create blocks, you can register to become a SBP candidate by staking a certain amount of VITE, each round (about 75 seconds) will elect 25 SBPs, the SBPs will be elected from random 23 out of top 25 candidate nodes, plus random 2 out of the candidate nodes ranking 26th-100th on the list. The 50% of block creation rewards will be allocated to the block creation node, the other 50% will be allocated to nodes that are ranked on top 100 as voting rewards. One registration address (staking address) can register multiple block creation nodes (node names), a node name cannot be used if the node name has been registered by a registration address. A node name can switch block creation address, however, block creation address cannot be reused by other node names."
         },
         "register": "SBP Registration",
         "cancel": "SBP Cancellation",
@@ -721,19 +721,6 @@
             "buy": "Buy price",
             "sell": "Sell price",
             "diff": "Spread"
-        },
-        "dexToken": {
-            "title": "Open Trading Pair",
-            "fee": "Token listing Fees",
-            "market": "Open Market",
-            "link": "Check on Explorer",
-            "name": "Token Name",
-            "id": "Token ID",
-            "hint": "If you'd like to add gateway symbol (such as BTC.V) after open the trading pair, please contact us: info@vite.org",
-            "btn": "Submit Application",
-            "search": "Please input token name",
-            "reqSuccess": "Application submission successful! Please view in the market later",
-            "reqError": "Token listing failed, please try again later."
         },
         "buy": {
             "title": "Buy {token}",
@@ -994,8 +981,10 @@
         "title": "运营商中心",
         "tokenList": "运营代币",
         "totalIncome": "历史总收益",
-        "permission": "权限转入",
+        "permission": "权限转让",
         "txPairManage": "交易对管理",
+        "noOperator": "该地址下暂无交易对，想成为运营商",
+        "learnMore": "了解更多",
         "permissionConfirm": {
             "title": "转让所有权",
             "submit": "确认转入",
@@ -1016,6 +1005,35 @@
         "changeOwner": "转让所有权",
         "changeFee": "调整费率",
         "incomeList": "收益明细",
-        "openTxPair": "开通交易对"
+        "historyIncome": "历史收益",
+        "openTxPair": "开通交易对",
+        "statusList": ["权限已转让", "交易中", "暂停交易", "交易未开通"],
+        "openTxPairConfirm": {
+            "title": "开通 {symbol} 交易对",
+            "fee": "上币费",
+            "hint": "交易对开通成功后，如果想要添加网关标识（如BTC.V），请发邮件联系我们：info@vite.org",
+            "btn": "提交申请",
+            "reqSuccess": "提交申请成功，请稍后在市场中查看",
+            "reqError": "上币失败，请稍后重试"
+        },
+        "stopTransHint": "确定要暂停 {symbol} 交易吗？",
+        "stopSuccess": "暂停成功",
+        "stopFail": "暂停失败",
+        "openSuccess": "恢复成功",
+        "openFail": "恢复失败",
+        "changeOwnerHint": "请知悉：交易对权限转让后，您将不能享有赚取手续费、调整手续费等权限，权限一经转让不得撤回",
+        "currentMaker": "当前Maker费率",
+        "confirmFee": "手续费",
+        "currentTaker": "当前Taker费率",
+        "txPairName": "交易对名称",
+        "changeFeeHint": "{symbol} 的手续费调整为 {fee}",
+        "changeFeeSubmit": "确认将 {changeFeeHint}",        
+        "historyAllIncome": "历史总收益",
+        "incomeListHead": {
+            "date": "日期",
+            "txNum": "交易量",
+            "feeRate": "手续费率",
+            "feeIncome": "手续费收益"
+        }
     }
 }

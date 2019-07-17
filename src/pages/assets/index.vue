@@ -22,7 +22,7 @@
                             <AssetSwitch v-model="assetType" class="asset-switch" />
                         </div>
                     </div>
-                    <div v-show="!tokenList || !tokenList.length" class="no-data">{{ $t('hint.noData') }}</div>
+                    <div v-show="!tokenList || !tokenList.length" class="no-data"><div>{{ $t('hint.noData') }}</div></div>
                     <tokenCard v-show="tokenList && tokenList.length"
                                v-for="token in tokenList"
                                :key="token.tokenId"
@@ -162,7 +162,24 @@ export default {
         flex-grow: 1;
         background-color: #fff;
         .no-data {
-            margin-top: 60px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translateY(-50%) translateX(-50%);
+            font-size: 12px;
+            @include font-family-normal();
+            font-weight: 400;
+            color: rgba(94,104,117,0.58);
+            line-height: 16px;
+            text-align: center;
+            &:before {
+                display: inline-block;
+                margin-bottom: 16px;
+                content: ' ';
+                width: 60px;
+                height: 60px;
+                background: url('~assets/imgs/dexEmpty.svg') 100% 100%;
+            }
         }
         .token__head {
             display: flex;
