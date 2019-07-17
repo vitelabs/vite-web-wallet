@@ -35,10 +35,14 @@ export default {
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
 
+.operator-wrapper {
+    width: 100%;
+    height: 100%;
+}
+
 .become-operator {
     display: flex;
     flex-direction: column;
-    // text-align: center;
     height: 100%;
     width: 100%;
     align-items: center;
