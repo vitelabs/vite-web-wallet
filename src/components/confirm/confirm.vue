@@ -22,7 +22,7 @@
                 <div v-show="!singleBtn" class="btn btn-border __pointer"
                      @click="_leftBtnClick">{{ leftBtnTxt }}</div>
                 <div v-show="!singleBtn" class="btn btn-blue __pointer"
-                     :class="{'unuse': btnUnuse && !isLoading }"
+                     :class="{'btn-gray': btnUnuse && !isLoading }"
                      @click="_rightBtnClick">
                     <span v-show="!isLoading">{{ rightBtnTxt }}</span>
                     <loading v-show="isLoading" loadingType="dot"></loading>
