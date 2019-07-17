@@ -9,11 +9,11 @@ export function execWithValid(funcName, noActive) {
             return funcName.call(this, ...args);
         }
         const activeAccount = getActiveAcc();
+        if (currHDACC && currHDACC.isBifrost) {
+            vbConnectDialog();
+            return;
+        }
         if (activeAccount) {
-            if (activeAccount.isBifrost) {
-                vbConnectDialog();
-                return;
-            }
             pwdConfirm({ type: 'unlockAccount' });
             return;
         }
