@@ -375,7 +375,7 @@ export class VBAccount {
     }
 
     lock() {
-        this.vb.destroy();
+        this.vb && this.vb.destroy();
 
         this.proxyActiveAcc.sendPowTx = undefined;
         this.status = StatusMap.LOCK;
