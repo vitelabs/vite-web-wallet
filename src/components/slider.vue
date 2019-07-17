@@ -157,7 +157,7 @@ $green: linear-gradient(270deg, rgba(0,212,208,1) 0%, rgba(0,215,100,1) 100%);
                 padding: 2px 6px;
                 border-radius: 2px;
                 font-size: 12px;
-                @include font-family-normal();
+                font-family: $font-H;
                 font-weight: 400;
                 color: rgba(255,255,255,1);
                 line-height: 16px;
