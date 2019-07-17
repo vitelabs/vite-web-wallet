@@ -1,9 +1,9 @@
 <template>
     <div class="operator-wrapper">
-        <sec-title v-if="!noData" :isShowHelp="false"></sec-title>
-        <income v-if="!noData" v-model="noIncome"></income>
-        <token-list v-if="!noData" v-model="noTokenList"></token-list>
-        <div v-if="noData" class="become-operator">
+        <sec-title v-show="!noData" :isShowHelp="false"></sec-title>
+        <income v-show="!noData" v-model="isIncome"></income>
+        <token-list v-show="!noData" v-model="isTokenList"></token-list>
+        <div v-show="noData" class="become-operator">
             <img src="~assets/imgs/no_operator.svg"/>
             <div class="text">{{ $t('tradeOperator.noOperator') }}</div>
             <div class="btn __pointer">{{ $t('tradeOperator.learnMore') }}</div>
@@ -35,16 +35,14 @@ export default {
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
 
-.operator-wrapper {
+.become-operator {
     display: flex;
     flex-direction: column;
+    // text-align: center;
     height: 100%;
     width: 100%;
     align-items: center;
     justify-content: center;
-}
-.become-operator {
-    text-align: center;
     img {
         display: inline-block;
         width: 340px;
