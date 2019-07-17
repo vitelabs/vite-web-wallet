@@ -238,8 +238,7 @@ export default {
                 this.$router.push({ name });
             });
             this.vb.on('disconnect', () => {
-                this.$route.name.indexOf('start')>-1&&this.initVB();
-
+                this.$route.name.indexOf('start') > -1 && this.initVB();
             });
         },
         toggleTab(tabName) {
