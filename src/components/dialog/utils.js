@@ -70,7 +70,7 @@ const mixin = {
         s() {
             return {
                 container: {
-                    'background': this.ShowMask ? 'rgba(0, 0, 0, 0.6)' : '--',
+                    'background': this.ShowMask ? 'rgba(0, 0, 0, 0.4)' : '--',
                     position: 'fixed',
                     top: 0,
                     bottom: 0,
@@ -83,8 +83,7 @@ const mixin = {
                     'z-index': 100
                 },
                 wrapper: {
-                    width: '90%',
-                    'max-width': widthMap[this.Width],
+                    width: widthMap[this.Width],
                     'max-height': '85%',
                     display: 'flex',
                     'flex-direction': 'column',
@@ -93,19 +92,20 @@ const mixin = {
                     'border-radius': '2px'
                 },
                 title: {
-                    background: '#268eff',
-                    height: '60px',
-                    'line-height': '60px',
-                    'padding-left': '30px',
-                    'font-size': '16px',
-                    color: '#ffffff'
+                    'font-size': '14px',
+                    background: 'rgba(38,142,255,1)',
+                    height: '50px',
+                    'line-height': '50px',
+                    'padding': '0 30px',
+                    color: '#ffffff',
+                    'font-family': 'PingFangSC-Semibold, arial, sans-serif'
                 },
                 close: {
                     cursor: 'pointer',
                     'box-sizing': 'border-box',
                     display: 'block',
                     float: 'right',
-                    padding: '30px',
+                    padding: '25px 0',
                     width: '20px',
                     height: '20px',
                     background: `url(${ closeIcon })`,
@@ -114,22 +114,25 @@ const mixin = {
                     'background-size': '20px 20px'
                 },
                 body: {
+                    flex: 1,
                     position: 'relative',
                     'box-sizing': 'border-box',
                     padding: '30px',
                     overflow: 'auto',
-                    'font-size': '18px',
-                    color: '#1d2024',
-                    'line-height': '26px'
+                    'font-size': '14px',
+                    color: 'rgba(29,32,36,1)',
+                    'line-height': '18px'
                 },
                 btnGroup: {
+                    'font-family': 'PingFangSC-Semibold, arial, sans-serif',
                     padding: '0 30px',
                     display: 'flex',
                     'min-height': '40px',
                     'height': '40px',
                     'box-sizing': 'border-box',
                     'justify-content': 'space-between',
-                    'margin-bottom': '30px'
+                    'margin-bottom': '30px',
+                    'font-size': '14px'
                 },
                 lBtn: { 'margin-right': '20px' },
                 btn: {
@@ -143,7 +146,7 @@ const mixin = {
                     'justify-content': 'center'
                 },
                 left: {
-                    border: '1px solid #007aff',
+                    border: '1px solid rgba(0,122,255,1)',
                     'border-radius': '2px',
                     color: '#007aff',
                     'margin-right': '20px'
