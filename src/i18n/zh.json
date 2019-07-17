@@ -372,14 +372,14 @@
         "vb":{
             "title":"ViteBifrost",
             "connect":{
-                "tips":"请使用 Vite App ViteBifrost 功能扫码登陆."
+                "tips":"请使用Vite App扫码登陆."
             },
             "confirm":{
                 "tips":"请在VITE App上确认交易"
             },
             "start":{
-                "scan":"请使用 Vite App ViteBifrost 功能扫码登陆.",
-                "downloadTips":"还没有支持ViteBifrost的App？",
+                "scan":"请使用Vite App扫码登陆.",
+                "downloadTips":"还没有Vite App？",
                 "download":"下载Vite手机钱包"
             },
             "defaultName":"我的账户"

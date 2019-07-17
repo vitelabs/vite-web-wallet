@@ -1,7 +1,7 @@
 import { timer } from 'utils/asyncFlow';
 import { rateToken } from 'services/trade';
 
-const loopTime = 10000;
+const loopTime = 60 * 1000;
 let rateTimer = null;
 
 const state = { rateMap: {}, rateTokenIds: [] };

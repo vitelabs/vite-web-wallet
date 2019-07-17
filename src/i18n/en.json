@@ -60,7 +60,7 @@
         "35004": "Invalid parameters",
         "35005": "Transactions are sent too frequent, please try again later",
         "35006": "Contract method not exist",
-        "35011": "全网拥堵",
+        "35011": "Network Congestion",
         "36001": "You cannot make any transfer until you receive a transaction",
         "36002": "System verify failed, please try again later",
         "36003": "System verify failed, please try again later",
@@ -429,10 +429,10 @@
             "address": "Recipient Address"
         },
         "issueConfirm": {
-            "title": "增发代币",
-            "amount": "增发数量",
-            "address": "受益地址",
-            "overAmount": "增发数量超出上限"
+            "title": "Re-issue",
+            "amount": "Amount",
+            "address": "Beneficiary Address",
+            "overAmount": "Reissued tokens exceed the upper limit"
         },
         "hint": {
             "tokenName": "Token name should have 1-40 characters including capitals and lowercase letters, spaces and underlines. Continuous spaces and numbers are not supported.",
@@ -660,14 +660,14 @@
         "vb":{
             "title":"ViteBifrost",
             "connect":{
-                "tips":"Scan a QR code to link your mobile wallet using ViteBifrost."
+                "tips":"Scan the QR code via Vite App"
             },
             "confirm":{
                 "tips":"Please confirm transaction on VITE App"
             },
             "start":{
-                "scan":"Scan a QR code to link your mobile wallet using ViteBifrost.",
-                "downloadTips":"Don’t have an app that supports ViteBifrost yet? ",
+                "scan":"Scan the QR code via Vite App",
+                "downloadTips":"Don’t have Vite App yet? ",
                 "download":"Download Vite Wallet"
             },
             "defaultName":"My Account"
