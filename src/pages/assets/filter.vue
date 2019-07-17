@@ -6,7 +6,7 @@
             :placeholder="$t('tradeAssets.search')"
         >
         </Search>
-        <div class="filter op" @click="addToken">
+        <div class="filter op __pointer" @click="addToken">
             <img src="~assets/imgs/add_token.svg" class="op__input" />
             <div>{{ $t("tokenCard.addToken.title") }}</div>
         </div>
@@ -14,7 +14,7 @@
             <Checkbox v-model="hideZero" class="op__input" />
             {{ $t("tradeAssets.zero") }}
         </div>
-        <div class="filter op click-able more" @click="more">
+        <div class="filter op click-able more __pointer" @click="more">
             {{ $t("tokenCard.moreRecords") }}
             <img src="~assets/imgs/moreRecords.svg" />
         </div>
