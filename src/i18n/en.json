@@ -981,8 +981,10 @@
         "title": "运营商中心",
         "tokenList": "运营代币",
         "totalIncome": "历史总收益",
-        "permission": "权限转入",
+        "permission": "权限转让",
         "txPairManage": "交易对管理",
+        "noOperator": "该地址下暂无交易对，想成为运营商",
+        "learnMore": "了解更多",
         "permissionConfirm": {
             "title": "转让所有权",
             "submit": "确认转入",
