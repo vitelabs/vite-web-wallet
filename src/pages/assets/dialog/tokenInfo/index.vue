@@ -139,12 +139,12 @@ export default {
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
 .head {
-    border-bottom: 1px solid #D4DEE7;
+    border-bottom: 1px solid rgba(212,222,231,1);
     box-sizing: border-box;
-    padding: 30px;
+    padding: 20px 30px;
     display: flex;
     background: rgba(0,122,255,0.05);
-    .head_info{
+    .head_info {
         display: flex;
         flex-direction: column;
     }
@@ -160,12 +160,14 @@ export default {
     .icon {
         width: 40px;
         height: 40px;
+        margin-right: 10px;
     }
     &__name {
         @include font-family-bold();
         color: rgba(29, 32, 36, 1);
         font-size: 14px;
-        &__gate{
+        line-height: 18px;
+        &__gate {
             color: #007AFF;
             background-color: rgba(0,122,255,0.06);
             @include font-family-normal();
@@ -178,17 +180,23 @@ export default {
         }
     }
     &__symbol {
+        @include font-family-normal();
         font-size: 12px;
         color: rgba(94, 104, 117, 1);
+        margin-top: 8px;
+        line-height: 16px;
     }
 }
-.tab{
-    padding-left: 30px;
-    height: 50px;
+.tab {
+    padding: 0 30px;
+    height: 40px;
     display: flex;
     border-bottom: 1px solid #D4DEE7;
     flex-shrink: 0;
-    &__item{
+    &__item {
+        @include font-family-bold();
+        font-size: 12px;
+        color: rgba(189,193,209,1);
         height: 100%;
         box-sizing: border-box;
         margin-right: 40px;
@@ -211,25 +219,25 @@ export default {
         height: 360px;
     }
     .content__item{
+        font-size: 12px;
+        @include font-family-normal();
         min-height: 40px;
         display: flex;
-        font-size: 14px;
         text-align: left;
         align-items: center;
-        color: #1D2024;
-        div{
+        color: rgba(29,32,36,1);
+        div {
             display: flex;
             align-items: center;
         }
         :last-child{
             word-break: break-word;
-
         }
         input{
             width: 100%;
             font-size: 14px;
         }
-        .label{
+        .label {
             color: rgba(94, 104, 117, 0.58);
             margin-right: 6px;
             word-break: keep-all;
