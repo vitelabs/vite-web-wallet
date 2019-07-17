@@ -29,7 +29,7 @@ const client = getClient('',
     },
     { lang: langMap[i18n.locale], version: 'v1.0' });
 export const getGateInfos = () =>
-    client({ path: 'certified_gateways', host: process.env.gatewayInfosServer });
+    client({ path: 'registration/certified_gateways', host: process.env.gatewayInfosServer });
 
 export const getChargeAddr = ({ tokenId, addr: walletAddress }, url) =>
     client({
