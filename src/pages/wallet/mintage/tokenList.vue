@@ -68,7 +68,7 @@
 
         </wallet-table>
 
-        <show-confirm v-if="changeOwnerToken" class="middle"
+        <show-confirm v-if="changeOwnerToken" class="middle" :btnUnuse="!!(!address || !isValidAddress)"
                       :title="$t('walletMintage.changeOwnerConfirm.title')" :showMask="true"
                       :leftBtnTxt="$t('walletMintage.cancel')" :leftBtnClick="cancelChangeOwner"
                       :rightBtnTxt="$t('walletMintage.submit')" :rightBtnClick="toChangeOwner">
@@ -94,7 +94,7 @@
             </div>
         </show-confirm>
 
-        <show-confirm v-if="issueToken" class="middle"
+        <show-confirm v-if="issueToken" class="middle" :btnUnuse="!!(!address || !isValidAddress || amountErr || !amount)"
                       :title="$t('walletMintage.issueConfirm.title')" :showMask="true"
                       :leftBtnTxt="$t('walletMintage.cancel')" :leftBtnClick="cancelIssue"
                       :rightBtnTxt="$t('walletMintage.submit')" :rightBtnClick="toIssue">
