@@ -368,7 +368,22 @@
         "nodeErr": "网关节点无效，请检查网关设置"
     },
     "assets": {
-        "title": "资产"
+        "title": "资产",
+        "vb":{
+            "title":"ViteBifrost",
+            "connect":{
+                "tips":"请使用Vite App扫码登陆."
+            },
+            "confirm":{
+                "tips":"请在VITE App上确认交易"
+            },
+            "start":{
+                "scan":"请使用Vite App扫码登陆.",
+                "downloadTips":"还没有Vite App？",
+                "download":"下载Vite手机钱包"
+            },
+            "defaultName":"我的账户"
+        }
     },
     "walletConversion": {
         "title": "置换VITE",
