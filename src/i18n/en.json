@@ -146,9 +146,9 @@
         "text3": "Please take proper precautions in ensuring that you accurately record and safely store your seed phrase. Even the slightest error will result in you not being able to successfully restore your address."
     },
     "preview": {
-        "t": "Version 1.6.0",
+        "t": "Version {version}",
         "txt1": "Vite Web Wallet is a light node wallet launched by Vite Labs",
-        "txt2": "The wallet in the current version supports functions of query account balances, send and default receive transactions,  staking VITE for quota, SBP registration, voting ,etc.",
+        "txt2": "The wallet in the current version supports functions of query account balances, send and default receive transactions, staking VITE for quota, SBP registration, voting ,etc.",
         "txt3": "We are now working on the Vite DEX, stay tuned.",
         "v": "Current Version: {version}"
     },

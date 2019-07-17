@@ -1,7 +1,7 @@
 <template>
     <div class="hover-wrapper">
         <div class="hover-notice">
-            <div class="hover-title">{{ $t('preview.t') }}</div>
+            <div class="hover-title">{{ $t('preview.t', { version }) }}</div>
             <div class="hover-content">{{ $t('preview.txt1') }}</div>
             <div class="hover-content">{{ $t('preview.txt2') }}</div>
             <div class="hover-content">{{ $t('preview.txt3') }}</div>
