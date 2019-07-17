@@ -57,11 +57,24 @@ export default {
             return 0;
         }
     },
+    watch: {
+        income() {
+            const tokenIds = [];
+            for (const type in this.income) {
+                if (!this.income[type].tokenIncomes) {
+                    continue;
+                }
+                this.income[type].tokenIncomes.forEach(detail => {
+                    tokenIds.push(detail.tokenId);
+                });
+            }
+            this.$store.dispatch('addRateTokens', tokenIds);
+        }
+    },
     methods: {
         fetchOperator() {
             operator(this.address).then(data => {
                 this.income = data.incomeStat || {};
-                console.log(this.income);
             }).catch(err => {
                 console.warn(err);
             });
