@@ -19,7 +19,7 @@
 
 <script>
 import { operator } from 'services/trade';
-// import bigNumber from 'utils/bigNumber';
+import BigNumber from 'utils/bigNumber';
 import viteIcon from 'assets/imgs/vite-dividend.svg';
 import ethIcon from 'assets/imgs/eth.svg';
 import usdIcon from 'assets/imgs/usd.svg';
@@ -54,7 +54,24 @@ export default {
             return this.$store.getters.activeAddr;
         },
         totalAmount() {
-            return 0;
+            let totalAmount = 0;
+            for (const type in this.income) {
+                if (!this.income[type].tokenIncomes) {
+                    continue;
+                }
+                for (let i = 0; i < this.income[type].tokenIncomes.length; i++) {
+                    const detail = this.income[type].tokenIncomes[i];
+                    const rate = this.getRate(detail.tokenId);
+                    if (!rate) {
+                        return '--';
+                    }
+
+                    const price = BigNumber.multi(detail.amount || 0, rate || 0, 2);
+                    totalAmount = BigNumber.plus(price, totalAmount, 2);
+                }
+            }
+            const pre = this.$store.state.env.currency === 'cny' ? '¥' : '$';
+            return `${ pre }${ totalAmount }`;
         }
     },
     watch: {
@@ -72,6 +89,17 @@ export default {
         }
     },
     methods: {
+        getRate(tokenId) {
+            const rateList = this.$store.state.exchangeRate.rateMap || {};
+            const coin = this.$store.state.env.currency;
+
+            if (!tokenId || !rateList[tokenId]) {
+                return null;
+            }
+
+            return rateList[tokenId][`${ coin }Rate`] || null;
+        },
+
         fetchOperator() {
             operator(this.address).then(data => {
                 this.income = data.incomeStat || {};
