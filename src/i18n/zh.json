@@ -372,13 +372,13 @@
         "vb":{
             "title":"ViteBifrost",
             "connect":{
-                "tips":"请使用Vite App扫码登陆."
+                "tips":"请使用Vite App扫码登录."
             },
             "confirm":{
                 "tips":"请在VITE App上确认交易"
             },
             "start":{
-                "scan":"请使用Vite App扫码登陆.",
+                "scan":"请使用Vite App扫码登录.",
                 "downloadTips":"还没有Vite App？",
                 "download":"下载Vite手机钱包"
             },
