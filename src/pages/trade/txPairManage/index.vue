@@ -32,7 +32,7 @@
             <pagination slot="tableBottom" class="__tb_pagination"
                         :totalPage="totalPage"
                         :toPage="fetchOperatorMarkets"
-                        :currentPage="currentPage"></pagination>
+                        :currentPage="currentPage + 1"></pagination>
         </wallet-table>
 
         <income-list v-if="showConfirmType === 'incomeList'"
@@ -73,6 +73,7 @@ export default {
             tokenId: this.$route.params.tokenId,
             tokenSymbol: this.$route.params.tokenSymbol,
             txPairList: [],
+            unOpenedTxPairList: [],
             listTotal: 0,
             currentPage: 0,
 
@@ -81,9 +82,6 @@ export default {
         };
     },
     computed: {
-        marketList() {
-            return this.$store.state.exchangeMarket.marketMap;
-        },
         address() {
             return this.$store.getters.activeAddr;
         },
@@ -124,18 +122,14 @@ export default {
                 });
             });
 
-            this.marketList.forEach(item => {
-                if (this.txPairList.find(v => v.quoteToken === item.tokenId)) {
-                    return;
-                }
-
+            this.unOpenedTxPairList.forEach(item => {
                 list.push({
-                    symbol: `${ this.tokenSymbol }/${ item.originalSymbol }`,
+                    symbol: `${ item.tradeTokenSymbol }/${ item.quoteTokenSymbol }`,
                     income: '--',
                     fee: '--',
                     status: 3,
                     statusTxt: this.$t('tradeTxPairManage.statusList')[3],
-                    quoteTokenDetail: item,
+                    txPairDetail: item,
                     tradeTokenDetail: this.$route.params
                 });
             });
@@ -278,8 +272,9 @@ export default {
                 }
             });
         },
-        fetchOperatorMarkets(pageNumber) {
-            const offset = pageNumber ? (pageNumber - 1) * 30 : 0;
+        fetchOperatorMarkets(pageNum) {
+            const offset = pageNum ? (pageNum - 1) * 30 : 0;
+
             operatorMarkets({
                 offset,
                 operatorId: this.address,
@@ -290,21 +285,9 @@ export default {
                 }
 
                 this.listTotal = data.total || 0;
-                this.currentPage = pageNumber ? pageNumber - 1 : 0;
-                // this.txPairList = [
-                //     {
-                //         'tradeToken': 'xxx',
-                //         'quoteToken': 'xxx',
-                //         'tradeTokenSymbol': 'BTC-000',
-                //         'quoteTokenSymbol': 'BTC-000',
-                //         'income': '2.222',
-                //         'makerFeeRate': 0.222,
-                //         'takerFeeRate': 0.222,
-                //         'transferStatus': 1,
-                //         'openStatus': 1
-                //     }
-                // ];
+                this.currentPage = pageNum ? pageNum - 1 : 0;
                 this.txPairList = data.tradePairList || [];
+                this.unOpenedTxPairList = data.unOpenedTradePairList || [];
             }).catch(err => {
                 console.warn(err);
             });
