@@ -62,6 +62,8 @@
 </template>
 
 <script>
+// [TODO] Need components/table
+
 import Pagination from 'components/pagination.vue';
 import { getDepositRecords, getWithdrawRecords } from 'services/gate.js';
 import shortify from 'utils/ellipsisAddr';
