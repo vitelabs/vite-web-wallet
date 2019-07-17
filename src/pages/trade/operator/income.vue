@@ -11,7 +11,7 @@
             <img class="icon" :src="type.icon" />
             <div class="token-wrapper">
                 <div class="token-title">{{ type.name }}</div>
-                <div class="token-amount">{{ income && income[type] ? income[type].dividendAmount : '0' }}</div>
+                <div class="token-amount">{{ income && income[type.name] ? income[type.name].amount : '0' }}</div>
             </div>
         </div>
     </div>
@@ -61,6 +61,7 @@ export default {
         fetchOperator() {
             operator(this.address).then(data => {
                 this.income = data.incomeStat || {};
+                console.log(this.income);
             }).catch(err => {
                 console.warn(err);
             });
