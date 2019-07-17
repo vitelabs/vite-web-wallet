@@ -1,7 +1,6 @@
 import Connector from '@vite/bifrost';
 import { setCurrHDAcc, getCurrHDAcc } from './index';
 import store from 'store';
-import router from 'router';
 
 export const BRIDGE = 'wss://biforst.vitewallet.com';
 export class VB extends Connector {
@@ -21,10 +20,6 @@ export class VB extends Connector {
                 isBifrost: true
             });
             store.commit('setCurrHDAccStatus');
-            // [TODO] Hide trade
-            // const name = store.state.env.lastPage || 'tradeCenter';
-            const name = store.state.env.lastPage || 'assets';
-            router.push({ name });
         });
         this.on('disconnect', () => {
             if (getCurrHDAcc() && getCurrHDAcc().isBifrost) {

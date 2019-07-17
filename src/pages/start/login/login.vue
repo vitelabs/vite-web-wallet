@@ -233,6 +233,10 @@ export default {
         },
         initVB() {
             this.vb = initVB();
+            this.vb.on('connect', () => {
+                const name = this.$store.state.env.lastPage || 'tradeCenter';
+                this.$router.push({ name });
+            });
             this.vb.on('disconnect', () => {
                 this.initVB();
             });
