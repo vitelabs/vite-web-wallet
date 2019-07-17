@@ -184,7 +184,7 @@ export default {
     }
 
     .vip {
-        font-family: font-family-bold();
+        @include font-family-bold();
         font-weight: 600;
         color: rgba(255,255,255,1);
         padding: 2px 8px;

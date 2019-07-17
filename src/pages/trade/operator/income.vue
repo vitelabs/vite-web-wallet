@@ -77,6 +77,7 @@ export default {
     watch: {
         income() {
             const tokenIds = [];
+
             for (const type in this.income) {
                 if (!this.income[type].tokenIncomes) {
                     continue;
@@ -86,6 +87,7 @@ export default {
                 });
             }
             this.$store.dispatch('addRateTokens', tokenIds);
+            this.$emit('input', tokenIds.length);
         }
     },
     methods: {

@@ -116,12 +116,12 @@ export default {
     line-height: 18px;
     .total-income-title {
         font-size: 12px;
-        font-family: font-family-normal();
+        @include font-family-normal();
         color: rgba(94,104,117,1);
     }
     .income {
         font-size: 12px;
-        font-family: font-family-bold();
+        @include font-family-bold();
         color: rgba(29,32,36,1);
     }
 }

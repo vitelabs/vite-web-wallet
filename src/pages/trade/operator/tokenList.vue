@@ -28,6 +28,7 @@ export default {
         fetchOperatorTokens() {
             operatorTokens(this.address).then(data => {
                 this.tokenList = data.tokenList || [];
+                this.$emit('input', this.tokenList.length);
             }).catch(err => {
                 console.warn(err);
             });
