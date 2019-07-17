@@ -83,8 +83,8 @@ export default {
                     sendTx({
                         methodName: 'dexFundNewMarket',
                         data: {
-                            tradeToken: this.txPair.tradeTokenDetail.tokenId,
-                            quoteToken: this.txPair.quoteTokenDetail.tokenId
+                            tradeToken: this.txPair.txPairDetail.tradeToken,
+                            quoteToken: this.txPair.txPairDetail.quoteToken
                         }
                     }).then(() => {
                         this.$toast(this.$t('tradeTxPairManage.openTxPairConfirm.reqSuccess'));
