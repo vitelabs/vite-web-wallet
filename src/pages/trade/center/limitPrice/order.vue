@@ -664,6 +664,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "../center.scss";
+
 $font-black: rgba(36, 39, 43, 0.8);
 
 .dex-input-wrapper {
@@ -677,6 +678,7 @@ $font-black: rgba(36, 39, 43, 0.8);
         margin-bottom: 10px;
     }
     .real-price {
+        font-family: $font-H;
         max-width: 100px;
         box-sizing: border-box;
         padding: 0 6px;
@@ -720,15 +722,14 @@ $font-black: rgba(36, 39, 43, 0.8);
     opacity: 0;
     transition: opacity 0.2s ease-in-out;
     width: 0;
-    height: auto;
+    line-height: 12px;
     white-space: nowrap;
     &.active {
         display: block;
         min-width: 0;
         width: auto;
-        height: auto;
         opacity: 1;
-        padding: 6px;
+        padding: 6px 12px;
     }
     &::after {
         content: " ";
@@ -755,6 +756,7 @@ $font-black: rgba(36, 39, 43, 0.8);
         color: #1d2024;
         margin-bottom: 10px;
         .wallet {
+            font-family: $font-H;
             display: block;
             float: right;
             &::before {
@@ -813,7 +815,7 @@ $font-black: rgba(36, 39, 43, 0.8);
     line-height: 30px;
     border: none;
     input {
-        @include font-family-normal();
+        font-family: $font-H;
         font-size: 12px;
         color: #1d2024;
         text-indent: 6px;
