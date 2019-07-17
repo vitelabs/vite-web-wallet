@@ -44,6 +44,7 @@ import { gateStorage } from 'services/gate';
 import TokenFilter from './filter';
 import { debounce } from 'lodash';
 import AssetSwitch from './assetSwitch';
+import bignumber from 'utils/bigNumber';
 
 const filterFunc = filterObj => t => {
     if (!t.tokenName) {
@@ -53,7 +54,7 @@ const filterFunc = filterObj => t => {
         return true;
     }
     const NOTMatchNoZero
-        = filterObj.hideZero && +t.totalAmount === 0 && +t.totalExAmount === 0;
+        = filterObj.hideZero && +t.totalAmount === 0 && +t.totalExAmount === 0 && bignumber.isEqual(t.fundFloat || 0, 0);
     const NOTMatchFilterKey
         = filterObj.filterKey
         && !t.tokenSymbol.match(new RegExp(filterObj.filterKey, 'i'));

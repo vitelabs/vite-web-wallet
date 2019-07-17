@@ -3,6 +3,7 @@ import { getActiveAcc } from 'wallet';
 import { powProcess } from 'components/pow/index';
 import { quotaConfirm } from 'components/quota/index';
 import { vbConfirmDialog } from 'components/dialog';
+import { execWithValid } from 'utils/execWithValid';
 // import {}
 
 const { isObject } = utils;
@@ -20,7 +21,7 @@ const defaultConfig = {
     }
 };
 
-export default function sendTx({ config = defaultConfig, methodName, data, vbExtends }) {
+const sendTx = execWithValid(function ({ config = defaultConfig, methodName, data, vbExtends }) {
     config = formatConfig(config);
 
     const event = new EventEmitter();
@@ -134,8 +135,8 @@ export default function sendTx({ config = defaultConfig, methodName, data, vbExt
         });
 
     return event;
-}
-
+});
+export default sendTx;
 class EventEmitter {
     constructor() {
         this.thenCb = null;
