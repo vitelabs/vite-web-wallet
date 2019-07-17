@@ -47,7 +47,6 @@ const actions = {
             if (_activeTxPair.symbol !== getters.exActiveTxPair.symbol) {
                 return;
             }
-            console.log(data);
 
             commit('setExchangeMarketInfo', data);
         });
@@ -75,7 +74,6 @@ const getters = {
     exMakerFee(state) {
         const vipFee = getVipFee(state.isVip);
         const operatorMakerFee = getOperatorFee(state.marketInfo.makerBrokerFeeRate);
-        console.log(baseMakerFee, operatorMakerFee, vipFee);
         return baseMakerFee + Number(operatorMakerFee) - vipFee;
     },
     exTakerFee(state) {
