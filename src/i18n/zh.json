@@ -4,7 +4,6 @@
     "start": "开始",
     "login": "登录",
     "regAcc": "注册账户",
-    "dexToken": "开通交易对",
     "unlockAcc": "解锁当前账户",
     "changeAcc": "切换其他账户",
     "existingAcc": "本地已有账户",
@@ -41,7 +40,7 @@
     },
     "dealReminder": {
         "title": "成交提醒",
-        "describe": "你于{time} 委托的 {amount} {ttoken} ({ftoken}/{ttoken})已完全成交，详细记录可在委托历史中查看。"
+        "describe": "你于{time} 委托的 {amount} {ftoken} ({ftoken}/{ttoken})已完全成交，详细记录可在委托历史中查看。"
     },
     "pow": {
         "ing": "正在运行PoW获取配额",
@@ -107,7 +106,8 @@
         "TxResFail": "转账",
         "SendRefund": "转账",
         "GenesisReceive": "Genesis",
-        "DexFundTransferTokenOwner": "运营商中心权限转让"
+        "DexFundTransferTokenOwner": "运营商中心权限转让",
+        "DexFundMarketOwnerConfig": "运营商交易对配置"
     },
     "btn": {
         "cancel": "取消",
@@ -146,7 +146,7 @@
         "text3": "如果使用了从助记词恢复地址的方式，请保证助记词绝对正确，如果有细微的不同都可能无法恢复您的地址。"
     },
     "preview": {
-        "t": "1.6.0版本",
+        "t": "{version}版本",
         "txt1": "Web钱包是VITE官方发布的轻节点钱包",
         "txt2": "当前版本钱包支持查询账户余额、对外发送交易、默认签收交易、抵押VITE获取配额、注册SBP、投票等功能。",
         "txt3": "交易所功能正在开发中，敬请期待。",
@@ -569,7 +569,7 @@
         "title": "SBP",
         "help": {
             "title": "关于SBP",
-            "text": "SBP（Snapshot Block Producer）为具有出块权利的节点，您可以通过抵押一定数量的VITE注册成为SBP候选节点；每轮（时长75秒）会选举出25个SBP，每轮得票数前25名中随机选出23个作为SBP，得票数26-100名中随机选出2个作为SBP；出块奖励的50%将作为按块奖励分配给该块的出块节点，另外50%将作为按票奖励分配给该轮次得票数排名前100的节点。<br/><br/>一个注册地址（抵押地址）可以注册多个出块节点（节点名称），节点名称被一个注册地址使用后不能再被其他注册地址使用；节点名称可以更换出块地址，出块地址被一个节点名称使用后不能再被其他节点名称使用。"
+            "text": "SBP（Snapshot Block Producer）为具有出块权利的节点，您可以通过抵押一定数量的VITE注册成为SBP候选节点；每轮（时长75秒）会选举出25个SBP，每轮得票数前25名中随机选出23个作为SBP，得票数26-100名中随机选出2个作为SBP；出块奖励的50%将作为按块奖励分配给该块的出块节点，另外50%将作为按票奖励分配给该轮次得票数排名前100的节点。一个注册地址（抵押地址）可以注册多个出块节点（节点名称），节点名称被一个注册地址使用后不能再被其他注册地址使用；节点名称可以更换出块地址，出块地址被一个节点名称使用后不能再被其他节点名称使用。"
         },
         "register": "注册SBP",
         "cancel": "撤销注册SBP",
@@ -723,19 +723,6 @@
             "buy": "买一价",
             "sell": "卖一价",
             "diff": "买卖价差"
-        },
-        "dexToken": {
-            "title": "开通交易对",
-            "fee": "上币费",
-            "link": "前往浏览器查询",
-            "market": "开通市场",
-            "name": "开通代币名称",
-            "id": "开通代币TokenID",
-            "hint": "交易对开通成功后，如果想要添加网关标识（如BTC.V），请发邮件联系我们：info@vite.org",
-            "btn": "提交申请",
-            "search": "请输入代币名称",
-            "reqSuccess": "提交申请成功，请稍后在市场中查看",
-            "reqError": "上币失败，请稍后重试"
         },
         "buy": {
             "title": "买入{token}",
@@ -984,8 +971,10 @@
         "title": "运营商中心",
         "tokenList": "运营代币",
         "totalIncome": "历史总收益",
-        "permission": "权限转入",
+        "permission": "权限转让",
         "txPairManage": "交易对管理",
+        "noOperator": "该地址下暂无交易对，想成为运营商",
+        "learnMore": "了解更多",
         "permissionConfirm": {
             "title": "转让所有权",
             "submit": "确认转入",
@@ -1008,6 +997,36 @@
         "incomeList": "收益明细",
         "historyIncome": "历史收益",
         "openTxPair": "开通交易对",
-        "statusList": ["权限已转让", "交易中", "暂停交易", "交易未开通"]
+        "statusList": ["权限已转让", "交易中", "暂停交易", "交易未开通"],
+        "openTxPairConfirm": {
+            "title": "开通 {symbol} 交易对",
+            "fee": "上币费",
+            "hint": "交易对开通成功后，如果想要添加网关标识（如BTC.V），请发邮件联系我们：info@vite.org",
+            "btn": "提交申请",
+            "reqSuccess": "提交申请成功，请稍后在市场中查看",
+            "reqError": "上币失败，请稍后重试"
+        },
+        "stopTransHint": "确定要暂停 {symbol} 交易吗？",
+        "stopSuccess": "暂停成功",
+        "stopFail": "暂停失败",
+        "openSuccess": "恢复成功",
+        "openFail": "恢复失败",
+        "changeOwnerSuccess": "转让成功",
+        "changeOwnerFaill": "转让失败",
+        "submitChange": "确认转让",
+        "changeOwnerHint": "请知悉：交易对权限转让后，您将不能享有赚取手续费、调整手续费等权限，权限一经转让不得撤回",
+        "currentMaker": "当前Maker费率",
+        "confirmFee": "手续费",
+        "currentTaker": "当前Taker费率",
+        "txPairName": "交易对名称",
+        "changeFeeHint": "{symbol} 的 {type} 手续费调整为 {fee}",
+        "changeFeeSubmit": "确认将 {changeFeeHint}",
+        "historyAllIncome": "历史总收益",
+        "incomeListHead": {
+            "date": "日期",
+            "txNum": "交易量",
+            "feeRate": "手续费率",
+            "feeIncome": "手续费收益"
+        }
     }
 }

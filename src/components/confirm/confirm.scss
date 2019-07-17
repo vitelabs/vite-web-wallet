@@ -68,6 +68,8 @@
         @include font-family-bold();
         color: rgba(29,32,36,1);
         line-height: 18px;
+        overflow: auto;
+        flex: 1;
     }
 
     .bottom {
