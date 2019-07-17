@@ -40,9 +40,9 @@ const mutations = {
     },
     setTokenInfoFromGithub(state, payload = []) {
         payload.forEach(t => {
-            state.tokenMapFromGithub[t.tokenAddress]
-        = state.tokenMapFromGithub[t.tokenAddress] || {};
-            state.tokenMapFromGithub[t.tokenAddress].icon = t.icon;
+            state.tokenMapFromGithub[t.tokenId]
+        = state.tokenMapFromGithub[t.tokenId] || {};
+            state.tokenMapFromGithub[t.tokenId].icon = t.urlIcon || undefined;// 只保存icon信息
         });
     }
 };

@@ -48,7 +48,7 @@ block originContent
             .label {{$t("tokenCard.gateInfo.nodeDesc")}}
         .content__item
             .label {{$t("tokenCard.gateInfo.setting")}}
-            input.gate-url(:placeholder="$t('tokenCard.gateInfo.settingPlaceholder')" :disabled="token.type==='OFFICAL_GATE'" v-model="url")
+            viteInput.gate-url(:placeholder="$t('tokenCard.gateInfo.settingPlaceholder')" :disabled="token.type==='OFFICAL_GATE'" v-model="url")
     .tab-content.no-padding(v-if="tabName==='deposit'")
         Tb(:type="'deposit'" :token="token" :key="`deposit_${token.tokenId}`")
     .tab-content.no-padding(v-if="tabName==='withdraw'")
@@ -61,9 +61,10 @@ import { getTokenIcon } from 'utils/tokenParser';
 import { getExplorerLink } from 'utils/getLink';
 import openUrl from 'utils/openUrl';
 import Tb from './tb';
+import viteInput from 'components/viteInput';
 
 export default {
-    components: { Tb },
+    components: { Tb, viteInput },
     props: {
         token: {
             type: Object,
@@ -232,10 +233,6 @@ export default {
         }
         :last-child{
             word-break: break-word;
-        }
-        input{
-            width: 100%;
-            font-size: 14px;
         }
         .label {
             color: rgba(94, 104, 117, 0.58);

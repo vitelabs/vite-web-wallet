@@ -49,6 +49,9 @@ export default {
             if (code === '1000001') {
                 return;
             }
+            if (code === 11012 || code === 11020) {// wc 取消授权，断开
+                return;
+            }
 
             if (!this || !this.$t) {
                 return;
