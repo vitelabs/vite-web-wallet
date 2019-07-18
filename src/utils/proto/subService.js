@@ -5,8 +5,8 @@ export function depthWs({ symbol }) {
     return key;
 }
 
-export const defaultPairWs = function ({ quoteTokenSymbol }) {
-    const key = `market.quoteToken.${ quoteTokenSymbol }.tickers`;
+export const defaultPairWs = function ({ quoteTokenCategory }) {
+    const key = `market.quoteTokenCategory.${ quoteTokenCategory }.tickers`;
     return key;
 };
 

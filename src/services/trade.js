@@ -72,11 +72,11 @@ export const rateToken = function ({ tokenIdList = [] }) {
     });
 };
 
-export const defaultPair = function ({ quoteTokenSymbol }) {
+export const defaultPair = function ({ quoteTokenCategory }) {
     return request({
         path: `${ path }/ticker/24hr`,
         method: 'GET',
-        params: { quoteTokenSymbol }
+        params: { quoteTokenCategory }
     });
 };
 
