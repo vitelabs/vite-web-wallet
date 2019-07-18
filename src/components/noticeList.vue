@@ -36,7 +36,7 @@ export default {
         },
         latestOrder: function () {
             // [TODO] notice type
-            if (this.latestOrders && this.latestOrder && this.latestOrder.status === 4) {
+            if (this.latestOrder && this.latestOrder.status === 4) {
                 this.$toast(this.$t('tradeOrderHistory.table.rowMap.statusMap')[4]);
             }
             this.updateLatestOrder();

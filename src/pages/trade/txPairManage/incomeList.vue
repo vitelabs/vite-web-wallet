@@ -1,5 +1,5 @@
 <template>
-    <confirm class="big income-list-confirm" :showMask="true"
+    <confirm class="big no-padding-confirm" :showMask="true"
              :closeIcon="true" :close="close"
              :title="$t('tradeTxPairManage.incomeList')">
         <div class="total-income">
@@ -111,16 +111,16 @@ export default {
 
 .total-income {
     padding: 14px 30px;
+    height: 64px;
     box-sizing: border-box;
     background: rgba(0,122,255,0.05);
     line-height: 18px;
+    font-size: 12px;
     .total-income-title {
-        font-size: 12px;
         @include font-family-normal();
         color: rgba(94,104,117,1);
     }
     .income {
-        font-size: 12px;
         @include font-family-bold();
         color: rgba(29,32,36,1);
     }
@@ -129,6 +129,7 @@ export default {
 .income-list-table {
     width: 100%;
     min-width: 0;
+    min-height: 300px;
     box-shadow: none;
     flex: 1;
     @include rowWith {
