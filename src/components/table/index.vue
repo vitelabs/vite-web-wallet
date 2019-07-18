@@ -1,28 +1,46 @@
 <template>
     <div class="__tb">
         <div class="__tb_row __tb_head __pointer">
-            <div v-for="(headItem, i) in headList" :key="i"
-                 class="__tb_cell" :class="headItem.class || ''">
-                {{ headItem.text || '' }}
-            </div>
+            <template v-if="isSympleHead">
+                <div  class="__tb_cell" v-for="(h) in headList" :key="h">{{ h }}</div>
+            </template>
+
+            <template v-else>
+                <div v-for="(headItem, i) in headList" :key="i"
+                     class="__tb_cell" :class="headItem.class || ''">
+                    {{ headItem.text || '' }}
+                </div>
+            </template>
         </div>
 
         <div ref="tableContent" class="__tb_content" v-show="contentList && contentList.length">
-            <div v-for="(rowItem, index) in contentList" :key="index">
-                <div class="__tb_row __tb_content_row" :class="{
-                    'active': !!clickRow,
-                    '__pointer': !!clickRow
-                }" @click="_clickRow(rowItem, index)" >
-                    <span v-for="(headItem, i) in headList" :key="i"
-                          @click="clickCell(headList[i].cell, rowItem, index)"
-                          :class="`${headItem.class || ''} ${headItem.cellClass || ''}`" class="__tb_cell">
-                        <slot :name="`${index}${headList[i].cell}Before`"></slot>
-                        {{ rowItem[ headList[i].cell ] }}
-                        <slot :name="`${index}${headList[i].cell}After`"></slot>
-                    </span>
+            <template v-if="isSympleContent">
+                <div class="__tb_row __pointer __tb_content_row"
+                     v-for="(v, i) in contentList" :key="i"
+                     @click="_clickRow(v, i)">
+                    <div class="__tb_cell"
+                         v-for="(item, j) in v " :key="j"
+                         @click="clickCell(headList[j], item, j)">{{ item }}</div>
                 </div>
-                <slot :name="`${index}Row`"></slot>
-            </div>
+            </template>
+
+            <template v-else>
+                <div v-for="(rowItem, index) in contentList" :key="index">
+                    <div class="__tb_row __tb_content_row" :class="{
+                        'active': !!clickRow,
+                        '__pointer': !!clickRow
+                    }" @click="_clickRow(rowItem, index)" >
+                        <span v-for="(headItem, i) in headList" :key="i"
+                              @click="clickCell(headList[i].cell, rowItem, index)"
+                              :class="`${headItem.class || ''} ${headItem.cellClass || ''}`" class="__tb_cell">
+                            <slot :name="`${index}${headList[i].cell}Before`"></slot>
+                            {{ rowItem[ headList[i].cell ] }}
+                            <slot :name="`${index}${headList[i].cell}After`"></slot>
+                        </span>
+                    </div>
+                    <slot :name="`${index}Row`"></slot>
+                </div>
+            </template>
         </div>
 
         <div class="__tb_content __tb_content_no_data" v-show="!contentList || !contentList.length">
@@ -56,6 +74,24 @@ export default {
             default: ''
         }
     },
+    computed: {
+        isSympleHead() {
+            return !this.headList.find(v => typeof v !== 'string');
+        },
+        isSympleContent() {
+            let isSymple = true;
+            this.contentList.forEach(item => {
+                if (!isSymple) {
+                    return;
+                }
+                isSymple = !!item.find;
+                if (item.find) {
+                    isSymple = isSymple ? !item.find(v => typeof v !== 'string') : isSymple;
+                }
+            });
+            return isSymple;
+        }
+    },
     methods: {
         _clickRow(item, index) {
             this.clickRow && this.clickRow(item, index);
@@ -75,6 +111,7 @@ export default {
 @import "./mintTrade.scss";
 @import "./dividend.scss";
 @import "./txPairManage.scss";
+@import "./tradeList.scss";
 
 // [TODO] Delete keystore
 .keystore-table-item {

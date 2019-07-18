@@ -114,7 +114,7 @@ export default {
                 list.push({
                     symbol: `${ item.tradeTokenSymbol }/${ item.quoteTokenSymbol }`,
                     income: item.income || '--',
-                    fee: item.takerFeeRate && item.makerFeeRate ? `Taker(${ item.takerFeeRate }%) / Maker(${ item.makerFeeRate }%)` : '--',
+                    fee: item.takerFeeRate && item.makerFeeRate ? `Taker(${ item.takerFeeRate * 100 }%) / Maker(${ item.makerFeeRate * 100 }%)` : '--',
                     status,
                     statusTxt: this.$t('tradeTxPairManage.statusList')[status],
                     txPairDetail: item,
