@@ -3,13 +3,13 @@
         <li class="ex-tab __pointer" :class="{ 'active': isShowFavorite }" @click="showFavorite">
             <span class="favorite-icon __pointer" :class="{'active': isShowFavorite}"></span>
         </li>
-        <li v-for="(_t, i) in toTokenList" :key="i"
+        <li v-for="(c, i) in quoteTokenCategory" :key="i"
             :class="{
-                'active': !isShowFavorite && _t.symbol === currentMarket,
-                'active-side': (isShowFavorite && i === 0) || (toTokenList[i-1] && toTokenList[i-1].symbol === currentMarket)
+                'active': !isShowFavorite && c === curentCategory,
+                'active-side': (isShowFavorite && i === 0) || (quoteTokenCategory[i-1] === curentCategory)
             }" class="ex-tab __pointer"
-            @click="changeToken(_t)"
-        >{{ _t.originalSymbol }}</li>
+            @click="changeCategory(c)"
+        >{{ c }}</li>
     </ul>
 </template>
 
@@ -19,21 +19,21 @@ export default {
         isShowFavorite() {
             return this.$store.state.exchangeMarket.isShowFavorite;
         },
-        currentMarket() {
-            return this.$store.state.exchangeMarket.currentMarket;
+        curentCategory() {
+            return this.$store.state.exchangeMarket.curentCategory;
         },
-        toTokenList() {
-            return this.$store.state.exchangeMarket.marketMap;
+        quoteTokenCategory() {
+            return this.$store.state.exchangeMarket.quoteTokenCategory;
         }
     },
     methods: {
         showFavorite() {
             this.$store.commit('setIsShowFavorite', true);
-            this.$store.commit('setCurrentMarket', null);
+            this.$store.commit('setCurentCategory', null);
         },
-        changeToken(_t) {
+        changeCategory(category) {
             this.$store.commit('setIsShowFavorite', false);
-            this.$store.commit('setCurrentMarket', _t.symbol);
+            this.$store.commit('setCurentCategory', category);
         }
     }
 };
