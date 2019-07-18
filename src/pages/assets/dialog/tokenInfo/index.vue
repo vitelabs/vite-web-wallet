@@ -135,6 +135,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
+
 .head {
     border-bottom: 1px solid rgba(212,222,231,1);
     box-sizing: border-box;
