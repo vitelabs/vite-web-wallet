@@ -1,9 +1,16 @@
 import { baseToken, marketsClosed } from 'services/trade';
 import getQuery from 'utils/query';
 
+const quoteTokenCategory = [ 'VITE', 'BTC', 'ETH', 'USD' ];
+
+const query = getQuery();
+const category = query.category;
+const DetaultCategory = category && quoteTokenCategory.indexOf(category) !== -1 ? category : 'VITE';
+
 const state = {
+    quoteTokenCategory,
+    curentCategory: DetaultCategory,
     isShowFavorite: false,
-    currentMarket: '',
     marketMap: [],
     marketClosed: []
 };
@@ -12,8 +19,8 @@ const mutations = {
     setIsShowFavorite(state, isShow) {
         state.isShowFavorite = isShow;
     },
-    setCurrentMarket(state, tokenId) {
-        state.currentMarket = tokenId;
+    setCurentCategory(state, category) {
+        state.curentCategory = category;
     },
     setMarketMap(state, marketMap) {
         state.marketMap = marketMap;
@@ -24,41 +31,17 @@ const mutations = {
 };
 
 const actions = {
-    updateMarketMap({ commit, dispatch, state }) {
+    updateMarketMap({ commit, dispatch }) {
+        // Add quote token
         baseToken().then(data => {
-            commit('setMarketMap', data || []);
-
-            const marketMap = state.marketMap;
-            const firstMarket = marketMap[0] ? marketMap[0].symbol : '';
+            const marketMap = data || [];
+            commit('setMarketMap', marketMap);
 
             const tokenIds = [];
             marketMap.forEach(({ tokenId }) => {
                 tokenIds.push(tokenId);
             });
             dispatch('addRateTokens', tokenIds);
-
-            const query = getQuery();
-            const queryArr = query.symbol ? query.symbol.split('_') : [];
-            const queryQuoteTokenSymbol = queryArr[1] || '';
-
-            if (!queryQuoteTokenSymbol) {
-                commit('setCurrentMarket', firstMarket);
-                return;
-            }
-
-            let i;
-            for (i = 0; i < marketMap.length; i++) {
-                if (marketMap[i].symbol === queryQuoteTokenSymbol) {
-                    break;
-                }
-            }
-
-            if (i >= marketMap.length) {
-                commit('setCurrentMarket', firstMarket);
-                return;
-            }
-
-            commit('setCurrentMarket', marketMap[i].symbol);
         });
     },
     getMarketsClosed({ commit }) {

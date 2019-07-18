@@ -116,8 +116,8 @@ export default {
         isShowFavorite() {
             return this.$store.state.exchangeMarket.isShowFavorite;
         },
-        quoteTokenSymbol() {
-            return this.$store.state.exchangeMarket.currentMarket;
+        quoteTokenCategory() {
+            return this.$store.state.exchangeMarket.curentCategory;
         },
         isShowNoData() {
             return !this.isLoading
@@ -163,12 +163,12 @@ export default {
         activeTxPair() {
             return this.$store.state.exchangeActiveTxPair.activeTxPair;
         },
-        quoteTokenSymbol: function () {
+        quoteTokenCategory: function () {
             this.searchText = '';
             this.searchList = [];
             this.stopDefaultPair();
 
-            if (!this.quoteTokenSymbol) {
+            if (!this.quoteTokenCategory) {
                 return;
             }
 
@@ -200,7 +200,7 @@ export default {
     methods: {
         init() {
             defaultPairTimer = defaultPairTimer || new subTask('defaultPair', ({ args, data }) => {
-                if (args.quoteTokenSymbol !== this.quoteTokenSymbol) {
+                if (args.quoteTokenCategory !== this.quoteTokenCategory) {
                     return;
                 }
 
@@ -236,7 +236,7 @@ export default {
             }, 2000);
 
             defaultPairTimer.start(() => {
-                return { quoteTokenSymbol: this.quoteTokenSymbol };
+                return { quoteTokenCategory: this.quoteTokenCategory };
             });
         },
         initFavoriteList() {
