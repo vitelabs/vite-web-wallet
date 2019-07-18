@@ -7,7 +7,7 @@ const minStakingUnit = BigNumber.toMin(MinStakingAmount, 18); // [TODO] vite tok
 
 export function checkAmountFormat(amount = '', decimals = 8) {
     const limit = decimals > MaxDecimals ? MaxDecimals : decimals;
-    const decimalNum = decimals ? new RegExp(`^\\d+[.]\\d{1,${ limit }}$`) : null;
+    const decimalNum = +decimals ? new RegExp(`^\\d+[.]\\d{1,${ limit }}$`) : null;
 
     const isInt = new RegExp('^(\\d+)$').test(amount);
     const isPoint = new RegExp('^\\d+[.]\\d+$').test(amount);
