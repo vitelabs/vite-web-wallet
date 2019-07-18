@@ -136,6 +136,11 @@ export default {
             return list;
         }
     },
+    watch: {
+        address() {
+            this.$router.push({ name: 'tradeOperator' });
+        }
+    },
     methods: {
         getStatus(item) {
             if (item.transferStatus === 1) {
