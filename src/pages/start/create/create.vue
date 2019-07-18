@@ -77,7 +77,7 @@ export default {
 
 .__btn.__btn_all_in.unuse {
     background: rgba(191,191,191,1);
-    color: #fff;
+    color: rgba(255,255,255,1);
 }
 
 .__btn_list {

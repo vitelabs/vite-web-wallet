@@ -49,6 +49,8 @@ block originContent
         .content__item
             .label {{$t("tokenCard.gateInfo.setting")}}
             viteInput.gate-url(:placeholder="$t('tokenCard.gateInfo.settingPlaceholder')" :disabled="token.type==='OFFICAL_GATE'" v-model="url")
+            .btn.unuse(v-if="dBtnUnuse") {{$t('tokenCard.tokenInfo.saveGate')}}
+            .btn(v-if="!dBtnUnuse") {{$t('tokenCard.tokenInfo.saveGate')}}
     .tab-content.no-padding(v-if="tabName==='deposit'")
         Tb(:type="'deposit'" :token="token" :key="`deposit_${token.tokenId}`")
     .tab-content.no-padding(v-if="tabName==='withdraw'")
@@ -98,12 +100,6 @@ export default {
                 this.urlCache = val.trim();
             }
         },
-        dSTxt() {
-            if (this.token.type === 'THIRD_GATE' && this.tabName === 'gate') {
-                return this.$t('tokenCard.tokenInfo.saveGate');
-            }
-            return '';
-        },
         dBtnUnuse() {
             return !this.urlCache;
         },
@@ -139,6 +135,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
+
 .head {
     border-bottom: 1px solid rgba(212,222,231,1);
     box-sizing: border-box;
@@ -211,13 +208,13 @@ export default {
     }
 }
 .tab-content{
-    height: 300px;
+    box-sizing: border-box;
+    height: 350px;
     padding: 30px;
     position: relative;
     overflow: scroll;
     &.no-padding{
         padding: 0;
-        height: 360px;
     }
     .content__item{
         font-size: 12px;
@@ -236,12 +233,27 @@ export default {
         }
         .label {
             color: rgba(94, 104, 117, 0.58);
-            margin-right: 6px;
+            margin-right: 10px;
             word-break: keep-all;
         }
         .click-able{
             color: #007AFF;
             cursor: pointer;
+        }
+        .btn {
+            height: 34px;
+            line-height: 34px;
+            border-radius: 2px;
+            font-size: 14px;
+            @include font-family-bold();
+            padding: 0 20px;
+            white-space: nowrap;
+            margin-left: 23px;
+            background: rgba(0,122,255,1);
+            color: rgba(255,255,255,1);
+            &.unuse {
+                background: rgba(191,191,191,1);
+            }
         }
     }
 }

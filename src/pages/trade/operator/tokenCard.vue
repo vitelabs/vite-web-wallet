@@ -163,8 +163,8 @@ export default {
                 margin-right: 12px;
             }
             &.unuse {
-                background: #efefef;
-                color: #666;
+                background: rgba(191,191,191,1);
+                color: rgba(255,255,255,1);
                 border: none;
             }
         }

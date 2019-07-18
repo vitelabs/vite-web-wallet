@@ -9,4 +9,8 @@ viteJS
 routes.js
 .netlify
 package-lock.json
+<<<<<<< HEAD
 secret.js
+=======
+static.tar
+>>>>>>> dev/2.1.0

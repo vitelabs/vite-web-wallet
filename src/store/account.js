@@ -7,6 +7,7 @@ import { constant } from '@vite/vitejs';
 import { getTokenIcon } from 'utils/tokenParser';
 
 let balanceInfoInst = null;
+
 const state = {
     onroad: { balanceInfos: {} },
     balance: { balanceInfos: {} }
@@ -58,12 +59,9 @@ const actions = {
         }, 1000);
         balanceInfoInst.start();
     },
-    stopLoopBalance({ commit }) {
+    stopLoopBalance() {
         balanceInfoInst && balanceInfoInst.stop();
         balanceInfoInst = null;
-        commit('commitClearBalance');
-        commit('commitClearTransList');
-        commit('commitClearPledge');
     }
 };
 
