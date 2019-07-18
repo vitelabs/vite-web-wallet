@@ -3,7 +3,7 @@
         <tab-list></tab-list>
 
         <div class="search-wrapper">
-            <vite-input class="search-input" v-model="searchText"
+            <vite-input class="market-search-input" v-model="searchText"
                         :placeholder="$t('trade.search')">
                 <img slot="before" class="icon" src="~assets/imgs/search.svg"/>
             </vite-input>
@@ -359,7 +359,7 @@ export default {
         padding: 4px 6px;
         box-sizing: border-box;
 
-        .search-input {
+        .market-search-input {
             flex: 1;
             background: rgba(245, 250, 255, 1);
             border-radius: 2px;
@@ -406,7 +406,7 @@ export default {
 </style>
 
 <style lang="scss">
-.search-input.input-wrapper {
+.market-search-input.input-wrapper {
     box-sizing: border-box;
     height: 20px;
     line-height: 20px;

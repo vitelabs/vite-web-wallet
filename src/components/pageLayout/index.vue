@@ -135,12 +135,6 @@ export default {
     }
 }
 
-.wallet .page-layout-wrapper .page-content {
-    .page-scroll-wrapper .page-wrapper {
-        overflow: auto;
-    }
-}
-
 .page-layout-wrapper {
     display: flex;
     flex-direction: row;
