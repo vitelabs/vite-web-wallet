@@ -370,7 +370,7 @@
     "assets": {
         "title": "资产",
         "vb":{
-            "title":"ViteBifrost",
+            "title":"VIteConnector",
             "connect":{
                 "tips":"请使用Vite App扫码登陆."
             },

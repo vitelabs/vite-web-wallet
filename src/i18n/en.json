@@ -24,6 +24,7 @@
     "addrName": "Address{index}",
     "true": "true",
     "false": "false",
+    "notSupport":"",
     "guide": {
         "close": "Close",
         "next": "Next",
@@ -658,7 +659,7 @@
     "assets": {
         "title": "Assets",
         "vb":{
-            "title":"ViteBifrost",
+            "title":"VIteConnector",
             "connect":{
                 "tips":"Scan the QR code via Vite App"
             },

@@ -56,7 +56,10 @@ export default {
             if (!this || !this.$t) {
                 return;
             }
-
+            if (code === 11011) {// wc
+                toast(this.$t('notSupport'), type, position);
+                return;
+            }
             let msg = code === -1 || !this.$i18n.messages.zh.errCode[Math.abs(code)]
                 ? message || this.$t('hint.err') : this.$t(`errCode.${ Math.abs(code) }`);
             if (Math.abs(code) === 32002) {
