@@ -31,6 +31,9 @@ export default {
             this.$store.dispatch('startLoopBalance');
         },
         address: function () {
+            this.$store.commit('commitClearBalance');
+            this.$store.commit('commitClearPledge');
+            this.$store.commit('commitClearTransList');
             this.address && this.$store.dispatch('exFetchLatestOrder');
         }
     }
