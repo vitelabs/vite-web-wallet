@@ -25,7 +25,7 @@
                     v-on:drag="makerChanged">
                 <div class="speed">
                     <span class="__left">{{ minFee }}</span>
-                    <span class="__right">{{ `${maxFee * 100}%` }}</span>
+                    <span class="__right">{{ `${maxFee}%` }}</span>
                 </div>
             </slider>
         </div>
@@ -51,7 +51,7 @@
                     v-on:drag="takerChanged">
                 <div class="speed">
                     <span class="__left">{{ minFee }}</span>
-                    <span class="__right">{{ `${maxFee * 100}%` }}</span>
+                    <span class="__right">{{ `${maxFee}%` }}</span>
                 </div>
             </slider>
         </div>
@@ -65,7 +65,7 @@ import alertConfirm from 'components/confirm/index.js';
 import slider from 'components/slider';
 
 const minFee = 0;
-const maxFee = 0.002;
+const maxFee = 0.2;
 
 export default {
     components: { confirm, slider },
@@ -143,8 +143,8 @@ export default {
                             operationCode,
                             tradeToken: this.txPair.txPairDetail.tradeToken,
                             quoteToken: this.txPair.txPairDetail.quoteToken,
-                            makerFeeRate: this.maker * 100000,
-                            takerFeeRate: this.taker * 100000
+                            makerFeeRate: this.maker * 1000,
+                            takerFeeRate: this.taker * 1000
                         }, {
                             success: this.$t('hint.operateSuccess'),
                             fail: this.$t('hint.operateFail')

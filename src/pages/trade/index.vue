@@ -15,7 +15,6 @@ export default {
     components: { pageLayout },
     mounted() {
         this.$store.dispatch('startLoopExchangeRate');
-        this.$store.dispatch('startLoopExchangeBalance');
     }
 };
 </script>

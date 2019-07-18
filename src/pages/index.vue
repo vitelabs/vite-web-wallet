@@ -16,6 +16,7 @@ export default {
     mounted() {
         this.$store.commit('setLang', this.$i18n.locale);
         this.$store.dispatch('startLoopBalance');
+        this.$store.dispatch('startLoopExchangeBalance');
         this.$store.dispatch('exFetchLatestOrder');
     },
     computed: {
@@ -29,8 +30,10 @@ export default {
     watch: {
         currHDAcc: function () {
             this.$store.dispatch('startLoopBalance');
+            this.$store.dispatch('startLoopExchangeBalance');
         },
         address: function () {
+            this.$store.commit('clearDexBalance');
             this.$store.commit('commitClearBalance');
             this.$store.commit('commitClearPledge');
             this.$store.commit('commitClearTransList');
