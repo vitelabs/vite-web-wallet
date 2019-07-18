@@ -75,6 +75,9 @@ export default {
         }
     },
     watch: {
+        address() {
+            this.fetchOperator();
+        },
         income() {
             const tokenIds = [];
 
@@ -103,6 +106,8 @@ export default {
         },
 
         fetchOperator() {
+            this.income = {};
+
             operator(this.address).then(data => {
                 this.income = data.incomeStat || {};
             }).catch(err => {

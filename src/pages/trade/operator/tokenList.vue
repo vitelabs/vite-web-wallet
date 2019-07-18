@@ -24,8 +24,15 @@ export default {
             return this.$store.getters.activeAddr;
         }
     },
+    watch: {
+        address() {
+            this.fetchOperatorTokens();
+        }
+    },
     methods: {
         fetchOperatorTokens() {
+            this.tokenList = [];
+
             operatorTokens(this.address).then(data => {
                 this.tokenList = data.tokenList || [];
                 this.$emit('input', this.tokenList.length);
