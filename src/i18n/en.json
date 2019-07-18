@@ -24,7 +24,7 @@
     "addrName": "Address{index}",
     "true": "true",
     "false": "false",
-    "notSupport":"",
+    "notSupport":"The function not available under ViteConnect Mode",
     "guide": {
         "close": "Close",
         "next": "Next",

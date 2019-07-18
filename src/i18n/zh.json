@@ -23,6 +23,7 @@
     "addrName": "地址{index}",
     "true": "是",
     "false": "否",
+    "notSupport":"ViteConnect登录下暂未开放该功能",
     "guide": {
         "close": "关闭",
         "next": "下一步",
