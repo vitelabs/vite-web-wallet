@@ -78,6 +78,7 @@
         text-align: left;
         font-size: 12px;
         margin: 0 3px;    
+        @include font-family-normal();
         &:first-child {
             padding-left: 30px;
             margin-left: 0;
