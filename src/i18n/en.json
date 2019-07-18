@@ -659,7 +659,7 @@
     "assets": {
         "title": "Assets",
         "vb":{
-            "title":"VIteConnector",
+            "title":"ViteConnect",
             "connect":{
                 "tips":"Scan the QR code via Vite App"
             },
