@@ -1017,6 +1017,7 @@
             "reqError": "上币失败，请稍后重试"
         },
         "stopTransHint": "确定要暂停 {symbol} 交易吗？",
+        "resetTransHint": "确定要恢复 {symbol} 交易吗？",
         "stopSuccess": "暂停成功",
         "stopFail": "暂停失败",
         "openSuccess": "恢复成功",
