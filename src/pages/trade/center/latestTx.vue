@@ -55,23 +55,18 @@ export default {
         },
         isLoading() {
             return this.$store.state.exchangeLatestTx.isLoading;
+        },
+        quoteTokenDigit() {
+            return this.$store.state.exchangeTokenDecimalsLimit.quoteToken;
+        },
+        tradeTokenDigit() {
+            return this.$store.state.exchangeTokenDecimalsLimit.tradeToken;
         }
     },
     methods: {
-        formatNum(num, type, fix = 8) {
-            const decimals = `${ type }Precision`;
-
-            if (this.activeTxPair && this.activeTxPair[decimals] < fix) {
-                fix = this.activeTxPair[decimals];
-            }
-
-            const tokenDetail = type === 'price' ? 'quoteTokenDetail' : 'tradeTokenDetail';
-
-            if (!this[tokenDetail]) {
-                return BigNumber.formatNum(num, fix);
-            }
-
-            return BigNumber.formatNum(num, this[tokenDetail].tokenDecimals, fix);
+        formatNum(num, type) {
+            const tokenDigit = type === 'price' ? 'quoteTokenDigit' : 'tradeTokenDigit';
+            return BigNumber.normalFormatNum(num, this[tokenDigit]);
         },
         getDate(timestamp) {
             return date(timestamp, 'zh', true);

@@ -1,7 +1,7 @@
 <template>
     <div class="token-card-wrapper">
         <div class="symbol">{{ token.tokenSymbol || ''}}</div>
-        <div class="amount">{{ token.income || ''}}</div>
+        <div class="amount">{{ token.income ? formatNum(token.income) : ''}}</div>
         <div class="btn-list">
             <span v-if="token.status === 1" class="unuse">{{ $t('tradeOperator.permission') }}</span>
             <span v-if="token.status !== 1" class="__pointer"
@@ -38,6 +38,7 @@
 <script>
 import { constant, hdAddr } from '@vite/vitejs';
 import sendTx from 'utils/sendTx';
+import BigNumber from 'utils/bigNumber';
 import { initPwd } from 'components/password/index.js';
 import confirm from 'components/confirm/confirm.vue';
 import viteInput from 'components/viteInput';
@@ -67,6 +68,9 @@ export default {
         }
     },
     methods: {
+        formatNum(num) {
+            return BigNumber.onlyFormat(num);
+        },
         validAddr() {
             if (!this.address) {
                 this.isValidAddress = true;
