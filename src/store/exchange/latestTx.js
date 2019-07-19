@@ -10,6 +10,7 @@ const state = {
 
 const mutations = {
     exSetLatestTxList(state, list) {
+        console.log('trade', list);
         list = list || [];
 
         let arr = [];

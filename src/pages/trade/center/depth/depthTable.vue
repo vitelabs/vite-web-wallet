@@ -49,11 +49,14 @@ export default {
             arr.sort((a, b) => b.quantity - a.quantity);
             return arr && arr[0] ? arr[0].quantity : 0;
         },
-        activeTxPair() {
-            return this.$store.state.exchangeActiveTxPair.activeTxPair;
-        },
         currentOpenOrders() {
             return this.$store.state.exchangeCurrentOpenOrders.list;
+        },
+        ttokenDigit() {
+            return this.$store.state.exchangeTokenDecimalsLimit.quoteToken;
+        },
+        ftokenDigit() {
+            return this.$store.state.exchangeTokenDecimalsLimit.tradeToken;
         }
     },
     methods: {
@@ -75,17 +78,11 @@ export default {
 
             return false;
         },
-        formatNum(num, type, fix = 8) {
-            const decimals = type === 'ttoken' ? 'pricePrecision' : 'quantityPrecision';
-
-            if (this.activeTxPair && this.activeTxPair[decimals] < fix) {
-                fix = this.activeTxPair[decimals];
+        formatNum(num, type) {
+            if (type === 'ttoken') {
+                return BigNumber.formatNum(num, this.ttokenDigit);
             }
-
-            if (!this[type]) {
-                return BigNumber.formatNum(num, fix);
-            }
-            return BigNumber.formatNum(num, this[type].tokenDecimals, fix);
+            return BigNumber.formatNum(num, this.ftokenDigit);
         },
         getWidth(item) {
             const width = BigNumber.dividedToNumber(item.quantity, this.maxQuantity, 2).toString() * 100;
@@ -107,7 +104,12 @@ export default {
                 }
             }
 
-            this.$store.commit('exSetActiveTx', { price, quantity, side, num });
+            this.$store.commit('exSetActiveTx', {
+                price: this.formatNum(price, 'ttoken'),
+                quantity: this.formatNum(quantity, 'ftoken'),
+                side,
+                num
+            });
         }
     }
 };

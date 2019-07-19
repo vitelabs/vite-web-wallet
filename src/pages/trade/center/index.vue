@@ -32,11 +32,29 @@ export default {
     computed: {
         address() {
             return this.$store.getters.activeAddr;
+        },
+        quoteTokenDetail() {
+            return this.$store.state.exchangeTokens.ttoken;
+        },
+        tradeTokenDetail() {
+            return this.$store.state.exchangeTokens.ftoken;
+        },
+        activeTxPair() {
+            return this.$store.state.exchangeActiveTxPair.activeTxPair;
         }
     },
     watch: {
         address() {
             this.$store.dispatch('exFetchVip');
+        },
+        quoteTokenDetail() {
+            this.$store.dispatch('exSetQuoteTokenDecimals');
+        },
+        tradeTokenDetail() {
+            this.$store.dispatch('exSetTradeTokenDecimals');
+        },
+        activeTxPair() {
+            this.$store.dispatch('exSetTokenDecimals');
         }
     }
 };

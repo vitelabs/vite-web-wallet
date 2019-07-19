@@ -88,8 +88,6 @@ import BigNumber from 'utils/bigNumber';
 import { verifyAmount, checkAmountFormat } from 'utils/validations';
 import { execWithValid } from 'utils/execWithValid';
 
-const maxDigit = 8;
-
 export default {
     components: { viteInput, slider },
     props: {
@@ -124,10 +122,11 @@ export default {
             if (old && old.symbol === this.activeTxPair.symbol) {
                 return;
             }
-            this.price
-                = this.activeTxPair && this.activeTxPair.closePrice
-                    ? this.activeTxPair.closePrice
-                    : '';
+
+            const price = this.activeTxPair && this.activeTxPair.closePrice
+                ? this.activeTxPair.closePrice
+                : '';
+            this.price = BigNumber.normalFormatNum(price, this.ttokenDigit);
             this.quantity = '';
             this.amount = '';
         },
@@ -147,7 +146,7 @@ export default {
             this.validAll();
         },
         activeTx: function () {
-            this.price = this.activeTx.price;
+            this.price = BigNumber.normalFormatNum(this.activeTx.price, this.ttokenDigit);
 
             if (!this.activeTx.num) {
                 this.priceChanged();
@@ -162,8 +161,7 @@ export default {
                 return;
             }
 
-            const quantity = BigNumber.normalFormatNum(this.activeTx.num,
-                this.ftokenDigit);
+            const quantity = BigNumber.normalFormatNum(this.activeTx.num, this.ftokenDigit);
 
             if (
                 this.orderType === 'sell'
@@ -173,8 +171,7 @@ export default {
                     this.priceChanged();
                     return;
                 }
-                this.quantity = BigNumber.normalFormatNum(this.balance,
-                    this.ftokenDigit);
+                this.quantity = BigNumber.normalFormatNum(this.balance, this.ftokenDigit);
                 this.quantityChanged();
                 return;
             }
@@ -192,8 +189,21 @@ export default {
                 }
             }
 
-            this.quantity = quantity;
+            this.quantity = BigNumber.normalFormatNum(quantity, this.ftokenDigit);
             this.quantityChanged();
+        },
+        ttokenDigit: function () {
+            if (this.price) {
+                this.price = BigNumber.normalFormatNum(this.price, this.ttokenDigit);
+            }
+            if (this.amount) {
+                this.amount = BigNumber.normalFormatNum(this.amount, this.ttokenDigit);
+            }
+        },
+        ftokenDigit: function () {
+            if (this.quantity) {
+                this.quantity = BigNumber.normalFormatNum(this.quantity, this.ftokenDigit);
+            }
         }
     },
     computed: {
@@ -331,26 +341,10 @@ export default {
             return this.$store.state.exchangeActiveTx.activeTx;
         },
         ttokenDigit() {
-            if (!this.ttokenDetail || !this.activeTxPair) {
-                return 0;
-            }
-
-            const tDigit = this.ttokenDetail.tokenDecimals;
-            const pariDigit = this.activeTxPair.pricePrecision;
-
-            const digit = tDigit > pariDigit ? pariDigit : tDigit;
-            return digit > maxDigit ? maxDigit : digit;
+            return this.$store.state.exchangeTokenDecimalsLimit.quoteToken;
         },
         ftokenDigit() {
-            if (!this.ftokenDetail || !this.activeTxPair) {
-                return 0;
-            }
-
-            const fDigit = this.ftokenDetail.tokenDecimals;
-            const pariDigit = this.activeTxPair.quantityPrecision;
-
-            const digit = fDigit > pariDigit ? pariDigit : fDigit;
-            return digit > maxDigit ? maxDigit : digit;
+            return this.$store.state.exchangeTokenDecimalsLimit.tradeToken;
         },
         closeMarket() {
             return this.$store.state.exchangeMarket.marketClosed;
