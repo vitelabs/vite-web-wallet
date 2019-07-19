@@ -695,7 +695,8 @@
     },
     "tradeCenter": {
         "title": "交易中心",
-        "marketClosed": "{symbol} 已暂停交易。"
+        "marketClosed": "{symbol} 已暂停交易。",
+        "mergeDepth": "深度合并"
     },
     "trade": {
         "search": "查询",

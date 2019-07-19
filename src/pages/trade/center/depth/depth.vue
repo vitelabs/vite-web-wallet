@@ -15,6 +15,7 @@
                     'active-side': isShowBuy && !isShowSell
                 }" class="ex-tab __pointer"
                 @click="showTable(false, true)">{{ $t('trade.depth.sell') }}</li>
+            <merge-depth></merge-depth>
         </ul>
 
         <div class="__center-tb-title">
@@ -43,10 +44,11 @@
 
 <script>
 import depthTable from './depthTable';
+import mergeDepth from './mergeDepth';
 import price from './price';
 
 export default {
-    components: { depthTable, price },
+    components: { depthTable, price, mergeDepth },
     data() {
         return {
             isShowBuy: true,
