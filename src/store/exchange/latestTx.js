@@ -10,7 +10,6 @@ const state = {
 
 const mutations = {
     exSetLatestTxList(state, list) {
-        console.log('trade', list);
         list = list || [];
 
         let arr = [];
@@ -20,8 +19,8 @@ const mutations = {
                 arr.push(tx);
             } else {
                 arr.push(list[index]);
+                list.splice(index, 1);
             }
-            list.splice(index, 1);
         });
 
         arr = arr.concat(list);
