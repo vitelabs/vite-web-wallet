@@ -308,12 +308,12 @@
             "tabName": "Deposit History",
             "heads": ["Time", "Amount", "Status", "{outChain} Chain Hash","VITE Chain Hash"],
             "statusMap": {
-                "OPPOSITE_PROCESSING": "{outChain}链待确认",
-                "OPPOSITE_CONFIRMED_FAIL":"{outChain}链失败",
-                "OPPOSITE_CONFIRMED": "网关已接收",
-                "TOT_CONFIRMED": "已完成",
-                "BELOW_MINIMUM": "充值失败",
-                "TOT_PROCESSING": "VITE链待确认"
+                "OPPOSITE_PROCESSING": "{outChain} awaits to confirm",
+                "OPPOSITE_CONFIRMED_FAIL":"{outChain} processing failed",
+                "OPPOSITE_CONFIRMED": "Gateway Received",
+                "TOT_CONFIRMED": "Completed",
+                "BELOW_MINIMUM": "Topup Failed",
+                "TOT_PROCESSING": "VITE chain await to confirm"
             }
         },
         "withdrawRecord": {
@@ -322,10 +322,10 @@
             "statusMap":{
                 "TOT_PROCESSING": "VITE Chain Unconfirmed",
                 "TOT_CONFIRMED": "VITE Confirmed",
-                "TOT_EXCEED_THE_LIMIT":"转出金额超过限额",
-                "OPPOSITE_PROCESSING": "{outChain}链待确认",
+                "TOT_EXCEED_THE_LIMIT":"Transfer amount exceeds the limit",
+                "OPPOSITE_PROCESSING": "{outChain} awaits to confirm",
                 "OPPOSITE_CONFIRMED": "Completed",
-                "WRONG_WITHDRAW_ADDRESS":"转出地址填写错误"            
+                "WRONG_WITHDRAW_ADDRESS":"Transfer address is incorrect"
             }
         },
         "receive": {
