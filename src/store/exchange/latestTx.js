@@ -19,8 +19,8 @@ const mutations = {
                 arr.push(tx);
             } else {
                 arr.push(list[index]);
+                list.splice(index, 1);
             }
-            list.splice(index, 1);
         });
 
         arr = arr.concat(list);

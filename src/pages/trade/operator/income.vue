@@ -11,7 +11,7 @@
             <img class="icon" :src="type.icon" />
             <div class="token-wrapper">
                 <div class="token-title">{{ type.name }}</div>
-                <div class="token-amount">{{ income && income[type.name] ? income[type.name].amount : '0' }}</div>
+                <div class="token-amount">{{ income && income[type.name] ? formatNum(income[type.name].amount) : '0' }}</div>
             </div>
         </div>
     </div>
@@ -94,6 +94,9 @@ export default {
         }
     },
     methods: {
+        formatNum(num) {
+            return BigNumber.onlyFormat(num);
+        },
         getRate(tokenId) {
             const rateList = this.$store.state.exchangeRate.rateMap || {};
             const coin = this.$store.state.env.currency;
