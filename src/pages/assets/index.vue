@@ -189,12 +189,23 @@ export default {
                 @include colWidth;
                 padding: 9px;
                 color: rgba(94, 104, 117, 0.58);
+                overflow: visible;
                 .asset-switch {
                     color: rgba(94, 104, 117, 0.58);;
                     font-size: 12px;
                     @include font-family-normal();
                     /deep/.list-title {
                         border: none;
+                    }
+                    /deep/.list {
+                        overflow: visible;
+                        border-radius: 2px;
+                        margin-top: 8px;
+                        @include font-family-normal();
+                        color: rgba(94,104,117,0.58);
+                        .item:hover {
+                            background: rgba(75,116,255,0.1);
+                        }
                     }
                 }
             }
