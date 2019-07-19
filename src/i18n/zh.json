@@ -19,6 +19,7 @@
     "stakingAmount": "抵押金额",
     "withdrawHeight": "到期快照高度",
     "balance": "账户余额",
+    "dexBalance": "交易所账户余额",
     "addrName": "地址{index}",
     "true": "是",
     "false": "否",
@@ -981,7 +982,7 @@
             "submit": "确认转入",
             "tokenName": "币种名称",
             "address": "接受所有权地址",
-            "notice": "请知悉：币种所有权转入后尚未开通的交易对权限将归新的所有者拥有。已开通暂停交易的交易对所有权仍归您所有。"
+            "notice": "请知悉：币种所有权转让后尚未开通的交易对权限将归新的所有者拥有。已开通暂停交易的交易对所有权仍归您所有。"
         }
     },
     "tradeTxPairManage": {
