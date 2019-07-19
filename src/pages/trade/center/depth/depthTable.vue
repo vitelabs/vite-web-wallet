@@ -52,10 +52,10 @@ export default {
         currentOpenOrders() {
             return this.$store.state.exchangeCurrentOpenOrders.list;
         },
-        ttokenDigit() {
+        quoteTokenDigit() {
             return this.$store.state.exchangeTokenDecimalsLimit.quoteToken;
         },
-        ftokenDigit() {
+        tradeTokenDigit() {
             return this.$store.state.exchangeTokenDecimalsLimit.tradeToken;
         }
     },
@@ -80,9 +80,9 @@ export default {
         },
         formatNum(num, type) {
             if (type === 'ttoken') {
-                return BigNumber.formatNum(num, this.ttokenDigit);
+                return BigNumber.formatNum(num, this.quoteTokenDigit);
             }
-            return BigNumber.formatNum(num, this.ftokenDigit);
+            return BigNumber.formatNum(num, this.tradeTokenDigit);
         },
         getWidth(item) {
             const width = BigNumber.dividedToNumber(item.quantity, this.maxQuantity, 2).toString() * 100;
