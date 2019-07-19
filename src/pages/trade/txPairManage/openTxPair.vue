@@ -6,7 +6,7 @@
              :leftBtnClick="trans" :close="close" >
 
         <div class="__row">
-            <div class="__row_t">{{ $t('balance') }}</div>
+            <div class="__row_t">{{ $t('dexBalance') }}</div>
             <div class="__input_row __unuse_input __bold">
                 <img  :src="viteTokenInfo.icon" class="__icon" />
                 {{ viteTokenInfo.tokenSymbol }} <span class="__right">{{ showExViteBalance }}</span>
