@@ -1,5 +1,5 @@
 <template>
-    <div class="merge-depth-wrapper">
+    <div v-show="stepList.length" class="merge-depth-wrapper">
         {{ $t('tradeCenter.mergeDepth') }}
         <div class="select-list">
             <div class="list-head">{{ step }}</div>
@@ -16,7 +16,7 @@ export default {
     mounted() {
         this.$store.dispatch('exSetDepthStep', this.step);
     },
-    date() {
+    data() {
         return { step: '' };
     },
     computed: {
@@ -82,5 +82,6 @@ export default {
     @include font-family-normal();
     color: rgba(158,164,173,1);
     line-height: 16px;
+    padding: 6px 6px 3px;
 }
 </style>
