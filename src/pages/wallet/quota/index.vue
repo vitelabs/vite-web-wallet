@@ -114,7 +114,7 @@ export default {
             });
             this.showConfirmType = '';
         },
-        submit: execWithValid(() => {
+        submit: execWithValid(function () {
             this.testAmount();
             if (this.amountErr) {
                 return;
