@@ -1,11 +1,10 @@
 .trade-list-table {
     min-width: 0px;
     flex: 1;
-}
-
-@include rowWith {
-    width: 25%;
-    &:first-child {
-        min-width: 110px;
+    @include rowWith {
+        width: 25%;
+        &:first-child {
+            min-width: 110px;
+        }
     }
 }
