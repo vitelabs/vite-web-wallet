@@ -264,6 +264,7 @@ export default {
         align-self: stretch;
         position: relative;
         @include colWidth;
+        overflow: auto;
         .unbind {
             height: 16px;
             width: 16px;
