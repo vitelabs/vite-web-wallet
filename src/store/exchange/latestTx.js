@@ -12,18 +12,16 @@ const mutations = {
     exSetLatestTxList(state, list) {
         list = list || [];
 
-        let arr = [];
-        state.txList.forEach(tx => {
+        let arr = [].concat(state.txList);
+        arr.forEach(tx => {
             const index = list.findIndex(v => v.tradeId !== tx.tradeId);
-            if (index < 0) {
-                arr.push(tx);
-            } else {
+            if (index >= 0) {
                 arr.push(list[index]);
                 list.splice(index, 1);
             }
         });
 
-        arr = arr.concat(list);
+        arr = arr.concat(list || []);
         arr.sort((a, b) => b.time - a.time);
         arr = arr.slice(0, 100);
 
