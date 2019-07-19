@@ -39,7 +39,7 @@
 import pageLayout from 'components/pageLayout/index';
 import tokenCard from './tokenCard';
 import accountHead from './head';
-import { addTokenDialog,inviteDialog } from './dialog';
+import { addTokenDialog, inviteDialog } from './dialog';
 import { gateStorage } from 'services/gate';
 import TokenFilter from './filter';
 import { debounce } from 'lodash';

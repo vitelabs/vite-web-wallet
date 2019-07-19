@@ -143,7 +143,7 @@ export default {
     &.edit {
         text-align: left;
         background-color: rgba(176, 192, 237, 0.42);
-        border:1px solid #D4DEE7  ;
+        border: 1px solid #D4DEE7  ;
         @include font-family-bold();
     }
 }
