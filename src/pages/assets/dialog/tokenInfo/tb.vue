@@ -96,7 +96,6 @@ export default {
         };
     },
     beforeMount() {
-        window.fffff=this;
         this.updateData();
     },
     filters: {
