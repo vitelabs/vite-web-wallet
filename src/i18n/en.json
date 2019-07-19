@@ -305,25 +305,26 @@
         },
         "depositRecord": {
             "tabName": "Deposit History",
-            "heads": ["Time", "Amount", "Status", "VITE Chain Hash", "{outChain} Chain Hash"],
+            "heads": ["Time", "Amount", "Status", "{outChain} Chain Hash","VITE Chain Hash"],
             "statusMap": {
-                "OPPOSITE_PROCESSING": "{outChain} Chain Unconfirmed",
-                "OPPOSITE_CONFIRMED": "Gateway has received",
-                "TOT_CONFIRMED": "Completed",
-                "BELOW_MINIMUM": "VITE Chain Unconfirmed",
-                "TOT_PROCESSING": "Completed"
+                "OPPOSITE_PROCESSING": "{outChain}链待确认",
+                "OPPOSITE_CONFIRMED_FAIL":"{outChain}链失败",
+                "OPPOSITE_CONFIRMED": "网关已接收",
+                "TOT_CONFIRMED": "已完成",
+                "BELOW_MINIMUM": "充值失败",
+                "TOT_PROCESSING": "VITE链待确认"
             }
         },
         "withdrawRecord": {
             "tabName": "Transfer History",
             "heads": ["Time", "Amount", "Status", "VITE Chain Hash", "{outChain} Chain Hash"],
-            "statusMap": {
-                "TODO": "VITE Chain Unconfirmed",
-                "TOT_PROCESSING": "VITE Confirmed",
-                "TOT_NOT_RECEIVED": "Transfer Failed",
-                "TOT_CONFIRMED": "Gateway has received",
-                "OPPOSITE_PROCESSING": "{outChain} chain unconfirmed",
-                "OPPOSITE_CONFIRMED": "Completed"
+            "statusMap":{
+                "TOT_PROCESSING": "VITE Chain Unconfirmed",
+                "TOT_CONFIRMED": "VITE Confirmed",
+                "TOT_EXCEED_THE_LIMIT":"转出金额超过限额",
+                "OPPOSITE_PROCESSING": "{outChain}链待确认",
+                "OPPOSITE_CONFIRMED": "Completed",
+                "WRONG_WITHDRAW_ADDRESS":"转出地址填写错误"            
             }
         },
         "receive": {
