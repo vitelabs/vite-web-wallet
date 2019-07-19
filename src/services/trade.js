@@ -24,11 +24,11 @@ export const klineHistory = function ({ startTime, endTime, symbol, interval }) 
     });
 };
 
-export const depth = function ({ symbol }) {
+export const depth = function ({ symbol, step }) {
     return request({
         path: `${ path }/depth`,
         method: 'GET',
-        params: { symbol }
+        params: { symbol, step }
     });
 };
 

@@ -8,7 +8,8 @@ let activeTxPair = null;
 const state = {
     buy: [],
     sell: [],
-    isLoading: false
+    isLoading: false,
+    depthStep: ''
 };
 
 const mutations = {
@@ -22,11 +23,14 @@ const mutations = {
     },
     exSetDepthLoading(state, isLoading) {
         state.isLoading = isLoading;
+    },
+    exSetDepthStep(state, step) {
+        state.depthStep = step;
     }
 };
 
 const actions = {
-    exFetchDepth({ rootState, commit, getters, dispatch }) {
+    exFetchDepth({ rootState, commit, getters, dispatch, state }) {
         const _activeTxPair = rootState.exchangeActiveTxPair.activeTxPair;
         if (!_activeTxPair) {
             return;
@@ -47,13 +51,22 @@ const actions = {
             commit('exSetDepthBuy', data && data.bids ? data.bids || [] : []);
         }, time);
 
-        depthTask.start(() => getters.exActiveTxPair);
+        depthTask.start(() => {
+            return {
+                step: state.depthDecimals,
+                ...getters.exActiveTxPair
+            };
+        });
     },
     exStopDepthTimer({ commit }) {
         depthTask && depthTask.stop();
         depthTask = null;
         commit('exSetDepthSell', []);
         commit('exSetDepthBuy', []);
+    },
+    exSetDepthStep({ commit, dispatch }, step) {
+        commit('exSetDepthStep', step);
+        dispatch('exFetchDepth');
     }
 };
 

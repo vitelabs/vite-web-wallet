@@ -1,7 +1,8 @@
 import { depth, defaultPair, assignPair, latestTx, order } from 'services/trade';
 
-export function depthWs({ symbol }) {
-    const key = `market.${ symbol }.depth`;
+export function depthWs({ symbol, step }) {
+    const stepStr = !step && step !== 0 ? '' : `.${ step }`;
+    const key = `market.${ symbol }.depth${ stepStr }`;
     return key;
 }
 
