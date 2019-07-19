@@ -13,14 +13,14 @@
             <div class="__tb_cell">
                 {{
                     $t(`tokenCard.${type}Record.heads.3`, {
-                        outChain: tokenToGate[tokenId].mappedNet
+                        outChain: tokenToGate[token.tokenId].mappedNet
                     })
                 }}
             </div>
             <div class="__tb_cell">
                 {{
                     $t(`tokenCard.${type}Record.heads.4`, {
-                        outChain: tokenToGate[tokenId].mappedNet
+                        outChain: tokenToGate[token.tokenId].mappedNet
                     })
                 }}
             </div>
@@ -33,17 +33,17 @@
                 <div class="__tb_cell">
                     {{
                         $t(`tokenCard.${type}Record.statusMap.${item.state}`, {
-                            outChain: tokenToGate[tokenId].mappedNet
+                            outChain: tokenToGate[token.tokenId].mappedNet
                         })
                     }}
                 </div>
                 <div class="__tb_cell click-able"
-                     @click="() => type === 'deposit' ? gotoOutHash(item.outTxHash) : gotoInHash(item.inTxHash)">
-                    {{ item.outTxHash| hashShortify }}
+                     @click="() => gotoInHash(item.inTxHash)">
+                    {{ item.inTxHash| hashShortify }}
                 </div>
                 <div class="__tb_cell click-able"
-                     @click="() => type === 'withdraw' ? gotoOutHash(item.outTxHash) : gotoInHash(item.inTxHash)">
-                    {{ item.inTxHash | hashShortify }}
+                     @click="() => gotoOutHash(item.outTxHash)">
+                    {{ item.outTxHash | hashShortify }}
                 </div>
             </div>
         </div>
@@ -96,6 +96,7 @@ export default {
         };
     },
     beforeMount() {
+        window.fffff=this;
         this.updateData();
     },
     filters: {
