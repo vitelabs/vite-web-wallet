@@ -694,7 +694,8 @@
     "tradeCenter": {
         "title": "Exchange",
         "marketClosed": "{symbol} 已暂停交易。",
-        "mergeDepth": "深度合并"
+        "mergeDepth": "深度合并",
+        "depthStep": "{step}位小数"
     },
     "trade": {
         "search": "Search",
