@@ -9,7 +9,7 @@
             <div class="__input_row __unuse_input __bold">
                 {{ txPair.symbol }}
                 <span class="__right">
-                    {{ txPair.txPairDetail.makerFeeRate ? `${txPair.txPairDetail.makerFeeRate}%` : '0%' }}
+                    {{ txPair.txPairDetail.makerFeeRate ? `${(txPair.txPairDetail.makerFeeRate * 100).toFixed(3)}%` : '0%' }}
                 </span>
             </div>
         </div>
@@ -35,7 +35,7 @@
             <div class="__input_row __unuse_input __bold">
                 {{ txPair.symbol }}
                 <span class="__right">
-                    {{ txPair.txPairDetail.takerFeeRate ? `${txPair.txPairDetail.takerFeeRate}%` : '0%' }}
+                    {{ txPair.txPairDetail.takerFeeRate ? `${(txPair.txPairDetail.takerFeeRate * 100).toFixed(3)}%` : '0%' }}
                 </span>
             </div>
         </div>
@@ -108,7 +108,7 @@ export default {
             let text = '';
             let operationCode = 0;
 
-            if (+this.maker !== +this.txPair.txPairDetail.makerFeeRate) {
+            if (this.maker && +this.maker !== +this.txPair.txPairDetail.makerFeeRate) {
                 text += this.$t('tradeTxPairManage.changeFeeHint', {
                     symbol: this.txPair.symbol,
                     type: 'Maker',
@@ -116,7 +116,7 @@ export default {
                 });
                 operationCode += 4;
             }
-            if (+this.taker !== +this.txPair.txPairDetail.takerFeeRate) {
+            if (this.taker && +this.taker !== +this.txPair.txPairDetail.takerFeeRate) {
                 text = text ? `${ text }; ` : text;
                 text += this.$t('tradeTxPairManage.changeFeeHint', {
                     symbol: this.txPair.symbol,
