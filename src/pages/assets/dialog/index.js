@@ -6,6 +6,7 @@ import tokenInfoComp from './tokenInfo';
 import withdrawComp from './withdraw.vue';
 import exWithdrawComp from './exWithdraw.vue';
 import exChargeComp from './exCharge.vue';
+import inviteComp from './invite.vue';
 
 export const receiveDialog = getDialog(receiveComp);
 export const chargeDialog = getDialog(chargeComp);
@@ -14,3 +15,4 @@ export const tokenInfoDialog = getDialog(tokenInfoComp);
 export const withdrawDialog = getDialog(withdrawComp);
 export const exWithdrawDialog = getDialog(exWithdrawComp);
 export const exChargeDialog = getDialog(exChargeComp);
+export const inviteDialog = getDialog(inviteComp);
