@@ -123,5 +123,9 @@ export default {
         decimal = decimal >= fix ? fix : decimal;
         const n = new BigNumber(num);
         return n.toFormat(decimal);
+    },
+    onlyFormat(num) {
+        const n = new GroupBigNumber(num);
+        return n.toFormat();
     }
 };

@@ -112,6 +112,7 @@ export default {
 @import "./dividend.scss";
 @import "./txPairManage.scss";
 @import "./tradeList.scss";
+@import "./incomeList.scss";
 
 // [TODO] Delete keystore
 .keystore-table-item {
