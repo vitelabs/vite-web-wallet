@@ -3,21 +3,30 @@ extends /components/dialog/base.pug
 block content
     img.bg-img(src="~assets/imgs/invite.png")
     div(v-if="inviteCode")
-        .invite-code
+        .invite-code 我的邀请码为：{{this.inviteCode}}
             img.title_icon.copy.__pointer(src="~assets/imgs/copy_default.svg" @click="copy")
         .invite-info
-            .item.num
-            .item.benifit
+            .item
+                img.left(src="~assets/imgs/invite_num.png")
+                .right
+                    .label 邀请人数
+                    .content 13
+
+            .item
+                img.left(src="~assets/imgs/invite_benifit.png")
+                .right
+                    .label 邀请挖矿收益
+                    .content 100
     div(v-else)
         .block__title {{ $t(`tradeAssets.confirmrecharge.lable1`) }}
-            .right 可用余额kkkkkEth
-        .block__content.edit.space dsfsfafsf
-        .block__title 邀请规则
-    .illustrate sdfasdfasfdasfsafdasfd
+            .right 可用余额 {{avaliableExAmount}} VITE
+        .block__content.edit.space 1000 VITE
+    .block__title 邀请规则
+    .illustrate 花费1000 vite生成邀请码，1000 vite会算作交易所收益，分给持有VX的用户
         .dot
-    .illustrate sdfasdfasfdasfsafdasfd
+    .illustrate 使用邀请码的用户交易过程中产生手续费，产生手续费的 5%，视为邀请用户产生的交易手续，可进行挖矿VX
         .dot
-    .illustrate sdfasdfasfdasfsafdasfd
+    .illustrate 使用邀请码的用户，在交易过程过程中手续费可9折
         .dot
 
 </template>
@@ -26,6 +35,7 @@ block content
 import { getInviteInfo, getCode, genCode } from 'services/tradeOperation';
 import copy from 'utils/copy';
 import { doUntill } from 'utils/asyncFlow';
+import { VITE_TOKENID } from 'utils/constant';
 
 export default {
     async beforeMount() {
@@ -46,7 +56,10 @@ export default {
             return this.$store.getters.activeAddr;
         },
         dSTxt() {
-            return '生成邀请码';
+            return !this.inviteCode && '生成邀请码';
+        },
+        avaliableExAmount() {
+            return this.$store.getters.exBalanceList[VITE_TOKENID];
         }
     },
     methods: {
@@ -55,11 +68,12 @@ export default {
             return this.inviteCode;
         },
         inspector() {
-            genCode().then(() => doUntill(() => this.getCode(), undefined, 1000, 3));
+            genCode().then(() =>
+                doUntill(() => this.getCode(), undefined, 1000, 3));
             return Promise.reject('no close');
         },
         copy() {
-            copy(this.address);
+            copy(this.inviteCode);
             this.$toast(this.$t('hint.copy'));
         }
     }
@@ -143,15 +157,14 @@ export default {
     &.edit {
         text-align: left;
         background-color: rgba(176, 192, 237, 0.42);
-        border: 1px solid #D4DEE7  ;
+        border: 1px solid #d4dee7;
         @include font-family-bold();
     }
 }
 .illustrate {
-    height: 18px;
-    font-size: 14px;
-    color: rgba(94, 104, 117, 1);
-    line-height: 18px;
+    font-size: 12px;
+    color: #5e6875;
+    line-height: 16px;
     padding-left: 13px;
     margin-top: 12px;
     position: relative;
@@ -163,16 +176,55 @@ export default {
         border-radius: 100%;
         position: absolute;
         left: 0;
-        top: 8px;
+        top: 6px;
     }
 }
 .invite-code {
+    height: 56px;
+    border-radius: 2px;
+    border: 1px dashed rgba(0, 122, 255, 0.7);
+    text-align: center;
+    position: relative;
+    display: flex;
+    align-items: center;
+    color: #1d2024;
+    @include font-family-bold();
+    justify-content: center;
+    .copy {
+        position: absolute;
+        right: 15px;
+    }
 }
 .invite-info {
+    display: flex;
+    justify-content: space-between;
+    border-radius: 2px;
+    height: 56px;
+    margin-top: 23px;
     .item {
-        .num {
+        background: rgba(0, 122, 255, 0.05);
+        padding: 9px 15px;
+        display: flex;
+        align-items: center;
+        width: calc(50% - 10px);
+        box-sizing: border-box;
+        .left {
+            height: 24px;
+            width: 24px;
+            margin-right: 15px;
         }
-        .benifit {
+        .right {
+            display: flex;
+            flex-direction: column;
+            .label {
+                color: #5e6875;
+                font-size: 12px;
+            }
+            .content {
+                color: #1d2024;
+                font-size: 14px;
+                @include font-family-bold();
+            }
         }
     }
 }

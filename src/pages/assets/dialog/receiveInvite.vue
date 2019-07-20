@@ -1,68 +1,56 @@
 <template lang="pug">
 extends /components/dialog/base.pug
 block content
-    .block__title
-        span {{$t('tokenCard.charge.addressTitle')}}
-        img.title_icon.copy.__pointer(src="~assets/imgs/copy_default.svg" @click="copy")
-    .block__content(:class="{err:addrErr}") {{addrErr||address}}
-    .qrcode-container
-        .qrcode-container__title {{$t('tokenCard.charge.codeTips',{tokenSymbol:token.tokenSymbol})}}
-        qrcode(:text="addressQrcode" :options="qrOptions" class="qrcode-container__content")
-    .charge-tips {{$t('tokenCard.charge.tips.0',{tokenSymbol:token.tokenSymbol})}}
+    img.bg-img(src="~assets/imgs/invite.png")
+    div(v-if="inviteeCode")
+        .invite-code 你已接受过邀请，邀请码为：{{this.inviteeCode}}
+    div(v-else)
+        .block__title {{ $t(`tradeAssets.confirmrecharge.lable1`) }}
+        input.block__content(v-model="code")
+    .block__title 邀请规则
+    .illustrate 花费1000 vite生成邀请码，1000 vite会算作交易所收益，分给持有VX的用户
         .dot
-    .charge-tips {{$t('tokenCard.charge.tips.1',{tokenSymbol:token.tokenSymbol,min:minimumDepositAmount})}}
+    .illustrate 使用邀请码的用户交易过程中产生手续费，产生手续费的 5%，视为邀请用户产生的交易手续，可进行挖矿VX
         .dot
-    .charge-tips {{$t('tokenCard.charge.tips.2')}}
+    .illustrate 使用邀请码的用户，在交易过程过程中手续费可9折
         .dot
+
 </template>
 
 <script>
-import qrcode from 'components/qrcode';
-import copy from 'utils/copy';
-import { modes } from 'qrcode.es';
-import { getDepositInfo } from 'services/gate';
-import bigNumber from 'utils/bigNumber';
+import { getInviteeCode, bindCode } from 'services/tradeOperation';
+import { doUntill } from 'utils/asyncFlow';
 
 export default {
-    components: { qrcode },
-    props: {
-        token: {
-            type: Object,
-            required: true
-        }
-    },
-    beforeMount() {
-        getDepositInfo({ addr: this.defaultAddr, tokenId: this.token.tokenId }, this.token.gateInfo.url).then(res => {
-            this.address = res.depositAddress;
-            this.minimumDepositAmountMin = res.minimumDepositAmount;
-        }).catch(() => (this.addrErr = this.$t('tokenCard.charge.addrErr')));
+    async beforeMount() {
+        await this.getInviteeCode();
+        this.status = 'LOADED';
     },
     data() {
         return {
-            minimumDepositAmountMin: '',
-            address: '',
-            amount: 0,
-            qrOptions: { size: 124, mode: modes.NORMAL },
-            dTitle: this.$t('tokenCard.charge.title'),
-            addrErr: ''
+            status: 'LOADING', // "ERROR" "LOADING" "LOADED"
+            dTitle: '接受邀请',
+            inviteeCode: null,
+            code: ''
         };
     },
     computed: {
-        minimumDepositAmount() {
-            return bigNumber.toBasic(this.minimumDepositAmountMin, this.token.decimals);
-        },
-        addressQrcode() {
-            if (this.token.type === 'OFFICAL_GATE' && this.token.tokenSymbol === 'BTC') return `bitcoin:${ this.address }`;
-            return this.address;
-        },
-        defaultAddr() {
+        address() {
             return this.$store.getters.activeAddr;
+        },
+        dSTxt() {
+            return !this.inviteeCode && '接受邀请';
+        },
+        dBtnUnuse() {
+            return !/\d{1,10}/.test(this.code);
         }
     },
     methods: {
-        copy() {
-            copy(this.address);
-            this.$toast(this.$t('hint.copy'));
+        async getInviteeCode() {
+            this.inviteeCode = await getInviteeCode(this.address);
+        },
+        inspector() {
+            bindCode(this.code).then(doUntill(() => this.getInviteeCode(), undefined, 1000, 3));
         }
     }
 };
@@ -70,75 +58,114 @@ export default {
 
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
-
+.bg-img {
+    height: 140px;
+    width: 140px;
+    margin: 0 auto 29px;
+}
 .block__title {
     height: 16px;
-    font-size: 14px;
+    font-size: 12px;
     @include font-family-bold();
-    font-weight: 600;
     color: rgba(29, 32, 36, 1);
     line-height: 16px;
     margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    .right {
+        color: #767f8b;
+        font-size: 12px;
+    }
     &:first-child {
         margin-top: 0;
     }
-    .title_icon {
-        float: right;
-        &.copy {
-            margin-right: 10px;
-        }
-    }
 }
+
 .block__content {
-    height: 40px;
-    background: rgba(243, 246, 249, 1);
+    position: relative;
+    height: 34px;
     border-radius: 2px;
     border: 1px solid rgba(212, 222, 231, 1);
-    font-size: 14px;
+    font-size: 12px;
     word-break: break-word;
     width: 100%;
-    line-height: 40px;
+    line-height: 34px;
     box-sizing: border-box;
     margin-top: 16px;
-    text-align: center;
-    &.err{
-        color: #FF2929;
+    padding: 10px 15px;
+    align-items: center;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+
+    .all {
+        border-radius: 2px;
+        background: #007aff;
+        color: #fff;
+        cursor: pointer;
+        font-size: 12px;
+        padding: 0 6px;
+        height: 18px;
+        line-height: 18px;
+        float: right;
+        display: flex;
+        word-break: keep-all;
     }
-    &input {
+    .token__title {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        img {
+            width: 20px;
+            height: 20px;
+            margin-right: 20px;
+        }
+    }
+    input {
+        width: 100%;
+    }
+    .light {
+        color: #5e6875;
+    }
+    .blue {
+        color: #007aff;
+    }
+    &.edit {
         text-align: left;
+        background-color: rgba(176, 192, 237, 0.42);
+        border: 1px solid #d4dee7;
+        @include font-family-bold();
     }
 }
-.qrcode-container {
-    width: 455px;
-    background: rgba(243, 246, 249, 1);
-    border: 1px solid rgba(212, 222, 231, 1);
-    margin-top: 20px;
-    padding: 20px;
-    font-size: 16px;
-    box-sizing: border-box;
-    text-align: center;
-    &__content {
-        margin-top: 22px;
-    }
-}
-.charge-tips {
-    height: 18px;
-    font-size: 14px;
-    color: rgba(94, 104, 117, 1);
-    line-height: 18px;
+.illustrate {
+    font-size: 12px;
+    color: #5e6875;
+    line-height: 16px;
     padding-left: 13px;
-    margin-top: 20px;
+    margin-top: 12px;
     position: relative;
     width: 100%;
     .dot {
-        width: 6px;
-        height: 6px;
+        width: 4px;
+        height: 4px;
         background: rgba(0, 122, 255, 1);
         border-radius: 100%;
         position: absolute;
         left: 0;
         top: 6px;
     }
+}
+.invite-code {
+    height: 56px;
+    border-radius: 2px;
+    border: 1px dashed rgba(0, 122, 255, 0.7);
+    text-align: center;
+    position: relative;
+    display: flex;
+    align-items: center;
+    color: #1d2024;
+    @include font-family-bold();
+    justify-content: center;
 }
 </style>
 

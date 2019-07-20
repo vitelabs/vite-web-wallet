@@ -78,6 +78,10 @@ export function getInviteInfo(address:string):Promise<IInviterInfo> {
   return request({ method: "GET", path: "inviter", params: { address } });
 }
 
-export function getCode(address:string){
+export function getCode(address:string){//get my code 
     return viteClient.request('dexfund_getInviterCode',address)
+}
+
+export function getInviteeCode(address:string){// get who invited me
+    return viteClient.request('dexfund_getInviteeCode',address)
 }
