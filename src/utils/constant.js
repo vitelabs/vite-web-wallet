@@ -29,6 +29,6 @@ export const defaultTokenMap = process.env.NODE_ENV === 'production' ? {
     // }
 };
 
-
+export const VITE_TOKENID = 'tti_5649544520544f4b454e6e40';
 export const OFFICAL_GATE_NAME = 'Vite Official Gateway';
 
