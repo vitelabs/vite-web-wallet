@@ -32,6 +32,12 @@
 import openUrl from 'utils/openUrl';
 
 export default {
+    created() {
+        this.$store.dispatch('startLoopHeight');
+    },
+    destroyed() {
+        this.$store.dispatch('stopLoopHeight');
+    },
     data() {
         return {
             version: process.env.version,
