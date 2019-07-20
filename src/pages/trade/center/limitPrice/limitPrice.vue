@@ -30,7 +30,7 @@
             <order orderType="sell" class="order-wrapper"></order>
         </div>
 
-        <vip-confirm v-show="isShowVipConfirm" :close="hideVipConfirm"></vip-confirm>
+        <vip-confirm v-if="isShowVipConfirm" :close="hideVipConfirm"></vip-confirm>
     </div>
 </template>
 

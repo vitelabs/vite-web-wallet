@@ -61,15 +61,27 @@ const actions = {
             commit('setTokenInfo', { tokenInfo: item.tokenInfo || null, tokenId });
         }
     },
-    startLoopHeight({ commit }) {
-        heightTimer
-      = heightTimer
-      || new timer(() =>
-          $ViteJS.ledger.getSnapshotChainHeight().then(result => {
-              commit('setCurrentHeight', result);
-          }),
-      2000);
+    startLoopHeight({ commit, dispatch }) {
+        dispatch('stopLoopHeight');
+
+        heightTimer = new timer(() =>
+            $ViteJS.ledger.getSnapshotChainHeight().then(result => {
+                commit('setCurrentHeight', result);
+            }), 2000);
         heightTimer.start();
+
+        // $ViteJS.subscribe('newAccountBlocks').then(event => {
+        //     event.on(result => {
+        //         console.log(result);
+        //     });
+        //     // event.off();
+        // }).catch(err => {
+        //     console.warn(err);
+        // });
+    },
+    stopLoopHeight() {
+        heightTimer && heightTimer.stop();
+        heightTimer = null;
     },
     getAllTokens({ commit }) {
     // 暂时为前端提供代币搜索功能，获取全部token信息；
