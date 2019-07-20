@@ -61,13 +61,13 @@ const actions = {
             commit('setTokenInfo', { tokenInfo: item.tokenInfo || null, tokenId });
         }
     },
-    startLoopHeight({ commit, dispatch }) {
+    startLoopHeight({ commit, dispatch }, time = 10000) {
         dispatch('stopLoopHeight');
 
         heightTimer = new timer(() =>
             $ViteJS.ledger.getSnapshotChainHeight().then(result => {
                 commit('setCurrentHeight', result);
-            }), 2000);
+            }), time);
         heightTimer.start();
 
         // $ViteJS.subscribe('newAccountBlocks').then(event => {
