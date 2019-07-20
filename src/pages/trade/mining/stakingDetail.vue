@@ -32,6 +32,12 @@ import date from 'utils/date';
 import bigNumber from 'utils/bigNumber';
 
 export default {
+    created() {
+        this.$store.dispatch('startLoopHeight');
+    },
+    destroyed() {
+        this.$store.dispatch('stopLoopHeight');
+    },
     props: {
         stakingObj: {
             type: Object,
