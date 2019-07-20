@@ -81,7 +81,7 @@ export default {
         }
     },
     beforeMount() {
-        this.updateExBalance();
+        // this.updateExBalance();
         this.$store.dispatch('startLoopExchangeRate');
     },
     computed: {
