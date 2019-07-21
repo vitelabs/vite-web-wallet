@@ -27,15 +27,15 @@ import { StatusMap } from 'wallet';
 import switchAddr from 'components/switchAddress';
 import { pwdConfirm } from 'components/password/index.js';
 import SwitchComp from 'uiKit/switch.vue';
-import {inviteDialog,receiveInviteDialog} from 'components/dialog'
+import { inviteDialog, receiveInviteDialog } from 'components/dialog';
 
 export default {
-    components: { switchAddr,SwitchComp },
-    data(){
+    components: { switchAddr, SwitchComp },
+    data() {
         return {
-            optList:[{name:this.$t('assets.invite.inviteTitle'),value:'invite'},{name:this.$t('assets.invite.receiveInviteTitle'),value:'receiveInvite'}],
-            selectInvite:'invite'
-        }
+            optList: [ { name: this.$t('assets.invite.inviteTitle'), value: 'invite' }, { name: this.$t('assets.invite.receiveInviteTitle'), value: 'receiveInvite' } ],
+            selectInvite: 'invite'
+        };
     },
     props: {
         tabList: {
@@ -56,12 +56,12 @@ export default {
         }
     },
     methods: {
-        inviteDialog(v){
-            this.selectInvite='invite'
-            if(v==='invite'){
-                inviteDialog()
-            }else if(v==='receiveInvite'){
-                receiveInviteDialog()
+        inviteDialog(v) {
+            this.selectInvite = 'invite';
+            if (v === 'invite') {
+                inviteDialog();
+            } else if (v === 'receiveInvite') {
+                receiveInviteDialog();
             }
         },
         goOperator() {
@@ -132,7 +132,7 @@ export default {
         height: 100%;
         white-space: nowrap;
         text-align: center;
-        border:none;
+        border: none;
         user-select: none;
         &.active {
             position: relative;
