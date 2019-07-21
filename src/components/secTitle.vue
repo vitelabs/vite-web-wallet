@@ -56,6 +56,7 @@ export default {
 
             confirm({
                 size: 'small',
+                type: 'description',
                 title: this.$t(this.helpTitle),
                 singleBtn: true,
                 closeBtn: { show: false },

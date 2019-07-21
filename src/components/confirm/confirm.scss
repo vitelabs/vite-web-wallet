@@ -31,6 +31,12 @@
     width: 681px;
 }
 
+.description .confirm-wrapper {
+    .content-wrapper {
+        @include font-family-normal();
+    }
+}
+
 .confirm-wrapper {
     width: 515px;
     max-height: 85%;
