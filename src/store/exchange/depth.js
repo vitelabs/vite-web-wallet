@@ -53,7 +53,7 @@ const actions = {
 
         depthTask.start(() => {
             return {
-                step: state.depthDecimals,
+                step: state.depthStep,
                 ...getters.exActiveTxPair
             };
         });
