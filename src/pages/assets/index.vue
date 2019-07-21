@@ -12,7 +12,7 @@
                 ></TokenFilter>
                 <div class="token-list">
                     <div class="token__head">
-                        <div class="col">{{$t('tokenCard.heads.name')}}</div>
+                        <div class="col" >{{$t('tokenCard.heads.name')}}</div>
                         <div class="col">{{$t('tokenCard.heads.balance')}}</div>
                         <div class="col">{{$t('tokenCard.heads.onroad')}}</div>
                         <div class="col">{{$t('tokenCard.heads.gate')}}</div>

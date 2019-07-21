@@ -1,0 +1,35 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "module": "commonjs",
+    "target": "es5",
+    "lib": ["es2017", "dom"],
+    "strict": false,
+    "allowJs": true,
+    // "composite": true,
+    // "declaration": true,
+    // "declarationMap": true,
+    "sourceMap": true,
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "downlevelIteration": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noImplicitAny": false,
+    "preserveSymlinks": true,
+    "importHelpers": true,
+    "strictNullChecks": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "noUnusedLocals": true,
+    // "paths": {
+    //     "*": [
+    //     "src/*"
+    //   ]
+    // },
+    "typeRoots": ["./typings","@types"],
+    "types": ["node","@vite/vitejs"]
+  }
+  
+}

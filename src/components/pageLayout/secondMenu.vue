@@ -13,6 +13,7 @@
         </ul>
 
         <ul class="right-lab-list">
+            <SwitchComp class="tab __pointer" :optList="optList" :value="selectInvite" @input="inviteDialog"/>
             <div class="tab __pointer" @click="goHelp">{{ $t("help") }}</div>
             <div v-show="!isLogin" @click="dexStart" class="tab __pointer">
                 {{ isHaveUsers ? $t("unlockAcc") : $t("login") }}
@@ -30,9 +31,17 @@
 import { StatusMap } from 'wallet';
 import switchAddr from 'components/switchAddress';
 import { execWithValid } from 'utils/execWithValid';
+import SwitchComp from 'uiKit/switch.vue';
+import { inviteDialog, receiveInviteDialog } from 'components/dialog';
 
 export default {
-    components: { switchAddr },
+    components: { switchAddr, SwitchComp },
+    data() {
+        return {
+            optList: [ { name: this.$t('assets.invite.inviteTitle'), value: 'invite' }, { name: this.$t('assets.invite.receiveInviteTitle'), value: 'receiveInvite' } ],
+            selectInvite: 'invite'
+        };
+    },
     props: {
         tabList: {
             type: Array,
@@ -52,6 +61,14 @@ export default {
         }
     },
     methods: {
+        inviteDialog(v) {
+            this.selectInvite = 'invite';
+            if (v === 'invite') {
+                inviteDialog();
+            } else if (v === 'receiveInvite') {
+                receiveInviteDialog();
+            }
+        },
         goOperator() {
             this.$router.push({ name: 'tradeOperator' });
         },
@@ -116,7 +133,8 @@ export default {
         height: 100%;
         white-space: nowrap;
         text-align: center;
-
+        border: none;
+        user-select: none;
         &.active {
             position: relative;
             color: rgba(0, 122, 255, 1);
