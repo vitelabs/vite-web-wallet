@@ -1,6 +1,6 @@
 <template>
     <div class="title">
-        {{ title }}
+        <span class="title-t">{{ title }}</span>
         <span v-show="amount" class="amount">{{ amount }}</span>
     </div>
 </template>
@@ -25,11 +25,12 @@ export default {
 
 .title {
     height: 50px;
-    line-height: 50px;
     font-size: 13px;
     @include font-family-bold();
     font-weight: 600;
     color: rgba(94,104,117,0.8);
+    display: flex;
+    align-items: center;
     .amount {
         font-size: 20px;
         color: rgba(29,32,36,1);
