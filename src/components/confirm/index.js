@@ -5,6 +5,7 @@ const Confirm = Vue.extend(confirmComponent);
 
 export default function ({
     size,
+    type = '',
     showMask = true,
     title,
     content = '',
@@ -37,6 +38,7 @@ export default function ({
     };
 
     instance.showMask = showMask;
+    instance.type = type || '';
     instance.size = size || '';
     instance.title = title;
     instance.content = content;

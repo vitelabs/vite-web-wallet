@@ -17,40 +17,39 @@ block head
 block originContent
     .tab-content(v-if="tabName==='tokenInfo'")
         .content__item
-            .label {{$t("tokenCard.tokenInfo.labels.tokenId")}}
+            .label {{$t("tokenCard.tokenInfo.labels.tokenId")}}:
             div.click-able(@click="goToTokenDetail") {{token.tokenId}}
         .content__item
-            .label {{$t("tokenCard.tokenInfo.labels.address")}}
+            .label {{$t("tokenCard.tokenInfo.labels.address")}}:
             div {{token.owner}}
         .content__item
-            .label {{$t("tokenCard.tokenInfo.labels.tokenName")}}
+            .label {{$t("tokenCard.tokenInfo.labels.tokenName")}}:
             div {{token.tokenName}}
         .content__item
-            .label {{$t("tokenCard.tokenInfo.labels.totalSupply")}}
+            .label {{$t("tokenCard.tokenInfo.labels.totalSupply")}}:
             div {{token.totalSupply}}
         .content__item
-            .label {{$t("tokenCard.tokenInfo.labels.decimals")}}
+            .label {{$t("tokenCard.tokenInfo.labels.decimals")}}:
             div {{token.decimals}}
         .content__item
-            .label {{$t("tokenCard.tokenInfo.labels.isReIssuable")}}
+            .label {{$t("tokenCard.tokenInfo.labels.isReIssuable")}}:
             div {{$t("tokenCard.tokenInfo.reIssuable")[token.isReIssuable]}}
         .content__item
-            .label {{$t("tokenCard.tokenInfo.labels.time")}}
+            .label {{$t("tokenCard.tokenInfo.labels.time")}}:
             div
     .tab-content(v-if="tabName==='gate'")
         .content__item(v-if="token.gateInfo.url")
-            .label {{$t("tokenCard.gateInfo.officalNet")}}
+            .label {{$t("tokenCard.gateInfo.officalNet")}}:
         .content__item(v-if="token.gateInfo.url")
-            .label {{$t("tokenCard.gateInfo.introduction")}}
+            .label {{$t("tokenCard.gateInfo.introduction")}}:
         .content__item(v-if="token.gateInfo.url")
-            .label {{$t("tokenCard.gateInfo.token")}}
+            .label {{$t("tokenCard.gateInfo.token")}}:
         .content__item(v-if="!token.gateInfo.url")
-            .label {{$t("tokenCard.gateInfo.nodeDesc")}}
+            .label {{$t("tokenCard.gateInfo.nodeDesc")}}:
         .content__item
-            .label {{$t("tokenCard.gateInfo.setting")}}
+            .label {{$t("tokenCard.gateInfo.setting")}}:
             viteInput.gate-url(:placeholder="$t('tokenCard.gateInfo.settingPlaceholder')" :disabled="token.type==='OFFICAL_GATE'" v-model="url")
-            .btn.unuse(v-if="dBtnUnuse") {{$t('tokenCard.tokenInfo.saveGate')}}
-            .btn(v-if="!dBtnUnuse") {{$t('tokenCard.tokenInfo.saveGate')}}
+            .btn( @click="save" v-if="token.type!=='OFFICAL_GATE'") {{$t('tokenCard.tokenInfo.saveGate')}}
     .tab-content.no-padding(v-if="tabName==='deposit'")
         Tb(:type="'deposit'" :token="token" :key="`deposit_${token.tokenId}`")
     .tab-content.no-padding(v-if="tabName==='withdraw'")
@@ -100,9 +99,6 @@ export default {
                 this.urlCache = val.trim();
             }
         },
-        dBtnUnuse() {
-            return !this.urlCache;
-        },
         defaultAddr() {
             return this.$store.getters.activeAddr;
         }
@@ -115,16 +111,21 @@ export default {
         getIcon(id) {
             return getTokenIcon(id);
         },
-        inspector() {
-            return new Promise((res, rej) => {
-                getChargeAddr({ addr: this.defaultAddr, tokenId: this.token.tokenId }, this.url).then(() => {
+        save() {
+            const formatRight = /(https:\/\/)?([A-Za-z0-9_\-]\.[A-Za-z0-9_\-])+(\/[A-Za-z0-9_\-]+)*/.test(this.urlCache);
+            if (!formatRight) {
+                this.$toast(this.$t('tokenCard.nodeErr'));
+                return;
+            }
+            getChargeAddr({ addr: this.defaultAddr, tokenId: this.token.tokenId },
+                this.url)
+                .then(() => {
                     gateStorage.bindToken(this.token.tokenId, { gateInfo: { url: this.url } });
-                    res({ url: this.url });
-                }).catch(e => {
+                })
+                .catch(e => {
                     this.$toast(this.$t('tokenCard.nodeErr'));
-                    rej(e);
+                    console.error(e);
                 });
-            });
         },
         tabClick(name) {
             this.tabName = name;
@@ -137,19 +138,19 @@ export default {
 @import "~assets/scss/vars.scss";
 
 .head {
-    border-bottom: 1px solid rgba(212,222,231,1);
+    border-bottom: 1px solid rgba(212, 222, 231, 1);
     box-sizing: border-box;
     padding: 20px 30px;
     display: flex;
-    background: rgba(0,122,255,0.05);
+    background: rgba(0, 122, 255, 0.05);
     .head_info {
         display: flex;
         flex-direction: column;
     }
-    .gate_info{
+    .gate_info {
         font-size: 12px;
-        color: #007AFF;
-        background: rgba(0,122,255,0.06);
+        color: #007aff;
+        background: rgba(0, 122, 255, 0.06);
         padding: 0 4px;
         align-self: flex-start;
         border-radius: 2px;
@@ -166,8 +167,8 @@ export default {
         font-size: 14px;
         line-height: 18px;
         &__gate {
-            color: #007AFF;
-            background-color: rgba(0,122,255,0.06);
+            color: #007aff;
+            background-color: rgba(0, 122, 255, 0.06);
             @include font-family-normal();
             font-size: 12px;
             height: 20px;
@@ -189,46 +190,46 @@ export default {
     padding: 0 30px;
     height: 40px;
     display: flex;
-    border-bottom: 1px solid #D4DEE7;
+    border-bottom: 1px solid #d4dee7;
     flex-shrink: 0;
     &__item {
         @include font-family-bold();
         font-size: 12px;
-        color: rgba(189,193,209,1);
+        color: rgba(189, 193, 209, 1);
         height: 100%;
         box-sizing: border-box;
         margin-right: 40px;
-        color: #5E6875;
+        color: #5e6875;
         display: flex;
         align-items: center;
         cursor: pointer;
-        &.active{
-            border-bottom: 2px solid #007AFF;
+        &.active {
+            border-bottom: 2px solid #007aff;
         }
     }
 }
-.tab-content{
+.tab-content {
     box-sizing: border-box;
     height: 350px;
     padding: 30px;
     position: relative;
     overflow: scroll;
-    &.no-padding{
+    &.no-padding {
         padding: 0;
     }
-    .content__item{
+    .content__item {
         font-size: 12px;
         @include font-family-normal();
         min-height: 40px;
         display: flex;
         text-align: left;
         align-items: center;
-        color: rgba(29,32,36,1);
+        color: rgba(29, 32, 36, 1);
         div {
             display: flex;
             align-items: center;
         }
-        :last-child{
+        :last-child {
             word-break: break-word;
         }
         .label {
@@ -236,11 +237,13 @@ export default {
             margin-right: 10px;
             word-break: keep-all;
         }
-        .click-able{
-            color: #007AFF;
+        .click-able {
+            color: #007aff;
             cursor: pointer;
         }
         .btn {
+            cursor: pointer;
+            user-select: none;
             height: 34px;
             line-height: 34px;
             border-radius: 2px;
@@ -249,14 +252,13 @@ export default {
             padding: 0 20px;
             white-space: nowrap;
             margin-left: 23px;
-            background: rgba(0,122,255,1);
-            color: rgba(255,255,255,1);
+            background: rgba(0, 122, 255, 1);
+            color: rgba(255, 255, 255, 1);
             &.unuse {
-                background: rgba(191,191,191,1);
+                background: rgba(191, 191, 191, 1);
             }
         }
     }
 }
-
 </style>
 
