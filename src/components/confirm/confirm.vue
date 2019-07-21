@@ -42,6 +42,10 @@ export default {
             type: String,
             default: ''
         },
+        type: {
+            type: String,
+            default: ''
+        },
         isLoading: {
             type: Boolean,
             default: false
@@ -93,7 +97,7 @@ export default {
     },
     computed: {
         classStr() {
-            return `${ this.size } ${ this.showMask ? 'gray' : '' }`;
+            return `${ this.size } ${ this.type } ${ this.showMask ? 'gray' : '' }`;
         }
     },
     methods: {

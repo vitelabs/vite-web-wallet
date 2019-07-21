@@ -185,6 +185,17 @@ export default {
     box-shadow: none;
 }
 
+.__tb_row {
+    &.__tb_head {
+        border: none;
+        background: rgba(198,203,212,0.08);
+        font-size: 14px;
+    }
+    &.__tb_content_row {
+        border: none;
+    }
+}
+
 .__tb_cell {
     word-break: break-word;
     white-space: normal;
