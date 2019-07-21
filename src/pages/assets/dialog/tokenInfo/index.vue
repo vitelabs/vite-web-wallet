@@ -17,37 +17,37 @@ block head
 block originContent
     .tab-content(v-if="tabName==='tokenInfo'")
         .content__item
-            .label {{$t("tokenCard.tokenInfo.labels.tokenId")}}
+            .label {{$t("tokenCard.tokenInfo.labels.tokenId")}}:
             div.click-able(@click="goToTokenDetail") {{token.tokenId}}
         .content__item
-            .label {{$t("tokenCard.tokenInfo.labels.address")}}
+            .label {{$t("tokenCard.tokenInfo.labels.address")}}:
             div {{token.owner}}
         .content__item
-            .label {{$t("tokenCard.tokenInfo.labels.tokenName")}}
+            .label {{$t("tokenCard.tokenInfo.labels.tokenName")}}:
             div {{token.tokenName}}
         .content__item
-            .label {{$t("tokenCard.tokenInfo.labels.totalSupply")}}
+            .label {{$t("tokenCard.tokenInfo.labels.totalSupply")}}:
             div {{token.totalSupply}}
         .content__item
-            .label {{$t("tokenCard.tokenInfo.labels.decimals")}}
+            .label {{$t("tokenCard.tokenInfo.labels.decimals")}}:
             div {{token.decimals}}
         .content__item
-            .label {{$t("tokenCard.tokenInfo.labels.isReIssuable")}}
+            .label {{$t("tokenCard.tokenInfo.labels.isReIssuable")}}:
             div {{$t("tokenCard.tokenInfo.reIssuable")[token.isReIssuable]}}
         .content__item
-            .label {{$t("tokenCard.tokenInfo.labels.time")}}
+            .label {{$t("tokenCard.tokenInfo.labels.time")}}:
             div
     .tab-content(v-if="tabName==='gate'")
         .content__item(v-if="token.gateInfo.url")
-            .label {{$t("tokenCard.gateInfo.officalNet")}}
+            .label {{$t("tokenCard.gateInfo.officalNet")}}:
         .content__item(v-if="token.gateInfo.url")
-            .label {{$t("tokenCard.gateInfo.introduction")}}
+            .label {{$t("tokenCard.gateInfo.introduction")}}:
         .content__item(v-if="token.gateInfo.url")
-            .label {{$t("tokenCard.gateInfo.token")}}
+            .label {{$t("tokenCard.gateInfo.token")}}:
         .content__item(v-if="!token.gateInfo.url")
-            .label {{$t("tokenCard.gateInfo.nodeDesc")}}
+            .label {{$t("tokenCard.gateInfo.nodeDesc")}}:
         .content__item
-            .label {{$t("tokenCard.gateInfo.setting")}}
+            .label {{$t("tokenCard.gateInfo.setting")}}:
             viteInput.gate-url(:placeholder="$t('tokenCard.gateInfo.settingPlaceholder')" :disabled="token.type==='OFFICAL_GATE'" v-model="url")
             .btn( @click="save" v-if="token.type!=='OFFICAL_GATE'") {{$t('tokenCard.tokenInfo.saveGate')}}
     .tab-content.no-padding(v-if="tabName==='deposit'")
