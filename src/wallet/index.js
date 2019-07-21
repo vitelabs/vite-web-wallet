@@ -36,15 +36,15 @@ export function setCurrHDAcc(acc) {
     ) {
         return currentHDAccount;
     }
-    if (
-        acc.isBifrost
-    || !acc.id
-    || !currentHDAccount
-    || currentHDAccount.id !== acc.id
-    ) {
-        return constructAccount(acc);
-    }
-    return currentHDAccount;
+    // if (
+    //     acc.isBifrost
+    // || !acc.id
+    // || !currentHDAccount
+    // || currentHDAccount.id !== acc.id
+    // ) {
+    return constructAccount(acc);
+    // }
+    // return currentHDAccount;
 }
 
 export function getActiveAcc() {
