@@ -42,7 +42,7 @@ export default {
     data() {
         return {
             status: 'LOADING', // "ERROR" "LOADING" "LOADED"
-            dTitle:  this.$t('assets.invite.inviteTitle'),
+            dTitle: this.$t('assets.invite.inviteTitle'),
             inviteCode: 0,
             inviteInfo: null
         };
@@ -52,13 +52,13 @@ export default {
             return this.$store.getters.activeAddr;
         },
         dSTxt() {
-            return !this.inviteCode &&this.$t('assets.invite.genCode') ;
+            return !this.inviteCode && this.$t('assets.invite.genCode') ;
         },
         avaliableExAmount() {
-            return this.$store.getters.exBalanceList[VITE_TOKENID]&&this.$store.getters.exBalanceList[VITE_TOKENID].available;
+            return this.$store.getters.exBalanceList[VITE_TOKENID] && this.$store.getters.exBalanceList[VITE_TOKENID].available;
         },
-        dBtnUnuse(){
-            return !(this.avaliableExAmount&&Number(this.avaliableExAmount)>=1000)
+        dBtnUnuse() {
+            return !(this.avaliableExAmount && Number(this.avaliableExAmount) >= 1000);
         }
     },
     methods: {
@@ -67,9 +67,9 @@ export default {
             return this.inviteCode;
         },
         inspector() {
-            genCode().then(() =>{
-                doUntill({createPromise:() => this.getCode(), interval:1000, times:3});
-            })
+            genCode().then(() => {
+                doUntill({ createPromise: () => this.getCode(), interval: 1000, times: 3 });
+            });
             return Promise.reject('no close');
         },
         copy() {

@@ -47,8 +47,8 @@ export default {
             return this.inviteeCode;
         },
         inspector() {
-            bindCode(this.code).then(()=>doUntill({createPromise:() => this.getInviteeCode(),interval:1000, times:3}));
-            return Promise.reject('no close')
+            bindCode(this.code).then(() => doUntill({ createPromise: () => this.getInviteeCode(), interval: 1000, times: 3 }));
+            return Promise.reject('no close');
         }
     }
 };
