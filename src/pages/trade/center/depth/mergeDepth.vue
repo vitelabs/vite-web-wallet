@@ -1,10 +1,12 @@
 <template>
     <div v-show="stepList.length" class="merge-depth-wrapper">
         {{ $t('tradeCenter.mergeDepth') }}
-        <div class="select-list __pointer" @click="toggleShowStepList">
+        <div class="select-list __pointer" @click.self="toggleShowStepList">
             {{ $t('tradeCenter.depthStep', { step }) }}
-            <div v-show="isShowStepList" class="list" @click="setStep(s)">
-                <div class="item" v-for="(s,i) in stepList" :key="i">{{ $t('tradeCenter.depthStep', { step: s }) }}</div>
+            <div v-show="isShowStepList" class="list">
+                <div class="item" @click="setStep(s)"
+                     v-for="(s,i) in stepList" :key="i">
+                    {{ $t('tradeCenter.depthStep', { step: s }) }}</div>
             </div>
         </div>
     </div>
@@ -14,16 +16,13 @@
 const maxDigit = 8;
 
 export default {
-    mounted() {
-        this.$store.dispatch('exSetDepthStep', this.step);
-    },
     data() {
-        return {
-            step: '',
-            isShowStepList: false
-        };
+        return { isShowStepList: false };
     },
     computed: {
+        step() {
+            return this.$store.state.exchangeDepth.depthStep;
+        },
         activeTxPair() {
             return this.$store.state.exchangeActiveTxPair.activeTxPair;
         },
@@ -54,23 +53,17 @@ export default {
         }
     },
     watch: {
-        activeTxPair() {
-            this.step = '';
-        },
         maxStep() {
             if ((!this.step && this.step !== 0)
                 || this.step > this.maxStep) {
-                this.step = this.maxStep;
+                this.$store.dispatch('exSetDepthStep', this.maxStep);
             }
-        },
-        step() {
-            this.$store.dispatch('exSetDepthStep', this.step);
         }
     },
     methods: {
         setStep(_step) {
-            this.step = _step;
-            this.toggleShowStepList();
+            this.$store.dispatch('exSetDepthStep', _step);
+            this.isShowStepList = false;
         },
         toggleShowStepList() {
             this.isShowStepList = !this.isShowStepList;
