@@ -3,16 +3,12 @@ extends /components/dialog/base.pug
 block content
     img.bg-img(src="~assets/imgs/invite.png")
     div(v-if="inviteeCode")
-        .invite-code 你已接受过邀请，邀请码为：{{this.inviteeCode}}
+        .invite-code {{$t('assets.invite.invited')}}{{this.inviteeCode}}
     div(v-else)
-        .block__title {{ $t(`tradeAssets.confirmrecharge.lable1`) }}
+        .block__title {{ $t('assets.invite.codeLable') }}
         input.block__content(v-model="code")
-    .block__title 邀请规则
-    .illustrate 花费1000 vite生成邀请码，1000 vite会算作交易所收益，分给持有VX的用户
-        .dot
-    .illustrate 使用邀请码的用户交易过程中产生手续费，产生手续费的 5%，视为邀请用户产生的交易手续，可进行挖矿VX
-        .dot
-    .illustrate 使用邀请码的用户，在交易过程过程中手续费可9折
+    .block__title {{$t('assets.invite.inviteRule')}}
+    .illustrate(v-for="(i,j) in $t('assets.invite.ruleItems')" :key="j") {{i}}
         .dot
 
 </template>
@@ -29,7 +25,7 @@ export default {
     data() {
         return {
             status: 'LOADING', // "ERROR" "LOADING" "LOADED"
-            dTitle: '接受邀请',
+            dTitle: this.$t('assets.invite.receiveInviteTitle'),
             inviteeCode: null,
             code: ''
         };
@@ -39,7 +35,7 @@ export default {
             return this.$store.getters.activeAddr;
         },
         dSTxt() {
-            return !this.inviteeCode && '接受邀请';
+            return !this.inviteeCode && this.$t('assets.invite.receiveInviteTitle');
         },
         dBtnUnuse() {
             return !/\d{1,10}/.test(this.code);
@@ -48,9 +44,11 @@ export default {
     methods: {
         async getInviteeCode() {
             this.inviteeCode = await getInviteeCode(this.address);
+            return this.inviteeCode;
         },
         inspector() {
-            bindCode(this.code).then(doUntill(() => this.getInviteeCode(), undefined, 1000, 3));
+            bindCode(this.code).then(()=>doUntill({createPromise:() => this.getInviteeCode(),interval:1000, times:3}));
+            return Promise.reject('no close')
         }
     }
 };

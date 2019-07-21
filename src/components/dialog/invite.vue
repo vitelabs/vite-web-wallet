@@ -3,30 +3,26 @@ extends /components/dialog/base.pug
 block content
     img.bg-img(src="~assets/imgs/invite.png")
     div(v-if="inviteCode")
-        .invite-code 我的邀请码为：{{this.inviteCode}}
+        .invite-code {{$t('assets.invite.myCode')}}{{this.inviteCode}}
             img.title_icon.copy.__pointer(src="~assets/imgs/copy_default.svg" @click="copy")
         .invite-info
             .item
                 img.left(src="~assets/imgs/invite_num.png")
                 .right
-                    .label 邀请人数
-                    .content 13
+                    .label {{ $t('assets.invite.inviteNum') }}
+                    .content {{inviteInfo&&inviteInfo.inviteCount||0}}
 
             .item
                 img.left(src="~assets/imgs/invite_benifit.png")
                 .right
-                    .label 邀请挖矿收益
-                    .content 100
+                    .label {{ $t('assets.invite.inviteBenifit') }}
+                    .content {{inviteInfo&&inviteInfo.miningTotal||0}}
     div(v-else)
-        .block__title {{ $t(`tradeAssets.confirmrecharge.lable1`) }}
-            .right 可用余额 {{avaliableExAmount}} VITE
+        .block__title {{ $t('assets.invite.cost') }}
+            .right {{$t('assets.invite.avaliable')}} {{avaliableExAmount||0}} VITE
         .block__content.edit.space 1000 VITE
-    .block__title 邀请规则
-    .illustrate 花费1000 vite生成邀请码，1000 vite会算作交易所收益，分给持有VX的用户
-        .dot
-    .illustrate 使用邀请码的用户交易过程中产生手续费，产生手续费的 5%，视为邀请用户产生的交易手续，可进行挖矿VX
-        .dot
-    .illustrate 使用邀请码的用户，在交易过程过程中手续费可9折
+    .block__title {{$t('assets.invite.inviteRule')}}
+    .illustrate(v-for="(i,j) in $t('assets.invite.ruleItems')" :key="j") {{i}}
         .dot
 
 </template>
@@ -46,7 +42,7 @@ export default {
     data() {
         return {
             status: 'LOADING', // "ERROR" "LOADING" "LOADED"
-            dTitle: '邀请好友',
+            dTitle:  this.$t('assets.invite.inviteTitle'),
             inviteCode: 0,
             inviteInfo: null
         };
@@ -56,10 +52,13 @@ export default {
             return this.$store.getters.activeAddr;
         },
         dSTxt() {
-            return !this.inviteCode && '生成邀请码';
+            return !this.inviteCode &&this.$t('assets.invite.genCode') ;
         },
         avaliableExAmount() {
-            return this.$store.getters.exBalanceList[VITE_TOKENID];
+            return this.$store.getters.exBalanceList[VITE_TOKENID]&&this.$store.getters.exBalanceList[VITE_TOKENID].available;
+        },
+        dBtnUnuse(){
+            return !(this.avaliableExAmount&&Number(this.avaliableExAmount)>=1000)
         }
     },
     methods: {
@@ -68,8 +67,9 @@ export default {
             return this.inviteCode;
         },
         inspector() {
-            genCode().then(() =>
-                doUntill(() => this.getCode(), undefined, 1000, 3));
+            genCode().then(() =>{
+                doUntill({createPromise:() => this.getCode(), interval:1000, times:3});
+            })
             return Promise.reject('no close');
         },
         copy() {

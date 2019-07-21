@@ -59,7 +59,7 @@ export function genCode() {
       config: {
         pow: true
       }
-    });
+    }).then(data=>res(data)).catch(e=>rej(e));
   });
 }
 
