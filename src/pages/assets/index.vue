@@ -12,7 +12,7 @@
                 ></TokenFilter>
                 <div class="token-list">
                     <div class="token__head">
-                        <div class="col" @click="invite">{{$t('tokenCard.heads.name')}}</div>
+                        <div class="col" >{{$t('tokenCard.heads.name')}}</div>
                         <div class="col">{{$t('tokenCard.heads.balance')}}</div>
                         <div class="col">{{$t('tokenCard.heads.onroad')}}</div>
                         <div class="col">{{$t('tokenCard.heads.gate')}}</div>
@@ -39,7 +39,7 @@
 import pageLayout from 'components/pageLayout/index';
 import tokenCard from './tokenCard';
 import accountHead from './head';
-import { addTokenDialog, receiveInviteDialog } from './dialog';
+import { addTokenDialog } from './dialog';
 import { gateStorage } from 'services/gate';
 import TokenFilter from './filter';
 import { debounce } from 'lodash';
@@ -115,9 +115,6 @@ export default {
         }
     },
     methods: {
-        invite() {
-            receiveInviteDialog();
-        },
         updateExBalance: debounce(function () {
             this.$store.dispatch('startLoopExchangeBalance');
         }, 0.1),
