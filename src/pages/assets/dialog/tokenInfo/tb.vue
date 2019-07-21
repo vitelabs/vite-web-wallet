@@ -13,14 +13,14 @@
             <div class="__tb_cell">
                 {{
                     $t(`tokenCard.${type}Record.heads.3`, {
-                        outChain: token.tokenSymbol
+                        outChain: tokenToGate[token.tokenId].mappedNet
                     })
                 }}
             </div>
             <div class="__tb_cell">
                 {{
                     $t(`tokenCard.${type}Record.heads.4`, {
-                        outChain: token.tokenSymbol
+                        outChain: tokenToGate[token.tokenId].mappedNet
                     })
                 }}
             </div>
@@ -33,17 +33,17 @@
                 <div class="__tb_cell">
                     {{
                         $t(`tokenCard.${type}Record.statusMap.${item.state}`, {
-                            outChain: token.tokenSymbol
+                            outChain: tokenToGate[token.tokenId].mappedNet
                         })
                     }}
                 </div>
                 <div class="__tb_cell click-able"
-                     @click="() => type === 'deposit' ? gotoOutHash(item.outTxHash) : gotoInHash(item.inTxHash)">
-                    {{ type === "deposit" ? item.outTxHash : item.inTxHash | hashShortify }}
+                     @click="() => gotoInHash(item.inTxHash)">
+                    {{ item.inTxHash| hashShortify }}
                 </div>
                 <div class="__tb_cell click-able"
-                     @click="() => type === 'withdraw' ? gotoOutHash(item.outTxHash) : gotoInHash(item.inTxHash)">
-                    {{ type === "withdraw" ? item.outTxHash : item.inTxHash | hashShortify }}
+                     @click="() => gotoOutHash(item.outTxHash)">
+                    {{ item.outTxHash | hashShortify }}
                 </div>
             </div>
         </div>
@@ -110,6 +110,9 @@ export default {
     computed: {
         defaultAddr() {
             return this.$store.getters.activeAddr;
+        },
+        tokenToGate() {
+            return this.$store.getters.mapToken2Gate;
         }
     },
     methods: {
@@ -180,6 +183,17 @@ export default {
     height: 100%;
     min-width: 0px;
     box-shadow: none;
+}
+
+.__tb_row {
+    &.__tb_head {
+        border: none;
+        background: rgba(198,203,212,0.08);
+        font-size: 14px;
+    }
+    &.__tb_content_row {
+        border: none;
+    }
 }
 
 .__tb_cell {

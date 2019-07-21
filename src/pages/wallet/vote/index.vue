@@ -17,8 +17,8 @@
 
                 <span v-for="(v, i) in voteList" :key="i"
                       :slot="`${i}operateKeyBefore`" :class="cache ? 'unclickable' : 'clickable'">
-                    <span @click="cancelVote(v)">{{ v.operate }}</span>
-                    <span class="reward" @click="openReward(v)">{{ $t('walletVote.toReward') }}</span>
+                    <span class="operate-btn" @click="cancelVote(v)">{{ v.operate }}</span>
+                    <span class="operate-btn" @click="openReward(v)">{{ $t('walletVote.toReward') }}</span>
                 </span>
             </wallet-table>
         </section>
@@ -411,6 +411,9 @@ export default {
     }
 }
 
+.operate-btn {
+    margin-right: 12px;
+}
 .clickable {
     color: #007aff;
     cursor: pointer;

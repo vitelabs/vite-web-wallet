@@ -62,7 +62,7 @@ const pushServer = {
 const gatewayInfosServer = {
     production: '"crosschain.vite.net"',
     test: '"crosschain-test.vite.net"',
-    dev: '"crosschain-test.vite.net"'
+    dev: '"https://crosschain-test.vite.net"'
     // dexTestNet: '"gateway.vitewallet.com"'
 };
 const Node_Env = process.env.NODE_ENV || 'dev';

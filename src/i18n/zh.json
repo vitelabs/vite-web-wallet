@@ -19,6 +19,7 @@
     "stakingAmount": "抵押金额",
     "withdrawHeight": "到期快照高度",
     "balance": "账户余额",
+    "dexBalance": "交易所账户余额",
     "addrName": "地址{index}",
     "true": "是",
     "false": "否",
@@ -305,25 +306,26 @@
         },
         "depositRecord": {
             "tabName": "充值记录",
-            "heads": ["时间", "金额", "状态", "VITE链Hash", "{outChain}链Hash"],
+            "heads": ["时间", "金额", "状态", "{outChain}链Hash","VITE链Hash"],
             "statusMap": {
                 "OPPOSITE_PROCESSING": "{outChain}链待确认",
+                "OPPOSITE_CONFIRMED_FAIL":"{outChain}链失败",
                 "OPPOSITE_CONFIRMED": "网关已接收",
                 "TOT_CONFIRMED": "已完成",
-                "BELOW_MINIMUM": "VITE链待确认",
-                "TOT_PROCESSING": "已完成"
+                "BELOW_MINIMUM": "充值失败",
+                "TOT_PROCESSING": "VITE链待确认"
             }
         },
         "withdrawRecord": {
             "tabName": "提现记录",
             "heads": ["时间", "金额", "状态", "VITE链Hash", "{outChain}链Hash"],
             "statusMap": {
-                "TODO": "VITE链待确认",
-                "TOT_PROCESSING": "VITE链确认",
-                "TOT_NOT_RECEIVED": "转出失败",
+                "TOT_PROCESSING": "VITE链待确认",
                 "TOT_CONFIRMED": "网关已接收",
+                "TOT_EXCEED_THE_LIMIT":"转出金额超过限额",
                 "OPPOSITE_PROCESSING": "{outChain}链待确认",
-                "OPPOSITE_CONFIRMED": "已完成"
+                "OPPOSITE_CONFIRMED": "已完成",
+                "WRONG_WITHDRAW_ADDRESS":"转出地址填写错误"            
             }
         },
         "receive": {
@@ -982,7 +984,7 @@
             "submit": "确认转入",
             "tokenName": "币种名称",
             "address": "接受所有权地址",
-            "notice": "请知悉：币种所有权转入后尚未开通的交易对权限将归新的所有者拥有。已开通暂停交易的交易对所有权仍归您所有。"
+            "notice": "请知悉：币种所有权转让后尚未开通的交易对权限将归新的所有者拥有。已开通暂停交易的交易对所有权仍归您所有。"
         }
     },
     "tradeTxPairManage": {

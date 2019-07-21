@@ -42,8 +42,12 @@ export default {
             default: () => {}
         }
     },
-    mounted() {
+    created() {
+        this.$store.dispatch('startLoopHeight');
         this.fetchStakingObj();
+    },
+    destroyed() {
+        this.$store.dispatch('stopLoopHeight');
     },
     data() {
         return {

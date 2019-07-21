@@ -28,6 +28,7 @@ export function setCurrHDAcc(acc) {
     if (!acc) {
         return;
     }
+
     if (
         acc.isBifrost
     && currentHDAccount
@@ -36,15 +37,8 @@ export function setCurrHDAcc(acc) {
     ) {
         return currentHDAccount;
     }
-    if (
-        acc.isBifrost
-    || !acc.id
-    || !currentHDAccount
-    || currentHDAccount.id !== acc.id
-    ) {
-        return constructAccount(acc);
-    }
-    return currentHDAccount;
+
+    return constructAccount(acc);
 }
 
 export function getActiveAcc() {

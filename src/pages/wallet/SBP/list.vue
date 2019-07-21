@@ -105,7 +105,11 @@ export default {
         }
     },
     created() {
+        this.$store.dispatch('startLoopHeight');
         this.fetchList();
+    },
+    destroyed() {
+        this.$store.dispatch('stopLoopHeight');
     },
     data() {
         return {

@@ -1,7 +1,7 @@
 <template>
     <div>
         <sec-title :showHelp="showHelp"></sec-title>
-        <confirm  v-show="isShowHelp" :showMask="true" :singleBtn="true"
+        <confirm  class="small" v-show="isShowHelp" :showMask="true" :singleBtn="true"
                   :title="$t('walletQuota.help.title')" :closeIcon="true"
                   :close="close" :leftBtnTxt="$t('btn.understand')"
                   :leftBtnClick="close">
@@ -41,7 +41,6 @@ export default {
 .quota-head-wrapper {
     font-size: 24px;
     color: #1d2024;
-
     .title {
         @include font-family-bold();
     }
@@ -63,19 +62,20 @@ export default {
 }
 
 .help-t {
-    @include font-family-bold();
-    font-size: 16px;
-    line-height: 16px;
-    margin-bottom: 16px;
+    @include font-family-normal();
+    font-size: 14px;
+    line-height: 14px;
+    margin-bottom: 12px;
     word-break: break-all;
 }
 
 .help-txt {
     opacity: 0.66;
-    font-size: 14px;
+    font-size: 12px;
     color: #172c39;
     line-height: 22px;
     margin-bottom: 10px;
     word-break: break-all;
+    @include font-family-normal();
 }
 </style>

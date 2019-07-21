@@ -20,6 +20,7 @@
     "submitStaking": "Submit Staking",
     "withdrawHeight": "Expected Snapshot Height",
     "balance": "Balance",
+    "dexBalance": "ViteX Balance",
     "addrName": "Address{index}",
     "true": "true",
     "false": "false",
@@ -106,8 +107,8 @@
         "TxResFail": "Transfer",
         "SendRefund": "Transfer",
         "GenesisReceive": "Genesis",
-        "DexFundTransferTokenOwner": "运营商中心权限转让",
-        "DexFundMarketOwnerConfig": "运营商交易对配置"
+        "DexFundTransferTokenOwner": "Operator's key ownership transfer",
+        "DexFundMarketOwnerConfig": "Operator's trading pair configuration"
     },
     "btn": {
         "cancel": "Cancel",
@@ -136,8 +137,8 @@
         "validMaxDigit": "At most {digit} decimals",
         "nodeErr": "The full node is abnormal, please try again later.",
         "bigger0": "Value must be greater than 0",
-        "operateSuccess": "操作成功",
-        "operateFail": "操作失败"
+        "operateSuccess": "Operation Successful",
+        "operateFail": "Operation Failed"
     },
     "beforeUse": {
         "title": "Read Before Use",
@@ -305,25 +306,26 @@
         },
         "depositRecord": {
             "tabName": "Deposit History",
-            "heads": ["Time", "Amount", "Status", "VITE Chain Hash", "{outChain} Chain Hash"],
+            "heads": ["Time", "Amount", "Status", "{outChain} Chain Hash","VITE Chain Hash"],
             "statusMap": {
-                "OPPOSITE_PROCESSING": "{outChain} Chain Unconfirmed",
-                "OPPOSITE_CONFIRMED": "Gateway has received",
-                "TOT_CONFIRMED": "Completed",
-                "BELOW_MINIMUM": "VITE Chain Unconfirmed",
-                "TOT_PROCESSING": "Completed"
+                "OPPOSITE_PROCESSING": "{outChain}链待确认",
+                "OPPOSITE_CONFIRMED_FAIL":"{outChain}链失败",
+                "OPPOSITE_CONFIRMED": "网关已接收",
+                "TOT_CONFIRMED": "已完成",
+                "BELOW_MINIMUM": "充值失败",
+                "TOT_PROCESSING": "VITE链待确认"
             }
         },
         "withdrawRecord": {
             "tabName": "Transfer History",
             "heads": ["Time", "Amount", "Status", "VITE Chain Hash", "{outChain} Chain Hash"],
-            "statusMap": {
-                "TODO": "VITE Chain Unconfirmed",
-                "TOT_PROCESSING": "VITE Confirmed",
-                "TOT_NOT_RECEIVED": "Transfer Failed",
-                "TOT_CONFIRMED": "Gateway has received",
-                "OPPOSITE_PROCESSING": "{outChain} chain unconfirmed",
-                "OPPOSITE_CONFIRMED": "Completed"
+            "statusMap":{
+                "TOT_PROCESSING": "VITE Chain Unconfirmed",
+                "TOT_CONFIRMED": "VITE Confirmed",
+                "TOT_EXCEED_THE_LIMIT":"转出金额超过限额",
+                "OPPOSITE_PROCESSING": "{outChain}链待确认",
+                "OPPOSITE_CONFIRMED": "Completed",
+                "WRONG_WITHDRAW_ADDRESS":"转出地址填写错误"            
             }
         },
         "receive": {
@@ -693,7 +695,7 @@
     },
     "tradeCenter": {
         "title": "Exchange",
-        "marketClosed": "{symbol} 已暂停交易。",
+        "marketClosed": "{symbol} market has been suspended",
         "mergeDepth": "深度合并",
         "depthStep": "{step}位小数"
     },
@@ -980,63 +982,63 @@
         "price": "Total Estimated Value"
     },
     "tradeOperator": {
-        "title": "运营商中心",
-        "tokenList": "运营代币",
-        "totalIncome": "历史总收益",
-        "permission": "权限转让",
-        "txPairManage": "交易对管理",
-        "noOperator": "该地址下暂无交易对，想成为运营商",
-        "learnMore": "了解更多",
+        "title": "Operator",
+        "tokenList": "Tokens",
+        "totalIncome": "Total Income",
+        "permission": "Transfer Token's Ownership",
+        "txPairManage": "Manage Trading Pairs",
+        "noOperator": "You have no tokens or trading pairs yet, wanna become an operator?",
+        "learnMore": "Learn More",
         "permissionConfirm": {
-            "title": "转让所有权",
-            "submit": "确认转入",
-            "tokenName": "币种名称",
-            "address": "接受所有权地址",
-            "notice": "请知悉：币种所有权转入后尚未开通的交易对权限将归新的所有者拥有。已开通暂停交易的交易对所有权仍归您所有。"
+            "title": "Transfer Ownership",
+            "submit": "Confirm",
+            "tokenName": "Token Name",
+            "address": "Recipient Address",
+            "notice": "NOTICE: When the ownership transferred to someone else, trading pairs that not be opened will belong to the new owner. Trading/suspension trading pairs still belong to you"
         }
     },
     "tradeTxPairManage": {
-        "title": "{tokenSymbol}交易对管理",
-        "symbol": "交易对名称",
-        "income": "累计收益",
-        "fee": "当前费率",
-        "status": "状态",
-        "operate": "操作",
-        "stopTrans": "暂停交易",
-        "resetTrans": "恢复交易",
-        "changeOwner": "转让所有权",
-        "changeFee": "调整费率",
-        "incomeList": "收益明细",
-        "historyIncome": "历史收益",
-        "openTxPair": "开通交易对",
-        "statusList": ["权限已转让", "交易中", "暂停交易", "交易未开通"],
+        "title": "{tokenSymbol} Trading Pairs Management",
+        "symbol": "Name",
+        "income": "Income",
+        "fee": "Fee Rate",
+        "status": "Status",
+        "operate": "Action",
+        "stopTrans": "Suspend",
+        "resetTrans": "Recover",
+        "changeOwner": "Transfer Ownership",
+        "changeFee": "Adjust Fee Rate",
+        "incomeList": "Income Details",
+        "historyIncome": "Income History",
+        "openTxPair": "Open Trading Pairs",
+        "statusList": ["Ownership Transferred", "Trading", "Suspension", "Trade Not Open"],
         "openTxPairConfirm": {
-            "title": "开通 {symbol} 交易对",
-            "fee": "上币费",
-            "hint": "交易对开通成功后，如果想要添加网关标识（如BTC.V），请发邮件联系我们：info@vite.org",
-            "btn": "提交申请",
-            "reqSuccess": "提交申请成功，请稍后在市场中查看",
-            "reqError": "上币失败，请稍后重试"
+            "title": "Open {symbol} to trade",
+            "fee": "Listing Fee",
+            "hint": "If you want to add unique gateway symbol (like BTC.V) after opening a trading pair, please contact us at info@vite.org",
+            "btn": "Submit",
+            "reqSuccess": "Submit Successful! Check it on market board later.",
+            "reqError": "Listing failed, please try again"
         },
-        "stopTransHint": "确定要暂停 {symbol} 交易吗？",
-        "resetTransHint": "确定要恢复 {symbol} 交易吗？",
-        "stopSuccess": "暂停成功",
-        "stopFail": "暂停失败",
-        "openSuccess": "恢复成功",
-        "openFail": "恢复失败",
-        "changeOwnerHint": "请知悉：交易对权限转让后，您将不能享有赚取手续费、调整手续费等权限，权限一经转让不得撤回",
-        "currentMaker": "当前Maker费率",
-        "confirmFee": "手续费",
-        "currentTaker": "当前Taker费率",
-        "txPairName": "交易对名称",
-        "changeFeeHint": "{symbol} 的手续费调整为 {fee}",
-        "changeFeeSubmit": "确认将 {changeFeeHint}",        
-        "historyAllIncome": "历史总收益",
+        "stopTransHint": "Make sure to suspend {symbol} ?",
+        "resetTransHint": "Make sure to recover {symbol} ?",
+        "stopSuccess": "Suspension Successful",
+        "stopFail": "Suspension Failed",
+        "openSuccess": "Recovery Successful",
+        "openFail": "Recovery Failed",
+        "changeOwnerHint": "NOTICE: You will not be able to collect fees or adjust fee rate after ownership transferred as well as you cannot undo this transfer action",
+        "currentMaker": "Maker",
+        "confirmFee": "Fee",
+        "currentTaker": "Taker",
+        "txPairName": "Name",
+        "changeFeeHint": "{symbol}'s fee into {fee}",
+        "changeFeeSubmit": "Make sure to change {changeFeeHint}",
+        "historyAllIncome": "Total Income",
         "incomeListHead": {
-            "date": "日期",
-            "txNum": "交易量",
-            "feeRate": "手续费率",
-            "feeIncome": "手续费收益"
+            "date": "Date",
+            "txNum": "Volume",
+            "feeRate": "Rate",
+            "feeIncome": "Income"
         }
     }
 }

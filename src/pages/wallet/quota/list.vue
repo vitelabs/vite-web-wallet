@@ -74,10 +74,12 @@ export default {
             default: () => {}
         }
     },
-    mounted() {
+    created() {
+        this.$store.dispatch('startLoopHeight');
         this.startLoopPledgeList();
     },
     destroyed() {
+        this.$store.dispatch('stopLoopHeight');
         this.stopLoopPledgeList();
     },
     data() {
