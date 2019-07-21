@@ -1,26 +1,25 @@
 @import "~assets/scss/vars.scss";
 
 @mixin block {
-    .block__title {
-        height: 16px;
-        font-size: 12px;
-        @include font-family-bold();
-        color: rgba(29, 32, 36, 1);
-        line-height: 16px;
-        margin-top: 20px;
-        display: flex;
-        justify-content: space-between;
-        .err {
-            color: #ff2929;
-            font-size: 12px;
-        }
-        &:first-child {
-            margin-top: 0;
-        }
+  .block__title {
+    height: 16px;
+    font-size: 12px;
+    @include font-family-bold();
+    color: rgba(29, 32, 36, 1);
+    line-height: 16px;
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    .err {
+      color: #ff2929;
+      font-size: 12px;
     }
-}
+    &:first-child {
+      margin-top: 0;
+    }
+  }
 
-.block__content {
+  .block__content {
     position: relative;
     height: 34px;
     border-radius: 2px;
@@ -38,40 +37,41 @@
     justify-content: space-between;
 
     .all {
-        border-radius: 2px;
-        background: #007aff;
-        color: #fff;
-        cursor: pointer;
-        font-size: 12px;
-        padding: 0 6px;
-        height: 18px;
-        line-height: 18px;
-        float: right;
-        display: flex;
-        word-break: keep-all;
+      border-radius: 2px;
+      background: #007aff;
+      color: #fff;
+      cursor: pointer;
+      font-size: 12px;
+      padding: 0 6px;
+      height: 18px;
+      line-height: 18px;
+      float: right;
+      display: flex;
+      word-break: keep-all;
     }
     .token__title {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        img {
-            width: 20px;
-            height: 20px;
-            margin-right: 20px;
-        }
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      img {
+        width: 20px;
+        height: 20px;
+        margin-right: 20px;
+      }
     }
     input {
-        width: 100%;
+      width: 100%;
     }
     .light {
-        color: #5e6875;
+      color: #5e6875;
     }
     .blue {
-        color: #007aff;
+      color: #007aff;
     }
     &.edit {
-        text-align: left;
-        background: rgba(243, 246, 249, 1);
-        @include font-family-bold();
+      text-align: left;
+      background: rgba(243, 246, 249, 1);
+      @include font-family-bold();
     }
+  }
 }

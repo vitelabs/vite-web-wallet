@@ -385,6 +385,21 @@
                 "download":"下载Vite手机钱包"
             },
             "defaultName":"我的账户"
+        },
+        "invite":{
+            "inviteTitle":"邀请好友",
+            "receiveInviteTitle":"接受邀请",
+            "myCode":"我的邀请码为：",
+            "codeLable":"邀请码",
+            "invited":"你已接受过邀请，邀请码为：",
+            "genCode":"生成邀请码",
+            "cost":"所需金额",
+            "avaliable":"可用余额",
+            "inviteNum":"邀请人数",
+            "inviteBenifit":"邀请挖矿收益",
+            "inviteRule":"邀请规则",
+            "ruleItems":["花费1000 vite生成邀请码，1000 vite会算作交易所收益，分给持有VX的用户","使用邀请码的用户交易过程中产生手续费，产生手续费的 5%，视为邀请用户产生的交易手续，可进行挖矿VX","使用邀请码的用户，在交易过程过程中手续费可9折"]
+
         }
     },
     "walletConversion": {

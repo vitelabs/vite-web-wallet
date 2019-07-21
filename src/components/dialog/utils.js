@@ -114,6 +114,8 @@ const mixin = {
                     'background-size': '20px 20px'
                 },
                 body: {
+                    display: 'flex',
+                    'flex-direction': 'column',
                     flex: 1,
                     position: 'relative',
                     'box-sizing': 'border-box',
