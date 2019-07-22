@@ -120,7 +120,8 @@
         "understand": "I understand",
         "edit": "Edit",
         "reReg": "Re-register",
-        "otherProd": "Use Other Products of Vite"
+        "otherProd": "Use Other Products of Vite",
+        "known": "我知道了"
     },
     "hint": {
         "noNet": "No network detected",
@@ -138,7 +139,8 @@
         "nodeErr": "The full node is abnormal, please try again later.",
         "bigger0": "Value must be greater than 0",
         "operateSuccess": "Operation Successful",
-        "operateFail": "Operation Failed"
+        "operateFail": "Operation Failed",
+        "unreceived": "钱包账户还未解锁，请解锁后使用更多功能"
     },
     "beforeUse": {
         "title": "Read Before Use",
