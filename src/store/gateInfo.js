@@ -17,13 +17,12 @@ const actions = {
 };
 
 const getters = {
-    mapToken2Gate(state, getters) {
+    mapToken2Gate(state) {
         const map = {};
-        const mapGate2Token = getters.mapGate2Token;
         state.gateInfos.map(g => g.tokens).reduce(function (pre, cur) {
             return [ ...pre, ...(cur || []) ];
         }, []).forEach(n => {
-            map[n.tokenId] = Object.assign({}, n, { url: mapGate2Token[n.gateway].url });
+            map[n.tokenId] = n;
         });
         return map;
     },

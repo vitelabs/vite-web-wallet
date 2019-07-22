@@ -53,13 +53,18 @@ export default {
             return this.$store.getters.activeAddr;
         },
         dSTxt() {
-            return !this.inviteCode && this.$t('assets.invite.genCode') ;
+            return !this.inviteCode && this.$t('assets.invite.genCode');
         },
         avaliableExAmount() {
-            return this.$store.getters.exBalanceList[VITE_TOKENID] && this.$store.getters.exBalanceList[VITE_TOKENID].available;
+            return (
+                this.$store.getters.exBalanceList[VITE_TOKENID]
+                && this.$store.getters.exBalanceList[VITE_TOKENID].available
+            );
         },
         dBtnUnuse() {
-            return !(this.avaliableExAmount && Number(this.avaliableExAmount) >= 1000);
+            return !(
+                this.avaliableExAmount && Number(this.avaliableExAmount) >= 1000
+            );
         }
     },
     methods: {
@@ -69,7 +74,20 @@ export default {
         },
         inspector() {
             genCode().then(() => {
-                doUntill({ createPromise: () => this.getCode(), interval: 1000, times: 3 });
+                this.$toast(this.$t('assets.invite.successToast'));
+                doUntill({
+                    createPromise: () => this.getCode(),
+                    interval: 1000,
+                    times: 3
+                })
+                    .then(res => {
+                        console.log(res);
+                    })
+                    .catch(e => {
+                        this.$toast(this.$t('assets.invite.noResult'),e);
+                    });
+            }).catch(e => {
+                this.$toast(this.$t('assets.invite.failToast'),e);
             });
             return Promise.reject('no close');
         },
