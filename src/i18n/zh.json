@@ -392,7 +392,7 @@
             "myCode":"我的邀请码为：",
             "notEnough":"交易所可用余额不足",
             "codeLable":"邀请码",
-            "noResult":"未查询到结果",
+            "noResult":"未查询到结果，稍后重试",
             "formatErr":"邀请码格式错误",
             "successToast":"请求发送成功",
             "failToast":"请求发送失败",
@@ -802,7 +802,9 @@
             "openVip": "开通",
             "dexFee": "交易所基础费率：{fee}",
             "operatorFee": "运营商收取费率：{fee}",
-            "vipFee": "VIP特权抵扣：{fee}"
+            "vipFee": "VIP特权抵扣：{fee}",
+            "inviteFeeDiscount":"邀请码折扣：{fee} off",
+            "feeRule":"(基础费率+运营商费率-VIP抵扣)*邀请折扣"
         },
         "vipConfirm": {
             "cancelVip": "取消VIP",

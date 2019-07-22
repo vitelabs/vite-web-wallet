@@ -1,7 +1,8 @@
 import sendTx from "utils/sendTx";
 import { constant } from "@vite/vitejs";
 import { getClient } from "utils/request";
-import viteClient from "utils/viteClient"
+import viteClient from "utils/viteClient";
+import i18n from "i18n";
 
 const version = "v1";
 const path = `${process.env.dexApiServer}${version}`;
@@ -33,6 +34,23 @@ const genCodeInterface = {
 export function bindCode(code:number) {
   return new Promise((res, rej) => {
     sendTx({
+      abi:JSON.stringify(bindCodeInterface),
+      description:{
+        "function":{
+            "name":{
+                "base":i18n.t('assets.invite.receiveInviteTitle','en'),
+                "zh":i18n.t('assets.invite.receiveInviteTitle','zh')
+            }
+        },
+        "inputs":[
+            {
+                "name":{
+                    "base":i18n.t('assets.invite.codeLable'),
+                    "zh":i18n.t('assets.invite.codeLable')
+                }
+            }
+        ],
+      },        
       methodName: "callContract",
       data: {
         toAddress: constant.DexFund_Addr,
@@ -51,6 +69,16 @@ export function bindCode(code:number) {
 export function genCode() {
   return new Promise((res, rej) => {
     sendTx({
+      abi:JSON.stringify(genCodeInterface),
+        description:{
+        "function":{
+            "name":{
+                "base":i18n.t('assets.invite.inviteTitle','en'),
+                "zh":i18n.t('assets.invite.inviteTitle','en')
+            }
+        },
+        inputs:[]
+      }, 
       methodName: "callContract",
       data: {
         toAddress: constant.DexFund_Addr,
