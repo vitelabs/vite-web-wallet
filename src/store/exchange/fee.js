@@ -30,9 +30,9 @@ const mutations = {
 };
 
 const actions = {
-    getInvitedCode({ commit }) {
+    getInvitedCode({ commit, getters }) {
         return new Promise((res, rej) => {
-            getInviteeCode().then(code => {
+            getInviteeCode(getters.activeAddr).then(code => {
                 commit('setInviteCode', code);
                 res(code);
             }).catch(e => rej(e));
