@@ -1,15 +1,11 @@
 <template>
     <div class="index-layout-wrapper">
         <div class="header">
-            <img
-                class="header-logo __pointer"
-                src="~assets/imgs/ViteLogo1.svg"
-            />
+            <img class="header-logo __pointer" src="~assets/imgs/ViteLogo1.svg"/>
             <change-lang class="start change-lang __pointer"></change-lang>
         </div>
         <div class="confirm-wrapper">
             <div class="confirm">
-                <login v-if="$route.name === 'start'"></login>
                 <router-view></router-view>
                 <first-notice v-if="$route.name === 'start'"></first-notice>
             </div>
@@ -20,10 +16,15 @@
 <script>
 import firstNotice from 'components/firstNotice.vue';
 import changeLang from 'components/changeLang';
-import login from './login/login';
 
-export default { components: { changeLang, login, firstNotice } };
+export default {
+    components: { changeLang, firstNotice },
+    mounted() {
+        console.log(this.$route.name);
+    }
+};
 </script>
+
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
 

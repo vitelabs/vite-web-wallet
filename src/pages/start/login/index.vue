@@ -102,7 +102,7 @@
                     <input
                         ref="passInput"
                         autofocus
-                        :placeholder="$t('startCreate.input')"
+                        :placeholder="$t('create.input')"
                         v-model="password"
                         :type="'password'"
                         @focus="inputFocus('pass')"
@@ -122,7 +122,7 @@
                             {{
                                 isShowExisting
                                     ? $t("btn.login")
-                                    : $t("startCreate.finish")
+                                    : $t("create.finish")
                             }}
                         </span>
                         <loading v-show="isLoading" loadingType="dot"></loading>
@@ -150,7 +150,7 @@ import openUrl from 'utils/openUrl';
 import { getList, deleteOldAcc } from 'wallet';
 
 import accountItem from './accountItem.vue';
-import restore from '../restore.vue';
+import restore from './restore.vue';
 import accountList from './accountList.vue';
 
 import qrcode from 'components/qrcode';
@@ -337,7 +337,7 @@ export default {
             }
 
             if (!this.password) {
-                this.$toast(this.$t('startCreate.input'), 'error');
+                this.$toast(this.$t('create.input'), 'error');
                 this.focusPass();
                 return;
             }
@@ -358,8 +358,7 @@ export default {
                     }
 
                     this.currHDAcc.activate();
-                    const name
-                        = this.$store.state.env.lastPage || 'tradeCenter';
+                    const name = this.$store.state.env.lastPage || 'tradeCenter';
                     this.$router.push({ name });
                 })
                 .catch(err => {

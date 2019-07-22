@@ -4,8 +4,8 @@
         <div class="btn btn-login __pointer" @click="leftClick">
             {{ isHaveUsers ? $t("unlockAcc") : $t("login") }}
         </div>
-        <div class="btn btn-register __pointer" @click="rightClick">
-            {{ isHaveUsers ? $t("changeAcc") : $t("register") }}
+        <div v-show="isHaveUsers" class="btn btn-register __pointer" @click="rightClick">
+            {{ $t("changeAcc") }}
         </div>
     </div>
 </template>
@@ -22,7 +22,7 @@ export default {
     methods: {
         leftClick() {
             if (!this.isHaveUsers) {
-                this.$router.push({ name: 'start' });
+                this.$router.push({ name: 'startLogin' });
                 return;
             }
             const valid = execWithValid(function () {
@@ -31,11 +31,7 @@ export default {
             valid();
         },
         rightClick() {
-            if (!this.isHaveUsers) {
-                this.$router.push({ name: 'startCreate' });
-                return;
-            }
-            this.$router.push({ name: 'start' });
+            this.$router.push({ name: 'startLogin' });
         }
     }
 };

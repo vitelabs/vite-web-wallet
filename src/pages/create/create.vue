@@ -6,8 +6,8 @@
 
         <div @click="toogleAgree" class="agreement agree-list __pointer" :class="{
             'active': isAgree
-        }">{{ $t('startCreate.agreementPre') }}
-            <span @click.stop="openLink" class="link">{{ $t('startCreate.agreement') }}</span>
+        }">{{ $t('create.agreementPre') }}
+            <span @click.stop="openLink" class="link">{{ $t('create.agreement') }}</span>
         </div>
 
         <div class="__btn_list">
@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import create from '../create.vue';
+import create from '../start/login/create.vue';
 
 export default {
     components: { create },
@@ -73,7 +73,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
-@import "../agree.scss";
+@import "./agree.scss";
 
 .__btn.__btn_all_in.unuse {
     background: rgba(191,191,191,1);

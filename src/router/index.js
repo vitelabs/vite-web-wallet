@@ -31,15 +31,15 @@ router.beforeEach((to, from, next) => {
 
     // Init
     if (!from.name) {
-        // To start***, but not start
-        if (to.name && to.name.indexOf('start') !== -1 && to.name !== 'start') {
-            router.replace({ name: 'start' });
+        // To start***, but not startLogin
+        if (to.name && to.name.indexOf('start') !== -1 && to.name !== 'startLogin') {
+            router.replace({ name: 'startLogin' });
             return;
         }
 
         // Don't have currHDAcc and want to go start*** or trade***
-        if (!currHDAcc && to.name && [ 'start', 'tradeCenter' ].indexOf(to.name) === -1) {
-            router.replace({ name: 'start' });
+        if (!currHDAcc && to.name && [ 'startLogin', 'tradeCenter' ].indexOf(to.name) === -1) {
+            router.replace({ name: 'startLogin' });
             return;
         }
     }
@@ -50,14 +50,14 @@ router.beforeEach((to, from, next) => {
     }
 
 
-    // If want to go start, and from isn't start***, record from.
-    if (to.name && to.name === 'start' && from.name && from.name.indexOf('start') === -1) {
+    // If want to go startLogin, and from isn't start***, record from.
+    if (to.name && to.name === 'startLogin' && from.name && from.name.indexOf('start') === -1) {
         store.commit('setLastPage', from.name);
     }
 
-    // If must login, but not login, to start.
+    // If must login, but not login, to startLogin.
     if (loginRoutes.indexOf(to.name) >= 0 && currHDAcc.status === StatusMap.LOCK) {
-        router.replace({ name: 'start' });
+        router.replace({ name: 'startLogin' });
         return;
     }
 

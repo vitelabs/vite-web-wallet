@@ -206,7 +206,7 @@
             "720": "12小时"
         }
     },
-    "startCreate": {
+    "create": {
         "input": "请输入密码",
         "again": "请再次输入密码",
         "choose": "选择账户",
@@ -221,6 +221,11 @@
             "consistency": "请输入相同的密码",
             "pwFormat": "密码格式错误，密码仅支持英文、半角符号、数字"
         }
+    },
+    "startCreate": {
+        "notice": "为提高账户安全性，Web端将不再支持新建助记词，推荐您下载Vite App新建助记词，并使用Vite App扫码登录web钱包",
+        "goLogin": "去登录",
+        "goDex": "去交易所"
     },
     "startRecord": {
         "agreeList": [

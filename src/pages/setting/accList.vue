@@ -121,14 +121,14 @@ export default {
             const editName = this.editName.trim();
 
             if (!/^[a-zA-Z0-9_\u4e00-\u9fa5]+$/g.test(editName)) {
-                this.$toast(this.$t('startCreate.hint.name'));
+                this.$toast(this.$t('create.hint.name'));
                 this.clearEditName();
                 return;
             }
 
             const long = 26;
             if (editName.length > 26) {
-                this.$toast(this.$t('startCreate.hint.nameLong', { long }));
+                this.$toast(this.$t('create.hint.nameLong', { long }));
                 this.clearEditName();
                 return;
             }

@@ -97,10 +97,10 @@ export default {
         }
     },
     mounted() {
-        this.price
-            = this.activeTxPair && this.activeTxPair.closePrice
-                ? this.activeTxPair.closePrice
-                : '';
+        const price = this.activeTxPair && this.activeTxPair.closePrice
+            ? this.activeTxPair.closePrice
+            : '';
+        this.price = BigNumber.normalFormatNum(price, this.ttokenDigit);
     },
     data() {
         return {
