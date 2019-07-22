@@ -122,7 +122,7 @@ export default {
 
                 this.isLoading = false;
                 this.$router.push({
-                    name: 'start',
+                    name: 'startLogin',
                     params: { id }
                 });
             }).catch(err => {
@@ -137,7 +137,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
-@import "../agree.scss";
+@import "./agree.scss";
 
 .__btn.__btn_all_in.unuse {
     background: rgba(191,191,191,1);

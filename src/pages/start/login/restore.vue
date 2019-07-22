@@ -16,7 +16,7 @@
         <div class="__btn_list">
             <span class="__btn __btn_border __pointer" @click="leftClick" >{{ $t(leftTxt) }}</span>
             <div class="__btn __btn_all_in __pointer" @click="valid">
-                <span v-show="!isLoading">{{ $t('startCreate.finish') }}</span>
+                <span v-show="!isLoading">{{ $t('create.finish') }}</span>
                 <loading v-show="isLoading" loadingType="dot"></loading>
             </div>
         </div>
@@ -113,7 +113,7 @@ export default {
                 this.isLoading = false;
                 this.finishCb && this.finishCb(id);
                 this.$router.push({
-                    name: 'start',
+                    name: 'startLogin',
                     params: { id }
                 });
             }).catch(err => {

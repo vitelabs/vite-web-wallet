@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="__btn __btn_input">
-            <input autofocus :placeholder="$t('startCreate.input')"
+            <input autofocus :placeholder="$t('create.input')"
                    v-model="password" :type="'password'" />
         </div>
 

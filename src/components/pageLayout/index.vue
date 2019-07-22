@@ -91,7 +91,7 @@ export default {
             }
 
             if (name === 'login') {
-                this.$router.push({ name: 'start' });
+                this.$router.push({ name: 'startLogin' });
                 return;
             }
 
@@ -101,7 +101,7 @@ export default {
 
             const account = this.$store.state.wallet.currHDAcc;
             if (!account && name !== 'setting') {
-                this.$router.push({ name: 'start' });
+                this.$router.push({ name: 'startLogin' });
                 return;
             }
 

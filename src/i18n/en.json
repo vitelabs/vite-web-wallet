@@ -206,28 +206,26 @@
             "720": "12 Hours"
         }
     },
-    "startCreate": {
-        "input": "Please input password",
-        "again": "Please input password again",
-        "choose": "Choose Account",
-        "finish": "Done",
-        "agreementPre": "I agree to Vite Wallet and ViteX's",
-        "agreement": "Privacy Policy and Terms of Service",
+    "create": {
+        "input": "请输入密码",
+        "again": "请再次输入密码",
+        "choose": "选择账户",
+        "finish": "完成",
+        "agreementPre": "同意Vite钱包和ViteX",
+        "agreement": "隐私政策与服务协议",
         "hint": {
-            "nameInput": "Please input account name",
-            "nameLong": "Name cannot exceed {long} characters!",
-            "long": "Your input cannot exceed 32 characters!",
-            "name": "Account name only supports Chinese, English, numbers and underscores",
-            "consistency": "Please enter the same password!",
-            "pwFormat": "Wrong password format. The password only supports English, half-width symbols, numbers."
+            "nameInput": "请输入账户名称",
+            "nameLong": "名称不得超出{long}个字符",
+            "long": "密码不能大于32个字符",
+            "name": "账户名称仅支持中英文、数字和下划线",
+            "consistency": "请输入相同的密码",
+            "pwFormat": "密码格式错误，密码仅支持英文、半角符号、数字"
         }
     },
-    "startRecord": {
-        "agreeList": [
-            "I understand that if I lose my mnemonic words, I will not be able to access my account.",
-            "I understand that if I forget or lose my mnemonic words, no one can guarantee the restoration of my assets.",
-            "I have already written down or securely stored my mnemonic words."
-        ]
+    "startCreate": {
+        "notice": "为提高账户安全性，Web端将不再支持新建助记词，推荐您下载Vite App新建助记词，并使用Vite App扫码登录web钱包",
+        "goLogin": "去登录",
+        "goDex": "去交易所"
     },
     "keystore": {
         "title": "Keystore",
