@@ -22,6 +22,17 @@ router.beforeEach((to, from, next) => {
         return;
     }
 
+    // CreateAccount only use in development.
+    if (to.name === 'create') {
+        if (process.env.NODE_ENV === 'test' || process.env.NODE_ENV === 'dev') {
+            next();
+            return;
+        }
+        router.replace({ name: 'notFound' });
+        return;
+    }
+
+    // Go to explorer.
     if (to.name === 'viteExplorer') {
         window.open(getExplorerLink());
         return;

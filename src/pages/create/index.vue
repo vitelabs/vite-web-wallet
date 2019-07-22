@@ -9,7 +9,7 @@
 <script>
 import create from './create.vue';
 import record from './record.vue';
-import process from 'components/process';
+import process from './process';
 
 export default {
     components: { create, process, record },
@@ -35,9 +35,13 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.create-account-wrapper{
-    max-width: 360px;
-    background: blue;
+.create-account-wrapper {
+    position: absolute;
+    padding: 50px;
+    top: 20px;
+    left: 200px;
+    width: 380px;
+    background: rgba(0,100,255,1);
 }
 </style>
 
