@@ -3,16 +3,20 @@
         <div class="order-title">
             {{ $t(`trade.${orderType}.title`, { token: ftokenShow }) }}
             <div class="wallet">
-                {{ balance || '0' }}
+                {{ balance || "0" }}
                 <span class="ex-order-token">
-                    {{ orderType === 'buy' ? ttokenShow : ftokenShow }}
+                    {{ orderType === "buy" ? ttokenShow : ftokenShow }}
                 </span>
             </div>
         </div>
 
         <div class="dex-input-wrapper b">
             <span class="ex-order-token __ellipsis">
-                {{ $t(`trade.${orderType}.price`, { token: originQuoteTokenSymbol }) }}
+                {{
+                    $t(`trade.${orderType}.price`, {
+                        token: originQuoteTokenSymbol
+                    })
+                }}
             </span>
             <div class="else-input-wrapper" :class="{'err': priceErr}">
                 <span class="tips" :class="{'active':
@@ -27,7 +31,11 @@
 
         <div class="dex-input-wrapper">
             <span class="ex-order-token __ellipsis">
-                {{ $t(`trade.${orderType}.quantity`, { token: originTradeTokenSymbol }) }}
+                {{
+                    $t(`trade.${orderType}.quantity`, {
+                        token: originTradeTokenSymbol
+                    })
+                }}
             </span>
             <div class="else-input-wrapper" :class="{'err': quantityErr}">
                 <span class="tips" :class="{'active':
@@ -46,7 +54,11 @@
 
         <div class="dex-input-wrapper">
             <span class="ex-order-token __ellipsis">
-                {{ $t('trade.quantityTitle', { quantity: originQuoteTokenSymbol }) }}
+                {{
+                    $t("trade.quantityTitle", {
+                        quantity: originQuoteTokenSymbol
+                    })
+                }}
             </span>
             <div class="else-input-wrapper" :class="{'err': amountErr}">
                 <span class="tips" :class="{'active':
@@ -74,6 +86,7 @@ import { initPwd } from 'components/password/index.js';
 import sendTx from 'utils/sendTx';
 import BigNumber from 'utils/bigNumber';
 import { verifyAmount, checkAmountFormat } from 'utils/validations';
+import { execWithValid } from 'utils/execWithValid';
 
 const maxDigit = 8;
 
@@ -86,7 +99,10 @@ export default {
         }
     },
     mounted() {
-        this.price = this.activeTxPair && this.activeTxPair.closePrice ? this.activeTxPair.closePrice : '';
+        this.price
+            = this.activeTxPair && this.activeTxPair.closePrice
+                ? this.activeTxPair.closePrice
+                : '';
     },
     data() {
         return {
@@ -108,7 +124,10 @@ export default {
             if (old && old.symbol === this.activeTxPair.symbol) {
                 return;
             }
-            this.price = this.activeTxPair && this.activeTxPair.closePrice ? this.activeTxPair.closePrice : '';
+            this.price
+                = this.activeTxPair && this.activeTxPair.closePrice
+                    ? this.activeTxPair.closePrice
+                    : '';
             this.quantity = '';
             this.amount = '';
         },
@@ -135,21 +154,27 @@ export default {
                 return;
             }
 
-            if (!(this.orderType === 'buy' && this.activeTx.side === 1)
-                && !(this.orderType === 'sell' && this.activeTx.side === 0)) {
+            if (
+                !(this.orderType === 'buy' && this.activeTx.side === 1)
+                && !(this.orderType === 'sell' && this.activeTx.side === 0)
+            ) {
                 this.priceChanged();
                 return;
             }
 
-            const quantity = BigNumber.normalFormatNum(this.activeTx.num, this.ftokenDigit);
+            const quantity = BigNumber.normalFormatNum(this.activeTx.num,
+                this.ftokenDigit);
 
-            if (this.orderType === 'sell'
-                && BigNumber.compared(this.balance || 0, quantity) < 0) {
+            if (
+                this.orderType === 'sell'
+                && BigNumber.compared(this.balance || 0, quantity) < 0
+            ) {
                 if (+this.balance === 0) {
                     this.priceChanged();
                     return;
                 }
-                this.quantity = BigNumber.normalFormatNum(this.balance, this.ftokenDigit);
+                this.quantity = BigNumber.normalFormatNum(this.balance,
+                    this.ftokenDigit);
                 this.quantityChanged();
                 return;
             }
@@ -160,7 +185,8 @@ export default {
                     if (+this.balance === 0) {
                         return;
                     }
-                    this.amount = BigNumber.normalFormatNum(this.balance || '', this.ttokenDigit);
+                    this.amount = BigNumber.normalFormatNum(this.balance || '',
+                        this.ttokenDigit);
                     this.quantity = this.getQuantity(this.price, this.amount);
                     return;
                 }
@@ -189,7 +215,10 @@ export default {
         },
         rate() {
             const rateList = this.$store.state.exchangeRate.rateMap || {};
-            const tokenId = this.activeTxPair && this.activeTxPair.quoteToken ? this.activeTxPair.quoteToken : null;
+            const tokenId
+                = this.activeTxPair && this.activeTxPair.quoteToken
+                    ? this.activeTxPair.quoteToken
+                    : null;
             const coin = this.$store.state.env.currency;
 
             if (!tokenId || !rateList[tokenId]) {
@@ -199,29 +228,45 @@ export default {
         },
         minAmount() {
             const minAmount = this.$store.state.exchangeLimit.minAmount;
-            const quoteTokenSymbol = this.activeTxPair ? this.activeTxPair.quoteTokenSymbol : '';
+            const quoteTokenSymbol = this.activeTxPair
+                ? this.activeTxPair.quoteTokenSymbol
+                : '';
 
-            if (!minAmount || !quoteTokenSymbol || !minAmount[quoteTokenSymbol]) {
+            if (
+                !minAmount
+                || !quoteTokenSymbol
+                || !minAmount[quoteTokenSymbol]
+            ) {
                 return 0;
             }
             return minAmount[quoteTokenSymbol];
         },
         percent() {
-            if (!this.availableBalance
+            if (
+                !this.availableBalance
                 || (this.orderType === 'buy' && !this.ttokenDetail)
-                || (this.orderType !== 'buy' && !this.ftokenDetail)) {
+                || (this.orderType !== 'buy' && !this.ftokenDetail)
+            ) {
                 return '0';
             }
 
             const balance = this.availableBalance;
 
             if (this.orderType === 'buy') {
-                const basicAmount = BigNumber.toMin(this.amount || 0, this.ttokenDetail.tokenDecimals);
-                return BigNumber.dividedToNumber(basicAmount || 0, balance, 3, 'nofix');
+                const basicAmount = BigNumber.toMin(this.amount || 0,
+                    this.ttokenDetail.tokenDecimals);
+                return BigNumber.dividedToNumber(basicAmount || 0,
+                    balance,
+                    3,
+                    'nofix');
             }
 
-            const basicQuantity = BigNumber.toMin(this.quantity || 0, this.ftokenDetail.tokenDecimals);
-            return BigNumber.dividedToNumber(basicQuantity || 0, balance, 3, 'nofix');
+            const basicQuantity = BigNumber.toMin(this.quantity || 0,
+                this.ftokenDetail.tokenDecimals);
+            return BigNumber.dividedToNumber(basicQuantity || 0,
+                balance,
+                3,
+                'nofix');
         },
         rawBalance() {
             if (!this.activeTxPair) {
@@ -244,7 +289,9 @@ export default {
             return balanceList[tokenId];
         },
         availableBalance() {
-            return this.rawBalance && this.rawBalance.available ? this.rawBalance.available : '0';
+            return this.rawBalance && this.rawBalance.available
+                ? this.rawBalance.available
+                : '0';
         },
         balance() {
             if (!this.rawBalance) {
@@ -262,10 +309,14 @@ export default {
             return this.$store.state.exchangeTokens.ftoken;
         },
         originTradeTokenSymbol() {
-            return this.activeTxPair ? this.activeTxPair.tradeTokenSymbol.split('-')[0] : '';
+            return this.activeTxPair
+                ? this.activeTxPair.tradeTokenSymbol.split('-')[0]
+                : '';
         },
         originQuoteTokenSymbol() {
-            return this.activeTxPair ? this.activeTxPair.quoteTokenSymbol.split('-')[0] : '';
+            return this.activeTxPair
+                ? this.activeTxPair.quoteTokenSymbol.split('-')[0]
+                : '';
         },
         ftokenShow() {
             return this.activeTxPair ? this.activeTxPair.tradeTokenSymbol : '';
@@ -335,7 +386,8 @@ export default {
                 amount = this.getAmount(price, quantity);
             }
 
-            !BigNumber.isEqual(quantity, this.quantity) && (this.quantity = quantity);
+            !BigNumber.isEqual(quantity, this.quantity)
+                && (this.quantity = quantity);
             !BigNumber.isEqual(amount, this.amount) && (this.amount = amount);
         },
         amountChanged() {
@@ -355,7 +407,8 @@ export default {
             }
 
             quantity = this.getQuantity(price, amount);
-            !BigNumber.isEqual(quantity, this.quantity) && (this.quantity = quantity);
+            !BigNumber.isEqual(quantity, this.quantity)
+                && (this.quantity = quantity);
         },
         priceChanged() {
             this.validAll();
@@ -410,13 +463,19 @@ export default {
             if (this.orderType === 'buy') {
                 quantity = BigNumber.multi(quantity, 1 + this.fee);
             }
-            return BigNumber.dividedCeil(amount, quantity, this.ttokenDigit, 'nofix');
+            return BigNumber.dividedCeil(amount,
+                quantity,
+                this.ttokenDigit,
+                'nofix');
         },
         getPercentBalance(percent, digit) {
             if (!this.balance || BigNumber.isEqual(this.balance, 0)) {
                 return '';
             }
-            const result = BigNumber.multi(percent, this.balance, digit, 'nofix');
+            const result = BigNumber.multi(percent,
+                this.balance,
+                digit,
+                'nofix');
             return BigNumber.isEqual(result, 0) ? '' : result;
         },
         // amount = quantity * price * (1+fee)
@@ -458,7 +517,9 @@ export default {
                 return '';
             }
 
-            const decimals = this.ttokenDetail ? this.ttokenDetail.tokenDecimals : 0;
+            const decimals = this.ttokenDetail
+                ? this.ttokenDetail.tokenDecimals
+                : 0;
             let minAmount = BigNumber.toMin(amount, decimals);
             const minPrice = BigNumber.toMin(price, decimals);
 
@@ -503,7 +564,7 @@ export default {
             this.quantity = '';
         },
 
-        _clickBtn() {
+        _clickBtn: execWithValid(function () {
             if (this.isLoading || this.activeTxPairIsClose) {
                 return;
             }
@@ -526,7 +587,8 @@ export default {
                 return;
             }
 
-            initPwd({// yztood
+            initPwd({
+                // yztood
                 submit: () => {
                     this.newOrder({
                         price: this.price,
@@ -534,10 +596,14 @@ export default {
                     });
                 }
             });
-        },
+        }),
         newOrder({ price, quantity }) {
-            const tradeToken = this.activeTxPair ? this.activeTxPair.tradeToken : '';
-            const quoteToken = this.activeTxPair ? this.activeTxPair.quoteToken : '';
+            const tradeToken = this.activeTxPair
+                ? this.activeTxPair.tradeToken
+                : '';
+            const quoteToken = this.activeTxPair
+                ? this.activeTxPair.quoteToken
+                : '';
             const side = this.orderType === 'buy' ? 0 : 1;
 
             this.isLoading = true;
@@ -556,7 +622,18 @@ export default {
                 methodName: 'callContract',
                 data: {
                     toAddress: constant.DexFund_Addr,
-                    abi: { 'type': 'function', 'name': 'DexFundNewOrder', 'inputs': [ { 'name': 'tradeToken', 'type': 'tokenId' }, { 'name': 'quoteToken', 'type': 'tokenId' }, { 'name': 'side', 'type': 'bool' }, { 'name': 'orderType', 'type': 'uint8' }, { 'name': 'price', 'type': 'string' }, { 'name': 'quantity', 'type': 'uint256' } ] },
+                    abi: {
+                        type: 'function',
+                        name: 'DexFundNewOrder',
+                        inputs: [
+                            { name: 'tradeToken', type: 'tokenId' },
+                            { name: 'quoteToken', type: 'tokenId' },
+                            { name: 'side', type: 'bool' },
+                            { name: 'orderType', type: 'uint8' },
+                            { name: 'price', type: 'string' },
+                            { name: 'quantity', type: 'uint256' }
+                        ]
+                    },
                     params: [ tradeToken, quoteToken, side, 0, price, quantity ],
                     tokenId: tradeToken
                 },
@@ -569,15 +646,17 @@ export default {
                         }
                     }
                 }
-            }).then(() => {
-                this.isLoading = false;
-                this.clearAll();
-                this.$toast(this.$t('trade.newOrderSuccess'));
-            }).catch(err => {
-                console.warn(err);
-                this.isLoading = false;
-                this.$toast(this.$t('trade.newOrderFail'), err);
-            });
+            })
+                .then(() => {
+                    this.isLoading = false;
+                    this.clearAll();
+                    this.$toast(this.$t('trade.newOrderSuccess'));
+                })
+                .catch(err => {
+                    console.warn(err);
+                    this.isLoading = false;
+                    this.$toast(this.$t('trade.newOrderFail'), err);
+                });
         }
     }
 };
@@ -585,6 +664,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "../center.scss";
+
 $font-black: rgba(36, 39, 43, 0.8);
 
 .dex-input-wrapper {
@@ -598,11 +678,12 @@ $font-black: rgba(36, 39, 43, 0.8);
         margin-bottom: 10px;
     }
     .real-price {
+        font-family: $font-H;
         max-width: 100px;
         box-sizing: border-box;
         padding: 0 6px;
         font-size: 12px;
-        color: rgba(94,104,117,0.58);
+        color: rgba(94, 104, 117, 0.58);
     }
     .ex-order-token {
         font-size: 12px;
@@ -616,7 +697,7 @@ $font-black: rgba(36, 39, 43, 0.8);
     .else-input-wrapper {
         position: relative;
         border-radius: 2px;
-        border: 1px solid rgba(212,222,231,1);
+        border: 1px solid rgba(212, 222, 231, 1);
         box-sizing: border-box;
         flex: 1;
         &.err {
@@ -632,27 +713,26 @@ $font-black: rgba(36, 39, 43, 0.8);
     z-index: 10;
     transform: translate(-50%, 0);
     background: #fff;
-    box-shadow: 0px 5px 20px 0px rgba(0,0,0,0.1);
+    box-shadow: 0px 5px 20px 0px rgba(0, 0, 0, 0.1);
     border-radius: 2px;
     font-size: 12px;
-    color: #5E6875;
+    color: #5e6875;
     box-sizing: border-box;
     @include font-family-normal();
     opacity: 0;
     transition: opacity 0.2s ease-in-out;
     width: 0;
-    height: auto;
+    line-height: 12px;
     white-space: nowrap;
     &.active {
         display: block;
         min-width: 0;
         width: auto;
-        height: auto;
         opacity: 1;
-        padding: 6px;
+        padding: 6px 12px;
     }
     &::after {
-        content: ' ';
+        content: " ";
         display: inline-block;
         border: 6px solid transparent;
         border-top: 6px solid #fff;
@@ -676,14 +756,15 @@ $font-black: rgba(36, 39, 43, 0.8);
         color: #1d2024;
         margin-bottom: 10px;
         .wallet {
+            font-family: $font-H;
             display: block;
             float: right;
             &::before {
-                content: '';
+                content: "";
                 display: inline-block;
                 width: 16px;
                 height: 16px;
-                background: url('~assets/imgs/ex-wallet-icon.svg');
+                background: url("~assets/imgs/ex-wallet-icon.svg");
                 background-size: 100% 100%;
                 margin-bottom: -4px;
             }
@@ -705,10 +786,18 @@ $font-black: rgba(36, 39, 43, 0.8);
         font-weight: 600;
         color: #fff;
         &.red {
-            background: linear-gradient(270deg, rgba(226, 43, 116, 1) 0%, rgba(237, 81, 88, 1) 100%);
+            background: linear-gradient(
+                270deg,
+                rgba(226, 43, 116, 1) 0%,
+                rgba(237, 81, 88, 1) 100%
+            );
         }
         &.green {
-            background: linear-gradient(270deg, rgba(0, 212, 208, 1) 0%, rgba(0, 215, 100, 1) 100%);
+            background: linear-gradient(
+                270deg,
+                rgba(0, 212, 208, 1) 0%,
+                rgba(0, 215, 100, 1) 100%
+            );
         }
         &.gray {
             color: rgba(29, 32, 36, 0.6);
@@ -726,7 +815,7 @@ $font-black: rgba(36, 39, 43, 0.8);
     line-height: 30px;
     border: none;
     input {
-        @include font-family-normal();
+        font-family: $font-H;
         font-size: 12px;
         color: #1d2024;
         text-indent: 6px;

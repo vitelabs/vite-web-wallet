@@ -19,6 +19,7 @@
     "stakingAmount": "抵押金额",
     "withdrawHeight": "到期快照高度",
     "balance": "账户余额",
+    "dexBalance": "交易所账户余额",
     "addrName": "地址{index}",
     "true": "是",
     "false": "否",
@@ -368,7 +369,36 @@
         "nodeErr": "网关节点无效，请检查网关设置"
     },
     "assets": {
-        "title": "资产"
+        "title": "资产",
+        "vb":{
+            "title":"ViteBifrost",
+            "connect":{
+                "tips":"请使用Vite App扫码登录."
+            },
+            "confirm":{
+                "tips":"请在VITE App上确认交易"
+            },
+            "start":{
+                "scan":"请使用Vite App扫码登录.",
+                "downloadTips":"还没有Vite App？",
+                "download":"下载Vite手机钱包"
+            },
+            "defaultName":"我的账户"
+        },
+        "invite":{
+            "inviteTitle":"邀请好友",
+            "receiveInviteTitle":"接受邀请",
+            "myCode":"我的邀请码为：",
+            "codeLable":"邀请码",
+            "invited":"你已接受过邀请，邀请码为：",
+            "genCode":"生成邀请码",
+            "cost":"所需金额",
+            "avaliable":"可用余额",
+            "inviteNum":"邀请人数",
+            "inviteBenifit":"邀请挖矿收益",
+            "inviteRule":"邀请规则",
+            "ruleItems":["花费1000 VITE生成邀请码，1000 VITE会算作交易所收益，分给持有VX的用户","使用邀请码的用户交易过程中产生手续费，产生手续费的 5%，视为邀请用户产生的交易手续费，可进行挖矿VX","使用邀请码的用户，在交易过程中可享手续费永久9折优惠"]
+        }
     },
     "walletConversion": {
         "title": "置换VITE",
@@ -965,7 +995,7 @@
             "submit": "确认转入",
             "tokenName": "币种名称",
             "address": "接受所有权地址",
-            "notice": "请知悉：币种所有权转入后尚未开通的交易对权限将归新的所有者拥有。已开通暂停交易的交易对所有权仍归您所有。"
+            "notice": "请知悉：币种所有权转让后尚未开通的交易对权限将归新的所有者拥有。已开通暂停交易的交易对所有权仍归您所有。"
         }
     },
     "tradeTxPairManage": {
@@ -992,6 +1022,7 @@
             "reqError": "上币失败，请稍后重试"
         },
         "stopTransHint": "确定要暂停 {symbol} 交易吗？",
+        "resetTransHint": "确定要恢复 {symbol} 交易吗？",
         "stopSuccess": "暂停成功",
         "stopFail": "暂停失败",
         "openSuccess": "恢复成功",

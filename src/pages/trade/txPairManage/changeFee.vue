@@ -9,7 +9,7 @@
             <div class="__input_row __unuse_input __bold">
                 {{ txPair.symbol }}
                 <span class="__right">
-                    {{ txPair.txPairDetail.makerFeeRate ? `${txPair.txPairDetail.makerFeeRate}%` : '0%' }}
+                    {{ txPair.txPairDetail.makerFeeRate ? `${(txPair.txPairDetail.makerFeeRate * 100).toFixed(3)}%` : '0%' }}
                 </span>
             </div>
         </div>
@@ -25,7 +25,7 @@
                     v-on:drag="makerChanged">
                 <div class="speed">
                     <span class="__left">{{ minFee }}</span>
-                    <span class="__right">{{ `${maxFee * 100}%` }}</span>
+                    <span class="__right">{{ `${maxFee}%` }}</span>
                 </div>
             </slider>
         </div>
@@ -35,7 +35,7 @@
             <div class="__input_row __unuse_input __bold">
                 {{ txPair.symbol }}
                 <span class="__right">
-                    {{ txPair.txPairDetail.takerFeeRate ? `${txPair.txPairDetail.takerFeeRate}%` : '0%' }}
+                    {{ txPair.txPairDetail.takerFeeRate ? `${(txPair.txPairDetail.takerFeeRate * 100).toFixed(3)}%` : '0%' }}
                 </span>
             </div>
         </div>
@@ -51,7 +51,7 @@
                     v-on:drag="takerChanged">
                 <div class="speed">
                     <span class="__left">{{ minFee }}</span>
-                    <span class="__right">{{ `${maxFee * 100}%` }}</span>
+                    <span class="__right">{{ `${maxFee}%` }}</span>
                 </div>
             </slider>
         </div>
@@ -65,7 +65,7 @@ import alertConfirm from 'components/confirm/index.js';
 import slider from 'components/slider';
 
 const minFee = 0;
-const maxFee = 0.002;
+const maxFee = 0.2;
 
 export default {
     components: { confirm, slider },
@@ -108,7 +108,7 @@ export default {
             let text = '';
             let operationCode = 0;
 
-            if (+this.maker !== +this.txPair.txPairDetail.makerFeeRate) {
+            if (this.maker && +this.maker !== +this.txPair.txPairDetail.makerFeeRate) {
                 text += this.$t('tradeTxPairManage.changeFeeHint', {
                     symbol: this.txPair.symbol,
                     type: 'Maker',
@@ -116,7 +116,7 @@ export default {
                 });
                 operationCode += 4;
             }
-            if (+this.taker !== +this.txPair.txPairDetail.takerFeeRate) {
+            if (this.taker && +this.taker !== +this.txPair.txPairDetail.takerFeeRate) {
                 text = text ? `${ text }; ` : text;
                 text += this.$t('tradeTxPairManage.changeFeeHint', {
                     symbol: this.txPair.symbol,
@@ -143,8 +143,8 @@ export default {
                             operationCode,
                             tradeToken: this.txPair.txPairDetail.tradeToken,
                             quoteToken: this.txPair.txPairDetail.quoteToken,
-                            makerFeeRate: this.maker * 100000,
-                            takerFeeRate: this.taker * 100000
+                            makerFeeRate: this.maker * 1000,
+                            takerFeeRate: this.taker * 1000
                         }, {
                             success: this.$t('hint.operateSuccess'),
                             fail: this.$t('hint.operateFail')

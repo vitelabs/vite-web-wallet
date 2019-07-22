@@ -3,7 +3,7 @@
         <tab-list></tab-list>
 
         <div class="search-wrapper">
-            <vite-input class="search-input" v-model="searchText"
+            <vite-input class="market-search-input" v-model="searchText"
                         :placeholder="$t('trade.search')">
                 <img slot="before" class="icon" src="~assets/imgs/search.svg"/>
             </vite-input>
@@ -116,8 +116,8 @@ export default {
         isShowFavorite() {
             return this.$store.state.exchangeMarket.isShowFavorite;
         },
-        quoteTokenSymbol() {
-            return this.$store.state.exchangeMarket.currentMarket;
+        quoteTokenCategory() {
+            return this.$store.state.exchangeMarket.curentCategory;
         },
         isShowNoData() {
             return !this.isLoading
@@ -163,12 +163,12 @@ export default {
         activeTxPair() {
             return this.$store.state.exchangeActiveTxPair.activeTxPair;
         },
-        quoteTokenSymbol: function () {
+        quoteTokenCategory: function () {
             this.searchText = '';
             this.searchList = [];
             this.stopDefaultPair();
 
-            if (!this.quoteTokenSymbol) {
+            if (!this.quoteTokenCategory) {
                 return;
             }
 
@@ -200,7 +200,7 @@ export default {
     methods: {
         init() {
             defaultPairTimer = defaultPairTimer || new subTask('defaultPair', ({ args, data }) => {
-                if (args.quoteTokenSymbol !== this.quoteTokenSymbol) {
+                if (args.quoteTokenCategory !== this.quoteTokenCategory) {
                     return;
                 }
 
@@ -236,7 +236,7 @@ export default {
             }, 2000);
 
             defaultPairTimer.start(() => {
-                return { quoteTokenSymbol: this.quoteTokenSymbol };
+                return { quoteTokenCategory: this.quoteTokenCategory };
             });
         },
         initFavoriteList() {
@@ -359,7 +359,7 @@ export default {
         padding: 4px 6px;
         box-sizing: border-box;
 
-        .search-input {
+        .market-search-input {
             flex: 1;
             background: rgba(245, 250, 255, 1);
             border-radius: 2px;
@@ -406,7 +406,7 @@ export default {
 </style>
 
 <style lang="scss">
-.search-input.input-wrapper {
+.market-search-input.input-wrapper {
     box-sizing: border-box;
     height: 20px;
     line-height: 20px;

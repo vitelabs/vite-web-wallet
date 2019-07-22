@@ -1,10 +1,10 @@
 <template>
-    <confirm class="big income-list-confirm" :showMask="true"
+    <confirm class="big no-padding-confirm" :showMask="true"
              :closeIcon="true" :close="close"
              :title="$t('tradeTxPairManage.incomeList')">
         <div class="total-income">
             <div class="total-income-title">{{ $t('tradeTxPairManage.historyAllIncome') }}</div>
-            <div class="income">{{ totalIncome }}</div>
+            <div class="income">{{ showTotalIncome }}</div>
         </div>
         <wallet-table class="income-list-table"
                       :headList="headList" :contentList="contentList">
@@ -21,6 +21,7 @@ import walletTable from 'components/table/index.vue';
 import pagination from 'components/pagination.vue';
 import { operatorIncome } from 'services/trade';
 import date from 'utils/date';
+import BigNumber from 'utils/bigNumber';
 
 export default {
     components: { confirm, walletTable, pagination },
@@ -49,6 +50,9 @@ export default {
         };
     },
     computed: {
+        showTotalIncome() {
+            return this.totalIncome ? BigNumber.onlyFormat(this.totalIncome) : 0;
+        },
         activeAddr() {
             return this.$store.getters.activeAddr;
         },
@@ -75,9 +79,9 @@ export default {
             this.list.forEach(item => {
                 list.push({
                     date: date(item.date * 1000, this.$i18n.locale),
-                    tradeQuantity: item.tradeQuantity,
-                    feeRate: `Taker(${ item.takerFeeRate }%) / Maker(${ item.makerFeeRate }%)`,
-                    income: item.income
+                    tradeQuantity: BigNumber.onlyFormat(item.tradeQuantity),
+                    feeRate: item.takerFeeRate && item.makerFeeRate ? `Taker(${ (item.takerFeeRate * 100).toFixed(3) }%) / Maker(${ (item.makerFeeRate * 100).toFixed(3) }%)` : '--',
+                    income: BigNumber.onlyFormat(item.income)
                 });
             });
             return list;
@@ -107,32 +111,21 @@ export default {
 
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
-@import '~assets/scss/table.scss';
 
 .total-income {
     padding: 14px 30px;
+    height: 64px;
     box-sizing: border-box;
     background: rgba(0,122,255,0.05);
     line-height: 18px;
+    font-size: 12px;
     .total-income-title {
-        font-size: 12px;
         @include font-family-normal();
         color: rgba(94,104,117,1);
     }
     .income {
-        font-size: 12px;
         @include font-family-bold();
         color: rgba(29,32,36,1);
-    }
-}
-
-.income-list-table {
-    width: 100%;
-    min-width: 0;
-    box-shadow: none;
-    flex: 1;
-    @include rowWith {
-        width: 25%;
     }
 }
 </style>

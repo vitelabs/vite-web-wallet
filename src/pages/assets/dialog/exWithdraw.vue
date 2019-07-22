@@ -19,6 +19,7 @@ import { getValidBalance } from 'utils/validations';
 import sendTx from 'utils/sendTx';
 import debounce from 'lodash/debounce';
 import bigNumber from 'utils/bigNumber';
+import { execWithValid } from 'utils/execWithValid';
 export default {
     props: {
         token: {
@@ -71,7 +72,7 @@ export default {
                     this.token.decimals);
             }
         },
-        inspector() {
+        inspector: execWithValid(function () {
             return new Promise((res, rej) => {
                 if (this.testAmount(this.withdrawAmount)) return;
                 const amount = this.isWithdrawAll
@@ -94,7 +95,7 @@ export default {
                         rej(e);
                     });
             });
-        }
+        })
     }
 };
 </script>

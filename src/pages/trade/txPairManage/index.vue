@@ -62,6 +62,7 @@ import changeFee from './changeFee.vue';
 import changeOwner from './changeOwner.vue';
 import { execWithValid } from 'utils/execWithValid';
 import sendTx from 'utils/sendTx';
+import BigNumber from 'utils/bigNumber';
 
 export default {
     components: { pagination, walletTable, secTitle, incomeList, openTxPair, changeOwner, changeFee },
@@ -113,8 +114,8 @@ export default {
                 const status = this.getStatus(item);
                 list.push({
                     symbol: `${ item.tradeTokenSymbol }/${ item.quoteTokenSymbol }`,
-                    income: item.income || '--',
-                    fee: item.takerFeeRate && item.makerFeeRate ? `Taker(${ item.takerFeeRate }%) / Maker(${ item.makerFeeRate }%)` : '--',
+                    income: item.income ? BigNumber.onlyFormat(item.income) : '--',
+                    fee: item.takerFeeRate && item.makerFeeRate ? `Taker(${ (item.takerFeeRate * 100).toFixed(3) }%) / Maker(${ (item.makerFeeRate * 100).toFixed(3) }%)` : '--',
                     status,
                     statusTxt: this.$t('tradeTxPairManage.statusList')[status],
                     txPairDetail: item,
@@ -134,6 +135,11 @@ export default {
                 });
             });
             return list;
+        }
+    },
+    watch: {
+        address() {
+            this.$router.push({ name: 'tradeOperator' });
         }
     },
     methods: {
@@ -164,7 +170,7 @@ export default {
         openTx: execWithValid(function (item) {
             confirm({
                 size: 'small',
-                title: this.$t('tradeTxPairManage.stopTrans'),
+                title: this.$t('tradeTxPairManage.resetTrans'),
                 leftBtn: { text: this.$t('btn.cancel') },
                 rightBtn: {
                     text: this.$t('btn.submit'),
@@ -172,7 +178,7 @@ export default {
                         this.fetchOpenTx(item);
                     }
                 },
-                content: this.$t('tradeTxPairManage.stopTransHint', { symbol: item.symbol })
+                content: this.$t('tradeTxPairManage.resetTransHint', { symbol: item.symbol })
             });
         }),
         changeFee: execWithValid(function (item) {

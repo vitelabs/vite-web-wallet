@@ -22,7 +22,7 @@
                             <AssetSwitch v-model="assetType" class="asset-switch" />
                         </div>
                     </div>
-                    <div v-show="!tokenList || !tokenList.length" class="no-data">{{ $t('hint.noData') }}</div>
+                    <div v-show="!tokenList || !tokenList.length" class="no-data"><div>{{ $t('hint.noData') }}</div></div>
                     <tokenCard v-show="tokenList && tokenList.length"
                                v-for="token in tokenList"
                                :key="token.tokenId"
@@ -81,7 +81,6 @@ export default {
         }
     },
     beforeMount() {
-        this.updateExBalance();
         this.$store.dispatch('startLoopExchangeRate');
     },
     computed: {
@@ -115,9 +114,6 @@ export default {
         }
     },
     methods: {
-        updateExBalance: debounce(function () {
-            this.$store.dispatch('startLoopExchangeBalance');
-        }, 0.1),
         addToken() {
             addTokenDialog();
         },
@@ -162,7 +158,24 @@ export default {
         flex-grow: 1;
         background-color: #fff;
         .no-data {
-            margin-top: 60px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translateY(-50%) translateX(-50%);
+            font-size: 12px;
+            @include font-family-normal();
+            font-weight: 400;
+            color: rgba(94,104,117,0.58);
+            line-height: 16px;
+            text-align: center;
+            &:before {
+                display: inline-block;
+                margin-bottom: 16px;
+                content: ' ';
+                width: 60px;
+                height: 60px;
+                background: url('~assets/imgs/dexEmpty.svg') 100% 100%;
+            }
         }
         .token__head {
             display: flex;
@@ -176,12 +189,23 @@ export default {
                 @include colWidth;
                 padding: 9px;
                 color: rgba(94, 104, 117, 0.58);
+                overflow: visible;
                 .asset-switch {
                     color: rgba(94, 104, 117, 0.58);;
                     font-size: 12px;
                     @include font-family-normal();
                     /deep/.list-title {
                         border: none;
+                    }
+                    /deep/.list {
+                        overflow: visible;
+                        border-radius: 2px;
+                        margin-top: 8px;
+                        @include font-family-normal();
+                        color: rgba(94,104,117,0.58);
+                        .item:hover {
+                            background: rgba(75,116,255,0.1);
+                        }
                     }
                 }
             }
