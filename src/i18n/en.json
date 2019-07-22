@@ -679,6 +679,7 @@
             "receiveInviteTitle":"接受邀请",
             "myCode":"我的邀请码为：",
             "codeLable":"邀请码",
+            "notEnough":"交易所可用余额不足",
             "invited":"你已接受过邀请，邀请码为：",
             "genCode":"生成邀请码",
             "cost":"所需金额",
