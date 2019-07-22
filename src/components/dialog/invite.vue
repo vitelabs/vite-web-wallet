@@ -84,10 +84,10 @@ export default {
                         console.log(res);
                     })
                     .catch(e => {
-                        this.$toast(this.$t('assets.invite.noResult'),e);
+                        this.$toast(this.$t('assets.invite.noResult'), e);
                     });
             }).catch(e => {
-                this.$toast(this.$t('assets.invite.failToast'),e);
+                this.$toast(this.$t('assets.invite.failToast'), e);
             });
             return Promise.reject('no close');
         },
