@@ -54,7 +54,7 @@ export default {
         margin-right: 10px;
     }
     .go-list {
-        margin-top: 80px;
+        margin-top: 100px;
         font-size: 16px;
         @include font-family-bold();
         color: rgba(255,255,255,1);
@@ -75,12 +75,27 @@ export default {
         }
     }
     .__btn:hover {
+        position: relative;
+        &::before {
+            position: absolute;
+            top: 54px;
+            left: 50%;
+            margin-left: -6px;
+            content: ' ';
+            display: inline-block;
+            border: 6px solid transparent;
+            border-bottom: 6px solid #fff;
+        }
         &::after {
+            position: absolute;
+            top: 65px;
+            left: 50%;
+            margin-left: -56px;
             display: inline-block;
             background: rgba(255,255,255,1);
             box-shadow: 0px 5px 10px 0px rgba(0,145,216,0.6);
             content: ' ';
-            background: url('~assets/imgs/download.png') center;
+            background: url('~assets/imgs/download.png') center no-repeat #fff;
             background-size: 100px 100px;
             padding: 6px;
             width: 100px;
