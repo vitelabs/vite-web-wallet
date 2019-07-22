@@ -64,9 +64,13 @@ export default {
         inviteDialog(v) {
             this.selectInvite = 'invite';
             if (v === 'invite') {
-                inviteDialog();
+                inviteDialog().catch(() => {
+                    console.log('not close');
+                });
             } else if (v === 'receiveInvite') {
-                receiveInviteDialog();
+                receiveInviteDialog().catch(() => {
+                    console.log('not close');
+                });
             }
         },
         goOperator() {
