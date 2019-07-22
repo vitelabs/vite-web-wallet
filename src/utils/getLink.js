@@ -1,10 +1,10 @@
 import i18n from 'i18n';
 
-const explorerLinkMap = {
-    production: 'https://explorer.vite.net/',
-    test: 'http://132.232.134.168:8080/',
-    default: 'https://explorer.vite.net/'
-};
+// const explorerLinkMap = {
+//     production: 'https://explorer.vite.net/',
+//     test: 'http://132.232.134.168:8080/',
+//     default: 'https://explorer.vite.net/'
+// };
 
 const appLinkMap = { default: 'https://vite.org/{lang}/airdrop' };
 
@@ -13,8 +13,7 @@ function getEnvLink(map) {
 }
 
 export function getExplorerLink() {
-    const l1 = getEnvLink(explorerLinkMap);
-    return `${ l1 }${ i18n.locale }`;
+    return `${ process.env.viteNet }${ i18n.locale === 'en' ? '' : i18n.locale }`;
 }
 
 export function getAppLink() {

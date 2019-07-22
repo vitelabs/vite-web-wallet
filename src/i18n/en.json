@@ -157,7 +157,7 @@
         "conf": "Open password-free mode to free you from entering password during every transaction process. ",
         "title": "Password",
         "placeholder": "Please input wallet password",
-        "unlockAcc": "Please input password to unlock {name} account"
+        "unlockAcc": "请解锁 {name} 账户"
     },
     "quotaConfirm": {
         "title": "Insufficient Quota",
@@ -368,6 +368,9 @@
             "failTips": "An error occurred in gateway node, please check the network settings"
         },
         "nodeErr": "Gateway node is invalid, please check the gateway settings"
+    },
+    "viteExplorer": {
+        "title": "区块浏览器"
     },
     "wallet": {
         "title": "Quota Management",

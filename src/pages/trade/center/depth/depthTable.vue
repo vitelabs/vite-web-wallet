@@ -53,10 +53,21 @@ export default {
             return this.$store.state.exchangeCurrentOpenOrders.list;
         },
         quoteTokenDigit() {
-            return this.$store.state.exchangeTokenDecimalsLimit.quoteToken;
+            const quoteTokenDigit = this.$store.state.exchangeTokenDecimalsLimit.quoteToken;
+            if ((this.depthStep || this.depthStep === 0) && quoteTokenDigit > this.depthStep) {
+                return this.depthStep;
+            }
+            return quoteTokenDigit;
         },
         tradeTokenDigit() {
-            return this.$store.state.exchangeTokenDecimalsLimit.tradeToken;
+            const tradeTokenDigit = this.$store.state.exchangeTokenDecimalsLimit.tradeToken;
+            if ((this.depthStep || this.depthStep === 0) && tradeTokenDigit > this.depthStep) {
+                return this.depthStep;
+            }
+            return tradeTokenDigit;
+        },
+        depthStep() {
+            return this.$store.state.exchangeDepth.depthStep;
         }
     },
     methods: {

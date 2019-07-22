@@ -3,9 +3,9 @@
              :content="content" :showMask="showMask" :isLoading="isLoading"
              :leftBtnTxt="cancelTxt || $t('btn.cancel')" :rightBtnTxt="submitTxt || $t('btn.submit')"
              :leftBtnClick="exchange ? _submit : _cancle"  :rightBtnClick="exchange ? _cancle : _submit">
-
         <slot></slot>
 
+        <img class="unlock-user" src="~assets/imgs/unlock-user.svg"/>
         <form autocomplete="off" v-show="isShowPWD" class="__input __input_row" :class="{ 'distance': !!content }">
             <input ref="passInput" v-model="password" :placeholder="$t('pwdConfirm.placeholder')" type="password"/>
         </form>
@@ -186,5 +186,13 @@ export default {
 
 .__input.distance {
     margin-top: 30px;
+}
+.unlock-user {
+    width: 100px;
+    height: 100px;
+    position: relative;
+    left: 50%;
+    margin-left: -50px;
+    margin-bottom: 30px;
 }
 </style>
