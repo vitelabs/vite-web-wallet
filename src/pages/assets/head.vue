@@ -374,7 +374,17 @@ export default {
                 align-items: flex-start;
                 height: 88px;
                 .asset-switch {
+                    min-width: 123px;
+                    height: 24px;
+                    line-height: 24px;
                     margin-bottom: 10px;
+                    /deep/.list-title {
+                        &:after {
+                            position: absolute;
+                            right: 6px;
+                            margin-top: 4px;
+                        }
+                    }
                 }
                 .asset__btc {
                     margin-bottom: 10px;

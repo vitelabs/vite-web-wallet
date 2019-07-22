@@ -157,7 +157,7 @@
         "conf": "开启免密设置，您只需要登录时输入密码，交易过程无需再输入密码",
         "title": "输入钱包密码",
         "placeholder": "请输入钱包密码",
-        "unlockAcc": "请输入密码解锁 {name} 账户"
+        "unlockAcc": "请解锁 {name} 账户"
     },
     "quotaConfirm": {
         "title": "配额不足",
@@ -368,6 +368,9 @@
             "failTips":"网关节点出错，请检查网关设置"
         },
         "nodeErr": "网关节点无效，请检查网关设置"
+    },
+    "viteExplorer": {
+        "title": "区块浏览器"
     },
     "assets": {
         "title": "资产",

@@ -3,6 +3,7 @@ import VueRouter from 'vue-router';
 
 import store from 'store';
 import statistics from 'utils/statistics';
+import { getExplorerLink } from 'utils/getLink';
 import { getCurrHDAcc, StatusMap } from 'wallet';
 import routeConfig from './routes';
 
@@ -18,6 +19,11 @@ router.beforeEach((to, from, next) => {
     if (!to.name && to.path) {
         const arr = to.path.split('/');
         router.replace({ name: arr[ arr.length - 1 ] || 'tradeCenter' });
+        return;
+    }
+
+    if (to.name === 'viteExplorer') {
+        window.open(getExplorerLink());
         return;
     }
 
