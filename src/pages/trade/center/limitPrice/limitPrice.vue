@@ -87,7 +87,7 @@ export default {
             const exTakerFee = this.toPercentFee(this.$store.getters.exTakerFee);
             return `${ exTakerFee }%`;
         },
-        inviteFeeDiscount(){
+        inviteFeeDiscount() {
             const inviteFeeDiscount = this.toPercentFee(this.$store.getters.inviteFeeDiscount);
             return `${ inviteFeeDiscount }%`;
         },
