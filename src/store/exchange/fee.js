@@ -1,6 +1,7 @@
 import $ViteJS from 'utils/viteClient';
 import { timer } from 'utils/asyncFlow';
 import BigNumber from 'utils/bigNumber';
+import { getInviteeCode } from 'services/tradeOperation';
 
 const baseMakerFee = 0.002;
 const baseTakerFee = 0.002;
@@ -12,7 +13,8 @@ const state = {
     isVip: false,
     baseMakerFee,
     baseTakerFee,
-    marketInfo: {}
+    marketInfo: {},
+    invitedCode: ''
 };
 
 const mutations = {
@@ -21,10 +23,21 @@ const mutations = {
     },
     setExchangeMarketInfo(state, marketInfo) {
         state.marketInfo = Object.assign({}, marketInfo);
+    },
+    setInviteCode(state, payload) {
+        state.invitedCode = payload;
     }
 };
 
 const actions = {
+    getInvitedCode({ commit }) {
+        return new Promise((res, rej) => {
+            getInviteeCode().then(code => {
+                commit('setInviteCode', code);
+                res(code);
+            }).catch(e => rej(e));
+        });
+    },
     exFetchVip({ commit, getters }) {
         commit('setExchangeVip', false);
 
@@ -71,15 +84,21 @@ const getters = {
     operatorTakerFee(state) {
         return getOperatorFee(state.marketInfo.takerBrokerFeeRate);
     },
-    exMakerFee(state) {
+    exMakerFee(state, getters) {
         const vipFee = getVipFee(state.isVip);
         const operatorMakerFee = getOperatorFee(state.marketInfo.makerBrokerFeeRate);
-        return baseMakerFee + Number(operatorMakerFee) - vipFee;
+        return (baseMakerFee + Number(operatorMakerFee) - vipFee) * (1 - getters.inviteFeeDiscount);
     },
-    exTakerFee(state) {
+    exTakerFee(state, getters) {
         const vipFee = getVipFee(state.isVip);
         const operatorTakerFee = getOperatorFee(state.marketInfo.takerBrokerFeeRate);
-        return baseTakerFee + Number(operatorTakerFee) - vipFee;
+        return (baseTakerFee + Number(operatorTakerFee) - vipFee) * (1 - getters.inviteFeeDiscount);
+    },
+    inviteFeeDiscount(state) {
+        if (state.invitedCode) {
+            return 0.1;
+        }
+        return 0;
     }
 };
 

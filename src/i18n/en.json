@@ -682,7 +682,7 @@
             "notEnough":"交易所可用余额不足",
             "invited":"你已接受过邀请，邀请码为：",
             "formatErr":"邀请码格式错误",
-            "noResult":"未查询到结果",
+            "noResult":"未查询到结果,稍后重试",
             "successToast":"请求发送成功",
             "failToast":"请求发送失败",
             "genCode":"生成邀请码",
@@ -801,7 +801,9 @@
             "openVip": "Become a VIP",
             "dexFee": "Exchange Default Fees: {fee}",
             "operatorFee": "Operator Fees: {fee}",
-            "vipFee": "VIP Discount: {fee}"
+            "vipFee": "VIP Discount: {fee}",
+            "inviteFeeDiscount":"Referral Discount: {fee} off",
+            "feeRule":"(基础费率+运营商费率-VIP抵扣)*邀请折扣"
         },        
         "vipConfirm": {
             "cancelVip": "Cancel VIP",

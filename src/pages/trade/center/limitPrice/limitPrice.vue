@@ -17,6 +17,8 @@
                         <span>{{ $t('trade.limitPrice.dexFee', { fee: baseFee }) }}</span>
                         <span>{{ $t('trade.limitPrice.operatorFee', { fee: operatorFee }) }}</span>
                         <span>{{ $t('trade.limitPrice.vipFee', { fee: vipFee }) }}</span>
+                        <span>{{ $t('trade.limitPrice.inviteFeeDiscount', { fee: inviteFeeDiscount }) }}</span>
+                        <span>{{ $t('trade.limitPrice.feeRule') }}</span>
                     </span>
                 </span>
             </div>
@@ -85,7 +87,10 @@ export default {
             const exTakerFee = this.toPercentFee(this.$store.getters.exTakerFee);
             return `${ exTakerFee }%`;
         },
-
+        inviteFeeDiscount(){
+            const inviteFeeDiscount = this.toPercentFee(this.$store.getters.inviteFeeDiscount);
+            return `${ inviteFeeDiscount }%`;
+        },
         isVip() {
             return this.$store.state.exchangeFee.isVip;
         },

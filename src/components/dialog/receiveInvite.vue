@@ -15,7 +15,7 @@ block content
 </template>
 
 <script>
-import { getInviteeCode, bindCode } from 'services/tradeOperation';
+import {bindCode } from 'services/tradeOperation';
 import { doUntill } from 'utils/asyncFlow';
 
 export default {
@@ -32,11 +32,13 @@ export default {
         return {
             status: 'LOADING', // "ERROR" "LOADING" "LOADED"
             dTitle: this.$t('assets.invite.receiveInviteTitle'),
-            inviteeCode: null,
             code: ''
         };
     },
     computed: {
+        inviteeCode(){
+            return this.$store.state.exchangeFee.invitedCode
+        },
         address() {
             return this.$store.getters.activeAddr;
         },
@@ -53,9 +55,8 @@ export default {
         }
     },
     methods: {
-        async getInviteeCode() {
-            this.inviteeCode = await getInviteeCode(this.address);
-            return this.inviteeCode;
+        async getInviteeCode(){
+            return this.$store.dispatch('getInvitedCode')
         },
         inspector() {
             bindCode(this.code)
