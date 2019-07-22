@@ -14,10 +14,14 @@
 
         <ul class="right-lab-list">
             <div class="tab __pointer" @click="goHelp">{{ $t("help") }}</div>
-            <div v-show="!isLogin" @click="dexStart" class="tab __pointer">
+            <div v-show="!isLogin" @click="loginClick" class="tab __pointer">
                 {{ isHaveUsers ? $t("unlockAcc") : $t("login") }}
+                <div v-show="isShowUnlockBubble" class="unlock-bubble">
+                    {{ $t('hint.unreceived') }}
+                    <div class="bubble-btn" @click.stop="iKnow">{{ $t('btn.known') }}</div>
+                </div>
             </div>
-            <div v-show="!isLogin" @click="dexChange" class="tab __pointer">
+            <div v-show="!isLogin" @click="changeAcc" class="tab __pointer">
                 {{ isHaveUsers ? $t('changeAcc') : $t('register') }}</div>
             <div v-show="isHaveUsers && $route.name.indexOf('trade') !== -1" class="tab __pointer"
                  @click="goOperator">{{ $t('tradeOperator.title') }}</div>
@@ -43,26 +47,49 @@ export default {
             default: () => {}
         }
     },
+    data() {
+        return { isKnowUnrecieved: false };
+    },
     computed: {
         isLogin() {
             return this.$store.state.wallet.status === StatusMap.UNLOCK;
         },
         isHaveUsers() {
             return !!this.$store.state.wallet.currHDAcc;
+        },
+        isShowUnlockBubble() {
+            return this.isHaveUnreceived && this.$route.name === 'assets' && !this.isKnowUnrecieved;
+        },
+        balanceInfo() {
+            return this.$store.getters.balanceInfo;
+        },
+        isHaveUnreceived() {
+            if (!this.balanceInfo) {
+                return false;
+            }
+            for (const tokenId in this.balanceInfo) {
+                if (this.balanceInfo[tokenId].onroadNum && +this.balanceInfo[tokenId].onroadNum > 0) {
+                    return true;
+                }
+            }
+            return false;
         }
     },
     methods: {
+        iKnow() {
+            this.isKnowUnrecieved = true;
+        },
         goOperator() {
             this.$router.push({ name: 'tradeOperator' });
         },
         goHelp() {
             window.open('/help');
         },
-        dexStart: execWithValid(function () {},
+        loginClick: execWithValid(function () {},
             function () {
                 this.go('start');
             }),
-        dexChange() {
+        changeAcc() {
             if (!this.isHaveUsers) {
                 this.$router.push({ name: 'startCreate' });
                 return;
@@ -96,7 +123,36 @@ export default {
         display: flex;
         flex-wrap: nowrap;
         .tab {
+            position: relative;
             margin-left: 28px;
+            .unlock-bubble {
+                text-align: left;
+                white-space: normal;
+                max-width: 150px;
+                box-sizing: border-box;
+                padding: 10px 12px;
+                background: rgba(255,255,255,1);
+                box-shadow: 0px 3px 10px 0px rgba(176,192,237,0.69);
+                position: absolute;
+                top: 40px;
+                z-index: 1;
+                line-height: 16px;
+                font-size: 12px;
+                @include font-family-normal();
+                color: rgba(94,104,117,1);
+                .bubble-btn {
+                    margin-top: 10px;
+                    color: rgba(0,122,255,1);
+                }
+                &:after {
+                    top: -12px;
+                    position: absolute;
+                    content: ' ';
+                    display: inline-block;
+                    border: 6px solid transparent;
+                    border-bottom: 6px solid #fff;
+                }
+            }
         }
     }
 
@@ -110,7 +166,6 @@ export default {
         color: #bdc1d1;
         font-size: 13px;
         @include font-family-bold();
-        font-weight: 600;
         display: inline-block;
         box-sizing: border-box;
         height: 100%;
