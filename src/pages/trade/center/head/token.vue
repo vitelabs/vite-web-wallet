@@ -1,24 +1,23 @@
 <template>
     <div ref="tContainer" v-click-outside="hideToken" class="token">
+        <div class="token-img">
+            <img v-show="ftokenIcon" :src="ftokenIcon"/>
+            <div v-show="activeTxPairIsClose" class="close"></div>
+        </div>
+
         <div class="t-item __pointer">
-            <div class="t-icon" @click="showToken('ftoken')">
-                <img v-show="ftokenIcon" :src="ftokenIcon"/>
+            <span class="symbol" @click="showToken('ftoken')">
                 {{ ftokenDetail ? ftokenDetail.symbol : '' }}
-                <div v-show="activeTxPairIsClose" class="close"></div>
-            </div> /
-            <div class="t-icon" @click="showToken('ttoken')">
+            </span> /
+            <span class="symbol ttoken" @click="showToken('ttoken')">
                 {{ ttokenDetail ? ttokenDetail.symbol : '' }}
+            </span>
+            <div class="gate __pointer">
+                <img class="gate-img" v-show="ftokenIcon" :src="ftokenIcon"/>
+                gate
             </div>
         </div>
-        <div class="t-item id __pointer">
-            <div class="token-id __ellipsis" @click="showToken('ftoken')">
-                {{ ftokenDetail ? ftokenDetail.tokenId : '' }}
-            </div>
-            <span class="line">/</span>
-            <div class="token-id __ellipsis" @click="showToken('ttoken')">
-                {{ ttokenDetail ? ttokenDetail.tokenId : '' }}
-            </div>
-        </div>
+
         <div v-show="showTokenType" class="detail" :class="{'right': showTokenType === 'ttoken'}">
             <div @click="goNetToken(tokenDetail.tokenId)" class="token-row __pointer">
                 <span class="token-title">{{ $t('trade.head.tokenName') }} :</span>
@@ -176,78 +175,79 @@ export default {
     white-space: nowrap;
     max-width: 250px;
 
+    .token-img {
+        position: absolute;
+        top: 15px;
+        display: inline-block;
+        img {
+            display: inline-block;
+            width: 28px;
+            height: 28px;
+            border-radius: 28px;
+        }
+        .close {
+            position: absolute;
+            display: inline-block;
+            width: 28px;
+            height: 28px;
+            border-radius: 28px;
+            background: rgba(0,0,0,0.5);
+            z-index: 100;
+            left: 0;
+            &:after {
+                position: absolute;
+                top: 13px;
+                right: -6px;
+                content: ' ';
+                display: inline-block;
+                width: 14px;
+                height: 14px;
+                border-radius: 12px;
+                background: url('~assets/imgs/tx-pair-close.svg');
+                background-size: 100% 100%;
+            }
+        }
+    }
+
     .t-item {
-        overflow: hidden;
+        display: inline-block;
         font-size: 12px;
         @include font-family-bold();
         font-weight: 600;
         color: rgba(29, 32, 36, 1);
         line-height: 14px;
+        margin-left: 36px;
 
-        .t-icon {
+        .symbol {
             position: relative;
-            display: inline-block;
             white-space: nowrap;
             line-height: 20px;
-            img {
-                width: 28px;
-                height: 28px;
-                border-radius: 18px;
-                margin-bottom: -7px;
-            }
-            &:last-child {
-                color: #5E6875;
-            }
             &:first-child {
                 font-size: 16px;
             }
-
-            .close {
-                position: absolute;
-                display: inline-block;
-                width: 28px;
-                height: 28px;
-                border-radius: 28px;
-                background: rgba(0,0,0,0.5);
-                z-index: 100;
-                left: 0;
-                &:after {
-                    position: absolute;
-                    top: 13px;
-                    right: -6px;
-                    content: ' ';
-                    display: inline-block;
-                    width: 14px;
-                    height: 14px;
-                    border-radius: 12px;
-                    background: url('~assets/imgs/tx-pair-close.svg');
-                    background-size: 100% 100%;
-                }
+            &.ttoken {
+                color: #5E6875;
             }
         }
 
-        &.id {
-            display: flex;
+        .gate {
             @include font-family-normal();
-            font-size: 12px;
-            font-weight: 400;
             color: $blue;
-            margin-top: 3px;
-            .token-id {
-                flex: 1;
-            }
-            .line {
-                position: relative;
-                top: -3px;
-                color: #BDC1D1;
+            display: flex;
+            margin-top: 2px;
+            .gate-img {
+                width: 14px;
+                height: 14px;
+                border-radius: 14px;
+                margin-right: 4px;
             }
         }
     }
 
     .detail {
         position: absolute;
-        left: 0;
-        top: 50px;
+        left: 35px;
+        top: 35px;
         z-index: 1;
         background: rgba(255, 255, 255, 1);
         box-shadow: 0 5px 20px 0 rgba(176, 192, 237, 0.69);

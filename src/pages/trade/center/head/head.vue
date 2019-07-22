@@ -123,7 +123,7 @@ export default {
     display: flex;
     flex-wrap: wrap;
     box-sizing: border-box;
-    padding: 0px 14px 10px;
+    padding: 0px 14px 8px;
     @include font-family-bold();
     font-size: 12px;
     font-weight: 600;
@@ -136,13 +136,12 @@ export default {
         flex: 1;
         flex-wrap: wrap;
         .token-wrapper {
-            padding-top: 10px;
+            padding-top: 8px;
             min-width: 250px;
-            margin-top: -5px;
             margin-right: 20px;
         }
         .else-wrapper {
-            padding-top: 10px;
+            padding-top: 8px;
             display: flex;
             flex-direction: row;
             flex: 1;
@@ -155,7 +154,7 @@ export default {
         }
         .token-content {
             font-family: $font-H;
-            margin-top: 8px;
+            margin-top: 4px;
             font-weight: 600;
             color: #1d2024;
             &.down {
@@ -177,8 +176,7 @@ export default {
         display: inline-block;
         height: 100%;
         box-sizing: border-box;
-        padding: 10px 10px;
-        width: 25px;
+        padding: 8px 0 0 10px;
         div {
             width: 5px;
             height: 5px;
