@@ -2,18 +2,13 @@
     <div class="token-card">
         <div class="col title click-able">
             <div class="token-meta">
-                <img
-                    :src="token.icon"
-                    class="icon"
-                    @click="() => showDetail()"
-                />
-                <span
-                    class="token-name underline"
-                    @click="() => showDetail()"
-                >{{
-                    getTokenNameString(token.tokenSymbol, token.index)
-                }}</span
-                >
+                <img :src="token.icon" class="icon" @click="() => showDetail()"/>
+                <div class="name-wrapper" @click="() => showDetail()">
+                    <div class="token-symbol">
+                        {{ getTokenNameString(token.tokenSymbol, token.index) }}
+                    </div>
+                    <div class="token-name">{{ token.tokenName }}</div>
+                </div>
             </div>
             <div class="separate"></div>
         </div>
@@ -258,7 +253,7 @@ export default {
         flex-direction: column;
         align-items: flex-start;
         justify-content: space-between;
-        padding: 7px 0;
+        padding: 8px 0;
         color: #5e6875;
         font-size: 12px;
         align-self: stretch;
@@ -319,10 +314,18 @@ export default {
                 height: 16px;
                 width: 16px;
                 margin-right: 4px;
+                margin-bottom: 11px;
             }
-            .token-meta{
-                display: flex;
-                align-items: center;
+            .token-meta {
+                .name-wrapper {
+                    display: inline-block;
+                    .token-name {
+                        font-size: 11px;
+                        @include font-family-normal();
+                        color: rgba(94,104,117,0.58);
+                        line-height: 15px;
+                    }
+                }
             }
         }
     }
