@@ -1,13 +1,17 @@
 <template>
     <div class="logout">
-        <div class="text">{{ $t('trade.limitPrice.text') }}</div>
-        <div class="btn btn-login __pointer" @click="leftClick">{{ isHaveUsers ? $t('unlockAcc') : $t('login')  }}</div>
-        <div class="btn btn-register __pointer" @click="rightClick">{{ isHaveUsers ? $t('changeAcc') : $t('register') }}</div>
+        <div class="text">{{ $t("trade.limitPrice.text") }}</div>
+        <div class="btn btn-login __pointer" @click="leftClick">
+            {{ isHaveUsers ? $t("unlockAcc") : $t("login") }}
+        </div>
+        <div class="btn btn-register __pointer" @click="rightClick">
+            {{ isHaveUsers ? $t("changeAcc") : $t("register") }}
+        </div>
     </div>
 </template>
 
 <script>
-import { pwdConfirm } from 'components/password/index.js';
+import { execWithValid } from 'utils/execWithValid';
 
 export default {
     computed: {
@@ -21,7 +25,10 @@ export default {
                 this.$router.push({ name: 'start' });
                 return;
             }
-            pwdConfirm({ type: 'unlockAccount' });
+            const valid = execWithValid(function () {
+
+            });
+            valid();
         },
         rightClick() {
             if (!this.isHaveUsers) {

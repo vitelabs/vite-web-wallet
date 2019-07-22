@@ -49,21 +49,21 @@ const ethNet = {
 };
 const dexApiServer = {
     test: '"https://vitex.vite.net/test/api/"',
-    // dev: '"https://vitex.vite.net/test/api/"',
-    dev: '"http://132.232.65.121:8080/test/api/"',
+    dev: '"https://vitex.vite.net/test/api/"',
+    // dev: '"http://132.232.65.121:8080/test/api/"',
     dexTestNet: '"https://vitex.vite.net/beta/api/"'
 };
 const pushServer = {
     test: '"wss://vitex.vite.net/test/websocket"',
-    // dev: '"wss://vitex.vite.net/test/websocket"',
-    dev: '"ws://132.232.65.121:11211/test/websocket"',
+    dev: '"wss://vitex.vite.net/test/websocket"',
+    // dev: '"ws://132.232.65.121:11211/test/websocket"',
     dexTestNet: '"wss://vitex.vite.net/beta/websocket"'
 };
 const gatewayInfosServer = {
-    // production: '"//132.232.60.116:8081"',
-    test: '"132.232.60.116:8081"',
-    dev: '"132.232.60.116:8081"',
-    dexTestNet: '"gateway.vitewallet.com/test/crosschain/"'
+    production: '"crosschain.vite.net"',
+    test: '"crosschain-test.vite.net"',
+    dev: '"crosschain-test.vite.net"'
+    // dexTestNet: '"gateway.vitewallet.com"'
 };
 const Node_Env = process.env.NODE_ENV || 'dev';
 

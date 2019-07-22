@@ -30,9 +30,6 @@ export default {
         activeTxPair() {
             return this.$store.state.exchangeActiveTxPair.activeTxPair;
         },
-        currentMarket() {
-            return this.$store.state.exchangeMarket.currentMarket;
-        },
         latestOrder() {
             return this.$store.state.exchangeLatestOrder.latestOrder;
         }
@@ -128,8 +125,13 @@ export default {
     methods: {
         fetchOpenOrders() {
             this.$store.commit('exClearLatestOrder', []);
+
+            if (!this.activeTxPair) {
+                return;
+            }
+
             const address = this.defaultAddr;
-            const currentMarket = this.currentMarket;
+            const symbol = this.activeTxPair.symbol;
 
             order({
                 address,
@@ -138,7 +140,7 @@ export default {
                 status: 1,
                 ...this.activeTxPair
             }).then(data => {
-                if (this.defaultAddr !== address || currentMarket !== this.currentMarket) {
+                if (this.defaultAddr !== address || symbol !== this.activeTxPair.symbol) {
                     return;
                 }
                 this.$store.commit('exSetCurrentOpenOrders', data.order || []);

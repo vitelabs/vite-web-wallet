@@ -25,9 +25,6 @@ export default {
         },
         latestOrder() {
             return this.$store.state.exchangeLatestOrder.latestOrder;
-        },
-        currentMarket() {
-            return this.$store.state.exchangeMarket.currentMarket;
         }
     },
     watch: {
@@ -53,14 +50,17 @@ export default {
 
             this.historyOrderList = this.historyOrderList.sort((a, b) => b.createTime - a.createTime);
             this.historyOrderList = this.historyOrderList.slice(0, pageSize);
-            this.historyOrderList = [].concat(this.historyOrderList);
         }
     },
     methods: {
         fetchHistory() {
+            if (!this.activeTxPair) {
+                return;
+            }
+
             this.historyOrderList = [];
             const address = this.defaultAddr;
-            const currentMarket = this.currentMarket;
+            const symbol = this.activeTxPair.symbol;
 
             order({
                 address,
@@ -68,7 +68,7 @@ export default {
                 limit: pageSize,
                 ...this.activeTxPair
             }).then(data => {
-                if (this.defaultAddr !== address || currentMarket !== this.currentMarket) {
+                if (this.defaultAddr !== address || symbol !== this.activeTxPair.symbol) {
                     return;
                 }
                 this.historyOrderList = data.order || [];

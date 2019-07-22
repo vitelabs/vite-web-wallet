@@ -1,6 +1,6 @@
 <template>
     <div class="account-head-wrapper">
-        <div class="head__item">
+        <div class="head__item" v-if="!account.isBifrost">
             <img class="icon" src="~assets/imgs/head_acc.png" />
             <div class="head-right">
                 <div class="head-title">
@@ -381,6 +381,7 @@ export default {
                     font-size: 18px;
                     line-height: 26px;
                     font-family: $font-bold;
+                    white-space: nowrap;
                 }
                 .asset__cash {
                     color: #5e687594;

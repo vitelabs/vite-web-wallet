@@ -17,24 +17,28 @@ const mutations = {
     }
 };
 
-const updateExBalance = (commit, address) =>
-    $ViteJS.request('dexfund_getAccountFundInfo', address).then(data => {
-        commit('setExchangeBalance', data);
-    });
-
 const actions = {
-    startLoopExchangeBalance({ commit, dispatch, getters }) {
+    startLoopExchangeBalance({ commit, dispatch, rootGetters }) {
         // 1. Stop last loop
         dispatch('stopLoopExchangeBalance');
 
         // 2. Restart
         balanceTimer = new timer(() => {
-            const _address = getters.activeAddr;
-            if (address !== _address) {
+            if (address && rootGetters.activeAddr !== address) {
                 commit('clearDexBalance');
-                address = _address;
             }
-            updateExBalance(commit, _address);
+            address = rootGetters.activeAddr;
+
+            $ViteJS.request('dexfund_getAccountFundInfo', address).then(data => {
+                // If address changed, return
+                if (rootGetters.activeAddr !== address) {
+                    return;
+                }
+                commit('setExchangeBalance', data);
+            }).catch(e => {
+                const code = e && e.error && e.error.code;
+                code === -32002 && commit('clearDexBalance');
+            });
         }, loopTime);
         balanceTimer.start();
     },

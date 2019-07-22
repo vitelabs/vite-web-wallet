@@ -105,7 +105,7 @@ import bigNumber from 'utils/bigNumber';
 import { gateStorage } from 'services/gate';
 import transaction from '../transaction';
 import { execWithValid } from 'utils/execWithValid';
-import Alert from '../alert';
+import Alert from '../alert.vue';
 import { getTokenNameString } from 'utils/tokenParser';
 
 export default {
@@ -264,6 +264,7 @@ export default {
         align-self: stretch;
         position: relative;
         @include colWidth;
+        overflow: auto;
         .unbind {
             height: 16px;
             width: 16px;
@@ -317,7 +318,6 @@ export default {
             .icon {
                 height: 16px;
                 width: 16px;
-                margin-bottom: -4px;
                 margin-right: 4px;
             }
             .token-meta{

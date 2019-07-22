@@ -72,7 +72,7 @@ class WsProtoClient {
                 }
 
                 const realData = getRealData(data);
-                // console.log('Onmessage', data, realData);
+                console.log('Onmessage', data, realData);
 
                 const error = data.error_code || undefined;
                 this._subKeys[data.event_key] && this._subKeys[data.event_key].forEach(c => {
@@ -122,7 +122,7 @@ class WsProtoClient {
     }
 
     sub(event, callback) {
-        // console.log('[SUB]', event);
+        console.log('[SUB]', event);
         this._subKeys[event] = this._subKeys[event] || new Set();
         this._subKeys[event].add(callback);
         this.send(event, this.MESSAGETYPE.SUB);
@@ -153,7 +153,7 @@ class WsProtoClient {
         if (!this.ready || this.closed) return;
 
         if (type === this.MESSAGETYPE.PING) {
-            // console.log('ping', this._clientId, new Date());
+            console.log('ping', this._clientId, new Date());
         }
 
         const payload = {
@@ -202,7 +202,7 @@ function getRealData(data) {
         key = 'KlineProto';
     } else if (/^market.(\w|\-)+.depth$/.test(event_key)) {
         key = 'DepthListProto';
-    } else if (/^market.quoteToken.(\w|\-)+.tickers$/.test(event_key)) {
+    } else if (/^market.(quoteToken|quoteTokenCategory).(\w|\-)+.tickers$/.test(event_key)) {
         key = 'TickerStatisticsProto';
     } else if (/^market.(\w|\-)+.tickers$/.test(event_key)) {
         key = 'TickerStatisticsProto';

@@ -28,7 +28,7 @@
 <script>
 // [TODO] Need components/confirm and components/table
 import { chargeDetail } from 'services/trade';
-import d from 'dayjs';
+import date from 'utils/date';
 
 export default {
     props: {
@@ -40,7 +40,10 @@ export default {
         }
     },
     data() {
-        return { detailData: [], isShow: false };
+        return {
+            detailData: [],
+            isShow: false
+        };
     },
     computed: {
         address() {
@@ -51,7 +54,7 @@ export default {
                 const o = this.detailData[k];
 
                 return [
-                    d.unix(o.time).format('YYYY-MM-DD HH:mm'),
+                    date(o.time * 1000, this.$i18n.locale),
                     o.tokenSymbol,
                     this.$t('tradeAssets.table.rowMap.sideMap')[o.type],
                     o.amount
@@ -94,7 +97,7 @@ export default {
 @include rowWith {
     width: 15%;
     &:first-child {
-        min-width: 110px;
+        min-width: 150px;
     }
 }
 

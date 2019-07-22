@@ -9,7 +9,9 @@
                       :class="{ 'active': !isVip }">
                     {{ isVip ? $t('trade.limitPrice.cancelVip') : $t('trade.limitPrice.openVip') }}
                 </span>
-                <span class="fee">{{ $t('trade.limitPrice.fee') }} Taker({{ exTakerFee }}) / Maker({{ exMakerFee }})</span>
+                <span>{{ $t('trade.limitPrice.fee') }}
+                    <span class="fee">Taker({{ exTakerFee }}) / Maker({{ exMakerFee }})</span>
+                </span>
                 <span class="help __pointer" @mouseenter="showHelp" @mouseleave="hideHelp">
                     <span v-show="isShowHelp" class="help-tip">
                         <span>{{ $t('trade.limitPrice.dexFee', { fee: baseFee }) }}</span>
@@ -140,6 +142,9 @@ export default {
                 margin-right: 0;
             }
         }
+        .fee {
+            font-family: $font-H;
+        }
     }
 
     .help {
@@ -161,6 +166,7 @@ export default {
         transform: translateY(-100%);
         box-shadow: 0 2px 10px 1px rgba(176, 192, 237, 0.42);
         border-radius: 2px;
+        font-family: $font-H;
         &:after {
             right: 15px;
             position: absolute;
