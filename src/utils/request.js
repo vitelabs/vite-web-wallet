@@ -73,8 +73,7 @@ export default function request({
 }
 
 export const getClient = function (baseUrl = '', afterResponse, headersBase = {}) {
-    return function ({ method = 'GET', path, params = {}, timeout = reqTimeout, host, headers = {} }) {
-        host = host || baseUrl;
+    return function ({ method = 'GET', path, params = {}, timeout = reqTimeout, host = baseUrl, headers = {} }) {
         host.slice(-1) === '/' && (host = host.slice(0, -1));
         path.indexOf('/') === 0 && (path = path.splice(1));
         path = `${ host }/${ path }`;

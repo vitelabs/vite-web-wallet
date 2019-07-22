@@ -409,17 +409,20 @@ export class VBAccount {
         const sendPowTx = async ({
             methodName,
             params = [],
-            vbExtends
+            vbExtends,
+            abi,
+            description
         }) => {
             if (params[0]) {
                 params[0].prevHash = 'hack for bifrost';
                 params[0].height = 34;
             }
             const block = await this.activeAccount.getBlock[methodName](params[0], 'sync');
-
             return vb.sendVbTx({
                 block,
-                extend: vbExtends
+                extend: vbExtends,
+                abi,
+                description
             });
         };
         this.status = StatusMap.UNLOCK;
