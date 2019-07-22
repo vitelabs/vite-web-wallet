@@ -15,7 +15,7 @@ block content
 </template>
 
 <script>
-import {bindCode } from 'services/tradeOperation';
+import { bindCode } from 'services/tradeOperation';
 import { doUntill } from 'utils/asyncFlow';
 
 export default {
@@ -36,8 +36,8 @@ export default {
         };
     },
     computed: {
-        inviteeCode(){
-            return this.$store.state.exchangeFee.invitedCode
+        inviteeCode() {
+            return this.$store.state.exchangeFee.invitedCode;
         },
         address() {
             return this.$store.getters.activeAddr;
@@ -55,8 +55,8 @@ export default {
         }
     },
     methods: {
-        async getInviteeCode(){
-            return this.$store.dispatch('getInvitedCode')
+        async getInviteeCode() {
+            return this.$store.dispatch('getInvitedCode');
         },
         inspector() {
             bindCode(this.code)
