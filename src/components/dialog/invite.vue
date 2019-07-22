@@ -19,7 +19,7 @@ block content
                     .content {{inviteInfo&&inviteInfo.miningTotal||0}}
     div(v-else)
         .block__title {{ $t('assets.invite.cost') }}
-            .right {{$t('assets.invite.avaliable')}} {{ !(this.avaliableExAmount && Number(this.avaliableExAmount) >= 1000)?$t('assets.invite.notEnough'):`${avaliableExAmount||0}VITE`}} 
+            .right {{$t('assets.invite.avaliable')}} {{ !(this.avaliableExAmount && Number(this.avaliableExAmount) >= 1000)?$t('assets.invite.notEnough'):`${avaliableExAmount||0}VITE`}}
         .block__content.edit.space 1000 VITE
     .block__title {{$t('assets.invite.inviteRule')}}
     .illustrate(v-for="(i,j) in $t('assets.invite.ruleItems')" :key="j") {{i}}
