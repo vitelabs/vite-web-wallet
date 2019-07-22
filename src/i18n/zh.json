@@ -390,6 +390,7 @@
             "inviteTitle":"邀请好友",
             "receiveInviteTitle":"接受邀请",
             "myCode":"我的邀请码为：",
+            "notEnough":"交易所可用余额不足",
             "codeLable":"邀请码",
             "invited":"你已接受过邀请，邀请码为：",
             "genCode":"生成邀请码",
