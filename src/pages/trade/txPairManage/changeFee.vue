@@ -8,9 +8,7 @@
             <div class="__row_t">{{ $t('tradeTxPairManage.currentMaker') }}</div>
             <div class="__input_row __unuse_input __bold">
                 {{ txPair.symbol }}
-                <span class="__right">
-                    {{ txPair.txPairDetail.makerFeeRate ? `${(txPair.txPairDetail.makerFeeRate * 100).toFixed(3)}%` : '0%' }}
-                </span>
+                <span class="__right">{{ `${currMakerFee}%` }}</span>
             </div>
         </div>
 
@@ -21,7 +19,7 @@
             </div>
 
             <slider class="change-fee-slider" :min="minFee" :max="maxFee"
-                    :default="txPair.txPairDetail.makerFeeRate"
+                    :default="+currMakerFee"
                     v-on:drag="makerChanged">
                 <div class="speed">
                     <span class="__left">{{ minFee }}</span>
@@ -34,9 +32,7 @@
             <div class="__row_t">{{ $t('tradeTxPairManage.currentTaker') }}</div>
             <div class="__input_row __unuse_input __bold">
                 {{ txPair.symbol }}
-                <span class="__right">
-                    {{ txPair.txPairDetail.takerFeeRate ? `${(txPair.txPairDetail.takerFeeRate * 100).toFixed(3)}%` : '0%' }}
-                </span>
+                <span class="__right">{{ `${currTakerFee}%` }}</span>
             </div>
         </div>
 
@@ -47,7 +43,7 @@
             </div>
 
             <slider class="change-fee-slider" :min="minFee" :max="maxFee"
-                    :default="txPair.txPairDetail.takerFeeRate"
+                    :default="+currTakerFee"
                     v-on:drag="takerChanged">
                 <div class="speed">
                     <span class="__left">{{ minFee }}</span>
@@ -83,6 +79,10 @@ export default {
             default: () => {}
         }
     },
+    mounted() {
+        this.maker = this.currMakerFee;
+        this.taker = this.currTakerFee;
+    },
     data() {
         return {
             maker: '',
@@ -94,6 +94,12 @@ export default {
     computed: {
         viteTokenInfo() {
             return this.$store.getters.viteTokenInfo;
+        },
+        currMakerFee() {
+            return this.txPair.txPairDetail.makerFeeRate ? (this.txPair.txPairDetail.makerFeeRate * 100).toFixed(3) : 0;
+        },
+        currTakerFee() {
+            return this.txPair.txPairDetail.takerFeeRate ? (this.txPair.txPairDetail.takerFeeRate * 100).toFixed(3) : 0;
         }
     },
     methods: {
@@ -108,7 +114,7 @@ export default {
             let text = '';
             let operationCode = 0;
 
-            if (this.maker && +this.maker !== +this.txPair.txPairDetail.makerFeeRate) {
+            if (this.maker && +this.maker !== +this.currMakerFee) {
                 text += this.$t('tradeTxPairManage.changeFeeHint', {
                     symbol: this.txPair.symbol,
                     type: 'Maker',
@@ -116,7 +122,7 @@ export default {
                 });
                 operationCode += 4;
             }
-            if (this.taker && +this.taker !== +this.txPair.txPairDetail.takerFeeRate) {
+            if (this.taker && +this.taker !== +this.currTakerFee) {
                 text = text ? `${ text }; ` : text;
                 text += this.$t('tradeTxPairManage.changeFeeHint', {
                     symbol: this.txPair.symbol,

@@ -22,6 +22,12 @@ router.beforeEach((to, from, next) => {
         return;
     }
 
+    // Go to explorer.
+    if (to.name === 'viteExplorer') {
+        window.open(getExplorerLink());
+        return;
+    }
+
     // CreateAccount only use in development.
     if (to.name === 'create') {
         if (process.env.NODE_ENV === 'test' || process.env.NODE_ENV === 'dev') {
@@ -32,22 +38,10 @@ router.beforeEach((to, from, next) => {
         return;
     }
 
-    // Go to explorer.
-    if (to.name === 'viteExplorer') {
-        window.open(getExplorerLink());
-        return;
-    }
-
     const currHDAcc = getCurrHDAcc();
 
     // Init
     if (!from.name) {
-        // To start***, but not startLogin
-        if (to.name && to.name.indexOf('start') !== -1 && to.name !== 'startLogin') {
-            router.replace({ name: 'startLogin' });
-            return;
-        }
-
         // Don't have currHDAcc and want to go start*** or trade***
         if (!currHDAcc && to.name && [ 'startLogin', 'tradeCenter' ].indexOf(to.name) === -1) {
             router.replace({ name: 'startLogin' });
@@ -55,11 +49,11 @@ router.beforeEach((to, from, next) => {
         }
     }
 
+    // If want to go tradeTxPairManage, but not from tradeOperator or don't have from, use tradeOperator instead it.
     if ((!from.name || from.name !== 'tradeOperator') && to.name === 'tradeTxPairManage') {
         router.replace({ name: 'tradeOperator' });
         return;
     }
-
 
     // If want to go startLogin, and from isn't start***, record from.
     if (to.name && to.name === 'startLogin' && from.name && from.name.indexOf('start') === -1) {
