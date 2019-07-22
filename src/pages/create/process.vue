@@ -36,6 +36,7 @@ export default {
     position: relative;
     display: inline-block;
     margin-top: 60px;
+    margin-left: 58px;
 }
 
 .process-line {
@@ -54,7 +55,7 @@ export default {
     }
 
     .finish {
-        background: url('../assets/imgs/complete.svg');
+        background: url('~assets/imgs/complete.svg');
     }
 
     .active {

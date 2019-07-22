@@ -4,19 +4,11 @@
 
         <create ref="createDom" :submit="createAccount"></create>
 
-        <div @click="toogleAgree" class="agreement agree-list __pointer" :class="{
-            'active': isAgree
-        }">{{ $t('create.agreementPre') }}
-            <span @click.stop="openLink" class="link">{{ $t('create.agreement') }}</span>
-        </div>
-
         <div class="__btn_list">
             <span class="__btn __btn_border __pointer" @click="back" >
                 {{ $t('btn.back') }}
             </span>
-            <div class="__btn __btn_all_in __pointer" :class="{
-                'unuse': !isAgree
-            }" @click="valid">
+            <div class="__btn __btn_all_in __pointer" @click="valid">
                 {{ $t('btn.next')}}
             </div>
         </div>
@@ -44,15 +36,11 @@ export default {
             name: '',
             pass1: '',
             pass2: '',
-            inputItem: '',
-            isAgree: false
+            inputItem: ''
         };
     },
     methods: {
         valid() {
-            if (!this.isAgree) {
-                return;
-            }
             this.$refs.createDom && this.$refs.createDom.valid();
         },
         back() {
@@ -60,12 +48,6 @@ export default {
         },
         createAccount(name, pass) {
             this.toNext && this.toNext(name, pass);
-        },
-        toogleAgree() {
-            this.isAgree = !this.isAgree;
-        },
-        openLink() {
-            window.open('/privacy.html');
         }
     }
 };
@@ -73,7 +55,6 @@ export default {
 
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
-@import "./agree.scss";
 
 .__btn.__btn_all_in.unuse {
     background: rgba(191,191,191,1);

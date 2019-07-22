@@ -17,23 +17,9 @@
             </span>
         </div>
 
-        <div class="agree-list">
-            <div @click="toogleAgree('1')" class="agreement __pointer" :class="{
-                'active': !!agreeList['1']
-            }">{{ $t('startRecord.agreeList.0') }}</div>
-            <div @click="toogleAgree('2')" class="agreement __pointer" :class="{
-                'active': !!agreeList['2']
-            }">{{ $t('startRecord.agreeList.1') }}</div>
-            <div @click="toogleAgree('3')" class="agreement __pointer" :class="{
-                'active': !!agreeList['3']
-            }">{{ $t('startRecord.agreeList.2') }}</div>
-        </div>
-
         <div class="__btn_list">
             <span class="__btn __btn_border __pointer" @click="goBack">{{ $t('btn.back') }}</span>
-            <span class="__btn __btn_all_in __pointer" :class="{
-                'unuse': !isAgree
-            }" @click="login">
+            <span class="__btn __btn_all_in __pointer" @click="login">
                 <span v-show="!isLoading">{{ $t('btn.submit') }}</span>
                 <loading v-show="isLoading" loadingType="dot"></loading>
             </span>
@@ -44,9 +30,9 @@
 <script>
 import { hdAddr } from '@vite/vitejs';
 import { saveHDAccount } from 'wallet';
-import process from 'components/process';
 import copy from 'components/copy';
 import loading from 'components/loading.vue';
+import process from './process';
 
 export default {
     components: { process, copy, loading },
@@ -73,28 +59,15 @@ export default {
         return {
             hdAddrObj,
             len: 12,
-            agreeList: {},
             isLoading: false
         };
     },
     computed: {
         mnemonicList() {
             return this.hdAddrObj.mnemonic.split(/\s/);
-        },
-        isAgree() {
-            for (let i = 1; i < 4; i++) {
-                if (!this.agreeList[i]) {
-                    return false;
-                }
-            }
-            return true;
         }
     },
     methods: {
-        toogleAgree(key) {
-            this.agreeList[key] = !this.agreeList[key];
-            this.agreeList = Object.assign({}, this.agreeList);
-        },
         copy() {
             this.$refs.copyDome.copy(this.hdAddrObj.mnemonic);
         },
@@ -105,7 +78,7 @@ export default {
         },
 
         login() {
-            if (this.isLoading || !this.isAgree) {
+            if (this.isLoading) {
                 return;
             }
 
@@ -137,7 +110,6 @@ export default {
 
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
-@import "./agree.scss";
 
 .__btn.__btn_all_in.unuse {
     background: rgba(191,191,191,1);
