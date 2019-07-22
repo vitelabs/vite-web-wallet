@@ -1,7 +1,7 @@
 <template>
     <div class="token-card-wrapper">
         <div class="symbol">{{ token.tokenSymbol || ''}}</div>
-        <div class="amount">{{ token.income ? formatNum(token.income) : ''}}</div>
+        <div class="amount">{{ btcIncome }} <span class="currency">{{ currencyIncome }}</span></div>
         <div class="btn-list">
             <span v-if="token.status === 1" class="unuse">{{ $t('tradeOperator.permission') }}</span>
             <span v-if="token.status !== 1" class="__pointer"
@@ -68,9 +68,54 @@ export default {
     computed: {
         btnUnuse() {
             return !this.address || !this.isValidAddress;
+        },
+        rateMap() {
+            return this.$store.state.exchangeRate.rateMap || {};
+        },
+        currency() {
+            return this.$store.state.env.currency;
+        },
+        currencyIncome() {
+            let amount = 0;
+            const pre = this.currency === 'cny' ? '≈¥' : '≈$';
+
+            for (const tokenId in this.token.income) {
+                const rate = this.getCurrencyRate(tokenId);
+                if (!rate) {
+                    return `${ pre } --`;
+                }
+                const income = BigNumber.multi(rate, this.token.income[tokenId]);
+                amount = BigNumber.plus(amount, income, 2);
+            }
+            return `${ pre } ${ amount }`;
+        },
+        btcIncome() {
+            let amount = 0;
+            for (const tokenId in this.token.income) {
+                const rate = this.getBtcRate(tokenId);
+                if (!rate) {
+                    return '-- BTC';
+                }
+                const income = BigNumber.multi(rate, this.token.income[tokenId]);
+                amount = BigNumber.plus(amount, income, 8);
+            }
+            return `${ amount } BTC`;
         }
     },
     methods: {
+        getCurrencyRate(tokenId) {
+            if (!tokenId || !this.rateMap[tokenId]) {
+                return null;
+            }
+
+            return this.rateMap[tokenId][`${ this.currency }Rate`] || null;
+        },
+        getBtcRate(tokenId) {
+            if (!tokenId || !this.rateMap[tokenId]) {
+                return null;
+            }
+            return this.rateMap[tokenId].btcRate || null;
+        },
         formatNum(num) {
             return BigNumber.onlyFormat(num);
         },
@@ -150,6 +195,10 @@ export default {
         color: rgba(29,32,36,1);
         line-height: 22px;
         margin: 8px 0 30px;
+        .currency {
+            font-size: 14px;
+            color: rgba(94,104,117,0.58);
+        }
     }
     .btn-list {
         font-size: 12px;
