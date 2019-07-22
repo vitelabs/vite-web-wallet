@@ -109,14 +109,14 @@ export default {
         },
         loginClick: execWithValid(function () {},
             function () {
-                this.go('start');
+                this.go('startLogin');
             }),
         changeAcc() {
             if (!this.isHaveUsers) {
                 this.$router.push({ name: 'startCreate' });
                 return;
             }
-            this.go('start');
+            this.go('startLogin');
         }
     }
 };

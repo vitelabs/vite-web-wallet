@@ -194,8 +194,9 @@ export default {
                     color: rgba(94, 104, 117, 0.58);;
                     font-size: 12px;
                     @include font-family-normal();
+                    border: none;
                     /deep/.list-title {
-                        border: none;
+                        padding: 0 10px;
                     }
                     /deep/.list {
                         overflow: visible;
