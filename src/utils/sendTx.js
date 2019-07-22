@@ -21,7 +21,7 @@ const defaultConfig = {
     }
 };
 
-const sendTx = execWithValid(function ({ config = defaultConfig, methodName, data, vbExtends }) {
+const sendTx = execWithValid(function ({ config = defaultConfig, methodName, data, vbExtends = {}, abi = {}, description = {} }) {
     config = formatConfig(config);
 
     const event = new EventEmitter();
@@ -38,6 +38,8 @@ const sendTx = execWithValid(function ({ config = defaultConfig, methodName, dat
             methodName,
             params: [data],
             vbExtends,
+            abi,
+            description,
             beforePow: (accountBlock, checkPowResult, next) => {
                 // console.log('[beforePow]');
 

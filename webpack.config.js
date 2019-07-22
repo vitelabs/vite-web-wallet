@@ -87,7 +87,7 @@ let webpackConfig = {
                     limit: 10 * 1024
                 }
             }, {
-                test: /\.js$/,
+                test: /\.(j|t)s$/,
                 // exclude: /node_modules(?!(\/base-x)|(\/resize-detector)|(\/vue-echarts))|(\/@vite\/vitejs)/,
                 exclude: /node_modules(?!(\/base-x)|(\/resize-detector)|(\/vue-echarts))/,
                 use: {
@@ -133,7 +133,7 @@ let webpackConfig = {
             store: path.join(SRC_PATH, '/store'),
             version: path.join(SRC_PATH, '../version.json')
         },
-        extensions: [ '.js', '.scss', '.vue', '.json' ]
+        extensions: [ '.js', '.ts', '.scss', '.vue', '.json' ]
     }
 };
 

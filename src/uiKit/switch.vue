@@ -82,17 +82,17 @@ export default {
     @include font-family-bold();
     font-size: 14px;
     position: relative;
+    border: 1px solid rgba(212, 222, 231, 1);
+    user-select: none;
     .list-title {
         position: relative;
         box-sizing: border-box;
         border-radius: 2px;
         padding: 0 8px;
         display: flex;
-        border-radius: 2px;
-        border: 1px solid rgba(212, 222, 231, 1);
+        align-items: center;
         &:after {
             content: "";
-            display: inline-block;
             width: 16px;
             height: 16px;
             background: url("~assets/imgs/uiKit/select/down.svg");
