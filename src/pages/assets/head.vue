@@ -382,7 +382,6 @@ export default {
                         &:after {
                             position: absolute;
                             right: 6px;
-                            margin-top: 4px;
                         }
                     }
                 }

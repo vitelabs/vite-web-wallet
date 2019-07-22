@@ -1,8 +1,5 @@
 <template>
-    <Vswitch
-        :optList="optList"
-        v-model="innerValue"
-    />
+    <Vswitch :optList="optList" v-model="innerValue"/>
 </template>
 <script>
 import Vswitch from 'uiKit/switch';
