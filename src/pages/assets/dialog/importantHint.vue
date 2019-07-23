@@ -5,9 +5,10 @@
              :leftBtnTxt="$t('btn.next')" :leftBtnClick="next">
 
         <div class="notice-content">
-            {{ $t('assets.notice.contentBefore', { gate: gateInfo.gateway }) }}
-            <span @click="goLink" class="link __pointer">{{ $t('assets.notice.agreeList') }}</span>
-            {{ $t('assets.notice.contentAfter', { gate: gateInfo.gateway }) }}
+            {{ $t('assets.notice.contentProvider', { gate: gateInfo.gateway }) }}
+            <span v-show="gateInfo.gateway !== 'Vite Labs'">{{ $t('assets.notice.contentOther', { gate: gateInfo.gateway }) }}</span>
+            {{ $t('assets.notice.contentAgree', { gate: gateInfo.gateway }) }}<span @click="goLink" class="link __pointer">{{ $t('assets.notice.agreement') }}</span>.
+            {{ $t('assets.notice.contentUngree', { gate: gateInfo.gateway }) }}
         </div>
 
         <div class="__hint"><span>{{ $t('assets.notice.hint', { gate: gateInfo.gateway }) }}</span></div>
