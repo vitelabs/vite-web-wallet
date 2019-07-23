@@ -4,6 +4,8 @@
                    :isShowHelp="false" :isShowBack="true"></sec-title>
 
         <wallet-table class="tx-pair-manage-table" :headList="headList" :contentList="showList">
+            <span v-for="(v, i) in showList" :key="i"
+                  :class="`status-icon status_${v.status}`" :slot="`${i}statusTxtBefore`"> </span>
 
             <span v-for="(v, i) in showList" :key="i" :slot="`${i}operateBefore`">
                 <span v-show="v.status === 3" @click="openTxPair(v)"
@@ -310,6 +312,29 @@ export default {
     height: 100%;
     .tx-pair-manage-table {
         flex: 1;
+        .status-icon {
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            margin-right: 2px;
+            margin-bottom: -3px;
+            &.status_0 {
+                background: url('~assets/imgs/trans-change-owner.svg');
+                background-size: 100% 100%;
+            }
+            &.status_1 {
+                background: url('~assets/imgs/transfer.svg');
+                background-size: 100% 100%;
+            }
+            &.status_2 {
+                background: url('~assets/imgs/stop-trans.svg');
+                background-size: 100% 100%;
+            }
+            &.status_3 {
+                background: url('~assets/imgs/trans-closed.svg');
+                background-size: 100% 100%;
+            }
+        }
     }
     .click-able {
         margin-right: 20px;
