@@ -83,12 +83,12 @@ export default {
             for (const tokenId in this.token.income) {
                 const rate = this.getCurrencyRate(tokenId);
                 if (!rate) {
-                    return `${ pre } --`;
+                    return `${ pre }--`;
                 }
                 const income = BigNumber.multi(rate, this.token.income[tokenId]);
                 amount = BigNumber.plus(amount, income, 2);
             }
-            return `${ pre } ${ amount }`;
+            return `${ pre }${ amount }`;
         },
         btcIncome() {
             let amount = 0;

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="14px" height="14px" viewBox="0 0 14 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 55.2 (78181) - https://sketchapp.com -->
+    <title>暂停</title>
+    <desc>Created with Sketch.</desc>
+    <g id="页面1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="首页-copy-13备份-36" transform="translate(-897.000000, -183.000000)">
+            <g id="列表1备份-2" transform="translate(80.000000, 174.000000)">
+                <g id="已取消备份-2" transform="translate(817.000000, 9.000000)">
+                    <path d="M14,7 C14,10.866 10.866,14 7,14 C3.134,14 0,10.866 0,7 C0,3.134 3.134,0 7,0 C10.866,0 14,3.134 14,7" id="Fill-1" fill="#FFC800"></path>
+                    <path d="M9.49456711,4.6 L9.49456711,9.4 C9.49456711,9.73137085 9.22593796,10 8.89456711,10 C8.56319626,10 8.29456711,9.73137085 8.29456711,9.4 L8.29456711,4.6 C8.29456711,4.26862915 8.56319626,4 8.89456711,4 C9.22593796,4 9.49456711,4.26862915 9.49456711,4.6 Z M5.71,4.6 L5.71,9.4 C5.71,9.73137085 5.44137085,10 5.11,10 C4.77862915,10 4.51,9.73137085 4.51,9.4 L4.51,4.6 C4.51,4.26862915 4.77862915,4 5.11,4 C5.44137085,4 5.71,4.26862915 5.71,4.6 Z" id="形状结合" fill="#FFFFFF" fill-rule="nonzero"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
