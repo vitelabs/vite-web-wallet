@@ -20,9 +20,6 @@
                 <div class="op" @click="send">
                     {{ $t("tokenCard.actionType.SEND") }}
                 </div>
-                <div class="op" @click="exCharge">
-                    {{ $t("tokenCard.actionType.EXCHARGE") }}
-                </div>
             </div>
         </div>
         <div class="col">
@@ -56,6 +53,9 @@
                 {{ `${avaliableExBalance || 0} ${token.tokenSymbol}` }}
             </div>
             <div class="op_group">
+                <div class="op" @click="exCharge">
+                    {{ $t("tokenCard.actionType.EXCHARGE") }}
+                </div>
                 <div class="op" @click="exWithdraw">
                     {{ $t("tokenCard.actionType.EXWITHDRAW") }}
                 </div>
