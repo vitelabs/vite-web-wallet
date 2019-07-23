@@ -1,4 +1,5 @@
 import BigNumber from 'utils/bigNumber';
+import $ViteJS from 'utils/viteClient';
 
 const pageCount = 50;
 let lastFetchTime = null;
@@ -16,12 +17,6 @@ const mutations = {
     commitTransList(state, payload) {
         state.totalNum = payload.totalNum || 0;
         state.transList = payload.list || [];
-
-        for(let i=0; i<state.transList.length; i++) {
-            let item = state.transList[i];
-            let tokenId = item.tokenId;
-            viteWallet.Ledger.setTokenInfo(item.tokenInfo || null, tokenId);
-        }
     },
     commitClearTransList(state) {
         state.transList = [];
@@ -31,23 +26,25 @@ const mutations = {
 };
 
 const actions = {
-    fetchTransList({ commit, state }, { address, pageIndex }) {
-        let fetchTime = new Date().getTime();
+    fetchTransList({ commit, state, dispatch }, { address, pageIndex }) {
+        const fetchTime = new Date().getTime();
         lastFetchTime = fetchTime;
         commit('commitSetCurrent', pageIndex);
 
-        return viteWallet.Ledger.getBlocks({
+        return $ViteJS.getTxList({
             addr: address,
             index: pageIndex,
             pageCount
-        }).then((data)=>{
-            if (pageIndex !== state.currentPage || 
-                fetchTime !== lastFetchTime ||
-                !data) {
+        }).then(data => {
+            if (pageIndex !== state.currentPage
+                || fetchTime !== lastFetchTime
+                || !data) {
                 return null;
             }
 
             commit('commitTransList', data);
+            data.list && dispatch('setTokenInfoList', data.list);
+
             return data;
         });
     }
@@ -55,29 +52,33 @@ const actions = {
 
 const getters = {
     totalPage(state) {
-        return BigNumber.dividedToNumber(state.totalNum, pageCount);
+        return BigNumber.dividedCeil(state.totalNum, pageCount);
     },
     transList(state) {
-        let list = state.transList || [];
-        let nowList = [];
+        const list = state.transList || [];
+        const nowList = [];
 
-        list.forEach((item) => {
-            let confirms = item.confirmedTimes || 0;    // ( confirms )
+        list.forEach(item => {
+            // ( confirms )
+            const confirms = item.confirmedTimes || 0;
 
-            let status = 0; // unconfirmed
+            // Unconfirmed
+            let status = 0;
+            // Confirms
             if (confirms && confirms > 0 && confirms <= 50) {
-                status = 1; // confirms
+                status = 1;
+            // Confirmed
             } else if (confirms && confirms > 50) {
-                status = 2; // confirmed
+                status = 2;
             }
 
-            let isSend = [1, 2, 3].indexOf(+item.blockType) > -1;
-            let timestamp = item.timestamp * 1000;
-            let transAddr = isSend ? item.toAddress : item.fromAddress;
+            const isSend = [ 1, 2, 3 ].indexOf(+item.blockType) > -1;
+            const timestamp = item.timestamp * 1000;
+            const transAddr = isSend ? item.toAddress : item.fromAddress;
 
-            let amount = item.tokenInfo && item.tokenInfo.decimals ?
-                BigNumber.toBasic(item.amount, item.tokenInfo.decimals) :
-                item.amount;
+            const amount = item.tokenInfo && item.tokenInfo.decimals
+                ? BigNumber.toBasic(item.amount, item.tokenInfo.decimals)
+                : item.amount;
 
             nowList.push({
                 isSend,
@@ -90,6 +91,7 @@ const getters = {
                 rawData: item
             });
         });
+
         return nowList;
     }
 };

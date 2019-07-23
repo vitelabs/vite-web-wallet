@@ -1,0 +1,124 @@
+@import "~assets/scss/vars.scss";
+
+.__input_row {
+    border-radius: 2px;
+    border: 1px solid rgba(212,222,231,1);
+    box-sizing: border-box;
+    padding: 0 15px;
+    height: 34px;
+    line-height: 34px;
+    font-size: 12px;
+    @include font-family-normal();
+    &.__bold {
+        @include font-family-bold();
+        color: rgba(29,32,36,1);
+    }
+    .__icon {
+        width: 20px;
+        height: 20px;
+        margin-right: 10px;
+        margin-bottom: -4px;
+    }
+    .__right {
+        float: right;
+        color: rgba(0,122,255,1);
+    }
+}
+
+.__input {
+    font-size: 12px;
+    background: rgba(255,255,255,1);
+    color: rgba(94,104,117,0.3);
+    input {
+        width: 100%;
+    }
+}
+
+.__unuse_input {
+    font-size: 12px;
+    background: rgba(243,246,249,1);
+    color: rgba(94,104,117,1);
+}
+
+.__row {
+    font-size: 12px;
+    @include font-family-normal();
+    position: relative;
+    margin-top: 20px;
+    &:first-child {
+        margin-top: 0;
+    }
+
+    .__row_t {
+        position: relative;
+        @include font-family-bold();
+        line-height: 16px;
+        color: rgba(29,32,36,1);
+        padding-bottom: 12px;
+        overflow: auto;
+        zoom: 1;
+    }
+
+    .__err {
+        @include font-family-normal();
+        color: #FF2929;
+        float: right;
+    }
+
+    .__row_hint {
+        @include font-family-normal();
+        position: absolute;
+        left: 90px;
+        right: 0;
+        line-height: 16px;
+        text-align: right;
+    }
+}
+
+.__hint {
+    margin-top: 20px;
+    line-height: 16px;
+    font-size: 12px;
+    @include font-family-normal();
+    font-weight: 400;
+    color: rgba(94,104,117,1);
+    span {
+        display: inline-block;
+        margin-left: 10px;
+        margin-top: -20px;
+    }
+    &:before {
+        width: 6px;
+        height: 6px;
+        background: rgba(0,122,255,1);
+        border-radius: 6px;
+        content: ' ';
+        display: inline-block;
+    }
+}
+
+.__notice {
+    padding: 10px 15px;
+    background: rgba(255,251,235,1);
+    border-radius: 2px;
+    font-size: 12px;
+    @include font-family-normal();
+    color: rgba(94,104,117,1);
+    line-height: 18px;
+    margin-top: 20px;
+    &:before {
+        display: inline-block;
+        content: ' ';
+        width: 14px;
+        height: 14px;
+        border-radius: 14px;
+        background: url('~assets/imgs/notice.svg');
+        background-size: 100% 100%;
+        margin-bottom: -2px;
+    }
+    span {
+        display: inline-block;
+        margin-left: 19px;
+        margin-top: -20px;
+    }
+}

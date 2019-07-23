@@ -37,41 +37,65 @@
             "Withdraw to Wallet"
         ]
     },
-    "dealReminder": {
-        "title": "Deal Notice",
-        "describe": "Your order {amount} {ftoken} ({ftoken}/{ttoken}) at {time} is a complete deal, visit Order History to find out more."
-    },
-    "pow": {
-        "ing": "Running PoW to acquire quota",
-        "no": "You can stake VITE for quota in case you would not like to run PoW"
-    },
-    "addAccount": "Create an Account",
-    "saveQrcode": "Save QR code image",
-    "unlockSuccess": "Unlock Success",
-    "sendTrans": {
-        "send": "Send Transaction",
-        "symbol": "Send"
-    },
-    "errCode": {
-        "35003": "{name} ID-Konflikt aufgetreten, bitte später erneut versuchen",
-        "35004": "Invalid parameters",
-        "35005": "Transaktionen werden zu häufig gesendet, bitte später erneut versuchen",
-        "35006": "Contract method not exist",
-        "36001": "Sie können keine Überweisung vornehmen, bis Sie eine Transaktion erhalten",
-        "36002": "System verify failed, please try again later",
-        "36003": "System verify failed, please try again later",
-        "36004": "System verify failed, please try again later",
-        "36005": "Snapshot block height is illegal, please try again later",
-        "37001": "Wrong order number format",
-        "37002": "Wrong order type",
-        "37003": "Wrong order price format",
-        "37004": "Exception occurs in order transaction volume",
-        "37005": "Order transaction amount too small",
-        "37006": "Existed trading market",
-        "37007": "Order trading market not exist",
-        "37008": "Exception occurs in searching order information",
-        "37009": "Revoked order doesn't belong to current address",
-        "37010": "This order status cannot be revoked"
+    "sync": "Wallet initializing, transactions cannot be made temporarily.",
+    "noNet": "No network detected",
+    "noP2P": "Konnte keine Verbindung mit anderen Nodes herstellen",
+    "firstDone": "Init Done",
+    "firstDoing": "Initializing",
+    "blockHeight": "Snapshot Block Height"
+  },
+  "accList": {
+    "balance": "Kontostand",
+    "addAcc": "Adresse hinzufügen",
+    "addr": "Adressen der Konten",
+    "addrList": "Adressen",
+    "default": "Standardbenutzer auswählen"
+  },
+  "create": {
+    "accName": "Kontenname",
+    "input": "Bitte Passwort eingeben",
+    "again": "Bitte Passwort erneut eingeben",
+    "choose": "Konto wählen",
+    "finish": "Fertig",
+    "hint": {
+      "nameInput": "Please input account name",
+      "nameLong": "Account name cannot exceed {long} characters!",
+      "long": "Your input cannot exceed 32 characters!",
+      "name": "Account name only supports Chinese, English, numbers and underscores",
+      "consistency": "Please enter the same password!",
+      "pwFormat": "Wrong password format. The password only supports English, half-width symbols, numbers.",
+      "save": "Your private key stored in {0}，please keep it carefully，your account and password cannot be retrieved at current version!"
+    }
+  },
+  "dragDrop": {
+    "text": "Drag and drop files there",
+    "err1": "Imported illegal file!",
+    "err2": "Only one file can be imported!",
+    "guide": "Open folder to import",
+    "hint": "Noted that login by importing keystore file cannot support creating multi addresses, using mnemonic seed phrase is recommended in cross-platform situations."
+  },
+  "account": {
+    "title": "Account Detail",
+    "transfer": "Transfer",
+    "getTestToken": "Test-Token erhalten",
+    "transDetail": "Transaktionsdetails anzeigen",
+    "name": "Kontenname",
+    "address": "Meine Adresse",
+    "balance": "Kontostand",
+    "fundFloat": "Ausständig",
+    "pend": "Ausstehend",
+    "copy": "Adresse kopieren",
+    "outAddress": "Meine Adresse",
+    "inAddress": "Empfängeradresse",
+    "sum": "Betrag",
+    "password": "Passwort",
+    "saveQrcode": "Bild des QR-Code speichern",
+    "sendTrans": "Transaktion senden",
+    "remarks": "Kommentar",
+    "placeholder": {
+      "amount": "Bitte Betrag eingeben",
+      "remarks": "Bitte Kommentar eingeben",
+      "addr": "Bitte Adresse eingeben"
     },
     "txType": {
         "SBPreg": "SBP Registration",
@@ -543,36 +567,21 @@
         },
         "toReward": "View my rewards",
         "voting": "Voting",
-        "search": "Please input node name or block creation address",
-        "addrNoExistErr": "You aren't able to vote for now as your address has no transaction record before",
-        "revokeVoting": "Revoke voting",
-        "section1": {
-            "title": "My Voting",
-            "head": [
-                "Name",
-                "Status",
-                "My Voting",
-                "Status of Voting",
-                "Action"
-            ],
-            "nodeStatusMap": {
-                "1": "Active",
-                "2": "Inactive"
-            },
-            "voteStatusMap": {
-                "voted": "Voting Successful",
-                "voting": "Voting",
-                "canceling": "Revoking in Process",
-                "voteNotWork": "Revoked Voting"
-            },
-            "hoverHelp": "The node {nodeName} you are voted for has been revoked, you may vote again directly or revoke your voting, If you do not do so, your original voting result will be recovered after the {nodeName} re-registering",
-            "confirm": {
-                "cancelText": "Not yet",
-                "submitText": "Confirm"
-            },
-            "revoke": "Revoking",
-            "operateBtn": "Revoke",
-            "cancelVoteErr": "Failed to revoke voting, please try again"
+        "canceling": "Under Revoking",
+        "voteNotWork": "Invalid Vote"
+      },
+      "hoverHelp": "The node {nodeName} you are voted for has been revoked, you may vote again directly or revoke your voting, If you do not do so, your original voting result will be recovered after the {nodeName} re-registering",
+      "confirm": {
+        "title": "Revoke voting",
+        "cancelText": "Not yet",
+        "submitText": "Confirm"
+      },
+      "toast": "Revoking request has sent",
+      "quotaConfirm": {
+        "title": "Insufficient Quota",
+        "content": "your left quota turn out to be insufficient, you can acquire more quota by running PoW or staking VITE",
+        "leftBtn": {
+          "text": "Stake Quota"
         },
         "section2": {
             "title": "SBP candidates",

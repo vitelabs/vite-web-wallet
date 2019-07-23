@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
+    <title>VITEX</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <polygon id="path-1" points="1.07454545 0.181818182 8.70414851e-14 0.181818182 2.80163636 3.74290909 8.70414851e-14 7.30418182 2.14927273 7.30418182 4.95072727 3.74290909 2.14909091 0.181818182 1.07454545 0.181818182 7.846 0.181818182 7.846 7.38981818 8.70414851e-14 7.38981818 8.70414851e-14 0.181818182"></polygon>
+        <polygon id="path-3" points="7.82236364 0.181818182 5.46890909 3.17272727 4.39454545 1.80727273 5.67290909 0.181818182"></polygon>
+        <path d="M3.91127273,2.42127273 L4.95072727,3.74290909 L3.91127273,2.42127273 Z" id="path-5"></path>
+        <linearGradient x1="50.00318%" y1="99.9936429%" x2="50.00318%" y2="-0.00299903701%" id="linearGradient-7">
+            <stop stop-color="#38BAFD" offset="0%"></stop>
+            <stop stop-color="#5DDFFF" offset="100%"></stop>
+        </linearGradient>
+        <polygon id="path-8" points="4.39454545 5.67909091 5.46890909 4.31363636 7.822 7.30418182 5.67290909 7.30418182"></polygon>
+        <polygon id="path-10" points="5.15143483e-14 0.245454545 2.81018182 3.81745455 5.15143483e-14 7.38981818 2.15581818 7.38981818 4.96581818 3.81745455 2.15563636 0.245454545"></polygon>
+        <polygon id="path-12" points="5.69018182 0.245454545 4.40781818 1.876 5.48545455 3.24563636 7.846 0.245454545"></polygon>
+        <polygon id="path-14" points="4.40781818 5.75963636 5.69018182 7.38981818 7.84545455 7.38981818 5.48545455 4.39"></polygon>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="新交易记录" transform="translate(-140.000000, -655.000000)">
+            <g id="注册" transform="translate(140.000000, 655.000000)">
+                <path d="M16,8 C16,12.4182857 12.4182857,16 8,16 C3.58171429,16 0,12.4182857 0,8 C0,3.58171429 3.58171429,0 8,0 C12.4182857,0 16,3.58171429 16,8" id="Fill-1" fill="#FFC800"></path>
+                <g id="分组" transform="translate(4.000000, 4.000000)">
+                    <g id="分组-7">
+                        <mask id="mask-2" fill="white">
+                            <use xlink:href="#path-1"></use>
+                        </mask>
+                        <g id="Clip-2"></g>
+                        <polygon id="Fill-1" fill-opacity="0.8" fill="#FFFFFF" mask="url(#mask-2)" points="-1.48325796e-13 0.181818182 2.80163636 3.74290909 -1.48325796e-13 7.30418182 2.14927273 7.30418182 4.95072727 3.74290909 2.14909091 0.181818182"></polygon>
+                        <mask id="mask-4" fill="white">
+                            <use xlink:href="#path-3"></use>
+                        </mask>
+                        <g id="Clip-4"></g>
+                        <polygon id="Fill-3" fill-opacity="0.8" fill="#FFFFFF" mask="url(#mask-4)" points="5.46890909 3.17272727 7.82236364 0.181818182 5.67290909 0.181818182 4.39454545 1.80727273"></polygon>
+                        <mask id="mask-6" fill="white">
+                            <use xlink:href="#path-5"></use>
+                        </mask>
+                        <g id="Clip-6"></g>
+                        <path d="M3.91127273,2.42127273 L4.95072727,3.74290909 L3.91127273,2.42127273 Z" id="Fill-5" fill="url(#linearGradient-7)" mask="url(#mask-6)"></path>
+                        <mask id="mask-9" fill="white">
+                            <use xlink:href="#path-8"></use>
+                        </mask>
+                        <g id="Clip-8"></g>
+                        <polygon id="Fill-7" fill-opacity="0.8" fill="#FFFFFF" mask="url(#mask-9)" points="4.39454545 5.67909091 5.67290909 7.30418182 7.822 7.30418182 5.46890909 4.31363636"></polygon>
+                    </g>
+                    <g id="分组-5">
+                        <mask id="mask-11" fill="white">
+                            <use xlink:href="#path-10"></use>
+                        </mask>
+                        <g id="Clip-10"></g>
+                        <polygon id="Fill-9" fill="#FFFFFF" mask="url(#mask-11)" points="5.15143483e-14 0.245454545 2.81018182 3.81745455 5.15143483e-14 7.38981818 2.15581818 7.38981818 4.96581818 3.81745455 2.15563636 0.245454545"></polygon>
+                        <mask id="mask-13" fill="white">
+                            <use xlink:href="#path-12"></use>
+                        </mask>
+                        <g id="Clip-12"></g>
+                        <polygon id="Fill-11" fill="#FFFFFF" mask="url(#mask-13)" points="5.69018182 0.245454545 4.40781818 1.876 5.48545455 3.24563636 7.846 0.245454545"></polygon>
+                        <mask id="mask-15" fill="white">
+                            <use xlink:href="#path-14"></use>
+                        </mask>
+                        <g id="Clip-14"></g>
+                        <polygon id="Fill-13" fill="#FFFFFF" mask="url(#mask-15)" points="4.40781818 5.75963636 5.69018182 7.38981818 7.84545455 7.38981818 5.48545455 4.39"></polygon>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,32 +1,34 @@
 <template>
-    <confirm :title="title || $t('pwdConfirm.title')" 
-             :content="content" :showMask="showMask"
+    <confirm class="small" :title="pwdTitle"
+             :content="content" :showMask="showMask" :isLoading="isLoading"
              :leftBtnTxt="cancelTxt || $t('btn.cancel')" :rightBtnTxt="submitTxt || $t('btn.submit')"
-             :leftBtnClick="exchange?_submit:_cancle"  :rightBtnClick="exchange?_cancle:_submit">
-        <div v-show="isShowPWD" class="pass-input" :class="{
-            'distance': !!content
-        }">
-            <!-- Safari autocomplete -->
-            <!-- <input fake_pass type="password" style="display:none"/> -->
-            <input v-model="password" :placeholder="$t('pwdConfirm.placeholder')" type="password"/>
-        </div>
-        <div v-show="isShowPWD && isShowPWDHold" class="hold-pwd __pointer" @click="toggleHold">
-            <span :class="{ 'active': isPwdHold }"></span>
-            {{ $t('pwdConfirm.conf') }}
-        </div>
+             :leftBtnClick="exchange ? _submit : _cancle"  :rightBtnClick="exchange ? _cancle : _submit">
+        <slot></slot>
+
+        <img v-show="isShowPWD" class="unlock-user" src="~assets/imgs/unlock-user.svg"/>
+        <form autocomplete="off" v-show="isShowPWD" class="__input __input_row" :class="{ 'distance': !!content }">
+            <input ref="passInput" v-model="password" :placeholder="$t('pwdConfirm.placeholder')" type="password"/>
+        </form>
+
+        <hold-pwd-view v-show="isShowPWD && isShowHold"></hold-pwd-view>
     </confirm>
 </template>
 
 <script>
-import confirm from 'components/confirm.vue';
+import { StatusMap } from 'wallet';
+import { constant } from 'utils/store';
+import confirm from 'components/confirm/confirm.vue';
+import holdPwdView from './holdPwd.vue';
 
-const holdTime = 5 * 60 * 1000;
+let lastE = null;
 
 export default {
-    components: {
-        confirm
-    },
+    components: { confirm, holdPwdView },
     props: {
+        type: {
+            type: String,
+            default: 'normal'
+        },
         showMask: {
             type: Boolean,
             default: true
@@ -59,27 +61,53 @@ export default {
             type: Boolean,
             default: true
         },
-        exchange:{
-            type:Boolean,
-            default:false
+        exchange: {
+            type: Boolean,
+            default: false
         }
+    },
+    mounted() {
+        lastE = this.$onKeyDown(13, () => {
+            this._submit();
+        });
+
+        const accInfo = this.currHDAcc.getAccInfo();
+        const showHoldNum = accInfo.showHoldPWDNum || 0;
+
+        this.isHoldPWD = !!accInfo[constant.HoldPwdKey];
+        this.isShowHold = showHoldNum < 3 && !this.isHoldPWD;
+        this.currHDAcc.saveOnAcc(constant.ShowHoldPWDNumKey, this.isShowHold ? showHoldNum + 1 : 4);
+    },
+    destroyed() {
+        this.$onKeyDown(13, lastE);
     },
     data() {
         return {
-            isShowPWDHold: !window.isShowPWD,
             password: '',
-            isPwdHold: false
+            isLoading: false,
+            isHoldPWD: false,
+            isShowHold: false
         };
+    },
+    computed: {
+        pwdTitle() {
+            if (this.type === 'normal') {
+                return this.title || this.$t('pwdConfirm.title');
+            }
+
+            const name = this.$store.state.wallet.name;
+            return this.$t('pwdConfirm.unlockAcc', { name });
+        },
+        currHDAcc() {
+            return this.$store.state.wallet.currHDAcc;
+        },
+        isLogin() {
+            return this.$store.state.wallet.status === StatusMap.UNLOCK;
+        }
     },
     methods: {
         clear() {
             this.password = '';
-        },
-        toggleHold() {
-            if (!this.isShowPWD) {
-                return;
-            }
-            this.isPwdHold = !this.isPwdHold;
         },
 
         _cancle() {
@@ -87,38 +115,65 @@ export default {
             this.cancel && this.cancel();
         },
         _submit() {
+            if (this.isLoading) {
+                return;
+            }
+
             if (!this.isShowPWD) {
                 this.clear();
                 this.submit && this.submit();
                 return;
             }
 
-            let password = this.$trim(this.password);
+            const password = this.$trim(this.password);
             if (!password) {
-                this.$toast( this.$t('hint.pwEmpty') );
+                this.$toast(this.$t('hint.pwEmpty'));
                 return false;
             }
 
-            let activeAccount = this.$wallet.getActiveAccount();
-            if (!activeAccount) {
-                this.$toast( this.$t('hint.err') );
+            if (!this.currHDAcc) {
+                this.$toast(this.$t('hint.err'));
                 return false;
             }
 
-            let deal = (result) => {
+            const deal = result => {
                 if (!result) {
-                    this.$toast( this.$t('hint.pwErr') );
+                    this.$toast(this.$t('hint.pwErr'));
                     return false;
                 }
 
-                this.isPwdHold && activeAccount.holdPWD(password, holdTime);
+                if (this.type !== 'normal') {
+                    this.$toast(this.$t('unlockSuccess'));
+                }
+
                 this.clear();
                 this.submit && this.submit();
             };
 
-            activeAccount.verify(password).then((result) => {
-                deal(result);
-            }).catch(() => {
+            if (this.isLogin) {
+                this.currHDAcc.verify(password).then(() => {
+                    deal(true);
+                }).catch(() => {
+                    deal(false);
+                });
+                return;
+            }
+
+            this.isLoading = true;
+            this.$store.dispatch('login', password).then(() => {
+                this.isLoading = false;
+                if (!this.password) {
+                    return;
+                }
+                this.currHDAcc.activate();
+                deal(true);
+            }).catch(err => {
+                console.warn(err);
+                this.isLoading = false;
+                if (!this.password) {
+                    return;
+                }
+                console.warn(err);
                 deal(false);
             });
         }
@@ -129,41 +184,15 @@ export default {
 <style lang="scss" scoped>
 @import '~assets/scss/vars.scss';
 
-.pass-input {
-    width: 100%;
-    background: #FFFFFF;
-    border: 1px solid #D4DEE7;
-    border-radius: 2px;
-    height: 40px;
-    line-height: 40px;
-    box-sizing: border-box;
-    padding: 0 15px;
-    &.distance {
-        margin-top: 30px;
-    }
-    input {
-        width: 100%;
-        font-size: 14px;
-    }
+.__input.distance {
+    margin-top: 30px;
 }
-.hold-pwd {
-    font-family: $font-normal, arial, sans-serif;
-    font-size: 14px;
-    color: #1D2024;
-    margin-top: 12px;
-    span {
-        display: inline-block;
-        margin-bottom: -3px;
-        width: 16px;
-        height: 16px;
-        box-sizing: border-box;
-        background: #FFFFFF;
-        border: 1px solid #D4DEE7;
-        border-radius: 16px;
-        &.active {
-            background: url('../../assets/imgs/presnet.svg') no-repeat center;
-            background-size: 16px 16px;
-        }
-    }
+.unlock-user {
+    width: 100px;
+    height: 100px;
+    position: relative;
+    left: 50%;
+    margin-left: -50px;
+    margin-bottom: 30px;
 }
 </style>

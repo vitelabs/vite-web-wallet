@@ -1,0 +1,5 @@
+.mint-trade-table {
+    @include rowWith {
+        min-width: 25%;
+    }
+}

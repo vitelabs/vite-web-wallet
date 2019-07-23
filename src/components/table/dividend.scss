@@ -1,0 +1,5 @@
+.dividend-table {
+    @include rowWith {
+        width: 150px;
+    }
+}

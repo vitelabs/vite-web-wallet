@@ -1,6 +1,0 @@
-{
-    "ledger_getBalance": 1000,
-    "ledger_getBlocks": 2000,
-    "ledger_getSnapshotChainHeight": 1000,
-    "pledge_getPledgeList": 1000
-}

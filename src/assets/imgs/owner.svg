@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="8px" height="8px" viewBox="0 0 8 8" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
+    <title>1</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="0%" y1="0%" x2="100%" y2="97.6511121%" id="linearGradient-1">
+            <stop stop-color="#052EF5" offset="0%"></stop>
+            <stop stop-color="#0BB6EB" offset="100%"></stop>
+        </linearGradient>
+        <path d="M8,6.99555333 C8,7.55029391 7.54696369,8 7.00296986,8 L0.997030139,8 C0.446385598,8 0,7.5522728 0,6.99555333 L0,6.83333333 C0,5.86666667 1.13333333,5.26666667 2.2,4.8 L2.3,4.75 C2.38333333,4.71666667 2.46666667,4.71666667 2.55,4.76666667 C2.98333333,5.05 3.46666667,5.2 3.98333333,5.2 C4.5,5.2 5,5.03333333 5.41666667,4.76666667 C5.5,4.71666667 5.58333333,4.71666667 5.66666667,4.75 L5.76666667,4.8 C6.86666667,5.26666667 8,5.85 8,6.83333333 L8,6.99555333 Z M4,0 C5.1,0 5.98333333,0.983333333 5.98333333,2.2 C5.98333333,3.41666667 5.1,4.4 4,4.4 C2.9,4.4 2.01666667,3.41666667 2.01666667,2.2 C2.01666667,0.983333333 2.9,0 4,0 Z" id="path-2"></path>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="首页-copy-10" transform="translate(-1205.000000, -399.000000)">
+            <g id="深度合并" transform="translate(1121.000000, 57.000000)">
+                <g id="跌-copy-22" transform="translate(0.000000, 336.000000)">
+                    <g id="分组-5" transform="translate(84.000000, 6.000000)">
+                        <mask id="mask-3" fill="white">
+                            <use xlink:href="#path-2"></use>
+                        </mask>
+                        <use id="1" fill="url(#linearGradient-1)" xlink:href="#path-2"></use>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

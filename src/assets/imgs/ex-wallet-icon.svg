@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
+    <title>买入</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="712" height="299" rx="2"></rect>
+        <filter x="-10.5%" y="-24.2%" width="120.9%" height="149.8%" filterUnits="objectBoundingBox" id="filter-2">
+            <feMorphology radius="0.5" operator="dilate" in="SourceAlpha" result="shadowSpreadOuter1"></feMorphology>
+            <feOffset dx="0" dy="2" in="shadowSpreadOuter1" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="24" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0.690196078   0 0 0 0 0.752941176   0 0 0 0 0.929411765  0 0 0 0.422186368 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="交易所-0114" transform="translate(-609.000000, -548.000000)">
+            <g id="K线图" fill="#FFFFFF" fill-rule="nonzero">
+                <rect id="矩形" x="0" y="0" width="1440" height="820"></rect>
+            </g>
+            <g id="限价" transform="translate(399.000000, 511.000000)">
+                <g id="Rectangle-2">
+                    <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                    <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-1"></use>
+                </g>
+                <g id="买入" transform="translate(22.000000, 36.000000)">
+                    <text id="0.00000000-VITE" font-family="PingFangSC-Semibold, PingFang SC" font-size="12" font-weight="500" letter-spacing="0.35">
+                        <tspan x="208" y="13" fill="#24272B">0.00000000 </tspan>
+                        <tspan x="283.946" y="13" font-family="PingFang-SC-Regular, PingFang SC" font-weight="normal" fill="#5E6875">VITE</tspan>
+                    </text>
+                    <path d="M202.189723,10.3162124 L198.328294,10.3162124 C197.379118,10.3162124 196.607121,9.51350919 196.607121,8.52657897 C196.607121,7.53964875 197.379118,6.7369455 198.328294,6.7369455 L202.189723,6.7369455 L202.189723,5.57894737 L198.328294,5.57894737 C196.765064,5.57894737 195.493421,6.90117069 195.493421,8.52657897 C195.493421,10.1519873 196.765064,11.4736842 198.328294,11.4736842 L202.189723,11.4736842 L202.189723,10.3162124 Z" id="Fill-3" stroke="#BDC1D1" stroke-width="0.3" fill="#BDC1D1" fill-rule="evenodd"></path>
+                    <path d="M200.925926,14.0526316 L191.074074,14.0526316 C189.933333,14.0526316 189,13.1052632 189,11.9473684 L189,5.10526316 C189,3.94736842 189.933333,3 191.074074,3 L200.925926,3 C202.066667,3 203,3.94736842 203,5.10526316 L203,11.9473684 C203,13.1052632 202.066667,14.0526316 200.925926,14.0526316 Z" id="Stroke-1" stroke="#BDC1D1" stroke-width="1.4" stroke-linecap="round"></path>
+                    <path d="M199.5,9.41666667 C199.016125,9.41666667 198.625,9.02554167 198.625,8.54166667 C198.625,8.05866667 199.016125,7.66666667 199.5,7.66666667 C199.983875,7.66666667 200.375,8.05866667 200.375,8.54166667 C200.375,9.02554167 199.983875,9.41666667 199.5,9.41666667 Z" id="Fill-5" fill="#BDC1D1" fill-rule="evenodd"></path>
+                    <path d="M0.5,178.991617 L0.5,205.008383 C0.5,205.827556 1.17598664,206.5 2.00638887,206.5 L308.993611,206.5 C309.830175,206.5 310.5,205.833698 310.5,205.008383 L310.5,178.991617 C310.5,178.172444 309.824013,177.5 308.993611,177.5 L2.00638887,177.5 C1.1698253,177.5 0.5,178.166302 0.5,178.991617 Z" id="Rectangle-26-Copy-23" stroke="#D4DEE7" stroke-width="1" fill="#FFFFFF" fill-rule="evenodd"></path>
+                    <text id="VITE" font-family="PingFang-SC-Regular, PingFang SC" font-size="12" font-weight="normal" letter-spacing="0.3" fill="#5E6875">
+                        <tspan x="278.516" y="197">VITE</tspan>
+                    </text>
+                    <text id="0.00001152" font-family="PingFang-SC-Regular, PingFang SC" font-size="12" font-weight="normal" letter-spacing="0.3" fill="#24272B">
+                        <tspan x="6.104" y="197">0.00001152</tspan>
+                    </text>
+                    <text id="买入价" font-family="PingFang-SC-Regular, PingFang SC" font-size="12" font-weight="normal" line-spacing="16" letter-spacing="0.3" fill="#24272B">
+                        <tspan x="0" y="168">成交金额</tspan>
+                    </text>
+                    <rect id="矩形" fill="#007AFF" fill-rule="nonzero" x="0" y="223" width="311" height="30" rx="2"></rect>
+                    <text id="买入VITE" font-family="PingFangSC-Semibold, PingFang SC" font-size="14" font-weight="500" line-spacing="16" fill="#FBFBFB">
+                        <tspan x="126" y="245">买入VITE</tspan>
+                    </text>
+                    <path d="M0.5,51.991617 L0.5,78.008383 C0.5,78.827556 1.17598664,79.5 2.00638887,79.5 L308.993611,79.5 C309.830175,79.5 310.5,78.8336978 310.5,78.008383 L310.5,51.991617 C310.5,51.172444 309.824013,50.5 308.993611,50.5 L2.00638887,50.5 C1.1698253,50.5 0.5,51.1663022 0.5,51.991617 Z" id="Rectangle-26-Copy-23" stroke="#D4DEE7" stroke-width="1" fill="#FFFFFF" fill-rule="evenodd"></path>
+                    <text id="VITE" font-family="PingFang-SC-Regular, PingFang SC" font-size="12" font-weight="normal" letter-spacing="0.3" fill="#5E6875">
+                        <tspan x="278.516" y="70">VITE</tspan>
+                    </text>
+                    <text id="0.00001152" font-family="PingFang-SC-Regular, PingFang SC" font-size="12" font-weight="normal" letter-spacing="0.3" fill="#24272B">
+                        <tspan x="6.104" y="70">0.00001152</tspan>
+                    </text>
+                    <text id="买入价" font-family="PingFang-SC-Regular, PingFang SC" font-size="12" font-weight="normal" line-spacing="16" letter-spacing="0.3" fill="#24272B">
+                        <tspan x="0" y="41">买入价</tspan>
+                    </text>
+                    <path d="M0.5,114.991617 L0.5,141.008383 C0.5,141.827556 1.17598664,142.5 2.00638887,142.5 L308.993611,142.5 C309.830175,142.5 310.5,141.833698 310.5,141.008383 L310.5,114.991617 C310.5,114.172444 309.824013,113.5 308.993611,113.5 L2.00638887,113.5 C1.1698253,113.5 0.5,114.166302 0.5,114.991617 Z" id="Rectangle-26-Copy-23" stroke="#D4DEE7" stroke-width="1" fill="#FFFFFF" fill-rule="evenodd"></path>
+                    <text id="VITE" font-family="PingFang-SC-Regular, PingFang SC" font-size="12" font-weight="normal" letter-spacing="0.3" fill="#5E6875">
+                        <tspan x="278.516" y="133">VITE</tspan>
+                    </text>
+                    <text id="0.00001152" font-family="PingFang-SC-Regular, PingFang SC" font-size="12" font-weight="normal" letter-spacing="0.3" fill="#24272B">
+                        <tspan x="6.104" y="133">0.00001152</tspan>
+                    </text>
+                    <text id="买入价" font-family="PingFang-SC-Regular, PingFang SC" font-size="12" font-weight="normal" line-spacing="16" letter-spacing="0.3" fill="#24272B">
+                        <tspan x="0" y="104">买入量</tspan>
+                    </text>
+                    <text id="买入ABC" font-family="PingFangSC-Semibold, PingFang SC" font-size="12" font-weight="500" letter-spacing="0.3" fill="#24272B">
+                        <tspan x="8" y="13">买入ABC</tspan>
+                    </text>
+                    <rect id="矩形" fill="#007AFF" fill-rule="nonzero" x="0" y="2" width="2" height="13"></rect>
+                    <rect id="矩形" fill="#007AFF" fill-rule="nonzero" x="166" y="92" width="29" height="15" rx="2"></rect>
+                    <text id="25%" font-family="PingFang-SC-Regular, PingFang SC" font-size="11" font-weight="normal" line-spacing="15" letter-spacing="0.275" fill="#FFFFFF">
+                        <tspan x="168" y="104">25%</tspan>
+                    </text>
+                    <rect id="矩形" stroke="#007AFF" stroke-width="1" fill-rule="nonzero" x="203.5" y="92.5" width="28" height="14" rx="2"></rect>
+                    <text id="50%" font-family="PingFang-SC-Regular, PingFang SC" font-size="11" font-weight="normal" line-spacing="15" letter-spacing="0.275" fill="#007AFF">
+                        <tspan x="205" y="104">50%</tspan>
+                    </text>
+                    <rect id="矩形" stroke="#007AFF" stroke-width="1" fill-rule="nonzero" x="240.5" y="92.5" width="28" height="14" rx="2"></rect>
+                    <text id="75%" font-family="PingFang-SC-Regular, PingFang SC" font-size="11" font-weight="normal" line-spacing="15" letter-spacing="0.275" fill="#007AFF">
+                        <tspan x="242" y="104">75%</tspan>
+                    </text>
+                    <rect id="矩形" stroke="#007AFF" stroke-width="1" fill-rule="nonzero" x="275.5" y="92.5" width="35" height="14" rx="2"></rect>
+                    <text id="100%" font-family="PingFang-SC-Regular, PingFang SC" font-size="11" font-weight="normal" line-spacing="15" letter-spacing="0.275" fill="#007AFF">
+                        <tspan x="277" y="104">100%</tspan>
+                    </text>
+                </g>
+                <g id="买入" transform="translate(22.000000, 36.000000)">
+                    <path d="M202.189723,10.3162124 L198.328294,10.3162124 C197.379118,10.3162124 196.607121,9.51350919 196.607121,8.52657897 C196.607121,7.53964875 197.379118,6.7369455 198.328294,6.7369455 L202.189723,6.7369455 L202.189723,5.57894737 L198.328294,5.57894737 C196.765064,5.57894737 195.493421,6.90117069 195.493421,8.52657897 C195.493421,10.1519873 196.765064,11.4736842 198.328294,11.4736842 L202.189723,11.4736842 L202.189723,10.3162124 Z" id="Fill-3" stroke="#BDC1D1" stroke-width="0.3" fill="#BDC1D1"></path>
+                    <path d="M200.925926,14.0526316 L191.074074,14.0526316 C189.933333,14.0526316 189,13.1052632 189,11.9473684 L189,5.10526316 C189,3.94736842 189.933333,3 191.074074,3 L200.925926,3 C202.066667,3 203,3.94736842 203,5.10526316 L203,11.9473684 C203,13.1052632 202.066667,14.0526316 200.925926,14.0526316 Z" id="Stroke-1" stroke="#BDC1D1" stroke-width="1.4" stroke-linecap="round"></path>
+                    <path d="M199.5,9.41666667 C199.016125,9.41666667 198.625,9.02554167 198.625,8.54166667 C198.625,8.05866667 199.016125,7.66666667 199.5,7.66666667 C199.983875,7.66666667 200.375,8.05866667 200.375,8.54166667 C200.375,9.02554167 199.983875,9.41666667 199.5,9.41666667 Z" id="Fill-5" fill="#BDC1D1"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="36px" height="16px" viewBox="0 0 36 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 55.2 (78181) - https://sketchapp.com -->
+    <title>未开通</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="-50.9672423%" y1="31.3369296%" x2="141.485541%" y2="68.320756%" id="linearGradient-1">
+            <stop stop-color="#00ECFF" offset="0%"></stop>
+            <stop stop-color="#00C3FF" offset="28.6760216%"></stop>
+            <stop stop-color="#0998F3" offset="50.8163023%"></stop>
+            <stop stop-color="#0D6CEF" offset="68.5260699%"></stop>
+            <stop stop-color="#0B30E4" offset="100%"></stop>
+        </linearGradient>
+        <path d="M0,0 L32,0 C34.209139,-4.05812251e-16 36,1.790861 36,4 L36,16 L4,16 C1.790861,16 2.705415e-16,14.209139 0,12 L0,0 Z" id="path-2"></path>
+    </defs>
+    <g id="页面1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="首页-copy-13备份-9" transform="translate(-794.000000, -500.000000)">
+            <g id="限价" transform="translate(350.000000, 494.000000)">
+                <g id="编组" transform="translate(444.000000, 6.000000)">
+                    <mask id="mask-3" fill="white">
+                        <use xlink:href="#path-2"></use>
+                    </mask>
+                    <use id="蒙版" fill="url(#linearGradient-1)" xlink:href="#path-2"></use>
+                    <polygon id="V" fill="#FFFFFF" fill-rule="nonzero" opacity="0.2" mask="url(#mask-3)" transform="translate(29.000000, 6.500000) rotate(-9.000000) translate(-29.000000, -6.500000) " points="19 -5 22.9137134 -5 28.953775 13.7478992 29.046225 13.7478992 35.0862866 -5 39 -5 31.1725732 18 26.8274268 18"></polygon>
+                    <text id="VIP" mask="url(#mask-3)" font-family="PingFangSC-Semibold, PingFang SC" font-size="12" font-weight="500" line-spacing="16" fill="#FFFFFF">
+                        <tspan x="8.5" y="13">VIP</tspan>
+                    </text>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,15 +1,16 @@
-import BigNumber from 'utils/bigNumber';
+import $ViteJS from 'utils/viteClient';
 
 const pageCount = 50;
 
 let lastFetchTime = null;
 let lastFetchQuotaTime = null;
+let lastAddress = null;
 
 const state = {
-    // amount data
+    // Amount data
     quotaAmount: '',
     pledgeTransNum: '',
-    // list data
+    // List data
     totalPledgeAmount: '',
     pledgeList: [],
     totalNum: 0,
@@ -26,14 +27,14 @@ const mutations = {
         state.totalNum = payload.totalCount || 0;
     },
     commitQuota(state, payload) {
-        state.quotaAmount = payload.quota;
-        state.pledgeTransNum = payload.txNum;
+        state.quotaAmount = payload.current;
+        state.pledgeTransNum = payload.utps;
     },
     commitClearPledge(state) {
-        // amount data
+        // Amount data
         state.quotaAmount = '';
         state.pledgeTransNum = '';
-        // list data
+        // List data
         state.totalPledgeAmount = '';
         state.pledgeList = [];
         state.totalNum = 0;
@@ -42,12 +43,18 @@ const mutations = {
 };
 
 const actions = {
-    fetchQuota({ commit }, address) {
-        let fetchTime = new Date().getTime();
-        lastFetchQuotaTime = fetchTime;
+    fetchQuota({ commit, rootState }) {
+        const activeAccount = rootState.wallet.activeAcc;
+        const address = activeAccount ? activeAccount.address : '';
 
-        return $ViteJS.pledge.getPledgeQuota(address).then((result)=>{
-            if (fetchTime !== lastFetchQuotaTime || !result) {
+        const fetchTime = new Date().getTime();
+        lastFetchQuotaTime = fetchTime;
+        lastAddress = address;
+
+        return $ViteJS.pledge.getPledgeQuota(address).then(result => {
+            if (fetchTime !== lastFetchQuotaTime
+                || !result
+                || address !== lastAddress) {
                 return null;
             }
 
@@ -56,14 +63,16 @@ const actions = {
         });
     },
     fetchPledgeList({ commit, state }, { address, pageIndex }) {
-        let fetchTime = new Date().getTime();
+        const fetchTime = new Date().getTime();
         lastFetchTime = fetchTime;
+        lastAddress = address;
         commit('commitSetCurrent', pageIndex);
 
-        return $ViteJS.pledge.getPledgeList(address, pageIndex, pageCount).then((result)=>{
-            if (pageIndex !== state.currentPage || 
-                fetchTime !== lastFetchTime ||
-                !result) {
+        return $ViteJS.pledge.getPledgeList(address, pageIndex, pageCount).then(result => {
+            if (pageIndex !== state.currentPage
+                || fetchTime !== lastFetchTime
+                || !result
+                || lastAddress !== address) {
                 return null;
             }
 
@@ -75,21 +84,8 @@ const actions = {
 
 const getters = {
     totalPledgePage(state) {
-        return BigNumber.dividedToNumber(state.totalNum || 0, pageCount);
-    },
-    pledgeList(state) {
-        let list = state.pledgeList || [];
-        let nowList = [];
-
-        list.forEach((item) => {
-            nowList.push({
-                beneficialAddr: item.beneficialAddr,
-                withdrawHeight: item.withdrawHeight,
-                withdrawTime: item.withdrawTime,
-                amount: item.amount
-            });
-        });
-        return nowList;
+        const totalNum = state.totalNum || 0;
+        return Math.ceil(totalNum / pageCount);
     }
 };
 

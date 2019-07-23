@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <link rel="shortcut icon" type="image/x-icon" href="favicon.ico"/>
+        <title>Vite PreMainnet</title>
+    </head>
+
+    <body>
+        <div id="app">
+            <div>VCP Balance= VCP Balance at testnet+ VCP on road at testnet</div>
+            <div>VITE Balance= VITE Balance at testnet+VITE on road at testnet+ VITE Unreceived by Contracts</div>
+            <table id="table"></table>
+        </div>
+
+        <script>
+            function getViteNumber(num) {
+                if (num.length > 18) {
+                    var afterNum = num.slice(num.length - 18);
+                    var preNum = num.slice(0, num.length - 18);
+                    return preNum + '.' + afterNum;
+                }
+
+                let newNum = '';
+                newNum = '0.';
+                for (let i=0; i<18 - num.length; i++) {
+                    newNum += '0';
+                }
+                return newNum + num;
+            }
+
+            function fetch(params) {
+                const xhr = new XMLHttpRequest();
+
+                xhr.open('POST', location.origin + '/api/transferdetail/list', true);
+                xhr.setRequestHeader('content-type', 'application/json; charset=utf-8');
+                xhr.send(JSON.stringify(params));
+
+                return new Promise((res, rej) => {
+                    xhr.onload = function () {
+                        if (+xhr.status !== 200) {
+                            rej(JSON.parse(xhr.responseText));
+                            return;
+                        }
+
+                        let { code, data, msg } = JSON.parse(xhr.responseText);
+
+                        if (code !== 0) {
+                            rej({ code, data, msg });
+                            return;
+                        }
+
+                        res(data);
+                    }
+                    xhr.onerror = function (err) {
+                        rej(err);
+                    };
+                    xhr.onabort = function (err) {
+                        rej(err);
+                    };
+                    xhr.ontimeout = function () {
+                        rej();
+                    };
+                })
+            }
+
+            let address = location.search;
+            address = address.slice('?address='.length);
+
+            if (address && address.length === 55) {
+                fetch({
+                    "accountAddress": address,
+                    "paging" : {
+                        "index" : 0,
+                        "count" :50
+                    }
+                }).then((data) => {
+                    let balanceMap = data.blockList[0] || {};
+                    let vite = balanceMap && +balanceMap.vitefinalbalance ? getViteNumber(balanceMap.vitefinalbalance) : '0';
+                    let vcp = balanceMap && +balanceMap.vcpfinalbalance ? balanceMap.vcpfinalbalance : '0';
+
+                    let tableDom = document.getElementById('table');
+                    tableDom.innerHTML = `<tr><th>Address</th><th>Balance (VITE)</th><th>Balance (VCP)</th></tr><tr><td>${encodeURIComponent(address)}</td><td>${encodeURIComponent(vite)}</td><td>${encodeURIComponent(vcp)}</td></tr>`;
+                }).catch((err) => {
+                    console.error(err)
+                })
+            }
+        </script>
+
+        <style>
+            body {
+                overflow: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+            table {
+                box-sizing: border-box;
+                border: 1px solid #0094ff;
+                border-bottom: none;
+            }
+            table tr th, table tr td {
+                box-sizing: border-box;
+                padding: 5px;
+                border-bottom: 1px solid #0094ff;
+                border-right: 1px solid #0094ff;
+            }
+            table tr th:last-child, table tr td:last-child {
+                border-right: none;
+            }
+        </style>
+    </body>
+</html>

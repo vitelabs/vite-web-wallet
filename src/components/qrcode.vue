@@ -26,9 +26,7 @@ export default {
         text: ''
     },
     data() {
-        return { 
-            qrcode: '' 
-        };
+        return { qrcode: '' };
     },
     mounted() {
         this.genCode();
@@ -39,13 +37,15 @@ export default {
                 return;
             }
 
+            // Initializing the QrCode
             this.$refs.qrcode.innerHTML = '';
-            const q = new qrcode(this.$refs.qrcode); //Initializing the QrCode
+            const q = new qrcode(this.$refs.qrcode);
 
+            // Function that generates the QrCode
             q.generate(this.text, Object.assign({}, defaultOpt, this.options)).then(() => {
                 this.image = q.getImage();
-                this.$emit('genImage',this.image);
-            }); // Function that generates the QrCode
+                this.$emit('genImage', this.image);
+            });
         }
     },
     watch: {

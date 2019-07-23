@@ -22,12 +22,14 @@ export default {
     left: calc(100% + 7px);
     top: 50%;
     transform: translateY(-50%);
-    background: #ffffff;
+    background: #fff;
     box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.1);
     border-radius: 2px;
     box-sizing: border-box;
     line-height: 20px;
-    padding: 10px;
+    padding: 4px 6px;
+    font-size: 12px;
+
     .trigle {
         border-top: 7px solid transparent;
         border-bottom: 7px solid transparent;

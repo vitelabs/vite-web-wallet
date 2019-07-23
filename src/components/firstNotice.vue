@@ -1,11 +1,11 @@
 <template>
     <div class="first-notice-wrapper" v-show="isFirst">
         <div class="wrapper">
-            <div class="title">{{ $t('firstNotice.title') }}</div>
+            <div class="title">{{ $t('beforeUse.title') }}</div>
             <ul class="first-notice">
-                <li>{{ $t('firstNotice.text1') }}</li>
-                <li>{{ $t('firstNotice.text2') }}</li>
-                <li>{{ $t('firstNotice.text3') }}</li>
+                <li>{{ $t('beforeUse.text1') }}</li>
+                <li>{{ $t('beforeUse.text2') }}</li>
+                <li>{{ $t('beforeUse.text3') }}</li>
             </ul>
             <div class="__btn __btn_all_in" @click="close">{{ $t('btn.understand') }}</div>
         </div>
@@ -13,21 +13,19 @@
 </template>
 
 <script>
-import localStorage from 'utils/localStorage';
+import { constant, storage } from 'utils/store';
 
 export default {
     mounted() {
-        this.isFirst = !localStorage.getItem('first');
+        this.isFirst = !storage.getItem(constant.FirstKey);
     },
     data() {
-        return {
-            isFirst: false
-        };
+        return { isFirst: false };
     },
     methods: {
         close() {
             this.isFirst = false;
-            localStorage.setItem('first', 'true');
+            storage.setItem(constant.FirstKey, true);
         }
     }
 };
@@ -49,7 +47,8 @@ export default {
     background: rgba(0, 0, 0, 0);
     z-index: 100;
 }
-.wrapper { 
+
+.wrapper {
     background: #fff;
     width: 90%;
     max-height: 600px;
@@ -58,23 +57,27 @@ export default {
     padding: 25px 15px;
     box-sizing: border-box;
     margin-top: -40px;
-    box-shadow: 0 6px 36px 0 rgba(176,192,237,0.4);
+    box-shadow: 0 6px 36px 0 rgba(176, 192, 237, 0.4);
+
     .title {
         font-size: 16px;
-        font-family: $font-bold, arial, sans-serif;
+        @include font-family-bold();
         text-align: center;
     }
+
     .first-notice {
         box-sizing: border-box;
         max-height: 420px;
         padding: 20px;
         font-size: 14px;
         overflow: auto;
+
         li {
             margin-top: 10px;
             line-height: 20px;
             word-wrap: break-word;
             list-style-type: disc;
+
             &:first-child {
                 margin-top: 0;
             }

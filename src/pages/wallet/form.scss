@@ -1,0 +1,100 @@
+@import "~assets/scss/vars.scss";
+
+.__form_border {
+    background: #fff;
+    box-shadow: 0px 2px 10px 1px rgba(176,192,237,0.42);
+    border-radius: 2px;
+}
+
+.__form_input_title {
+    @include font-family-bold();
+    font-size: 12px;
+    color: #1d2024;
+    letter-spacing: 0.35px;
+    line-height: 16px;
+    margin-bottom: 12px;
+
+    .err {
+        float: right;
+        font-size: 12px;
+        color: #ff2929;
+        line-height: 16px;
+    }
+}
+
+.__form_btn {
+    border-radius: 2px;
+    background: #007aff;
+    color: #fff;
+    height: 34px;
+    line-height: 34px;
+    text-align: center;
+    float: right;
+    font-size: 12px;
+    @include font-family-bold();
+
+    &.unuse {
+        background: rgba(191,191,191,1);
+        color: rgba(255,255,255,1);
+        cursor: not-allowed;
+    }
+}
+
+.__form_input {
+    position: relative;
+    box-sizing: border-box;
+    height: 34px;
+    line-height: 34px;
+    background: #fff;
+    border: 1px solid #d4dee7;
+    border-radius: 2px;
+    font-size: 12px;
+    color: #5e6875;
+    padding: 0 15px;
+
+    &.unuse {
+        background: #f3f6f9;
+    }
+
+    input {
+        width: 100%;
+        background: transparent;
+        font-size: 14px;
+    }
+}
+
+.__form_tips {
+    position: absolute;
+    left: 50%;
+    bottom: 48px;
+    transform: translate(-50%, 0);
+    background: #fff;
+    box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    font-size: 12px;
+    color: #3e4a59;
+    box-sizing: border-box;
+    @include font-family-normal();
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    width: 0;
+    height: 0;
+
+    &.active {
+        min-width: 250px;
+        height: auto;
+        opacity: 1;
+        padding: 10px 6px;
+    }
+
+    &::after {
+        content: ' ';
+        display: inline-block;
+        border: 6px solid transparent;
+        border-top: 6px solid #fff;
+        position: absolute;
+        bottom: -12px;
+        left: 50%;
+        margin-left: -6px;
+    }
+}

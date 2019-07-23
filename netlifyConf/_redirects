@@ -1,5 +1,4 @@
 # Redirect default Netlify subdomain to primary domain
 https://vitewebwallet.netlify.com/* https://wallet.vite.net/:splat 301!
-/gw/bind  https://gateway.vite.net/gw/bind  200
-/gw/balance/*  https://gateway.vite.net/gw/balance:splat  200
+/gw/* https://wallet.vite.net/gw/:splat 200
 /*    /index.html   200

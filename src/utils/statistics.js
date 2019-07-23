@@ -1,15 +1,15 @@
-let statisticsNull = {
-    pageView(...args){
+const statisticsNull = {
+    pageView(...args) {
         process.env.NODE_ENV === 'dev' && console.log('[statistics pageView]', JSON.stringify(args));
     },
-    event(...args){
+    event(...args) {
         process.env.NODE_ENV === 'dev' && console.log('[statistics event]', JSON.stringify(args));
     }
 };
 
-let statistics = {
+const statistics = {
     pageView(path) {
-        _hmt.push(['_trackPageview', path]);
+        _hmt.push([ '_trackPageview', path ]);
     },
     event(...args) {
         if (args.length < 2) {
