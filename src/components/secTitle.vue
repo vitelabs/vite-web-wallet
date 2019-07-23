@@ -81,12 +81,14 @@ export default {
 
     .back {
         display: inline-block;
-        padding: 4px;
         width: 16px;
         height: 16px;
         background: url('~assets/imgs/back.svg') center no-repeat;
         background-size: 16px 16px;
-        margin-bottom: -5px;
+        margin-bottom: -3px;
+        margin-right: 6px;
+        border-radius: 2px;
+        border: 1px solid rgba(0,122,255,1);
     }
 
     .help {
