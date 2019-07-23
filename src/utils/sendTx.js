@@ -21,7 +21,7 @@ const defaultConfig = {
     }
 };
 
-const sendTx = execWithValid(function ({ config = defaultConfig, methodName, data, vbExtends = {}, abi = {}, description = {} }) {
+const sendTx = execWithValid(function ({ config = defaultConfig, methodName, data, vbExtends, abi = {}, description = {} }) {
     config = formatConfig(config);
 
     const event = new EventEmitter();
