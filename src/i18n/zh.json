@@ -1003,6 +1003,9 @@
         "withdrawBtn": "确认取回",
         "stakingBalance": "可取回抵押余额"
     },
+    "inviteMining":{
+        "txTitle":"邀请挖矿总收益"
+    },
     "tradeDividend": {
         "title": "分红",
         "poolTitle": "手续费分红池",

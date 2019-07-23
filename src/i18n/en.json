@@ -1006,6 +1006,9 @@
         "withdrawBtn": "Confirm to retrieve",
         "stakingBalance": "Retrievable Staking Amount"
     },
+    "inviteMining":{
+        "txTitle":"邀请挖矿总收益"
+    },
     "tradeDividend": {
         "title": "Dividends",
         "poolTitle": "Trading Fee Dividend Pool",
