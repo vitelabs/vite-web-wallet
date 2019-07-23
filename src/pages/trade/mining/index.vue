@@ -27,7 +27,15 @@
                 </wallet-table>
             </div>
         </div>
-
+        <div class="trade-mining-section">
+            <section-title :title="$t('inviteMining.txTitle')" :amount="`${inviteTotal} VX`"></section-title>
+            <wallet-table class="mint-trade-table content tb"
+                          :headList="inviteHeadList" :contentList="inviteContent">
+                <pagination slot="tableBottom" class="__tb_pagination"
+                            :currentPage="inviteCurrentPage + 1" :toPage="fetchMiningInvite"
+                            :totalPage="inviteTotalPage"></pagination>
+            </wallet-table>
+        </div>
         <vx-confirm v-show="isShowVxConfirm" :close="hideVxConfirm"
                     :actionType="actionType" :stakingObj="stakingObj"></vx-confirm>
     </div>
@@ -41,6 +49,7 @@ import { execWithValid } from 'utils/execWithValid';
 import pagination from 'components/pagination.vue';
 import walletTable from 'components/table/index.vue';
 import { miningTrade, miningPledge } from 'services/trade';
+import {getInviteMiningDetail} from 'services/tradeOperation';
 import sectionTitle from '../components/sectionTitle.vue';
 import vxConfirm from './vxConfirm.vue';
 import stakingDetail from './stakingDetail.vue';
@@ -69,6 +78,11 @@ export default {
             stakeListTotal: 0,
             stakeList: [],
 
+            inviteCurrentPage: 0,
+            inviteTotal: 0,
+            inviteListTotal: 0,
+            inviteList: [],
+
             stakingObj: null,
             actionType: null,
             isShowVxConfirm: false,
@@ -92,7 +106,17 @@ export default {
             }, {
                 text: this.$t('tradeMining.tbHead.mining'),
                 cell: 'mining'
-            } ]
+            } ],
+            inviteHeadList: [ {
+                text: this.$t('tradeMining.tbHead.date'),
+                cell: 'date'
+            }, {
+                text: this.$t('tradeMining.tbHead.fee'),
+                cell: 'fee'
+            }, {
+                text: this.$t('tradeMining.tbHead.mining'),
+                cell: 'mining'
+            } ],
         };
     },
     computed: {
@@ -102,7 +126,12 @@ export default {
         tradeTotalPage() {
             return Math.ceil(this.tradeListTotal / 30);
         },
-
+        inviteContent() {
+            return this.dealList(this.inviteList);
+        },
+        inviteTotalPage() {
+            return Math.ceil(this.inviteListTotal / 30);
+        },
         stakeContent() {
             return this.dealList(this.stakeList);
         },
@@ -124,6 +153,7 @@ export default {
             this.loopStakingInfo();
             this.fetchMiningTrade();
             this.fetchMiningStake();
+            this.fetchMiningInvite();
         },
         dealList(rawlist) {
             const list = [];
@@ -180,7 +210,7 @@ export default {
                 }
 
                 this.tradeListTotal = data.total || 0;
-                this.stakeCurrentPage = pageNumber ? pageNumber - 1 : 0;
+                this.tradeCurrentPage = pageNumber ? pageNumber - 1 : 0;
                 this.tradeTotal = data.miningTotal ? bigNumber.formatNum(data.miningTotal, 8) : 0;
                 this.tradeList = data.miningList || [];
             }).catch(err => {
@@ -205,7 +235,25 @@ export default {
             }).catch(err => {
                 console.warn(err);
             });
-        }
+        },
+        fetchMiningInvite(pageNumber) {
+            const offset = pageNumber ? (pageNumber - 1) * 30 : 0;
+
+            getInviteMiningDetail({
+                address: this.address,
+                offset
+            }).then(data => {
+                if (!data) {
+                    return;
+                }
+                this.inviteListTotal = data.total || 0;
+                this.inviteCurrentPage = pageNumber ? pageNumber - 1 : 0;
+                this.inviteTotal = data.miningTotal ? bigNumber.formatNum(data.miningTotal, 8) : 0;
+                this.inviteList = data.miningList || [];
+            }).catch(err => {
+                console.warn(err);
+            });
+        },
     }
 };
 </script>

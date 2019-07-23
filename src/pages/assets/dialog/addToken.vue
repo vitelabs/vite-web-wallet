@@ -51,7 +51,7 @@ export default {
             const shownTokenIds = shownTokens.map(t => t.tokenId).concat(this.$store.getters.otherWhithBalance);
             const allTokens = this.$store.state.ledger.allTokens;
             const reg = new RegExp(this.userInput.trim(), 'i');
-            return allTokens.filter(t => shownTokenIds.indexOf(t.tokenId) === -1 && t.tokenName).filter(t => t.tokenName.match(reg) || t.tokenSymbol.match(reg)).slice(0, MAX_RES_NUMS);
+            return allTokens.filter(t => shownTokenIds.indexOf(t.tokenId) === -1 && t.tokenName).filter(t => t.tokenName.match(reg) || t.tokenSymbol.match(reg)||t.tokenId===this.userInput.trim()).slice(0, MAX_RES_NUMS);
         },
         BtnUnuse() {
             return this.selectedTokenIds.length === 0;
