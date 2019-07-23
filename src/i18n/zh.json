@@ -999,7 +999,7 @@
         "stakingBalance": "可取回抵押余额"
     },
     "inviteMining":{
-        "txTitle":"邀请挖矿"
+        "txTitle":"邀请挖矿总收益"
     },
     "tradeDividend": {
         "title": "分红",
