@@ -9,5 +9,8 @@
         &:nth-child(3) {
             width: 180px;
         }
+        &:last-child {
+            text-align: right;
+        }
     }
 }
