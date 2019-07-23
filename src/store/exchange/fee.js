@@ -24,7 +24,7 @@ const mutations = {
     setExchangeMarketInfo(state, marketInfo) {
         state.marketInfo = Object.assign({}, marketInfo);
     },
-    setInviteCode(state, payload) {
+    setInviteCode(state, payload = '') {
         state.invitedCode = payload;
     }
 };
@@ -32,6 +32,10 @@ const mutations = {
 const actions = {
     getInvitedCode({ commit, getters }) {
         return new Promise((res, rej) => {
+            if (!getters.activeAddr) {
+                commit('setInviteCode');
+                return rej('no address');
+            }
             getInviteeCode(getters.activeAddr).then(code => {
                 commit('setInviteCode', code);
                 res(code);

@@ -63,6 +63,8 @@ import { getExplorerLink } from 'utils/getLink';
 import openUrl from 'utils/openUrl';
 import Tb from './tb';
 import viteInput from 'components/viteInput';
+import { throttle } from 'lodash';
+
 
 export default {
     components: { Tb, viteInput },
@@ -78,7 +80,8 @@ export default {
             tabName: this.initTabName || 'tokenInfo',
             urlCache: this.token.gateInfo.url,
             dTitle: this.$t('tokenCard.tokenInfo.title', { tokenSymbol: this.token.tokenSymbol }),
-            dWidth: 'wide'
+            dWidth: 'wide',
+            saveLoading: false
         };
     },
     computed: {
@@ -111,22 +114,28 @@ export default {
         getIcon(id) {
             return getTokenIcon(id);
         },
-        save() {
+        save: throttle(function () {
             const formatRight = /(https:\/\/)?([A-Za-z0-9_\-]\.[A-Za-z0-9_\-])+(\/[A-Za-z0-9_\-]+)*/.test(this.urlCache);
             if (!formatRight) {
                 this.$toast(this.$t('tokenCard.nodeErr'));
                 return;
             }
+            if (this.saveLoading) {
+                return;
+            }
+            this.saveLoading = true;
             getChargeAddr({ addr: this.defaultAddr, tokenId: this.token.tokenId },
                 this.url)
                 .then(() => {
                     gateStorage.bindToken(this.token.tokenId, { gateInfo: { url: this.url } });
+                    this.$toast(this.$t('tokenCard.saveSuccess'));
                 })
                 .catch(e => {
                     this.$toast(this.$t('tokenCard.nodeErr'));
                     console.error(e);
-                });
-        },
+                })
+                .finally(() => (this.saveLoading = false));
+        }, 1000),
         tabClick(name) {
             this.tabName = name;
         }
