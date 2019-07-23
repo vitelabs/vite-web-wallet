@@ -1,22 +1,19 @@
-import config from 'config/constant';
 import { timer } from 'utils/asyncFlow';
 import BigNumber from 'utils/bigNumber';
+import { constant } from '@vite/vitejs';
+import $ViteJS from 'utils/viteClient';
 
 const loopTime = 5000;
 let regListInst = null;
-let nodeNameList = {};
+const nodeNameList = {};
 
 const apis = {
     fetchRegistrationList(address) {
-        return $ViteJS.register.getRegistrationList(config.gid, address).then((result)=>{
-            return result || [];
-        });
+        return $ViteJS.register.getRegistrationList(constant.Snapshot_Gid, address).then(result => result || []);
     }
 };
 
-const state = {
-    registrationList: []
-};
+const state = { registrationList: [] };
 
 const mutations = {
     commitRegistrationList(state, list) {
@@ -28,45 +25,50 @@ const mutations = {
 };
 
 const actions = {
-    fetchRegistrationList({ commit }, address) {
-        return apis.fetchRegistrationList(address).then((result) => {
+    fetchRegistrationList({ commit, rootGetters }) {
+        const address = rootGetters.activeAddr;
+        return apis.fetchRegistrationList(address).then(result => {
             commit('commitRegistrationList', result);
         });
     },
-    loopRegList({ state, dispatch }, {
-        address, nodeName, operate, producer
-    }) {
-        // operate ==> 0: cancel / 1: reg / 2: update
-        state.registrationList.forEach((regItem) => {
+    loopRegList({ state, dispatch, rootGetters }, { nodeName, operate, producer }) {
+        const address = rootGetters.activeAddr;
+
+        // Operate ==> 0: cancel / 1: reg / 2: update
+        let isInList = false;
+        state.registrationList.forEach(regItem => {
             if (regItem.name !== nodeName) {
                 return;
             }
-            nodeNameList[nodeName] = {
-                nodeName, operate, producer
-            };
+            isInList = true;
+            nodeNameList[nodeName] = { nodeName, operate, producer };
         });
 
-        if (regListInst) {
-            return;
+        if (!state.registrationList.length || !isInList) {
+            nodeNameList[nodeName] = { nodeName, operate, producer };
         }
 
-        regListInst = new timer(()=>{
-            state.registrationList.forEach((item) => {
-                let nodeName = item.name;
+        dispatch('stopLoopRegList');
+        regListInst = new timer(() => {
+            state.registrationList.forEach(item => {
+                const nodeName = item.name;
                 if (!nodeNameList[nodeName]) {
                     return;
                 }
- 
-                let operate = nodeNameList[nodeName].operate;
-                let isCancel = item.cancelHeight && !BigNumber.isEqual(item.cancelHeight, 0);
-                switch(operate) {
-                case 0: // cancel
+
+                const operate = nodeNameList[nodeName].operate;
+                const isCancel = item.cancelTime && !BigNumber.isEqual(item.cancelTime, 0);
+                switch (operate) {
+                // Cancel
+                case 0:
                     isCancel && delete nodeNameList[nodeName];
                     break;
-                case 1: // reg
+                // Reg
+                case 1:
                     !isCancel && nodeNameList[nodeName].operate && delete nodeNameList[nodeName];
                     break;
-                case 2: // update
+                // Update
+                case 2:
                     nodeNameList[nodeName].producer === item.nodeAddr && delete nodeNameList[nodeName];
                     break;
                 default: break;
@@ -74,15 +76,16 @@ const actions = {
             });
 
             let length = 0;
-            for (let name in nodeNameList) {
+            for (const name in nodeNameList) {
                 name && length++;
             }
 
             if (!length) {
                 dispatch('stopLoopRegList');
+
                 return;
             }
-            
+
             return dispatch('fetchRegistrationList', address);
         }, loopTime);
         regListInst.start();
@@ -95,23 +98,25 @@ const actions = {
 
 const getters = {
     regNameList(state) {
-        let list = [];
-        state.registrationList.forEach((item) => {
-            let isCancel = item.cancelHeight && !BigNumber.isEqual(item.cancelHeight, 0);
+        const list = [];
+        state.registrationList.forEach(item => {
+            const isCancel = item.cancelTime && !BigNumber.isEqual(item.cancelTime, 0);
             !isCancel && list.push(item.name);
         });
+
         return list;
     },
     regAddrList(state) {
-        let list = {};
-        state.registrationList.forEach((item) => {
-            let isCancel = item.cancelHeight && !BigNumber.isEqual(item.cancelHeight, 0);
+        const list = {};
+        state.registrationList.forEach(item => {
+            const isCancel = item.cancelTime && !BigNumber.isEqual(item.cancelTime, 0);
             list[item.name] = list[item.name] || [];
             list[item.name].push({
                 nodeAddr: item.nodeAddr,
                 isCancel
             });
         });
+
         return list;
     }
 };

@@ -3,6 +3,9 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <meta http-equiv="Cache-Control" content="no-store, must-revalidate"/>
+        <meta http-equiv="expires" content="0"/>
+        <meta name="format-detection" content="telephone=no"/>
         <link rel="shortcut icon" type="image/x-icon" href="favicon.ico"/>
         <title><%= htmlWebpackPlugin.options.title %></title>
 
@@ -11,9 +14,20 @@
             (function() {
                 var hm = document.createElement("script");
                 hm.src = "https://hm.baidu.com/hm.js?3a3b76d8f12f13e970c2fdbe222a6d93";
-                var s = document.getElementsByTagName("script")[0]; 
+                var s = document.getElementsByTagName("script")[0];
                 s.parentNode.insertBefore(hm, s);
             })();
+        </script>
+
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-132666177-1"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag('js', new Date());
+            gtag('config', 'UA-132666177-1');
         </script>
     </head>
 
@@ -43,7 +57,7 @@
                 </div>
             </div>
         </div>
-        
+
         <style>
             body {
                 margin: 0;
@@ -83,22 +97,22 @@
             }
 
             @-webkit-keyframes sk-rotateplane {
-                0% { -webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg) } 
+                0% { -webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg) }
                 25% { -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(0deg) }
                 50% { -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(180deg); }
                 75% { -webkit-transform: perspective(120px) rotateX(-0deg) rotateY(180deg); }
                 100% { -webkit-transform: perspective(120px) rotateX(-0deg) rotateY(-0deg); }
             }
             @keyframes sk-rotateplane {
-                0% { 
+                0% {
                     transform: perspective(120px) rotateX(0deg) rotateY(0deg);
-                    -webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg) 
-                } 
+                    -webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg)
+                }
                 25% {
                     transform: perspective(120px) rotateX(-180deg) rotateY(0deg);
-                    -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(0deg) 
+                    -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(0deg)
                 }
-                50% { 
+                50% {
                     transform: perspective(120px) rotateX(-180deg) rotateY(180deg);
                     -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(180deg);
                 }

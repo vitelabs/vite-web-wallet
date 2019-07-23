@@ -1,125 +1,102 @@
 <template>
     <div v-show="mnemonic" class="mnemonic">
         <div class="row">
-            <span class="title">{{ $t('mnemonic.title') }}</span>
+            <span class="small-title">{{ $t('mnemonic.title') }}</span>
             <span class="copy icon __pointer" @click="copy" :class="{ 'lock':  lock }"></span>
-            <span class="eyes icon __pointer" @click="toggleVisible" :class="{
-                'lock':  lock,
-                'visible': visible
+            <span class="lock-icon icon __pointer" @click="unlock" :class="{
+                'lock': lock
             }"></span>
         </div>
-        <copyOK class="copy-wrapper" :copySuccess="copySuccess"></copyOK>
+        <copy ref="copyDome" class="copy-wrapper"></copy>
         <div class="content">{{ mnemonicStr }}</div>
     </div>
 </template>
 
 <script>
-import copy from 'utils/copy';
-import copyOK from 'components/copyOK';
+import copy from 'components/copy';
+import { pwdConfirm } from 'components/password';
 
 export default {
-    components: {
-        copyOK
-    },
-    props: {
-        lock: {
-            type: Boolean,
-            default: true
-        }
-    },
+    components: { copy },
     data() {
-        let activeAccount = this.$wallet.getActiveAccount();
-        let mnemonic = activeAccount.getMnemonic();
-        let mnemonicStr = mnemonic ? this.getShowMnemonic(mnemonic) : '';
-
-        return {
-            visible: false,
-            mnemonic,
-            copySuccess: false,
-            mnemonicStr
-        };
+        return { lock: true };
     },
     computed: {
-        showMnemonic() {
-            return !this.lock && this.visible;
-        }
-    },
-    watch: {
-        showMnemonic: function() {
-            this.mnemonicStr = this.mnemonic ? this.getShowMnemonic(this.mnemonic) : '';
+        mnemonic() {
+            const acc = this.$store.state.wallet.currHDAcc;
+            return acc ? acc.mnemonic : '';
+        },
+        mnemonicStr() {
+            if (!this.mnemonic) {
+                return '';
+            }
+
+            if (!this.lock) {
+                return this.mnemonic;
+            }
+
+            let showStr = '';
+            for (let i = 0; i < this.mnemonic.length; i++) {
+                showStr += '*';
+            }
+            return showStr;
         }
     },
     methods: {
+        unlock() {
+            if (!this.lock) {
+                this.lock = true;
+                return;
+            }
+
+            pwdConfirm({
+                submit: () => {
+                    this.lock = false;
+                }
+            });
+        },
         copy() {
             if (this.lock) {
                 return;
             }
-            copy(this.mnemonic);
-            this.copySuccess = true;
-            setTimeout(()=>{
-                this.copySuccess = false;
-            }, 1000);
-        },
-        toggleVisible() {
-            if (this.lock) {
-                return;
-            }
-            this.visible = !this.visible;
-        },
-        getShowMnemonic(mnemonic) {
-            if (!this.lock && this.visible) {
-                return mnemonic;
-            }
-
-            let showStr = '';
-            for (let i=0; i<mnemonic.length; i++) {
-                showStr += '*';
-            }
-            return showStr;
+            this.$refs.copyDome.copy(this.mnemonic);
         }
     }
 };
 </script>
 
-
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
+@import "./setting.scss";
 
 .mnemonic {
     width: 100%;
     position: relative;
+
     .copy-wrapper {
         bottom: 90px;
     }
 }
+
 .row {
     width: 100%;
-    margin-bottom: 16px;
-    .title {
-        font-size: 14px;
-        color: #1D2024;
-        letter-spacing: 0.35px;
-        line-height: 16px;
-        font-family: $font-bold, arial, sans-serif;
-    }
+    margin-bottom: 12px;
     .icon {
         display: block;
         width: 20px;
         height: 20px;
         float: right;
     }
-    .eyes {
+
+    .lock-icon {
         margin-right: 16px;
         background-size: 20px 20px;
-        background: url('../../assets/imgs/eyeclose_default.svg');
-        &.visible {
-            background: url('../../assets/imgs/eyeopen_default.svg');
-        }
+        background: url('../../assets/imgs/unlock.svg') center no-repeat;
         &.lock {
-            background: url('../../assets/imgs/eyeopen_disabled.svg');
-            cursor: not-allowed;
+            background: url('../../assets/imgs/lock.svg') center no-repeat;
         }
     }
+
     .copy {
         background-size: 20px 20px;
         background: url('../../assets/imgs/copy_default.svg');
@@ -129,13 +106,14 @@ export default {
         }
     }
 }
+
 .content {
-    background: #F3F6F9;
-    border: 1px solid #D4DEE7;
+    background: #f3f6f9;
+    border: 1px solid #d4dee7;
     border-radius: 2px;
     padding: 10px 15px;
     font-size: 14px;
-    color: #5E6875;
+    color: #5e6875;
     word-wrap: break-word;
 }
 </style>

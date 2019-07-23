@@ -1,0 +1,30 @@
+.wallet-trans-list-table {
+    .tType {
+        min-width: 230px;
+        width: 15%;
+    }
+    
+    .status {
+        min-width: 120px;
+        width: 10%;
+    }
+    
+    .time {
+        min-width: 200px;
+        width: 20%;
+    }
+    
+    .address {
+        min-width: 240px;
+        width: 25%;
+    }
+    
+    .sum {
+        width: 14%;
+        min-width: 150px;
+    }
+    
+    .token {
+        min-width: 70px;
+    }
+}

@@ -1,29 +1,27 @@
 @import "~assets/scss/vars.scss";
 
 :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-    color: #999; 
+    color: rgba(94,104,117,0.3);
 }
 ::-moz-placeholder { /* Mozilla Firefox 19+ */
-    color: #999;
+    color: rgba(94,104,117,0.3);
 }
 ::-webkit-input-placeholder { /* WebKit browsers */
-    color:#999; 
+    color: rgba(94,104,117,0.3);
 }
 :-ms-input-placeholder { /* Internet Explorer 10+ */
-    color:#999; 
+    color: rgba(94,104,117,0.3);
+}
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
 }
 
 body {
     padding: 0px;
     margin: 0px;
     -webkit-overflow-scrolling: touch;
-    font-family: $font-normal, arial, sans-serif;
+    @include font-family-normal();
     letter-spacing: 0;
-}
-
-::-webkit-scrollbar {
-    width: 0px;
-    height: 0;
 }
 
 ul {
@@ -56,12 +54,20 @@ textarea {
 }
 
 .__title {
-    font-family: $font-bold, arial, sans-serif;
+    @include font-family-bold();
     font-size: 26px;
     color: #FFFFFF;
     letter-spacing: 0;
     text-align: center;
     padding: 0 0 30px;
+}
+
+.__second-title {
+    font-size: 14px;
+    @include font-family-bold();
+    font-weight: 600;
+    color: rgba(29,32,36,1);
+    line-height: 18px;
 }
 
 .__btn {
@@ -77,14 +83,14 @@ textarea {
     background: #007AFF;
     color: #FFFFFF;
     border-radius: 3px;
-    font-family: $font-bold, arial, sans-serif;
+    @include font-family-bold();
 }
 
 .__btn_border {
     border-radius: 2px;
     background: #fff;
     color: #195ADD;
-    font-family: $font-bold, arial, sans-serif;
+    @include font-family-bold();
 }
 
 .__btn_input {
@@ -92,7 +98,7 @@ textarea {
     border-radius: 2px;
     overflow: hidden;
     text-align: left;
-    font-family: $font-normal, arial, sans-serif;
+    @include font-family-normal();
     padding: 0 16px;
     input {
         width: 100%;
@@ -106,7 +112,7 @@ textarea {
     text-align: center;
     font-size: 16px;
     color: #fff;
-    font-family: $font-bold, arial, sans-serif;
+    @include font-family-bold();
 }
 
 .__ellipsis {
@@ -141,8 +147,21 @@ textarea {
         }
     }
 }
+
+.clearfix {
+    overflow: auto;
+    zoom: 1;
+}
+
 @media only screen and (max-width: 500px) {
     .__btn_list .__btn {
         width: 48%;
     }
+}
+
+@font-face {
+    font-family: "DINPro";
+    src: url("../font/DINPro.otf");
+    font-weight: normal;
+    font-style: normal;
 }

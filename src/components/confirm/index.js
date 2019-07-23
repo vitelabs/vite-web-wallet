@@ -1,15 +1,15 @@
 import Vue from 'vue';
-import confirmComponent from '../confirm.vue';
+import confirmComponent from './confirm.vue';
 
 const Confirm = Vue.extend(confirmComponent);
-let instance = new Confirm({
-    el: document.createElement('div')
-});
 
-export default function({
+export default function ({
+    size,
+    type = '',
     showMask = true,
-    title, 
-    singleBtn = false, 
+    title,
+    content = '',
+    singleBtn = false,
     closeBtn = {
         show: false,
         click: () => {}
@@ -17,27 +17,34 @@ export default function({
     leftBtn = {
         text: '',
         click: () => {}
-    }, 
+    },
     rightBtn = {
         text: '',
         click: () => {}
-    },
-    content = ''
+    }
 }) {
-    let _close = (cb) => {
+    let instance = new Confirm({ el: document.createElement('div') });
+
+    const appEl = document.body;
+    const _close = cb => {
         try {
-            document.body.removeChild(instance.$el);
-        } catch(err) {
+            appEl.removeChild(instance.$el);
+        } catch (err) {
             console.warn(err);
         }
+        instance.$destroy();
+        instance = null;
         cb && cb();
     };
 
     instance.showMask = showMask;
+    instance.type = type || '';
+    instance.size = size || '';
     instance.title = title;
+    instance.content = content;
     instance.singleBtn = singleBtn;
     instance.closeIcon = closeBtn.show;
-    instance.close = ()=>{
+    instance.close = () => {
         _close(closeBtn ? closeBtn.click : null);
     };
     instance.leftBtnTxt = leftBtn.text;
@@ -48,8 +55,8 @@ export default function({
     instance.rightBtnClick = () => {
         _close(rightBtn ? rightBtn.click : null);
     };
-    instance.content = content || '';
 
-    document.body.appendChild(instance.$el);
+    appEl.appendChild(instance.$el);
+
     return true;
 }

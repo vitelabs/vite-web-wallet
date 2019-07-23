@@ -38,6 +38,7 @@ export default {
     border: 6px solid #dfdfdf;
     border-radius: 50%;
 }
+
 .loading-ring div {
     display: block;
     position: absolute;
@@ -45,15 +46,17 @@ export default {
     right: -6px;
     width: 100%;
     height: 100%;
-    border: 6px solid #195ADD;
+    border: 6px solid #195add;
     border-radius: 50%;
     animation: lds-ring 1.2s linear infinite;
-    border-color: #195ADD #195ADD #195ADD transparent;
+    border-color: #195add #195add #195add transparent;
 }
+
 @keyframes lds-ring {
     0% {
         transform: rotate(0deg);
     }
+
     100% {
         transform: rotate(360deg);
     }
@@ -62,6 +65,7 @@ export default {
 .dot {
     display: inline-block;
 }
+
 .dot > div {
     width: 8px;
     height: 8px;
@@ -70,21 +74,46 @@ export default {
     display: inline-block;
     animation: sk-bouncedelay 1.4s infinite ease-in-out both;
 }
+
 .dot .bounce1 {
     animation-delay: -0.32s;
 }
+
 .dot .bounce2 {
     animation-delay: -0.16s;
 }
 
 @keyframes sk-bouncedelay {
-    0%, 80%, 100% { 
+    0%,
+    80%,
+    100% {
         opacity: 0.1;
         transform: scale(0.3);
-    } 
+    }
+
     40% {
         opacity: 1;
-        transform: scale(1.0);
+        transform: scale(1);
+    }
+}
+
+.ex-center-loading {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+
+    .dot {
+        position: relative;
+        top: 50%;
+        left: 50%;
+        margin-top: -11px;
+        margin-left: -17px;
+    }
+
+    .dot > div {
+        background-color: #007aff;
     }
 }
 </style>

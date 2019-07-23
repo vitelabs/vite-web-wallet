@@ -1,0 +1,70 @@
+.wallet-vote-table {
+    min-height: 150px;
+    .clickable {
+        color: #007aff;
+        cursor: pointer;
+    }
+
+    .__tb {
+        width: 100%;
+    }
+
+    .__tb_cell {
+        width: 25%;
+        .hoveraction {
+            &.tipsicon {
+                position: relative;
+                display: inline-block;
+                background: url(~assets/imgs/hover_help.svg);
+                overflow: visible;
+                width: 16px;
+                height: 16px;
+                vertical-align: sub;
+                cursor: pointer;
+
+                .unregister-tips {
+                    word-break: break-all;
+                    min-width: 314px;
+                    min-height: 100px;
+                    padding: 10px;
+                    font-size: 14px;
+                    color: #3e4a59;
+                    line-height: 20px;
+                }
+            }
+        }
+    }
+
+    &.node-list {
+        .__tb_cell {
+            min-width: 100px;
+            text-overflow: hidden;
+            margin: 0 5px;
+            text-overflow: ellipsis;
+
+            &:first-child {
+                width: 5%;
+                min-width: 30px;
+            }
+
+            &:nth-child(2) {
+                width: 30%;
+            }
+
+            &:nth-child(3) {
+                width: 40%;
+                min-width: 450px;
+            }
+
+            &:nth-child(4) {
+                width: 15%;
+                min-width: 150px;
+            }
+
+            &:last-child {
+                width: 5%;
+                min-width: 50px;
+            }
+        }
+    }
+}

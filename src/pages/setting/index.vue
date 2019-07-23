@@ -1,62 +1,66 @@
 <template>
-    <layout>
-        <div v-show="showPassWrapper" class="item" :class="{ 'unlock': !lock }">
-            <div class="title __pointer">{{ $t('setting.unlock') }}</div>
-            <div class="input-wrapper">
-                <input :disabled="!lock" class="pass" v-model="pass" type="password" :placeholder="$t('create.input')" />
-            </div>
-            <span class="btn __pointer" @click="validPass">{{ $t('btn.submit') }}</span>
-        </div>
+    <page-layout>
+        <div class="setting-wrapper">
+            <sec-title class="setting-sec-title" :isShowHelp="false"></sec-title>
+            <div class="content-wrapper">
+                <div class="content">
+                    <div v-if="!!currHDAcc" class="big-title">{{ $t('setting.addrList') }}</div>
+                    <accList v-if="!!currHDAcc"></accList>
 
-        <mnemonic :lock="lock" class="item"></mnemonic>
-        <accList class="item"></accList>
-        <lang class="item"></lang>
-    </layout>
+                    <div v-if="!!isLogin&&!currHDAcc.isBifrost" class="big-title">{{ $t('setting.secure') }}</div>
+                    <mnemonic v-if="!!isLogin&&!currHDAcc.isBifrost"></mnemonic>
+                    <hold-pwd v-if="!!isLogin&&!currHDAcc.isBifrost" class="item"></hold-pwd>
+                </div>
+
+                <div class="area">
+                    <div class="big-title">{{ $t('setting.config') }}</div>
+                    <auto-logout v-if="!!isLogin&&!currHDAcc.isBifrost"></auto-logout>
+                    <lang></lang>
+                    <currency></currency>
+                </div>
+
+                <div class="area">
+                    <div class="big-title">{{ $t('setting.netInfo') }}</div>
+                    <net-info></net-info>
+                </div>
+            </div>
+        </div>
+    </page-layout>
 </template>
 
 <script>
-import layout from './layout.vue';
-import accList from './accList.vue';
+import pageLayout from 'components/pageLayout/index';
+import secTitle from 'components/secTitle';
+import holdPwd from 'components/password/holdPwd.vue';
+import netInfo from './netInfo';
 import lang from './lang.vue';
+import autoLogout from './autoLogout.vue';
+import accList from './accList.vue';
 import mnemonic from './mnemonic.vue';
+import currency from './currency.vue';
+import { StatusMap } from 'wallet';
 
 export default {
     components: {
-        layout, accList, lang, mnemonic
+        pageLayout,
+        secTitle,
+        netInfo,
+        lang,
+        autoLogout,
+        holdPwd,
+        accList,
+        mnemonic,
+        currency
     },
     data() {
-        let activeAccount = this.$wallet.getActiveAccount();
-        let showPassWrapper = activeAccount ? activeAccount.type === 'wallet' : false;
-
-        return {
-            isSubmiting: false,
-            activeAccount,
-            showPassWrapper,
-            pass: '',
-            lock: true
-        };
+        return { isTestEnv: process.env.NODE_ENV === 'dev' || process.env.NODE_ENV === 'test' };
     },
-    methods: {
-        validPass() {
-            if (this.isSubmiting || !this.lock) {
-                return;
-            }
-
-            if (!this.pass) {
-                this.$toast( this.$t('account.hint.wrong') );
-                return;
-            }
-
-            this.isSubmiting = true;
-            this.activeAccount.verify(this.pass).then((result) => {
-                this.isSubmiting = false;
-                this.lock = !result;
-                this.lock && this.$toast( this.$t('account.hint.wrong') );
-            }).catch(() => {
-                this.isSubmiting = false;
-                this.lock = true;
-                this.$toast( this.$t('account.hint.wrong') );
-            });
+    computed: {
+        isLogin() {
+            return this.$store.state.wallet.status === StatusMap.UNLOCK;
+        },
+        currHDAcc() {
+            return this.$store.state.wallet.currHDAcc;
         }
     }
 };
@@ -64,71 +68,37 @@ export default {
 
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
+@import "./setting.scss";
 
-.item {
-    margin-bottom: 20px;
-    margin-top: 0;
-    &.unlock {
-        .pass {
-            border: 1px solid #efefef;
-        }
-        .btn {
-            background: #efefef;
-            color: #666;
-        }
+.setting-wrapper {
+    position: relative;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+
+    .setting-sec-title {
+        margin-top: 10px;
     }
-    .title {
-        font-size: 14px;
-        color: #1D2024;
-        letter-spacing: 0.35px;
-        line-height: 16px;
-        margin-bottom: 16px;
-    }
-    .input-wrapper {
-        display: inline-block;
-        width: 83%;
-        height: 40px;
-        margin-right: 10px;
-        .pass {
-            display: inline-block;
-            box-sizing: border-box;
-            width: 100%;
-            height: 100%;
-            padding: 0 15px;
-            line-height: 40px;
-            background: #FFFFFF;
-            border: 1px solid #D4DEE7;
-            border-radius: 2px;
-            font-size: 14px;
-        }
-    }
-    .btn {
-        position: relative;
-        top: -1px;
-        float: right;
-        width: 12%;
-        max-width: 60px;
-        height: 40px;
-        text-align: center;
-        line-height: 40px;
-        background: #007AFF;
+
+    .content-wrapper {
+        position: absolute;
+        top: 40px;
+        bottom: 10px;
+        left: 0px;
+        right: 0px;
+        overflow: auto;
+        background: #fff;
+        box-shadow: 0px 2px 10px 1px rgba(176, 192, 237, 0.42);
         border-radius: 2px;
-        font-family: $font-normal-b, arial, sans-serif;
-        font-size: 14px;
-        color: #FFFFFF;
-        &.unuse {
-            background: #efefef;
-            color: #666;
+
+        .content {
+            max-width: 510px;
+            padding: 0 20px 20px;
         }
     }
-}
-
-@media only screen and (max-width: 500px) {
-    .item .input-wrapper {
-        width: 75%;
-    }
-    .item .btn {
-        width: 60px;
+    .area {
+        padding: 0 20px 20px;
+        border-top: 1px solid rgba(198, 203, 212, .3);
     }
 }
 </style>

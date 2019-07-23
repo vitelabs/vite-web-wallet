@@ -1,9 +1,11 @@
-var fs = require('fs');
-var path = require('path');
+const fs = require('fs');
+const path = require('path');
 
-var routesPath = path.join(__dirname, 'routes.js');
+// RouteConfig > pageConfig
+const routeConfig = require('./src/router/config.js');
 
-var result = fs.existsSync(routesPath);
+const routesPath = path.join(__dirname, '/src/router/routes.js');
+const result = fs.existsSync(routesPath);
 // Not exists
 if (result) {
     fs.unlinkSync(routesPath);
@@ -11,11 +13,10 @@ if (result) {
 
 // Write routes file
 let routesStr = '';
-let routes = 'export default { routes: [';
-let indexRoutes = [];
+const routes = {};
 
 traversing('./src/pages/', (fPath, next, val) => {
-    let stats = fs.statSync(fPath);
+    const stats = fs.statSync(fPath);
 
     if (stats.isDirectory()) {
         next(fPath);
@@ -26,61 +27,109 @@ traversing('./src/pages/', (fPath, next, val) => {
         return;
     }
 
-    let tmpPath = fPath.replace(/src\/pages\//, '');
+    const tmpPath = fPath.replace(/src\/pages\//, '');
 
-    // pages/XXX.vue
+    // Pages/XXX.vue
     if (tmpPath === val && val.indexOf('.vue') === val.length - 4) {
-        let name = val.replace('.vue', '');
-        pushRoute(fPath, tmpPath, name);
+        const name = val.replace('.vue', '');
+        (name !== 'index') && pushRoute(fPath, tmpPath, name, name);
         return;
     }
 
-    // pages/XXX/XXX/XXX/index.vue
-    if (val === 'index.vue') {
-        let path = '/' + tmpPath.replace(/\/index.vue$/, '');
+    if (val !== 'index.vue') {
+        return;
+    }
 
-        let nList = path.split('/');
-        let name = '';
-        nList.forEach((n) => {
-            if (!n) {
-                return;
-            }
-            if (!name) {
-                name += n;
-                return;
-            }
-            name += (n ? n[0].toLocaleUpperCase() + n.slice(1) : '');
-        });
+    // Pages/XXX/XXX/index.vue
+    const path = tmpPath.replace(/\/index.vue$/, '');
 
+    const nList = path.split('/');
+    if (!nList || !nList.length || nList.length > 2) {
+        return;
+    }
+
+    let name = '';
+    nList.forEach(n => {
         if (!name) {
+            name += n;
             return;
         }
-        
-        pushRoute(fPath, tmpPath, name);
-    }
-}, './');
+        name += (n ? n[0].toLocaleUpperCase() + n.slice(1) : '');
+    });
 
-routes += '],';
-routesStr += routes;
-routesStr += `indexLayoutRoutes: ${JSON.stringify(indexRoutes)}}`;
+    if (!name) {
+        return;
+    }
+
+    pushRoute(fPath, tmpPath, name, nList[0]);
+});
+
+let _routes = '';
+for (const key in routes) {
+    const _k = routes[key];
+
+    // [TODO] Async Route
+    // _routes += `{name: '${ _k.name }', path: '${ _k.path }', component: ()=>import(\'${ _k.pagePath }\')`;
+    _routes += `{name: '${ _k.name }', path: '${ _k.path }', component: ${ _k.component }`;
+
+    const alias = routeConfig[key] && routeConfig[key].alias ? routeConfig[key].alias : _k.alias;
+    alias && (_routes += `, alias: ${ JSON.stringify(alias) }`);
+
+    if (!_k.children || !_k.children.length) {
+        _routes += '},';
+        continue;
+    }
+
+    _routes += ', children: [';
+    _k.children.forEach(_kr => {
+        // [TODO] Async Route
+        // _routes += `{name: '${ _kr.name }', path: '${ _kr.path }', component: ()=>import(\'${ _kr.pagePath }\')`;
+        _routes += `{name: '${ _kr.name }', path: '${ _kr.path }', component: ${ _kr.component }`;
+        const alias = routeConfig[_kr.name] && routeConfig[_kr.name].alias ? routeConfig[_kr.name].alias : _kr.alias;
+        alias && (_routes += `, alias: ${ JSON.stringify(alias) }`);
+        _routes += '},';
+    });
+    _routes += ']},';
+}
+_routes += '{ path: \'/\', redirect: \'/index\' },{ path: \'*\', redirect: \'/notFound\' }';
+routesStr += `export default { routes: [${ _routes }] }`;
 
 fs.writeFileSync(routesPath, routesStr);
 
-function pushRoute(fPath, tmpPath, name) {
-    let file = fs.readFileSync(fPath);
-    if (file.indexOf('/**  vite-wallet index-layout */') !== -1) {
-        indexRoutes.push(name);
+
+function pushRoute(fPath, tmpPath, name, parent) {
+    if (!name) {
+        return;
     }
-    routesStr += `import ${name} from \'pages/${tmpPath}\';`;
-    routes += `{name:'${name}',path:'/${name}',component:${name}},`;
+
+    const _route = {};
+
+    // [TODO] Async Route
+    routesStr += `import ${ name } from \'pages/${ tmpPath }\';`;
+    _route.pagePath = `pages/${ tmpPath }`;
+    _route.name = name;
+    _route.path = `/${ name }`;
+    _route.component = name;
+
+    // _route is children, push children
+    if (parent !== name) {
+        routes[parent] = routes[parent] || {};
+        routes[parent].children = routes[parent].children || [];
+        routes[parent].children.push(_route);
+        return;
+    }
+
+    // _route is parent
+    routes[parent] = Object.assign(routes[parent] || {}, _route);
+    routes[parent].component = routes[parent].component || _route.component;
+    routes[parent].children = routes[parent].children || [];
 }
 
-function traversing (startPath, cb) {
-    function readdirSync (startPath) {
-        let files = fs.readdirSync(startPath);
-
-        files.forEach((val) => {
-            let fPath = path.join(startPath, val);
+function traversing(startPath, cb) {
+    function readdirSync(startPath) {
+        const files = fs.readdirSync(startPath);
+        files.forEach(val => {
+            const fPath = path.join(startPath, val);
             cb && cb(fPath, readdirSync, val);
         });
     }

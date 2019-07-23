@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="50px" height="50px" viewBox="0 0 50 50" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 55.2 (78181) - https://sketchapp.com -->
+    <title>提示</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="3.85452822%" y1="0%" x2="100%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#54B6FF" offset="0%"></stop>
+            <stop stop-color="#2A7FFF" offset="100%"></stop>
+        </linearGradient>
+        <circle id="path-2" cx="25" cy="25" r="23.5"></circle>
+    </defs>
+    <g id="页面1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" opacity="0.798339844">
+        <g id="弹窗新修改" transform="translate(-678.000000, -605.000000)">
+            <g id="声明备份" transform="translate(513.000000, 525.000000)">
+                <g id="Group-2" transform="translate(165.000000, 80.000000)">
+                    <g id="椭圆形">
+                        <use fill="url(#linearGradient-1)" xlink:href="#path-2"></use>
+                        <use fill-opacity="0.3" fill="#FFFFFF" xlink:href="#path-2"></use>
+                    </g>
+                    <path d="M25.2381043,38.5 C23.58125,38.5 22.2381043,37.1568542 22.2381043,35.5 C22.2381043,33.8431458 23.58125,32.5 25.2381043,32.5 C26.8949585,32.5 28.2381043,33.8431458 28.2381043,35.5 C28.2381043,37.1568542 26.8949585,38.5 25.2381043,38.5 Z M25.1131043,11.5 C27.0531971,11.5 28.625953,13.0727559 28.625953,15.0128487 C28.625953,15.1275794 28.6203323,15.2422412 28.6091111,15.3564218 L27.3087137,28.5885361 C27.1977177,29.7179689 26.2479781,30.5789474 25.1131043,30.5789474 C23.9782305,30.5789474 23.0284909,29.7179689 22.9174949,28.5885361 L21.6170975,15.3564218 C21.4273473,13.4256306 22.8387399,11.7065921 24.7695312,11.5168419 C24.8837118,11.5056207 24.9983736,11.5 25.1131043,11.5 Z" id="形状结合" fill="#FFFFFF"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

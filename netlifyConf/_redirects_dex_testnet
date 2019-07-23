@@ -1,0 +1,6 @@
+# *** Warning! Your custom domain is not using HTTPS yet ***
+# These rules will change if you change your site’s custom domains or HTTPS settings
+
+# Redirect default Netlify subdomain to primary domain
+/gw/* http://132.232.60.116:8000/gw/:splat 200
+/*    /index.html   200

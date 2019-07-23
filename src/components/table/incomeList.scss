@@ -1,0 +1,16 @@
+.income-list-table {
+    width: 100%;
+    min-width: 0;
+    min-height: 300px;
+    box-shadow: none;
+    flex: 1;
+    @include rowWith {
+        width: 25%;
+        &:nth-child(3) {
+            width: 180px;
+        }
+        &:last-child {
+            text-align: right;
+        }
+    }
+}

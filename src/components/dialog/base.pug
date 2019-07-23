@@ -1,0 +1,13 @@
+div(:style="s.container")
+    div(:style="s.wrapper")
+        div(:style="s.title") {{Title}}
+            span(v-show="ShowClose" @click="close" :style="s.close")
+        block head
+        block originContent
+            div(:style="s.body")
+                block content
+                    div(v-if="Content")
+        div(:style="s.btnGroup" v-if="ShowBottom")
+            div(:style="[s.btn,BtnUnuse||btnUnuse?s.unUse:undefined]" v-if="!!STxt" @click="rClick") {{STxt}}
+            div(:style="[s.lBtn,s.btn]" v-if="!STxt"  @click="lClick") {{LTxt}}
+            div(:style="[s.btn,BtnUnuse||btnUnuse?s.unUse:undefined]" v-if="!STxt"  @click="rClick") {{RTxt}}
