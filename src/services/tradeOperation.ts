@@ -6,7 +6,7 @@ import i18n from "i18n";
 
 const version = "v1";
 const path = `${process.env.dexApiServer}${version}`;
-const request = getClient(path, (xhr:XMLHttpRequest) => {
+const request = getClient(path, (xhr: XMLHttpRequest) => {
   if (xhr.status === 200) {
     const { code, msg, data, error, subCode } = JSON.parse(xhr.responseText);
     if (code !== 0) {
@@ -31,26 +31,26 @@ const genCodeInterface = {
   name: "DexFundNewInviter",
   inputs: []
 };
-export function bindCode(code:number) {
+export function bindCode(code: number) {
   return new Promise((res, rej) => {
     sendTx({
-      abi:JSON.stringify(bindCodeInterface),
-      description:{
-        "function":{
-            "name":{
-                "base":i18n.t('assets.invite.receiveInviteTitle','en'),
-                "zh":i18n.t('assets.invite.receiveInviteTitle','zh')
-            }
+      abi: JSON.stringify(bindCodeInterface),
+      description: {
+        function: {
+          name: {
+            base: i18n.t("assets.invite.receiveInviteTitle", "en"),
+            zh: i18n.t("assets.invite.receiveInviteTitle", "zh")
+          }
         },
-        "inputs":[
-            {
-                "name":{
-                    "base":i18n.t('assets.invite.codeLable'),
-                    "zh":i18n.t('assets.invite.codeLable')
-                }
+        inputs: [
+          {
+            name: {
+              base: i18n.t("assets.invite.codeLable"),
+              zh: i18n.t("assets.invite.codeLable")
             }
-        ],
-      },        
+          }
+        ]
+      },
       methodName: "callContract",
       data: {
         toAddress: constant.DexFund_Addr,
@@ -69,16 +69,16 @@ export function bindCode(code:number) {
 export function genCode() {
   return new Promise((res, rej) => {
     sendTx({
-      abi:JSON.stringify(genCodeInterface),
-        description:{
-        "function":{
-            "name":{
-                "base":i18n.t('assets.invite.inviteTitle','en'),
-                "zh":i18n.t('assets.invite.inviteTitle','en')
-            }
+      abi: JSON.stringify(genCodeInterface),
+      description: {
+        function: {
+          name: {
+            base: i18n.t("assets.invite.inviteTitle", "en"),
+            zh: i18n.t("assets.invite.inviteTitle", "en")
+          }
         },
-        inputs:[]
-      }, 
+        inputs: []
+      },
       methodName: "callContract",
       data: {
         toAddress: constant.DexFund_Addr,
@@ -87,10 +87,11 @@ export function genCode() {
       config: {
         pow: true
       }
-    }).then(data=>res(data)).catch(e=>rej(e));
+    })
+      .then(data => res(data))
+      .catch(e => rej(e));
   });
 }
-
 
 interface IInviterInfo {
   miningTotal: bnStr;
@@ -102,14 +103,41 @@ interface IInviterInfo {
     inviter: string;
   };
 }
-export function getInviteInfo(address:string):Promise<IInviterInfo> {
+export function getInviteInfo(address: string): Promise<IInviterInfo> {
   return request({ method: "GET", path: "inviter", params: { address } });
 }
 
-export function getCode(address:string){//get my code 
-    return viteClient.request('dexfund_getInviterCode',address)
+export function getCode(address: string) {
+  //get my code
+  return viteClient.request("dexfund_getInviterCode", address);
 }
 
-export function getInviteeCode(address:string){// get who invited me
-    return viteClient.request('dexfund_getInviteeCode',address)
+export function getInviteeCode(address: string) {
+  // get who invited me
+  return viteClient.request("dexfund_getInviteeCode", address);
+}
+
+interface IInviteMiningDetail {
+  miningTotal: string;
+  total: string;
+  miningList: [
+    {
+      date: number;
+      feeAmount: string;
+      miningToken: string;
+      miningAmount: string;
+      status: number;
+    }
+  ];
+}
+export function getInviteMiningDetail({
+  address,
+  offset,
+  limit
+}): Promise<IInviteMiningDetail> {
+  return request({
+    method: "GET",
+    path: "mining/invite",
+    params: { address, offset, limit }
+  });
 }
