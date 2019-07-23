@@ -79,6 +79,10 @@ export function genCode() {
         },
         inputs: []
       },
+      vbExtends:{
+        "type":"dexNewInviter",
+        "cost":"1000 VITE"
+      },
       methodName: "callContract",
       data: {
         toAddress: constant.DexFund_Addr,
