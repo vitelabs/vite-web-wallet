@@ -7,6 +7,7 @@
             </div>
 
             <div class="content-wrapper" >
+                <img v-if="type === 'generalTips'" class="general-tips-icon" src="~assets/imgs/general-tips.svg"/>
                 <div v-if="content">{{ content }}</div>
                 <slot></slot>
             </div>
@@ -42,6 +43,7 @@ export default {
             type: String,
             default: ''
         },
+        // description / generalTips
         type: {
             type: String,
             default: ''
@@ -121,12 +123,4 @@ export default {
 @import "~assets/scss/vars.scss";
 @import "./confirm.scss";
 @import "./confirmRow.scss";
-
-.no-padding-confirm .content-wrapper {
-    padding: 0;
-    min-height: 300px;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-}
 </style>
