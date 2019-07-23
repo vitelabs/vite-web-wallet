@@ -11,7 +11,7 @@ export default {
     props: {
         type: {
             type: String,
-            default: 'normal'
+            default: 'notice'
         },
         isShowClose: {
             type: Boolean,
@@ -67,6 +67,11 @@ export default {
     &.notice {
         &::before {
             background: linear-gradient(270deg, rgba(0,212,208,1) 0%, rgba(0,215,100,1) 100%);
+        }
+    }
+    &.error {
+        &::before {
+            background: linear-gradient(270deg, rgb(241, 93, 35) 0%, rgb(241, 4, 4) 100%);
         }
     }
 
