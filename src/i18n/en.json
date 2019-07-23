@@ -671,11 +671,12 @@
         "title": "Assets",
         "notice": {
             "title": "重要提示",
-            "contentBefore": "本服务由{gate}提供。Vite平台对{gate}的业务没有任何责任，Vite平台不参与{gate}与Vite平台用户之间的任何活动。使用{gate}提供的服务，表明您同意{gate}",
-            "contentAfter": "。若您不同意这些条款，请勿使用{gate}服务。",
-            "agree": "我已阅读并同意隐私政策",
-            "hint": "若您对支付流程有问题，请联系{gate}客服团队——support@{gate}.com",
-            "agreeList": "服务条款，交易条件，限制及隐私政策"
+            "contentProvider": "本服务由{gate}提供。",
+            "contentOther": "Vite平台对{gate}的业务没有任何责任，Vite平台不参与{gate}与Vite平台用户之间的任何活动。",
+            "contentAgree": "使用{gate}提供的服务，表明您同意{gate}",
+            "agreement": "服务条款，交易条件，限制及隐私政策",
+            "contentUngree": "若您不同意这些条款，请勿使用{gate}服务。",
+            "hint": "若您对支付流程有问题，请联系{gate}客服团队——support@{gate}.com"
         },
         "vb":{
             "title":"ViteBifrost",
