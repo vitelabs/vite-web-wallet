@@ -1,15 +1,32 @@
 <template>
-    <div class="gate __pointer">
-        <span v-if="operatorInfo" @click="showOperator">
+    <div class="gate">
+        <span class="__pointer" v-if="operatorInfo" @click="showOperator">
             <img v-show="operatorInfo.icon" class="gate-img" :src="operatorInfo.icon"/>
             {{ operatorInfo.address || '--' }}
         </span>
         <span v-else>--</span>
 
-        <confirm v-show="isShowCinfirm" :title="$t('tradeCenter.operator.title')"
+        <confirm v-if="isShowCinfirm" class="no-padding-confirm"
+                 :title="$t('tradeCenter.operator.title')"
                  :closeIcon="true" :singleBtn="true" :close="closeOperator"
                  :leftBtnTxt="$t('btn.understand')" :leftBtnClick="closeOperator">
-
+            <div class="operator-info-title">
+                <img :src="operatorInfo.icon"/>
+                <div class="title-info">
+                    <div class="name">{{ operatorInfo.name }}</div>
+                    <div class="address">{{ operatorInfo.address }}</div>
+                </div>
+            </div>
+            <div class="info-item">
+                <span class="info_second_title">{{ $t('tradeCenter.operator.introduction') }}:</span>
+                <div class="introduction">{{ operatorInfo.introduction }}</div>
+            </div>
+            <div class="info-item">
+                <span class="info_second_title">{{ $t('tradeCenter.operator.txPair') }}:</span>
+                <div class="tx-pair-list" v-if="operatorInfo.txPairs.length">
+                    <span v-for="(symbol,i) in operatorInfo.txPairs" :key="i">{{ symbol }}</span>
+                </div>
+            </div>
         </confirm>
     </div>
 </template>
@@ -22,7 +39,7 @@ import XS_Fund from 'assets/imgs/operator/XS_Fund.png';
 import Vgate from 'assets/imgs/operator/Vgate.png';
 
 const operatorIcon = { XS_Fund, Vgate };
-console.log(operatorIcon);
+
 export default {
     components: { confirm },
     data() {
@@ -72,6 +89,62 @@ export default {
         border-radius: 14px;
         margin-right: 2px;
         margin-bottom: -2px;
+    }
+}
+
+.operator-info-title {
+    padding: 30px 20px;
+    background: rgba(0,122,255,0.05);
+    border-bottom: 1px solid rgba(212,222,231,1);
+    img {
+        width: 40px;
+        height: 40px;
+        border-radius: 2px;
+        border: 1px solid rgba(212,222,231,1);
+        margin-right: 12px;
+        margin-bottom: -4px;
+    }
+    .title-info {
+        display: inline-block;
+        .name {
+            font-size: 14px;
+            @include font-family-bold();
+            color: rgba(29,32,36,1);
+            line-height: 18px;
+            margin-bottom: 8px;
+        }
+        .address {
+            font-size: 11px;
+            color: rgba(94,104,117,1);
+            line-height: 15px;
+        }
+    }
+}
+.info-item {
+    margin-top: 20px;
+    font-size: 12px;
+    @include font-family-normal();
+    padding: 0 30px;
+    word-break: break-word;
+    white-space: normal;
+    display: flex;
+    .info_second_title {
+        color: rgba(94,104,117,0.58);
+        white-space: nowrap;
+        margin-right: 10px;
+    }
+    .introduction {
+        color: rgba(29,32,36,1);
+    }
+    .tx-pair-list {
+        display: flex;
+        flex-wrap: wrap;
+        color: rgba(0,122,255,1);
+        span {
+            white-space: nowrap;
+            margin-bottom: 6px;
+            margin-right: 30px;
+        }
     }
 }
 </style>
