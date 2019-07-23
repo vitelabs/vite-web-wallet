@@ -49,7 +49,7 @@ import { execWithValid } from 'utils/execWithValid';
 import pagination from 'components/pagination.vue';
 import walletTable from 'components/table/index.vue';
 import { miningTrade, miningPledge } from 'services/trade';
-import {getInviteMiningDetail} from 'services/tradeOperation';
+import { getInviteMiningDetail } from 'services/tradeOperation';
 import sectionTitle from '../components/sectionTitle.vue';
 import vxConfirm from './vxConfirm.vue';
 import stakingDetail from './stakingDetail.vue';
@@ -116,7 +116,7 @@ export default {
             }, {
                 text: this.$t('tradeMining.tbHead.mining'),
                 cell: 'mining'
-            } ],
+            } ]
         };
     },
     computed: {
@@ -253,7 +253,7 @@ export default {
             }).catch(err => {
                 console.warn(err);
             });
-        },
+        }
     }
 };
 </script>
