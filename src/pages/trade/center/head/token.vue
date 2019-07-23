@@ -12,10 +12,7 @@
             <span class="symbol ttoken" @click="showToken('ttoken')">
                 {{ ttokenDetail ? ttokenDetail.symbol : '' }}
             </span>
-            <div class="gate __pointer">
-                <img class="gate-img" v-show="ftokenIcon" :src="ftokenIcon"/>
-                gate
-            </div>
+            <operator></operator>
         </div>
 
         <div v-show="showTokenType" class="detail" :class="{'right': showTokenType === 'ttoken'}">
@@ -75,8 +72,11 @@
 import date from 'utils/date';
 import ellipsisAddr from 'utils/ellipsisAddr';
 import { getTokenIcon } from 'utils/tokenParser';
+import operator from './operator.vue';
+import BigNumber from 'utils/bigNumber';
 
 export default {
+    components: { operator },
     data() {
         return { showTokenType: '' };
     },
@@ -137,7 +137,8 @@ export default {
             detail.publisher = ellipsisAddr(detail.publisher);
             detail.tokenType = detail.tokenType === 0 ? this.$t('trade.head.tokenType0')
                 : detail.tokenType === 1 ? this.$t('trade.head.tokenType1') : '';
-            detail.publisherDate = detail.publisherDate ? date(detail.publisherDate, 'zh') : '';
+            detail.publisherDate = detail.publisherDate ? date(detail.publisherDate * 1000, 'zh') : '';
+            detail.totalSupply = detail.totalSupply ? BigNumber.toBasic(detail.totalSupply, detail.tokenDecimals || 0) : '';
 
             return detail;
         }
@@ -229,19 +230,6 @@ export default {
                 color: #5E6875;
             }
         }
-
-        .gate {
-            @include font-family-normal();
-            color: $blue;
-            display: flex;
-            margin-top: 2px;
-            .gate-img {
-                width: 14px;
-                height: 14px;
-                border-radius: 14px;
-                margin-right: 4px;
-            }
-        }
     }
 
     .detail {
@@ -257,7 +245,7 @@ export default {
         font-size: 11px;
 
         &.right {
-            left: 125px;
+            left: 105px;
         }
 
         &::after {
