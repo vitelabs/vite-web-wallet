@@ -113,7 +113,7 @@ export default {
         },
         toBasic: (value, decimals) => b.toBasic(value, decimals),
         hashShortify(value) {
-            return shortify(value, 6, 0);
+            return shortify(value, 4, 0);
         }
     },
     computed: {
@@ -229,8 +229,8 @@ export default {
         }
         &:nth-child(5),
         &:nth-child(4) {
-            min-width: 105px;
-            width: 22%;
+            min-width: 103px;
+            width: 18%;
         }
         &:last-child{
             min-width: 50px;

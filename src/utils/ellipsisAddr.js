@@ -6,5 +6,5 @@ export default function (addr, len = 10, fontLen = 5) {
     const afterLen = len;
 
     return addr.length > (beforeLen + afterLen)
-        ? `${ addr.slice(0, beforeLen) }......${ addr.slice(-afterLen) }` : '';
+        ? `${ addr.slice(0, beforeLen) }...${ addr.slice(-afterLen) }` : '';
 }
