@@ -73,6 +73,7 @@ import date from 'utils/date';
 import ellipsisAddr from 'utils/ellipsisAddr';
 import { getTokenIcon } from 'utils/tokenParser';
 import operator from './operator.vue';
+import BigNumber from 'utils/bigNumber';
 
 export default {
     components: { operator },
@@ -136,7 +137,8 @@ export default {
             detail.publisher = ellipsisAddr(detail.publisher);
             detail.tokenType = detail.tokenType === 0 ? this.$t('trade.head.tokenType0')
                 : detail.tokenType === 1 ? this.$t('trade.head.tokenType1') : '';
-            detail.publisherDate = detail.publisherDate ? date(detail.publisherDate, 'zh') : '';
+            detail.publisherDate = detail.publisherDate ? date(detail.publisherDate * 1000, 'zh') : '';
+            detail.totalSupply = detail.totalSupply ? BigNumber.toBasic(detail.totalSupply, detail.tokenDecimals || 0) : '';
 
             return detail;
         }
@@ -243,7 +245,7 @@ export default {
         font-size: 11px;
 
         &.right {
-            left: 125px;
+            left: 105px;
         }
 
         &::after {
