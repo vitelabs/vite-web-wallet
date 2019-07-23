@@ -12,10 +12,7 @@
             <span class="symbol ttoken" @click="showToken('ttoken')">
                 {{ ttokenDetail ? ttokenDetail.symbol : '' }}
             </span>
-            <div class="gate __pointer">
-                <img class="gate-img" v-show="ftokenIcon" :src="ftokenIcon"/>
-                gate
-            </div>
+            <operator></operator>
         </div>
 
         <div v-show="showTokenType" class="detail" :class="{'right': showTokenType === 'ttoken'}">
@@ -75,8 +72,10 @@
 import date from 'utils/date';
 import ellipsisAddr from 'utils/ellipsisAddr';
 import { getTokenIcon } from 'utils/tokenParser';
+import operator from './operator.vue';
 
 export default {
+    components: { operator },
     data() {
         return { showTokenType: '' };
     },
@@ -227,19 +226,6 @@ export default {
             }
             &.ttoken {
                 color: #5E6875;
-            }
-        }
-
-        .gate {
-            @include font-family-normal();
-            color: $blue;
-            display: flex;
-            margin-top: 2px;
-            .gate-img {
-                width: 14px;
-                height: 14px;
-                border-radius: 14px;
-                margin-right: 4px;
             }
         }
     }
