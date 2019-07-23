@@ -200,7 +200,7 @@ function getRealData(data) {
         key = 'OrderProto';
     } else if (/^market.(\w|\-)+.kline.(minute|hour|day|week|minute30|hour6|hour12)$/.test(event_key)) {
         key = 'KlineProto';
-    } else if (/^market.(\w|\-)+.depth$/.test(event_key)) {
+    } else if (/^market.(\w|\-)+.(depth.step[0-9]+|depth)$/.test(event_key)) {
         key = 'DepthListProto';
     } else if (/^market.(quoteToken|quoteTokenCategory).(\w|\-)+.tickers$/.test(event_key)) {
         key = 'TickerStatisticsProto';

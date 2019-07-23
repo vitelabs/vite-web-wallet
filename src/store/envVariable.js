@@ -7,20 +7,19 @@ const currencyKey = constant.CurrencyKey;
 const autoLogoutKey = constant.AutoLogoutKey;
 const LangKey = constant.LangKey;
 
-// coins: {
-//     en: 'usd',
-//     zh: 'cny'
-// }
-
 const state = {
     clientStatus: -1,
     lang: '',
     currency: localStorage.getItem(currencyKey) || '',
     autoLogoutTime: localStorage.getItem(autoLogoutKey) || 5,
-    lastPage: ''
+    lastPage: '',
+    isShowCompliance: false
 };
 
 const mutations = {
+    setComplianceShow(state) {
+        state.isShowCompliance = true;
+    },
     setClientNetStatus(state, clientStatus) {
         state.clientStatus = clientStatus;
     },

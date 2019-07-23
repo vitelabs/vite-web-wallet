@@ -14,6 +14,7 @@
 </template>
 
 <script>
+import confirm from 'components/confirm/index.js';
 import layout from './layout';
 import depth from './depth/depth.vue';
 import market from './market/market.vue';
@@ -28,6 +29,18 @@ export default {
     mounted() {
         this.$store.dispatch('exFetchActiveTxPair');
         this.$store.dispatch('exFetchVip');
+
+        !this.$store.state.env.isShowCompliance && confirm({
+            size: 'small',
+            type: 'generalTips',
+            title: this.$t('compliance.title'),
+            content: this.$t('compliance.text'),
+            singleBtn: true,
+            leftBtn: {
+                text: this.$t('btn.understand'),
+                click: this.$store.commit('setComplianceShow')
+            }
+        });
     },
     computed: {
         address() {

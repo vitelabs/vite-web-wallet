@@ -31,9 +31,30 @@
     width: 681px;
 }
 
+.no-padding-confirm .content-wrapper {
+    padding: 0;
+    min-height: 300px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
 .description .confirm-wrapper {
     .content-wrapper {
         @include font-family-normal();
+    }
+}
+
+.generalTips .confirm-wrapper {
+    .content-wrapper {
+        @include font-family-normal();
+    }
+    .general-tips-icon {
+        margin-bottom: 30px;
+        width: 50px;
+        height: 50px;
+        margin-left: 50%;
+        transform: translateX(-50%);
     }
 }
 
