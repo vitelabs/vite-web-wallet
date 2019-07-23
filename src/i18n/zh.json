@@ -734,7 +734,12 @@
         "title": "交易中心",
         "marketClosed": "{symbol} 已暂停交易。",
         "mergeDepth": "深度合并",
-        "depthStep": "{step}位小数"
+        "depthStep": "{step}位小数",
+        "operator": {
+            "title": "运营商信息",
+            "introduction": "介绍",
+            "txPair": "交易对"
+        }
     },
     "trade": {
         "search": "查询",
