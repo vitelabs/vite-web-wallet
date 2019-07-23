@@ -42,7 +42,9 @@
     },
     "dealReminder": {
         "title": "Deal Notice",
-        "describe": "Your order {amount} {ftoken} ({ftoken}/{ttoken}) at {time} is a complete deal, visit Order History to find out more."
+        "failTitle": "提单失败",
+        "notice": "Your order {amount} {ftoken} ({ftoken}/{ttoken}) at {time} is a complete deal, visit Order History to find out more.",
+        "error": "你于{time} 委托的 {amount} {ftoken} ({ftoken}/{ttoken})提单失败，详细记录可在委托历史中查看。"        
     },
     "pow": {
         "ing": "Running PoW to acquire quota",
