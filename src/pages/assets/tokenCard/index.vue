@@ -84,6 +84,8 @@
             :token="token"
             v-if="isShowTrans"
         />
+
+        <important-hint ref="importantHintDom"></important-hint>
     </div>
 </template>
 
@@ -96,15 +98,16 @@ import {
     exWithdrawDialog,
     exChargeDialog
 } from '../dialog';
+import importantHint from '../dialog/importantHint';
 import bigNumber from 'utils/bigNumber';
+import { execWithValid } from 'utils/execWithValid';
+import { getTokenNameString } from 'utils/tokenParser';
 import { gateStorage } from 'services/gate';
 import transaction from '../transaction';
-import { execWithValid } from 'utils/execWithValid';
 import Alert from '../alert.vue';
-import { getTokenNameString } from 'utils/tokenParser';
 
 export default {
-    components: { transaction, Alert },
+    components: { transaction, Alert, importantHint },
     props: {
         token: {
             type: Object,
@@ -195,13 +198,17 @@ export default {
             });
         },
         charge() {
-            chargeDialog({ token: this.token }).catch(e => {
-                console.error(e);
+            this.$refs.importantHintDom.showConfirm(this.token, () => {
+                chargeDialog({ token: this.token }).catch(e => {
+                    console.error(e);
+                });
             });
         },
         withdraw: execWithValid(function () {
-            withdrawDialog({ token: this.token }).catch(e => {
-                console.error(e);
+            this.$refs.importantHintDom.showConfirm(this.token, () => {
+                withdrawDialog({ token: this.token }).catch(e => {
+                    console.error(e);
+                });
             });
         }),
         showDetail(initTabName = 'tokenInfo') {
