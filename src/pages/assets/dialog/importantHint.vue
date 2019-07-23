@@ -1,17 +1,17 @@
 <template>
     <confirm v-show="isShowConfirm" class="small"
              type="description" :title="$t('assets.notice.title')"
-             :close="closeConfirm" :closeIcon="true"
-             :singleBtn="true" :btnUnuse="!isAgree"
+             :close="closeConfirm" :closeIcon="true" :singleBtn="true"
              :leftBtnTxt="$t('btn.next')" :leftBtnClick="next">
+
         <div class="notice-content">
             {{ $t('assets.notice.contentBefore', { gate: gateInfo.gateway }) }}
             <span @click="goLink" class="link __pointer">{{ $t('assets.notice.agreeList') }}</span>
             {{ $t('assets.notice.contentAfter', { gate: gateInfo.gateway }) }}
         </div>
-        <div class="agreement __pointer" :class="{ 'active': isAgree }"
-             @click="toogleAgree">{{ $t('assets.notice.agree') }}</div>
+
         <div class="__hint"><span>{{ $t('assets.notice.hint', { gate: gateInfo.gateway }) }}</span></div>
+
     </confirm>
 </template>
 
@@ -24,8 +24,7 @@ export default {
         return {
             isShowConfirm: false,
             tokenInfo: {},
-            successCallback: null,
-            isAgree: false
+            successCallback: null
         };
     },
     computed: {
@@ -37,9 +36,6 @@ export default {
         }
     },
     methods: {
-        toogleAgree() {
-            this.isAgree = !this.isAgree;
-        },
         showConfirm(tokenInfo, callback) {
             this.isShowConfirm = true;
             this.tokenInfo = tokenInfo;
@@ -58,7 +54,6 @@ export default {
             this.clear();
         },
         clear() {
-            this.isAgree = false;
             this.tokenInfo = {};
             this.successCallback = null;
         },
