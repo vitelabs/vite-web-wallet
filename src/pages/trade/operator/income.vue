@@ -1,7 +1,7 @@
 <template>
     <div class="income-wrapper">
         <div class="item">
-            <img class="icon" src="~assets/imgs/head_asset.png" />
+            <img class="icon" src="~assets/imgs/head_asset.svg" />
             <div class="token-wrapper">
                 <div class="token-title">{{ $t('tradeOperator.totalIncome') }}</div>
                 <div class="token-amount">{{ totalAmount }}</div>
