@@ -45,15 +45,22 @@ export default {
             this.tokenInfo = tokenInfo;
             this.successCallback = callback;
         },
+        _close() {
+            this.closeConfirm();
+            this.clear();
+        },
         closeConfirm() {
-            this.isAgree = false;
-            this.tokenInfo = {};
-            this.successCallback = null;
             this.isShowConfirm = false;
         },
         next() {
             this.closeConfirm();
             this.successCallback && this.successCallback();
+            this.clear();
+        },
+        clear() {
+            this.isAgree = false;
+            this.tokenInfo = {};
+            this.successCallback = null;
         },
         goLink() {
             window.alert('Where??');

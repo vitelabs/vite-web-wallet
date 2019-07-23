@@ -48,6 +48,7 @@ export default {
                 return;
             }
 
+            // this.addNotice()
             const orderNotice = {
                 time: date(this.latestOrder.createTime * 1000, 'zh'),
                 ftoken: this.latestOrder.tradeTokenSymbol,
@@ -72,6 +73,31 @@ export default {
             };
             this.latestOrders.push(orderNotice);
         }
+        // addNotice() {
+        //     const orderNotice = {
+        //         time: date(this.latestOrder.createTime * 1000, 'zh'),
+        //         ftoken: this.latestOrder.tradeTokenSymbol,
+        //         ttoken: this.latestOrder.quoteTokenSymbol,
+        //         close: data => {
+        //             let i;
+        //             for (i = 0; i < this.latestOrders.length; i++) {
+        //                 if (this.latestOrders[i] === data) {
+        //                     break;
+        //                 }
+        //             }
+        //             if (i >= this.latestOrders.length) {
+        //                 return;
+        //             }
+
+        //             data.timeout && clearTimeout(data.timeout);
+        //             this.latestOrders.splice(i, 1);
+        //         },
+        //         timeout: setTimeout(() => {
+        //             orderNotice.close(orderNotice);
+        //         }, 4000)
+        //     };
+        //     this.latestOrders.push(orderNotice);
+        // }
     }
 };
 </script>
