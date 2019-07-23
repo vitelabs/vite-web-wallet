@@ -1,7 +1,8 @@
 <template>
     <div class="token-card-wrapper">
         <div class="symbol">{{ token.tokenSymbol || ''}}</div>
-        <div class="amount">{{ btcIncome }} <span class="currency">{{ currencyIncome }}</span></div>
+        <div class="amount">{{ btcIncome }}</div>
+        <div class="currency">{{ currencyIncome }}</div>
         <div class="btn-list">
             <span v-if="token.status === 1" class="unuse">{{ $t('tradeOperator.permission') }}</span>
             <span v-if="token.status !== 1" class="__pointer"
@@ -188,17 +189,22 @@ export default {
         @include font-family-bold();
         color: rgba(94,104,117,1);
         line-height: 18px;
+        padding-bottom: 12px;
+        border-bottom: 1px dashed rgba(211,223,239,1);
     }
     .amount {
         font-size: 18px;
         @include font-family-bold();
         color: rgba(29,32,36,1);
         line-height: 22px;
-        margin: 8px 0 30px;
-        .currency {
-            font-size: 14px;
-            color: rgba(94,104,117,0.58);
-        }
+        margin: 18px 0 8px;
+    }
+    .currency {
+        font-size: 12px;
+        @include font-family-normal();
+        color: rgba(91,99,141,0.82);
+        line-height: 16px;
+        margin-bottom: 18px;
     }
     .btn-list {
         font-size: 12px;
@@ -207,7 +213,7 @@ export default {
         span {
             display: inline-block;
             box-sizing: border-box;
-            padding: 0 30px;
+            padding: 0 10px;
             min-width: 126px;
             text-align: center;
             height: 30px;
