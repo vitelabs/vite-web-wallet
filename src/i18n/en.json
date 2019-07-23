@@ -242,6 +242,7 @@
         "moreRecords":"More Records",
         "others":"Others",
         "assetSpread":"Portfolio",
+        "saveSuccess":"保存成功",
         "heads":{
             "name":"Name",
             "balance":"Balance",
@@ -307,7 +308,7 @@
         },
         "depositRecord": {
             "tabName": "Deposit History",
-            "heads": ["Time", "Amount", "Status", "{outChain} Chain Hash","VITE Chain Hash"],
+            "heads": ["Time", "Amount", "Status", "{outChain} Chain Hash","VITE Chain Hash","手续费"],
             "statusMap": {
                 "OPPOSITE_PROCESSING": "{outChain} awaits to confirm",
                 "OPPOSITE_CONFIRMED_FAIL":"{outChain} processing failed",
@@ -319,7 +320,7 @@
         },
         "withdrawRecord": {
             "tabName": "Transfer History",
-            "heads": ["Time", "Amount", "Status", "VITE Chain Hash", "{outChain} Chain Hash"],
+            "heads": ["Time", "Amount", "Status", "VITE Chain Hash", "{outChain} Chain Hash","手续费"],
             "statusMap":{
                 "TOT_PROCESSING": "VITE Chain Unconfirmed",
                 "TOT_CONFIRMED": "VITE Confirmed",

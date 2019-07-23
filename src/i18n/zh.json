@@ -249,6 +249,7 @@
         "moreRecords":"更多记录",
         "others":"其它",
         "assetSpread":"资产分布",
+        "saveSuccess":"保存成功",
         "heads":{
             "name":"代币名称",
             "balance":"钱包余额",
@@ -314,7 +315,7 @@
         },
         "depositRecord": {
             "tabName": "充值记录",
-            "heads": ["时间", "金额", "状态", "{outChain}链Hash","VITE链Hash"],
+            "heads": ["时间", "金额", "状态", "{outChain}链Hash","VITE链Hash","手续费"],
             "statusMap": {
                 "OPPOSITE_PROCESSING": "{outChain}链待确认",
                 "OPPOSITE_CONFIRMED_FAIL":"{outChain}链失败",
@@ -326,7 +327,7 @@
         },
         "withdrawRecord": {
             "tabName": "提现记录",
-            "heads": ["时间", "金额", "状态", "VITE链Hash", "{outChain}链Hash"],
+            "heads": ["时间", "金额", "状态", "VITE链Hash", "{outChain}链Hash","手续费"],
             "statusMap": {
                 "TOT_PROCESSING": "VITE链待确认",
                 "TOT_CONFIRMED": "网关已接收",
