@@ -8,7 +8,7 @@ block content
         .block__title {{ $t('assets.invite.codeLable') }}
         input.block__content(v-model="code")
     .block__title {{$t('assets.invite.inviteRule')}}
-    .illustrate(v-for="(i,j) in $t('assets.invite.ruleItems')" :key="j") {{i}}
+    .illustrate(v-for="(i,j) in $t('assets.invite.ruleItems')" :key="j").highlight {{i}}
         .dot
 
 </template>
