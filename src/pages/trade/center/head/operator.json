@@ -9,7 +9,7 @@
     {
         "icon": "XS_Fund",
         "address": "瞎填的",
-        "txPairs": ["MM-000_VITE"],
+        "txPairs": ["MM-000_VITE", "SS-000_BTC-000", "VCP_VITE", "VTT-000_VITE", "VTT-000_VITE", "VTT-000_VITE"],
         "name": "鑫盛资本（XS_Fund）",
         "introduction": "鑫盛资本于2018年4月结识vite项目，先后参与了私募、社区建设、超级节点、DAPP开发等等，一直与团队保持良好的沟通及合作，在vite生态中始终保持良好的信誉。鑫盛资本网关项目于今年6月正式启动，计划7月底同vitex同步上线，未来我们将继续支持vite生态，争取与团队节奏保持高度一直。不忘初心，方得始终！"
     },
