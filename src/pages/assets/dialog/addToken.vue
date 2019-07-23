@@ -18,6 +18,7 @@ block content
 
 <script>
 import { gateStorage } from 'services/gate';
+import { throttle } from 'lodash';
 
 const MAX_RES_NUMS = 10;
 export default {
@@ -31,12 +32,12 @@ export default {
         };
     },
     methods: {
-        inspector() {
+        inspector: throttle(function () {
             gateStorage.bindTokens(this.selectedTokenIds.map(i => {
                 return { tokenId: i, gateInfo: {} };
             }));
             return Promise.resolve(this.selectedTokenIds);
-        }
+        }, 1000)
     },
     computed: {
         token2Gate() {

@@ -24,6 +24,11 @@
                     })
                 }}
             </div>
+            <div class="__tb_cell">
+                {{
+                    $t(`tokenCard.${type}Record.heads.5`)
+                }}
+            </div>
         </div>
 
         <div v-show="tbData && tbData.length" class="__tb_content">
@@ -45,6 +50,10 @@
                      @click="() => gotoOutHash(item.outTxHash)">
                     {{ item.outTxHash | hashShortify }}
                 </div>
+                <div class="__tb_cell">
+                    {{ item.fee | toBasic(token.decimals) }}
+                </div>
+
             </div>
         </div>
 
@@ -104,7 +113,7 @@ export default {
         },
         toBasic: (value, decimals) => b.toBasic(value, decimals),
         hashShortify(value) {
-            return shortify(value, 6, 0);
+            return shortify(value, 4, 0);
         }
     },
     computed: {
@@ -196,25 +205,38 @@ export default {
     }
 }
 
-.__tb_cell {
-    word-break: break-word;
-    white-space: normal;
-    &:first-child {
-        min-width: 93px;
-        width: 20%;
-    }
-    &:nth-child(2) {
-        min-width: 70px;
-        width: 5%;
-    }
-    &:nth-child(3) {
-        min-width: 70px;
-        width: 25%;
-    }
-    &:last-child,
-    &:nth-child(4) {
-        min-width: 105px;
-        width: 22%;
+.__tb{
+    .__tb_cell {
+        word-break: break-word;
+        white-space: normal;
+        display: flex;
+        justify-content: center;
+        line-height: 14px;
+        align-items: center;
+        &:first-child {
+            min-width: 103px;
+            width: 20%;
+            justify-content: flex-start;
+            padding-left: 20px;
+        }
+        &:nth-child(2) {
+            min-width: 70px;
+            width: 8%;
+        }
+        &:nth-child(3) {
+            min-width: 70px;
+            width: 20%;
+        }
+        &:nth-child(5),
+        &:nth-child(4) {
+            min-width: 103px;
+            width: 18%;
+        }
+        &:last-child{
+            min-width: 50px;
+            width: 12%;
+            justify-content: flex-end;
+        }
     }
 }
 </style>

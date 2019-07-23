@@ -18,6 +18,7 @@ export default {
         this.$store.dispatch('startLoopBalance');
         this.$store.dispatch('startLoopExchangeBalance');
         this.$store.dispatch('exFetchLatestOrder');
+        this.$store.commit('getInvitedCode');
     },
     computed: {
         currHDAcc() {
@@ -31,6 +32,7 @@ export default {
         currHDAcc: function () {
             this.$store.dispatch('startLoopBalance');
             this.$store.dispatch('startLoopExchangeBalance');
+            this.$store.commit('getInvitedCode');
         },
         address: function () {
             this.$store.commit('clearDexBalance');
@@ -38,6 +40,7 @@ export default {
             this.$store.commit('commitClearPledge');
             this.$store.commit('commitClearTransList');
             this.address && this.$store.dispatch('exFetchLatestOrder');
+            this.$store.commit('getInvitedCode');
         }
     }
 };
