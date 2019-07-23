@@ -2,13 +2,9 @@
     <div class="notice-list">
         <update></update>
         <notice v-for="(order, index) in latestOrders" :key="index"
-                type="notice" :title="$t('dealReminder.title')"
+                :type="order.type" :title="order.title"
                 :close="order.close" :rawData="order"
-                :describe="$t('dealReminder.describe', {
-                    time: order.time,
-                    ftoken: order.ftoken,
-                    ttoken: order.ttoken
-        })"></notice>
+                :describe="order.describe"></notice>
     </div>
 </template>
 
@@ -35,24 +31,27 @@ export default {
             this.address && this.$store.dispatch('exFetchLatestOrder');
         },
         latestOrder: function () {
-            // [TODO] notice type
-            if (this.latestOrder && this.latestOrder.status === 4) {
-                this.$toast(this.$t('tradeOrderHistory.table.rowMap.statusMap')[4]);
-            }
             this.updateLatestOrder();
         }
     },
     methods: {
         updateLatestOrder() {
-            if (!this.latestOrder || this.latestOrder.status !== 2) {
+            if (!this.latestOrder || [ 2, 4 ].indexOf(this.latestOrder.status) === -1) {
                 return;
             }
+            this.addNotice(this.latestOrder);
+        },
+        addNotice(latestOrder) {
+            const type = latestOrder.status === 2 ? 'notice' : 'error';
 
-            // this.addNotice()
             const orderNotice = {
-                time: date(this.latestOrder.createTime * 1000, 'zh'),
-                ftoken: this.latestOrder.tradeTokenSymbol,
-                ttoken: this.latestOrder.quoteTokenSymbol,
+                type,
+                title: type === 'notice' ? this.$t('dealReminder.title') : this.$t('dealReminder.failTitle'),
+                describe: this.$t(`dealReminder.${ type }`, {
+                    time: date(latestOrder.createTime * 1000, 'zh'),
+                    ftoken: latestOrder.tradeTokenSymbol,
+                    ttoken: latestOrder.quoteTokenSymbol
+                }),
                 close: data => {
                     let i;
                     for (i = 0; i < this.latestOrders.length; i++) {
@@ -73,31 +72,6 @@ export default {
             };
             this.latestOrders.push(orderNotice);
         }
-        // addNotice() {
-        //     const orderNotice = {
-        //         time: date(this.latestOrder.createTime * 1000, 'zh'),
-        //         ftoken: this.latestOrder.tradeTokenSymbol,
-        //         ttoken: this.latestOrder.quoteTokenSymbol,
-        //         close: data => {
-        //             let i;
-        //             for (i = 0; i < this.latestOrders.length; i++) {
-        //                 if (this.latestOrders[i] === data) {
-        //                     break;
-        //                 }
-        //             }
-        //             if (i >= this.latestOrders.length) {
-        //                 return;
-        //             }
-
-        //             data.timeout && clearTimeout(data.timeout);
-        //             this.latestOrders.splice(i, 1);
-        //         },
-        //         timeout: setTimeout(() => {
-        //             orderNotice.close(orderNotice);
-        //         }, 4000)
-        //     };
-        //     this.latestOrders.push(orderNotice);
-        // }
     }
 };
 </script>
