@@ -84,7 +84,7 @@
         "RetrieveReward": "Retrieve Reward",
         "Voting": "Voting",
         "RevokeVoting": "Revoke Voting",
-        "GetQuota": "Get TPS Quota",
+        "GetQuota": "Get Quota",
         "WithdrawalOfQuota": "Withdrawal of Staking Quota",
         "Mintage": "Token Issuance",
         "MintageIssue": "Additional Token Issuance",
@@ -978,7 +978,7 @@
         "withdrawTitle": "Retrieving Staked VITE",
         "addPlaceHolder": "Please input staking amount, at least 134 VITE",
         "withdrawPlaceHolder": "Please input retrieving amount, at least 134 VITE",
-        "addBtn": "Submit Staking",
+        "addBtn": "Get Quota",
         "withdrawBtn": "Confirm to retrieve",
         "stakingBalance": "Retrievable Staking Amount"
     },
