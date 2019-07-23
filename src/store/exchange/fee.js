@@ -39,7 +39,10 @@ const actions = {
             getInviteeCode(getters.activeAddr).then(code => {
                 commit('setInviteCode', code);
                 res(code);
-            }).catch(e => rej(e));
+            }).catch(e => {
+                commit('setInviteCode');
+                rej(e);
+            });
         });
     },
     exFetchVip({ commit, getters }) {
