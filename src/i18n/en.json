@@ -313,7 +313,8 @@
             "token": "Issued Token",
             "setting": "Settings",
             "nodeDesc": "User Guide",
-            "settingPlaceholder": "Please input gateway link address"
+            "settingPlaceholder": "Please input gateway link address",
+            "nodeDescStr": "当前功能仅针对跨链代币使用，非跨链代币请勿使用，同时请勿轻信他人的网关链接，造成的资产损失本站概不负责。如需使用则将正确的网关链接填写在下方，保存后即可在当前地址生效。"
         },
         "depositRecord": {
             "tabName": "Deposit History",
