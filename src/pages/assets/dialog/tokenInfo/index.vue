@@ -39,13 +39,17 @@ block originContent
             div
     .tab-content(v-if="tabName==='gate'")
         .content__item(v-if="token.gateInfo.url")
+            .label {{$t("tokenCard.gateInfo.name")}}:
+            span {{ token.gateInfo.gateway }}
+        .content__item(v-if="token.gateInfo.url")
             .label {{$t("tokenCard.gateInfo.officalNet")}}:
             span {{ token.gateInfo.offical }}
         .content__item(v-if="token.gateInfo.url")
             .label {{$t("tokenCard.gateInfo.introduction")}}:
             span {{ token.gateInfo.introduction }}
         .content__item(v-if="token.gateInfo.url")
-            .label {{$t("tokenCard.gateInfo.token")}}:
+            .label {{$t("tokenCard.gateInfo.customer")}}:
+            span {{ token.gateInfo.customer }}
         .content__item(v-if="!token.gateInfo.url")
             .label {{$t("tokenCard.gateInfo.nodeDesc")}}:
         .content__item
