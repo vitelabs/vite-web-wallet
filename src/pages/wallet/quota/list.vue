@@ -54,17 +54,12 @@ import ellipsisAddr from 'utils/ellipsisAddr.js';
 import { StatusMap } from 'wallet';
 import { execWithValid } from 'utils/execWithValid';
 
+const Vite_Token_Info = constant.Vite_Token_Info;
 let pledgeListInst;
 
 export default {
     components: { pagination, walletTable },
     props: {
-        tokenInfo: {
-            type: Object,
-            default: () => {
-                return {};
-            }
-        },
         showConfirm: {
             type: Function,
             default: () => {}
@@ -97,11 +92,7 @@ export default {
             return this.$store.getters.activeAddr;
         },
         totalAmount() {
-            if (!this.tokenInfo) {
-                return 0;
-            }
-
-            return BigNumber.toBasic(this.$store.state.pledge.totalPledgeAmount || 0, this.tokenInfo.decimals);
+            return BigNumber.toBasic(this.$store.state.pledge.totalPledgeAmount || 0, Vite_Token_Info.decimals);
         },
         totalPage() {
             return this.$store.getters.totalPledgePage;
@@ -110,10 +101,6 @@ export default {
             return this.$store.state.ledger.currentHeight || 0;
         },
         pledgeList() {
-            if (!this.tokenInfo) {
-                return [];
-            }
-
             const pledgeList = this.$store.state.pledge.pledgeList;
 
             const nowList = [];
@@ -124,7 +111,7 @@ export default {
                     ? this.$t('walletQuota.maturity')
                     : date(pledge.withdrawTime * 1000, this.$i18n.locale);
 
-                const showAmount = BigNumber.toBasic(pledge.amount || 0, this.tokenInfo.decimals);
+                const showAmount = BigNumber.toBasic(pledge.amount || 0, Vite_Token_Info.decimals);
 
                 nowList.push({
                     agent: pledge.agent,

@@ -53,25 +53,24 @@
                   :submitTxt="$t('walletSBP.rewardConfirm.rightBtn')"
                   :cancelTxt="$t('walletSBP.rewardConfirm.leftBtn')"
                   :isShowPWD="isShowPWD" :cancel="hideReward" :submit="sendReward">
-            <div class="reward-confirm-wrapper">
-                {{ $t('walletSBP.rewardConfirm.describe1', { time: this.getTime(new Date().getTime()) }) }}
-                <div class="reward-amount">VITE
-                    <span>{{ totalReward || '--' }}</span>
-                </div>
-                <div class="reward-des">
-                    {{ $t('walletSBP.rewardConfirm.describe2') }}
-                    <a class="link" target="_blank"
-                       :href="getUrl(rewardItem && rewardItem.rawData.name)">
-                        {{ $t('walletSBP.rewardConfirm.describe3') }}
-                    </a>
-                    {{ $t('walletSBP.rewardConfirm.describe4') }}
-                </div>
+            {{ $t('walletSBP.rewardConfirm.describe1', { time: this.getTime(new Date().getTime()) }) }}
+            <div class="__unuse_input __input_row __bold">VITE
+                <span class="__right">{{ totalReward || '--' }}</span>
+            </div>
+            <div class="__hint">
+                {{ $t('walletSBP.rewardConfirm.describe2') }}
+                <a class="link" target="_blank"
+                   :href="getUrl(rewardItem && rewardItem.rawData.name)">
+                    {{ $t('walletSBP.rewardConfirm.describe3') }}
+                </a>
+                {{ $t('walletSBP.rewardConfirm.describe4') }}
             </div>
         </password>
     </div>
 </template>
 
 <script>
+import { constant as viteConstant } from '@vite/vitejs';
 import date from 'utils/date.js';
 import ellipsisAddr from 'utils/ellipsisAddr.js';
 import BigNumber from 'utils/bigNumber';
@@ -84,6 +83,7 @@ import { initPwd } from 'components/password/index.js';
 import password from 'components/password/password.vue';
 import { execWithValid } from 'utils/execWithValid';
 
+const Vite_Token_Info = viteConstant.Vite_Token_Info;
 const amount = 500000;
 
 export default {
@@ -92,12 +92,6 @@ export default {
         showConfirm: {
             type: Function,
             default: () => {}
-        },
-        tokenInfo: {
-            type: Object,
-            default: () => {
-                return {};
-            }
         },
         getParams: {
             type: Function,
@@ -130,11 +124,8 @@ export default {
             return this.$store.getters.activeAddr;
         },
         amountErr() {
-            if (!this.tokenInfo || !this.tokenInfo.tokenId) {
-                return '';
-            }
-            const balance = this.tokenBalList[this.tokenInfo.tokenId] ? this.tokenBalList[this.tokenInfo.tokenId].totalAmount : 0;
-            const minAmount = BigNumber.toMin(amount, this.tokenInfo.decimals);
+            const balance = this.tokenBalList[Vite_Token_Info.tokenId] ? this.tokenBalList[Vite_Token_Info.tokenId].totalAmount : 0;
+            const minAmount = BigNumber.toMin(amount, Vite_Token_Info.decimals);
             if (BigNumber.compared(balance, minAmount) < 0) {
                 return this.$t('hint.insufficientBalance');
             }
@@ -151,11 +142,7 @@ export default {
             return this.$store.state.env.clientStatus;
         },
         list() {
-            if (!this.tokenInfo || !this.tokenInfo.tokenId) {
-                return [];
-            }
-
-            const decimals = this.tokenInfo.decimals;
+            const decimals = Vite_Token_Info.decimals;
 
             const registrationList = this.$store.state.SBP.registrationList || [];
             const list = [];
@@ -172,7 +159,7 @@ export default {
                 list.push({
                     name: item.name,
                     addr,
-                    amount: item.isCancel ? '--' : `${ BigNumber.toBasic(item.pledgeAmount, decimals) } ${ this.tokenInfo.tokenSymbol }`,
+                    amount: item.isCancel ? '--' : `${ BigNumber.toBasic(item.pledgeAmount, decimals) } ${ Vite_Token_Info.tokenSymbol }`,
 
                     isMaturity,
                     isCancel,
@@ -338,7 +325,7 @@ export default {
                     return;
                 }
 
-                const decimals = this.tokenInfo.decimals;
+                const decimals = Vite_Token_Info.decimals;
                 this.totalReward = BigNumber.toBasic(data.totalReward, decimals);
                 this.showReward(item);
             }).catch(err => {
@@ -360,41 +347,13 @@ export default {
     }
 }
 
-.reward-confirm-wrapper {
-    font-size: 14px;
-    margin-bottom: 10px;
-    .reward-amount {
-        padding: 10px 15px;
-        box-sizing: border-box;
-        height: 40px;
-        line-height: 20px;
-        background: rgba(243,246,249,1);
-        border-radius: 2px;
-        border: 1px solid rgba(212,222,231,1);
-        margin: 15px 0;
-        span {
-            color: rgba(0,122,255,1);
-            float: right;
-        }
-    }
-    .reward-des {
-        @include font-family-normal();
-        font-weight: 400;
-        color: rgba(94,104,117,1);
-        line-height: 18px;
-        &:before {
-            display: inline-block;
-            content: ' ';
-            width: 6px;
-            height: 6px;
-            background: rgba(0,122,255,1);
-            display: inline-block;
-            margin-right: 4px;
-            border-radius: 6px;
-        }
-        .link {
-            color: #007AFF;
-        }
+.__input_row {
+    margin-top: 18px;
+}
+
+.__hint {
+    .link {
+        color: #007AFF;
     }
 }
 

@@ -30,12 +30,14 @@
 </template>
 
 <script>
+import { constant } from '@vite/vitejs';
 import confirm from 'components/confirm/confirm.vue';
 import { initPwd } from 'components/password/index.js';
 import sendTx from 'utils/sendTx';
 import BigNumber from 'utils/bigNumber';
 
 const fee = '1000';
+const Vite_Token_Info = constant.Vite_Token_Info;
 
 export default {
     components: { confirm },
@@ -66,11 +68,8 @@ export default {
         tokenBalList() {
             return this.$store.state.account.balance.balanceInfos;
         },
-        viteTokenInfo() {
-            return this.$store.getters.viteTokenInfo;
-        },
         balance() {
-            const tokenId = this.viteTokenInfo.tokenId;
+            const tokenId = Vite_Token_Info.tokenId;
             return this.tokenBalList[tokenId] ? this.tokenBalList[tokenId].totalAmount : 0;
         },
         showBalance() {
