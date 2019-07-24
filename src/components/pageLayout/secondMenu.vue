@@ -34,9 +34,10 @@
 <script>
 import { StatusMap } from 'wallet';
 import switchAddr from 'components/switchAddress';
-import { execWithValid } from 'utils/execWithValid';
+
 import SwitchComp from 'uiKit/switch.vue';
 import { inviteDialog, receiveInviteDialog } from 'components/dialog';
+import { execWithValid } from 'utils/execWithValid';
 
 export default {
     components: { switchAddr, SwitchComp },
