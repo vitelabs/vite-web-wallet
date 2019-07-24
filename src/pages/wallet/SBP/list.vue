@@ -100,7 +100,7 @@ export default {
             default: () => {}
         }
     },
-    created() {
+    mounted() {
         this.$store.dispatch('startLoopHeight');
         this.fetchList();
     },
