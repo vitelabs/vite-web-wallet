@@ -16,7 +16,7 @@ block content
                 img.left(src="~assets/imgs/invite_benifit.png")
                 .right
                     .label {{ $t('assets.invite.inviteBenifit') }}
-                    .content {{inviteInfo&&inviteInfo.miningTotal||0}}
+                    .content {{(inviteInfo&&inviteInfo.miningTotal)?formatNum(inviteInfo.miningTotal):0}}
     div(v-else)
         .block__title {{ $t('assets.invite.cost') }}
             .right(v-if="this.avaliableExAmount && Number(this.avaliableExAmount) >= 1000") {{$t('assets.invite.avaliable')}} {{`${avaliableExAmount||0}VITE`}}
@@ -33,6 +33,7 @@ import { getInviteInfo, getCode, genCode } from 'services/tradeOperation';
 import copy from 'utils/copy';
 import { doUntill } from 'utils/asyncFlow';
 import { VITE_TOKENID } from 'utils/constant';
+import bn from 'utils/bigNumber';
 
 export default {
     async beforeMount() {
@@ -68,6 +69,9 @@ export default {
         }
     },
     methods: {
+        formatNum(n) {
+            return bn.normalFormatNum(n);
+        },
         async getCode() {
             this.inviteCode = await getCode(this.address);
             return this.inviteCode;
