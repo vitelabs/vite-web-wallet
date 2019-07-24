@@ -1009,20 +1009,20 @@
             "mining": "Mining Amount",
             "pledge": "Staking Amount"
         },
-        "txTitle": "Trading Mining Total Profit",
-        "quotaTitle": "Staking Mining Total Profit",
-        "addHint": "Staking mining profit will be calculated at 13:00(UTC+8) everyday. You can manually retrieve your staking amount after the staking comes into effective",
+        "txTitle": "Trading as Mining Total Income",
+        "quotaTitle": "Staking as Mining Total Income",
+        "addHint": "Income of Staking as Mining will be calculated at 13:00(UTC+8) everyday. You can manually retrieve your staking amount after the staking comes into effective",
         "withdrawHint": "You will no longer be able to mining VX after retrieving",
         "addTitle": "Staking VITE for Mining",
         "withdrawTitle": "Retrieving Staked VITE",
         "addPlaceHolder": "Please input staking amount, at least 134 VITE",
         "withdrawPlaceHolder": "Please input retrieving amount, at least 134 VITE",
-        "addBtn": "Get Quota",
+        "addBtn": "Confirm to stake ",
         "withdrawBtn": "Confirm to retrieve",
         "stakingBalance": "Retrievable Staking Amount"
     },
     "inviteMining":{
-        "txTitle":"邀请挖矿总收益"
+        "txTitle":"Referring as Mining Total Income"
     },
     "tradeDividend": {
         "title": "Dividends",
