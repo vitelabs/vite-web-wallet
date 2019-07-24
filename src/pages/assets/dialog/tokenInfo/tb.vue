@@ -230,11 +230,11 @@ export default {
         &:nth-child(5),
         &:nth-child(4) {
             min-width: 103px;
-            width: 18%;
+            width: 17%;
         }
         &:last-child{
             min-width: 55px;
-            width: 13%;
+            width: 15%;
             justify-content: flex-end;
         }
     }
