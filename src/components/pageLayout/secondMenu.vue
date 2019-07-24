@@ -150,7 +150,7 @@ export default {
             .unlock-bubble {
                 text-align: left;
                 white-space: normal;
-                max-width: 150px;
+                width: 150px;
                 box-sizing: border-box;
                 padding: 10px 12px;
                 background: rgba(255,255,255,1);

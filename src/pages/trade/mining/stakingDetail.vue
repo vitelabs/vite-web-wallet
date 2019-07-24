@@ -30,6 +30,9 @@
 <script>
 import date from 'utils/date';
 import bigNumber from 'utils/bigNumber';
+import { constant } from '@vite/vitejs';
+
+const Vite_Token_Info = constant.Vite_Token_Info;
 
 export default {
     created() {
@@ -52,9 +55,6 @@ export default {
         height() {
             return this.$store.state.ledger.currentHeight;
         },
-        viteTokenInfo() {
-            return this.$store.getters.viteTokenInfo;
-        },
         canCancel() {
             return this.stakingObj.withdrawHeight <= this.height;
         },
@@ -68,7 +68,7 @@ export default {
             }
             return {
                 withdrawTime: date(this.stakingObj.withdrawTime * 1000, this.$i18n.locale),
-                amount: bigNumber.toBasic(this.stakingObj.amount || 0, 18), // [TODO] viteTokenInfo fix
+                amount: bigNumber.toBasic(this.stakingObj.amount || 0, Vite_Token_Info.decimals),
                 withdrawHeight: this.stakingObj.withdrawHeight
             };
         }
