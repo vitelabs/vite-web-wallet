@@ -114,7 +114,9 @@
         "SendRefund": "转账",
         "GenesisReceive": "Genesis",
         "DexFundTransferTokenOwner": "运营商中心权限转让",
-        "DexFundMarketOwnerConfig": "运营商交易对配置"
+        "DexFundMarketOwnerConfig": "运营商交易对配置",
+        "DexFundBindInviteCode": "绑定邀请码",
+        "DexFundNewInviter": "生成邀请码"
     },
     "btn": {
         "cancel": "取消",

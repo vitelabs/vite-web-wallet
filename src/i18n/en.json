@@ -114,7 +114,9 @@
         "SendRefund": "Transfer",
         "GenesisReceive": "Genesis",
         "DexFundTransferTokenOwner": "Operator's key ownership transfer",
-        "DexFundMarketOwnerConfig": "Operator's trading pair configuration"
+        "DexFundMarketOwnerConfig": "Operator's trading pair configuration",
+        "DexFundBindInviteCode": "绑定邀请码",
+        "DexFundNewInviter": "生成邀请码"
     },
     "btn": {
         "cancel": "Cancel",
