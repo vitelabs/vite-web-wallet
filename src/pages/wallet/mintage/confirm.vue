@@ -62,7 +62,7 @@ export default {
     },
     computed: {
         btnUnuse() {
-            const max = BigNumber.toMin(fee, 18);
+            const max = BigNumber.toMin(fee, Vite_Token_Info.decimals);
             return BigNumber.compared(this.balance, max) < 0;
         },
         tokenBalList() {
@@ -76,7 +76,7 @@ export default {
             if (!this.balance) {
                 return 0;
             }
-            return BigNumber.toBasic(this.balance, 18);
+            return BigNumber.toBasic(this.balance, Vite_Token_Info.decimals);
         }
     },
     methods: {

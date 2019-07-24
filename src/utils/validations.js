@@ -1,9 +1,11 @@
+import { constant } from '@vite/vitejs';
 import BigNumber from 'utils/bigNumber';
 import i18n from 'i18n';
 
+const Vite_Token_Info = constant.Vite_Token_Info;
 const MaxDecimals = 8;
 const MinStakingAmount = 134;
-const minStakingUnit = BigNumber.toMin(MinStakingAmount, 18); // [TODO] vite token info decimals
+const minStakingUnit = BigNumber.toMin(MinStakingAmount, Vite_Token_Info.decimals);
 
 export function checkAmountFormat(amount = '', decimals = 8) {
     const limit = decimals > MaxDecimals ? MaxDecimals : decimals;
