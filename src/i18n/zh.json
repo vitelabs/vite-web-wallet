@@ -310,13 +310,15 @@
         "gateInfo": {
             "gateSetting":"点击设置网关",
             "tabName": "网关详情",
+            "name": "网关名称",
             "selfdefined": "自定义网关",
             "officalNet": "网关官网",
             "introduction": "网关介绍",
             "token": "网关发行代币",
             "setting": "网关设置",
+            "customer": "客服链接",
             "settingPlaceholder": "请输入网关链接地址",
-            "nodeDesc":"网关节点使用说明："
+            "nodeDesc":"网关节点使用说明"
         },
         "depositRecord": {
             "tabName": "充值记录",
@@ -395,7 +397,7 @@
             "contentAgree": "使用{gate}提供的服务，表明您同意{gate}",
             "agreement": "服务条款，交易条件，限制及隐私政策",
             "contentUngree": "若您不同意这些条款，请勿使用{gate}服务。",
-            "hint": "若您对支付流程有问题，请联系{gate}客服团队——support@{gate}.com"
+            "hint": "若您对支付流程有问题，请联系{gate}客服团队"
         },
         "vb":{
             "title":"ViteBifrost",

@@ -150,6 +150,7 @@ export default {
     }
 
     .token-list {
+        position: relative;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -164,7 +165,6 @@ export default {
             transform: translateY(-50%) translateX(-50%);
             font-size: 12px;
             @include font-family-normal();
-            font-weight: 400;
             color: rgba(94,104,117,0.58);
             line-height: 16px;
             text-align: center;
