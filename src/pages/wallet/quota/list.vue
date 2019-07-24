@@ -53,6 +53,7 @@ import BigNumber from 'utils/bigNumber';
 import ellipsisAddr from 'utils/ellipsisAddr.js';
 import { StatusMap } from 'wallet';
 import { execWithValid } from 'utils/execWithValid';
+import openUrl from 'utils/openUrl';
 
 const Vite_Token_Info = constant.Vite_Token_Info;
 let pledgeListInst;
@@ -69,7 +70,7 @@ export default {
             default: () => {}
         }
     },
-    created() {
+    mounted() {
         this.$store.dispatch('startLoopHeight');
         this.startLoopPledgeList();
     },
@@ -166,7 +167,7 @@ export default {
         },
         gotoDetail(addr) {
             const locale = this.$i18n.locale === 'zh' ? 'zh/' : '';
-            window.open(`${ process.env.viteNet }${ locale }account/${ addr }`);
+            openUrl(`${ process.env.viteNet }${ locale }account/${ addr }`);
         },
         showCancel: execWithValid(function (item) {
             if (this.loading) {

@@ -51,7 +51,6 @@
 </template>
 
 <script>
-import { constant } from '@vite/vitejs';
 import { operatorMarkets } from 'services/trade';
 import pagination from 'components/pagination.vue';
 import walletTable from 'components/table/index.vue';
@@ -238,46 +237,8 @@ export default {
         },
         onlyFetchConfig({ operationCode, tradeToken, quoteToken, owner = this.address, takerFeeRate = 0, makerFeeRate = 0, stopMarket = false }) {
             return sendTx({
-                methodName: 'callContract',
-                data: {
-                    toAddress: constant.DexFund_Addr,
-                    abi: {
-                        'type': 'function',
-                        'name': 'DexFundMarketOwnerConfig',
-                        'inputs': [
-                            {
-                                'name': 'operationCode',
-                                'type': 'uint8'
-                            },
-                            {
-                                'name': 'tradeToken',
-                                'type': 'tokenId'
-                            },
-                            {
-                                'name': 'quoteToken',
-                                'type': 'tokenId'
-                            },
-                            {
-                                'name': 'owner',
-                                'type': 'address'
-                            },
-                            {
-                                'name': 'takerFeeRate',
-                                'type': 'int32'
-                            },
-                            {
-                                'name': 'makerFeeRate',
-                                'type': 'int32'
-                            },
-                            {
-                                'name': 'stopMarket',
-                                'type': 'bool'
-                            }
-                        ]
-                    },
-                    params: [ operationCode, tradeToken, quoteToken, owner, takerFeeRate, makerFeeRate, !!stopMarket ],
-                    tokenId: quoteToken
-                }
+                methodName: 'dexFundMarketOwnerConfig',
+                data: { operationCode, tradeToken, quoteToken, owner, takerFeeRate, makerFeeRate, stopMarket }
             });
         },
         fetchOperatorMarkets(pageNum) {

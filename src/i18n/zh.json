@@ -101,7 +101,6 @@
         "DexFundUserDeposit": "ViteX充值",
         "DexFundUserWithdraw": "ViteX提现",
         "DexFundNewOrder": "ViteX挂单",
-        "currDexFundNewOrder": "ViteX挂单",
         "DexTradeCancelOrder": "ViteX撤单",
         "DexFundNewMarket": "ViteX上币",
         "CreateContractReq": "创建合约",
