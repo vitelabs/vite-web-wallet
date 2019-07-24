@@ -101,7 +101,6 @@
         "DexFundUserDeposit": "ViteX Deposit",
         "DexFundUserWithdraw": "ViteX Withdrawal",
         "DexFundNewOrder": "ViteX Creating Orders",
-        "currDexFundNewOrder": "ViteX Creating Orders",
         "DexTradeCancelOrder": "ViteX Revoking Orders",
         "DexFundNewMarket": "ViteX Token Listing",
         "CreateContractReq": "Create Contract",

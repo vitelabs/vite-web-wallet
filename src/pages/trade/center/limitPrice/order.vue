@@ -79,7 +79,6 @@
 </template>
 
 <script>
-import { constant } from '@vite/vitejs';
 import slider from 'components/slider';
 import viteInput from 'components/viteInput';
 import { initPwd } from 'components/password/index.js';
@@ -604,33 +603,9 @@ export default {
             const tokenDecimals = this.ftokenDetail.tokenDecimals;
             quantity = BigNumber.toMin(quantity, tokenDecimals);
 
-            // sendTx('dexFundNewOrder', {
-            //     tradeToken,
-            //     quoteToken,
-            //     side: this.orderType === 'buy' ? 0 : 1,
-            //     price,
-            //     quantity
-            // },
-
             sendTx({
-                methodName: 'callContract',
-                data: {
-                    toAddress: constant.DexFund_Addr,
-                    abi: {
-                        type: 'function',
-                        name: 'DexFundNewOrder',
-                        inputs: [
-                            { name: 'tradeToken', type: 'tokenId' },
-                            { name: 'quoteToken', type: 'tokenId' },
-                            { name: 'side', type: 'bool' },
-                            { name: 'orderType', type: 'uint8' },
-                            { name: 'price', type: 'string' },
-                            { name: 'quantity', type: 'uint256' }
-                        ]
-                    },
-                    params: [ tradeToken, quoteToken, side, 0, price, quantity ],
-                    tokenId: tradeToken
-                },
+                methodName: 'dexFundNewOrder',
+                data: { tradeToken, quoteToken, side, price, quantity },
                 config: {
                     pow: true,
                     powConfig: {

@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import { constant, hdAddr } from '@vite/vitejs';
+import { hdAddr } from '@vite/vitejs';
 import sendTx from 'utils/sendTx';
 import BigNumber from 'utils/bigNumber';
 import { initPwd } from 'components/password/index.js';
@@ -150,12 +150,10 @@ export default {
                     this.isLoading = true;
 
                     sendTx({
-                        methodName: 'callContract',
+                        methodName: 'dexFundTransferTokenOwner',
                         data: {
-                            toAddress: constant.DexFund_Addr,
-                            abi: { 'type': 'function', 'name': 'DexFundTransferTokenOwner', 'inputs': [ { 'name': 'token', 'type': 'tokenId' }, { 'name': 'owner', 'type': 'address' } ] },
-                            params: [ tokenId, this.address ],
-                            tokenId
+                            tokenId,
+                            owner: this.address
                         }
                     }).then(() => {
                         this.isLoading = false;
