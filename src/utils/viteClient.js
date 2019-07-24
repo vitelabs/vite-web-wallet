@@ -20,6 +20,22 @@ $ViteJS.addTxType({
     DexFundMarketOwnerConfig: {
         contractAddr: constant.DexFund_Addr,
         abi: { 'type': 'function', 'name': 'DexFundMarketOwnerConfig', 'inputs': [ { 'name': 'operationCode', 'type': 'uint8' }, { 'name': 'tradeToken', 'type': 'tokenId' }, { 'name': 'quoteToken', 'type': 'tokenId' }, { 'name': 'owner', 'type': 'address' }, { 'name': 'takerFeeRate', 'type': 'int32' }, { 'name': 'makerFeeRate', 'type': 'int32' }, { 'name': 'stopMarket', 'type': 'bool' } ] }
+    },
+    DexFundBindInviteCode: {
+        contractAddr: constant.DexFund_Addr,
+        abi: {
+            type: 'function',
+            name: 'DexFundBindInviteCode',
+            inputs: [{ name: 'code', type: 'uint32' }]
+        }
+    },
+    DexFundNewInviter: {
+        contractAddr: constant.DexFund_Addr,
+        abi: {
+            type: 'function',
+            name: 'DexFundNewInviter',
+            inputs: []
+        }
     }
 });
 
