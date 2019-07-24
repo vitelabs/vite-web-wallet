@@ -58,12 +58,14 @@
                 <span class="__right">{{ totalReward || '--' }}</span>
             </div>
             <div class="__hint">
-                {{ $t('walletSBP.rewardConfirm.describe2') }}
-                <a class="link" target="_blank"
-                   :href="getUrl(rewardItem && rewardItem.rawData.name)">
-                    {{ $t('walletSBP.rewardConfirm.describe3') }}
-                </a>
-                {{ $t('walletSBP.rewardConfirm.describe4') }}
+                <span>
+                    {{ $t('walletSBP.rewardConfirm.describe2') }}
+                    <a class="link" target="_blank"
+                       :href="getUrl(rewardItem && rewardItem.rawData.name)">
+                        {{ $t('walletSBP.rewardConfirm.describe3') }}
+                    </a>
+                    {{ $t('walletSBP.rewardConfirm.describe4') }}
+                </span>
             </div>
         </password>
     </div>
@@ -371,9 +373,8 @@ export default {
 }
 
 .btn {
-    font-size: 14px;
     color: #007aff;
-    margin-right: 18px;
+    margin-right: 15px;
     &.unuse {
         color: #ced1d5;
     }

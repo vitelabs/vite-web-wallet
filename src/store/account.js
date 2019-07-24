@@ -178,6 +178,15 @@ const getters = {
         const exBalance = rootGetters.exBalanceList;
 
         return Object.keys(mapToken2Gate).map(i => {
+            // [TODO] ViteLabsGateInfo Fixed
+            const viteLabsGateInfo = {};
+            if (mapToken2Gate[i].gateway === 'Vite Labs') {
+                viteLabsGateInfo.introduction = 'Vite Labs官方网关，负责BTC、ETH、USDT(ERC20)、GRIN四种代币跨链服务';
+                viteLabsGateInfo.offical = 'vite.org';
+                viteLabsGateInfo.customer = 'gateway@vite.org';
+                viteLabsGateInfo.privacy = '';
+            }
+
             const {
                 index,
                 availableExAmount = '',
@@ -199,7 +208,8 @@ const getters = {
             } = Object.assign({}, balanceInfo[i] || {}, allToken[i] || {}, {
                 gateInfo: {
                     url: mapToken2Gate[i].url,
-                    gateway: mapToken2Gate[i].gateway
+                    gateway: mapToken2Gate[i].gateway,
+                    ...viteLabsGateInfo
                 }
             }, exBalance[i]);
             const rate = rootState.exchangeRate.rateMap[i] && rootState.exchangeRate.rateMap[i][`${ rootState.env.currency }Rate`];

@@ -40,8 +40,10 @@ block originContent
     .tab-content(v-if="tabName==='gate'")
         .content__item(v-if="token.gateInfo.url")
             .label {{$t("tokenCard.gateInfo.officalNet")}}:
+            span {{ token.gateInfo.offical }}
         .content__item(v-if="token.gateInfo.url")
             .label {{$t("tokenCard.gateInfo.introduction")}}:
+            span {{ token.gateInfo.introduction }}
         .content__item(v-if="token.gateInfo.url")
             .label {{$t("tokenCard.gateInfo.token")}}:
         .content__item(v-if="!token.gateInfo.url")
