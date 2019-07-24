@@ -73,12 +73,12 @@ export default {
         fee() {
             return bigNumber.toBasic(this.feeMin, this.token.decimals);
         },
-        ammountErr() {
+        ammountErr:debounce(function () {
             if (!this.withdrawAmount) {
                 return;
             }
             return this.validateAmount(this.withdrawAmount);
-        },
+        }),
         dBtnUnuse() {
             return this.ammountErr || !this.isAddrCorrect || !this.withdrawAmount || !this.withdrawAddr || this.verifingAddr || this.fetchingFee;
         },
