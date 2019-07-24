@@ -55,6 +55,7 @@ block originContent
             div.click-able(v-if="token.gateInfo.privacy")(@click="goToGatePrivacy") {{$t("tokenCard.gateInfo.clickPrivacy", {gate: token.gateInfo.gateway})}}
         .content__item(v-if="!token.gateInfo.url")
             .label {{$t("tokenCard.gateInfo.nodeDesc")}}:
+            div {{ $t("tokenCard.gateInfo.nodeDescStr") }}
         .content__item.center
             .label {{$t("tokenCard.gateInfo.setting")}}:
             viteInput.gate-url(:placeholder="$t('tokenCard.gateInfo.settingPlaceholder')" :disabled="token.type==='OFFICAL_GATE'" v-model="url")
@@ -244,7 +245,8 @@ export default {
     .content__item {
         font-size: 12px;
         @include font-family-normal();
-        min-height: 40px;
+        line-height: 16px;
+        margin-bottom: 24px;
         display: flex;
         text-align: left;
         color: rgba(29, 32, 36, 1);
