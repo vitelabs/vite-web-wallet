@@ -58,8 +58,8 @@
         "symbol": "Send"
     },
     "compliance": {
-        "text": "本站目前不支持来自下列国家或地区的客户：中国香港、古巴、伊朗、朝鲜、克里米亚、苏丹、马来西亚、叙利亚、美国[包括所有美国领土，如波多黎各、美属萨摩亚、关岛、北马里亚纳群岛邦、美属维尔京群岛（圣克罗伊岛，圣约翰岛和圣托马斯岛）]、孟加拉国、玻利维亚、厄瓜多尔和吉尔吉斯斯坦。如欲了解更多详情，请参阅我们的服务条款及我们的风险与合规声明。",
-        "title": "合规提示"
+        "text": "ViteX does not serve customers in the following countries/regions/territories: Hong Kong, Cuba, Iran, North Korea, Crimea, Sudan, Malaysia, Syria, USA [including all USA territories like Puerto Rico, American Samoa, Guam, Northern Mariana Island, and the US Virgin Islands (St. Croix, St. John and St. Thomas)], Bangladesh, Bolivia, Ecuador, and Kyrgyzstan. For more information, please read our Terms of Service and Privacy Policy",
+        "title": "Important Notice"
     },
     "errCode": {
         "35003": "{name} ID conflict occurs, please re-submit later",
@@ -465,7 +465,7 @@
             "totalSupplyFormat": "Wrong format of Total Supply",
             "totalSupplyNull": "Total Supply is required",
             "maxSupplyNull": "Max Supply is required",
-            "maxSupplyMin": "Total Supply must be less than Max Supply",
+            "maxSupplyMin": "Must be greater than total supply",
             "decimalsNull": "Decimals field is required",
             "decimalsFormat": "Wrong format of decimals",
             "decimalsMax": "Decimals are out of range",
