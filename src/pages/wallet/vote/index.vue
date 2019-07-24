@@ -59,21 +59,11 @@ import $ViteJS from 'utils/viteClient';
 import sendTx from 'utils/sendTx';
 import { execWithValid } from 'utils/execWithValid';
 
+const Vite_Token_Info = constant.Vite_Token_Info;
+
 export default {
     components: { secTitle, tooltips, search, loading, walletTable },
     beforeMount() {
-        this.tokenInfo = this.$store.getters.viteTokenInfo;
-
-        if (!this.tokenInfo) {
-            this.loadingToken = true;
-            this.$store.dispatch('fetchTokenInfo').then(tokenInfo => {
-                this.loadingToken = false;
-                this.tokenInfo = tokenInfo;
-            })
-                .catch(err => {
-                    console.warn(err);
-                });
-        }
         this.nodeDataTimer = new timer(this.updateNodeData, 3 * 1000);
         this.nodeDataTimer.start();
         this.startVoteData();
@@ -88,7 +78,6 @@ export default {
             nodeData: [],
             voteData: [],
             loadingToken: false,
-            tokenInfo: null,
             cache: null,
             nodeDataTimer: null,
             isResisterTipsShow: false
@@ -115,7 +104,7 @@ export default {
                 tokenList[tokenId].icon = defaultToken.icon;
             }
 
-            const token = tokenList[this.tokenInfo.tokenId] || {};
+            const token = tokenList[Vite_Token_Info.tokenId] || {};
             return token.balance || 0;
         },
         haveVote() {
@@ -137,10 +126,6 @@ export default {
             return headList;
         },
         voteList() {
-            if (!this.tokenInfo) {
-                return [];
-            }
-
             const c = voteRecord => {
                 const data = Object.assign({}, voteRecord);
 
@@ -158,7 +143,7 @@ export default {
                 data.voteStatusText = this.$t('walletVote.section1.voteStatusMap')[data.voteStatus];
 
                 // Tans
-                data.voteNum = BigNumber.toBasic(data.balance, this.tokenInfo.decimals) || this.balance || 0;
+                data.voteNum = BigNumber.toBasic(data.balance, Vite_Token_Info.decimals) || this.balance || 0;
                 data.operate = this.$t('walletVote.section1.operateBtn');
 
                 return data;
@@ -202,13 +187,9 @@ export default {
             return headList;
         },
         nodeList() {
-            if (!this.tokenInfo) {
-                return [];
-            }
-
             return this.nodeData.map(v => {
                 // Tans
-                v.voteNum = BigNumber.toBasic(v.voteNum, this.tokenInfo.decimals) || 0;
+                v.voteNum = BigNumber.toBasic(v.voteNum, Vite_Token_Info.decimals) || 0;
                 v.operate = this.$t('walletVote.section2.operateBtn');
                 return v;
             }).filter(v => {
@@ -313,7 +294,7 @@ export default {
             };
 
             const sendCancel = () => {
-                sendTx({ methodName: 'revokeVoting', data: { tokenId: this.tokenInfo.tokenId }, config: { pow: true } }).then(successCancel).catch(failCancel);
+                sendTx({ methodName: 'revokeVoting', data: { tokenId: Vite_Token_Info.tokenId }, config: { pow: true } }).then(successCancel).catch(failCancel);
             };
 
             initPwd({
@@ -351,7 +332,7 @@ export default {
                     methodName: 'voting',
                     data: {
                         nodeName: v.name,
-                        tokenId: this.tokenInfo.tokenId
+                        tokenId: Vite_Token_Info.tokenId
                     }
                 }).then(successVote).catch(failVote);
             };

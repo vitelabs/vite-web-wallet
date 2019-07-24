@@ -32,6 +32,7 @@ import sendTx from 'utils/sendTx';
 import $ViteJS from 'utils/viteClient';
 import date from 'utils/date';
 
+const Vite_Token_Info = constant.Vite_Token_Info;
 const vipStakingAmount = 10000;
 
 export default {
@@ -64,22 +65,19 @@ export default {
                 return this.stakingObj && this.stakingObj.withdrawHeight <= this.height;
             }
 
-            if (!this.rawBalance || !+this.rawBalance.availableExAmount || !this.viteTokenInfo) {
+            if (!this.rawBalance || !+this.rawBalance.availableExAmount) {
                 return false;
             }
 
-            const minAmount = BigNumber.toMin(vipStakingAmount, this.viteTokenInfo.decimals);
+            const minAmount = BigNumber.toMin(vipStakingAmount, Vite_Token_Info.decimals);
             return BigNumber.compared(minAmount, this.rawBalance.availableExAmount) <= 0;
         },
         viteTokenInfo() {
             return this.$store.getters.viteTokenInfo;
         },
         rawBalance() {
-            if (!this.viteTokenInfo) {
-                return null;
-            }
             const list = this.$store.getters.exBalanceList;
-            return list[this.viteTokenInfo.tokenId];
+            return list[Vite_Token_Info.tokenId];
         },
         exViteBalance() {
             return this.rawBalance ? this.rawBalance.available : 0;
