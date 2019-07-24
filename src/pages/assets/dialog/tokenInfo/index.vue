@@ -40,19 +40,22 @@ block originContent
     .tab-content(v-if="tabName==='gate'")
         .content__item(v-if="token.gateInfo.url")
             .label {{$t("tokenCard.gateInfo.name")}}:
-            span {{ token.gateInfo.gateway }}
+            div {{ token.gateInfo.gateway }}
         .content__item(v-if="token.gateInfo.url")
             .label {{$t("tokenCard.gateInfo.officalNet")}}:
-            span {{ token.gateInfo.offical }}
+            div.click-able(@click="goToGateOffical") {{ token.gateInfo.offical }}
         .content__item(v-if="token.gateInfo.url")
             .label {{$t("tokenCard.gateInfo.introduction")}}:
-            span {{ token.gateInfo.introduction }}
+            div {{ token.gateInfo.introduction }}
         .content__item(v-if="token.gateInfo.url")
             .label {{$t("tokenCard.gateInfo.customer")}}:
-            span {{ token.gateInfo.customer }}
+            div {{ token.gateInfo.customer }}
+        .content__item(v-if="token.gateInfo.url")
+            .label {{$t("tokenCard.gateInfo.privacy")}}:
+            div.click-able(v-if="token.gateInfo.privacy")(@click="goToGatePrivacy") {{$t("tokenCard.gateInfo.clickPrivacy", {gate: token.gateInfo.gateway})}}
         .content__item(v-if="!token.gateInfo.url")
             .label {{$t("tokenCard.gateInfo.nodeDesc")}}:
-        .content__item
+        .content__item.center
             .label {{$t("tokenCard.gateInfo.setting")}}:
             viteInput.gate-url(:placeholder="$t('tokenCard.gateInfo.settingPlaceholder')" :disabled="token.type==='OFFICAL_GATE'" v-model="url")
             .btn( @click="save" v-if="token.type!=='OFFICAL_GATE'") {{$t('tokenCard.tokenInfo.saveGate')}}
@@ -116,6 +119,12 @@ export default {
         goToTokenDetail() {
             const l = `${ getExplorerLink() }/token/${ this.token.tokenId }`;
             openUrl(l);
+        },
+        goToGateOffical() {
+            window.open(this.token.gateInfo.offical);
+        },
+        goToGatePrivacy() {
+            window.open(this.token.gateInfo.privacy);
         },
         getIcon(id) {
             return getTokenIcon(id);
@@ -238,11 +247,13 @@ export default {
         min-height: 40px;
         display: flex;
         text-align: left;
-        align-items: center;
         color: rgba(29, 32, 36, 1);
-        div {
-            display: flex;
+        &.center {
             align-items: center;
+            div {
+                display: flex;
+                align-items: center;
+            }
         }
         :last-child {
             word-break: break-word;
