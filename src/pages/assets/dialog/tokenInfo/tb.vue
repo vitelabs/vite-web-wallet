@@ -233,8 +233,8 @@ export default {
             width: 18%;
         }
         &:last-child{
-            min-width: 50px;
-            width: 12%;
+            min-width: 55px;
+            width: 13%;
             justify-content: flex-end;
         }
     }
