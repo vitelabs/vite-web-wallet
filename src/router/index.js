@@ -2,6 +2,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 
 import store from 'store';
+import openUrl from 'utils/openUrl';
 import statistics from 'utils/statistics';
 import { getExplorerLink } from 'utils/getLink';
 import { getCurrHDAcc, StatusMap } from 'wallet';
@@ -24,7 +25,7 @@ router.beforeEach((to, from, next) => {
 
     // Go to explorer.
     if (to.name === 'viteExplorer') {
-        window.open(getExplorerLink());
+        openUrl(getExplorerLink());
         return;
     }
 

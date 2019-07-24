@@ -32,6 +32,7 @@ import importKeystore from './import';
 import sendTx from './sendTx';
 import balance from './balance';
 import { timer } from 'utils/asyncFlow';
+import openUrl from 'utils/openUrl';
 
 let balanceTimer = null;
 
@@ -55,7 +56,7 @@ export default {
     methods: {
         goNet() {
             const locale = this.$i18n.locale === 'zh' ? 'zh/' : '';
-            window.open(`${ process.env.viteNet }${ locale }account/${ this.address }`);
+            openUrl(`${ process.env.viteNet }${ locale }account/${ this.address }`);
         },
         getKeystore(obj) {
             this.address = obj.addr;
