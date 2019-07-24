@@ -122,10 +122,10 @@ export default {
             openUrl(l);
         },
         goToGateOffical() {
-            window.open(this.token.gateInfo.offical);
+            openUrl(this.token.gateInfo.offical);
         },
         goToGatePrivacy() {
-            window.open(this.token.gateInfo.privacy);
+            openUrl(this.token.gateInfo.privacy);
         },
         getIcon(id) {
             return getTokenIcon(id);
@@ -264,6 +264,7 @@ export default {
             color: rgba(94, 104, 117, 0.58);
             margin-right: 10px;
             word-break: keep-all;
+            white-space: nowrap;
         }
         .click-able {
             color: #007aff;

@@ -58,6 +58,7 @@ import BigNumber from 'utils/bigNumber';
 import $ViteJS from 'utils/viteClient';
 import sendTx from 'utils/sendTx';
 import { execWithValid } from 'utils/execWithValid';
+import openUrl from 'utils/openUrl';
 
 const Vite_Token_Info = constant.Vite_Token_Info;
 
@@ -261,11 +262,11 @@ export default {
         },
         goToNodeDetail(nodeName) {
             const locale = this.$i18n.locale === 'zh' ? 'zh/' : '';
-            window.open(`${ process.env.viteNet }${ locale }SBPDetail/${ nodeName }`);
+            openUrl(`${ process.env.viteNet }${ locale }SBPDetail/${ nodeName }`);
         },
         goToDetail(addr) {
             const locale = this.$i18n.locale === 'zh' ? 'zh/' : '';
-            window.open(`${ process.env.viteNet }${ locale }account/${ addr }`);
+            openUrl(`${ process.env.viteNet }${ locale }account/${ addr }`);
         },
         openReward() {
             if (this.cache) {
@@ -273,7 +274,7 @@ export default {
             }
             const locale = this.$i18n.locale === 'zh' ? 'zh' : 'en';
             const activeAccount = this.$store.state.wallet.activeAcc;
-            window.open(`https://reward.vite.net?language=${ locale }&address=${ activeAccount ? activeAccount.address : '' }`);
+            openUrl(`https://reward.vite.net?language=${ locale }&address=${ activeAccount ? activeAccount.address : '' }`);
         },
         cancelVote: execWithValid(function (v) {
             if (this.cache) {

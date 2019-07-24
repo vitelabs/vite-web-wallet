@@ -74,6 +74,7 @@ import ellipsisAddr from 'utils/ellipsisAddr';
 import { getTokenIcon } from 'utils/tokenParser';
 import operator from './operator.vue';
 import BigNumber from 'utils/bigNumber';
+import openUrl from 'utils/openUrl';
 
 export default {
     components: { operator },
@@ -158,11 +159,11 @@ export default {
         },
         goNetToken(tokenId) {
             const locale = this.$i18n.locale === 'zh' ? 'zh/' : '';
-            window.open(`${ process.env.viteNet }${ locale }token/${ tokenId }`);
+            openUrl(`${ process.env.viteNet }${ locale }token/${ tokenId }`);
         },
         goNetAddr(addr) {
             const locale = this.$i18n.locale === 'zh' ? 'zh/' : '';
-            window.open(`${ process.env.viteNet }${ locale }account/${ addr }`);
+            openUrl(`${ process.env.viteNet }${ locale }account/${ addr }`);
         }
     }
 };

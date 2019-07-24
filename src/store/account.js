@@ -184,7 +184,7 @@ const getters = {
                 viteLabsGateInfo.introduction = 'Vite Labs官方网关，负责BTC、ETH、USDT(ERC20)、GRIN四种代币跨链服务';
                 viteLabsGateInfo.offical = 'https://vite.org';
                 viteLabsGateInfo.customer = 'gateway@vite.org';
-                viteLabsGateInfo.privacy = '/privacy.html';
+                viteLabsGateInfo.privacy = `${ location.origin }/privacy.html`;
             }
 
             const {
