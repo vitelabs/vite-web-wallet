@@ -152,15 +152,15 @@
     },
     "beforeUse": {
         "title": "Read Before Use",
-        "text1": "Please be sure to backup your seed phrase when creating account. We cannot guarantee the restoration of your assets in the instance that you visit a scam site or lose your private keys or seed phrase.",
+        "text1": "为保障用户资金安全，web端暂不支持创建账户，请下载vite app创建账户，如果您访问了一个钓鱼网站或者丢失了您的备份，本站无法为您恢复资金。",
         "text2": "Please note that our websites do not store your private keys or seed phrase. Therefore, you will need to restore your account via seed phrase if you decide to change browsers, clear local cookies, or change PCs.",
         "text3": "Please take proper precautions in ensuring that you accurately record and safely store your seed phrase. Even the slightest error will result in you not being able to successfully restore your address."
     },
     "preview": {
         "t": "Version {version}",
-        "txt1": "Vite Web Wallet is a light node wallet launched by Vite Labs",
-        "txt2": "The wallet in the current version supports functions of query account balances, send and default receive transactions,  staking VITE for quota, SBP registration, voting ,etc.",
-        "txt3": "We are now working on the Vite DEX, stay tuned.",
+        "txt1": "x.vite.net是vite官方发布的集成钱包，交易所于一体的web产品",
+        "txt2": "当前版本主要包括钱包、ViteX交易所、抵押VITE获取配额、注册SBP、投票、铸币等功能，使用App 扫码登录体验更加流畅。",
+        "txt3": "ViteX已正式上线，抓紧挂单体验吧。",
         "v": "Current Version: {version}"
     },
     "pwdConfirm": {
@@ -313,7 +313,8 @@
             "token": "Issued Token",
             "setting": "Settings",
             "nodeDesc": "User Guide",
-            "settingPlaceholder": "Please input gateway link address"
+            "settingPlaceholder": "Please input gateway link address",
+            "nodeDescStr": "当前功能仅针对跨链代币使用，非跨链代币请勿使用，同时请勿轻信他人的网关链接，造成的资产损失本站概不负责。如需使用则将正确的网关链接填写在下方，保存后即可在当前地址生效。"
         },
         "depositRecord": {
             "tabName": "Deposit History",
@@ -1008,20 +1009,20 @@
             "mining": "Mining Amount",
             "pledge": "Staking Amount"
         },
-        "txTitle": "Trading Mining Total Profit",
-        "quotaTitle": "Staking Mining Total Profit",
-        "addHint": "Staking mining profit will be calculated at 13:00(UTC+8) everyday. You can manually retrieve your staking amount after the staking comes into effective",
+        "txTitle": "Trading as Mining Total Income",
+        "quotaTitle": "Staking as Mining Total Income",
+        "addHint": "Income of Staking as Mining will be calculated at 13:00(UTC+8) everyday. You can manually retrieve your staking amount after the staking comes into effective",
         "withdrawHint": "You will no longer be able to mining VX after retrieving",
         "addTitle": "Staking VITE for Mining",
         "withdrawTitle": "Retrieving Staked VITE",
         "addPlaceHolder": "Please input staking amount, at least 134 VITE",
         "withdrawPlaceHolder": "Please input retrieving amount, at least 134 VITE",
-        "addBtn": "Get Quota",
+        "addBtn": "Confirm to stake ",
         "withdrawBtn": "Confirm to retrieve",
         "stakingBalance": "Retrievable Staking Amount"
     },
     "inviteMining":{
-        "txTitle":"邀请挖矿总收益"
+        "txTitle":"Referring as Mining Total Income"
     },
     "tradeDividend": {
         "title": "Dividends",
