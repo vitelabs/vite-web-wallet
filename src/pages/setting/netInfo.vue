@@ -32,7 +32,7 @@
 import openUrl from 'utils/openUrl';
 
 export default {
-    created() {
+    mounted() {
         this.$store.dispatch('startLoopHeight', 3000);
     },
     destroyed() {
