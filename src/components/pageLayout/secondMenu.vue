@@ -106,7 +106,11 @@ export default {
             this.$router.push({ name: 'tradeOperator' });
         },
         goHelp() {
-            window.open('/help');
+            if (this.$i18n.locale === 'zh') {
+                window.open('https://forum.vite.net/topic/2250/%E5%A6%82%E6%9E%9C%E6%82%A8%E5%9C%A8%E4%BD%BF%E7%94%A8vitex%E7%9A%84%E6%97%B6%E5%80%99%E9%81%87%E5%88%B0%E4%BA%86%E9%97%AE%E9%A2%98-%E8%AF%B7%E7%9C%8B%E6%AD%A4%E8%B4%B4');
+                return;
+            }
+            window.open('https://forum.vite.net/topic/2251/if-you-have-a-question-about-using-vitex-please-read-this-article');
         },
         loginClick: execWithValid(function () {},
             function () {

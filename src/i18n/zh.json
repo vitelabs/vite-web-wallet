@@ -322,7 +322,8 @@
             "privacy": "服务协议",
             "clickPrivacy": "{gate}官方网关服务协议",
             "settingPlaceholder": "请输入网关链接地址",
-            "nodeDesc":"网关节点使用说明"
+            "nodeDesc":"网关节点使用说明",
+            "nodeDescStr": "当前功能仅针对跨链代币使用，非跨链代币请勿使用，同时请勿轻信他人的网关链接，造成的资产损失本站概不负责。如需使用则将正确的网关链接填写在下方，保存后即可在当前地址生效。"
         },
         "depositRecord": {
             "tabName": "充值记录",
@@ -435,7 +436,7 @@
             "inviteNum":"邀请人数",
             "inviteBenifit":"邀请挖矿收益",
             "inviteRule":"邀请规则",
-            "ruleItems":["花费<span class='strong'>1000 VITE/span>生成邀请码，<span class='strong'>1000 VITE</span> 会算作交易所收益，分给持有VX的用户","使用邀请码的用户交易过程中产生手续费，产生手续费的 <span class='strong'>5%</span>，视为邀请用户产生的交易手续，可进行挖矿VX","使用邀请码的用户，在交易过程过程中手续费可<span class='strong'>9折</span>"]
+            "ruleItems":["花费<span class='strong'>1000 VITE</span>生成邀请码，<span class='strong'>1000 VITE</span> 会算作交易所收益，分给持有VX的用户","使用邀请码的用户交易过程中产生手续费，产生手续费的 <span class='strong'>5%</span>，视为邀请用户产生的交易手续，可进行挖矿VX","使用邀请码的用户，在交易过程过程中手续费可<span class='strong'>9折</span>"]
 
         }
     },
