@@ -73,7 +73,7 @@ export default {
         fee() {
             return bigNumber.toBasic(this.feeMin, this.token.decimals);
         },
-        ammountErr:debounce(function () {
+        ammountErr: debounce(function () {
             if (!this.withdrawAmount) {
                 return;
             }
