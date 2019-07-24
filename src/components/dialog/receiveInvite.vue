@@ -85,6 +85,10 @@ export default {
 
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
+/deep/ .strong{
+    color: #1D2024;
+    @include font-family-bold();
+}
 .bg-img {
     height: 140px;
     width: 140px;
