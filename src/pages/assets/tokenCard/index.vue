@@ -85,7 +85,7 @@
             v-if="isShowTrans"
         />
 
-        <important-hint ref="importantHintDom"></important-hint>
+        <important-hint ref="importantHintDom" :tokenInfo="token"></important-hint>
     </div>
 </template>
 
@@ -198,14 +198,14 @@ export default {
             });
         },
         charge() {
-            this.$refs.importantHintDom.showConfirm(this.token, () => {
+            this.$refs.importantHintDom.showConfirm(() => {
                 chargeDialog({ token: this.token }).catch(e => {
                     console.error(e);
                 });
             });
         },
         withdraw: execWithValid(function () {
-            this.$refs.importantHintDom.showConfirm(this.token, () => {
+            this.$refs.importantHintDom.showConfirm(() => {
                 withdrawDialog({ token: this.token }).catch(e => {
                     console.error(e);
                 });

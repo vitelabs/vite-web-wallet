@@ -6,12 +6,20 @@
 
         <div class="notice-content">
             {{ $t('assets.notice.contentProvider', { gate: gateInfo.gateway }) }}
-            <span v-show="gateInfo.gateway !== 'Vite Labs'">{{ $t('assets.notice.contentOther', { gate: gateInfo.gateway }) }}</span>
-            {{ $t('assets.notice.contentAgree', { gate: gateInfo.gateway }) }}<span @click="goLink" class="link __pointer">{{ $t('assets.notice.agreement') }}</span>.
+            <span v-show="gateInfo.gateway !== 'Vite Labs'">
+                {{ $t('assets.notice.contentOther', { gate: gateInfo.gateway }) }}
+            </span>
+            {{ $t('assets.notice.contentAgree', { gate: gateInfo.gateway }) }}
+            <span @click="goLink" class="link __pointer">{{ $t('assets.notice.agreement') }}</span>
             {{ $t('assets.notice.contentUngree', { gate: gateInfo.gateway }) }}
         </div>
 
-        <div class="__hint"><span>{{ $t('assets.notice.hint', { gate: gateInfo.gateway }) }}</span></div>
+        <div class="__hint">
+            <span>
+                {{ $t('assets.notice.hint', { gate: gateInfo.gateway }) }}
+                {{ gateInfo.customer ? `——${gateInfo.customer}` : '' }}
+            </span>
+        </div>
 
     </confirm>
 </template>
@@ -21,10 +29,17 @@ import confirm from 'components/confirm/confirm.vue';
 
 export default {
     components: { confirm },
+    props: {
+        tokenInfo: {
+            type: Object,
+            default: () => {
+                return {};
+            }
+        }
+    },
     data() {
         return {
             isShowConfirm: false,
-            tokenInfo: {},
             successCallback: null
         };
     },
@@ -37,9 +52,8 @@ export default {
         }
     },
     methods: {
-        showConfirm(tokenInfo, callback) {
+        showConfirm(callback) {
             this.isShowConfirm = true;
-            this.tokenInfo = tokenInfo;
             this.successCallback = callback;
         },
         _close() {
@@ -55,11 +69,12 @@ export default {
             this.clear();
         },
         clear() {
-            this.tokenInfo = {};
             this.successCallback = null;
         },
         goLink() {
-            window.alert('Where??');
+            if (this.gateInfo.privacy) {
+                window.open(this.gateInfo.privacy);
+            }
         }
     }
 };
