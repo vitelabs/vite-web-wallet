@@ -33,7 +33,7 @@ import { getInviteInfo, getCode, genCode } from 'services/tradeOperation';
 import copy from 'utils/copy';
 import { doUntill } from 'utils/asyncFlow';
 import { VITE_TOKENID } from 'utils/constant';
-import bn from 'utils/bigNumber'
+import bn from 'utils/bigNumber';
 
 export default {
     async beforeMount() {
@@ -69,8 +69,8 @@ export default {
         }
     },
     methods: {
-        formatNum(n){
-            return bn.normalFormatNum(n)
+        formatNum(n) {
+            return bn.normalFormatNum(n);
         },
         async getCode() {
             this.inviteCode = await getCode(this.address);
