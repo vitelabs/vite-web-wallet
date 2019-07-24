@@ -301,6 +301,8 @@
             }
         },
         "gateInfo": {
+            "name": "网关名称",
+            "customer": "客服链接",
             "gateSetting":"Configure Gateway",
             "tabName": "Gateway Details",
             "selfdefined": "Customize Gateway",
@@ -308,7 +310,7 @@
             "introduction": "Description",
             "token": "Issued Token",
             "setting": "Settings",
-            "nodeDesc": "User Guide:",
+            "nodeDesc": "User Guide",
             "settingPlaceholder": "Please input gateway link address"
         },
         "depositRecord": {
@@ -676,7 +678,7 @@
             "contentAgree": "使用{gate}提供的服务，表明您同意{gate}",
             "agreement": "服务条款，交易条件，限制及隐私政策",
             "contentUngree": "若您不同意这些条款，请勿使用{gate}服务。",
-            "hint": "若您对支付流程有问题，请联系{gate}客服团队——support@{gate}.com"
+            "hint": "若您对支付流程有问题，请联系{gate}客服团队"
         },
         "vb":{
             "title":"ViteBifrost",
