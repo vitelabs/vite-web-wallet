@@ -101,7 +101,6 @@
         "DexFundUserDeposit": "ViteX Deposit",
         "DexFundUserWithdraw": "ViteX Withdrawal",
         "DexFundNewOrder": "ViteX Creating Orders",
-        "currDexFundNewOrder": "ViteX Creating Orders",
         "DexTradeCancelOrder": "ViteX Revoking Orders",
         "DexFundNewMarket": "ViteX Token Listing",
         "CreateContractReq": "Create Contract",
@@ -305,6 +304,8 @@
         "gateInfo": {
             "name": "Gateway Name",
             "customer": "Customer Service",
+            "privacy": "Terms of Services",
+            "clickPrivacy": "{gate}'s official gateway Terms of Services",
             "gateSetting":"Configure Gateway",
             "tabName": "Gateway Details",
             "selfdefined": "Customize Gateway",

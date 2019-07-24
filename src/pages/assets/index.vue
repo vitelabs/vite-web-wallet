@@ -37,6 +37,7 @@
 
 <script>
 import pageLayout from 'components/pageLayout/index';
+import openUrl from 'utils/openUrl';
 import tokenCard from './tokenCard';
 import accountHead from './head';
 import { addTokenDialog } from './dialog';
@@ -119,7 +120,7 @@ export default {
         },
         goDetail() {
             const locale = this.$i18n.locale === 'zh' ? 'zh/' : '';
-            window.open(`${ process.env.viteNet }${ locale }account/${ this.account.addr }`);
+            openUrl(`${ process.env.viteNet }${ locale }account/${ this.account.addr }`);
         }
     }
 };
