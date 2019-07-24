@@ -301,6 +301,8 @@
             }
         },
         "gateInfo": {
+            "name": "网关名称",
+            "customer": "客服链接",
             "gateSetting":"Configure Gateway",
             "tabName": "Gateway Details",
             "selfdefined": "Customize Gateway",
@@ -308,7 +310,7 @@
             "introduction": "Description",
             "token": "Issued Token",
             "setting": "Settings",
-            "nodeDesc": "User Guide:",
+            "nodeDesc": "User Guide",
             "settingPlaceholder": "Please input gateway link address"
         },
         "depositRecord": {
