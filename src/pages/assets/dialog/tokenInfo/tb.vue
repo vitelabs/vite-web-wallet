@@ -214,8 +214,8 @@ export default {
         line-height: 14px;
         align-items: center;
         &:first-child {
-            min-width: 103px;
-            width: 20%;
+            min-width: 105px;
+            width: 21%;
             justify-content: flex-start;
             padding-left: 20px;
         }
@@ -230,11 +230,11 @@ export default {
         &:nth-child(5),
         &:nth-child(4) {
             min-width: 103px;
-            width: 18%;
+            width: 17%;
         }
         &:last-child{
             min-width: 55px;
-            width: 13%;
+            width: 14%;
             justify-content: flex-end;
         }
     }
