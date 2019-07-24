@@ -49,7 +49,7 @@
 </template>
 
 <script>
-import { hdAddr } from '@vite/vitejs';
+import { hdAddr, constant } from '@vite/vitejs';
 import viteInput from 'components/viteInput';
 import { initPwd } from 'components/password/index.js';
 import BigNumber from 'utils/bigNumber';
@@ -57,18 +57,13 @@ import statistics from 'utils/statistics';
 import { verifyAmount } from 'utils/validations';
 import { execWithValid } from 'utils/execWithValid';
 
+const Vite_Token_Info = constant.Vite_Token_Info;
 const amountTimeout = null;
 const minNum = 134;
 
 export default {
     components: { viteInput },
     props: {
-        tokenInfo: {
-            type: Object,
-            default: () => {
-                return {};
-            }
-        },
         sendPledgeTx: {
             type: Function,
             default: () => {}
@@ -101,19 +96,14 @@ export default {
     },
     methods: {
         testAmount() {
-            if (!this.tokenInfo || !this.tokenInfo.tokenId) {
-                this.amountErr = '';
-                return true;
-            }
-
-            const balance = this.tokenBalList && this.tokenBalList[this.tokenInfo.tokenId]
-                ? this.tokenBalList[this.tokenInfo.tokenId].totalAmount : 0;
+            const balance = this.tokenBalList && this.tokenBalList[Vite_Token_Info.tokenId]
+                ? this.tokenBalList[Vite_Token_Info.tokenId].totalAmount : 0;
 
             this.amountErr = verifyAmount({
                 formatDecimals: 8,
-                decimals: this.tokenInfo.decimals,
+                decimals: Vite_Token_Info.decimals,
                 balance,
-                minAmount: BigNumber.toMin(minNum, this.tokenInfo.decimals),
+                minAmount: BigNumber.toMin(minNum, Vite_Token_Info.decimals),
                 errorMap: { lessMin: this.$t('walletQuota.limitAmt', { num: minNum }) }
             })(this.amount);
 

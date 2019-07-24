@@ -92,9 +92,6 @@ export default {
         };
     },
     computed: {
-        viteTokenInfo() {
-            return this.$store.getters.viteTokenInfo;
-        },
         currMakerFee() {
             return this.txPair.txPairDetail.makerFeeRate ? (this.txPair.txPairDetail.makerFeeRate * 100).toFixed(3) : 0;
         },
