@@ -26,6 +26,7 @@
 </template>
 
 <script>
+import { constant } from '@vite/vitejs';
 import loading from 'components/loading';
 import confirm from 'components/confirm/confirm.vue';
 import viteInput from 'components/viteInput';
@@ -34,6 +35,7 @@ import sendTx from 'utils/sendTx';
 import { initPwd } from 'components/password/index.js';
 
 const spend = 10000;
+const Vite_Token_Info = constant.Vite_Token_Info;
 
 export default {
     components: { loading, confirm, viteInput },
@@ -55,11 +57,8 @@ export default {
             return this.$store.getters.viteTokenInfo;
         },
         rawBalance() {
-            if (!this.viteTokenInfo) {
-                return null;
-            }
             const list = this.$store.getters.exBalanceList;
-            return list[this.viteTokenInfo.tokenId];
+            return list[Vite_Token_Info.tokenId];
         },
         exViteBalance() {
             return this.rawBalance ? this.rawBalance.availableExAmount : 0;
@@ -68,11 +67,7 @@ export default {
             return this.rawBalance ? this.rawBalance.available : 0;
         },
         isHaveBalance() {
-            if (!this.viteTokenInfo) {
-                return false;
-            }
-
-            const amount = BigNumber.toMin(this.spend, this.viteTokenInfo.decimals);
+            const amount = BigNumber.toMin(this.spend, Vite_Token_Info.decimals);
             return BigNumber.compared(this.exViteBalance, amount) >= 0;
         }
     },

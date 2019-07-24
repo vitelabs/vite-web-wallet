@@ -46,11 +46,6 @@ export default {
             pool: {}
         };
     },
-    computed: {
-        viteTokenInfo() {
-            return this.$store.getters.viteTokenInfo;
-        }
-    },
     methods: {
         getSymbol(tokenInfo) {
             if (!tokenInfo) {

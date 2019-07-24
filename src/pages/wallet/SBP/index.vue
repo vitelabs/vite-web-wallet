@@ -6,31 +6,30 @@
 
         <div v-if="!loadingToken" class="section">
             <div class="__second-title">{{ $t('walletSBP.section1.title') }}</div>
-            <register :tokenInfo="tokenInfo" :canUseAddr="canUseAddr" :getParams="getParams" class="content"></register>
+            <register :canUseAddr="canUseAddr" :getParams="getParams" class="content"></register>
         </div>
 
         <div v-if="!loadingToken" class="section">
             <div class="__second-title">{{ $t('walletSBP.section2.title') }}</div>
-            <list :showConfirm="showConfirm" :tokenInfo="tokenInfo" :getParams="getParams"></list>
+            <list :showConfirm="showConfirm" :getParams="getParams"></list>
         </div>
 
-        <div v-if="showConfirmType" class="gray-wrapper">
-            <confirm :title="$t(`walletSBP.confirm.${showConfirmType}.title`)" :singleBtn="true"
-                     :closeIcon="true" :close="closeConfirm"
-                     :leftBtnTxt="$t(`walletSBP.confirm.${showConfirmType}.btn`)" :leftBtnClick="validTx"
-                     :btnUnuse="!!btnUnuse">
-                <div v-if="showConfirmType === 'edit'">
-                    <div class="input-err" v-show="addrErr">{{ addrErr }}</div>
-                    <vite-input v-model="addr" :valid="testAddr"
-                                :placeholder="$t(`walletSBP.confirm.${showConfirmType}.placeholder`)"></vite-input>
-                </div>
-            </confirm>
-        </div>
+        <confirm v-if="showConfirmType" :showMask="true" class="small"
+                 :title="$t(`walletSBP.confirm.${showConfirmType}.title`)" :singleBtn="true"
+                 :closeIcon="true" :close="closeConfirm"
+                 :leftBtnTxt="$t(`walletSBP.confirm.${showConfirmType}.btn`)" :leftBtnClick="validTx"
+                 :btnUnuse="!!btnUnuse">
+            <div v-if="showConfirmType === 'edit'">
+                <div class="input-err" v-show="addrErr">{{ addrErr }}</div>
+                <vite-input v-model="addr" :valid="testAddr"
+                            :placeholder="$t(`walletSBP.confirm.${showConfirmType}.placeholder`)"></vite-input>
+            </div>
+        </confirm>
     </div>
 </template>
 
 <script>
-import { hdAddr } from '@vite/vitejs';
+import { hdAddr, constant } from '@vite/vitejs';
 import secTitle from 'components/secTitle';
 import loading from 'components/loading';
 import confirm from 'components/confirm/confirm.vue';
@@ -42,28 +41,15 @@ import sendTx from 'utils/sendTx';
 import register from './register';
 import list from './list';
 
+const Vite_Token_Info = constant.Vite_Token_Info;
+
 export default {
     components: { secTitle, register, list, loading, confirm, viteInput },
-    created() {
-        this.tokenInfo = this.$store.getters.viteTokenInfo;
-
-        if (!this.tokenInfo) {
-            this.loadingToken = true;
-            this.$store.dispatch('fetchTokenInfo').then(tokenInfo => {
-                this.loadingToken = false;
-                this.tokenInfo = tokenInfo;
-            })
-                .catch(err => {
-                    console.warn(err);
-                });
-        }
-    },
     destroyed() {
         this.clearAll();
     },
     data() {
         return {
-            tokenInfo: {},
             loadingToken: false,
             showConfirmType: '',
             activeItem: {},
@@ -136,7 +122,7 @@ export default {
             this.showConfirmType = type;
             this.stopWatch = false;
 
-            if (!this.tokenInfo || !activeItem) {
+            if (!activeItem) {
                 return;
             }
             this.activeItem = activeItem;
@@ -209,10 +195,10 @@ export default {
         },
 
         getParams({ producerAddr, nodeName, amount }) {
-            const toAmount = BigNumber.toMin(amount || 0, this.tokenInfo.decimals);
+            const toAmount = BigNumber.toMin(amount || 0, Vite_Token_Info.decimals);
 
             return {
-                tokenId: this.tokenInfo.tokenId,
+                tokenId: Vite_Token_Info.tokenId,
                 nodeName: nodeName || this.activeItem.name,
                 amount: toAmount,
                 toAddress: producerAddr || ''

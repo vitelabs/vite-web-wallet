@@ -59,24 +59,19 @@
 </template>
 
 <script>
-import { hdAddr } from '@vite/vitejs';
+import { hdAddr, constant } from '@vite/vitejs';
 import viteInput from 'components/viteInput';
 import { initPwd } from 'components/password/index.js';
 import BigNumber from 'utils/bigNumber';
 import sendTx from 'utils/sendTx';
 import { execWithValid } from 'utils/execWithValid';
 
+const Vite_Token_Info = constant.Vite_Token_Info;
 const amount = 500000;
 
 export default {
     components: { viteInput },
     props: {
-        tokenInfo: {
-            type: Object,
-            default: () => {
-                return {};
-            }
-        },
         getParams: {
             type: Function,
             default: () => {}
@@ -110,11 +105,8 @@ export default {
             return this.$store.getters.regAddrList;
         },
         amountErr() {
-            if (!this.tokenInfo || !this.tokenInfo.tokenId) {
-                return '';
-            }
-            const balance = this.tokenBalList[this.tokenInfo.tokenId] ? this.tokenBalList[this.tokenInfo.tokenId].totalAmount : 0;
-            const minAmount = BigNumber.toMin(amount, this.tokenInfo.decimals);
+            const balance = this.tokenBalList[Vite_Token_Info.tokenId] ? this.tokenBalList[Vite_Token_Info.tokenId].totalAmount : 0;
+            const minAmount = BigNumber.toMin(amount, Vite_Token_Info.decimals);
             if (BigNumber.compared(balance, minAmount) < 0) {
                 return this.$t('hint.insufficientBalance');
             }
@@ -122,10 +114,6 @@ export default {
             return '';
         },
         btnUnuse() {
-            if (!this.tokenInfo || !this.tokenInfo.tokenId) {
-                return true;
-            }
-
             return this.amountErr || this.loading || !this.nodeName || !this.producerAddr || this.nodeNameErr || this.producerAddrErr;
         },
         tokenBalList() {

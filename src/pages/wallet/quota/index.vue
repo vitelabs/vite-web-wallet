@@ -17,17 +17,16 @@
 
         <div v-show="!loadingToken" class="content">
             <my-quota class="my-quota _content_border"></my-quota>
-            <pledge-tx class="pledge-tx"
-                       :sendPledgeTx="sendPledgeTx" :tokenInfo="tokenInfo"></pledge-tx>
+            <pledge-tx class="pledge-tx" :sendPledgeTx="sendPledgeTx"></pledge-tx>
         </div>
 
         <list v-show="!loadingToken" ref="txList" :sendPledgeTx="sendPledgeTx"
-              :tokenInfo="tokenInfo"
               :showConfirm="showConfirm"></list>
     </div>
 </template>
 
 <script>
+import { constant } from '@vite/vitejs';
 import Vue from 'vue';
 import quotaHead from './quotaHead';
 import myQuota from './myQuota';
@@ -42,25 +41,12 @@ import BigNumber from 'utils/bigNumber';
 import { verifyWithdrawAmount } from 'utils/validations';
 import { execWithValid } from 'utils/execWithValid';
 
+const Vite_Token_Info = constant.Vite_Token_Info;
+
 export default {
     components: { quotaHead, myQuota, pledgeTx, confirm, list, loading, viteInput },
-    created() {
-        this.tokenInfo = this.$store.getters.viteTokenInfo;
-
-        if (!this.tokenInfo) {
-            this.loadingToken = true;
-            this.$store.dispatch('fetchTokenInfo').then(tokenInfo => {
-                this.loadingToken = false;
-                this.tokenInfo = tokenInfo;
-            })
-                .catch(err => {
-                    console.warn(err);
-                });
-        }
-    },
     data() {
         return {
-            tokenInfo: {},
             loadingToken: false,
             showConfirmType: '',
 
@@ -81,7 +67,7 @@ export default {
             if (!this.stakingAmount) {
                 return '';
             }
-            return BigNumber.toBasic(this.stakingAmount || 0, this.tokenInfo.decimals);
+            return BigNumber.toBasic(this.stakingAmount || 0, Vite_Token_Info.decimals);
         }
     },
     methods: {
@@ -92,7 +78,7 @@ export default {
 
             this.amountErr = verifyWithdrawAmount({
                 stakingAmount: this.stakingAmount,
-                decimals: this.tokenInfo.decimals
+                decimals: Vite_Token_Info.decimals
             }, this.cancelAmount);
 
             return !this.amountErr;
@@ -141,12 +127,12 @@ export default {
                 return;
             }
 
-            amount = BigNumber.toMin(amount || 0, this.tokenInfo.decimals);
+            amount = BigNumber.toMin(amount || 0, Vite_Token_Info.decimals);
 
             sendTx({
                 methodName: type,
                 data: {
-                    tokenId: this.tokenInfo.tokenId,
+                    tokenId: Vite_Token_Info.tokenId,
                     toAddress,
                     amount
                 },
