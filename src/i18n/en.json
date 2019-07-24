@@ -304,6 +304,8 @@
         "gateInfo": {
             "name": "网关名称",
             "customer": "客服链接",
+            "privacy": "服务协议",
+            "clickPrivacy": "{gate}官方网关服务协议",
             "gateSetting":"Configure Gateway",
             "tabName": "Gateway Details",
             "selfdefined": "Customize Gateway",
