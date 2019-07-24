@@ -214,8 +214,8 @@ export default {
         line-height: 14px;
         align-items: center;
         &:first-child {
-            min-width: 103px;
-            width: 20%;
+            min-width: 105px;
+            width: 21%;
             justify-content: flex-start;
             padding-left: 20px;
         }
@@ -234,7 +234,7 @@ export default {
         }
         &:last-child{
             min-width: 55px;
-            width: 15%;
+            width: 14%;
             justify-content: flex-end;
         }
     }
