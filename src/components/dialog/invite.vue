@@ -23,7 +23,7 @@ block content
             .right(v-else) {{$t('assets.invite.notEnough')}}
         .block__content.edit.space 1000 VITE
     .block__title {{$t('assets.invite.inviteRule')}}
-    .illustrate(v-for="(i,j) in $t('assets.invite.ruleItems')" :key="j") {{i}}
+    .illustrate(v-for="(i,j) in $t('assets.invite.ruleItems')" :key="j" v-html="i")
         .dot
 
 </template>
@@ -101,6 +101,10 @@ export default {
 
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
+/deep/ .strong{
+    color: #1D2024;
+    @include font-family-bold();
+}
 .bg-img {
     height: 140px;
     width: 140px;
