@@ -698,7 +698,7 @@
                 "downloadTips":"Don’t have Vite App yet? ",
                 "download":"Download Vite Wallet"
             },
-            "accountName":"My Account"
+            "accountName":"ViteConnect Address"
         },
         "invite":{
             "inviteTitle":"Invite Friends",
