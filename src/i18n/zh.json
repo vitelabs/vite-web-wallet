@@ -58,8 +58,8 @@
         "symbol": "发送交易"
     },
     "compliance": {
-        "text": "本站目前不支持来自下列国家或地区的客户：中国香港、古巴、伊朗、朝鲜、克里米亚、苏丹、马来西亚、叙利亚、美国[包括所有美国领土，如波多黎各、美属萨摩亚、关岛、北马里亚纳群岛邦、美属维尔京群岛（圣克罗伊岛，圣约翰岛和圣托马斯岛）]、孟加拉国、玻利维亚、厄瓜多尔和吉尔吉斯斯坦。如欲了解更多详情，请参阅我们的服务条款及我们的风险与合规声明。",
-        "title": "合规提示"
+        "text": "ViteX 目前不支持来自下列国家或地区的客户：中国香港、古巴、伊朗、朝鲜、克里米亚、苏丹、马来西亚、叙利亚、美国[包括所有美国领土，如波多黎各、美属萨摩亚、关岛、北马里亚纳群岛邦、美属维尔京群岛（圣克罗伊岛，圣约翰岛和圣托马斯岛）]、孟加拉国、玻利维亚、厄瓜多尔和吉尔吉斯斯坦。如欲了解更多详情，请参阅我们的服务条款及隐私政策。",
+        "title": "重要提示"
     },
     "errCode": {
         "35003": "{name}ID发生冲突，请您稍后重新提交",
@@ -101,7 +101,6 @@
         "DexFundUserDeposit": "ViteX充值",
         "DexFundUserWithdraw": "ViteX提现",
         "DexFundNewOrder": "ViteX挂单",
-        "currDexFundNewOrder": "ViteX挂单",
         "DexTradeCancelOrder": "ViteX撤单",
         "DexFundNewMarket": "ViteX上币",
         "CreateContractReq": "创建合约",
@@ -152,13 +151,13 @@
     },
     "beforeUse": {
         "title": "使用前必读",
-        "text1": "为保障用户资金安全，web端暂不支持创建账户，请下载vite app创建账户，如果您访问了一个钓鱼网站或者丢失了您的备份，本站无法为您恢复资金。",
+        "text1": "为保障用户资金安全，web端暂不支持创建账户，请下载Vite App创建账户，如果您访问了一个钓鱼网站或者丢失了您的备份，本站无法为您恢复资金。",
         "text2": "由于本站不存储你的私钥或助记词，如果您更换浏览器、电脑或者清除浏览器缓存，需要通过备份助记词恢复账号。",
         "text3": "如果使用了从助记词恢复地址的方式，请保证助记词绝对正确，如果有细微的不同都可能无法恢复您的地址。"
     },
     "preview": {
         "t": "{version}版本",
-        "txt1": "x.vite.net是vite官方发布的集成钱包，交易所于一体的web产品",
+        "txt1": "x.vite.net是Vite官方发布的集成钱包，交易所于一体的web产品",
         "txt2": "当前版本主要包括钱包、ViteX交易所、抵押VITE获取配额、注册SBP、投票、铸币等功能，使用App 扫码登录体验更加流畅。",
         "txt3": "ViteX已正式上线，抓紧挂单体验吧。",
         "v": "当前版本：{version}"
@@ -319,6 +318,7 @@
             "token": "网关发行代币",
             "setting": "网关设置",
             "customer": "客服链接",
+            "clickCustomer": "点击提交工单",
             "privacy": "服务协议",
             "clickPrivacy": "{gate}官方网关服务协议",
             "settingPlaceholder": "请输入网关链接地址",
@@ -844,7 +844,7 @@
             "operatorFee": "运营商收取费率：{fee}",
             "vipFee": "VIP特权抵扣：{fee}",
             "inviteFeeDiscount":"邀请码折扣：{fee} off",
-            "feeRule":"(基础费率+运营商费率-VIP抵扣)*邀请折扣"
+            "feeRule":"(基础费率-VIP抵扣+运营商费率)*邀请折扣"
         },
         "vipConfirm": {
             "cancelVip": "取消VIP",

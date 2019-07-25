@@ -35,7 +35,7 @@ import { constant } from '@vite/vitejs';
 const Vite_Token_Info = constant.Vite_Token_Info;
 
 export default {
-    created() {
+    mounted() {
         this.$store.dispatch('startLoopHeight');
     },
     destroyed() {
