@@ -2156,10 +2156,10 @@
   resolved "https://registry.npm.taobao.org/@vite/vitejs-ws/download/@vite/vitejs-ws-2.2.0.tgz#e0faaa1cde975f0499adf3f13d949d88c5cfd630"
   integrity sha1-4PqqHN6XXwSZrfPxPZSdiMXP1jA=
 
-"@vite/vitejs@2.2.8":
-  version "2.2.8"
-  resolved "https://registry.yarnpkg.com/@vite/vitejs/-/vitejs-2.2.8.tgz#1f32c7a055c7bcd44a6d2682d3c72a9a91eda047"
-  integrity sha512-2VQSaJHdbyd50VWdRpAWY1jZ0CytIN031tfDccLXWknecDeAHP+RsL4FHQD4OMUdo6+qHC1BOD1LNHarXuCeWg==
+"@vite/vitejs@2.2.9":
+  version "2.2.9"
+  resolved "https://registry.yarnpkg.com/@vite/vitejs/-/vitejs-2.2.9.tgz#31f48c2ce834cee0f96d3c3b71f87044399b593a"
+  integrity sha512-hb8BdPmTBYqq0JfT+WUG0T1cS9LmThhIOiROrJkbCIKy5VURDrZ7VeQAHelo1mSJFzslmbOYhQojwpB7cL1UOA==
   dependencies:
     "@sisi/ed25519-blake2b-hd-key" "^1.0.2"
     "@sisi/tweetnacl-blake2b" "^1.0.0"
