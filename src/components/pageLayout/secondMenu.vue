@@ -13,7 +13,7 @@
         </ul>
 
         <ul class="right-lab-list">
-            <SwitchComp class="tab __pointer" :optList="optList" :value="selectInvite" @input="inviteDialog" v-show="showInvite"/>
+            <SwitchComp class="tab __pointer" :optList="inviteOptLit" :value="selectInvite" @input="inviteDialog"/>
             <div class="tab __pointer" @click="goHelp">{{ $t("help") }}</div>
             <div v-show="!isLogin" @click="loginClick" class="tab __pointer">
                 {{ isHaveUsers ? $t("unlockAcc") : $t("login") }}
@@ -54,17 +54,24 @@ export default {
     },
     data() {
         return {
-            optList: [
-                { name: this.$t('assets.invite.inviteTitle'), value: 'invite' },
-                { name: this.$t('assets.invite.receiveInviteTitle'), value: 'receiveInvite' }
-            ],
-            selectInvite: 'invite',
+            selectInvite: this.showInvite ? 'invite' : 'receiveInvite',
             isKnowUnrecieved: false
         };
     },
     computed: {
         showInvite() {
-            return this.address && this.$store.state.uiConfig.invite_addr_list && this.$store.state.uiConfig.invite_addr_list.find(a => a === this.address);
+            if (this.address && this.$store.state.uiConfig.allShowInvite) {
+                return true;
+            }
+            return this.address && this.$store.state.uiConfig.inviteAddrList && this.$store.state.uiConfig.inviteAddrList.find(a => a === this.address);
+        },
+        inviteOptLit() {
+            return this.showInvite ? [
+                { name: this.$t('assets.invite.inviteTitle'), value: 'invite' },
+                { name: this.$t('assets.invite.receiveInviteTitle'), value: 'receiveInvite' }
+            ] : [
+                { name: this.$t('assets.invite.receiveInviteTitle'), value: 'receiveInvite' }
+            ];
         },
         address() {
             return this.$store.getters.activeAddr;
@@ -98,7 +105,7 @@ export default {
             this.isKnowUnrecieved = true;
         },
         inviteDialog(v) {
-            this.selectInvite = 'invite';
+            this.selectInvite = this.showInvite ? 'invite' : 'receiveInvite';
             if (v === 'invite') {
                 inviteDialog().catch(() => {
                     console.log('not close');

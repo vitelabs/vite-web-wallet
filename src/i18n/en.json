@@ -688,17 +688,17 @@
         "vb":{
             "title":"Vite Connect",
             "connect":{
-                "tips":"Scan the QR code via Vite App"
+                "tips":"Scan the QR code via Vite Wallet App"
             },
             "confirm":{
-                "tips":"Please confirm transaction on VITE App"
+                "tips":"Please confirm transaction on VITE Wallet App"
             },
             "start":{
-                "scan":"Scan the QR code via Vite App",
-                "downloadTips":"Don’t have Vite App yet? ",
+                "scan":"Scan the QR code via Vite Wallet App",
+                "downloadTips":"Don’t have Vite Wallet App yet? ",
                 "download":"Download Vite Wallet"
             },
-            "accountName":"My Account"
+            "accountName":"ViteConnect Address"
         },
         "invite":{
             "inviteTitle":"Invite Friends",
