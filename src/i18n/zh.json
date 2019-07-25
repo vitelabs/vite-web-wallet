@@ -417,7 +417,7 @@
                 "downloadTips":"还没有Vite App？",
                 "download":"下载Vite手机钱包"
             },
-            "defaultName":"我的账户"
+            "accountName":"我的账户"
         },
         "invite":{
             "inviteTitle":"邀请好友",
