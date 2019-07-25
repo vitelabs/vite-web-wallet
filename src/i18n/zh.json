@@ -753,6 +753,7 @@
         "marketClosed": "{symbol} 已暂停交易。",
         "mergeDepth": "深度合并",
         "depthStep": "{step}位小数",
+        "blocking": "网络拥堵, 请稍候重试",
         "operator": {
             "title": "运营商信息",
             "introduction": "介绍",

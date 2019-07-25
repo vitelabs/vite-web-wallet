@@ -594,7 +594,10 @@ export default {
             });
         }),
         newOrder({ price, quantity }) {
-            console.log(this.blockingLevel);
+            if (this.blockingLevel === 3) {
+                this.$toast(this.$t('tradeCenter.blocking'));
+                return;
+            }
 
             const tradeToken = this.activeTxPair
                 ? this.activeTxPair.tradeToken
