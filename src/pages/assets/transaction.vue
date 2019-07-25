@@ -185,7 +185,6 @@ export default {
             }
 
             const isHold = initPwd({
-                showMask: false,
                 submit: () => {
                     this.isShowTrans = true;
                     this.transfer();
