@@ -407,17 +407,17 @@
         "vb":{
             "title":"ViteConnect",
             "connect":{
-                "tips":"请使用Vite App扫码登录."
+                "tips":"请使用Vite Wallet App扫码登录."
             },
             "confirm":{
-                "tips":"请在VITE App上确认交易"
+                "tips":"请在VITE Wallet App上确认交易"
             },
             "start":{
-                "scan":"请使用Vite App扫码登录.",
-                "downloadTips":"还没有Vite App？",
+                "scan":"请使用Vite Wallet App扫码登录.",
+                "downloadTips":"还没有Vite Wallet App？",
                 "download":"下载Vite手机钱包"
             },
-            "accountName":"我的账户"
+            "accountName":"ViteConnect 地址"
         },
         "invite":{
             "inviteTitle":"邀请好友",
