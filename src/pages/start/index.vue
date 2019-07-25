@@ -17,12 +17,7 @@
 import firstNotice from 'components/firstNotice.vue';
 import changeLang from 'components/changeLang';
 
-export default {
-    components: { changeLang, firstNotice },
-    mounted() {
-        console.log(this.$route.name);
-    }
-};
+export default { components: { changeLang, firstNotice } };
 </script>
 
 <style lang="scss" scoped>

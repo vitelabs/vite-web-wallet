@@ -75,7 +75,7 @@ export default function request({
 export const getClient = function (baseUrl = '', afterResponse, headersBase = {}) {
     return function ({ method = 'GET', path, params = {}, timeout = reqTimeout, host = baseUrl, headers = {} }) {
         host.slice(-1) === '/' && (host = host.slice(0, -1));
-        path.indexOf('/') === 0 && (path = path.splice(1));
+        path.indexOf('/') === 0 && (path = path.slice(1));
         path = `${ host }/${ path }`;
         headers = { ...headersBase, ...headers };
         if ((path.indexOf('.') !== -1 || path.indexOf(':') !== -1) && path.indexOf('http') !== 0) {

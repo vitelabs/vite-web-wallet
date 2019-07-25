@@ -49,7 +49,7 @@ block originContent
             div {{ token.gateInfo.introduction }}
         .content__item(v-if="token.gateInfo.url")
             .label {{$t("tokenCard.gateInfo.customer")}}:
-            div {{ token.gateInfo.customer }}
+            div.click-able(v-if="token.gateInfo.customer")(@click="goToGateCustomer") {{ $t("tokenCard.gateInfo.clickCustomer") }}
         .content__item(v-if="token.gateInfo.url")
             .label {{$t("tokenCard.gateInfo.privacy")}}:
             div.click-able(v-if="token.gateInfo.privacy")(@click="goToGatePrivacy") {{$t("tokenCard.gateInfo.clickPrivacy", {gate: token.gateInfo.gateway})}}
@@ -126,6 +126,13 @@ export default {
         },
         goToGatePrivacy() {
             openUrl(this.token.gateInfo.privacy);
+        },
+        goToGateCustomer() {
+            if (this.$i18n.locale === 'zh') {
+                openUrl(this.token.gateInfo.customer);
+                return;
+            }
+            openUrl(this.token.gateInfo.customerEn);
         },
         getIcon(id) {
             return getTokenIcon(id);

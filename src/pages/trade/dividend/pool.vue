@@ -56,7 +56,7 @@ export default {
             const pre = +index >= 100 ? ''
                 : +index >= 10 ? '0'
                     : '00';
-            return `${ symbol }-${ pre }${ index }`;
+            return [ 'VITE', 'VCP', 'VX' ].indexOf(symbol) === -1 ? `${ symbol }-${ pre }${ index }` : symbol;
         },
         fetchPool() {
             $ViteJS.request('dexfund_getCurrentDividendPools').then(data => {

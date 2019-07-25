@@ -302,6 +302,7 @@
             }
         },
         "gateInfo": {
+            "clickCustomer": "点击提交工单",
             "name": "Gateway Name",
             "customer": "Customer Service",
             "privacy": "Terms of Services",
@@ -697,7 +698,7 @@
                 "downloadTips":"Don’t have Vite App yet? ",
                 "download":"Download Vite Wallet"
             },
-            "defaultName":"My Account"
+            "accountName":"My Account"
         },
         "invite":{
             "inviteTitle":"Invite Friends",
@@ -742,6 +743,7 @@
         "marketClosed": "{symbol} market has been suspended",
         "mergeDepth": "Group",
         "depthStep": "{step} digits",
+        "blocking": "网络拥堵, 请稍候重试",
         "operator": {
             "title": "Operator Details",
             "introduction": "Introduction",

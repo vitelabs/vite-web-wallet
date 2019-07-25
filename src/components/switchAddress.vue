@@ -49,13 +49,11 @@ export default {
             return ellipsisAddr(this.address, 5);
         },
         showName() {
-            let i;
-            for (i = 0; i < this.addrList.length;i++) {
-                if (this.addrList[i].address === this.address) {
-                    break;
-                }
+            if (getCurrHDAcc().isBifrost) {
+                return this.$t('assets.vb.accountName');
             }
-            if (i >= this.addrList.length) {
+            const i = this.addrList.findIndex(v => v.address === this.address);
+            if (i < 0) {
                 return '';
             }
             return this.addrList[i].name || `${ this.$t('addrName', { index: this.addrList[i].idx + 1 }) }`;

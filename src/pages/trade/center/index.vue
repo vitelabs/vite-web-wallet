@@ -29,6 +29,7 @@ export default {
     mounted() {
         this.$store.dispatch('exFetchActiveTxPair');
         this.$store.dispatch('exFetchVip');
+        this.$store.dispatch('startLoopDexFundeUnreceived');
 
         !this.$store.state.env.isShowCompliance && confirm({
             size: 'small',
@@ -41,6 +42,9 @@ export default {
                 click: this.$store.commit('setComplianceShow')
             }
         });
+    },
+    destroyed() {
+        this.$store.dispatch('stopLoopDexFundeUnreceived');
     },
     computed: {
         address() {

@@ -1,7 +1,7 @@
 import { baseToken, marketsClosed } from 'services/trade';
 import getQuery from 'utils/query';
 
-const quoteTokenCategory = [ 'VITE', 'BTC', 'ETH', 'USD' ];
+const quoteTokenCategory = [ 'BTC', 'ETH', 'VITE', 'USDT' ];
 
 const query = getQuery();
 const category = query.category;

@@ -318,6 +318,7 @@
             "token": "网关发行代币",
             "setting": "网关设置",
             "customer": "客服链接",
+            "clickCustomer": "点击提交工单",
             "privacy": "服务协议",
             "clickPrivacy": "{gate}官方网关服务协议",
             "settingPlaceholder": "请输入网关链接地址",
@@ -416,7 +417,7 @@
                 "downloadTips":"还没有Vite App？",
                 "download":"下载Vite手机钱包"
             },
-            "defaultName":"我的账户"
+            "accountName":"我的账户"
         },
         "invite":{
             "inviteTitle":"邀请好友",
@@ -752,6 +753,7 @@
         "marketClosed": "{symbol} 已暂停交易。",
         "mergeDepth": "深度合并",
         "depthStep": "{step}位小数",
+        "blocking": "网络拥堵, 请稍候重试",
         "operator": {
             "title": "运营商信息",
             "introduction": "介绍",
