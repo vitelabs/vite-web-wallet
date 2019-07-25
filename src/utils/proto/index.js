@@ -122,7 +122,7 @@ class WsProtoClient {
     }
 
     sub(event, callback) {
-        console.log('[SUB]', event);
+        // console.log('[SUB]', event);
         this._subKeys[event] = this._subKeys[event] || new Set();
         this._subKeys[event].add(callback);
         this.send(event, this.MESSAGETYPE.SUB);
@@ -153,7 +153,7 @@ class WsProtoClient {
         if (!this.ready || this.closed) return;
 
         if (type === this.MESSAGETYPE.PING) {
-            console.log('ping', this._clientId, new Date());
+            // console.log('ping', this._clientId, new Date());
         }
 
         const payload = {

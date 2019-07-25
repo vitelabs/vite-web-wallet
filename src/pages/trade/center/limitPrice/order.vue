@@ -206,6 +206,9 @@ export default {
         }
     },
     computed: {
+        blockingLevel() {
+            return this.$store.getters.dexBlockingLever;
+        },
         fee() {
             return this.$store.getters.exMakerFee;
         },
@@ -591,6 +594,8 @@ export default {
             });
         }),
         newOrder({ price, quantity }) {
+            console.log(this.blockingLevel);
+
             const tradeToken = this.activeTxPair
                 ? this.activeTxPair.tradeToken
                 : '';

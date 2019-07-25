@@ -63,10 +63,7 @@ const actions = {
         }
     },
     startLoopHeight({ commit, dispatch }, time = 10000) {
-        console.log('start to stop', time);
         dispatch('stopLoopHeight');
-
-        console.log('start', time);
 
         heightTimer = new timer(() =>
             $ViteJS.ledger.getSnapshotChainHeight().then(result => {
@@ -84,7 +81,6 @@ const actions = {
         // });
     },
     stopLoopHeight() {
-        console.log('stop');
         heightTimer && heightTimer.stop();
         heightTimer = null;
     },
