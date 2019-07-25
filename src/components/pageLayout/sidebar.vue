@@ -130,9 +130,9 @@ export default {
 
     .logo {
         display: inline-block;
-        margin-top: 24px;
+        margin-top: 30px;
         width: 100%;
-        height: 46px;
+        height: 52px;
 
         img {
             width: 100%;
@@ -158,12 +158,12 @@ export default {
         justify-content: center;
         align-items: center;
         width: 100%;
-        height: 40px;
+        height: 24px;
         margin-top: 30px;
 
         img {
-            width: 22px;
-            height: 22px;
+            width: 24px;
+            height: 24px;
         }
 
         &.active::before {
@@ -175,7 +175,7 @@ export default {
             right: 4px;
             display: inline-block;
             width: 4px;
-            height: 40px;
+            height: 24px;
             background-image: linear-gradient(-90deg, #1b3bd8 100%, #176ce0 100%, #0b92e7 100%, #0bb6eb 100%, #00e0f2 100%);
         }
     }
@@ -186,7 +186,7 @@ export default {
 
     ._bottom {
         width: 100%;
-        padding: 30px 0;
+        padding: 30px 0 50px;
 
         .icon {
             margin-top: 0;
