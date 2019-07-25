@@ -12,7 +12,7 @@
                     />
                 </div>
                 <div v-if="!isShowNameInput" class="name" @click="startRename">
-                    {{ account.isBifrost?$t('assets.vb.defaultName'):account.name }}
+                    {{ account.isBifrost?$t('assets.vb.accountName'):account.name }}
                 </div>
                 <!-- <input fake_pass type="password" style="display:none"/> -->
                 <form autocomplete="off" v-else>
