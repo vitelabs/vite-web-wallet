@@ -11,6 +11,7 @@ import limit from './limit';
 import fee from './fee';
 import latestOrder from './latestOrder';
 import tokenDecimalsLimit from './tokenDecimalsLimit';
+import dexFundUnreceived from './dexFundUnreceived';
 
 export default {
     exchangeRate: rate,
@@ -25,5 +26,6 @@ export default {
     exchangeLimit: limit,
     exchangeFee: fee,
     exchangeLatestOrder: latestOrder,
-    exchangeTokenDecimalsLimit: tokenDecimalsLimit
+    exchangeTokenDecimalsLimit: tokenDecimalsLimit,
+    exchangeDexFundUnreceived: dexFundUnreceived
 };

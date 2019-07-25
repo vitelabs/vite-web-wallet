@@ -5,7 +5,7 @@ import provider from '@vite/vitejs-ws';
 const WS_RPC = new provider(process.env.goViteServer);
 const $ViteJS = new client(WS_RPC, () => {
     console.log('Connect success');
-// });
-}, { isDecodeTx: true });
+});
+// }, { isDecodeTx: true });
 
 export default $ViteJS;
