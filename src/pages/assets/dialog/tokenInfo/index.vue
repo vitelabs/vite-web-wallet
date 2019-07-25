@@ -46,7 +46,7 @@ block originContent
             div.click-able(@click="goToGateOffical") {{ token.gateInfo.offical }}
         .content__item(v-if="token.gateInfo.url")
             .label {{$t("tokenCard.gateInfo.introduction")}}:
-            div {{ token.gateInfo.introduction }}
+            div {{ gateIntroduction }}
         .content__item(v-if="token.gateInfo.url")
             .label {{$t("tokenCard.gateInfo.customer")}}:
             div.click-able(v-if="token.gateInfo.customer")(@click="goToGateCustomer") {{ $t("tokenCard.gateInfo.clickCustomer") }}
@@ -100,6 +100,12 @@ export default {
             if (this.token.gateInfo.gateway) return this.token.gateInfo.gateway;
             if (this.token.gateInfo.url) return this.$t('tokenCard.gateInfo.selfdefined');
             return '';
+        },
+        gateIntroduction() {
+            if (this.$i18n.locale === 'zh') {
+                return this.token.gateInfo.introduction;
+            }
+            return this.token.gateInfo.introductionEn;
         },
         url: {
             get: function () {
