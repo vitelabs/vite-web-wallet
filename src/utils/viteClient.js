@@ -6,6 +6,9 @@ const WS_RPC = new provider(process.env.goViteServer);
 const $ViteJS = new client(WS_RPC, () => {
     console.log('Connect success');
 });
-// }, { isDecodeTx: true });
+// }, {
+//     isDecodeTx: true,
+//     decodeTxTypeList: ['DexFundPledgeForVip']
+// });
 
 export default $ViteJS;
