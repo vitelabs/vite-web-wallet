@@ -49,7 +49,8 @@ export default {
             return ellipsisAddr(this.address, 5);
         },
         showName() {
-            if (getCurrHDAcc().isBifrost) {
+            const currAcc = getCurrHDAcc();
+            if (currAcc && currAcc.isBifrost) {
                 return this.$t('assets.vb.accountName');
             }
             const i = this.addrList.findIndex(v => v.address === this.address);

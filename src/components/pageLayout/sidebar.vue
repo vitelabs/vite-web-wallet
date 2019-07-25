@@ -9,7 +9,7 @@
             <div class="_top">
                 <div v-for="(name, index) in menuTops" :key="index"
                      class="__pointer icon" :class="{ 'active': $route.name.indexOf(name) >= 0 }"
-                     @click="go(name)">
+                     @click="_go(name)">
                     <img v-show="$route.name.indexOf(name) < 0" :src="icon[name]" />
                     <img v-show="$route.name.indexOf(name) >= 0" :src="icon[`${name}Active`]"  />
                 </div>
@@ -18,7 +18,7 @@
             <div class="_bottom">
                 <div v-for="(name, index) in menuBottoms" :key="index"
                      class="icon __pointer" :class="{ 'active': $route.name === name }"
-                     @click="go(name)" @mouseenter="enterLogout(name)" @mouseleave="leaveLogout(name)">
+                     @click="_go(name)" @mouseenter="enterLogout(name)" @mouseleave="leaveLogout(name)">
                     <img v-show="$route.name !== name && (name !== iconHover)" :src="icon[name]" />
                     <img v-show="$route.name === name || (name === iconHover) " :src="icon[`${name}Active`]"  />
                 </div>
@@ -29,6 +29,7 @@
 
 <script>
 import testNotice from 'components/testNotice';
+import statistics from 'utils/statistics';
 
 import viteLogo from 'assets/imgs/sidebar_logo.svg';
 import assets from 'assets/imgs/assets_default.svg';
@@ -91,6 +92,10 @@ export default {
         }
     },
     methods: {
+        _go(name) {
+            statistics.event('Vite_web_wallet', 'sidebar', name);
+            this.go && this.go(name);
+        },
         overLogo() {
             this.isShowNotice = true;
         },
