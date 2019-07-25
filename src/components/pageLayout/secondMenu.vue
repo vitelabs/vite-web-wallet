@@ -13,7 +13,7 @@
         </ul>
 
         <ul class="right-lab-list">
-            <SwitchComp class="tab __pointer" :optList="optList" :value="selectInvite" @input="inviteDialog"/>
+            <SwitchComp class="tab __pointer" :optList="optList" :value="selectInvite" @input="inviteDialog" v-show="showInvite"/>
             <div class="tab __pointer" @click="goHelp">{{ $t("help") }}</div>
             <div v-show="!isLogin" @click="loginClick" class="tab __pointer">
                 {{ isHaveUsers ? $t("unlockAcc") : $t("login") }}
@@ -63,6 +63,12 @@ export default {
         };
     },
     computed: {
+        showInvite(){
+            return this.address&&this.$store.state.uiConfig.invite_addr_list&&this.$store.state.uiConfig.invite_addr_list.find(a=>a===this.address)
+        },
+        address(){
+            return this.$store.getters.activeAddr
+        },
         isLogin() {
             return this.$store.state.wallet.status === StatusMap.UNLOCK;
         },
