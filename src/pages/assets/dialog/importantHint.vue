@@ -26,6 +26,7 @@
 
 <script>
 import confirm from 'components/confirm/confirm.vue';
+import openUrl from 'utils/openUrl';
 
 export default {
     components: { confirm },
@@ -73,7 +74,7 @@ export default {
         },
         goLink() {
             if (this.gateInfo.privacy) {
-                window.open(this.gateInfo.privacy);
+                openUrl(this.gateInfo.privacy);
             }
         }
     }

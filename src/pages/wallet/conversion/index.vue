@@ -45,6 +45,7 @@
 </template>
 
 <script>
+import openUrl from 'utils/openUrl';
 import { timer } from 'utils/asyncFlow';
 import _ethWallet from 'utils/ethWallet/index.js';
 import secTitle from 'components/secTitle';
@@ -122,7 +123,7 @@ export default {
             this.transToken = '';
         },
         toRecord() {
-            window.open(`${ process.env.ethNet }/address/${ this.address }#tokentxns`);
+            openUrl(`${ process.env.ethNet }/address/${ this.address }#tokentxns`);
         },
 
         startLoopBalance() {

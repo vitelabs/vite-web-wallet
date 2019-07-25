@@ -7,23 +7,23 @@
             <span class="title">{{ $t('setting.version') }}</span>{{ version }}
         </div>
         <div class="row">
-            <a href="mailto:info@vite.org" target="_blank">
+            <span class="a-link __pointer" @click="openEmail">
                 <span class="title">{{ $t('setting.service') }}</span><span class="link">info@vite.org</span>
-            </a>
-            <a href="https://vite.org/" target="_blank">
+            </span>
+            <span class="a-link __pointer" @click="go('https://vite.org/')">
                 <span class="title">{{ $t('setting.site') }}</span><span class="link">vite.org</span>
-            </a>
-            <a class="__pointer" @click="goNet">
+            </span>
+            <span class="a-link __pointer" @click="goNet">
                 <span class="title">{{ $t('setting.explorer') }}</span><span class="link">{{ netService }}</span>
-            </a>
+            </span>
         </div>
         <div class="row">
-            <a href="https://vite.net/" target="_blank">
+            <span class="a-link __pointer"  @click="go('https://vite.net/')">
                 <span class="title">{{ $t('setting.sys') }}</span><span class="link">vite.net</span>
-            </a>
-            <a href="https://github.com/vitelabs" target="_blank">
+            </span>
+            <span class="a-link __pointer"  @click="go('https://github.com/vitelabs')">
                 <span class="title">{{ $t('setting.open') }}</span><span class="link">https://github.com/vitelabs</span>
-            </a>
+            </span>
         </div>
     </div>
 </template>
@@ -32,7 +32,7 @@
 import openUrl from 'utils/openUrl';
 
 export default {
-    created() {
+    mounted() {
         this.$store.dispatch('startLoopHeight', 3000);
     },
     destroyed() {
@@ -52,7 +52,13 @@ export default {
     methods: {
         goNet() {
             const locale = this.$i18n.locale === 'zh' ? 'zh/' : '';
-            openUrl(`${ process.env.viteNet }${ locale }`);
+            this.go(`${ process.env.viteNet }${ locale }`);
+        },
+        openEmail() {
+            window.open('mailto:info@vite.org');
+        },
+        go(url) {
+            openUrl(url);
         }
     }
 };
@@ -68,7 +74,7 @@ export default {
     font-size: 14px;
     color: #5e6875;
 
-    a {
+    .a-link {
         color: #5e6875;
         margin-left: 20px;
         white-space: nowrap;
