@@ -183,7 +183,8 @@ const getters = {
             if (mapToken2Gate[i].gateway === 'Vite Labs') {
                 viteLabsGateInfo.introduction = 'Vite Labs官方网关，负责BTC、ETH、USDT(ERC20)、GRIN四种代币跨链服务';
                 viteLabsGateInfo.offical = 'https://vite.org';
-                viteLabsGateInfo.customer = 'gateway@vite.org';
+                viteLabsGateInfo.customer = 'https://vitex.zendesk.com/hc/zh-cn/requests/new',
+                viteLabsGateInfo.customerEn = 'https://vitex.zendesk.com/hc/en-001/requests/new',
                 viteLabsGateInfo.privacy = `${ location.origin }/privacy.html`;
             }
 
