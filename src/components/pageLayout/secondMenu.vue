@@ -63,11 +63,11 @@ export default {
         };
     },
     computed: {
-        showInvite(){
-            return this.address&&this.$store.state.uiConfig.invite_addr_list&&this.$store.state.uiConfig.invite_addr_list.find(a=>a===this.address)
+        showInvite() {
+            return this.address && this.$store.state.uiConfig.invite_addr_list && this.$store.state.uiConfig.invite_addr_list.find(a => a === this.address);
         },
-        address(){
-            return this.$store.getters.activeAddr
+        address() {
+            return this.$store.getters.activeAddr;
         },
         isLogin() {
             return this.$store.state.wallet.status === StatusMap.UNLOCK;
