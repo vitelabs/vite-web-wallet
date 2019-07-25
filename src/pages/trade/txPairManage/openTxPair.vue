@@ -80,6 +80,10 @@ export default {
                         data: {
                             tradeToken: this.txPair.txPairDetail.tradeToken,
                             quoteToken: this.txPair.txPairDetail.quoteToken
+                        },
+                        vbExtends: {
+                            'type': 'dexNewMarket',
+                            'fee': '10000 VITE'
                         }
                     }).then(() => {
                         this.$toast(this.$t('tradeTxPairManage.openTxPairConfirm.reqSuccess'));
