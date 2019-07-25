@@ -41,10 +41,10 @@
         ]
     },
     "dealReminder": {
-        "title": "Deal Notice",
-        "failTitle": "提单失败",
+        "title": "Trading Notice",
+        "failTitle": "Order Failed",
         "notice": "Your order {amount} {ftoken} ({ftoken}/{ttoken}) at {time} is a complete deal, visit Order History to find out more.",
-        "error": "你于{time} 委托的 {amount} {ftoken} ({ftoken}/{ttoken})提单失败，详细记录可在委托历史中查看。"        
+        "error": "Your order {amount} {ftoken} ({ftoken}/{ttoken}) at {time} has failed, for more details, please view in Order History section."
     },
     "pow": {
         "ing": "Running PoW to acquire quota",
@@ -114,8 +114,8 @@
         "GenesisReceive": "Genesis",
         "DexFundTransferTokenOwner": "Operator's key ownership transfer",
         "DexFundMarketOwnerConfig": "Operator's trading pair configuration",
-        "DexFundBindInviteCode": "绑定邀请码",
-        "DexFundNewInviter": "生成邀请码"
+        "DexFundBindInviteCode": "Use Referral Code",
+        "DexFundNewInviter": "Create Referral Code"
     },
     "btn": {
         "cancel": "Cancel",
@@ -128,7 +128,7 @@
         "edit": "Edit",
         "reReg": "Re-register",
         "otherProd": "Use Other Products of Vite",
-        "known": "我知道了"
+        "known": "I know"
     },
     "hint": {
         "noNet": "No network detected",
@@ -147,26 +147,26 @@
         "bigger0": "Value must be greater than 0",
         "operateSuccess": "Operation Successful",
         "operateFail": "Operation Failed",
-        "unreceived": "钱包账户还未解锁，请解锁后使用更多功能"
+        "unreceived": "Unlock you wallet before use"
     },
     "beforeUse": {
         "title": "Read Before Use",
-        "text1": "为保障用户资金安全，web端暂不支持创建账户，请下载vite app创建账户，如果您访问了一个钓鱼网站或者丢失了您的备份，本站无法为您恢复资金。",
+        "text1": "For your funds' safety, create account function is not supported provisionally on web wallet. Please download Vite App to create account. Vite platform would like to warn you that if you visit a phishing website or lose you backup, our company cannot recover your funds.",
         "text2": "Please note that our websites do not store your private keys or seed phrase. Therefore, you will need to restore your account via seed phrase if you decide to change browsers, clear local cookies, or change PCs.",
         "text3": "Please take proper precautions in ensuring that you accurately record and safely store your seed phrase. Even the slightest error will result in you not being able to successfully restore your address."
     },
     "preview": {
         "t": "Version {version}",
-        "txt1": "x.vite.net是vite官方发布的集成钱包，交易所于一体的web产品",
-        "txt2": "当前版本主要包括钱包、ViteX交易所、抵押VITE获取配额、注册SBP、投票、铸币等功能，使用App 扫码登录体验更加流畅。",
-        "txt3": "ViteX已正式上线，抓紧挂单体验吧。",
+        "txt1": "x.vite.net is an web platform integrating wallet and exchange. It is officially launched by Vite Labs.",
+        "txt2": "Current version mainly contains functions of wallet, ViteX decentralised exchange, staking VITE for quota, SBP registration, voting and token issuance. Try our newly released function ViteConnect: you can use Vite App to login via scanning a QR code.",
+        "txt3": "ViteX is formally launched. Come and start trading now.",
         "v": "Current Version: {version}"
     },
     "pwdConfirm": {
         "conf": "Open password-free mode to free you from entering password during every transaction process. ",
         "title": "Password",
         "placeholder": "Please input wallet password",
-        "unlockAcc": "请解锁 {name} 账户"
+        "unlockAcc": "Please unlock {name} first"
     },
     "quotaConfirm": {
         "title": "Insufficient Quota",
@@ -214,25 +214,25 @@
         }
     },
     "create": {
-        "input": "请输入密码",
-        "again": "请再次输入密码",
-        "choose": "选择账户",
-        "finish": "完成",
-        "agreementPre": "同意Vite钱包和ViteX",
-        "agreement": "隐私政策与服务协议",
+        "input": "Please enter your password",
+        "again": "Please confirm your password",
+        "choose": "Choose an account",
+        "finish": "Done",
+        "agreementPre": "I have read and agree with Vite Wallet and ViteX's",
+        "agreement": "Terms of Services and Privacy Policy",
         "hint": {
-            "nameInput": "请输入账户名称",
-            "nameLong": "名称不得超出{long}个字符",
-            "long": "密码不能大于32个字符",
-            "name": "账户名称仅支持中英文、数字和下划线",
-            "consistency": "请输入相同的密码",
-            "pwFormat": "密码格式错误，密码仅支持英文、半角符号、数字"
+            "nameInput": "Please input account name",
+            "nameLong": "Name cannot exceed {long} characters",
+            "long": "Password cannot exceed 32 characters",
+            "name": "Account name only supports English and Chinese characters, digits and underline",
+            "consistency": "Please enter the same password",
+            "pwFormat": "Wrong password format, password only contains digits, English letters and half width punctuation."
         }
     },
     "startCreate": {
-        "notice": "为提高账户安全性，Web端将不再支持新建助记词，推荐您下载Vite App新建助记词，并使用Vite App扫码登录web钱包",
-        "goLogin": "去登录",
-        "goDex": "去交易所"
+        "notice": "For your funds' safety, create account function is not supported provisionally on web wallet. Please download Vite App to create account.",
+        "goLogin": "Log In",
+        "goDex": "Go to ViteX"
     },
     "keystore": {
         "title": "Keystore",
@@ -248,7 +248,7 @@
         "moreRecords":"More Records",
         "others":"Others",
         "assetSpread":"Portfolio",
-        "saveSuccess":"保存成功",
+        "saveSuccess":"Successfully saved",
         "heads":{
             "name":"Name",
             "balance":"Balance",
@@ -302,11 +302,11 @@
             }
         },
         "gateInfo": {
-            "name": "网关名称",
-            "customer": "客服链接",
             "clickCustomer": "点击提交工单",
-            "privacy": "服务协议",
-            "clickPrivacy": "{gate}官方网关服务协议",
+            "name": "Gateway Name",
+            "customer": "Customer Service",
+            "privacy": "Terms of Services",
+            "clickPrivacy": "{gate}'s official gateway Terms of Services",
             "gateSetting":"Configure Gateway",
             "tabName": "Gateway Details",
             "selfdefined": "Customize Gateway",
@@ -316,11 +316,11 @@
             "setting": "Settings",
             "nodeDesc": "User Guide",
             "settingPlaceholder": "Please input gateway link address",
-            "nodeDescStr": "当前功能仅针对跨链代币使用，非跨链代币请勿使用，同时请勿轻信他人的网关链接，造成的资产损失本站概不负责。如需使用则将正确的网关链接填写在下方，保存后即可在当前地址生效。"
+            "nodeDescStr": "This function only works for cross-chain tokens, do not use this on built-in tokens. Meanwhile, please be careful about unfamiliar gateway links. By continuing to use our platform, you agree and acknowledge that Vite Labs would not be responsible for the loss of your fund and other negative consequences caused. Fill out the gateway link below if you need to use gateway, the link will come into effect after you hit save."
         },
         "depositRecord": {
             "tabName": "Deposit History",
-            "heads": ["Time", "Amount", "Status", "{outChain} Chain Hash","VITE Chain Hash","手续费"],
+            "heads": ["Time", "Amount", "Status", "{outChain} Chain Hash","VITE Chain Hash","Fees"],
             "statusMap": {
                 "OPPOSITE_PROCESSING": "{outChain} awaits to confirm",
                 "OPPOSITE_CONFIRMED_FAIL":"{outChain} processing failed",
@@ -332,7 +332,7 @@
         },
         "withdrawRecord": {
             "tabName": "Transfer History",
-            "heads": ["Time", "Amount", "Status", "VITE Chain Hash", "{outChain} Chain Hash","手续费"],
+            "heads": ["Time", "Amount", "Status", "VITE Chain Hash", "{outChain} Chain Hash","Fees"],
             "statusMap":{
                 "TOT_PROCESSING": "VITE Chain Unconfirmed",
                 "TOT_CONFIRMED": "VITE Confirmed",
@@ -677,13 +677,13 @@
     "assets": {
         "title": "Assets",
         "notice": {
-            "title": "重要提示",
-            "contentProvider": "本服务由{gate}提供。",
-            "contentOther": "Vite平台对{gate}的业务没有任何责任，Vite平台不参与{gate}与Vite平台用户之间的任何活动。",
-            "contentAgree": "使用{gate}提供的服务，表明您同意{gate}",
-            "agreement": "服务条款，交易条件，限制及隐私政策",
-            "contentUngree": "若您不同意这些条款，请勿使用{gate}服务。",
-            "hint": "若您对支付流程有问题，请联系{gate}客服团队"
+            "title": "Important Notice",
+            "contentProvider": "This service is provided by a third-party organization {gate}.",
+            "contentOther": "You agree and acknowledge that Vite Labs would not be responsible for any negative consequences caused by {gate}, Vite platform would not be involved in any activities between {gate} and their users",
+            "contentAgree": "By continuing to use {gate}'s service, you agree and acknowledge {gate}'s",
+            "agreement": "Terms of Services, Trading limitation, Conditions and Privacy Policy",
+            "contentUngree": "Please agree to this terms before using {gate}'s service",
+            "hint": "Contact {gate}'s customer service team if you encounter any problems during payment process."
         },
         "vb":{
             "title":"Vite Connect",
@@ -741,12 +741,12 @@
     "tradeCenter": {
         "title": "Exchange",
         "marketClosed": "{symbol} market has been suspended",
-        "mergeDepth": "深度合并",
-        "depthStep": "{step}位小数",
+        "mergeDepth": "Group",
+        "depthStep": "{step} digits",
         "operator": {
-            "title": "运营商信息",
-            "introduction": "介绍",
-            "txPair": "交易对"
+            "title": "Operator Details",
+            "introduction": "Introduction",
+            "txPair": "Trading Pairs"
         }
     },
     "trade": {
@@ -835,7 +835,7 @@
             "operatorFee": "Operator Fees: {fee}",
             "vipFee": "VIP Discount: {fee}",
             "inviteFeeDiscount":"Referral Discount: {fee} off",
-            "feeRule":"(基础费率+运营商费率-VIP抵扣)*邀请折扣"
+            "feeRule":"(Default Fee rate - VIP discount + operator's fee rate) * Referral discount"
         },        
         "vipConfirm": {
             "cancelVip": "Cancel VIP",
