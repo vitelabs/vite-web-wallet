@@ -47,9 +47,6 @@ import { execWithValid } from 'utils/execWithValid';
 
 export default {
     components: { confirm, viteInput },
-    created() {
-        console.log(this.token);
-    },
     props: {
         token: {
             type: Object,
