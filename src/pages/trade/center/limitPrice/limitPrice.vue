@@ -77,7 +77,7 @@ export default {
         },
         vipFee() {
             const vipFee = this.toPercentFee(this.$store.getters.vipFee);
-            return `${ vipFee }%`;
+            return `${ parseFloat(vipFee) }%`;
         },
         exMakerFee() {
             const exMakerFee = this.toPercentFee(this.$store.getters.exMakerFee);
@@ -89,7 +89,7 @@ export default {
         },
         inviteFeeDiscount() {
             const inviteFeeDiscount = this.toPercentFee(this.$store.getters.inviteFeeDiscount);
-            return `${ inviteFeeDiscount }%`;
+            return `${ parseInt(inviteFeeDiscount) }%`;
         },
         isVip() {
             return this.$store.state.exchangeFee.isVip;
