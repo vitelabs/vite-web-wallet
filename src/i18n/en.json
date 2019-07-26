@@ -679,7 +679,7 @@
         "notice": {
             "title": "Important Notice",
             "contentProvider": "This service is provided by {gate}.",
-            "contentOther": "You agree and acknowledge that Vite Labs would not be responsible for any negative consequences caused by {gate}, a third-party entity. Vite platform would not be involved in any activities between {gate} and their users",
+            "contentOther": "You agree and acknowledge that Vite Labs would not be responsible for any negative consequences caused by {gate}. Vite platform does not take any part in the relationship that may arise between {gate} and users of Vite platform",
             "contentAgree": "By continuing to use {gate}'s service, you agree and acknowledge {gate}'s",
             "agreement": "Terms of Services, Trading limitation, Conditions and Privacy Policy",
             "contentUngree": "Please agree to this terms before using {gate}'s service",
