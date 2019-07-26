@@ -23,7 +23,8 @@ block content
             .right(v-else) {{$t('assets.invite.notEnough')}}
         .block__content.edit.space 1000 VITE
     .block__title {{$t('assets.invite.inviteRule')}}
-    .illustrate(v-for="(i,j) in $t('assets.invite.ruleItems')" :key="j" v-html="i")
+    .illustrate(v-for="(i,j) in $t('assets.invite.ruleItems')")
+        span(v-html="i")
         .dot
 
 </template>
