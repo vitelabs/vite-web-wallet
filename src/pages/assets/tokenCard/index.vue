@@ -322,6 +322,7 @@ export default {
                 width: 16px;
                 margin-right: 4px;
                 margin-bottom: 11px;
+                border-radius: 50%;
             }
             .token-meta {
                 .name-wrapper {
