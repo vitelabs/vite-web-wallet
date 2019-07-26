@@ -302,7 +302,7 @@
             }
         },
         "gateInfo": {
-            "clickCustomer": "点击提交工单",
+            "clickCustomer": "Submit a request",
             "name": "Gateway Name",
             "customer": "Customer Service",
             "privacy": "Terms of Services",
@@ -384,7 +384,7 @@
         "nodeErr": "Gateway node is invalid, please check the gateway settings"
     },
     "viteExplorer": {
-        "title": "区块浏览器"
+        "title": "Block Explorer"
     },
     "wallet": {
         "title": "Quota Management",
@@ -678,24 +678,24 @@
         "title": "Assets",
         "notice": {
             "title": "Important Notice",
-            "contentProvider": "This service is provided by a third-party organization {gate}.",
-            "contentOther": "You agree and acknowledge that Vite Labs would not be responsible for any negative consequences caused by {gate}, Vite platform would not be involved in any activities between {gate} and their users",
+            "contentProvider": "This service is provided by {gate}.",
+            "contentOther": "You agree and acknowledge that Vite Labs would not be responsible for any negative consequences caused by {gate}, a third-party entity. Vite platform would not be involved in any activities between {gate} and their users",
             "contentAgree": "By continuing to use {gate}'s service, you agree and acknowledge {gate}'s",
             "agreement": "Terms of Services, Trading limitation, Conditions and Privacy Policy",
             "contentUngree": "Please agree to this terms before using {gate}'s service",
-            "hint": "Contact {gate}'s customer service team if you encounter any problems during payment process."
+            "hint": "Contact customer service team of {gate} if you encounter any problems during payment process."
         },
         "vb":{
-            "title":"Vite Connect",
+            "title":"ViteConnect",
             "connect":{
-                "tips":"Scan the QR code via Vite App"
+                "tips":"Scan the QR code via Vite Wallet App"
             },
             "confirm":{
-                "tips":"Please confirm transaction on VITE App"
+                "tips":"Please confirm transaction on VITE Wallet App"
             },
             "start":{
-                "scan":"Scan the QR code via Vite App",
-                "downloadTips":"Don’t have Vite App yet? ",
+                "scan":"Scan the QR code via Vite Wallet App",
+                "downloadTips":"Don’t have Vite Wallet App yet? ",
                 "download":"Download Vite Wallet"
             },
             "accountName":"ViteConnect Address"
@@ -743,7 +743,7 @@
         "marketClosed": "{symbol} market has been suspended",
         "mergeDepth": "Group",
         "depthStep": "{step} digits",
-        "blocking": "网络拥堵, 请稍候重试",
+        "blocking": "Network congestion occurs, please try again later",
         "operator": {
             "title": "Operator Details",
             "introduction": "Introduction",
@@ -832,11 +832,11 @@
             "quantityNotNull": "Quantity cannot be empty",
             "cancelVip": "Cancel",
             "openVip": "Become a VIP",
-            "dexFee": "Exchange Default Fees: {fee}",
-            "operatorFee": "Operator Fees: {fee}",
+            "dexFee": "Base Transaction Fees: {fee}",
+            "operatorFee": "Zone Fees (Charged by Operator): {fee}",
             "vipFee": "VIP Discount: {fee}",
             "inviteFeeDiscount":"Referral Discount: {fee} off",
-            "feeRule":"(Default Fee rate - VIP discount + operator's fee rate) * Referral discount"
+            "feeRule":"(Base Transaction Fee - VIP discount + Zone Fees) * Referral Discount"
         },        
         "vipConfirm": {
             "cancelVip": "Cancel VIP",
@@ -846,7 +846,7 @@
             "noBalance": "Insufficient Balance",
             "openHint": "You will enjoy the privilege of 0.1% trading fee discount after becoming a VIP. The staking amount of 10,000 VITE can be manually retrieved after 30 days.",
             "cancelHint": "You can retrieve your staking amount at approximately {time}. You will lose your VIP privilege after retrieving.",
-            "openSuccess": "Application Successful! VIP status will come into effect later.",
+            "openSuccess": "Applied Successful! VIP status will come into effect later.",
             "openFail": "Failed to apply VIP",
             "cancelSuccess": "Cancel VIP Successful",
             "cancelFail": "Cancel Failed"
@@ -854,7 +854,7 @@
     },
     "tradeAssets": {
         "title": "Funds",
-        "search": "Please input token name",
+        "search": "Please enter token name",
         "operate": "Action",
         "all":"All",
         "confirmTable": {
@@ -1003,7 +1003,7 @@
     },
     "tradeMining": {
         "title": "Mining",
-        "addQuota": "Add new staking mining",
+        "addQuota": "Create a new staking",
         "add": "Add",
         "withdraw": "Retrieve",
         "tbHead": {
@@ -1071,7 +1071,7 @@
         "openTxPairConfirm": {
             "title": "Open {symbol} to trade",
             "fee": "Listing Fee",
-            "hint": "If you want to add unique gateway symbol (like BTC.V) after opening a trading pair, please contact us at info@vite.org",
+            "hint": "If you want to add unique operator symbol (like BTC.V) after opening a trading pair, please contact us at our Telegram group: https://t.me/vite_en",
             "btn": "Submit",
             "reqSuccess": "Submit Successful! Check it on market board later.",
             "reqError": "Listing failed, please try again"
@@ -1082,7 +1082,7 @@
         "stopFail": "Suspension Failed",
         "openSuccess": "Recovery Successful",
         "openFail": "Recovery Failed",
-        "changeOwnerHint": "NOTICE: You will not be able to collect fees or adjust fee rate after ownership transferred as well as you cannot undo this transfer action",
+        "changeOwnerHint": "NOTICE: You will not be able to collect or adjust fees after ownership transferred as well as you cannot undo this transfer action",
         "currentMaker": "Maker",
         "confirmFee": "Fee",
         "currentTaker": "Taker",

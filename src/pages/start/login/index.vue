@@ -484,6 +484,7 @@ export default {
                     font-family: $font-bold;
                     cursor: pointer;
                     margin-left: 2px;
+                    word-break: keep-all;
                 }
             }
             .vb_qrcode {
