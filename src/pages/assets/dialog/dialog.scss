@@ -35,17 +35,14 @@
     justify-content: space-between;
 
     .all {
-      border-radius: 2px;
-      background: #007aff;
-      color: #fff;
-      cursor: pointer;
-      font-size: 12px;
-      padding: 0 6px;
-      height: 18px;
-      line-height: 18px;
-      float: right;
-      display: flex;
-      word-break: keep-all;
+        color:rgba(0,122,255,1);
+        line-height:16px;
+        font-size: 12px;
+        border-bottom: 1px dashed rgba(0,122,255,1);
+        cursor: pointer;
+        float: right;
+        display: flex;
+        word-break: keep-all;
     }
     .token__title {
       display: flex;
