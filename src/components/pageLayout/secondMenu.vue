@@ -17,17 +17,15 @@
             <div class="tab __pointer" @click="goHelp">{{ $t("help") }}</div>
             <div v-show="!isHaveUsers" @click="login"
                  class="tab __pointer"> {{ $t("login") }}</div>
-            <template v-show="!isLogin">
-                <div v-show="isHaveUsers" @click="_unlock" class="tab __pointer">
-                    {{ $t("unlockAcc") }}
-                    <div v-show="isShowUnlockBubble" class="unlock-bubble">
-                        {{ $t('hint.unreceived') }}
-                        <div class="bubble-btn" @click.stop="iKnow">{{ $t('btn.known') }}</div>
-                    </div>
+            <div v-show="!isLogin && isHaveUsers" @click="_unlock" class="tab __pointer">
+                {{ $t("unlockAcc") }}
+                <div v-show="isShowUnlockBubble" class="unlock-bubble">
+                    {{ $t('hint.unreceived') }}
+                    <div class="bubble-btn" @click.stop="iKnow">{{ $t('btn.known') }}</div>
                 </div>
-                <div v-show="isHaveUsers" class="tab __pointer"
-                     @click="changeAcc">{{ $t('changeAcc') }}</div>
-            </template>
+            </div>
+            <div v-show="!isLogin && isHaveUsers" class="tab __pointer"
+                 @click="changeAcc">{{ $t('changeAcc') }}</div>
             <div v-show="isHaveUsers && $route.name.indexOf('trade') !== -1" class="tab __pointer"
                  @click="goOperator">{{ $t('tradeOperator.title') }}</div>
             <switch-addr class="switch-tab menu" v-show="$route.name !== 'assets'" ></switch-addr>
