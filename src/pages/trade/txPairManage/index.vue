@@ -113,10 +113,13 @@ export default {
 
             this.txPairList.forEach(item => {
                 const status = this.getStatus(item);
+                const takerStr = item.takerFeeRate ? `Taker(${ (item.takerFeeRate * 100).toFixed(3) }%)` : '';
+                const makerStr = item.makerFeeRate ? `Maker(${ (item.makerFeeRate * 100).toFixed(3) }%)` : '';
+
                 list.push({
                     symbol: `${ item.tradeTokenSymbol }/${ item.quoteTokenSymbol }`,
                     income: item.income ? BigNumber.onlyFormat(item.income) : '--',
-                    fee: item.takerFeeRate && item.makerFeeRate ? `Taker(${ (item.takerFeeRate * 100).toFixed(3) }%) / Maker(${ (item.makerFeeRate * 100).toFixed(3) }%)` : '--',
+                    fee: !makerStr && !takerStr ? '--' : `${ takerStr || 'Taker(--)' } / ${ makerStr || 'Maker(--)' }`,
                     status,
                     statusTxt: this.$t('tradeTxPairManage.statusList')[status],
                     txPairDetail: item,
