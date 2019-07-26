@@ -49,7 +49,8 @@ export default {
             return ellipsisAddr(this.address, 5);
         },
         showName() {
-            if (getCurrHDAcc().isBifrost) {
+            const currAcc = getCurrHDAcc();
+            if (currAcc && currAcc.isBifrost) {
                 return this.$t('assets.vb.accountName');
             }
             const i = this.addrList.findIndex(v => v.address === this.address);
@@ -89,10 +90,6 @@ export default {
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
 
-.dex .switch-address-wrapper {
-    font-size: 13px;
-}
-
 .menu.switch-address-wrapper {
     .list-title {
         border: none;
@@ -107,7 +104,8 @@ export default {
     color: #73767A;
     @include font-family-bold();
     font-weight: 600;
-    font-size: 14px;
+    font-size: 13px;
+    white-space: nowrap;
 
     .list-title {
         position: relative;
