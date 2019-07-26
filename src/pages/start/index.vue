@@ -50,7 +50,7 @@ export default { components: { changeLang, firstNotice } };
 
         .header-logo {
             display: inline-block;
-            width: 90px;
+            height: 50px;
         }
         .change-lang {
             float: right;
