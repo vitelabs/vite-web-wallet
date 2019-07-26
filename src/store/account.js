@@ -244,7 +244,7 @@ const getters = {
                 owner,
                 tokenId,
                 icon,
-                type,
+                type: (tokenSymbol === 'VCP' && !index) ? 'NATIVE' : type,
                 gateInfo
             };
         });
@@ -310,7 +310,7 @@ const getters = {
                     owner,
                     tokenId,
                     icon,
-                    type,
+                    type: (tokenSymbol === 'VCP' && !index) ? 'NATIVE' : type,
                     gateInfo
                 };
             })
@@ -386,7 +386,7 @@ const getters = {
                     owner,
                     tokenId,
                     icon,
-                    type,
+                    type: (tokenSymbol === 'VCP' && !index) ? 'NATIVE' : type,
                     gateInfo
                 };
             });
