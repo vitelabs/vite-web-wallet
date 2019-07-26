@@ -77,10 +77,13 @@ export default {
         contentList() {
             const list = [];
             this.list.forEach(item => {
+                const takerStr = item.takerFeeRate ? `Taker(${ (item.takerFeeRate * 100).toFixed(3) }%)` : '';
+                const makerStr = item.makerFeeRate ? `Maker(${ (item.makerFeeRate * 100).toFixed(3) }%)` : '';
+
                 list.push({
                     date: date(item.date * 1000, this.$i18n.locale),
                     tradeQuantity: BigNumber.onlyFormat(item.tradeQuantity),
-                    feeRate: item.takerFeeRate && item.makerFeeRate ? `Taker(${ (item.takerFeeRate * 100).toFixed(3) }%) / Maker(${ (item.makerFeeRate * 100).toFixed(3) }%)` : '--',
+                    feeRate: !makerStr && !takerStr ? '--' : `${ takerStr || 'Taker(--)' } / ${ makerStr || 'Maker(--)' }`,
                     income: BigNumber.onlyFormat(item.income)
                 });
             });
