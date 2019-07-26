@@ -2,7 +2,7 @@
     <div class="gate">
         <span class="__pointer" v-if="operatorInfo" @click="showOperator">
             <img v-show="operatorInfo.icon" class="gate-img" :src="operatorInfo.icon"/>
-            {{ operatorInfo.address || '--' }}
+            {{ operatorInfo.showAddr || '--' }}
         </span>
         <span v-else>--</span>
 
@@ -19,12 +19,12 @@
             </div>
             <div class="info-item">
                 <span class="info_second_title">{{ $t('tradeCenter.operator.introduction') }}:</span>
-                <div class="introduction">{{ operatorInfo.introduction }}</div>
+                <div class="introduction">{{ $i18n.locale === 'zh' ? operatorInfo.introduction : operatorInfo.en.introduction }}</div>
             </div>
-            <div class="info-item">
+            <div class="info-item _b">
                 <span class="info_second_title">{{ $t('tradeCenter.operator.txPair') }}:</span>
                 <div class="tx-pair-list" v-if="operatorInfo.txPairs.length">
-                    <span v-for="(symbol,i) in operatorInfo.txPairs" :key="i">{{ symbol }}</span>
+                    <span v-for="(symbol,i) in operatorInfo.txPairs" :key="i">{{ symbol.replace('_', '/') }}</span>
                 </div>
             </div>
         </confirm>
@@ -32,13 +32,15 @@
 </template>
 
 <script>
+import ellipsisAddr from 'utils/ellipsisAddr';
 import confirm from 'components/confirm/confirm.vue';
 import operatorList from './operator.json';
 
 import XS_Fund from 'assets/imgs/operator/XS_Fund.png';
 import Vgate from 'assets/imgs/operator/Vgate.png';
+import ViteLabs from 'assets/imgs/operator/viteLabs.png';
 
-const operatorIcon = { XS_Fund, Vgate };
+const operatorIcon = { ViteLabs, XS_Fund, Vgate };
 
 export default {
     components: { confirm },
@@ -61,6 +63,7 @@ export default {
 
             const icon = operator.icon;
             operator.icon = icon ? operatorIcon[icon] || '' : '';
+            operator.showAddr = ellipsisAddr(operator.address);
             return operator;
         }
     },
@@ -128,6 +131,9 @@ export default {
     word-break: break-word;
     white-space: normal;
     display: flex;
+    &._b {
+        margin-bottom: 10px;
+    }
     .info_second_title {
         color: rgba(94,104,117,0.58);
         white-space: nowrap;
