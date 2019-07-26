@@ -1,7 +1,7 @@
 <template>
     <div class="index-layout-wrapper">
         <div class="header">
-            <img class="header-logo __pointer" src="~assets/imgs/ViteLogo1.svg"/>
+            <img @click="goVX" class="header-logo __pointer" src="~assets/imgs/ViteLogo1.svg"/>
             <change-lang class="start change-lang __pointer"></change-lang>
         </div>
         <div class="confirm-wrapper">
@@ -16,8 +16,16 @@
 <script>
 import firstNotice from 'components/firstNotice.vue';
 import changeLang from 'components/changeLang';
+import openUrl from 'utils/openUrl';
 
-export default { components: { changeLang, firstNotice } };
+export default {
+    components: { changeLang, firstNotice },
+    methods: {
+        goVX() {
+            openUrl(`https://vitex.net/${ this.$i18n.locale === 'zh' ? 'zh' : '' }`);
+        }
+    }
+};
 </script>
 
 <style lang="scss" scoped>
