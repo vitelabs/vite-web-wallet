@@ -13,7 +13,7 @@
         </ul>
 
         <ul class="right-lab-list">
-            <SwitchComp class="tab __pointer" :optList="inviteOptLit" :value="selectInvite" @input="inviteDialog" v-show="$route.name.indexOf('trade') !== -1"/>
+            <SwitchComp class="tab __pointer invite-switch" :optList="inviteOptLit" :value="selectInvite" @input="inviteDialog" v-show="$route.name.indexOf('trade') !== -1"/>
             <div class="tab __pointer" @click="goHelp">{{ $t("help") }}</div>
             <div v-show="!isHaveUsers" @click="login"
                  class="tab __pointer"> {{ $t("login") }}</div>
@@ -183,6 +183,11 @@ export default {
         .tab {
             position: relative;
             margin-left: 28px;
+            &.invite-switch{
+                /deep/ .list-title{
+                    padding: 0!important;
+                }
+            }
             .unlock-bubble {
                 text-align: left;
                 white-space: normal;
