@@ -771,7 +771,7 @@
         "amountTitle": "数量({amount})",
         "amountTable": "数量",
         "amount": "成交额",
-        "newOrderSuccess": "提单成功",
+        "newOrderSuccess": "提单请求已发送",
         "newOrderFail": "提单失败",
         "depthView": "深度图",
         "klineView": "k线图",

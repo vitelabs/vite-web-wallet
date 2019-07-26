@@ -2,7 +2,7 @@
     <div class="sidebar-wrapper">
         <div class="content">
             <div @mouseenter="overLogo" @mouseleave="leaveLogo" class="logo __pointer">
-                <img :src="viteLogo" />
+                <img @click="goVX" :src="viteLogo" />
                 <test-notice class="notice" :class="{'hide': !isShowNotice}"></test-notice>
             </div>
 
@@ -30,6 +30,7 @@
 <script>
 import testNotice from 'components/testNotice';
 import statistics from 'utils/statistics';
+import openUrl from 'utils/openUrl';
 
 import viteLogo from 'assets/imgs/sidebar_logo.svg';
 import assets from 'assets/imgs/assets_default.svg';
@@ -92,6 +93,9 @@ export default {
         }
     },
     methods: {
+        goVX() {
+            openUrl(`https://vitex.net/${ this.$i18n.locale === 'zh' ? 'zh' : '' }`);
+        },
         _go(name) {
             statistics.event('Vite_web_wallet', 'sidebar', name);
             this.go && this.go(name);
