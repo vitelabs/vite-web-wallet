@@ -143,7 +143,7 @@ export default {
             );
         },
         gateName() {
-            if (this.token.type === 'NATIVE' || (this.token.tokenSymbol === 'VCP' && !this.token.index)) return '--';
+            if (this.token.type === 'NATIVE') return '--';
             if (this.token.gateInfo.gateway) return this.token.gateInfo.gateway;
             if (this.token.gateInfo.url) return this.$t('tokenCard.gateInfo.selfdefined');
             return this.$t('tokenCard.gateInfo.gateSetting');
