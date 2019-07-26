@@ -5,7 +5,7 @@ block content
         .search-container
             img.search-icon(src="~assets/imgs/search_gray.png")
             input(v-model="userInput" class="search-input" :placeholder="$t('tokenCard.addToken.placeholder')")
-        .search-tips(v-show="searchRes && searchRes.length")
+        .search-tips
             .search-tips__item(v-for="token in searchRes" :class="{active:selectedTokenIds.indexOf(token.tokenId)>=0}")
                 input(type="checkbox" name="addTokenSelected" v-model="selectedTokenIds" :value="token.tokenId" )
                 img(:src="token.icon||token.tokenId|id2icon")
@@ -90,7 +90,7 @@ export default {
 
 .search-tips{
     flex: 1;
-    max-height: 260px;
+    height: 260px;
     overflow-y: scroll;
     border-radius: 0px 0px 2px 2px;
     border: 1px solid rgba(212,222,231,1);
