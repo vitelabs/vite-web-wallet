@@ -139,7 +139,7 @@ export default {
                 && (!this.token.totalAmount
                     || bigNumber.isEqual(this.token.totalAmount, '0'))
                 && (!this.token.totalExAmount
-                    || bigNumber.isEqual(this.token.totalExAmount, '0'))&&!(this.token.tokenSymbol==='VCP'&&!this.token.index)//except vcp
+                    || bigNumber.isEqual(this.token.totalExAmount, '0')) && !(this.token.tokenSymbol === 'VCP' && !this.token.index)// except vcp
             );
         },
         gateName() {
