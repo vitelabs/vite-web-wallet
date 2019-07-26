@@ -62,7 +62,7 @@ import txRewardImg from 'assets/imgs/txReward.svg';
 import txTokenImg from 'assets/imgs/txToken.svg';
 import txTransImg from 'assets/imgs/txTrans.svg';
 import txVoteImg from 'assets/imgs/txVote.svg';
-import txVxImg from 'assets/imgs/txVx.svg';
+import txDexImg from 'assets/imgs/txDex.svg';
 
 import pagination from 'components/pagination.vue';
 import walletTable from 'components/table/index.vue';
@@ -88,11 +88,17 @@ const txImgs = {
     MintageTransferOwner: txTokenImg,
     MintageChangeTokenType: txTokenImg,
     MintageCancelPledge: txTokenImg,
-    DexFundUserDeposit: txVxImg,
-    DexFundUserWithdraw: txVxImg,
-    DexFundNewOrder: txVxImg,
-    DexTradeCancelOrder: txVxImg,
-    DexFundNewMarket: txVxImg,
+    DexFundUserDeposit: txDexImg,
+    DexFundUserWithdraw: txDexImg,
+    DexFundNewOrder: txDexImg,
+    DexTradeCancelOrder: txDexImg,
+    DexFundNewMarket: txDexImg,
+    DexFundPledgeForVx: txDexImg,
+    DexFundPledgeForVip: txDexImg,
+    DexFundTransferTokenOwner: txDexImg,
+    DexFundMarketOwnerConfig: txDexImg,
+    DexFundBindInviteCode: txDexImg,
+    DexFundNewInviter: txDexImg,
     CreateContractReq: txTransImg,
     TxReq: txTransImg,
     RewardReq: txTransImg,

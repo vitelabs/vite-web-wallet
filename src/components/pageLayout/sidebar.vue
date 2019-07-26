@@ -9,7 +9,7 @@
             <div class="_top">
                 <div v-for="(name, index) in menuTops" :key="index"
                      class="__pointer icon" :class="{ 'active': $route.name.indexOf(name) >= 0 }"
-                     @click="go(name)">
+                     @click="_go(name)">
                     <img v-show="$route.name.indexOf(name) < 0" :src="icon[name]" />
                     <img v-show="$route.name.indexOf(name) >= 0" :src="icon[`${name}Active`]"  />
                 </div>
@@ -18,7 +18,7 @@
             <div class="_bottom">
                 <div v-for="(name, index) in menuBottoms" :key="index"
                      class="icon __pointer" :class="{ 'active': $route.name === name }"
-                     @click="go(name)" @mouseenter="enterLogout(name)" @mouseleave="leaveLogout(name)">
+                     @click="_go(name)" @mouseenter="enterLogout(name)" @mouseleave="leaveLogout(name)">
                     <img v-show="$route.name !== name && (name !== iconHover)" :src="icon[name]" />
                     <img v-show="$route.name === name || (name === iconHover) " :src="icon[`${name}Active`]"  />
                 </div>
@@ -29,6 +29,7 @@
 
 <script>
 import testNotice from 'components/testNotice';
+import statistics from 'utils/statistics';
 
 import viteLogo from 'assets/imgs/sidebar_logo.svg';
 import assets from 'assets/imgs/assets_default.svg';
@@ -91,6 +92,10 @@ export default {
         }
     },
     methods: {
+        _go(name) {
+            statistics.event('Vite_web_wallet', 'sidebar', name);
+            this.go && this.go(name);
+        },
         overLogo() {
             this.isShowNotice = true;
         },
@@ -130,9 +135,9 @@ export default {
 
     .logo {
         display: inline-block;
-        margin-top: 24px;
+        margin-top: 30px;
         width: 100%;
-        height: 46px;
+        height: 52px;
 
         img {
             width: 100%;
@@ -158,12 +163,12 @@ export default {
         justify-content: center;
         align-items: center;
         width: 100%;
-        height: 40px;
+        height: 24px;
         margin-top: 30px;
 
         img {
-            width: 22px;
-            height: 22px;
+            width: 24px;
+            height: 24px;
         }
 
         &.active::before {
@@ -175,7 +180,7 @@ export default {
             right: 4px;
             display: inline-block;
             width: 4px;
-            height: 40px;
+            height: 24px;
             background-image: linear-gradient(-90deg, #1b3bd8 100%, #176ce0 100%, #0b92e7 100%, #0bb6eb 100%, #00e0f2 100%);
         }
     }
@@ -186,7 +191,7 @@ export default {
 
     ._bottom {
         width: 100%;
-        padding: 30px 0;
+        padding: 30px 0 50px;
 
         .icon {
             margin-top: 0;

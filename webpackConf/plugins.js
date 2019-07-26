@@ -69,7 +69,7 @@ const Node_Env = process.env.NODE_ENV || 'dev';
 
 const plugins = [
     new HtmlWebpackPlugin({
-        title: 'Vite Wallet',
+        title: 'ViteX, Exchange By the Community, For the Community',
         favicon: path.join(SRC_PATH, 'assets/imgs/logo.png'),
         template: TEMPLATE_PATH
         // [TODO] Async Router

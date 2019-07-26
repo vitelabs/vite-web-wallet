@@ -405,16 +405,16 @@
             "hint": "若您对支付流程有问题，请联系{gate}客服团队"
         },
         "vb":{
-            "title":"ViteBifrost",
+            "title":"ViteConnect",
             "connect":{
-                "tips":"请使用Vite App扫码登录."
+                "tips":"请使用Vite Wallet App扫码登录."
             },
             "confirm":{
-                "tips":"请在VITE App上确认交易"
+                "tips":"请在VITE Wallet App上确认交易"
             },
             "start":{
-                "scan":"请使用Vite App扫码登录.",
-                "downloadTips":"还没有Vite App？",
+                "scan":"请使用Vite Wallet App扫码登录.",
+                "downloadTips":"还没有Vite Wallet App？",
                 "download":"下载Vite手机钱包"
             },
             "accountName":"ViteConnect 地址"
@@ -1069,7 +1069,7 @@
         "openTxPairConfirm": {
             "title": "开通 {symbol} 交易对",
             "fee": "上币费",
-            "hint": "交易对开通成功后，如果想要添加网关标识（如BTC.V），请发邮件联系我们：info@vite.org",
+            "hint": "交易对开通成功后，如果想要添加运营商标识（如BTC.V），请在我们的Telegram群组联系我们：https://t.me/vite_zh",
             "btn": "提交申请",
             "reqSuccess": "提交申请成功，请稍后在市场中查看",
             "reqError": "上币失败，请稍后重试"

@@ -6,24 +6,28 @@
                 :key="index"
                 class="tab __pointer"
                 :class="{ active: $route.name === tab }"
-                @click="go(tab)"
+                @click="_go(tab)"
             >
                 {{ $t(`${tab}.title`) }}
             </li>
         </ul>
 
         <ul class="right-lab-list">
-            <SwitchComp class="tab __pointer" :optList="optList" :value="selectInvite" @input="inviteDialog" v-show="showInvite"/>
+            <SwitchComp class="tab __pointer" :optList="inviteOptLit" :value="selectInvite" @input="inviteDialog"/>
             <div class="tab __pointer" @click="goHelp">{{ $t("help") }}</div>
-            <div v-show="!isLogin" @click="loginClick" class="tab __pointer">
-                {{ isHaveUsers ? $t("unlockAcc") : $t("login") }}
-                <div v-show="isShowUnlockBubble" class="unlock-bubble">
-                    {{ $t('hint.unreceived') }}
-                    <div class="bubble-btn" @click.stop="iKnow">{{ $t('btn.known') }}</div>
+            <div v-show="!isHaveUsers" @click="login"
+                 class="tab __pointer"> {{ $t("login") }}</div>
+            <template v-show="!isLogin">
+                <div v-show="isHaveUsers" @click="_unlock" class="tab __pointer">
+                    {{ $t("unlockAcc") }}
+                    <div v-show="isShowUnlockBubble" class="unlock-bubble">
+                        {{ $t('hint.unreceived') }}
+                        <div class="bubble-btn" @click.stop="iKnow">{{ $t('btn.known') }}</div>
+                    </div>
                 </div>
-            </div>
-            <div v-show="!isLogin" @click="changeAcc" class="tab __pointer">
-                {{ isHaveUsers ? $t('changeAcc') : $t('register') }}</div>
+                <div v-show="isHaveUsers" class="tab __pointer"
+                     @click="changeAcc">{{ $t('changeAcc') }}</div>
+            </template>
             <div v-show="isHaveUsers && $route.name.indexOf('trade') !== -1" class="tab __pointer"
                  @click="goOperator">{{ $t('tradeOperator.title') }}</div>
             <switch-addr class="switch-tab menu" v-show="$route.name !== 'assets'" ></switch-addr>
@@ -35,6 +39,7 @@
 import { StatusMap } from 'wallet';
 import switchAddr from 'components/switchAddress';
 
+import statistics from 'utils/statistics';
 import SwitchComp from 'uiKit/switch.vue';
 import { inviteDialog, receiveInviteDialog } from 'components/dialog';
 import { execWithValid } from 'utils/execWithValid';
@@ -54,17 +59,24 @@ export default {
     },
     data() {
         return {
-            optList: [
-                { name: this.$t('assets.invite.inviteTitle'), value: 'invite' },
-                { name: this.$t('assets.invite.receiveInviteTitle'), value: 'receiveInvite' }
-            ],
-            selectInvite: 'invite',
+            selectInvite: this.showInvite ? 'invite' : 'receiveInvite',
             isKnowUnrecieved: false
         };
     },
     computed: {
         showInvite() {
-            return this.address && this.$store.state.uiConfig.invite_addr_list && this.$store.state.uiConfig.invite_addr_list.find(a => a === this.address);
+            if (this.address && this.$store.state.uiConfig.allShowInvite) {
+                return true;
+            }
+            return this.address && this.$store.state.uiConfig.inviteAddrList && this.$store.state.uiConfig.inviteAddrList.find(a => a === this.address);
+        },
+        inviteOptLit() {
+            return this.showInvite ? [
+                { name: this.$t('assets.invite.inviteTitle'), value: 'invite' },
+                { name: this.$t('assets.invite.receiveInviteTitle'), value: 'receiveInvite' }
+            ] : [
+                { name: this.$t('assets.invite.receiveInviteTitle'), value: 'receiveInvite' }
+            ];
         },
         address() {
             return this.$store.getters.activeAddr;
@@ -98,7 +110,9 @@ export default {
             this.isKnowUnrecieved = true;
         },
         inviteDialog(v) {
-            this.selectInvite = 'invite';
+            this.selectInvite = this.showInvite ? 'invite' : 'receiveInvite';
+            statistics.event('Vite_web_wallet', 'secondMenu', `${ this.$route.name }-${ this.selectInvite }`);
+
             if (v === 'invite') {
                 inviteDialog().catch(() => {
                     console.log('not close');
@@ -109,25 +123,37 @@ export default {
                 });
             }
         },
+        _go(name) {
+            statistics.event('Vite_web_wallet', 'secondMenu', name);
+            this.go && this.go(name);
+        },
         goOperator() {
+            statistics.event('Vite_web_wallet', 'secondMenu', `${ this.$route.name }-tradeOperator`);
             this.$router.push({ name: 'tradeOperator' });
         },
         goHelp() {
+            statistics.event('Vite_web_wallet', 'secondMenu', `${ this.$route.name }-help`);
             if (this.$i18n.locale === 'zh') {
                 openUrl('https://forum.vite.net/topic/2250/%E5%A6%82%E6%9E%9C%E6%82%A8%E5%9C%A8%E4%BD%BF%E7%94%A8vitex%E7%9A%84%E6%97%B6%E5%80%99%E9%81%87%E5%88%B0%E4%BA%86%E9%97%AE%E9%A2%98-%E8%AF%B7%E7%9C%8B%E6%AD%A4%E8%B4%B4');
                 return;
             }
             openUrl('https://forum.vite.net/topic/2251/if-you-have-a-question-about-using-vitex-please-read-this-article');
         },
-        loginClick: execWithValid(function () {},
+
+        _unlock() {
+            statistics.event('Vite_web_wallet', 'secondMenu', `${ this.$route.name }-unlock`);
+            this.unlock();
+        },
+        unlock: execWithValid(function () {},
             function () {
                 this.go('startLogin');
             }),
+        login() {
+            statistics.event('Vite_web_wallet', 'secondMenu', `${ this.$route.name }-login`);
+            this.go('startLogin');
+        },
         changeAcc() {
-            if (!this.isHaveUsers) {
-                this.$router.push({ name: 'startCreate' });
-                return;
-            }
+            statistics.event('Vite_web_wallet', 'secondMenu', `${ this.$route.name }-switchAccount`);
             this.go('startLogin');
         }
     }
