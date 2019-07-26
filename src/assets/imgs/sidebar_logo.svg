@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg width="52px" height="53px" viewBox="0 0 52 53" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
-    <title>编组</title>
-    <desc>Created with Sketch.</desc>
     <defs>
         <rect id="path-1" x="0" y="0" width="70" height="858"></rect>
         <filter x="-25.0%" y="-1.8%" width="150.0%" height="104.1%" filterUnits="objectBoundingBox" id="filter-2">
@@ -56,29 +53,29 @@
             <feColorMatrix values="0 0 0 0 1   0 0 0 0 1   0 0 0 0 1  0 0 0 0.260869565 0" type="matrix" in="shadowInnerInner1"></feColorMatrix>
         </filter>
     </defs>
-    <g id="页面1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="已登陆" transform="translate(-9.000000, -29.000000)">
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g transform="translate(-9.000000, -29.000000)">
             <rect fill="#FAFCFF" x="0" y="0" width="1440" height="858"></rect>
             <g id="side-panel">
-                <g id="矩形">
+                <g>
                     <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
                     <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-1"></use>
                 </g>
-                <g id="编组-2" transform="translate(9.000000, 30.000000)">
-                    <g id="Fill-17复制-3">
+                <g transform="translate(9.000000, 30.000000)">
+                    <g>
                         <use fill="url(#linearGradient-3)" fill-rule="evenodd" xlink:href="#path-4"></use>
                         <use fill="black" fill-opacity="1" filter="url(#filter-5)" xlink:href="#path-4"></use>
                     </g>
-                    <g id="Fill-19复制-3">
+                    <g>
                         <use fill="url(#linearGradient-6)" fill-rule="evenodd" xlink:href="#path-7"></use>
                         <use fill-opacity="0.727655157" fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-7"></use>
                         <use fill="black" fill-opacity="1" filter="url(#filter-8)" xlink:href="#path-7"></use>
                     </g>
-                    <g id="Fill-23复制-3">
+                    <g>
                         <use fill="url(#linearGradient-9)" fill-rule="evenodd" xlink:href="#path-10"></use>
                         <use fill="black" fill-opacity="1" filter="url(#filter-11)" xlink:href="#path-10"></use>
                     </g>
-                    <g id="Fill-21复制-3">
+                    <g>
                         <use fill="url(#linearGradient-12)" fill-rule="evenodd" xlink:href="#path-13"></use>
                         <use fill-opacity="0.727655157" fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-13"></use>
                         <use fill="black" fill-opacity="1" filter="url(#filter-14)" xlink:href="#path-13"></use>

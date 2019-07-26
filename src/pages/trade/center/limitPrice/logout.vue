@@ -4,14 +4,15 @@
         <div class="btn btn-login __pointer" @click="leftClick">
             {{ isHaveUsers ? $t("unlockAcc") : $t("login") }}
         </div>
-        <div v-show="isHaveUsers" class="btn btn-register __pointer" @click="rightClick">
-            {{ $t("changeAcc") }}
+        <div class="btn btn-register __pointer" @click="rightClick">
+            {{ isHaveUsers ? $t("changeAcc") : $t("register") }}
         </div>
     </div>
 </template>
 
 <script>
 import { execWithValid } from 'utils/execWithValid';
+import statistics from 'utils/statistics';
 
 export default {
     computed: {
@@ -22,15 +23,17 @@ export default {
     methods: {
         leftClick() {
             if (!this.isHaveUsers) {
+                statistics.event('Vite_web_wallet', this.$route.name, 'limitPrice-login');
                 this.$router.push({ name: 'startLogin' });
                 return;
             }
-            const valid = execWithValid(function () {
 
-            });
+            statistics.event('Vite_web_wallet', this.$route.name, 'limitPrice-unlock');
+            const valid = execWithValid(function () {});
             valid();
         },
         rightClick() {
+            statistics.event('Vite_web_wallet', this.$route.name, this.isHaveUsers ? 'limitPrice-switchAcc' : 'limitPrice-create');
             this.$router.push({ name: 'startLogin' });
         }
     }
