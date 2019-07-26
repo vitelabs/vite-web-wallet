@@ -2,7 +2,7 @@
     <div class="order-history-ct">
         <Filters @submit="submit($event)"></Filters>
         <history-table class="tb" :isShowPage="true"
-                       :list="data" :currentPage="currentPage" :toPage="toPage"
+                       :list="data" :currentPage="currentPage" :toPage="update"
                        :totalPage="totalPage"></history-table>
     </div>
 </template>
@@ -41,29 +41,24 @@ export default {
         }
     },
     methods: {
-        toPage(pageNo) {
-            this.update(Object.assign(this.filters, { offset: pageNo }));
-        },
         submit(v) {
             this.filters = v;
             this.update(this.filters);
         },
-        update(filters = {}) {
+        update(pageNo = 1) {
             if (!this.defaultAddr) {
                 return;
             }
-
-            filters = Object.assign({ offset: this.currentPage - 1 }, filters);
 
             order({
                 address: this.defaultAddr,
                 limit: pageSize,
                 total: 1,
-                ...filters
+                offset: (pageNo - 1) * pageSize
             }).then(data => {
                 this.totalPage = Math.ceil(data.total / pageSize);
                 this.data = data.order || [];
-                this.currentPage = filters.offset + 1;
+                this.currentPage = pageNo;
             });
         }
     }
