@@ -11,7 +11,8 @@ const TEMPLATE_PATH = path.join(__dirname, '../index.html');
 const Buffer_Path = path.join(__dirname, '../node_modules/buffer/index.js');
 
 const goViteServer = {
-    production: '\'wss://api.vitewallet.com/ws\'',
+    production: '\'ws:134.175.1.34:41420\'',
+    // production: '\'wss://api.vitewallet.com/ws\'',
     test: '\'wss://premainnet.vitewallet.com/test/ws\'',
     // dev: '\'ws:192.168.31.8:41420\'',
     dev: '\'wss://premainnet.vitewallet.com/test/ws\'',
@@ -48,12 +49,14 @@ const ethNet = {
     dexTestNet: '\'https://ropsten.etherscan.io\''
 };
 const dexApiServer = {
+    production: '"https://vitex.vite.net/api/"',
     test: '"https://vitex.vite.net/test/api/"',
     dev: '"https://vitex.vite.net/test/api/"',
     // dev: '"http://132.232.65.121:8080/test/api/"',
     dexTestNet: '"https://vitex.vite.net/beta/api/"'
 };
 const pushServer = {
+    production: '"wss://vitex.vite.net/websocket"',
     test: '"wss://vitex.vite.net/test/websocket"',
     dev: '"wss://vitex.vite.net/test/websocket"',
     // dev: '"ws://132.232.65.121:11211/test/websocket"',
