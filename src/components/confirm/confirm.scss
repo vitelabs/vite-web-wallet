@@ -91,10 +91,10 @@
     .content-wrapper {
         position: relative;
         padding: 30px;
-        font-size: 14px;
+        font-size: 13px;
         @include font-family-bold();
         color: rgba(29,32,36,1);
-        line-height: 18px;
+        line-height: 22px;
         overflow: auto;
         flex: 1;
     }
