@@ -16,7 +16,8 @@ const client = getClient(
 );
 
 interface IUiController {
-  invite_addr_list: string[];
+  inviteAddrList: string[];
+  allShowInvite:boolean
 }
 export function getUiConfig(): Promise<IUiController> {
   return client({ method: "GET", path: "/uiController/main.json" });
