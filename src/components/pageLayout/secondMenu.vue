@@ -13,7 +13,7 @@
         </ul>
 
         <ul class="right-lab-list">
-            <SwitchComp class="tab __pointer" :optList="inviteOptLit" :value="selectInvite" @input="inviteDialog" v-show="$route.name.indexOf('assets') !== -1"/>
+            <SwitchComp class="tab __pointer" :optList="inviteOptLit" :value="selectInvite" @input="inviteDialog" v-show="$route.name.indexOf('trade') !== -1"/>
             <div class="tab __pointer" @click="goHelp">{{ $t("help") }}</div>
             <div v-show="!isHaveUsers" @click="login"
                  class="tab __pointer"> {{ $t("login") }}</div>
