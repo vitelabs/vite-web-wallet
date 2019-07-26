@@ -196,8 +196,9 @@ export default {
                     font-size: 12px;
                     @include font-family-normal();
                     border: none;
+                    margin-left: -10px;
                     /deep/.list-title {
-                        padding: 0 10px;
+                        padding-left: 0;
                     }
                     /deep/.list {
                         overflow: visible;
