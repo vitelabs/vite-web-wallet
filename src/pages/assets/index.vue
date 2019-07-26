@@ -198,7 +198,7 @@ export default {
                     border: none;
                     margin-left: -10px;
                     /deep/.list-title {
-                        padding-left: 0;
+                        padding: 0 10px;
                     }
                     /deep/.list {
                         overflow: visible;
