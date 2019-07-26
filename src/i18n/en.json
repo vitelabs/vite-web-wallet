@@ -761,7 +761,7 @@
         "amountTitle": "Amount({amount})",
         "amountTable": "Qty",
         "amount": "Total",
-        "newOrderSuccess": "Order Success",
+        "newOrderSuccess": "Order request has sent",
         "newOrderFail": "Order Failed",
         "depthView": "Depth",
         "klineView": "TradingView",
