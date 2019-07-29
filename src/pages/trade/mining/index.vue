@@ -1,5 +1,6 @@
 <template>
     <div class="trade-mining-wrapper">
+        <h1>{{ $t('tradeMining.comingHint') }}</h1>
         <div class="trade-mining-section">
             <section-title :title="$t('tradeMining.txTitle')" :amount="`${tradeTotal} VX`"></section-title>
             <wallet-table class="mint-trade-table content tb"
