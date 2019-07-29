@@ -80,7 +80,8 @@ export const withdraw = async ({
     withdrawAddress,
     gateAddr,
     tokenId,
-    type
+    type,
+    fee
 }) => {
     // if (type !== 0 || type !== 1) {
     //     throw new Error('unexcepted address type');
@@ -107,7 +108,7 @@ export const withdraw = async ({
             pow: true,
             powConfig: { isShowCancel: true }
         },
-        vbExtends: { type: 'crossChainTransfer' }
+        vbExtends: { type: 'crossChainTransfer', fee }
     });
 };
 
