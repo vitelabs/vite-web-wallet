@@ -90,6 +90,9 @@ export default {
         },
         menuBottoms() {
             return this.menuList.slice(this.settingIndex);
+        },
+        address() {
+            return this.$store.getters.activeAddr;
         }
     },
     methods: {
@@ -97,7 +100,7 @@ export default {
             openUrl(`https://vitex.net/${ this.$i18n.locale === 'zh' ? 'zh' : '' }`);
         },
         _go(name) {
-            statistics.event('Vite_web_wallet', 'sidebar', name);
+            statistics.event('sidebar', name, this.address || '');
             this.go && this.go(name);
         },
         overLogo() {
