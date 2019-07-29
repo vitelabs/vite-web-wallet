@@ -149,7 +149,7 @@ export default {
                 return;
             }
 
-            statistics.event('Vite_web_wallet', 'quota', 'SubmitQuota');
+            statistics.event(this.$route.name, 'SubmitQuota', this.addr || '');
 
             this.testAmount();
             this.testAddr();
@@ -168,7 +168,7 @@ export default {
             }, true);
         }),
         _sendPledgeTx() {
-            statistics.event('Vite_web_wallet', 'quota', 'ConfirmQuota');
+            statistics.event(this.$route.name, 'ConfirmQuota', this.addr || '');
             this.loading = true;
 
             this.sendPledgeTx({
