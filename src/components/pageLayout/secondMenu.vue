@@ -109,7 +109,7 @@ export default {
         },
         inviteDialog(v) {
             this.selectInvite = this.showInvite ? 'invite' : 'receiveInvite';
-            statistics.event('Vite_web_wallet', 'secondMenu', `${ this.$route.name }-${ this.selectInvite }`);
+            statistics.event('secondMenu', `${ this.$route.name }-${ this.selectInvite }`, this.address || '');
 
             if (v === 'invite') {
                 inviteDialog().catch(() => {
@@ -122,15 +122,15 @@ export default {
             }
         },
         _go(name) {
-            statistics.event('Vite_web_wallet', 'secondMenu', name);
+            statistics.event('secondMenu', name, this.address || '');
             this.go && this.go(name);
         },
         goOperator() {
-            statistics.event('Vite_web_wallet', 'secondMenu', `${ this.$route.name }-tradeOperator`);
+            statistics.event('secondMenu', `${ this.$route.name }-tradeOperator`, this.address || '');
             this.$router.push({ name: 'tradeOperator' });
         },
         goHelp() {
-            statistics.event('Vite_web_wallet', 'secondMenu', `${ this.$route.name }-help`);
+            statistics.event('secondMenu', `${ this.$route.name }-help`, this.address || '');
             if (this.$i18n.locale === 'zh') {
                 openUrl('https://forum.vite.net/topic/2250/%E5%A6%82%E6%9E%9C%E6%82%A8%E5%9C%A8%E4%BD%BF%E7%94%A8vitex%E7%9A%84%E6%97%B6%E5%80%99%E9%81%87%E5%88%B0%E4%BA%86%E9%97%AE%E9%A2%98-%E8%AF%B7%E7%9C%8B%E6%AD%A4%E8%B4%B4');
                 return;
@@ -139,7 +139,7 @@ export default {
         },
 
         _unlock() {
-            statistics.event('Vite_web_wallet', 'secondMenu', `${ this.$route.name }-unlock`);
+            statistics.event('secondMenu', `${ this.$route.name }-unlock`, this.address || '');
             this.unlock();
         },
         unlock: execWithValid(function () {},
@@ -147,11 +147,11 @@ export default {
                 this.go('startLogin');
             }),
         login() {
-            statistics.event('Vite_web_wallet', 'secondMenu', `${ this.$route.name }-login`);
+            statistics.event('secondMenu', `${ this.$route.name }-login`, this.address || '');
             this.go('startLogin');
         },
         changeAcc() {
-            statistics.event('Vite_web_wallet', 'secondMenu', `${ this.$route.name }-switchAccount`);
+            statistics.event('secondMenu', `${ this.$route.name }-switchAccount`, this.address || '');
             this.go('startLogin');
         }
     }

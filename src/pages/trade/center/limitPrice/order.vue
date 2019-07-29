@@ -570,13 +570,13 @@ export default {
             this.validQuantity();
 
             if (!this.price) {
-                this.priceErr = 'trade.limitPrice.priceNotNull';
+                this.priceErr = this.$t('trade.limitPrice.priceNotNull');
             }
             if (!this.amount) {
-                this.amountErr = 'trade.limitPrice.amountNotNull';
+                this.amountErr = this.$t('trade.limitPrice.amountNotNull');
             }
             if (!this.quantity) {
-                this.quantityErr = 'trade.limitPrice.quantityNotNull';
+                this.quantityErr = this.$t('trade.limitPrice.quantityNotNull');
             }
 
             if (this.priceErr || this.amountErr || this.quantityErr) {

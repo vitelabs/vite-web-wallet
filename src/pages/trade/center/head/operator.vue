@@ -1,8 +1,8 @@
 <template>
     <div class="gate">
         <span class="__pointer" v-if="operatorInfo" @click="showOperator">
-            <img v-show="operatorInfo.icon" class="gate-img" :src="operatorInfo.icon"/>
-            {{ operatorInfo.showAddr || '--' }}
+            <img v-show="operatorInfo.img" class="gate-img" :src="operatorInfo.img"/>
+            {{ operatorInfo.name || '--' }}
         </span>
         <span v-else>--</span>
 
@@ -11,7 +11,7 @@
                  :closeIcon="true" :singleBtn="true" :close="closeOperator"
                  :leftBtnTxt="$t('btn.understand')" :leftBtnClick="closeOperator">
             <div class="operator-info-title">
-                <img :src="operatorInfo.icon"/>
+                <img :src="operatorInfo.img"/>
                 <div class="title-info">
                     <div class="name">{{ operatorInfo.name }}</div>
                     <div class="address">{{ operatorInfo.address }}</div>
@@ -32,7 +32,6 @@
 </template>
 
 <script>
-import ellipsisAddr from 'utils/ellipsisAddr';
 import confirm from 'components/confirm/confirm.vue';
 import operatorList from './operator.json';
 
@@ -62,8 +61,7 @@ export default {
             }
 
             const icon = operator.icon;
-            operator.icon = icon ? operatorIcon[icon] || '' : '';
-            operator.showAddr = ellipsisAddr(operator.address);
+            operator.img = icon ? operatorIcon[icon] || '' : '';
             return operator;
         }
     },
