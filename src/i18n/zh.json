@@ -1069,7 +1069,7 @@
         "openTxPairConfirm": {
             "title": "开通 {symbol} 交易对",
             "fee": "上币费",
-            "hint": "交易对开通成功后，如果想要添加运营商标识（如BTC.V），请在我们的Telegram群组联系我们：https://t.me/vite_zh",
+            "hint": "交易对开通成功后，如果想要添加运营商标识，请在我们的Telegram群组联系我们：https://t.me/vite_zh",
             "btn": "提交申请",
             "reqSuccess": "提交申请成功，请稍后在市场中查看",
             "reqError": "上币失败，请稍后重试"
