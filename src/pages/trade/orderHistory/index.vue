@@ -43,7 +43,7 @@ export default {
     methods: {
         submit(v) {
             this.filters = v;
-            this.update(this.filters);
+            this.update();
         },
         update(pageNo = 1) {
             if (!this.defaultAddr) {
@@ -54,7 +54,8 @@ export default {
                 address: this.defaultAddr,
                 limit: pageSize,
                 total: 1,
-                offset: (pageNo - 1) * pageSize
+                offset: (pageNo - 1) * pageSize,
+                ...this.filters
             }).then(data => {
                 this.totalPage = Math.ceil(data.total / pageSize);
                 this.data = data.order || [];
