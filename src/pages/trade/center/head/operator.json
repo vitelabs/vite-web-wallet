@@ -7,9 +7,9 @@
                     "BTC-000_USDT-000",
                     "VITE_BTC-000", "VITE_ETH-000", "VITE_USDT-000"],
         "name": "Vite Labs",
-        "introduction": "Vite Labs作为ViteX的技术提供方，在VITEX上线后会以官方身份成为首个运营商，届时将会完成常见跨链币种的铸币工作，并开启相应的交易对。Vite Labs在ViteX诞生初期发挥一定作用；随着ViteX和其他运营商的发展，会弱化自己的运营商功能。",
+        "introduction": "Vite Labs作为ViteX的技术提供方，在ViteX上线后会以官方身份成为首个运营商，届时将会完成常见跨链币种的铸币工作，并开启相应的交易对。Vite Labs在ViteX诞生初期发挥一定作用；随着ViteX和其他运营商的发展，会弱化自己的运营商功能。",
         "en": {
-            "introduction": "Vite Labs作为ViteX的技术提供方，在VITEX上线后会以官方身份成为首个运营商，届时将会完成常见跨链币种的铸币工作，并开启相应的交易对。Vite Labs在ViteX诞生初期发挥一定作用；随着ViteX和其他运营商的发展，会弱化自己的运营商功能。"
+            "introduction": "Vite Labs is a technology provider as well as the first operator of ViteX. Vite Labs will issue common cross-chain tokens and open corresponding trading pairs. Vite Labs will weaken its role as an operator after more operators join in ViteX platform. "
         }
     }
 ]
