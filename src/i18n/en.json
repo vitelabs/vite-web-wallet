@@ -525,8 +525,8 @@
             "amount": "Amount",
             "withdrawTime": "Expected Due Date",
             "unexpired": "Temporarily cannot make withdrawal of staked token until due date",
-            "vip": "This staking action is for default opening VIP in ViteX exchange, please go to ViteX exchange page to cancel VIP",
-            "mining": "This staking is your staking mining amount in ViteX, please go to ViteX mining page to retrieve",
+            "vip": "This staking action is for default opening VIP on ViteX exchange, please go to ViteX exchange page to cancel VIP",
+            "mining": "This staking is your staking as mining amount on ViteX, please go to ViteX mining page to retrieve",
             "other": "This staking is staked via other ways and it is not supported retrieving here"
         }
     },
@@ -1022,7 +1022,8 @@
         "withdrawPlaceHolder": "Please input retrieving amount, at least 134 VITE",
         "addBtn": "Confirm to stake ",
         "withdrawBtn": "Confirm to retrieve",
-        "stakingBalance": "Retrievable Staking Amount"
+        "stakingBalance": "Retrievable Staking Amount",
+        "comingHint": "Mining function is coming soon! Stay tuned."
     },
     "inviteMining":{
         "txTitle":"Referring as Mining Total Income"
