@@ -18,22 +18,25 @@ export default {
     computed: {
         isHaveUsers() {
             return !!this.$store.state.wallet.currHDAcc;
+        },
+        address() {
+            return this.$store.getters.activeAddr;
         }
     },
     methods: {
         leftClick() {
             if (!this.isHaveUsers) {
-                statistics.event('Vite_web_wallet', this.$route.name, 'limitPrice-login');
+                statistics.event(this.$route.name, 'limitPrice-login', this.address || '');
                 this.$router.push({ name: 'startLogin' });
                 return;
             }
 
-            statistics.event('Vite_web_wallet', this.$route.name, 'limitPrice-unlock');
+            statistics.event(this.$route.name, 'limitPrice-unlock', this.address || '');
             const valid = execWithValid(function () {});
             valid();
         },
         rightClick() {
-            statistics.event('Vite_web_wallet', this.$route.name, this.isHaveUsers ? 'limitPrice-switchAcc' : 'limitPrice-create');
+            statistics.event(this.$route.name, this.isHaveUsers ? 'limitPrice-switchAcc' : 'limitPrice-create', this.address || '');
             this.$router.push({ name: 'startLogin' });
         }
     }
