@@ -14,9 +14,8 @@ const mutations = {
 
         let arr = [].concat(state.txList);
         arr.forEach(tx => {
-            const index = list.findIndex(v => v.tradeId !== tx.tradeId);
+            const index = list.findIndex(v => v.tradeId === tx.tradeId);
             if (index >= 0) {
-                arr.push(list[index]);
                 list.splice(index, 1);
             }
         });
