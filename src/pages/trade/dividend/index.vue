@@ -48,6 +48,19 @@
                 </wallet-table>
             </div>
         </div>
+
+        <!--Temporary coming soon alert-->
+        <confirm v-show="isShowConfirm"
+                 type="description" :title="$t('tradeDividend.hintTitle')"
+                 :close="closeConfirm" :closeIcon="true" :singleBtn="true"
+                 :leftBtnTxt="$t('btn.understand')" :leftBtnClick="closeConfirm">
+
+            <div class="notice-content">
+                {{ $t('tradeDividend.comingHint') }}
+                <span @click="goLink" class="link __pointer">{{ $t('tradeDividend.more') }}</span>
+            </div>
+
+        </confirm>
     </div>
 </template>
 
@@ -59,15 +72,18 @@ import pagination from 'components/pagination.vue';
 import { dividend } from 'services/trade';
 import date from 'utils/date';
 import bigNumber from 'utils/bigNumber';
+import confirm from 'components/confirm/confirm.vue';
+import openUrl from 'utils/openUrl';
 
 export default {
-    components: { sectionTitle, walletTable, pagination, pool },
+    components: { sectionTitle, walletTable, pagination, pool, confirm },
     mounted() {
         this.fetchList();
     },
     data() {
         return {
             isShowMyList: '',
+            isShowConfirm: true,
             currentPage: 0,
             totalNum: 0,
 
@@ -222,6 +238,15 @@ export default {
                 this.myDividend = {};
                 this.list = [];
             });
+        },
+        closeConfirm() {
+            this.isShowConfirm = false;
+        },
+        goLink() {
+            if (this.$i18n.locale === 'zh') {
+                openUrl('https://dex.vite.wiki/zh/dex/#vx-%E6%89%8B%E7%BB%AD%E8%B4%B9%E5%88%86%E7%BA%A2');
+            }
+            openUrl('https://dex.vite.wiki/dex/#vx-holder-dividends');
         }
     }
 };
@@ -344,5 +369,12 @@ export default {
             background: rgba(247,249,251,1);
         }
     }
+}
+.notice-content {
+    line-height: 18px;
+}
+.link {
+    color: #007aff;
+    text-decoration: underline;
 }
 </style>

@@ -39,6 +39,19 @@
         </div>
         <vx-confirm v-show="isShowVxConfirm" :close="hideVxConfirm"
                     :actionType="actionType" :stakingObj="stakingObj"></vx-confirm>
+
+        <!--Temporary coming soon alert-->
+        <confirm v-show="isShowConfirm"
+                 type="description" :title="$t('tradeMining.hintTitle')"
+                 :close="closeConfirm" :closeIcon="true" :singleBtn="true"
+                 :leftBtnTxt="$t('btn.understand')" :leftBtnClick="closeConfirm">
+
+            <div class="notice-content">
+                {{ $t('tradeMining.comingHint') }}
+                <span @click="goLink" class="link __pointer">{{ $t('tradeMining.more') }}</span>
+            </div>
+
+        </confirm>
     </div>
 </template>
 
@@ -56,11 +69,14 @@ import vxConfirm from './vxConfirm.vue';
 import stakingDetail from './stakingDetail.vue';
 import bigNumber from 'utils/bigNumber';
 import { timer } from 'utils/asyncFlow';
+import confirm from 'components/confirm/confirm.vue';
+import openUrl from 'utils/openUrl';
+
 
 let stakingInfoTimer = null;
 
 export default {
-    components: { walletTable, pagination, sectionTitle, vxConfirm, stakingDetail },
+    components: { walletTable, pagination, sectionTitle, vxConfirm, stakingDetail, confirm },
     mounted() {
         this.init();
     },
@@ -87,6 +103,7 @@ export default {
             stakingObj: null,
             actionType: null,
             isShowVxConfirm: false,
+            isShowConfirm: true,
 
             tradeHeadList: [ {
                 text: this.$t('tradeMining.tbHead.date'),
@@ -254,6 +271,15 @@ export default {
             }).catch(err => {
                 console.warn(err);
             });
+        },
+        closeConfirm() {
+            this.isShowConfirm = false;
+        },
+        goLink() {
+            if (this.$i18n.locale === 'zh') {
+                openUrl('https://dex.vite.wiki/zh/dex/#%E6%8C%96%E7%9F%BF%E6%96%B9%E6%A1%88v');
+            }
+            openUrl('https://dex.vite.wiki/dex/#vx-mining');
         }
     }
 };
@@ -310,5 +336,12 @@ export default {
             box-shadow: none;
         }
     }
+}
+.notice-content {
+    line-height: 18px;
+}
+.link {
+    color: #007aff;
+    text-decoration: underline;
 }
 </style>
