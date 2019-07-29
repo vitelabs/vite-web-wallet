@@ -681,9 +681,10 @@
             "contentProvider": "This service is provided by {gate}.",
             "contentOther": "You agree and acknowledge that Vite Labs would not be responsible for any negative consequences caused by {gate}. Vite platform does not take any part in the relationship that may arise between {gate} and users of Vite platform",
             "contentAgree": "By continuing to use {gate}'s service, you agree and acknowledge {gate}'s",
-            "agreement": "Terms of Services, Trading limitation, Conditions and Privacy Policy",
+            "agreement": "Terms of Services, Trading Conditions and Privacy Policy",
             "contentUngree": "Please agree to this terms before using {gate}'s service",
-            "hint": "Contact customer service team of {gate} if you encounter any problems during payment process."
+            "hint": "Contact customer service team of {gate} if you encounter any problems during payment process.",
+            "next": "Confirm and Proceed"
         },
         "vb":{
             "title":"ViteConnect",
@@ -1072,7 +1073,7 @@
         "openTxPairConfirm": {
             "title": "Open {symbol} to trade",
             "fee": "Listing Fee",
-            "hint": "If you want to add unique operator symbol (like BTC.V) after opening a trading pair, please contact us at our Telegram group: https://t.me/vite_en",
+            "hint": "If you want to add unique operator symbol after opening a trading pair, please contact us at our Telegram group: https://t.me/vite_en",
             "btn": "Submit",
             "reqSuccess": "Submit Successful! Check it on market board later.",
             "reqError": "Listing failed, please try again"

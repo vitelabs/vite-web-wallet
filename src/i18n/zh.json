@@ -402,7 +402,8 @@
             "contentAgree": "使用{gate}提供的服务，表明您同意{gate}",
             "agreement": "服务条款，交易条件，限制及隐私政策",
             "contentUngree": "若您不同意这些条款，请勿使用{gate}服务。",
-            "hint": "若您对支付流程有问题，请联系{gate}客服团队"
+            "hint": "若您对支付流程有问题，请联系{gate}客服团队",
+            "next": "同意并继续"
         },
         "vb":{
             "title":"ViteConnect",
@@ -1021,7 +1022,7 @@
         "addBtn": "提交抵押",
         "withdrawBtn": "确认取回",
         "stakingBalance": "可取回抵押余额",
-        "comingHint": "挖矿功能即将开启，敬请期待"
+        "comingHint": "挖矿功能即将开启，敬请期待。"
     },
     "inviteMining":{
         "txTitle":"邀请挖矿总收益"
