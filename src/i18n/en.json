@@ -1024,7 +1024,9 @@
         "addBtn": "Confirm to stake ",
         "withdrawBtn": "Confirm to retrieve",
         "stakingBalance": "Retrievable Staking Amount",
-        "comingHint": "Mining function is coming soon! Stay tuned."
+        "hintTitle": "Important Notice",
+        "comingHint": "VX mining function is coming soon, stay tuned. You can get VX in five ways: 1. Trading as Mining, 2. Listing as Mining, 3. Referring as Mining, 4. Staking as Mining, 5. Market-making as Mining. Users who hold VX enjoy payouts from a shared dividend pool.",
+        "more": "Learn more about VX mining rules"
     },
     "inviteMining":{
         "txTitle":"Referring as Mining Total Income"
@@ -1037,7 +1039,10 @@
         "VX": "Holding VX",
         "coin": "Type",
         "amount": "Amount",
-        "price": "Total Estimated Value"
+        "price": "Total Estimated Value",
+        "hintTitle": "Important Notice",
+        "comingHint": "VX mining and dividend functions are coming soon, stay tuned. The system will distribute 1% of the total pool to all VX users proportional to the amount of VX they hold. The initial dividend pool will start at 0 and will grow according to the amount of fees collected by ViteX. Traders must have a minimum of 10 VX in order to receive dividends from a shared dividend pool comprised of base transaction, listing and referral code generating fees. ",
+        "more": "Learn more about VX dividend rules"
     },
     "tradeOperator": {
         "title": "Operator",
