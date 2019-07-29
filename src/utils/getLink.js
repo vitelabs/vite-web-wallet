@@ -13,7 +13,7 @@ import i18n from 'i18n';
 // }
 
 export function getExplorerLink() {
-    return `${ process.env.viteNet }${ i18n.locale === 'en' ? '' : i18n.locale }`;
+    return `${ process.env.viteNet }${ i18n.locale === 'en' ? '' : `${ i18n.locale }/` }`;
 }
 
 export function getAppLink() {

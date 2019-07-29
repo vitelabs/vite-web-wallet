@@ -124,7 +124,7 @@ export default {
     },
     methods: {
         goToTokenDetail() {
-            const l = `${ getExplorerLink() }/token/${ this.token.tokenId }`;
+            const l = `${ getExplorerLink() }token/${ this.token.tokenId }`;
             openUrl(l);
         },
         goToGateOffical() {
