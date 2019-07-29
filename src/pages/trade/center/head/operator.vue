@@ -1,7 +1,7 @@
 <template>
     <div class="gate">
         <span class="__pointer" v-if="operatorInfo" @click="showOperator">
-            <img v-show="operatorInfo.icon" class="gate-img" :src="operatorInfo.icon"/>
+            <img v-show="operatorInfo.img" class="gate-img" :src="operatorInfo.img"/>
             {{ operatorInfo.name || '--' }}
         </span>
         <span v-else>--</span>
@@ -11,7 +11,7 @@
                  :closeIcon="true" :singleBtn="true" :close="closeOperator"
                  :leftBtnTxt="$t('btn.understand')" :leftBtnClick="closeOperator">
             <div class="operator-info-title">
-                <img :src="operatorInfo.icon"/>
+                <img :src="operatorInfo.img"/>
                 <div class="title-info">
                     <div class="name">{{ operatorInfo.name }}</div>
                     <div class="address">{{ operatorInfo.address }}</div>
@@ -61,7 +61,7 @@ export default {
             }
 
             const icon = operator.icon;
-            operator.icon = icon ? operatorIcon[icon] || '' : '';
+            operator.img = icon ? operatorIcon[icon] || '' : '';
             return operator;
         }
     },
