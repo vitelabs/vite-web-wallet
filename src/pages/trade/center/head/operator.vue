@@ -85,11 +85,13 @@ export default {
     display: flex;
     margin-top: 2px;
     .gate-img {
-        width: 14px;
-        height: 14px;
-        border-radius: 14px;
+        width: 10px;
+        height: 10px;
+        padding: 2px;
         margin-right: 2px;
-        margin-bottom: -2px;
+        margin-bottom: -4px;
+        border-radius: 2px;
+        border: 1px solid rgba(212,222,231,1);
     }
 }
 
@@ -98,8 +100,9 @@ export default {
     background: rgba(0,122,255,0.05);
     border-bottom: 1px solid rgba(212,222,231,1);
     img {
-        width: 40px;
-        height: 40px;
+        width: 28px;
+        height: 28px;
+        padding: 6px;
         border-radius: 2px;
         border: 1px solid rgba(212,222,231,1);
         margin-right: 12px;
