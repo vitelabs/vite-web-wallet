@@ -2,7 +2,7 @@ require('./buildRoutes.js');
 
 const path = require('path');
 const merge = require('webpack-merge');
-// const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 const plugins = require('./webpackConf/plugins.js');
 const devConfig = require('./webpackConf/dev.config.js');
@@ -45,19 +45,19 @@ let webpackConfig = {
             }
         },
         minimizer: [
-            // new UglifyJsPlugin({
-            //     cache: true,
-            //     parallel: true,
-            //     uglifyOptions: {
-            //         compress: {
-            //             unused: true,
-            //             drop_debugger: true
-            //         },
-            //         output: { comments: false }
-            //     },
-            //     extractComments: true,
-            //     sourceMap: false
-            // })
+            new UglifyJsPlugin({
+                cache: true,
+                parallel: true,
+                uglifyOptions: {
+                    compress: {
+                        unused: true,
+                        drop_debugger: true
+                    },
+                    output: { comments: false }
+                },
+                extractComments: true,
+                sourceMap: false
+            })
         ]
     },
     module: {
