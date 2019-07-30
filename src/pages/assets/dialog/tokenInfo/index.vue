@@ -74,6 +74,7 @@ import openUrl from 'utils/openUrl';
 import Tb from './tb';
 import viteInput from 'components/viteInput';
 import { throttle } from 'lodash';
+import bn from 'utils/bigNumber'
 
 
 export default {
@@ -123,6 +124,9 @@ export default {
         }
     },
     methods: {
+        toBasic(v){
+            return bn.toBasic(v,this.token.decimals,0)
+        },
         goToTokenDetail() {
             const l = `${ getExplorerLink() }token/${ this.token.tokenId }`;
             openUrl(l);
