@@ -1,8 +1,11 @@
 {
     "8": {
-        "version": "2.5.0",
-        "zh": "真正的去中心化交易所ViteX正式上线，抓紧挂单体验吧",
-        "en": "ViteX, an authentic decentralised exchange,is officially launched, start trading in ViteX now! ",
+        "version": {
+            "zh": "交易所ViteX正式上线！",
+            "en": "ViteX launches now!"
+        },
+        "zh": "支持ViteConnect登录，更有VIP、邀请码折扣，享受更安全更优惠的交易体验。挖矿功能即将开放，敬请期待",
+        "en": "ViteX supports login via ViteConnect and VIP & referring discount, which allows you to enjoy more secure and cheaper trading experience. Mining function is around the corner, stay tuned!",
         "time": "1563874272860"
     },
     "6": {
