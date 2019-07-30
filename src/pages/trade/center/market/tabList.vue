@@ -14,6 +14,8 @@
 </template>
 
 <script>
+import statistics from 'utils/statistics';
+
 export default {
     computed: {
         isShowFavorite() {
@@ -24,14 +26,19 @@ export default {
         },
         quoteTokenCategory() {
             return this.$store.state.exchangeMarket.quoteTokenCategory;
+        },
+        address() {
+            return this.$store.getters.activeAddr;
         }
     },
     methods: {
         showFavorite() {
+            statistics.event(this.$route.name, 'trade_basic_sign', this.address || '');
             this.$store.commit('setIsShowFavorite', true);
             this.$store.commit('setCurentCategory', null);
         },
         changeCategory(category) {
+            statistics.event(this.$route.name, `trade_basic_${ category }`, this.address || '');
             this.$store.commit('setIsShowFavorite', false);
             this.$store.commit('setCurentCategory', category);
         }
