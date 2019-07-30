@@ -115,6 +115,7 @@ export default {
         border-radius: 2px;
         border: 1px solid rgba(212,222,231,1);
         padding: 0 8px;
+        white-space: nowrap;
 
         &:after {
             content: '';
