@@ -2,7 +2,7 @@
     <div class="my-quota-wrapper">
         <div class="row">
             <div class="title">{{ $t('walletQuota.myQuota') }}</div>
-            <div class="text">{{ txNum || 0 }} UTPS</div>
+            <div class="text">{{ txNum || 0 }} UT</div>
         </div>
     </div>
 </template>

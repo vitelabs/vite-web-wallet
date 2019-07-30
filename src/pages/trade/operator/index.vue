@@ -6,7 +6,7 @@
         <div v-show="noData" class="become-operator">
             <img src="~assets/imgs/no_operator.svg"/>
             <div class="text">{{ $t('tradeOperator.noOperator') }}</div>
-            <div class="btn __pointer">{{ $t('tradeOperator.learnMore') }}</div>
+            <div class="btn __pointer" @click="goOperatorTutorial">{{ $t('tradeOperator.learnMore') }}</div>
         </div>
     </div>
 </template>
@@ -15,6 +15,7 @@
 import income from './income.vue';
 import tokenList from './tokenList';
 import secTitle from 'components/secTitle';
+import openUrl from 'utils/openUrl';
 
 export default {
     components: { income, secTitle, tokenList },
@@ -27,6 +28,11 @@ export default {
     computed: {
         noData() {
             return !this.isIncome && !this.isTokenList;
+        }
+    },
+    methods: {
+        goOperatorTutorial() {
+            openUrl('https://forum.vite.net/topic/2283/guidelines-on-how-to-become-an-operator-on-vitex');
         }
     }
 };

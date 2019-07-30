@@ -2,7 +2,7 @@
     <confirm v-show="isShowConfirm" class="small"
              type="description" :title="$t('assets.notice.title')"
              :close="closeConfirm" :closeIcon="true" :singleBtn="true"
-             :leftBtnTxt="$t('btn.next')" :leftBtnClick="next">
+             :leftBtnTxt="$t('assets.notice.next')" :leftBtnClick="next">
 
         <div class="notice-content">
             {{ $t('assets.notice.contentProvider', { gate: gateInfo.gateway }) }}

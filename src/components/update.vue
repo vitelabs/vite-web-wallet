@@ -2,7 +2,7 @@
     <div v-show="versionList.length">
         <notice v-for="(version, index) in versionList" :key="index"
                 :isShowClose="true" :close="close" :rawData="index"
-                :title="version.version"
+                :title="version.version[$i18n.locale]"
                 :describe="$t('lang') === '中文' ? version.zh : version.en"></notice>
     </div>
 </template>
