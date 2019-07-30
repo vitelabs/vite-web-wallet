@@ -5,7 +5,7 @@ const quoteTokenCategory = [ 'BTC', 'ETH', 'VITE', 'USDT' ];
 
 const query = getQuery();
 const category = query.category;
-const DetaultCategory = category && quoteTokenCategory.indexOf(category) !== -1 ? category : 'VITE';
+const DetaultCategory = category && quoteTokenCategory.indexOf(category) !== -1 ? category : 'BTC';
 
 const state = {
     quoteTokenCategory,
