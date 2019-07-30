@@ -39,41 +39,46 @@
         </div>
         <vx-confirm v-show="isShowVxConfirm" :close="hideVxConfirm"
                     :actionType="actionType" :stakingObj="stakingObj"></vx-confirm>
-
-        <!--Temporary coming soon alert-->
-        <confirm v-show="isShowConfirm" class="small"
-                 type="description" :title="$t('tradeMining.hintTitle')"
-                 :close="closeConfirm" :closeIcon="true" :singleBtn="true"
-                 :leftBtnTxt="$t('tradeMining.more')" :leftBtnClick="goLink">
-            {{ $t('tradeMining.comingHint') }}
-            <span @click="goLink" class="link __pointer">{{ $t('tradeMining.more') }}</span>
-        </confirm>
     </div>
 </template>
 
 <script>
 import { constant } from '@vite/vitejs';
-import date from 'utils/date';
-import $ViteJS from 'utils/viteClient';
-import { execWithValid } from 'utils/execWithValid';
+import confirm from 'components/confirm/index.js';
 import pagination from 'components/pagination.vue';
 import walletTable from 'components/table/index.vue';
 import { miningTrade, miningPledge } from 'services/trade';
 import { getInviteMiningDetail } from 'services/tradeOperation';
+import bigNumber from 'utils/bigNumber';
+import { timer } from 'utils/asyncFlow';
+import openUrl from 'utils/openUrl';
+import date from 'utils/date';
+import $ViteJS from 'utils/viteClient';
+import { execWithValid } from 'utils/execWithValid';
 import sectionTitle from '../components/sectionTitle.vue';
 import vxConfirm from './vxConfirm.vue';
 import stakingDetail from './stakingDetail.vue';
-import bigNumber from 'utils/bigNumber';
-import { timer } from 'utils/asyncFlow';
-import confirm from 'components/confirm/confirm.vue';
-import openUrl from 'utils/openUrl';
-
 
 let stakingInfoTimer = null;
 
 export default {
-    components: { walletTable, pagination, sectionTitle, vxConfirm, stakingDetail, confirm },
+    components: { walletTable, pagination, sectionTitle, vxConfirm, stakingDetail },
     mounted() {
+        // Temporary coming soon alert
+        confirm({
+            size: 'small',
+            type: 'description',
+            title: this.$t('tradeMining.hintTitle'),
+            singleBtn: true,
+            closeBtn: { show: true },
+            leftBtn: {
+                text: this.$t('tradeMining.more'),
+                click: () => {
+                    this.goLink();
+                }
+            },
+            content: this.$t('tradeMining.comingHint')
+        });
         this.init();
     },
     destroyed() {
@@ -99,7 +104,6 @@ export default {
             stakingObj: null,
             actionType: null,
             isShowVxConfirm: false,
-            isShowConfirm: true,
 
             tradeHeadList: [ {
                 text: this.$t('tradeMining.tbHead.date'),
@@ -267,9 +271,6 @@ export default {
             }).catch(err => {
                 console.warn(err);
             });
-        },
-        closeConfirm() {
-            this.isShowConfirm = false;
         },
         goLink() {
             if (this.$i18n.locale === 'zh') {
