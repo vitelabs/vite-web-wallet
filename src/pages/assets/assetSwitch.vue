@@ -1,8 +1,11 @@
 <template>
     <Vswitch :optList="optList" v-model="innerValue"/>
 </template>
+
 <script>
+import statistics from 'utils/statistics';
 import Vswitch from 'uiKit/switch';
+
 export default {
     components: { Vswitch },
     props: {
@@ -11,8 +14,14 @@ export default {
             default: 'TOTAL'
         }
     },
+    computed: {
+        activeAddr() {
+            return this.$store.getters.activeAddr;
+        }
+    },
     watch: {
         innerValue(val) {
+            statistics.event(this.$route.name, 'changeEstimate', this.activeAddr || '');
             this.$emit('input', val);
         }
     },

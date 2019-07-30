@@ -19,6 +19,7 @@
 </template>
 
 <script>
+import statistics from 'utils/statistics';
 import ellipsisAddr from 'utils/ellipsisAddr.js';
 import { StatusMap, getCurrHDAcc } from 'wallet';
 
@@ -72,6 +73,8 @@ export default {
                 return;
             }
             this.$store.commit('switchActiveAcc', { address, index });
+            statistics.event(this.$route.name, 'switchAddress', this.address || '');
+
             this.toggleList();
         },
         toggleList() {
@@ -105,7 +108,6 @@ export default {
     @include font-family-bold();
     font-weight: 600;
     font-size: 13px;
-    white-space: nowrap;
 
     .list-title {
         position: relative;

@@ -26,6 +26,7 @@ import { debounce } from 'lodash';
 import Search from 'components/search';
 import { addTokenDialog } from './dialog';
 import Checkbox from 'uiKit/checkbox';
+import statistics from 'utils/statistics';
 
 export default {
     data() {
@@ -34,8 +35,18 @@ export default {
             filterKey: ''
         };
     },
+    computed: {
+        activeAddr() {
+            return this.$store.getters.activeAddr;
+        }
+    },
     watch: {
         hideZero() {
+            if (this.hideZero) {
+                statistics.event(this.$route.name, 'hideLowBalances', this.activeAddr || '');
+            } else {
+                statistics.event(this.$route.name, 'showLowBalances', this.activeAddr || '');
+            }
             this.updateFilter();
         },
         filterKey() {
@@ -51,6 +62,7 @@ export default {
             });
         }, 0.5),
         addToken() {
+            statistics.event(this.$route.name, 'addToken', this.activeAddr || '');
             addTokenDialog().catch(e => console.error(e));
         },
         more() {
