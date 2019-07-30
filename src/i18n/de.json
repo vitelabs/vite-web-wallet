@@ -765,7 +765,9 @@
         "operator": {
             "title": "Operator Details",
             "introduction": "Introduction",
-            "txPair": "Trading Pairs"
+            "txPair": "Trading Pairs",
+            "confirmTitle": "温馨提示",
+            "confirmText": "当前交易对 {symbol} 为匿名运营商管理，请谨慎交易。数字资产交易存在风险，需用户自行谨慎判断确定相关数字资产的真实性、合法性和有效性，并自行承担因此产生的责任与损失。"
         }
     },
     "trade": {
