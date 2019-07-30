@@ -11,8 +11,8 @@ const TEMPLATE_PATH = path.join(__dirname, '../index.html');
 const Buffer_Path = path.join(__dirname, '../node_modules/buffer/index.js');
 
 const goViteServer = {
-    production: '\'wss://api.vitewallet.com/pre/ws\'',
-    // production: '\'wss://api.vitewallet.com/ws\'',
+    // production: '\'wss://api.vitewallet.com/pre/ws\'',
+    production: '\'wss://api.vitewallet.com/ws\'',
     test: '\'wss://premainnet.vitewallet.com/test/ws\'',
     // dev: '\'ws:192.168.31.8:41420\'',
     dev: '\'wss://premainnet.vitewallet.com/test/ws\'',
