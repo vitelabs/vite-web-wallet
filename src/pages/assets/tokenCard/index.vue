@@ -17,7 +17,7 @@
                 {{ `${token.balance || 0} ${token.tokenSymbol}` }}
             </div>
             <div class="op_group">
-                <div class="op" @click="send">
+                <div class="op" @click="_send">
                     {{ $t("tokenCard.actionType.SEND") }}
                 </div>
             </div>
@@ -36,7 +36,7 @@
                 <div class="op" @click="charge">
                     {{ $t("tokenCard.actionType.CHARGE") }}
                 </div>
-                <div class="op" @click="withdraw">
+                <div class="op" @click="_withdraw">
                     {{ $t("tokenCard.actionType.WITHDRAW") }}
                 </div>
                 <div class="op readonly" @click="() => showDetail('withdraw')">
@@ -53,10 +53,10 @@
                 {{ `${avaliableExBalance || 0} ${token.tokenSymbol}` }}
             </div>
             <div class="op_group">
-                <div class="op" @click="exCharge">
+                <div class="op" @click="_exCharge">
                     {{ $t("tokenCard.actionType.EXCHARGE") }}
                 </div>
-                <div class="op" @click="exWithdraw">
+                <div class="op" @click="_exWithdraw">
                     {{ $t("tokenCard.actionType.EXWITHDRAW") }}
                 </div>
                 <div class="op readonly" @click="exRecord">
@@ -99,6 +99,7 @@ import {
     exChargeDialog
 } from '../dialog';
 import importantHint from '../dialog/importantHint';
+import statistics from 'utils/statistics';
 import bigNumber from 'utils/bigNumber';
 import { execWithValid } from 'utils/execWithValid';
 import { getTokenNameString } from 'utils/tokenParser';
@@ -180,6 +181,9 @@ export default {
                     cash: this.token.walletAsset
                 };
             }
+        },
+        address() {
+            return this.$store.getters.activeAddr;
         }
     },
     methods: {
@@ -187,6 +191,7 @@ export default {
             return getTokenNameString(...args);
         },
         exRecord() {
+            statistics.event(this.$route.name, 'exchange-history', this.address || '');
             this.$refs.alert.show();
         },
         unbind() {
@@ -198,11 +203,16 @@ export default {
             });
         },
         charge() {
+            statistics.event(this.$route.name, 'Cross-Chain-receive', this.address || '');
             this.$refs.importantHintDom.showConfirm(() => {
                 chargeDialog({ token: this.token }).catch(e => {
                     console.error(e);
                 });
             });
+        },
+        _withdraw() {
+            statistics.event(this.$route.name, 'Cross-Chain-transfer', this.address || '');
+            this.withdraw();
         },
         withdraw: execWithValid(function () {
             this.$refs.importantHintDom.showConfirm(() => {
@@ -212,9 +222,19 @@ export default {
             });
         }),
         showDetail(initTabName = 'tokenInfo') {
+            statistics.event(this.$route.name, `tokenDialog-${ initTabName }`, this.address || '');
+
             tokenInfoDialog({ token: this.token, initTabName }).catch(e => {
                 console.error(e);
             });
+        },
+        _exCharge() {
+            statistics.event(this.$route.name, 'exchange-deposit', this.address || '');
+            this.exCharge();
+        },
+        _exWithdraw() {
+            statistics.event(this.$route.name, 'exchange-withdraw', this.address || '');
+            this.exWithdraw();
         },
         exCharge: execWithValid(function () {
             exChargeDialog({ token: this.token }).catch(e => {
@@ -226,6 +246,10 @@ export default {
                 console.error(e);
             });
         }),
+        _send() {
+            statistics.event(this.$route.name, 'wallet-transfer', this.address || '');
+            this.send();
+        },
         send: execWithValid(function () {
             if (!this.token.tokenId) {
                 return;

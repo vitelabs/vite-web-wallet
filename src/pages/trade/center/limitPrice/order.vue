@@ -86,6 +86,7 @@ import sendTx from 'utils/sendTx';
 import BigNumber from 'utils/bigNumber';
 import { verifyAmount, checkAmountFormat } from 'utils/validations';
 import { execWithValid } from 'utils/execWithValid';
+import statistics from 'utils/statistics';
 
 export default {
     components: { viteInput, slider },
@@ -356,6 +357,9 @@ export default {
                 return true;
             }
             return this.closeMarket.find(v => v.symbol === this.activeTxPair.symbol);
+        },
+        address() {
+            return this.$store.getters.activeAddr;
         }
     },
     methods: {
@@ -564,6 +568,8 @@ export default {
             if (this.isLoading || this.activeTxPairIsClose) {
                 return;
             }
+
+            statistics.event(this.$route.name, `limitPrice-${ this.orderType }`, this.address || '');
 
             this.validPrice();
             this.validAmount();
