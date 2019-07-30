@@ -20,5 +20,5 @@ interface IUiController {
   allShowInvite:boolean
 }
 export function getUiConfig(): Promise<IUiController> {
-  return client({ method: "GET", path: "/uiController/main.json" });
+  return client({ method: "GET", path: "/uiController/main.json",params:{t:Date.now()} });
 }

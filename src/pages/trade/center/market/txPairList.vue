@@ -78,12 +78,13 @@ export default {
         showList() {
             const list = this.orderList(this.list);
             const query = getQuery();
+            const symbol = query.symbol || 'VITE_BTC-000';
 
             const _l = [];
             let activeTxPair = list && list.length ? list[0] : null;
 
             list.forEach(_t => {
-                if (query.symbol && _t.symbol === query.symbol) {
+                if (symbol && _t.symbol === symbol) {
                     activeTxPair = _t;
                 }
                 _l.push(_t);
