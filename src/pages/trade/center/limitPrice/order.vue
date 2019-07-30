@@ -685,8 +685,6 @@ $font-black: rgba(36, 39, 43, 0.8);
 
 .tips {
     position: absolute;
-    left: 50%;
-    bottom: 42px;
     z-index: 10;
     transform: translate(-50%, 0);
     background: #fff;
@@ -706,6 +704,8 @@ $font-black: rgba(36, 39, 43, 0.8);
         min-width: 0;
         width: auto;
         opacity: 1;
+        left: 50%;
+        bottom: 42px;
         padding: 6px 12px;
     }
     &::after {

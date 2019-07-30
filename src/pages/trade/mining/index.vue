@@ -41,16 +41,12 @@
                     :actionType="actionType" :stakingObj="stakingObj"></vx-confirm>
 
         <!--Temporary coming soon alert-->
-        <confirm v-show="isShowConfirm"
+        <confirm v-show="isShowConfirm" class="small"
                  type="description" :title="$t('tradeMining.hintTitle')"
                  :close="closeConfirm" :closeIcon="true" :singleBtn="true"
                  :leftBtnTxt="$t('btn.understand')" :leftBtnClick="closeConfirm">
-
-            <div class="notice-content">
-                {{ $t('tradeMining.comingHint') }}
-                <span @click="goLink" class="link __pointer">{{ $t('tradeMining.more') }}</span>
-            </div>
-
+            {{ $t('tradeMining.comingHint') }}
+            <span @click="goLink" class="link __pointer">{{ $t('tradeMining.more') }}</span>
         </confirm>
     </div>
 </template>
@@ -336,9 +332,6 @@ export default {
             box-shadow: none;
         }
     }
-}
-.notice-content {
-    line-height: 18px;
 }
 .link {
     color: #007aff;
