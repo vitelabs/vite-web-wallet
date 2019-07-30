@@ -48,15 +48,6 @@
                 </wallet-table>
             </div>
         </div>
-
-        <!--Temporary coming soon alert-->
-        <confirm v-show="isShowConfirm" class="small"
-                 type="description" :title="$t('tradeDividend.hintTitle')"
-                 :close="closeConfirm" :closeIcon="true" :singleBtn="true"
-                 :leftBtnTxt="$t('tradeDividend.more')" :leftBtnClick="goLink">
-            {{ $t('tradeDividend.comingHint') }}
-            <span @click="goLink" class="link __pointer">{{ $t('tradeDividend.more') }}</span>
-        </confirm>
     </div>
 </template>
 
@@ -68,18 +59,33 @@ import pagination from 'components/pagination.vue';
 import { dividend } from 'services/trade';
 import date from 'utils/date';
 import bigNumber from 'utils/bigNumber';
-import confirm from 'components/confirm/confirm.vue';
+import confirm from 'components/confirm/index.js';
 import openUrl from 'utils/openUrl';
 
 export default {
-    components: { sectionTitle, walletTable, pagination, pool, confirm },
+    components: { sectionTitle, walletTable, pagination, pool },
     mounted() {
+        // Temporary coming soon alert
+        confirm({
+            size: 'small',
+            type: 'description',
+            title: this.$t('tradeDividend.hintTitle'),
+            singleBtn: true,
+            closeBtn: { show: true },
+            leftBtn: {
+                text: this.$t('tradeDividend.more'),
+                click: () => {
+                    this.goLink();
+                }
+            },
+            content: this.$t('tradeDividend.comingHint')
+        });
+
         this.fetchList();
     },
     data() {
         return {
             isShowMyList: '',
-            isShowConfirm: true,
             currentPage: 0,
             totalNum: 0,
 
@@ -234,9 +240,6 @@ export default {
                 this.myDividend = {};
                 this.list = [];
             });
-        },
-        closeConfirm() {
-            this.isShowConfirm = false;
         },
         goLink() {
             if (this.$i18n.locale === 'zh') {
