@@ -31,6 +31,7 @@
 <script>
 import getQuery from 'utils/query';
 import BigNumber from 'utils/bigNumber';
+import statistics from 'utils/statistics';
 
 export default {
     props: {
@@ -96,6 +97,9 @@ export default {
         },
         closeMarket() {
             return this.$store.state.exchangeMarket.marketClosed;
+        },
+        address() {
+            return this.$store.getters.activeAddr;
         }
     },
     methods: {
@@ -199,6 +203,7 @@ export default {
             });
         },
         setActiveTxPair(txPair) {
+            statistics.event(`${ this.$route.name }_trade_pair`, txPair.symbol, this.address || '');
             this.$store.dispatch('exFetchActiveTxPair', txPair);
         }
     }
