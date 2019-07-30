@@ -67,6 +67,7 @@ import viteInput from 'components/viteInput';
 import loading from 'components/loading';
 import localStorage from 'utils/store';
 import { subTask } from 'utils/proto/subTask';
+import statistics from 'utils/statistics';
 import { assignPair } from 'services/trade';
 
 import orderArrow from './orderArrow';
@@ -157,6 +158,9 @@ export default {
         },
         activeTxPair() {
             return this.$store.state.exchangeActiveTxPair.activeTxPair;
+        },
+        address() {
+            return this.$store.getters.activeAddr;
         }
     },
     watch: {
@@ -318,8 +322,10 @@ export default {
 
             this.favoritePairs = this.favoritePairs || {};
             if (this.favoritePairs[symbol]) {
+                statistics.event(`${ this.$route.name }_delete_trade_sign`, symbol, this.address || '');
                 delete this.favoritePairs[symbol];
             } else {
+                statistics.event(`${ this.$route.name }_trade_sign`, symbol, this.address || '');
                 this.favoritePairs[symbol] = { toTokenId };
             }
             this.favoritePairs = Object.assign({}, this.favoritePairs);
