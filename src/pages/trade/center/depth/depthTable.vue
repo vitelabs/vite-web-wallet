@@ -116,8 +116,8 @@ export default {
             }
 
             this.$store.commit('exSetActiveTx', {
-                price: this.formatNum(price, 'ttoken'),
-                quantity: this.formatNum(quantity, 'ftoken'),
+                price,
+                quantity,
                 side,
                 num
             });
