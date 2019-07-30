@@ -53,7 +53,7 @@
         <confirm v-show="isShowConfirm" class="small"
                  type="description" :title="$t('tradeDividend.hintTitle')"
                  :close="closeConfirm" :closeIcon="true" :singleBtn="true"
-                 :leftBtnTxt="$t('btn.understand')" :leftBtnClick="closeConfirm">
+                 :leftBtnTxt="$t('tradeDividend.more')" :leftBtnClick="goLink">
             {{ $t('tradeDividend.comingHint') }}
             <span @click="goLink" class="link __pointer">{{ $t('tradeDividend.more') }}</span>
         </confirm>
