@@ -32,6 +32,7 @@
 </template>
 
 <script>
+import viteConfirm from 'components/confirm/index.js';
 import confirm from 'components/confirm/confirm.vue';
 import operatorList from './operator.json';
 
@@ -63,6 +64,26 @@ export default {
             const icon = operator.icon;
             operator.img = icon ? operatorIcon[icon] || '' : '';
             return operator;
+        }
+    },
+    watch: {
+        activeTxPair() {
+            if (this.operatorInfo) {
+                return;
+            }
+
+            const tradeTokenSymbol = this.activeTxPair.tradeTokenSymbol.split('-')[0];
+            const quoteTokenSymbol = this.activeTxPair.quoteTokenSymbol.split('-')[0];
+
+            viteConfirm({
+                size: 'small',
+                type: 'description',
+                title: this.$t('tradeCenter.operator.confirmTitle'),
+                singleBtn: true,
+                closeBtn: { show: false },
+                leftBtn: { text: this.$t('btn.understand') },
+                content: this.$t('tradeCenter.operator.confirmText', { symbol: `${ tradeTokenSymbol }/${ quoteTokenSymbol }` })
+            });
         }
     },
     methods: {
