@@ -68,15 +68,16 @@
 
 <script>
 import Vue from 'vue';
+import { utils } from '@vite/vitejs';
+import { getCurrHDAcc } from 'wallet';
+import Pie from 'components/pie';
+import copy from 'components/copy';
 import QrcodePopup from 'components/qrcodePopup';
 import SwitchAddr from 'components/switchAddress';
-import Pie from 'components/pie';
 import bigNumber from 'utils/bigNumber';
-import { utils } from '@vite/vitejs';
-import copy from 'components/copy';
-import AssetSwitch from './assetSwitch';
+import statistics from 'utils/statistics';
 import { getTokenNameString } from 'utils/tokenParser';
-import { getCurrHDAcc } from 'wallet';
+import AssetSwitch from './assetSwitch';
 
 const assetsType = {
     TOTAL: 'TOTAL',
@@ -205,6 +206,8 @@ export default {
             this.$offKeyDown();
         },
         startRename() {
+            statistics.event(this.$route.name, 'changeName', this.activeAddr || '');
+
             if (this.isShowNameInput || getCurrHDAcc().isBifrost) {
                 return;
             }

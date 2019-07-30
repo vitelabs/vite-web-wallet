@@ -19,8 +19,10 @@ block content
 <script>
 import { gateStorage } from 'services/gate';
 import { throttle } from 'lodash';
+import statistics from 'utils/statistics';
 
 const MAX_RES_NUMS = 10;
+
 export default {
     data() {
         return {
@@ -33,6 +35,8 @@ export default {
     },
     methods: {
         inspector: throttle(function () {
+            statistics.event('assets', 'addToken-add', this.activeAddr || '');
+
             gateStorage.bindTokens(this.selectedTokenIds.map(i => {
                 return { tokenId: i, gateInfo: {} };
             }));
@@ -55,6 +59,9 @@ export default {
         },
         BtnUnuse() {
             return this.selectedTokenIds.length === 0;
+        },
+        activeAddr() {
+            return this.$store.getters.activeAddr;
         }
     }
 };
