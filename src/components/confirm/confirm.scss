@@ -19,7 +19,10 @@
 .small .confirm-wrapper {
     width: 380px;
     .bottom .btn.btn-single {
-        width: 200px;
+        min-width: 200px;
+        width: auto;
+        box-sizing: border-box;
+        padding: 0 20px;
     }
 }
 
