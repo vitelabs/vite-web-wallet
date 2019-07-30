@@ -29,9 +29,9 @@ const actions = {
             return;
         }
 
+        dispatch('exFetchActiveTokens');
         dispatch('exFetchLatestTx');
         dispatch('exFetchDepth');
-        dispatch('exFetchActiveTokens');
         dispatch('exFetchMarketInfo');
     }
 };

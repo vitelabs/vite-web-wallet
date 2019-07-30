@@ -11,16 +11,38 @@ const mutations = {
     },
     exSetActiveFtoken(state, ftoken) {
         state.ftoken = ftoken;
+    },
+    exClearActiveToken(state, activeTxPair) {
+        if (!activeTxPair) {
+            state.ttoken = null;
+            state.ftoken = null;
+            return;
+        }
+
+        if (!state.ttoken || state.ttoken.tokenId !== activeTxPair.quoteToken) {
+            state.ttoken = {
+                tokenId: activeTxPair.quoteToken,
+                symbol: activeTxPair.quoteTokenSymbol,
+                originalSymbol: activeTxPair.quoteTokenSymbol.split('-')[0]
+            };
+        }
+
+        if (!state.ftoken || state.ftoken.tokenId !== activeTxPair.tradeToken) {
+            state.ftoken = {
+                tokenId: activeTxPair.tradeToken,
+                symbol: activeTxPair.tradeTokenSymbol,
+                originalSymbol: activeTxPair.tradeTokenSymbol.split('-')[0]
+            };
+        }
     }
 };
 
 const actions = {
     exFetchActiveTokens({ rootState, dispatch, commit }) {
         const activeTxPair = rootState.exchangeActiveTxPair.activeTxPair;
+        commit('exClearActiveToken', activeTxPair);
 
         if (!activeTxPair) {
-            commit('exSetActiveTtoken', null);
-            commit('exSetActiveFtoken', null);
             return;
         }
 
