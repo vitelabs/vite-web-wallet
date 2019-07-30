@@ -31,12 +31,12 @@ export default {
                 return;
             }
 
-            statistics.event(this.$route.name, 'limitPrice-unlock', this.address || '');
+            statistics.event(this.$route.name, 'limitPrice-unlockAccount', this.address || '');
             const valid = execWithValid(function () {});
             valid();
         },
         rightClick() {
-            statistics.event(this.$route.name, this.isHaveUsers ? 'limitPrice-switchAcc' : 'limitPrice-create', this.address || '');
+            statistics.event(this.$route.name, this.isHaveUsers ? 'limitPrice-switchAccount' : 'limitPrice-createAccount', this.address || '');
             this.$router.push({ name: 'startLogin' });
         }
     }
