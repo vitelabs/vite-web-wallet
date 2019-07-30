@@ -76,8 +76,9 @@ import { utils, hdAddr } from '@vite/vitejs';
 import { initPwd } from 'components/password/index.js';
 import confirm from 'components/confirm/confirm.vue';
 import viteInput from 'components/viteInput';
-import bigNumber from 'utils/bigNumber';
 import sendTx from 'utils/sendTx';
+import bigNumber from 'utils/bigNumber';
+import statistics from 'utils/statistics';
 import { getTokenIcon } from 'utils/tokenParser';
 import { verifyAmount } from 'utils/validations';
 import { execWithValid } from 'utils/execWithValid';
@@ -146,6 +147,9 @@ export default {
         },
         netStatus() {
             return this.$store.state.env.clientStatus;
+        },
+        activeAddr() {
+            return this.$store.getters.activeAddr;
         }
     },
     methods: {
@@ -170,6 +174,8 @@ export default {
             if (this.loading) {
                 return;
             }
+
+            statistics.event(this.$route.name, 'wallet-transfer-submit', this.activeAddr || '');
 
             if (!this.inAddress) {
                 this.isValidAddress = false;

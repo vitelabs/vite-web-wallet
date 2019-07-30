@@ -66,6 +66,7 @@ export default {
             addTokenDialog().catch(e => console.error(e));
         },
         more() {
+            statistics.event(this.$route.name, 'moreRecords', this.activeAddr || '');
             this.$router.push({ name: 'walletTransList' });
         }
     }

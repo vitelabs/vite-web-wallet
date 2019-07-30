@@ -23,6 +23,7 @@
 
 <script>
 import d from 'dayjs';
+import statistics from 'utils/statistics';
 import { orderDetail } from 'services/trade';
 import pagination from 'components/pagination';
 import walletTable from 'components/table/index';
@@ -98,6 +99,9 @@ export default {
                 });
             }
             return list;
+        },
+        address() {
+            return this.$store.getters.activeAddr;
         }
     },
     methods: {
@@ -117,6 +121,8 @@ export default {
             this.detailConfirm = false;
         },
         showDetail(order) {
+            statistics.event(this.$route.name, 'orderHistory-detail', this.address || '');
+
             orderDetail({
                 orderId: order.orderId,
                 symbol: order.symbol,

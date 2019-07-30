@@ -15,6 +15,7 @@ block content
         .all(@click="all") {{$t('tradeAssets.all')}}
 </template>
 <script>
+import statistics from 'utils/statistics';
 import { getValidBalance } from 'utils/validations';
 import sendTx from 'utils/sendTx';
 import debounce from 'lodash/debounce';
@@ -66,6 +67,8 @@ export default {
             }
         },
         inspector() {
+            statistics.event('assets', 'exchange-deposit-submit', this.defaultAddr || '');
+
             return new Promise((res, rej) => {
                 if (this.testAmount(this.withdrawAmount)) return;
                 const amount = this.isAll ? this.token.totalAmount : bigNumber.toMin(this.withdrawAmount, this.token.decimals);

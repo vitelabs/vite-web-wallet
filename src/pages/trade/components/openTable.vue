@@ -21,7 +21,7 @@
                 <div class="__tb_cell">{{ v.executedQuantity + ' ' + getOriginSymbol(v.tradeTokenSymbol) }}</div>
                 <div class="__tb_cell">{{ `${(v.executedPercent*100).toFixed(2)}%` }}</div>
                 <div class="__tb_cell">{{ v.executedAvgPrice + ' ' + getOriginSymbol(v.quoteTokenSymbol) }}</div>
-                <div @click="cancel(v)" class="__tb_cell click-able">
+                <div @click="_cancel(v)" class="__tb_cell click-able">
                     {{ $t("tradeOpenOrders.table.rowMap.cancel") }}
                 </div>
             </div>
@@ -38,8 +38,9 @@
 import d from 'dayjs';
 import { utils } from '@vite/vitejs';
 import sendTx from 'utils/sendTx';
-import { initPwd } from 'components/password/index.js';
+import statistics from 'utils/statistics';
 import { execWithValid } from 'utils/execWithValid';
+import { initPwd } from 'components/password/index.js';
 
 const { _Buffer } = utils;
 
@@ -64,11 +65,18 @@ export default {
     computed: {
         sortedList() {
             return this.list.slice(0).sort((a, b) => (b.createTime - a.createTime));
+        },
+        address() {
+            return this.$store.getters.activeAddr;
         }
     },
     methods: {
         getOriginSymbol(symbol) {
             return symbol.split('-')[0];
+        },
+        _cancel(order) {
+            statistics.event(this.$route.name, 'openOrder-cancel', this.address || '');
+            this.cancel(order);
         },
         cancel: execWithValid(function (order) {
             const failSubmit = e => {

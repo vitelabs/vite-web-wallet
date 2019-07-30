@@ -1,30 +1,42 @@
 <template>
     <div class="order">
         <div class="ex-tab-list">
-            <div @click="tap='openOrder'"
+            <div @click="switchTab('openOrder')"
                  class="ex-tab active-side __pointer"
-                 :class="{'active': tap === 'openOrder'}">
+                 :class="{'active': tab === 'openOrder'}">
                 {{ $t('tradeOpenOrders.title') }}
             </div>
-            <div @click="tap='historyOrder'"
+            <div @click="switchTab('historyOrder')"
                  class="ex-tab active-side __pointer"
-                 :class="{'active': tap === 'historyOrder'}">
+                 :class="{'active': tab === 'historyOrder'}">
                 {{ $t('tradeOrderHistory.title') }}
             </div>
         </div>
-        <openOrder v-show="tap==='openOrder'" class="item order-tab"></openOrder>
-        <historyOrder v-show="tap==='historyOrder'" class="item order-tab"></historyOrder>
+        <openOrder v-show="tab==='openOrder'" class="item order-tab"></openOrder>
+        <historyOrder v-show="tab==='historyOrder'" class="item order-tab"></historyOrder>
     </div>
 </template>
 
 <script>
+import statistics from 'utils/statistics';
 import openOrder from '../components/orderOpen.vue';
 import historyOrder from '../components/orderHistory.vue';
 
 export default {
     components: { historyOrder, openOrder },
     data() {
-        return { tap: 'openOrder' };
+        return { tab: 'openOrder' };
+    },
+    computed: {
+        address() {
+            return this.$store.getters.activeAddr;
+        }
+    },
+    methods: {
+        switchTab(tab) {
+            statistics.event(this.$route.name, `switch-${ tab }`, this.address || '');
+            this.tab = tab;
+        }
     }
 };
 </script>

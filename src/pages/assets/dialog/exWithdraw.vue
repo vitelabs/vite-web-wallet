@@ -16,6 +16,7 @@ block content
 </template>
 <script>
 import { getValidBalance } from 'utils/validations';
+import statistics from 'utils/statistics';
 import sendTx from 'utils/sendTx';
 import debounce from 'lodash/debounce';
 import bigNumber from 'utils/bigNumber';
@@ -72,7 +73,11 @@ export default {
                     this.token.decimals);
             }
         },
-        inspector: execWithValid(function () {
+        inspector() {
+            statistics.event('assets', 'exchange-withdraw-submit', this.defaultAddr || '');
+            return this._submit();
+        },
+        _submit: execWithValid(function () {
             return new Promise((res, rej) => {
                 if (this.testAmount(this.withdrawAmount)) return;
                 const amount = this.isWithdrawAll
