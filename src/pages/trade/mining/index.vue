@@ -44,7 +44,7 @@
         <confirm v-show="isShowConfirm" class="small"
                  type="description" :title="$t('tradeMining.hintTitle')"
                  :close="closeConfirm" :closeIcon="true" :singleBtn="true"
-                 :leftBtnTxt="$t('btn.understand')" :leftBtnClick="closeConfirm">
+                 :leftBtnTxt="$t('tradeMining.more')" :leftBtnClick="goLink">
             {{ $t('tradeMining.comingHint') }}
             <span @click="goLink" class="link __pointer">{{ $t('tradeMining.more') }}</span>
         </confirm>
