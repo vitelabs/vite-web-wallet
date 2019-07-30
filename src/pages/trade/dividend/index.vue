@@ -50,16 +50,12 @@
         </div>
 
         <!--Temporary coming soon alert-->
-        <confirm v-show="isShowConfirm"
+        <confirm v-show="isShowConfirm" class="small"
                  type="description" :title="$t('tradeDividend.hintTitle')"
                  :close="closeConfirm" :closeIcon="true" :singleBtn="true"
                  :leftBtnTxt="$t('btn.understand')" :leftBtnClick="closeConfirm">
-
-            <div class="notice-content">
-                {{ $t('tradeDividend.comingHint') }}
-                <span @click="goLink" class="link __pointer">{{ $t('tradeDividend.more') }}</span>
-            </div>
-
+            {{ $t('tradeDividend.comingHint') }}
+            <span @click="goLink" class="link __pointer">{{ $t('tradeDividend.more') }}</span>
         </confirm>
     </div>
 </template>
@@ -369,9 +365,6 @@ export default {
             background: rgba(247,249,251,1);
         }
     }
-}
-.notice-content {
-    line-height: 18px;
 }
 .link {
     color: #007aff;
