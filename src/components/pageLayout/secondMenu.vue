@@ -139,7 +139,7 @@ export default {
         },
 
         _unlock() {
-            statistics.event('secondMenu', `${ this.$route.name }-unlock`, this.address || '');
+            statistics.event('secondMenu', `${ this.$route.name }-unlockAccount`, this.address || '');
             this.unlock();
         },
         unlock: execWithValid(function () {},
