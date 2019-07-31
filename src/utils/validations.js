@@ -7,9 +7,10 @@ const MaxDecimals = 8;
 const MinStakingAmount = 134;
 const minStakingUnit = BigNumber.toMin(MinStakingAmount, Vite_Token_Info.decimals);
 
-export function checkAmountFormat(amount = '', decimals = 8) {
+export function checkAmountFormat(amount = '', decimals = 8, integerBits) {
     const limit = decimals > MaxDecimals ? MaxDecimals : decimals;
     const decimalNum = +decimals ? new RegExp(`^\\d+[.]\\d{1,${ limit }}$`) : null;
+    const integerNum = +integerBits ? new RegExp(`^\\d{1,${ integerBits }}([.]\\d+)*$`) : null;
 
     const isInt = new RegExp('^(\\d+)$').test(amount);
     const isPoint = new RegExp('^\\d+[.]\\d+$').test(amount);
@@ -22,11 +23,15 @@ export function checkAmountFormat(amount = '', decimals = 8) {
         return 2;
     }
 
+    if (integerNum && !integerNum.test(amount)) {
+        return 3;
+    }
+
     return 0;
 }
 
 // errorMap = { overMax, lessMin, notEnough }
-export function verifyAmount({ decimals, formatDecimals = 8, balance, minAmount, maxAmount, errorMap }) {
+export function verifyAmount({ decimals, formatDecimals = 8, integerBits, balance, minAmount, maxAmount, errorMap }) {
     formatDecimals = getFormatDecimals(decimals, formatDecimals);
 
     return function (amount) {
@@ -34,7 +39,7 @@ export function verifyAmount({ decimals, formatDecimals = 8, balance, minAmount,
             return null;
         }
 
-        const checkMsg = checkAmountFormatMsg(amount, formatDecimals);
+        const checkMsg = checkAmountFormatMsg(amount, formatDecimals, integerBits);
         if (checkMsg) {
             return checkMsg;
         }
@@ -124,8 +129,8 @@ function verifyAmountLimit({ decimals, balance, minAmount, maxAmount, errorMap =
     return null;
 }
 
-function checkAmountFormatMsg(amount, formatDecimals) {
-    const checkResult = checkAmountFormat(amount, formatDecimals);
+function checkAmountFormatMsg(amount, formatDecimals, integerBits) {
+    const checkResult = checkAmountFormat(amount, formatDecimals, integerBits);
 
     if (checkResult !== 0) {
         return checkResult === 2
