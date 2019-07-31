@@ -8,20 +8,9 @@ const {
 
 
 export function addHdAccount({ id, lang, keystore }) {
-    const list = getAccList();
-
-    let i;
-    for (i = 0; i < list.length; i++) {
-        if (list[i].id === id) {
-            break;
-        }
-    }
-
-    if (i < list.length) {
-        list.splice(i, 1);
-    }
-
-    list.push({ id, lang, keystore });
+    let list = getAccList();
+    list = list.filter(v => v.id !== id);
+    list.unshift({ id, lang, keystore });
     setAccList(list);
 }
 
