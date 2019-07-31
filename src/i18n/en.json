@@ -839,7 +839,7 @@
             "operatorFee": "Zone Fees (Charged by Operator): {fee}",
             "vipFee": "VIP Discount: {fee}",
             "inviteFeeDiscount":"Referral Discount: {fee} off",
-            "feeRule":"(Base Transaction Fee - VIP discount + Zone Fees) * Referral Discount"
+            "feeRule":"(Base Transaction Fee - VIP discount + Zone Fees) * Referral Discount. (The adjustment and discount of fees will only affect new places orders, the former orders stay in old fees.)"
         },        
         "vipConfirm": {
             "cancelVip": "Cancel VIP",
