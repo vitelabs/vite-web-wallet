@@ -46,8 +46,6 @@ const actions = {
         });
     },
     exFetchVip({ commit, getters }) {
-        commit('setExchangeVip', false);
-
         const address = getters.activeAddr;
         address && $ViteJS.request('dexfund_isPledgeVip', address).then(data => {
             if (address !== getters.activeAddr) {
