@@ -5,7 +5,7 @@
 
             <div class="right-tab">
                 <span class="vip" :class="{ 'active': isVip }">VIP</span>
-                <span class="vip-operate __pointer" @click="showVipConfirm"
+                <span class="vip-operate __pointer" @click="_showVipConfirm"
                       :class="{ 'active': !isVip }">
                     {{ isVip ? $t('trade.limitPrice.cancelVip') : $t('trade.limitPrice.openVip') }}
                 </span>
@@ -43,6 +43,7 @@ import vipConfirm from './vipConfirm.vue';
 import { StatusMap } from 'wallet';
 import { execWithValid } from 'utils/execWithValid';
 import BigNumber from 'utils/bigNumber';
+import statistics from 'utils/statistics';
 
 export default {
     components: { logoutView, order, vipConfirm },
@@ -99,6 +100,9 @@ export default {
         },
         isLogin() {
             return this.$store.state.wallet.status === StatusMap.UNLOCK;
+        },
+        address() {
+            return this.$store.getters.activeAddr;
         }
     },
     methods: {
@@ -114,6 +118,10 @@ export default {
 
         hideVipConfirm() {
             this.isShowVipConfirm = false;
+        },
+        _showVipConfirm() {
+            statistics.event(this.$route.name, `switchVIP-${ this.isVip ? 'cancel' : 'open' }`, this.address || '');
+            this.showVipConfirm();
         },
         showVipConfirm: execWithValid(function () {
             this.isShowVipConfirm = true;
