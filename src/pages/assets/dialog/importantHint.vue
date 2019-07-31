@@ -10,14 +10,16 @@
                 {{ $t('assets.notice.contentOther', { gate: gateInfo.gateway }) }}
             </span>
             {{ $t('assets.notice.contentAgree', { gate: gateInfo.gateway }) }}
-            <span @click="goLink" class="link __pointer">{{ $t('assets.notice.agreement') }}</span>
+            <span @click="goLink(gateInfo.privacy)" class="link __pointer">{{ $t('assets.notice.agreement') }}</span>
             {{ $t('assets.notice.contentUngree', { gate: gateInfo.gateway }) }}
         </div>
 
         <div class="__hint">
             <span>
                 {{ $t('assets.notice.hint', { gate: gateInfo.gateway }) }}
-                {{ gateInfo.customer ? `——${gateInfo.customer}` : '' }}
+                <a v-show="gateInfo.customer">
+                    --<a class="link __pointer" @click="goLink(gateInfo.customer)">{{ gateInfo.customer }}</a>
+                </a>
             </span>
         </div>
 
@@ -72,10 +74,8 @@ export default {
         clear() {
             this.successCallback = null;
         },
-        goLink() {
-            if (this.gateInfo.privacy) {
-                openUrl(this.gateInfo.privacy);
-            }
+        goLink(url) {
+            url && openUrl(url);
         }
     }
 };
