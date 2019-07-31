@@ -533,7 +533,10 @@ export default {
         },
 
         validPrice() {
-            this.priceErr = verifyAmount({ formatDecimals: this.ttokenDigit })(this.price);
+            this.priceErr = verifyAmount({
+                formatDecimals: this.ttokenDigit,
+                integerBits: 12
+            })(this.price);
         },
         validAmount() {
             this.amountErr = verifyAmount({
