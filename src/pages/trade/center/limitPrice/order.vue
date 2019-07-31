@@ -665,7 +665,7 @@ $font-black: rgba(36, 39, 43, 0.8);
     }
     .real-price {
         font-family: $font-H;
-        max-width: 100px;
+        max-width: 150px;
         box-sizing: border-box;
         padding: 0 6px;
         font-size: 12px;
