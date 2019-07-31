@@ -48,7 +48,7 @@ export default {
                 return Default_Title;
             }
 
-            return `${ BigNumber.formatNum(this.closePrice, 2) } | ${ this.activeTxPair.symbol }`;
+            return `${ BigNumber.onlyFormat(this.closePrice) } | ${ this.activeTxPair.symbol }`;
         },
         rate() {
             const rateList = this.$store.state.exchangeRate.rateMap || {};
