@@ -8,6 +8,13 @@ block content
     .qrcode-container
         .qrcode-container__title {{$t('tokenCard.charge.codeTips',{tokenSymbol:token.tokenSymbol})}}
         qrcode(:text="addressQrcode" :options="qrOptions" class="qrcode-container__content")
+    .block__title(v-if="!!labelName&&!!labelValue")
+        span {{labelName}}
+        img.title_icon.copy.__pointer(src="~assets/imgs/copy_default.svg" @click="copyLabel")
+    .block__content(v-if="!!labelName") {{labelValue}}
+    .qrcode-container(v-if="!!labelName")
+        .qrcode-container__title {{$t('tokenCard.charge.labelCodeTips',{labelName})}}
+        qrcode(:text="labelValue" :options="qrOptions" class="qrcode-container__content")
     .charge-tips {{$t('tokenCard.charge.tips.0',{tokenSymbol:token.tokenSymbol})}}
         .dot
     .charge-tips {{$t('tokenCard.charge.tips.1',{tokenSymbol:token.tokenSymbol,min:minimumDepositAmount})}}
@@ -35,6 +42,8 @@ export default {
         getDepositInfo({ addr: this.defaultAddr, tokenId: this.token.tokenId }, this.token.gateInfo.url).then(res => {
             this.address = res.depositAddress;
             this.minimumDepositAmountMin = res.minimumDepositAmount;
+            this.labelName = res.labelName;
+            this.labelValue = res.label;
         }).catch(() => (this.addrErr = this.$t('tokenCard.charge.addrErr')));
     },
     data() {
@@ -44,7 +53,9 @@ export default {
             amount: 0,
             qrOptions: { size: 124, mode: modes.NORMAL },
             dTitle: this.$t('tokenCard.charge.title'),
-            addrErr: ''
+            addrErr: '',
+            labelName: '',
+            labelValue: ''
         };
     },
     computed: {
@@ -61,6 +72,10 @@ export default {
     methods: {
         copy() {
             copy(this.address);
+            this.$toast(this.$t('hint.copy'));
+        },
+        copyLabel() {
+            copy(this.labelValue);
             this.$toast(this.$t('hint.copy'));
         }
     }
