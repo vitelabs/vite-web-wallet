@@ -361,6 +361,7 @@
             "addrErr":"网关节点出错，请检查网关设置",
             "addressTitle": "转入地址",
             "codeTips": "请扫描二维码充值,请使用支持{tokenSymbol}的钱包转账",
+            "labelCodeTips":"请扫描 {labelName} 二维码",
             "tips": [
                 "跨链转入操作是将{tokenSymbol}跨链映射至VITE网络，转入后您依然可以转出",
                 "通过该存款地址只能发送{tokenSymbol},且金额不能低于{min}",

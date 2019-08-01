@@ -353,6 +353,7 @@
             "title": "Cross-Chain Receive",
             "addrErr": "Something went wrong with gateway node, please check your network settings",
             "addressTitle": "Recipient Address",
+            "labelCodeTips":"Please Scan the QRcode from {labelName}",
             "codeTips": "Scan QR code to deposit. Please transfer with the wallet that supports {tokenSymbol}",
             "tips": [
                 "Cross-Chain Receive operation will do {tokenSymbol} Cross-Chain mapping to VITE network, you can still transfer the assets after receiving them",
