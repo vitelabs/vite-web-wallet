@@ -50,6 +50,7 @@
 import FlatPickr from 'vue-flatpickr-component';
 import { tokenMap } from 'services/trade';
 import 'flatpickr/dist/flatpickr.css';
+import statistics from 'utils/statistics';
 
 export default {
     components: { FlatPickr },
@@ -66,6 +67,9 @@ export default {
     computed: {
         marketMap() {
             return this.$store.state.exchangeMarket.marketMap;
+        },
+        activeAddr() {
+            return this.$store.getters.activeAddr;
         }
     },
     watch: {
@@ -75,6 +79,8 @@ export default {
     },
     methods: {
         reset() {
+            statistics.event(this.$route.name, 'reset', this.activeAddr || '');
+
             this.fromDate = '';
             this.toDate = '';
             this.tradeType = '';
@@ -83,6 +89,8 @@ export default {
             this.$emit('submit', {});
         },
         submit() {
+            statistics.event(this.$route.name, 'search', this.activeAddr || '');
+
             const fdate = this.fromDate ? new Date(this.fromDate).getTime() / 1000 : '';
             const tdate = this.toDate ? new Date(this.toDate).getTime() / 1000 : '';
 

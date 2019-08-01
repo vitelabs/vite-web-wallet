@@ -17,7 +17,7 @@
 
                 <span v-for="(v, i) in voteList" :key="i"
                       :slot="`${i}operateKeyBefore`" :class="cache ? 'unclickable' : 'clickable'">
-                    <span class="operate-btn" @click="cancelVote(v)">{{ v.operate }}</span>
+                    <span class="operate-btn" @click="_cancelVote(v)">{{ v.operate }}</span>
                     <span class="operate-btn" @click="openReward(v)">{{ $t('walletVote.toReward') }}</span>
                 </span>
             </wallet-table>
@@ -37,7 +37,7 @@
 
                 <span v-for="(v, i) in nodeList" :key="i"
                       :slot="`${i}operateKeyBefore`"
-                      @click="vote(v)">
+                      @click="_vote(v)">
                     {{ v.operate }}
                 </span>
             </wallet-table>
@@ -59,6 +59,7 @@ import $ViteJS from 'utils/viteClient';
 import sendTx from 'utils/sendTx';
 import { execWithValid } from 'utils/execWithValid';
 import openUrl from 'utils/openUrl';
+import statistics from 'utils/statistics';
 
 const Vite_Token_Info = constant.Vite_Token_Info;
 
@@ -207,6 +208,9 @@ export default {
         },
         activeAcc() {
             return this.$store.state.wallet.activeAcc;
+        },
+        activeAddr() {
+            return this.$store.getters.activeAddr;
         }
     },
     watch: {
@@ -276,6 +280,10 @@ export default {
             const activeAccount = this.$store.state.wallet.activeAcc;
             openUrl(`https://reward.vite.net?language=${ locale }&address=${ activeAccount ? activeAccount.address : '' }`);
         },
+        _cancelVote(v) {
+            statistics.event(this.$route.name, 'vote_revoke', this.activeAddr || '');
+            this.cancelVote(v);
+        },
         cancelVote: execWithValid(function (v) {
             if (this.cache) {
                 return;
@@ -305,6 +313,10 @@ export default {
                 submit: sendCancel
             }, true);
         }),
+        _vote(v) {
+            statistics.event(this.$route.name, 'vote_to', this.activeAddr || '');
+            this.vote(v);
+        },
         vote: execWithValid(function (v) {
             const successVote = () => {
                 const t = Object.assign({}, v);

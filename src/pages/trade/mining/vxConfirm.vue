@@ -34,8 +34,9 @@
 <script>
 import confirm from 'components/confirm/confirm.vue';
 import viteInput from 'components/viteInput';
-import bigNumber from 'utils/bigNumber';
 import sendTx from 'utils/sendTx';
+import bigNumber from 'utils/bigNumber';
+import statistics from 'utils/statistics';
 import { verifyAmount, verifyWithdrawAmount } from 'utils/validations';
 
 const minLimit = 134;
@@ -140,6 +141,8 @@ export default {
             this.close && this.close();
         },
         staking() {
+            statistics.event(this.$route.name, this.actionType === 1 ? 'addQuota-submit' : 'withdrawQuota-submit', this.accountAddr || '');
+
             const amount = bigNumber.toMin(this.amount, this.viteTokenInfo.decimals);
 
             sendTx({
