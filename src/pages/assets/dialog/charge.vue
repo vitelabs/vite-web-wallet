@@ -42,8 +42,8 @@ export default {
         getDepositInfo({ addr: this.defaultAddr, tokenId: this.token.tokenId }, this.token.gateInfo.url).then(res => {
             this.address = res.depositAddress;
             this.minimumDepositAmountMin = res.minimumDepositAmount;
-            this.labelName=res.labelName;
-            this.labelValue=res.label;
+            this.labelName = res.labelName;
+            this.labelValue = res.label;
         }).catch(() => (this.addrErr = this.$t('tokenCard.charge.addrErr')));
     },
     data() {
@@ -54,8 +54,8 @@ export default {
             qrOptions: { size: 124, mode: modes.NORMAL },
             dTitle: this.$t('tokenCard.charge.title'),
             addrErr: '',
-            labelName:'',
-            labelValue:''
+            labelName: '',
+            labelValue: ''
         };
     },
     computed: {
@@ -74,7 +74,7 @@ export default {
             copy(this.address);
             this.$toast(this.$t('hint.copy'));
         },
-        copyLabel(){
+        copyLabel() {
             copy(this.labelValue);
             this.$toast(this.$t('hint.copy'));
         }
