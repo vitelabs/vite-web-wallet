@@ -45,15 +45,16 @@
 
 <script>
 import { constant } from '@vite/vitejs';
+import { StatusMap } from 'wallet';
 import pagination from 'components/pagination.vue';
 import walletTable from 'components/table/index.vue';
 import date from 'utils/date.js';
+import openUrl from 'utils/openUrl';
 import { timer } from 'utils/asyncFlow';
 import BigNumber from 'utils/bigNumber';
+import statistics from 'utils/statistics';
 import ellipsisAddr from 'utils/ellipsisAddr.js';
-import { StatusMap } from 'wallet';
 import { execWithValid } from 'utils/execWithValid';
-import openUrl from 'utils/openUrl';
 
 const Vite_Token_Info = constant.Vite_Token_Info;
 let pledgeListInst;
@@ -162,6 +163,8 @@ export default {
                 }
                 return;
             }
+
+            statistics.event(this.$route.name, 'other-withdrawQuota', this.address || '');
             this.showCancel(item, index);
             return;
         },

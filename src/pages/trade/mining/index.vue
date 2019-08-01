@@ -15,10 +15,10 @@
             <section-title :title="$t('tradeMining.quotaTitle')" :amount="`${stakeTotal} VX`"></section-title>
             <div class="content">
                 <div class="quota-detail">
-                    <div v-if="!stakingObj" @click="showVxConfirm(1)"
+                    <div v-if="!stakingObj" @click="_showVxConfirm(1)"
                          class="no-detail __pointer">{{ $t('tradeMining.addQuota') }}</div>
                     <staking-detail v-if="stakingObj"
-                                    :stakingObj="stakingObj" :showVxConfirm="showVxConfirm"></staking-detail>
+                                    :stakingObj="stakingObj" :showVxConfirm="_showVxConfirm"></staking-detail>
                 </div>
                 <wallet-table class="mint-trade-table tb"
                               :headList="pledgeHeadList" :contentList="stakeContent" >
@@ -54,6 +54,7 @@ import { timer } from 'utils/asyncFlow';
 import openUrl from 'utils/openUrl';
 import date from 'utils/date';
 import $ViteJS from 'utils/viteClient';
+import statistics from 'utils/statistics';
 import { execWithValid } from 'utils/execWithValid';
 import sectionTitle from '../components/sectionTitle.vue';
 import vxConfirm from './vxConfirm.vue';
@@ -189,6 +190,10 @@ export default {
         hideVxConfirm() {
             this.isShowVxConfirm = false;
             this.actionType = null;
+        },
+        _showVxConfirm(actionType) {
+            statistics.event(this.$route.name, actionType === 1 ? 'addQuota' : 'withdrawQuota', this.address || '');
+            this.showVxConfirm(actionType);
         },
         showVxConfirm: execWithValid(function (actionType) {
             this.isShowVxConfirm = true;
