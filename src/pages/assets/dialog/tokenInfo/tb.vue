@@ -121,9 +121,9 @@ export default {
             return this.$store.getters.activeAddr;
         },
         outChain() {
-            const tokenToGate=this.$store.getters.mapToken2Gate;
-            const token=this.token;
-            return tokenToGate[token.tokenId]?tokenToGate[token.tokenId].mappedNet:token.tokenSymbol
+            const tokenToGate = this.$store.getters.mapToken2Gate;
+            const token = this.token;
+            return tokenToGate[token.tokenId] ? tokenToGate[token.tokenId].mappedNet : token.tokenSymbol;
         }
     },
     methods: {
