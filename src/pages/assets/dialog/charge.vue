@@ -11,7 +11,7 @@ block content
     .block__title(v-if="!!labelName&&!!labelValue")
         span {{labelName}}
         img.title_icon.copy.__pointer(src="~assets/imgs/copy_default.svg" @click="copyLabel")
-    .block__content(:class="{err:addrErr}" v-if="!!labelName") {{addrErr||address}}
+    .block__content(v-if="!!labelName") {{labelValue}}
     .qrcode-container(v-if="!!labelName")
         .qrcode-container__title {{$t('tokenCard.charge.labelCodeTips',{labelName})}}
         qrcode(:text="labelValue" :options="qrOptions" class="qrcode-container__content")
