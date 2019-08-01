@@ -120,6 +120,10 @@ export default {
                 data: {
                     amount: '0',
                     actionType
+                },
+                vbExtends: {
+                    'type': 'dexFundPledgeForVip',
+                    'amount': '10,000 VITE'
                 }
             }).then(() => {
                 this.isLoading = false;
