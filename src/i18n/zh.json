@@ -848,7 +848,7 @@
             "operatorFee": "运营商收取费率：{fee}",
             "vipFee": "VIP特权抵扣：{fee}",
             "inviteFeeDiscount":"邀请码折扣：{fee} off",
-            "feeRule":"(基础费率-VIP抵扣+运营商费率)*邀请折扣"
+            "feeRule":"(基础费率-VIP抵扣+运营商费率)*邀请折扣。（费率折扣及费率调整只影响新订单，此前挂单依旧执行旧费率）"
         },
         "vipConfirm": {
             "cancelVip": "取消VIP",
@@ -1041,7 +1041,7 @@
         "amount": "分红金额",
         "price": "分红总估值",
         "hintTitle": "重要通知",
-        "comingHint": "VX挖矿分红功能即将开启，敬请期待。系统每天自动将分红池1%的VITE、BTC、ETH、USDT等分红给VX持有者。初始分红池的资金为 0。分红池中包含交易所基础手续费，5000VITE上币费以及生成邀请码的1000VITE。持有VX的数量大于等于10VX可持续获得手续费分红。",
+        "comingHint": "VX挖矿分红功能即将开启，敬请期待。系统每天自动将分红池1%的VITE、BTC、ETH、USDT等分红给VX持有者。初始分红池的资金为0。分红池中包含交易所基础手续费，5000VITE上币费以及生成邀请码的1000VITE。持有VX的数量大于等于10VX可持续获得手续费分红。",
         "more": "了解更多VX分红规则"
     },
     "tradeOperator": {
