@@ -131,6 +131,7 @@ export function getDepositRecords({ tokenId, walletAddress, pageNum, pageSize },
 }
 
 class GateWays {
+    public data:any;
     constructor() {
         if (!Array.isArray(addrSpace.getItem(STORAGEKEY))) {
             addrSpace.setItem(STORAGEKEY, []);
