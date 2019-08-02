@@ -81,20 +81,27 @@ export const withdraw = async ({
     gateAddr,
     tokenId,
     type,
-    fee
+    fee,
+    labelValue=''
 }) => {
-    // if (type !== 0 || type !== 1) {
-    //     throw new Error('unexcepted address type');
-    // }
-    type = 0; // not used at this moment
+    if (type !== 0 || type !== 1) {
+        throw new Error('unexcepted address type');
+    }
     if (!withdrawAddress) {
         throw new Error('lack withdrawAddress');
     }
-    const data = Buffer.concat([
+    const data =type===0? Buffer.concat([
         Buffer.from(utils.hexToBytes('0bc3')),
         Buffer.from([type]),
         Buffer.from(withdrawAddress)
-    ]).toString('base64');
+    ]).toString('base64'):Buffer.concat([
+        Buffer.from(utils.hexToBytes('0bc3')),
+        Buffer.from([type]),
+        Buffer.from([Buffer.from(withdrawAddress).length]),
+        Buffer.from(withdrawAddress),
+        Buffer.from([Buffer.from(labelValue).length]),
+        Buffer.from(labelValue)
+    ]);
 
     return await sendTx({
         methodName: 'asyncSendTx',
