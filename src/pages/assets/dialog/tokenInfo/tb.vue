@@ -35,13 +35,7 @@
             <div class="__tb_row __tb_content_row" v-for="item in tbData" :key="item.inTxHash">
                 <div class="__tb_cell">{{ item.dateTime | dateShow }}</div>
                 <div class="__tb_cell">{{ item.amount | toBasic(token.decimals) }}</div>
-                <div class="__tb_cell">
-                    {{
-                        $t(`tokenCard.${type}Record.statusMap.${item.state}`, {
-                            outChain
-                        })
-                    }}
-                </div>
+                <div class="__tb_cell">{{ getStateStr(item) }}</div>
                 <div class="__tb_cell click-able"
                      @click="() => gotoInHash(item.inTxHash)">
                     {{ item.inTxHash| hashShortify }}
@@ -127,6 +121,14 @@ export default {
         }
     },
     methods: {
+        getStateStr(item) {
+            return this.$t(`tokenCard.${ this.type }Record.statusMap.${ item.state }`, {
+                outChain: this.outChain,
+                confirms: item.inTxConfirmedCount && item.inTxConfirmationCount
+                    ? `(${ item.inTxConfirmedCount }/${ item.inTxConfirmationCount })`
+                    : ''
+            });
+        },
         gotoInHash(hash) {
             if (!hash) {
                 return;

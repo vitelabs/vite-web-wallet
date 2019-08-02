@@ -62,7 +62,8 @@
             </div>
             <div class="token-row">
                 <span class="token-title">{{ $t('trade.head.overview') }} :</span>
-                {{ tokenDetail.overview && tokenDetail.overview[$i18n.locale] ? tokenDetail.overview[$i18n.locale] : '--' }}
+                <!-- {{ tokenDetail.overview && tokenDetail.overview[$i18n.locale] ? tokenDetail.overview[$i18n.locale] : '--' }} -->
+                {{ tokenDetail.overview ? tokenDetail.overview.en || '--' : '--'}}
             </div>
         </div>
     </div>
@@ -136,8 +137,8 @@ export default {
 
             detail = Object.assign({}, detail);
             detail.publisher = ellipsisAddr(detail.publisher);
-            detail.tokenType = detail.tokenType === 0 ? this.$t('trade.head.tokenType0')
-                : detail.tokenType === 1 ? this.$t('trade.head.tokenType1') : '';
+            detail.tokenType = detail.reissue === 0 ? this.$t('trade.head.tokenType0')
+                : detail.reissue === 1 ? this.$t('trade.head.tokenType1') : '';
             detail.publisherDate = detail.publisherDate ? date(detail.publisherDate * 1000, 'zh') : '';
             detail.totalSupply = detail.totalSupply ? BigNumber.toBasic(detail.totalSupply, detail.tokenDecimals || 0) : '';
 
@@ -244,6 +245,7 @@ export default {
         @include font-family-normal();
         font-weight: 400;
         font-size: 11px;
+        width: 270px;
 
         &.right {
             left: 105px;
@@ -262,6 +264,8 @@ export default {
         .token-row {
             line-height: 23px;
             color: rgba(29, 32, 36, 0.7);
+            word-break: break-word;
+            white-space: normal;
 
             .active {
                 color: rgba(0, 122, 255, 1);
