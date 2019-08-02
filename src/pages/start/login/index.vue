@@ -55,9 +55,8 @@
                 </div>
             </div>
             <div v-if="tabName === 'existingAcc'" class="existing-acc">
-                <div class="bottom __btn __pointer">
+                <div class="bottom __btn __pointer" v-click-outside.includeChildrens="hideAccountList">
                     <div
-                        v-click-outside="hideAccountList"
                         @click="toggleAccountList"
                     >
                         <div
