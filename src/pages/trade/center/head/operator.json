@@ -11,5 +11,25 @@
         "en": {
             "introduction": "Vite Labs is a technology provider as well as the first operator of ViteX. Vite Labs will issue common cross-chain tokens and open corresponding trading pairs. Vite Labs will weaken its role as an operator after more participants become operators on ViteX platform."
         }
+    },
+    {
+        "icon": "Vgate",
+        "address": "vite_13086aa0dae5bad9deaec141885f91487d1559052a76b7cb3c",
+        "txPairs": ["TERA-000_BTC-000", "TERA-000_VITE"],
+        "name": "Vgate",
+        "introduction": "As an operator of ViteX, VGATE is responsible for listing coins, deposit and withdrawal, cryptocurrency marketing and promoting and other services within VGATE's own marketing area. VGATE has complete capabilities as an operator, namely the capabilities of operating VGATE and its cryptos. In addition to helping users list cryptos, deposit and withdraw, and adjust transaction fees, VGATE can also mint coins, help other operators mint coins and run their gateways.",
+        "en": {
+            "introduction": "As an operator of ViteX, VGATE is responsible for listing coins, deposit and withdrawal, cryptocurrency marketing and promoting and other services within VGATE's own marketing area. VGATE has complete capabilities as an operator, namely the capabilities of operating VGATE and its cryptos. In addition to helping users list cryptos, deposit and withdraw, and adjust transaction fees, VGATE can also mint coins, help other operators mint coins and run their gateways."
+        }
+    },
+    {
+        "icon": "XS_Fund",
+        "address": "vite_79d7b54aa59c7210ccab1035f690573b069ebcab25dd5510e8",
+        "txPairs": ["VXS-000_VITE"],
+        "name": "鑫盛资本（XS_Fund）",
+        "introduction": "鑫盛资本于2018年4月结识vite项目，先后参与了私募、社区建设、超级节点、DAPP开发等等，一直与团队保持良好的沟通及合作，在vite生态中始终保持良好的信誉。鑫盛资本网关项目于今年6月正式启动，计划7月底同vitex同步上线，未来我们将继续支持vite生态，争取与团队节奏保持高度一直。不忘初心，方得始终！",
+        "en": {
+            "introduction": "XS_Fund met VITE team in April 2018, and was involved in Vite’s private sale, community building, SBP, DAPP development and so on. XS_Fund keeps fine communication and cooperation with VITE, endeavors to keep well fame in VITE ecosystem. XS_Fund started gateway project in June, 2018 and it was expected to be online in synchronization with ViteX by end of July. In the future, XS_Fund will continue to support Vite ecosystem, strive for a high level of team rhythm. Never forget why you started, and your mission can be accomplished."
+        }
     }
 ]
