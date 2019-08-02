@@ -72,7 +72,7 @@ export default {
         };
     },
     beforeMount() {
-        window.ffff=this;
+        window.ffff = this;
         Promise.all([ getDepositInfo({ tokenId: this.token.tokenId, addr: this.defaultAddr }, this.token.gateInfo.url).then(res => {
             this.labelName = res.labelName;
         }),
@@ -139,7 +139,7 @@ export default {
                 lessMin: this.$t('tokenCard.withdraw.balanceErrMap.lessMin', { min: `${ bigNumber.toBasic(this.info.minimumWithdrawAmount, this.token.decimals) } ${ this.token.tokenSymbol }` })
             };
             return getValidBalance({
-                balance: bigNumber.minus(this.token.totalAmount, this.feeMin),
+                balance: bigNumber.minus(this.token.totalAmount||0, this.feeMin),
                 decimals: this.token.decimals,
                 minNum: this.info.minimumWithdrawAmount,
                 maxNum: this.info.maximumWithdrawAmount,
