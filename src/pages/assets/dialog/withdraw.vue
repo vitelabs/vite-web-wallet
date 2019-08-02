@@ -74,8 +74,8 @@ export default {
         debugger;
         getDepositInfo({ tokenId: this.token.tokenId, addr: this.defaultAddr }).then(res => {
             this.labelName = res.labelName;
-        });
-        getMetaInfo({ tokenId: this.token.tokenId }).then(res => {
+        }, this.token.gateInfo.url);
+        getMetaInfo({ tokenId: this.token.tokenId }, this.token.gateInfo.url).then(res => {
             this.type = res.type;
         });
         getWithdrawInfo({ walletAddress: this.defaultAddr, tokenId: this.token.tokenId }, this.token.gateInfo.url).then(data => (this.info = data));
