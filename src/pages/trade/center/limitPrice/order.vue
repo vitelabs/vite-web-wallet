@@ -224,7 +224,8 @@ export default {
                 return `${ pre }0`;
             }
 
-            return pre + BigNumber.multi(this.price || 0, this.rate || 0, 2);
+            const realPrice = BigNumber.multi(this.price || 0, this.rate || 0, 6);
+            return BigNumber.onlyFormat(realPrice, 2);
         },
         rate() {
             const rateList = this.$store.state.exchangeRate.rateMap || {};

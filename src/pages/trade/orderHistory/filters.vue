@@ -64,6 +64,9 @@ export default {
             ftokenMap: []
         };
     },
+    mounted() {
+        this.ttoken = this.marketMap[0].symbol;
+    },
     computed: {
         marketMap() {
             return this.$store.state.exchangeMarket.marketMap;

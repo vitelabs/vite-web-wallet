@@ -149,12 +149,14 @@ export default {
                 return txPair.tradeTokenSymbol;
             }
 
-            const price = BigNumber.multi(txPair.closePrice || 0, rate || 0, 2);
-            if (!+price) {
+            const _price = BigNumber.multi(txPair.closePrice || 0, rate || 0, 6);
+            if (!+_price) {
                 return txPair.tradeTokenSymbol;
             }
 
             const pre = this.$store.state.env.currency === 'cny' ? '≈¥' : '≈$';
+            const price = BigNumber.onlyFormat(_price, 2);
+
             return `${ txPair.tradeTokenSymbol }  ${ pre }${ price }`;
         },
         getRate(tokenId) {
