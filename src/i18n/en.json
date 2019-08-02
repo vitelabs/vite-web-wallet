@@ -322,7 +322,7 @@
             "tabName": "Deposit History",
             "heads": ["Time", "Amount", "Status", "{outChain} Chain Hash","VITE Chain Hash","Fees"],
             "statusMap": {
-                "OPPOSITE_PROCESSING": "{outChain} awaits to confirm",
+                "OPPOSITE_PROCESSING": "{outChain} awaits to confirm{confirms}",
                 "OPPOSITE_CONFIRMED_FAIL":"{outChain} processing failed",
                 "OPPOSITE_CONFIRMED": "Gateway Received",
                 "TOT_CONFIRMED": "Completed",
@@ -334,7 +334,7 @@
             "tabName": "Transfer History",
             "heads": ["Time", "Amount", "Status", "VITE Chain Hash", "{outChain} Chain Hash","Fees"],
             "statusMap":{
-                "TOT_PROCESSING": "VITE Chain Unconfirmed",
+                "TOT_PROCESSING": "VITE Chain Unconfirmed{confirms}",
                 "TOT_CONFIRMED": "VITE Confirmed",
                 "TOT_EXCEED_THE_LIMIT":"Transfer amount exceeds the limit",
                 "OPPOSITE_PROCESSING": "{outChain} awaits to confirm",
