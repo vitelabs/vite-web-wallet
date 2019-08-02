@@ -82,7 +82,8 @@ export const withdraw = async ({
     tokenId,
     type,
     fee,
-    labelValue=''
+    labelValue='',
+    labelName
 }) => {
     if (type !== 0 && type !== 1) {
         throw new Error('unexcepted address type');
@@ -115,7 +116,15 @@ export const withdraw = async ({
             pow: true,
             powConfig: { isShowCancel: true }
         },
-        vbExtends: { type: 'crossChainTransfer', fee }
+        vbExtends: { type: 'crossChainTransfer', fee },
+        description:type===1?{
+            "labelTitle":{
+                "name":{
+                    "base":labelName,
+                    "zh":labelName
+                }
+            } 
+        }:undefined
     });
 };
 

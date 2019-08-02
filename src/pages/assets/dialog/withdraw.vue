@@ -159,7 +159,7 @@ export default {
         },
         inspector: execWithValid(function () {
             return new Promise((res, rej) => {
-                withdraw({ fee: this.feeMin, amount: bigNumber.plus(this.withdrawAmountMin || bigNumber.toMin(this.withdrawAmount, this.token.decimals), this.feeMin, 0), withdrawAddress: this.withdrawAddr, gateAddr: this.info.gatewayAddress, tokenId: this.token.tokenId, labelValue: this.labelValue, type: this.type }, this.token.gateInfo.url)
+                withdraw({ fee: this.feeMin, amount: bigNumber.plus(this.withdrawAmountMin || bigNumber.toMin(this.withdrawAmount, this.token.decimals), this.feeMin, 0), withdrawAddress: this.withdrawAddr, gateAddr: this.info.gatewayAddress, tokenId: this.token.tokenId, labelValue: this.labelValue, type: this.type ,labelName:this.labelName}, this.token.gateInfo.url)
                     .then(d => {
                         this.$toast(this.$t('tokenCard.withdraw.successTips'));
                         res(d);
