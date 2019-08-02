@@ -84,7 +84,7 @@ export const withdraw = async ({
     fee,
     labelValue=''
 }) => {
-    if (type !== 0 || type !== 1) {
+    if (type !== 0 && type !== 1) {
         throw new Error('unexcepted address type');
     }
     if (!withdrawAddress) {
@@ -101,7 +101,7 @@ export const withdraw = async ({
         Buffer.from(withdrawAddress),
         Buffer.from([Buffer.from(labelValue).length]),
         Buffer.from(labelValue)
-    ]);
+    ]).toString('base64');
 
     return await sendTx({
         methodName: 'asyncSendTx',
