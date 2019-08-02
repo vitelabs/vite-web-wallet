@@ -326,7 +326,7 @@
             "nodeDescStr": "当前功能仅针对跨链代币使用，非跨链代币请勿使用，同时请勿轻信他人的网关链接，造成的资产损失本站概不负责。如需使用则将正确的网关链接填写在下方，保存后即可在当前地址生效。"
         },
         "depositRecord": {
-            "tabName": "充值记录",
+            "tabName": "转入记录",
             "heads": ["时间", "金额", "状态", "{outChain}链Hash","VITE链Hash","手续费"],
             "statusMap": {
                 "OPPOSITE_PROCESSING": "{outChain}链待确认{confirms}",
@@ -338,7 +338,7 @@
             }
         },
         "withdrawRecord": {
-            "tabName": "提现记录",
+            "tabName": "转出记录",
             "heads": ["时间", "金额", "状态", "VITE链Hash", "{outChain}链Hash","手续费"],
             "statusMap": {
                 "TOT_PROCESSING": "VITE链待确认{confirms}",
