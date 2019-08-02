@@ -42,6 +42,10 @@ export default {
             bind(el, binding, vnode) {
                 vnodes.set(vnode, binding);
             },
+            update(el, binding, vnode, oldVnode) {
+                vnodes.delete(oldVnode);
+                vnodes.set(vnode, binding);
+            },
             unbind(el, binding, vnode) {
                 vnodes.delete(vnode);
             }
