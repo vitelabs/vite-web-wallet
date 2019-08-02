@@ -68,8 +68,12 @@ export default {
     },
     watch: {
         activeTxPair(val, oldVal) {
+            if (oldVal && oldVal.symbol === val.symbol) {
+                return;
+            }
+
             if (this.operatorInfo
-                || (oldVal && oldVal.symbol === val.symbol)) {
+                && [ 'Vite Labs', 'Vgate' ].indexOf(this.operatorInfo.name) !== -1) {
                 return;
             }
 
@@ -107,13 +111,10 @@ export default {
     display: flex;
     margin-top: 2px;
     .gate-img {
-        width: 10px;
-        height: 10px;
-        padding: 2px;
+        width: 14px;
+        height: 14px;
         margin-right: 2px;
-        margin-bottom: -4px;
-        border-radius: 2px;
-        border: 1px solid rgba(212,222,231,1);
+        margin-bottom: -2px;
     }
 }
 
@@ -122,13 +123,10 @@ export default {
     background: rgba(0,122,255,0.05);
     border-bottom: 1px solid rgba(212,222,231,1);
     img {
-        width: 28px;
-        height: 28px;
-        padding: 6px;
-        border-radius: 2px;
-        border: 1px solid rgba(212,222,231,1);
+        width: 40px;
+        height: 40px;
         margin-right: 12px;
-        margin-bottom: -4px;
+        margin-bottom: -3px;
     }
     .title-info {
         display: inline-block;

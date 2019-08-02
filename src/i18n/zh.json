@@ -366,7 +366,7 @@
             "tips": [
                 "跨链转入操作是将{tokenSymbol}跨链映射至VITE网络，转入后您依然可以转出",
                 "通过该存款地址只能发送{tokenSymbol},且金额不能低于{min}",
-                "交易确认之后，预计5分钟后到账，请耐心等待"
+                "{confirmationCount}个网络确认之后到账，请耐心等待"
             ]
         },
         "withdraw": {
