@@ -85,6 +85,7 @@ export default {
                 tooltip: {
                     confine: true,
                     formatter: params => {
+                        // console.log(params);
                         let res = `${ this.$t('trade.priceTitle', { price: this.activeTxPair ? this.activeTxPair.quoteTokenSymbol : '' }) }: ${ params[0].name }`;
                         res += `<br/>${ params[0].seriesName } : ${ params[0].value }`;
 

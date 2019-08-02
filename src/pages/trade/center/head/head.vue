@@ -82,23 +82,7 @@ export default {
             return '';
         },
         realPrice() {
-            const pre = this.$store.state.env.currency === 'cny' ? '¥' : '$';
-
-            if (!this.activeTxPair) {
-                return `${ pre }0`;
-            }
-
-            return pre + BigNumber.multi(this.activeTxPair.closePrice || 0, this.rate || 0, 2);
-        },
-        rate() {
-            const rateList = this.$store.state.exchangeRate.rateMap || {};
-            const tokenId = this.activeTxPair && this.activeTxPair.quoteToken ? this.activeTxPair.quoteToken : null;
-            const coin = this.$store.state.env.currency;
-
-            if (!tokenId || !rateList[tokenId]) {
-                return null;
-            }
-            return rateList[tokenId][`${ coin }Rate`] || null;
+            return this.$store.state.exchangeActiveTxPair.realClosePrice;
         }
     },
     methods: {
