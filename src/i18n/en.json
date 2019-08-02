@@ -353,7 +353,7 @@
             "title": "Cross-Chain Receive",
             "addrErr": "Something went wrong with gateway node, please check your network settings",
             "addressTitle": "Recipient Address",
-            "labelTips":"(请将此 {labelName} 与充值地址同时使用，否则币会丢失)",
+            "labelTips":"(Please use this '{labelName}' with your receive address, otherwise your assets will lose",
             "labelCodeTips":"Please Scan the QRcode from {labelName}",
             "codeTips": "Scan QR code to deposit. Please transfer with the wallet that supports {tokenSymbol}",
             "tips": [
