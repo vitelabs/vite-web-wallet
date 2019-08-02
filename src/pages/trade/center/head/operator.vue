@@ -73,6 +73,10 @@ export default {
                 return;
             }
 
+            if ([ 'Vite Labs', 'Vgate' ].indexOf(this.operatorInfo.name) !== -1) {
+                return;
+            }
+
             const tradeTokenSymbol = this.activeTxPair.tradeTokenSymbol.split('-')[0];
             const quoteTokenSymbol = this.activeTxPair.quoteTokenSymbol.split('-')[0];
 
