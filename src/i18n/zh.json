@@ -360,6 +360,7 @@
             "title": "跨链转入",
             "addrErr":"网关节点出错，请检查网关设置",
             "addressTitle": "转入地址",
+            "labelTips":"(请将此 {labelName} 与充值地址同时使用，否则币会丢失)",
             "codeTips": "请扫描二维码充值,请使用支持{tokenSymbol}的钱包转账",
             "labelCodeTips":"请扫描 {labelName} 二维码",
             "tips": [
