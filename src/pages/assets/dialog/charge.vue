@@ -9,7 +9,7 @@ block content
         .qrcode-container__title {{$t('tokenCard.charge.codeTips',{tokenSymbol:token.tokenSymbol})}}
         qrcode(:text="addressQrcode" :options="qrOptions" class="qrcode-container__content")
     .block__title(v-if="!!labelName&&!!labelValue")
-        span {{labelName}}  
+        span {{labelName}}
             span.red {{$t('tokenCard.charge.labelTips',{labelName})}}
         img.title_icon.copy.__pointer(src="~assets/imgs/copy_default.svg" @click="copyLabel")
     .block__content(v-if="!!labelName") {{labelValue}}
@@ -25,11 +25,11 @@ block content
 </template>
 
 <script>
-import qrcode from "components/qrcode";
-import copy from "utils/copy";
-import { modes } from "qrcode.es";
-import { getDepositInfo } from "services/gate";
-import bigNumber from "utils/bigNumber";
+import qrcode from 'components/qrcode';
+import copy from 'utils/copy';
+import { modes } from 'qrcode.es';
+import { getDepositInfo } from 'services/gate';
+import bigNumber from 'utils/bigNumber';
 
 export default {
     components: { qrcode },
@@ -40,36 +40,32 @@ export default {
         }
     },
     beforeMount() {
-        getDepositInfo(
-            { addr: this.defaultAddr, tokenId: this.token.tokenId },
-            this.token.gateInfo.url
-        )
+        getDepositInfo({ addr: this.defaultAddr, tokenId: this.token.tokenId },
+            this.token.gateInfo.url)
             .then(res => {
                 this.address = res.depositAddress;
                 this.minimumDepositAmountMin = res.minimumDepositAmount;
                 this.labelName = res.labelName;
                 this.labelValue = res.label;
             })
-            .catch(() => (this.addrErr = this.$t("tokenCard.charge.addrErr")));
+            .catch(() => (this.addrErr = this.$t('tokenCard.charge.addrErr')));
     },
     data() {
         return {
-            minimumDepositAmountMin: "",
-            address: "",
+            minimumDepositAmountMin: '',
+            address: '',
             amount: 0,
             qrOptions: { size: 124, mode: modes.NORMAL },
-            dTitle: this.$t("tokenCard.charge.title"),
-            addrErr: "",
-            labelName: "",
-            labelValue: ""
+            dTitle: this.$t('tokenCard.charge.title'),
+            addrErr: '',
+            labelName: '',
+            labelValue: ''
         };
     },
     computed: {
         minimumDepositAmount() {
-            return bigNumber.toBasic(
-                this.minimumDepositAmountMin,
-                this.token.decimals
-            );
+            return bigNumber.toBasic(this.minimumDepositAmountMin,
+                this.token.decimals);
         },
         addressQrcode() {
             return this.address;
@@ -81,11 +77,11 @@ export default {
     methods: {
         copy() {
             copy(this.address);
-            this.$toast(this.$t("hint.copy"));
+            this.$toast(this.$t('hint.copy'));
         },
         copyLabel() {
             copy(this.labelValue);
-            this.$toast(this.$t("hint.copy"));
+            this.$toast(this.$t('hint.copy'));
         }
     }
 };
