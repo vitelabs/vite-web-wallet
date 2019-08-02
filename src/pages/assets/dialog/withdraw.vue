@@ -78,7 +78,7 @@ export default {
         getMetaInfo({ tokenId: this.token.tokenId }, this.token.gateInfo.url).then(res => {
             this.type = res.type;
         }),
-        getWithdrawInfo({ walletAddress: this.defaultAddr, tokenId: this.token.tokenId }, this.token.gateInfo.url).then(data => (this.info = data)) ]).then(() =>( this.loading = false));
+        getWithdrawInfo({ walletAddress: this.defaultAddr, tokenId: this.token.tokenId }, this.token.gateInfo.url).then(data => (this.info = data)) ]).then(() => (this.loading = false));
     },
     computed: {
         fee() {
