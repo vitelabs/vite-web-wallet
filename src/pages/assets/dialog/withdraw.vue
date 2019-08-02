@@ -67,17 +67,18 @@ export default {
             failTips: '',
             isFeeTipsShow: false,
             fetchingFee: true,
-            verifingAddr: false
+            verifingAddr: false,
+            loading: true
         };
     },
     beforeMount() {
-        getDepositInfo({ tokenId: this.token.tokenId, addr: this.defaultAddr }, this.token.gateInfo.url).then(res => {
+        new Promise([ getDepositInfo({ tokenId: this.token.tokenId, addr: this.defaultAddr }, this.token.gateInfo.url).then(res => {
             this.labelName = res.labelName;
-        });
+        }),
         getMetaInfo({ tokenId: this.token.tokenId }, this.token.gateInfo.url).then(res => {
             this.type = res.type;
-        });
-        getWithdrawInfo({ walletAddress: this.defaultAddr, tokenId: this.token.tokenId }, this.token.gateInfo.url).then(data => (this.info = data));
+        }),
+        getWithdrawInfo({ walletAddress: this.defaultAddr, tokenId: this.token.tokenId }, this.token.gateInfo.url).then(data => (this.info = data)) ]).then(() =>( this.loading = false));
     },
     computed: {
         fee() {
@@ -90,7 +91,7 @@ export default {
             return this.validateAmount(this.withdrawAmount);
         },
         dBtnUnuse() {
-            return this.ammountErr || !this.isAddrCorrect || !this.withdrawAmount || !this.withdrawAddr || this.verifingAddr || this.fetchingFee;
+            return this.loading || this.ammountErr || !this.isAddrCorrect || !this.withdrawAmount || !this.withdrawAddr || this.verifingAddr || this.fetchingFee;
         },
         min() {
             return this.info.minimumWithdrawAmount ? `${ bigNumber.toBasic(this.info.minimumWithdrawAmount, this.token.decimals) } ${ this.token.tokenSymbol }` : '--';
