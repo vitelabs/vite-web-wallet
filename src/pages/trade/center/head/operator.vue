@@ -73,7 +73,7 @@ export default {
             }
 
             if (this.operatorInfo
-                && [ 'Vite Labs', 'Vgate' ].indexOf(this.operatorInfo.name) !== -1) {
+                && [ 'Vite Labs', 'VGATE' ].indexOf(this.operatorInfo.name) !== -1) {
                 return;
             }
 
