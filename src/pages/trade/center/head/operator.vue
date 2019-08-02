@@ -67,8 +67,9 @@ export default {
         }
     },
     watch: {
-        activeTxPair() {
-            if (this.operatorInfo) {
+        activeTxPair(val, oldVal) {
+            if (this.operatorInfo
+                || (oldVal && oldVal.symbol === val.symbol)) {
                 return;
             }
 
