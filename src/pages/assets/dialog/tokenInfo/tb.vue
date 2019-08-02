@@ -13,14 +13,14 @@
             <div class="__tb_cell">
                 {{
                     $t(`tokenCard.${type}Record.heads.3`, {
-                        outChain: tokenToGate[token.tokenId].mappedNet
+                        outChain
                     })
                 }}
             </div>
             <div class="__tb_cell">
                 {{
                     $t(`tokenCard.${type}Record.heads.4`, {
-                        outChain: tokenToGate[token.tokenId].mappedNet
+                        outChain
                     })
                 }}
             </div>
@@ -38,7 +38,7 @@
                 <div class="__tb_cell">
                     {{
                         $t(`tokenCard.${type}Record.statusMap.${item.state}`, {
-                            outChain: tokenToGate[token.tokenId].mappedNet
+                            outChain
                         })
                     }}
                 </div>
@@ -74,7 +74,7 @@
 // [TODO] Need components/table
 
 import Pagination from 'components/pagination.vue';
-import { getDepositRecords, getWithdrawRecords } from 'services/gate.js';
+import { getDepositRecords, getWithdrawRecords } from 'services/gate';
 import shortify from 'utils/ellipsisAddr';
 import b from 'utils/bigNumber';
 import openUrl from 'utils/openUrl';
@@ -120,8 +120,10 @@ export default {
         defaultAddr() {
             return this.$store.getters.activeAddr;
         },
-        tokenToGate() {
-            return this.$store.getters.mapToken2Gate;
+        outChain() {
+            const tokenToGate = this.$store.getters.mapToken2Gate;
+            const token = this.token;
+            return tokenToGate[token.tokenId] ? tokenToGate[token.tokenId].mappedNet : token.tokenSymbol;
         }
     },
     methods: {
