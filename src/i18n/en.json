@@ -752,7 +752,7 @@
             "introduction": "Introduction",
             "txPair": "Trading Pairs",
             "confirmTitle": "Risk Reminder",
-            "confirmText": "The current trading pair {symbol} is provided by an anonymous operator. Please be careful when trading. Investing in digital assets comes with high risks. Before investing, please have a full understanding of all the risks of investing in digital assets and judge the authenticity, legality and validity of digital assets on your own. Please be prudent of your own investment decisions and undertake responsibility for the loss of your assets."
+            "confirmText": "The current trading pair is {symbol}. Please be careful when trading. Investing in digital assets comes with high risks. Before investing, please have a full understanding of all the risks of investing in digital assets and judge the authenticity, legality and validity of digital assets on your own. Please be prudent of your own investment decisions and undertake responsibility for the loss of your assets."
         }
     },
     "trade": {
