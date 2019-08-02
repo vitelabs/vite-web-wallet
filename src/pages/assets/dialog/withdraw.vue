@@ -30,7 +30,7 @@ block content
 </template>
 
 <script>
-import { verifyAddr, getWithdrawInfo, getWithdrawFee, withdraw,getDepositInfo, getMetaInfo } from 'services/gate';
+import { verifyAddr, getWithdrawInfo, getWithdrawFee, withdraw, getDepositInfo, getMetaInfo } from 'services/gate';
 import debounce from 'lodash/debounce';
 import { getValidBalance } from 'utils/validations';
 import bigNumber from 'utils/bigNumber';
@@ -55,8 +55,8 @@ export default {
                 'gatewayAddress': ''
             },
             type: -1,
-            labelName:'',
-            labelValue:'',
+            labelName: '',
+            labelValue: '',
             withdrawAddr: '',
             withdrawAmountMin: '',
             withdrawAmount: '',
@@ -71,12 +71,12 @@ export default {
         };
     },
     beforeMount() {
-        debugger
-        getDepositInfo({tokenId:this.token.tokenId,addr:this.defaultAddr}).then(res=>{
-            this.labelName=res.labelName;
-        })
-        getMetaInfo({tokenId:this.token.tokenId}).then(res=>{
-            this.type=res.type
+        debugger;
+        getDepositInfo({ tokenId: this.token.tokenId, addr: this.defaultAddr }).then(res => {
+            this.labelName = res.labelName;
+        });
+        getMetaInfo({ tokenId: this.token.tokenId }).then(res => {
+            this.type = res.type;
         });
         getWithdrawInfo({ walletAddress: this.defaultAddr, tokenId: this.token.tokenId }, this.token.gateInfo.url).then(data => (this.info = data));
     },
@@ -158,7 +158,7 @@ export default {
         },
         inspector: execWithValid(function () {
             return new Promise((res, rej) => {
-                withdraw({ fee: this.feeMin, amount: bigNumber.plus(this.withdrawAmountMin || bigNumber.toMin(this.withdrawAmount, this.token.decimals), this.feeMin, 0), withdrawAddress: this.withdrawAddr, gateAddr: this.info.gatewayAddress, tokenId: this.token.tokenId ,labelValue:this.labelValue,type:this.token}, this.token.gateInfo.url)
+                withdraw({ fee: this.feeMin, amount: bigNumber.plus(this.withdrawAmountMin || bigNumber.toMin(this.withdrawAmount, this.token.decimals), this.feeMin, 0), withdrawAddress: this.withdrawAddr, gateAddr: this.info.gatewayAddress, tokenId: this.token.tokenId, labelValue: this.labelValue, type: this.token }, this.token.gateInfo.url)
                     .then(d => {
                         this.$toast(this.$t('tokenCard.withdraw.successTips'));
                         res(d);
