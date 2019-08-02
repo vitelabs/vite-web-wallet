@@ -68,12 +68,12 @@ export default {
     },
     watch: {
         activeTxPair(val, oldVal) {
-            if (this.operatorInfo
-                || (oldVal && oldVal.symbol === val.symbol)) {
+            if (oldVal && oldVal.symbol === val.symbol) {
                 return;
             }
 
-            if ([ 'Vite Labs', 'Vgate' ].indexOf(this.operatorInfo.name) !== -1) {
+            if (this.operatorInfo
+                && [ 'Vite Labs', 'Vgate' ].indexOf(this.operatorInfo.name) !== -1) {
                 return;
             }
 
