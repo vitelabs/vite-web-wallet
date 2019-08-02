@@ -359,7 +359,7 @@
             "tips": [
                 "Cross-Chain Receive operation will do {tokenSymbol} Cross-Chain mapping to VITE network, you can still transfer the assets after receiving them",
                 "You can only send {tokenSymbol} through this address and the amount cannot be less than {min}",
-                "When the transaction is confirmed, you will receive the asset after 5 minutes, kindly wait in patient"
+                "{confirmationCount}个网络确认之后到账, kindly wait in patient"
             ]
         },
         "withdraw": {

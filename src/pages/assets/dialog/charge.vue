@@ -20,7 +20,7 @@ block content
         .dot
     .charge-tips {{$t('tokenCard.charge.tips.1',{tokenSymbol:token.tokenSymbol,min:minimumDepositAmount})}}
         .dot
-    .charge-tips {{$t('tokenCard.charge.tips.2')}}
+    .charge-tips {{$t('tokenCard.charge.tips.2',{confirmationCount})}}
         .dot
 </template>
 
@@ -47,11 +47,13 @@ export default {
                 this.minimumDepositAmountMin = res.minimumDepositAmount;
                 this.labelName = res.labelName;
                 this.labelValue = res.label;
+                this.confirmationCount = res.confirmationCount;
             })
             .catch(() => (this.addrErr = this.$t('tokenCard.charge.addrErr')));
     },
     data() {
         return {
+            confirmationCount: '',
             minimumDepositAmountMin: '',
             address: '',
             amount: 0,
