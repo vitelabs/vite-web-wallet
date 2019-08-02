@@ -139,7 +139,7 @@ export default {
                 lessMin: this.$t('tokenCard.withdraw.balanceErrMap.lessMin', { min: `${ bigNumber.toBasic(this.info.minimumWithdrawAmount, this.token.decimals) } ${ this.token.tokenSymbol }` })
             };
             return getValidBalance({
-                balance: bigNumber.minus(this.token.totalAmount||0, this.feeMin),
+                balance: bigNumber.minus(this.token.totalAmount || 0, this.feeMin),
                 decimals: this.token.decimals,
                 minNum: this.info.minimumWithdrawAmount,
                 maxNum: this.info.maximumWithdrawAmount,
@@ -159,7 +159,7 @@ export default {
         },
         inspector: execWithValid(function () {
             return new Promise((res, rej) => {
-                withdraw({ fee: this.feeMin, amount: bigNumber.plus(this.withdrawAmountMin || bigNumber.toMin(this.withdrawAmount, this.token.decimals), this.feeMin, 0), withdrawAddress: this.withdrawAddr, gateAddr: this.info.gatewayAddress, tokenId: this.token.tokenId, labelValue: this.labelValue, type: this.type ,labelName:this.labelName}, this.token.gateInfo.url)
+                withdraw({ fee: this.feeMin, amount: bigNumber.plus(this.withdrawAmountMin || bigNumber.toMin(this.withdrawAmount, this.token.decimals), this.feeMin, 0), withdrawAddress: this.withdrawAddr, gateAddr: this.info.gatewayAddress, tokenId: this.token.tokenId, labelValue: this.labelValue, type: this.type, labelName: this.labelName }, this.token.gateInfo.url)
                     .then(d => {
                         this.$toast(this.$t('tokenCard.withdraw.successTips'));
                         res(d);
