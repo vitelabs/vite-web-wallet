@@ -137,8 +137,8 @@ export default {
 
             detail = Object.assign({}, detail);
             detail.publisher = ellipsisAddr(detail.publisher);
-            detail.tokenType = detail.reissue === 0 ? this.$t('trade.head.tokenType0')
-                : detail.reissue === 1 ? this.$t('trade.head.tokenType1') : '';
+            detail.tokenType = detail.reissue === 1 ? this.$t('trade.head.tokenType0')
+                : detail.reissue === 2 ? this.$t('trade.head.tokenType1') : '';
             detail.publisherDate = detail.publisherDate ? date(detail.publisherDate * 1000, 'zh') : '';
             detail.totalSupply = detail.totalSupply ? BigNumber.toBasic(detail.totalSupply, detail.tokenDecimals || 0) : '';
 
