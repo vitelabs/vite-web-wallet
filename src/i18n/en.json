@@ -269,7 +269,7 @@
         },
         "addToken": {
             "title": "Add Token",
-            "placeholder": "Please input token name",
+            "placeholder": "Please input token name 或者 TokenID",
             "lTxt": "Cancel",
             "rTxt": "Add"
         },

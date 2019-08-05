@@ -285,7 +285,7 @@
         },
         "addToken": {
             "title": "添加代币",
-            "placeholder": "请输入代币名称",
+            "placeholder": "请输入代币名称或TokenID",
             "lTxt": "取消",
             "rTxt": "添加"
         },
@@ -1045,6 +1045,7 @@
         "title": "分红",
         "poolTitle": "手续费分红池",
         "listTitle": "我的分红",
+        "allPrice": "总估值",
         "date": "日期",
         "VX": "持有VX",
         "coin": "分红币种",

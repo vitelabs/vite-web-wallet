@@ -322,6 +322,7 @@ export default {
 
     .item-content {
         position: absolute;
+        margin-top: 10px;
         width: 200px;
         padding: 8px 12px 0;
         background: #fff;
