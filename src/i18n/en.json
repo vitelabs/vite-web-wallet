@@ -379,7 +379,7 @@
                 "all": "All"
             },
             "amountPlaceholder": "Please input transfer amount which should not be less than {min}",
-            "addressPlaceholder": "Please input transfer address",
+            "addressPlaceholder": "Please input {token} transfer address",
             "successTips": "Transfer request has been sent",
             "failTips": "An error occurred in gateway node, please check the network settings"
         },

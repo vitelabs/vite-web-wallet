@@ -10,7 +10,7 @@ block content
     .block__title {{$t("tokenCard.withdraw.labels.address")}}
         .err {{isAddrCorrect?'':$t("tokenCard.withdraw.addressErr")}}
     .block__content
-        input(v-model="withdrawAddr" :placeholder="$t('tokenCard.withdraw.addressPlaceholder')")
+        input(v-model="withdrawAddr" :placeholder="$t('tokenCard.withdraw.addressPlaceholder', {token: token.tokenSymbol === 'USDT' && token.index === 0 ? 'USDT(ERC20)' : ''})")
     .block__title {{$t("tokenCard.withdraw.labels.amount")}}
         .err {{ammountErr}}
     .block__content
