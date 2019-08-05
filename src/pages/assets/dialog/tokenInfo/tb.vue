@@ -133,13 +133,13 @@ export default {
             if (!hash) {
                 return;
             }
-            openUrl(this.inTxExplorerFormat.replace('{$tx}', hash));
+            openUrl(this.inTxExplorerFormat.replace('{$tx}',encodeURIComponent(hash)));
         },
         gotoOutHash(hash) {
             if (!hash) {
                 return;
             }
-            openUrl(this.outTxExplorerFormat.replace('{$tx}', hash));
+            openUrl(this.outTxExplorerFormat.replace('{$tx}', encodeURIComponent(hash)));
         },
         updateData(pageNum = this.currentPage) {
             if (!this.type) {
