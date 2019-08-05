@@ -37,6 +37,17 @@
                 <option value="1">{{ $t("tradeOrderHistory.filter.sell") }}</option>
             </select>
         </div>
+
+        <div class="filter end">
+            <div class="filter_label">{{ $t("tradeOrderHistory.filter.status") }}</div>
+            <select v-model="status" class="filter_content">
+                <option value="1">{{ $t("tradeOrderHistory.status.1") }}</option>
+                <option value="2">{{ $t("tradeOrderHistory.status.2") }}</option>
+                <option value="3">{{ $t("tradeOrderHistory.status.3") }}</option>
+                <option value="4">{{ $t("tradeOrderHistory.status.4") }}</option>
+            </select>
+        </div>
+
         <div @click="submit" class="search active">
             {{ $t("tradeOrderHistory.filter.search") }}
         </div>
@@ -61,6 +72,7 @@ export default {
             tradeType: '',
             ftoken: '',
             ttoken: '',
+            status: '',
             ftokenMap: []
         };
     },
@@ -89,6 +101,7 @@ export default {
             this.tradeType = '';
             this.ftoken = '';
             this.ttoken = '';
+            this.status = '';
             this.$emit('submit', {});
         },
         submit() {
@@ -107,7 +120,8 @@ export default {
                 endTime: tdate,
                 side: this.tradeType,
                 tradeTokenSymbol: this.ftoken,
-                quoteTokenSymbol: this.ttoken
+                quoteTokenSymbol: this.ttoken,
+                status: this.status
             });
         }
     }

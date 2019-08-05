@@ -774,7 +774,8 @@
         "quantityTitle": "成交额({quantity})",
         "priceTitle": "价格({price})",
         "amountTitle": "数量({amount})",
-        "amountTable": "数量",
+        "quantityTable": "累积数量",
+        "amountTable": "累积成交额",
         "amount": "成交额",
         "newOrderSuccess": "提单请求已发送",
         "newOrderFail": "提单失败",
@@ -960,6 +961,12 @@
             "1": "卖",
             "0": "买"
         },
+        "status": {
+            "1": "委托中",
+            "2": "已完成",
+            "3": "已撤销",
+            "4": "下单失败"
+        },
         "confirmTable": {
             "title":"成交记录",
             "heads": [
@@ -1000,6 +1007,7 @@
             "side": "方向",
             "buy": "买",
             "sell": "卖",
+            "status": "状态",
             "search": "搜索",
             "reset": "重置"
         }
