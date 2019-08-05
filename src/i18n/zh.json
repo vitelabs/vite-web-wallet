@@ -386,7 +386,7 @@
                 "all": "全部"
             },
             "amountPlaceholder": "请输入转出金额，最小不少于{min}",
-            "addressPlaceholder": "请输入转出地址",
+            "addressPlaceholder": "请输入{token}转出地址",
             "successTips": "转出请求已发送",
             "failTips":"网关节点出错，请检查网关设置"
         },
