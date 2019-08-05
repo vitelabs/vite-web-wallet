@@ -38,12 +38,25 @@ export default {
 
             return list;
         },
-        buyAmountList() {
+        buyQuantityList() {
             const _l = [];
             let sum = 0;
             const buyList = [].concat(this.buyList).reverse();
             buyList.forEach(item => {
                 sum = BigNumber.plus(sum, item.quantity || 0);
+
+                _l.push(sum);
+            });
+            _l.reverse();
+
+            return _l;
+        },
+        buyAmountList() {
+            const _l = [];
+            let sum = 0;
+            const buyList = [].concat(this.buyList).reverse();
+            buyList.forEach(item => {
+                sum = BigNumber.plus(sum, item.amount || 0);
 
                 _l.push(sum);
             });
@@ -57,7 +70,7 @@ export default {
 
             return list;
         },
-        sellAmountList() {
+        sellQuantityList() {
             const _l = [];
             this.buyList.forEach(() => {
                 _l.push(null);
@@ -66,6 +79,20 @@ export default {
             let sum = 0;
             this.sellList.forEach(item => {
                 sum = BigNumber.plus(sum, item.quantity || 0);
+                _l.push(sum);
+            });
+
+            return _l;
+        },
+        sellAmountList() {
+            const _l = [];
+            this.buyList.forEach(() => {
+                _l.push(null);
+            });
+
+            let sum = 0;
+            this.sellList.forEach(item => {
+                sum = BigNumber.plus(sum, item.amount || 0);
                 _l.push(sum);
             });
 
@@ -85,10 +112,16 @@ export default {
                 tooltip: {
                     confine: true,
                     formatter: params => {
-                        // console.log(params);
                         let res = `${ this.$t('trade.priceTitle', { price: this.activeTxPair ? this.activeTxPair.quoteTokenSymbol : '' }) }: ${ params[0].name }`;
                         res += `<br/>${ params[0].seriesName } : ${ params[0].value }`;
-
+                        let amount;
+                        const index = params[0].dataIndex;
+                        if (index >= this.buyList.length) {
+                            amount = this.sellAmountList[index];
+                        } else {
+                            amount = this.buyAmountList[index];
+                        }
+                        res += `<br/>${ this.$t('trade.amountTable') } : ${ amount }`;
                         return res;
                     },
                     trigger: 'axis',
@@ -110,19 +143,19 @@ export default {
                 },
                 yAxis: [{ type: 'value' }],
                 series: [ {
-                    name: this.$t('trade.amountTable'),
+                    name: this.$t('trade.quantityTable'),
                     type: 'line',
                     itemStyle: { normal: { color: '#4cc453' } },
                     lineStyle: { normal: { color: '#00D764' } },
                     areaStyle: { color: '#00D764' },
-                    data: this.buyAmountList
+                    data: this.buyQuantityList
                 }, {
-                    name: this.$t('trade.amountTable'),
+                    name: this.$t('trade.quantityTable'),
                     type: 'line',
                     itemStyle: { normal: { color: '#e94c4c' } },
                     lineStyle: { normal: { color: '#ED5158' } },
                     areaStyle: { color: '#ED5158' },
-                    data: this.sellAmountList
+                    data: this.sellQuantityList
                 } ]
             };
         }

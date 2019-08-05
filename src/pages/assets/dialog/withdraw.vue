@@ -9,7 +9,8 @@ block content
         .right.blue {{token.balance||'0'}}
     .block__title {{$t("tokenCard.withdraw.labels.address")}}
         .err {{isAddrCorrect?'':$t("tokenCard.withdraw.addressErr")}}
-    input.block__content(v-model="withdrawAddr" :placehodler="$t('tokenCard.withdraw.addressPlaceholder')")
+    .block__content
+        input(v-model="withdrawAddr" :placeholder="$t('tokenCard.withdraw.addressPlaceholder')")
     .block__title {{$t("tokenCard.withdraw.labels.amount")}}
         .err {{ammountErr}}
     .block__content

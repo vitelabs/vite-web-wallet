@@ -764,7 +764,8 @@
         "quantityTitle": "Total({quantity})",
         "priceTitle": "Price({price})",
         "amountTitle": "Amount({amount})",
-        "amountTable": "Qty",
+        "quantityTable": "累积数量Qty？？？",
+        "amountTable": "累积成交额",
         "amount": "Total",
         "newOrderSuccess": "Order request has sent",
         "newOrderFail": "Order Failed",
@@ -962,6 +963,12 @@
             "1": "Sell",
             "0": "Buy"
         },
+        "status": {
+            "1": "委托中",
+            "2": "已完成",
+            "3": "已撤销",
+            "4": "下单失败"
+        },
         "confirmTable": {
             "title":"Order Book",
             "heads": [
@@ -1002,6 +1009,7 @@
             "side": "Side",
             "buy": "Buy",
             "sell": "Sell",
+            "status": "状态",
             "search": "Search",
             "reset": "Reset"
         }
