@@ -35,13 +35,23 @@
                     <div class="slot-row __tb_row __tb_content_row" v-if="activeRow" :slot="`${activeIndex}Row`">
                         <div class="__tb_cell"></div>
                         <div class="__tb_cell"></div>
-                        <div class="__tb_cell" v-for="tokenType in ['BTC', 'ETH', 'USD', 'VITE']" :key="tokenType">
+                        <div class="__tb_cell" v-for="tokenType in ['VITE', 'ETH', 'BTC', 'USD']" :key="tokenType">
                             <div v-for="(item, i) in activeRow[tokenType] ? activeRow[tokenType].tokenDividends : []" :key="i" >
                                 {{ item.tokenSymbol + ' ' + formatNum(item.amount, tokenType) }}
                             </div>
                         </div>
                         <div class="__tb_cell"></div>
                     </div>
+
+                    <span v-for="(item, i) in contentList" :key="i" :slot="`${i}VITEAfter`"
+                          class="arrow-icon" :class="{'active': activeIndex === i}"></span>
+                    <span v-for="(item, i) in contentList" :key="i" :slot="`${i}ETHAfter`"
+                          class="arrow-icon" :class="{'active': activeIndex === i}"></span>
+                    <span v-for="(item, i) in contentList" :key="i" :slot="`${i}BTCAfter`"
+                          class="arrow-icon" :class="{'active': activeIndex === i}"></span>
+                    <span v-for="(item, i) in contentList" :key="i" :slot="`${i}USDAfter`"
+                          class="arrow-icon" :class="{'active': activeIndex === i}"></span>
+
                     <pagination slot="tableBottom" class="__tb_pagination"
                                 :currentPage="currentPage + 1" :toPage="fetchList"
                                 :totalPage="totalPage"></pagination>
@@ -110,17 +120,17 @@ export default {
                 text: this.$t('tradeDividend.VX'),
                 cell: 'vxQuantity'
             }, {
-                text: `BTC ${ this.$t('tradeDividend.amount') }`,
-                cell: 'BTC'
+                text: `VITE ${ this.$t('tradeDividend.amount') }`,
+                cell: 'VITE'
             }, {
                 text: `ETH ${ this.$t('tradeDividend.amount') }`,
                 cell: 'ETH'
             }, {
+                text: `BTC ${ this.$t('tradeDividend.amount') }`,
+                cell: 'BTC'
+            }, {
                 text: `USD ${ this.$t('tradeDividend.amount') }`,
                 cell: 'USD'
-            }, {
-                text: `VITE ${ this.$t('tradeDividend.amount') }`,
-                cell: 'VITE'
             }, {
                 text: this.$t('tradeDividend.price'),
                 cell: 'price'
@@ -368,6 +378,16 @@ export default {
         &:hover {
             background: rgba(247,249,251,1);
         }
+    }
+}
+.arrow-icon {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background: url("~assets/imgs/decend.svg") center no-repeat;
+    margin-bottom: -4px;
+    &.active {
+        background: url("~assets/imgs/ascend.svg") center no-repeat;
     }
 }
 .link {
