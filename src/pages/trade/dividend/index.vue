@@ -15,7 +15,7 @@
                     </div>
 
                     <div class="item __pointer" v-click-outside="hideMyList"  @click.stop="showMyList(tokenType)"
-                         v-for="tokenType in ['BTC', 'ETH', 'USD', 'VITE']" :key="tokenType">
+                         v-for="tokenType in ['VITE', 'ETH', 'BTC', 'USD']" :key="tokenType">
                         <div class="item-title">{{ tokenType }}</div>
                         <div class="item-amount">
                             {{ myDividend[tokenType] ? formatNum(myDividend[tokenType].dividendAmount, tokenType) : 0 }}
