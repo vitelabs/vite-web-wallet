@@ -133,7 +133,7 @@ export default {
             if (!hash) {
                 return;
             }
-            openUrl(this.inTxExplorerFormat.replace('{$tx}',encodeURIComponent(hash)));
+            openUrl(this.inTxExplorerFormat.replace('{$tx}', encodeURIComponent(hash)));
         },
         gotoOutHash(hash) {
             if (!hash) {
