@@ -13,11 +13,26 @@
                 <div class="token-list">
                     <div class="token__head">
                         <div class="col" >{{$t('tokenCard.heads.name')}}</div>
-                        <div class="col">{{$t('tokenCard.heads.balance')}}</div>
+                        <div class="col">
+                            {{$t('tokenCard.heads.balance')}}
+                            <i class="tipsicon">
+                                <tooltips class="fee-tips" :content="$t('tokenCard.heads.balanceTips')"></tooltips>
+                            </i>
+                        </div>
                         <div class="col">{{$t('tokenCard.heads.onroad')}}</div>
-                        <div class="col">{{$t('tokenCard.heads.gate')}}</div>
+                        <div class="col">
+                            {{$t('tokenCard.heads.gate')}}
+                            <i class="tipsicon">
+                                <tooltips class="fee-tips" :content="$t('tokenCard.heads.gateTips')"></tooltips>
+                            </i>
+                        </div>
                         <div class="col">{{$t('tokenCard.heads.totalExAmount')}}</div>
-                        <div class="col">{{$t('tokenCard.heads.availableExAmount')}}</div>
+                        <div class="col">
+                            {{$t('tokenCard.heads.availableExAmount')}}
+                            <i class="tipsicon">
+                                <tooltips class="fee-tips" :content="$t('tokenCard.heads.availableExAmountTips')"></tooltips>
+                            </i>
+                        </div>
                         <div class="col">
                             <AssetSwitch v-model="assetType" class="asset-switch" />
                         </div>
@@ -36,6 +51,7 @@
 </template>
 
 <script>
+import tooltips from 'components/tooltips';
 import pageLayout from 'components/pageLayout/index';
 import openUrl from 'utils/openUrl';
 import tokenCard from './tokenCard';
@@ -62,7 +78,7 @@ const filterFunc = filterObj => t => {
     return !(NOTMatchNoZero || NOTMatchFilterKey);
 };
 export default {
-    components: { pageLayout, accountHead, tokenCard, TokenFilter, AssetSwitch },
+    components: { pageLayout, accountHead, tokenCard, TokenFilter, AssetSwitch, tooltips },
     data() {
         return {
             isShowTrans: false,
@@ -136,6 +152,42 @@ export default {
     bottom: 0;
     left: 0;
     right: 0;
+}
+
+.tipsicon {
+    margin-left: 3px;
+    position: relative;
+    display: inline-block;
+    background: url(~assets/imgs/gray_hover_help.svg) center no-repeat;
+    background-size: 100% 100%;
+    overflow: visible;
+    width: 16px;
+    height: 16px;
+    vertical-align: sub;
+    cursor: pointer;
+    margin-bottom: -1px;
+    .fee-tips{
+        z-index: 100;
+        top: 25px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: none;
+        color: #5E6875;
+        width: 200px;
+        box-shadow: 0px 5px 20px 0px rgba(176,192,237,0.4);
+        word-break: break-word;
+        @include font-family-normal();
+        /deep/.trigle {
+            border: 7px solid transparent;
+            border-bottom: 7px solid #fff;
+            top: -14px;
+            transform: translateX(-50%);
+            left: 50%;
+        }
+    }
+    &:hover .fee-tips {
+        display: inline-block;
+    }
 }
 
 .wallet-account-wrapper{
