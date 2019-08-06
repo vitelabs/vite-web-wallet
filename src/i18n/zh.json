@@ -298,14 +298,20 @@
             "title": "{tokenSymbol}代币信息",
             "saveGate": "保存修改",
             "labels": {
-                "tokenId": "TokenID",
-                "title": "{tokenSymbol}代币地址",
-                "address": "铸币地址",
                 "tokenName": "代币名称",
+                "tokenId": "TokenID",
+                "overview": "代币简介",
                 "totalSupply": "发行总量",
-                "decimals": "小数位",
-                "isReIssuable": "类型",
-                "time": "发行日期"
+                "type": "代币类型",
+                "gate": "跨链网关",
+                "website": "官网",
+                "whitePaper": "白皮书",
+                "explorer": "浏览器",
+                "github": "Github",
+                "media": "社交媒体",
+                "crossType": "跨链代币",
+                "originType": "原生代币",
+                "viewmore": "查看更多"
             },
             "reIssuable": {
                 "true": "可增发",

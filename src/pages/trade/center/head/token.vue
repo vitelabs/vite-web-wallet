@@ -62,8 +62,8 @@
             </div>
             <div class="token-row">
                 <span class="token-title">{{ $t('trade.head.overview') }} :</span>
-                <!-- {{ tokenDetail.overview && tokenDetail.overview[$i18n.locale] ? tokenDetail.overview[$i18n.locale] : '--' }} -->
-                {{ tokenDetail.overview ? tokenDetail.overview.en || '--' : '--'}}
+                {{ tokenDetail.overview && tokenDetail.overview[$i18n.locale] ? tokenDetail.overview[$i18n.locale] : '--' }}
+                <!-- {{ tokenDetail.overview ? tokenDetail.overview.en || '--' : '--'}} -->
             </div>
         </div>
     </div>
