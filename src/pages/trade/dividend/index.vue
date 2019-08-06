@@ -11,11 +11,12 @@
                 <div class="my-divident">
                     <div class="item">
                         <div class="item-title">{{ $t('tradeDividend.price') }}</div>
-                        <div class="item-amount">{{ myFullIncome }}</div>
+                        <div class="item-amount">{{ myFullBtcIncome }}</div>
+                        <div class="item-price">{{ myFullIncome }}</div>
                     </div>
 
                     <div class="item __pointer" v-click-outside="hideMyList"  @click.stop="showMyList(tokenType)"
-                         v-for="tokenType in ['VITE', 'ETH', 'BTC', 'USD']" :key="tokenType">
+                         v-for="tokenType in ['VITE', 'BTC', 'ETH', 'USD']" :key="tokenType">
                         <div class="item-title">{{ tokenType }}</div>
                         <div class="item-amount">
                             {{ myDividend[tokenType] ? formatNum(myDividend[tokenType].dividendAmount, tokenType) : 0 }}
@@ -35,7 +36,7 @@
                     <div class="slot-row __tb_row __tb_content_row" v-if="activeRow" :slot="`${activeIndex}Row`">
                         <div class="__tb_cell"></div>
                         <div class="__tb_cell"></div>
-                        <div class="__tb_cell" v-for="tokenType in ['VITE', 'ETH', 'BTC', 'USD']" :key="tokenType">
+                        <div class="__tb_cell" v-for="tokenType in ['VITE', 'BTC', 'ETH', 'USD']" :key="tokenType">
                             <div v-for="(item, i) in activeRow[tokenType] ? activeRow[tokenType].tokenDividends : []" :key="i" >
                                 {{ item.tokenSymbol + ' ' + formatNum(item.amount, tokenType) }}
                             </div>
@@ -45,9 +46,9 @@
 
                     <span v-for="(item, i) in contentList" :key="i" :slot="`${i}VITEAfter`"
                           class="arrow-icon" :class="{'active': activeIndex === i}"></span>
-                    <span v-for="(item, i) in contentList" :key="i" :slot="`${i}ETHAfter`"
-                          class="arrow-icon" :class="{'active': activeIndex === i}"></span>
                     <span v-for="(item, i) in contentList" :key="i" :slot="`${i}BTCAfter`"
+                          class="arrow-icon" :class="{'active': activeIndex === i}"></span>
+                    <span v-for="(item, i) in contentList" :key="i" :slot="`${i}ETHAfter`"
                           class="arrow-icon" :class="{'active': activeIndex === i}"></span>
                     <span v-for="(item, i) in contentList" :key="i" :slot="`${i}USDAfter`"
                           class="arrow-icon" :class="{'active': activeIndex === i}"></span>
@@ -123,11 +124,11 @@ export default {
                 text: `VITE ${ this.$t('tradeDividend.amount') }`,
                 cell: 'VITE'
             }, {
-                text: `ETH ${ this.$t('tradeDividend.amount') }`,
-                cell: 'ETH'
-            }, {
                 text: `BTC ${ this.$t('tradeDividend.amount') }`,
                 cell: 'BTC'
+            }, {
+                text: `ETH ${ this.$t('tradeDividend.amount') }`,
+                cell: 'ETH'
             }, {
                 text: `USD ${ this.$t('tradeDividend.amount') }`,
                 cell: 'USD'
@@ -163,7 +164,11 @@ export default {
                 ? this.list[this.activeIndex].dividendStat : {};
         },
         myFullIncome() {
-            return this.getPrice(this.myDividend);
+            return `≈${ this.getPrice(this.myDividend) }`;
+        },
+        myFullBtcIncome() {
+            const btcIncome = this.getPriceNum(this.myDividend, 'btc');
+            return `${ this.formatNum(btcIncome, 'BTC') } BTC`;
         }
     },
     watch: {
@@ -183,13 +188,10 @@ export default {
         }
     },
     methods: {
-        getPrice(dividendStat) {
-            const pre = this.$store.state.env.currency === 'cny' ? '¥' : '$';
+        getPriceNum(dividendStat, coin) {
+            coin = coin || this.$store.state.env.currency;
             const rateList = this.$store.state.exchangeRate.rateMap || {};
-            const coin = this.$store.state.env.currency;
-
             let income = 0;
-
             for (const symbol in dividendStat) {
                 const list = dividendStat[symbol] && dividendStat[symbol].tokenDividends
                     ? dividendStat[symbol].tokenDividends : [];
@@ -199,7 +201,12 @@ export default {
                     income = bigNumber.plus(income, amount);
                 });
             }
-
+            return income;
+        },
+        getPrice(dividendStat) {
+            const coin = this.$store.state.env.currency;
+            const pre = coin === 'cny' ? '¥' : '$';
+            const income = this.getPriceNum(dividendStat, coin);
             return `${ pre }${ bigNumber.formatNum(income, 2) }`;
         },
         isShowMyDividendList(tokenType) {
@@ -287,31 +294,31 @@ export default {
         flex: 1;
         box-shadow: 0px 2px 10px 1px rgba(176,192,237,0.42);
         .my-divident {
-            width: 100%;
             background: url('~assets/imgs/mint_pledge_bg.png') rgba(234,248,255,0.2);
             background-size: 100% 100%;
             font-size: 12px;
+            font-family: $font-normal;
             line-height: 16px;
-            border-bottom: 1px solid rgba(212,222,231,1);
+            display: flex;
+            flex-direction: row;
+
             .item {
-                display: inline-block;
+                flex: 1;
                 box-sizing: border-box;
-                width: 19.9%;
                 padding: 14px 30px;
-                line-height: 18px;
                 border-right: 1px solid rgba(227,235,245,0.6);
                 &:last-child {
                     border-right: none;
                 }
                 .item-title {
-                    font-family: $font-normal;
-                    font-weight: 400;
                     color: rgba(94,104,117,1);
+                    margin-bottom: 2px;
                 }
                 .item-amount {
+                    font-size: 16px;
                     position: relative;
                     font-family: $font-bold;
-                    font-weight: 600;
+                    line-height: 20px;
                     color: rgba(29,32,36,1);
                     .down-icon {
                         display: inline-block;
@@ -321,6 +328,10 @@ export default {
                         height: 16px;
                         margin-bottom: -4px;
                     }
+                }
+                .item-price {
+                    color: rgba(94,104,117,0.58);
+                    margin-top: 2px;
                 }
             }
         }
