@@ -213,6 +213,8 @@ export default {
         width: 40px;
         height: 40px;
         margin-right: 10px;
+        border: 1px solid rgba(212,222,231,1);
+        border-radius: 40px;
     }
     &__name {
         @include font-family-bold();

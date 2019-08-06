@@ -72,7 +72,6 @@
 <script>
 import date from 'utils/date';
 import ellipsisAddr from 'utils/ellipsisAddr';
-import { getTokenIcon } from 'utils/tokenParser';
 import operator from './operator.vue';
 import BigNumber from 'utils/bigNumber';
 import openUrl from 'utils/openUrl';
@@ -119,7 +118,7 @@ export default {
             if (defaultToken && defaultToken.icon) {
                 return defaultToken.icon;
             }
-            return getTokenIcon(tokenId);
+            return '';
         },
         tokenDetail() {
             if (!this.showTokenType) {
@@ -187,6 +186,7 @@ export default {
             width: 28px;
             height: 28px;
             border-radius: 28px;
+            border: 1px solid rgba(212,222,231,1);
         }
         .close {
             position: absolute;
