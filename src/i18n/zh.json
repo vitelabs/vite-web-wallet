@@ -13,6 +13,7 @@
     "settingAcc": "设置账户",
     "resetAcc": "重新设置账号",
     "logout": "退出登录",
+    "saveLogout": "安全退出",
     "blockHeight": "快照块高度",
     "accountName": "账户昵称",
     "action": "操作",
@@ -262,7 +263,10 @@
             "onroad":"钱包待接收金额",
             "gate":"钱包跨链网关",
             "totalExAmount":"交易所总余额",
-            "availableExAmount":"交易所可用余额"
+            "availableExAmount":"交易所可用余额",
+            "balanceTips": "点击转账，可以从Vite 钱包给其他地址转币",
+            "gateTips": "点击跨链转入，可以将其他币种跨链映射到Vite网络，转入Vite钱包；点击跨链转出仍可以将资产转至其他平台。*转入转出过程可能会产生手续费，且有金额限制",
+            "availableExAmountTips": "点击充值至交易所，将钱包中的资产划转至交易所；点击提现至钱包，将交易所资产划转至钱包。以上划转过程不需要手续费"
         },
         "actionType": {
             "SEND": "转账",
