@@ -1,85 +1,34 @@
 <template>
-    <div ref="tContainer" v-click-outside="hideToken" class="token">
-        <div class="token-img">
+    <div class="token __pointer">
+        <div class="token-img" @click="showDetail('token')">
             <img v-show="ftokenIcon" :src="ftokenIcon"/>
             <div v-show="activeTxPairIsClose" class="close"></div>
         </div>
 
-        <div class="t-item __pointer">
-            <span class="symbol" @click="showToken('ftoken')">
+        <div class="t-item">
+            <span class="symbol" @click="showDetail('token')">
                 {{ ftokenDetail ? ftokenDetail.symbol : '' }}
             </span> /
-            <span class="symbol ttoken" @click="showToken('ttoken')">
+            <span class="symbol ttoken" @click="showDetail('token')">
                 {{ ttokenDetail ? ttokenDetail.symbol : '' }}
             </span>
-            <operator></operator>
+            <span class="gate" @click="showDetail('operator')">
+                <img class="gate-img" src="~assets/imgs/operator_icon.svg" />
+                {{ operatorInfo ? operatorInfo.name : '--' }}
+            </span>
         </div>
 
-        <div v-show="showTokenType" class="detail" :class="{'right': showTokenType === 'ttoken'}">
-            <div @click="goNetToken(tokenDetail.tokenId)" class="token-row __pointer">
-                <span class="token-title">{{ $t('trade.head.tokenName') }} :</span>
-                <span class="active">{{ tokenDetail.name || '--' }}</span>
-            </div>
-            <div class="token-row __pointer">
-                <span class="token-title">{{ $t('trade.head.originalSymbol') }} :</span>
-                <span>{{ tokenDetail.originalSymbol || '--' }}</span>
-            </div>
-            <div class="token-row">
-                <span class="token-title">{{ $t('trade.head.tokenId') }} :</span>
-                {{ tokenDetail.tokenId || '--' }}
-            </div>
-            <div @click="goNetAddr(tokenDetail.publisher)" class="token-row __pointer">
-                <span class="token-title">{{ $t('trade.head.publisher') }} :</span>
-                <span class="active">{{ tokenDetail.publisher || '--' }}</span>
-            </div>
-            <div class="token-row __pointer">
-                <span class="token-title">{{ $t('trade.head.gateway') }} :</span>
-                <span>{{ tokenDetail.gateway ? tokenDetail.gateway.name || '--' : '--' }}</span>
-            </div>
-            <div class="token-row">
-                <span class="token-title">{{ $t('trade.head.tokenDigit') }} :</span>
-                {{ tokenDetail.tokenDecimals || '--' }}
-            </div>
-            <div class="token-row">
-                <span class="token-title">{{ $t('trade.head.publisherDate') }} :</span>
-                {{ tokenDetail.publisherDate || '--' }}
-            </div>
-            <div class="token-row">
-                <span class="token-title">{{ $t('trade.head.total') }} :</span>
-                {{ tokenDetail.totalSupply || '--' }}
-            </div>
-            <div class="token-row">
-                <span class="token-title">{{ $t('trade.head.website') }} :</span>
-                {{ tokenDetail.website || '--' }}
-            </div>
-            <div class="token-row">
-                <span class="token-title">{{ $t('trade.head.explorer') }} :</span>
-                {{ tokenDetail.links && tokenDetail.links.explorer ? tokenDetail.links.explorer : '--' }}
-            </div>
-            <div class="token-row">
-                <span class="token-title">{{ $t('trade.head.type') }} :</span>
-                {{ tokenDetail.tokenType || '--' }}
-            </div>
-            <div class="token-row">
-                <span class="token-title">{{ $t('trade.head.overview') }} :</span>
-                {{ tokenDetail.overview && tokenDetail.overview[$i18n.locale] ? tokenDetail.overview[$i18n.locale] : '--' }}
-                <!-- {{ tokenDetail.overview ? tokenDetail.overview.en || '--' : '--'}} -->
-            </div>
-        </div>
+        <detail ref="detailConfirm"></detail>
     </div>
 </template>
 
 <script>
-import date from 'utils/date';
-import ellipsisAddr from 'utils/ellipsisAddr';
-import operator from './operator.vue';
-import BigNumber from 'utils/bigNumber';
-import openUrl from 'utils/openUrl';
+import detail from './detail.vue';
 
 export default {
-    components: { operator },
+    components: { detail },
     data() {
-        return { showTokenType: '' };
+        return { showTab: '' };
     },
     computed: {
         closeMarket() {
@@ -120,50 +69,13 @@ export default {
             }
             return '';
         },
-        tokenDetail() {
-            if (!this.showTokenType) {
-                return {};
-            }
-
-            let detail = this.$store.state.exchangeTokens.ftoken;
-            if (this.showTokenType === 'ttoken') {
-                detail = this.$store.state.exchangeTokens.ttoken;
-            }
-
-            if (!detail) {
-                return {};
-            }
-
-            detail = Object.assign({}, detail);
-            detail.publisher = ellipsisAddr(detail.publisher);
-            detail.tokenType = detail.reissue === 1 ? this.$t('trade.head.tokenType0')
-                : detail.reissue === 2 ? this.$t('trade.head.tokenType1') : '';
-            detail.publisherDate = detail.publisherDate ? date(detail.publisherDate * 1000, 'zh') : '';
-            detail.totalSupply = detail.totalSupply ? BigNumber.toBasic(detail.totalSupply, detail.tokenDecimals || 0) : '';
-
-            return detail;
+        operatorInfo() {
+            return this.$store.state.exchangeTokens.operator;
         }
     },
     methods: {
-        showToken(type) {
-            this.showTokenType = type;
-        },
-        hideToken(e) {
-            const tContainer = this.$refs.tContainer;
-            if (!tContainer
-                || e.target === tContainer
-                || tContainer.contains(e.target)) {
-                return;
-            }
-            this.showTokenType = '';
-        },
-        goNetToken(tokenId) {
-            const locale = this.$i18n.locale === 'zh' ? 'zh/' : '';
-            openUrl(`${ process.env.viteNet }${ locale }token/${ tokenId }`);
-        },
-        goNetAddr(addr) {
-            const locale = this.$i18n.locale === 'zh' ? 'zh/' : '';
-            openUrl(`${ process.env.viteNet }${ locale }account/${ addr }`);
+        showDetail(tab = 'token') {
+            this.$refs.detailConfirm.tab = tab;
         }
     }
 };
@@ -187,6 +99,7 @@ export default {
             height: 28px;
             border-radius: 28px;
             border: 1px solid rgba(212,222,231,1);
+            box-sizing: border-box;
         }
         .close {
             position: absolute;
@@ -230,6 +143,17 @@ export default {
             }
             &.ttoken {
                 color: #5E6875;
+            }
+        }
+        .gate {
+            @include font-family-normal();
+            color: #007AFF;
+            display: flex;
+            margin-top: 2px;
+            .gate-img {
+                width: 14px;
+                height: 14px;
+                margin-bottom: -3px;
             }
         }
     }
