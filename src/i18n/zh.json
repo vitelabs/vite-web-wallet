@@ -768,11 +768,17 @@
         "depthStep": "{step}位小数",
         "blocking": "网络拥堵, 请稍候重试",
         "operator": {
-            "title": "运营商信息",
-            "introduction": "介绍",
+            "overview": "介绍",
             "txPair": "交易对",
             "confirmTitle": "温馨提示",
-            "confirmText": "当前交易对为 {symbol}，请谨慎交易。数字资产交易存在风险，需用户自行谨慎判断确定相关数字资产的真实性、合法性和有效性，并自行承担因此产生的责任与损失。"
+            "confirmText": "当前交易对为 {symbol}，请谨慎交易。数字资产交易存在风险，需用户自行谨慎判断确定相关数字资产的真实性、合法性和有效性，并自行承担因此产生的责任与损失。",
+            "address": "运营商地址",
+            "name": "运营商名称"
+        },
+        "operatorTxPair": {
+            "title": "交易对信息",
+            "tokenTab": "代币详情",
+            "operatorTab": "运营商信息"
         }
     },
     "trade": {
