@@ -228,17 +228,19 @@ export default {
         right: -10px;
         z-index: 1;
         transform: translateX(100%);
-        background: rgba(255, 255, 255, 1);
-        box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.1);
+        background: rgba(215,215,215,1);
+        box-shadow: 0px 5px 20px 0px rgba(0,0,0,0.1);
+        border: 1px solid rgba(212,222,231,1);
         font-size: 12px;
-        color: #5E6875;
+        line-height: 18px;
+        color: rgba(94,104,117,1);
         font-family: $font-H;
         font-weight: 400;
 
         &::after {
             content: ' ';
             border: 5px solid transparent;
-            border-right: 5px solid #fff;
+            border-right: 5px solid rgba(215,215,215,1);
             position: absolute;
             top: 50%;
             left: 0;

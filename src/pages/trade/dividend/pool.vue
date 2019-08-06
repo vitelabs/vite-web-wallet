@@ -41,11 +41,11 @@ const typeList = [ {
     name: 'VITE',
     icon: viteIcon
 }, {
-    name: 'ETH',
-    icon: ethIcon
-}, {
     name: 'BTC',
     icon: btcIcon
+}, {
+    name: 'ETH',
+    icon: ethIcon
 }, {
     name: 'USD',
     icon: usdIcon
@@ -197,7 +197,6 @@ export default {
     flex: 1;
     padding: 14px 30px;
     box-sizing: border-box;
-    border: 1px solid rgba(227, 235, 245, 0.6);
     font-size: 12px;
     display: flex;
     flex-direction: row;
