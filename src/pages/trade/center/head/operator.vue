@@ -1,10 +1,9 @@
 <template>
     <div class="gate">
-        <span class="__pointer" v-if="operatorInfo" @click="showOperator">
-            <img v-show="operatorInfo.img" class="gate-img" :src="operatorInfo.img"/>
-            {{ operatorInfo.name || '--' }}
+        <span class="__pointer" @click="showOperator">
+            <img class="gate-img" src="~assets/imgs/operator_icon.svg" />
+            {{ operatorInfo ? operatorInfo.name : '--' }}
         </span>
-        <span v-else>--</span>
 
         <confirm v-if="isShowCinfirm" class="no-padding-confirm"
                  :title="$t('tradeCenter.operator.title')"
@@ -93,6 +92,9 @@ export default {
     },
     methods: {
         showOperator() {
+            if (!this.operatorInfo) {
+                return;
+            }
             this.isShowCinfirm = true;
         },
         closeOperator() {
@@ -113,8 +115,7 @@ export default {
     .gate-img {
         width: 14px;
         height: 14px;
-        margin-right: 2px;
-        margin-bottom: -2px;
+        margin-bottom: -3px;
     }
 }
 
