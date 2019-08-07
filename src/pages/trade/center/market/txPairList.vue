@@ -29,7 +29,6 @@
 </template>
 
 <script>
-import getQuery from 'utils/query';
 import BigNumber from 'utils/bigNumber';
 import statistics from 'utils/statistics';
 
@@ -44,6 +43,10 @@ export default {
         currentRule: {
             type: String,
             default: ''
+        },
+        isLoading: {
+            type: Boolean,
+            default: false
         },
         list: {
             type: Array,
@@ -69,6 +72,9 @@ export default {
         isShowFavorite() {
             return this.$store.state.exchangeMarket.isShowFavorite;
         },
+        DefaultSymbol() {
+            return this.$store.state.exchangeMarket.DefaultSymbol;
+        },
         activeSymbol() {
             return this.activeTxPair ? this.activeTxPair.symbol || null : null;
         },
@@ -76,23 +82,29 @@ export default {
             return this.$store.state.exchangeActiveTxPair.activeTxPair;
         },
         showList() {
-            const list = this.orderList(this.list);
-            const query = getQuery();
-            const symbol = query.symbol || 'VITE_BTC-000';
+            if (this.isLoading) {
+                return [];
+            }
 
+            const list = this.orderList(this.list);
             const _l = [];
-            let activeTxPair = list && list.length ? list[0] : null;
+
+            let activeTxPair = null;
 
             list.forEach(_t => {
-                if (symbol && _t.symbol === symbol) {
+                if (this.DefaultSymbol && _t.symbol === this.DefaultSymbol) {
                     activeTxPair = _t;
                 }
                 _l.push(_t);
             });
 
-            if (!this.activeTxPair && activeTxPair) {
+            if (activeTxPair) {
                 this.setActiveTxPair(activeTxPair);
+            } else if (!this.activeTxPair) {
+                activeTxPair = list && list.length ? list[0] : null;
+                activeTxPair && this.setActiveTxPair(activeTxPair);
             }
+            this.$store.commit('clearDefaultSymbol');
 
             return _l;
         },

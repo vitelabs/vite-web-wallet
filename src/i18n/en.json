@@ -757,6 +757,7 @@
         "mergeDepth": "Group",
         "depthStep": "{step} digits",
         "blocking": "Network congestion occurs, please try again later",
+        "supportMining": "支持挖矿的交易对",
         "operator": {
             "overview": "Introduction",
             "txPair": "Trading Pairs",

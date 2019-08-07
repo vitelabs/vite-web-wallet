@@ -25,11 +25,13 @@ let webpackConfig = {
     entry: { index: path.join(SRC_PATH, '/index.js') },
     output: {
         path: STATIC_PATH,
-        filename: '[name].[hash].js'
+        // filename: '[name].[contenthash].js'
+        filename: '[name].[chunkhash].js'
     },
     plugins,
     optimization: {
         splitChunks: {
+            maxSize: 1200000,
             cacheGroups: {
                 // [TODO] Async Router
                 vendors: {

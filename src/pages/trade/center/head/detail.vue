@@ -69,7 +69,7 @@
                 <span class="facebook" v-show="tokenDetail.facebookLink"></span>
             </div>
         </div>
-        <div v-if="tab === 'operator'" class="tab-content">
+        <div v-if="tab === 'operator' && operatorInfo" class="tab-content">
             <div class="content__item">
                 <span class="label">{{ $t('tradeCenter.operator.name') }}:</span>
                 {{ operatorInfo.name }}<img class="operator-img" :src="operatorInfo.icon"/>
@@ -84,8 +84,13 @@
             </div>
             <div class="content__item _b">
                 <span class="label">{{ $t('tradeCenter.operator.txPair') }}:</span>
-                <div class="tx-pair-list" v-if="operatorInfo.txPairs.length">
-                    <span v-for="(symbol,i) in operatorInfo.txPairs" :key="i">{{ symbol.replace('_', '/') }}</span>
+                <div class="tx-pair-list">
+                    <template v-for="(pairs, category) in operatorInfo.tradePairs">
+                        <span class="symbol" v-for="(symbol) in pairs" :key="symbol"
+                              @click="switchTxPair({ category, symbol })">
+                            {{symbol.replace('_', '/') }}
+                        </span>
+                    </template>
                 </div>
             </div>
         </div>
@@ -97,14 +102,15 @@ import confirm from 'components/confirm/confirm.vue';
 import { getExplorerLink } from 'utils/getLink';
 import bigNumber from 'utils/bigNumber';
 import openUrl from 'utils/openUrl';
+import statistics from 'utils/statistics';
 
-import operatorList from './operator.json';
+// import operatorList from './operator.json';
 
-import XS_Fund from 'assets/imgs/operator/XS_Fund.png';
-import Vgate from 'assets/imgs/operator/Vgate.png';
-import ViteLabs from 'assets/imgs/operator/viteLabs.png';
+// import XS_Fund from 'assets/imgs/operator/XS_Fund.png';
+// import Vgate from 'assets/imgs/operator/Vgate.png';
+// import ViteLabs from 'assets/imgs/operator/viteLabs.png';
 
-const operatorIcon = { ViteLabs, XS_Fund, Vgate };
+// const operatorIcon = { ViteLabs, XS_Fund, Vgate };
 
 export default {
     components: { confirm },
@@ -136,27 +142,25 @@ export default {
 
             return tokenDetail;
         },
-        // operatorInfo() {
-        //     return this.$store.state.exchangeTokens.operator;
-        // }
-
-        activeTxPair() {
-            return this.$store.state.exchangeActiveTxPair.activeTxPair;
+        address() {
+            return this.$store.getters.activeAddr;
         },
         operatorInfo() {
-            if (!this.activeTxPair) {
-                return null;
-            }
-
-            const operator = operatorList.find(v => v.txPairs.indexOf(this.activeTxPair.symbol) !== -1);
-            if (!operator) {
-                return null;
-            }
-
-            const img = operator.img;
-            operator.icon = img ? operatorIcon[img] || '' : '';
-            return operator;
+            return this.$store.state.exchangeTokens.operator;
         }
+
+        // activeTxPair() {
+        //     return this.$store.state.exchangeActiveTxPair.activeTxPair;
+        // },
+        // operatorInfo() {
+        //     if (!this.activeTxPair) {
+        //         return null;
+        //     }
+        //     const operator = operatorList[0];
+        //     const img = operator.img;
+        //     operator.icon = img ? operatorIcon[img] || '' : '';
+        //     return operator;
+        // }
     },
     methods: {
         switchTab(tab) {
@@ -171,6 +175,11 @@ export default {
         },
         openUrl(url) {
             url && openUrl(url);
+        },
+        switchTxPair({ category, symbol }) {
+            statistics.event(this.$route.name, `operator_switchTxPair_${ category }_${ symbol }`, this.address || '');
+            this.$store.commit('switchTradePair', { category, symbol });
+            this.close();
         }
     }
 };
@@ -195,7 +204,7 @@ export default {
         display: flex;
         flex-wrap: wrap;
         color: rgba(0,122,255,1);
-        span {
+        .symbol {
             white-space: nowrap;
             margin-bottom: 6px;
             margin-right: 30px;
