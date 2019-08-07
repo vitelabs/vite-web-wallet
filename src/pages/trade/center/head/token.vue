@@ -12,6 +12,10 @@
             <span class="symbol ttoken" @click="showDetail('token')">
                 {{ ttokenDetail ? ttokenDetail.symbol : '' }}
             </span>
+            <span class="mining" v-show="isMinging">
+                <img src="~assets/imgs/mining.svg"/>
+                <tooltips class="tips" :content="$t('tradeCenter.supportMining')"></tooltips>
+            </span>
             <span class="gate" @click="showDetail('operator')">
                 <img class="gate-img" src="~assets/imgs/operator_icon.svg" />
                 {{ operatorInfo ? operatorInfo.name : '--' }}
@@ -24,13 +28,18 @@
 
 <script>
 import detail from './detail.vue';
+import tooltips from 'components/tooltips';
 
 export default {
-    components: { detail },
+    components: { detail, tooltips },
     data() {
         return { showTab: '' };
     },
     computed: {
+        isMinging() {
+            const marketInfo = this.$store.state.exchangeFee.marketInfo;
+            return marketInfo && marketInfo.allowMine;
+        },
         closeMarket() {
             return this.$store.state.exchangeMarket.marketClosed;
         },
@@ -75,6 +84,9 @@ export default {
     },
     methods: {
         showDetail(tab = 'token') {
+            if (tab === 'operator' && !this.operatorInfo) {
+                tab = 'token';
+            }
             this.$refs.detailConfirm.tab = tab;
         }
     }
@@ -143,6 +155,21 @@ export default {
             }
             &.ttoken {
                 color: #5E6875;
+            }
+        }
+        .mining {
+            position: relative;
+            .tips {
+                display: none;
+                @include font-family-normal();
+            }
+            &:hover {
+                .tips {
+                    display: inline-block;
+                }
+            }
+            img {
+                margin-bottom: -1px;
             }
         }
         .gate {
