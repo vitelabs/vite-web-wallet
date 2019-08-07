@@ -72,7 +72,6 @@ export default {
         };
     },
     beforeMount() {
-        window.ffff = this;
         Promise.all([ getDepositInfo({ tokenId: this.token.tokenId, addr: this.defaultAddr }, this.token.gateInfo.url).then(res => {
             this.labelName = res.labelName;
         }),
