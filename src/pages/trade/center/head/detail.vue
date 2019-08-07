@@ -2,12 +2,7 @@
     <confirm v-show="tab" class="big no-padding-confirm" :title="$t('tradeCenter.operatorTxPair.title')"
              :closeIcon="true" :close="close">
         <div class="head">
-            <img class="icon" :src="tokenDetail.urlIcon"/>
-            <div class="head_info">
-                <div class="head__name">{{tokenDetail.name}}</div>
-                <div class="head__symbol">{{tokenDetail.originalSymbol}}</div>
-            </div>
-            <div class="gate_info" v-if="tokenDetail.gateway && tokenDetail.gateway.name">{{tokenDetail.gateway.name}}</div>
+            <tx-pair-info></tx-pair-info>
         </div>
         <div class="tab">
             <div class="tab__item" :class="{'active': tab === 'token'}" @click="switchTab('token')">
@@ -65,8 +60,8 @@
             </div>
             <div class="content__item">
                 <div class="label">{{$t("tokenCard.tokenInfo.labels.media")}}:</div>
-                <span class="twitter" v-show="tokenDetail.twitterLink"></span>
-                <span class="facebook" v-show="tokenDetail.facebookLink"></span>
+                <span class="twitter" v-show="tokenDetail.twitterLink">twitter</span>
+                <span class="facebook" v-show="tokenDetail.facebookLink">facebook</span>
             </div>
         </div>
         <div v-if="tab === 'operator' && operatorInfo" class="tab-content">
@@ -103,6 +98,7 @@ import { getExplorerLink } from 'utils/getLink';
 import bigNumber from 'utils/bigNumber';
 import openUrl from 'utils/openUrl';
 import statistics from 'utils/statistics';
+import txPairInfo from './txPairInfo.vue';
 
 // import operatorList from './operator.json';
 
@@ -113,7 +109,7 @@ import statistics from 'utils/statistics';
 // const operatorIcon = { ViteLabs, XS_Fund, Vgate };
 
 export default {
-    components: { confirm },
+    components: { confirm, txPairInfo },
     data() {
         return { tab: '' };
     },
@@ -149,13 +145,7 @@ export default {
             return this.$store.state.exchangeTokens.operator;
         }
 
-        // activeTxPair() {
-        //     return this.$store.state.exchangeActiveTxPair.activeTxPair;
-        // },
         // operatorInfo() {
-        //     if (!this.activeTxPair) {
-        //         return null;
-        //     }
         //     const operator = operatorList[0];
         //     const img = operator.img;
         //     operator.icon = img ? operatorIcon[img] || '' : '';
