@@ -203,6 +203,7 @@ export default {
     font-size: 12px;
     font-family: $font-normal;
     line-height: 16px;
+    border-right: 1px solid rgba(227,235,245,0.6);
     &:last-child {
         border-right: none;
     }
