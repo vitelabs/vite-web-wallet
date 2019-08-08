@@ -1,62 +1,72 @@
 {
-    "lang": "EN",
-    "help": "Help",
-    "start": "Start",
-    "login": "Log In",
-    "regAcc": "Register",
-    "dexToken": "Open Trading Pairs",
-    "unlockAcc": "Unlock Current Account",
-    "changeAcc": "Switch to Other Account",
-    "existingAcc": "Existing Accounts",
-    "restore": "Import Mnemonic Words",
-    "register": "Sign Up",
-    "createAcc": "Create",
-    "settingAcc": "Setting Account",
-    "resetAcc": "Reset Your Account",
-    "logout": "Logout",
-    "blockHeight": "Snapshot Block Height",
-    "accountName": "Account Name",
-    "action": "Action",
-    "stakingAmount": "Staking Amount",
-    "submitStaking": "Submit Staking",
-    "withdrawHeight": "Expected Snapshot Height",
-    "balance": "Balance",
-    "addrName": "Address{index}",
+    "lang": "RU",
+    "help": "Помощь",
+    "start": "Начать",
+    "login": "Войти",
+    "regAcc": "Зарегистрироваться",
+    "unlockAcc": "Разблокировать Текущий Аккаунт",
+    "changeAcc": "Переключиться на Другой Аккаунт",
+    "existingAcc": "Существующие Аккаунты",
+    "restore": "Импорт Мнемонических Слов",
+    "register": "Зарегистрироваться",
+    "createAcc": "Создать",
+    "settingAcc": "Настройка Аккаунта",
+    "resetAcc": "Сбросить Ваш Аккаунт",
+    "logout": "Выйти",
+    "blockHeight": "Высота Снепшот Блока",
+    "accountName": "Имя Пользователя",
+    "action": "Действие",
+    "stakingAmount": "Сумма Стейкинга",
+    "submitStaking": "Отправить в Стейкинг",
+    "withdrawHeight": "Ожидаемая Высота Снепшота",
+    "balance": "Баланс",
+    "dexBalance": "Баланс ViteX",
+    "addrName": "Адрес{index}",
+    "true": "верно",
+    "false": "неверно",
     "guide": {
-        "close": "Close",
-        "next": "Next",
-        "closeTips": "Skip user guide (Not recommended)",
+        "close": "Закрыть",
+        "next": "Далее",
+        "closeTips": "Пропустить руководство пользователя (Не рекомендуется)",
         "trade": [
-            "Manage your assets (both Web Wallet and ViteX exchange) here",
-            "Check out Open Orders and Order History, know trading details",
+            "Управляйте вашими активами (как Веб-Кошелека, так и биржи ViteX) здесь",
+            "Проверьте Открытые Ордера и Историю Ордеров, узнайте детали торговли",
             "Participate in mining, acquire VX and trading fee dividends (Mining Dividends)",
-            "Experience more features: Staking for Quota, becoming a SBP (Snapshot Block Producer) runner, Voting for SBPs, ERC20 conversion, Transaction Details, etc."
+            "Попробуйте больше возможностей: сделайте Стейк на Квоту, станьте держателем SBP (Snapshot Block Producer), Голосуйте за SBP, конвертрируйте ERC20, Детали Транзакции и.т.д."
         ],
         "assets": [
-            "Deposit to Exchange",
-            "Withdraw to Wallet"
+            "Депозит на Биржу",
+            "Вывод на Кошелек",
+            "Кросс-Чейн Получение и Перевод"
         ]
     },
     "dealReminder": {
-        "title": "Deal Notice",
-        "describe": "Your order {amount} {ftoken} ({ftoken}/{ttoken}) at {time} is a complete deal, visit Order History to find out more."
+        "title": "Торговое Уведомление",
+        "failTitle": "Ордер не Выполнен",
+        "notice": "Ваш ордер {amount} {ftoken} ({ftoken}/{ttoken}) в {time} является выполненым, посетите Историю Ордеров, чтобы узнать больше.",
+        "error": "Ваш ордер {amount} {ftoken} ({ftoken}/{ttoken}) в {time} не удался, для получения более подробной информации, пожалуйста, посмотрите в разделе История Ордеров."
     },
     "pow": {
-        "ing": "Running PoW to acquire quota",
-        "no": "You can stake VITE for quota in case you would not like to run PoW"
+        "ing": "Запуск PoW для получения квоты",
+        "no": "Вы можете стейкать VITE для квоты, если не хотите запускать PoW"
     },
-    "addAccount": "Create an Account",
-    "saveQrcode": "Save QR code image",
-    "unlockSuccess": "Unlock Success",
+    "addAccount": "Создать Аккаунт",
+    "saveQrcode": "Сохранить изображение QR-кода",
+    "unlockSuccess": "Успешная Разблокировка",
     "sendTrans": {
-        "send": "Send Transaction",
-        "symbol": "Send"
+        "send": "Отправить Транзакцию",
+        "symbol": "Отправить"
+    },
+    "compliance": {
+        "text": "ViteX не обслуживает клиентов в следующих странах / регионах / территориях: Гонконг, Куба, Иран, Северная Корея, Крым, Судан, Малайзия, Сирия, США [включая все территории США, такие как Пуэрто-Рико, Американское Самоа, Гуам, Северный остров Мариана и Виргинские острова США (Сент-Круа, Сент-Джон и Сент-Томас)], Бангладеш, Боливия, Эквадор и Кыргызстан. Для получения дополнительной информации, пожалуйста, прочитайте наши Условия Предоставления Услуг и Политику Конфиденциальности",
+        "title": "Важное Замечание"
     },
     "errCode": {
-        "35003": "{name} ID conflict occurs, please re-submit later",
-        "35004": "Invalid parameters",
+        "35003": "{name} Конфликт ID, пожалуйста, повторите попытку позже",
+        "35004": "Неверные параметры",
         "35005": "Transactions are sent too frequent, please try again later",
         "35006": "Contract method not exist",
+        "35011": "Network Congestion",
         "36001": "You cannot make any transfer until you receive a transaction",
         "36002": "System verify failed, please try again later",
         "36003": "System verify failed, please try again later",
@@ -80,7 +90,7 @@
         "RetrieveReward": "Retrieve Reward",
         "Voting": "Voting",
         "RevokeVoting": "Revoke Voting",
-        "GetQuota": "Get TPS Quota",
+        "GetQuota": "Get Quota",
         "WithdrawalOfQuota": "Withdrawal of Staking Quota",
         "Mintage": "Token Issuance",
         "MintageIssue": "Additional Token Issuance",
@@ -91,18 +101,21 @@
         "DexFundUserDeposit": "ViteX Deposit",
         "DexFundUserWithdraw": "ViteX Withdrawal",
         "DexFundNewOrder": "ViteX Creating Orders",
-        "currDexFundNewOrder": "ViteX Creating Orders",
         "DexTradeCancelOrder": "ViteX Revoking Orders",
         "DexFundNewMarket": "ViteX Token Listing",
         "CreateContractReq": "Create Contract",
-        "DexFundPledgeForVx": "ViteX抵押",
+        "DexFundPledgeForVx": "ViteX Staking",
         "DexFundPledgeForVip": "ViteX VIP",
         "TxReq": "Transfer",
         "RewardReq": "Transfer",
         "TxRes": "Transfer",
         "TxResFail": "Transfer",
         "SendRefund": "Transfer",
-        "GenesisReceive": "Genesis"
+        "GenesisReceive": "Genesis",
+        "DexFundTransferTokenOwner": "Operator's key ownership transfer",
+        "DexFundMarketOwnerConfig": "Operator's trading pair configuration",
+        "DexFundBindInviteCode": "Use Referral Code",
+        "DexFundNewInviter": "Create Referral Code"
     },
     "btn": {
         "cancel": "Cancel",
@@ -114,7 +127,8 @@
         "understand": "I understand",
         "edit": "Edit",
         "reReg": "Re-register",
-        "otherProd": "Use Other Products of Vite"
+        "otherProd": "Use Other Products of Vite",
+        "known": "I know"
     },
     "hint": {
         "noNet": "No network detected",
@@ -124,30 +138,35 @@
         "err": "Oops, error occurs",
         "request": "{name} request has sent, please wait",
         "copy": "Successfully copied",
-        "addrFormat": "Address format error",
-        "amtFormat": "Amount format error",
+        "addrFormat": "Incorrect address format",
+        "amtFormat": "Incorrect amount format",
         "transSucc": "Transaction successful!",
         "insufficientBalance": "Insufficient balance",
-        "nodeErr": "The full node is abnormal, please try again later."
+        "validMaxDigit": "At most {digit} decimals",
+        "nodeErr": "The full node is abnormal, please try again later.",
+        "bigger0": "Value must be greater than 0",
+        "operateSuccess": "Operation Successful",
+        "operateFail": "Operation Failed",
+        "unreceived": "Unlock you wallet before use"
     },
     "beforeUse": {
         "title": "Read Before Use",
-        "text1": "Please be sure to backup your seed phrase when creating account. We cannot guarantee the restoration of your assets in the instance that you visit a scam site or lose your private keys or seed phrase.",
+        "text1": "For your funds' safety, create account function is not supported provisionally on web wallet. Please download Vite App to create account. Vite platform would like to warn you that if you visit a phishing website or lose you backup, our company cannot recover your funds.",
         "text2": "Please note that our websites do not store your private keys or seed phrase. Therefore, you will need to restore your account via seed phrase if you decide to change browsers, clear local cookies, or change PCs.",
         "text3": "Please take proper precautions in ensuring that you accurately record and safely store your seed phrase. Even the slightest error will result in you not being able to successfully restore your address."
     },
     "preview": {
-        "t": "Version 1.6.0",
-        "txt1": "Vite Web Wallet is a light node wallet launched by Vite Labs",
-        "txt2": "The wallet in the current version supports functions of query account balances, send and default receive transactions,  staking VITE for quota, SBP registration, voting ,etc.",
-        "txt3": "We are now working on the Vite DEX, stay tuned.",
+        "t": "Version {version}",
+        "txt1": "x.vite.net is an web platform integrating wallet and exchange. It is officially launched by Vite Labs.",
+        "txt2": "Current version mainly contains functions of wallet, ViteX decentralised exchange, staking VITE for quota, SBP registration, voting and token issuance. Try our newly released function ViteConnect: you can use Vite App to login via scanning a QR code.",
+        "txt3": "ViteX is formally launched. Come and start trading now.",
         "v": "Current Version: {version}"
     },
     "pwdConfirm": {
         "conf": "Open password-free mode to free you from entering password during every transaction process. ",
         "title": "Password",
         "placeholder": "Please input wallet password",
-        "unlockAcc": "Please input password to unlock {name} account"
+        "unlockAcc": "Please unlock {name} first"
     },
     "quotaConfirm": {
         "title": "Insufficient Quota",
@@ -194,28 +213,26 @@
             "720": "12 Hours"
         }
     },
-    "startCreate": {
-        "input": "Please input password",
-        "again": "Please input password again",
-        "choose": "Choose Account",
+    "create": {
+        "input": "Please enter your password",
+        "again": "Please confirm your password",
+        "choose": "Choose an account",
         "finish": "Done",
-        "agreementPre": "I agree to Vite Wallet and ViteX's",
-        "agreement": "Privacy Policy and Terms of Service",
+        "agreementPre": "I have read and agree with Vite Wallet and ViteX's",
+        "agreement": "Terms of Services and Privacy Policy",
         "hint": {
             "nameInput": "Please input account name",
-            "nameLong": "Name cannot exceed {long} characters!",
-            "long": "Your input cannot exceed 32 characters!",
-            "name": "Account name only supports Chinese, English, numbers and underscores",
-            "consistency": "Please enter the same password!",
-            "pwFormat": "Wrong password format. The password only supports English, half-width symbols, numbers."
+            "nameLong": "Name cannot exceed {long} characters",
+            "long": "Password cannot exceed 32 characters",
+            "name": "Account name only supports English and Chinese characters, digits and underline",
+            "consistency": "Please enter the same password",
+            "pwFormat": "Wrong password format, password only contains digits, English letters and half width punctuation."
         }
     },
-    "startRecord": {
-        "agreeList": [
-            "I understand that if I lose my mnemonic words, I will not be able to access my account.",
-            "I understand that if I forget or lose my mnemonic words, no one can guarantee the restoration of my assets.",
-            "I have already written down or securely stored my mnemonic words."
-        ]
+    "startCreate": {
+        "notice": "For your funds' safety, create account function is not supported provisionally on web wallet. Please download Vite App to create account.",
+        "goLogin": "Log In",
+        "goDex": "Go to ViteX"
     },
     "keystore": {
         "title": "Keystore",
@@ -231,6 +248,7 @@
         "moreRecords": "More Records",
         "others": "Others",
         "assetSpread": "Portfolio",
+        "saveSuccess": "Successfully saved",
         "heads": {
             "name": "Name",
             "balance": "Balance",
@@ -284,15 +302,21 @@
             }
         },
         "gateInfo": {
+            "clickCustomer": "Submit a request",
+            "name": "Gateway Name",
+            "customer": "Customer Service",
+            "privacy": "Terms of Services",
+            "clickPrivacy": "{gate}'s official gateway Terms of Services",
             "gateSetting": "Configure Gateway",
             "tabName": "Gateway Details",
             "selfdefined": "Customize Gateway",
             "officalNet": "Website",
             "introduction": "Description",
             "token": "Issued Token",
-            "setting": "Settings",
-            "nodeDesc": "User Guide:",
-            "settingPlaceholder": "Please input gateway link address"
+            "setting": "Gateway Interface",
+            "nodeDesc": "User Guide",
+            "settingPlaceholder": "Please input gateway link address",
+            "nodeDescStr": "This function only works for cross-chain tokens, do not use this on built-in tokens. Meanwhile, please be careful about unfamiliar gateway links. By continuing to use our platform, you agree and acknowledge that Vite Labs would not be responsible for the loss of your fund and other negative consequences caused. Fill out the gateway link below if you need to use gateway, the link will come into effect after you hit save."
         },
         "depositRecord": {
             "tabName": "Deposit History",
@@ -301,14 +325,16 @@
                 "Amount",
                 "Status",
                 "VITE Chain Hash",
-                "{outChain} Chain Hash"
+                "{outChain} Chain Hash",
+                "Fees"
             ],
             "statusMap": {
-                "OPPOSITE_PROCESSING": "{outChain} Chain Unconfirmed",
-                "OPPOSITE_CONFIRMED": "Gateway has received",
+                "OPPOSITE_PROCESSING": "{outChain} awaits to confirm{confirms}",
+                "OPPOSITE_CONFIRMED_FAIL": "{outChain} processing failed",
+                "OPPOSITE_CONFIRMED": "Gateway Received",
                 "TOT_CONFIRMED": "Completed",
-                "BELOW_MINIMUM": "VITE Chain Unconfirmed",
-                "TOT_PROCESSING": "Completed"
+                "BELOW_MINIMUM": "Topup Failed",
+                "TOT_PROCESSING": "VITE chain await to confirm"
             }
         },
         "withdrawRecord": {
@@ -318,15 +344,16 @@
                 "Amount",
                 "Status",
                 "VITE Chain Hash",
-                "{outChain} Chain Hash"
+                "{outChain} Chain Hash",
+                "Fees"
             ],
             "statusMap": {
-                "TODO": "VITE Chain Unconfirmed",
-                "TOT_PROCESSING": "VITE Confirmed",
-                "TOT_NOT_RECEIVED": "Transfer Failed",
-                "TOT_CONFIRMED": "Gateway has received",
-                "OPPOSITE_PROCESSING": "{outChain} chain unconfirmed",
-                "OPPOSITE_CONFIRMED": "Completed"
+                "TOT_PROCESSING": "VITE Chain Unconfirmed{confirms}",
+                "TOT_CONFIRMED": "VITE Confirmed",
+                "TOT_EXCEED_THE_LIMIT": "Transfer amount exceeds the limit",
+                "OPPOSITE_PROCESSING": "{outChain} awaits to confirm",
+                "OPPOSITE_CONFIRMED": "Completed",
+                "WRONG_WITHDRAW_ADDRESS": "Transfer address is incorrect"
             }
         },
         "receive": {
@@ -340,11 +367,13 @@
             "title": "Cross-Chain Receive",
             "addrErr": "Something went wrong with gateway node, please check your network settings",
             "addressTitle": "Recipient Address",
+            "labelTips": "(Please use this '{labelName}' with your receive address, otherwise your assets will lose",
+            "labelCodeTips": "Please Scan the QRcode from {labelName}",
             "codeTips": "Scan QR code to deposit. Please transfer with the wallet that supports {tokenSymbol}",
             "tips": [
                 "Cross-Chain Receive operation will do {tokenSymbol} Cross-Chain mapping to VITE network, you can still transfer the assets after receiving them",
                 "You can only send {tokenSymbol} through this address and the amount cannot be less than {min}",
-                "When the transaction is confirmed, you will receive the asset after 5 minutes, kindly wait in patient"
+                "You will receive your assets after {confirmationCount} confirmations, kindly wait in patient"
             ]
         },
         "withdraw": {
@@ -369,6 +398,9 @@
             "failTips": "An error occurred in gateway node, please check the network settings"
         },
         "nodeErr": "Gateway node is invalid, please check the gateway settings"
+    },
+    "viteExplorer": {
+        "title": "Block Explorer"
     },
     "wallet": {
         "title": "Quota Management",
@@ -399,6 +431,64 @@
         "trans": {
             "powErr": "Error occurs when running PoW, please try again",
             "powTransErr": "Insufficient quota of PoW, we'd recommend that you stake VITE to obtain quota."
+        }
+    },
+    "walletMintage": {
+        "title": "Token Issuance",
+        "address": "Issuance Address",
+        "tokenName": "Token Name",
+        "tokenSymbol": "Token Symbol",
+        "totalSupply": "Total Supply",
+        "decimals": "Decimals",
+        "isReIssuable": "ReIssuable",
+        "maxSupply": "Max Supply",
+        "ownerBurnOnly": "Burn out by Owner Only",
+        "isOwnerBurnOnly": "Burn out by Owner Only",
+        "mint": "Confirm",
+        "tokenList": "Issued Token",
+        "submit": "Submit",
+        "cancel": "Cancel",
+        "getListFail": "You are unable to get token list, try again later",
+        "mintageConfirm": {
+            "title": "Check your Token Issuance Information",
+            "balance": "Balance",
+            "fee": "Issuance Fee",
+            "btn": "Confirm"
+        },
+        "reIssuableConfirm": {
+            "title": "Change to Non-issuable",
+            "text": "Make sure to change {tokenName} to Non-issuable status?"
+        },
+        "changeOwnerConfirm": {
+            "title": "Transfer Ownership",
+            "address": "Recipient Address"
+        },
+        "issueConfirm": {
+            "title": "Re-issue",
+            "amount": "Amount",
+            "address": "Beneficiary Address",
+            "overAmount": "Reissued tokens exceed the upper limit"
+        },
+        "hint": {
+            "tokenName": "Token name should have 1-40 characters including capitals and lowercase letters, spaces and underlines. Continuous spaces and numbers are not supported.",
+            "tokenSymbol": "Token symbol should have 1-10 characters, only capitals and numbers are supported.",
+            "success": "Token Issuance Successful",
+            "fail": "Token Issuance failed"
+        },
+        "err": {
+            "tokenNameFormat": "Token Name's format is incorrect",
+            "tokenNameNull": "Token Name is required",
+            "tokenSymbolFormat": "Token Symbol's format is incorrect",
+            "tokenSymbolNull": "Token Symbol is required",
+            "supplyMax": "Excessive amount of token issuance",
+            "totalSupplyFormat": "Wrong format of Total Supply",
+            "totalSupplyNull": "Total Supply is required",
+            "maxSupplyNull": "Max Supply is required",
+            "maxSupplyMin": "Must be greater than total supply",
+            "decimalsNull": "Decimals field is required",
+            "decimalsFormat": "Wrong format of decimals",
+            "decimalsMax": "Decimals are out of range",
+            "maxSupplyFormat": "Wrong format of Max Supply"
         }
     },
     "walletQuota": {
@@ -451,8 +541,8 @@
             "amount": "Amount",
             "withdrawTime": "Expected Due Date",
             "unexpired": "Temporarily cannot make withdrawal of staked token until due date",
-            "vip": "This staking action is for default opening VIP in ViteX exchange, please go to ViteX exchange page to cancel VIP",
-            "mining": "This staking is your staking mining amount in ViteX, please go to ViteX mining page to retrieve",
+            "vip": "This staking action is for default opening VIP on ViteX exchange, please go to ViteX exchange page to cancel VIP",
+            "mining": "This staking is your staking as mining amount on ViteX, please go to ViteX mining page to retrieve",
             "other": "This staking is staked via other ways and it is not supported retrieving here"
         }
     },
@@ -476,7 +566,7 @@
         "title": "SBP",
         "help": {
             "title": "About SBP",
-            "text": "SBP（Snapshot Block Producer）is a node that has right to create blocks, you can register to become a SBP candidate by staking a certain amount of VITE, each round (about 75 seconds) will elect 25 SBPs, the SBPs will be elected from random 23 out of top 25 candidate nodes, plus random 2 out of the candidate nodes ranking 26th-100th on the list. The 50% of block creation rewards will be allocated to the block creation node, the other 50% will be allocated to nodes that are ranked on top 100 as voting rewards. <br/><br/> One registration address (staking address) can register multiple block creation nodes (node names), a node name cannot be used if the node name has been registered by a registration address. A node name can switch block creation address, however, block creation address cannot be reused by other node names."
+            "text": "SBP（Snapshot Block Producer）is a node that has right to create blocks, you can register to become a SBP candidate by staking a certain amount of VITE, each round (about 75 seconds) will elect 25 SBPs, the SBPs will be elected from random 23 out of top 25 candidate nodes, plus random 2 out of the candidate nodes ranking 26th-100th on the list. The 50% of block creation rewards will be allocated to the block creation node, the other 50% will be allocated to nodes that are ranked on top 100 as voting rewards. One registration address (staking address) can register multiple block creation nodes (node names), a node name cannot be used if the node name has been registered by a registration address. A node name can switch block creation address, however, block creation address cannot be reused by other node names."
         },
         "register": "SBP Registration",
         "cancel": "SBP Cancellation",
@@ -601,7 +691,55 @@
         }
     },
     "assets": {
-        "title": "Assets"
+        "title": "Assets",
+        "notice": {
+            "title": "Important Notice",
+            "contentProvider": "This service is provided by {gate}.",
+            "contentOther": "You agree and acknowledge that Vite Labs would not be responsible for any negative consequences caused by {gate}. Vite platform does not take any part in the relationship that may arise between {gate} and users of Vite platform",
+            "contentAgree": "By continuing to use {gate}'s service, you agree and acknowledge {gate}'s",
+            "agreement": "Terms of Services, Trading Conditions and Privacy Policy",
+            "contentUngree": "Please agree to this terms before using {gate}'s service",
+            "hint": "Contact customer service team of {gate} if you encounter any problems during payment process.",
+            "next": "Confirm and Proceed"
+        },
+        "vb": {
+            "title": "ViteConnect",
+            "connect": {
+                "tips": "Scan the QR code via Vite Wallet App"
+            },
+            "confirm": {
+                "tips": "Please confirm transaction on VITE Wallet App"
+            },
+            "start": {
+                "scan": "Scan the QR code via Vite Wallet App",
+                "downloadTips": "Don’t have Vite Wallet App yet? ",
+                "download": "Download Vite Wallet"
+            },
+            "accountName": "ViteConnect Address"
+        },
+        "invite": {
+            "inviteTitle": "Invite Friends",
+            "receiveInviteTitle": "Use Referral Code",
+            "myCode": "My Referral Code: ",
+            "codeLable": "Referral Code",
+            "invited": "You have already accepted an invitation, referral code is: ",
+            "genCode": "Create a Referral Code",
+            "cost": "Cost",
+            "formatErr": "Incorrect referral code format",
+            "noResult": "Oops...No result found, please try again later",
+            "successToast": "Request has sent",
+            "failToast": "Failed to send request",
+            "notEnough": "Insufficient exchange balance",
+            "avaliable": "Balance",
+            "inviteNum": "Invited",
+            "inviteBenifit": "Referral Mining Income",
+            "inviteRule": "Rules",
+            "ruleItems": [
+                "You can spend <span class='strong'>1000 VITE</span> to create a referral code. This fund will be put into dividend pool and distributed to VX holders",
+                " <span class='strong'>5%</span> of trading fees generated by users who use referral code will be treated as trading fees which could mine VX.",
+                "Traders who use referral code could enjoy <span class='strong'>10%</span> off during trading"
+            ]
+        }
     },
     "walletConversion": {
         "title": "VITE Conversion",
@@ -622,7 +760,18 @@
         }
     },
     "tradeCenter": {
-        "title": "Exchange"
+        "title": "Exchange",
+        "marketClosed": "{symbol} market has been suspended",
+        "mergeDepth": "Group",
+        "depthStep": "{step} digits",
+        "blocking": "Network congestion occurs, please try again later",
+        "operator": {
+            "title": "Operator Details",
+            "introduction": "Introduction",
+            "txPair": "Trading Pairs",
+            "confirmTitle": "Risk Reminder",
+            "confirmText": "The current trading pair is {symbol}. Please be careful when trading. Investing in digital assets comes with high risks. Before investing, please have a full understanding of all the risks of investing in digital assets and judge the authenticity, legality and validity of digital assets on your own. Please be prudent of your own investment decisions and undertake responsibility for the loss of your assets."
+        }
     },
     "trade": {
         "search": "Search",
@@ -635,7 +784,7 @@
         "amountTitle": "Amount({amount})",
         "amountTable": "Qty",
         "amount": "Total",
-        "newOrderSuccess": "Order Success",
+        "newOrderSuccess": "Order request has sent",
         "newOrderFail": "Order Failed",
         "depthView": "Depth",
         "klineView": "TradingView",
@@ -650,19 +799,6 @@
             "buy": "Buy price",
             "sell": "Sell price",
             "diff": "Spread"
-        },
-        "dexToken": {
-            "title": "Open Trading Pair",
-            "fee": "Token listing Fees",
-            "market": "Open Market",
-            "link": "Check on Explorer",
-            "name": "Token Name",
-            "id": "Token ID",
-            "hint": "If you'd like to add gateway symbol (such as BTC.V) after open the trading pair, please contact us: info@vite.org",
-            "btn": "Submit Application",
-            "search": "Please input token name",
-            "reqSuccess": "Application submission successful! Please view in the market later",
-            "reqError": "Token listing failed, please try again later."
         },
         "buy": {
             "title": "Buy {token}",
@@ -713,17 +849,17 @@
             "title": "Limit",
             "fee": "Fees",
             "text": "This page is a preview page of transaction data. Please login to trade.",
-            "validAmountDigit": "Volume must be greater than {amount}{token}",
-            "validMaxDigit": "At most {digit} decimals",
+            "validAmount": "Volume must be greater than {amount}{token}",
             "priceNotNull": "Amount cannot be empty",
             "amountNotNull": "Volume cannot be empty",
             "quantityNotNull": "Quantity cannot be empty",
-            "bigger0": "Value must be greater than 0",
             "cancelVip": "Cancel",
             "openVip": "Become a VIP",
-            "dexFee": "Exchange Default Fees: {fee}",
-            "operatorFee": "Operator Fees: {fee}",
-            "vipFee": "VIP Discount: {fee}"
+            "dexFee": "Base Transaction Fees: {fee}",
+            "operatorFee": "Zone Fees (Charged by Operator): {fee}",
+            "vipFee": "VIP Discount: {fee}",
+            "inviteFeeDiscount": "Referral Discount: {fee} off",
+            "feeRule": "(Base Transaction Fee - VIP discount + Zone Fees) * Referral Discount. ATTENTION: The adjustment and discount of fees will only affect new orders, the former orders' charge remains the same."
         },
         "vipConfirm": {
             "cancelVip": "Cancel VIP",
@@ -733,7 +869,7 @@
             "noBalance": "Insufficient Balance",
             "openHint": "You will enjoy the privilege of 0.1% trading fee discount after becoming a VIP. The staking amount of 10,000 VITE can be manually retrieved after 30 days.",
             "cancelHint": "You can retrieve your staking amount at approximately {time}. You will lose your VIP privilege after retrieving.",
-            "openSuccess": "Application Successful! VIP status will come into effect later.",
+            "openSuccess": "Applied Successful! VIP status will come into effect later.",
             "openFail": "Failed to apply VIP",
             "cancelSuccess": "Cancel VIP Successful",
             "cancelFail": "Cancel Failed"
@@ -741,7 +877,7 @@
     },
     "tradeAssets": {
         "title": "Funds",
-        "search": "Please input token name",
+        "search": "Please enter token name",
         "operate": "Action",
         "all": "All",
         "confirmTable": {
@@ -890,7 +1026,7 @@
     },
     "tradeMining": {
         "title": "Mining",
-        "addQuota": "Add new staking mining",
+        "addQuota": "Create a new staking",
         "add": "Add",
         "withdraw": "Retrieve",
         "tbHead": {
@@ -899,17 +1035,23 @@
             "mining": "Mining Amount",
             "pledge": "Staking Amount"
         },
-        "txTitle": "Trading Mining Total Profit",
-        "quotaTitle": "Staking Mining Total Profit",
-        "addHint": "Staking mining profit will be calculated at 13:00(UTC+8) everyday. You can manually retrieve your staking amount after the staking comes into effective",
+        "txTitle": "Trading as Mining Total Income",
+        "quotaTitle": "Staking as Mining Total Income",
+        "addHint": "Income of Staking as Mining will be calculated at 13:00(UTC+8) everyday. You can manually retrieve your staking amount after the staking comes into effective",
         "withdrawHint": "You will no longer be able to mining VX after retrieving",
         "addTitle": "Staking VITE for Mining",
         "withdrawTitle": "Retrieving Staked VITE",
         "addPlaceHolder": "Please input staking amount, at least 134 VITE",
         "withdrawPlaceHolder": "Please input retrieving amount, at least 134 VITE",
-        "addBtn": "Submit Staking",
+        "addBtn": "Confirm to stake ",
         "withdrawBtn": "Confirm to retrieve",
-        "stakingBalance": "Retrievable Staking Amount"
+        "stakingBalance": "Retrievable Staking Amount",
+        "hintTitle": "Important Notice",
+        "comingHint": "VX mining function is coming soon, stay tuned. You can get VX in five ways: 1. Trading as Mining, 2. Listing as Mining, 3. Referring as Mining, 4. Staking as Mining, 5. Market-making as Mining. Users who hold VX enjoy payouts from a shared dividend pool.",
+        "more": "Learn more about VX mining rules"
+    },
+    "inviteMining": {
+        "txTitle": "Referring as Mining Total Income"
     },
     "tradeDividend": {
         "title": "Dividends",
@@ -919,6 +1061,74 @@
         "VX": "Holding VX",
         "coin": "Type",
         "amount": "Amount",
-        "price": "Total Estimated Value"
+        "price": "Total Estimated Value",
+        "hintTitle": "Important Notice",
+        "comingHint": "VX mining and dividend functions are coming soon, stay tuned. The system will distribute 1% of BTC, ETH, VITE, USDT of the total pool to all VX users proportional to the amount of VX they hold. The initial dividend pool will start at 0 and will grow according to the amount of fees collected by ViteX. Traders must have a minimum of 10 VX in order to receive dividends from a shared dividend pool comprised of base transaction, listing and referral code generating fees. ",
+        "more": "Learn more about VX dividend rules"
+    },
+    "tradeOperator": {
+        "title": "Operator",
+        "tokenList": "Tokens",
+        "totalIncome": "Total Income",
+        "permission": "Transfer Token's Ownership",
+        "txPairManage": "Manage Trading Pairs",
+        "noOperator": "You have no tokens or trading pairs yet, wanna become an operator?",
+        "learnMore": "Learn More",
+        "permissionConfirm": {
+            "title": "Transfer Ownership",
+            "submit": "Confirm",
+            "tokenName": "Token Name",
+            "address": "Recipient Address",
+            "notice": "NOTICE: When the ownership transferred to someone else, trading pairs that not be opened will belong to the new owner. Trading/suspension trading pairs still belong to you"
+        }
+    },
+    "tradeTxPairManage": {
+        "title": "{tokenSymbol} Trading Pairs Management",
+        "symbol": "Name",
+        "income": "Income",
+        "fee": "Fee Rate",
+        "status": "Status",
+        "operate": "Action",
+        "stopTrans": "Suspend",
+        "resetTrans": "Recover",
+        "changeOwner": "Transfer Ownership",
+        "changeFee": "Adjust Fee Rate",
+        "incomeList": "Income Details",
+        "historyIncome": "Income History",
+        "openTxPair": "Open Trading Pairs",
+        "statusList": [
+            "Ownership Transferred",
+            "Trading",
+            "Suspension",
+            "Trade Not Open"
+        ],
+        "openTxPairConfirm": {
+            "title": "Open {symbol} to trade",
+            "fee": "Listing Fee",
+            "hint": "If you want to add unique operator symbol after opening a trading pair, please contact us at our Telegram group: https://t.me/vite_en",
+            "btn": "Submit",
+            "reqSuccess": "Submit Successful! Check it on market board later.",
+            "reqError": "Listing failed, please try again"
+        },
+        "stopTransHint": "Make sure to suspend {symbol} ?",
+        "resetTransHint": "Make sure to recover {symbol} ?",
+        "stopSuccess": "Suspension Successful",
+        "stopFail": "Suspension Failed",
+        "openSuccess": "Recovery Successful",
+        "openFail": "Recovery Failed",
+        "changeOwnerHint": "NOTICE: You will not be able to collect or adjust fees after ownership transferred as well as you cannot undo this transfer action",
+        "currentMaker": "Maker",
+        "confirmFee": "Fee",
+        "currentTaker": "Taker",
+        "txPairName": "Name",
+        "changeFeeHint": "{symbol}'s fee into {fee}",
+        "changeFeeSubmit": "Make sure to change {changeFeeHint}",
+        "historyAllIncome": "Total Income",
+        "incomeListHead": {
+            "date": "Date",
+            "txNum": "Volume",
+            "feeRate": "Rate",
+            "feeIncome": "Income"
+        }
     }
 }
