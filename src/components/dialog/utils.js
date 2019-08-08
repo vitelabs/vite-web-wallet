@@ -10,7 +10,7 @@ const STATUS = {
 const widthMap = {
     narrow: '380px',
     normal: '515px',
-    wide: '618px'
+    wide: '681px'
 };
 const getValue = function (key, defaultValue) {
     const dkey = `d${ key.slice(0, 1).toUpperCase() }${ key.slice(1) }`;

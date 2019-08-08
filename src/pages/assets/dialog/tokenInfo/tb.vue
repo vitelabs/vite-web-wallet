@@ -13,14 +13,14 @@
             <div class="__tb_cell">
                 {{
                     $t(`tokenCard.${type}Record.heads.3`, {
-                        outChain: tokenToGate[token.tokenId].mappedNet
+                        outChain
                     })
                 }}
             </div>
             <div class="__tb_cell">
                 {{
                     $t(`tokenCard.${type}Record.heads.4`, {
-                        outChain: tokenToGate[token.tokenId].mappedNet
+                        outChain
                     })
                 }}
             </div>
@@ -35,13 +35,7 @@
             <div class="__tb_row __tb_content_row" v-for="item in tbData" :key="item.inTxHash">
                 <div class="__tb_cell">{{ item.dateTime | dateShow }}</div>
                 <div class="__tb_cell">{{ item.amount | toBasic(token.decimals) }}</div>
-                <div class="__tb_cell">
-                    {{
-                        $t(`tokenCard.${type}Record.statusMap.${item.state}`, {
-                            outChain: tokenToGate[token.tokenId].mappedNet
-                        })
-                    }}
-                </div>
+                <div class="__tb_cell">{{ getStateStr(item) }}</div>
                 <div class="__tb_cell click-able"
                      @click="() => gotoInHash(item.inTxHash)">
                     {{ item.inTxHash| hashShortify }}
@@ -74,7 +68,7 @@
 // [TODO] Need components/table
 
 import Pagination from 'components/pagination.vue';
-import { getDepositRecords, getWithdrawRecords } from 'services/gate.js';
+import { getDepositRecords, getWithdrawRecords } from 'services/gate';
 import shortify from 'utils/ellipsisAddr';
 import b from 'utils/bigNumber';
 import openUrl from 'utils/openUrl';
@@ -120,22 +114,32 @@ export default {
         defaultAddr() {
             return this.$store.getters.activeAddr;
         },
-        tokenToGate() {
-            return this.$store.getters.mapToken2Gate;
+        outChain() {
+            const tokenToGate = this.$store.getters.mapToken2Gate;
+            const token = this.token;
+            return tokenToGate[token.tokenId] ? tokenToGate[token.tokenId].mappedNet : token.tokenSymbol;
         }
     },
     methods: {
+        getStateStr(item) {
+            return this.$t(`tokenCard.${ this.type }Record.statusMap.${ item.state }`, {
+                outChain: this.outChain,
+                confirms: item.inTxConfirmedCount && item.inTxConfirmationCount
+                    ? `(${ item.inTxConfirmedCount }/${ item.inTxConfirmationCount })`
+                    : ''
+            });
+        },
         gotoInHash(hash) {
             if (!hash) {
                 return;
             }
-            openUrl(this.inTxExplorerFormat.replace('{$tx}', hash));
+            openUrl(this.inTxExplorerFormat.replace('{$tx}', encodeURIComponent(hash)));
         },
         gotoOutHash(hash) {
             if (!hash) {
                 return;
             }
-            openUrl(this.outTxExplorerFormat.replace('{$tx}', hash));
+            openUrl(this.outTxExplorerFormat.replace('{$tx}', encodeURIComponent(hash)));
         },
         updateData(pageNum = this.currentPage) {
             if (!this.type) {

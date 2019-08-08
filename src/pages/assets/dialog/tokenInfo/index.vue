@@ -49,7 +49,7 @@ block originContent
             div {{ gateIntroduction }}
         .content__item(v-if="token.gateInfo.url")
             .label {{$t("tokenCard.gateInfo.customer")}}:
-            div.click-able(v-if="token.gateInfo.customer")(@click="goToGateCustomer") {{ $t("tokenCard.gateInfo.clickCustomer") }}
+            div.click-able(v-if="token.gateInfo.customer")(@click="goToGateCustomer") {{ getCustomer() }}
         .content__item(v-if="token.gateInfo.url")
             .label {{$t("tokenCard.gateInfo.privacy")}}:
             div.click-able(v-if="token.gateInfo.privacy")(@click="goToGatePrivacy") {{$t("tokenCard.gateInfo.clickPrivacy", {gate: token.gateInfo.gateway})}}
@@ -137,12 +137,23 @@ export default {
         goToGatePrivacy() {
             openUrl(this.token.gateInfo.privacy);
         },
+        isEmail(url) {
+            return /^\w+((.\w+)|(-\w+))@[A-Za-z0-9]+((.|-)[A-Za-z0-9]+).[A-Za-z0-9]+$/.test(url);
+        },
         goToGateCustomer() {
-            if (this.$i18n.locale === 'zh') {
-                openUrl(this.token.gateInfo.customer);
+            const customer = this.$i18n.locale === 'zh' ? this.token.gateInfo.customer : this.token.gateInfo.customerEn;
+            if (this.isEmail(customer)) {
+                openUrl(`mailto:${ customer }`);
                 return;
             }
-            openUrl(this.token.gateInfo.customerEn);
+            openUrl(customer);
+        },
+        getCustomer() {
+            const customer = this.$i18n.locale === 'zh' ? this.token.gateInfo.customer : this.token.gateInfo.customerEn;
+            if (this.isEmail(customer)) {
+                return customer;
+            }
+            return this.$t('tokenCard.gateInfo.clickCustomer');
         },
         getIcon(id) {
             return getTokenIcon(id);

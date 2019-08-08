@@ -320,9 +320,9 @@
         },
         "depositRecord": {
             "tabName": "Deposit History",
-            "heads": ["Time", "Amount", "Status", "{outChain} Chain Hash","VITE Chain Hash","Fees"],
+            "heads": ["Time", "Amount", "Status", "{outChain} Hash","vite Hash","Fees"],
             "statusMap": {
-                "OPPOSITE_PROCESSING": "{outChain} awaits to confirm",
+                "OPPOSITE_PROCESSING": "{outChain} awaits to confirm{confirms}",
                 "OPPOSITE_CONFIRMED_FAIL":"{outChain} processing failed",
                 "OPPOSITE_CONFIRMED": "Gateway Received",
                 "TOT_CONFIRMED": "Completed",
@@ -332,9 +332,9 @@
         },
         "withdrawRecord": {
             "tabName": "Transfer History",
-            "heads": ["Time", "Amount", "Status", "VITE Chain Hash", "{outChain} Chain Hash","Fees"],
+            "heads": ["Time", "Amount", "Status", "vite Hash", "{outChain} Hash","Fees"],
             "statusMap":{
-                "TOT_PROCESSING": "VITE Chain Unconfirmed",
+                "TOT_PROCESSING": "VITE Chain Unconfirmed{confirms}",
                 "TOT_CONFIRMED": "VITE Confirmed",
                 "TOT_EXCEED_THE_LIMIT":"Transfer amount exceeds the limit",
                 "OPPOSITE_PROCESSING": "{outChain} awaits to confirm",
@@ -353,11 +353,13 @@
             "title": "Cross-Chain Receive",
             "addrErr": "Something went wrong with gateway node, please check your network settings",
             "addressTitle": "Recipient Address",
+            "labelTips":"(Please use this '{labelName}' with your receive address, otherwise your assets will lose",
+            "labelCodeTips":"Please Scan the QRcode from {labelName}",
             "codeTips": "Scan QR code to deposit. Please transfer with the wallet that supports {tokenSymbol}",
             "tips": [
                 "Cross-Chain Receive operation will do {tokenSymbol} Cross-Chain mapping to VITE network, you can still transfer the assets after receiving them",
                 "You can only send {tokenSymbol} through this address and the amount cannot be less than {min}",
-                "When the transaction is confirmed, you will receive the asset after 5 minutes, kindly wait in patient"
+                "You will receive your assets after {confirmationCount} confirmations, kindly wait in patient"
             ]
         },
         "withdraw": {
@@ -750,7 +752,7 @@
             "introduction": "Introduction",
             "txPair": "Trading Pairs",
             "confirmTitle": "Risk Reminder",
-            "confirmText": "The current trading pair {symbol} is provided by an anonymous operator. Please be careful when trading. Investing in digital assets comes with high risks. Before investing, please have a full understanding of all the risks of investing in digital assets and judge the authenticity, legality and validity of digital assets on your own. Please be prudent of your own investment decisions and undertake responsibility for the loss of your assets."
+            "confirmText": "The current trading pair is {symbol}. Please be careful when trading. Investing in digital assets comes with high risks. Before investing, please have a full understanding of all the risks of investing in digital assets and judge the authenticity, legality and validity of digital assets on your own. Please be prudent of your own investment decisions and undertake responsibility for the loss of your assets."
         }
     },
     "trade": {

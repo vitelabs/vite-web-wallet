@@ -327,9 +327,9 @@
         },
         "depositRecord": {
             "tabName": "充值记录",
-            "heads": ["时间", "金额", "状态", "{outChain}链Hash","VITE链Hash","手续费"],
+            "heads": ["时间", "金额", "状态", "{outChain}链Hash","vite链Hash","手续费"],
             "statusMap": {
-                "OPPOSITE_PROCESSING": "{outChain}链待确认",
+                "OPPOSITE_PROCESSING": "{outChain}链待确认{confirms}",
                 "OPPOSITE_CONFIRMED_FAIL":"{outChain}链失败",
                 "OPPOSITE_CONFIRMED": "网关已接收",
                 "TOT_CONFIRMED": "已完成",
@@ -339,9 +339,9 @@
         },
         "withdrawRecord": {
             "tabName": "提现记录",
-            "heads": ["时间", "金额", "状态", "VITE链Hash", "{outChain}链Hash","手续费"],
+            "heads": ["时间", "金额", "状态", "vite链Hash", "{outChain}链Hash","手续费"],
             "statusMap": {
-                "TOT_PROCESSING": "VITE链待确认",
+                "TOT_PROCESSING": "VITE链待确认{confirms}",
                 "TOT_CONFIRMED": "网关已接收",
                 "TOT_EXCEED_THE_LIMIT":"转出金额超过限额",
                 "OPPOSITE_PROCESSING": "{outChain}链待确认",
@@ -360,11 +360,13 @@
             "title": "跨链转入",
             "addrErr":"网关节点出错，请检查网关设置",
             "addressTitle": "转入地址",
+            "labelTips":"(请将此 {labelName} 与充值地址同时使用，否则币会丢失)",
             "codeTips": "请扫描二维码充值,请使用支持{tokenSymbol}的钱包转账",
+            "labelCodeTips":"请扫描 {labelName} 二维码",
             "tips": [
                 "跨链转入操作是将{tokenSymbol}跨链映射至VITE网络，转入后您依然可以转出",
                 "通过该存款地址只能发送{tokenSymbol},且金额不能低于{min}",
-                "交易确认之后，预计5分钟后到账，请耐心等待"
+                "{confirmationCount}个网络确认之后到账，请耐心等待"
             ]
         },
         "withdraw": {
@@ -760,7 +762,7 @@
             "introduction": "介绍",
             "txPair": "交易对",
             "confirmTitle": "温馨提示",
-            "confirmText": "当前交易对 {symbol} 为匿名运营商管理，请谨慎交易。数字资产交易存在风险，需用户自行谨慎判断确定相关数字资产的真实性、合法性和有效性，并自行承担因此产生的责任与损失。"
+            "confirmText": "当前交易对为 {symbol}，请谨慎交易。数字资产交易存在风险，需用户自行谨慎判断确定相关数字资产的真实性、合法性和有效性，并自行承担因此产生的责任与损失。"
         }
     },
     "trade": {
