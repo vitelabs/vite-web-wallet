@@ -11,62 +11,49 @@ const TEMPLATE_PATH = path.join(__dirname, '../index.html');
 const Buffer_Path = path.join(__dirname, '../node_modules/buffer/index.js');
 
 const goViteServer = {
-    // production: '\'wss://api.vitewallet.com/pre/ws\'',
     production: '\'wss://api.vitewallet.com/ws\'',
     test: '\'wss://premainnet.vitewallet.com/test/ws\'',
-    // dev: '\'ws:192.168.31.8:41420\'',
-    dev: '\'wss://premainnet.vitewallet.com/test/ws\'',
-    dexTestNet: '\'wss://testnet.vitewallet.com/beta/ws\''
+    dev: '\'wss://premainnet.vitewallet.com/test/ws\''
 };
 const viteNet = {
     production: '\'https://explorer.vite.net/\'',
     test: '\'http://132.232.134.168:8080/\'',
-    dev: '\'http://132.232.134.168:8080/\'',
-    dexTestNet: '\'https://explorer.vite.net/\''
+    dev: '\'http://132.232.134.168:8080/\''
 };
 const ethServer = {
     production: '\'https:\/\/mainnet.infura.io\/http\'',
     test: '\'https://ropsten.infura.io/http\'',
-    dev: '\'https://ropsten.infura.io/http\'',
-    dexTestNet: '\'https://ropsten.infura.io/http\''
+    dev: '\'https://ropsten.infura.io/http\''
 };
 const contractAddress = {
     production: '\'0x1b793e49237758dbd8b752afc9eb4b329d5da016\'',
     test: '\'0x54b716345c14ba851f1b51dcc1491abee6ba8f44\'',
-    dev: '\'0x54b716345c14ba851f1b51dcc1491abee6ba8f44\'',
-    dexTestNet: '\'0x54b716345c14ba851f1b51dcc1491abee6ba8f44\''
+    dev: '\'0x54b716345c14ba851f1b51dcc1491abee6ba8f44\''
 };
 const conversionHost = {
     production: '\'gateway.vite.net\'',
     test: '\'132.232.60.116:8001\'',
-    dev: '\'132.232.60.116:8001\'',
-    dexTestNet: '\'132.232.60.116:8001\''
+    dev: '\'132.232.60.116:8001\''
 };
 const ethNet = {
     production: '\'https://etherscan.io\'',
     test: '\'https://ropsten.etherscan.io\'',
-    dev: '\'https://ropsten.etherscan.io\'',
-    dexTestNet: '\'https://ropsten.etherscan.io\''
+    dev: '\'https://ropsten.etherscan.io\''
 };
 const dexApiServer = {
     production: '"https://vitex.vite.net/api/"',
     test: '"https://vitex.vite.net/test/api/"',
-    dev: '"https://vitex.vite.net/test/api/"',
-    // dev: '"http://132.232.65.121:8080/test/api/"',
-    dexTestNet: '"https://vitex.vite.net/beta/api/"'
+    dev: '"https://vitex.vite.net/test/api/"'
 };
 const pushServer = {
     production: '"wss://vitex.vite.net/websocket"',
     test: '"wss://vitex.vite.net/test/websocket"',
-    dev: '"wss://vitex.vite.net/test/websocket"',
-    // dev: '"ws://132.232.65.121:11211/test/websocket"',
-    dexTestNet: '"wss://vitex.vite.net/beta/websocket"'
+    dev: '"wss://vitex.vite.net/test/websocket"'
 };
 const gatewayInfosServer = {
     production: '"crosschain.vite.net"',
     test: '"crosschain-test.vite.net"',
     dev: '"https://crosschain-test.vite.net"'
-    // dexTestNet: '"gateway.vitewallet.com"'
 };
 const Node_Env = process.env.NODE_ENV || 'dev';
 
