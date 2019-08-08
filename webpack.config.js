@@ -92,9 +92,15 @@ let webpackConfig = {
                     // 10KB
                     limit: 10 * 1024
                 }
-            }, {
+            },
+            {
+                test: /\.(svg|png|jpg|gif)$/,
+                loader: 'image-webpack-loader',
+                enforce: 'pre'
+            },
+            {
                 test: /\.(j|t)s$/,
-                // exclude: /node_modules(?!(\/base-x)|(\/resize-detector)|(\/vue-echarts))|(\/@vite\/vitejs)/,
+                // exclude: /node_modules(?!(\/base-x)|(\/resize-detector)|(\/vue-echarts))|(\/@vite\/vitejs\/)/,
                 exclude: /node_modules(?!(\/base-x)|(\/resize-detector)|(\/vue-echarts))/,
                 use: {
                     loader: 'babel-loader',
@@ -123,7 +129,7 @@ let webpackConfig = {
     },
     resolve: {
         alias: {
-            // '@vite/vitejs': '@vite/vitejs/es5/index.js',
+            '@vite/vitejs': '@vite/vitejs/es5/index.js',
             vue: 'vue/dist/vue.js',
             charting: CHARTING_PATH,
             src: SRC_PATH,
