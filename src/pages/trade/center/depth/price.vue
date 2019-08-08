@@ -32,13 +32,7 @@ export default {
             return this.activeTxPair ? this.activeTxPair.upDownPrev : '0';
         },
         realPrice() {
-            const pre = this.$store.state.env.currency === 'cny' ? '¥' : '$';
-
-            if (!this.activeTxPair) {
-                return `${ pre }0`;
-            }
-
-            return pre + BigNumber.multi(this.activeTxPair.closePrice || 0, this.rate || 0, 2);
+            return this.$store.state.exchangeActiveTxPair.realClosePrice;
         },
         closePrice() {
             return this.activeTxPair && this.activeTxPair.closePrice ? this.activeTxPair.closePrice : '';
@@ -49,16 +43,6 @@ export default {
             }
 
             return `${ BigNumber.onlyFormat(this.closePrice) } | ${ this.activeTxPair.symbol }`;
-        },
-        rate() {
-            const rateList = this.$store.state.exchangeRate.rateMap || {};
-            const tokenId = this.activeTxPair && this.activeTxPair.quoteToken ? this.activeTxPair.quoteToken : null;
-            const coin = this.$store.state.env.currency;
-
-            if (!tokenId || !rateList[tokenId]) {
-                return null;
-            }
-            return rateList[tokenId][`${ coin }Rate`] || null;
         }
     },
     watch: {

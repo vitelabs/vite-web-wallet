@@ -6,7 +6,7 @@ block content
         img.title_icon.copy.__pointer(src="~assets/imgs/copy_default.svg" @click="copy")
     .block__content(:class="{err:addrErr}") {{addrErr||address}}
     .qrcode-container
-        .qrcode-container__title {{$t('tokenCard.charge.codeTips',{tokenSymbol:token.tokenSymbol})}}
+        .qrcode-container__title {{$t('tokenCard.charge.codeTips',{tokenSymbol:getTokenSymbol(token)})}}
         qrcode(:text="addressQrcode" :options="qrOptions" class="qrcode-container__content")
     .block__title(v-if="!!labelName&&!!labelValue")
         span {{labelName}}
@@ -16,9 +16,9 @@ block content
     .qrcode-container(v-if="!!labelName")
         .qrcode-container__title {{$t('tokenCard.charge.labelCodeTips',{labelName})}}
         qrcode(:text="labelValue" :options="qrOptions" class="qrcode-container__content")
-    .charge-tips {{$t('tokenCard.charge.tips.0',{tokenSymbol:token.tokenSymbol})}}
+    .charge-tips {{$t('tokenCard.charge.tips.0',{tokenSymbol:getTokenSymbol(token)})}}
         .dot
-    .charge-tips {{$t('tokenCard.charge.tips.1',{tokenSymbol:token.tokenSymbol,min:minimumDepositAmount})}}
+    .charge-tips {{$t('tokenCard.charge.tips.1',{tokenSymbol:getTokenSymbol(token),min:minimumDepositAmount})}}
         .dot
     .charge-tips {{$t('tokenCard.charge.tips.2',{confirmationCount})}}
         .dot
@@ -77,6 +77,12 @@ export default {
         }
     },
     methods: {
+        getTokenSymbol(token) {
+            if (token.tokenSymbol === 'USDT' && token.index === 0) {
+                return 'USDT(ERC20)';
+            }
+            return token.tokenSymbol;
+        },
         copy() {
             copy(this.address);
             this.$toast(this.$t('hint.copy'));

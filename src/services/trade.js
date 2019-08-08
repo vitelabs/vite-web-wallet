@@ -219,3 +219,11 @@ export function operatorIncome({ operatorId, tradeToken, quoteToken, offset, lim
         params: { operatorId, tradeToken, quoteToken, offset, limit }
     });
 }
+
+export function operatorTradepair({ tradeToken, quoteToken }) {
+    return request({
+        path: `${ path }/operator/tradepair`,
+        method: 'GET',
+        params: { tradeToken, quoteToken }
+    });
+}

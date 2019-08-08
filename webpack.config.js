@@ -25,24 +25,30 @@ let webpackConfig = {
     entry: { index: path.join(SRC_PATH, '/index.js') },
     output: {
         path: STATIC_PATH,
-        filename: '[name].[hash].js'
+        // filename: '[name].[contenthash].js'
+        filename: '[name].[chunkhash].js'
     },
     plugins,
     optimization: {
         splitChunks: {
-            cacheGroups: {
-                // [TODO] Async Router
-                vendors: {
-                    test: /[\\/]node_modules[\\/]/,
-                    name: 'vendor',
-                    chunks: 'all'
-                },
-                default: {
-                    minChunks: 2,
-                    priority: -20,
-                    reuseExistingChunk: true
-                }
-            }
+            maxSize: 3600000,
+            maxAsyncRequests: 5,
+            maxInitialRequests: 3,
+            hidePathInfo: true,
+            chunks: 'all'
+            // cacheGroups: {
+            //     // [TODO] Async Router
+            //     vendors: {
+            //         test: /[\\/]node_modules[\\/]/,
+            //         name: 'vendor',
+            //         chunks: 'all'
+            //     },
+            //     default: {
+            //         minChunks: 2,
+            //         priority: -20,
+            //         reuseExistingChunk: true
+            //     }
+            // }
         },
         minimizer: [
             new UglifyJsPlugin({
