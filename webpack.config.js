@@ -92,9 +92,15 @@ let webpackConfig = {
                     // 10KB
                     limit: 10 * 1024
                 }
-            }, {
+            },
+            {
+                test: /\.(svg|png|jpg|gif)$/,
+                loader: 'image-webpack-loader',
+                enforce: 'pre'
+            },
+            {
                 test: /\.(j|t)s$/,
-                // exclude: /node_modules(?!(\/base-x)|(\/resize-detector)|(\/vue-echarts))|(\/@vite\/vitejs)/,
+                // exclude: /node_modules(?!(\/base-x)|(\/resize-detector)|(\/vue-echarts))|(\/@vite\/vitejs\/)/,
                 exclude: /node_modules(?!(\/base-x)|(\/resize-detector)|(\/vue-echarts))/,
                 use: {
                     loader: 'babel-loader',
@@ -108,8 +114,9 @@ let webpackConfig = {
                 test: /(\.scss$|\.css$|\.sass$)/,
                 use: [
                     { loader: 'style-loader' },
-                    { loader: 'css-loader' },
+                    { loader: 'css-loader', options: { minimize: true } },
                     { loader: 'sass-loader' }
+                    // { loader: 'image-webpack-loader', enforce: 'pre' }
                     // { loader: 'postcss-loader' }
                 ]
             }, {
