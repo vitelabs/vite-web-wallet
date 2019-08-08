@@ -1,8 +1,9 @@
-import { tokenDetail } from 'services/trade';
+import { operatorTradepair } from 'services/trade';
 
 const state = {
     ttoken: null,
-    ftoken: null
+    ftoken: null,
+    operator: null
 };
 
 const mutations = {
@@ -12,10 +13,14 @@ const mutations = {
     exSetActiveFtoken(state, ftoken) {
         state.ftoken = ftoken;
     },
+    exSetActiveOperator(state, operator) {
+        state.operator = operator;
+    },
     exClearActiveToken(state, activeTxPair) {
         if (!activeTxPair) {
             state.ttoken = null;
             state.ftoken = null;
+            state.operator = null;
             return;
         }
 
@@ -25,6 +30,7 @@ const mutations = {
                 symbol: activeTxPair.quoteTokenSymbol,
                 originalSymbol: activeTxPair.quoteTokenSymbol.split('-')[0]
             };
+            state.operator = null;
         }
 
         if (!state.ftoken || state.ftoken.tokenId !== activeTxPair.tradeToken) {
@@ -33,12 +39,13 @@ const mutations = {
                 symbol: activeTxPair.tradeTokenSymbol,
                 originalSymbol: activeTxPair.tradeTokenSymbol.split('-')[0]
             };
+            state.operator = null;
         }
     }
 };
 
 const actions = {
-    exFetchActiveTokens({ rootState, dispatch, commit }) {
+    exFetchActiveTokens({ rootState, commit }) {
         const activeTxPair = rootState.exchangeActiveTxPair.activeTxPair;
         commit('exClearActiveToken', activeTxPair);
 
@@ -46,29 +53,17 @@ const actions = {
             return;
         }
 
-        dispatch('exFetchActiveFtoken', activeTxPair.tradeToken);
-        dispatch('exFetchActiveTtoken', activeTxPair.quoteToken);
-    },
-    exFetchActiveTtoken({ rootState, commit }, tokenId) {
-        tokenDetail({ tokenId }).then(data => {
-            const activeTxPair = rootState.exchangeActiveTxPair.activeTxPair;
-            if (tokenId !== activeTxPair.quoteToken) {
+        operatorTradepair({
+            quoteToken: activeTxPair.quoteToken,
+            tradeToken: activeTxPair.tradeToken
+        }).then(data => {
+            if (!data) {
                 return;
             }
 
-            commit('exSetActiveTtoken', data);
-        }).catch(err => {
-            console.warn(err);
-        });
-    },
-    exFetchActiveFtoken({ rootState, commit }, tokenId) {
-        tokenDetail({ tokenId }).then(data => {
-            const activeTxPair = rootState.exchangeActiveTxPair.activeTxPair;
-            if (tokenId !== activeTxPair.tradeToken) {
-                return;
-            }
-
-            commit('exSetActiveFtoken', data);
+            commit('exSetActiveFtoken', data.tradeTokenDetail);
+            commit('exSetActiveTtoken', data.quoteTokenDetail);
+            commit('exSetActiveOperator', data.operatorInfo);
         }).catch(err => {
             console.warn(err);
         });

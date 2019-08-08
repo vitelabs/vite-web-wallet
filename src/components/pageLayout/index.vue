@@ -62,8 +62,6 @@ export default {
     },
     watch: {
         isLogin: function () {
-            this.setMenuList();
-
             if (this.isLogin) {
                 this.operate();
                 return;
@@ -81,20 +79,9 @@ export default {
             for (const key in sidebarMenuList) {
                 menuList.push(key);
             }
-            menuList.push(this.isLogin ? 'logout' : 'login');
             this.menuList = menuList;
         },
         go(name) {
-            if (name === 'logout') {
-                this.$store.commit('logout');
-                return;
-            }
-
-            if (name === 'login') {
-                this.$router.push({ name: 'startLogin' });
-                return;
-            }
-
             if (this.$route.name === name) {
                 return;
             }

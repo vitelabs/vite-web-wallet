@@ -29,6 +29,23 @@ export default {
         }
     },
     computed: {
+        quoteTokenDigit() {
+            const quoteTokenDigit = this.$store.state.exchangeTokenDecimalsLimit.quoteToken;
+            if ((this.depthStep || this.depthStep === 0) && quoteTokenDigit > this.depthStep) {
+                return this.depthStep;
+            }
+            return quoteTokenDigit;
+        },
+        tradeTokenDigit() {
+            const tradeTokenDigit = this.$store.state.exchangeTokenDecimalsLimit.tradeToken;
+            if ((this.depthStep || this.depthStep === 0) && tradeTokenDigit > this.depthStep) {
+                return this.depthStep;
+            }
+            return tradeTokenDigit;
+        },
+        depthStep() {
+            return this.$store.state.exchangeDepth.depthStep;
+        },
         activeTxPair() {
             return this.$store.state.exchangeActiveTxPair.activeTxPair;
         },
@@ -38,13 +55,26 @@ export default {
 
             return list;
         },
-        buyAmountList() {
+        buyQuantityList() {
             const _l = [];
             let sum = 0;
             const buyList = [].concat(this.buyList).reverse();
             buyList.forEach(item => {
                 sum = BigNumber.plus(sum, item.quantity || 0);
+                sum = BigNumber.onlyFormat(sum, this.tradeTokenDigit);
+                _l.push(sum);
+            });
+            _l.reverse();
 
+            return _l;
+        },
+        buyAmountList() {
+            const _l = [];
+            let sum = 0;
+            const buyList = [].concat(this.buyList).reverse();
+            buyList.forEach(item => {
+                sum = BigNumber.plus(sum, item.amount || 0);
+                sum = BigNumber.onlyFormat(sum, this.quoteTokenDigit);
                 _l.push(sum);
             });
             _l.reverse();
@@ -57,7 +87,7 @@ export default {
 
             return list;
         },
-        sellAmountList() {
+        sellQuantityList() {
             const _l = [];
             this.buyList.forEach(() => {
                 _l.push(null);
@@ -66,6 +96,22 @@ export default {
             let sum = 0;
             this.sellList.forEach(item => {
                 sum = BigNumber.plus(sum, item.quantity || 0);
+                sum = BigNumber.onlyFormat(sum, this.tradeTokenDigit);
+                _l.push(sum);
+            });
+
+            return _l;
+        },
+        sellAmountList() {
+            const _l = [];
+            this.buyList.forEach(() => {
+                _l.push(null);
+            });
+
+            let sum = 0;
+            this.sellList.forEach(item => {
+                sum = BigNumber.plus(sum, item.amount || 0);
+                sum = BigNumber.onlyFormat(sum, this.quoteTokenDigit);
                 _l.push(sum);
             });
 
@@ -87,7 +133,14 @@ export default {
                     formatter: params => {
                         let res = `${ this.$t('trade.priceTitle', { price: this.activeTxPair ? this.activeTxPair.quoteTokenSymbol : '' }) }: ${ params[0].name }`;
                         res += `<br/>${ params[0].seriesName } : ${ params[0].value }`;
-
+                        let amount;
+                        const index = params[0].dataIndex;
+                        if (index >= this.buyList.length) {
+                            amount = this.sellAmountList[index];
+                        } else {
+                            amount = this.buyAmountList[index];
+                        }
+                        res += `<br/>${ this.$t('trade.amountTable') } : ${ amount }`;
                         return res;
                     },
                     trigger: 'axis',
@@ -100,7 +153,7 @@ export default {
                         color: '#fff',
                         fontSize: '12px'
                     },
-                    extraCssText: 'box-shadow: 0 0 16px 0 rgba(0, 0, 0, .2);border-radius: 4px;'
+                    extraCssText: 'box-shadow: 0 0 16px 0 rgba(0, 0, 0, .2); border-radius: 4px;'
                 },
                 xAxis: {
                     type: 'category',
@@ -109,19 +162,19 @@ export default {
                 },
                 yAxis: [{ type: 'value' }],
                 series: [ {
-                    name: this.$t('trade.amountTable'),
+                    name: this.$t('trade.quantityTable'),
                     type: 'line',
                     itemStyle: { normal: { color: '#4cc453' } },
                     lineStyle: { normal: { color: '#00D764' } },
                     areaStyle: { color: '#00D764' },
-                    data: this.buyAmountList
+                    data: this.buyQuantityList
                 }, {
-                    name: this.$t('trade.amountTable'),
+                    name: this.$t('trade.quantityTable'),
                     type: 'line',
                     itemStyle: { normal: { color: '#e94c4c' } },
                     lineStyle: { normal: { color: '#ED5158' } },
                     areaStyle: { color: '#ED5158' },
-                    data: this.sellAmountList
+                    data: this.sellQuantityList
                 } ]
             };
         }

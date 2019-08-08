@@ -14,6 +14,7 @@
 </template>
 
 <script>
+import BigNumber from 'utils/bigNumber';
 import confirm from 'components/confirm/index.js';
 import layout from './layout';
 import depth from './depth/depth.vue';
@@ -30,6 +31,7 @@ export default {
         this.$store.dispatch('exFetchActiveTxPair');
         this.$store.dispatch('exFetchVip');
         this.$store.dispatch('startLoopDexFundeUnreceived');
+        this.$store.commit('exSetRealClosePrice', this.realPrice);
 
         !this.$store.state.env.isShowCompliance && confirm({
             size: 'small',
@@ -44,7 +46,7 @@ export default {
         });
     },
     destroyed() {
-        this.$store.dispatch('stopLoopDexFundeUnreceived');
+        this.$store.dispatch('stopLoopDexFundUnreceived');
     },
     computed: {
         address() {
@@ -58,9 +60,35 @@ export default {
         },
         activeTxPair() {
             return this.$store.state.exchangeActiveTxPair.activeTxPair;
+        },
+        currency() {
+            return this.$store.state.env.currency;
+        },
+        rate() {
+            const rateList = this.$store.state.exchangeRate.rateMap || {};
+            const tokenId = this.activeTxPair && this.activeTxPair.quoteToken ? this.activeTxPair.quoteToken : null;
+            const coin = this.currency;
+
+            if (!tokenId || !rateList[tokenId]) {
+                return null;
+            }
+            return rateList[tokenId][`${ coin }Rate`] || null;
+        },
+        realPrice() {
+            const pre = this.currency === 'cny' ? '¥' : '$';
+
+            if (!this.activeTxPair) {
+                return `${ pre }0`;
+            }
+
+            const realPrice = BigNumber.multi(this.activeTxPair.closePrice || 0, this.rate || 0, 6);
+            return pre + BigNumber.onlyFormat(realPrice, 2);
         }
     },
     watch: {
+        realPrice() {
+            this.$store.commit('exSetRealClosePrice', this.realPrice);
+        },
         address() {
             this.$store.dispatch('exFetchVip');
         },

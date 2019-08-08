@@ -2,7 +2,7 @@
 extends /components/dialog/base.pug
 block head
     .head
-        img.icon(:src="token.icon||getIcon(token.tokenId)")
+        img.icon(:src="tokenDetail.urlIcon || token.icon || getIcon(token.tokenId)")
         .head_info
             .head__name {{token.tokenName}}
                 .head__name__gate(v-if="token.gateInfo.name")
@@ -17,26 +17,42 @@ block head
 block originContent
     .tab-content(v-if="tabName==='tokenInfo'")
         .content__item
+            .label {{$t("tokenCard.tokenInfo.labels.tokenName")}}:
+            div {{tokenDetail.name}}
+        .content__item
             .label {{$t("tokenCard.tokenInfo.labels.tokenId")}}:
             div.click-able(@click="goToTokenDetail") {{token.tokenId}}
         .content__item
-            .label {{$t("tokenCard.tokenInfo.labels.address")}}:
-            div {{token.owner}}
-        .content__item
-            .label {{$t("tokenCard.tokenInfo.labels.tokenName")}}:
-            div {{token.tokenName}}
+            .label {{$t("tokenCard.tokenInfo.labels.overview")}}:
+            div {{ tokenDetail.overview && tokenDetail.overview[$i18n.locale] ? tokenDetail.overview[$i18n.locale] : '--' }}
+                span.click-able.view-more(v-if="tokenDetail.overview && tokenDetail.overviewLink" @click="openUrl(tokenDetail.overviewLink)") {{ $t("tokenCard.tokenInfo.labels.viewmore") }}
         .content__item
             .label {{$t("tokenCard.tokenInfo.labels.totalSupply")}}:
             div {{toBasic(token.totalSupply)}}
         .content__item
-            .label {{$t("tokenCard.tokenInfo.labels.decimals")}}:
-            div {{token.decimals}}
+            .label {{$t("tokenCard.tokenInfo.labels.type")}}:
+            .div {{ tokenDetail.ttype || '--' }}
         .content__item
-            .label {{$t("tokenCard.tokenInfo.labels.isReIssuable")}}:
-            div {{$t("tokenCard.tokenInfo.reIssuable")[token.isReIssuable]}}
+            .label {{$t("tokenCard.tokenInfo.labels.gate")}}:
+            div.click-able(@click="openUrl(tokenDetail.gateway ? tokenDetail.gateway.website : null)") {{tokenDetail.gateway ? tokenDetail.gateway.name || '--' : '--'}}
         .content__item
-            .label {{$t("tokenCard.tokenInfo.labels.time")}}:
+            .label {{$t("tokenCard.tokenInfo.labels.website")}}:
+            div.click-able(@click="openUrl(tokenDetail.website)") {{ tokenDetail.website || '--' }}
+        .content__item
+            .label {{$t("tokenCard.tokenInfo.labels.whitePaper")}}:
+            div.click-able(@click="openUrl(tokenDetail.whitepaperLink)") {{ tokenDetail.whitepaperLink || '--' }}
+        .content__item
+            .label {{$t("tokenCard.tokenInfo.labels.explorer")}}:
+            div.click-able(v-if="tokenDetail.gateway" @click="openUrl(tokenDetail.explorerLink)") {{ tokenDetail.explorerLink || '--' }}
+            div.click-able(v-if="!tokenDetail.gateway" @click="goToTokenDetail") {{ tokenDetail.explorerLink || '--' }}
+        .content__item
+            .label {{$t("tokenCard.tokenInfo.labels.github")}}:
+            div.click-able(@click="openUrl(tokenDetail.githubLink)") {{ tokenDetail.githubLink || '--' }}
+        .content__item
+            .label {{$t("tokenCard.tokenInfo.labels.media")}}:
             div
+                span.twitter(v-show="tokenDetail.twitterLink")
+                span.facebook(v-show="tokenDetail.facebookLink")
     .tab-content(v-if="tabName==='gate'")
         .content__item(v-if="token.gateInfo.url")
             .label {{$t("tokenCard.gateInfo.name")}}:
@@ -67,6 +83,7 @@ block originContent
 </template>
 
 <script>
+import { tokenDetail } from 'services/trade';
 import { gateStorage, getChargeAddr } from 'services/gate';
 import { getTokenIcon } from 'utils/tokenParser';
 import { getExplorerLink } from 'utils/getLink';
@@ -75,7 +92,6 @@ import Tb from './tb';
 import viteInput from 'components/viteInput';
 import { throttle } from 'lodash';
 import bn from 'utils/bigNumber';
-
 
 export default {
     components: { Tb, viteInput },
@@ -86,8 +102,12 @@ export default {
         },
         initTabName: { type: String, default: 'tokenInfo' }
     },
+    beforeMount() {
+        this.fetchTokenDetail();
+    },
     data() {
         return {
+            tokenDetail: {},
             tabName: this.initTabName || 'tokenInfo',
             urlCache: this.token.gateInfo.url,
             dTitle: this.$t('tokenCard.tokenInfo.title', { tokenSymbol: this.token.tokenSymbol }),
@@ -182,140 +202,31 @@ export default {
         }, 1000),
         tabClick(name) {
             this.tabName = name;
+        },
+        fetchTokenDetail() {
+            tokenDetail({ tokenId: this.token.tokenId }).then(data => {
+                this.tokenDetail = data;
+                if (data.links) {
+                    for (const key in data.links) {
+                        this.tokenDetail[`${ key }Link`] = data.links[key];
+                    }
+                }
+                this.tokenDetail.ttype = tokenDetail.gateway
+                    ? this.$t('tokenCard.tokenInfo.labels.crossType')
+                    : this.$t('tokenCard.tokenInfo.labels.originType');
+                this.tokenDetail.explorerLink = this.tokenDetail.explorerLink
+                    || (this.tokenDetail.gateway ? null : getExplorerLink());
+            }).catch(err => {
+                console.warn(err);
+            });
+        },
+        openUrl(url) {
+            url && openUrl(url);
         }
     }
 };
 </script>
 
 <style lang="scss" scoped>
-@import "~assets/scss/vars.scss";
-
-.head {
-    border-bottom: 1px solid rgba(212, 222, 231, 1);
-    box-sizing: border-box;
-    padding: 20px 30px;
-    display: flex;
-    background: rgba(0, 122, 255, 0.05);
-    .head_info {
-        display: flex;
-        flex-direction: column;
-    }
-    .gate_info {
-        font-size: 12px;
-        color: #007aff;
-        background: rgba(0, 122, 255, 0.06);
-        padding: 0 4px;
-        align-self: flex-start;
-        border-radius: 2px;
-        margin-left: 6px;
-    }
-    .icon {
-        width: 40px;
-        height: 40px;
-        margin-right: 10px;
-    }
-    &__name {
-        @include font-family-bold();
-        color: rgba(29, 32, 36, 1);
-        font-size: 14px;
-        line-height: 18px;
-        &__gate {
-            color: #007aff;
-            background-color: rgba(0, 122, 255, 0.06);
-            @include font-family-normal();
-            font-size: 12px;
-            height: 20px;
-            padding: 0 4px;
-            margin-left: 6px;
-            line-height: 20px;
-            display: flex;
-        }
-    }
-    &__symbol {
-        @include font-family-normal();
-        font-size: 12px;
-        color: rgba(94, 104, 117, 1);
-        margin-top: 8px;
-        line-height: 16px;
-    }
-}
-.tab {
-    padding: 0 30px;
-    height: 40px;
-    display: flex;
-    border-bottom: 1px solid #d4dee7;
-    flex-shrink: 0;
-    &__item {
-        @include font-family-bold();
-        font-size: 12px;
-        color: rgba(189, 193, 209, 1);
-        height: 100%;
-        box-sizing: border-box;
-        margin-right: 40px;
-        color: #5e6875;
-        display: flex;
-        align-items: center;
-        cursor: pointer;
-        &.active {
-            border-bottom: 2px solid #007aff;
-        }
-    }
-}
-.tab-content {
-    box-sizing: border-box;
-    height: 350px;
-    padding: 30px;
-    position: relative;
-    overflow: scroll;
-    &.no-padding {
-        padding: 0;
-    }
-    .content__item {
-        font-size: 12px;
-        @include font-family-normal();
-        line-height: 16px;
-        margin-bottom: 24px;
-        display: flex;
-        text-align: left;
-        color: rgba(29, 32, 36, 1);
-        &.center {
-            align-items: center;
-            div {
-                display: flex;
-                align-items: center;
-            }
-        }
-        :last-child {
-            word-break: break-word;
-        }
-        .label {
-            color: rgba(94, 104, 117, 0.58);
-            margin-right: 10px;
-            word-break: keep-all;
-            white-space: nowrap;
-        }
-        .click-able {
-            color: #007aff;
-            cursor: pointer;
-        }
-        .btn {
-            cursor: pointer;
-            user-select: none;
-            height: 34px;
-            line-height: 34px;
-            border-radius: 2px;
-            font-size: 14px;
-            @include font-family-bold();
-            padding: 0 20px;
-            white-space: nowrap;
-            margin-left: 23px;
-            background: rgba(0, 122, 255, 1);
-            color: rgba(255, 255, 255, 1);
-            &.unuse {
-                background: rgba(191, 191, 191, 1);
-            }
-        }
-    }
-}
+@import "~components/confirm/moreTabConfirm.scss";
 </style>
-
