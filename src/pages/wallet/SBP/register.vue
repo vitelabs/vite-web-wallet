@@ -49,7 +49,7 @@
             <div class="item">
                 <div v-show="!btnUnuse" class="__form_btn __pointer" :class="{
                     'unuse': btnUnuse
-                }" @click="validTx">{{ $t('walletSBP.section1.confirmBtn') }}</div>
+                }" @click="_validTx">{{ $t('walletSBP.section1.confirmBtn') }}</div>
                 <div v-show="btnUnuse" class="__form_btn __pointer"  :class="{
                     'unuse': btnUnuse
                 }">{{ $t('walletSBP.section1.confirmBtn') }}</div>
@@ -62,8 +62,9 @@
 import { hdAddr, constant } from '@vite/vitejs';
 import viteInput from 'components/viteInput';
 import { initPwd } from 'components/password/index.js';
-import BigNumber from 'utils/bigNumber';
 import sendTx from 'utils/sendTx';
+import BigNumber from 'utils/bigNumber';
+import statistics from 'utils/statistics';
 import { execWithValid } from 'utils/execWithValid';
 
 const Vite_Token_Info = constant.Vite_Token_Info;
@@ -186,6 +187,10 @@ export default {
             this.producerAddrErr = '';
         },
 
+        _validTx() {
+            statistics.event(this.$route.name, 'regSBP', this.quotaAddr || '');
+            this.validTx();
+        },
         validTx: execWithValid(function () {
             if (this.loading) {
                 return;
