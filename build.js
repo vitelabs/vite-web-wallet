@@ -6,8 +6,6 @@ console.log(`Write netlifyConf ${ process.env.NODE_ENV }`);
 let redirect;
 if (process.env.NODE_ENV === 'test') {
     redirect = path.join(__dirname, 'netlifyConf/_redirects_test');
-} else if (process.env.NODE_ENV === 'dexTestNet') {
-    redirect = path.join(__dirname, 'netlifyConf/_redirects_dex_testnet');
 } else {
     redirect = path.join(__dirname, 'netlifyConf/_redirects');
 }
@@ -31,7 +29,6 @@ copyFolder(chartPath, chartStaticPath);
 function copyFolder(currentPath, targetPath) {
     if (!fs.existsSync(currentPath)) {
         console.error(new Error(`${ currentPath }     is not exist.`));
-
         return;
     }
     !fs.existsSync(targetPath) && fs.mkdirSync(targetPath);
