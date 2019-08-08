@@ -30,6 +30,7 @@ let webpackConfig = {
     },
     plugins,
     optimization: {
+        usedExports: true,
         splitChunks: {
             maxSize: 3600000,
             maxAsyncRequests: 5,
