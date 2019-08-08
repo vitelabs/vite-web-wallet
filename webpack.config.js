@@ -108,8 +108,9 @@ let webpackConfig = {
                 test: /(\.scss$|\.css$|\.sass$)/,
                 use: [
                     { loader: 'style-loader' },
-                    { loader: 'css-loader' },
+                    { loader: 'css-loader', options: { minimize: true } },
                     { loader: 'sass-loader' }
+                    // { loader: 'image-webpack-loader', enforce: 'pre' }
                     // { loader: 'postcss-loader' }
                 ]
             }, {
