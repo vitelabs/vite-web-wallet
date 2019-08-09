@@ -22,7 +22,6 @@ const mutations = {
         state.isVip = isVip;
     },
     setExchangeMarketInfo(state, marketInfo) {
-        console.log(marketInfo);
         state.marketInfo = marketInfo;
     },
     setInviteCode(state, payload = '') {
