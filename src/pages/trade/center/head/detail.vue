@@ -107,7 +107,7 @@ export default {
     },
     computed: {
         ftokenDetail() {
-            return this.$store.state.exchangeTokens.ttoken;
+            return this.$store.state.exchangeTokens.ftoken;
         },
         tokenDetail() {
             if (!this.ftokenDetail) {
