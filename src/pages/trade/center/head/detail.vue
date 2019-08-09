@@ -100,14 +100,6 @@ import openUrl from 'utils/openUrl';
 import statistics from 'utils/statistics';
 import txPairInfo from './txPairInfo.vue';
 
-// import operatorList from './operator.json';
-
-// import XS_Fund from 'assets/imgs/operator/XS_Fund.png';
-// import Vgate from 'assets/imgs/operator/Vgate.png';
-// import ViteLabs from 'assets/imgs/operator/viteLabs.png';
-
-// const operatorIcon = { ViteLabs, XS_Fund, Vgate };
-
 export default {
     components: { confirm, txPairInfo },
     data() {
@@ -144,13 +136,6 @@ export default {
         operatorInfo() {
             return this.$store.state.exchangeTokens.operator;
         }
-
-        // operatorInfo() {
-        //     const operator = operatorList[0];
-        //     const img = operator.img;
-        //     operator.icon = img ? operatorIcon[img] || '' : '';
-        //     return operator;
-        // }
     },
     methods: {
         switchTab(tab) {
