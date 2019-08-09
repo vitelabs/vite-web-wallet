@@ -32,9 +32,6 @@ let webpackConfig = {
     optimization: {
         usedExports: true,
         splitChunks: {
-            maxSize: 3600000,
-            maxAsyncRequests: 5,
-            maxInitialRequests: 3,
             hidePathInfo: true,
             chunks: 'all'
             // cacheGroups: {
