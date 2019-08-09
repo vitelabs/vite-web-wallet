@@ -4,7 +4,7 @@
             {{ $t('trade.limitPrice.title') }}
 
             <div class="right-tab">
-                <span class="vip" :class="{ 'active': isVip }">VIP</span>
+                <span class="vip" :class="{ 'active': isVip }"></span>
                 <span class="vip-operate __pointer" @click="_showVipConfirm"
                       :class="{ 'active': !isVip }">
                     {{ isVip ? $t('trade.limitPrice.cancelVip') : $t('trade.limitPrice.openVip') }}
@@ -203,12 +203,11 @@ export default {
     }
 
     .vip {
-        @include font-family-bold();
-        font-weight: 600;
+        display: inline-block;
+        margin-bottom: -3px;
         color: rgba(255,255,255,1);
-        padding: 2px 8px;
-        background: rgba(189,193,209,1);
-        border-radius: 4px;
+        width: 36px;
+        height: 16px;
         background: url('~assets/imgs/not_vip.svg');
         background-size: 100% 100%;
 
