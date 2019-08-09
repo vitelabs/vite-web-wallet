@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+  <defs>
+    <linearGradient id="vcandy-a" x1="100%" x2="0%" y1="100%" y2="0%">
+      <stop offset="0%" stop-color="#B4EC51"/>
+      <stop offset="100%" stop-color="#429321"/>
+    </linearGradient>
+  </defs>
+  <g fill="none">
+    <circle cx="10" cy="10" r="10" fill="url(#vcandy-a)"/>
+    <path fill="#FFF" d="M4,8.1259388 L8.12121211,7.19230769 L7.71049566,17.6666667 L4,8.1259388 Z M9.0980956,6.95012821 L17.3333333,5 L7.87878788,17.5448718 L9.0980956,6.95012821 Z"/>
+  </g>
+</svg>

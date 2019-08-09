@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.2 (57519) - http://www.bohemiancoding.com/sketch -->
+    <title>download_disabled</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="158" y="112" width="1242" height="737" rx="2"></rect>
+        <filter x="-6.0%" y="-9.8%" width="112.0%" height="120.2%" filterUnits="objectBoundingBox" id="filter-2">
+            <feMorphology radius="0.5" operator="dilate" in="SourceAlpha" result="shadowSpreadOuter1"></feMorphology>
+            <feOffset dx="0" dy="2" in="shadowSpreadOuter1" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="24" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feComposite in="shadowBlurOuter1" in2="SourceAlpha" operator="out" result="shadowBlurOuter1"></feComposite>
+            <feColorMatrix values="0 0 0 0 0.690196078   0 0 0 0 0.752941176   0 0 0 0 0.929411765  0 0 0 0.422186368 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+        <path d="M16.9364015,11.3824142 C16.2721186,11.3824142 15.7336108,11.9221886 15.7336108,12.5862167 L15.7336108,16.2523413 L2.24765869,16.2523413 L2.24765869,12.5862167 C2.24765869,11.9213749 1.70356322,11.3824142 1.04486797,11.3824142 L1.20279072,11.3824142 C0.538507748,11.3824142 0,11.9212016 0,12.5740906 L0,17.0015609 C0,17.8257024 0.674297607,18.5 1.49843913,18.5 L16.4828304,18.5 C17.3069719,18.5 17.9812695,17.8257024 17.9812695,17.0015609 L17.9812695,12.5740906 C17.9812695,11.9159459 17.437174,11.3824142 16.7784788,11.3824142 L16.9364015,11.3824142 Z M8.578564,13.7986472 L3.97456084,9.1958672 C3.50368663,8.72511809 3.50062539,7.96356889 3.96817942,7.49444186 L3.83999117,7.62306138 C4.30734101,7.15413923 5.07620722,7.14698888 5.55531653,7.60519189 L7.86680541,9.81581721 L7.86680541,1.69880883 C7.86680541,1.036725 8.41090088,0.5 9.06959613,0.5 L8.91167338,0.5 C9.57595635,0.5 10.1144641,1.02755043 10.1144641,1.69880883 L10.1144641,9.81581721 L12.3946872,7.57932315 C12.8681929,7.11489821 13.6330205,7.11761361 14.1034365,7.58584491 L13.9744636,7.45747097 C14.4446742,7.92549778 14.4505253,8.68251539 13.9846019,9.15126547 L9.36524454,13.7986472 C9.14047867,14.0234131 8.80332986,14.0234131 8.578564,13.7986472 Z" id="path-3"></path>
+        <path d="M16.9364015,11.3824142 C16.2721186,11.3824142 15.7336108,11.9221886 15.7336108,12.5862167 L15.7336108,16.2523413 L2.24765869,16.2523413 L2.24765869,12.5862167 C2.24765869,11.9213749 1.70356322,11.3824142 1.04486797,11.3824142 L1.20279072,11.3824142 C0.538507748,11.3824142 0,11.9212016 0,12.5740906 L0,17.0015609 C0,17.8257024 0.674297607,18.5 1.49843913,18.5 L16.4828304,18.5 C17.3069719,18.5 17.9812695,17.8257024 17.9812695,17.0015609 L17.9812695,12.5740906 C17.9812695,11.9159459 17.437174,11.3824142 16.7784788,11.3824142 L16.9364015,11.3824142 Z M8.578564,13.7986472 L3.97456084,9.1958672 C3.50368663,8.72511809 3.50062539,7.96356889 3.96817942,7.49444186 L3.83999117,7.62306138 C4.30734101,7.15413923 5.07620722,7.14698888 5.55531653,7.60519189 L7.86680541,9.81581721 L7.86680541,1.69880883 C7.86680541,1.036725 8.41090088,0.5 9.06959613,0.5 L8.91167338,0.5 C9.57595635,0.5 10.1144641,1.02755043 10.1144641,1.69880883 L10.1144641,9.81581721 L12.3946872,7.57932315 C12.8681929,7.11489821 13.6330205,7.11761361 14.1034365,7.58584491 L13.9744636,7.45747097 C14.4446742,7.92549778 14.4505253,8.68251539 13.9846019,9.15126547 L9.36524454,13.7986472 C9.14047867,14.0234131 8.80332986,14.0234131 8.578564,13.7986472 Z" id="path-5"></path>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="vite-钱包7" transform="translate(-521.000000, -234.000000)">
+            <rect id="Rectangle-2" fill="#FAFCFF" x="0" y="0" width="1440" height="889"></rect>
+            <g id="Title-Rectangle">
+                <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                <rect stroke="#F6F5F5" stroke-width="1" stroke-linejoin="square" fill="#FFFFFF" fill-rule="evenodd" x="158.5" y="112.5" width="1241" height="736" rx="2"></rect>
+            </g>
+            <g id="Group-13" transform="translate(188.000000, 234.000000)">
+                <g id="icons/utility/upload-copy-2" transform="translate(333.000000, 0.000000)">
+                    <g id="icons/utility/upload-copy">
+                        <g transform="translate(1.000000, 1.000000)">
+                            <mask id="mask-4" fill="white">
+                                <use xlink:href="#path-3"></use>
+                            </mask>
+                            <use id="Mask" stroke="#FFFFFF" stroke-width="0.6" fill="#CED1D5" opacity="0.7" xlink:href="#path-3"></use>
+                        </g>
+                    </g>
+                </g>
+                <g id="icons/utility/upload-copy-2" transform="translate(333.000000, 0.000000)">
+                    <g id="icons/utility/upload-copy" transform="translate(1.000000, 1.000000)">
+                        <mask id="mask-6" fill="white">
+                            <use xlink:href="#path-5"></use>
+                        </mask>
+                        <use id="Mask" stroke="#FFFFFF" stroke-width="0.6" fill="#CED1D5" opacity="0.7" xlink:href="#path-5"></use>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

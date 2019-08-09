@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>done_icon</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g transform="translate(-777.000000, -33.000000)" fill="#FFFFFF">
+            <g id="Group" transform="translate(625.000000, 30.000000)">
+                <g id="Group-7" transform="translate(152.000000, 3.000000)">
+                    <path d="M0.150313152,7.62839248 C-0.0501043841,7.42797495 -0.0501043841,7.09394572 0.150313152,6.89352818 L0.885177453,6.15866388 C1.08559499,5.95824635 1.41962422,5.95824635 1.62004175,6.15866388 L5.76200418,10.3340292 C5.89561587,10.4676409 6.12943633,10.4676409 6.26304802,10.3340292 L14.3799582,2.15031315 C14.5803758,1.94989562 14.914405,1.94989562 15.1148225,2.15031315 L15.8496868,2.88517745 C16.0501044,3.08559499 16.0501044,3.41962422 15.8496868,3.62004175 L6.39665971,13.1732777 C6.19624217,13.4070981 5.86221294,13.4070981 5.66179541,13.1732777 L0.150313152,7.62839248 Z" id="Mask"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

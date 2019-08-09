@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="12px" height="12px" viewBox="0 0 12 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
+    <title>盘口</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="309" height="756" rx="2"></rect>
+        <filter x="-5.7%" y="-2.1%" width="111.3%" height="104.6%" filterUnits="objectBoundingBox" id="filter-2">
+            <feMorphology radius="0.5" operator="dilate" in="SourceAlpha" result="shadowSpreadOuter1"></feMorphology>
+            <feOffset dx="0" dy="2" in="shadowSpreadOuter1" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0.690196078   0 0 0 0 0.752941176   0 0 0 0 0.929411765  0 0 0 0.422186368 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="图标" transform="translate(-160.000000, -414.000000)">
+            <g id="深度合并" transform="translate(87.000000, 54.000000)">
+                <g id="Rectangle-2">
+                    <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                    <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-1"></use>
+                </g>
+                <rect id="矩形" fill="#FFFFFF" fill-rule="nonzero" x="0" y="0" width="309" height="756"></rect>
+                <g id="跌" transform="translate(0.000000, 63.000000)">
+                    <g id="跌-新" transform="translate(0.000000, 297.000000)">
+                        <rect id="矩形" fill="#FFFFFF" fill-rule="nonzero" x="0" y="0" width="309" height="20"></rect>
+                        <g id="分组" stroke-width="1" fill-rule="evenodd" transform="translate(6.000000, 2.000000)" font-family="PingFang-SC-Regular, PingFang SC" font-size="12" font-weight="normal">
+                            <text id="0.0001896" fill="#E5494D">
+                                <tspan x="0" y="13">0.0001896</tspan>
+                            </text>
+                            <text id="66.342" fill="#5E6875">
+                                <tspan x="115" y="13">66.342</tspan>
+                            </text>
+                            <text id="0.81202608" fill="#5E6875">
+                                <tspan x="229" y="13">0.81202608</tspan>
+                            </text>
+                        </g>
+                        <rect id="矩形" fill-opacity="0.05" fill="#E5494D" fill-rule="nonzero" x="198" y="0" width="111" height="20"></rect>
+                    </g>
+                </g>
+                <g id="盘口" transform="translate(0.000000, 360.000000)" fill="#E5494D" stroke="#FFFFFF" stroke-width="0.5">
+                    <g id="分组-2" transform="translate(73.000000, 0.000000)">
+                        <g id="分组-copy-3">
+                            <path d="M5.85883452,0.150107333 L1.84634438,4.1615315 C1.37892129,4.62883041 1.3806094,5.38954092 1.84237432,5.85285936 L1.55050135,5.56000443 C2.01573184,6.0268001 2.7866771,6.02859515 3.25800987,5.57782934 L5.225048,3.69662441 L5.225048,10.7857026 C5.225048,11.4518715 5.77194785,11.991908 6.42395267,11.991908 L6.02757444,11.991908 C6.6897112,11.991908 7.2264791,11.4476313 7.2264791,10.7857026 L7.2264791,3.69662441 L9.16691061,5.5998432 C9.63824819,6.06214169 10.403282,6.05574794 10.8678734,5.59331414 L10.5742138,5.8856099 C11.0422921,5.41970552 11.0401994,4.65815557 10.5747775,4.18991003 L6.5593354,0.150107333 C6.35919229,-0.0500357776 6.05897763,-0.0500357776 5.85883452,0.150107333 Z" id="Path" transform="translate(6.000000, 5.995954) scale(1, -1) translate(-6.000000, -5.995954) "></path>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

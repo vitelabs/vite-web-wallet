@@ -1,0 +1,19 @@
+
+$btn-color: #195BDD;
+$font-bold: PingFangSC-Semibold, arial, sans-serif;
+$font-normal: PingFangSC-Regular, arial, sans-serif;
+$font-normal-b: Avenir-Book, arial, sans-serif;
+$font-H: DINPro, arial, sans-serif;
+
+@mixin font-family($font) {
+    font-family: $font, arial, sans-serif;
+}
+
+@mixin font-family-normal() {
+    font-family: $font-normal;
+    font-weight: 400;
+}
+@mixin font-family-bold() {
+    font-family: $font-bold;
+    font-weight: 600;
+}
