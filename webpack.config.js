@@ -4,9 +4,9 @@ const path = require('path');
 const merge = require('webpack-merge');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
-const plugins = require('./webpackConf/plugins.js');
-const devConfig = require('./webpackConf/dev.config.js');
-const testConfig = require('./webpackConf/test.config.js');
+const plugins = require('./pack/plugins.js');
+const devConfig = require('./pack/dev.config.js');
+const testConfig = require('./pack/test.config.js');
 
 const SRC_PATH = path.join(__dirname, './src');
 const CHARTING_PATH = path.join(__dirname, './charting_library');

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
+    <title>下拉</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="交易所" transform="translate(-1407.000000, -15.000000)">
+            <rect id="矩形" fill="#FAFCFF" fill-rule="nonzero" x="0" y="0" width="1440" height="1126"></rect>
+            <g id="顶部菜单" transform="translate(80.000000, 0.000000)">
+                <rect id="Rectangle-2" x="0" y="0" width="1350" height="46" rx="2"></rect>
+            </g>
+            <g id="账户切换" transform="translate(1407.000000, 15.000000)" fill="#73767A" fill-rule="nonzero">
+                <g id="下拉">
+                    <path d="M5.08117034,10.5437916 L8.09733015,6.90544582 C8.22315859,6.76485139 8.4435445,6.76485139 8.56937294,6.90544582 L11.5706418,10.5437916 C11.7523113,10.7476163 11.6078692,11.0704628 11.3346204,11.0704628 L5.31644718,11.0704628 C5.04394299,11.0704628 4.89875633,10.7476163 5.08117034,10.5437916 Z" id="Shape" transform="translate(8.325731, 8.935231) scale(1, -1) translate(-8.325731, -8.935231) "></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

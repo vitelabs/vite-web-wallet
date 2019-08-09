@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="17" height="16" viewBox="0 0 17 16">
+  <defs>
+    <polygon id="vx-a" points="6.824 10.09 7.341 9.667 9.617 10.493 6.824 14.531"/>
+    <filter id="vx-b" width="135.8%" height="120.6%" x="-17.9%" y="-10.3%" filterUnits="objectBoundingBox">
+      <feGaussianBlur in="SourceAlpha" result="shadowBlurInner1" stdDeviation=".25"/>
+      <feOffset dy=".5" in="shadowBlurInner1" result="shadowOffsetInner1"/>
+      <feComposite in="shadowOffsetInner1" in2="SourceAlpha" k2="-1" k3="1" operator="arithmetic" result="shadowInnerInner1"/>
+      <feColorMatrix in="shadowInnerInner1" values="0 0 0 0 1   0 0 0 0 1   0 0 0 0 1  0 0 0 0.260869565 0"/>
+    </filter>
+    <polygon id="vx-c" points="2 7.743 6.535 9.478 6.989 9.153 6.921 6.291"/>
+    <filter id="vx-d" height="131.4%" y="-15.7%" filterUnits="objectBoundingBox">
+      <feGaussianBlur in="SourceAlpha" result="shadowBlurInner1" stdDeviation=".25"/>
+      <feOffset dy=".5" in="shadowBlurInner1" result="shadowOffsetInner1"/>
+      <feComposite in="shadowOffsetInner1" in2="SourceAlpha" k2="-1" k3="1" operator="arithmetic" result="shadowInnerInner1"/>
+      <feColorMatrix in="shadowInnerInner1" values="0 0 0 0 1   0 0 0 0 1   0 0 0 0 1  0 0 0 0.260869565 0"/>
+    </filter>
+    <polygon id="vx-e" points="6.824 5.368 13.861 4.233 6.824 9.441"/>
+    <filter id="vx-f" width="114.2%" height="119.2%" x="-7.1%" y="-9.6%" filterUnits="objectBoundingBox">
+      <feGaussianBlur in="SourceAlpha" result="shadowBlurInner1" stdDeviation=".25"/>
+      <feOffset dy=".5" in="shadowBlurInner1" result="shadowOffsetInner1"/>
+      <feComposite in="shadowOffsetInner1" in2="SourceAlpha" k2="-1" k3="1" operator="arithmetic" result="shadowInnerInner1"/>
+      <feColorMatrix in="shadowInnerInner1" values="0 0 0 0 1   0 0 0 0 1   0 0 0 0 1  0 0 0 0.260869565 0"/>
+    </filter>
+    <polygon id="vx-g" points="7.065 9.689 10.839 11.144 13.917 4.285"/>
+    <filter id="vx-h" width="114.6%" height="114.6%" x="-7.3%" y="-7.3%" filterUnits="objectBoundingBox">
+      <feGaussianBlur in="SourceAlpha" result="shadowBlurInner1" stdDeviation=".25"/>
+      <feOffset dy=".5" in="shadowBlurInner1" result="shadowOffsetInner1"/>
+      <feComposite in="shadowOffsetInner1" in2="SourceAlpha" k2="-1" k3="1" operator="arithmetic" result="shadowInnerInner1"/>
+      <feColorMatrix in="shadowInnerInner1" values="0 0 0 0 1   0 0 0 0 1   0 0 0 0 1  0 0 0 0.260869565 0"/>
+    </filter>
+  </defs>
+  <g fill="none" fill-rule="evenodd" transform="translate(.266 -.2)">
+    <path fill="#FFC800" d="M8.2,16.2 C3.78171429,16.2 0.2,12.6182857 0.2,8.2 C0.2,3.78171429 3.78171429,0.2 8.2,0.2 C12.6182857,0.2 16.2,3.78171429 16.2,8.2 C16.2,12.6182857 12.6182857,16.2 8.2,16.2 Z"/>
+    <use fill="#FFF" fill-opacity=".5" xlink:href="#vx-a"/>
+    <use fill="#000" filter="url(#vx-b)" xlink:href="#vx-a"/>
+    <use fill="#FFF" fill-opacity=".7" xlink:href="#vx-c"/>
+    <use fill="#000" filter="url(#vx-d)" xlink:href="#vx-c"/>
+    <use fill="#FFF" xlink:href="#vx-e"/>
+    <use fill="#000" filter="url(#vx-f)" xlink:href="#vx-e"/>
+    <use fill="#FFF" xlink:href="#vx-g"/>
+    <use fill="#000" filter="url(#vx-h)" xlink:href="#vx-g"/>
+  </g>
+</svg>

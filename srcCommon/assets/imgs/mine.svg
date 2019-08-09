@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="14px" height="14px" viewBox="0 0 14 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.2 (57519) - http://www.bohemiancoding.com/sketch -->
+    <title>mine</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="69" width="1243" height="393" rx="2"></rect>
+        <filter x="-6.0%" y="-18.4%" width="112.0%" height="137.9%" filterUnits="objectBoundingBox" id="filter-2">
+            <feMorphology radius="0.5" operator="dilate" in="SourceAlpha" result="shadowSpreadOuter1"></feMorphology>
+            <feOffset dx="0" dy="2" in="shadowSpreadOuter1" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="24" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feComposite in="shadowBlurOuter1" in2="SourceAlpha" operator="out" result="shadowBlurOuter1"></feComposite>
+            <feColorMatrix values="0 0 0 0 0.690196078   0 0 0 0 0.752941176   0 0 0 0 0.929411765  0 0 0 0.422186368 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="获取配额" transform="translate(-620.000000, -547.000000)">
+            <rect id="Rectangle-2" fill="#FAFCFF" x="0" y="-1" width="1440" height="889"></rect>
+            <g id="Group-10" transform="translate(157.000000, 387.000000)">
+                <g id="Rectangle-2">
+                    <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                    <rect stroke="#F6F5F5" stroke-width="1" stroke-linejoin="square" fill="#FFFFFF" fill-rule="evenodd" x="0.5" y="69.5" width="1242" height="392" rx="2"></rect>
+                </g>
+                <g id="我的抵押信息" transform="translate(0.000000, 135.000000)">
+                    <g>
+                        <rect id="Rectangle-3" x="0" y="0" width="1240" height="64"></rect>
+                        <text id="vite_098dfae02679a4c" font-family="PingFangSC-Regular, PingFang SC" font-size="14" font-weight="normal" line-spacing="16" fill="#007AFF">
+                            <tspan x="30" y="39">vite_098dfae02679a4ca05a4c8bf5dd00a8757f0c622bfccce7d68</tspan>
+                        </text>
+                        <path d="M477,36.9583333 L477,37.6 C477,38.3583333 476.358333,39 475.6,39 L464.4,39 C463.641667,39 463,38.3583333 463,37.6 L463,36.9583333 C463,35.2666667 464.983333,34.2166667 466.85,33.4 L467.025,33.3125 C467.170833,33.2541667 467.316667,33.2541667 467.4625,33.3416667 C468.220833,33.8375 469.066667,34.1 469.970833,34.1 C470.875,34.1 471.75,33.8083333 472.479167,33.3416667 C472.625,33.2541667 472.770833,33.2541667 472.916667,33.3125 L473.091667,33.4 C475.016667,34.2166667 477,35.2375 477,36.9583333 L477,36.9583333 Z M470,25 C471.925,25 473.470833,26.7208333 473.470833,28.85 C473.470833,30.9791667 471.925,32.7 470,32.7 C468.075,32.7 466.529167,30.9791667 466.529167,28.85 C466.529167,26.7208333 468.075,25 470,25 Z" id="Mask" fill="#D4DEE7"></path>
+                        <text id="222" font-family="PingFangSC-Regular, PingFang SC" font-size="14" font-weight="normal" line-spacing="16" fill="#5E6875">
+                            <tspan x="695" y="39">222</tspan>
+                        </text>
+                        <text id="1000.01221" font-family="PingFangSC-Regular, PingFang SC" font-size="14" font-weight="normal" line-spacing="16" fill="#5E6875">
+                            <tspan x="517" y="39">1000.01221</tspan>
+                        </text>
+                        <text id="333" font-family="PingFangSC-Regular, PingFang SC" font-size="14" font-weight="normal" line-spacing="16" fill="#5E6875">
+                            <tspan x="870" y="39">333</tspan>
+                        </text>
+                        <text id="2018.01.01-10:10" font-family="PingFangSC-Regular, PingFang SC" font-size="14" font-weight="normal" line-spacing="16" fill="#5E6875">
+                            <tspan x="1019" y="39">2018.01.01 10:10</tspan>
+                        </text>
+                        <text id="撤销" font-family="PingFangSC-Regular, PingFang SC" font-size="14" font-weight="normal" line-spacing="16" fill="#007AFF">
+                            <tspan x="1182" y="39">撤销</tspan>
+                        </text>
+                        <rect id="Rectangle-3" fill="#C6CBD4" opacity="0.3" x="0" y="63" width="1240" height="1"></rect>
+                    </g>
+                </g>
+                <g id="我的抵押信息" transform="translate(0.000000, 135.000000)">
+                    <rect id="Rectangle-3" x="0" y="0" width="1240" height="64"></rect>
+                    <path d="M477,36.9583333 L477,37.6 C477,38.3583333 476.358333,39 475.6,39 L464.4,39 C463.641667,39 463,38.3583333 463,37.6 L463,36.9583333 C463,35.2666667 464.983333,34.2166667 466.85,33.4 L467.025,33.3125 C467.170833,33.2541667 467.316667,33.2541667 467.4625,33.3416667 C468.220833,33.8375 469.066667,34.1 469.970833,34.1 C470.875,34.1 471.75,33.8083333 472.479167,33.3416667 C472.625,33.2541667 472.770833,33.2541667 472.916667,33.3125 L473.091667,33.4 C475.016667,34.2166667 477,35.2375 477,36.9583333 L477,36.9583333 Z M470,25 C471.925,25 473.470833,26.7208333 473.470833,28.85 C473.470833,30.9791667 471.925,32.7 470,32.7 C468.075,32.7 466.529167,30.9791667 466.529167,28.85 C466.529167,26.7208333 468.075,25 470,25 Z" id="Mask" fill="#D4DEE7"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
