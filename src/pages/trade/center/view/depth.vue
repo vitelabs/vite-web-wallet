@@ -69,6 +69,7 @@ export default {
             return _l;
         },
         buyAmountList() {
+            console.log(this.quoteTokenDigit);
             const _l = [];
             let sum = 0;
             const buyList = [].concat(this.buyList).reverse();
