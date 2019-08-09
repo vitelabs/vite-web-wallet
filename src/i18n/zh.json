@@ -337,7 +337,7 @@
         },
         "depositRecord": {
             "tabName": "转入记录",
-            "heads": ["时间", "金额", "状态", "{outChain}链Hash","VITE链Hash","手续费"],
+            "heads": ["时间", "金额", "状态", "{outChain}链Hash","vite链Hash","手续费"],
             "statusMap": {
                 "OPPOSITE_PROCESSING": "{outChain}链待确认{confirms}",
                 "OPPOSITE_CONFIRMED_FAIL":"{outChain}链失败",
@@ -349,7 +349,7 @@
         },
         "withdrawRecord": {
             "tabName": "转出记录",
-            "heads": ["时间", "金额", "状态", "VITE链Hash", "{outChain}链Hash","手续费"],
+            "heads": ["时间", "金额", "状态", "vite链Hash", "{outChain}链Hash","手续费"],
             "statusMap": {
                 "TOT_PROCESSING": "VITE链待确认{confirms}",
                 "TOT_CONFIRMED": "网关已接收",

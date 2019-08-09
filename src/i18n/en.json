@@ -330,7 +330,7 @@
         },
         "depositRecord": {
             "tabName": "Receive History",
-            "heads": ["Time", "Amount", "Status", "{outChain} Chain Hash","VITE Chain Hash","Fees"],
+            "heads": ["Time", "Amount", "Status", "{outChain} Hash","vite Hash","Fees"],
             "statusMap": {
                 "OPPOSITE_PROCESSING": "{outChain} awaits to confirm{confirms}",
                 "OPPOSITE_CONFIRMED_FAIL":"{outChain} processing failed",
@@ -342,7 +342,7 @@
         },
         "withdrawRecord": {
             "tabName": "Transfer History",
-            "heads": ["Time", "Amount", "Status", "VITE Chain Hash", "{outChain} Chain Hash","Fees"],
+            "heads": ["Time", "Amount", "Status", "vite Hash", "{outChain} Hash","Fees"],
             "statusMap":{
                 "TOT_PROCESSING": "VITE Chain Unconfirmed{confirms}",
                 "TOT_CONFIRMED": "VITE Confirmed",
