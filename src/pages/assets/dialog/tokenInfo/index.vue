@@ -18,7 +18,7 @@ block originContent
     .tab-content(v-if="tabName==='tokenInfo'")
         .content__item
             .label {{$t("tokenCard.tokenInfo.labels.tokenName")}}:
-            div {{tokenDetail.name}}
+            div.click-able(@click="goToTokenDetail") {{tokenDetail.name}} ({{tokenDetail.symbol}})
         .content__item
             .label {{$t("tokenCard.tokenInfo.labels.tokenId")}}:
             div.click-able(@click="goToTokenDetail") {{token.tokenId}}
@@ -211,7 +211,7 @@ export default {
                         this.tokenDetail[`${ key }Link`] = data.links[key];
                     }
                 }
-                this.tokenDetail.ttype = tokenDetail.gateway
+                this.tokenDetail.ttype = this.tokenDetail.gateway
                     ? this.$t('tokenCard.tokenInfo.labels.crossType')
                     : this.$t('tokenCard.tokenInfo.labels.originType');
                 this.tokenDetail.explorerLink = this.tokenDetail.explorerLink
