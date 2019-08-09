@@ -61,7 +61,7 @@ export default {
             const buyList = [].concat(this.buyList).reverse();
             buyList.forEach(item => {
                 sum = BigNumber.plus(sum, item.quantity || 0);
-                sum = BigNumber.onlyFormat(sum, this.tradeTokenDigit);
+                sum = BigNumber.formatNum(sum, this.tradeTokenDigit);
                 _l.push(sum);
             });
             _l.reverse();
@@ -75,7 +75,7 @@ export default {
             const buyList = [].concat(this.buyList).reverse();
             buyList.forEach(item => {
                 sum = BigNumber.plus(sum, item.amount || 0);
-                sum = BigNumber.onlyFormat(sum, this.quoteTokenDigit);
+                sum = BigNumber.formatNum(sum, this.quoteTokenDigit);
                 _l.push(sum);
             });
             _l.reverse();
@@ -97,7 +97,7 @@ export default {
             let sum = 0;
             this.sellList.forEach(item => {
                 sum = BigNumber.plus(sum, item.quantity || 0);
-                sum = BigNumber.onlyFormat(sum, this.tradeTokenDigit);
+                sum = BigNumber.formatNum(sum, this.tradeTokenDigit);
                 _l.push(sum);
             });
 
@@ -112,7 +112,7 @@ export default {
             let sum = 0;
             this.sellList.forEach(item => {
                 sum = BigNumber.plus(sum, item.amount || 0);
-                sum = BigNumber.onlyFormat(sum, this.quoteTokenDigit);
+                sum = BigNumber.formatNum(sum, this.quoteTokenDigit);
                 _l.push(sum);
             });
 
@@ -132,8 +132,8 @@ export default {
                 tooltip: {
                     confine: true,
                     formatter: params => {
-                        let res = `${ this.$t('trade.priceTitle', { price: this.activeTxPair ? this.activeTxPair.quoteTokenSymbol : '' }) }: ${ params[0].name }`;
-                        res += `<br/>${ params[0].seriesName } : ${ params[0].value }`;
+                        const price = BigNumber.formatNum(params[0].name, this.quoteTokenDigit);
+                        const quantity = BigNumber.formatNum(params[0].value, this.tradeTokenDigit);
                         let amount;
                         const index = params[0].dataIndex;
                         if (index >= this.buyList.length) {
@@ -141,6 +141,10 @@ export default {
                         } else {
                             amount = this.buyAmountList[index];
                         }
+                        amount = BigNumber.formatNum(amount, this.quoteTokenDigit);
+
+                        let res = `${ this.$t('trade.priceTitle', { price: this.activeTxPair ? this.activeTxPair.quoteTokenSymbol : '' }) }: ${ price }`;
+                        res += `<br/>${ params[0].seriesName } : ${ quantity }`;
                         res += `<br/>${ this.$t('trade.amountTable') } : ${ amount }`;
                         return res;
                     },
