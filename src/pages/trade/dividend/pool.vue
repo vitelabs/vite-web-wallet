@@ -141,24 +141,25 @@ export default {
 
                 this.pool = {};
                 const tokenIds = [];
+                const tokenList = [ 'VITE', 'ETH', 'BTC', 'USD' ];
 
                 for (const tokenId in data) {
                     const token = data[tokenId];
-                    const tokenType = typeList[token.quoteTokenType - 1];
+                    const tokenTypeName = tokenList[token.quoteTokenType - 1];
 
-                    this.pool[tokenType.name] = this.pool[tokenType.name] || {
+                    this.pool[tokenTypeName] = this.pool[tokenTypeName] || {
                         amount: '0',
                         decimals: 8,
                         tokens: []
                     };
 
-                    const allAmount = this.pool[tokenType.name].amount;
+                    const allAmount = this.pool[tokenTypeName].amount;
 
-                    token.tokenType = tokenType.name;
+                    token.tokenType = tokenTypeName;
                     token.amount = bigNumber.toBasic(token.amount, token.tokenInfo.decimals);
 
-                    this.pool[tokenType.name].tokens.push(token);
-                    this.pool[tokenType.name].amount = bigNumber.plus(token.amount, allAmount);
+                    this.pool[tokenTypeName].tokens.push(token);
+                    this.pool[tokenTypeName].amount = bigNumber.plus(token.amount, allAmount);
 
                     tokenIds.push(token.tokenInfo.tokenId);
                 }
