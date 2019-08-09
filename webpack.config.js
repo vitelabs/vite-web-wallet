@@ -44,6 +44,13 @@ let webpackConfig = {
             //         name: 'vendor',
             //         chunks: 'all'
             //     },
+            //     commons: {
+            //         name: 'comomns',
+            //         test: /src(?!(\/utils))/, // 可自定义拓展规则
+            //         minChunks: 2, // 最小共用次数
+            //         minSize: 0, // 代码最小多大，进行抽离
+            //         priority: 1 // 该配置项是设置处理的优先级，数值越大越优先处理
+            //     },
             //     default: {
             //         minChunks: 2,
             //         priority: -20,
@@ -57,7 +64,10 @@ let webpackConfig = {
                 parallel: true,
                 uglifyOptions: {
                     compress: {
+                        // collapse_vars: true,
+                        // reduce_vars: true,
                         unused: true,
+                        drop_console: true,
                         drop_debugger: true
                     },
                     output: { comments: false }
@@ -117,7 +127,6 @@ let webpackConfig = {
                     { loader: 'style-loader' },
                     { loader: 'css-loader', options: { minimize: true } },
                     { loader: 'sass-loader' }
-                    // { loader: 'image-webpack-loader', enforce: 'pre' }
                     // { loader: 'postcss-loader' }
                 ]
             }, {
