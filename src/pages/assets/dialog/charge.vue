@@ -11,7 +11,7 @@ block head
                 span.strong(place="tokenSymbol") {{getTokenSymbol(token)}}
                 span.strong(place="min") {{minimumDepositAmount}}
             .dot
-        .charge-tips 
+        .charge-tips
             i18n(path='tokenCard.charge.tips.2' tag="span")
                 span.strong(place="confirmationCount") {{confirmationCount}}
             .dot
@@ -34,11 +34,11 @@ block content
 </template>
 
 <script>
-import qrcode from "components/qrcode";
-import copy from "utils/copy";
-import { modes } from "qrcode.es";
-import { getDepositInfo } from "services/gate";
-import bigNumber from "utils/bigNumber";
+import qrcode from 'components/qrcode';
+import copy from 'utils/copy';
+import { modes } from 'qrcode.es';
+import { getDepositInfo } from 'services/gate';
+import bigNumber from 'utils/bigNumber';
 
 export default {
     components: { qrcode },
@@ -49,10 +49,8 @@ export default {
         }
     },
     beforeMount() {
-        getDepositInfo(
-            { addr: this.defaultAddr, tokenId: this.token.tokenId },
-            this.token.gateInfo.url
-        )
+        getDepositInfo({ addr: this.defaultAddr, tokenId: this.token.tokenId },
+            this.token.gateInfo.url)
             .then(res => {
                 this.address = res.depositAddress;
                 this.minimumDepositAmountMin = res.minimumDepositAmount;
@@ -60,27 +58,25 @@ export default {
                 this.labelValue = res.label;
                 this.confirmationCount = res.confirmationCount;
             })
-            .catch(() => (this.addrErr = this.$t("tokenCard.charge.addrErr")));
+            .catch(() => (this.addrErr = this.$t('tokenCard.charge.addrErr')));
     },
     data() {
         return {
-            confirmationCount: "",
-            minimumDepositAmountMin: "",
-            address: "",
+            confirmationCount: '',
+            minimumDepositAmountMin: '',
+            address: '',
             amount: 0,
             qrOptions: { size: 124, mode: modes.NORMAL },
-            dTitle: this.$t("tokenCard.charge.title"),
-            addrErr: "",
-            labelName: "",
-            labelValue: ""
+            dTitle: this.$t('tokenCard.charge.title'),
+            addrErr: '',
+            labelName: '',
+            labelValue: ''
         };
     },
     computed: {
         minimumDepositAmount() {
-            return bigNumber.toBasic(
-                this.minimumDepositAmountMin,
-                this.token.decimals
-            );
+            return bigNumber.toBasic(this.minimumDepositAmountMin,
+                this.token.decimals);
         },
         addressQrcode() {
             return this.address;
@@ -91,18 +87,18 @@ export default {
     },
     methods: {
         getTokenSymbol(token) {
-            if (token.tokenSymbol === "USDT" && token.index === 0) {
-                return "USDT(ERC20)";
+            if (token.tokenSymbol === 'USDT' && token.index === 0) {
+                return 'USDT(ERC20)';
             }
             return token.tokenSymbol;
         },
         copy() {
             copy(this.address);
-            this.$toast(this.$t("hint.copy"));
+            this.$toast(this.$t('hint.copy'));
         },
         copyLabel() {
             copy(this.labelValue);
-            this.$toast(this.$t("hint.copy"));
+            this.$toast(this.$t('hint.copy'));
         }
     }
 };

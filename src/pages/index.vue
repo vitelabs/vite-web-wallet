@@ -10,9 +10,9 @@
 
 <script>
 import noticeList from 'components/noticeList.vue';
-import {emptySpace} from 'utils/storageSpace';
+import { emptySpace } from 'utils/storageSpace';
 import { receiveInviteDialog } from 'components/dialog';
-const inviteCodeKey='INVITE_CODE'
+const inviteCodeKey = 'INVITE_CODE';
 
 export default {
     components: { noticeList },
@@ -21,14 +21,14 @@ export default {
         this.$store.dispatch('startLoopBalance');
         this.$store.dispatch('startLoopExchangeBalance');
         this.$store.dispatch('exFetchLatestOrder');
-        this.$store.dispatch('getInvitedCode').catch(()=>{
-        if(Number(this.$route.query['inviteCode'])>0){
-            const oldCode=emptySpace.getItem(inviteCodeKey);
-            emptySpace.setItem(inviteCodeKey,this.$route.query['inviteCode'])
-            if(!oldCode&&this.$route.name==='tradeCenter'){
-                receiveInviteDialog()
+        this.$store.dispatch('getInvitedCode').catch(() => {
+            if (Number(this.$route.query['inviteCode']) > 0) {
+                const oldCode = emptySpace.getItem(inviteCodeKey);
+                emptySpace.setItem(inviteCodeKey, this.$route.query['inviteCode']);
+                if (!oldCode && this.$route.name === 'tradeCenter') {
+                    receiveInviteDialog();
+                }
             }
-        }
         });
     },
     computed: {
