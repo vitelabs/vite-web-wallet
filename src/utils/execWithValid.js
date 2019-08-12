@@ -11,14 +11,15 @@ export function execWithValid(funcName, noActive) {
         const activeAccount = getActiveAcc();
         if (currHDACC && currHDACC.isBifrost) {
             vbConnectDialog();
-            return;
+            return Promise.reject({ error: { code: 12001 } });
         }
         if (activeAccount) {
             pwdConfirm({ type: 'unlockAccount' });
-            return;
+            return Promise.reject({ error: { code: 12001 } });
         }
         if (noActive) {
             noActive.apply(this);
+            return Promise.reject({ error: { code: 12002 } });
         }
     };
 }
