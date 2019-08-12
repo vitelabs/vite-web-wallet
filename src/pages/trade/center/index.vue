@@ -81,8 +81,14 @@ export default {
                 return `${ pre }0`;
             }
 
-            const realPrice = BigNumber.multi(this.activeTxPair.closePrice || 0, this.rate || 0, 6);
-            return pre + BigNumber.onlyFormat(realPrice, 2);
+            const _price = BigNumber.multi(this.activeTxPair.closePrice || 0, this.rate || 0, 6);
+            const _realPrice = BigNumber.normalFormatNum(_price, 6);
+            const _realPrice2 = BigNumber.normalFormatNum(_realPrice, 2);
+
+            if (+_realPrice2 !== 0) {
+                return pre + BigNumber.onlyFormat(_realPrice2);
+            }
+            return pre + BigNumber.onlyFormat(_realPrice, 2);
         }
     },
     watch: {
