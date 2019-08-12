@@ -17,7 +17,7 @@
                 <tooltips class="tips" :content="$t('tradeCenter.supportMining')"></tooltips>
             </span>
             <span class="gate" @click="_showDetail('operator')">
-                <img class="gate-img" src="~assets/imgs/operator_icon.svg" />
+                <img class="gate-img" :src="operatorIcon" />
                 {{ operatorInfo ? operatorInfo.name : '--' }}
             </span>
         </div>
@@ -80,6 +80,12 @@ export default {
         },
         operatorInfo() {
             return this.$store.state.exchangeTokens.operator;
+        },
+        operatorIcon() {
+            if (this.operatorInfo) {
+                return this.operatorInfo.icon || '';
+            }
+            return '';
         }
     },
     methods: {
@@ -87,7 +93,7 @@ export default {
             if (tab === 'operator' && !this.operatorInfo) {
                 tab = 'token';
             }
-            this.showDetail(tab);
+            this.showDetail && this.showDetail(tab);
         }
     }
 };
