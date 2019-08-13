@@ -294,6 +294,7 @@
                 "tokenId": "TokenID",
                 "tokenName": "Name",
                 "totalSupply": "Total Supply",
+                "total": "流通总量",
                 "overview": "代币简介",
                 "type": "代币类型",
                 "gate": "跨链网关",
