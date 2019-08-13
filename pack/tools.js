@@ -28,7 +28,11 @@ module.exports = {
         }, targetPath);
     },
     buildLog: function (msg) {
-        console.log(`\n ==== ${ msg }, ${ new Date().getTime() } ====`);
+        console.log(`\n ==> ${ msg }, ${ new Date().getTime() }`);
+    },
+    cleanFile: function (filePath) {
+        const result = fs.existsSync(filePath);
+        result && fs.unlinkSync(filePath);
     }
 };
 

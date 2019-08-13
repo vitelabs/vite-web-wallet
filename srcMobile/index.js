@@ -7,8 +7,8 @@ import 'utils/viteClient.js';
 
 import Vue from 'vue';
 
-import App from 'pages/index.vue';
-// import router from 'router/index.js';
+import App from './pages/index.vue';
+import router from './router/index.js';
 
 import i18n from 'i18n';
 import store from 'store';
@@ -28,6 +28,6 @@ new Vue({
     components: { App },
     template: '<App/>',
     store,
-    // router,
+    router,
     i18n
 });

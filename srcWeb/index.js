@@ -8,7 +8,7 @@ import './wallet';
 
 import Vue from 'vue';
 
-import App from './pages/index.vue';
+import App from 'webPages/index.vue';
 import router from './router/index.js';
 
 import i18n from 'i18n';
