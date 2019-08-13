@@ -61,7 +61,34 @@ const plugins = [
     new HtmlWebpackPlugin({
         title: 'ViteX, Exchange By the Community, For the Community',
         favicon: path.join(SRC_PATH, 'assets/imgs/logo.png'),
-        template: TEMPLATE_PATH
+        template: TEMPLATE_PATH,
+        filename: 'index.html',
+        hash: true,
+        chunks: [ 'index', 'verdors' ],
+        minify: {
+            removeAttributeQuotes: true,
+            removeComments: true,
+            collapseWhitespace: true,
+            removeScriptTypeAttributes: true,
+            removeStyleLinkTypeAttributes: true
+        }
+        // [TODO] Async Router
+        // chunksSortMode: 'none'
+    }),
+    new HtmlWebpackPlugin({
+        title: 'ViteX, Exchange By the Community, For the Community',
+        favicon: path.join(SRC_PATH, 'assets/imgs/logo.png'),
+        template: TEMPLATE_PATH,
+        filename: 'mobileDex.html',
+        hash: true,
+        chunks: [ 'mobileDex', 'verdors' ],
+        minify: {
+            removeAttributeQuotes: true,
+            removeComments: true,
+            collapseWhitespace: true,
+            removeScriptTypeAttributes: true,
+            removeStyleLinkTypeAttributes: true
+        }
         // [TODO] Async Router
         // chunksSortMode: 'none'
     }),
