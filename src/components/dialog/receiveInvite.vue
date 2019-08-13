@@ -2,7 +2,7 @@
 extends /components/dialog/base.pug
 block content
     img.bg-img(src="~assets/imgs/invite.png")
-    div(v-if="inviteeCode")
+    div(v-if="inviteeCode&&+inviteeCode!==-1")
         .invite-code {{$t('assets.invite.invited')}}{{this.inviteeCode}}
     div(v-else)
         .block__title {{ $t('assets.invite.codeLable') }}
@@ -18,6 +18,7 @@ block content
 <script>
 import { bindCode } from 'services/tradeOperation';
 import { doUntill } from 'utils/asyncFlow';
+import { emptySpace } from 'utils/storageSpace';
 
 export default {
     async beforeMount() {
@@ -26,7 +27,10 @@ export default {
         } catch (e) {
             console.log('get bind code error', e);
         }
-
+        const code = emptySpace.getItem('INVITE_CODE');
+        if (code) {
+            this.code = code;
+        }
         this.status = 'LOADED';
     },
     data() {
@@ -45,7 +49,7 @@ export default {
         },
         dSTxt() {
             return (
-                !this.inviteeCode && this.$t('assets.invite.receiveInviteTitle')
+                (!this.inviteeCode || Number(this.inviteeCode) === -1) ? this.$t('assets.invite.receiveInviteTitle') : ''
             );
         },
         formatErr() {
@@ -86,8 +90,8 @@ export default {
 
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
-/deep/ .strong{
-    color: #1D2024;
+/deep/ .strong {
+    color: #1d2024;
     @include font-family-bold();
 }
 .bg-img {
