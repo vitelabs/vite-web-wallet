@@ -86,7 +86,7 @@ export default {
             const _realPrice2 = BigNumber.normalFormatNum(_realPrice, 2);
 
             if (+_realPrice2 !== 0) {
-                return pre + BigNumber.onlyFormat(_realPrice2);
+                return pre + BigNumber.onlyFormat(_realPrice2, 2);
             }
             return pre + BigNumber.onlyFormat(_realPrice, 2);
         }
