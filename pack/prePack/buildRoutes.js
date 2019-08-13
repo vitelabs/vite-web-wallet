@@ -35,7 +35,7 @@ traversing(path.join(srcWebPath, '/pages'), (fPath, next, val) => {
     // Pages/XXX.vue
     if (tmpPath === val && val.indexOf('.vue') === val.length - 4) {
         const name = val.replace('.vue', '');
-        (name !== 'index') && pushRoute(fPath, tmpPath, name, name);
+        (name !== 'index') && pushRoute(tmpPath, name, name);
         return;
     }
 
@@ -64,7 +64,7 @@ traversing(path.join(srcWebPath, '/pages'), (fPath, next, val) => {
         return;
     }
 
-    pushRoute(fPath, tmpPath, name, nList[0]);
+    pushRoute(tmpPath, name, nList[0]);
 });
 
 let _routes = '';
@@ -100,7 +100,7 @@ routesStr += `export default { routes: [${ _routes }] }`;
 fs.writeFileSync(routesPath, routesStr);
 
 
-function pushRoute(fPath, tmpPath, name, parent) {
+function pushRoute(tmpPath, name, parent) {
     if (!name) {
         return;
     }
