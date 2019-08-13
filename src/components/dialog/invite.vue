@@ -100,8 +100,8 @@ export default {
             return Promise.reject('no close');
         },
         copyShare() {
-            copy(`${location.origin}/trade?inviteCode=${ this.inviteCode }`);
-            this.$toast(this.$t('hint.copy'));
+            copy(`${ location.origin }/trade?ldfjacia=${ this.inviteCode }`);
+            this.$toast(this.$t('hint.copyShare'));
         },
         copy() {
             copy(this.inviteCode);
