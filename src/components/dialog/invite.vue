@@ -101,7 +101,7 @@ export default {
         },
         copyShare() {
             copy(`${ location.origin }/trade?inviteCode=${ this.inviteCode }`);
-            this.$toast(this.$t('hint.copy'));
+            this.$toast(this.$t('hint.copyShare'));
         },
         copy() {
             copy(this.inviteCode);
