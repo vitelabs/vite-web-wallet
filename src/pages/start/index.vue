@@ -62,6 +62,7 @@ export default {
         }
         .change-lang {
             float: right;
+            white-space: nowrap;
         }
     }
 
