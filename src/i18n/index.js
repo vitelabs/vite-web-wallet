@@ -24,6 +24,7 @@ const locale = localStorage.getItem('lang') || appLocale || getDefaultLang() || 
 const i18nConf = {
     locale,
     fallbackLocale: 'en',
+    silentFallbackWarn: true,
     messages: { en, zh, id_ID: id }
 };
 
