@@ -1,18 +1,14 @@
 <template>
     <div class="trade-container">
-        <page-layout>
-            <div class="trade-wrapper">
-                <router-view></router-view>
-            </div>
-        </page-layout>
+        <div class="trade-wrapper">
+            <router-view></router-view>
+        </div>
     </div>
 </template>
 
 <script>
-import pageLayout from 'components/pageLayout/index';
 
 export default {
-    components: { pageLayout },
     mounted() {
         this.$store.dispatch('startLoopExchangeRate');
     }

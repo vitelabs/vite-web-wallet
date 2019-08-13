@@ -10,10 +10,10 @@ const testConfig = require('./pack/test.config.js');
 
 const SRC_PATH = path.join(__dirname, './src');
 const WEB_SRC_PATH = path.join(__dirname, './srcWeb');
+const MOBILE_SRC_PATH = path.join(__dirname, './srcMobile');
+
 const CHARTING_PATH = path.join(__dirname, './charting_library');
-const STATIC_PATH = process.env.APP === 'true'
-    ? path.join(__dirname, '../../app/walletPages')
-    : path.join(__dirname, './dist');
+const STATIC_PATH = path.join(__dirname, './dist');
 const development = [ 'dev', 'test' ];
 const mode = development.indexOf(process.env.NODE_ENV) > -1 ? 'development' : 'production';
 
@@ -22,10 +22,12 @@ console.log(`\n ======== webpackConfig.mode: ${ mode } ======== \n`);
 
 let webpackConfig = {
     mode,
-    entry: { index: path.join(WEB_SRC_PATH, '/index.js') },
+    entry: {
+        index: path.join(WEB_SRC_PATH, '/index.js'),
+        mobileDex: path.join(MOBILE_SRC_PATH, '/index.js')
+    },
     output: {
         path: STATIC_PATH,
-        // filename: '[name].[contenthash].js'
         filename: '[name].[chunkhash].js'
     },
     plugins,
