@@ -18,7 +18,7 @@
             </span>
             <span class="gate" @click="_showDetail('operator')">
                 <img class="gate-img" :src="operatorIcon" />
-                {{ operatorInfo ? operatorInfo.name : '--' }}
+                {{ operatorInfo ? operatorInfo.name : $t('tradeCenter.operator.noName') }}
             </span>
         </div>
     </div>
@@ -26,6 +26,7 @@
 
 <script>
 import tooltips from 'components/tooltips';
+import operatorIcon from 'assets/imgs/operator_icon.svg';
 
 export default {
     components: { tooltips },
@@ -85,14 +86,11 @@ export default {
             if (this.operatorInfo) {
                 return this.operatorInfo.icon || '';
             }
-            return '';
+            return operatorIcon;
         }
     },
     methods: {
         _showDetail(tab = 'token') {
-            if (tab === 'operator' && !this.operatorInfo) {
-                tab = 'token';
-            }
             this.showDetail && this.showDetail(tab);
         }
     }
