@@ -61,8 +61,9 @@
             </div>
             <div class="content__item">
                 <div class="label">{{$t("tokenCard.tokenInfo.labels.media")}}:</div>
-                <span class="twitter" v-show="tokenDetail.twitterLink">twitter</span>
-                <span class="facebook" v-show="tokenDetail.facebookLink">facebook</span>
+                <img src="~assets/imgs/facebook.svg" class="media-icon" v-show="tokenDetail.facebookLink"/>
+                <img src="~assets/imgs/twitter.svg" class="media-icon" v-show="tokenDetail.twitterLink"/>
+                <img src="~assets/imgs/telegram.svg" class="media-icon" v-show="tokenDetail.telegramLink"/>
             </div>
         </div>
         <div v-show="tab === 'operator'" class="tab-content">
