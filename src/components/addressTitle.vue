@@ -3,12 +3,12 @@
         <div class="pre-title">
             <slot></slot>
         </div>
-        <img src="../assets/imgs/copy_default.svg"
+        <img src="~assets/imgs/copy_default.svg"
              @click="copy" class="title_icon copy __pointer"/>
         <span v-click-outside="closeQrCode"
               ref="codeContainer"
               class="title_icon __pointer qrcode">
-            <img src="../assets/imgs/qrcode_default.svg" @click="toggleQrCode"/>
+            <img src="~assets/imgs/qrcode_default.svg" @click="toggleQrCode"/>
             <div class="code-container" v-show="qrcodeShow">
                 <div class="code">
                     <qrcode :text="addressQrcode"

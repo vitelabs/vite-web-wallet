@@ -1,6 +1,6 @@
 <template>
     <div class="notice-wrapper" :class="type">
-        <img v-show="isShowClose" @click="close(rawData)" src="../assets/imgs/close.svg" class="close __pointer"/>
+        <img v-show="isShowClose" @click="close(rawData)" src="~assets/imgs/close.svg" class="close __pointer"/>
         <div class="title">{{ title }}</div>
         <div class="describe">{{ describe }}</div>
     </div>

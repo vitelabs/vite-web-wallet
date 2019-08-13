@@ -1,4 +1,4 @@
-require('./buildRoutes.js');
+require('./pack/prePack/buildRoutes.js');
 
 const path = require('path');
 const merge = require('webpack-merge');
@@ -9,6 +9,7 @@ const devConfig = require('./pack/dev.config.js');
 const testConfig = require('./pack/test.config.js');
 
 const SRC_PATH = path.join(__dirname, './src');
+const WEB_SRC_PATH = path.join(__dirname, './srcWeb');
 const CHARTING_PATH = path.join(__dirname, './charting_library');
 const STATIC_PATH = process.env.APP === 'true'
     ? path.join(__dirname, '../../app/walletPages')
@@ -21,7 +22,7 @@ console.log(`\n ======== webpackConfig.mode: ${ mode } ======== \n`);
 
 let webpackConfig = {
     mode,
-    entry: { index: path.join(SRC_PATH, '/index.js') },
+    entry: { index: path.join(WEB_SRC_PATH, '/index.js') },
     output: {
         path: STATIC_PATH,
         // filename: '[name].[contenthash].js'
@@ -140,12 +141,12 @@ let webpackConfig = {
             charting: CHARTING_PATH,
             src: SRC_PATH,
             uiKit: path.join(SRC_PATH, '/uiKit'),
-            wallet: path.join(SRC_PATH, '/wallet'),
+            wallet: path.join(WEB_SRC_PATH, '/wallet'),
             services: path.join(SRC_PATH, '/services'),
             components: path.join(SRC_PATH, '/components'),
-            pages: path.join(SRC_PATH, '/pages'),
+            pages: path.join(WEB_SRC_PATH, '/pages'),
             assets: path.join(SRC_PATH, '/assets'),
-            router: path.join(SRC_PATH, '/router'),
+            router: path.join(WEB_SRC_PATH, '/router'),
             utils: path.join(SRC_PATH, '/utils'),
             plugins: path.join(SRC_PATH, '/plugins'),
             i18n: path.join(SRC_PATH, '/i18n'),
