@@ -24,7 +24,7 @@ const locale = localStorage.getItem('lang') || appLocale || getDefaultLang() || 
 const i18nConf = {
     locale,
     fallbackLocale: 'en',
-    messages: { en, zh, id }
+    messages: { en, zh, id_ID: id }
 };
 
 Vue.use(VueI18n);
