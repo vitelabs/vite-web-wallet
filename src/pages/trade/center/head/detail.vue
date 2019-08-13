@@ -8,7 +8,7 @@
             <div class="tab__item" :class="{'active': tab === 'token'}" @click="switchTab('token')">
                 {{$t("tradeCenter.operatorTxPair.tokenTab")}}
             </div>
-            <div v-show="operatorInfo" class="tab__item" :class="{'active': tab === 'operator'}" @click="switchTab('operator')">
+            <div class="tab__item" :class="{'active': tab === 'operator'}" @click="switchTab('operator')">
                 {{$t("tradeCenter.operatorTxPair.operatorTab")}}
             </div>
         </div>
@@ -64,23 +64,24 @@
                 <span class="facebook" v-show="tokenDetail.facebookLink">facebook</span>
             </div>
         </div>
-        <div v-if="tab === 'operator' && operatorInfo" class="tab-content">
+        <div v-show="tab === 'operator'" class="tab-content">
             <div class="content__item">
                 <span class="label">{{ $t('tradeCenter.operator.name') }}:</span>
-                {{ operatorInfo.name }}<img class="operator-img" :src="operatorInfo.icon"/>
+                {{ operatorInfo ? operatorInfo.name : $t('tradeCenter.operator.noName') }}
+                <img class="operator-img" :src="operatorIcon"/>
             </div>
             <div class="content__item">
                 <span class="label">{{ $t('tradeCenter.operator.address') }}:</span>
-                {{ operatorInfo.address  }}
+                {{ operatorInfo ? operatorInfo.address : '--' }}
             </div>
             <div class="content__item">
                 <span class="label">{{ $t('tradeCenter.operator.overview') }}:</span>
-                {{ operatorInfo.overview && operatorInfo.overview[$i18n.locale] ? operatorInfo.overview[$i18n.locale] : '--' }}
+                {{ operatorOverview }}
             </div>
             <div class="content__item _b">
                 <span class="label">{{ $t('tradeCenter.operator.txPair') }}:</span>
                 <div class="tx-pair-list">
-                    <template v-for="(pairs, category) in operatorInfo.tradePairs">
+                    <template v-for="(pairs, category) in operatorTradePairs">
                         <span class="symbol" v-for="(symbol) in pairs" :key="symbol"
                               @click="switchTxPair({ category, symbol })">
                             {{symbol.replace('_', '/') }}
@@ -99,6 +100,7 @@ import bigNumber from 'utils/bigNumber';
 import openUrl from 'utils/openUrl';
 import statistics from 'utils/statistics';
 import txPairInfo from './txPairInfo.vue';
+import operatorIcon from 'assets/imgs/operator_icon.svg';
 
 export default {
     components: { confirm, txPairInfo },
@@ -135,6 +137,22 @@ export default {
         },
         operatorInfo() {
             return this.$store.state.exchangeTokens.operator;
+        },
+        operatorIcon() {
+            if (this.operatorInfo) {
+                return this.operatorInfo.icon || '';
+            }
+            return operatorIcon;
+        },
+        operatorOverview() {
+            if (!this.operatorInfo) {
+                return '--';
+            }
+            return this.operatorInfo.overview && this.operatorInfo.overview[this.$i18n.locale]
+                ? this.operatorInfo.overview[this.$i18n.locale] : '--';
+        },
+        operatorTradePairs() {
+            return this.operatorInfo ? this.operatorInfo.tradePairs : [];
         }
     },
     methods: {
