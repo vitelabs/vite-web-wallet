@@ -64,7 +64,7 @@ const plugins = [
         template: TEMPLATE_PATH,
         filename: 'index.html',
         hash: true,
-        chunks: [ 'index', 'verdors' ],
+        chunks: [ 'index', 'vendors', 'default' ],
         minify: {
             removeAttributeQuotes: true,
             removeComments: true,
@@ -81,7 +81,7 @@ const plugins = [
         template: TEMPLATE_PATH,
         filename: 'mobileDex.html',
         hash: true,
-        chunks: [ 'mobileDex', 'verdors' ],
+        chunks: [ 'mobileDex', 'vendors', 'default' ],
         minify: {
             removeAttributeQuotes: true,
             removeComments: true,

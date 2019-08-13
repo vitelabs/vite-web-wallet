@@ -35,27 +35,28 @@ let webpackConfig = {
         usedExports: true,
         splitChunks: {
             hidePathInfo: true,
-            chunks: 'all'
-            // cacheGroups: {
-            //     // [TODO] Async Router
-            //     vendors: {
-            //         test: /[\\/]node_modules[\\/]/,
-            //         name: 'vendor',
-            //         chunks: 'all'
-            //     },
-            //     commons: {
-            //         name: 'comomns',
-            //         test: /src(?!(\/utils))/, // 可自定义拓展规则
-            //         minChunks: 2, // 最小共用次数
-            //         minSize: 0, // 代码最小多大，进行抽离
-            //         priority: 1 // 该配置项是设置处理的优先级，数值越大越优先处理
-            //     },
-            //     default: {
-            //         minChunks: 2,
-            //         priority: -20,
-            //         reuseExistingChunk: true
-            //     }
-            // }
+            chunks: 'all',
+            cacheGroups: {
+                // [TODO] Async Router
+                vendors: {
+                    test: /[\\/]node_modules[\\/]/,
+                    name: 'vendors',
+                    chunks: 'all'
+                },
+                //     commons: {
+                //         name: 'comomns',
+                //         test: /src(?!(\/utils))/, // 可自定义拓展规则
+                //         minChunks: 2, // 最小共用次数
+                //         minSize: 0, // 代码最小多大，进行抽离
+                //         priority: 1 // 该配置项是设置处理的优先级，数值越大越优先处理
+                //     },
+                default: {
+                    name: 'default',
+                    minChunks: 2,
+                    priority: -20,
+                    reuseExistingChunk: true
+                }
+            }
         },
         minimizer: [
             new UglifyJsPlugin({
