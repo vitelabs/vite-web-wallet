@@ -769,6 +769,7 @@
         "blocking": "网络拥堵, 请稍候重试",
         "supportMining": "支持挖矿的交易对",
         "operator": {
+            "noName": "匿名网关",
             "overview": "介绍",
             "txPair": "交易对",
             "confirmTitle": "温馨提示",
