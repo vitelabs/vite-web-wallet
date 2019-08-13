@@ -302,6 +302,7 @@
                 "tokenId": "TokenID",
                 "overview": "代币简介",
                 "totalSupply": "发行总量",
+                "total": "流通总量",
                 "type": "代币类型",
                 "gate": "跨链网关",
                 "website": "官网",
