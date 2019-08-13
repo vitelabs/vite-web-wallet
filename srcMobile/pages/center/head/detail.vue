@@ -14,7 +14,8 @@
         </div>
         <div v-show="tab === 'token'" class="tab-content">
             <div class="content__item">
-                <div class="label">{{$t("tokenCard.tokenInfo.labels.tokenName")}}:</div> {{ tokenDetail.name }}
+                <div class="label">{{$t("tokenCard.tokenInfo.labels.tokenName")}}:</div>
+                <div class="click-able" @click="goToTokenDetail">{{tokenDetail.name}} ({{tokenDetail.symbol}})</div>
             </div>
             <div class="content__item">
                 <div class="label">{{$t("tokenCard.tokenInfo.labels.tokenId")}}:</div>
