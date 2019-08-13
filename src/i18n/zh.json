@@ -138,6 +138,7 @@
         "err": "发生错误",
         "request": "{name}请求已发送，请耐心等待",
         "copy": "复制成功",
+        "copyShare":"分享链接复制成功",
         "addrFormat": "账户地址格式错误",
         "amtFormat": "金额格式错误",
         "transSucc": "转账成功",
