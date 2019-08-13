@@ -759,10 +759,13 @@
         "blocking": "Network congestion occurs, please try again later",
         "supportMining": "支持挖矿的交易对",
         "operator": {
+            "noName": "匿名网关",
             "overview": "Introduction",
             "txPair": "Trading Pairs",
             "confirmTitle": "Risk Reminder",
-            "confirmText": "The current trading pair is {symbol}. Please be careful when trading. Investing in digital assets comes with high risks. Before investing, please have a full understanding of all the risks of investing in digital assets and judge the authenticity, legality and validity of digital assets on your own. Please be prudent of your own investment decisions and undertake responsibility for the loss of your assets."
+            "confirmText": "The current trading pair is {symbol}. Please be careful when trading. Investing in digital assets comes with high risks. Before investing, please have a full understanding of all the risks of investing in digital assets and judge the authenticity, legality and validity of digital assets on your own. Please be prudent of your own investment decisions and undertake responsibility for the loss of your assets.",
+            "address": "运营商地址",
+            "name": "运营商名称"
         },
         "operatorTxPair": {
             "title": "交易对信息",
