@@ -1,13 +1,9 @@
 <template>
-    <page-layout>
-        <div class="not-found">Not Found</div>
-    </page-layout>
+    <div class="not-found">Not Found</div>
 </template>
 
 <script>
-import pageLayout from 'components/pageLayout/index';
-
-export default { components: { pageLayout } };
+export default { };
 </script>
 
 <style lang="scss" scoped>

@@ -6,4 +6,7 @@
  * }
  */
 
-module.exports = { pagesAlia: 'mobilePages' };
+module.exports = {
+    pagesAlia: 'mobilePages',
+    center: { alias: '/index' }
+};
