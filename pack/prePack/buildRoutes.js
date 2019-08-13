@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const { traversingDir } = require('../tools.js');
 
 const srcWebPath = path.resolve(__dirname, '../../srcWeb/');
 
@@ -17,7 +18,7 @@ if (result) {
 let routesStr = '';
 const routes = {};
 
-traversing(path.join(srcWebPath, '/pages'), (fPath, next, val) => {
+traversingDir(path.join(srcWebPath, '/pages'), (fPath, next, val) => {
     // console.log(fPath);
     const stats = fs.statSync(fPath);
 
@@ -126,15 +127,4 @@ function pushRoute(tmpPath, name, parent) {
     routes[parent] = Object.assign(routes[parent] || {}, _route);
     routes[parent].component = routes[parent].component || _route.component;
     routes[parent].children = routes[parent].children || [];
-}
-
-function traversing(startPath, cb) {
-    function readdirSync(startPath) {
-        const files = fs.readdirSync(startPath);
-        files.forEach(val => {
-            const fPath = path.join(startPath, val);
-            cb && cb(fPath, readdirSync, val);
-        });
-    }
-    readdirSync(startPath);
 }
