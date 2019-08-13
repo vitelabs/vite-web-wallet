@@ -27,8 +27,8 @@ block originContent
             div {{ tokenDetail.overview && tokenDetail.overview[$i18n.locale] ? tokenDetail.overview[$i18n.locale] : '--' }}
                 span.click-able.view-more(v-if="tokenDetail.overview && tokenDetail.overviewLink" @click="openUrl(tokenDetail.overviewLink)") {{ $t("tokenCard.tokenInfo.labels.viewmore") }}
         .content__item
-            .label {{$t("tokenCard.tokenInfo.labels.totalSupply")}}:
-            div {{toBasic(token.totalSupply)}}
+            .label {{$t("tokenCard.tokenInfo.labels.total")}}:
+            div {{token.total || '--'}}
         .content__item
             .label {{$t("tokenCard.tokenInfo.labels.type")}}:
             .div {{ tokenDetail.ttype || '--' }}
@@ -91,7 +91,6 @@ import openUrl from 'utils/openUrl';
 import Tb from './tb';
 import viteInput from 'components/viteInput';
 import { throttle } from 'lodash';
-import bn from 'utils/bigNumber';
 
 export default {
     components: { Tb, viteInput },
@@ -144,9 +143,6 @@ export default {
         }
     },
     methods: {
-        toBasic(v) {
-            return bn.toBasic(v, this.token.decimals, 0);
-        },
         goToTokenDetail() {
             const l = `${ getExplorerLink() }token/${ this.token.tokenId }`;
             openUrl(l);

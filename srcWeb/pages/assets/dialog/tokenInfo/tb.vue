@@ -117,7 +117,7 @@ export default {
         outChain() {
             const tokenToGate = this.$store.getters.mapToken2Gate;
             const token = this.token;
-            return tokenToGate[token.tokenId] ? tokenToGate[token.tokenId].mappedNet : token.tokenSymbol;
+            return tokenToGate[token.tokenId] ? tokenToGate[token.tokenId].mappedNet.toLowerCase() : token.tokenSymbol.toLowerCase();
         }
     },
     methods: {
