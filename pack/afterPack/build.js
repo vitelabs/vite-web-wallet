@@ -5,30 +5,32 @@ console.log(`Write netlifyConf ${ process.env.NODE_ENV }`);
 
 let redirect;
 if (process.env.NODE_ENV === 'test') {
-    redirect = path.join(__dirname, 'netlifyConf/_redirects_test');
+    redirect = path.join(__dirname, '../../netlifyConf/_redirects_test');
 } else {
-    redirect = path.join(__dirname, 'netlifyConf/_redirects');
+    redirect = path.join(__dirname, '../../netlifyConf/_redirects');
 }
 
-const staticPath = path.join(__dirname, 'dist');
-const chartPath = path.join(__dirname, 'charting_library');
-const chartStaticPath = path.join(__dirname, 'dist/charting_library');
+const staticPath = path.join(__dirname, '../../dist');
+const chartPath = path.join(__dirname, '../../charting_library');
+const chartStaticPath = path.join(__dirname, '../../dist/charting_library');
+const staticPagesPath = path.join(__dirname, '../../staticPages');
 
 const result = fs.existsSync(staticPath);
 // Not exists
 if (!result) {
-    console.error(new Error(`${ staticPath }     is not exists.`));
+    console.error(new Error(`${ staticPath } is not exists.`));
     return ;
 }
 
 fs.writeFileSync(path.join(staticPath, '_redirects'), fs.readFileSync(redirect));
-fs.writeFileSync(path.join(staticPath, 'privacy.html'), fs.readFileSync(path.join(__dirname, './privacy.html')));
+
+copyFolder(staticPagesPath, staticPath);
 copyFolder(chartPath, chartStaticPath);
 
 
 function copyFolder(currentPath, targetPath) {
     if (!fs.existsSync(currentPath)) {
-        console.error(new Error(`${ currentPath }     is not exist.`));
+        console.error(new Error(`${ currentPath } is not exist.`));
         return;
     }
     !fs.existsSync(targetPath) && fs.mkdirSync(targetPath);

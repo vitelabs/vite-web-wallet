@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <link rel="shortcut icon" type="image/x-icon" href="favicon.ico"/>
+        <title>Vite PreMainnet</title>
+
+        <script>
+            var _hmt = _hmt || [];
+            (function() {
+                var hm = document.createElement("script");
+                hm.src = "https://hm.baidu.com/hm.js?3a3b76d8f12f13e970c2fdbe222a6d93";
+                var s = document.getElementsByTagName("script")[0];
+                s.parentNode.insertBefore(hm, s);
+            })();
+        </script>
+
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-132666177-1"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag('js', new Date());
+            gtag('config', 'UA-132666177-1');
+        </script>
+    </head>
+
+    <body>
+        <div class="app-loading-wrapper">
+            <div class="loading">
+                <svg class="loading" xmlns="http://www.w3.org/2000/svg" width="380" height="380" viewBox="0 0 380 380">
+                    <defs>
+                        <rect id="logo-a" width="512" height="512"/>
+                        <linearGradient id="logo-b" x1="0%" x2="136.343%" y1="0%" y2="155.449%">
+                        <stop offset="0%" stop-color="#052EF5"/>
+                        <stop offset="31.474%" stop-color="#0D6DF0"/>
+                        <stop offset="49.184%" stop-color="#0B92E7"/>
+                        <stop offset="71.324%" stop-color="#0BB6EB"/>
+                        <stop offset="100%" stop-color="#00E0F2"/>
+                        </linearGradient>
+                    </defs>
+                    <g fill="none" fill-rule="evenodd" transform="translate(-66 -66)">
+                        <mask id="logo-c" fill="#fff">
+                        <use xlink:href="#logo-a"/>
+                        </mask>
+                        <use fill="#FFF" xlink:href="#logo-a"/>
+                        <path fill="url(#logo-b)" d="M119.926827,194.207608 L211.364459,173.660199 L202.251863,404.180519 L119.926827,194.207608 Z M232.260073,169.703744 L415.416354,126.488528 L205.141989,404.485294 L232.260073,169.703744 Z" mask="url(#logo-c)"/>
+                    </g>
+                </svg>
+            </div>
+
+            <div id="notice"></div>
+
+
+        </div>
+
+        <script>
+            function getDefaultLang() {
+                try {
+                    const type = navigator.appName;
+                    let lang = type === 'Netscape' ? navigator.language : navigator.userLanguage;
+                    lang = lang.substr(0, 2);
+                    return lang === 'zh' ? 'zh' : 'en';
+                } catch (err) {
+                    console.warn(err);
+                    return 'en';
+                }
+            }
+
+            let lang = getDefaultLang();
+            if (lang === 'zh') {
+                document.getElementById('notice').innerHTML = '<h2></h2><div>ViteX正在升级中，预计7月12日 12:00（UTC+8）升级完成，新版本将支持交易挖矿、持有VX分红等功能，敬请期待。</div></br><div></div>';
+            } else {
+                document.getElementById('notice').innerHTML = '<h2></h2><div>ViteX is upgrading right now, this upgrade will be finished till 12nd July 12:00 (UTC+8). </div></br><div>Functions of trading as mining, VX holding dividends will be supported in this upcoming version, stay tuned.</div>';
+            }
+        </script>
+
+        <style>
+            body {
+                margin: 0;
+                padding: 40px;
+            }
+            #notice {
+                text-align: center;
+            }
+            .loading {
+                width: 100px;
+                height: 100px;
+            }
+            .app-loading-wrapper {
+                background: #fff;
+                margin: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+            }
+        </style>
+    </body>
+</html>
