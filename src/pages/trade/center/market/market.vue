@@ -340,6 +340,10 @@ export default {
 <style lang="scss" scoped>
 @import "../center.scss";
 
+.__center-tb-item.percent {
+    overflow: visible;
+}
+
 .market-wrapper {
     position: relative;
     width: 100%;
