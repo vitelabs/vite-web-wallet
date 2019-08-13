@@ -127,7 +127,6 @@ let webpackConfig = {
                     { loader: 'style-loader' },
                     { loader: 'css-loader', options: { minimize: true } },
                     { loader: 'sass-loader' }
-                    // { loader: 'postcss-loader' }
                 ]
             }, {
                 test: /(\.ttf$|\.ttc$|\.otf$)/,
