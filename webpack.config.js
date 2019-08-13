@@ -1,4 +1,4 @@
-require('./pack/prePack/buildRoutes.js');
+require('./pack/prePack/index.js');
 
 const path = require('path');
 const merge = require('webpack-merge');
@@ -146,7 +146,8 @@ let webpackConfig = {
             wallet: path.join(WEB_SRC_PATH, '/wallet'),
             services: path.join(SRC_PATH, '/services'),
             components: path.join(SRC_PATH, '/components'),
-            pages: path.join(WEB_SRC_PATH, '/pages'),
+            webPages: path.join(WEB_SRC_PATH, '/pages'),
+            mobilePages: path.join(MOBILE_SRC_PATH, '/pages'),
             assets: path.join(SRC_PATH, '/assets'),
             router: path.join(WEB_SRC_PATH, '/router'),
             utils: path.join(SRC_PATH, '/utils'),
