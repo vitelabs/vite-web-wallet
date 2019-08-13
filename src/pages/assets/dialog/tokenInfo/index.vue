@@ -211,7 +211,7 @@ export default {
                         this.tokenDetail[`${ key }Link`] = data.links[key];
                     }
                 }
-                this.tokenDetail.ttype = this.tokenDetail.gateway
+                this.tokenDetail.ttype = (this.tokenDetail.gateway || this.gateName)
                     ? this.$t('tokenCard.tokenInfo.labels.crossType')
                     : this.$t('tokenCard.tokenInfo.labels.originType');
                 this.tokenDetail.explorerLink = this.tokenDetail.explorerLink
