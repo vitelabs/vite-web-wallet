@@ -35,7 +35,7 @@ function copyFolder(currentPath, targetPath) {
     }
     !fs.existsSync(targetPath) && fs.mkdirSync(targetPath);
 
-    traversing(currentPath, (fPath, targetPath, next, val) => {
+    traversing(currentPath, (fPath, next, val, targetPath) => {
         const stats = fs.statSync(fPath);
         const toPath = path.join(targetPath, val);
 
@@ -52,13 +52,14 @@ function copyFolder(currentPath, targetPath) {
         }
     }, targetPath);
 }
+
 function traversing(startPath, cb, folderLevel) {
     function readdirSync(startPath, folderLevel) {
         const files = fs.readdirSync(startPath);
 
         files.forEach(val => {
             const fPath = path.join(startPath, val);
-            cb && cb(fPath, folderLevel, readdirSync, val);
+            cb && cb(fPath, readdirSync, val, folderLevel);
         });
     }
 
