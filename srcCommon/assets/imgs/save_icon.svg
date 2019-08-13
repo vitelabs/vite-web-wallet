@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" viewBox="0 0 24 24">
-  <defs>
-    <path id="save_icon-a" d="M16.34375,10 L11.65625,14.65625 L7,10 L9.65625,10 L9.65625,6 L13.65625,6 L13.65625,10 L16.34375,10 Z M7,16 L16.34375,16 L16.34375,17.34375 L7,17.34375 L7,16 Z"/>
-  </defs>
-  <g fill="none" fill-rule="evenodd">
-    <use fill="#FFF" xlink:href="#save_icon-a"/>
-  </g>
-</svg>
