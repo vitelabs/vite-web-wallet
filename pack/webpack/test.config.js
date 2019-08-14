@@ -1,4 +1,6 @@
 module.exports = {
+    mode: 'development',
+    devtool: 'source-map',
     devServer: {
         quiet: false,
         host: '0.0.0.0',
@@ -12,18 +14,7 @@ module.exports = {
             '/trade': {
                 target: 'http://localhost:8081',
                 pathRewrite: { '^/trade\w*': '' }
-            },
-            '/gateway': {
-                target: 'https://gateway.vitewallet.com/test/crosschain/',
-                changeOrigin: true,
-                secure: false,
-                pathRewrite: { '^/gateway': '' }
             }
-            // '/api/v1': {
-            //     target: 'http://192.168.31.189:8082/dev/',
-            //     changeOrigin: true,
-            //     secure: false
-            // }
         }
     }
 };

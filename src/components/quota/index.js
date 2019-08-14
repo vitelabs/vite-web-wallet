@@ -1,7 +1,8 @@
 import Vue from 'vue';
 import i18n from 'i18n';
 
-import router from 'router/index.js';
+// [TODO]
+import router from 'webRouter/index.js';
 import quotaCancelComponent from './cancel.vue';
 
 const QuotaCancelComponent = Vue.extend(quotaCancelComponent);
