@@ -22,6 +22,7 @@ module.exports = {
     ],
     optimization: {
         usedExports: true,
+        // runtimeChunk: true,
         splitChunks: {
             hidePathInfo: true,
             chunks: 'all',
@@ -142,5 +143,10 @@ module.exports = {
             mobilePages: path.join(MOBILE_SRC_PATH, '/pages')
         },
         extensions: [ '.js', '.ts', '.scss', '.vue', '.json' ]
+    },
+    devServer: {
+        quiet: false,
+        host: '0.0.0.0',
+        port: 8081
     }
 };
