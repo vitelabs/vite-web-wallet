@@ -379,6 +379,7 @@
                 "fee": "Fee",
                 "all": "All"
             },
+            "labelPlaceholder":"Please input {labelName}",
             "amountPlaceholder": "Please input transfer amount which should not be less than {min}",
             "addressPlaceholder": "Please input transfer address",
             "successTips": "Transfer request has been sent",
