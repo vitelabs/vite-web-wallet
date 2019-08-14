@@ -22,7 +22,7 @@ export default {
         this.$store.dispatch('startLoopExchangeBalance');
         this.$store.dispatch('exFetchLatestOrder');
         this.$store.dispatch('getInvitedCode').catch(() => {
-            if (Number(this.$route.query['vknafdscda']) > 0) {//random name for avoid to be blocked
+            if (Number(this.$route.query['vknafdscda']) > 0) {// random name for avoid to be blocked
                 const oldCode = emptySpace.getItem(inviteCodeKey);
                 emptySpace.setItem(inviteCodeKey, this.$route.query['vknafdscda']);
                 if (!oldCode && this.$route.name === 'tradeCenter') {
