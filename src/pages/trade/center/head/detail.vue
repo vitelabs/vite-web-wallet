@@ -30,7 +30,7 @@
                     {{ $t("tokenCard.tokenInfo.labels.viewmore") }}</span>
             </div>
             <div class="content__item">
-                <div class="label">{{$t("tokenCard.tokenInfo.labels.totalSupply")}}:</div> {{ tokenDetail.showTotalSupply }}
+                <div class="label">{{$t("tokenCard.tokenInfo.labels.total")}}:</div> {{ tokenDetail.total || '--' }}
             </div>
             <div class="content__item">
                 <div class="label">{{$t("tokenCard.tokenInfo.labels.type")}}:</div> {{ tokenDetail.ttype }}
@@ -61,8 +61,9 @@
             </div>
             <div class="content__item">
                 <div class="label">{{$t("tokenCard.tokenInfo.labels.media")}}:</div>
-                <span class="twitter" v-show="tokenDetail.twitterLink">twitter</span>
-                <span class="facebook" v-show="tokenDetail.facebookLink">facebook</span>
+                <img src="~assets/imgs/facebook.svg" class="media-icon" v-show="tokenDetail.facebookLink"/>
+                <img src="~assets/imgs/twitter.svg" class="media-icon" v-show="tokenDetail.twitterLink"/>
+                <img src="~assets/imgs/telegram.svg" class="media-icon" v-show="tokenDetail.telegramLink"/>
             </div>
         </div>
         <div v-show="tab === 'operator'" class="tab-content">
@@ -97,7 +98,6 @@
 <script>
 import confirm from 'components/confirm/confirm.vue';
 import { getExplorerLink } from 'utils/getLink';
-import bigNumber from 'utils/bigNumber';
 import openUrl from 'utils/openUrl';
 import statistics from 'utils/statistics';
 import txPairInfo from './txPairInfo.vue';
@@ -129,7 +129,6 @@ export default {
                     : this.$t('tokenCard.tokenInfo.labels.originType');
             tokenDetail.explorerLink = tokenDetail.explorerLink
                 || (tokenDetail.gateway ? null : getExplorerLink());
-            tokenDetail.showTotalSupply = bigNumber.toBasic(tokenDetail.totalSupply, tokenDetail.tokenDecimals);
 
             return tokenDetail;
         },

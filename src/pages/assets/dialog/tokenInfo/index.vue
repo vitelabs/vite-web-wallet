@@ -27,8 +27,8 @@ block originContent
             div {{ tokenDetail.overview && tokenDetail.overview[$i18n.locale] ? tokenDetail.overview[$i18n.locale] : '--' }}
                 span.click-able.view-more(v-if="tokenDetail.overview && tokenDetail.overviewLink" @click="openUrl(tokenDetail.overviewLink)") {{ $t("tokenCard.tokenInfo.labels.viewmore") }}
         .content__item
-            .label {{$t("tokenCard.tokenInfo.labels.totalSupply")}}:
-            div {{toBasic(token.totalSupply)}}
+            .label {{$t("tokenCard.tokenInfo.labels.total")}}:
+            div {{token.total || '--'}}
         .content__item
             .label {{$t("tokenCard.tokenInfo.labels.type")}}:
             .div {{ tokenDetail.ttype || '--' }}
@@ -51,8 +51,9 @@ block originContent
         .content__item
             .label {{$t("tokenCard.tokenInfo.labels.media")}}:
             div
-                span.twitter(v-show="tokenDetail.twitterLink")
-                span.facebook(v-show="tokenDetail.facebookLink")
+                img.media-icon(src="~assets/imgs/facebook.svg" v-show="tokenDetail.facebookLink")
+                img.media-icon(src="~assets/imgs/twitter.svg" v-show="tokenDetail.twitterLink")
+                img.media-icon(src="~assets/imgs/telegram.svg" v-show="tokenDetail.telegramLink")
     .tab-content(v-if="tabName==='gate'")
         .content__item(v-if="token.gateInfo.url")
             .label {{$t("tokenCard.gateInfo.name")}}:
@@ -91,7 +92,6 @@ import openUrl from 'utils/openUrl';
 import Tb from './tb';
 import viteInput from 'components/viteInput';
 import { throttle } from 'lodash';
-import bn from 'utils/bigNumber';
 
 export default {
     components: { Tb, viteInput },
@@ -144,9 +144,6 @@ export default {
         }
     },
     methods: {
-        toBasic(v) {
-            return bn.toBasic(v, this.token.decimals, 0);
-        },
         goToTokenDetail() {
             const l = `${ getExplorerLink() }token/${ this.token.tokenId }`;
             openUrl(l);
