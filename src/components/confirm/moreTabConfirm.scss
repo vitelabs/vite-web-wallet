@@ -93,6 +93,11 @@
         display: flex;
         text-align: left;
         color: rgba(94,104,117,1);
+        .media-icon {
+            width: 20px;
+            height: 20px;
+            margin-right: 14px;
+        }
         .view-more {
             margin-left: 6px;
         }
