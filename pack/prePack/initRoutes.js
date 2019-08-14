@@ -15,7 +15,6 @@ module.exports = function (ProjectPath, routeConfig) {
     const routes = {};
 
     traversingDir(PagesPath, (fPath, next, val) => {
-        // console.log(fPath);
         const stats = fs.statSync(fPath);
 
         if (stats.isDirectory()) {
@@ -27,9 +26,10 @@ module.exports = function (ProjectPath, routeConfig) {
             return;
         }
 
+        // `fPath` is a file, now.
         const tmpPath = fPath.split('pages/')[1];
 
-        // Pages/XXX.vue
+        // pages/XXX.vue
         if (tmpPath === val && val.indexOf('.vue') === val.length - 4) {
             const name = val.replace('.vue', '');
             (name !== 'index') && pushRoute(tmpPath, name, name);
@@ -40,14 +40,16 @@ module.exports = function (ProjectPath, routeConfig) {
             return;
         }
 
-        // Pages/XXX/XXX/index.vue
+        // pages/XXX/XXX/index.vue
         const path = tmpPath.replace(/\/index.vue$/, '');
-
         const nList = path.split('/');
+
+        // Max: secondary route
         if (!nList || !nList.length || nList.length > 2) {
             return;
         }
 
+        // Camel-Case
         let name = '';
         nList.forEach(n => {
             if (!name) {
@@ -56,10 +58,6 @@ module.exports = function (ProjectPath, routeConfig) {
             }
             name += (n ? n[0].toLocaleUpperCase() + n.slice(1) : '');
         });
-
-        if (!name) {
-            return;
-        }
 
         pushRoute(tmpPath, name, nList[0]);
     });

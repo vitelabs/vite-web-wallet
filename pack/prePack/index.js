@@ -4,6 +4,7 @@ const { buildLog } = require('../tools.js');
 
 const StartTime = new Date().getTime();
 
+
 // 1. Init Web Router
 buildLog('Start Init Web Router');
 
@@ -22,6 +23,7 @@ const MobileProjectPath = path.resolve(__dirname, '../../srcMobile');
 initRoutes(MobileProjectPath, MobileRouterConfig);
 
 buildLog('Finish Init Mobile Router');
+
 
 // Finish PrePack
 const FinishTime = new Date().getTime();
