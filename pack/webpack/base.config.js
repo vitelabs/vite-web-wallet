@@ -1,25 +1,31 @@
 const path = require('path');
+const webpack = require('webpack');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
-const plugins = require('./plugins.js');
-const { staticPath, srcPath, WEB_SRC_PATH, MOBILE_SRC_PATH } = require('../config.js');
+const { staticPath, srcPath, WEB_SRC_PATH, MOBILE_SRC_PATH, envVars } = require('../config.js');
 
 const CHARTING_PATH = path.join(__dirname, '../../charting_library');
-
+const Buffer_Path = path.join(__dirname, '../../node_modules/buffer/index.js');
 
 module.exports = {
     output: {
         path: staticPath,
         filename: '[name].[chunkhash].js'
     },
-    plugins,
+    plugins: [
+        new VueLoaderPlugin(),
+        new webpack.DefinePlugin(envVars),
+        new webpack.NormalModuleReplacementPlugin(/\/buffer\//, function (resource) {
+            resource.request = Buffer_Path;
+        })
+    ],
     optimization: {
         usedExports: true,
         splitChunks: {
             hidePathInfo: true,
             chunks: 'all',
             cacheGroups: {
-                // [TODO] Async Router
                 vendors: {
                     test: /[\\/]node_modules[\\/]/,
                     name: 'vendors',
@@ -33,10 +39,10 @@ module.exports = {
                 }
                 //     commons: {
                 //         name: 'comomns',
-                //         test: /src(?!(\/utils))/, // 可自定义拓展规则
-                //         minChunks: 2, // 最小共用次数
-                //         minSize: 0, // 代码最小多大，进行抽离
-                //         priority: 1 // 该配置项是设置处理的优先级，数值越大越优先处理
+                //         test: /src(?!(\/utils))/,
+                //         minChunks: 2,
+                //         minSize: 0,
+                //         priority: 1
                 //     },
             }
         },
@@ -61,16 +67,15 @@ module.exports = {
     },
     module: {
         rules: [
-            // [TODO] srcPath
             {
                 test: /\.pug$/,
                 oneOf: [
-                    // 这条规则应用到 Vue 组件内的 `<template lang="pug">`
+                    // this applies to <template lang="pug"> in Vue components
                     {
                         resourceQuery: /^\?vue/,
                         use: [{ loader: 'pug-plain-loader', options: { basedir: srcPath } }]
                     },
-                    // 这条规则应用到 JavaScript 内的 pug 导入
+                    // this applies to pug imports inside JavaScript
                     { use: [ 'raw-loader', { loader: 'pug-plain-loader', options: { basedir: srcPath } } ] }
                 ]
 
@@ -98,11 +103,7 @@ module.exports = {
                 exclude: /node_modules(?!(\/base-x)|(\/resize-detector)|(\/vue-echarts))/,
                 use: {
                     loader: 'babel-loader',
-                    options: {
-                        presets: ['@babel/preset-env']
-                        // [TODO] Async Route
-                        // plugins: ['syntax-dynamic-import']
-                    }
+                    options: { presets: ['@babel/preset-env'] }
                 }
             }, {
                 test: /(\.scss$|\.css$|\.sass$)/,

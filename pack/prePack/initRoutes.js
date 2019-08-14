@@ -32,7 +32,7 @@ module.exports = function (ProjectPath, routeConfig) {
         // pages/XXX.vue
         if (tmpPath === val && val.indexOf('.vue') === val.length - 4) {
             const name = val.replace('.vue', '');
-            (name !== 'index') && pushRoute(tmpPath, name, name);
+            (name !== 'index') && pushRoute(fPath, name, name);
             return;
         }
 
@@ -59,15 +59,13 @@ module.exports = function (ProjectPath, routeConfig) {
             name += (n ? n[0].toLocaleUpperCase() + n.slice(1) : '');
         });
 
-        pushRoute(tmpPath, name, nList[0]);
+        pushRoute(fPath, name, nList[0]);
     });
 
     let _routes = '';
     for (const key in routes) {
         const _k = routes[key];
 
-        // [TODO] Async Route
-        // _routes += `{name: '${ _k.name }', path: '${ _k.path }', component: ()=>import(\'${ _k.pagePath }\')`;
         _routes += `{name: '${ _k.name }', path: '${ _k.path }', component: ${ _k.component }`;
 
         const alias = routeConfig[key] && routeConfig[key].alias ? routeConfig[key].alias : _k.alias;
@@ -80,8 +78,6 @@ module.exports = function (ProjectPath, routeConfig) {
 
         _routes += ', children: [';
         _k.children.forEach(_kr => {
-            // [TODO] Async Route
-            // _routes += `{name: '${ _kr.name }', path: '${ _kr.path }', component: ()=>import(\'${ _kr.pagePath }\')`;
             _routes += `{name: '${ _kr.name }', path: '${ _kr.path }', component: ${ _kr.component }`;
             const alias = routeConfig[_kr.name] && routeConfig[_kr.name].alias ? routeConfig[_kr.name].alias : _kr.alias;
             alias && (_routes += `, alias: ${ JSON.stringify(alias) }`);
@@ -89,24 +85,25 @@ module.exports = function (ProjectPath, routeConfig) {
         });
         _routes += ']},';
     }
+
     _routes += '{ path: \'/\', redirect: \'/index\' },{ path: \'*\', redirect: \'/notFound\' }';
     routesStr += `export default { routes: [${ _routes }] }`;
 
     fs.writeFileSync(RoutesPath, routesStr);
 
-    function pushRoute(tmpPath, name, parent) {
+
+    function pushRoute(pagePath, name, parent) {
         if (!name) {
             return;
         }
 
-        const _route = {};
-
-        // [TODO] Async Route
-        routesStr += `import ${ name } from \'${ routeConfig.pagesAlia }/${ tmpPath }\';`;
-        _route.pagePath = `${ routeConfig.pagesAlia }/${ tmpPath }`;
-        _route.name = name;
-        _route.path = `/${ name }`;
-        _route.component = name;
+        routesStr += `import ${ name } from \'${ pagePath }\';`;
+        const _route = {
+            name,
+            pagePath,
+            path: `/${ name }`,
+            component: name
+        };
 
         // _route is children, push children
         if (parent !== name) {
