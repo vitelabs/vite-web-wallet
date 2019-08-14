@@ -1,14 +1,11 @@
 const path = require('path');
 const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 // const CircularDependencyPlugin = require('circular-dependency-plugin');
 
-const packJson = require('../package.json');
-const SRC_PATH = path.join(__dirname, '../src');
-const TEMPLATE_PATH = path.join(__dirname, '../index.html');
-const Buffer_Path = path.join(__dirname, '../node_modules/buffer/index.js');
+const packJson = require('../../package.json');
+const Buffer_Path = path.join(__dirname, '../../node_modules/buffer/index.js');
 
 const goViteServer = {
     production: '\'wss://api.vitewallet.com/ws\'',
@@ -58,40 +55,6 @@ const gatewayInfosServer = {
 const Node_Env = process.env.NODE_ENV || 'dev';
 
 const plugins = [
-    new HtmlWebpackPlugin({
-        title: 'ViteX, Exchange By the Community, For the Community',
-        favicon: path.join(SRC_PATH, 'assets/imgs/logo.png'),
-        template: TEMPLATE_PATH,
-        filename: 'index.html',
-        hash: true,
-        chunks: [ 'index', 'vendors', 'default' ],
-        minify: {
-            removeAttributeQuotes: true,
-            removeComments: true,
-            collapseWhitespace: true,
-            removeScriptTypeAttributes: true,
-            removeStyleLinkTypeAttributes: true
-        }
-        // [TODO] Async Router
-        // chunksSortMode: 'none'
-    }),
-    new HtmlWebpackPlugin({
-        title: 'ViteX, Exchange By the Community, For the Community',
-        favicon: path.join(SRC_PATH, 'assets/imgs/logo.png'),
-        template: TEMPLATE_PATH,
-        filename: 'mobileDex.html',
-        hash: true,
-        chunks: [ 'mobileDex', 'vendors', 'default' ],
-        minify: {
-            removeAttributeQuotes: true,
-            removeComments: true,
-            collapseWhitespace: true,
-            removeScriptTypeAttributes: true,
-            removeStyleLinkTypeAttributes: true
-        }
-        // [TODO] Async Router
-        // chunksSortMode: 'none'
-    }),
     new VueLoaderPlugin(),
     new webpack.DefinePlugin({
         'process.env.version': `"${ packJson.version }"`,
