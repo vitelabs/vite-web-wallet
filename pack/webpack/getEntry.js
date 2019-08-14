@@ -20,8 +20,6 @@ for (const entryName in entryFile) {
             removeScriptTypeAttributes: true,
             removeStyleLinkTypeAttributes: true
         }
-        // [TODO] Async Router
-        // chunksSortMode: 'none'
     }));
 }
 

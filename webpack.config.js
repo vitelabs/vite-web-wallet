@@ -1,6 +1,7 @@
 require('./pack/prePack/index.js');
 
 const merge = require('webpack-merge');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const { entry, htmlWebpackPlugins } = require('./pack/webpack/getEntry');
 const baseConfig = require('./pack/webpack/base.config.js');
@@ -14,6 +15,8 @@ let webpackConfig = merge({
     entry,
     plugins: htmlWebpackPlugins
 }, baseConfig);
+
+(process.env.analyzer === 'true') && webpackConfig.plugins.push(new BundleAnalyzerPlugin());
 
 if (process.env.NODE_ENV === 'dev') {
     webpackConfig = merge(webpackConfig, devConfig);
