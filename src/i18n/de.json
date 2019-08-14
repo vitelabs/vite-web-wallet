@@ -226,7 +226,7 @@
             "long": "Password cannot exceed 32 characters",
             "name": "Account name only supports English and Chinese characters, digits and underline",
             "consistency": "Please enter the same password",
-            "pwFormat": "Wrong password format, password only contains digits, English letters and half width punctuation."
+            "pwFormat": "Wrong password format. The password should only contain digits, letters and symbols."
         }
     },
     "startCreate": {
@@ -275,7 +275,7 @@
         },
         "type": {
             "native": "Native Tokens",
-            "crossGate": "Cross-Chain Tokens"
+            "crossGate": "Cross-Chain Coins"
         },
         "assetType": {
             "TOTAL": "All Assets",
@@ -316,7 +316,7 @@
             "setting": "Gateway Interface",
             "nodeDesc": "User Guide",
             "settingPlaceholder": "Please input gateway link address",
-            "nodeDescStr": "This function only works for cross-chain tokens, do not use this on built-in tokens. Meanwhile, please be careful about unfamiliar gateway links. By continuing to use our platform, you agree and acknowledge that Vite Labs would not be responsible for the loss of your fund and other negative consequences caused. Fill out the gateway link below if you need to use gateway, the link will come into effect after you hit save."
+            "nodeDescStr": "This function only works for cross-chain coins, do not use this on built-in tokens. Meanwhile, please be careful about unfamiliar gateway links. By continuing to use our platform, you agree and acknowledge that Vite Labs would not be responsible for the loss of your fund and other negative consequences caused. Fill out the gateway link below if you need to use gateway, the link will come into effect after you hit save."
         },
         "depositRecord": {
             "tabName": "Deposit History",

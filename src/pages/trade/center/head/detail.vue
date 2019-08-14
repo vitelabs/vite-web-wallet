@@ -42,7 +42,7 @@
             </div>
             <div class="content__item">
                 <div class="label">{{$t("tokenCard.tokenInfo.labels.website")}}:</div>
-                <div class="click-able" @click="openUrl(tokenDetail.website)">{{ tokenDetail.website || '--' }}</div>
+                <div class="click-able" @click="openUrl(tokenDetail.websiteLink)">{{ tokenDetail.websiteLink || '--' }}</div>
             </div>
             <div class="content__item">
                 <div class="label">{{$t("tokenCard.tokenInfo.labels.whitePaper")}}:</div>
@@ -120,7 +120,8 @@ export default {
             const tokenDetail = this.ftokenDetail;
             if (this.ftokenDetail.links) {
                 for (const key in this.ftokenDetail.links) {
-                    tokenDetail[`${ key }Link`] = this.ftokenDetail.links[key];
+                    tokenDetail[`${ key }Link`] = this.ftokenDetail.links[key] && this.ftokenDetail.links[key].length
+                        ? this.ftokenDetail.links[key][0] : '';
                 }
             }
             tokenDetail.ttype = typeof tokenDetail.gateway === 'undefined'
