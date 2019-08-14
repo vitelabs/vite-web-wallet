@@ -52,7 +52,7 @@ const dexApiServer = {
     production: '"https://vitex.vite.net/api/"',
     test: '"https://vitex.vite.net/test/api/"',
     dev: '"https://vitex.vite.net/test/api/"',
-    // dev: '"http://132.232.65.121:8080/test/api/"',
+    // dev: '"http://192.168.31.221:8082/dev/api/"',
     dexTestNet: '"https://vitex.vite.net/beta/api/"'
 };
 const pushServer = {

@@ -37,7 +37,7 @@ block originContent
             div.click-able(@click="openUrl(tokenDetail.gateway ? tokenDetail.gateway.website : null)") {{tokenDetail.gateway ? tokenDetail.gateway.name || '--' : '--'}}
         .content__item
             .label {{$t("tokenCard.tokenInfo.labels.website")}}:
-            div.click-able(@click="openUrl(tokenDetail.website)") {{ tokenDetail.website || '--' }}
+            div.click-able(@click="openUrl(tokenDetail.websiteLink)") {{ tokenDetail.websiteLink || '--' }}
         .content__item
             .label {{$t("tokenCard.tokenInfo.labels.whitePaper")}}:
             div.click-able(@click="openUrl(tokenDetail.whitepaperLink)") {{ tokenDetail.whitepaperLink || '--' }}
@@ -205,7 +205,8 @@ export default {
                 this.tokenDetail = data;
                 if (data.links) {
                     for (const key in data.links) {
-                        this.tokenDetail[`${ key }Link`] = data.links[key];
+                        this.tokenDetail[`${ key }Link`] = data.links[key] && data.links[key].length
+                            ? data.links[key][0] : '';
                     }
                 }
                 this.tokenDetail.ttype = (this.tokenDetail.gateway || this.gateName)
