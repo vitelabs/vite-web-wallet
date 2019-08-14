@@ -13,7 +13,7 @@
     "settingAcc": "Setting Account",
     "resetAcc": "Reset Your Account",
     "logout": "Logout",
-    "saveLogout": "安全退出",
+    "saveLogout": "Logout",
     "blockHeight": "Snapshot Block Height",
     "accountName": "Account Name",
     "action": "Action",
@@ -139,7 +139,7 @@
         "err": "Oops, error occurs",
         "request": "{name} request has sent, please wait",
         "copy": "Successfully copied",
-        "copyShare":"分享链接复制成功",
+        "copyShare":"Copy share link successful!",
         "addrFormat": "Incorrect address format",
         "amtFormat": "Incorrect amount format",
         "transSucc": "Transaction successful!",
@@ -258,9 +258,9 @@
             "gate":"Wallet Cross-Chain Gateway",
             "totalExAmount":"Exchange Total Balance",
             "availableExAmount":"Exchange Available Balance",
-            "balanceTips": "点击转账，可以从Vite 钱包给其他地址转币",
-            "gateTips": "点击跨链转入，可以将其他币种跨链映射到Vite网络，转入Vite钱包；点击跨链转出仍可以将资产转至其他平台。*转入转出过程可能会产生手续费，且有金额限制",
-            "availableExAmountTips": "点击充值至交易所，将钱包中的资产划转至交易所；点击提现至钱包，将交易所资产划转至钱包。以上划转过程不需要手续费"
+            "balanceTips": "You can transfer your assets to other addresses via clicking 'Transfer' button",
+            "gateTips": "In this cross-chain section, you can map other tokens into Vite network. Click 'Receive' button to deposit assets to your Vite Wallet. Click 'Transfer' button to transfer your assets to other platforms. * Cross-chain transfer/receive process may charge fees, it also has its transfer limitation.",
+            "availableExAmountTips": "You can transfer your assets from Vite Wallet to ViteX Exchange via clicking 'Deposit' button. Click 'Withdraw' button to transfer assets from ViteX Exchange to Vite Wallet. No transaction fees caused during these processes."
         },
         "actionType": {
             "SEND": "Transfer",
@@ -274,7 +274,7 @@
         },
         "addToken": {
             "title": "Add Token",
-            "placeholder": "Please input token name 或者 TokenID",
+            "placeholder": "Please enter token name or TokenID",
             "lTxt": "Cancel",
             "rTxt": "Add"
         },
@@ -295,18 +295,18 @@
                 "tokenId": "TokenID",
                 "tokenName": "Name",
                 "totalSupply": "Total Supply",
-                "total": "流通总量",
-                "overview": "代币简介",
-                "type": "代币类型",
-                "gate": "跨链网关",
-                "website": "官网",
-                "whitePaper": "白皮书",
-                "explorer": "浏览器",
+                "total": "Circulating Supply",
+                "overview": "Introduction",
+                "type": "Type",
+                "gate": "Cross-Chain Gateway",
+                "website": "Website",
+                "whitePaper": "White Paper",
+                "explorer": "Explorer",
                 "github": "Github",
-                "media": "社交媒体",
-                "crossType": "跨链代币",
-                "originType": "原生代币",
-                "viewmore": "查看更多"
+                "media": "Social Media",
+                "crossType": "Cross-Chain",
+                "originType": "Native",
+                "viewmore": "View More"
             },
             "reIssuable": {
                 "true": "Re-issuable",
@@ -379,7 +379,7 @@
             "balanceErrMap": {
                 "notEnough": "Insufficient Balance",
                 "overMax": "Transfer amount must be less than {max}",
-                "lessMin": "Transfer amount must be greater than {min}"
+                "lessMin": "Transfer amount should not be less than {min}"
             },
             "feeTips": "Transaction fee amount is set by gateway operator",
             "addressErr": "Address format is incorrect",
@@ -390,6 +390,7 @@
                 "fee": "Fee",
                 "all": "All"
             },
+            "labelPlaceholder":"Please input {labelName}",
             "amountPlaceholder": "Please input transfer amount which should not be less than {min}",
             "addressPlaceholder": "Please input {token} transfer address",
             "successTips": "Transfer request has been sent",
@@ -759,19 +760,19 @@
         "mergeDepth": "Group",
         "depthStep": "{step} digits",
         "blocking": "Network congestion occurs, please try again later",
-        "supportMining": "支持挖矿的交易对",
+        "supportMining": "Mineable Trading Pairs",
         "operator": {
-            "noName": "匿名网关",
+            "noName": "Anonymous Gateway",
             "overview": "Introduction",
             "txPair": "Trading Pairs",
             "confirmTitle": "Risk Reminder",
             "confirmText": "The current trading pair is {symbol}. Please be careful when trading. Investing in digital assets comes with high risks. Before investing, please have a full understanding of all the risks of investing in digital assets and judge the authenticity, legality and validity of digital assets on your own. Please be prudent of your own investment decisions and undertake responsibility for the loss of your assets.",
-            "address": "运营商地址",
-            "name": "运营商名称"
+            "address": "Operator Address",
+            "name": "Operator Name"
         },
         "operatorTxPair": {
-            "title": "交易对信息",
-            "tokenTab": "代币详情",
+            "title": "Trading Pair Details",
+            "tokenTab": "Token Details",
             "operatorTab": "Operator Details"
         }
     },
@@ -784,8 +785,8 @@
         "quantityTitle": "Total({quantity})",
         "priceTitle": "Price({price})",
         "amountTitle": "Amount({amount})",
-        "quantityTable": "累积数量Qty？？？",
-        "amountTable": "累积成交额",
+        "quantityTable": "Qty",
+        "amountTable": "Volume",
         "amount": "Total",
         "newOrderSuccess": "Order request has sent",
         "newOrderFail": "Order Failed",
@@ -984,10 +985,10 @@
             "0": "Buy"
         },
         "status": {
-            "1": "委托中",
-            "2": "已完成",
-            "3": "已撤销",
-            "4": "下单失败"
+            "1": "Ongoing",
+            "2": "Completed",
+            "3": "Cancelled",
+            "4": "Failed"
         },
         "confirmTable": {
             "title":"Order Book",
@@ -1029,7 +1030,7 @@
             "side": "Side",
             "buy": "Buy",
             "sell": "Sell",
-            "status": "状态",
+            "status": "Status",
             "search": "Search",
             "reset": "Reset"
         }
