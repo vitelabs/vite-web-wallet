@@ -136,7 +136,6 @@ module.exports = {
             plugins: path.join(srcPath, '/plugins'),
             i18n: path.join(srcPath, '/i18n'),
             store: path.join(srcPath, '/store'),
-            version: path.join(srcPath, '../version.json'),
 
             wallet: path.join(PC_SRC_PATH, '/wallet'),
             pcPages: path.join(PC_SRC_PATH, '/pages'),
