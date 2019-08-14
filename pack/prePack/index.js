@@ -6,23 +6,23 @@ const StartTime = new Date().getTime();
 
 
 // 1. Init Web Router
-buildLog('Start Init Web Router');
+buildLog('Start Init PC Router');
 
-const WebRouterConfig = require('../../srcWeb/router/config.js');
-const WebProjectPath = path.resolve(__dirname, '../../srcWeb');
-initRoutes(WebProjectPath, WebRouterConfig);
+const PCRouterConfig = require('../../srcPC/router/config.js');
+const PCProjectPath = path.resolve(__dirname, '../../srcPC');
+initRoutes(PCProjectPath, PCRouterConfig);
 
-buildLog('Finish Init Web Router');
+buildLog('Finish Init PC Router');
 
 
 // 2. Init Mobile Router
-buildLog('Start Init Mobile Router');
+buildLog('Start Init H5 Router');
 
-const MobileRouterConfig = require('../../srcMobile/router/config.js');
-const MobileProjectPath = path.resolve(__dirname, '../../srcMobile');
-initRoutes(MobileProjectPath, MobileRouterConfig);
+const H5RouterConfig = require('../../srcH5/router/config.js');
+const H5ProjectPath = path.resolve(__dirname, '../../srcH5');
+initRoutes(H5ProjectPath, H5RouterConfig);
 
-buildLog('Finish Init Mobile Router');
+buildLog('Finish Init H5 Router');
 
 
 // Finish PrePack

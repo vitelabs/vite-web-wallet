@@ -2,8 +2,8 @@ const path = require('path');
 const packJson = require('../package.json');
 
 const srcPath = path.resolve(__dirname, '../src');
-const WEB_SRC_PATH = path.resolve(__dirname, '../srcWeb');
-const MOBILE_SRC_PATH = path.resolve(__dirname, '../srcMobile');
+const PC_SRC_PATH = path.resolve(__dirname, '../srcPC');
+const H5_SRC_PATH = path.resolve(__dirname, '../srcH5');
 const TEMPLATE_PATH = path.resolve(__dirname, '../index.html');
 
 const DefaultTitle = 'ViteX, Exchange By the Community, For the Community';
@@ -59,18 +59,18 @@ const Node_Env = process.env.NODE_ENV || 'dev';
 
 module.exports = {
     srcPath,
-    WEB_SRC_PATH,
-    MOBILE_SRC_PATH,
+    PC_SRC_PATH,
+    H5_SRC_PATH,
     staticPath: path.join(__dirname, '../dist'),
     entryFile: {
         index: {
-            path: path.join(WEB_SRC_PATH, '/index.js'),
+            path: path.join(PC_SRC_PATH, '/index.js'),
             title: DefaultTitle,
             favicon: Favicon,
             template: TEMPLATE_PATH
         },
         mobileDex: {
-            path: path.join(MOBILE_SRC_PATH, '/index.js'),
+            path: path.join(H5_SRC_PATH, '/index.js'),
             title: DefaultTitle,
             favicon: Favicon,
             template: TEMPLATE_PATH
