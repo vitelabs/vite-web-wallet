@@ -176,7 +176,7 @@ export default {
             return getTokenIcon(id);
         },
         save: throttle(function () {
-            const formatRight = /(https:\/\/)?([A-Za-z0-9_\-]\.[A-Za-z0-9_\-])+(\/[A-Za-z0-9_\-]+)*/.test(this.urlCache);
+            const formatRight = process.env.NODE_ENV !== 'production' || /(https:\/\/)?([A-Za-z0-9_\-]\.[A-Za-z0-9_\-])+(\/[A-Za-z0-9_\-]+)*/.test(this.urlCache);
             if (!formatRight) {
                 this.$toast(this.$t('tokenCard.nodeErr'));
                 return;
