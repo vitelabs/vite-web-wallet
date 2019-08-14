@@ -38,7 +38,7 @@
         "assets": [
             "Deposit to Exchange",
             "Withdraw to Wallet",
-            "Cross-Chain Receive & Transfer"
+            "Cross-Chain Receive & Send"
         ]
     },
     "dealReminder": {
@@ -258,15 +258,15 @@
             "gate":"Wallet Cross-Chain Gateway",
             "totalExAmount":"Exchange Total Balance",
             "availableExAmount":"Exchange Available Balance",
-            "balanceTips": "You can transfer your assets to other addresses via clicking 'Transfer' button",
-            "gateTips": "In this cross-chain section, you can map other tokens into Vite network. Click 'Receive' button to deposit assets to your Vite Wallet. Click 'Transfer' button to transfer your assets to other platforms. * Cross-chain transfer/receive process may charge fees, it also has its transfer limitation.",
+            "balanceTips": "You can transfer your assets to other addresses via clicking 'Send' button",
+            "gateTips": "In this cross-chain section, you can map other tokens into Vite network. Click 'Receive' button to deposit assets to your Vite Wallet. Click 'Send' button to transfer your assets to other platforms. * Cross-chain receive/send process may charge fees, it also has its transfer limitation.",
             "availableExAmountTips": "You can transfer your assets from Vite Wallet to ViteX Exchange via clicking 'Deposit' button. Click 'Withdraw' button to transfer assets from ViteX Exchange to Vite Wallet. No transaction fees caused during these processes."
         },
         "actionType": {
-            "SEND": "Transfer",
+            "SEND": "Send",
             "RECEIVE": "Receive",
             "CHARGE": "Receive",
-            "WITHDRAW": "Transfer",
+            "WITHDRAW": "Send",
             "EXCHARGE": "Deposit",
             "EXWITHDRAW": "Withdraw",
             "EXRECRODS": "History",
