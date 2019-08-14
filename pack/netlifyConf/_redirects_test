@@ -1,5 +1,3 @@
 # Redirect default Netlify subdomain to primary domain
 /gw/* http://132.232.60.116:8001/gw/:splat 200
-/gateWay/* http://132.232.60.116:8081/:splat 200
-/tmpCross/* http://132.232.60.116:8082/:splat 200
 /*    /index.html   200
