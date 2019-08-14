@@ -226,7 +226,7 @@
             "long": "Password cannot exceed 32 characters",
             "name": "Account name only supports English and Chinese characters, digits and underline",
             "consistency": "Please enter the same password",
-            "pwFormat": "Wrong password format, password only contains digits, English letters and half width punctuation."
+            "pwFormat": "Wrong password format. The password should only contain digits, letters and symbols."
         }
     },
     "startCreate": {
