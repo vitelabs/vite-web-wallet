@@ -3,7 +3,8 @@ import { operatorTradepair } from 'services/trade';
 const state = {
     ttoken: null,
     ftoken: null,
-    operator: null
+    operator: null,
+    isLoading: true
 };
 
 const mutations = {
@@ -41,6 +42,9 @@ const mutations = {
             };
             state.operator = null;
         }
+    },
+    exSetOperatorTxPairLoading(state, isLoading) {
+        state.isLoading = isLoading;
     }
 };
 
@@ -53,10 +57,12 @@ const actions = {
             return;
         }
 
+        commit('exSetOperatorTxPairLoading', true);
         operatorTradepair({
             quoteToken: activeTxPair.quoteToken,
             tradeToken: activeTxPair.tradeToken
         }).then(data => {
+            commit('exSetOperatorTxPairLoading', false);
             if (!data) {
                 return;
             }
@@ -65,6 +71,7 @@ const actions = {
             commit('exSetActiveTtoken', data.quoteTokenDetail);
             commit('exSetActiveOperator', data.operatorInfo);
         }).catch(err => {
+            commit('exSetOperatorTxPairLoading', false);
             console.warn(err);
         });
     }

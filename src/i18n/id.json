@@ -226,7 +226,7 @@
             "long": "Kata sandi tidak boleh melebihi 32 karakter",
             "name": "Nama akun hanya mendukung karakter bahasa Inggris dan Cina, angka dan garis bawah",
             "consistency": "Silakan masukkan kata sandi yang sama",
-            "pwFormat": "Format kata sandi salah, kata sandi hanya berisi angka, huruf bahasa Inggris dan tanda baca setengah lebar."
+            "pwFormat": "Wrong password format. The password should only contain digits, letters and symbols."
         }
     },
     "startCreate": {
@@ -275,7 +275,7 @@
         },
         "type": {
             "native": "Token Asli",
-            "crossGate": "Token Lintas Rantai"
+            "crossGate": "Cross-Chain Coins"
         },
         "assetType": {
             "TOTAL": "Semua Aset",
@@ -316,7 +316,7 @@
             "setting": "Gateway Interface",
             "nodeDesc": "Panduan pengguna",
             "settingPlaceholder": "Silakan masukkan alamat tautan gateway",
-            "nodeDescStr": "Fungsi ini hanya berfungsi untuk token lintas-rantai, jangan gunakan ini pada token bawaan. Sementara itu, harap berhati-hati tentang tautan gateway yang tidak dikenal. Dengan terus menggunakan platform kami, Anda setuju dan mengakui bahwa Vite Labs tidak akan bertanggung jawab atas kehilangan dana Anda dan konsekuensi negatif lainnya yang disebabkan. Isi tautan gateway di bawah ini jika Anda perlu menggunakan gateway, tautan tersebut akan mulai berlaku setelah Anda menekan save."
+            "nodeDescStr": "This function only works for cross-chain coins, do not use this on built-in tokens. Meanwhile, please be careful about unfamiliar gateway links. By continuing to use our platform, you agree and acknowledge that Vite Labs would not be responsible for the loss of your fund and other negative consequences caused. Fill out the gateway link below if you need to use gateway, the link will come into effect after you hit save."
         },
         "depositRecord": {
             "tabName": "Riwayat Deposit",
