@@ -10,15 +10,23 @@ module.exports = function (ProjectPath, routeConfig) {
 
     cleanFile(RoutesPath);
 
-    // Write routes file
-    let routesStr = '';
+    const { pagePaths, routes } = getRoutes(PagesPath);
+
+    // Write vue-router config file
+    const routesStr = getRoutesFile(pagePaths, routes, routeConfig);
+    fs.writeFileSync(RoutesPath, routesStr);
+};
+
+
+function getRoutes(PagesPath) {
+    const pagePaths = {};
     const routes = {};
 
-    traversingDir(PagesPath, (fPath, next, val) => {
-        const stats = fs.statSync(fPath);
+    traversingDir(PagesPath, (pagePath, next, val) => {
+        const stats = fs.statSync(pagePath);
 
         if (stats.isDirectory()) {
-            next(fPath);
+            next(pagePath);
             return;
         }
 
@@ -26,13 +34,13 @@ module.exports = function (ProjectPath, routeConfig) {
             return;
         }
 
-        // `fPath` is a file, now.
-        const tmpPath = fPath.split('pages/')[1];
+        // `pagePath` is a file, now.
+        const tmpPath = pagePath.split('pages/')[1];
 
         // pages/XXX.vue
         if (tmpPath === val && val.indexOf('.vue') === val.length - 4) {
             const name = val.replace('.vue', '');
-            (name !== 'index') && pushRoute(fPath, name, name);
+            (name !== 'index') && pushRoute({ pagePath, name }, { pagePaths, routes });
             return;
         }
 
@@ -59,9 +67,53 @@ module.exports = function (ProjectPath, routeConfig) {
             name += (n ? n[0].toLocaleUpperCase() + n.slice(1) : '');
         });
 
-        pushRoute(fPath, name, nList[0]);
+        pushRoute({
+            pagePath,
+            name,
+            parent: nList[0]
+        }, { pagePaths, routes });
     });
 
+    return { pagePaths, routes };
+}
+
+function pushRoute({ pagePath, name, parent }, { pagePaths, routes }) {
+    if (!name) {
+        return;
+    }
+
+    pagePaths[name] = pagePath;
+
+    const _route = {
+        name,
+        pagePath,
+        path: `/${ name }`,
+        component: name
+    };
+
+    // _route is children, push children
+    if (parent !== name) {
+        routes[parent] = routes[parent] || {};
+        routes[parent].children = routes[parent].children || [];
+        routes[parent].children.push(_route);
+        return;
+    }
+
+    // _route is parent
+    routes[parent] = Object.assign(routes[parent] || {}, _route);
+    routes[parent].component = routes[parent].component || _route.component;
+    routes[parent].children = routes[parent].children || [];
+}
+
+function getRoutesFile(pagePaths, routes, routeConfig) {
+    let routesStr = '';
+
+    // Import page files
+    for (const key in pagePaths) {
+        routesStr += `import ${ key } from \'${ pagePaths[key] }\';`;
+    }
+
+    // Write router config
     let _routes = '';
     for (const key in routes) {
         const _k = routes[key];
@@ -76,6 +128,7 @@ module.exports = function (ProjectPath, routeConfig) {
             continue;
         }
 
+        // if have children router
         _routes += ', children: [';
         _k.children.forEach(_kr => {
             _routes += `{name: '${ _kr.name }', path: '${ _kr.path }', component: ${ _kr.component }`;
@@ -87,35 +140,7 @@ module.exports = function (ProjectPath, routeConfig) {
     }
 
     _routes += '{ path: \'/\', redirect: \'/index\' },{ path: \'*\', redirect: \'/notFound\' }';
+
     routesStr += `export default { routes: [${ _routes }] }`;
-
-    fs.writeFileSync(RoutesPath, routesStr);
-
-
-    function pushRoute(pagePath, name, parent) {
-        if (!name) {
-            return;
-        }
-
-        routesStr += `import ${ name } from \'${ pagePath }\';`;
-        const _route = {
-            name,
-            pagePath,
-            path: `/${ name }`,
-            component: name
-        };
-
-        // _route is children, push children
-        if (parent !== name) {
-            routes[parent] = routes[parent] || {};
-            routes[parent].children = routes[parent].children || [];
-            routes[parent].children.push(_route);
-            return;
-        }
-
-        // _route is parent
-        routes[parent] = Object.assign(routes[parent] || {}, _route);
-        routes[parent].component = routes[parent].component || _route.component;
-        routes[parent].children = routes[parent].children || [];
-    }
-};
+    return routesStr;
+}
