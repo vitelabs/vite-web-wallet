@@ -122,20 +122,14 @@ export default {
 @import "~h5Assets/scss/center.scss";
 
 .limit-price-wrapper {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: 100%;
     font-size: 14px;
     @include font-family-normal();
-    font-weight: 400;
 
     .right-tab {
         font-size: 12px;
         float: right;
         @include font-family-normal();
         color: rgba(94, 104, 117, 1);
-        font-weight: 400;
         >span {
             position: relative;
             margin-right: 6px;
