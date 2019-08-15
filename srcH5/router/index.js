@@ -4,8 +4,8 @@ import VueRouter from 'vue-router';
 import routeConfig from './routes';
 
 const router = new VueRouter({
-    // mode: process.env.NODE_ENV === 'dev' ? 'hash' : 'history',
-    mode: 'hash',
+    mode: process.env.NODE_ENV === 'dev' ? 'hash' : 'history',
+    // mode: 'hash',
     routes: routeConfig.routes
 });
 
