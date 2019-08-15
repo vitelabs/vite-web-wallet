@@ -118,9 +118,17 @@ function getRoutesFile(pagePaths, routes, routeConfig) {
     for (const key in routes) {
         const _k = routes[key];
 
-        _routes += `{name: '${ _k.name }', path: '${ _k.path }', component: ${ _k.component }`;
+        _routes += `{name: '${ _k.name }', path: '${ routeConfig.prePath || '' }${ _k.path }', component: ${ _k.component }`;
 
-        const alias = routeConfig[key] && routeConfig[key].alias ? routeConfig[key].alias : _k.alias;
+        let alias = routeConfig[key] && routeConfig[key].alias ? routeConfig[key].alias : _k.alias;
+        if (typeof alias === 'string') {
+            alias = `${ routeConfig.prePath || '' }${ alias }`;
+        } else if (alias) {
+            alias.forEach((_a, i) => {
+                alias[i] = `${ routeConfig.prePath || '' }${ _a }`;
+            });
+        }
+        console.log(alias);
         alias && (_routes += `, alias: ${ JSON.stringify(alias) }`);
 
         if (!_k.children || !_k.children.length) {
@@ -131,15 +139,22 @@ function getRoutesFile(pagePaths, routes, routeConfig) {
         // if have children router
         _routes += ', children: [';
         _k.children.forEach(_kr => {
-            _routes += `{name: '${ _kr.name }', path: '${ _kr.path }', component: ${ _kr.component }`;
-            const alias = routeConfig[_kr.name] && routeConfig[_kr.name].alias ? routeConfig[_kr.name].alias : _kr.alias;
+            _routes += `{name: '${ _kr.name }', path: '${ routeConfig.prePath || '' }${ _kr.path }', component: ${ _kr.component }`;
+            let alias = routeConfig[_kr.name] && routeConfig[_kr.name].alias ? routeConfig[_kr.name].alias : _kr.alias;
+            if (typeof alias === 'string') {
+                alias = `${ routeConfig.prePath || '' }${ alias }`;
+            } else if (alias) {
+                alias.forEach((_a, i) => {
+                    alias[i] = `${ routeConfig.prePath || '' }${ _a }`;
+                });
+            }
             alias && (_routes += `, alias: ${ JSON.stringify(alias) }`);
             _routes += '},';
         });
         _routes += ']},';
     }
 
-    _routes += '{ path: \'/\', redirect: \'/index\' },{ path: \'*\', redirect: \'/notFound\' }';
+    _routes += `{ path: \'/\', redirect: \'${ routeConfig.prePath || '' }/index\' },{ path: \'*\', redirect: \'${ routeConfig.prePath || '' }/notFound\' }`;
 
     routesStr += `export default { routes: [${ _routes }] }`;
     return routesStr;
