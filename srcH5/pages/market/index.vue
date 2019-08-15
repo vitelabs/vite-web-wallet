@@ -338,7 +338,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../center.scss";
+@import "~h5Assets/scss/center.scss";
 
 .__center-tb-item.percent {
     overflow: visible;

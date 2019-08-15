@@ -122,7 +122,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
-@import '../center.scss';
+@import '~h5Assets/scss/center.scss';
 
 .tx-pair-wrapper {
     display: flex;
