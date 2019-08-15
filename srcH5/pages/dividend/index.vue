@@ -64,7 +64,7 @@
 
 <script>
 import pool from './pool.vue';
-import sectionTitle from '../components/sectionTitle';
+import sectionTitle from 'h5Components/sectionTitle';
 import walletTable from 'components/table/index.vue';
 import pagination from 'components/pagination.vue';
 import { dividend } from 'services/trade';

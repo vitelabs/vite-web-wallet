@@ -9,7 +9,7 @@
 
 <script>
 import { order } from 'services/trade';
-import historyTable from '../components/historyTable.vue';
+import historyTable from 'h5Components/historyTable.vue';
 import Filters from './filters';
 
 const pageSize = 35;

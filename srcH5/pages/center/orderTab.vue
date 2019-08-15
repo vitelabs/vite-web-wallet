@@ -19,8 +19,8 @@
 
 <script>
 import statistics from 'utils/statistics';
-import openOrder from '../components/orderOpen.vue';
-import historyOrder from '../components/orderHistory.vue';
+import openOrder from 'h5Components/orderOpen.vue';
+import historyOrder from 'h5Components/orderHistory.vue';
 
 export default {
     components: { historyOrder, openOrder },

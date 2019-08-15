@@ -6,7 +6,7 @@
 
 <script>
 import { order } from 'services/trade';
-import openTable from '../components/openTable';
+import openTable from 'h5Components/openTable';
 
 export default {
     components: { openTable },
