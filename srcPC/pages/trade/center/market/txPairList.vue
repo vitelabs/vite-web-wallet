@@ -166,9 +166,17 @@ export default {
                 return txPair.tradeTokenSymbol;
             }
 
-            const pre = this.$store.state.env.currency === 'cny' ? '≈¥' : '≈$';
-            const price = BigNumber.onlyFormat(_price, 2);
+            let price = '';
+            const _realPrice = BigNumber.normalFormatNum(_price, 6);
+            const _realPrice2 = BigNumber.normalFormatNum(_realPrice, 2);
 
+            if (+_realPrice2 === 0) {
+                price = _realPrice;
+            } else {
+                price = _realPrice2;
+            }
+
+            const pre = this.$store.state.env.currency === 'cny' ? '≈¥' : '≈$';
             return `${ txPair.tradeTokenSymbol }  ${ pre }${ price }`;
         },
         getRate(tokenId) {

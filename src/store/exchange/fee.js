@@ -40,7 +40,7 @@ const actions = {
                 commit('setInviteCode', code);
                 res(code);
             }).catch(e => {
-                commit('setInviteCode', '-1');
+                commit('setInviteCode');
                 rej(e);
             });
         });
