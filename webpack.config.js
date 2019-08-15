@@ -20,6 +20,9 @@ let webpackConfig = merge({
 if (process.env.NODE_ENV === 'dev') {
     webpackConfig = merge(webpackConfig, devConfig);
 }
+if (process.env.NODE_ENV === 'test') {
+    webpackConfig = merge(webpackConfig, devConfig);
+}
 if (process.env.NODE_ENV === 'production') {
     webpackConfig = merge(webpackConfig, prodConfig);
 }
