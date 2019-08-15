@@ -1,4 +1,4 @@
 # Redirect default Netlify subdomain to primary domain
 /gw/* https://wallet.vite.net/gw/:splat 200
-/mobileDex/* /mobileDex.html/* 200
+/mobileDex/* /mobileDex.html/mobileDex/:splat 200
 /*    /index.html   200
