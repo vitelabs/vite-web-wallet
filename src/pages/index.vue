@@ -13,20 +13,20 @@
 </template>
 
 <script>
-import noticeList from "components/noticeList.vue";
-import { emptySpace } from "utils/storageSpace";
-import { receiveInviteDialog } from "components/dialog";
-const inviteCodeKey = "INVITE_CODE";
+import noticeList from 'components/noticeList.vue';
+import { emptySpace } from 'utils/storageSpace';
+import { receiveInviteDialog } from 'components/dialog';
+const inviteCodeKey = 'INVITE_CODE';
 
 export default {
     components: { noticeList },
     mounted() {
-        this.$store.commit("setLang", this.$i18n.locale);
-        this.$store.dispatch("startLoopBalance");
-        this.$store.dispatch("startLoopExchangeBalance");
-        this.$store.dispatch("exFetchLatestOrder");
+        this.$store.commit('setLang', this.$i18n.locale);
+        this.$store.dispatch('startLoopBalance');
+        this.$store.dispatch('startLoopExchangeBalance');
+        this.$store.dispatch('exFetchLatestOrder');
         this.$store
-            .dispatch("getInvitedCode")
+            .dispatch('getInvitedCode')
             .then(code => Number(code) === 0 && this.checkInvite)
             .catch(() => {
                 this.checkInvite();
@@ -42,31 +42,29 @@ export default {
     },
     methods: {
         checkInvite() {
-            if (Number(this.$route.query["ldfjacia"]) > 0) {
+            if (Number(this.$route.query['ldfjacia']) > 0) {
                 // random for avoid bloked
-                emptySpace.setItem(
-                    inviteCodeKey,
-                    this.$route.query["ldfjacia"]
-                );
-                if (this.$route.name === "tradeCenter") {
+                emptySpace.setItem(inviteCodeKey,
+                    this.$route.query['ldfjacia']);
+                if (this.$route.name === 'tradeCenter') {
                     receiveInviteDialog();
                 }
             }
         }
     },
     watch: {
-        currHDAcc: function() {
-            this.$store.dispatch("startLoopBalance");
-            this.$store.dispatch("startLoopExchangeBalance");
-            this.$store.dispatch("getInvitedCode");
+        currHDAcc: function () {
+            this.$store.dispatch('startLoopBalance');
+            this.$store.dispatch('startLoopExchangeBalance');
+            this.$store.dispatch('getInvitedCode');
         },
-        address: function() {
-            this.$store.commit("clearDexBalance");
-            this.$store.commit("commitClearBalance");
-            this.$store.commit("commitClearPledge");
-            this.$store.commit("commitClearTransList");
-            this.address && this.$store.dispatch("exFetchLatestOrder");
-            this.$store.dispatch("getInvitedCode").catch(console.log);
+        address: function () {
+            this.$store.commit('clearDexBalance');
+            this.$store.commit('commitClearBalance');
+            this.$store.commit('commitClearPledge');
+            this.$store.commit('commitClearTransList');
+            this.address && this.$store.dispatch('exFetchLatestOrder');
+            this.$store.dispatch('getInvitedCode').catch(console.log);
         }
     }
 };
