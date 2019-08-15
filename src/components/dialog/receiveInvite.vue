@@ -2,7 +2,7 @@
 extends /components/dialog/base.pug
 block content
     img.bg-img(src="~assets/imgs/invite.png")
-    div(v-if="inviteeCode")
+    div(v-if="inviteeCode&&+inviteeCode!==0")
         .invite-code {{$t('assets.invite.invited')}}{{this.inviteeCode}}
     div(v-else)
         .block__title {{ $t('assets.invite.codeLable') }}
@@ -16,24 +16,28 @@ block content
 </template>
 
 <script>
-import { bindCode } from 'services/tradeOperation';
-import { doUntill } from 'utils/asyncFlow';
+import { bindCode } from "services/tradeOperation";
+import { doUntill } from "utils/asyncFlow";
+import { emptySpace } from "utils/storageSpace";
 
 export default {
     async beforeMount() {
         try {
             await this.getInviteeCode();
         } catch (e) {
-            console.log('get bind code error', e);
+            console.log("get bind code error", e);
         }
-
-        this.status = 'LOADED';
+        const code = emptySpace.getItem("INVITE_CODE");
+        if (code) {
+            this.code = code;
+        }
+        this.status = "LOADED";
     },
     data() {
         return {
-            status: 'LOADING', // "ERROR" "LOADING" "LOADED"
-            dTitle: this.$t('assets.invite.receiveInviteTitle'),
-            code: ''
+            status: "LOADING", // "ERROR" "LOADING" "LOADED"
+            dTitle: this.$t("assets.invite.receiveInviteTitle"),
+            code: ""
         };
     },
     computed: {
@@ -45,40 +49,40 @@ export default {
         },
         dSTxt() {
             return (
-                !this.inviteeCode && this.$t('assets.invite.receiveInviteTitle')
+                (!this.inviteeCode||Number(this.inviteeCode)===0)?this.$t("assets.invite.receiveInviteTitle"):''
             );
         },
         formatErr() {
-            return this.code !== '' && !/\d{1,10}/.test(this.code);
+            return this.code !== "" && !/\d{1,10}/.test(this.code);
         },
         dBtnUnuse() {
-            return this.formatErr || this.code === '';
+            return this.formatErr || this.code === "";
         }
     },
     methods: {
         async getInviteeCode() {
-            return this.$store.dispatch('getInvitedCode');
+            return this.$store.dispatch("getInvitedCode");
         },
         inspector() {
             bindCode(this.code)
                 .then(() => {
-                    this.$toast(this.$t('assets.invite.successToast'));
+                    this.$toast(this.$t("assets.invite.successToast"));
                     doUntill({
                         createPromise: () => this.getInviteeCode(),
                         interval: 1000,
                         times: 3
                     })
                         .then(res => {
-                            console.log('code', res);
+                            console.log("code", res);
                         })
                         .catch(e => {
-                            this.$toast(this.$t('assets.invite.noResult'), e);
+                            this.$toast(this.$t("assets.invite.noResult"), e);
                         });
                 })
                 .catch(e => {
-                    this.$toast(this.$t('assets.invite.failToast'), e);
+                    this.$toast(this.$t("assets.invite.failToast"), e);
                 });
-            return Promise.reject('no close');
+            return Promise.reject("no close");
         }
     }
 };
@@ -86,8 +90,8 @@ export default {
 
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
-/deep/ .strong{
-    color: #1D2024;
+/deep/ .strong {
+    color: #1d2024;
     @include font-family-bold();
 }
 .bg-img {
