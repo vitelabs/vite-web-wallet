@@ -6,7 +6,4 @@
  * }
  */
 
-module.exports = {
-    prePath: '/mobileDex',
-    center: { alias: '/index' }
-};
+module.exports = { center: { alias: '/index' } };
