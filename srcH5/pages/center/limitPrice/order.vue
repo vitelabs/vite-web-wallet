@@ -731,7 +731,6 @@ $font-black: rgba(36, 39, 43, 0.8);
 }
 
 .order-wrapper {
-    flex: 1;
     padding: 0 6px;
 
     .order-title {

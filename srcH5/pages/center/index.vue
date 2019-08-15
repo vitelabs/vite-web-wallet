@@ -1,9 +1,9 @@
 <template>
     <div class="trade-center-wrapper">
-        <center-head slot="lt"></center-head>
-        <limit-price slot="lb4"></limit-price>
-        <depth slot="r"></depth>
-        <order-tab class="order-tab"></order-tab>
+        <center-head></center-head>
+        <limit-price></limit-price>
+        <depth></depth>
+        <order-tab></order-tab>
     </div>
 </template>
 
@@ -103,8 +103,6 @@ export default {
 
 <style lang="scss" scoped>
 .trade-center-wrapper {
-    display: flex;
-    flex-direction: column;
     height: 100%;
     width: 100%;
 }
