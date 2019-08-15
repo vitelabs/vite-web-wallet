@@ -2,11 +2,9 @@
  * Eg:
  *
  * startImport: {
+ *      prePath: 'mobiledex',
  *      alias: '/index' || \['/index'\]
  * }
  */
 
-module.exports = {
-    prePath: 'mobiledex',
-    center: { alias: '/index' }
-};
+module.exports = { center: { alias: '/index' } };
