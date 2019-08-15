@@ -1,5 +1,11 @@
+const { staticPath } = require('../config.js');
+
 module.exports = {
     mode: 'development',
+    output: {
+        path: staticPath,
+        filename: '[name].[hash].js'
+    },
     devtool: 'source-map',
     devServer: {
         proxy: {

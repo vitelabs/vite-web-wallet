@@ -16,6 +16,7 @@ module.exports = {
     plugins: [
         new VueLoaderPlugin(),
         new webpack.DefinePlugin(envVars),
+        new webpack.HotModuleReplacementPlugin(),
         new webpack.NormalModuleReplacementPlugin(/\/buffer\//, function (resource) {
             resource.request = Buffer_Path;
         })
@@ -152,6 +153,7 @@ module.exports = {
     devServer: {
         quiet: false,
         host: '0.0.0.0',
-        port: 8081
+        port: 8081,
+        hot: true
     }
 };
