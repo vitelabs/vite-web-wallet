@@ -9,7 +9,7 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-    console.log(JSON.stringify(to), JSON.stringify(from));
+    console.log(to && to.name, from && from.name);
     next();
 });
 
