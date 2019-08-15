@@ -1,5 +1,5 @@
 <template>
-    <div class="trade-container">
+    <div id="vite-wallet-app" class="trade-container">
         <div v-if="isDev" class="mock-mobile-top">
             <div @click="back">back</div>
         </div>
@@ -9,8 +9,8 @@
         <div v-if="isDev" class="mock-mobile-bottom">
             <span>交易</span>
             <span>资产</span>
-            <span>挖矿</span>
-            <span>订单</span>
+            <span @click="goMining">挖矿</span>
+            <span @click="goOrder">订单</span>
         </div>
     </div>
 </template>
@@ -29,6 +29,12 @@ export default {
     methods: {
         back() {
             this.$router.back();
+        },
+        goOrder() {
+            this.$router.push({ name: 'openOrders' });
+        },
+        goMining() {
+            this.$router.push({ name: 'mining' });
         }
     }
 };

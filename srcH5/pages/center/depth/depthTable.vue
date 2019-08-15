@@ -127,7 +127,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../center.scss';
+@import '~h5Assets/scss/center.scss';
 
 .depth-table-wrapper {
     position: relative;

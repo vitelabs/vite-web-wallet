@@ -54,7 +54,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../center.scss';
+@import '~h5Assets/scss/center.scss';
 
 .price-wrapper {
     height: 30px;
