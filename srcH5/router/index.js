@@ -8,6 +8,11 @@ const router = new VueRouter({
     routes: routeConfig.routes
 });
 
+router.beforeEach((to, from, next) => {
+    console.log(JSON.stringify(to), JSON.stringify(from));
+    next();
+});
+
 Vue.use(VueRouter);
 
 export default router;
