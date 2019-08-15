@@ -23,7 +23,7 @@ export default {
     },
     computed: {
         isDev() {
-            return process.env.NODE_ENV === 'dev';
+            return process.env.NODE_ENV === 'dev' || process.env.NODE_ENV === 'test';
         }
     },
     methods: {
