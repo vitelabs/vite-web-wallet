@@ -61,9 +61,12 @@
             </div>
             <div class="content__item">
                 <div class="label">{{$t("tokenCard.tokenInfo.labels.media")}}:</div>
-                <img src="~assets/imgs/facebook.svg" class="media-icon" v-show="tokenDetail.facebookLink"/>
-                <img src="~assets/imgs/twitter.svg" class="media-icon" v-show="tokenDetail.twitterLink"/>
-                <img src="~assets/imgs/telegram.svg" class="media-icon" v-show="tokenDetail.telegramLink"/>
+                <img src="~assets/imgs/facebook.svg" class="media-icon"
+                     v-show="tokenDetail.facebookLink"  @click="openUrl(tokenDetail.facebookLink)"/>
+                <img src="~assets/imgs/twitter.svg" class="media-icon"
+                     v-show="tokenDetail.twitterLink"  @click="openUrl(tokenDetail.twitterLink)"/>
+                <img src="~assets/imgs/telegram.svg" class="media-icon"
+                     v-show="tokenDetail.telegramLink"  @click="openUrl(tokenDetail.telegramLink)"/>
             </div>
         </div>
         <div v-show="tab === 'operator'" class="tab-content">
