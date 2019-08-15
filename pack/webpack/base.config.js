@@ -142,7 +142,8 @@ module.exports = {
             pcRouter: path.join(PC_SRC_PATH, '/router'),
 
             h5Pages: path.join(H5_SRC_PATH, '/pages'),
-            h5Router: path.join(H5_SRC_PATH, '/router')
+            h5Router: path.join(H5_SRC_PATH, '/router'),
+            h5Components: path.join(H5_SRC_PATH, '/components')
         },
         extensions: [ '.js', '.ts', '.scss', '.vue', '.json' ],
         modules: [path.resolve(srcPath, '../node_modules')]

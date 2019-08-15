@@ -56,7 +56,7 @@ import date from 'utils/date';
 import $ViteJS from 'utils/viteClient';
 import statistics from 'utils/statistics';
 import { execWithValid } from 'utils/execWithValid';
-import sectionTitle from '../components/sectionTitle.vue';
+import sectionTitle from 'h5Components/sectionTitle.vue';
 import vxConfirm from './vxConfirm.vue';
 import stakingDetail from './stakingDetail.vue';
 
