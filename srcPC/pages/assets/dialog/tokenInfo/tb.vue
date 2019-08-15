@@ -117,14 +117,14 @@ export default {
         outChain() {
             const tokenToGate = this.$store.getters.mapToken2Gate;
             const token = this.token;
-            return tokenToGate[token.tokenId] ? tokenToGate[token.tokenId].mappedNet.toLowerCase() : token.tokenSymbol.toLowerCase();
+            return tokenToGate[token.tokenId] ? tokenToGate[token.tokenId].mappedNet : token.tokenSymbol;
         }
     },
     methods: {
         getStateStr(item) {
             return this.$t(`tokenCard.${ this.type }Record.statusMap.${ item.state }`, {
                 outChain: this.outChain,
-                confirms: (typeof item.inTxConfirmedCount === 'number') && item.inTxConfirmationCount
+                confirms: item.inTxConfirmedCount && item.inTxConfirmationCount
                     ? `(${ item.inTxConfirmedCount }/${ item.inTxConfirmationCount })`
                     : ''
             });
