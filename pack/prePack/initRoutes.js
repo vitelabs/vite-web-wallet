@@ -100,9 +100,9 @@ function pushRoute({ pagePath, name, parent }, { pagePaths, routes }) {
     }
 
     // _route is parent
-    routes[parent] = Object.assign(routes[parent] || {}, _route);
-    routes[parent].component = routes[parent].component || _route.component;
-    routes[parent].children = routes[parent].children || [];
+    routes[name] = Object.assign(routes[name] || {}, _route);
+    routes[name].component = routes[name].component || _route.component;
+    routes[name].children = routes[name].children || [];
 }
 
 function getRoutesFile(pagePaths, routes, routeConfig) {
@@ -118,7 +118,7 @@ function getRoutesFile(pagePaths, routes, routeConfig) {
     for (const key in routes) {
         const _k = routes[key];
 
-        _routes += `{${ getARouterStr(key, _k, routeConfig) }`;
+        _routes += `{${ getARouterStr(_k, routeConfig) }`;
         if (!_k.children || !_k.children.length) {
             _routes += '},';
             continue;
@@ -128,17 +128,7 @@ function getRoutesFile(pagePaths, routes, routeConfig) {
         _routes += ', children: [';
 
         _k.children.forEach(_kr => {
-            _routes += `{name: '${ _kr.name }', path: '${ _kr.path }', component: ${ _kr.component }`;
-            let alias = routeConfig[_kr.name] && routeConfig[_kr.name].alias ? routeConfig[_kr.name].alias : _kr.alias;
-            if (typeof alias === 'string') {
-                alias = `${ alias }`;
-            } else if (alias) {
-                alias.forEach((_a, i) => {
-                    alias[i] = `${ _a }`;
-                });
-            }
-            alias && (_routes += `, alias: ${ JSON.stringify(alias) }`);
-            _routes += '},';
+            _routes += `{${ getARouterStr(_kr, routeConfig) }},`;
         });
 
         _routes += ']},';
@@ -150,10 +140,12 @@ function getRoutesFile(pagePaths, routes, routeConfig) {
     return routesStr;
 }
 
-function getARouterStr(key, router, routeConfig) {
-    let str = `name: '${ router.name }', path: '${ router.path }', component: ${ router.component }`;
+function getARouterStr(router, routeConfig) {
+    const name = router.name;
 
-    let alias = routeConfig[key] && routeConfig[key].alias ? routeConfig[key].alias : router.alias;
+    let str = `name: '${ name }', path: '${ router.path }', component: ${ router.component }`;
+
+    let alias = routeConfig[name] && routeConfig[name].alias ? routeConfig[name].alias : router.alias;
     if (typeof alias === 'string') {
         alias = `${ alias }`;
     } else if (alias) {
