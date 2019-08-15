@@ -100,7 +100,7 @@ export default {
             return Promise.reject('no close');
         },
         copyShare() {
-            copy(`https://x.vite.net/trade?inviteCode=${ this.inviteCode }`);
+            copy(`${location.origin}/trade?inviteCode=${ this.inviteCode }`);
             this.$toast(this.$t('hint.copy'));
         },
         copy() {
