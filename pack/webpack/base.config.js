@@ -154,6 +154,16 @@ module.exports = {
         quiet: false,
         host: '0.0.0.0',
         port: 8081,
-        hot: true
+        hot: true,
+        proxy: {
+            '/trade': {
+                target: 'http://localhost:8081',
+                pathRewrite: { '^/trade\w*': '' }
+            },
+            '/mobiledex': {
+                target: 'http://localhost:8081/mobileDex.html',
+                pathRewrite: { '^/mobiledex\w*': '' }
+            }
+        }
     }
 };
