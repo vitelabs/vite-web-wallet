@@ -138,7 +138,7 @@
         "err": "Oops, error occurs",
         "request": "{name} request has sent, please wait",
         "copy": "Successfully copied",
-        "copyShare":"分享链接复制成功",
+        "copyShare":"Copy share link successful!",
         "addrFormat": "Incorrect address format",
         "amtFormat": "Incorrect amount format",
         "transSucc": "Transaction successful!",
