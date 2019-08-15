@@ -28,7 +28,7 @@ block originContent
                 span.click-able.view-more(v-if="tokenDetail.overview && tokenDetail.overviewLink" @click="openUrl(tokenDetail.overviewLink)") {{ $t("tokenCard.tokenInfo.labels.viewmore") }}
         .content__item
             .label {{$t("tokenCard.tokenInfo.labels.total")}}:
-            div {{token.total || '--'}}
+            div {{tokenDetail.showTotalSupply || '--'}}
         .content__item
             .label {{$t("tokenCard.tokenInfo.labels.type")}}:
             .div {{ tokenDetail.ttype || '--' }}
@@ -89,6 +89,7 @@ import { gateStorage, getChargeAddr } from 'services/gate';
 import { getTokenIcon } from 'utils/tokenParser';
 import { getExplorerLink } from 'utils/getLink';
 import openUrl from 'utils/openUrl';
+import BigNumber from 'utils/bigNumber';
 import Tb from './tb';
 import viteInput from 'components/viteInput';
 import { throttle } from 'lodash';
@@ -214,6 +215,7 @@ export default {
                     : this.$t('tokenCard.tokenInfo.labels.originType');
                 this.tokenDetail.explorerLink = this.tokenDetail.explorerLink
                     || (this.tokenDetail.gateway ? null : getExplorerLink());
+                this.tokenDetail.showTotalSupply = BigNumber.toBasic(this.tokenDetail.totalSupply, this.tokenDetail.tokenDecimals);
             }).catch(err => {
                 console.warn(err);
             });
