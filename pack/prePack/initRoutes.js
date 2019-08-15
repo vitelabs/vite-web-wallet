@@ -144,7 +144,8 @@ function getRoutesFile(pagePaths, routes, routeConfig) {
         _routes += ']},';
     }
 
-    _routes += `{ path: \'/\', redirect: \'${ routeConfig.prePath || '' }/index\' },{ path: \'*\', redirect: \'${ routeConfig.prePath || '' }/notFound\' }`;
+    _routes += `{ path: \'/\', redirect: \'${ routeConfig.prePath || '' }/index\' }`;
+    // ,{ path: \'*\', redirect: \'${ routeConfig.prePath || '' }/notFound\' }
 
     routesStr += `export default { routes: [${ _routes }] }`;
     return routesStr;
