@@ -92,7 +92,7 @@ function pushRoute({ pagePath, name, parent }, { pagePaths, routes }) {
     };
 
     // _route is children, push children
-    if (parent !== name) {
+    if (parent && parent !== name) {
         routes[parent] = routes[parent] || {};
         routes[parent].children = routes[parent].children || [];
         routes[parent].children.push(_route);
