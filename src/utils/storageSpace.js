@@ -24,3 +24,17 @@ export const addrSpace = {
         storage.setItem(`${ this.key }_${ key }`, content);
     }
 };
+
+export const emptySpace = {
+    get key() {
+        return 'vite';
+    },
+
+    getItem(key) {
+        return storage.getItem(`${ this.key }_${ key }`);
+    },
+
+    setItem(key, content) {
+        storage.setItem(`${ this.key }_${ key }`, content);
+    }
+};

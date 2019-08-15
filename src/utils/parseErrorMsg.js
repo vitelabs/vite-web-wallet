@@ -6,3 +6,10 @@ export const rpcCode = function (err) {
     // err.error ? err.error.message || '' : '';
     return code;
 };
+
+// code 11000 wc error
+// 11012 用户拒绝
+// 11020 链接断开
+// code 12000 web error
+// code 12001 未解锁
+// code 12002 无激活账户
