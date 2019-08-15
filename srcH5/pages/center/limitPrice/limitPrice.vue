@@ -23,30 +23,21 @@
                 </span>
             </div>
         </div>
-
-        <logout-view v-if="!isLogin"></logout-view>
-
-        <div v-if="isLogin" class="ex-center-login">
-            <order orderType="buy"></order>
-            <div class="order-border"></div>
-            <order orderType="sell" class="order-wrapper"></order>
-        </div>
-
+        <order orderType="buy"></order>
+        <order orderType="sell"></order>
         <vip-confirm v-if="isShowVipConfirm" :close="hideVipConfirm"></vip-confirm>
     </div>
 </template>
 
 <script>
-import logoutView from './logout';
 import order from './order.vue';
 import vipConfirm from './vipConfirm.vue';
-import { StatusMap } from 'wallet';
 import { execWithValid } from 'utils/execWithValid';
 import BigNumber from 'utils/bigNumber';
 import statistics from 'utils/statistics';
 
 export default {
-    components: { logoutView, order, vipConfirm },
+    components: { order, vipConfirm },
     data() {
         return {
             isShowHelp: false,
@@ -97,9 +88,6 @@ export default {
         },
         markerInfo() {
             return this.$store.state.exchangeFee.marketInfo;
-        },
-        isLogin() {
-            return this.$store.state.wallet.status === StatusMap.UNLOCK;
         },
         address() {
             return this.$store.getters.activeAddr;
@@ -215,23 +203,6 @@ export default {
             background: url('~assets/imgs/vip.svg');
             background-size: 100% 100%;
         }
-    }
-}
-
-.ex-center-login {
-    display: flex;
-    flex-direction: row;
-    flex: 1;
-    width: 100%;
-    height: 100%;
-    box-sizing: border-box;
-    padding: 8px 0 10px;
-
-    .order-border {
-        height: 100%;
-        opacity: 0.136;
-        border: 1px dashed #D7E0E8;
-        margin: 0 6px;
     }
 }
 </style>
