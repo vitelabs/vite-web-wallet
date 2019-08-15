@@ -51,9 +51,9 @@ block originContent
         .content__item
             .label {{$t("tokenCard.tokenInfo.labels.media")}}:
             div
-                img.media-icon(src="~assets/imgs/facebook.svg" v-show="tokenDetail.facebookLink")
-                img.media-icon(src="~assets/imgs/twitter.svg" v-show="tokenDetail.twitterLink")
-                img.media-icon(src="~assets/imgs/telegram.svg" v-show="tokenDetail.telegramLink")
+                img.media-icon(src="~assets/imgs/facebook.svg" v-show="tokenDetail.facebookLink" @click="openUrl(tokenDetail.facebookLink)")
+                img.media-icon(src="~assets/imgs/twitter.svg" v-show="tokenDetail.twitterLink" @click="openUrl(tokenDetail.twitterLink)")
+                img.media-icon(src="~assets/imgs/telegram.svg" v-show="tokenDetail.telegramLink" @click="openUrl(tokenDetail.telegramLink)")
     .tab-content(v-if="tabName==='gate'")
         .content__item(v-if="token.gateInfo.url")
             .label {{$t("tokenCard.gateInfo.name")}}:
