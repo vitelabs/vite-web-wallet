@@ -139,6 +139,7 @@
         "err": "发生错误",
         "request": "{name}请求已发送，请耐心等待",
         "copy": "复制成功",
+        "copyShare":"分享链接复制成功",
         "addrFormat": "账户地址格式错误",
         "amtFormat": "金额格式错误",
         "transSucc": "转账成功",
@@ -148,7 +149,8 @@
         "nodeErr": "节点异常，请您稍后重试",
         "operateSuccess": "操作成功",
         "operateFail": "操作失败",
-        "unreceived": "钱包账户还未解锁，请解锁后使用更多功能"
+        "unreceived": "钱包账户还未解锁，请解锁后使用更多功能",
+        "unLogin":"请登录后重试"
     },
     "beforeUse": {
         "title": "使用前必读",
@@ -180,7 +182,7 @@
         "restore": "助记词恢复账户",
         "record": "记录助记词",
         "prompt": "助记词是您恢复账户的重要手段，如给予他人，您的资产会被他人获取。请谨慎记录，以防丢失。",
-        "placeholder": "请输入您的助记词",
+        "placeholder": "请输入您的助记词。助记词格式：单词、空格、单词...空格、单词",
         "empty": "助记词输入为空",
         "error": "助记词错误",
         "hint": "助记词格式：单词、空格、单词...空格、单词",
@@ -397,6 +399,7 @@
                 "all": "全部"
             },
             "amountPlaceholder": "请输入转出金额，最小不少于{min}",
+            "labelPlaceholder":"请输入 {labelName}",
             "addressPlaceholder": "请输入{token}转出地址",
             "successTips": "转出请求已发送",
             "failTips":"网关节点出错，请检查网关设置"
