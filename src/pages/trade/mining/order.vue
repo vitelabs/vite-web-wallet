@@ -78,7 +78,7 @@ export default {
             getOrderMiningDetail({
                 address: this.address,
                 offset
-                })
+            })
                 .then(data => {
                     if (!data) {
                         return;
