@@ -138,6 +138,7 @@
         "err": "エラーが発生しました",
         "request": "リクエストが送信されました。しばらくお待ちください。",
         "copy": "コピーが成功しました",
+        "copyShare": "Copy share link successful!",
         "addrFormat": "アドレス形式が間違っています",
         "amtFormat": "数値形式が間違っています",
         "transSucc": "トランザクション成功",
@@ -147,7 +148,8 @@
         "bigger0": "この値は{0} より大きい数字にしなければなりません",
         "operateSuccess": "オペレーション成功",
         "operateFail": "操作に失敗しました。",
-        "unreceived": "使用前にウォレットをアンロックしてください"
+        "unreceived": "使用前にウォレットをアンロックしてください",
+        "unLogin": "Please login"
     },
     "beforeUse": {
         "title": "利用前に読んで下さい",
@@ -392,6 +394,7 @@
                 "fee": "手数料",
                 "all": "すべて"
             },
+            "labelPlaceholder": "Please input {labelName}",
             "amountPlaceholder": "{min}以上の金額を入力してください",
             "addressPlaceholder": "転送先アドレスを入力して下さい",
             "successTips": "転送リクエストが送信されました",
