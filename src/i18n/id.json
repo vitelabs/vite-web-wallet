@@ -1,5 +1,5 @@
 {
-    "lang": "Indonesia",
+    "lang": "Inggris",
     "help": "Bantuan",
     "start": "Mulai",
     "login": "Masuk",
@@ -179,7 +179,7 @@
         "restore": "Pulihkan Akun dengan Seed Phrase",
         "record": "Hasilkan Seed Phrase",
         "prompt": "Seed Phrase mnemonic adalah satu-satunya cara untuk mengembalikan dompet Anda. Anda sangat disarankan untuk menuliskan frasa dan menyimpannya di tempat yang aman di mana hanya Anda yang dapat mengaksesnya.",
-        "placeholder": "Silakan masukkan frase seed mnemonic Anda",
+        "placeholder": "Please input your mnemonic seed phrase. Example: apple banana peach mango pear ...",
         "empty": "Masukan dari frase seed tidak boleh kosong",
         "error": "Seed Phrase salah. Coba lagi",
         "hint": "Contoh: apel pisang peach mangga ...",
@@ -367,7 +367,7 @@
             "title": "Cross-Chain Receive",
             "addrErr": "Ada yang salah dengan node gateway, harap periksa pengaturan jaringan Anda",
             "addressTitle": "Alamat penerima",
-            "labelTips": "(Silakan gunakan'{labelName}' ini dengan alamat terima Anda, jika tidak aset Anda akan hilang",
+            "labelTips": " (Please use this '{labelName}' with your recipient address, otherwise your assets will lose)",
             "labelCodeTips": "Harap Pindai kode QR dari {labelName}",
             "codeTips": "Pindai kode QR untuk menyetor. Silakan transfer dengan dompet yang mendukung {tokenSymbol}",
             "tips": [
