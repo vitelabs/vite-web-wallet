@@ -138,6 +138,7 @@
         "err": "Ups, terjadi kesalahan",
         "request": "{name} permintaan telah dikirim, harap tunggu",
         "copy": "Berhasil disalin",
+        "copyShare": "Copy share link successful!",
         "addrFormat": "Format alamat salah",
         "amtFormat": "Format jumlah yang salah",
         "transSucc": "Transaksi berhasil!",
@@ -147,7 +148,8 @@
         "bigger0": "Nilai harus lebih besar dari 0",
         "operateSuccess": "Operasi sukses",
         "operateFail": "Operasi gagal",
-        "unreceived": "Buka kunci dompet Anda sebelum digunakan"
+        "unreceived": "Buka kunci dompet Anda sebelum digunakan",
+        "unLogin": "Please login"
     },
     "beforeUse": {
         "title": "Baca Sebelum Digunakan",
@@ -392,6 +394,7 @@
                 "fee": "Biaya",
                 "all": "Semua"
             },
+            "labelPlaceholder": "Please input {labelName}",
             "amountPlaceholder": "Silakan masukkan jumlah transfer yang tidak boleh kurang dari {min}",
             "addressPlaceholder": "Silakan masukkan alamat transfer",
             "successTips": "Permintaan transfer telah dikirim",
