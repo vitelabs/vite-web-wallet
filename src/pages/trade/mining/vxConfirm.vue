@@ -38,6 +38,7 @@ import sendTx from 'utils/sendTx';
 import bigNumber from 'utils/bigNumber';
 import statistics from 'utils/statistics';
 import { verifyAmount, verifyWithdrawAmount } from 'utils/validations';
+import router from 'router';
 
 const minLimit = 134;
 
@@ -62,6 +63,9 @@ export default {
             amount: '',
             amountErr: ''
         };
+    },
+    beforeMount() {
+        window.fffff = this;
     },
     computed: {
         canOrder() {
@@ -141,7 +145,7 @@ export default {
             this.close && this.close();
         },
         staking() {
-            statistics.event(this.$route.name, this.actionType === 1 ? 'addQuota-submit' : 'withdrawQuota-submit', this.accountAddr || '');
+            statistics.event(router.currentRoute.name, this.actionType === 1 ? 'addQuota-submit' : 'withdrawQuota-submit', this.accountAddr || '');
 
             const amount = bigNumber.toMin(this.amount, this.viteTokenInfo.decimals);
 
