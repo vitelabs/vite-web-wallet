@@ -179,7 +179,7 @@
         "restore": "Restore Account by Seed Phrase",
         "record": "Generate Seed Phrase",
         "prompt": "Mnemonic seed phrase is the only way to restore your wallet. You are strongly advised to write down the phrase and keep it in a safe place where only you can access.",
-        "placeholder": "Please input your mnemonic seed phrase",
+        "placeholder": "Please input your mnemonic seed phrase. Example: apple banana peach mango pear ...",
         "empty": "The input of seed phrase cannot be empty",
         "error": "Incorrect seed phrase. Try again",
         "hint": "Example: apple banana peach mango pear ...",
@@ -367,7 +367,7 @@
             "title": "Cross-Chain Receive",
             "addrErr": "Something went wrong with gateway node, please check your network settings",
             "addressTitle": "Recipient Address",
-            "labelTips": "(Please use this '{labelName}' with your receive address, otherwise your assets will lose",
+            "labelTips": " (Please use this '{labelName}' with your recipient address, otherwise your assets will lose)",
             "labelCodeTips": "Please Scan the QRcode from {labelName}",
             "codeTips": "Scan QR code to deposit. Please transfer with the wallet that supports {tokenSymbol}",
             "tips": [
