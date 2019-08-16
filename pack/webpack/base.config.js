@@ -113,6 +113,20 @@ module.exports = {
                 use: [
                     { loader: 'style-loader' },
                     { loader: 'css-loader', options: { minimize: true } },
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            parser: 'postcss-scss',
+                            plugins: [
+                                require('autoprefixer'),
+                                require('postcss-pxtorem')({
+                                    rootValue: 100,
+                                    unitPrecision: 5,
+                                    propList: [ '*', '!border*' ]
+                                })
+                            ]
+                        }
+                    },
                     { loader: 'sass-loader' }
                 ]
             }, {

@@ -20,6 +20,7 @@ $up-font-color: $green;
 }
 
 .ex-tab-list {
+    display: flex;
     padding-top: 4px;
     width: 100%;
     background: rgba(243,245,249,1);
@@ -27,12 +28,13 @@ $up-font-color: $green;
     .ex-tab {
         display: inline-block;
         font-size: 13px;
-        font-weight: 600;
-        line-height: 16px;
+        line-height: 17px;
         padding: 0px 6px 3px;
         color: rgba(29,32,36,0.6);
         @include font-family-bold();
         border-left: 1px solid rgba(205,204,204,1);
+        margin-top: 6px;
+
         &:first-child {
             border: none;
         }
@@ -40,10 +42,10 @@ $up-font-color: $green;
             border: none;
         }
         &.active {
+            margin-top: 0;
             border: none;
             padding-top: 6px;
             background: #fff;
-            line-height: 17px;
             border-radius: 4px 4px 0px 0px;
         }
         .favorite-icon {
