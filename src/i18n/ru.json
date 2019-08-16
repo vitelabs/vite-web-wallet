@@ -138,6 +138,7 @@
         "err": "Произошла ошибка",
         "request": "{name} запрос отправлен, пожалуйста, подождите",
         "copy": "Успешно скопировано",
+        "copyShare": "Copy share link successful!",
         "addrFormat": "Некорректный формат адреса",
         "amtFormat": "Некорректный формат суммы",
         "transSucc": "Транзакция выполнена успешно!",
@@ -147,7 +148,8 @@
         "bigger0": "Значение должно быть больше 0",
         "operateSuccess": "Операция Выполнена Успешно",
         "operateFail": "Операция Не Выполнена",
-        "unreceived": "Разблокируйте свой кошелек перед использованием"
+        "unreceived": "Разблокируйте свой кошелек перед использованием",
+        "unLogin": "Please login"
     },
     "beforeUse": {
         "title": "Прочитайте перед использованием",
@@ -392,6 +394,7 @@
                 "fee": "Fee",
                 "all": "All"
             },
+            "labelPlaceholder": "Please input {labelName}",
             "amountPlaceholder": "Please input transfer amount which should not be less than {min}",
             "addressPlaceholder": "Please input transfer address",
             "successTips": "Transfer request has been sent",
