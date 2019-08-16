@@ -11,9 +11,9 @@
 
         <create ref="createDom" :submit="validMnemonic"></create>
 
-        <div class="note">{{ $t('mnemonic.hint') }}</div>
+        <!--<div class="note">{{ $t('mnemonic.hint') }}</div>-->
 
-        <div class="__btn_list">
+        <div class="__btn_list note">
             <span class="__btn __btn_border __pointer" @click="leftClick" >{{ $t(leftTxt) }}</span>
             <div class="__btn __btn_all_in __pointer" @click="valid">
                 <span v-show="!isLoading">{{ $t('create.finish') }}</span>
@@ -162,6 +162,9 @@ export default {
 
 <style lang="scss" scoped>
 .wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     box-sizing: border-box;
     position: relative;
     background: #fff;
@@ -178,14 +181,13 @@ export default {
 
     textarea {
         width: 100%;
-        height: 100%;
         resize: none;
         text-align: left;
         word-wrap: break-word;
 
         &.center {
             text-align: center;
-            line-height: 60px;
+            /*line-height: 60px;*/
         }
     }
 

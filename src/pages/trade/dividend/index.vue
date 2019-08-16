@@ -243,9 +243,9 @@ export default {
         },
         goLink() {
             if (this.$i18n.locale === 'zh') {
-                openUrl('https://dex.vite.wiki/zh/dex/#vx-%E6%89%8B%E7%BB%AD%E8%B4%B9%E5%88%86%E7%BA%A2');
+                openUrl('https://vite.wiki/zh/dex/#vx-%E6%89%8B%E7%BB%AD%E8%B4%B9%E5%88%86%E7%BA%A2');
             }
-            openUrl('https://dex.vite.wiki/dex/#vx-holder-dividends');
+            openUrl('https://vite.wiki/dex/#vx-holder-dividends');
         }
     }
 };
