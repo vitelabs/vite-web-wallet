@@ -179,7 +179,7 @@
         "restore": "シードフレーズによるアカウントの復元",
         "record": "シードフレーズの生成",
         "prompt": "ニーモニックシードフレーズは、ウォレットを復元する唯一の方法です。 フレーズを書き留めて、自分だけがアクセスできる安全な場所に保管することを強くお勧めします。",
-        "placeholder": "ニーモニックシードフレーズを入力してください",
+        "placeholder": "Please input your mnemonic seed phrase. Example: apple banana peach mango pear ...",
         "empty": "シードフレーズの入力が空欄です",
         "error": "シードフレーズが間違っています 再入力してください",
         "hint": "例：apple banana peach mango pear ...",
@@ -367,7 +367,7 @@
             "title": "クロスチェーン受信",
             "addrErr": "ゲートウェイノードに問題が発生しました ネットワーク設定を確認してください",
             "addressTitle": "受取アドレス",
-            "labelTips": "受信アドレスでこの「{labelName}」を使用してください。そうしないと、アセットが失われます",
+            "labelTips": " (Please use this '{labelName}' with your recipient address, otherwise your assets will lose)",
             "labelCodeTips": "{labelName} からQRコードをスキャンして下さい",
             "codeTips": "QRコードをスキャンして入金します {tokenSymbol}をサポートするウォレットで転送してください",
             "tips": [
