@@ -1,15 +1,22 @@
 <template>
-    <div id="vite-wallet-app" class="app-wrapper" :class="{
-        'dex': $route.name.indexOf('trade') !== -1,
-        'wallet': $route.name.indexOf('trade') === -1
-    }">
-        <router-view/>
+    <div
+        id="vite-wallet-app"
+        class="app-wrapper"
+        :class="{
+            dex: $route.name.indexOf('trade') !== -1,
+            wallet: $route.name.indexOf('trade') === -1
+        }"
+    >
+        <router-view />
         <notice-list></notice-list>
     </div>
 </template>
 
 <script>
 import noticeList from 'components/noticeList.vue';
+import { emptySpace } from 'utils/storageSpace';
+import { receiveInviteDialog } from 'components/dialog';
+const inviteCodeKey = 'INVITE_CODE';
 
 export default {
     components: { noticeList },
@@ -18,7 +25,12 @@ export default {
         this.$store.dispatch('startLoopBalance');
         this.$store.dispatch('startLoopExchangeBalance');
         this.$store.dispatch('exFetchLatestOrder');
-        this.$store.dispatch('getInvitedCode');
+        this.$store
+            .dispatch('getInvitedCode')
+            .then(code => Number(code) === 0 && this.checkInvite)
+            .catch(() => {
+                this.checkInvite();
+            });
     },
     computed: {
         currHDAcc() {
@@ -26,6 +38,18 @@ export default {
         },
         address() {
             return this.$store.getters.activeAddr;
+        }
+    },
+    methods: {
+        checkInvite() {
+            if (Number(this.$route.query['ldfjacia']) > 0) {
+                // random for avoid bloked
+                emptySpace.setItem(inviteCodeKey,
+                    this.$route.query['ldfjacia']);
+                if (this.$route.name === 'tradeCenter') {
+                    receiveInviteDialog();
+                }
+            }
         }
     },
     watch: {
@@ -40,7 +64,7 @@ export default {
             this.$store.commit('commitClearPledge');
             this.$store.commit('commitClearTransList');
             this.address && this.$store.dispatch('exFetchLatestOrder');
-            this.$store.dispatch('getInvitedCode');
+            this.$store.dispatch('getInvitedCode').catch(console.log);
         }
     }
 };

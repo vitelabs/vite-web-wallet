@@ -138,6 +138,7 @@
         "err": "Oops, error occurs",
         "request": "{name} request has sent, please wait",
         "copy": "Successfully copied",
+        "copyShare":"Copy share link successful!",
         "addrFormat": "Incorrect address format",
         "amtFormat": "Incorrect amount format",
         "transSucc": "Transaction successful!",
@@ -147,7 +148,8 @@
         "bigger0": "Value must be greater than 0",
         "operateSuccess": "Operation Successful",
         "operateFail": "Operation Failed",
-        "unreceived": "Unlock you wallet before use"
+        "unreceived": "Unlock you wallet before use",
+        "unLogin":"Please login"
     },
     "beforeUse": {
         "title": "Read Before Use",
@@ -378,6 +380,7 @@
                 "fee": "Fee",
                 "all": "All"
             },
+            "labelPlaceholder":"Please input {labelName}",
             "amountPlaceholder": "Please input transfer amount which should not be less than {min}",
             "addressPlaceholder": "Please input transfer address",
             "successTips": "Transfer request has been sent",

@@ -138,6 +138,7 @@
         "err": "发生错误",
         "request": "{name}请求已发送，请耐心等待",
         "copy": "复制成功",
+        "copyShare":"分享链接复制成功",
         "addrFormat": "账户地址格式错误",
         "amtFormat": "金额格式错误",
         "transSucc": "转账成功",
@@ -147,7 +148,8 @@
         "nodeErr": "节点异常，请您稍后重试",
         "operateSuccess": "操作成功",
         "operateFail": "操作失败",
-        "unreceived": "钱包账户还未解锁，请解锁后使用更多功能"
+        "unreceived": "钱包账户还未解锁，请解锁后使用更多功能",
+        "unLogin":"请登录后重试"
     },
     "beforeUse": {
         "title": "使用前必读",
@@ -386,7 +388,8 @@
                 "all": "全部"
             },
             "amountPlaceholder": "请输入转出金额，最小不少于{min}",
-            "addressPlaceholder": "请输入转出地址",
+            "labelPlaceholder":"请输入 {labelName}",
+            "addressPlaceholder": "请输入{token}转出地址",
             "successTips": "转出请求已发送",
             "failTips":"网关节点出错，请检查网关设置"
         },

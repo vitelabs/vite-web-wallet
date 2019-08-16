@@ -4,7 +4,8 @@ block content
     img.bg-img(src="~assets/imgs/invite.png")
     div(v-if="inviteCode")
         .invite-code {{$t('assets.invite.myCode')}}{{this.inviteCode}}
-            img.title_icon.copy.__pointer(src="~assets/imgs/copy_default.svg" @click="copy")
+            img.copy-share.__pointer(src="~assets/imgs/share.svg" @click="copyShare()")
+            img.copy.__pointer(src="~assets/imgs/copy_default.svg" @click="copy")
         .invite-info
             .item
                 img.left(src="~assets/imgs/invite_num.png")
@@ -78,23 +79,29 @@ export default {
             return this.inviteCode;
         },
         inspector() {
-            genCode().then(() => {
-                this.$toast(this.$t('assets.invite.successToast'));
-                doUntill({
-                    createPromise: () => this.getCode(),
-                    interval: 1000,
-                    times: 3
-                })
-                    .then(res => {
-                        console.log(res);
+            genCode()
+                .then(() => {
+                    this.$toast(this.$t('assets.invite.successToast'));
+                    doUntill({
+                        createPromise: () => this.getCode(),
+                        interval: 1000,
+                        times: 3
                     })
-                    .catch(e => {
-                        this.$toast(this.$t('assets.invite.noResult'), e);
-                    });
-            }).catch(e => {
-                this.$toast(this.$t('assets.invite.failToast'), e);
-            });
+                        .then(res => {
+                            console.log(res);
+                        })
+                        .catch(e => {
+                            this.$toast(this.$t('assets.invite.noResult'), e);
+                        });
+                })
+                .catch(e => {
+                    this.$toast(this.$t('assets.invite.failToast'), e);
+                });
             return Promise.reject('no close');
+        },
+        copyShare() {
+            copy(`${ location.origin }/trade?ldfjacia=${ this.inviteCode }`);
+            this.$toast(this.$t('hint.copyShare'));
         },
         copy() {
             copy(this.inviteCode);
@@ -106,8 +113,9 @@ export default {
 
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
-/deep/ .strong{
-    color: #1D2024;
+/deep/ .strong {
+    //tricks ,no scope
+    color: #1d2024;
     @include font-family-bold();
 }
 .bg-img {
@@ -184,7 +192,7 @@ export default {
     }
     &.edit {
         text-align: left;
-        background-color: rgba(176, 192, 237, 0.42);
+        background-color: rgba(243, 246, 249, 1);
         border: 1px solid #d4dee7;
         @include font-family-bold();
     }
@@ -221,6 +229,14 @@ export default {
     .copy {
         position: absolute;
         right: 15px;
+        width: 20px;
+        height: 20px;
+        &-share {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            right: 47px;
+        }
     }
 }
 .invite-info {
