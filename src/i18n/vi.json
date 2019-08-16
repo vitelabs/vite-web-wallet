@@ -138,6 +138,7 @@
         "err": "Đã xảy ra lỗi",
         "request": "{name} đã gửi yêu cầu, vui lòng đợi",
         "copy": "Sao chép thành công",
+        "copyShare": "Copy share link successful!",
         "addrFormat": "Sai định dạng địa chỉ",
         "amtFormat": "Sai định dạng số lượng",
         "transSucc": "Giao dịch thành công!",
@@ -147,7 +148,8 @@
         "bigger0": "Số lượng phải lớn hơn 0",
         "operateSuccess": "Thao tác Thành công",
         "operateFail": "Thao tác Thất bại",
-        "unreceived": "Mở khóa ví trước khi sử dụng"
+        "unreceived": "Mở khóa ví trước khi sử dụng",
+        "unLogin": "Please login"
     },
     "beforeUse": {
         "title": "Đọc kỹ trước khi sử dụng",
@@ -392,6 +394,7 @@
                 "fee": "Phí",
                 "all": "Tất cả"
             },
+            "labelPlaceholder": "Please input {labelName}",
             "amountPlaceholder": "Vui lòng điền số lượng nhiều hơn {min}",
             "addressPlaceholder": "Vui lòng điền địa chỉ chuyển",
             "successTips": "Yêu cầu chuyển đã được gửi",
