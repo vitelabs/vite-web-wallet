@@ -187,6 +187,7 @@ export default {
 
         &.center {
             text-align: center;
+
             /*line-height: 60px;*/
         }
     }
