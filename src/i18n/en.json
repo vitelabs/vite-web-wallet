@@ -148,7 +148,8 @@
         "bigger0": "Value must be greater than 0",
         "operateSuccess": "Operation Successful",
         "operateFail": "Operation Failed",
-        "unreceived": "Unlock you wallet before use"
+        "unreceived": "Unlock you wallet before use",
+        "unLogin":"Please login"
     },
     "beforeUse": {
         "title": "Read Before Use",
