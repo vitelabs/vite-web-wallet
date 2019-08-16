@@ -57,12 +57,13 @@ export default {
 @import '~h5Assets/scss/center.scss';
 
 .price-wrapper {
+    display: flex;
+    justify-content: center;
     height: 30px;
     line-height: 30px;
     border-top: 1px solid rgba(229, 237, 243, 1);
     border-bottom: 1px solid rgba(229, 237, 243, 1);
     text-align: center;
-    // @include font-family-bold();
     font-family: $font-H;
     font-weight: 600;
 
@@ -98,6 +99,7 @@ export default {
     .real-price {
         font-size: 12px;
         color: #24272b;
+        margin-left: 10px;
     }
 }
 </style>
