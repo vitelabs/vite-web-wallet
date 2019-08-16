@@ -2,28 +2,28 @@
     <div class="trade-mining-wrapper">
         <div class="tab_title">
             <div class="tab_title_item" @click="tabName = 'trade'" :class="{active:tabName==='trade'}">
-                <img src="" />
+                <img src="~assets/imgs/exchange/mining/trade.png" />
                 <div>
-                    <div class="label">发送挖矿</div>
+                    <div class="label">{{$t('tradeMining.txTitle')}}</div>
                     <div class="amount">{{tradeMiningTotal}} VX</div>
                 </div>
             </div>
             <div class="tab_title_item" @click="tabName = 'staking'" :class="{active:tabName==='staking'}">
-                <img />
+                <img src="~assets/imgs/exchange/mining/staking.png" />
                 <div>
-                    <div class="label">发送挖矿</div>
+                    <div class="label">{{$t('tradeMining.quotaTitle')}}</div>
                     <div class="amount">{{stakingMiningTotal}} VX</div>
                 </div>
             </div>
             <div class="tab_title_item" @click="tabName = 'invite'" :class="{active:tabName==='invite'}">
-                <img />
+                <img src="~assets/imgs/exchange/mining/invite.png" />
                 <div>
-                    <div class="label">发送挖矿</div>
+                    <div class="label">{{$t('inviteMining.txTitle')}}</div>
                     <div class="amount">{{inviteMiningTotal}} VX</div>
                 </div>
             </div>
             <div class="tab_title_item" @click="tabName = 'order'" :class="{active:tabName==='order'}">
-                <img />
+                <img src="~assets/imgs/exchange/mining/order.png" />
                 <div>
                     <div class="label">发送挖矿</div>
                     <div class="amount">{{orderMiningTotal}} VX</div>
@@ -38,7 +38,6 @@
         </div>
     </div>
 </template>
-
 <script>
 import confirm from 'components/confirm/index.js';
 import { miningTrade, miningPledge } from 'services/trade';
@@ -146,6 +145,8 @@ export default {
         }
         img{
             margin-right: 20px;
+            height: 34px;
+            width:34px;
         }
     }
 
