@@ -130,19 +130,19 @@ export default {
 
 .tab_title{
     display: flex;
-    margin-bottom:12px;
-    padding:22px 0;
+    margin-bottom: 12px;
+    padding: 22px 0;
     &_item{
         cursor: pointer;
         user-select: none;
         flex-grow: 1;
-        padding:20px 0 20px 30px;
+        padding: 20px 0 20px 30px;
         display: flex;
         align-items: center;
         justify-content: flex-start;
         &.active{
-            background:rgba(0,122,255,0.04);
-            border-bottom:2px solid rgba(0,122,255,1);;
+            background: rgba(0,122,255,0.04);
+            border-bottom: 2px solid rgba(0,122,255,1);;
         }
         img{
             margin-right: 20px;
