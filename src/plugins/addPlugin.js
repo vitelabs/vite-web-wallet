@@ -38,7 +38,7 @@ export default {
         Vue.prototype.$toast = function (message, err, type, position) {
             if (!err) {
                 toast(message, type, position);
-                return ;
+                return;
             }
 
             const error = err && err.error ? err.error : err || null;
@@ -49,16 +49,27 @@ export default {
             if (code === '1000001') {
                 return;
             }
-            if (code === 11012 || code === 11020) {// wc 取消授权，断开
+            if (code === 11012 || code === 11020) {
+                // wc 取消授权，断开
                 return;
             }
-
+            if (code === 12001) {
+                // 未解锁
+                return;
+            }
+            if (code === 12002) {
+                // 无激活账户
+                toast(this.$t('hint.unLogin'), type, position);
+                return;
+            }
             if (!this || !this.$t) {
                 return;
             }
 
-            let msg = code === -1 || !this.$i18n.messages.zh.errCode[Math.abs(code)]
-                ? message || this.$t('hint.err') : this.$t(`errCode.${ Math.abs(code) }`);
+            let msg
+        = code === -1 || !this.$i18n.messages.zh.errCode[Math.abs(code)]
+            ? message || this.$t('hint.err')
+            : this.$t(`errCode.${ Math.abs(code) }`);
             if (Math.abs(code) === 32002) {
                 msg = `${ errMsg } (${ code })`;
             }
