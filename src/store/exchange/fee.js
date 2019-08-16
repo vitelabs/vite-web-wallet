@@ -100,7 +100,7 @@ const getters = {
         return (baseTakerFee + Number(operatorTakerFee) - vipFee) * (1 - getters.inviteFeeDiscount);
     },
     inviteFeeDiscount(state) {
-        if (state.invitedCode) {
+        if (+state.invitedCode) {
             return 0.1;
         }
         return 0;
