@@ -55,6 +55,9 @@ export default {
             if (code === 12001) {// 未解锁
                 return;
             }
+            if (code === 12002) {// 无激活账户
+                this.$t('hint.unLogin');
+            }
             if (!this || !this.$t) {
                 return;
             }
