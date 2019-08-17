@@ -118,7 +118,6 @@ export default {
             this.showVxConfirm(actionType);
         },
         showVxConfirm: execWithValid(function (actionType) {
-            debugger;
             this.vxConfirm = insertTo(VxConfirm, {
                 actionType,
                 stakingObj: this.stakingObj,

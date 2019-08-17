@@ -28,20 +28,19 @@ export default {
     data() {
         return {
             currentPage: 0,
-            miningTotal: 0,
             listTotal: 0,
             miningList: [],
             headList: [
                 {
-                    text: this.$t('tradeMining.tbHead.date'),
+                    text: this.$t('orderMining.tbHead.date'),
                     cell: 'date'
                 },
                 {
-                    text: this.$t('tradeMining.tbHead.fee'),
-                    cell: 'fee'
+                    text: this.$t('orderMining.tbHead.ratio'),
+                    cell: 'ratio'
                 },
                 {
-                    text: this.$t('tradeMining.tbHead.mining'),
+                    text: this.$t('orderMining.tbHead.mining'),
                     cell: 'mining'
                 }
             ]
@@ -55,11 +54,7 @@ export default {
             return this.miningList.map(item => {
                 return {
                     date: date(item.date * 1000, this.$i18n.locale),
-                    fee: `${ bigNumber.formatNum(item.feeAmount || 0, 8) } ${
-                        item.miningToken
-                    }`,
-                    pledge: `${ bigNumber.formatNum(item.pledgeAmount || 0,
-                        8) } VITE`,
+                    ratio:`${(item.ratio*100).toFixed(2)}%`,
                     mining: `${ bigNumber.formatNum(item.miningAmount || 0, 8) } VX`
                 };
             });
@@ -86,9 +81,6 @@ export default {
 
                     this.listTotal = data.total || 0;
                     this.currentPage = pageNumber ? pageNumber - 1 : 0;
-                    this.miningTotal = data.miningTotal
-                        ? bigNumber.formatNum(data.miningTotal, 8)
-                        : 0;
                     this.miningList = data.miningList || [];
                 })
                 .catch(err => {

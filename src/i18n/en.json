@@ -1062,7 +1062,15 @@
         "more": "Learn more about VX mining rules"
     },
     "inviteMining":{
-        "txTitle":"Referring as Mining Total Income"
+        "title":"Referring as Mining Total Income"
+    },
+    "orderMining":{
+        "title":"Referring as Mining Total Income",
+        "tbHead": {
+            "date": "Date",
+            "ratio": "Ratio",
+            "mining": "Mining Amount"
+        }
     },
     "tradeDividend": {
         "title": "Dividends",

@@ -1060,7 +1060,15 @@
         "more": "了解更多VX挖矿规则"
     },
     "inviteMining":{
-        "txTitle":"邀请挖矿总收益"
+        "title":"Referring as Mining Total Income"
+    },
+    "orderMining":{
+        "title":"Referring as Mining Total Income",
+        "tbHead": {
+            "date": "Date",
+            "ratio": "Ratio",
+            "mining": "Mining Amount"
+        }
     },
     "tradeDividend": {
         "title": "分红",
