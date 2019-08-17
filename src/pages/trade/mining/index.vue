@@ -155,7 +155,7 @@ export default {
         }
         .amount{
             font-size: 16px;
-            color:#1D2024;
+            color: #1D2024;
         }
     }
 
