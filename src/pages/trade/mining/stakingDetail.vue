@@ -32,18 +32,18 @@
 </template>
 
 <script>
-import date from "utils/date";
-import bigNumber from "utils/bigNumber";
-import { constant } from "@vite/vitejs";
+import date from 'utils/date';
+import bigNumber from 'utils/bigNumber';
+import { constant } from '@vite/vitejs';
 
 const Vite_Token_Info = constant.Vite_Token_Info;
 
 export default {
     mounted() {
-        this.$store.dispatch("startLoopHeight");
+        this.$store.dispatch('startLoopHeight');
     },
     destroyed() {
-        this.$store.dispatch("stopLoopHeight");
+        this.$store.dispatch('stopLoopHeight');
     },
     props: {
         stakingObj: {
@@ -65,20 +65,16 @@ export default {
         stakingDetail() {
             if (!this.stakingObj) {
                 return {
-                    amount: "",
-                    withdrawTime: "",
-                    withdrawHeight: ""
+                    amount: '',
+                    withdrawTime: '',
+                    withdrawHeight: ''
                 };
             }
             return {
-                withdrawTime: date(
-                    this.stakingObj.withdrawTime * 1000,
-                    this.$i18n.locale
-                ),
-                amount: bigNumber.toBasic(
-                    this.stakingObj.amount || 0,
-                    Vite_Token_Info.decimals
-                ),
+                withdrawTime: date(this.stakingObj.withdrawTime * 1000,
+                    this.$i18n.locale),
+                amount: bigNumber.toBasic(this.stakingObj.amount || 0,
+                    Vite_Token_Info.decimals),
                 withdrawHeight: this.stakingObj.withdrawHeight
             };
         }
@@ -122,7 +118,7 @@ export default {
         align-items: center;
     }
     .btn {
-        display:flex;
+        display: flex;
         justify-content: center;
         align-items: center;
         min-width: 100px;
