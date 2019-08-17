@@ -18,14 +18,14 @@
             <div class="tab_title_item" @click="tabName = 'invite'" :class="{active:tabName==='invite'}">
                 <img src="~assets/imgs/exchange/mining/invite.png" />
                 <div>
-                    <div class="label">{{$t('inviteMining.txTitle')}}</div>
+                    <div class="label">{{$t('inviteMining.title')}}</div>
                     <div class="amount">{{inviteMiningTotal}} VX</div>
                 </div>
             </div>
             <div class="tab_title_item" @click="tabName = 'order'" :class="{active:tabName==='order'}">
                 <img src="~assets/imgs/exchange/mining/order.png" />
                 <div>
-                    <div class="label">发送挖矿</div>
+                    <div class="label">{{$t('orderMining.title')}}</div>
                     <div class="amount">{{orderMiningTotal}} VX</div>
                 </div>
             </div>
@@ -147,6 +147,15 @@ export default {
             margin-right: 20px;
             height: 34px;
             width: 34px;
+        }
+        @include font-family-bold();
+        .label{
+            font-size: 13px;
+            color: #5E6875;
+        }
+        .amount{
+            font-size: 16px;
+            color:#1D2024;
         }
     }
 

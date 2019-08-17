@@ -64,9 +64,6 @@ export default {
             amountErr: ''
         };
     },
-    beforeMount() {
-        window.fffff = this;
-    },
     computed: {
         canOrder() {
             return this.amount && !this.amountErr;
