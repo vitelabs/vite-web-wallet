@@ -5,28 +5,28 @@
                 <img src="~assets/imgs/exchange/mining/trade.png" />
                 <div>
                     <div class="label">{{$t('tradeMining.txTitle')}}</div>
-                    <div class="amount">{{tradeMiningTotal}} VX</div>
+                    <div class="amount">{{tradeMiningTotal|formatNum}} VX</div>
                 </div>
             </div>
             <div class="tab_title_item" @click="tabName = 'staking'" :class="{active:tabName==='staking'}">
                 <img src="~assets/imgs/exchange/mining/staking.png" />
                 <div>
                     <div class="label">{{$t('tradeMining.quotaTitle')}}</div>
-                    <div class="amount">{{stakingMiningTotal}} VX</div>
+                    <div class="amount">{{stakingMiningTotal|formatNum}} VX</div>
                 </div>
             </div>
             <div class="tab_title_item" @click="tabName = 'invite'" :class="{active:tabName==='invite'}">
                 <img src="~assets/imgs/exchange/mining/invite.png" />
                 <div>
                     <div class="label">{{$t('inviteMining.title')}}</div>
-                    <div class="amount">{{inviteMiningTotal}} VX</div>
+                    <div class="amount">{{inviteMiningTotal|formatNum}} VX</div>
                 </div>
             </div>
             <div class="tab_title_item" @click="tabName = 'order'" :class="{active:tabName==='order'}">
                 <img src="~assets/imgs/exchange/mining/order.png" />
                 <div>
                     <div class="label">{{$t('orderMining.title')}}</div>
-                    <div class="amount">{{orderMiningTotal}} VX</div>
+                    <div class="amount">{{orderMiningTotal|formatNum}} VX</div>
                 </div>
             </div>
         </div>
