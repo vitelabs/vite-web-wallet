@@ -1,7 +1,11 @@
+const webpack = require('webpack');
 const { staticPath } = require('../config.js');
 
 module.exports = {
     mode: 'development',
+    plugins: [
+        new webpack.HotModuleReplacementPlugin()
+    ],
     output: {
         path: staticPath,
         filename: '[name].[hash].js'

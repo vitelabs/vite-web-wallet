@@ -2,20 +2,20 @@ const path = require('path');
 const getEntry = require('./getEntry');
 const { srcPath } = require('../config');
 
-const PC_SRC_PATH = path.resolve(__dirname, '../srcPC');
+const PC_SRC_PATH = path.join(srcPath, '../srcPC');
 
 const { entry, htmlWebpackPlugins } = getEntry({
     index: {
         path: path.join(PC_SRC_PATH, '/index.js'),
         title: 'ViteX, Exchange By the Community, For the Community',
         favicon: path.join(srcPath, 'assets/imgs/logo.png'),
-        template: path.resolve(__dirname, '../index.html')
+        template: path.join(srcPath, '../index.html')
     }
 });
 
-export default {
+module.exports = {
     entry,
-    htmlWebpackPlugins,
+    plugins: htmlWebpackPlugins,
     resolve: {
         alias: {
             wallet: path.join(PC_SRC_PATH, '/wallet'),

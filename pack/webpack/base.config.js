@@ -16,7 +16,6 @@ module.exports = {
     plugins: [
         new VueLoaderPlugin(),
         new webpack.DefinePlugin(envVars),
-        new webpack.HotModuleReplacementPlugin(),
         new webpack.NormalModuleReplacementPlugin(/\/buffer\//, function (resource) {
             resource.request = Buffer_Path;
         })

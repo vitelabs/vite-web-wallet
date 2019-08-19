@@ -2,20 +2,20 @@ const path = require('path');
 const getEntry = require('./getEntry');
 const { srcPath } = require('../config');
 
-const H5_SRC_PATH = path.resolve(__dirname, '../srcH5');
+const H5_SRC_PATH = path.join(srcPath, '../srcH5');
 
 const { entry, htmlWebpackPlugins } = getEntry({
     mobileDex: {
         path: path.join(H5_SRC_PATH, '/index.js'),
         title: 'ViteX, Exchange By the Community, For the Community',
         favicon: path.join(srcPath, 'assets/imgs/logo.png'),
-        template: path.resolve(__dirname, '../index.html')
+        template: path.join(srcPath, '../index.html')
     }
 });
 
-export default {
+module.exports = {
     entry,
-    htmlWebpackPlugins,
+    plugins: htmlWebpackPlugins,
     resolve: {
         alias: {
             h5Pages: path.join(H5_SRC_PATH, '/pages'),
