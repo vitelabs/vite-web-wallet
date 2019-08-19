@@ -59,7 +59,8 @@
         <tx-pair-list v-show="!isShowNoData && !isLoading"
                       :list="activeTxPairList" :isLoading="isLoading"
                       :favoritePairs="favoritePairs" :currentRule="currentOrderRule"
-                      :setFavorite="setFavorite" :showCol="showCol"></tx-pair-list>
+                      :setFavorite="setFavorite" :showCol="showCol"
+                      :goTrade="goTrade"></tx-pair-list>
     </div>
 </template>
 
@@ -68,7 +69,6 @@ import viteInput from 'components/viteInput';
 import loading from 'components/loading';
 import localStorage from 'utils/store';
 import { subTask } from 'utils/proto/subTask';
-import statistics from 'utils/statistics';
 import { assignPair } from 'services/trade';
 
 import orderArrow from './orderArrow';
@@ -80,6 +80,12 @@ let defaultPairTimer = null;
 let assignPairTimerList = [];
 
 export default {
+    props: {
+        goTrade: {
+            type: Function,
+            default: () => {}
+        }
+    },
     components: {
         viteInput,
         loading,
@@ -323,10 +329,8 @@ export default {
 
             this.favoritePairs = this.favoritePairs || {};
             if (this.favoritePairs[symbol]) {
-                statistics.event(`${ this.$route.name }_delete_trade_sign`, symbol, this.address || '');
                 delete this.favoritePairs[symbol];
             } else {
-                statistics.event(`${ this.$route.name }_trade_sign`, symbol, this.address || '');
                 this.favoritePairs[symbol] = { toTokenId };
             }
             this.favoritePairs = Object.assign({}, this.favoritePairs);

@@ -30,10 +30,13 @@
 
 <script>
 import BigNumber from 'utils/bigNumber';
-import statistics from 'utils/statistics';
 
 export default {
     props: {
+        goTrade: {
+            type: Function,
+            default: () => {}
+        },
         favoritePairs: {
             type: Object,
             default: () => {
@@ -87,26 +90,7 @@ export default {
             }
 
             const list = this.orderList(this.list);
-            const _l = [];
-
-            let activeTxPair = null;
-
-            list.forEach(_t => {
-                if (this.DefaultSymbol && _t.symbol === this.DefaultSymbol) {
-                    activeTxPair = _t;
-                }
-                _l.push(_t);
-            });
-
-            if (activeTxPair) {
-                this.setActiveTxPair(activeTxPair);
-            } else if (!this.activeTxPair) {
-                activeTxPair = list && list.length ? list[0] : null;
-                activeTxPair && this.setActiveTxPair(activeTxPair);
-            }
-            this.$store.commit('clearDefaultSymbol');
-
-            return _l;
+            return [].concat(list);
         },
         closeMarket() {
             return this.$store.state.exchangeMarket.marketClosed;
@@ -218,8 +202,7 @@ export default {
             });
         },
         setActiveTxPair(txPair) {
-            statistics.event(`${ this.$route.name }_trade_pair`, txPair.symbol, this.address || '');
-            this.$store.dispatch('exFetchActiveTxPair', txPair);
+            this.goTrade(txPair);
         }
     }
 };
