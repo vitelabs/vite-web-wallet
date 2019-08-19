@@ -13,7 +13,7 @@
     "settingAcc": "Настройка Аккаунта",
     "resetAcc": "Сбросить Ваш Аккаунт",
     "logout": "Выйти",
-    "saveLogout": "安全退出",
+    "saveLogout": "Выйти",
     "blockHeight": "Высота Снепшот Блока",
     "accountName": "Имя Пользователя",
     "action": "Действие",
@@ -38,7 +38,7 @@
         "assets": [
             "Депозит на Биржу",
             "Вывод на Кошелек",
-            "Кросс-Чейн Получение и Перевод"
+            "Cross-Chain Receive & Send"
         ]
     },
     "dealReminder": {
@@ -149,8 +149,7 @@
         "bigger0": "Значение должно быть больше 0",
         "operateSuccess": "Операция Выполнена Успешно",
         "operateFail": "Операция Не Выполнена",
-        "unreceived": "Разблокируйте свой кошелек перед использованием",
-        "unLogin": "Please login"
+        "unreceived": "Разблокируйте свой кошелек перед использованием"
     },
     "beforeUse": {
         "title": "Прочитайте перед использованием",
@@ -182,7 +181,7 @@
         "restore": "Восстановить аккаунт по Сид Фразе",
         "record": "Сгенерировать Сид Фразу",
         "prompt": "Мнемоническая сид фраза - единственный способ восстановить ваш кошелек. Настоятельно рекомендуем записать фразу и хранить ее в безопасном месте, где только вы сможете получить к ней доступ.",
-        "placeholder": "Please input your mnemonic seed phrase. Example: apple banana peach mango pear ...",
+        "placeholder": "Пожалуйста, введите вашу мнемоническую сид фразу",
         "empty": "Ввод сид фразы не может быть пустым",
         "error": "Неверная сид фраза. Попробуйте снова",
         "hint": "Пример: яблоко банан персик манго груша ...",
@@ -259,15 +258,15 @@
             "gate": "Кросс-чейн Шлюз Кошелька",
             "totalExAmount": "Общий Баланс на Бирже",
             "availableExAmount": "Доступный Баланс на Бирже",
-            "balanceTips": "点击转账，可以从Vite 钱包给其他地址转币",
-            "gateTips": "点击跨链转入，可以将其他币种跨链映射到Vite网络，转入Vite钱包；点击跨链转出仍可以将资产转至其他平台。*转入转出过程可能会产生手续费，且有金额限制",
-            "availableExAmountTips": "点击充值至交易所，将钱包中的资产划转至交易所；点击提现至钱包，将交易所资产划转至钱包。以上划转过程不需要手续费"
+            "balanceTips": "You can transfer your assets to other addresses via clicking 'Send' button",
+            "gateTips": "In this cross-chain section, you can map other tokens into Vite network. Click 'Receive' button to deposit assets to your Vite Wallet. Click 'Send' button to transfer your assets to other platforms. * Cross-chain receive/send process may charge fees, it also has its transfer limitation.",
+            "availableExAmountTips": "You can transfer your assets from Vite Wallet to ViteX Exchange via clicking 'Deposit' button. Click 'Withdraw' button to transfer assets from ViteX Exchange to Vite Wallet. No transaction fees caused during these processes."
         },
         "actionType": {
-            "SEND": "Перевести",
+            "SEND": "Отправить",
             "RECEIVE": "Получить",
             "CHARGE": "Получить",
-            "WITHDRAW": "Перевести",
+            "WITHDRAW": "Отправить",
             "EXCHARGE": "Пополнить",
             "EXWITHDRAW": "Вывести Средства",
             "EXRECRODS": "История",
@@ -275,7 +274,7 @@
         },
         "addToken": {
             "title": "Добавить Токен",
-            "placeholder": "Please input token name 或者 TokenID",
+            "placeholder": "Please enter token name or TokenID",
             "lTxt": "Отменить",
             "rTxt": "Добавить"
         },
@@ -296,18 +295,18 @@
                 "tokenId": "ID Токена",
                 "tokenName": "Название",
                 "totalSupply": "Общее Предложение",
-                "total": "流通总量",
-                "overview": "代币简介",
-                "type": "代币类型",
-                "gate": "跨链网关",
-                "website": "官网",
-                "whitePaper": "白皮书",
-                "explorer": "浏览器",
+                "total": "Circulating Supply",
+                "overview": "Описание",
+                "type": "Тип",
+                "gate": "Cross-Chain Gateway",
+                "website": "Веб-сайт",
+                "whitePaper": "White Paper",
+                "explorer": "Explorer",
                 "github": "Github",
-                "media": "社交媒体",
-                "crossType": "跨链代币",
-                "originType": "原生代币",
-                "viewmore": "查看更多"
+                "media": "Social Media",
+                "crossType": "Cross-Chain",
+                "originType": "Native",
+                "viewmore": "View More"
             },
             "reIssuable": {
                 "true": "Перевыпуск",
@@ -377,38 +376,38 @@
             "amountPlaceholder": "Пожалуйста, введите сумму получения"
         },
         "charge": {
-            "title": "Кросс-Чейн Получение",
+            "title": "Cross-Chain Receive Funds",
             "addrErr": "Что-то пошло не так с нодой шлюза, проверьте настройки сети",
             "addressTitle": "Адрес Получателя",
-            "labelTips": " (Please use this '{labelName}' with your recipient address, otherwise your assets will lose)",
-            "labelCodeTips": "Пожалуйста, отсканируйте QR-код от {labelName}",
-            "codeTips": "Сканируйте QR код для внесения депозита. Пожалуйста, переведите с кошельком, который поддерживает {tokenSymbol}",
+            "labelTips": "(Please use this '{labelName}' with your recipient address, otherwise your assets will lose",
+            "labelCodeTips": "Please Scan the QR code from {labelName}",
+            "codeTips": "Scan QR code to deposit. Please send funds with the wallet that supports {tokenSymbol}",
             "tips": [
-                "Операция Кросс-Чейн Получение выполнит {tokenSymbol} сопоставление Cross-Chain с сетью VITE, вы по прежнему можете перевести активы после их получения",
+                "Cross-Chain Receive operation will do {tokenSymbol} Cross-Chain mapping to VITE network, you can still transfer the assets to other platform after receiving them",
                 "Вы можете отправить только {tokenSymbol} через этот адрес, и сумма не может быть меньше {min}",
                 "Вы получите свои активы после {confirmationCount} подтверждений, пожалуйста подождите"
             ]
         },
         "withdraw": {
-            "title": "Кросс-Чейн Перевод",
+            "title": "Cross-Chain Send Funds",
             "balanceErrMap": {
                 "notEnough": "Недостаточно Средств",
-                "overMax": "Сумма перевода должна быть меньше, чем {max}",
-                "lessMin": "Сумма перевода должна быть больше чем {min}"
+                "overMax": "Send amount should be less than {max}",
+                "lessMin": "Send amount should not be less than {min}"
             },
             "feeTips": "Размер комиссии за транзакцию устанавливается оператором шлюза",
             "addressErr": "Неверный формат адреса",
             "labels": {
                 "balance": "Баланс",
-                "address": "Адрес",
+                "address": "Адрес Получателя",
                 "amount": "Сумма",
                 "fee": "Комиссия",
                 "all": "Все"
             },
             "labelPlaceholder": "Please input {labelName}",
-            "amountPlaceholder": "Пожалуйста, введите сумму перевода, которая не должна быть меньше {min}",
-            "addressPlaceholder": "Please input {token} transfer address",
-            "successTips": "Запрос на перевод отправлен",
+            "amountPlaceholder": "Please input send amount which should not be less than {min}",
+            "addressPlaceholder": "Please enter {token} recipient address",
+            "successTips": "Transaction request has been sent",
             "failTips": "Произошла ошибка в ноде шлюза, проверьте настройки сети"
         },
         "nodeErr": "Нода шлюза недействительна, пожалуйста, проверьте настройки шлюза"
@@ -421,7 +420,7 @@
         "help": {
             "title": "Быстрое Понимание Квоты"
         },
-        "transfer": "Перевод",
+        "transfer": "Send Funds",
         "getTestToken": "Получить Тестовые Токены",
         "transDetail": "Больше Деталей Транзакции",
         "address": "Мой Адрес",
@@ -745,81 +744,81 @@
             "failToast": "Не удалось отправить запрос",
             "notEnough": "Недостаточный биржевой баланс",
             "avaliable": "Баланс",
-            "inviteNum": "Invited",
-            "inviteBenifit": "Referral Mining Income",
-            "inviteRule": "Rules",
+            "inviteNum": "Поиглашенные",
+            "inviteBenifit": "Привлечение как Майнинг Доход",
+            "inviteRule": "Правила",
             "ruleItems": [
-                "You can spend <span class='strong'>1000 VITE</span> to create a referral code. This fund will be put into dividend pool and distributed to VX holders",
-                " <span class='strong'>5%</span> of trading fees generated by users who use referral code will be treated as trading fees which could mine VX.",
-                "Traders who use referral code could enjoy <span class='strong'>10%</span> off during trading"
+                "Вы можете потратить <span class='strong'>1000 VITE</span> для создания реферального кода. Эти средства будут помещены в пул дивидендов и распределены среди Держателей VX",
+                " <span class='strong'>5%</span> от торговых сборов, сгенерированых пользователями, использующими реферальный код, будет рассматриваться как торговые сборы, которые могут майнить VX.",
+                "Трейдеры, использующие реферальный код, могут пользоваться скидкой <span class='strong'>10%</span> во время торговли"
             ]
         }
     },
     "walletConversion": {
-        "title": "VITE Conversion",
+        "title": "Конвертация VITE",
         "help": {
-            "title": "Quick Understanding of VITE Conversion",
+            "title": "Быстрое понимание конвертации VITE",
             "text": "You can migrate ERC20 tokens into VITE into our TestNet by VITE conversion function. In TestNet, casting your vote for official SBPs to collect rewards, the annualized rate can reach 20%. Your ERC20 VITE tokens will be transferred to Ethereum black hole address: {blackAddr}, you will receive the same amount of VITE at your Vite address when Ethereum black hole address has received the transaction and confirmed. Once you are in the conversion process, confirm that there are enough VITE and ETH (as gas) in your Ethereum address of Vite wallet."
         },
-        "gas": "Mining Fees",
-        "record": "Conversion History",
-        "aboutPrice": "Approx {amount} ETH",
-        "note": "Please wait in patient after submitting the conversion. You cannot receive the converted VITE until you have got 30 Ethereum transaction confirmations. Ehtereum transaction records can be viewed in Conversion History section.",
+        "gas": "Майнинг Плата",
+        "record": "История Конвертации",
+        "aboutPrice": "Примерно {amount} ETH",
+        "note": "Пожалуйста, сохраняйте терпение после подтверждения конвертации. Вы не сможете получить конвертированный VITE, пока не получите 30 подтверждений транзакций Ethereum. Записи о транзакциях Ehtereum можно просмотреть в разделе «История Конвертации».",
         "exchange": {
-            "vite": "Convert",
-            "viteAddr": "Receiving Address",
-            "viteAmount": "Conversion Amount",
-            "btn": "Ready to Convert",
-            "success": "Conversion Successful. It may take approx 20 minutes to get VITE into your account after the Ethereum transaction is confirmed."
+            "vite": "Конвертировать",
+            "viteAddr": "Адрес Получателя",
+            "viteAmount": "Сумма Конвертации",
+            "btn": "Готов к Конвертации",
+            "success": "Конвертация успешна. Получение VITE на ваш аккаунт может занять около 20 минут, после подтверждения транзакции Ethereum."
         }
     },
     "tradeCenter": {
-        "title": "Exchange",
-        "marketClosed": "{symbol} market has been suspended",
-        "mergeDepth": "Group",
-        "depthStep": "{step} digits",
-        "blocking": "Network congestion occurs, please try again later",
-        "supportMining": "支持挖矿的交易对",
+        "title": "Обмен",
+        "marketClosed": "{symbol} рынок был приостановлен",
+        "mergeDepth": "Группа",
+        "depthStep": "{step} цифр",
+        "blocking": "Сеть перегружена, пожалуйста, повторите попытку позже",
+        "supportMining": "Mineable Trading Pairs",
         "operator": {
-            "noName": "匿名网关",
-            "overview": "Introduction",
-            "txPair": "Trading Pairs",
-            "confirmTitle": "Risk Reminder",
-            "confirmText": "The current trading pair is {symbol}. Please be careful when trading. Investing in digital assets comes with high risks. Before investing, please have a full understanding of all the risks of investing in digital assets and judge the authenticity, legality and validity of digital assets on your own. Please be prudent of your own investment decisions and undertake responsibility for the loss of your assets.",
-            "address": "运营商地址",
-            "name": "运营商名称"
+            "noName": "Anonymous Gateway",
+            "overview": "Описание",
+            "txPair": "Торговые Пары",
+            "confirmTitle": "Напоминание о Риске",
+            "confirmText": "Текущая торговая пара - {symbol}. Пожалуйста, будьте осторожны при торговле. Инвестиции в цифровые активы сопряжены с высокими рисками. Прежде чем инвестировать, пожалуйста, имейте полное представление обо всех рисках инвестирования в цифровые активы и оценивайте подлинность, законность и действительность цифровых активов самостоятельно. Пожалуйста, будьте осторожны с вашими собственными инвестиционными решениями и возьмите на себя ответственность за потерю ваших активов.",
+            "address": "Operator Address",
+            "name": "Operator Name"
         },
         "operatorTxPair": {
-            "title": "交易对信息",
-            "tokenTab": "代币详情",
-            "operatorTab": "Operator Details"
+            "title": "Trading Pair Details",
+            "tokenTab": "Token Details",
+            "operatorTab": "Детали Оператора"
         }
     },
     "trade": {
-        "search": "Search",
-        "txPair": "Pair",
-        "price": "Price",
-        "upDown": "Change%",
-        "txNum": "Volume",
-        "quantityTitle": "Total({quantity})",
-        "priceTitle": "Price({price})",
-        "amountTitle": "Amount({amount})",
-        "quantityTable": "累积数量Qty？？？",
-        "amountTable": "累积成交额",
-        "amount": "Total",
-        "newOrderSuccess": "Order request has sent",
-        "newOrderFail": "Order Failed",
-        "depthView": "Depth",
-        "klineView": "TradingView",
+        "search": "Поиск",
+        "txPair": "Пара",
+        "price": "Цена",
+        "upDown": "Изменение%",
+        "txNum": "Объём",
+        "quantityTitle": "Всего({quantity})",
+        "priceTitle": "Цена({price})",
+        "amountTitle": "Сумма({amount})",
+        "quantityTable": "Кол-во",
+        "amountTable": "Объём",
+        "amount": "Всего",
+        "newOrderSuccess": "Запрос на Ордер отправлен",
+        "newOrderFail": "Ордер не Выполнен",
+        "depthView": "Глубина",
+        "klineView": "Торговый Вид",
         "txPairDetail": {
-            "title": "Trading pair details",
-            "24h": "24h",
-            "openPrice": "Open",
-            "quantity": "Market Volume",
-            "amount": "Base volume",
-            "status": "Status",
-            "latest": "Latest",
-            "buy": "Buy price",
+            "title": "Детали торговой пары",
+            "24h": "24 ч",
+            "openPrice": "Открыть",
+            "quantity": "Объем Рынка",
+            "amount": "Базовый Объем",
+            "status": "Статус",
+            "latest": "Последние",
+            "buy": "Цена покупки",
             "sell": "Цена продажи",
             "diff": "Спред"
         },
@@ -965,200 +964,208 @@
             "title": "Отменить Ордер",
             "content": "Вы уверены, что хотите отменить текущий ордер?"
         },
-        "title": "Open Orders",
+        "title": "Открытые Ордера",
         "hint": {
-            "fdate": "Please select start date",
-            "tdate": "Please select end date",
-            "dateErr": "The end date must be later than the start date",
-            "ftoken": "Please select ftoken"
+            "fdate": "Пожалуйста, выберите дату начала",
+            "tdate": "Пожалуйста, выберите дату окончания",
+            "dateErr": "Дата окончания должна быть позже даты начала",
+            "ftoken": "Пожалуйста, выберите токен"
         },
         "side": {
-            "1": "Sell",
-            "0": "Buy"
+            "1": "Продать",
+            "0": "Купить"
         },
         "table": {
             "heads": [
-                "Date",
-                "Pair",
-                "Side",
-                "Price",
-                "Amount",
-                "Filled",
-                "Filled%",
-                "Average"
+                "Дата",
+                "Пара",
+                "Направление",
+                "Цена",
+                "Сумма",
+                "Заполнено",
+                "Заполнено%",
+                "В среднем"
             ],
             "rowMap": {
-                "cancel": "Cancel"
+                "cancel": "Отменить"
             }
         }
     },
     "tradeOrderHistory": {
-        "title": "Order History",
+        "title": "История Ордеров",
         "hint": {
-            "fdate": "Please choose start date",
-            "tdate": "Please choose end date",
-            "dateErr": "End date must be after start date"
+            "fdate": "Пожалуйста, выберите дату начала",
+            "tdate": "Пожалуйста, выберите дату окончания",
+            "dateErr": "Дата окончания должна быть позже даты начала"
         },
         "side": {
-            "1": "Sell",
-            "0": "Buy"
+            "1": "Продать",
+            "0": "Купить"
         },
         "status": {
-            "1": "委托中",
-            "2": "已完成",
-            "3": "已撤销",
-            "4": "下单失败"
+            "1": "Ongoing",
+            "2": "Завершено",
+            "3": "Cancelled",
+            "4": "Ошибка"
         },
         "confirmTable": {
-            "title": "Order Book",
+            "title": "Биржевой Стакан",
             "heads": [
-                "Time",
-                "Price",
-                "Amount",
-                "Fees",
-                "Total"
+                "Время",
+                "Цена",
+                "Сумма",
+                "Комиссии",
+                "Всего"
             ]
         },
         "table": {
             "heads": [
-                "Date",
-                "Pair",
-                "Side",
-                "Price",
-                "Amount",
-                "Filled",
-                "Filled%",
-                "Average",
-                "Fees",
-                "Status"
+                "Дата",
+                "Пара",
+                "Направление",
+                "Цена",
+                "Сумма",
+                "Заполнено",
+                "Заполнено%",
+                "В среднем",
+                "Комиссии",
+                "Статус"
             ],
             "rowMap": {
                 "statusMap": {
                     "1": "In Order",
-                    "2": "Completed",
-                    "3": "Canceled",
-                    "4": "Failed"
+                    "2": "Выполнено",
+                    "3": "Отменено",
+                    "4": "Ошибка"
                 },
-                "detail": "Details"
+                "detail": "Подробнее"
             }
         },
         "filter": {
-            "start": "From",
-            "end": "To",
-            "type": "Type",
-            "side": "Side",
-            "buy": "Buy",
-            "sell": "Sell",
-            "status": "状态",
-            "search": "Search",
-            "reset": "Reset"
+            "start": "От",
+            "end": "До",
+            "type": "Тип",
+            "side": "Направление",
+            "buy": "Купить",
+            "sell": "Продать",
+            "status": "Статус",
+            "search": "Поиск",
+            "reset": "Сбросить"
         }
     },
     "tradeMining": {
-        "title": "Mining",
-        "addQuota": "Create a new staking",
-        "add": "Add",
-        "withdraw": "Retrieve",
+        "title": "Майнинг",
+        "addQuota": "Создать новый стейкинг",
+        "add": "Добавить",
+        "withdraw": "Получить",
         "tbHead": {
-            "date": "Date",
-            "fee": "Trading Fees",
-            "mining": "Mining Amount",
-            "pledge": "Staking Amount"
+            "date": "Дата",
+            "fee": "Торговые Комиссии",
+            "mining": "Сумма Майнинга",
+            "pledge": "Сумма Стейкинга"
         },
-        "txTitle": "Trading as Mining Total Income",
-        "quotaTitle": "Staking as Mining Total Income",
-        "addHint": "Income of Staking as Mining will be calculated at 13:00(UTC+8) everyday. You can manually retrieve your staking amount after the staking comes into effective",
-        "withdrawHint": "You will no longer be able to mining VX after retrieving",
-        "addTitle": "Staking VITE for Mining",
-        "withdrawTitle": "Retrieving Staked VITE",
-        "addPlaceHolder": "Please input staking amount, at least 134 VITE",
-        "withdrawPlaceHolder": "Please input retrieving amount, at least 134 VITE",
-        "addBtn": "Confirm to stake ",
-        "withdrawBtn": "Confirm to retrieve",
-        "stakingBalance": "Retrievable Staking Amount",
-        "hintTitle": "Important Notice",
-        "comingHint": "VX mining function is coming soon, stay tuned. You can get VX in five ways: 1. Trading as Mining, 2. Listing as Mining, 3. Referring as Mining, 4. Staking as Mining, 5. Market-making as Mining. Users who hold VX enjoy payouts from a shared dividend pool.",
-        "more": "Learn more about VX mining rules"
+        "txTitle": "Торговля как Майнинг Общий Доход",
+        "quotaTitle": "Стейкинг как Майнинг Общий Доход",
+        "addHint": "Доход от Стейкинг как Майнинг будет рассчитываться в 13:00 (UTC + 8) каждый день. Вы можете вручную вернуть вашу сумму стейкинга после вступления стейкинга в силу",
+        "withdrawHint": "Вы больше не сможете майнить VX после возврата",
+        "addTitle": "Стейкинг VITE для Майнинга",
+        "withdrawTitle": "Возврат VITE в Стейкинге",
+        "addPlaceHolder": "Пожалуйста, введите сумму стейка, как минимум 134 VITE",
+        "withdrawPlaceHolder": "Пожалуйста, введите сумму возврата, как минимум 134 VITE",
+        "addBtn": "Подтвердить стейк ",
+        "withdrawBtn": "Подтвердить возврат",
+        "stakingBalance": "Возвращаемая Сумма Стейка",
+        "hintTitle": "Важное Замечание",
+        "comingHint": "Функция майнинга VX скоро появится, следите за обновлениями. Вы можете получить VX пятью способами: 1. Торговля как Майнинг, 2. Листинг как Майнинг, 3. Привлечение как Майнинг, 4. Стейкинг как Майнинг, 5. Маркет-Мейкинг как Майнинг. Пользователи, владеющие VX, пользуются выплатами из общего пула дивидендов.",
+        "more": "Узнайте больше о правилах майнинга VX"
     },
     "inviteMining": {
-        "txTitle": "Referring as Mining Total Income"
+        "title": "邀请挖矿总收益"
+    },
+    "orderMining": {
+        "title": "挂单挖矿总收益",
+        "tbHead": {
+            "date": "日前",
+            "ratio": "占比",
+            "mining": "挖矿金额"
+        }
     },
     "tradeDividend": {
-        "title": "Dividends",
-        "poolTitle": "Trading Fee Dividend Pool",
-        "listTitle": "My Dividends",
-        "date": "Date",
-        "VX": "Holding VX",
-        "coin": "Type",
-        "amount": "Amount",
-        "price": "Total Estimated Value",
-        "hintTitle": "Important Notice",
-        "comingHint": "VX mining and dividend functions are coming soon, stay tuned. The system will distribute 1% of BTC, ETH, VITE, USDT of the total pool to all VX users proportional to the amount of VX they hold. The initial dividend pool will start at 0 and will grow according to the amount of fees collected by ViteX. Traders must have a minimum of 10 VX in order to receive dividends from a shared dividend pool comprised of base transaction, listing and referral code generating fees. ",
-        "more": "Learn more about VX dividend rules"
+        "title": "Дивиденды",
+        "poolTitle": "Пул Дивидендов Комиссии за Торговлю",
+        "listTitle": "Мои Дивиденды",
+        "date": "Дата",
+        "VX": "Хранение VX",
+        "coin": "Тип",
+        "amount": "Сумма",
+        "price": "Общая Оценочная Стоимость",
+        "hintTitle": "Важное Замечание",
+        "comingHint": "Функции майнинга и дивидендов VX скоро появятся, следите за обновлениями. Система будет распределять 1% BTC, ETH, VITE, USDT от общего пула всем пользователям VX пропорционально количеству VX, которое они имеют. Начальный дивидендный пул начнется с 0 и будет расти в зависимости от суммы сборов, взимаемых ViteX. Трейдеры должны иметь как минимум 10 VX, чтобы получать дивиденды из пула дивидендов, состоящего из базовой транзакции, листинга и комиссионных за генерацию реферального кода. ",
+        "more": "Узнайте больше о правилах дивидендов VX"
     },
     "tradeOperator": {
-        "title": "Operator",
-        "tokenList": "Tokens",
-        "totalIncome": "Total Income",
-        "permission": "Transfer Token's Ownership",
-        "txPairManage": "Manage Trading Pairs",
-        "noOperator": "You have no tokens or trading pairs yet, wanna become an operator?",
-        "learnMore": "Learn More",
+        "title": "Оператор",
+        "tokenList": "Токены",
+        "totalIncome": "Общий Доход",
+        "permission": "Передача Права Собственности Токеном",
+        "txPairManage": "Управление Торговыми Парами",
+        "noOperator": "У вас еще нет токенов или торговых пар, хотите стать оператором?",
+        "learnMore": "Подробнее",
         "permissionConfirm": {
-            "title": "Transfer Ownership",
-            "submit": "Confirm",
-            "tokenName": "Token Name",
-            "address": "Recipient Address",
-            "notice": "NOTICE: When the ownership transferred to someone else, trading pairs that not be opened will belong to the new owner. Trading/suspension trading pairs still belong to you"
+            "title": "Передать Права Собственности",
+            "submit": "Подтвердить",
+            "tokenName": "Имя Токена",
+            "address": "Адрес Получателя",
+            "notice": "ВНИМАНИЕ. Когда право собственности переходит к другому лицу, торговые пары, которые не были открыты, будут принадлежать новому владельцу. Торговля / приостановка торговых пар по-прежнему принадлежат вам"
         }
     },
     "tradeTxPairManage": {
-        "title": "{tokenSymbol} Trading Pairs Management",
-        "symbol": "Name",
-        "income": "Income",
+        "title": "Управление торговыми парами {tokenSymbol}",
+        "symbol": "Имя",
+        "income": "Доход",
         "fee": "Ставка Комиссии",
         "status": "Статус",
         "operate": "Действие",
         "stopTrans": "Приостановить",
         "resetTrans": "Восстановить",
         "changeOwner": "Передать Права Собственности",
-        "changeFee": "Adjust Fee Rate",
-        "incomeList": "Income Details",
-        "historyIncome": "Income History",
-        "openTxPair": "Open Trading Pairs",
+        "changeFee": "Регулировать Ставку Комиссии",
+        "incomeList": "Детали Дохода",
+        "historyIncome": "История Доходов",
+        "openTxPair": "Открытые Торговые Пары",
         "statusList": [
-            "Ownership Transferred",
-            "Trading",
-            "Suspension",
-            "Trade Not Open"
+            "Собственность Передана",
+            "Торговля",
+            "Приостановка",
+            "Торговля Не Открыта"
         ],
         "openTxPairConfirm": {
-            "title": "Open {symbol} to trade",
-            "fee": "Listing Fee",
-            "hint": "If you want to add unique operator symbol after opening a trading pair, please contact us at our Telegram group: https://t.me/vite_en",
-            "btn": "Submit",
-            "reqSuccess": "Submit Successful! Check it on market board later.",
-            "reqError": "Listing failed, please try again"
+            "title": "Открыть {symbol} для торговли",
+            "fee": "Комиссия за Листинг",
+            "hint": "Если вы хотите добавить уникальный символ оператора после открытия торговой пары, пожалуйста, свяжитесь с нами в нашей группе Telegram: https://t.me/vite_ru",
+            "btn": "Подтвердить",
+            "reqSuccess": "Успешно отправлено! Проверьте это на доске ордеров рынка позже.",
+            "reqError": "Листинг не удался, пожалуйста попробуйте позже"
         },
-        "stopTransHint": "Make sure to suspend {symbol} ?",
-        "resetTransHint": "Make sure to recover {symbol} ?",
-        "stopSuccess": "Suspension Successful",
-        "stopFail": "Suspension Failed",
-        "openSuccess": "Recovery Successful",
-        "openFail": "Recovery Failed",
-        "changeOwnerHint": "NOTICE: You will not be able to collect or adjust fees after ownership transferred as well as you cannot undo this transfer action",
-        "currentMaker": "Maker",
-        "confirmFee": "Fee",
-        "currentTaker": "Taker",
-        "txPairName": "Name",
-        "changeFeeHint": "{symbol}'s fee into {fee}",
-        "changeFeeSubmit": "Make sure to change {changeFeeHint}",
-        "historyAllIncome": "Total Income",
+        "stopTransHint": "Обязательно приостановить {symbol} ?",
+        "resetTransHint": "Обязательно восстановить {symbol} ?",
+        "stopSuccess": "Успешно Приостановлено",
+        "stopFail": "Приостановка Неуспешна",
+        "openSuccess": "Успешное Восстановление",
+        "openFail": "Ошибка Восстановления",
+        "changeOwnerHint": "ВНИМАНИЕ. Вы не сможете собирать или корректировать комиссии после передачи права собственности, а также не сможете отменить это действие",
+        "currentMaker": "Mейкер",
+        "confirmFee": "Комиссия",
+        "currentTaker": "Tейкер",
+        "txPairName": "Имя",
+        "changeFeeHint": "Комиссия {symbol} на {fee}",
+        "changeFeeSubmit": "Убедитесь в изменении {changeFeeHint}",
+        "historyAllIncome": "Общий Доход",
         "incomeListHead": {
-            "date": "Date",
-            "txNum": "Volume",
-            "feeRate": "Rate",
-            "feeIncome": "Income"
+            "date": "Дата",
+            "txNum": "Объём",
+            "feeRate": "Курс",
+            "feeIncome": "Доход"
         }
     }
 }
