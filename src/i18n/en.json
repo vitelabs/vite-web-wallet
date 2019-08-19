@@ -1062,14 +1062,14 @@
         "more": "Learn more about VX mining rules"
     },
     "inviteMining":{
-        "title":"Referring as Mining Total Income"
+        "title":"邀请挖矿总收益"
     },
     "orderMining":{
-        "title":"Referring as Mining Total Income",
+        "title":"挂单挖矿总收益",
         "tbHead": {
-            "date": "Date",
-            "ratio": "Ratio",
-            "mining": "Mining Amount"
+            "date": "日前",
+            "ratio": "占比",
+            "mining": "挖矿金额"
         }
     },
     "tradeDividend": {
