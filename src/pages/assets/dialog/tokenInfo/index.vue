@@ -24,7 +24,7 @@ block originContent
             div.click-able(@click="goToTokenDetail") {{token.tokenId}}
         .content__item
             .label {{$t("tokenCard.tokenInfo.labels.overview")}}:
-            div {{ tokenDetail.overview && tokenDetail.overview[$i18n.locale] ? tokenDetail.overview[$i18n.locale] : '--' }}
+            div {{ getOverview(tokenDetail.overview) }}
                 span.click-able.view-more(v-if="tokenDetail.overview && tokenDetail.overviewLink" @click="openUrl(tokenDetail.overviewLink)") {{ $t("tokenCard.tokenInfo.labels.viewmore") }}
         .content__item
             .label {{$t("tokenCard.tokenInfo.labels.total")}}:
@@ -222,6 +222,19 @@ export default {
         },
         openUrl(url) {
             url && openUrl(url);
+        },
+        getOverview(overview) {
+            if (!overview) {
+                return '--';
+            }
+
+            if (overview[this.$i18n.locale]) {
+                return overview[this.$i18n.locale];
+            } else if (overview.en) {
+                return overview.en;
+            }
+
+            return '--';
         }
     }
 };
