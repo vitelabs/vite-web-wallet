@@ -28,7 +28,6 @@ export default {
     data() {
         return {
             tradeCurrentPage: 0,
-            tradeTotal: 0,
             tradeListTotal: 0,
             tradeList: [],
             tradeHeadList: [
@@ -49,6 +48,14 @@ export default {
     },
     beforeMount() {
         this.fetchMiningTrade();
+    },
+    watch: {
+        address() {
+            this.tradeCurrentPage=0;
+            this.tradeListTotal= 0;
+            this.tradeList=[];
+            this.fetchMiningInvite();
+        }
     },
     computed: {
         content() {
@@ -86,9 +93,6 @@ export default {
 
                     this.tradeListTotal = data.total || 0;
                     this.tradeCurrentPage = pageNumber ? pageNumber - 1 : 0;
-                    this.tradeTotal = data.miningTotal
-                        ? bigNumber.formatNum(data.miningTotal, 8)
-                        : 0;
                     this.tradeList = data.miningList || [];
                 })
                 .catch(err => {

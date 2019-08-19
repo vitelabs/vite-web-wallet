@@ -49,6 +49,14 @@ export default {
     beforeMount() {
         this.updateData();
     },
+    watch: {
+        address() {
+            this.listTotal = 0;
+            this.currentPage = 0;
+            this.miningList = [];
+            this.fetchMiningInvite();
+        }
+    },
     computed: {
         content() {
             return this.miningList.map(item => {
