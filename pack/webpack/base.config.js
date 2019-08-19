@@ -3,7 +3,7 @@ const webpack = require('webpack');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
-const { staticPath, srcPath, PC_SRC_PATH, H5_SRC_PATH, envVars } = require('../config.js');
+const { staticPath, srcPath, envVars } = require('../config.js');
 
 const CHARTING_PATH = path.join(__dirname, '../../charting_library');
 const Buffer_Path = path.join(__dirname, '../../node_modules/buffer/index.js');
@@ -23,12 +23,10 @@ module.exports = {
     ],
     optimization: {
         usedExports: true,
-        // runtimeChunk: true,
         splitChunks: {
             hidePathInfo: true,
             chunks: 'all',
             cacheGroups: {
-                // h5 ~~ pc split
                 vendors: {
                     test: /[\\/]node_modules[\\/]/,
                     name: 'vendors',
@@ -150,16 +148,7 @@ module.exports = {
             utils: path.join(srcPath, '/utils'),
             plugins: path.join(srcPath, '/plugins'),
             i18n: path.join(srcPath, '/i18n'),
-            store: path.join(srcPath, '/store'),
-
-            wallet: path.join(PC_SRC_PATH, '/wallet'),
-            pcPages: path.join(PC_SRC_PATH, '/pages'),
-            pcRouter: path.join(PC_SRC_PATH, '/router'),
-
-            h5Pages: path.join(H5_SRC_PATH, '/pages'),
-            h5Router: path.join(H5_SRC_PATH, '/router'),
-            h5Components: path.join(H5_SRC_PATH, '/components'),
-            h5Assets: path.join(H5_SRC_PATH, '/assets')
+            store: path.join(srcPath, '/store')
         },
         extensions: [ '.js', '.ts', '.scss', '.vue', '.json' ],
         modules: [path.resolve(srcPath, '../node_modules')]
