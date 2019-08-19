@@ -53,7 +53,6 @@ export default {
     data() {
         return {
             stakeCurrentPage: 0,
-            stakeTotal: 0,
             stakeListTotal: 0,
             stakeList: [],
             stakingObj: null,
@@ -82,6 +81,14 @@ export default {
     destroyed() {
         this.vxConfirm && this.vxConfirm.$destroy() && (this.vxConfirm = null);
         this.stopStakingInfo();
+    },
+    watch: {
+        address() {
+            this.stakeListTotal = 0;
+            this.stakeCurrentPage = 0;
+            this.stakeList = [];
+            this.fetchMiningInvite();
+        }
     },
     computed: {
         content() {
@@ -166,9 +173,6 @@ export default {
 
                     this.stakeListTotal = data.total || 0;
                     this.stakeCurrentPage = pageNumber ? pageNumber - 1 : 0;
-                    this.stakeTotal = data.miningTotal
-                        ? bigNumber.formatNum(data.miningTotal, 8)
-                        : 0;
                     this.stakeList = data.miningList || [];
                 })
                 .catch(err => {

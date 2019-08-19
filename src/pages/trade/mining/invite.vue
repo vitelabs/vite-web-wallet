@@ -22,7 +22,6 @@ import walletTable from 'components/table/index.vue';
 import bigNumber from 'utils/bigNumber';
 import date from 'utils/date';
 
-
 export default {
     components: { walletTable, pagination },
     data() {
@@ -50,6 +49,15 @@ export default {
     beforeMount() {
         this.fetchMiningInvite();
     },
+    watch: {
+        address() {
+            this.inviteListTotal = 0;
+            this.inviteCurrentPage = 0;
+            this.inviteTotal = 0;
+            this.inviteList = [];
+            this.fetchMiningInvite();
+        }
+    },
     computed: {
         content() {
             return this.inviteList.map(item => {
@@ -60,7 +68,8 @@ export default {
                     }`,
                     pledge: `${ bigNumber.formatNum(item.pledgeAmount || 0,
                         8) } VITE`,
-                    mining: `${ bigNumber.formatNum(item.miningAmount || 0, 8) } VX`
+                    mining: `${ bigNumber.formatNum(item.miningAmount || 0,
+                        8) } VX`
                 };
             });
         },
