@@ -1,29 +1,33 @@
 <template>
     <div class="staking-detail">
         <div class="item">
-            <img src="~assets/imgs/smallAssets.svg" />
-            <div class="item-detail">
-                <div>{{ $t('stakingAmount') }}</div>
-                <div class="bold">{{ stakingDetail.amount }}</div>
-            </div>
+            <div>{{ $t("stakingAmount") }}</div>
+            <div class="bold">{{ stakingDetail.amount }}</div>
         </div>
         <div class="item">
-            <img src="~assets/imgs/snapshot.svg" />
-            <div class="item-detail">
-                <div>{{ $t('withdrawHeight') }}</div>
-                <div class="bold">{{ stakingDetail.withdrawHeight }}</div>
-            </div>
+            <div>{{ $t("withdrawHeight") }}</div>
+            <div class="bold">{{ stakingDetail.withdrawHeight }}</div>
         </div>
         <div class="item no-border">
-            <img src="~assets/imgs/time.svg" />
-            <div class="item-detail">
-                <div>{{ $t('walletQuota.list.withdrawTime') }}</div>
-                <div class="bold">{{ stakingDetail.withdrawTime }}</div>
+            <div>{{ $t("walletQuota.list.withdrawTime") }}</div>
+            <div class="bold">{{ stakingDetail.withdrawTime }}</div>
+        </div>
+
+        <div class="operations">
+            <div class="btn add __pointer" @click="showVxConfirm(1)">
+                {{ $t("tradeMining.add") }}
+            </div>
+            <div v-show="!canCancel" class="btn unuse">
+                {{ $t("tradeMining.withdraw") }}
+            </div>
+            <div
+                v-show="canCancel"
+                class="btn cancel __pointer"
+                @click="showVxConfirm(2)"
+            >
+                {{ $t("tradeMining.withdraw") }}
             </div>
         </div>
-        <div v-show="!canCancel" class="btn unuse">{{ $t('tradeMining.withdraw') }}</div>
-        <div v-show="canCancel" class="btn cancel __pointer" @click="showVxConfirm(2)">{{ $t('tradeMining.withdraw') }}</div>
-        <div class="btn add __pointer" @click="showVxConfirm(1)">{{ $t('tradeMining.add') }}</div>
     </div>
 </template>
 
@@ -67,8 +71,10 @@ export default {
                 };
             }
             return {
-                withdrawTime: date(this.stakingObj.withdrawTime * 1000, this.$i18n.locale),
-                amount: bigNumber.toBasic(this.stakingObj.amount || 0, Vite_Token_Info.decimals),
+                withdrawTime: date(this.stakingObj.withdrawTime * 1000,
+                    this.$i18n.locale),
+                amount: bigNumber.toBasic(this.stakingObj.amount || 0,
+                    Vite_Token_Info.decimals),
                 withdrawHeight: this.stakingObj.withdrawHeight
             };
         }
@@ -80,44 +86,44 @@ export default {
 @import "~assets/scss/vars.scss";
 
 .staking-detail {
-    background: url('~assets/imgs/mint_pledge_bg.png') rgba(234,248,255,0.2);
+    background: url("~assets/imgs/mint_pledge_bg.png") rgba(234, 248, 255, 0.2);
     background-size: 100% 100%;
-    >div {
-        display: inline-block;
-    }
+    display: flex;
     .item {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
         box-sizing: border-box;
         width: 25%;
         padding: 16px 30px;
-        border-right: 1px solid rgba(227,235,245,0.6);
+        border-right: 1px solid rgba(227, 235, 245, 0.6);
+        font-size: 12px;
+        @include font-family-normal();
+        color: #5e6875;
+        > div {
+            height: 16px;
+        }
         &.no-border {
             border-right: none;
         }
-
-        img {
-            margin-right: 10px;
-        }
-        .item-detail {
-            display: inline-block;
-            line-height: 18px;
-            font-size: 12px;
-            font-family: $font-normal;
-            font-weight: 400;
-            color: rgba(94,104,117,1);
-            .bold {
-                font-family: $font-bold;
-                font-weight: 600;
-                color: rgba(29,32,36,1);
-            }
+        .bold {
+            @include font-family-bold();
+            color: #1d2024;
         }
     }
+    .operations {
+        display: flex;
+        flex-grow: 1;
+        justify-content: flex-end;
+        align-items: center;
+    }
     .btn {
-        margin-top: 19px;
-        float: right;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         min-width: 100px;
+        height: 30px;
         box-sizing: border-box;
-        padding: 7px;
-        text-align: center;
         border-radius: 2px;
         font-size: 12px;
         @include font-family-bold();
@@ -125,13 +131,13 @@ export default {
         line-height: 16px;
         &.add {
             color: #fff;
-            background: rgba(0,122,255,1);
+            background: rgba(0, 122, 255, 1);
             margin-right: 13px;
             margin-bottom: -1px;
         }
         &.cancel {
-            color: rgba(94,104,117,1);
-            border: 1px solid rgba(198,203,212,1);
+            color: rgba(94, 104, 117, 1);
+            border: 1px solid rgba(198, 203, 212, 1);
             margin-right: 30px;
         }
         &.unuse {
