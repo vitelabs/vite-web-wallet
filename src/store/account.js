@@ -186,7 +186,7 @@ const getters = {
                 viteLabsGateInfo.offical = 'https://vite.org';
                 viteLabsGateInfo.customer = 'https://vitex.zendesk.com/hc/zh-cn/requests/new',
                 viteLabsGateInfo.customerEn = 'https://vitex.zendesk.com/hc/en-001/requests/new',
-                viteLabsGateInfo.privacy = `${ location.origin }/viteLabsGatePrivacy.html`;
+                viteLabsGateInfo.privacy = `${ location.origin }/privacy.html`;
             } else if (mapToken2Gate[i].gateway === 'VGATE') {
                 viteLabsGateInfo.introduction = 'As an operator of ViteX, VGATE is responsible for listing coins, deposit and withdrawal, cryptocurrency marketing and promoting and other services within VGATE\'s own marketing area. VGATE has complete capabilities as an operator, namely the capabilities of operating VGATE and its cryptos. In addition to helping users list cryptos, deposit and withdraw, and adjust transaction fees, VGATE can also mint coins, help other operators mint coins and run their gateways.',
                 viteLabsGateInfo.introductionEn = 'As an operator of ViteX, VGATE is responsible for listing coins, deposit and withdrawal, cryptocurrency marketing and promoting and other services within VGATE\'s own marketing area. VGATE has complete capabilities as an operator, namely the capabilities of operating VGATE and its cryptos. In addition to helping users list cryptos, deposit and withdraw, and adjust transaction fees, VGATE can also mint coins, help other operators mint coins and run their gateways.',
