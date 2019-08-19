@@ -1,32 +1,59 @@
 <template>
     <div class="trade-mining-wrapper">
         <div class="tab_title">
-            <div class="tab_title_item" @click="tabName = 'trade'" :class="{active:tabName==='trade'}">
+            <div
+                class="tab_title_item"
+                @click="tabName = 'trade'"
+                :class="{ active: tabName === 'trade' }"
+            >
                 <img src="~assets/imgs/exchange/mining/trade.png" />
                 <div>
-                    <div class="label">{{$t('tradeMining.txTitle')}}</div>
-                    <div class="amount">{{tradeMiningTotal|formatNum}} VX</div>
+                    <div class="label">{{ $t("tradeMining.txTitle") }}</div>
+                    <div class="amount">
+                        {{ tradeMiningTotal | formatNum }} VX
+                    </div>
                 </div>
             </div>
-            <div class="tab_title_item" @click="tabName = 'staking'" :class="{active:tabName==='staking'}">
+            <div class="gap"></div>
+            <div
+                class="tab_title_item"
+                @click="tabName = 'staking'"
+                :class="{ active: tabName === 'staking' }"
+            >
                 <img src="~assets/imgs/exchange/mining/staking.png" />
                 <div>
-                    <div class="label">{{$t('tradeMining.quotaTitle')}}</div>
-                    <div class="amount">{{stakingMiningTotal|formatNum}} VX</div>
+                    <div class="label">{{ $t("tradeMining.quotaTitle") }}</div>
+                    <div class="amount">
+                        {{ stakingMiningTotal | formatNum }} VX
+                    </div>
                 </div>
             </div>
-            <div class="tab_title_item" @click="tabName = 'invite'" :class="{active:tabName==='invite'}">
+            <div class="gap"></div>
+            <div
+                class="tab_title_item"
+                @click="tabName = 'invite'"
+                :class="{ active: tabName === 'invite' }"
+            >
                 <img src="~assets/imgs/exchange/mining/invite.png" />
                 <div>
-                    <div class="label">{{$t('inviteMining.title')}}</div>
-                    <div class="amount">{{inviteMiningTotal|formatNum}} VX</div>
+                    <div class="label">{{ $t("inviteMining.title") }}</div>
+                    <div class="amount">
+                        {{ inviteMiningTotal | formatNum }} VX
+                    </div>
                 </div>
             </div>
-            <div class="tab_title_item" @click="tabName = 'order'" :class="{active:tabName==='order'}">
+            <div class="gap"></div>
+            <div
+                class="tab_title_item"
+                @click="tabName = 'order'"
+                :class="{ active: tabName === 'order' }"
+            >
                 <img src="~assets/imgs/exchange/mining/order.png" />
                 <div>
-                    <div class="label">{{$t('orderMining.title')}}</div>
-                    <div class="amount">{{orderMiningTotal|formatNum}} VX</div>
+                    <div class="label">{{ $t("orderMining.title") }}</div>
+                    <div class="amount">
+                        {{ orderMiningTotal | formatNum }} VX
+                    </div>
                 </div>
             </div>
         </div>
@@ -39,18 +66,18 @@
     </div>
 </template>
 <script>
-import confirm from 'components/confirm/index.js';
-import { miningTrade, miningPledge } from 'services/trade';
+import confirm from "components/confirm/index.js";
+import { miningTrade, miningPledge } from "services/trade";
 import {
     getInviteMiningDetail,
     getOrderMiningDetail
-} from 'services/tradeOperation';
+} from "services/tradeOperation";
 
-import openUrl from 'utils/openUrl';
-import inviteMinComp from './invite.vue';
-import orderMinComp from './order.vue';
-import tradeMinComp from './trade.vue';
-import stakingMinComp from './staking.vue';
+import openUrl from "utils/openUrl";
+import inviteMinComp from "./invite.vue";
+import orderMinComp from "./order.vue";
+import tradeMinComp from "./trade.vue";
+import stakingMinComp from "./staking.vue";
 
 export default {
     components: {
@@ -65,24 +92,24 @@ export default {
             stakingMiningTotal: 0,
             inviteMiningTotal: 0,
             orderMiningTotal: 0,
-            tabName: 'trade'
+            tabName: "trade"
         };
     },
     mounted() {
         // Temporary coming soon alert
         confirm({
-            size: 'small',
-            type: 'description',
-            title: this.$t('tradeMining.hintTitle'),
+            size: "small",
+            type: "description",
+            title: this.$t("tradeMining.hintTitle"),
             singleBtn: true,
             closeBtn: { show: true },
             leftBtn: {
-                text: this.$t('tradeMining.more'),
+                text: this.$t("tradeMining.more"),
                 click: () => {
                     this.goLink();
                 }
             },
-            content: this.$t('tradeMining.comingHint')
+            content: this.$t("tradeMining.comingHint")
         });
         this.init();
     },
@@ -108,17 +135,27 @@ export default {
             if (!this.address) return;
             const address = this.address;
             Promise.all([
-                miningTrade({ address }).then(data => (this.tradeMiningTotal = data.miningTotal)),
-                miningPledge({ address }).then(data => (this.stakingMiningTotal = data.miningTotal)),
-                getInviteMiningDetail({ address }).then(data => (this.inviteMiningTotal = data.miningTotal)),
-                getOrderMiningDetail({ address }).then(data => (this.orderMiningTotal = data.miningTotal))
+                miningTrade({ address }).then(
+                    data => (this.tradeMiningTotal = data.miningTotal)
+                ),
+                miningPledge({ address }).then(
+                    data => (this.stakingMiningTotal = data.miningTotal)
+                ),
+                getInviteMiningDetail({ address }).then(
+                    data => (this.inviteMiningTotal = data.miningTotal)
+                ),
+                getOrderMiningDetail({ address }).then(
+                    data => (this.orderMiningTotal = data.miningTotal)
+                )
             ]);
         },
         goLink() {
-            if (this.$i18n.locale === 'zh') {
-                openUrl('https://dex.vite.wiki/zh/dex/#%E6%8C%96%E7%9F%BF%E6%96%B9%E6%A1%88v');
+            if (this.$i18n.locale === "zh") {
+                openUrl(
+                    "https://dex.vite.wiki/zh/dex/#%E6%8C%96%E7%9F%BF%E6%96%B9%E6%A1%88v"
+                );
             }
-            openUrl('https://dex.vite.wiki/dex/#vx-mining');
+            openUrl("https://dex.vite.wiki/dex/#vx-mining");
         }
     }
 };
@@ -127,11 +164,17 @@ export default {
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
 
-.tab_title{
+.tab_title {
     display: flex;
     margin-bottom: 12px;
     padding: 22px 0;
-    &_item{
+    .gap{
+        width: 0;
+        border-left: 1px solid rgba(227, 235, 245, 0.6);
+        height: 60px;
+        
+    }
+    &_item {
         cursor: pointer;
         user-select: none;
         flex-grow: 1;
@@ -139,26 +182,25 @@ export default {
         display: flex;
         align-items: center;
         justify-content: flex-start;
-        &.active{
-            background: rgba(0,122,255,0.04);
-            border-bottom: 2px solid rgba(0,122,255,1);;
+        &.active {
+            background: rgba(0, 122, 255, 0.04);
+            border-bottom: 2px solid rgba(0, 122, 255, 1);
         }
-        img{
+        img {
             margin-right: 20px;
             height: 34px;
             width: 34px;
         }
         @include font-family-bold();
-        .label{
+        .label {
             font-size: 13px;
-            color: #5E6875;
+            color: #5e6875;
         }
-        .amount{
+        .amount {
             font-size: 16px;
-            color: #1D2024;
+            color: #1d2024;
         }
     }
-
 }
 
 .trade-mining-wrapper {
@@ -168,7 +210,7 @@ export default {
     display: flex;
     flex-direction: column;
 }
-.tab_container{
+.tab_container {
     flex-grow: 1;
 }
 /deep/ .trade-mining-section {
