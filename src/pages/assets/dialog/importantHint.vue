@@ -18,7 +18,9 @@
             <span>
                 {{ $t('assets.notice.hint', { gate: gateInfo.gateway }) }}
                 <a v-show="gateInfo.customer">
-                    --<a class="link __pointer" @click="goLink">{{ $i18n.locale === 'zh' ? gateInfo.customer : gateInfo.customerEn }}</a>
+                    --<a class="link __pointer" @click="goLink($i18n.locale === 'zh' ? gateInfo.customer : gateInfo.customerEn)">
+                        {{ $i18n.locale === 'zh' ? gateInfo.customer : gateInfo.customerEn }}
+                    </a>
                 </a>
             </span>
         </div>
@@ -74,8 +76,7 @@ export default {
         clear() {
             this.successCallback = null;
         },
-        goLink() {
-            const url = this.$i18n.locale === 'zh' ? this.gateInfo.customer : this.gateInfo.customerEn;
+        goLink(url) {
             url && openUrl(url);
         }
     }
