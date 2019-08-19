@@ -66,18 +66,18 @@
     </div>
 </template>
 <script>
-import confirm from "components/confirm/index.js";
-import { miningTrade, miningPledge } from "services/trade";
+import confirm from 'components/confirm/index.js';
+import { miningTrade, miningPledge } from 'services/trade';
 import {
     getInviteMiningDetail,
     getOrderMiningDetail
-} from "services/tradeOperation";
+} from 'services/tradeOperation';
 
-import openUrl from "utils/openUrl";
-import inviteMinComp from "./invite.vue";
-import orderMinComp from "./order.vue";
-import tradeMinComp from "./trade.vue";
-import stakingMinComp from "./staking.vue";
+import openUrl from 'utils/openUrl';
+import inviteMinComp from './invite.vue';
+import orderMinComp from './order.vue';
+import tradeMinComp from './trade.vue';
+import stakingMinComp from './staking.vue';
 
 export default {
     components: {
@@ -92,24 +92,24 @@ export default {
             stakingMiningTotal: 0,
             inviteMiningTotal: 0,
             orderMiningTotal: 0,
-            tabName: "trade"
+            tabName: 'trade'
         };
     },
     mounted() {
         // Temporary coming soon alert
         confirm({
-            size: "small",
-            type: "description",
-            title: this.$t("tradeMining.hintTitle"),
+            size: 'small',
+            type: 'description',
+            title: this.$t('tradeMining.hintTitle'),
             singleBtn: true,
             closeBtn: { show: true },
             leftBtn: {
-                text: this.$t("tradeMining.more"),
+                text: this.$t('tradeMining.more'),
                 click: () => {
                     this.goLink();
                 }
             },
-            content: this.$t("tradeMining.comingHint")
+            content: this.$t('tradeMining.comingHint')
         });
         this.init();
     },
@@ -135,27 +135,17 @@ export default {
             if (!this.address) return;
             const address = this.address;
             Promise.all([
-                miningTrade({ address }).then(
-                    data => (this.tradeMiningTotal = data.miningTotal)
-                ),
-                miningPledge({ address }).then(
-                    data => (this.stakingMiningTotal = data.miningTotal)
-                ),
-                getInviteMiningDetail({ address }).then(
-                    data => (this.inviteMiningTotal = data.miningTotal)
-                ),
-                getOrderMiningDetail({ address }).then(
-                    data => (this.orderMiningTotal = data.miningTotal)
-                )
+                miningTrade({ address }).then(data => (this.tradeMiningTotal = data.miningTotal)),
+                miningPledge({ address }).then(data => (this.stakingMiningTotal = data.miningTotal)),
+                getInviteMiningDetail({ address }).then(data => (this.inviteMiningTotal = data.miningTotal)),
+                getOrderMiningDetail({ address }).then(data => (this.orderMiningTotal = data.miningTotal))
             ]);
         },
         goLink() {
-            if (this.$i18n.locale === "zh") {
-                openUrl(
-                    "https://dex.vite.wiki/zh/dex/#%E6%8C%96%E7%9F%BF%E6%96%B9%E6%A1%88v"
-                );
+            if (this.$i18n.locale === 'zh') {
+                openUrl('https://dex.vite.wiki/zh/dex/#%E6%8C%96%E7%9F%BF%E6%96%B9%E6%A1%88v');
             }
-            openUrl("https://dex.vite.wiki/dex/#vx-mining");
+            openUrl('https://dex.vite.wiki/dex/#vx-mining');
         }
     }
 };
@@ -166,13 +156,14 @@ export default {
 
 .tab_title {
     display: flex;
+    align-items: center;
     margin-bottom: 12px;
     padding: 22px 0;
     .gap{
         width: 0;
         border-left: 1px solid rgba(227, 235, 245, 0.6);
         height: 60px;
-        
+
     }
     &_item {
         cursor: pointer;
