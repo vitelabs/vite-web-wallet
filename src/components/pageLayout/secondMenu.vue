@@ -29,6 +29,7 @@
             <div v-show="isHaveUsers && $route.name.indexOf('trade') !== -1" class="tab __pointer"
                  @click="goOperator">{{ $t('tradeOperator.title') }}</div>
             <switch-addr class="switch-tab menu" v-show="$route.name !== 'assets'" ></switch-addr>
+            <div class="tab __pointer" v-show="isLogin" @click="logout">{{ $t('saveLogout') }}</div>
         </ul>
     </div>
 </template>
@@ -153,6 +154,10 @@ export default {
         changeAcc() {
             statistics.event('secondMenu', `${ this.$route.name }-switchAccount`, this.address || '');
             this.go('startLogin');
+        },
+        logout() {
+            statistics.event('secondMenu', `${ this.$route.name }-logout`, this.address || '');
+            this.$store.commit('logout');
         }
     }
 };
@@ -181,6 +186,9 @@ export default {
         display: flex;
         flex-wrap: nowrap;
         .tab {
+            &:last-child {
+                margin-left: 18px;
+            }
             position: relative;
             margin-left: 28px;
             &.invite-switch{

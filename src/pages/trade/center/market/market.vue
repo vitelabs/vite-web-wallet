@@ -56,7 +56,8 @@
 
         <loading loadingType="dot" class="ex-center-loading" v-show="isLoading"></loading>
         <div class="hint" v-show="isShowNoData">{{ noData }}</div>
-        <tx-pair-list v-show="!isShowNoData && !isLoading" :list="activeTxPairList"
+        <tx-pair-list v-show="!isShowNoData && !isLoading"
+                      :list="activeTxPairList" :isLoading="isLoading"
                       :favoritePairs="favoritePairs" :currentRule="currentOrderRule"
                       :setFavorite="setFavorite" :showCol="showCol"></tx-pair-list>
     </div>
@@ -338,6 +339,10 @@ export default {
 
 <style lang="scss" scoped>
 @import "../center.scss";
+
+.__center-tb-item.percent {
+    overflow: visible;
+}
 
 .market-wrapper {
     position: relative;

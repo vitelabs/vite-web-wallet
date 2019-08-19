@@ -22,7 +22,7 @@ const mutations = {
         state.isVip = isVip;
     },
     setExchangeMarketInfo(state, marketInfo) {
-        state.marketInfo = Object.assign({}, marketInfo);
+        state.marketInfo = marketInfo;
     },
     setInviteCode(state, payload = '') {
         state.invitedCode = payload;

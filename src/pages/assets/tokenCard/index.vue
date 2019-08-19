@@ -347,6 +347,7 @@ export default {
                 margin-right: 4px;
                 margin-bottom: 11px;
                 border-radius: 50%;
+                border: 1px solid rgba(212,222,231,1);
             }
             .token-meta {
                 display: flex;

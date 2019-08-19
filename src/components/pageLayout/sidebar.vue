@@ -18,9 +18,9 @@
             <div class="_bottom">
                 <div v-for="(name, index) in menuBottoms" :key="index"
                      class="icon __pointer" :class="{ 'active': $route.name === name }"
-                     @click="_go(name)" @mouseenter="enterLogout(name)" @mouseleave="leaveLogout(name)">
-                    <img v-show="$route.name !== name && (name !== iconHover)" :src="icon[name]" />
-                    <img v-show="$route.name === name || (name === iconHover) " :src="icon[`${name}Active`]"  />
+                     @click="_go(name)">
+                    <img class="default" v-show="$route.name !== name" :src="icon[name]" />
+                    <img class="active" v-show="$route.name === name" :src="icon[`${name}Active`]"  />
                 </div>
             </div>
         </div>
@@ -39,10 +39,6 @@ import wallet from 'assets/imgs/wallet_default.svg';
 import walletActive from 'assets/imgs/wallet_pressed.svg';
 import setting from 'assets/imgs/settings_default.svg';
 import settingActive from 'assets/imgs/settings_pressed.svg';
-import logout from 'assets/imgs/logout_default.svg';
-import logoutActive from 'assets/imgs/logout_pressed.svg';
-import login from 'assets/imgs/login_default.svg';
-import loginActive from 'assets/imgs/login_pressed.svg';
 import trade from 'assets/imgs/trade_default.svg';
 import tradeActive from 'assets/imgs/trade_pressed.svg';
 
@@ -61,7 +57,6 @@ export default {
     data() {
         return {
             isShowNotice: false,
-            iconHover: false,
             viteLogo,
             icon: {
                 assets,
@@ -72,10 +67,6 @@ export default {
                 tradeActive,
                 setting,
                 settingActive,
-                logout,
-                logoutActive,
-                login,
-                loginActive,
                 index: trade,
                 indexActive: trade
             }
@@ -108,19 +99,6 @@ export default {
         },
         leaveLogo() {
             this.isShowNotice = false;
-        },
-
-        enterLogout(name) {
-            if (name !== 'logout' && name !== 'login') {
-                return;
-            }
-            this.iconHover = name;
-        },
-        leaveLogout(name) {
-            if (name !== 'logout' && name !== 'login') {
-                return;
-            }
-            this.iconHover = '';
         }
     }
 };

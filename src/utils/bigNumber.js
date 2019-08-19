@@ -124,8 +124,25 @@ export default {
         const n = new BigNumber(num);
         return n.toFormat(decimal);
     },
-    onlyFormat(num) {
+    onlyFormat(num, minDecimals) {
         const n = new GroupBigNumber(num);
-        return n.toFormat();
+        let formatN = n.toFormat();
+
+        if (typeof minDecimals === 'undefined') {
+            return formatN;
+        }
+
+        const afterPoint = formatN.split('.')[1] || '';
+        if (afterPoint.length >= minDecimals) {
+            return formatN;
+        }
+
+        if (!afterPoint.length) {
+            formatN += '.';
+        }
+        for (let i = 0; i < minDecimals - afterPoint.length; i++) {
+            formatN += '0';
+        }
+        return formatN;
     }
 };

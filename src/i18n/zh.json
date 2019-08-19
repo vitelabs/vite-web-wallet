@@ -13,6 +13,7 @@
     "settingAcc": "设置账户",
     "resetAcc": "重新设置账号",
     "logout": "退出登录",
+    "saveLogout": "安全退出",
     "blockHeight": "快照块高度",
     "accountName": "账户昵称",
     "action": "操作",
@@ -264,7 +265,10 @@
             "onroad":"钱包待接收金额",
             "gate":"钱包跨链网关",
             "totalExAmount":"交易所总余额",
-            "availableExAmount":"交易所可用余额"
+            "availableExAmount":"交易所可用余额",
+            "balanceTips": "点击转账，可以从Vite 钱包给其他地址转币",
+            "gateTips": "点击跨链转入，可以将其他币种跨链映射到Vite网络，转入Vite钱包；点击跨链转出仍可以将资产转至其他平台。*转入转出过程可能会产生手续费，且有金额限制",
+            "availableExAmountTips": "点击充值至交易所，将钱包中的资产划转至交易所；点击提现至钱包，将交易所资产划转至钱包。以上划转过程不需要手续费"
         },
         "actionType": {
             "SEND": "转账",
@@ -287,7 +291,7 @@
         },
         "addToken": {
             "title": "添加代币",
-            "placeholder": "请输入代币名称",
+            "placeholder": "请输入代币名称或TokenID",
             "lTxt": "取消",
             "rTxt": "添加"
         },
@@ -296,14 +300,21 @@
             "title": "{tokenSymbol}代币信息",
             "saveGate": "保存修改",
             "labels": {
-                "tokenId": "TokenID",
-                "title": "{tokenSymbol}代币地址",
-                "address": "铸币地址",
                 "tokenName": "代币名称",
+                "tokenId": "TokenID",
+                "overview": "代币简介",
                 "totalSupply": "发行总量",
-                "decimals": "小数位",
-                "isReIssuable": "类型",
-                "time": "发行日期"
+                "total": "流通总量",
+                "type": "代币类型",
+                "gate": "跨链网关",
+                "website": "官网",
+                "whitePaper": "白皮书",
+                "explorer": "浏览器",
+                "github": "Github",
+                "media": "社交媒体",
+                "crossType": "跨链代币",
+                "originType": "原生代币",
+                "viewmore": "查看更多"
             },
             "reIssuable": {
                 "true": "可增发",
@@ -328,7 +339,7 @@
             "nodeDescStr": "当前功能仅针对跨链代币使用，非跨链代币请勿使用，同时请勿轻信他人的网关链接，造成的资产损失本站概不负责。如需使用则将正确的网关链接填写在下方，保存后即可在当前地址生效。"
         },
         "depositRecord": {
-            "tabName": "充值记录",
+            "tabName": "转入记录",
             "heads": ["时间", "金额", "状态", "{outChain}链Hash","vite链Hash","手续费"],
             "statusMap": {
                 "OPPOSITE_PROCESSING": "{outChain}链待确认{confirms}",
@@ -340,7 +351,7 @@
             }
         },
         "withdrawRecord": {
-            "tabName": "提现记录",
+            "tabName": "转出记录",
             "heads": ["时间", "金额", "状态", "vite链Hash", "{outChain}链Hash","手续费"],
             "statusMap": {
                 "TOT_PROCESSING": "VITE链待确认{confirms}",
@@ -760,12 +771,20 @@
         "mergeDepth": "深度合并",
         "depthStep": "{step}位小数",
         "blocking": "网络拥堵, 请稍候重试",
+        "supportMining": "支持挖矿的交易对",
         "operator": {
-            "title": "运营商信息",
-            "introduction": "介绍",
+            "noName": "匿名网关",
+            "overview": "介绍",
             "txPair": "交易对",
             "confirmTitle": "温馨提示",
-            "confirmText": "当前交易对为 {symbol}，请谨慎交易。数字资产交易存在风险，需用户自行谨慎判断确定相关数字资产的真实性、合法性和有效性，并自行承担因此产生的责任与损失。"
+            "confirmText": "当前交易对为 {symbol}，请谨慎交易。数字资产交易存在风险，需用户自行谨慎判断确定相关数字资产的真实性、合法性和有效性，并自行承担因此产生的责任与损失。",
+            "address": "运营商地址",
+            "name": "运营商名称"
+        },
+        "operatorTxPair": {
+            "title": "交易对信息",
+            "tokenTab": "代币详情",
+            "operatorTab": "运营商信息"
         }
     },
     "trade": {
@@ -777,7 +796,8 @@
         "quantityTitle": "成交额({quantity})",
         "priceTitle": "价格({price})",
         "amountTitle": "数量({amount})",
-        "amountTable": "数量",
+        "quantityTable": "累积数量",
+        "amountTable": "累积成交额",
         "amount": "成交额",
         "newOrderSuccess": "提单请求已发送",
         "newOrderFail": "提单失败",
@@ -963,6 +983,12 @@
             "1": "卖",
             "0": "买"
         },
+        "status": {
+            "1": "委托中",
+            "2": "已完成",
+            "3": "已撤销",
+            "4": "下单失败"
+        },
         "confirmTable": {
             "title":"成交记录",
             "heads": [
@@ -1003,6 +1029,7 @@
             "side": "方向",
             "buy": "买",
             "sell": "卖",
+            "status": "状态",
             "search": "搜索",
             "reset": "重置"
         }
@@ -1040,6 +1067,7 @@
         "title": "分红",
         "poolTitle": "手续费分红池",
         "listTitle": "我的分红",
+        "allPrice": "总估值",
         "date": "日期",
         "VX": "持有VX",
         "coin": "分红币种",

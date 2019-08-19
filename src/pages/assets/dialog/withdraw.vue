@@ -9,7 +9,7 @@ block content
         .right.blue {{token.balance||'0'}}
     .block__title {{$t("tokenCard.withdraw.labels.address")}}
         .err {{isAddrCorrect?'':$t("tokenCard.withdraw.addressErr")}}
-    input.block__content(v-model="withdrawAddr" :placehodler="$t('tokenCard.withdraw.addressPlaceholder')")
+    input.block__content(v-model="withdrawAddr" :placeholder="$t('tokenCard.withdraw.addressPlaceholder', {token: token.tokenSymbol === 'USDT' && token.index === 0 ? 'USDT(ERC20)' : ''})")
     .block__title(v-if="type===1") {{labelName}}
     input.block__content(v-if="type===1" v-model="labelValue" :placeholder="$t('tokenCard.withdraw.labelPlaceholder',{labelName})")
     .block__title {{$t("tokenCard.withdraw.labels.amount")}}

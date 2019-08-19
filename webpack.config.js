@@ -25,24 +25,35 @@ let webpackConfig = {
     entry: { index: path.join(SRC_PATH, '/index.js') },
     output: {
         path: STATIC_PATH,
-        filename: '[name].[hash].js'
+        // filename: '[name].[contenthash].js'
+        filename: '[name].[chunkhash].js'
     },
     plugins,
     optimization: {
+        usedExports: true,
         splitChunks: {
-            cacheGroups: {
-                // [TODO] Async Router
-                vendors: {
-                    test: /[\\/]node_modules[\\/]/,
-                    name: 'vendor',
-                    chunks: 'all'
-                },
-                default: {
-                    minChunks: 2,
-                    priority: -20,
-                    reuseExistingChunk: true
-                }
-            }
+            hidePathInfo: true,
+            chunks: 'all'
+            // cacheGroups: {
+            //     // [TODO] Async Router
+            //     vendors: {
+            //         test: /[\\/]node_modules[\\/]/,
+            //         name: 'vendor',
+            //         chunks: 'all'
+            //     },
+            //     commons: {
+            //         name: 'comomns',
+            //         test: /src(?!(\/utils))/, // 可自定义拓展规则
+            //         minChunks: 2, // 最小共用次数
+            //         minSize: 0, // 代码最小多大，进行抽离
+            //         priority: 1 // 该配置项是设置处理的优先级，数值越大越优先处理
+            //     },
+            //     default: {
+            //         minChunks: 2,
+            //         priority: -20,
+            //         reuseExistingChunk: true
+            //     }
+            // }
         },
         minimizer: [
             new UglifyJsPlugin({
@@ -50,7 +61,10 @@ let webpackConfig = {
                 parallel: true,
                 uglifyOptions: {
                     compress: {
+                        // collapse_vars: true,
+                        // reduce_vars: true,
                         unused: true,
+                        drop_console: true,
                         drop_debugger: true
                     },
                     output: { comments: false }
@@ -86,9 +100,15 @@ let webpackConfig = {
                     // 10KB
                     limit: 10 * 1024
                 }
-            }, {
+            },
+            {
+                test: /\.(svg|png|jpg|gif)$/,
+                loader: 'image-webpack-loader',
+                enforce: 'pre'
+            },
+            {
                 test: /\.(j|t)s$/,
-                // exclude: /node_modules(?!(\/base-x)|(\/resize-detector)|(\/vue-echarts))|(\/@vite\/vitejs)/,
+                // exclude: /node_modules(?!(\/base-x)|(\/resize-detector)|(\/vue-echarts))|(\/@vite\/vitejs\/)/,
                 exclude: /node_modules(?!(\/base-x)|(\/resize-detector)|(\/vue-echarts))/,
                 use: {
                     loader: 'babel-loader',
@@ -102,7 +122,7 @@ let webpackConfig = {
                 test: /(\.scss$|\.css$|\.sass$)/,
                 use: [
                     { loader: 'style-loader' },
-                    { loader: 'css-loader' },
+                    { loader: 'css-loader', options: { minimize: true } },
                     { loader: 'sass-loader' }
                     // { loader: 'postcss-loader' }
                 ]

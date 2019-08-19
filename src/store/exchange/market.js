@@ -5,11 +5,14 @@ const quoteTokenCategory = [ 'BTC', 'ETH', 'VITE', 'USDT' ];
 
 const query = getQuery();
 const category = query.category;
-const DetaultCategory = category && quoteTokenCategory.indexOf(category) !== -1 ? category : 'BTC';
+const symbol = query.symbol;
+const DefaultCategory = category && quoteTokenCategory.indexOf(category) !== -1 ? category : 'BTC';
+const DefaultSymbol = symbol || 'VITE_BTC-000';
 
 const state = {
     quoteTokenCategory,
-    curentCategory: DetaultCategory,
+    curentCategory: DefaultCategory,
+    DefaultSymbol,
     isShowFavorite: false,
     marketMap: [],
     marketClosed: []
@@ -27,6 +30,17 @@ const mutations = {
     },
     setMarketClosed(state, marketClosed) {
         state.marketClosed = marketClosed;
+    },
+    switchTradePair(state, { category, symbol }) {
+        if (!category || quoteTokenCategory.indexOf(category) === -1) {
+            return;
+        }
+
+        state.curentCategory = category;
+        state.DefaultSymbol = symbol;
+    },
+    clearDefaultSymbol(state) {
+        state.DefaultSymbol = null;
     }
 };
 
