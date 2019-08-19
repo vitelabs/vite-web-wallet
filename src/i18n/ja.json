@@ -579,7 +579,7 @@
         "title": "SBP",
         "help": {
             "title": "SBPについて",
-            "text": "SBP（スナップショットブロックプロデューサー）はブロック作成権限を持つノードです。一定量のVITEをステーキングすることでSBP候補として登録できます。各ラウンド（約75秒）で25のSBPが選択されます 上位25の候補ノードからランダムに23、さらにリストの26番目から100番目にランク付けされた候補ノードからランダムに2つ選択されます。ブロック作成報酬の50％はブロック作成ノードに割り当てられ、残りの50％は投票報酬として上位100位にランク付けされたノードに割り当てられます。 1つの登録アドレス（ステーキングアドレス）は、複数のブロック作成ノード（ノード名）を登録できます。ノード名が登録アドレスによって登録されている場合、ノード名は使用できません。 ノード名はブロック作成アドレスを切り替えることができますが、ブロック作成アドレスを他のノード名で再利用することはできません。"
+            "text": "SBP（Snapshot Block Producer）is a node that has right to create blocks, you can register to become a SBP candidate by staking a certain amount of VITE, each round (about 75 seconds) will elect 25 SBPs, the SBPs will be elected from random 23 out of top 25 candidate nodes, plus random 2 out of the candidate nodes ranking 26th-100th on the list. The 50% of total SBP rewards will be allocated to the block creation node, the other 50% will be allocated to nodes that are ranked on top 100 as voting rewards. One registration address (staking address) can register multiple block creation nodes (node names), a node name cannot be used if the node name has been registered by a registration address. A node name can switch block creation address, however, block creation address cannot be reused by other node names."
         },
         "register": "SBP登録",
         "cancel": "SBPの取消",
@@ -758,7 +758,7 @@
         "title": "Vite変換",
         "help": {
             "title": "VITE変換の簡単な説明",
-            "text": "VITE変換機能により、ERC20トークンをVITEのTestNetに移行できます。TestNetでは、公式SBPに投票して報酬を受け取ると、年率が20％に達する可能性があります。ERC20VITEトークンは、Ethereumブラックホールアドレスに転送されます：{ blackAddr}、Ethereumブラックホールアドレスがトランザクションを受信して確認すると、Viteアドレスで同量のVITEを受け取ります。変換プロセスに入ったら、Viteウォレットのアドレスに十分なVITEとETH（ガスとして）があることを確認します Viteウォレットのアドレス。"
+            "text": "You can convert ERC20 VITE into VITE at Vite Pre-Mainnet through VITE conversion. During conversion, your ERC20 VITE will be transferred to Ethereum black hole address: 0x1111111111111111111111111111111111111111, and you will receive the same amount of VITE in your Vite address after the transaction to Ethereum black hole address has completed. During the conversion, fee of transaction to the Ethereum black hole address come from your current ETH address. After submitting the conversion, please wait at least 30 confirmations in Ethereum network, you can find the transaction history in conversion history."
         },
         "gas": "マイニング手数料",
         "record": "変換履歴",
