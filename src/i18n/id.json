@@ -1,5 +1,5 @@
 {
-    "lang": "Inggris",
+    "lang": "Indonesia",
     "help": "Bantuan",
     "start": "Mulai",
     "login": "Masuk",
@@ -13,7 +13,7 @@
     "settingAcc": "Pengaturan Akun",
     "resetAcc": "Setel Ulang Akun",
     "logout": "Keluar",
-    "saveLogout": "安全退出",
+    "saveLogout": "Logout",
     "blockHeight": "Snapshot Block Height",
     "accountName": "Nama Akun",
     "action": "Beraksi",
