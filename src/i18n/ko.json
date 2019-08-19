@@ -579,7 +579,7 @@
         "title": "SBP",
         "help": {
             "title": "About SBP",
-            "text": "SBP（Snapshot Block Producer）is a node that has right to create blocks, you can register to become a SBP candidate by staking a certain amount of VITE, each round (about 75 seconds) will elect 25 SBPs, the SBPs will be elected from random 23 out of top 25 candidate nodes, plus random 2 out of the candidate nodes ranking 26th-100th on the list. The 50% of block creation rewards will be allocated to the block creation node, the other 50% will be allocated to nodes that are ranked on top 100 as voting rewards. One registration address (staking address) can register multiple block creation nodes (node names), a node name cannot be used if the node name has been registered by a registration address. A node name can switch block creation address, however, block creation address cannot be reused by other node names."
+            "text": "SBP（Snapshot Block Producer）is a node that has right to create blocks, you can register to become a SBP candidate by staking a certain amount of VITE, each round (about 75 seconds) will elect 25 SBPs, the SBPs will be elected from random 23 out of top 25 candidate nodes, plus random 2 out of the candidate nodes ranking 26th-100th on the list. The 50% of total SBP rewards will be allocated to the block creation node, the other 50% will be allocated to nodes that are ranked on top 100 as voting rewards. One registration address (staking address) can register multiple block creation nodes (node names), a node name cannot be used if the node name has been registered by a registration address. A node name can switch block creation address, however, block creation address cannot be reused by other node names."
         },
         "register": "SBP Registration",
         "cancel": "SBP Cancellation",
@@ -758,7 +758,7 @@
         "title": "VITE Conversion",
         "help": {
             "title": "Quick Understanding of VITE Conversion",
-            "text": "You can migrate ERC20 tokens into VITE into our TestNet by VITE conversion function. In TestNet, casting your vote for official SBPs to collect rewards, the annualized rate can reach 20%. Your ERC20 VITE tokens will be transferred to Ethereum black hole address: {blackAddr}, you will receive the same amount of VITE at your Vite address when Ethereum black hole address has received the transaction and confirmed. Once you are in the conversion process, confirm that there are enough VITE and ETH (as gas) in your Ethereum address of Vite wallet."
+            "text": "You can convert ERC20 VITE into VITE at Vite Pre-Mainnet through VITE conversion. During conversion, your ERC20 VITE will be transferred to Ethereum black hole address: 0x1111111111111111111111111111111111111111, and you will receive the same amount of VITE in your Vite address after the transaction to Ethereum black hole address has completed. During the conversion, fee of transaction to the Ethereum black hole address come from your current ETH address. After submitting the conversion, please wait at least 30 confirmations in Ethereum network, you can find the transaction history in conversion history."
         },
         "gas": "Mining Fees",
         "record": "Conversion History",
