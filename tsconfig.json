@@ -29,7 +29,7 @@
     //   ]
     // },
     "typeRoots": ["./typings","@types"],
-    "types": ["node","@vite/vitejs"]
+    "types": ["node"]
   }
   
 }
