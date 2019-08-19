@@ -19,9 +19,9 @@
                 <span v-show="showCol === 'updown'" class="__center-tb-item percent" :class="{
                     'up': +txPair.priceChange > 0,
                     'down': +txPair.priceChange < 0
-                }">{{ txPair.priceChangePercent ? getPercent(txPair.priceChangePercent) : '--' }}</span>
+                }">{{ txPair.priceChangePercent ? getPercent(txPair.priceChangePercent) : '0.00%' }}</span>
                 <span v-show="showCol === 'txNum'" class="__center-tb-item">
-                    {{ txPair.amount ? formatNum(txPair.amount, 1) : '--' }}
+                    {{ txPair.amount ? formatNum(txPair.amount, 1) : '0.0' }}
                 </span>
             </div>
         </div>
@@ -29,7 +29,6 @@
 </template>
 
 <script>
-import getQuery from 'utils/query';
 import BigNumber from 'utils/bigNumber';
 import statistics from 'utils/statistics';
 
@@ -44,6 +43,10 @@ export default {
         currentRule: {
             type: String,
             default: ''
+        },
+        isLoading: {
+            type: Boolean,
+            default: false
         },
         list: {
             type: Array,
@@ -69,6 +72,9 @@ export default {
         isShowFavorite() {
             return this.$store.state.exchangeMarket.isShowFavorite;
         },
+        DefaultSymbol() {
+            return this.$store.state.exchangeMarket.DefaultSymbol;
+        },
         activeSymbol() {
             return this.activeTxPair ? this.activeTxPair.symbol || null : null;
         },
@@ -76,23 +82,29 @@ export default {
             return this.$store.state.exchangeActiveTxPair.activeTxPair;
         },
         showList() {
-            const list = this.orderList(this.list);
-            const query = getQuery();
-            const symbol = query.symbol || 'VITE_BTC-000';
+            if (this.isLoading) {
+                return [];
+            }
 
+            const list = this.orderList(this.list);
             const _l = [];
-            let activeTxPair = list && list.length ? list[0] : null;
+
+            let activeTxPair = null;
 
             list.forEach(_t => {
-                if (symbol && _t.symbol === symbol) {
+                if (this.DefaultSymbol && _t.symbol === this.DefaultSymbol) {
                     activeTxPair = _t;
                 }
                 _l.push(_t);
             });
 
-            if (!this.activeTxPair && activeTxPair) {
+            if (activeTxPair) {
                 this.setActiveTxPair(activeTxPair);
+            } else if (!this.activeTxPair) {
+                activeTxPair = list && list.length ? list[0] : null;
+                activeTxPair && this.setActiveTxPair(activeTxPair);
             }
+            this.$store.commit('clearDefaultSymbol');
 
             return _l;
         },
@@ -149,9 +161,19 @@ export default {
                 return txPair.tradeTokenSymbol;
             }
 
-            const price = BigNumber.multi(txPair.closePrice || 0, rate || 0, 2);
-            if (!+price) {
+            const _price = BigNumber.multi(txPair.closePrice || 0, rate || 0, 6);
+            if (!+_price) {
                 return txPair.tradeTokenSymbol;
+            }
+
+            let price = '';
+            const _realPrice = BigNumber.normalFormatNum(_price, 6);
+            const _realPrice2 = BigNumber.normalFormatNum(_realPrice, 2);
+
+            if (+_realPrice2 === 0) {
+                price = _realPrice;
+            } else {
+                price = _realPrice2;
             }
 
             const pre = this.$store.state.env.currency === 'cny' ? '≈¥' : '≈$';
@@ -226,17 +248,19 @@ export default {
         right: -10px;
         z-index: 1;
         transform: translateX(100%);
-        background: rgba(255, 255, 255, 1);
-        box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.1);
+        background: rgba(215,215,215,1);
+        box-shadow: 0px 5px 20px 0px rgba(0,0,0,0.1);
+        border: 1px solid rgba(212,222,231,1);
         font-size: 12px;
-        color: #5E6875;
+        line-height: 18px;
+        color: rgba(94,104,117,1);
         font-family: $font-H;
         font-weight: 400;
 
         &::after {
             content: ' ';
             border: 5px solid transparent;
-            border-right: 5px solid #fff;
+            border-right: 5px solid rgba(215,215,215,1);
             position: absolute;
             top: 50%;
             left: 0;

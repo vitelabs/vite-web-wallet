@@ -38,7 +38,7 @@
                 <div class="__tb_cell">{{ getStateStr(item) }}</div>
                 <div class="__tb_cell click-able"
                      @click="() => gotoInHash(item.inTxHash)">
-                    {{ item.inTxHash| hashShortify }}
+                    {{ item.inTxHash | hashShortify }}
                 </div>
                 <div class="__tb_cell click-able"
                      @click="() => gotoOutHash(item.outTxHash)">

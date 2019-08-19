@@ -1,6 +1,9 @@
 import BigNumber from 'utils/bigNumber';
 
-const state = { activeTxPair: null };
+const state = {
+    activeTxPair: null,
+    realClosePrice: ''
+};
 
 const mutations = {
     exSetActiveTxPair(state, txPair) {
@@ -13,6 +16,9 @@ const mutations = {
             }
         }
         isChange && (state.activeTxPair = Object.assign({}, txPair));
+    },
+    exSetRealClosePrice(state, realClosePrice) {
+        state.realClosePrice = realClosePrice || '';
     }
 };
 

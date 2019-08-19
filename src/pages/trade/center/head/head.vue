@@ -46,11 +46,7 @@
             </div>
         </div>
 
-        <div class="else-point __pointer" @click="showTxPair">
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
+        <div class="else-point __pointer" @click="showTxPair"></div>
         <tx-pair v-show="isShowTxPair" :close="hideTxPair"></tx-pair>
     </div>
 </template>
@@ -82,23 +78,7 @@ export default {
             return '';
         },
         realPrice() {
-            const pre = this.$store.state.env.currency === 'cny' ? '¥' : '$';
-
-            if (!this.activeTxPair) {
-                return `${ pre }0`;
-            }
-
-            return pre + BigNumber.multi(this.activeTxPair.closePrice || 0, this.rate || 0, 2);
-        },
-        rate() {
-            const rateList = this.$store.state.exchangeRate.rateMap || {};
-            const tokenId = this.activeTxPair && this.activeTxPair.quoteToken ? this.activeTxPair.quoteToken : null;
-            const coin = this.$store.state.env.currency;
-
-            if (!tokenId || !rateList[tokenId]) {
-                return null;
-            }
-            return rateList[tokenId][`${ coin }Rate`] || null;
+            return this.$store.state.exchangeActiveTxPair.realClosePrice;
         }
     },
     methods: {
@@ -123,7 +103,7 @@ export default {
     display: flex;
     flex-wrap: wrap;
     box-sizing: border-box;
-    padding: 0px 14px 8px;
+    padding: 0px 14px 5px;
     @include font-family-bold();
     font-size: 12px;
     font-weight: 600;
@@ -174,19 +154,10 @@ export default {
 
     .else-point {
         display: inline-block;
-        height: 100%;
-        box-sizing: border-box;
-        padding: 8px 0 0 10px;
-        div {
-            width: 5px;
-            height: 5px;
-            background: rgba(0,122,255,0.7);
-            border-radius: 5px;
-            margin-bottom: 5px;
-            &:last-child {
-                margin-bottom: 0;
-            }
-        }
+        height: 24px;
+        padding: 2px 10px;
+        background: url('~assets/imgs/more-tx-detail.svg') right bottom no-repeat;
+        background-size: 4px 24px;
     }
 }
 </style>

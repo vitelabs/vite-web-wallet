@@ -26,7 +26,7 @@ const mutations = {
 const actions = {
     startLoopDexFundeUnreceived({ commit, dispatch }) {
         // 1. Stop last loop
-        dispatch('stopLoopDexFundeUnreceived');
+        dispatch('stopLoopDexFundUnreceived');
 
         // 2. Restart
         unreceivedTimer = new timer(() => $ViteJS.request('onroad_getOnroadInfoByAddress', DexFund_Addr).then(data => {
@@ -34,7 +34,7 @@ const actions = {
         }), loopTime);
         unreceivedTimer.start();
     },
-    stopLoopDexFundeUnreceived({ commit }) {
+    stopLoopDexFundUnreceived({ commit }) {
         commit('dexClearUnreveived');
         unreceivedTimer && unreceivedTimer.stop();
         unreceivedTimer = null;

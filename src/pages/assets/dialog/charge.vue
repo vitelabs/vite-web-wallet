@@ -21,7 +21,7 @@ block content
         img.title_icon.copy.__pointer(src="~assets/imgs/copy_default.svg" @click="copy")
     .block__content(:class="{err:addrErr}") {{addrErr||address}}
     .qrcode-container
-        .qrcode-container__title {{$t('tokenCard.charge.codeTips',{tokenSymbol:token.tokenSymbol})}}
+        .qrcode-container__title {{$t('tokenCard.charge.codeTips',{tokenSymbol:getTokenSymbol(token)})}}
         qrcode(:text="addressQrcode" :options="qrOptions" class="qrcode-container__content")
     .block__title(v-if="!!labelName&&!!labelValue")
         span {{labelName}}
