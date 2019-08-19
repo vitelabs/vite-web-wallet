@@ -51,9 +51,9 @@ export default {
     },
     watch: {
         address() {
-            this.tradeCurrentPage=0;
-            this.tradeListTotal= 0;
-            this.tradeList=[];
+            this.tradeCurrentPage = 0;
+            this.tradeListTotal = 0;
+            this.tradeList = [];
             this.fetchMiningInvite();
         }
     },
