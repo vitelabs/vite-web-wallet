@@ -13,6 +13,7 @@
     "settingAcc": "Setting Account",
     "resetAcc": "Reset Your Account",
     "logout": "Logout",
+    "saveLogout": "安全退出",
     "blockHeight": "Snapshot Block Height",
     "accountName": "Account Name",
     "action": "Action",
@@ -138,6 +139,7 @@
         "err": "Oops, error occurs",
         "request": "{name} request has sent, please wait",
         "copy": "Successfully copied",
+        "copyShare": "Copy share link successful!",
         "addrFormat": "Incorrect address format",
         "amtFormat": "Incorrect amount format",
         "transSucc": "Transaction successful!",
@@ -147,7 +149,8 @@
         "bigger0": "Value must be greater than 0",
         "operateSuccess": "Operation Successful",
         "operateFail": "Operation Failed",
-        "unreceived": "Unlock you wallet before use"
+        "unreceived": "Unlock you wallet before use",
+        "unLogin": "Please login"
     },
     "beforeUse": {
         "title": "Read Before Use",
@@ -179,7 +182,7 @@
         "restore": "Restore Account by Seed Phrase",
         "record": "Generate Seed Phrase",
         "prompt": "Mnemonic seed phrase is the only way to restore your wallet. You are strongly advised to write down the phrase and keep it in a safe place where only you can access.",
-        "placeholder": "Please input your mnemonic seed phrase",
+        "placeholder": "Please input your mnemonic seed phrase. Example: apple banana peach mango pear ...",
         "empty": "The input of seed phrase cannot be empty",
         "error": "Incorrect seed phrase. Try again",
         "hint": "Example: apple banana peach mango pear ...",
@@ -255,7 +258,10 @@
             "onroad": "Wallet Unreceived Amount",
             "gate": "Wallet Cross-Chain Gateway",
             "totalExAmount": "Exchange Total Balance",
-            "availableExAmount": "Exchange Available Balance"
+            "availableExAmount": "Exchange Available Balance",
+            "balanceTips": "点击转账，可以从Vite 钱包给其他地址转币",
+            "gateTips": "点击跨链转入，可以将其他币种跨链映射到Vite网络，转入Vite钱包；点击跨链转出仍可以将资产转至其他平台。*转入转出过程可能会产生手续费，且有金额限制",
+            "availableExAmountTips": "点击充值至交易所，将钱包中的资产划转至交易所；点击提现至钱包，将交易所资产划转至钱包。以上划转过程不需要手续费"
         },
         "actionType": {
             "SEND": "Transfer",
@@ -269,7 +275,7 @@
         },
         "addToken": {
             "title": "Add Token",
-            "placeholder": "Please input token name",
+            "placeholder": "Please input token name 或者 TokenID",
             "lTxt": "Cancel",
             "rTxt": "Add"
         },
@@ -288,13 +294,20 @@
             "saveGate": "Save",
             "labels": {
                 "tokenId": "TokenID",
-                "title": "{tokenSymbol} Address",
-                "address": "Mintage Address",
                 "tokenName": "Name",
                 "totalSupply": "Total Supply",
-                "decimals": "Decimals",
-                "isReIssuable": "Type",
-                "time": "Issuance Date"
+                "total": "流通总量",
+                "overview": "代币简介",
+                "type": "代币类型",
+                "gate": "跨链网关",
+                "website": "官网",
+                "whitePaper": "白皮书",
+                "explorer": "浏览器",
+                "github": "Github",
+                "media": "社交媒体",
+                "crossType": "跨链代币",
+                "originType": "原生代币",
+                "viewmore": "查看更多"
             },
             "reIssuable": {
                 "true": "Re-issuable",
@@ -319,7 +332,7 @@
             "nodeDescStr": "This function only works for cross-chain coins, do not use this on built-in tokens. Meanwhile, please be careful about unfamiliar gateway links. By continuing to use our platform, you agree and acknowledge that Vite Labs would not be responsible for the loss of your fund and other negative consequences caused. Fill out the gateway link below if you need to use gateway, the link will come into effect after you hit save."
         },
         "depositRecord": {
-            "tabName": "Deposit History",
+            "tabName": "Receive History",
             "heads": [
                 "Time",
                 "Amount",
@@ -367,7 +380,7 @@
             "title": "Cross-Chain Receive",
             "addrErr": "Something went wrong with gateway node, please check your network settings",
             "addressTitle": "Recipient Address",
-            "labelTips": "(Please use this '{labelName}' with your receive address, otherwise your assets will lose",
+            "labelTips": " (Please use this '{labelName}' with your recipient address, otherwise your assets will lose)",
             "labelCodeTips": "Please Scan the QRcode from {labelName}",
             "codeTips": "Scan QR code to deposit. Please transfer with the wallet that supports {tokenSymbol}",
             "tips": [
@@ -392,8 +405,9 @@
                 "fee": "Fee",
                 "all": "All"
             },
+            "labelPlaceholder": "Please input {labelName}",
             "amountPlaceholder": "Please input transfer amount which should not be less than {min}",
-            "addressPlaceholder": "Please input transfer address",
+            "addressPlaceholder": "Please input {token} transfer address",
             "successTips": "Transfer request has been sent",
             "failTips": "An error occurred in gateway node, please check the network settings"
         },
@@ -765,12 +779,20 @@
         "mergeDepth": "Group",
         "depthStep": "{step} digits",
         "blocking": "Network congestion occurs, please try again later",
+        "supportMining": "支持挖矿的交易对",
         "operator": {
-            "title": "Operator Details",
-            "introduction": "Introduction",
+            "noName": "匿名网关",
+            "overview": "Introduction",
             "txPair": "Trading Pairs",
             "confirmTitle": "Risk Reminder",
-            "confirmText": "The current trading pair is {symbol}. Please be careful when trading. Investing in digital assets comes with high risks. Before investing, please have a full understanding of all the risks of investing in digital assets and judge the authenticity, legality and validity of digital assets on your own. Please be prudent of your own investment decisions and undertake responsibility for the loss of your assets."
+            "confirmText": "The current trading pair is {symbol}. Please be careful when trading. Investing in digital assets comes with high risks. Before investing, please have a full understanding of all the risks of investing in digital assets and judge the authenticity, legality and validity of digital assets on your own. Please be prudent of your own investment decisions and undertake responsibility for the loss of your assets.",
+            "address": "运营商地址",
+            "name": "运营商名称"
+        },
+        "operatorTxPair": {
+            "title": "交易对信息",
+            "tokenTab": "代币详情",
+            "operatorTab": "Operator Details"
         }
     },
     "trade": {
@@ -782,7 +804,8 @@
         "quantityTitle": "Total({quantity})",
         "priceTitle": "Price({price})",
         "amountTitle": "Amount({amount})",
-        "amountTable": "Qty",
+        "quantityTable": "累积数量Qty？？？",
+        "amountTable": "累积成交额",
         "amount": "Total",
         "newOrderSuccess": "Order request has sent",
         "newOrderFail": "Order Failed",
@@ -980,6 +1003,12 @@
             "1": "Sell",
             "0": "Buy"
         },
+        "status": {
+            "1": "委托中",
+            "2": "已完成",
+            "3": "已撤销",
+            "4": "下单失败"
+        },
         "confirmTable": {
             "title": "Order Book",
             "heads": [
@@ -1020,6 +1049,7 @@
             "side": "Side",
             "buy": "Buy",
             "sell": "Sell",
+            "status": "状态",
             "search": "Search",
             "reset": "Reset"
         }
