@@ -23,7 +23,7 @@
             </div>
             <div class="content__item">
                 <div class="label">{{$t("tokenCard.tokenInfo.labels.overview")}}:</div>
-                {{ tokenDetail.overview && tokenDetail.overview[$i18n.locale] ? tokenDetail.overview[$i18n.locale] : '--' }}
+                {{ getOverview(tokenDetail.overview) }}
                 <span class="click-able view-more"
                       v-if="tokenDetail.overview && tokenDetail.overviewLink"
                       @click="openUrl(tokenDetail.overviewLink)">
@@ -179,6 +179,19 @@ export default {
             statistics.event(this.$route.name, `operator_switchTxPair_${ category }_${ symbol }`, this.address || '');
             this.$store.commit('switchTradePair', { category, symbol });
             this.close();
+        },
+        getOverview(overview) {
+            if (!overview) {
+                return '--';
+            }
+
+            if (overview[this.$i18n.locale]) {
+                return overview[this.$i18n.locale];
+            } else if (overview.en) {
+                return overview.en;
+            }
+
+            return '--';
         }
     }
 };
