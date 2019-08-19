@@ -1060,7 +1060,15 @@
         "more": "了解更多VX挖矿规则"
     },
     "inviteMining":{
-        "txTitle":"邀请挖矿总收益"
+        "title":"邀请挖矿总收益"
+    },
+    "orderMining":{
+        "title":"挂单挖矿总收益",
+        "tbHead": {
+            "date": "日前",
+            "ratio": "占比",
+            "mining": "挖矿金额"
+        }
     },
     "tradeDividend": {
         "title": "分红",
