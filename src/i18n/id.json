@@ -579,7 +579,7 @@
         "title": "SBP",
         "help": {
             "title": "Tentang SBP",
-            "text": "SBP （Snapshot Block Producer） adalah simpul yang memiliki hak untuk membuat blok, Anda dapat mendaftar untuk menjadi kandidat SBP dengan mempertaruhkan sejumlah VITE, setiap putaran (sekitar 75 detik) akan memilih 25 SBP, SBP akan dipilih dari 23 dari 25 kandidat node acak, ditambah 2 random dari node kandidat peringkat 26-100 di daftar. 50% dari hadiah blok ciptaan akan dialokasikan ke node blok ciptaan, 50% lainnya akan dialokasikan ke node yang peringkat di atas 100 sebagai hadiah voting. Satu alamat registrasi (staking address) dapat mendaftarkan beberapa node pembuatan blok (nama simpul), nama simpul tidak dapat digunakan jika nama simpul telah didaftarkan oleh alamat pendaftaran. Nama simpul dapat mengganti alamat pembuatan blok, namun, alamat pembuatan blok tidak dapat digunakan kembali oleh nama simpul lainnya."
+            "text": "SBP（Snapshot Block Producer）is a node that has right to create blocks, you can register to become a SBP candidate by staking a certain amount of VITE, each round (about 75 seconds) will elect 25 SBPs, the SBPs will be elected from random 23 out of top 25 candidate nodes, plus random 2 out of the candidate nodes ranking 26th-100th on the list. The 50% of total SBP rewards will be allocated to the block creation node, the other 50% will be allocated to nodes that are ranked on top 100 as voting rewards. One registration address (staking address) can register multiple block creation nodes (node names), a node name cannot be used if the node name has been registered by a registration address. A node name can switch block creation address, however, block creation address cannot be reused by other node names."
         },
         "register": "Pendaftaran SBP",
         "cancel": "Pembatalan SBP",
@@ -758,7 +758,7 @@
         "title": "VITE Konversi",
         "help": {
             "title": "Pemahaman Cepat tentang Konversi VITE",
-            "text": "Anda dapat memigrasikan token ERC20 ke VITE ke dalam fungsi konversi TestNet oleh VITE kami. Di TestNet, memberikan suara Anda untuk SBP resmi untuk mengumpulkan hadiah, tarif tahunan dapat mencapai 20%. Token VITE ERC20 Anda akan ditransfer ke alamat black hole Ethereum: {blackAddr}, Anda akan menerima jumlah VITE yang sama di alamat Vite Anda ketika alamat black hole Ethereum telah menerima transaksi dan dikonfirmasi. Setelah Anda dalam proses konversi, konfirmasikan bahwa ada cukup VITE dan ETH (sebagai gas) di alamat Ethereum dompet Vite Anda."
+            "text": "You can convert ERC20 VITE into VITE at Vite Pre-Mainnet through VITE conversion. During conversion, your ERC20 VITE will be transferred to Ethereum black hole address: 0x1111111111111111111111111111111111111111, and you will receive the same amount of VITE in your Vite address after the transaction to Ethereum black hole address has completed. During the conversion, fee of transaction to the Ethereum black hole address come from your current ETH address. After submitting the conversion, please wait at least 30 confirmations in Ethereum network, you can find the transaction history in conversion history."
         },
         "gas": "Biaya Penambangan",
         "record": "Sejarah Konversi",
