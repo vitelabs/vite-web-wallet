@@ -5,7 +5,7 @@ const { buildLog } = require('../tools.js');
 const StartTime = new Date().getTime();
 
 
-// 1. Init Web Router
+// 1. Init PC Router
 buildLog('Start Init PC Router');
 
 const PCRouterConfig = require('../../srcPC/router/config.js');

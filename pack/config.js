@@ -1,14 +1,6 @@
 const path = require('path');
 const packJson = require('../package.json');
 
-const srcPath = path.resolve(__dirname, '../src');
-const PC_SRC_PATH = path.resolve(__dirname, '../srcPC');
-const H5_SRC_PATH = path.resolve(__dirname, '../srcH5');
-const TEMPLATE_PATH = path.resolve(__dirname, '../index.html');
-
-const DefaultTitle = 'ViteX, Exchange By the Community, For the Community';
-const Favicon = path.join(srcPath, 'assets/imgs/logo.png');
-
 const goViteServer = {
     production: '\'wss://api.vitewallet.com/ws\'',
     test: '\'wss://premainnet.vitewallet.com/test/ws\'',
@@ -58,24 +50,8 @@ const Node_Env = process.env.NODE_ENV || 'dev';
 
 
 module.exports = {
-    srcPath,
-    PC_SRC_PATH,
-    H5_SRC_PATH,
+    srcPath: path.resolve(__dirname, '../src'),
     staticPath: path.join(__dirname, '../dist'),
-    entryFile: {
-        index: {
-            path: path.join(PC_SRC_PATH, '/index.js'),
-            title: DefaultTitle,
-            favicon: Favicon,
-            template: TEMPLATE_PATH
-        },
-        mobileDex: {
-            path: path.join(H5_SRC_PATH, '/index.js'),
-            title: DefaultTitle,
-            favicon: Favicon,
-            template: TEMPLATE_PATH
-        }
-    },
     envVars: {
         'process.env.version': `"${ packJson.version }"`,
         'process.env.NODE_ENV': `"${ Node_Env }"`,

@@ -7,6 +7,8 @@ const { entry, htmlWebpackPlugins } = require('./pack/webpack/getEntry');
 const baseConfig = require('./pack/webpack/base.config.js');
 const devConfig = require('./pack/webpack/dev.config.js');
 const prodConfig = require('./pack/webpack/prod.config.js');
+const pcConfig = require('./pack/webpack/pc.config.js');
+const h5Config = require('./pack/webpack/h5.config.js');
 
 console.log(`\n ======== process.env.NODE_ENV: ${ process.env.NODE_ENV } ======== \n`);
 
@@ -16,6 +18,15 @@ let webpackConfig = merge({
 }, baseConfig);
 
 (process.env.analyzer === 'true') && webpackConfig.plugins.push(new BundleAnalyzerPlugin());
+
+if (process.env.isPC === 'true') {
+    webpackConfig = merge(webpackConfig, pcConfig);
+} else if (process.env.isH5 === 'true') {
+    webpackConfig = merge(webpackConfig, h5Config);
+} else {
+    webpackConfig = merge(webpackConfig, pcConfig);
+    webpackConfig = merge(webpackConfig, h5Config);
+}
 
 if (process.env.NODE_ENV === 'dev') {
     webpackConfig = merge(webpackConfig, devConfig);
