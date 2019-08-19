@@ -16,12 +16,11 @@
     </div>
 </template>
 <script>
-import pagination from 'components/pagination.vue';
-import { getInviteMiningDetail } from 'services/tradeOperation';
-import walletTable from 'components/table/index.vue';
-import bigNumber from 'utils/bigNumber';
-import date from 'utils/date';
-
+import pagination from "components/pagination.vue";
+import { getInviteMiningDetail } from "services/tradeOperation";
+import walletTable from "components/table/index.vue";
+import bigNumber from "utils/bigNumber";
+import date from "utils/date";
 
 export default {
     components: { walletTable, pagination },
@@ -33,16 +32,16 @@ export default {
             inviteList: [],
             inviteHeadList: [
                 {
-                    text: this.$t('tradeMining.tbHead.date'),
-                    cell: 'date'
+                    text: this.$t("tradeMining.tbHead.date"),
+                    cell: "date"
                 },
                 {
-                    text: this.$t('tradeMining.tbHead.fee'),
-                    cell: 'fee'
+                    text: this.$t("tradeMining.tbHead.fee"),
+                    cell: "fee"
                 },
                 {
-                    text: this.$t('tradeMining.tbHead.mining'),
-                    cell: 'mining'
+                    text: this.$t("tradeMining.tbHead.mining"),
+                    cell: "mining"
                 }
             ]
         };
@@ -50,17 +49,31 @@ export default {
     beforeMount() {
         this.fetchMiningInvite();
     },
+    watch: {
+        address() {
+            this.inviteListTotal = 0;
+            this.inviteCurrentPage = 0;
+            this.inviteTotal = 0;
+            this.inviteList = [];
+            this.fetchMiningInvite();
+        }
+    },
     computed: {
         content() {
             return this.inviteList.map(item => {
                 return {
                     date: date(item.date * 1000, this.$i18n.locale),
-                    fee: `${ bigNumber.formatNum(item.feeAmount || 0, 8) } ${
+                    fee: `${bigNumber.formatNum(item.feeAmount || 0, 8)} ${
                         item.miningToken
                     }`,
-                    pledge: `${ bigNumber.formatNum(item.pledgeAmount || 0,
-                        8) } VITE`,
-                    mining: `${ bigNumber.formatNum(item.miningAmount || 0, 8) } VX`
+                    pledge: `${bigNumber.formatNum(
+                        item.pledgeAmount || 0,
+                        8
+                    )} VITE`,
+                    mining: `${bigNumber.formatNum(
+                        item.miningAmount || 0,
+                        8
+                    )} VX`
                 };
             });
         },
