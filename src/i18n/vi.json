@@ -13,6 +13,7 @@
     "settingAcc": "Thiết lập Tài khoản",
     "resetAcc": "Cài lại Tài khoản",
     "logout": "Đăng xuất",
+    "saveLogout": "安全退出",
     "blockHeight": "Chiều cao Block Snapshot",
     "accountName": "Tên Tài khoản",
     "action": "Hành động",
@@ -184,7 +185,7 @@
         "placeholder": "Please input your mnemonic seed phrase. Example: apple banana peach mango pear ...",
         "empty": "Không để trống ô nhập seed phrase",
         "error": "Seed phrase không chính xác. Vui lòng thử lại",
-        "hint": "Ví dụ: Xin chào mình là Bonita đây là ví dụ về seedphrase...",
+        "hint": "Ví dụ: apple banana peach mango pear ...",
         "change": "Dùng {len} Mnemonic"
     },
     "setting": {
@@ -257,7 +258,10 @@
             "onroad": "Số lượng Đang chuyển giao",
             "gate": "Cổng ví Chuỗi chéo",
             "totalExAmount": "Tổng số dư trên sàn",
-            "availableExAmount": "Tổng số dư sẵn có trên sàn"
+            "availableExAmount": "Tổng số dư sẵn có trên sàn",
+            "balanceTips": "点击转账，可以从Vite 钱包给其他地址转币",
+            "gateTips": "点击跨链转入，可以将其他币种跨链映射到Vite网络，转入Vite钱包；点击跨链转出仍可以将资产转至其他平台。*转入转出过程可能会产生手续费，且有金额限制",
+            "availableExAmountTips": "点击充值至交易所，将钱包中的资产划转至交易所；点击提现至钱包，将交易所资产划转至钱包。以上划转过程不需要手续费"
         },
         "actionType": {
             "SEND": "Chuyển",
@@ -271,7 +275,7 @@
         },
         "addToken": {
             "title": "Thêm token",
-            "placeholder": "Vui lòng điền tên token",
+            "placeholder": "Please input token name 或者 TokenID",
             "lTxt": "Hủy",
             "rTxt": "Thêm"
         },
@@ -290,13 +294,20 @@
             "saveGate": "Lưu",
             "labels": {
                 "tokenId": "TokenID",
-                "title": "Địa chỉ {tokenSymbol}",
-                "address": "Địa chỉ Mintage",
                 "tokenName": "Tên",
                 "totalSupply": "Tổng cung",
-                "decimals": "Số thập phân",
-                "isReIssuable": "Loại",
-                "time": "Ngày phát hành"
+                "total": "流通总量",
+                "overview": "代币简介",
+                "type": "代币类型",
+                "gate": "跨链网关",
+                "website": "官网",
+                "whitePaper": "白皮书",
+                "explorer": "浏览器",
+                "github": "Github",
+                "media": "社交媒体",
+                "crossType": "跨链代币",
+                "originType": "原生代币",
+                "viewmore": "查看更多"
             },
             "reIssuable": {
                 "true": "Có thể cấp lại",
@@ -321,7 +332,7 @@
             "nodeDescStr": "This function only works for cross-chain coins, do not use this on built-in tokens. Meanwhile, please be careful about unfamiliar gateway links. By continuing to use our platform, you agree and acknowledge that Vite Labs would not be responsible for the loss of your fund and other negative consequences caused. Fill out the gateway link below if you need to use gateway, the link will come into effect after you hit save."
         },
         "depositRecord": {
-            "tabName": "Lịch sử Nạp tiền",
+            "tabName": "Receive History",
             "heads": [
                 "Thời gian",
                 "Số lượng",
@@ -396,7 +407,7 @@
             },
             "labelPlaceholder": "Please input {labelName}",
             "amountPlaceholder": "Vui lòng điền số lượng nhiều hơn {min}",
-            "addressPlaceholder": "Vui lòng điền địa chỉ chuyển",
+            "addressPlaceholder": "Please input {token} transfer address",
             "successTips": "Yêu cầu chuyển đã được gửi",
             "failTips": "Đã xảy ra lỗi trong node cổng, vui lòng kiểm tra thiết lập mạng"
         },
@@ -768,12 +779,20 @@
         "mergeDepth": "Nhóm",
         "depthStep": "{step} chữ số",
         "blocking": "Đã xảy ra lỗi mạng, vui lòng thử lại",
+        "supportMining": "支持挖矿的交易对",
         "operator": {
-            "title": "Chi tiết về Nhà vận hành",
-            "introduction": "Giới thiệu",
+            "noName": "匿名网关",
+            "overview": "Giới thiệu",
             "txPair": "Cặp Giao dịch",
             "confirmTitle": "Nhắc nhở rủi ro",
-            "confirmText": "Cặp giao dịch hiện tại là {symbol}. Hãy cẩn thận khi giao dịch. Đầu tư vào tài sản kỹ thuật số đi kèm với rủi ro cao. Trước khi đầu tư, vui lòng hiểu rõ tất cả các rủi ro khi đầu tư vào tài sản kỹ thuật số và tự mình đánh giá tính xác thực, tính hợp pháp và tính hợp lệ của tài sản kỹ thuật số. Hãy thận trọng với các quyết định đầu tư và chịu trách nhiệm về sản của chính mình."
+            "confirmText": "Cặp giao dịch hiện tại là {symbol}. Hãy cẩn thận khi giao dịch. Đầu tư vào tài sản kỹ thuật số đi kèm với rủi ro cao. Trước khi đầu tư, vui lòng hiểu rõ tất cả các rủi ro khi đầu tư vào tài sản kỹ thuật số và tự mình đánh giá tính xác thực, tính hợp pháp và tính hợp lệ của tài sản kỹ thuật số. Hãy thận trọng với các quyết định đầu tư và chịu trách nhiệm về sản của chính mình.",
+            "address": "运营商地址",
+            "name": "运营商名称"
+        },
+        "operatorTxPair": {
+            "title": "交易对信息",
+            "tokenTab": "代币详情",
+            "operatorTab": "Chi tiết về Nhà vận hành"
         }
     },
     "trade": {
@@ -785,7 +804,8 @@
         "quantityTitle": "Tổng({quantity})",
         "priceTitle": "Giá({price})",
         "amountTitle": "Số lượng({amount})",
-        "amountTable": "Số lượng",
+        "quantityTable": "累积数量Qty？？？",
+        "amountTable": "累积成交额",
         "amount": "Tổng",
         "newOrderSuccess": "Đã gửi yêu cầu đặt hàng",
         "newOrderFail": "Lệnh không thành công",
@@ -983,6 +1003,12 @@
             "1": "Bán",
             "0": "Mua"
         },
+        "status": {
+            "1": "委托中",
+            "2": "已完成",
+            "3": "已撤销",
+            "4": "下单失败"
+        },
         "confirmTable": {
             "title": "Sổ Đặt hàng",
             "heads": [
@@ -1023,6 +1049,7 @@
             "side": "Mặt",
             "buy": "Mua",
             "sell": "Bán",
+            "status": "状态",
             "search": "Tìm kiếm",
             "reset": "Thiết lập lại"
         }
