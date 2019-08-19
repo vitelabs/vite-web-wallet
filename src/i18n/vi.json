@@ -579,7 +579,7 @@
         "title": "SBP",
         "help": {
             "title": "Về SBP",
-            "text": "SBP (Nhà sản xuất Khối Snapshot) là node có quyền tạo khối, bạn có thể đăng ký trở thành ứng cử viên SBP bằng cách đặt một số lượng VITE nhất định, mỗi vòng sẽ có 25 SBP (khoảng 75 giây), các SBP sẽ được bầu ngẫu nhiên 23 trong số 25 nút ứng cử viên hàng đầu, cộng với ngẫu nhiên 2 trong số các nút ứng cử xếp thứ 26 - 100 trong danh sách. 50% phần thưởng tạo khối sẽ được phân bổ cho node tạo khối, 50% còn lại sẽ được phân bổ cho các node xếp hạng trong top 100 dưới dạng phần thưởng bỏ phiếu. Một địa chỉ đăng ký (địa chỉ đặt cược) có thể đăng ký nhiều node tạo khối (tên node), tên node không thể được sử dụng nếu đã được đăng ký bởi một địa chỉ khác. Tên node có thể thay đổi địa chỉ tạo khối, tuy nhiên, với một địa chỉ tạo khối không thể thay đổi tên node khác."
+            "text": "SBP（Snapshot Block Producer）is a node that has right to create blocks, you can register to become a SBP candidate by staking a certain amount of VITE, each round (about 75 seconds) will elect 25 SBPs, the SBPs will be elected from random 23 out of top 25 candidate nodes, plus random 2 out of the candidate nodes ranking 26th-100th on the list. The 50% of total SBP rewards will be allocated to the block creation node, the other 50% will be allocated to nodes that are ranked on top 100 as voting rewards. One registration address (staking address) can register multiple block creation nodes (node names), a node name cannot be used if the node name has been registered by a registration address. A node name can switch block creation address, however, block creation address cannot be reused by other node names."
         },
         "register": "Đăng ký SBP",
         "cancel": "Hủy SBP",
@@ -758,7 +758,7 @@
         "title": "Chuyển đổi VITE",
         "help": {
             "title": "Hiểu thêm về Chuyển đổi VITE",
-            "text": "Bạn có thể di chuyển VITE ERC20 thành VITE Coin vào Testnet của chúng tôi dự trên chức năng Chuyển đổi VITE. Trong TestNet, bỏ phiếu bầu cho SBP chính thức để thu thập phần thưởng, tỷ lệ hàng năm có thể đạt 20%. VITE ERC20 của bạn sẽ được chuyển đến địa chỉ lỗ đen Ethereum: {blackAddr}, khi đó bạn sẽ nhận được cùng số lượng VITE tại địa chỉ Vite của bạn khi giao dịch của bạn được xác nhận gửi vào địa chỉ lỗ đen Ethereum. Một khi đang chuyển đổi, hãy chắc chắn bạn có đủ VITE và ETH (dưới dạng gas) trong địa chỉ Ethereum từ ví Vite của bạn."
+            "text": "You can convert ERC20 VITE into VITE at Vite Pre-Mainnet through VITE conversion. During conversion, your ERC20 VITE will be transferred to Ethereum black hole address: 0x1111111111111111111111111111111111111111, and you will receive the same amount of VITE in your Vite address after the transaction to Ethereum black hole address has completed. During the conversion, fee of transaction to the Ethereum black hole address come from your current ETH address. After submitting the conversion, please wait at least 30 confirmations in Ethereum network, you can find the transaction history in conversion history."
         },
         "gas": "Phí Khai thác",
         "record": "Lịch sử Chuyển đổi",
