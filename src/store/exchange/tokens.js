@@ -51,6 +51,7 @@ const mutations = {
 const actions = {
     exFetchActiveTokens({ rootState, commit }) {
         const activeTxPair = rootState.exchangeActiveTxPair.activeTxPair;
+        console.log(activeTxPair);
         commit('exClearActiveToken', activeTxPair);
 
         if (!activeTxPair) {

@@ -84,7 +84,8 @@ const mixin = {
                     'z-index': 100
                 },
                 wrapper: {
-                    width: widthMap[this.Width],
+                    width: '85%',
+                    'max-width': widthMap[this.Width],
                     'max-height': '85%',
                     display: 'flex',
                     'flex-direction': 'column',
