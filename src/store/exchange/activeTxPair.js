@@ -39,23 +39,6 @@ const actions = {
         dispatch('exFetchLatestTx');
         dispatch('exFetchDepth');
         dispatch('exFetchMarketInfo');
-    },
-    h5DexFetchActiveTxPair({ state, dispatch, commit }, txPair) {
-        const activeTxPair = state.activeTxPair;
-
-        console.log(txPair);
-
-        if (txPair) {
-            commit('exSetActiveTxPair', txPair);
-        }
-
-        if (txPair && activeTxPair && activeTxPair.symbol === txPair.symbol) {
-            return;
-        }
-
-        dispatch('exFetchActiveTokens');
-        dispatch('exFetchDepth');
-        dispatch('exFetchMarketInfo');
     }
 };
 
