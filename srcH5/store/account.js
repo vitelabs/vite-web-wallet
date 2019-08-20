@@ -10,7 +10,6 @@ import client from 'utils/viteClient';
 let balanceInfoInst = null;
 const query = getQuery();
 
-
 const state = {
     activeAcc: new addrAccount({ address: query.address, client }),
     onroad: { balanceInfos: {} },

@@ -5,8 +5,12 @@
 </template>
 
 <script>
+// import getDialog from 'components/getDialog.js';
+// import { receiveInviteDialog } from 'components/dialog';
+
 export default {
     mounted() {
+        // console.log(getDialog(receiveInviteDialog));
         this.$store.commit('setLang', this.$i18n.locale);
         this.$store.dispatch('startLoopBalance');
         this.$store.dispatch('startLoopExchangeBalance');
