@@ -49,15 +49,11 @@ export default {
         tokenList() {
             return [
                 ...this.defaultTokenList,
-                ...this.officalGateTokenList,
                 ...this.otherWhithBalance
             ];
         },
         defaultTokenList() {
             return this.$store.getters.defaultTokenList;
-        },
-        officalGateTokenList() {
-            return this.$store.getters.officalGateTokenList;
         },
         otherWhithBalance() {
             return this.$store.getters.otherWhithBalance;
@@ -65,7 +61,6 @@ export default {
         showTokenIds() {
             return [
                 ...this.defaultTokenList,
-                ...this.officalGateTokenList,
                 ...this.otherWhithBalance
             ].map(t => t.tokenId);
         }

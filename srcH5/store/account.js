@@ -166,100 +166,12 @@ const getters = {
             .splice(list.findIndex(v => v.tokenId === viteId), 1)
             .concat(list);
     },
-    officalGateTokenList(state, getters, rootState, rootGetters) {
-        const balanceInfo = getters.balanceInfo;
-        const allToken = rootGetters.allTokensMap;
-        const mapToken2Gate = rootGetters.mapToken2Gate;
-        const exBalance = rootGetters.exBalanceList;
-
-        return Object.keys(mapToken2Gate).map(i => {
-            // [TODO] ViteLabsGateInfo Fixed
-            const viteLabsGateInfo = {};
-            if (mapToken2Gate[i].gateway === 'Vite Labs') {
-                viteLabsGateInfo.introduction = 'Vite Labs官方网关，负责BTC、ETH、USDT(ERC20)、GRIN四种代币跨链服务';
-                viteLabsGateInfo.introductionEn = 'The gateway provided by Vite Labs, running cross-chain services for four coins: BTC, ETH, USDT(ERC20), GRIN';
-                viteLabsGateInfo.offical = 'https://vite.org';
-                viteLabsGateInfo.customer = 'https://vitex.zendesk.com/hc/zh-cn/requests/new',
-                viteLabsGateInfo.customerEn = 'https://vitex.zendesk.com/hc/en-001/requests/new',
-                viteLabsGateInfo.privacy = `${ location.origin }/privacy.html`;
-            } else if (mapToken2Gate[i].gateway === 'VGATE') {
-                viteLabsGateInfo.introduction = 'As an operator of ViteX, VGATE is responsible for listing coins, deposit and withdrawal, cryptocurrency marketing and promoting and other services within VGATE\'s own marketing area. VGATE has complete capabilities as an operator, namely the capabilities of operating VGATE and its cryptos. In addition to helping users list cryptos, deposit and withdraw, and adjust transaction fees, VGATE can also mint coins, help other operators mint coins and run their gateways.',
-                viteLabsGateInfo.introductionEn = 'As an operator of ViteX, VGATE is responsible for listing coins, deposit and withdrawal, cryptocurrency marketing and promoting and other services within VGATE\'s own marketing area. VGATE has complete capabilities as an operator, namely the capabilities of operating VGATE and its cryptos. In addition to helping users list cryptos, deposit and withdraw, and adjust transaction fees, VGATE can also mint coins, help other operators mint coins and run their gateways.',
-                viteLabsGateInfo.offical = 'https://vgate.io/';
-                viteLabsGateInfo.customer = 'vgateservice@gmail.com',
-                viteLabsGateInfo.customerEn = 'vgateservice@gmail.com',
-                viteLabsGateInfo.privacy = 'https://vgate.io/clause';
-            }
-
-            const {
-                index,
-                availableExAmount = '',
-                totalExAmount = '',
-                onroadNum = '',
-                tokenName = '',
-                totalAmount = '',
-                totalSupply = '',
-                isReIssuable = '',
-                tokenSymbol,
-                balance = '',
-                fundFloat = '',
-                decimals = '',
-                owner = '',
-                tokenId = i,
-                icon = getTokenIcon(i),
-                type = 'OFFICAL_GATE',
-                gateInfo = {}
-            } = Object.assign({}, balanceInfo[i] || {}, allToken[i] || {}, {
-                gateInfo: {
-                    url: mapToken2Gate[i].url,
-                    gateway: mapToken2Gate[i].gateway,
-                    ...viteLabsGateInfo
-                }
-            }, exBalance[i]);
-            const rate = rootState.exchangeRate.rateMap[i] && rootState.exchangeRate.rateMap[i][`${ rootState.env.currency }Rate`];
-            const totalExAsset = rate ? bigNumber.multi(bigNumber.toBasic(totalExAmount || 0, decimals), rate) : 0;
-            const walletAsset = rate ? bigNumber.multi(bigNumber.toBasic(totalAmount || 0, decimals), rate) : 0;
-            const totalAsset = bigNumber.plus(totalExAsset, walletAsset);
-            const rateBtc = rootState.exchangeRate.rateMap[i] && rootState.exchangeRate.rateMap[i]['btcRate'];
-            const totalExAssetBtc = rateBtc ? bigNumber.multi(bigNumber.toBasic(totalExAmount || 0, decimals), rateBtc) : 0;
-            const walletAssetBtc = rateBtc ? bigNumber.multi(bigNumber.toBasic(totalAmount || 0, decimals), rateBtc) : 0;
-            const totalAssetBtc = bigNumber.plus(totalExAssetBtc, walletAssetBtc);
-            return {
-                totalExAssetBtc,
-                walletAssetBtc,
-                totalAssetBtc,
-                index,
-                totalAsset,
-                totalExAsset,
-                walletAsset,
-                availableExAmount,
-                totalExAmount,
-                onroadNum,
-                tokenName,
-                totalAmount,
-                totalSupply,
-                isReIssuable,
-                tokenSymbol,
-                balance,
-                fundFloat,
-                decimals,
-                owner,
-                tokenId,
-                icon,
-                type: (tokenSymbol === 'VCP' && !index) ? 'NATIVE' : type,
-                gateInfo
-            };
-        });
-    },
     otherWhithBalance(state, getters, rootState, rootGetters) {
         const balanceInfo = getters.balanceInfo;
         const allToken = rootGetters.allTokensMap;
         const mapToken2Gate = rootGetters.mapToken2Gate;
         const exBalance = rootGetters.exBalanceList;
-        const contains = [
-            ...getters.defaultTokenList,
-            ...getters.officalGateTokenList
-        ].map(t => t.tokenId);
+        const contains = (getters.defaultTokenList || []).map(t => t.tokenId);
         return Object.keys(allToken)
             .filter(i => {
                 const walletAmount = getters.balanceInfo[i] ? getters.balanceInfo[i].totalAmount : 0;
