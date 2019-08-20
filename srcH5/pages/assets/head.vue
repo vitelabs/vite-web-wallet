@@ -1,22 +1,15 @@
 <template>
     <div class="account-head-wrapper">
-        <div class="head__item">
-            <div class="head-right">
-                <span class="address-content">
-                    <copy ref="copyDom" class="copy-tips"></copy>
-                    <span class="addr_item">{{ activeAddr }}</span>
-                    <img class="address-content__operate __pointer"
-                         src="~assets/imgs/copy_default.svg"
-                         @click="copy"/>
-                </span>
-            </div>
+        <div class="assets">
+            <div class="asset__title">{{ $t('mobileAssets.allAssets', { token: 'BTC' }) }}</div>
+            <div class="asset__btc">{{ assetBtc }}</div>
+            <div class="asset__cash">≈{{ currencySymbol }} {{ asset || '--' }}</div>
         </div>
-        <div class="worth head__item">
-            <div class="assets">
-                <div class="asset__btc">{{ assetBtc }} BTC</div>
-                <div class="asset__cash">{{ currencySymbol }} {{ asset }}</div>
-            </div>
-        </div>
+        <span class="address-content">
+            <copy ref="copyDom" class="copy-tips"></copy>
+            <span class="addr_item">{{ activeAddr }}</span>
+            <img class="copy __pointer" src="~h5Assets/imgs/copy.svg" @click="copy"/>
+        </span>
     </div>
 </template>
 
@@ -72,96 +65,67 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~assets/scss/vars.scss";
+@import "~h5Assets/scss/vars.scss";
 
 .account-head-wrapper {
     position: relative;
-    text-align: center;
-    background: #fff;
+    background: url('~h5Assets/imgs/assets.svg') no-repeat;
+    background-size: 100% 100%;
     border-radius: 2px;
-    display: flex;
-    min-height: 124px;
-    align-items: center;
+    font-size: 12px;
     box-sizing: border-box;
-    justify-content: space-between;
-    padding: 10px 0;
-    box-sizing: border-box;
+    padding: 14px;
+    margin-bottom: 12px;
 
-    .head__item {
-        border-left: 1px solid rgba(227, 235, 245, 0.6);
+    .assets {
+        padding: 14px;
+        border-bottom: 1px dashed rgba(211,223,239,1);
+        font-family: $font;
+        font-weight: 400;
+        color: rgba(36,39,43,1);
+        .asset__title {
+            color: rgba(62,74,89,0.6);
+            line-height: 16px;
+        }
+        .asset__btc {
+            font-size: 24px;
+            font-weight: 600;
+            line-height: 30px;
+            margin-top: 6px;
+        }
+        .asset__cash {
+            font-size: 14px;
+            line-height: 18px;
+            margin-top: 6px;
+        }
+    }
+    .address-content {
+        margin-top: 14px;
+        font-size: 12px;
+        word-break: break-word;
+        padding: 8px 14px;
+        box-sizing: border-box;
+        background: rgba(255,255,255,0.7);
+        color: rgba(62,74,89,0.45);
+        line-height: 18px;
+        font-family: $font;
+        font-weight: 600;
         display: flex;
         align-items: center;
-        padding: 0 30px;
-        min-height: 85px;
-        flex-grow: 1;
-        box-sizing: border-box;
-        &:first-child {
-            border-left: none;
-            min-width: 350px;
-        }
-        &:nth-child(2) {
-            min-width: 330px;
-        }
-        .address-content {
-            max-width: 300px;
-            font-size: 14px;
-            word-break: break-word;
-            box-sizing: border-box;
-            background: #f3f6f9;
-            color: #bdc1d1;
-            padding: 5px 9px;
-            display: flex;
-            align-items: center;
-            margin: 10px 0 5px;
-            display: flex;
-            position: relative;
-            font-family: $font-normal;
-            .copy-tips{
-                top: -50%;
-            }
-            .addr_item{
-                max-width: 220px;
-            }
-            &__operate {
-                width: 16px;
-                height: 16px;
-                margin-left: 10px;
-            }
-            .copy-wrapper {
-                top: -30px;
-            }
-        }
-        .head-right {
-            font-size: 20px;
-            color: #1d2024;
-            text-align: left;
-            font-family: $font-bold;
-            word-break: break-word;
-            display: flex;
-            flex-direction: column;
-            align-self: stretch;
-            flex-grow: 1;
+        position: relative;
+        .addr_item {
+            padding-right: 10px;
+            border-right: 1px solid rgba(168, 173, 180, 0.24);
         }
 
-        &.worth {
-            display: flex;
-            .assets {
-                display: flex;
-                flex-direction: column;
-                align-items: flex-start;
-                height: 88px;
-                .asset__btc {
-                    margin-bottom: 10px;
-                    font-size: 18px;
-                    line-height: 26px;
-                    font-family: $font-bold;
-                    white-space: nowrap;
-                }
-                .asset__cash {
-                    color: #5e687594;
-                    font-size: 12px;
-                }
-            }
+        .copy-tips{
+            position: absolute;
+            top: -50%;
+        }
+        .copy {
+            margin-left: 10px;
+            width: 16px;
+            height: 18px;
         }
     }
 }
