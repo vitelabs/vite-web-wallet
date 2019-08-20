@@ -34,7 +34,7 @@
 <script>
 import confirm from 'components/confirm/confirm.vue';
 import viteInput from 'components/viteInput';
-import sendTx from 'utils/sendTx';
+// import sendTx from 'utils/sendTx';
 import bigNumber from 'utils/bigNumber';
 import statistics from 'utils/statistics';
 import { verifyAmount, verifyWithdrawAmount } from 'utils/validations';
@@ -144,29 +144,29 @@ export default {
         staking() {
             statistics.event(router.currentRoute.name, this.actionType === 1 ? 'addQuota-submit' : 'withdrawQuota-submit', this.accountAddr || '');
 
-            const amount = bigNumber.toMin(this.amount, this.viteTokenInfo.decimals);
+            // const amount = bigNumber.toMin(this.amount, this.viteTokenInfo.decimals);
 
-            sendTx({
-                methodName: 'dexFundPledgeForVx',
-                data: {
-                    amount,
-                    actionType: this.actionType
-                }
-            }).then(() => {
-                if (this.isAdd) {
-                    this.$toast(this.$t('hint.request', { name: this.$t('submitStaking') }));
-                } else {
-                    this.$toast(this.$t('hint.request', { name: this.$t('walletQuota.withdrawalStaking') }));
-                }
-                this._close();
-            }).catch(err => {
-                console.warn(err);
-                if (this.isAdd) {
-                    this.$toast(this.$t('walletQuota.pledgeFail'), err);
-                } else {
-                    this.$toast(this.$t('walletQuota.canclePledgeFail'), err);
-                }
-            });
+            // sendTx({
+            //     methodName: 'dexFundPledgeForVx',
+            //     data: {
+            //         amount,
+            //         actionType: this.actionType
+            //     }
+            // }).then(() => {
+            //     if (this.isAdd) {
+            //         this.$toast(this.$t('hint.request', { name: this.$t('submitStaking') }));
+            //     } else {
+            //         this.$toast(this.$t('hint.request', { name: this.$t('walletQuota.withdrawalStaking') }));
+            //     }
+            //     this._close();
+            // }).catch(err => {
+            //     console.warn(err);
+            //     if (this.isAdd) {
+            //         this.$toast(this.$t('walletQuota.pledgeFail'), err);
+            //     } else {
+            //         this.$toast(this.$t('walletQuota.canclePledgeFail'), err);
+            //     }
+            // });
         }
     }
 };

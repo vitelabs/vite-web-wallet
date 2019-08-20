@@ -12,6 +12,12 @@ const state = {
 const mutations = {
     setComplianceShow(state) {
         state.isShowCompliance = true;
+    },
+    setLang(state, lang) {
+        state.lang = lang;
+        if (!state.currency) {
+            state.currency = lang === 'zh' ? 'cny' : 'usd';
+        }
     }
 };
 

@@ -7,8 +7,8 @@ import 'utils/viteClient.js';
 
 import Vue from 'vue';
 
-import App from './pages/index.vue';
-import router from './router/index.js';
+import App from 'h5Pages/index.vue';
+import router from 'h5Router/index.js';
 
 import i18n from 'i18n';
 import store from 'h5Store';

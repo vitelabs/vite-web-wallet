@@ -1,0 +1,72 @@
+@import "~assets/scss/vars.scss";
+
+@mixin block {
+  .block__title {
+    height: 16px;
+    font-size: 12px;
+    @include font-family-bold();
+    color: rgba(29, 32, 36, 1);
+    line-height: 16px;
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    .err {
+      color: #ff2929;
+      font-size: 12px;
+    }
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+  .block__content {
+    position: relative;
+    border-radius: 2px;
+    border: 1px solid rgba(212, 222, 231, 1);
+    font-size: 12px;
+    word-break: break-word;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 16px;
+    padding: 7px 15px;
+    align-items: center;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+
+    .all {
+        color:rgba(0,122,255,1);
+        line-height:16px;
+        font-size: 12px;
+        border-bottom: 1px dashed rgba(0,122,255,1);
+        cursor: pointer;
+        float: right;
+        display: flex;
+        word-break: keep-all;
+    }
+    .token__title {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      img {
+        width: 20px;
+        height: 20px;
+        margin-right: 20px;
+      }
+    }
+    input {
+      width: 100%;
+    }
+    .light {
+      color: #5e6875;
+    }
+    .blue {
+      color: #007aff;
+    }
+    &.edit {
+      text-align: left;
+      background: rgba(243, 246, 249, 1);
+      @include font-family-bold();
+    }
+  }
+}

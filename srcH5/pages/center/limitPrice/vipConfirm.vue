@@ -28,7 +28,7 @@
 import { constant } from '@vite/vitejs';
 import confirm from 'components/confirm/confirm.vue';
 import BigNumber from 'utils/bigNumber';
-import sendTx from 'utils/sendTx';
+// import sendTx from 'utils/sendTx';
 import $ViteJS from 'utils/viteClient';
 import date from 'utils/date';
 import statistics from 'utils/statistics';
@@ -115,26 +115,26 @@ export default {
 
             statistics.event(this.$route.name, `VIP-${ actionType === 2 ? 'cancel' : 'open' }`, this.accountAddr || '');
 
-            sendTx({
-                methodName: 'dexFundPledgeForVip',
-                data: {
-                    amount: '0',
-                    actionType
-                },
-                vbExtends: {
-                    'type': 'dexFundPledgeForVip',
-                    'amount': '10,000 VITE'
-                }
-            }).then(() => {
-                this.isLoading = false;
-                this.$toast(this.isVip ? this.$t('trade.vipConfirm.cancelSuccess') : this.$t('trade.vipConfirm.openSuccess'));
-                this.close && this.close();
-                this.$store.dispatch('startLoopVip', !this.isVip);
-            }).catch(err => {
-                console.warn(err);
-                this.isLoading = false;
-                this.$toast(this.isVip ? this.$t('trade.vipConfirm.cancelFail') : this.$t('trade.vipConfirm.openFail'));
-            });
+            // sendTx({
+            //     methodName: 'dexFundPledgeForVip',
+            //     data: {
+            //         amount: '0',
+            //         actionType
+            //     },
+            //     vbExtends: {
+            //         'type': 'dexFundPledgeForVip',
+            //         'amount': '10,000 VITE'
+            //     }
+            // }).then(() => {
+            //     this.isLoading = false;
+            //     this.$toast(this.isVip ? this.$t('trade.vipConfirm.cancelSuccess') : this.$t('trade.vipConfirm.openSuccess'));
+            //     this.close && this.close();
+            //     this.$store.dispatch('startLoopVip', !this.isVip);
+            // }).catch(err => {
+            //     console.warn(err);
+            //     this.isLoading = false;
+            //     this.$toast(this.isVip ? this.$t('trade.vipConfirm.cancelFail') : this.$t('trade.vipConfirm.openFail'));
+            // });
         },
 
         fetchStakingObj() {

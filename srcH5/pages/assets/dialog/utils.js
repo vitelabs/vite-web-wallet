@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import closeIcon from 'assets/imgs/confirm_close.svg';
-import store from 'store';
+import store from 'h5Store';
+
 import i18n from 'i18n';
 
 const STATUS = {
@@ -205,6 +206,7 @@ const mixin = {
         }
     }
 };
+
 
 export default function (component, propsDefault = {}) {
     return function dialog(props = {}) {

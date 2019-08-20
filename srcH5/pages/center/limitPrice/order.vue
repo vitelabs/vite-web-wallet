@@ -82,10 +82,9 @@
 import slider from 'components/slider';
 import viteInput from 'components/viteInput';
 import { initPwd } from 'components/password/index.js';
-import sendTx from 'utils/sendTx';
+// import sendTx from 'utils/sendTx';
 import BigNumber from 'utils/bigNumber';
 import { verifyAmount, checkAmountFormat } from 'utils/validations';
-import { execWithValid } from 'utils/execWithValid';
 import statistics from 'utils/statistics';
 
 export default {
@@ -568,7 +567,7 @@ export default {
             this.quantity = '';
         },
 
-        _clickBtn: execWithValid(function () {
+        _clickBtn() {
             if (this.isLoading || this.activeTxPairIsClose) {
                 return;
             }
@@ -602,48 +601,49 @@ export default {
                     });
                 }
             });
-        }),
+        },
         newOrder({ price, quantity }) {
-            if (this.blockingLevel === 3) {
-                this.$toast(this.$t('tradeCenter.blocking'));
-                return;
-            }
+            console.log(price, quantity);
+            // if (this.blockingLevel === 3) {
+            //     this.$toast(this.$t('tradeCenter.blocking'));
+            //     return;
+            // }
 
-            const tradeToken = this.activeTxPair
-                ? this.activeTxPair.tradeToken
-                : '';
-            const quoteToken = this.activeTxPair
-                ? this.activeTxPair.quoteToken
-                : '';
-            const side = this.orderType === 'buy' ? 0 : 1;
+            // const tradeToken = this.activeTxPair
+            //     ? this.activeTxPair.tradeToken
+            //     : '';
+            // const quoteToken = this.activeTxPair
+            //     ? this.activeTxPair.quoteToken
+            //     : '';
+            // const side = this.orderType === 'buy' ? 0 : 1;
 
-            this.isLoading = true;
-            const tokenDecimals = this.ftokenDetail.tokenDecimals;
-            quantity = BigNumber.toMin(quantity, tokenDecimals);
+            // this.isLoading = true;
+            // const tokenDecimals = this.ftokenDetail.tokenDecimals;
+            // quantity = BigNumber.toMin(quantity, tokenDecimals);
 
-            sendTx({
-                methodName: 'dexFundNewOrder',
-                data: { tradeToken, quoteToken, side, price, quantity },
-                config: {
-                    pow: true,
-                    powConfig: {
-                        isShowCancel: true,
-                        cancel: () => {
-                            this.isLoading = false;
-                        }
-                    }
-                }
-            })
-                .then(() => {
-                    this.isLoading = false;
-                    this.clearAll();
-                    this.$toast(this.$t('trade.newOrderSuccess'));
-                })
-                .catch(err => {
-                    console.warn(err);
-                    this.isLoading = false;
-                    this.$toast(this.$t('trade.newOrderFail'), err);
-                });
+            // sendTx({
+            //     methodName: 'dexFundNewOrder',
+            //     data: { tradeToken, quoteToken, side, price, quantity },
+            //     config: {
+            //         pow: true,
+            //         powConfig: {
+            //             isShowCancel: true,
+            //             cancel: () => {
+            //                 this.isLoading = false;
+            //             }
+            //         }
+            //     }
+            // })
+            //     .then(() => {
+            //         this.isLoading = false;
+            //         this.clearAll();
+            //         this.$toast(this.$t('trade.newOrderSuccess'));
+            //     })
+            //     .catch(err => {
+            //         console.warn(err);
+            //         this.isLoading = false;
+            //         this.$toast(this.$t('trade.newOrderFail'), err);
+            //     });
         }
     }
 };
