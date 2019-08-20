@@ -1146,5 +1146,9 @@
             "feeRate": "手续费率",
             "feeIncome": "手续费收益"
         }
+    },
+    "mobileAssets": {
+        "allAssets": "总资产折合({token})",
+        "tokenListTitle": "代币信息"
     }
 }

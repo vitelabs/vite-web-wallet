@@ -24,6 +24,16 @@ const mutations = {
 const getters = {
     activeAddr(state) {
         return state.address || '';
+    },
+    currencySymbol(state) {
+        if (!state.currency) {
+            return '';
+        }
+        const symbolMap = {
+            cny: '¥',
+            usd: '$'
+        };
+        return symbolMap[state.currency] || '';
     }
 };
 
