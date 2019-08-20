@@ -87,7 +87,7 @@ export default {
             this.stakeListTotal = 0;
             this.stakeCurrentPage = 0;
             this.stakeList = [];
-            this.fetchMiningInvite();
+            this.fetchStakingInfo();
         }
     },
     computed: {

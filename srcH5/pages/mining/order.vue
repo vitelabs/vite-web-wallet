@@ -54,7 +54,7 @@ export default {
             this.listTotal = 0;
             this.currentPage = 0;
             this.miningList = [];
-            this.fetchMiningInvite();
+            this.updateData();
         }
     },
     computed: {
