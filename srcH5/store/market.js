@@ -7,7 +7,8 @@ const query = getQuery();
 const category = query.category;
 const symbol = query.symbol;
 const DefaultCategory = category && quoteTokenCategory.indexOf(category) !== -1 ? category : 'BTC';
-const DefaultSymbol = symbol || 'VITE_BTC-000';
+// const DefaultSymbol = symbol || 'VITE_BTC-000';
+const DefaultSymbol = symbol || 'GRIN-000_BTC-000';
 
 const state = {
     quoteTokenCategory,
@@ -53,7 +54,7 @@ const actions = {
         if (!txPair.symbol) {
             txPair = { symbol: DefaultSymbol };
         }
-        dispatch('h5DexFetchActiveTxPair', txPair);
+        dispatch('dexFetchActiveTxPair', txPair);
     },
     updateMarketMap({ commit, dispatch }) {
         // Add quote token
