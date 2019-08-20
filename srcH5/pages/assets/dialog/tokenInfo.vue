@@ -2,15 +2,13 @@
 extends /components/dialog/base.pug
 block head
     .head
-        img.icon(:src="tokenDetail.urlIcon || token.icon || getIcon(token.tokenId)")
+        img.icon(:src="tokenDetail.urlIcon || token.icon")
         .head_info
-            .head__name {{token.tokenName}}
-                .head__name__gate(v-if="token.gateInfo.name")
-            .head__symbol {{token.tokenSymbol}}
-        .gate_info(v-if="gateName") {{gateName}}
+            .head__name {{ tokenDetail.name }}
+            .head__symbol {{ token.tokenSymbol }}
+        .gate_info(v-if="tokenDetail.gateway") {{ tokenDetail.gateway.name }}
     .tab
         .tab__item.active {{$t("tokenCard.tokenInfo.tabName")}}
-
 block originContent
     .tab-content
         .content__item
@@ -55,7 +53,6 @@ block originContent
 
 <script>
 import { tokenDetail } from 'services/trade';
-import { getTokenIcon } from 'utils/tokenParser';
 import { getExplorerLink } from 'utils/getLink';
 import openUrl from 'utils/openUrl';
 import BigNumber from 'utils/bigNumber';
@@ -74,12 +71,6 @@ export default {
         return { tokenDetail: {} };
     },
     computed: {
-        gateName() {
-            if (this.token.type === 'NATIVE') return '';
-            if (this.token.gateInfo.gateway) return this.token.gateInfo.gateway;
-            if (this.token.gateInfo.url) return this.$t('tokenCard.gateInfo.selfdefined');
-            return '';
-        },
         defaultAddr() {
             return this.$store.getters.activeAddr;
         }
@@ -88,9 +79,6 @@ export default {
         goToTokenDetail() {
             const l = `${ getExplorerLink() }token/${ this.token.tokenId }`;
             openUrl(l);
-        },
-        getIcon(id) {
-            return getTokenIcon(id);
         },
         tabClick(name) {
             this.tabName = name;
@@ -104,7 +92,7 @@ export default {
                             ? data.links[key][0] : '';
                     }
                 }
-                this.tokenDetail.ttype = (this.tokenDetail.gateway || this.gateName)
+                this.tokenDetail.ttype = this.tokenDetail.gateway
                     ? this.$t('tokenCard.tokenInfo.labels.crossType')
                     : this.$t('tokenCard.tokenInfo.labels.originType');
                 this.tokenDetail.explorerLink = this.tokenDetail.explorerLink

@@ -96,7 +96,6 @@ const getters = {
     },
     defaultTokenList(state, getters, rootState, rootGetters) {
         const balanceInfo = getters.balanceInfo;
-        const allToken = rootGetters.allTokensMap;
         const exBalance = rootGetters.exBalanceList;
 
         // ------------------- show default token
@@ -117,12 +116,10 @@ const getters = {
                 owner = '',
                 tokenId = i,
                 icon = getTokenIcon(i),
-                type = 'NATIVE',
-                gateInfo = {}
+                type = 'NATIVE'
             } = Object.assign({},
                 defaultTokenMap[i],
                 balanceInfo[i] || {},
-                allToken[i] || {},
                 exBalance[i]);
             const rate = rootState.exchangeRate.rateMap[i] && rootState.exchangeRate.rateMap[i][`${ rootState.env.currency }Rate`];
             const totalExAsset = rate ? bigNumber.multi(bigNumber.toBasic(totalExAmount || 0, decimals), rate) : 0;
@@ -154,8 +151,7 @@ const getters = {
                 owner,
                 tokenId,
                 icon,
-                type,
-                gateInfo
+                type
             };
         });
         // force vite first
@@ -164,11 +160,13 @@ const getters = {
             .splice(list.findIndex(v => v.tokenId === viteId), 1)
             .concat(list);
     },
-    otherWhithBalance(state, getters, rootState, rootGetters) {
+    otherWithBalance(state, getters, rootState, rootGetters) {
         const balanceInfo = getters.balanceInfo;
-        const allToken = rootGetters.allTokensMap;
         const exBalance = rootGetters.exBalanceList;
         const contains = (getters.defaultTokenList || []).map(t => t.tokenId);
+
+        const allToken = Object.assign({}, exBalance, balanceInfo);
+
         return Object.keys(allToken)
             .filter(i => {
                 const walletAmount = getters.balanceInfo[i] ? getters.balanceInfo[i].totalAmount : 0;
@@ -192,8 +190,7 @@ const getters = {
                     owner = '',
                     tokenId = i,
                     icon = getTokenIcon(i),
-                    type = 'THIRD_GATE',
-                    gateInfo = {}
+                    type = 'THIRD_GATE'
                 } = Object.assign({}, balanceInfo[i] || {}, allToken[i] || {});
                 const rate = rootState.exchangeRate.rateMap[i] && rootState.exchangeRate.rateMap[i][`${ rootState.env.currency }Rate`];
                 const totalExAsset = rate ? bigNumber.multi(bigNumber.toBasic(totalExAmount || 0, decimals), rate) : 0;
@@ -225,8 +222,7 @@ const getters = {
                     owner,
                     tokenId,
                     icon,
-                    type: (tokenSymbol === 'VCP' && !index) ? 'NATIVE' : type,
-                    gateInfo
+                    type: (tokenSymbol === 'VCP' && !index) ? 'NATIVE' : type
                 };
             });
     }
