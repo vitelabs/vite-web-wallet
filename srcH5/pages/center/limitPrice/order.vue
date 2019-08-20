@@ -81,7 +81,6 @@
 <script>
 import slider from 'components/slider';
 import viteInput from 'components/viteInput';
-import { initPwd } from 'components/password/index.js';
 // import sendTx from 'utils/sendTx';
 import BigNumber from 'utils/bigNumber';
 import { verifyAmount, checkAmountFormat } from 'utils/validations';
@@ -592,14 +591,9 @@ export default {
                 return;
             }
 
-            initPwd({
-                // yztood
-                submit: () => {
-                    this.newOrder({
-                        price: this.price,
-                        quantity: this.quantity
-                    });
-                }
+            this.newOrder({
+                price: this.price,
+                quantity: this.quantity
             });
         },
         newOrder({ price, quantity }) {

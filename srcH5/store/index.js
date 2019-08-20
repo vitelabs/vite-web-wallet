@@ -17,7 +17,6 @@ import market from './market';
 import env from './env';
 import account from './account';
 import ledger from 'store/ledger';
-import gateInfo from 'store/gateInfo';
 
 const exchange = {
     exchangeRate: rate,
@@ -45,6 +44,5 @@ for (const moduleName in exchange) {
 store.registerModule('env', env);
 store.registerModule('account', account);
 store.registerModule('ledger', ledger);
-store.registerModule('gateInfo', gateInfo);
 
 export default store;

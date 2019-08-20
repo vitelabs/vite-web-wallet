@@ -39,7 +39,6 @@ import d from 'dayjs';
 // import { utils } from '@vite/vitejs';
 // import sendTx from 'utils/sendTx';
 import statistics from 'utils/statistics';
-import { initPwd } from 'components/password/index.js';
 
 // const { _Buffer } = utils;
 
@@ -87,39 +86,31 @@ export default {
             //     this.$toast(this.$t('tradeOpenOrders.confirm.successToast'));
             // };
 
-            initPwd({
-                title: this.$t('tradeOpenOrders.confirm.title'),
-                content: this.$t('tradeOpenOrders.confirm.content'),
-                submitTxt: this.$t('tradeOpenOrders.confirm.submitTxt'),
-                cancelTxt: this.$t('tradeOpenOrders.confirm.cancelTxt'),
-                submit: () => {
-                    // sendTx({
-                    //     methodName: 'dexTradeCancelOrder',
-                    //     data: {
-                    //         orderId: _Buffer.from(order.orderId, 'hex').toString('base64'),
-                    //         tradeToken: order.tradeToken
-                    //     },
-                    //     vbExtends: {
-                    //         'type': 'dexCancel',
-                    //         'side': order.side,
-                    //         'tradeTokenSymbol': order.tradeTokenSymbol,
-                    //         'quoteTokenSymbol': order.quoteTokenSymbol,
-                    //         'price': `${ order.price } ${ this.getOriginSymbol(order.quoteTokenSymbol) }`
-                    //     }
-                    // })
-                    //     .then(successSubmit)
-                    //     .catch(err => {
-                    //         console.warn(err);
-                    //         const code = err && err.error ? err.error.code || -1
-                    //             : err ? err.code : -1;
-                    //         if (code === -37008) {
-                    //             this.$toast(`${ this.$t('tradeOpenOrders.cancelErr') }(37008)`);
-                    //             return;
-                    //         }
-                    //         failSubmit(err);
-                    //     });
-                }
-            }, true);
+            // sendTx({
+            //     methodName: 'dexTradeCancelOrder',
+            //     data: {
+            //         orderId: _Buffer.from(order.orderId, 'hex').toString('base64'),
+            //         tradeToken: order.tradeToken
+            //     },
+            //     vbExtends: {
+            //         'type': 'dexCancel',
+            //         'side': order.side,
+            //         'tradeTokenSymbol': order.tradeTokenSymbol,
+            //         'quoteTokenSymbol': order.quoteTokenSymbol,
+            //         'price': `${ order.price } ${ this.getOriginSymbol(order.quoteTokenSymbol) }`
+            //     }
+            // })
+            //     .then(successSubmit)
+            //     .catch(err => {
+            //         console.warn(err);
+            //         const code = err && err.error ? err.error.code || -1
+            //             : err ? err.code : -1;
+            //         if (code === -37008) {
+            //             this.$toast(`${ this.$t('tradeOpenOrders.cancelErr') }(37008)`);
+            //             return;
+            //         }
+            //         failSubmit(err);
+            //     });
         }
     }
 };
