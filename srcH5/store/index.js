@@ -3,7 +3,6 @@ import vuex from 'vuex';
 
 import rate from 'store/exchange/rate.js';
 import depth from 'store/exchange/depth.js';
-import activeTxPair from 'store/exchange/activeTxPair';
 import activeTx from 'store/exchange/activeTx';
 import balance from 'store/exchange/balance';
 import tokens from 'store/exchange/tokens';
@@ -13,10 +12,11 @@ import fee from 'store/exchange/fee';
 import latestOrder from 'store/exchange/latestOrder';
 import tokenDecimalsLimit from 'store/exchange/tokenDecimalsLimit';
 import dexFundUnreceived from 'store/exchange/dexFundUnreceived';
+import ledger from 'store/ledger';
 import market from './market';
 import env from './env';
 import account from './account';
-import ledger from 'store/ledger';
+import activeTxPair from './activeTxPair';
 
 const exchange = {
     exchangeRate: rate,

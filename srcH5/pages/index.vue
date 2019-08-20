@@ -5,12 +5,14 @@
 </template>
 
 <script>
-// import getDialog from 'components/getDialog.js';
-// import { receiveInviteDialog } from 'components/dialog';
+import getDialog from 'h5Components/getDialog.js';
+import receiveInvite from 'h5Components/receiveInvite.vue';
 
 export default {
     mounted() {
-        // console.log(getDialog(receiveInviteDialog));
+        const receiveInviteDialog = getDialog(receiveInvite);
+        receiveInviteDialog();
+
         this.$store.commit('setLang', this.$i18n.locale);
         this.$store.dispatch('startLoopBalance');
         this.$store.dispatch('startLoopExchangeBalance');

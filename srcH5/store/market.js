@@ -42,12 +42,16 @@ const mutations = {
 
 const actions = {
     init({ dispatch }) {
-        const txPair = {};
+        let txPair = {};
         for (const key in query) {
             if (key === 'address') {
                 continue;
             }
             txPair[key] = query[key];
+        }
+
+        if (!txPair.symbol) {
+            txPair = { symbol: DefaultSymbol };
         }
         dispatch('h5DexFetchActiveTxPair', txPair);
     },
