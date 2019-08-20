@@ -21,8 +21,7 @@ export default {
 
 <style lang="scss" scoped>
 .token {
-    position: relative;
-    white-space: nowrap;
-    max-width: 250px;
+    width: 100%;
+    margin-bottom: 10px;
 }
 </style>
