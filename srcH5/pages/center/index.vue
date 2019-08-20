@@ -18,7 +18,7 @@ import orderTab from './orderTab';
 export default {
     components: { depth, limitPrice, centerHead, orderTab },
     mounted() {
-        this.$store.dispatch('exFetchActiveTxPair');
+        this.$store.dispatch('h5DexFetchActiveTxPair');
         this.$store.dispatch('exFetchVip');
         this.$store.dispatch('startLoopDexFundeUnreceived');
         this.$store.commit('exSetRealClosePrice', this.realPrice);
