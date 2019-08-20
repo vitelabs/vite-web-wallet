@@ -56,9 +56,6 @@ export default {
             }
             return this.closeMarket.find(v => v.symbol === this.activeTxPair.symbol);
         },
-        defaultTokens() {
-            return this.$store.state.ledger.tokenInfoMaps;
-        },
         ttokenDetail() {
             return this.$store.state.exchangeTokens.ttoken;
         },
@@ -74,12 +71,6 @@ export default {
                 return this.ftokenDetail.urlIcon;
             }
 
-            const tokenId = this.ftokenDetail.tokenId;
-            const defaultToken = this.defaultTokens[tokenId];
-
-            if (defaultToken && defaultToken.icon) {
-                return defaultToken.icon;
-            }
             return '';
         },
         operatorInfo() {

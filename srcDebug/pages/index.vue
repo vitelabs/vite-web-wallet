@@ -37,7 +37,11 @@ export default {
             // this.$router.back();
         },
         goTrade(txPair) {
-            this.iframeSrc = `${ location.origin }/mobiledex?address=${ this.address }&symbol=${ txPair.symbol }`;
+            let iframeSrc = `${ location.origin }/mobiledex?address=${ this.address }`;
+            for (const key in txPair) {
+                iframeSrc += `&${ key }=${ txPair[key] }`;
+            }
+            this.iframeSrc = iframeSrc;
         },
         goOrder() {
             this.iframeSrc = `${ location.origin }/mobiledex#/order?address=${ this.address }`;
