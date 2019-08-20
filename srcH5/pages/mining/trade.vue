@@ -54,7 +54,7 @@ export default {
             this.tradeCurrentPage = 0;
             this.tradeListTotal = 0;
             this.tradeList = [];
-            this.fetchMiningInvite();
+            this.fetchMiningTrade();
         }
     },
     computed: {
