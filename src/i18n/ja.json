@@ -13,6 +13,7 @@
     "settingAcc": "アカウントの設定",
     "resetAcc": "アカウントのリセット",
     "logout": "ログアウト",
+    "saveLogout": "安全退出",
     "blockHeight": "スナップショットブロック値",
     "accountName": "アカウント名",
     "action": "アクション",
@@ -138,6 +139,7 @@
         "err": "エラーが発生しました",
         "request": "リクエストが送信されました。しばらくお待ちください。",
         "copy": "コピーが成功しました",
+        "copyShare": "Copy share link successful!",
         "addrFormat": "アドレス形式が間違っています",
         "amtFormat": "数値形式が間違っています",
         "transSucc": "トランザクション成功",
@@ -147,7 +149,8 @@
         "bigger0": "この値は{0} より大きい数字にしなければなりません",
         "operateSuccess": "オペレーション成功",
         "operateFail": "操作に失敗しました。",
-        "unreceived": "使用前にウォレットをアンロックしてください"
+        "unreceived": "使用前にウォレットをアンロックしてください",
+        "unLogin": "Please login"
     },
     "beforeUse": {
         "title": "利用前に読んで下さい",
@@ -179,7 +182,7 @@
         "restore": "シードフレーズによるアカウントの復元",
         "record": "シードフレーズの生成",
         "prompt": "ニーモニックシードフレーズは、ウォレットを復元する唯一の方法です。 フレーズを書き留めて、自分だけがアクセスできる安全な場所に保管することを強くお勧めします。",
-        "placeholder": "ニーモニックシードフレーズを入力してください",
+        "placeholder": "Please input your mnemonic seed phrase. Example: apple banana peach mango pear ...",
         "empty": "シードフレーズの入力が空欄です",
         "error": "シードフレーズが間違っています 再入力してください",
         "hint": "例：apple banana peach mango pear ...",
@@ -255,7 +258,10 @@
             "onroad": "ウォレット未受取額",
             "gate": "ウォレット クロスチェ－ンゲートウェイ",
             "totalExAmount": "取引所合計残高",
-            "availableExAmount": "取引可能残高"
+            "availableExAmount": "取引可能残高",
+            "balanceTips": "点击转账，可以从Vite 钱包给其他地址转币",
+            "gateTips": "点击跨链转入，可以将其他币种跨链映射到Vite网络，转入Vite钱包；点击跨链转出仍可以将资产转至其他平台。*转入转出过程可能会产生手续费，且有金额限制",
+            "availableExAmountTips": "点击充值至交易所，将钱包中的资产划转至交易所；点击提现至钱包，将交易所资产划转至钱包。以上划转过程不需要手续费"
         },
         "actionType": {
             "SEND": "転送",
@@ -269,7 +275,7 @@
         },
         "addToken": {
             "title": "トークンを追加",
-            "placeholder": "トークン名を入力してください",
+            "placeholder": "Please input token name 或者 TokenID",
             "lTxt": "キャンセル",
             "rTxt": "追加"
         },
@@ -288,13 +294,20 @@
             "saveGate": "保存",
             "labels": {
                 "tokenId": "トークンID",
-                "title": "{tokenSymbol} アドレス",
-                "address": "ミンテージアドレス",
                 "tokenName": "名前",
                 "totalSupply": "総供給",
-                "decimals": "小数",
-                "isReIssuable": "タイプ",
-                "time": "発行日"
+                "total": "流通总量",
+                "overview": "代币简介",
+                "type": "代币类型",
+                "gate": "跨链网关",
+                "website": "官网",
+                "whitePaper": "白皮书",
+                "explorer": "浏览器",
+                "github": "Github",
+                "media": "社交媒体",
+                "crossType": "跨链代币",
+                "originType": "原生代币",
+                "viewmore": "查看更多"
             },
             "reIssuable": {
                 "true": "再発行可能",
@@ -319,7 +332,7 @@
             "nodeDescStr": "This function only works for cross-chain coins, do not use this on built-in tokens. Meanwhile, please be careful about unfamiliar gateway links. By continuing to use our platform, you agree and acknowledge that Vite Labs would not be responsible for the loss of your fund and other negative consequences caused. Fill out the gateway link below if you need to use gateway, the link will come into effect after you hit save."
         },
         "depositRecord": {
-            "tabName": "デポジット履歴",
+            "tabName": "Receive History",
             "heads": [
                 "時間",
                 "量",
@@ -367,7 +380,7 @@
             "title": "クロスチェーン受信",
             "addrErr": "ゲートウェイノードに問題が発生しました ネットワーク設定を確認してください",
             "addressTitle": "受取アドレス",
-            "labelTips": "受信アドレスでこの「{labelName}」を使用してください。そうしないと、アセットが失われます",
+            "labelTips": " (Please use this '{labelName}' with your recipient address, otherwise your assets will lose)",
             "labelCodeTips": "{labelName} からQRコードをスキャンして下さい",
             "codeTips": "QRコードをスキャンして入金します {tokenSymbol}をサポートするウォレットで転送してください",
             "tips": [
@@ -392,8 +405,9 @@
                 "fee": "手数料",
                 "all": "すべて"
             },
+            "labelPlaceholder": "Please input {labelName}",
             "amountPlaceholder": "{min}以上の金額を入力してください",
-            "addressPlaceholder": "転送先アドレスを入力して下さい",
+            "addressPlaceholder": "Please input {token} transfer address",
             "successTips": "転送リクエストが送信されました",
             "failTips": "ゲートウェイノードでエラーが発生しました ネットワーク設定を確認してください"
         },
@@ -765,12 +779,20 @@
         "mergeDepth": "グループ",
         "depthStep": "{step}桁",
         "blocking": "ネットワークの混雑が発生しています しばらくしてからもう一度お試しください",
+        "supportMining": "支持挖矿的交易对",
         "operator": {
-            "title": "オペレータ詳細",
-            "introduction": "はじめに",
+            "noName": "匿名网关",
+            "overview": "はじめに",
             "txPair": "トレーディングペア",
             "confirmTitle": "リスク喚起",
-            "confirmText": "デジタル資産への投資には高いリスクが伴います。投資する前に、デジタル資産への投資のすべてのリスクを完全に理解し、その真正性、合法性、有効性を判断してください。 あなた自身のデジタル資産の対する投資決定に慎重になり、資産の損失に対する責任はご自身にあることを理解下さい。　"
+            "confirmText": "デジタル資産への投資には高いリスクが伴います。投資する前に、デジタル資産への投資のすべてのリスクを完全に理解し、その真正性、合法性、有効性を判断してください。 あなた自身のデジタル資産の対する投資決定に慎重になり、資産の損失に対する責任はご自身にあることを理解下さい。　",
+            "address": "运营商地址",
+            "name": "运营商名称"
+        },
+        "operatorTxPair": {
+            "title": "交易对信息",
+            "tokenTab": "代币详情",
+            "operatorTab": "オペレータ詳細"
         }
     },
     "trade": {
@@ -782,7 +804,8 @@
         "quantityTitle": "合計({quantity})",
         "priceTitle": "価格({price})",
         "amountTitle": "量({amount})",
-        "amountTable": "数量",
+        "quantityTable": "累积数量Qty？？？",
+        "amountTable": "累积成交额",
         "amount": "合計",
         "newOrderSuccess": "注文リクエストが送信されました",
         "newOrderFail": "注文失敗",
@@ -980,6 +1003,12 @@
             "1": "売却",
             "0": "購入"
         },
+        "status": {
+            "1": "委托中",
+            "2": "已完成",
+            "3": "已撤销",
+            "4": "下单失败"
+        },
         "confirmTable": {
             "title": "オーダー ブック",
             "heads": [
@@ -1020,6 +1049,7 @@
             "side": "サイド",
             "buy": "購入",
             "sell": "売却",
+            "status": "状态",
             "search": "検索",
             "reset": "リセット"
         }
