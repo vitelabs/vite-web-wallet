@@ -103,14 +103,3 @@ export default {
     }
 };
 </script>
-
-<style lang="scss" scoped>
-.trade-center-wrapper {
-    height: 100%;
-    width: 100%;
-}
-.order-tab {
-    margin-bottom: 10px;
-    min-height: 300px;
-}
-</style>
