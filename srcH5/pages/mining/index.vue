@@ -71,7 +71,7 @@ import { miningTrade, miningPledge } from 'services/trade';
 import {
     getInviteMiningDetail,
     getOrderMiningDetail
-} from 'services/tradeOperation';
+} from 'h5Services/tradeOperation';
 
 import openUrl from 'utils/openUrl';
 import inviteMinComp from './invite.vue';

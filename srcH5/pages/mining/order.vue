@@ -16,7 +16,7 @@
     </div>
 </template>
 <script>
-import { getOrderMiningDetail } from 'services/tradeOperation';
+import { getOrderMiningDetail } from 'h5Services/tradeOperation';
 import walletTable from 'components/table/index.vue';
 import pagination from 'components/pagination.vue';
 import bigNumber from 'utils/bigNumber';

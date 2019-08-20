@@ -1,7 +1,7 @@
 import $ViteJS from 'utils/viteClient';
 import { timer } from 'utils/asyncFlow';
 import BigNumber from 'utils/bigNumber';
-import { getInviteeCode } from 'services/tradeOperation';
+import { getInviteeCode } from 'h5Services/tradeOperation';
 
 const baseMakerFee = 0.002;
 const baseTakerFee = 0.002;

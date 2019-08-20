@@ -22,7 +22,9 @@ module.exports = {
             h5Router: path.join(H5_SRC_PATH, '/router'),
             h5Components: path.join(H5_SRC_PATH, '/components'),
             h5Assets: path.join(H5_SRC_PATH, '/assets'),
-            h5Store: path.join(H5_SRC_PATH, '/store')
+            h5Store: path.join(H5_SRC_PATH, '/store'),
+            h5Services: path.join(H5_SRC_PATH, '/services'),
+            h5Utils: path.join(H5_SRC_PATH, '/utils')
         }
     }
 };

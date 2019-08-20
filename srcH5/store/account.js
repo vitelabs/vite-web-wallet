@@ -98,7 +98,6 @@ const getters = {
     defaultTokenList(state, getters, rootState, rootGetters) {
         const balanceInfo = getters.balanceInfo;
         const allToken = rootGetters.allTokensMap;
-        const mapToken2Gate = rootGetters.mapToken2Gate;
         const exBalance = rootGetters.exBalanceList;
 
         // ------------------- show default token
@@ -124,7 +123,7 @@ const getters = {
             } = Object.assign({},
                 defaultTokenMap[i],
                 balanceInfo[i] || {},
-                allToken[i] || {}, { gateInfo: { url: mapToken2Gate[i] && mapToken2Gate[i].url } },
+                allToken[i] || {},
                 exBalance[i]);
             const rate = rootState.exchangeRate.rateMap[i] && rootState.exchangeRate.rateMap[i][`${ rootState.env.currency }Rate`];
             const totalExAsset = rate ? bigNumber.multi(bigNumber.toBasic(totalExAmount || 0, decimals), rate) : 0;
@@ -169,7 +168,6 @@ const getters = {
     otherWhithBalance(state, getters, rootState, rootGetters) {
         const balanceInfo = getters.balanceInfo;
         const allToken = rootGetters.allTokensMap;
-        const mapToken2Gate = rootGetters.mapToken2Gate;
         const exBalance = rootGetters.exBalanceList;
         const contains = (getters.defaultTokenList || []).map(t => t.tokenId);
         return Object.keys(allToken)
@@ -197,7 +195,7 @@ const getters = {
                     icon = getTokenIcon(i),
                     type = 'THIRD_GATE',
                     gateInfo = {}
-                } = Object.assign({}, balanceInfo[i] || {}, allToken[i] || {}, { gateInfo: { url: mapToken2Gate[i] && mapToken2Gate[i].url } });
+                } = Object.assign({}, balanceInfo[i] || {}, allToken[i] || {});
                 const rate = rootState.exchangeRate.rateMap[i] && rootState.exchangeRate.rateMap[i][`${ rootState.env.currency }Rate`];
                 const totalExAsset = rate ? bigNumber.multi(bigNumber.toBasic(totalExAmount || 0, decimals), rate) : 0;
                 const walletAsset = rate ? bigNumber.multi(bigNumber.toBasic(totalAmount || 0, decimals), rate) : 0;

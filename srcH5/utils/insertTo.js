@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import store from 'store';
+import store from 'h5Store';
 import i18n from 'i18n';
 
 export function insertTo(component, propsDefault = {}, ele) {

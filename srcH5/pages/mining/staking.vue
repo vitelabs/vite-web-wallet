@@ -32,7 +32,7 @@
     </div>
 </template>
 <script>
-import { insertTo } from 'utils/insertTo';
+import { insertTo } from 'h5Utils/insertTo';
 import VxConfirm from './vxConfirm.vue';
 import $ViteJS from 'utils/viteClient';
 import statistics from 'utils/statistics';
