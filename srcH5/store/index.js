@@ -47,9 +47,4 @@ store.registerModule('account', account);
 store.registerModule('ledger', ledger);
 store.registerModule('gateInfo', gateInfo);
 
-store.dispatch('init');
-store.dispatch('updateMarketMap');
-store.dispatch('getMarketsClosed');
-store.dispatch('exFetchLimitAmounts');
-
 export default store;

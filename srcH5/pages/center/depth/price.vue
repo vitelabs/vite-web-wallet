@@ -13,17 +13,7 @@
 </template>
 
 <script>
-import BigNumber from 'utils/bigNumber';
-
-const Default_Title = 'Vite Wallet';
-
 export default {
-    mounted() {
-        document.title = this.documentTitle;
-    },
-    destroyed() {
-        document.title = Default_Title;
-    },
     computed: {
         activeTxPair() {
             return this.$store.getters.exActiveTxPair;
@@ -36,18 +26,6 @@ export default {
         },
         closePrice() {
             return this.activeTxPair && this.activeTxPair.closePrice ? this.activeTxPair.closePrice : '';
-        },
-        documentTitle() {
-            if (!this.activeTxPair) {
-                return Default_Title;
-            }
-
-            return `${ BigNumber.onlyFormat(this.closePrice) } | ${ this.activeTxPair.symbol }`;
-        }
-    },
-    watch: {
-        documentTitle() {
-            document.title = this.documentTitle;
         }
     }
 };

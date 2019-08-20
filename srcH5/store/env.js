@@ -21,23 +21,10 @@ const mutations = {
     }
 };
 
-const actions = {
-    init({ dispatch }) {
-        const txPair = {};
-        for (const key in query) {
-            if (key === 'address') {
-                continue;
-            }
-            txPair[key] = query[key];
-        }
-        dispatch('h5DexFetchActiveTxPair', txPair);
-    }
-};
-
 const getters = {
     activeAddr(state) {
         return state.address || '';
     }
 };
 
-export default { state, mutations, actions, getters };
+export default { state, mutations, getters };
