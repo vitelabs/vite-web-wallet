@@ -17,6 +17,9 @@ export function getTokenIcon(tokenId) {
 }
 
 export function getTokenNameString(symbol, index, length = 3) {
+    if (!symbol) {
+        return '';
+    }
     if (symbol.toUpperCase() === 'VITE' || symbol.toUpperCase() === 'VCP' || symbol.toUpperCase() === 'VX' || index === undefined) {
         return symbol;
     }

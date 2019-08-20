@@ -34,8 +34,8 @@ export default {
         allTokens() {
             return [
                 ...this.$store.getters.defaultTokenList,
-                ...this.$store.getters.otherWhithBalance
-            ].filter(t => t.tokenName);
+                ...this.$store.getters.otherWithBalance
+            ];
         },
         currencySymbol() {
             return this.$store.getters.currencySymbol;
@@ -80,8 +80,7 @@ export default {
     .assets {
         padding: 14px;
         border-bottom: 1px dashed rgba(211,223,239,1);
-        font-family: $font;
-        font-weight: 400;
+        @include font-normal();
         color: rgba(36,39,43,1);
         .asset__title {
             color: rgba(62,74,89,0.6);
@@ -89,7 +88,7 @@ export default {
         }
         .asset__btc {
             font-size: 24px;
-            font-weight: 600;
+            @include font-bold();
             line-height: 30px;
             margin-top: 6px;
         }
@@ -108,8 +107,7 @@ export default {
         background: rgba(255,255,255,0.7);
         color: rgba(62,74,89,0.45);
         line-height: 18px;
-        font-family: $font;
-        font-weight: 600;
+        @include font-bold();
         display: flex;
         align-items: center;
         position: relative;

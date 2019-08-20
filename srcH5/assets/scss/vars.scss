@@ -1,1 +1,12 @@
 $font: PingFang-SC, arial, sans-serif;
+$blue: #007aff;
+
+@mixin font-normal() {
+    font-family: $font;
+    font-weight: 400;
+}
+
+@mixin font-bold() {
+    font-family: $font;
+    font-weight: 600;
+}

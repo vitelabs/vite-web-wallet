@@ -29,19 +29,19 @@ export default {
         tokenList() {
             return [
                 ...this.defaultTokenList,
-                ...this.otherWhithBalance
+                ...this.otherWithBalance
             ];
         },
         defaultTokenList() {
             return this.$store.getters.defaultTokenList;
         },
-        otherWhithBalance() {
-            return this.$store.getters.otherWhithBalance;
+        otherWithBalance() {
+            return this.$store.getters.otherWithBalance;
         },
         showTokenIds() {
             return [
                 ...this.defaultTokenList,
-                ...this.otherWhithBalance
+                ...this.otherWithBalance
             ].map(t => t.tokenId);
         }
     }
@@ -57,13 +57,13 @@ export default {
 
 .token-list {
     font-size: 14px;
-    font-family: $font;
     .title {
-        font-weight: 600;
+        @include font-bold();
         color: rgba(62,74,89,1);
         line-height: 18px;
     }
     .no-data {
+        @include font-normal();
         text-align: center;
     }
 }

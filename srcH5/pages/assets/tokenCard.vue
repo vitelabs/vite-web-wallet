@@ -73,6 +73,8 @@ export default {
             return getTokenNameString(...args);
         },
         showDetail() {
+            console.log(tokenInfoDialog);
+            console.log(this.token);
             tokenInfoDialog({ token: this.token }).catch(e => {
                 console.error(e);
             });
@@ -102,13 +104,14 @@ export default {
     position: relative;
     background: #fff;
     border-bottom: 1px solid rgba(211,223,239,1);
+    @include font-normal();
     font-family: $font;
 
     .token-meta {
         margin-bottom: 12px;
         line-height: 20px;
         font-size: 16px;
-        font-weight: 600;
+        @include font-bold();
         color: rgba(36,39,43,1);
         .icon {
             height: 20px;
@@ -128,7 +131,7 @@ export default {
             line-height: 16px;
             flex: 1;
             font-size: 12px;
-            font-weight: 600;
+            @include font-bold();
             color: rgba(36,39,43,1);
             text-align: right;
             &:first-child {
@@ -147,11 +150,11 @@ export default {
             border: 1px solid rgba(0,122,255,0.3);
             word-break: keep-all;
             line-height: 26px;
-            color: #007aff;
+            color: $blue;
             flex: 1;
             text-align: center;
             font-size: 14px;
-            font-weight: 600;
+            @include font-bold();
             &:first-child {
                 margin-right: 25px;
             }
