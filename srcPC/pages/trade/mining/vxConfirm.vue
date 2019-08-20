@@ -38,7 +38,7 @@ import sendTx from 'utils/sendTx';
 import bigNumber from 'utils/bigNumber';
 import statistics from 'utils/statistics';
 import { verifyAmount, verifyWithdrawAmount } from 'utils/validations';
-import router from 'h5Router';
+import router from 'router';
 
 const minLimit = 134;
 
