@@ -41,6 +41,16 @@ const mutations = {
 };
 
 const actions = {
+    init({ dispatch }) {
+        const txPair = {};
+        for (const key in query) {
+            if (key === 'address') {
+                continue;
+            }
+            txPair[key] = query[key];
+        }
+        dispatch('h5DexFetchActiveTxPair', txPair);
+    },
     updateMarketMap({ commit, dispatch }) {
         // Add quote token
         baseToken().then(data => {

@@ -18,6 +18,10 @@ import orderTab from './orderTab';
 export default {
     components: { depth, limitPrice, centerHead, orderTab },
     mounted() {
+        this.$store.dispatch('init');
+        this.$store.dispatch('updateMarketMap');
+        this.$store.dispatch('getMarketsClosed');
+        this.$store.dispatch('exFetchLimitAmounts');
         this.$store.dispatch('h5DexFetchActiveTxPair');
         this.$store.dispatch('exFetchVip');
         this.$store.dispatch('startLoopDexFundeUnreceived');
