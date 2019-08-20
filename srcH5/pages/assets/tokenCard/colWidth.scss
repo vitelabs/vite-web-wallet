@@ -1,0 +1,16 @@
+@mixin colWidth {
+    padding: 8px;
+    &:first-child {
+        min-width: 80px;
+        width: 11%;
+        padding-left: 30px;
+    }
+    &:nth-child(2){
+        min-width: 260px;
+        width: 25%;
+    }
+    &:nth-child(3) {
+        min-width: 110px;
+        width: 15%;
+    }
+}

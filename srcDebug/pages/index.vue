@@ -8,8 +8,8 @@
             <iframe v-if="iframeSrc" :src="iframeSrc" frameborder="0"></iframe>
         </div>
         <div class="mock-bar bottom">
-            <span>交易</span>
-            <span>资产</span>
+            <span @click="goTrade">交易</span>
+            <span @click="goAssets">资产</span>
             <span @click="goMining">挖矿</span>
             <span @click="goOrder">订单</span>
         </div>
@@ -35,6 +35,9 @@ export default {
     methods: {
         back() {
             // this.$router.back();
+        },
+        goAssets() {
+            this.iframeSrc = `${ location.origin }/mobiledex#/assets?address=${ this.address }`;
         },
         goTrade(txPair) {
             let iframeSrc = `${ location.origin }/mobiledex?address=${ this.address }`;

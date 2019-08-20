@@ -32,7 +32,6 @@
 <script>
 import order from './order.vue';
 import vipConfirm from './vipConfirm.vue';
-import { execWithValid } from 'utils/execWithValid';
 import BigNumber from 'utils/bigNumber';
 import statistics from 'utils/statistics';
 
@@ -111,9 +110,9 @@ export default {
             statistics.event(this.$route.name, `switchVIP-${ this.isVip ? 'cancel' : 'open' }`, this.address || '');
             this.showVipConfirm();
         },
-        showVipConfirm: execWithValid(function () {
+        showVipConfirm() {
             this.isShowVipConfirm = true;
-        })
+        }
     }
 };
 </script>

@@ -36,7 +36,6 @@ import { insertTo } from 'utils/insertTo';
 import VxConfirm from './vxConfirm.vue';
 import $ViteJS from 'utils/viteClient';
 import statistics from 'utils/statistics';
-import { execWithValid } from 'utils/execWithValid';
 import stakingDetail from './stakingDetail.vue';
 import { constant } from '@vite/vitejs';
 import { timer } from 'utils/asyncFlow';
@@ -124,7 +123,7 @@ export default {
                 this.address || '');
             this.showVxConfirm(actionType);
         },
-        showVxConfirm: execWithValid(function (actionType) {
+        showVxConfirm(actionType) {
             this.vxConfirm = insertTo(VxConfirm, {
                 actionType,
                 stakingObj: this.stakingObj,
@@ -132,7 +131,7 @@ export default {
                     this.hideVxConfirm();
                 }
             });
-        }),
+        },
 
         stopStakingInfo() {
             stakingInfoTimer && stakingInfoTimer.stop();
