@@ -41,8 +41,7 @@ export default {
         allTokens() {
             return [
                 ...this.$store.getters.defaultTokenList,
-                ...this.$store.getters.otherWhithBalance,
-                ...this.$store.getters.officalGateTokenList
+                ...this.$store.getters.otherWhithBalance
             ].filter(t => t.tokenName);
         },
         currencySymbol() {

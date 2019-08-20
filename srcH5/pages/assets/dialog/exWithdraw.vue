@@ -14,6 +14,7 @@ block content
         input(v-model="withdrawAmount" :placeholder="$t(`tradeAssets.confirmwithdraw.placeholder`)" @input="handleUserInputAmount")
         .all(@click="all") {{$t('tradeAssets.all')}}
 </template>
+
 <script>
 import { getValidBalance } from 'utils/validations';
 import statistics from 'utils/statistics';
