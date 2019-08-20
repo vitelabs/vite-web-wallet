@@ -13,6 +13,7 @@
     "settingAcc": "Настройка Аккаунта",
     "resetAcc": "Сбросить Ваш Аккаунт",
     "logout": "Выйти",
+    "saveLogout": "安全退出",
     "blockHeight": "Высота Снепшот Блока",
     "accountName": "Имя Пользователя",
     "action": "Действие",
@@ -115,71 +116,73 @@
         "DexFundTransferTokenOwner": "Передача ключевой собственности Оператора",
         "DexFundMarketOwnerConfig": "Конфигурация торговой пары Оператора",
         "DexFundBindInviteCode": "Использовать Реферальный Код",
-        "DexFundNewInviter": "Create Referral Code"
+        "DexFundNewInviter": "Создать Реферальный Код"
     },
     "btn": {
-        "cancel": "Cancel",
-        "login": "Login",
-        "imported": "Import Account",
-        "back": "Back",
-        "submit": "Submit",
-        "next": "Next Step",
-        "understand": "I understand",
-        "edit": "Edit",
-        "reReg": "Re-register",
-        "otherProd": "Use Other Products of Vite",
-        "known": "I know"
+        "cancel": "Отменить",
+        "login": "Вход",
+        "imported": "Импортировать Аккаунт",
+        "back": "Назад",
+        "submit": "Подтвердить",
+        "next": "Следующий Шаг",
+        "understand": "Я понимаю",
+        "edit": "Изменить",
+        "reReg": "Перезарегистрироваться",
+        "otherProd": "Используйте Другие Продукты Vite",
+        "known": "Я знаю"
     },
     "hint": {
-        "noNet": "No network detected",
-        "pwErr": "Incorrect password!",
-        "pwEmpty": "Password cannot be empty!",
-        "noData": "No Data",
-        "err": "Oops, error occurs",
-        "request": "{name} request has sent, please wait",
-        "copy": "Successfully copied",
-        "addrFormat": "Incorrect address format",
-        "amtFormat": "Incorrect amount format",
-        "transSucc": "Transaction successful!",
-        "insufficientBalance": "Insufficient balance",
-        "validMaxDigit": "At most {digit} decimals",
-        "nodeErr": "The full node is abnormal, please try again later.",
-        "bigger0": "Value must be greater than 0",
-        "operateSuccess": "Operation Successful",
-        "operateFail": "Operation Failed",
-        "unreceived": "Unlock you wallet before use"
+        "noNet": "Сеть не обнаружена",
+        "pwErr": "Неверный пароль!",
+        "pwEmpty": "Пароль не может быть пустым!",
+        "noData": "Нет Данных",
+        "err": "Произошла ошибка",
+        "request": "{name} запрос отправлен, пожалуйста, подождите",
+        "copy": "Успешно скопировано",
+        "copyShare": "Copy share link successful!",
+        "addrFormat": "Некорректный формат адреса",
+        "amtFormat": "Некорректный формат суммы",
+        "transSucc": "Транзакция выполнена успешно!",
+        "insufficientBalance": "Недостаточный баланс",
+        "validMaxDigit": "Не более {digit} десятичных знаков",
+        "nodeErr": "Полная нода аномальна, повторите попытку позже.",
+        "bigger0": "Значение должно быть больше 0",
+        "operateSuccess": "Операция Выполнена Успешно",
+        "operateFail": "Операция Не Выполнена",
+        "unreceived": "Разблокируйте свой кошелек перед использованием",
+        "unLogin": "Please login"
     },
     "beforeUse": {
-        "title": "Read Before Use",
-        "text1": "For your funds' safety, create account function is not supported provisionally on web wallet. Please download Vite App to create account. Vite platform would like to warn you that if you visit a phishing website or lose you backup, our company cannot recover your funds.",
-        "text2": "Please note that our websites do not store your private keys or seed phrase. Therefore, you will need to restore your account via seed phrase if you decide to change browsers, clear local cookies, or change PCs.",
-        "text3": "Please take proper precautions in ensuring that you accurately record and safely store your seed phrase. Even the slightest error will result in you not being able to successfully restore your address."
+        "title": "Прочитайте перед использованием",
+        "text1": "В целях безопасности ваших средств, функция создания учетной записи временно не поддерживается в веб-кошельке. Пожалуйста, скачайте Vite Приложение, чтобы создать аккаунт. Платформа Vite предупреждает вас, что если вы посетите фишинговый веб-сайт или потеряете резервную копию, наша компания не сможет вернуть ваши средства.",
+        "text2": "Обратите внимание, что на наших веб-сайтах не хранятся ваши личные ключи или сид фразы. Поэтому вам нужно будет восстановить свою учетную запись с помощью с фразы, если вы решите сменить браузер, очистить локальные файлы cookie или сменить ПК.",
+        "text3": "Пожалуйста, примите надлежащие меры предосторожности, чтобы точно записать и безопасно сохранить сид фразу. Даже малейшая ошибка приведет к тому, что вы не сможете успешно восстановить свой адрес."
     },
     "preview": {
-        "t": "Version {version}",
-        "txt1": "x.vite.net is an web platform integrating wallet and exchange. It is officially launched by Vite Labs.",
-        "txt2": "Current version mainly contains functions of wallet, ViteX decentralised exchange, staking VITE for quota, SBP registration, voting and token issuance. Try our newly released function ViteConnect: you can use Vite App to login via scanning a QR code.",
-        "txt3": "ViteX is formally launched. Come and start trading now.",
-        "v": "Current Version: {version}"
+        "t": "Версия {version}",
+        "txt1": "x.vite.net - это веб-платформа, объединяющая кошелек и биржу. Она официально запущена Vite Labs.",
+        "txt2": "Текущая версия в основном содержит функции кошелька, децентрализованной биржи ViteX, стейкинга VITE для квоты, регистрации SBP, голосования и выдачи токенов. Попробуйте нашу недавно выпущенную функцию ViteConnect: вы можете использовать приложение Vite для входа в систему путем сканирования QR-кода.",
+        "txt3": "ViteX официально запущен. Приходите и начните торговать сейчас.",
+        "v": "Текущая версия: {version}"
     },
     "pwdConfirm": {
-        "conf": "Open password-free mode to free you from entering password during every transaction process. ",
-        "title": "Password",
-        "placeholder": "Please input wallet password",
-        "unlockAcc": "Please unlock {name} first"
+        "conf": "Откройте режим без пароля, чтобы освободить вас от ввода пароля во время каждой транзакции. ",
+        "title": "Пароль",
+        "placeholder": "Пожалуйста, введите пароль кошелька",
+        "unlockAcc": "Пожалуйста, сначала разблокируйте {name}"
     },
     "quotaConfirm": {
-        "title": "Insufficient Quota",
-        "cancelContent": "You cannot {operate} due to insufficient TPS quota. You need to stake VITE for quota to {operate}",
-        "goQuota": "Stake VITE",
-        "noOperate": "Not {operate} yet"
+        "title": "Недостаточно Квоты",
+        "cancelContent": "Вы не можете {operate} из-за недостаточной TPS квоты. Вы должны застейка VITE на квоту, чтобы {operate}",
+        "goQuota": "Стейк VITE",
+        "noOperate": "Еще {operate} нет"
     },
     "mnemonic": {
-        "title": "Mnemonic",
-        "restore": "Restore Account by Seed Phrase",
-        "record": "Generate Seed Phrase",
-        "prompt": "Mnemonic seed phrase is the only way to restore your wallet. You are strongly advised to write down the phrase and keep it in a safe place where only you can access.",
-        "placeholder": "Пожалуйста, введите вашу мнемоническую сид фразу",
+        "title": "Мнемоническая фраза",
+        "restore": "Восстановить аккаунт по Сид Фразе",
+        "record": "Сгенерировать Сид Фразу",
+        "prompt": "Мнемоническая сид фраза - единственный способ восстановить ваш кошелек. Настоятельно рекомендуем записать фразу и хранить ее в безопасном месте, где только вы сможете получить к ней доступ.",
+        "placeholder": "Please input your mnemonic seed phrase. Example: apple banana peach mango pear ...",
         "empty": "Ввод сид фразы не может быть пустым",
         "error": "Неверная сид фраза. Попробуйте снова",
         "hint": "Пример: яблоко банан персик манго груша ...",
@@ -195,7 +198,7 @@
         "version": "Version",
         "service": "Служба Поддержки",
         "site": "Официальный Сайт Vite",
-        "sys": "System Portal",
+        "sys": "Сайт",
         "open": "Vite Github",
         "addAddr": "Добавить Адрес",
         "addrList": "Управление Адресами",
@@ -245,71 +248,81 @@
         }
     },
     "tokenCard": {
-        "moreRecords": "More Records",
-        "others": "Others",
-        "assetSpread": "Portfolio",
-        "saveSuccess": "Successfully saved",
+        "moreRecords": "Больше Записей",
+        "others": "Прочее",
+        "assetSpread": "Портфолио",
+        "saveSuccess": "Успешно сохраненo",
         "heads": {
-            "name": "Name",
-            "balance": "Balance",
-            "onroad": "Wallet Unreceived Amount",
-            "gate": "Wallet Cross-Chain Gateway",
-            "totalExAmount": "Exchange Total Balance",
-            "availableExAmount": "Exchange Available Balance"
+            "name": "Название",
+            "balance": "Баланс",
+            "onroad": "Неполученная Сумма Кошелька",
+            "gate": "Кросс-чейн Шлюз Кошелька",
+            "totalExAmount": "Общий Баланс на Бирже",
+            "availableExAmount": "Доступный Баланс на Бирже",
+            "balanceTips": "点击转账，可以从Vite 钱包给其他地址转币",
+            "gateTips": "点击跨链转入，可以将其他币种跨链映射到Vite网络，转入Vite钱包；点击跨链转出仍可以将资产转至其他平台。*转入转出过程可能会产生手续费，且有金额限制",
+            "availableExAmountTips": "点击充值至交易所，将钱包中的资产划转至交易所；点击提现至钱包，将交易所资产划转至钱包。以上划转过程不需要手续费"
         },
         "actionType": {
-            "SEND": "Transfer",
-            "RECEIVE": "Receive",
-            "CHARGE": "Receive",
-            "WITHDRAW": "Transfer",
-            "EXCHARGE": "Deposit",
-            "EXWITHDRAW": "Withdraw",
-            "EXRECRODS": "History",
-            "RECRODS": "History"
+            "SEND": "Перевести",
+            "RECEIVE": "Получить",
+            "CHARGE": "Получить",
+            "WITHDRAW": "Перевести",
+            "EXCHARGE": "Пополнить",
+            "EXWITHDRAW": "Вывести Средства",
+            "EXRECRODS": "История",
+            "RECRODS": "История"
         },
         "addToken": {
-            "title": "Add Token",
-            "placeholder": "Please input token name",
-            "lTxt": "Cancel",
-            "rTxt": "Add"
+            "title": "Добавить Токен",
+            "placeholder": "Please input token name 或者 TokenID",
+            "lTxt": "Отменить",
+            "rTxt": "Добавить"
         },
         "type": {
-            "native": "Native Tokens",
+            "native": "Нативные Токены",
             "crossGate": "Cross-Chain Coins"
         },
         "assetType": {
-            "TOTAL": "All Assets",
-            "EX": "Exchange Assets",
-            "WALLET": "Wallet Assets"
+            "TOTAL": "Все Активы",
+            "EX": "Активы на Бирже",
+            "WALLET": "Активы на Кошельке"
         },
         "tokenInfo": {
-            "tabName": "Details",
-            "title": "{tokenSymbol} Information",
-            "saveGate": "Save",
+            "tabName": "Подробнее",
+            "title": "{tokenSymbol} Информация",
+            "saveGate": "Сохранить",
             "labels": {
-                "tokenId": "TokenID",
-                "title": "{tokenSymbol} Address",
-                "address": "Mintage Address",
-                "tokenName": "Name",
-                "totalSupply": "Total Supply",
-                "decimals": "Decimals",
-                "isReIssuable": "Type",
-                "time": "Issuance Date"
+                "tokenId": "ID Токена",
+                "tokenName": "Название",
+                "totalSupply": "Общее Предложение",
+                "total": "流通总量",
+                "overview": "代币简介",
+                "type": "代币类型",
+                "gate": "跨链网关",
+                "website": "官网",
+                "whitePaper": "白皮书",
+                "explorer": "浏览器",
+                "github": "Github",
+                "media": "社交媒体",
+                "crossType": "跨链代币",
+                "originType": "原生代币",
+                "viewmore": "查看更多"
             },
             "reIssuable": {
-                "true": "Re-issuable",
-                "false": "Not re-issuable"
+                "true": "Перевыпуск",
+                "false": "Не подлежит повторному выпуску"
             }
         },
         "gateInfo": {
-            "clickCustomer": "Submit a request",
-            "name": "Gateway Name",
-            "customer": "Customer Service",
-            "privacy": "Terms of Services",
-            "clickPrivacy": "{gate}'s official gateway Terms of Services",
-            "gateSetting": "Configure Gateway",
-            "tabName": "Gateway Details",
-            "selfdefined": "Customize Gateway",
+            "clickCustomer": "Отправить запрос",
+            "name": "Имя Шлюза",
+            "customer": "Служба Поддержки",
+            "privacy": "Условия Обслуживания",
+            "clickPrivacy": "Условия предоставления услуг официального шлюза {gate}",
+            "gateSetting": "Сконфигурировать Шлюз",
+            "tabName": "Детали Шлюза",
+            "selfdefined": "Настроить Шлюз",
             "officalNet": "Веб-сайт",
             "introduction": "Описание",
             "token": "Выпущенный Токен",
@@ -319,7 +332,7 @@
             "nodeDescStr": "This function only works for cross-chain coins, do not use this on built-in tokens. Meanwhile, please be careful about unfamiliar gateway links. By continuing to use our platform, you agree and acknowledge that Vite Labs would not be responsible for the loss of your fund and other negative consequences caused. Fill out the gateway link below if you need to use gateway, the link will come into effect after you hit save."
         },
         "depositRecord": {
-            "tabName": "История Депозитов",
+            "tabName": "Receive History",
             "heads": [
                 "Время",
                 "Сумма",
@@ -367,7 +380,7 @@
             "title": "Кросс-Чейн Получение",
             "addrErr": "Что-то пошло не так с нодой шлюза, проверьте настройки сети",
             "addressTitle": "Адрес Получателя",
-            "labelTips": "(Пожалуйста, используйте это '{labelName}' с вашим адресом получения, иначе ваши активы будут потеряны",
+            "labelTips": " (Please use this '{labelName}' with your recipient address, otherwise your assets will lose)",
             "labelCodeTips": "Пожалуйста, отсканируйте QR-код от {labelName}",
             "codeTips": "Сканируйте QR код для внесения депозита. Пожалуйста, переведите с кошельком, который поддерживает {tokenSymbol}",
             "tips": [
@@ -381,356 +394,357 @@
             "balanceErrMap": {
                 "notEnough": "Недостаточно Средств",
                 "overMax": "Сумма перевода должна быть меньше, чем {max}",
-                "lessMin": "Transfer amount must be greater than {min}"
+                "lessMin": "Сумма перевода должна быть больше чем {min}"
             },
-            "feeTips": "Transaction fee amount is set by gateway operator",
-            "addressErr": "Address format is incorrect",
+            "feeTips": "Размер комиссии за транзакцию устанавливается оператором шлюза",
+            "addressErr": "Неверный формат адреса",
             "labels": {
-                "balance": "Balance",
-                "address": "Address",
-                "amount": "Amount",
-                "fee": "Fee",
-                "all": "All"
+                "balance": "Баланс",
+                "address": "Адрес",
+                "amount": "Сумма",
+                "fee": "Комиссия",
+                "all": "Все"
             },
-            "amountPlaceholder": "Please input transfer amount which should not be less than {min}",
-            "addressPlaceholder": "Please input transfer address",
-            "successTips": "Transfer request has been sent",
-            "failTips": "An error occurred in gateway node, please check the network settings"
+            "labelPlaceholder": "Please input {labelName}",
+            "amountPlaceholder": "Пожалуйста, введите сумму перевода, которая не должна быть меньше {min}",
+            "addressPlaceholder": "Please input {token} transfer address",
+            "successTips": "Запрос на перевод отправлен",
+            "failTips": "Произошла ошибка в ноде шлюза, проверьте настройки сети"
         },
-        "nodeErr": "Gateway node is invalid, please check the gateway settings"
+        "nodeErr": "Нода шлюза недействительна, пожалуйста, проверьте настройки шлюза"
     },
     "viteExplorer": {
-        "title": "Block Explorer"
+        "title": "Обозреватель Блоков"
     },
     "wallet": {
-        "title": "Quota Management",
+        "title": "Управление Квотой",
         "help": {
-            "title": "Quick Understanding of Quota"
+            "title": "Быстрое Понимание Квоты"
         },
-        "transfer": "Transfer",
-        "getTestToken": "Get Test Tokens",
-        "transDetail": "More Transaction Details",
-        "address": "My Address",
-        "fundFloat": "Unreceived",
-        "pend": "Pending",
-        "inAddress": "Receive Address",
-        "sum": "Amount",
-        "remarks": "Comment",
-        "remarksLong": "{len} bytes left",
-        "totalAsset": "Total Assets",
+        "transfer": "Перевод",
+        "getTestToken": "Получить Тестовые Токены",
+        "transDetail": "Больше Деталей Транзакции",
+        "address": "Мой Адрес",
+        "fundFloat": "Не получено",
+        "pend": "Ожидают",
+        "inAddress": "Адрес Получателя",
+        "sum": "Сумма",
+        "remarks": "Комментарий",
+        "remarksLong": "{len} осталось байтов",
+        "totalAsset": "Всего активов",
         "placeholder": {
-            "amount": "Please input amount",
-            "remarks": "Please input comments",
-            "addr": "Please input address"
+            "amount": "Пожалуйста, введите сумму",
+            "remarks": "Пожалуйста, введите комментарии",
+            "addr": "Пожалуйста, введите адрес"
         },
         "hint": {
-            "token": "VITE test tokens have be sent to your account, please check your account!",
-            "tErr": "Get test token failed!",
-            "amount": "Amount must be greater than 0"
+            "token": "Тестовые токены VITE отправлены на ваш аккаунт, пожалуйста, проверьте ваш аккаунт!",
+            "tErr": "Получить тестовый токен не удалось!",
+            "amount": "Сумма должна быть больше 0"
         },
         "trans": {
-            "powErr": "Error occurs when running PoW, please try again",
-            "powTransErr": "Insufficient quota of PoW, we'd recommend that you stake VITE to obtain quota."
+            "powErr": "Произошла ошибка при запуске PoW, попробуйте еще раз",
+            "powTransErr": "Недостаточно квоты PoW, мы рекомендуем вам застейкать VITE для получения квоты."
         }
     },
     "walletMintage": {
-        "title": "Token Issuance",
-        "address": "Issuance Address",
-        "tokenName": "Token Name",
-        "tokenSymbol": "Token Symbol",
-        "totalSupply": "Total Supply",
-        "decimals": "Decimals",
-        "isReIssuable": "ReIssuable",
-        "maxSupply": "Max Supply",
-        "ownerBurnOnly": "Burn out by Owner Only",
-        "isOwnerBurnOnly": "Burn out by Owner Only",
-        "mint": "Confirm",
-        "tokenList": "Issued Token",
-        "submit": "Submit",
-        "cancel": "Cancel",
-        "getListFail": "You are unable to get token list, try again later",
+        "title": "Выпуск Токена",
+        "address": "Адрес Выпуска",
+        "tokenName": "Имя Токена",
+        "tokenSymbol": "Аббревиатура Токена",
+        "totalSupply": "Общее Предложение",
+        "decimals": "Десятичные",
+        "isReIssuable": "Перевыпускаемый",
+        "maxSupply": "Максимальное Предложение",
+        "ownerBurnOnly": "Сжигание только Владельцем",
+        "isOwnerBurnOnly": "Сжигание только Владельцем",
+        "mint": "Подтвердить",
+        "tokenList": "Выпущенный Токен",
+        "submit": "Подтвердить",
+        "cancel": "Отменить",
+        "getListFail": "Вы не можете получить список токенов, попробуйте позже",
         "mintageConfirm": {
-            "title": "Check your Token Issuance Information",
-            "balance": "Balance",
-            "fee": "Issuance Fee",
-            "btn": "Confirm"
+            "title": "Проверьте вашу информацию о выдаче Токена",
+            "balance": "Баланс",
+            "fee": "Плата за Выпуск",
+            "btn": "Подтвердить"
         },
         "reIssuableConfirm": {
-            "title": "Change to Non-issuable",
-            "text": "Make sure to change {tokenName} to Non-issuable status?"
+            "title": "Изменить на Не выпускаемый",
+            "text": "Точно изменить {tokenName} на статус «Не выпускаемый»?"
         },
         "changeOwnerConfirm": {
-            "title": "Transfer Ownership",
-            "address": "Recipient Address"
+            "title": "Передать Права Собственности",
+            "address": "Адрес Получателя"
         },
         "issueConfirm": {
-            "title": "Re-issue",
-            "amount": "Amount",
-            "address": "Beneficiary Address",
-            "overAmount": "Reissued tokens exceed the upper limit"
+            "title": "Перевыпуск",
+            "amount": "Сумма",
+            "address": "Адрес Получателя",
+            "overAmount": "Перевыпущенные токены превышают верхний предел"
         },
         "hint": {
-            "tokenName": "Token name should have 1-40 characters including capitals and lowercase letters, spaces and underlines. Continuous spaces and numbers are not supported.",
-            "tokenSymbol": "Token symbol should have 1-10 characters, only capitals and numbers are supported.",
-            "success": "Token Issuance Successful",
-            "fail": "Token Issuance failed"
+            "tokenName": "Имя токена должно состоять из 1-40 символов, включая заглавные и строчные буквы, пробелы и подчеркивание. Непрерывные пробелы и числа не поддерживаются.",
+            "tokenSymbol": "Символ токена должен иметь 1-10 символов, поддерживаются только заглавные буквы и цифры.",
+            "success": "Выпуск Токена Успешен",
+            "fail": "Ошибка Выдачи Токена"
         },
         "err": {
-            "tokenNameFormat": "Token Name's format is incorrect",
-            "tokenNameNull": "Token Name is required",
-            "tokenSymbolFormat": "Token Symbol's format is incorrect",
-            "tokenSymbolNull": "Token Symbol is required",
-            "supplyMax": "Excessive amount of token issuance",
-            "totalSupplyFormat": "Wrong format of Total Supply",
-            "totalSupplyNull": "Total Supply is required",
-            "maxSupplyNull": "Max Supply is required",
-            "maxSupplyMin": "Must be greater than total supply",
-            "decimalsNull": "Decimals field is required",
-            "decimalsFormat": "Wrong format of decimals",
-            "decimalsMax": "Decimals are out of range",
-            "maxSupplyFormat": "Wrong format of Max Supply"
+            "tokenNameFormat": "Неверный формат Имени токена",
+            "tokenNameNull": "Имя Токена обязательно",
+            "tokenSymbolFormat": "Неверный формат Символа токена",
+            "tokenSymbolNull": "Требуется Символ токена",
+            "supplyMax": "Чрезмерное количество выдачи токена",
+            "totalSupplyFormat": "Неправильный формат Общего Предложения",
+            "totalSupplyNull": "Требуется Общее Предложение",
+            "maxSupplyNull": "Требуется Максимальное Предложение",
+            "maxSupplyMin": "Должно быть больше, чем общее предложение",
+            "decimalsNull": "Поле десятичных знаков обязательно",
+            "decimalsFormat": "Неверный формат десятичных знаков",
+            "decimalsMax": "Десятичные числа вне диапазона",
+            "maxSupplyFormat": "Неправильный формат Максимального Предложения"
         }
     },
     "walletQuota": {
-        "title": "Quota Management",
+        "title": "Управление Квотой",
         "help": {
-            "title": "Quick Understanding of Quota"
+            "title": "Быстрое Понимание Квоты"
         },
-        "myQuota": "My Quota",
-        "maxTxNum": "Maximum Number of Txs",
-        "beneficialAddr": "Quota Recipient Address",
-        "fromAddr": "Deduction Address",
-        "time": "Staking Freeze Duration",
-        "aboutDays": "Approx {day} days",
-        "amountPlaceholder": "Please input staking amount, minimum {num} VITE",
-        "limitAmt": "Staking amount should not be less than {num}.",
-        "addrPlaceholder": "Please input quota recipient address",
-        "inputWithdrawAmount": "Please input withdraw amount",
-        "pledgeFail": "Failed to Submit",
-        "canclePledgeFail": "Failed",
-        "maturity": "Staking has expired!",
-        "minAmt": "Withdraw amount cannot be less than {num} VITE",
-        "gotoStake": "Please Staking enough VITE first",
-        "maxAmt": "Withdraw amount should be in [{minAmount}, {maxAmount}]",
-        "cancelLimitAmt": "Staking amount cannot be less than {num}",
-        "withdrawalStaking": "Withdrawal of Staked Token",
-        "myAddr": "Me",
+        "myQuota": "Моя Квота",
+        "maxTxNum": "Максимальное Количество Транзакций",
+        "beneficialAddr": "Адрес Получателя Квоты",
+        "fromAddr": "Адрес Вычета",
+        "time": "Продолжительность Замораживания Стейкинга",
+        "aboutDays": "Около {day} дней",
+        "amountPlaceholder": "Пожалуйста, введите сумму стейка, минимум {num} VITE",
+        "limitAmt": "Количество стейка не должно быть меньше {num}.",
+        "addrPlaceholder": "Пожалуйста, введите адрес получателя квоты",
+        "inputWithdrawAmount": "Пожалуйста, введите сумму вывода",
+        "pledgeFail": "Не удалось Отправить",
+        "canclePledgeFail": "Ошибка",
+        "maturity": "Срок действия стейка истек!",
+        "minAmt": "Сумма снятия не может быть меньше, чем {num} VITE",
+        "gotoStake": "Пожалуйста, сначала Застейкайте достаточно VITE",
+        "maxAmt": "Сумма снятия должна быть в [{minAmount}, {maxAmount}]",
+        "cancelLimitAmt": "Сумма стейка не может быть меньше {num}",
+        "withdrawalStaking": "Снятие Стейкинга Квоты",
+        "myAddr": "Мне",
         "confirm": {
             "help": {
-                "t1": "What is Quota?",
-                "txt1": "In the Vite system, users do not purchase the gas required for a transaction by paying a fee, but acquire the computing resource through a quota-based model. Required quota for sending a transaction = the basic quota (request) + quota (the attached text data), quota required to accept a transaction = the basic quota (response). This quota-based resource configuration protocol allows users to obtain higher resource quotas in two ways: Staking VITE to obtain quota and running PoW.",
-                "t2": "What is Staking?",
-                "txt2": "In the Vite system, the user can stake VITE to obtain a certain amount of quota. The minimum value for staking is 134 VITE, and there is no maximum limit; meanwhile, Vite system also supports that the A-address stakes a part of the VITE and allocates the obtained quota to the B address. When users apply to stake, VITE will be sent to the smart contract address instead of another user, and only the user who applies for staking has access to manage the staking amount.",
-                "t3": "What is PoW?",
-                "txt3": "Proof of Work (PoW), is a protocol to confirm that you have done a certain amount of work, and is also an economic measure to deter DDoS attacks and other service abuse. It requires the initiator to conduct a certain amount of computing, which means that it may take some time for the computer. In the Vite system, users can obtain a free quota by running the PoW, and also can send a transaction without any annotated information through obtained quota."
+                "t1": "Что такое Квота?",
+                "txt1": "В системе Vite пользователи не покупают газ, необходимый для транзакции, платя комиссию, а приобретают вычислительный ресурс по модели, основанной на квотах. Требуемая квота для отправки транзакции = базовая квота (запрос) + квота (прикрепленные текстовые данные), квота, необходимая для принятия транзакции = базовая квота (ответ). Этот протокол конфигурации ресурсов на основе квот позволяет пользователям получать более высокие квоты на ресурсы двумя способами: стейкать VITE для получения квоты и запускать PoW.",
+                "t2": "Что такое Стейкинг?",
+                "txt2": "В системе Vite пользователь может застейкать (поставить) VITE, чтобы получить определенную квоту. Минимальное значение для размещения составляет 134 VITE, и нет максимального ограничения; Между тем, система Vite также поддерживает то, что A-адрес стейкает часть VITE и выделяет полученную квоту для B-адреса. Когда пользователи подают заявки на стейк, VITE отправляется на адрес смарт-контракта, а не на другого пользователя, и только пользователь, подающий заявку на стейк, имеет доступ к управлению суммой стейка.",
+                "t3": "Что такое PoW?",
+                "txt3": "Proof of Work (PoW) - это протокол, подтверждающий, что вы выполнили определенный объем работы, а также экономическая мера для предотвращения DDoS-атак и других злоупотреблений услугами. Это требует, чтобы инициатор провел определенное количество вычислений, что означает, что это может занять некоторое время для компьютера. В системе Vite пользователи могут получить бесплатную квоту, запустив PoW, а также могут отправить транзакцию без аннотированной информации через полученную квоту."
             },
             "cancel": {
-                "describe": "Your current staked amount is {amount} VITE, please confirm to withdraw.",
-                "rightBtn": "Ready to Go",
-                "leftBtn": "Cancel Withdraw"
+                "describe": "Ваша текущая сумма стейка составляет {amount} VITE, подтвердите вывод средств.",
+                "rightBtn": "Готовы Начать",
+                "leftBtn": "Отменить Вывод"
             },
             "submit": {
-                "describe": "Make sure to stake {amount} VITE to obtain quota, you cannot withdraw until about 3 days after staking comes into effect.",
-                "rightBtn": "Confirm",
-                "leftBtn": "Cancel"
+                "describe": "Удостоверьтесь, что застейка {amount} VITE для получения квоты, вы не сможете снять их ранее, чем примерно через 3 дня после вступления в силу стейка.",
+                "rightBtn": "Подтвердить",
+                "leftBtn": "Отменить"
             }
         },
         "list": {
-            "title": "My Staking List",
-            "total": "Staking {amount} VITE in total",
-            "amount": "Amount",
-            "withdrawTime": "Expected Due Date",
-            "unexpired": "Temporarily cannot make withdrawal of staked token until due date",
-            "vip": "This staking action is for default opening VIP on ViteX exchange, please go to ViteX exchange page to cancel VIP",
-            "mining": "This staking is your staking as mining amount on ViteX, please go to ViteX mining page to retrieve",
-            "other": "This staking is staked via other ways and it is not supported retrieving here"
+            "title": "Мой Список Стейка",
+            "total": "Всего VITE в стейкинге",
+            "amount": "Сумма",
+            "withdrawTime": "Ожидаемый Срок",
+            "unexpired": "Временно не может сделать вывод застейканного токена до истечения срока",
+            "vip": "Это стейкинг действие для открытия VIP по умолчанию на бирже, перейдите на страницу ViteX, чтобы отменить VIP",
+            "mining": "Этот стейкинг является вашим стейком в ​​качестве майнинга на ViteX, перейдите на страницу майнинга ViteX для получения",
+            "other": "Этот стейкинг делается другими способами и его получение не поддерживается здесь"
         }
     },
     "walletTransList": {
-        "title": "Transactions",
+        "title": "Транзакции",
         "tType": {
-            "title": "Type",
-            "symbol": "Type"
+            "title": "Тип",
+            "symbol": "Тип"
         },
         "status": {
-            "title": "Status",
-            "unconfirmed": "Unconfirmed",
-            "confirms": "Confirming",
-            "confirmed": "Confirmed"
+            "title": "Статус",
+            "unconfirmed": "Не подтверждено",
+            "confirms": "Подтверждение",
+            "confirmed": "Подтверждено"
         },
-        "timestamp": "Timestamp",
-        "tAddress": "Address",
-        "sum": "Amount"
+        "timestamp": "Отметка времени",
+        "tAddress": "Адрес",
+        "sum": "Сумма"
     },
     "walletSBP": {
         "title": "SBP",
         "help": {
-            "title": "About SBP",
-            "text": "SBP（Snapshot Block Producer）is a node that has right to create blocks, you can register to become a SBP candidate by staking a certain amount of VITE, each round (about 75 seconds) will elect 25 SBPs, the SBPs will be elected from random 23 out of top 25 candidate nodes, plus random 2 out of the candidate nodes ranking 26th-100th on the list. The 50% of block creation rewards will be allocated to the block creation node, the other 50% will be allocated to nodes that are ranked on top 100 as voting rewards. One registration address (staking address) can register multiple block creation nodes (node names), a node name cannot be used if the node name has been registered by a registration address. A node name can switch block creation address, however, block creation address cannot be reused by other node names."
+            "title": "О SBP",
+            "text": "SBP (Snapshot Block Producer) - это нода, которая имеет право создавать блоки, вы можете зарегистрироваться, чтобы стать кандидатом в SBP, стейкая определенное количество VITE, каждый раунд (около 75 секунд) будут выбрано 25 SBP, SBP будут избраны из 23 случайных топ 25 нод-кандидатов, плюс 2 случайных из нод кандидатов, занимающих 26-100-е место в списке. 50% вознаграждений будут выделены ноде создавшей блок, остальные 50% будут выделены нодам, которые находятся в топ-100 в качестве вознаграждений за голоса. Один регистрационный адрес (адрес стейкинга) может зарегистрировать несколько нод создания блоков (имя ноды), имя ноды нельзя использовать, если имя ноды зарегистрировано в регистрационном адресе. Имя ноды может переключать адрес создания блока, однако, адрес создания блока не может быть повторно использован другими именами ноды."
         },
-        "register": "SBP Registration",
-        "cancel": "SBP Cancellation",
-        "cancelBtn": "Cancel",
-        "rewardBtn": "Claim Rewards",
-        "noReward": "No Rewards",
+        "register": "Регистрация SBP",
+        "cancel": "Отмена SBP",
+        "cancelBtn": "Отмена",
+        "rewardBtn": "Получение Вознаграждений",
+        "noReward": "Нет Наград",
         "rewardConfirm": {
-            "title": "Claim Rewards",
-            "describe1": "Rewards that are available for claiming update at 13:00:00 (UTC+8) every day, till {time} you can claim",
-            "describe2": "Query mining rewards details, you can",
-            "describe3": "click here",
-            "describe4": "Rewards will send to your Vite Web Wallet address after submitting claim request, please check it in Wallet Home Page. Note: Don't repeat claim actions.",
-            "leftBtn": "Not Now",
-            "rightBtn": "Claim All"
+            "title": "Получение Вознаграждений",
+            "describe1": "Вознаграждения, которые доступны для получения обновляются в 13:00:00 (UTC + 8) каждый день, до {time}, которое вы можете получать",
+            "describe2": "Подробности наград за добычу запроса, вы можете",
+            "describe3": "нажмите здесь",
+            "describe4": "Награды будут отправлены на ваш адрес веб-кошелька Vite после подачи запроса на получение, пожалуйста, проверьте его на домашней странице кошелька. Примечание: не повторяйте действия по подтверждению.",
+            "leftBtn": "Не Сейчас",
+            "rightBtn": "Забрать Все"
         },
         "confirm": {
-            "title": "Registration of SBP candidates",
-            "describe": "The {amount} VITE of current address will be locked about 90 days when you submit the registration,  the amount will be returned to staking address after being unlocked",
-            "leftBtn": "Not register yet",
-            "rightBtn": "Ready to Register",
+            "title": "Регистрация кандидатов в SBP",
+            "describe": "{amount} VITE текущего адреса будет заблокирована около 90 дней после отправки регистрации,  сумма будет возвращена на адрес стекинга, после разблокировки",
+            "leftBtn": "Ещё не зарегистрирован",
+            "rightBtn": "Готово к Регистрации",
             "edit": {
-                "title": "Change block creation address",
-                "placeholder": "please input new block creation address",
-                "btn": "Confirm to Change"
+                "title": "Изменить адрес создания блока",
+                "placeholder": "пожалуйста, введите новый адрес создания блока",
+                "btn": "Подтвердить изменения"
             }
         },
         "section1": {
-            "title": "Registration Form",
-            "nodeName": "Node Name",
-            "producerAddr": "Block Creation Address",
-            "quotaAddr": "Staking Address",
-            "quotaTime": "Staking Period",
-            "time": "7776000 snapshot blocks（approximately 90 days）",
-            "confirmBtn": "Submit",
-            "namePlaceholder": "Please input node name",
-            "nameHint": "Within 40 characters, support English letters (both upper and lower cases), numbers, '_'、'.'",
-            "nameErr": "This node name is illegal",
-            "nameUsed": "This node name is occupied",
-            "addrPlaceholder": "Please input snapshot block creation address",
-            "addrHint": "The block creation address must be a full node and keep up running",
-            "addrErr": "Illegal address",
-            "addrUsed": "This address has been occupied",
-            "registerSuccess": "Registration request has sent",
-            "registerFail": "Registration request failed"
+            "title": "Регистрационная Форма",
+            "nodeName": "Имя Ноды",
+            "producerAddr": "Адрес Создания Блока",
+            "quotaAddr": "Адрес Стейкинга",
+            "quotaTime": "Период Стейкинга",
+            "time": "7776000 снимков блоков (примерно 90 дней)",
+            "confirmBtn": "Подтвердить",
+            "namePlaceholder": "Пожалуйста, введите имя ноды",
+            "nameHint": "В пределах 40 символов поддерживаются английские буквы (как в верхнем, так и в нижнем регистре), цифры, '_' 、 '.'",
+            "nameErr": "Это имя этой ноды недопустимо",
+            "nameUsed": "Это имя ноды занято",
+            "addrPlaceholder": "Пожалуйста, введите адрес создания снимка блоков",
+            "addrHint": "Адрес создания блока должен быть полной нодой и продолжать работать",
+            "addrErr": "Недопустимый адрес",
+            "addrUsed": "Этот адрес был занят",
+            "registerSuccess": "Запрос на регистрацию отправлен",
+            "registerFail": "Ошибка регистрации"
         },
         "section2": {
-            "title": "Registration Information",
-            "update": "Modify",
-            "updateFail": "Failed to send modify request",
-            "cancel": "Revoking",
-            "cancelFail": "Failed to send revoking request",
-            "expireDate": "Expire Date: {time}",
+            "title": "Регистрационная Информация",
+            "update": "Изменить",
+            "updateFail": "Не удалось отправить запрос на изменение",
+            "cancel": "Отмена",
+            "cancelFail": "Не удалось отправить запрос на отмену",
+            "expireDate": "Срок Действия: {time}",
             "cancelConfirm": {
-                "title": "Revoke registration of SBP",
-                "describe": "The staking amount will be returned back to your staking address after revoking, you have to re-submit the registration to become a SBP"
+                "title": "Отменить регистрацию SBP",
+                "describe": "Сумма стейка будет возвращена обратно на ваш адрес стейкинга после отмены, вам необходимо повторно отправить регистрацию, чтобы стать SBP"
             }
         }
     },
     "walletVote": {
-        "title": "Voting",
+        "title": "Голосование",
         "help": {
-            "title": "About Voting",
-            "text": "You can join and vote for 25 SBPs （Snapshot Block Producer), each round of voting lasts 75s, the polls you can use for voting are equivalent to the amount of VITE tokens owned by voting address, the default selection is the choice of previous round, the SBPs will be chosen from random 23 out of top 25 candidate nodes, plus random 2 out of the candidate nodes ranking 26th-100th on the list, 25 SBPs in total."
+            "title": "О Голосовании",
+            "text": "Вы можете присоединиться и проголосовать за 25 SBP (Производитель Блоков Снимков), каждый раунд голосования длится 75с, голоса, которые вы можете использовать для голосования, эквивалентны количеству токенов VITE, принадлежащих адресу голосования, выбор по умолчанию - это выбор предыдущего раунда. SBP будут выбираться из случайных 23 из 25 узлов-кандидатов, плюс случайные 2 из нод-кандидатов, занимающих 26-100-е место в списке, всего 25 SBP."
         },
-        "toReward": "View my rewards",
-        "voting": "Voting",
-        "search": "Please input node name or block creation address",
-        "addrNoExistErr": "You aren't able to vote for now as your address has no transaction record before",
-        "revokeVoting": "Revoke voting",
+        "toReward": "Просмотреть мои награды",
+        "voting": "Голосование",
+        "search": "Пожалуйста, введите имя ноды или адрес создания снимков блоков",
+        "addrNoExistErr": "Вы не можете голосовать сейчас, так как на вашем адресе ранее не было записи транзакции",
+        "revokeVoting": "Отменить голосование",
         "section1": {
-            "title": "My Voting",
+            "title": "Мои Голоса",
             "head": [
-                "Name",
-                "Status",
-                "My Voting",
-                "Status of Voting",
-                "Action"
+                "Имя",
+                "Статус",
+                "Мои Голоса",
+                "Состояние Голосования",
+                "Действие"
             ],
             "nodeStatusMap": {
-                "1": "Active",
-                "2": "Inactive"
+                "1": "Активная",
+                "2": "Неактивная"
             },
             "voteStatusMap": {
-                "voted": "Voting Successful",
-                "voting": "Voting",
-                "canceling": "Revoking in Process",
-                "voteNotWork": "Revoked Voting"
+                "voted": "Голосование Успешно",
+                "voting": "Голосование",
+                "canceling": "Отмена в Процессе",
+                "voteNotWork": "Отмененное Голосование"
             },
-            "hoverHelp": "The node {nodeName} you are voted for has been revoked, you may vote again directly or revoke your voting, If you do not do so, your original voting result will be recovered after the {nodeName} re-registering",
+            "hoverHelp": "Нода {nodeName}, за которую вы проголосовали, был отозвана, вы можете проголосовать снова напрямую или отменить свое голосование. Если вы этого не сделаете, ваш первоначальный результат голосования будет восстановлен после повторной регистрации {nodeName}",
             "confirm": {
-                "cancelText": "Not yet",
-                "submitText": "Confirm"
+                "cancelText": "Еще нет",
+                "submitText": "Подтвердить"
             },
-            "revoke": "Revoking",
-            "operateBtn": "Revoke",
-            "cancelVoteErr": "Failed to revoke voting, please try again"
+            "revoke": "Отмена",
+            "operateBtn": "Отменить",
+            "cancelVoteErr": "Не удалось отменить голосование, повторите попытку"
         },
         "section2": {
-            "title": "SBP candidates",
+            "title": "Кандидаты SBP",
             "head": [
-                "Rank",
-                "Node Name",
-                "Address",
-                "Votes",
-                "Action"
+                "Ранг",
+                "Имя Ноды",
+                "Адрес",
+                "Голоса",
+                "Действие"
             ],
             "confirm": {
                 "normal": {
-                    "content": "You can vote for only one SBP, are you sure you want to vote for {name}?",
-                    "cancelText": "Not yet",
-                    "submitText": "Ready to vote"
+                    "content": "Вы можете голосовать только за один SBP, вы уверены, что хотите проголосовать за {name}?",
+                    "cancelText": "Еще нет",
+                    "submitText": "Готово для голосования"
                 },
                 "cover": {
-                    "content": "You've already voted for {nodeName}, are you sure to overwrite current voting record?",
-                    "cancelText": "Confirm",
-                    "submitText": "Cancel"
+                    "content": "Вы уже проголосовали за {nodeName}, вы уверены, что хотите перезаписать текущую запись голосования?",
+                    "cancelText": "Подтвердить",
+                    "submitText": "Отменить"
                 }
             },
-            "noSearchData": "No content found, please try another input",
-            "operateBtn": "Vote",
-            "voteErr": "Failed to vote, please try again"
+            "noSearchData": "Содержимое не найдено, попробуйте еще раз",
+            "operateBtn": "Голосовать",
+            "voteErr": "Не удалось проголосовать, попробуйте еще раз"
         }
     },
     "assets": {
-        "title": "Assets",
+        "title": "Активы",
         "notice": {
-            "title": "Important Notice",
-            "contentProvider": "This service is provided by {gate}.",
-            "contentOther": "You agree and acknowledge that Vite Labs would not be responsible for any negative consequences caused by {gate}. Vite platform does not take any part in the relationship that may arise between {gate} and users of Vite platform",
-            "contentAgree": "By continuing to use {gate}'s service, you agree and acknowledge {gate}'s",
-            "agreement": "Terms of Services, Trading Conditions and Privacy Policy",
-            "contentUngree": "Please agree to this terms before using {gate}'s service",
-            "hint": "Contact customer service team of {gate} if you encounter any problems during payment process.",
-            "next": "Confirm and Proceed"
+            "title": "Важное Замечание",
+            "contentProvider": "Эта услуга предоставляется {gate}.",
+            "contentOther": "Вы соглашаетесь и признаете, что Vite Labs не будет нести ответственность за любые негативные последствия, вызванные {gate}. Платформа Vite не участвует в отношениях, которые могут возникнуть между {gate} и пользователями платформы Vite",
+            "contentAgree": "Продолжая использовать услугу {gate}, вы соглашаетесь и признаете {gate}",
+            "agreement": "Условия Обслуживания, Торговые Условия и Политика Конфиденциальности",
+            "contentUngree": "Пожалуйста, согласитесь с этими условиями перед использованием услуги {gate}",
+            "hint": "Свяжитесь с отделом обслуживания клиентов {gate}, если у вас возникнут проблемы во время процесса оплаты.",
+            "next": "Подтвердите и Продолжить"
         },
         "vb": {
             "title": "ViteConnect",
             "connect": {
-                "tips": "Scan the QR code via Vite Wallet App"
+                "tips": "Сканируйте QR-код через приложение Vite Wallet"
             },
             "confirm": {
-                "tips": "Please confirm transaction on VITE Wallet App"
+                "tips": "Подтвердите транзакцию в приложении VITE Wallet"
             },
             "start": {
-                "scan": "Scan the QR code via Vite Wallet App",
-                "downloadTips": "Don’t have Vite Wallet App yet? ",
-                "download": "Download Vite Wallet"
+                "scan": "Сканируйте QR-код через приложение Vite Wallet",
+                "downloadTips": "У вас еще нет приложения Vite Wallet? ",
+                "download": "Загрузить Vite Wallet"
             },
-            "accountName": "ViteConnect Address"
+            "accountName": "Адрес ViteConnect"
         },
         "invite": {
-            "inviteTitle": "Invite Friends",
-            "receiveInviteTitle": "Use Referral Code",
-            "myCode": "My Referral Code: ",
-            "codeLable": "Referral Code",
-            "invited": "You have already accepted an invitation, referral code is: ",
-            "genCode": "Create a Referral Code",
-            "cost": "Cost",
-            "formatErr": "Incorrect referral code format",
-            "noResult": "Oops...No result found, please try again later",
-            "successToast": "Request has sent",
-            "failToast": "Failed to send request",
-            "notEnough": "Insufficient exchange balance",
-            "avaliable": "Balance",
+            "inviteTitle": "Пригласить Друзей",
+            "receiveInviteTitle": "Используйте Реферальный Код",
+            "myCode": "Мой Реферальный Код: ",
+            "codeLable": "Реферальный Код",
+            "invited": "Вы уже приняли приглашение, реферальный код: ",
+            "genCode": "Создать Реферальный Код",
+            "cost": "Стоимость",
+            "formatErr": "Неверный формат реферального кода",
+            "noResult": "К сожалению, ничего не найдено, попробуйте позже",
+            "successToast": "Запрос отправлен",
+            "failToast": "Не удалось отправить запрос",
+            "notEnough": "Недостаточный биржевой баланс",
+            "avaliable": "Баланс",
             "inviteNum": "Invited",
             "inviteBenifit": "Referral Mining Income",
             "inviteRule": "Rules",
@@ -765,12 +779,20 @@
         "mergeDepth": "Group",
         "depthStep": "{step} digits",
         "blocking": "Network congestion occurs, please try again later",
+        "supportMining": "支持挖矿的交易对",
         "operator": {
-            "title": "Operator Details",
-            "introduction": "Introduction",
+            "noName": "匿名网关",
+            "overview": "Introduction",
             "txPair": "Trading Pairs",
             "confirmTitle": "Risk Reminder",
-            "confirmText": "The current trading pair is {symbol}. Please be careful when trading. Investing in digital assets comes with high risks. Before investing, please have a full understanding of all the risks of investing in digital assets and judge the authenticity, legality and validity of digital assets on your own. Please be prudent of your own investment decisions and undertake responsibility for the loss of your assets."
+            "confirmText": "The current trading pair is {symbol}. Please be careful when trading. Investing in digital assets comes with high risks. Before investing, please have a full understanding of all the risks of investing in digital assets and judge the authenticity, legality and validity of digital assets on your own. Please be prudent of your own investment decisions and undertake responsibility for the loss of your assets.",
+            "address": "运营商地址",
+            "name": "运营商名称"
+        },
+        "operatorTxPair": {
+            "title": "交易对信息",
+            "tokenTab": "代币详情",
+            "operatorTab": "Operator Details"
         }
     },
     "trade": {
@@ -782,7 +804,8 @@
         "quantityTitle": "Total({quantity})",
         "priceTitle": "Price({price})",
         "amountTitle": "Amount({amount})",
-        "amountTable": "Qty",
+        "quantityTable": "累积数量Qty？？？",
+        "amountTable": "累积成交额",
         "amount": "Total",
         "newOrderSuccess": "Order request has sent",
         "newOrderFail": "Order Failed",
@@ -797,150 +820,150 @@
             "status": "Status",
             "latest": "Latest",
             "buy": "Buy price",
-            "sell": "Sell price",
-            "diff": "Spread"
+            "sell": "Цена продажи",
+            "diff": "Спред"
         },
         "buy": {
-            "title": "Buy {token}",
-            "price": "Price({token})",
-            "quantity": "Amount({token})"
+            "title": "Купить {token}",
+            "price": "Цена({token})",
+            "quantity": "Сумма({token})"
         },
         "sell": {
-            "title": "Sell {token}",
-            "price": "Price({token})",
-            "quantity": "Amount({token})"
+            "title": "Продать {token}",
+            "price": "Цена({token})",
+            "quantity": "Сумма({token})"
         },
         "head": {
-            "latestPrice": "Last Price",
-            "updown": "24h Change",
-            "highPrice": "24h High",
-            "lowPrice": "24h Low",
-            "quantity": "24h Volume",
-            "tokenName": "Token",
-            "originalSymbol": "Symbol",
-            "gateway": "Gateway",
-            "website": "Official Website",
-            "explorer": "Block Explorer",
-            "overview": "Description",
-            "tokenShow": "Abbr",
-            "tokenId": "Token ID",
-            "publisher": "Issuer",
-            "total": "Total",
-            "tokenDigit": "Decimals",
-            "publisherDate": "Issuance Date",
-            "type": "Status",
-            "tokenType0": "Issuance Available",
-            "tokenType1": "Never Issued"
+            "latestPrice": "Последняя Цена",
+            "updown": "Изменения за 24 ч",
+            "highPrice": "24ч Максимум",
+            "lowPrice": "24ч Минимум",
+            "quantity": "24ч Объем",
+            "tokenName": "Токен",
+            "originalSymbol": "Символ",
+            "gateway": "Шлюз",
+            "website": "Официальный Веб-сайт",
+            "explorer": "Обозреватель Блоков",
+            "overview": "Описание",
+            "tokenShow": "Абр.",
+            "tokenId": "ID Токена",
+            "publisher": "Эмитент",
+            "total": "Всего",
+            "tokenDigit": "Десятичные",
+            "publisherDate": "Дата Выпуска",
+            "type": "Статус",
+            "tokenType0": "Выпуск Доступен",
+            "tokenType1": "Никогда не Выпускался"
         },
         "latestTx": {
-            "title": "Last Orders",
-            "time": "Time"
+            "title": "Последние Ордера",
+            "time": "Время"
         },
         "depth": {
-            "buy": "Buy",
-            "sell": "Sell",
-            "all": "All"
+            "buy": "Купить",
+            "sell": "Продать",
+            "all": "Все"
         },
         "noData": {
-            "favorite": "You have no favorite yet",
-            "search": "No result found"
+            "favorite": "У вас еще нет избранных",
+            "search": "Результаты не найдены"
         },
         "limitPrice": {
-            "title": "Limit",
-            "fee": "Fees",
-            "text": "This page is a preview page of transaction data. Please login to trade.",
-            "validAmount": "Volume must be greater than {amount}{token}",
-            "priceNotNull": "Amount cannot be empty",
-            "amountNotNull": "Volume cannot be empty",
-            "quantityNotNull": "Quantity cannot be empty",
-            "cancelVip": "Cancel",
-            "openVip": "Become a VIP",
-            "dexFee": "Base Transaction Fees: {fee}",
-            "operatorFee": "Zone Fees (Charged by Operator): {fee}",
-            "vipFee": "VIP Discount: {fee}",
-            "inviteFeeDiscount": "Referral Discount: {fee} off",
-            "feeRule": "(Base Transaction Fee - VIP discount + Zone Fees) * Referral Discount. ATTENTION: The adjustment and discount of fees will only affect new orders, the former orders' charge remains the same."
+            "title": "Лимит",
+            "fee": "Комиссия",
+            "text": "Эта страница является страницей предварительного просмотра данных транзакции. Пожалуйста, войдите, чтобы торговать.",
+            "validAmount": "Объем должен быть больше чем {amount}{token}",
+            "priceNotNull": "Сумма не может быть пустой",
+            "amountNotNull": "Объём не может быть пустым",
+            "quantityNotNull": "Количество не может быть пустым",
+            "cancelVip": "Отменить",
+            "openVip": "Стать VIP",
+            "dexFee": "Базовые комиссии за транзакцию: {fee}",
+            "operatorFee": "Сборы Зоны (взимается Оператором): {fee}",
+            "vipFee": "VIP Скидка: {fee}",
+            "inviteFeeDiscount": "Реферальная скидка: {fee} выкл",
+            "feeRule": "(Базовая Плата за Транзакцию - VIP скидка + Сборы Зоны) * Реферальная Скидка. Внимание: Регулировка и скидка на комиссию повлияют только на новые ордера, стоимость предыдущих ордеров остается одинаковой."
         },
         "vipConfirm": {
-            "cancelVip": "Cancel VIP",
-            "openVip": "Become a VIP",
-            "openStakingAmount": "Staking Amount for Becoming a VIP",
-            "cancelStakingAmount": "Retrievable Staking Amount",
-            "noBalance": "Insufficient Balance",
-            "openHint": "You will enjoy the privilege of 0.1% trading fee discount after becoming a VIP. The staking amount of 10,000 VITE can be manually retrieved after 30 days.",
-            "cancelHint": "You can retrieve your staking amount at approximately {time}. You will lose your VIP privilege after retrieving.",
-            "openSuccess": "Applied Successful! VIP status will come into effect later.",
-            "openFail": "Failed to apply VIP",
-            "cancelSuccess": "Cancel VIP Successful",
-            "cancelFail": "Cancel Failed"
+            "cancelVip": "Отменить VIP",
+            "openVip": "Стать VIP",
+            "openStakingAmount": "Сумма Стейка для того, чтобы стать VIP",
+            "cancelStakingAmount": "Извлекаемая Сумма Стейка",
+            "noBalance": "Недостаточно Средств",
+            "openHint": "После того, как вы станете VIP, вы получите скидку 0,1% на комиссию за торговлю. Сумма стейка 10 000 VITE может быть возвращена вручную через 30 дней.",
+            "cancelHint": "Вы можете получить сумму стейка примерно в {время}. Вы потеряете свою VIP-привилегию после возврата.",
+            "openSuccess": "Успешно применено! VIP статус вступит в силу позже.",
+            "openFail": "Не удалось применить VIP",
+            "cancelSuccess": "Отмена VIP Успешна",
+            "cancelFail": "Отмена не удалась"
         }
     },
     "tradeAssets": {
-        "title": "Funds",
-        "search": "Please enter token name",
-        "operate": "Action",
-        "all": "All",
+        "title": "Средства",
+        "search": "Пожалуйста, введите название токена",
+        "operate": "Действие",
+        "all": "Все",
         "confirmTable": {
-            "title": "Detailed Record",
+            "title": "Подробная запись",
             "heads": [
-                "Date",
-                "Token",
-                "Type",
-                "Amount"
+                "Дата",
+                "Токен",
+                "Тип",
+                "Сумма"
             ]
         },
         "pwdConfirm": {
-            "cancelTxt": "Cancel"
+            "cancelTxt": "Отменить"
         },
         "table": {
             "heads": [
-                "Token",
-                "Total Balance",
-                "Exchange Balance",
-                "In Order",
-                "Value"
+                "Токен",
+                "Общий баланс",
+                "Биржевой баланс",
+                "В Ордере",
+                "Стоимость"
             ],
             "rowMap": {
-                "recharge": "Deposit to Exchange",
-                "withdraw": "Withdraw to Wallet",
-                "detail": "Details",
+                "recharge": "Депозит на Биржу",
+                "withdraw": "Вывод на Кошелек",
+                "detail": "Подробнее",
                 "sideMap": {
-                    "1": "Deposit",
-                    "2": "Withdraw"
+                    "1": "Пополнить",
+                    "2": "Вывести Средства"
                 }
             }
         },
         "confirmrecharge": {
-            "successToast": "Deposit successful",
-            "failToast": "Failed to deposit",
-            "title": "Deposit to Exchange",
-            "lable1": "Wallet Balance",
-            "lable2": "Deposit Amount",
-            "tips": "Insufficient Wallet Balance",
-            "placeholder": "Please input deposit amount",
-            "btn": "Deposit"
+            "successToast": "Успешное пополение",
+            "failToast": "Не удалось пополнить",
+            "title": "Депозит на Биржу",
+            "lable1": "Баланс Кошелька",
+            "lable2": "Сумма Пополения",
+            "tips": "Недостаточно Средств",
+            "placeholder": "Пожалуйста, введите сумму пополнения",
+            "btn": "Пополнить"
         },
         "confirmwithdraw": {
-            "successToast": "Withdrawal Successful",
-            "failToast": "Withdrawal Failed",
-            "title": "Withdraw to Wallet",
-            "lable1": "Available Balance",
-            "lable2": "Withdrawal Amount",
-            "tips": "Insufficient Wallet Balance",
-            "placeholder": "Please input withdrawal amount",
-            "btn": "Withdraw"
+            "successToast": "Успешный Вывод",
+            "failToast": "Вывод не Выполнен",
+            "title": "Вывод на Кошелек",
+            "lable1": "Доступный Баланс",
+            "lable2": "Сумма для Вывода",
+            "tips": "Недостаточно Средств",
+            "placeholder": "Пожалуйста, введите сумму вывода",
+            "btn": "Вывести Средства"
         },
-        "zero": "Hide Low Balances"
+        "zero": "Скрыть Низкие Балансы"
     },
     "tradeOpenOrders": {
-        "cancelErr": "You are trying too ofter, please try again later.",
+        "cancelErr": "Вы слишком часто пытаетесь, пожалуйста, попробуйте позже.",
         "confirm": {
-            "successToast": "Revoking Order Successful",
-            "failToast": "Revoking Order Failed",
-            "submitTxt": "Confirm to revoke",
-            "cancelTxt": "Cancel",
-            "title": "Revoke Order",
-            "content": "Are you sure you want to revoke current order?"
+            "successToast": "Отзыв Ордера Успешен",
+            "failToast": "Отзыв Ордера не Выполнен",
+            "submitTxt": "Подтвердить отмену",
+            "cancelTxt": "Отменить",
+            "title": "Отменить Ордер",
+            "content": "Вы уверены, что хотите отменить текущий ордер?"
         },
         "title": "Open Orders",
         "hint": {
@@ -979,6 +1002,12 @@
         "side": {
             "1": "Sell",
             "0": "Buy"
+        },
+        "status": {
+            "1": "委托中",
+            "2": "已完成",
+            "3": "已撤销",
+            "4": "下单失败"
         },
         "confirmTable": {
             "title": "Order Book",
@@ -1020,6 +1049,7 @@
             "side": "Side",
             "buy": "Buy",
             "sell": "Sell",
+            "status": "状态",
             "search": "Search",
             "reset": "Reset"
         }
@@ -1086,12 +1116,12 @@
         "title": "{tokenSymbol} Trading Pairs Management",
         "symbol": "Name",
         "income": "Income",
-        "fee": "Fee Rate",
-        "status": "Status",
-        "operate": "Action",
-        "stopTrans": "Suspend",
-        "resetTrans": "Recover",
-        "changeOwner": "Transfer Ownership",
+        "fee": "Ставка Комиссии",
+        "status": "Статус",
+        "operate": "Действие",
+        "stopTrans": "Приостановить",
+        "resetTrans": "Восстановить",
+        "changeOwner": "Передать Права Собственности",
         "changeFee": "Adjust Fee Rate",
         "incomeList": "Income Details",
         "historyIncome": "Income History",
