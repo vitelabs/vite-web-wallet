@@ -18,18 +18,17 @@ export default {
             default: ''
         }
     },
-    // mounted() {
-    //     if (!this.defaultTab) {
-    //         this.selectTab(this.tabList[0]);
-    //     }
-    // },
+    mounted() {
+        if (!this.defaultTab) {
+            this.selectTab(this.tabList[0]);
+        }
+    },
     data() {
         return { activeTab: '' };
     },
     methods: {
         selectTab(tab) {
             this.activeTab = tab;
-
             this.$emit('input', this.activeTab);
         }
     }
