@@ -1,48 +1,47 @@
 <template>
     <div class="order-wrapper">
-        <div class="order-title">
-            {{ $t(`trade.${orderType}.title`, { token: ftokenShow }) }}
-            <div class="wallet">
-                {{ balance || "0" }}
-                <span class="ex-order-token">
-                    {{ orderType === "buy" ? ttokenShow : ftokenShow }}
-                </span>
-            </div>
-        </div>
-
-        <div class="dex-input-wrapper b">
-            <span class="ex-order-token __ellipsis">
-                {{
-                    $t(`trade.${orderType}.price`, {
-                        token: originQuoteTokenSymbol
-                    })
-                }}
-            </span>
+        <div class="dex-input-wrapper">
+            <div class="ex-order-token">{{ $t(`mobileTradeCenter.${orderType}.price`) }}</div>
             <div class="else-input-wrapper" :class="{'err': priceErr}">
                 <span class="tips" :class="{'active':
                     focusInput === 'price' && priceErr
                 }">{{  priceErr || '' }}</span>
                 <vite-input v-model="price" @input="priceChanged" type="number"
                             @focus="showTips('price')" @blur="hideTips('price')">
-                    <span class="real-price __ellipsis" slot="after">{{ realPrice }}</span>
+                    <span class="symbol" slot="after">{{ originQuoteTokenSymbol }}</span>
                 </vite-input>
             </div>
         </div>
 
         <div class="dex-input-wrapper">
-            <span class="ex-order-token __ellipsis">
-                {{
-                    $t(`trade.${orderType}.quantity`, {
-                        token: originTradeTokenSymbol
-                    })
-                }}
-            </span>
+            <div class="ex-order-token">
+                {{ $t(`mobileTradeCenter.${orderType}.quantity`) }}
+                <dex-balance v-show="orderType === 'sell'"
+                             :balance="balance" :tokenShow="originTradeTokenSymbol"></dex-balance>
+            </div>
             <div class="else-input-wrapper" :class="{'err': quantityErr}">
                 <span class="tips" :class="{'active':
                     focusInput === 'quantity' && quantityErr
                 }">{{ quantityErr }}</span>
                 <vite-input v-model="quantity" @input="quantityChanged" type="number"
                             @focus="showTips('quantity')" @blur="hideTips('quantity')">
+                    <span class="symbol" slot="after">{{ originTradeTokenSymbol }}</span>
+                </vite-input>
+            </div>
+        </div>
+
+        <div class="dex-input-wrapper">
+            <div class="ex-order-token">{{ $t("trade.amount") }}
+                <dex-balance v-show="orderType === 'buy'"
+                             :balance="balance" :tokenShow="originQuoteTokenSymbol"></dex-balance>
+            </div>
+            <div class="else-input-wrapper" :class="{'err': amountErr}">
+                <span class="tips" :class="{'active':
+                    focusInput === 'amount' && amountErr
+                }">{{ amountErr }}</span>
+                <vite-input v-model="amount" @input="amountChanged" type="number"
+                            @focus="showTips('amount')" @blur="hideTips('amount')">
+                    <span class="symbol" slot="after">{{ originQuoteTokenSymbol }}</span>
                 </vite-input>
             </div>
         </div>
@@ -50,24 +49,6 @@
         <div class="slider-wrapper">
             <slider class="dex-order" :class="orderType" :min="0" :max="100" :default="0"
                     v-model="percent" v-on:drag="percentChanged"></slider>
-        </div>
-
-        <div class="dex-input-wrapper">
-            <span class="ex-order-token __ellipsis">
-                {{
-                    $t("trade.quantityTitle", {
-                        quantity: originQuoteTokenSymbol
-                    })
-                }}
-            </span>
-            <div class="else-input-wrapper" :class="{'err': amountErr}">
-                <span class="tips" :class="{'active':
-                    focusInput === 'amount' && amountErr
-                }">{{ amountErr }}</span>
-                <vite-input v-model="amount" @input="amountChanged" type="number"
-                            @focus="showTips('amount')" @blur="hideTips('amount')">
-                </vite-input>
-            </div>
         </div>
 
         <div class="order-btn __pointer" :class="{
@@ -79,6 +60,7 @@
 </template>
 
 <script>
+import dexBalance from './dexBalance';
 import slider from 'components/slider';
 import viteInput from 'components/viteInput';
 // import sendTx from 'utils/sendTx';
@@ -87,7 +69,7 @@ import { verifyAmount, checkAmountFormat } from 'utils/validations';
 import statistics from 'utils/statistics';
 
 export default {
-    components: { viteInput, slider },
+    components: { viteInput, slider, dexBalance },
     props: {
         orderType: {
             type: String,
@@ -644,36 +626,28 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~h5Assets/scss/center.scss";
+@import "~h5Assets/scss/vars.scss";
 
 $font-black: rgba(36, 39, 43, 0.8);
 
 .dex-input-wrapper {
     position: relative;
-    display: flex;
-    flex-direction: row;
-    height: 30px;
-    line-height: 30px;
-    @include font-family-normal();
-    &.b {
-        margin-bottom: 10px;
-    }
-    .real-price {
-        font-family: $font-H;
-        max-width: 150px;
-        box-sizing: border-box;
-        padding: 0 6px;
-        font-size: 12px;
-        color: rgba(94, 104, 117, 0.58);
+    @include font-normal();
+    margin-top: 4px;
+    .symbol {
+        font-size: 16px;
+        font-family: $font;
+        font-weight: 300;
+        padding: 0 14px;
+        color: rgba(62,74,89,0.7);
     }
     .ex-order-token {
-        font-size: 12px;
-        @include font-family-normal();
-        font-weight: 400;
-        color: rgba(94, 104, 117, 1);
-        width: 95px;
+        font-size: 14px;
+        height: 38px;
+        line-height: 38px;
+        @include font-normal();
         white-space: nowrap;
-        margin-right: 6px;
+        color: rgba(62,74,89,0.7);
     }
     .else-input-wrapper {
         position: relative;
@@ -697,7 +671,7 @@ $font-black: rgba(36, 39, 43, 0.8);
     font-size: 12px;
     color: #5e6875;
     box-sizing: border-box;
-    @include font-family-normal();
+    @include font-normal();
     opacity: 0;
     transition: opacity 0.2s ease-in-out;
     width: 0;
@@ -709,7 +683,7 @@ $font-black: rgba(36, 39, 43, 0.8);
         width: auto;
         opacity: 1;
         left: 50%;
-        bottom: 42px;
+        bottom: 50px;
         padding: 6px 12px;
     }
     &::after {
@@ -725,59 +699,25 @@ $font-black: rgba(36, 39, 43, 0.8);
 }
 
 .order-wrapper {
-    padding: 0 6px;
-
-    .order-title {
-        height: 17px;
-        line-height: 17px;
-        font-size: 12px;
-        @include font-family-bold();
-        font-weight: 600;
-        color: #1d2024;
-        margin-bottom: 10px;
-        .wallet {
-            font-family: $font-H;
-            display: block;
-            float: right;
-            &::before {
-                content: "";
-                display: inline-block;
-                width: 16px;
-                height: 16px;
-                background: url("~assets/imgs/ex-wallet-icon.svg");
-                background-size: 100% 100%;
-                margin-bottom: -4px;
-            }
-        }
-    }
+    padding-bottom: 4px;
 
     .slider-wrapper {
-        margin: 6px 5px;
+        margin: 19px 5px;
     }
 
     .order-btn {
-        height: 30px;
-        line-height: 30px;
+        height: 50px;
+        line-height: 50px;
         text-align: center;
-        margin-top: 12px;
         border-radius: 2px;
-        font-size: 14px;
-        @include font-family-bold();
-        font-weight: 600;
+        font-size: 16px;
+        @include font-bold();
         color: #fff;
         &.red {
-            background: linear-gradient(
-                270deg,
-                rgba(226, 43, 116, 1) 0%,
-                rgba(237, 81, 88, 1) 100%
-            );
+            background: $red;
         }
         &.green {
-            background: linear-gradient(
-                270deg,
-                rgba(0, 212, 208, 1) 0%,
-                rgba(0, 215, 100, 1) 100%
-            );
+            background: $green;
         }
         &.gray {
             color: rgba(29, 32, 36, 0.6);
@@ -788,17 +728,17 @@ $font-black: rgba(36, 39, 43, 0.8);
 </style>
 
 <style lang="scss">
-@import "~assets/scss/vars.scss";
+@import "~h5Assets/scss/vars.scss";
 
 .dex-input-wrapper .input-wrapper {
     height: 100%;
-    line-height: 30px;
+    line-height: 40px;
     border: none;
     input {
-        font-family: $font-H;
-        font-size: 12px;
-        color: #1d2024;
-        text-indent: 6px;
+        font-family: $font;
+        font-size: 16px;
+        color: rgba(36,39,43,1);
+        text-indent: 14px;
     }
 }
 </style>

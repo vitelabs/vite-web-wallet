@@ -1150,5 +1150,17 @@
     "mobileAssets": {
         "allAssets": "总资产折合({token})",
         "tokenListTitle": "代币信息"
+    },
+    "mobileTradeCenter": {
+        "buyTitle": "买入",
+        "sellTitle": "卖出",
+        "buy": {
+            "price": "买入价",
+            "quantity": "买入量"
+        },
+        "sell": {
+            "price": "卖出价",
+            "quantity": "卖出量"
+        }
     }
 }
