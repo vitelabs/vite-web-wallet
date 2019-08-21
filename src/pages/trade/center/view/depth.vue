@@ -61,21 +61,17 @@ export default {
             const buyList = [].concat(this.buyList).reverse();
             buyList.forEach(item => {
                 sum = BigNumber.plus(sum, item.quantity || 0);
-                sum = BigNumber.formatNum(sum, this.tradeTokenDigit);
                 _l.push(sum);
             });
             _l.reverse();
-
             return _l;
         },
         buyAmountList() {
-            console.log(this.quoteTokenDigit);
             const _l = [];
             let sum = 0;
             const buyList = [].concat(this.buyList).reverse();
             buyList.forEach(item => {
                 sum = BigNumber.plus(sum, item.amount || 0);
-                sum = BigNumber.formatNum(sum, this.quoteTokenDigit);
                 _l.push(sum);
             });
             _l.reverse();
@@ -97,7 +93,6 @@ export default {
             let sum = 0;
             this.sellList.forEach(item => {
                 sum = BigNumber.plus(sum, item.quantity || 0);
-                sum = BigNumber.formatNum(sum, this.tradeTokenDigit);
                 _l.push(sum);
             });
 
@@ -112,7 +107,6 @@ export default {
             let sum = 0;
             this.sellList.forEach(item => {
                 sum = BigNumber.plus(sum, item.amount || 0);
-                sum = BigNumber.formatNum(sum, this.quoteTokenDigit);
                 _l.push(sum);
             });
 
