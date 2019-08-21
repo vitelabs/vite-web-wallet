@@ -3,9 +3,9 @@
         <div class="__center-title">
             <div class="tab-list">
                 <span @click="clickTab('buy')" class="tab" :class="{'buy': tab === 'buy'}">
-                    buy
+                    {{ $t('mobileTradeCenter.buyTitle') }}
                 </span><span @click="clickTab('sell')" class="tab" :class="{'sell': tab === 'sell'}">
-                    sell
+                    {{ $t('mobileTradeCenter.sellTitle') }}
                 </span>
             </div>
             <div class="right-tab">

@@ -1152,6 +1152,9 @@
         "tokenListTitle": "代币信息"
     },
     "mobileTradeCenter": {
+        "highPrice": "高",
+        "lowPrice": "低",
+        "quantity": "24H",
         "buyTitle": "买入",
         "sellTitle": "卖出",
         "buyPrice": "买价({token})",

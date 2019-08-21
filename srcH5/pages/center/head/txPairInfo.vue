@@ -136,6 +136,7 @@ export default {
     width: 100%;
     align-items: center;
     @include font-normal();
+    margin-bottom: 10px;
 }
 .left {
     position: relative;
@@ -147,6 +148,7 @@ export default {
     width: 40px;
     height: 40px;
     display: inline-block;
+    margin-right: 10px;
     img {
         display: inline-block;
         width: 100%;
@@ -154,7 +156,6 @@ export default {
         border-radius: 40px;
         border: 1px solid rgba(212,222,231,1);
         box-sizing: border-box;
-        margin-right: 10px;
     }
     .close {
         position: absolute;
