@@ -18,7 +18,7 @@ export default {
     data() {
         return {
             tabList: [ 'mining', 'dividend' ],
-            activeTab: 'dividend'
+            activeTab: 'mining'
         };
     }
 };
