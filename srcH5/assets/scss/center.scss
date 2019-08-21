@@ -60,16 +60,6 @@ $up-font-color: $green;
     }
 }
 
-.__center-title {
-    padding: 6px;
-    line-height: 17px;
-    font-size: 13px;
-    @include font-family-bold();
-    font-weight: 600;
-    color: rgba(29,32,36,0.6);
-    background: #f7f9fb;
-}
-
 .__center-tb-title {
     display: flex;
     flex-direction: row;
