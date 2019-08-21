@@ -62,7 +62,7 @@ export default {
             return this.miningList.map(item => {
                 return {
                     date: date(item.date * 1000, this.$i18n.locale),
-                    ratio: `${ (item.ratio * 100).toFixed(2) }%`,
+                    ratio: `${ bigNumber.multi(item.miningRatio, 100, 2) }%`,
                     mining: `${ bigNumber.formatNum(item.miningAmount || 0, 8) } VX`
                 };
             });
