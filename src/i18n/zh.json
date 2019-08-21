@@ -1171,5 +1171,10 @@
         "orderPrice": "价格",
         "executedQuantity": "成交",
         "avgPrice": "均价"
+    },
+    "mobileDividend": {
+        "poolTitle": "手续费分红池({token})",
+        "myDividendTitle": "我的分红收益总估值({token})",
+        "listTitle": "分红明细"
     }
 }

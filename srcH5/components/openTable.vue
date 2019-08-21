@@ -19,7 +19,6 @@
 
                     <div @click="_cancel(v)" class="cancel">{{ $t("tradeOpenOrders.table.rowMap.cancel") }}</div>
                 </div>
-
                 <div class="__tb_row_item _flex">
                     <div class="__tb_cell">
                         {{ $t('mobileTradeCenter.orderQuantity') }}:

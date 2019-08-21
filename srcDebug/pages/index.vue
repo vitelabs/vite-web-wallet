@@ -80,8 +80,8 @@ export default {
 }
 .trade-wrapper {
     position: absolute;
-    top: 25px;
-    bottom: 25px;
+    top: 33px;
+    bottom: 33px;
     left: 0;
     right: 0;
     overflow: auto;
