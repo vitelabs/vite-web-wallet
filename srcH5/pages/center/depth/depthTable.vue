@@ -4,11 +4,11 @@
 
         <div class="__center-tb-row" :class="dataType" @click="clickRow(item, i)"
              v-for="(item, i) in depthData" :key="i">
-            <span v-if="dataType === 'buy'">{{ formatNum(item.quantity, 'ftoken') }}</span>
-            <span>{{ formatNum(item.price, 'ttoken') }}
+            <span v-if="dataType === 'buy'" class="quantity">{{ formatNum(item.quantity, 'ftoken') }}</span>
+            <span class="price">{{ formatNum(item.price, 'ttoken') }}
                 <span class="owner" v-show="isInOpenOrders(item.price)"></span>
             </span>
-            <span v-if="dataType === 'sell'">{{ formatNum(item.quantity, 'ftoken') }}</span>
+            <span v-if="dataType === 'sell'" class="quantity">{{ formatNum(item.quantity, 'ftoken') }}</span>
             <span class="percent-wrapper" :class="dataType" :style="{ 'width': getWidth(item) + '%' }"></span>
         </div>
     </div>
@@ -142,6 +142,10 @@ export default {
     flex-direction: row;
     color: rgba(94,104,117,1);
     justify-content: space-between;
+    white-space: nowrap;
+    .price {
+        max-width: 50%;
+    }
     .owner {
         display: inline-block;
         width: 8px;
@@ -151,9 +155,15 @@ export default {
     }
     &.buy {
         padding-left: 4px;
+        .quantity {
+            color: $green;
+        }
     }
     &.sell {
         padding-right: 4px;
+        .quantity {
+            color: $red;
+        }
     }
 }
 
