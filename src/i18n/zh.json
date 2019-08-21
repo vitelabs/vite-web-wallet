@@ -1154,6 +1154,8 @@
     "mobileTradeCenter": {
         "buyTitle": "买入",
         "sellTitle": "卖出",
+        "buyPrice": "买价({token})",
+        "sellPrice": "卖价({token})",
         "buy": {
             "price": "买入价",
             "quantity": "买入量"

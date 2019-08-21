@@ -107,8 +107,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.trade-center-wrapper {
+    font-size: 12px;
+    background: rgba(243,245,249,1);
+}
 .white-wrapper {
     padding: 16px 24px;
     background: #fff;
+    margin-bottom: 16px;
 }
 </style>

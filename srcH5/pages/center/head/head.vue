@@ -73,7 +73,6 @@ export default {
 
 <style lang="scss" scoped>
 @import '~h5Assets/scss/vars.scss';
-@import '~h5Assets/scss/center.scss';
 
 .txpair-head-wrapper {
     background: linear-gradient(62deg,rgba(255,255,255,1) 0%,rgba(199,228,255,1) 100%);

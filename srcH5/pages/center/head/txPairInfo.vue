@@ -129,7 +129,6 @@ export default {
 
 <style lang="scss" scoped>
 @import '~h5Assets/scss/vars.scss';
-@import '~h5Assets/scss/center.scss';
 
 .tx-pair-info {
     display: flex;
@@ -184,8 +183,7 @@ export default {
 .t-item {
     display: inline-block;
     font-size: 12px;
-    @include font-family-bold();
-    font-weight: 600;
+    @include font-bold();
     color: rgba(29, 32, 36, 1);
     line-height: 14px;
 

@@ -209,7 +209,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~h5Assets/scss/center.scss';
+@import "../center.scss";
 
 .tx-pair-wrapper {
     position: relative;
