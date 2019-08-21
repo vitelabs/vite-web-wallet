@@ -1166,6 +1166,10 @@
         "sell": {
             "price": "卖出价",
             "quantity": "卖出量"
-        }
+        },
+        "orderQuantity": "数量",
+        "orderPrice": "价格",
+        "executedQuantity": "成交",
+        "avgPrice": "均价"
     }
 }
