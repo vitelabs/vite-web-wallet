@@ -2,9 +2,9 @@
     <div class="limit-price-wrapper">
         <div class="__center-title">
             <div class="tab-list">
-                <span class="tab" :class="{'buy': tab === 'buy'}">
+                <span @click="clickTab('buy')" class="tab" :class="{'buy': tab === 'buy'}">
                     buy
-                </span><span class="tab" :class="{'sell': tab === 'buy'}">
+                </span><span @click="clickTab('sell')" class="tab" :class="{'sell': tab === 'sell'}">
                     sell
                 </span>
             </div>
@@ -25,78 +25,28 @@
 <script>
 import order from './order.vue';
 import vipConfirm from './vipConfirm.vue';
-import BigNumber from 'utils/bigNumber';
 import statistics from 'utils/statistics';
 
 export default {
     components: { order, vipConfirm },
     data() {
         return {
-            isShowHelp: false,
             isShowVipConfirm: false,
             tab: 'buy'
         };
     },
     computed: {
-        baseFee() {
-            return `Taker(${ this.baseTakerFee }) / Maker(${ this.baseMakerFee })`;
-        },
-        baseMakerFee() {
-            const baseMakerFee = this.toPercentFee(this.$store.state.exchangeFee.baseMakerFee);
-            return `${ baseMakerFee }%`;
-        },
-        baseTakerFee() {
-            const baseTakerFee = this.toPercentFee(this.$store.state.exchangeFee.baseTakerFee);
-            return `${ baseTakerFee }%`;
-        },
-        operatorFee() {
-            return `Taker(${ this.operatorTakerFee }) / Maker(${ this.operatorMakerFee })`;
-        },
-        operatorTakerFee() {
-            const operatorTakerFee = this.toPercentFee(this.$store.getters.operatorTakerFee);
-            return `${ operatorTakerFee }%`;
-        },
-        operatorMakerFee() {
-            const operatorMakerFee = this.toPercentFee(this.$store.getters.operatorMakerFee);
-            return `${ operatorMakerFee }%`;
-        },
-        vipFee() {
-            const vipFee = this.toPercentFee(this.$store.getters.vipFee);
-            return `${ parseFloat(vipFee) }%`;
-        },
-        exMakerFee() {
-            const exMakerFee = this.toPercentFee(this.$store.getters.exMakerFee);
-            return `${ exMakerFee }%`;
-        },
-        exTakerFee() {
-            const exTakerFee = this.toPercentFee(this.$store.getters.exTakerFee);
-            return `${ exTakerFee }%`;
-        },
-        inviteFeeDiscount() {
-            const inviteFeeDiscount = this.toPercentFee(this.$store.getters.inviteFeeDiscount);
-            return `${ parseInt(inviteFeeDiscount) }%`;
-        },
         isVip() {
             return this.$store.state.exchangeFee.isVip;
-        },
-        markerInfo() {
-            return this.$store.state.exchangeFee.marketInfo;
         },
         address() {
             return this.$store.getters.activeAddr;
         }
     },
     methods: {
-        showHelp() {
-            this.isShowHelp = true;
+        clickTab(tab) {
+            this.tab = tab;
         },
-        hideHelp() {
-            this.isShowHelp = false;
-        },
-        toPercentFee(fee) {
-            return BigNumber.multi(fee || 0, 100, 3);
-        },
-
         hideVipConfirm() {
             this.isShowVipConfirm = false;
         },
@@ -113,10 +63,10 @@ export default {
 
 <style lang="scss" scoped>
 @import "~h5Assets/scss/vars.scss";
-@import "~h5Assets/scss/center.scss";
 
 .limit-price-wrapper {
     font-size: 14px;
+    @include font-normal();
 
     .__center-title {
         height: 30px;
@@ -124,6 +74,7 @@ export default {
         @include font-bold();
         border-bottom: 1px solid rgba(211,223,239,1);
         .tab-list {
+            display: inline-block;
             color: rgba(62,74,89,0.7);
             .tab {
                 display: inline-block;
@@ -146,33 +97,25 @@ export default {
         float: right;
         @include font-normal();
         color: rgba(94, 104, 117, 1);
-        // >span {
-        //     position: relative;
-        //     margin-right: 6px;
-        //     &:last-child {
-        //         margin-right: 0;
-        //     }
-        // }
-        .fee {
-            font-family: $font-H;
-        }
     }
 
     .vip-operate {
+        font-size: 14px;
+        color: rgba(62,74,89,0.6);
+        line-height: 18px;
         &.active {
-            color: #007AFF;
+            color: $blue;
         }
     }
 
     .vip {
         display: inline-block;
         margin-bottom: -3px;
-        color: rgba(255,255,255,1);
         width: 36px;
         height: 16px;
         background: url('~assets/imgs/not_vip.svg');
         background-size: 100% 100%;
-
+        margin-right: 10px;
         &.active {
             background: url('~assets/imgs/vip.svg');
             background-size: 100% 100%;
