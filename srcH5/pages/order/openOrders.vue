@@ -1,7 +1,5 @@
 <template>
-    <div class="open-order-ct">
-        <open-table class="open-order-table" :list="list"></open-table>
-    </div>
+    <open-table class="open-order-table" :list="list"></open-table>
 </template>
 
 <script>
@@ -39,14 +37,3 @@ export default {
     }
 };
 </script>
-
-<style lang="scss" scoped>
-.open-order-ct {
-    height: 100%;
-    box-sizing: border-box;
-    padding-top: 10px;
-    .open-order-table {
-        box-shadow: 0px 2px 10px 1px rgba(176,192,237,0.42);
-    }
-}
-</style>
