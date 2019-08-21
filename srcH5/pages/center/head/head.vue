@@ -95,6 +95,9 @@ export default {
         line-height: 16px;
         color: rgba(62,74,89,1);
         margin-bottom: 5px;
+        &:last-child {
+            margin-bottom: 0;
+        }
         span {
             color: rgba(62,74,89,0.6);
         }

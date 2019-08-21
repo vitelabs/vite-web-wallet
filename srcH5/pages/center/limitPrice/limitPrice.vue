@@ -1,30 +1,23 @@
 <template>
     <div class="limit-price-wrapper">
         <div class="__center-title">
-            {{ $t('trade.limitPrice.title') }}
-
+            <div class="tab-list">
+                <span class="tab" :class="{'buy': tab === 'buy'}">
+                    buy
+                </span><span class="tab" :class="{'sell': tab === 'buy'}">
+                    sell
+                </span>
+            </div>
             <div class="right-tab">
                 <span class="vip" :class="{ 'active': isVip }"></span>
                 <span class="vip-operate __pointer" @click="_showVipConfirm"
                       :class="{ 'active': !isVip }">
                     {{ isVip ? $t('trade.limitPrice.cancelVip') : $t('trade.limitPrice.openVip') }}
                 </span>
-                <span>{{ $t('trade.limitPrice.fee') }}
-                    <span class="fee">Taker({{ exTakerFee }}) / Maker({{ exMakerFee }})</span>
-                </span>
-                <span class="help __pointer" @mouseenter="showHelp" @mouseleave="hideHelp">
-                    <span v-show="isShowHelp" class="help-tip">
-                        <span>{{ $t('trade.limitPrice.dexFee', { fee: baseFee }) }}</span>
-                        <span>{{ $t('trade.limitPrice.operatorFee', { fee: operatorFee }) }}</span>
-                        <span>{{ $t('trade.limitPrice.vipFee', { fee: vipFee }) }}</span>
-                        <span>{{ $t('trade.limitPrice.inviteFeeDiscount', { fee: inviteFeeDiscount }) }}</span>
-                        <span>{{ $t('trade.limitPrice.feeRule') }}</span>
-                    </span>
-                </span>
             </div>
         </div>
-        <order orderType="buy"></order>
-        <order orderType="sell"></order>
+        <order v-if="tab === 'buy'" orderType="buy"></order>
+        <order v-if="tab === 'sell'" orderType="sell"></order>
         <vip-confirm v-if="isShowVipConfirm" :close="hideVipConfirm"></vip-confirm>
     </div>
 </template>
@@ -40,7 +33,8 @@ export default {
     data() {
         return {
             isShowHelp: false,
-            isShowVipConfirm: false
+            isShowVipConfirm: false,
+            tab: 'buy'
         };
     },
     computed: {
@@ -118,66 +112,53 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "~h5Assets/scss/vars.scss";
 @import "~h5Assets/scss/center.scss";
 
 .limit-price-wrapper {
     font-size: 14px;
-    @include font-family-normal();
+
+    .__center-title {
+        height: 30px;
+        line-height: 30px;
+        @include font-bold();
+        border-bottom: 1px solid rgba(211,223,239,1);
+        .tab-list {
+            color: rgba(62,74,89,0.7);
+            .tab {
+                display: inline-block;
+                padding: 0 12px;
+                border-radius: 2px 2px 0px 0px;
+            }
+            .buy {
+                color: rgba(255,255,255,1);
+                background: $green;
+            }
+            .sell {
+                color: rgba(255,255,255,1);
+                background: $red;
+            }
+        }
+    }
 
     .right-tab {
         font-size: 12px;
         float: right;
-        @include font-family-normal();
+        @include font-normal();
         color: rgba(94, 104, 117, 1);
-        >span {
-            position: relative;
-            margin-right: 6px;
-            &:last-child {
-                margin-right: 0;
-            }
-        }
+        // >span {
+        //     position: relative;
+        //     margin-right: 6px;
+        //     &:last-child {
+        //         margin-right: 0;
+        //     }
+        // }
         .fee {
             font-family: $font-H;
         }
     }
 
-    .help {
-        background: url('~assets/imgs/info.svg');
-        background-size: 100% 100%;
-        width: 16px;
-        height: 16px;
-        display: inline-block;
-        margin-bottom: -3px;
-    }
-
-    .help-tip {
-        position: absolute;
-        top: -12px;
-        right: -13px;
-        min-width: 300px;
-        padding: 10px 10px 0;
-        background: #fff;
-        transform: translateY(-100%);
-        box-shadow: 0 2px 10px 1px rgba(176, 192, 237, 0.42);
-        border-radius: 2px;
-        font-family: $font-H;
-        &:after {
-            right: 15px;
-            position: absolute;
-            content: ' ';
-            display: inline-block;
-            border: 6px solid transparent;
-            border-top: 6px solid #fff;
-        }
-        >span {
-            display: block;
-            margin-bottom: 10px;
-        }
-    }
-
     .vip-operate {
-        padding-right: 6px;
-        border-right: 1px solid rgba(205,204,204,1);
         &.active {
             color: #007AFF;
         }

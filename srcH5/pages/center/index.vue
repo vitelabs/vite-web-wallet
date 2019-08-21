@@ -1,8 +1,10 @@
 <template>
     <div class="trade-center-wrapper">
         <center-head></center-head>
-        <limit-price></limit-price>
-        <depth></depth>
+        <div class="white-wrapper">
+            <limit-price></limit-price>
+            <depth></depth>
+        </div>
         <order-tab></order-tab>
     </div>
 </template>
@@ -103,3 +105,10 @@ export default {
     }
 };
 </script>
+
+<style lang="scss" scoped>
+.white-wrapper {
+    padding: 16px 24px;
+    background: #fff;
+}
+</style>
