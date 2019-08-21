@@ -1,6 +1,6 @@
 <template>
     <div class="txpair-head-wrapper">
-        <token></token>
+        <tx-pair-info :showDetail="showDetail"></tx-pair-info>
 
         <div class="else-wrapper">
             <div class="left">
@@ -12,37 +12,38 @@
                 </div>
                 <div>
                     <span>≈{{ realPrice }}</span>
-                    <span :class="{
+                    <span class="updown" :class="{
                         'up': +upDown > 0,
                         'down': +upDown < 0
-                    }">{{ activeTxPair && activeTxPair.upDownPercent ?  upDownIcon + activeTxPair.upDownPercent : '--' }}</span>
+                    }">{{ activeTxPair && activeTxPair.upDownPercent ? upDownIcon + activeTxPair.upDownPercent : '--' }}</span>
                 </div>
             </div>
 
             <div class="right">
-                <div class="token-title">
-                    <span>{{ $t('trade.head.highPrice') }}</span>
-                    {{ activeTxPair && activeTxPair.highPrice ? activeTxPair.highPrice : '--' }}
+                <div class="item">
+                    <div>{{ $t('mobileTradeCenter.highPrice') }}</div>
+                    <div>{{ $t('mobileTradeCenter.lowPrice') }}</div>
+                    <div>{{ $t('mobileTradeCenter.quantity') }}</div>
                 </div>
-                <div class="token-title">
-                    <span>{{ $t('trade.head.lowPrice') }}</span>
-                    {{ activeTxPair && activeTxPair.lowPrice ? activeTxPair.lowPrice : '--' }}
-                </div>
-                <div class="token-title">
-                    <span>{{ $t('trade.head.quantity') }}</span>
-                    {{ activeTxPair && activeTxPair.amount ? formatNum(activeTxPair.amount, 1) + ' ' + activeTxPair.originQuoteTokenSymbol : '--' }}
+                <div class="item">
+                    <div>{{ activeTxPair && activeTxPair.highPrice ? activeTxPair.highPrice : '--' }} {{ activeTxPair ? activeTxPair.originQuoteTokenSymbol : '' }}</div>
+                    <div>{{ activeTxPair && activeTxPair.lowPrice ? activeTxPair.lowPrice : '--' }} {{ activeTxPair ? activeTxPair.originQuoteTokenSymbol : '' }}</div>
+                    <div>{{ activeTxPair && activeTxPair.amount ? formatNum(activeTxPair.amount, 1) : '--' }} {{ activeTxPair ? activeTxPair.originQuoteTokenSymbol : '' }}</div>
                 </div>
             </div>
         </div>
+
+        <detail ref="detailConfirm"></detail>
     </div>
 </template>
 
 <script>
 import BigNumber from 'utils/bigNumber';
-import token from './token';
+import txPairInfo from './txPairInfo';
+import detail from './detail.vue';
 
 export default {
-    components: { token },
+    components: { txPairInfo, detail },
     computed: {
         activeTxPair() {
             return this.$store.getters.exActiveTxPair;
@@ -66,6 +67,9 @@ export default {
     methods: {
         formatNum(num, fix) {
             return BigNumber.formatNum(num, fix);
+        },
+        showDetail(tab = 'token') {
+            this.$refs.detailConfirm.tab = tab;
         }
     }
 };
@@ -88,19 +92,7 @@ export default {
         justify-content: space-between;
         align-items: center;
     }
-    .token-title {
-        @include font-normal();
-        white-space: nowrap;
-        line-height: 16px;
-        color: rgba(62,74,89,1);
-        margin-bottom: 5px;
-        &:last-child {
-            margin-bottom: 0;
-        }
-        span {
-            color: rgba(62,74,89,0.6);
-        }
-    }
+
     .left {
         @include font-normal();
         color: rgba(62,74,89,0.6);
@@ -112,16 +104,52 @@ export default {
             line-height: 28px;
             color: $blue;
             margin-bottom: 6px;
-            &.down {
-                color: $down-color;
+        }
+        .updown {
+            color: $blue;
+            &::before {
+                display: inline-block;
+                content: ' ';
+                width: 10px;
+                height: 10px;
+                margin-right: 2px;
             }
-            &.up {
-                color: $up-color;
+            &.down:before {
+                background: url('~assets/imgs/ex-down-arrow.svg');
+                background-size: 100% 100%;
             }
+            &.up:before {
+                background: url('~assets/imgs/ex-up-arrow.svg');
+                background-size: 100% 100%;
+            }
+        }
+        .down {
+            color: $down-color;
+        }
+        .up {
+            color: $up-color;
         }
     }
     .right {
+        display: flex;
+        flex-direction: row;
         @include font-normal();
+        .item {
+            text-align: right;
+            color: rgba(62,74,89,1);
+            &:first-child {
+                margin-right: 7px;
+                color: rgba(62,74,89,0.6);
+            }
+            div {
+                line-height: 16px;
+                white-space: nowrap;
+                margin-bottom: 5px;
+                &:last-child {
+                    margin-bottom: 0;
+                }
+            }
+        }
     }
 }
 </style>
