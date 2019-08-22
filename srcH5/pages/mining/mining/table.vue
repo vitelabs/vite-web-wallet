@@ -1,6 +1,5 @@
 <template>
     <div class="list">
-        <div class="title">{{ title || $t('mobileMining.listTitle') }}</div>
         <div v-for="(content, i) in contentList" :key="i" class="item">
             <div v-for="(head, j) in headList" :key="j" class="item-row __ellipsis">
                 <span v-if="head.text">{{ head.text }}</span>
@@ -16,10 +15,6 @@
 <script>
 export default {
     props: {
-        title: {
-            type: String,
-            default: ''
-        },
         headList: {
             type: Array,
             default: () => []
@@ -35,13 +30,6 @@ export default {
 <style lang="scss" scoped>
 @import "~h5Assets/scss/vars.scss";
 
-.title {
-    font-size: 14px;
-    @include font-bold();
-    color: rgba(62,74,89,1);
-    line-height: 20px;
-    margin-bottom: 14px;
-}
 .item {
     display: flex;
     flex-direction: row;

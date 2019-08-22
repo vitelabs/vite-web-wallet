@@ -4,30 +4,28 @@
                    :title="$t('mobileMining.stakingTotalIncome', {token: 'VX'})">
             <is-staking></is-staking>
         </my-income>
-        <mining-table :headList="pledgeHeadList" :contentList="content"></mining-table>
-        <!-- <pagination
-                slot="tableBottom"
-                class="__tb_pagination"
-                :currentPage="stakeCurrentPage + 1"
-                :toPage="fetchMiningStake"
-                :totalPage="stakeTotalPage"
-            ></pagination> -->
+        <list-title></list-title>
+        <list-view class="list-wrapper-view" :reachEnd="reachEnd">
+            <mining-table slot="content" :headList="pledgeHeadList" :contentList="content"></mining-table>
+        </list-view>
     </div>
 </template>
 
 <script>
-import pagination from 'components/pagination';
 import { miningPledge } from 'services/trade';
 import bigNumber from 'utils/bigNumber';
 import date from 'utils/date';
 import myIncome from '../myIncome';
 import isStaking from './isStaking';
 import miningTable from '../table';
+import listView from 'h5Components/listView.vue';
+import listTitle from '../listTitle.vue';
 
 export default {
-    components: { pagination, myIncome, isStaking, miningTable },
+    components: { myIncome, isStaking, miningTable, listView, listTitle },
     data() {
         return {
+            isInit: false,
             miningTotal: 0,
             stakeCurrentPage: 0,
             stakeListTotal: 0,
@@ -50,6 +48,7 @@ export default {
             this.stakeListTotal = 0;
             this.stakeCurrentPage = 0;
             this.stakeList = [];
+            this.isInit = false;
             this.fetchMiningStake();
         }
     },
@@ -66,16 +65,19 @@ export default {
                 };
             });
         },
-        stakeTotalPage() {
-            return Math.ceil(this.stakeListTotal / 30);
-        },
         address() {
             return this.$store.getters.activeAddr;
         }
     },
     methods: {
+        reachEnd() {
+            this.fetchMiningStake(this.stakeCurrentPage + 1);
+        },
         fetchMiningStake(pageNumber) {
-            const offset = pageNumber ? (pageNumber - 1) * 30 : 0;
+            const offset = (pageNumber || 0) * 30;
+            if (this.isInit && offset >= this.stakeListTotal) {
+                return;
+            }
 
             miningPledge({
                 address: this.address,
@@ -87,8 +89,10 @@ export default {
 
                 this.miningTotal = data.miningTotal || 0;
                 this.stakeListTotal = data.total || 0;
-                this.stakeCurrentPage = pageNumber ? pageNumber - 1 : 0;
-                this.stakeList = data.miningList || [];
+                this.stakeCurrentPage = pageNumber || 0;
+                const list = data.miningList || [];
+                this.stakeList = [].concat(this.stakeList, list);
+                this.isInit = true;
             }).catch(err => {
                 console.warn(err);
             });
@@ -96,3 +100,9 @@ export default {
     }
 };
 </script>
+
+<style lang="scss" scoped>
+.list-wrapper-view {
+    max-height: 450px;
+}
+</style>

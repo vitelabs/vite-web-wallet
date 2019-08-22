@@ -3,30 +3,27 @@
         <my-income :miningTotal="`${inviteTotal}`"
                    :title="$t('mobileMining.inviteTotalIncome', {token: 'VX'})">
         </my-income>
-
-        <mining-table :headList="inviteHeadList" :contentList="content"></mining-table>
-        <!-- <pagination
-                slot="tableBottom"
-                class="__tb_pagination"
-                :currentPage="inviteCurrentPage + 1"
-                :toPage="fetchMiningInvite"
-                :totalPage="inviteTotalPage"
-            ></pagination> -->
+        <list-title></list-title>
+        <list-view class="list-wrapper-view" :reachEnd="reachEnd">
+            <mining-table slot="content" :headList="inviteHeadList" :contentList="content"></mining-table>
+        </list-view>
     </div>
 </template>
 
 <script>
-import pagination from 'components/pagination.vue';
 import { getInviteMiningDetail } from 'h5Services/tradeOperation';
 import myIncome from './myIncome';
 import bigNumber from 'utils/bigNumber';
 import date from 'utils/date';
 import miningTable from './table';
+import listView from 'h5Components/listView.vue';
+import listTitle from './listTitle.vue';
 
 export default {
-    components: { miningTable, pagination, myIncome },
+    components: { miningTable, myIncome, listView, listTitle },
     data() {
         return {
+            isInit: false,
             inviteCurrentPage: 0,
             inviteTotal: 0,
             inviteListTotal: 0,
@@ -50,6 +47,7 @@ export default {
             this.inviteCurrentPage = 0;
             this.inviteTotal = 0;
             this.inviteList = [];
+            this.isInit = false;
             this.fetchMiningInvite();
         }
     },
@@ -68,36 +66,46 @@ export default {
                 };
             });
         },
-        inviteTotalPage() {
-            return Math.ceil(this.inviteListTotal / 30);
-        },
         address() {
             return this.$store.getters.activeAddr;
         }
     },
     methods: {
+        reachEnd() {
+            this.fetchMiningInvite(this.inviteCurrentPage + 1);
+        },
         fetchMiningInvite(pageNumber) {
-            const offset = pageNumber ? (pageNumber - 1) * 30 : 0;
+            const offset = (pageNumber || 0) * 30;
+            if (this.isInit && offset >= this.inviteListTotal) {
+                return;
+            }
 
             getInviteMiningDetail({
                 address: this.address,
                 offset
-            })
-                .then(data => {
-                    if (!data) {
-                        return;
-                    }
-                    this.inviteListTotal = data.total || 0;
-                    this.inviteCurrentPage = pageNumber ? pageNumber - 1 : 0;
-                    this.inviteTotal = data.miningTotal
-                        ? bigNumber.formatNum(data.miningTotal, 8)
-                        : 0;
-                    this.inviteList = data.miningList || [];
-                })
-                .catch(err => {
-                    console.warn(err);
-                });
+            }).then(data => {
+                if (!data) {
+                    return;
+                }
+
+                this.inviteListTotal = data.total || 0;
+                this.inviteTotal = data.miningTotal
+                    ? bigNumber.formatNum(data.miningTotal, 8)
+                    : 0;
+                this.inviteCurrentPage = pageNumber || 0;
+                const list = data.miningList || [];
+                this.inviteList = [].concat(this.inviteList, list);
+                this.isInit = true;
+            }).catch(err => {
+                console.warn(err);
+            });
         }
     }
 };
 </script>
+
+<style lang="scss" scoped>
+.list-wrapper-view {
+    max-height: 450px;
+}
+</style>
