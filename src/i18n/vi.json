@@ -527,7 +527,7 @@
         "maxAmt": "Số tiền rút phải trong khoảng [{minAmount}, {maxAmount}]",
         "cancelLimitAmt": "Số lượng đặt cược không được ít hơn {num}",
         "withdrawalStaking": "Rút token đã thế chấp",
-        "myAddr": "Tôi",
+        "myAddr": "Current Address",
         "confirm": {
             "help": {
                 "t1": "Hạn ngạch là gì?",
