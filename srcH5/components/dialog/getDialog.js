@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import closeIcon from 'assets/imgs/confirm_close.svg';
+import closeIcon from 'h5Assets/imgs/confirm_close.svg';
 import store from 'h5Store';
 import i18n from 'i18n';
 
@@ -95,12 +95,13 @@ const mixin = {
                 },
                 title: {
                     'font-size': '14px',
-                    background: 'rgba(38,142,255,1)',
                     height: '50px',
                     'line-height': '50px',
-                    'padding': '0 30px',
-                    color: '#ffffff',
-                    'font-family': 'PingFangSC-Semibold, arial, sans-serif'
+                    'text-align': 'center',
+                    'padding': '0 16px',
+                    color: 'rgba(36,39,43,1)',
+                    'font-family': 'PingFangSC, arial, sans-serif',
+                    'font-weight': '600'
                 },
                 close: {
                     cursor: 'pointer',
@@ -121,7 +122,7 @@ const mixin = {
                     flex: 1,
                     position: 'relative',
                     'box-sizing': 'border-box',
-                    padding: '30px',
+                    padding: '0 16px 20px',
                     overflow: 'auto',
                     'font-size': '14px',
                     color: 'rgba(29,32,36,1)',
@@ -129,13 +130,13 @@ const mixin = {
                 },
                 btnGroup: {
                     'font-family': 'PingFangSC-Semibold, arial, sans-serif',
-                    padding: '0 30px',
+                    padding: '0 16px',
                     display: 'flex',
                     'min-height': '40px',
                     'height': '40px',
                     'box-sizing': 'border-box',
                     'justify-content': 'space-between',
-                    'margin-bottom': '30px',
+                    'margin-bottom': '20px',
                     'font-size': '14px'
                 },
                 lBtn: { 'margin-right': '20px' },
@@ -206,6 +207,7 @@ const mixin = {
         }
     }
 };
+
 
 export default function (component, propsDefault = {}) {
     return function dialog(props = {}) {

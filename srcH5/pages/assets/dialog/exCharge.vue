@@ -86,7 +86,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "./dialog.scss";
+@import "~h5Components/dialog/dialog.scss";
 @include block;
 </style>
 
