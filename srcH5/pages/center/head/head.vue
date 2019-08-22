@@ -33,19 +33,20 @@
             </div>
         </div>
 
-        <token-detail ref="tokenDetailConfirm"></token-detail>
         <operator-detail ref="operatorDetailConfirm"></operator-detail>
     </div>
 </template>
 
 <script>
 import BigNumber from 'utils/bigNumber';
+import { getExplorerLink } from 'utils/getLink';
 import txPairInfo from './txPairInfo';
-import tokenDetail from './tokenDetail.vue';
 import operatorDetail from './operatorDetail.vue';
+import getDialog from 'h5Components/dialog/getDialog.js';
+import tokenInfoComp from 'h5Components/tokenInfo';
 
 export default {
-    components: { txPairInfo, tokenDetail, operatorDetail },
+    components: { txPairInfo, operatorDetail },
     computed: {
         activeTxPair() {
             return this.$store.getters.exActiveTxPair;
@@ -64,6 +65,32 @@ export default {
         },
         realPrice() {
             return this.$store.state.exchangeActiveTxPair.realClosePrice;
+        },
+        ftokenDetail() {
+            return this.$store.state.exchangeTokens.ftoken;
+        },
+        tokenDetail() {
+            if (!this.ftokenDetail) {
+                return {};
+            }
+
+            const tokenDetail = this.ftokenDetail;
+            tokenDetail.tokenSymbol = tokenDetail.originalSymbol;
+            if (this.ftokenDetail.links) {
+                for (const key in this.ftokenDetail.links) {
+                    tokenDetail[`${ key }Link`] = this.ftokenDetail.links[key] && this.ftokenDetail.links[key].length
+                        ? this.ftokenDetail.links[key][0] : '';
+                }
+            }
+            tokenDetail.ttype = typeof tokenDetail.gateway === 'undefined'
+                ? '--' : tokenDetail.gateway
+                    ? this.$t('tokenCard.tokenInfo.labels.crossType')
+                    : this.$t('tokenCard.tokenInfo.labels.originType');
+            tokenDetail.explorerLink = tokenDetail.explorerLink
+                || (tokenDetail.gateway ? null : getExplorerLink());
+            tokenDetail.showTotalSupply = BigNumber.toBasic(tokenDetail.totalSupply, tokenDetail.tokenDecimals);
+
+            return tokenDetail;
         }
     },
     methods: {
@@ -72,7 +99,10 @@ export default {
         },
         showDetail(tab = 'token') {
             if (tab === 'token') {
-                this.$refs.tokenDetailConfirm.tab = tab;
+                const tokenInfoDialog = getDialog(tokenInfoComp);
+                tokenInfoDialog({ token: this.tokenDetail }).catch(e => {
+                    console.error(e);
+                });
                 return;
             }
             this.$refs.operatorDetailConfirm.tab = tab;

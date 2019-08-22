@@ -7,8 +7,6 @@ block head
             .head__name {{ tokenDetail.name }}
             .head__symbol {{ token.tokenSymbol }}
         .gate_info(v-if="tokenDetail.gateway") {{ tokenDetail.gateway.name }}
-    .tab
-        .tab__item.active {{$t("tokenCard.tokenInfo.tabName")}}
 block originContent
     .tab-content
         .content__item
@@ -68,7 +66,10 @@ export default {
         this.fetchTokenDetail();
     },
     data() {
-        return { tokenDetail: {} };
+        return {
+            tokenDetail: {},
+            dTitle: this.$t('mobileAssets.tokenInfoTitle')
+        };
     },
     computed: {
         defaultAddr() {
