@@ -109,7 +109,6 @@ export default {
     padding-left: 13px;
     margin-top: 12px;
     position: relative;
-    width: 100%;
     .dot {
         width: 4px;
         height: 4px;

@@ -33,17 +33,19 @@
             </div>
         </div>
 
-        <detail ref="detailConfirm"></detail>
+        <token-detail ref="tokenDetailConfirm"></token-detail>
+        <operator-detail ref="operatorDetailConfirm"></operator-detail>
     </div>
 </template>
 
 <script>
 import BigNumber from 'utils/bigNumber';
 import txPairInfo from './txPairInfo';
-import detail from './detail.vue';
+import tokenDetail from './tokenDetail.vue';
+import operatorDetail from './operatorDetail.vue';
 
 export default {
-    components: { txPairInfo, detail },
+    components: { txPairInfo, tokenDetail, operatorDetail },
     computed: {
         activeTxPair() {
             return this.$store.getters.exActiveTxPair;
@@ -69,7 +71,11 @@ export default {
             return BigNumber.formatNum(num, fix);
         },
         showDetail(tab = 'token') {
-            this.$refs.detailConfirm.tab = tab;
+            if (tab === 'token') {
+                this.$refs.tokenDetailConfirm.tab = tab;
+                return;
+            }
+            this.$refs.operatorDetailConfirm.tab = tab;
         }
     }
 };
