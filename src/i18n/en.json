@@ -513,7 +513,7 @@
         "maxAmt": "Withdraw amount should be in [{minAmount}, {maxAmount}]",
         "cancelLimitAmt": "Staking amount cannot be less than {num}",
         "withdrawalStaking": "Withdrawal of Staked Token",
-        "myAddr": "Me",
+        "myAddr": "Current Address",
         "confirm": {
             "help": {
                 "t1": "What is Quota?",
