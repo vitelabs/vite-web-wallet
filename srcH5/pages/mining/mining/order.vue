@@ -1,5 +1,9 @@
 <template>
     <div class="trade-mining-section">
+        <my-income :miningTotal="`${miningTotal}`"
+                   :title="$t('mobileMining.orderTotalIncome', {token: 'VX'})">
+        </my-income>
+
         <wallet-table
             class="mint-trade-table content tb"
             :headList="headList"
@@ -21,12 +25,13 @@ import walletTable from 'components/table/index.vue';
 import pagination from 'components/pagination.vue';
 import bigNumber from 'utils/bigNumber';
 import date from 'utils/date';
-
+import myIncome from './myIncome';
 
 export default {
-    components: { walletTable, pagination },
+    components: { walletTable, pagination, myIncome },
     data() {
         return {
+            miningTotal: 0,
             currentPage: 0,
             listTotal: 0,
             miningList: [],
@@ -87,6 +92,7 @@ export default {
                         return;
                     }
 
+                    this.miningTotal = data.miningTotal;
                     this.listTotal = data.total || 0;
                     this.currentPage = pageNumber ? pageNumber - 1 : 0;
                     this.miningList = data.miningList || [];

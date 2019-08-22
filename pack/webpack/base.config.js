@@ -1,6 +1,5 @@
 const path = require('path');
 const webpack = require('webpack');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 const { staticPath, srcPath, envVars } = require('../config.js');
@@ -45,25 +44,7 @@ module.exports = {
                 //         priority: 1
                 //     },
             }
-        },
-        minimizer: [
-            new UglifyJsPlugin({
-                cache: true,
-                parallel: true,
-                uglifyOptions: {
-                    compress: {
-                        // collapse_vars: true,
-                        // reduce_vars: true,
-                        unused: true,
-                        drop_console: true,
-                        drop_debugger: true
-                    },
-                    output: { comments: false }
-                },
-                extractComments: true,
-                sourceMap: false
-            })
-        ]
+        }
     },
     module: {
         rules: [

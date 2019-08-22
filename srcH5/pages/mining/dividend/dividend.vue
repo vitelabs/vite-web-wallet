@@ -41,28 +41,10 @@ import pagination from 'components/pagination.vue';
 import { dividend } from 'services/trade';
 import date from 'utils/date';
 import bigNumber from 'utils/bigNumber';
-import confirm from 'components/confirm/index.js';
-import openUrl from 'utils/openUrl';
 
 export default {
     components: { pagination, pool },
     mounted() {
-        // Temporary coming soon alert
-        confirm({
-            size: 'small',
-            type: 'description',
-            title: this.$t('tradeDividend.hintTitle'),
-            singleBtn: true,
-            closeBtn: { show: true },
-            leftBtn: {
-                text: this.$t('tradeDividend.more'),
-                click: () => {
-                    this.goLink();
-                }
-            },
-            content: this.$t('tradeDividend.comingHint')
-        });
-
         this.fetchList();
     },
     data() {
@@ -198,12 +180,6 @@ export default {
                 this.myDividend = {};
                 this.list = [];
             });
-        },
-        goLink() {
-            if (this.$i18n.locale === 'zh') {
-                openUrl('https://dex.vite.wiki/zh/dex/#vx-%E6%89%8B%E7%BB%AD%E8%B4%B9%E5%88%86%E7%BA%A2');
-            }
-            openUrl('https://dex.vite.wiki/dex/#vx-holder-dividends');
         }
     }
 };
@@ -213,10 +189,9 @@ export default {
 @import "~h5Assets/scss/vars.scss";
 
 .trade-dividend-wrapper {
-    width: 100%;
-    height: 100%;
     font-size: 12px;
     @include font-normal();
+    padding: 18px 24px;
 }
 
 .my-divident {

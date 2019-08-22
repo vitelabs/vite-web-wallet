@@ -1,6 +1,6 @@
 <template>
-    <div class="select-tab-wrapper">
-        <span class="select-tab" :class="{'active': activeTab === key}"
+    <div class="tab-list-wrapper">
+        <span class="tab" :class="{'active': activeTab === key}"
               v-for="(tab, key) in tabList" :key="key"
               @click="selectTab(key)">{{ tab }}</span>
     </div>
@@ -33,31 +33,23 @@ export default {
 <style lang="scss" scoped>
 @import "~h5Assets/scss/vars.scss";
 
-.select-tab-wrapper {
-    display: inline-block;
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
-    border-radius: 2px;
-    font-size: 14px;
+.tab-list-wrapper {
+    display: flex;
+    font-size: 13px;
     @include font-bold();
-    color: rgba(255,255,255,1);
-    line-height: 18px;
+    color: rgba(62,74,89,0.7);
+    height: 35px;
+    line-height: 35px;
+    border-bottom: 1px solid rgba(211,223,239,1);
+    flex-direction: row;
+    justify-content: space-around;
 
-    .select-tab {
+    .tab {
         box-sizing: border-box;
-        display: inline-block;
-        height: 30px;
-        line-height: 30px;
-        padding: 0 12px;
-        color: $blue;
-        border: 1px solid $blue;
+        height: 100%;
         &.active {
-            position: relative;
-            top: -1px;
-            border: none;
-            background: $blue;
-            color: #fff;
+            color: rgba(62, 74, 89, 1);
+            border-bottom: 3px solid $blue;
         }
     }
 }

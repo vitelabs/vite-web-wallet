@@ -39,7 +39,9 @@ import bigNumber from 'utils/bigNumber';
 import statistics from 'utils/statistics';
 import { verifyAmount, verifyWithdrawAmount } from 'utils/validations';
 import router from 'h5Router';
+import { constant } from '@vite/vitejs';
 
+const Vite_Token_Info = constant.Vite_Token_Info;
 const minLimit = 134;
 
 export default {
@@ -72,11 +74,8 @@ export default {
             return this.$store.getters.viteTokenInfo;
         },
         rawBalance() {
-            if (!this.viteTokenInfo) {
-                return null;
-            }
             const list = this.$store.getters.exBalanceList;
-            return list[this.viteTokenInfo.tokenId];
+            return list[Vite_Token_Info.tokenId];
         },
         exViteBalance() {
             return this.rawBalance ? this.rawBalance.available : 0;
@@ -88,7 +87,7 @@ export default {
             if (this.isAdd || !this.stakingObj) {
                 return 0;
             }
-            return bigNumber.toBasic(this.stakingObj.amount, this.viteTokenInfo.decimals);
+            return bigNumber.toBasic(this.stakingObj.amount, Vite_Token_Info.decimals);
         },
 
         isAdd() {
@@ -109,16 +108,11 @@ export default {
     },
     methods: {
         testAmount() {
-            if (!this.viteTokenInfo) {
-                this.amountErr = this.$t('hint.amtFormat');
-                return false;
-            }
-
             if (this.isAdd) {
                 this.amountErr = verifyAmount({
-                    decimals: this.viteTokenInfo.decimals,
+                    decimals: Vite_Token_Info.decimals,
                     formatDecimals: 8,
-                    minAmount: bigNumber.toMin(minLimit, this.viteTokenInfo.decimals),
+                    minAmount: bigNumber.toMin(minLimit, Vite_Token_Info.decimals),
                     balance: this.rawBalance ? this.rawBalance.availableExAmount || 0 : 0,
                     errorMap: {
                         less0: this.$t('wallet.hint.amount'),
@@ -128,7 +122,7 @@ export default {
             } else {
                 this.amountErr = verifyWithdrawAmount({
                     stakingAmount: this.stakingObj ? this.stakingObj.amount || 0 : 0,
-                    decimals: this.viteTokenInfo.decimals
+                    decimals: Vite_Token_Info.decimals
                 }, this.amount);
             }
 
@@ -144,7 +138,7 @@ export default {
         staking() {
             statistics.event(router.currentRoute.name, this.actionType === 1 ? 'addQuota-submit' : 'withdrawQuota-submit', this.accountAddr || '');
 
-            // const amount = bigNumber.toMin(this.amount, this.viteTokenInfo.decimals);
+            // const amount = bigNumber.toMin(this.amount, Vite_Token_Info.decimals);
 
             // sendTx({
             //     methodName: 'dexFundPledgeForVx',

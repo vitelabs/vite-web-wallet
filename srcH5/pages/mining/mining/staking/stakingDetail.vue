@@ -1,32 +1,34 @@
 <template>
     <div class="staking-detail">
         <div class="item">
-            <div>{{ $t("stakingAmount") }}</div>
+            <div class="item-tilte">
+                <img src="~h5Assets/imgs/staking_amount.svg" />{{ $t("stakingAmount") }}
+            </div>
             <div class="bold">{{ stakingDetail.amount }}</div>
         </div>
         <div class="item">
-            <div>{{ $t("withdrawHeight") }}</div>
+            <div class="item-tilte">
+                <img src="~h5Assets/imgs/snapshot.svg" />{{ $t("withdrawHeight") }}
+            </div>
             <div class="bold">{{ stakingDetail.withdrawHeight }}</div>
         </div>
-        <div class="item no-border">
-            <div>{{ $t("walletQuota.list.withdrawTime") }}</div>
+        <div class="item">
+            <div class="item-tilte">
+                <img src="~h5Assets/imgs/staking_time.svg" />{{ $t("walletQuota.list.withdrawTime") }}
+            </div>
             <div class="bold">{{ stakingDetail.withdrawTime }}</div>
         </div>
 
-        <div class="operations">
-            <div class="btn add __pointer" @click="showVxConfirm(1)">
+        <div class="item operation">
+            <span class="btn add __pointer" @click="showVxConfirm(1)">
                 {{ $t("tradeMining.add") }}
-            </div>
-            <div v-show="!canCancel" class="btn unuse">
+            </span>
+            <span v-show="!canCancel" class="btn unuse">
                 {{ $t("tradeMining.withdraw") }}
-            </div>
-            <div
-                v-show="canCancel"
-                class="btn cancel __pointer"
-                @click="showVxConfirm(2)"
-            >
+            </span>
+            <span v-show="canCancel" class="btn cancel __pointer" @click="showVxConfirm(2)">
                 {{ $t("tradeMining.withdraw") }}
-            </div>
+            </span>
         </div>
     </div>
 </template>
@@ -70,6 +72,7 @@ export default {
                     withdrawHeight: ''
                 };
             }
+
             return {
                 withdrawTime: date(this.stakingObj.withdrawTime * 1000,
                     this.$i18n.locale),
@@ -83,69 +86,61 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~assets/scss/vars.scss";
+@import "~h5Assets/scss/vars.scss";
 
 .staking-detail {
-    background: url("~assets/imgs/mint_pledge_bg.png") rgba(234, 248, 255, 0.2);
-    background-size: 100% 100%;
     display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    font-size: 12px;
+    @include font-normal();
+    color: rgba(62,74,89,0.6);
+    line-height: 16px;
     .item {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        box-sizing: border-box;
-        width: 25%;
-        padding: 16px 30px;
-        border-right: 1px solid rgba(227, 235, 245, 0.6);
-        font-size: 12px;
-        @include font-family-normal();
-        color: #5e6875;
-        > div {
-            height: 16px;
+        width: 50%;
+        margin-bottom: 14px;
+        &.operation {
+            display: flex;
+            align-items: center;
+            flex-direction: row;
         }
-        &.no-border {
-            border-right: none;
+        .item-tilte {
+            margin-bottom: 5px;
+            img {
+                width: 16px;
+                height: 16px;
+                margin-bottom: -4px;
+                margin-right: 2px;
+            }
         }
         .bold {
-            @include font-family-bold();
-            color: #1d2024;
+            @include font-bold();
         }
     }
-    .operations {
-        display: flex;
-        flex-grow: 1;
-        justify-content: flex-end;
-        align-items: center;
-    }
+
     .btn {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-width: 100px;
-        height: 30px;
-        box-sizing: border-box;
+        display: inline-block;
         border-radius: 2px;
-        font-size: 12px;
-        @include font-family-bold();
-        font-weight: 600;
-        line-height: 16px;
+        padding: 0 13px;
+        height: 24px;
+        line-height: 24px;
+        box-sizing: border-box;
+        font-size: 14px;
+        @include font-bold();
         &.add {
             color: #fff;
-            background: rgba(0, 122, 255, 1);
-            margin-right: 13px;
-            margin-bottom: -1px;
+            background: $blue;
+            margin-right: 5px;
         }
         &.cancel {
-            color: rgba(94, 104, 117, 1);
-            border: 1px solid rgba(198, 203, 212, 1);
-            margin-right: 30px;
+            color: $blue;
+            border: 1px solid $blue;
         }
         &.unuse {
-            margin-right: 30px;
             background: #efefef;
             color: #666;
             border: none;
-            cursor: not-allowed;
         }
     }
 }

@@ -14,7 +14,6 @@
 
 <script>
 import BigNumber from 'utils/bigNumber';
-import confirm from 'components/confirm/index.js';
 import openOrder from 'h5Components/orderOpen.vue';
 import depth from './depth/depth.vue';
 import limitPrice from './limitPrice/limitPrice.vue';
@@ -30,18 +29,6 @@ export default {
         this.$store.dispatch('exFetchVip');
         this.$store.dispatch('startLoopDexFundeUnreceived');
         this.$store.commit('exSetRealClosePrice', this.realPrice);
-
-        !this.$store.state.env.isShowCompliance && confirm({
-            size: 'small',
-            type: 'generalTips',
-            title: this.$t('compliance.title'),
-            content: this.$t('compliance.text'),
-            singleBtn: true,
-            leftBtn: {
-                text: this.$t('btn.understand'),
-                click: this.$store.commit('setComplianceShow')
-            }
-        });
     },
     destroyed() {
         this.$store.dispatch('stopLoopDexFundUnreceived');
