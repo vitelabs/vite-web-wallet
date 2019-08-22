@@ -1,10 +1,10 @@
 <template>
     <div class="trade-mining-section">
-        <wallet-table
-            class="mint-trade-table content tb"
-            :headList="inviteHeadList"
-            :contentList="content"
-        >
+        <my-income :miningTotal="`${inviteTotal}`"
+                   :title="$t('mobileMining.inviteTotalIncome', {token: 'VX'})">
+        </my-income>
+
+        <wallet-table class="mint-trade-table content tb" :headList="inviteHeadList" :contentList="content">
             <pagination
                 slot="tableBottom"
                 class="__tb_pagination"
@@ -15,15 +15,17 @@
         </wallet-table>
     </div>
 </template>
+
 <script>
 import pagination from 'components/pagination.vue';
 import { getInviteMiningDetail } from 'h5Services/tradeOperation';
 import walletTable from 'components/table/index.vue';
+import myIncome from './myIncome';
 import bigNumber from 'utils/bigNumber';
 import date from 'utils/date';
 
 export default {
-    components: { walletTable, pagination },
+    components: { walletTable, pagination, myIncome },
     data() {
         return {
             inviteCurrentPage: 0,

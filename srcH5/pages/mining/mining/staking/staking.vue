@@ -1,41 +1,50 @@
 <template>
     <div class="trade-mining-section">
-        <myIncome :miningTotal="`${miningTotal}`"
-                  :title="$t('mobileMining.tradeTotalIncome', {token: 'VX'})">
-        </myIncome>
+        <my-income :miningTotal="`${miningTotal}`"
+                   :title="$t('mobileMining.stakingTotalIncome', {token: 'VX'})">
+            <is-staking></is-staking>
+        </my-income>
 
-        <wallet-table class="mint-trade-table content tb"
-                      :headList="tradeHeadList" :contentList="content">
-            <pagination slot="tableBottom" class="__tb_pagination"
-                        :currentPage="tradeCurrentPage + 1" :toPage="fetchMiningTrade"
-                        :totalPage="tradeTotalPage"></pagination>
+        <wallet-table
+            class="mint-trade-table tb"
+            :headList="pledgeHeadList"
+            :contentList="content">
+            <pagination
+                slot="tableBottom"
+                class="__tb_pagination"
+                :currentPage="stakeCurrentPage + 1"
+                :toPage="fetchMiningStake"
+                :totalPage="stakeTotalPage"
+            ></pagination>
         </wallet-table>
     </div>
 </template>
+
 <script>
 import walletTable from 'components/table/index.vue';
 import pagination from 'components/pagination';
-import { miningTrade } from 'services/trade';
+import { miningPledge } from 'services/trade';
 import bigNumber from 'utils/bigNumber';
 import date from 'utils/date';
-import myIncome from './myIncome';
+import myIncome from '../myIncome';
+import isStaking from './isStaking';
 
 export default {
-    components: { walletTable, pagination, myIncome },
+    components: { walletTable, pagination, myIncome, isStaking },
     data() {
         return {
             miningTotal: 0,
-            tradeCurrentPage: 0,
-            tradeListTotal: 0,
-            tradeList: [],
-            tradeHeadList: [
+            stakeCurrentPage: 0,
+            stakeListTotal: 0,
+            stakeList: [],
+            pledgeHeadList: [
                 {
                     text: this.$t('tradeMining.tbHead.date'),
                     cell: 'date'
                 },
                 {
-                    text: this.$t('tradeMining.tbHead.fee'),
-                    cell: 'fee'
+                    text: this.$t('tradeMining.tbHead.pledge'),
+                    cell: 'pledge'
                 },
                 {
                     text: this.$t('tradeMining.tbHead.mining'),
@@ -45,19 +54,19 @@ export default {
         };
     },
     beforeMount() {
-        this.fetchMiningTrade();
+        this.fetchMiningStake();
     },
     watch: {
         address() {
-            this.tradeCurrentPage = 0;
-            this.tradeListTotal = 0;
-            this.tradeList = [];
-            this.fetchMiningTrade();
+            this.stakeListTotal = 0;
+            this.stakeCurrentPage = 0;
+            this.stakeList = [];
+            this.fetchMiningStake();
         }
     },
     computed: {
         content() {
-            return this.tradeList.map(item => {
+            return this.stakeList.map(item => {
                 return {
                     date: date(item.date * 1000, this.$i18n.locale),
                     fee: `${ bigNumber.formatNum(item.feeAmount || 0, 8) } ${
@@ -69,18 +78,18 @@ export default {
                 };
             });
         },
-        tradeTotalPage() {
-            return Math.ceil(this.tradeListTotal / 30);
+        stakeTotalPage() {
+            return Math.ceil(this.stakeListTotal / 30);
         },
         address() {
             return this.$store.getters.activeAddr;
         }
     },
     methods: {
-        fetchMiningTrade(pageNumber) {
+        fetchMiningStake(pageNumber) {
             const offset = pageNumber ? (pageNumber - 1) * 30 : 0;
 
-            miningTrade({
+            miningPledge({
                 address: this.address,
                 offset
             }).then(data => {
@@ -89,9 +98,9 @@ export default {
                 }
 
                 this.miningTotal = data.miningTotal || 0;
-                this.tradeListTotal = data.total || 0;
-                this.tradeCurrentPage = pageNumber ? pageNumber - 1 : 0;
-                this.tradeList = data.miningList || [];
+                this.stakeListTotal = data.total || 0;
+                this.stakeCurrentPage = pageNumber ? pageNumber - 1 : 0;
+                this.stakeList = data.miningList || [];
             }).catch(err => {
                 console.warn(err);
             });

@@ -1,10 +1,9 @@
 <template>
     <div class="m-d-wrapper">
-        <select-tab :tabList="tabList" v-model="activeTab"></select-tab>
-        <div class="content-wrapper">
-            <mining v-show="activeTab === 'mining'"></mining>
-            <dividend v-show="activeTab === 'dividend'"></dividend>
-        </div>
+        <select-tab :tabList="tabList" defaultTab="mining"
+                    v-model="activeTab"></select-tab>
+        <mining v-show="activeTab === 'mining'"></mining>
+        <dividend v-show="activeTab === 'dividend'"></dividend>
     </div>
 </template>
 
@@ -17,7 +16,7 @@ export default {
     components: { mining, dividend, selectTab },
     data() {
         return {
-            tabList: [ 'mining', 'dividend' ],
+            tabList: { 'mining': this.$t('mobileMining.title'), 'dividend': this.$t('mobileDividend.title') },
             activeTab: 'mining'
         };
     }
@@ -27,8 +26,5 @@ export default {
 <style lang="scss" scoped>
 .m-d-wrapper {
     font-size: 12px;
-    .content-wrapper {
-        padding: 18px 24px;
-    }
 }
 </style>
