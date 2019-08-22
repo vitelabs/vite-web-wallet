@@ -527,7 +527,7 @@
         "maxAmt": "Сумма снятия должна быть в [{minAmount}, {maxAmount}]",
         "cancelLimitAmt": "Сумма стейка не может быть меньше {num}",
         "withdrawalStaking": "Снятие Стейкинга Квоты",
-        "myAddr": "Мне",
+        "myAddr": "Current Address",
         "confirm": {
             "help": {
                 "t1": "Что такое Квота?",
