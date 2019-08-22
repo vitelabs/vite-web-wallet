@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import getDialog from 'h5Components/getDialog.js';
+import getDialog from 'h5Components/dialog/getDialog.js';
 import receiveInvite from 'h5Components/receiveInvite.vue';
 
 export default {
