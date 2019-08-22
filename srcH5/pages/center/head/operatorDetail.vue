@@ -4,71 +4,6 @@
         <div class="head">
             <tx-pair-info></tx-pair-info>
         </div>
-        <div class="tab">
-            <div class="tab__item" :class="{'active': tab === 'token'}" @click="switchTab('token')">
-                {{$t("tradeCenter.operatorTxPair.tokenTab")}}
-            </div>
-            <div class="tab__item" :class="{'active': tab === 'operator'}" @click="switchTab('operator')">
-                {{$t("tradeCenter.operatorTxPair.operatorTab")}}
-            </div>
-        </div>
-        <div v-show="tab === 'token'" class="tab-content">
-            <div class="content__item">
-                <div class="label">{{$t("tokenCard.tokenInfo.labels.tokenName")}}:</div>
-                <div class="click-able" @click="goToTokenDetail">{{tokenDetail.name}} ({{tokenDetail.symbol}})</div>
-            </div>
-            <div class="content__item">
-                <div class="label">{{$t("tokenCard.tokenInfo.labels.tokenId")}}:</div>
-                <div class="click-able" @click="goToTokenDetail">{{tokenDetail.tokenId}}</div>
-            </div>
-            <div class="content__item">
-                <div class="label">{{$t("tokenCard.tokenInfo.labels.overview")}}:</div>
-                {{ getOverview(tokenDetail.overview) }}
-                <span class="click-able view-more"
-                      v-if="tokenDetail.overview && tokenDetail.overviewLink"
-                      @click="openUrl(tokenDetail.overviewLink)">
-                    {{ $t("tokenCard.tokenInfo.labels.viewmore") }}</span>
-            </div>
-            <div class="content__item">
-                <div class="label">{{$t("tokenCard.tokenInfo.labels.total")}}:</div> {{ tokenDetail.showTotalSupply || '--' }}
-            </div>
-            <div class="content__item">
-                <div class="label">{{$t("tokenCard.tokenInfo.labels.type")}}:</div> {{ tokenDetail.ttype }}
-            </div>
-            <div class="content__item">
-                <div class="label">{{$t("tokenCard.tokenInfo.labels.gate")}}:</div>
-                <div @click="openUrl(tokenDetail.gateway ? tokenDetail.gateway.website : null)"
-                     class="click-able">{{tokenDetail.gateway ? tokenDetail.gateway.name || '--' : '--'}}</div>
-            </div>
-            <div class="content__item">
-                <div class="label">{{$t("tokenCard.tokenInfo.labels.website")}}:</div>
-                <div class="click-able" @click="openUrl(tokenDetail.websiteLink)">{{ tokenDetail.websiteLink || '--' }}</div>
-            </div>
-            <div class="content__item">
-                <div class="label">{{$t("tokenCard.tokenInfo.labels.whitePaper")}}:</div>
-                <div class="click-able" @click="openUrl(tokenDetail.whitepaperLink)">
-                    {{ tokenDetail.whitepaperLink || '--' }}</div>
-            </div>
-            <div class="content__item">
-                <div class="label">{{$t("tokenCard.tokenInfo.labels.explorer")}}:</div>
-                <div class="click-able" @click="openUrl(tokenDetail.explorerLink)">
-                    {{ tokenDetail.explorerLink || '--' }}</div>
-            </div>
-            <div class="content__item">
-                <div class="label">{{$t("tokenCard.tokenInfo.labels.github")}}:</div>
-                <div class="click-able" @click="openUrl(tokenDetail.githubLink)">
-                    {{ tokenDetail.githubLink || '--' }}</div>
-            </div>
-            <div class="content__item">
-                <div class="label">{{$t("tokenCard.tokenInfo.labels.media")}}:</div>
-                <img src="~assets/imgs/facebook.svg" class="media-icon"
-                     v-show="tokenDetail.facebookLink"  @click="openUrl(tokenDetail.facebookLink)"/>
-                <img src="~assets/imgs/twitter.svg" class="media-icon"
-                     v-show="tokenDetail.twitterLink"  @click="openUrl(tokenDetail.twitterLink)"/>
-                <img src="~assets/imgs/telegram.svg" class="media-icon"
-                     v-show="tokenDetail.telegramLink"  @click="openUrl(tokenDetail.telegramLink)"/>
-            </div>
-        </div>
         <div v-show="tab === 'operator'" class="tab-content">
             <div class="content__item">
                 <span class="label">{{ $t('tradeCenter.operator.name') }}:</span>
@@ -99,7 +34,7 @@
 </template>
 
 <script>
-import confirm from 'components/confirm/confirm.vue';
+import confirm from 'h5Components/confirm/confirm.vue';
 import { getExplorerLink } from 'utils/getLink';
 import openUrl from 'utils/openUrl';
 import statistics from 'utils/statistics';
@@ -198,29 +133,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~components/confirm/moreTabConfirm.scss";
-
-.content__item {
-    word-break: break-word;
-    white-space: normal;
-    &._b {
-        margin-bottom: 10px;
-    }
-    .operator-img {
-        width: 30px;
-        height: 30px;
-        margin-left: 10px;
-        margin-top: -8px;
-    }
-    .tx-pair-list {
-        display: flex;
-        flex-wrap: wrap;
-        color: rgba(0,122,255,1);
-        .symbol {
-            white-space: nowrap;
-            margin-bottom: 6px;
-            margin-right: 30px;
-        }
-    }
-}
+@import "~h5Components/confirm/moreTabConfirm.scss";
+@import "./detail.scss";
 </style>

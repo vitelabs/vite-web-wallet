@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import confirm from 'components/confirm/confirm.vue';
+import confirm from 'h5Components/confirm/confirm.vue';
 import viteInput from 'components/viteInput';
 // import sendTx from 'utils/sendTx';
 import bigNumber from 'utils/bigNumber';

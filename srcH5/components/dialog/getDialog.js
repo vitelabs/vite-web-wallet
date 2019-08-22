@@ -8,11 +8,7 @@ const STATUS = {
     'CANCEL': 'CANCEL',
     'CONFIRMED': 'CONFRIMED'
 };
-const widthMap = {
-    narrow: '380px',
-    normal: '515px',
-    wide: '681px'
-};
+
 const getValue = function (key, defaultValue) {
     const dkey = `d${ key.slice(0, 1).toUpperCase() }${ key.slice(1) }`;
     if (this[key] !== undefined) return this[key];
@@ -85,12 +81,11 @@ const mixin = {
                 },
                 wrapper: {
                     width: '85%',
-                    'max-width': widthMap[this.Width],
+                    'max-width': '270px',
                     'max-height': '85%',
                     display: 'flex',
                     'flex-direction': 'column',
                     background: '#ffffff',
-                    'box-shadow': '0 2px 48px 1px rgba(176, 192, 237, 0.42)',
                     'border-radius': '2px'
                 },
                 title: {
@@ -109,12 +104,12 @@ const mixin = {
                     display: 'block',
                     float: 'right',
                     padding: '25px 0',
-                    width: '20px',
-                    height: '20px',
+                    width: '18px',
+                    height: '18px',
                     background: `url(${ closeIcon })`,
                     'background-repeat': 'no-repeat',
                     'background-position': 'center',
-                    'background-size': '20px 20px'
+                    'background-size': '18px 18px'
                 },
                 body: {
                     display: 'flex',

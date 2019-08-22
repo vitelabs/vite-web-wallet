@@ -123,5 +123,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~components/confirm/moreTabConfirm.scss";
+@import "~h5Components/confirm/moreTabConfirm.scss";
 </style>

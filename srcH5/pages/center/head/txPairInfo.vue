@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import viteConfirm from 'components/confirm/index.js';
+import viteConfirm from 'h5Components/confirm/index.js';
 import operatorIcon from 'h5Assets/imgs/operator_default.svg';
 
 let lastSymbol = null;
