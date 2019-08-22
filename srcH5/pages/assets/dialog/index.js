@@ -1,5 +1,5 @@
 import getDialog from 'h5Components/dialog/getDialog.js';
-import tokenInfoComp from './tokenInfo';
+import tokenInfoComp from 'h5Components/tokenInfo';
 import exWithdrawComp from './exWithdraw.vue';
 import exChargeComp from './exCharge.vue';
 

@@ -73,8 +73,6 @@ export default {
             return getTokenNameString(...args);
         },
         showDetail() {
-            console.log(tokenInfoDialog);
-            console.log(this.token);
             tokenInfoDialog({ token: this.token }).catch(e => {
                 console.error(e);
             });

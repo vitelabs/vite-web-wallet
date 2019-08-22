@@ -1149,7 +1149,8 @@
     },
     "mobileAssets": {
         "allAssets": "总资产折合({token})",
-        "tokenListTitle": "代币信息"
+        "tokenListTitle": "代币信息",
+        "tokenInfoTitle": "代币详情"
     },
     "mobileTradeCenter": {
         "highPrice": "高",
