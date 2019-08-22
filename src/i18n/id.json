@@ -527,7 +527,7 @@
         "maxAmt": "Jumlah penarikan harus dalam [{minAmount}, {maxAmount}]",
         "cancelLimitAmt": "Jumlah taruhan tidak boleh kurang dari {num}",
         "withdrawalStaking": "Penarikan Token Staked",
-        "myAddr": "Saya",
+        "myAddr": "Current Address",
         "confirm": {
             "help": {
                 "t1": "Apa itu Kuota?",
