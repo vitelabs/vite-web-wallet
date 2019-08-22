@@ -18,41 +18,42 @@
 
         <div class="list-wrapper">
             <div class="list-title">{{ $t('mobileDividend.listTitle') }}</div>
-            <div class="list-item" v-show="contentList && contentList.length"
-                 v-for="(item, i) in contentList" :key="i">
-                <span class="small-item big">{{ item.date }}</span>
-                <span class="small-item big"><span class="vx-amount">{{ item.vxQuantity }}</span> VX</span>
-                <span class="small-item">{{ item.VITE }} VITE</span>
-                <span class="small-item">{{ item.BTC }} BTC</span>
-                <span class="small-item">{{ item.ETH }} ETH</span>
-                <span class="small-item">{{ item.USD }} USD</span>
-            </div>
+            <list-view class="list-wrapper-view" :reachEnd="reachEnd">
+                <div slot="content">
+                    <div class="list-item" v-show="contentList && contentList.length"
+                         v-for="(item, i) in contentList" :key="i">
+                        <span class="small-item big">{{ item.date }}</span>
+                        <span class="small-item big"><span class="vx-amount">{{ item.vxQuantity }}</span> VX</span>
+                        <span class="small-item">{{ item.VITE }} VITE</span>
+                        <span class="small-item">{{ item.BTC }} BTC</span>
+                        <span class="small-item">{{ item.ETH }} ETH</span>
+                        <span class="small-item">{{ item.USD }} USD</span>
+                    </div>
+                </div>
+            </list-view>
+
             <div class="no-data" v-show="!contentList || !contentList.length">{{ $t('hint.noData') }}</div>
         </div>
-        <!-- <pagination slot="tableBottom" class="__tb_pagination"
-                        :currentPage="currentPage + 1" :toPage="fetchList"
-                        :totalPage="totalPage"></pagination> -->
     </div>
 </template>
 
 <script>
 import pool from './pool.vue';
-import pagination from 'components/pagination.vue';
 import { dividend } from 'services/trade';
 import date from 'utils/date';
 import bigNumber from 'utils/bigNumber';
+import listView from 'h5Components/listView.vue';
 
 export default {
-    components: { pagination, pool },
+    components: { pool, listView },
     mounted() {
         this.fetchList();
     },
     data() {
         return {
-            isShowMyList: '',
+            isInit: false,
             currentPage: 0,
             totalNum: 0,
-
             myDividend: {},
             list: []
         };
@@ -61,10 +62,6 @@ export default {
         address() {
             return this.$store.getters.activeAddr;
         },
-        totalPage() {
-            return Math.ceil(this.totalNum / 30);
-        },
-
         headList() {
             return [ {
                 text: this.$t('tradeDividend.date'),
@@ -107,7 +104,6 @@ export default {
             });
             return list;
         },
-
         myFullIncome() {
             return `≈${ this.getPrice(this.myDividend) }`;
         },
@@ -164,17 +160,25 @@ export default {
             return bigNumber.formatNum(amount, tokenSymbol ? map[tokenSymbol] : 8);
         },
 
+        reachEnd() {
+            this.fetchList(this.currentPage + 1);
+        },
         fetchList(pageNum) {
-            const offset = pageNum ? (pageNum - 1) * 30 : 0;
+            const offset = (pageNum || 0) * 30;
+            if (this.isInit && offset >= this.totalNum) {
+                return;
+            }
 
             dividend({
                 address: this.address,
                 offset
             }).then(data => {
                 this.totalNum = data ? data.total || 0 : 0;
-                this.currentPage = pageNum ? pageNum - 1 : 0;
+                this.currentPage = pageNum || 0;
                 this.myDividend = data ? data.dividendStat || {} : {};
-                this.list = data ? data.dividendList || [] : [];
+                const list = data ? data.dividendList || [] : [];
+                this.list = [].concat(this.list, list);
+                this.isInit = true;
             }).catch(err => {
                 console.warn(err);
                 this.myDividend = {};
@@ -243,12 +247,16 @@ export default {
 .list-wrapper {
     @include font-normal();
     color: rgba(62,74,89,0.6);
+    .list-wrapper-view {
+        max-height: 450px;
+    }
     .list-item {
         display: flex;
         flex-wrap: wrap;
         flex-direction: row;
         align-items: center;
-        border-bottom: 1px solid rgba(211,223,239,1);;
+        border-bottom: 1px solid rgba(211,223,239,1);
+        margin-bottom: 15px;
         .small-item {
             display: inline-block;
             width: 50%;
