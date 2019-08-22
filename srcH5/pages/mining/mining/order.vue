@@ -3,32 +3,27 @@
         <my-income :miningTotal="`${miningTotal}`"
                    :title="$t('mobileMining.orderTotalIncome', {token: 'VX'})">
         </my-income>
+        <mining-table :headList="headList" :contentList="content"></mining-table>
 
-        <wallet-table
-            class="mint-trade-table content tb"
-            :headList="headList"
-            :contentList="content"
-        >
-            <pagination
+        <!-- <pagination
                 slot="tableBottom"
                 class="__tb_pagination"
                 :currentPage="currentPage + 1"
                 :toPage="updateData"
                 :totalPage="taotalPage"
-            ></pagination>
-        </wallet-table>
+            ></pagination> -->
     </div>
 </template>
 <script>
 import { getOrderMiningDetail } from 'h5Services/tradeOperation';
-import walletTable from 'components/table/index.vue';
 import pagination from 'components/pagination.vue';
 import bigNumber from 'utils/bigNumber';
 import date from 'utils/date';
 import myIncome from './myIncome';
+import miningTable from './table';
 
 export default {
-    components: { walletTable, pagination, myIncome },
+    components: { pagination, myIncome, miningTable },
     data() {
         return {
             miningTotal: 0,
@@ -37,17 +32,11 @@ export default {
             miningList: [],
             headList: [
                 {
-                    text: this.$t('orderMining.tbHead.date'),
-                    cell: 'date'
-                },
-                {
                     text: this.$t('orderMining.tbHead.ratio'),
                     cell: 'ratio'
                 },
-                {
-                    text: this.$t('orderMining.tbHead.mining'),
-                    cell: 'mining'
-                }
+                { cell: 'amount' },
+                { cell: 'date' }
             ]
         };
     },
@@ -68,7 +57,10 @@ export default {
                 return {
                     date: date(item.date * 1000, this.$i18n.locale),
                     ratio: `${ (item.ratio * 100).toFixed(2) }%`,
-                    mining: `${ bigNumber.formatNum(item.miningAmount || 0, 8) } VX`
+                    amount: {
+                        amount: `${ bigNumber.formatNum(item.miningAmount || 0, 8) }`,
+                        token: 'VX'
+                    }
                 };
             });
         },

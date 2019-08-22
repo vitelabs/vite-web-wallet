@@ -1187,6 +1187,8 @@
         "tradeTotalIncome": "交易挖矿总收益({token})",
         "stakingTotalIncome": "抵押挖矿总收益({token})",
         "inviteTotalIncome": "邀请挖矿总收益({token})",
-        "orderTotalIncome": "挂单挖矿总收益({token})"
+        "orderTotalIncome": "挂单挖矿总收益({token})",
+        "fee": "手续费金额",
+        "listTitle": "挖矿明细"
     }
 }
