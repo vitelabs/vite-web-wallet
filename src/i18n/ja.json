@@ -527,7 +527,7 @@
         "maxAmt": "引き出し金額は[{minAmount}、{maxAmount}]である必要があります",
         "cancelLimitAmt": "ステーキング額は{num}未満にはできません",
         "withdrawalStaking": "ステークトークンの引き出し",
-        "myAddr": "私",
+        "myAddr": "Current Address",
         "confirm": {
             "help": {
                 "t1": "クオータとは？",
