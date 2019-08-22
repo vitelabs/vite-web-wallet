@@ -4,33 +4,28 @@
                    :title="$t('mobileMining.stakingTotalIncome', {token: 'VX'})">
             <is-staking></is-staking>
         </my-income>
-
-        <wallet-table
-            class="mint-trade-table tb"
-            :headList="pledgeHeadList"
-            :contentList="content">
-            <pagination
+        <mining-table :headList="pledgeHeadList" :contentList="content"></mining-table>
+        <!-- <pagination
                 slot="tableBottom"
                 class="__tb_pagination"
                 :currentPage="stakeCurrentPage + 1"
                 :toPage="fetchMiningStake"
                 :totalPage="stakeTotalPage"
-            ></pagination>
-        </wallet-table>
+            ></pagination> -->
     </div>
 </template>
 
 <script>
-import walletTable from 'components/table/index.vue';
 import pagination from 'components/pagination';
 import { miningPledge } from 'services/trade';
 import bigNumber from 'utils/bigNumber';
 import date from 'utils/date';
 import myIncome from '../myIncome';
 import isStaking from './isStaking';
+import miningTable from '../table';
 
 export default {
-    components: { walletTable, pagination, myIncome, isStaking },
+    components: { pagination, myIncome, isStaking, miningTable },
     data() {
         return {
             miningTotal: 0,
@@ -39,17 +34,11 @@ export default {
             stakeList: [],
             pledgeHeadList: [
                 {
-                    text: this.$t('tradeMining.tbHead.date'),
-                    cell: 'date'
-                },
-                {
                     text: this.$t('tradeMining.tbHead.pledge'),
                     cell: 'pledge'
                 },
-                {
-                    text: this.$t('tradeMining.tbHead.mining'),
-                    cell: 'mining'
-                }
+                { cell: 'amount' },
+                { cell: 'date' }
             ]
         };
     },
@@ -68,13 +57,12 @@ export default {
         content() {
             return this.stakeList.map(item => {
                 return {
-                    date: date(item.date * 1000, this.$i18n.locale),
-                    fee: `${ bigNumber.formatNum(item.feeAmount || 0, 8) } ${
-                        item.miningToken
-                    }`,
-                    pledge: `${ bigNumber.formatNum(item.pledgeAmount || 0,
-                        8) } VITE`,
-                    mining: `${ bigNumber.formatNum(item.miningAmount || 0, 8) } VX`
+                    pledge: `${ bigNumber.formatNum(item.pledgeAmount || 0, 8) } VITE`,
+                    amount: {
+                        amount: `${ bigNumber.formatNum(item.miningAmount || 0, 8) }`,
+                        token: 'VX'
+                    },
+                    date: date(item.date * 1000, this.$i18n.locale)
                 };
             });
         },
