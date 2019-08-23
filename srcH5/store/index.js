@@ -1,22 +1,22 @@
 import Vue from 'vue';
 import vuex from 'vuex';
 
-import rate from 'store/exchange/rate.js';
-import depth from 'store/exchange/depth.js';
-import activeTx from 'store/exchange/activeTx';
-import balance from 'store/exchange/balance';
-import tokens from 'store/exchange/tokens';
-import currentOpenOrders from 'store/exchange/currentOpenOrders';
-import limit from 'store/exchange/limit';
-import fee from 'store/exchange/fee';
-import latestOrder from 'store/exchange/latestOrder';
-import tokenDecimalsLimit from 'store/exchange/tokenDecimalsLimit';
-import dexFundUnreceived from 'store/exchange/dexFundUnreceived';
-import ledger from 'store/ledger';
-import market from './market';
 import env from './env';
 import account from './account';
 import activeTxPair from './activeTxPair';
+import ledger from 'store/ledger';
+import balance from 'store/exchange/balance';
+import dexFundUnreceived from 'store/exchange/dexFundUnreceived';
+import fee from 'store/exchange/fee';
+import currentOpenOrders from 'store/exchange/currentOpenOrders';
+import latestOrder from 'store/exchange/latestOrder';
+import activeTx from 'store/exchange/activeTx';
+import rate from 'store/exchange/rate.js';
+import depth from 'store/exchange/depth.js';
+import market from './market';
+import tokens from 'store/exchange/tokens';
+import tokenDecimalsLimit from 'store/exchange/tokenDecimalsLimit';
+import limit from 'store/exchange/limit';
 
 const exchange = {
     exchangeRate: rate,

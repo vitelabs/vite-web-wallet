@@ -1,26 +1,13 @@
-import getQuery from 'utils/query';
+import env from 'h5Utils/envFromURL';
 
-const query = getQuery();
+let currency = env.currency;
+if (!currency && env.lang) {
+    currency = env.lang === 'zh' ? 'cny' : 'usd';
+}
 
-const state = {
-    address: query.address,
-    currency: query.currency || 'usd',
-    lang: query.lang || 'en'
-};
-
-const mutations = {
-    setLang(state, lang) {
-        state.lang = lang;
-        if (!state.currency) {
-            state.currency = lang === 'zh' ? 'cny' : 'usd';
-        }
-    }
-};
+const state = { currency: currency || 'en' };
 
 const getters = {
-    activeAddr(state) {
-        return state.address || '';
-    },
     currencySymbol(state) {
         if (!state.currency) {
             return '';
@@ -33,4 +20,4 @@ const getters = {
     }
 };
 
-export default { state, mutations, getters };
+export default { state, getters };

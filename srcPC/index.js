@@ -9,9 +9,9 @@ import './wallet';
 import Vue from 'vue';
 
 import App from 'pcPages/index.vue';
-import router from './router/index.js';
+import router from 'pcRouter/index.js';
 
-import i18n from 'i18n';
+import i18n from 'pcI18n';
 import store from 'store';
 
 import plugin from 'plugins/addPlugin';

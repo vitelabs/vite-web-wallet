@@ -16,7 +16,7 @@ block content
 </template>
 
 <script>
-import { getValidBalance } from 'utils/validations';
+import { getValidBalance } from 'h5Utils/validations';
 import statistics from 'utils/statistics';
 // import sendTx from 'utils/sendTx';
 import debounce from 'lodash/debounce';

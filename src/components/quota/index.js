@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import i18n from 'i18n';
+import i18n from 'pcI18n';
 
 // [TODO]
 import router from 'pcRouter/index.js';

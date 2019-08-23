@@ -133,7 +133,7 @@ export default {
                     ? this.$t('tokenCard.tokenInfo.labels.crossType')
                     : this.$t('tokenCard.tokenInfo.labels.originType');
             tokenDetail.explorerLink = tokenDetail.explorerLink
-                || (tokenDetail.gateway ? null : getExplorerLink());
+                || (tokenDetail.gateway ? null : getExplorerLink(this.$i18n.locale));
             tokenDetail.showTotalSupply = BigNumber.toBasic(tokenDetail.totalSupply, tokenDetail.tokenDecimals);
 
             return tokenDetail;
@@ -169,7 +169,7 @@ export default {
             this.tab = '';
         },
         goToTokenDetail() {
-            const l = `${ getExplorerLink() }token/${ this.tokenDetail.tokenId }`;
+            const l = `${ getExplorerLink(this.$i18n.locale) }token/${ this.tokenDetail.tokenId }`;
             this.openUrl(l);
         },
         openUrl(url) {

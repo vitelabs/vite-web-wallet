@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import closeIcon from 'h5Assets/imgs/confirm_close.svg';
 import store from 'h5Store';
-import i18n from 'i18n';
+import i18n from 'h5I18n';
 
 const STATUS = {
     'CLOSE': 'CLOSE',
