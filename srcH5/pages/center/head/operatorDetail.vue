@@ -21,9 +21,8 @@
             <div class="content__item _b">
                 <span class="label">{{ $t('tradeCenter.operator.txPair') }}:</span>
                 <div class="tx-pair-list">
-                    <template v-for="(pairs, category) in operatorTradePairs">
-                        <span class="symbol" v-for="(symbol) in pairs" :key="symbol"
-                              @click="switchTxPair({ category, symbol })">
+                    <template v-for="(pairs) in operatorTradePairs">
+                        <span class="symbol" v-for="(symbol) in pairs" :key="symbol">
                             {{symbol.replace('_', '/') }}
                         </span>
                     </template>
@@ -37,7 +36,6 @@
 import confirm from 'h5Components/confirm/confirm.vue';
 import { getExplorerLink } from 'utils/getLink';
 import openUrl from 'utils/openUrl';
-import statistics from 'utils/statistics';
 import BigNumber from 'utils/bigNumber';
 import txPairInfo from './txPairInfo.vue';
 import operatorIcon from 'assets/imgs/operator_icon.svg';
@@ -68,7 +66,7 @@ export default {
                     ? this.$t('tokenCard.tokenInfo.labels.crossType')
                     : this.$t('tokenCard.tokenInfo.labels.originType');
             tokenDetail.explorerLink = tokenDetail.explorerLink
-                || (tokenDetail.gateway ? null : getExplorerLink());
+                || (tokenDetail.gateway ? null : getExplorerLink(this.$i18n.locale));
             tokenDetail.showTotalSupply = BigNumber.toBasic(tokenDetail.totalSupply, tokenDetail.tokenDecimals);
 
             return tokenDetail;
@@ -104,16 +102,11 @@ export default {
             this.tab = '';
         },
         goToTokenDetail() {
-            const l = `${ getExplorerLink() }token/${ this.tokenDetail.tokenId }`;
+            const l = `${ getExplorerLink(this.$i18n.locale) }token/${ this.tokenDetail.tokenId }`;
             this.openUrl(l);
         },
         openUrl(url) {
             url && openUrl(url);
-        },
-        switchTxPair({ category, symbol }) {
-            statistics.event(this.$route.name, `operator_switchTxPair_${ category }_${ symbol }`, this.address || '');
-            this.$store.commit('switchTradePair', { category, symbol });
-            this.close();
         },
         getOverview(overview) {
             if (!overview) {

@@ -65,7 +65,7 @@ import slider from 'components/slider';
 import viteInput from 'components/viteInput';
 // import sendTx from 'utils/sendTx';
 import BigNumber from 'utils/bigNumber';
-import { verifyAmount, checkAmountFormat } from 'utils/validations';
+import { verifyAmount, checkAmountFormat } from 'h5Utils/validations';
 import statistics from 'utils/statistics';
 
 export default {
@@ -192,33 +192,6 @@ export default {
         },
         fee() {
             return this.$store.getters.exMakerFee;
-        },
-        realPrice() {
-            if (!this.rate || this.priceErr || !this.price) {
-                return '';
-            }
-
-            const pre = this.$store.state.env.currency === 'cny' ? '≈¥' : '≈$';
-
-            if (!this.activeTxPair) {
-                return `${ pre }0`;
-            }
-
-            const realPrice = BigNumber.multi(this.price || 0, this.rate || 0, 6);
-            return BigNumber.onlyFormat(realPrice, 2);
-        },
-        rate() {
-            const rateList = this.$store.state.exchangeRate.rateMap || {};
-            const tokenId
-                = this.activeTxPair && this.activeTxPair.quoteToken
-                    ? this.activeTxPair.quoteToken
-                    : null;
-            const coin = this.$store.state.env.currency;
-
-            if (!tokenId || !rateList[tokenId]) {
-                return null;
-            }
-            return rateList[tokenId][`${ coin }Rate`] || null;
         },
         minAmount() {
             const minAmount = this.$store.state.exchangeLimit.minAmount;

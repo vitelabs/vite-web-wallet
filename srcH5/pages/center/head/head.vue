@@ -64,7 +64,7 @@ export default {
             return '';
         },
         realPrice() {
-            return this.$store.state.exchangeActiveTxPair.realClosePrice;
+            return this.$store.getters.activeTxPairRealClosePrice;
         },
         ftokenDetail() {
             return this.$store.state.exchangeTokens.ftoken;
@@ -87,7 +87,7 @@ export default {
                     ? this.$t('tokenCard.tokenInfo.labels.crossType')
                     : this.$t('tokenCard.tokenInfo.labels.originType');
             tokenDetail.explorerLink = tokenDetail.explorerLink
-                || (tokenDetail.gateway ? null : getExplorerLink());
+                || (tokenDetail.gateway ? null : getExplorerLink(this.$i18n.locale));
             tokenDetail.showTotalSupply = BigNumber.toBasic(tokenDetail.totalSupply, tokenDetail.tokenDecimals);
 
             return tokenDetail;

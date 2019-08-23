@@ -1,6 +1,6 @@
 import { constant } from '@vite/vitejs';
 import BigNumber from 'utils/bigNumber';
-import i18n from 'pcI18n';
+import i18n from 'h5I18n';
 
 const Vite_Token_Info = constant.Vite_Token_Info;
 const MaxDecimals = 8;

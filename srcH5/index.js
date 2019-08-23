@@ -10,7 +10,7 @@ import Vue from 'vue';
 import App from 'h5Pages/index.vue';
 import router from 'h5Router/index.js';
 
-import i18n from 'i18n';
+import i18n from 'h5I18n';
 import store from 'h5Store';
 
 import plugin from 'plugins/addPlugin';

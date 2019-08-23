@@ -25,7 +25,7 @@ router.beforeEach((to, from, next) => {
 
     // Go to explorer.
     if (to.name === 'viteExplorer') {
-        openUrl(getExplorerLink());
+        openUrl(getExplorerLink(this.$i18n.locale));
         return;
     }
 

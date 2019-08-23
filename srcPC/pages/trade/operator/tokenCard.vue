@@ -67,15 +67,15 @@ export default {
         btnUnuse() {
             return !this.address || !this.isValidAddress;
         },
-        rateMap() {
-            return this.$store.state.exchangeRate.rateMap || {};
+        currencyRateList() {
+            return this.$store.getters.currencyRateList || {};
         },
-        currency() {
-            return this.$store.state.env.currency;
+        btcRateList() {
+            return this.$store.getters.btcRateList || {};
         },
         currencyIncome() {
             let amount = 0;
-            const pre = this.currency === 'cny' ? '≈¥' : '≈$';
+            const pre = `≈${ this.$store.getters.currencySymbol }`;
 
             for (const tokenId in this.token.income) {
                 const rate = this.getCurrencyRate(tokenId);
@@ -102,17 +102,16 @@ export default {
     },
     methods: {
         getCurrencyRate(tokenId) {
-            if (!tokenId || !this.rateMap[tokenId]) {
+            if (!tokenId) {
                 return null;
             }
-
-            return this.rateMap[tokenId][`${ this.currency }Rate`] || null;
+            return this.currencyRateList[tokenId] || null;
         },
         getBtcRate(tokenId) {
-            if (!tokenId || !this.rateMap[tokenId]) {
+            if (!tokenId) {
                 return null;
             }
-            return this.rateMap[tokenId].btcRate || null;
+            return this.btcRateList[tokenId] || null;
         },
         formatNum(num) {
             return BigNumber.onlyFormat(num);

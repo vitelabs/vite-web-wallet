@@ -2,7 +2,7 @@ import sendTx from 'utils/sendTx';
 import { constant } from '@vite/vitejs';
 import { getClient } from 'utils/request';
 import viteClient from 'utils/viteClient';
-import i18n from 'i18n';
+import i18n from 'pcI18n';
 
 const version = 'v1';
 const path = `${ process.env.dexApiServer }${ version }`;

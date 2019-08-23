@@ -146,7 +146,7 @@ export default {
     },
     methods: {
         goToTokenDetail() {
-            const l = `${ getExplorerLink() }token/${ this.token.tokenId }`;
+            const l = `${ getExplorerLink(this.$i18n.locale) }token/${ this.token.tokenId }`;
             openUrl(l);
         },
         goToGateOffical() {
@@ -214,7 +214,7 @@ export default {
                     ? this.$t('tokenCard.tokenInfo.labels.crossType')
                     : this.$t('tokenCard.tokenInfo.labels.originType');
                 this.tokenDetail.explorerLink = this.tokenDetail.explorerLink
-                    || (this.tokenDetail.gateway ? null : getExplorerLink());
+                    || (this.tokenDetail.gateway ? null : getExplorerLink(this.$i18n.locale));
                 this.tokenDetail.showTotalSupply = BigNumber.toBasic(this.tokenDetail.totalSupply, this.tokenDetail.tokenDecimals);
             }).catch(err => {
                 console.warn(err);

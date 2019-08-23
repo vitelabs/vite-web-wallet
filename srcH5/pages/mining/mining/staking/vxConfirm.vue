@@ -37,7 +37,7 @@ import viteInput from 'components/viteInput';
 // import sendTx from 'utils/sendTx';
 import bigNumber from 'utils/bigNumber';
 import statistics from 'utils/statistics';
-import { verifyAmount, verifyWithdrawAmount } from 'utils/validations';
+import { verifyAmount, verifyWithdrawAmount } from 'h5Utils/validations';
 import router from 'h5Router';
 import { constant } from '@vite/vitejs';
 

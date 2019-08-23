@@ -2,13 +2,13 @@ import Vue from 'vue';
 import VueI18n from 'vue-i18n';
 import localStorage from 'utils/store';
 
-import en from './en';
-import zh from './zh';
-import id from './id';
-// Import de from './de';
-// import fr from './fr';
-// import ja from './ja';
-// import ru from './ru';
+import en from 'i18n/en';
+import zh from 'i18n/zh';
+import id from 'i18n/id';
+// Import de from 'i18n/de';
+// import fr from 'i18n/fr';
+// import ja from 'i18n/ja';
+// import ru from 'i18n/ru';
 
 
 let appLocale = window.viteWalletI18n ? window.viteWalletI18n.locale : '';

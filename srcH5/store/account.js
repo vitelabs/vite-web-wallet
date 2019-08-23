@@ -2,16 +2,16 @@ import { constant, addrAccount } from '@vite/vitejs';
 
 import bigNumber from 'utils/bigNumber';
 import { timer } from 'utils/asyncFlow';
-import getQuery from 'utils/query';
 import { defaultTokenMap } from 'utils/constant';
 import { getTokenIcon } from 'utils/tokenParser';
 import client from 'utils/viteClient';
+import env from 'h5Utils/envFromURL';
 
 let balanceInfoInst = null;
-const query = getQuery();
+const activeAcc = new addrAccount({ address: env.address, client });
 
 const state = {
-    activeAcc: new addrAccount({ address: query.address, client }),
+    address: env.address || '',
     onroad: { balanceInfos: {} },
     balance: { balanceInfos: {} }
 };
@@ -41,13 +41,9 @@ const mutations = {
 };
 
 const actions = {
-    startLoopBalance({
-        commit,
-        dispatch,
-        state
-    }) {
+    startLoopBalance({ commit, dispatch }) {
         dispatch('stopLoopBalance');
-        balanceInfoInst = new timer(() => state.activeAcc.getBalance().then(data => {
+        balanceInfoInst = new timer(() => activeAcc.getBalance().then(data => {
             commit('commitBalanceInfo', data);
         }), 1000);
         balanceInfoInst.start();
@@ -59,6 +55,9 @@ const actions = {
 };
 
 const getters = {
+    activeAddr(state) {
+        return state.address || '';
+    },
     balanceInfo(state) {
         // -------- merge balance & onroad
         const balanceInfo = Object.create(null);

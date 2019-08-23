@@ -47,8 +47,30 @@ const actions = {
     }
 };
 
+const getters = {
+    currencyRateList(state, getters, rootState) {
+        const rateList = state.rateMap || {};
+        const coin = rootState.env.currency;
+
+        const _rateList = {};
+        for (const tokenId in rateList) {
+            _rateList[tokenId] = rateList[tokenId][`${ coin }Rate`];
+        }
+        return _rateList;
+    },
+    btcRateList(state) {
+        const rateList = state.rateMap || {};
+        const _rateList = {};
+        for (const tokenId in rateList) {
+            _rateList[tokenId] = rateList[tokenId]['btcRate'];
+        }
+        return _rateList;
+    }
+};
+
 export default {
     state,
+    getters,
     mutations,
     actions
 };

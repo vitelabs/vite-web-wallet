@@ -13,7 +13,6 @@ export default {
         const receiveInviteDialog = getDialog(receiveInvite);
         receiveInviteDialog();
 
-        this.$store.commit('setLang', this.$i18n.locale);
         this.$store.dispatch('startLoopBalance');
         this.$store.dispatch('startLoopExchangeBalance');
         this.$store.dispatch('startLoopExchangeRate');

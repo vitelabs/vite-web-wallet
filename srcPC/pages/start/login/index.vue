@@ -210,7 +210,7 @@ export default {
     },
     methods: {
         getWallet() {
-            openUrl(getAppLink());
+            openUrl(getAppLink(this.$i18n.locale));
         },
         destoryVB() {
             console.log('destory vb');

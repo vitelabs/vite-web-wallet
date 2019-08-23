@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import store from 'h5Store';
-import i18n from 'i18n';
+import i18n from 'h5I18n';
 
 export function insertTo(component, propsDefault = {}, ele) {
     const vueComp = Vue.extend(component);

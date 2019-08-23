@@ -32,7 +32,7 @@ export default {
             return this.activeTxPair ? this.activeTxPair.upDownPrev : '0';
         },
         realPrice() {
-            return this.$store.state.exchangeActiveTxPair.realClosePrice;
+            return this.$store.getters.activeTxPairRealClosePrice;
         },
         closePrice() {
             return this.activeTxPair && this.activeTxPair.closePrice ? this.activeTxPair.closePrice : '';

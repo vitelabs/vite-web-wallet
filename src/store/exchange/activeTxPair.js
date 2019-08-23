@@ -1,9 +1,6 @@
 import BigNumber from 'utils/bigNumber';
 
-const state = {
-    activeTxPair: null,
-    realClosePrice: ''
-};
+const state = { activeTxPair: null };
 
 const mutations = {
     exSetActiveTxPair(state, txPair) {
@@ -16,9 +13,6 @@ const mutations = {
             }
         }
         isChange && (state.activeTxPair = Object.assign({}, txPair));
-    },
-    exSetRealClosePrice(state, realClosePrice) {
-        state.realClosePrice = realClosePrice || '';
     }
 };
 
@@ -60,6 +54,31 @@ const getters = {
         activeTxPair.originTradeTokenSymbol = activeTxPair.tradeTokenSymbol.split('-')[0] || '';
 
         return activeTxPair;
+    },
+    activeTxPairRealClosePrice(state, getters, rootState, rootGetters) {
+        const pre = rootGetters.currencySymbol;
+        if (!state.activeTxPair) {
+            return `${ pre }0`;
+        }
+
+        const _price = BigNumber.multi(state.activeTxPair.closePrice || 0, getters.activeTxPairQuoteCurrencyRate, 6);
+        const _realPrice = BigNumber.normalFormatNum(_price, 6);
+        const _realPrice2 = BigNumber.normalFormatNum(_realPrice, 2);
+
+        if (+_realPrice2 !== 0) {
+            return pre + BigNumber.onlyFormat(_realPrice2, 2);
+        }
+        return pre + BigNumber.onlyFormat(_realPrice, 2);
+    },
+    activeTxPairQuoteCurrencyRate(state, getters, rootState) {
+        const rateList = rootState.exchangeRate.rateMap || {};
+        const tokenId = state.activeTxPair && state.activeTxPair.quoteToken ? state.activeTxPair.quoteToken : null;
+        const coin = rootState.env.currency;
+
+        if (!tokenId || !rateList[tokenId]) {
+            return null;
+        }
+        return rateList[tokenId][`${ coin }Rate`] || null;
     }
 };
 

@@ -2,7 +2,7 @@ import { getClient } from "utils/request";
 import { utils } from "@vite/vitejs";
 import sendTx from "utils/sendTx";
 import { addrSpace } from "utils/storageSpace";
-import i18n from "i18n";
+import i18n from "pcI18n";
 
 const langMap = {
   zh: "zh-cn",

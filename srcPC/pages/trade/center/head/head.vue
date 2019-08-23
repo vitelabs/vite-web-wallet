@@ -78,7 +78,7 @@ export default {
             return '';
         },
         realPrice() {
-            return this.$store.state.exchangeActiveTxPair.realClosePrice;
+            return this.$store.getters.activeTxPairRealClosePrice;
         }
     },
     methods: {
