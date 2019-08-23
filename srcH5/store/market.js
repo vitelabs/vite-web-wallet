@@ -1,4 +1,4 @@
-import { baseToken, marketsClosed } from 'services/trade';
+import { marketsClosed } from 'services/trade';
 import getQuery from 'utils/query';
 
 const quoteTokenCategory = [ 'BTC', 'ETH', 'VITE', 'USDT' ];
@@ -11,19 +11,14 @@ const DefaultCategory = category && quoteTokenCategory.indexOf(category) !== -1 
 const DefaultSymbol = symbol || 'GRIN-000_BTC-000';
 
 const state = {
-    quoteTokenCategory,
     curentCategory: DefaultCategory,
     DefaultSymbol,
-    marketMap: [],
     marketClosed: []
 };
 
 const mutations = {
     setCurentCategory(state, category) {
         state.curentCategory = category;
-    },
-    setMarketMap(state, marketMap) {
-        state.marketMap = marketMap;
     },
     setMarketClosed(state, marketClosed) {
         state.marketClosed = marketClosed;
@@ -35,9 +30,6 @@ const mutations = {
 
         state.curentCategory = category;
         state.DefaultSymbol = symbol;
-    },
-    clearDefaultSymbol(state) {
-        state.DefaultSymbol = null;
     }
 };
 
@@ -55,19 +47,6 @@ const actions = {
             txPair = { symbol: DefaultSymbol };
         }
         dispatch('dexFetchActiveTxPair', txPair);
-    },
-    updateMarketMap({ commit, dispatch }) {
-        // Add quote token
-        baseToken().then(data => {
-            const marketMap = data || [];
-            commit('setMarketMap', marketMap);
-
-            const tokenIds = [];
-            marketMap.forEach(({ tokenId }) => {
-                tokenIds.push(tokenId);
-            });
-            dispatch('addRateTokens', tokenIds);
-        });
     },
     getMarketsClosed({ commit }) {
         marketsClosed().then(data => {
