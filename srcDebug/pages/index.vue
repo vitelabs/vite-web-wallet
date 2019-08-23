@@ -35,7 +35,6 @@ export default {
     methods: {
         back() {
             this.iframeSrc = '';
-            // this.$router.back();
         },
         goAssets() {
             this.iframeSrc = `${ location.origin }/mobiledex#/assets?address=${ this.address }`;
