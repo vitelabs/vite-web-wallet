@@ -124,7 +124,8 @@ const mixin = {
                     'line-height': '18px'
                 },
                 btnGroup: {
-                    'font-family': 'PingFangSC-Semibold, arial, sans-serif',
+                    'font-family': 'PingFangSC, arial, sans-serif',
+                    'font-weight': 600,
                     padding: '0 16px',
                     display: 'flex',
                     'min-height': '40px',
