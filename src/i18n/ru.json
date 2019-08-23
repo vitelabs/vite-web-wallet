@@ -149,11 +149,12 @@
         "bigger0": "Значение должно быть больше 0",
         "operateSuccess": "Операция Выполнена Успешно",
         "operateFail": "Операция Не Выполнена",
-        "unreceived": "Разблокируйте свой кошелек перед использованием"
+        "unreceived": "Разблокируйте свой кошелек перед использованием",
+        "unLogin": "Please login before using referral code"
     },
     "beforeUse": {
         "title": "Прочитайте перед использованием",
-        "text1": "В целях безопасности ваших средств, функция создания учетной записи временно не поддерживается в веб-кошельке. Пожалуйста, скачайте Vite Приложение, чтобы создать аккаунт. Платформа Vite предупреждает вас, что если вы посетите фишинговый веб-сайт или потеряете резервную копию, наша компания не сможет вернуть ваши средства.",
+        "text1": "For your funds' safety, account creation function is not currently supported on web wallet. Please download Vite App to create an account. Vite platform would like to warn you that if you visit a phishing website or lose you backup, our company cannot recover your funds.",
         "text2": "Обратите внимание, что на наших веб-сайтах не хранятся ваши личные ключи или сид фразы. Поэтому вам нужно будет восстановить свою учетную запись с помощью с фразы, если вы решите сменить браузер, очистить локальные файлы cookie или сменить ПК.",
         "text3": "Пожалуйста, примите надлежащие меры предосторожности, чтобы точно записать и безопасно сохранить сид фразу. Даже малейшая ошибка приведет к тому, что вы не сможете успешно восстановить свой адрес."
     },
@@ -232,7 +233,7 @@
         }
     },
     "startCreate": {
-        "notice": "В целях безопасности ваших средств функция создания учетной записи временно не поддерживается в веб-кошельке. Пожалуйста, скачайте Vite App, чтобы создать учётную запись.",
+        "notice": "For your funds' safety, account creation function is not currently supported on web wallet. Please download Vite App to create an account.",
         "goLogin": "Войти",
         "goDex": "Перейти к ViteX"
     },
