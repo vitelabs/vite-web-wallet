@@ -129,7 +129,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "assets/scss/vars.scss";
+@import "h5Assets/scss/vars.scss";
 
 .filter-root {
     display: flex;
@@ -139,7 +139,7 @@ export default {
 
     .filter {
         color: #5e6875;
-        @include font-family-normal();
+        @include font-normal();
         width: 132px;
 
         > * {
@@ -178,8 +178,7 @@ export default {
         color: #007aff;
         border-radius: 2px;
         border: 1px solid #007aff;
-        font-family: $font-normal-b;
-        font-weight: normal;
+        @include font-normal();
         text-align: center;
         line-height: 28px;
         margin-right: 8px;

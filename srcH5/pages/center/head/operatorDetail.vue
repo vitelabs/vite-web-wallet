@@ -134,5 +134,28 @@ export default {
 
 <style lang="scss" scoped>
 @import "~h5Components/confirm/moreTabConfirm.scss";
-@import "./detail.scss";
+
+.content__item {
+    word-break: break-word;
+    white-space: normal;
+    &._b {
+        margin-bottom: 10px;
+    }
+    .operator-img {
+        width: 30px;
+        height: 30px;
+        margin-left: 10px;
+        margin-top: -8px;
+    }
+    .tx-pair-list {
+        display: flex;
+        flex-wrap: wrap;
+        color: rgba(0,122,255,1);
+        .symbol {
+            white-space: nowrap;
+            margin-bottom: 6px;
+            margin-right: 8px;
+        }
+    }
+}
 </style>
