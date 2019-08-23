@@ -137,7 +137,6 @@ module.exports = {
         quiet: false,
         host: '0.0.0.0',
         port: 8081,
-        hot: true,
         proxy: {
             '/trade': {
                 target: 'http://localhost:8081',

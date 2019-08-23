@@ -17,7 +17,7 @@ block content
 <script>
 import { bindCode } from 'h5Services/tradeOperation';
 import { doUntill } from 'utils/asyncFlow';
-import { emptySpace } from 'utils/storageSpace';
+// import { emptySpace } from 'utils/storageSpace';
 
 export default {
     async beforeMount() {
@@ -26,10 +26,10 @@ export default {
         } catch (e) {
             console.log('get bind code error', e);
         }
-        const code = emptySpace.getItem('INVITE_CODE');
-        if (code) {
-            this.code = code;
-        }
+        // const code = emptySpace.getItem('INVITE_CODE');
+        // if (code) {
+        //     this.code = code;
+        // }
         this.status = 'LOADED';
     },
     data() {
