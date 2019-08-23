@@ -22,6 +22,9 @@ export default {
             this.$store.dispatch('addRateTokens', val);
         }
     },
+    created() {
+        this.$store.dispatch('startLoopBalance');
+    },
     beforeMount() {
         this.$store.dispatch('startLoopExchangeRate');
     },

@@ -86,9 +86,9 @@ const getters = {
                 tokenId = i,
                 icon = getTokenIcon(i)
             } = Object.assign({},
-                defaultTokenMap[i],
+                defaultTokenMap[i] || {},
                 balanceInfo[i] || {},
-                exBalance[i]);
+                exBalance[i] || {});
 
             const currencyRate = rootGetters.currencyRateList[i] || 0;
             const totalExAsset = bigNumber.multi(bigNumber.toBasic(totalExAmount || 0, decimals), currencyRate);
@@ -136,7 +136,7 @@ const getters = {
         return Object.keys(allToken)
             .filter(i => {
                 const walletAmount = getters.balanceInfo[i] ? getters.balanceInfo[i].totalAmount : 0;
-                const exAmount = exBalance[i] ? exBalance[i].totalExAmount : 0;
+                const exAmount = exBalance[i] ? exBalance[i].totalExAmount || 0 : 0;
                 return (!bigNumber.isEqual(walletAmount, 0) || !bigNumber.isEqual(exAmount, 0)) && contains.indexOf(i) === -1;
             })
             .map(i => {
@@ -153,7 +153,7 @@ const getters = {
                     owner = '',
                     tokenId = i,
                     icon = getTokenIcon(i)
-                } = Object.assign({}, balanceInfo[i] || {}, allToken[i] || {});
+                } = Object.assign({}, balanceInfo[i] || {}, exBalance[i] || {});
 
                 const currencyRate = rootGetters.currencyRateList[i] || 0;
                 const totalExAsset = bigNumber.multi(bigNumber.toBasic(totalExAmount || 0, decimals), currencyRate);

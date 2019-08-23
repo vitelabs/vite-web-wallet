@@ -13,8 +13,6 @@ export default {
         const receiveInviteDialog = getDialog(receiveInvite);
         receiveInviteDialog();
 
-        this.$store.dispatch('startLoopBalance');
-        this.$store.dispatch('startLoopExchangeBalance');
         this.$store.dispatch('startLoopExchangeRate');
         this.$store.dispatch('exFetchLatestOrder');
     }
