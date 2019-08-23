@@ -83,7 +83,8 @@ export default {
                 .catch(e => {
                     if (e && e.error && e.error.code === 12002) {
                         router.push({ name: 'startLogin' });
-                        return Promise.resolve();
+                        this.close();
+                        return;
                     }
                     this.$toast(this.$t('assets.invite.failToast'), e);
                 });
