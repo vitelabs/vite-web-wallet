@@ -36,6 +36,7 @@ if (process.env.NODE_ENV === 'dev') {
 }
 if (process.env.NODE_ENV === 'test') {
     webpackConfig = merge(webpackConfig, testConfig);
+    webpackConfig = merge(webpackConfig, debugConfig);
 }
 if (process.env.NODE_ENV === 'production') {
     webpackConfig = merge(webpackConfig, prodConfig);
