@@ -45,4 +45,6 @@ store.registerModule('env', env);
 store.registerModule('account', account);
 store.registerModule('ledger', ledger);
 
+store.dispatch('startLoopExchangeBalance');
+
 export default store;

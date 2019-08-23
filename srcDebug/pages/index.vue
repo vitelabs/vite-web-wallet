@@ -37,20 +37,20 @@ export default {
             this.iframeSrc = '';
         },
         goAssets() {
-            this.iframeSrc = `${ location.origin }/mobiledex#/assets?address=${ this.address }`;
+            this.iframeSrc = `${ location.origin }/mobiledex#/assets?address=${ this.address }&lang=${ this.$i18n.locale }`;
         },
         goTrade(txPair) {
-            let iframeSrc = `${ location.origin }/mobiledex?address=${ this.address }`;
+            let iframeSrc = `${ location.origin }/mobiledex?address=${ this.address }&lang=${ this.$i18n.locale }`;
             for (const key in txPair) {
                 iframeSrc += `&${ key }=${ txPair[key] }`;
             }
             this.iframeSrc = iframeSrc;
         },
         goOrder() {
-            this.iframeSrc = `${ location.origin }/mobiledex#/order?address=${ this.address }`;
+            this.iframeSrc = `${ location.origin }/mobiledex#/order?address=${ this.address }&lang=${ this.$i18n.locale }`;
         },
         goMining() {
-            this.iframeSrc = `${ location.origin }/mobiledex#/mining?address=${ this.address }`;
+            this.iframeSrc = `${ location.origin }/mobiledex#/mining?address=${ this.address }&lang=${ this.$i18n.locale }`;
         }
     }
 };
