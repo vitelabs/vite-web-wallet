@@ -19,6 +19,7 @@ block content
 import { bindCode } from 'services/tradeOperation';
 import { doUntill } from 'utils/asyncFlow';
 import { emptySpace } from 'utils/storageSpace';
+import router from 'router';
 
 export default {
     async beforeMount() {
@@ -80,6 +81,10 @@ export default {
                         });
                 })
                 .catch(e => {
+                    if (e && e.error && e.error.code === 12002) {
+                        router.push({ name: 'startLogin' });
+                        return Promise.resolve();
+                    }
                     this.$toast(this.$t('assets.invite.failToast'), e);
                 });
             return Promise.reject('no close');
