@@ -47,7 +47,6 @@ const getters = {
         return state.address || '';
     },
     balanceInfo(state) {
-        // -------- merge balance
         const balanceInfo = Object.create(null);
         for (const tokenId in state.balance) {
             const item = state.balance[tokenId];
