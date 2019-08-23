@@ -11,22 +11,24 @@ module.exports = {
             }
         }
     },
-    minimizer: [
-        new UglifyJsPlugin({
-            cache: true,
-            parallel: true,
-            uglifyOptions: {
-                compress: {
-                    // collapse_vars: true,
-                    // reduce_vars: true,
-                    unused: true,
-                    drop_console: true,
-                    drop_debugger: true
+    optimization: {
+        minimizer: [
+            new UglifyJsPlugin({
+                cache: true,
+                parallel: true,
+                uglifyOptions: {
+                    compress: {
+                        // collapse_vars: true,
+                        // reduce_vars: true,
+                        unused: true,
+                        drop_console: true,
+                        drop_debugger: true
+                    },
+                    output: { comments: false }
                 },
-                output: { comments: false }
-            },
-            extractComments: true,
-            sourceMap: false
-        })
-    ]
+                extractComments: true,
+                sourceMap: false
+            })
+        ]
+    }
 };
