@@ -6,6 +6,7 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 const { entry, htmlWebpackPlugins } = require('./pack/webpack/getEntry');
 const baseConfig = require('./pack/webpack/base.config.js');
 const devConfig = require('./pack/webpack/dev.config.js');
+const testConfig = require('./pack/webpack/test.config.js');
 const prodConfig = require('./pack/webpack/prod.config.js');
 const pcConfig = require('./pack/webpack/pc.config.js');
 const h5Config = require('./pack/webpack/h5.config.js');
@@ -34,7 +35,7 @@ if (process.env.NODE_ENV === 'dev') {
     webpackConfig = merge(webpackConfig, debugConfig);
 }
 if (process.env.NODE_ENV === 'test') {
-    webpackConfig = merge(webpackConfig, devConfig);
+    webpackConfig = merge(webpackConfig, testConfig);
 }
 if (process.env.NODE_ENV === 'production') {
     webpackConfig = merge(webpackConfig, prodConfig);
