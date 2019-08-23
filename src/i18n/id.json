@@ -1,5 +1,5 @@
 {
-    "lang": "Inggris",
+    "lang": "Indonesia",
     "help": "Bantuan",
     "start": "Mulai",
     "login": "Masuk",
@@ -149,11 +149,12 @@
         "bigger0": "Nilai harus lebih besar dari 0",
         "operateSuccess": "Operasi sukses",
         "operateFail": "Operasi gagal",
-        "unreceived": "Buka kunci dompet Anda sebelum digunakan"
+        "unreceived": "Buka kunci dompet Anda sebelum digunakan",
+        "unLogin": "Please login before using referral code"
     },
     "beforeUse": {
         "title": "Baca Sebelum Digunakan",
-        "text1": "Demi keamanan dana Anda, membuat fungsi akun tidak didukung sementara di dompet web. Silakan unduh Aplikasi Vite untuk membuat akun. Platform Vite ingin memperingatkan Anda bahwa jika Anda mengunjungi situs web phishing atau kehilangan cadangan Anda, perusahaan kami tidak dapat memulihkan dana Anda.",
+        "text1": "For your funds' safety, account creation function is not currently supported on web wallet. Please download Vite App to create an account. Vite platform would like to warn you that if you visit a phishing website or lose you backup, our company cannot recover your funds.",
         "text2": "Harap perhatikan bahwa situs web kami tidak menyimpan kunci pribadi atau frasa unggulan Anda. Oleh karena itu, Anda perlu mengembalikan akun Anda melalui frase seed jika Anda memutuskan untuk mengubah browser, menghapus cookie lokal, atau mengubah PC.",
         "text3": "Harap berhati-hati dalam memastikan bahwa Anda merekam dan menyimpan frase benih Anda dengan akurat. Bahkan kesalahan sekecil apa pun akan menyebabkan Anda tidak berhasil mengembalikan alamat Anda."
     },
@@ -232,7 +233,7 @@
         }
     },
     "startCreate": {
-        "notice": "Demi keamanan dana Anda, membuat fungsi akun tidak didukung sementara di dompet web. Silakan unduh Aplikasi Vite untuk membuat akun.",
+        "notice": "For your funds' safety, account creation function is not currently supported on web wallet. Please download Vite App to create an account.",
         "goLogin": "Masuk",
         "goDex": "Pergi ke ViteX"
     },
