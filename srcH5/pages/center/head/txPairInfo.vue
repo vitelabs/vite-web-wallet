@@ -130,6 +130,22 @@ export default {
 <style lang="scss" scoped>
 @import '~h5Assets/scss/vars.scss';
 
+.confirm.tx-pair-info {
+    position: relative;
+    margin-bottom: 0;
+    .mining {
+        display: inline-block;
+    }
+    .gate {
+        position: absolute;
+        left: 50px;
+        top: 26px;
+        border: none;
+        padding: 0;
+        color: rgba(62,74,89,1);
+    }
+}
+
 .tx-pair-info {
     display: flex;
     justify-content: space-between;

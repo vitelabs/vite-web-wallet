@@ -3,7 +3,7 @@
 .head {
     border-bottom: 1px solid rgba(212, 222, 231, 1);
     box-sizing: border-box;
-    padding: 20px 30px;
+    padding: 20px 15px;
     display: flex;
     background: rgba(0, 122, 255, 0.05);
     @include font-family-normal();
@@ -58,7 +58,7 @@
 .tab-content {
     box-sizing: border-box;
     height: 470px;
-    padding: 30px;
+    padding: 13px 16px;
     position: relative;
     overflow: scroll;
     &.no-padding {

@@ -2,7 +2,7 @@
     <confirm v-show="tab" class="big no-padding-confirm" :title="$t('tradeCenter.operatorTxPair.title')"
              :closeIcon="true" :close="close">
         <div class="head">
-            <tx-pair-info></tx-pair-info>
+            <tx-pair-info class="confirm"></tx-pair-info>
         </div>
         <div v-show="tab === 'operator'" class="tab-content">
             <div class="content__item">
