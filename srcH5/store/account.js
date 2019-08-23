@@ -3,47 +3,35 @@ import { constant, addrAccount } from '@vite/vitejs';
 import bigNumber from 'utils/bigNumber';
 import { timer } from 'utils/asyncFlow';
 import { defaultTokenMap } from 'utils/constant';
-import { getTokenIcon } from 'utils/tokenParser';
 import client from 'utils/viteClient';
 import env from 'h5Utils/envFromURL';
+import { getTokenIcon } from 'h5Utils/tokenParser';
 
 let balanceInfoInst = null;
 const activeAcc = new addrAccount({ address: env.address, client });
 
 const state = {
     address: env.address || '',
-    onroad: { balanceInfos: {} },
-    balance: { balanceInfos: {} }
+    balance: {}
 };
 
 const mutations = {
     commitBalanceInfo(state, payload) {
         if (!payload) {
-            state.balance = { balanceInfos: {} };
-            state.onroad = { balanceInfos: {} };
+            state.balance = {};
             return;
         }
-
-        state.balance = payload.balance || {};
-        state.balance.balanceInfos = state.balance && state.balance.tokenBalanceInfoMap
-            ? state.balance.tokenBalanceInfoMap
-            : {};
-
-        state.onroad = payload.onroad || {};
-        state.onroad.balanceInfos = state.onroad && state.onroad.tokenBalanceInfoMap
-            ? state.onroad.tokenBalanceInfoMap
-            : {};
+        state.balance = payload.tokenBalanceInfoMap || {};
     },
     commitClearBalance(state) {
-        state.balance = { balanceInfos: {} };
-        state.onroad = { balanceInfos: {} };
+        state.balance = {};
     }
 };
 
 const actions = {
     startLoopBalance({ commit, dispatch }) {
         dispatch('stopLoopBalance');
-        balanceInfoInst = new timer(() => activeAcc.getBalance().then(data => {
+        balanceInfoInst = new timer(() => activeAcc.getAccountBalance().then(data => {
             commit('commitBalanceInfo', data);
         }), 1000);
         balanceInfoInst.start();
@@ -59,10 +47,10 @@ const getters = {
         return state.address || '';
     },
     balanceInfo(state) {
-        // -------- merge balance & onroad
+        // -------- merge balance
         const balanceInfo = Object.create(null);
-        for (const tokenId in state.balance.balanceInfos) {
-            const item = state.balance.balanceInfos[tokenId];
+        for (const tokenId in state.balance) {
+            const item = state.balance[tokenId];
 
             const tokenInfo = item.tokenInfo;
             const decimals = tokenInfo.decimals;
@@ -76,21 +64,6 @@ const getters = {
             balanceInfo[tokenId].transNum = item.number;
             balanceInfo[tokenId].totalAmount = item.totalAmount;
         }
-
-        for (const tokenId in state.onroad.balanceInfos) {
-            const item = state.onroad.balanceInfos[tokenId];
-
-            const tokenInfo = item.tokenInfo;
-            const decimals = tokenInfo.decimals;
-            const balance = bigNumber.toBasic(item.totalAmount, decimals);
-
-            balanceInfo[tokenId] = balanceInfo[tokenId] || {};
-            balanceInfo[tokenId].tokenId = balanceInfo[tokenId].tokenId || tokenInfo.tokenId;
-            balanceInfo[tokenId].fundFloat = balance;
-            balanceInfo[tokenId].decimals = balanceInfo[tokenId].decimals || tokenInfo.decimals;
-            balanceInfo[tokenId].tokenSymbol = balanceInfo[tokenId].tokenSymbol || tokenInfo.tokenSymbol;
-            balanceInfo[tokenId].onroadNum = item.number;
-        }
         return balanceInfo;
     },
     defaultTokenList(state, getters, rootState, rootGetters) {
@@ -100,59 +73,53 @@ const getters = {
         // ------------------- show default token
         const list = Object.keys(defaultTokenMap).map(i => {
             const {
-                index,
                 availableExAmount = 0,
                 totalExAmount = 0,
-                onroadNum = '',
                 totalAmount = 0,
                 tokenName = '',
                 totalSupply = '',
                 isReIssuable = '',
                 tokenSymbol,
                 balance = '',
-                fundFloat = '',
                 decimals = '',
                 owner = '',
                 tokenId = i,
-                icon = getTokenIcon(i),
-                type = 'NATIVE'
+                icon = getTokenIcon(i)
             } = Object.assign({},
                 defaultTokenMap[i],
                 balanceInfo[i] || {},
                 exBalance[i]);
-            const rate = rootState.exchangeRate.rateMap[i] && rootState.exchangeRate.rateMap[i][`${ rootState.env.currency }Rate`];
-            const totalExAsset = rate ? bigNumber.multi(bigNumber.toBasic(totalExAmount || 0, decimals), rate) : 0;
-            const walletAsset = rate ? bigNumber.multi(bigNumber.toBasic(totalAmount || 0, decimals), rate) : 0;
-            const totalAsset = bigNumber.plus(totalExAsset, walletAsset);
-            const rateBtc = rootState.exchangeRate.rateMap[i] && rootState.exchangeRate.rateMap[i]['btcRate'];
-            const totalExAssetBtc = rateBtc ? bigNumber.multi(bigNumber.toBasic(totalExAmount || 0, decimals), rateBtc) : 0;
-            const walletAssetBtc = rateBtc ? bigNumber.multi(bigNumber.toBasic(totalAmount || 0, decimals), rateBtc) : 0;
-            const totalAssetBtc = bigNumber.plus(totalExAssetBtc, walletAssetBtc);
+
+            const currencyRate = rootGetters.currencyRateList[i] || 0;
+            const totalExAsset = bigNumber.multi(bigNumber.toBasic(totalExAmount || 0, decimals), currencyRate);
+            const walletAsset = bigNumber.multi(bigNumber.toBasic(totalAmount || 0, decimals), currencyRate);
+
+            const btcRate = rootGetters.btcRateList[i] || 0;
+            const totalExAssetBtc = bigNumber.multi(bigNumber.toBasic(totalExAmount || 0, decimals), btcRate);
+            const walletAssetBtc = bigNumber.multi(bigNumber.toBasic(totalAmount || 0, decimals), btcRate);
+
             return {
                 totalExAssetBtc,
                 walletAssetBtc,
-                totalAssetBtc,
-                index,
-                totalAsset,
                 totalExAsset,
                 walletAsset,
                 availableExAmount,
                 totalExAmount,
-                onroadNum,
                 totalAmount,
                 tokenName,
                 totalSupply,
                 isReIssuable,
                 tokenSymbol,
                 balance,
-                fundFloat,
                 decimals,
                 owner,
                 tokenId,
                 icon,
-                type
+                totalAsset: bigNumber.plus(totalExAsset, walletAsset),
+                totalAssetBtc: bigNumber.plus(totalExAssetBtc, walletAssetBtc)
             };
         });
+
         // force vite first
         const viteId = constant.Vite_TokenId;
         return list
@@ -174,54 +141,47 @@ const getters = {
             })
             .map(i => {
                 const {
-                    index,
                     availableExAmount = '',
                     totalExAmount = '',
-                    onroadNum = '',
                     tokenName = '',
                     totalAmount = '',
                     totalSupply = '',
                     isReIssuable = '',
                     tokenSymbol,
                     balance = '',
-                    fundFloat = '',
                     decimals = '',
                     owner = '',
                     tokenId = i,
-                    icon = getTokenIcon(i),
-                    type = 'THIRD_GATE'
+                    icon = getTokenIcon(i)
                 } = Object.assign({}, balanceInfo[i] || {}, allToken[i] || {});
-                const rate = rootState.exchangeRate.rateMap[i] && rootState.exchangeRate.rateMap[i][`${ rootState.env.currency }Rate`];
-                const totalExAsset = rate ? bigNumber.multi(bigNumber.toBasic(totalExAmount || 0, decimals), rate) : 0;
-                const walletAsset = rate ? bigNumber.multi(bigNumber.toBasic(totalAmount || 0, decimals), rate) : 0;
-                const totalAsset = bigNumber.plus(totalExAsset, walletAsset);
-                const rateBtc = rootState.exchangeRate.rateMap[i] && rootState.exchangeRate.rateMap[i]['btcRate'];
-                const totalExAssetBtc = rateBtc ? bigNumber.multi(bigNumber.toBasic(totalExAmount || 0, decimals), rateBtc) : 0;
-                const walletAssetBtc = rateBtc ? bigNumber.multi(bigNumber.toBasic(totalAmount || 0, decimals), rateBtc) : 0;
-                const totalAssetBtc = bigNumber.plus(totalExAssetBtc, walletAssetBtc);
+
+                const currencyRate = rootGetters.currencyRateList[i] || 0;
+                const totalExAsset = bigNumber.multi(bigNumber.toBasic(totalExAmount || 0, decimals), currencyRate);
+                const walletAsset = bigNumber.multi(bigNumber.toBasic(totalAmount || 0, decimals), currencyRate);
+
+                const btcRate = rootGetters.btcRateList[i] || 0;
+                const totalExAssetBtc = bigNumber.multi(bigNumber.toBasic(totalExAmount || 0, decimals), btcRate);
+                const walletAssetBtc = bigNumber.multi(bigNumber.toBasic(totalAmount || 0, decimals), btcRate);
+
                 return {
                     totalExAssetBtc,
                     walletAssetBtc,
-                    totalAssetBtc,
-                    index,
-                    totalAsset,
                     walletAsset,
                     totalExAmount,
                     availableExAmount,
                     totalExAsset,
-                    onroadNum,
                     tokenName,
                     totalAmount,
                     totalSupply,
                     isReIssuable,
                     tokenSymbol,
                     balance,
-                    fundFloat,
                     decimals,
                     owner,
                     tokenId,
                     icon,
-                    type: (tokenSymbol === 'VCP' && !index) ? 'NATIVE' : type
+                    totalAsset: bigNumber.plus(totalExAsset, walletAsset),
+                    totalAssetBtc: bigNumber.plus(totalExAssetBtc, walletAssetBtc)
                 };
             });
     }

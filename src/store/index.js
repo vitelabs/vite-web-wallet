@@ -10,7 +10,6 @@ import envVariableStore from './envVariable';
 import exchange from './exchange/index';
 import gateInfo from './gateInfo';
 import walletStore from './wallet';
-import worldRate from './worldRate';
 import uiConfig from './uiConfig';
 
 Vue.use(vuex);
@@ -25,7 +24,6 @@ store.registerModule('SBP', SBPStore);
 store.registerModule('ledger', ledgerStore);
 store.registerModule('env', envVariableStore);
 store.registerModule('gateInfo', gateInfo);
-store.registerModule('worldRate', worldRate);
 store.registerModule('uiConfig', uiConfig);
 
 for (const moduleName in exchange) {
