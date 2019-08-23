@@ -1,7 +1,7 @@
 <template>
     <div class="token-card">
         <div class="token-meta" @click="showDetail">
-            <img :src="token.icon" class="icon"/>{{ getTokenNameString(token.tokenSymbol, token.index) }}
+            <img :src="token.icon" class="icon"/>{{ getTokenSymbolString(token.tokenSymbol, token.index) }}
         </div>
         <div class="col">
             <span>{{ $t('tokenCard.heads.balance') }}</span>
@@ -30,7 +30,7 @@ import {
 } from './dialog';
 import statistics from 'utils/statistics';
 import bigNumber from 'utils/bigNumber';
-import { getTokenNameString } from 'utils/tokenParser';
+import { getTokenSymbolString } from 'h5Utils/tokenParser';
 
 export default {
     props: {
@@ -69,8 +69,8 @@ export default {
         }
     },
     methods: {
-        getTokenNameString(...args) {
-            return getTokenNameString(...args);
+        getTokenSymbolString(...args) {
+            return getTokenSymbolString(...args);
         },
         showDetail() {
             tokenInfoDialog({ token: this.token }).catch(e => {

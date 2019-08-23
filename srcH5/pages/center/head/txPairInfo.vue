@@ -29,6 +29,7 @@
 <script>
 import viteConfirm from 'h5Components/confirm/index.js';
 import operatorIcon from 'h5Assets/imgs/operator_default.svg';
+import defaultTokenIcon from 'assets/imgs/default_token_icon.png';
 
 let lastSymbol = null;
 
@@ -63,15 +64,10 @@ export default {
             return this.$store.state.exchangeTokens.ftoken;
         },
         ftokenIcon() {
-            if (!this.ftokenDetail) {
-                return '';
-            }
-
-            if (this.ftokenDetail.urlIcon) {
+            if (this.ftokenDetail && this.ftokenDetail.urlIcon) {
                 return this.ftokenDetail.urlIcon;
             }
-
-            return '';
+            return defaultTokenIcon;
         },
         operatorInfo() {
             return this.$store.state.exchangeTokens.operator;

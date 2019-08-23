@@ -2,7 +2,7 @@
 extends /components/dialog/base.pug
 block head
     .head
-        img.icon(:src="tokenDetail.urlIcon || token.icon")
+        img.icon(:src="icon")
         .head_info
             .head__name {{ tokenDetail.name }}
             .head__symbol {{ token.tokenSymbol }}
@@ -54,6 +54,7 @@ import { tokenDetail } from 'services/trade';
 import { getExplorerLink } from 'utils/getLink';
 import openUrl from 'utils/openUrl';
 import BigNumber from 'utils/bigNumber';
+import defaultTokenIcon from 'assets/imgs/default_token_icon.png';
 
 export default {
     props: {
@@ -74,6 +75,9 @@ export default {
     computed: {
         defaultAddr() {
             return this.$store.getters.activeAddr;
+        },
+        icon() {
+            return this.tokenDetail.urlIcon || this.token.icon || defaultTokenIcon;
         }
     },
     methods: {

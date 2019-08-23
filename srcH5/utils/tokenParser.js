@@ -1,19 +1,11 @@
-import Identicon from 'identicon.js';
-import { utils } from '@vite/vitejs';
 import { defaultTokenMap } from 'utils/constant';
-
-const { blake2b, _Buffer } = utils;
-const iconConfig = { format: 'png' };
+import defaultTokenIcon from 'assets/imgs/default_token_icon.png';
 
 export function getTokenIcon(tokenId) {
-    if (defaultTokenMap[tokenId]) {
-        return defaultTokenMap[tokenId].icon;
+    if (tokenId && defaultTokenMap[tokenId]) {
+        return defaultTokenMap[tokenId].icon || defaultTokenIcon;
     }
-    const tokenHash = blake2b(tokenId);
-    const hexStr = _Buffer(tokenHash).toString('hex');
-
-    return `data:image/png+xml;base64,${ new Identicon(hexStr,
-        iconConfig).toString() }`;
+    return defaultTokenIcon;
 }
 
 export function getTokenSymbolString(symbol, index, length = 3) {
