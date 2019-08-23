@@ -149,11 +149,12 @@
         "bigger0": "この値は{0} より大きい数字にしなければなりません",
         "operateSuccess": "オペレーション成功",
         "operateFail": "操作に失敗しました。",
-        "unreceived": "使用前にウォレットをアンロックしてください"
+        "unreceived": "使用前にウォレットをアンロックしてください",
+        "unLogin": "Please login before using referral code"
     },
     "beforeUse": {
         "title": "利用前に読んで下さい",
-        "text1": "資金の安全確保の為、アカウント作成機能は一時的にサポートされていません。 Viteアプリをダウンロードしてアカウントを作成してください。 Viteプラットフォームは、フィッシングサイトにアクセスした場合、バックアップを失った場合に、資金を回収できないことを警告致します。",
+        "text1": "For your funds' safety, account creation function is not currently supported on web wallet. Please download Vite App to create an account. Vite platform would like to warn you that if you visit a phishing website or lose you backup, our company cannot recover your funds.",
         "text2": "私たちのWebサイトはあなたの秘密鍵やシードフレーズを保存しません。ブラウザの変更、ローカルCookieのクリア、PCの変更をする場合は、シードフレーズを使用してアカウントを復元する必要があります。",
         "text3": "シードフレーズを正確に記録して安全に保存するように、適切な予防措置を講じてください。 わずかなエラーでも、アドレスを正常に復元できなくなります。"
     },
@@ -232,7 +233,7 @@
         }
     },
     "startCreate": {
-        "notice": "資金の安全のため、アカウント作成機能はWebウォレットで一時的にサポートされていません。 Viteアプリをダウンロードしてアカウントを作成してください。",
+        "notice": "For your funds' safety, account creation function is not currently supported on web wallet. Please download Vite App to create an account.",
         "goLogin": "ログイン",
         "goDex": "ViteXへ行く"
     },
