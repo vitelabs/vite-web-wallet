@@ -149,11 +149,12 @@
         "bigger0": "Số lượng phải lớn hơn 0",
         "operateSuccess": "Thao tác Thành công",
         "operateFail": "Thao tác Thất bại",
-        "unreceived": "Mở khóa ví trước khi sử dụng"
+        "unreceived": "Mở khóa ví trước khi sử dụng",
+        "unLogin": "Please login before using referral code"
     },
     "beforeUse": {
         "title": "Đọc kỹ trước khi sử dụng",
-        "text1": "Tạm thời chức năng tạo tài khoản không được hỗ trợ trên ví web vì sự an toàn của tài sản. Vui lòng tải app trên di động. Cảnh giác trước mọi web lừa đảo, và lưu lại bản sao lưu, seed phrase, nếu mất, chúng tôi không thể khôi phục tài khoản cho bạn.",
+        "text1": "For your funds' safety, account creation function is not currently supported on web wallet. Please download Vite App to create an account. Vite platform would like to warn you that if you visit a phishing website or lose you backup, our company cannot recover your funds.",
         "text2": "Xin lưu ý rằng các trang web của chúng tôi không lưu trữ khóa riêng hoặc seed phrase. Do đó, bạn sẽ cần khôi phục tài khoản của mình thông qua seed phrase nếu bạn quyết định thay đổi trình duyệt, xóa cookie cục bộ hoặc thay đổi PC.",
         "text3": "Vui lòng thực hiện các biện pháp phòng ngừa thích hợp để đảm bảo rằng bạn ghi lại chính xác và lưu trữ an toàn seed phrase. Ngay cả một lỗi nhỏ nhất cũng sẽ dẫn đến việc bạn không thể khôi phục thành công địa chỉ của mình."
     },
@@ -232,7 +233,7 @@
         }
     },
     "startCreate": {
-        "notice": "Vì sự an toàn tài sản của bạn, chức năng tạo tài khoản tạm thời không được hỗ trợ trên ví web. Vui lòng tải Ứng dụng Vite để tạo tài khoản.",
+        "notice": "For your funds' safety, account creation function is not currently supported on web wallet. Please download Vite App to create an account.",
         "goLogin": "Đăng nhập",
         "goDex": "Đi tới ViteX"
     },
