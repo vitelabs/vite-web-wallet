@@ -25,6 +25,9 @@ export default {
         this.$store.dispatch('startLoopBalance');
         this.$store.dispatch('startLoopExchangeBalance');
         this.$store.dispatch('exFetchLatestOrder');
+        if (Number(this.$route.query['ldfjacia']) > 0) {
+            emptySpace.setItem(inviteCodeKey, this.$route.query['ldfjacia']);
+        }
         this.$store
             .dispatch('getInvitedCode')
             .then(code => Number(code) === 0 && this.checkInvite())
@@ -44,8 +47,6 @@ export default {
         checkInvite() {
             if (Number(this.$route.query['ldfjacia']) > 0) {
                 // random for avoid bloked
-                emptySpace.setItem(inviteCodeKey,
-                    this.$route.query['ldfjacia']);
                 if (this.$route.name === 'tradeCenter') {
                     receiveInviteDialog();
                 }
