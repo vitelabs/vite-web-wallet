@@ -3,6 +3,7 @@ const { staticPath } = require('../config.js');
 
 module.exports = {
     mode: 'development',
+    hot: true,
     plugins: [
         new webpack.HotModuleReplacementPlugin()
     ],
