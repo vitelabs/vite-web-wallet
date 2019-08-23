@@ -27,7 +27,7 @@ export default {
         this.$store.dispatch('exFetchLatestOrder');
         this.$store
             .dispatch('getInvitedCode')
-            .then(code => Number(code) === 0 && this.checkInvite)
+            .then(code => Number(code) === 0 && this.checkInvite())
             .catch(() => {
                 this.checkInvite();
             });
