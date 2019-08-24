@@ -76,7 +76,7 @@ import QrcodePopup from 'components/qrcodePopup';
 import SwitchAddr from 'components/switchAddress';
 import bigNumber from 'utils/bigNumber';
 import statistics from 'utils/statistics';
-import { getTokenSymbolString } from 'utils/tokenParser';
+import { getTokenSymbolString } from 'pcUtils/tokenParser';
 import AssetSwitch from './assetSwitch';
 
 const assetsType = {

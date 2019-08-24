@@ -31,7 +31,7 @@
 
 <script>
 import $ViteJS from 'utils/viteClient';
-import { getTokenSymbolString } from 'h5Utils/tokenParser';
+import { getTokenSymbolString } from 'pcUtils/tokenParser';
 import viteIcon from 'assets/imgs/vite-dividend.svg';
 import ethIcon from 'assets/imgs/eth.svg';
 import usdIcon from 'assets/imgs/usd.svg';

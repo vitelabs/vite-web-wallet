@@ -4,7 +4,7 @@ import { StatusMap } from 'wallet';
 import { defaultTokenMap } from 'utils/constant';
 import { gateStorage } from 'pcServices/gate';
 import { constant } from '@vite/vitejs';
-import { getTokenIcon } from 'utils/tokenParser';
+import { getTokenIcon } from 'pcUtils/tokenParser';
 
 let balanceInfoInst = null;
 
