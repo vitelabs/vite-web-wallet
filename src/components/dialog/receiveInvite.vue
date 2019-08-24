@@ -19,7 +19,7 @@ block content
 import { bindCode } from 'services/tradeOperation';
 import { doUntill } from 'utils/asyncFlow';
 import { emptySpace } from 'utils/storageSpace';
-import router from 'router';
+import router from 'pcRouter';
 
 export default {
     async beforeMount() {
