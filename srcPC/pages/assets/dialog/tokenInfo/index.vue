@@ -85,7 +85,7 @@ block originContent
 
 <script>
 import { tokenDetail } from 'services/trade';
-import { gateStorage, getChargeAddr } from 'services/gate';
+import { gateStorage, getChargeAddr } from 'pcServices/gate';
 import { getTokenIcon } from 'utils/tokenParser';
 import { getExplorerLink } from 'utils/getLink';
 import openUrl from 'utils/openUrl';

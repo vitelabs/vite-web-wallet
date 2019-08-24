@@ -1,4 +1,4 @@
-import { getGateInfos } from 'services/gate';
+import { getGateInfos } from 'pcServices/gate';
 
 const state = { gateInfos: [] };
 

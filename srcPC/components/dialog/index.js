@@ -1,4 +1,4 @@
-import baseComp from './base.vue';
+import baseComp from 'components/dialog/base.vue';
 import vbConfirmComp from './vbConfirm.vue';
 import vbConnectComp from './vbConnect.vue';
 import getDialog from './utils.js';

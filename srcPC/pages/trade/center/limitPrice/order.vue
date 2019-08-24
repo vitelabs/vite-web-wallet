@@ -81,11 +81,11 @@
 <script>
 import slider from 'components/slider';
 import viteInput from 'components/viteInput';
-import { initPwd } from 'components/password/index.js';
-import sendTx from 'utils/sendTx';
+import { initPwd } from 'pcComponents/password/index.js';
+import sendTx from 'pcUtils/sendTx';
 import BigNumber from 'utils/bigNumber';
-import { verifyAmount, checkAmountFormat } from 'utils/validations';
-import { execWithValid } from 'utils/execWithValid';
+import { verifyAmount, checkAmountFormat } from 'pcUtils/validations';
+import { execWithValid } from 'pcUtils/execWithValid';
 import statistics from 'utils/statistics';
 
 export default {

@@ -56,13 +56,13 @@ import pagination from 'components/pagination.vue';
 import walletTable from 'components/table/index.vue';
 import secTitle from 'components/secTitle.vue';
 import confirm from 'components/confirm/index.js';
-import { initPwd } from 'components/password/index.js';
+import { initPwd } from 'pcComponents/password/index.js';
 import openTxPair from './openTxPair.vue';
 import incomeList from './incomeList.vue';
 import changeFee from './changeFee.vue';
 import changeOwner from './changeOwner.vue';
-import { execWithValid } from 'utils/execWithValid';
-import sendTx from 'utils/sendTx';
+import { execWithValid } from 'pcUtils/execWithValid';
+import sendTx from 'pcUtils/sendTx';
 import BigNumber from 'utils/bigNumber';
 
 export default {

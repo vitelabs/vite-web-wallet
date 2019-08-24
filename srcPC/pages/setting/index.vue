@@ -29,9 +29,9 @@
 </template>
 
 <script>
-import pageLayout from 'components/pageLayout/index';
+import pageLayout from 'pcComponents/pageLayout/index';
 import secTitle from 'components/secTitle';
-import holdPwd from 'components/password/holdPwd.vue';
+import holdPwd from 'pcComponents/password/holdPwd.vue';
 import netInfo from './netInfo';
 import lang from './lang.vue';
 import autoLogout from './autoLogout.vue';

@@ -1,6 +1,6 @@
 import { StatusMap, getCurrHDAcc, getActiveAcc } from 'wallet';
-import { pwdConfirm } from 'components/password/index.js';
-import { vbConnectDialog } from 'components/dialog';
+import { pwdConfirm } from 'pcComponents/password/index.js';
+import { vbConnectDialog } from 'pcComponents/dialog';
 
 export function execWithValid(funcName, noActive) {
     return function (...args) {

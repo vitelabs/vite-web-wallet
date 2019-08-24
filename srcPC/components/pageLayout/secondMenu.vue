@@ -40,8 +40,8 @@ import switchAddr from 'components/switchAddress';
 
 import statistics from 'utils/statistics';
 import SwitchComp from 'uiKit/switch.vue';
-import { inviteDialog, receiveInviteDialog } from 'components/dialog';
-import { execWithValid } from 'utils/execWithValid';
+import { inviteDialog, receiveInviteDialog } from 'pcComponents/dialog';
+import { execWithValid } from 'pcUtils/execWithValid';
 import openUrl from 'utils/openUrl';
 
 export default {

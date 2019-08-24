@@ -129,13 +129,13 @@
 import { hdAddr } from '@vite/vitejs';
 import showConfirm from 'components/confirm/confirm.vue';
 import walletTable from 'components/table/index.vue';
-import { initPwd } from 'components/password/index.js';
+import { initPwd } from 'pcComponents/password/index.js';
 import viteInput from 'components/viteInput';
 import tooltips from 'components/tooltips';
-import sendTx from 'utils/sendTx';
+import sendTx from 'pcUtils/sendTx';
 import BigNumber from 'utils/bigNumber';
-import { verifyAmount } from 'utils/validations';
-import { execWithValid } from 'utils/execWithValid';
+import { verifyAmount } from 'pcUtils/validations';
+import { execWithValid } from 'pcUtils/execWithValid';
 
 export default {
     components: { walletTable, showConfirm, viteInput, tooltips },

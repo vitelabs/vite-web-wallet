@@ -1,6 +1,6 @@
 import { getClient } from "utils/request";
 import { utils } from "@vite/vitejs";
-import sendTx from "utils/sendTx";
+import sendTx from "pcUtils/sendTx";
 import { addrSpace } from "utils/storageSpace";
 import i18n from "pcI18n";
 

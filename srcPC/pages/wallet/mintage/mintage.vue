@@ -80,8 +80,8 @@ import viteInput from 'components/viteInput';
 import boolRadio from 'components/boolRadio';
 import BigNumber from 'utils/bigNumber';
 import mintageConfirm from './confirm';
-import { execWithValid } from 'utils/execWithValid';
-import { checkAmountFormat } from 'utils/validations';
+import { execWithValid } from 'pcUtils/execWithValid';
+import { checkAmountFormat } from 'pcUtils/validations';
 
 const maxNum = BigNumber.exponentiated(2, 256, '-1');
 
