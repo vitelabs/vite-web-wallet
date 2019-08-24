@@ -73,7 +73,7 @@ import { getCurrHDAcc } from 'wallet';
 import Pie from 'components/pie';
 import copy from 'components/copy';
 import QrcodePopup from 'components/qrcodePopup';
-import SwitchAddr from 'components/switchAddress';
+import SwitchAddr from 'pcComponents/switchAddress';
 import bigNumber from 'utils/bigNumber';
 import statistics from 'utils/statistics';
 import { getTokenSymbolString } from 'pcUtils/tokenParser';
