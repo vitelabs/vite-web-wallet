@@ -78,7 +78,7 @@ import ellipsisAddr from 'utils/ellipsisAddr.js';
 import BigNumber from 'utils/bigNumber';
 import sendTx from 'pcUtils/sendTx';
 import $Vite from 'utils/viteClient';
-import { constant } from 'utils/store';
+import { constant } from 'pcUtils/store';
 import tooltips from 'components/tooltips';
 import walletTable from 'components/table/index.vue';
 import { initPwd } from 'pcComponents/password/index.js';

@@ -24,7 +24,7 @@ import { StatusMap, getCurrHDAcc } from 'wallet';
 import sidebar from './sidebar';
 import secondMenu from './secondMenu';
 import { sidebarMenuList, secondMenuList } from './config';
-import guide from 'components/guide';
+import guide from './guide';
 
 let autoLogout = null;
 

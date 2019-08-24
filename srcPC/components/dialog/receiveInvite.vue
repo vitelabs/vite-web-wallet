@@ -18,7 +18,7 @@ block content
 <script>
 import { bindCode } from 'pcServices/tradeOperation';
 import { doUntill } from 'utils/asyncFlow';
-import { emptySpace } from 'utils/storageSpace';
+import { emptySpace } from 'pcUtils/storageSpace';
 
 export default {
     async beforeMount() {

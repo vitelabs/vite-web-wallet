@@ -1,6 +1,5 @@
 <template>
-    <div class="notice-list">
-        <update></update>
+    <div>
         <notice v-for="(order, index) in latestOrders" :key="index"
                 :type="order.type" :title="order.title"
                 :close="order.close" :rawData="order"
@@ -10,11 +9,10 @@
 
 <script>
 import notice from 'components/notice';
-import update from 'components/update.vue';
 import date from 'utils/date';
 
 export default {
-    components: { notice, update },
+    components: { notice },
     data() {
         return { latestOrders: [] };
     },
@@ -75,21 +73,3 @@ export default {
     }
 };
 </script>
-
-<style lang="scss" scoped>
-.notice-list {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    z-index: 101;
-    max-height: 100%;
-    overflow: auto;
-    transition: all 0.8s ease-in-out;
-}
-
-@media only screen and (max-width: 500px) {
-    .notice-list {
-        z-index: 0;
-    }
-}
-</style>

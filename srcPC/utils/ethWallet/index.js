@@ -4,7 +4,7 @@ const Tx = require('ethereumjs-tx');
 // Web3-providers-ws cannot work in IE.
 const ethProvider = require('web3-providers-http');
 
-import localStorage from 'utils/store';
+import localStorage from 'pcUtils/store';
 import { bind as gwBind, balance as gwBalance } from 'services/conversion';
 import { timer } from 'utils/asyncFlow';
 import { getWalletAddr, getWrongWalletAddr } from './address';

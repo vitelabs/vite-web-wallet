@@ -9,7 +9,7 @@
 
 <script>
 import notice from 'components/notice';
-import { getVersion, setVersion } from 'utils/store';
+import { getVersion, setVersion } from 'pcUtils/store';
 
 const showNum = 1;
 

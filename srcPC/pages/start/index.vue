@@ -14,9 +14,9 @@
 </template>
 
 <script>
-import firstNotice from 'components/firstNotice.vue';
-import changeLang from 'components/changeLang';
 import openUrl from 'utils/openUrl';
+import changeLang from 'pcComponents/changeLang';
+import firstNotice from './firstNotice.vue';
 
 export default {
     components: { changeLang, firstNotice },

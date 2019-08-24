@@ -16,7 +16,7 @@ import store from 'pcStore';
 
 import plugin from 'plugins/addPlugin';
 import directives from 'plugins/directives';
-import { resaveAccList, resaveLastAcc } from 'utils/store/resave';
+import { resaveAccList, resaveLastAcc } from 'pcUtils/store/resave';
 
 resaveAccList();
 resaveLastAcc();

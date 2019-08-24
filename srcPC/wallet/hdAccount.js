@@ -8,7 +8,7 @@ import {
 import viteCrypto from 'testwebworker';
 import statistics from 'utils/statistics';
 import $ViteJS from 'utils/viteClient';
-import { constant as u_constant } from 'utils/store';
+import { constant as u_constant } from 'pcUtils/store';
 
 import {
     getAddr,

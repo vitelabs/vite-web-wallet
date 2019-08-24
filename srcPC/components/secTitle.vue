@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { blackHole } from 'utils/ethWallet/viteContract';
+import { blackHole } from 'pcUtils/ethWallet/viteContract';
 import confirm from 'components/confirm/index.js';
 
 export default {

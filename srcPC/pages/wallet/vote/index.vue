@@ -49,7 +49,7 @@
 import { constant } from '@vite/vitejs';
 import tooltips from 'components/tooltips';
 import search from 'components/search';
-import secTitle from 'components/secTitle';
+import secTitle from 'pcComponents/secTitle';
 import loading from 'components/loading';
 import walletTable from 'components/table/index.vue';
 import { initPwd } from 'pcComponents/password/index.js';

@@ -9,7 +9,7 @@
 <script>
 import tokenList from './tokenList';
 import mintage from './mintage';
-import secTitle from 'components/secTitle';
+import secTitle from 'pcComponents/secTitle';
 
 export default {
     components: { tokenList, secTitle, mintage },

@@ -30,7 +30,7 @@
 
 <script>
 import { hdAddr, constant } from '@vite/vitejs';
-import secTitle from 'components/secTitle';
+import secTitle from 'pcComponents/secTitle';
 import loading from 'components/loading';
 import confirm from 'components/confirm/confirm.vue';
 import viteInput from 'components/viteInput';

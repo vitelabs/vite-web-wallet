@@ -1,7 +1,7 @@
 import {
     storage as localStorage,
     constant
-} from 'utils/store';
+} from 'pcUtils/store';
 
 const currencyKey = constant.CurrencyKey;
 const autoLogoutKey = constant.AutoLogoutKey;

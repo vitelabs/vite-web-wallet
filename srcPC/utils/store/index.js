@@ -17,13 +17,13 @@ export const constant = _constant;
 export const storage = {
     setItem: function (key, data) {
         // if (SettingKeys.indexOf(key) === -1 && TradeKeys.indexOf(key) === -1) {
-        //     throw new Error(`[localStorage] Please add the key ${ key } in utils/store/constant(SettingKeys | TradeKeys)`);
+        //     throw new Error(`[localStorage] Please add the key ${ key } in pcUtils/store/constant(SettingKeys | TradeKeys)`);
         // }
         setItem(key, data);
     },
     getItem: function (key) {
         // if (SettingKeys.indexOf(key) === -1 && TradeKeys.indexOf(key) === -1) {
-        //     throw new Error(`[localStorage] Please add the key ${ key } in utils/store/constant(SettingKeys | TradeKeys)`);
+        //     throw new Error(`[localStorage] Please add the key ${ key } in pcUtils/store/constant(SettingKeys | TradeKeys)`);
         // }
         return getItem(key);
     }
