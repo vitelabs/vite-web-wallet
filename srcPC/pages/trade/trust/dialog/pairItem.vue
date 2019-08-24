@@ -1,5 +1,5 @@
 <template>
-    <div class="pair-item">{{item.name}}<div class="cancel" v-if="cancelAble" @click="cancel"></div></div>
+    <div class="pair-item" :class="{'cancel-able':cancelAble}">{{item.name}}<div class="cancel __pointer" v-if="cancelAble" @click="cancel"></div></div>
 </template>
 <script>
 export default {
@@ -15,7 +15,7 @@ export default {
     },
     methods: {
         cancel() {
-            this.$emit('deleteItem', this.item);
+            this.$emit('cancelItem', this.item);
         }
     }
 };
@@ -30,15 +30,17 @@ export default {
     font-size: 12px;
     display: flex;
     align-items: center;
-    .cancel-able {
+    &.cancel-able {
         background: rgba(0, 122, 255, 0.05);
         border: 1px solid rgba(0, 122, 255, 0.3);
     }
     .cancel{
-        width: 6px;
-        height: 6px;
-        cursor: pointer;
-        user-select: none;
+        width: 12px;
+        height: 12px;
+        margin-left: 8px;
+        background: url(~assets/imgs/cancel_item.png);
+        background-size: cover;
+        background-repeat: no-repeat;
     }
 }
 </style>

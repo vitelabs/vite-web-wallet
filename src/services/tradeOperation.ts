@@ -156,7 +156,7 @@ export function getProxyGrantor({ address }): Promise<IProxyRelation> {
 }
 
 
-export function getProxyAblePairs(): Promise<IProxyPair> {
+export function getProxyAblePairs(): Promise<IProxyPair[]> {
   return request({ method: "GET", path: "proxy/market" });
 }
 

@@ -1,10 +1,10 @@
 <template>
-    <div class="proxy __pointer">
+    <div class="proxy">
         <div class="op item">
             <div class="title">交易委托</div>
             <div class="btn_group">
-                <div class="btn btn__ok" @click="addProxy">新建委托</div>
-                <div class="btn btn__cancel">了解委托</div>
+                <div class="btn btn__ok __pointer" @click="addProxy">新建委托</div>
+                <div class="btn btn__cancel __pointer">了解委托</div>
             </div>
         </div>
         <div class="active item">
@@ -15,14 +15,14 @@
                     <div class="proxytb_cell">委托交易对</div>
                     <div class="proxytb_cell">操作</div>
                 </div>
-                <div class="proxytb_content">
+                <div class="proxytb_content" v-if="Object.keys(relation).length>0">
                     <div
                         class="proxytb_row"
                         v-for="addr in relation"
                         :key="addr"
                     ></div>
                 </div>
-                <div class="proxytb_content_no_data">
+                <div class="proxytb_content" v-else>
                     <div class="proxytb_no_data"></div>
                 </div>
             </div>
@@ -34,14 +34,14 @@
                     <div class="proxytb_cell">委托人地址</div>
                     <div class="proxytb_cell">委托交易对</div>
                 </div>
-                <div class="proxytb_content">
+                <div class="proxytb_content" v-if="Object.keys(grantor).length>0">
                     <div
                         class="proxytb_row"
                         v-for="addr in grantor"
                         :key="addr"
                     ></div>
                 </div>
-                <div class="proxytb_content_no_data">
+                <div class="proxytb_content" v-else>
                     <div class="proxytb_no_data"></div>
                 </div>
             </div>
@@ -50,6 +50,7 @@
 </template>
 <script>
 import { getProxyRelation, getProxyGrantor } from 'services/tradeOperation';
+import {addDialog} from "./dialog"
 export default {
     data() {
         return { relation: {}, grantor: {} };
@@ -59,17 +60,21 @@ export default {
             return this.$store.getters.activeAddr;
         }
     },
+    beforeMount(){
+        this.updateData();
+    },
     methods: {
         updateData() {
             getProxyRelation({ address: this.address }).then(data => {
-                this.relation = data;
+                this.relation = data.relations;
             });
             getProxyGrantor({ address: this.address }).then(data => {
-                this.grantor = data;
+                this.grantor = data.relations;
             });
         },
         addProxy() {
-
+            console.log('fff')
+            addDialog({})
         }
     }
 };
@@ -80,6 +85,7 @@ export default {
     display: flex;
     flex-direction: column;
     padding-top: 13px;
+    height: 100%;
     .title {
         padding: 14px 0;
         font-size: 14px;
@@ -104,14 +110,26 @@ export default {
         }
     }
     .active {
+        flex:1;
     }
     .passive {
+        flex:1;
     }
 }
 .btn {
+    width:128px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 11px;
     &__ok {
+        color:#fff;
+        background-color: #007aff;
     }
     &__cancel {
+        background-color:#fff;
+        color: #007aff;
     }
 }
 
@@ -124,15 +142,12 @@ export default {
     background: #fff;
     border-radius: 2px;
     box-shadow: 0px 2px 10px 1px rgba(176, 192, 237, 0.42);
-
+    flex:1;
     .proxytb_content {
         flex: 1;
         position: relative;
         overflow-x: hidden;
         overflow-y: auto;
-    }
-    .proxytb_content_no_data {
-        min-height: 200px;
     }
     .proxytb_no_data {
         position: absolute;
@@ -163,8 +178,6 @@ export default {
         display: flex;
         color: #5e6875;
         border-bottom: 1px solid rgba(227, 235, 245, 0.6);
-
-        justify-content: space-between;
         box-sizing: border-box;
         align-items: center;
         padding: 9px 0;
@@ -188,12 +201,19 @@ export default {
         white-space: nowrap;
         box-sizing: border-box;
         &:first-child {
+            width:370px;
             padding-left: 30px;
             margin-left: 0;
         }
-        &:last-child {
+        &:nth-child(2) {
+            flex:1;
+        }
+        &:last-child{
             padding-right: 30px;
             margin-right: 0;
+        }
+        &:nth-child(3){
+            width:280px;
         }
     }
     .click-able {
