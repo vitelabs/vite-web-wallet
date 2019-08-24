@@ -50,7 +50,7 @@
 </template>
 <script>
 import { getProxyRelation, getProxyGrantor } from 'services/tradeOperation';
-import {addDialog} from "./dialog"
+import { addDialog } from './dialog';
 export default {
     data() {
         return { relation: {}, grantor: {} };
@@ -60,7 +60,7 @@ export default {
             return this.$store.getters.activeAddr;
         }
     },
-    beforeMount(){
+    beforeMount() {
         this.updateData();
     },
     methods: {
@@ -73,8 +73,8 @@ export default {
             });
         },
         addProxy() {
-            console.log('fff')
-            addDialog({})
+            console.log('fff');
+            addDialog({});
         }
     }
 };
@@ -110,25 +110,25 @@ export default {
         }
     }
     .active {
-        flex:1;
+        flex: 1;
     }
     .passive {
-        flex:1;
+        flex: 1;
     }
 }
 .btn {
-    width:128px;
+    width: 128px;
     height: 30px;
     display: flex;
     align-items: center;
     justify-content: center;
     margin-right: 11px;
     &__ok {
-        color:#fff;
+        color: #fff;
         background-color: #007aff;
     }
     &__cancel {
-        background-color:#fff;
+        background-color: #fff;
         color: #007aff;
     }
 }
@@ -142,7 +142,7 @@ export default {
     background: #fff;
     border-radius: 2px;
     box-shadow: 0px 2px 10px 1px rgba(176, 192, 237, 0.42);
-    flex:1;
+    flex: 1;
     .proxytb_content {
         flex: 1;
         position: relative;
@@ -201,19 +201,19 @@ export default {
         white-space: nowrap;
         box-sizing: border-box;
         &:first-child {
-            width:370px;
+            width: 370px;
             padding-left: 30px;
             margin-left: 0;
         }
         &:nth-child(2) {
-            flex:1;
+            flex: 1;
         }
         &:last-child{
             padding-right: 30px;
             margin-right: 0;
         }
         &:nth-child(3){
-            width:280px;
+            width: 280px;
         }
     }
     .click-able {

@@ -14,10 +14,10 @@ block content
 </template>
 
 <script>
-import { throttle } from "lodash";
-import PairItem from "./pairItem";
-import SearchTips from "uiKit/searchTips";
-import {getProxyAblePairs} from "services/tradeOperation"
+import { throttle } from 'lodash';
+import PairItem from './pairItem';
+import SearchTips from 'uiKit/searchTips';
+import { getProxyAblePairs } from 'services/tradeOperation';
 
 // const MAX_RES_NUMS = 10;
 
@@ -26,7 +26,7 @@ export default {
     props: {
         trustAddress: {
             type: String,
-            default: ""
+            default: ''
         },
         existsPair: {
             type: Array,
@@ -35,19 +35,19 @@ export default {
     },
     data() {
         return {
-            allProxyAblePairs:[],
+            allProxyAblePairs: [],
             selectedPairs: [],
-            userInputAddress: "",
-            userInput: "",
-            dLTxt: this.$t("tokenCard.addToken.lTxt"),
-            dRTxt: this.$t("tokenCard.addToken.rTxt"),
-            dTitle: this.$t("tokenCard.addToken.title")
+            userInputAddress: '',
+            userInput: '',
+            dLTxt: this.$t('tokenCard.addToken.lTxt'),
+            dRTxt: this.$t('tokenCard.addToken.rTxt'),
+            dTitle: this.$t('tokenCard.addToken.title')
         };
     },
-    beforeMount(){
-        getProxyAblePairs().then(data=>{
-            this.allProxyAblePairs=data;
-        })
+    beforeMount() {
+        getProxyAblePairs().then(data => {
+            this.allProxyAblePairs = data;
+        });
     },
     methods: {
         addItem(item) {
@@ -57,17 +57,15 @@ export default {
             this.selectedPairs.push(item);
         },
         deleteItem(item) {
-            console.log(item)
+            console.log(item);
             const i = this.selectedPairs.findIndex(i => i.id === item.id);
             if (i >= 0) this.selectedPairs.splice(i, 1);
         },
         filterMethod(input) {
-            console.log(999)
-            return this.allProxyAblePairs.filter(p=>p.symbol.replace("_","/").indexOf(input)>=0).map(p=>Object.assign(p,{
-                name:p.symbol.replace("_","/"),id:`${p.tradeToken}/${p.quoteToken}`
-            }))
+            console.log(999);
+            return this.allProxyAblePairs.filter(p => p.symbol.replace('_', '/').indexOf(input) >= 0).map(p => Object.assign(p, { name: p.symbol.replace('_', '/'), id: `${ p.tradeToken }/${ p.quoteToken }` }));
         },
-        inspector: throttle(function() {})
+        inspector: throttle(function () {})
     },
     computed: {
         address() {
@@ -82,9 +80,9 @@ export default {
 .pair_section {
     display: flex;
     flex-wrap: wrap;
-    padding:6px 0;
+    padding: 6px 0;
     &.new2add{
-        border-top:1px solid rgba(212,222,231,1);
+        border-top: 1px solid rgba(212,222,231,1);
 
     }
     .pairs{

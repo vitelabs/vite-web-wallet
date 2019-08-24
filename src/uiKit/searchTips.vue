@@ -17,7 +17,7 @@
     </div>
 </template>
 <script>
-import throttle from "lodash/throttle";
+import throttle from 'lodash/throttle';
 
 export default {
     props: {
@@ -27,10 +27,10 @@ export default {
         }
     },
     data() {
-        return { userInput: "", searchRes: [], isShowTips: false };
+        return { userInput: '', searchRes: [], isShowTips: false };
     },
     watch: {
-        userInput: throttle(function(val) {
+        userInput: throttle(function (val) {
             this.searchRes = this.filterMethod(val);
             if (this.searchRes.length > 0) {
                 this.isShowTips = true;
@@ -43,7 +43,7 @@ export default {
         },
         selected(v) {
             this.closeTips();
-            this.$emit("selected", v);
+            this.$emit('selected', v);
             this.userInput = v.name;
         }
     }
@@ -58,7 +58,7 @@ export default {
     font-size: 12px;
     max-height: 203px;
     min-height: 34px;
-    display:flex;
+    display: flex;
     flex-direction: column;
     @include font-family-bold();
     .search-input-container {
@@ -81,7 +81,7 @@ export default {
         }
     }
     .tips-list {
-        flex:1;
+        flex: 1;
         overflow-y: scroll;
         border-radius: 0px 0px 2px 2px;
         border: 1px solid rgba(212, 222, 231, 1);
