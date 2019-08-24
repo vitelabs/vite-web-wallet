@@ -34,7 +34,7 @@
 <script>
 import confirm from 'h5Components/confirm/confirm.vue';
 import viteInput from 'components/viteInput';
-// import sendTx from 'utils/sendTx';
+// import sendTx from 'h5Utils/sendTx';
 import bigNumber from 'utils/bigNumber';
 import statistics from 'utils/statistics';
 import { verifyAmount, verifyWithdrawAmount } from 'h5Utils/validations';

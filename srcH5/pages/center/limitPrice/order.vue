@@ -63,7 +63,7 @@
 import dexBalance from './dexBalance';
 import slider from 'components/slider';
 import viteInput from 'components/viteInput';
-// import sendTx from 'utils/sendTx';
+// import sendTx from 'h5Utils/sendTx';
 import BigNumber from 'utils/bigNumber';
 import { verifyAmount, checkAmountFormat } from 'h5Utils/validations';
 import statistics from 'utils/statistics';

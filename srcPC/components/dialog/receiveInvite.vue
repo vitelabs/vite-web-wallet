@@ -16,7 +16,7 @@ block content
 </template>
 
 <script>
-import { bindCode } from 'services/tradeOperation';
+import { bindCode } from 'pcServices/tradeOperation';
 import { doUntill } from 'utils/asyncFlow';
 import { emptySpace } from 'utils/storageSpace';
 

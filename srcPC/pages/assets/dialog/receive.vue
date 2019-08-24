@@ -19,7 +19,7 @@ import qrcode from 'components/qrcode';
 import copy from 'utils/copy';
 import { utils } from '@vite/vitejs';
 import { modes } from 'qrcode.es';
-import { getValidBalance } from 'utils/validations';
+import { getValidBalance } from 'pcUtils/validations';
 
 export default {
     components: { qrcode },

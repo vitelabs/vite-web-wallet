@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import { getInviteMiningDetail } from 'h5Services/tradeOperation';
+import { getInviteMiningDetail } from 'services/tradeOperation';
 import myIncome from './myIncome';
 import bigNumber from 'utils/bigNumber';
 import date from 'utils/date';

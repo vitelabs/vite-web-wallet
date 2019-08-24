@@ -2,7 +2,7 @@ import bigNumber from 'utils/bigNumber';
 import { timer } from 'utils/asyncFlow';
 import { StatusMap } from 'wallet';
 import { defaultTokenMap } from 'utils/constant';
-import { gateStorage } from 'services/gate';
+import { gateStorage } from 'pcServices/gate';
 import { constant } from '@vite/vitejs';
 import { getTokenIcon } from 'utils/tokenParser';
 

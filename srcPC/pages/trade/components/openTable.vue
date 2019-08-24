@@ -37,10 +37,10 @@
 <script>
 import d from 'dayjs';
 import { utils } from '@vite/vitejs';
-import sendTx from 'utils/sendTx';
+import sendTx from 'pcUtils/sendTx';
 import statistics from 'utils/statistics';
-import { execWithValid } from 'utils/execWithValid';
-import { initPwd } from 'components/password/index.js';
+import { execWithValid } from 'pcUtils/execWithValid';
+import { initPwd } from 'pcComponents/password/index.js';
 
 const { _Buffer } = utils;
 

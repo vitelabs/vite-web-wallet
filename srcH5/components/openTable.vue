@@ -48,7 +48,7 @@
 <script>
 import d from 'dayjs';
 // import { utils } from '@vite/vitejs';
-// import sendTx from 'utils/sendTx';
+// import sendTx from 'h5Utils/sendTx';
 import statistics from 'utils/statistics';
 
 // const { _Buffer } = utils;

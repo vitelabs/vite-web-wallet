@@ -17,7 +17,7 @@ block content
 </template>
 
 <script>
-import { gateStorage } from 'services/gate';
+import { gateStorage } from 'pcServices/gate';
 import { throttle } from 'lodash';
 import statistics from 'utils/statistics';
 

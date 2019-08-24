@@ -51,11 +51,11 @@
 <script>
 import { hdAddr, constant } from '@vite/vitejs';
 import viteInput from 'components/viteInput';
-import { initPwd } from 'components/password/index.js';
+import { initPwd } from 'pcComponents/password/index.js';
 import BigNumber from 'utils/bigNumber';
 import statistics from 'utils/statistics';
-import { verifyAmount } from 'utils/validations';
-import { execWithValid } from 'utils/execWithValid';
+import { verifyAmount } from 'pcUtils/validations';
+import { execWithValid } from 'pcUtils/execWithValid';
 
 const Vite_Token_Info = constant.Vite_Token_Info;
 const amountTimeout = null;

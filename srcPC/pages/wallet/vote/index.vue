@@ -52,12 +52,12 @@ import search from 'components/search';
 import secTitle from 'components/secTitle';
 import loading from 'components/loading';
 import walletTable from 'components/table/index.vue';
-import { initPwd } from 'components/password/index.js';
+import { initPwd } from 'pcComponents/password/index.js';
 import { timer } from 'utils/asyncFlow';
 import BigNumber from 'utils/bigNumber';
 import $ViteJS from 'utils/viteClient';
-import sendTx from 'utils/sendTx';
-import { execWithValid } from 'utils/execWithValid';
+import sendTx from 'pcUtils/sendTx';
+import { execWithValid } from 'pcUtils/execWithValid';
 import openUrl from 'utils/openUrl';
 import statistics from 'utils/statistics';
 

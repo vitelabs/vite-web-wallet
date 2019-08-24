@@ -63,11 +63,11 @@
 <script>
 import icon from 'assets/imgs/eth_logo.svg';
 import BigNumber from 'utils/bigNumber';
-import { verifyAmount } from 'utils/validations';
+import { verifyAmount } from 'pcUtils/validations';
 import confirm from 'components/confirm/confirm.vue';
 import viteInput from 'components/viteInput';
 import process from 'components/slider';
-import { initPwd } from 'components/password/index.js';
+import { initPwd } from 'pcComponents/password/index.js';
 
 const minGwei = 3;
 const maxGwei = 99;

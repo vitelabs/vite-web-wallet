@@ -14,7 +14,7 @@
 
 <script>
 import copy from 'components/copy';
-import { pwdConfirm } from 'components/password';
+import { pwdConfirm } from 'pcComponents/password';
 
 export default {
     components: { copy },

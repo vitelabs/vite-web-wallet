@@ -28,7 +28,7 @@
 import { constant } from '@vite/vitejs';
 import confirm from 'h5Components/confirm/confirm.vue';
 import BigNumber from 'utils/bigNumber';
-// import sendTx from 'utils/sendTx';
+// import sendTx from 'h5Utils/sendTx';
 import $ViteJS from 'utils/viteClient';
 import date from 'utils/date';
 import statistics from 'utils/statistics';

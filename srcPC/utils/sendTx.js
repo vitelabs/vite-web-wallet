@@ -1,9 +1,9 @@
 import { utils } from '@vite/vitejs';
 import { getActiveAcc } from 'wallet';
-import { powProcess } from 'components/pow/index';
-import { quotaConfirm } from 'components/quota/index';
-import { vbConfirmDialog } from 'components/dialog';
-import { execWithValid } from 'utils/execWithValid';
+import { powProcess } from 'pcComponents/pow/index';
+import { quotaConfirm } from 'pcComponents/quota/index';
+import { vbConfirmDialog } from 'pcComponents/dialog';
+import { execWithValid } from 'pcUtils/execWithValid';
 
 const { isObject } = utils;
 

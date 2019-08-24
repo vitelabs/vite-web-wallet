@@ -28,7 +28,7 @@ block content
 import qrcode from 'components/qrcode';
 import copy from 'utils/copy';
 import { modes } from 'qrcode.es';
-import { getDepositInfo } from 'services/gate';
+import { getDepositInfo } from 'pcServices/gate';
 import bigNumber from 'utils/bigNumber';
 
 export default {

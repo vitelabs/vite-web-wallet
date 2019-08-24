@@ -38,12 +38,12 @@
 
 <script>
 import { hdAddr } from '@vite/vitejs';
-import sendTx from 'utils/sendTx';
+import sendTx from 'pcUtils/sendTx';
 import BigNumber from 'utils/bigNumber';
-import { initPwd } from 'components/password/index.js';
+import { initPwd } from 'pcComponents/password/index.js';
 import confirm from 'components/confirm/confirm.vue';
 import viteInput from 'components/viteInput';
-import { execWithValid } from 'utils/execWithValid';
+import { execWithValid } from 'pcUtils/execWithValid';
 
 export default {
     components: { confirm, viteInput },

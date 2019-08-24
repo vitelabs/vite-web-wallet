@@ -1,4 +1,4 @@
-// import sendTx from 'utils/sendTx';
+// import sendTx from 'h5Utils/sendTx';
 // import { constant } from '@vite/vitejs';
 import { getClient } from 'utils/request';
 import viteClient from 'utils/viteClient';

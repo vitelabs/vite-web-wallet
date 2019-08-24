@@ -17,7 +17,7 @@ block content
 
 <script>
 import { getValidBalance } from 'h5Utils/validations';
-// import sendTx from 'utils/sendTx';
+// import sendTx from 'h5Utils/sendTx';
 import debounce from 'lodash/debounce';
 import bigNumber from 'utils/bigNumber';
 export default {
