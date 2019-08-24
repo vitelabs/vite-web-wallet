@@ -1,7 +1,7 @@
 import { getClient } from "utils/request";
 import { utils } from "@vite/vitejs";
 import sendTx from "pcUtils/sendTx";
-import { addrSpace } from "utils/storageSpace";
+import { addrSpace } from "pcUtils/storageSpace";
 import i18n from "pcI18n";
 
 const langMap = {

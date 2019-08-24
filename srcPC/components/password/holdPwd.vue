@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import { constant } from 'utils/store';
+import { constant } from 'pcUtils/store';
 
 const HoldPwdKey = constant.HoldPwdKey;
 

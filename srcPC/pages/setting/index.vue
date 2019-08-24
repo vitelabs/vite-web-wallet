@@ -30,7 +30,7 @@
 
 <script>
 import pageLayout from 'pcComponents/pageLayout/index';
-import secTitle from 'components/secTitle';
+import secTitle from 'pcComponents/secTitle';
 import holdPwd from 'pcComponents/password/holdPwd.vue';
 import netInfo from './netInfo';
 import lang from './lang.vue';

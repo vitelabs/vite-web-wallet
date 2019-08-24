@@ -67,7 +67,7 @@
 <script>
 import viteInput from 'components/viteInput';
 import loading from 'components/loading';
-import localStorage from 'utils/store';
+import localStorage from 'pcUtils/store';
 import { subTask } from 'utils/proto/subTask';
 import { assignPair } from 'services/trade';
 

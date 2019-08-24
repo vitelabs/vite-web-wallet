@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import secTitle from 'components/secTitle';
+import secTitle from 'pcComponents/secTitle';
 import confirm from 'components/confirm/confirm.vue';
 
 export default {

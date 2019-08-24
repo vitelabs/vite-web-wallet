@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import noticeList from 'components/noticeList.vue';
+import noticeList from 'pcComponents/noticeList.vue';
 
 export default {
     components: { noticeList },

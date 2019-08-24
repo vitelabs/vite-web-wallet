@@ -1,4 +1,4 @@
-import { storage, constant } from 'utils/store';
+import { storage, constant } from 'pcUtils/store';
 
 const { getItem, setItem } = storage;
 const {
@@ -73,7 +73,7 @@ export function setAccInfo(id, infoKey, data) {
     }
 
     if (AccInfoKeys.indexOf(infoKey) === -1) {
-        throw new Error(`[localStorage] Please add the key ${ infoKey } in utils/store/constant AccInfoKeys.`);
+        throw new Error(`[localStorage] Please add the key ${ infoKey } in pcUtils/store/constant AccInfoKeys.`);
     }
 
     key = `${ id }_${ infoKey }`;
@@ -120,7 +120,7 @@ export function setAddrInfo(addr, infoKey, data) {
     }
 
     if (AddrInfoKeys.indexOf(infoKey) === -1) {
-        throw new Error(`[localStorage] Please add the key ${ infoKey } in utils/store/constant AccInfoKeys.`);
+        throw new Error(`[localStorage] Please add the key ${ infoKey } in pcUtils/store/constant AccInfoKeys.`);
     }
 
     key = `${ addr }_${ infoKey }`;

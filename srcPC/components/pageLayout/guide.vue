@@ -48,7 +48,7 @@
 </template>
 
 <script>
-import storage from 'utils/store';
+import storage from 'pcUtils/store';
 
 const GuideKey = 'beginnerGuide';
 

@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import addressTitle from 'components/addressTitle';
+import addressTitle from './addressTitle';
 
 export default {
     components: { addressTitle },

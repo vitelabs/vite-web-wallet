@@ -16,7 +16,7 @@
 
 <script>
 import { StatusMap } from 'wallet';
-import { constant } from 'utils/store';
+import { constant } from 'pcUtils/store';
 import confirm from 'components/confirm/confirm.vue';
 import holdPwdView from './holdPwd.vue';
 

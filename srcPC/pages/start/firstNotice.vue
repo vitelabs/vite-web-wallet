@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { constant, storage } from 'utils/store';
+import { constant, storage } from 'pcUtils/store';
 
 export default {
     mounted() {
