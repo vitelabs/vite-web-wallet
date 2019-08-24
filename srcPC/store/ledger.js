@@ -3,7 +3,7 @@ import { timer } from 'utils/asyncFlow';
 import $ViteJS from 'utils/viteClient';
 import { defaultTokenMap } from 'utils/constant';
 import { tokenInfoFromGithub } from 'services/trade';
-import { getTokenIcon } from 'utils/tokenParser';
+import { getTokenIcon } from 'pcUtils/tokenParser';
 
 const ViteId = constant.Vite_TokenId;
 const MAX_TOKEN_NUM = 100;
