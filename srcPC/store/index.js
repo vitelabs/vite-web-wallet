@@ -7,10 +7,10 @@ import pledgeStore from './pledge';
 import SBPStore from './SBP';
 import ledgerStore from './ledger';
 import envVariableStore from './envVariable';
-import exchange from './exchange/index';
 import gateInfo from './gateInfo';
 import walletStore from './wallet';
 import uiConfig from './uiConfig';
+import exchange from './exchange/index';
 
 Vue.use(vuex);
 

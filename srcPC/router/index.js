@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 
-import store from 'store';
+import store from 'pcStore';
 import openUrl from 'utils/openUrl';
 import statistics from 'utils/statistics';
 import { getExplorerLink } from 'utils/getLink';

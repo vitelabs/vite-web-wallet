@@ -1,6 +1,6 @@
 import Connector from '@vite/bifrost';
 import { setCurrHDAcc, getCurrHDAcc } from './index';
-import store from 'store';
+import store from 'pcStore';
 
 export const BRIDGE = 'wss://biforst.vitewallet.com';
 export class VB extends Connector {

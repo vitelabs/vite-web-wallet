@@ -5,7 +5,7 @@ import 'assets/scss/mixins.scss';
 
 import Vue from 'vue';
 import i18n from 'pcI18n';
-import store from 'store';
+import store from 'pcStore';
 
 import App from './pages/index.vue';
 

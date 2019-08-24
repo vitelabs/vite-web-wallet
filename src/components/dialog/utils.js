@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import closeIcon from 'assets/imgs/confirm_close.svg';
-import store from 'store';
+import store from 'pcStore';
 import i18n from 'pcI18n';
 
 const STATUS = {

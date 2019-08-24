@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import i18n from 'pcI18n';
-import store from 'store';
+import store from 'pcStore';
 import { constant } from 'utils/store';
 import pwdComponent from './password.vue';
 

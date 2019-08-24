@@ -2,8 +2,8 @@ import { addrAccount } from '@vite/vitejs';
 
 import bigNumber from 'utils/bigNumber';
 import { timer } from 'utils/asyncFlow';
-import { defaultTokenMap } from 'utils/constant';
 import client from 'utils/viteClient';
+import { defaultTokenMap } from 'utils/constant';
 import env from 'h5Utils/envFromURL';
 import { getTokenIcon } from 'h5Utils/tokenParser';
 
