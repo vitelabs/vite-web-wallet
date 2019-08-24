@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import testNotice from 'components/testNotice';
+import testNotice from 'pcComponents/testNotice';
 import statistics from 'utils/statistics';
 import openUrl from 'utils/openUrl';
 

@@ -36,7 +36,7 @@
 
 <script>
 import { StatusMap } from 'wallet';
-import switchAddr from 'components/switchAddress';
+import switchAddr from 'pcComponents/switchAddress';
 
 import statistics from 'utils/statistics';
 import SwitchComp from 'uiKit/switch.vue';
