@@ -12,7 +12,7 @@ import App from 'pcPages/index.vue';
 import router from 'pcRouter/index.js';
 
 import i18n from 'pcI18n';
-import store from 'store';
+import store from 'pcStore';
 
 import plugin from 'plugins/addPlugin';
 import directives from 'plugins/directives';

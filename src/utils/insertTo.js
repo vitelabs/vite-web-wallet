@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import store from 'store';
+import store from 'pcStore';
 import i18n from 'pcI18n';
 
 export function insertTo(component, propsDefault = {}, ele) {
