@@ -129,6 +129,7 @@ textarea {
 
 .__pointer {
     cursor: pointer;
+    user-select: none;
 }
 
 .__err_msg {
