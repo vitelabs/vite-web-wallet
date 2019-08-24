@@ -25,27 +25,12 @@ export default {
     created() {
         this.$store.dispatch('startLoopBalance');
     },
-    beforeMount() {
-        this.$store.dispatch('startLoopExchangeRate');
-    },
     computed: {
         tokenList() {
-            return [
-                ...this.defaultTokenList,
-                ...this.otherWithBalance
-            ];
-        },
-        defaultTokenList() {
-            return this.$store.getters.defaultTokenList;
-        },
-        otherWithBalance() {
-            return this.$store.getters.otherWithBalance;
+            return this.$store.getters.allBalanceInfo;
         },
         showTokenIds() {
-            return [
-                ...this.defaultTokenList,
-                ...this.otherWithBalance
-            ].map(t => t.tokenId);
+            return this.$store.getters.allBalanceInfo.map(t => t.tokenId);
         }
     }
 };
