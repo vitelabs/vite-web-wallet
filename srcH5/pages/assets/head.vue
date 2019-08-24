@@ -32,10 +32,8 @@ export default {
         },
 
         allTokens() {
-            return [
-                ...this.$store.getters.defaultTokenList,
-                ...this.$store.getters.otherWithBalance
-            ];
+            console.log(this.$store.getters.allBalanceInfo);
+            return this.$store.getters.allBalanceInfo;
         },
         currencySymbol() {
             return this.$store.getters.currencySymbol;

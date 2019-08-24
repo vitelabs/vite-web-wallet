@@ -59,7 +59,7 @@ export default {
     },
     computed: {
         height() {
-            return this.$store.state.ledger.currentHeight;
+            return this.$store.state.env.currentHeight;
         },
         canCancel() {
             return this.stakingObj.withdrawHeight <= this.height;

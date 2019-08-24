@@ -67,11 +67,11 @@ export default {
         };
     },
     computed: {
+        viteTokenInfo() {
+            return this.$store.state.env.tokenMap[Vite_Token_Info.tokenId];
+        },
         canOrder() {
             return this.amount && !this.amountErr;
-        },
-        viteTokenInfo() {
-            return this.$store.getters.viteTokenInfo;
         },
         rawBalance() {
             const list = this.$store.getters.exBalanceList;

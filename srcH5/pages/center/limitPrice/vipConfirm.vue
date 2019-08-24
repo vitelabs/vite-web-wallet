@@ -7,7 +7,7 @@
         <div v-if="!isVip" class="__row">
             <div class="__row_t">{{ $t('tokenCard.heads.availableExAmount') }}</div>
             <div class="__input_row __unuse_input __bold">
-                <img :src="viteTokenInfo ? viteTokenInfo.icon : ''" class="__icon" />VITE
+                <img :src="viteTokenInfo.icon" class="__icon" />VITE
                 <span class="__right">{{ exViteBalance }}</span>
             </div>
         </div>
@@ -58,8 +58,11 @@ export default {
         };
     },
     computed: {
+        viteTokenInfo() {
+            return this.$store.state.env.tokenMap[Vite_Token_Info.tokenId];
+        },
         height() {
-            return this.$store.state.ledger.currentHeight;
+            return this.$store.state.env.currentHeight;
         },
         canOrder() {
             if (this.isVip) {
@@ -72,9 +75,6 @@ export default {
 
             const minAmount = BigNumber.toMin(vipStakingAmount, Vite_Token_Info.decimals);
             return BigNumber.compared(minAmount, this.rawBalance.availableExAmount) <= 0;
-        },
-        viteTokenInfo() {
-            return this.$store.getters.viteTokenInfo;
         },
         rawBalance() {
             const list = this.$store.getters.exBalanceList;

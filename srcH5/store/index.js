@@ -4,7 +4,6 @@ import vuex from 'vuex';
 import env from './env';
 import account from './account';
 import activeTxPair from './activeTxPair';
-import ledger from 'store/ledger';
 import balance from 'store/exchange/balance';
 import dexFundUnreceived from 'store/exchange/dexFundUnreceived';
 import fee from 'store/exchange/fee';
@@ -43,8 +42,8 @@ for (const moduleName in exchange) {
 }
 store.registerModule('env', env);
 store.registerModule('account', account);
-store.registerModule('ledger', ledger);
 
 store.dispatch('startLoopExchangeBalance');
+store.dispatch('fetchDefaultTokenList');
 
 export default store;

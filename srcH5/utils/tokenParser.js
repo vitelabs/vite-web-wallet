@@ -9,7 +9,6 @@ export function getTokenIcon(tokenId) {
 }
 
 export function getTokenSymbolString(symbol, index, length = 3) {
-    console.log(symbol, index);
     if (!symbol) {
         return '';
     }
