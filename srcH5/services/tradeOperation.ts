@@ -31,28 +31,3 @@ export function bindCode(code: number) {
     //         .catch(e => rej(e));
     // });
 }
-
-export function genCode() {
-    // return new Promise((res, rej) => {
-    //     sendTx({
-    //         abi: JSON.stringify(constant.DexFundNewInviter_Abi),
-    //         description: {
-    //             function: {
-    //                 name: {
-    //                     base: i18n.t('assets.invite.inviteTitle', 'en'),
-    //                     zh: i18n.t('assets.invite.inviteTitle', 'en')
-    //                 }
-    //             },
-    //             inputs: []
-    //         },
-    //         vbExtends: {
-    //             type: 'dexNewInviter',
-    //             cost: '1000 VITE'
-    //         },
-    //         methodName: 'dexFundNewInviter',
-    //         config: { pow: true }
-    //     })
-    //         .then(data => res(data))
-    //         .catch(e => rej(e));
-    // });
-}

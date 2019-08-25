@@ -5,7 +5,7 @@ module.exports = {
     devServer: {
         proxy: {
             '/gw': {
-                target: 'https://wallet.vite.net/',
+                target: 'https://x.vite.net',
                 changeOrigin: true,
                 secure: false
             }

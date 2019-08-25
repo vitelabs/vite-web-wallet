@@ -79,10 +79,13 @@ export const getClient = function (baseUrl = '', afterResponse, headersBase = {}
         host.slice(-1) === '/' && (host = host.slice(0, -1));
         path.indexOf('/') === 0 && (path = path.slice(1));
         path = `${ host }/${ path }`;
+
         headers = { ...headersBase, ...headers };
+
         if ((path.indexOf('.') !== -1 || path.indexOf(':') !== -1) && path.indexOf('http') !== 0) {
             path = `${ location.protocol }//${ path }`;
         }
+
         // [TODO] 暂时解决自定义网关跨域问题
         return request({ method, path, params, timeout, afterResponse, headers });
     };
