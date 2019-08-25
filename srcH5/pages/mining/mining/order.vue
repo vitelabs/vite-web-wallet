@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import { getOrderMiningDetail } from 'services/tradeOperation';
+import { getOrderMiningDetail } from 'services/trade';
 import bigNumber from 'utils/bigNumber';
 import date from 'utils/date';
 import myIncome from './myIncome';

@@ -66,14 +66,9 @@
     </div>
 </template>
 <script>
-import confirm from 'components/confirm/index.js';
-import { miningTrade, miningPledge } from 'services/trade';
-import {
-    getInviteMiningDetail,
-    getOrderMiningDetail
-} from 'services/tradeOperation';
-
 import openUrl from 'utils/openUrl';
+import confirm from 'components/confirm/index.js';
+import { miningTrade, miningPledge, getInviteMiningDetail, getOrderMiningDetail } from 'services/trade';
 import inviteMinComp from './invite.vue';
 import orderMinComp from './order.vue';
 import tradeMinComp from './trade.vue';

@@ -1,7 +1,6 @@
-import $ViteJS from 'utils/viteClient';
 import { timer } from 'utils/asyncFlow';
 import BigNumber from 'utils/bigNumber';
-import { getInviteeCode } from 'services/tradeOperation';
+import { getInviteeCode, isPledgeVip, getMarketInfo } from 'services/viteServer';
 
 const baseMakerFee = 0.002;
 const baseTakerFee = 0.002;
@@ -47,7 +46,7 @@ const actions = {
     },
     exFetchVip({ commit, getters }) {
         const address = getters.activeAddr;
-        address && $ViteJS.request('dexfund_isPledgeVip', address).then(data => {
+        address && isPledgeVip(address).then(data => {
             if (address !== getters.activeAddr) {
                 return;
             }
@@ -61,7 +60,7 @@ const actions = {
     exFetchMarketInfo({ commit, getters }) {
         const _activeTxPair = getters.exActiveTxPair;
 
-        _activeTxPair && $ViteJS.request('dexfund_getMarketInfo', _activeTxPair.tradeToken, _activeTxPair.quoteToken).then(data => {
+        _activeTxPair && getMarketInfo(_activeTxPair.tradeToken, _activeTxPair.quoteToken).then(data => {
             if (_activeTxPair.symbol !== getters.exActiveTxPair.symbol) {
                 return;
             }
