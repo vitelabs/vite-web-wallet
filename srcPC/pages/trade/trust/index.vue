@@ -3,7 +3,7 @@
         <div class="op item">
             <div class="title">交易委托</div>
             <div class="btn_group">
-                <div class="btn btn__ok __pointer" @click="addProxy">
+                <div class="btn btn__ok __pointer" @click="addProxy({actionType:'new'})">
                     新建委托
                 </div>
                 <div class="btn btn__cancel __pointer">了解委托</div>
@@ -23,26 +23,23 @@
                 >
                     <div
                         class="proxytb_row"
-                        v-for="addr in relation"
+                        v-for="addr in Object.keys(relation)"
                         :key="addr"
                     >
                         <div class="proxytb_cell">
                             {{ addr }}
                         </div>
-                        <div class="proxytb_cell">
-                            <PairItem
-                                v-for="pair in grantor[addr]"
-                                :key="pair.symbol"
-                                :item="transUtil(pair)"
-                            />
+                        <div class="proxytb_cell pair">
+                            {{ transUtil(relation[addr]) }}
                         </div>
                         <div class="proxytb_cell operation">
                             <div
                                 class="click-able"
                                 @click="
                                     addProxy({
-                                        address: addr,
-                                        existsPair: relation[addr]
+                                        trustAddress: addr,
+                                        existsPair: relation[addr],
+                                        actionType:'add'
                                     })
                                 "
                             >
@@ -51,9 +48,10 @@
                             <div
                                 class="click-able"
                                 @click="
-                                    deleteProxy({
-                                        address: addr,
-                                        existsPair: relation[addr]
+                                    addProxy({
+                                        trustAddress: addr,
+                                        existsPair: relation[addr],
+                                        actionType:'delete'
                                     })
                                 "
                             >
@@ -62,9 +60,10 @@
                             <div
                                 class="click-able"
                                 @click="
-                                    deleteAll({
-                                        address: addr,
-                                        existsPair: relation[addr]
+                                    addProxy({
+                                        trustAddress: addr,
+                                        existsPair: relation[addr],
+                                        actionType:'deleteAll'
                                     })
                                 "
                             >
@@ -91,16 +90,12 @@
                 >
                     <div
                         class="proxytb_row"
-                        v-for="addr in grantor"
+                        v-for="addr in Object.keys(grantor)"
                         :key="addr"
                     >
                         <div class="proxytb_cell">{{ addr }}</div>
                         <div class="proxytb_cell">
-                            <PairItem
-                                v-for="pair in grantor[addr]"
-                                :key="pair.symbol"
-                                :item="transUtil(pair)"
-                            />
+                            {{ transUtil(grantor[addr]) }}
                         </div>
                     </div>
                 </div>
@@ -112,9 +107,9 @@
     </div>
 </template>
 <script>
-import { getProxyRelation, getProxyGrantor } from 'services/tradeOperation';
-import { addDialog } from './dialog';
-import PairItem from './dialog/pairItem';
+import { getProxyRelation, getProxyGrantor } from "pcServices/tradeOperation";
+import { addDialog } from "./dialog";
+import PairItem from "./dialog/pairItem";
 export default {
     components: { PairItem },
     data() {
@@ -137,17 +132,20 @@ export default {
                 this.grantor = data.relations;
             });
         },
-        addProxy({ address, existsPair } = {}) {
-            addDialog({ address, existsPair });
+        addProxy({ trustAddress, existsPair ,actionType} = {}) {
+            if (existsPair) {
+                existsPair = existsPair.map(p =>
+                    Object.assign(p, {
+                        name: p.symbol.replace("_", "/"),
+                        id: `${p.tradeToken}/${p.quoteToken}`
+                    })
+                );
+            }
+            addDialog({ trustAddress, existsPair,actionType });
         },
-        deleteProxy({ address, existsPair } = {}) {
-            addDialog({ address, existsPair });
-        },
-        transUtil(pair) {
-            return Object.assign(pair, {
-                name: pair.symbol.replace('_', '/'),
-                id: `${ pair.tradeToken }/${ pair.quoteToken }`
-            });
+        transUtil(pairs) {
+            if (!pairs || pairs.length === 0) return "";
+            return pairs.map(p => p.symbol.replace("_", "/")).join("   ");
         }
     }
 };
@@ -266,19 +264,18 @@ export default {
     }
 
     .proxytb_cell {
-        display: inline-block;
-        text-align: left;
+        display: flex;
         font-size: 12px;
         margin: 0 3px;
         @include font-family-normal();
         white-space: nowrap;
         box-sizing: border-box;
-        .operation {
+        &.operation {
             display: flex;
             justify-content: space-between;
         }
         &:first-child {
-            width: 370px;
+            width: 400px;
             padding-left: 30px;
             margin-left: 0;
         }
