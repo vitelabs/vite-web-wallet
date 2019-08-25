@@ -55,9 +55,11 @@ const getters = {
             const decimals = tokenInfo.decimals;
             const balance = bigNumber.toBasic(item.totalAmount, decimals);
 
-            balanceInfo[tokenId] = tokenInfo[tokenId] || {};
-            balanceInfo[tokenId].balance = balance;
-            balanceInfo[tokenId].totalAmount = item.totalAmount;
+            balanceInfo[tokenId] = {
+                ...tokenInfo,
+                balance: balance,
+                totalAmount: item.totalAmount
+            };
         }
         return balanceInfo;
     },

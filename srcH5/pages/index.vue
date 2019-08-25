@@ -6,18 +6,16 @@
 </template>
 
 <script>
-import getDialog from 'h5Components/dialog/getDialog.js';
-import receiveInvite from 'h5Components/receiveInvite.vue';
+import { receiveInviteDialog } from 'h5Components/dialog';
 import orderNoticeList from 'components/orderNoticeList.vue';
 
 export default {
     components: { orderNoticeList },
     mounted() {
-        const receiveInviteDialog = getDialog(receiveInvite);
-        receiveInviteDialog();
-
-        this.$store.dispatch('startLoopExchangeRate');
-        this.$store.dispatch('exFetchLatestOrder');
+        console.log(this.$route.query);
+        if (Number(this.$route.query['ldfjacia']) > 0) {
+            receiveInviteDialog();
+        }
     }
 };
 </script>
