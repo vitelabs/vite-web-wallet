@@ -14,7 +14,7 @@
 <script>
 import income from './income.vue';
 import tokenList from './tokenList';
-import secTitle from 'components/secTitle';
+import secTitle from 'pcComponents/secTitle';
 import openUrl from 'utils/openUrl';
 
 export default {

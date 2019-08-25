@@ -98,14 +98,11 @@ export default {
             return BigNumber.onlyFormat(num);
         },
         getRate(tokenId) {
-            const rateList = this.$store.state.exchangeRate.rateMap || {};
-            const coin = this.$store.state.env.currency;
-
-            if (!tokenId || !rateList[tokenId]) {
+            if (!tokenId) {
                 return null;
             }
-
-            return rateList[tokenId][`${ coin }Rate`] || null;
+            const rateList = this.$store.getters.currencyRateList || {};
+            return rateList[tokenId] || null;
         },
 
         fetchOperator() {

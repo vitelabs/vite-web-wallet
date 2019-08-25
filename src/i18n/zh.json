@@ -1146,5 +1146,50 @@
             "feeRate": "手续费率",
             "feeIncome": "手续费收益"
         }
+    },
+    "mobileAssets": {
+        "allAssets": "总资产折合({token})",
+        "tokenListTitle": "代币信息",
+        "tokenInfoTitle": "代币详情"
+    },
+    "mobileTradeCenter": {
+        "highPrice": "高",
+        "lowPrice": "低",
+        "quantity": "24H",
+        "buyTitle": "买入",
+        "sellTitle": "卖出",
+        "buyPrice": "买价({token})",
+        "sellPrice": "卖价({token})",
+        "buy": {
+            "price": "买入价",
+            "quantity": "买入量"
+        },
+        "sell": {
+            "price": "卖出价",
+            "quantity": "卖出量"
+        },
+        "orderQuantity": "数量",
+        "orderPrice": "价格",
+        "executedQuantity": "成交",
+        "avgPrice": "均价"
+    },
+    "mobileDividend": {
+        "title": "分红",
+        "poolTitle": "手续费分红池({token})",
+        "myDividendTitle": "我的分红收益总估值({token})",
+        "listTitle": "分红明细"
+    },
+    "mobileMining": {
+        "title": "挖矿",
+        "miningTrade": "交易挖矿",
+        "miningStaking": "抵押挖矿",
+        "miningInvite": "邀请挖矿",
+        "miningOrder": "挂单挖矿",
+        "tradeTotalIncome": "交易挖矿总收益({token})",
+        "stakingTotalIncome": "抵押挖矿总收益({token})",
+        "inviteTotalIncome": "邀请挖矿总收益({token})",
+        "orderTotalIncome": "挂单挖矿总收益({token})",
+        "fee": "手续费金额",
+        "listTitle": "挖矿明细"
     }
 }

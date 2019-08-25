@@ -34,10 +34,10 @@
 <script>
 import confirm from 'components/confirm/confirm.vue';
 import viteInput from 'components/viteInput';
-import sendTx from 'utils/sendTx';
+import sendTx from 'pcUtils/sendTx';
 import bigNumber from 'utils/bigNumber';
 import statistics from 'utils/statistics';
-import { verifyAmount, verifyWithdrawAmount } from 'utils/validations';
+import { verifyAmount, verifyWithdrawAmount } from 'pcUtils/validations';
 import router from 'pcRouter';
 
 const minLimit = 134;

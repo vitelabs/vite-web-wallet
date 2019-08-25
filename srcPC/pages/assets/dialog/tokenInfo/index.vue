@@ -85,8 +85,8 @@ block originContent
 
 <script>
 import { tokenDetail } from 'services/trade';
-import { gateStorage, getChargeAddr } from 'services/gate';
-import { getTokenIcon } from 'utils/tokenParser';
+import { gateStorage, getChargeAddr } from 'pcServices/gate';
+import { getTokenIcon } from 'pcUtils/tokenParser';
 import { getExplorerLink } from 'utils/getLink';
 import openUrl from 'utils/openUrl';
 import BigNumber from 'utils/bigNumber';
@@ -146,7 +146,7 @@ export default {
     },
     methods: {
         goToTokenDetail() {
-            const l = `${ getExplorerLink() }token/${ this.token.tokenId }`;
+            const l = `${ getExplorerLink(this.$i18n.locale) }token/${ this.token.tokenId }`;
             openUrl(l);
         },
         goToGateOffical() {
@@ -214,7 +214,7 @@ export default {
                     ? this.$t('tokenCard.tokenInfo.labels.crossType')
                     : this.$t('tokenCard.tokenInfo.labels.originType');
                 this.tokenDetail.explorerLink = this.tokenDetail.explorerLink
-                    || (this.tokenDetail.gateway ? null : getExplorerLink());
+                    || (this.tokenDetail.gateway ? null : getExplorerLink(this.$i18n.locale));
                 this.tokenDetail.showTotalSupply = BigNumber.toBasic(this.tokenDetail.totalSupply, this.tokenDetail.tokenDecimals);
             }).catch(err => {
                 console.warn(err);

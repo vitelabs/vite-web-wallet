@@ -20,7 +20,12 @@ module.exports = {
         alias: {
             wallet: path.join(PC_SRC_PATH, '/wallet'),
             pcPages: path.join(PC_SRC_PATH, '/pages'),
-            pcRouter: path.join(PC_SRC_PATH, '/router')
+            pcRouter: path.join(PC_SRC_PATH, '/router'),
+            pcI18n: path.join(PC_SRC_PATH, '/i18n'),
+            pcStore: path.join(PC_SRC_PATH, '/store'),
+            pcUtils: path.join(PC_SRC_PATH, '/utils'),
+            pcComponents: path.join(PC_SRC_PATH, '/components'),
+            pcServices: path.join(PC_SRC_PATH, '/services')
         }
     }
 };

@@ -32,11 +32,11 @@
     </div>
 </template>
 <script>
-import { insertTo } from 'utils/insertTo';
+import { insertTo } from 'pcUtils/insertTo';
 import VxConfirm from './vxConfirm.vue';
 import $ViteJS from 'utils/viteClient';
 import statistics from 'utils/statistics';
-import { execWithValid } from 'utils/execWithValid';
+import { execWithValid } from 'pcUtils/execWithValid';
 import stakingDetail from './stakingDetail.vue';
 import { constant } from '@vite/vitejs';
 import { timer } from 'utils/asyncFlow';

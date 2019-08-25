@@ -35,11 +35,11 @@ import list from './list';
 import confirm from 'components/confirm/confirm.vue';
 import loading from 'components/loading';
 import viteInput from 'components/viteInput';
-import { initPwd } from 'components/password/index.js';
-import sendTx from 'utils/sendTx';
+import { initPwd } from 'pcComponents/password/index.js';
+import sendTx from 'pcUtils/sendTx';
 import BigNumber from 'utils/bigNumber';
-import { verifyWithdrawAmount } from 'utils/validations';
-import { execWithValid } from 'utils/execWithValid';
+import { verifyWithdrawAmount } from 'pcUtils/validations';
+import { execWithValid } from 'pcUtils/execWithValid';
 
 const Vite_Token_Info = constant.Vite_Token_Info;
 

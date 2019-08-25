@@ -81,11 +81,11 @@
 <script>
 import slider from 'components/slider';
 import viteInput from 'components/viteInput';
-import { initPwd } from 'components/password/index.js';
-import sendTx from 'utils/sendTx';
+import { initPwd } from 'pcComponents/password/index.js';
+import sendTx from 'pcUtils/sendTx';
 import BigNumber from 'utils/bigNumber';
-import { verifyAmount, checkAmountFormat } from 'utils/validations';
-import { execWithValid } from 'utils/execWithValid';
+import { verifyAmount, checkAmountFormat } from 'pcUtils/validations';
+import { execWithValid } from 'pcUtils/execWithValid';
 import statistics from 'utils/statistics';
 
 export default {
@@ -225,20 +225,10 @@ export default {
             }
 
             const realPrice = BigNumber.multi(this.price || 0, this.rate || 0, 6);
-            return BigNumber.onlyFormat(realPrice, 2);
+            return `${ pre }${ BigNumber.onlyFormat(realPrice, 2) }`;
         },
         rate() {
-            const rateList = this.$store.state.exchangeRate.rateMap || {};
-            const tokenId
-                = this.activeTxPair && this.activeTxPair.quoteToken
-                    ? this.activeTxPair.quoteToken
-                    : null;
-            const coin = this.$store.state.env.currency;
-
-            if (!tokenId || !rateList[tokenId]) {
-                return null;
-            }
-            return rateList[tokenId][`${ coin }Rate`] || null;
+            return this.$store.getters.activeTxPairQuoteCurrencyRate || null;
         },
         minAmount() {
             const minAmount = this.$store.state.exchangeLimit.minAmount;

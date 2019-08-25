@@ -31,8 +31,8 @@ import loading from 'components/loading';
 import confirm from 'components/confirm/confirm.vue';
 import viteInput from 'components/viteInput';
 import BigNumber from 'utils/bigNumber';
-import sendTx from 'utils/sendTx';
-import { initPwd } from 'components/password/index.js';
+import sendTx from 'pcUtils/sendTx';
+import { initPwd } from 'pcComponents/password/index.js';
 
 const spend = 10000;
 const Vite_Token_Info = constant.Vite_Token_Info;

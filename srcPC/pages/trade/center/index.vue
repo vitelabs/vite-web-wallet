@@ -14,7 +14,6 @@
 </template>
 
 <script>
-import BigNumber from 'utils/bigNumber';
 import confirm from 'components/confirm/index.js';
 import layout from './layout';
 import depth from './depth/depth.vue';
@@ -31,7 +30,6 @@ export default {
         this.$store.dispatch('exFetchActiveTxPair');
         this.$store.dispatch('exFetchVip');
         this.$store.dispatch('startLoopDexFundeUnreceived');
-        this.$store.commit('exSetRealClosePrice', this.realPrice);
 
         !this.$store.state.env.isShowCompliance && confirm({
             size: 'small',
@@ -60,41 +58,9 @@ export default {
         },
         activeTxPair() {
             return this.$store.state.exchangeActiveTxPair.activeTxPair;
-        },
-        currency() {
-            return this.$store.state.env.currency;
-        },
-        rate() {
-            const rateList = this.$store.state.exchangeRate.rateMap || {};
-            const tokenId = this.activeTxPair && this.activeTxPair.quoteToken ? this.activeTxPair.quoteToken : null;
-            const coin = this.currency;
-
-            if (!tokenId || !rateList[tokenId]) {
-                return null;
-            }
-            return rateList[tokenId][`${ coin }Rate`] || null;
-        },
-        realPrice() {
-            const pre = this.currency === 'cny' ? '¥' : '$';
-
-            if (!this.activeTxPair) {
-                return `${ pre }0`;
-            }
-
-            const _price = BigNumber.multi(this.activeTxPair.closePrice || 0, this.rate || 0, 6);
-            const _realPrice = BigNumber.normalFormatNum(_price, 6);
-            const _realPrice2 = BigNumber.normalFormatNum(_realPrice, 2);
-
-            if (+_realPrice2 !== 0) {
-                return pre + BigNumber.onlyFormat(_realPrice2, 2);
-            }
-            return pre + BigNumber.onlyFormat(_realPrice, 2);
         }
     },
     watch: {
-        realPrice() {
-            this.$store.commit('exSetRealClosePrice', this.realPrice);
-        },
         address() {
             this.$store.dispatch('exFetchVip');
         },

@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import { execWithValid } from 'utils/execWithValid';
+import { execWithValid } from 'pcUtils/execWithValid';
 import statistics from 'utils/statistics';
 
 export default {

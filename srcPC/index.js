@@ -9,14 +9,14 @@ import './wallet';
 import Vue from 'vue';
 
 import App from 'pcPages/index.vue';
-import router from './router/index.js';
+import router from 'pcRouter/index.js';
 
-import i18n from 'i18n';
-import store from 'store';
+import i18n from 'pcI18n';
+import store from 'pcStore';
 
 import plugin from 'plugins/addPlugin';
 import directives from 'plugins/directives';
-import { resaveAccList, resaveLastAcc } from 'utils/store/resave';
+import { resaveAccList, resaveLastAcc } from 'pcUtils/store/resave';
 
 resaveAccList();
 resaveLastAcc();

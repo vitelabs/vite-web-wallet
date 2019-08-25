@@ -9,9 +9,9 @@
 </template>
 
 <script>
-import noticeList from 'components/noticeList.vue';
-import { emptySpace } from 'utils/storageSpace';
-import { receiveInviteDialog } from 'components/dialog';
+import noticeList from 'pcComponents/noticeList.vue';
+import { emptySpace } from 'pcUtils/storageSpace';
+import { receiveInviteDialog } from 'pcComponents/dialog';
 const inviteCodeKey = 'INVITE_CODE';
 
 export default {

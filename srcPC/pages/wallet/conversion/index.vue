@@ -47,8 +47,8 @@
 <script>
 import openUrl from 'utils/openUrl';
 import { timer } from 'utils/asyncFlow';
-import _ethWallet from 'utils/ethWallet/index.js';
-import secTitle from 'components/secTitle';
+import _ethWallet from 'pcUtils/ethWallet/index.js';
+import secTitle from 'pcComponents/secTitle';
 import loading from 'components/loading';
 import viteAddress from './address';
 import token from './token';

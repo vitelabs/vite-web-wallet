@@ -41,7 +41,7 @@ import logoutView from './logout';
 import order from './order.vue';
 import vipConfirm from './vipConfirm.vue';
 import { StatusMap } from 'wallet';
-import { execWithValid } from 'utils/execWithValid';
+import { execWithValid } from 'pcUtils/execWithValid';
 import BigNumber from 'utils/bigNumber';
 import statistics from 'utils/statistics';
 

@@ -73,15 +73,15 @@
 import Vue from 'vue';
 import { utils, hdAddr } from '@vite/vitejs';
 
-import { initPwd } from 'components/password/index.js';
+import { initPwd } from 'pcComponents/password/index.js';
 import confirm from 'components/confirm/confirm.vue';
 import viteInput from 'components/viteInput';
-import sendTx from 'utils/sendTx';
+import sendTx from 'pcUtils/sendTx';
 import bigNumber from 'utils/bigNumber';
 import statistics from 'utils/statistics';
-import { getTokenIcon } from 'utils/tokenParser';
-import { verifyAmount } from 'utils/validations';
-import { execWithValid } from 'utils/execWithValid';
+import { getTokenIcon } from 'pcUtils/tokenParser';
+import { verifyAmount } from 'pcUtils/validations';
+import { execWithValid } from 'pcUtils/execWithValid';
 
 const { getBytesSize } = utils;
 

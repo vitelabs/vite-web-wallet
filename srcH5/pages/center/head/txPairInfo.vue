@@ -1,38 +1,39 @@
 <template>
     <div class="tx-pair-info">
-        <div class="token-img" @click="_showDetail('token')">
-            <img v-show="ftokenIcon" :src="ftokenIcon"/>
-            <div v-show="activeTxPairIsClose" class="close"></div>
+        <div class="left">
+            <div class="token-img" @click="_showDetail('token')">
+                <img v-show="ftokenIcon" :src="ftokenIcon"/>
+                <div v-show="activeTxPairIsClose" class="close"></div>
+            </div>
+
+            <div class="t-item">
+                <span class="symbol" @click="_showDetail('token')">
+                    {{ ftokenDetail ? ftokenDetail.symbol : '' }}
+                </span>
+                <span class="symbol ttoken" @click="_showDetail('token')">
+                    / {{ ttokenDetail ? ttokenDetail.symbol : '' }}
+                </span>
+                <div class="mining" v-show="isMinging">
+                    <img src="~assets/imgs/mining.svg"/>
+                </div>
+            </div>
         </div>
 
-        <div class="t-item">
-            <span class="symbol" @click="_showDetail('token')">
-                {{ ftokenDetail ? ftokenDetail.symbol : '' }}
-            </span> /
-            <span class="symbol ttoken" @click="_showDetail('token')">
-                {{ ttokenDetail ? ttokenDetail.symbol : '' }}
-            </span>
-            <span class="mining" v-show="isMinging">
-                <img src="~assets/imgs/mining.svg"/>
-                <tooltips class="tips" :content="$t('tradeCenter.supportMining')"></tooltips>
-            </span>
-            <span class="gate" @click="_showDetail('operator')">
-                <img class="gate-img" :src="operatorIcon" />
-                {{ operatorInfo ? operatorInfo.name : $t('tradeCenter.operator.noName') }}
-            </span>
-        </div>
+        <span class="gate" @click="_showDetail('operator')">
+            <img class="gate-img" :src="operatorIcon" />
+            {{ operatorInfo ? operatorInfo.name : $t('tradeCenter.operator.noName') }}
+        </span>
     </div>
 </template>
 
 <script>
-import tooltips from 'components/tooltips';
-import viteConfirm from 'components/confirm/index.js';
-import operatorIcon from 'assets/imgs/operator_icon.svg';
+import viteConfirm from 'h5Components/confirm/index.js';
+import operatorIcon from 'h5Assets/imgs/operator_default.svg';
+import defaultTokenIcon from 'assets/imgs/default_token_icon.png';
 
 let lastSymbol = null;
 
 export default {
-    components: { tooltips },
     props: {
         showDetail: {
             type: Function,
@@ -56,9 +57,6 @@ export default {
             }
             return this.closeMarket.find(v => v.symbol === this.activeTxPair.symbol);
         },
-        defaultTokens() {
-            return this.$store.state.ledger.tokenInfoMaps;
-        },
         ttokenDetail() {
             return this.$store.state.exchangeTokens.ttoken;
         },
@@ -66,21 +64,10 @@ export default {
             return this.$store.state.exchangeTokens.ftoken;
         },
         ftokenIcon() {
-            if (!this.ftokenDetail) {
-                return '';
-            }
-
-            if (this.ftokenDetail.urlIcon) {
+            if (this.ftokenDetail && this.ftokenDetail.urlIcon) {
                 return this.ftokenDetail.urlIcon;
             }
-
-            const tokenId = this.ftokenDetail.tokenId;
-            const defaultToken = this.defaultTokens[tokenId];
-
-            if (defaultToken && defaultToken.icon) {
-                return defaultToken.icon;
-            }
-            return '';
+            return defaultTokenIcon;
         },
         operatorInfo() {
             return this.$store.state.exchangeTokens.operator;
@@ -137,21 +124,48 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~h5Assets/scss/center.scss';
+@import '~h5Assets/scss/vars.scss';
+
+.confirm.tx-pair-info {
+    position: relative;
+    margin-bottom: 0;
+    .mining {
+        display: inline-block;
+    }
+    .gate {
+        position: absolute;
+        left: 50px;
+        top: 26px;
+        border: none;
+        padding: 0;
+        color: rgba(62,74,89,1);
+    }
+}
 
 .tx-pair-info {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+    @include font-normal();
+    margin-bottom: 10px;
+}
+.left {
     position: relative;
+    display: flex;
+    flex: 1;
 }
 
 .token-img {
-    position: absolute;
-    top: 6px;
+    width: 40px;
+    height: 40px;
     display: inline-block;
+    margin-right: 10px;
     img {
         display: inline-block;
-        width: 28px;
-        height: 28px;
-        border-radius: 28px;
+        width: 100%;
+        height: 100%;
+        border-radius: 40px;
         border: 1px solid rgba(212,222,231,1);
         box-sizing: border-box;
     }
@@ -182,48 +196,45 @@ export default {
 .t-item {
     display: inline-block;
     font-size: 12px;
-    @include font-family-bold();
-    font-weight: 600;
+    @include font-bold();
     color: rgba(29, 32, 36, 1);
     line-height: 14px;
-    margin-left: 36px;
 
     .symbol {
         position: relative;
         white-space: nowrap;
-        line-height: 20px;
+        @include font-bold();
         &:first-child {
-            font-size: 16px;
+            font-size: 18px;
+            color: rgba(36,39,43,1);
+            line-height: 22px;
         }
         &.ttoken {
-            color: #5E6875;
+            font-size: 14px;
+            color: rgba(62,74,89,0.3);
+            line-height: 18px;
         }
     }
     .mining {
         position: relative;
-        .tips {
-            display: none;
-            @include font-family-normal();
-        }
-        &:hover {
-            .tips {
-                display: inline-block;
-            }
-        }
         img {
-            margin-bottom: -1px;
+            width: 16px;
+            height: 16px;
         }
     }
-    .gate {
-        @include font-family-normal();
-        color: #007AFF;
-        display: flex;
-        margin-top: 2px;
-        .gate-img {
-            width: 14px;
-            height: 14px;
-            margin-bottom: -3px;
-        }
+}
+
+.gate {
+    border-radius: 2px;
+    border: 1px solid rgba(0,122,255,1);
+    @include font-normal();
+    font-size: 12px;
+    color: $blue;
+    padding: 3px 6px;
+    .gate-img {
+        width: 14px;
+        height: 14px;
+        margin-bottom: -3px;
     }
 }
 </style>
