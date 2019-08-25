@@ -10,7 +10,7 @@ block content
         input.block__content(v-else v-model="userInputAddress")
         .block__title 委托交易对
         .pair_section.exists
-            PairItem(v-for="item in existsPair" :item="item" class="pairs")
+            PairItem(v-for="item in existsPair" :item="item" class="pairs" :cancelAble="actionType==='delete'" @cancelItem="deleteExist(item)")
         .pair_section.new2add
             PairItem(v-for="item in selectedPairs" :item="item" :cancelAble="true" @cancelItem="deleteItem(item)" class="pairs")
         SearchTips(:filterMethod="filterMethod" @selected="addItem" class="search")
@@ -54,6 +54,7 @@ export default {
         return {
             allProxyAblePairs: [],
             selectedPairs: [],
+            deletedPairs: [],
             userInputAddress: '',
             userInput: '',
             dLTxt: '取消',
@@ -76,9 +77,11 @@ export default {
             this.selectedPairs.push(item);
         },
         deleteItem(item) {
-            console.log(item);
             const i = this.selectedPairs.findIndex(i => i.id === item.id);
             if (i >= 0) this.selectedPairs.splice(i, 1);
+        },
+        deleteExist(item) {
+            this.deletedPairs.push(item);
         },
         filterMethod(input) {
             return this.allProxyAblePairs
@@ -90,7 +93,12 @@ export default {
                     }));
         },
         inspector: throttle(function () {
-            configMarketsAgent({ actionType: true });
+            const actionType = (this.actionType === 'new' || this.actionType === 'add') ? 1 : 2;
+            if (this.actionType === 'deleteAll') this.deletedPairs = this.existsPair;
+            const manilpulatePairs = (this.actionType === 'new' || this.actionType === 'add') ? this.selectedPairs : this.deletedPairs;
+            const tradeTokens = manilpulatePairs.map(p => p.tradeToken);
+            const quoteTokens = manilpulatePairs.map(p => p.quoteToken);
+            return configMarketsAgent({ actionType, address: this.trustAddress || this.userInputAddress, tradeTokens, quoteTokens });
         })
     },
     computed: {
