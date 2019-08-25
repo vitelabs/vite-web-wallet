@@ -1,5 +1,20 @@
 <template lang="pug">
 extends /components/dialog/base.pug
+block head
+    .head
+        .charge-tips
+            i18n(path='tokenCard.charge.tips.0' tag="span")
+                span.strong(place="tokenSymbol") {{getTokenSymbol(token)}}
+            .dot
+        .charge-tips
+            i18n(path='tokenCard.charge.tips.1' tag="span")
+                span.strong(place="tokenSymbol") {{getTokenSymbol(token)}}
+                span.strong(place="min") {{minimumDepositAmount}}
+            .dot
+        .charge-tips
+            i18n(path='tokenCard.charge.tips.2' tag="span")
+                span.strong(place="confirmationCount") {{confirmationCount}}
+            .dot
 block content
     .block__title
         span {{$t('tokenCard.charge.addressTitle')}}
@@ -16,12 +31,6 @@ block content
     .qrcode-container(v-if="!!labelName")
         .qrcode-container__title {{$t('tokenCard.charge.labelCodeTips',{labelName})}}
         qrcode(:text="labelValue" :options="qrOptions" class="qrcode-container__content")
-    .charge-tips {{$t('tokenCard.charge.tips.0',{tokenSymbol:getTokenSymbol(token)})}}
-        .dot
-    .charge-tips {{$t('tokenCard.charge.tips.1',{tokenSymbol:getTokenSymbol(token),min:minimumDepositAmount})}}
-        .dot
-    .charge-tips {{$t('tokenCard.charge.tips.2',{confirmationCount})}}
-        .dot
 </template>
 
 <script>
@@ -129,24 +138,41 @@ export default {
         margin-top: 20px;
     }
 }
-.charge-tips {
+.head {
+    border-bottom: 1px solid rgba(212, 222, 231, 1);
+    box-sizing: border-box;
+    padding: 20px 30px;
+    display: flex;
+    flex-direction: column;
+    background: rgba(0, 122, 255, 0.05);
     @include font-family-normal();
     line-height: 18px;
-    font-size: 14px;
-    color: rgba(94, 104, 117, 1);
-    padding-left: 13px;
-    margin-top: 10px;
-    position: relative;
-    width: 100%;
-    margin-top: 20px;
-    .dot {
-        width: 6px;
-        height: 6px;
-        background: rgba(0, 122, 255, 1);
-        border-radius: 100%;
-        position: absolute;
-        left: 0;
-        top: 6px;
+    .charge-tips {
+        @include font-family-normal();
+        line-height: 16px;
+        font-size: 12px;
+        color: rgba(94, 104, 117, 1);
+        padding-left: 13px;
+        margin-top: 10px;
+        position: relative;
+        width: 100%;
+        margin-top: 20px;
+        &:first-child{
+            margin-top: 0px;
+        }
+        .strong{
+            color: #007aff;
+            @include font-family-bold();
+        }
+        .dot {
+            width: 4px;
+            height: 4px;
+            background: rgba(0, 122, 255, 1);
+            border-radius: 100%;
+            position: absolute;
+            left: 0;
+            top: 4px;
+        }
     }
 }
 </style>

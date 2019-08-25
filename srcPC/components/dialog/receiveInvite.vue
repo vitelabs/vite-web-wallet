@@ -2,7 +2,7 @@
 extends /components/dialog/base.pug
 block content
     img.bg-img(src="~assets/imgs/invite.png")
-    div(v-if="inviteeCode&&+inviteeCode!==-1")
+    div(v-if="inviteeCode&&+inviteeCode!==0")
         .invite-code {{$t('assets.invite.invited')}}{{this.inviteeCode}}
     div(v-else)
         .block__title {{ $t('assets.invite.codeLable') }}
@@ -19,6 +19,7 @@ block content
 import { bindCode } from 'pcServices/tradeOperation';
 import { doUntill } from 'utils/asyncFlow';
 import { emptySpace } from 'pcUtils/storageSpace';
+import router from 'pcRouter';
 
 export default {
     async beforeMount() {
@@ -49,7 +50,7 @@ export default {
         },
         dSTxt() {
             return (
-                (!this.inviteeCode || Number(this.inviteeCode) === -1) ? this.$t('assets.invite.receiveInviteTitle') : ''
+                (!this.inviteeCode || Number(this.inviteeCode) === 0) ? this.$t('assets.invite.receiveInviteTitle') : ''
             );
         },
         formatErr() {
@@ -80,6 +81,11 @@ export default {
                         });
                 })
                 .catch(e => {
+                    if (e && e.error && e.error.code === 12002) {
+                        router.push({ name: 'startLogin' });
+                        this.close();
+                        return;
+                    }
                     this.$toast(this.$t('assets.invite.failToast'), e);
                 });
             return Promise.reject('no close');
