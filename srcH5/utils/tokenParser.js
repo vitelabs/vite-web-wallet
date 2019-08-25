@@ -1,5 +1,6 @@
 import { defaultTokenMap } from 'utils/constant';
 import defaultTokenIcon from 'assets/imgs/default_token_icon.png';
+import { getTokenSymbolString as _getTokenSymbolString } from 'utils/tokenParser';
 
 export function getTokenIcon(tokenId) {
     if (tokenId && defaultTokenMap[tokenId]) {
@@ -8,21 +9,4 @@ export function getTokenIcon(tokenId) {
     return defaultTokenIcon;
 }
 
-export function getTokenSymbolString(symbol, index, length = 3) {
-    if (!symbol) {
-        return '';
-    }
-    if (symbol.toUpperCase() === 'VITE' || symbol.toUpperCase() === 'VCP' || symbol.toUpperCase() === 'VX' || index === undefined) {
-        return symbol;
-    }
-    const s = String(index);
-    if (s.length > length) throw 'wrong index length';
-
-    return (
-        `${ symbol }-${
-            Array(length - s.length)
-                .fill(0)
-                .join('')
-        }${ s }`
-    );
-}
+export const getTokenSymbolString = _getTokenSymbolString;
