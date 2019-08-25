@@ -1,7 +1,10 @@
 <template lang="pug">
 extends /components/dialog/base.pug
 block content
-    .content-wrapper
+    .content-wrapper(v-if="actionType==='deleteAll'")
+        i18n(path='tokenCard.charge.tips.0' tag="span")
+            span.strong(place="tokenSymbol") {{trustAddress}}
+    .content-wrapper(v-else)
         .block__title 委托地址
         .block__content.edit(v-if="!!trustAddress") {{trustAddress}}
         input.block__content(v-else v-model="userInputAddress")
@@ -17,9 +20,7 @@ block content
 import { throttle } from 'lodash';
 import PairItem from './pairItem';
 import SearchTips from 'uiKit/searchTips';
-import { getProxyAblePairs } from 'services/tradeOperation';
-
-// const MAX_RES_NUMS = 10;
+import { getProxyAblePairs, configMarketsAgent } from 'services/tradeOperation';
 
 export default {
     components: { PairItem, SearchTips },
@@ -31,23 +32,41 @@ export default {
         existsPair: {
             type: Array,
             default: () => []
+        },
+        actionType: {
+            type: String, // new|add|delete|deleteAll
+            default: 'new'
         }
     },
     data() {
+        const rTxtMap = {
+            new: '添加',
+            add: '添加',
+            delete: '确认修改',
+            delteAll: '确认'
+        };
+        const titleMap = {
+            new: '新增委托',
+            add: '增加委托交易对',
+            delete: '减少委托交易对',
+            delteAll: '确认撤销委托'
+        };
         return {
             allProxyAblePairs: [],
             selectedPairs: [],
             userInputAddress: '',
             userInput: '',
-            dLTxt: this.$t('tokenCard.addToken.lTxt'),
-            dRTxt: this.$t('tokenCard.addToken.rTxt'),
-            dTitle: this.$t('tokenCard.addToken.title')
+            dLTxt: '取消',
+            dWidth: this.actionType === 'deleteAll' ? 'narrow' : undefined,
+            dRTxt: rTxtMap[this.actionType],
+            dTitle: titleMap[this.actionType]
         };
     },
     beforeMount() {
-        getProxyAblePairs().then(data => {
-            this.allProxyAblePairs = data;
-        });
+        (this.actionType === 'new' || this.actionType === 'add')
+            && getProxyAblePairs().then(data => {
+                this.allProxyAblePairs = data;
+            });
     },
     methods: {
         addItem(item) {
@@ -62,10 +81,17 @@ export default {
             if (i >= 0) this.selectedPairs.splice(i, 1);
         },
         filterMethod(input) {
-            console.log(999);
-            return this.allProxyAblePairs.filter(p => p.symbol.replace('_', '/').indexOf(input) >= 0).map(p => Object.assign(p, { name: p.symbol.replace('_', '/'), id: `${ p.tradeToken }/${ p.quoteToken }` }));
+            return this.allProxyAblePairs
+                .filter(p => p.symbol.replace('_', '/').indexOf(input) >= 0)
+                .map(p =>
+                    Object.assign(p, {
+                        name: p.symbol.replace('_', '/'),
+                        id: `${ p.tradeToken }/${ p.quoteToken }`
+                    }));
         },
-        inspector: throttle(function () {})
+        inspector: throttle(function () {
+            configMarketsAgent({actionType:true})
+        })
     },
     computed: {
         address() {
@@ -81,11 +107,10 @@ export default {
     display: flex;
     flex-wrap: wrap;
     padding: 6px 0;
-    &.new2add{
-        border-top: 1px solid rgba(212,222,231,1);
-
+    &.exists {
+        border-bottom: 1px solid rgba(212, 222, 231, 1);
     }
-    .pairs{
+    .pairs {
         margin: 6px;
         margin-right: 0;
     }
@@ -158,7 +183,7 @@ export default {
         @include font-family-bold();
     }
 }
-.search{
+.search {
     height: 205px;
 }
 </style>
