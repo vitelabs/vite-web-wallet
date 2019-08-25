@@ -107,9 +107,9 @@
     </div>
 </template>
 <script>
-import { getProxyRelation, getProxyGrantor } from "pcServices/tradeOperation";
-import { addDialog } from "./dialog";
-import PairItem from "./dialog/pairItem";
+import { getProxyRelation, getProxyGrantor } from 'pcServices/tradeOperation';
+import { addDialog } from './dialog';
+import PairItem from './dialog/pairItem';
 export default {
     components: { PairItem },
     data() {
@@ -132,20 +132,19 @@ export default {
                 this.grantor = data.relations;
             });
         },
-        addProxy({ trustAddress, existsPair ,actionType} = {}) {
+        addProxy({ trustAddress, existsPair, actionType } = {}) {
             if (existsPair) {
                 existsPair = existsPair.map(p =>
                     Object.assign(p, {
-                        name: p.symbol.replace("_", "/"),
-                        id: `${p.tradeToken}/${p.quoteToken}`
-                    })
-                );
+                        name: p.symbol.replace('_', '/'),
+                        id: `${ p.tradeToken }/${ p.quoteToken }`
+                    }));
             }
-            addDialog({ trustAddress, existsPair,actionType });
+            addDialog({ trustAddress, existsPair, actionType });
         },
         transUtil(pairs) {
-            if (!pairs || pairs.length === 0) return "";
-            return pairs.map(p => p.symbol.replace("_", "/")).join("   ");
+            if (!pairs || pairs.length === 0) return '';
+            return pairs.map(p => p.symbol.replace('_', '/')).join('   ');
         }
     }
 };
