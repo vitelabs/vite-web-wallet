@@ -2,6 +2,7 @@ import $ViteJS from 'utils/viteClient';
 import { timer } from 'utils/asyncFlow';
 import BigNumber from 'utils/bigNumber';
 import { getInviteeCode } from 'services/tradeOperation';
+import { getSvipStatus } from 'pcServices/tradeOperation';
 
 const baseMakerFee = 0.002;
 const baseTakerFee = 0.002;
@@ -26,6 +27,9 @@ const mutations = {
     },
     setInviteCode(state, payload = '') {
         state.invitedCode = payload;
+    },
+    setExchangeSVip(state, isSVip) {
+        state.isSVip = isSVip;
     }
 };
 
@@ -43,6 +47,15 @@ const actions = {
                 commit('setInviteCode', '-1');
                 rej(e);
             });
+        });
+    },
+    exFetchSVip({ commit, getters }) {
+        const address = getters.activeAddr;
+        address && getSvipStatus(address).then(data => {
+            if (address !== getters.activeAddr) {
+                return;
+            }
+            commit('setExchangeSVip', data);
         });
     },
     exFetchVip({ commit, getters }) {

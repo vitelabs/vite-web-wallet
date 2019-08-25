@@ -20,7 +20,7 @@ block content
 import { throttle } from 'lodash';
 import PairItem from './pairItem';
 import SearchTips from 'uiKit/searchTips';
-import { getProxyAblePairs, configMarketsAgent } from 'services/tradeOperation';
+import { getProxyAblePairs, configMarketsAgent } from 'pcServices/tradeOperation';
 
 export default {
     components: { PairItem, SearchTips },
@@ -98,7 +98,7 @@ export default {
             const manilpulatePairs = (this.actionType === 'new' || this.actionType === 'add') ? this.selectedPairs : this.deletedPairs;
             const tradeTokens = manilpulatePairs.map(p => p.tradeToken);
             const quoteTokens = manilpulatePairs.map(p => p.quoteToken);
-            return configMarketsAgent({ actionType, address: this.trustAddress || this.userInputAddress, tradeTokens, quoteTokens });
+            return configMarketsAgent({ actionType, agent: this.trustAddress || this.userInputAddress, tradeTokens, quoteTokens });
         })
     },
     computed: {

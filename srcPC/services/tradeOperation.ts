@@ -67,11 +67,21 @@ export function getInviteeCode(address: string) {
     // get who invited me
     return viteClient.request('dexfund_getInviteeCode', address);
 }
-
 export function getSvipStatus(address:string){
      return viteClient.request("dexfund_isPledgeSuperVip", address); 
 }
-
+export function pledgeForSuperVIp({actionType}) {
+  return new Promise((res, rej) => {
+    sendTx({
+      abi: JSON.stringify(constant.DexFundPledgeForSuperVip_Abi),
+      methodName: "dexFundPledgeForSuperVip",
+      data: { actionType },
+      config: { pow: true }
+    })
+      .then(data => res(data))
+      .catch(e => rej(e));
+  });
+}
 export function configMarketsAgent({actionType, agent,tradeTokens,quoteTokens}) {
   return new Promise((res, rej) => {
     sendTx({
@@ -85,18 +95,7 @@ export function configMarketsAgent({actionType, agent,tradeTokens,quoteTokens}) 
   });
 }
 
-export function pledgeForSuperVIp({actionType}) {
-  return new Promise((res, rej) => {
-    sendTx({
-      abi: JSON.stringify(constant.DexFundPledgeForSuperVip_Abi),
-      methodName: "dexFundPledgeForSuperVip",
-      data: { actionType },
-      config: { pow: true }
-    })
-      .then(data => res(data))
-      .catch(e => rej(e));
-  });
-}
+
 interface IProxyPair {
   symbol: string;
   tradeToken: tokenId;
