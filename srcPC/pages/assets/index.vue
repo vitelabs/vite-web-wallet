@@ -52,12 +52,12 @@
 
 <script>
 import tooltips from 'components/tooltips';
-import pageLayout from 'components/pageLayout/index';
+import pageLayout from 'pcComponents/pageLayout/index';
 import openUrl from 'utils/openUrl';
 import tokenCard from './tokenCard';
 import accountHead from './head';
 import { addTokenDialog } from './dialog';
-import { gateStorage } from 'services/gate';
+import { gateStorage } from 'pcServices/gate';
 import TokenFilter from './filter';
 import { debounce } from 'lodash';
 import AssetSwitch from './assetSwitch';

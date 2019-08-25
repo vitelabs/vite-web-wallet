@@ -66,7 +66,7 @@ import txDexImg from 'assets/imgs/txDex.svg';
 
 import pagination from 'components/pagination.vue';
 import walletTable from 'components/table/index.vue';
-import secTitle from 'components/secTitle';
+import secTitle from 'pcComponents/secTitle';
 import date from 'utils/date.js';
 import { timer } from 'utils/asyncFlow';
 import BigNumber from 'utils/bigNumber';

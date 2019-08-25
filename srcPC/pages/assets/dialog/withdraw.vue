@@ -30,13 +30,13 @@ block content
 </template>
 
 <script>
-import { verifyAddr, getWithdrawInfo, getWithdrawFee, withdraw, getDepositInfo, getMetaInfo } from 'services/gate';
+import { verifyAddr, getWithdrawInfo, getWithdrawFee, withdraw, getDepositInfo, getMetaInfo } from 'pcServices/gate';
 import debounce from 'lodash/debounce';
-import { getValidBalance } from 'utils/validations';
+import { getValidBalance } from 'pcUtils/validations';
 import bigNumber from 'utils/bigNumber';
 import tooltips from 'components/tooltips';
-import { getTokenIcon } from 'utils/tokenParser';
-import { execWithValid } from 'utils/execWithValid';
+import { getTokenIcon } from 'pcUtils/tokenParser';
+import { execWithValid } from 'pcUtils/execWithValid';
 
 
 export default {

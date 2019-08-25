@@ -2,14 +2,13 @@
     <div class="depth-table-wrapper">
         <loading loadingType="dot" class="ex-center-loading" v-show="isLoading"></loading>
 
-        <div class="__center-tb-row __pointer" @click="clickRow(item, i)"
+        <div class="__center-tb-row" :class="dataType" @click="clickRow(item, i)"
              v-for="(item, i) in depthData" :key="i">
-            <span class="__center-tb-item depth price __ellipsis" :class="dataType">
-                {{ formatNum(item.price, 'ttoken') }}
+            <span v-if="dataType === 'buy'" class="quantity">{{ formatNum(item.quantity, 'ftoken') }}</span>
+            <span class="price">{{ formatNum(item.price, 'ttoken') }}
                 <span class="owner" v-show="isInOpenOrders(item.price)"></span>
             </span>
-            <span class="__center-tb-item left depth quantity">{{ formatNum(item.quantity, 'ftoken') }}</span>
-            <span class="__center-tb-item depth amount">{{ formatNum(item.amount, 'ttoken') }}</span>
+            <span v-if="dataType === 'sell'" class="quantity">{{ formatNum(item.quantity, 'ftoken') }}</span>
             <span class="percent-wrapper" :class="dataType" :style="{ 'width': getWidth(item) + '%' }"></span>
         </div>
     </div>
@@ -127,19 +126,45 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~h5Assets/scss/center.scss';
+@import '~h5Assets/scss/vars.scss';
 
 .depth-table-wrapper {
     position: relative;
-    font-family: $font-H;
 }
 
-.__center-tb-item .owner {
-    display: inline-block;
-    width: 8px;
-    height: 8px;
-    background: url('~assets/imgs/owner.svg');
-    background-size: 100% 100%;
+.__center-tb-row {
+    position: relative;
+    height: 24px;
+    line-height: 24px;
+    font-size: 12px;
+    @include font-bold();
+    display: flex;
+    flex-direction: row;
+    color: rgba(94,104,117,1);
+    justify-content: space-between;
+    white-space: nowrap;
+    .price {
+        max-width: 50%;
+    }
+    .owner {
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        background: url('~assets/imgs/owner.svg');
+        background-size: 100% 100%;
+    }
+    &.buy {
+        padding-left: 4px;
+        .quantity {
+            color: $green;
+        }
+    }
+    &.sell {
+        padding-right: 4px;
+        .quantity {
+            color: $red;
+        }
+    }
 }
 
 .percent-wrapper {
@@ -147,13 +172,12 @@ export default {
     right: 0;
     top: 0;
     bottom: 0;
-
     &.buy {
-        background: rgba(0, 215, 100, 0.08);
+        background: rgba(0,215,100,0.08);
     }
 
     &.sell {
-        background: rgba(237, 81, 88, 0.08);
+        background: rgba(237,81,88,0.08);
     }
 }
 </style>

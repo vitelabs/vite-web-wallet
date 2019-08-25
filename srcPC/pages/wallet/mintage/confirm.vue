@@ -32,8 +32,8 @@
 <script>
 import { constant } from '@vite/vitejs';
 import confirm from 'components/confirm/confirm.vue';
-import { initPwd } from 'components/password/index.js';
-import sendTx from 'utils/sendTx';
+import { initPwd } from 'pcComponents/password/index.js';
+import sendTx from 'pcUtils/sendTx';
 import BigNumber from 'utils/bigNumber';
 
 const fee = '1000';

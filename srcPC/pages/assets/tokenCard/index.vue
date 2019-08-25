@@ -5,7 +5,7 @@
                 <img :src="token.icon" class="icon" @click="() => showDetail()"/>
                 <div class="name-wrapper" @click="() => showDetail()">
                     <div class="token-symbol">
-                        {{ getTokenNameString(token.tokenSymbol, token.index) }}
+                        {{ getTokenSymbolString(token.tokenSymbol, token.index) }}
                     </div>
                     <div class="token-name">{{ token.tokenName }}</div>
                 </div>
@@ -101,9 +101,9 @@ import {
 import importantHint from '../dialog/importantHint';
 import statistics from 'utils/statistics';
 import bigNumber from 'utils/bigNumber';
-import { execWithValid } from 'utils/execWithValid';
-import { getTokenNameString } from 'utils/tokenParser';
-import { gateStorage } from 'services/gate';
+import { execWithValid } from 'pcUtils/execWithValid';
+import { getTokenSymbolString } from 'pcUtils/tokenParser';
+import { gateStorage } from 'pcServices/gate';
 import transaction from '../transaction';
 import Alert from '../alert.vue';
 
@@ -187,8 +187,8 @@ export default {
         }
     },
     methods: {
-        getTokenNameString(...args) {
-            return getTokenNameString(...args);
+        getTokenSymbolString(...args) {
+            return getTokenSymbolString(...args);
         },
         exRecord() {
             statistics.event(this.$route.name, 'exchange-history', this.address || '');

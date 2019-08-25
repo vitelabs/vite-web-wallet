@@ -9,11 +9,13 @@ const afterResponseDefault = async function (xhr, path) {
         });
     }
 
-    const { code, msg, data, error } = JSON.parse(xhr.responseText);
+    const { code, msg, data, error, subCode } = JSON.parse(xhr.responseText);
     const rightCode = path.indexOf('api') === -1 ? 200 : 0;
+
     if (code !== rightCode) {
         return Promise.reject({
             code,
+            subCode,
             message: msg || error
         });
     }

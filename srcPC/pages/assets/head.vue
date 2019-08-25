@@ -73,10 +73,10 @@ import { getCurrHDAcc } from 'wallet';
 import Pie from 'components/pie';
 import copy from 'components/copy';
 import QrcodePopup from 'components/qrcodePopup';
-import SwitchAddr from 'components/switchAddress';
+import SwitchAddr from 'pcComponents/switchAddress';
 import bigNumber from 'utils/bigNumber';
 import statistics from 'utils/statistics';
-import { getTokenNameString } from 'utils/tokenParser';
+import { getTokenSymbolString } from 'pcUtils/tokenParser';
 import AssetSwitch from './assetSwitch';
 
 const assetsType = {
@@ -98,7 +98,7 @@ export default {
     computed: {
         pieData() {
             const data = JSON.parse(JSON.stringify(this.assetMap));
-            data.forEach(t => (t.symbol = getTokenNameString(t.tokenSymbol, t.index)));
+            data.forEach(t => (t.symbol = getTokenSymbolString(t.tokenSymbol, t.index)));
             let polyData = data;
             if (data.length > 5) {
                 polyData = data.slice(0, 4);

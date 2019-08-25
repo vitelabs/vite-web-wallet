@@ -16,8 +16,8 @@ block content
 </template>
 <script>
 import statistics from 'utils/statistics';
-import { getValidBalance } from 'utils/validations';
-import sendTx from 'utils/sendTx';
+import { getValidBalance } from 'pcUtils/validations';
+import sendTx from 'pcUtils/sendTx';
 import debounce from 'lodash/debounce';
 import bigNumber from 'utils/bigNumber';
 export default {

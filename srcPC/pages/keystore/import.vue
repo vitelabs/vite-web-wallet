@@ -30,7 +30,7 @@
 
 <script>
 import { keystore } from '@vite/vitejs';
-import { getKeystoreAccList } from 'utils/store';
+import { getKeystoreAccList } from 'pcUtils/store';
 
 export default {
     props: {

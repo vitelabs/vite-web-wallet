@@ -31,6 +31,7 @@
 
 <script>
 import $ViteJS from 'utils/viteClient';
+import { getTokenSymbolString } from 'pcUtils/tokenParser';
 import viteIcon from 'assets/imgs/vite-dividend.svg';
 import ethIcon from 'assets/imgs/eth.svg';
 import usdIcon from 'assets/imgs/usd.svg';
@@ -124,12 +125,7 @@ export default {
             if (!tokenInfo) {
                 return '';
             }
-            const index = tokenInfo.index;
-            const symbol = tokenInfo.tokenSymbol;
-            const pre = +index >= 100 ? ''
-                : +index >= 10 ? '0'
-                    : '00';
-            return [ 'VITE', 'VCP', 'VX' ].indexOf(symbol) === -1 ? `${ symbol }-${ pre }${ index }` : symbol;
+            return getTokenSymbolString(tokenInfo.tokenSymbol, tokenInfo.index);
         },
         fetchPool() {
             $ViteJS.request('dexfund_getCurrentDividendPools').then(data => {

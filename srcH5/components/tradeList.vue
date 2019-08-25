@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import confirm from 'components/confirm/confirm.vue';
+import confirm from 'h5Components/confirm/confirm.vue';
 import walletTable from 'components/table/index.vue';
 
 export default {

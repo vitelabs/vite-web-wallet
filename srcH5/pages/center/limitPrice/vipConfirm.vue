@@ -7,7 +7,7 @@
         <div v-if="!isVip" class="__row">
             <div class="__row_t">{{ $t('tokenCard.heads.availableExAmount') }}</div>
             <div class="__input_row __unuse_input __bold">
-                <img :src="viteTokenInfo ? viteTokenInfo.icon : ''" class="__icon" />VITE
+                <img :src="viteTokenInfo.icon" class="__icon" />VITE
                 <span class="__right">{{ exViteBalance }}</span>
             </div>
         </div>
@@ -26,9 +26,9 @@
 
 <script>
 import { constant } from '@vite/vitejs';
-import confirm from 'components/confirm/confirm.vue';
+import confirm from 'h5Components/confirm/confirm.vue';
 import BigNumber from 'utils/bigNumber';
-import sendTx from 'utils/sendTx';
+// import sendTx from 'h5Utils/sendTx';
 import $ViteJS from 'utils/viteClient';
 import date from 'utils/date';
 import statistics from 'utils/statistics';
@@ -58,8 +58,11 @@ export default {
         };
     },
     computed: {
+        viteTokenInfo() {
+            return this.$store.state.env.tokenMap[Vite_Token_Info.tokenId];
+        },
         height() {
-            return this.$store.state.ledger.currentHeight;
+            return this.$store.state.env.currentHeight;
         },
         canOrder() {
             if (this.isVip) {
@@ -72,9 +75,6 @@ export default {
 
             const minAmount = BigNumber.toMin(vipStakingAmount, Vite_Token_Info.decimals);
             return BigNumber.compared(minAmount, this.rawBalance.availableExAmount) <= 0;
-        },
-        viteTokenInfo() {
-            return this.$store.getters.viteTokenInfo;
         },
         rawBalance() {
             const list = this.$store.getters.exBalanceList;
@@ -115,26 +115,26 @@ export default {
 
             statistics.event(this.$route.name, `VIP-${ actionType === 2 ? 'cancel' : 'open' }`, this.accountAddr || '');
 
-            sendTx({
-                methodName: 'dexFundPledgeForVip',
-                data: {
-                    amount: '0',
-                    actionType
-                },
-                vbExtends: {
-                    'type': 'dexFundPledgeForVip',
-                    'amount': '10,000 VITE'
-                }
-            }).then(() => {
-                this.isLoading = false;
-                this.$toast(this.isVip ? this.$t('trade.vipConfirm.cancelSuccess') : this.$t('trade.vipConfirm.openSuccess'));
-                this.close && this.close();
-                this.$store.dispatch('startLoopVip', !this.isVip);
-            }).catch(err => {
-                console.warn(err);
-                this.isLoading = false;
-                this.$toast(this.isVip ? this.$t('trade.vipConfirm.cancelFail') : this.$t('trade.vipConfirm.openFail'));
-            });
+            // sendTx({
+            //     methodName: 'dexFundPledgeForVip',
+            //     data: {
+            //         amount: '0',
+            //         actionType
+            //     },
+            //     vbExtends: {
+            //         'type': 'dexFundPledgeForVip',
+            //         'amount': '10,000 VITE'
+            //     }
+            // }).then(() => {
+            //     this.isLoading = false;
+            //     this.$toast(this.isVip ? this.$t('trade.vipConfirm.cancelSuccess') : this.$t('trade.vipConfirm.openSuccess'));
+            //     this.close && this.close();
+            //     this.$store.dispatch('startLoopVip', !this.isVip);
+            // }).catch(err => {
+            //     console.warn(err);
+            //     this.isLoading = false;
+            //     this.$toast(this.isVip ? this.$t('trade.vipConfirm.cancelFail') : this.$t('trade.vipConfirm.openFail'));
+            // });
         },
 
         fetchStakingObj() {

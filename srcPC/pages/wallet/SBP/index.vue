@@ -30,14 +30,14 @@
 
 <script>
 import { hdAddr, constant } from '@vite/vitejs';
-import secTitle from 'components/secTitle';
+import secTitle from 'pcComponents/secTitle';
 import loading from 'components/loading';
 import confirm from 'components/confirm/confirm.vue';
 import viteInput from 'components/viteInput';
-import { initPwd } from 'components/password/index.js';
-import { execWithValid } from 'utils/execWithValid';
+import { initPwd } from 'pcComponents/password/index.js';
+import { execWithValid } from 'pcUtils/execWithValid';
 import BigNumber from 'utils/bigNumber';
-import sendTx from 'utils/sendTx';
+import sendTx from 'pcUtils/sendTx';
 import register from './register';
 import list from './list';
 

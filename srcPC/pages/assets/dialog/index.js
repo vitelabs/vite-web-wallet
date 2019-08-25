@@ -1,4 +1,4 @@
-import getDialog from 'components/dialog/utils.js';
+import getDialog from 'pcComponents/dialog/utils.js';
 import receiveComp from './receive.vue';
 import chargeComp from './charge.vue';
 import addTokenComp from './addToken.vue';

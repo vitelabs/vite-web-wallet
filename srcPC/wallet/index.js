@@ -1,6 +1,6 @@
 import { keystore, constant, utils } from '@vite/vitejs';
 import viteCrypto from 'testwebworker';
-import { getOldAccList, setOldAccList } from 'utils/store';
+import { getOldAccList, setOldAccList } from 'pcUtils/store';
 import { HDAccount, StatusMap as _StatusMap, VBAccount } from './hdAccount';
 import { getLastAcc, addHdAccount, setAcc, getAccList } from './store';
 function constructAccount(acc) {

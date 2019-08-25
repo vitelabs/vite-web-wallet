@@ -54,7 +54,7 @@ import { timer } from 'utils/asyncFlow';
 import BigNumber from 'utils/bigNumber';
 import statistics from 'utils/statistics';
 import ellipsisAddr from 'utils/ellipsisAddr.js';
-import { execWithValid } from 'utils/execWithValid';
+import { execWithValid } from 'pcUtils/execWithValid';
 
 const Vite_Token_Info = constant.Vite_Token_Info;
 let pledgeListInst;

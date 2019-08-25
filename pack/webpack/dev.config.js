@@ -12,6 +12,7 @@ module.exports = {
     },
     devtool: 'source-map',
     devServer: {
+        hot: true,
         proxy: {
             '/gw': {
                 target: 'http://132.232.60.116:8000',

@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import pageLayout from 'components/pageLayout/index';
+import pageLayout from 'pcComponents/pageLayout/index';
 
 export default { components: { pageLayout } };
 </script>

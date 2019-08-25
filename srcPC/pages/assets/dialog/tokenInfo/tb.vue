@@ -68,7 +68,7 @@
 // [TODO] Need components/table
 
 import Pagination from 'components/pagination.vue';
-import { getDepositRecords, getWithdrawRecords } from 'services/gate';
+import { getDepositRecords, getWithdrawRecords } from 'pcServices/gate';
 import shortify from 'utils/ellipsisAddr';
 import b from 'utils/bigNumber';
 import openUrl from 'utils/openUrl';

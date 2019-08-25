@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import changeLang from 'components/changeLang';
+import changeLang from 'pcComponents/changeLang';
 
 export default { components: { changeLang } };
 </script>
