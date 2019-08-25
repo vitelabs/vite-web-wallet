@@ -3,7 +3,9 @@
         <div class="op item">
             <div class="title">交易委托</div>
             <div class="btn_group">
-                <div class="btn btn__ok __pointer" @click="addProxy">新建委托</div>
+                <div class="btn btn__ok __pointer" @click="addProxy">
+                    新建委托
+                </div>
                 <div class="btn btn__cancel __pointer">了解委托</div>
             </div>
         </div>
@@ -15,12 +17,61 @@
                     <div class="proxytb_cell">委托交易对</div>
                     <div class="proxytb_cell">操作</div>
                 </div>
-                <div class="proxytb_content" v-if="Object.keys(relation).length>0">
+                <div
+                    class="proxytb_content"
+                    v-if="Object.keys(relation).length > 0"
+                >
                     <div
                         class="proxytb_row"
                         v-for="addr in relation"
                         :key="addr"
-                    ></div>
+                    >
+                        <div class="proxytb_cell">
+                            {{ addr }}
+                        </div>
+                        <div class="proxytb_cell">
+                            <PairItem
+                                v-for="pair in grantor[addr]"
+                                :key="pair.symbol"
+                                :item="transUtil(pair)"
+                            />
+                        </div>
+                        <div class="proxytb_cell operation">
+                            <div
+                                class="click-able"
+                                @click="
+                                    addProxy({
+                                        address: addr,
+                                        existsPair: relation[addr]
+                                    })
+                                "
+                            >
+                                增加交易对
+                            </div>
+                            <div
+                                class="click-able"
+                                @click="
+                                    deleteProxy({
+                                        address: addr,
+                                        existsPair: relation[addr]
+                                    })
+                                "
+                            >
+                                减少交易对
+                            </div>
+                            <div
+                                class="click-able"
+                                @click="
+                                    deleteAll({
+                                        address: addr,
+                                        existsPair: relation[addr]
+                                    })
+                                "
+                            >
+                                撤销委托
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="proxytb_content" v-else>
                     <div class="proxytb_no_data"></div>
@@ -34,12 +85,24 @@
                     <div class="proxytb_cell">委托人地址</div>
                     <div class="proxytb_cell">委托交易对</div>
                 </div>
-                <div class="proxytb_content" v-if="Object.keys(grantor).length>0">
+                <div
+                    class="proxytb_content"
+                    v-if="Object.keys(grantor).length > 0"
+                >
                     <div
                         class="proxytb_row"
                         v-for="addr in grantor"
                         :key="addr"
-                    ></div>
+                    >
+                        <div class="proxytb_cell">{{ addr }}</div>
+                        <div class="proxytb_cell">
+                            <PairItem
+                                v-for="pair in grantor[addr]"
+                                :key="pair.symbol"
+                                :item="transUtil(pair)"
+                            />
+                        </div>
+                    </div>
                 </div>
                 <div class="proxytb_content" v-else>
                     <div class="proxytb_no_data"></div>
@@ -51,7 +114,9 @@
 <script>
 import { getProxyRelation, getProxyGrantor } from 'services/tradeOperation';
 import { addDialog } from './dialog';
+import PairItem from './dialog/pairItem';
 export default {
+    components: { PairItem },
     data() {
         return { relation: {}, grantor: {} };
     },
@@ -72,9 +137,17 @@ export default {
                 this.grantor = data.relations;
             });
         },
-        addProxy() {
-            console.log('fff');
-            addDialog({});
+        addProxy({ address, existsPair } = {}) {
+            addDialog({ address, existsPair });
+        },
+        deleteProxy({ address, existsPair } = {}) {
+            addDialog({ address, existsPair });
+        },
+        transUtil(pair) {
+            return Object.assign(pair, {
+                name: pair.symbol.replace('_', '/'),
+                id: `${ pair.tradeToken }/${ pair.quoteToken }`
+            });
         }
     }
 };
@@ -200,6 +273,10 @@ export default {
         @include font-family-normal();
         white-space: nowrap;
         box-sizing: border-box;
+        .operation {
+            display: flex;
+            justify-content: space-between;
+        }
         &:first-child {
             width: 370px;
             padding-left: 30px;
@@ -208,16 +285,17 @@ export default {
         &:nth-child(2) {
             flex: 1;
         }
-        &:last-child{
+        &:last-child {
             padding-right: 30px;
             margin-right: 0;
         }
-        &:nth-child(3){
+        &:nth-child(3) {
             width: 280px;
         }
     }
     .click-able {
         cursor: pointer;
+        user-select: none;
         color: #007aff;
     }
 }
