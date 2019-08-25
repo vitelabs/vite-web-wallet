@@ -76,13 +76,12 @@ const getters = {
             const decimals = tokenInfo.decimals;
             const balance = bigNumber.toBasic(item.totalAmount, decimals);
 
-            balanceInfo[tokenId] = tokenInfo[tokenId] || {};
-            balanceInfo[tokenId].tokenId = tokenId;
-            balanceInfo[tokenId].balance = balance;
-            balanceInfo[tokenId].decimals = decimals;
-            balanceInfo[tokenId].tokenSymbol = tokenInfo.tokenSymbol;
-            balanceInfo[tokenId].transNum = item.number;
-            balanceInfo[tokenId].totalAmount = item.totalAmount;
+            balanceInfo[tokenId] = {
+                ...tokenInfo,
+                balance,
+                transNum: item.number,
+                totalAmount: item.totalAmount
+            };
         }
 
         for (const tokenId in state.onroad.balanceInfos) {
