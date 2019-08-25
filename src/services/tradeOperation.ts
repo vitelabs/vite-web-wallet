@@ -1,22 +1,6 @@
-import { getClient } from 'utils/request';
+import request from 'utils/request';
 import viteClient from 'utils/viteClient';
 
-const version = 'v1';
-const path = `${ process.env.dexApiServer }${ version }`;
-const request = getClient(path, (xhr: XMLHttpRequest) => {
-    if (xhr.status === 200) {
-        const { code, msg, data, error, subCode } = JSON.parse(xhr.responseText);
-        if (code !== 0) {
-            return Promise.reject({
-                code,
-                subCode,
-                message: msg || error
-            });
-        }
-        return Promise.resolve(data || null);
-    }
-    return Promise.reject(xhr.responseText);
-});
 
 interface IInviterInfo {
   miningTotal: bnStr;
