@@ -32,7 +32,6 @@ export default {
         },
 
         allTokens() {
-            console.log(this.$store.getters.allBalanceInfo);
             return this.$store.getters.allBalanceInfo;
         },
         currencySymbol() {
