@@ -90,7 +90,7 @@ export default {
                     }));
         },
         inspector: throttle(function () {
-            configMarketsAgent({actionType:true})
+            configMarketsAgent({ actionType: true });
         })
     },
     computed: {
