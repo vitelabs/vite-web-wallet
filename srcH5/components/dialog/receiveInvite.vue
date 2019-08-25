@@ -18,7 +18,6 @@ block content
 <script>
 import { bindCode } from 'h5Services/tradeOperation';
 import { doUntill } from 'utils/asyncFlow';
-// import { emptySpace } from 'h5Utils/storageSpace';
 import router from 'h5Router';
 
 export default {
@@ -28,10 +27,6 @@ export default {
         } catch (e) {
             console.log('get bind code error', e);
         }
-        // const code = emptySpace.getItem('INVITE_CODE');
-        // if (code) {
-        //     this.code = code;
-        // }
         this.status = 'LOADED';
     },
     data() {

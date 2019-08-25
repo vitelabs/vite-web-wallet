@@ -15,7 +15,7 @@ module.exports = {
         hot: true,
         proxy: {
             '/gw': {
-                target: 'http://132.232.60.116:8000',
+                target: 'http://132.232.60.116:8001',
                 changeOrigin: true,
                 secure: false
             }
