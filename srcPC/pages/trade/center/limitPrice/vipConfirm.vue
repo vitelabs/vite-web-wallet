@@ -32,6 +32,7 @@ import sendTx from 'pcUtils/sendTx';
 import date from 'utils/date';
 import statistics from 'utils/statistics';
 import { getAgentVipPledgeInfo } from 'services/viteServer';
+import router from 'pcRouter';
 
 const Vite_Token_Info = constant.Vite_Token_Info;
 const vipStakingAmount = 10000;
@@ -113,7 +114,7 @@ export default {
             const actionType = this.isVip ? 2 : 1;
             this.isLoading = true;
 
-            statistics.event(this.$route.name, `VIP-${ actionType === 2 ? 'cancel' : 'open' }`, this.accountAddr || '');
+            statistics.event(router.currentRoute.name, `VIP-${ actionType === 2 ? 'cancel' : 'open' }`, this.accountAddr || '');
 
             sendTx({
                 methodName: 'dexFundPledgeForVip',

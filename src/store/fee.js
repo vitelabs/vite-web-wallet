@@ -13,7 +13,8 @@ const state = {
     baseMakerFee,
     baseTakerFee,
     marketInfo: {},
-    invitedCode: ''
+    invitedCode: '',
+    isSVip: false
 };
 
 const mutations = {
@@ -42,7 +43,7 @@ const actions = {
                 commit('setInviteCode', code);
                 res(code);
             }).catch(e => {
-                commit('setInviteCode', '-1');
+                commit('setInviteCode', 0);
                 rej(e);
             });
         });
@@ -107,10 +108,12 @@ const getters = {
         return 0;
     },
     exMakerFee(state, getters) {
-        return getFee(baseMakerFee, getters.operatorMakerFee, getters.vipFee, getters.inviteFeeDiscount);
+        const _baseMakerFee = state.isSVip ? 0 : baseMakerFee;
+        return getFee(_baseMakerFee, getters.operatorMakerFee, getters.vipFee, getters.inviteFeeDiscount);
     },
     exTakerFee(state, getters) {
-        return getFee(baseTakerFee, getters.operatorTakerFee, getters.vipFee, getters.inviteFeeDiscount);
+        const _baseTakerFee = state.isSVip ? 0 : baseTakerFee;
+        return getFee(_baseTakerFee, getters.operatorTakerFee, getters.vipFee, getters.inviteFeeDiscount);
     },
     exBuyOrderFee(state, getters) {
         if (BigNumber.compared(getters.exMakerFee, getters.exTakerFee) > 0) {

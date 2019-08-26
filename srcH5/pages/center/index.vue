@@ -23,6 +23,7 @@ export default {
     mounted() {
         this.$store.dispatch('dexFetchActiveTxPair');
         this.$store.dispatch('exFetchVip');
+        this.$store.dispatch('exFetchSVip');
         this.$store.dispatch('getMarketsClosed');
         this.$store.dispatch('exFetchLimitAmounts');
         this.$store.dispatch('startLoopDexFundeUnreceived');
@@ -38,6 +39,7 @@ export default {
     watch: {
         address() {
             this.$store.dispatch('exFetchVip');
+            this.$store.dispatch('exFetchSVip');
         }
     }
 };

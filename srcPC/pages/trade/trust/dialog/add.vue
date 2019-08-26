@@ -11,16 +11,19 @@ block content
         .block__title 委托交易对
         .pair_section.exists
             PairItem(v-for="item in existsPair" :item="item" class="pairs" :cancelAble="actionType==='delete'" @cancelItem="deleteExist(item)")
-        .pair_section.new2add
+        .pair_section(:class="{pair_section__border_top:this.existsPair&&this.existsPair.length>0}")
             PairItem(v-for="item in selectedPairs" :item="item" :cancelAble="true" @cancelItem="deleteItem(item)" class="pairs")
-        SearchTips(:filterMethod="filterMethod" @selected="addItem" class="search")
+        SearchTips(:filterMethod="filterMethod" @selected="addItem" class="search" v-if="actionType==='new'||actionType==='add'")
 </template>
 
 <script>
 import { throttle } from 'lodash';
 import PairItem from './pairItem';
 import SearchTips from 'uiKit/searchTips';
-import { getProxyAblePairs, configMarketsAgent } from 'pcServices/tradeOperation';
+import {
+    getProxyAblePairs,
+    configMarketsAgent
+} from 'pcServices/tradeOperation';
 
 export default {
     components: { PairItem, SearchTips },
@@ -81,11 +84,17 @@ export default {
             if (i >= 0) this.selectedPairs.splice(i, 1);
         },
         deleteExist(item) {
-            this.deletedPairs.push(item);
+            const i = this.existsPair.findIndex(i => i.id === item.id);
+            if (i >= 0) this.existsPair.splice(i, 1), this.deletedPairs.push(item);
         },
         filterMethod(input) {
+            if (!input) return [];
             return this.allProxyAblePairs
-                .filter(p => p.symbol.replace('_', '/').indexOf(input) >= 0)
+                .filter(p =>
+                    p.symbol
+                        .replace('_', '/')
+                        .toLowerCase()
+                        .indexOf(input.toLowerCase()) >= 0)
                 .map(p =>
                     Object.assign(p, {
                         name: p.symbol.replace('_', '/'),
@@ -93,12 +102,21 @@ export default {
                     }));
         },
         inspector: throttle(function () {
-            const actionType = (this.actionType === 'new' || this.actionType === 'add') ? 1 : 2;
+            const actionType
+                = this.actionType === 'new' || this.actionType === 'add' ? 1 : 2;
             if (this.actionType === 'deleteAll') this.deletedPairs = this.existsPair;
-            const manilpulatePairs = (this.actionType === 'new' || this.actionType === 'add') ? this.selectedPairs : this.deletedPairs;
+            const manilpulatePairs
+                = this.actionType === 'new' || this.actionType === 'add'
+                    ? this.selectedPairs
+                    : this.deletedPairs;
             const tradeTokens = manilpulatePairs.map(p => p.tradeToken);
             const quoteTokens = manilpulatePairs.map(p => p.quoteToken);
-            return configMarketsAgent({ actionType, agent: this.trustAddress || this.userInputAddress, tradeTokens, quoteTokens });
+            return configMarketsAgent({
+                actionType,
+                agent: this.trustAddress || this.userInputAddress,
+                tradeTokens,
+                quoteTokens
+            });
         })
     },
     computed: {
@@ -115,8 +133,8 @@ export default {
     display: flex;
     flex-wrap: wrap;
     padding: 6px 0;
-    &.exists {
-        border-bottom: 1px solid rgba(212, 222, 231, 1);
+    &.__border_top {
+        border-top: 1px solid rgba(212, 222, 231, 1);
     }
     .pairs {
         margin: 6px;
