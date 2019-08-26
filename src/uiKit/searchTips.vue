@@ -29,11 +29,9 @@ export default {
     data() {
         return { userInput: '', searchRes: [], isShowTips: false };
     },
-    watch: {
-        userInput: throttle((val)=>this.search(val), 300)
-    },
+    watch: { userInput: throttle(val => this.search(val), 300) },
     methods: {
-        search(val){
+        search(val) {
             this.searchRes = this.filterMethod(val);
             if (this.searchRes.length > 0) {
                 this.isShowTips = true;
