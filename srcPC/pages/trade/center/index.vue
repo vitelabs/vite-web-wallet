@@ -27,8 +27,8 @@ import orderTab from './orderTab';
 export default {
     components: { layout, depth, market, latestTx, limitPrice, centerHead, centerView, orderTab },
     mounted() {
-        this.$store.dispatch('exFetchActiveTxPair');
         this.$store.dispatch('exFetchVip');
+        this.$store.dispatch('exFetchActiveTxPair');
         this.$store.dispatch('startLoopDexFundeUnreceived');
 
         !this.$store.state.env.isShowCompliance && confirm({
@@ -49,29 +49,11 @@ export default {
     computed: {
         address() {
             return this.$store.getters.activeAddr;
-        },
-        quoteTokenDetail() {
-            return this.$store.state.exchangeTokens.ttoken;
-        },
-        tradeTokenDetail() {
-            return this.$store.state.exchangeTokens.ftoken;
-        },
-        activeTxPair() {
-            return this.$store.state.exchangeActiveTxPair.activeTxPair;
         }
     },
     watch: {
         address() {
             this.$store.dispatch('exFetchVip');
-        },
-        quoteTokenDetail() {
-            this.$store.dispatch('exSetQuoteTokenDecimals');
-        },
-        tradeTokenDetail() {
-            this.$store.dispatch('exSetTradeTokenDecimals');
-        },
-        activeTxPair() {
-            this.$store.dispatch('exSetTokenDecimals');
         }
     }
 };

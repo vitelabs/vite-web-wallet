@@ -21,7 +21,7 @@ import centerHead from './head/head.vue';
 export default {
     components: { depth, limitPrice, centerHead, openOrder },
     mounted() {
-        this.$store.dispatch('init');
+        this.$store.dispatch('dexFetchActiveTxPair', { symbol: this.$store.state.exchangeMarket.currentSymbol });
         this.$store.dispatch('exFetchVip');
         this.$store.dispatch('getMarketsClosed');
         this.$store.dispatch('exFetchLimitAmounts');
@@ -33,29 +33,11 @@ export default {
     computed: {
         address() {
             return this.$store.getters.activeAddr;
-        },
-        quoteTokenDetail() {
-            return this.$store.state.exchangeTokens.ttoken;
-        },
-        tradeTokenDetail() {
-            return this.$store.state.exchangeTokens.ftoken;
-        },
-        activeTxPair() {
-            return this.$store.state.exchangeActiveTxPair.activeTxPair;
         }
     },
     watch: {
         address() {
             this.$store.dispatch('exFetchVip');
-        },
-        quoteTokenDetail() {
-            this.$store.dispatch('exSetQuoteTokenDecimals');
-        },
-        tradeTokenDetail() {
-            this.$store.dispatch('exSetTradeTokenDecimals');
-        },
-        activeTxPair() {
-            this.$store.dispatch('exSetTokenDecimals');
         }
     }
 };
