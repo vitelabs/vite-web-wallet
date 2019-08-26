@@ -2,10 +2,10 @@ import Vue from 'vue';
 import vuex from 'vuex';
 
 import env from './env';
-import market from './market';
 import account from './account';
-import activeTxPair from './activeTxPair';
 
+import market from './market';
+import activeTxPair from './activeTxPair';
 import fee from 'store/fee';
 import limit from 'store/limit';
 import rate from 'store/rate.js';
