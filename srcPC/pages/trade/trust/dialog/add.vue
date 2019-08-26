@@ -42,15 +42,15 @@ export default {
         }
     },
     data() {
-        const rTxtMap = this.$t("trade.proxy.dialog.rTxtMap");
-        const titleMap =  this.$t("trade.proxy.dialog.titleMap");
+        const rTxtMap = this.$t('trade.proxy.dialog.rTxtMap');
+        const titleMap = this.$t('trade.proxy.dialog.titleMap');
         return {
             allProxyAblePairs: [],
             selectedPairs: [],
             deletedPairs: [],
             userInputAddress: '',
             userInput: '',
-            dLTxt:  this.$t("trade.proxy.dialog.cancel"),
+            dLTxt: this.$t('trade.proxy.dialog.cancel'),
             dWidth: this.actionType === 'deleteAll' ? 'narrow' : undefined,
             dRTxt: rTxtMap[this.actionType],
             dTitle: titleMap[this.actionType]
