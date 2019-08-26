@@ -921,13 +921,13 @@
                 "new": "添加",
                 "add": "添加",
                 "delete": "确认修改",
-                "delteAll": "确认"
+                "deleteAll": "确认"
               },
               "titleMap": {
                 "new": "新增委托",
                 "add": "增加委托交易对",
                 "delete": "减少委托交易对",
-                "delteAll": "确认撤销委托"
+                "deleteAll": "确认撤销委托"
               }
             }
         }

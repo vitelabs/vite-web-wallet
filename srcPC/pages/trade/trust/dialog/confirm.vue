@@ -3,10 +3,10 @@ extends /components/dialog/base.pug
 block content
     .content-wrapper
         .block__title {{$t('trade.proxy.passive.head.0')}}
-        .block__content.edit(v-if="!!trustAddress") {{trustAddress}}
+        div.block__content(v-if="!!trustAddress") {{trustAddress}}
         .block__title {{$t('trade.proxy.passive.head.1')}}
-        .block__content
-            span.pure-pair(v-for="t in transUtil(relation[addr])" :key="t") {{t}}
+        div.block__content
+            span.pure-pair(v-for="t in pairArray" :key="t") {{t}}
 </template>
 
 <script>
@@ -16,15 +16,20 @@ export default {
             type: String,
             default: ''
         },
-        paris: {
+        pairs: {
             type: Array,
             default: () => []
         }
     },
+    beforeMount(){
+        window.ffff=this;
+    },
     data() {
         return {
             dWidth: 'narrow',
-            dTitle: '确认委托交易对'
+            dTitle: '确认委托交易对',
+            dLTxt:'取消',
+            dRTxt:'确定'
         };
     },
     computed: {
@@ -62,18 +67,16 @@ export default {
 
 .block__content {
     position: relative;
-    border-radius: 2px;
-    border: 1px solid rgba(212, 222, 231, 1);
+    color:#5E6875;
     font-size: 12px;
-    word-break: break-word;
+    word-break: break-all;
     width: 100%;
     box-sizing: border-box;
-    margin-top: 16px;
-    padding: 7px 15px;
+    margin-top: 4px;
     align-items: center;
     display: flex;
     width: 100%;
-    justify-content: space-between;
+    flex-wrap: wrap;
     .pure-pair {
         margin-right: 10px;
     }
