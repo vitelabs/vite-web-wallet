@@ -1,26 +1,20 @@
 <template lang="pug">
 extends /components/dialog/base.pug
 block content
-    .content-wrapper
+    .content-wrapper(v-if="!isSVip")
         .block__title {{$t("tokenCard.withdraw.labels.balance")}}
         .block__content.edit.space
             .token__title
-                img(:src="token.icon")
-                .symbol {{token.tokenSymbol}}
-            .right.blue {{token.balance||'0'}}
+                img(:src="viteTokenInfo.icon")
+                .symbol VITE
+            .right.blue {{exViteBalance}}
         .block__title {{$t("tokenCard.withdraw.labels.amount")}}
-            .err {{ammountErr}}
-        .block__content
-            input(v-model="stakeAmount" :placeholder="$t('tokenCard.withdraw.amountPlaceholder',{min})")
+        .block__content.edit {{vipStakingAmount}} VITE
         .charge-tips {{tip}}
             .dot
-    .content-wrapper
+    .content-wrapper(v-else)
         .block__title {{$t("tokenCard.withdraw.labels.balance")}}
-        .block__content.edit.space
-            .token__title
-                img(:src="token.icon")
-                .symbol {{token.tokenSymbol}}
-            .right.blue {{token.balance||'0'}}
+        .block__content.edit {{vipStakingAmount}} VITE
         .charge-tips {{tip}}
             .dot
 
@@ -28,7 +22,6 @@ block content
 
 <script>
 import debounce from 'lodash/debounce';
-import { getValidBalance } from 'pcUtils/validations';
 import BigNumber from 'utils/bigNumber';
 import { execWithValid } from 'pcUtils/execWithValid';
 import { pledgeForSuperVIp } from 'pcServices/tradeOperation';
@@ -40,13 +33,6 @@ const Vite_Token_Info = constant.Vite_Token_Info;
 const vipStakingAmount = 10000;
 
 export default {
-    components: {},
-    props: {
-        token: {
-            type: Object,
-            required: true
-        }
-    },
     data() {
         return {
             stakeAmount: '',
@@ -54,7 +40,9 @@ export default {
             isAddrCorrect: true,
             dTitle: this.$t('tokenCard.withdraw.title'),
             dSTxt: this.$t('tokenCard.withdraw.title'),
-            loading: true
+            loading: true,
+            viteTokenInfo: Vite_Token_Info,
+            vipStakingAmount
         };
     },
     beforeMount() {
@@ -102,14 +90,6 @@ export default {
         }, 500)
     },
     methods: {
-        validateAmount(val) {
-            const errorMap = { notEnough: this.$t('tokenCard.withdraw.balanceErrMap.notEnough') };
-            return getValidBalance({
-                balance: this.exViteBalance,
-                decimals: this.token.decimals,
-                errorMap
-            })(val);
-        },
         fetchStakingObj() {
             if (!this.isVip) {
                 return;
