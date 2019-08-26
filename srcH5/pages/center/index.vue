@@ -25,6 +25,7 @@ export default {
         this.$store.dispatch('getMarketsClosed');
         this.$store.dispatch('exFetchLimitAmounts');
         this.$store.dispatch('exFetchVip');
+        this.$store.dispatch('exFetchSVip');
         this.$store.dispatch('startLoopDexFundeUnreceived');
     },
     destroyed() {
@@ -47,6 +48,7 @@ export default {
     watch: {
         address() {
             this.$store.dispatch('exFetchVip');
+            this.$store.dispatch('exFetchSVip');
         },
         quoteTokenDetail() {
             this.$store.dispatch('exSetQuoteTokenDecimals');

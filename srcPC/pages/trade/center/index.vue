@@ -29,6 +29,7 @@ export default {
     mounted() {
         this.$store.dispatch('exFetchActiveTxPair');
         this.$store.dispatch('exFetchVip');
+        this.$store.dispatch('exFetchSVip');
         this.$store.dispatch('startLoopDexFundeUnreceived');
 
         !this.$store.state.env.isShowCompliance && confirm({
@@ -63,6 +64,7 @@ export default {
     watch: {
         address() {
             this.$store.dispatch('exFetchVip');
+            this.$store.dispatch('exFetchSVip');
         },
         quoteTokenDetail() {
             this.$store.dispatch('exSetQuoteTokenDecimals');

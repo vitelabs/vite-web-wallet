@@ -77,3 +77,7 @@ export function getInviteeCode(address: string) {
     // get who invited me
     return viteClient.request('dexfund_getInviteeCode', address);
 }
+
+export function getSvipStatus(address:string){
+    return viteClient.request("dexfund_isPledgeSuperVip", address); 
+}
