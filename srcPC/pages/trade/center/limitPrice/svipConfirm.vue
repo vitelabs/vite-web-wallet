@@ -37,15 +37,15 @@ export default {
             stakeAmount: '',
             stakingObj: {},
             isAddrCorrect: true,
-            dTitle: this.isSVip?this.$t('trade.svipConfirm.cancelVip'):this.$t('trade.svipConfirm.openVip'),
-            dSTxt: this.isSVip?this.$t('trade.svipConfirm.cancelVip'):this.$t('trade.svipConfirm.openVip'),
+            dTitle: this.isSVip ? this.$t('trade.svipConfirm.cancelVip') : this.$t('trade.svipConfirm.openVip'),
+            dSTxt: this.isSVip ? this.$t('trade.svipConfirm.cancelVip') : this.$t('trade.svipConfirm.openVip'),
             loading: true,
             viteTokenInfo: Vite_Token_Info,
             vipStakingAmount
         };
     },
     beforeMount() {
-        this.fetchStakingObj()
+        this.fetchStakingObj();
     },
     computed: {
         height() {
