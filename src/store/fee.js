@@ -92,7 +92,7 @@ const actions = {
 
 const getters = {
     vipFee(state) {
-        return getVipFee(state.isVip);
+        return state.isVip ? 0.001 : 0;
     },
     operatorMakerFee(state) {
         return getOperatorFee(state.marketInfo.makerBrokerFeeRate);
@@ -100,21 +100,23 @@ const getters = {
     operatorTakerFee(state) {
         return getOperatorFee(state.marketInfo.takerBrokerFeeRate);
     },
-    exMakerFee(state, getters) {
-        const vipFee = getVipFee(state.isVip);
-        const operatorMakerFee = getOperatorFee(state.marketInfo.makerBrokerFeeRate);
-        return (baseMakerFee + Number(operatorMakerFee) - vipFee) * (1 - getters.inviteFeeDiscount);
-    },
-    exTakerFee(state, getters) {
-        const vipFee = getVipFee(state.isVip);
-        const operatorTakerFee = getOperatorFee(state.marketInfo.takerBrokerFeeRate);
-        return (baseTakerFee + Number(operatorTakerFee) - vipFee) * (1 - getters.inviteFeeDiscount);
-    },
     inviteFeeDiscount(state) {
-        if (state.invitedCode) {
+        if (state.invitedCode > 0) {
             return 0.1;
         }
         return 0;
+    },
+    exMakerFee(state, getters) {
+        return getFee(baseMakerFee, getters.operatorMakerFee, getters.vipFee, getters.inviteFeeDiscount);
+    },
+    exTakerFee(state, getters) {
+        return getFee(baseTakerFee, getters.operatorTakerFee, getters.vipFee, getters.inviteFeeDiscount);
+    },
+    exBuyOrderFee(state, getters) {
+        if (BigNumber.compared(getters.exMakerFee, getters.exTakerFee) > 0) {
+            return getters.exMakerFee;
+        }
+        return getters.exTakerFee;
     }
 };
 
@@ -126,8 +128,10 @@ export default {
 };
 
 
-function getVipFee(isVip) {
-    return isVip ? 0.001 : 0;
+function getFee(baseFee, operatorFee, vipFee, inviteFeeDiscount) {
+    const allFee = baseFee + Number(operatorFee) - vipFee;
+    const discount = 1 - inviteFeeDiscount;
+    return BigNumber.multi(allFee, discount);
 }
 
 function getOperatorFee(fee) {

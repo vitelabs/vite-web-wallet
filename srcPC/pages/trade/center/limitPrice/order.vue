@@ -211,7 +211,7 @@ export default {
             return this.$store.getters.dexBlockingLever;
         },
         fee() {
-            return this.$store.getters.exMakerFee;
+            return this.$store.getters.exBuyOrderFee;
         },
         realPrice() {
             if (!this.rate || this.priceErr || !this.price) {
