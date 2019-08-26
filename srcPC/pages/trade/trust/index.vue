@@ -140,7 +140,7 @@ export default {
                         id: `${ p.tradeToken }/${ p.quoteToken }`
                     }));
             }
-            addDialog({ trustAddress, existsPair, actionType });
+            addDialog({ trustAddress, existsPair:existsPair&&existsPair.slice(0), actionType });
         },
         transUtil(pairs) {
             if (!pairs || pairs.length === 0) return '';
