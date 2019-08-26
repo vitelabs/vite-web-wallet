@@ -4,16 +4,13 @@
             {{ $t('trade.limitPrice.title') }}
 
             <div class="right-tab">
-                <span class="vip" :class="{ 'active': isVip }"></span>
-                <span class="vip-operate __pointer" @click="_showVipConfirm"
-                      :class="{ 'active': !isVip }">
-                    {{ isVip ? $t('trade.limitPrice.cancelVip') : $t('trade.limitPrice.openVip') }}
-                </span>
+                <Vip></Vip>
                 <span>{{ $t('trade.limitPrice.fee') }}
                     <span class="fee">Taker({{ exTakerFee }}) / Maker({{ exMakerFee }})</span>
                 </span>
                 <span class="help __pointer" @mouseenter="showHelp" @mouseleave="hideHelp">
                     <span v-show="isShowHelp" class="help-tip">
+                        <span>超级vip交易所基础费率为0</span>
                         <span>{{ $t('trade.limitPrice.dexFee', { fee: baseFee }) }}</span>
                         <span>{{ $t('trade.limitPrice.operatorFee', { fee: operatorFee }) }}</span>
                         <span>{{ $t('trade.limitPrice.vipFee', { fee: vipFee }) }}</span>
@@ -31,27 +28,20 @@
             <div class="order-border"></div>
             <order orderType="sell" class="order-wrapper"></order>
         </div>
-
-        <vip-confirm v-if="isShowVipConfirm" :close="hideVipConfirm"></vip-confirm>
     </div>
 </template>
 
 <script>
 import logoutView from './logout';
 import order from './order.vue';
-import vipConfirm from './vipConfirm.vue';
 import { StatusMap } from 'wallet';
-import { execWithValid } from 'pcUtils/execWithValid';
 import BigNumber from 'utils/bigNumber';
-import statistics from 'utils/statistics';
+import Vip from './vip.vue';
 
 export default {
-    components: { logoutView, order, vipConfirm },
+    components: { logoutView, order, Vip },
     data() {
-        return {
-            isShowHelp: false,
-            isShowVipConfirm: false
-        };
+        return { isShowHelp: false };
     },
     computed: {
         baseFee() {
@@ -95,6 +85,9 @@ export default {
         isVip() {
             return this.$store.state.exchangeFee.isVip;
         },
+        isSVip() {
+            return this.$store.state.exchangeFee.isSVip;
+        },
         markerInfo() {
             return this.$store.state.exchangeFee.marketInfo;
         },
@@ -114,18 +107,7 @@ export default {
         },
         toPercentFee(fee) {
             return BigNumber.multi(fee || 0, 100, 3);
-        },
-
-        hideVipConfirm() {
-            this.isShowVipConfirm = false;
-        },
-        _showVipConfirm() {
-            statistics.event(this.$route.name, `switchVIP-${ this.isVip ? 'cancel' : 'open' }`, this.address || '');
-            this.showVipConfirm();
-        },
-        showVipConfirm: execWithValid(function () {
-            this.isShowVipConfirm = true;
-        })
+        }
     }
 };
 </script>
@@ -191,29 +173,6 @@ export default {
         >span {
             display: block;
             margin-bottom: 10px;
-        }
-    }
-
-    .vip-operate {
-        padding-right: 6px;
-        border-right: 1px solid rgba(205,204,204,1);
-        &.active {
-            color: #007AFF;
-        }
-    }
-
-    .vip {
-        display: inline-block;
-        margin-bottom: -3px;
-        color: rgba(255,255,255,1);
-        width: 36px;
-        height: 16px;
-        background: url('~assets/imgs/not_vip.svg');
-        background-size: 100% 100%;
-
-        &.active {
-            background: url('~assets/imgs/vip.svg');
-            background-size: 100% 100%;
         }
     }
 }

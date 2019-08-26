@@ -11,7 +11,7 @@
                 up: isShowList,
                 'not-allowed': notAllowed
             }"
-        >{{ selected.name }}</span>
+        >{{ title||selected&&selected.name }}</span>
 
         <ul
             class="list"
@@ -46,6 +46,10 @@ export default {
         notAllowed: {
             type: Boolean,
             default: false
+        },
+        title: {
+            type: String,
+            default: ''
         }
     },
     data() {

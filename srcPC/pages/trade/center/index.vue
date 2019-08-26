@@ -28,6 +28,7 @@ export default {
     components: { layout, depth, market, latestTx, limitPrice, centerHead, centerView, orderTab },
     mounted() {
         this.$store.dispatch('exFetchVip');
+        this.$store.dispatch('exFetchSVip');
         this.$store.dispatch('exFetchActiveTxPair');
         this.$store.dispatch('startLoopDexFundeUnreceived');
 
@@ -54,6 +55,7 @@ export default {
     watch: {
         address() {
             this.$store.dispatch('exFetchVip');
+            this.$store.dispatch('exFetchSVip');
         }
     }
 };
