@@ -16,9 +16,9 @@ block content
 </template>
 
 <script>
-import { bindCode } from 'h5Services/tradeOperation';
 import { doUntill } from 'utils/asyncFlow';
 import router from 'h5Router';
+import sendTx from 'h5Utils/sendTx';
 
 export default {
     async beforeMount() {
@@ -60,29 +60,29 @@ export default {
             return this.$store.dispatch('getInvitedCode');
         },
         inspector() {
-            bindCode(this.code)
-                .then(() => {
-                    this.$toast(this.$t('assets.invite.successToast'));
-                    doUntill({
-                        createPromise: () => this.getInviteeCode(),
-                        interval: 1000,
-                        times: 3
-                    })
-                        .then(res => {
-                            console.log('code', res);
-                        })
-                        .catch(e => {
-                            this.$toast(this.$t('assets.invite.noResult'), e);
-                        });
-                })
-                .catch(e => {
-                    if (e && e.error && e.error.code === 12002) {
-                        router.push({ name: 'startLogin' });
-                        this.close();
-                        return;
-                    }
-                    this.$toast(this.$t('assets.invite.failToast'), e);
+            sendTx({
+                methodName: 'dexFundBindInviteCode',
+                data: { code: this.code }
+            }).then(() => {
+                this.$toast(this.$t('assets.invite.successToast'));
+                doUntill({
+                    createPromise: () => this.getInviteeCode(),
+                    interval: 1000,
+                    times: 3
+                }).then(res => {
+                    console.log('code', res);
+                }).catch(e => {
+                    this.$toast(this.$t('assets.invite.noResult'), e);
                 });
+            }).catch(e => {
+                if (e && e.error && e.error.code === 12002) {
+                    router.push({ name: 'startLogin' });
+                    this.close();
+                    return;
+                }
+                this.$toast(this.$t('assets.invite.failToast'), e);
+            });
+
             return Promise.reject('no close');
         }
     }
