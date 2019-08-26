@@ -40,47 +40,61 @@ const actions = {
                 commit('setInviteCode');
                 return rej('no address');
             }
-            getInviteeCode(getters.activeAddr).then(code => {
-                commit('setInviteCode', code);
-                res(code);
-            }).catch(e => {
-                commit('setInviteCode', 0);
-                rej(e);
-            });
+            getInviteeCode(getters.activeAddr)
+                .then(code => {
+                    commit('setInviteCode', code);
+                    res(code);
+                })
+                .catch(e => {
+                    commit('setInviteCode', 0);
+                    rej(e);
+                });
         });
     },
     exFetchSVip({ commit, getters }) {
-        const address = getters.activeAddr;
-        address && getSvipStatus(address).then(data => {
-            if (address !== getters.activeAddr) {
-                return;
-            }
-            commit('setExchangeSVip', data);
+        new Promise((res, rej) => {
+            const address = getters.activeAddr;
+            address
+        && getSvipStatus(address)
+            .then(data => {
+                if (address !== getters.activeAddr) {
+                    return;
+                }
+                commit('setExchangeSVip', data);
+                res(data);
+            })
+            .catch(e => rej(e));
         });
     },
     exFetchVip({ commit, getters }) {
         const address = getters.activeAddr;
-        address && $ViteJS.request('dexfund_isPledgeVip', address).then(data => {
-            if (address !== getters.activeAddr) {
-                return;
-            }
-            commit('setExchangeVip', data);
-            if (vipTimer && data === nextVip) {
-                nextVip = null;
-                stopLoopVip();
-            }
-        });
+        address
+      && $ViteJS.request('dexfund_isPledgeVip', address).then(data => {
+          if (address !== getters.activeAddr) {
+              return;
+          }
+          commit('setExchangeVip', data);
+          if (vipTimer && data === nextVip) {
+              nextVip = null;
+              stopLoopVip();
+          }
+      });
     },
     exFetchMarketInfo({ commit, getters }) {
         const _activeTxPair = getters.exActiveTxPair;
 
-        _activeTxPair && $ViteJS.request('dexfund_getMarketInfo', _activeTxPair.tradeToken, _activeTxPair.quoteToken).then(data => {
-            if (_activeTxPair.symbol !== getters.exActiveTxPair.symbol) {
-                return;
-            }
+        _activeTxPair
+      && $ViteJS
+          .request('dexfund_getMarketInfo',
+              _activeTxPair.tradeToken,
+              _activeTxPair.quoteToken)
+          .then(data => {
+              if (_activeTxPair.symbol !== getters.exActiveTxPair.symbol) {
+                  return;
+              }
 
-            commit('setExchangeMarketInfo', data);
-        });
+              commit('setExchangeMarketInfo', data);
+          });
     },
     startLoopVip({ dispatch }, nextVipStatus) {
         stopLoopVip();
@@ -108,12 +122,18 @@ const getters = {
     exMakerFee(state, getters) {
         const vipFee = getVipFee(state.isVip);
         const operatorMakerFee = getOperatorFee(state.marketInfo.makerBrokerFeeRate);
-        return (state.isSVip ? 0 : baseMakerFee + Number(operatorMakerFee) - vipFee) * (1 - getters.inviteFeeDiscount);
+        return (
+            (state.isSVip ? 0 : baseMakerFee + Number(operatorMakerFee) - vipFee)
+      * (1 - getters.inviteFeeDiscount)
+        );
     },
     exTakerFee(state, getters) {
         const vipFee = getVipFee(state.isVip);
         const operatorTakerFee = getOperatorFee(state.marketInfo.takerBrokerFeeRate);
-        return (state.isSVip ? 0 : baseMakerFee + Number(operatorTakerFee) - vipFee) * (1 - getters.inviteFeeDiscount);
+        return (
+            (state.isSVip ? 0 : baseMakerFee + Number(operatorTakerFee) - vipFee)
+      * (1 - getters.inviteFeeDiscount)
+        );
     },
     inviteFeeDiscount(state) {
         if (state.invitedCode) {
@@ -129,7 +149,6 @@ export default {
     actions,
     getters
 };
-
 
 function getVipFee(isVip) {
     return isVip ? 0.001 : 0;

@@ -2,8 +2,8 @@
 extends /components/dialog/base.pug
 block content
     .content-wrapper(v-if="actionType==='deleteAll'")
-        i18n(path='tokenCard.charge.tips.0' tag="span")
-            span.strong(place="tokenSymbol") {{trustAddress}}
+        i18n(path='trade.proxy.dialog.cancelAllTips' tag="span")
+            div.strong(place="trustAddress") {{trustAddress}}
     .content-wrapper(v-else)
         .block__title {{$t('trade.proxy.passive.head.0')}}
         .block__content.edit(v-if="!!trustAddress") {{trustAddress}}
@@ -17,20 +17,21 @@ block content
 </template>
 
 <script>
-import { throttle } from 'lodash';
-import PairItem from './pairItem';
-import SearchTips from 'uiKit/searchTips';
+import { throttle } from "lodash";
+import PairItem from "./pairItem";
+import SearchTips from "uiKit/searchTips";
 import {
     getProxyAblePairs,
     configMarketsAgent
-} from 'pcServices/tradeOperation';
+} from "pcServices/tradeOperation";
+import { confirmDialog } from "./index";
 
 export default {
     components: { PairItem, SearchTips },
     props: {
         trustAddress: {
             type: String,
-            default: ''
+            default: ""
         },
         existsPair: {
             type: Array,
@@ -38,27 +39,27 @@ export default {
         },
         actionType: {
             type: String, // new|add|delete|deleteAll
-            default: 'new'
+            default: "new"
         }
     },
     data() {
-        const rTxtMap = this.$t('trade.proxy.dialog.rTxtMap');
-        const titleMap = this.$t('trade.proxy.dialog.titleMap');
+        const rTxtMap = this.$t("trade.proxy.dialog.rTxtMap");
+        const titleMap = this.$t("trade.proxy.dialog.titleMap");
         return {
             allProxyAblePairs: [],
             selectedPairs: [],
             deletedPairs: [],
-            userInputAddress: '',
-            userInput: '',
-            dLTxt: this.$t('trade.proxy.dialog.cancel'),
-            dWidth: this.actionType === 'deleteAll' ? 'narrow' : undefined,
+            userInputAddress: "",
+            userInput: "",
+            dLTxt: this.$t("trade.proxy.dialog.cancel"),
+            dWidth: this.actionType === "deleteAll" ? "narrow" : undefined,
             dRTxt: rTxtMap[this.actionType],
             dTitle: titleMap[this.actionType]
         };
     },
     beforeMount() {
-        (this.actionType === 'new' || this.actionType === 'add')
-            && getProxyAblePairs().then(data => {
+        (this.actionType === "new" || this.actionType === "add") &&
+            getProxyAblePairs().then(data => {
                 this.allProxyAblePairs = data;
             });
     },
@@ -75,38 +76,53 @@ export default {
         },
         deleteExist(item) {
             const i = this.existsPair.findIndex(i => i.id === item.id);
-            if (i >= 0) this.existsPair.splice(i, 1), this.deletedPairs.push(item);
+            if (i >= 0)
+                this.existsPair.splice(i, 1), this.deletedPairs.push(item);
         },
         filterMethod(input) {
             if (!input) return [];
             return this.allProxyAblePairs
-                .filter(p =>
-                    p.symbol
-                        .replace('_', '/')
-                        .toLowerCase()
-                        .indexOf(input.toLowerCase()) >= 0)
+                .filter(
+                    p =>
+                        p.symbol
+                            .replace("_", "/")
+                            .toLowerCase()
+                            .indexOf(input.toLowerCase()) >= 0
+                )
                 .map(p =>
                     Object.assign(p, {
-                        name: p.symbol.replace('_', '/'),
-                        id: `${ p.tradeToken }/${ p.quoteToken }`
-                    }));
+                        name: p.symbol.replace("_", "/"),
+                        id: `${p.tradeToken}/${p.quoteToken}`
+                    })
+                );
         },
-        inspector: throttle(function () {
-            const actionType
-                = this.actionType === 'new' || this.actionType === 'add' ? 1 : 2;
-            if (this.actionType === 'deleteAll') this.deletedPairs = this.existsPair;
-            const manilpulatePairs
-                = this.actionType === 'new' || this.actionType === 'add'
+        inspector: throttle(async function() {
+            const actionType =
+                this.actionType === "new" || this.actionType === "add" ? 1 : 2;
+            if (this.actionType === "deleteAll")
+                this.deletedPairs = this.existsPair;
+            const manilpulatePairs =
+                this.actionType === "new" || this.actionType === "add"
                     ? this.selectedPairs
                     : this.deletedPairs;
             const tradeTokens = manilpulatePairs.map(p => p.tradeToken);
             const quoteTokens = manilpulatePairs.map(p => p.quoteToken);
-            return configMarketsAgent({
-                actionType,
-                agent: this.trustAddress || this.userInputAddress,
-                tradeTokens,
-                quoteTokens
-            });
+            if (this.actionType === "new") {
+                await confirmDialog({
+                    pairs: this.manilpulatePairs,
+                    trustAddress: this.trustAddress || this.userInputAddress
+                });
+            }
+            try {
+                await configMarketsAgent({
+                    actionType,
+                    agent: this.trustAddress || this.userInputAddress,
+                    tradeTokens,
+                    quoteTokens
+                });
+            } catch (e) {
+                return Promise.reject(e)
+            }
         })
     },
     computed: {
