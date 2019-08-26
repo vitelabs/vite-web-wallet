@@ -19,14 +19,14 @@
     </div>
 </template>
 <script>
-import vipConfirm from "./vipConfirm.vue";
-import { insertTo } from "pcUtils/insertTo";
-import statistics from "utils/statistics";
-import { execWithValid } from "pcUtils/execWithValid";
-import VSwitch from "uiKit/switch";
-import component2function from "pcComponents/dialog/utils";
-import svipComp from "./svipConfirm";
-import {doUntill} from "utils/asyncFlow"
+import vipConfirm from './vipConfirm.vue';
+import { insertTo } from 'pcUtils/insertTo';
+import statistics from 'utils/statistics';
+import { execWithValid } from 'pcUtils/execWithValid';
+import VSwitch from 'uiKit/switch';
+import component2function from 'pcComponents/dialog/utils';
+import svipComp from './svipConfirm';
+import { doUntill } from 'utils/asyncFlow';
 
 export default {
     components: { VSwitch },
@@ -40,58 +40,53 @@ export default {
         optList() {
             return [
                 {
-                    name: this.isVip && this.isSVip ? "cancelvip" : "openSvip",
-                    value: this.isVip && this.isSVip ? "vip" : "svip"
+                    name: this.isVip && this.isSVip ? 'cancelvip' : 'openSvip',
+                    value: this.isVip && this.isSVip ? 'vip' : 'svip'
                 },
                 {
                     name:
                         !this.isVip && !this.isSVip
-                            ? "openvip"
+                            ? 'openvip'
                             : this.isVip && !this.isSVip
-                            ? "cancelvip"
-                            : "cancelSvip",
-                    value: this.isVip && this.isSVip ? "svip" : "vip"
+                                ? 'cancelvip'
+                                : 'cancelSvip',
+                    value: this.isVip && this.isSVip ? 'svip' : 'vip'
                 }
             ];
         }
     },
     methods: {
         action(item) {
-            if (item === "vip") {
+            if (item === 'vip') {
                 this._showVipConfirm();
             } else {
                 this.showSVipConfirm();
             }
         },
         _showVipConfirm() {
-            statistics.event(
-                this.$route.name,
-                `switchVIP-${this.isVip ? "cancel" : "open"}`,
-                this.address || ""
-            );
+            statistics.event(this.$route.name,
+                `switchVIP-${ this.isVip ? 'cancel' : 'open' }`,
+                this.address || '');
             this.showVipConfirm();
         },
         hideVipConfirm() {
-            this.vipConfirm &&
-                this.vipConfirm.destroyInstance() &&
-                (this.vipConfirm = null);
+            this.vipConfirm
+                && this.vipConfirm.destroyInstance()
+                && (this.vipConfirm = null);
         },
-        showVipConfirm: execWithValid(function() {
+        showVipConfirm: execWithValid(function () {
             this.vipConfirm = insertTo(vipConfirm, {
                 close: () => {
                     this.hideVipConfirm();
                 }
             });
         }),
-        showSVipConfirm: execWithValid(function() {
+        showSVipConfirm: execWithValid(function () {
             component2function(svipComp)().then(() =>
-                doUntill(
-                    () =>this.$store.dispatch('exFetchSVip'),
+                doUntill(() => this.$store.dispatch('exFetchSVip'),
                     undefined,
                     1000,
-                    3
-                )
-            );
+                    3));
         })
     }
 };

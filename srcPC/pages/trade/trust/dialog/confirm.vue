@@ -14,7 +14,7 @@ export default {
     props: {
         trustAddress: {
             type: String,
-            default: ""
+            default: ''
         },
         paris: {
             type: Array,
@@ -23,13 +23,13 @@ export default {
     },
     data() {
         return {
-            dWidth: "narrow",
-            dTitle: "确认委托交易对"
+            dWidth: 'narrow',
+            dTitle: '确认委托交易对'
         };
     },
     computed: {
         pairArray() {
-            return this.pairs.map(p => p.symbol.replace("_", "/"));
+            return this.pairs.map(p => p.symbol.replace('_', '/'));
         }
     },
     methods: {
