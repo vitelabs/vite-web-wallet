@@ -88,49 +88,49 @@ export default {
 </script>
 <style lang="scss" scoped>
 .vip-container {
-  display: flex;
-  .vip-operate {
-    padding-right: 6px;
-    border-right: 1px solid rgba(205, 204, 204, 1);
-    &.active {
-      color: #007aff;
+    display: flex;
+    .vip-operate {
+        padding-right: 6px;
+        border-right: 1px solid rgba(205, 204, 204, 1);
+        &.active {
+            color: #007aff;
+        }
+        .drop-menu {
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0px 5px 10px 0px rgba(176, 192, 237, 0.69);
+            border-radius: 2px;
+            > div {
+                width: 90px;
+                height: 32px;
+            }
+            > div:hover {
+                background: rgba(75, 116, 255, 0.1);
+            }
+        }
     }
-    .drop-menu {
-      display: flex;
-      flex-direction: column;
-      box-shadow: 0px 5px 10px 0px rgba(176, 192, 237, 0.69);
-      border-radius: 2px;
-      > div {
-        width: 90px;
-        height: 32px;
-      }
-      > div:hover {
-        background: rgba(75, 116, 255, 0.1);
-      }
+    .svip {
+        display: inline-block;
+        margin-bottom: -3px;
+        color: rgba(255, 255, 255, 1);
+        width: 36px;
+        height: 16px;
+        background: url("~assets/imgs/svip.png");
+        background-size: 100% 100%;
     }
-  }
-  .svip {
-    display: inline-block;
-    margin-bottom: -3px;
-    color: rgba(255, 255, 255, 1);
-    width: 36px;
-    height: 16px;
-    background: url("~assets/imgs/svip.png");
-    background-size: 100% 100%;
-  }
-  .vip {
-    display: inline-block;
-    margin-bottom: -3px;
-    color: rgba(255, 255, 255, 1);
-    width: 36px;
-    height: 16px;
-    background: url("~assets/imgs/not_vip.svg");
-    background-size: 100% 100%;
+    .vip {
+        display: inline-block;
+        margin-bottom: -3px;
+        color: rgba(255, 255, 255, 1);
+        width: 36px;
+        height: 16px;
+        background: url("~assets/imgs/not_vip.svg");
+        background-size: 100% 100%;
 
-    &.active {
-      background: url("~assets/imgs/vip.svg");
-      background-size: 100% 100%;
+        &.active {
+            background: url("~assets/imgs/vip.svg");
+            background-size: 100% 100%;
+        }
     }
-  }
 }
 </style>
