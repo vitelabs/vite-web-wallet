@@ -55,7 +55,7 @@
             'red': orderType === 'sell',
             'green': orderType === 'buy',
             'gray': isLoading || amountErr || priceErr || quantityErr || activeTxPairIsClose
-        }" @click="_clickBtn">{{ $t(`trade.${orderType}.title`, { token: ftokenShow }) }}</div>
+        }" @click="toSubmit">{{ $t(`trade.${orderType}.title`, { token: ftokenShow }) }}</div>
     </div>
 </template>
 
@@ -63,10 +63,10 @@
 import dexBalance from './dexBalance';
 import slider from 'components/slider';
 import viteInput from 'components/viteInput';
-// import sendTx from 'h5Utils/sendTx';
 import BigNumber from 'utils/bigNumber';
-import { verifyAmount, checkAmountFormat } from 'h5Utils/validations';
 import statistics from 'utils/statistics';
+import sendTx from 'h5Utils/sendTx';
+import { verifyAmount, checkAmountFormat } from 'h5Utils/validations';
 
 export default {
     components: { viteInput, slider, dexBalance },
@@ -521,7 +521,7 @@ export default {
             this.quantity = '';
         },
 
-        _clickBtn() {
+        toSubmit() {
             if (this.isLoading || this.activeTxPairIsClose) {
                 return;
             }
@@ -552,47 +552,35 @@ export default {
             });
         },
         newOrder({ price, quantity }) {
-            console.log(price, quantity);
-            // if (this.blockingLevel === 3) {
-            //     this.$toast(this.$t('tradeCenter.blocking'));
-            //     return;
-            // }
+            if (this.blockingLevel === 3) {
+                this.$toast(this.$t('tradeCenter.blocking'));
+                return;
+            }
 
-            // const tradeToken = this.activeTxPair
-            //     ? this.activeTxPair.tradeToken
-            //     : '';
-            // const quoteToken = this.activeTxPair
-            //     ? this.activeTxPair.quoteToken
-            //     : '';
-            // const side = this.orderType === 'buy' ? 0 : 1;
+            const tradeToken = this.activeTxPair
+                ? this.activeTxPair.tradeToken
+                : '';
+            const quoteToken = this.activeTxPair
+                ? this.activeTxPair.quoteToken
+                : '';
+            const side = this.orderType === 'buy' ? 0 : 1;
 
-            // this.isLoading = true;
-            // const tokenDecimals = this.ftokenDetail.tokenDecimals;
-            // quantity = BigNumber.toMin(quantity, tokenDecimals);
+            this.isLoading = true;
+            const tokenDecimals = this.ftokenDetail.tokenDecimals;
+            quantity = BigNumber.toMin(quantity, tokenDecimals);
 
-            // sendTx({
-            //     methodName: 'dexFundNewOrder',
-            //     data: { tradeToken, quoteToken, side, price, quantity },
-            //     config: {
-            //         pow: true,
-            //         powConfig: {
-            //             isShowCancel: true,
-            //             cancel: () => {
-            //                 this.isLoading = false;
-            //             }
-            //         }
-            //     }
-            // })
-            //     .then(() => {
-            //         this.isLoading = false;
-            //         this.clearAll();
-            //         this.$toast(this.$t('trade.newOrderSuccess'));
-            //     })
-            //     .catch(err => {
-            //         console.warn(err);
-            //         this.isLoading = false;
-            //         this.$toast(this.$t('trade.newOrderFail'), err);
-            //     });
+            sendTx({
+                methodName: 'dexFundNewOrder',
+                data: { tradeToken, quoteToken, side, price, quantity }
+            }).then(() => {
+                this.isLoading = false;
+                this.clearAll();
+                this.$toast(this.$t('trade.newOrderSuccess'));
+            }).catch(err => {
+                console.warn(err);
+                this.isLoading = false;
+                this.$toast(this.$t('trade.newOrderFail'), err);
+            });
         }
     }
 };

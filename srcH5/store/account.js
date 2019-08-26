@@ -1,16 +1,17 @@
 import { addrAccount } from '@vite/vitejs';
 
+import client from 'utils/viteClient';
 import bigNumber from 'utils/bigNumber';
 import { timer } from 'utils/asyncFlow';
-import client from 'utils/viteClient';
 import { defaultTokenMap } from 'utils/constant';
+
 import env from 'h5Utils/envFromURL';
 import { getTokenIcon } from 'h5Utils/tokenParser';
 
 let balanceInfoInst = null;
-const activeAcc = new addrAccount({ address: env.address, client });
 
 const state = {
+    activeAcc: new addrAccount({ address: env.address, client }),
     address: env.address || '',
     balance: {}
 };
@@ -29,9 +30,9 @@ const mutations = {
 };
 
 const actions = {
-    startLoopBalance({ commit, dispatch }) {
+    startLoopBalance({ state, commit, dispatch }) {
         dispatch('stopLoopBalance');
-        balanceInfoInst = new timer(() => activeAcc.getAccountBalance().then(data => {
+        balanceInfoInst = new timer(() => state.activeAcc.getAccountBalance().then(data => {
             commit('commitBalanceInfo', data);
         }), 1000);
         balanceInfoInst.start();

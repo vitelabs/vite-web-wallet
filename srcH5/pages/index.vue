@@ -12,7 +12,6 @@ import orderNoticeList from 'components/orderNoticeList.vue';
 export default {
     components: { orderNoticeList },
     mounted() {
-        console.log(this.$route.query);
         if (Number(this.$route.query['ldfjacia']) > 0) {
             receiveInviteDialog();
         }
