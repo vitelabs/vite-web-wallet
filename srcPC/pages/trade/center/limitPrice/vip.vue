@@ -1,73 +1,77 @@
 <template>
     <div class="vip-container">
-        <span
-            class="svip"
-            v-if="isSVip"
-        ></span>
-        <span
-            class="vip"
-            :class="{ 'active': isVip }"
-            v-else
-        ></span>
+        <span class="vip svip" v-if="isSVip"></span>
+        <span class="vip" :class="{ active: isVip }" v-else></span>
         <span
             class="vip-operate __pointer"
-            @click="_showVipConfirm"
-            v-if="isSVip&&isVip"
+            @click="showSVipConfirm"
+            v-if="isSVip && !isVip"
         >
-            {{$t('trade.limitPrice.cancelVip') }}
+            {{ $t("trade.limitPrice.cancelVip") }}
         </span>
-        <div
-            class="vip-operate __pointer"
-            @click="drop=!drop"
+        <VSwitch
             v-else
-        >
-            {{ isVip&&isSVip ? $t('trade.limitPrice.cancelVip') : $t('trade.limitPrice.openVip') }}
-            <div
-                class="drop-menu"
-                v-show="drop"
-            >
-                <div @click="dropM1">{{isVip&&isSVip?'cancelvip':'openSvip'}}</div>
-                <div @click="dropM2">{{!isVip&&!isSVip?'openvip':(isVip&&!isSVip?'cancelvip':'cancelSvip')}}</div>
-            </div>
-        </div>
-
+            class="vip-operate drop_menu"
+            @input="action"
+            :optList="optList"
+            :title="isVip && isSVip ? 'cancelvip' : 'openSvip'"
+        />
     </div>
 </template>
 <script>
-
 import vipConfirm from './vipConfirm.vue';
-import insertTo from 'pcUtils/insertTo';
+import { insertTo } from 'pcUtils/insertTo';
 import statistics from 'utils/statistics';
 import { execWithValid } from 'pcUtils/execWithValid';
-
+import VSwitch from 'uiKit/switch';
+import component2function from 'pcComponents/dialog/utils';
+import svipComp from './svipConfirm';
 
 export default {
-    data() {
-        return { drop: false };
-    },
+    components: { VSwitch },
     computed: {
         isVip() {
             return this.$store.state.exchangeFee.isVip;
         },
         isSVip() {
             return this.$store.state.exchangeFee.isSVip;
+        },
+        optList() {
+            return [
+                {
+                    name: this.isVip && this.isSVip ? 'cancelvip' : 'openSvip',
+                    value: this.isVip && this.isSVip ? 'vip' : 'svip'
+                },
+                {
+                    name:
+                        !this.isVip && !this.isSVip
+                            ? 'openvip'
+                            : this.isVip && !this.isSVip
+                                ? 'cancelvip'
+                                : 'cancelSvip',
+                    value: this.isVip && this.isSVip ? 'svip' : 'vip'
+                }
+            ];
         }
     },
     methods: {
-        dropM1() {
-
-        },
-        dropM2() {
-
+        action(item) {
+            if (item === 'vip') {
+                this._showVipConfirm();
+            } else {
+                this.showSVipConfirm();
+            }
         },
         _showVipConfirm() {
-            statistics.event(this.$route.name, `switchVIP-${ this.isVip ? 'cancel' : 'open' }`, this.address || '');
+            statistics.event(this.$route.name,
+                `switchVIP-${ this.isVip ? 'cancel' : 'open' }`,
+                this.address || '');
             this.showVipConfirm();
         },
         hideVipConfirm() {
             this.vipConfirm
-        && this.vipConfirm.destroyInstance()
-        && (this.vipConfirm = null);
+                && this.vipConfirm.destroyInstance()
+                && (this.vipConfirm = null);
         },
         showVipConfirm: execWithValid(function () {
             this.vipConfirm = insertTo(vipConfirm, {
@@ -77,11 +81,7 @@ export default {
             });
         }),
         showSVipConfirm: execWithValid(function () {
-            this.vipConfirm = insertTo(vipConfirm, {
-                close: () => {
-                    this.hideSVipConfirm();
-                }
-            });
+            component2function(svipComp)();
         })
     }
 };
@@ -92,41 +92,25 @@ export default {
     .vip-operate {
         padding-right: 6px;
         border-right: 1px solid rgba(205, 204, 204, 1);
+        &.drop_menu{
+            border:none;
+        }
         &.active {
             color: #007aff;
         }
-        .drop-menu {
-            display: flex;
-            flex-direction: column;
-            box-shadow: 0px 5px 10px 0px rgba(176, 192, 237, 0.69);
-            border-radius: 2px;
-            > div {
-                width: 90px;
-                height: 32px;
-            }
-            > div:hover {
-                background: rgba(75, 116, 255, 0.1);
-            }
-        }
-    }
-    .svip {
-        display: inline-block;
-        margin-bottom: -3px;
-        color: rgba(255, 255, 255, 1);
-        width: 36px;
-        height: 16px;
-        background: url("~assets/imgs/svip.png");
-        background-size: 100% 100%;
     }
     .vip {
         display: inline-block;
         margin-bottom: -3px;
+        margin-right: 6px;
         color: rgba(255, 255, 255, 1);
         width: 36px;
         height: 16px;
-        background: url("~assets/imgs/not_vip.svg");
+        background-image: url("~assets/imgs/not_vip.svg");
         background-size: 100% 100%;
-
+        &.svip{
+            background-image: url("~assets/imgs/svip.png");
+        }
         &.active {
             background: url("~assets/imgs/vip.svg");
             background-size: 100% 100%;

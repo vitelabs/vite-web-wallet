@@ -26,8 +26,8 @@
             </div>
             <div v-show="!isLogin && isHaveUsers" class="tab __pointer"
                  @click="changeAcc">{{ $t('changeAcc') }}</div>
-            <div v-show="isHaveUsers && $route.name.indexOf('trade') !== -1" class="tab __pointer"
-                 @click="goOperator">{{ $t('tradeOperator.title') }}</div>
+
+            <SwitchComp @input="operateAction" v-show="isHaveUsers && $route.name.indexOf('trade') !== -1" class="more-switch tab __pointer" :title="'more'" :optList="moreOptList" />
             <switch-addr class="switch-tab menu" v-show="$route.name !== 'assets'" ></switch-addr>
             <div class="tab __pointer" v-show="isLogin" @click="logout">{{ $t('saveLogout') }}</div>
         </ul>
@@ -63,6 +63,15 @@ export default {
         };
     },
     computed: {
+        moreOptList() {
+            return [ {
+                name: this.$t('tradeOperator.title'),
+                value: 'operator'
+            }, {
+                name: '代理',
+                value: 'proxy'
+            } ];
+        },
         showInvite() {
             if (this.address && this.$store.state.uiConfig.allShowInvite) {
                 return true;
@@ -105,6 +114,10 @@ export default {
         }
     },
     methods: {
+        operateAction(action) {
+            action === 'operator' && this.goOperator();
+            action === 'proxy' && this.goProxy();
+        },
         iKnow() {
             this.isKnowUnrecieved = true;
         },
@@ -129,6 +142,10 @@ export default {
         goOperator() {
             statistics.event('secondMenu', `${ this.$route.name }-tradeOperator`, this.address || '');
             this.$router.push({ name: 'tradeOperator' });
+        },
+        goProxy() {
+            statistics.event('secondMenu', `${ this.$route.name }-tradeTrust`, this.address || '');
+            this.$router.push({ name: 'tradeTrust' });
         },
         goHelp() {
             statistics.event('secondMenu', `${ this.$route.name }-help`, this.address || '');
@@ -192,6 +209,11 @@ export default {
             position: relative;
             margin-left: 28px;
             &.invite-switch{
+                /deep/ .list-title{
+                    padding: 0!important;
+                }
+            }
+            &.more-switch{
                 /deep/ .list-title{
                     padding: 0!important;
                 }
