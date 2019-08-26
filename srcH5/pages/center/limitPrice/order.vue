@@ -191,7 +191,7 @@ export default {
             return this.$store.getters.dexBlockingLever;
         },
         fee() {
-            return this.$store.getters.exMakerFee;
+            return this.$store.getters.exBuyOrderFee;
         },
         minAmount() {
             const minAmount = this.$store.state.exchangeLimit.minAmount;
