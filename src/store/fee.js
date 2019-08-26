@@ -15,7 +15,8 @@ const state = {
     baseMakerFee,
     baseTakerFee,
     marketInfo: {},
-    invitedCode: ''
+    invitedCode: '',
+    isSVip: false
 };
 
 const mutations = {
@@ -44,7 +45,7 @@ const actions = {
                 commit('setInviteCode', code);
                 res(code);
             }).catch(e => {
-                commit('setInviteCode', '-1');
+                commit('setInviteCode', 0);
                 rej(e);
             });
         });
