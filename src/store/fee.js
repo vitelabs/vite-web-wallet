@@ -1,8 +1,7 @@
 import $ViteJS from 'utils/viteClient';
 import { timer } from 'utils/asyncFlow';
 import BigNumber from 'utils/bigNumber';
-import { getInviteeCode } from 'services/tradeOperation';
-import { getSvipStatus } from 'pcServices/tradeOperation';
+import { getInviteeCode, getSvipStatus } from 'services/tradeOperation';
 
 const baseMakerFee = 0.002;
 const baseTakerFee = 0.002;
@@ -95,6 +94,9 @@ const actions = {
 
 const getters = {
     vipFee(state) {
+        return getVipFee(state.isVip);
+    },
+    svipFee(state) {
         return getVipFee(state.isVip);
     },
     operatorMakerFee(state) {
