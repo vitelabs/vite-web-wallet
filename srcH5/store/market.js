@@ -1,10 +1,10 @@
 import { marketsClosed } from 'services/trade';
-import { category, symbol } from 'h5Utils/envFromURL';
+import env from 'h5Utils/envFromURL';
 
 const state = {
     // DefaultSymbol: symbol,
-    currentSymbol: symbol,
-    curentCategory: category,
+    currentSymbol: env.symbol,
+    curentCategory: env.category,
     marketClosed: []
 };
 

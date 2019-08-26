@@ -21,7 +21,7 @@ import centerHead from './head/head.vue';
 export default {
     components: { depth, limitPrice, centerHead, openOrder },
     mounted() {
-        this.$store.dispatch('dexFetchActiveTxPair', { symbol: this.$store.state.exchangeMarket.currentSymbol });
+        this.$store.dispatch('dexFetchActiveTxPair');
         this.$store.dispatch('exFetchVip');
         this.$store.dispatch('getMarketsClosed');
         this.$store.dispatch('exFetchLimitAmounts');

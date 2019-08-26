@@ -1,4 +1,5 @@
 import { assignPair } from 'services/trade';
+import env from 'h5Utils/envFromURL';
 
 const state = { activeTxPair: null };
 
@@ -17,10 +18,12 @@ const mutations = {
 };
 
 const actions = {
-    dexFetchActiveTxPair({ state, dispatch, commit }, txPair) {
-        if (!txPair) {
-            return;
-        }
+    dexFetchActiveTxPair({ state, dispatch, commit, rootState }, txPair) {
+        txPair = txPair || {
+            symbol: rootState.exchangeMarket.currentSymbol,
+            quoteToken: env.quoteToken,
+            tradeToken: env.tradeToken
+        };
 
         const activeTxPair = state.activeTxPair;
         if (activeTxPair && activeTxPair.symbol === txPair.symbol) {
