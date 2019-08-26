@@ -1,21 +1,21 @@
 <template>
     <div class="proxy">
         <div class="op item">
-            <div class="title">交易委托</div>
+            <div class="title">{{$t('trade.proxy.title')}}</div>
             <div class="btn_group">
                 <div class="btn btn__ok __pointer" @click="addProxy({actionType:'new'})">
-                    新建委托
+                    {{$t('trade.proxy.new')}}
                 </div>
-                <div class="btn btn__cancel __pointer">了解委托</div>
+                <div class="btn btn__cancel __pointer">{{$t('trade.proxy.info')}}</div>
             </div>
         </div>
         <div class="active item">
-            <div class="title">委托记录</div>
+            <div class="title">{{$t('trade.proxy.active.title')}}</div>
             <div class="proxytb">
                 <div class="proxytb_row head">
-                    <div class="proxytb_cell">委托地址</div>
-                    <div class="proxytb_cell">委托交易对</div>
-                    <div class="proxytb_cell">操作</div>
+                    <div class="proxytb_cell">{{$t('trade.proxy.active.head.0')}}</div>
+                    <div class="proxytb_cell">{{$t('trade.proxy.active.head.1')}}</div>
+                    <div class="proxytb_cell">{{$t('trade.proxy.active.head.2')}}</div>
                 </div>
                 <div
                     class="proxytb_content"
@@ -43,7 +43,7 @@
                                     })
                                 "
                             >
-                                增加交易对
+                                {{$t('trade.proxy.active.operate.0')}}
                             </div>
                             <div
                                 class="click-able"
@@ -55,7 +55,7 @@
                                     })
                                 "
                             >
-                                减少交易对
+                                {{$t('trade.proxy.active.operate.1')}}
                             </div>
                             <div
                                 class="click-able"
@@ -67,7 +67,7 @@
                                     })
                                 "
                             >
-                                撤销委托
+                                {{$t('trade.proxy.active.operate.2')}}
                             </div>
                         </div>
                     </div>
@@ -78,11 +78,11 @@
             </div>
         </div>
         <div class="passive item">
-            <div class="title">接受委托记录</div>
+            <div class="title">{{$t('trade.proxy.passive.title')}}</div>
             <div class="proxytb">
                 <div class="proxytb_row head">
-                    <div class="proxytb_cell">委托人地址</div>
-                    <div class="proxytb_cell">委托交易对</div>
+                    <div class="proxytb_cell">{{$t('trade.proxy.passive.head.0')}}</div>
+                    <div class="proxytb_cell">{{$t('trade.proxy.passive.head.1')}}</div>
                 </div>
                 <div
                     class="proxytb_content"

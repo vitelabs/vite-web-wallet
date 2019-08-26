@@ -5,10 +5,10 @@ block content
         i18n(path='tokenCard.charge.tips.0' tag="span")
             span.strong(place="tokenSymbol") {{trustAddress}}
     .content-wrapper(v-else)
-        .block__title 委托地址
+        .block__title {{$t('trade.proxy.passive.head.0')}}
         .block__content.edit(v-if="!!trustAddress") {{trustAddress}}
         input.block__content(v-else v-model="userInputAddress")
-        .block__title 委托交易对
+        .block__title {{$t('trade.proxy.passive.head.1')}}
         .pair_section.exists
             PairItem(v-for="item in existsPair" :item="item" class="pairs" :cancelAble="actionType==='delete'" @cancelItem="deleteExist(item)")
         .pair_section(:class="{pair_section__border_top:this.existsPair&&this.existsPair.length>0}")
@@ -42,25 +42,15 @@ export default {
         }
     },
     data() {
-        const rTxtMap = {
-            new: '添加',
-            add: '添加',
-            delete: '确认修改',
-            delteAll: '确认'
-        };
-        const titleMap = {
-            new: '新增委托',
-            add: '增加委托交易对',
-            delete: '减少委托交易对',
-            delteAll: '确认撤销委托'
-        };
+        const rTxtMap = this.$t("trade.proxy.dialog.rTxtMap");
+        const titleMap =  this.$t("trade.proxy.dialog.titleMap");
         return {
             allProxyAblePairs: [],
             selectedPairs: [],
             deletedPairs: [],
             userInputAddress: '',
             userInput: '',
-            dLTxt: '取消',
+            dLTxt:  this.$t("trade.proxy.dialog.cancel"),
             dWidth: this.actionType === 'deleteAll' ? 'narrow' : undefined,
             dRTxt: rTxtMap[this.actionType],
             dTitle: titleMap[this.actionType]

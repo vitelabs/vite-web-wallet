@@ -877,6 +877,49 @@
             "openFail": "Failed to apply VIP",
             "cancelSuccess": "Cancel VIP Successful",
             "cancelFail": "Cancel Failed"
+        },
+        "svipConfirm": {
+            "cancelVip": "Cancel SVIP",
+            "openVip": "Become a SVIP",
+            "openStakingAmount": "Staking Amount for Becoming a SVIP",
+            "cancelStakingAmount": "Retrievable Staking Amount",
+            "noBalance": "Insufficient Balance",
+            "openHint": "SVIP开通后，可免除基础手续费，开通SVIP需抵押10000VITE，30天后可手动取回",
+            "cancelHint": "You can retrieve your staking amount at approximately {time}. You will lose your SVIP privilege after retrieving.",
+            "openSuccess": "Applied Successful! SVIP status will come into effect later.",
+            "openFail": "Failed to apply VIP",
+            "cancelSuccess": "Cancel VIP Successful",
+            "cancelFail": "Cancel Failed"
+        },
+        "proxy":{
+            "title":"交易委托",
+            "info":"了解委托",
+            "new":"新建委托",
+            "active":{
+                "title":"委托记录",
+                "head":["委托地址","委托交易对","操作"],
+                "operate":["增加交易对","减少交易对","撤销委托"]
+            },
+            "passive":{
+                "title":"接受委托记录",
+                "head":["委托地址","委托交易对"]
+            },
+
+            "dialog": {
+              "cancel": "取消",
+              "rTxtMap": {
+                "new": "添加",
+                "add": "添加",
+                "delete": "确认修改",
+                "delteAll": "确认"
+              },
+              "titleMap": {
+                "new": "新增委托",
+                "add": "增加委托交易对",
+                "delete": "减少委托交易对",
+                "delteAll": "确认撤销委托"
+              }
+            }
         }
     },
     "tradeAssets": {
