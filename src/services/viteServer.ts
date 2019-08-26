@@ -95,3 +95,7 @@ export function getAccountTxList({ address, pageIndex, pageCount }) {
         pageCount
     });
 }
+
+export function getSvipStatus(address:string) {
+    return viteClient.request('dexfund_isPledgeSuperVip', address);
+}

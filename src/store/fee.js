@@ -1,7 +1,6 @@
 import { timer } from 'utils/asyncFlow';
 import BigNumber from 'utils/bigNumber';
-import { getInviteeCode, isPledgeVip, getMarketInfo } from 'services/viteServer';
-import { getSvipStatus } from 'pcServices/tradeOperation';
+import { getInviteeCode, isPledgeVip, getMarketInfo, getSvipStatus } from 'services/viteServer';
 
 const baseMakerFee = 0.002;
 const baseTakerFee = 0.002;

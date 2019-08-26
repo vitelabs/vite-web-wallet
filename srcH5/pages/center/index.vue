@@ -22,9 +22,9 @@ export default {
     components: { depth, limitPrice, centerHead, openOrder },
     mounted() {
         this.$store.dispatch('init');
+        this.$store.dispatch('exFetchVip');
         this.$store.dispatch('getMarketsClosed');
         this.$store.dispatch('exFetchLimitAmounts');
-        this.$store.dispatch('exFetchVip');
         this.$store.dispatch('startLoopDexFundeUnreceived');
     },
     destroyed() {

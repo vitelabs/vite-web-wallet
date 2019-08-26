@@ -64,8 +64,8 @@ const getters = {
         return balanceInfo;
     },
     allBalanceInfo(state, getters, rootState, rootGetters) {
-        const balanceInfo = getters.balanceInfo;
-        const exBalance = rootGetters.exBalanceList;
+        const balanceInfo = getters.balanceInfo || {};
+        const exBalance = rootGetters.exBalanceList || {};
         const allToken = Object.assign({}, defaultTokenMap, exBalance, balanceInfo);
 
         return Object.keys(allToken)
