@@ -9,11 +9,13 @@
 import { receiveInviteDialog } from 'h5Components/dialog';
 import orderNoticeList from 'components/orderNoticeList.vue';
 import env from 'h5Utils/envFromURL';
+import { setItem } from 'h5Utils/storage';
 
 export default {
     components: { orderNoticeList },
     mounted() {
         if (env.inviteeCode > 0) {
+            setItem('inviteeCode', env.inviteeCode);
             receiveInviteDialog();
         }
     }

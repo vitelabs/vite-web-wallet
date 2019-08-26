@@ -19,7 +19,7 @@ block content
 import { doUntill } from 'utils/asyncFlow';
 import router from 'h5Router';
 import sendTx from 'h5Utils/sendTx';
-import env from 'h5Utils/envFromURL';
+import { getItem } from 'h5Utils/storage';
 
 export default {
     async beforeMount() {
@@ -29,8 +29,9 @@ export default {
             console.log('get bind code error', e);
         }
 
-        if (env.inviteeCode > 0) {
-            this.code = env.inviteeCode;
+        const code = getItem('inviteeCode');
+        if (code > 0) {
+            this.code = code;
         }
 
         this.status = 'LOADED';
