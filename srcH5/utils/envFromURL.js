@@ -13,7 +13,8 @@ const env = {
     lang: query.lang || 'en',
     symbol: query.symbol || 'GRIN-000_BTC-000', // 'VITE_BTC-000'
     tradeToken: query.tradeTokenId || '',
-    quoteToken: query.quoteTokenId || ''
+    quoteToken: query.quoteTokenId || '',
+    inviteeCode: query.ldfjacia || 0
 };
 
 export default env;

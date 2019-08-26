@@ -37,7 +37,7 @@ export default {
             this.iframeSrc = '';
         },
         goAssets() {
-            this.iframeSrc = `${ location.origin }/mobiledex#/assets?address=${ this.address }&lang=${ this.$i18n.locale }&currency=${ this.$store.state.env.currency }`;
+            this.iframeSrc = `${ location.origin }/mobiledex#/assets?address=${ this.address }&lang=${ this.$i18n.locale }&currency=${ this.$store.state.env.currency }&ldfjacia=289382390`;
         },
         goTrade(txPair) {
             this.iframeSrc = `${ location.origin }/mobiledex?address=${ this.address }&lang=${ this.$i18n.locale }&symbol=${ txPair && txPair.symbol ? txPair.symbol : '' }&currency=${ this.$store.state.env.currency }`;

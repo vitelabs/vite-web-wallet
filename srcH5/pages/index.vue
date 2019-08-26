@@ -8,11 +8,12 @@
 <script>
 import { receiveInviteDialog } from 'h5Components/dialog';
 import orderNoticeList from 'components/orderNoticeList.vue';
+import env from 'h5Utils/envFromURL';
 
 export default {
     components: { orderNoticeList },
     mounted() {
-        if (Number(this.$route.query['ldfjacia']) > 0) {
+        if (env.inviteeCode > 0) {
             receiveInviteDialog();
         }
     }

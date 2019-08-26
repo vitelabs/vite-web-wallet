@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import { getTokenSymbolString } from 'pcUtils/tokenParser';
+import { getTokenSymbolString } from 'utils/tokenParser';
 import viteIcon from 'assets/imgs/vite-dividend.svg';
 import ethIcon from 'assets/imgs/eth.svg';
 import usdIcon from 'assets/imgs/usd.svg';
