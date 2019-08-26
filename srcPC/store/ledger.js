@@ -2,7 +2,7 @@ import { constant } from '@vite/vitejs';
 import { timer } from 'utils/asyncFlow';
 import { defaultTokenMap } from 'utils/constant';
 import { tokenInfoFromGithub } from 'services/trade';
-import { getTokenIcon } from 'pcUtils/tokenParser';
+import { getTokenIcon } from 'utils/tokenParser';
 import { getTokenInfoById, getSnapshotChainHeight, getTokenInfoList } from 'services/viteServer';
 
 const ViteId = constant.Vite_TokenId;

@@ -35,7 +35,7 @@ import debounce from 'lodash/debounce';
 import { getValidBalance } from 'pcUtils/validations';
 import bigNumber from 'utils/bigNumber';
 import tooltips from 'components/tooltips';
-import { getTokenIcon } from 'pcUtils/tokenParser';
+import { getTokenIcon } from 'utils/tokenParser';
 import { execWithValid } from 'pcUtils/execWithValid';
 
 

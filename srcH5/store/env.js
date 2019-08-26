@@ -1,7 +1,7 @@
 import env from 'h5Utils/envFromURL';
 import { timer } from 'utils/asyncFlow';
 import { defaultTokenMap } from 'utils/constant';
-import { getTokenIcon } from 'h5Utils/tokenParser';
+import { getTokenIcon } from 'utils/tokenParser';
 import { getSnapshotChainHeight, getTokenInfoById } from 'services/viteServer';
 
 let heightTimer = null;

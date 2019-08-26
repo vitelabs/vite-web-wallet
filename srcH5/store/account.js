@@ -6,7 +6,7 @@ import { timer } from 'utils/asyncFlow';
 import { defaultTokenMap } from 'utils/constant';
 
 import env from 'h5Utils/envFromURL';
-import { getTokenIcon } from 'h5Utils/tokenParser';
+import { getTokenIcon } from 'utils/tokenParser';
 
 let balanceInfoInst = null;
 

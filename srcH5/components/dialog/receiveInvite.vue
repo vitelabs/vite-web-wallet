@@ -2,7 +2,7 @@
 extends /components/dialog/base.pug
 block content
     img.bg-img(src="~assets/imgs/invite.png")
-    div(v-if="inviteeCode&&+inviteeCode!==0")
+    div(v-if="inviteeCode && +inviteeCode!==0")
         .invite-code {{$t('assets.invite.invited')}}{{this.inviteeCode}}
     div(v-else)
         .block__title {{ $t('assets.invite.codeLable') }}
@@ -19,6 +19,7 @@ block content
 import { doUntill } from 'utils/asyncFlow';
 import router from 'h5Router';
 import sendTx from 'h5Utils/sendTx';
+import env from 'h5Utils/envFromURL';
 
 export default {
     async beforeMount() {
@@ -27,6 +28,11 @@ export default {
         } catch (e) {
             console.log('get bind code error', e);
         }
+
+        if (env.inviteeCode > 0) {
+            this.code = env.inviteeCode;
+        }
+
         this.status = 'LOADED';
     },
     data() {
