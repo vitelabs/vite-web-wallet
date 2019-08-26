@@ -93,7 +93,7 @@ export default {
         padding-right: 6px;
         border-right: 1px solid rgba(205, 204, 204, 1);
         &.drop_menu{
-            border:none;
+            border: none;
         }
         &.active {
             color: #007aff;
