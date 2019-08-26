@@ -21,15 +21,15 @@ export default {
             default: () => []
         }
     },
-    beforeMount(){
-        window.ffff=this;
+    beforeMount() {
+        window.ffff = this;
     },
     data() {
         return {
             dWidth: 'narrow',
             dTitle: '确认委托交易对',
-            dLTxt:'取消',
-            dRTxt:'确定'
+            dLTxt: '取消',
+            dRTxt: '确定'
         };
     },
     computed: {
@@ -67,7 +67,7 @@ export default {
 
 .block__content {
     position: relative;
-    color:#5E6875;
+    color: #5E6875;
     font-size: 12px;
     word-break: break-all;
     width: 100%;

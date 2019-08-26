@@ -131,12 +131,12 @@ export default {
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
 .strong{
-    color:#1D2024;
+    color: #1D2024;
     font-size: 14px;
 }
 .address_container{
     font-size: 12px;
-    color:#5E6875;
+    color: #5E6875;
     word-break: break-all;
     line-height: 14px;
 }

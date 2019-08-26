@@ -56,11 +56,11 @@ export default {
         tip() {
             return this.isSVip ? this.$t('trade.svipConfirm.cancelHint', { time: this.stakingObj.withdrawTime ? date(this.stakingObj.withdrawTime * 1000, ' Pzh') : '' }) : this.$t('trade.vipConfirm.openHint');
         },
-        dTitle(){
-            return this.isSVip ? this.$t('trade.svipConfirm.cancelVip') : this.$t('trade.svipConfirm.openVip')
+        dTitle() {
+            return this.isSVip ? this.$t('trade.svipConfirm.cancelVip') : this.$t('trade.svipConfirm.openVip');
         },
-        dSTxt(){
-            return this.isSVip ? this.$t('trade.svipConfirm.cancelVip') : this.$t('trade.svipConfirm.openVip')
+        dSTxt() {
+            return this.isSVip ? this.$t('trade.svipConfirm.cancelVip') : this.$t('trade.svipConfirm.openVip');
         },
         isSVip() {
             return this.$store.state.exchangeFee.isSVip;
