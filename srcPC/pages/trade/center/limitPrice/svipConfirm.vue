@@ -38,7 +38,6 @@ export default {
             stakingObj: {},
             isAddrCorrect: true,
             loading: true,
-            viteTokenInfo: Vite_Token_Info,
             vipStakingAmount
         };
     },
@@ -54,7 +53,7 @@ export default {
             return this.$store.state.ledger.currentHeight;
         },
         tip() {
-            return this.isSVip ? this.$t('trade.svipConfirm.cancelHint', { time: this.stakingObj.withdrawTime ? date(this.stakingObj.withdrawTime * 1000, ' Pzh') : '' }) : this.$t('trade.vipConfirm.openHint');
+            return this.isSVip ? this.$t('trade.svipConfirm.cancelHint', { time: this.stakingObj.withdrawTime ? date(this.stakingObj.withdrawTime * 1000, ' Pzh') : '' }) : this.$t('trade.svipConfirm.openHint');
         },
         dTitle() {
             return this.isSVip ? this.$t('trade.svipConfirm.cancelVip') : this.$t('trade.svipConfirm.openVip');
@@ -70,6 +69,9 @@ export default {
                 return;
             }
             return this.validateAmount(this.withdrawAmount);
+        },
+        viteTokenInfo() {
+            return this.$store.getters.viteTokenInfo;
         },
         dBtnUnuse() {
             if (this.isSVip) {
