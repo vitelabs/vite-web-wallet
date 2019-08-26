@@ -40,16 +40,16 @@ export default {
         optList() {
             return [
                 {
-                    name: this.isVip && this.isSVip ? 'cancelvip' : 'openSvip',
+                    name: this.isVip && this.isSVip ? this.$t('trade.vipConfirm.cancelVip') :this.$t('trade.svipConfirm.openVip'),
                     value: this.isVip && this.isSVip ? 'vip' : 'svip'
                 },
                 {
                     name:
                         !this.isVip && !this.isSVip
-                            ? 'openvip'
+                            ? this.$t('trade.vipConfirm.openVip')
                             : this.isVip && !this.isSVip
-                                ? 'cancelvip'
-                                : 'cancelSvip',
+                                ? this.$t('trade.vipConfirm.cancelVip')
+                                : this.$t('trade.svipConfirm.cancelVip'),
                     value: this.isVip && this.isSVip ? 'svip' : 'vip'
                 }
             ];
@@ -83,10 +83,7 @@ export default {
         }),
         showSVipConfirm: execWithValid(function () {
             component2function(svipComp)().then(() =>
-                doUntill(() => this.$store.dispatch('exFetchSVip'),
-                    undefined,
-                    1000,
-                    3));
+                doUntill({createPromise:() => this.$store.dispatch('exFetchSVip'),interval:1000,times:3}));
         })
     }
 };

@@ -2,17 +2,17 @@
 extends /components/dialog/base.pug
 block content
     .content-wrapper(v-if="actionType==='deleteAll'")
-        i18n(path='trade.proxy.dialog.cancelAllTips' tag="span")
-            div.strong(place="trustAddress") {{trustAddress}}
+        i18n.strong(path='trade.proxy.dialog.cancelAllTips' tag="span")
+            div.address_container(place="trustAddress") {{trustAddress}}
     .content-wrapper(v-else)
         .block__title {{$t('trade.proxy.passive.head.0')}}
         .block__content.edit(v-if="!!trustAddress") {{trustAddress}}
         input.block__content(v-else v-model="userInputAddress")
         .block__title {{$t('trade.proxy.passive.head.1')}}
         .pair_section.exists
-            PairItem(v-for="item in existsPair" :item="item" class="pairs" :cancelAble="actionType==='delete'" @cancelItem="deleteExist(item)")
+            PairItem(v-for="item in existsPair" :key="item.id" :item="item" class="pairs" :cancelAble="actionType==='delete'" @cancelItem="deleteExist(item)")
         .pair_section(:class="{pair_section__border_top:this.existsPair&&this.existsPair.length>0}")
-            PairItem(v-for="item in selectedPairs" :item="item" :cancelAble="true" @cancelItem="deleteItem(item)" class="pairs")
+            PairItem(v-for="item in selectedPairs" :key="item.id" :item="item" :cancelAble="true" @cancelItem="deleteItem(item)" class="pairs")
         SearchTips(:filterMethod="filterMethod" @selected="addItem" class="search" v-if="actionType==='new'||actionType==='add'")
 </template>
 
@@ -104,7 +104,7 @@ export default {
             const quoteTokens = manilpulatePairs.map(p => p.quoteToken);
             if (this.actionType === 'new') {
                 await confirmDialog({
-                    pairs: this.manilpulatePairs,
+                    pairs: manilpulatePairs,
                     trustAddress: this.trustAddress || this.userInputAddress
                 });
             }
@@ -130,6 +130,16 @@ export default {
 
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
+.strong{
+    color:#1D2024;
+    font-size: 14px;
+}
+.address_container{
+    font-size: 12px;
+    color:#5E6875;
+    word-break: break-all;
+    line-height: 14px;
+}
 .pair_section {
     display: flex;
     flex-wrap: wrap;

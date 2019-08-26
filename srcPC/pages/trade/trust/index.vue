@@ -45,7 +45,7 @@
                                 v-for="t in transUtil(relation[addr])"
                                 :key="t"
                                 class="pure-pair"
-                            >{{ t }}</span
+                                >{{ t }}</span
                             >
                         </div>
                         <div class="proxytb_cell operation">
@@ -119,7 +119,7 @@
                                 v-for="t in transUtil(grantor[addr])"
                                 :key="t"
                                 class="pure-pair"
-                            >{{ t }}</span
+                                >{{ t }}</span
                             >
                         </div>
                     </div>
@@ -132,10 +132,11 @@
     </div>
 </template>
 <script>
-import { getProxyRelation, getProxyGrantor } from 'pcServices/tradeOperation';
-import { addDialog } from './dialog';
-import PairItem from './dialog/pairItem';
-import { doUntill } from 'utils/asyncFlow';
+import { getProxyRelation, getProxyGrantor } from "pcServices/tradeOperation";
+import { addDialog } from "./dialog";
+import PairItem from "./dialog/pairItem";
+import { doUntill } from "utils/asyncFlow";
+import { execWithValid } from "pcUtils/execWithValid"
 export default {
     components: { PairItem },
     data() {
@@ -158,31 +159,34 @@ export default {
                 this.grantor = data.relations;
             });
         },
-        addProxy({ trustAddress, existsPair, actionType } = {}) {
+        addProxy:execWithValid(function ({ trustAddress, existsPair, actionType } = {}) {
             if (existsPair) {
                 existsPair = existsPair.map(p =>
                     Object.assign(p, {
-                        name: p.symbol.replace('_', '/'),
-                        id: `${ p.tradeToken }/${ p.quoteToken }`
-                    }));
+                        name: p.symbol.replace("_", "/"),
+                        id: `${p.tradeToken}/${p.quoteToken}`
+                    })
+                );
             }
             addDialog({
                 trustAddress,
                 existsPair: existsPair && existsPair.slice(0),
                 actionType
-            }).then(() => {
-                doUntill(() =>
-                    getProxyRelation({ address: this.address }).then(data => {
+            }).then(() =>
+                doUntill({
+                    createPromise: ()=>getProxyRelation({
+                        address: this.address
+                    }).then(data => {
                         this.relation = data.relations;
                     }),
-                undefined,
-                1000,
-                3);
-            });
-        },
+                    interval: 1000,
+                    times: 3
+                })
+            );
+        }),
         transUtil(pairs) {
             if (!pairs || pairs.length === 0) return [];
-            return pairs.map(p => p.symbol.replace('_', '/'));
+            return pairs.map(p => p.symbol.replace("_", "/"));
         }
     }
 };

@@ -37,15 +37,17 @@ export default {
             stakeAmount: '',
             stakingObj: {},
             isAddrCorrect: true,
-            dTitle: this.isSVip ? this.$t('trade.svipConfirm.cancelVip') : this.$t('trade.svipConfirm.openVip'),
-            dSTxt: this.isSVip ? this.$t('trade.svipConfirm.cancelVip') : this.$t('trade.svipConfirm.openVip'),
             loading: true,
             viteTokenInfo: Vite_Token_Info,
             vipStakingAmount
         };
     },
     beforeMount() {
+        this.$store.dispatch('startLoopHeight');
         this.fetchStakingObj();
+    },
+    destroyed() {
+        this.$store.dispatch('stopLoopHeight');
     },
     computed: {
         height() {
@@ -53,6 +55,12 @@ export default {
         },
         tip() {
             return this.isSVip ? this.$t('trade.svipConfirm.cancelHint', { time: this.stakingObj.withdrawTime ? date(this.stakingObj.withdrawTime * 1000, ' Pzh') : '' }) : this.$t('trade.vipConfirm.openHint');
+        },
+        dTitle(){
+            return this.isSVip ? this.$t('trade.svipConfirm.cancelVip') : this.$t('trade.svipConfirm.openVip')
+        },
+        dSTxt(){
+            return this.isSVip ? this.$t('trade.svipConfirm.cancelVip') : this.$t('trade.svipConfirm.openVip')
         },
         isSVip() {
             return this.$store.state.exchangeFee.isSVip;
@@ -64,7 +72,7 @@ export default {
             return this.validateAmount(this.withdrawAmount);
         },
         dBtnUnuse() {
-            if (this.isVip) {
+            if (this.isSVip) {
                 return !(this.stakingObj && this.stakingObj.withdrawHeight <= this.height);
             }
 
@@ -94,12 +102,12 @@ export default {
     },
     methods: {
         fetchStakingObj() {
-            if (!this.isVip) {
+            if (!this.isSVip) {
                 return;
             }
 
             $ViteJS.request('pledge_getAgentPledgeInfo', {
-                pledgeAddr: this.accountAddr,
+                pledgeAddr: this.address,
                 agentAddr: constant.DexFund_Addr,
                 beneficialAddr: constant.DexFund_Addr,
                 bid: 3
@@ -116,8 +124,6 @@ export default {
                 pledgeForSuperVIp({ actionType }).then(() => {
                     this.isLoading = false;
                     this.$toast(this.isSVip ? this.$t('trade.svipConfirm.cancelSuccess') : this.$t('trade.svipConfirm.openSuccess'));
-                    this.close && this.close();
-                    this.$store.dispatch('startLoopVip', !this.isVip);
                     res();
                 }).catch(err => {
                     console.warn(err);
