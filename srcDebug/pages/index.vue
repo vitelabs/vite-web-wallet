@@ -37,20 +37,16 @@ export default {
             this.iframeSrc = '';
         },
         goAssets() {
-            this.iframeSrc = `${ location.origin }/mobiledex#/assets?address=${ this.address }&lang=${ this.$i18n.locale }`;
+            this.iframeSrc = `${ location.origin }/mobiledex#/assets?address=${ this.address }&lang=${ this.$i18n.locale }&currency=${ this.$store.state.env.currency }`;
         },
         goTrade(txPair) {
-            let iframeSrc = `${ location.origin }/mobiledex?address=${ this.address }&lang=${ this.$i18n.locale }`;
-            for (const key in txPair) {
-                iframeSrc += `&${ key }=${ txPair[key] }`;
-            }
-            this.iframeSrc = iframeSrc;
+            this.iframeSrc = `${ location.origin }/mobiledex?address=${ this.address }&lang=${ this.$i18n.locale }&symbol=${ txPair && txPair.symbol ? txPair.symbol : '' }&currency=${ this.$store.state.env.currency }`;
         },
         goOrder() {
-            this.iframeSrc = `${ location.origin }/mobiledex#/order?address=${ this.address }&lang=${ this.$i18n.locale }`;
+            this.iframeSrc = `${ location.origin }/mobiledex#/order?address=${ this.address }&lang=${ this.$i18n.locale }&currency=${ this.$store.state.env.currency }`;
         },
         goMining() {
-            this.iframeSrc = `${ location.origin }/mobiledex#/mining?address=${ this.address }&lang=${ this.$i18n.locale }`;
+            this.iframeSrc = `${ location.origin }/mobiledex#/mining?address=${ this.address }&lang=${ this.$i18n.locale }&currency=${ this.$store.state.env.currency }`;
         }
     }
 };

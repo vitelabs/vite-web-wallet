@@ -335,10 +335,10 @@ export default {
             return this.$store.state.exchangeActiveTx.activeTx;
         },
         ttokenDigit() {
-            return this.$store.state.exchangeTokenDecimalsLimit.quoteToken;
+            return this.$store.getters.quoteTokenDecimalsLimit;
         },
         ftokenDigit() {
-            return this.$store.state.exchangeTokenDecimalsLimit.tradeToken;
+            return this.$store.getters.tradeTokenDecimalsLimit;
         },
         closeMarket() {
             return this.$store.state.exchangeMarket.marketClosed;

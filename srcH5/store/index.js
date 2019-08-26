@@ -16,7 +16,7 @@ import activeTx from 'store/activeTx';
 import latestOrder from 'store/latestOrder';
 import dexFundUnreceived from 'store/dexFundUnreceived';
 import currentOpenOrders from 'store/currentOpenOrders';
-import tokenDecimalsLimit from 'store/tokenDecimalsLimit';
+import activeTxPairGetters from 'store/activeTxPairGetters';
 
 const exchange = {
     exchangeRate: rate,
@@ -30,7 +30,7 @@ const exchange = {
     exchangeLimit: limit,
     exchangeFee: fee,
     exchangeLatestOrder: latestOrder,
-    exchangeTokenDecimalsLimit: tokenDecimalsLimit,
+    exchangeActiveTxPairGetters: activeTxPairGetters,
     exchangeDexFundUnreceived: dexFundUnreceived
 };
 
