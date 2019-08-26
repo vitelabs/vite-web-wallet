@@ -3,7 +3,9 @@ require('es6-promise').polyfill();
 
 import 'assets/scss/mixins.scss';
 import 'utils/performance';
-import 'utils/viteClient.js';
+import 'utils/viteClient';
+import 'h5Utils/bridge';
+import 'h5Utils/envFromURL';
 
 import Vue from 'vue';
 
