@@ -21,11 +21,11 @@ export const klineHistory = function ({ startTime, endTime, symbol, interval }) 
     });
 };
 
-export const depth = function ({ symbol, step }) {
+export const depth = function ({ symbol, step, limit = 100 }) {
     return ViteXAPI({
         path: '/depth',
         method: 'GET',
-        params: { symbol, step }
+        params: { symbol, step, limit }
     });
 };
 
