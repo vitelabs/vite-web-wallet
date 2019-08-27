@@ -182,7 +182,7 @@
         "restore": "Khôi phục Tài khoản bằng Seed phrase",
         "record": "Tạo Seed phrase",
         "prompt": "Mnemonic seed phrase là cách duy nhất để khôi phục ví của bạn. Vui lòng viết phrase ra và lưu lại cẩn thân.",
-        "placeholder": "Vui lòng điền mnemonic seed phrase",
+        "placeholder": "Please enter your mnemonic seed phrase. Example: apple banana peach mango pear ...",
         "empty": "Không để trống ô nhập seed phrase",
         "error": "Seed phrase không chính xác. Vui lòng thử lại",
         "hint": "Ví dụ: apple banana peach mango pear ...",
