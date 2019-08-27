@@ -159,7 +159,7 @@ export default {
     align-items: center;
     margin-bottom: 14px;
     background-color: #ffffff;
-    box-shadow:0px 2px 10px 1px rgba(176,192,237,0.42);
+    box-shadow: 0px 2px 10px 1px rgba(176,192,237,0.42);
     .gap{
         width: 0;
         border-left: 1px solid rgba(227, 235, 245, 0.6);
