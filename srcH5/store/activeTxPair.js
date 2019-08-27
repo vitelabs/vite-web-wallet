@@ -1,5 +1,7 @@
-import { assignPair } from 'services/trade';
+import { subTask } from 'utils/proto/subTask';
 import env from 'h5Utils/envFromURL';
+
+let assignPairTask = null;
 
 const state = { activeTxPair: null };
 
@@ -30,18 +32,30 @@ const actions = {
             return;
         }
 
-        assignPair({ symbols: [txPair.symbol] }).then(data => {
+        assignPairTask && assignPairTask.stop();
+        assignPairTask = null;
+
+        assignPairTask = new subTask('assignPair', ({ data }) => {
             if (!data || !data.length) {
                 return;
             }
 
-            commit('exSetActiveTxPair', data[0]);
+            const activeTxPair = data[0];
+            const currActiveTxPair = state.activeTxPair;
 
-            dispatch('exFetchActiveTokens');
-            dispatch('exFetchDepth');
-            dispatch('exFetchMarketInfo');
-        }).catch(err => {
-            console.warn(err);
+            if (currActiveTxPair && activeTxPair.symbol !== currActiveTxPair.symbol) {
+                return;
+            }
+
+            commit('exSetActiveTxPair', activeTxPair);
+            if (!currActiveTxPair) {
+                dispatch('exFetchActiveTokens');
+                dispatch('exFetchDepth');
+                dispatch('exFetchMarketInfo');
+            }
+        });
+        assignPairTask.start(() => {
+            return { symbol: txPair.symbol };
         });
     }
 };
