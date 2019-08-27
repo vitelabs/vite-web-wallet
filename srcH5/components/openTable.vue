@@ -5,7 +5,7 @@
                 'active': !!changeList[v.orderId]
             }" v-for="v in sortedList" :key="v.orderId">
                 <div class="__tb_row_item">
-                    <div>
+                    <div class="left">
                         <span class="side_icon" :class="{
                             'buy': v.side===0,
                             'sell': v.side===1
@@ -41,7 +41,7 @@
                 </div>
             </div>
         </div>
-        <div class="__tb_no_data" v-show="!sortedList || !sortedList.length">{{ $t('hint.noData') }}</div>
+        <no-data v-show="!sortedList || !sortedList.length"></no-data>
     </div>
 </template>
 
@@ -50,10 +50,12 @@ import d from 'dayjs';
 import { utils } from '@vite/vitejs';
 import sendTx from 'h5Utils/sendTx';
 import statistics from 'utils/statistics';
+import noData from 'h5Components/noData';
 
 const { _Buffer } = utils;
 
 export default {
+    components: { noData },
     props: {
         changeList: {
             type: Object,
@@ -100,16 +102,16 @@ export default {
                     'price': `${ order.price } ${ this.getOriginSymbol(order.quoteTokenSymbol) }`
                 }
             }).then(() => {
-                this.$toast(this.$t('tradeOpenOrders.confirm.successToast'));
+                // this.$toast(this.$t('tradeOpenOrders.confirm.successToast'));
             }).catch(err => {
                 console.warn(err);
-                const code = err && err.error ? err.error.code || -1
-                    : err ? err.code : -1;
-                if (code === -37008) {
-                    this.$toast(`${ this.$t('tradeOpenOrders.cancelErr') }(37008)`);
-                    return;
-                }
-                this.$toast(this.$t('tradeOpenOrders.confirm.failToast'), err);
+                // const code = err && err.error ? err.error.code || -1
+                //     : err ? err.code : -1;
+                // if (code === -37008) {
+                //     this.$toast(`${ this.$t('tradeOpenOrders.cancelErr') }(37008)`);
+                //     return;
+                // }
+                // this.$toast(this.$t('tradeOpenOrders.confirm.failToast'), err);
             });
         }
     }
@@ -127,14 +129,24 @@ export default {
 .__tb_row {
     font-size: 12px;
     @include font-normal();
-    border-bottom: 1px solid rgba(211,223,239,1);
     margin-bottom: 18px;
+    padding: 0 24px;
+
     .__tb_row_item {
         margin-bottom: 10px;
         display: flex;
         align-items: center;
         flex-direction: row;
         justify-content: space-between;
+        &:last-child {
+            margin-bottom: 0px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(211,223,239,1);
+        }
+        .left {
+            display: flex;
+            align-items: center;
+        }
         &._flex {
             line-height: 18px;
             font-size: 14px;
@@ -148,6 +160,7 @@ export default {
         line-height: 16px;
         text-align: center;
         border-radius: 2px;
+        margin-right: 6px;
         &.buy {
             background: rgba(1,215,100,0.1);
             color: $green;

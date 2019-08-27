@@ -28,7 +28,7 @@ export default {
 .order-wrapper {
     font-size: 12px;
     .content-wrapper {
-        padding: 22px 24px;
+        padding: 22px 0px;
     }
 }
 </style>

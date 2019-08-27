@@ -70,11 +70,13 @@ export default {
                     methodName: 'dexFundUserDeposit',
                     data: { tokenId: this.token.tokenId, amount }
                 }).then(() => {
-                    this.$toast(this.$t('tradeAssets.confirmrecharge.successToast'));
+                    // this.$toast(this.$t('tradeAssets.confirmrecharge.successToast'));
                     res();
+                    this.close();
                 }).catch(e => {
-                    this.$toast(this.$t('tradeAssets.confirmrecharge.failToast'), e);
+                    // this.$toast(this.$t('tradeAssets.confirmrecharge.failToast'), e);
                     rej(e);
+                    this.close();
                 });
             });
         }

@@ -146,19 +146,19 @@ export default {
                     actionType: this.actionType
                 }
             }).then(() => {
-                if (this.isAdd) {
-                    this.$toast(this.$t('hint.request', { name: this.$t('submitStaking') }));
-                } else {
-                    this.$toast(this.$t('hint.request', { name: this.$t('walletQuota.withdrawalStaking') }));
-                }
+                // if (this.isAdd) {
+                //     this.$toast(this.$t('hint.request', { name: this.$t('submitStaking') }));
+                // } else {
+                //     this.$toast(this.$t('hint.request', { name: this.$t('walletQuota.withdrawalStaking') }));
+                // }
                 this._close();
             }).catch(err => {
                 console.warn(err);
-                if (this.isAdd) {
-                    this.$toast(this.$t('walletQuota.pledgeFail'), err);
-                } else {
-                    this.$toast(this.$t('walletQuota.canclePledgeFail'), err);
-                }
+                // if (this.isAdd) {
+                //     this.$toast(this.$t('walletQuota.pledgeFail'), err);
+                // } else {
+                //     this.$toast(this.$t('walletQuota.canclePledgeFail'), err);
+                // }
             });
         }
     }
