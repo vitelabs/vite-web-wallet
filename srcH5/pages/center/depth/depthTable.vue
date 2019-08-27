@@ -1,7 +1,5 @@
 <template>
     <div class="depth-table-wrapper">
-        <loading loadingType="dot" class="ex-center-loading" v-show="isLoading"></loading>
-
         <div class="__center-tb-row" :class="dataType" @click="clickRow(item, i)"
              v-for="(item, i) in depthData" :key="i">
             <span v-if="dataType === 'buy'" class="quantity">{{ formatNum(item.quantity, 'ftoken') }}</span>
@@ -16,10 +14,8 @@
 
 <script>
 import BigNumber from 'utils/bigNumber';
-import loading from 'components/loading';
 
 export default {
-    components: { loading },
     props: {
         dataType: {
             type: String,
@@ -34,9 +30,6 @@ export default {
         this.$store.dispatch('exStopDepthTimer');
     },
     computed: {
-        isLoading() {
-            return this.$store.state.exchangeDepth.isLoading;
-        },
         ttoken() {
             return this.$store.state.exchangeTokens.ttoken;
         },
