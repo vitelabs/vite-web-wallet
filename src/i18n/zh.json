@@ -888,6 +888,8 @@
             "cancelFail": "取消失败"
         },
         "svipConfirm": {
+            "open":"开通",
+            "cancel":"取消",
             "cancelVip": "取消SVIP",
             "openVip": "开通SVIP",
             "openStakingAmount": "开通SVIP抵押金额",

@@ -29,7 +29,7 @@ import date from 'utils/date';
 import $ViteJS from 'utils/viteClient';
 
 const Vite_Token_Info = constant.Vite_Token_Info;
-const vipStakingAmount = 10000;
+const vipStakingAmount = 1000000;
 
 export default {
     data() {
