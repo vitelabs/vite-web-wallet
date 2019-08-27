@@ -1,6 +1,8 @@
 <template>
     <div id="vite-wallet-app" class="trade-container">
-        <router-view></router-view>
+        <div class="router-wrapper">
+            <router-view></router-view>
+        </div>
         <order-notice-list class="notice-list"></order-notice-list>
     </div>
 </template>
@@ -32,17 +34,25 @@ export default {
 
 <style lang="scss" scoped>
 .trade-container {
+    position: relative;
     height: 100%;
     width: 100%;
-    overflow: auto;
+    overflow: hidden;
+    .router-wrapper {
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+    }
 }
+
 .notice-list {
     position: absolute;
     bottom: 0;
     right: 0;
     z-index: 101;
+    box-sizing: border-box;
+    width: 100%;
     max-height: 100%;
     overflow: auto;
-    transition: all 0.8s ease-in-out;
 }
 </style>
