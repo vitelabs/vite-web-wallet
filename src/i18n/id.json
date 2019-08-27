@@ -183,8 +183,8 @@
         "record": "Hasilkan Seed Phrase",
         "prompt": "Seed Phrase mnemonic adalah satu-satunya cara untuk mengembalikan dompet Anda. Anda sangat disarankan untuk menuliskan frasa dan menyimpannya di tempat yang aman di mana hanya Anda yang dapat mengaksesnya.",
         "placeholder": "Please enter your mnemonic seed phrase. Example: apple banana peach mango pear ...",
-        "empty": "Masukan dari frase seed tidak boleh kosong",
-        "error": "Seed Phrase salah. Coba lagi",
+        "empty": "Seed phrase cannot be empty",
+        "error": "Wrong seed phrase. Try again",
         "hint": "Contoh: apel pisang peach mangga ...",
         "change": "Beralih ke {len} kata-kata Mnemonic"
     },
