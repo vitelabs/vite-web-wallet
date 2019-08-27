@@ -106,7 +106,7 @@ export default {
             const quoteTokens = manilpulatePairs.map(p => p.quoteToken);
             if (this.actionType !== 'deleteAll') {
                 await confirmDialog({
-                    pairs: this.actionType==='delete'?this.existsPair:[].concat(this.existsPair,this.selectedPairs),
+                    pairs: this.actionType === 'delete' ? this.existsPair : [].concat(this.existsPair, this.selectedPairs),
                     trustAddress: this.trustAddress || this.userInputAddress
                 });
             }
