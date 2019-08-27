@@ -8,7 +8,7 @@ export default async function ({ methodName, data }) {
     const accountBlock = await activeAcc.getBlock[methodName](data, 'sync');
     console.log(accountBlock);
 
-    return bridge['wallet.sendRawTx']({
+    return bridge['pri.sendTx']({
         block: accountBlock
         // extend,
         // abi,
