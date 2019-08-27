@@ -183,8 +183,8 @@
         "record": "Generate Seed Phrase",
         "prompt": "Mnemonic seed phrase is the only way to restore your wallet. You are strongly advised to write down the phrase and keep it in a safe place where only you can access.",
         "placeholder": "Please enter your mnemonic seed phrase. Example: apple banana peach mango pear ...",
-        "empty": "The input of seed phrase cannot be empty",
-        "error": "Incorrect seed phrase. Try again",
+        "empty": "Seed phrase cannot be empty",
+        "error": "Wrong seed phrase. Try again",
         "hint": "Example: apple banana peach mango pear ...",
         "change": "Switch to {len} Mnemonic Words"
     },
