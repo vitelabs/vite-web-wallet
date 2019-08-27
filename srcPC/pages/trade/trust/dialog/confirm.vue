@@ -1,12 +1,16 @@
 <template lang="pug">
 extends /components/dialog/base.pug
 block content
-    .content-wrapper
+    .content-wrapper(v-if="isDeleteAll")
+        i18n.strong(path='trade.proxy.dialog.cancelAllTips' tag="span")
+            div.address_container(place="trustAddress") {{trustAddress}}
+    .content-wrapper(v-else)
         .block__title {{$t('trade.proxy.passive.head.0')}}
         div.block__content(v-if="!!trustAddress") {{trustAddress}}
         .block__title {{$t('trade.proxy.passive.head.1')}}
         div.block__content
             span.pure-pair(v-for="t in pairArray" :key="t") {{t}}
+
 </template>
 
 <script>
@@ -21,20 +25,22 @@ export default {
             default: () => []
         }
     },
-    beforeMount() {
-        window.ffff = this;
-    },
     data() {
         return {
             dWidth: 'narrow',
-            dTitle: '确认委托交易对',
-            dLTxt: '取消',
-            dRTxt: '确定'
+            dLTxt: this.$t('trade.proxy.dialog.confirm.cancel'),
+            dRTxt: this.$t('trade.proxy.dialog.confirm.ok')
         };
     },
     computed: {
         pairArray() {
             return this.pairs.map(p => p.symbol.replace('_', '/'));
+        },
+        dTitle() {
+            return this.isDeleteAll ? this.$t('trade.proxy.dialog.titleMap')['deleteAll'] : this.$t('trade.proxy.dialog.confirm.title');
+        },
+        isDeleteAll() {
+            return !(this.pairs && this.pairs.length > 0);
         }
     },
     methods: {
@@ -80,6 +86,16 @@ export default {
     .pure-pair {
         margin-right: 10px;
     }
+}
+.strong {
+    color: #1d2024;
+    font-size: 14px;
+}
+.address_container {
+    font-size: 12px;
+    color: #5e6875;
+    word-break: break-all;
+    line-height: 14px;
 }
 </style>
 
