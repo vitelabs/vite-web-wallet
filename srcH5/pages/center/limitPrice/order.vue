@@ -77,10 +77,7 @@ export default {
         }
     },
     mounted() {
-        const price = this.activeTxPair && this.activeTxPair.closePrice
-            ? this.activeTxPair.closePrice
-            : '';
-        this.price = BigNumber.normalFormatNum(price, this.ttokenDigit);
+        this.initNormalFormatPrice();
     },
     data() {
         return {
@@ -103,10 +100,7 @@ export default {
                 return;
             }
 
-            const price = this.activeTxPair && this.activeTxPair.closePrice
-                ? this.activeTxPair.closePrice
-                : '';
-            this.price = BigNumber.normalFormatNum(price, this.ttokenDigit);
+            this.initNormalFormatPrice();
             this.quantity = '';
             this.amount = '';
         },
@@ -395,6 +389,17 @@ export default {
 
             amount = this.getAmount(price, quantity);
             !BigNumber.isEqual(amount, this.amount) && (this.amount = amount);
+        },
+
+        initNormalFormatPrice() {
+            const price = this.activeTxPair && this.activeTxPair.closePrice
+                ? this.activeTxPair.closePrice
+                : '';
+            if (!+price) {
+                this.price = '';
+                return;
+            }
+            this.price = BigNumber.normalFormatNum(price, this.ttokenDigit);
         },
 
         // price = amount / quantity / (1+fee)
