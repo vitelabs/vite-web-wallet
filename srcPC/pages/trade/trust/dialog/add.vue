@@ -104,9 +104,9 @@ export default {
                     : this.deletedPairs;
             const tradeTokens = manilpulatePairs.map(p => p.tradeToken);
             const quoteTokens = manilpulatePairs.map(p => p.quoteToken);
-            if (this.actionType === 'new') {
+            if (this.actionType !== 'deleteAll') {
                 await confirmDialog({
-                    pairs: manilpulatePairs,
+                    pairs: this.actionType==='delete'?this.existsPair:[].concat(this.existsPair,this.selectedPairs),
                     trustAddress: this.trustAddress || this.userInputAddress
                 });
             }

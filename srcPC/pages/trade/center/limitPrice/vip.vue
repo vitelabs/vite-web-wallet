@@ -14,7 +14,7 @@
             class="vip-operate drop_menu"
             @input="action"
             :optList="optList"
-            :title="isVip && isSVip ? 'cancelvip' : 'openSvip'"
+            :title="isVip && isSVip ? $t('trade.svipConfirm.cancel') : $t('trade.svipConfirm.open')"
         />
     </div>
 </template>
