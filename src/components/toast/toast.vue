@@ -48,12 +48,6 @@ export default {
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
 
-@media screen and (min-width: 500px) {
-    .mint-toast {
-        padding: 20px;
-    }
-}
-
 .mint-toast {
     box-sizing: border-box;
     position: fixed;
@@ -129,5 +123,11 @@ export default {
     75% { transform: rotate(270deg); }
 
     100% { transform: rotate(360deg); }
+}
+
+@media screen and (max-width: 500px) {
+    .mint-toast {
+        padding: 20px;
+    }
 }
 </style>
