@@ -218,14 +218,13 @@ export default {
             }
 
             const balance = this.availableBalance;
+            if (!+balance) {
+                return '0';
+            }
 
             if (this.orderType === 'buy') {
-                const basicAmount = BigNumber.toMin(this.amount || 0,
-                    this.ttokenDetail.tokenDecimals);
-                return BigNumber.dividedToNumber(basicAmount || 0,
-                    balance,
-                    3,
-                    'nofix');
+                const basicAmount = BigNumber.toMin(this.amount || 0, this.ttokenDetail.tokenDecimals);
+                return BigNumber.dividedToNumber(basicAmount || 0, balance, 3, 'nofix');
             }
 
             const basicQuantity = BigNumber.toMin(this.quantity || 0,
