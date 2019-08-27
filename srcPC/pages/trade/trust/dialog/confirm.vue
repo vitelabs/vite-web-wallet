@@ -28,19 +28,19 @@ export default {
     data() {
         return {
             dWidth: 'narrow',
-            dLTxt: this.$t("trade.proxy.dialog.confirm.cancel"),
-            dRTxt: this.$t("trade.proxy.dialog.confirm.ok")
+            dLTxt: this.$t('trade.proxy.dialog.confirm.cancel'),
+            dRTxt: this.$t('trade.proxy.dialog.confirm.ok')
         };
     },
     computed: {
         pairArray() {
             return this.pairs.map(p => p.symbol.replace('_', '/'));
         },
-        dTitle(){
-            return this.isDeleteAll?this.$t('trade.proxy.dialog.titleMap')['deleteAll']:this.$t("trade.proxy.dialog.confirm.title");
+        dTitle() {
+            return this.isDeleteAll ? this.$t('trade.proxy.dialog.titleMap')['deleteAll'] : this.$t('trade.proxy.dialog.confirm.title');
         },
-        isDeleteAll(){
-            return !(this.pairs&&this.pairs.length>0)
+        isDeleteAll() {
+            return !(this.pairs && this.pairs.length > 0);
         }
     },
     methods: {
