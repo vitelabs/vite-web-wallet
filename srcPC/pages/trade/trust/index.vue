@@ -150,10 +150,10 @@ export default {
     beforeMount() {
         this.updateData();
     },
-    watch:{
-        address(){
-            this.relation={};
-            this.grantor={};
+    watch: {
+        address() {
+            this.relation = {};
+            this.grantor = {};
             this.updateData();
         }
     },
