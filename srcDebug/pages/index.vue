@@ -80,7 +80,7 @@ export default {
     bottom: 33px;
     left: 0;
     right: 0;
-    overflow: auto;
+    overflow: hidden;
     iframe {
         width: 100%;
         height: 100%;
