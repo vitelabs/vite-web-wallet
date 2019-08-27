@@ -1,3 +1,0 @@
-declare type bnStr=string
-
-
