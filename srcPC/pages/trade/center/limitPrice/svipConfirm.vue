@@ -8,11 +8,14 @@ block content
                 img(:src="viteTokenInfo.icon")
                 .symbol VITE
             .right.blue {{exViteBalance}}
+        .block__title {{ $t('trade.svipConfirm.openStakingAmount') }}
+            .err(v-if="dBtnUnuse") {{$t('trade.vipConfirm.noBalance')}}
         .block__content.edit {{vipStakingAmount}} VITE
         .charge-tips {{tip}}
             .dot
     .content-wrapper(v-else)
-        .block__title {{ !isSVip?$t('trade.vipConfirm.noBalance'):$t('walletQuota.list.unexpired') }}
+        .block__title(v-if="dBtnUnuse") {{ $t('trade.svipConfirm.cancelStakingAmount') }}
+            .err {{$t('walletQuota.list.unexpired')}}
         .block__content.edit {{vipStakingAmount}} VITE
         .charge-tips {{tip}}
             .dot
