@@ -135,10 +135,10 @@ export default {
         margin-bottom: 10px;
     }
     .operator-img {
-        width: 30px;
-        height: 30px;
+        width: 20px;
+        height: 20px;
         margin-left: 10px;
-        margin-top: -8px;
+        margin-top: -3px;
     }
     .tx-pair-list {
         display: flex;
