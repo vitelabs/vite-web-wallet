@@ -916,6 +916,11 @@
                 "delete": "确认修改",
                 "deleteAll": "确认"
               },
+              "confirm":{
+                    "title": "确认委托交易对",
+                    "cancel": "取消",
+                    "ok": "确认"
+              },
               "titleMap": {
                 "new": "新增委托",
                 "add": "增加委托交易对",
