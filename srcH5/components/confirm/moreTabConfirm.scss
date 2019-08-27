@@ -1,0 +1,122 @@
+@import "~h5Assets/scss/vars.scss";
+
+.head {
+    border-bottom: 1px solid rgba(212, 222, 231, 1);
+    box-sizing: border-box;
+    padding: 20px 15px;
+    display: flex;
+    background: rgba(0, 122, 255, 0.05);
+    @include font-normal();
+    line-height: 18px;
+
+    .head_info {
+        display: flex;
+        flex-direction: column;
+    }
+    .gate_info {
+        font-size: 12px;
+        color: #007aff;
+        background: rgba(0, 122, 255, 0.06);
+        padding: 0 4px;
+        align-self: flex-start;
+        border-radius: 2px;
+        margin-left: 6px;
+    }
+    .icon {
+        width: 40px;
+        height: 40px;
+        margin-right: 10px;
+        border: 1px solid rgba(212,222,231,1);
+        border-radius: 40px;
+    }
+    &__name {
+        @include font-bold();
+        color: rgba(29, 32, 36, 1);
+        font-size: 14px;
+        line-height: 18px;
+        &__gate {
+            color: #007aff;
+            background-color: rgba(0, 122, 255, 0.06);
+            @include font-normal();
+            font-size: 12px;
+            height: 20px;
+            padding: 0 4px;
+            margin-left: 6px;
+            line-height: 20px;
+            display: flex;
+        }
+    }
+    &__symbol {
+        @include font-normal();
+        font-size: 12px;
+        color: rgba(94, 104, 117, 1);
+        margin-top: 8px;
+        line-height: 16px;
+    }
+}
+
+.tab-content {
+    box-sizing: border-box;
+    height: 470px;
+    padding: 13px 16px;
+    position: relative;
+    overflow: scroll;
+    &.no-padding {
+        padding: 0;
+    }
+    .content__item {
+        font-size: 12px;
+        @include font-normal();
+        line-height: 16px;
+        margin-bottom: 20px;
+        display: flex;
+        text-align: left;
+        color: rgba(94,104,117,1);
+        .media-icon {
+            width: 20px;
+            height: 20px;
+            margin-right: 14px;
+            cursor: pointer;
+        }
+        .view-more {
+            margin-left: 6px;
+        }
+        &.center {
+            align-items: center;
+            div {
+                display: flex;
+                align-items: center;
+            }
+        }
+        :last-child {
+            word-break: break-word;
+        }
+        .label {
+            color: rgba(62, 74, 89, 0.7);
+            margin-right: 10px;
+            word-break: keep-all;
+            white-space: nowrap;
+        }
+        .click-able {
+            color: #007aff;
+            cursor: pointer;
+        }
+        .btn {
+            cursor: pointer;
+            user-select: none;
+            height: 34px;
+            line-height: 34px;
+            border-radius: 2px;
+            font-size: 14px;
+            @include font-bold();
+            padding: 0 20px;
+            white-space: nowrap;
+            margin-left: 23px;
+            background: rgba(0, 122, 255, 1);
+            color: rgba(255, 255, 255, 1);
+            &.unuse {
+                background: rgba(191, 191, 191, 1);
+            }
+        }
+    }
+}

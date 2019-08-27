@@ -16,7 +16,13 @@ input[type=number]::-webkit-inner-spin-button {
     -webkit-appearance: none;
 }
 
+html {
+    width: 100%;
+    height: 100%;
+}
 body {
+    width: 100%;
+    height: 100%;
     padding: 0px;
     margin: 0px;
     -webkit-overflow-scrolling: touch;
@@ -123,6 +129,7 @@ textarea {
 
 .__pointer {
     cursor: pointer;
+    user-select: none;
 }
 
 .__err_msg {
