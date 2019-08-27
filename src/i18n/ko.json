@@ -183,8 +183,8 @@
         "record": "시드 문구 생성하기",
         "prompt": "니모닉 시드 문구는 지갑을 복원하는 유일한 방법입니다. 시드 문구를 백업하고 본인만 접근할 수 있는 안전한 장소에 보관하세요",
         "placeholder": "Please enter your mnemonic seed phrase. Example: apple banana peach mango pear ...",
-        "empty": "시드 문구는 반드시 입력해야 합니다.",
-        "error": "시드 문구가 잘못되었습니다. 다시 시도하세요",
+        "empty": "Seed phrase cannot be empty",
+        "error": "Wrong seed phrase. Try again",
         "hint": "예 : 사과 바나나 복숭아 망고 배 ...",
         "change": "{len} 니모닉 단어로 전환하기"
     },
