@@ -879,14 +879,14 @@
             "cancelFail": "Cancel Failed"
         },
         "svipConfirm": {
-            "open":"开通",
-            "cancel":"取消",
+            "open":"Upgrade",
+            "cancel":"Cancel",
             "cancelVip": "Cancel SVIP",
             "openVip": "Become a SVIP",
             "openStakingAmount": "Staking Amount for Becoming a SVIP",
             "cancelStakingAmount": "Retrievable Staking Amount",
             "noBalance": "Insufficient Balance",
-            "openHint": "SVIP开通后，可免除基础手续费，开通SVIP需抵押10000VITE，30天后可手动取回",
+            "openHint": "You will enjoy 0% base transaction fee when upgrading to SVIP. The staking amount of 1,000,000 VITE can be manually retrieved after 30 days.",
             "cancelHint": "You can retrieve your staking amount at approximately {time}. You will lose your SVIP privilege after retrieving.",
             "openSuccess": "Applied Successful! SVIP status will come into effect later.",
             "openFail": "Failed to apply SVIP",
@@ -894,33 +894,33 @@
             "cancelFail": "Cancel Failed"
         },
         "proxy":{
-            "title":"交易委托",
-            "info":"了解委托",
-            "new":"新建委托",
+            "title":"Trade Delegation",
+            "info":"What is Trade Delegation?",
+            "new":"Initiate Delegation",
             "active":{
-                "title":"委托记录",
-                "head":["委托地址","委托交易对","操作"],
-                "operate":["增加交易对","减少交易对","撤销委托"]
+                "title":"Delegation History",
+                "head":["Delegatee Address","Trading Pairs","Action"],
+                "operate":["Add Delegations","Remove Delegations","Remove All Delegations"]
             },
             "passive":{
-                "title":"接受委托记录",
-                "head":["委托地址","委托交易对"]
+                "title":"Accepted Delegation History",
+                "head":["Delegator Address","Trading Pairs"]
             },
 
             "dialog": {
-              "cancel": "取消",
-              "cancelAllTips":"确认撤销对{trustAddress}所有的交易委托?",
+              "cancel": "Cancel",
+              "cancelAllTips":"Are you sure you'd like to remove all delegations on {trustAddress}?",
               "rTxtMap": {
-                "new": "添加",
-                "add": "添加",
-                "delete": "确认修改",
-                "deleteAll": "确认"
+                "new": "Add",
+                "add": "Add",
+                "delete": "Confirm",
+                "deleteAll": "Confirm"
               },
               "titleMap": {
-                "new": "新增委托",
-                "add": "增加委托交易对",
-                "delete": "减少委托交易对",
-                "deleteAll": "确认撤销委托"
+                "new": "Initiate Delegation",
+                "add": "Add Delegations",
+                "delete": "Remove Delegations",
+                "deleteAll": "Confirm to remove delegations"
               }
             }
         }
@@ -1108,14 +1108,14 @@
         "more": "Learn more about VX mining rules"
     },
     "inviteMining":{
-        "title":"邀请挖矿总收益"
+        "title":"Referring as Mining Total Income"
     },
     "orderMining":{
-        "title":"挂单挖矿总收益",
+        "title":"Market-Making as Mining Total Income",
         "tbHead": {
-            "date": "日前",
-            "ratio": "占比",
-            "mining": "挖矿金额"
+            "date": "Date",
+            "ratio": "Ratio",
+            "mining": "Amount"
         }
     },
     "tradeDividend": {
