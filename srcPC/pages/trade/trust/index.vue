@@ -180,9 +180,7 @@ export default {
                 actionType
             }).then(() =>
                 doUntill({
-                    createPromise: () => getProxyRelation({ address: this.address }).then(data => {
-                        this.relation = data.relations;
-                    }),
+                    createPromise: () => this.updateData(),
                     interval: 1000,
                     times: 3
                 }));
