@@ -128,13 +128,13 @@ export default {
                 }
             }).then(() => {
                 this.isLoading = false;
-                this.$toast(this.isVip ? this.$t('trade.vipConfirm.cancelSuccess') : this.$t('trade.vipConfirm.openSuccess'));
+                // this.$toast(this.isVip ? this.$t('trade.vipConfirm.cancelSuccess') : this.$t('trade.vipConfirm.openSuccess'));
                 this.close && this.close();
                 this.$store.dispatch('startLoopVip', !this.isVip);
             }).catch(err => {
                 console.warn(err);
                 this.isLoading = false;
-                this.$toast(this.isVip ? this.$t('trade.vipConfirm.cancelFail') : this.$t('trade.vipConfirm.openFail'));
+                // this.$toast(this.isVip ? this.$t('trade.vipConfirm.cancelFail') : this.$t('trade.vipConfirm.openFail'));
             });
         },
 

@@ -522,7 +522,8 @@ export default {
         },
 
         toSubmit() {
-            if (this.isLoading || this.activeTxPairIsClose) {
+            if (this.isLoading || this.activeTxPairIsClose
+                || this.amountErr || this.priceErr || this.quantityErr) {
                 return;
             }
 
@@ -575,11 +576,11 @@ export default {
             }).then(() => {
                 this.isLoading = false;
                 this.clearAll();
-                this.$toast(this.$t('trade.newOrderSuccess'));
+                // this.$toast(this.$t('trade.newOrderSuccess'));
             }).catch(err => {
                 console.warn(err);
                 this.isLoading = false;
-                this.$toast(this.$t('trade.newOrderFail'), err);
+                // this.$toast(this.$t('trade.newOrderFail'), err);
             });
         }
     }
@@ -616,6 +617,7 @@ $font-black: rgba(36, 39, 43, 0.8);
         border: 1px solid rgba(212, 222, 231, 1);
         box-sizing: border-box;
         flex: 1;
+        height: 40px;
         &.err {
             border: 1px solid $red;
         }
@@ -692,9 +694,9 @@ $font-black: rgba(36, 39, 43, 0.8);
 @import "~h5Assets/scss/vars.scss";
 
 .dex-input-wrapper .input-wrapper {
-    height: 100%;
     line-height: 40px;
     border: none;
+    height: 100%;
     input {
         font-family: $font;
         font-size: 16px;

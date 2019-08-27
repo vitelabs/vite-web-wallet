@@ -92,10 +92,10 @@ export default {
                         amount
                     }
                 }).then(() => {
-                    this.$toast(this.$t('tradeAssets.confirmwithdraw.successToast'));
+                    // this.$toast(this.$t('tradeAssets.confirmwithdraw.successToast'));
                     res();
                 }).catch(e => {
-                    this.$toast(this.$t('tradeAssets.confirmwithdraw.failToast'), e);
+                    // this.$toast(this.$t('tradeAssets.confirmwithdraw.failToast'), e);
                     rej(e);
                 });
             });

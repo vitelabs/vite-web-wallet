@@ -23,11 +23,7 @@
 </template>
 
 <script>
-import {
-    tokenInfoDialog,
-    exWithdrawDialog,
-    exChargeDialog
-} from './dialog';
+import { tokenInfoDialog, exWithdrawDialog, exChargeDialog } from './dialog';
 import bigNumber from 'utils/bigNumber';
 import statistics from 'utils/statistics';
 import { getTokenSymbolString } from 'utils/tokenParser';

@@ -5,7 +5,7 @@
             <limit-price></limit-price>
             <depth></depth>
         </div>
-        <div class="white-wrapper">
+        <div class="order-white-wrapper">
             <div class="order-tab">{{ $t('tradeOpenOrders.title') }}</div>
             <openOrder></openOrder>
         </div>
@@ -57,8 +57,13 @@ export default {
     background: #fff;
     margin-bottom: 16px;
 }
+.order-white-wrapper {
+    padding-top: 16px;
+    background: #fff;
+}
 .order-tab {
     margin-bottom: 10px;
+    padding: 0 24px;
     line-height: 20px;
     font-size: 14px;
     @include font-bold();
