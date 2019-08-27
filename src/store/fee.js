@@ -11,8 +11,6 @@ let nextVip = null;
 
 const state = {
     isVip: false,
-    baseMakerFee,
-    baseTakerFee,
     marketInfo: {},
     invitedCode: '',
     isSVip: false
@@ -107,6 +105,12 @@ const actions = {
 };
 
 const getters = {
+    baseTakerFee(state) {
+        return state.isSVip ? 0 : baseTakerFee;
+    },
+    baseMakerFee() {
+        return state.isSVip ? 0 : baseMakerFee;
+    },
     vipFee(state) {
         return getVipFee(state.isVip);
     },
@@ -123,7 +127,7 @@ const getters = {
         const vipFee = getVipFee(state.isVip);
         const operatorMakerFee = getOperatorFee(state.marketInfo.makerBrokerFeeRate);
         return (
-            (state.isSVip ? 0 : baseMakerFee + Number(operatorMakerFee) - vipFee)
+            (state.isSVip ? 0 : getters.baseMakerFee + Number(operatorMakerFee) - vipFee)
       * (1 - getters.inviteFeeDiscount)
         );
     },
@@ -131,7 +135,7 @@ const getters = {
         const vipFee = getVipFee(state.isVip);
         const operatorTakerFee = getOperatorFee(state.marketInfo.takerBrokerFeeRate);
         return (
-            (state.isSVip ? 0 : baseMakerFee + Number(operatorTakerFee) - vipFee)
+            (state.isSVip ? 0 : getters.basetakerFee + Number(operatorTakerFee) - vipFee)
       * (1 - getters.inviteFeeDiscount)
         );
     },
