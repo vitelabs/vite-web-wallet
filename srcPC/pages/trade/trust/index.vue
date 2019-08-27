@@ -159,12 +159,12 @@ export default {
     },
     methods: {
         updateData() {
-            getProxyRelation({ address: this.address }).then(data => {
+            return Promise.all([ getProxyRelation({ address: this.address }).then(data => {
                 this.relation = data.relations;
-            });
+            }),
             getProxyGrantor({ address: this.address }).then(data => {
                 this.grantor = data.relations;
-            });
+            }) ]);
         },
         addProxy: execWithValid(function ({ trustAddress, existsPair, actionType } = {}) {
             if (existsPair) {
