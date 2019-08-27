@@ -152,6 +152,9 @@ export default {
             font-size: 14px;
             color: rgba(62,74,89,0.6);
         }
+        .__tb_cell {
+            white-space: nowrap;
+        }
     }
     .side_icon{
         display: inline-block;

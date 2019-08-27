@@ -114,11 +114,13 @@ const getters = {
     },
     exMakerFee(state, getters) {
         const _baseMakerFee = state.isSVip ? 0 : baseMakerFee;
-        return getFee(_baseMakerFee, getters.operatorMakerFee, getters.vipFee, getters.inviteFeeDiscount);
+        const makerFee = getFee(_baseMakerFee, getters.operatorMakerFee, getters.vipFee, getters.inviteFeeDiscount);
+        return Number(makerFee);
     },
     exTakerFee(state, getters) {
         const _baseTakerFee = state.isSVip ? 0 : baseTakerFee;
-        return getFee(_baseTakerFee, getters.operatorTakerFee, getters.vipFee, getters.inviteFeeDiscount);
+        const takerFee = getFee(_baseTakerFee, getters.operatorTakerFee, getters.vipFee, getters.inviteFeeDiscount);
+        return Number(takerFee);
     },
     exBuyOrderFee(state, getters) {
         if (BigNumber.compared(getters.exMakerFee, getters.exTakerFee) > 0) {
