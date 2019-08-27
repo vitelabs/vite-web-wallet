@@ -44,6 +44,7 @@ for (const moduleName in exchange) {
 store.registerModule('env', env);
 store.registerModule('account', account);
 
+store.commit('exSetDepthListLimit', 20);
 store.dispatch('fetchDefaultTokenList');
 store.dispatch('startLoopExchangeRate');
 store.dispatch('startLoopExchangeBalance');

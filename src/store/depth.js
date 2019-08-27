@@ -9,16 +9,20 @@ const state = {
     buy: [],
     sell: [],
     isLoading: false,
-    depthStep: ''
+    depthStep: '',
+    listLimit: 100
 };
 
 const mutations = {
     exSetDepthBuy(state, depthData) {
-        state.buy = depthData || [];
+        let list = depthData || [];
+        list = list.splice(0, state.listLimit);
+        state.buy = list;
     },
     exSetDepthSell(state, depthData) {
-        const list = depthData || [];
+        let list = depthData || [];
         list.sort((a, b) => bigNumber.compared(b.price, a.price));
+        list = list.splice(0, state.listLimit);
         state.sell = list;
     },
     exSetDepthLoading(state, isLoading) {
@@ -26,6 +30,9 @@ const mutations = {
     },
     exSetDepthStep(state, step) {
         state.depthStep = step;
+    },
+    exSetDepthListLimit(state, limit) {
+        state.listLimit = limit;
     }
 };
 
@@ -53,6 +60,7 @@ const actions = {
 
         depthTask.start(() => {
             return {
+                limit: state.listLimit,
                 step: state.depthStep,
                 ...getters.exActiveTxPair
             };
