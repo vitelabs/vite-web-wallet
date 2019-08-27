@@ -917,9 +917,9 @@
                 "deleteAll": "Confirm"
               },
               "confirm":{
-                    "title": "确认委托交易对",
-                    "cancel": "取消",
-                    "ok": "确认"
+                    "title": "Confirm Delegations",
+                    "cancel": "Cancel",
+                    "ok": "Confirm"
               },
               "titleMap": {
                 "new": "Initiate Delegation",
