@@ -1,7 +1,7 @@
 import Bridge from '@vite/bridge';
 import inviteRR from 'h5Assets/imgs/inviteRR.png';
 
-export const bridge = new Bridge({ selfDefinedMethods: [ 'wallet.sendRawTx', 'nav.RRBtnClick' ] });
+export const bridge = new Bridge({ selfDefinedMethods: [ 'pri.sendTx', 'nav.RRBtnClick' ] });
 
 bridge['app.setWebTitle']({ title: 'ViteX' }).then(() => {
     console.log('setWebTitle ok');
