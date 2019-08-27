@@ -48,11 +48,11 @@ export default {
             return `Taker(${ this.baseTakerFee }) / Maker(${ this.baseMakerFee })`;
         },
         baseMakerFee() {
-            const baseMakerFee = this.toPercentFee(this.$store.state.exchangeFee.baseMakerFee);
+            const baseMakerFee = this.toPercentFee(this.$store.getters.baseMakerFee);
             return `${ baseMakerFee }%`;
         },
         baseTakerFee() {
-            const baseTakerFee = this.toPercentFee(this.$store.state.exchangeFee.baseTakerFee);
+            const baseTakerFee = this.toPercentFee(this.$store.getters.baseTakerFee);
             return `${ baseTakerFee }%`;
         },
         operatorFee() {

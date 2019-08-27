@@ -14,8 +14,8 @@ block content
         .charge-tips {{tip}}
             .dot
     .content-wrapper(v-else)
-        .block__title(v-if="dBtnUnuse") {{ $t('trade.svipConfirm.cancelStakingAmount') }}
-            .err {{$t('walletQuota.list.unexpired')}}
+        .block__title {{ $t('trade.svipConfirm.cancelStakingAmount') }}
+            .err(v-if="dBtnUnuse") {{$t('walletQuota.list.unexpired')}}
         .block__content.edit {{vipStakingAmount}} VITE
         .charge-tips {{tip}}
             .dot
