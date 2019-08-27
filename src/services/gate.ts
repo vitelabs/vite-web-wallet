@@ -43,10 +43,10 @@ export const getChargeAddr = ({ tokenId, addr: walletAddress }, url) =>
     host: url
   });
 
-export const verifyAddr = ({ tokenId, withdrawAddress }, url) =>
+export const verifyAddr = ({ tokenId, withdrawAddress,label }, url) =>
   client({
     path: "withdraw-address/verification",
-    params: { tokenId, withdrawAddress },
+    params: { tokenId, withdrawAddress,label },
     host: url
   });
 

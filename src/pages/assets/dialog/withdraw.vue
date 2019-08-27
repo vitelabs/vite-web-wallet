@@ -107,7 +107,18 @@ export default {
                 return;
             }
             this.verifingAddr = true;
-            verifyAddr({ tokenId: this.token.tokenId, withdrawAddress: val }, this.token.gateInfo.url).then(d => {
+            verifyAddr({ tokenId: this.token.tokenId, withdrawAddress: val, label: this.type === 1 ? this.labelValue : undefined }, this.token.gateInfo.url).then(d => {
+                this.isAddrCorrect = d.isValidAddress;
+                this.verifingAddr = false;
+            });
+        }, 500),
+        labelValue: debounce(function (val) {
+            if (!val) {
+                this.isAddrCorrect = true;
+                return;
+            }
+            this.verifingAddr = true;
+            verifyAddr({ tokenId: this.token.tokenId, withdrawAddress: this.withdrawAddr, label: this.type === 1 ? val : undefined }, this.token.gateInfo.url).then(d => {
                 this.isAddrCorrect = d.isValidAddress;
                 this.verifingAddr = false;
             });
