@@ -2,18 +2,17 @@
 extends /components/dialog/base.pug
 block content
     .content-wrapper(v-if="!isSVip")
-        .block__title {{$t("tokenCard.withdraw.labels.balance")}}
+        .block__title {{ $t('tokenCard.heads.availableExAmount') }}
         .block__content.edit.space
             .token__title
                 img(:src="viteTokenInfo.icon")
                 .symbol VITE
             .right.blue {{exViteBalance}}
-        .block__title {{$t("tokenCard.withdraw.labels.amount")}}
         .block__content.edit {{vipStakingAmount}} VITE
         .charge-tips {{tip}}
             .dot
     .content-wrapper(v-else)
-        .block__title {{$t("tokenCard.withdraw.labels.balance")}}
+        .block__title {{ !isSVip?$t('trade.vipConfirm.noBalance'):$t('walletQuota.list.unexpired') }}
         .block__content.edit {{vipStakingAmount}} VITE
         .charge-tips {{tip}}
             .dot
@@ -36,20 +35,31 @@ export default {
     data() {
         return {
             stakeAmount: '',
-            stakingObj: '',
+            stakingObj: {},
             isAddrCorrect: true,
-            dTitle: this.$t('tokenCard.withdraw.title'),
-            dSTxt: this.$t('tokenCard.withdraw.title'),
             loading: true,
-            viteTokenInfo: Vite_Token_Info,
             vipStakingAmount
         };
     },
     beforeMount() {
+        this.$store.dispatch('startLoopHeight');
+        this.fetchStakingObj();
+    },
+    destroyed() {
+        this.$store.dispatch('stopLoopHeight');
     },
     computed: {
+        height() {
+            return this.$store.state.ledger.currentHeight;
+        },
         tip() {
-            return this.isSVip ? this.$t('trade.vipConfirm.cancelHint', { time: this.stakingObj.withdrawTime ? date(this.stakingObj.withdrawTime * 1000, ' Pzh') : '' }) : this.$t('trade.vipConfirm.openHint');
+            return this.isSVip ? this.$t('trade.svipConfirm.cancelHint', { time: this.stakingObj.withdrawTime ? date(this.stakingObj.withdrawTime * 1000, ' Pzh') : '' }) : this.$t('trade.svipConfirm.openHint');
+        },
+        dTitle() {
+            return this.isSVip ? this.$t('trade.svipConfirm.cancelVip') : this.$t('trade.svipConfirm.openVip');
+        },
+        dSTxt() {
+            return this.isSVip ? this.$t('trade.svipConfirm.cancelVip') : this.$t('trade.svipConfirm.openVip');
         },
         isSVip() {
             return this.$store.state.exchangeFee.isSVip;
@@ -60,8 +70,11 @@ export default {
             }
             return this.validateAmount(this.withdrawAmount);
         },
+        viteTokenInfo() {
+            return this.$store.getters.viteTokenInfo;
+        },
         dBtnUnuse() {
-            if (this.isVip) {
+            if (this.isSVip) {
                 return !(this.stakingObj && this.stakingObj.withdrawHeight <= this.height);
             }
 
@@ -91,12 +104,12 @@ export default {
     },
     methods: {
         fetchStakingObj() {
-            if (!this.isVip) {
+            if (!this.isSVip) {
                 return;
             }
 
             $ViteJS.request('pledge_getAgentPledgeInfo', {
-                pledgeAddr: this.accountAddr,
+                pledgeAddr: this.address,
                 agentAddr: constant.DexFund_Addr,
                 beneficialAddr: constant.DexFund_Addr,
                 bid: 3
@@ -112,14 +125,12 @@ export default {
                 this.isLoading = true;
                 pledgeForSuperVIp({ actionType }).then(() => {
                     this.isLoading = false;
-                    this.$toast(this.isVip ? this.$t('trade.vipConfirm.cancelSuccess') : this.$t('trade.vipConfirm.openSuccess'));
-                    this.close && this.close();
-                    this.$store.dispatch('startLoopVip', !this.isVip);
+                    this.$toast(this.isSVip ? this.$t('trade.svipConfirm.cancelSuccess') : this.$t('trade.svipConfirm.openSuccess'));
                     res();
                 }).catch(err => {
                     console.warn(err);
                     this.isLoading = false;
-                    this.$toast(this.isVip ? this.$t('trade.vipConfirm.cancelFail') : this.$t('trade.vipConfirm.openFail'));
+                    this.$toast(this.isSVip ? this.$t('trade.svipConfirm.cancelFail') : this.$t('trade.svipConfirm.openFail'));
                     rej();
                 });
             });

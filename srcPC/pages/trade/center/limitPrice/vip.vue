@@ -26,6 +26,7 @@ import { execWithValid } from 'pcUtils/execWithValid';
 import VSwitch from 'uiKit/switch';
 import component2function from 'pcComponents/dialog/utils';
 import svipComp from './svipConfirm';
+import { doUntill } from 'utils/asyncFlow';
 
 export default {
     components: { VSwitch },
@@ -39,16 +40,16 @@ export default {
         optList() {
             return [
                 {
-                    name: this.isVip && this.isSVip ? 'cancelvip' : 'openSvip',
+                    name: this.isVip && this.isSVip ? this.$t('trade.vipConfirm.cancelVip') : this.$t('trade.svipConfirm.openVip'),
                     value: this.isVip && this.isSVip ? 'vip' : 'svip'
                 },
                 {
                     name:
                         !this.isVip && !this.isSVip
-                            ? 'openvip'
+                            ? this.$t('trade.vipConfirm.openVip')
                             : this.isVip && !this.isSVip
-                                ? 'cancelvip'
-                                : 'cancelSvip',
+                                ? this.$t('trade.vipConfirm.cancelVip')
+                                : this.$t('trade.svipConfirm.cancelVip'),
                     value: this.isVip && this.isSVip ? 'svip' : 'vip'
                 }
             ];
@@ -81,7 +82,8 @@ export default {
             });
         }),
         showSVipConfirm: execWithValid(function () {
-            component2function(svipComp)();
+            component2function(svipComp)().then(() =>
+                doUntill({ createPromise: () => this.$store.dispatch('exFetchSVip'), interval: 1000, times: 3 }));
         })
     }
 };
@@ -92,7 +94,7 @@ export default {
     .vip-operate {
         padding-right: 6px;
         border-right: 1px solid rgba(205, 204, 204, 1);
-        &.drop_menu{
+        &.drop_menu {
             border: none;
         }
         &.active {
@@ -108,7 +110,7 @@ export default {
         height: 16px;
         background-image: url("~assets/imgs/not_vip.svg");
         background-size: 100% 100%;
-        &.svip{
+        &.svip {
             background-image: url("~assets/imgs/svip.png");
         }
         &.active {

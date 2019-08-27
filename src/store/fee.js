@@ -49,12 +49,15 @@ const actions = {
         });
     },
     exFetchSVip({ commit, getters }) {
-        const address = getters.activeAddr;
-        address && getSvipStatus(address).then(data => {
-            if (address !== getters.activeAddr) {
-                return;
-            }
-            commit('setExchangeSVip', data);
+        new Promise((res, rej) => {
+            const address = getters.activeAddr;
+            address && getSvipStatus(address).then(data => {
+                if (address !== getters.activeAddr) {
+                    return;
+                }
+                commit('setExchangeSVip', data);
+                res(data);
+            }).catch(e => rej(e));
         });
     },
     exFetchVip({ commit, getters }) {
@@ -77,7 +80,6 @@ const actions = {
             if (_activeTxPair.symbol !== getters.exActiveTxPair.symbol) {
                 return;
             }
-
             commit('setExchangeMarketInfo', data);
         });
     },
@@ -94,6 +96,9 @@ const actions = {
 const getters = {
     vipFee(state) {
         return state.isVip ? 0.001 : 0;
+    },
+    svipFee(state) {
+        return state.isSVip ? 0.001 : 0;
     },
     operatorMakerFee(state) {
         return getOperatorFee(state.marketInfo.makerBrokerFeeRate);

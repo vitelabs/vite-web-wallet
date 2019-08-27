@@ -2,7 +2,7 @@
     <div class="v-search-tips" v-click-outside.includeChildrens="closeTips">
         <div class="search-input-container">
             <img src="~assets/imgs/search_gray.png" class="search-icon" />
-            <input type="text" class="search-input" v-model="userInput" />
+            <input type="text" class="search-input" v-model="userInput" @blur="search(userInput)" />
         </div>
         <div class="tips-list" v-show="isShowTips">
             <div
@@ -29,15 +29,14 @@ export default {
     data() {
         return { userInput: '', searchRes: [], isShowTips: false };
     },
-    watch: {
-        userInput: throttle(function (val) {
+    watch: { userInput: throttle(val => this.search(val), 300) },
+    methods: {
+        search(val) {
             this.searchRes = this.filterMethod(val);
             if (this.searchRes.length > 0) {
                 this.isShowTips = true;
             }
-        }, 300)
-    },
-    methods: {
+        },
         closeTips() {
             this.isShowTips = false;
         },
