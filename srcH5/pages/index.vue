@@ -10,7 +10,7 @@ import { receiveInviteDialog } from 'h5Components/dialog';
 import orderNoticeList from 'components/orderNoticeList.vue';
 import env from 'h5Utils/envFromURL';
 import { setItem } from 'h5Utils/storage';
-import bridge from 'h5Utils/bridge';
+import { bridge } from 'h5Utils/bridge';
 
 export default {
     components: { orderNoticeList },
@@ -18,6 +18,8 @@ export default {
         bridge['nav.RRBtnClick'](() => {
             console.log('isDialog??');
             receiveInviteDialog();
+        }).catch(err => {
+            console.warn(err);
         });
 
         if (env.inviteeCode > 0) {

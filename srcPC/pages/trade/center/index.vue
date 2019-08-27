@@ -29,7 +29,7 @@ export default {
     mounted() {
         this.$store.dispatch('exFetchVip');
         this.$store.dispatch('exFetchSVip');
-        this.$store.dispatch('exFetchActiveTxPair');
+        // this.$store.dispatch('exFetchActiveTxPair');
         this.$store.dispatch('startLoopDexFundeUnreceived');
 
         !this.$store.state.env.isShowCompliance && confirm({

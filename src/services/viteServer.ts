@@ -52,6 +52,15 @@ export function getAgentVipPledgeInfo(address: string) {
     });
 }
 
+export function getAgentSVipPledgeInfo(address: string) {
+    return viteClient.request('pledge_getAgentPledgeInfo', {
+        pledgeAddr: address,
+        agentAddr: DexFund_Addr,
+        beneficialAddr: DexFund_Addr,
+        bid: 3
+    });
+}
+
 export function getCurrDividendPools() {
     return viteClient.request('dexfund_getCurrentDividendPools');
 }
