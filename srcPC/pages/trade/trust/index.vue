@@ -150,6 +150,13 @@ export default {
     beforeMount() {
         this.updateData();
     },
+    watch:{
+        address(){
+            this.relation={};
+            this.grantor={};
+            this.updateData();
+        }
+    },
     methods: {
         updateData() {
             getProxyRelation({ address: this.address }).then(data => {
