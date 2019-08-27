@@ -255,6 +255,9 @@ export default {
             }
 
             const balance = this.availableBalance;
+            if (!+balance) {
+                return '0';
+            }
 
             if (this.orderType === 'buy') {
                 const basicAmount = BigNumber.toMin(this.amount || 0,
