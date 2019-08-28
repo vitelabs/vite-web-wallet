@@ -10,12 +10,14 @@
                 </span>
                 <span class="help __pointer" @mouseenter="showHelp" @mouseleave="hideHelp">
                     <span v-show="isShowHelp" class="help-tip">
-                        <span>{{ $t('trade.limitPrice.svipFee')}}</span>
+                        <span v-if="isSVip">{{ $t('trade.limitPrice.svipFee')}}</span>
+                        <span v-else style="color:red;">{{ $t('trade.limitPrice.adviseToSVip')}}</span>
                         <span>{{ $t('trade.limitPrice.dexFee', { fee: baseFee }) }}</span>
                         <span>{{ $t('trade.limitPrice.operatorFee', { fee: operatorFee }) }}</span>
-                        <span>{{ $t('trade.limitPrice.vipFee', { fee: vipFee }) }}</span>
+                        <span v-if="!isSVip">{{ $t('trade.limitPrice.vipFee', { fee: vipFee }) }}</span>
                         <span>{{ $t('trade.limitPrice.inviteFeeDiscount', { fee: inviteFeeDiscount }) }}</span>
-                        <span>{{ $t('trade.limitPrice.feeRule') }}</span>
+                        <span v-if="isSVip">{{ $t('trade.limitPrice.feeRuleWithSVip') }}</span>
+                        <span v-else>{{ $t('trade.limitPrice.feeRule') }}</span>
                     </span>
                 </span>
             </div>
