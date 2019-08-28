@@ -871,6 +871,7 @@
             "dexFee": "交易所基础费率：{fee}",
             "operatorFee": "运营商收取费率：{fee}",
             "vipFee": "VIP特权抵扣：{fee}",
+            "svipFee":"超级vip交易所基础费率为0",
             "inviteFeeDiscount":"邀请码折扣：{fee} off",
             "feeRule":"(基础费率-VIP抵扣+运营商费率)*邀请折扣。（费率折扣及费率调整只影响新订单，此前挂单依旧执行旧费率）"
         },
@@ -885,9 +886,12 @@
             "openSuccess": "申请开通VIP成功，稍后生效",
             "openFail": "开通失败",
             "cancelSuccess": "申请取消VIP成功",
-            "cancelFail": "取消失败"
+            "cancelFail": "取消失败",
+            "adviseToCancel":"由于您已成为超级VIP，平台手续费已为0，建议您取回普通VIP的抵押金额。"
         },
         "svipConfirm": {
+            "open":"开通",
+            "cancel":"取消",
             "cancelVip": "取消SVIP",
             "openVip": "开通SVIP",
             "openStakingAmount": "开通SVIP抵押金额",
@@ -901,7 +905,10 @@
             "cancelFail": "取消失败"
         },
         "proxy":{
-            "title":"交易委托",
+            "title":"委托代理",
+            "subTitle":"交易委托",              
+            "successProxy":"委托成功",
+            "failProxy":"委托失败",
             "info":"了解委托",
             "new":"新建委托",
             "active":{
@@ -928,6 +935,11 @@
                 "add": "增加委托交易对",
                 "delete": "减少委托交易对",
                 "deleteAll": "确认撤销委托"
+              },
+              "confirm":{
+                    "title": "确认委托交易对",
+                    "cancel": "取消",
+                    "ok": "确认"
               }
             }
         }

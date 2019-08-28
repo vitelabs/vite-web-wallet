@@ -10,7 +10,7 @@
                 </span>
                 <span class="help __pointer" @mouseenter="showHelp" @mouseleave="hideHelp">
                     <span v-show="isShowHelp" class="help-tip">
-                        <span>超级vip交易所基础费率为0</span>
+                        <span>{{ $t('trade.limitPrice.svipFee')}}</span>
                         <span>{{ $t('trade.limitPrice.dexFee', { fee: baseFee }) }}</span>
                         <span>{{ $t('trade.limitPrice.operatorFee', { fee: operatorFee }) }}</span>
                         <span>{{ $t('trade.limitPrice.vipFee', { fee: vipFee }) }}</span>
@@ -48,11 +48,11 @@ export default {
             return `Taker(${ this.baseTakerFee }) / Maker(${ this.baseMakerFee })`;
         },
         baseMakerFee() {
-            const baseMakerFee = this.toPercentFee(this.$store.state.exchangeFee.baseMakerFee);
+            const baseMakerFee = this.toPercentFee(this.$store.getters.baseMakerFee);
             return `${ baseMakerFee }%`;
         },
         baseTakerFee() {
-            const baseTakerFee = this.toPercentFee(this.$store.state.exchangeFee.baseTakerFee);
+            const baseTakerFee = this.toPercentFee(this.$store.getters.baseTakerFee);
             return `${ baseTakerFee }%`;
         },
         operatorFee() {
@@ -130,6 +130,7 @@ export default {
         @include font-family-normal();
         color: rgba(94, 104, 117, 1);
         font-weight: 400;
+        display: flex;
         >span {
             position: relative;
             margin-right: 6px;

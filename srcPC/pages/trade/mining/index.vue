@@ -152,8 +152,9 @@ export default {
 .tab_title {
     display: flex;
     align-items: center;
-    margin-bottom: 12px;
-    padding: 22px 0;
+    margin-bottom: 14px;
+    background-color: #ffffff;
+    box-shadow: 0px 2px 10px 1px rgba(176,192,237,0.42);
     .gap{
         width: 0;
         border-left: 1px solid rgba(227, 235, 245, 0.6);
@@ -213,7 +214,7 @@ export default {
         border-radius: 2px;
         box-shadow: 0px 2px 10px 1px rgba(176, 192, 237, 0.42);
         .quota-detail {
-            border-bottom: 1px solid #d4dee7;
+            border-bottom: 1px solid #F3F7FB;
             box-sizing: border-box;
             .no-detail {
                 box-sizing: border-box;
