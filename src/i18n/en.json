@@ -107,6 +107,8 @@
         "CreateContractReq": "Create Contract",
         "DexFundPledgeForVx": "ViteX Staking",
         "DexFundPledgeForVip": "ViteX VIP",
+        "DexFundPledgeForSuperVip": "ViteX SVIP",
+        "DexFundConfigMarketsAgent": "Configure Delegations",
         "TxReq": "Transfer",
         "RewardReq": "Transfer",
         "TxRes": "Transfer",
@@ -901,6 +903,8 @@
             "subTitle":"Trade Delegation",              
             "successProxy":"委托成功",
             "failProxy":"委托失败",
+            "successCancelProxy":"撤销委托成功",
+            "failCancelProxy":"撤销委托失败",
             "info":"What is Trade Delegation?",
             "new":"Initiate Delegation",
             "active":{

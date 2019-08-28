@@ -43,6 +43,9 @@ export default {
     data() {
         return { isShowHelp: false };
     },
+    beforeMount(){
+        window.fffffffff=this;
+    },
     computed: {
         baseFee() {
             return `Taker(${ this.baseTakerFee }) / Maker(${ this.baseMakerFee })`;
