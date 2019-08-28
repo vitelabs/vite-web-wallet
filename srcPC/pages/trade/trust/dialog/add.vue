@@ -129,9 +129,9 @@ export default {
                     tradeTokens,
                     quoteTokens
                 });
-                this.$toast(this.$t('trade.proxy.dialog.successProxy'));
+                this.$toast(this.$t('trade.proxy.successProxy'));
             } catch (e) {
-                this.$toast(this.$t('trade.proxy.dialog.failProxy'), e);
+                this.$toast(this.$t('trade.proxy.failProxy'), e);
                 return Promise.reject(e);
             }
         })

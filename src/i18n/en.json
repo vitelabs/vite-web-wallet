@@ -777,6 +777,7 @@
         }
     },
     "trade": {
+        "more":"more",
         "search": "Search",
         "txPair": "Pair",
         "price": "Price",
