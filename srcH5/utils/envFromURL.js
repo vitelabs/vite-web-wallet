@@ -11,7 +11,7 @@ const env = {
     address: query.address || '',
     currency: query.currency || 'usd',
     lang: query.lang || 'en',
-    symbol: query.symbol || 'GRIN-000_BTC-000', // 'VITE_BTC-000'
+    symbol: query.symbol || 'CSTT-000_VITE', // 'VITE_BTC-000'
     tradeToken: query.tradeTokenId || '',
     quoteToken: query.quoteTokenId || '',
     inviteeCode: query.ldfjacia || 0
