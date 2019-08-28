@@ -223,6 +223,10 @@ export default {
             width: 14px;
             height: 14px;
             margin-bottom: -3px;
+            margin-right: 4px;
+            box-sizing: border-box;
+            border-radius: 2px;
+            border: 1px solid rgba(212,222,231,1);
         }
     }
 }

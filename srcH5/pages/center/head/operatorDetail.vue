@@ -139,6 +139,9 @@ export default {
         height: 20px;
         margin-left: 10px;
         margin-top: -3px;
+        box-sizing: border-box;
+        border-radius: 2px;
+        border: 1px solid rgba(212,222,231,1);
     }
     .tx-pair-list {
         display: flex;
