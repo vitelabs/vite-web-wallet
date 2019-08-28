@@ -33,7 +33,7 @@ export default {
         display: inline-block;
         width: 16px;
         height: 16px;
-        background: url("~assets/imgs/ex-wallet-icon.svg");
+        background: url("~h5Assets/imgs/wallet_balance.svg");
         background-size: 100% 100%;
         margin-bottom: -4px;
     }

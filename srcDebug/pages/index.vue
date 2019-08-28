@@ -7,12 +7,6 @@
             <market v-if="!iframeSrc" :goTrade="goTrade"></market>
             <iframe v-if="iframeSrc" :src="iframeSrc" frameborder="0"></iframe>
         </div>
-        <div class="mock-bar bottom">
-            <span @click="goTrade">交易</span>
-            <span @click="goAssets">资产</span>
-            <span @click="goMining">挖矿</span>
-            <span @click="goOrder">订单</span>
-        </div>
     </div>
 </template>
 
@@ -68,16 +62,12 @@ export default {
             position: sticky;
             top: 0;
         }
-        &.bottom {
-            position: absolute;
-            bottom: 0;
-        }
     }
 }
 .trade-wrapper {
     position: absolute;
     top: 33px;
-    bottom: 33px;
+    bottom: 0;
     left: 0;
     right: 0;
     overflow: hidden;
