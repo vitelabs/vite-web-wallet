@@ -895,7 +895,9 @@
             "openSuccess": "Berhasil Diterapkan! Status VIP akan mulai berlaku nanti.",
             "openFail": "Gagal menerapkan VIP",
             "cancelSuccess": "Batalkan VIP Berhasil",
-            "cancelFail": "Batalkan Gagal"
+            "cancelFail": "Batalkan Gagal",
+            "adviseToCancel":"由于您已成为超级VIP，平台手续费已为0，建议您取回普通VIP的抵押金额。"
+
         },
         "svipConfirm": {
             "open":"开通",
@@ -913,7 +915,10 @@
             "cancelFail": "Cancel Failed"
         },
         "proxy":{
-            "title":"交易委托",
+            "title":"委托代理",
+            "subTitle":"交易委托",              
+            "successProxy":"委托成功",
+            "failProxy":"委托失败",
             "info":"了解委托",
             "new":"新建委托",
             "active":{

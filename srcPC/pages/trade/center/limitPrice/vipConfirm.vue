@@ -19,8 +19,8 @@
             </div>
             <div class="__input_row __unuse_input">10,000 VITE</div>
         </div>
-
-        <div class="__hint"><span>{{ hint }}</span></div>
+        <div class="__hint" v-if="isVip&&isSVip"><span>{{ $t('trade.vipConfirm.adviseToCancel') }}</span></div>
+        <div class="__hint" style="margin-top:5px;"><span>{{ hint }}</span></div>
     </confirm>
 </template>
 
@@ -87,7 +87,9 @@ export default {
         accountAddr() {
             return this.$store.getters.activeAddr;
         },
-
+        isSVip() {
+            return this.$store.state.exchangeFee.isSVip;
+        },
         isVip() {
             return this.$store.state.exchangeFee.isVip;
         },

@@ -230,7 +230,9 @@ export default {
     }
 }
 .btn {
-    width: 128px;
+    min-width: 128px;
+    box-sizing: border-box;
+    padding:0 5px;
     height: 30px;
     display: flex;
     align-items: center;
@@ -335,7 +337,8 @@ export default {
             margin-right: 0;
         }
         &:nth-child(3) {
-            width: 280px;
+            min-width: 280px;
+            width:25%;
         }
     }
     .click-able {

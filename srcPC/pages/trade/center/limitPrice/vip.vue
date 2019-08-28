@@ -91,9 +91,12 @@ export default {
 <style lang="scss" scoped>
 .vip-container {
     display: flex;
-    .vip-operate {
+        .vip-operate {
         padding-right: 6px;
         border-right: 1px solid rgba(205, 204, 204, 1);
+        /deep/ .list{
+            width: 94px!important;
+        }
         &.drop_menu {
             border: none;
         }
