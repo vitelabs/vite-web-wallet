@@ -787,6 +787,7 @@
         }
     },
     "trade": {
+        "more":"更多",
         "search": "查询",
         "txPair": "交易对",
         "price": "价格",

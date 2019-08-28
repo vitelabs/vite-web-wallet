@@ -796,6 +796,7 @@
         }
     },
     "trade": {
+        "more":"more",
         "search": "Pencarian",
         "txPair": "Pasangan",
         "price": "Harga",
