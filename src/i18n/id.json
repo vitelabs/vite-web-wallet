@@ -107,6 +107,8 @@
         "CreateContractReq": "Buat Kontrak",
         "DexFundPledgeForVx": "Taruhan ViteX",
         "DexFundPledgeForVip": "ViteX VIP",
+        "DexFundPledgeForSuperVip": "ViteX SVIP",
+        "DexFundConfigMarketsAgent": "Configure Delegations",
         "TxReq": "Transfer",
         "RewardReq": "Transfer",
         "TxRes": "Transfer",
@@ -796,6 +798,7 @@
         }
     },
     "trade": {
+        "more":"more",
         "search": "Pencarian",
         "txPair": "Pasangan",
         "price": "Harga",
@@ -919,6 +922,8 @@
             "subTitle":"交易委托",              
             "successProxy":"委托成功",
             "failProxy":"委托失败",
+            "successCancelProxy":"撤销委托成功",
+            "failCancelProxy":"撤销委托失败",
             "info":"了解委托",
             "new":"新建委托",
             "active":{

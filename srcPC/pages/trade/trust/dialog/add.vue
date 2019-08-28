@@ -129,9 +129,9 @@ export default {
                     tradeTokens,
                     quoteTokens
                 });
-                this.$toast(this.$t('trade.proxy.dialog.successProxy'));
+                (this.actionType === 'new' || this.actionType === 'add') ? this.$toast(this.$t('trade.proxy.successProxy')) : this.$toast(this.$t('trade.proxy.successCancelProxy'));
             } catch (e) {
-                this.$toast(this.$t('trade.proxy.dialog.failProxy'), e);
+                (this.actionType === 'new' || this.actionType === 'add') ? this.$toast(this.$t('trade.proxy.failProxy'), e) : this.$toast(this.$t('trade.proxy.failCancelProxy'), e);
                 return Promise.reject(e);
             }
         })

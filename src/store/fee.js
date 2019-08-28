@@ -142,7 +142,7 @@ export default {
 function getFee(baseFee, operatorFee, vipFee, inviteFeeDiscount) {
     const allFee = baseFee + operatorFee - vipFee;
     const discount = 1 - inviteFeeDiscount;
-    const fee = BigNumber.multi(allFee, discount);
+    const fee = BigNumber.multi((allFee > 0 ? allFee : 0), discount);
     return Number(fee);
 }
 
