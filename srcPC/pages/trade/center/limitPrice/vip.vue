@@ -89,13 +89,20 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+@import "~assets/scss/vars.scss";
 .vip-container {
     display: flex;
     .vip-operate {
         padding-right: 6px;
         border-right: 1px solid rgba(205, 204, 204, 1);
+        color: #9EA4AD;
+        font-size: 12px;
+        @include font-family-normal();
+
         /deep/ .list{
-            width: 94px!important;
+            width: 120px!important;
+            color: #9EA4AD;
+            font-size: 12px;
         }
         &.drop_menu {
             border: none;
