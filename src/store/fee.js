@@ -127,7 +127,7 @@ const getters = {
         const vipFee = getVipFee(state.isVip);
         const operatorMakerFee = getOperatorFee(state.marketInfo.makerBrokerFeeRate);
         return (
-            (state.isSVip ? 0 : getters.baseMakerFee + Number(operatorMakerFee) - vipFee)
+            (getters.baseMakerFee + Number(operatorMakerFee) - vipFee)
       * (1 - getters.inviteFeeDiscount)
         );
     },
@@ -135,7 +135,7 @@ const getters = {
         const vipFee = getVipFee(state.isVip);
         const operatorTakerFee = getOperatorFee(state.marketInfo.takerBrokerFeeRate);
         return (
-            (state.isSVip ? 0 : getters.basetakerFee + Number(operatorTakerFee) - vipFee)
+            (getters.basetakerFee + Number(operatorTakerFee) - vipFee)
       * (1 - getters.inviteFeeDiscount)
         );
     },

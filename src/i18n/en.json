@@ -863,6 +863,7 @@
             "operatorFee": "Zone Fees (Charged by Operator): {fee}",
             "vipFee": "VIP Discount: {fee}",
             "inviteFeeDiscount":"Referral Discount: {fee} off",
+            "svipFee":"超级vip交易所基础费率为0",
             "feeRule":"(Base Transaction Fee - VIP discount + Zone Fees) * Referral Discount. ATTENTION: The adjustment and discount of fees will only affect new orders, the former orders' charge remains the same."
         },        
         "vipConfirm": {
@@ -876,7 +877,8 @@
             "openSuccess": "Applied Successful! VIP status will come into effect later.",
             "openFail": "Failed to apply VIP",
             "cancelSuccess": "Cancel VIP Successful",
-            "cancelFail": "Cancel Failed"
+            "cancelFail": "Cancel Failed",
+            "adviseToCancel":"由于您已成为超级VIP，平台手续费已为0，建议您取回普通VIP的抵押金额。"
         },
         "svipConfirm": {
             "open":"Upgrade",
@@ -894,7 +896,10 @@
             "cancelFail": "Cancel Failed"
         },
         "proxy":{
-            "title":"Trade Delegation",
+            "title":"委托代理",
+            "subTitle":"Trade Delegation",              
+            "successProxy":"委托成功",
+            "failProxy":"委托失败",
             "info":"What is Trade Delegation?",
             "new":"Initiate Delegation",
             "active":{

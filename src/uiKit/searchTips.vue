@@ -47,7 +47,7 @@ export default {
         selected(v) {
             this.closeTips();
             this.$emit('selected', v);
-            this.userInput = v.name;
+            this.userInput = "";
         }
     }
 };
