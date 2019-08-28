@@ -14,7 +14,7 @@
             class="vip-operate drop_menu"
             @input="action"
             :optList="optList"
-            :title="isVip && isSVip ? 'cancelvip' : 'openSvip'"
+            :title="isVip && isSVip ? $t('trade.svipConfirm.cancel') : $t('trade.svipConfirm.open')"
         />
     </div>
 </template>
@@ -94,6 +94,9 @@ export default {
     .vip-operate {
         padding-right: 6px;
         border-right: 1px solid rgba(205, 204, 204, 1);
+        /deep/ .list{
+            width: 94px!important;
+        }
         &.drop_menu {
             border: none;
         }

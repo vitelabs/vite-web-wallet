@@ -6,20 +6,23 @@ block content
             div.address_container(place="trustAddress") {{trustAddress}}
     .content-wrapper(v-else)
         .block__title {{$t('trade.proxy.passive.head.0')}}
+            .err(v-if="!isValidAddress") {{$t('hint.addrFormat')}}
         .block__content.edit(v-if="!!trustAddress") {{trustAddress}}
-        input.block__content(v-else v-model="userInputAddress")
+        viteInput.block__content(v-else v-model="userInputAddress" :valid="validAddr" :placeholder="$t('wallet.placeholder.addr')")
         .block__title {{$t('trade.proxy.passive.head.1')}}
         .pair_section.exists
             PairItem(v-for="item in existsPair" :key="item.id" :item="item" class="pairs" :cancelAble="actionType==='delete'" @cancelItem="deleteExist(item)")
         .pair_section(:class="{pair_section__border_top:this.existsPair&&this.existsPair.length>0}")
             PairItem(v-for="item in selectedPairs" :key="item.id" :item="item" :cancelAble="true" @cancelItem="deleteItem(item)" class="pairs")
-        SearchTips(:filterMethod="filterMethod" @selected="addItem" class="search" v-if="actionType==='new'||actionType==='add'")
+        SearchTips( :filterMethod="filterMethod" @selected="addItem" class="search" v-if="actionType==='new'||actionType==='add'")
 </template>
 
 <script>
 import { throttle } from 'lodash';
+import { hdAddr } from '@vite/vitejs';
 import PairItem from './pairItem';
 import SearchTips from 'uiKit/searchTips';
+import viteInput from 'components/viteInput';
 import {
     getProxyAblePairs,
     configMarketsAgent
@@ -27,7 +30,7 @@ import {
 import { confirmDialog } from './index';
 
 export default {
-    components: { PairItem, SearchTips },
+    components: { PairItem, SearchTips, viteInput },
     props: {
         trustAddress: {
             type: String,
@@ -54,16 +57,25 @@ export default {
             dLTxt: this.$t('trade.proxy.dialog.cancel'),
             dWidth: this.actionType === 'deleteAll' ? 'narrow' : undefined,
             dRTxt: rTxtMap[this.actionType],
-            dTitle: titleMap[this.actionType]
+            dTitle: titleMap[this.actionType],
+            isValidAddress: true
         };
     },
     beforeMount() {
+        window.fffff = this;
         (this.actionType === 'new' || this.actionType === 'add')
             && getProxyAblePairs().then(data => {
                 this.allProxyAblePairs = data;
             });
     },
     methods: {
+        validAddr() {
+            if (this.actionType !== 'new' || !this.userInputAddress) {
+                this.isValidAddress = true;
+                return;
+            }
+            this.isValidAddress = hdAddr.isValidHexAddr(this.userInputAddress);
+        },
         addItem(item) {
             if (this.selectedPairs.find(i => i.id === item.id)) {
                 return;
@@ -104,9 +116,9 @@ export default {
                     : this.deletedPairs;
             const tradeTokens = manilpulatePairs.map(p => p.tradeToken);
             const quoteTokens = manilpulatePairs.map(p => p.quoteToken);
-            if (this.actionType === 'new') {
+            if (this.actionType !== 'deleteAll') {
                 await confirmDialog({
-                    pairs: manilpulatePairs,
+                    pairs: this.actionType === 'delete' ? this.existsPair : [].concat(this.existsPair, this.selectedPairs),
                     trustAddress: this.trustAddress || this.userInputAddress
                 });
             }
@@ -117,7 +129,9 @@ export default {
                     tradeTokens,
                     quoteTokens
                 });
+                this.$toast(this.$t('trade.proxy.dialog.successProxy'));
             } catch (e) {
+                this.$toast(this.$t('trade.proxy.dialog.failProxy'), e);
                 return Promise.reject(e);
             }
         })
@@ -125,6 +139,9 @@ export default {
     computed: {
         address() {
             return this.$store.getters.activeAddr;
+        },
+        dBtnUnuse() {
+            return !this.isValidAddress || (this.actionType === 'new' && !this.userInputAddress);
         }
     }
 };

@@ -29,7 +29,11 @@ export default {
     data() {
         return { userInput: '', searchRes: [], isShowTips: false };
     },
-    watch: { userInput: throttle(val => this.search(val), 300) },
+    watch: {
+        userInput: throttle(function (val) {
+            this.search(val);
+        }, 300)
+    },
     methods: {
         search(val) {
             this.searchRes = this.filterMethod(val);
@@ -43,7 +47,7 @@ export default {
         selected(v) {
             this.closeTips();
             this.$emit('selected', v);
-            this.userInput = v.name;
+            this.userInput = '';
         }
     }
 };

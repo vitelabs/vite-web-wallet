@@ -10,8 +10,6 @@ let nextVip = null;
 
 const state = {
     isVip: false,
-    baseMakerFee,
-    baseTakerFee,
     marketInfo: {},
     invitedCode: '',
     isSVip: false
@@ -94,6 +92,12 @@ const actions = {
 };
 
 const getters = {
+    baseTakerFee(state) {
+        return state.isSVip ? 0 : baseTakerFee;
+    },
+    baseMakerFee() {
+        return state.isSVip ? 0 : baseMakerFee;
+    },
     vipFee(state) {
         return state.isVip ? 0.001 : 0;
     },
@@ -113,14 +117,10 @@ const getters = {
         return 0;
     },
     exMakerFee(state, getters) {
-        const _baseMakerFee = state.isSVip ? 0 : baseMakerFee;
-        const makerFee = getFee(_baseMakerFee, getters.operatorMakerFee, getters.vipFee, getters.inviteFeeDiscount);
-        return Number(makerFee);
+        return getFee(getters.baseMakerFee, getters.operatorMakerFee, getters.vipFee, getters.inviteFeeDiscount);
     },
     exTakerFee(state, getters) {
-        const _baseTakerFee = state.isSVip ? 0 : baseTakerFee;
-        const takerFee = getFee(_baseTakerFee, getters.operatorTakerFee, getters.vipFee, getters.inviteFeeDiscount);
-        return Number(takerFee);
+        return getFee(getters.baseTakerFee, getters.operatorTakerFee, getters.vipFee, getters.inviteFeeDiscount);
     },
     exBuyOrderFee(state, getters) {
         if (BigNumber.compared(getters.exMakerFee, getters.exTakerFee) > 0) {
@@ -138,14 +138,17 @@ export default {
 };
 
 
+// (baseFee + operatorFee - vipFee) * (1 - inviteFeeDiscount)
 function getFee(baseFee, operatorFee, vipFee, inviteFeeDiscount) {
-    const allFee = baseFee + Number(operatorFee) - vipFee;
+    const allFee = baseFee + operatorFee - vipFee;
     const discount = 1 - inviteFeeDiscount;
-    return BigNumber.multi(allFee, discount);
+    const fee = BigNumber.multi(allFee, discount);
+    return Number(fee);
 }
 
 function getOperatorFee(fee) {
-    return BigNumber.dividedToNumber(fee || 0, 100000, 5);
+    const operatorFee = BigNumber.dividedToNumber(fee || 0, 100000, 5);
+    return Number(operatorFee);
 }
 
 function stopLoopVip() {

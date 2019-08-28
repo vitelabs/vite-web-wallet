@@ -68,7 +68,7 @@ export default {
                 name: this.$t('tradeOperator.title'),
                 value: 'operator'
             }, {
-                name: '代理',
+                name: this.$t('trade.proxy.title'),
                 value: 'proxy'
             } ];
         },

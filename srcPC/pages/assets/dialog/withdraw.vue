@@ -11,7 +11,7 @@ block content
         .err {{isAddrCorrect?'':$t("tokenCard.withdraw.addressErr")}}
     input.block__content(v-model="withdrawAddr" :placeholder="$t('tokenCard.withdraw.addressPlaceholder', {token: token.tokenSymbol === 'USDT' && token.index === 0 ? 'USDT(ERC20)' : ''})")
     .block__title(v-if="type===1") {{labelName}}
-    input.block__content(v-if="type===1" v-model="labelValue" :placeholder="$t('tokenCard.withdraw.addressPlaceholder')")
+    input.block__content(v-if="type===1" v-model="labelValue" :placeholder="$t('tokenCard.withdraw.labelPlaceholder',{labelName})")
     .block__title {{$t("tokenCard.withdraw.labels.amount")}}
         .err {{ammountErr}}
     .block__content
@@ -107,7 +107,18 @@ export default {
                 return;
             }
             this.verifingAddr = true;
-            verifyAddr({ tokenId: this.token.tokenId, withdrawAddress: val }, this.token.gateInfo.url).then(d => {
+            verifyAddr({ tokenId: this.token.tokenId, withdrawAddress: val, label: this.type === 1 ? this.labelValue : undefined }, this.token.gateInfo.url).then(d => {
+                this.isAddrCorrect = d.isValidAddress;
+                this.verifingAddr = false;
+            });
+        }, 500),
+        labelValue: debounce(function (val) {
+            if (!val) {
+                this.isAddrCorrect = true;
+                return;
+            }
+            this.verifingAddr = true;
+            verifyAddr({ tokenId: this.token.tokenId, withdrawAddress: this.withdrawAddr, label: this.type === 1 ? val : undefined }, this.token.gateInfo.url).then(d => {
                 this.isAddrCorrect = d.isValidAddress;
                 this.verifingAddr = false;
             });

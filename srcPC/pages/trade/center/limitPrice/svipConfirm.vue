@@ -8,11 +8,14 @@ block content
                 img(:src="viteTokenInfo.icon")
                 .symbol VITE
             .right.blue {{exViteBalance}}
+        .block__title {{ $t('trade.svipConfirm.openStakingAmount') }}
+            .err(v-if="dBtnUnuse") {{$t('trade.vipConfirm.noBalance')}}
         .block__content.edit {{vipStakingAmount}} VITE
         .charge-tips {{tip}}
             .dot
     .content-wrapper(v-else)
-        .block__title {{ !isSVip?$t('trade.vipConfirm.noBalance'):$t('walletQuota.list.unexpired') }}
+        .block__title {{ $t('trade.svipConfirm.cancelStakingAmount') }}
+            .err(v-if="dBtnUnuse") {{$t('walletQuota.list.unexpired')}}
         .block__content.edit {{vipStakingAmount}} VITE
         .charge-tips {{tip}}
             .dot
@@ -29,7 +32,7 @@ import date from 'utils/date';
 import $ViteJS from 'utils/viteClient';
 
 const Vite_Token_Info = constant.Vite_Token_Info;
-const vipStakingAmount = 10000;
+const vipStakingAmount = 1000000;
 
 export default {
     data() {

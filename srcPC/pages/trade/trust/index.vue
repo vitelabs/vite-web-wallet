@@ -150,14 +150,21 @@ export default {
     beforeMount() {
         this.updateData();
     },
+    watch: {
+        address() {
+            this.relation = {};
+            this.grantor = {};
+            this.updateData();
+        }
+    },
     methods: {
         updateData() {
-            getProxyRelation({ address: this.address }).then(data => {
+            return Promise.all([ getProxyRelation({ address: this.address }).then(data => {
                 this.relation = data.relations;
-            });
+            }),
             getProxyGrantor({ address: this.address }).then(data => {
                 this.grantor = data.relations;
-            });
+            }) ]);
         },
         addProxy: execWithValid(function ({ trustAddress, existsPair, actionType } = {}) {
             if (existsPair) {
@@ -173,9 +180,7 @@ export default {
                 actionType
             }).then(() =>
                 doUntill({
-                    createPromise: () => getProxyRelation({ address: this.address }).then(data => {
-                        this.relation = data.relations;
-                    }),
+                    createPromise: () => this.updateData(),
                     interval: 1000,
                     times: 3
                 }));
@@ -226,7 +231,9 @@ export default {
     }
 }
 .btn {
-    width: 128px;
+    min-width: 128px;
+    box-sizing: border-box;
+    padding: 0 5px;
     height: 30px;
     display: flex;
     align-items: center;
@@ -331,7 +338,8 @@ export default {
             margin-right: 0;
         }
         &:nth-child(3) {
-            width: 280px;
+            min-width: 280px;
+            width: 25%;
         }
     }
     .click-able {

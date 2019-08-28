@@ -895,9 +895,13 @@
             "openSuccess": "Berhasil Diterapkan! Status VIP akan mulai berlaku nanti.",
             "openFail": "Gagal menerapkan VIP",
             "cancelSuccess": "Batalkan VIP Berhasil",
-            "cancelFail": "Batalkan Gagal"
+            "cancelFail": "Batalkan Gagal",
+            "adviseToCancel":"由于您已成为超级VIP，平台手续费已为0，建议您取回普通VIP的抵押金额。"
+
         },
         "svipConfirm": {
+            "open":"开通",
+            "cancel":"取消",
             "cancelVip": "Cancel SVIP",
             "openVip": "Become a SVIP",
             "openStakingAmount": "Staking Amount for Becoming a SVIP",
@@ -906,12 +910,15 @@
             "openHint": "SVIP开通后，可免除基础手续费，开通SVIP需抵押10000VITE，30天后可手动取回",
             "cancelHint": "You can retrieve your staking amount at approximately {time}. You will lose your SVIP privilege after retrieving.",
             "openSuccess": "Applied Successful! SVIP status will come into effect later.",
-            "openFail": "Failed to apply VIP",
-            "cancelSuccess": "Cancel VIP Successful",
+            "openFail": "Failed to apply SVIP",
+            "cancelSuccess": "Cancel SVIP Successful",
             "cancelFail": "Cancel Failed"
         },
         "proxy":{
-            "title":"交易委托",
+            "title":"委托代理",
+            "subTitle":"交易委托",              
+            "successProxy":"委托成功",
+            "failProxy":"委托失败",
             "info":"了解委托",
             "new":"新建委托",
             "active":{
@@ -938,6 +945,11 @@
                 "add": "增加委托交易对",
                 "delete": "减少委托交易对",
                 "deleteAll": "确认撤销委托"
+              },
+              "confirm":{
+                    "title": "确认委托交易对",
+                    "cancel": "取消",
+                    "ok": "确认"
               }
             }
         }
