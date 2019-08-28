@@ -103,6 +103,8 @@
         "DexFundUserWithdraw": "ViteX提现",
         "DexFundNewOrder": "ViteX挂单",
         "DexTradeCancelOrder": "ViteX撤单",
+        "DexFundPledgeForSuperVip": "ViteX SVIP",
+        "DexFundConfigMarketsAgent": "配置委托",
         "DexFundNewMarket": "ViteX上币",
         "CreateContractReq": "创建合约",
         "DexFundPledgeForVx": "ViteX抵押",
@@ -910,6 +912,8 @@
             "subTitle":"交易委托",              
             "successProxy":"委托成功",
             "failProxy":"委托失败",
+            "successCancelProxy":"撤销委托成功",
+            "failCancelProxy":"撤销委托失败",
             "info":"了解委托",
             "new":"新建委托",
             "active":{
