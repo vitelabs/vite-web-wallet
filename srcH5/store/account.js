@@ -9,14 +9,26 @@ import env from 'h5Utils/envFromURL';
 import { getTokenIcon } from 'utils/tokenParser';
 
 let balanceInfoInst = null;
+const activeAcc = env.address ? new addrAccount({ address: env.address, client }) : null;
 
 const state = {
-    activeAcc: new addrAccount({ address: env.address, client }),
+    activeAcc,
     address: env.address || '',
     balance: {}
 };
 
 const mutations = {
+    commitSetAddress(state, address) {
+        if (!address) {
+            return;
+        }
+        if (state.address === address) {
+            return;
+        }
+
+        state.address = address;
+        state.activeAcc = new addrAccount({ address, client });
+    },
     commitBalanceInfo(state, payload) {
         if (!payload) {
             state.balance = {};
@@ -30,6 +42,10 @@ const mutations = {
 };
 
 const actions = {
+    setAddress({ commit, dispatch }, address) {
+        commit('commitSetAddress', address);
+        dispatch('startLoopBalance');
+    },
     startLoopBalance({ state, commit, dispatch }) {
         dispatch('stopLoopBalance');
         balanceInfoInst = new timer(() => state.activeAcc.getAccountBalance().then(data => {
