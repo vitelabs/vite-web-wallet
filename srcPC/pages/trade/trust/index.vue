@@ -232,7 +232,7 @@ export default {
 .btn {
     min-width: 128px;
     box-sizing: border-box;
-    padding:0 5px;
+    padding: 0 5px;
     height: 30px;
     display: flex;
     align-items: center;
@@ -338,7 +338,7 @@ export default {
         }
         &:nth-child(3) {
             min-width: 280px;
-            width:25%;
+            width: 25%;
         }
     }
     .click-able {

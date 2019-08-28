@@ -130,7 +130,7 @@ export default {
         @include font-family-normal();
         color: rgba(94, 104, 117, 1);
         font-weight: 400;
-        display:flex;
+        display: flex;
         >span {
             position: relative;
             margin-right: 6px;

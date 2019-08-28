@@ -30,7 +30,7 @@ import {
 import { confirmDialog } from './index';
 
 export default {
-    components: { PairItem, SearchTips,viteInput },
+    components: { PairItem, SearchTips, viteInput },
     props: {
         trustAddress: {
             type: String,
@@ -58,22 +58,22 @@ export default {
             dWidth: this.actionType === 'deleteAll' ? 'narrow' : undefined,
             dRTxt: rTxtMap[this.actionType],
             dTitle: titleMap[this.actionType],
-            isValidAddress:true
+            isValidAddress: true
         };
     },
     beforeMount() {
-        window.fffff=this;
+        window.fffff = this;
         (this.actionType === 'new' || this.actionType === 'add')
             && getProxyAblePairs().then(data => {
                 this.allProxyAblePairs = data;
             });
     },
     methods: {
-          validAddr() {
-            if(this.actionType!=='new'||!this.userInputAddress){
-                this.isValidAddress=true;
+        validAddr() {
+            if (this.actionType !== 'new' || !this.userInputAddress) {
+                this.isValidAddress = true;
                 return;
-            };
+            }
             this.isValidAddress = hdAddr.isValidHexAddr(this.userInputAddress);
         },
         addItem(item) {
@@ -129,9 +129,9 @@ export default {
                     tradeTokens,
                     quoteTokens
                 });
-                this.$toast(this.$t('trade.proxy.dialog.successProxy'))
+                this.$toast(this.$t('trade.proxy.dialog.successProxy'));
             } catch (e) {
-                this.$toast(this.$t('trade.proxy.dialog.failProxy'),e)
+                this.$toast(this.$t('trade.proxy.dialog.failProxy'), e);
                 return Promise.reject(e);
             }
         })
@@ -140,8 +140,8 @@ export default {
         address() {
             return this.$store.getters.activeAddr;
         },
-        dBtnUnuse(){
-            return !this.isValidAddress||(this.actionType==='new'&&!this.userInputAddress)
+        dBtnUnuse() {
+            return !this.isValidAddress || (this.actionType === 'new' && !this.userInputAddress);
         }
     }
 };
