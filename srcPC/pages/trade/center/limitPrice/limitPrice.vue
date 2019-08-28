@@ -43,8 +43,8 @@ export default {
     data() {
         return { isShowHelp: false };
     },
-    beforeMount(){
-        window.fffffffff=this;
+    beforeMount() {
+        window.fffffffff = this;
     },
     computed: {
         baseFee() {
