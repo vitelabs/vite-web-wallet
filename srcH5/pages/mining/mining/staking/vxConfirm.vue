@@ -36,7 +36,6 @@ import { constant } from '@vite/vitejs';
 import viteInput from 'components/viteInput';
 import confirm from 'h5Components/confirm/confirm.vue';
 import bigNumber from 'utils/bigNumber';
-import statistics from 'utils/statistics';
 import sendTx from 'h5Utils/sendTx';
 import { verifyAmount, verifyWithdrawAmount } from 'h5Utils/validations';
 
@@ -135,8 +134,6 @@ export default {
             this.close && this.close();
         },
         staking() {
-            statistics.event(this.$route.name, this.actionType === 1 ? 'addQuota-submit' : 'withdrawQuota-submit', this.accountAddr || '');
-
             const amount = bigNumber.toMin(this.amount, Vite_Token_Info.decimals);
 
             sendTx({
@@ -153,7 +150,6 @@ export default {
                 // }
                 this._close();
             }).catch(err => {
-                alert(JSON.stringify(err));
                 console.warn(err);
                 // if (this.isAdd) {
                 //     this.$toast(this.$t('walletQuota.pledgeFail'), err);
