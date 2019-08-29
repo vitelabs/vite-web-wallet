@@ -115,7 +115,7 @@ export default {
             lastSymbol = this.activeTxPair.symbol;
 
             if (this.operatorInfo
-                && [ 'Vite Labs', 'VGATE', 'XS_Fund' ].indexOf(this.operatorInfo.name) !== -1) {
+                && [ 'Vite Labs', 'VGATE', 'XS_Fund', 'Bi23' ].indexOf(this.operatorInfo.name) !== -1) {
                 return;
             }
 

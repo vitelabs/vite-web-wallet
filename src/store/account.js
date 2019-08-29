@@ -201,6 +201,13 @@ const getters = {
                 viteLabsGateInfo.customer = 'support@bi23.com',
                 viteLabsGateInfo.customerEn = 'support@bi23.com',
                 viteLabsGateInfo.privacy = 'https://bi23.com/privacy.html';
+            } else if (mapToken2Gate[i].gateway === 'XS_Fund') {
+                viteLabsGateInfo.introduction = 'XS_Fund, as the gateway for the operation of ViteX exchange, has good credit and complete operation capability. Services include listing coins, coin mintae, deposit, withdraw, cross-chain services, while accepting operator cooperation and supporting technology transfer services.',
+                viteLabsGateInfo.introductionEn = 'XS_Fund, as the gateway for the operation of ViteX exchange, has good credit and complete operation capability. Services include listing coins, coin mintae, deposit, withdraw, cross-chain services, while accepting operator cooperation and supporting technology transfer services.',
+                viteLabsGateInfo.offical = 'https://xinsheng.71an.com/lrc/';
+                viteLabsGateInfo.customer = 'XS_Fund@163.com',
+                viteLabsGateInfo.customerEn = 'XS_Fund@163.com',
+                viteLabsGateInfo.privacy = 'https://forum.vite.net/topic/2610/xsfund-gateway-service-agreement/';
             }
 
             const {
