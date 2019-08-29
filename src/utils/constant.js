@@ -5,14 +5,18 @@ import vxIcon from 'assets/imgs/vx.png';
 
 export const defaultTokenMap = {
     'tti_5649544520544f4b454e6e40': {
+        tokenId: 'tti_5649544520544f4b454e6e40',
         tokenSymbol: 'VITE',
         icon: viteIcon,
         index: 0,
         ...constant.Vite_Token_Info
     },
     'tti_564954455820434f494e69b5': {
+        tokenId: 'tti_564954455820434f494e69b5',
         tokenSymbol: 'VX',
+        tokenName: 'ViteX Coin',
         icon: vxIcon,
+        decimals: 18,
         index: 0
     }
 };

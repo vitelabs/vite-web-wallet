@@ -1,5 +1,7 @@
-import BigNumber from 'utils/bigNumber';
-import { assignPair } from 'services/trade';
+import { subTask } from 'utils/proto/subTask';
+import env from 'h5Utils/envFromURL';
+
+let assignPairTask = null;
 
 const state = { activeTxPair: null };
 
@@ -18,78 +20,48 @@ const mutations = {
 };
 
 const actions = {
-    dexFetchActiveTxPair({ state, dispatch, commit }, txPair) {
-        if (!txPair) {
-            return;
-        }
+    dexFetchActiveTxPair({ state, dispatch, commit, rootState }, txPair) {
+        txPair = txPair || {
+            symbol: rootState.exchangeMarket.currentSymbol,
+            quoteToken: env.quoteToken,
+            tradeToken: env.tradeToken
+        };
 
         const activeTxPair = state.activeTxPair;
         if (activeTxPair && activeTxPair.symbol === txPair.symbol) {
             return;
         }
 
-        assignPair({ symbols: [txPair.symbol] }).then(data => {
+        assignPairTask && assignPairTask.stop();
+        assignPairTask = null;
+
+        assignPairTask = new subTask('assignPair', ({ data }) => {
             if (!data || !data.length) {
                 return;
             }
 
-            commit('exSetActiveTxPair', data[0]);
+            const activeTxPair = data[0];
+            const currActiveTxPair = state.activeTxPair;
 
-            dispatch('exFetchActiveTokens');
-            dispatch('exFetchDepth');
-            dispatch('exFetchMarketInfo');
-        }).catch(err => {
-            console.warn(err);
+            if (currActiveTxPair && activeTxPair.symbol !== currActiveTxPair.symbol) {
+                return;
+            }
+
+            commit('exSetActiveTxPair', activeTxPair);
+            if (!currActiveTxPair) {
+                dispatch('exFetchActiveTokens');
+                dispatch('exFetchDepth');
+                dispatch('exFetchMarketInfo');
+            }
         });
-    }
-};
-
-const getters = {
-    exActiveTxPair(state) {
-        if (!state.activeTxPair) {
-            return null;
-        }
-
-        const activeTxPair = Object.assign({}, state.activeTxPair);
-
-        const upDown = BigNumber.minus(activeTxPair.closePrice || 0, activeTxPair.openPrice || 0);
-        const upDownPrev = BigNumber.minus(activeTxPair.closePrice || 0, activeTxPair.prevClosePrice || 0);
-
-        activeTxPair.upDown = upDown;
-        activeTxPair.upDownPrev = +upDownPrev ? upDownPrev : '0';
-        activeTxPair.upDownPercent = activeTxPair.priceChangePercent ? `${ BigNumber.multi(activeTxPair.priceChangePercent, 100, 2) }%` : '';
-        activeTxPair.originQuoteTokenSymbol = activeTxPair.quoteTokenSymbol.split('-')[0] || '';
-        activeTxPair.originTradeTokenSymbol = activeTxPair.tradeTokenSymbol.split('-')[0] || '';
-
-        return activeTxPair;
-    },
-    activeTxPairRealClosePrice(state, getters, rootState, rootGetters) {
-        const pre = rootGetters.currencySymbol;
-        if (!state.activeTxPair) {
-            return `${ pre }0`;
-        }
-
-        const _price = BigNumber.multi(state.activeTxPair.closePrice || 0, getters.activeTxPairQuoteCurrencyRate, 6);
-        const _realPrice = BigNumber.normalFormatNum(_price, 6);
-        const _realPrice2 = BigNumber.normalFormatNum(_realPrice, 2);
-
-        if (+_realPrice2 !== 0) {
-            return pre + BigNumber.onlyFormat(_realPrice2, 2);
-        }
-        return pre + BigNumber.onlyFormat(_realPrice, 2);
-    },
-    activeTxPairQuoteCurrencyRate(state, getters, rootState, rootGetters) {
-        const tokenId = state.activeTxPair && state.activeTxPair.quoteToken ? state.activeTxPair.quoteToken : null;
-        if (!tokenId) {
-            return 0;
-        }
-        return rootGetters.currencyRateList[tokenId] || 0;
+        assignPairTask.start(() => {
+            return { symbol: txPair.symbol };
+        });
     }
 };
 
 export default {
     state,
     mutations,
-    getters,
     actions
 };

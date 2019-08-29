@@ -8,7 +8,7 @@ import activeTx from 'store/activeTx';
 import latestOrder from 'store/latestOrder';
 import dexFundUnreceived from 'store/dexFundUnreceived';
 import currentOpenOrders from 'store/currentOpenOrders';
-import tokenDecimalsLimit from 'store/tokenDecimalsLimit';
+import activeTxPairGetters from 'store/activeTxPairGetters';
 
 import market from './market';
 import latestTx from './latestTx';
@@ -28,5 +28,5 @@ export default {
     exchangeActiveTxPair: activeTxPair,
     exchangeCurrentOpenOrders: currentOpenOrders,
     exchangeDexFundUnreceived: dexFundUnreceived,
-    exchangeTokenDecimalsLimit: tokenDecimalsLimit
+    exchangeActiveTxPairGetters: activeTxPairGetters
 };

@@ -123,10 +123,11 @@ export default {
         margin-top: 30px;
         width: 100%;
         height: 52px;
+        text-align: center;
 
         img {
-            width: 100%;
-            height: 100%;
+            width: 52px;
+            height: 52px;
         }
 
         .notice {

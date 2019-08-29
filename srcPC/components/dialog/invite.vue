@@ -31,7 +31,8 @@ block content
 </template>
 
 <script>
-import { getInviteInfo, getCode } from 'services/tradeOperation';
+import { getInviteInfo } from 'services/trade';
+import { getCode } from 'services/viteServer';
 import { genCode } from 'pcServices/tradeOperation';
 import copy from 'utils/copy';
 import { doUntill } from 'utils/asyncFlow';

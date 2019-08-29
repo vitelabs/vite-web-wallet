@@ -16,10 +16,11 @@ block content
 </template>
 
 <script>
-import { getValidBalance } from 'h5Utils/validations';
-// import sendTx from 'h5Utils/sendTx';
 import debounce from 'lodash/debounce';
 import bigNumber from 'utils/bigNumber';
+import sendTx from 'h5Utils/sendTx';
+import { getValidBalance } from 'h5Utils/validations';
+
 export default {
     props: {
         token: {
@@ -34,15 +35,13 @@ export default {
             dTitle: this.$t('tradeAssets.confirmrecharge.title'),
             dSTxt: this.$t('tradeAssets.confirmrecharge.btn'),
             errTips: '',
-            fetchingFee: true
+            fetchingFee: true,
+            notEnough: this.$t('tokenCard.withdraw.balanceErrMap.notEnough')
         };
     },
     computed: {
         dBtnUnuse() {
-            return (
-                this.errTips
-        || !this.withdrawAmount
-            );
+            return this.errTips || !this.withdrawAmount;
         },
         defaultAddr() {
             return this.$store.getters.activeAddr;
@@ -54,32 +53,31 @@ export default {
             this.errTips = this.testAmount(e.target.value);
         }, 500),
         testAmount(val) {
-            const errorMap = { notEnough: this.$t('tokenCard.withdraw.balanceErrMap.notEnough') };
+            const errorMap = { notEnough: this.notEnough };
             return getValidBalance({ balance: this.token.totalAmount, decimals: this.token.decimals, errorMap })(val);
         },
         all() {
-            if (
-                this.token.totalAmount
-        && bigNumber.compared(this.token.totalAmount, '0') > 0
-            ) {
+            if (this.token.totalAmount
+                && bigNumber.compared(this.token.totalAmount, '0') > 0) {
                 this.isAll = true;
                 this.withdrawAmount = bigNumber.toBasic(this.token.totalAmount, this.token.decimals);
             }
         },
         inspector() {
-            // return new Promise((res, rej) => {
-            //     if (this.testAmount(this.withdrawAmount)) return;
-            //     const amount = this.isAll ? this.token.totalAmount : bigNumber.toMin(this.withdrawAmount, this.token.decimals);
-            //     sendTx({ methodName: 'dexFundUserDeposit', data: { tokenId: this.token.tokenId, amount } }).then(() => {
-            //         this.$toast(this.$t('tradeAssets.confirmrecharge.successToast'));
-            //         res();
-            //     })
-            //         .catch(e => {
-            //             this.$toast(this.$t('tradeAssets.confirmrecharge.failToast'),
-            //                 e);
-            //             rej(e);
-            //         });
-            // });
+            return new Promise((res, rej) => {
+                if (this.testAmount(this.withdrawAmount)) return;
+                const amount = this.isAll ? this.token.totalAmount : bigNumber.toMin(this.withdrawAmount, this.token.decimals);
+                sendTx({
+                    methodName: 'dexFundUserDeposit',
+                    data: { tokenId: this.token.tokenId, amount }
+                }).then(() => {
+                    // this.$toast(this.$t('tradeAssets.confirmrecharge.successToast'));
+                    res();
+                }).catch(e => {
+                    // this.$toast(this.$t('tradeAssets.confirmrecharge.failToast'), e);
+                    rej(e);
+                });
+            });
         }
     }
 };

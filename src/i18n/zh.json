@@ -864,6 +864,8 @@
         "limitPrice": {
             "title": "限价",
             "fee": "手续费",
+            "adviseToSVip":"成为超级VIP可免交易所基础费率",
+            "feeRuleWithSVip":"运营商费率*邀请折扣。（费率折扣及费率调整只影响新订单，此前挂单依旧执行旧费率）",
             "text": "此页面为交易预览信息，请登录后进行交易",
             "validAmount": "成交额需大于{amount}{token}",
             "priceNotNull": "金额不能为空",
@@ -1252,5 +1254,11 @@
         "orderTotalIncome": "挂单挖矿总收益({token})",
         "fee": "手续费金额",
         "listTitle": "挖矿明细"
+    },
+    "mobileBottomBar": {
+        "center": "交易",
+        "assets": "资产",
+        "mining": "挖矿",
+        "order": "订单"
     }
 }

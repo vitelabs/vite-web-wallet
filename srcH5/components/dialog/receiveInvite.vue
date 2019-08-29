@@ -2,7 +2,7 @@
 extends /components/dialog/base.pug
 block content
     img.bg-img(src="~assets/imgs/invite.png")
-    div(v-if="inviteeCode&&+inviteeCode!==0")
+    div(v-if="inviteeCode && +inviteeCode!==0")
         .invite-code {{$t('assets.invite.invited')}}{{this.inviteeCode}}
     div(v-else)
         .block__title {{ $t('assets.invite.codeLable') }}
@@ -16,9 +16,9 @@ block content
 </template>
 
 <script>
-import { bindCode } from 'h5Services/tradeOperation';
 import { doUntill } from 'utils/asyncFlow';
-import router from 'h5Router';
+import sendTx from 'h5Utils/sendTx';
+import { getItem } from 'h5Utils/storage';
 
 export default {
     async beforeMount() {
@@ -27,6 +27,12 @@ export default {
         } catch (e) {
             console.log('get bind code error', e);
         }
+
+        const code = getItem('inviteeCode');
+        if (code > 0) {
+            this.code = code;
+        }
+
         this.status = 'LOADED';
     },
     data() {
@@ -60,29 +66,30 @@ export default {
             return this.$store.dispatch('getInvitedCode');
         },
         inspector() {
-            bindCode(this.code)
-                .then(() => {
-                    this.$toast(this.$t('assets.invite.successToast'));
-                    doUntill({
-                        createPromise: () => this.getInviteeCode(),
-                        interval: 1000,
-                        times: 3
-                    })
-                        .then(res => {
-                            console.log('code', res);
-                        })
-                        .catch(e => {
-                            this.$toast(this.$t('assets.invite.noResult'), e);
-                        });
-                })
-                .catch(e => {
-                    if (e && e.error && e.error.code === 12002) {
-                        router.push({ name: 'startLogin' });
-                        this.close();
-                        return;
-                    }
-                    this.$toast(this.$t('assets.invite.failToast'), e);
+            sendTx({
+                methodName: 'dexFundBindInviteCode',
+                data: { code: this.code }
+            }).then(() => {
+                // this.$toast(this.$t('assets.invite.successToast'));
+                doUntill({
+                    createPromise: () => this.getInviteeCode(),
+                    interval: 1000,
+                    times: 3
+                }).then(res => {
+                    console.log('code', res);
+                }).catch(e => {
+                    this.$toast(this.$t('assets.invite.noResult'), e);
                 });
+            }).catch(e => {
+                console.warn(e);
+                // if (e && e.error && e.error.code === 12002) {
+                //     router.push({ name: 'startLogin' });
+                //     this.close();
+                //     return;
+                // }
+                // this.$toast(this.$t('assets.invite.failToast'), e);
+            });
+
             return Promise.reject('no close');
         }
     }

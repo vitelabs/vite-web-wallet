@@ -57,10 +57,10 @@ export default {
             return this.$store.state.exchangeLatestTx.isLoading;
         },
         quoteTokenDigit() {
-            return this.$store.state.exchangeTokenDecimalsLimit.quoteToken;
+            return this.$store.getters.quoteTokenDecimalsLimit;
         },
         tradeTokenDigit() {
-            return this.$store.state.exchangeTokenDecimalsLimit.tradeToken;
+            return this.$store.getters.tradeTokenDecimalsLimit;
         }
     },
     methods: {

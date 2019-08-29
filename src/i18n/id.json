@@ -874,6 +874,8 @@
         "limitPrice": {
             "title": "Batas",
             "fee": "Biaya",
+            "adviseToSVip":"成为超级VIP可免交易所基础费率",
+            "feeRuleWithSVip":"Zone Fees * Referral Discount. ATTENTION: The adjustment and discount of fees will only affect new orders, the former orders' charge remains the same.",
             "text": "Halaman ini adalah halaman pratinjau data transaksi. Silakan masuk untuk berdagang.",
             "validAmount": "Volume harus lebih besar dari {amount}{token}",
             "priceNotNull": "Jumlah tidak boleh kosong",
