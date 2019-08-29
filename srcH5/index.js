@@ -27,7 +27,8 @@ Vue.use(directives);
 
 Vue.config.devtools = process.env.NODE_ENV !== 'production';
 
-bridge['app.language'](lang => {
+bridge['app.language']().then(lang => {
+    console.log('get lang', lang);
     i18n.locale = lang.startsWith('zh') ? 'zh' : 'en';
 });
 
