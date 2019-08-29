@@ -863,11 +863,11 @@
             "cancelVip": "Cancel",
             "openVip": "Become a VIP",
             "dexFee": "Base Transaction Fees: {fee}",
-            "operatorFee": "Zone Fees (Charged by Operator): {fee}",
+            "operatorFee": "Operator Fees: {fee}",
             "vipFee": "VIP Discount: {fee}",
             "inviteFeeDiscount":"Referral Discount: {fee} off",
             "svipFee":"超级vip交易所基础费率为0",
-            "feeRule":"(Base Transaction Fee - VIP discount + Zone Fees) * Referral Discount. ATTENTION: The adjustment and discount of fees will only affect new orders, the former orders' charge remains the same."
+            "feeRule":"(Base Transaction Fee - VIP discount + Operator Fees) * Referral Discount. ATTENTION: The adjustment and discount of fees will only affect new orders, the former orders' charge remains the same."
         },        
         "vipConfirm": {
             "cancelVip": "Cancel VIP",
