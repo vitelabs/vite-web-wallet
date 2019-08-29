@@ -34,17 +34,16 @@
 <script>
 import { insertTo } from 'pcUtils/insertTo';
 import VxConfirm from './vxConfirm.vue';
-import $ViteJS from 'utils/viteClient';
 import statistics from 'utils/statistics';
 import { execWithValid } from 'pcUtils/execWithValid';
 import stakingDetail from './stakingDetail.vue';
-import { constant } from '@vite/vitejs';
 import { timer } from 'utils/asyncFlow';
 import walletTable from 'components/table/index.vue';
 import pagination from 'components/pagination';
 import { miningPledge } from 'services/trade';
 import bigNumber from 'utils/bigNumber';
 import date from 'utils/date';
+import { getAgentMiningPledgeInfo } from 'services/viteServer';
 
 let stakingInfoTimer = null;
 
@@ -144,19 +143,11 @@ export default {
             stakingInfoTimer.start();
         },
         fetchStakingInfo() {
-            $ViteJS
-                .request('pledge_getAgentPledgeInfo', {
-                    pledgeAddr: this.address,
-                    agentAddr: constant.DexFund_Addr,
-                    beneficialAddr: constant.DexFund_Addr,
-                    bid: 1
-                })
-                .then(data => {
-                    this.stakingObj = data;
-                })
-                .catch(err => {
-                    console.warn(err);
-                });
+            getAgentMiningPledgeInfo(this.address).then(data => {
+                this.stakingObj = data;
+            }).catch(err => {
+                console.warn(err);
+            });
         },
 
         fetchMiningStake(pageNumber) {

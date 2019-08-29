@@ -1,8 +1,8 @@
 import { constant } from '@vite/vitejs';
 import { timer } from 'utils/asyncFlow';
-import $ViteJS from 'utils/viteClient';
 import { defaultTokenMap } from 'utils/constant';
 import { tokenInfoFromGithub } from 'services/trade';
+import { getTokenInfoById, getSnapshotChainHeight, getTokenInfoList } from 'services/viteServer';
 
 const ViteId = constant.Vite_TokenId;
 const MAX_TOKEN_NUM = 100;
@@ -51,7 +51,7 @@ const mutations = {
 
 const apis = {
     fetchTokenInfo(tokenId = ViteId) {
-        return $ViteJS.mintage.getTokenInfoById(tokenId);
+        return getTokenInfoById(tokenId);
     }
 };
 
@@ -67,7 +67,7 @@ const actions = {
         dispatch('stopLoopHeight');
 
         heightTimer = new timer(() =>
-            $ViteJS.ledger.getSnapshotChainHeight().then(result => {
+            getSnapshotChainHeight().then(result => {
                 commit('setCurrentHeight', result);
             }), time);
         heightTimer.start();
@@ -86,8 +86,8 @@ const actions = {
         heightTimer = null;
     },
     getAllTokens({ commit }) {
-    // 暂时为前端提供代币搜索功能，获取全部token信息；
-        $ViteJS.mintage.getTokenInfoList(0, MAX_TOKEN_NUM).then(data => {
+        // 暂时为前端提供代币搜索功能，获取全部token信息；
+        getTokenInfoList(0, MAX_TOKEN_NUM).then(data => {
             commit('setAllTokens', data.tokenInfoList);
         });
     },

@@ -2,10 +2,10 @@ import Vue from 'vue';
 import vuex from 'vuex';
 
 import env from './env';
-import market from './market';
 import account from './account';
-import activeTxPair from './activeTxPair';
 
+import market from './market';
+import activeTxPair from './activeTxPair';
 import fee from 'store/fee';
 import limit from 'store/limit';
 import rate from 'store/rate.js';
@@ -16,7 +16,7 @@ import activeTx from 'store/activeTx';
 import latestOrder from 'store/latestOrder';
 import dexFundUnreceived from 'store/dexFundUnreceived';
 import currentOpenOrders from 'store/currentOpenOrders';
-import tokenDecimalsLimit from 'store/tokenDecimalsLimit';
+import activeTxPairGetters from 'store/activeTxPairGetters';
 
 const exchange = {
     exchangeRate: rate,
@@ -30,7 +30,7 @@ const exchange = {
     exchangeLimit: limit,
     exchangeFee: fee,
     exchangeLatestOrder: latestOrder,
-    exchangeTokenDecimalsLimit: tokenDecimalsLimit,
+    exchangeActiveTxPairGetters: activeTxPairGetters,
     exchangeDexFundUnreceived: dexFundUnreceived
 };
 
@@ -44,9 +44,8 @@ for (const moduleName in exchange) {
 store.registerModule('env', env);
 store.registerModule('account', account);
 
+store.commit('exSetDepthListLimit', 20);
 store.dispatch('fetchDefaultTokenList');
 store.dispatch('startLoopExchangeRate');
-store.dispatch('startLoopExchangeBalance');
-store.dispatch('exFetchLatestOrder');
 
 export default store;

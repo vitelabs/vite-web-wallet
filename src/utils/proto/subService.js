@@ -45,7 +45,7 @@ export const klineWs = function ({ symbol, resolution }) {
 export const httpServicesMap = {
     depth,
     defaultPair,
-    assignPair,
+    assignPair: ({ symbol }) => assignPair({ symbols: [symbol] }),
     latestTx,
     orderQueryHistory: ({ quoteTokenSymbol, tradeTokenSymbol, address }) => order({
         address,

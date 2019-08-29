@@ -1,9 +1,7 @@
-import { constant } from '@vite/vitejs';
 import { timer } from 'utils/asyncFlow';
-import $ViteJS from 'utils/viteClient';
+import { getDexFundAddrOnroadInfo } from 'services/viteServer';
 
 const loopTime = 5 * 1000;
-const DexFund_Addr = constant.DexFund_Addr;
 let unreceivedTimer = null;
 
 const state = {
@@ -29,7 +27,7 @@ const actions = {
         dispatch('stopLoopDexFundUnreceived');
 
         // 2. Restart
-        unreceivedTimer = new timer(() => $ViteJS.request('onroad_getOnroadInfoByAddress', DexFund_Addr).then(data => {
+        unreceivedTimer = new timer(() => getDexFundAddrOnroadInfo().then(data => {
             commit('dexSetUnreveived', data);
         }), loopTime);
         unreceivedTimer.start();

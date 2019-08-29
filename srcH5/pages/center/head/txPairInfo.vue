@@ -140,6 +140,11 @@ export default {
         padding: 0;
         color: rgba(62,74,89,1);
     }
+    .gate-img {
+        box-sizing: border-box;
+        border-radius: 2px;
+        border: 1px solid rgba(212,222,231,1);
+    }
 }
 
 .tx-pair-info {

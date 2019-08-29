@@ -29,9 +29,9 @@ import { constant } from '@vite/vitejs';
 import confirm from 'components/confirm/confirm.vue';
 import BigNumber from 'utils/bigNumber';
 import sendTx from 'pcUtils/sendTx';
-import $ViteJS from 'utils/viteClient';
 import date from 'utils/date';
 import statistics from 'utils/statistics';
+import { getAgentVipPledgeInfo } from 'services/viteServer';
 import router from 'pcRouter';
 
 const Vite_Token_Info = constant.Vite_Token_Info;
@@ -145,12 +145,7 @@ export default {
                 return;
             }
 
-            $ViteJS.request('pledge_getAgentPledgeInfo', {
-                pledgeAddr: this.accountAddr,
-                agentAddr: constant.DexFund_Addr,
-                beneficialAddr: constant.DexFund_Addr,
-                bid: 2
-            }).then(data => {
+            getAgentVipPledgeInfo(this.accountAddr).then(data => {
                 this.stakingObj = data;
             }).catch(err => {
                 console.warn(err);

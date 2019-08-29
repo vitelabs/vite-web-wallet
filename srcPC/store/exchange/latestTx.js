@@ -12,6 +12,21 @@ const mutations = {
     exSetLatestTxList(state, list) {
         list = list || [];
 
+        if (!state.txList || !state.txList.length) {
+            state.txList = list;
+            return;
+        }
+
+        const nextTx = list[list.length - 1];
+        const currLastTx = state.txList[0];
+
+        if (currLastTx.time > nextTx.time) {
+            return;
+        }
+        if (currLastTx.time === nextTx.time && currLastTx.blockHeight > nextTx.blockHeight) {
+            return;
+        }
+
         let arr = [].concat(state.txList);
         arr.forEach(tx => {
             const index = list.findIndex(v => v.tradeId === tx.tradeId);
@@ -20,10 +35,8 @@ const mutations = {
             }
         });
 
-        arr = arr.concat(list || []);
-        arr.sort((a, b) => b.time - a.time);
+        arr = list.concat(arr);
         arr = arr.slice(0, 100);
-
         state.txList = arr || [];
     },
     exSetLatestTxLoading(state, isLoading) {
@@ -47,6 +60,9 @@ const actions = {
 
             if (data && data.trade) {
                 data = data.trade || [];
+            } else {
+                data = data || [];
+                data.reverse();
             }
 
             commit('exSetLatestTxList', data);

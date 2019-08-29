@@ -55,7 +55,7 @@
             'red': orderType === 'sell',
             'green': orderType === 'buy',
             'gray': isLoading || amountErr || priceErr || quantityErr || activeTxPairIsClose
-        }" @click="_clickBtn">{{ $t(`trade.${orderType}.title`, { token: ftokenShow }) }}</div>
+        }" @click="toSubmit">{{ $t(`trade.${orderType}.title`, { token: ftokenShow }) }}</div>
     </div>
 </template>
 
@@ -63,10 +63,10 @@
 import dexBalance from './dexBalance';
 import slider from 'components/slider';
 import viteInput from 'components/viteInput';
-// import sendTx from 'h5Utils/sendTx';
 import BigNumber from 'utils/bigNumber';
-import { verifyAmount, checkAmountFormat } from 'h5Utils/validations';
 import statistics from 'utils/statistics';
+import sendTx from 'h5Utils/sendTx';
+import { verifyAmount, checkAmountFormat } from 'h5Utils/validations';
 
 export default {
     components: { viteInput, slider, dexBalance },
@@ -77,10 +77,7 @@ export default {
         }
     },
     mounted() {
-        const price = this.activeTxPair && this.activeTxPair.closePrice
-            ? this.activeTxPair.closePrice
-            : '';
-        this.price = BigNumber.normalFormatNum(price, this.ttokenDigit);
+        this.initNormalFormatPrice();
     },
     data() {
         return {
@@ -103,10 +100,7 @@ export default {
                 return;
             }
 
-            const price = this.activeTxPair && this.activeTxPair.closePrice
-                ? this.activeTxPair.closePrice
-                : '';
-            this.price = BigNumber.normalFormatNum(price, this.ttokenDigit);
+            this.initNormalFormatPrice();
             this.quantity = '';
             this.amount = '';
         },
@@ -191,7 +185,7 @@ export default {
             return this.$store.getters.dexBlockingLever;
         },
         fee() {
-            return this.$store.getters.exMakerFee;
+            return this.$store.getters.exBuyOrderFee;
         },
         minAmount() {
             const minAmount = this.$store.state.exchangeLimit.minAmount;
@@ -218,14 +212,13 @@ export default {
             }
 
             const balance = this.availableBalance;
+            if (!+balance) {
+                return '0';
+            }
 
             if (this.orderType === 'buy') {
-                const basicAmount = BigNumber.toMin(this.amount || 0,
-                    this.ttokenDetail.tokenDecimals);
-                return BigNumber.dividedToNumber(basicAmount || 0,
-                    balance,
-                    3,
-                    'nofix');
+                const basicAmount = BigNumber.toMin(this.amount || 0, this.ttokenDetail.tokenDecimals);
+                return BigNumber.dividedToNumber(basicAmount || 0, balance, 3, 'nofix');
             }
 
             const basicQuantity = BigNumber.toMin(this.quantity || 0,
@@ -298,10 +291,10 @@ export default {
             return this.$store.state.exchangeActiveTx.activeTx;
         },
         ttokenDigit() {
-            return this.$store.state.exchangeTokenDecimalsLimit.quoteToken;
+            return this.$store.getters.quoteTokenDecimalsLimit;
         },
         ftokenDigit() {
-            return this.$store.state.exchangeTokenDecimalsLimit.tradeToken;
+            return this.$store.getters.tradeTokenDecimalsLimit;
         },
         closeMarket() {
             return this.$store.state.exchangeMarket.marketClosed;
@@ -396,6 +389,17 @@ export default {
 
             amount = this.getAmount(price, quantity);
             !BigNumber.isEqual(amount, this.amount) && (this.amount = amount);
+        },
+
+        initNormalFormatPrice() {
+            const price = this.activeTxPair && this.activeTxPair.closePrice
+                ? this.activeTxPair.closePrice
+                : '';
+            if (!+price) {
+                this.price = '';
+                return;
+            }
+            this.price = BigNumber.normalFormatNum(price, this.ttokenDigit);
         },
 
         // price = amount / quantity / (1+fee)
@@ -521,8 +525,9 @@ export default {
             this.quantity = '';
         },
 
-        _clickBtn() {
-            if (this.isLoading || this.activeTxPairIsClose) {
+        toSubmit() {
+            if (this.isLoading || this.activeTxPairIsClose
+                || this.amountErr || this.priceErr || this.quantityErr) {
                 return;
             }
 
@@ -552,47 +557,35 @@ export default {
             });
         },
         newOrder({ price, quantity }) {
-            console.log(price, quantity);
-            // if (this.blockingLevel === 3) {
-            //     this.$toast(this.$t('tradeCenter.blocking'));
-            //     return;
-            // }
+            if (this.blockingLevel === 3) {
+                this.$toast(this.$t('tradeCenter.blocking'));
+                return;
+            }
 
-            // const tradeToken = this.activeTxPair
-            //     ? this.activeTxPair.tradeToken
-            //     : '';
-            // const quoteToken = this.activeTxPair
-            //     ? this.activeTxPair.quoteToken
-            //     : '';
-            // const side = this.orderType === 'buy' ? 0 : 1;
+            const tradeToken = this.activeTxPair
+                ? this.activeTxPair.tradeToken
+                : '';
+            const quoteToken = this.activeTxPair
+                ? this.activeTxPair.quoteToken
+                : '';
+            const side = this.orderType === 'buy' ? 0 : 1;
 
-            // this.isLoading = true;
-            // const tokenDecimals = this.ftokenDetail.tokenDecimals;
-            // quantity = BigNumber.toMin(quantity, tokenDecimals);
+            this.isLoading = true;
+            const tokenDecimals = this.ftokenDetail.tokenDecimals;
+            quantity = BigNumber.toMin(quantity, tokenDecimals);
 
-            // sendTx({
-            //     methodName: 'dexFundNewOrder',
-            //     data: { tradeToken, quoteToken, side, price, quantity },
-            //     config: {
-            //         pow: true,
-            //         powConfig: {
-            //             isShowCancel: true,
-            //             cancel: () => {
-            //                 this.isLoading = false;
-            //             }
-            //         }
-            //     }
-            // })
-            //     .then(() => {
-            //         this.isLoading = false;
-            //         this.clearAll();
-            //         this.$toast(this.$t('trade.newOrderSuccess'));
-            //     })
-            //     .catch(err => {
-            //         console.warn(err);
-            //         this.isLoading = false;
-            //         this.$toast(this.$t('trade.newOrderFail'), err);
-            //     });
+            sendTx({
+                methodName: 'dexFundNewOrder',
+                data: { tradeToken, quoteToken, side, price, quantity }
+            }).then(() => {
+                this.isLoading = false;
+                this.clearAll();
+                // this.$toast(this.$t('trade.newOrderSuccess'));
+            }).catch(err => {
+                console.warn(err);
+                this.isLoading = false;
+                // this.$toast(this.$t('trade.newOrderFail'), err);
+            });
         }
     }
 };
@@ -628,6 +621,7 @@ $font-black: rgba(36, 39, 43, 0.8);
         border: 1px solid rgba(212, 222, 231, 1);
         box-sizing: border-box;
         flex: 1;
+        height: 40px;
         &.err {
             border: 1px solid $red;
         }
@@ -704,9 +698,9 @@ $font-black: rgba(36, 39, 43, 0.8);
 @import "~h5Assets/scss/vars.scss";
 
 .dex-input-wrapper .input-wrapper {
-    height: 100%;
     line-height: 40px;
     border: none;
+    height: 100%;
     input {
         font-family: $font;
         font-size: 16px;

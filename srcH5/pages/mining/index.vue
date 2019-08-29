@@ -1,6 +1,6 @@
 <template>
     <div class="m-d-wrapper">
-        <select-tab :tabList="tabList" defaultTab="mining"
+        <select-tab class="mining-select" :tabList="tabList" defaultTab="mining"
                     v-model="activeTab"></select-tab>
         <mining v-show="activeTab === 'mining'"></mining>
         <dividend v-show="activeTab === 'dividend'"></dividend>
@@ -24,6 +24,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.mining-select {
+    margin-top: 10px;
+}
 .m-d-wrapper {
     font-size: 12px;
 }

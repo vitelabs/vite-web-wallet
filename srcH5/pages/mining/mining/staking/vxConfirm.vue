@@ -32,14 +32,12 @@
 </template>
 
 <script>
-import confirm from 'h5Components/confirm/confirm.vue';
-import viteInput from 'components/viteInput';
-// import sendTx from 'h5Utils/sendTx';
-import bigNumber from 'utils/bigNumber';
-import statistics from 'utils/statistics';
-import { verifyAmount, verifyWithdrawAmount } from 'h5Utils/validations';
-import router from 'h5Router';
 import { constant } from '@vite/vitejs';
+import viteInput from 'components/viteInput';
+import confirm from 'h5Components/confirm/confirm.vue';
+import bigNumber from 'utils/bigNumber';
+import sendTx from 'h5Utils/sendTx';
+import { verifyAmount, verifyWithdrawAmount } from 'h5Utils/validations';
 
 const Vite_Token_Info = constant.Vite_Token_Info;
 const minLimit = 134;
@@ -136,31 +134,29 @@ export default {
             this.close && this.close();
         },
         staking() {
-            statistics.event(router.currentRoute.name, this.actionType === 1 ? 'addQuota-submit' : 'withdrawQuota-submit', this.accountAddr || '');
+            const amount = bigNumber.toMin(this.amount, Vite_Token_Info.decimals);
 
-            // const amount = bigNumber.toMin(this.amount, Vite_Token_Info.decimals);
-
-            // sendTx({
-            //     methodName: 'dexFundPledgeForVx',
-            //     data: {
-            //         amount,
-            //         actionType: this.actionType
-            //     }
-            // }).then(() => {
-            //     if (this.isAdd) {
-            //         this.$toast(this.$t('hint.request', { name: this.$t('submitStaking') }));
-            //     } else {
-            //         this.$toast(this.$t('hint.request', { name: this.$t('walletQuota.withdrawalStaking') }));
-            //     }
-            //     this._close();
-            // }).catch(err => {
-            //     console.warn(err);
-            //     if (this.isAdd) {
-            //         this.$toast(this.$t('walletQuota.pledgeFail'), err);
-            //     } else {
-            //         this.$toast(this.$t('walletQuota.canclePledgeFail'), err);
-            //     }
-            // });
+            sendTx({
+                methodName: 'dexFundPledgeForVx',
+                data: {
+                    amount,
+                    actionType: this.actionType
+                }
+            }).then(() => {
+                // if (this.isAdd) {
+                //     this.$toast(this.$t('hint.request', { name: this.$t('submitStaking') }));
+                // } else {
+                //     this.$toast(this.$t('hint.request', { name: this.$t('walletQuota.withdrawalStaking') }));
+                // }
+                this._close();
+            }).catch(err => {
+                console.warn(err);
+                // if (this.isAdd) {
+                //     this.$toast(this.$t('walletQuota.pledgeFail'), err);
+                // } else {
+                //     this.$toast(this.$t('walletQuota.canclePledgeFail'), err);
+                // }
+            });
         }
     }
 };

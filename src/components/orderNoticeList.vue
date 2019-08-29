@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="order-notice-list">
         <notice v-for="(order, index) in latestOrders" :key="index"
                 :type="order.type" :title="order.title"
                 :close="order.close" :rawData="order"
@@ -73,3 +73,9 @@ export default {
     }
 };
 </script>
+
+<style lang="scss" scoped>
+.order-notice-list {
+    transition: all 0.8s ease-in-out;
+}
+</style>
