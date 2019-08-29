@@ -1214,16 +1214,16 @@
         "tokenInfoTitle": "代币详情"
     },
     "mobileTradeCenter": {
-        "highPrice": "高",
-        "lowPrice": "低",
+        "highPrice": "High",
+        "lowPrice": "Low",
         "quantity": "24H",
-        "buyTitle": "买入",
-        "sellTitle": "卖出",
+        "buyTitle": "Buy",
+        "sellTitle": "Sell",
         "buyPrice": "买价({token})",
         "sellPrice": "卖价({token})",
         "buy": {
-            "price": "买入价",
-            "quantity": "买入量"
+            "price": "Price",
+            "quantity": "Volume"
         },
         "sell": {
             "price": "卖出价",
@@ -1250,13 +1250,13 @@
         "stakingTotalIncome": "抵押挖矿总收益({token})",
         "inviteTotalIncome": "邀请挖矿总收益({token})",
         "orderTotalIncome": "挂单挖矿总收益({token})",
-        "fee": "手续费金额",
-        "listTitle": "挖矿明细"
+        "fee": "Fees",
+        "listTitle": "Mining History"
     },
     "mobileBottomBar": {
-        "center": "交易",
-        "assets": "资产",
-        "mining": "挖矿",
-        "order": "订单"
+        "center": "Trade",
+        "assets": "Assets",
+        "mining": "Mining",
+        "order": "Order"
     }
 }
