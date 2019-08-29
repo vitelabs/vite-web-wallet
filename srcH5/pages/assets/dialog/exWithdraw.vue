@@ -35,6 +35,7 @@ export default {
             withdrawAmount: '',
             dTitle: this.$t('tradeAssets.confirmwithdraw.title'),
             dSTxt: this.$t('tradeAssets.confirmwithdraw.btn'),
+            notEnough: this.$t('tokenCard.withdraw.balanceErrMap.notEnough'),
             errTips: '',
             fetchingFee: true
         };
@@ -57,7 +58,7 @@ export default {
             this.errTips = this.testAmount(v.target.value);
         }, 500),
         testAmount(val) {
-            const errorMap = { notEnough: this.$t('tokenCard.withdraw.balanceErrMap.notEnough') };
+            const errorMap = { notEnough: this.notEnough };
             return getValidBalance({
                 balance: this.token.availableExAmount,
                 decimals: this.token.decimals,

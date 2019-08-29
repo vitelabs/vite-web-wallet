@@ -35,7 +35,8 @@ export default {
             dTitle: this.$t('tradeAssets.confirmrecharge.title'),
             dSTxt: this.$t('tradeAssets.confirmrecharge.btn'),
             errTips: '',
-            fetchingFee: true
+            fetchingFee: true,
+            notEnough: this.$t('tokenCard.withdraw.balanceErrMap.notEnough')
         };
     },
     computed: {
@@ -52,7 +53,7 @@ export default {
             this.errTips = this.testAmount(e.target.value);
         }, 500),
         testAmount(val) {
-            const errorMap = { notEnough: this.$t('tokenCard.withdraw.balanceErrMap.notEnough') };
+            const errorMap = { notEnough: this.notEnough };
             return getValidBalance({ balance: this.token.totalAmount, decimals: this.token.decimals, errorMap })(val);
         },
         all() {
@@ -72,11 +73,9 @@ export default {
                 }).then(() => {
                     // this.$toast(this.$t('tradeAssets.confirmrecharge.successToast'));
                     res();
-                    this.close();
                 }).catch(e => {
                     // this.$toast(this.$t('tradeAssets.confirmrecharge.failToast'), e);
                     rej(e);
-                    this.close();
                 });
             });
         }
