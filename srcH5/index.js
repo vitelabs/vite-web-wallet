@@ -3,7 +3,9 @@ require('es6-promise').polyfill();
 
 import 'assets/scss/mixins.scss';
 import 'utils/performance';
-import 'utils/viteClient.js';
+import 'utils/viteClient';
+import 'h5Utils/envFromURL';
+import { bridge } from 'h5Utils/bridge';
 
 import Vue from 'vue';
 
@@ -22,6 +24,10 @@ Vue.use(plugin);
 Vue.use(directives);
 
 Vue.config.devtools = process.env.NODE_ENV !== 'production';
+
+bridge['app.language'](lang => {
+    i18n.locale = lang.startsWith('zh') ? 'zh' : 'en';
+});
 
 new Vue({
     el: '#app',

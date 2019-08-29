@@ -97,10 +97,7 @@ export default {
         }
     },
     mounted() {
-        const price = this.activeTxPair && this.activeTxPair.closePrice
-            ? this.activeTxPair.closePrice
-            : '';
-        this.price = BigNumber.normalFormatNum(price, this.ttokenDigit);
+        this.initNormalFormatPrice();
     },
     data() {
         return {
@@ -123,10 +120,7 @@ export default {
                 return;
             }
 
-            const price = this.activeTxPair && this.activeTxPair.closePrice
-                ? this.activeTxPair.closePrice
-                : '';
-            this.price = BigNumber.normalFormatNum(price, this.ttokenDigit);
+            this.initNormalFormatPrice();
             this.quantity = '';
             this.amount = '';
         },
@@ -211,7 +205,7 @@ export default {
             return this.$store.getters.dexBlockingLever;
         },
         fee() {
-            return this.$store.getters.exMakerFee;
+            return this.$store.getters.exBuyOrderFee;
         },
         realPrice() {
             if (!this.rate || this.priceErr || !this.price) {
@@ -255,6 +249,9 @@ export default {
             }
 
             const balance = this.availableBalance;
+            if (!+balance) {
+                return '0';
+            }
 
             if (this.orderType === 'buy') {
                 const basicAmount = BigNumber.toMin(this.amount || 0,
@@ -335,10 +332,10 @@ export default {
             return this.$store.state.exchangeActiveTx.activeTx;
         },
         ttokenDigit() {
-            return this.$store.state.exchangeTokenDecimalsLimit.quoteToken;
+            return this.$store.getters.quoteTokenDecimalsLimit;
         },
         ftokenDigit() {
-            return this.$store.state.exchangeTokenDecimalsLimit.tradeToken;
+            return this.$store.getters.tradeTokenDecimalsLimit;
         },
         closeMarket() {
             return this.$store.state.exchangeMarket.marketClosed;
@@ -433,6 +430,17 @@ export default {
 
             amount = this.getAmount(price, quantity);
             !BigNumber.isEqual(amount, this.amount) && (this.amount = amount);
+        },
+
+        initNormalFormatPrice() {
+            const price = this.activeTxPair && this.activeTxPair.closePrice
+                ? this.activeTxPair.closePrice
+                : '';
+            if (!+price) {
+                this.price = '';
+                return;
+            }
+            this.price = BigNumber.normalFormatNum(price, this.ttokenDigit);
         },
 
         // price = amount / quantity / (1+fee)

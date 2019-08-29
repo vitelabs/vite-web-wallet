@@ -28,7 +28,7 @@ export default {
 
 .my-income {
     background: url('~h5Assets/imgs/assets.svg') no-repeat;
-    background-size: 100% 100%;
+    background-size: cover;
     border-radius: 2px;
     line-height: 16px;
     margin: 20px 0;

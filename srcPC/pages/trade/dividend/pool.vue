@@ -30,13 +30,13 @@
 </template>
 
 <script>
-import $ViteJS from 'utils/viteClient';
-import { getTokenSymbolString } from 'pcUtils/tokenParser';
+import { getTokenSymbolString } from 'utils/tokenParser';
 import viteIcon from 'assets/imgs/vite-dividend.svg';
 import ethIcon from 'assets/imgs/eth.svg';
 import usdIcon from 'assets/imgs/usd.svg';
 import btcIcon from 'assets/imgs/BTC.svg';
 import bigNumber from 'utils/bigNumber';
+import { getCurrDividendPools } from 'services/viteServer';
 
 const typeList = [ {
     name: 'VITE',
@@ -128,7 +128,7 @@ export default {
             return getTokenSymbolString(tokenInfo.tokenSymbol, tokenInfo.index);
         },
         fetchPool() {
-            $ViteJS.request('dexfund_getCurrentDividendPools').then(data => {
+            getCurrDividendPools().then(data => {
                 this.rawData = data;
                 if (!data) {
                     this.pool = {};

@@ -16,8 +16,8 @@
                 </span>
             </div>
         </div>
-        <order v-if="tab === 'buy'" orderType="buy"></order>
-        <order v-if="tab === 'sell'" orderType="sell"></order>
+        <order v-show="tab === 'buy'" orderType="buy"></order>
+        <order v-show="tab === 'sell'" orderType="sell"></order>
         <vip-confirm v-if="isShowVipConfirm" :close="hideVipConfirm"></vip-confirm>
     </div>
 </template>

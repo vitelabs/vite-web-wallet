@@ -16,7 +16,7 @@
   dependencies:
     "@babel/highlight" "^7.0.0"
 
-"@babel/core@>=7.2.2", "@babel/core@^7.1.0", "@babel/core@^7.1.6":
+"@babel/core@>=7.2.2", "@babel/core@^7.1.0", "@babel/core@^7.1.6", "@babel/core@^7.2.2":
   version "7.5.5"
   resolved "https://registry.yarnpkg.com/@babel/core/-/core-7.5.5.tgz#17b2686ef0d6bc58f963dddd68ab669755582c30"
   integrity sha512-i4qoSr2KTtce0DmkuuQBV4AuQgGPUcPXMr9L5MyYAtk06z068lQ10a4O009fe5OB/DfNV+h+qqT7ddNV8UnRjg==
@@ -2145,15 +2145,22 @@
     "@ethersproject/strings" "^5.0.0-beta.125"
     "@types/node" "^12.0.12"
 
+"@vite/bridge@^1.0.14":
+  version "1.0.14"
+  resolved "https://registry.yarnpkg.com/@vite/bridge/-/bridge-1.0.14.tgz#856536aaacb7192efea2b81c7c54809c87694784"
+  integrity sha512-tvyHWVnAqUmdCHVrQ8q9+lr70jertB9h3z/q1laHy7+iNT0nua2bPJ+I9UiJVjCmYibZ1/26XTtotuAEfu4tyA==
+  dependencies:
+    "@babel/core" "^7.2.2"
+
 "@vite/vitejs-ws@2.2.0":
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/@vite/vitejs-ws/-/vitejs-ws-2.2.0.tgz#e0faaa1cde975f0499adf3f13d949d88c5cfd630"
   integrity sha512-LZEZVLvDs2SLvtkF2xzFi/RMeLehe3vUrHmNZGNg9mNLOGaSLZnCW288c/oYDSZjVAjj37lfmFvHilmk3q5jdw==
 
-"@vite/vitejs@2.2.10":
-  version "2.2.10"
-  resolved "https://registry.npm.taobao.org/@vite/vitejs/download/@vite/vitejs-2.2.10.tgz#9ec0aa1e010fed8d938c1a8227e6104b110765ee"
-  integrity sha1-nsCqHgEP7Y2TjBqCJ+YQSxEHZe4=
+"@vite/vitejs@2.2.11-alpha.0":
+  version "2.2.11-alpha.0"
+  resolved "https://registry.yarnpkg.com/@vite/vitejs/-/vitejs-2.2.11-alpha.0.tgz#c4ae983526cdb286c3cd3b5832b54dc16d6de8bb"
+  integrity sha512-grQazIO4+9D7T/PuVUzEFCkRWnnN5iG/GtIGL/Ipd8HcbJR6FySJYOMNqBV4qMB5wdRgToZUdFXEpJvgp267TQ==
   dependencies:
     "@sisi/ed25519-blake2b-hd-key" "^1.0.2"
     "@sisi/tweetnacl-blake2b" "^1.0.0"

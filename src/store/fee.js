@@ -1,7 +1,6 @@
-import $ViteJS from 'utils/viteClient';
 import { timer } from 'utils/asyncFlow';
 import BigNumber from 'utils/bigNumber';
-import { getInviteeCode, getSvipStatus } from 'services/tradeOperation';
+import { getInviteeCode, isPledgeVip, getMarketInfo, getSvipStatus } from 'services/viteServer';
 
 const baseMakerFee = 0.002;
 const baseTakerFee = 0.002;
@@ -38,61 +37,49 @@ const actions = {
                 commit('setInviteCode');
                 return rej('no address');
             }
-            getInviteeCode(getters.activeAddr)
-                .then(code => {
-                    commit('setInviteCode', code);
-                    res(code);
-                })
-                .catch(e => {
-                    commit('setInviteCode', 0);
-                    rej(e);
-                });
+            getInviteeCode(getters.activeAddr).then(code => {
+                commit('setInviteCode', code);
+                res(code);
+            }).catch(e => {
+                commit('setInviteCode', 0);
+                rej(e);
+            });
         });
     },
     exFetchSVip({ commit, getters }) {
         new Promise((res, rej) => {
             const address = getters.activeAddr;
-            address
-        && getSvipStatus(address)
-            .then(data => {
+            address && getSvipStatus(address).then(data => {
                 if (address !== getters.activeAddr) {
                     return;
                 }
                 commit('setExchangeSVip', data);
                 res(data);
-            })
-            .catch(e => rej(e));
+            }).catch(e => rej(e));
         });
     },
     exFetchVip({ commit, getters }) {
         const address = getters.activeAddr;
-        address
-      && $ViteJS.request('dexfund_isPledgeVip', address).then(data => {
-          if (address !== getters.activeAddr) {
-              return;
-          }
-          commit('setExchangeVip', data);
-          if (vipTimer && data === nextVip) {
-              nextVip = null;
-              stopLoopVip();
-          }
-      });
+        address && isPledgeVip(address).then(data => {
+            if (address !== getters.activeAddr) {
+                return;
+            }
+            commit('setExchangeVip', data);
+            if (vipTimer && data === nextVip) {
+                nextVip = null;
+                stopLoopVip();
+            }
+        });
     },
     exFetchMarketInfo({ commit, getters }) {
         const _activeTxPair = getters.exActiveTxPair;
 
-        _activeTxPair
-      && $ViteJS
-          .request('dexfund_getMarketInfo',
-              _activeTxPair.tradeToken,
-              _activeTxPair.quoteToken)
-          .then(data => {
-              if (_activeTxPair.symbol !== getters.exActiveTxPair.symbol) {
-                  return;
-              }
-
-              commit('setExchangeMarketInfo', data);
-          });
+        _activeTxPair && getMarketInfo(_activeTxPair.tradeToken, _activeTxPair.quoteToken).then(data => {
+            if (_activeTxPair.symbol !== getters.exActiveTxPair.symbol) {
+                return;
+            }
+            commit('setExchangeMarketInfo', data);
+        });
     },
     startLoopVip({ dispatch }, nextVipStatus) {
         stopLoopVip();
@@ -112,10 +99,7 @@ const getters = {
         return state.isSVip ? 0 : baseMakerFee;
     },
     vipFee(state) {
-        return getVipFee(state.isVip);
-    },
-    svipFee(state) {
-        return getVipFee(state.isVip);
+        return state.isVip ? 0.001 : 0;
     },
     operatorMakerFee(state) {
         return getOperatorFee(state.marketInfo.makerBrokerFeeRate);
@@ -123,29 +107,23 @@ const getters = {
     operatorTakerFee(state) {
         return getOperatorFee(state.marketInfo.takerBrokerFeeRate);
     },
-    exMakerFee(state, getters) {
-        const vipFee = getVipFee(state.isVip);
-        const operatorMakerFee = getOperatorFee(state.marketInfo.makerBrokerFeeRate);
-        const preFee
-      = getters.baseMakerFee - vipFee > 0 ? getters.baseMakerFee - vipFee : 0;
-        return (
-            (preFee + Number(operatorMakerFee)) * (1 - getters.inviteFeeDiscount)
-        );
-    },
-    exTakerFee(state, getters) {
-        const vipFee = getVipFee(state.isVip);
-        const operatorTakerFee = getOperatorFee(state.marketInfo.takerBrokerFeeRate);
-        const preFee
-      = getters.baseTakerFee - vipFee > 0 ? getters.baseTakerFee - vipFee : 0;
-        return (
-            (preFee + Number(operatorTakerFee)) * (1 - getters.inviteFeeDiscount)
-        );
-    },
     inviteFeeDiscount(state) {
-        if (state.invitedCode) {
+        if (Number(state.invitedCode) > 0) {
             return 0.1;
         }
         return 0;
+    },
+    exMakerFee(state, getters) {
+        return getFee(getters.baseMakerFee, getters.operatorMakerFee, getters.vipFee, getters.inviteFeeDiscount);
+    },
+    exTakerFee(state, getters) {
+        return getFee(getters.baseTakerFee, getters.operatorTakerFee, getters.vipFee, getters.inviteFeeDiscount);
+    },
+    exBuyOrderFee(state, getters) {
+        if (BigNumber.compared(getters.exMakerFee, getters.exTakerFee) > 0) {
+            return getters.exMakerFee;
+        }
+        return getters.exTakerFee;
     }
 };
 
@@ -156,12 +134,19 @@ export default {
     getters
 };
 
-function getVipFee(isVip) {
-    return isVip ? 0.001 : 0;
+
+// (baseFee + operatorFee - vipFee) * (1 - inviteFeeDiscount)
+function getFee(baseFee, operatorFee, vipFee, inviteFeeDiscount) {
+    const preFee = baseFee - vipFee > 0 ? baseFee - vipFee : 0;
+    const allFee = preFee + operatorFee;
+    const discount = 1 - inviteFeeDiscount;
+    const fee = BigNumber.multi(allFee, discount);
+    return Number(fee);
 }
 
 function getOperatorFee(fee) {
-    return BigNumber.dividedToNumber(fee || 0, 100000, 5);
+    const operatorFee = BigNumber.dividedToNumber(fee || 0, 100000, 5);
+    return Number(operatorFee);
 }
 
 function stopLoopVip() {

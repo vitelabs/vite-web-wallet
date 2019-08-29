@@ -16,11 +16,11 @@ block content
 </template>
 
 <script>
-import { getValidBalance } from 'h5Utils/validations';
-import statistics from 'utils/statistics';
-// import sendTx from 'h5Utils/sendTx';
 import debounce from 'lodash/debounce';
 import bigNumber from 'utils/bigNumber';
+import statistics from 'utils/statistics';
+import sendTx from 'h5Utils/sendTx';
+import { getValidBalance } from 'h5Utils/validations';
 
 export default {
     props: {
@@ -76,31 +76,29 @@ export default {
         },
         inspector() {
             statistics.event('assets', 'exchange-withdraw-submit', this.defaultAddr || '');
-            return this._submit();
-        },
-        _submit() {
-            // return new Promise((res, rej) => {
-            //     if (this.testAmount(this.withdrawAmount)) return;
-            //     const amount = this.isWithdrawAll
-            //         ? this.token.availableExAmount
-            //         : bigNumber.toMin(this.withdrawAmount, this.token.decimals);
-            //     sendTx({
-            //         methodName: 'dexFundUserWithdraw',
-            //         data: {
-            //             tokenId: this.token.tokenId,
-            //             amount
-            //         }
-            //     })
-            //         .then(() => {
-            //             this.$toast(this.$t('tradeAssets.confirmwithdraw.successToast'));
-            //             res();
-            //         })
-            //         .catch(e => {
-            //             this.$toast(this.$t('tradeAssets.confirmwithdraw.failToast'),
-            //                 e);
-            //             rej(e);
-            //         });
-            // });
+
+            return new Promise((res, rej) => {
+                if (this.testAmount(this.withdrawAmount)) {
+                    return;
+                }
+
+                const amount = this.isWithdrawAll
+                    ? this.token.availableExAmount
+                    : bigNumber.toMin(this.withdrawAmount, this.token.decimals);
+                sendTx({
+                    methodName: 'dexFundUserWithdraw',
+                    data: {
+                        tokenId: this.token.tokenId,
+                        amount
+                    }
+                }).then(() => {
+                    // this.$toast(this.$t('tradeAssets.confirmwithdraw.successToast'));
+                    res();
+                }).catch(e => {
+                    // this.$toast(this.$t('tradeAssets.confirmwithdraw.failToast'), e);
+                    rej(e);
+                });
+            });
         }
     }
 };
