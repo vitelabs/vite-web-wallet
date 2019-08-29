@@ -79,7 +79,7 @@ export default {
         height: 49px;
         box-sizing: border-box;
         background: rgba(255,255,255,1);
-        // box-shadow: 0px -2px 20px 0px rgba(0,0,0,0.05);
+        box-shadow: 0px -2px 20px 0px rgba(0,0,0,0.05);
     }
 }
 
