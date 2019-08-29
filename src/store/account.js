@@ -194,6 +194,13 @@ const getters = {
                 viteLabsGateInfo.customer = 'vgateservice@gmail.com',
                 viteLabsGateInfo.customerEn = 'vgateservice@gmail.com',
                 viteLabsGateInfo.privacy = 'https://vgate.io/clause';
+            } else if (mapToken2Gate[i].gateway === 'Bi23') {
+                viteLabsGateInfo.introduction = 'Bi23团队致力于为Vite公链社区用户提供安全、快捷的跨链服务，目前已支持三种代币: ATOM（Cosmos）、IRIS（IRISnet）、XTZ（Tezos）等跨链服务',
+                viteLabsGateInfo.introductionEn = 'The gateway provided by Bi23.com , running cross-chain services for three coins: ATOM(Cosmos),IRIS(IRISnet),XTZ(Tezos)',
+                viteLabsGateInfo.offical = 'https://bi23.com';
+                viteLabsGateInfo.customer = 'support@bi23.com',
+                viteLabsGateInfo.customerEn = 'support@bi23.com',
+                viteLabsGateInfo.privacy = 'https://bi23.com/privacy.html';
             }
 
             const {
