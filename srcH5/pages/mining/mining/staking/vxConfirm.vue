@@ -153,6 +153,7 @@ export default {
                 // }
                 this._close();
             }).catch(err => {
+                alert(JSON.stringify(err));
                 console.warn(err);
                 // if (this.isAdd) {
                 //     this.$toast(this.$t('walletQuota.pledgeFail'), err);
