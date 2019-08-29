@@ -855,6 +855,8 @@
         "limitPrice": {
             "title": "Limit",
             "fee": "Fees",
+            "adviseToSVip":"成为超级VIP可免交易所基础费率",
+            "feeRuleWithSVip":"Zone Fees * Referral Discount. ATTENTION: The adjustment and discount of fees will only affect new orders, the former orders' charge remains the same.",
             "text": "This page is a preview page of transaction data. Please login to trade.",
             "validAmount": "Volume must be greater than {amount}{token}",
             "priceNotNull": "Amount cannot be empty",
