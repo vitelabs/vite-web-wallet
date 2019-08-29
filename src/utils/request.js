@@ -1,21 +1,13 @@
 import qs from 'qs';
 
 const reqTimeout = 30000;
-const afterResponseDefault = async function (xhr, path) {
-    if (+xhr.status !== 200) {
-        return Promise.reject({
-            code: xhr.status,
-            message: xhr.responseText
-        });
-    }
 
-    const { code, msg, data, error, subCode } = JSON.parse(xhr.responseText);
-    const rightCode = path.indexOf('api') === -1 ? 200 : 0;
+const afterResponseDefault = async function (xhr) {
+    const { code, msg, data, error } = JSON.parse(xhr.responseText);
 
-    if (code !== rightCode) {
+    if (code !== 200) {
         return Promise.reject({
             code,
-            subCode,
             message: msg || error
         });
     }
@@ -55,6 +47,14 @@ export default function request({
 
     return new Promise((res, rej) => {
         xhr.onload = function () {
+            if (+xhr.status !== 200) {
+                rej({
+                    status: xhr.status,
+                    message: xhr.responseText || ''
+                });
+                return;
+            }
+
             afterResponse(xhr, path).then(d => res(d), d => rej(d)).catch(e => {
                 rej({
                     status: xhr.status,

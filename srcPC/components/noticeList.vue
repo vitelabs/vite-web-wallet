@@ -18,9 +18,9 @@ export default { components: { update, orderNoticeList } };
     bottom: 0;
     right: 0;
     z-index: 101;
+    box-sizing: border-box;
     max-height: 100%;
     overflow: auto;
-    transition: all 0.8s ease-in-out;
 }
 
 @media only screen and (max-width: 500px) {

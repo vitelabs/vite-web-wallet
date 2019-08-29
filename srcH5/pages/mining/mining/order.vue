@@ -4,23 +4,25 @@
                    :title="$t('mobileMining.orderTotalIncome', {token: 'VX'})">
         </my-income>
         <list-title></list-title>
-        <list-view class="list-wrapper-view" :reachEnd="reachEnd">
+        <list-view v-show="content && content.length" class="list-wrapper-view" :reachEnd="reachEnd">
             <mining-table slot="content" :headList="headList" :contentList="content"></mining-table>
         </list-view>
+        <no-data v-show="!content || !content.length"></no-data>
     </div>
 </template>
 
 <script>
-import { getOrderMiningDetail } from 'services/tradeOperation';
+import { getOrderMiningDetail } from 'services/trade';
 import bigNumber from 'utils/bigNumber';
 import date from 'utils/date';
 import myIncome from './myIncome';
 import miningTable from './table';
 import listView from 'h5Components/listView.vue';
 import listTitle from './listTitle.vue';
+import noData from 'h5Components/noData';
 
 export default {
-    components: { myIncome, miningTable, listView, listTitle },
+    components: { noData, myIncome, miningTable, listView, listTitle },
     data() {
         return {
             isInit: false,

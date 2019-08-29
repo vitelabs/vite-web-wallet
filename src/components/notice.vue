@@ -93,4 +93,16 @@ export default {
         line-height: 28px;
     }
 }
+
+@media screen and (max-width: 500px) {
+    .notice-wrapper {
+        float: right;
+        width: 90%;
+        max-width: 360px;
+        padding: 16px;
+        .describe {
+            line-height: 22px;
+        }
+    }
+}
 </style>

@@ -11,11 +11,10 @@
 <script>
 import { insertTo } from 'h5Utils/insertTo';
 import VxConfirm from './vxConfirm.vue';
-import $ViteJS from 'utils/viteClient';
 import statistics from 'utils/statistics';
 import stakingDetail from './stakingDetail.vue';
-import { constant } from '@vite/vitejs';
 import { timer } from 'utils/asyncFlow';
+import { getAgentMiningPledgeInfo } from 'services/viteServer';
 
 let stakingInfoTimer = null;
 
@@ -78,12 +77,7 @@ export default {
             stakingInfoTimer.start();
         },
         fetchStakingInfo() {
-            $ViteJS.request('pledge_getAgentPledgeInfo', {
-                pledgeAddr: this.address,
-                agentAddr: constant.DexFund_Addr,
-                beneficialAddr: constant.DexFund_Addr,
-                bid: 1
-            }).then(data => {
+            getAgentMiningPledgeInfo(this.address).then(data => {
                 this.stakingObj = data;
             }).catch(err => {
                 console.warn(err);

@@ -1,24 +1,25 @@
-export default function (text) {
-    const textArea = document.createElement('textarea');
-    textArea.style.position = 'fixed';
-    textArea.style.top = 0;
-    textArea.style.left = 0;
-    textArea.style.width = '2em';
-    textArea.style.height = '2em';
-    textArea.style.padding = 0;
-    textArea.style.border = 'none';
-    textArea.style.outline = 'none';
-    textArea.style.boxShadow = 'none';
-    textArea.style.background = 'transparent';
-    textArea.value = text;
-    document.body.appendChild(textArea);
-    textArea.select();
+import { isIOS } from 'utils/platform';
 
-    try {
-        document.execCommand('copy');
-    } catch (err) {
-        console.warn(err);
+export default function (value) {
+    const el = document.createElement('textarea');
+    el.style.position = 'absolute';
+    el.style.top = '-9999px';
+    document.body.appendChild(el);
+    el.contentEditable = true;
+    el.readOnly = true;
+    el.value = value;
+
+    if (isIOS()) {
+        const range = document.createRange();
+        range.selectNodeContents(el);
+        const s = window.getSelection();
+        s.removeAllRanges();
+        s.addRange(range);
+        el.setSelectionRange(0, 999999); // A big number, to cover anything that could be inside the element.
+    } else {
+        el.select();
     }
 
-    document.body.removeChild(textArea);
+    document.execCommand('copy');
+    document.body.removeChild(el);
 }
