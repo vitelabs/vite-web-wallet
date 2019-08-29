@@ -31,7 +31,7 @@ export default {
                 miningIcon,
                 miningActiveIcon
             },
-            barList: [ 'center', 'assets', 'mining', 'order' ]
+            barList: [ 'assets', 'center', 'order', 'mining' ]
         };
     },
     methods: {
