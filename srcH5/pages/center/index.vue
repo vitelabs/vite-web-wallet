@@ -5,7 +5,7 @@
             <limit-price></limit-price>
             <depth></depth>
         </div>
-        <div class="white-wrapper">
+        <div class="order-white-wrapper">
             <div class="order-tab">{{ $t('tradeOpenOrders.title') }}</div>
             <openOrder></openOrder>
         </div>
@@ -21,11 +21,11 @@ import centerHead from './head/head.vue';
 export default {
     components: { depth, limitPrice, centerHead, openOrder },
     mounted() {
-        this.$store.dispatch('init');
-        this.$store.dispatch('getMarketsClosed');
-        this.$store.dispatch('exFetchLimitAmounts');
+        this.$store.dispatch('dexFetchActiveTxPair');
         this.$store.dispatch('exFetchVip');
         this.$store.dispatch('exFetchSVip');
+        this.$store.dispatch('getMarketsClosed');
+        this.$store.dispatch('exFetchLimitAmounts');
         this.$store.dispatch('startLoopDexFundeUnreceived');
     },
     destroyed() {
@@ -34,30 +34,12 @@ export default {
     computed: {
         address() {
             return this.$store.getters.activeAddr;
-        },
-        quoteTokenDetail() {
-            return this.$store.state.exchangeTokens.ttoken;
-        },
-        tradeTokenDetail() {
-            return this.$store.state.exchangeTokens.ftoken;
-        },
-        activeTxPair() {
-            return this.$store.state.exchangeActiveTxPair.activeTxPair;
         }
     },
     watch: {
         address() {
             this.$store.dispatch('exFetchVip');
             this.$store.dispatch('exFetchSVip');
-        },
-        quoteTokenDetail() {
-            this.$store.dispatch('exSetQuoteTokenDecimals');
-        },
-        tradeTokenDetail() {
-            this.$store.dispatch('exSetTradeTokenDecimals');
-        },
-        activeTxPair() {
-            this.$store.dispatch('exSetTokenDecimals');
         }
     }
 };
@@ -75,8 +57,13 @@ export default {
     background: #fff;
     margin-bottom: 16px;
 }
+.order-white-wrapper {
+    padding-top: 16px;
+    background: #fff;
+}
 .order-tab {
     margin-bottom: 10px;
+    padding: 0 24px;
     line-height: 20px;
     font-size: 14px;
     @include font-bold();

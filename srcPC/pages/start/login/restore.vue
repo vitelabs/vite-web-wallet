@@ -25,7 +25,7 @@
 
 <script>
 import { hdAddr } from '@vite/vitejs';
-import $ViteJS from 'utils/viteClient';
+import { getAccountBalance } from 'services/viteServer';
 import loading from 'components/loading.vue';
 import { saveHDAccount } from 'wallet';
 import create from './create.vue';
@@ -134,7 +134,7 @@ export default {
 
             const requests = [];
             for (let i = 0; i < num; i++) {
-                requests.push($ViteJS.getBalance(addrs[i].hexAddr));
+                requests.push(getAccountBalance(addrs[i].hexAddr));
             }
 
             const data = await Promise.all(requests);

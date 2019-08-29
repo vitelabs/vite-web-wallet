@@ -5,9 +5,10 @@
             <is-staking></is-staking>
         </my-income>
         <list-title></list-title>
-        <list-view class="list-wrapper-view" :reachEnd="reachEnd">
+        <list-view v-show="content && content.length" class="list-wrapper-view" :reachEnd="reachEnd">
             <mining-table slot="content" :headList="pledgeHeadList" :contentList="content"></mining-table>
         </list-view>
+        <no-data v-show="!content || !content.length"></no-data>
     </div>
 </template>
 
@@ -20,9 +21,10 @@ import isStaking from './isStaking';
 import miningTable from '../table';
 import listView from 'h5Components/listView.vue';
 import listTitle from '../listTitle.vue';
+import noData from 'h5Components/noData';
 
 export default {
-    components: { myIncome, isStaking, miningTable, listView, listTitle },
+    components: { noData, myIncome, isStaking, miningTable, listView, listTitle },
     data() {
         return {
             isInit: false,

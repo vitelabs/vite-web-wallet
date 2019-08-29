@@ -79,7 +79,7 @@ import viteInput from 'components/viteInput';
 import sendTx from 'pcUtils/sendTx';
 import bigNumber from 'utils/bigNumber';
 import statistics from 'utils/statistics';
-import { getTokenIcon } from 'pcUtils/tokenParser';
+import { getTokenIcon } from 'utils/tokenParser';
 import { verifyAmount } from 'pcUtils/validations';
 import { execWithValid } from 'pcUtils/execWithValid';
 

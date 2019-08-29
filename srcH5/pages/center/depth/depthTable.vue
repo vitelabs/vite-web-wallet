@@ -1,7 +1,5 @@
 <template>
     <div class="depth-table-wrapper">
-        <loading loadingType="dot" class="ex-center-loading" v-show="isLoading"></loading>
-
         <div class="__center-tb-row" :class="dataType" @click="clickRow(item, i)"
              v-for="(item, i) in depthData" :key="i">
             <span v-if="dataType === 'buy'" class="quantity">{{ formatNum(item.quantity, 'ftoken') }}</span>
@@ -16,10 +14,8 @@
 
 <script>
 import BigNumber from 'utils/bigNumber';
-import loading from 'components/loading';
 
 export default {
-    components: { loading },
     props: {
         dataType: {
             type: String,
@@ -34,9 +30,6 @@ export default {
         this.$store.dispatch('exStopDepthTimer');
     },
     computed: {
-        isLoading() {
-            return this.$store.state.exchangeDepth.isLoading;
-        },
         ttoken() {
             return this.$store.state.exchangeTokens.ttoken;
         },
@@ -52,14 +45,14 @@ export default {
             return this.$store.state.exchangeCurrentOpenOrders.list;
         },
         quoteTokenDigit() {
-            const quoteTokenDigit = this.$store.state.exchangeTokenDecimalsLimit.quoteToken;
+            const quoteTokenDigit = this.$store.getters.quoteTokenDecimalsLimit;
             if ((this.depthStep || this.depthStep === 0) && quoteTokenDigit > this.depthStep) {
                 return this.depthStep;
             }
             return quoteTokenDigit;
         },
         tradeTokenDigit() {
-            const tradeTokenDigit = this.$store.state.exchangeTokenDecimalsLimit.tradeToken;
+            const tradeTokenDigit = this.$store.getters.tradeTokenDecimalsLimit;
             if ((this.depthStep || this.depthStep === 0) && tradeTokenDigit > this.depthStep) {
                 return this.depthStep;
             }

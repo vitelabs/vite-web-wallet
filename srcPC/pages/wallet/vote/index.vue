@@ -55,11 +55,11 @@ import walletTable from 'components/table/index.vue';
 import { initPwd } from 'pcComponents/password/index.js';
 import { timer } from 'utils/asyncFlow';
 import BigNumber from 'utils/bigNumber';
-import $ViteJS from 'utils/viteClient';
 import sendTx from 'pcUtils/sendTx';
 import { execWithValid } from 'pcUtils/execWithValid';
 import openUrl from 'utils/openUrl';
 import statistics from 'utils/statistics';
+import { getCurrSBPNodeList } from 'services/viteServer';
 
 const Vite_Token_Info = constant.Vite_Token_Info;
 
@@ -253,7 +253,7 @@ export default {
             });
         },
         updateNodeData() {
-            return $ViteJS.register.getCandidateList(constant.Snapshot_Gid).then(result => {
+            return getCurrSBPNodeList().then(result => {
                 this.nodeData = result.map(v => {
                     return {
                         ...v,

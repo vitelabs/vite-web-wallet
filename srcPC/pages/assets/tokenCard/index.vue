@@ -102,7 +102,7 @@ import importantHint from '../dialog/importantHint';
 import statistics from 'utils/statistics';
 import bigNumber from 'utils/bigNumber';
 import { execWithValid } from 'pcUtils/execWithValid';
-import { getTokenSymbolString } from 'pcUtils/tokenParser';
+import { getTokenSymbolString } from 'utils/tokenParser';
 import { gateStorage } from 'pcServices/gate';
 import transaction from '../transaction';
 import Alert from '../alert.vue';

@@ -1,8 +1,8 @@
 import env from 'h5Utils/envFromURL';
-import $ViteJS from 'utils/viteClient';
 import { timer } from 'utils/asyncFlow';
 import { defaultTokenMap } from 'utils/constant';
-import { getTokenIcon } from 'h5Utils/tokenParser';
+import { getTokenIcon } from 'utils/tokenParser';
+import { getSnapshotChainHeight, getTokenInfoById } from 'services/viteServer';
 
 let heightTimer = null;
 
@@ -40,7 +40,7 @@ const actions = {
         dispatch('stopLoopHeight');
 
         heightTimer = new timer(() =>
-            $ViteJS.ledger.getSnapshotChainHeight().then(result => {
+            getSnapshotChainHeight().then(result => {
                 commit('setCurrentHeight', result);
             }), time);
         heightTimer.start();
@@ -55,7 +55,7 @@ const actions = {
         }
     },
     addTokenInfo({ commit }, tokenId) {
-        return $ViteJS.mintage.getTokenInfoById(tokenId).then(result => {
+        return getTokenInfoById(tokenId).then(result => {
             commit('addTokenInfo', result);
             return result;
         });

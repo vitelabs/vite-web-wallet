@@ -1254,5 +1254,11 @@
         "orderTotalIncome": "挂单挖矿总收益({token})",
         "fee": "手续费金额",
         "listTitle": "挖矿明细"
+    },
+    "mobileBottomBar": {
+        "center": "交易",
+        "assets": "资产",
+        "mining": "挖矿",
+        "order": "订单"
     }
 }

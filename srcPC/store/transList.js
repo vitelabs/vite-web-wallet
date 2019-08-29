@@ -1,5 +1,5 @@
 import BigNumber from 'utils/bigNumber';
-import $ViteJS from 'utils/viteClient';
+import { getAccountTxList } from 'services/viteServer';
 
 const pageCount = 50;
 let lastFetchTime = null;
@@ -31,11 +31,7 @@ const actions = {
         lastFetchTime = fetchTime;
         commit('commitSetCurrent', pageIndex);
 
-        return $ViteJS.getTxList({
-            addr: address,
-            index: pageIndex,
-            pageCount
-        }).then(data => {
+        return getAccountTxList({ address, pageIndex, pageCount }).then(data => {
             if (pageIndex !== state.currentPage
                 || fetchTime !== lastFetchTime
                 || !data) {

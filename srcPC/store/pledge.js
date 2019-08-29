@@ -1,4 +1,4 @@
-import $ViteJS from 'utils/viteClient';
+import { getAccountQuota, getAccountPledgeList } from 'services/viteServer';
 
 const pageCount = 50;
 
@@ -51,7 +51,7 @@ const actions = {
         lastFetchQuotaTime = fetchTime;
         lastAddress = address;
 
-        return $ViteJS.pledge.getPledgeQuota(address).then(result => {
+        return getAccountQuota(address).then(result => {
             if (fetchTime !== lastFetchQuotaTime
                 || !result
                 || address !== lastAddress) {
@@ -68,7 +68,7 @@ const actions = {
         lastAddress = address;
         commit('commitSetCurrent', pageIndex);
 
-        return $ViteJS.pledge.getPledgeList(address, pageIndex, pageCount).then(result => {
+        return getAccountPledgeList(address, pageIndex, pageCount).then(result => {
             if (pageIndex !== state.currentPage
                 || fetchTime !== lastFetchTime
                 || !result

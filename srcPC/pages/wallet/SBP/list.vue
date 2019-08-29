@@ -77,13 +77,13 @@ import date from 'utils/date.js';
 import ellipsisAddr from 'utils/ellipsisAddr.js';
 import BigNumber from 'utils/bigNumber';
 import sendTx from 'pcUtils/sendTx';
-import $Vite from 'utils/viteClient';
 import { constant } from 'pcUtils/store';
 import tooltips from 'components/tooltips';
 import walletTable from 'components/table/index.vue';
 import { initPwd } from 'pcComponents/password/index.js';
 import password from 'pcComponents/password/password.vue';
 import { execWithValid } from 'pcUtils/execWithValid';
+import { getSBPAvailableReward } from 'services/viteServer';
 
 const Vite_Token_Info = viteConstant.Vite_Token_Info;
 const amount = 500000;
@@ -321,7 +321,7 @@ export default {
         },
         reward: execWithValid(function (item) {
             this.totalReward = null;
-            $Vite.request('register_getAvailableReward', '00000000000000000001', item.rawData.name).then(data => {
+            getSBPAvailableReward(item.rawData.name).then(data => {
                 if (!data || data.drained || !+data.totalReward) {
                     this.$toast(this.$t('walletSBP.noReward'));
                     return;
