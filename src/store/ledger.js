@@ -3,7 +3,6 @@ import { timer } from 'utils/asyncFlow';
 import $ViteJS from 'utils/viteClient';
 import { defaultTokenMap } from 'utils/constant';
 import { tokenInfoFromGithub } from 'services/trade';
-import { getTokenIcon } from 'utils/tokenParser';
 
 const ViteId = constant.Vite_TokenId;
 const MAX_TOKEN_NUM = 100;
@@ -44,6 +43,8 @@ const mutations = {
             state.tokenMapFromGithub[t.tokenId]
         = state.tokenMapFromGithub[t.tokenId] || {};
             state.tokenMapFromGithub[t.tokenId].icon = t.icon || undefined;// 只保存icon信息
+            const res = state.allTokens.find(t1 => t1.tokenId === t.tokenId);
+            if (res)res.icon = t.icon;
         });
     }
 };
@@ -113,7 +114,7 @@ const getters = {
             map[t.tokenId] = Object.assign({},
                 t,
                 state.tokenMapFromGithub[t.tokenId] || {});
-            map[t.tokenId].icon = map[t.tokenId].icon || getTokenIcon(t.tokenId);
+            map[t.tokenId].icon = map[t.tokenId].icon;
         });
         return map;
     },
