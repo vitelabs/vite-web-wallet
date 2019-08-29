@@ -876,9 +876,9 @@
             "dexFee": "交易所基础费率：{fee}",
             "operatorFee": "运营商收取费率：{fee}",
             "vipFee": "VIP特权抵扣：{fee}",
-            "svipFee":"超级vip交易所基础费率为0",
+            "svipFee":"超级VIP：交易所基础费率为0",
             "inviteFeeDiscount":"邀请码折扣：{fee} off",
-            "feeRule":"(基础费率-VIP抵扣+运营商费率)*邀请折扣。（费率折扣及费率调整只影响新订单，此前挂单依旧执行旧费率）"
+            "feeRule":"手续费 = (基础费率-VIP抵扣+运营商费率)*邀请折扣。（费率折扣及费率调整只影响新订单，此前挂单依旧执行旧费率）"
         },
         "vipConfirm": {
             "cancelVip": "取消VIP",

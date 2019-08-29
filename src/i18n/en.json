@@ -261,7 +261,7 @@
             "totalExAmount":"Exchange Total Balance",
             "availableExAmount":"Exchange Available Balance",
             "balanceTips": "You can transfer your assets to other addresses via clicking 'Send' button",
-            "gateTips": "In this cross-chain section, you can map other tokens into Vite network. Click 'Receive' button to deposit assets to your Vite Wallet. Click 'Send' button to transfer your assets to other platforms. * Cross-chain receive/send process may charge fees, it also has its transfer limitation.",
+            "gateTips": "In this cross-chain section, you can map other tokens into Vite network. Click 'Receive' button to deposit assets to your Vite Wallet. Click 'Send' button to transfer your assets to other platforms. * Cross-chain receive/send process may charge fees, it also has its transfer limit.",
             "availableExAmountTips": "You can transfer your assets from Vite Wallet to ViteX Exchange via clicking 'Deposit' button. Click 'Withdraw' button to transfer assets from ViteX Exchange to Vite Wallet. No transaction fees caused during these processes."
         },
         "actionType": {
@@ -855,8 +855,8 @@
         "limitPrice": {
             "title": "Limit",
             "fee": "Fees",
-            "adviseToSVip":"成为超级VIP可免交易所基础费率",
-            "feeRuleWithSVip":"Zone Fees * Referral Discount. ATTENTION: The adjustment and discount of fees will only affect new orders, the former orders' charge remains the same.",
+            "adviseToSVip":"Upgrade to SVIP, enjoy zero base transaction fee",
+            "feeRuleWithSVip":"Operator Fees * Referral Discount. ATTENTION: The adjustment and discount of fees will only affect new orders, the former orders' charge remains the same.",
             "text": "This page is a preview page of transaction data. Please login to trade.",
             "validAmount": "Volume must be greater than {amount}{token}",
             "priceNotNull": "Amount cannot be empty",
@@ -868,7 +868,7 @@
             "operatorFee": "Operator Fees: {fee}",
             "vipFee": "VIP Discount: {fee}",
             "inviteFeeDiscount":"Referral Discount: {fee} off",
-            "svipFee":"超级vip交易所基础费率为0",
+            "svipFee":"SVIP: 0% base transaction fee",
             "feeRule":"(Base Transaction Fee - VIP discount + Operator Fees) * Referral Discount. ATTENTION: The adjustment and discount of fees will only affect new orders, the former orders' charge remains the same."
         },        
         "vipConfirm": {
@@ -878,12 +878,12 @@
             "cancelStakingAmount": "Retrievable Staking Amount",
             "noBalance": "Insufficient Balance",
             "openHint": "You will enjoy the privilege of 0.1% trading fee discount after becoming a VIP. The staking amount of 10,000 VITE can be manually retrieved after 30 days.",
-            "cancelHint": "You can retrieve your stake at approximately {time}. You will lose your VIP privilege after retrieving.",
+            "cancelHint": "You can retrieve your stake at approximately {time}. By then, you will lose your VIP privilege.",
             "openSuccess": "Applied Successful! VIP status will come into effect later.",
             "openFail": "Failed to apply VIP",
             "cancelSuccess": "Cancel VIP Successful",
             "cancelFail": "Cancel Failed",
-            "adviseToCancel":"由于您已成为超级VIP，平台手续费已为0，建议您取回普通VIP的抵押金额。"
+            "adviseToCancel":"There will be no base transaction fees with your current status as our SVIP, we therefore recommend you to revoke the staked VITE，which is required for general VIP members."
         },
         "svipConfirm": {
             "open":"Upgrade",
