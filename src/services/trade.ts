@@ -133,7 +133,7 @@ export async function chargeDetail({ tokenId, address }) {
     });
 }
 
-export async function tokenInfoFromGithub({ tokenSymbol, platformSymbol = 'VITE', tokenAddress } = { tokenSymbol: '', platformSymbol: 'VITE', tokenAddress: '' }) {
+export async function tokenInfoFromGithub({ tokenSymbol, platformSymbol = 'VITE', tokenAddress }:{tokenSymbol?:string,platformSymbol:string,tokenAddress?:string} = { platformSymbol: 'VITE' }) {
     return await request({
         path: `${ path }/cryptocurrency/info/query`,
         method: 'POST',
@@ -141,7 +141,7 @@ export async function tokenInfoFromGithub({ tokenSymbol, platformSymbol = 'VITE'
     });
 }
 
-export async function tokenRateFromCMC({ tokenSymbol, platformSymbol = 'VITE', tokenAddress } = { tokenSymbol: '', platformSymbol: 'VITE', tokenAddress: '' }) {
+export async function tokenRateFromCMC({ tokenSymbol, platformSymbol = 'VITE', tokenAddress }:{tokenSymbol?:string,platformSymbol:string,tokenAddress?:string} = {  platformSymbol: 'VITE' }) {
     return await request({
         path: `${ path }/cryptocurrency/rate/query`,
         method: 'POST',
