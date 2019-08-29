@@ -15,16 +15,21 @@
         <div class="depth-content-wrapper">
             <depth-table class="depth-table" dataType="sell" :depthData="depthSell"></depth-table>
             <depth-table class="depth-table" dataType="buy" :depthData="depthBuy"></depth-table>
+            <loading v-show="isLoading" loadingType="dot" class="ex-center-loading"></loading>
         </div>
     </div>
 </template>
 
 <script>
 import depthTable from './depthTable';
+import loading from 'components/loading';
 
 export default {
-    components: { depthTable },
+    components: { loading, depthTable },
     computed: {
+        isLoading() {
+            return this.$store.state.exchangeDepth.isLoading;
+        },
         depthBuy() {
             return this.$store.state.exchangeDepth.buy;
         },
@@ -64,9 +69,11 @@ export default {
     }
 
     .depth-content-wrapper {
+        position: relative;
         width: 100%;
         display: flex;
         flex-direction: row;
+        min-height: 20px;
     }
 
     .depth-table {

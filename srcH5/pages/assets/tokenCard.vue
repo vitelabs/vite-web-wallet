@@ -23,14 +23,10 @@
 </template>
 
 <script>
-import {
-    tokenInfoDialog,
-    exWithdrawDialog,
-    exChargeDialog
-} from './dialog';
-import statistics from 'utils/statistics';
+import { tokenInfoDialog, exWithdrawDialog, exChargeDialog } from './dialog';
 import bigNumber from 'utils/bigNumber';
-import { getTokenSymbolString } from 'h5Utils/tokenParser';
+import statistics from 'utils/statistics';
+import { getTokenSymbolString } from 'utils/tokenParser';
 
 export default {
     props: {

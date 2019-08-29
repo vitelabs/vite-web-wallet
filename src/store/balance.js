@@ -1,6 +1,6 @@
 import { timer } from 'utils/asyncFlow';
 import BigNumber from 'utils/bigNumber';
-import $ViteJS from 'utils/viteClient';
+import { getAccountDexBalance } from 'services/viteServer';
 
 const loopTime = 2 * 1000;
 let balanceTimer = null;
@@ -29,7 +29,7 @@ const actions = {
             }
             address = rootGetters.activeAddr;
 
-            $ViteJS.request('dexfund_getAccountFundInfo', address).then(data => {
+            getAccountDexBalance(address).then(data => {
                 // If address changed, return
                 if (rootGetters.activeAddr !== address) {
                     return;

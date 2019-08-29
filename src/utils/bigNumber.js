@@ -19,12 +19,12 @@ const normalFormat = {
 
 const normalConfig = {
     FORMAT: normalFormat,
-    ROUNDING_MODE: BigNumber.ROUND_FLOOR
+    ROUNDING_MODE: BigNumber.ROUND_DOWN
 };
 
 const groupConfig = {
     FORMAT: groupFormat,
-    ROUNDING_MODE: BigNumber.ROUND_FLOOR
+    ROUNDING_MODE: BigNumber.ROUND_DOWN
 };
 
 const ceilConfig = {

@@ -31,8 +31,7 @@
                     </div>
                 </div>
             </list-view>
-
-            <div class="no-data" v-show="!contentList || !contentList.length">{{ $t('hint.noData') }}</div>
+            <no-data v-show="!contentList || !contentList.length"></no-data>
         </div>
     </div>
 </template>
@@ -43,9 +42,10 @@ import { dividend } from 'services/trade';
 import date from 'utils/date';
 import bigNumber from 'utils/bigNumber';
 import listView from 'h5Components/listView.vue';
+import noData from 'h5Components/noData';
 
 export default {
-    components: { pool, listView },
+    components: { noData, pool, listView },
     mounted() {
         this.fetchList();
     },
