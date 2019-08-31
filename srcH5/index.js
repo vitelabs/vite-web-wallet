@@ -4,6 +4,7 @@ import eruda from 'eruda';
 eruda.init();
 
 import 'assets/scss/mixins.scss';
+import 'h5Assets/scss/mixins.scss';
 import 'utils/performance';
 import 'utils/viteClient';
 import 'h5Utils/envFromURL';
