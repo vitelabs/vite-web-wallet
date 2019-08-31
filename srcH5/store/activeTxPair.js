@@ -20,17 +20,12 @@ const mutations = {
 };
 
 const actions = {
-    dexFetchActiveTxPair({ state, dispatch, commit, rootState }, txPair) {
+    dexFetchActiveTxPair({ state, dispatch, commit, rootState }, txPair, isInit = true) {
         txPair = txPair || {
             symbol: rootState.exchangeMarket.currentSymbol,
             quoteToken: env.quoteToken,
             tradeToken: env.tradeToken
         };
-
-        const activeTxPair = state.activeTxPair;
-        if (activeTxPair && activeTxPair.symbol === txPair.symbol) {
-            return;
-        }
 
         assignPairTask && assignPairTask.stop();
         assignPairTask = null;
@@ -42,13 +37,14 @@ const actions = {
 
             const activeTxPair = data[0];
             const currActiveTxPair = state.activeTxPair;
-
             if (currActiveTxPair && activeTxPair.symbol !== currActiveTxPair.symbol) {
                 return;
             }
 
             commit('exSetActiveTxPair', activeTxPair);
-            if (!currActiveTxPair) {
+
+            if (isInit) {
+                isInit = false;
                 dispatch('exFetchActiveTokens');
                 dispatch('exFetchDepth');
                 dispatch('exFetchMarketInfo');
