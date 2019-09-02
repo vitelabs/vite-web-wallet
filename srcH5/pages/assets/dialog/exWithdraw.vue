@@ -73,6 +73,7 @@ export default {
                 this.isWithdrawAll = true;
                 this.withdrawAmount = bigNumber.toBasic(this.token.availableExAmount,
                     this.token.decimals);
+                this.errTips = '';
             }
         },
         inspector() {
