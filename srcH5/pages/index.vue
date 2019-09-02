@@ -23,12 +23,10 @@ export default {
     created() {
         bridge['wallet.currentAddress']().then(address => {
             console.log('get address', address);
-            // window.setTimeout(() => {
+
             this.isLoading = false;
             this.init();
-            // this.$store.dispatch('setAddress', 'vite_869a06b8963bd5d88a004723ad5d45f345a71c0884e2c80e88');
             this.$store.dispatch('setAddress', address);
-        // }, 5000);
         }).catch(err => {
             console.warn(err);
         });
