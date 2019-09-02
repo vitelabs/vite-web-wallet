@@ -2,11 +2,11 @@
     <div class="depth-table-wrapper">
         <div class="__center-tb-row" :class="dataType" @click="clickRow(item, i)"
              v-for="(item, i) in depthData" :key="i">
-            <span v-if="dataType === 'buy'" class="quantity">{{ formatNum(item.quantity, 'ftoken') }}</span>
+            <span v-if="dataType === 'sell'" class="quantity">{{ formatNum(item.quantity, 'ftoken') }}</span>
             <span class="price">{{ formatNum(item.price, 'ttoken') }}
                 <span class="owner" v-show="isInOpenOrders(item.price)"></span>
             </span>
-            <span v-if="dataType === 'sell'" class="quantity">{{ formatNum(item.quantity, 'ftoken') }}</span>
+            <span v-if="dataType === 'buy'" class="quantity">{{ formatNum(item.quantity, 'ftoken') }}</span>
             <span class="percent-wrapper" :class="dataType" :style="{ 'width': getWidth(item) + '%' }"></span>
         </div>
     </div>

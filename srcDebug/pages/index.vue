@@ -1,7 +1,8 @@
 <template>
     <div id="vite-wallet-app" class="trade-container">
         <div class="mock-bar top">
-            <div @click="back">back</div>
+            <span @click="back">back</span>
+            <span @click="assets">Go Assets</span>
         </div>
         <div class="trade-wrapper">
             <market v-if="!iframeSrc" :goTrade="goTrade"></market>
@@ -32,6 +33,9 @@ export default {
         },
         goTrade(txPair) {
             this.iframeSrc = `${ location.origin }/mobiledex?address=${ this.address }&lang=${ this.$i18n.locale }&symbol=${ txPair && txPair.symbol ? txPair.symbol : '' }&currency=${ this.$store.state.env.currency }`;
+        },
+        assets() {
+            this.iframeSrc = `${ location.origin }/mobiledex#/assets?address=${ this.address }&lang=${ this.$i18n.locale }&currency=${ this.$store.state.env.currency }`;
         }
     }
 };

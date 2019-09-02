@@ -1,20 +1,20 @@
 <template>
     <div class="depth-wrapper">
         <div class="__center-tb-title">
+            <span class="__center-tb-item __ellipsis depth price">{{ $t('mobileTradeCenter.buyPrice', {
+                token: quoteTokenDetail ? quoteTokenDetail.originalSymbol : ''
+            }) }}</span>
             <span class="__center-tb-item __ellipsis depth amount">{{ $t('mobileTradeCenter.sellPrice', {
                 token: quoteTokenDetail ? quoteTokenDetail.originalSymbol : ''
             }) }}</span>
             <span class="__center-tb-item left __ellipsis depth quantity">{{ $t('trade.amountTitle', {
                 amount: tradeTokenDetail ? tradeTokenDetail.originalSymbol : ''
             }) }}</span>
-            <span class="__center-tb-item __ellipsis depth price">{{ $t('mobileTradeCenter.buyPrice', {
-                token: quoteTokenDetail ? quoteTokenDetail.originalSymbol : ''
-            }) }}</span>
         </div>
 
         <div class="depth-content-wrapper">
-            <depth-table class="depth-table" dataType="sell" :depthData="depthSell"></depth-table>
             <depth-table class="depth-table" dataType="buy" :depthData="depthBuy"></depth-table>
+            <depth-table class="depth-table" dataType="sell" :depthData="depthSell"></depth-table>
             <loading v-show="isLoading" loadingType="dot" class="ex-center-loading"></loading>
         </div>
     </div>
