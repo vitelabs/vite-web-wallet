@@ -1,6 +1,6 @@
 <template>
-    <div class="confirm-container" :class="classStr">
-        <div class="confirm-wrapper">
+    <div class="confirm-container" @touchmove="isElContainer" :class="classStr">
+        <div class="confirm-wrapper" ref="container">
             <div class="title" :class="{'__ellipsis': !closeIcon}">
                 {{ title }}
                 <span v-show="closeIcon" @click="close" class="close-icon __pointer"></span>
@@ -103,6 +103,11 @@ export default {
         }
     },
     methods: {
+        isElContainer(e) {
+            if (e.target !== this.$refs.container || !this.$refs.container.contains(e.target)) {
+                e.preventDefault();
+            }
+        },
         _rightBtnClick() {
             if (this.btnUnuse || this.isLoading) {
                 return;
