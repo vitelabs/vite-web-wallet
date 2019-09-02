@@ -104,8 +104,8 @@ export default {
     },
     methods: {
         isElContainer(e) {
-            console.log(e.target, this.$refs.container);
-            if (e.target !== this.$refs.container || !this.$refs.container.contains(e.target)) {
+            const el = this.$refs.container;
+            if (e.target !== el && !el.contains(e.target)) {
                 e.preventDefault();
             }
         },
