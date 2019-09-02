@@ -11,7 +11,7 @@ block content
     .block__title {{$t(`tradeAssets.confirmrecharge.lable2`) }}
         .err {{ errTips }}
     .block__content
-        input(v-model="withdrawAmount" :placeholder="$t(`tradeAssets.confirmrecharge.placeholder`)" @input='handleUserInputAmount')
+        input(v-model="withdrawAmount" type="number" :placeholder="$t(`tradeAssets.confirmrecharge.placeholder`)" @input='handleUserInputAmount')
         .all(@click="all") {{$t('tradeAssets.all')}}
 </template>
 
