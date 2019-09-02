@@ -1,4 +1,4 @@
-div(@touchmove.stop.prevent :style="s.container")
+div(:style="s.container")
     div(:style="s.wrapper")
         div(:style="s.title") {{Title}}
             span(v-show="ShowClose" @click="close" :style="s.close")
