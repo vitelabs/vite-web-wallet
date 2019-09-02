@@ -34,7 +34,7 @@ export default {
         width: 16px;
         height: 16px;
         background: url("~h5Assets/imgs/wallet_balance.svg");
-        background-size: 100% 100%;
+        background-size: cover;
         margin-bottom: -4px;
     }
 }

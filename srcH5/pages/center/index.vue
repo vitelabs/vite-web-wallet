@@ -1,5 +1,5 @@
 <template>
-    <div class="trade-center-wrapper">
+    <div class="trade-center-wrapper __wrapper">
         <center-head></center-head>
         <div class="white-wrapper">
             <limit-price></limit-price>

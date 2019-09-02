@@ -165,7 +165,7 @@ export default {
     color: rgba(62,74,89,0.6);
     border-radius: 2px;
     background: url('~h5Assets/imgs/assets.svg') no-repeat;
-    background-size: 100% 100%;
+    background-size: cover;
     .title {
         line-height: 26px;
     }

@@ -67,7 +67,7 @@ export default {
 .account-head-wrapper {
     position: relative;
     background: url('~h5Assets/imgs/assets.svg') no-repeat;
-    background-size: 100% 100%;
+    background-size: cover;
     border-radius: 2px;
     font-size: 12px;
     box-sizing: border-box;
