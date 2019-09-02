@@ -70,10 +70,7 @@ export default {
     },
     computed: {
         transLimit() {
-            if (this.isShowFavorite) {
-                return 3;
-            }
-            return this.$store.state.exchangeMarket.categoryTransLimit[this.curentCategory];
+            return this.$store.getters.exCategoryTransLimit;
         },
         isShowFavorite() {
             return this.$store.state.exchangeMarket.isShowFavorite;
