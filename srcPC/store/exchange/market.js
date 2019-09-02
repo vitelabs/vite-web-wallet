@@ -2,6 +2,7 @@ import { baseToken, marketsClosed } from 'services/trade';
 import getQuery from 'utils/query';
 
 const quoteTokenCategory = [ 'BTC', 'ETH', 'VITE', 'USDT' ];
+const categoryTransLimit = { 'BTC': 3, 'ETH': 2, 'VITE': 1, 'USDT': 1 }; // [TODO] Merge quoteTokenCategory
 
 const query = getQuery();
 const category = query.category;
@@ -11,7 +12,6 @@ const DefaultSymbol = symbol || 'VITE_BTC-000';
 
 const state = {
     quoteTokenCategory,
-    categoryTransLimit: { 'BTC': 3, 'ETH': 2, 'VITE': 1, 'USDT': 1 }, // [TODO] Merge quoteTokenCategory
     curentCategory: DefaultCategory,
     DefaultSymbol,
     isShowFavorite: false,
@@ -66,4 +66,13 @@ const actions = {
     }
 };
 
-export default { state, mutations, actions };
+const getters = {
+    exCategoryTransLimit(state) {
+        if (state.isShowFavorite) {
+            return 3;
+        }
+        return categoryTransLimit[state.curentCategory];
+    }
+};
+
+export default { state, mutations, actions, getters };
