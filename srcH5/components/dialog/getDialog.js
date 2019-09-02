@@ -73,7 +73,7 @@ const mixin = {
                     bottom: 0,
                     right: 0,
                     left: 0,
-                    overflow: 'auto',
+                    overflow: 'hidden',
                     display: 'flex',
                     'justify-content': 'center',
                     'align-items': 'center',
@@ -84,6 +84,7 @@ const mixin = {
                     'max-width': '270px',
                     'max-height': '85%',
                     display: 'flex',
+                    overflow: 'auto',
                     'flex-direction': 'column',
                     background: '#ffffff',
                     'border-radius': '2px'
@@ -221,9 +222,9 @@ export default function (component, propsDefault = {}) {
             const appEl = document.getElementById('vite-wallet-app');
             appEl.appendChild(componentInstance.$el);
 
-            componentInstance.$el.addEventListener('touchmove', function (e) {
-                e.preventDefault();
-            }, false);
+            // componentInstance.$el.addEventListener('touchmove', function (e) {
+            //     e.preventDefault();
+            // }, false);
 
             return componentInstance.$el;
         };
