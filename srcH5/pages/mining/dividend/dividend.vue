@@ -232,9 +232,6 @@ export default {
         padding-bottom: 0;
 
         .small-amount {
-            &:nth-child(2n) {
-                text-align: right;
-            }
             width: 50%;
             white-space: nowrap;
             color: rgba(62,74,89,0.6);
