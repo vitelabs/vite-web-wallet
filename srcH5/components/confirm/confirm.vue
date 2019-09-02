@@ -1,5 +1,5 @@
 <template>
-    <div class="confirm-container" ref="container" @touchmove="isElContainer" :class="classStr">
+    <div class="confirm-container" ref="container" :class="classStr">
         <div class="confirm-wrapper">
             <div class="title" :class="{'__ellipsis': !closeIcon}">
                 {{ title }}
@@ -103,12 +103,6 @@ export default {
         }
     },
     methods: {
-        isElContainer(e) {
-            const el = this.$refs.container;
-            if (!el.contains(e.target)) {
-                e.preventDefault();
-            }
-        },
         _rightBtnClick() {
             if (this.btnUnuse || this.isLoading) {
                 return;
