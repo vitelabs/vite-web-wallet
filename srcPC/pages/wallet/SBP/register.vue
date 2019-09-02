@@ -68,7 +68,7 @@ import statistics from 'utils/statistics';
 import { execWithValid } from 'pcUtils/execWithValid';
 
 const Vite_Token_Info = constant.Vite_Token_Info;
-const amount = 500000;
+const amount = 1000000;
 
 export default {
     components: { viteInput },
