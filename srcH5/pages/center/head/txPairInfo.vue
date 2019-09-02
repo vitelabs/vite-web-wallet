@@ -231,6 +231,7 @@ export default {
             font-size: 18px;
             color: rgba(36,39,43,1);
             line-height: 22px;
+            margin-right: 4px;
         }
         &.ttoken {
             font-size: 14px;
