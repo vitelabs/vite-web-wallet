@@ -220,6 +220,11 @@ export default function (component, propsDefault = {}) {
             instance = componentInstance;
             const appEl = document.getElementById('vite-wallet-app');
             appEl.appendChild(componentInstance.$el);
+
+            componentInstance.$el.addEventListener('touchmove', function (e) {
+                e.preventDefault();
+            }, false);
+
             return componentInstance.$el;
         };
         const p = new Promise(function (resolve, reject) {
