@@ -152,8 +152,16 @@ export default {
         .symbol-wrapper {
             display: inline-block;
         }
+        .symbol {
+            &:first-child {
+                margin-right: 0;
+            }
+        }
         .mining {
             display: inline-block;
+            img {
+                margin-bottom: -2px;
+            }
         }
     }
 }

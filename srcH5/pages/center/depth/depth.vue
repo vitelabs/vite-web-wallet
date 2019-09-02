@@ -4,11 +4,11 @@
             <span class="__center-tb-item __ellipsis depth price">{{ $t('mobileTradeCenter.buyPrice', {
                 token: quoteTokenDetail ? quoteTokenDetail.originalSymbol : ''
             }) }}</span>
-            <span class="__center-tb-item __ellipsis depth amount">{{ $t('mobileTradeCenter.sellPrice', {
-                token: quoteTokenDetail ? quoteTokenDetail.originalSymbol : ''
-            }) }}</span>
             <span class="__center-tb-item left __ellipsis depth quantity">{{ $t('trade.amountTitle', {
                 amount: tradeTokenDetail ? tradeTokenDetail.originalSymbol : ''
+            }) }}</span>
+            <span class="__center-tb-item __ellipsis depth amount">{{ $t('mobileTradeCenter.sellPrice', {
+                token: quoteTokenDetail ? quoteTokenDetail.originalSymbol : ''
             }) }}</span>
         </div>
 
@@ -34,7 +34,7 @@ export default {
             return this.$store.state.exchangeDepth.buy;
         },
         depthSell() {
-            return this.$store.state.exchangeDepth.sell;
+            return this.$store.state.exchangeDepth.rawSell;
         },
         quoteTokenDetail() {
             return this.$store.state.exchangeTokens.ttoken;

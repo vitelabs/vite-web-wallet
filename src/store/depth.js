@@ -8,6 +8,7 @@ let activeTxPair = null;
 const state = {
     buy: [],
     sell: [],
+    rawSell: [],
     isLoading: false,
     depthStep: '',
     listLimit: 100
@@ -21,6 +22,8 @@ const mutations = {
     },
     exSetDepthSell(state, depthData) {
         let list = depthData || [];
+        state.rawSell = [].concat(list).splice(0, state.listLimit);
+
         list.sort((a, b) => bigNumber.compared(b.price, a.price));
         list = list.splice(0, state.listLimit);
         state.sell = list;
