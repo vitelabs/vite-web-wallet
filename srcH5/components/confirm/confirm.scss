@@ -6,7 +6,7 @@
     bottom: 0;
     right: 0;
     left: 0;
-    overflow: auto;
+    overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -49,6 +49,7 @@
     min-width: 270px;
     max-height: 85%;
     display: flex;
+    overflow: auto;
     flex-direction: column;
     border-radius: 2px;
     background: rgba(255,255,255,1);
