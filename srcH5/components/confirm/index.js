@@ -23,12 +23,7 @@ export default function ({
         click: () => {}
     }
 }) {
-    const el = document.createElement('div');
-    el.addEventListener('touchmove', function (e) {
-        e.preventDefault();
-    }, false);
-
-    let instance = new Confirm({ el });
+    let instance = new Confirm({ el: document.createElement('div') });
 
     const appEl = document.body;
     const _close = cb => {
