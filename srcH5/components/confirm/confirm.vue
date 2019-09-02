@@ -104,6 +104,7 @@ export default {
     },
     methods: {
         isElContainer(e) {
+            console.log(e.target);
             if (e.target !== this.$refs.container || !this.$refs.container.contains(e.target)) {
                 e.preventDefault();
             }
