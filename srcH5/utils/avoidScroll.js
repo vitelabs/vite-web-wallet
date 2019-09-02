@@ -18,7 +18,7 @@ const defaultConfig = {
 const config = {};
 
 const notPreventScrollElement = function (element) {
-    return config.isExtraElement(element) || isScrollElement(element, true);
+    return config.isExtraElement(element) || isScrollElement(element);
 };
 
 const isScrollElement = function (element, whileTouch) {
