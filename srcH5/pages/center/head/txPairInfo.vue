@@ -199,7 +199,8 @@ export default {
 }
 
 .t-item {
-    display: inline-block;
+    display: flex;
+    align-items: center;
     font-size: 12px;
     @include font-bold();
     color: rgba(29, 32, 36, 1);

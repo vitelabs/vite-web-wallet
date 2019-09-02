@@ -21,7 +21,7 @@
                     'down': +txPair.priceChange < 0
                 }">{{ txPair.priceChangePercent ? getPercent(txPair.priceChangePercent) : '0.00%' }}</span>
                 <span v-show="showCol === 'txNum'" class="__center-tb-item">
-                    {{ txPair.amount ? formatNum(txPair.amount, 1) : '0.0' }}
+                    {{ txPair.amount ? formatNum(txPair.amount, transLimit) : '0.0' }}
                 </span>
             </div>
         </div>
@@ -69,6 +69,12 @@ export default {
         };
     },
     computed: {
+        transLimit() {
+            if (this.isShowFavorite) {
+                return 3;
+            }
+            return this.$store.state.exchangeMarket.categoryTransLimit[this.curentCategory];
+        },
         isShowFavorite() {
             return this.$store.state.exchangeMarket.isShowFavorite;
         },

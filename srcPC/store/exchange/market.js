@@ -11,6 +11,7 @@ const DefaultSymbol = symbol || 'VITE_BTC-000';
 
 const state = {
     quoteTokenCategory,
+    categoryTransLimit: { 'BTC': 3, 'ETH': 2, 'VITE': 1, 'USDT': 1 }, // [TODO] Merge quoteTokenCategory
     curentCategory: DefaultCategory,
     DefaultSymbol,
     isShowFavorite: false,

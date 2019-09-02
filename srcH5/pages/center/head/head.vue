@@ -138,11 +138,11 @@ export default {
             @include font-bold();
             font-size: 24px;
             line-height: 28px;
-            color: $blue;
+            color: #24272b;
             margin-bottom: 6px;
         }
         .updown {
-            color: $blue;
+            color: #24272b;
             &::before {
                 display: inline-block;
                 content: ' ';

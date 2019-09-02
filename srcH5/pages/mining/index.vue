@@ -26,6 +26,15 @@ export default {
 <style lang="scss" scoped>
 .mining-select {
     margin-top: 10px;
+    /deep/.select-tab {
+        width: 80px;
+        &:first-child {
+            border-radius: 2px 0px 0px 2px;
+        }
+        &:last-child {
+            border-radius: 0px 2px 2px 0px;
+        }
+    }
 }
 .m-d-wrapper {
     font-size: 12px;

@@ -7,7 +7,7 @@ block content
     div(v-else)
         .block__title {{ $t('assets.invite.codeLable') }}
             .err(v-if="formatErr") {{$t('assets.invite.formatErr')}}
-        input.block__content(v-model="code")
+        vite-input(v-model="code")
     .block__title {{$t('assets.invite.inviteRule')}}
     .illustrate(v-for="(i,j) in $t('assets.invite.ruleItems')" :key="j")
         span(v-html="i")
@@ -19,8 +19,10 @@ block content
 import { doUntill } from 'utils/asyncFlow';
 import sendTx from 'h5Utils/sendTx';
 import { getItem } from 'h5Utils/storage';
+import viteInput from 'components/viteInput';
 
 export default {
+    components: { viteInput },
     async beforeMount() {
         try {
             await this.getInviteeCode();
@@ -113,7 +115,7 @@ export default {
     @include font-family-bold();
     color: rgba(29, 32, 36, 1);
     line-height: 16px;
-    margin-top: 20px;
+    margin: 12px 0;
     display: flex;
     justify-content: space-between;
     .err {
@@ -129,62 +131,10 @@ export default {
     }
 }
 
-.block__content {
-    position: relative;
-    height: 34px;
-    border-radius: 2px;
-    border: 1px solid rgba(212, 222, 231, 1);
-    font-size: 12px;
-    word-break: break-word;
-    width: 100%;
-    line-height: 34px;
-    box-sizing: border-box;
-    margin-top: 16px;
-    padding: 10px 15px;
-    align-items: center;
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
-
-    .all {
-        border-radius: 2px;
-        background: #007aff;
-        color: #fff;
-        cursor: pointer;
-        font-size: 12px;
-        padding: 0 6px;
-        height: 18px;
-        line-height: 18px;
-        float: right;
-        display: flex;
-        word-break: keep-all;
-    }
-    .token__title {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        img {
-            width: 20px;
-            height: 20px;
-            margin-right: 20px;
-        }
-    }
-    input {
-        width: 100%;
-    }
-    .light {
-        color: #5e6875;
-    }
-    .blue {
-        color: #007aff;
-    }
-    &.edit {
-        text-align: left;
-        background-color: rgba(176, 192, 237, 0.42);
-        border: 1px solid #d4dee7;
-        @include font-family-bold();
-    }
+input {
+    text-indent: 0;
 }
+
 .illustrate {
     font-size: 12px;
     color: #5e6875;

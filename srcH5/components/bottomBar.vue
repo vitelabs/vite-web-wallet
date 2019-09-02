@@ -13,7 +13,7 @@ import centerIcon from 'h5Assets/imgs/center_bar.svg';
 import centerActiveIcon from 'h5Assets/imgs/center_bar_active.svg';
 import orderIcon from 'h5Assets/imgs/order_bar.svg';
 import orderActiveIcon from 'h5Assets/imgs/order_bar_active.svg';
-import assetsIcon from 'h5Assets/imgs/assets_bar.svg';
+import assetsIcon from 'h5Assets/imgs/assets_bar.png';
 import assetsActiveIcon from 'h5Assets/imgs/assets_bar_active.svg';
 import miningIcon from 'h5Assets/imgs/mining_bar.svg';
 import miningActiveIcon from 'h5Assets/imgs/mining_bar_active.svg';
@@ -55,6 +55,10 @@ export default {
     .bar-item {
         text-align: center;
         flex: 1;
+        img {
+            width: 28px;
+            height: 28px;
+        }
     }
 }
 </style>
