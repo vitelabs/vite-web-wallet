@@ -1,5 +1,5 @@
 <template>
-    <div class="order-wrapper">
+    <div class="order-wrapper __wrapper">
         <!-- <select-tab :tabList="tabList" v-model="activeTab"></select-tab> -->
         <div class="content-wrapper">
             <open-order v-show="activeTab === 'openOrders'"></open-order>
@@ -25,10 +25,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.order-wrapper {
-    font-size: 12px;
-    .content-wrapper {
-        padding: 22px 0px;
-    }
+.content-wrapper {
+    padding: 22px 0px;
 }
 </style>

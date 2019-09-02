@@ -1,5 +1,5 @@
 <template>
-    <div class="m-d-wrapper">
+    <div class="m-d-wrapper __wrapper">
         <select-tab class="mining-select" :tabList="tabList" defaultTab="mining"
                     v-model="activeTab"></select-tab>
         <mining v-show="activeTab === 'mining'"></mining>

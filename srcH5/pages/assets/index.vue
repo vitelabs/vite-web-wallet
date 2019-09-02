@@ -1,5 +1,5 @@
 <template>
-    <div class="assets-container">
+    <div class="assets-container __wrapper">
         <account-head></account-head>
         <div class="token-list">
             <div class="title">{{ $t('mobileAssets.tokenListTitle') }}</div>
