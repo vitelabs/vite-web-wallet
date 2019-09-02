@@ -70,14 +70,16 @@ export default {
         top: 0;
         left: 0;
         right: 0;
-        bottom: 49px;
+        bottom: 54px;
         overflow: hidden;
     }
     .bottom-bar {
         position: absolute;
         bottom: 0;
         width: 100%;
-        height: 49px;
+        height: 54px;
+        display: flex;
+        align-items: center;
         box-sizing: border-box;
         background: rgba(255,255,255,1);
         box-shadow: 0px -2px 20px 0px rgba(0,0,0,0.05);
