@@ -32,7 +32,7 @@ export default {
 
         const code = getItem('inviteeCode');
         if (code > 0) {
-            this.code = code;
+            this.code = `${ code }`;
         }
 
         this.status = 'LOADED';
@@ -57,7 +57,7 @@ export default {
             );
         },
         formatErr() {
-            return this.code !== '' && !/\d{1,10}/.test(this.code);
+            return this.code !== '' && !/^\d{1,10}$/.test(this.code);
         },
         dBtnUnuse() {
             return this.formatErr || this.code === '';
