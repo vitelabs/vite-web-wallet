@@ -38,8 +38,6 @@ export default {
             this.init();
         }
 
-        receiveInviteDialog();
-
         bridge.subscribe('nav.RRBtnClick', () => {
             receiveInviteDialog();
         });
