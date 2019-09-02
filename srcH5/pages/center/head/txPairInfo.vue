@@ -7,12 +7,14 @@
             </div>
 
             <div class="t-item">
-                <span class="symbol" @click="_showDetail('token')">
-                    {{ ftokenDetail ? ftokenDetail.symbol : '' }}
-                </span>
-                <span class="symbol ttoken" @click="_showDetail('token')">
-                    / {{ ttokenDetail ? ttokenDetail.symbol : '' }}
-                </span>
+                <div class="symbol-wrapper">
+                    <span class="symbol" @click="_showDetail('token')">
+                        {{ ftokenDetail ? ftokenDetail.symbol : '' }}
+                    </span>
+                    <span class="symbol ttoken" @click="_showDetail('token')">
+                        / {{ ttokenDetail ? ttokenDetail.symbol : '' }}
+                    </span>
+                </div>
                 <div class="mining" v-show="isMinging">
                     <img src="~assets/imgs/mining.svg"/>
                 </div>
@@ -145,6 +147,15 @@ export default {
         border-radius: 2px;
         border: 1px solid rgba(212,222,231,1);
     }
+    .t-item {
+        display: block;
+        .symbol-wrapper {
+            display: inline-block;
+        }
+        .mining {
+            display: inline-block;
+        }
+    }
 }
 
 .tx-pair-info {
@@ -200,11 +211,17 @@ export default {
 
 .t-item {
     display: flex;
-    align-items: center;
+    flex-direction: column;
     font-size: 12px;
     @include font-bold();
     color: rgba(29, 32, 36, 1);
     line-height: 14px;
+
+    .symbol-wrapper {
+        flex: 1;
+        display: flex;
+        align-items: center;
+    }
 
     .symbol {
         position: relative;
@@ -222,6 +239,8 @@ export default {
         }
     }
     .mining {
+        flex: 1;
+        align-items: center;
         position: relative;
         img {
             width: 16px;
