@@ -1,5 +1,5 @@
 <template>
-    <div class="confirm-container" @touchmove.stop.prevent :class="classStr">
+    <div class="confirm-container" :class="classStr">
         <div class="confirm-wrapper">
             <div class="title" :class="{'__ellipsis': !closeIcon}">
                 {{ title }}
