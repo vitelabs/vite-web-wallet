@@ -18,7 +18,7 @@ const defaultConfig = {
 const config = {};
 
 const notPreventScrollElement = function (element) {
-    return config.isExtraElement(element) || isScrollElement(element);
+    return config.isExtraElement(element) || isScrollElement(element, true);
 };
 
 const isScrollElement = function (element, whileTouch) {
@@ -133,10 +133,10 @@ const api = {
         document.removeEventListener('touchstart', bindFunc.start, false);
     }
 };
+
 if (typeof module !== 'undefined') {
     module.exports = api;
 }
+
 api.config();
-
 api.bind();
-
