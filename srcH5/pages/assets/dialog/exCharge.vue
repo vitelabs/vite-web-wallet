@@ -61,6 +61,7 @@ export default {
                 && bigNumber.compared(this.token.totalAmount, '0') > 0) {
                 this.isAll = true;
                 this.withdrawAmount = bigNumber.toBasic(this.token.totalAmount, this.token.decimals);
+                this.errTips = '';
             }
         },
         inspector() {
