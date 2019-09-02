@@ -209,6 +209,7 @@ export default {
             width: 16px;
             height: 16px;
             margin-right: 2px;
+            margin-bottom: -3px;
         }
     }
     .token-amount {
