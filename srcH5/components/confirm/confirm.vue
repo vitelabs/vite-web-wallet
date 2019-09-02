@@ -1,5 +1,5 @@
 <template>
-    <div class="confirm-container" ref="containerDom" :class="classStr">
+    <div class="confirm-container" @touchmove.stop.prevent :class="classStr">
         <div class="confirm-wrapper">
             <div class="title" :class="{'__ellipsis': !closeIcon}">
                 {{ title }}
@@ -98,9 +98,9 @@ export default {
         }
     },
     mounted() {
-        this.$refs.containerDom.addEventListener('touchmove', function (e) {
-            e.preventDefault();
-        }, false);
+        // this.$refs.containerDom.addEventListener('touchmove', function (e) {
+        //     e.preventDefault();
+        // }, false);
     },
     computed: {
         classStr() {
