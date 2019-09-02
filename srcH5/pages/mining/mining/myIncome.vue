@@ -46,7 +46,6 @@ export default {
             @include font-bold();
             line-height: 30px;
             color: rgba(62,74,89,1);
-            margin-bottom: 6px;
         }
     }
 }

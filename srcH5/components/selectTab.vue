@@ -50,6 +50,7 @@ export default {
         height: 30px;
         line-height: 30px;
         padding: 0 12px;
+        text-align: center;
         color: $blue;
         border: 1px solid $blue;
         &.active {
