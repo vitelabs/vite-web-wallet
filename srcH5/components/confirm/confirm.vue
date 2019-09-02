@@ -97,11 +97,6 @@ export default {
             default: ''
         }
     },
-    mounted() {
-        // this.$refs.containerDom.addEventListener('touchmove', function (e) {
-        //     e.preventDefault();
-        // }, false);
-    },
     computed: {
         classStr() {
             return `${ this.size } ${ this.type } ${ this.showMask ? 'gray' : '' }`;
