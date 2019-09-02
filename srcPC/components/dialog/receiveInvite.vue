@@ -54,7 +54,7 @@ export default {
             );
         },
         formatErr() {
-            return this.code !== '' && !/\d{1,10}/.test(this.code);
+            return this.code !== '' && !/^\d{1,10}$/.test(this.code);
         },
         dBtnUnuse() {
             return this.formatErr || this.code === '';
