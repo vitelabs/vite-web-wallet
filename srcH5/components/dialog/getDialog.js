@@ -223,7 +223,7 @@ export default function (component, propsDefault = {}) {
 
             componentInstance.$el.addEventListener('touchmove', function (e) {
                 const el = componentInstance.$el;
-                if (e.target !== el && !el.contains(e.target)) {
+                if (!el.contains(e.target)) {
                     e.preventDefault();
                 }
             });
