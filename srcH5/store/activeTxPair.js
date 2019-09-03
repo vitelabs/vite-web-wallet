@@ -59,11 +59,11 @@ const actions = {
                 dispatch('exFetchMarketInfo');
             }
         });
+
         assignPairTask.start(() => {
             return { symbol: txPair.symbol };
         }).catch(err => {
             console.warn(err);
-            dispatch('dexFetchActiveTxPair');
         });
     }
 };
