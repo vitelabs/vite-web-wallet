@@ -7,12 +7,7 @@ let stat = false;
 
 const defaultConfig = {
     isExtraElement(element) {
-        switch (true) {
-        case element.tagName === 'INPUT' && element.type === 'range':
-            return true;
-        default:
-            return false;
-        }
+        return element.tagName === 'INPUT' && element.type === 'range';
     }
 };
 const config = {};
@@ -21,48 +16,25 @@ const notPreventScrollElement = function (element) {
     return config.isExtraElement(element) || isScrollElement(element);
 };
 
-const isScrollElement = function (element, whileTouch) {
-    const checkFunc = whileTouch ? checkIsScrollElementWhileTouch : checkIsScrollElementWhileScroll;
+const isScrollElement = function (element) {
     while (element) {
-        if (checkFunc(element)) {
+        const style = window.getComputedStyle(element).position;
+        if (style.overflowY === 'hidden' || style.overflowX === 'hidden') {
+            return false;
+        }
+
+        if (checkIsScrollElementWhileScroll(element)) {
             return element;
         }
         element = element.parentElement;
     }
     return false;
 };
-const checkIsScrollElementWhileTouch = function (element) {
-    const style = window.getComputedStyle(element);
-    let tmp;
-    let check;
 
-    if (style.overflowY === 'scroll' && element.scrollHeight > element.clientHeight) {
-        check = true;
-        if (element.scrollTop === 0) {
-            element.scrollTop = 1;
-        }
-        tmp = element.scrollHeight - element.clientHeight;
-        if (tmp === element.scrollTop) {
-            element.scrollTop = tmp - 1;
-        }
-    }
-    if (style.overflowX === 'scroll' && element.scrollWidth > element.clientWidth) {
-        check = true;
-        if (element.scrollLeft === 0) {
-            element.scrollLeft = 1;
-        }
-        tmp = element.scrollWidth - element.clientWidth;
-        if (tmp === element.scrollLeft) {
-            element.scrollLeft = tmp - 1;
-        }
-    }
-    if (check) {
-        return element;
-    }
-};
 const checkIsScrollElementWhileScroll = function (element) {
     const style = window.getComputedStyle(element);
-
+    // console.log(style);
+    // console.log(element, element.scrollHeight, element.clientHeight, startPosX, startPosY);
     return (
         (style.overflowY === 'scroll' || style.overflowY === 'auto')
         && (
@@ -82,10 +54,13 @@ const bindFunc = {
     move(e) {
         curPosY = e.touches ? e.touches[0].screenY : e.screenY;
         curPosX = e.touches ? e.touches[0].screenX : e.screenX;
-        notPreventScrollElement(e.target) || (e.defaultPrevented || e.preventDefault());
+
+        if (notPreventScrollElement(e.target)) {
+            return;
+        }
+        e.defaultPrevented || e.preventDefault();
     },
     start(e) {
-        // const target = isScrollElement(e.target, true);
         startPosY = e.touches ? e.touches[0].screenY : e.screenY;
         startPosX = e.touches ? e.touches[0].screenX : e.screenX;
     }
@@ -134,9 +109,9 @@ const api = {
     }
 };
 
-if (typeof module !== 'undefined') {
-    module.exports = api;
-}
+// if (typeof module !== 'undefined') {
+//     module.exports = api;
+// }
 
 api.config();
 api.bind();
