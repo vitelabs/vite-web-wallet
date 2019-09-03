@@ -21,16 +21,15 @@ const notPreventScrollElement = function (element) {
 
 const isScrollElement = function (element) {
     while (element) {
+        if (element.clientHeight === document.body.clientHeight) {
+            return false;
+        }
+
         if (checkIsScrollElementWhileScroll(element)) {
             return element;
         }
 
         element = element.parentElement;
-        const style = window.getComputedStyle(element);
-        if (style.overflowY === 'hidden' || style.overflowX === 'hidden') {
-            console.log(element);
-            return false;
-        }
     }
     return false;
 };
