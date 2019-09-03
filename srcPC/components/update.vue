@@ -82,7 +82,15 @@ export default {
             if (version.title) {
                 return version.title[this.$i18n.locale] || version.title.en;
             }
-            return version.version;
+
+            // [TODO] Delete: Old Style
+            if (!version.version) {
+                return '';
+            }
+            if (typeof version.version === 'string') {
+                return version.version;
+            }
+            return version.version[this.$i18n.locale] || version.version.en;
         }
     }
 };
