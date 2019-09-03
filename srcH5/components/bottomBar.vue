@@ -9,14 +9,14 @@
 </template>
 
 <script>
-import centerIcon from 'h5Assets/imgs/center_bar.svg';
-import centerActiveIcon from 'h5Assets/imgs/center_bar_active.svg';
-import orderIcon from 'h5Assets/imgs/order_bar.svg';
-import orderActiveIcon from 'h5Assets/imgs/order_bar_active.svg';
+import centerIcon from 'h5Assets/imgs/center_bar.png';
+import centerActiveIcon from 'h5Assets/imgs/center_bar_active.png';
+import orderIcon from 'h5Assets/imgs/order_bar.png';
+import orderActiveIcon from 'h5Assets/imgs/order_bar_active.png';
 import assetsIcon from 'h5Assets/imgs/assets_bar.png';
-import assetsActiveIcon from 'h5Assets/imgs/assets_bar_active.svg';
-import miningIcon from 'h5Assets/imgs/mining_bar.svg';
-import miningActiveIcon from 'h5Assets/imgs/mining_bar_active.svg';
+import assetsActiveIcon from 'h5Assets/imgs/assets_bar_active.png';
+import miningIcon from 'h5Assets/imgs/mining_bar.png';
+import miningActiveIcon from 'h5Assets/imgs/mining_bar_active.png';
 
 export default {
     data() {
