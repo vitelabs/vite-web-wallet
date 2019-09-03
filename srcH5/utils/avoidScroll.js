@@ -13,20 +13,24 @@ const defaultConfig = {
 const config = {};
 
 const notPreventScrollElement = function (element) {
+    console.log('start', element);
+    const e = isScrollElement(element);
+    console.log('stop', e);
     return config.isExtraElement(element) || isScrollElement(element);
 };
 
 const isScrollElement = function (element) {
     while (element) {
-        const style = window.getComputedStyle(element).position;
-        if (style.overflowY === 'hidden' || style.overflowX === 'hidden') {
-            return false;
-        }
-
         if (checkIsScrollElementWhileScroll(element)) {
             return element;
         }
+
         element = element.parentElement;
+        const style = window.getComputedStyle(element);
+        if (style.overflowY === 'hidden' || style.overflowX === 'hidden') {
+            console.log(element);
+            return false;
+        }
     }
     return false;
 };
