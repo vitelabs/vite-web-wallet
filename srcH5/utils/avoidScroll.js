@@ -13,9 +13,6 @@ const defaultConfig = {
 const config = {};
 
 const notPreventScrollElement = function (element) {
-    console.log('start', element);
-    const e = isScrollElement(element);
-    console.log('stop', e);
     return config.isExtraElement(element) || isScrollElement(element);
 };
 
@@ -36,8 +33,6 @@ const isScrollElement = function (element) {
 
 const checkIsScrollElementWhileScroll = function (element) {
     const style = window.getComputedStyle(element);
-    // console.log(style);
-    // console.log(element, element.scrollHeight, element.clientHeight, startPosX, startPosY);
     return (
         (style.overflowY === 'scroll' || style.overflowY === 'auto')
         && (
@@ -68,6 +63,7 @@ const bindFunc = {
         startPosX = e.touches ? e.touches[0].screenX : e.screenX;
     }
 };
+
 const api = {
     bind() {
         if (!stat) {
@@ -111,10 +107,6 @@ const api = {
         document.removeEventListener('touchstart', bindFunc.start, false);
     }
 };
-
-// if (typeof module !== 'undefined') {
-//     module.exports = api;
-// }
 
 api.config();
 api.bind();
