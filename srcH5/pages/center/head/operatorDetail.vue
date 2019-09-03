@@ -1,5 +1,5 @@
 <template>
-    <confirm v-show="tab" class="big no-padding-confirm" :title="$t('tradeCenter.operatorTxPair.title')"
+    <confirm v-show="tab" class="big no-padding-confirm" :title="$t('tradeCenter.operatorTxPair.operatorTab')"
              :closeIcon="true" :close="close">
         <div class="head">
             <tx-pair-info class="confirm"></tx-pair-info>

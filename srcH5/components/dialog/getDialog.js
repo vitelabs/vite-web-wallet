@@ -82,7 +82,7 @@ const mixin = {
                 wrapper: {
                     width: '85%',
                     'max-height': '85%',
-                    'max-width': '270px',
+                    'max-width': '300px',
                     display: 'flex',
                     'flex-direction': 'column',
                     background: '#ffffff',
