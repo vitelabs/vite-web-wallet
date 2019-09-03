@@ -107,7 +107,7 @@ export default {
             height: 22px;
             background: url('~h5Assets/imgs/add_quota.svg');
             background-size: 100% 100%;
-            margin-bottom: -4px;
+            margin-bottom: -5px;
             margin-right: 5px;
         }
     }
