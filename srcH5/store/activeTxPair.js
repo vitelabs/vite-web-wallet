@@ -3,7 +3,10 @@ import env from 'h5Utils/envFromURL';
 
 let assignPairTask = null;
 
-const state = { activeTxPair: null };
+const state = {
+    activeTxPair: null,
+    isLoading: true
+};
 
 const mutations = {
     exSetActiveTxPair(state, txPair) {
@@ -16,6 +19,9 @@ const mutations = {
             }
         }
         isChange && (state.activeTxPair = Object.assign({}, txPair));
+    },
+    setActiveTxPairLoading(state, isLoading) {
+        state.isLoading = isLoading;
     }
 };
 
@@ -26,6 +32,7 @@ const actions = {
             quoteToken: env.quoteToken,
             tradeToken: env.tradeToken
         };
+        isInit && commit('setActiveTxPairLoading', true);
 
         assignPairTask && assignPairTask.stop();
         assignPairTask = null;
@@ -45,6 +52,7 @@ const actions = {
 
             if (isInit) {
                 isInit = false;
+                commit('setActiveTxPairLoading', false);
                 dispatch('exFetchActiveTokens');
                 dispatch('exFetchDepth');
                 dispatch('exFetchMarketInfo');
