@@ -136,7 +136,6 @@ export default {
     color: rgba(94,104,117,1);
     justify-content: space-between;
     white-space: nowrap;
-    padding: 0 4px;
     .price {
         max-width: 50%;
     }
@@ -148,11 +147,13 @@ export default {
         background-size: 100% 100%;
     }
     &.buy {
+        padding-right: 4px;
         .quantity {
             color: $green;
         }
     }
     &.sell {
+        padding-left: 4px;
         .quantity {
             color: $red;
         }
