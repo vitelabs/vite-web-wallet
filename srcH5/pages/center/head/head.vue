@@ -151,11 +151,11 @@ export default {
                 margin-right: 2px;
             }
             &.down:before {
-                background: url('~assets/imgs/ex-down-arrow.svg');
+                background: url('~h5Assets/imgs/down_arrow.png');
                 background-size: 100% 100%;
             }
             &.up:before {
-                background: url('~assets/imgs/ex-up-arrow.svg');
+                background: url('~h5Assets/imgs/up_arrow.png');
                 background-size: 100% 100%;
             }
         }
