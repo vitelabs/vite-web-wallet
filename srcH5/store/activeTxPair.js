@@ -21,6 +21,7 @@ const mutations = {
         isChange && (state.activeTxPair = Object.assign({}, txPair));
     },
     setActiveTxPairLoading(state, isLoading) {
+        console.log('isLoading');
         state.isLoading = isLoading;
     }
 };
