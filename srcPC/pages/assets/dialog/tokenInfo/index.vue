@@ -203,6 +203,8 @@ export default {
         },
         fetchTokenDetail() {
             tokenDetail({ tokenId: this.token.tokenId }).then(data => {
+                console.log(data);
+
                 this.tokenDetail = data;
                 if (data.links) {
                     for (const key in data.links) {
