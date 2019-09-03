@@ -62,6 +62,7 @@ const actions = {
             return { symbol: txPair.symbol };
         }).catch(err => {
             console.warn(err);
+            dispatch('dexFetchActiveTxPair');
         });
     }
 };
