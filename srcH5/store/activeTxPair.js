@@ -39,6 +39,7 @@ const actions = {
         assignPairTask = null;
 
         assignPairTask = new subTask('assignPair', ({ data }) => {
+            commit('setActiveTxPairLoading', false);
             if (!data || !data.length) {
                 return;
             }
@@ -53,7 +54,6 @@ const actions = {
 
             if (isInit) {
                 isInit = false;
-                commit('setActiveTxPairLoading', false);
                 dispatch('exFetchActiveTokens');
                 dispatch('exFetchDepth');
                 dispatch('exFetchMarketInfo');
