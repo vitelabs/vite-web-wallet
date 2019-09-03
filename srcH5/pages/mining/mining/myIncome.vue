@@ -27,7 +27,7 @@ export default {
 @import "~h5Assets/scss/vars.scss";
 
 .my-income {
-    background: url('~h5Assets/imgs/assets.svg') no-repeat;
+    background: url('~h5Assets/imgs/small_bg.svg') no-repeat;
     background-size: cover;
     border-radius: 2px;
     line-height: 16px;

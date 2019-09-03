@@ -7,7 +7,7 @@ block content
     div(v-else)
         .block__title {{ $t('assets.invite.codeLable') }}
             .err(v-if="formatErr") {{$t('assets.invite.formatErr')}}
-        vite-input(v-model="code")
+        vite-input.invite-input(v-model="code")
     .block__title {{$t('assets.invite.inviteRule')}}
     .illustrate(v-for="(i,j) in $t('assets.invite.ruleItems')" :key="j")
         span(v-html="i")
@@ -115,7 +115,7 @@ export default {
     @include font-family-bold();
     color: rgba(29, 32, 36, 1);
     line-height: 16px;
-    margin: 12px 0;
+    margin-top: 12px;
     display: flex;
     justify-content: space-between;
     .err {
@@ -130,6 +130,9 @@ export default {
         margin-top: 0;
     }
 }
+.invite-input {
+    margin-top: 12px;
+}
 
 input {
     text-indent: 0;
@@ -143,6 +146,7 @@ input {
     margin-top: 12px;
     position: relative;
     width: 100%;
+    box-sizing: border-box;
     .dot {
         width: 4px;
         height: 4px;

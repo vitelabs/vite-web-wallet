@@ -138,6 +138,7 @@ export default {
         align-items: center;
         flex-direction: row;
         justify-content: space-between;
+        white-space: nowrap;
         &:last-child {
             margin-bottom: 0px;
             padding-bottom: 10px;
@@ -158,8 +159,7 @@ export default {
     }
     .side_icon{
         display: inline-block;
-        width: 16px;
-        height: 16px;
+        padding: 2px;
         line-height: 16px;
         text-align: center;
         border-radius: 2px;
@@ -180,7 +180,7 @@ export default {
     }
     .trade {
         @include font-bold();
-        font-size: 18px;
+        font-size: 16px;
         color: rgba(36,39,43,1);
     }
     .time {

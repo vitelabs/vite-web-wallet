@@ -81,6 +81,7 @@ const mixin = {
                 },
                 wrapper: {
                     width: '85%',
+                    'max-height': '85%',
                     'max-width': '270px',
                     display: 'flex',
                     'flex-direction': 'column',
@@ -111,7 +112,6 @@ const mixin = {
                     'background-size': '18px 18px'
                 },
                 body: {
-                    'max-height': '65%',
                     display: 'flex',
                     'flex-direction': 'column',
                     flex: 1,

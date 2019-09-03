@@ -1,6 +1,6 @@
 <template>
     <div class="trade-mining-section">
-        <my-income :miningTotal="`${miningTotal}`"
+        <my-income class="staking-income-wrapper" :miningTotal="`${miningTotal}`"
                    :title="$t('mobileMining.stakingTotalIncome', {token: 'VX'})">
             <is-staking></is-staking>
         </my-income>
@@ -104,6 +104,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.staking-income-wrapper {
+    background: url('~h5Assets/imgs/assets.svg') no-repeat;
+}
 .list-wrapper-view {
     max-height: 450px;
 }
