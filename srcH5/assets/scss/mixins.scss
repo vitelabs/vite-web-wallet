@@ -2,6 +2,10 @@ html, body {
     overflow: hidden;
 }
 
+* { 
+    -webkit-user-select: none; 
+}
+
 .__wrapper {
     position: absolute;
     top: 0;
