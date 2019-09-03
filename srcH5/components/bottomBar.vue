@@ -51,7 +51,7 @@ export default {
     font-size: 11px;
     @include font-normal();
     color: rgba(183,201,223,1);
-    line-height: 16px;
+    line-height: 14px;
     .bar-item {
         text-align: center;
         flex: 1;
