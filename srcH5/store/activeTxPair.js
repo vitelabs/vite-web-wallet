@@ -60,6 +60,8 @@ const actions = {
         });
         assignPairTask.start(() => {
             return { symbol: txPair.symbol };
+        }).catch(err => {
+            console.warn(err);
         });
     }
 };

@@ -107,7 +107,10 @@ export class subTask extends timer {
         super.start();
 
         // Get all data from http at first if need
-        isNeedAllDataFirst && this.httpRequest();
+        if (!isNeedAllDataFirst) {
+            return Promise.resolve();
+        }
+        return this.httpRequest();
     }
 
     stop() {
@@ -122,7 +125,11 @@ export class subTask extends timer {
         const args = this.args;
         const currentKey = this.subKey;
 
-        httpServicesMap[this.key] && httpServicesMap[this.key](args).then(data => {
+        if (!httpServicesMap[this.key]) {
+            return Promise.resolve();
+        }
+
+        return httpServicesMap[this.key](args).then(data => {
             // Async request, maybe subkey already changed.
             if (this.subKey !== currentKey) {
                 return;
