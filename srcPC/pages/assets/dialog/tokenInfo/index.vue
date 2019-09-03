@@ -57,19 +57,19 @@ block originContent
     .tab-content(v-if="tabName==='gate'")
         .content__item(v-if="token.gateInfo.url")
             .label {{$t("tokenCard.gateInfo.name")}}:
-            div {{ token.gateInfo.gateway }}
+            div {{ gateInfo.name }}
         .content__item(v-if="token.gateInfo.url")
             .label {{$t("tokenCard.gateInfo.officalNet")}}:
-            div.click-able(@click="goToGateOffical") {{ token.gateInfo.offical }}
+            div.click-able(@click="openUrl(gateInfo.websiteLink)") {{ gateInfo.websiteLink }}
         .content__item(v-if="token.gateInfo.url")
             .label {{$t("tokenCard.gateInfo.introduction")}}:
             div {{ gateIntroduction }}
         .content__item(v-if="token.gateInfo.url")
             .label {{$t("tokenCard.gateInfo.customer")}}:
-            div.click-able(v-if="token.gateInfo.customer")(@click="goToGateCustomer") {{ getCustomer() }}
+            div.click-able(v-if="gateInfo.support")(@click="openUrl(gateInfo.support)") {{ gateSupport }}
         .content__item(v-if="token.gateInfo.url")
             .label {{$t("tokenCard.gateInfo.privacy")}}:
-            div.click-able(v-if="token.gateInfo.privacy")(@click="goToGatePrivacy") {{$t("tokenCard.gateInfo.clickPrivacy", {gate: token.gateInfo.gateway})}}
+            div.click-able(v-if="gatePolicy")(@click="openUrl(gatePolicy)") {{$t("tokenCard.gateInfo.clickPrivacy", {gate: gateInfo.name})}}
         .content__item(v-if="!token.gateInfo.url")
             .label {{$t("tokenCard.gateInfo.nodeDesc")}}:
             div {{ $t("tokenCard.gateInfo.nodeDescStr") }}
@@ -123,12 +123,49 @@ export default {
             if (this.token.gateInfo.url) return this.$t('tokenCard.gateInfo.selfdefined');
             return '';
         },
-        gateIntroduction() {
-            if (this.$i18n.locale === 'zh') {
-                return this.token.gateInfo.introduction;
+        gateInfo() {
+            if (!this.tokenDetail || !this.tokenDetail.gateway) {
+                return {};
             }
-            return this.token.gateInfo.introductionEn;
+            const gateway = this.tokenDetail.gateway;
+            if (gateway.links) {
+                for (const key in gateway.links) {
+                    gateway[`${ key }Link`] = gateway.links[key] && gateway.links[key].length
+                        ? gateway.links[key][0] : '';
+                }
+            }
+            return gateway;
         },
+        gateIntroduction() {
+            if (!this.gateInfo.overview) {
+                return '';
+            }
+            if (this.$i18n.locale === 'zh') {
+                return this.gateInfo.overview.zh || this.gateInfo.overview.en;
+            }
+            return this.gateInfo.overview.en;
+        },
+        gatePolicy() {
+            if (!this.gateInfo.policy) {
+                return;
+            }
+            if (this.$i18n.locale === 'zh') {
+                return this.gateInfo.policy.zh || this.gateInfo.policy.en;
+            }
+            return this.gateInfo.policy.en;
+        },
+        gateSupport() {
+            if (!this.gateInfo.support) {
+                return '';
+            }
+
+            const support = this.gateInfo.support;
+            if (this.isEmail(support)) {
+                return support;
+            }
+            return this.$t('tokenCard.gateInfo.clickCustomer');
+        },
+
         url: {
             get: function () {
                 if (this.token.type === 'OFFICAL_GATE') {
@@ -149,30 +186,13 @@ export default {
             const l = `${ getExplorerLink(this.$i18n.locale) }token/${ this.token.tokenId }`;
             openUrl(l);
         },
-        goToGateOffical() {
-            openUrl(this.token.gateInfo.offical);
-        },
-        goToGatePrivacy() {
-            openUrl(this.token.gateInfo.privacy);
-        },
         isEmail(url) {
             return /^\w+((.\w+)|(-\w+))@[A-Za-z0-9]+((.|-)[A-Za-z0-9]+).[A-Za-z0-9]+$/.test(url);
         },
-        goToGateCustomer() {
-            const customer = this.$i18n.locale === 'zh' ? this.token.gateInfo.customer : this.token.gateInfo.customerEn;
-            if (this.isEmail(customer)) {
-                openUrl(`mailto:${ customer }`);
-                return;
-            }
-            openUrl(customer);
+        openUrl(url) {
+            url && openUrl(url);
         },
-        getCustomer() {
-            const customer = this.$i18n.locale === 'zh' ? this.token.gateInfo.customer : this.token.gateInfo.customerEn;
-            if (this.isEmail(customer)) {
-                return customer;
-            }
-            return this.$t('tokenCard.gateInfo.clickCustomer');
-        },
+
         getIcon(id) {
             return getTokenIcon(id);
         },
@@ -203,8 +223,6 @@ export default {
         },
         fetchTokenDetail() {
             tokenDetail({ tokenId: this.token.tokenId }).then(data => {
-                console.log(data);
-
                 this.tokenDetail = data;
                 if (data.links) {
                     for (const key in data.links) {
@@ -221,9 +239,6 @@ export default {
             }).catch(err => {
                 console.warn(err);
             });
-        },
-        openUrl(url) {
-            url && openUrl(url);
         },
         getOverview(overview) {
             if (!overview) {

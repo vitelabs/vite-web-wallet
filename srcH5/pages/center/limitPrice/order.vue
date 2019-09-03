@@ -16,8 +16,8 @@
         <div class="dex-input-wrapper">
             <div class="ex-order-token">
                 {{ $t(`mobileTradeCenter.${orderType}.quantity`) }}
-                <dex-balance v-show="orderType === 'sell'"
-                             :balance="balance" :tokenShow="originTradeTokenSymbol"></dex-balance>
+                <dex-balance :tokenShow="orderType === 'sell' ? originTradeTokenSymbol : originQuoteTokenSymbol"
+                             :balance="balance"></dex-balance>
             </div>
             <div class="else-input-wrapper" :class="{'err': quantityErr}">
                 <span class="tips" :class="{'active':
@@ -31,10 +31,7 @@
         </div>
 
         <div class="dex-input-wrapper">
-            <div class="ex-order-token">{{ $t("trade.amount") }}
-                <dex-balance v-show="orderType === 'buy'"
-                             :balance="balance" :tokenShow="originQuoteTokenSymbol"></dex-balance>
-            </div>
+            <div class="ex-order-token">{{ $t("trade.amount") }}</div>
             <div class="else-input-wrapper" :class="{'err': amountErr}">
                 <span class="tips" :class="{'active':
                     focusInput === 'amount' && amountErr
