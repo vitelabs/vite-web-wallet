@@ -1,13 +1,8 @@
 import sendTx from 'pcUtils/sendTx';
 import { constant } from '@vite/vitejs';
 import i18n from 'pcI18n';
-import { getClient } from 'utils/request';
 import viteClient from 'utils/viteClient';
-
-const version = 'v1';
-const path = `${ process.env.dexApiServer }${ version }`;
-
-const request = getClient(path);
+import { ViteXAPI } from 'services/apiServer';
 
 export function bindCode(code: number) {
     return new Promise((res, rej) => {
@@ -106,14 +101,14 @@ interface IProxyRelation {
 }
 
 export function getProxyRelation({ address }): Promise<IProxyRelation> {
-    return request({
+    return ViteXAPI({
         method: 'GET',
         path: 'relation/proxy',
         params: { address }
     });
 }
 export function getProxyGrantor({ address }): Promise<IProxyRelation> {
-    return request({
+    return ViteXAPI({
         method: 'GET',
         path: 'relation/grantor',
         params: { address }
@@ -122,5 +117,5 @@ export function getProxyGrantor({ address }): Promise<IProxyRelation> {
 
 
 export function getProxyAblePairs(): Promise<IProxyPair[]> {
-    return request({ method: 'GET', path: 'proxy/market' });
+    return ViteXAPI({ method: 'GET', path: 'proxy/market' });
 }
