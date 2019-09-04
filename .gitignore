@@ -1,7 +1,7 @@
 .DS_Store
 node_modules
 dist
-distMobile
+distH5
 static
 .eslintcache
 .idea

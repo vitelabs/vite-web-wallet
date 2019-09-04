@@ -98,7 +98,7 @@ export default {
 
             let num = 0;
             if (side) {
-                for (let i = index; i < this.depthData.length; i++) {
+                for (let i = 0; i <= index; i++) {
                     num = BigNumber.plus(num, this.depthData[i].quantity, this.ftoken.tokenDecimals);
                 }
             } else {
