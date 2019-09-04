@@ -3,6 +3,7 @@
 # Ignore built files except build/index.js
 static/*
 dist/*
+distH5/*
 routes.js
 charting_library.min.js
 charting_library/*

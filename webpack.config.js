@@ -1,9 +1,9 @@
 require('./pack/prePack/index.js');
 
-const path = require('path');
 const merge = require('webpack-merge');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
+const { mobileStaticPath } = require('./pack/config');
 const { entry, htmlWebpackPlugins } = require('./pack/webpack/getEntry');
 const baseConfig = require('./pack/webpack/base.config.js');
 const devConfig = require('./pack/webpack/dev.config.js');
@@ -27,7 +27,7 @@ if (process.env.isPC === 'true') {
 } else if (process.env.isH5 === 'true') {
     webpackConfig = merge(webpackConfig, h5Config, {
         output: {
-            path: path.resolve(__dirname, './distH5'),
+            path: mobileStaticPath,
             filename: '[name].[chunkhash].js'
         }
     });
