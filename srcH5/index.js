@@ -34,11 +34,14 @@ bridge['app.language']().then(lang => {
     i18n.locale = lang.startsWith('zh') ? 'zh' : 'en';
 });
 
-new Vue({
-    el: '#app',
-    components: { App },
-    template: '<App/>',
-    store,
-    router,
-    i18n
-});
+
+setTimeout(() => {
+    new Vue({
+        el: '#app',
+        components: { App },
+        template: '<App/>',
+        store,
+        router,
+        i18n
+    });
+}, 20000);
