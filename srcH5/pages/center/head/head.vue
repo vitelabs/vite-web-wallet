@@ -28,7 +28,7 @@
                 <div class="item">
                     <div>{{ activeTxPair && activeTxPair.highPrice ? activeTxPair.highPrice : '--' }} {{ activeTxPair ? activeTxPair.originQuoteTokenSymbol : '' }}</div>
                     <div>{{ activeTxPair && activeTxPair.lowPrice ? activeTxPair.lowPrice : '--' }} {{ activeTxPair ? activeTxPair.originQuoteTokenSymbol : '' }}</div>
-                    <div>{{ activeTxPair && activeTxPair.amount ? formatNum(activeTxPair.amount, 1) : '--' }} {{ activeTxPair ? activeTxPair.originQuoteTokenSymbol : '' }}</div>
+                    <div>{{ activeTxPair && activeTxPair.amount ? formatNum(activeTxPair.amount, 3) : '--' }} {{ activeTxPair ? activeTxPair.originQuoteTokenSymbol : '' }}</div>
                 </div>
             </div>
         </div>
