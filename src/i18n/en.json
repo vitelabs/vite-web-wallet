@@ -1209,47 +1209,47 @@
         }
     },
     "mobileAssets": {
-        "allAssets": "总资产折合({token})",
-        "tokenListTitle": "代币信息",
-        "tokenInfoTitle": "代币详情"
+        "allAssets": "Estimated Assets Value ({token})",
+        "tokenListTitle": "Tokens",
+        "tokenInfoTitle": "Token Details"
     },
     "mobileTradeCenter": {
         "highPrice": "High",
         "lowPrice": "Low",
-        "quantity": "24H",
+        "quantity": "24H Vol",
         "buyTitle": "Buy",
         "sellTitle": "Sell",
-        "buyPrice": "买价({token})",
-        "sellPrice": "卖价({token})",
+        "buyPrice": "Buy Price ({token})",
+        "sellPrice": "Sell Price ({token})",
         "buy": {
             "price": "Price",
-            "quantity": "Volume"
+            "quantity": "Amount"
         },
         "sell": {
-            "price": "卖出价",
-            "quantity": "卖出量"
+            "price": "Price",
+            "quantity": "Amount"
         },
-        "orderQuantity": "数量",
-        "orderPrice": "价格",
-        "executedQuantity": "成交",
-        "avgPrice": "均价"
+        "orderQuantity": "Amount",
+        "orderPrice": "Price",
+        "executedQuantity": "Filled",
+        "avgPrice": "Avg"
     },
     "mobileDividend": {
-        "title": "分红",
-        "poolTitle": "手续费分红池({token})",
-        "myDividendTitle": "我的分红收益总估值({token})",
-        "listTitle": "分红明细"
+        "title": "Dividends",
+        "poolTitle": "Dividend Pool ({token})",
+        "myDividendTitle": "Total Estimated Value of Dividends ({token})",
+        "listTitle": "Dividend Details"
     },
     "mobileMining": {
-        "title": "挖矿",
-        "miningTrade": "交易挖矿",
-        "miningStaking": "抵押挖矿",
-        "miningInvite": "邀请挖矿",
-        "miningOrder": "挂单挖矿",
-        "tradeTotalIncome": "交易挖矿总收益({token})",
-        "stakingTotalIncome": "抵押挖矿总收益({token})",
-        "inviteTotalIncome": "邀请挖矿总收益({token})",
-        "orderTotalIncome": "挂单挖矿总收益({token})",
+        "title": "Mining",
+        "miningTrade": "Trading as Mining",
+        "miningStaking": "Staking as Mining",
+        "miningInvite": "Referral as Mining",
+        "miningOrder": "Market-Making as Mining",
+        "tradeTotalIncome": "Trading as Mining Total Income ({token})",
+        "stakingTotalIncome": "Staking as Mining Total Income ({token})",
+        "inviteTotalIncome": "Referral as Mining Total Income ({token})",
+        "orderTotalIncome": "Market-Making as Mining Total Income ({token})",
         "fee": "Fees",
         "listTitle": "Mining History"
     },
