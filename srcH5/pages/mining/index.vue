@@ -25,6 +25,7 @@ export default {
 
 <style lang="scss" scoped>
 .mining-select {
+    text-align: center;
     margin-top: 10px;
     /deep/.select-tab {
         width: 80px;
@@ -37,6 +38,10 @@ export default {
     }
 }
 .m-d-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
     font-size: 12px;
 }
 </style>
