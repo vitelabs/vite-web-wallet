@@ -103,8 +103,8 @@ export default {
 
             lastSymbol = this.activeTxPair.symbol;
 
-            if (this.operatorInfo
-                && [ 'Vite Labs', 'VGATE' ].indexOf(this.operatorInfo.name) !== -1) {
+            if (this.operatorInfo && !this.operatorInfo.level) {
+                // && [ 'Vite Labs', 'VGATE' ].indexOf(this.operatorInfo.name) !== -1) {
                 return;
             }
 
