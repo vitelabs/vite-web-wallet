@@ -54,6 +54,7 @@ const actions = {
 
             if (isInit) {
                 isInit = false;
+                dispatch('addRateTokens', [activeTxPair.quoteToken]);
                 dispatch('exFetchActiveTokens');
                 dispatch('exFetchDepth');
                 dispatch('exFetchMarketInfo');
