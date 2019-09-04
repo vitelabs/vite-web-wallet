@@ -27,7 +27,7 @@ if (process.env.isPC === 'true') {
 } else if (process.env.isH5 === 'true') {
     webpackConfig = merge(webpackConfig, h5Config, {
         output: {
-            path: path.resolve(__dirname, './distMobile'),
+            path: path.resolve(__dirname, './distH5'),
             filename: '[name].[chunkhash].js'
         }
     });
