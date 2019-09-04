@@ -9,7 +9,7 @@ const { entry, htmlWebpackPlugins } = getEntry({
         path: path.join(H5_SRC_PATH, '/index.js'),
         title: 'ViteX',
         favicon: path.join(srcPath, 'assets/imgs/logo.png'),
-        template: path.join(H5_SRC_PATH, './index.html')
+        template: path.join(srcPath, '../index.html')
     }
 });
 

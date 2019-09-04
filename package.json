@@ -12,7 +12,7 @@
         "build:testH5": "npm run clean:H5 && NODE_ENV=test isH5=true webpack && NODE_ENV=test isH5=true node ./pack/afterPack.js",
         "dev": "NODE_ENV=dev webpack-dev-server",
         "production": "NODE_ENV=production webpack-dev-server",
-        "analyzer": "analyzer=true isPC=true webpack-dev-server",
+        "analyzer": "NODE_ENV=production analyzer=true isH5=true webpack-dev-server",
         "lint:all": "eslint --ext js,vue --fix .",
         "lint": "eslint --ext js,vue --cache --fix .",
         "stylelint": "stylelint **/*.vue --custom-syntax postcss-html --fix",
