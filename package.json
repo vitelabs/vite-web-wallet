@@ -4,7 +4,7 @@
     "description": "",
     "scripts": {
         "clean": "rm -rf ./dist",
-        "clean:H5": "rm -rf ./distMobile",
+        "clean:H5": "rm -rf ./distH5",
         "build": "npm run clean && NODE_ENV=production isPC=true webpack && NODE_ENV=test node ./pack/afterPack.js",
         "build:H5": "npm run clean:H5 && NODE_ENV=production isH5=true webpack && NODE_ENV=test isH5=true node ./pack/afterPack.js",
         "build:test": "npm run clean && NODE_ENV=test webpack && NODE_ENV=test node ./pack/afterPack.js",
