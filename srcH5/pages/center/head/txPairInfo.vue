@@ -16,7 +16,7 @@
                     </span>
                 </div>
                 <div class="mining" v-show="isMinging">
-                    <img src="~assets/imgs/mining.svg"/>
+                    <img src="~h5Assets/imgs/mining.png"/>
                 </div>
             </div>
         </div>
@@ -142,11 +142,6 @@ export default {
         padding: 0;
         color: rgba(62,74,89,1);
     }
-    .gate-img {
-        box-sizing: border-box;
-        border-radius: 2px;
-        border: 1px solid rgba(212,222,231,1);
-    }
     .t-item {
         display: block;
         .symbol-wrapper {
@@ -269,6 +264,9 @@ export default {
         width: 14px;
         height: 14px;
         margin-bottom: -3px;
+        box-sizing: border-box;
+        border-radius: 2px;
+        border: 1px solid rgba(212,222,231,1);
     }
 }
 </style>
