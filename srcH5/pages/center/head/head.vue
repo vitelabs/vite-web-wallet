@@ -148,7 +148,7 @@ export default {
                 content: ' ';
                 width: 10px;
                 height: 10px;
-                margin-right: 2px;
+                margin-right: 3px;
             }
             &.down:before {
                 background: url('~h5Assets/imgs/down_arrow.png');

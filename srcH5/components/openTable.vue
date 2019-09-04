@@ -121,9 +121,10 @@ export default {
 <style lang="scss" scoped>
 @import "~h5Assets/scss/vars.scss";
 
-.__tb_no_data {
-    text-align: center;
-    color: rgba(62, 74, 89, 0.6);
+.__tb {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
 }
 
 .__tb_row {
