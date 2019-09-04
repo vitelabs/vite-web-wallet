@@ -52,6 +52,7 @@ const Node_Env = process.env.NODE_ENV || 'dev';
 module.exports = {
     srcPath: path.resolve(__dirname, '../src'),
     staticPath: path.join(__dirname, '../dist'),
+    mobileStaticPath: path.join(__dirname, '../distH5'),
     envVars: {
         'process.env.version': `"${ packJson.version }"`,
         'process.env.NODE_ENV': `"${ Node_Env }"`,
