@@ -1,10 +1,10 @@
 <template>
     <div class="trade-mining-wrapper">
         <tab-list :tabList="tabList" defaultTab="trade" v-model="tabName"></tab-list>
-        <tradeMinComp v-if="tabName === 'trade'"></tradeMinComp>
-        <stakingMinComp v-if="tabName === 'staking'"></stakingMinComp>
-        <inviteMinComp v-if="tabName === 'invite'"></inviteMinComp>
-        <orderMinComp v-if="tabName === 'order'"></orderMinComp>
+        <tradeMinComp class="section" v-if="tabName === 'trade'"></tradeMinComp>
+        <stakingMinComp class="section" v-if="tabName === 'staking'"></stakingMinComp>
+        <inviteMinComp class="section" v-if="tabName === 'invite'"></inviteMinComp>
+        <orderMinComp class="section" v-if="tabName === 'order'"></orderMinComp>
     </div>
 </template>
 
@@ -35,6 +35,15 @@ export default {
 @import "~assets/scss/vars.scss";
 
 .trade-mining-wrapper {
+    flex: 1;
     padding: 10px 24px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    .section {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
 }
 </style>

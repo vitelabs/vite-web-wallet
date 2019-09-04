@@ -28,7 +28,7 @@
                 <div class="item">
                     <div>{{ activeTxPair && activeTxPair.highPrice ? activeTxPair.highPrice : '--' }} {{ activeTxPair ? activeTxPair.originQuoteTokenSymbol : '' }}</div>
                     <div>{{ activeTxPair && activeTxPair.lowPrice ? activeTxPair.lowPrice : '--' }} {{ activeTxPair ? activeTxPair.originQuoteTokenSymbol : '' }}</div>
-                    <div>{{ activeTxPair && activeTxPair.amount ? formatNum(activeTxPair.amount, 1) : '--' }} {{ activeTxPair ? activeTxPair.originQuoteTokenSymbol : '' }}</div>
+                    <div>{{ activeTxPair && activeTxPair.amount ? formatNum(activeTxPair.amount, 3) : '--' }} {{ activeTxPair ? activeTxPair.originQuoteTokenSymbol : '' }}</div>
                 </div>
             </div>
         </div>
@@ -148,7 +148,7 @@ export default {
                 content: ' ';
                 width: 10px;
                 height: 10px;
-                margin-right: 2px;
+                margin-right: 3px;
             }
             &.down:before {
                 background: url('~h5Assets/imgs/down_arrow.png');

@@ -1,7 +1,9 @@
 <template>
     <div class="no-data-wrapper">
-        <img src="~assets/imgs/dexEmpty.svg"/>
-        <div>{{ $t('hint.noData') }}</div>
+        <div class="no-data">
+            <img src="~assets/imgs/dexEmpty.svg"/>
+            <div>{{ $t('hint.noData') }}</div>
+        </div>
     </div>
 </template>
 
@@ -13,6 +15,15 @@ export default {};
 @import "~h5Assets/scss/vars.scss";
 
 .no-data-wrapper {
+    flex: 1;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+}
+
+.no-data {
     width: 100%;
     padding: 55px 0;
     text-align: center;

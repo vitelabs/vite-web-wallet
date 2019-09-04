@@ -32,7 +32,13 @@ export default {
         border-radius: 2px;
     }
 }
+.order-wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
 .content-wrapper {
+    flex: 1;
     padding: 22px 0px;
 }
 </style>
