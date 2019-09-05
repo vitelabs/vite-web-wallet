@@ -700,7 +700,7 @@ $font-black: rgba(36, 39, 43, 0.8);
     height: 100%;
     input {
         font-family: $font;
-        font-size: 16px;
+        font-size: 14px;
         color: rgba(36,39,43,1);
         text-indent: 14px;
     }

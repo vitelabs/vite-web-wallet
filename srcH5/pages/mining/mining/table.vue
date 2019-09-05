@@ -1,7 +1,7 @@
 <template>
     <div class="list">
         <div v-for="(content, i) in contentList" :key="i" class="item">
-            <div v-for="(head, j) in headList" :key="j" class="item-row __ellipsis">
+            <div v-for="(head, j) in headList" :key="j" class="item-row">
                 <span v-if="head.text">{{ head.text }}</span>
                 <span v-if="head.cell !== 'amount'">{{ content[head.cell] }}</span>
                 <span v-if="head.cell === 'amount'">
@@ -43,6 +43,7 @@ export default {
     .item-row {
         margin-top: 10px;
         width: 50%;
+        white-space: nowrap;
         &:last-child {
             margin-bottom: 12px;
         }
