@@ -102,7 +102,7 @@ export default {
             return Promise.reject('no close');
         },
         copyShare() {
-            copy(`${ location.origin }/trade?inviteCode=${ this.inviteCode }`);
+            copy(`https://growth.vite.net${ process.env.NODE_ENV === 'production' ? '' : '/test' }/vitex-board?ldfjacia=${ this.inviteCode }`);
             this.$toast(this.$t('hint.copyShare'));
         },
         copy() {
