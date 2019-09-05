@@ -528,7 +528,7 @@ export default {
                 return;
             }
 
-            statistics.event(this.$route.name, `limitPrice-${ this.orderType }`, this.address || '');
+            statistics.event(`H5${ this.$route.name }`, `limitPrice-${ this.orderType }`, this.address || '');
 
             this.validPrice();
             this.validAmount();

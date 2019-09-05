@@ -96,7 +96,7 @@ export default {
     },
     methods: {
         reset() {
-            statistics.event(this.$route.name, 'reset', this.activeAddr || '');
+            statistics.event(`H5${ this.$route.name }`, 'reset', this.activeAddr || '');
 
             this.fromDate = '';
             this.toDate = '';
@@ -107,7 +107,7 @@ export default {
             this.$emit('submit', {});
         },
         submit() {
-            statistics.event(this.$route.name, 'search', this.activeAddr || '');
+            statistics.event(`H5${ this.$route.name }`, 'search', this.activeAddr || '');
 
             const fdate = this.fromDate ? new Date(this.fromDate).getTime() / 1000 : '';
             const tdate = this.toDate ? new Date(this.toDate).getTime() / 1000 : '';

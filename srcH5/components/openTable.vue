@@ -86,7 +86,7 @@ export default {
             return symbol.split('-')[0];
         },
         cancel(order) {
-            statistics.event(this.$route.name, 'openOrder-cancel', this.address || '');
+            statistics.event(`H5${ this.$route.name }`, 'openOrder-cancel', this.address || '');
 
             sendTx({
                 methodName: 'dexTradeCancelOrder',

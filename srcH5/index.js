@@ -10,6 +10,7 @@ import 'utils/performance';
 import 'utils/viteClient';
 import 'h5Utils/envFromURL';
 import { bridge } from 'h5Utils/bridge';
+import statistics from 'utils/statistics';
 
 import Vue from 'vue';
 
@@ -34,6 +35,7 @@ bridge['app.language']().then(lang => {
     i18n.locale = lang.startsWith('zh') ? 'zh' : 'en';
 });
 
+statistics.event('H5-Start');
 new Vue({
     el: '#app',
     components: { App },
