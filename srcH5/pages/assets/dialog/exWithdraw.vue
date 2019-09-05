@@ -77,7 +77,7 @@ export default {
             }
         },
         inspector() {
-            statistics.event('assets', 'exchange-withdraw-submit', this.defaultAddr || '');
+            statistics.event('H5assets', 'exchange-withdraw-submit', this.defaultAddr || '');
 
             return new Promise((res, rej) => {
                 if (this.testAmount(this.withdrawAmount)) {

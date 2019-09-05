@@ -51,7 +51,7 @@ export default {
             this.isShowVipConfirm = false;
         },
         _showVipConfirm() {
-            statistics.event(this.$route.name, `switchVIP-${ this.isVip ? 'cancel' : 'open' }`, this.address || '');
+            statistics.event(`H5${ this.$route.name }`, `switchVIP-${ this.isVip ? 'cancel' : 'open' }`, this.address || '');
             this.showVipConfirm();
         },
         showVipConfirm() {

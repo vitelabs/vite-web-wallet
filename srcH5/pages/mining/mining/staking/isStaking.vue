@@ -52,7 +52,7 @@ export default {
             this.vxConfirm = null;
         },
         _showVxConfirm(actionType) {
-            statistics.event(this.$route.name,
+            statistics.event(`H5${ this.$route.name }`,
                 actionType === 1 ? 'addQuota' : 'withdrawQuota',
                 this.address || '');
             this.showVxConfirm(actionType);

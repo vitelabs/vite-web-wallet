@@ -14,8 +14,8 @@
 
         <div class="__row">
             <div class="__row_t">{{ stakingText }}
-                <span v-show="!canOrder && !isVip" class="__err">{{ $t('trade.vipConfirm.noBalance') }}</span>
-                <span v-show="!canOrder && isVip" class="__err">{{ $t('walletQuota.list.unexpired') }}</span>
+                <div v-show="!canOrder && !isVip" class="__err">{{ $t('trade.vipConfirm.noBalance') }}</div>
+                <div v-show="!canOrder && isVip" class="__err">{{ $t('walletQuota.list.unexpired') }}</div>
             </div>
             <div class="__input_row __unuse_input">10,000 VITE</div>
         </div>
@@ -114,7 +114,7 @@ export default {
             const actionType = this.isVip ? 2 : 1;
             this.isLoading = true;
 
-            statistics.event(this.$route.name, `VIP-${ actionType === 2 ? 'cancel' : 'open' }`, this.accountAddr || '');
+            statistics.event(`H5${ this.$route.name }`, `VIP-${ actionType === 2 ? 'cancel' : 'open' }`, this.accountAddr || '');
 
             sendTx({
                 methodName: 'dexFundPledgeForVip',
@@ -152,3 +152,11 @@ export default {
     }
 };
 </script>
+
+<style lang="scss" scoped>
+.__row_t .__err {
+    float: none;
+    font-size: 12px;
+    padding-top: 3px;
+}
+</style>

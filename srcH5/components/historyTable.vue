@@ -121,7 +121,7 @@ export default {
             this.detailConfirm = false;
         },
         showDetail(order) {
-            statistics.event(this.$route.name, 'orderHistory-detail', this.address || '');
+            statistics.event(`H5${ this.$route.name }`, 'orderHistory-detail', this.address || '');
 
             orderDetail({
                 orderId: order.orderId,

@@ -61,10 +61,23 @@ export default {
         token: {
             type: Object,
             required: true
+        },
+        _tokenDetail: {
+            type: Object,
+            required: true
+        },
+        isNeedFetch: {
+            type: Boolean,
+            required: false,
+            default: true
         }
     },
     beforeMount() {
-        this.fetchTokenDetail();
+        if (this.isNeedFetch) {
+            this.fetchTokenDetail();
+        } else {
+            this.tokenDetail = this._tokenDetail;
+        }
     },
     data() {
         return {
@@ -78,6 +91,14 @@ export default {
         },
         icon() {
             return this.tokenDetail.urlIcon || this.token.icon || defaultTokenIcon;
+        }
+    },
+    watch: {
+        _tokenDetail() {
+            if (this.isNeedFetch) {
+                return;
+            }
+            this.tokenDetail = this._tokenDetail;
         }
     },
     methods: {

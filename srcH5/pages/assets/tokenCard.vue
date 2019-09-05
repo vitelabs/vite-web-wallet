@@ -1,7 +1,7 @@
 <template>
     <div class="token-card">
         <div class="token-meta" @click="showDetail">
-            <img :src="token.icon" class="icon"/>{{ getTokenSymbolString(token.tokenSymbol, token.index) }}
+            <img :src="tokenDetail.urlIcon || token.icon" class="icon"/>{{ getTokenSymbolString(token.tokenSymbol, token.index) }}
         </div>
         <div class="col">
             <span>{{ $t('tokenCard.heads.balance') }}</span>
@@ -24,8 +24,10 @@
 
 <script>
 import { tokenInfoDialog, exWithdrawDialog, exChargeDialog } from './dialog';
+import { tokenDetail } from 'services/trade';
 import bigNumber from 'utils/bigNumber';
 import statistics from 'utils/statistics';
+import { getExplorerLink } from 'utils/getLink';
 import { getTokenSymbolString } from 'utils/tokenParser';
 
 export default {
@@ -42,6 +44,12 @@ export default {
                 };
             }
         }
+    },
+    mounted() {
+        this.fetchTokenDetail();
+    },
+    data() {
+        return { tokenDetail: {} };
     },
     computed: {
         currencySymbol() {
@@ -69,20 +77,44 @@ export default {
             return getTokenSymbolString(...args);
         },
         showDetail() {
-            tokenInfoDialog({ token: this.token }).catch(e => {
+            tokenInfoDialog({
+                token: this.token,
+                _tokenDetail: this.tokenDetail,
+                isNeedFetch: false
+            }).catch(e => {
                 console.error(e);
             });
         },
         exCharge() {
-            statistics.event(this.$route.name, 'exchange-deposit', this.address || '');
+            statistics.event(`H5${ this.$route.name }`, 'exchange-deposit', this.address || '');
             exChargeDialog({ token: this.token }).catch(e => {
                 console.error(e);
             });
         },
         exWithdraw() {
-            statistics.event(this.$route.name, 'exchange-withdraw', this.address || '');
+            statistics.event(`H5${ this.$route.name }`, 'exchange-withdraw', this.address || '');
             exWithdrawDialog({ token: this.token }).catch(e => {
                 console.error(e);
+            });
+        },
+
+        fetchTokenDetail() {
+            tokenDetail({ tokenId: this.token.tokenId }).then(data => {
+                this.tokenDetail = data;
+                if (data.links) {
+                    for (const key in data.links) {
+                        this.tokenDetail[`${ key }Link`] = data.links[key] && data.links[key].length
+                            ? data.links[key][0] : '';
+                    }
+                }
+                this.tokenDetail.ttype = this.tokenDetail.gateway
+                    ? this.$t('tokenCard.tokenInfo.labels.crossType')
+                    : this.$t('tokenCard.tokenInfo.labels.originType');
+                this.tokenDetail.explorerLink = this.tokenDetail.explorerLink
+                    || (this.tokenDetail.gateway ? null : getExplorerLink(this.$i18n.locale));
+                this.tokenDetail.showTotalSupply = bigNumber.toBasic(this.tokenDetail.totalSupply, this.tokenDetail.tokenDecimals);
+            }).catch(err => {
+                console.warn(err);
             });
         }
     }

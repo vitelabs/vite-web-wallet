@@ -3,7 +3,7 @@
         <div class="bar-item" v-for="(item, i) in barList" :key="i" @click="go(item)">
             <img v-show="$route.name === item" :src="icon[`${item}ActiveIcon`]"/>
             <img v-show="$route.name !== item" :src="icon[`${item}Icon`]"/>
-            <div>{{ $t(`mobileBottomBar.${item}`) }}</div>
+            <div :class="{'active': $route.name === item}">{{ $t(`mobileBottomBar.${item}`) }}</div>
         </div>
     </div>
 </template>
@@ -55,6 +55,9 @@ export default {
     .bar-item {
         text-align: center;
         flex: 1;
+        .active {
+            color: $blue;
+        }
         img {
             width: 28px;
             height: 28px;

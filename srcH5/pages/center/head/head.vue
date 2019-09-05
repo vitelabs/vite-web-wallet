@@ -11,8 +11,7 @@
                     {{ activeTxPair && activeTxPair.closePrice ? formatNum(activeTxPair.closePrice, activeTxPair.pricePrecision) : '--' }}
                 </div>
                 <div>
-                    <span>≈{{ realPrice }}</span>
-                    <span class="updown" :class="{
+                    <span>≈{{ realPrice }}</span><span class="updown" :class="{
                         'up': +upDown > 0,
                         'down': +upDown < 0
                     }">{{ activeTxPair && activeTxPair.upDownPercent ? upDownIcon + activeTxPair.upDownPercent : '--' }}</span>
