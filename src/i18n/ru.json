@@ -88,7 +88,7 @@
         "SBPreg": "Регистрация SBP",
         "UpdateReg": "Обновить Регистрацию",
         "RevokeReg": "Отменить Регистрацию",
-        "RetrieveReward": "Получить Вознаграждение",
+        "RetrieveReward": "Claim Reward",
         "Voting": "Голосование",
         "RevokeVoting": "Отменить Голосование",
         "GetQuota": "Получить Квоту",
@@ -98,7 +98,7 @@
         "MintageBurn": "Уничтожить Токены",
         "MintageTransferOwner": "Передача права собственности",
         "MintageChangeTokenType": "Изменить тип токена",
-        "MintageCancelPledge": "Получить Токены Стейка",
+        "MintageCancelPledge": "Retrieve your stake",
         "DexFundUserDeposit": "ViteX Депозит",
         "DexFundUserWithdraw": "ViteX Вывод Средств",
         "DexFundNewOrder": "ViteX Создание Ордеров",
@@ -107,6 +107,8 @@
         "CreateContractReq": "Создать Контракт",
         "DexFundPledgeForVx": "ViteX Стейкинг",
         "DexFundPledgeForVip": "ViteX VIP",
+        "DexFundPledgeForSuperVip": "ViteX SVIP",
+        "DexFundConfigMarketsAgent": "Configure Delegations",
         "TxReq": "Перевод",
         "RewardReq": "Перевод",
         "TxRes": "Перевод",
@@ -149,12 +151,11 @@
         "bigger0": "Значение должно быть больше 0",
         "operateSuccess": "Операция Выполнена Успешно",
         "operateFail": "Операция Не Выполнена",
-        "unreceived": "Разблокируйте свой кошелек перед использованием",
-        "unLogin": "Please login before using referral code"
+        "unreceived": "Разблокируйте свой кошелек перед использованием"
     },
     "beforeUse": {
         "title": "Прочитайте перед использованием",
-        "text1": "For your funds' safety, account creation function is not currently supported on web wallet. Please download Vite App to create an account. Vite platform would like to warn you that if you visit a phishing website or lose you backup, our company cannot recover your funds.",
+        "text1": "В целях безопасности ваших средств, функция создания учетной записи временно не поддерживается в веб-кошельке. Пожалуйста, скачайте Vite Приложение, чтобы создать аккаунт. Платформа Vite предупреждает вас, что если вы посетите фишинговый веб-сайт или потеряете резервную копию, наша компания не сможет вернуть ваши средства.",
         "text2": "Обратите внимание, что на наших веб-сайтах не хранятся ваши личные ключи или сид фразы. Поэтому вам нужно будет восстановить свою учетную запись с помощью с фразы, если вы решите сменить браузер, очистить локальные файлы cookie или сменить ПК.",
         "text3": "Пожалуйста, примите надлежащие меры предосторожности, чтобы точно записать и безопасно сохранить сид фразу. Даже малейшая ошибка приведет к тому, что вы не сможете успешно восстановить свой адрес."
     },
@@ -182,9 +183,9 @@
         "restore": "Восстановить аккаунт по Сид Фразе",
         "record": "Сгенерировать Сид Фразу",
         "prompt": "Мнемоническая сид фраза - единственный способ восстановить ваш кошелек. Настоятельно рекомендуем записать фразу и хранить ее в безопасном месте, где только вы сможете получить к ней доступ.",
-        "placeholder": "Please enter your mnemonic seed phrase. Example: apple banana peach mango pear ...",
-        "empty": "Seed phrase cannot be empty",
-        "error": "Wrong seed phrase. Try again",
+        "placeholder": "Пожалуйста, введите вашу мнемоническую сид фразу",
+        "empty": "Ввод сид фразы не может быть пустым",
+        "error": "Неверная сид фраза. Попробуйте снова",
         "hint": "Пример: яблоко банан персик манго груша ...",
         "change": "Переключиться на {len} Мнемонические Слова"
     },
@@ -233,7 +234,7 @@
         }
     },
     "startCreate": {
-        "notice": "For your funds' safety, account creation function is not currently supported on web wallet. Please download Vite App to create an account.",
+        "notice": "В целях безопасности ваших средств функция создания учетной записи временно не поддерживается в веб-кошельке. Пожалуйста, скачайте Vite App, чтобы создать учётную запись.",
         "goLogin": "Войти",
         "goDex": "Перейти к ViteX"
     },
@@ -260,7 +261,7 @@
             "totalExAmount": "Общий Баланс на Бирже",
             "availableExAmount": "Доступный Баланс на Бирже",
             "balanceTips": "You can transfer your assets to other addresses via clicking 'Send' button",
-            "gateTips": "In this cross-chain section, you can map other tokens into Vite network. Click 'Receive' button to deposit assets to your Vite Wallet. Click 'Send' button to transfer your assets to other platforms. * Cross-chain receive/send process may charge fees, it also has its transfer limitation.",
+            "gateTips": "In this cross-chain section, you can map other tokens into Vite network. Click 'Receive' button to deposit assets to your Vite Wallet. Click 'Send' button to transfer your assets to other platforms. * Cross-chain receive/send process may charge fees, it also has its transfer limit.",
             "availableExAmountTips": "You can transfer your assets from Vite Wallet to ViteX Exchange via clicking 'Deposit' button. Click 'Withdraw' button to transfer assets from ViteX Exchange to Vite Wallet. No transaction fees caused during these processes."
         },
         "actionType": {
@@ -377,7 +378,7 @@
             "amountPlaceholder": "Пожалуйста, введите сумму получения"
         },
         "charge": {
-            "title": "Cross-Chain Receive Funds",
+            "title": "Кросс-Чейн Получение",
             "addrErr": "Что-то пошло не так с нодой шлюза, проверьте настройки сети",
             "addressTitle": "Адрес Получателя",
             "labelTips": "(Please use this '{labelName}' with your recipient address, otherwise your assets will lose",
@@ -390,7 +391,7 @@
             ]
         },
         "withdraw": {
-            "title": "Cross-Chain Send Funds",
+            "title": "Cross-Chain Send",
             "balanceErrMap": {
                 "notEnough": "Недостаточно Средств",
                 "overMax": "Send amount should be less than {max}",
@@ -516,7 +517,7 @@
         "fromAddr": "Адрес Вычета",
         "time": "Продолжительность Замораживания Стейкинга",
         "aboutDays": "Около {day} дней",
-        "amountPlaceholder": "Пожалуйста, введите сумму стейка, минимум {num} VITE",
+        "amountPlaceholder": "Please enter staking amount, minimum {num} VITE",
         "limitAmt": "Количество стейка не должно быть меньше {num}.",
         "addrPlaceholder": "Пожалуйста, введите адрес получателя квоты",
         "inputWithdrawAmount": "Пожалуйста, введите сумму вывода",
@@ -528,7 +529,7 @@
         "maxAmt": "Сумма снятия должна быть в [{minAmount}, {maxAmount}]",
         "cancelLimitAmt": "Сумма стейка не может быть меньше {num}",
         "withdrawalStaking": "Снятие Стейкинга Квоты",
-        "myAddr": "Current Address",
+        "myAddr": "Мне",
         "confirm": {
             "help": {
                 "t1": "Что такое Квота?",
@@ -580,7 +581,7 @@
         "title": "SBP",
         "help": {
             "title": "О SBP",
-            "text": "SBP（Snapshot Block Producer）is a node that has right to create blocks, you can register to become a SBP candidate by staking a certain amount of VITE, each round (about 75 seconds) will elect 25 SBPs, the SBPs will be elected from random 23 out of top 25 candidate nodes, plus random 2 out of the candidate nodes ranking 26th-100th on the list. The 50% of total SBP rewards will be allocated to the block creation node, the other 50% will be allocated to nodes that are ranked on top 100 as voting rewards. One registration address (staking address) can register multiple block creation nodes (node names), a node name cannot be used if the node name has been registered by a registration address. A node name can switch block creation address, however, block creation address cannot be reused by other node names."
+            "text": "SBP (Snapshot Block Producer) - это нода, которая имеет право создавать блоки, вы можете зарегистрироваться, чтобы стать кандидатом в SBP, стейкая определенное количество VITE, каждый раунд (около 75 секунд) будут выбрано 25 SBP, SBP будут избраны из 23 случайных топ 25 нод-кандидатов, плюс 2 случайных из нод кандидатов, занимающих 26-100-е место в списке. 50% вознаграждений будут выделены ноде создавшей блок, остальные 50% будут выделены нодам, которые находятся в топ-100 в качестве вознаграждений за голоса. Один регистрационный адрес (адрес стейкинга) может зарегистрировать несколько нод создания блоков (имя ноды), имя ноды нельзя использовать, если имя ноды зарегистрировано в регистрационном адресе. Имя ноды может переключать адрес создания блока, однако, адрес создания блока не может быть повторно использован другими именами ноды."
         },
         "register": "Регистрация SBP",
         "cancel": "Отмена SBP",
@@ -759,7 +760,7 @@
         "title": "Конвертация VITE",
         "help": {
             "title": "Быстрое понимание конвертации VITE",
-            "text": "You can convert ERC20 VITE into VITE at Vite Pre-Mainnet through VITE conversion. During conversion, your ERC20 VITE will be transferred to Ethereum black hole address: 0x1111111111111111111111111111111111111111, and you will receive the same amount of VITE in your Vite address after the transaction to Ethereum black hole address has completed. During the conversion, fee of transaction to the Ethereum black hole address come from your current ETH address. After submitting the conversion, please wait at least 30 confirmations in Ethereum network, you can find the transaction history in conversion history."
+            "text": "You can migrate ERC20 tokens into VITE into our TestNet by VITE conversion function. In TestNet, casting your vote for official SBPs to collect rewards, the annualized rate can reach 20%. Your ERC20 VITE tokens will be transferred to Ethereum black hole address: {blackAddr}, you will receive the same amount of VITE at your Vite address when Ethereum black hole address has received the transaction and confirmed. Once you are in the conversion process, confirm that there are enough VITE and ETH (as gas) in your Ethereum address of Vite wallet."
         },
         "gas": "Майнинг Плата",
         "record": "История Конвертации",
@@ -796,6 +797,7 @@
         }
     },
     "trade": {
+        "more": "more",
         "search": "Поиск",
         "txPair": "Пара",
         "price": "Цена",
@@ -871,6 +873,8 @@
         "limitPrice": {
             "title": "Лимит",
             "fee": "Комиссия",
+            "adviseToSVip": "Upgrade to SVIP, enjoy zero base transaction fee",
+            "feeRuleWithSVip": "Operator Fees * Referral Discount. ATTENTION: The adjustment and discount of fees will only affect new orders, the former orders' charge remains the same.",
             "text": "Эта страница является страницей предварительного просмотра данных транзакции. Пожалуйста, войдите, чтобы торговать.",
             "validAmount": "Объем должен быть больше чем {amount}{token}",
             "priceNotNull": "Сумма не может быть пустой",
@@ -879,23 +883,91 @@
             "cancelVip": "Отменить",
             "openVip": "Стать VIP",
             "dexFee": "Базовые комиссии за транзакцию: {fee}",
-            "operatorFee": "Сборы Зоны (взимается Оператором): {fee}",
+            "operatorFee": "Operator Fees: {fee}",
             "vipFee": "VIP Скидка: {fee}",
             "inviteFeeDiscount": "Реферальная скидка: {fee} выкл",
-            "feeRule": "(Базовая Плата за Транзакцию - VIP скидка + Сборы Зоны) * Реферальная Скидка. Внимание: Регулировка и скидка на комиссию повлияют только на новые ордера, стоимость предыдущих ордеров остается одинаковой."
+            "svipFee": "SVIP: 0% base transaction fee",
+            "feeRule": "(Base Transaction Fee - VIP discount + Operator Fees) * Referral Discount. ATTENTION: The adjustment and discount of fees will only affect new orders, the former orders' charge remains the same."
         },
         "vipConfirm": {
             "cancelVip": "Отменить VIP",
             "openVip": "Стать VIP",
             "openStakingAmount": "Сумма Стейка для того, чтобы стать VIP",
-            "cancelStakingAmount": "Извлекаемая Сумма Стейка",
+            "cancelStakingAmount": "Retrievable Stake",
             "noBalance": "Недостаточно Средств",
             "openHint": "После того, как вы станете VIP, вы получите скидку 0,1% на комиссию за торговлю. Сумма стейка 10 000 VITE может быть возвращена вручную через 30 дней.",
-            "cancelHint": "Вы можете получить сумму стейка примерно в {время}. Вы потеряете свою VIP-привилегию после возврата.",
+            "cancelHint": "You can retrieve your stake at approximately {time}. By then, you will lose your VIP privilege.",
             "openSuccess": "Успешно применено! VIP статус вступит в силу позже.",
             "openFail": "Не удалось применить VIP",
             "cancelSuccess": "Отмена VIP Успешна",
+            "cancelFail": "Отмена не удалась",
+            "adviseToCancel": "There will be no base transaction fees with your current status as our SVIP, we therefore recommend you to revoke the staked VITE，which is required for general VIP members."
+        },
+        "svipConfirm": {
+            "open": "Upgrade",
+            "cancel": "Отменить",
+            "cancelVip": "Cancel SVIP",
+            "openVip": "Become a SVIP",
+            "openStakingAmount": "Staking Amount for Becoming a SVIP",
+            "cancelStakingAmount": "Retrievable Stake",
+            "noBalance": "Недостаточно Средств",
+            "openHint": "You will enjoy 0% base transaction fee when upgrading to SVIP. The stake of 1,000,000 VITE can be manually retrieved after 30 days.",
+            "cancelHint": "You can retrieve your stake at approximately {time}. You will lose your SVIP privilege after retrieving.",
+            "openSuccess": "Applied Successful! SVIP status will come into effect later.",
+            "openFail": "Failed to apply SVIP",
+            "cancelSuccess": "Cancel SVIP Successful",
             "cancelFail": "Отмена не удалась"
+        },
+        "proxy": {
+            "title": "Trade Delegation",
+            "subTitle": "Trade Delegation",
+            "successProxy": "Delegation Success",
+            "failProxy": "Delegation Failed",
+            "successCancelProxy": "Remove Delegation Success",
+            "failCancelProxy": "Failed to remove delegations",
+            "info": "What is Trade Delegation?",
+            "new": "Initiate Delegation",
+            "active": {
+                "title": "Delegation History",
+                "head": [
+                    "Delegatee Address",
+                    "Торговые Пары",
+                    "Действие"
+                ],
+                "operate": [
+                    "Add Delegations",
+                    "Remove Delegations",
+                    "Remove All Delegations"
+                ]
+            },
+            "passive": {
+                "title": "Accepted Delegation History",
+                "head": [
+                    "Delegator Address",
+                    "Торговые Пары"
+                ]
+            },
+            "dialog": {
+                "cancel": "Отменить",
+                "cancelAllTips": "Are you sure you'd like to remove all delegations on {trustAddress}?",
+                "rTxtMap": {
+                    "new": "Добавить",
+                    "add": "Добавить",
+                    "delete": "Подтвердить",
+                    "deleteAll": "Подтвердить"
+                },
+                "confirm": {
+                    "title": "Confirm Delegations",
+                    "cancel": "Отменить",
+                    "ok": "Подтвердить"
+                },
+                "titleMap": {
+                    "new": "Initiate Delegation",
+                    "add": "Add Delegations",
+                    "delete": "Remove Delegations",
+                    "deleteAll": "Confirm to remove delegations"
+                }
+            }
         }
     },
     "tradeAssets": {
@@ -1063,32 +1135,32 @@
             "date": "Дата",
             "fee": "Торговые Комиссии",
             "mining": "Сумма Майнинга",
-            "pledge": "Сумма Стейкинга"
+            "pledge": "Stake"
         },
         "txTitle": "Торговля как Майнинг Общий Доход",
         "quotaTitle": "Стейкинг как Майнинг Общий Доход",
-        "addHint": "Доход от Стейкинг как Майнинг будет рассчитываться в 13:00 (UTC + 8) каждый день. Вы можете вручную вернуть вашу сумму стейкинга после вступления стейкинга в силу",
+        "addHint": "Income of Staking as Mining will be calculated at 13:00(UTC+8) everyday. You can manually retrieve your stake after the staking comes into effective",
         "withdrawHint": "Вы больше не сможете майнить VX после возврата",
         "addTitle": "Стейкинг VITE для Майнинга",
         "withdrawTitle": "Возврат VITE в Стейкинге",
-        "addPlaceHolder": "Пожалуйста, введите сумму стейка, как минимум 134 VITE",
+        "addPlaceHolder": "Please enter staking amount, at least 134 VITE",
         "withdrawPlaceHolder": "Пожалуйста, введите сумму возврата, как минимум 134 VITE",
         "addBtn": "Подтвердить стейк ",
         "withdrawBtn": "Подтвердить возврат",
-        "stakingBalance": "Возвращаемая Сумма Стейка",
+        "stakingBalance": "Retrievable Stake",
         "hintTitle": "Важное Замечание",
         "comingHint": "Функция майнинга VX скоро появится, следите за обновлениями. Вы можете получить VX пятью способами: 1. Торговля как Майнинг, 2. Листинг как Майнинг, 3. Привлечение как Майнинг, 4. Стейкинг как Майнинг, 5. Маркет-Мейкинг как Майнинг. Пользователи, владеющие VX, пользуются выплатами из общего пула дивидендов.",
         "more": "Узнайте больше о правилах майнинга VX"
     },
     "inviteMining": {
-        "title": "邀请挖矿总收益"
+        "title": "Привлечение как Майнинг Общий Доход"
     },
     "orderMining": {
-        "title": "挂单挖矿总收益",
+        "title": "Market-Making as Mining Total Income",
         "tbHead": {
-            "date": "日前",
-            "ratio": "占比",
-            "mining": "挖矿金额"
+            "date": "Дата",
+            "ratio": "Ratio",
+            "mining": "Сумма"
         }
     },
     "tradeDividend": {
@@ -1168,5 +1240,56 @@
             "feeRate": "Курс",
             "feeIncome": "Доход"
         }
+    },
+    "mobileAssets": {
+        "allAssets": "Estimated Assets Value ({token})",
+        "tokenListTitle": "Токены",
+        "tokenInfoTitle": "Token Details"
+    },
+    "mobileTradeCenter": {
+        "highPrice": "High",
+        "lowPrice": "Low",
+        "quantity": "24H Vol",
+        "buyTitle": "Купить",
+        "sellTitle": "Продать",
+        "buyPrice": "Buy Price ({token})",
+        "sellPrice": "Sell Price ({token})",
+        "buy": {
+            "price": "Цена",
+            "quantity": "Сумма"
+        },
+        "sell": {
+            "price": "Цена",
+            "quantity": "Сумма"
+        },
+        "orderQuantity": "Сумма",
+        "orderPrice": "Цена",
+        "executedQuantity": "Заполнено",
+        "avgPrice": "Avg"
+    },
+    "mobileDividend": {
+        "title": "Дивиденды",
+        "poolTitle": "Dividend Pool ({token})",
+        "myDividendTitle": "Total Estimated Value of Dividends ({token})",
+        "listTitle": "Dividend Details"
+    },
+    "mobileMining": {
+        "title": "Майнинг",
+        "miningTrade": "Торговля",
+        "miningStaking": "Staking",
+        "miningInvite": "Referral",
+        "miningOrder": "Market-Making",
+        "tradeTotalIncome": "Trading as Mining Total Income ({token})",
+        "stakingTotalIncome": "Staking as Mining Total Income ({token})",
+        "inviteTotalIncome": "Referral as Mining Total Income ({token})",
+        "orderTotalIncome": "Market-Making as Mining Total Income ({token})",
+        "fee": "Комиссия",
+        "listTitle": "Mining History"
+    },
+    "mobileBottomBar": {
+        "center": "Trade",
+        "assets": "Активы",
+        "mining": "Майнинг",
+        "order": "Order"
     }
 }
