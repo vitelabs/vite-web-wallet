@@ -48,17 +48,6 @@ export default {
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
 
-.dex .mint-toast {
-    padding: 20px 30px;
-    font-size: 14px;
-    line-height: 18px;
-    min-width: 160px;
-}
-
-.wallet .mint-toast {
-    min-width: 300px;
-}
-
 .mint-toast {
     box-sizing: border-box;
     position: fixed;
@@ -67,12 +56,13 @@ export default {
     border-radius: 2px;
     max-width: 100%;
     text-align: center;
-    padding: 30px;
+    padding: 20px 30px;
+    font-size: 14px;
+    line-height: 18px;
+    min-width: 160px;
     z-index: 1000;
     word-break: keep-all;
     @include font-family-bold();
-    font-size: 16px;
-    line-height: 24px;
     color: #1d2024;
 
     .line {
@@ -133,5 +123,11 @@ export default {
     75% { transform: rotate(270deg); }
 
     100% { transform: rotate(360deg); }
+}
+
+@media screen and (max-width: 500px) {
+    .mint-toast {
+        padding: 20px;
+    }
 }
 </style>

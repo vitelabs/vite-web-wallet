@@ -1,6 +1,6 @@
 <template>
     <div class="notice-wrapper" :class="type">
-        <img v-show="isShowClose" @click="close(rawData)" src="../assets/imgs/close.svg" class="close __pointer"/>
+        <img v-show="isShowClose" @click="close(rawData)" src="~assets/imgs/close.svg" class="close __pointer"/>
         <div class="title">{{ title }}</div>
         <div class="describe">{{ describe }}</div>
     </div>
@@ -91,6 +91,18 @@ export default {
         @include font-family-normal();
         color: #5e6875;
         line-height: 28px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .notice-wrapper {
+        float: right;
+        width: 90%;
+        max-width: 360px;
+        padding: 16px;
+        .describe {
+            line-height: 22px;
+        }
     }
 }
 </style>

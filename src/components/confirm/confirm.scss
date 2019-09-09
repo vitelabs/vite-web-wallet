@@ -17,7 +17,7 @@
 }
 
 .small .confirm-wrapper {
-    width: 380px;
+    max-width: 380px;
     .bottom .btn.btn-single {
         min-width: 200px;
         width: auto;
@@ -27,11 +27,11 @@
 }
 
 .middle .confirm-wrapper {
-    width: 515px;
+    max-width: 515px;
 }
 
 .big .confirm-wrapper {
-    width: 681px;
+    max-width: 681px;
 }
 
 .no-padding-confirm .confirm-wrapper .content-wrapper {
@@ -62,7 +62,8 @@
 }
 
 .confirm-wrapper {
-    width: 515px;
+    width: 80%;
+    max-width: 515px;
     max-height: 85%;
     display: flex;
     flex-direction: column;

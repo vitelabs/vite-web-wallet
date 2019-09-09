@@ -1,25 +1,24 @@
-import Identicon from 'identicon.js';
-import { utils } from '@vite/vitejs';
 import { defaultTokenMap } from 'utils/constant';
+import defaultTokenIcon from 'assets/imgs/default_token_icon.png';
 
-const { blake2b, _Buffer } = utils;
-const iconConfig = { format: 'png' };
+const No_Index_Token = [ 'VITE', 'VCP', 'VX' ];
 
 export function getTokenIcon(tokenId) {
-    if (defaultTokenMap[tokenId]) {
-        return defaultTokenMap[tokenId].icon;
+    if (tokenId && defaultTokenMap[tokenId]) {
+        return defaultTokenMap[tokenId].icon || defaultTokenIcon;
     }
-    const tokenHash = blake2b(tokenId);
-    const hexStr = _Buffer(tokenHash).toString('hex');
-
-    return `data:image/png+xml;base64,${ new Identicon(hexStr,
-        iconConfig).toString() }`;
+    return defaultTokenIcon;
 }
 
-export function getTokenNameString(symbol, index, length = 3) {
-    if (symbol.toUpperCase() === 'VITE' || symbol.toUpperCase() === 'VCP' || symbol.toUpperCase() === 'VX' || index === undefined) {
+export function getTokenSymbolString(symbol, index, length = 3) {
+    if (!symbol) {
+        return '';
+    }
+
+    if (No_Index_Token.indexOf(symbol.toUpperCase()) !== -1 || index === undefined) {
         return symbol;
     }
+
     const s = String(index);
     if (s.length > length) throw 'wrong index length';
 

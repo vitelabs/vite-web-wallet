@@ -1,173 +1,51 @@
-require('./buildRoutes.js');
+require('./pack/prePack/index.js');
 
-const path = require('path');
 const merge = require('webpack-merge');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
-const plugins = require('./webpackConf/plugins.js');
-const devConfig = require('./webpackConf/dev.config.js');
-const testConfig = require('./webpackConf/test.config.js');
-const dexTestNetConfig = require('./webpackConf/dexTestNet.config.js');
-
-const SRC_PATH = path.join(__dirname, './src');
-const CHARTING_PATH = path.join(__dirname, './charting_library');
-const STATIC_PATH = process.env.APP === 'true'
-    ? path.join(__dirname, '../../app/walletPages')
-    : path.join(__dirname, './dist');
-const development = [ 'dev', 'test', 'dexTestNet' ];
-const mode = development.indexOf(process.env.NODE_ENV) > -1 ? 'development' : 'production';
+const { mobileStaticPath } = require('./pack/config');
+const { entry, htmlWebpackPlugins } = require('./pack/webpack/getEntry');
+const baseConfig = require('./pack/webpack/base.config.js');
+const devConfig = require('./pack/webpack/dev.config.js');
+const testConfig = require('./pack/webpack/test.config.js');
+const prodConfig = require('./pack/webpack/prod.config.js');
+const pcConfig = require('./pack/webpack/pc.config.js');
+const h5Config = require('./pack/webpack/h5.config.js');
+const debugConfig = require('./pack/webpack/debug.config.js');
 
 console.log(`\n ======== process.env.NODE_ENV: ${ process.env.NODE_ENV } ======== \n`);
-console.log(`\n ======== webpackConfig.mode: ${ mode } ======== \n`);
 
-let webpackConfig = {
-    mode,
-    entry: { index: path.join(SRC_PATH, '/index.js') },
-    output: {
-        path: STATIC_PATH,
-        // filename: '[name].[contenthash].js'
-        filename: '[name].[chunkhash].js'
-    },
-    plugins,
-    optimization: {
-        usedExports: true,
-        splitChunks: {
-            hidePathInfo: true,
-            chunks: 'all'
-            // cacheGroups: {
-            //     // [TODO] Async Router
-            //     vendors: {
-            //         test: /[\\/]node_modules[\\/]/,
-            //         name: 'vendor',
-            //         chunks: 'all'
-            //     },
-            //     commons: {
-            //         name: 'comomns',
-            //         test: /src(?!(\/utils))/, // 可自定义拓展规则
-            //         minChunks: 2, // 最小共用次数
-            //         minSize: 0, // 代码最小多大，进行抽离
-            //         priority: 1 // 该配置项是设置处理的优先级，数值越大越优先处理
-            //     },
-            //     default: {
-            //         minChunks: 2,
-            //         priority: -20,
-            //         reuseExistingChunk: true
-            //     }
-            // }
-        },
-        minimizer: [
-            new UglifyJsPlugin({
-                cache: true,
-                parallel: true,
-                uglifyOptions: {
-                    compress: {
-                        // collapse_vars: true,
-                        // reduce_vars: true,
-                        unused: true,
-                        drop_console: true,
-                        drop_debugger: true
-                    },
-                    output: { comments: false }
-                },
-                extractComments: true,
-                sourceMap: false
-            })
-        ]
-    },
-    module: {
-        rules: [
-            {
-                test: /\.pug$/,
-                oneOf: [
-                    // 这条规则应用到 Vue 组件内的 `<template lang="pug">`
-                    {
-                        resourceQuery: /^\?vue/,
-                        use: [{ loader: 'pug-plain-loader', options: { basedir: SRC_PATH } }]
-                    },
-                    // 这条规则应用到 JavaScript 内的 pug 导入
-                    { use: [ 'raw-loader', { loader: 'pug-plain-loader', options: { basedir: SRC_PATH } } ] }
-                ]
+let webpackConfig = merge({
+    entry,
+    plugins: htmlWebpackPlugins
+}, baseConfig);
 
-            },
-            {
-                test: /\.vue$/,
-                use: [{ loader: 'vue-loader' }]
-            },
-            {
-                test: /\.(svg|png|jpg|gif)$/,
-                loader: 'url-loader',
-                query: {
-                    // 10KB
-                    limit: 10 * 1024
-                }
-            },
-            {
-                test: /\.(svg|png|jpg|gif)$/,
-                loader: 'image-webpack-loader',
-                enforce: 'pre'
-            },
-            {
-                test: /\.(j|t)s$/,
-                // exclude: /node_modules(?!(\/base-x)|(\/resize-detector)|(\/vue-echarts))|(\/@vite\/vitejs\/)/,
-                exclude: /node_modules(?!(\/base-x)|(\/resize-detector)|(\/vue-echarts))/,
-                use: {
-                    loader: 'babel-loader',
-                    options: {
-                        presets: ['@babel/preset-env']
-                        // [TODO] Async Route
-                        // plugins: ['syntax-dynamic-import']
-                    }
-                }
-            }, {
-                test: /(\.scss$|\.css$|\.sass$)/,
-                use: [
-                    { loader: 'style-loader' },
-                    { loader: 'css-loader', options: { minimize: true } },
-                    { loader: 'sass-loader' }
-                    // { loader: 'postcss-loader' }
-                ]
-            }, {
-                test: /(\.ttf$|\.ttc$|\.otf$)/,
-                use: {
-                    loader: 'url-loader',
-                    options: { limit: 10000 }
-                }
-            } ]
-    },
-    resolve: {
-        alias: {
-            // '@vite/vitejs': '@vite/vitejs/es5/index.js',
-            vue: 'vue/dist/vue.js',
-            charting: CHARTING_PATH,
-            src: SRC_PATH,
-            uiKit: path.join(SRC_PATH, '/uiKit'),
-            wallet: path.join(SRC_PATH, '/wallet'),
-            services: path.join(SRC_PATH, '/services'),
-            components: path.join(SRC_PATH, '/components'),
-            pages: path.join(SRC_PATH, '/pages'),
-            assets: path.join(SRC_PATH, '/assets'),
-            router: path.join(SRC_PATH, '/router'),
-            utils: path.join(SRC_PATH, '/utils'),
-            plugins: path.join(SRC_PATH, '/plugins'),
-            i18n: path.join(SRC_PATH, '/i18n'),
-            store: path.join(SRC_PATH, '/store'),
-            version: path.join(SRC_PATH, '../version.json')
-        },
-        extensions: [ '.js', '.ts', '.scss', '.vue', '.json' ]
-    }
-};
+(process.env.analyzer === 'true') && webpackConfig.plugins.push(new BundleAnalyzerPlugin());
+
+if (process.env.isPC === 'true') {
+    webpackConfig = merge(webpackConfig, pcConfig);
+} else if (process.env.isH5 === 'true') {
+    webpackConfig = merge(webpackConfig, h5Config, {
+        output: {
+            path: mobileStaticPath,
+            filename: '[name].[chunkhash].js'
+        }
+    });
+} else {
+    webpackConfig = merge(webpackConfig, pcConfig);
+    webpackConfig = merge(webpackConfig, h5Config);
+}
 
 if (process.env.NODE_ENV === 'dev') {
     webpackConfig = merge(webpackConfig, devConfig);
+    webpackConfig = merge(webpackConfig, debugConfig);
 }
 if (process.env.NODE_ENV === 'test') {
     webpackConfig = merge(webpackConfig, testConfig);
+    webpackConfig = merge(webpackConfig, debugConfig);
 }
-if (process.env.NODE_ENV === 'dexTestNet') {
-    webpackConfig = merge(webpackConfig, dexTestNetConfig);
-}
-if (process.env.NODE_ENV !== 'production') {
-    webpackConfig.devtool = 'source-map';
+if (process.env.NODE_ENV === 'production') {
+    webpackConfig = merge(webpackConfig, prodConfig);
 }
 
 module.exports = webpackConfig;

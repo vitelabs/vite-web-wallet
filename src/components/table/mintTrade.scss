@@ -1,4 +1,9 @@
 .mint-trade-table {
+    .__tb_head{
+        height: 41px;
+        display: flex;
+        align-items: center;
+    }
     @include rowWith {
         min-width: 25%;
     }
