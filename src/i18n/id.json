@@ -88,7 +88,7 @@
         "SBPreg": "Pendaftaran SBP",
         "UpdateReg": "Perbarui Pendaftaran",
         "RevokeReg": "Cabut Registrasi",
-        "RetrieveReward": "Ambil Hadiah",
+        "RetrieveReward": "Claim Reward",
         "Voting": "Pemungutan suara",
         "RevokeVoting": "Cabut Voting",
         "GetQuota": "Dapatkan Kuota",
@@ -98,7 +98,7 @@
         "MintageBurn": "Hancurkan Token",
         "MintageTransferOwner": "Transfer kepemilikan",
         "MintageChangeTokenType": "Edit jenis token",
-        "MintageCancelPledge": "Ambil Token Stak",
+        "MintageCancelPledge": "Retrieve your stake",
         "DexFundUserDeposit": "Setoran ViteX",
         "DexFundUserWithdraw": "Penarikan ViteX",
         "DexFundNewOrder": "Membuat Pesanan ViteX",
@@ -151,12 +151,11 @@
         "bigger0": "Nilai harus lebih besar dari 0",
         "operateSuccess": "Operasi sukses",
         "operateFail": "Operasi gagal",
-        "unreceived": "Buka kunci dompet Anda sebelum digunakan",
-        "unLogin": "Please login before using referral code"
+        "unreceived": "Buka kunci dompet Anda sebelum digunakan"
     },
     "beforeUse": {
         "title": "Baca Sebelum Digunakan",
-        "text1": "For your funds' safety, account creation function is not currently supported on web wallet. Please download Vite App to create an account. Vite platform would like to warn you that if you visit a phishing website or lose you backup, our company cannot recover your funds.",
+        "text1": "Demi keamanan dana Anda, membuat fungsi akun tidak didukung sementara di dompet web. Silakan unduh Aplikasi Vite untuk membuat akun. Platform Vite ingin memperingatkan Anda bahwa jika Anda mengunjungi situs web phishing atau kehilangan cadangan Anda, perusahaan kami tidak dapat memulihkan dana Anda.",
         "text2": "Harap perhatikan bahwa situs web kami tidak menyimpan kunci pribadi atau frasa unggulan Anda. Oleh karena itu, Anda perlu mengembalikan akun Anda melalui frase seed jika Anda memutuskan untuk mengubah browser, menghapus cookie lokal, atau mengubah PC.",
         "text3": "Harap berhati-hati dalam memastikan bahwa Anda merekam dan menyimpan frase benih Anda dengan akurat. Bahkan kesalahan sekecil apa pun akan menyebabkan Anda tidak berhasil mengembalikan alamat Anda."
     },
@@ -184,9 +183,9 @@
         "restore": "Pulihkan Akun dengan Seed Phrase",
         "record": "Hasilkan Seed Phrase",
         "prompt": "Seed Phrase mnemonic adalah satu-satunya cara untuk mengembalikan dompet Anda. Anda sangat disarankan untuk menuliskan frasa dan menyimpannya di tempat yang aman di mana hanya Anda yang dapat mengaksesnya.",
-        "placeholder": "Please enter your mnemonic seed phrase. Example: apple banana peach mango pear ...",
-        "empty": "Seed phrase cannot be empty",
-        "error": "Wrong seed phrase. Try again",
+        "placeholder": "Silakan masukkan frase seed mnemonic Anda",
+        "empty": "Masukan dari frase seed tidak boleh kosong",
+        "error": "Seed Phrase salah. Coba lagi",
         "hint": "Contoh: apel pisang peach mangga ...",
         "change": "Beralih ke {len} kata-kata Mnemonic"
     },
@@ -235,7 +234,7 @@
         }
     },
     "startCreate": {
-        "notice": "For your funds' safety, account creation function is not currently supported on web wallet. Please download Vite App to create an account.",
+        "notice": "Demi keamanan dana Anda, membuat fungsi akun tidak didukung sementara di dompet web. Silakan unduh Aplikasi Vite untuk membuat akun.",
         "goLogin": "Masuk",
         "goDex": "Pergi ke ViteX"
     },
@@ -250,19 +249,19 @@
         }
     },
     "tokenCard": {
-        "moreRecords": "Lebih Banyak Catatan",
+        "moreRecords": "View History",
         "others": "Lainnya",
         "assetSpread": "Portofolio",
         "saveSuccess": "Berhasil disimpan",
         "heads": {
             "name": "Nama",
-            "balance": "Saldo",
+            "balance": "Saldo Dompet",
             "onroad": "Jumlah Dompet yang Tidak Dapat Diterima",
             "gate": "Gateway Lintas Rantai Dompet",
             "totalExAmount": "Total Saldo Pertukaran",
             "availableExAmount": "Saldo Tersedia Pertukaran",
             "balanceTips": "You can transfer your assets to other addresses via clicking 'Send' button",
-            "gateTips": "In this cross-chain section, you can map other tokens into Vite network. Click 'Receive' button to deposit assets to your Vite Wallet. Click 'Send' button to transfer your assets to other platforms. * Cross-chain receive/send process may charge fees, it also has its transfer limitation.",
+            "gateTips": "In this cross-chain section, you can map other tokens into Vite network. Click 'Receive' button to deposit assets to your Vite Wallet. Click 'Send' button to transfer your assets to other platforms. * Cross-chain receive/send process may charge fees, it also has its transfer limit.",
             "availableExAmountTips": "You can transfer your assets from Vite Wallet to ViteX Exchange via clicking 'Deposit' button. Click 'Withdraw' button to transfer assets from ViteX Exchange to Vite Wallet. No transaction fees caused during these processes."
         },
         "actionType": {
@@ -379,7 +378,7 @@
             "amountPlaceholder": "Silakan masukkan jumlah terima"
         },
         "charge": {
-            "title": "Cross-Chain Receive Funds",
+            "title": "Cross-Chain Receive",
             "addrErr": "Ada yang salah dengan node gateway, harap periksa pengaturan jaringan Anda",
             "addressTitle": "Alamat penerima",
             "labelTips": "(Please use this '{labelName}' with your recipient address, otherwise your assets will lose",
@@ -392,7 +391,7 @@
             ]
         },
         "withdraw": {
-            "title": "Cross-Chain Send Funds",
+            "title": "Cross-Chain Send",
             "balanceErrMap": {
                 "notEnough": "Saldo tidak mencukupi",
                 "overMax": "Send amount should be less than {max}",
@@ -518,7 +517,7 @@
         "fromAddr": "Alamat Pengurangan",
         "time": "Staking Freeze Duration",
         "aboutDays": "Perkiraan {day} hari",
-        "amountPlaceholder": "Silakan masukkan jumlah taruhan, minimum {num} VITE",
+        "amountPlaceholder": "Please enter staking amount, minimum {num} VITE",
         "limitAmt": "Jumlah taruhan tidak boleh kurang dari {num}.",
         "addrPlaceholder": "Silakan masukkan alamat penerima kuota",
         "inputWithdrawAmount": "Silakan masukkan jumlah penarikan",
@@ -530,7 +529,7 @@
         "maxAmt": "Jumlah penarikan harus dalam [{minAmount}, {maxAmount}]",
         "cancelLimitAmt": "Jumlah taruhan tidak boleh kurang dari {num}",
         "withdrawalStaking": "Penarikan Token Staked",
-        "myAddr": "Current Address",
+        "myAddr": "Saya",
         "confirm": {
             "help": {
                 "t1": "Apa itu Kuota?",
@@ -582,7 +581,7 @@
         "title": "SBP",
         "help": {
             "title": "Tentang SBP",
-            "text": "SBP（Snapshot Block Producer）is a node that has right to create blocks, you can register to become a SBP candidate by staking a certain amount of VITE, each round (about 75 seconds) will elect 25 SBPs, the SBPs will be elected from random 23 out of top 25 candidate nodes, plus random 2 out of the candidate nodes ranking 26th-100th on the list. The 50% of total SBP rewards will be allocated to the block creation node, the other 50% will be allocated to nodes that are ranked on top 100 as voting rewards. One registration address (staking address) can register multiple block creation nodes (node names), a node name cannot be used if the node name has been registered by a registration address. A node name can switch block creation address, however, block creation address cannot be reused by other node names."
+            "text": "SBP （Snapshot Block Producer） adalah simpul yang memiliki hak untuk membuat blok, Anda dapat mendaftar untuk menjadi kandidat SBP dengan mempertaruhkan sejumlah VITE, setiap putaran (sekitar 75 detik) akan memilih 25 SBP, SBP akan dipilih dari 23 dari 25 kandidat node acak, ditambah 2 random dari node kandidat peringkat 26-100 di daftar. 50% dari hadiah blok ciptaan akan dialokasikan ke node blok ciptaan, 50% lainnya akan dialokasikan ke node yang peringkat di atas 100 sebagai hadiah voting. Satu alamat registrasi (staking address) dapat mendaftarkan beberapa node pembuatan blok (nama simpul), nama simpul tidak dapat digunakan jika nama simpul telah didaftarkan oleh alamat pendaftaran. Nama simpul dapat mengganti alamat pembuatan blok, namun, alamat pembuatan blok tidak dapat digunakan kembali oleh nama simpul lainnya."
         },
         "register": "Pendaftaran SBP",
         "cancel": "Pembatalan SBP",
@@ -761,7 +760,7 @@
         "title": "VITE Konversi",
         "help": {
             "title": "Pemahaman Cepat tentang Konversi VITE",
-            "text": "You can convert ERC20 VITE into VITE at Vite Pre-Mainnet through VITE conversion. During conversion, your ERC20 VITE will be transferred to Ethereum black hole address: 0x1111111111111111111111111111111111111111, and you will receive the same amount of VITE in your Vite address after the transaction to Ethereum black hole address has completed. During the conversion, fee of transaction to the Ethereum black hole address come from your current ETH address. After submitting the conversion, please wait at least 30 confirmations in Ethereum network, you can find the transaction history in conversion history."
+            "text": "Anda dapat memigrasikan token ERC20 ke VITE ke dalam fungsi konversi TestNet oleh VITE kami. Di TestNet, memberikan suara Anda untuk SBP resmi untuk mengumpulkan hadiah, tarif tahunan dapat mencapai 20%. Token VITE ERC20 Anda akan ditransfer ke alamat black hole Ethereum: {blackAddr}, Anda akan menerima jumlah VITE yang sama di alamat Vite Anda ketika alamat black hole Ethereum telah menerima transaksi dan dikonfirmasi. Setelah Anda dalam proses konversi, konfirmasikan bahwa ada cukup VITE dan ETH (sebagai gas) di alamat Ethereum dompet Vite Anda."
         },
         "gas": "Biaya Penambangan",
         "record": "Sejarah Konversi",
@@ -798,7 +797,7 @@
         }
     },
     "trade": {
-        "more":"more",
+        "more": "More",
         "search": "Pencarian",
         "txPair": "Pasangan",
         "price": "Harga",
@@ -874,8 +873,8 @@
         "limitPrice": {
             "title": "Batas",
             "fee": "Biaya",
-            "adviseToSVip":"成为超级VIP可免交易所基础费率",
-            "feeRuleWithSVip":"Zone Fees * Referral Discount. ATTENTION: The adjustment and discount of fees will only affect new orders, the former orders' charge remains the same.",
+            "adviseToSVip": "Upgrade to SVIP, enjoy zero base transaction fee",
+            "feeRuleWithSVip": "Operator Fees * Referral Discount. ATTENTION: The adjustment and discount of fees will only affect new orders, the former orders' charge remains the same.",
             "text": "Halaman ini adalah halaman pratinjau data transaksi. Silakan masuk untuk berdagang.",
             "validAmount": "Volume harus lebih besar dari {amount}{token}",
             "priceNotNull": "Jumlah tidak boleh kosong",
@@ -884,80 +883,90 @@
             "cancelVip": "Batal",
             "openVip": "Menjadi VIP",
             "dexFee": "Biaya Transaksi Dasar: {fee}",
-            "operatorFee": "Biaya Zona (Dibebankan oleh Operator): {fee}",
+            "operatorFee": "Operator Fees: {fee}",
             "vipFee": "Diskon VIP: {fee}",
             "inviteFeeDiscount": "Diskon Referral: {fee} off",
-            "feeRule": "(Biaya Transaksi Dasar - diskon VIP + Biaya Zona) * Diskon Referensi. PERHATIAN: Penyesuaian dan diskon biaya hanya akan mempengaruhi pesanan baru, biaya pesanan sebelumnya tetap sama."
+            "svipFee": "SVIP: 0% base transaction fee",
+            "feeRule": "(Base Transaction Fee - VIP discount + Operator Fees) * Referral Discount. ATTENTION: The adjustment and discount of fees will only affect new orders, the former orders' charge remains the same."
         },
         "vipConfirm": {
             "cancelVip": "Batalkan VIP",
             "openVip": "Menjadi VIP",
             "openStakingAmount": "Jumlah Taruhan untuk Menjadi VIP",
-            "cancelStakingAmount": "Jumlah Taruhan yang Dapat Dipulihkan",
+            "cancelStakingAmount": "Retrievable Stake",
             "noBalance": "Saldo tidak mencukupi",
             "openHint": "Anda akan menikmati hak istimewa dari diskon biaya perdagangan 0,1% setelah menjadi VIP. Jumlah taruhan 10.000 VITE dapat diambil secara manual setelah 30 hari.",
-            "cancelHint": "Anda dapat mengambil jumlah taruhan Anda kira-kira {time}. Anda akan kehilangan hak istimewa VIP Anda setelah mengambil.",
+            "cancelHint": "You can retrieve your stake at approximately {time}. By then, you will lose your VIP privilege.",
             "openSuccess": "Berhasil Diterapkan! Status VIP akan mulai berlaku nanti.",
             "openFail": "Gagal menerapkan VIP",
             "cancelSuccess": "Batalkan VIP Berhasil",
             "cancelFail": "Batalkan Gagal",
-            "adviseToCancel":"由于您已成为超级VIP，平台手续费已为0，建议您取回普通VIP的抵押金额。"
-
+            "adviseToCancel": "There will be no base transaction fees with your current status as our SVIP, we therefore recommend you to revoke the staked VITE，which is required for general VIP members."
         },
         "svipConfirm": {
-            "open":"开通",
-            "cancel":"取消",
+            "open": "Upgrade",
+            "cancel": "Batal",
             "cancelVip": "Cancel SVIP",
             "openVip": "Become a SVIP",
             "openStakingAmount": "Staking Amount for Becoming a SVIP",
-            "cancelStakingAmount": "Retrievable Staking Amount",
-            "noBalance": "Insufficient Balance",
-            "openHint": "SVIP开通后，可免除基础手续费，开通SVIP需抵押10000VITE，30天后可手动取回",
-            "cancelHint": "You can retrieve your staking amount at approximately {time}. You will lose your SVIP privilege after retrieving.",
+            "cancelStakingAmount": "Retrievable Stake",
+            "noBalance": "Saldo tidak mencukupi",
+            "openHint": "You will enjoy 0% base transaction fee when upgrading to SVIP. The stake of 1,000,000 VITE can be manually retrieved after 30 days.",
+            "cancelHint": "You can retrieve your stake at approximately {time}. You will lose your SVIP privilege after retrieving.",
             "openSuccess": "Applied Successful! SVIP status will come into effect later.",
             "openFail": "Failed to apply SVIP",
             "cancelSuccess": "Cancel SVIP Successful",
-            "cancelFail": "Cancel Failed"
+            "cancelFail": "Batalkan Gagal"
         },
-        "proxy":{
-            "title":"委托代理",
-            "subTitle":"交易委托",              
-            "successProxy":"委托成功",
-            "failProxy":"委托失败",
-            "successCancelProxy":"撤销委托成功",
-            "failCancelProxy":"撤销委托失败",
-            "info":"了解委托",
-            "new":"新建委托",
-            "active":{
-                "title":"委托记录",
-                "head":["委托地址","委托交易对","操作"],
-                "operate":["增加交易对","减少交易对","撤销委托"]
+        "proxy": {
+            "title": "Trade Delegation",
+            "subTitle": "Trade Delegation",
+            "successProxy": "Delegation Success",
+            "failProxy": "Delegation Failed",
+            "successCancelProxy": "Remove Delegation Success",
+            "failCancelProxy": "Failed to remove delegations",
+            "info": "What is Trade Delegation?",
+            "new": "Initiate Delegation",
+            "active": {
+                "title": "Delegation History",
+                "head": [
+                    "Delegatee Address",
+                    "Pasangan Perdagangan",
+                    "Beraksi"
+                ],
+                "operate": [
+                    "Add Delegations",
+                    "Remove Delegations",
+                    "Remove All Delegations"
+                ]
             },
-            "passive":{
-                "title":"接受委托记录",
-                "head":["委托地址","委托交易对"]
+            "passive": {
+                "title": "Accepted Delegation History",
+                "head": [
+                    "Delegator Address",
+                    "Pasangan Perdagangan"
+                ]
             },
-
             "dialog": {
-              "cancel": "取消",
-              "cancelAllTips":"确认撤销对{trustAddress}所有的交易委托?",
-              "rTxtMap": {
-                "new": "添加",
-                "add": "添加",
-                "delete": "确认修改",
-                "deleteAll": "确认"
-              },
-              "titleMap": {
-                "new": "新增委托",
-                "add": "增加委托交易对",
-                "delete": "减少委托交易对",
-                "deleteAll": "确认撤销委托"
-              },
-              "confirm":{
-                    "title": "确认委托交易对",
-                    "cancel": "取消",
-                    "ok": "确认"
-              }
+                "cancel": "Batal",
+                "cancelAllTips": "Are you sure you'd like to remove all delegations on {trustAddress}?",
+                "rTxtMap": {
+                    "new": "Tambah",
+                    "add": "Tambah",
+                    "delete": "Memastikan",
+                    "deleteAll": "Memastikan"
+                },
+                "confirm": {
+                    "title": "Confirm Delegations",
+                    "cancel": "Batal",
+                    "ok": "Memastikan"
+                },
+                "titleMap": {
+                    "new": "Initiate Delegation",
+                    "add": "Add Delegations",
+                    "delete": "Remove Delegations",
+                    "deleteAll": "Confirm to remove delegations"
+                }
             }
         }
     },
@@ -1126,38 +1135,39 @@
             "date": "Tanggal",
             "fee": "Biaya Perdagangan",
             "mining": "Jumlah Penambangan",
-            "pledge": "Jumlah Staking"
+            "pledge": "Stake"
         },
         "txTitle": "Perdagangan sebagai Total Pendapatan Penambangan",
         "quotaTitle": "Staking sebagai Pendapatan Total Penambangan",
-        "addHint": "Penghasilan staking sebagai Pertambangan akan dihitung pada 13:00 (UTC + 8) setiap hari. Anda dapat secara manual mengambil jumlah stake Anda setelah stake menjadi efektif",
+        "addHint": "Income of Staking as Mining will be calculated at 13:00(UTC+8) everyday. You can manually retrieve your stake after the staking comes into effective",
         "withdrawHint": "Anda tidak lagi dapat menambang VX setelah mengambil",
         "addTitle": "Staking VITE untuk Penambangan",
         "withdrawTitle": "Mengambil VITE Staked",
-        "addPlaceHolder": "Silakan masukkan jumlah taruhan, setidaknya 134 VITE",
+        "addPlaceHolder": "Please enter staking amount, at least 134 VITE",
         "withdrawPlaceHolder": "Silakan masukkan jumlah pengambilan, setidaknya 134 VITE",
         "addBtn": "Konfirmasikan untuk mempertaruhkan ",
         "withdrawBtn": "Konfirmasikan untuk mengambil",
-        "stakingBalance": "Jumlah Taruhan yang Dapat Dipulihkan",
+        "stakingBalance": "Retrievable Stake",
         "hintTitle": "Pemberitahuan Penting",
         "comingHint": "Fungsi penambangan VX akan segera hadir, nantikan. Anda bisa mendapatkan VX dalam lima cara: 1. Trading sebagai Penambangan, 2. Listing sebagai Penambangan, 3. Merujuk sebagai Penambangan, 4. Staking sebagai Penambangan, 5. Pembuatan pasar sebagai Penambangan. Pengguna yang memegang VX menikmati pembayaran dari kumpulan dividen bersama.",
         "more": "Pelajari lebih lanjut tentang aturan penambangan VX"
     },
     "inviteMining": {
-        "title": "邀请挖矿总收益"
+        "title": "Mengacu pada Total Pendapatan Penambangan"
     },
     "orderMining": {
-        "title": "挂单挖矿总收益",
+        "title": "Market-Making as Mining Total Income",
         "tbHead": {
-            "date": "日前",
-            "ratio": "占比",
-            "mining": "挖矿金额"
+            "date": "Tanggal",
+            "ratio": "Ratio",
+            "mining": "Jumlah"
         }
     },
     "tradeDividend": {
         "title": "Dividen",
         "poolTitle": "Kelompok Dividen Biaya Perdagangan",
         "listTitle": "Dividen Saya",
+        "allPrice": "Total Nilai Taksiran",
         "date": "Tanggal",
         "VX": "Holding VX",
         "coin": "Tipe",
@@ -1231,5 +1241,56 @@
             "feeRate": "Nilai",
             "feeIncome": "Pendapatan"
         }
+    },
+    "mobileAssets": {
+        "allAssets": "Estimated Assets Value ({token})",
+        "tokenListTitle": "Token",
+        "tokenInfoTitle": "Token Details"
+    },
+    "mobileTradeCenter": {
+        "highPrice": "High",
+        "lowPrice": "Low",
+        "quantity": "24H Vol",
+        "buyTitle": "Beli",
+        "sellTitle": "Jual",
+        "buyPrice": "Buy Price ({token})",
+        "sellPrice": "Sell Price ({token})",
+        "buy": {
+            "price": "Harga",
+            "quantity": "Jumlah"
+        },
+        "sell": {
+            "price": "Harga",
+            "quantity": "Jumlah"
+        },
+        "orderQuantity": "Jumlah",
+        "orderPrice": "Harga",
+        "executedQuantity": "Terisi",
+        "avgPrice": "Avg"
+    },
+    "mobileDividend": {
+        "title": "Dividen",
+        "poolTitle": "Dividend Pool ({token})",
+        "myDividendTitle": "Total Estimated Value of Dividends ({token})",
+        "listTitle": "Dividend Details"
+    },
+    "mobileMining": {
+        "title": "Pertambangan",
+        "miningTrade": "Perdagangan",
+        "miningStaking": "Staking",
+        "miningInvite": "Referral",
+        "miningOrder": "Market-Making",
+        "tradeTotalIncome": "Trading as Mining Total Income ({token})",
+        "stakingTotalIncome": "Staking as Mining Total Income ({token})",
+        "inviteTotalIncome": "Referral as Mining Total Income ({token})",
+        "orderTotalIncome": "Market-Making as Mining Total Income ({token})",
+        "fee": "Biaya",
+        "listTitle": "Mining History"
+    },
+    "mobileBottomBar": {
+        "center": "Trade",
+        "assets": "Aset",
+        "mining": "Pertambangan",
+        "order": "Order"
     }
 }
