@@ -13,7 +13,7 @@
     "settingAcc": "Thiết lập Tài khoản",
     "resetAcc": "Cài lại Tài khoản",
     "logout": "Đăng xuất",
-    "saveLogout": "安全退出",
+    "saveLogout": "Đăng xuất",
     "blockHeight": "Chiều cao Block Snapshot",
     "accountName": "Tên Tài khoản",
     "action": "Hành động",
@@ -38,7 +38,7 @@
         "assets": [
             "Ký thác vào Sàn",
             "Rút về Ví",
-            "Nhận và Chuyển Chuỗi chéo"
+            "Cross-Chain Receive & Send"
         ]
     },
     "dealReminder": {
@@ -150,11 +150,11 @@
         "operateSuccess": "Thao tác Thành công",
         "operateFail": "Thao tác Thất bại",
         "unreceived": "Mở khóa ví trước khi sử dụng",
-        "unLogin": "Please login"
+        "unLogin": "Please login before using referral code"
     },
     "beforeUse": {
         "title": "Đọc kỹ trước khi sử dụng",
-        "text1": "Tạm thời chức năng tạo tài khoản không được hỗ trợ trên ví web vì sự an toàn của tài sản. Vui lòng tải app trên di động. Cảnh giác trước mọi web lừa đảo, và lưu lại bản sao lưu, seed phrase, nếu mất, chúng tôi không thể khôi phục tài khoản cho bạn.",
+        "text1": "For your funds' safety, account creation function is not currently supported on web wallet. Please download Vite App to create an account. Vite platform would like to warn you that if you visit a phishing website or lose you backup, our company cannot recover your funds.",
         "text2": "Xin lưu ý rằng các trang web của chúng tôi không lưu trữ khóa riêng hoặc seed phrase. Do đó, bạn sẽ cần khôi phục tài khoản của mình thông qua seed phrase nếu bạn quyết định thay đổi trình duyệt, xóa cookie cục bộ hoặc thay đổi PC.",
         "text3": "Vui lòng thực hiện các biện pháp phòng ngừa thích hợp để đảm bảo rằng bạn ghi lại chính xác và lưu trữ an toàn seed phrase. Ngay cả một lỗi nhỏ nhất cũng sẽ dẫn đến việc bạn không thể khôi phục thành công địa chỉ của mình."
     },
@@ -182,9 +182,9 @@
         "restore": "Khôi phục Tài khoản bằng Seed phrase",
         "record": "Tạo Seed phrase",
         "prompt": "Mnemonic seed phrase là cách duy nhất để khôi phục ví của bạn. Vui lòng viết phrase ra và lưu lại cẩn thân.",
-        "placeholder": "Please input your mnemonic seed phrase. Example: apple banana peach mango pear ...",
-        "empty": "Không để trống ô nhập seed phrase",
-        "error": "Seed phrase không chính xác. Vui lòng thử lại",
+        "placeholder": "Please enter your mnemonic seed phrase. Example: apple banana peach mango pear ...",
+        "empty": "Seed phrase cannot be empty",
+        "error": "Wrong seed phrase. Try again",
         "hint": "Ví dụ: apple banana peach mango pear ...",
         "change": "Dùng {len} Mnemonic"
     },
@@ -233,7 +233,7 @@
         }
     },
     "startCreate": {
-        "notice": "Vì sự an toàn tài sản của bạn, chức năng tạo tài khoản tạm thời không được hỗ trợ trên ví web. Vui lòng tải Ứng dụng Vite để tạo tài khoản.",
+        "notice": "For your funds' safety, account creation function is not currently supported on web wallet. Please download Vite App to create an account.",
         "goLogin": "Đăng nhập",
         "goDex": "Đi tới ViteX"
     },
@@ -259,15 +259,15 @@
             "gate": "Cổng ví Chuỗi chéo",
             "totalExAmount": "Tổng số dư trên sàn",
             "availableExAmount": "Tổng số dư sẵn có trên sàn",
-            "balanceTips": "点击转账，可以从Vite 钱包给其他地址转币",
-            "gateTips": "点击跨链转入，可以将其他币种跨链映射到Vite网络，转入Vite钱包；点击跨链转出仍可以将资产转至其他平台。*转入转出过程可能会产生手续费，且有金额限制",
-            "availableExAmountTips": "点击充值至交易所，将钱包中的资产划转至交易所；点击提现至钱包，将交易所资产划转至钱包。以上划转过程不需要手续费"
+            "balanceTips": "You can transfer your assets to other addresses via clicking 'Send' button",
+            "gateTips": "In this cross-chain section, you can map other tokens into Vite network. Click 'Receive' button to deposit assets to your Vite Wallet. Click 'Send' button to transfer your assets to other platforms. * Cross-chain receive/send process may charge fees, it also has its transfer limitation.",
+            "availableExAmountTips": "You can transfer your assets from Vite Wallet to ViteX Exchange via clicking 'Deposit' button. Click 'Withdraw' button to transfer assets from ViteX Exchange to Vite Wallet. No transaction fees caused during these processes."
         },
         "actionType": {
-            "SEND": "Chuyển",
+            "SEND": "Gửi",
             "RECEIVE": "Nhân",
             "CHARGE": "Nhận",
-            "WITHDRAW": "Chuyển",
+            "WITHDRAW": "Gửi",
             "EXCHARGE": "Nạp",
             "EXWITHDRAW": "Rút",
             "EXRECRODS": "Lịch sử",
@@ -275,7 +275,7 @@
         },
         "addToken": {
             "title": "Thêm token",
-            "placeholder": "Please input token name 或者 TokenID",
+            "placeholder": "Please enter token name or TokenID",
             "lTxt": "Hủy",
             "rTxt": "Thêm"
         },
@@ -296,18 +296,18 @@
                 "tokenId": "TokenID",
                 "tokenName": "Tên",
                 "totalSupply": "Tổng cung",
-                "total": "流通总量",
-                "overview": "代币简介",
-                "type": "代币类型",
-                "gate": "跨链网关",
-                "website": "官网",
-                "whitePaper": "白皮书",
-                "explorer": "浏览器",
+                "total": "Circulating Supply",
+                "overview": "Giới thiệu",
+                "type": "Loại",
+                "gate": "Cross-Chain Gateway",
+                "website": "Trang web",
+                "whitePaper": "White Paper",
+                "explorer": "Explorer",
                 "github": "Github",
-                "media": "社交媒体",
-                "crossType": "跨链代币",
-                "originType": "原生代币",
-                "viewmore": "查看更多"
+                "media": "Social Media",
+                "crossType": "Cross-Chain",
+                "originType": "Native",
+                "viewmore": "View More"
             },
             "reIssuable": {
                 "true": "Có thể cấp lại",
@@ -377,38 +377,38 @@
             "amountPlaceholder": "Vui lòng nhập số lượng nhận"
         },
         "charge": {
-            "title": "Nhận Chuỗi chéo",
+            "title": "Cross-Chain Receive Funds",
             "addrErr": "Đã xảy ra lỗi với node cổng, vui lòng kiểm tra cài đặt mạng của bạn",
             "addressTitle": "Địa chỉ Người nhận",
-            "labelTips": " (Please use this '{labelName}' with your recipient address, otherwise your assets will lose)",
-            "labelCodeTips": "Vui lòng quét mã QR từ {labelName}",
-            "codeTips": "Quét mã QR để nạp tiền. Vui lòng chuyển bằng ví hỗ trợ {tokenSymbol}",
+            "labelTips": "(Please use this '{labelName}' with your recipient address, otherwise your assets will lose",
+            "labelCodeTips": "Please Scan the QR code from {labelName}",
+            "codeTips": "Scan QR code to deposit. Please send funds with the wallet that supports {tokenSymbol}",
             "tips": [
-                "Hoạt động nhận chuỗi chéo sẽ thực hiện chuyển đổi chuỗi chéo {tokenSymbol} vào mạng VITE, bạn vẫn có thể chuyển tài sản sau khi nhận token",
+                "Cross-Chain Receive operation will do {tokenSymbol} Cross-Chain mapping to VITE network, you can still transfer the assets to other platform after receiving them",
                 "Bạn chỉ có thể gửi {tokenSymbol} qua địa chỉ này và số lượng không thể ít hơn {min}",
                 "Bạn sẽ nhận được tài sản của mình sau {confirmationCount} xác nhận, vui lòng đợi"
             ]
         },
         "withdraw": {
-            "title": "Chuyển Chuỗi chéo",
+            "title": "Cross-Chain Send Funds",
             "balanceErrMap": {
                 "notEnough": "Không đủ số dư",
-                "overMax": "Số tiền chuyển phải nhỏ hơn {max}",
-                "lessMin": "Số tiền chuyển phải lớn hơn {min}"
+                "overMax": "Send amount should be less than {max}",
+                "lessMin": "Send amount should not be less than {min}"
             },
             "feeTips": "Số tiền phí giao dịch được đặt bởi Nhà vận hành cổng",
             "addressErr": "Định dạng địa chỉ không đúng",
             "labels": {
                 "balance": "Số dư",
-                "address": "Địa chỉ",
+                "address": "Địa chỉ người nhận",
                 "amount": "Số lượng",
                 "fee": "Phí",
                 "all": "Tất cả"
             },
             "labelPlaceholder": "Please input {labelName}",
-            "amountPlaceholder": "Vui lòng điền số lượng nhiều hơn {min}",
-            "addressPlaceholder": "Please input {token} transfer address",
-            "successTips": "Yêu cầu chuyển đã được gửi",
+            "amountPlaceholder": "Please input send amount which should not be less than {min}",
+            "addressPlaceholder": "Please enter {token} recipient address",
+            "successTips": "Transaction request has been sent",
             "failTips": "Đã xảy ra lỗi trong node cổng, vui lòng kiểm tra thiết lập mạng"
         },
         "nodeErr": "Node cổng không hợp lệ, vui lòng kiểm tra thiết lập cổng"
@@ -421,13 +421,13 @@
         "help": {
             "title": "Hiểu thêm về Hạn ngạch"
         },
-        "transfer": "Chuyển",
+        "transfer": "Send Funds",
         "getTestToken": "Nhận Test Token",
         "transDetail": "Chi tiết giao dịch",
         "address": "Địa chỉ của tôi",
         "fundFloat": "Đang chuyển giao",
         "pend": "Đang chờ xử lý",
-        "inAddress": "Địa chỉ nhận",
+        "inAddress": "Địa chỉ người nhận",
         "sum": "Số lượng",
         "remarks": "Bình luận",
         "remarksLong": "còn {len} byte nữa",
@@ -528,7 +528,7 @@
         "maxAmt": "Số tiền rút phải trong khoảng [{minAmount}, {maxAmount}]",
         "cancelLimitAmt": "Số lượng đặt cược không được ít hơn {num}",
         "withdrawalStaking": "Rút token đã thế chấp",
-        "myAddr": "Tôi",
+        "myAddr": "Current Address",
         "confirm": {
             "help": {
                 "t1": "Hạn ngạch là gì?",
@@ -580,7 +580,7 @@
         "title": "SBP",
         "help": {
             "title": "Về SBP",
-            "text": "SBP (Nhà sản xuất Khối Snapshot) là node có quyền tạo khối, bạn có thể đăng ký trở thành ứng cử viên SBP bằng cách đặt một số lượng VITE nhất định, mỗi vòng sẽ có 25 SBP (khoảng 75 giây), các SBP sẽ được bầu ngẫu nhiên 23 trong số 25 nút ứng cử viên hàng đầu, cộng với ngẫu nhiên 2 trong số các nút ứng cử xếp thứ 26 - 100 trong danh sách. 50% phần thưởng tạo khối sẽ được phân bổ cho node tạo khối, 50% còn lại sẽ được phân bổ cho các node xếp hạng trong top 100 dưới dạng phần thưởng bỏ phiếu. Một địa chỉ đăng ký (địa chỉ đặt cược) có thể đăng ký nhiều node tạo khối (tên node), tên node không thể được sử dụng nếu đã được đăng ký bởi một địa chỉ khác. Tên node có thể thay đổi địa chỉ tạo khối, tuy nhiên, với một địa chỉ tạo khối không thể thay đổi tên node khác."
+            "text": "SBP（Snapshot Block Producer）is a node that has right to create blocks, you can register to become a SBP candidate by staking a certain amount of VITE, each round (about 75 seconds) will elect 25 SBPs, the SBPs will be elected from random 23 out of top 25 candidate nodes, plus random 2 out of the candidate nodes ranking 26th-100th on the list. The 50% of total SBP rewards will be allocated to the block creation node, the other 50% will be allocated to nodes that are ranked on top 100 as voting rewards. One registration address (staking address) can register multiple block creation nodes (node names), a node name cannot be used if the node name has been registered by a registration address. A node name can switch block creation address, however, block creation address cannot be reused by other node names."
         },
         "register": "Đăng ký SBP",
         "cancel": "Hủy SBP",
@@ -759,7 +759,7 @@
         "title": "Chuyển đổi VITE",
         "help": {
             "title": "Hiểu thêm về Chuyển đổi VITE",
-            "text": "Bạn có thể di chuyển VITE ERC20 thành VITE Coin vào Testnet của chúng tôi dự trên chức năng Chuyển đổi VITE. Trong TestNet, bỏ phiếu bầu cho SBP chính thức để thu thập phần thưởng, tỷ lệ hàng năm có thể đạt 20%. VITE ERC20 của bạn sẽ được chuyển đến địa chỉ lỗ đen Ethereum: {blackAddr}, khi đó bạn sẽ nhận được cùng số lượng VITE tại địa chỉ Vite của bạn khi giao dịch của bạn được xác nhận gửi vào địa chỉ lỗ đen Ethereum. Một khi đang chuyển đổi, hãy chắc chắn bạn có đủ VITE và ETH (dưới dạng gas) trong địa chỉ Ethereum từ ví Vite của bạn."
+            "text": "You can convert ERC20 VITE into VITE at Vite Pre-Mainnet through VITE conversion. During conversion, your ERC20 VITE will be transferred to Ethereum black hole address: 0x1111111111111111111111111111111111111111, and you will receive the same amount of VITE in your Vite address after the transaction to Ethereum black hole address has completed. During the conversion, fee of transaction to the Ethereum black hole address come from your current ETH address. After submitting the conversion, please wait at least 30 confirmations in Ethereum network, you can find the transaction history in conversion history."
         },
         "gas": "Phí Khai thác",
         "record": "Lịch sử Chuyển đổi",
@@ -779,19 +779,19 @@
         "mergeDepth": "Nhóm",
         "depthStep": "{step} chữ số",
         "blocking": "Đã xảy ra lỗi mạng, vui lòng thử lại",
-        "supportMining": "支持挖矿的交易对",
+        "supportMining": "Mineable Trading Pairs",
         "operator": {
-            "noName": "匿名网关",
+            "noName": "Anonymous Gateway",
             "overview": "Giới thiệu",
             "txPair": "Cặp Giao dịch",
             "confirmTitle": "Nhắc nhở rủi ro",
             "confirmText": "Cặp giao dịch hiện tại là {symbol}. Hãy cẩn thận khi giao dịch. Đầu tư vào tài sản kỹ thuật số đi kèm với rủi ro cao. Trước khi đầu tư, vui lòng hiểu rõ tất cả các rủi ro khi đầu tư vào tài sản kỹ thuật số và tự mình đánh giá tính xác thực, tính hợp pháp và tính hợp lệ của tài sản kỹ thuật số. Hãy thận trọng với các quyết định đầu tư và chịu trách nhiệm về sản của chính mình.",
-            "address": "运营商地址",
-            "name": "运营商名称"
+            "address": "Operator Address",
+            "name": "Operator Name"
         },
         "operatorTxPair": {
-            "title": "交易对信息",
-            "tokenTab": "代币详情",
+            "title": "Trading Pair Details",
+            "tokenTab": "Token Details",
             "operatorTab": "Chi tiết về Nhà vận hành"
         }
     },
@@ -804,8 +804,8 @@
         "quantityTitle": "Tổng({quantity})",
         "priceTitle": "Giá({price})",
         "amountTitle": "Số lượng({amount})",
-        "quantityTable": "累积数量Qty？？？",
-        "amountTable": "累积成交额",
+        "quantityTable": "Số lượng",
+        "amountTable": "Khối lượng",
         "amount": "Tổng",
         "newOrderSuccess": "Đã gửi yêu cầu đặt hàng",
         "newOrderFail": "Lệnh không thành công",
@@ -1004,10 +1004,10 @@
             "0": "Mua"
         },
         "status": {
-            "1": "委托中",
-            "2": "已完成",
-            "3": "已撤销",
-            "4": "下单失败"
+            "1": "Ongoing",
+            "2": "Đã hoàn thành",
+            "3": "Cancelled",
+            "4": "Thất bại"
         },
         "confirmTable": {
             "title": "Sổ Đặt hàng",
@@ -1049,7 +1049,7 @@
             "side": "Mặt",
             "buy": "Mua",
             "sell": "Bán",
-            "status": "状态",
+            "status": "Trạng thái",
             "search": "Tìm kiếm",
             "reset": "Thiết lập lại"
         }
@@ -1081,7 +1081,15 @@
         "more": "Tìm hiểu về Quy tắc khai thác VX"
     },
     "inviteMining": {
-        "txTitle": "Tổng thu nhập Giới thiệu là Khai thác"
+        "title": "邀请挖矿总收益"
+    },
+    "orderMining": {
+        "title": "挂单挖矿总收益",
+        "tbHead": {
+            "date": "日前",
+            "ratio": "占比",
+            "mining": "挖矿金额"
+        }
     },
     "tradeDividend": {
         "title": "Cổ tức",
