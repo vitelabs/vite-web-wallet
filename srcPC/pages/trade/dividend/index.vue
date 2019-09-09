@@ -70,28 +70,11 @@ import pagination from 'components/pagination.vue';
 import { dividend } from 'services/trade';
 import date from 'utils/date';
 import bigNumber from 'utils/bigNumber';
-import confirm from 'components/confirm/index.js';
 import openUrl from 'utils/openUrl';
 
 export default {
     components: { sectionTitle, walletTable, pagination, pool },
     mounted() {
-        // Temporary coming soon alert
-        confirm({
-            size: 'small',
-            type: 'description',
-            title: this.$t('tradeDividend.hintTitle'),
-            singleBtn: true,
-            closeBtn: { show: true },
-            leftBtn: {
-                text: this.$t('tradeDividend.more'),
-                click: () => {
-                    this.goLink();
-                }
-            },
-            content: this.$t('tradeDividend.comingHint')
-        });
-
         this.fetchList();
     },
     data() {
