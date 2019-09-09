@@ -8,7 +8,7 @@ block content
         .search-tips
             .search-tips__item(v-for="token in searchRes" :class="{active:selectedTokenIds.indexOf(token.tokenId)>=0}")
                 input(type="checkbox" name="addTokenSelected" v-model="selectedTokenIds" :value="token.tokenId" )
-                img(:src="token.icon")
+                img(:src="token.icon||token.tokenId|id2icon")
                 .info
                     .title
                         .name {{token.tokenName}}

@@ -1,13 +1,9 @@
 <template>
-    <div
-        id="vite-wallet-app"
-        class="app-wrapper"
-        :class="{
-            dex: $route.name.indexOf('trade') !== -1,
-            wallet: $route.name.indexOf('trade') === -1
-        }"
-    >
-        <router-view />
+    <div id="vite-wallet-app" class="app-wrapper" :class="{
+        'dex': $route.name.indexOf('trade') !== -1,
+        'wallet': $route.name.indexOf('trade') === -1
+    }">
+        <router-view/>
         <notice-list></notice-list>
     </div>
 </template>

@@ -151,12 +151,11 @@
         "bigger0": "Value must be greater than 0",
         "operateSuccess": "Operation Successful",
         "operateFail": "Operation Failed",
-        "unreceived": "Unlock you wallet before use",
-        "unLogin":"Please login before using referral code"
+        "unreceived": "Unlock you wallet before use"
     },
     "beforeUse": {
         "title": "Read Before Use",
-        "text1": "For your funds' safety, account creation function is not currently supported on web wallet. Please download Vite App to create an account. Vite platform would like to warn you that if you visit a phishing website or lose you backup, our company cannot recover your funds.",
+        "text1": "For your funds' safety, create account function is not supported provisionally on web wallet. Please download Vite App to create account. Vite platform would like to warn you that if you visit a phishing website or lose you backup, our company cannot recover your funds.",
         "text2": "Please note that our websites do not store your private keys or seed phrase. Therefore, you will need to restore your account via seed phrase if you decide to change browsers, clear local cookies, or change PCs.",
         "text3": "Please take proper precautions in ensuring that you accurately record and safely store your seed phrase. Even the slightest error will result in you not being able to successfully restore your address."
     },
@@ -184,9 +183,9 @@
         "restore": "Restore Account by Seed Phrase",
         "record": "Generate Seed Phrase",
         "prompt": "Mnemonic seed phrase is the only way to restore your wallet. You are strongly advised to write down the phrase and keep it in a safe place where only you can access.",
-        "placeholder": "Please enter your mnemonic seed phrase. Example: apple banana peach mango pear ...",
-        "empty": "Seed phrase cannot be empty",
-        "error": "Wrong seed phrase. Try again",
+        "placeholder": "Please input your mnemonic seed phrase",
+        "empty": "The input of seed phrase cannot be empty",
+        "error": "Incorrect seed phrase. Try again",
         "hint": "Example: apple banana peach mango pear ...",
         "change": "Switch to {len} Mnemonic Words"
     },
@@ -205,7 +204,7 @@
         "addAddr": "Add Address",
         "addrList": "Address Management",
         "setDefault": "Select Default Address",
-        "autoLogout": "Auto Logout Time",
+        "autoLogout": "Auto Logout Time",    
         "noPass": "Turn on password-free mode",
         "explorer": "Block Explorer",
         "netInfo": "Network Information",
@@ -235,7 +234,7 @@
         }
     },
     "startCreate": {
-        "notice": "For your funds' safety, account creation function is not currently supported on web wallet. Please download Vite App to create an account.",
+        "notice": "For your funds' safety, create account function is not supported provisionally on web wallet. Please download Vite App to create account.",
         "goLogin": "Log In",
         "goDex": "Go to ViteX"
     },
@@ -365,7 +364,7 @@
             "amountPlaceholder": "Please input receive amount"
         },
         "charge": {
-            "title": "Cross-Chain Receive Funds",
+            "title": "Cross-Chain Receive",
             "addrErr": "Something went wrong with gateway node, please check your network settings",
             "addressTitle": "Recipient Address",
             "labelTips":"(Please use this '{labelName}' with your recipient address, otherwise your assets will lose",
@@ -516,7 +515,7 @@
         "maxAmt": "Withdraw amount should be in [{minAmount}, {maxAmount}]",
         "cancelLimitAmt": "Staking amount cannot be less than {num}",
         "withdrawalStaking": "Withdrawal of Staked Token",
-        "myAddr": "Current Address",
+        "myAddr": "Me",
         "confirm": {
             "help": {
                 "t1": "What is Quota?",
@@ -568,7 +567,7 @@
         "title": "SBP",
         "help": {
             "title": "About SBP",
-            "text": "SBP（Snapshot Block Producer）is a node that has right to create blocks, you can register to become a SBP candidate by staking a certain amount of VITE, each round (about 75 seconds) will elect 25 SBPs, the SBPs will be elected from random 23 out of top 25 candidate nodes, plus random 2 out of the candidate nodes ranking 26th-100th on the list. The 50% of total SBP rewards will be allocated to the block creation node, the other 50% will be allocated to nodes that are ranked on top 100 as voting rewards. One registration address (staking address) can register multiple block creation nodes (node names), a node name cannot be used if the node name has been registered by a registration address. A node name can switch block creation address, however, block creation address cannot be reused by other node names."
+            "text": "SBP（Snapshot Block Producer）is a node that has right to create blocks, you can register to become a SBP candidate by staking a certain amount of VITE, each round (about 75 seconds) will elect 25 SBPs, the SBPs will be elected from random 23 out of top 25 candidate nodes, plus random 2 out of the candidate nodes ranking 26th-100th on the list. The 50% of block creation rewards will be allocated to the block creation node, the other 50% will be allocated to nodes that are ranked on top 100 as voting rewards. One registration address (staking address) can register multiple block creation nodes (node names), a node name cannot be used if the node name has been registered by a registration address. A node name can switch block creation address, however, block creation address cannot be reused by other node names."
         },
         "register": "SBP Registration",
         "cancel": "SBP Cancellation",
@@ -743,7 +742,7 @@
         "title": "VITE Conversion",
         "help": {
             "title": "Quick Understanding of VITE Conversion",
-            "text": "You can convert ERC20 VITE into VITE at Vite Pre-Mainnet through VITE conversion. During conversion, your ERC20 VITE will be transferred to Ethereum black hole address: 0x1111111111111111111111111111111111111111, and you will receive the same amount of VITE in your Vite address after the transaction to Ethereum black hole address has completed. During the conversion, fee of transaction to the Ethereum black hole address come from your current ETH address. After submitting the conversion, please wait at least 30 confirmations in Ethereum network, you can find the transaction history in conversion history."
+            "text": "You can migrate ERC20 tokens into VITE into our TestNet by VITE conversion function. In TestNet, casting your vote for official SBPs to collect rewards, the annualized rate can reach 20%. Your ERC20 VITE tokens will be transferred to Ethereum black hole address: {blackAddr}, you will receive the same amount of VITE at your Vite address when Ethereum black hole address has received the transaction and confirmed. Once you are in the conversion process, confirm that there are enough VITE and ETH (as gas) in your Ethereum address of Vite wallet."
         },
         "gas": "Mining Fees",
         "record": "Conversion History",
