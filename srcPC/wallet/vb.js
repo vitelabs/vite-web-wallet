@@ -2,7 +2,7 @@ import Connector from '@vite/bifrost';
 import { setCurrHDAcc, getCurrHDAcc } from './index';
 import store from 'pcStore';
 
-export const BRIDGE = 'wss://biforst.vitewallet.com';
+export const BRIDGE = process === 'production' ? 'wss://biforst.vitewallet.com' : 'ws://139.155.7.172:5001';
 export class VB extends Connector {
     constructor(opts, meta) {
         super(opts, meta);
