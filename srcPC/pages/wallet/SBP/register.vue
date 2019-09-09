@@ -44,7 +44,7 @@
                     {{ $t('stakingAmount') }}
                     <span v-show="amountErr" class="err">{{ amountErr }}</span>
                 </div>
-                <div class="__form_input all unuse __ellipsis">500,000 VITE</div>
+                <div class="__form_input all unuse __ellipsis">1,000,000 VITE</div>
             </div>
             <div class="item">
                 <div v-show="!btnUnuse" class="__form_btn __pointer" :class="{
@@ -68,7 +68,7 @@ import statistics from 'utils/statistics';
 import { execWithValid } from 'pcUtils/execWithValid';
 
 const Vite_Token_Info = constant.Vite_Token_Info;
-const amount = 500000;
+const amount = 1000000;
 
 export default {
     components: { viteInput },
