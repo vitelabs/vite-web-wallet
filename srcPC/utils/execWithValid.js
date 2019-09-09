@@ -5,9 +5,6 @@ import { vbConnectDialog } from 'pcComponents/dialog';
 export function execWithValid(funcName, noActive) {
     return function (...args) {
         const currHDACC = getCurrHDAcc();
-        if (!currHDACC) {
-            return Promise.reject({ error: { code: 12002 } });
-        }
         if (currHDACC.status === StatusMap.UNLOCK) {
             return funcName.call(this, ...args);
         }

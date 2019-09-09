@@ -18,9 +18,7 @@
             <span>
                 {{ $t('assets.notice.hint', { gate: gateInfo.gateway }) }}
                 <a v-show="gateInfo.customer">
-                    --<a class="link __pointer" @click="goLink($i18n.locale === 'zh' ? gateInfo.customer : gateInfo.customerEn)">
-                        {{ $i18n.locale === 'zh' ? gateInfo.customer : gateInfo.customerEn }}
-                    </a>
+                    --<a class="link __pointer" @click="goLink(gateInfo.customer)">{{ gateInfo.customer }}</a>
                 </a>
             </span>
         </div>
