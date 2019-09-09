@@ -9,7 +9,7 @@
                 >
                     {{ $t("trade.proxy.new") }}
                 </div>
-                <div class="btn btn__cancel __pointer">
+                <div class="btn btn__cancel __pointer" @click="gotoProxyInfo">
                     {{ $t("trade.proxy.info") }}
                 </div>
             </div>
@@ -137,6 +137,7 @@ import { addDialog } from './dialog';
 import PairItem from './dialog/pairItem';
 import { doUntill } from 'utils/asyncFlow';
 import { execWithValid } from 'pcUtils/execWithValid';
+import openUrl from 'utils/openUrl';
 export default {
     components: { PairItem },
     data() {
@@ -158,6 +159,9 @@ export default {
         }
     },
     methods: {
+        gotoProxyInfo(){
+            openUrl("https://github.com/vitelabs/vite-wiki/blob/mainnet/docs/zh/dex/api/proxy.md")
+        },
         updateData() {
             return Promise.all([ getProxyRelation({ address: this.address }).then(data => {
                 this.relation = data.relations;
