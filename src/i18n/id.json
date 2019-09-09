@@ -13,7 +13,7 @@
     "settingAcc": "Pengaturan Akun",
     "resetAcc": "Setel Ulang Akun",
     "logout": "Keluar",
-    "saveLogout": "安全退出",
+    "saveLogout": "Keluar",
     "blockHeight": "Snapshot Block Height",
     "accountName": "Nama Akun",
     "action": "Beraksi",
@@ -38,7 +38,7 @@
         "assets": [
             "Setor ke Pertukaran",
             "Tarik ke Dompet",
-            "Penerimaan & Transfer Lintas Rantai"
+            "Cross-Chain Receive & Send"
         ]
     },
     "dealReminder": {
@@ -152,11 +152,11 @@
         "operateSuccess": "Operasi sukses",
         "operateFail": "Operasi gagal",
         "unreceived": "Buka kunci dompet Anda sebelum digunakan",
-        "unLogin": "Please login"
+        "unLogin": "Please login before using referral code"
     },
     "beforeUse": {
         "title": "Baca Sebelum Digunakan",
-        "text1": "Demi keamanan dana Anda, membuat fungsi akun tidak didukung sementara di dompet web. Silakan unduh Aplikasi Vite untuk membuat akun. Platform Vite ingin memperingatkan Anda bahwa jika Anda mengunjungi situs web phishing atau kehilangan cadangan Anda, perusahaan kami tidak dapat memulihkan dana Anda.",
+        "text1": "For your funds' safety, account creation function is not currently supported on web wallet. Please download Vite App to create an account. Vite platform would like to warn you that if you visit a phishing website or lose you backup, our company cannot recover your funds.",
         "text2": "Harap perhatikan bahwa situs web kami tidak menyimpan kunci pribadi atau frasa unggulan Anda. Oleh karena itu, Anda perlu mengembalikan akun Anda melalui frase seed jika Anda memutuskan untuk mengubah browser, menghapus cookie lokal, atau mengubah PC.",
         "text3": "Harap berhati-hati dalam memastikan bahwa Anda merekam dan menyimpan frase benih Anda dengan akurat. Bahkan kesalahan sekecil apa pun akan menyebabkan Anda tidak berhasil mengembalikan alamat Anda."
     },
@@ -184,9 +184,9 @@
         "restore": "Pulihkan Akun dengan Seed Phrase",
         "record": "Hasilkan Seed Phrase",
         "prompt": "Seed Phrase mnemonic adalah satu-satunya cara untuk mengembalikan dompet Anda. Anda sangat disarankan untuk menuliskan frasa dan menyimpannya di tempat yang aman di mana hanya Anda yang dapat mengaksesnya.",
-        "placeholder": "Please input your mnemonic seed phrase. Example: apple banana peach mango pear ...",
-        "empty": "Masukan dari frase seed tidak boleh kosong",
-        "error": "Seed Phrase salah. Coba lagi",
+        "placeholder": "Please enter your mnemonic seed phrase. Example: apple banana peach mango pear ...",
+        "empty": "Seed phrase cannot be empty",
+        "error": "Wrong seed phrase. Try again",
         "hint": "Contoh: apel pisang peach mangga ...",
         "change": "Beralih ke {len} kata-kata Mnemonic"
     },
@@ -235,7 +235,7 @@
         }
     },
     "startCreate": {
-        "notice": "Demi keamanan dana Anda, membuat fungsi akun tidak didukung sementara di dompet web. Silakan unduh Aplikasi Vite untuk membuat akun.",
+        "notice": "For your funds' safety, account creation function is not currently supported on web wallet. Please download Vite App to create an account.",
         "goLogin": "Masuk",
         "goDex": "Pergi ke ViteX"
     },
@@ -261,15 +261,15 @@
             "gate": "Gateway Lintas Rantai Dompet",
             "totalExAmount": "Total Saldo Pertukaran",
             "availableExAmount": "Saldo Tersedia Pertukaran",
-            "balanceTips": "点击转账，可以从Vite 钱包给其他地址转币",
-            "gateTips": "点击跨链转入，可以将其他币种跨链映射到Vite网络，转入Vite钱包；点击跨链转出仍可以将资产转至其他平台。*转入转出过程可能会产生手续费，且有金额限制",
-            "availableExAmountTips": "点击充值至交易所，将钱包中的资产划转至交易所；点击提现至钱包，将交易所资产划转至钱包。以上划转过程不需要手续费"
+            "balanceTips": "You can transfer your assets to other addresses via clicking 'Send' button",
+            "gateTips": "In this cross-chain section, you can map other tokens into Vite network. Click 'Receive' button to deposit assets to your Vite Wallet. Click 'Send' button to transfer your assets to other platforms. * Cross-chain receive/send process may charge fees, it also has its transfer limitation.",
+            "availableExAmountTips": "You can transfer your assets from Vite Wallet to ViteX Exchange via clicking 'Deposit' button. Click 'Withdraw' button to transfer assets from ViteX Exchange to Vite Wallet. No transaction fees caused during these processes."
         },
         "actionType": {
-            "SEND": "Transfer",
+            "SEND": "Kirim",
             "RECEIVE": "Menerima",
             "CHARGE": "Menerima",
-            "WITHDRAW": "Transfer",
+            "WITHDRAW": "Kirim",
             "EXCHARGE": "Deposito",
             "EXWITHDRAW": "Penarikan",
             "EXRECRODS": "Riwayat",
@@ -277,7 +277,7 @@
         },
         "addToken": {
             "title": "Tambahkan Token",
-            "placeholder": "Please input token name 或者 TokenID",
+            "placeholder": "Please enter token name or TokenID",
             "lTxt": "Batal",
             "rTxt": "Tambah"
         },
@@ -298,18 +298,18 @@
                 "tokenId": "TokenID",
                 "tokenName": "Nama",
                 "totalSupply": "Total Pasokan",
-                "total": "流通总量",
-                "overview": "代币简介",
-                "type": "代币类型",
-                "gate": "跨链网关",
-                "website": "官网",
-                "whitePaper": "白皮书",
-                "explorer": "浏览器",
+                "total": "Circulating Supply",
+                "overview": "Pengantar",
+                "type": "Tipe",
+                "gate": "Cross-Chain Gateway",
+                "website": "Situs web",
+                "whitePaper": "White Paper",
+                "explorer": "Explorer",
                 "github": "Github",
-                "media": "社交媒体",
-                "crossType": "跨链代币",
-                "originType": "原生代币",
-                "viewmore": "查看更多"
+                "media": "Social Media",
+                "crossType": "Cross-Chain",
+                "originType": "Native",
+                "viewmore": "View More"
             },
             "reIssuable": {
                 "true": "Diterbitkan kembali",
@@ -379,38 +379,38 @@
             "amountPlaceholder": "Silakan masukkan jumlah terima"
         },
         "charge": {
-            "title": "Cross-Chain Receive",
+            "title": "Cross-Chain Receive Funds",
             "addrErr": "Ada yang salah dengan node gateway, harap periksa pengaturan jaringan Anda",
             "addressTitle": "Alamat penerima",
-            "labelTips": " (Please use this '{labelName}' with your recipient address, otherwise your assets will lose)",
-            "labelCodeTips": "Harap Pindai kode QR dari {labelName}",
-            "codeTips": "Pindai kode QR untuk menyetor. Silakan transfer dengan dompet yang mendukung {tokenSymbol}",
+            "labelTips": "(Please use this '{labelName}' with your recipient address, otherwise your assets will lose",
+            "labelCodeTips": "Please Scan the QR code from {labelName}",
+            "codeTips": "Scan QR code to deposit. Please send funds with the wallet that supports {tokenSymbol}",
             "tips": [
-                "Operasi Cross-Chain Receive akan melakukan {tokenSymbol} pemetaan Cross-Chain ke jaringan VITE, Anda masih dapat mentransfer aset setelah menerimanya",
+                "Cross-Chain Receive operation will do {tokenSymbol} Cross-Chain mapping to VITE network, you can still transfer the assets to other platform after receiving them",
                 "Anda hanya dapat mengirim {tokenSymbol} melalui alamat ini dan jumlahnya tidak boleh kurang dari {min}",
                 "Anda akan menerima aset Anda setelah {confirmationCount} konfirmasi, silakan tunggu"
             ]
         },
         "withdraw": {
-            "title": "Transfer Lintas Rantai",
+            "title": "Cross-Chain Send Funds",
             "balanceErrMap": {
                 "notEnough": "Saldo tidak mencukupi",
-                "overMax": "Jumlah transfer harus kurang dari {max}",
-                "lessMin": "Jumlah transfer harus lebih besar dari {min}"
+                "overMax": "Send amount should be less than {max}",
+                "lessMin": "Send amount should not be less than {min}"
             },
             "feeTips": "Jumlah biaya transaksi ditentukan oleh operator gateway",
             "addressErr": "Format alamat salah",
             "labels": {
                 "balance": "Saldo",
-                "address": "Alamat",
+                "address": "Alamat penerima",
                 "amount": "Jumlah",
                 "fee": "Biaya",
                 "all": "Semua"
             },
             "labelPlaceholder": "Please input {labelName}",
-            "amountPlaceholder": "Silakan masukkan jumlah transfer yang tidak boleh kurang dari {min}",
-            "addressPlaceholder": "Please input {token} transfer address",
-            "successTips": "Permintaan transfer telah dikirim",
+            "amountPlaceholder": "Please input send amount which should not be less than {min}",
+            "addressPlaceholder": "Please enter {token} recipient address",
+            "successTips": "Transaction request has been sent",
             "failTips": "Terjadi kesalahan pada node gateway, harap periksa pengaturan jaringan"
         },
         "nodeErr": "Node gateway tidak valid, periksa pengaturan gateway"
@@ -423,13 +423,13 @@
         "help": {
             "title": "Pemahaman Cepat tentang Kuota"
         },
-        "transfer": "Transfer",
+        "transfer": "Send Funds",
         "getTestToken": "Dapatkan Token Uji",
         "transDetail": "Lebih Banyak Rincian Transaksi",
         "address": "Alamat saya",
         "fundFloat": "Tidak diterima",
         "pend": "Tertunda",
-        "inAddress": "Alamat Penerima",
+        "inAddress": "Alamat penerima",
         "sum": "Jumlah",
         "remarks": "Komentar",
         "remarksLong": "{len} byte tersisa",
@@ -530,7 +530,7 @@
         "maxAmt": "Jumlah penarikan harus dalam [{minAmount}, {maxAmount}]",
         "cancelLimitAmt": "Jumlah taruhan tidak boleh kurang dari {num}",
         "withdrawalStaking": "Penarikan Token Staked",
-        "myAddr": "Saya",
+        "myAddr": "Current Address",
         "confirm": {
             "help": {
                 "t1": "Apa itu Kuota?",
@@ -582,7 +582,7 @@
         "title": "SBP",
         "help": {
             "title": "Tentang SBP",
-            "text": "SBP （Snapshot Block Producer） adalah simpul yang memiliki hak untuk membuat blok, Anda dapat mendaftar untuk menjadi kandidat SBP dengan mempertaruhkan sejumlah VITE, setiap putaran (sekitar 75 detik) akan memilih 25 SBP, SBP akan dipilih dari 23 dari 25 kandidat node acak, ditambah 2 random dari node kandidat peringkat 26-100 di daftar. 50% dari hadiah blok ciptaan akan dialokasikan ke node blok ciptaan, 50% lainnya akan dialokasikan ke node yang peringkat di atas 100 sebagai hadiah voting. Satu alamat registrasi (staking address) dapat mendaftarkan beberapa node pembuatan blok (nama simpul), nama simpul tidak dapat digunakan jika nama simpul telah didaftarkan oleh alamat pendaftaran. Nama simpul dapat mengganti alamat pembuatan blok, namun, alamat pembuatan blok tidak dapat digunakan kembali oleh nama simpul lainnya."
+            "text": "SBP（Snapshot Block Producer）is a node that has right to create blocks, you can register to become a SBP candidate by staking a certain amount of VITE, each round (about 75 seconds) will elect 25 SBPs, the SBPs will be elected from random 23 out of top 25 candidate nodes, plus random 2 out of the candidate nodes ranking 26th-100th on the list. The 50% of total SBP rewards will be allocated to the block creation node, the other 50% will be allocated to nodes that are ranked on top 100 as voting rewards. One registration address (staking address) can register multiple block creation nodes (node names), a node name cannot be used if the node name has been registered by a registration address. A node name can switch block creation address, however, block creation address cannot be reused by other node names."
         },
         "register": "Pendaftaran SBP",
         "cancel": "Pembatalan SBP",
@@ -761,7 +761,7 @@
         "title": "VITE Konversi",
         "help": {
             "title": "Pemahaman Cepat tentang Konversi VITE",
-            "text": "Anda dapat memigrasikan token ERC20 ke VITE ke dalam fungsi konversi TestNet oleh VITE kami. Di TestNet, memberikan suara Anda untuk SBP resmi untuk mengumpulkan hadiah, tarif tahunan dapat mencapai 20%. Token VITE ERC20 Anda akan ditransfer ke alamat black hole Ethereum: {blackAddr}, Anda akan menerima jumlah VITE yang sama di alamat Vite Anda ketika alamat black hole Ethereum telah menerima transaksi dan dikonfirmasi. Setelah Anda dalam proses konversi, konfirmasikan bahwa ada cukup VITE dan ETH (sebagai gas) di alamat Ethereum dompet Vite Anda."
+            "text": "You can convert ERC20 VITE into VITE at Vite Pre-Mainnet through VITE conversion. During conversion, your ERC20 VITE will be transferred to Ethereum black hole address: 0x1111111111111111111111111111111111111111, and you will receive the same amount of VITE in your Vite address after the transaction to Ethereum black hole address has completed. During the conversion, fee of transaction to the Ethereum black hole address come from your current ETH address. After submitting the conversion, please wait at least 30 confirmations in Ethereum network, you can find the transaction history in conversion history."
         },
         "gas": "Biaya Penambangan",
         "record": "Sejarah Konversi",
@@ -781,19 +781,19 @@
         "mergeDepth": "Grup",
         "depthStep": "{step} digit",
         "blocking": "Terjadi kemacetan jaringan, silakan coba lagi nanti",
-        "supportMining": "支持挖矿的交易对",
+        "supportMining": "Mineable Trading Pairs",
         "operator": {
-            "noName": "匿名网关",
+            "noName": "Anonymous Gateway",
             "overview": "Pengantar",
             "txPair": "Pasangan Perdagangan",
             "confirmTitle": "Pengingat Risiko",
             "confirmText": "Pasangan perdagangan saat ini adalah {simbol}. Harap berhati-hati saat berdagang. Berinvestasi dalam aset digital memiliki risiko tinggi. Sebelum berinvestasi, harap memiliki pemahaman penuh tentang semua risiko berinvestasi dalam aset digital dan menilai keaslian, legalitas, dan validitas aset digital Anda sendiri. Harap berhati-hati terhadap keputusan investasi Anda sendiri dan bertanggung jawab atas hilangnya aset Anda.",
-            "address": "运营商地址",
-            "name": "运营商名称"
+            "address": "Operator Address",
+            "name": "Operator Name"
         },
         "operatorTxPair": {
-            "title": "交易对信息",
-            "tokenTab": "代币详情",
+            "title": "Trading Pair Details",
+            "tokenTab": "Token Details",
             "operatorTab": "Detail Operator"
         }
     },
@@ -807,8 +807,8 @@
         "quantityTitle": "Total({quantity})",
         "priceTitle": "Harga({price})",
         "amountTitle": "Jumlah({amount})",
-        "quantityTable": "累积数量Qty？？？",
-        "amountTable": "累积成交额",
+        "quantityTable": "Jumlah",
+        "amountTable": "Volume",
         "amount": "Total",
         "newOrderSuccess": "Permintaan pesanan telah dikirim",
         "newOrderFail": "Pesanan Gagal",
@@ -1067,10 +1067,10 @@
             "0": "Beli"
         },
         "status": {
-            "1": "委托中",
-            "2": "已完成",
-            "3": "已撤销",
-            "4": "下单失败"
+            "1": "Ongoing",
+            "2": "Selesai",
+            "3": "Cancelled",
+            "4": "Gagal"
         },
         "confirmTable": {
             "title": "Daftar Order",
@@ -1112,7 +1112,7 @@
             "side": "Sisi",
             "buy": "Beli",
             "sell": "Jual",
-            "status": "状态",
+            "status": "Status",
             "search": "Pencarian",
             "reset": "Setel ulang"
         }
@@ -1144,7 +1144,15 @@
         "more": "Pelajari lebih lanjut tentang aturan penambangan VX"
     },
     "inviteMining": {
-        "txTitle": "Mengacu pada Total Pendapatan Penambangan"
+        "title": "邀请挖矿总收益"
+    },
+    "orderMining": {
+        "title": "挂单挖矿总收益",
+        "tbHead": {
+            "date": "日前",
+            "ratio": "占比",
+            "mining": "挖矿金额"
+        }
     },
     "tradeDividend": {
         "title": "Dividen",
