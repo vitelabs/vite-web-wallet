@@ -67,7 +67,6 @@
 </template>
 <script>
 import openUrl from 'utils/openUrl';
-import confirm from 'components/confirm/index.js';
 import { miningTrade, miningPledge, getInviteMiningDetail, getOrderMiningDetail } from 'services/trade';
 import inviteMinComp from './invite.vue';
 import orderMinComp from './order.vue';
@@ -91,21 +90,6 @@ export default {
         };
     },
     mounted() {
-        // Temporary coming soon alert
-        confirm({
-            size: 'small',
-            type: 'description',
-            title: this.$t('tradeMining.hintTitle'),
-            singleBtn: true,
-            closeBtn: { show: true },
-            leftBtn: {
-                text: this.$t('tradeMining.more'),
-                click: () => {
-                    this.goLink();
-                }
-            },
-            content: this.$t('tradeMining.comingHint')
-        });
         this.init();
     },
     computed: {
