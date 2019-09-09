@@ -1,0 +1,16 @@
+$font: PingFang-SC, arial, sans-serif;
+$blue: #007aff;
+$red: rgba(229,73,77,1);
+$green: rgba(1,215,100,1);
+$down-color: $red;
+$up-color: $green;
+
+@mixin font-normal() {
+    font-family: $font;
+    font-weight: 400;
+}
+
+@mixin font-bold() {
+    font-family: $font;
+    font-weight: 600;
+}

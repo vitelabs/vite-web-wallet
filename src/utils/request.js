@@ -1,17 +1,11 @@
 import qs from 'qs';
 
 const reqTimeout = 30000;
-const afterResponseDefault = async function (xhr, path) {
-    if (+xhr.status !== 200) {
-        return Promise.reject({
-            code: xhr.status,
-            message: xhr.responseText
-        });
-    }
 
+const afterResponseDefault = async function (xhr) {
     const { code, msg, data, error } = JSON.parse(xhr.responseText);
-    const rightCode = path.indexOf('api') === -1 ? 200 : 0;
-    if (code !== rightCode) {
+
+    if (code !== 200) {
         return Promise.reject({
             code,
             message: msg || error
@@ -53,6 +47,14 @@ export default function request({
 
     return new Promise((res, rej) => {
         xhr.onload = function () {
+            if (+xhr.status !== 200) {
+                rej({
+                    status: xhr.status,
+                    message: xhr.responseText || ''
+                });
+                return;
+            }
+
             afterResponse(xhr, path).then(d => res(d), d => rej(d)).catch(e => {
                 rej({
                     status: xhr.status,
@@ -77,10 +79,13 @@ export const getClient = function (baseUrl = '', afterResponse, headersBase = {}
         host.slice(-1) === '/' && (host = host.slice(0, -1));
         path.indexOf('/') === 0 && (path = path.slice(1));
         path = `${ host }/${ path }`;
+
         headers = { ...headersBase, ...headers };
+
         if ((path.indexOf('.') !== -1 || path.indexOf(':') !== -1) && path.indexOf('http') !== 0) {
             path = `${ location.protocol }//${ path }`;
         }
+
         // [TODO] 暂时解决自定义网关跨域问题
         return request({ method, path, params, timeout, afterResponse, headers });
     };

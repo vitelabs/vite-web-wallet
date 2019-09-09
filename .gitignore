@@ -1,6 +1,7 @@
 .DS_Store
 node_modules
 dist
+distH5
 static
 .eslintcache
 .idea
@@ -11,3 +12,4 @@ routes.js
 package-lock.json
 secret.js
 static.tar
+h5Static.tar

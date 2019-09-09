@@ -4,7 +4,7 @@
             <div ref="line" class="line" :class="{
                 'smooth': !isShowPrecent
             }" :style="{ 'width': size + '%' }">
-                <div ref="drag" @mousedown="drag" class="drag"
+                <div ref="drag" @mousedown="pcDrag" class="drag"
                      @mouseenter="showPercent" @mouseleave="hidePercent">
                     <span ref="percent" class="percent" :class="{
                         'show': isShowPrecent
@@ -44,6 +44,9 @@ export default {
             default: ''
         }
     },
+    mounted() {
+        this.init();
+    },
     data() {
         const size = this.default / (this.max - this.min);
         return {
@@ -61,6 +64,59 @@ export default {
         }
     },
     methods: {
+        init() {
+            this.$refs.drag.addEventListener('touchstart', e => {
+                this.showPercent(e);
+            });
+            this.$refs.drag.addEventListener('touchmove', e => {
+                this.mobileDrag(e);
+            });
+            this.$refs.drag.addEventListener('touchend', e => {
+                this.hidePercent(e);
+            });
+        },
+        pcDrag(e) {
+            const eWidth = this.$refs.line.clientWidth;
+            const startX = e.clientX;
+
+            document.onmousemove = ev => {
+                const currX = ev.clientX;
+                this.emitDrag(currX, startX, eWidth);
+            };
+            document.touchend = () => {
+                !this.isEnterPercent && this.hidePercent();
+
+                document.onmousemove = null;
+                document.onmouseup = null;
+            };
+            document.onmouseup = () => {
+                !this.isEnterPercent && this.hidePercent();
+
+                document.onmousemove = null;
+                document.onmouseup = null;
+            };
+        },
+        mobileDrag(e) {
+            const startX = this.$refs.drag.offsetLeft + this.$refs.drag.clientWidth / 2;
+
+            const ev = e || window.event;
+            const touch = ev.targetTouches[0];
+            const currX = touch.clientX - this.$refs.wrapper.offsetLeft;
+
+            this.emitDrag(currX, startX, this.$refs.line.clientWidth);
+        },
+        emitDrag(currX, startX, eWidth) {
+            this.showPercent();
+
+            const allWidth = this.$refs.wrapper.clientWidth;
+            const distance = currX - startX;
+
+            let curentWidth = eWidth + distance;
+            curentWidth = curentWidth > 0 ? curentWidth : 0;
+            curentWidth = curentWidth > allWidth ? allWidth : curentWidth;
+            this.size = curentWidth / allWidth * 100;
+            this.$emit('drag', this.size);
+        },
         showPercent(e) {
             e && (this.isEnterPercent = true);
             this.isShowPrecent = true;
@@ -68,29 +124,6 @@ export default {
         hidePercent(e) {
             e && (this.isEnterPercent = false);
             this.isShowPrecent = false;
-        },
-        drag(e) {
-            const allWidth = this.$refs.wrapper.clientWidth;
-            const eWidth = this.$refs.line.clientWidth;
-            const startX = e.clientX;
-
-            document.onmousemove = ev => {
-                this.showPercent();
-
-                const distance = ev.clientX - startX;
-                let curentWidth = eWidth + distance;
-                curentWidth = curentWidth > 0 ? curentWidth : 0;
-                curentWidth = curentWidth > allWidth ? allWidth : curentWidth;
-                this.size = curentWidth / allWidth * 100;
-                this.$emit('drag', this.size);
-            };
-
-            document.onmouseup = () => {
-                !this.isEnterPercent && this.hidePercent();
-
-                document.onmousemove = null;
-                document.onmouseup = null;
-            };
         },
         _setSize(e) {
             if (e.target === this.$refs.drag || e.target === this.$refs.percent) {

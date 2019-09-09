@@ -1,5 +1,6 @@
 import toast from 'components/toast/index.js';
-import { getTokenIcon } from 'utils/tokenParser';
+import bigNumber from 'utils/bigNumber';
+import date from 'utils/date';
 
 document.addEventListener('drop', e => {
     e.preventDefault();
@@ -57,19 +58,13 @@ export default {
                 // 未解锁
                 return;
             }
-            if (code === 12002) {
-                // 无激活账户
-                toast(this.$t('hint.unLogin'), type, position);
-                return;
-            }
             if (!this || !this.$t) {
                 return;
             }
 
-            let msg
-        = code === -1 || !this.$i18n.messages.zh.errCode[Math.abs(code)]
-            ? message || this.$t('hint.err')
-            : this.$t(`errCode.${ Math.abs(code) }`);
+            let msg = code === -1 || !this.$i18n.messages.zh.errCode[Math.abs(code)]
+                ? message || this.$t('hint.err')
+                : this.$t(`errCode.${ Math.abs(code) }`);
             if (Math.abs(code) === 32002) {
                 msg = `${ errMsg } (${ code })`;
             }
@@ -81,8 +76,17 @@ export default {
 
         // ----------filters
 
-        Vue.filter('id2icon', function (value) {
-            return getTokenIcon(value);
+        Vue.filter('date', function (value, locale, isOnlyTime) {
+            return date(value, locale, isOnlyTime);
+        });
+        Vue.filter('formatNum', function (value, decimal, number) {
+            return bigNumber.formatNum(value, decimal, number);
+        });
+        Vue.filter('toBasic', function (num, minUnit, decimalPlaces) {
+            return bigNumber.toBasic(num, minUnit, decimalPlaces);
+        });
+        Vue.filter('toMin', function (num, decimal, fix) {
+            return bigNumber.formatNum(num, decimal, fix);
         });
     }
 };

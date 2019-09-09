@@ -13,7 +13,7 @@
     "settingAcc": "Pengaturan Akun",
     "resetAcc": "Setel Ulang Akun",
     "logout": "Keluar",
-    "saveLogout": "Logout",
+    "saveLogout": "安全退出",
     "blockHeight": "Snapshot Block Height",
     "accountName": "Nama Akun",
     "action": "Beraksi",
@@ -107,6 +107,8 @@
         "CreateContractReq": "Buat Kontrak",
         "DexFundPledgeForVx": "Taruhan ViteX",
         "DexFundPledgeForVip": "ViteX VIP",
+        "DexFundPledgeForSuperVip": "ViteX SVIP",
+        "DexFundConfigMarketsAgent": "Configure Delegations",
         "TxReq": "Transfer",
         "RewardReq": "Transfer",
         "TxRes": "Transfer",
@@ -796,6 +798,7 @@
         }
     },
     "trade": {
+        "more":"more",
         "search": "Pencarian",
         "txPair": "Pasangan",
         "price": "Harga",
@@ -871,6 +874,8 @@
         "limitPrice": {
             "title": "Batas",
             "fee": "Biaya",
+            "adviseToSVip":"成为超级VIP可免交易所基础费率",
+            "feeRuleWithSVip":"Zone Fees * Referral Discount. ATTENTION: The adjustment and discount of fees will only affect new orders, the former orders' charge remains the same.",
             "text": "Halaman ini adalah halaman pratinjau data transaksi. Silakan masuk untuk berdagang.",
             "validAmount": "Volume harus lebih besar dari {amount}{token}",
             "priceNotNull": "Jumlah tidak boleh kosong",
@@ -895,7 +900,65 @@
             "openSuccess": "Berhasil Diterapkan! Status VIP akan mulai berlaku nanti.",
             "openFail": "Gagal menerapkan VIP",
             "cancelSuccess": "Batalkan VIP Berhasil",
-            "cancelFail": "Batalkan Gagal"
+            "cancelFail": "Batalkan Gagal",
+            "adviseToCancel":"由于您已成为超级VIP，平台手续费已为0，建议您取回普通VIP的抵押金额。"
+
+        },
+        "svipConfirm": {
+            "open":"开通",
+            "cancel":"取消",
+            "cancelVip": "Cancel SVIP",
+            "openVip": "Become a SVIP",
+            "openStakingAmount": "Staking Amount for Becoming a SVIP",
+            "cancelStakingAmount": "Retrievable Staking Amount",
+            "noBalance": "Insufficient Balance",
+            "openHint": "SVIP开通后，可免除基础手续费，开通SVIP需抵押10000VITE，30天后可手动取回",
+            "cancelHint": "You can retrieve your staking amount at approximately {time}. You will lose your SVIP privilege after retrieving.",
+            "openSuccess": "Applied Successful! SVIP status will come into effect later.",
+            "openFail": "Failed to apply SVIP",
+            "cancelSuccess": "Cancel SVIP Successful",
+            "cancelFail": "Cancel Failed"
+        },
+        "proxy":{
+            "title":"委托代理",
+            "subTitle":"交易委托",              
+            "successProxy":"委托成功",
+            "failProxy":"委托失败",
+            "successCancelProxy":"撤销委托成功",
+            "failCancelProxy":"撤销委托失败",
+            "info":"了解委托",
+            "new":"新建委托",
+            "active":{
+                "title":"委托记录",
+                "head":["委托地址","委托交易对","操作"],
+                "operate":["增加交易对","减少交易对","撤销委托"]
+            },
+            "passive":{
+                "title":"接受委托记录",
+                "head":["委托地址","委托交易对"]
+            },
+
+            "dialog": {
+              "cancel": "取消",
+              "cancelAllTips":"确认撤销对{trustAddress}所有的交易委托?",
+              "rTxtMap": {
+                "new": "添加",
+                "add": "添加",
+                "delete": "确认修改",
+                "deleteAll": "确认"
+              },
+              "titleMap": {
+                "new": "新增委托",
+                "add": "增加委托交易对",
+                "delete": "减少委托交易对",
+                "deleteAll": "确认撤销委托"
+              },
+              "confirm":{
+                    "title": "确认委托交易对",
+                    "cancel": "取消",
+                    "ok": "确认"
+              }
+            }
         }
     },
     "tradeAssets": {
