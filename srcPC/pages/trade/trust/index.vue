@@ -159,8 +159,8 @@ export default {
         }
     },
     methods: {
-        gotoProxyInfo(){
-            openUrl("https://github.com/vitelabs/vite-wiki/blob/mainnet/docs/zh/dex/api/proxy.md")
+        gotoProxyInfo() {
+            openUrl('https://github.com/vitelabs/vite-wiki/blob/mainnet/docs/zh/dex/api/proxy.md');
         },
         updateData() {
             return Promise.all([ getProxyRelation({ address: this.address }).then(data => {
