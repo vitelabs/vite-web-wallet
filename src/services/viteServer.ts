@@ -108,3 +108,11 @@ export function getAccountTxList({ address, pageIndex, pageCount }) {
 export function getSvipStatus(address:string) {
     return viteClient.request('dexfund_isPledgeSuperVip', address);
 }
+
+export function getCurrentVxMineInfo() {
+    return viteClient.request('dexfund_getCurrentVxMineInfo');
+}
+
+export function getCurrentFeesForMine() {
+    return viteClient.request('dexfund_getCurrentFeesForMine');
+}
