@@ -231,7 +231,7 @@ export default {
         white-space: nowrap;
         @include font-bold();
         &:first-child {
-            font-size: 18px;
+            font-size: 16px;
             color: rgba(36,39,43,1);
             line-height: 22px;
             margin-right: 4px;

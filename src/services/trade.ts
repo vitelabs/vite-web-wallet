@@ -154,6 +154,14 @@ export function miningTrade({ address, offset, limit = 30 }) {
     });
 }
 
+export function tradeFee({ address }) {
+    return ViteXAPI({
+        path: '/trade/fee',
+        method: 'GET',
+        params: { address }
+    });
+}
+
 export function miningPledge({ address, offset, limit = 30 }) {
     return ViteXAPI({
         path: '/mining/pledge',

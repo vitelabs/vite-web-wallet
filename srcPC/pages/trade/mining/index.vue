@@ -58,8 +58,8 @@
             </div>
         </div>
         <div class="tab_container">
-            <tradeMinComp v-if="tabName === 'trade'"></tradeMinComp>
-            <stakingMinComp v-if="tabName === 'staking'"></stakingMinComp>
+            <tradeMinComp v-if="tabName === 'trade'" :totalDividend="tradeTotalDividend"></tradeMinComp>
+            <stakingMinComp v-if="tabName === 'staking'" :totalDividend="pledgeTotalDividend"></stakingMinComp>
             <inviteMinComp v-if="tabName === 'invite'"></inviteMinComp>
             <orderMinComp v-if="tabName === 'order'"></orderMinComp>
         </div>
@@ -67,6 +67,7 @@
 </template>
 <script>
 import openUrl from 'utils/openUrl';
+import { getCurrentVxMineInfo } from 'services/viteServer';
 import { miningTrade, miningPledge, getInviteMiningDetail, getOrderMiningDetail } from 'services/trade';
 import inviteMinComp from './invite.vue';
 import orderMinComp from './order.vue';
@@ -82,12 +83,16 @@ export default {
     },
     data() {
         return {
+            currVxMineInfo: null,
             tradeMiningTotal: 0,
             stakingMiningTotal: 0,
             inviteMiningTotal: 0,
             orderMiningTotal: 0,
             tabName: 'trade'
         };
+    },
+    beforeMount() {
+        this.getCurrentVxMineInfo();
     },
     mounted() {
         this.init();
@@ -99,9 +104,20 @@ export default {
         stakeTotalPage() {
             return Math.ceil(this.stakeListTotal / 30);
         },
-
         address() {
             return this.$store.getters.activeAddr;
+        },
+        tradeTotalDividend() {
+            if (!this.currVxMineInfo) {
+                return null;
+            }
+            return this.currVxMineInfo.feeMineDetail || null;
+        },
+        pledgeTotalDividend() {
+            if (!this.currVxMineInfo) {
+                return '0';
+            }
+            return this.currVxMineInfo.pledgeMine || '0';
         }
     },
     watch: {
@@ -125,6 +141,13 @@ export default {
                 openUrl('https://dex.vite.wiki/zh/dex/#%E6%8C%96%E7%9F%BF%E6%96%B9%E6%A1%88v');
             }
             openUrl('https://dex.vite.wiki/dex/#vx-mining');
+        },
+        getCurrentVxMineInfo() {
+            getCurrentVxMineInfo().then(data => {
+                this.currVxMineInfo = data || null;
+            }).catch(err => {
+                console.warn(err);
+            });
         }
     }
 };

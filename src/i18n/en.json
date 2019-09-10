@@ -92,7 +92,7 @@
         "Voting": "Voting",
         "RevokeVoting": "Revoke Voting",
         "GetQuota": "Get Quota",
-        "WithdrawalOfQuota": "Withdrawal of Staking Quota",
+        "WithdrawalOfQuota": "Withdrawal of Stake",
         "Mintage": "Token Issuance",
         "MintageIssue": "Additional Token Issuance",
         "MintageBurn": "Destroy Tokens",
@@ -249,13 +249,13 @@
         }
     },
     "tokenCard": {
-        "moreRecords":"More Records",
+        "moreRecords":"View History",
         "others":"Others",
         "assetSpread":"Portfolio",
         "saveSuccess":"Successfully saved",
         "heads":{
             "name":"Name",
-            "balance":"Balance",
+            "balance":"Wallet Balance",
             "onroad":"Wallet Unreceived Amount",
             "gate":"Wallet Cross-Chain Gateway",
             "totalExAmount":"Exchange Total Balance",
@@ -514,7 +514,7 @@
         "gotoStake": "Please Staking enough VITE first",
         "maxAmt": "Withdraw amount should be in [{minAmount}, {maxAmount}]",
         "cancelLimitAmt": "Staking amount cannot be less than {num}",
-        "withdrawalStaking": "Withdrawal of Staked Token",
+        "withdrawalStaking": "Withdraw Staked Token",
         "myAddr": "Me",
         "confirm": {
             "help": {
@@ -779,7 +779,7 @@
         }
     },
     "trade": {
-        "more":"more",
+        "more":"More",
         "search": "Search",
         "txPair": "Pair",
         "price": "Price",
@@ -1122,7 +1122,11 @@
         "stakingBalance": "Retrievable Stake",
         "hintTitle": "Important Notice",
         "comingHint": "VX mining function is coming soon, stay tuned. You can get VX in five ways: 1. Trading as Mining, 2. Listing as Mining, 3. Referring as Mining, 4. Staking as Mining, 5. Market-making as Mining. Users who hold VX enjoy payouts from a shared dividend pool.",
-        "more": "Learn more about VX mining rules"
+        "more": "Learn more about VX mining rules",
+        "todayTrade": "24H Trading as Mining",
+        "fee": "Base Transaction Fees",
+        "dividends": "Expected to get",
+        "view": "View Live Mining Dashboard"
     },
     "inviteMining":{
         "title":"Referring as Mining Total Income"
@@ -1139,6 +1143,7 @@
         "title": "Dividends",
         "poolTitle": "Trading Fee Dividend Pool",
         "listTitle": "My Dividends",
+        "allPrice": "Total Estimated Value",
         "date": "Date",
         "VX": "Holding VX",
         "coin": "Type",
