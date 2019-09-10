@@ -1125,7 +1125,8 @@
         "more": "Learn more about VX mining rules",
         "todayTrade": "今日交易挖矿",
         "fee": "手续费",
-        "dividends": "预计分红"
+        "dividends": "预计分红",
+        "view": "查看市场实时挖矿数据"
     },
     "inviteMining":{
         "title":"Referring as Mining Total Income"
