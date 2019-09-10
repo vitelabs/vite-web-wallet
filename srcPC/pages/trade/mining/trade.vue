@@ -34,22 +34,26 @@
 <script>
 import walletTable from 'components/table/index.vue';
 import pagination from 'components/pagination';
+import { getCurrentFeesForMine } from 'services/viteServer';
 import { miningTrade, tradeFee } from 'services/trade';
-import { getCurrentVxMineInfo, getCurrentFeesForMine } from 'services/viteServer';
 import bigNumber from 'utils/bigNumber';
 import date from 'utils/date';
 
 export default {
     components: { walletTable, pagination },
+    props: {
+        totalDividend: {
+            type: Object,
+            default: null
+        }
+    },
     beforeMount() {
         this.fetchMiningTrade();
         this.fetchTradeFee();
-        this.fetchFeeAll();
     },
     data() {
         return {
             currentFees: null,
-            totalDividend: null,
             tradeFeeList: [],
             tradeCurrentPage: 0,
             tradeListTotal: 0,
@@ -180,11 +184,12 @@ export default {
                     console.warn(err);
                 });
         },
-        fetchFeeAll() {
-            Promise.all([
-                getCurrentVxMineInfo().then(data => (this.totalDividend = data ? data.feeMineDetail || null : null)),
-                getCurrentFeesForMine().then(data => (this.currentFees = data || null))
-            ]);
+        getCurrentFeesForMine() {
+            getCurrentFeesForMine().then(data => {
+                this.currentFees = data || null;
+            }).catch(err => {
+                console.warn(err);
+            });
         }
     }
 };
