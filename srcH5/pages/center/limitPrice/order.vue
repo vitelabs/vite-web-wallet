@@ -598,7 +598,7 @@ $font-black: rgba(36, 39, 43, 0.8);
     @include font-normal();
     margin-top: 4px;
     .symbol {
-        font-size: 16px;
+        font-size: 14px;
         font-family: $font;
         font-weight: 300;
         padding: 0 14px;
@@ -700,7 +700,7 @@ $font-black: rgba(36, 39, 43, 0.8);
     height: 100%;
     input {
         font-family: $font;
-        font-size: 14px;
+        font-size: 16px;
         color: rgba(36,39,43,1);
         text-indent: 14px;
     }

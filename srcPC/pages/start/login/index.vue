@@ -472,6 +472,7 @@ export default {
             box-sizing: border-box;
             background: #fff;
             margin-bottom: 20px;
+            font-size: 14px;
             .code_tips {
                 word-break: break-all;
                 text-align: left;

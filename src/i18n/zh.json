@@ -1120,7 +1120,10 @@
         "stakingBalance": "可取回抵押余额",
         "hintTitle": "重要通知",
         "comingHint": "VX挖矿功能即将开启，敬请期待。VX挖矿分为5类：交易挖矿、上币挖矿、邀请挖矿、抵押挖矿和挂单挖矿。您可以通过以上5种方式获取VX，持有VX可持续获得手续费分红。",
-        "more": "了解更多VX挖矿规则"
+        "more": "了解更多VX挖矿规则",
+        "todayTrade": "今日交易挖矿",
+        "fee": "手续费",
+        "dividends": "预计分红"
     },
     "inviteMining":{
         "title":"邀请挖矿总收益"
@@ -1128,7 +1131,7 @@
     "orderMining":{
         "title":"挂单挖矿总收益",
         "tbHead": {
-            "date": "日前",
+            "date": "日期",
             "ratio": "占比",
             "mining": "挖矿金额"
         }
