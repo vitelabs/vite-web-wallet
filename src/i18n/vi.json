@@ -92,7 +92,7 @@
         "Voting": "Bỏ phiếu",
         "RevokeVoting": "Hủy bỏ Bỏ phiếu",
         "GetQuota": "Nhận Hạn ngạch",
-        "WithdrawalOfQuota": "Rút Hạn ngạch đặc cược",
+        "WithdrawalOfQuota": "Withdrawal of Stake",
         "Mintage": "Phát hành token",
         "MintageIssue": "Phát hành Token bổ sung",
         "MintageBurn": "Phá hủy Token",
@@ -528,7 +528,7 @@
         "gotoStake": "Vui lòng thế chấp đủ VITE trước",
         "maxAmt": "Số tiền rút phải trong khoảng [{minAmount}, {maxAmount}]",
         "cancelLimitAmt": "Số lượng đặt cược không được ít hơn {num}",
-        "withdrawalStaking": "Rút token đã thế chấp",
+        "withdrawalStaking": "Withdraw Staked Token",
         "myAddr": "Tôi",
         "confirm": {
             "help": {
