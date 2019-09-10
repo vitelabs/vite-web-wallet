@@ -92,7 +92,7 @@
         "Voting": "投票",
         "RevokeVoting": "投票の取り消し",
         "GetQuota": "クオータを獲得",
-        "WithdrawalOfQuota": "ステーキングクォータの送信",
+        "WithdrawalOfQuota": "Withdrawal of Stake",
         "Mintage": "トークン発行",
         "MintageIssue": "追加のトークン発行",
         "MintageBurn": "トークンの破壊",
@@ -528,7 +528,7 @@
         "gotoStake": "最初に十分なVITEをステーキングしてください",
         "maxAmt": "引き出し金額は[{minAmount}、{maxAmount}]である必要があります",
         "cancelLimitAmt": "ステーキング額は{num}未満にはできません",
-        "withdrawalStaking": "ステークトークンの引き出し",
+        "withdrawalStaking": "Withdraw Staked Token",
         "myAddr": "私",
         "confirm": {
             "help": {
