@@ -55,6 +55,7 @@ export default {
     beforeMount() {
         this.fetchMiningTrade();
         this.fetchTradeFee();
+        this.getCurrentFeesForMine();
     },
     data() {
         return {
