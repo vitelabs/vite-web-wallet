@@ -249,13 +249,13 @@
         }
     },
     "tokenCard": {
-        "moreRecords":"More Records",
+        "moreRecords":"View History",
         "others":"Others",
         "assetSpread":"Portfolio",
         "saveSuccess":"Successfully saved",
         "heads":{
             "name":"Name",
-            "balance":"Balance",
+            "balance":"Wallet Balance",
             "onroad":"Wallet Unreceived Amount",
             "gate":"Wallet Cross-Chain Gateway",
             "totalExAmount":"Exchange Total Balance",
@@ -779,7 +779,7 @@
         }
     },
     "trade": {
-        "more":"more",
+        "more":"More",
         "search": "Search",
         "txPair": "Pair",
         "price": "Price",
@@ -1139,6 +1139,7 @@
         "title": "Dividends",
         "poolTitle": "Trading Fee Dividend Pool",
         "listTitle": "My Dividends",
+        "allPrice": "Total Estimated Value",
         "date": "Date",
         "VX": "Holding VX",
         "coin": "Type",
