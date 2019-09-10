@@ -1,17 +1,21 @@
 <template>
     <div class="trade-mining-section">
-        <div class="fee-title">{{ $t('tradeMining.todayTrade') }}</div>
+        <div class="fee-title">
+            {{ $t('tradeMining.todayTrade') }}
+            <span class="link __pointer" @click="goView">{{ $t('tradeMining.view') }}</span>
+        </div>
+
         <div class="my-divident">
             <div class="item" v-for="tokenType in ['VITE', 'BTC', 'ETH', 'USD']" :key="tokenType">
                 <div class="item-title">{{ tokenType }}</div>
                 <div class="item-price">
                     <div>
                         <span>{{ $t('tradeMining.fee') }}</span>
-                        {{ expectedDividends && expectedDividends[tokenType] ? expectedDividends[tokenType].fee : 0 }}
+                        {{ expectedDividends && expectedDividends[tokenType] ? expectedDividends[tokenType].fee : 0 }} VX
                     </div>
                     <div class="dividend">
                         <span>{{ $t('tradeMining.dividends') }}</span>
-                        {{ expectedDividends && expectedDividends[tokenType] ? expectedDividends[tokenType].dividend : 0 }}
+                        {{ expectedDividends && expectedDividends[tokenType] ? expectedDividends[tokenType].dividend : 0 }} VX
                     </div>
                 </div>
             </div>
@@ -38,6 +42,7 @@ import { getCurrentFeesForMine } from 'services/viteServer';
 import { miningTrade, tradeFee } from 'services/trade';
 import bigNumber from 'utils/bigNumber';
 import date from 'utils/date';
+import openUrl from 'utils/openUrl';
 
 export default {
     components: { walletTable, pagination },
@@ -187,6 +192,9 @@ export default {
             }).catch(err => {
                 console.warn(err);
             });
+        },
+        goView() {
+            openUrl('https://vitex.net/');
         }
     }
 };
@@ -200,6 +208,12 @@ export default {
     color: rgba(94, 104, 117, 0.8);
     line-height: 30px;
     margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    .link {
+        color: #007aff;
+        margin-left: 10px;
+    }
 }
 
 .my-divident {

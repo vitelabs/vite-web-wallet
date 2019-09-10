@@ -3,7 +3,7 @@
         <div class="item">
             <div>{{ $t("stakingAmount") }}</div>
             <div class="bold">{{ stakingDetail.amount }}</div>
-            <div>{{ `${$t('tradeMining.dividends')}: ${expectedDividends}` }}</div>
+            <div>{{ `${$t('tradeMining.dividends')}: ${expectedDividends} VX` }}</div>
         </div>
         <div class="item">
             <div>{{ $t("withdrawHeight") }}</div>
