@@ -1123,7 +1123,8 @@
         "more": "了解更多VX挖矿规则",
         "todayTrade": "今日交易挖矿",
         "fee": "手续费",
-        "dividends": "预计分红"
+        "dividends": "预计分红",
+        "view": "查看市场实时挖矿数据"
     },
     "inviteMining":{
         "title":"邀请挖矿总收益"
