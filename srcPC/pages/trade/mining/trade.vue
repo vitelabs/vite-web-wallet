@@ -1,10 +1,25 @@
 <template>
     <div class="trade-mining-section">
-        <wallet-table
-            class="mint-trade-table content tb"
-            :headList="tradeHeadList"
-            :contentList="content"
-        >
+        <div class="fee-title">{{ $t('tradeMining.todayTrade') }}</div>
+        <div class="my-divident">
+            <div class="item" v-for="tokenType in ['VITE', 'BTC', 'ETH', 'USD']" :key="tokenType">
+                <div class="item-title">{{ tokenType }}</div>
+                <div class="item-price">
+                    <div>
+                        <span>{{ $t('tradeMining.fee') }}</span>
+                        {{ expectedDividends && expectedDividends[tokenType] ? expectedDividends[tokenType].fee : 0 }}
+                    </div>
+                    <div class="dividend">
+                        <span>{{ $t('tradeMining.dividends') }}</span>
+                        {{ expectedDividends && expectedDividends[tokenType] ? expectedDividends[tokenType].dividend : 0 }}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <wallet-table class="mint-trade-table content tb"
+                      :headList="tradeHeadList"
+                      :contentList="content">
             <pagination
                 slot="tableBottom"
                 class="__tb_pagination"
@@ -15,18 +30,31 @@
         </wallet-table>
     </div>
 </template>
+
 <script>
 import walletTable from 'components/table/index.vue';
 import pagination from 'components/pagination';
-import { miningTrade } from 'services/trade';
+import { getCurrentFeesForMine } from 'services/viteServer';
+import { miningTrade, tradeFee } from 'services/trade';
 import bigNumber from 'utils/bigNumber';
 import date from 'utils/date';
 
-
 export default {
     components: { walletTable, pagination },
+    props: {
+        totalDividend: {
+            type: Object,
+            default: null
+        }
+    },
+    beforeMount() {
+        this.fetchMiningTrade();
+        this.fetchTradeFee();
+    },
     data() {
         return {
+            currentFees: null,
+            tradeFeeList: [],
             tradeCurrentPage: 0,
             tradeListTotal: 0,
             tradeList: [],
@@ -46,15 +74,13 @@ export default {
             ]
         };
     },
-    beforeMount() {
-        this.fetchMiningTrade();
-    },
     watch: {
         address() {
             this.tradeCurrentPage = 0;
             this.tradeListTotal = 0;
             this.tradeList = [];
             this.fetchMiningTrade();
+            this.fetchTradeFee();
         }
     },
     computed: {
@@ -76,6 +102,50 @@ export default {
         },
         address() {
             return this.$store.getters.activeAddr;
+        },
+        expectedDividends() {
+            if (!this.currentFees || !this.totalDividend || !this.tradeFeeList || !this.tradeFeeList.length) {
+                return null;
+            }
+
+            const typeList = {
+                1: {
+                    tokenSymbol: 'VITE',
+                    decimals: 18
+                },
+                2: {
+                    tokenSymbol: 'ETH',
+                    decimals: 18
+                },
+                3: {
+                    tokenSymbol: 'BTC',
+                    decimals: 8
+                },
+                4: {
+                    tokenSymbol: 'USD',
+                    decimals: 6
+                }
+            };
+            const dividends = {};
+            this.tradeFeeList.forEach(tradeFee => {
+                const quoteType = tradeFee.quoteType;
+                const decimals = typeList[quoteType].decimals;
+                const symbol = typeList[quoteType].tokenSymbol;
+
+                const currFee = this.currentFees[quoteType] || 0;
+                const currDividens = this.totalDividend[quoteType] || 0;
+
+                const basicCurrFee = bigNumber.toBasic(currFee, decimals);
+                const basicCurrDividens = bigNumber.toBasic(currDividens, decimals);
+                const percent = +basicCurrFee ? bigNumber.dividedToNumber(tradeFee.amount, basicCurrFee, 8) : 0;
+
+                dividends[symbol] = {
+                    fee: tradeFee.amount,
+                    dividend: bigNumber.multi(basicCurrDividens, percent)
+                };
+            });
+
+            return dividends;
         }
     },
     methods: {
@@ -98,7 +168,68 @@ export default {
                 .catch(err => {
                     console.warn(err);
                 });
+        },
+        fetchTradeFee() {
+            tradeFee({ address: this.address }).then(data => {
+                if (!data) {
+                    return;
+                }
+
+                this.tradeFeeList = data || [];
+            })
+                .catch(err => {
+                    console.warn(err);
+                });
+        },
+        getCurrentFeesForMine() {
+            getCurrentFeesForMine().then(data => {
+                this.currentFees = data || null;
+            }).catch(err => {
+                console.warn(err);
+            });
         }
     }
 };
 </script>
+
+<style lang="scss" scoped>
+@import "~assets/scss/vars.scss";
+
+.fee-title {
+    font-size: 13px;
+    color: rgba(94, 104, 117, 0.8);
+    line-height: 30px;
+    margin-bottom: 10px;
+}
+
+.my-divident {
+    background: url('~assets/imgs/mint_pledge_bg.png') rgba(234,248,255,0.2);
+    background-size: 100% 100%;
+    font-size: 12px;
+    font-family: $font-normal;
+    line-height: 16px;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 20px;
+    box-shadow: 0px 2px 10px 1px rgba(176, 192, 237, 0.42);
+    border-radius: 2px;
+
+    .item {
+        flex: 1;
+        box-sizing: border-box;
+        padding: 14px 30px;
+        border-right: 1px solid rgba(227,235,245,0.6);
+        &:last-child {
+            border-right: none;
+        }
+        .item-title {
+            color: rgba(94,104,117,1);
+            margin-bottom: 2px;
+        }
+        .item-price {
+            color: rgba(29,32,36,1);
+            margin-top: 2px;
+        }
+    }
+}
+</style>

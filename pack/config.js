@@ -12,7 +12,7 @@ const viteNet = {
     dev: '\'http://132.232.134.168:8080/\''
 };
 const ethServer = {
-    production: '\'https:\/\/mainnet.infura.io\/http\'',
+    production: '\'https://mainnet.infura.io/v3/caae2231051e46a1941f422df1fbcc94\'',
     test: '\'https://ropsten.infura.io/http\'',
     dev: '\'https://ropsten.infura.io/http\''
 };
