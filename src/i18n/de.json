@@ -92,7 +92,7 @@
         "Voting": "Voting",
         "RevokeVoting": "Revoke Voting",
         "GetQuota": "Get Quota",
-        "WithdrawalOfQuota": "Withdrawal of Staking Quota",
+        "WithdrawalOfQuota": "Withdrawal of Stake",
         "Mintage": "Token Issuance",
         "MintageIssue": "Additional Token Issuance",
         "MintageBurn": "Destroy Tokens",
@@ -528,7 +528,7 @@
         "gotoStake": "Please Staking enough VITE first",
         "maxAmt": "Withdraw amount should be in [{minAmount}, {maxAmount}]",
         "cancelLimitAmt": "Staking amount cannot be less than {num}",
-        "withdrawalStaking": "Withdrawal of Staked Token",
+        "withdrawalStaking": "Withdraw Staked Token",
         "myAddr": "Me",
         "confirm": {
             "help": {
