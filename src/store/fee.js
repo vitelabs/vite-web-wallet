@@ -72,6 +72,7 @@ const actions = {
         });
     },
     exFetchMarketInfo({ commit, getters }) {
+        commit('setExchangeMarketInfo', {});
         const _activeTxPair = getters.exActiveTxPair;
 
         _activeTxPair && getMarketInfo(_activeTxPair.tradeToken, _activeTxPair.quoteToken).then(data => {
