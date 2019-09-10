@@ -1131,7 +1131,7 @@
     "orderMining":{
         "title":"挂单挖矿总收益",
         "tbHead": {
-            "date": "日前",
+            "date": "日期",
             "ratio": "占比",
             "mining": "挖矿金额"
         }
