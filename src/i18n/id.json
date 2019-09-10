@@ -1150,7 +1150,10 @@
         "stakingBalance": "Retrievable Stake",
         "hintTitle": "Pemberitahuan Penting",
         "comingHint": "Fungsi penambangan VX akan segera hadir, nantikan. Anda bisa mendapatkan VX dalam lima cara: 1. Trading sebagai Penambangan, 2. Listing sebagai Penambangan, 3. Merujuk sebagai Penambangan, 4. Staking sebagai Penambangan, 5. Pembuatan pasar sebagai Penambangan. Pengguna yang memegang VX menikmati pembayaran dari kumpulan dividen bersama.",
-        "more": "Pelajari lebih lanjut tentang aturan penambangan VX"
+        "more": "Pelajari lebih lanjut tentang aturan penambangan VX",
+        "todayTrade": "今日交易挖矿",
+        "fee": "手续费",
+        "dividends": "预计分红"
     },
     "inviteMining": {
         "title": "Mengacu pada Total Pendapatan Penambangan"
