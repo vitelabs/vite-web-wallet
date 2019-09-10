@@ -1125,7 +1125,8 @@
         "more": "Learn more about VX mining rules",
         "todayTrade": "24H Trading as Mining",
         "fee": "Base Transaction Fees",
-        "dividends": "Expected to get"
+        "dividends": "Expected to get",
+        "view": "View Live Mining Dashboard"
     },
     "inviteMining":{
         "title":"Referring as Mining Total Income"
