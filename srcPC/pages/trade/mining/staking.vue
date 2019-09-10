@@ -2,8 +2,6 @@
     <div class="trade-mining-section">
         <div class="content">
             <div class="quota-detail">
-                {{ expectedDividends }}
-
                 <div
                     v-if="!stakingObj"
                     @click="_showVxConfirm(1)"
@@ -14,6 +12,7 @@
                 <staking-detail
                     v-else
                     :stakingObj="stakingObj"
+                    :totalDividend="totalDividend"
                     :showVxConfirm="_showVxConfirm"
                 ></staking-detail>
             </div>
@@ -116,12 +115,6 @@ export default {
         },
         address() {
             return this.$store.getters.activeAddr;
-        },
-        expectedDividends() {
-            if (!this.stakingObj || !+this.stakingObj.amount) {
-                return '0';
-            }
-            return this.stakingObj.amount / this.totalDividend;
         }
     },
     methods: {

@@ -1,16 +1,16 @@
 <template>
     <div class="trade-mining-section">
-        <div class="fee-title">今日交易挖矿</div>
+        <div class="fee-title">{{ $t('tradeMining.todayTrade') }}</div>
         <div class="my-divident">
             <div class="item" v-for="tokenType in ['VITE', 'BTC', 'ETH', 'USD']" :key="tokenType">
                 <div class="item-title">{{ tokenType }}</div>
                 <div class="item-price">
                     <div>
-                        <span>手续费</span>
+                        <span>{{ $t('tradeMining.fee') }}</span>
                         {{ expectedDividends && expectedDividends[tokenType] ? expectedDividends[tokenType].fee : 0 }}
                     </div>
-                    <div>
-                        <span>预计分红</span>
+                    <div class="dividend">
+                        <span>{{ $t('tradeMining.dividends') }}</span>
                         {{ expectedDividends && expectedDividends[tokenType] ? expectedDividends[tokenType].dividend : 0 }}
                     </div>
                 </div>
@@ -104,7 +104,6 @@ export default {
             return this.$store.getters.activeAddr;
         },
         expectedDividends() {
-            console.log(this.currentFees, this.totalDividend, this.tradeFeeList);
             if (!this.currentFees || !this.totalDividend || !this.tradeFeeList || !this.tradeFeeList.length) {
                 return null;
             }
@@ -139,7 +138,6 @@ export default {
                 const basicCurrFee = bigNumber.toBasic(currFee, decimals);
                 const basicCurrDividens = bigNumber.toBasic(currDividens, decimals);
                 const percent = +basicCurrFee ? bigNumber.dividedToNumber(tradeFee.amount, basicCurrFee, 8) : 0;
-                console.log(tradeFee.amount, currFee, basicCurrFee, percent, currDividens);
 
                 dividends[symbol] = {
                     fee: tradeFee.amount,
@@ -147,7 +145,6 @@ export default {
                 };
             });
 
-            console.log(dividends);
             return dividends;
         }
     },
@@ -198,6 +195,13 @@ export default {
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
 
+.fee-title {
+    font-size: 13px;
+    color: rgba(94, 104, 117, 0.8);
+    line-height: 30px;
+    margin-bottom: 10px;
+}
+
 .my-divident {
     background: url('~assets/imgs/mint_pledge_bg.png') rgba(234,248,255,0.2);
     background-size: 100% 100%;
@@ -206,6 +210,9 @@ export default {
     line-height: 16px;
     display: flex;
     flex-direction: row;
+    margin-bottom: 20px;
+    box-shadow: 0px 2px 10px 1px rgba(176, 192, 237, 0.42);
+    border-radius: 2px;
 
     .item {
         flex: 1;

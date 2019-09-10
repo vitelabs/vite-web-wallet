@@ -116,3 +116,7 @@ export function getCurrentVxMineInfo() {
 export function getCurrentFeesForMine() {
     return viteClient.request('dexfund_getCurrentFeesForMine');
 }
+
+export function getCurrentPledgeForVxSum() {
+    return viteClient.request('dexfund_getCurrentPledgeForVxSum');
+}

@@ -3,6 +3,7 @@
         <div class="item">
             <div>{{ $t("stakingAmount") }}</div>
             <div class="bold">{{ stakingDetail.amount }}</div>
+            <div>{{ `${$t('tradeMining.dividends')}: ${expectedDividends}` }}</div>
         </div>
         <div class="item">
             <div>{{ $t("withdrawHeight") }}</div>
@@ -35,6 +36,7 @@
 import date from 'utils/date';
 import bigNumber from 'utils/bigNumber';
 import { constant } from '@vite/vitejs';
+import { getCurrentPledgeForVxSum } from 'services/viteServer';
 
 const Vite_Token_Info = constant.Vite_Token_Info;
 
@@ -53,7 +55,14 @@ export default {
         showVxConfirm: {
             type: Function,
             default: () => {}
+        },
+        totalDividend: {
+            type: String,
+            default: '0'
         }
+    },
+    data() {
+        return { currTotalPledge: 0 };
     },
     computed: {
         height() {
@@ -77,6 +86,23 @@ export default {
                     Vite_Token_Info.decimals),
                 withdrawHeight: this.stakingObj.withdrawHeight
             };
+        },
+        expectedDividends() {
+            if (!this.stakingObj || !+this.stakingObj.amount) {
+                return '0';
+            }
+            const percent = +this.currTotalPledge ? bigNumber.dividedToNumber(this.stakingObj.amount, this.currTotalPledge, 8) : 0;
+            const dividends = bigNumber.multi(this.totalDividend, percent, 8);
+            return bigNumber.toBasic(dividends, Vite_Token_Info.decimals, 8);
+        }
+    },
+    methods: {
+        getCurrentPledgeForVxSum() {
+            return getCurrentPledgeForVxSum().then(data => {
+                this.currTotalPledge = data || '0';
+            }).catch(err => {
+                console.warn(err);
+            });
         }
     }
 };
