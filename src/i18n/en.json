@@ -780,7 +780,7 @@
     },
     "trade": {
         "more":"more",
-        "search": "Search",
+       "search": "Search",
         "txPair": "Pair",
         "price": "Price",
         "upDown": "Change%",
@@ -1123,9 +1123,9 @@
         "hintTitle": "Important Notice",
         "comingHint": "VX mining function is coming soon, stay tuned. You can get VX in five ways: 1. Trading as Mining, 2. Listing as Mining, 3. Referring as Mining, 4. Staking as Mining, 5. Market-making as Mining. Users who hold VX enjoy payouts from a shared dividend pool.",
         "more": "Learn more about VX mining rules",
-        "todayTrade": "今日交易挖矿",
-        "fee": "手续费",
-        "dividends": "预计分红"
+        "todayTrade": "24H Trading as Mining",
+        "fee": "Base Transaction Fees",
+        "dividends": "Expected to get"
     },
     "inviteMining":{
         "title":"Referring as Mining Total Income"
