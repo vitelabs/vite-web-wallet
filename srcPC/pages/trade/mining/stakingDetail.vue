@@ -42,6 +42,7 @@ const Vite_Token_Info = constant.Vite_Token_Info;
 
 export default {
     mounted() {
+        this.getCurrentPledgeForVxSum();
         this.$store.dispatch('startLoopHeight');
     },
     destroyed() {
