@@ -11,7 +11,7 @@
                 <div class="item-price">
                     <div>
                         <span>{{ $t('tradeMining.fee') }}</span>
-                        {{ expectedDividends && expectedDividends[tokenType] ? expectedDividends[tokenType].fee : 0 }} VX
+                        {{ expectedDividends && expectedDividends[tokenType] ? expectedDividends[tokenType].fee : 0 }} {{ tokenType }}
                     </div>
                     <div class="dividend">
                         <span>{{ $t('tradeMining.dividends') }}</span>
