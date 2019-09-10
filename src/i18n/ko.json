@@ -92,7 +92,7 @@
         "Voting": "투표",
         "RevokeVoting": "투표 철회",
         "GetQuota": "할당량 가져오기",
-        "WithdrawalOfQuota": "스테이킹 할당량 출금",
+        "WithdrawalOfQuota": "Withdrawal of Stake",
         "Mintage": "토큰 발행",
         "MintageIssue": "추가 토큰 발행",
         "MintageBurn": "토큰 제거",
@@ -528,7 +528,7 @@
         "gotoStake": "충분한 VITE를 먼저 스테이킹하세요",
         "maxAmt": "출금 금액은 [{minAmount}, {maxAmount}] 범위여만 합니다",
         "cancelLimitAmt": "스테이킹 금액은 {num}보다 작아서는 안됩니다",
-        "withdrawalStaking": "스테이킹 토큰 출금",
+        "withdrawalStaking": "Withdraw Staked Token",
         "myAddr": "Me",
         "confirm": {
             "help": {
