@@ -92,7 +92,7 @@
         "Voting": "Pemungutan suara",
         "RevokeVoting": "Cabut Voting",
         "GetQuota": "Dapatkan Kuota",
-        "WithdrawalOfQuota": "Penarikan Kuota Taruhan",
+        "WithdrawalOfQuota": "Withdrawal of Stake",
         "Mintage": "Penerbitan Token",
         "MintageIssue": "Penerbitan Token Tambahan",
         "MintageBurn": "Hancurkan Token",
@@ -528,7 +528,7 @@
         "gotoStake": "Harap Siapkan cukup VITE terlebih dahulu",
         "maxAmt": "Jumlah penarikan harus dalam [{minAmount}, {maxAmount}]",
         "cancelLimitAmt": "Jumlah taruhan tidak boleh kurang dari {num}",
-        "withdrawalStaking": "Penarikan Token Staked",
+        "withdrawalStaking": "Withdraw Staked Token",
         "myAddr": "Saya",
         "confirm": {
             "help": {
