@@ -2,6 +2,8 @@
     <div class="trade-mining-section">
         <div class="content">
             <div class="quota-detail">
+                {{ expectedDividends }}
+
                 <div
                     v-if="!stakingObj"
                     @click="_showVxConfirm(1)"
@@ -49,6 +51,12 @@ let stakingInfoTimer = null;
 
 export default {
     components: { walletTable, pagination, stakingDetail },
+    props: {
+        totalDividend: {
+            type: String,
+            default: '0'
+        }
+    },
     data() {
         return {
             stakeCurrentPage: 0,
@@ -106,9 +114,14 @@ export default {
         stakeTotalPage() {
             return Math.ceil(this.stakeListTotal / 30);
         },
-
         address() {
             return this.$store.getters.activeAddr;
+        },
+        expectedDividends() {
+            if (!this.stakingObj || !+this.stakingObj.amount) {
+                return '0';
+            }
+            return this.stakingObj.amount / this.totalDividend;
         }
     },
     methods: {
