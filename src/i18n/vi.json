@@ -1151,9 +1151,10 @@
         "hintTitle": "Thông báo quan trọng",
         "comingHint": "Chức năng khai thác VX sẽ sớm ra mắt, hãy cùng chờ đón! Bạn có thể nhận VX theo năm cách: 1. Giao dịch là khai thác, 2. Niêm yết là khai thác, 3. Giới thiệu là khai thác, 4. Đặt cược là khai thác, 5. Tạo thị trường là khai thác. Người dùng nắm giữ VX được hưởng các khoản thanh toán từ nhóm chia cổ tức.",
         "more": "Tìm hiểu về Quy tắc khai thác VX",
-        "todayTrade": "今日交易挖矿",
-        "fee": "手续费",
-        "dividends": "预计分红"
+        "todayTrade": "24H Trading as Mining",
+        "fee": "Base Transaction Fees",
+        "dividends": "Expected to get",
+        "view": "View Live Mining Dashboard"
     },
     "inviteMining": {
         "title": "Tổng thu nhập Giới thiệu là Khai thác"
