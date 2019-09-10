@@ -42,6 +42,7 @@ export default {
     computed: {
         isMinging() {
             const marketInfo = this.$store.state.exchangeFee.marketInfo;
+            console.log(marketInfo);
             return marketInfo && marketInfo.allowMine;
         },
         closeMarket() {
