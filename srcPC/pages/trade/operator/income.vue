@@ -35,7 +35,7 @@ const typeList = [ {
     name: 'BTC',
     icon: btcIcon
 }, {
-    name: 'USD',
+    name: 'USDT',
     icon: usdIcon
 } ];
 
@@ -95,6 +95,7 @@ export default {
     },
     methods: {
         formatNum(num) {
+            num = BigNumber.normalFormatNum(num, 8);
             return BigNumber.onlyFormat(num);
         },
         getRate(tokenId) {

@@ -5,33 +5,34 @@
             <span class="link __pointer" @click="goView">{{ $t('tradeMining.view') }}</span>
         </div>
 
-        <div class="my-divident">
-            <div class="item" v-for="tokenType in ['VITE', 'BTC', 'ETH', 'USD']" :key="tokenType">
-                <div class="item-title">{{ tokenType }}</div>
-                <div class="item-price">
-                    <div>
-                        <span>{{ $t('tradeMining.fee') }}</span>
-                        {{ expectedDividends && expectedDividends[tokenType] ? expectedDividends[tokenType].fee : 0 }} {{ tokenType }}
-                    </div>
-                    <div class="dividend">
-                        <span>{{ $t('tradeMining.dividends') }}</span>
-                        {{ expectedDividends && expectedDividends[tokenType] ? expectedDividends[tokenType].dividend : 0 }} VX
+        <div class="bottom-wrapper">
+            <div class="my-divident">
+                <div class="item" v-for="tokenType in ['VITE', 'BTC', 'ETH', 'USDT']" :key="tokenType">
+                    <div class="item-title">{{ tokenType }}</div>
+                    <div class="item-price">
+                        <div>
+                            <span>{{ $t('tradeMining.fee') }}</span>
+                            {{ expectedDividends && expectedDividends[tokenType] ? expectedDividends[tokenType].fee : 0 }} {{ tokenType }}
+                        </div>
+                        <div class="dividend">
+                            <span>{{ $t('tradeMining.dividends') }}</span>
+                            {{ expectedDividends && expectedDividends[tokenType] ? expectedDividends[tokenType].dividend : 0 }} VX
+                        </div>
                     </div>
                 </div>
             </div>
+            <wallet-table class="mint-trade-table tb"
+                          :headList="tradeHeadList"
+                          :contentList="content">
+                <pagination
+                    slot="tableBottom"
+                    class="__tb_pagination"
+                    :currentPage="tradeCurrentPage + 1"
+                    :toPage="fetchMiningTrade"
+                    :totalPage="tradeTotalPage"
+                ></pagination>
+            </wallet-table>
         </div>
-
-        <wallet-table class="mint-trade-table content tb"
-                      :headList="tradeHeadList"
-                      :contentList="content">
-            <pagination
-                slot="tableBottom"
-                class="__tb_pagination"
-                :currentPage="tradeCurrentPage + 1"
-                :toPage="fetchMiningTrade"
-                :totalPage="tradeTotalPage"
-            ></pagination>
-        </wallet-table>
     </div>
 </template>
 
@@ -128,7 +129,7 @@ export default {
                     decimals: 8
                 },
                 4: {
-                    tokenSymbol: 'USD',
+                    tokenSymbol: 'USDT',
                     decimals: 6
                 }
             };
@@ -204,6 +205,14 @@ export default {
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
 
+.bottom-wrapper {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    box-shadow: 0px 2px 10px 1px rgba(176,192,237,0.42);
+    border-radius: 2px;
+}
+
 .fee-title {
     font-size: 13px;
     color: rgba(94, 104, 117, 0.8);
@@ -217,6 +226,12 @@ export default {
     }
 }
 
+.tb {
+    box-shadow: none;
+    flex: 1;
+    border-radius: none;
+}
+
 .my-divident {
     background: url('~assets/imgs/mint_pledge_bg.png') rgba(234,248,255,0.2);
     background-size: 100% 100%;
@@ -225,8 +240,6 @@ export default {
     line-height: 16px;
     display: flex;
     flex-direction: row;
-    margin-bottom: 20px;
-    box-shadow: 0px 2px 10px 1px rgba(176, 192, 237, 0.42);
     border-radius: 2px;
 
     .item {
