@@ -1,38 +1,28 @@
 <template>
-    <div class="trade-mining-section">
-        <div class="fee-title">
-            {{ $t('tradeMining.todayTrade') }}
-            <span class="link __pointer" @click="goView">{{ $t('tradeMining.view') }}</span>
-        </div>
-
-        <div class="bottom-wrapper">
-            <div class="my-divident">
-                <div class="item" v-for="tokenType in ['VITE', 'BTC', 'ETH', 'USDT']" :key="tokenType">
-                    <div class="item-title">{{ tokenType }}</div>
-                    <div class="item-price">
-                        <div>
-                            <span>{{ $t('tradeMining.fee') }}</span>
-                            {{ expectedDividends && expectedDividends[tokenType] ? expectedDividends[tokenType].fee : 0 }} {{ tokenType }}
-                        </div>
-                        <div class="dividend">
-                            <span>{{ $t('tradeMining.dividends') }}</span>
-                            {{ expectedDividends && expectedDividends[tokenType] ? expectedDividends[tokenType].dividend : 0 }} VX
-                        </div>
-                    </div>
+    <div class="trade-mining-section shadow">
+        <div class="my-divident">
+            <div class="item" v-for="tokenType in ['VITE', 'BTC', 'ETH', 'USDT']" :key="tokenType">
+                <div class="item-title">{{ tokenType }} {{ $t('tradeMining.fee') }}</div>
+                <div class="item-price">
+                    {{ expectedDividends && expectedDividends[tokenType] ? expectedDividends[tokenType].fee : 0 }}
+                </div>
+                <div class="item-dividend">
+                    <span>{{ $t('tradeMining.dividends') }}</span>
+                    {{ expectedDividends && expectedDividends[tokenType] ? expectedDividends[tokenType].dividend : 0 }}VX
                 </div>
             </div>
-            <wallet-table class="mint-trade-table tb"
-                          :headList="tradeHeadList"
-                          :contentList="content">
-                <pagination
-                    slot="tableBottom"
-                    class="__tb_pagination"
-                    :currentPage="tradeCurrentPage + 1"
-                    :toPage="fetchMiningTrade"
-                    :totalPage="tradeTotalPage"
-                ></pagination>
-            </wallet-table>
         </div>
+        <wallet-table class="mint-trade-table no-shadow tb"
+                      :headList="tradeHeadList"
+                      :contentList="content">
+            <pagination
+                slot="tableBottom"
+                class="__tb_pagination"
+                :currentPage="tradeCurrentPage + 1"
+                :toPage="fetchMiningTrade"
+                :totalPage="tradeTotalPage"
+            ></pagination>
+        </wallet-table>
     </div>
 </template>
 
@@ -43,7 +33,6 @@ import { getCurrentFeesForMine } from 'services/viteServer';
 import { miningTrade, tradeFee } from 'services/trade';
 import bigNumber from 'utils/bigNumber';
 import date from 'utils/date';
-import openUrl from 'utils/openUrl';
 
 export default {
     components: { walletTable, pagination },
@@ -194,9 +183,6 @@ export default {
             }).catch(err => {
                 console.warn(err);
             });
-        },
-        goView() {
-            openUrl('https://vitex.net/');
         }
     }
 };
@@ -205,39 +191,12 @@ export default {
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
 
-.bottom-wrapper {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    box-shadow: 0px 2px 10px 1px rgba(176,192,237,0.42);
-    border-radius: 2px;
-}
-
-.fee-title {
-    font-size: 13px;
-    color: rgba(94, 104, 117, 0.8);
-    line-height: 30px;
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-    .link {
-        color: #007aff;
-        margin-left: 10px;
-    }
-}
-
-.tb {
-    box-shadow: none;
-    flex: 1;
-    border-radius: none;
-}
-
 .my-divident {
     background: url('~assets/imgs/mint_pledge_bg.png') rgba(234,248,255,0.2);
     background-size: 100% 100%;
     font-size: 12px;
     font-family: $font-normal;
-    line-height: 16px;
+    line-height: 18px;
     display: flex;
     flex-direction: row;
     border-radius: 2px;
@@ -252,11 +211,14 @@ export default {
         }
         .item-title {
             color: rgba(94,104,117,1);
-            margin-bottom: 2px;
         }
         .item-price {
+            font-size: 16px;
             color: rgba(29,32,36,1);
-            margin-top: 2px;
+            line-height: 20px;
+        }
+        .item-dividend {
+            color: rgba(94,104,117,0.58);
         }
     }
 }

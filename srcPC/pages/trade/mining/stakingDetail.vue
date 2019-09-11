@@ -3,7 +3,10 @@
         <div class="item">
             <div>{{ $t("stakingAmount") }}</div>
             <div class="bold">{{ stakingDetail.amount }}</div>
-            <div>{{ `${$t('tradeMining.dividends')}: ${expectedDividends} VX` }}</div>
+        </div>
+        <div class="item">
+            <div>{{ $t('tradeMining.dividends') }}</div>
+            <div class="bold">{{ `${expectedDividends} VX` }}</div>
         </div>
         <div class="item">
             <div>{{ $t("withdrawHeight") }}</div>
@@ -110,70 +113,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~assets/scss/vars.scss";
-
-.staking-detail {
-    background: url("~assets/imgs/mint_pledge_bg.png") rgba(234, 248, 255, 0.2);
-    background-size: 100% 100%;
-    display: flex;
-    .item {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        box-sizing: border-box;
-        width: 25%;
-        padding: 16px 30px;
-        border-right: 1px solid rgba(227, 235, 245, 0.6);
-        font-size: 12px;
-        @include font-family-normal();
-        color: #5e6875;
-        > div {
-            height: 16px;
-        }
-        &.no-border {
-            border-right: none;
-        }
-        .bold {
-            @include font-family-bold();
-            color: #1d2024;
-        }
-    }
-    .operations {
-        display: flex;
-        flex-grow: 1;
-        justify-content: flex-end;
-        align-items: center;
-    }
-    .btn {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-width: 100px;
-        height: 30px;
-        box-sizing: border-box;
-        border-radius: 2px;
-        font-size: 12px;
-        @include font-family-bold();
-        font-weight: 600;
-        line-height: 16px;
-        &.add {
-            color: #fff;
-            background: rgba(0, 122, 255, 1);
-            margin-right: 13px;
-            margin-bottom: -1px;
-        }
-        &.cancel {
-            color: rgba(94, 104, 117, 1);
-            border: 1px solid rgba(198, 203, 212, 1);
-            margin-right: 30px;
-        }
-        &.unuse {
-            margin-right: 30px;
-            background: #efefef;
-            color: #666;
-            border: none;
-            cursor: not-allowed;
-        }
-    }
-}
+@import "../components/stakingDetail.scss";
 </style>
