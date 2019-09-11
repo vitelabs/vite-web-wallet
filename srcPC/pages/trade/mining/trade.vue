@@ -142,7 +142,7 @@ export default {
                 const currDividens = this.totalDividend[quoteType] || 0;
 
                 const basicCurrFee = bigNumber.toBasic(currFee, decimals);
-                const basicCurrDividens = bigNumber.toBasic(currDividens, decimals);
+                const basicCurrDividens = bigNumber.toBasic(currDividens, 18);
                 const percent = +basicCurrFee ? bigNumber.dividedToNumber(tradeFee.amount, basicCurrFee, 8) : 0;
 
                 dividends[symbol] = {
