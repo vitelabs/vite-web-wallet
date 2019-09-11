@@ -10,7 +10,7 @@
             </div>
 
             <div class="item my-dividend-token">
-                <div class="small-amount" v-for="tokenType in ['VITE', 'BTC', 'ETH', 'USD']" :key="tokenType">
+                <div class="small-amount" v-for="tokenType in ['VITE', 'BTC', 'ETH', 'USDT']" :key="tokenType">
                     {{ myDividend[tokenType] ? formatNum(myDividend[tokenType].dividendAmount, tokenType) : 0 }} {{ tokenType }}
                 </div>
             </div>
@@ -27,7 +27,7 @@
                         <span class="small-item">{{ item.VITE }} VITE</span>
                         <span class="small-item">{{ item.BTC }} BTC</span>
                         <span class="small-item">{{ item.ETH }} ETH</span>
-                        <span class="small-item">{{ item.USD }} USD</span>
+                        <span class="small-item">{{ item.USDT }} USDT</span>
                     </div>
                 </div>
             </list-view>
@@ -79,8 +79,8 @@ export default {
                 text: `ETH ${ this.$t('tradeDividend.amount') }`,
                 cell: 'ETH'
             }, {
-                text: `USD ${ this.$t('tradeDividend.amount') }`,
-                cell: 'USD'
+                text: `USDT ${ this.$t('tradeDividend.amount') }`,
+                cell: 'USDT'
             }, {
                 text: this.$t('tradeDividend.price'),
                 cell: 'price'
@@ -98,7 +98,7 @@ export default {
                     ETH: dividendStat.ETH ? this.formatNum(dividendStat.ETH.dividendAmount || 0, 'ETH') : 0,
                     VITE: dividendStat.VITE ? this.formatNum(dividendStat.VITE.dividendAmount || 0, 'VITE') : 0,
                     BTC: dividendStat.BTC ? this.formatNum(dividendStat.BTC.dividendAmount || 0, 'BTC') : 0,
-                    USD: dividendStat.USD ? this.formatNum(dividendStat.USD.dividendAmount || 0, 'USD') : 0,
+                    USDT: dividendStat.USDT ? this.formatNum(dividendStat.USDT.dividendAmount || 0, 'USDT') : 0,
                     price: this.getPrice(dividendStat)
                 });
             });
@@ -155,7 +155,7 @@ export default {
                 BTC: 8,
                 ETH: 8,
                 VITE: 4,
-                USD: 2
+                USDT: 2
             };
             return bigNumber.formatNum(amount, tokenSymbol ? map[tokenSymbol] : 8);
         },
