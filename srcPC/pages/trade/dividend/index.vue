@@ -16,7 +16,7 @@
                     </div>
 
                     <div class="item __pointer" v-click-outside="hideMyList"  @click.stop="showMyList(tokenType)"
-                         v-for="tokenType in ['VITE', 'BTC', 'ETH', 'USD']" :key="tokenType">
+                         v-for="tokenType in ['VITE', 'BTC', 'ETH', 'USDT']" :key="tokenType">
                         <div class="item-title">{{ tokenType }}</div>
                         <div class="item-amount">
                             {{ myDividend[tokenType] ? formatNum(myDividend[tokenType].dividendAmount, tokenType) : 0 }}
@@ -36,7 +36,7 @@
                     <div class="slot-row __tb_row __tb_content_row" v-if="activeRow" :slot="`${activeIndex}Row`">
                         <div class="__tb_cell"></div>
                         <div class="__tb_cell"></div>
-                        <div class="__tb_cell" v-for="tokenType in ['VITE', 'BTC', 'ETH', 'USD']" :key="tokenType">
+                        <div class="__tb_cell" v-for="tokenType in ['VITE', 'BTC', 'ETH', 'USDT']" :key="tokenType">
                             <div v-for="(item, i) in activeRow[tokenType] ? activeRow[tokenType].tokenDividends : []" :key="i" >
                                 {{ item.tokenSymbol + ' ' + formatNum(item.amount, tokenType) }}
                             </div>
@@ -50,7 +50,7 @@
                           class="arrow-icon" :class="{'active': activeIndex === i}"></span>
                     <span v-for="(item, i) in contentList" :key="i" :slot="`${i}ETHAfter`"
                           class="arrow-icon" :class="{'active': activeIndex === i}"></span>
-                    <span v-for="(item, i) in contentList" :key="i" :slot="`${i}USDAfter`"
+                    <span v-for="(item, i) in contentList" :key="i" :slot="`${i}USDTAfter`"
                           class="arrow-icon" :class="{'active': activeIndex === i}"></span>
 
                     <pagination slot="tableBottom" class="__tb_pagination"
@@ -113,8 +113,8 @@ export default {
                 text: `ETH ${ this.$t('tradeDividend.amount') }`,
                 cell: 'ETH'
             }, {
-                text: `USD ${ this.$t('tradeDividend.amount') }`,
-                cell: 'USD'
+                text: `USDT ${ this.$t('tradeDividend.amount') }`,
+                cell: 'USDT'
             }, {
                 text: this.$t('tradeDividend.price'),
                 cell: 'price'
@@ -132,7 +132,7 @@ export default {
                     ETH: dividendStat.ETH ? this.formatNum(dividendStat.ETH.dividendAmount || 0, 'ETH') : 0,
                     VITE: dividendStat.VITE ? this.formatNum(dividendStat.VITE.dividendAmount || 0, 'VITE') : 0,
                     BTC: dividendStat.BTC ? this.formatNum(dividendStat.BTC.dividendAmount || 0, 'BTC') : 0,
-                    USD: dividendStat.USD ? this.formatNum(dividendStat.USD.dividendAmount || 0, 'USD') : 0,
+                    USDT: dividendStat.USDT ? this.formatNum(dividendStat.USDT.dividendAmount || 0, 'USDT') : 0,
                     price: this.getPrice(dividendStat)
                 });
             });
@@ -209,7 +209,7 @@ export default {
                 BTC: 8,
                 ETH: 8,
                 VITE: 4,
-                USD: 2
+                USDT: 2
             };
             return bigNumber.formatNum(amount, tokenSymbol ? map[tokenSymbol] : 8);
         },

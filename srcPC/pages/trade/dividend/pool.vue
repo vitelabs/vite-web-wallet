@@ -48,7 +48,7 @@ const typeList = [ {
     name: 'ETH',
     icon: ethIcon
 }, {
-    name: 'USD',
+    name: 'USDT',
     icon: usdIcon
 } ];
 
@@ -74,7 +74,7 @@ export default {
                 return `≈${ pre } --`;
             }
 
-            allPrice = this.formatNum(allPrice, 'USD');
+            allPrice = this.formatNum(allPrice, 'USDT');
             return `≈${ pre }${ allPrice }`;
         },
         allBtc() {
@@ -137,7 +137,7 @@ export default {
 
                 this.pool = {};
                 const tokenIds = [];
-                const tokenList = [ 'VITE', 'ETH', 'BTC', 'USD' ];
+                const tokenList = [ 'VITE', 'ETH', 'BTC', 'USDT' ];
 
                 for (const tokenId in data) {
                     const token = data[tokenId];
@@ -170,7 +170,7 @@ export default {
                 BTC: 8,
                 ETH: 8,
                 VITE: 4,
-                USD: 2
+                USDT: 2
             };
             return bigNumber.formatNum(amount, map[tokenSymbol]);
         }
