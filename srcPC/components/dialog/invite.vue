@@ -31,24 +31,24 @@ block content
 </template>
 
 <script>
-import { getInviteInfo } from "services/trade";
-import { getCode } from "services/viteServer";
-import { genCode } from "pcServices/tradeOperation";
-import copy from "utils/copy";
-import { doUntill } from "utils/asyncFlow";
-import { VITE_TOKENID } from "utils/constant";
-import bn from "utils/bigNumber";
+import { getInviteInfo } from 'services/trade';
+import { getCode } from 'services/viteServer';
+import { genCode } from 'pcServices/tradeOperation';
+import copy from 'utils/copy';
+import { doUntill } from 'utils/asyncFlow';
+import { VITE_TOKENID } from 'utils/constant';
+import bn from 'utils/bigNumber';
 
 export default {
     async beforeMount() {
         await this.getCode();
         this.inviteInfo = await getInviteInfo(this.address);
-        this.status = "LOADED";
+        this.status = 'LOADED';
     },
     data() {
         return {
-            status: "LOADING", // "ERROR" "LOADING" "LOADED"
-            dTitle: this.$t("assets.invite.inviteTitle"),
+            status: 'LOADING', // "ERROR" "LOADING" "LOADED"
+            dTitle: this.$t('assets.invite.inviteTitle'),
             inviteCode: 0,
             inviteInfo: null
         };
@@ -58,12 +58,12 @@ export default {
             return this.$store.getters.activeAddr;
         },
         dSTxt() {
-            return !this.inviteCode && this.$t("assets.invite.genCode");
+            return !this.inviteCode && this.$t('assets.invite.genCode');
         },
         avaliableExAmount() {
             return (
-                this.$store.getters.exBalanceList[VITE_TOKENID] &&
-                this.$store.getters.exBalanceList[VITE_TOKENID].available
+                this.$store.getters.exBalanceList[VITE_TOKENID]
+                && this.$store.getters.exBalanceList[VITE_TOKENID].available
             );
         },
         dBtnUnuse() {
@@ -83,7 +83,7 @@ export default {
         inspector() {
             genCode()
                 .then(() => {
-                    this.$toast(this.$t("assets.invite.successToast"));
+                    this.$toast(this.$t('assets.invite.successToast'));
                     doUntill({
                         createPromise: () => this.getCode(),
                         interval: 1000,
@@ -93,25 +93,23 @@ export default {
                             console.log(res);
                         })
                         .catch(e => {
-                            this.$toast(this.$t("assets.invite.noResult"), e);
+                            this.$toast(this.$t('assets.invite.noResult'), e);
                         });
                 })
                 .catch(e => {
-                    this.$toast(this.$t("assets.invite.failToast"), e);
+                    this.$toast(this.$t('assets.invite.failToast'), e);
                 });
-            return Promise.reject("no close");
+            return Promise.reject('no close');
         },
         copyShare() {
-            copy(
-                `https://growth.vite.net${
-                    process.env.NODE_ENV === "production" ? "" : "/test"
-                }/vitex-board?ldfjacia=${this.inviteCode}`
-            );
-            this.$toast(this.$t("hint.copyShare"));
+            copy(`https://growth.vite.net${
+                process.env.NODE_ENV === 'production' ? '' : '/test'
+            }/vitex-board?ldfjacia=${ this.inviteCode }`);
+            this.$toast(this.$t('hint.copyShare'));
         },
         copy() {
             copy(this.inviteCode);
-            this.$toast(this.$t("hint.copy"));
+            this.$toast(this.$t('hint.copy'));
         }
     }
 };

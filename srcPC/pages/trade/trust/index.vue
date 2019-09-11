@@ -45,7 +45,7 @@
                                 v-for="t in transUtil(relation[addr])"
                                 :key="t"
                                 class="pure-pair"
-                                >{{ t }}</span
+                            >{{ t }}</span
                             >
                         </div>
                         <div class="proxytb_cell operation">
@@ -119,7 +119,7 @@
                                 v-for="t in transUtil(grantor[addr])"
                                 :key="t"
                                 class="pure-pair"
-                                >{{ t }}</span
+                            >{{ t }}</span
                             >
                         </div>
                     </div>
@@ -132,12 +132,12 @@
     </div>
 </template>
 <script>
-import { getProxyRelation, getProxyGrantor } from "pcServices/tradeOperation";
-import { addDialog } from "./dialog";
-import PairItem from "./dialog/pairItem";
-import { doUntill } from "utils/asyncFlow";
-import { execWithValid } from "pcUtils/execWithValid";
-import openUrl from "utils/openUrl";
+import { getProxyRelation, getProxyGrantor } from 'pcServices/tradeOperation';
+import { addDialog } from './dialog';
+import PairItem from './dialog/pairItem';
+import { doUntill } from 'utils/asyncFlow';
+import { execWithValid } from 'pcUtils/execWithValid';
+import openUrl from 'utils/openUrl';
 export default {
     components: { PairItem },
     data() {
@@ -160,9 +160,7 @@ export default {
     },
     methods: {
         gotoProxyInfo() {
-            openUrl(
-                "https://github.com/vitelabs/vite-wiki/blob/mainnet/docs/zh/dex/api/proxy.md"
-            );
+            openUrl('https://github.com/vitelabs/vite-wiki/blob/mainnet/docs/zh/dex/api/proxy.md');
         },
         updateData() {
             return Promise.all([
@@ -174,7 +172,7 @@ export default {
                 })
             ]);
         },
-        addProxy: execWithValid(function({
+        addProxy: execWithValid(function ({
             trustAddress,
             existsPair,
             actionType
@@ -182,10 +180,9 @@ export default {
             if (existsPair) {
                 existsPair = existsPair.map(p =>
                     Object.assign(p, {
-                        name: p.symbol.replace("_", "/"),
-                        id: `${p.tradeToken}/${p.quoteToken}`
-                    })
-                );
+                        name: p.symbol.replace('_', '/'),
+                        id: `${ p.tradeToken }/${ p.quoteToken }`
+                    }));
             }
             addDialog({
                 trustAddress,
@@ -196,12 +193,11 @@ export default {
                     createPromise: () => this.updateData(),
                     interval: 1000,
                     times: 3
-                })
-            );
+                }));
         }),
         transUtil(pairs) {
             if (!pairs || pairs.length === 0) return [];
-            return pairs.map(p => p.symbol.replace("_", "/"));
+            return pairs.map(p => p.symbol.replace('_', '/'));
         }
     }
 };
