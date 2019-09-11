@@ -1,7 +1,7 @@
 <template>
     <div class="proxy">
+        <div class="super-title">{{ $t("trade.proxy.title") }}</div>
         <div class="op item">
-            <div class="title">{{ $t("trade.proxy.title") }}</div>
             <div class="btn_group">
                 <div
                     class="btn btn__ok __pointer"
@@ -45,7 +45,7 @@
                                 v-for="t in transUtil(relation[addr])"
                                 :key="t"
                                 class="pure-pair"
-                            >{{ t }}</span
+                                >{{ t }}</span
                             >
                         </div>
                         <div class="proxytb_cell operation">
@@ -119,7 +119,7 @@
                                 v-for="t in transUtil(grantor[addr])"
                                 :key="t"
                                 class="pure-pair"
-                            >{{ t }}</span
+                                >{{ t }}</span
                             >
                         </div>
                     </div>
@@ -132,12 +132,12 @@
     </div>
 </template>
 <script>
-import { getProxyRelation, getProxyGrantor } from 'pcServices/tradeOperation';
-import { addDialog } from './dialog';
-import PairItem from './dialog/pairItem';
-import { doUntill } from 'utils/asyncFlow';
-import { execWithValid } from 'pcUtils/execWithValid';
-import openUrl from 'utils/openUrl';
+import { getProxyRelation, getProxyGrantor } from "pcServices/tradeOperation";
+import { addDialog } from "./dialog";
+import PairItem from "./dialog/pairItem";
+import { doUntill } from "utils/asyncFlow";
+import { execWithValid } from "pcUtils/execWithValid";
+import openUrl from "utils/openUrl";
 export default {
     components: { PairItem },
     data() {
@@ -160,23 +160,32 @@ export default {
     },
     methods: {
         gotoProxyInfo() {
-            openUrl('https://github.com/vitelabs/vite-wiki/blob/mainnet/docs/zh/dex/api/proxy.md');
+            openUrl(
+                "https://github.com/vitelabs/vite-wiki/blob/mainnet/docs/zh/dex/api/proxy.md"
+            );
         },
         updateData() {
-            return Promise.all([ getProxyRelation({ address: this.address }).then(data => {
-                this.relation = data.relations;
-            }),
-            getProxyGrantor({ address: this.address }).then(data => {
-                this.grantor = data.relations;
-            }) ]);
+            return Promise.all([
+                getProxyRelation({ address: this.address }).then(data => {
+                    this.relation = data.relations;
+                }),
+                getProxyGrantor({ address: this.address }).then(data => {
+                    this.grantor = data.relations;
+                })
+            ]);
         },
-        addProxy: execWithValid(function ({ trustAddress, existsPair, actionType } = {}) {
+        addProxy: execWithValid(function({
+            trustAddress,
+            existsPair,
+            actionType
+        } = {}) {
             if (existsPair) {
                 existsPair = existsPair.map(p =>
                     Object.assign(p, {
-                        name: p.symbol.replace('_', '/'),
-                        id: `${ p.tradeToken }/${ p.quoteToken }`
-                    }));
+                        name: p.symbol.replace("_", "/"),
+                        id: `${p.tradeToken}/${p.quoteToken}`
+                    })
+                );
             }
             addDialog({
                 trustAddress,
@@ -187,11 +196,12 @@ export default {
                     createPromise: () => this.updateData(),
                     interval: 1000,
                     times: 3
-                }));
+                })
+            );
         }),
         transUtil(pairs) {
             if (!pairs || pairs.length === 0) return [];
-            return pairs.map(p => p.symbol.replace('_', '/'));
+            return pairs.map(p => p.symbol.replace("_", "/"));
         }
     }
 };
@@ -202,22 +212,23 @@ export default {
 .proxy {
     display: flex;
     flex-direction: column;
-    padding-top: 13px;
+    padding-top: 10px;
     height: 100%;
-    .title {
-        padding: 14px 0;
-        font-size: 14px;
-        color: #1d2024;
-        @include font-family-bold();
+    .super-title {
+        font-size: 18px;
     }
     .item {
         display: flex;
         flex-direction: column;
+        margin-top: 14px;
+        .title {
+            font-size: 14px;
+            color: #1d2024;
+            @include font-family-bold();
+            margin-bottom: 14px;
+        }
     }
     .op {
-        .title {
-            font-size: 18px;
-        }
         .btn_group {
             display: flex;
             .btn {
