@@ -10,6 +10,7 @@
 
 <script>
 import tabList from 'h5Components/tabList.vue';
+import { getCurrentVxMineInfo } from 'services/viteServer';
 import inviteMinComp from './invite.vue';
 import orderMinComp from './order.vue';
 import tradeMinComp from './trade.vue';
@@ -19,6 +20,7 @@ export default {
     components: { tabList, inviteMinComp, orderMinComp, tradeMinComp, stakingMinComp },
     data() {
         return {
+            currVxMineInfo: null,
             tabList: {
                 'trade': this.$t('mobileMining.miningTrade'),
                 'staking': this.$t('mobileMining.miningStaking'),
@@ -27,6 +29,29 @@ export default {
             },
             tabName: 'trade'
         };
+    },
+    computed: {
+        tradeTotalDividend() {
+            if (!this.currVxMineInfo) {
+                return null;
+            }
+            return this.currVxMineInfo.feeMineDetail || null;
+        },
+        pledgeTotalDividend() {
+            if (!this.currVxMineInfo) {
+                return '0';
+            }
+            return this.currVxMineInfo.pledgeMine || '0';
+        }
+    },
+    methods: {
+        getCurrentVxMineInfo() {
+            getCurrentVxMineInfo().then(data => {
+                this.currVxMineInfo = data || null;
+            }).catch(err => {
+                console.warn(err);
+            });
+        }
     }
 };
 </script>

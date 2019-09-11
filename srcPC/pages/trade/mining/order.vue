@@ -1,7 +1,7 @@
 <template>
     <div class="trade-mining-section">
         <wallet-table
-            class="mint-trade-table content tb"
+            class="mint-trade-table tb"
             :headList="headList"
             :contentList="content"
         >

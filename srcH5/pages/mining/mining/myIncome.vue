@@ -1,7 +1,10 @@
 <template>
     <div class="my-income">
         <div class="item">
-            <div class="item-title">{{ title }}</div>
+            <div class="item-title">
+                {{ title }}
+                <span class="view-link" @click="goView">{{ $t('mobileMining.viewLink') }}</span>
+            </div>
             <div class="item-amount">{{ miningTotal | formatNum }}</div>
         </div>
         <slot></slot>
@@ -9,6 +12,8 @@
 </template>
 
 <script>
+import openUrl from 'utils/openUrl';
+
 export default {
     props: {
         title: {
@@ -18,6 +23,11 @@ export default {
         miningTotal: {
             type: String,
             default: '0'
+        }
+    },
+    methods: {
+        goView() {
+            openUrl('https://vitex.net/');
         }
     }
 };
@@ -40,6 +50,20 @@ export default {
         .item-title {
             color: rgba(62,74,89,0.6);
             margin-bottom: 6px;
+            .view-link {
+                float: right;
+                color: $blue;
+                line-height: 16px;
+                &::after {
+                    width: 16px;
+                    height: 16px;
+                    content: ' ';
+                    display: inline-block;
+                    background: url('~h5Assets/imgs/right_arrow.svg');
+                    background-size: 100% 100%;
+                    margin-bottom: -4px;
+                }
+            }
         }
         .item-amount {
             font-size: 24px;

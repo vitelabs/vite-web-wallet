@@ -1,37 +1,36 @@
 <template>
-    <div class="trade-mining-section">
-        <div class="content">
-            <div class="quota-detail">
-                <div
-                    v-if="!stakingObj"
-                    @click="_showVxConfirm(1)"
-                    class="no-detail __pointer"
-                >
-                    {{ $t("tradeMining.addQuota") }}
-                </div>
-                <staking-detail
-                    v-else
-                    :stakingObj="stakingObj"
-                    :totalDividend="totalDividend"
-                    :showVxConfirm="_showVxConfirm"
-                ></staking-detail>
-            </div>
-            <wallet-table
-                class="mint-trade-table tb"
-                :headList="pledgeHeadList"
-                :contentList="content"
+    <div class="trade-mining-section shadow">
+        <div class="quota-detail">
+            <div
+                v-if="!stakingObj"
+                @click="_showVxConfirm(1)"
+                class="no-detail __pointer"
             >
-                <pagination
-                    slot="tableBottom"
-                    class="__tb_pagination"
-                    :currentPage="stakeCurrentPage + 1"
-                    :toPage="fetchMiningStake"
-                    :totalPage="stakeTotalPage"
-                ></pagination>
-            </wallet-table>
+                {{ $t("tradeMining.addQuota") }}
+            </div>
+            <staking-detail
+                v-else
+                :stakingObj="stakingObj"
+                :totalDividend="totalDividend"
+                :showVxConfirm="_showVxConfirm"
+            ></staking-detail>
         </div>
+        <wallet-table
+            class="mint-trade-table no-shadow tb"
+            :headList="pledgeHeadList"
+            :contentList="content"
+        >
+            <pagination
+                slot="tableBottom"
+                class="__tb_pagination"
+                :currentPage="stakeCurrentPage + 1"
+                :toPage="fetchMiningStake"
+                :totalPage="stakeTotalPage"
+            ></pagination>
+        </wallet-table>
     </div>
 </template>
+
 <script>
 import { insertTo } from 'pcUtils/insertTo';
 import VxConfirm from './vxConfirm.vue';

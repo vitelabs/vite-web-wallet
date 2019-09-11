@@ -1,5 +1,10 @@
 <template>
     <div class="trade-mining-wrapper">
+        <div class="fee-title">
+            {{ $t('tradeMining.todayTrade') }}
+            <span class="link __pointer" @click="goView">{{ $t('tradeMining.view') }}</span>
+        </div>
+
         <div class="tab_title">
             <div
                 class="tab_title_item"
@@ -57,14 +62,14 @@
                 </div>
             </div>
         </div>
-        <div class="tab_container">
-            <tradeMinComp v-if="tabName === 'trade'" :totalDividend="tradeTotalDividend"></tradeMinComp>
-            <stakingMinComp v-if="tabName === 'staking'" :totalDividend="pledgeTotalDividend"></stakingMinComp>
-            <inviteMinComp v-if="tabName === 'invite'"></inviteMinComp>
-            <orderMinComp v-if="tabName === 'order'"></orderMinComp>
-        </div>
+
+        <tradeMinComp v-if="tabName === 'trade'" :totalDividend="tradeTotalDividend"></tradeMinComp>
+        <stakingMinComp v-if="tabName === 'staking'" :totalDividend="pledgeTotalDividend"></stakingMinComp>
+        <inviteMinComp v-if="tabName === 'invite'"></inviteMinComp>
+        <orderMinComp v-if="tabName === 'order'"></orderMinComp>
     </div>
 </template>
+
 <script>
 import openUrl from 'utils/openUrl';
 import { getCurrentVxMineInfo } from 'services/viteServer';
@@ -148,6 +153,9 @@ export default {
             }).catch(err => {
                 console.warn(err);
             });
+        },
+        goView() {
+            openUrl('https://vitex.net/');
         }
     }
 };
@@ -155,6 +163,40 @@ export default {
 
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
+
+.trade-mining-wrapper {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+.fee-title {
+    font-size: 18px;
+    line-height: 22px;
+    padding: 10px 0 14px;
+    display: flex;
+    align-items: center;
+    @include font-family-bold();
+    color: rgba(36,39,43,1);
+    .link {
+        display: flex;
+        align-items: center;
+        font-size: 12px;
+        color: #007aff;
+        margin-left: 14px;
+        &::before {
+            display: inline-block;
+            content: ' ';
+            width: 16px;
+            height: 16px;
+            background: url('~assets/imgs/info_link.svg');
+            background-size: 100% 100%;
+            margin-right: 5px;
+        }
+    }
+}
 
 .tab_title {
     display: flex;
@@ -176,6 +218,7 @@ export default {
         display: flex;
         align-items: center;
         justify-content: flex-start;
+        @include font-family-bold();
         &.active {
             background: rgba(0, 122, 255, 0.04);
             border-bottom: 2px solid rgba(0, 122, 255, 1);
@@ -185,7 +228,6 @@ export default {
             height: 34px;
             width: 34px;
         }
-        @include font-family-bold();
         .label {
             font-size: 13px;
             color: #5e6875;
@@ -197,62 +239,21 @@ export default {
     }
 }
 
-.trade-mining-wrapper {
+/deep/ .trade-mining-section {
     width: 100%;
     height: 100%;
-    box-sizing: border-box;
     display: flex;
     flex-direction: column;
-}
-.tab_container {
-    flex-grow: 1;
-}
-/deep/ .trade-mining-section {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    min-height: 350px;
-
-    .content {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        background: #fff;
+    &.shadow {
+        box-shadow: 0px 2px 10px 1px rgba(176,192,237,0.42);
         border-radius: 2px;
-        box-shadow: 0px 2px 10px 1px rgba(176, 192, 237, 0.42);
-        .quota-detail {
-            border-bottom: 1px solid #F3F7FB;
-            box-sizing: border-box;
-            .no-detail {
-                box-sizing: border-box;
-                padding: 16px 30px;
-                width: 100%;
-                line-height: 48px;
-                text-align: center;
-                font-size: 16px;
-                @include font-family-bold();
-                color: rgba(0, 122, 255, 1);
-                font-weight: 600;
-                &:before {
-                    content: " ";
-                    display: inline-block;
-                    width: 13px;
-                    height: 13px;
-                    background: url("~assets/imgs/addStaking.svg");
-                    background-size: 100% 100%;
-                    margin-right: 6px;
-                    margin-bottom: -1px;
-                }
-            }
-        }
-        .tb {
-            flex: 1;
-            box-shadow: none;
-        }
     }
-}
-.link {
-    color: #007aff;
-    text-decoration: underline;
+    .no-shadow {
+        box-shadow: none;
+        border-radius: none;
+    }
+    .mint-trade-table {
+        flex: 1;
+    }
 }
 </style>
