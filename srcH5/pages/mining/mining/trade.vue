@@ -216,10 +216,6 @@ export default {
 .list-wrapper-view {
     max-height: 450px;
 }
-.staking-income-wrapper {
-    background: url('~h5Assets/imgs/big_bg.png') no-repeat;
-    background-size: cover;
-}
 .my-dividend {
     padding: 0 14px 14px;
     border-top: 1px dashed rgba(211,223,239,1);

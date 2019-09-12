@@ -163,8 +163,8 @@ export default {
         display: inline-block;
         border-radius: 2px;
         padding: 0 13px;
-        height: 26px;
-        line-height: 26px;
+        height: 30px;
+        line-height: 30px;
         box-sizing: border-box;
         font-size: 14px;
         @include font-bold();

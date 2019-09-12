@@ -1,21 +1,23 @@
 <template>
     <div class="order-wrapper">
         <div class="dex-input-wrapper">
-            <div class="ex-order-token">{{ $t(`mobileTradeCenter.${orderType}.price`) }}</div>
+            <div class="ex-order-token">
+                {{ $t(`mobileTradeCenter.${orderType}.price`) }} ({{ originQuoteTokenSymbol }})
+            </div>
             <div class="else-input-wrapper" :class="{'err': priceErr}">
                 <span class="tips" :class="{'active':
                     focusInput === 'price' && priceErr
                 }">{{  priceErr || '' }}</span>
                 <vite-input v-model="price" @input="priceChanged" type="number"
                             @focus="showTips('price')" @blur="hideTips('price')">
-                    <span class="symbol" slot="after">{{ originQuoteTokenSymbol }}</span>
+                    <span class="real-price __ellipsis" slot="after">{{ realPrice }}</span>
                 </vite-input>
             </div>
         </div>
 
         <div class="dex-input-wrapper">
             <div class="ex-order-token">
-                {{ $t(`mobileTradeCenter.${orderType}.quantity`) }}
+                {{ $t(`mobileTradeCenter.${orderType}.quantity`) }} ({{ originTradeTokenSymbol }})
                 <dex-balance :tokenShow="orderType === 'sell' ? originTradeTokenSymbol : originQuoteTokenSymbol"
                              :balance="balance"></dex-balance>
             </div>
@@ -25,20 +27,20 @@
                 }">{{ quantityErr }}</span>
                 <vite-input v-model="quantity" @input="quantityChanged" type="number"
                             @focus="showTips('quantity')" @blur="hideTips('quantity')">
-                    <span class="symbol" slot="after">{{ originTradeTokenSymbol }}</span>
                 </vite-input>
             </div>
         </div>
 
         <div class="dex-input-wrapper">
-            <div class="ex-order-token">{{ $t("trade.amount") }}</div>
+            <div class="ex-order-token">
+                {{ $t("trade.amount") }} ({{ originQuoteTokenSymbol }})
+            </div>
             <div class="else-input-wrapper" :class="{'err': amountErr}">
                 <span class="tips" :class="{'active':
                     focusInput === 'amount' && amountErr
                 }">{{ amountErr }}</span>
                 <vite-input v-model="amount" @input="amountChanged" type="number"
                             @focus="showTips('amount')" @blur="hideTips('amount')">
-                    <span class="symbol" slot="after">{{ originQuoteTokenSymbol }}</span>
                 </vite-input>
             </div>
         </div>
@@ -183,6 +185,23 @@ export default {
         },
         fee() {
             return this.$store.getters.exBuyOrderFee;
+        },
+        realPrice() {
+            if (!this.rate || this.priceErr || !this.price) {
+                return '';
+            }
+
+            const pre = this.$store.state.env.currency === 'cny' ? '≈ ¥' : '≈ $';
+
+            if (!this.activeTxPair) {
+                return `${ pre }0`;
+            }
+
+            const realPrice = BigNumber.multi(this.price || 0, this.rate || 0, 6);
+            return `${ pre }${ BigNumber.onlyFormat(realPrice, 2) }`;
+        },
+        rate() {
+            return this.$store.getters.activeTxPairQuoteCurrencyRate || null;
         },
         minAmount() {
             const minAmount = this.$store.state.exchangeLimit.minAmount;
@@ -688,6 +707,14 @@ $font-black: rgba(36, 39, 43, 0.8);
             background: #f3f5f9;
         }
     }
+}
+.real-price {
+    @include font-normal();
+    max-width: 150px;
+    box-sizing: border-box;
+    padding: 0 14px;
+    font-size: 14px;
+    color: rgba(62, 74, 89, 0.45);
 }
 </style>
 

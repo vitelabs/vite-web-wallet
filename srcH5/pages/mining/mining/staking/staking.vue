@@ -110,10 +110,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.staking-income-wrapper {
-    background: url('~h5Assets/imgs/big_bg.png') no-repeat;
-    background-size: cover;
-}
 .list-wrapper-view {
     max-height: 450px;
 }
