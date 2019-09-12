@@ -1,8 +1,8 @@
 <template>
     <div class="trade-mining-wrapper">
         <tab-list :tabList="tabList" defaultTab="trade" v-model="tabName"></tab-list>
-        <tradeMinComp class="section" v-if="tabName === 'trade'"></tradeMinComp>
-        <stakingMinComp class="section" v-if="tabName === 'staking'"></stakingMinComp>
+        <tradeMinComp class="section" :totalDividend="tradeTotalDividend" v-if="tabName === 'trade'"></tradeMinComp>
+        <stakingMinComp class="section" :totalDividend="pledgeTotalDividend" v-if="tabName === 'staking'"></stakingMinComp>
         <inviteMinComp class="section" v-if="tabName === 'invite'"></inviteMinComp>
         <orderMinComp class="section" v-if="tabName === 'order'"></orderMinComp>
     </div>
