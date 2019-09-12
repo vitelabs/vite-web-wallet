@@ -12,7 +12,7 @@ import { order } from 'services/trade';
 import historyTable from 'h5Components/historyTable.vue';
 import Filters from './filters';
 
-const pageSize = 35;
+const pageSize = 100;
 
 export default {
     components: { Filters, historyTable },
