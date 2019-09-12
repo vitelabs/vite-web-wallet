@@ -18,6 +18,9 @@ import stakingMinComp from './staking/staking.vue';
 
 export default {
     components: { tabList, inviteMinComp, orderMinComp, tradeMinComp, stakingMinComp },
+    beforeMount() {
+        this.getCurrentVxMineInfo();
+    },
     data() {
         return {
             currVxMineInfo: null,
