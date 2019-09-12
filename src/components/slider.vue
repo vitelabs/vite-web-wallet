@@ -13,11 +13,21 @@
             </div>
 
             <ul class="list">
-                <li ref="point0" :class="{ 'active': size >= 0 }"></li>
-                <li ref="point1" :class="{ 'active': size >= 25 }"></li>
-                <li ref="point2" :class="{ 'active': size >= 50 }"></li>
-                <li ref="point3" :class="{ 'active': size >= 75 }"></li>
-                <li ref="point4" :class="{ 'active': size >= 100 }"></li>
+                <li ref="point0">
+                    <span :class="{ 'active': size >= 0 }"></span>
+                </li>
+                <li ref="point1">
+                    <span :class="{ 'active': size >= 25 }"></span>
+                </li>
+                <li ref="point2">
+                    <span :class="{ 'active': size >= 50 }"></span>
+                </li>
+                <li ref="point3">
+                    <span :class="{ 'active': size >= 75 }"></span>
+                </li>
+                <li ref="point4">
+                    <span :class="{ 'active': size >= 100 }"></span>
+                </li>
             </ul>
             <slot></slot>
         </div>
@@ -134,7 +144,7 @@ export default {
             let i;
             for (i = 0; i < 5; i++) {
                 const el = this.$refs[`point${ i }`];
-                if (el && e.target === el) {
+                if (el && (e.target === el || el.contains(e.target))) {
                     break;
                 }
             }
@@ -164,7 +174,7 @@ $red: linear-gradient(270deg, rgba(226,43,116,1) 0%, rgba(237,81,88,1) 100%);
 $green: linear-gradient(270deg, rgba(0,212,208,1) 0%, rgba(0,215,100,1) 100%);
 
 .dex-order.process-wrapper {
-    padding: 10px 0px;
+    padding: 16px 0px;
     .line-wrapper {
         height: 2px;
         border-radius: 2px;
@@ -172,21 +182,33 @@ $green: linear-gradient(270deg, rgba(0,212,208,1) 0%, rgba(0,215,100,1) 100%);
     }
     .line {
         .drag {
-            width: 10px;
-            height: 10px;
-            top: -4px;
-            right: -5px;
-            border-radius: 10px;
+            position: absolute;
+            width: 26px;
+            height: 26px;
+            top: -13px;
+            right: -13px;
+            background: none;
             box-shadow: none;
             border: none;
             z-index: 1;
+
+            &:before {
+                position: absolute;
+                top: 8px;
+                left: 8px;
+                display: inline-block;
+                content: ' ';
+                width: 10px;
+                height: 10px;
+                border-radius: 10px;
+            }
             .percent {
                 opacity: 0;
                 display: inline-block;
                 position: absolute;
-                top: -30px;
+                top: -25px;
                 transform: translateX(-50%);
-                left: 5px;
+                left: 12px;
                 padding: 2px 6px;
                 border-radius: 2px;
                 font-size: 12px;
@@ -218,18 +240,12 @@ $green: linear-gradient(270deg, rgba(0,212,208,1) 0%, rgba(0,215,100,1) 100%);
         left: 0;
         width: 100%;
         li {
-            width: 8px;
-            height: 8px;
-            background: rgba(255,255,255,1);
-            border: 2px solid rgba(212,222,231,1);
-            border-radius: 8px;
-            display: inline-block;
-            box-sizing: border-box;
             position: absolute;
-            margin-left: -4px;
-            &.active {
-                border: none;
-            }
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            margin-left: -10px;
+            margin-top: -6px;
             &:first-child {
                 left: 0px;
             }
@@ -246,6 +262,21 @@ $green: linear-gradient(270deg, rgba(0,212,208,1) 0%, rgba(0,215,100,1) 100%);
                 left: 100%;
             }
         }
+        li span {
+            position: absolute;
+            top: 6px;
+            left: 6px;
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: rgba(255,255,255,1);
+            border: 2px solid rgba(212,222,231,1);
+            border-radius: 8px;
+            box-sizing: border-box;
+            &.active {
+                border: none;
+            }
+        }
     }
 }
 .dex-order {
@@ -253,7 +284,9 @@ $green: linear-gradient(270deg, rgba(0,212,208,1) 0%, rgba(0,215,100,1) 100%);
         .line {
             background: $green;
             .drag {
-                background: $green;
+                &::before {
+                    background: $green;
+                }
                 .percent {
                     background: $green;
                     &::before {
@@ -262,7 +295,7 @@ $green: linear-gradient(270deg, rgba(0,212,208,1) 0%, rgba(0,215,100,1) 100%);
                 }
             }
         }
-        .list li.active {
+        .list li span.active {
             background: $green;
         }
     }
@@ -270,7 +303,9 @@ $green: linear-gradient(270deg, rgba(0,212,208,1) 0%, rgba(0,215,100,1) 100%);
         .line {
             background: $red;
             .drag {
-                background: $red;
+                &::before {
+                    background: $red;
+                }
                 .percent {
                     background: $red;
                     &::before {
@@ -279,7 +314,7 @@ $green: linear-gradient(270deg, rgba(0,212,208,1) 0%, rgba(0,215,100,1) 100%);
                 }
             }
         }
-        .list li.active {
+        .list li span.active {
             background: $red;
         }
     }
