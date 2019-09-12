@@ -75,6 +75,7 @@ export default {
             this.tradeCurrentPage = 0;
             this.tradeListTotal = 0;
             this.tradeList = [];
+            this.tradeFeeList = [];
             this.fetchMiningTrade();
             this.fetchTradeFee();
         }
