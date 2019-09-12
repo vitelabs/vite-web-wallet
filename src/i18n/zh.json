@@ -902,7 +902,7 @@
             "openStakingAmount": "开通SVIP抵押金额",
             "cancelStakingAmount": "可取回抵押金额",
             "noBalance": "交易所可用余额不足",
-            "openHint": "SVIP开通后，可免除基础手续费，开通SVIP需抵押10000VITE，30天后可手动取回",
+            "openHint": "SVIP开通后，可免除基础手续费，开通SVIP需抵押 1,000,000VITE，30天后可手动取回",
             "cancelHint": "预计 {time} 可取回抵押，取回抵押后，您将无法再使用SVIP特权",
             "openSuccess": "申请开通SVIP成功，稍后生效",
             "openFail": "开通失败",
