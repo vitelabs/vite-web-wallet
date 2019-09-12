@@ -1,40 +1,44 @@
 <template>
-    <div class="__tb" v-show="sortedList && sortedList.length">
-        <order-item v-for="v in sortedList" :key="v.orderId" :order="v">
-            <span class="status">{{ $t('tradeOrderHistory.table.rowMap.statusMap')[v.status] }}</span>
-        </order-item>
+    <div class="__tb">
+        <div v-show="sortedList && sortedList.length">
+            <order-item v-for="v in sortedList" :key="v.orderId" :order="v">
+                <span class="status">{{ $t('tradeOrderHistory.table.rowMap.statusMap')[v.status] }}</span>
+            </order-item>
+        </div>
+        <no-data v-show="!sortedList || !sortedList.length"></no-data>
     </div>
     <!-- <wallet-table class="trade-history-table"
-                      :headList="headList" :contentList="showList"
-                      :clickCell="clickCell">
-            <span v-for="(v, i) in showList" :key="i"
-                  :slot="`${i}sideKeyBefore`" :class="{
-                      'buy': v.rawData.side === 0,
-                      'sell': v.rawData.side === 1
-            }">{{ $t("tradeOrderHistory.side")[v.rawData.side] }}</span>
+                    :headList="headList" :contentList="showList"
+                    :clickCell="clickCell">
+        <span v-for="(v, i) in showList" :key="i"
+                :slot="`${i}sideKeyBefore`" :class="{
+                    'buy': v.rawData.side === 0,
+                    'sell': v.rawData.side === 1
+        }">{{ $t("tradeOrderHistory.side")[v.rawData.side] }}</span>
 
-            <pagination v-if="isShowPage" slot="tableBottom" class="__tb_pagination"
-                        :currentPage="currentPage" :toPage="toPage"
-                        :totalPage="totalPage"></pagination>
-        </wallet-table> -->
-    <!-- <confirm v-show="detailConfirm" :list="detailList" :close="close"
-                 :title="$t('tradeOrderHistory.confirmTable.title')"
-                 :heads="$t('tradeOrderHistory.confirmTable.heads')">
-        </confirm> -->
+        <pagination v-if="isShowPage" slot="tableBottom" class="__tb_pagination"
+                    :currentPage="currentPage" :toPage="toPage"
+                    :totalPage="totalPage"></pagination>
+    </wallet-table>
+    <confirm v-show="detailConfirm" :list="detailList" :close="close"
+                :title="$t('tradeOrderHistory.confirmTable.title')"
+                :heads="$t('tradeOrderHistory.confirmTable.heads')">
+    </confirm> -->
 </template>
 
 <script>
+import noData from 'h5Components/noData';
+import orderItem from 'h5Components/orderItem';
 // import d from 'dayjs';
 // import statistics from 'utils/statistics';
 // import { orderDetail } from 'services/trade';
-import orderItem from 'h5Components/orderItem';
 // import pagination from 'components/pagination';
 // import walletTable from 'components/table/index';
 // import confirm from './tradeList';
 
 export default {
     // confirm, walletTable, pagination
-    components: { orderItem },
+    components: { noData, orderItem },
     props: {
         list: {
             type: Array,
