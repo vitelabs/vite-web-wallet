@@ -82,6 +82,7 @@ export default {
         };
     },
     beforeMount() {
+        this.getCurrentFeesForMine();
         this.fetchMiningTrade();
         this.fetchTradeFee();
     },
@@ -220,12 +221,12 @@ export default {
     background-size: cover;
 }
 .my-dividend {
-    padding: 15px 14px;
+    padding: 0 14px 14px;
     border-top: 1px dashed rgba(211,223,239,1);
     font-size: 12px;
     line-height: 16px;
     .dividend-item {
-        margin-bottom: 16px;
+        margin-top: 16px;
     }
     .item-title {
         color: rgba(62,74,89,0.6);
