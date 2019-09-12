@@ -1127,7 +1127,7 @@
         "fee": "Base Transaction Fees",
         "dividends": "24H Expected Mined Volume",
         "view": "View Live Mining Dashboard",
-        "inviteCount": "邀请人数"
+        "inviteCount": "Invited"
     },
     "inviteMining":{
         "title":"Referring as Mining Total Income"
@@ -1257,7 +1257,8 @@
         "inviteTotalIncome": "Referral as Mining Total Income ({token})",
         "orderTotalIncome": "Market-Making as Mining Total Income ({token})",
         "fee": "Fees",
-        "listTitle": "Mining History"
+        "listTitle": "Mining History",
+        "viewLink": "Live Mining Dashboard" 
     },
     "mobileBottomBar": {
         "center": "Trade",
