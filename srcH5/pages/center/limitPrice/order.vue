@@ -685,7 +685,7 @@ $font-black: rgba(36, 39, 43, 0.8);
     padding-bottom: 4px;
 
     .slider-wrapper {
-        margin: 19px 5px;
+        margin: 13px 5px;
     }
 
     .order-btn {
