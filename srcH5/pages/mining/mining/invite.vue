@@ -1,6 +1,6 @@
 <template>
     <div class="trade-mining-section">
-        <my-income :miningTotal="`${inviteTotal}`"
+        <my-income class="staking-income-wrapper" :miningTotal="`${inviteTotal}`"
                    :title="$t('mobileMining.inviteTotalIncome', {token: 'VX'})">
             <div class="operation">
                 <div class="item">
@@ -130,6 +130,11 @@ export default {
 
 .list-wrapper-view {
     max-height: 450px;
+}
+
+.staking-income-wrapper {
+    background: url('~h5Assets/imgs/big_bg.png') no-repeat;
+    background-size: cover;
 }
 .operation {
     display: flex;
