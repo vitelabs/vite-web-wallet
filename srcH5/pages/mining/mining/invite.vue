@@ -1,6 +1,6 @@
 <template>
     <div class="trade-mining-section">
-        <my-income class="staking-income-wrapper" :miningTotal="`${inviteTotal}`"
+        <my-income :miningTotal="`${inviteTotal}`"
                    :title="$t('mobileMining.inviteTotalIncome', {token: 'VX'})">
             <div class="operation">
                 <div class="item">
