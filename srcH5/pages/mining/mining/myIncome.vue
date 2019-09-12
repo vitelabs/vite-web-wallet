@@ -38,7 +38,7 @@ export default {
 
 .my-income {
     background: url('~h5Assets/imgs/small_bg.svg') no-repeat;
-    background-size: cover;
+    background-size: 100% 100%;
     border-radius: 2px;
     line-height: 16px;
     margin: 20px 0;

@@ -31,13 +31,13 @@
         </div>
 
         <div class="operation">
-            <span class="item btn add __pointer" @click="showVxConfirm(1)">
+            <span class="item btn add" @click="showVxConfirm(1)">
                 {{ $t("tradeMining.add") }}
             </span>
             <span v-show="!canCancel" class="item btn unuse">
                 {{ $t("tradeMining.withdraw") }}
             </span>
-            <span v-show="canCancel" class="item btn cancel __pointer" @click="showVxConfirm(2)">
+            <span v-show="canCancel" class="item btn cancel" @click="showVxConfirm(2)">
                 {{ $t("tradeMining.withdraw") }}
             </span>
         </div>
