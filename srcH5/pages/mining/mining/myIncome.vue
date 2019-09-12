@@ -37,7 +37,7 @@ export default {
 @import "~h5Assets/scss/vars.scss";
 
 .my-income {
-    background: url('~h5Assets/imgs/small_bg.svg') no-repeat;
+    background: url('~h5Assets/imgs/big_bg.png') no-repeat;
     background-size: 100% 100%;
     border-radius: 2px;
     line-height: 16px;
@@ -46,7 +46,7 @@ export default {
     @include font-normal();
 
     .item {
-        padding: 10px 12px;
+        padding: 20px 12px 15px;
         .item-title {
             color: rgba(62,74,89,0.6);
             margin-bottom: 6px;

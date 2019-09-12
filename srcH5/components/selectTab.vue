@@ -39,7 +39,7 @@ export default {
     left: 50%;
     transform: translateX(-50%);
     border-radius: 2px;
-    font-size: 14px;
+    font-size: 12px;
     @include font-bold();
     color: rgba(255,255,255,1);
     line-height: 18px;
@@ -49,7 +49,7 @@ export default {
         display: inline-block;
         height: 30px;
         line-height: 30px;
-        padding: 0 12px;
+        white-space: nowrap;
         text-align: center;
         color: $blue;
         border: 1px solid $blue;

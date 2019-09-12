@@ -131,11 +131,6 @@ export default {
 .list-wrapper-view {
     max-height: 450px;
 }
-
-.staking-income-wrapper {
-    background: url('~h5Assets/imgs/big_bg.png') no-repeat;
-    background-size: cover;
-}
 .operation {
     display: flex;
     align-items: center;

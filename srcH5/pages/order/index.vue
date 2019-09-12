@@ -32,7 +32,17 @@ export default {
 .order-select {
     margin-top: 10px;
     text-align: center;
+    /deep/.select-tab {
+        width: 86px;
+        &:first-child {
+            border-radius: 2px 0px 0px 2px;
+        }
+        &:last-child {
+            border-radius: 0px 2px 2px 0px;
+        }
+    }
 }
+
 .order-wrapper {
     width: 100%;
     height: 100%;

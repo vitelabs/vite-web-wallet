@@ -27,7 +27,7 @@ export default {
     @include font-normal();
     display: block;
     float: right;
-    color: rgba(62,74,89,1);
+    color: rgba(62, 74, 89, 0.7);
     &::before {
         content: "";
         display: inline-block;

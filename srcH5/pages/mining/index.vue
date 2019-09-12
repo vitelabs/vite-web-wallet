@@ -28,7 +28,7 @@ export default {
     text-align: center;
     margin-top: 10px;
     /deep/.select-tab {
-        width: 100px;
+        width: 70px;
         &:first-child {
             border-radius: 2px 0px 0px 2px;
         }
