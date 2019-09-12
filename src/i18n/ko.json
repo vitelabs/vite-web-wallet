@@ -1151,10 +1151,11 @@
         "hintTitle": "중요 공지",
         "comingHint": "VX 채굴 기능은 곧 제공됩니다. VX는 5 가지 방법으로 얻을 수 있습니다: 1. 채굴 트레이딩 2. 채굴 상장 3. 추천인 채굴 4. 채굴 스테이킹, 5. 마켓 메이킹 채굴. VX를 보유한 사용자는 공유 배당풀에서 배당금을받습니다.",
         "more": "VX 채굴 규칙 자세히 알기",
-        "todayTrade": "24H Trading as Mining",
+        "todayTrade": "Mining Details",
         "fee": "Base Transaction Fees",
-        "dividends": "Expected to get",
-        "view": "View Live Mining Dashboard"
+        "dividends": "24H Expected Mined Volume",
+        "view": "View Live Mining Dashboard",
+        "inviteCount": "초대됨"
     },
     "inviteMining": {
         "title": "Referring as Mining Total Income"
@@ -1289,7 +1290,8 @@
         "inviteTotalIncome": "Referral as Mining Total Income ({token})",
         "orderTotalIncome": "Market-Making as Mining Total Income ({token})",
         "fee": "수수료",
-        "listTitle": "Mining History"
+        "listTitle": "Mining History",
+        "viewLink": "Live Mining Dashboard"
     },
     "mobileBottomBar": {
         "center": "Trade",
