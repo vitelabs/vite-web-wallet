@@ -1,7 +1,7 @@
 <template>
     <div class="order-history-ct">
-        <Filters @submit="submit($event)"></Filters>
-        <history-table class="tb" :isShowPage="true"
+        <!-- <Filters @submit="submit($event)"></Filters> -->
+        <history-table :isShowPage="true"
                        :list="data" :currentPage="currentPage" :toPage="update"
                        :totalPage="totalPage"></history-table>
     </div>
@@ -69,14 +69,7 @@ export default {
 <style lang="scss" scoped>
 .order-history-ct {
     height: 100%;
-    padding-top: 10px;
     display: flex;
     flex-direction: column;
-
-    .tb {
-        width: 100%;
-        flex: 1;
-        display: flex;
-    }
 }
 </style>
