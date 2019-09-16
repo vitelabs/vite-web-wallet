@@ -18,7 +18,7 @@ module.exports = {
         new webpack.NormalModuleReplacementPlugin(/\/buffer\//, function (resource) {
             resource.request = Buffer_Path;
         }),
-        new webpack.IgnorePlugin(/^\.\/(?!english)/, /bip39\/src\/wordlists$/)
+        new webpack.IgnorePlugin(/^\.\/wordlists\/(?!english)/, /bip39\/src/)
     ],
     optimization: {
         usedExports: true,

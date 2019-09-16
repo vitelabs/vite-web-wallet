@@ -27,13 +27,13 @@ export function getWrongWalletAddr(mnemonic, index) {
 
 // It's Wrong !!!!!!!!!!
 function getRootByHex(mnemonic) {
-    const seed = bip39.mnemonicToSeedHex(mnemonic);
+    const seed = bip39.mnemonicToSeedSync(mnemonic).toString('hex');
     const hdWallet = hdkey.fromMasterSeed(seed);
     return hdWallet.derivePath(hdPathString);
 }
 
 function getRoot(mnemonic) {
-    const seed = bip39.mnemonicToSeed(mnemonic);
+    const seed = bip39.mnemonicToSeedSync(mnemonic);
     const hdWallet = hdkey.fromMasterSeed(seed);
     return hdWallet.derivePath(hdPathString);
 }
