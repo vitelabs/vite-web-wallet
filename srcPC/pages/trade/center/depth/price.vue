@@ -61,8 +61,6 @@ export default {
     justify-content: center;
     height: 30px;
     line-height: 30px;
-    border-top: 1px solid rgba(229, 237, 243, 1);
-    border-bottom: 1px solid rgba(229, 237, 243, 1);
     text-align: center;
     font-family: $font-H;
     font-weight: 600;

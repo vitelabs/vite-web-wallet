@@ -9,7 +9,7 @@
                 'active-side': (isShowFavorite && i === 0) || (quoteTokenCategory[i-1] === curentCategory)
             }" class="ex-tab __pointer"
             @click="changeCategory(c)"
-        >{{ c }}</li>
+        ><span>{{ c }}</span></li>
     </ul>
 </template>
 

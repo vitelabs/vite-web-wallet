@@ -4,17 +4,17 @@
             <li :class="{
                     'active': isShowSell && isShowBuy
                 }" class="ex-tab __pointer"
-                @click="showTable(true, true)">{{ $t('trade.depth.all') }}</li>
+                @click="showTable(true, true)"><span>{{ $t('trade.depth.all') }}</span></li>
             <li :class="{
                     'active': isShowBuy && !isShowSell,
                     'active-side': isShowSell && isShowBuy
                 }" class="ex-tab __pointer"
-                @click="showTable(true, false)">{{ $t('trade.depth.buy') }}</li>
+                @click="showTable(true, false)"><span>{{ $t('trade.depth.buy') }}</span></li>
             <li :class="{
                     'active': isShowSell && !isShowBuy,
                     'active-side': isShowBuy && !isShowSell
                 }" class="ex-tab __pointer"
-                @click="showTable(false, true)">{{ $t('trade.depth.sell') }}</li>
+                @click="showTable(false, true)"><span>{{ $t('trade.depth.sell') }}</span></li>
                 <!-- <merge-depth></merge-depth> -->
         </ul>
 
@@ -34,7 +34,10 @@
             <div class="depth-table" :class="{'show-all': isShowBuy && isShowSell}">
                 <depth-table v-show="isShowSell" class="sell" dataType="sell" :depthData="depthSell"></depth-table>
             </div>
-            <price></price>
+            <price :class="{
+                border_all: true,
+                no_border_t: !isShowSell || (isShowSell && !isShowBuy && (!depthSell || !depthSell.length))
+            }"></price>
             <depth-table v-show="isShowBuy" class="depth-table" :class="{
                 'show-all': isShowBuy && isShowSell
             }" dataType="buy" :depthData="depthBuy"></depth-table>
@@ -113,6 +116,14 @@ export default {
         .sell {
             width: 100%;
         }
+    }
+
+    .border_all {
+        border-top: 1px solid rgba(229, 237, 243, 1);
+        border-bottom: 1px solid rgba(229, 237, 243, 1);
+    }
+    .no_border_t {
+        border-top: none;
     }
 }
 </style>
