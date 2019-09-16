@@ -178,3 +178,33 @@ export default {
     }
 };
 </script>
+
+<style lang="scss" scoped>
+@import "~assets/scss/vars.scss";
+
+.quota-detail {
+    border-bottom: 1px solid #d4dee7;
+    box-sizing: border-box;
+    .no-detail {
+        box-sizing: border-box;
+        padding: 16px 30px;
+        width: 100%;
+        line-height: 48px;
+        text-align: center;
+        font-size: 16px;
+        @include font-family-bold();
+        color: rgba(0,122,255,1);
+        font-weight: 600;
+        &:before {
+            content: ' ';
+            display: inline-block;
+            width: 13px;
+            height: 13px;
+            background: url('~assets/imgs/addStaking.svg');
+            background-size: 100% 100%;
+            margin-right: 6px;
+            margin-bottom: -1px;
+        }
+    }
+}
+</style>
