@@ -12,7 +12,7 @@
         "build:testH5": "npm run clean:H5 && NODE_ENV=test isH5=true webpack && NODE_ENV=test isH5=true node ./pack/afterPack.js",
         "dev": "NODE_ENV=dev webpack-dev-server",
         "production": "NODE_ENV=production webpack-dev-server",
-        "analyzer": "NODE_ENV=production analyzer=true isH5=true webpack-dev-server",
+        "analyzer": "NODE_ENV=production analyzer=true isPC=true webpack-dev-server",
         "lint:all": "eslint --ext js,vue --fix .",
         "lint": "eslint --ext js,vue --cache --fix .",
         "stylelint": "stylelint **/*.vue --custom-syntax postcss-html --fix",
@@ -29,7 +29,7 @@
         "> 1%",
         "iOS 7",
         "last 3 iOS versions"
-    ],    
+    ],
     "author": "",
     "license": "ISC",
     "peerDependencies": {
@@ -92,7 +92,7 @@
         "babel-plugin-syntax-dynamic-import": "~6.18.0",
         "babel-preset-minify": "^0.5.0",
         "bignumber.js": "~7.2.1",
-        "bip39": "~2.5.0",
+        "bip39": "~3.0.2",
         "buffer": "~5.2.1",
         "circular-dependency-plugin": "~5.0.2",
         "cssnano": "^4.1.10",
