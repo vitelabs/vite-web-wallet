@@ -8,12 +8,7 @@
             >
                 {{ $t("tradeMining.addQuota") }}
             </div>
-            <staking-detail
-                v-else
-                :stakingObj="stakingObj"
-                :totalDividend="totalDividend"
-                :showVxConfirm="_showVxConfirm"
-            ></staking-detail>
+            <staking-detail v-else :showVxConfirm="_showVxConfirm"></staking-detail>
         </div>
         <wallet-table
             class="mint-trade-table no-shadow tb"
@@ -43,24 +38,16 @@ import pagination from 'components/pagination';
 import { miningPledge } from 'services/trade';
 import bigNumber from 'utils/bigNumber';
 import date from 'utils/date';
-import { getAgentMiningPledgeInfo } from 'services/viteServer';
 
 let stakingInfoTimer = null;
 
 export default {
     components: { walletTable, pagination, stakingDetail },
-    props: {
-        totalDividend: {
-            type: String,
-            default: '0'
-        }
-    },
     data() {
         return {
             stakeCurrentPage: 0,
             stakeListTotal: 0,
             stakeList: [],
-            stakingObj: null,
             isShowVxConfirm: false,
             vxConfirm: null,
             pledgeHeadList: [
@@ -92,7 +79,7 @@ export default {
             this.stakeListTotal = 0;
             this.stakeCurrentPage = 0;
             this.stakeList = [];
-            this.fetchStakingInfo();
+            this.$store.dispatch('getAgentMiningPledgeInfo');
         }
     },
     computed: {
@@ -114,6 +101,9 @@ export default {
         },
         address() {
             return this.$store.getters.activeAddr;
+        },
+        stakingObj() {
+            return this.$store.state.exchangeMine.userPledgeInfo;
         }
     },
     methods: {
@@ -144,15 +134,8 @@ export default {
         },
         loopStakingInfo() {
             this.stopStakingInfo();
-            stakingInfoTimer = new timer(() => this.fetchStakingInfo(), 2000);
+            stakingInfoTimer = new timer(() => this.$store.dispatch('getAgentMiningPledgeInfo'), 2000);
             stakingInfoTimer.start();
-        },
-        fetchStakingInfo() {
-            getAgentMiningPledgeInfo(this.address).then(data => {
-                this.stakingObj = data;
-            }).catch(err => {
-                console.warn(err);
-            });
         },
 
         fetchMiningStake(pageNumber) {
@@ -161,19 +144,17 @@ export default {
             miningPledge({
                 address: this.address,
                 offset
-            })
-                .then(data => {
-                    if (!data) {
-                        return;
-                    }
+            }).then(data => {
+                if (!data) {
+                    return;
+                }
 
-                    this.stakeListTotal = data.total || 0;
-                    this.stakeCurrentPage = pageNumber ? pageNumber - 1 : 0;
-                    this.stakeList = data.miningList || [];
-                })
-                .catch(err => {
-                    console.warn(err);
-                });
+                this.stakeListTotal = data.total || 0;
+                this.stakeCurrentPage = pageNumber ? pageNumber - 1 : 0;
+                this.stakeList = data.miningList || [];
+            }).catch(err => {
+                console.warn(err);
+            });
         }
     }
 };

@@ -8,6 +8,7 @@ import market from './market';
 import activeTxPair from './activeTxPair';
 import fee from 'store/fee';
 import limit from 'store/limit';
+import mine from 'store/mine.js';
 import rate from 'store/rate.js';
 import tokens from 'store/tokens';
 import depth from 'store/depth.js';
@@ -19,6 +20,7 @@ import currentOpenOrders from 'store/currentOpenOrders';
 import activeTxPairGetters from 'store/activeTxPairGetters';
 
 const exchange = {
+    exchangeMine: mine,
     exchangeRate: rate,
     exchangeDepth: depth,
     exchangeActiveTx: activeTx,

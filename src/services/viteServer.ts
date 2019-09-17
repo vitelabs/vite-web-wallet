@@ -120,3 +120,11 @@ export function getCurrentFeesForMine() {
 export function getCurrentPledgeForVxSum() {
     return viteClient.request('dexfund_getCurrentPledgeForVxSum');
 }
+
+export function getAllFeesOfAddress(address) {
+    return viteClient.request('dex_getAllFeesOfAddress', address);
+}
+
+export function getMinThresholdForTradeAndMining() {
+    return viteClient.request('dex_getMinThresholdForTradeAndMining');
+}
