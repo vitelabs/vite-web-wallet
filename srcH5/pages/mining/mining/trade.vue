@@ -27,8 +27,7 @@
 import walletTable from 'components/table/index.vue';
 import noData from 'h5Components/noData';
 import listView from 'h5Components/listView.vue';
-import { miningTrade, tradeFee } from 'services/trade';
-import { getCurrentFeesForMine } from 'services/viteServer';
+import { miningTrade } from 'services/trade';
 import date from 'utils/date';
 import bigNumber from 'utils/bigNumber';
 import myIncome from './myIncome';
@@ -82,7 +81,7 @@ export default {
         };
     },
     beforeMount() {
-        this.getCurrentFeesForMine();
+        this.$store.dispatch('getCurrentFeesForMine');
         this.fetchMiningTrade();
         this.fetchTradeFee();
     },
@@ -117,48 +116,7 @@ export default {
             return this.$store.getters.activeAddr;
         },
         expectedDividends() {
-            if (!this.currentFees || !this.totalDividend || !this.tradeFeeList || !this.tradeFeeList.length) {
-                return null;
-            }
-
-            const typeList = {
-                1: {
-                    tokenSymbol: 'VITE',
-                    decimals: 18
-                },
-                2: {
-                    tokenSymbol: 'ETH',
-                    decimals: 18
-                },
-                3: {
-                    tokenSymbol: 'BTC',
-                    decimals: 8
-                },
-                4: {
-                    tokenSymbol: 'USDT',
-                    decimals: 6
-                }
-            };
-            const dividends = {};
-            this.tradeFeeList.forEach(tradeFee => {
-                const quoteType = tradeFee.quoteType;
-                const decimals = typeList[quoteType].decimals;
-                const symbol = typeList[quoteType].tokenSymbol;
-
-                const currFee = this.currentFees[quoteType] || 0;
-                const currDividens = this.totalDividend[quoteType] || 0;
-
-                const basicCurrFee = bigNumber.toBasic(currFee, decimals);
-                const basicCurrDividens = bigNumber.toBasic(currDividens, 18); // VX decimals
-                const percent = +basicCurrFee ? bigNumber.dividedToNumber(tradeFee.amount, basicCurrFee, 8) : 0;
-
-                dividends[symbol] = {
-                    fee: tradeFee.amount,
-                    dividend: bigNumber.multi(basicCurrDividens, percent)
-                };
-            });
-
-            return dividends;
+            return this.$store.getters.tradeDividends;
         }
     },
     methods: {
@@ -190,23 +148,7 @@ export default {
             });
         },
         fetchTradeFee() {
-            tradeFee({ address: this.address }).then(data => {
-                if (!data) {
-                    return;
-                }
-
-                this.tradeFeeList = data || [];
-            })
-                .catch(err => {
-                    console.warn(err);
-                });
-        },
-        getCurrentFeesForMine() {
-            getCurrentFeesForMine().then(data => {
-                this.currentFees = data || null;
-            }).catch(err => {
-                console.warn(err);
-            });
+            this.$store.dispatch('getAllFeesOfAddress');
         }
     }
 };

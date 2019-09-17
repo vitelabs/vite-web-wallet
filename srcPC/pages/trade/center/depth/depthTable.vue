@@ -60,11 +60,7 @@ export default {
             return quoteTokenDigit;
         },
         tradeTokenDigit() {
-            const tradeTokenDigit = this.$store.getters.tradeTokenDecimalsLimit;
-            if ((this.depthStep || this.depthStep === 0) && tradeTokenDigit > this.depthStep) {
-                return this.depthStep;
-            }
-            return tradeTokenDigit;
+            return this.$store.getters.tradeTokenDecimalsLimit;
         },
         depthStep() {
             return this.$store.state.exchangeDepth.depthStep;

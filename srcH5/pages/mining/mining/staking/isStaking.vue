@@ -3,7 +3,7 @@
         <div v-if="!stakingObj" @click="_showVxConfirm(1)" class="no-detail __pointer">
             {{ $t("tradeMining.addQuota") }}
         </div>
-        <staking-detail v-else :stakingObj="stakingObj" :totalDividend="totalDividend"
+        <staking-detail v-else :stakingObj="stakingObj"
                         :showVxConfirm="_showVxConfirm"></staking-detail>
     </div>
 </template>
@@ -14,23 +14,13 @@ import VxConfirm from './vxConfirm.vue';
 import statistics from 'utils/statistics';
 import stakingDetail from './stakingDetail.vue';
 import { timer } from 'utils/asyncFlow';
-import { getAgentMiningPledgeInfo } from 'services/viteServer';
 
 let stakingInfoTimer = null;
 
 export default {
     components: { stakingDetail },
-    props: {
-        totalDividend: {
-            type: String,
-            default: '0'
-        }
-    },
     data() {
-        return {
-            stakingObj: null,
-            vxConfirm: null
-        };
+        return { vxConfirm: null };
     },
     beforeMount() {
         this.loopStakingInfo();
@@ -41,12 +31,15 @@ export default {
     },
     watch: {
         address() {
-            this.fetchStakingInfo();
+            this.loopStakingInfo();
         }
     },
     computed: {
         address() {
             return this.$store.getters.activeAddr;
+        },
+        stakingObj() {
+            return this.$store.state.exchangeMine.userPledgeInfo;
         }
     },
     methods: {
@@ -79,15 +72,9 @@ export default {
         },
         loopStakingInfo() {
             this.stopStakingInfo();
-            stakingInfoTimer = new timer(() => this.fetchStakingInfo(), 2000);
+            this.$store.dispatch('getAgentMiningPledgeInfo');
+            stakingInfoTimer = new timer(() => this.$store.dispatch('getAgentMiningPledgeInfo'), 2000);
             stakingInfoTimer.start();
-        },
-        fetchStakingInfo() {
-            getAgentMiningPledgeInfo(this.address).then(data => {
-                this.stakingObj = data;
-            }).catch(err => {
-                console.warn(err);
-            });
         }
     }
 };
