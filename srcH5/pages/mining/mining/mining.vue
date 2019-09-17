@@ -1,8 +1,8 @@
 <template>
     <div class="trade-mining-wrapper">
         <tab-list :tabList="tabList" defaultTab="trade" v-model="tabName"></tab-list>
-        <tradeMinComp class="section" :totalDividend="tradeTotalDividend" v-if="tabName === 'trade'"></tradeMinComp>
-        <stakingMinComp class="section" :totalDividend="pledgeTotalDividend" v-if="tabName === 'staking'"></stakingMinComp>
+        <tradeMinComp class="section" v-if="tabName === 'trade'"></tradeMinComp>
+        <stakingMinComp class="section" v-if="tabName === 'staking'"></stakingMinComp>
         <inviteMinComp class="section" v-if="tabName === 'invite'"></inviteMinComp>
         <orderMinComp class="section" v-if="tabName === 'order'"></orderMinComp>
     </div>
@@ -10,7 +10,6 @@
 
 <script>
 import tabList from 'h5Components/tabList.vue';
-import { getCurrentVxMineInfo } from 'services/viteServer';
 import inviteMinComp from './invite.vue';
 import orderMinComp from './order.vue';
 import tradeMinComp from './trade.vue';
@@ -19,7 +18,7 @@ import stakingMinComp from './staking/staking.vue';
 export default {
     components: { tabList, inviteMinComp, orderMinComp, tradeMinComp, stakingMinComp },
     beforeMount() {
-        this.getCurrentVxMineInfo();
+        this.$store.dispatch('getCurrentVxMineInfo');
     },
     data() {
         return {
@@ -32,29 +31,6 @@ export default {
             },
             tabName: 'trade'
         };
-    },
-    computed: {
-        tradeTotalDividend() {
-            if (!this.currVxMineInfo) {
-                return null;
-            }
-            return this.currVxMineInfo.feeMineDetail || null;
-        },
-        pledgeTotalDividend() {
-            if (!this.currVxMineInfo) {
-                return '0';
-            }
-            return this.currVxMineInfo.pledgeMine || '0';
-        }
-    },
-    methods: {
-        getCurrentVxMineInfo() {
-            getCurrentVxMineInfo().then(data => {
-                this.currVxMineInfo = data || null;
-            }).catch(err => {
-                console.warn(err);
-            });
-        }
     }
 };
 </script>

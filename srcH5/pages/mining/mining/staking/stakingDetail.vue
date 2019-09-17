@@ -48,36 +48,27 @@
 import date from 'utils/date';
 import bigNumber from 'utils/bigNumber';
 import { constant } from '@vite/vitejs';
-import { getCurrentPledgeForVxSum } from 'services/viteServer';
 
 const Vite_Token_Info = constant.Vite_Token_Info;
 
 export default {
     mounted() {
-        this.getCurrentPledgeForVxSum();
+        this.$store.dispatch('getCurrentPledgeForVxSum');
         this.$store.dispatch('startLoopHeight');
     },
     destroyed() {
         this.$store.dispatch('stopLoopHeight');
     },
     props: {
-        stakingObj: {
-            type: Object,
-            default: null
-        },
         showVxConfirm: {
             type: Function,
             default: () => {}
-        },
-        totalDividend: {
-            type: String,
-            default: '0'
         }
     },
-    data() {
-        return { currTotalPledge: 0 };
-    },
     computed: {
+        stakingObj() {
+            return this.$store.state.exchangeMine.userPledgeInfo;
+        },
         height() {
             return this.$store.state.env.currentHeight;
         },
@@ -102,21 +93,7 @@ export default {
             };
         },
         expectedDividends() {
-            if (!this.stakingObj || !+this.stakingObj.amount) {
-                return '0';
-            }
-            const percent = +this.currTotalPledge ? bigNumber.dividedToNumber(this.stakingObj.amount, this.currTotalPledge, 8) : 0;
-            const dividends = bigNumber.multi(this.totalDividend, percent, 8);
-            return bigNumber.toBasic(dividends, Vite_Token_Info.decimals, 8);
-        }
-    },
-    methods: {
-        getCurrentPledgeForVxSum() {
-            return getCurrentPledgeForVxSum().then(data => {
-                this.currTotalPledge = data || '0';
-            }).catch(err => {
-                console.warn(err);
-            });
+            return this.$store.getters.stakingDividends;
         }
     }
 };
