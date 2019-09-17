@@ -32,11 +32,10 @@ function getENTime(timestamp) {
     const year = date.getFullYear();
 
 
-    let time = 'AM';
     let hour = date.getHours();
+    const time = hour >= 12 ? 'PM' : 'AM';
     if (hour > 12) {
         hour = hour - 12;
-        time = 'PM';
     }
     hour = hour < 10 ? `0${ hour }` : hour;
     let minutes = date.getMinutes();
