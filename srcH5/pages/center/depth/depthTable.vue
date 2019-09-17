@@ -162,14 +162,15 @@ export default {
 
 .percent-wrapper {
     position: absolute;
-    right: 0;
     top: 0;
     bottom: 0;
     &.buy {
+        right: 0;
         background: rgba(0,215,100,0.08);
     }
 
     &.sell {
+        left: 0;
         background: rgba(237,81,88,0.08);
     }
 }
