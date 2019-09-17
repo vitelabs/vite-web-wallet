@@ -116,7 +116,7 @@ export default {
             return this.$store.getters.activeAddr;
         },
         expectedDividends() {
-            return this.$store.getters.stakingDividends;
+            return this.$store.getters.tradeDividends;
         }
     },
     methods: {

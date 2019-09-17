@@ -19,6 +19,7 @@ export default {
     components: { tabList, inviteMinComp, orderMinComp, tradeMinComp, stakingMinComp },
     beforeMount() {
         this.$store.dispatch('getCurrentVxMineInfo');
+        this.$store.dispatch('getMinThresholdForTradeAndMining');
     },
     data() {
         return {
