@@ -27,7 +27,6 @@ export default {
     height: 50px;
     font-size: 13px;
     @include font-family-bold();
-    font-weight: 600;
     color: rgba(94,104,117,0.8);
     display: flex;
     align-items: center;

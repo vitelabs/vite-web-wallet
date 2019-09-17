@@ -86,19 +86,20 @@ export default {
 <style lang="scss" scoped>
 .pagination-wrapper {
     display: inline-block;
+    align-items: center;
 }
 
 .box {
     text-align: center;
     box-sizing: border-box;
     display: inline-block;
-    width: 24px;
-    height: 24px;
-    border: 1px solid #c6cbd4;
+    width: 30px;
+    height: 30px;
+    border: 1px solid rgba(198,203,212,1);
     border-radius: 2px;
-    line-height: 24px;
-    font-size: 14px;
-    color: #333;
+    line-height: 30px;
+    font-size: 12px;
+    color: rgba(51,51,51,1);
     margin-left: 6px;
 
     &:first-child {
@@ -126,7 +127,7 @@ export default {
 .prev,
 .next {
     position: relative;
-    top: 6px;
+    top: 10px;
 }
 
 .prev {

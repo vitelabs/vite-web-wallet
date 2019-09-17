@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 57.1 (83088) - https://sketch.com -->
+    <title>right_white</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M8.61818182,10 L9.49090909,10 C9.77207224,10 10,9.77207224 10,9.49090909 L10,2.50909091 C10,2.22792776 9.77207224,2 9.49090909,2 C9.20974595,2 8.98181818,2.22792776 8.98181818,2.50909091 L8.98181818,8.98181818 L2.50909091,8.98181818 C2.22792776,8.98181818 2,9.20974595 2,9.49090909 C2,9.77207224 2.22792776,10 2.50909091,10 L8.61818182,10 Z" id="path-1"></path>
+    </defs>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="挖矿分红备份-68" transform="translate(-320.000000, -175.000000)">
+            <g id="编组-2" transform="translate(24.000000, 155.000000)">
+                <g id="编组-6" transform="translate(248.000000, 20.000000)">
+                    <g id="Group-8备份" transform="translate(50.000000, 2.000000)">
+                        <mask id="mask-2" fill="white">
+                            <use xlink:href="#path-1"></use>
+                        </mask>
+                        <use id="Combined-Shape" fill-opacity="0.7" fill="#007AFF" fill-rule="nonzero" transform="translate(6.000000, 6.000000) rotate(-45.000000) translate(-6.000000, -6.000000) " xlink:href="#path-1"></use>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

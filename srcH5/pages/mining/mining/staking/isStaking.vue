@@ -3,7 +3,7 @@
         <div v-if="!stakingObj" @click="_showVxConfirm(1)" class="no-detail __pointer">
             {{ $t("tradeMining.addQuota") }}
         </div>
-        <staking-detail v-else :stakingObj="stakingObj"
+        <staking-detail v-else :stakingObj="stakingObj" :totalDividend="totalDividend"
                         :showVxConfirm="_showVxConfirm"></staking-detail>
     </div>
 </template>
@@ -20,6 +20,12 @@ let stakingInfoTimer = null;
 
 export default {
     components: { stakingDetail },
+    props: {
+        totalDividend: {
+            type: String,
+            default: '0'
+        }
+    },
     data() {
         return {
             stakingObj: null,
@@ -91,10 +97,11 @@ export default {
 @import "~h5Assets/scss/vars.scss";
 
 .quota-detail {
-    padding: 15px 14px;
+    padding: 0px 14px 14px;
     border-top: 1px dashed rgba(211,223,239,1);
     .no-detail {
         width: 100%;
+        padding-top: 14px;
         text-align: center;
         font-size: 14px;
         @include font-bold();

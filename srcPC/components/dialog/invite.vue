@@ -21,7 +21,7 @@ block content
     div(v-else)
         .block__title {{ $t('assets.invite.cost') }}
             .right(v-if="this.avaliableExAmount && Number(this.avaliableExAmount) >= 1000") {{$t('assets.invite.avaliable')}} {{`${avaliableExAmount||0}VITE`}}
-            .right(v-else) {{$t('assets.invite.notEnough')}}
+            .right.err(v-else) {{$t('assets.invite.notEnough')}}
         .block__content.edit.space 1000 VITE
     .block__title {{$t('assets.invite.inviteRule')}}
     .illustrate(v-for="(i,j) in $t('assets.invite.ruleItems')")
@@ -102,7 +102,9 @@ export default {
             return Promise.reject('no close');
         },
         copyShare() {
-            copy(`https://growth.vite.net${ process.env.NODE_ENV === 'production' ? '' : '/test' }/vitex-board?ldfjacia=${ this.inviteCode }`);
+            copy(`https://growth.vite.net${
+                process.env.NODE_ENV === 'production' ? '' : '/test'
+            }/vitex-board?ldfjacia=${ this.inviteCode }`);
             this.$toast(this.$t('hint.copyShare'));
         },
         copy() {
@@ -137,7 +139,11 @@ export default {
     .right {
         color: #767f8b;
         font-size: 12px;
+        &.err {
+            color: #ff2929;
+        }
     }
+
     &:first-child {
         margin-top: 0;
     }

@@ -1,7 +1,7 @@
 <template>
     <div class="proxy">
+        <div class="super-title">{{ $t("trade.proxy.title") }}</div>
         <div class="op item">
-            <div class="title">{{ $t("trade.proxy.title") }}</div>
             <div class="btn_group">
                 <div
                     class="btn btn__ok __pointer"
@@ -163,14 +163,20 @@ export default {
             openUrl('https://github.com/vitelabs/vite-wiki/blob/mainnet/docs/zh/dex/api/proxy.md');
         },
         updateData() {
-            return Promise.all([ getProxyRelation({ address: this.address }).then(data => {
-                this.relation = data.relations;
-            }),
-            getProxyGrantor({ address: this.address }).then(data => {
-                this.grantor = data.relations;
-            }) ]);
+            return Promise.all([
+                getProxyRelation({ address: this.address }).then(data => {
+                    this.relation = data.relations;
+                }),
+                getProxyGrantor({ address: this.address }).then(data => {
+                    this.grantor = data.relations;
+                })
+            ]);
         },
-        addProxy: execWithValid(function ({ trustAddress, existsPair, actionType } = {}) {
+        addProxy: execWithValid(function ({
+            trustAddress,
+            existsPair,
+            actionType
+        } = {}) {
             if (existsPair) {
                 existsPair = existsPair.map(p =>
                     Object.assign(p, {
@@ -202,22 +208,23 @@ export default {
 .proxy {
     display: flex;
     flex-direction: column;
-    padding-top: 13px;
+    padding-top: 10px;
     height: 100%;
-    .title {
-        padding: 14px 0;
-        font-size: 14px;
-        color: #1d2024;
-        @include font-family-bold();
+    .super-title {
+        font-size: 18px;
     }
     .item {
         display: flex;
         flex-direction: column;
+        margin-top: 14px;
+        .title {
+            font-size: 14px;
+            color: #1d2024;
+            @include font-family-bold();
+            margin-bottom: 14px;
+        }
     }
     .op {
-        .title {
-            font-size: 18px;
-        }
         .btn_group {
             display: flex;
             .btn {
