@@ -1,5 +1,6 @@
 import fee from 'store/fee';
 import limit from 'store/limit';
+import mine from 'store/mine.js';
 import rate from 'store/rate.js';
 import tokens from 'store/tokens';
 import depth from 'store/depth.js';
@@ -16,6 +17,7 @@ import activeTxPair from './activeTxPair';
 
 export default {
     exchangeFee: fee,
+    exchangeMine: mine,
     exchangeRate: rate,
     exchangeDepth: depth,
     exchangeLimit: limit,

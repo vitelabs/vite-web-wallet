@@ -2,7 +2,7 @@
     <div class="trade-mining-section">
         <my-income class="staking-income-wrapper" :miningTotal="`${miningTotal}`"
                    :title="$t('mobileMining.stakingTotalIncome', {token: 'VX'})">
-            <is-staking :totalDividend="totalDividend"></is-staking>
+            <is-staking></is-staking>
         </my-income>
         <list-title></list-title>
         <list-view v-show="content && content.length" class="list-wrapper-view" :reachEnd="reachEnd">
@@ -25,12 +25,6 @@ import noData from 'h5Components/noData';
 
 export default {
     components: { noData, myIncome, isStaking, miningTable, listView, listTitle },
-    props: {
-        totalDividend: {
-            type: String,
-            default: '0'
-        }
-    },
     data() {
         return {
             isInit: false,
