@@ -1,27 +1,18 @@
 <template>
-    <div class="trade-mining-section">
-        <div class="fee-title">
-            {{ $t('tradeMining.todayTrade') }}
-            <span class="link __pointer" @click="goView">{{ $t('tradeMining.view') }}</span>
-        </div>
-
+    <div class="trade-mining-section shadow">
         <div class="my-divident">
-            <div class="item" v-for="tokenType in ['VITE', 'BTC', 'ETH', 'USD']" :key="tokenType">
-                <div class="item-title">{{ tokenType }}</div>
+            <div class="item" v-for="tokenType in ['VITE', 'BTC', 'ETH', 'USDT']" :key="tokenType">
+                <div class="item-title">{{ tokenType }} {{ $t('tradeMining.fee') }}</div>
                 <div class="item-price">
-                    <div>
-                        <span>{{ $t('tradeMining.fee') }}</span>
-                        {{ expectedDividends && expectedDividends[tokenType] ? expectedDividends[tokenType].fee : 0 }} {{ tokenType }}
-                    </div>
-                    <div class="dividend">
-                        <span>{{ $t('tradeMining.dividends') }}</span>
-                        {{ expectedDividends && expectedDividends[tokenType] ? expectedDividends[tokenType].dividend : 0 }} VX
-                    </div>
+                    {{ expectedDividends && expectedDividends[tokenType] ? expectedDividends[tokenType].fee : 0 }}
+                </div>
+                <div class="item-dividend">
+                    <span>{{ $t('tradeMining.dividends') }}</span>
+                    {{ expectedDividends && expectedDividends[tokenType] ? expectedDividends[tokenType].dividend : 0 }}VX
                 </div>
             </div>
         </div>
-
-        <wallet-table class="mint-trade-table content tb"
+        <wallet-table class="mint-trade-table no-shadow tb"
                       :headList="tradeHeadList"
                       :contentList="content">
             <pagination
@@ -42,7 +33,6 @@ import { getCurrentFeesForMine } from 'services/viteServer';
 import { miningTrade, tradeFee } from 'services/trade';
 import bigNumber from 'utils/bigNumber';
 import date from 'utils/date';
-import openUrl from 'utils/openUrl';
 
 export default {
     components: { walletTable, pagination },
@@ -55,6 +45,7 @@ export default {
     beforeMount() {
         this.fetchMiningTrade();
         this.fetchTradeFee();
+        this.getCurrentFeesForMine();
     },
     data() {
         return {
@@ -84,6 +75,7 @@ export default {
             this.tradeCurrentPage = 0;
             this.tradeListTotal = 0;
             this.tradeList = [];
+            this.tradeFeeList = [];
             this.fetchMiningTrade();
             this.fetchTradeFee();
         }
@@ -127,7 +119,7 @@ export default {
                     decimals: 8
                 },
                 4: {
-                    tokenSymbol: 'USD',
+                    tokenSymbol: 'USDT',
                     decimals: 6
                 }
             };
@@ -141,7 +133,7 @@ export default {
                 const currDividens = this.totalDividend[quoteType] || 0;
 
                 const basicCurrFee = bigNumber.toBasic(currFee, decimals);
-                const basicCurrDividens = bigNumber.toBasic(currDividens, decimals);
+                const basicCurrDividens = bigNumber.toBasic(currDividens, 18); // VX decimals
                 const percent = +basicCurrFee ? bigNumber.dividedToNumber(tradeFee.amount, basicCurrFee, 8) : 0;
 
                 dividends[symbol] = {
@@ -192,9 +184,6 @@ export default {
             }).catch(err => {
                 console.warn(err);
             });
-        },
-        goView() {
-            openUrl('https://vitex.net/');
         }
     }
 };
@@ -203,29 +192,14 @@ export default {
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
 
-.fee-title {
-    font-size: 13px;
-    color: rgba(94, 104, 117, 0.8);
-    line-height: 30px;
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-    .link {
-        color: #007aff;
-        margin-left: 10px;
-    }
-}
-
 .my-divident {
     background: url('~assets/imgs/mint_pledge_bg.png') rgba(234,248,255,0.2);
     background-size: 100% 100%;
     font-size: 12px;
     font-family: $font-normal;
-    line-height: 16px;
+    line-height: 18px;
     display: flex;
     flex-direction: row;
-    margin-bottom: 20px;
-    box-shadow: 0px 2px 10px 1px rgba(176, 192, 237, 0.42);
     border-radius: 2px;
 
     .item {
@@ -238,11 +212,14 @@ export default {
         }
         .item-title {
             color: rgba(94,104,117,1);
-            margin-bottom: 2px;
         }
         .item-price {
+            font-size: 16px;
             color: rgba(29,32,36,1);
-            margin-top: 2px;
+            line-height: 20px;
+        }
+        .item-dividend {
+            color: rgba(94,104,117,0.58);
         }
     }
 }

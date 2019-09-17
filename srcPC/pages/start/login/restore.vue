@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="wrapper">
-            <textarea v-model="mnemonic" :class="{
+            <textarea class="" v-model="mnemonic" :class="{
                 'center': !mnemonic
             }" :placeholder="$t('mnemonic.placeholder')"></textarea>
             <span v-show="errMsg" class="msg __err_msg" >
@@ -182,6 +182,7 @@ export default {
         resize: none;
         text-align: left;
         word-wrap: break-word;
+        font-size: 14px;
 
         &.center {
             text-align: center;

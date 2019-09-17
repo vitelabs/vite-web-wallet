@@ -902,7 +902,7 @@
             "openStakingAmount": "开通SVIP抵押金额",
             "cancelStakingAmount": "可取回抵押金额",
             "noBalance": "交易所可用余额不足",
-            "openHint": "SVIP开通后，可免除基础手续费，开通SVIP需抵押10000VITE，30天后可手动取回",
+            "openHint": "SVIP开通后，可免除基础手续费，开通SVIP需抵押 1,000,000VITE，30天后可手动取回",
             "cancelHint": "预计 {time} 可取回抵押，取回抵押后，您将无法再使用SVIP特权",
             "openSuccess": "申请开通SVIP成功，稍后生效",
             "openFail": "开通失败",
@@ -1121,10 +1121,11 @@
         "hintTitle": "重要通知",
         "comingHint": "VX挖矿功能即将开启，敬请期待。VX挖矿分为5类：交易挖矿、上币挖矿、邀请挖矿、抵押挖矿和挂单挖矿。您可以通过以上5种方式获取VX，持有VX可持续获得手续费分红。",
         "more": "了解更多VX挖矿规则",
-        "todayTrade": "今日交易挖矿",
+        "todayTrade": "我的挖矿详情",
         "fee": "手续费",
-        "dividends": "预计可挖",
-        "view": "查看市场实时挖矿数据"
+        "dividends": "预计今日可挖",
+        "view": "查看市场实时挖矿数据",
+        "inviteCount": "邀请人数"
     },
     "inviteMining":{
         "title":"邀请挖矿总收益"
@@ -1257,7 +1258,8 @@
         "inviteTotalIncome": "邀请挖矿总收益({token})",
         "orderTotalIncome": "挂单挖矿总收益({token})",
         "fee": "手续费金额",
-        "listTitle": "挖矿明细"
+        "listTitle": "挖矿明细",
+        "viewLink": "实时挖矿数据" 
     },
     "mobileBottomBar": {
         "center": "交易",

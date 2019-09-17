@@ -1,10 +1,18 @@
 <template>
-    <div class="trade-mining-section">
-        <wallet-table
-            class="mint-trade-table content tb"
-            :headList="inviteHeadList"
-            :contentList="content"
-        >
+    <div class="trade-mining-section shadow">
+        <div class="staking-detail">
+            <div class="item">
+                <div>{{ $t('tradeMining.inviteCount')}}</div>
+                <div class="bold">{{ inviter ? inviter.inviteCount || 0 : 0 }}</div>
+            </div>
+            <!-- <div class="item">
+                <div>{{ $t('assets.invite.inviteBenifit') }}</div>
+                <div class="bold">{{ inviter ? inviter.miningTotal || 0 : '--' }} VX</div>
+            </div> -->
+        </div>
+
+        <wallet-table class="mint-trade-table no-shadow tb"
+                      :headList="inviteHeadList" :contentList="content">
             <pagination
                 slot="tableBottom"
                 class="__tb_pagination"
@@ -15,9 +23,10 @@
         </wallet-table>
     </div>
 </template>
+
 <script>
 import pagination from 'components/pagination.vue';
-import { getInviteMiningDetail } from 'services/trade';
+import { getInviteMiningDetail, getInviteInfo } from 'services/trade';
 import walletTable from 'components/table/index.vue';
 import bigNumber from 'utils/bigNumber';
 import date from 'utils/date';
@@ -26,6 +35,7 @@ export default {
     components: { walletTable, pagination },
     data() {
         return {
+            inviter: null,
             inviteCurrentPage: 0,
             inviteTotal: 0,
             inviteListTotal: 0,
@@ -48,14 +58,17 @@ export default {
     },
     beforeMount() {
         this.fetchMiningInvite();
+        this.getInviteInfo();
     },
     watch: {
         address() {
+            this.inviter = null;
             this.inviteListTotal = 0;
             this.inviteCurrentPage = 0;
             this.inviteTotal = 0;
             this.inviteList = [];
             this.fetchMiningInvite();
+            this.getInviteInfo();
         }
     },
     computed: {
@@ -81,6 +94,13 @@ export default {
         }
     },
     methods: {
+        getInviteInfo() {
+            getInviteInfo(this.address).then(data => {
+                this.inviter = data || null;
+            }).catch(err => {
+                console.warn(err);
+            });
+        },
         fetchMiningInvite(pageNumber) {
             const offset = pageNumber ? (pageNumber - 1) * 30 : 0;
 
@@ -106,3 +126,7 @@ export default {
     }
 };
 </script>
+
+<style lang="scss" scoped>
+@import "../components/stakingDetail.scss";
+</style>
