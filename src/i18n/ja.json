@@ -1151,11 +1151,11 @@
         "hintTitle": "重要なお知らせ",
         "comingHint": "VXマイニング機能は近日公開予定です。ご期待ください。 VXは5つの方法で入手できます。1.トレードマイニング、2.リスティングマイニング、3.リファラルマイニング、4.ステーキングマイニング、5.マーケットメイキングマイニング。 VX保有するユーザーは、共有プールからの配当を享受できます。",
         "more": "VXマイニングルールの詳細",
+        "fee": "取引手数料",
         "todayTrade": "Mining Details",
-        "fee": "Base Transaction Fees",
         "dividends": "24H Expected Mined Volume",
         "view": "View Live Mining Dashboard",
-        "inviteCount": "招待"
+        "inviteCount": "Referrals"
     },
     "inviteMining": {
         "title": "リファラルマイニング総収入"
