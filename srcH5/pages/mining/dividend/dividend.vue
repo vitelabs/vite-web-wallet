@@ -266,6 +266,7 @@ export default {
             &.big {
                 font-size: 14px;
                 line-height: 18px;
+                white-space: nowrap;
             }
             .vx-amount {
                 @include font-bold();
