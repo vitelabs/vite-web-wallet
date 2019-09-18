@@ -2,6 +2,11 @@ import { constant } from '@vite/vitejs';
 import bigNumber from 'utils/bigNumber';
 import { getCurrentFeesForMine, getAllFeesOfAddress, getMinThresholdForTradeAndMining, getCurrentVxMineInfo, getCurrentPledgeForVxSum, getAgentMiningPledgeInfo } from 'services/viteServer';
 
+import viteIcon from 'assets/imgs/vite-dividend.svg';
+import ethIcon from 'assets/imgs/eth.svg';
+import usdIcon from 'assets/imgs/usd.svg';
+import btcIcon from 'assets/imgs/BTC.svg';
+
 const Vite_Token_Info = constant.Vite_Token_Info;
 const VX_Decimals = 18;
 const typeList = {
@@ -30,7 +35,20 @@ const state = {
     currPledge: 0,
 
     minThreshold: {},
-    currVxMineInfo: null
+    currVxMineInfo: null,
+    showTypeList: [ {
+        name: 'VITE',
+        icon: viteIcon
+    }, {
+        name: 'BTC',
+        icon: btcIcon
+    }, {
+        name: 'ETH',
+        icon: ethIcon
+    }, {
+        name: 'USDT',
+        icon: usdIcon
+    } ]
 };
 
 const mutations = {

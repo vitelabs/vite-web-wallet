@@ -38,24 +38,6 @@ import bigNumber from 'utils/bigNumber';
 import myIncome from './myIncome';
 import miningTable from './table';
 import listTitle from './listTitle.vue';
-import viteIcon from 'assets/imgs/vite-dividend.svg';
-import ethIcon from 'assets/imgs/eth.svg';
-import usdIcon from 'assets/imgs/usd.svg';
-import btcIcon from 'assets/imgs/BTC.svg';
-
-const typeList = [ {
-    name: 'VITE',
-    icon: viteIcon
-}, {
-    name: 'BTC',
-    icon: btcIcon
-}, {
-    name: 'ETH',
-    icon: ethIcon
-}, {
-    name: 'USDT',
-    icon: usdIcon
-} ];
 
 export default {
     components: { noData, walletTable, myIncome, miningTable, listView, listTitle },
@@ -67,7 +49,6 @@ export default {
     },
     data() {
         return {
-            typeList,
             currentFees: null,
             tradeFeeList: [],
             isInit: false,
@@ -101,6 +82,9 @@ export default {
         }
     },
     computed: {
+        typeList() {
+            return this.$store.state.exchangeMine.showTypeList;
+        },
         content() {
             return this.tradeList.map(item => {
                 let decimals = 8;
