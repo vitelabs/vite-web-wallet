@@ -1,6 +1,7 @@
 <template>
     <div class="trade-mining-section">
         <myIncome class="staking-income-wrapper" :miningTotal="`${miningTotal}`"
+                  :isShowHelp="true" :helpTips="$t('tradeMining.help')"
                   :title="$t('mobileMining.tradeTotalIncome', {token: 'VX'})">
             <div class="my-dividend">
                 <div class="dividend-item" v-for="item in typeList" :key="item.name">
@@ -163,7 +164,7 @@ export default {
     max-height: 450px;
 }
 .my-dividend {
-    padding: 0 14px 14px;
+    padding: 0 8px 14px;
     border-top: 1px dashed rgba(211,223,239,1);
     font-size: 12px;
     line-height: 16px;
