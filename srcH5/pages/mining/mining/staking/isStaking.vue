@@ -84,7 +84,7 @@ export default {
 @import "~h5Assets/scss/vars.scss";
 
 .quota-detail {
-    padding: 0px 14px 14px;
+    padding: 0px 8px 14px;
     border-top: 1px dashed rgba(211,223,239,1);
     .no-detail {
         width: 100%;

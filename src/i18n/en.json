@@ -1127,7 +1127,8 @@
         "fee": "Base Transaction Fees",
         "dividends": "24H Expected Mined Volume",
         "view": "View Live Mining Dashboard",
-        "inviteCount": "Invited"
+        "inviteCount": "Invited",
+        "help": "Current trading fees displayed on this page contains only the 0.2% ViteX base transaction fees, please note that operator fees shall be taken into consideration when calculating mining cost"
     },
     "inviteMining":{
         "title":"Referring as Mining Total Income"

@@ -13,7 +13,11 @@
             >
                 <img src="~assets/imgs/exchange/mining/trade.png" />
                 <div>
-                    <div class="label">{{ $t("tradeMining.txTitle") }}</div>
+                    <div class="label">{{ $t("tradeMining.txTitle") }}
+                        <span class="help __pointer" @mouseenter="showHelp" @mouseleave="hideHelp">
+                            <span v-show="isShowHelp" class="help-text">{{ $t('tradeMining.help') }}</span>
+                        </span>
+                    </div>
                     <div class="amount">
                         {{ tradeMiningTotal | formatNum }} VX
                     </div>
@@ -92,7 +96,8 @@ export default {
             stakingMiningTotal: 0,
             inviteMiningTotal: 0,
             orderMiningTotal: 0,
-            tabName: 'trade'
+            tabName: 'trade',
+            isShowHelp: false
         };
     },
     beforeMount() {
@@ -119,6 +124,12 @@ export default {
         }
     },
     methods: {
+        showHelp() {
+            this.isShowHelp = true;
+        },
+        hideHelp() {
+            this.isShowHelp = false;
+        },
         init() {
             if (!this.address) return;
             const address = this.address;
@@ -144,6 +155,41 @@ export default {
 
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
+
+.help {
+    position: relative;
+    background: url('~assets/imgs/info.svg');
+    background-size: 100% 100%;
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    margin-bottom: -3px;
+    .help-text {
+        position: absolute;
+        top: 25px;
+        right: 8px;
+        width: 200px;
+        padding: 10px;
+        background: #fff;
+        transform: translateX(50%);
+        box-shadow: 0 2px 10px 1px rgba(176, 192, 237, 0.42);
+        border-radius: 2px;
+        font-family: $font-H;
+        color: #5e6875;
+        font-size: 12px;
+        line-height: 16px;
+        &:after {
+            position: absolute;
+            content: ' ';
+            top: 0;
+            left: 50%;
+            transform: translate(-50%, -100%);
+            display: inline-block;
+            border: 6px solid transparent;
+            border-bottom: 6px solid #fff;
+        }
+    }
+}
 
 .trade-mining-wrapper {
     width: 100%;
