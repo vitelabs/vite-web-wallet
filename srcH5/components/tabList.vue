@@ -38,7 +38,6 @@ export default {
     font-size: 13px;
     @include font-bold();
     color: rgba(62,74,89,0.7);
-    height: 35px;
     line-height: 35px;
     border-bottom: 1px solid rgba(211,223,239,1);
     flex-direction: row;
