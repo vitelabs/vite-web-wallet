@@ -78,7 +78,7 @@ export default {
     padding: 0 24px;
 
     .__tb_row_item {
-        margin-bottom: 10px;
+        margin-bottom: 6px;
         display: flex;
         align-items: center;
         flex-direction: row;
@@ -95,7 +95,7 @@ export default {
         }
         &._flex {
             line-height: 18px;
-            font-size: 14px;
+            font-size: 12px;
             color: rgba(62,74,89,0.6);
         }
         .__tb_cell {
