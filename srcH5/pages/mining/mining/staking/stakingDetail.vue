@@ -106,7 +106,6 @@ export default {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    align-items: center;
     font-size: 12px;
     @include font-normal();
     color: rgba(62,74,89,0.6);
@@ -131,7 +130,6 @@ export default {
     }
     .operation {
         display: flex;
-        align-items: center;
         flex-direction: row;
         width: 100%;
         margin-top: 14px;
