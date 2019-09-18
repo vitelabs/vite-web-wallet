@@ -30,18 +30,16 @@ export default {
     },
     computed: {
         quoteTokenDigit() {
-            const quoteTokenDigit = this.$store.getters.quoteTokenDecimalsLimit;
-            if ((this.depthStep || this.depthStep === 0) && quoteTokenDigit > this.depthStep) {
+            return this.$store.getters.quoteTokenDecimalsLimit;
+        },
+        quoteTokenDepthDigit() {
+            if ((this.depthStep || this.depthStep === 0) && this.quoteTokenDigit > this.depthStep) {
                 return this.depthStep;
             }
-            return quoteTokenDigit;
+            return this.quoteTokenDigit;
         },
         tradeTokenDigit() {
-            const tradeTokenDigit = this.$store.getters.tradeTokenDecimalsLimit;
-            if ((this.depthStep || this.depthStep === 0) && tradeTokenDigit > this.depthStep) {
-                return this.depthStep;
-            }
-            return tradeTokenDigit;
+            return this.$store.getters.tradeTokenDecimalsLimit;
         },
         depthStep() {
             return this.$store.state.exchangeDepth.depthStep;
@@ -126,8 +124,9 @@ export default {
                 tooltip: {
                     confine: true,
                     formatter: params => {
-                        const price = BigNumber.formatNum(params[0].name, this.quoteTokenDigit);
+                        const price = BigNumber.formatNum(params[0].name, this.quoteTokenDepthDigit);
                         const quantity = BigNumber.formatNum(params[0].value, this.tradeTokenDigit);
+
                         let amount;
                         const index = params[0].dataIndex;
                         if (index >= this.buyList.length) {

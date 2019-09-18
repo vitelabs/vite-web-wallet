@@ -5,11 +5,11 @@
         <div class="__center-tb-row __pointer" @click="clickRow(item, i)"
              v-for="(item, i) in depthData" :key="i">
             <span class="__center-tb-item depth price __ellipsis" :class="dataType">
-                {{ formatNum(item.price, 'ttoken') }}
+                {{ formatNum(item.price, quoteTokenDepthDigit) }}
                 <span class="owner" v-show="isInOpenOrders(item.price)"></span>
             </span>
-            <span class="__center-tb-item left depth quantity">{{ formatNum(item.quantity, 'ftoken') }}</span>
-            <span class="__center-tb-item depth amount">{{ formatNum(item.amount, 'ttoken') }}</span>
+            <span class="__center-tb-item left depth quantity">{{ formatNum(item.quantity, tradeTokenDigit) }}</span>
+            <span class="__center-tb-item depth amount">{{ formatNum(item.amount, quoteTokenDigit) }}</span>
             <span class="percent-wrapper" :class="dataType" :style="{ 'width': getWidth(item) + '%' }"></span>
         </div>
     </div>
@@ -53,14 +53,17 @@ export default {
             return this.$store.state.exchangeCurrentOpenOrders.list;
         },
         quoteTokenDigit() {
+            return this.$store.getters.quoteTokenDecimalsLimit;
+        },
+        tradeTokenDigit() {
+            return this.$store.getters.tradeTokenDecimalsLimit;
+        },
+        quoteTokenDepthDigit() {
             const quoteTokenDigit = this.$store.getters.quoteTokenDecimalsLimit;
             if ((this.depthStep || this.depthStep === 0) && quoteTokenDigit > this.depthStep) {
                 return this.depthStep;
             }
             return quoteTokenDigit;
-        },
-        tradeTokenDigit() {
-            return this.$store.getters.tradeTokenDecimalsLimit;
         },
         depthStep() {
             return this.$store.state.exchangeDepth.depthStep;
@@ -85,11 +88,8 @@ export default {
 
             return false;
         },
-        formatNum(num, type) {
-            if (type === 'ttoken') {
-                return BigNumber.formatNum(num, this.quoteTokenDigit);
-            }
-            return BigNumber.formatNum(num, this.tradeTokenDigit);
+        formatNum(num, digit) {
+            return BigNumber.formatNum(num, digit);
         },
         getWidth(item) {
             const width = BigNumber.dividedToNumber(item.quantity, this.maxQuantity, 2).toString() * 100;
