@@ -6,11 +6,15 @@
                 <div class="dividend-item" v-for="item in typeList" :key="item.name">
                     <div class="item-title">
                         <img :src="item.icon" /> {{ $t('tradeMining.fee') }}
-                        <span>{{ expectedDividends && expectedDividends[item.name] ? expectedDividends[item.name].fee : 0 }}</span>
+                        <span>
+                            {{ expectedDividends && expectedDividends[item.name] ? expectedDividends[item.name].fee : 0 }}
+                            {{ item.name }}
+                        </span>
                     </div>
                     <div class="item-dividend">
                         <span>{{ $t('tradeMining.dividends') }}</span>
-                        {{ expectedDividends && expectedDividends[item.name] ? expectedDividends[item.name].dividend : 0 }}VX
+                        {{ expectedDividends && expectedDividends[item.name] ? expectedDividends[item.name].dividend : 0 }}
+                        VX
                     </div>
                 </div>
             </div>
