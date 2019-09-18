@@ -31,26 +31,8 @@
 
 <script>
 import { getTokenSymbolString } from 'utils/tokenParser';
-import viteIcon from 'assets/imgs/vite-dividend.svg';
-import ethIcon from 'assets/imgs/eth.svg';
-import usdIcon from 'assets/imgs/usd.svg';
-import btcIcon from 'assets/imgs/BTC.svg';
 import bigNumber from 'utils/bigNumber';
 import { getCurrDividendPools } from 'services/viteServer';
-
-const typeList = [ {
-    name: 'VITE',
-    icon: viteIcon
-}, {
-    name: 'BTC',
-    icon: btcIcon
-}, {
-    name: 'ETH',
-    icon: ethIcon
-}, {
-    name: 'USDT',
-    icon: usdIcon
-} ];
 
 export default {
     beforeMount() {
@@ -58,13 +40,15 @@ export default {
     },
     data() {
         return {
-            typeList,
             rawData: {},
             pool: {},
             isShowTokenList: ''
         };
     },
     computed: {
+        typeList() {
+            return this.$store.state.exchangeMine.showTypeList;
+        },
         allPrice() {
             const coin = this.$store.state.env.currency;
             const pre = coin === 'cny' ? '¥' : '$';
