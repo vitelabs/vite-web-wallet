@@ -1123,11 +1123,11 @@
         "hintTitle": "Important Notice",
         "comingHint": "VX mining function is coming soon, stay tuned. You can get VX in five ways: 1. Trading as Mining, 2. Listing as Mining, 3. Referring as Mining, 4. Staking as Mining, 5. Market-making as Mining. Users who hold VX enjoy payouts from a shared dividend pool.",
         "more": "Learn more about VX mining rules",
+        "fee": "Trading Fees",
         "todayTrade": "Mining Details",
-        "fee": "Base Transaction Fees",
         "dividends": "24H Expected Mined Volume",
         "view": "View Live Mining Dashboard",
-        "inviteCount": "Invited"
+        "inviteCount": "Referrals"
     },
     "inviteMining":{
         "title":"Referring as Mining Total Income"
@@ -1252,10 +1252,10 @@
         "miningStaking": "Staking",
         "miningInvite": "Referral",
         "miningOrder": "Market-Making",
-        "tradeTotalIncome": "Trading as Mining Total Income ({token})",
-        "stakingTotalIncome": "Staking as Mining Total Income ({token})",
-        "inviteTotalIncome": "Referral as Mining Total Income ({token})",
-        "orderTotalIncome": "Market-Making as Mining Total Income ({token})",
+        "tradeTotalIncome": "Total Income ({token})",
+        "stakingTotalIncome": "Total Income ({token})",
+        "inviteTotalIncome": "Total Income ({token})",
+        "orderTotalIncome": "Total Income ({token})",
         "fee": "Fees",
         "listTitle": "Mining History",
         "viewLink": "Live Mining Dashboard" 
