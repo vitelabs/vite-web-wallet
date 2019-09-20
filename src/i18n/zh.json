@@ -424,6 +424,7 @@
         },
         "vb":{
             "title":"ViteConnect",
+            "closeAlert":"关闭弹窗",
             "connect":{
                 "tips":"请使用Vite Wallet App扫码登录."
             },
