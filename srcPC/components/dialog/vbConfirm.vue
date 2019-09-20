@@ -9,11 +9,11 @@ block content
 <script>
 export default {
     data() {
-        return { dShowClose: false, dTitle: this.$t('assets.vb.title') ,dSTxt:this.$t('assets.vb.closeAlert')};
+        return { dShowClose: false, dTitle: this.$t('assets.vb.title'), dSTxt: this.$t('assets.vb.closeAlert') };
     },
-    methods:{
-        inspector(){
-            return Promise.resolve()
+    methods: {
+        inspector() {
+            return Promise.resolve();
         }
     }
 };
