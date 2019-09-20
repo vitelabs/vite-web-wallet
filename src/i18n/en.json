@@ -705,6 +705,7 @@
         },
         "vb":{
             "title":"ViteConnect",
+            "closeAlert":"close",
             "connect":{
                 "tips":"Scan the QR code via Vite Wallet App"
             },
