@@ -30,15 +30,11 @@ export default {
             return this.$store.state.exchangeTokens.ttoken;
         },
         maxStep() {
-            if (!this.ttokenDetail || !this.activeTxPair) {
+            if (!this.activeTxPair) {
                 return '';
             }
-
-            const tDigit = this.ttokenDetail.tokenDecimals;
             const pariDigit = this.activeTxPair.pricePrecision;
-
-            const digit = tDigit > pariDigit ? pariDigit : tDigit;
-            return digit > maxDigit ? maxDigit : digit;
+            return pariDigit > maxDigit ? maxDigit : pariDigit;
         },
         stepList() {
             if (!this.maxStep && this.maxStep !== 0) {
