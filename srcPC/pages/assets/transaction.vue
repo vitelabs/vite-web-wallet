@@ -226,6 +226,10 @@ export default {
                     this.amountErr = this.$t('hint.insufficientBalance');
                     return;
                 }
+                if (code === 11021) {
+                    this.loading = false;
+                    this.closeTrans();
+                }
 
                 this.$toast(msg, err);
             };
