@@ -86,7 +86,7 @@ import { execWithValid } from 'pcUtils/execWithValid';
 import { getSBPAvailableReward } from 'services/viteServer';
 
 const Vite_Token_Info = viteConstant.Vite_Token_Info;
-const amount = 500000;
+const amount = 1000000;
 
 export default {
     components: { tooltips, password, walletTable },
