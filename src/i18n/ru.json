@@ -1155,7 +1155,8 @@
         "todayTrade": "Mining Details",
         "dividends": "24H Expected Mined Volume",
         "view": "View Live Mining Dashboard",
-        "inviteCount": "Referrals"
+        "inviteCount": "Referrals",
+        "help": "Current trading fees displayed on this page contains only the 0.2% ViteX base transaction fees, please note that operator fees shall be taken into consideration when calculating mining cost"
     },
     "inviteMining": {
         "title": "Привлечение как Майнинг Общий Доход"
