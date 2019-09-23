@@ -30,11 +30,15 @@ export default {
             return this.$store.state.exchangeTokens.ttoken;
         },
         maxStep() {
-            if (!this.activeTxPair) {
+            if (!this.ttokenDetail || !this.activeTxPair) {
                 return '';
             }
+
+            const tDigit = this.ttokenDetail.tokenDecimals;
             const pariDigit = this.activeTxPair.pricePrecision;
-            return pariDigit > maxDigit ? maxDigit : pariDigit;
+
+            const digit = tDigit > pariDigit ? pariDigit : tDigit;
+            return digit > maxDigit ? maxDigit : digit;
         },
         stepList() {
             if (!this.maxStep && this.maxStep !== 0) {
@@ -54,6 +58,9 @@ export default {
                 || this.step > this.maxStep) {
                 this.$store.dispatch('exSetDepthStep', this.maxStep);
             }
+        },
+        activeTxPair() {
+            this.$store.dispatch('exSetDepthStep', this.maxStep);
         }
     },
     methods: {
