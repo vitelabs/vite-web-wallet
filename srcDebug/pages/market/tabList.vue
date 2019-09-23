@@ -1,7 +1,7 @@
 <template>
     <ul class="ex-tab-list">
         <li class="ex-tab __pointer" :class="{ 'active': isShowFavorite }" @click="showFavorite">
-            <span class="favorite-icon __pointer" :class="{'active': isShowFavorite}"></span>
+            <span class="tab favorite-icon __pointer" :class="{'active': isShowFavorite}"></span>
         </li>
         <li v-for="(c, i) in quoteTokenCategory" :key="i"
             :class="{
@@ -9,7 +9,7 @@
                 'active-side': (isShowFavorite && i === 0) || (quoteTokenCategory[i-1] === curentCategory)
             }" class="ex-tab __pointer"
             @click="changeCategory(c)"
-        >{{ c }}</li>
+        ><span class="tab">{{ c }}</span></li>
     </ul>
 </template>
 

@@ -57,8 +57,8 @@
         }
         &.unuse {
             margin-right: 30px;
-            color: rgba(94, 104, 117, 1);
-            border: 1px solid rgba(198,203,212,1);
+            color: rgba(94, 104, 117, 0.3);
+            border: 1px solid rgba(198,203,212,0.3);
             cursor: not-allowed;
         }
     }

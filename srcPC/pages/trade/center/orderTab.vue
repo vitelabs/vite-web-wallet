@@ -4,12 +4,12 @@
             <div @click="switchTab('openOrder')"
                  class="ex-tab active-side __pointer"
                  :class="{'active': tab === 'openOrder'}">
-                {{ $t('tradeOpenOrders.title') }}
+                <span>{{ $t('tradeOpenOrders.title') }}</span>
             </div>
             <div @click="switchTab('historyOrder')"
                  class="ex-tab active-side __pointer"
                  :class="{'active': tab === 'historyOrder'}">
-                {{ $t('tradeOrderHistory.title') }}
+                <span>{{ $t('tradeOrderHistory.title') }}</span>
             </div>
         </div>
         <openOrder v-show="tab==='openOrder'" class="item order-tab"></openOrder>

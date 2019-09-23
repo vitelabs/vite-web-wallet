@@ -17,7 +17,8 @@ module.exports = {
         new webpack.DefinePlugin(envVars),
         new webpack.NormalModuleReplacementPlugin(/\/buffer\//, function (resource) {
             resource.request = Buffer_Path;
-        })
+        }),
+        new webpack.IgnorePlugin(/^\.\/wordlists\/(?!english)/, /bip39\/src/)
     ],
     optimization: {
         usedExports: true,
@@ -81,7 +82,7 @@ module.exports = {
             {
                 test: /\.(j|t)s$/,
                 // exclude: /node_modules(?!(\/base-x)|(\/resize-detector)|(\/vue-echarts))|(\/@vite\/vitejs\/)/,
-                exclude: /node_modules(?!(\/base-x)|(\/resize-detector)|(\/vue-echarts))/,
+                exclude: /node_modules(?!(\/base-x)|(\/resize-detector)|(\/vue-echarts)|(\/bip39))/,
                 use: {
                     loader: 'babel-loader',
                     options: { presets: ['@babel/preset-env'] }

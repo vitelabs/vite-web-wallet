@@ -42,7 +42,6 @@ export default {
     border-bottom: 1px solid rgba(211,223,239,1);
     flex-direction: row;
     justify-content: space-between;
-    padding: 0 14px;
 
     .tab {
         box-sizing: border-box;
