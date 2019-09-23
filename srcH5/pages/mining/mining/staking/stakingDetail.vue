@@ -31,13 +31,13 @@
         </div>
 
         <div class="operation">
-            <span class="item btn add __pointer" @click="showVxConfirm(1)">
+            <span class="item btn add" @click="showVxConfirm(1)">
                 {{ $t("tradeMining.add") }}
             </span>
             <span v-show="!canCancel" class="item btn unuse">
                 {{ $t("tradeMining.withdraw") }}
             </span>
-            <span v-show="canCancel" class="item btn cancel __pointer" @click="showVxConfirm(2)">
+            <span v-show="canCancel" class="item btn cancel" @click="showVxConfirm(2)">
                 {{ $t("tradeMining.withdraw") }}
             </span>
         </div>
@@ -48,36 +48,27 @@
 import date from 'utils/date';
 import bigNumber from 'utils/bigNumber';
 import { constant } from '@vite/vitejs';
-import { getCurrentPledgeForVxSum } from 'services/viteServer';
 
 const Vite_Token_Info = constant.Vite_Token_Info;
 
 export default {
     mounted() {
-        this.getCurrentPledgeForVxSum();
+        this.$store.dispatch('getCurrentPledgeForVxSum');
         this.$store.dispatch('startLoopHeight');
     },
     destroyed() {
         this.$store.dispatch('stopLoopHeight');
     },
     props: {
-        stakingObj: {
-            type: Object,
-            default: null
-        },
         showVxConfirm: {
             type: Function,
             default: () => {}
-        },
-        totalDividend: {
-            type: String,
-            default: '0'
         }
     },
-    data() {
-        return { currTotalPledge: 0 };
-    },
     computed: {
+        stakingObj() {
+            return this.$store.state.exchangeMine.userPledgeInfo;
+        },
         height() {
             return this.$store.state.env.currentHeight;
         },
@@ -102,21 +93,7 @@ export default {
             };
         },
         expectedDividends() {
-            if (!this.stakingObj || !+this.stakingObj.amount) {
-                return '0';
-            }
-            const percent = +this.currTotalPledge ? bigNumber.dividedToNumber(this.stakingObj.amount, this.currTotalPledge, 8) : 0;
-            const dividends = bigNumber.multi(this.totalDividend, percent, 8);
-            return bigNumber.toBasic(dividends, Vite_Token_Info.decimals, 8);
-        }
-    },
-    methods: {
-        getCurrentPledgeForVxSum() {
-            return getCurrentPledgeForVxSum().then(data => {
-                this.currTotalPledge = data || '0';
-            }).catch(err => {
-                console.warn(err);
-            });
+            return this.$store.getters.stakingDividends;
         }
     }
 };
@@ -129,7 +106,6 @@ export default {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    align-items: center;
     font-size: 12px;
     @include font-normal();
     color: rgba(62,74,89,0.6);
@@ -154,7 +130,6 @@ export default {
     }
     .operation {
         display: flex;
-        align-items: center;
         flex-direction: row;
         width: 100%;
         margin-top: 14px;
@@ -163,8 +138,8 @@ export default {
         display: inline-block;
         border-radius: 2px;
         padding: 0 13px;
-        height: 26px;
-        line-height: 26px;
+        height: 30px;
+        line-height: 30px;
         box-sizing: border-box;
         font-size: 14px;
         @include font-bold();

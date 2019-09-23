@@ -20,36 +20,18 @@
 <script>
 import { operator } from 'services/trade';
 import BigNumber from 'utils/bigNumber';
-import viteIcon from 'assets/imgs/vite-dividend.svg';
-import ethIcon from 'assets/imgs/eth.svg';
-import usdIcon from 'assets/imgs/usd.svg';
-import btcIcon from 'assets/imgs/BTC.svg';
-
-const typeList = [ {
-    name: 'VITE',
-    icon: viteIcon
-}, {
-    name: 'ETH',
-    icon: ethIcon
-}, {
-    name: 'BTC',
-    icon: btcIcon
-}, {
-    name: 'USDT',
-    icon: usdIcon
-} ];
 
 export default {
     created() {
         this.fetchOperator();
     },
     data() {
-        return {
-            typeList,
-            income: {}
-        };
+        return { income: {} };
     },
     computed: {
+        typeList() {
+            return this.$store.state.exchangeMine.showTypeList;
+        },
         address() {
             return this.$store.getters.activeAddr;
         },

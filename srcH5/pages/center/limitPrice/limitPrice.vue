@@ -78,7 +78,8 @@ export default {
             color: rgba(62,74,89,0.7);
             .tab {
                 display: inline-block;
-                padding: 0 12px;
+                width: 70px;
+                text-align: center;
                 border-radius: 2px 2px 0px 0px;
             }
             .buy {
@@ -110,9 +111,9 @@ export default {
 
     .vip {
         display: inline-block;
-        margin-bottom: -3px;
-        width: 36px;
-        height: 16px;
+        margin-bottom: -4px;
+        width: 40px;
+        height: 18px;
         background: url('~assets/imgs/not_vip.svg');
         background-size: 100% 100%;
         margin-right: 10px;

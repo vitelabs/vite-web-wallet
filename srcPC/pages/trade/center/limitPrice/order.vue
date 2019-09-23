@@ -757,7 +757,7 @@ $font-black: rgba(36, 39, 43, 0.8);
     }
 
     .slider-wrapper {
-        margin: 6px 5px;
+        margin: 0 5px;
     }
 
     .order-btn {
