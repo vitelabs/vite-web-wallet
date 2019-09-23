@@ -10,6 +10,8 @@ export const rpcCode = function (err) {
 // code 11000 wc error
 // 11012 用户拒绝
 // 11020 链接断开
+// 11021 用户关闭弹窗，继续下面操作
+
 // code 12000 web error
 // code 12001 未解锁
 // code 12002 无激活账户
