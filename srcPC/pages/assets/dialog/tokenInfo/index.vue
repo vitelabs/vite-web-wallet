@@ -66,7 +66,7 @@ block originContent
             div {{ gateIntroduction }}
         .content__item(v-if="token.gateInfo.url")
             .label {{$t("tokenCard.gateInfo.customer")}}:
-            div.click-able(v-if="gateInfo.support")(@click="openUrl(gateInfo.support)") {{ gateSupport }}
+            div.click-able(v-if="gateInfo.serviceSupport")(@click="openUrl(gateInfo.serviceSupport)") {{ gateSupport }}
         .content__item(v-if="token.gateInfo.url")
             .label {{$t("tokenCard.gateInfo.privacy")}}:
             div.click-able(v-if="gatePolicy")(@click="openUrl(gatePolicy)") {{$t("tokenCard.gateInfo.clickPrivacy", {gate: gateInfo.name})}}
@@ -155,11 +155,11 @@ export default {
             return this.gateInfo.policy.en;
         },
         gateSupport() {
-            if (!this.gateInfo.support) {
+            if (!this.gateInfo.serviceSupport) {
                 return '';
             }
 
-            const support = this.gateInfo.support;
+            const support = this.gateInfo.serviceSupport;
             if (this.isEmail(support)) {
                 return support;
             }

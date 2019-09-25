@@ -58,6 +58,9 @@ export default {
                 || this.step > this.maxStep) {
                 this.$store.dispatch('exSetDepthStep', this.maxStep);
             }
+        },
+        activeTxPair() {
+            this.$store.dispatch('exSetDepthStep', this.maxStep);
         }
     },
     methods: {
