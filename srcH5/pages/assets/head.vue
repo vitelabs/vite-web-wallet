@@ -72,7 +72,7 @@ export default {
     font-size: 12px;
     box-sizing: border-box;
     padding: 14px;
-    margin-bottom: 12px;
+    margin-bottom: 4px;
 
     .assets {
         padding: 14px;

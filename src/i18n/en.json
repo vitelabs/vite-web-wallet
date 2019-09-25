@@ -1217,7 +1217,6 @@
     },
     "mobileAssets": {
         "allAssets": "Estimated Assets Value ({token})",
-        "tokenListTitle": "Tokens",
         "tokenInfoTitle": "Token Details"
     },
     "mobileTradeCenter": {
