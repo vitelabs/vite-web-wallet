@@ -2154,10 +2154,10 @@
     "@types/unist" "*"
     "@types/vfile-message" "*"
 
-"@vite/bifrost@1.0.1-0":
-  version "1.0.1-0"
-  resolved "https://registry.npm.taobao.org/@vite/bifrost/download/@vite/bifrost-1.0.1-0.tgz?cache=0&sync_timestamp=1568893097516&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40vite%2Fbifrost%2Fdownload%2F%40vite%2Fbifrost-1.0.1-0.tgz#f868084099e22924fc78d0b6724867907a9826a0"
-  integrity sha1-+GgIQJniKST8eNC2ckhnkHqYJqA=
+"@vite/bifrost@1.0.1-1":
+  version "1.0.1-1"
+  resolved "https://registry.npm.taobao.org/@vite/bifrost/download/@vite/bifrost-1.0.1-1.tgz?cache=0&sync_timestamp=1569392204234&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40vite%2Fbifrost%2Fdownload%2F%40vite%2Fbifrost-1.0.1-1.tgz#ea52a16a5f786e14cef6cf1ca7e85eb28b88fff1"
+  integrity sha1-6lKhal94bhTO9s8cp+hesouI//E=
   dependencies:
     "@ethersproject/bytes" "^5.0.0-beta.126"
     "@ethersproject/strings" "^5.0.0-beta.125"
