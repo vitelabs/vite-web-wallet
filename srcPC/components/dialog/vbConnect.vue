@@ -7,10 +7,10 @@ block content
 </template>
 
 <script>
-import { initVB } from 'wallet/vb';
-import { getCurrHDAcc } from 'wallet';
-import qrcode from 'components/qrcode';
-import icon from 'assets/imgs/start_qrcode_icon.svg';
+import { initVB } from "wallet/vb";
+import { getCurrHDAcc } from "wallet";
+import qrcode from "components/qrcode";
+import icon from "assets/imgs/start_qrcode_icon.svg";
 
 export default {
     components: { qrcode },
@@ -21,20 +21,28 @@ export default {
                 image: icon,
                 mSize: 0.3
             },
-            dTitle: this.$t('assets.vb.title'),
-            dWidth: 'narrow',
+            dTitle: this.$t("assets.vb.title"),
+            dWidth: "narrow",
             vb: null
         };
     },
     beforeMount() {
-        const lastAccount = getCurrHDAcc() && getCurrHDAcc().isBifrost ? getCurrHDAcc().activeAddr : undefined;
-        this.vb = initVB({ lastAccount });
-        this.vb.on('connect', () => {
-            this.close();
-        });
-        this.vb.on('disconnect', () => {
-            this.vb = initVB();
-        });
+        this.initVB();
+    },
+    methods: {
+        initVB() {
+            const lastAccount =
+                getCurrHDAcc() && getCurrHDAcc().isBifrost
+                    ? getCurrHDAcc().activeAddr
+                    : undefined;
+            this.vb = initVB({ lastAccount });
+            this.vb.on("connect", () => {
+                this.close();
+            });
+            this.vb.on("disconnect", () => {
+                this.initVB();
+            });
+        }
     }
 };
 </script>
@@ -49,7 +57,7 @@ export default {
     color: #333;
     font-family: $font-bold;
 }
-.code_container{
+.code_container {
     width: 163px;
     height: 163px;
     margin: 0 auto;
