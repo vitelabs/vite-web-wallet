@@ -719,6 +719,7 @@
         },
         "vb": {
             "title": "ViteConnect",
+            "closeAlert": "close",
             "connect": {
                 "tips": "Vite 지갑 앱을 통해 QR코드를 스캔하세요"
             },
@@ -781,6 +782,7 @@
         "depthStep": "{step} 자리 수",
         "blocking": "네트워크 연결 오류가 발생하였습니다. 잠시 후 다시 시도해주세요.",
         "supportMining": "Mineable Trading Pairs",
+        "miningPrice": "买入价大于{price}时满足挂单挖矿条件",
         "operator": {
             "noName": "Anonymous Gateway",
             "overview": "소개",
@@ -1250,7 +1252,6 @@
     },
     "mobileAssets": {
         "allAssets": "Estimated Assets Value ({token})",
-        "tokenListTitle": "토큰",
         "tokenInfoTitle": "Token Details"
     },
     "mobileTradeCenter": {
