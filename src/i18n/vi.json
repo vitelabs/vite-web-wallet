@@ -719,6 +719,7 @@
         },
         "vb": {
             "title": "ViteConnect",
+            "closeAlert": "close",
             "connect": {
                 "tips": "Quét mã QR bằng Ứng dụng ví Vite"
             },
@@ -781,6 +782,7 @@
         "depthStep": "{step} chữ số",
         "blocking": "Đã xảy ra lỗi mạng, vui lòng thử lại",
         "supportMining": "Mineable Trading Pairs",
+        "miningPrice": "买入价大于{price}时满足挂单挖矿条件",
         "operator": {
             "noName": "Anonymous Gateway",
             "overview": "Giới thiệu",
@@ -1250,7 +1252,6 @@
     },
     "mobileAssets": {
         "allAssets": "Estimated Assets Value ({token})",
-        "tokenListTitle": "Token",
         "tokenInfoTitle": "Token Details"
     },
     "mobileTradeCenter": {
