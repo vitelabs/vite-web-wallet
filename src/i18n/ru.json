@@ -719,6 +719,7 @@
         },
         "vb": {
             "title": "ViteConnect",
+            "closeAlert": "close",
             "connect": {
                 "tips": "Сканируйте QR-код через приложение Vite Wallet"
             },
@@ -781,6 +782,7 @@
         "depthStep": "{step} цифр",
         "blocking": "Сеть перегружена, пожалуйста, повторите попытку позже",
         "supportMining": "Mineable Trading Pairs",
+        "miningPrice": "买入价大于{price}时满足挂单挖矿条件",
         "operator": {
             "noName": "Anonymous Gateway",
             "overview": "Описание",
@@ -1250,7 +1252,6 @@
     },
     "mobileAssets": {
         "allAssets": "Estimated Assets Value ({token})",
-        "tokenListTitle": "Токены",
         "tokenInfoTitle": "Token Details"
     },
     "mobileTradeCenter": {
