@@ -774,6 +774,7 @@
         "depthStep": "{step}位小数",
         "blocking": "网络拥堵, 请稍候重试",
         "supportMining": "支持挖矿的交易对",
+        "miningPrice": "买入价大于{price}时满足挂单挖矿条件",
         "operator": {
             "noName": "匿名网关",
             "overview": "介绍",
@@ -1219,7 +1220,6 @@
     },
     "mobileAssets": {
         "allAssets": "总资产折合({token})",
-        "tokenListTitle": "代币信息",
         "tokenInfoTitle": "代币详情"
     },
     "mobileTradeCenter": {

@@ -129,7 +129,7 @@ export default {
     box-sizing: border-box;
     position: relative;
     background: #fff;
-    border-bottom: 1px solid rgba(211,223,239,1);
+    border-top: 1px solid rgba(211,223,239,1);
     @include font-normal();
     font-family: $font;
 

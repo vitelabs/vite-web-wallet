@@ -12,7 +12,7 @@
             <span class="symbol ttoken" @click="_showDetail('token')">
                 {{ ttokenDetail ? ttokenDetail.symbol : '' }}
             </span>
-            <span class="mining" v-show="isMinging">
+            <span class="mining" v-show="isMining">
                 <img src="~assets/imgs/mining.svg"/>
                 <tooltips class="tips" :content="$t('tradeCenter.supportMining')"></tooltips>
             </span>
@@ -40,9 +40,8 @@ export default {
         }
     },
     computed: {
-        isMinging() {
-            const marketInfo = this.$store.state.exchangeFee.marketInfo;
-            return marketInfo && marketInfo.allowMine;
+        isMining() {
+            return this.$store.getters.exIsMining;
         },
         closeMarket() {
             return this.$store.state.exchangeMarket.marketClosed;

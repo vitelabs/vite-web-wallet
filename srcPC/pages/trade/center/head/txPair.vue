@@ -83,20 +83,11 @@ export default {
 
             return `${ BigNumber.formatNum(this.activeTxPair.amount, 1) } ${ this.activeTxPair.quoteTokenSymbol }`;
         },
-        depthBuy() {
-            return this.$store.state.exchangeDepth.buy;
-        },
-        depthSell() {
-            return this.$store.state.exchangeDepth.sell;
-        },
         buyOne() {
-            return this.depthBuy && this.depthBuy.length ? this.depthBuy[0].price : '';
+            return this.$store.getters.exBuyOnePrice;
         },
         sellOne() {
-            if (!this.depthSell || !this.depthSell.length) {
-                return '';
-            }
-            return this.depthSell[this.depthSell.length - 1].price;
+            return this.$store.getters.exSellOnePrice;
         },
         diff() {
             if (!this.sellOne && !this.buyOne) {
