@@ -719,6 +719,7 @@
         },
         "vb": {
             "title": "ViteConnect",
+            "closeAlert": "close",
             "connect": {
                 "tips": "Vite WalletアプリでQRコードをスキャンする"
             },
@@ -781,6 +782,7 @@
         "depthStep": "{step}桁",
         "blocking": "ネットワークの混雑が発生しています しばらくしてからもう一度お試しください",
         "supportMining": "Mineable Trading Pairs",
+        "miningPrice": "买入价大于{price}时满足挂单挖矿条件",
         "operator": {
             "noName": "Anonymous Gateway",
             "overview": "はじめに",
@@ -1250,7 +1252,6 @@
     },
     "mobileAssets": {
         "allAssets": "Estimated Assets Value ({token})",
-        "tokenListTitle": "トークン",
         "tokenInfoTitle": "Token Details"
     },
     "mobileTradeCenter": {
