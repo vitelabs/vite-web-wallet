@@ -1,11 +1,11 @@
 <template>
     <div class="assets-container __wrapper">
         <account-head></account-head>
+        <token-filter v-model="isHideZero"></token-filter>
         <div class="token-list">
-            <div class="title">{{ $t('mobileAssets.tokenListTitle') }}</div>
-            <div v-show="!tokenList || !tokenList.length" class="no-data">{{ $t('hint.noData') }}</div>
-            <tokenCard v-show="tokenList && tokenList.length"
-                       v-for="token in tokenList" :key="token.tokenId"
+            <div v-show="!filterTokenList || !filterTokenList.length" class="no-data">{{ $t('hint.noData') }}</div>
+            <tokenCard v-show="filterTokenList && filterTokenList.length"
+                       v-for="token in filterTokenList" :key="token.tokenId"
                        :token="token"></tokenCard>
         </div>
     </div>
@@ -14,16 +14,15 @@
 <script>
 import tokenCard from './tokenCard.vue';
 import accountHead from './head';
+import tokenFilter from './filter';
 
 export default {
-    components: { accountHead, tokenCard },
-    watch: {
-        showTokenIds(val) {
-            this.$store.dispatch('addRateTokens', val);
-        }
-    },
+    components: { accountHead, tokenCard, tokenFilter },
     created() {
         this.$store.dispatch('startLoopBalance');
+    },
+    data() {
+        return { isHideZero: false };
     },
     computed: {
         tokenList() {
@@ -31,6 +30,25 @@ export default {
         },
         showTokenIds() {
             return this.$store.getters.allBalanceInfo.map(t => t.tokenId);
+        },
+        filterTokenList() {
+            if (!this.isHideZero) {
+                return this.tokenList;
+            }
+
+            const filterList = [];
+            this.tokenList.forEach(item => {
+                if (!+item.balance && !+item.availableExAmount && !+item.totalExAmount) {
+                    return;
+                }
+                filterList.push(item);
+            });
+            return filterList;
+        }
+    },
+    watch: {
+        showTokenIds(val) {
+            this.$store.dispatch('addRateTokens', val);
         }
     }
 };

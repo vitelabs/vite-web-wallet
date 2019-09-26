@@ -19,9 +19,10 @@
                 }}
             </span>
             <div class="else-input-wrapper" :class="{'err': priceErr}">
-                <span class="tips" :class="{'active':
-                    focusInput === 'price' && priceErr
-                }">{{  priceErr || '' }}</span>
+                <span v-show="focusInput === 'price' && priceErr" class="tips">{{  priceErr || '' }}</span>
+                <span v-show="isShowMining" class="tips">
+                    {{ $t('tradeCenter.miningPrice', { price: miningPrice }) }}
+                </span>
                 <vite-input v-model="price" @input="priceChanged" type="number"
                             @focus="showTips('price')" @blur="hideTips('price')">
                     <span class="real-price __ellipsis" slot="after">{{ realPrice }}</span>
@@ -38,9 +39,7 @@
                 }}
             </span>
             <div class="else-input-wrapper" :class="{'err': quantityErr}">
-                <span class="tips" :class="{'active':
-                    focusInput === 'quantity' && quantityErr
-                }">{{ quantityErr }}</span>
+                <span v-show="focusInput === 'quantity' && quantityErr" class="tips">{{ quantityErr }}</span>
                 <vite-input v-model="quantity" @input="quantityChanged" type="number"
                             @focus="showTips('quantity')" @blur="hideTips('quantity')">
                 </vite-input>
@@ -61,9 +60,7 @@
                 }}
             </span>
             <div class="else-input-wrapper" :class="{'err': amountErr}">
-                <span class="tips" :class="{'active':
-                    focusInput === 'amount' && amountErr
-                }">{{ amountErr }}</span>
+                <span v-show="focusInput === 'amount' && amountErr" class="tips">{{ amountErr }}</span>
                 <vite-input v-model="amount" @input="amountChanged" type="number"
                             @focus="showTips('amount')" @blur="hideTips('amount')">
                 </vite-input>
@@ -201,6 +198,15 @@ export default {
         }
     },
     computed: {
+        isMining() {
+            return this.$store.getters.exIsMining;
+        },
+        isShowMining() {
+            return this.orderType === 'buy' && this.focusInput === 'price' && !this.priceErr && this.isMining && this.miningPrice;
+        },
+        miningPrice() {
+            return this.$store.getters.exMiningPrice;
+        },
         blockingLevel() {
             return this.$store.getters.dexBlockingLever;
         },
@@ -699,23 +705,15 @@ $font-black: rgba(36, 39, 43, 0.8);
     box-shadow: 0px 5px 20px 0px rgba(0, 0, 0, 0.1);
     border-radius: 2px;
     font-size: 12px;
+    line-height: 16px;
     color: #5e6875;
     box-sizing: border-box;
     @include font-family-normal();
-    opacity: 0;
-    transition: opacity 0.2s ease-in-out;
-    width: 0;
-    line-height: 12px;
+    display: block;
+    left: 50%;
+    bottom: 40px;
+    padding: 6px 12px;
     white-space: nowrap;
-    &.active {
-        display: block;
-        min-width: 0;
-        width: auto;
-        opacity: 1;
-        left: 50%;
-        bottom: 42px;
-        padding: 6px 12px;
-    }
     &::after {
         content: " ";
         display: inline-block;
