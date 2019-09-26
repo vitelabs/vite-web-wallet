@@ -81,8 +81,29 @@ const actions = {
     }
 };
 
+const getters = {
+    exSellOnePrice(state) {
+        if (!state.sell || !state.sell.length) {
+            return '';
+        }
+        return state.sell[state.sell.length - 1].price;
+    },
+    exBuyOnePrice(state) {
+        return state.buy && state.buy.length ? state.buy[0].price : '';
+    },
+    exMiningPrice(state, getters) {
+        const sellOne = getters.exSellOnePrice;
+        if (!sellOne) {
+            return '';
+        }
+        const price = bigNumber.multi(sellOne, 0.9);
+        return bigNumber.onlyFormat(price);
+    }
+};
+
 export default {
     state,
     mutations,
-    actions
+    actions,
+    getters
 };
