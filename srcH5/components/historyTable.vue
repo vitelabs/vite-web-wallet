@@ -5,7 +5,6 @@
                 <span class="status">{{ $t('tradeOrderHistory.table.rowMap.statusMap')[v.status] }}</span>
             </order-item>
         </div>
-        <no-data v-show="!sortedList || !sortedList.length"></no-data>
     </div>
     <!-- <wallet-table class="trade-history-table"
                     :headList="headList" :contentList="showList"
@@ -27,30 +26,20 @@
 </template>
 
 <script>
-import noData from 'h5Components/noData';
 import orderItem from 'h5Components/orderItem';
 // import d from 'dayjs';
 // import statistics from 'utils/statistics';
 // import { orderDetail } from 'services/trade';
-// import pagination from 'components/pagination';
-// import walletTable from 'components/table/index';
 // import confirm from './tradeList';
 
 export default {
-    // confirm, walletTable, pagination
-    components: { noData, orderItem },
+    // confirm
+    components: { orderItem },
     props: {
         list: {
             type: Array,
             default: () => []
-        },
-        isShowPage: {
-            type: Boolean,
-            default: false
-        },
-        currentPage: null,
-        toPage: null,
-        totalPage: null
+        }
     },
     // data() {
     //     return {

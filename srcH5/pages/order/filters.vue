@@ -1,130 +1,200 @@
 <template>
-    <div class="filter-root">
-        <div class="filter">
-            <div class="filter_label"> {{ $t("tradeOrderHistory.filter.start") }} </div>
-            <FlatPickr
-                v-model="fromDate"
-                class="filter_content"
-                :config="{dateFormat:'Y/m/d H:i',enableTime:true,time_24hr:true}"
-            ></FlatPickr>
-        </div>
-        <div class="separator">-</div>
-        <div class="filter end">
-            <div class="filter_label">{{ $t("tradeOrderHistory.filter.end") }}</div>
-            <FlatPickr
-                v-model="toDate"
-                class="filter_content"
-                :config="{dateFormat:'Y/m/d H:i',enableTime:true,time_24hr:true}"
-            ></FlatPickr>
-        </div>
-        <div class="filter">
-            <div class="filter_label">{{ $t("tradeOrderHistory.filter.type") }}</div>
-            <select class="filter_content" v-model="ftoken">
-                <option :value="token.symbol" v-for="token in ftokenMap" :key="token.symbol">{{ token.symbol }}</option>
-            </select>
-        </div>
-        <div class="separator">-</div>
-        <div class="filter end">
-            <select class="filter_content" v-model="ttoken">
-                <option v-for="t in marketMap" :value="t.symbol" :key="t.symbol">{{ t.symbol }}</option>
-            </select>
+    <div class="filter-root" ref="filterRoot" @click="close">
+        <div class="filter-head">
+            <div class="item" :class="{'active': filterType === 'date'}"
+                 @click="triggerFilter('date')">
+                {{ $t("mobileOrder.filterDate") }}
+                <span class="arrow"></span>
+            </div>
+            <div class="item" :class="{'active': filterType === 'token'}"
+                 @click="triggerFilter('token')">
+                {{ $t("mobileOrder.filterToken") }}
+                <span class="arrow"></span>
+            </div>
+            <div class="item" :class="{'active': filterType === 'side'}"
+                 @click="triggerFilter('side')">
+                {{ $t("tradeOrderHistory.filter.side") }}
+                <span class="arrow"></span>
+            </div>
+            <div class="item" :class="{'active': filterType === 'status'}"
+                 @click="triggerFilter('status')">
+                {{ $t("tradeOrderHistory.filter.status") }}
+                <span class="arrow"></span>
+            </div>
         </div>
 
-        <div class="filter end">
-            <div class="filter_label">{{ $t("tradeOrderHistory.filter.side") }}</div>
-            <select v-model="tradeType" class="filter_content">
-                <option value="0">{{ $t("tradeOrderHistory.filter.buy") }}</option>
-                <option value="1">{{ $t("tradeOrderHistory.filter.sell") }}</option>
-            </select>
-        </div>
-
-        <div class="filter end">
-            <div class="filter_label">{{ $t("tradeOrderHistory.filter.status") }}</div>
-            <select v-model="status" class="filter_content">
-                <option value="1">{{ $t("tradeOrderHistory.status.1") }}</option>
-                <option value="2">{{ $t("tradeOrderHistory.status.2") }}</option>
-                <option value="3">{{ $t("tradeOrderHistory.status.3") }}</option>
-                <option value="4">{{ $t("tradeOrderHistory.status.4") }}</option>
-            </select>
-        </div>
-
-        <div @click="submit" class="search active">
-            {{ $t("tradeOrderHistory.filter.search") }}
-        </div>
-        <div @click="reset" class="search">
-            {{ $t("tradeOrderHistory.filter.reset") }}
+        <div ref="filterWrapper" v-show="filterType" class="filter-wrapper">
+            <div class="filter-content" v-show="filterType === 'date'">
+                <div v-for="_d in ['all', '3month', '1month', '1week', '1day']" :key="_d"
+                     class="normal-item" @click="selectDate(_d)"
+                     :class="{'active': date === _d}">
+                    {{ $t(`mobileOrder.${_d}`) }}
+                </div>
+            </div>
+            <div class="filter-content token" v-show="filterType === 'token'">
+                <div v-show="!isLoadingMarketMap" class="token-side">
+                    <div class="token-item" :class="{'active': !ttoken}"
+                         @click="selectTtoken('')">{{ $t('mobileOrder.all') }}</div>
+                    <div class="token-item" :class="{'active': ttoken === t.symbol}"
+                         @click="selectTtoken(t.symbol)"
+                         v-for="t in marketMap" :key="t.symbol">{{ t.symbol }}</div>
+                </div>
+                <loading v-show="isLoadingMarketMap" loadingType="dot" class="ex-center-loading"></loading>
+                <div class="token-side">
+                    <loading v-show="isLoadingFtokenMap" loadingType="dot" class="ex-center-loading"></loading>
+                    <div v-show="!isLoadingFtokenMap" class="token-item"
+                         :class="{'active': ftoken === token.symbol}"
+                         v-for="token in ftokenMap" :key="token.symbol"
+                         @click="selectFtoken(token.symbol)">
+                        <span class="bold">{{ token.symbol }}</span><span class="light">/{{ ttoken }}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="filter-content" v-show="filterType === 'side'">
+                <div class="normal-item" :class="{'active': !side}"
+                     @click="selectSide('')">{{ $t("mobileOrder.all") }}</div>
+                <div class="normal-item" :class="{'active': side === '0'}"
+                     @click="selectSide('0')">{{ $t("tradeOrderHistory.filter.buy") }}</div>
+                <div class="normal-item" :class="{'active': side === '1'}"
+                     @click="selectSide('1')">{{ $t("tradeOrderHistory.filter.sell") }}</div>
+            </div>
+            <div class="filter-content" v-show="filterType === 'status'">
+                <div class="normal-item" :class="{'active': !status}"
+                     @click="selectStatus('')">{{ $t("mobileOrder.all") }}</div>
+                <div v-for="s in ['1', '2', '3', '4']" :key="s"
+                     class="normal-item" @click="selectStatus(s)"
+                     :class="{'active': status === s}">
+                    {{ $t(`tradeOrderHistory.status.${s}`) }}
+                </div>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
-import FlatPickr from 'vue-flatpickr-component';
 import { tokenMap, baseToken } from 'services/trade';
-import 'flatpickr/dist/flatpickr.css';
 import statistics from 'utils/statistics';
+import loading from 'components/loading';
 
 export default {
-    components: { FlatPickr },
+    components: { loading },
     data() {
         return {
-            marketMap: [],
-            fromDate: '',
-            toDate: '',
-            tradeType: '',
-            ftoken: '',
+            filterType: '',
+
+            date: 'all',
             ttoken: '',
+            side: '',
             status: '',
-            ftokenMap: []
+
+            marketMap: [],
+            isLoadingMarketMap: false,
+
+            ftoken: '',
+            ftokenMap: [],
+            isLoadingFtokenMap: false
         };
     },
     mounted() {
+        this.isLoadingMarketMap = true;
         baseToken().then(data => {
             const marketMap = data || [];
-            this.ttoken = marketMap[0].symbol;
             this.marketMap = marketMap;
+            this.isLoadingMarketMap = false;
+        }).catch(err => {
+            console.warn(err);
+            this.isLoadingMarketMap = false;
         });
     },
     computed: {
         activeAddr() {
             return this.$store.getters.activeAddr;
+        },
+        fromDate() {
+            if (!this.date || this.date === 'all') {
+                return '';
+            }
+
+            const date = new Date();
+            let month = date.getMonth();
+            let day = date.getDate();
+
+            switch (this.date) {
+            case '3month':
+                month -= 3;
+                break;
+            case '1month':
+                month -= 1;
+                break;
+            case '1week':
+                day -= 7;
+                break;
+            case '1day':
+                day -= 1;
+                break;
+            default:
+                break;
+            }
+            date.setMonth(month);
+            date.setDate(day);
+            return parseInt(date.getTime() / 1000);
         }
     },
     watch: {
         ttoken() {
-            tokenMap({ symbol: this.ttoken }).then(data => (this.ftokenMap = data));
-        }
-    },
-    methods: {
-        reset() {
-            statistics.event(`H5${ this.$route.name }`, 'reset', this.activeAddr || '');
-
-            this.fromDate = '';
-            this.toDate = '';
-            this.tradeType = '';
             this.ftoken = '';
-            this.ttoken = '';
-            this.status = '';
-            this.$emit('submit', {});
-        },
-        submit() {
-            statistics.event(`H5${ this.$route.name }`, 'search', this.activeAddr || '');
+            this.ftokenMap = [];
 
-            const fdate = this.fromDate ? new Date(this.fromDate).getTime() / 1000 : '';
-            const tdate = this.toDate ? new Date(this.toDate).getTime() / 1000 : '';
-
-            if (fdate && tdate && fdate >= tdate) {
-                this.$toast(this.$t('tradeOrderHistory.hint.dateErr'));
+            if (!this.ttoken) {
                 return;
             }
 
-            this.$emit('submit', {
-                startTime: fdate,
-                endTime: tdate,
-                side: this.tradeType,
-                tradeTokenSymbol: this.ftoken,
-                quoteTokenSymbol: this.ttoken,
-                status: this.status
+            this.isLoadingFtokenMap = true;
+            tokenMap({ symbol: this.ttoken }).then(data => {
+                this.isLoadingFtokenMap = false;
+                this.ftokenMap = data;
+            }).catch(err => {
+                console.warn(err);
+                this.isLoadingFtokenMap = false;
             });
+        }
+    },
+    methods: {
+        triggerFilter(type) {
+            if (this.filterType === type) {
+                this.filterType = '';
+            }
+            this.filterType = type;
+        },
+        close(e) {
+            if (this.$refs.filterRoot.contains(e.target) && e.target !== this.$refs.filterWrapper) {
+                return;
+            }
+            this.filterType = '';
+
+            statistics.event(`H5${ this.$route.name }`, 'search', this.activeAddr || '');
+            this.$emit('submit', {
+                startTime: this.fromDate,
+                side: this.side,
+                status: this.status,
+                tradeTokenSymbol: this.ftoken,
+                quoteTokenSymbol: this.ttoken
+            });
+        },
+        selectDate(date) {
+            this.date = date;
+        },
+        selectTtoken(ttoken) {
+            this.ttoken = ttoken;
+        },
+        selectSide(side) {
+            this.side = side;
+        },
+        selectStatus(status) {
+            this.status = status;
+        },
+        selectFtoken(ftoken) {
+            this.ftoken = ftoken;
         }
     }
 };
@@ -134,62 +204,95 @@ export default {
 @import "h5Assets/scss/vars.scss";
 
 .filter-root {
-    display: flex;
-    align-items: flex-end;
-    margin-bottom: 20px;
-    font-size: 12px;
-
-    .filter {
-        color: #5e6875;
-        @include font-normal();
-        width: 132px;
-
-        > * {
-            width: 100%;
-        }
-
-        input,
-        select {
-            padding-left: 10px;
-        }
-
-        &.end {
-            margin-right: 18px;
-        }
-    }
-
-    .separator {
-        height: 28px;
-        margin: 0 8px;
-        display: flex;
-        color: #d4dee7;
-    }
-
-    .filter_content {
-        margin-top: 6px;
-        height: 28px;
+    @include font-normal();
+    .filter-head {
         background: #fff;
-        border-radius: 2px;
-        border: 1px solid rgba(212, 222, 231, 1);
-        box-sizing: border-box;
+        padding: 0px 24px 14px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        .item {
+            font-size: 12px;
+            color: rgba(62,74,89,0.6);
+            line-height: 16px;
+            .arrow {
+                display: inline-block;
+                width: 10px;
+                height: 12px;
+                background: url('~h5Assets/imgs/ascend_down.svg');
+                background-size: 100% 100%;
+                margin-bottom: -2px;
+            }
+            &.active {
+                color: rgba(0,122,255,1);
+                .arrow {
+                    background: url('~h5Assets/imgs/ascend_up.svg');
+                }
+            }
+        }
     }
-
-    .search {
-        width: 60px;
-        height: 28px;
-        color: #007aff;
-        border-radius: 2px;
-        border: 1px solid #007aff;
-        @include font-normal();
-        text-align: center;
-        line-height: 28px;
-        margin-right: 8px;
-        cursor: pointer;
-
-        &:active,
-        &.active {
-            background: rgba(0, 122, 255, 1);
-            color: #fff;
+    .filter-wrapper {
+        position: absolute;
+        top: 30px;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: rgba(0,0,0,0.4);
+        .filter-content {
+            font-size: 14px;
+            background: #fff;
+            .normal-item {
+                line-height: 30px;
+                text-align: center;
+                color: rgba(62,74,89,1);
+                padding-bottom: 10px;
+                &.active {
+                    color: $blue;
+                }
+            }
+            .token-item {
+                text-align: center;
+                line-height: 38px;
+                color: rgba(62,74,89,0.7);
+                &.active {
+                    color: $blue;
+                    .bold {
+                        color: $blue;
+                    }
+                    .lignt {
+                        color: $blue;
+                        opacity: 0.4;
+                    }
+                }
+                .bold {
+                    @include font-bold();
+                    color: rgba(36,39,43,1);
+                }
+                .lignt {
+                    @include font-bold();
+                    color: rgba(62,74,89,0.3);
+                }
+            }
+            &.token {
+                display: flex;
+                flex-direction: row;
+                .token-side {
+                    position: relative;
+                    flex: 1;
+                    max-height: 300px;
+                    overflow: auto;
+                    -webkit-overflow-scrolling: touch;
+                    &:first-child {
+                        position: relative;
+                        padding: 10px 0;
+                        min-height: 150px;
+                    }
+                    &:last-child {
+                        padding: 10px 0;
+                        background: rgba(247,247,249,1);
+                    }
+                }
+            }
         }
     }
 }
