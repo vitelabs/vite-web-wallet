@@ -719,6 +719,7 @@
         },
         "vb": {
             "title": "ViteConnect",
+            "closeAlert": "close",
             "connect": {
                 "tips": "Memindai kode QR melalui Aplikasi Vite Wallet"
             },
@@ -781,6 +782,7 @@
         "depthStep": "{step} digit",
         "blocking": "Terjadi kemacetan jaringan, silakan coba lagi nanti",
         "supportMining": "Mineable Trading Pairs",
+        "miningPrice": "买入价大于{price}时满足挂单挖矿条件",
         "operator": {
             "noName": "Anonymous Gateway",
             "overview": "Pengantar",
@@ -1250,7 +1252,6 @@
     },
     "mobileAssets": {
         "allAssets": "Estimated Assets Value ({token})",
-        "tokenListTitle": "Token",
         "tokenInfoTitle": "Token Details"
     },
     "mobileTradeCenter": {
