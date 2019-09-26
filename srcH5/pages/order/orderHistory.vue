@@ -16,8 +16,8 @@ import { order } from 'services/trade';
 import loading from 'components/loading';
 import noData from 'h5Components/noData';
 import listView from 'h5Components/listView.vue';
-import historyTable from 'h5Components/historyTable.vue';
 import Filters from './filters';
+import historyTable from './historyTable.vue';
 
 const Page_Size = 20;
 
