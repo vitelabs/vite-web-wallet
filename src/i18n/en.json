@@ -764,6 +764,7 @@
         "depthStep": "{step} digits",
         "blocking": "Network congestion occurs, please try again later",
         "supportMining": "Mineable Trading Pairs",
+        "miningPrice": "买入价大于{price}时满足挂单挖矿条件",
         "operator": {
             "noName": "Anonymous Gateway",
             "overview": "Introduction",
@@ -1218,7 +1219,6 @@
     },
     "mobileAssets": {
         "allAssets": "Estimated Assets Value ({token})",
-        "tokenListTitle": "Tokens",
         "tokenInfoTitle": "Token Details"
     },
     "mobileTradeCenter": {
