@@ -15,7 +15,7 @@
                         / {{ ttokenDetail ? ttokenDetail.symbol : '' }}
                     </span>
                 </div>
-                <div class="mining" v-show="isMinging">
+                <div class="mining" v-show="isMining">
                     <img src="~h5Assets/imgs/mining.png"/>
                 </div>
             </div>
@@ -43,9 +43,8 @@ export default {
         }
     },
     computed: {
-        isMinging() {
-            const marketInfo = this.$store.state.exchangeFee.marketInfo;
-            return marketInfo && marketInfo.allowMine;
+        isMining() {
+            return this.$store.getters.exIsMining;
         },
         closeMarket() {
             return this.$store.state.exchangeMarket.marketClosed;
