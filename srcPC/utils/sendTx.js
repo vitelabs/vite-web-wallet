@@ -20,7 +20,14 @@ const defaultConfig = {
     }
 };
 
-const sendTx = execWithValid(function ({ config = defaultConfig, methodName, data, vbExtends, abi, description }) {
+const sendTx = execWithValid(function ({
+    config = defaultConfig,
+    methodName,
+    data,
+    vbExtends,
+    abi,
+    description
+}) {
     config = formatConfig(config);
 
     const event = new EventEmitter();
@@ -29,7 +36,14 @@ const sendTx = execWithValid(function ({ config = defaultConfig, methodName, dat
     let powInstance = null;
     let vbInstance = null;
     if (activeAccount.isBifrost) {
-        const { compInstance } = vbConfirmDialog();
+        const confirmPromise = vbConfirmDialog();
+        const { compInstance } = confirmPromise;
+        confirmPromise.then(() => {
+            // 如果点击了关闭窗口，则不再提示。
+            event.catchCb && event.catchCb({ code: 11021, message: '链接断开' });
+            event.thenCb = null;
+            event.catchCb = null;
+        });
         vbInstance = compInstance;
     }
     activeAccount

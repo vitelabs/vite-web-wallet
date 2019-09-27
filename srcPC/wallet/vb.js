@@ -1,4 +1,4 @@
-import Connector from '@vite/bifrost';
+import Connector from '@vite/connector';
 import { setCurrHDAcc, getCurrHDAcc } from './index';
 import store from 'pcStore';
 
