@@ -63,10 +63,11 @@ export default {
                     price: `${ v.price } ${ this.getOriginSymbol(v.quoteTokenSymbol) }`,
                     quantity: `${ v.quantity } ${ this.getOriginSymbol(v.tradeTokenSymbol) }`,
                     executedQuantity: `${ v.executedQuantity } ${ this.getOriginSymbol(v.tradeTokenSymbol) }`,
-                    executedPercent: `${ (v.executedPercent * 100).toFixed(2) }%`,
+                    // executedPercent: `${ (v.executedPercent * 100).toFixed(2) }%`,
                     executedAvgPrice: `${ v.executedAvgPrice } ${ this.getOriginSymbol(v.quoteTokenSymbol) }`,
                     fee: `${ v.fee } ${ this.getOriginSymbol(v.quoteTokenSymbol) }`,
                     status: this.$t('tradeOrderHistory.table.rowMap.statusMap')[v.status],
+                    amount: `${ v.amount } ${ this.getOriginSymbol(v.quoteTokenSymbol) }`,
                     operate: this.$t('tradeOrderHistory.table.rowMap.detail'),
                     rawData: v
                 });
@@ -88,8 +89,8 @@ export default {
         headList() {
             const list = [];
             const cellList = [ 'createTime', 'symbol', 'sideKey', 'price',
-                'quantity', 'executedQuantity', 'executedPercent', 'executedAvgPrice',
-                'fee', 'status', 'operate'
+                'quantity', 'executedQuantity', 'executedAvgPrice',
+                'fee', 'amount', 'status', 'operate'
             ];
             for (let i = 0; i < cellList.length; i++) {
                 list.push({

@@ -1030,7 +1030,8 @@
                 "Amount",
                 "Filled",
                 "Filled%",
-                "Average"
+                "Average",
+                "Total"
             ],
             "rowMap": {
                 "cancel": "Cancel"
@@ -1072,9 +1073,9 @@
                 "Price",
                 "Amount",
                 "Filled",
-                "Filled%",
                 "Average",
                 "Fees",
+                "Total",
                 "Status"
             ],
             "rowMap": {
