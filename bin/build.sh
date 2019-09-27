@@ -9,7 +9,7 @@ git checkout master
 echo "Pull ==============";
 git pull
 
-if [ "$isClear" == "clear" ]
+if [ "$isClear"X == "clear"X ]
 then
     echo "Delete node_modules =================";
     rm -rf ./node_modules
@@ -21,7 +21,7 @@ yarn
 # Build and tar
 echo "Build" $handle;
 
-if [ $handle == "PC" ]
+if [ "$handle"X == "PC"X ]
 then
     echo "Delete dist =================";
     rm -rf ./dist
@@ -35,7 +35,7 @@ else
     echo "Build =================";
     yarn run build:H5
     echo "Tar ==============";
-    tar -cvf h5Static.tar.tar ./distH5/*
+    tar -cvf h5Static.tar ./distH5/*
 fi
 
 echo "Finish building";
