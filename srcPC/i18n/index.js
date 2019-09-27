@@ -40,7 +40,11 @@ function getDefaultLang() {
         let lang = type === 'Netscape' ? navigator.language : navigator.userLanguage;
         lang = lang.substr(0, 2);
 
-        return lang === 'zh' ? 'zh' : 'en';
+        const languages = [ 'en', 'zh', 'id' ];
+        if (languages.indexOf(lang) !== -1) {
+            return lang;
+        }
+        return 'en';
     } catch (err) {
         console.warn(err);
         return 'en';
