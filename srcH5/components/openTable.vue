@@ -1,11 +1,8 @@
 <template>
     <div class="__tb">
-        <div v-show="sortedList && sortedList.length">
-            <order-item v-for="v in sortedList" :key="v.orderId" :order="v">
-                <div @click="cancel(v)" class="cancel">{{ $t("tradeOpenOrders.table.rowMap.cancel") }}</div>
-            </order-item>
-        </div>
-        <no-data v-show="!sortedList || !sortedList.length"></no-data>
+        <order-item v-for="v in sortedList" :key="v.orderId" :order="v">
+            <div @click="cancel(v)" class="cancel">{{ $t("tradeOpenOrders.table.rowMap.cancel") }}</div>
+        </order-item>
     </div>
 </template>
 
@@ -13,13 +10,12 @@
 import { utils } from '@vite/vitejs';
 import sendTx from 'h5Utils/sendTx';
 import statistics from 'utils/statistics';
-import noData from 'h5Components/noData';
 import orderItem from 'h5Components/orderItem';
 
 const { _Buffer } = utils;
 
 export default {
-    components: { noData, orderItem },
+    components: { orderItem },
     props: {
         changeList: {
             type: Object,
