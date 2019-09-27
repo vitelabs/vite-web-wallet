@@ -1,7 +1,6 @@
 <template>
     <div class="open-order-ct">
         <open-table :list="list"></open-table>
-
         <pagination class="__tb_pagination"
                     :currentPage="currentPage" :toPage="getOrder"
                     :totalPage="totalPage"></pagination>
