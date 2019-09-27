@@ -1,6 +1,8 @@
 <template>
     <div class="title">
-        <span class="title-t">{{ title }}</span>
+        <span class="title-t">{{ title }}
+            <slot></slot>
+        </span>
         <span v-show="amount" class="amount">{{ amount }}</span>
     </div>
 </template>

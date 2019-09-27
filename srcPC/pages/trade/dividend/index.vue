@@ -2,7 +2,11 @@
     <div class="trade-dividend-wrapper">
         <section-title :title="$t('tradeDividend.poolTitle')"></section-title>
         <pool></pool>
-        <section-title :title="$t('tradeDividend.listTitle')"></section-title>
+        <section-title :title="$t('tradeDividend.listTitle')">
+            <span class="help __pointer" @mouseenter="showHelp" @mouseleave="hideHelp">
+                <span v-show="isShowHelp" class="help-text">{{ $t('tradeDividend.help') }}</span>
+            </span>
+        </section-title>
         <div class="content">
             <div class="my-divident">
                 <div class="item">
@@ -59,13 +63,13 @@
 
 <script>
 import pool from './pool.vue';
-import sectionTitle from '../components/sectionTitle';
 import walletTable from 'components/table/index.vue';
 import pagination from 'components/pagination.vue';
 import { dividend } from 'services/trade';
 import date from 'utils/date';
 import bigNumber from 'utils/bigNumber';
 import openUrl from 'utils/openUrl';
+import sectionTitle from './sectionTitle';
 
 export default {
     components: { sectionTitle, walletTable, pagination, pool },
@@ -74,6 +78,7 @@ export default {
     },
     data() {
         return {
+            isShowHelp: false,
             isShowMyList: '',
             currentPage: 0,
             totalNum: 0,
@@ -166,6 +171,12 @@ export default {
         }
     },
     methods: {
+        showHelp() {
+            this.isShowHelp = true;
+        },
+        hideHelp() {
+            this.isShowHelp = false;
+        },
         getPriceNum(dividendStat, coin) {
             coin = coin || this.$store.state.env.currency;
             const rateList = this.$store.state.exchangeRate.rateMap || {};
@@ -249,6 +260,40 @@ export default {
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
 @import "~assets/scss/table.scss";
+
+.help {
+    position: relative;
+    background: url('~assets/imgs/info.svg');
+    background-size: 100% 100%;
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    margin-bottom: -3px;
+    .help-text {
+        position: absolute;
+        left: 25px;
+        top: -5px;
+        padding: 6px;
+        background: #fff;
+        box-shadow: 0 2px 10px 1px rgba(176, 192, 237, 0.42);
+        border-radius: 2px;
+        font-family: $font-H;
+        color: #5e6875;
+        font-size: 12px;
+        line-height: 16px;
+        white-space: nowrap;
+        &:after {
+            position: absolute;
+            content: ' ';
+            top: 50%;
+            left: 0;
+            transform: translate(-100%, -50%);
+            display: inline-block;
+            border: 6px solid transparent;
+            border-right: 6px solid #fff;
+        }
+    }
+}
 
 .trade-dividend-wrapper {
     width: 100%;
