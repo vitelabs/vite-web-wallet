@@ -764,7 +764,7 @@
         "depthStep": "{step} digits",
         "blocking": "Network congestion occurs, please try again later",
         "supportMining": "Mineable Trading Pairs",
-        "miningPrice": "买入价大于{price}时满足挂单挖矿条件",
+        "miningPrice": "You would meet the mining qualification when buy price is greater that {price}",
         "operator": {
             "noName": "Anonymous Gateway",
             "overview": "Introduction",
