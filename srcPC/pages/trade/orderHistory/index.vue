@@ -76,7 +76,7 @@ export default {
     .tb {
         width: 100%;
         flex: 1;
-        display: flex;
+        overflow: auto;
     }
 }
 </style>
