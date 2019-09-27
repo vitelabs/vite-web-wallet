@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 
+import i18n from 'pcI18n';
 import store from 'pcStore';
 import openUrl from 'utils/openUrl';
 import statistics from 'utils/statistics';
@@ -25,7 +26,7 @@ router.beforeEach((to, from, next) => {
 
     // Go to explorer.
     if (to.name === 'viteExplorer') {
-        openUrl(getExplorerLink(this.$i18n.locale));
+        openUrl(getExplorerLink(i18n.locale));
         return;
     }
 
