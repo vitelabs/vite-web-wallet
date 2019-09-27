@@ -782,7 +782,7 @@
         "depthStep": "{step}桁",
         "blocking": "ネットワークの混雑が発生しています しばらくしてからもう一度お試しください",
         "supportMining": "Mineable Trading Pairs",
-        "miningPrice": "买入价大于{price}时满足挂单挖矿条件",
+        "miningPrice": "You would meet the mining qualification when buy price is greater than {price}",
         "operator": {
             "noName": "Anonymous Gateway",
             "overview": "はじめに",
