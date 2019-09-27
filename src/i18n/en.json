@@ -1155,7 +1155,8 @@
         "price": "Total Estimated Value",
         "hintTitle": "Important Notice",
         "comingHint": "VX mining and dividend functions are coming soon, stay tuned. The system will distribute 1% of BTC, ETH, VITE, USDT of the total pool to all VX users proportional to the amount of VX they hold. The initial dividend pool will start at 0 and will grow according to the amount of fees collected by ViteX. Traders must have a minimum of 10 VX in order to receive dividends from a shared dividend pool comprised of base transaction, listing and referral code generating fees. ",
-        "more": "Learn more about VX dividend rules"
+        "more": "Learn more about VX dividend rules",
+        "help": "持有VX参与分红需满足条件：1. VX在交易所账户中 2. 余额不少于10VX"
     },
     "tradeOperator": {
         "title": "Operator",
