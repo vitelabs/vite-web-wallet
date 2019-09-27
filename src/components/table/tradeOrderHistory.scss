@@ -14,24 +14,23 @@
     height: 100%;
     overflow: auto;
     @include rowWith {
-        width: 7%;
+        width: 9%;
     
         &:first-child {
-            width: 160px;
+            width: 150px;
         }
         &:nth-child(2) {
-            width: 17%;
+            width: 150px;
         }
         &:nth-child(3) {
             width: 40px;
         }
-    
-        &:nth-child(4),
-        &:nth-child(5),
-        &:nth-child(6),
-        &:nth-child(8),
-        &:nth-child(9) {
-            width: 13%;
+
+        &:nth-child(10) {
+            width: 63px;
+        }
+        &:nth-child(11) {
+            width: 70px;
         }
     }
     
