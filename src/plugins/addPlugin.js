@@ -50,7 +50,7 @@ export default {
             if (code === '1000001') {
                 return;
             }
-            if (code === 11012 || code === 11020) {
+            if (code === 11012 || code === 11020 || code === 11021) {
                 // wc 取消授权，断开
                 return;
             }

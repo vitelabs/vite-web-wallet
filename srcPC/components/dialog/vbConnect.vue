@@ -27,14 +27,22 @@ export default {
         };
     },
     beforeMount() {
-        const lastAccount = getCurrHDAcc() && getCurrHDAcc().isBifrost ? getCurrHDAcc().activeAddr : undefined;
-        this.vb = initVB({ lastAccount });
-        this.vb.on('connect', () => {
-            this.close();
-        });
-        this.vb.on('disconnect', () => {
-            this.vb = initVB();
-        });
+        this.initVB();
+    },
+    methods: {
+        initVB() {
+            const lastAccount
+                = getCurrHDAcc() && getCurrHDAcc().isBifrost
+                    ? getCurrHDAcc().activeAddr
+                    : undefined;
+            this.vb = initVB({ lastAccount });
+            this.vb.on('connect', () => {
+                this.close();
+            });
+            this.vb.on('disconnect', () => {
+                this.initVB();
+            });
+        }
     }
 };
 </script>
@@ -49,7 +57,7 @@ export default {
     color: #333;
     font-family: $font-bold;
 }
-.code_container{
+.code_container {
     width: 163px;
     height: 163px;
     margin: 0 auto;
