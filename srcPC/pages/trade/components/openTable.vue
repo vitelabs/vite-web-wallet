@@ -130,7 +130,7 @@ export default {
 @import '~assets/scss/table.scss';
 
 .__tb {
-    height: 100%;
+    flex: 1;
     box-shadow: none;
     .__tb_content_row {
         transition: all 0.4s ease-in-out;
