@@ -38,7 +38,7 @@
             </select>
         </div>
 
-        <div class="filter end">
+        <div v-show="isShowStatus" class="filter end">
             <div class="filter_label">{{ $t("tradeOrderHistory.filter.status") }}</div>
             <select v-model="status" class="filter_content">
                 <option value="1">{{ $t("tradeOrderHistory.status.1") }}</option>
@@ -65,6 +65,12 @@ import statistics from 'utils/statistics';
 
 export default {
     components: { FlatPickr },
+    props: {
+        isShowStatus: {
+            type: Boolean,
+            default: true
+        }
+    },
     data() {
         return {
             fromDate: '',
