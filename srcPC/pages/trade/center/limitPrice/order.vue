@@ -712,7 +712,7 @@ $font-black: rgba(36, 39, 43, 0.8);
     display: block;
     left: 50%;
     bottom: 40px;
-    padding: 6px 12px;
+    padding: 10px;
     white-space: nowrap;
     &::after {
         content: " ";

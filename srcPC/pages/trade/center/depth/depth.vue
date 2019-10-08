@@ -15,7 +15,7 @@
                     'active-side': isShowBuy && !isShowSell
                 }" class="ex-tab __pointer"
                 @click="showTable(false, true)"><span>{{ $t('trade.depth.sell') }}</span></li>
-                <!-- <merge-depth></merge-depth> -->
+            <merge-depth></merge-depth>
         </ul>
 
         <div class="__center-tb-title">
