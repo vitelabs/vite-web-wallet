@@ -102,7 +102,13 @@ export default {
         ftoken() {
             return this.$store.state.exchangeTokens.ftoken;
         },
+        isMining() {
+            return this.$store.getters.exIsMining;
+        },
         miningPrice() {
+            if (this.isMining) {
+                return '';
+            }
             return this.$store.getters.exMiningPrice;
         },
         maxQuantity() {
