@@ -1,9 +1,9 @@
 <template>
     <div class="title">
-        <span class="title-t">{{ title }}
-            <slot></slot>
+        <span class="title-t">{{ title }}</span>
+        <span v-if="help" class="help __pointer" @mouseenter="showHelp" @mouseleave="hideHelp">
+            <span v-show="isShowHelp" class="help-text">{{ help }}</span>
         </span>
-        <span v-show="amount" class="amount">{{ amount }}</span>
     </div>
 </template>
 
@@ -14,9 +14,20 @@ export default {
             type: String,
             default: ''
         },
-        amount: {
+        help: {
             type: String,
             default: ''
+        }
+    },
+    data() {
+        return { isShowHelp: false };
+    },
+    methods: {
+        showHelp() {
+            this.isShowHelp = true;
+        },
+        hideHelp() {
+            this.isShowHelp = false;
         }
     }
 };
@@ -26,23 +37,44 @@ export default {
 @import "~assets/scss/vars.scss";
 
 .title {
-    height: 50px;
+    padding: 14px 0;
+    line-height: 18px;
     font-size: 13px;
     @include font-family-bold();
     color: rgba(94,104,117,0.8);
-    display: flex;
-    align-items: center;
-    .amount {
-        font-size: 20px;
-        color: rgba(29,32,36,1);
-        &:before {
+}
+
+.help {
+    position: relative;
+    background: url('~assets/imgs/info.svg');
+    background-size: 100% 100%;
+    width: 12px;
+    height: 12px;
+    display: inline-block;
+    margin-bottom: -1px;
+    .help-text {
+        position: absolute;
+        left: 24px;
+        top: -12px;
+        height: 36px;
+        line-height: 36px;
+        padding: 0 10px;
+        background: #fff;
+        box-shadow: 0px 5px 20px 0px rgba(0,0,0,0.1);
+        border-radius: 2px;
+        @include font-family-normal();
+        color: rgba(94,104,117,1);
+        font-size: 12px;
+        white-space: nowrap;
+        &:after {
+            position: absolute;
             content: ' ';
-            margin: 0 10px 3px;
+            top: 50%;
+            left: 0;
+            transform: translate(-100%, -50%);
             display: inline-block;
-            width: 8px;
-            height: 8px;
-            border-radius: 8px;
-            background: rgba(0,122,255,1);
+            border: 6px solid transparent;
+            border-right: 6px solid #fff;
         }
     }
 }

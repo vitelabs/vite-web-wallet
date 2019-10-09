@@ -31,6 +31,7 @@ export default {
         this.$store.dispatch('exFetchSVip');
         this.$store.dispatch('exFetchActiveTxPair');
         this.$store.dispatch('startLoopDexFundeUnreceived');
+        this.$store.dispatch('getMiningSettingInfo');
 
         !this.$store.state.env.isShowCompliance && confirm({
             size: 'small',

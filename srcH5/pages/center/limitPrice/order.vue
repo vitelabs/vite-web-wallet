@@ -59,6 +59,7 @@
 import dexBalance from './dexBalance';
 import slider from 'components/slider';
 import viteInput from 'components/viteInput';
+import viteConfirm from 'h5Components/confirm/index.js';
 import BigNumber from 'utils/bigNumber';
 import statistics from 'utils/statistics';
 import sendTx from 'h5Utils/sendTx';
@@ -91,6 +92,12 @@ export default {
         };
     },
     watch: {
+        isOperatorTxPairLoading() {
+            return this.$store.state.exchangeTokens.isLoading;
+        },
+        operatorInfo() {
+            return this.$store.state.exchangeTokens.operator;
+        },
         activeTxPair: function (val, old) {
             if (old && old.symbol === this.activeTxPair.symbol) {
                 return;
@@ -177,14 +184,11 @@ export default {
         }
     },
     computed: {
-        isMining() {
-            return this.$store.getters.exIsMining;
-        },
         isShowMining() {
-            return this.orderType === 'buy' && this.focusInput === 'price' && !this.priceErr && this.isMining && this.miningPrice;
+            return this.orderType === 'buy' && this.focusInput === 'price' && !this.priceErr && this.miningPrice;
         },
         miningPrice() {
-            return this.$store.getters.exMiningPrice;
+            return this.$store.getters.activeTxPairMiningPrice;
         },
         blockingLevel() {
             return this.$store.getters.dexBlockingLever;
@@ -573,6 +577,33 @@ export default {
                 return;
             }
 
+            // Sell order or No activeTxPair or No operatorInfo or No dager
+            if (this.orderType === 'sell'
+                || this.isOperatorTxPairLoading || !this.activeTxPair
+                || (this.operatorInfo && this.operatorInfo.level)) {
+                this.prepareOrder();
+                return;
+            }
+
+            const tradeTokenSymbol = this.activeTxPair.tradeTokenSymbol.split('-')[0];
+            const quoteTokenSymbol = this.activeTxPair.quoteTokenSymbol.split('-')[0];
+
+            viteConfirm({
+                size: 'small',
+                type: 'description',
+                title: this.$t('tradeCenter.operator.confirmTitle'),
+                singleBtn: true,
+                closeBtn: { show: true },
+                leftBtn: {
+                    text: this.$t('btn.understand'),
+                    click: () => {
+                        this.prepareOrder();
+                    }
+                },
+                content: this.$t('tradeCenter.operator.confirmText', { symbol: `${ tradeTokenSymbol }/${ quoteTokenSymbol }` })
+            });
+        },
+        prepareOrder() {
             this.newOrder({
                 price: this.price,
                 quantity: this.quantity

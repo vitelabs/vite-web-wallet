@@ -16,24 +16,28 @@ block head
                 span.strong(place="confirmationCount") {{confirmationCount}}
             .dot
 block content
-    .block__title
+    .block__title.no_top
         span {{$t('tokenCard.charge.addressTitle')}}
-        img.title_icon.copy.__pointer(src="~assets/imgs/copy_default.svg" @click="copy")
-    .block__content(:class="{err:addrErr}") {{addrErr||address}}
-    .qrcode-container
-        .qrcode-container__title {{$t('tokenCard.charge.codeTips',{tokenSymbol:getTokenSymbol(token)})}}
-        qrcode(:text="addressQrcode" :options="qrOptions" class="qrcode-container__content")
-    .block__title(v-if="!!labelName&&!!labelValue")
-        span {{labelName}}
-            span.red {{$t('tokenCard.charge.labelTips',{labelName})}}
-        img.title_icon.copy.__pointer(src="~assets/imgs/copy_default.svg" @click="copyLabel")
-    .block__content(v-if="!!labelName") {{labelValue}}
-    .qrcode-container(v-if="!!labelName")
-        .qrcode-container__title {{$t('tokenCard.charge.labelCodeTips',{labelName})}}
-        qrcode(:text="labelValue" :options="qrOptions" class="qrcode-container__content")
+        img.title_icon.copy.__pointer(v-show="!isLoading" src="~assets/imgs/copy_default.svg" @click="copy")
+    div.ex-center-loading(v-show="isLoading")
+        loading(loadingType="dot")
+    div(v-show="!isLoading")
+        .block__content(:class="{err:addrErr}") {{addrErr||address}}
+        .qrcode-container
+            .qrcode-container__title {{$t('tokenCard.charge.codeTips',{tokenSymbol:getTokenSymbol(token)})}}
+            qrcode(:text="addressQrcode" :options="qrOptions" class="qrcode-container__content")
+        .block__title(v-if="!!labelName&&!!labelValue")
+            span {{labelName}}
+                span.red {{$t('tokenCard.charge.labelTips',{labelName})}}
+            img.title_icon.copy.__pointer(src="~assets/imgs/copy_default.svg" @click="copyLabel")
+        .block__content(v-if="!!labelName") {{labelValue}}
+        .qrcode-container(v-if="!!labelName")
+            .qrcode-container__title {{$t('tokenCard.charge.labelCodeTips',{labelName})}}
+            qrcode(:text="labelValue" :options="qrOptions" class="qrcode-container__content")
 </template>
 
 <script>
+import loading from 'components/loading';
 import qrcode from 'components/qrcode';
 import copy from 'utils/copy';
 import { modes } from 'qrcode.es';
@@ -41,7 +45,7 @@ import { getDepositInfo } from 'pcServices/gate';
 import bigNumber from 'utils/bigNumber';
 
 export default {
-    components: { qrcode },
+    components: { qrcode, loading },
     props: {
         token: {
             type: Object,
@@ -49,19 +53,25 @@ export default {
         }
     },
     beforeMount() {
+        this.isLoading = true;
         getDepositInfo({ addr: this.defaultAddr, tokenId: this.token.tokenId },
             this.token.gateInfo.url)
             .then(res => {
+                this.isLoading = false;
                 this.address = res.depositAddress;
                 this.minimumDepositAmountMin = res.minimumDepositAmount;
                 this.labelName = res.labelName;
                 this.labelValue = res.label;
                 this.confirmationCount = res.confirmationCount;
             })
-            .catch(() => (this.addrErr = this.$t('tokenCard.charge.addrErr')));
+            .catch(() => {
+                this.isLoading = false;
+                this.addrErr = this.$t('tokenCard.charge.addrErr');
+            });
     },
     data() {
         return {
+            isLoading: true,
             confirmationCount: '',
             minimumDepositAmountMin: '',
             address: '',
@@ -109,7 +119,13 @@ export default {
 @import "./dialog.scss";
 @include block;
 
+.ex-center-loading {
+    text-align: center;
+}
 .block__title {
+    &.no_top {
+        margin-top: 0;
+    }
     .title_icon {
         width: 18px;
         height: 18px;

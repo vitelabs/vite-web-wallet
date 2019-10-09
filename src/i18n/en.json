@@ -194,6 +194,9 @@
         "config": "General",
         "currency": "Default Currency",
         "secure": "Security",
+        "gate": "自定义网关",        
+        "triggerGate": ["关闭", "开启"],
+        "gateHelp": "开启自定义网关，可以在钱包页面设置自己设置网关，设置后可以进行跨链转入代币。目前主要针对开发者使用。",
         "lang": "Language",
         "block": "Current Height",
         "version": "Version",
@@ -262,7 +265,8 @@
             "availableExAmount":"Exchange Available Balance",
             "balanceTips": "You can transfer your assets to other addresses via clicking 'Send' button",
             "gateTips": "In this cross-chain section, you can map other tokens into Vite network. Click 'Receive' button to deposit assets to your Vite Wallet. Click 'Send' button to transfer your assets to other platforms. * Cross-chain receive/send process may charge fees, it also has its transfer limit.",
-            "availableExAmountTips": "You can transfer your assets from Vite Wallet to ViteX Exchange via clicking 'Deposit' button. Click 'Withdraw' button to transfer assets from ViteX Exchange to Vite Wallet. No transaction fees caused during these processes."
+            "availableExAmountTips": "You can transfer your assets from Vite Wallet to ViteX Exchange via clicking 'Deposit' button. Click 'Withdraw' button to transfer assets from ViteX Exchange to Vite Wallet. No transaction fees caused during these processes.",
+            "unreceivedTips": "登录状态下可自动接收在途金额"
         },
         "actionType": {
             "SEND": "Send",
@@ -778,7 +782,8 @@
             "title": "Trading Pair Details",
             "tokenTab": "Token Details",
             "operatorTab": "Operator Details"
-        }
+        },
+        "depthMiningPrice": "此线上方为有效挂单区域"
     },
     "trade": {
         "more":"More",
@@ -1229,8 +1234,7 @@
         "quantity": "24H Vol",
         "buyTitle": "Buy",
         "sellTitle": "Sell",
-        "buyPrice": "Buy Price ({token})",
-        "sellPrice": "Sell Price ({token})",
+        "price": "Price ({token})",
         "buy": {
             "price": "Price",
             "quantity": "Amount"

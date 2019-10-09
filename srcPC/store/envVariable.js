@@ -6,12 +6,14 @@ import {
 const currencyKey = constant.CurrencyKey;
 const autoLogoutKey = constant.AutoLogoutKey;
 const LangKey = constant.LangKey;
+const GateKey = constant.GateKey;
 
 const state = {
     clientStatus: -1,
     lang: '',
     currency: localStorage.getItem(currencyKey) || '',
     autoLogoutTime: localStorage.getItem(autoLogoutKey) || 5,
+    gate: +localStorage.getItem(GateKey) || 0,
     lastPage: '',
     isShowCompliance: false
 };
@@ -29,6 +31,10 @@ const mutations = {
         if (!state.currency) {
             state.currency = lang === 'zh' ? 'cny' : 'usd';
         }
+    },
+    setGate(state, isOpen) {
+        localStorage.setItem(GateKey, isOpen ? 1 : 0);
+        state.gate = isOpen ? 1 : 0;
     },
     setCurrency(state, currency) {
         currency = currency.toLowerCase();
