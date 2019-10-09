@@ -1,6 +1,7 @@
 import { constant } from '@vite/vitejs';
 import bigNumber from 'utils/bigNumber';
 import { getCurrentFeesForMine, getAllFeesOfAddress, getMinThresholdForTradeAndMining, getCurrentVxMineInfo, getCurrentPledgeForVxSum, getAgentMiningPledgeInfo } from 'services/viteServer';
+import { getMiningSetting } from 'services/trade';
 
 import viteIcon from 'assets/imgs/vite-dividend.svg';
 import ethIcon from 'assets/imgs/eth.svg';
@@ -48,7 +49,11 @@ const state = {
     }, {
         name: 'USDT',
         icon: usdIcon
-    } ]
+    } ],
+
+    tradeMiningSymbols: [],
+    orderMiningSymbols: [],
+    miningSymbols: []
 };
 
 const mutations = {
@@ -69,6 +74,14 @@ const mutations = {
     },
     setAgentMiningPledgeInfo(state, data) {
         state.userPledgeInfo = data || null;
+    },
+    setMiningSetting(state, data) {
+        if (!data) {
+            return;
+        }
+        state.tradeMiningSymbols = data.tradeSymbols || [];
+        state.orderMiningSymbols = data.orderSymbols || [];
+        state.miningSymbols = state.tradeMiningSymbols.concat(state.orderMiningSymbols);
     }
 };
 
@@ -133,6 +146,13 @@ const actions = {
                 return;
             }
             commit('setAgentMiningPledgeInfo', data);
+        });
+    },
+    getMiningSettingInfo({ commit }) {
+        getMiningSetting().then(data => {
+            commit('setMiningSetting', data);
+        }).catch(err => {
+            console.warn(err);
         });
     }
 };

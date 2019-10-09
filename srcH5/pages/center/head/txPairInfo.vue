@@ -41,7 +41,7 @@ export default {
     },
     computed: {
         isMining() {
-            return this.$store.getters.exIsMining;
+            return this.$store.getters.activeTxPairIsMining;
         },
         closeMarket() {
             return this.$store.state.exchangeMarket.marketClosed;

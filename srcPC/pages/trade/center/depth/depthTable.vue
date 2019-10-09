@@ -7,7 +7,7 @@
         <span v-show="isShowMiningPrice" class="mining-price" :style="`top: ${top}px`">{{ $t('tradeCenter.depthMiningPrice') }}</span>
         <div ref="depthTable" class="depth-table-wrapper">
             <loading loadingType="dot" class="ex-center-loading" v-show="isLoading"></loading>
-
+            <price v-if="!isShowAll && dataType === 'buy'" class="border_b"></price>
             <div class=" __pointer" :ref="`depthRow${i}`"
                  @click="clickRow(item, i)"
                  @mouseenter="showMiningPrice(item, i)"
@@ -34,9 +34,10 @@
 <script>
 import BigNumber from 'utils/bigNumber';
 import loading from 'components/loading';
+import price from './price';
 
 export default {
-    components: { loading },
+    components: { loading, price },
     props: {
         dataType: {
             type: String,
@@ -71,12 +72,9 @@ export default {
             this.depthData.forEach((item, i) => {
                 if (this.isInMining(i)) {
                     item.isInMining = true;
-                    a.push(item);
                 }
 
-                if (i === 0) {
-                    return;
-                }
+                a.push(item);
 
                 if (item.isInMining
                     && (
@@ -102,14 +100,8 @@ export default {
         ftoken() {
             return this.$store.state.exchangeTokens.ftoken;
         },
-        isMining() {
-            return this.$store.getters.exIsMining;
-        },
         miningPrice() {
-            if (this.isMining) {
-                return '';
-            }
-            return this.$store.getters.exMiningPrice;
+            return this.$store.getters.activeTxPairMiningPrice;
         },
         maxQuantity() {
             const arr = [].concat(this.depthData);
@@ -164,7 +156,7 @@ export default {
                 return false;
             }
             const price = this.depthData[i].price;
-            return price >= this.miningPrice;
+            return BigNumber.compared(price, this.miningPrice) >= 0;
         },
         isInOpenOrders(price) {
             if (!this.currentOpenOrders) {
@@ -229,6 +221,7 @@ export default {
     position: relative;
     &.buy {
         flex: 1;
+        height: inherit;
     }
 }
 .show-all {
@@ -240,6 +233,9 @@ export default {
     .depth-table-wrapper {
         overflow: hidden;
     }
+}
+.border_b {
+    border-bottom: 1px solid rgba(229, 237, 243, 1);
 }
 .depth-table-wrapper {
     height: 100%;
