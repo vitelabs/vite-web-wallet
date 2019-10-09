@@ -28,7 +28,7 @@
         <div class="col">
             <div
                 :class="{underline:gateName!=='--','click-able':gateName!=='--'}"
-                @click="() => token.type !== 'NATIVE' && canEditGateURL && showDetail('gate')"
+                @click="() => gateName !== '--' &&  showDetail('gate')"
             >
                 {{ gateName }}
             </div>
