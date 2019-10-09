@@ -9,6 +9,7 @@ static
 viteJS
 routes.js
 .netlify
+.yarnrc
 package-lock.json
 secret.js
 static.tar
