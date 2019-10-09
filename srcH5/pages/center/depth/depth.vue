@@ -1,14 +1,14 @@
 <template>
     <div class="depth-wrapper">
         <div class="__center-tb-title">
-            <span class="__center-tb-item __ellipsis depth price">{{ $t('mobileTradeCenter.buyPrice', {
+            <span class="__center-tb-item left __ellipsis depth quantity">{{ $t('trade.amountTitle', {
+                amount: tradeTokenDetail ? tradeTokenDetail.originalSymbol : ''
+            }) }}</span>
+            <span class="__center-tb-item __ellipsis depth amount">{{ $t('mobileTradeCenter.price', {
                 token: quoteTokenDetail ? quoteTokenDetail.originalSymbol : ''
             }) }}</span>
             <span class="__center-tb-item left __ellipsis depth quantity">{{ $t('trade.amountTitle', {
                 amount: tradeTokenDetail ? tradeTokenDetail.originalSymbol : ''
-            }) }}</span>
-            <span class="__center-tb-item __ellipsis depth amount">{{ $t('mobileTradeCenter.sellPrice', {
-                token: quoteTokenDetail ? quoteTokenDetail.originalSymbol : ''
             }) }}</span>
         </div>
 

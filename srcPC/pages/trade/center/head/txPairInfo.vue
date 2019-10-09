@@ -13,7 +13,7 @@
                 {{ ttokenDetail ? ttokenDetail.symbol : '' }}
             </span>
             <span class="mining" v-show="isMining">
-                <img src="~assets/imgs/mining.svg"/>
+                <img src="~assets/imgs/big_mining.svg"/>
                 <tooltips class="tips" :content="$t('tradeCenter.supportMining')"></tooltips>
             </span>
             <span class="gate" @click="_showDetail('operator')">
@@ -26,10 +26,7 @@
 
 <script>
 import tooltips from 'components/tooltips';
-import viteConfirm from 'components/confirm/index.js';
 import operatorIcon from 'assets/imgs/operator_icon.svg';
-
-let lastSymbol = null;
 
 export default {
     components: { tooltips },
@@ -41,7 +38,7 @@ export default {
     },
     computed: {
         isMining() {
-            return this.$store.getters.exIsMining;
+            return this.$store.getters.activeTxPairIsMining;
         },
         closeMarket() {
             return this.$store.state.exchangeMarket.marketClosed;
@@ -89,46 +86,11 @@ export default {
                 return this.operatorInfo.icon || '';
             }
             return operatorIcon;
-        },
-        isOperatorTxPairLoading() {
-            return this.$store.state.exchangeTokens.isLoading;
-        }
-    },
-    watch: {
-        isOperatorTxPairLoading() {
-            this.initDanger();
-        },
-        activeTxPair() {
-            this.initDanger();
         }
     },
     methods: {
         _showDetail(tab = 'token') {
             this.showDetail && this.showDetail(tab);
-        },
-        initDanger() {
-            if (this.isOperatorTxPairLoading || !this.activeTxPair || lastSymbol === this.activeTxPair.symbol) {
-                return;
-            }
-
-            lastSymbol = this.activeTxPair.symbol;
-            if (this.operatorInfo && this.operatorInfo.level) {
-                // && [ 'Vite Labs', 'VGATE' ].indexOf(this.operatorInfo.name) !== -1) {
-                return;
-            }
-
-            const tradeTokenSymbol = this.activeTxPair.tradeTokenSymbol.split('-')[0];
-            const quoteTokenSymbol = this.activeTxPair.quoteTokenSymbol.split('-')[0];
-
-            viteConfirm({
-                size: 'small',
-                type: 'description',
-                title: this.$t('tradeCenter.operator.confirmTitle'),
-                singleBtn: true,
-                closeBtn: { show: false },
-                leftBtn: { text: this.$t('btn.understand') },
-                content: this.$t('tradeCenter.operator.confirmText', { symbol: `${ tradeTokenSymbol }/${ quoteTokenSymbol }` })
-            });
         }
     }
 };

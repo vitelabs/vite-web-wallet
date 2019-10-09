@@ -114,7 +114,6 @@ export default {
     font-size: 16px;
     &__content{
         margin-top: 22px;
-
     }
 }
 </style>

@@ -19,7 +19,12 @@
                                 <tooltips class="fee-tips" :content="$t('tokenCard.heads.balanceTips')"></tooltips>
                             </i>
                         </div>
-                        <div class="col">{{$t('tokenCard.heads.onroad')}}</div>
+                        <div class="col">
+                            {{$t('tokenCard.heads.onroad')}}
+                            <i class="tipsicon">
+                                <tooltips class="fee-tips" :content="$t('tokenCard.heads.unreceivedTips')"></tooltips>
+                            </i>
+                        </div>
                         <div class="col">
                             {{$t('tokenCard.heads.gate')}}
                             <i class="tipsicon">

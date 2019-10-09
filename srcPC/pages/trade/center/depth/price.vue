@@ -67,7 +67,7 @@ export default {
 
     .price {
         font-size: 14px;
-
+        color: #000;
         &.down {
             color: $down-font-color;
         }

@@ -78,12 +78,14 @@
 <script>
 import slider from 'components/slider';
 import viteInput from 'components/viteInput';
+import viteConfirm from 'components/confirm/index.js';
 import { initPwd } from 'pcComponents/password/index.js';
 import sendTx from 'pcUtils/sendTx';
 import BigNumber from 'utils/bigNumber';
 import { verifyAmount, checkAmountFormat } from 'pcUtils/validations';
 import { execWithValid } from 'pcUtils/execWithValid';
 import statistics from 'utils/statistics';
+
 
 export default {
     components: { viteInput, slider },
@@ -198,14 +200,17 @@ export default {
         }
     },
     computed: {
-        isMining() {
-            return this.$store.getters.exIsMining;
+        isOperatorTxPairLoading() {
+            return this.$store.state.exchangeTokens.isLoading;
+        },
+        operatorInfo() {
+            return this.$store.state.exchangeTokens.operator;
         },
         isShowMining() {
-            return this.orderType === 'buy' && this.focusInput === 'price' && !this.priceErr && this.isMining && this.miningPrice;
+            return this.orderType === 'buy' && this.focusInput === 'price' && !this.priceErr && this.miningPrice;
         },
         miningPrice() {
-            return this.$store.getters.exMiningPrice;
+            return this.$store.getters.activeTxPairMiningPrice;
         },
         blockingLevel() {
             return this.$store.getters.dexBlockingLever;
@@ -597,6 +602,33 @@ export default {
                 return;
             }
 
+            // Sell order or No activeTxPair or no operatorInfo or No dager
+            if (this.orderType === 'sell'
+                || this.isOperatorTxPairLoading || !this.activeTxPair
+                || (this.operatorInfo && this.operatorInfo.level)) {
+                this.prepareOrder();
+                return;
+            }
+
+            const tradeTokenSymbol = this.activeTxPair.tradeTokenSymbol.split('-')[0];
+            const quoteTokenSymbol = this.activeTxPair.quoteTokenSymbol.split('-')[0];
+
+            viteConfirm({
+                size: 'small',
+                type: 'description',
+                title: this.$t('tradeCenter.operator.confirmTitle'),
+                singleBtn: true,
+                closeBtn: { show: true },
+                leftBtn: {
+                    text: this.$t('btn.understand'),
+                    click: () => {
+                        this.prepareOrder();
+                    }
+                },
+                content: this.$t('tradeCenter.operator.confirmText', { symbol: `${ tradeTokenSymbol }/${ quoteTokenSymbol }` })
+            });
+        }),
+        prepareOrder() {
             initPwd({
                 // yztood
                 submit: () => {
@@ -606,7 +638,7 @@ export default {
                     });
                 }
             });
-        }),
+        },
         newOrder({ price, quantity }) {
             if (this.blockingLevel === 3) {
                 this.$toast(this.$t('tradeCenter.blocking'));
@@ -712,7 +744,7 @@ $font-black: rgba(36, 39, 43, 0.8);
     display: block;
     left: 50%;
     bottom: 40px;
-    padding: 6px 12px;
+    padding: 10px;
     white-space: nowrap;
     &::after {
         content: " ";

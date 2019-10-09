@@ -28,7 +28,7 @@
         <div class="col">
             <div
                 :class="{underline:gateName!=='--','click-able':gateName!=='--'}"
-                @click="() => token.type !== 'NATIVE' && showDetail('gate')"
+                @click="() => gateName !== '--' &&  showDetail('gate')"
             >
                 {{ gateName }}
             </div>
@@ -143,11 +143,14 @@ export default {
                     || bigNumber.isEqual(this.token.totalExAmount, '0')) && !(this.token.tokenSymbol === 'VCP' && !this.token.index)// except vcp
             );
         },
+        canEditGateURL() {
+            return !!this.$store.state.env.gate;
+        },
         gateName() {
             if (this.token.type === 'NATIVE') return '--';
             if (this.token.gateInfo.gateway) return this.token.gateInfo.gateway;
             if (this.token.gateInfo.url) return this.$t('tokenCard.gateInfo.selfdefined');
-            return this.$t('tokenCard.gateInfo.gateSetting');
+            return this.canEditGateURL ? this.$t('tokenCard.gateInfo.gateSetting') : '--';
         },
         exBanlance() {
             return (

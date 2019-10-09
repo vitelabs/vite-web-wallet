@@ -11,7 +11,10 @@
                 <span class="__center-tb-item tx-pair">
                     <span class="favorite-icon" :class="{'active': !!favoritePairs[txPair.symbol]}"
                           @click.stop="setFavorite(txPair)"></span>
-                    <span class="describe">{{ getTxPairShowSymbol(txPair) }}</span>
+                    <span class="describe">
+                        {{ getTxPairShowSymbol(txPair) }}
+                        <img v-show="isMining(txPair)" src="~assets/imgs/mining.svg"/>
+                    </span>
                 </span>
                 <span class="__center-tb-item">
                     {{ txPair.closePrice ? formatNum(txPair.closePrice, txPair.pricePrecision) : '--' }}
@@ -69,6 +72,9 @@ export default {
         };
     },
     computed: {
+        miningSymbols() {
+            return this.$store.state.exchangeMine.miningSymbols;
+        },
         transLimit() {
             return this.$store.getters.exCategoryTransLimit;
         },
@@ -119,6 +125,9 @@ export default {
         }
     },
     methods: {
+        isMining(item) {
+            return this.miningSymbols.indexOf(item.symbol) !== -1;
+        },
         getTxPairShowSymbol(txPair) {
             const tradeTokenSymbol = txPair.tradeTokenSymbol.split('-')[0];
             const quoteTokenSymbol = txPair.quoteTokenSymbol.split('-')[0];
@@ -284,6 +293,9 @@ export default {
     .describe {
         display: inline-block;
         width: 80px;
+        img {
+            margin-bottom: -2px;
+        }
     }
 
     &.active {
