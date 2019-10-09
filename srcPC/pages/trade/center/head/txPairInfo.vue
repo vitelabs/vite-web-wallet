@@ -13,7 +13,7 @@
                 {{ ttokenDetail ? ttokenDetail.symbol : '' }}
             </span>
             <span class="mining" v-show="isMining">
-                <img src="~assets/imgs/mining.svg"/>
+                <img src="~assets/imgs/big_mining.svg"/>
                 <tooltips class="tips" :content="$t('tradeCenter.supportMining')"></tooltips>
             </span>
             <span class="gate" @click="_showDetail('operator')">
@@ -38,7 +38,7 @@ export default {
     },
     computed: {
         isMining() {
-            return this.$store.getters.exIsMining;
+            return this.$store.getters.activeTxPairIsMining;
         },
         closeMarket() {
             return this.$store.state.exchangeMarket.marketClosed;

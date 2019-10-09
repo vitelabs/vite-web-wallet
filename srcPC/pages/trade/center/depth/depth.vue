@@ -33,7 +33,7 @@
         <div class="depth-content-wrapper" :class="{'only-sell': !isShowBuy && isShowSell}">
             <depth-table v-show="isShowSell" :isShowAll="isShowBuy && isShowSell"
                          dataType="sell" :depthData="depthSell"></depth-table>
-            <price :class="{
+            <price v-if="!(isShowBuy && !isShowSell)" :class="{
                 border_all: true,
                 no_border_t: !isShowSell || (isShowSell && !isShowBuy && (!depthSell || !depthSell.length))
             }"></price>

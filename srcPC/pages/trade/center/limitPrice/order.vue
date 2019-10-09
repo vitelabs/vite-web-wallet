@@ -206,14 +206,11 @@ export default {
         operatorInfo() {
             return this.$store.state.exchangeTokens.operator;
         },
-        isMining() {
-            return this.$store.getters.exIsMining;
-        },
         isShowMining() {
-            return this.orderType === 'buy' && this.focusInput === 'price' && !this.priceErr && this.isMining && this.miningPrice;
+            return this.orderType === 'buy' && this.focusInput === 'price' && !this.priceErr && this.miningPrice;
         },
         miningPrice() {
-            return this.$store.getters.exMiningPrice;
+            return this.$store.getters.activeTxPairMiningPrice;
         },
         blockingLevel() {
             return this.$store.getters.dexBlockingLever;

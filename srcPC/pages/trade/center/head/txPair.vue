@@ -87,7 +87,7 @@ export default {
             return this.$store.getters.exBuyOnePrice;
         },
         sellOne() {
-            return this.$store.getters.exSellOnePrice;
+            return this.$store.getters.activeTxPairSellOnePrice;
         },
         diff() {
             if (!this.sellOne && !this.buyOne) {
