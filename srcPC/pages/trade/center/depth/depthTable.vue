@@ -8,24 +8,21 @@
         <div ref="depthTable" class="depth-table-wrapper">
             <loading loadingType="dot" class="ex-center-loading" v-show="isLoading"></loading>
             <price v-if="!isShowAll && dataType === 'buy'" class="border_b"></price>
-            <div class=" __pointer" :ref="`depthRow${i}`"
+            <div class="__center-tb-row __pointer" :ref="`depthRow${i}`"
                  @click="clickRow(item, i)"
                  @mouseenter="showMiningPrice(item, i)"
                  @mouseleave="hideMiningPrice(item)"
                  :class="{
-                     '__center-tb-row': !item.isLine,
-                     'in_mining': item.isInMining,
-                     'line': item.isLine
-            }" v-for="(item, i) in _depthData" :key="i">
-                <template v-if="!item.isLine">
-                    <span class="__center-tb-item depth price __ellipsis" :class="dataType">
-                        {{ formatNum(item.price, quoteTokenDepthDigit) }}
-                        <span class="owner" v-show="isInOpenOrders(item.price)"></span>
-                    </span>
-                    <span class="__center-tb-item left depth quantity">{{ formatNum(item.quantity, tradeTokenDigit) }}</span>
-                    <span class="__center-tb-item depth amount">{{ formatNum(item.amount, quoteTokenDigit) }}</span>
-                    <span class="percent-wrapper" :class="dataType" :style="{ 'width': getWidth(item) + '%' }"></span>
-                </template>
+                     'in_mining': buyMiningSeparator >= 0 && i <= buyMiningSeparator,
+                     'border_b': buyMiningSeparator >= 0 && i === buyMiningSeparator
+            }" v-for="(item, i) in depthData" :key="i">
+                <span class="__center-tb-item depth price __ellipsis" :class="dataType">
+                    {{ formatNum(item.price, quoteTokenDepthDigit) }}
+                    <span class="owner" v-show="isInOpenOrders(item.price)"></span>
+                </span>
+                <span class="__center-tb-item left depth quantity">{{ formatNum(item.quantity, tradeTokenDigit) }}</span>
+                <span class="__center-tb-item depth amount">{{ formatNum(item.amount, quoteTokenDigit) }}</span>
+                <span class="percent-wrapper" :class="dataType" :style="{ 'width': getWidth(item) + '%' }"></span>
             </div>
         </div>
     </div>
@@ -62,37 +59,11 @@ export default {
         this.$store.dispatch('exStopDepthTimer');
     },
     computed: {
-        _depthData() {
+        buyMiningSeparator() {
             if (this.dataType !== 'buy') {
-                return this.depthData;
+                return -1;
             }
-
-            const a = [];
-            let isHaveLine = false;
-            this.depthData.forEach((item, i) => {
-                if (this.isInMining(i)) {
-                    item.isInMining = true;
-                }
-
-                a.push({
-                    ...item,
-                    i
-                });
-
-                if (item.isInMining
-                    && (
-                        (i + 1 >= this.depthData.length && !isHaveLine)
-                        || !this.isInMining(i + 1)
-                    )
-                ) {
-                    isHaveLine = true;
-                    a.push({
-                        price: this.miningPrice,
-                        isLine: true
-                    });
-                }
-            });
-            return a;
+            return this.$store.getters.exDepthBuyMiningSeparator;
         },
         isLoading() {
             return this.$store.state.exchangeDepth.isLoading;
@@ -131,16 +102,23 @@ export default {
             return this.$store.state.exchangeDepth.depthStep;
         }
     },
+    watch: {
+        buyMiningSeparator() {
+            if (this.buyMiningSeparator < 0) {
+                this.hideMiningPrice();
+            }
+        }
+    },
     methods: {
         showMiningPrice(item, i) {
-            if (!item.isLine) {
+            if (i !== this.buyMiningSeparator) {
                 return;
             }
 
             const elTop = this.$refs[`depthRow${ i }`][0].getBoundingClientRect().top;
             const listTop = this.$refs.depthTable.getBoundingClientRect().top;
             const height = this.$refs.depthTable.clientHeight;
-            const top = elTop - listTop;
+            const top = elTop - listTop + this.$refs[`depthRow${ i }`][0].clientHeight;
 
             if (top > listTop + height) {
                 this.hideMiningPrice();
@@ -152,14 +130,6 @@ export default {
         },
         hideMiningPrice() {
             this.isShowMiningPrice = false;
-        },
-        isInMining(i) {
-            if (!this.miningPrice
-                || i >= this.depthData.length) {
-                return false;
-            }
-            const price = this.depthData[i].price;
-            return BigNumber.compared(price, this.miningPrice) >= 0;
         },
         isInOpenOrders(price) {
             if (!this.currentOpenOrders) {
@@ -187,14 +157,9 @@ export default {
             return width > 100 ? 100 : width;
         },
         clickRow(data, index) {
-            if (data.isLine) {
-                return;
-            }
-
             const price = data.price;
             const quantity = data.quantity;
             const side = this.dataType === 'buy' ? 0 : 1;
-            index = this.dataType === 'buy' ? data.i : index;
 
             let num = 0;
             if (side) {
@@ -282,11 +247,10 @@ export default {
     &.in_mining {
         background: rgba(75,116,255,0.05);
     }
-}
-
-.line {
-    position: relative;
-    border-bottom: 1px dashed rgba(189,196,208,1);
+    &.border_b {
+        position: relative;
+        border-bottom: 1px dashed rgba(189,196,208,1);
+    }
 }
 
 .__center-tb-item .owner {
