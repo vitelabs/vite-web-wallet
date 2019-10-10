@@ -84,8 +84,34 @@ const actions = {
 const getters = {
     exBuyOnePrice(state) {
         return state.buy && state.buy.length ? state.buy[0].price : '';
+    },
+    exDepthBuyMiningSeparator(state, getters, rootState, rootGetters) {
+        const miningPrice = rootGetters.activeTxPairMiningPrice;
+        if (!state.buy || !state.buy.length || !miningPrice) {
+            return -1;
+        }
+
+        for (let i = 0; i < state.buy.length; i++) {
+            if (isInMining(state.buy[i], miningPrice)
+                && (
+                    i + 1 >= state.buy.length
+                    || !isInMining(state.buy[i + 1].price, miningPrice)
+                )
+            ) {
+                return i;
+            }
+        }
+
+        return -1;
     }
 };
+
+function isInMining(price, miningPrice) {
+    if (!miningPrice || !price) {
+        return false;
+    }
+    return bigNumber.compared(price, miningPrice) >= 0;
+}
 
 export default {
     state,

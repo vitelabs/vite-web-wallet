@@ -60,7 +60,7 @@ export default {
             }
         },
         activeTxPair(val, oldval) {
-            if (val.symbol === oldval.symbol) {
+            if (oldval && val && val.symbol === oldval.symbol) {
                 return;
             }
             this.$store.dispatch('exSetDepthStep', this.maxStep);
