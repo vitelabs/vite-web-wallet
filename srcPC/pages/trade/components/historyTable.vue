@@ -67,7 +67,7 @@ export default {
                     executedAvgPrice: `${ v.executedAvgPrice } ${ this.getOriginSymbol(v.quoteTokenSymbol) }`,
                     fee: `${ v.fee } ${ this.getOriginSymbol(v.quoteTokenSymbol) }`,
                     status: this.$t('tradeOrderHistory.table.rowMap.statusMap')[v.status],
-                    amount: `${ v.amount } ${ this.getOriginSymbol(v.quoteTokenSymbol) }`,
+                    amount: `${ v.executedAmount } ${ this.getOriginSymbol(v.quoteTokenSymbol) }`,
                     operate: this.$t('tradeOrderHistory.table.rowMap.detail'),
                     rawData: v
                 });
