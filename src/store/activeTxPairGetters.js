@@ -90,7 +90,6 @@ const getters = {
         }
 
         const miningSymbols = rootState.exchangeMine.miningSymbols;
-        console.log(miningSymbols);
         return miningSymbols.indexOf(activeTxPair.symbol) !== -1;
     },
     activeTxPairMiningPrice(state, getters, rootState) {

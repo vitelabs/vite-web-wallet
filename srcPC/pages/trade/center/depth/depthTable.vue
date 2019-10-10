@@ -74,7 +74,10 @@ export default {
                     item.isInMining = true;
                 }
 
-                a.push(item);
+                a.push({
+                    ...item,
+                    i
+                });
 
                 if (item.isInMining
                     && (
@@ -191,6 +194,7 @@ export default {
             const price = data.price;
             const quantity = data.quantity;
             const side = this.dataType === 'buy' ? 0 : 1;
+            index = this.dataType === 'buy' ? data.i : index;
 
             let num = 0;
             if (side) {
