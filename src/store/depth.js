@@ -92,10 +92,13 @@ const getters = {
         }
 
         for (let i = 0; i < state.buy.length; i++) {
-            if (isInMining(state.buy[i], miningPrice)
+            const currPrice = state.buy[i].price;
+            const nextPrice = i + 1 >= state.buy.length ? 0 : state.buy[i + 1].price;
+
+            if (isInMining(currPrice, miningPrice)
                 && (
                     i + 1 >= state.buy.length
-                    || !isInMining(state.buy[i + 1].price, miningPrice)
+                    || !isInMining(nextPrice, miningPrice)
                 )
             ) {
                 return i;
