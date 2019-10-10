@@ -229,6 +229,12 @@ export default {
     height: inherit;
     &.sell {
         overflow: auto;
+        .depth-table-wrapper {
+            height: auto;
+            position: absolute;
+            width: 100%;
+            bottom: 0;
+        }
     }
     .depth-table-wrapper {
         overflow: hidden;
