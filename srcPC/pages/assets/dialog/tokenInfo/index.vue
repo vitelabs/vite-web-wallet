@@ -76,10 +76,10 @@ block originContent
         .content__item.center(v-if="token.type==='OFFICAL_GATE'")
             .label {{$t("tokenCard.gateInfo.setting")}}:
             viteInput.gate-url(:placeholder="$t('tokenCard.gateInfo.settingPlaceholder')" :disabled="true" v-model="url")
-        .content__item.center(v-if="token.type!=='OFFICAL_GATE' && canEditGateURL")
+        .content__item.center(v-if="token.type!=='OFFICAL_GATE' && (url || canEditGateURL)")
             .label {{$t("tokenCard.gateInfo.setting")}}:
-            viteInput.gate-url(:placeholder="$t('tokenCard.gateInfo.settingPlaceholder')" v-model="url")
-            .btn(@click="save") {{$t('tokenCard.tokenInfo.saveGate')}}
+            viteInput.gate-url(:placeholder="$t('tokenCard.gateInfo.settingPlaceholder')" :disabled="!canEditGateURL" v-model="url")
+            .btn( @click="save" v-if="canEditGateURL") {{$t('tokenCard.tokenInfo.saveGate')}}
     .tab-content.no-padding(v-if="tabName==='deposit'")
         Tb(:type="'deposit'" :token="token" :key="`deposit_${token.tokenId}`")
     .tab-content.no-padding(v-if="tabName==='withdraw'")
