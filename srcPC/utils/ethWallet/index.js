@@ -295,3 +295,17 @@ function sendEthTx(ethTxHash) {
         });
     });
 }
+
+
+// all of the addresses is ethAddress
+
+// function getErc20TokenBalance() {
+//     contract.methods.balanceOf(contractAddr).call({ from: address }, (error, result) => {
+//         if (error) {
+//             return rej(error);
+//         }
+//         return res(result);
+//     });
+// }
+
+// this.sendContractTx({ toAddress, value, gwei }) value is the minAmount
