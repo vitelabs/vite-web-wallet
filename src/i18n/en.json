@@ -194,7 +194,7 @@
         "config": "General",
         "currency": "Default Currency",
         "secure": "Security",
-        "gate": "Custom c",
+        "gate": "Custom Gateway",
         "triggerGate": ["Close", "Open"],
         "gateHelp": "You can customize your gateway configuration when activating this feature. Currently this feature is mainly for developers.",
         "lang": "Language",
