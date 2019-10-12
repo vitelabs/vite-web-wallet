@@ -1,8 +1,8 @@
 <template>
     <div class="trade-dividend-wrapper">
-        <section-title :title="$t('tradeDividend.poolTitle')"></section-title>
+        <section-title class="top-title" :title="$t('tradeDividend.poolTitle')"></section-title>
         <pool></pool>
-        <section-title :title="$t('tradeDividend.listTitle')"></section-title>
+        <section-title :title="$t('tradeDividend.listTitle')" :help="$t('tradeDividend.help')"></section-title>
         <div class="content">
             <div class="my-divident">
                 <div class="item">
@@ -59,13 +59,13 @@
 
 <script>
 import pool from './pool.vue';
-import sectionTitle from '../components/sectionTitle';
 import walletTable from 'components/table/index.vue';
 import pagination from 'components/pagination.vue';
 import { dividend } from 'services/trade';
 import date from 'utils/date';
 import bigNumber from 'utils/bigNumber';
 import openUrl from 'utils/openUrl';
+import sectionTitle from './sectionTitle';
 
 export default {
     components: { sectionTitle, walletTable, pagination, pool },
@@ -256,6 +256,9 @@ export default {
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
+    .top-title {
+        padding-top: 4px;
+    }
 }
 
 .content {

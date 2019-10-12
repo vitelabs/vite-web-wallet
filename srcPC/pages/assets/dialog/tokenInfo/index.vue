@@ -73,10 +73,13 @@ block originContent
         .content__item(v-if="!token.gateInfo.url")
             .label {{$t("tokenCard.gateInfo.nodeDesc")}}:
             div {{ $t("tokenCard.gateInfo.nodeDescStr") }}
-        .content__item.center
+        .content__item.center(v-if="token.type==='OFFICAL_GATE'")
             .label {{$t("tokenCard.gateInfo.setting")}}:
-            viteInput.gate-url(:placeholder="$t('tokenCard.gateInfo.settingPlaceholder')" :disabled="token.type==='OFFICAL_GATE'" v-model="url")
-            .btn( @click="save" v-if="token.type!=='OFFICAL_GATE'") {{$t('tokenCard.tokenInfo.saveGate')}}
+            viteInput.gate-url(:placeholder="$t('tokenCard.gateInfo.settingPlaceholder')" :disabled="true" v-model="url")
+        .content__item.center(v-if="token.type!=='OFFICAL_GATE' && (url || canEditGateURL)")
+            .label {{$t("tokenCard.gateInfo.setting")}}:
+            viteInput.gate-url(:placeholder="$t('tokenCard.gateInfo.settingPlaceholder')" :disabled="!canEditGateURL" v-model="url")
+            .btn( @click="save" v-if="canEditGateURL") {{$t('tokenCard.tokenInfo.saveGate')}}
     .tab-content.no-padding(v-if="tabName==='deposit'")
         Tb(:type="'deposit'" :token="token" :key="`deposit_${token.tokenId}`")
     .tab-content.no-padding(v-if="tabName==='withdraw'")
@@ -117,6 +120,9 @@ export default {
         };
     },
     computed: {
+        canEditGateURL() {
+            return !!this.$store.state.env.gate;
+        },
         gateName() {
             if (this.token.type === 'NATIVE') return '';
             if (this.token.gateInfo.gateway) return this.token.gateInfo.gateway;

@@ -194,6 +194,9 @@
         "config": "常规设置",
         "currency": "计价币种",
         "secure": "安全设置",
+        "gate": "自定义网关",
+        "triggerGate": ["关闭", "开启"],
+        "gateHelp": "开启自定义网关，可以在钱包页面自己设置网关，设置后可以进行跨链转入代币。目前主要针对开发者使用。",
         "lang": "语言",
         "block": "当前区块高度",
         "version": "版本",
@@ -269,7 +272,8 @@
             "availableExAmount":"交易所可用余额",
             "balanceTips": "点击转账，可以从Vite 钱包给其他地址转币",
             "gateTips": "点击跨链转入，可以将其他币种跨链映射到Vite网络，转入Vite钱包；点击跨链转出仍可以将资产转至其他平台。*转入转出过程可能会产生手续费，且有金额限制",
-            "availableExAmountTips": "点击充值至交易所，将钱包中的资产划转至交易所；点击提现至钱包，将交易所资产划转至钱包。以上划转过程不需要手续费"
+            "availableExAmountTips": "点击充值至交易所，将钱包中的资产划转至交易所；点击提现至钱包，将交易所资产划转至钱包。以上划转过程不需要手续费",
+            "unreceivedTips": "登录状态下可自动接收在途金额"
         },
         "actionType": {
             "SEND": "转账",
@@ -788,7 +792,8 @@
             "title": "交易对信息",
             "tokenTab": "代币详情",
             "operatorTab": "运营商信息"
-        }
+        },
+        "depthMiningPrice": "此线上方为有效挂单区域"
     },
     "trade": {
         "more":"更多",
@@ -1029,7 +1034,8 @@
                 "委托数量",
                 "已成交",
                 "成交率",
-                "成交均价"
+                "成交均价",
+                "金额"
             ],
             "rowMap": {
                 "cancel": "撤销"
@@ -1071,9 +1077,9 @@
                 "委托价格",
                 "委托数量",
                 "已成交",
-                "成交率",
                 "成交均价",
                 "手续费",
+                "成交额",
                 "状态"
             ],
             "rowMap": {
@@ -1153,7 +1159,8 @@
         "price": "分红总估值",
         "hintTitle": "重要通知",
         "comingHint": "VX挖矿分红功能即将开启，敬请期待。系统每天自动将分红池1%的VITE、BTC、ETH、USDT等分红给VX持有者。初始分红池的资金为0。分红池中包含交易所基础手续费，5000VITE上币费以及生成邀请码的1000VITE。持有VX的数量大于等于10VX可持续获得手续费分红。",
-        "more": "了解更多VX分红规则"
+        "more": "了解更多VX分红规则",
+        "help": "持有VX参与分红需满足条件：1. VX在交易所账户中 2. 余额不少于10VX"
     },
     "tradeOperator": {
         "title": "运营商中心",
@@ -1228,8 +1235,7 @@
         "quantity": "24H",
         "buyTitle": "买入",
         "sellTitle": "卖出",
-        "buyPrice": "买价({token})",
-        "sellPrice": "卖价({token})",
+        "price": "价格({token})",
         "buy": {
             "price": "买入价",
             "quantity": "买入量"
@@ -1268,5 +1274,14 @@
         "assets": "资产",
         "mining": "挖矿",
         "order": "订单"
+    },
+    "mobileOrder": {
+        "filterDate": "日期",
+        "filterToken": "币种",
+        "all": "全部",
+        "3month": "近3个月",
+        "1month": "近1个月",
+        "1week": "近1周",
+        "1day": "近1天"
     }
 }

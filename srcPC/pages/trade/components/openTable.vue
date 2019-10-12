@@ -21,6 +21,7 @@
                 <div class="__tb_cell">{{ v.executedQuantity + ' ' + getOriginSymbol(v.tradeTokenSymbol) }}</div>
                 <div class="__tb_cell">{{ `${(v.executedPercent*100).toFixed(2)}%` }}</div>
                 <div class="__tb_cell">{{ v.executedAvgPrice + ' ' + getOriginSymbol(v.quoteTokenSymbol) }}</div>
+                <div class="__tb_cell">{{ v.amount + ' ' + getOriginSymbol(v.quoteTokenSymbol) }}</div>
                 <div @click="_cancel(v)" class="__tb_cell click-able">
                     {{ $t("tradeOpenOrders.table.rowMap.cancel") }}
                 </div>
@@ -129,7 +130,7 @@ export default {
 @import '~assets/scss/table.scss';
 
 .__tb {
-    height: 100%;
+    flex: 1;
     box-shadow: none;
     .__tb_content_row {
         transition: all 0.4s ease-in-out;
@@ -154,19 +155,16 @@ export default {
 }
 
 @include rowWith {
-    width: 8%;
+    width: 10%;
 
-    &:nth-child(2) {
-        width: 160px;
-    }
     &:first-child {
-        width: 130px;
+        width: 150px;
     }
-    &:nth-child(4),
-    &:nth-child(5),
-    &:nth-child(6),
-    &:nth-child(8) {
-        width: 15%;
+    &:nth-child(2) {
+        width: 150px;
+    }
+    &:nth-child(3) {
+        width: 40px;
     }
 }
 

@@ -294,3 +294,10 @@ export function getOrderMiningDetail({
         params: { address, offset, limit }
     });
 }
+
+export function getMiningSetting() {
+    return ViteXAPI({
+        method: 'GET',
+        path: 'mining/setting'
+    });
+}

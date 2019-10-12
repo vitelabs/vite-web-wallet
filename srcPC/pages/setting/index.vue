@@ -17,6 +17,7 @@
                     <auto-logout v-if="!!isLogin&&!currHDAcc.isBifrost"></auto-logout>
                     <lang></lang>
                     <currency></currency>
+                    <gate></gate>
                 </div>
 
                 <div class="area">
@@ -34,6 +35,7 @@ import secTitle from 'pcComponents/secTitle';
 import holdPwd from 'pcComponents/password/holdPwd.vue';
 import netInfo from './netInfo';
 import lang from './lang.vue';
+import gate from './gate.vue';
 import autoLogout from './autoLogout.vue';
 import accList from './accList.vue';
 import mnemonic from './mnemonic.vue';
@@ -50,7 +52,8 @@ export default {
         holdPwd,
         accList,
         mnemonic,
-        currency
+        currency,
+        gate
     },
     data() {
         return { isTestEnv: process.env.NODE_ENV === 'dev' || process.env.NODE_ENV === 'test' };
