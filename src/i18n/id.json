@@ -194,6 +194,12 @@
         "config": "Umum",
         "currency": "Mata Uang Default",
         "secure": "Keamanan",
+        "gate": "Custom Gateway",
+        "triggerGate": [
+            "Tutup",
+            "Buka"
+        ],
+        "gateHelp": "You can customize your gateway configuration when activating this feature. Currently this feature is mainly for developers.",
         "lang": "Bahasa",
         "block": "Current height",
         "version": "Versi",
@@ -262,7 +268,8 @@
             "availableExAmount": "Saldo Tersedia Pertukaran",
             "balanceTips": "You can transfer your assets to other addresses via clicking 'Send' button",
             "gateTips": "In this cross-chain section, you can map other tokens into Vite network. Click 'Receive' button to deposit assets to your Vite Wallet. Click 'Send' button to transfer your assets to other platforms. * Cross-chain receive/send process may charge fees, it also has its transfer limit.",
-            "availableExAmountTips": "You can transfer your assets from Vite Wallet to ViteX Exchange via clicking 'Deposit' button. Click 'Withdraw' button to transfer assets from ViteX Exchange to Vite Wallet. No transaction fees caused during these processes."
+            "availableExAmountTips": "You can transfer your assets from Vite Wallet to ViteX Exchange via clicking 'Deposit' button. Click 'Withdraw' button to transfer assets from ViteX Exchange to Vite Wallet. No transaction fees caused during these processes.",
+            "unreceivedTips": "Unreceived amount will be received automatically when logged in"
         },
         "actionType": {
             "SEND": "Kirim",
@@ -796,7 +803,8 @@
             "title": "Trading Pair Details",
             "tokenTab": "Token Details",
             "operatorTab": "Detail Operator"
-        }
+        },
+        "depthMiningPrice": "Above this line is valid mining area"
     },
     "trade": {
         "more": "More",
@@ -1059,7 +1067,8 @@
                 "Jumlah",
                 "Terisi",
                 "Terisi%",
-                "Rata-rata"
+                "Rata-rata",
+                "Total"
             ],
             "rowMap": {
                 "cancel": "Batal"
@@ -1101,9 +1110,9 @@
                 "Harga",
                 "Jumlah",
                 "Terisi",
-                "Terisi%",
                 "Rata-rata",
                 "Biaya",
+                "Total",
                 "Status"
             ],
             "rowMap": {
@@ -1183,7 +1192,8 @@
         "price": "Total Nilai Taksiran",
         "hintTitle": "Pemberitahuan Penting",
         "comingHint": "Fungsi penambangan dan dividen VX akan segera hadir, tunggu saja. Sistem akan mendistribusikan 1% dari BTC, ETH, VITE, USDT dari total kumpulan ke semua pengguna VX sebanding dengan jumlah VX yang mereka pegang. Kumpulan dividen awal akan mulai dari 0 dan akan tumbuh sesuai dengan jumlah biaya yang dikumpulkan oleh ViteX. Trader harus memiliki minimal 10 VX untuk dapat menerima dividen dari kumpulan dividen bersama yang terdiri dari transaksi dasar, daftar, dan biaya pembuatan kode rujukan. ",
-        "more": "Pelajari lebih lanjut tentang aturan dividen VX"
+        "more": "Pelajari lebih lanjut tentang aturan dividen VX",
+        "help": "VX dividend reward rules: 1. VX must be held on the ViteX exchange account. 2. You must hold a minimum of 10 VX."
     },
     "tradeOperator": {
         "title": "Operator",
@@ -1260,8 +1270,7 @@
         "quantity": "24H Vol",
         "buyTitle": "Beli",
         "sellTitle": "Jual",
-        "buyPrice": "Buy Price ({token})",
-        "sellPrice": "Sell Price ({token})",
+        "price": "Price ({token})",
         "buy": {
             "price": "Harga",
             "quantity": "Jumlah"
@@ -1300,5 +1309,14 @@
         "assets": "Aset",
         "mining": "Pertambangan",
         "order": "Order"
+    },
+    "mobileOrder": {
+        "filterDate": "Tanggal",
+        "filterToken": "Tipe",
+        "all": "Semua",
+        "3month": "3 months",
+        "1month": "1 month",
+        "1week": "1 week",
+        "1day": "1 day"
     }
 }
