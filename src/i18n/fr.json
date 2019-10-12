@@ -194,6 +194,12 @@
         "config": "General",
         "currency": "Default Currency",
         "secure": "Security",
+        "gate": "Custom Gateway",
+        "triggerGate": [
+            "Close",
+            "Open"
+        ],
+        "gateHelp": "You can customize your gateway configuration when activating this feature. Currently this feature is mainly for developers.",
         "lang": "Language",
         "block": "Current Height",
         "version": "Version",
@@ -262,7 +268,8 @@
             "availableExAmount": "Exchange Available Balance",
             "balanceTips": "You can transfer your assets to other addresses via clicking 'Send' button",
             "gateTips": "In this cross-chain section, you can map other tokens into Vite network. Click 'Receive' button to deposit assets to your Vite Wallet. Click 'Send' button to transfer your assets to other platforms. * Cross-chain receive/send process may charge fees, it also has its transfer limit.",
-            "availableExAmountTips": "You can transfer your assets from Vite Wallet to ViteX Exchange via clicking 'Deposit' button. Click 'Withdraw' button to transfer assets from ViteX Exchange to Vite Wallet. No transaction fees caused during these processes."
+            "availableExAmountTips": "You can transfer your assets from Vite Wallet to ViteX Exchange via clicking 'Deposit' button. Click 'Withdraw' button to transfer assets from ViteX Exchange to Vite Wallet. No transaction fees caused during these processes.",
+            "unreceivedTips": "Unreceived amount will be received automatically when logged in"
         },
         "actionType": {
             "SEND": "Send",
@@ -796,7 +803,8 @@
             "title": "Trading Pair Details",
             "tokenTab": "Token Details",
             "operatorTab": "Operator Details"
-        }
+        },
+        "depthMiningPrice": "Above this line is valid mining area"
     },
     "trade": {
         "more": "More",
@@ -1059,7 +1067,8 @@
                 "Amount",
                 "Filled",
                 "Filled%",
-                "Average"
+                "Average",
+                "Total"
             ],
             "rowMap": {
                 "cancel": "Cancel"
@@ -1101,9 +1110,9 @@
                 "Price",
                 "Amount",
                 "Filled",
-                "Filled%",
                 "Average",
                 "Fees",
+                "Total",
                 "Status"
             ],
             "rowMap": {
@@ -1183,7 +1192,8 @@
         "price": "Total Estimated Value",
         "hintTitle": "Important Notice",
         "comingHint": "VX mining and dividend functions are coming soon, stay tuned. The system will distribute 1% of BTC, ETH, VITE, USDT of the total pool to all VX users proportional to the amount of VX they hold. The initial dividend pool will start at 0 and will grow according to the amount of fees collected by ViteX. Traders must have a minimum of 10 VX in order to receive dividends from a shared dividend pool comprised of base transaction, listing and referral code generating fees. ",
-        "more": "Learn more about VX dividend rules"
+        "more": "Learn more about VX dividend rules",
+        "help": "VX dividend reward rules: 1. VX must be held on the ViteX exchange account. 2. You must hold a minimum of 10 VX."
     },
     "tradeOperator": {
         "title": "Operator",
@@ -1260,8 +1270,7 @@
         "quantity": "24H Vol",
         "buyTitle": "Buy",
         "sellTitle": "Sell",
-        "buyPrice": "Buy Price ({token})",
-        "sellPrice": "Sell Price ({token})",
+        "price": "Price ({token})",
         "buy": {
             "price": "Price",
             "quantity": "Amount"
@@ -1300,5 +1309,14 @@
         "assets": "Assets",
         "mining": "Mining",
         "order": "Order"
+    },
+    "mobileOrder": {
+        "filterDate": "Date",
+        "filterToken": "Type",
+        "all": "All",
+        "3month": "3 months",
+        "1month": "1 month",
+        "1week": "1 week",
+        "1day": "1 day"
     }
 }
