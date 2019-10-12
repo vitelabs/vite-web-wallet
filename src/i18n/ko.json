@@ -194,6 +194,12 @@
         "config": "일반",
         "currency": "기본 통화",
         "secure": "보안",
+        "gate": "Custom Gateway",
+        "triggerGate": [
+            "닫기",
+            "Open"
+        ],
+        "gateHelp": "You can customize your gateway configuration when activating this feature. Currently this feature is mainly for developers.",
         "lang": "언어",
         "block": "현재 높이",
         "version": "버전",
@@ -262,7 +268,8 @@
             "availableExAmount": "거래소 거래 가능 자산",
             "balanceTips": "You can transfer your assets to other addresses via clicking 'Send' button",
             "gateTips": "In this cross-chain section, you can map other tokens into Vite network. Click 'Receive' button to deposit assets to your Vite Wallet. Click 'Send' button to transfer your assets to other platforms. * Cross-chain receive/send process may charge fees, it also has its transfer limit.",
-            "availableExAmountTips": "You can transfer your assets from Vite Wallet to ViteX Exchange via clicking 'Deposit' button. Click 'Withdraw' button to transfer assets from ViteX Exchange to Vite Wallet. No transaction fees caused during these processes."
+            "availableExAmountTips": "You can transfer your assets from Vite Wallet to ViteX Exchange via clicking 'Deposit' button. Click 'Withdraw' button to transfer assets from ViteX Exchange to Vite Wallet. No transaction fees caused during these processes.",
+            "unreceivedTips": "Unreceived amount will be received automatically when logged in"
         },
         "actionType": {
             "SEND": "전송",
@@ -796,7 +803,8 @@
             "title": "Trading Pair Details",
             "tokenTab": "Token Details",
             "operatorTab": "오퍼레이터 세부사항"
-        }
+        },
+        "depthMiningPrice": "Above this line is valid mining area"
     },
     "trade": {
         "more": "More",
@@ -1059,7 +1067,8 @@
                 "수량",
                 "완료됨",
                 "완료됨%",
-                "평균"
+                "평균",
+                "총합계"
             ],
             "rowMap": {
                 "cancel": "취소"
@@ -1101,9 +1110,9 @@
                 "가격",
                 "수량",
                 "완료됨",
-                "완료됨%",
                 "평균",
                 "수수료",
+                "총합계",
                 "상태"
             ],
             "rowMap": {
@@ -1183,7 +1192,8 @@
         "price": "총 예상 가치",
         "hintTitle": "중요 공지",
         "comingHint": "VX 채굴 및 배당 기능은 곧 제공됩니다. 이 시스템은 보유한 VX의 양에 비례하여 모든 VX 사용자에게 전체 풀의 BTC, ETH, VITE, USDT의 1 %를 분배합니다. 초기 배당금은 0에서 시작하며 ViteX가 징수한 수수료 금액에 따라 증가합니다. 거래는 기본 거래, 상장 및 추천 코드 생성 수수료로 구성된 공유 배당풀에서 배당을 받으려면 최소 10 VX가 있어야합니다. ",
-        "more": "VX 배당 규칙 자세히 알기"
+        "more": "VX 배당 규칙 자세히 알기",
+        "help": "VX dividend reward rules: 1. VX must be held on the ViteX exchange account. 2. You must hold a minimum of 10 VX."
     },
     "tradeOperator": {
         "title": "오퍼레이터",
@@ -1260,8 +1270,7 @@
         "quantity": "24H Vol",
         "buyTitle": "매수",
         "sellTitle": "매도",
-        "buyPrice": "Buy Price ({token})",
-        "sellPrice": "Sell Price ({token})",
+        "price": "Price ({token})",
         "buy": {
             "price": "가격",
             "quantity": "수량"
@@ -1300,5 +1309,14 @@
         "assets": "자산",
         "mining": "채굴",
         "order": "Order"
+    },
+    "mobileOrder": {
+        "filterDate": "날짜",
+        "filterToken": "유형",
+        "all": "전체",
+        "3month": "3 months",
+        "1month": "1 month",
+        "1week": "1 week",
+        "1day": "1 day"
     }
 }
