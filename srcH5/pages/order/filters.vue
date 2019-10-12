@@ -205,6 +205,7 @@ export default {
 
 .filter-root {
     @include font-normal();
+    z-index: 1;
     .filter-head {
         background: #fff;
         padding: 0px 24px 14px;
