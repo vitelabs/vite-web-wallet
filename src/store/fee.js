@@ -125,10 +125,6 @@ const getters = {
             return getters.exMakerFee;
         }
         return getters.exTakerFee;
-    },
-    exIsMining(state) {
-        const marketInfo = state.marketInfo;
-        return marketInfo && marketInfo.allowMine;
     }
 };
 

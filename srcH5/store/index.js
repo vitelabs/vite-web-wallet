@@ -49,5 +49,6 @@ store.registerModule('account', account);
 store.commit('exSetDepthListLimit', 20);
 store.dispatch('fetchDefaultTokenList');
 store.dispatch('startLoopExchangeRate');
+store.dispatch('getMiningSettingInfo');
 
 export default store;

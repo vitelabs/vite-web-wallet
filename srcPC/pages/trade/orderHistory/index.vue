@@ -10,7 +10,7 @@
 <script>
 import { order } from 'services/trade';
 import historyTable from '../components/historyTable.vue';
-import Filters from './filters';
+import Filters from '../components/filters';
 
 const pageSize = 35;
 
@@ -76,7 +76,8 @@ export default {
     .tb {
         width: 100%;
         flex: 1;
-        display: flex;
+        overflow: auto;
+        box-shadow: 0px 2px 10px 1px rgba(176,192,237,0.42);
     }
 }
 </style>

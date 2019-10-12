@@ -10,12 +10,11 @@ import id from 'i18n/id';
 // import ja from 'i18n/ja';
 // import ru from 'i18n/ru';
 
-
-let appLocale = window.viteWalletI18n ? window.viteWalletI18n.locale : '';
-if (appLocale) {
-    appLocale = appLocale.indexOf('zh') === 0 ? 'zh' : 'en';
-}
-const locale = localStorage.getItem('lang') || appLocale || getDefaultLang() || 'en';
+// let appLocale = window.viteWalletI18n ? window.viteWalletI18n.locale : '';
+// if (appLocale) {
+//     appLocale = appLocale.indexOf('zh') === 0 ? 'zh' : 'en';
+// }
+const locale = localStorage.getItem('lang') || getDefaultLang() || 'en';
 
 // De,
 // fr,
@@ -40,7 +39,13 @@ function getDefaultLang() {
         let lang = type === 'Netscape' ? navigator.language : navigator.userLanguage;
         lang = lang.substr(0, 2);
 
-        return lang === 'zh' ? 'zh' : 'en';
+        // navigator.languages
+        const languages = [ 'en', 'zh', 'id' ];
+        const nameMap = { 'id': 'id_ID' };
+        if (languages.indexOf(lang) !== -1) {
+            return nameMap[lang] || lang;
+        }
+        return 'en';
     } catch (err) {
         console.warn(err);
         return 'en';

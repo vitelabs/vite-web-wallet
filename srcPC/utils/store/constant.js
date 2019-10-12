@@ -12,9 +12,10 @@ export const AutoLogoutKey = 'autoLogoutTime';
 export const HoldPwdKey = 'isHoldPWD';
 export const CurrencyKey = 'currency';
 export const LangKey = 'lang';
+export const GateKey = 'gate';
 export const ShowHoldPWDNumKey = 'showHoldPWDNum';
 
-export const SettingKeys = [ FirstKey, LangKey, AutoLogoutKey, CurrencyKey, HoldPwdKey, ShowHoldPWDNumKey ];
+export const SettingKeys = [ FirstKey, LangKey, AutoLogoutKey, CurrencyKey, HoldPwdKey, ShowHoldPWDNumKey, GateKey ];
 export const TradeKeys = [ 'favoriteTickers', 'beginnerGuide' ];
 
 export const AccBaseKeys = [ 'name', 'addrNum', 'idx', 'addr' ];

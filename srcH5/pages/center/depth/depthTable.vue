@@ -1,12 +1,21 @@
 <template>
     <div class="depth-table-wrapper">
-        <div class="__center-tb-row" :class="dataType" @click="clickRow(item, i)"
-             v-for="(item, i) in depthData" :key="i">
-            <span v-if="dataType === 'sell'" class="quantity">{{ formatNum(item.quantity, 'ftoken') }}</span>
-            <span class="price">{{ formatNum(item.price, 'ttoken') }}
+        <div class="__center-tb-row" @click="clickRow(item, i)"
+             :class="{
+                 'buy': dataType === 'buy',
+                 'sell': dataType === 'sell',
+                 'in_mining': buyMiningSeparator >= 0 && i <= buyMiningSeparator,
+                 'border_b': buyMiningSeparator >= 0 && i === buyMiningSeparator
+        }" v-for="(item, i) in depthData" :key="i">
+            <span v-if="dataType === 'sell'" class="price">
+                {{ formatNum(item.price, 'ttoken') }}
                 <span class="owner" v-show="isInOpenOrders(item.price)"></span>
             </span>
-            <span v-if="dataType === 'buy'" class="quantity">{{ formatNum(item.quantity, 'ftoken') }}</span>
+            <span class="quantity">{{ formatNum(item.quantity, 'ftoken') }}</span>
+            <span v-if="dataType === 'buy'" class="price">
+                <span class="owner" v-show="isInOpenOrders(item.price)"></span>
+                {{ formatNum(item.price, 'ttoken') }}
+            </span>
             <span class="percent-wrapper" :class="dataType" :style="{ 'width': getWidth(item) + '%' }"></span>
         </div>
     </div>
@@ -30,6 +39,12 @@ export default {
         this.$store.dispatch('exStopDepthTimer');
     },
     computed: {
+        buyMiningSeparator() {
+            if (this.dataType !== 'buy') {
+                return -1;
+            }
+            return this.$store.getters.exDepthBuyMiningSeparator;
+        },
         ttoken() {
             return this.$store.state.exchangeTokens.ttoken;
         },
@@ -132,6 +147,14 @@ export default {
     color: rgba(94,104,117,1);
     justify-content: space-between;
     white-space: nowrap;
+    box-sizing: border-box;
+    &.in_mining {
+        background: rgba(75,116,255,0.05);
+    }
+    &.border_b {
+        position: relative;
+        border-bottom: 1px dashed rgba(189,196,208,1);
+    }
     .price {
         max-width: 50%;
     }

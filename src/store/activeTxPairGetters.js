@@ -75,6 +75,44 @@ const getters = {
         }
 
         return getMinDecimals(tradeTokenDetail.tokenDecimals, activeTxPair.quantityPrecision);
+    },
+    activeTxPairSellOnePrice(state, getters, rootState) {
+        const sell = rootState.exchangeDepth.sell;
+        if (!sell || !sell.length) {
+            return '';
+        }
+        return sell[sell.length - 1].price;
+    },
+    activeTxPairIsMining(state, getters, rootState) {
+        const activeTxPair = rootState.exchangeActiveTxPair.activeTxPair;
+        if (!activeTxPair) {
+            return false;
+        }
+
+        const miningSymbols = rootState.exchangeMine.miningSymbols;
+        return miningSymbols.indexOf(activeTxPair.symbol) !== -1;
+    },
+    activeTxPairMiningPrice(state, getters, rootState) {
+        // No activeTxPair
+        const activeTxPair = rootState.exchangeActiveTxPair.activeTxPair;
+        if (!activeTxPair) {
+            return '';
+        }
+
+        // No orderMining
+        const orderMiningSymbols = rootState.exchangeMine.orderMiningSymbols;
+        if (orderMiningSymbols.indexOf(activeTxPair.symbol) === -1) {
+            return '';
+        }
+
+        // No sellOnePrice
+        const sellOne = getters.activeTxPairSellOnePrice;
+        if (!sellOne) {
+            return '';
+        }
+
+        const price = BigNumber.multi(sellOne, 0.9);
+        return BigNumber.onlyFormat(price);
     }
 };
 
