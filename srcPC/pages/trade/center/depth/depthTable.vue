@@ -195,6 +195,7 @@ export default {
 }
 .show-all {
     flex: 1;
+    min-height: 0;
     height: inherit;
     &.sell {
         overflow: auto;
