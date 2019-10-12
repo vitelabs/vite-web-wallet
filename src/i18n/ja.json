@@ -194,6 +194,12 @@
         "config": "基本設定",
         "currency": "デフォルト通貨",
         "secure": "セキュリティ",
+        "gate": "Custom Gateway",
+        "triggerGate": [
+            "閉じる",
+            "公開"
+        ],
+        "gateHelp": "You can customize your gateway configuration when activating this feature. Currently this feature is mainly for developers.",
         "lang": "言語",
         "block": "現在のブロックハイト",
         "version": "バージョン",
@@ -262,7 +268,8 @@
             "availableExAmount": "取引可能残高",
             "balanceTips": "You can transfer your assets to other addresses via clicking 'Send' button",
             "gateTips": "In this cross-chain section, you can map other tokens into Vite network. Click 'Receive' button to deposit assets to your Vite Wallet. Click 'Send' button to transfer your assets to other platforms. * Cross-chain receive/send process may charge fees, it also has its transfer limit.",
-            "availableExAmountTips": "You can transfer your assets from Vite Wallet to ViteX Exchange via clicking 'Deposit' button. Click 'Withdraw' button to transfer assets from ViteX Exchange to Vite Wallet. No transaction fees caused during these processes."
+            "availableExAmountTips": "You can transfer your assets from Vite Wallet to ViteX Exchange via clicking 'Deposit' button. Click 'Withdraw' button to transfer assets from ViteX Exchange to Vite Wallet. No transaction fees caused during these processes.",
+            "unreceivedTips": "Unreceived amount will be received automatically when logged in"
         },
         "actionType": {
             "SEND": "送信",
@@ -796,7 +803,8 @@
             "title": "Trading Pair Details",
             "tokenTab": "Token Details",
             "operatorTab": "オペレータ詳細"
-        }
+        },
+        "depthMiningPrice": "Above this line is valid mining area"
     },
     "trade": {
         "more": "More",
@@ -1059,7 +1067,8 @@
                 "量",
                 "Filled",
                 "Filled%",
-                "平均"
+                "平均",
+                "合計"
             ],
             "rowMap": {
                 "cancel": "キャンセル"
@@ -1101,9 +1110,9 @@
                 "価格",
                 "量",
                 "Filled",
-                "Filled%",
                 "平均",
                 "手数料",
+                "合計",
                 "ステータス"
             ],
             "rowMap": {
@@ -1183,7 +1192,8 @@
         "price": "合計推定値",
         "hintTitle": "重要なお知らせ",
         "comingHint": "VXマイニングおよび配当詳細は近日公開予定です。ご期待ください。 システムは、保有するVXの量に比例して、BTC、ETH、VITE、USDTの合計プールの1％をすべてのVXユーザーに配布します。 最初の配当プールは0から始まり、ViteX徴収手数料量に応じて増加します。 トレーダーは、トレード、リスティング、リファラルコード、マーケットメイキングによりVXを獲得できますが、共有配当プールから配当を受け取るためには最低10 VXが必要です。",
-        "more": "VX配当ルールの詳細"
+        "more": "VX配当ルールの詳細",
+        "help": "VX dividend reward rules: 1. VX must be held on the ViteX exchange account. 2. You must hold a minimum of 10 VX."
     },
     "tradeOperator": {
         "title": "オペレーター",
@@ -1260,8 +1270,7 @@
         "quantity": "24H Vol",
         "buyTitle": "購入",
         "sellTitle": "売却",
-        "buyPrice": "Buy Price ({token})",
-        "sellPrice": "Sell Price ({token})",
+        "price": "Price ({token})",
         "buy": {
             "price": "価格",
             "quantity": "量"
@@ -1300,5 +1309,14 @@
         "assets": "資産",
         "mining": "マイニング",
         "order": "Order"
+    },
+    "mobileOrder": {
+        "filterDate": "日付",
+        "filterToken": "タイプ",
+        "all": "すべて",
+        "3month": "3 months",
+        "1month": "1 month",
+        "1week": "1 week",
+        "1day": "1 day"
     }
 }
