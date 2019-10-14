@@ -92,12 +92,6 @@ export default {
         };
     },
     watch: {
-        isOperatorTxPairLoading() {
-            return this.$store.state.exchangeTokens.isLoading;
-        },
-        operatorInfo() {
-            return this.$store.state.exchangeTokens.operator;
-        },
         activeTxPair: function (val, old) {
             if (old && old.symbol === this.activeTxPair.symbol) {
                 return;
@@ -184,6 +178,12 @@ export default {
         }
     },
     computed: {
+        isOperatorTxPairLoading() {
+            return this.$store.state.exchangeTokens.isLoading;
+        },
+        operatorInfo() {
+            return this.$store.state.exchangeTokens.operator;
+        },
         isShowMining() {
             return this.orderType === 'buy' && this.focusInput === 'price' && !this.priceErr && this.miningPrice;
         },
