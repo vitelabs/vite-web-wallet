@@ -21,11 +21,9 @@ const mutations = {
         state.buy = list;
     },
     exSetDepthSell(state, depthData) {
-        let list = depthData || [];
+        const list = depthData || [];
         state.rawSell = [].concat(list).splice(0, state.listLimit);
-
-        list.sort((a, b) => bigNumber.compared(b.price, a.price));
-        list = list.splice(0, state.listLimit);
+        list.sort((a, b) => b.price - a.price);
         state.sell = list;
     },
     exSetDepthLoading(state, isLoading) {
