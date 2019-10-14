@@ -46,6 +46,7 @@ export default {
     .tab {
         box-sizing: border-box;
         height: 100%;
+        line-height: 35px;
         &.active {
             color: rgba(62, 74, 89, 1);
             border-bottom: 3px solid $blue;
