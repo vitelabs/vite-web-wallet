@@ -79,7 +79,6 @@ export default {
         sellList() {
             const sellList = [].concat(this.$store.state.exchangeDepth.sell || []);
             const list = sellList.sort((a, b) => a.price - b.price);
-
             return list;
         },
         sellQuantityList() {
