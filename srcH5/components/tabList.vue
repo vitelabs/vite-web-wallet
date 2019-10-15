@@ -38,15 +38,13 @@ export default {
     font-size: 13px;
     @include font-bold();
     color: rgba(62,74,89,0.7);
-    line-height: 35px;
     border-bottom: 1px solid rgba(211,223,239,1);
     flex-direction: row;
     justify-content: space-between;
 
     .tab {
         box-sizing: border-box;
-        height: 100%;
-        line-height: 35px;
+        padding: 6px 0;
         &.active {
             color: rgba(62, 74, 89, 1);
             border-bottom: 3px solid $blue;
