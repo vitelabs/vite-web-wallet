@@ -112,12 +112,12 @@ const getters = {
         }
 
         const miningSymbols = {
-            'ETH-000_BTC-000': 0.5,
-            'GRIN-000_BTC-000': 0.8,
-            'GRIN-000_ETH-000': 0.8,
-            'GRIN-000_VITE': 0.8,
-            'BTC-000_USDT-000': 0.5,
-            'ETH-000_USDT-000': 0.5
+            'ETH-000_BTC-000': 0.95,
+            'GRIN-000_BTC-000': 0.92,
+            'GRIN-000_ETH-000': 0.92,
+            'GRIN-000_VITE': 0.92,
+            'BTC-000_USDT-000': 0.95,
+            'ETH-000_USDT-000': 0.95
         };
 
         const symbol = activeTxPair.symbol;
