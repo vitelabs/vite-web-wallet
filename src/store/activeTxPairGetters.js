@@ -122,7 +122,7 @@ const getters = {
 
         const symbol = activeTxPair.symbol;
         const price = BigNumber.multi(sellOne, miningSymbols[symbol] || 0.9);
-        return BigNumber.onlyFormat(price);
+        return BigNumber.normalFormatNum(price);
     }
 };
 
