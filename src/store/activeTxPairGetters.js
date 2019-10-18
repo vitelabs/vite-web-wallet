@@ -111,8 +111,24 @@ const getters = {
             return '';
         }
 
-        const price = BigNumber.multi(sellOne, 0.9);
-        return BigNumber.onlyFormat(price);
+        const miningSymbols = {
+            'ETH-000_BTC-000': 0.95,
+            'GRIN-000_BTC-000': 0.92,
+            'GRIN-000_ETH-000': 0.92,
+            'GRIN-000_VITE': 0.92,
+            'BTC-000_USDT-000': 0.95,
+            'ETH-000_USDT-000': 0.95
+        };
+
+        const symbol = activeTxPair.symbol;
+        const price = BigNumber.multi(sellOne, miningSymbols[symbol] || 0.9);
+        return BigNumber.normalFormatNum(price);
+    },
+    showActiveTxPairMiningPrice(state, getters) {
+        if (!getters.activeTxPairMiningPrice) {
+            return '';
+        }
+        return BigNumber.onlyFormat(getters.activeTxPairMiningPrice);
     }
 };
 
