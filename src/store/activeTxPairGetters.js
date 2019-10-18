@@ -111,7 +111,17 @@ const getters = {
             return '';
         }
 
-        const price = BigNumber.multi(sellOne, 0.9);
+        const miningSymbols = {
+            'ETH-000_BTC-000': 0.5,
+            'GRIN-000_BTC-000': 0.8,
+            'GRIN-000_ETH-000': 0.8,
+            'GRIN-000_VITE': 0.8,
+            'BTC-000_USDT-000': 0.5,
+            'ETH-000_USDT-000': 0.5
+        };
+
+        const symbol = activeTxPair.symbol;
+        const price = BigNumber.multi(sellOne, miningSymbols[symbol] || 0.9);
         return BigNumber.onlyFormat(price);
     }
 };
