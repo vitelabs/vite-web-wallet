@@ -6,6 +6,7 @@ import account from './account';
 
 import market from './market';
 import activeTxPair from './activeTxPair';
+import favoriteTxPair from './favoriteTxPair';
 import fee from 'store/fee';
 import limit from 'store/limit';
 import mine from 'store/mine.js';
@@ -33,7 +34,8 @@ const exchange = {
     exchangeFee: fee,
     exchangeLatestOrder: latestOrder,
     exchangeActiveTxPairGetters: activeTxPairGetters,
-    exchangeDexFundUnreceived: dexFundUnreceived
+    exchangeDexFundUnreceived: dexFundUnreceived,
+    favoriteTxPair
 };
 
 Vue.use(vuex);

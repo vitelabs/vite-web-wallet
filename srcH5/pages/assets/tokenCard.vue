@@ -16,19 +16,21 @@
             <span>{{ avaliableExBalance || 0 }}</span>
         </div>
         <div class="op_group">
-            <div class="op __pointer" @click="exCharge">{{ $t("tokenCard.actionType.EXCHARGE") }}</div>
-            <div class="op __pointer" @click="exWithdraw">{{ $t("tokenCard.actionType.EXWITHDRAW") }}</div>
+            <div class="op __pointer" @click="transfer">{{ $t('mobileAssets.transfer') }}</div>
+            <div class="op __pointer" @click="trade">{{ $t('mobileAssets.trade') }}</div>
         </div>
     </div>
 </template>
 
 <script>
-import { tokenInfoDialog, exWithdrawDialog, exChargeDialog } from './dialog';
+// , exWithdrawDialog, exChargeDialog
+import { tokenInfoDialog } from './dialog';
 import { tokenDetail } from 'services/trade';
 import bigNumber from 'utils/bigNumber';
 import statistics from 'utils/statistics';
 import { getExplorerLink } from 'utils/getLink';
 import { getTokenSymbolString } from 'utils/tokenParser';
+import { bridge } from 'h5Utils/bridge';
 
 export default {
     props: {
@@ -85,18 +87,29 @@ export default {
                 console.error(e);
             });
         },
-        exCharge() {
-            statistics.event(`H5${ this.$route.name }`, 'exchange-deposit', this.address || '');
-            exChargeDialog({ token: this.token }).catch(e => {
-                console.error(e);
+        transfer() {
+            statistics.event(`H5${ this.$route.name }`, 'transfer', this.address || '');
+            bridge['pri.transferAsset']().catch(err => {
+                console.warn(err);
+                this.$toast(this.$t('hint.operateFail'));
             });
         },
-        exWithdraw() {
-            statistics.event(`H5${ this.$route.name }`, 'exchange-withdraw', this.address || '');
-            exWithdrawDialog({ token: this.token }).catch(e => {
-                console.error(e);
-            });
+        trade() {
+
         },
+
+        // exCharge() {
+        //     statistics.event(`H5${ this.$route.name }`, 'exchange-deposit', this.address || '');
+        //     exChargeDialog({ token: this.token }).catch(e => {
+        //         console.error(e);
+        //     });
+        // },
+        // exWithdraw() {
+        //     statistics.event(`H5${ this.$route.name }`, 'exchange-withdraw', this.address || '');
+        //     exWithdrawDialog({ token: this.token }).catch(e => {
+        //         console.error(e);
+        //     });
+        // },
 
         fetchTokenDetail() {
             tokenDetail({ tokenId: this.token.tokenId }).then(data => {

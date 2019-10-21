@@ -31,6 +31,7 @@ export default {
         this.$store.dispatch('getMarketsClosed');
         this.$store.dispatch('exFetchLimitAmounts');
         this.$store.dispatch('startLoopDexFundeUnreceived');
+        this.$store.dispatch('initFavorite');
     },
     destroyed() {
         this.$store.dispatch('stopLoopDexFundUnreceived');
