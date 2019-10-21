@@ -175,5 +175,8 @@ export default {
     height: 28px;
     background-size: 100% 100%;
     margin-top: -5px;
+    &.active {
+        background: url('~h5Assets/imgs/favorite.svg');
+    }
 }
 </style>
