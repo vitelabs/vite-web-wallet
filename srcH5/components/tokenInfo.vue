@@ -64,7 +64,7 @@ export default {
         },
         _tokenDetail: {
             type: Object,
-            required: true
+            required: false
         },
         isNeedFetch: {
             type: Boolean,
@@ -150,4 +150,8 @@ export default {
 
 <style lang="scss" scoped>
 @import "~h5Components/confirm/moreTabConfirm.scss";
+
+.tab-content {
+    height: 270px;
+}
 </style>

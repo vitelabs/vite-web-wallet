@@ -116,7 +116,7 @@ export default {
 .txpair-head-wrapper {
     background: linear-gradient(62deg,rgba(255,255,255,1) 0%,rgba(199,228,255,1) 100%);
     border-radius: 2px;
-    padding: 24px 18px;
+    padding: 17px 24px;
     overflow: hidden;
     box-sizing: border-box;
     font-size: 12px;
@@ -126,6 +126,7 @@ export default {
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
+        padding-top: 11px;
     }
 
     .left {
