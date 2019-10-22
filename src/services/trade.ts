@@ -305,7 +305,7 @@ export function getMiningSetting() {
 export function getMarketsByTradeToken({ tradeTokenSymbol }) {
     return ViteXAPI({
         method: 'GET',
-        path: 'markets',
+        path: 'ticker/24hr',
         params: { tradeTokenSymbol }
     });
 }
