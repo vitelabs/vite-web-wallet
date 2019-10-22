@@ -18,7 +18,7 @@ block originContent
         .content__item
             .label {{$t("tokenCard.tokenInfo.labels.overview")}}:
             div {{ getOverview(tokenDetail.overview) }}
-                span.click-able.view-more(v-if="tokenDetail.overview && tokenDetail.overviewLink" @click="openUrl(tokenDetail.overviewLink)") {{ $t("tokenCard.tokenInfo.labels.viewmore") }}
+                span.click-able.view-more(v-if="tokenDetail.overview && tokenDetail.overviewLink && tokenDetail.overviewLink.length" @click="openUrl(tokenDetail.overviewLink[0])") {{ $t("tokenCard.tokenInfo.labels.viewmore") }}
         .content__item
             .label {{$t("tokenCard.tokenInfo.labels.total")}}:
             div {{tokenDetail.showTotalSupply || '--'}}
@@ -30,17 +30,25 @@ block originContent
             div.click-able(@click="openUrl(tokenDetail.gateway ? tokenDetail.gateway.website : null)") {{tokenDetail.gateway ? tokenDetail.gateway.name || '--' : '--'}}
         .content__item
             .label {{$t("tokenCard.tokenInfo.labels.website")}}:
-            div.click-able(@click="openUrl(tokenDetail.websiteLink)") {{ tokenDetail.websiteLink || '--' }}
+            div(v-if="!tokenDetail.websiteLink || !tokenDetail.websiteLink.length") {{ '--' }}
+            div(v-else)
+                span.click-able(v-for="(link, i) in tokenDetail.websiteLink" :key="i" @click="openUrl(link)") {{ link || '--' }}
         .content__item
             .label {{$t("tokenCard.tokenInfo.labels.whitePaper")}}:
-            div.click-able(@click="openUrl(tokenDetail.whitepaperLink)") {{ tokenDetail.whitepaperLink || '--' }}
+            div(v-if="!tokenDetail.whitepaperLink || !tokenDetail.whitepaperLink.length") {{ '--' }}
+            div(v-else)
+                span.click-able(v-for="(link, i) in tokenDetail.whitepaperLink" :key="i" @click="openUrl(link)") {{ link || '--' }}
         .content__item
             .label {{$t("tokenCard.tokenInfo.labels.explorer")}}:
-            div.click-able(v-if="tokenDetail.gateway" @click="openUrl(tokenDetail.explorerLink)") {{ tokenDetail.explorerLink || '--' }}
-            div.click-able(v-if="!tokenDetail.gateway" @click="goToTokenDetail") {{ tokenDetail.explorerLink || '--' }}
+            div(v-if="tokenDetail.gateway")
+                span.click-able(v-for="(link, i) in tokenDetail.explorerLink || []" :key="i" @click="openUrl(link)") {{link || '--' }}
+            div(v-else)
+                span.click-able(@click="goToTokenDetail") {{ tokenDetail.explorerLink && tokenDetail.explorerLink.length ? tokenDetail.explorerLink[0] : '--' }}
         .content__item
             .label {{$t("tokenCard.tokenInfo.labels.github")}}:
-            div.click-able(@click="openUrl(tokenDetail.githubLink)") {{ tokenDetail.githubLink || '--' }}
+            div(v-if="!tokenDetail.githubLink || !tokenDetail.githubLink.length") {{ '--' }}
+            div(v-else)
+                span.click-able(v-for="(link, i) in tokenDetail.githubLink" :key="i" @click="openUrl(link)") {{ link || '--' }}
         .content__item
             .label {{$t("tokenCard.tokenInfo.labels.media")}}:
             div
@@ -114,15 +122,14 @@ export default {
                 this.tokenDetail = data;
                 if (data.links) {
                     for (const key in data.links) {
-                        this.tokenDetail[`${ key }Link`] = data.links[key] && data.links[key].length
-                            ? data.links[key][0] : '';
+                        this.tokenDetail[`${ key }Link`] = data.links[key] || [];
                     }
                 }
                 this.tokenDetail.ttype = this.tokenDetail.gateway
                     ? this.$t('tokenCard.tokenInfo.labels.crossType')
                     : this.$t('tokenCard.tokenInfo.labels.originType');
                 this.tokenDetail.explorerLink = this.tokenDetail.explorerLink
-                    || (this.tokenDetail.gateway ? null : getExplorerLink(this.$i18n.locale));
+                    || (this.tokenDetail.gateway ? null : [getExplorerLink(this.$i18n.locale)]);
                 this.tokenDetail.showTotalSupply = BigNumber.toBasic(this.tokenDetail.totalSupply, this.tokenDetail.tokenDecimals);
             }).catch(err => {
                 console.warn(err);
@@ -150,4 +157,8 @@ export default {
 
 <style lang="scss" scoped>
 @import "~h5Components/confirm/moreTabConfirm.scss";
+
+.click-able {
+    margin-right: 10px;
+}
 </style>
