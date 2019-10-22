@@ -1,6 +1,6 @@
 <template>
     <div>
-        <no-data slot="content" v-if="!list || !list.length"></no-data>
+        <no-data v-if="!list || !list.length"></no-data>
         <open-table :changeList="changeList" :list="list"></open-table>
     </div>
 </template>

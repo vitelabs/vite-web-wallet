@@ -102,19 +102,6 @@ export default {
             this.$refs.tradeView.isShow = true;
         },
 
-        // exCharge() {
-        //     statistics.event(`H5${ this.$route.name }`, 'exchange-deposit', this.address || '');
-        //     exChargeDialog({ token: this.token }).catch(e => {
-        //         console.error(e);
-        //     });
-        // },
-        // exWithdraw() {
-        //     statistics.event(`H5${ this.$route.name }`, 'exchange-withdraw', this.address || '');
-        //     exWithdrawDialog({ token: this.token }).catch(e => {
-        //         console.error(e);
-        //     });
-        // },
-
         fetchTokenDetail() {
             tokenDetail({ tokenId: this.token.tokenId }).then(data => {
                 this.tokenDetail = data;

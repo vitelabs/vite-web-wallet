@@ -3,7 +3,6 @@ import env from 'h5Utils/envFromURL';
 
 const state = {
     currentSymbol: env.symbol,
-    curentCategory: env.category,
     marketClosed: []
 };
 
