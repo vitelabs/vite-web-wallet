@@ -1,7 +1,7 @@
 import '@babel/polyfill';
 require('es6-promise').polyfill();
-// import eruda from 'eruda';
-// eruda.init();
+import eruda from 'eruda';
+eruda.init();
 
 import 'assets/scss/mixins.scss';
 import 'h5Assets/scss/mixins.scss';
