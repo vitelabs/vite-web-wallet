@@ -4,7 +4,7 @@
         <loading loadingType="dot" class="ex-center-loading" v-show="isLoading"></loading>
         <no-data v-if="!isLoading && !txPairList.length"></no-data>
         <div v-show="!isLoading && txPairList.length" class="trade-container">
-            <div class="tx-pair" v-for="(txPair, i) in txPairList" :key="i">
+            <div class="tx-pair" @click="switchTxPair(txPair)" v-for="(txPair, i) in txPairList" :key="i">
                 <div class="left">
                     <div class="symbol">
                         {{ txPair.tradeTokenSymbol }}
@@ -88,6 +88,10 @@ export default {
         },
         close() {
             this.isShow = false;
+        },
+        switchTxPair(txPair) {
+            this.$store.commit('switchTradePair', txPair);
+            this.$router.push({ name: 'center' });
         }
     }
 };
