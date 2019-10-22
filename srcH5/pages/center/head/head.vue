@@ -77,8 +77,7 @@ export default {
             tokenDetail.tokenSymbol = tokenDetail.originalSymbol;
             if (this.ftokenDetail.links) {
                 for (const key in this.ftokenDetail.links) {
-                    tokenDetail[`${ key }Link`] = this.ftokenDetail.links[key] && this.ftokenDetail.links[key].length
-                        ? this.ftokenDetail.links[key][0] : '';
+                    tokenDetail[`${ key }Link`] = this.ftokenDetail.links[key] || [];
                 }
             }
             tokenDetail.ttype = typeof tokenDetail.gateway === 'undefined'
@@ -86,7 +85,7 @@ export default {
                     ? this.$t('tokenCard.tokenInfo.labels.crossType')
                     : this.$t('tokenCard.tokenInfo.labels.originType');
             tokenDetail.explorerLink = tokenDetail.explorerLink
-                || (tokenDetail.gateway ? null : getExplorerLink(this.$i18n.locale));
+                || (tokenDetail.gateway ? null : [getExplorerLink(this.$i18n.locale)]);
             tokenDetail.showTotalSupply = BigNumber.toBasic(tokenDetail.totalSupply, tokenDetail.tokenDecimals);
 
             return tokenDetail;
