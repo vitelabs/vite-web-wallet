@@ -11,7 +11,7 @@
                 <span @click="_showDetail('token')" class="ttoken">
                     /{{ ttokenDetail ? ttokenDetail.symbol : '' }}
                 </span>
-                <img @click="_showDetail('token')" class="mining" src="~h5Assets/imgs/mining.png"/>
+                <img class="mining" src="~h5Assets/imgs/mining.png"/>
                 <img @click="switchTxPair" class="mining" src="~h5Assets/imgs/down.svg"/>
             </div>
             <div class="gate" @click="_showDetail('operator')">
@@ -96,8 +96,8 @@ export default {
         },
         switchTxPair() {
             bridge['pri.switchPair']().then(data => {
-                console.log('pri.switchPair', data);
-                this.$toast(data.symbol);
+                this.$store.commit('switchTradePair', data);
+                this.$store.dispatch('dexFetchActiveTxPair');
             }).catch(err => {
                 console.warn(err);
                 this.$toast(this.$t('hint.operateFail'));
@@ -148,7 +148,7 @@ export default {
         font-size: 16px;
         @include font-bold();
         color: rgba(36,39,43,1);
-        margin-bottom: 12px;
+        margin-bottom: 11px;
         .ttoken {
             font-size: 12px;
             color: rgba(62,74,89,0.3);
