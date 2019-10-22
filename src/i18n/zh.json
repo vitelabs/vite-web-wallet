@@ -412,7 +412,10 @@
         "nodeErr": "网关节点无效，请检查网关设置"
     },
     "viteExplorer": {
-        "title": "区块浏览器"
+        "title": "Vite区块浏览器"
+    },
+    "viteScanExplorer": {
+        "title": "ViteScan"
     },
     "assets": {
         "title": "资产",
