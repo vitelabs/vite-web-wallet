@@ -1,15 +1,19 @@
 <template>
-    <open-table :changeList="changeList" :list="list"></open-table>
+    <div>
+        <no-data slot="content" v-if="!list || !list.length"></no-data>
+        <open-table :changeList="changeList" :list="list"></open-table>
+    </div>
 </template>
 
 <script>
 import { order } from 'services/trade';
 import openTable from './openTable.vue';
+import noData from 'h5Components/noData';
 
 const pageSize = 30;
 
 export default {
-    components: { openTable },
+    components: { openTable, noData },
     mounted() {
         this.fetchOpenOrders();
     },
