@@ -405,7 +405,10 @@
         "nodeErr": "Gateway node is invalid, please check the gateway settings"
     },
     "viteExplorer": {
-        "title": "Block Explorer"
+        "title": "Vite Block Explorer"
+    },
+    "viteScanExplorer": {
+        "title": "ViteScan"
     },
     "wallet": {
         "title": "Quota Management",

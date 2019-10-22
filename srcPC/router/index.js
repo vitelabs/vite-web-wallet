@@ -29,6 +29,10 @@ router.beforeEach((to, from, next) => {
         openUrl(getExplorerLink(i18n.locale));
         return;
     }
+    if (to.name === 'viteScanExplorer') {
+        openUrl('https://vitescan.io');
+        return;
+    }
 
     // CreateAccount only use in development.
     if (to.name === 'create') {
