@@ -301,3 +301,11 @@ export function getMiningSetting() {
         path: 'mining/setting'
     });
 }
+
+export function getMarketsByTradeToken({ tradeTokenSymbol }) {
+    return ViteXAPI({
+        method: 'GET',
+        path: 'markets',
+        params: { tradeTokenSymbol }
+    });
+}
