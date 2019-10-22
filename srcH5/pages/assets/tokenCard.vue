@@ -19,12 +19,15 @@
             <div class="op __pointer" @click="transfer">{{ $t('mobileAssets.transfer') }}</div>
             <div class="op __pointer" @click="trade">{{ $t('mobileAssets.trade') }}</div>
         </div>
+
+        <trade-view ref="tradeView" :symbol="tokenDetail ? tokenDetail.symbol : ''"></trade-view>
     </div>
 </template>
 
 <script>
 // , exWithdrawDialog, exChargeDialog
 import { tokenInfoDialog } from './dialog';
+import tradeView from './trade';
 import { tokenDetail } from 'services/trade';
 import bigNumber from 'utils/bigNumber';
 import statistics from 'utils/statistics';
@@ -33,6 +36,7 @@ import { getTokenSymbolString } from 'utils/tokenParser';
 import { bridge } from 'h5Utils/bridge';
 
 export default {
+    components: { tradeView },
     props: {
         token: {
             type: Object,
@@ -47,7 +51,7 @@ export default {
             }
         }
     },
-    mounted() {
+    beforeMount() {
         this.fetchTokenDetail();
     },
     data() {
@@ -89,13 +93,13 @@ export default {
         },
         transfer() {
             statistics.event(`H5${ this.$route.name }`, 'transfer', this.address || '');
-            bridge['pri.transferAsset']().catch(err => {
+            bridge['pri.transferAsset']({ tokenId: this.token.tokenId }).catch(err => {
                 console.warn(err);
                 this.$toast(this.$t('hint.operateFail'));
             });
         },
         trade() {
-
+            this.$refs.tradeView.isShow = true;
         },
 
         // exCharge() {
