@@ -25,6 +25,7 @@ const mutations = {
 const actions = {
     initFavorite({ commit }) {
         bridge['pri.getAllFavPairs']().then(list => {
+            console.log('pri.getAllFavPairs', list);
             commit('initFavoriteList', {
                 list,
                 canFavorite: true
@@ -38,12 +39,14 @@ const actions = {
         });
     },
     exSetFavorite({ commit }, symbol) {
-        return bridge['pri.addFavPair']({ symbol }).then(() => {
+        return bridge['pri.addFavPair']({ symbol }).then(data => {
+            console.log('pri.addFavPair', data);
             commit('exSetFavorite', symbol);
         });
     },
     exDeletetFavorite({ commit }, symbol) {
-        return bridge['pri.deleteFavPair']({ symbol }).then(() => {
+        return bridge['pri.deleteFavPair']({ symbol }).then(data => {
+            console.log('pri.deleteFavPair', data);
             commit('exDeletetFavorite', symbol);
         });
     }
